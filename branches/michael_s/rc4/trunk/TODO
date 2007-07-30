@@ -1,0 +1,22 @@
+$Id: TODO,v 1.1.1.1 2005/01/15 06:43:44 Michael Sasek Exp $
+
+osCommerce 2.2 Milestone 1 To-Do Notes
+Copyright (c) osCommerce 2003
+
+The following are known problems to exist in the Milestone 1 release.
+
+1. File Uploading
+
+Empty file uploads in the Administration Tool may update the entry filename to
+contain the word "array".
+
+2. Filename Lengths
+
+Some filename lengths exceed the limit of 31 characters which poses a problem
+for Mac OS 9.
+
+3. No E-Mail Address Checking
+
+There is no e-mail address checking in the Administration Tool -> Customers
+area which might lead to duplicate e-mail addresses existing in the database
+when records are updated.

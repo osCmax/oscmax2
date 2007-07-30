@@ -1,0 +1,63 @@
+# $Id: .htaccess  1 2003/06/12 10:53:20 Michael Sasek$
+#
+# This is used with Apache WebServers
+#
+# For this to work, you must include the parameter 'Options' to
+# the AllowOverride configuration
+#
+# Example:
+#
+# <Directory "/usr/local/apache/htdocs">
+#   AllowOverride Options
+# </Directory>
+#
+# 'All' with also work. (This configuration is in the
+# apache/conf/httpd.conf file)
+
+# The following makes adjustments to the SSL protocol for Internet
+# Explorer browsers
+
+<IfModule mod_setenvif.c>
+  <IfDefine SSL>
+    SetEnvIf User-Agent ".*MSIE.*" \
+             nokeepalive ssl-unclean-shutdown \
+             downgrade-1.0 force-response-1.0
+  </IfDefine>
+</IfModule>
+
+# If Search Engine Friendly URLs do not work, try enabling the
+# following Apache configuration parameter
+#
+# AcceptPathInfo On
+
+# Fix certain PHP values
+# (commented out by default to prevent errors occuring on certain
+# servers)
+#
+#<IfModule mod_php4.c>
+#  php_value session.use_trans_sid 0
+#  php_value register_globals 1
+#</IfModule>
+## SEO Url's .htaccess file
+## If you want to use the Apache Mod-Rewrite method for SEO URL's
+## Uncomment one of the two code blocks below, depending on where your store is installed:
+## NOTE: This requires that you are on an apache web server with mod_rewrite enabled.
+
+## If installed in a subfolder, uncomment the below block and change /folder/ to
+## The directory where your shop is installed. For instance, if installed in the catalog directory
+## Change it to /catalog/
+
+#RewriteEngine On
+# Change "folder" to your catalog directory name
+#RewriteBase /folder/
+#RewriteRule ^(.*)-p-(.*).html$ product_info.php?products_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-c-(.*).html$ index.php?cPath=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-m-(.*).html$ index.php?manufacturers_id=$2&%{QUERY_STRING}
+
+## If installed to the base home/root directory, uncomment the below code only:
+
+#RewriteEngine On
+#RewriteBase /
+#RewriteRule ^(.*)-p-(.*).html$ product_info.php?products_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-c-(.*).html$ index.php?cPath=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-m-(.*).html$ index.php?manufacturers_id=$2&%{QUERY_STRING}

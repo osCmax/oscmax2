@@ -1,0 +1,45 @@
+<?php
+/*
+$Id: best_sellers.php 3 2006-05-27 04:59:07Z user $
+
+  osCMax Power E-Commerce
+  http://oscdox.com
+
+  Copyright 2006 osCMax
+
+  Released under the GNU General Public License
+*/
+
+// Most of this file is changed or moved to BTS - Basic Template System - format.
+//  if (isset($HTTP_GET_VARS['products_id'])) {
+  if (isset($current_category_id) && ($current_category_id > 0)) {
+    $best_sellers_query = tep_db_query("select distinct p.products_id, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . TABLE_CATEGORIES . " c where p.products_status = '1' and p.products_ordered > 0 and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = c.categories_id and '" . (int)$current_category_id . "' in (c.categories_id, c.parent_id) order by p.products_ordered desc, pd.products_name limit " . MAX_DISPLAY_BESTSELLERS);
+  } else {
+    $best_sellers_query = tep_db_query("select distinct p.products_id, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_ordered > 0 and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' order by p.products_ordered desc, pd.products_name limit " . MAX_DISPLAY_BESTSELLERS);
+  }
+
+  if (tep_db_num_rows($best_sellers_query) >= MIN_DISPLAY_BESTSELLERS) {
+?>
+<!-- best_sellers //-->
+<?php
+  $boxHeading = BOX_HEADING_BESTSELLERS;
+  $corner_left = 'square';
+  $corner_right = 'square';
+  $box_base_name = 'best_sellers'; // for easy unique box template setup (added BTSv1.2)
+  $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
+
+  $rows = 0;
+  $boxContent = '<table border="0" width="100%" cellspacing="0" cellpadding="1">';
+  while ($best_sellers = tep_db_fetch_array($best_sellers_query)) {
+    $rows++;
+    $boxContent .= '<tr><td class="infoBoxContents" valign="top">' . tep_row_number_format($rows) . '.</td><td class="infoBoxContents"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $best_sellers['products_id']) . '">' . $best_sellers['products_name'] . '</a></td></tr>';
+  }
+  $boxContent .= '</table>';
+
+
+include (bts_select('boxes', $box_base_name)); // BTS 1.5
+
+  }
+//}
+?>
+<!-- best_sellers eof //-->

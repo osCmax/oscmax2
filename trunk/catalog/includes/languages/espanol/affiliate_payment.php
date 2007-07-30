@@ -1,0 +1,29 @@
+<?php
+/*
+$Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
+
+  OSC-Affiliate
+
+  Contribution based on:
+
+  osCMax Power E-Commerce
+  http://oscdox.com
+
+  Copyright 2006 osCMax
+
+  Released under the GNU General Public License
+*/
+
+define('NAVBAR_TITLE', 'Affiliate Program');
+define('HEADING_TITLE', 'Affiliate Program: Payment');
+
+define('TEXT_AFFILIATE_HEADER', 'Your Payments:');
+
+define('TABLE_HEADING_DATE', 'Payment Date');
+define('TABLE_HEADING_PAYMENT', 'Affiliate Earnings');
+define('TABLE_HEADING_STATUS', 'Payment Status');
+define('TABLE_HEADING_PAYMENT_ID','Payment-ID');
+define('TEXT_DISPLAY_NUMBER_OF_PAYMENTS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> payments)');
+define('TEXT_INFORMATION_PAYMENT_TOTAL', 'Your current earnings amount to:');
+define('TEXT_NO_PAYMENTS', 'Up to now still no payments have been recorded.');
+?>

@@ -1,0 +1,2 @@
+<FONT face="arial, helvetica, sans-serif">
+<P><FONT face=Arial>Enter your terms and conditions through the admin panel. Click on the <STRONG>Conditions Page</STRONG> link under the <STRONG>Catalog</STRONG> section of the admin and use the wysiwyg HTML editor.</FONT></P></FONT>

@@ -1,0 +1,46 @@
+<html style="width:300px; Height: 60px;">
+ <head>
+  <title>Select Phrase</title>
+<script language="javascript">
+
+var myTitle = window.dialogArguments;
+document.title = myTitle;
+
+
+function returnSelected() {
+  var idx  = document.all.textPulldown.selectedIndex;
+  var text = document.all.textPulldown[idx].text;
+
+  window.returnValue = text;          // set return value
+  window.close();                     // close dialog
+}
+
+</script>
+</head>
+<body bgcolor="#FFFFFF" topmargin=15 leftmargin=0>
+
+<form method=get onSubmit="Set(document.all.ColorHex.value); return false;">
+<div align=center>
+
+<select name="textPulldown">
+<option>Hello Mr.</option>
+<option>Hello Ms.</option>
+<option>Welcome to our webshop,</option>
+<option>Greetings,</option>
+<option>Hello,</option>
+<option>Thank you for your enquiry,</option>
+<option>My Email: email@com.com.uk</option>
+<option>Our Website!! www.ourwebsite.com</option>
+<option>Thats great, haha thanks,</option>
+<option>You can put any text here for you needs!</option>
+<option>These drop down choices is comming from</option>
+<option>admin/htmlarea/popups/custom2.php</option>
+<option>Customize em to your needs</option>
+<option>Customize em to your needs...</option>
+</select>
+
+<input type="button" value=" Go " onClick="returnSelected()">
+
+</div>
+</form>
+</body></html>

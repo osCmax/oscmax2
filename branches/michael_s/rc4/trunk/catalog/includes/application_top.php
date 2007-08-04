@@ -18,12 +18,10 @@ $debug = array();
 // set the level of error reporting
   error_reporting(E_ALL & ~E_NOTICE);
 
-// check if register_globals is enabled.
-// since this is a temporary measure this message is hardcoded. The requirement will be removed before 2.2 is finalized.
-  if (function_exists('ini_get')) {
-    ini_get('register_globals') or exit('FATAL ERROR: register_globals is disabled in php.ini, please enable it!');
+// check support for register_globals
+  if (function_exists('ini_get') && (ini_get('register_globals') == false) && (PHP_VERSION < 4.3) ) {
+    exit('Server Requirement Error: register_globals is disabled in your PHP configuration. This can be enabled in your php.ini configuration file or in the .htaccess file in your catalog directory. Please use PHP 4.3+ if register_globals cannot be enabled on the server.');
   }
-
 // LINE ADDED: added to support PHP 5.0.x by TJ
 $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
@@ -41,6 +39,8 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
 // define the project version
   define('PROJECT_VERSION', 'osCMax v2.0');
+// some code to solve compatibility issues
+  require(DIR_WS_FUNCTIONS . 'compatibility.php');
 
 // set the type of request (secure or not)
   $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
@@ -130,8 +130,6 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 // include navigation history class
   require(DIR_WS_CLASSES . 'navigation_history.php');
 
-// some code to solve compatibility issues
-  require(DIR_WS_FUNCTIONS . 'compatibility.php');
 
 // check if sessions are supported, otherwise use the php3 compatible session class
   if (!function_exists('session_start')) {
@@ -199,6 +197,10 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   } else {
     tep_session_start();
     $session_started = true;
+  }
+
+  if ( ($session_started == true) && (PHP_VERSION >= 4.3) && function_exists('ini_get') && (ini_get('register_globals') == false) ) {
+    extract($_SESSION, EXTR_OVERWRITE+EXTR_REFS);
   }
 
 // set SID once, even if empty
@@ -313,13 +315,12 @@ if (isset($HTTP_GET_VARS['pName']) && defined(urldecode($HTTP_GET_VARS['pName'])
   if (!tep_session_is_registered('currency') || isset($HTTP_GET_VARS['currency']) || ( (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') && (LANGUAGE_CURRENCY != $currency) ) ) {
     if (!tep_session_is_registered('currency')) tep_session_register('currency');
 
-    if (isset($HTTP_GET_VARS['currency'])) {
-      if (!$currency = tep_currency_exists($HTTP_GET_VARS['currency'])) $currency = (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') ? LANGUAGE_CURRENCY : DEFAULT_CURRENCY;
+    if (isset($HTTP_GET_VARS['currency']) && $currencies->is_set($HTTP_GET_VARS['currency'])) {
+      $currency = $HTTP_GET_VARS['currency'];
     } else {
       $currency = (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') ? LANGUAGE_CURRENCY : DEFAULT_CURRENCY;
     }
   }
-
 // navigation history
   if (tep_session_is_registered('navigation')) {
     if (PHP_VERSION < 4) {
@@ -434,7 +435,8 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
 					tep_session_unregister('mao_low_offer');
         $cart->add_cart($HTTP_POST_VARS['products_id'], $cart->get_quantity(tep_get_uprid($HTTP_POST_VARS['products_id'], $attributes))+1, $attributes);
 // EOF: MOD - QT Pro
-            }
+                      } 
+                    }
         tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
         break;
 // performed by the 'buy now' button in product listings and review page

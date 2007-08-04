@@ -113,7 +113,10 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . $HTTP_POST_VARS['categories_image'] . "' where categories_id = '" .  tep_db_input($categories_id) . "'");
             $categories_image = '';
           } else {
-            if ($categories_image = new upload('categories_image', DIR_FS_CATALOG_IMAGES)) {
+        $categories_image = new upload('categories_image');
+        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES);
+
+        if ($categories_image->parse() && $categories_image->save()) {
               tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
             }
 // EOF: MOD for Categories Description 1.5
@@ -1121,7 +1124,7 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
 <?php
     echo tep_draw_form('search', FILENAME_CATEGORIES, '', 'get');
     echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search');
-    echo '</form>';
+    echo tep_hide_session_id() . '</form>';
 ?>
                 </td>
               </tr>
@@ -1130,7 +1133,7 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
 <?php
     echo tep_draw_form('goto', FILENAME_CATEGORIES, '', 'get');
     echo HEADING_TITLE_GOTO . ' ' . tep_draw_pull_down_menu('cPath', tep_get_category_tree(), $current_category_id, 'onChange="this.form.submit();"');
-    echo '</form>';
+    echo tep_hide_session_id() . '</form>';
 ?>
                 </td>
               </tr>

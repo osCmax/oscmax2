@@ -500,14 +500,14 @@ create table categories_description (
 drop table if exists configuration;
 create table configuration (
   configuration_id int(11) not null auto_increment,
-  configuration_title varchar(64) not null ,
-  configuration_key varchar(64) not null ,
+  configuration_title varchar(255) not null ,
+  configuration_key varchar(255) not null ,
   configuration_value varchar(255) not null ,
   configuration_description varchar(255) not null ,
   configuration_group_id int(11) default '0' not null ,
   sort_order int(5) ,
   last_modified datetime ,
-  date_added datetime default '0000-00-00 00:00:00' not null ,
+  date_added datetime default '1900-05-05 11:00:00' not null ,
   use_function varchar(255) ,
   set_function text ,
   PRIMARY KEY (configuration_id)
@@ -815,6 +815,7 @@ insert into configuration (configuration_id, configuration_title, configuration_
 insert into configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) values ('1160', 'Shipping Zone', 'MODULE_SHIPPING_FLAT_ZONE', '0', 'If a zone is selected, only enable this shipping method for that zone.', '6', '0', NULL, '2005-09-17 10:39:49', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(');
 insert into configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) values ('1157', 'Enable Flat Shipping', 'MODULE_SHIPPING_FLAT_STATUS', 'True', 'Do you want to offer flat rate shipping?', '6', '0', NULL, '2005-09-17 10:39:49', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), ');
 INSERT INTO configuration VALUES (1200, 'Order Editor- Display Payment Method dropdown?', 'DISPLAY_PAYMENT_METHOD_DROPDOWN', 'true', 'Display Payment Method in Order Editor as dropdown menu (true) or as input field (false)', 1, 21, NULL, '2006-04-02 11:51:01', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Product Quantities In Shopping Cart', 'MAX_QTY_IN_CART', '99', 'Maximum number of product quantities that can be added to the shopping cart (0 for no limit)', '3', '19', now());
 
 
 drop table if exists configuration_group;

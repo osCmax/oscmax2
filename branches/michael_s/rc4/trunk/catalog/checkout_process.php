@@ -331,7 +331,7 @@ if (!tep_session_is_registered('noaccount')) {
     $email_order .= EMAIL_TEXT_PAYMENT_METHOD . "\n" .
                     EMAIL_SEPARATOR . "\n";
     $payment_class = $$payment;
-    $email_order .= $payment_class->title . "\n\n";
+    $email_order .= $order->info['payment_method'] . "\n\n";
     if ($payment_class->email_footer) {
       $email_order .= $payment_class->email_footer . "\n\n";
     }

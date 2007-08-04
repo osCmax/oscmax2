@@ -94,6 +94,9 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
 // EOF: MOD - ICW CREDIT CLASS SYSTEM
 
   if (!tep_session_is_registered('comments')) tep_session_register('comments');
+  if (isset($HTTP_POST_VARS['comments']) && tep_not_null($HTTP_POST_VARS['comments'])) {
+    $comments = tep_db_prepare_input($HTTP_POST_VARS['comments']);
+  }
 
   $total_weight = $cart->show_weight();
   $total_count = $cart->count_contents();

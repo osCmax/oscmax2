@@ -265,10 +265,10 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
       if ($image_size = @getimagesize($src)) {
         if (empty($width) && tep_not_null($height)) {
           $ratio = $height / $image_size[1];
-          $width = $image_size[0] * $ratio;
+          $width = intval($image_size[0] * $ratio);
         } elseif (tep_not_null($width) && empty($height)) {
           $ratio = $width / $image_size[0];
-          $height = $image_size[1] * $ratio;
+          $height = intval($image_size[1] * $ratio);
         } elseif (empty($width) && empty($height)) {
           $width = $image_size[0];
           $height = $image_size[1];
@@ -335,11 +335,18 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a form input field
   function tep_draw_input_field($name, $value = '', $parameters = '', $type = 'text', $reinsert_value = true) {
+    global $HTTP_GET_VARS, $HTTP_POST_VARS;
     $field = '<input type="' . tep_output_string($type) . '" name="' . tep_output_string($name) . '"';
 
-    if ( (isset($GLOBALS[$name])) && ($reinsert_value == true) ) {
-      $field .= ' value="' . tep_output_string(stripslashes($GLOBALS[$name])) . '"';
-    } elseif (tep_not_null($value)) {
+    if ( ($reinsert_value == true) && ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) ) {
+      if (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) {
+        $value = stripslashes($HTTP_GET_VARS[$name]);
+      } elseif (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) {
+        $value = stripslashes($HTTP_POST_VARS[$name]);
+      }
+    }
+
+    if (tep_not_null($value)) {
       $field .= ' value="' . tep_output_string($value) . '"';
     }
 
@@ -359,11 +366,12 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a selection field - alias function for tep_draw_checkbox_field() and tep_draw_radio_field()
   function tep_draw_selection_field($name, $type, $value = '', $checked = false, $parameters = '') {
+    global $HTTP_GET_VARS, $HTTP_POST_VARS;
     $selection = '<input type="' . tep_output_string($type) . '" name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($value)) $selection .= ' value="' . tep_output_string($value) . '"';
 
-    if ( ($checked == true) || ( isset($GLOBALS[$name]) && is_string($GLOBALS[$name]) && ( ($GLOBALS[$name] == 'on') || (isset($value) && (stripslashes($GLOBALS[$name]) == $value)) ) ) ) {
+    if ( ($checked == true) || (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name]) && (($HTTP_GET_VARS[$name] == 'on') || (stripslashes($HTTP_GET_VARS[$name]) == $value))) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name]) && (($HTTP_POST_VARS[$name] == 'on') || (stripslashes($HTTP_POST_VARS[$name]) == $value))) ) {
       $selection .= ' CHECKED';
     }
 
@@ -389,15 +397,19 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a form textarea field
   function tep_draw_textarea_field($name, $wrap, $width, $height, $text = '', $parameters = '', $reinsert_value = true) {
+    global $HTTP_GET_VARS, $HTTP_POST_VARS;
     $field = '<textarea name="' . tep_output_string($name) . '" wrap="' . tep_output_string($wrap) . '" cols="' . tep_output_string($width) . '" rows="' . tep_output_string($height) . '"';
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
     $field .= '>';
 
-    if ( (isset($GLOBALS[$name])) && ($reinsert_value == true) ) {
-// LINE CHANGED: MS2 update 501112 - Added: tep_output_string_protected(...)
-      $field .= tep_output_string_protected(stripslashes($GLOBALS[$name]));
+    if ( ($reinsert_value == true) && ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) ) {
+      if (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) {
+        $field .= tep_output_string_protected(stripslashes($HTTP_GET_VARS[$name]));
+      } elseif (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) {
+        $field .= tep_output_string_protected(stripslashes($HTTP_POST_VARS[$name]));
+      }
     } elseif (tep_not_null($text)) {
 // LINE CHANGED: MS2 update 501112 - Added: tep_output_string_protected(...)
       $field .= tep_output_string_protected($text);
@@ -411,12 +423,17 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a form hidden field
   function tep_draw_hidden_field($name, $value = '', $parameters = '') {
+    global $HTTP_GET_VARS, $HTTP_POST_VARS;
     $field = '<input type="hidden" name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($value)) {
       $field .= ' value="' . tep_output_string($value) . '"';
-    } elseif (isset($GLOBALS[$name])) {
-      $field .= ' value="' . tep_output_string(stripslashes($GLOBALS[$name])) . '"';
+    } elseif ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) {
+      if ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) ) {
+        $field .= ' value="' . tep_output_string(stripslashes($HTTP_GET_VARS[$name])) . '"';
+      } elseif ( (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) {
+        $field .= ' value="' . tep_output_string(stripslashes($HTTP_POST_VARS[$name])) . '"';
+      }
     }
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
@@ -439,13 +456,20 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a form pull down menu
   function tep_draw_pull_down_menu($name, $values, $default = '', $parameters = '', $required = false) {
+    global $HTTP_GET_VARS, $HTTP_POST_VARS;
     $field = '<select name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
     $field .= '>';
 
-    if (empty($default) && isset($GLOBALS[$name])) $default = stripslashes($GLOBALS[$name]);
+    if (empty($default) && ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) ) {
+      if (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) {
+        $default = stripslashes($HTTP_GET_VARS[$name]);
+      } elseif (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) {
+        $default = stripslashes($HTTP_POST_VARS[$name]);
+      }
+    }
 
     for ($i=0, $n=sizeof($values); $i<$n; $i++) {
       $field .= '<option value="' . tep_output_string($values[$i]['id']) . '"';

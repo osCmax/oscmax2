@@ -119,7 +119,7 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
     global $HTTP_GET_VARS, $language;
 
     $manufacturers_id = '';
-    if (isset($HTTP_GET_VARS['manufacturers_id']) && tep_not_null($HTTP_GET_VARS['manufacturers_id'])) {
+    if (isset($HTTP_GET_VARS['manufacturers_id']) && is_numeric($HTTP_GET_VARS['manufacturers_id'])) {
       $manufacturers_id = $HTTP_GET_VARS['manufacturers_id'];
     }
 
@@ -140,13 +140,17 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
   function tep_cache_also_purchased($auto_expire = false, $refresh = false) {
     global $HTTP_GET_VARS, $language, $languages_id;
 
-    if (($refresh == true) || !read_cache($cache_output, 'also_purchased-' . $language . '.cache' . $HTTP_GET_VARS['products_id'], $auto_expire)) {
-      ob_start();
-      include(DIR_WS_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
-      $cache_output = ob_get_contents();
-      ob_end_clean();
-      write_cache($cache_output, 'also_purchased-' . $language . '.cache' . $HTTP_GET_VARS['products_id']);
-    }
+$cache_output = '';
+
+if (isset($HTTP_GET_VARS['products_id']) && is_numeric($HTTP_GET_VARS['products_id'])) {
+  if (($refresh == true) || !read_cache($cache_output, 'also_purchased-' . $language . '.cache' . $HTTP_GET_VARS['products_id'], $auto_expire)) {
+    ob_start();
+    include(DIR_WS_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
+    $cache_output = ob_get_contents();
+    ob_end_clean();
+    write_cache($cache_output, 'also_purchased-' . $language . '.cache' . $HTTP_GET_VARS['products_id']);
+  }
+}
 
     return $cache_output;
   }

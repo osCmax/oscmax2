@@ -390,7 +390,6 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 ////
 // Add tax to a products price
   function tep_add_tax($price, $tax) {
-    global $currencies;
 // BOF: MOD - Separate Pricing Per Customer, show_tax modification
 // next line was original code
 //    if ( (DISPLAY_PRICE_WITH_TAX == 'true') && ($tax > 0) ) {
@@ -406,17 +405,15 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
  //    echo $sppc_customer_group_tax_exempt;
      if ( (DISPLAY_PRICE_WITH_TAX == 'true') && ($tax > 0) && ($customer_group_show_tax == '1')) {
 // EOF: MOD - Separate Pricing Per Customer, show_tax modification
-      return tep_round($price, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']) + tep_calculate_tax($price, $tax);
+      return $price + tep_calculate_tax($price, $tax);
     } else {
-      return tep_round($price, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']);
+      return $price;
     }
   }
 
 // Calculates Tax rounding the result
   function tep_calculate_tax($price, $tax) {
-    global $currencies;
-
-    return tep_round($price * $tax / 100, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']);
+    return $price * $tax / 100;
   }
 
 ////
@@ -498,7 +495,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
         $state = tep_get_zone_code($address['country_id'], $address['zone_id'], $state);
       }
     } elseif (isset($address['country']) && tep_not_null($address['country'])) {
-      $country = tep_output_string_protected($address['country']);
+      $country = tep_output_string_protected($address['country']['title']);
     } else {
       $country = '';
     }
@@ -528,7 +525,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     $statecomma = '';
     $streets = $street;
     if ($suburb != '') $streets = $street . $cr . $suburb;
-    if ($country == '') $country = tep_output_string_protected($address['country']);
+//  if ($country == '') $country = tep_output_string_protected($address['country']);
     if ($state != '') $statecomma = $state . ', ';
 
     $fmt = $address_format['format'];
@@ -1239,9 +1236,10 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   function tep_currency_exists($code) {
     $code = tep_db_prepare_input($code);
 
-    $currency_code = tep_db_query("select currencies_id from " . TABLE_CURRENCIES . " where code = '" . tep_db_input($code) . "'");
-    if (tep_db_num_rows($currency_code)) {
-      return $code;
+    $currency_query = tep_db_query("select code from " . TABLE_CURRENCIES . " where code = '" . tep_db_input($code) . "' limit 1");
+    if (tep_db_num_rows($currency_query)) {
+      $currency = tep_db_fetch_array($currency_query);
+      return $currency['code'];
     } else {
       return false;
     }
@@ -1295,13 +1293,15 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   }
 
   function tep_get_ip_address() {
-    if (isset($_SERVER)) {
-      if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-      } elseif (isset($_SERVER['HTTP_CLIENT_IP'])) {
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    global $HTTP_SERVER_VARS;
+
+    if (isset($HTTP_SERVER_VARS)) {
+      if (isset($HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'];
+      } elseif (isset($HTTP_SERVER_VARS['HTTP_CLIENT_IP'])) {
+        $ip = $HTTP_SERVER_VARS['HTTP_CLIENT_IP'];
       } else {
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $HTTP_SERVER_VARS['REMOTE_ADDR'];
       }
     } else {
       if (getenv('HTTP_X_FORWARDED_FOR')) {

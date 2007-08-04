@@ -71,7 +71,7 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
                               'city' => $order['customers_city'],
                               'postcode' => $order['customers_postcode'],
                               'state' => $order['customers_state'],
-                              'country' => $order['customers_country'],
+                              'country' => array('title' => $order['customers_country']),
                               'format_id' => $order['customers_address_format_id'],
                               'telephone' => $order['customers_telephone'],
                               'email_address' => $order['customers_email_address']);
@@ -83,7 +83,7 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
                               'city' => $order['delivery_city'],
                               'postcode' => $order['delivery_postcode'],
                               'state' => $order['delivery_state'],
-                              'country' => $order['delivery_country'],
+                              'country' => array('title' => $order['delivery_country']),
                               'format_id' => $order['delivery_address_format_id']);
 
       if (empty($this->delivery['name']) && empty($this->delivery['street_address'])) {
@@ -97,7 +97,7 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
                              'city' => $order['billing_city'],
                              'postcode' => $order['billing_postcode'],
                              'state' => $order['billing_state'],
-                             'country' => $order['billing_country'],
+                             'country' => array('title' => $order['billing_country']),
                              'format_id' => $order['billing_address_format_id']);
 
       $index = 0;
@@ -145,7 +145,7 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
     }
 
     function cart() {
-      global $customer_id, $sendto, $billto, $cart, $languages_id, $currency, $currencies, $shipping, $payment;
+      global $HTTP_POST_VARS, $customer_id, $sendto, $billto, $cart, $languages_id, $currency, $currencies, $shipping, $payment, $comments;
 
       $this->content_type = $cart->get_content_type();
 
@@ -165,19 +165,23 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
                           'currency' => $currency,
                           'currency_value' => $currencies->currencies[$currency]['value'],
                           'payment_method' => $payment,
-                          'cc_type' => (isset($GLOBALS['cc_type']) ? $GLOBALS['cc_type'] : ''),
-                          'cc_owner' => (isset($GLOBALS['cc_owner']) ? $GLOBALS['cc_owner'] : ''),
-                          'cc_number' => (isset($GLOBALS['cc_number']) ? $GLOBALS['cc_number'] : ''),
-                          'cc_expires' => (isset($GLOBALS['cc_expires']) ? $GLOBALS['cc_expires'] : ''),
+                          'cc_type' => (isset($HTTP_POST_VARS['cc_type']) ? $HTTP_POST_VARS['cc_type'] : ''),
+                          'cc_owner' => (isset($HTTP_POST_VARS['cc_owner']) ? $HTTP_POST_VARS['cc_owner'] : ''),
+                          'cc_number' => (isset($HTTP_POST_VARS['cc_number']) ? $HTTP_POST_VARS['cc_number'] : ''),
+                          'cc_expires' => (isset($HTTP_POST_VARS['cc_expires']) ? $HTTP_POST_VARS['cc_expires'] : ''),
                           'shipping_method' => $shipping['title'],
                           'shipping_cost' => $shipping['cost'],
                           'subtotal' => 0,
                           'tax' => 0,
                           'tax_groups' => array(),
-                          'comments' => (isset($GLOBALS['comments']) ? $GLOBALS['comments'] : ''));
+                          'comments' => (tep_session_is_registered('comments') && !empty($comments) ? $comments : ''));
 
       if (isset($GLOBALS[$payment]) && is_object($GLOBALS[$payment])) {
+        if (isset($GLOBALS[$payment]->public_title)) {
+          $this->info['payment_method'] = $GLOBALS[$payment]->public_title;
+        } else {
         $this->info['payment_method'] = $GLOBALS[$payment]->title;
+        }
 
         if ( isset($GLOBALS[$payment]->order_status) && is_numeric($GLOBALS[$payment]->order_status) && ($GLOBALS[$payment]->order_status > 0) ) {
           $this->info['order_status'] = $GLOBALS[$payment]->order_status;
@@ -279,7 +283,7 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
           }
         }
 
-        $shown_price = tep_add_tax($this->products[$index]['final_price'], $this->products[$index]['tax']) * $this->products[$index]['qty'];
+        $shown_price = $currencies->calculate_price($this->products[$index]['final_price'], $this->products[$index]['tax'], $this->products[$index]['qty']);
         $this->info['subtotal'] += $shown_price;
 
         $products_tax = $this->products[$index]['tax'];

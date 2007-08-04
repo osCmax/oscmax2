@@ -102,18 +102,32 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
     global $session_started;
 
     if ($session_started == true) {
-      return session_register($variable);
-    } else {
-      return false;
+      if (PHP_VERSION < 4.3) {
+        return session_register($variable);
+      } else {
+        $_SESSION[$variable] = (isset($GLOBALS[$variable])) ? $GLOBALS[$variable] : null;
+
+        $GLOBALS[$variable] =& $_SESSION[$variable];
+      }
     }
+
+    return false;
   }
 
   function tep_session_is_registered($variable) {
-    return session_is_registered($variable);
+    if (PHP_VERSION < 4.3) {
+      return session_is_registered($variable);
+    } else {
+      return isset($_SESSION[$variable]);
+    }
   }
 
   function tep_session_unregister($variable) {
-    return session_unregister($variable);
+    if (PHP_VERSION < 4.3) {
+      return session_unregister($variable);
+    } else {
+      unset($_SESSION[$variable]);
+    }
   }
 
   function tep_session_id($sessid = '') {

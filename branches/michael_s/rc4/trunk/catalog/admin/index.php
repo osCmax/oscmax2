@@ -202,6 +202,7 @@ $cat = array(
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
+<meta name="robots" content="noindex,nofollow">
 <title><?php echo TITLE; ?></title>
 <style type="text/css"><!--
 .style1 {color: #FF0000}
@@ -348,7 +349,7 @@ a:hover.headerLink { font-family: Verdana, Arial, sans-serif; font-size: 10px; c
                       <tr><?php echo tep_draw_form('languages', 'index.php', '', 'get'); ?>
                         <td class="heading"><?php echo HEADING_TITLE; ?></td>
                         <td align="right"><?php echo tep_draw_pull_down_menu('language', $languages_array, $languages_selected, 'onChange="this.form.submit();"'); ?></td>
-                      </form></tr>
+                      <?php echo tep_hide_session_id(); ?></form></tr>
                     </table></td>
                   </tr>
 <?php

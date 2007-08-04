@@ -377,6 +377,11 @@ $Id: sessions.php 3 2006-05-27 04:59:07Z user $
       }
     }
 
+if (!empty($session->id)) {
+  if (preg_match('/^[a-zA-Z0-9]+$/', $session->id) == false) {
+    unset($session->id);
+  }
+}
 /*
 // Check the REQUEST_URI symbol for a string of the form
 // '<session-name>=<session-id>' to allow URLs of the form

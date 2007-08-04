@@ -1090,9 +1090,9 @@ $select_array[$i] . '"';
     tep_db_query("delete from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$product_id . "'");
     tep_db_query("delete from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "'");
     tep_db_query("delete from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'");
-    tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where products_id = '" . (int)$product_id . "'");
-    tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'");
-
+    tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
+    tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
+   
     $product_reviews_query = tep_db_query("select reviews_id from " . TABLE_REVIEWS . " where products_id = '" . (int)$product_id . "'");
     while ($product_reviews = tep_db_fetch_array($product_reviews_query)) {
       tep_db_query("delete from " . TABLE_REVIEWS_DESCRIPTION . " where reviews_id = '" . (int)$product_reviews['reviews_id'] . "'");
@@ -1356,21 +1356,17 @@ $select_array[$i] . '"';
 
 ////
 // Add tax to a products price
-  function tep_add_tax($price, $tax) {
-    global $currencies;
-
-    if (DISPLAY_PRICE_WITH_TAX == 'true') {
-      return tep_round($price, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']) + tep_calculate_tax($price, $tax);
+  function tep_add_tax($price, $tax, $override = false) {
+    if ( ( (DISPLAY_PRICE_WITH_TAX == 'true') || ($override == true) ) && ($tax > 0) ) {
+      return $price + tep_calculate_tax($price, $tax);
     } else {
-      return tep_round($price, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']);
+      return $price;
     }
   }
 
 // Calculates Tax rounding the result
   function tep_calculate_tax($price, $tax) {
-    global $currencies;
-
-    return tep_round($price * $tax / 100, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']);
+    return $price * $tax / 100;
   }
 
 ////

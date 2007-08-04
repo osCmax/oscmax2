@@ -27,8 +27,6 @@ $Id: upload.php 3 2006-05-27 04:59:07Z user $
         if ( ($this->parse() == true) && ($this->save() == true) ) {
           return true;
         } else {
-// self destruct
-          $this == null;
 
           return false;
         }
@@ -36,25 +34,19 @@ $Id: upload.php 3 2006-05-27 04:59:07Z user $
     }
 
     function parse() {
-      global $messageStack;
+      global $HTTP_POST_FILES, $messageStack;
 
+      $file = array();
       if (isset($_FILES[$this->file])) {
         $file = array('name' => $_FILES[$this->file]['name'],
                       'type' => $_FILES[$this->file]['type'],
                       'size' => $_FILES[$this->file]['size'],
                       'tmp_name' => $_FILES[$this->file]['tmp_name']);
-      } elseif (isset($GLOBALS['HTTP_POST_FILES'][$this->file])) {
-        global $HTTP_POST_FILES;
-
+      } elseif (isset($HTTP_POST_FILES[$this->file])) {
         $file = array('name' => $HTTP_POST_FILES[$this->file]['name'],
                       'type' => $HTTP_POST_FILES[$this->file]['type'],
                       'size' => $HTTP_POST_FILES[$this->file]['size'],
                       'tmp_name' => $HTTP_POST_FILES[$this->file]['tmp_name']);
-      } else {
-        $file = array('name' => (isset($GLOBALS[$this->file . '_name']) ? $GLOBALS[$this->file . '_name'] : ''),
-                      'type' => (isset($GLOBALS[$this->file . '_type']) ? $GLOBALS[$this->file . '_type'] : ''),
-                      'size' => (isset($GLOBALS[$this->file . '_size']) ? $GLOBALS[$this->file . '_size'] : ''),
-                      'tmp_name' => (isset($GLOBALS[$this->file]) ? $GLOBALS[$this->file] : ''));
       }
 
       if ( tep_not_null($file['tmp_name']) && ($file['tmp_name'] != 'none') && is_uploaded_file($file['tmp_name']) ) {

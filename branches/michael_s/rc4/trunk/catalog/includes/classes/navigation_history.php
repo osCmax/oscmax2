@@ -60,8 +60,8 @@ $Id: navigation_history.php 3 2006-05-27 04:59:07Z user $
       if ($set == 'true') {
         $this->path[] = array('page' => basename($PHP_SELF),
                               'mode' => $request_type,
-                              'get' => $HTTP_GET_VARS,
-                              'post' => $HTTP_POST_VARS);
+                              'get' => $this->filter_parameters($HTTP_GET_VARS),
+                              'post' => $this->filter_parameters($HTTP_POST_VARS));
       }
     }
 
@@ -80,13 +80,13 @@ $Id: navigation_history.php 3 2006-05-27 04:59:07Z user $
       if (is_array($page)) {
         $this->snapshot = array('page' => $page['page'],
                                 'mode' => $page['mode'],
-                                'get' => $page['get'],
-                                'post' => $page['post']);
+                                'get' => $this->filter_parameters($page['get']),
+                                'post' => $this->filter_parameters($page['post']));
       } else {
         $this->snapshot = array('page' => basename($PHP_SELF),
                                 'mode' => $request_type,
-                                'get' => $HTTP_GET_VARS,
-                                'post' => $HTTP_POST_VARS);
+                                'get' => $this->filter_parameters($HTTP_GET_VARS),
+                                'post' => $this->filter_parameters($HTTP_POST_VARS));
       }
     }
 
@@ -124,6 +124,18 @@ $Id: navigation_history.php 3 2006-05-27 04:59:07Z user $
       }
     }
 
+    function filter_parameters($parameters) {
+      $clean = array();
+
+      reset($parameters);
+      while (list($key, $value) = each($parameters)) {
+        if (strpos($key, '_nh-dns') < 1) {
+          $clean[$key] = $value;
+        }
+      }
+
+      return $clean;
+    }
     function unserialize($broken) {
       for(reset($broken);$kv=each($broken);) {
         $key=$kv['key'];

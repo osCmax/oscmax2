@@ -34,7 +34,7 @@ var $shiptotal;
           $qty = $this->contents[$products_id]['qty'];
           $product_query = tep_db_query("select products_id from " . TABLE_CUSTOMERS_BASKET . " where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id) . "'");
           if (!tep_db_num_rows($product_query)) {
-            tep_db_query("insert into " . TABLE_CUSTOMERS_BASKET . " (customers_id, products_id, customers_basket_quantity, customers_basket_date_added) values ('" . (int)$customer_id . "', '" . tep_db_input($products_id) . "', '" . $qty . "', '" . date('Ymd') . "')");
+            tep_db_query("insert into " . TABLE_CUSTOMERS_BASKET . " (customers_id, products_id, customers_basket_quantity, customers_basket_date_added) values ('" . (int)$customer_id . "', '" . tep_db_input($products_id) . "', '" . tep_db_input($qty) . "', '" . date('Ymd') . "')");
             if (isset($this->contents[$products_id]['attributes'])) {
               reset($this->contents[$products_id]['attributes']);
               while (list($option, $value) = each($this->contents[$products_id]['attributes'])) {
@@ -42,7 +42,7 @@ var $shiptotal;
               }
             }
           } else {
-            tep_db_query("update " . TABLE_CUSTOMERS_BASKET . " set customers_basket_quantity = '" . $qty . "' where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id) . "'");
+            tep_db_query("update " . TABLE_CUSTOMERS_BASKET . " set customers_basket_quantity = '" . tep_db_input($qty) . "' where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id) . "'");
           }
         }
 //BOF - ICW ADDDED FOR CREDIT CLASS GV
@@ -96,8 +96,23 @@ var $shiptotal;
 // BOF: MS2 update 501112 - Changed
       $products_id_string = tep_get_uprid($products_id, $attributes);
       $products_id = tep_get_prid($products_id_string);
+// BOF: MS2 update 060817 - Changed
+      if (defined('MAX_QTY_IN_CART') && (MAX_QTY_IN_CART > 0) && ((int)$qty > MAX_QTY_IN_CART)) {
+        $qty = MAX_QTY_IN_CART;
+      }
+      $attributes_pass_check = true;
 
-      if (is_numeric($products_id) && is_numeric($qty)) {
+      if (is_array($attributes)) {
+       reset($attributes);
+       while (list($option, $value) = each($attributes)) {
+        if (!is_numeric($option) || !is_numeric($value)) {
+        $attributes_pass_check = false;
+        break;
+        }
+       }
+      }
+       if (is_numeric($products_id) && is_numeric($qty) && ($attributes_pass_check == true)) {
+// EOF MS2 update 060817 - Changed       	
         $check_product_query = tep_db_query("select products_status from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
         $check_product = tep_db_fetch_array($check_product_query);
 
@@ -110,7 +125,7 @@ var $shiptotal;
           if ($this->in_cart($products_id_string)) {
             $this->update_quantity($products_id_string, $qty, $attributes);
           } else {
-            $this->contents[$products_id_string] = array('qty' => $qty);
+            $this->contents[$products_id_string] = array('qty' => (int)$qty);
 // insert into database
             if (tep_session_is_registered('customer_id')) tep_db_query("insert into " . TABLE_CUSTOMERS_BASKET . " (customers_id, products_id, customers_basket_quantity, customers_basket_date_added) values ('" . (int)$customer_id . "', '" . tep_db_input($products_id_string) . "', '" . (int)$qty . "', '" . date('Ymd') . "')");
 
@@ -139,9 +154,25 @@ var $shiptotal;
 // BOF: MS2 update 501112 - Changed
       $products_id_string = tep_get_uprid($products_id, $attributes);
       $products_id = tep_get_prid($products_id_string);
+// BOF: MS2 update 060817 - Changed
+      if (defined('MAX_QTY_IN_CART') && (MAX_QTY_IN_CART > 0) && ((int)$quantity > MAX_QTY_IN_CART)) {
+        $quantity = MAX_QTY_IN_CART;
+      }
+      $attributes_pass_check = true;
 
-      if (is_numeric($products_id) && isset($this->contents[$products_id_string]) && is_numeric($quantity)) {
-        $this->contents[$products_id_string] = array('qty' => $quantity);
+      if (is_array($attributes)) {
+        reset($attributes);
+        while (list($option, $value) = each($attributes)) {
+          if (!is_numeric($option) || !is_numeric($value)) {
+            $attributes_pass_check = false;
+            break;
+          }
+        }
+      }
+
+      if (is_numeric($products_id) && isset($this->contents[$products_id_string]) && is_numeric($quantity) && ($attributes_pass_check == true)) {
+// EOF MS2 update 060817 - Changed
+        $this->contents[$products_id_string] = array('qty' => (int)$quantity);
 // update database
         if (tep_session_is_registered('customer_id')) tep_db_query("update " . TABLE_CUSTOMERS_BASKET . " set customers_basket_quantity = '" . (int)$quantity . "' where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id_string) . "'");
 
@@ -232,6 +263,7 @@ var $shiptotal;
     }
 
     function calculate() {
+      global $currencies;
 // LINE ADDED: MOD - ICW Gift Voucher System
       $this->total_virtual = 0;
       $this->total = 0;
@@ -290,7 +322,7 @@ var $shiptotal;
 // EOF: MOD - Separate Pricing Per Customer
           $this->total_virtual += tep_add_tax($products_price, $products_tax) * $qty * $no_count;// ICW CREDIT CLASS;
           $this->weight_virtual += ($qty * $products_weight) * $no_count;// ICW CREDIT CLASS;
-          $this->total += tep_add_tax($products_price, $products_tax) * $qty;
+          $this->total += $currencies->calculate_price($products_price, $products_tax, $qty);
 // LINE ADDED: MOD - indvship
           $this->shiptotal += ($products_ship_price * $qty);
           $this->weight += ($qty * $products_weight);
@@ -303,9 +335,9 @@ var $shiptotal;
             $attribute_price_query = tep_db_query("select options_values_price, price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$prid . "' and options_id = '" . (int)$option . "' and options_values_id = '" . (int)$value . "'");
             $attribute_price = tep_db_fetch_array($attribute_price_query);
             if ($attribute_price['price_prefix'] == '+') {
-              $this->total += $qty * tep_add_tax($attribute_price['options_values_price'], $products_tax);
+              $this->total += $currencies->calculate_price($attribute_price['options_values_price'], $products_tax, $qty);
             } else {
-              $this->total -= $qty * tep_add_tax($attribute_price['options_values_price'], $products_tax);
+              $this->total -= $currencies->calculate_price($attribute_price['options_values_price'], $products_tax, $qty);
             }
           }
         }

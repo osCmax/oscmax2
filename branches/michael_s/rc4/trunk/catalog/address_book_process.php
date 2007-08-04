@@ -173,7 +173,7 @@ $Id: address_book_process.php 3 2006-05-27 04:59:07Z user $
 // reregister session variables
         if ( (isset($HTTP_POST_VARS['primary']) && ($HTTP_POST_VARS['primary'] == 'on')) || ($HTTP_GET_VARS['edit'] == $customer_default_address_id) ) {
           $customer_first_name = $firstname;
-          $customer_country_id = $country_id;
+          $customer_country_id = $country;
           $customer_zone_id = (($zone_id > 0) ? (int)$zone_id : '0');
           $customer_default_address_id = (int)$HTTP_GET_VARS['edit'];
 
@@ -194,7 +194,7 @@ $Id: address_book_process.php 3 2006-05-27 04:59:07Z user $
 // reregister session variables
         if (isset($HTTP_POST_VARS['primary']) && ($HTTP_POST_VARS['primary'] == 'on')) {
           $customer_first_name = $firstname;
-          $customer_country_id = $country_id;
+          $customer_country_id = $country;
           $customer_zone_id = (($zone_id > 0) ? (int)$zone_id : '0');
           if (isset($HTTP_POST_VARS['primary']) && ($HTTP_POST_VARS['primary'] == 'on')) $customer_default_address_id = $new_address_book_id;
 

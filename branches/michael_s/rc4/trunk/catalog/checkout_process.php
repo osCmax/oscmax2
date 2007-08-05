@@ -61,8 +61,8 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
 // Make sure the /catalog/includes/class/order.php is included
 // and $order object is created before this!!!
   if(MODULE_PAYMENT_AUTHORIZENET_STATUS == "True") {
-		include(DIR_WS_MODULES . 'authorizenet_direct.php');
-	}
+    include(DIR_WS_MODULES . 'authorizenet_direct.php');
+  }
 // EOF: MOD - Authorizenet ADC Direct Connection
 
 // load the before_process function from the payment modules
@@ -136,11 +136,13 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
 
   for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
 // Stock Update - Joao Correia
-// BOF: MOD - QT Pro
+// LINE ADDED: MOD - QT Pro
     $products_stock_attributes=null;
     if (STOCK_LIMITED == 'true') {
-        $products_attributes = $order->products[$i]['attributes'];
-      if (DOWNLOAD_ENABLED == 'true') {
+// BOF: QT Pro - move from below
+      $products_attributes = $order->products[$i]['attributes'];
+// BOF: QT Pro - move from below
+//      if (DOWNLOAD_ENABLED == 'true') {
 // EOF: MOD - QT Pro
         $stock_query_raw = "SELECT products_quantity, pad.products_attributes_filename
                             FROM " . TABLE_PRODUCTS . " p
@@ -151,7 +153,9 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
                             WHERE p.products_id = '" . tep_get_prid($order->products[$i]['id']) . "'";
 // Will work with only one option for downloadable products
 // otherwise, we have to build the query dynamically with a loop
-        $products_attributes = $order->products[$i]['attributes'];
+// BOF: QT Pro - move to above
+//      $products_attributes = $order->products[$i]['attributes'];
+// EOF: QT Pro - move to above
         if (is_array($products_attributes)) {
           $stock_query_raw .= " AND pa.options_id = '" . $products_attributes[0]['option_id'] . "' AND pa.options_values_id = '" . $products_attributes[0]['value_id'] . "'";
         }
@@ -159,8 +163,7 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
 // BOF: MOD - QT Pro
       if (tep_db_num_rows($stock_query) > 0) {
         $stock_values = tep_db_fetch_array($stock_query);
-      }
-            $actual_stock_bought = $order->products[$i]['qty'];
+        $actual_stock_bought = $order->products[$i]['qty'];
         $download_selected = false;
         if ((DOWNLOAD_ENABLED == 'true') && isset($stock_values['products_attributes_filename']) && tep_not_null($stock_values['products_attributes_filename'])) {
           $download_selected = true;
@@ -168,25 +171,34 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
         }
 //      If not downloadable and attributes present, adjust attribute stock
         if (!$download_selected && is_array($products_attributes)) {
-                $all_nonstocked = true;
-                $products_stock_attributes_array = array();
-                foreach ($products_attributes as $attribute) {
-                    if ($attribute['track_stock'] == 1) {
-                      $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
-                      $all_nonstocked = false;
-                    }
-                }
-                if ($all_nonstocked) {
-                    $actual_stock_bought = $order->products[$i]['qty'];
-                }  else {
-                  asort($products_stock_attributes_array, SORT_NUMERIC);
-                  $products_stock_attributes = implode(",", $products_stock_attributes_array);
-                  $attributes_stock_query = tep_db_query("select products_stock_quantity from " . TABLE_PRODUCTS_STOCK . " where products_stock_attributes = '$products_stock_attributes' AND products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
-                  if (tep_db_num_rows($attributes_stock_query) > 0) {
-                      $attributes_stock_values = tep_db_fetch_array($attributes_stock_query);
-                      $attributes_stock_left = $attributes_stock_values['products_stock_quantity'] - $order->products[$i]['qty'];
-                      tep_db_query("update " . TABLE_PRODUCTS_STOCK . " set products_stock_quantity = '" . $attributes_stock_left . "' where products_stock_attributes = '$products_stock_attributes' AND products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
-                      $actual_stock_bought = ($attributes_stock_left < 1) ? $attributes_stock_values['products_stock_quantity'] : $order->products[$i]['qty'];
+          $all_nonstocked = true;
+          $products_stock_attributes_array = array();
+          foreach ($products_attributes as $attribute) {
+//**si** 14-11-05 fix missing att list
+//            if ($attribute['track_stock'] == 1) {
+//              $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
+            $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
+            if ($attribute['track_stock'] == 1) {
+//**si** 14-11-05 end
+              $all_nonstocked = false;
+            }
+          }
+          if ($all_nonstocked) {
+            $actual_stock_bought = $order->products[$i]['qty'];
+//**si** 14-11-05 fix missing att list
+            asort($products_stock_attributes_array, SORT_NUMERIC);
+            $products_stock_attributes = implode(",", $products_stock_attributes_array);
+//**si** 14-11-05 end
+
+          }  else {
+            asort($products_stock_attributes_array, SORT_NUMERIC);
+            $products_stock_attributes = implode(",", $products_stock_attributes_array);
+            $attributes_stock_query = tep_db_query("select products_stock_quantity from " . TABLE_PRODUCTS_STOCK . " where products_stock_attributes = '$products_stock_attributes' AND products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+            if (tep_db_num_rows($attributes_stock_query) > 0) {
+              $attributes_stock_values = tep_db_fetch_array($attributes_stock_query);
+              $attributes_stock_left = $attributes_stock_values['products_stock_quantity'] - $order->products[$i]['qty'];
+              tep_db_query("update " . TABLE_PRODUCTS_STOCK . " set products_stock_quantity = '" . $attributes_stock_left . "' where products_stock_attributes = '$products_stock_attributes' AND products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+              $actual_stock_bought = ($attributes_stock_left < 1) ? $attributes_stock_values['products_stock_quantity'] : $order->products[$i]['qty'];
             } else {
               $attributes_stock_left = 0 - $order->products[$i]['qty'];
               tep_db_query("insert into " . TABLE_PRODUCTS_STOCK . " (products_id, products_stock_attributes, products_stock_quantity) values ('" . tep_get_prid($order->products[$i]['id']) . "', '" . $products_stock_attributes . "', '" . $attributes_stock_left . "')");
@@ -210,12 +222,24 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
           }
         }
       }
-// BOF: MOD - QT Pro
+// LINE ADDED: MOD - QT Pro
     }
-// EOF: MOD - QT Pro
+
+//**si** 14-11-05 fix missing att list
+else {
+	if ( is_array($order->products[$i]['attributes']) ) {
+	  $products_stock_attributes_array = array();
+	  foreach ($order->products[$i]['attributes'] as $attribute) {
+	      $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
+		}
+		asort($products_stock_attributes_array, SORT_NUMERIC);
+		$products_stock_attributes = implode(",", $products_stock_attributes_array);
+	}
+}
+//**si** 14-11-05 end
 // Update products_ordered (for bestsellers list)
     tep_db_query("update " . TABLE_PRODUCTS . " set products_ordered = products_ordered + " . sprintf('%d', $order->products[$i]['qty']) . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
-// BOF: MOD - QT Pro
+// LINE ADDED: MOD - QT Pro
     if (!isset($products_stock_attributes)) $products_stock_attributes=null;
     $sql_data_array = array('orders_id' => $insert_id,
                             'products_id' => tep_get_prid($order->products[$i]['id']),
@@ -225,11 +249,11 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
                             'final_price' => $order->products[$i]['final_price'],
                             'products_tax' => $order->products[$i]['tax'],
                             'products_quantity' => $order->products[$i]['qty'],//);
+// LINE ADDED: MOD - QT Pro
                             'products_stock_attributes' => $products_stock_attributes);
-// EOF: MOD - QT Pro
     tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
     $order_products_id = tep_db_insert_id();
-// LINE ADDED: MOD - ICW CREDIT CLASS SYSTEM
+
 //------insert customer choosen option to order--------
     $attributes_exist = '0';
     $products_ordered_attributes = '';
@@ -271,8 +295,6 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
                                   'download_count' => $attributes_values['products_attributes_maxcount']);
           tep_db_perform(TABLE_ORDERS_PRODUCTS_DOWNLOAD, $sql_data_array);
         }
-// LINE CHANGED: MOD - clr 030714 changing to use values from $orders->products and adding call to tep_decode_specialchars()
-//      $products_ordered_attributes .= "\n\t" . $attributes_values['products_options_name'] . ' ' . tep_decode_specialchars($order->products[$i]['attributes'][$j]['value']);
         $products_ordered_attributes .= "\n\t" . $attributes_values['products_options_name'] . ' ' . $attributes_values['products_options_values_name'];
       }
     }

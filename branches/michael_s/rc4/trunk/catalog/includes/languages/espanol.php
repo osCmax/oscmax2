@@ -45,7 +45,7 @@ define('HTML_PARAMS','dir="LTR" lang="es"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0');
+define('TITLE', 'osCMax v2.0 RC4');
 
 // header text in includes/header.php
 define('HEADER_TITLE_CREATE_ACCOUNT', 'Crear una Cuenta');
@@ -100,8 +100,8 @@ define('BOX_SHOPPING_CART_EMPTY', '0 objetos');
 define('BOX_HEADING_CUSTOMER_ORDERS', 'Historia de Pedido');
 
 // best_sellers box text in includes/boxes/best_sellers.php
-define('BOX_HEADING_BESTSELLERS', 'Bestsellers');
-define('BOX_HEADING_BESTSELLERS_IN', 'Bestsellers in<br>&nbsp;&nbsp;');
+define('BOX_HEADING_BESTSELLERS', 'Los Mas Vendidos');
+define('BOX_HEADING_BESTSELLERS_IN', 'Los Mas Vendidos en <br>&nbsp;&nbsp;');
 
 // notifications box text in includes/boxes/products_notifications.php
 define('BOX_HEADING_NOTIFICATIONS', 'Notificaciones');
@@ -236,7 +236,7 @@ define('ENTRY_PASSWORD_NEW', 'Nueva Contraseña:');
 define('ENTRY_PASSWORD_NEW_TEXT', '*');
 define('ENTRY_PASSWORD_NEW_ERROR', 'Su nueva Contraseña debe contener un mínimo de ' . ENTRY_PASSWORD_MIN_LENGTH . ' caracteres.');
 define('ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING', 'La Confirmación de Contraseña debe concordar con su nueva Contraseña.');
-define('PASSWORD_HIDDEN', '--HIDDEN--');
+define('PASSWORD_HIDDEN', '--OCULTO--');
 
 define('FORM_REQUIRED_INFORMATION', '* Información requerida');
 
@@ -296,7 +296,7 @@ define('ICON_SUCCESS', 'Exitoso');
 define('ICON_WARNING', 'Advertencia');
 
 // BOF: MOD - CATALOG_PRODUCTS_WITH_IMAGES_mod
-  define('BOX_CATALOG_PRODUCTS_WITH_IMAGES', 'Catalogo Imprimible');
+define('BOX_CATALOG_PRODUCTS_WITH_IMAGES', 'Catalogo Imprimible');
 define('IMAGE_BUTTON_UPSORT', 'Sort Asending');
 define('IMAGE_BUTTON_DOWNSORT', 'Sort Desending');
 // EOF: MOD - CATALOG_PRODUCTS_WITH_IMAGES_mod
@@ -329,13 +329,13 @@ define('TEXT_REQUIRED', '<span class="errorText">Requerido</span>');
 // LINE ADDED: Country-State Selector
 define ('DEFAULT_COUNTRY', '223');
 
-define('ERROR_TEP_MAIL', '<font face="Verdana, Arial" size="2" color="#ff0000"><b><small>TEP ERROR:</small> No puede enviar el correo electrónico por el servidor especificado SMTP. Por favor compruebe su ajuste de php.ini y corrija al servidor SMTP si fuera necesario.</b></font>');
-define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Advertencia: El directorio de instalación existe en: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/instalar. Por favor quite este directorio para motivos de seguridad.');
-define('WARNING_CONFIG_FILE_WRITEABLE', 'Warning: I am able to write to the configuration file: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/includes/configure.php. This is a potential security risk - please set the right user permissions on this file.');
-define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Advertencia: El directorio de sesiones no existe: ' . tep_session_save_path() . '. Las sesiones no trabajarán hasta que este directorio sea creado.');
-define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Warning: I am not able to write to the sessions directory: ' . tep_session_save_path() . '. Sessions will not work until the right user permissions are set.');
-define('WARNING_SESSION_AUTO_START', 'Advertencia: la sesión auto_start es permitida - por favor incapacite este rasgo de php en php.ini y comience de nuevo al servidor de web.');
-define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Advertencia: El directorio de productos transmitible no existe: ' . DIR_FS_DOWNLOAD . '. Productos transmitibles no trabajarán hasta que este directorio sea válido.');
+define('ERROR_TEP_MAIL', '<font face="Verdana, Arial" size="2" color="#ff0000"><b><small>TEP ERROR:</small> No he podido enviar el email con el servidor SMTP especificado. Configura tu servidor SMTP en la secci&oacute;n adecuada del fichero php.ini.</b></font>');
+define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Advertencia: El directorio de instalaci&oacute;n existe en: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/install. Por razones de seguridad, elimine este directorio completamente.');
+define('WARNING_CONFIG_FILE_WRITEABLE', 'Advertencia: Puedo escribir en el fichero de configuraci&oacute;n: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/includes/configure.php. En determinadas circunstancias esto puede suponer un riesgo - por favor corriga los permisos de este fichero.');
+define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Advertencia: El directorio para guardar datos de sesi&oacute;n no existe: ' . tep_session_save_path() . '. Las sesiones no funcionar&aacute;n hasta que no se corriga este error.');
+define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Avertencia: No puedo escribir en el directorio para datos de sesi&oacute;n: ' . tep_session_save_path() . '. Las sesiones no funcionar&aacute;n hasta que no se corriga este error.');
+define('WARNING_SESSION_AUTO_START', 'Advertencia: session.auto_start esta activado - desactive esta caracteristica en el fichero php.ini and reinicie el servidor web.');
+define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Advertencia: El directorio para productos descargables no existe: ' . DIR_FS_DOWNLOAD . '. Los productos descargables no funcionar&aacute;n hasta que no se corriga este error.');
 
 define('TEXT_CCVAL_ERROR_INVALID_DATE', 'La fecha de vencimiento participó en la tarjeta de crédito es inválido.<br>Por favor compruebe la fecha e intentelo otra vez.');
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'El número de la tarjeta de crédito entrado es inválido. <br> Por favor compruebe el número y el intento otra vez.');
@@ -367,24 +367,24 @@ define('NAV_ORDER_INFO', 'Order Info');
 // EOF: MOD - Checkout Without Account
 
 // BOF: MOD - Article Manager
-define('BOX_HEADING_ARTICLES', 'Articles');
-define('BOX_ALL_ARTICLES', 'All Articles');
-define('BOX_NEW_ARTICLES', 'New Articles');
-define('TEXT_DISPLAY_NUMBER_OF_ARTICLES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> articles)');
-define('TEXT_DISPLAY_NUMBER_OF_ARTICLES_NEW', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> new articles)');
-define('TABLE_HEADING_AUTHOR', 'Author');
-define('TABLE_HEADING_ABSTRACT', 'Abstract');
-define('BOX_HEADING_AUTHORS', 'Articles by Author');
-define('NAVBAR_TITLE_DEFAULT', 'Articles');
+define('BOX_HEADING_ARTICLES', 'Noticias');
+define('BOX_ALL_ARTICLES', 'Todas las noticias');
+define('BOX_NEW_ARTICLES', '&Uacute;ltimas noticias');
+define('TEXT_DISPLAY_NUMBER_OF_ARTICLES', 'Mostrando de <b>%d</b> a <b>%d</b> (de <b>%d</b> noticias)');
+define('TEXT_DISPLAY_NUMBER_OF_ARTICLES_NEW', 'Mostrando de <b>%d</b> a <b>%d</b> (de <b>%d</b> &uacute;ltimas noticias)');
+define('TABLE_HEADING_AUTHOR', 'Autor');
+define('TABLE_HEADING_ABSTRACT', 'Extracto');
+define('BOX_HEADING_AUTHORS', 'Noticias por autor');
+define('NAVBAR_TITLE_DEFAULT', 'Noticias');
 // EOF: MOD - Article Manager
 
 // BOF: MOD - Login Box My Account
 define('BOX_HEADING_LOGIN_BOX', 'Sign in');
-define('BOX_LOGINBOX_EMAIL', '<center>E-mail address:</center>');
-define('BOX_LOGINBOX_PASSWORD', '<center>Password:<center>');
-define('BOX_LOGINBOX_TEXT_NEW', '<center>Create an Account<center>');
-define('BOX_LOGINBOX_NEW', '<center><u>create an account</u><center>');
-define('BOX_LOGINBOX_FORGOT_PASSWORD', '<center><u>(forgotten)</u></center><br>');
+define('BOX_LOGINBOX_EMAIL', 'E-mail address:');
+define('BOX_LOGINBOX_PASSWORD', 'Password:');
+define('BOX_LOGINBOX_TEXT_NEW', 'Create an Account');
+define('BOX_LOGINBOX_NEW', 'create an account');
+define('BOX_LOGINBOX_FORGOT_PASSWORD', '(forgotten)');
 define('IMAGE_BUTTON_LOGIN', 'Login');
 define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','My account info');
 define('LOGIN_BOX_ACCOUNT_EDIT','Edit account info.');

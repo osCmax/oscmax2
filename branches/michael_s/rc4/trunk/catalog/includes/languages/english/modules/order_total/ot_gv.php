@@ -10,6 +10,7 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
+  define('IMAGE_REDEEM_VOUCHER', 'Redeem');
   define('MODULE_ORDER_TOTAL_GV_TITLE', 'Gift Vouchers');
   define('MODULE_ORDER_TOTAL_GV_HEADER', 'Gift Vouchers/Discount Coupons');
   define('MODULE_ORDER_TOTAL_GV_DESCRIPTION', 'Gift Vouchers');

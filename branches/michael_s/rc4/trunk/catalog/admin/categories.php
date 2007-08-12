@@ -506,7 +506,8 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                 <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
                 <td class="main">
                 <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
-                  echo tep_draw_fckeditor ('categories_description[' . $languages[$i]['id'] . ']', '550', '300', (isset($categories_description[$languages[$i]['id']]) ? stripslashes($categories_description[$languages[$i]['id']]) : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
+// Line Changed - MOD: Ajustable Editor Window
+                  echo tep_draw_fckeditor ('categories_description[' . $languages[$i]['id'] . ']', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, (isset($categories_description[$languages[$i]['id']]) ? stripslashes($categories_description[$languages[$i]['id']]) : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
                   } else { echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','soft','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
                 }
                 ?>

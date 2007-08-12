@@ -44,8 +44,8 @@ $listing_split = new splitPageResults($listing_sql, MAX_ARTICLES_PER_PAGE);
 ?>
           <tr>
             <td valign="top" class="main" width="75%">
-<?php
-  echo '<a href="' . tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $articles_listing['articles_id']) . '"><b>' . $articles_listing['articles_name'] . '</b></a> ';
+<?php  // osc-help.net: added class=main to the link.
+  echo '<a class="main" href="' . tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $articles_listing['articles_id']) . '"><b>' . $articles_listing['articles_name'] . '</b></a> ';
   if (DISPLAY_AUTHOR_ARTICLE_LISTING == 'true' && tep_not_null($articles_listing['authors_name'])) {
    echo TEXT_BY . ' ' . '<a href="' . tep_href_link(FILENAME_ARTICLES, 'authors_id=' . $articles_listing['authors_id']) . '"> ' . $articles_listing['authors_name'] . '</a>';
   }
@@ -85,9 +85,11 @@ $listing_split = new splitPageResults($listing_sql, MAX_ARTICLES_PER_PAGE);
   } else {
 ?>
           <tr>
-            <td class="main"><?php if ($topic_depth == 'articles') {
+            <td class="main"><?php if ($listing_no_article<>'') {
+                                     echo $listing_no_article;
+                                   } elseif ($topic_depth == 'articles') {
                                      echo TEXT_NO_ARTICLES;
-                                   } else if (isset($HTTP_GET_VARS['authors_id'])) {
+                                   } elseif (isset($HTTP_GET_VARS['authors_id'])) {
                                     echo  TEXT_NO_ARTICLES2;
                                    } ?></td>
           </tr>

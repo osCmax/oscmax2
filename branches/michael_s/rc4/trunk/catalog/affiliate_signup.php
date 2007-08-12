@@ -60,6 +60,10 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
 	if ($process) {
 	// -Country-State Selector
     $error = false; // reset error flag
+    
+    // BUG FIX:
+    $a_country = $country;
+    $a_state = $state;
 
     if (ACCOUNT_GENDER == 'true') {
       if ( ($a_gender != 'm') && ($a_gender != 'f') ) {
@@ -125,6 +129,46 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
       $entry_city_error = true;
     } else {
       $entry_city_error = false;
+    }
+    
+    if (!$a_country) {
+      $error = true;
+      $entry_country_error = true;
+    } else {
+      $entry_country_error = false;
+    }
+    
+    if (ACCOUNT_STATE == 'true') {
+      if ($entry_country_error) {
+        $entry_state_error = true;
+      } else {
+        $a_zone_id = 0;
+        $entry_state_error = false;
+        $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . tep_db_input($a_country) . "'");
+        $check_value = tep_db_fetch_array($check_query);
+        $entry_state_has_zones = ($check_value['total'] > 0);
+        if ($entry_state_has_zones) {
+          $zone_query = tep_db_query("select zone_id from " . TABLE_ZONES . " where zone_country_id = '" . tep_db_input($a_country) . "' and zone_name = '" . tep_db_input($a_state) . "'");
+          if (tep_db_num_rows($zone_query) == 1) {
+            $zone_values = tep_db_fetch_array($zone_query);
+            $a_zone_id = $zone_values['zone_id'];
+          } else {
+            $zone_query = tep_db_query("select zone_id from " . TABLE_ZONES . " where zone_country_id = '" . tep_db_input($a_country) . "' and zone_code = '" . tep_db_input($a_state) . "'");
+            if (tep_db_num_rows($zone_query) == 1) {
+              $zone_values = tep_db_fetch_array($zone_query);
+              $a_zone_id = $zone_values['zone_id'];
+            } else {
+              $error = true;
+              $entry_state_error = true;
+            }
+          }
+        } else {
+          if (!$a_state) {
+            $error = true;
+            $entry_state_error = true;
+          }
+        }
+      }
     }
 
     if (strlen($a_telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
@@ -215,6 +259,17 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
         $sql_data_array['affiliate_company_taxid'] = $a_company_taxid;
       }
       if (ACCOUNT_SUBURB == 'true') $sql_data_array['affiliate_suburb'] = $a_suburb;
+      
+      // BUG FIX:
+      if (ACCOUNT_STATE == 'true') {
+        if ($a_zone_id > 0) {
+          $sql_data_array['affiliate_zone_id'] = $a_zone_id;
+          $sql_data_array['affiliate_state'] = '';
+        } else {
+          $sql_data_array['affiliate_zone_id'] = '0';
+          $sql_data_array['affiliate_state'] = $a_state;
+        }
+      }
 
       $sql_data_array['affiliate_date_account_created'] = 'now()';
 

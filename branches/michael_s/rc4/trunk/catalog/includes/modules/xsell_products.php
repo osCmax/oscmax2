@@ -30,7 +30,7 @@ if ($num_products_xsell >= MIN_DISPLAY_ALSO_PURCHASED) {
         $xsell['specials_new_products_price'] = tep_get_products_special_price($xsell['products_id']); 
 
 if ($xsell['specials_new_products_price']) { 
-      $xsell_price =  '<s>' . $currencies->display_price($xsell['products_price'], tep_get_tax_rate($xsell['products_tax_class_id'])) . '</s><br>'; 
+      $xsell_price =  '<span style="text-decoration:line-through">' . $currencies->display_price($xsell['products_price'], tep_get_tax_rate($xsell['products_tax_class_id'])) . '</span><br>'; 
       $xsell_price .= '<span class="productSpecialPrice">' . $currencies->display_price($xsell['specials_new_products_price'], tep_get_tax_rate($xsell['products_tax_class_id'])) . '</span>'; 
     } else { 
 

@@ -9,9 +9,11 @@ many more features than standard osCommerce.
 If you find any repeatable bugs or problems, please visit:
 http://bugtrack.oscmax.com
 
-To discuss osCMax go to http://www.oscdox.com
+To discuss osCMax go to http://www.oscmax.com/forums
 
-For the most reliable osCMax hosting availble visit: http://aabox.com
+Installation instructions are located here:
+http://www.oscmax.com/book/oscmax_installation_manual
+
 
 The default login for the admin is:
 email address : admin@localhost.com
@@ -19,18 +21,13 @@ email address : admin@localhost.com
 
 If you have problems logging in or the login screen simply refreshes when you enter
 the above credentials, it is NOT a bug with the software, you simply have not
-installed the software correctly. There are about 200 posts at osCDox.com that deal
-with this issue, please do a search and read before posting.
-
-osCMax v2.0 is a major update to the v1.7 release. There are an immense number of
-upgrades, updates, patches, fixes, and new mods included. While we have taken great
-pains to test the features, there is no way we can test every possible configuration.
+installed the software correctly.
 
 As in any complex and powerful software package, there will most likely be bugs or
 problems with certain configurations. We have set up a bug reporting and tracking
 center, as well as discussion forums for the purpose of tracking and fixing any bugs.
 
-Please join the community at http://oscdox.com and visit http://bugtrack.oscmax.com.
+Please join the community at http://www.oscmax.com and visit http://bugtrack.oscmax.com.
 Consider becoming an active participant in the development and improvement of osCMax.
 
 ================================================================
@@ -115,41 +112,6 @@ Per Item Shipping
 Table Rate
 Zone Rates
 
-================================================================
-osCMax v2.0 partial bugfix list
-================================================================
-Language fixes - English, Spanish, German are fully supported, if not yet
-                 fully translated. No more error messages or missing files.
-                 Fixed for both catalog and admin pages.
-
-Added admin control for changing between standard osCommerce product listing and
-osCMax column product listing.
-
-Added admin control to set the number of columns in the osCMax product listing method
-
-Fixed all formatting issues with AABox template and the different languages
-
-Fixed country/State dropdown for all languages
-
-Fixed table heading style to be visible in all templates
-
-Fixed various stylesheet problems in all templates
-
-Fixed heading style for shopping cart page
-
-Removed bogus javascript calls in template files
-
-Fixed various discount coupon problems - are now being correctly mailed
-
-Updated wysiwyg editor to be cross browser compliant. Now uses FCKeditor
-
-Updated Specials and X-Sell to be SPPC v4 aware
-
-Default Specials is conditional. No speicals, no box is displayed
-
-There are about 150 other small fixes and enhancements that do not warrant individual
-mention, but they do make osCMax operate better and really round out the package very
-nicely.
 
 ================================================================
 Thank you
@@ -167,18 +129,11 @@ participation and help, osCMax would not be what it is today.
 Notes
 ================================================================
 
-Documentation and help can be found at http://www.osCDox.com
+Documentation and help can be found at http://www.oscmax.com
 Bug Tracking/Reporting is at http://bugtrack.oscmax.com
 
 Installation and hosting for osCMax is best provided by:
 
-AABox Web Hosting ::  http://aabox.com
-
-** Hosting starts @ $12.99/month **
-http://aabox.com/virtual-hosting-basic.htm
-
-** Remote installation (on your existing host) is $30.00 **
-https://billing.aabox.com/order/orderwiz.php?v=15&type3_package=105
 
 Michael Sasek
-osCMax Development
+osCMax Developer

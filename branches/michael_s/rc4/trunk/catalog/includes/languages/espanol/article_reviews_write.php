@@ -10,15 +10,15 @@ $Id: article_reviews_write.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Reviews');
-define('HEADING_TITLE', 'Write Review of \'');
+define('NAVBAR_TITLE', 'Comentarios');
+define('HEADING_TITLE', 'Escribir un comentario de \'');
 
-define('SUB_TITLE_FROM', 'From:');
-define('SUB_TITLE_REVIEW', 'Your Review:');
-define('SUB_TITLE_RATING', 'Rating:');
+define('SUB_TITLE_FROM', 'De:');
+define('SUB_TITLE_REVIEW', 'Tu comentario:');
+define('SUB_TITLE_RATING', 'Puntuaci&oacute;n:');
 
-define('TEXT_APPROVAL_WARNING', 'Note: Your review will not appear until it has been approved.');
-define('TEXT_BAD', '<small><font color="#ff0000"><b>Poor</b></font></small>');
-define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excellent</b></font></small>');
+define('TEXT_APPROVAL_WARNING', 'Nota: Tu comentario no ser&aacute; publicado hasta que sea aprobado por el administrador.');
+define('TEXT_BAD', '<small><font color="#ff0000"><b>Pobre</b></font></small>');
+define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excelente</b></font></small>');
 
 ?>

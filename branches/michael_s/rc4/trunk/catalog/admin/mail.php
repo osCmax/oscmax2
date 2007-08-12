@@ -215,7 +215,8 @@ define('customers_email_address', 'string', 'Customer or Newsletter Group');
               <tr>
                 <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
                 <td><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
-                	echo tep_draw_fckeditor('message', '550', '300', ' ') .'</td>';
+// Line Changed - MOD: Ajustable Editor Window
+                	echo tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, ' ') .'</td>';
                 } else { echo tep_draw_textarea_field('message', 'soft', '60', '15') .'</td>';
                 }
                 ?>

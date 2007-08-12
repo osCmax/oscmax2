@@ -80,7 +80,7 @@ define('BOX_HEADING_WHATS_NEW', 'What\'s New?');
 
 // quick_find box text in includes/boxes/quick_find.php
 define('BOX_HEADING_SEARCH', 'Quick Find');
-define('BOX_SEARCH_TEXT', 'Use keywords to find the product you are looking for.');
+define('BOX_SEARCH_TEXT', 'Use keywords to find the products');
 define('BOX_SEARCH_ADVANCED_SEARCH', 'Advanced Search');
 
 // specials box text in includes/boxes/specials.php
@@ -381,11 +381,11 @@ define('NAVBAR_TITLE_DEFAULT', 'Articles');
 
 // BOF: MOD - Login Box My Account
 define('BOX_HEADING_LOGIN_BOX', 'Sign in');
-define('BOX_LOGINBOX_EMAIL', '<center>E-mail address:</center>');
-define('BOX_LOGINBOX_PASSWORD', '<center>Password:<center>');
-define('BOX_LOGINBOX_TEXT_NEW', '<center>Create an Account<center>');
-define('BOX_LOGINBOX_NEW', '<center><u>create an account</u><center>');
-define('BOX_LOGINBOX_FORGOT_PASSWORD', '<center><u>(forgotten)</u></center><br>');
+define('BOX_LOGINBOX_EMAIL', 'E-mail address:');
+define('BOX_LOGINBOX_PASSWORD', 'Password:');
+define('BOX_LOGINBOX_TEXT_NEW', 'Create an Account');
+define('BOX_LOGINBOX_NEW', 'create an account');
+define('BOX_LOGINBOX_FORGOT_PASSWORD', 'Password forgotten');
 define('IMAGE_BUTTON_LOGIN', 'Login');
 define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','My account info');
 define('LOGIN_BOX_ACCOUNT_EDIT','Edit account info.');

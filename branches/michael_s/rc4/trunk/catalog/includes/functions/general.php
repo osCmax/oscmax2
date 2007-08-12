@@ -1074,7 +1074,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     //$to_email_address and $from_email_address are checked with tep_validate_email().
     $to_name = preg_replace('/[\n|\r].*/', '', $to_name);
     $email_subject = preg_replace('/[\n|\r].*/', '', $email_subject);
-    $from_email_name = preg_replace('/[\n|\r].*/', '', $from_name);
+    $from_email_name = preg_replace('/[\n|\r].*/', '', $from_email_name);
 
     // Instantiate a new mail object
     $message = new email(array('X-Mailer: osCommerce Mailer'));
@@ -1394,19 +1394,18 @@ function tep_reset_cache_data_seo_urls($action){
 
 // BOF: MOD - FedEx
 // link to fedex shipment tracker
-	function tep_track_fedex($order_id)
-	{
-		$fedex_query = tep_db_query("select fedex_tracking from " . TABLE_ORDERS . " where orders_id =
+    function tep_track_fedex($order_id)
+    {
+        $fedex_query = tep_db_query("select fedex_tracking from " . TABLE_ORDERS . " where orders_id =
 
 '" . (int)$order_id . "'");
-		$fedexArray = tep_db_fetch_array($fedex_query);
-		$fedex_tracking = $fedexArray['fedex_tracking'];
-
-		$trackLink = tep_href_link(FILENAME_TRACK_FEDEX);
-		if ($fedex_tracking) {
-			$trackLink = $trackLink . '?&track=' . $fedex_tracking;
-		}
-		return $trackLink;
-	}
+        $fedexArray = tep_db_fetch_array($fedex_query);
+        $fedex_tracking = $fedexArray['fedex_tracking'];
+                $trackLink = false;
+        if ($fedex_tracking) {
+                        $trackLink = tep_href_link(FILENAME_TRACK_FEDEX) . '?&track=' . $fedex_tracking;
+        }
+        return $trackLink;
+    }
 // EOF: MOD - FedEx
 ?>

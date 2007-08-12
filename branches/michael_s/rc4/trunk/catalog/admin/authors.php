@@ -104,6 +104,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <?php
 }
 // EOF: WebMakers.com Changed: Header Tag Controller v1.0
+  if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
 ?>
 <script language="Javascript1.2"><!-- // load htmlarea
 // MaxiDVD Added WYSIWYG HTML Area Box + Admin Function v1.7 - 2.2 MS2 Articles Description HTML - Head
@@ -122,6 +123,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
             } else { document.write('<scr'+'ipt>function editor_generate() { return false; }</scr'+'ipt>'); }
          <?php }?>
 // --></script>
+<?php
+  }
+?>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
 <script language="javascript"><!--
@@ -184,7 +188,14 @@ function popupImageWindow(url) {
               <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;'; ?></td>
+           <?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') { ?>
+                  <td class="main">
+                  <?php
+// Line Changed - MOD: Ajustable Editor Window
+                  echo tep_draw_fckeditor('authors_description[' . $languages[$i]['id'] . ']',HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT,''); ?></td>
+           <?php } else { ?>
                   <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', ''); ?></td>
+           <?php } ?>
                 </tr>
               </table>
             </td>
@@ -267,7 +278,14 @@ function popupImageWindow(url) {
               <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;'; ?></td>
+           <?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') { ?>
+                  <td class="main">
+                  <?php
+// Line Changed - MOD: Ajustable Editor Window
+                  echo tep_draw_fckeditor('authors_description[' . $languages[$i]['id'] . ']',HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, tep_get_author_description($authors['authors_id'], $languages[$i]['id'])); ?></td>
+           <?php } else { ?>
                   <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', tep_get_author_description($authors['authors_id'], $languages[$i]['id'])); ?></td>
+           <?php } ?>
                 </tr>
               </table>
             </td>

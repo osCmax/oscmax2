@@ -106,6 +106,7 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('FILENAME_ARTICLES_NEW', 'articles_new.php');
   define('FILENAME_ARTICLES_UPCOMING', 'articles_upcoming.php');
   define('FILENAME_ARTICLES_XSELL', 'articles_xsell.php');
+  define('FILENAME_ARTICLES_PXSELL', 'articles_pxsell.php');
   define('FILENAME_NEW_ARTICLES', 'new_articles.php');
   define('FILENAME_CATALOG_PRODUCTS_WITH_IMAGES', 'catalog_products_with_images.php'); // CATALOG_PRODUCTS_WITH_IMAGES_mod
   define('FILENAME_CHECKOUT_CONFIRMATION', CONTENT_CHECKOUT_CONFIRMATION . '.php');

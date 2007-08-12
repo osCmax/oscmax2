@@ -1,4 +1,11 @@
-    <?php echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&products_id=' . $HTTP_GET_VARS['products_id'])); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <?php
+      // Modify form processing depending on whether product or article
+      if ($valid_product) {
+        echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&products_id=' . $HTTP_GET_VARS['products_id']));
+        } else if ($valid_article) {
+          echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&articles_id=' . $HTTP_GET_VARS['articles_id']));
+      }
+    ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -10,7 +17,7 @@
                  } else if ($valid_article) {
                    $title = $article_info['articles_name'];
               }
-              echo sprintf(HEADING_TITLE, $product_info['products_name']);
+              echo sprintf(HEADING_TITLE, $title);
             ?>
              </td>
             <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_contact_us.gif', sprintf(HEADING_TITLE, $product_info['products_name']), HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>

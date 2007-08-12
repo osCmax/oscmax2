@@ -67,7 +67,7 @@ function CVVPopUpWindow(url) {
 ?>
 
 </head>
-<body onload="selectRowEffect(this, 0)">
+<body>
  <!-- coolMenu //-->
  <?php
  if (DISPLAY_DHTML_MENU == 'CoolMenu') {

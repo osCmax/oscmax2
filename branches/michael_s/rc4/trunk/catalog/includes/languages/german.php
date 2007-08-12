@@ -381,11 +381,11 @@ define('NAVBAR_TITLE_DEFAULT', 'Articles');
 
 // BOF: MOD - Login Box My Account
 define('BOX_HEADING_LOGIN_BOX', 'Anmelden');
-define('BOX_LOGINBOX_EMAIL', '<center>eMail-Adresse:</center>');
-define('BOX_LOGINBOX_PASSWORD', '<center>Passwort:<center>');
-define('BOX_LOGINBOX_TEXT_NEW', '<center>Ein neuer Kunde? <center>');
-define('BOX_LOGINBOX_NEW', '<center><u>ein Kundenkonto eröffnen</u><center>');
-define('BOX_LOGINBOX_FORGOT_PASSWORD', '<center><u>(vergessen)</u></center><br>');
+define('BOX_LOGINBOX_EMAIL', 'eMail-Adresse:');
+define('BOX_LOGINBOX_PASSWORD', 'Passwort:');
+define('BOX_LOGINBOX_TEXT_NEW', 'Ein neuer Kunde?');
+define('BOX_LOGINBOX_NEW', 'ein Kundenkonto eröffnen');
+define('BOX_LOGINBOX_FORGOT_PASSWORD', '(vergessen)');
 define('IMAGE_BUTTON_LOGIN', 'Anmelden');
 define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','Ihr Konto');
 define('LOGIN_BOX_ACCOUNT_EDIT','Daten ändern');

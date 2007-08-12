@@ -21,6 +21,8 @@
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','main_layout.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','print.css')); // BTSv1.5 ?>" media="print">
 <link rel="stylesheet" type="text/css" href="<?php echo DIR_WS_TEMPLATES; ?>coolmenu.css">
+<?php require('includes/javascript/form_check.js.php'); ?>
+
 <style type="text/css">
 <!--
 <?php

@@ -10,14 +10,15 @@ $Id: articles_new.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'New Articles');
-define('HEADING_TITLE', 'New Articles');
+define('NAVBAR_TITLE', '&Uacute;ltimas noticias');
+define('HEADING_TITLE', '&Uacute;ltimas noticias');
 
-define('TEXT_NEW_ARTICLES', 'The following articles were added in the last %s days.');
-define('TEXT_NO_NEW_ARTICLES', 'No new articles have been added in the last %s days.');
-define('TEXT_DATE_ADDED', 'Published:');
-define('TEXT_AUTHOR', 'Author:');
-define('TEXT_TOPIC', 'Topic:');
-define('TEXT_BY', 'by');
-define('TEXT_READ_MORE', 'Read More');
+define('TEXT_NEW_ARTICLES', 'Las siguientes noticias han sido añadidas en los &uacute;ltimos %s d&iacute;as.');
+define('TEXT_ARTICLES', sprintf(TEXT_NEW_ARTICLES, NEW_ARTICLES_DAYS_DISPLAY));
+define('TEXT_NO_NEW_ARTICLES', 'No hay noticias añadidas en los &uacute;ltimos %s d&iacute;s.');
+define('TEXT_DATE_ADDED', 'Publicado:');
+define('TEXT_AUTHOR', 'Autor:');
+define('TEXT_TOPIC', 'Secci&oacute;n:');
+define('TEXT_BY', 'por');
+define('TEXT_READ_MORE', 'Leer m&aacute;s');
 ?>

@@ -141,7 +141,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 
 
            if (tep_not_null($listing[$x]['specials_new_products_price'])) {
-             $lc_text = '&nbsp;<s>' .  $currencies->display_price($listing[$x]['products_price'], tep_get_tax_rate($listing[$x]['products_tax_class_id'])) . '</s><br>&nbsp;&nbsp;<span class="productSpecialPrice">' . $currencies->display_price($listing[$x]['specials_new_products_price'], tep_get_tax_rate($listing[$x]['products_tax_class_id'])) . '</span>&nbsp;';
+             $lc_text = '&nbsp;<span style="text-decoration:line-through">' .  $currencies->display_price($listing[$x]['products_price'], tep_get_tax_rate($listing[$x]['products_tax_class_id'])) . '</span><br>&nbsp;&nbsp;<span class="productSpecialPrice">' . $currencies->display_price($listing[$x]['specials_new_products_price'], tep_get_tax_rate($listing[$x]['products_tax_class_id'])) . '</span>&nbsp;';
             } else {
              $lc_text = '&nbsp;' . $currencies->display_price($listing[$x]['products_price'], tep_get_tax_rate($listing[$x]['products_tax_class_id'])) . '&nbsp;';
             }
@@ -175,27 +175,47 @@ for ($x = 0; $x < $no_of_listings; $x++) {
                                                 'params' => 'class="productListing-data"',
                                                 'text'  => $lc_text);
       $column ++;
-    if ($x == ($no_of_listings -1)) {
+/*
+    	if ($x == ($no_of_listings -1)) {
   // fill up the remainder of the table row with empty cells, assumes three products per row!
-  if ($column < PRODUCT_LIST_NUM_COLUMNS) {
-$list_box_contents[$row][$column + 1] = array('align' => 'center',
-                                              'params' => 'class="productListing-data"',
-                                              'text'  => "&nbsp;");
-           $column ++;
-  }
-    }
-      if ($column >= PRODUCT_LIST_NUM_COLUMNS || $x == ($no_of_listings -1)) {
+				if ($column < PRODUCT_LIST_NUM_COLUMNS) {
+					$list_box_contents[$row][$column + 1] = array('align' => 'center',
+                                              'params' => 'class="productListing-data" ',
+                                              'text'  => $x . "xxxxxx &nbsp;");
+ 
+  			}
+    	}
+			if ($column >= PRODUCT_LIST_NUM_COLUMNS || $x == ($no_of_listings -1)) {
         $row ++;
         $column = 0;
-      }
+			}
+*/
+
+			if ($column >= PRODUCT_LIST_NUM_COLUMNS) {
+        $row ++;
+        $column = 0;
+			}
+
+    } // line 102 (N of listing per current page)
+    if ($column > 0){
+    	for ($x = $column; $x < PRODUCT_LIST_NUM_COLUMNS; $x++){
+    		
+    		$list_box_contents[$row][$column] = array('align' => 'center',
+                                              'params' => 'class="productListing-data" ',
+                                              'text'  => "&nbsp;");
+ 				$column++;
+    		
+    	}
     }
+    
+    
 
     new productListingBox($list_box_contents);
-  } else {
+  } else { // from line 21
     $list_box_contents = array();
 
     $list_box_contents[0] = array('params' => 'class="productListing-odd"');
-    $list_box_contents[0][] = array('params' => 'class="productListing-data"',
+    $list_box_contents[0][] = array('params' => 'class="productListing-data" yyyyyy',
                                    'text' => TEXT_NO_PRODUCTS);
 
     new productListingBox($list_box_contents);

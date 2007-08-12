@@ -422,7 +422,8 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
             <td><table border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="main" valign="top"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-                	 echo tep_draw_fckeditor('topics_description[' . $languages[$i]['id'] . ']', '550', '300', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
+// Line Changed - MOD: Ajustable Editor Window
+                	 echo tep_draw_fckeditor('topics_description[' . $languages[$i]['id'] . ']', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
                } else { echo tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
               }
               ?>

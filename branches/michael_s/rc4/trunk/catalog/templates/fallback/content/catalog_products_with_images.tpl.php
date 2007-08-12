@@ -339,7 +339,7 @@
 <?PHP if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') { ?>
                <td class="main" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products['products_id'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>'; ?>&nbsp;</td>
 <?PHP } else { ?>
-               <td class="main" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'cPath=' . $products['categories_id'] . '&products_id=' . $products['products_id'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>'; ?>&nbsp;</td>
+               <td class="main" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>'; ?>&nbsp;</td>
 <?PHP } ?>
 <?PHP } ?>
 <?PHP if (PRODUCT_LIST_CATALOG_OPTIONS == 'show') { ?>
@@ -398,17 +398,17 @@
 <?PHP } ?>
 <?PHP } ?>
 <?PHP if (PRODUCT_LIST_CATALOG_MANUFACTURERS == 'show') { ?>
-                <td class="main" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'cPath=' . $products['cPath'] . '&products_id=' . $products['products_id'], 'NONSSL') . '">' . $products['manufacturers_name'] . '</a>'; ?>&nbsp;</div></td>
+                <td class="main" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '">' . $products['manufacturers_name'] . '</a>'; ?>&nbsp;</div></td>
 <?PHP } ?>
 <?PHP if (PRODUCT_LIST_CATALOG_NAME == 'show') { ?>
 <?PHP if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') { ?>
                 <td class="main" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products['products_id'], 'NONSSL') . '">' . $products['products_name'] . '</a>'; ?>&nbsp;</div></td>
 <?PHP } else { ?>
-                <td class="main" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'cPath=' . $products['categories_id'] . '&products_id=' . $products['products_id'], 'NONSSL') . '">' . $products['products_name'] . '</a>'; ?>&nbsp;</div></td>
+                <td class="main" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '">' . $products['products_name'] . '</a>'; ?>&nbsp;</div></td>
 <?PHP } ?>
 <?PHP } ?>
 <?PHP if (PRODUCT_LIST_CATALOG_DESCRIPTION == 'show') { ?>
-               <td class="main" align="center"><?php echo substr(nl2br($products['products_description']), 0, $description_length); ?>...&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'cPath=' . $products['cPath'] . '&products_id=' . $products['products_id'], 'NONSSL') . '"><i>More Info</i>...</a>'; ?></td>
+               <td class="main" align="center"><?php echo substr(nl2br($products['products_description']), 0, $description_length); ?>...&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '"><i>More Info</i>...</a>'; ?></td>
 <?PHP } ?>
 <?PHP if (PRODUCT_LIST_CATALOG_CATEGORIES == 'show') { ?>
                 <td class="main" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'cPath=' . $products['categories_id'], 'NONSSL') . '">' . $products['categories_name'] . '</a>'; ?>&nbsp;</div></td>
@@ -452,7 +452,8 @@ if($page != 1)
 
 {
 	$pageprev = $page - 1;
-	echo("<a href=\"$PHP_SELF?listing=" . $sort . "&page=$pageprev\">".BOX_CATALOG_PREV."</a>&nbsp;");
+//	echo("<a href=\"$PHP_SELF?listing=" . $sort . "&page=$pageprev\">".BOX_CATALOG_PREV."</a>&nbsp;");
+	echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $pageprev, 'NONSSL') . '">' . BOX_CATALOG_PREV . '</a> ';
 } else {
         echo(BOX_CATALOG_PREV."&nbsp;");
 }
@@ -475,7 +476,7 @@ for($i = $startpage; $i <= $startpage + $displaycount; $i++)
     {
         if($i>0) echo("[<b>".$i."</b>]&nbsp;");
     } else {
-		if($i>0) echo("<a href=\"$PHP_SELF?listing=" . $sort . "&page=$i\">[$i</a>]&nbsp;");
+		if($i>0) echo '[<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $i, 'NONSSL') . '">' . $i . '</a>]&nbsp;';
 	}
 }
 
@@ -487,14 +488,16 @@ for($i = $startpage; $i <= $startpage + $displaycount; $i++)
 	{
 		if($i>0) echo("[<b>".$i."</b>]&nbsp;");
 	} else {
-		if($i>0) echo("<a href=\"$PHP_SELF?listing=" . $sort . "&page=$i\">[$i]</a>&nbsp;");
+		// if($i>0) echo("<a href=\"$PHP_SELF?listing=" . $sort . "&page=$i\">[$i]</a>&nbsp;");
+		if($i>0) echo '[<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $i, 'NONSSL') . '">' . $i . '</a>]&nbsp;';
 	}
 }
 
 if(($totalrows - ($limit * $page)) > 0)
 {
 	$pagenext = $page + 1;
-	echo("<a href=\"$PHP_SELF?listing=" . $sort . "&page=$pagenext\">".BOX_CATALOG_NEXT."</a>");
+//	echo("<a href=\"$PHP_SELF?listing=" . $sort . "&page=$pagenext\">".BOX_CATALOG_NEXT."</a>");
+	echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $pagenext, 'NONSSL') . '">' . BOX_CATALOG_NEXT . '</a>';
 } else {
 	echo("&nbsp; ".BOX_CATALOG_NEXT);
 }

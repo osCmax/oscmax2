@@ -72,7 +72,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
       $image .= ' title=" ' . tep_output_string($alt) . ' "';
     }
 
-    if (tep_not_null($width) && tep_not_null($height)) {
+    if (tep_not_null($width) || tep_not_null($height)) {
       $image .= ' width="' . tep_output_string($width) . '" height="' . tep_output_string($height) . '"';
     }
 

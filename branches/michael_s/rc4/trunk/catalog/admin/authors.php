@@ -11,7 +11,7 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
 */
 
   require('includes/application_top.php');
-
+  require(DIR_FCKEDITOR . 'fckeditor.php');
   $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
 
   if (tep_not_null($action)) {
@@ -104,27 +104,6 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <?php
 }
 // EOF: WebMakers.com Changed: Header Tag Controller v1.0
-  if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-?>
-<script language="Javascript1.2"><!-- // load htmlarea
-// MaxiDVD Added WYSIWYG HTML Area Box + Admin Function v1.7 - 2.2 MS2 Articles Description HTML - Head
-        _editor_url = "<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_ADMIN; ?>htmlarea/";  // URL to htmlarea files
-          var win_ie_ver = parseFloat(navigator.appVersion.split("MSIE")[1]);
-           if (navigator.userAgent.indexOf('Mac')        >= 0) { win_ie_ver = 0; }
-            if (navigator.userAgent.indexOf('Windows CE') >= 0) { win_ie_ver = 0; }
-             if (navigator.userAgent.indexOf('Opera')      >= 0) { win_ie_ver = 0; }
-         <?php if (ARTICLE_MANAGER_WYSIWYG_BASIC == 'Basic'){ ?>  if (win_ie_ver >= 5.5) {
-         document.write('<scr' + 'ipt src="' +_editor_url+ 'editor_basic.js"');
-         document.write(' language="Javascript1.2"></scr' + 'ipt>');
-            } else { document.write('<scr'+'ipt>function editor_generate() { return false; }</scr'+'ipt>'); }
-         <?php } else{ ?> if (win_ie_ver >= 5.5) {
-         document.write('<scr' + 'ipt src="' +_editor_url+ 'editor_advanced.js"');
-         document.write(' language="Javascript1.2"></scr' + 'ipt>');
-            } else { document.write('<scr'+'ipt>function editor_generate() { return false; }</scr'+'ipt>'); }
-         <?php }?>
-// --></script>
-<?php
-  }
 ?>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
@@ -212,21 +191,6 @@ function popupImageWindow(url) {
           </tr>
 <?php
   }
-  // MaxiDVD Added WYSIWYG HTML Area Box + Admin Function v1.7 Authors Description HTML - Head
-  if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-?>
-      <script language="JavaScript1.2" defer>
-           var config = new Object();
-           config.width = "<?php echo ARTICLE_MANAGER_WYSIWYG_WIDTH; ?>px";
-           config.height = "<?php echo ARTICLE_MANAGER_WYSIWYG_HEIGHT; ?>px";
-           config.bodyStyle = 'background-color: <?php echo ARTICLE_MANAGER_WYSIWYG_BG_COLOUR; ?>; font-family: "<?php echo ARTICLE_MANAGER_WYSIWYG_FONT_TYPE; ?>"; color: <?php echo ARTICLE_MANAGER_WYSIWYG_FONT_COLOUR; ?>; font-size: <?php echo ARTICLE_MANAGER_WYSIWYG_FONT_SIZE; ?>pt;';
-           config.debug = <?php echo ARTICLE_MANAGER_WYSIWYG_DEBUG; ?>;
-      <?php for ($i = 0, $n = sizeof($languages); $i < $n; $i++) { ?>
-        editor_generate('authors_description[<?php echo $languages[$i]['id']; ?>]',config);
-      <?php } ?>
-      </script>
-<?php
-  }
 ?>
       <tr>
         <td class="main">&nbsp;</td>
@@ -300,21 +264,6 @@ function popupImageWindow(url) {
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-  }
-  // MaxiDVD Added WYSIWYG HTML Area Box + Admin Function v1.7 Authors Description HTML - Head
-  if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-?>
-      <script language="JavaScript1.2" defer>
-           var config = new Object();
-           config.width = "<?php echo ARTICLE_MANAGER_WYSIWYG_WIDTH; ?>px";
-           config.height = "<?php echo ARTICLE_MANAGER_WYSIWYG_HEIGHT; ?>px";
-           config.bodyStyle = 'background-color: <?php echo ARTICLE_MANAGER_WYSIWYG_BG_COLOUR; ?>; font-family: "<?php echo ARTICLE_MANAGER_WYSIWYG_FONT_TYPE; ?>"; color: <?php echo ARTICLE_MANAGER_WYSIWYG_FONT_COLOUR; ?>; font-size: <?php echo ARTICLE_MANAGER_WYSIWYG_FONT_SIZE; ?>pt;';
-           config.debug = <?php echo ARTICLE_MANAGER_WYSIWYG_DEBUG; ?>;
-      <?php for ($i = 0, $n = sizeof($languages); $i < $n; $i++) { ?>
-        editor_generate('authors_description[<?php echo $languages[$i]['id']; ?>]',config);
-      <?php } ?>
-      </script>
 <?php
   }
 ?>

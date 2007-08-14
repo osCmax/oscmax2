@@ -44,7 +44,6 @@
           <tr>
             <td align="center">
             	<?php 
-            	   $link = htmlspecialchars($link, ENT_QUOTES);
                  echo tep_draw_textarea_field('affiliate_banner', 'soft', '60', '6', $link); 
               ?>
             </td>
@@ -95,8 +94,7 @@
           </tr>
           <tr>
             <td class="smallText" align="center">
-              <?php 
-                $link = htmlspecialchars($link, ENT_QUOTES);
+              <?php
                 echo tep_draw_textarea_field('affiliate_banner', 'soft', '60', '6', $link); 
               ?>
             </td>

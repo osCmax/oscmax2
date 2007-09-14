@@ -347,7 +347,7 @@ global $customer_id, $order, $cc_id, $cart;
 				} else {
 					reset($order->info['tax_groups']);
 					while (list($key, $value) = each($order->info['tax_groups'])) {
-						$god_amout=0;
+						$god_amount=0;
 						$tax_rate = tep_get_tax_rate_from_desc($key);
 						$net = $tax_rate * $order->info['tax_groups'][$key];
 						if ($net>0) {

@@ -64,7 +64,7 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
 
 //    new infoBox($info_box_contents);
 
-
+}
 ?>
 
 <!-- authors_eof //-->

@@ -31,6 +31,8 @@ $Id: affiliate.php 14 2006-07-28 17:42:07Z user $
                                    '<a href="' . tep_href_link(FILENAME_AFFILIATE_SALES, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_SALES . '</a><br>' .
                                    '<a href="' . tep_href_link(FILENAME_AFFILIATE_CLICKS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_CLICKS . '</a><br>' .
                                    '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_BANNERS . '</a><br>' .
+                                   '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_NEWS . '</a><br>' .
+                                   '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_NEWSLETTER_MANAGER . '</a><br>' .
                                    '<a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_CONTACT . '</a>');
   }
 

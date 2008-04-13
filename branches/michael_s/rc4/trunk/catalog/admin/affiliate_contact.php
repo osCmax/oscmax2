@@ -40,7 +40,7 @@ $Id: affiliate_contact.php 14 2006-07-28 17:42:07Z user $
     $message = tep_db_prepare_input($HTTP_POST_VARS['message']);
 
     // Instantiate a new mail object
-    $mimemessage = new email(array('X-Mailer: osC mailer'));
+    $mimemessage = new email(array('X-Mailer: osCMax v2'));
 
     // Build the text version
     $text = strip_tags($text);

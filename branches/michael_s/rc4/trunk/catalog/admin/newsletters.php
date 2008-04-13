@@ -39,7 +39,7 @@ $Id: newsletters.php 3 2006-05-27 04:59:07Z user $
           $newsletter_error = true;
         }
 
-        if (empty($module)) {
+        if (empty($newsletter_module)) {
           $messageStack->add(ERROR_NEWSLETTER_MODULE, 'error');
           $newsletter_error = true;
         }

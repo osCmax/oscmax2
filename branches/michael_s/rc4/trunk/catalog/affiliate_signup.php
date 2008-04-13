@@ -24,12 +24,7 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
 
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_SIGNUP);
 
-  // +Country-State Selector
-  $refresh = false;
-  if (isset($HTTP_POST_VARS['action']) && (($HTTP_POST_VARS['action'] == 'process') || ($HTTP_POST_VARS['action'] == 'refresh'))) {
-    if ($HTTP_POST_VARS['action'] == 'process')  $process = true;
-	if ($HTTP_POST_VARS['action'] == 'refresh') $refresh = true;
-  // -Country-State Selector
+  if (isset($HTTP_POST_VARS['action'])) {
     $a_gender = tep_db_prepare_input($HTTP_POST_VARS['a_gender']);
     $a_firstname = tep_db_prepare_input($HTTP_POST_VARS['a_firstname']);
     $a_lastname = tep_db_prepare_input($HTTP_POST_VARS['a_lastname']);
@@ -55,21 +50,18 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
     $a_fax = tep_db_prepare_input($HTTP_POST_VARS['a_fax']);
     $a_homepage = tep_db_prepare_input($HTTP_POST_VARS['a_homepage']);
     $a_password = tep_db_prepare_input($HTTP_POST_VARS['a_password']);
+    $a_newsletter = tep_db_prepare_input($HTTP_POST_VARS['a_newsletter']);
+    $a_confirmation = tep_db_prepare_input($HTTP_POST_VARS['a_confirmation']);
+    $a_agb = tep_db_prepare_input($HTTP_POST_VARS['a_agb']);
 
-    // +Country-State Selector
-	if ($process) {
-	// -Country-State Selector
     $error = false; // reset error flag
-    
-    // BUG FIX:
-    $a_country = $country;
-    $a_state = $state;
 
     if (ACCOUNT_GENDER == 'true') {
-      if ( ($a_gender != 'm') && ($a_gender != 'f') ) {
-
+      if (($a_gender == 'm') || ($a_gender == 'f')) {
+        $entry_gender_error = false;
+      } else {
         $error = true;
-        $messageStack->add('create_account', ENTRY_GENDER_ERROR);
+        $entry_gender_error = true;
       }
     }
 
@@ -220,6 +212,8 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
     // Check Company
     $entry_company_error = false;
     $entry_company_taxid_error = false;
+    // Check Newsletter 
+    $entry_newsletter_error = false;
 
     // Check Payment
     $entry_payment_check_error = false;
@@ -250,7 +244,8 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
                               'affiliate_fax' => $a_fax,
                               'affiliate_homepage' => $a_homepage,
                               'affiliate_password' => tep_encrypt_password($a_password),
-                              'affiliate_agb' => '1');
+                              'affiliate_agb' => '1',
+                              'affiliate_newsletter' => $a_newsletter);
 
       if (ACCOUNT_GENDER == 'true') $sql_data_array['affiliate_gender'] = $a_gender;
       if (ACCOUNT_DOB == 'true') $sql_data_array['affiliate_dob'] = tep_date_raw($a_dob);
@@ -260,7 +255,6 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
       }
       if (ACCOUNT_SUBURB == 'true') $sql_data_array['affiliate_suburb'] = $a_suburb;
       
-      // BUG FIX:
       if (ACCOUNT_STATE == 'true') {
         if ($a_zone_id > 0) {
           $sql_data_array['affiliate_zone_id'] = $a_zone_id;
@@ -275,15 +269,18 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
 
       $affiliate_id = affiliate_insert ($sql_data_array, $HTTP_SESSION_VARS['affiliate_ref'] );
 
-      $aemailbody = MAIL_AFFILIATE_HEADER . "\n"
-                  . MAIL_AFFILIATE_ID . $affiliate_id . "\n"
-                  . MAIL_AFFILIATE_USERNAME . $a_email_address . "\n"
-                  . MAIL_AFFILIATE_PASSWORD . $a_password . "\n\n"
-                  . MAIL_AFFILIATE_LINK
-                  . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE . "\n\n"
-                  . MAIL_AFFILIATE_FOOTER;
-      tep_mail($a_firstname . ' ' . $a_lastname, $a_email_address, MAIL_AFFILIATE_SUBJECT, nl2br($aemailbody), STORE_OWNER, AFFILIATE_EMAIL_ADDRESS);
+      // build the message content
+	  $name = $a_firstname . ' ' . $a_lastname;    
+	  $email_text = sprintf(MAIL_GREET_NONE, $a_firstname);
+          $email_text .= MAIL_AFFILIATE_HEADER;
+	  $email_text .= sprintf(MAIL_AFFILIATE_ID, $affiliate_id);
+	  $email_text .= sprintf(MAIL_AFFILIATE_USERNAME, $a_email_address);
+	  $email_text .= sprintf(MAIL_AFFILIATE_PASSWORD, $a_password);
+	  $email_text .= sprintf(MAIL_AFFILIATE_LINK, HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE) . "\n\n";
+	  $email_text .= MAIL_AFFILIATE_FOOTER;
 
+      tep_mail($name, $a_email_address, MAIL_AFFILIATE_SUBJECT, $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+    
       tep_session_register('affiliate_id');
       $affiliate_email = $a_email_address;
       $affiliate_name = $a_firstname . ' ' . $a_lastname;
@@ -292,11 +289,7 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
       tep_redirect(tep_href_link(FILENAME_AFFILIATE_SIGNUP_OK, '', 'SSL'));
     }
   }
-// BOF: MOD - Country-State Selector
- }
-if ($HTTP_POST_VARS['action'] == 'refresh') {$state = '';}
-if (!isset($country)){$country = DEFAULT_COUNTRY;}
-// EOF: MOD - Country-State Selector
+
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_AFFILIATE_SIGNUP, '', 'SSL'));
 
   $content = affiliate_signup;

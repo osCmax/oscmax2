@@ -1,8 +1,9 @@
-          <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB; ?>"> 
+    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr> 
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'affiliate_clicks.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
           </tr>
         </table></td>
       </tr>
@@ -12,7 +13,7 @@
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main" colspan="4"><?php echo TEXT_AFFILIATE_HEADER . ' ' . $affiliate_clickthroughs_numrows; ?></td>
+            <td class="main" colspan="4"><?php echo TEXT_AFFILIATE_HEADER . ' <b>' . $affiliate_clickthroughs_numrows; ?></b></td>
           </tr>
         </table></td>
       </tr>
@@ -20,11 +21,11 @@
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="4">
           <tr>
-            <td class="infoBoxHeading"><?php echo TABLE_HEADING_DATE; ?></td>
- 	        <td class="infoBoxHeading"><?php echo TABLE_HEADING_CLICKED_PRODUCT; ?></td>
-	        <td class="infoBoxHeading"><?php echo TABLE_HEADING_REFFERED; ?></td>
+            <td class="infoBoxHeading"><?php echo TABLE_HEADING_DATE; ?><?php echo '<a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_AFFILIATE_HELP_9) . '\')"> ' . TEXT_CLICKTHROUGH_HELP . '</a>'; ?></td>
+ 	        <td class="infoBoxHeading"><?php echo TABLE_HEADING_CLICKED_PRODUCT; ?><?php echo '<a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_AFFILIATE_HELP_10) . '\')"> ' . TEXT_CLICKTHROUGH_HELP . '</a>'; ?></td>
+	        <td class="infoBoxHeading"><?php echo TABLE_HEADING_REFFERED; ?><?php echo '<a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_AFFILIATE_HELP_11) . '\')"> ' . TEXT_CLICKTHROUGH_HELP . '</a>'; ?></td>
           </tr>
 <?php
   if ($affiliate_clickthroughs_split->number_of_rows > 0) {
@@ -77,6 +78,15 @@
 <?php
   }
 ?>
+                <tr>
+                  <td colspan="4"><?php echo tep_draw_separator(); ?></td>
+                </tr>
+                 <tr>
+                  <td align="center" class="boxtext" colspan="4"><b><?php echo TEXT_CLICKS; ?><b></td>
+                </tr>
+                <tr>
+                  <td colspan="4"><?php echo tep_draw_separator(); ?></td>
+                </tr>
         </table></td>
       </tr>
     </table>

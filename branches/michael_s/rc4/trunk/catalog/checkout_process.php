@@ -368,6 +368,9 @@ if (!tep_session_is_registered('noaccount')) {
 // LINE ADDED: MOD - OSC-AFFILIATE
   require(DIR_WS_INCLUDES . 'affiliate_checkout_process.php');
 
+// remove items from wishlist if customer purchased them 
+  $wishList->clear();
+
 // load the after_process function from the payment modules
   $payment_modules->after_process();
 

@@ -37,7 +37,10 @@ $Id: logoff.php 3 2006-05-27 04:59:07Z user $
   tep_session_unregister('cc_id');
 // EOF: MOD - ICW - logout -> unregister GIFT VOUCHER sessions
   $cart->reset();
-
+  
+// BOF: MOD - Wishlist 3.5
+   $wishList->reset();  
+// EOF: MOD - Wishlist 3.5
   $content = CONTENT_LOGOFF;
 
   include (bts_select('main', $content_template)); // BTSv1.5

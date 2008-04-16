@@ -59,6 +59,17 @@
     } else {
       $products_name = $product_info['products_name'];
     }
+    
+//DISPLAY PRODUCT WAS ADDED TO WISHLIST IF WISHLIST REDIRECT IS ENABLED
+        if(tep_session_is_registered('wishlist_id')) { 
+        
+      ?>  
+        <tr>  
+           <td class="messageStackSuccess"><?php echo PRODUCT_ADDED_TO_WISHLIST; ?></td>
+        </tr> 
+      <?php tep_session_unregister('wishlist_id'); 
+      
+      }    
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -188,9 +199,9 @@
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                 <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params()) . '">' . tep_image_button('button_reviews.gif', IMAGE_BUTTON_REVIEWS) . '</a>'; ?></td>
-                <!-- Wish List 2.3 Start -->
-                <td align="center" class="main"><?php echo tep_draw_hidden_field('wishlist_action', 'add_wishlist') . tep_image_submit('button_wishlist.gif', IMAGE_BUTTON_ADD_WISHLIST, 'onClick="document.cart_quantity.action=\''. tep_href_link(FILENAME_WISHLIST, tep_get_all_get_params(array('action')) . 'action=add_wishlist') . '\';document.cart_quantity.submit();"'); ?></td>
-                <!-- Wish List 2.3 End   -->
+                <!-- Wish List 3.5 Start -->
+                <td align="center"><?php echo tep_image_submit('button_wishlist.gif', 'Add to Wishlist', 'name="wishlist" value="wishlist"'); ?></td>
+                <!-- Wish List 3.5 End   -->
                 <td class="main" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>

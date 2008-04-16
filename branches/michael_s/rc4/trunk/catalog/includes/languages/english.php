@@ -96,6 +96,12 @@ define('BOX_REVIEWS_TEXT_OF_5_STARS', '%s of 5 Stars!');
 define('BOX_HEADING_SHOPPING_CART', 'Shopping Cart');
 define('BOX_SHOPPING_CART_EMPTY', '0 items');
 
+// BOF: MOD - Wishlist 3.5
+//wishlist box text in includes/boxes/wishlist.php 
+define('BOX_HEADING_CUSTOMER_WISHLIST', 'My Wishlist'); 
+define('TEXT_WISHLIST_COUNT', 'Currently %s items are on your Wish List.');
+// EOF: MOD - Wishlist 3.5
+
 // order_history box text in includes/boxes/order_history.php
 define('BOX_HEADING_CUSTOMER_ORDERS', 'Order History');
 
@@ -396,16 +402,4 @@ define('LOGIN_BOX_MY_ACCOUNT','General information');
 define('LOGIN_BOX_LOGOFF','Log off');
 define('LOGIN_BOX_PRODUCTS_NEW','New Products');
 // EOF: MOD - Login Box My Account
-
-// BOF: MOD - Wish List 2.3 box text in includes/boxes/wishlist.php
-define('BOX_HEADING_CUSTOMER_WISHLIST', 'My Wishlist');
-define('BOX_WISHLIST_EMPTY', 'You have no items on your Wishlist');
-define('IMAGE_BUTTON_ADD_WISHLIST', 'Add to Wishlist');
-define('TEXT_WISHLIST_COUNT', 'Currently %s items are on your Wishlist.');
-define('TEXT_DISPLAY_NUMBER_OF_WISHLIST', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> items on your wishlist)');
-define('BOX_HEADING_CUSTOMER_WISHLIST_HELP', 'Wishlist Help');
-define('BOX_HEADING_SEND_WISHLIST', 'Send your Wishlist');
-define('BOX_TEXT_MOVE_TO_CART', 'Move to Cart');
-define('BOX_TEXT_DELETE', 'Delete');
-// EOF: MOD - Wish List 2.3 box text in includes/boxes/wishlist.php
 ?>

@@ -280,6 +280,11 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 
 // restore cart contents
       $cart->restore_contents();
+      
+//BOF: MOD - Wishlist 3.5
+// restore wishlist to sesssion
+        $wishList->restore_wishlist();
+//EOF: MOD - Wishlist 3.5      
 
 // build the message content
       $name = $firstname . ' ' . $lastname;

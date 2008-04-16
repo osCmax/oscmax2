@@ -74,10 +74,10 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
   define('TABLE_ZONES', 'zones');
 // LINE ADDED: MOD - Xsell Products
   define('TABLE_PRODUCTS_XSELL', 'products_xsell'); 
-// BOF: MOD - Wish List 2.3
+// BOF: MOD - Wish List 3.5
   define('TABLE_WISHLIST', 'customers_wishlist');
   define('TABLE_WISHLIST_ATTRIBUTES', 'customers_wishlist_attributes');
-// EOF: MOD - Wish List 2.3
+// EOF: MOD - Wish List 3.5
 // LINE ADDED: MOD - QT Pro: Begin Changed code
   define('TABLE_PRODUCTS_STOCK', 'products_stock');
 // BOF: MOD - Separate Pricing per Customer

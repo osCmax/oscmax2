@@ -135,6 +135,11 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 // restore cart contents
         $cart->restore_contents();
 
+//BOF: MOD - Wishlist 3.5
+// restore wishlist to sesssion
+        $wishList->restore_wishlist();
+//EOF: MOD - Wishlist 3.5
+
         if (sizeof($navigation->snapshot) > 0) {
           $origin_href = tep_href_link($navigation->snapshot['page'], tep_array_to_string($navigation->snapshot['get'], array(tep_session_name())), $navigation->snapshot['mode']);
           $navigation->clear_snapshot();

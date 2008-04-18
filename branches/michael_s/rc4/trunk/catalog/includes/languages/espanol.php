@@ -45,7 +45,7 @@ define('HTML_PARAMS','dir="LTR" lang="es"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0 RC4');
+define('TITLE', STORE_NAME);
 
 // header text in includes/header.php
 define('HEADER_TITLE_CREATE_ACCOUNT', 'Crear una Cuenta');
@@ -337,9 +337,9 @@ define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Avertencia: No puedo escribir
 define('WARNING_SESSION_AUTO_START', 'Advertencia: session.auto_start esta activado - desactive esta caracteristica en el fichero php.ini and reinicie el servidor web.');
 define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Advertencia: El directorio para productos descargables no existe: ' . DIR_FS_DOWNLOAD . '. Los productos descargables no funcionar&aacute;n hasta que no se corriga este error.');
 
-define('TEXT_CCVAL_ERROR_INVALID_DATE', 'La fecha de vencimiento participó en la tarjeta de crédito es inválido.<br>Por favor compruebe la fecha e intentelo otra vez.');
-define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'El número de la tarjeta de crédito entrado es inválido. <br> Por favor compruebe el número y el intento otra vez.');
-define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Los cuatro primeros dígitos del número entrado son: %s<br>Si aquel número es correcto, no aceptamos aquel tipo de tarjeta de crédito.<br>Si esto se equivoca, por favor intente otra vez.');
+define('TEXT_CCVAL_ERROR_INVALID_DATE', 'La fecha de caducidad de la tarjeta de cr&eacute;dito es incorrecta. Compruebe la fecha e int&eacute;ntelo de nuevo.');
+define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'El n&uacute;mero de la tarjeta de cr&eacute;dito es incorrecto. Compruebe el numero e int&eacute;ntelo de nuevo.');
+define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Los primeros cuatro digitos de su tarjeta son: %s. Si este n&uacute;mero es correcto, no aceptamos este tipo de tarjetas. Si es incorrecto, int&eacute;ntelo de nuevo.');
 
 /*
   The following copyright announcement can only be

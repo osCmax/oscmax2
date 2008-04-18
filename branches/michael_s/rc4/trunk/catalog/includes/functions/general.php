@@ -525,7 +525,6 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     $statecomma = '';
     $streets = $street;
     if ($suburb != '') $streets = $street . $cr . $suburb;
-//  if ($country == '') $country = tep_output_string_protected($address['country']);
     if ($state != '') $statecomma = $state . ', ';
 
     $fmt = $address_format['format'];
@@ -542,6 +541,9 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 // Return a formatted address
 // TABLES: customers, address_book
   function tep_address_label($customers_id, $address_id = 1, $html = false, $boln = '', $eoln = "\n") {
+    if (is_array($address_id) && !empty($address_id)) {
+      return tep_address_format($address_id['address_format_id'], $address_id, $html, $boln, $eoln);
+    }
     $address_query = tep_db_query("select entry_firstname as firstname, entry_lastname as lastname, entry_company as company, entry_street_address as street_address, entry_suburb as suburb, entry_city as city, entry_postcode as postcode, entry_state as state, entry_zone_id as zone_id, entry_country_id as country_id from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customers_id . "' and address_book_id = '" . (int)$address_id . "'");
     $address = tep_db_fetch_array($address_query);
 
@@ -1317,7 +1319,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   }
 
   function tep_count_customer_orders($id = '', $check_session = true) {
-    global $customer_id;
+    global $customer_id, $languages_id;
 
     if (is_numeric($id) == false) {
       if (tep_session_is_registered('customer_id')) {
@@ -1333,7 +1335,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
       }
     }
 
-    $orders_check_query = tep_db_query("select count(*) as total from " . TABLE_ORDERS . " where customers_id = '" . (int)$id . "'");
+    $orders_check_query = tep_db_query("select count(*) as total from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS . " s where o.customers_id = '" . (int)$id . "' and o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and s.public_flag = '1'");
     $orders_check = tep_db_fetch_array($orders_check_query);
 
     return $orders_check['total'];

@@ -45,7 +45,7 @@ define('HTML_PARAMS','dir="LTR" lang="en"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0');
+define('TITLE', STORE_NAME);
 
 // header text in includes/header.php
 define('HEADER_TITLE_CREATE_ACCOUNT', 'Create an Account');
@@ -80,7 +80,7 @@ define('BOX_HEADING_WHATS_NEW', 'What\'s New?');
 
 // quick_find box text in includes/boxes/quick_find.php
 define('BOX_HEADING_SEARCH', 'Quick Find');
-define('BOX_SEARCH_TEXT', 'Use keywords to find the products');
+define('BOX_SEARCH_TEXT', 'Use keywords to find the product you are looking for.');
 define('BOX_SEARCH_ADVANCED_SEARCH', 'Advanced Search');
 
 // specials box text in includes/boxes/specials.php
@@ -343,25 +343,10 @@ define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Warning: I am not able to wri
 define('WARNING_SESSION_AUTO_START', 'Warning: session.auto_start is enabled - please disable this php feature in php.ini and restart the web server.');
 define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Warning: The downloadable products directory does not exist: ' . DIR_FS_DOWNLOAD . '. Downloadable products will not work until this directory is valid.');
 
-define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The expiry date entered for the credit card is invalid.<br>Please check the date and try again.');
-define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The credit card number entered is invalid.<br>Please check the number and try again.');
-define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first four digits of the number entered are: %s<br>If that number is correct, we do not accept that type of credit card.<br>If it is wrong, please try again.');
+define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The expiry date entered for the credit card is invalid. Please check the date and try again.');
+define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The credit card number entered is invalid. Please check the number and try again.');
+define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first four digits of the number entered are: %s. If that number is correct, we do not accept that type of credit card. If it is wrong, please try again.');
 
-/*
-  The following copyright announcement can only be
-  appropriately modified or removed if the layout of
-  the site theme has been modified to distinguish
-  itself from the default osCMax/osCDox-copyrighted
-  theme.
-
-  For more information please go to the osCMax
-  support site:
-
-  http://oscdox.com/
-
-  Please leave this comment intact together with the
-  following copyright announcement.
-*/
 define('FOOTER_TEXT_BODY', 'Copyright &copy; 2005 <a href="http://oscdox.com">osCDox</a>, <a href="http://aabox.com">AABox Web Hosting</a><br>
 Powered by <a href="http://www.oscmax.com" target="_blank">osCMax v2.0</a>');
 

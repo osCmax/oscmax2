@@ -19,7 +19,7 @@ $Id: account.php 3 2006-05-27 04:59:07Z user $
 
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot();
-    tep_redirect(tep_href_link(FILENAME_LOGIN, 'my_account_f=' . $HTTP_GET_VARS['my_account_f'], 'SSL'));
+    tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
   }
 
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ACCOUNT);

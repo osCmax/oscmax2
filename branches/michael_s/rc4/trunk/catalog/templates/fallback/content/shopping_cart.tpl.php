@@ -173,6 +173,29 @@
         </table></td>
       </tr>
 <?php
+    $initialize_checkout_methods = $payment_modules->checkout_initialization_method();
+
+    if (!empty($initialize_checkout_methods)) {
+?>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td align="right" class="main" style="padding-right: 50px;"><?php echo TEXT_ALTERNATIVE_CHECKOUT_METHODS; ?></td>
+      </tr>
+<?php
+      reset($initialize_checkout_methods);
+      while (list(, $value) = each($initialize_checkout_methods)) {
+?>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td align="right" class="main"><?php echo $value; ?></td>
+      </tr>
+<?php
+      }
+    }
   } else {
 ?>
       <tr>

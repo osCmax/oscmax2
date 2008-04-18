@@ -18,5 +18,7 @@ define('TABLE_HEADING_MODULES', 'M&oacute;dulos');
 define('TABLE_HEADING_SORT_ORDER', 'Orden');
 define('TABLE_HEADING_ACTION', 'Acci&oacute;n');
 
+define('TEXT_INFO_VERSION', 'Versi&oacute;n:');
+define('TEXT_INFO_ONLINE_STATUS', 'online status');
 define('TEXT_MODULE_DIRECTORY', 'Directorio de m&oacute;dulos:');
 ?>

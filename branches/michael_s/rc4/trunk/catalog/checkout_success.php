@@ -23,14 +23,20 @@ $Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
   }
 
   if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'update')) {
-    $notify_string = 'action=notify&';
-    $notify = $HTTP_POST_VARS['notify'];
-    if (!is_array($notify)) $notify = array($notify);
-    for ($i=0, $n=sizeof($notify); $i<$n; $i++) {
-      $notify_string .= 'notify[]=' . $notify[$i] . '&';
-    }
-    if (strlen($notify_string) > 0) $notify_string = substr($notify_string, 0, -1);
+    $notify_string = '';
 
+    if (isset($HTTP_POST_VARS['notify']) && !empty($HTTP_POST_VARS['notify'])) {
+      $notify = $HTTP_POST_VARS['notify'];
+
+      if (!is_array($notify)) {
+        $notify = array($notify);
+      }
+
+      for ($i=0, $n=sizeof($notify); $i<$n; $i++) {
+        if (is_numeric($notify[$i])) {
+          $notify_string .= 'notify[]=' . $notify[$i] . '&';
+        }
+      }
 // BOF:
 //    tep_redirect(tep_href_link(FILENAME_DEFAULT, $notify_string));
 // Added a check for a Guest checkout and cleared the session - 030411 

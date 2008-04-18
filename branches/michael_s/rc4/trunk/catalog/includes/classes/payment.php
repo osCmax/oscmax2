@@ -164,6 +164,22 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
       return $js;
     }
 
+    function checkout_initialization_method() {
+      $initialize_array = array();
+
+      if (is_array($this->modules)) {
+        reset($this->modules);
+        while (list(, $value) = each($this->modules)) {
+          $class = substr($value, 0, strrpos($value, '.'));
+          if ($GLOBALS[$class]->enabled && method_exists($GLOBALS[$class], 'checkout_initialization_method')) {
+            $initialize_array[] = $GLOBALS[$class]->checkout_initialization_method();
+          }
+        }
+      }
+
+      return $initialize_array;
+    }
+
     function selection() {
       $selection_array = array();
 

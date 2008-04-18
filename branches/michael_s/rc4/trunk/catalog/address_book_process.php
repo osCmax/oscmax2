@@ -156,6 +156,8 @@ $Id: address_book_process.php 3 2006-05-27 04:59:07Z user $
       }
 
       if ($HTTP_POST_VARS['action'] == 'update') {
+        $check_query = tep_db_query("select address_book_id from " . TABLE_ADDRESS_BOOK . " where address_book_id = '" . (int)$HTTP_GET_VARS['edit'] . "' and customers_id = '" . (int)$customer_id . "' limit 1");
+        if (tep_db_num_rows($check_query) == 1) {
         tep_db_perform(TABLE_ADDRESS_BOOK, $sql_data_array, 'update', "address_book_id = '" . (int)$HTTP_GET_VARS['edit'] . "' and customers_id ='" . (int)$customer_id . "'");
 // BOF: MOD - Separate Pricing Per Customer: alert shop owner of tax id number added to an account
       if (ACCOUNT_COMPANY == 'true' && tep_not_null($company_tax_id)) {
@@ -184,8 +186,12 @@ $Id: address_book_process.php 3 2006-05-27 04:59:07Z user $
           if (ACCOUNT_GENDER == 'true') $sql_data_array['customers_gender'] = $gender;
 
           tep_db_perform(TABLE_CUSTOMERS, $sql_data_array, 'update', "customers_id = '" . (int)$customer_id . "'");
+          }
+
+          $messageStack->add_session('addressbook', SUCCESS_ADDRESS_BOOK_ENTRY_UPDATED, 'success');
         }
       } else {
+        if (tep_count_customer_address_book_entries() < MAX_ADDRESS_BOOK_ENTRIES) {
         $sql_data_array['customers_id'] = (int)$customer_id;
         tep_db_perform(TABLE_ADDRESS_BOOK, $sql_data_array);
 
@@ -205,10 +211,10 @@ $Id: address_book_process.php 3 2006-05-27 04:59:07Z user $
           if (isset($HTTP_POST_VARS['primary']) && ($HTTP_POST_VARS['primary'] == 'on')) $sql_data_array['customers_default_address_id'] = $new_address_book_id;
 
           tep_db_perform(TABLE_CUSTOMERS, $sql_data_array, 'update', "customers_id = '" . (int)$customer_id . "'");
+            $messageStack->add_session('addressbook', SUCCESS_ADDRESS_BOOK_ENTRY_UPDATED, 'success');
+          }
         }
       }
-
-      $messageStack->add_session('addressbook', SUCCESS_ADDRESS_BOOK_ENTRY_UPDATED, 'success');
 
       tep_redirect(tep_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL'));
     }

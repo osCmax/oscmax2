@@ -127,15 +127,18 @@ $Id: navigation_history.php 3 2006-05-27 04:59:07Z user $
     function filter_parameters($parameters) {
       $clean = array();
 
-      reset($parameters);
-      while (list($key, $value) = each($parameters)) {
-        if (strpos($key, '_nh-dns') < 1) {
-          $clean[$key] = $value;
+      if (is_array($parameters)) {
+        reset($parameters);
+        while (list($key, $value) = each($parameters)) {
+          if (strpos($key, '_nh-dns') < 1) {
+            $clean[$key] = $value;
+          }
         }
       }
 
       return $clean;
     }
+
     function unserialize($broken) {
       for(reset($broken);$kv=each($broken);) {
         $key=$kv['key'];

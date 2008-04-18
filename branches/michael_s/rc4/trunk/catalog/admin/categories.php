@@ -59,7 +59,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 // EOF: MOD for Categories Description 1.5
           $sort_order = tep_db_prepare_input($HTTP_POST_VARS['sort_order']);
 
-          $sql_data_array = array('sort_order' => $sort_order);
+        $sql_data_array = array('sort_order' => (int)$sort_order);
 
           if ($action == 'insert_category') {
             $insert_sql_data = array('parent_id' => $current_category_id,
@@ -259,16 +259,16 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
           $products_date_available = (date('Y-m-d') < $products_date_available) ? $products_date_available : 'null';
 
-          $sql_data_array = array('products_quantity' => tep_db_prepare_input($HTTP_POST_VARS['products_quantity']),
+          $sql_data_array = array('products_quantity' => (int)tep_db_prepare_input($HTTP_POST_VARS['products_quantity']),
 //LINE ADDED: MOD - indvship
                                   'products_ship_price' => tep_db_prepare_input($HTTP_POST_VARS['products_ship_price']), //indvship
                                   'products_model' => tep_db_prepare_input($HTTP_POST_VARS['products_model']),
                                   'products_price' => tep_db_prepare_input($HTTP_POST_VARS['products_price']),
                                   'products_date_available' => $products_date_available,
-                                  'products_weight' => tep_db_prepare_input($HTTP_POST_VARS['products_weight']),
+                                  'products_weight' => (float)tep_db_prepare_input($HTTP_POST_VARS['products_weight']),
                                   'products_status' => tep_db_prepare_input($HTTP_POST_VARS['products_status']),
                                   'products_tax_class_id' => tep_db_prepare_input($HTTP_POST_VARS['products_tax_class_id']),
-                                  'manufacturers_id' => tep_db_prepare_input($HTTP_POST_VARS['manufacturers_id']));
+                                  'manufacturers_id' => (int)tep_db_prepare_input($HTTP_POST_VARS['manufacturers_id']));
 
           if (isset($HTTP_POST_VARS['products_image']) && tep_not_null($HTTP_POST_VARS['products_image']) && ($HTTP_POST_VARS['products_image'] != 'none')) {
             $sql_data_array['products_image'] = tep_db_prepare_input($HTTP_POST_VARS['products_image']);
@@ -1355,9 +1355,15 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
       default:
         if ($rows > 0) {
           if (isset($cInfo) && is_object($cInfo)) { // category info box contents
+            $category_path_string = '';
+            $category_path = tep_generate_category_path($cInfo->categories_id);
+            for ($i=(sizeof($category_path[0])-1); $i>0; $i--) {
+              $category_path_string .= $category_path[0][$i]['id'] . '_';
+            }
+            $category_path_string = substr($category_path_string, 0, -1);
             $heading[] = array('text' => '<b>' . $cInfo->categories_name . '</b>');
 
-            $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $cInfo->categories_id . '&action=edit_category') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $cInfo->categories_id . '&action=delete_category') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $cInfo->categories_id . '&action=move_category') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a>');
+            $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=edit_category') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=delete_category') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=move_category') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a>');
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
             if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
             $contents[] = array('text' => '<br>' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);

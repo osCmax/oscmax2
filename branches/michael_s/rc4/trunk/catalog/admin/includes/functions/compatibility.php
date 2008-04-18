@@ -37,9 +37,9 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
     $HTTP_POST_FILES =& $_FILES;
     $HTTP_SERVER_VARS =& $_SERVER;
   } else {
-  if (!is_array($HTTP_GET_VARS)) $HTTP_GET_VARS = array();
-  if (!is_array($HTTP_POST_VARS)) $HTTP_POST_VARS = array();
-  if (!is_array($HTTP_COOKIE_VARS)) $HTTP_COOKIE_VARS = array();
+    if (!is_array($HTTP_GET_VARS)) $HTTP_GET_VARS = array();
+    if (!is_array($HTTP_POST_VARS)) $HTTP_POST_VARS = array();
+    if (!is_array($HTTP_COOKIE_VARS)) $HTTP_COOKIE_VARS = array();
   }
 
 // handle magic_quotes_gpc turned off.
@@ -185,7 +185,7 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
         $arg_separator = ini_get('arg_separator.output');
 
         if ( empty($arg_separator) ) {
-          $separator = '&';
+          $arg_separator = '&';
         }
       }
 
@@ -216,7 +216,7 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
         return null;
       }
 
-      return implode($separator, $tmp);
+      return implode($arg_separator, $tmp);
     }
 
 // Helper function
@@ -234,6 +234,34 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
       }
 
       return implode($arg_separator, $tmp);
+    }
+  }
+/*
+ * stripos() natively supported from PHP 5.0
+ * From Pear::PHP_Compat
+ */
+
+  if (!function_exists('stripos')) {
+    function stripos($haystack, $needle, $offset = null) {
+      $fix = 0;
+
+      if (!is_null($offset)) {
+        if ($offset > 0) {
+          $haystack = substr($haystack, $offset, strlen($haystack) - $offset);
+          $fix = $offset;
+        }
+      }
+
+      $segments = explode(strtolower($needle), strtolower($haystack), 2);
+
+// Check there was a match
+      if (count($segments) == 1) {
+        return false;
+      }
+
+      $position = strlen($segments[0]) + $fix;
+
+      return $position;
     }
   }
 ?>

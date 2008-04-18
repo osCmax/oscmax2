@@ -206,6 +206,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
 
         if (isset($restore_query)) {
           $sql_array = array();
+          $drop_table_names = array();
           $sql_length = strlen($restore_query);
           $pos = strpos($restore_query, ';');
           for ($i=$pos; $i<$sql_length; $i++) {
@@ -239,11 +240,20 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
                 $next = 'insert';
               }
               if ( (eregi('create', $next)) || (eregi('insert', $next)) || (eregi('drop t', $next)) ) {
+                $query = substr($restore_query, 0, $i);
+
                 $next = '';
-                $sql_array[] = substr($restore_query, 0, $i);
+                $sql_array[] = $query;
                 $restore_query = ltrim(substr($restore_query, $i+1));
                 $sql_length = strlen($restore_query);
                 $i = strpos($restore_query, ';')-1;
+
+                if (eregi('^create*', $query)) {
+                  $table_name = trim(substr($query, stripos($query, 'table ')+6));
+                  $table_name = substr($table_name, 0, strpos($table_name, ' '));
+
+                  $drop_table_names[] = $table_name;
+                }
               }
             }
           }
@@ -251,17 +261,18 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
 // BOF: Mod - QT Pro
           tep_db_query("drop table if exists address_book, address_format, banners, banners_history, categories, categories_description, configuration, configuration_group, counter, counter_history, countries, currencies, customers, customers_basket, customers_basket_attributes, customers_info, languages, manufacturers, manufacturers_info, orders, orders_products, orders_status, orders_status_history, orders_products_attributes, orders_products_download, products, products_attributes, products_attributes_download, prodcts_description, products_options, products_options_values, products_options_values_to_products_options, products_stock, products_to_categories, reviews, reviews_description, sessions, specials, tax_class, tax_rates, geo_zones, whos_online, zones, zones_to_geo_zones");
 // EOF: Mod - QT Pro
-
+          tep_db_query('drop table if exists ' . implode(', ', $drop_table_names));
           for ($i=0, $n=sizeof($sql_array); $i<$n; $i++) {
             tep_db_query($sql_array[$i]);
           }
-          
-            tep_session_close();
- 	          tep_db_query("delete from " . TABLE_WHOS_ONLINE);
- 	          tep_db_query("delete from " . TABLE_SESSIONS);
+
+          tep_session_close();
+
+          tep_db_query("delete from " . TABLE_WHOS_ONLINE);
+          tep_db_query("delete from " . TABLE_SESSIONS);
 
           tep_db_query("delete from " . TABLE_CONFIGURATION . " where configuration_key = 'DB_LAST_RESTORE'");
-          tep_db_query("insert into " . TABLE_CONFIGURATION . " values ('', 'Last Database Restore', 'DB_LAST_RESTORE', '" . $read_from . "', 'Last database restore file', '6', '', '', now(), '', '')");
+          tep_db_query("insert into " . TABLE_CONFIGURATION . " values (null, 'Last Database Restore', 'DB_LAST_RESTORE', '" . $read_from . "', 'Last database restore file', '6', '0', null, now(), '', '')");
 
           if (isset($remove_raw) && ($remove_raw == true)) {
             unlink($restore_from);
@@ -363,7 +374,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
     $dir = dir(DIR_FS_BACKUP);
     $contents = array();
     while ($file = $dir->read()) {
-      if (!is_dir(DIR_FS_BACKUP . $file)) {
+      if (!is_dir(DIR_FS_BACKUP . $file) && in_array(substr($file, -3), array('zip', 'sql', '.gz'))) {
         $contents[] = $file;
       }
     }

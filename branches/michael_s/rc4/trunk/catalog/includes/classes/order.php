@@ -76,7 +76,7 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
                               'telephone' => $order['customers_telephone'],
                               'email_address' => $order['customers_email_address']);
 
-      $this->delivery = array('name' => $order['delivery_name'],
+      $this->delivery = array('name' => trim($order['delivery_name']),
                               'company' => $order['delivery_company'],
                               'street_address' => $order['delivery_street_address'],
                               'suburb' => $order['delivery_suburb'],
@@ -145,30 +145,93 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
     }
 
     function cart() {
-      global $HTTP_POST_VARS, $customer_id, $sendto, $billto, $cart, $languages_id, $currency, $currencies, $shipping, $payment, $comments;
+      global $HTTP_POST_VARS, $customer_id, $sendto, $billto, $cart, $languages_id, $currency, $currencies, $shipping, $payment, $comments, $customer_default_address_id;
 
       $this->content_type = $cart->get_content_type();
 
+      if ( ($this->content_type != 'virtual') && ($sendto == false) ) {
+        $sendto = $customer_default_address_id;
+      }
       $customer_address_query = tep_db_query("select c.customers_firstname, c.customers_lastname, c.customers_telephone, c.customers_email_address, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, z.zone_name, co.countries_id, co.countries_name, co.countries_iso_code_2, co.countries_iso_code_3, co.address_format_id, ab.entry_state from " . TABLE_CUSTOMERS . " c, " . TABLE_ADDRESS_BOOK . " ab left join " . TABLE_ZONES . " z on (ab.entry_zone_id = z.zone_id) left join " . TABLE_COUNTRIES . " co on (ab.entry_country_id = co.countries_id) where c.customers_id = '" . (int)$customer_id . "' and ab.customers_id = '" . (int)$customer_id . "' and c.customers_default_address_id = ab.address_book_id");
       $customer_address = tep_db_fetch_array($customer_address_query);
 
-      $shipping_address_query = tep_db_query("select ab.entry_firstname, ab.entry_lastname, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, z.zone_name, ab.entry_country_id, c.countries_id, c.countries_name, c.countries_iso_code_2, c.countries_iso_code_3, c.address_format_id, ab.entry_state from " . TABLE_ADDRESS_BOOK . " ab left join " . TABLE_ZONES . " z on (ab.entry_zone_id = z.zone_id) left join " . TABLE_COUNTRIES . " c on (ab.entry_country_id = c.countries_id) where ab.customers_id = '" . (int)$customer_id . "' and ab.address_book_id = '" . (int)$sendto . "'");
-      $shipping_address = tep_db_fetch_array($shipping_address_query);
-      
-      $billing_address_query = tep_db_query("select ab.entry_firstname, ab.entry_lastname, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, z.zone_name, ab.entry_country_id, c.countries_id, c.countries_name, c.countries_iso_code_2, c.countries_iso_code_3, c.address_format_id, ab.entry_state from " . TABLE_ADDRESS_BOOK . " ab left join " . TABLE_ZONES . " z on (ab.entry_zone_id = z.zone_id) left join " . TABLE_COUNTRIES . " c on (ab.entry_country_id = c.countries_id) where ab.customers_id = '" . (int)$customer_id . "' and ab.address_book_id = '" . (int)$billto . "'");
-      $billing_address = tep_db_fetch_array($billing_address_query);
+      if (is_array($sendto) && !empty($sendto)) {
+        $shipping_address = array('entry_firstname' => $sendto['firstname'],
+                                  'entry_lastname' => $sendto['lastname'],
+                                  'entry_company' => $sendto['company'],
+                                  'entry_street_address' => $sendto['street_address'],
+                                  'entry_suburb' => $sendto['suburb'],
+                                  'entry_postcode' => $sendto['postcode'],
+                                  'entry_city' => $sendto['city'],
+                                  'entry_zone_id' => $sendto['zone_id'],
+                                  'zone_name' => $sendto['zone_name'],
+                                  'entry_country_id' => $sendto['country_id'],
+                                  'countries_id' => $sendto['country_id'],
+                                  'countries_name' => $sendto['country_name'],
+                                  'countries_iso_code_2' => $sendto['country_iso_code_2'],
+                                  'countries_iso_code_3' => $sendto['country_iso_code_3'],
+                                  'address_format_id' => $sendto['address_format_id'],
+                                  'entry_state' => $sendto['zone_name']);
+      } elseif (is_numeric($sendto)) {
+        $shipping_address_query = tep_db_query("select ab.entry_firstname, ab.entry_lastname, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, z.zone_name, ab.entry_country_id, c.countries_id, c.countries_name, c.countries_iso_code_2, c.countries_iso_code_3, c.address_format_id, ab.entry_state from " . TABLE_ADDRESS_BOOK . " ab left join " . TABLE_ZONES . " z on (ab.entry_zone_id = z.zone_id) left join " . TABLE_COUNTRIES . " c on (ab.entry_country_id = c.countries_id) where ab.customers_id = '" . (int)$customer_id . "' and ab.address_book_id = '" . (int)$sendto . "'");
+        $shipping_address = tep_db_fetch_array($shipping_address_query);
+      } else {
+        $shipping_address = array('entry_firstname' => null,
+                                  'entry_lastname' => null,
+                                  'entry_company' => null,
+                                  'entry_street_address' => null,
+                                  'entry_suburb' => null,
+                                  'entry_postcode' => null,
+                                  'entry_city' => null,
+                                  'entry_zone_id' => null,
+                                  'zone_name' => null,
+                                  'entry_country_id' => null,
+                                  'countries_id' => null,
+                                  'countries_name' => null,
+                                  'countries_iso_code_2' => null,
+                                  'countries_iso_code_3' => null,
+                                  'address_format_id' => 0,
+                                  'entry_state' => null);
+      }
 
-      $tax_address_query = tep_db_query("select ab.entry_country_id, ab.entry_zone_id from " . TABLE_ADDRESS_BOOK . " ab left join " . TABLE_ZONES . " z on (ab.entry_zone_id = z.zone_id) where ab.customers_id = '" . (int)$customer_id . "' and ab.address_book_id = '" . (int)($this->content_type == 'virtual' ? $billto : $sendto) . "'");
-      $tax_address = tep_db_fetch_array($tax_address_query);
+      if (is_array($billto) && !empty($billto)) {
+        $billing_address = array('entry_firstname' => $billto['firstname'],
+                                 'entry_lastname' => $billto['lastname'],
+                                 'entry_company' => $billto['company'],
+                                 'entry_street_address' => $billto['street_address'],
+                                 'entry_suburb' => $billto['suburb'],
+                                 'entry_postcode' => $billto['postcode'],
+                                 'entry_city' => $billto['city'],
+                                 'entry_zone_id' => $billto['zone_id'],
+                                 'zone_name' => $billto['zone_name'],
+                                 'entry_country_id' => $billto['country_id'],
+                                 'countries_id' => $billto['country_id'],
+                                 'countries_name' => $billto['country_name'],
+                                 'countries_iso_code_2' => $billto['country_iso_code_2'],
+                                 'countries_iso_code_3' => $billto['country_iso_code_3'],
+                                 'address_format_id' => $billto['address_format_id'],
+                                 'entry_state' => $billto['zone_name']);
+      } else {
+        $billing_address_query = tep_db_query("select ab.entry_firstname, ab.entry_lastname, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, z.zone_name, ab.entry_country_id, c.countries_id, c.countries_name, c.countries_iso_code_2, c.countries_iso_code_3, c.address_format_id, ab.entry_state from " . TABLE_ADDRESS_BOOK . " ab left join " . TABLE_ZONES . " z on (ab.entry_zone_id = z.zone_id) left join " . TABLE_COUNTRIES . " c on (ab.entry_country_id = c.countries_id) where ab.customers_id = '" . (int)$customer_id . "' and ab.address_book_id = '" . (int)$billto . "'");
+        $billing_address = tep_db_fetch_array($billing_address_query);
+      }
+
+      if ($this->content_type == 'virtual') {
+        $tax_address = array('entry_country_id' => $billing_address['entry_country_id'],
+                             'entry_zone_id' => $billing_address['entry_zone_id']);
+      } else {
+        $tax_address = array('entry_country_id' => $shipping_address['entry_country_id'],
+                             'entry_zone_id' => $shipping_address['entry_zone_id']);
+      }
 
       $this->info = array('order_status' => DEFAULT_ORDERS_STATUS_ID,
                           'currency' => $currency,
                           'currency_value' => $currencies->currencies[$currency]['value'],
                           'payment_method' => $payment,
-                          'cc_type' => (isset($HTTP_POST_VARS['cc_type']) ? $HTTP_POST_VARS['cc_type'] : ''),
-                          'cc_owner' => (isset($HTTP_POST_VARS['cc_owner']) ? $HTTP_POST_VARS['cc_owner'] : ''),
-                          'cc_number' => (isset($HTTP_POST_VARS['cc_number']) ? $HTTP_POST_VARS['cc_number'] : ''),
-                          'cc_expires' => (isset($HTTP_POST_VARS['cc_expires']) ? $HTTP_POST_VARS['cc_expires'] : ''),
+                          'cc_type' => '',
+                          'cc_owner' => '',
+                          'cc_number' => '',
+                          'cc_expires' => '',
                           'shipping_method' => $shipping['title'],
                           'shipping_cost' => $shipping['cost'],
                           'subtotal' => 0,
@@ -180,7 +243,7 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
         if (isset($GLOBALS[$payment]->public_title)) {
           $this->info['payment_method'] = $GLOBALS[$payment]->public_title;
         } else {
-        $this->info['payment_method'] = $GLOBALS[$payment]->title;
+          $this->info['payment_method'] = $GLOBALS[$payment]->title;
         }
 
         if ( isset($GLOBALS[$payment]->order_status) && is_numeric($GLOBALS[$payment]->order_status) && ($GLOBALS[$payment]->order_status > 0) ) {

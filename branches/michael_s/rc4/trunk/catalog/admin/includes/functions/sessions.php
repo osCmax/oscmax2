@@ -9,6 +9,10 @@ $Id: sessions.php 3 2006-05-27 04:59:07Z user $
 
   Released under the GNU General Public License
 */
+  if ( (PHP_VERSION >= 4.3) && ((bool)ini_get('register_globals') == false) ) {
+    @ini_set('session.bug_compat_42', 1);
+    @ini_set('session.bug_compat_warn', 0);
+  }
 
   if (STORE_SESSIONS == 'mysql') {
     if (!$SESS_LIFE = get_cfg_var('session.gc_maxlifetime')) {
@@ -31,7 +35,7 @@ $Id: sessions.php 3 2006-05-27 04:59:07Z user $
         return $value['value'];
       }
 
-      return false;
+      return '';
     }
 
     function _sess_write($key, $val) {
@@ -105,7 +109,6 @@ $Id: sessions.php 3 2006-05-27 04:59:07Z user $
       } else {
         $_SESSION[$variable] = null;
       }
-      $GLOBALS[$variable] =& $_SESSION[$variable];
     }
 
     return false;
@@ -115,7 +118,7 @@ $Id: sessions.php 3 2006-05-27 04:59:07Z user $
     if (PHP_VERSION < 4.3) {
       return session_is_registered($variable);
     } else {
-      return isset($_SESSION[$variable]);
+      return isset($_SESSION) && array_key_exists($variable, $_SESSION);
     }
   }
 

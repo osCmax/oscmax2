@@ -9,6 +9,10 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
 
   Released under the GNU General Public License
 */
+  if ( (PHP_VERSION >= 4.3) && ((bool)ini_get('register_globals') == false) ) {
+    @ini_set('session.bug_compat_42', 1);
+    @ini_set('session.bug_compat_warn', 0);
+  }
 
   if (STORE_SESSIONS == 'mysql') {
     if (!$SESS_LIFE = get_cfg_var('session.gc_maxlifetime')) {
@@ -31,7 +35,7 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
         return $value['value'];
       }
 
-      return false;
+      return '';
     }
 
     function _sess_write($key, $val) {
@@ -64,7 +68,6 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
   }
 
   function tep_session_start() {
-// BOF: MS2 update 501112 - Added
     global $HTTP_GET_VARS, $HTTP_POST_VARS, $HTTP_COOKIE_VARS;
 
     $sane_session_id = true;
@@ -94,7 +97,7 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
     if ($sane_session_id == false) {
       tep_redirect(tep_href_link(FILENAME_DEFAULT, '', 'NONSSL', false));
     }
-// EOF: MS2 update 501112 - Added
+
     return session_start();
   }
 
@@ -105,9 +108,11 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
       if (PHP_VERSION < 4.3) {
         return session_register($variable);
       } else {
-        $_SESSION[$variable] = (isset($GLOBALS[$variable])) ? $GLOBALS[$variable] : null;
-
-        $GLOBALS[$variable] =& $_SESSION[$variable];
+        if (isset($GLOBALS[$variable])) {
+          $_SESSION[$variable] =& $GLOBALS[$variable];
+        } else {
+          $_SESSION[$variable] = null;
+        }
       }
     }
 
@@ -118,7 +123,7 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
     if (PHP_VERSION < 4.3) {
       return session_is_registered($variable);
     } else {
-      return isset($_SESSION[$variable]);
+      return isset($_SESSION) && array_key_exists($variable, $_SESSION);
     }
   }
 

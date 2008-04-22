@@ -278,6 +278,9 @@ else {
                             'products_stock_attributes' => $products_stock_attributes);
     tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
     $order_products_id = tep_db_insert_id();
+    
+// LINE ADDED: MOD - CCGV
+$order_total_modules->update_credit_account($i);    
 
 //------insert customer choosen option to order--------
     $attributes_exist = '0';

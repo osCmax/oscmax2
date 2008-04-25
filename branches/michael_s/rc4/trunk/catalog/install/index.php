@@ -12,8 +12,6 @@ $Id: index.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application.php');
 
-  $page_file = 'index.php';
-  $page_title = 'Welcome';
   $page_contents = 'index.php';
 
   require('templates/main_page.php');

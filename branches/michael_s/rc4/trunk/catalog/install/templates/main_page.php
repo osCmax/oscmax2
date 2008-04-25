@@ -31,9 +31,9 @@ $Id: main_page.php 3 2006-05-27 04:59:07Z user $
 
 <div id="pageHeader">
   <div>
-    <div style="float: right; padding-top: 40px; padding-right: 15px; color: #000000; font-weight: bold;"><a href="http://www.oscmax.com" target="_blank">osCMax Website</a> &nbsp;|&nbsp; <a href="http://www.osCMax.com/support" target="_blank">Support</a> &nbsp;|&nbsp; <a href="http://www.osCMax.info" target="_blank">Documentation</a></div>
+    <div style="float: right; padding-top: 40px; padding-right: 15px; color: #000000; font-weight: bold;"><a href="http://www.oscmax.com" target="_blank">osCMax Website</a> &nbsp;|&nbsp; <a href="http://www.osCMax.com/forums" target="_blank">Support</a> &nbsp;|&nbsp; <a href="http://www.osCMax.com/book" target="_blank">Documentation</a></div>
 
-    <a href="index.php"><img src="images/oscmax-logo.png" border="0" width="85" height="80" title="osCMax Online Merchant v2.2" style="margin: 10px 10px 0px 10px;" /></a>
+    <a href="index.php"><img src="images/oscmax-logo.png" border="0" width="85" height="80" title="osCMax Power E-Commerce v2.0 RC4" style="margin: 10px 10px 0px 10px;" /></a>
   </div>
 </div>
 
@@ -50,7 +50,7 @@ $Id: main_page.php 3 2006-05-27 04:59:07Z user $
 </div>
 
 <div id="pageFooter">
-  Copyright &copy; 2000-2007 <a href="http://www.osCMax.com" target="_blank">osCMax</a> (<a href="http://www.osCMax.com/about/copyright" target="_blank">Copyright Policy</a>, <a href="http://www.osCMax.com/about/trademark" target="_blank">Trademark Policy</a>)<br />osCMax provides no warranty and is redistributable under the <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a>
+  Copyright &copy; 2000-2008 <a href="http://www.osCMax.com" target="_blank">osCMax</a> <br />osCMax provides no warranty and is redistributable under the <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a>
 </div>
 
 </body>

@@ -82,14 +82,6 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
 
   $order_totals = $order_total_modules->process();
 
-// BOF: MOD - Authorizenet ADC Direct Connection
-// Make sure the /catalog/includes/class/order.php is included
-// and $order object is created before this!!!
-  if(MODULE_PAYMENT_AUTHORIZENET_STATUS == "True") {
-    include(DIR_WS_MODULES . 'authorizenet_direct.php');
-  }
-// EOF: MOD - Authorizenet ADC Direct Connection
-
 // load the before_process function from the payment modules
   $payment_modules->before_process();
 

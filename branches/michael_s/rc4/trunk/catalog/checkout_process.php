@@ -116,6 +116,7 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
                           'billing_country' => $order->billing['country']['title'],
                           'billing_address_format_id' => $order->billing['format_id'],
                           'payment_method' => $order->info['payment_method'],
+                          'shipping_module' => $shipping['id'],
                           'cc_type' => $order->info['cc_type'],
                           'cc_owner' => $order->info['cc_owner'],
                           'cc_number' => $order->info['cc_number'],

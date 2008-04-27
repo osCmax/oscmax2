@@ -11,7 +11,7 @@ $Id: create_order_process.php 3 2006-05-27 04:59:07Z user $
 */
 
   require('includes/application_top.php');
-
+  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CREATE_ORDER_PROCESS);
  // if ($HTTP_POST_VARS['action'] != 'process') {
   //  tep_redirect(tep_href_link(FILENAME_CREATE_ORDER, '', 'SSL'));
   //}
@@ -36,17 +36,22 @@ $Id: create_order_process.php 3 2006-05-27 04:59:07Z user $
   $country = tep_db_prepare_input($HTTP_POST_VARS['country']);
   $format_id = "1";
   $size = "1";
-  $payment_method = "Change";
+  $payment_method = DEFAULT_PAYMENT_METHOD;
   $new_value = "1";
   $error = false; // reset error flag
   $temp_amount = "0";
   $temp_amount = number_format($temp_amount, 2, '.', '');
-  $currency = DEFAULT_CURRENCY;
-  $currency_value = "1";
   
+  $currency_text = DEFAULT_CURRENCY . ", 1";
+  if(IsSet($HTTP_POST_VARS['Currency']))
+  {
+  	$currency_text = tep_db_prepare_input($HTTP_POST_VARS['Currency']);
+  }
   
-    include(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CREATE_ORDER_PROCESS);
-
+  $currency_array = explode(",", $currency_text);
+  
+  $currency = $currency_array[0];
+  $currency_value = $currency_array[1];
 ?>
 <?php
 
@@ -83,7 +88,9 @@ $Id: create_order_process.php 3 2006-05-27 04:59:07Z user $
 							'date_purchased' => 'now()', 
                             'orders_status' => DEFAULT_ORDERS_STATUS_ID,
 							'currency' => $currency,
-							'currency_value' => $currency_value); 
+							'currency_value' => $currency_value,
+							'payment_method' => $payment_method
+							); 
 
 
 							
@@ -103,7 +110,7 @@ $Id: create_order_process.php 3 2006-05-27 04:59:07Z user $
   
   
     $sql_data_array = array('orders_id' => $insert_id,
-                            'title' => "Sous-Total :",
+                            'title' => TEXT_SUBTOTAL,
                             'text' => $temp_amount,
                             'value' => "0.00", 
                             'class' => "ot_subtotal", 
@@ -112,43 +119,39 @@ $Id: create_order_process.php 3 2006-05-27 04:59:07Z user $
 
 
    $sql_data_array = array('orders_id' => $insert_id,
-                            'title' => "R&eacute;duction :",
+                            'title' => TEXT_DISCOUNT,
                             'text' => $temp_amount,
                             'value' => "0.00",
                             'class' => "ot_customer_discount",
                             'sort_order' => "2");
    tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
   
-  
     $sql_data_array = array('orders_id' => $insert_id,
-                            'title' => "TVA :",
-                            'text' => $temp_amount,
-                            'value' => "0.00", 
-                            'class' => "ot_tax", 
-                            'sort_order' => "2");
-    tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
-  
-  
-    $sql_data_array = array('orders_id' => $insert_id,
-                            'title' => "Livraison :",
+                            'title' => TEXT_DELIVERY,
                             'text' => $temp_amount,
                             'value' => "0.00", 
                             'class' => "ot_shipping", 
                             'sort_order' => "3");
     tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
-  
-
-  
-      $sql_data_array = array('orders_id' => $insert_id,
-                            'title' => "Total :",
+	
+    $sql_data_array = array('orders_id' => $insert_id,
+                            'title' => TEXT_TAX,
                             'text' => $temp_amount,
                             'value' => "0.00", 
-                            'class' => "ot_total", 
+                            'class' => "ot_tax", 
                             'sort_order' => "4");
     tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
   
+      $sql_data_array = array('orders_id' => $insert_id,
+                            'title' => TEXT_TOTAL,
+                            'text' => $temp_amount,
+                            'value' => "0.00", 
+                            'class' => "ot_total", 
+                            'sort_order' => "5");
+    tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
+  
 
-    tep_redirect(tep_href_link(FILENAME_EDIT_ORDERS, 'oID=' . $insert_id, 'SSL'));
+    tep_redirect(tep_href_link(FILENAME_ORDERS_EDIT, 'oID=' . $insert_id, 'SSL'));
 
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');

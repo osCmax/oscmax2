@@ -265,28 +265,37 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
     echo $account['customers_telephone'];
   } else {
     echo tep_draw_input_field('telephone', $account['customers_telephone']) . '&nbsp;' . ENTRY_TELEPHONE_NUMBER_TEXT;
-  }
-?>
-<?php
-/*</td>
-          </tr>
-          <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_FAX_NUMBER; ?></td>
-            <td class="main">&nbsp;
-<?php
+  } ?>
+              </td>
+            </tr>
+            <tr>
+              <td class="main">&nbsp;<?php echo ENTRY_FAX_NUMBER; ?></td>
+              <td class="main">&nbsp;
+                <?php
   if ($is_read_only) {
     echo $account['customers_fax'];
   } else {
     echo tep_draw_input_field('fax', $account['customers_fax']) . '&nbsp;' . ENTRY_FAX_NUMBER_TEXT;
   }
 ?></td>
-          </tr>
-        </table></td>
+            </tr>
+          </table></td>
       </tr>
-    </table></td>
-  </tr>
- */ ?>
-<?php
-  //}
-?>
-</table>
+	  </table>
+      <tr>
+        <td class="formAreaTitle"><br>
+          <?php echo CATEGORY_ORDER_DETAILS; ?></td>
+      </tr>
+      <tr>
+        <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+            <tr>
+              <td class="main"><table border="0" cellspacing="0" cellpadding="2">
+                  <tr>
+                    <td class="main">&nbsp;<?php echo ENTRY_CURRENCY; ?></td>
+                    <td class="main"><?php echo $SelectCurrencyBox ?></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table></td>
+      </tr>
+    </table>

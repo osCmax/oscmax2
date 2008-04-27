@@ -61,6 +61,8 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_CREATE_ORDER', 'create_order.php');
   define('FILENAME_ORDERS_EDIT', 'edit_orders.php');
   define('FILENAME_EDIT_ORDERS', 'edit_orders.php');
+  define('FILENAME_ORDERS_EDIT_ADD_PRODUCT', 'edit_orders_add_product.php');
+  define('FILENAME_ORDERS_EDIT_AJAX', 'edit_orders_ajax.php');
 // EOF: MOD - Create & Edit Order & customers
 
 // BOF: MOD - Version Control & Bookmark MODULE for Contributions 0.1.4

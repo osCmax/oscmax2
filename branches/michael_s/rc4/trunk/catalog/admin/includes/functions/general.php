@@ -10,66 +10,6 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   Released under the GNU General Public License
 */
 
-/// Begin mods for Order Editor
-// Return the tax description for a zone / class
-// TABLES: tax_rates;
-  function tep_get_tax_description($class_id, $country_id, $zone_id) {
-    $tax_query = tep_db_query("select tax_description from " . TABLE_TAX_RATES . " tr left join " . TABLE_ZONES_TO_GEO_ZONES . " za on (tr.tax_zone_id = za.geo_zone_id) left join " . TABLE_GEO_ZONES . " tz on (tz.geo_zone_id = tr.tax_zone_id) where (za.zone_country_id is null or za.zone_country_id = '0' or za.zone_country_id = '" . (int)$country_id . "') and (za.zone_id is null or za.zone_id = '0' or za.zone_id = '" . (int)$zone_id . "') and tr.tax_class_id = '" . (int)$class_id . "' order by tr.tax_priority");
-    if (tep_db_num_rows($tax_query)) {
-      $tax_description = '';
-      while ($tax = tep_db_fetch_array($tax_query)) {
-        $tax_description .= $tax['tax_description'] . ' + ';
-      }
-      $tax_description = substr($tax_description, 0, -3);
-
-      return $tax_description;
-    } else {
-      return ENTRY_TAX;
-    }
-  }
-
-////
-
-// Function    : tep_get_country_id
-  // Arguments   : country_name		country name string
-  // Return      : country_id
-  // Description : Function to retrieve the country_id based on the country's name
-  function tep_get_country_id($country_name) {
-    $country_id_query = tep_db_query("select * from " . TABLE_COUNTRIES . " where countries_name = '" . $country_name . "'");
-    if (!tep_db_num_rows($country_id_query)) {
-      return 0;
-    }
-    else {
-      $country_id_row = tep_db_fetch_array($country_id_query);
-      return $country_id_row['countries_id'];
-    }
-  }
-
-   // Function    : tep_get_zone_id
-  // Arguments   : country_id		country id string    zone_name		state/province name
-  // Return      : zone_id
-  // Description : Function to retrieve the zone_id based on the zone's name
-  function tep_get_zone_id($country_id, $zone_name) {
-    $zone_id_query = tep_db_query("select * from " . TABLE_ZONES . " where zone_country_id = '" . $country_id . "' and zone_name = '" . $zone_name . "'");
-    if (!tep_db_num_rows($zone_id_query)) {
-      return 0;
-    }
-    else {
-      $zone_id_row = tep_db_fetch_array($zone_id_query);
-      return $zone_id_row['zone_id'];
-    }
-  }
-  
-
-// Function    : tep_html_quotes
-  // Arguments   : string	any string
-  // Return      : string with single quotes converted to html equivalent
-  // Description : Function to change quotes to HTML equivalents for form inputs.
-  function tep_html_quotes($string) {
-    return str_replace("'", "&#39;", $string);
-  }
-
-/////end Order Editor mods
 // BOF: MOD - Admin w/access levels
 //Check login and file access
 function tep_admin_check_login() {

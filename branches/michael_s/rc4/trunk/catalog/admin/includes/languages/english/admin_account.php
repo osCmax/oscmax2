@@ -48,4 +48,6 @@ define('JS_ALERT_EMAIL_FORMAT',     '- Email address format is invalid! \n');
 define('JS_ALERT_EMAIL_USED',       '- Email address has already been used! \n');
 define('JS_ALERT_PASSWORD_CONFIRM', '- Miss typing in Password Confirmation field! \n');
 
+define('ADMIN_EMAIL_SUBJECT', 'Personal Information Change');
+define('ADMIN_EMAIL_TEXT', 'Hi %s,' . "\n\n" . 'Your personal information, perhaps including your password, has been changed.  If this was done without your knowledge or consent please contact the administrator immediatly!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is an automated response, please do not reply!');
 ?>

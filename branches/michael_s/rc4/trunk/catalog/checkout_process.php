@@ -12,6 +12,12 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
 
   include('includes/application_top.php');
 
+// BOF: Downloads Controller - Free Shipping
+// Reset $shipping if free shipping is on and weight is not 0
+if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $cart->show_weight()!=0) {
+  tep_session_unregister('shipping');
+}
+// EOF: Downloads Controller - Free Shipping
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot(array('mode' => 'SSL', 'page' => FILENAME_CHECKOUT_PAYMENT));

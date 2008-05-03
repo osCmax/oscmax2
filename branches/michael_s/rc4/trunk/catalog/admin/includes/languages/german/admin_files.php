@@ -10,38 +10,38 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Admin "Boxes" Menu');
+define('HEADING_TITLE', 'Admin Schachtelt Menü');
 
-define('TABLE_HEADING_ACTION', 'Action');
-define('TABLE_HEADING_BOXES', 'Boxes');
-define('TABLE_HEADING_FILENAME', 'Filenames');
-define('TABLE_HEADING_GROUPS', 'Groups');
+define('TABLE_HEADING_ACTION', 'Tätigkeit');
+define('TABLE_HEADING_BOXES', 'Kästen');
+define('TABLE_HEADING_FILENAME', 'Dateinamen');
+define('TABLE_HEADING_GROUPS', 'Gruppen');
 define('TABLE_HEADING_STATUS', 'Status');
 
-define('TEXT_COUNT_BOXES', 'Boxes: ');
-define('TEXT_COUNT_FILES', 'File(s): ');
+define('TEXT_COUNT_BOXES', 'Kästen: ');
+define('TEXT_COUNT_FILES', 'Akte(n): ');
 
 //categories access
-define('TEXT_INFO_HEADING_DEFAULT_BOXES', 'Boxes: ');
+define('TEXT_INFO_HEADING_DEFAULT_BOXES', 'Kästen: ');
 
-define('TEXT_INFO_DEFAULT_BOXES_INTRO', 'Simply click the green button to install the box or the red button to uninstall it.<br><br><b>WARNING:</b> If you uninstall the box, all files stored in also will be remove!');
-define('TEXT_INFO_DEFAULT_BOXES_INSTALLED', ' installed');
-define('TEXT_INFO_DEFAULT_BOXES_NOT_INSTALLED', ' not installed');
+define('TEXT_INFO_DEFAULT_BOXES_INTRO', 'Klicken Sie einfach die grüne Taste, um den Kasten oder die rote Taste zum uninstall anzubringen es.<br><br><b>Warnung:</b> Wenn Sie uninstall ein Kasten, alle Akten, die in diesem Kasten gespeichert werden, werden auch entfernt!');
+define('TEXT_INFO_DEFAULT_BOXES_INSTALLED', ' angebracht');
+define('TEXT_INFO_DEFAULT_BOXES_NOT_INSTALLED', ' nicht angebracht');
 
-define('STATUS_BOX_INSTALLED', 'Installed');
-define('STATUS_BOX_NOT_INSTALLED', 'Not Installed');
-define('STATUS_BOX_REMOVE', 'Remove');
-define('STATUS_BOX_INSTALL', 'Install');
+define('STATUS_BOX_INSTALLED', 'Angebracht');
+define('STATUS_BOX_NOT_INSTALLED', 'Nicht angebracht');
+define('STATUS_BOX_REMOVE', 'Entfernen Sie');
+define('STATUS_BOX_INSTALL', 'Bringen Sie an');
 
 //files access
-define('TEXT_INFO_HEADING_DEFAULT_FILE', 'File: ');
-define('TEXT_INFO_HEADING_DELETE_FILE', 'Remove Confirmation');
-define('TEXT_INFO_HEADING_NEW_FILE', 'Store Files');
+define('TEXT_INFO_HEADING_DEFAULT_FILE', 'Akte: ');
+define('TEXT_INFO_HEADING_DELETE_FILE', 'Entfernen Sie Bestätigung');
+define('TEXT_INFO_HEADING_NEW_FILE', 'Speichern Sie Akten');
 
-define('TEXT_INFO_DEFAULT_FILE_INTRO', 'Click <b>store files</b> button to insert new file to current box: ');
-define('TEXT_INFO_DELETE_FILE_INTRO', 'Remove <font color="red"><b>%s</b></font> from <b>%s</b> box? ');
-define('TEXT_INFO_NEW_FILE_INTRO', 'Check the <font color="red"><b>left menu</b></font> to make sure you store the right files.');
+define('TEXT_INFO_DEFAULT_FILE_INTRO', 'Klicken Sie Speicherakten knöpfen, um eine neue Akte zum gegenwärtigen Kasten einzusetzen an: ');
+define('TEXT_INFO_DELETE_FILE_INTRO', 'Entfernen Sie <font color="red"><b>%s</b></font> von <b>%s</b> Kasten? ');
+define('TEXT_INFO_NEW_FILE_INTRO', 'Überprüfen Sie die linken Menükästen, um sicherzustellen, daß Sie die rechten Akten speichern.');
 
-define('TEXT_INFO_NEW_FILE_BOX', 'Current Box: ');
+define('TEXT_INFO_NEW_FILE_BOX', 'Gegenwärtiger Kasten: ');
 
 ?>

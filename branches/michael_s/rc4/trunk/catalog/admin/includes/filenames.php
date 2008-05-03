@@ -10,6 +10,13 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   Released under the GNU General Public License
 */
 
+  define('FILENAME_ADMIN_ACCOUNT', 'admin_account.php');
+  define('FILENAME_ADMIN_FILES', 'admin_files.php');
+  define('FILENAME_ADMIN_MEMBERS', 'admin_members.php');
+  Define('FILENAME_FORBIDDEN', 'forbidden.php');
+  define('FILENAME_LOGIN', 'login.php');
+  define('FILENAME_LOGOFF', 'logoff.php');
+  define('FILENAME_PASSWORD_FORGOTTEN', 'password_forgotten.php');
 // define the filenames used in the project
   define('FILENAME_BACKUP', 'backup.php');
   define('FILENAME_BANNER_MANAGER', 'banner_manager.php');

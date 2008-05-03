@@ -70,6 +70,8 @@ define('JS_ALERT_LEVEL', '- Required: Group Member \n');
 
 define('ADMIN_EMAIL_SUBJECT', 'New Admin Member');
 define('ADMIN_EMAIL_TEXT', 'Hi %s,' . "\n\n" . 'You can access the admin panel with the following password. Once you access the admin, please change your password!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is an automated response, please do not reply!');
+define('ADMIN_EMAIL_EDIT_SUBJECT', 'Admin Member Profile Edit');
+define('ADMIN_EMAIL_EDIT_TEXT', 'Hi %s,' . "\n\n" . 'Your personal information has been updated by an administrator.' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is an automated response, please do not reply!');
 
 define('TEXT_INFO_HEADING_DEFAULT_GROUPS', 'Admin Group ');
 define('TEXT_INFO_HEADING_DELETE_GROUPS', 'Delete Group ');
@@ -78,7 +80,9 @@ define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>NOTE:</b><li><b>edit:</b> edit grou
 define('TEXT_INFO_DELETE_GROUPS_INTRO', 'It\'s also will delete member of this group. Are you sure want to delete <nobr><b>%s</b> group?</nobr>');
 define('TEXT_INFO_DELETE_GROUPS_INTRO_NOT', 'You can not delete this groups!');
 define('TEXT_INFO_GROUPS_INTRO', 'Give an unique group name. Click next to submit.');
+define('TEXT_INFO_EDIT_GROUPS_INTRO', 'Give an unique group name. Click next to submit.');
 
+define('TEXT_INFO_HEADING_EDIT_GROUP', 'Admin Group');
 define('TEXT_INFO_HEADING_GROUPS', 'New Group');
 define('TEXT_INFO_GROUPS_NAME', ' <b>Group Name:</b><br>Give an unique group name. Then, click next to submit.<br>');
 define('TEXT_INFO_GROUPS_NAME_FALSE', '<font color="red"><b>ERROR:</b> At least the group name must have more than 5 character!</font>');

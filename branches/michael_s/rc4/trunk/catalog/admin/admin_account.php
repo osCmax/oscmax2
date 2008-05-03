@@ -35,6 +35,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
         $admin_id = tep_db_prepare_input($HTTP_POST_VARS['id_info']);
         $admin_email_address = tep_db_prepare_input($HTTP_POST_VARS['admin_email_address']);
         $stored_email[] = 'NONE';
+        $hiddenPassword = '-hidden-';
 
         $check_email_query = tep_db_query("select admin_email_address from " . TABLE_ADMIN . " where admin_id <> " . $admin_id . "");
         while ($check_email = tep_db_fetch_array($check_email_query)) {

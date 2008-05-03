@@ -12,7 +12,7 @@ $Id: english.php 3 2006-05-27 04:59:07Z user $
 
 // BOF: MOD - Admin w/levels
 // header text in includes/header.php
-define('HEADER_TITLE_ACCOUNT', 'My Account/Password');
+define('HEADER_TITLE_ACCOUNT', 'My Account');
 define('HEADER_TITLE_LOGOFF', 'Logoff');
 
 // Admin Account
@@ -25,7 +25,7 @@ define('BOX_ADMINISTRATOR_MEMBER', 'Members');
 define('BOX_ADMINISTRATOR_BOXES', 'File Access');
 
 // images
-define('IMAGE_FILE_PERMISSION', 'File Permission');
+define('IMAGE_FILE_PERMISSION', 'File Permissions');
 define('IMAGE_GROUPS', 'Groups List');
 define('IMAGE_INSERT_FILE', 'Insert File');
 define('IMAGE_MEMBERS', 'Members List');
@@ -71,7 +71,7 @@ define('HTML_PARAMS','dir="ltr" lang="en"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0');
+define('TITLE', 'osCMax v2.0 RC4');
 
 // BOF: MOD - ORDER EDIT
 // Create account & order

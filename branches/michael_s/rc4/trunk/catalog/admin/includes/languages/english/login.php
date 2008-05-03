@@ -36,5 +36,5 @@ define('TEXT_FORGOTTEN_FAIL', 'You have try over 3 times. For security reason, p
 define('TEXT_FORGOTTEN_SUCCESS', 'The new password have sent to your email address. Please check your email and click back to login.<br>&nbsp;<br>&nbsp;');
 
 define('ADMIN_EMAIL_SUBJECT', 'New Password');
-define('ADMIN_EMAIL_TEXT', 'Hi %s,' . "\n\n" . 'You have successfully updated your admin login information.' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: --Hidden--' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is an automated response, please do not reply!');
+define('ADMIN_EMAIL_TEXT', 'Hi %s,' . "\n\n" . 'You can access the admin panel with the following password. Once you access the admin, please change your password!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is an automated response, please do not reply!');
 ?>

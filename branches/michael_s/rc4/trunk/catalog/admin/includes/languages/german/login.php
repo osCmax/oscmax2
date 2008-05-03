@@ -15,26 +15,26 @@ if ($HTTP_GET_VARS['origin'] == FILENAME_CHECKOUT_PAYMENT) {
   define('HEADING_TITLE', 'Ordering online is easy.');
   define('TEXT_STEP_BY_STEP', 'We\'ll walk you through the process, step by step.');
 } else {
-  define('NAVBAR_TITLE', 'Login');
-  define('HEADING_TITLE', 'Welcome, Please Sign In');
-  define('TEXT_STEP_BY_STEP', ''); // should be empty
-}
+define('NAVBAR_TITLE', 'Zeichen Innen');
+define('HEADING_TITLE', 'Willkommen. Bitte Zeichen Innen');
+define('TEXT_STEP_BY_STEP', ''); // should be empty
 
-define('HEADING_RETURNING_ADMIN', 'Login Panel:');
-define('HEADING_PASSWORD_FORGOTTEN', 'Password Forgotten:');
-define('TEXT_RETURNING_ADMIN', 'Staff only!');
-define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
-define('ENTRY_PASSWORD', 'Password:');
-define('ENTRY_FIRSTNAME', 'First Name:');
-define('IMAGE_BUTTON_LOGIN', 'Submit');
 
-define('TEXT_PASSWORD_FORGOTTEN', 'Password forgotten?');
+define('HEADING_RETURNING_ADMIN', 'Zeichen In der Verkleidung:');
+define('HEADING_PASSWORD_FORGOTTEN', 'Kennwort Vergessen:');
+define('TEXT_RETURNING_ADMIN', 'Nur Personal!');
+define('ENTRY_EMAIL_ADDRESS', 'Email Adresse:');
+define('ENTRY_PASSWORD', 'Kennwort:');
+define('ENTRY_FIRSTNAME', 'Vorname:');
+define('IMAGE_BUTTON_LOGIN', 'Reichen Sie ein');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> Wrong username or password!');
-define('TEXT_FORGOTTEN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> first name and password not match!');
-define('TEXT_FORGOTTEN_FAIL', 'You have try over 3 times. For security reason, please contact your Web Administrator to get new password.<br>&nbsp;<br>&nbsp;');
-define('TEXT_FORGOTTEN_SUCCESS', 'The new password have sent to your email address. Please check your email and click back to login.<br>&nbsp;<br>&nbsp;');
+define('TEXT_PASSWORD_FORGOTTEN', 'Kennwort vergessen?');
 
-define('ADMIN_EMAIL_SUBJECT', 'New Password');
-define('ADMIN_EMAIL_TEXT', 'Hi %s,' . "\n\n" . 'You have successfully updated your admin login information.' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: --Hidden--' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is an automated response, please do not reply!');
+define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>Störung:</b></font> Falsches username oder Kennwort!');
+define('TEXT_FORGOTTEN_ERROR', '<font color="#ff0000"><b>Störung:</b></font> Vorname und Kennwort passen nicht zusammen!');
+define('TEXT_FORGOTTEN_FAIL', 'Sie haben über 3mal versucht. Aus Sicherheit Gründen treten Sie bitte mit Ihrem Hauptverwalter in Verbindung, um ein neues Kennwort zu erhalten.<br>&nbsp;<br>&nbsp;');
+define('TEXT_FORGOTTEN_SUCCESS', 'Ein neues Kennwort ist zu Ihrer E-mail Adresse geschickt worden. Überprüfen Sie bitte Ihre E-mail und klicken Sie die "rückseitige" Taste an, um innen zu unterzeichnen.<br>&nbsp;<br>&nbsp;');
+
+define('ADMIN_EMAIL_SUBJECT', 'Neues Kennwort');
+define('ADMIN_EMAIL_TEXT', 'Hallo %s,' . "\n\n" . 'Sie können die Leitung Verkleidung mit dem folgenden Kennwort zugänglich machen. Sobald Sie die Verkleidung zugänglich machen, ändern Sie bitte Ihr Kennwort aus Sicherheit Gründen!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Kennwort: %s' . "\n\n" . 'Danke!' . "\n" . '%s' . "\n\n" . 'Dieses ist eine automatisierte Antwort, bitte antworten Sie nicht!');
 ?>

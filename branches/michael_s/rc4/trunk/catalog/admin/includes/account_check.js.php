@@ -27,13 +27,13 @@ function validateForm() {
   if (adminName1 == '') { 
     errors+='<?php echo JS_ALERT_FIRSTNAME; ?>';
   } else if (adminName1.length < <?php echo ENTRY_FIRST_NAME_MIN_LENGTH; ?>) { 
-    errors+='- Firstname length must over  <?php echo (ENTRY_FIRST_NAME_MIN_LENGTH); ?>\n';
+    errors+='- First Name must be longer than  <?php echo (ENTRY_FIRST_NAME_MIN_LENGTH); ?>\n';
   }
 
   if (adminName2 == '') { 
     errors+='<?php echo JS_ALERT_LASTNAME; ?>';
   } else if (adminName2.length < <?php echo ENTRY_FIRST_NAME_MIN_LENGTH; ?>) { 
-    errors+='- Lastname length must over  <?php echo (ENTRY_LAST_NAME_MIN_LENGTH);  ?>\n';
+    errors+='- Last Name must be longer than  <?php echo (ENTRY_LAST_NAME_MIN_LENGTH);  ?>\n';
   }
 
   if (adminEmail == '') {

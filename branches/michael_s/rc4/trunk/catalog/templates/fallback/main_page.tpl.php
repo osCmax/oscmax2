@@ -44,7 +44,7 @@ function CVVPopUpWindow(url) {
 <?php
 	//// BEGIN:  Added for Dynamic MoPics v3.000
 ?>
-<link rel="stylesheet" type="text/css" href="dynamic_mopics.css">
+<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','dynamic_mopics.css')); // BTSv1.5 ?>">
 <script language="javascript" type="text/javascript"><!--
 	function popupImage(url, imageHeight, imageWidth) {
 		var newImageHeight = (parseInt(imageHeight) + 40);
@@ -81,6 +81,8 @@ function CVVPopUpWindow(url) {
 <?php
 // include i.e. template switcher in every template
 if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common_top.php')); // BTSv1.5
+// BOF Added: Down for Maintenance Hide header if not to show
+if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false') {
 ?>
 <!-- header //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -109,14 +111,23 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
   </tr>
 </table>
 <!-- header_eof //-->
-
+<?php
+}
+?>
 <!-- body //-->
 <table border="0" width="100%" cellspacing="3" cellpadding="3">
   <tr>
     <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+						<?php
+             // Hide Left Column if not to show
+                if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
+             ?>
 <!-- left_navigation //-->
 <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
 <!-- left_navigation_eof //-->
+            <?php
+             }
+            ?>
     </table></td>
 <!-- content //-->
     <td width="100%" valign="top"><?php
@@ -124,14 +135,25 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
   ?></td>
 <!-- content_eof //-->
     <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+             <?php
+             // Hide column_left.php if not to show
+                if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
+             ?>								
 <!-- right_navigation //-->
 <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
 <!-- right_navigation_eof //-->
+             <?php
+             }
+            ?>  		 
     </table></td>
   </tr>
 </table>
 <!-- body_eof //-->
 
+<?php
+// BOF Added: Down for Maintenance Hide footer.php if not to show
+if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false') {
+?>
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'counter.php'); ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="1">
@@ -180,6 +202,8 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
   }
 ?>
 <!-- footer_eof //-->
-<br>
+<?php
+}
+?>
 </body>
 </html>

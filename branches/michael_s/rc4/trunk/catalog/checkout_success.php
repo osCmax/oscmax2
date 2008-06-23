@@ -37,6 +37,7 @@ $Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
           $notify_string .= 'notify[]=' . $notify[$i] . '&';
         }
       }
+    }
 // BOF:
 //    tep_redirect(tep_href_link(FILENAME_DEFAULT, $notify_string));
 // Added a check for a Guest checkout and cleared the session - 030411 

@@ -99,8 +99,7 @@ $Id: cc.php 14 2006-07-28 17:42:07Z user $
       include(DIR_WS_CLASSES . 'cc_validation.php');
 
       $cc_validation = new cc_validation();
-      $result = $cc_validation->validate($HTTP_POST_VARS['cc_number_nh-dns'], $HTTP_POST_VARS['cc_expires_month'], $HTTP_POST_VARS['cc_expires_year']);
-
+      $result = $cc_validation->validate($HTTP_POST_VARS['cc_number_nh-dns'], $HTTP_POST_VARS['cc_expires_month'], $HTTP_POST_VARS['cc_expires_year'], $HTTP_POST_VARS['cc_checkcode'], $HTTP_POST_VARS['cc_card_type']);
       $error = '';
       switch ($result) {
         case -1:

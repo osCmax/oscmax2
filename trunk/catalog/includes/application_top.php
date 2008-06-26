@@ -404,6 +404,7 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
               $attributes[$oid]=$oval;
           }
         }
+        
         if (isset($HTTP_POST_VARS['id']) && is_array($HTTP_POST_VARS['id'])) {
           foreach ($HTTP_POST_VARS['id'] as $key=>$val) {
             if (is_numeric($key) && $key==(int)$key && is_numeric($val) && $val==(int)$val)
@@ -435,6 +436,7 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
         $cart->add_cart($HTTP_POST_VARS['products_id'], $cart->get_quantity(tep_get_uprid($HTTP_POST_VARS['products_id'], $attributes))+1, $attributes);
 // EOF: MOD - QT Pro
             }
+   }         
         tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
         break;
 // performed by the 'buy now' button in product listings and review page

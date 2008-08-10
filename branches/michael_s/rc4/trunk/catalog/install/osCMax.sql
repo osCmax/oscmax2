@@ -37,11 +37,6 @@ CREATE TABLE address_format (
 ) TYPE=MyISAM ;
 
 
-INSERT INTO address_format (address_format_id, address_format, address_summary) VALUES(1, '$firstname $lastname$cr$streets$cr$city, $postcode$cr$statecomma$country', '$city / $country');
-INSERT INTO address_format (address_format_id, address_format, address_summary) VALUES(2, '$firstname $lastname$cr$streets$cr$city, $state    $postcode$cr$country', '$city, $state / $country');
-INSERT INTO address_format (address_format_id, address_format, address_summary) VALUES(3, '$firstname $lastname$cr$streets$cr$city$cr$postcode - $statecomma$country', '$state / $country');
-INSERT INTO address_format (address_format_id, address_format, address_summary) VALUES(4, '$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country', '$postcode / $country');
-INSERT INTO address_format (address_format_id, address_format, address_summary) VALUES(5, '$firstname $lastname$cr$streets$cr$postcode $city$cr$country', '$city / $country');
 DROP TABLE IF EXISTS admin;
 CREATE TABLE admin (
   admin_id int(11) NOT NULL auto_increment,
@@ -58,7 +53,6 @@ CREATE TABLE admin (
   UNIQUE KEY admin_email_address (admin_email_address)
 ) TYPE=MyISAM ;
 
-INSERT INTO admin (admin_id, admin_groups_id, admin_firstname, admin_lastname, admin_email_address, admin_password, admin_created, admin_modified, admin_logdate, admin_lognum) VALUES(1, 1, 'Default', 'Admin', 'admin@localhost.com', '05cdeb1aeaffec1c7ae3f12c570a658c:81', '2003-07-17 11:35:03', '2003-08-02 19:43:11', '2008-05-03 22:48:41', 28);
 DROP TABLE IF EXISTS admin_files;
 CREATE TABLE admin_files (
   admin_files_id int(11) NOT NULL auto_increment,
@@ -70,126 +64,6 @@ CREATE TABLE admin_files (
 ) TYPE=MyISAM ;
 
 
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(1, 'administrator.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(2, 'configuration.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(3, 'catalog.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(4, 'modules.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(5, 'customers.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(6, 'taxes.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(7, 'localization.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(8, 'reports.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(9, 'tools.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(10, 'admin_members.php', 0, 1, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(11, 'admin_files.php', 0, 1, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(12, 'configuration.php', 0, 2, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(13, 'categories.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(14, 'products_attributes.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(15, 'manufacturers.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(16, 'reviews.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(17, 'specials.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(18, 'products_expected.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(19, 'modules.php', 0, 4, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(20, 'customers.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(79, 'orders.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(22, 'countries.php', 0, 6, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(23, 'zones.php', 0, 6, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(24, 'geo_zones.php', 0, 6, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(25, 'tax_classes.php', 0, 6, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(26, 'tax_rates.php', 0, 6, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(27, 'currencies.php', 0, 7, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(28, 'languages.php', 0, 7, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(29, 'orders_status.php', 0, 7, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(30, 'stats_products_viewed.php', 0, 8, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(31, 'stats_products_purchased.php', 0, 8, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(32, 'stats_customers.php', 0, 8, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(33, 'backup.php', 0, 9, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(34, 'banner_manager.php', 0, 9, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(35, 'cache.php', 0, 9, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(36, 'define_language.php', 0, 9, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(37, 'file_manager.php', 0, 9, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(38, 'mail.php', 0, 9, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(39, 'newsletters.php', 0, 9, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(40, 'server_info.php', 0, 9, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(41, 'whos_online.php', 0, 9, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(42, 'banner_statistics.php', 0, 9, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(43, 'affiliate.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(44, 'affiliate_affiliates.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(45, 'affiliate_clicks.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(46, 'affiliate_banners.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(47, 'affiliate_contact.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(48, 'affiliate_invoice.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(49, 'affiliate_payment.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(50, 'affiliate_popup_image.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(51, 'affiliate_sales.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(52, 'affiliate_statistics.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(53, 'affiliate_summary.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(54, 'gv_admin.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(55, 'coupon_admin.php', 0, 54, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(56, 'gv_queue.php', 0, 54, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(57, 'gv_mail.php', 0, 54, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(58, 'gv_sent.php', 0, 54, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(59, 'paypalipn.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(60, 'paypalipn_tests.php', 0, 59, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(61, 'paypalipn_txn.php', 0, 59, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(62, 'coupon_restrict.php', 0, 54, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(64, 'xsell_products.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(65, 'easypopulate.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(68, 'define_mainpage.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(70, 'edit_orders.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(71, 'validproducts.php', 0, 54, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(72, 'validcategories.php', 0, 54, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(73, 'listcategories.php', 0, 54, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(74, 'listproducts.php', 0, 54, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(75, 'new_attributes.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(80, 'paypal_ipn_order.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(78, 'paypal_ipn.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(81, 'articles.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(82, 'article_reviews.php', 0, 81, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(83, 'articles.php', 0, 81, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(84, 'articles_config.php', 0, 81, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(85, 'articles_xsell.php', 0, 81, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(86, 'authors.php', 0, 81, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(87, 'recover_cart_sales.php', 0, 8, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(88, 'stats_recover_cart_sales.php', 0, 8, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(89, 'stats_monthly_sales.php', 0, 8, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(90, 'batch_print.php', 0, 9, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(91, 'stock.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(92, 'stats_low_stock_attrib.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(93, 'info_boxes.php', 1, 0, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(94, 'infobox_configuration.php', 0, 93, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(95, 'popup_infobox_help.php', 0, 93, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(98, 'customers_groups.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(99, 'define_conditions.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(100, 'define_privacy.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(101, 'define_shipping.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(102, 'xsell.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(103, 'create_account.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(104, 'create_account_process.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(105, 'create_account_success.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(106, 'create_order.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(107, 'create_order_process.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(108, 'easypopulate_functions.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(109, 'new_attributes_change.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(110, 'new_attributes_config.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(111, 'new_attributes_functions.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(112, 'new_attributes_include.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(113, 'new_attributes_select.php', 0, 3, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(114, 'ship_fedex.php', 0, 8, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(115, 'fedex_popup.php', 0, 8, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(116, 'shipping_manifest.php', 0, 8, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(117, 'track_fedex.php', 0, 8, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(118, 'paypal_info.php', 0, 1, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(119, 'affiliate_info.php', 0, 1, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(120, 'domain_info.php', 0, 1, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(121, 'hosting_info.php', 0, 1, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(122, 'merchant_info.php', 0, 1, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(123, 'ssl_info.php', 0, 1, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(124, 'affiliate_news.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(125, 'affiliate_newsletters.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(126, 'affiliate_validcats.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(127, 'affiliate_validproducts.php', 0, 43, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(128, 'edit_orders_add_product.php', 0, 5, '1');
-INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(129, 'edit_orders_ajax.php', 0, 5, '1');
 DROP TABLE IF EXISTS admin_groups;
 CREATE TABLE admin_groups (
   admin_groups_id int(11) NOT NULL auto_increment,
@@ -199,8 +73,6 @@ CREATE TABLE admin_groups (
 ) TYPE=MyISAM ;
 
 
-INSERT INTO admin_groups (admin_groups_id, admin_groups_name) VALUES(1, 'Top Administrator');
-INSERT INTO admin_groups (admin_groups_id, admin_groups_name) VALUES(2, 'Marketing');
 DROP TABLE IF EXISTS affiliate_affiliate;
 CREATE TABLE affiliate_affiliate (
   affiliate_id int(11) NOT NULL auto_increment,
@@ -355,8 +227,6 @@ CREATE TABLE affiliate_payment_status (
 ) TYPE=MyISAM;
 
 
-INSERT INTO affiliate_payment_status (affiliate_payment_status_id, affiliate_language_id, affiliate_payment_status_name) VALUES(0, 1, 'Pending');
-INSERT INTO affiliate_payment_status (affiliate_payment_status_id, affiliate_language_id, affiliate_payment_status_name) VALUES(1, 1, 'Paid');
 DROP TABLE IF EXISTS affiliate_payment_status_history;
 CREATE TABLE affiliate_payment_status_history (
   affiliate_status_history_id int(11) NOT NULL auto_increment,
@@ -568,6 +438,1000 @@ CREATE TABLE configuration (
   set_function text,
   PRIMARY KEY  (configuration_id)
 ) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS configuration_group;
+CREATE TABLE configuration_group (
+  configuration_group_id int(11) NOT NULL auto_increment,
+  configuration_group_title varchar(64) NOT NULL,
+  configuration_group_description varchar(255) NOT NULL,
+  sort_order int(5) default NULL,
+  visible int(1) default '1',
+  PRIMARY KEY  (configuration_group_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS counter;
+CREATE TABLE counter (
+  startdate char(8) default NULL,
+  counter int(12) default NULL
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS counter_history;
+CREATE TABLE counter_history (
+  `month` char(8) default NULL,
+  counter int(12) default NULL
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS countries;
+CREATE TABLE countries (
+  countries_id int(11) NOT NULL auto_increment,
+  countries_name varchar(64) NOT NULL,
+  countries_iso_code_2 char(2) NOT NULL,
+  countries_iso_code_3 char(3) NOT NULL,
+  address_format_id int(11) NOT NULL default '0',
+  PRIMARY KEY  (countries_id),
+  KEY IDX_COUNTRIES_NAME (countries_name)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS coupons;
+CREATE TABLE coupons (
+  coupon_id int(11) NOT NULL auto_increment,
+  coupon_type char(1) NOT NULL default 'F',
+  coupon_code varchar(32) NOT NULL,
+  coupon_amount decimal(8,4) NOT NULL default '0.0000',
+  coupon_minimum_order decimal(8,4) NOT NULL default '0.0000',
+  coupon_start_date datetime NOT NULL default '0000-00-00 00:00:00',
+  coupon_expire_date datetime NOT NULL default '0000-00-00 00:00:00',
+  uses_per_coupon int(5) NOT NULL default '1',
+  uses_per_user int(5) NOT NULL default '0',
+  restrict_to_products varchar(255) default NULL,
+  restrict_to_categories varchar(255) default NULL,
+  restrict_to_customers text,
+  coupon_active char(1) NOT NULL default 'Y',
+  date_created datetime NOT NULL default '0000-00-00 00:00:00',
+  date_modified datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (coupon_id)
+) TYPE=MyISAM;
+
+DROP TABLE IF EXISTS coupons_description;
+CREATE TABLE coupons_description (
+  coupon_id int(11) NOT NULL default '0',
+  language_id int(11) NOT NULL default '0',
+  coupon_name varchar(32) NOT NULL,
+  coupon_description text,
+  KEY coupon_id (coupon_id)
+) TYPE=MyISAM;
+DROP TABLE IF EXISTS coupon_email_track;
+CREATE TABLE coupon_email_track (
+  unique_id int(11) NOT NULL auto_increment,
+  coupon_id int(11) NOT NULL default '0',
+  customer_id_sent int(11) NOT NULL default '0',
+  sent_firstname varchar(32) default NULL,
+  sent_lastname varchar(32) default NULL,
+  emailed_to varchar(32) default NULL,
+  date_sent datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (unique_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS coupon_gv_customer;
+CREATE TABLE coupon_gv_customer (
+  customer_id int(5) NOT NULL default '0',
+  amount decimal(8,4) NOT NULL default '0.0000',
+  PRIMARY KEY  (customer_id),
+  KEY customer_id (customer_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS coupon_gv_queue;
+CREATE TABLE coupon_gv_queue (
+  unique_id int(5) NOT NULL auto_increment,
+  customer_id int(5) NOT NULL default '0',
+  order_id int(5) NOT NULL default '0',
+  amount decimal(8,4) NOT NULL default '0.0000',
+  date_created datetime NOT NULL default '0000-00-00 00:00:00',
+  ipaddr varchar(32) NOT NULL,
+  release_flag char(1) NOT NULL default 'N',
+  PRIMARY KEY  (unique_id),
+  KEY uid (unique_id,customer_id,order_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS coupon_redeem_track;
+CREATE TABLE coupon_redeem_track (
+  unique_id int(11) NOT NULL auto_increment,
+  coupon_id int(11) NOT NULL default '0',
+  customer_id int(11) NOT NULL default '0',
+  redeem_date datetime NOT NULL default '0000-00-00 00:00:00',
+  redeem_ip varchar(32) NOT NULL,
+  order_id int(11) NOT NULL default '0',
+  PRIMARY KEY  (unique_id)
+) TYPE=MyISAM;
+
+DROP TABLE IF EXISTS currencies;
+CREATE TABLE currencies (
+  currencies_id int(11) NOT NULL auto_increment,
+  title varchar(32) NOT NULL,
+  `code` char(3) NOT NULL,
+  symbol_left varchar(12) default NULL,
+  symbol_right varchar(12) default NULL,
+  decimal_point char(1) default NULL,
+  thousands_point char(1) default NULL,
+  decimal_places char(1) default NULL,
+  `value` float(13,8) default NULL,
+  last_updated datetime default NULL,
+  PRIMARY KEY  (currencies_id),
+  KEY idx_currencies_code (`code`)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS customers;
+CREATE TABLE customers (
+  customers_id int(11) NOT NULL auto_increment,
+  purchased_without_account tinyint(1) unsigned NOT NULL default '0',
+  customers_gender char(1) NOT NULL,
+  customers_firstname varchar(32) NOT NULL,
+  customers_lastname varchar(32) NOT NULL,
+  customers_dob datetime NOT NULL default '0000-00-00 00:00:00',
+  customers_email_address varchar(96) NOT NULL,
+  customers_default_address_id int(11) NOT NULL default '0',
+  customers_telephone varchar(32) NOT NULL,
+  customers_fax varchar(32) default NULL,
+  customers_password varchar(40) default NULL,
+  customers_newsletter char(1) default NULL,
+  customers_login varchar(96) default NULL,
+  customers_group_name varchar(27) NOT NULL default 'Retail',
+  customers_group_id int(11) NOT NULL default '0',
+  customers_group_ra enum('0','1') NOT NULL default '0',
+  customers_payment_allowed varchar(255) NOT NULL,
+  customers_shipment_allowed varchar(255) NOT NULL,
+  PRIMARY KEY  (customers_id),
+  UNIQUE KEY idx_customers_login (customers_login),
+  KEY purchased_without_account (purchased_without_account),
+  KEY idx_customers_email_address (customers_email_address)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS customers_basket;
+CREATE TABLE customers_basket (
+  customers_basket_id int(11) NOT NULL auto_increment,
+  customers_id int(11) NOT NULL default '0',
+  products_id tinytext NOT NULL,
+  customers_basket_quantity int(2) NOT NULL default '0',
+  final_price decimal(15,4) NOT NULL default '0.0000',
+  customers_basket_date_added varchar(8) default NULL,
+  PRIMARY KEY  (customers_basket_id),
+  KEY idx_customers_basket_customers_id (customers_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS customers_basket_attributes;
+CREATE TABLE customers_basket_attributes (
+  customers_basket_attributes_id int(11) NOT NULL auto_increment,
+  customers_id int(11) NOT NULL default '0',
+  products_id tinytext NOT NULL,
+  products_options_id int(11) NOT NULL default '0',
+  products_options_value_id int(11) NOT NULL default '0',
+  products_options_value_text varchar(32) default NULL,
+  PRIMARY KEY  (customers_basket_attributes_id),
+  KEY idx_customers_basket_att_customers_id (customers_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS customers_groups;
+CREATE TABLE customers_groups (
+  customers_group_id smallint(5) unsigned NOT NULL default '0',
+  customers_group_name varchar(32) NOT NULL,
+  customers_group_show_tax enum('1','0') NOT NULL default '1',
+  customers_group_tax_exempt enum('0','1') NOT NULL default '0',
+  group_payment_allowed varchar(255) NOT NULL,
+  group_shipment_allowed varchar(255) NOT NULL,
+  PRIMARY KEY  (customers_group_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS customers_info;
+CREATE TABLE customers_info (
+  customers_info_id int(11) NOT NULL default '0',
+  customers_info_date_of_last_logon datetime default NULL,
+  customers_info_number_of_logons int(5) default NULL,
+  customers_info_date_account_created datetime default NULL,
+  customers_info_date_account_last_modified datetime default NULL,
+  global_product_notifications int(1) default '0',
+  PRIMARY KEY  (customers_info_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS customers_wishlist;
+CREATE TABLE customers_wishlist (
+  products_id tinytext NOT NULL,
+  customers_id int(13) NOT NULL default '0'
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS customers_wishlist_attributes;
+CREATE TABLE customers_wishlist_attributes (
+  customers_wishlist_attributes_id int(11) NOT NULL auto_increment,
+  customers_id int(11) NOT NULL default '0',
+  products_id tinytext NOT NULL,
+  products_options_id int(11) NOT NULL default '0',
+  products_options_value_id int(11) NOT NULL default '0',
+  PRIMARY KEY  (customers_wishlist_attributes_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS geo_zones;
+CREATE TABLE geo_zones (
+  geo_zone_id int(11) NOT NULL auto_increment,
+  geo_zone_name varchar(32) NOT NULL,
+  geo_zone_description varchar(255) NOT NULL,
+  last_modified datetime default NULL,
+  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (geo_zone_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS google_checkout;
+CREATE TABLE google_checkout (
+  customers_id int(11) default NULL,
+  buyer_id bigint(20) default NULL
+) TYPE=MyISAM;
+
+DROP TABLE IF EXISTS google_orders;
+CREATE TABLE google_orders (
+  orders_id int(11) default NULL,
+  google_order_number bigint(20) default NULL,
+  order_amount decimal(15,4) default NULL
+) TYPE=MyISAM;
+
+DROP TABLE IF EXISTS languages;
+CREATE TABLE languages (
+  languages_id int(11) NOT NULL auto_increment,
+  `name` varchar(32) NOT NULL,
+  `code` char(2) NOT NULL,
+  image varchar(64) default NULL,
+  `directory` varchar(32) default NULL,
+  sort_order int(3) default NULL,
+  PRIMARY KEY  (languages_id),
+  KEY IDX_LANGUAGES_NAME (`name`)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS manufacturers;
+CREATE TABLE manufacturers (
+  manufacturers_id int(11) NOT NULL auto_increment,
+  manufacturers_name varchar(32) NOT NULL,
+  manufacturers_image varchar(64) default NULL,
+  date_added datetime default NULL,
+  last_modified datetime default NULL,
+  PRIMARY KEY  (manufacturers_id),
+  KEY IDX_MANUFACTURERS_NAME (manufacturers_name)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS manufacturers_info;
+CREATE TABLE manufacturers_info (
+  manufacturers_id int(11) NOT NULL default '0',
+  languages_id int(11) NOT NULL default '0',
+  manufacturers_url varchar(255) NOT NULL,
+  url_clicked int(5) NOT NULL default '0',
+  date_last_click datetime default NULL,
+  PRIMARY KEY  (manufacturers_id,languages_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS newsletters;
+CREATE TABLE newsletters (
+  newsletters_id int(11) NOT NULL auto_increment,
+  title varchar(255) NOT NULL,
+  content text NOT NULL,
+  module varchar(255) NOT NULL,
+  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  date_sent datetime default NULL,
+  `status` int(1) default NULL,
+  locked int(1) default '0',
+  PRIMARY KEY  (newsletters_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS orders;
+CREATE TABLE orders (
+  orders_id int(11) NOT NULL auto_increment,
+  customers_id int(11) NOT NULL default '0',
+  customers_name varchar(64) NOT NULL,
+  customers_company varchar(32) default NULL,
+  customers_street_address varchar(64) NOT NULL,
+  customers_suburb varchar(32) default NULL,
+  customers_city varchar(32) NOT NULL,
+  customers_postcode varchar(10) NOT NULL,
+  customers_state varchar(32) default NULL,
+  customers_country varchar(32) NOT NULL,
+  customers_telephone varchar(32) NOT NULL,
+  customers_email_address varchar(96) NOT NULL,
+  customers_address_format_id int(5) NOT NULL default '0',
+  customers_dummy_account tinyint(3) unsigned NOT NULL,
+  delivery_name varchar(64) NOT NULL,
+  delivery_company varchar(32) default NULL,
+  delivery_street_address varchar(64) NOT NULL,
+  delivery_suburb varchar(32) default NULL,
+  delivery_city varchar(32) NOT NULL,
+  delivery_postcode varchar(10) NOT NULL,
+  delivery_state varchar(32) default NULL,
+  delivery_country varchar(32) NOT NULL,
+  delivery_address_format_id int(5) NOT NULL default '0',
+  billing_name varchar(64) NOT NULL,
+  billing_company varchar(32) default NULL,
+  billing_street_address varchar(64) NOT NULL,
+  billing_suburb varchar(32) default NULL,
+  billing_city varchar(32) NOT NULL,
+  billing_postcode varchar(10) NOT NULL,
+  billing_state varchar(32) default NULL,
+  billing_country varchar(32) NOT NULL,
+  billing_address_format_id int(5) NOT NULL default '0',
+  payment_method varchar(255) NOT NULL,
+  cc_type varchar(20) default NULL,
+  cc_owner varchar(64) default NULL,
+  cc_number varchar(32) default NULL,
+  cc_expires varchar(4) default NULL,
+  last_modified datetime default NULL,
+  date_purchased datetime default NULL,
+  orders_status int(5) NOT NULL default '0',
+  orders_date_finished datetime default NULL,
+  currency char(3) default NULL,
+  currency_value decimal(14,6) default NULL,
+  paypal_ipn_id int(11) NOT NULL default '0',
+  fedex_tracking varchar(20) NOT NULL,
+  purchased_without_account tinyint(1) unsigned NOT NULL default '0',
+  shipping_tax decimal(7,4) NOT NULL default '0.0000',
+  shipping_module varchar(255) default NULL,
+  PRIMARY KEY  (orders_id),
+  KEY idx_orders_customers_id (customers_id)
+) TYPE=MyISAM ;
+
+DROP TABLE IF EXISTS orders_products;
+CREATE TABLE orders_products (
+  orders_products_id int(11) NOT NULL auto_increment,
+  orders_id int(11) NOT NULL default '0',
+  products_id int(11) NOT NULL default '0',
+  products_model varchar(12) default NULL,
+  products_name varchar(64) NOT NULL,
+  products_price decimal(15,4) NOT NULL default '0.0000',
+  final_price decimal(15,4) NOT NULL default '0.0000',
+  products_tax decimal(7,4) NOT NULL default '0.0000',
+  products_quantity int(2) NOT NULL default '0',
+  products_stock_attributes varchar(255) default NULL,
+  PRIMARY KEY  (orders_products_id),
+  KEY idx_orders_products_orders_id (orders_id),
+  KEY idx_orders_products_products_id (products_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS orders_products_attributes;
+CREATE TABLE orders_products_attributes (
+  orders_products_attributes_id int(11) NOT NULL auto_increment,
+  orders_id int(11) NOT NULL default '0',
+  orders_products_id int(11) NOT NULL default '0',
+  products_options varchar(32) NOT NULL,
+  products_options_values varchar(32) NOT NULL,
+  options_values_price decimal(15,4) NOT NULL default '0.0000',
+  price_prefix char(1) NOT NULL,
+  PRIMARY KEY  (orders_products_attributes_id),
+  KEY idx_orders_products_att_orders_id (orders_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS orders_products_download;
+CREATE TABLE orders_products_download (
+  orders_products_download_id int(11) NOT NULL auto_increment,
+  orders_id int(11) NOT NULL default '0',
+  orders_products_id int(11) NOT NULL default '0',
+  orders_products_filename varchar(255) NOT NULL,
+  download_maxdays int(2) NOT NULL default '0',
+  download_count int(2) NOT NULL default '0',
+  PRIMARY KEY  (orders_products_download_id),
+  KEY idx_orders_products_download_orders_id (orders_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS orders_status;
+CREATE TABLE orders_status (
+  orders_status_id int(11) NOT NULL default '0',
+  language_id int(11) NOT NULL default '1',
+  orders_status_name varchar(32) NOT NULL,
+  public_flag int(11) default '1',
+  downloads_flag int(11) default '0',
+  PRIMARY KEY  (orders_status_id,language_id),
+  KEY idx_orders_status_name (orders_status_name)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS orders_status_history;
+CREATE TABLE orders_status_history (
+  orders_status_history_id int(11) NOT NULL auto_increment,
+  orders_id int(11) NOT NULL default '0',
+  orders_status_id int(5) NOT NULL default '0',
+  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  customer_notified int(1) default '0',
+  comments text,
+  PRIMARY KEY  (orders_status_history_id),
+  KEY idx_orders_status_history_orders_id (orders_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS orders_total;
+CREATE TABLE orders_total (
+  orders_total_id int(10) unsigned NOT NULL auto_increment,
+  orders_id int(11) NOT NULL default '0',
+  title varchar(255) NOT NULL,
+  `text` varchar(255) NOT NULL,
+  `value` decimal(15,4) NOT NULL default '0.0000',
+  class varchar(32) NOT NULL,
+  sort_order int(11) NOT NULL default '0',
+  PRIMARY KEY  (orders_total_id),
+  KEY idx_orders_total_orders_id (orders_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS packaging;
+CREATE TABLE packaging (
+  package_id int(11) NOT NULL auto_increment,
+  package_name varchar(64) NOT NULL,
+  package_description varchar(255) NOT NULL,
+  package_length decimal(6,2) NOT NULL default '5.00',
+  package_width decimal(6,2) NOT NULL default '5.00',
+  package_height decimal(6,2) NOT NULL default '5.00',
+  package_empty_weight decimal(6,2) NOT NULL default '0.00',
+  package_max_weight decimal(6,2) NOT NULL default '50.00',
+  package_cost int(5) NOT NULL default '0',
+  PRIMARY KEY  (package_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS paypal_ipn;
+CREATE TABLE paypal_ipn (
+  paypal_ipn_id int(10) unsigned NOT NULL auto_increment,
+  txn_type int(10) unsigned NOT NULL default '0',
+  reason_code int(11) default NULL,
+  payment_type int(11) NOT NULL default '0',
+  payment_status int(11) NOT NULL default '0',
+  pending_reason int(11) default NULL,
+  invoice varchar(64) default NULL,
+  mc_currency int(11) NOT NULL default '1',
+  first_name varchar(32) NOT NULL,
+  last_name varchar(32) NOT NULL,
+  payer_business_name varchar(32) default NULL,
+  address_name varchar(32) NOT NULL,
+  address_street varchar(64) NOT NULL,
+  address_city varchar(32) NOT NULL,
+  address_state varchar(32) NOT NULL,
+  address_zip varchar(64) NOT NULL,
+  address_country varchar(32) NOT NULL,
+  address_status varchar(64) NOT NULL,
+  address_owner varchar(64) NOT NULL default '0',
+  payer_email varchar(96) NOT NULL,
+  ebay_address_id varchar(96) default NULL,
+  payer_id varchar(32) NOT NULL,
+  payer_status varchar(32) NOT NULL,
+  payment_date varchar(32) NOT NULL,
+  business varchar(32) NOT NULL,
+  receiver_email varchar(96) NOT NULL,
+  receiver_id varchar(32) NOT NULL,
+  paypal_address_id varchar(64) NOT NULL,
+  txn_id varchar(17) NOT NULL,
+  notify_version varchar(17) NOT NULL,
+  verify_sign varchar(64) NOT NULL,
+  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (paypal_ipn_id,txn_id),
+  KEY idx_paypal_ipn_paypal_ipn_id (paypal_ipn_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS products;
+CREATE TABLE products (
+  products_id int(11) NOT NULL auto_increment,
+  products_quantity int(4) NOT NULL default '0',
+  products_model varchar(25) default NULL,
+  products_image varchar(64) default NULL,
+  products_price decimal(15,4) NOT NULL default '0.0000',
+  products_date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  products_last_modified datetime default NULL,
+  products_date_available datetime default NULL,
+  products_weight decimal(5,2) NOT NULL default '0.00',
+  products_status tinyint(1) NOT NULL default '0',
+  products_tax_class_id int(11) NOT NULL default '0',
+  manufacturers_id int(11) default NULL,
+  products_ordered int(11) NOT NULL default '0',
+  products_ship_price decimal(15,4) NOT NULL default '0.0000',
+  products_length decimal(6,2) NOT NULL default '12.00',
+  products_width decimal(6,2) NOT NULL default '12.00',
+  products_height decimal(6,2) NOT NULL default '12.00',
+  products_ready_to_ship int(1) NOT NULL default '0',
+  PRIMARY KEY  (products_id),
+  KEY idx_products_date_added (products_date_added),
+  KEY idx_products_model (products_model)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS products_attributes;
+CREATE TABLE products_attributes (
+  products_attributes_id int(11) NOT NULL auto_increment,
+  products_id int(11) NOT NULL default '0',
+  options_id int(11) NOT NULL default '0',
+  options_values_id int(11) NOT NULL default '0',
+  options_values_price decimal(15,4) NOT NULL default '0.0000',
+  price_prefix char(1) NOT NULL,
+  PRIMARY KEY  (products_attributes_id),
+  KEY idx_products_attributes_products_id (products_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS products_attributes_download;
+CREATE TABLE products_attributes_download (
+  products_attributes_id int(11) NOT NULL default '0',
+  products_attributes_filename varchar(255) NOT NULL,
+  products_attributes_maxdays int(2) default '0',
+  products_attributes_maxcount int(2) default '0',
+  PRIMARY KEY  (products_attributes_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS products_description;
+CREATE TABLE products_description (
+  products_id int(11) NOT NULL auto_increment,
+  language_id int(11) NOT NULL default '1',
+  products_name varchar(64) NOT NULL,
+  products_description text,
+  products_url varchar(255) default NULL,
+  products_viewed int(5) default '0',
+  PRIMARY KEY  (products_id,language_id),
+  KEY products_name (products_name)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS products_groups;
+CREATE TABLE products_groups (
+  customers_group_id int(11) NOT NULL default '0',
+  customers_group_price decimal(15,4) NOT NULL default '0.0000',
+  products_id int(11) NOT NULL default '0',
+  products_price decimal(15,4) NOT NULL default '0.0000'
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS products_notifications;
+CREATE TABLE products_notifications (
+  products_id int(11) NOT NULL default '0',
+  customers_id int(11) NOT NULL default '0',
+  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (products_id,customers_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS products_options;
+CREATE TABLE products_options (
+  products_options_id int(11) NOT NULL default '0',
+  language_id int(11) NOT NULL default '1',
+  products_options_name varchar(32) NOT NULL,
+  products_options_track_stock tinyint(4) NOT NULL default '0',
+  products_options_type int(5) NOT NULL default '0',
+  products_options_length smallint(2) NOT NULL default '32',
+  products_options_comment varchar(32) default NULL,
+  PRIMARY KEY  (products_options_id,language_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS products_options_values;
+CREATE TABLE products_options_values (
+  products_options_values_id int(11) NOT NULL default '0',
+  language_id int(11) NOT NULL default '1',
+  products_options_values_name varchar(64) NOT NULL,
+  PRIMARY KEY  (products_options_values_id,language_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS products_options_values_to_products_options;
+CREATE TABLE products_options_values_to_products_options (
+  products_options_values_to_products_options_id int(11) NOT NULL auto_increment,
+  products_options_id int(11) NOT NULL default '0',
+  products_options_values_id int(11) NOT NULL default '0',
+  PRIMARY KEY  (products_options_values_to_products_options_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS products_stock;
+CREATE TABLE products_stock (
+  products_stock_id int(11) NOT NULL auto_increment,
+  products_id int(11) NOT NULL default '0',
+  products_stock_attributes varchar(255) NOT NULL,
+  products_stock_quantity int(11) NOT NULL default '0',
+  PRIMARY KEY  (products_stock_id),
+  UNIQUE KEY idx_products_stock_attributes (products_id,products_stock_attributes)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS products_to_categories;
+CREATE TABLE products_to_categories (
+  products_id int(11) NOT NULL default '0',
+  categories_id int(11) NOT NULL default '0',
+  PRIMARY KEY  (products_id,categories_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS products_xsell;
+CREATE TABLE products_xsell (
+  ID int(10) NOT NULL auto_increment,
+  products_id int(10) unsigned NOT NULL default '1',
+  xsell_id int(10) unsigned NOT NULL default '1',
+  sort_order int(10) unsigned NOT NULL default '1',
+  PRIMARY KEY  (ID)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS reviews;
+CREATE TABLE reviews (
+  reviews_id int(11) NOT NULL auto_increment,
+  products_id int(11) NOT NULL default '0',
+  customers_id int(11) default NULL,
+  customers_name varchar(64) NOT NULL,
+  reviews_rating int(1) default NULL,
+  date_added datetime default NULL,
+  last_modified datetime default NULL,
+  reviews_read int(5) NOT NULL default '0',
+  PRIMARY KEY  (reviews_id),
+  KEY idx_reviews_products_id (products_id),
+  KEY idx_reviews_customers_id (customers_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS reviews_description;
+CREATE TABLE reviews_description (
+  reviews_id int(11) NOT NULL default '0',
+  languages_id int(11) NOT NULL default '0',
+  reviews_text text NOT NULL,
+  PRIMARY KEY  (reviews_id,languages_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS scart;
+CREATE TABLE scart (
+  scartid int(11) NOT NULL auto_increment,
+  customers_id int(11) NOT NULL default '0',
+  dateadded varchar(8) NOT NULL,
+  PRIMARY KEY  (scartid)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS searchword_swap;
+CREATE TABLE searchword_swap (
+  sws_id mediumint(11) NOT NULL auto_increment,
+  sws_word varchar(100) NOT NULL,
+  sws_replacement varchar(100) NOT NULL,
+  PRIMARY KEY  (sws_id)
+) TYPE=MyISAM;
+
+DROP TABLE IF EXISTS search_queries;
+CREATE TABLE search_queries (
+  search_id int(11) NOT NULL auto_increment,
+  search_text tinytext,
+  PRIMARY KEY  (search_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS search_queries_sorted;
+CREATE TABLE search_queries_sorted (
+  search_id smallint(6) NOT NULL auto_increment,
+  search_text tinytext NOT NULL,
+  search_count int(11) NOT NULL default '0',
+  PRIMARY KEY  (search_id)
+) TYPE=MyISAM;
+
+
+
+DROP TABLE IF EXISTS sessions;
+CREATE TABLE sessions (
+  sesskey varchar(32) NOT NULL,
+  expiry int(11) unsigned NOT NULL default '0',
+  `value` text NOT NULL,
+  PRIMARY KEY  (sesskey)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS shipping_manifest;
+CREATE TABLE shipping_manifest (
+  delivery_id int(5) NOT NULL auto_increment,
+  orders_id int(6) NOT NULL default '0',
+  delivery_name varchar(128) NOT NULL,
+  delivery_company varchar(128) NOT NULL,
+  delivery_address_1 varchar(128) NOT NULL,
+  delivery_address_2 varchar(128) NOT NULL,
+  delivery_city varchar(64) NOT NULL,
+  delivery_state char(2) NOT NULL,
+  delivery_postcode varchar(10) NOT NULL,
+  delivery_phone varchar(10) NOT NULL,
+  package_weight char(3) NOT NULL,
+  package_value varchar(4) NOT NULL,
+  oversized int(1) NOT NULL default '0',
+  pickup_date date NOT NULL default '0000-00-00',
+  shipping_type varchar(64) NOT NULL,
+  residential char(1) NOT NULL,
+  cod int(1) NOT NULL default '0',
+  tracking_num varchar(20) NOT NULL,
+  multiple int(3) NOT NULL default '0',
+  PRIMARY KEY  (delivery_id),
+  UNIQUE KEY tracking_num (tracking_num)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS specials;
+CREATE TABLE specials (
+  specials_id int(11) NOT NULL auto_increment,
+  products_id int(11) NOT NULL default '0',
+  specials_new_products_price decimal(15,4) NOT NULL default '0.0000',
+  specials_date_added datetime default NULL,
+  specials_last_modified datetime default NULL,
+  expires_date datetime default NULL,
+  date_status_change datetime default NULL,
+  `status` int(1) NOT NULL default '1',
+  customers_group_id int(11) NOT NULL default '0',
+  PRIMARY KEY  (specials_id),
+  KEY idx_specials_products_id (products_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS specials_retail_prices;
+CREATE TABLE specials_retail_prices (
+  products_id int(11) NOT NULL default '0',
+  specials_new_products_price decimal(15,4) NOT NULL default '0.0000',
+  `status` tinyint(4) default NULL,
+  customers_group_id smallint(6) default NULL,
+  PRIMARY KEY  (products_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS tax_class;
+CREATE TABLE tax_class (
+  tax_class_id int(11) NOT NULL auto_increment,
+  tax_class_title varchar(32) NOT NULL,
+  tax_class_description varchar(255) NOT NULL,
+  last_modified datetime default NULL,
+  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (tax_class_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS tax_rates;
+CREATE TABLE tax_rates (
+  tax_rates_id int(11) NOT NULL auto_increment,
+  tax_zone_id int(11) NOT NULL default '0',
+  tax_class_id int(11) NOT NULL default '0',
+  tax_priority int(5) default '1',
+  tax_rate decimal(7,4) NOT NULL default '0.0000',
+  tax_description varchar(255) NOT NULL,
+  last_modified datetime default NULL,
+  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (tax_rates_id)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS theme_configuration;
+CREATE TABLE theme_configuration (
+  configuration_id int(11) NOT NULL auto_increment,
+  configuration_title varchar(64) NOT NULL,
+  configuration_key varchar(64) NOT NULL default 'BOX_HEADING_',
+  configuration_value varchar(255) NOT NULL,
+  configuration_description varchar(255) NOT NULL,
+  configuration_group_id int(11) NOT NULL default '1',
+  configuration_column varchar(64) NOT NULL default 'left',
+  location int(5) NOT NULL default '0',
+  sort_order int(5) default NULL,
+  last_modified datetime default NULL,
+  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  box_heading varchar(64) NOT NULL,
+  PRIMARY KEY  (configuration_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS topics;
+CREATE TABLE topics (
+  topics_id int(11) NOT NULL auto_increment,
+  topics_image varchar(64) default NULL,
+  parent_id int(11) NOT NULL default '0',
+  sort_order int(3) default NULL,
+  date_added datetime default NULL,
+  last_modified datetime default NULL,
+  PRIMARY KEY  (topics_id),
+  KEY idx_topics_parent_id (parent_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS topics_description;
+CREATE TABLE topics_description (
+  topics_id int(11) NOT NULL default '0',
+  language_id int(11) NOT NULL default '1',
+  topics_name varchar(32) NOT NULL,
+  topics_heading_title varchar(64) default NULL,
+  topics_description text,
+  PRIMARY KEY  (topics_id,language_id),
+  KEY idx_topics_name (topics_name)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS whos_online;
+CREATE TABLE whos_online (
+  customer_id int(11) default NULL,
+  full_name varchar(64) NOT NULL,
+  session_id varchar(128) NOT NULL,
+  ip_address varchar(15) NOT NULL,
+  time_entry varchar(14) NOT NULL,
+  time_last_click varchar(14) NOT NULL,
+  last_page_url text NOT NULL
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS zones;
+CREATE TABLE zones (
+  zone_id int(11) NOT NULL auto_increment,
+  zone_country_id int(11) NOT NULL default '0',
+  zone_code varchar(32) NOT NULL,
+  zone_name varchar(32) NOT NULL,
+  PRIMARY KEY  (zone_id),
+  KEY idx_zones_to_geo_zones_country_id (zone_country_id)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS zones_to_geo_zones;
+CREATE TABLE zones_to_geo_zones (
+  association_id int(11) NOT NULL auto_increment,
+  zone_country_id int(11) NOT NULL default '0',
+  zone_id int(11) default NULL,
+  geo_zone_id int(11) default NULL,
+  last_modified datetime default NULL,
+  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (association_id)
+) TYPE=MyISAM ;
+
+
+INSERT INTO address_format (address_format_id, address_format, address_summary) VALUES(1, '$firstname $lastname$cr$streets$cr$city, $postcode$cr$statecomma$country', '$city / $country');
+INSERT INTO address_format (address_format_id, address_format, address_summary) VALUES(2, '$firstname $lastname$cr$streets$cr$city, $state    $postcode$cr$country', '$city, $state / $country');
+INSERT INTO address_format (address_format_id, address_format, address_summary) VALUES(3, '$firstname $lastname$cr$streets$cr$city$cr$postcode - $statecomma$country', '$state / $country');
+INSERT INTO address_format (address_format_id, address_format, address_summary) VALUES(4, '$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country', '$postcode / $country');
+INSERT INTO address_format (address_format_id, address_format, address_summary) VALUES(5, '$firstname $lastname$cr$streets$cr$postcode $city$cr$country', '$city / $country');
+
+
+INSERT INTO admin (admin_id, admin_groups_id, admin_firstname, admin_lastname, admin_email_address, admin_password, admin_created, admin_modified, admin_logdate, admin_lognum) VALUES(1, 1, 'Default', 'Admin', 'admin@localhost.com', '05cdeb1aeaffec1c7ae3f12c570a658c:81', '2003-07-17 11:35:03', '2003-08-02 19:43:11', '2008-05-03 22:48:41', 28);
+
+
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(1, 'administrator.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(2, 'configuration.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(3, 'catalog.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(4, 'modules.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(5, 'customers.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(6, 'taxes.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(7, 'localization.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(8, 'reports.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(9, 'tools.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(10, 'admin_members.php', 0, 1, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(11, 'admin_files.php', 0, 1, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(12, 'configuration.php', 0, 2, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(13, 'categories.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(14, 'products_attributes.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(15, 'manufacturers.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(16, 'reviews.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(17, 'specials.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(18, 'products_expected.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(19, 'modules.php', 0, 4, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(20, 'customers.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(79, 'orders.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(22, 'countries.php', 0, 6, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(23, 'zones.php', 0, 6, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(24, 'geo_zones.php', 0, 6, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(25, 'tax_classes.php', 0, 6, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(26, 'tax_rates.php', 0, 6, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(27, 'currencies.php', 0, 7, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(28, 'languages.php', 0, 7, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(29, 'orders_status.php', 0, 7, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(30, 'stats_products_viewed.php', 0, 8, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(31, 'stats_products_purchased.php', 0, 8, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(32, 'stats_customers.php', 0, 8, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(33, 'backup.php', 0, 9, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(34, 'banner_manager.php', 0, 9, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(35, 'cache.php', 0, 9, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(36, 'define_language.php', 0, 9, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(37, 'file_manager.php', 0, 9, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(38, 'mail.php', 0, 9, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(39, 'newsletters.php', 0, 9, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(40, 'server_info.php', 0, 9, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(41, 'whos_online.php', 0, 9, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(42, 'banner_statistics.php', 0, 9, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(43, 'affiliate.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(44, 'affiliate_affiliates.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(45, 'affiliate_clicks.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(46, 'affiliate_banners.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(47, 'affiliate_contact.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(48, 'affiliate_invoice.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(49, 'affiliate_payment.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(50, 'affiliate_popup_image.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(51, 'affiliate_sales.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(52, 'affiliate_statistics.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(53, 'affiliate_summary.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(54, 'gv_admin.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(55, 'coupon_admin.php', 0, 54, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(56, 'gv_queue.php', 0, 54, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(57, 'gv_mail.php', 0, 54, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(58, 'gv_sent.php', 0, 54, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(59, 'paypalipn.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(60, 'paypalipn_tests.php', 0, 59, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(61, 'paypalipn_txn.php', 0, 59, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(62, 'coupon_restrict.php', 0, 54, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(64, 'xsell_products.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(65, 'easypopulate.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(68, 'define_mainpage.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(70, 'edit_orders.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(71, 'validproducts.php', 0, 54, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(72, 'validcategories.php', 0, 54, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(73, 'listcategories.php', 0, 54, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(74, 'listproducts.php', 0, 54, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(75, 'new_attributes.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(80, 'paypal_ipn_order.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(78, 'paypal_ipn.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(81, 'articles.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(82, 'article_reviews.php', 0, 81, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(83, 'articles.php', 0, 81, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(84, 'articles_config.php', 0, 81, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(85, 'articles_xsell.php', 0, 81, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(86, 'authors.php', 0, 81, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(87, 'recover_cart_sales.php', 0, 8, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(88, 'stats_recover_cart_sales.php', 0, 8, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(89, 'stats_monthly_sales.php', 0, 8, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(90, 'batch_print.php', 0, 9, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(91, 'stock.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(92, 'stats_low_stock_attrib.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(93, 'info_boxes.php', 1, 0, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(94, 'infobox_configuration.php', 0, 93, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(95, 'popup_infobox_help.php', 0, 93, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(98, 'customers_groups.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(99, 'define_conditions.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(100, 'define_privacy.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(101, 'define_shipping.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(102, 'xsell.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(103, 'create_account.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(104, 'create_account_process.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(105, 'create_account_success.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(106, 'create_order.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(107, 'create_order_process.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(108, 'easypopulate_functions.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(109, 'new_attributes_change.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(110, 'new_attributes_config.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(111, 'new_attributes_functions.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(112, 'new_attributes_include.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(113, 'new_attributes_select.php', 0, 3, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(114, 'ship_fedex.php', 0, 8, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(115, 'fedex_popup.php', 0, 8, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(116, 'shipping_manifest.php', 0, 8, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(117, 'track_fedex.php', 0, 8, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(118, 'paypal_info.php', 0, 1, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(119, 'affiliate_info.php', 0, 1, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(120, 'domain_info.php', 0, 1, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(121, 'hosting_info.php', 0, 1, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(122, 'merchant_info.php', 0, 1, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(123, 'ssl_info.php', 0, 1, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(124, 'affiliate_news.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(125, 'affiliate_newsletters.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(126, 'affiliate_validcats.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(127, 'affiliate_validproducts.php', 0, 43, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(128, 'edit_orders_add_product.php', 0, 5, '1');
+INSERT INTO admin_files (admin_files_id, admin_files_name, admin_files_is_boxes, admin_files_to_boxes, admin_groups_id) VALUES(129, 'edit_orders_ajax.php', 0, 5, '1');
+
+
+INSERT INTO admin_groups (admin_groups_id, admin_groups_name) VALUES(1, 'Top Administrator');
+INSERT INTO admin_groups (admin_groups_id, admin_groups_name) VALUES(2, 'Marketing');
+
+
+INSERT INTO affiliate_payment_status (affiliate_payment_status_id, affiliate_language_id, affiliate_payment_status_name) VALUES(0, 1, 'Pending');
+INSERT INTO affiliate_payment_status (affiliate_payment_status_id, affiliate_language_id, affiliate_payment_status_name) VALUES(1, 1, 'Paid');
 
 
 INSERT INTO configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES(1, 'Store Name', 'STORE_NAME', 'Store Name', 'The name of my store', 1, 1, '2004-05-05 08:40:17', '2003-07-17 10:29:22', NULL, NULL);
@@ -945,16 +1809,6 @@ INSERT INTO configuration (configuration_id, configuration_title, configuration_
 INSERT INTO configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES(1443, 'Sort order of display.', 'MODULE_PAYMENT_GOOGLECHECKOUT_SORT_ORDER', '5', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2008-05-03 19:59:56', NULL, NULL);
 
 
-DROP TABLE IF EXISTS configuration_group;
-CREATE TABLE configuration_group (
-  configuration_group_id int(11) NOT NULL auto_increment,
-  configuration_group_title varchar(64) NOT NULL,
-  configuration_group_description varchar(255) NOT NULL,
-  sort_order int(5) default NULL,
-  visible int(1) default '1',
-  PRIMARY KEY  (configuration_group_id)
-) TYPE=MyISAM ;
-
 
 INSERT INTO configuration_group (configuration_group_id, configuration_group_title, configuration_group_description, sort_order, visible) VALUES(1, 'My Store', 'General information about my store', 1, 1);
 INSERT INTO configuration_group (configuration_group_id, configuration_group_title, configuration_group_description, sort_order, visible) VALUES(2, 'Minimum Values', 'The minimum values for functions / data', 2, 1);
@@ -982,30 +1836,6 @@ INSERT INTO configuration_group (configuration_group_id, configuration_group_tit
 INSERT INTO configuration_group (configuration_group_id, configuration_group_title, configuration_group_description, sort_order, visible) VALUES(888002, 'SEO URLs', 'Options for Ultimate SEO URLs by Chemo', 902, 1);
 INSERT INTO configuration_group (configuration_group_id, configuration_group_title, configuration_group_description, sort_order, visible) VALUES(12954, 'Wish List Settings', 'Settings for your Wish List', 25, 1);
 INSERT INTO configuration_group (configuration_group_id, configuration_group_title, configuration_group_description, sort_order, visible) VALUES(888003, 'Order Editor', 'Configuration options for Order Editor', 903, 1);
-DROP TABLE IF EXISTS counter;
-CREATE TABLE counter (
-  startdate char(8) default NULL,
-  counter int(12) default NULL
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS counter_history;
-CREATE TABLE counter_history (
-  `month` char(8) default NULL,
-  counter int(12) default NULL
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS countries;
-CREATE TABLE countries (
-  countries_id int(11) NOT NULL auto_increment,
-  countries_name varchar(64) NOT NULL,
-  countries_iso_code_2 char(2) NOT NULL,
-  countries_iso_code_3 char(3) NOT NULL,
-  address_format_id int(11) NOT NULL default '0',
-  PRIMARY KEY  (countries_id),
-  KEY IDX_COUNTRIES_NAME (countries_name)
-) TYPE=MyISAM ;
 
 
 INSERT INTO countries (countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id) VALUES(1, 'Afghanistan', 'AF', 'AFG', 1);
@@ -1247,383 +2077,19 @@ INSERT INTO countries (countries_id, countries_name, countries_iso_code_2, count
 INSERT INTO countries (countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id) VALUES(237, 'Zaire', 'ZR', 'ZAR', 1);
 INSERT INTO countries (countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id) VALUES(238, 'Zambia', 'ZM', 'ZMB', 1);
 INSERT INTO countries (countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id) VALUES(239, 'Zimbabwe', 'ZW', 'ZWE', 1);
-DROP TABLE IF EXISTS coupons;
-CREATE TABLE coupons (
-  coupon_id int(11) NOT NULL auto_increment,
-  coupon_type char(1) NOT NULL default 'F',
-  coupon_code varchar(32) NOT NULL,
-  coupon_amount decimal(8,4) NOT NULL default '0.0000',
-  coupon_minimum_order decimal(8,4) NOT NULL default '0.0000',
-  coupon_start_date datetime NOT NULL default '0000-00-00 00:00:00',
-  coupon_expire_date datetime NOT NULL default '0000-00-00 00:00:00',
-  uses_per_coupon int(5) NOT NULL default '1',
-  uses_per_user int(5) NOT NULL default '0',
-  restrict_to_products varchar(255) default NULL,
-  restrict_to_categories varchar(255) default NULL,
-  restrict_to_customers text,
-  coupon_active char(1) NOT NULL default 'Y',
-  date_created datetime NOT NULL default '0000-00-00 00:00:00',
-  date_modified datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (coupon_id)
-) TYPE=MyISAM;
-
-DROP TABLE IF EXISTS coupons_description;
-CREATE TABLE coupons_description (
-  coupon_id int(11) NOT NULL default '0',
-  language_id int(11) NOT NULL default '0',
-  coupon_name varchar(32) NOT NULL,
-  coupon_description text,
-  KEY coupon_id (coupon_id)
-) TYPE=MyISAM;
-DROP TABLE IF EXISTS coupon_email_track;
-CREATE TABLE coupon_email_track (
-  unique_id int(11) NOT NULL auto_increment,
-  coupon_id int(11) NOT NULL default '0',
-  customer_id_sent int(11) NOT NULL default '0',
-  sent_firstname varchar(32) default NULL,
-  sent_lastname varchar(32) default NULL,
-  emailed_to varchar(32) default NULL,
-  date_sent datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (unique_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS coupon_gv_customer;
-CREATE TABLE coupon_gv_customer (
-  customer_id int(5) NOT NULL default '0',
-  amount decimal(8,4) NOT NULL default '0.0000',
-  PRIMARY KEY  (customer_id),
-  KEY customer_id (customer_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS coupon_gv_queue;
-CREATE TABLE coupon_gv_queue (
-  unique_id int(5) NOT NULL auto_increment,
-  customer_id int(5) NOT NULL default '0',
-  order_id int(5) NOT NULL default '0',
-  amount decimal(8,4) NOT NULL default '0.0000',
-  date_created datetime NOT NULL default '0000-00-00 00:00:00',
-  ipaddr varchar(32) NOT NULL,
-  release_flag char(1) NOT NULL default 'N',
-  PRIMARY KEY  (unique_id),
-  KEY uid (unique_id,customer_id,order_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS coupon_redeem_track;
-CREATE TABLE coupon_redeem_track (
-  unique_id int(11) NOT NULL auto_increment,
-  coupon_id int(11) NOT NULL default '0',
-  customer_id int(11) NOT NULL default '0',
-  redeem_date datetime NOT NULL default '0000-00-00 00:00:00',
-  redeem_ip varchar(32) NOT NULL,
-  order_id int(11) NOT NULL default '0',
-  PRIMARY KEY  (unique_id)
-) TYPE=MyISAM;
-
-DROP TABLE IF EXISTS currencies;
-CREATE TABLE currencies (
-  currencies_id int(11) NOT NULL auto_increment,
-  title varchar(32) NOT NULL,
-  `code` char(3) NOT NULL,
-  symbol_left varchar(12) default NULL,
-  symbol_right varchar(12) default NULL,
-  decimal_point char(1) default NULL,
-  thousands_point char(1) default NULL,
-  decimal_places char(1) default NULL,
-  `value` float(13,8) default NULL,
-  last_updated datetime default NULL,
-  PRIMARY KEY  (currencies_id),
-  KEY idx_currencies_code (`code`)
-) TYPE=MyISAM ;
 
 
 insert into currencies (currencies_id, title, code, symbol_left, symbol_right, decimal_point, thousands_point, decimal_places, value, last_updated) values ('1', 'US Dollar', 'USD', '$', '', '.', ',', '2', '1.00000000', '2005-09-18 11:09:20');
 insert into currencies (currencies_id, title, code, symbol_left, symbol_right, decimal_point, thousands_point, decimal_places, value, last_updated) values ('2', 'Euro', 'EUR', '', 'EUR', '.', ',', '2', '0.81730002', '2005-09-18 11:09:20');
-DROP TABLE IF EXISTS customers;
-CREATE TABLE customers (
-  customers_id int(11) NOT NULL auto_increment,
-  purchased_without_account tinyint(1) unsigned NOT NULL default '0',
-  customers_gender char(1) NOT NULL,
-  customers_firstname varchar(32) NOT NULL,
-  customers_lastname varchar(32) NOT NULL,
-  customers_dob datetime NOT NULL default '0000-00-00 00:00:00',
-  customers_email_address varchar(96) NOT NULL,
-  customers_default_address_id int(11) NOT NULL default '0',
-  customers_telephone varchar(32) NOT NULL,
-  customers_fax varchar(32) default NULL,
-  customers_password varchar(40) default NULL,
-  customers_newsletter char(1) default NULL,
-  customers_login varchar(96) default NULL,
-  customers_group_name varchar(27) NOT NULL default 'Retail',
-  customers_group_id int(11) NOT NULL default '0',
-  customers_group_ra enum('0','1') NOT NULL default '0',
-  customers_payment_allowed varchar(255) NOT NULL,
-  customers_shipment_allowed varchar(255) NOT NULL,
-  PRIMARY KEY  (customers_id),
-  UNIQUE KEY idx_customers_login (customers_login),
-  KEY purchased_without_account (purchased_without_account),
-  KEY idx_customers_email_address (customers_email_address)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS customers_basket;
-CREATE TABLE customers_basket (
-  customers_basket_id int(11) NOT NULL auto_increment,
-  customers_id int(11) NOT NULL default '0',
-  products_id tinytext NOT NULL,
-  customers_basket_quantity int(2) NOT NULL default '0',
-  final_price decimal(15,4) NOT NULL default '0.0000',
-  customers_basket_date_added varchar(8) default NULL,
-  PRIMARY KEY  (customers_basket_id),
-  KEY idx_customers_basket_customers_id (customers_id)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS customers_basket_attributes;
-CREATE TABLE customers_basket_attributes (
-  customers_basket_attributes_id int(11) NOT NULL auto_increment,
-  customers_id int(11) NOT NULL default '0',
-  products_id tinytext NOT NULL,
-  products_options_id int(11) NOT NULL default '0',
-  products_options_value_id int(11) NOT NULL default '0',
-  products_options_value_text varchar(32) default NULL,
-  PRIMARY KEY  (customers_basket_attributes_id),
-  KEY idx_customers_basket_att_customers_id (customers_id)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS customers_groups;
-CREATE TABLE customers_groups (
-  customers_group_id smallint(5) unsigned NOT NULL default '0',
-  customers_group_name varchar(32) NOT NULL,
-  customers_group_show_tax enum('1','0') NOT NULL default '1',
-  customers_group_tax_exempt enum('0','1') NOT NULL default '0',
-  group_payment_allowed varchar(255) NOT NULL,
-  group_shipment_allowed varchar(255) NOT NULL,
-  PRIMARY KEY  (customers_group_id)
-) TYPE=MyISAM;
 
 
 insert into customers_groups (customers_group_id, customers_group_name, customers_group_show_tax, customers_group_tax_exempt, group_payment_allowed, group_shipment_allowed) values ('0', 'Retail', '1', '0', '', '');
 insert into customers_groups (customers_group_id, customers_group_name, customers_group_show_tax, customers_group_tax_exempt, group_payment_allowed, group_shipment_allowed) values ('1', 'Wholesale', '0', '0', '', '');
-DROP TABLE IF EXISTS customers_info;
-CREATE TABLE customers_info (
-  customers_info_id int(11) NOT NULL default '0',
-  customers_info_date_of_last_logon datetime default NULL,
-  customers_info_number_of_logons int(5) default NULL,
-  customers_info_date_account_created datetime default NULL,
-  customers_info_date_account_last_modified datetime default NULL,
-  global_product_notifications int(1) default '0',
-  PRIMARY KEY  (customers_info_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS customers_wishlist;
-CREATE TABLE customers_wishlist (
-  products_id tinytext NOT NULL,
-  customers_id int(13) NOT NULL default '0'
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS customers_wishlist_attributes;
-CREATE TABLE customers_wishlist_attributes (
-  customers_wishlist_attributes_id int(11) NOT NULL auto_increment,
-  customers_id int(11) NOT NULL default '0',
-  products_id tinytext NOT NULL,
-  products_options_id int(11) NOT NULL default '0',
-  products_options_value_id int(11) NOT NULL default '0',
-  PRIMARY KEY  (customers_wishlist_attributes_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS geo_zones;
-CREATE TABLE geo_zones (
-  geo_zone_id int(11) NOT NULL auto_increment,
-  geo_zone_name varchar(32) NOT NULL,
-  geo_zone_description varchar(255) NOT NULL,
-  last_modified datetime default NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (geo_zone_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS google_checkout;
-CREATE TABLE google_checkout (
-  customers_id int(11) default NULL,
-  buyer_id bigint(20) default NULL
-) TYPE=MyISAM;
-
-DROP TABLE IF EXISTS google_orders;
-CREATE TABLE google_orders (
-  orders_id int(11) default NULL,
-  google_order_number bigint(20) default NULL,
-  order_amount decimal(15,4) default NULL
-) TYPE=MyISAM;
-
-DROP TABLE IF EXISTS languages;
-CREATE TABLE languages (
-  languages_id int(11) NOT NULL auto_increment,
-  `name` varchar(32) NOT NULL,
-  `code` char(2) NOT NULL,
-  image varchar(64) default NULL,
-  `directory` varchar(32) default NULL,
-  sort_order int(3) default NULL,
-  PRIMARY KEY  (languages_id),
-  KEY IDX_LANGUAGES_NAME (`name`)
-) TYPE=MyISAM ;
 
 
 INSERT INTO languages (languages_id, name, code, image, directory, sort_order) VALUES(1, 'English', 'en', 'icon.gif', 'english', 1);
 INSERT INTO languages (languages_id, name, code, image, directory, sort_order) VALUES(2, 'Deutsch', 'de', 'icon.gif', 'german', 2);
 INSERT INTO languages (languages_id, name, code, image, directory, sort_order) VALUES(3, 'Espanol', 'es', 'icon.gif', 'espanol', 3);
-DROP TABLE IF EXISTS manufacturers;
-CREATE TABLE manufacturers (
-  manufacturers_id int(11) NOT NULL auto_increment,
-  manufacturers_name varchar(32) NOT NULL,
-  manufacturers_image varchar(64) default NULL,
-  date_added datetime default NULL,
-  last_modified datetime default NULL,
-  PRIMARY KEY  (manufacturers_id),
-  KEY IDX_MANUFACTURERS_NAME (manufacturers_name)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS manufacturers_info;
-CREATE TABLE manufacturers_info (
-  manufacturers_id int(11) NOT NULL default '0',
-  languages_id int(11) NOT NULL default '0',
-  manufacturers_url varchar(255) NOT NULL,
-  url_clicked int(5) NOT NULL default '0',
-  date_last_click datetime default NULL,
-  PRIMARY KEY  (manufacturers_id,languages_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS newsletters;
-CREATE TABLE newsletters (
-  newsletters_id int(11) NOT NULL auto_increment,
-  title varchar(255) NOT NULL,
-  content text NOT NULL,
-  module varchar(255) NOT NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  date_sent datetime default NULL,
-  `status` int(1) default NULL,
-  locked int(1) default '0',
-  PRIMARY KEY  (newsletters_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS orders;
-CREATE TABLE orders (
-  orders_id int(11) NOT NULL auto_increment,
-  customers_id int(11) NOT NULL default '0',
-  customers_name varchar(64) NOT NULL,
-  customers_company varchar(32) default NULL,
-  customers_street_address varchar(64) NOT NULL,
-  customers_suburb varchar(32) default NULL,
-  customers_city varchar(32) NOT NULL,
-  customers_postcode varchar(10) NOT NULL,
-  customers_state varchar(32) default NULL,
-  customers_country varchar(32) NOT NULL,
-  customers_telephone varchar(32) NOT NULL,
-  customers_email_address varchar(96) NOT NULL,
-  customers_address_format_id int(5) NOT NULL default '0',
-  customers_dummy_account tinyint(3) unsigned NOT NULL,
-  delivery_name varchar(64) NOT NULL,
-  delivery_company varchar(32) default NULL,
-  delivery_street_address varchar(64) NOT NULL,
-  delivery_suburb varchar(32) default NULL,
-  delivery_city varchar(32) NOT NULL,
-  delivery_postcode varchar(10) NOT NULL,
-  delivery_state varchar(32) default NULL,
-  delivery_country varchar(32) NOT NULL,
-  delivery_address_format_id int(5) NOT NULL default '0',
-  billing_name varchar(64) NOT NULL,
-  billing_company varchar(32) default NULL,
-  billing_street_address varchar(64) NOT NULL,
-  billing_suburb varchar(32) default NULL,
-  billing_city varchar(32) NOT NULL,
-  billing_postcode varchar(10) NOT NULL,
-  billing_state varchar(32) default NULL,
-  billing_country varchar(32) NOT NULL,
-  billing_address_format_id int(5) NOT NULL default '0',
-  payment_method varchar(255) NOT NULL,
-  cc_type varchar(20) default NULL,
-  cc_owner varchar(64) default NULL,
-  cc_number varchar(32) default NULL,
-  cc_expires varchar(4) default NULL,
-  last_modified datetime default NULL,
-  date_purchased datetime default NULL,
-  orders_status int(5) NOT NULL default '0',
-  orders_date_finished datetime default NULL,
-  currency char(3) default NULL,
-  currency_value decimal(14,6) default NULL,
-  paypal_ipn_id int(11) NOT NULL default '0',
-  fedex_tracking varchar(20) NOT NULL,
-  purchased_without_account tinyint(1) unsigned NOT NULL default '0',
-  shipping_tax decimal(7,4) NOT NULL default '0.0000',
-  shipping_module varchar(255) default NULL,
-  PRIMARY KEY  (orders_id),
-  KEY idx_orders_customers_id (customers_id)
-) TYPE=MyISAM ;
-
-DROP TABLE IF EXISTS orders_products;
-CREATE TABLE orders_products (
-  orders_products_id int(11) NOT NULL auto_increment,
-  orders_id int(11) NOT NULL default '0',
-  products_id int(11) NOT NULL default '0',
-  products_model varchar(12) default NULL,
-  products_name varchar(64) NOT NULL,
-  products_price decimal(15,4) NOT NULL default '0.0000',
-  final_price decimal(15,4) NOT NULL default '0.0000',
-  products_tax decimal(7,4) NOT NULL default '0.0000',
-  products_quantity int(2) NOT NULL default '0',
-  products_stock_attributes varchar(255) default NULL,
-  PRIMARY KEY  (orders_products_id),
-  KEY idx_orders_products_orders_id (orders_id),
-  KEY idx_orders_products_products_id (products_id)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS orders_products_attributes;
-CREATE TABLE orders_products_attributes (
-  orders_products_attributes_id int(11) NOT NULL auto_increment,
-  orders_id int(11) NOT NULL default '0',
-  orders_products_id int(11) NOT NULL default '0',
-  products_options varchar(32) NOT NULL,
-  products_options_values varchar(32) NOT NULL,
-  options_values_price decimal(15,4) NOT NULL default '0.0000',
-  price_prefix char(1) NOT NULL,
-  PRIMARY KEY  (orders_products_attributes_id),
-  KEY idx_orders_products_att_orders_id (orders_id)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS orders_products_download;
-CREATE TABLE orders_products_download (
-  orders_products_download_id int(11) NOT NULL auto_increment,
-  orders_id int(11) NOT NULL default '0',
-  orders_products_id int(11) NOT NULL default '0',
-  orders_products_filename varchar(255) NOT NULL,
-  download_maxdays int(2) NOT NULL default '0',
-  download_count int(2) NOT NULL default '0',
-  PRIMARY KEY  (orders_products_download_id),
-  KEY idx_orders_products_download_orders_id (orders_id)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS orders_status;
-CREATE TABLE orders_status (
-  orders_status_id int(11) NOT NULL default '0',
-  language_id int(11) NOT NULL default '1',
-  orders_status_name varchar(32) NOT NULL,
-  public_flag int(11) default '1',
-  downloads_flag int(11) default '0',
-  PRIMARY KEY  (orders_status_id,language_id),
-  KEY idx_orders_status_name (orders_status_name)
-) TYPE=MyISAM;
 
 
 INSERT INTO orders_status (orders_status_id, language_id, orders_status_name, public_flag, downloads_flag) VALUES(1, 1, 'Pending', 1, 0);
@@ -1661,399 +2127,26 @@ INSERT INTO orders_status (orders_status_id, language_id, orders_status_name, pu
 INSERT INTO orders_status (orders_status_id, language_id, orders_status_name, public_flag, downloads_flag) VALUES(105, 1, 'Google Canceled', 1, 0);
 INSERT INTO orders_status (orders_status_id, language_id, orders_status_name, public_flag, downloads_flag) VALUES(105, 2, 'Google Canceled', 1, 0);
 INSERT INTO orders_status (orders_status_id, language_id, orders_status_name, public_flag, downloads_flag) VALUES(105, 3, 'Google Canceled', 1, 0);
-DROP TABLE IF EXISTS orders_status_history;
-CREATE TABLE orders_status_history (
-  orders_status_history_id int(11) NOT NULL auto_increment,
-  orders_id int(11) NOT NULL default '0',
-  orders_status_id int(5) NOT NULL default '0',
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  customer_notified int(1) default '0',
-  comments text,
-  PRIMARY KEY  (orders_status_history_id),
-  KEY idx_orders_status_history_orders_id (orders_id)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS orders_total;
-CREATE TABLE orders_total (
-  orders_total_id int(10) unsigned NOT NULL auto_increment,
-  orders_id int(11) NOT NULL default '0',
-  title varchar(255) NOT NULL,
-  `text` varchar(255) NOT NULL,
-  `value` decimal(15,4) NOT NULL default '0.0000',
-  class varchar(32) NOT NULL,
-  sort_order int(11) NOT NULL default '0',
-  PRIMARY KEY  (orders_total_id),
-  KEY idx_orders_total_orders_id (orders_id)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS packaging;
-CREATE TABLE packaging (
-  package_id int(11) NOT NULL auto_increment,
-  package_name varchar(64) NOT NULL,
-  package_description varchar(255) NOT NULL,
-  package_length decimal(6,2) NOT NULL default '5.00',
-  package_width decimal(6,2) NOT NULL default '5.00',
-  package_height decimal(6,2) NOT NULL default '5.00',
-  package_empty_weight decimal(6,2) NOT NULL default '0.00',
-  package_max_weight decimal(6,2) NOT NULL default '50.00',
-  package_cost int(5) NOT NULL default '0',
-  PRIMARY KEY  (package_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS paypal_ipn;
-CREATE TABLE paypal_ipn (
-  paypal_ipn_id int(10) unsigned NOT NULL auto_increment,
-  txn_type int(10) unsigned NOT NULL default '0',
-  reason_code int(11) default NULL,
-  payment_type int(11) NOT NULL default '0',
-  payment_status int(11) NOT NULL default '0',
-  pending_reason int(11) default NULL,
-  invoice varchar(64) default NULL,
-  mc_currency int(11) NOT NULL default '1',
-  first_name varchar(32) NOT NULL,
-  last_name varchar(32) NOT NULL,
-  payer_business_name varchar(32) default NULL,
-  address_name varchar(32) NOT NULL,
-  address_street varchar(64) NOT NULL,
-  address_city varchar(32) NOT NULL,
-  address_state varchar(32) NOT NULL,
-  address_zip varchar(64) NOT NULL,
-  address_country varchar(32) NOT NULL,
-  address_status varchar(64) NOT NULL,
-  address_owner varchar(64) NOT NULL default '0',
-  payer_email varchar(96) NOT NULL,
-  ebay_address_id varchar(96) default NULL,
-  payer_id varchar(32) NOT NULL,
-  payer_status varchar(32) NOT NULL,
-  payment_date varchar(32) NOT NULL,
-  business varchar(32) NOT NULL,
-  receiver_email varchar(96) NOT NULL,
-  receiver_id varchar(32) NOT NULL,
-  paypal_address_id varchar(64) NOT NULL,
-  txn_id varchar(17) NOT NULL,
-  notify_version varchar(17) NOT NULL,
-  verify_sign varchar(64) NOT NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (paypal_ipn_id,txn_id),
-  KEY idx_paypal_ipn_paypal_ipn_id (paypal_ipn_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS products;
-CREATE TABLE products (
-  products_id int(11) NOT NULL auto_increment,
-  products_quantity int(4) NOT NULL default '0',
-  products_model varchar(25) default NULL,
-  products_image varchar(64) default NULL,
-  products_price decimal(15,4) NOT NULL default '0.0000',
-  products_date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  products_last_modified datetime default NULL,
-  products_date_available datetime default NULL,
-  products_weight decimal(5,2) NOT NULL default '0.00',
-  products_status tinyint(1) NOT NULL default '0',
-  products_tax_class_id int(11) NOT NULL default '0',
-  manufacturers_id int(11) default NULL,
-  products_ordered int(11) NOT NULL default '0',
-  products_ship_price decimal(15,4) NOT NULL default '0.0000',
-  products_length decimal(6,2) NOT NULL default '12.00',
-  products_width decimal(6,2) NOT NULL default '12.00',
-  products_height decimal(6,2) NOT NULL default '12.00',
-  products_ready_to_ship int(1) NOT NULL default '0',
-  PRIMARY KEY  (products_id),
-  KEY idx_products_date_added (products_date_added),
-  KEY idx_products_model (products_model)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS products_attributes;
-CREATE TABLE products_attributes (
-  products_attributes_id int(11) NOT NULL auto_increment,
-  products_id int(11) NOT NULL default '0',
-  options_id int(11) NOT NULL default '0',
-  options_values_id int(11) NOT NULL default '0',
-  options_values_price decimal(15,4) NOT NULL default '0.0000',
-  price_prefix char(1) NOT NULL,
-  PRIMARY KEY  (products_attributes_id),
-  KEY idx_products_attributes_products_id (products_id)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS products_attributes_download;
-CREATE TABLE products_attributes_download (
-  products_attributes_id int(11) NOT NULL default '0',
-  products_attributes_filename varchar(255) NOT NULL,
-  products_attributes_maxdays int(2) default '0',
-  products_attributes_maxcount int(2) default '0',
-  PRIMARY KEY  (products_attributes_id)
-) TYPE=MyISAM;
 
 
 insert into products_attributes_download (products_attributes_id, products_attributes_filename, products_attributes_maxdays, products_attributes_maxcount) values ('11', 'Dhtml-coolmenu.zip', '7', '10');
-DROP TABLE IF EXISTS products_description;
-CREATE TABLE products_description (
-  products_id int(11) NOT NULL auto_increment,
-  language_id int(11) NOT NULL default '1',
-  products_name varchar(64) NOT NULL,
-  products_description text,
-  products_url varchar(255) default NULL,
-  products_viewed int(5) default '0',
-  PRIMARY KEY  (products_id,language_id),
-  KEY products_name (products_name)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS products_groups;
-CREATE TABLE products_groups (
-  customers_group_id int(11) NOT NULL default '0',
-  customers_group_price decimal(15,4) NOT NULL default '0.0000',
-  products_id int(11) NOT NULL default '0',
-  products_price decimal(15,4) NOT NULL default '0.0000'
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS products_notifications;
-CREATE TABLE products_notifications (
-  products_id int(11) NOT NULL default '0',
-  customers_id int(11) NOT NULL default '0',
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (products_id,customers_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS products_options;
-CREATE TABLE products_options (
-  products_options_id int(11) NOT NULL default '0',
-  language_id int(11) NOT NULL default '1',
-  products_options_name varchar(32) NOT NULL,
-  products_options_track_stock tinyint(4) NOT NULL default '0',
-  products_options_type int(5) NOT NULL default '0',
-  products_options_length smallint(2) NOT NULL default '32',
-  products_options_comment varchar(32) default NULL,
-  PRIMARY KEY  (products_options_id,language_id)
-) TYPE=MyISAM;
 
 
 INSERT INTO products_options (products_options_id, language_id, products_options_name, products_options_track_stock, products_options_type, products_options_length, products_options_comment) VALUES(1, 1, 'Version', 0, 0, 32, NULL);
 INSERT INTO products_options (products_options_id, language_id, products_options_name, products_options_track_stock, products_options_type, products_options_length, products_options_comment) VALUES(1, 2, '', 0, 0, 32, NULL);
 INSERT INTO products_options (products_options_id, language_id, products_options_name, products_options_track_stock, products_options_type, products_options_length, products_options_comment) VALUES(1, 3, '', 0, 0, 32, NULL);
-DROP TABLE IF EXISTS products_options_values;
-CREATE TABLE products_options_values (
-  products_options_values_id int(11) NOT NULL default '0',
-  language_id int(11) NOT NULL default '1',
-  products_options_values_name varchar(64) NOT NULL,
-  PRIMARY KEY  (products_options_values_id,language_id)
-) TYPE=MyISAM;
 
 
 INSERT INTO products_options_values (products_options_values_id, language_id, products_options_values_name) VALUES(1, 2, 'Download: Windows - English');
 INSERT INTO products_options_values (products_options_values_id, language_id, products_options_values_name) VALUES(1, 1, 'Download: Windows - English');
 INSERT INTO products_options_values (products_options_values_id, language_id, products_options_values_name) VALUES(1, 3, '');
-DROP TABLE IF EXISTS products_options_values_to_products_options;
-CREATE TABLE products_options_values_to_products_options (
-  products_options_values_to_products_options_id int(11) NOT NULL auto_increment,
-  products_options_id int(11) NOT NULL default '0',
-  products_options_values_id int(11) NOT NULL default '0',
-  PRIMARY KEY  (products_options_values_to_products_options_id)
-) TYPE=MyISAM ;
 
 
 insert into products_options_values_to_products_options (products_options_values_to_products_options_id, products_options_id, products_options_values_id) values ('14', '1', '1');
-DROP TABLE IF EXISTS products_stock;
-CREATE TABLE products_stock (
-  products_stock_id int(11) NOT NULL auto_increment,
-  products_id int(11) NOT NULL default '0',
-  products_stock_attributes varchar(255) NOT NULL,
-  products_stock_quantity int(11) NOT NULL default '0',
-  PRIMARY KEY  (products_stock_id),
-  UNIQUE KEY idx_products_stock_attributes (products_id,products_stock_attributes)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS products_to_categories;
-CREATE TABLE products_to_categories (
-  products_id int(11) NOT NULL default '0',
-  categories_id int(11) NOT NULL default '0',
-  PRIMARY KEY  (products_id,categories_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS products_xsell;
-CREATE TABLE products_xsell (
-  ID int(10) NOT NULL auto_increment,
-  products_id int(10) unsigned NOT NULL default '1',
-  xsell_id int(10) unsigned NOT NULL default '1',
-  sort_order int(10) unsigned NOT NULL default '1',
-  PRIMARY KEY  (ID)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS reviews;
-CREATE TABLE reviews (
-  reviews_id int(11) NOT NULL auto_increment,
-  products_id int(11) NOT NULL default '0',
-  customers_id int(11) default NULL,
-  customers_name varchar(64) NOT NULL,
-  reviews_rating int(1) default NULL,
-  date_added datetime default NULL,
-  last_modified datetime default NULL,
-  reviews_read int(5) NOT NULL default '0',
-  PRIMARY KEY  (reviews_id),
-  KEY idx_reviews_products_id (products_id),
-  KEY idx_reviews_customers_id (customers_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS reviews_description;
-CREATE TABLE reviews_description (
-  reviews_id int(11) NOT NULL default '0',
-  languages_id int(11) NOT NULL default '0',
-  reviews_text text NOT NULL,
-  PRIMARY KEY  (reviews_id,languages_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS scart;
-CREATE TABLE scart (
-  scartid int(11) NOT NULL auto_increment,
-  customers_id int(11) NOT NULL default '0',
-  dateadded varchar(8) NOT NULL,
-  PRIMARY KEY  (scartid)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS searchword_swap;
-CREATE TABLE searchword_swap (
-  sws_id mediumint(11) NOT NULL auto_increment,
-  sws_word varchar(100) NOT NULL,
-  sws_replacement varchar(100) NOT NULL,
-  PRIMARY KEY  (sws_id)
-) TYPE=MyISAM;
-
-DROP TABLE IF EXISTS search_queries;
-CREATE TABLE search_queries (
-  search_id int(11) NOT NULL auto_increment,
-  search_text tinytext,
-  PRIMARY KEY  (search_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS search_queries_sorted;
-CREATE TABLE search_queries_sorted (
-  search_id smallint(6) NOT NULL auto_increment,
-  search_text tinytext NOT NULL,
-  search_count int(11) NOT NULL default '0',
-  PRIMARY KEY  (search_id)
-) TYPE=MyISAM;
-
-
-
-DROP TABLE IF EXISTS sessions;
-CREATE TABLE sessions (
-  sesskey varchar(32) NOT NULL,
-  expiry int(11) unsigned NOT NULL default '0',
-  `value` text NOT NULL,
-  PRIMARY KEY  (sesskey)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS shipping_manifest;
-CREATE TABLE shipping_manifest (
-  delivery_id int(5) NOT NULL auto_increment,
-  orders_id int(6) NOT NULL default '0',
-  delivery_name varchar(128) NOT NULL,
-  delivery_company varchar(128) NOT NULL,
-  delivery_address_1 varchar(128) NOT NULL,
-  delivery_address_2 varchar(128) NOT NULL,
-  delivery_city varchar(64) NOT NULL,
-  delivery_state char(2) NOT NULL,
-  delivery_postcode varchar(10) NOT NULL,
-  delivery_phone varchar(10) NOT NULL,
-  package_weight char(3) NOT NULL,
-  package_value varchar(4) NOT NULL,
-  oversized int(1) NOT NULL default '0',
-  pickup_date date NOT NULL default '0000-00-00',
-  shipping_type varchar(64) NOT NULL,
-  residential char(1) NOT NULL,
-  cod int(1) NOT NULL default '0',
-  tracking_num varchar(20) NOT NULL,
-  multiple int(3) NOT NULL default '0',
-  PRIMARY KEY  (delivery_id),
-  UNIQUE KEY tracking_num (tracking_num)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS specials;
-CREATE TABLE specials (
-  specials_id int(11) NOT NULL auto_increment,
-  products_id int(11) NOT NULL default '0',
-  specials_new_products_price decimal(15,4) NOT NULL default '0.0000',
-  specials_date_added datetime default NULL,
-  specials_last_modified datetime default NULL,
-  expires_date datetime default NULL,
-  date_status_change datetime default NULL,
-  `status` int(1) NOT NULL default '1',
-  customers_group_id int(11) NOT NULL default '0',
-  PRIMARY KEY  (specials_id),
-  KEY idx_specials_products_id (products_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS specials_retail_prices;
-CREATE TABLE specials_retail_prices (
-  products_id int(11) NOT NULL default '0',
-  specials_new_products_price decimal(15,4) NOT NULL default '0.0000',
-  `status` tinyint(4) default NULL,
-  customers_group_id smallint(6) default NULL,
-  PRIMARY KEY  (products_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS tax_class;
-CREATE TABLE tax_class (
-  tax_class_id int(11) NOT NULL auto_increment,
-  tax_class_title varchar(32) NOT NULL,
-  tax_class_description varchar(255) NOT NULL,
-  last_modified datetime default NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (tax_class_id)
-) TYPE=MyISAM ;
 
 
 INSERT INTO tax_class (tax_class_id, tax_class_title, tax_class_description, last_modified, date_added) VALUES(2, 'Taxable Item', 'Any taxable item', NULL, '2005-03-30 14:40:20');
 INSERT INTO tax_class (tax_class_id, tax_class_title, tax_class_description, last_modified, date_added) VALUES(3, 'Non Taxable', 'Non Taxable Goods', NULL, '2005-03-30 14:40:28');
-DROP TABLE IF EXISTS tax_rates;
-CREATE TABLE tax_rates (
-  tax_rates_id int(11) NOT NULL auto_increment,
-  tax_zone_id int(11) NOT NULL default '0',
-  tax_class_id int(11) NOT NULL default '0',
-  tax_priority int(5) default '1',
-  tax_rate decimal(7,4) NOT NULL default '0.0000',
-  tax_description varchar(255) NOT NULL,
-  last_modified datetime default NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (tax_rates_id)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS theme_configuration;
-CREATE TABLE theme_configuration (
-  configuration_id int(11) NOT NULL auto_increment,
-  configuration_title varchar(64) NOT NULL,
-  configuration_key varchar(64) NOT NULL default 'BOX_HEADING_',
-  configuration_value varchar(255) NOT NULL,
-  configuration_description varchar(255) NOT NULL,
-  configuration_group_id int(11) NOT NULL default '1',
-  configuration_column varchar(64) NOT NULL default 'left',
-  location int(5) NOT NULL default '0',
-  sort_order int(5) default NULL,
-  last_modified datetime default NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  box_heading varchar(64) NOT NULL,
-  PRIMARY KEY  (configuration_id)
-) TYPE=MyISAM ;
 
 
 INSERT INTO theme_configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, configuration_column, location, sort_order, last_modified, date_added, box_heading) VALUES(1, 'best sellers', 'BOX_HEADING_BEST_SELLERS', 'yes', 'Display Best Sellers box?', 1, 'left', 12, 1, '2005-04-01 12:31:54', '2003-04-15 11:01:05', '');
@@ -2076,52 +2169,6 @@ INSERT INTO theme_configuration (configuration_id, configuration_title, configur
 INSERT INTO theme_configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, configuration_column, location, sort_order, last_modified, date_added, box_heading) VALUES(2, 'categories', 'BOX_HEADING_CATEGORIES', 'yes', '', 1, 'left', 1, NULL, NULL, '0000-00-00 00:00:00', 'Categories');
 INSERT INTO theme_configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, configuration_column, location, sort_order, last_modified, date_added, box_heading) VALUES(22, 'wishlist', 'BOX_HEADING_CUSTOMER_WISHLIST', 'yes', '', 1, 'right', 3, NULL, '2005-02-22 18:28:48', '0000-00-00 00:00:00', 'My Wish List');
 INSERT INTO theme_configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, configuration_column, location, sort_order, last_modified, date_added, box_heading) VALUES(29, 'Authors', 'BOX_HEADING_AUTHORS', 'yes', '', 1, 'right', 11, NULL, NULL, '0000-00-00 00:00:00', 'Authors');
-DROP TABLE IF EXISTS topics;
-CREATE TABLE topics (
-  topics_id int(11) NOT NULL auto_increment,
-  topics_image varchar(64) default NULL,
-  parent_id int(11) NOT NULL default '0',
-  sort_order int(3) default NULL,
-  date_added datetime default NULL,
-  last_modified datetime default NULL,
-  PRIMARY KEY  (topics_id),
-  KEY idx_topics_parent_id (parent_id)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS topics_description;
-CREATE TABLE topics_description (
-  topics_id int(11) NOT NULL default '0',
-  language_id int(11) NOT NULL default '1',
-  topics_name varchar(32) NOT NULL,
-  topics_heading_title varchar(64) default NULL,
-  topics_description text,
-  PRIMARY KEY  (topics_id,language_id),
-  KEY idx_topics_name (topics_name)
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS whos_online;
-CREATE TABLE whos_online (
-  customer_id int(11) default NULL,
-  full_name varchar(64) NOT NULL,
-  session_id varchar(128) NOT NULL,
-  ip_address varchar(15) NOT NULL,
-  time_entry varchar(14) NOT NULL,
-  time_last_click varchar(14) NOT NULL,
-  last_page_url text NOT NULL
-) TYPE=MyISAM;
-
-
-DROP TABLE IF EXISTS zones;
-CREATE TABLE zones (
-  zone_id int(11) NOT NULL auto_increment,
-  zone_country_id int(11) NOT NULL default '0',
-  zone_code varchar(32) NOT NULL,
-  zone_name varchar(32) NOT NULL,
-  PRIMARY KEY  (zone_id),
-  KEY idx_zones_to_geo_zones_country_id (zone_country_id)
-) TYPE=MyISAM ;
 
 
 INSERT INTO zones (zone_id, zone_country_id, zone_code, zone_name) VALUES(1, 223, 'AL', 'Alabama');
@@ -2307,13 +2354,3 @@ INSERT INTO zones (zone_id, zone_country_id, zone_code, zone_name) VALUES(180, 1
 INSERT INTO zones (zone_id, zone_country_id, zone_code, zone_name) VALUES(181, 195, 'Zaragoza', 'Zaragoza');
 
 
-DROP TABLE IF EXISTS zones_to_geo_zones;
-CREATE TABLE zones_to_geo_zones (
-  association_id int(11) NOT NULL auto_increment,
-  zone_country_id int(11) NOT NULL default '0',
-  zone_id int(11) default NULL,
-  geo_zone_id int(11) default NULL,
-  last_modified datetime default NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (association_id)
-) TYPE=MyISAM;

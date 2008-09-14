@@ -62,7 +62,8 @@
     if (tep_not_null($article_info['articles_url'])) {
 ?>
       <tr>
-        <td class="main"><?php echo sprintf(TEXT_MORE_INFORMATION, tep_href_link(FILENAME_REDIRECT, 'action=url&goto=' . urlencode($article_info['articles_url']), 'NONSSL', true, false)); ?></td>
+        <td class="main"><?php //echo sprintf(TEXT_MORE_INFORMATION, tep_href_link(FILENAME_REDIRECT, 'action=url&goto=' . urlencode($article_info['articles_url']), 'NONSSL', true, false)); 
+		echo sprintf(TEXT_MORE_INFORMATION, tep_href_link(FILENAME_REDIRECT, 'action=arturl&goto=' . urlencode($article_info['articles_url']), 'NONSSL', true, false)); ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -90,7 +91,7 @@ if (DISPLAY_DATE_ADDED_ARTICLE_LISTING == 'true') {
       </tr>
 <?php
   if (ENABLE_ARTICLE_REVIEWS == 'true') {
-    $reviews_query = tep_db_query("select count(*) as count from " . TABLE_ARTICLE_REVIEWS . " where articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and approved = '1'");
+    $reviews_query = tep_db_query("SELECT COUNT(*) as count from " . TABLE_ARTICLE_REVIEWS . " where articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and approved = '1'");
     $reviews = tep_db_fetch_array($reviews_query);
 ?>
       <tr>

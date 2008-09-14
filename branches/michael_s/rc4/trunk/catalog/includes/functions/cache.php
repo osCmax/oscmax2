@@ -99,8 +99,9 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
   function tep_cache_categories_box($auto_expire = false, $refresh = false) {
 // LINE CHANGED
 //    global $cPath, $language, $languages_id, $tree, $cPath_array, $categories_string;
-    global $cPath, $language, $languages_id, $tree, $cPath_array, $categories_string, $cat_name, $boxContent;
+    global $cPath, $language, $languages_id, $tree, $cPath_array, $categories_string, $boxContent;
 
+    $cache_output = '';
     if (($refresh == true) || !read_cache($cache_output, 'categories_box-' . $language . '.cache' . $cPath, $auto_expire)) {
       ob_start();
       include(DIR_WS_BOXES . 'categories.php');
@@ -117,6 +118,7 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
 // Cache the manufacturers box
   function tep_cache_manufacturers_box($auto_expire = false, $refresh = false) {
     global $HTTP_GET_VARS, $language;
+    $cache_output = '';
 
     $manufacturers_id = '';
     if (isset($HTTP_GET_VARS['manufacturers_id']) && is_numeric($HTTP_GET_VARS['manufacturers_id'])) {
@@ -142,15 +144,15 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
 
 $cache_output = '';
 
-if (isset($HTTP_GET_VARS['products_id']) && is_numeric($HTTP_GET_VARS['products_id'])) {
-  if (($refresh == true) || !read_cache($cache_output, 'also_purchased-' . $language . '.cache' . $HTTP_GET_VARS['products_id'], $auto_expire)) {
-    ob_start();
-    include(DIR_WS_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
-    $cache_output = ob_get_contents();
-    ob_end_clean();
-    write_cache($cache_output, 'also_purchased-' . $language . '.cache' . $HTTP_GET_VARS['products_id']);
-  }
-}
+    if (isset($HTTP_GET_VARS['products_id']) && is_numeric($HTTP_GET_VARS['products_id'])) {
+      if (($refresh == true) || !read_cache($cache_output, 'also_purchased-' . $language . '.cache' . $HTTP_GET_VARS['products_id'], $auto_expire)) {
+        ob_start();
+        include(DIR_WS_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
+        $cache_output = ob_get_contents();
+        ob_end_clean();
+        write_cache($cache_output, 'also_purchased-' . $language . '.cache' . $HTTP_GET_VARS['products_id']);
+      }
+    }
 
     return $cache_output;
   }

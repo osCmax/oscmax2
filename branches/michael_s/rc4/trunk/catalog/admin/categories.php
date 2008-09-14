@@ -21,6 +21,11 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
   $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
 
+// Ultimate SEO URLs v2.1
+// If the action will affect the cache entries
+    if ( eregi("(insert|update|setflag)", $action) ) include_once('includes/reset_seo_cache.php');
+
+
   if (tep_not_null($action)) {
     switch ($action) {
       case 'setflag':

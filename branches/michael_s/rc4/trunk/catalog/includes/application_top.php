@@ -300,8 +300,11 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 # include the cache class
   include('includes/classes/cache.class.php');
   $cache = new cache($languages_id);
-# include the Ultimate SEO URLs cache file
-  include('includes/seo_cache.php');
+// Ultimate SEO URLs v2.1
+    include_once(DIR_WS_CLASSES . 'seo.class.php');
+        if ( !is_object($seo_urls) ){
+                $seo_urls = new SEO_URL($languages_id);
+        }
   # Get the cache - no parameters will get all GLOBAL cache entries for this language
   $cache->get_cache('GLOBAL');
 

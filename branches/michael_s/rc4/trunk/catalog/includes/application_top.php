@@ -305,6 +305,11 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
         if ( !is_object($seo_urls) ){
                 $seo_urls = new SEO_URL($languages_id);
         }
+// Validate SEO URL        
+     if ( is_object($seo_urls) && (strpos($_SERVER['REQUEST_URI'], '.html') !== false) && (defined('FWR_VALIDATION_ON') && FWR_VALIDATION_ON === 'true') ) { // SEO URLS is active and there is .html in the querystring
+       tep_validate_seo_urls();
+      }
+        
   # Get the cache - no parameters will get all GLOBAL cache entries for this language
   $cache->get_cache('GLOBAL');
 

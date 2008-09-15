@@ -1836,7 +1836,7 @@ INSERT INTO configuration_group (configuration_group_id, configuration_group_tit
 INSERT INTO configuration_group (configuration_group_id, configuration_group_title, configuration_group_description, sort_order, visible) VALUES(888002, 'SEO URLs', 'Options for Ultimate SEO URLs by Chemo', 902, 1);
 INSERT INTO configuration_group (configuration_group_id, configuration_group_title, configuration_group_description, sort_order, visible) VALUES(12954, 'Wish List Settings', 'Settings for your Wish List', 25, 1);
 INSERT INTO configuration_group (configuration_group_id, configuration_group_title, configuration_group_description, sort_order, visible) VALUES(888003, 'Order Editor', 'Configuration options for Order Editor', 903, 1);
-
+INSERT INTO configuration_group (configuration_group_id, configuration_group_title, configuration_group_description, sort_order, visible) VALUES(888005, 'SEO URL Validation', 'Validation For Ultimate SEO URLs', 950, 1);
 
 INSERT INTO countries (countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id) VALUES(1, 'Afghanistan', 'AF', 'AFG', 1);
 INSERT INTO countries (countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id) VALUES(2, 'Albania', 'AL', 'ALB', 1);

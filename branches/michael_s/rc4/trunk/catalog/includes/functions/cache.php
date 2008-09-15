@@ -5,7 +5,7 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */
@@ -99,15 +99,15 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
   function tep_cache_categories_box($auto_expire = false, $refresh = false) {
 // LINE CHANGED
 //    global $cPath, $language, $languages_id, $tree, $cPath_array, $categories_string;
-    global $cPath, $language, $languages_id, $tree, $cPath_array, $categories_string, $boxContent;
+    global $cPath, $language, $languages_id, $tree, $cPath_array, $categories_string, $cat_name, $boxContent, $box_base_name;
 
     $cache_output = '';
-    if (($refresh == true) || !read_cache($cache_output, 'categories_box-' . $language . '.cache' . $cPath, $auto_expire)) {
+    if (($refresh == true) || !read_cache($cache_output, 'categories_box-' . str_replace ( '/', '-', bts_select('boxes', $box_base_name)) . '-' . $language . '.cache' . $cPath, $auto_expire)) {
       ob_start();
       include(DIR_WS_BOXES . 'categories.php');
       $cache_output = ob_get_contents();
       ob_end_clean();
-      write_cache($cache_output, 'categories_box-' . $language . '.cache' . $cPath);
+      write_cache($cache_output, 'categories_box-' . str_replace ( '/', '-', bts_select('boxes', $box_base_name)) . '-' . $language . '.cache' . $cPath);
     }
 
     return $cache_output;
@@ -125,12 +125,12 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
       $manufacturers_id = $HTTP_GET_VARS['manufacturers_id'];
     }
 
-    if (($refresh == true) || !read_cache($cache_output, 'manufacturers_box-' . $language . '.cache' . $manufacturers_id, $auto_expire)) {
+    if (($refresh == true) || !read_cache($cache_output, 'manufacturers_box-' . str_replace ( '/', '-', bts_select('boxes', $box_base_name)) . '-' . $language . '.cache' . $manufacturers_id, $auto_expire)) {
       ob_start();
       include(DIR_WS_BOXES . 'manufacturers.php');
       $cache_output = ob_get_contents();
       ob_end_clean();
-      write_cache($cache_output, 'manufacturers_box-' . $language . '.cache' . $manufacturers_id);
+      write_cache($cache_output, 'manufacturers_box-' . str_replace ( '/', '-', bts_select('boxes', $box_base_name)) . '-' . $language . '.cache' . $manufacturers_id);
     }
 
     return $cache_output;

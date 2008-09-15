@@ -1,40 +1,76 @@
 <?php
+/*
+  $Id:Batch_print.php, user Exp $
+*/
+define('TEXT_ORDER_NUMBERS_RANGES', 'Bestellnummer(n), entweder einzelne Nummer # oder von - bis, # - #, oder #,#,#');
 define('HEADING_TITLE', 'Batch Print Center');
-define('TABLE_HEADING_COMMENTS', 'Comments');
-define('TABLE_HEADING_PRODUCTS_MODEL', 'Model');
-define('TABLE_HEADING_PRODUCTS', 'Products');
-define('TABLE_HEADING_TAX', 'Tax');
-define('TABLE_HEADING_TOTAL', 'Total');
-define('TABLE_HEADING_PRICE_EXCLUDING_TAX', 'Price (ex)');
-define('TABLE_HEADING_PRICE_INCLUDING_TAX', 'Price (inc)');
-define('TABLE_HEADING_TOTAL_EXCLUDING_TAX', 'Total (ex)');
-define('TABLE_HEADING_TOTAL_INCLUDING_TAX', 'Total (inc)');
-define('ENTRY_SOLD_TO', 'SOLD TO:');
-define('ENTRY_SHIP_TO', 'SHIP TO:');
-define('ENTRY_PAYMENT_METHOD', 'Payment Method:');
-define('ENTRY_PAYMENT_TYPE', 'Credit Card:');
-define('PAYMENT_TYPE', 'Credit Card');
-define('ENTRY_CC_OWNER', 'Credit Card Owner:');
-define('ENTRY_CC_NUMBER', 'Credit Card Number:');
-define('ENTRY_CC_EXP', 'Expiration Date:');
-define('ENTRY_SUB_TOTAL', 'Sub-Total:');
-define('ENTRY_PHONE', 'Phone:');
+define('TABLE_HEADING_COMMENTS', 'Kommentare');
+define('TABLE_HEADING_PRODUCTS_MODEL', 'Modell');
+define('TABLE_HEADING_PRODUCTS', 'Produkte');
+define('TABLE_HEADING_TAX', 'MwSt.');
+define('TABLE_HEADING_TOTAL', 'Gesamt');
+define('TABLE_HEADING_PRICE_EXCLUDING_TAX', 'Nettopreis');
+define('TABLE_HEADING_PRICE_INCLUDING_TAX', 'Preis inkl. MwSt.');
+define('TABLE_HEADING_TOTAL_EXCLUDING_TAX', 'Gesamt (netto)');
+define('TABLE_HEADING_TOTAL_INCLUDING_TAX', 'Gesamt (inkl. MwSt.)');
+define('ENTRY_SOLD_TO', 'Rechnungsadresse:');
+define('ENTRY_SHIP_TO', 'Lieferadresse:');
+define('ENTRY_PAYMENT_METHOD', 'Zahlungsweise:');
+define('ENTRY_PAYMENT_TYPE', 'Kreditkarte:');
+define('PAYMENT_TYPE', 'Kreditkarte');
+define('ENTRY_CC_OWNER', 'Inhaber:');
+define('ENTRY_CC_NUMBER', 'Kreditkartenummer:');
+define('ENTRY_CC_EXP', 'Gültig bis:');
+define('ENTRY_SUB_TOTAL', 'Zwischensumme:');
+define('ENTRY_PHONE', 'Telefonnr.:');
 define('ENTRY_EMAIL', 'E-Mail:');
-define('ENTRY_TAX', 'Tax:');
-define('ENTRY_SHIPPING', 'Shipping:');
-define('ENTRY_TOTAL', 'Total:');
-define('TEXT_ORDER_NUMBER','Order Number:');
-define('TEXT_ORDER_DATE','Order Date:');
+define('ENTRY_TAX', 'MwSt.:');
+define('ENTRY_SHIPPING', 'Versandkosten:');
+define('ENTRY_TOTAL', 'Gesamt:');
+define('TEXT_ORDER_NUMBER','Bestellnummer:');
+define('TEXT_ORDER_DATE','Bestelldatum:');
 define('TEXT_ORDER_FORMAT','F j, Y');
+define('TEXT_CHOOSE_TEMPLATE','Bitte wählen sie das gewünschte Template aus');
+define('TEXT_CHOOSE_TEMPLATE','Bitte geben sie entweder die Bestellnummern einzeln oder "von-bis" ein:<br>(z.B. 2577,2580-2585,2588)');
+define('TEXT_DATES_ORDERS_EXTRACTRED','Oder die Bestelldaten:<br>(Bitte im Format JJJJ-MM-TT Format)');
+define('TEXT_FROM','Von:');
+define('TEXT_TO','Lieferung: ');
+define('TEXT_PRINTING_LABELS_BILLING_DELIVERY','Beim Labeldruck:- Rechnungs- oder Lieferanschrift verwenden?');
+define('TEXT_DELIVERY','Lieferung: ');
+define('TEXT_BILLING','Rechnung: ');
+define('TEXT_POSITION_START_PRINTING', 'Startposition für den Druck:<br>(Position 0 ist oben links auf dem Label, ansteigend von links nach rechts, dann von oben nach unten)');
+define('TEXT_INCLUDE_ORDERS_STATUS', 'Nur Bestellungen mit Status:<br>(Bei None werden alle Bestellungen eingeschlossen)');
+define('TEXT_SHOW_ORDER','Bestelldatum anzeigen?');
+define('TEXT_SHOW_PHONE_NUMBER','Telefonnumer des Kunden anzeigen?');
+define('TEXT_SHOW_EMAIL_CUSTOMER','eMail-Adresse des Kunden anzeigen?');
+define('TEXT_PAYMENT_INFORMATION','Zahlungsweise anzeigen?');
+define('TEXT_SHOW_CREDIT_CARD_NUMBER','Kreditkartennummer anzeigen? (nur für entspr. Bestellungen)');
+define('TEXT_AUTOMACILLLY_CHANGE_ORDER','Automatisch den Status setzen auf:<br>(bei None wird kein Status geändert)');
+define('TEXT_SHOW_OREDERS_COMMENTS','Bestellungen ohne Kommentar anzeigen?<br>(Bestellungen mit Kommentaren des Kunden bei Kauf werden NICHT angezeigt!)');
+define('TEXT_NOTIFY_CUSTOMER','Den Kunden per E-Mail benachrichtigen?<br>(Der Kunde wird per eMail mit den Kommentaren in der batch print language-Datei benachrichtigt.)');
+define('TEXT_BANK','Bank: ');
+define('TEXT_POST','Post: ');
+define('TEXT_SALES','Sales: ');
+define('TEXT_PACKED_BY','Gepackt von:  ______________________');
+define('TEXT_VERIFIED_BY','Geprüft von:  ______________________');
+define('TEXT_DEAR','Sehr geehrte(r) ');
+define('TEXT_THX_CHRISMAS','Vielen Dank für ihre Unterstützung -----');
+define('TEXT_RETURNS_LABEL', 'Rücksende-Label Bestellung: ');
+define('TEXT_SHIPPING_LABEL', 'Versand-Label Bestellung: ');
+define('SHIP_FROM_COUNTRY', '');  //eg. 'United Kingdom'
+define('WEBSITE', 'www.Your site.com');
+define('TEXT_RETURNS', 'Wir hoffen dass Sie es nicht brauchen werden, haben aber für den Fall der Fälle ein Rücksende-Label beigepackt. Bitte beachten Sie unsere Hinweise unter www.Your site.com/shipping.php');
+define('TEXT_TO', 'An:');
+
 // Change this to a general comment that you would like
-define('BATCH_COMMENTS','Automatic order update notification.');
+define('BATCH_COMMENTS','Automatische Benachrichtung zu Ihrer Bestellung.');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
-define('EMAIL_TEXT_SUBJECT', 'Order Update');
-define('EMAIL_TEXT_ORDER_NUMBER', 'Order Number:');
-define('EMAIL_TEXT_INVOICE_URL', 'Detailed Invoice:');
-define('EMAIL_TEXT_DATE_ORDERED', 'Date Ordered:');
-define('EMAIL_TEXT_STATUS_UPDATE', 'Your order has been updated to the following status.' . "\n\n" . 'New status: %s' . "\n\n" . 'Please reply to this email if you have any questions.' . "\n");
-define('EMAIL_TEXT_COMMENTS_UPDATE', 'The comments for your order are' . "\n\n%s\n\n");
+define('EMAIL_TEXT_SUBJECT', 'Update ihrer Bestellung');
+define('EMAIL_TEXT_ORDER_NUMBER', 'Bestellnummer:');
+define('EMAIL_TEXT_INVOICE_URL', 'Detaillierte Rechnung:');
+define('EMAIL_TEXT_DATE_ORDERED', 'Bestelldatum:');
+define('EMAIL_TEXT_STATUS_UPDATE', 'Ihre Bestellung hat jetzt den folgenden Status.' . "\n\n" . 'Neuer Status: %s' . "\n\n" . 'Bitte antworten sie auf diese E-Mail, wenn sie Fragen zu Ihrer Bestellung haben.' . "\n");
+define('EMAIL_TEXT_COMMENTS_UPDATE', 'Die Kommentare zu Ihrer Bestellung lauten:' . "\n\n%s\n\n");
 
 // RGB Colors
 define('BLACK', '0,0,0');
@@ -42,12 +78,12 @@ define('GREY', '0.9,0.9,0.9');
 define('DARK_GREY', '0.7,0.7,0.7');
 
 // Error and Messages
-$error['ERROR_INVALID_INPUT'] = 'Internal Error: Unrecognized or invalid script input.';
-$error['ERROR_BAD_DATE'] =  'Invalid date, Please enter a valid date in Year-Month-Day (0000-00-00) format.';
-$error['ERROR_BAD_INVOICENUMBERS'] =  'Invalid Invoice numbers, Please enter a valid format. (eg. 2577,2580-2585,2588)';
-$error['NO_ORDERS'] =  'There were no orders selected for export, try changing your order options.';
-$error['SET_PERMISSIONS'] = 'Can\'t write to directory!  Please set the permissions of your temp_pdf folder to CHMOD 0777';
-$error['FAILED_TO_OPEN'] = 'Could not open file for writing, make sure correct permissions are set';
+$error['ERROR_INVALID_INPUT'] = 'Interner Fehler: Nicht erkannte oder ungültige Eingabe.';
+$error['ERROR_BAD_DATE'] =  'Ungültiges Datum! Bitte geben sie das Datum im Format JJJJ-MM-DD ein!';
+$error['ERROR_BAD_INVOICENUMBERS'] =  'Ungültige Bestellungsnummer, bitte geben sie eine gültige Nummer ein. (z.B. 2577,2580-2585,2588)';
+$error['NO_ORDERS'] =  'Es wurden keine Bestellungen für den Export ausgewählt, bitte passen Sie ihre Optionen an.';
+$error['SET_PERMISSIONS'] = 'Verzeichnis schreibgeschützt!  Bitte setzen sie die Zugriffsrechte für Ihr temp_pdf Verzeichnis auf CHMOD 0777';
+$error['FAILED_TO_OPEN'] = 'Datei kann nicht zum schreiben geöffnet werden, bitte überprüfen Sie die Zugriffsberechtigungen.';
 
 // PDF FONT SIZES
 define('COMPANY_HEADER_FONT_SIZE','14');

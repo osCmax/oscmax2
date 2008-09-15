@@ -54,7 +54,7 @@ for($y = $pdf->ez['pageHeight'] - STARTY; $y > LABEL_HEIGHT - STARTY; $y -= LABE
 	for ($x = STARTX; $x < STARTX + NUM_COLUMNS * LABEL_WIDTH; $x += LABEL_WIDTH){
 		if ($startpos <= $pos && $num < $endpos){
         
-			if (print_address($x, $y))
+			if (print_address($x, $y, $num))
 				$num++;
 		}
 		$pos++;

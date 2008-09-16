@@ -1,9 +1,10 @@
 <?php
 /*
-  $Id: wishlist.php,v 3.0  2005/04/20 Dennis Blake
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+$Id: wishlist_public.php 3 2006-05-27 04:59:07Z user $
+  osCMax Power E-Commerce
+  http://oscdox.com
 
+  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
   Released under the GNU General Public License
 */
 
@@ -46,8 +47,9 @@ if((isset($_GET['public_id'])) && ($_GET['public_id'] == '')) {
   }
 
 
-  $breadcrumb->add(HEADING_TITLE, tep_href_link(FILENAME_WISHLIST, '', 'NONSSL'));
+  $breadcrumb->add(NAVBAR_TITLE_WISHLIST, tep_href_link(FILENAME_WISHLIST, '', 'SSL'));
   $content = CONTENT_WISHLIST_PUBLIC;
 
   include (bts_select('main', $content_template)); // BTSv1.5
-<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
+  require(DIR_WS_INCLUDES . 'application_bottom.php'); 
+?>

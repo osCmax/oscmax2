@@ -1,5 +1,5 @@
 <!-- body_text //-->
-    <td width="100%" valign="top"><?php echo tep_draw_form('wishlist_form', tep_href_link(FILENAME_WISHLIST_PUBLIC)); ?>
+    <?php echo tep_draw_form('wishlist_form', tep_href_link(FILENAME_WISHLIST_PUBLIC)); ?>
 	  <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td>
@@ -214,6 +214,4 @@
 	}
 ?>
 <!-- customer_wishlist_eof //-->
-	</td>
-
 <!-- body_text_eof //-->

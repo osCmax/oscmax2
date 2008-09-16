@@ -1,5 +1,5 @@
 <!-- body_text //-->
-    <td width="100%" valign="top"><?php echo tep_draw_form('wishlist_form', tep_href_link(FILENAME_WISHLIST)); ?>
+<?php echo tep_draw_form('wishlist_form', tep_href_link(FILENAME_WISHLIST)); ?>
 	  <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td>
@@ -287,6 +287,5 @@ if (is_array($wishList->wishID) && !empty($wishList->wishID)) {
 }
 ?>
 <!-- customer_wishlist_eof //-->
-	</td>
 
 <!-- body_text_eof //-->

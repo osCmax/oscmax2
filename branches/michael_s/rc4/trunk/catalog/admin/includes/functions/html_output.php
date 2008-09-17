@@ -13,6 +13,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // The HTML href link wrapper function
   function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL') {
+    $parameters = tep_output_string($parameters);
     if ($page == '') {
       die('</td></tr></table></td></tr></table><br><br><font color="#ff0000"><b>Error!</b></font><br><br><b>Unable to determine the page link!<br><br>Function used:<br><br>tep_href_link(\'' . $page . '\', \'' . $parameters . '\', \'' . $connection . '\')</b>');
     }

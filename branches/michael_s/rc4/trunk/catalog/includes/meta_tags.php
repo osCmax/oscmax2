@@ -114,7 +114,7 @@ if(!defined(META_TEXT_PRICE)) define ('META_TEXT_PRICE', '');
     $mt_articles = tep_db_fetch_array($mt_articles_query);
 
     define('META_TAG_TITLE', $mt_articles['articles_head_title_tag'] . PRIMARY_SECTION . TITLE . $web_site_tagline);
-	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_articles['articles_head_title_tag']) . SECONDARY_SECTION . WEB_SITE_KEYWORDS;
+	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_articles['articles_head_title_tag'] . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
 	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_articles['articles_head_title_tag']);
     break;
   case CONTENT_ARTICLES_MAIN:
@@ -187,7 +187,7 @@ if(!defined(META_TEXT_PRICE)) define ('META_TEXT_PRICE', '');
     $mt_category = tep_db_fetch_array($mt_category_query);
 
     define('META_TAG_TITLE', $mt_category['categories_name'] . PRIMARY_SECTION . TITLE . $web_site_tagline);
-	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_category['categories_name']) . SECONDARY_SECTION . WEB_SITE_KEYWORDS;
+	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_category['categories_name'] . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
 	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_category['categories_name']);
     break;
   case CONTENT_INDEX_PRODUCTS:
@@ -196,14 +196,14 @@ if(!defined(META_TEXT_PRICE)) define ('META_TEXT_PRICE', '');
       $mt_manufacturer = tep_db_fetch_array($mt_manufacturer_query);
 
 	  define('META_TAG_TITLE', $mt_manufacturer['manufacturers_name'] . PRIMARY_SECTION . TITLE . $web_site_tagline);
-	  define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_manufacturer['manufacturers_name']) . SECONDARY_SECTION . WEB_SITE_KEYWORDS;
+	  define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_manufacturer['manufacturers_name'] . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
 	  define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_manufacturer['manufacturers_name']);
 	} else {
       $mt_category_query = tep_db_query("select categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . (int)$current_category_id . "' and language_id = '" . (int)$languages_id . "'");
       $mt_category = tep_db_fetch_array($mt_category_query);
 
 	  define('META_TAG_TITLE', $mt_category['categories_name'] . PRIMARY_SECTION . TITLE . $web_site_tagline);
-	  define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_category['categories_name']) . SECONDARY_SECTION . WEB_SITE_KEYWORDS;
+	  define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_category['categories_name'] . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
 	  define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_category['categories_name']);
     }
     break;
@@ -243,7 +243,7 @@ if(!defined(META_TEXT_PRICE)) define ('META_TEXT_PRICE', '');
 	$mt_products_description = substr(strip_tags(stripslashes($mt_product_info['products_description'])), 0, 100);
   $mt_products_price = META_TEXT_PRICE . strip_tags($mt_products_price);
 
-    define('META_TAG_TITLE', TITLE . PRIMARY_SECTION . $mt_products_name . SECONDARY_SECTION . $mt_products_price . $web_site_tagline);
+  define('META_TAG_TITLE', TITLE . PRIMARY_SECTION . $mt_products_name . SECONDARY_SECTION . $mt_products_price . $web_site_tagline);
 	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_products_name . SECONDARY_SECTION . $mt_products_description . '...');
 	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_products_name);
     break;
@@ -264,7 +264,7 @@ if(!defined(META_TEXT_PRICE)) define ('META_TEXT_PRICE', '');
     }
 
   $mt_products_price = META_TEXT_PRICE . strip_tags($mt_products_price);
-    define('META_TAG_TITLE', TITLE . PRIMARY_SECTION . $mt_products_name . SECONDARY_SECTION . $mt_products_price . TERTIARY_SECTION . NAVBAR_TITLE);
+  define('META_TAG_TITLE', TITLE . PRIMARY_SECTION . $mt_products_name . SECONDARY_SECTION . $mt_products_price . TERTIARY_SECTION . NAVBAR_TITLE);
 	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE . SECONDARY_SECTION . $mt_products_name . SECONDARY_SECTION . $mt_products_price);
 	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_products_name);
     break;

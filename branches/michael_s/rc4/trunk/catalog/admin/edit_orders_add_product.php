@@ -11,7 +11,7 @@
 
   For Order Editor support or to post bug reports, feature requests, etc, please visit the Order Editor support thread:
   http://forums.oscommerce.com/index.php?showtopic=54032
-  
+
 */
 
   require('includes/application_top.php');
@@ -37,14 +37,14 @@
   // $_GET['action'] switch
   if (isset($_GET['action'])) {
     switch ($_GET['action']) {
-    
+
     ////
     // Add a product to the virtual cart
       case 'add_product':
         if ($step != 5) break;
-        
+
         $AddedOptionsPrice = 0;
-        
+
         // Get Product Attribute Info
         if (isset($_POST['add_product_options'])) {
           foreach($_POST['add_product_options'] as $option_id => $option_value_id) {
@@ -66,7 +66,7 @@
         $download_query_raw ="SELECT products_attributes_filename, products_attributes_maxdays, products_attributes_maxcount 
         FROM " . TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD . " 
         WHERE products_attributes_id='" . $opt_products_attributes_id . "'";
-        
+
 		$download_query = tep_db_query($download_query_raw);
         if (tep_db_num_rows($download_query) > 0) {
           $download = tep_db_fetch_array($download_query);
@@ -80,9 +80,12 @@
           } //end foreach($_POST['add_product_options'] as $option_id => $option_value_id) {
         } //end if (isset($_POST['add_product_options'])) {
 		
-        
+
         // Get Product Info
-        $product_query = tep_db_query("select p.products_model, p.products_price, pd.products_name, p.products_tax_class_id from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on pd.products_id = p.products_id where p.products_id = '" . (int)$add_product_products_id . "'");
+        //BOF Added languageid (otherwise products_name is empty)
+        //$product_query = tep_db_query("select p.products_model, p.products_price, pd.products_name, p.products_tax_class_id from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on pd.products_id = p.products_id where p.products_id = '" . (int)$add_product_products_id . "'");
+        $product_query = tep_db_query("select p.products_model, p.products_price, pd.products_name, p.products_tax_class_id from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on pd.products_id = p.products_id where p.products_id = '" . (int)$add_product_products_id . "' and pd.language_id = '" . $languages_id . "'");
+        //EOF Added languageid
         $product = tep_db_fetch_array($product_query);
         $country_id = oe_get_country_id($order->delivery["country"]);
         $zone_id = oe_get_zone_id($country_id, $order->delivery['state']);
@@ -103,7 +106,7 @@
 	        //sppc patch
 	        //Set to false by default, configurable in the Order Editor section of the admin panel
 	        //thanks to whistlerxj for the original version of this patch
-    
+
 	        if (ORDER_EDITOR_USE_SPPC == 'true') {
 	
 	        // first find out the customer associated with this order ID..
@@ -136,7 +139,7 @@
               }
              }
          	}
-	        //end sppc patch   
+	        //end sppc patch 
 
         $sql_data_array = array('orders_id' => tep_db_prepare_input($oID),
                                 'products_id' => tep_db_prepare_input($add_product_products_id),
@@ -148,7 +151,7 @@
                                 'products_quantity' => tep_db_prepare_input($_POST['add_product_quantity']));
         tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
         $new_product_id = tep_db_insert_id();
-        
+
         if (isset($_POST['add_product_options'])) {
           foreach($_POST['add_product_options'] as $option_id => $option_value_id) {
             $sql_data_array = array('orders_id' => tep_db_prepare_input($oID),
@@ -188,14 +191,14 @@
 			tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
 			products_ordered = products_ordered + " . $_POST['add_product_quantity'] . "
 			WHERE products_id = '" . $_POST['add_product_products_id'] . "'");
-        
+
         // Unset selected product & category
         $add_product_categories_id = 0;
         $add_product_products_id = 0;
-        
+
 			 
 		tep_redirect(tep_href_link(FILENAME_ORDERS_EDIT_ADD_PRODUCT, 'oID=' . $oID . '&step=1&submitForm=yes'));
-        
+
 		break;
     }
   }
@@ -214,14 +217,14 @@
       $search_fields = array('pd.products_name');
       $product_search = oe_generate_search_SQL($search_array, $search_fields, 'AND');
     }
-  
+
     $products_query = tep_db_query("select p.products_id, p.products_price, p.products_model, pd.products_name from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on (p.products_id = pd.products_id) where pd.language_id = '" . $languages_id . "' and (" . $product_search . ") order by pd.products_name");
     $not_found = ((tep_db_num_rows($products_query)) ? false : true);
   } 
-  
+
   if (!isset($_POST['search'])) {
     $product_search = " where p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . $languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = c.categories_id ";
-    
+
     $_GET['inc_subcat'] = '1';
     if ($_GET['inc_subcat'] == '1') {
       $subcategories_array = array();
@@ -241,7 +244,7 @@
 
   $category_array = array(array('id' => '', 'text' => TEXT_SELECT_CATEGORY),
                           array('id' => '0', 'text' => TEXT_ALL_CATEGORIES));
-  
+
   if (($step > 1) && (!$not_found)) {
     $product_array = array(array('id' => 0, 'text' => TEXT_SELECT_PRODUCT));
     while($products = tep_db_fetch_array($products_query)) {
@@ -253,7 +256,7 @@
   $has_attributes = false;
   $products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$add_product_products_id . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . $languages_id . "'");
   $products_attributes = tep_db_fetch_array($products_attributes_query);
-  if ($products_attributes['total'] > 0) $has_attributes = true;   
+  if ($products_attributes['total'] > 0) $has_attributes = true; 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -340,7 +343,7 @@
          '            <td colspan="3" style="border-top: 1px solid #C9C9C9;">' . tep_draw_separator('pixel_trans.gif', '1', '1') . '</td>' . "\n" .
          '          </tr>' . "\n" .
          '          <tr class="dataTableRow">' . "\n";
-    
+
     if ($has_attributes) echo '          <form action="' . tep_href_link(FILENAME_ORDERS_EDIT_ADD_PRODUCT, 'oID=' . $_GET['oID']) . '" method="post">' . "\n";
 
     echo '            <td class="dataTableContent" align="right">' . TEXT_STEP_3 . '</td>' . "\n";
@@ -369,7 +372,7 @@
         echo   '            <td class="dataTableContent" valign="top">' . tep_draw_pull_down_menu('add_product_options[' . $products_options_name['products_options_id'] . ']', $products_options_array, $selected_attribute) . '</td>' . "\n" .
                '            <td class="dataTableContent">&nbsp;</td>' . "\n" .
                '          </tr>' . "\n" .
-               '          <tr class="dataTableRow">' . "\n";  
+               '          <tr class="dataTableRow">' . "\n";
         $i++;
       }
       echo '            <td class="dataTableContent">&nbsp;</td>' . "\n" .
@@ -382,7 +385,7 @@
            '          </tr>' . "\n";
     }
   }
-  
+
   if ($step > 3) {
     echo '          <tr class="dataTableRow">' . "\n" .
          '            <td colspan="3" style="border-bottom: 1px solid #C9C9C9;">' . tep_draw_separator('pixel_trans.gif', '1', '1') . '</td>' . "\n" .
@@ -419,21 +422,21 @@
     <!-- body_text_eof //-->
  
            <div align="center" class="dataTableContent">
-                   
+ 
 				   <script language="JavaScript" type="text/javascript">
                    <!--
                     document.write("<a href=\"javascript:self.close();\"><?php echo TEXT_CLOSE_POPUP; ?></a>");
 	               //-->
                   </script>
-				  
+				
 				  <noscript>
 				   <strong>
 				    <?php echo TEXT_ADD_PRODUCT_INSTRUCTIONS; ?>
                    </strong>
 				  </noscript>
-				  
+				
 		   </div>
-      
+
 	
 <!-- body_eof //-->
 

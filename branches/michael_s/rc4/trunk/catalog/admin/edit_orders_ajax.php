@@ -588,6 +588,7 @@ if ($action == 'update_downloads') {
     <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_COMMENTS; ?></td>
    </tr>
 <?php
+$r = 0;
 $orders_history_query = tep_db_query("SELECT orders_status_history_id, orders_status_id, date_added, customer_notified, comments 
                                     FROM " . TABLE_ORDERS_STATUS_HISTORY . " 
 									WHERE orders_id = '" . tep_db_prepare_input($_GET['oID']) . "' 

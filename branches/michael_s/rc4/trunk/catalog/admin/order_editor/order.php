@@ -99,41 +99,22 @@
 
 	  
 	  $index = 0;
-      $orders_products_query = 
-	  
-	  tep_db_query("
-	  SELECT 
-	   op.orders_products_id, 
-	   op.products_name, 
-	   op.products_model, 
-	   op.products_price,
-	   op.products_tax, 
-	   op.products_quantity, 
-	   op.final_price, 
-	   p.products_tax_class_id,
-	   p.products_weight,
-	   p.products_id
-      FROM " . TABLE_ORDERS_PRODUCTS . " op
-      INNER JOIN " . TABLE_PRODUCTS . " p
-      ON op.products_id = p.products_id
-      WHERE orders_id = '" . (int)$order_id . "'
-      ORDER BY op.orders_products_id");
-	
+      $orders_products_query = tep_db_query("select op.orders_products_id, op.products_id, op.products_name, op.products_model, op.products_price, op.products_tax, op.products_quantity, op.final_price, p.products_tax_class_id, p.products_weight, p.products_id from " . TABLE_ORDERS_PRODUCTS . " op INNER JOIN " . TABLE_PRODUCTS . " p on op.products_id = p.products_id where orders_id = '" . (int)$order_id . "' order by op.orders_products_id");
+
       while ($orders_products = tep_db_fetch_array($orders_products_query)) {
+        $orders_products_tax_query = tep_db_query("select products_tax_class_id from " .TABLE_PRODUCTS . " where products_id = " . $orders_products['products_id'] . "");
+        $orders_products_tax = tep_db_fetch_array($orders_products_tax_query);
         $this->products[$index] = array(		
-		'qty' => $orders_products['products_quantity'],
+        'qty' => $orders_products['products_quantity'],
         'name' => $orders_products['products_name'],
         'model' => $orders_products['products_model'],
         'tax' => $orders_products['products_tax'],
-        
-		'tax_description' => 
-	tep_get_tax_description($orders_products['products_tax_class_id'], $this->delivery["country_id"], $this->delivery["zone_id"]),
-    
-	    'price' => $orders_products['products_price'],
+        'tax_description' => tep_get_tax_description($orders_products_tax['products_tax_class_id'], $this->delivery["country_id"], $this->delivery["zone_id"]),
+        'price' => $orders_products['products_price'],
         'final_price' => $orders_products['final_price'],
-		'weight' => $orders_products['products_weight'],
-		'products_id' => $orders_products['products_id'],
-		'orders_products_id' => $orders_products['orders_products_id']);
+        'weight' => $orders_products['products_weight'],
+        'products_id' => $orders_products['products_id'],
+        'orders_products_id' => $orders_products['orders_products_id']);
 
         $subindex = 0;
         $attributes_query = tep_db_query("select products_options, products_options_values, options_values_price, price_prefix, orders_products_attributes_id from " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " where orders_id = '" . (int)$order_id . "' and orders_products_id = '" . (int)$orders_products['orders_products_id'] . "'");

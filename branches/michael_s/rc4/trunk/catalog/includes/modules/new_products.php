@@ -69,7 +69,7 @@ if ($customer_group_id != '0') {
 } // end if ($customer_group_id != '0')
 
 // an extra query is needed for all the specials
-	$specials_query = tep_db_query("select products_id, specials_new_products_price from specials where (".$select_list_of_prdct_ids.") and status = '1' and customers_group_id = '" .$customer_group_id. "' ");
+	$specials_query = tep_db_query("select products_id, specials_new_products_price from " . TABLE_SPECIALS . " where (".$select_list_of_prdct_ids.") and status = '1' and customers_group_id = '" .$customer_group_id. "' ");
 	while ($specials_array = tep_db_fetch_array($specials_query)) {
 	$new_s_prices[] = array ('products_id' => $specials_array['products_id'], 'specials_new_products_price' => $specials_array['specials_new_products_price']);
 	}

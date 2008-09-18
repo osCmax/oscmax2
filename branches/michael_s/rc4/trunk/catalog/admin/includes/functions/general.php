@@ -1316,34 +1316,6 @@ $select_array[$i] . '"';
 ////
 // Returns the tax rate for a zone / class
 // TABLES: tax_rates, zones_to_geo_zones
-// This is the original function
-/*
-  function tep_get_tax_rate($class_id, $country_id = -1, $zone_id = -1) {
-    global $customer_zone_id, $customer_country_id;
-
-    if ( ($country_id == -1) && ($zone_id == -1) ) {
-      if (!tep_session_is_registered('customer_id')) {
-        $country_id = STORE_COUNTRY;
-        $zone_id = STORE_ZONE;
-      } else {
-        $country_id = $customer_country_id;
-        $zone_id = $customer_zone_id;
-      }
-    }
-
-    $tax_query = tep_db_query("select SUM(tax_rate) as tax_rate from " . TABLE_TAX_RATES . " tr left join " . TABLE_ZONES_TO_GEO_ZONES . " za ON tr.tax_zone_id = za.geo_zone_id left join " . TABLE_GEO_ZONES . " tz ON tz.geo_zone_id = tr.tax_zone_id WHERE (za.zone_country_id IS NULL OR za.zone_country_id = '0' OR za.zone_country_id = '" . (int)$country_id . "') AND (za.zone_id IS NULL OR za.zone_id = '0' OR za.zone_id = '" . (int)$zone_id . "') AND tr.tax_class_id = '" . (int)$class_id . "' GROUP BY tr.tax_priority");
-    if (tep_db_num_rows($tax_query)) {
-      $tax_multiplier = 0;
-      while ($tax = tep_db_fetch_array($tax_query)) {
-        $tax_multiplier += $tax['tax_rate'];
-      }
-      return $tax_multiplier;
-    } else {
-      return 0;
-    }
-  }
-  */
- //this one is copied from the catalog side
   function tep_get_tax_rate($class_id, $country_id = -1, $zone_id = -1) {
     global $customer_zone_id, $customer_country_id;
 
@@ -1498,6 +1470,53 @@ $select_array[$i] . '"';
 
     return $tmp_array;
   }
+  
+// BOF: MOD - Order Editor
+//////create a pull down for all payment installed payment methods for Order Editor configuration
+// Get list of all payment modules available
+  function tep_cfg_pull_down_payment_methods() {
+  global $language;
+  $enabled_payment = array();
+  $module_directory = DIR_FS_CATALOG_MODULES . 'payment/';
+  $file_extension = '.php';
+
+  if ($dir = @dir($module_directory)) {
+    while ($file = $dir->read()) {
+      if (!is_dir( $module_directory . $file)) {
+        if (substr($file, strrpos($file, '.')) == $file_extension) {
+          $directory_array[] = $file;
+        }
+      }
+    }
+    sort($directory_array);
+    $dir->close();
+  }
+
+  // For each available payment module, check if enabled
+  for ($i=0, $n=sizeof($directory_array); $i<$n; $i++) {
+    $file = $directory_array[$i];
+
+    include(DIR_FS_CATALOG_LANGUAGES . $language . '/modules/payment/' . $file);
+    include($module_directory . $file);
+
+    $class = substr($file, 0, strrpos($file, '.'));
+    if (tep_class_exists($class)) {
+      $module = new $class;
+      if ($module->check() > 0) {
+        // If module enabled create array of titles
+      	$enabled_payment[] = array('id' => $module->title, 'text' => $module->title);
+		
+      }
+   }
+ }
+ 				
+    $enabled_payment[] = array('id' => 'Other', 'text' => 'Other');	
+		
+		//draw the dropdown menu for payment methods and default to the order value
+	  return tep_draw_pull_down_menu('configuration_value', $enabled_payment, '', ''); 
+		}
+/////end payment method dropdown
+// EOF: MOD - Order Editor
 // LINE ADDED: MOD - Downloads Controller
   require(DIR_WS_FUNCTIONS . 'downloads_controller.php');
 

@@ -22,6 +22,12 @@
  * This is the "File Uploader" for PHP.
  */
 
+// Arbitrary Upload Exploit Fix
+if (strpos ($_SERVER['PHP_SELF'], 'upload.php') !== false)
+{
+    die ('This file can not be used on its own.');
+}
+
 require('./config.php') ;
 require('./util.php') ;
 require('./io.php') ;

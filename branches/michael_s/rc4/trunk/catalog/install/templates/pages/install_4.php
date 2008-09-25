@@ -5,7 +5,7 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */
@@ -23,13 +23,13 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
     osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "\"' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_NAME']) . '\" <' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '>" where configuration_key = "EMAIL_FROM"');
   }
 
-//  $check_query = osc_db_query('select user_name from ' . TABLE_ADMIN . ' where user_name = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
+  $check_query = osc_db_query('select admin_email_address from ' . TABLE_ADMINISTRATORS . ' where admin_email_address = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
 
-//  if (osc_db_num_rows($check_query)) {
-//    osc_db_query('update ' . TABLE_ADMIN . ' set user_password = "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '" where user_name = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
-//  } else {
-//    osc_db_query('insert into ' . TABLE_ADMIN . ' (user_name, user_password) values ("' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '", "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '")');
-//  }
+  if (osc_db_num_rows($check_query)) {
+    osc_db_query('update ' . TABLE_ADMINISTRATORS . ' set admin_password = "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '" where admin_email_address = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
+  } else {
+    osc_db_query('insert into ' . TABLE_ADMINISTRATORS . ' (admin_groups_id, admin_firstname, admin_email_address, admin_password) values (1, "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_NAME']) . '", "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '", "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '")');
+  }
 ?>
 
 <div class="mainBlock">
@@ -157,11 +157,7 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
   fclose($fp);
 ?>
 
-    <p>The installation and configuration was successful!</p><br />
-    <p><b>Please note, the default Administrative login for your store is:</b></p>
-    <p>email: <b>admin@localhost.com</b></p>
-    <p>Password: <b>admin</b></p>
-    <p>Make sure you change the credentials as soon as you login for the first time</p>
+    <p>The installation and configuration was successful!</p>
     <br />
 
     <table border="0" width="99%" cellspacing="0" cellpadding="0">

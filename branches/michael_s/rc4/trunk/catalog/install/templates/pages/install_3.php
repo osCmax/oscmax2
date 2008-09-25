@@ -5,7 +5,7 @@ $Id: install_3.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */
@@ -54,7 +54,7 @@ $Id: install_3.php 3 2006-05-27 04:59:07Z user $
       <tr>
         <td class="inputField"><?php echo 'Store Owner E-Mail Address<br />' . osc_draw_input_field('CFG_STORE_OWNER_EMAIL_ADDRESS', null, 'class="text"'); ?></td>
         <td class="inputDescription">The e-mail address of the store owner that is presented to the public.</td>
-<!--      </tr>
+      </tr>
       <tr>
         <td class="inputField"><?php echo 'Administrator Username<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_USERNAME', null, 'class="text"'); ?></td>
         <td class="inputDescription">The administrator username to use for the administration tool.</td>
@@ -62,7 +62,7 @@ $Id: install_3.php 3 2006-05-27 04:59:07Z user $
       <tr>
         <td class="inputField"><?php echo 'Administrator Password<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text"'); ?></td>
         <td class="inputDescription">The password to use for the administrator account.</td>
-      </tr> -->
+      </tr>
     </table>
 
     <p align="right"><input type="image" src="images/button_continue.gif" border="0" alt="Continue" id="inputButton" />&nbsp;&nbsp;<a href="index.php"><img src="images/button_cancel.gif" border="0" alt="Cancel" /></a></p>

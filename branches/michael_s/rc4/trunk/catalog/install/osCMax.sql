@@ -6,6 +6,17 @@
 #
 # Database: osCMax v2.0 RC4
 #
+# NOTE: * Please make any modifications to this file by hand!
+#       * DO NOT use a mysqldump created file for new changes!
+#       * Please take note of the table structure, and use this
+#         structure as a standard for future modifications!
+#       * Any tables you add here should be added in admin/backup.php
+#         and in catalog/install/includes/functions/database.php
+#       * To see the 'diff'erence between MySQL databases, use
+#         the mysqldiff perl script located in the extras
+#         directory of the 'catalog' module.
+#       * Comments should be like these, full line comments.
+#         (don't use inline comments)
 
 DROP TABLE IF EXISTS address_book;
 CREATE TABLE address_book (
@@ -1500,7 +1511,7 @@ INSERT INTO configuration (configuration_id, configuration_title, configuration_
 INSERT INTO configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES(64, 'Company', 'ACCOUNT_COMPANY', 'false', 'Display company in the customers account', 5, 3, NULL, '2003-07-17 10:29:22', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES(65, 'Suburb', 'ACCOUNT_SUBURB', 'false', 'Display suburb in the customers account', 5, 4, NULL, '2003-07-17 10:29:22', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES(66, 'State', 'ACCOUNT_STATE', 'true', 'Display state in the customers account', 5, 5, NULL, '2003-07-17 10:29:22', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES(67, 'Installed Modules', 'MODULE_PAYMENT_INSTALLED', 'cc.php;googlecheckout.php;paypal_direct.php;paypal_express.php', 'List of payment module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: cc.php;cod.php;paypal.php)', 6, 0, '2008-05-03 22:50:07', '2003-07-17 10:29:22', NULL, NULL);
+INSERT INTO configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES(67, 'Installed Modules', 'MODULE_PAYMENT_INSTALLED', 'cc.php;', 'List of payment module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: cc.php;cod.php;paypal.php)', 6, 0, '2008-05-03 22:50:07', '2003-07-17 10:29:22', NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES(68, 'Installed Modules', 'MODULE_ORDER_TOTAL_INSTALLED', 'ot_subtotal.php;ot_shipping.php;ot_tax.php;ot_loyalty_discount.php;ot_loworderfee.php;ot_coupon.php;ot_gv.php;ot_total.php', 'List of order_total module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: ot_subtotal.php;ot_tax.php;ot_shipping.php;ot_total.php)', 6, 0, '2005-03-30 14:15:00', '2003-07-17 10:29:22', NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES(69, 'Installed Modules', 'MODULE_SHIPPING_INSTALLED', 'flat.php', 'List of shipping module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: ups.php;flat.php;item.php)', 6, 0, '2005-09-18 11:05:24', '2003-07-17 10:29:22', NULL, NULL);
 INSERT INTO configuration (configuration_id, configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES(498, 'Purchase Without Account', 'PWA_ON', 'false', 'Allow Customers to purchase without an account', 40, 1, '2008-05-03 23:15:17', '2003-04-08 12:10:51', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');

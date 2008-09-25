@@ -13,6 +13,8 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
 // define the database table names used in the project
   define('TABLE_ADDRESS_BOOK', 'address_book');
   define('TABLE_ADDRESS_FORMAT', 'address_format');
+// Line added: Mod RC2A
+  define('TABLE_ADMINISTRATORS', 'admin');
 // BOF: MOD - Article Manager
   define('TABLE_ARTICLE_REVIEWS', 'article_reviews');
   define('TABLE_ARTICLE_REVIEWS_DESCRIPTION', 'article_reviews_description');

@@ -445,31 +445,8 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
               $attributes=$attributes + $HTTP_POST_VARS['id'];
           }
         }
-                              // No offer is made or direct offers are disabled
-                              // so the default price is accepted
-                              $offeracceptable = true;
-                              // Addition for Make An Offer
-                              if (MAO_ACCEPT_OFFER_DIRECTLY == 'true') {
-					if (!$HTTP_POST_VARS['newpriceoffer'] == '') {
-						$offeracceptable = mao_check_offer($HTTP_POST_VARS['newpriceoffer'], $HTTP_POST_VARS['products_id']);
-						if ($offeracceptable == true) {
-							if (!tep_session_is_registered('mao_accepted_offer')) {
-								$mao_accepted_offer = array();
-								$mao_accepted = array('productid' => $HTTP_POST_VARS['products_id'],'newprice' => $HTTP_POST_VARS['newpriceoffer'],'initialvaluta' => $currency);
-								array_push($mao_accepted_offer, $mao_accepted);
-								tep_session_register('mao_accepted_offer');
-							} else {
-								$mao_accepted = array('productid' => $HTTP_POST_VARS['products_id'],'newprice' => $HTTP_POST_VARS['newpriceoffer'],'initialvaluta' => $currency);
-								array_push($mao_accepted_offer, $mao_accepted);
-							}
-						}
-					}
-				}
-				if ($offeracceptable == true) {
-					tep_session_unregister('mao_low_offer');
         $cart->add_cart($HTTP_POST_VARS['products_id'], $cart->get_quantity(tep_get_uprid($HTTP_POST_VARS['products_id'], $attributes))+1, $attributes);
 // EOF: MOD - QT Pro
-                      } 
                     }
         tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
         break;

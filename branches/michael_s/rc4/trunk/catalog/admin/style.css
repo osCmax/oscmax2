@@ -1,0 +1,17 @@
+/* Designed for use with the Access with Level Account (v. 2.2) for the Admin Area of osCommerce (MS2) 	*/
+/* Stylesheet coding by Cindy Harlow aka Chinchilla2 on the osC Support Forum							*/
+/* Copyright 2006 - Released under the GNU General Public License										*/
+/* Pages effected by this stylesheet... login.php, logoff.php, index.php, password_forgotten.php		*/ 
+
+a { color:#080381; text-decoration:none; }
+a:hover { color: #616161; text-decoration:underline; }
+a.text:link, a.text:visited { color: #858585; text-decoration: none; }
+a:text:hover { color: #000000; text-decoration: underline; }
+a.sub:link, a.sub:visited { color: #6B6B6B; text-decoration: none; }
+A.sub:hover { color: #919191; text-decoration: underline; }
+.sub { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; line-height: 1.5; color: #535353; }
+.text { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000; }
+.smallText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+.login_heading { font-family: Verdana, Arial, sans-serif; font-size: 12px; color: #010101;}
+.login { font-family: Verdana, Arial, sans-serif; font-size: 12px; color: #000000;}
+

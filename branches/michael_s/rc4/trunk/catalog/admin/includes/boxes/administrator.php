@@ -10,7 +10,7 @@ $Id: administrator.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 ?>
-<!-- catalog //-->
+<!-- administrator //-->
           <tr>
             <td>
 <?php
@@ -36,4 +36,4 @@ $Id: administrator.php 3 2006-05-27 04:59:07Z user $
 ?>
             </td>
           </tr>
-<!-- catalog_eof //-->
+<!-- administrator_eof //-->

@@ -11,9 +11,9 @@ $Id: forbiden.php 3 2006-05-27 04:59:07Z user $
 */
 
   require('includes/application_top.php');
-  
+
   $current_boxes = DIR_FS_ADMIN . DIR_WS_BOXES;
-  
+
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -36,9 +36,9 @@ $Id: forbiden.php 3 2006-05-27 04:59:07Z user $
 <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
 <!-- left_navigation_eof //-->
     </table></td>
-<!-- body_text //-->    
+<!-- body_text //-->
     <td width="100%" valign="top">
-      <table border="0" width="100%" cellspacing="0" cellpadding="2">     
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -58,11 +58,11 @@ $Id: forbiden.php 3 2006-05-27 04:59:07Z user $
               </tr>
               <tr class="dataTableRow">
                 <td align="left"><?php echo '&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>&nbsp;'; ?></td>
-              </tr>              
+              </tr>
             </table>
         </td>
       </tr>
-    </table></td>  
+    </table></td>
 <!-- body_text_eof //-->
   </tr>
 </table>

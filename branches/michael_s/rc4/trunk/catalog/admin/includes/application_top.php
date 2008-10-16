@@ -29,6 +29,7 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
 
 // Define the project version
   define('PROJECT_VERSION', 'osCMax v2.0 RC4');
+
 // some code to solve compatibility issues
   require(DIR_WS_FUNCTIONS . 'compatibility.php');
 
@@ -80,7 +81,6 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
 // include shopping cart class
   require(DIR_WS_CLASSES . 'shopping_cart.php');
 
-
 // check to see if php implemented session management functions - if not, include php3/php4 compatible session class
   if (!function_exists('session_start')) {
     define('PHP_SESSION_NAME', 'osCAdminID');
@@ -111,6 +111,7 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
   if ( (PHP_VERSION >= 4.3) && function_exists('ini_get') && (ini_get('register_globals') == false) ) {
     extract($_SESSION, EXTR_OVERWRITE+EXTR_REFS);
   }
+
 // set the language
   if (!tep_session_is_registered('language') || isset($HTTP_GET_VARS['language'])) {
     if (!tep_session_is_registered('language')) {
@@ -129,6 +130,30 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
 
     $language = $lng->language['directory'];
     $languages_id = $lng->language['id'];
+  }
+
+// redirect to login page if administrator is not yet logged in
+  if (!tep_session_is_registered('admin')) {
+    $redirect = false;
+
+    $current_page = basename($PHP_SELF);
+
+    if ($current_page != FILENAME_LOGIN) {
+      if (!tep_session_is_registered('redirect_origin')) {
+        tep_session_register('redirect_origin');
+
+        $redirect_origin = array('page' => $current_page,
+                                 'get' => $HTTP_GET_VARS);
+      }
+
+      $redirect = true;
+    }
+
+    if ($redirect == true) {
+      tep_redirect(tep_href_link(FILENAME_LOGIN));
+    }
+
+    unset($redirect);
   }
 
 // include the language translations
@@ -212,7 +237,7 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
   }
 
 // BOF: MOD - Admin w/access levels
-  if (basename($PHP_SELF) != FILENAME_LOGIN && basename($PHP_SELF) != FILENAME_PASSWORD_FORGOTTEN) {
+  if (basename($PHP_SELF) != FILENAME_LOGIN && basename($PHP_SELF) != FILENAME_PASSWORD_FORGOTTEN && basename($PHP_SELF) != FILENAME_FORBIDDEN) {
     tep_admin_check_login();
   }
 // EOF: MOD - Admin w/access levels

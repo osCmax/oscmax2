@@ -241,8 +241,8 @@ a:hover.headerLink { font-family: Verdana, Arial, sans-serif; font-size: 10px; c
       <tr bgcolor="#000000">
         <td><table border="0" width="600" height="440" cellspacing="0" cellpadding="0">
           <tr bgcolor="#ffffff" height="50">
-            <td height="50"><?php echo '<a href="http://aabox.com/virtual-hosting-oscmax.htm">' . tep_image(DIR_WS_IMAGES . 'oscmax.gif', 'osCMax v2.0 created by AABox Web Hosting', '169', '56') . '</a>'; ?></td>
-            <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.aabox.com/?oscmax" target="_blank" class="headerLink">AABox Web Hosting</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://oscdox.com" class="headerLink">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '" class="headerLink">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '" class="headerLink">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp<br>Current Version: <?php echo PROJECT_VERSION ?>&nbsp;&nbsp;</td>
+            <td height="50"><?php echo '<a href="http://www.oscmax.com">' . tep_image(DIR_WS_IMAGES . 'oscmax.gif', 'osCMax v2.0 created by AABox Web Hosting', '169', '56') . '</a>'; ?></td>
+            <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.aabox.com" target="_blank" class="headerLink">osCMax Hosting</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.oscdox.com" class="headerLink">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '" class="headerLink">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '" class="headerLink">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp<br>Current Version: <?php echo PROJECT_VERSION ?>&nbsp;&nbsp;</td>
           </tr>
           <tr bgcolor="#E7E7E7">
             <td colspan="2"><table border="0" width="100%" height="390" cellspacing="0" cellpadding="0">
@@ -258,15 +258,15 @@ a:hover.headerLink { font-family: Verdana, Arial, sans-serif; font-size: 10px; c
                      'text'  => 'osCMax v2.0');
 
   $contents[] = array('params' => 'class="infoBox"',
-                      'text'  => '<a href="http://www.osCDox.com" target="_blank">' . BOX_ENTRY_SUPPORT_SITE . '</a><br>' .
-                                 '<a href="http://osCDox.com/PNphpBB2.html" target="_blank">' . BOX_ENTRY_SUPPORT_FORUMS . '</a><br>' .
+                      'text'  => '<a href="http://www.oscmax.com" target="_blank">' . BOX_ENTRY_SUPPORT_SITE . '</a><br>' .
+                                 '<a href="http://www.oscmax.com/forums" target="_blank">' . BOX_ENTRY_SUPPORT_FORUMS . '</a><br>' .
                                  '<a href="http://www.osCDox.com/mailinglist/index.php?p=subscribe&id=1" target="_blank">' . BOX_ENTRY_MAILING_LISTS . '</a><br>' .
                                  '<a href="http://bugtrack.oscmax.com/" target="_blank">' . BOX_ENTRY_BUG_REPORTS . '</a><br>' .
                                  '<a href="https://www.paypal.com/us/mrb/pal=CDCRNFVMQRHTC" target="_blank">' . BOX_ENTRY_PAYPAL . '</a><br>' .
                                  '<a href="http://www.aabox.com/merchant-accounts.htm?oscmax" target="_blank">' . BOX_ENTRY_MERCHANT . '</a><br>' .
                                  '<a href="http://www.aabox.com/domains.htm?oscmax" target="_blank">' . BOX_ENTRY_DOMAINS . '</a><br>' .
                                  '<a href="http://www.aabox.com/ssl-compare.htm?oscmax" target="_blank">' . BOX_ENTRY_SSL . '</a><br>' .
-               			 '<a href="http://www.aabox.com/virtual-hosting-oscmax.htm?oscmax" target="_blank">' . BOX_ENTRY_AABOX . '</a>');
+               			 '<a href="http://www.aabox.com/virtual-hosting-oscmax.htm" target="_blank">' . BOX_ENTRY_AABOX . '</a>');
 
   $box = new box;
   echo $box->menuBox($heading, $contents);

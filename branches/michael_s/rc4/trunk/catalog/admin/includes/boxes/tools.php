@@ -31,8 +31,7 @@ $Id: tools.php 3 2006-05-27 04:59:07Z user $
 //                                   '<a href="' . tep_href_link(FILENAME_NEWSLETTERS) . '" class="menuBoxContentLink">' . BOX_TOOLS_NEWSLETTER_MANAGER . '</a><br>' .
 //                                   '<a href="' . tep_href_link(FILENAME_SERVER_INFO) . '" class="menuBoxContentLink">' . BOX_TOOLS_SERVER_INFO . '</a><br>' .
 //                                   '<a href="' . tep_href_link(FILENAME_WHOS_ONLINE) . '" class="menuBoxContentLink">' . BOX_TOOLS_WHOS_ONLINE . '</a>');
-    $contents[] = array('text'  => 
-                                   tep_admin_files_boxes(FILENAME_BACKUP, BOX_TOOLS_BACKUP) .
+    $contents[] = array('text'  => tep_admin_files_boxes(FILENAME_BACKUP, BOX_TOOLS_BACKUP) .
                                    tep_admin_files_boxes(FILENAME_BANNER_MANAGER, BOX_TOOLS_BANNER_MANAGER) .
                                    tep_admin_files_boxes(FILENAME_BATCH_PRINT, BOX_TOOLS_BATCH_CENTER) . 
                                    tep_admin_files_boxes(FILENAME_CACHE, BOX_TOOLS_CACHE) .

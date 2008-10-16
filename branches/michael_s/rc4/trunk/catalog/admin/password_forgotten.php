@@ -59,19 +59,7 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
-<style type="text/css"><!--
-a { color:#080381; text-decoration:none; }
-a:hover { color: #616161; text-decoration:underline; }
-a.text:link, a.text:visited { color: #858585; text-decoration: none; }
-a:text:hover { color: #000000; text-decoration: underline; }
-a.sub:link, a.sub:visited { color: #6B6B6B; text-decoration: none; }
-A.sub:hover { color: #919191; text-decoration: underline; }
-.sub { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; line-height: 1.5; color: #535353; }
-.text { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000; }
-.smallText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
-.login_heading { font-family: Verdana, Arial, sans-serif; font-size: 12px; color: #010101;}
-.login { font-family: Verdana, Arial, sans-serif; font-size: 12px; color: #000000;}
-//--></style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 
@@ -81,12 +69,12 @@ A.sub:hover { color: #919191; text-decoration: underline; }
       <tr bgcolor="#000000">
         <td><table border="0" width="600" height="440" cellspacing="0" cellpadding="0">
           <tr bgcolor="#ffffff" height="50">
-            <td height="50"><?php echo '<a href="http://aabox.com/virtual-hosting-oscmax.htm">' . tep_image(DIR_WS_IMAGES . 'oscmax.gif', 'osCMax v2.0', '169', '56') . '</a>'; ?></td>
+            <td height="50"><?php echo '<a href="http://www.oscmax.com/">' . tep_image(DIR_WS_IMAGES . 'oscmax.gif', 'osCMax v2.0', '169', '56') . '</a>'; ?></td>
             <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.aabox.com/?oscmax" target="_blank" class="headerLink">AABox Web Hosting</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://oscdox.com" class="headerLink">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp;</td>
           </tr>
           <tr bgcolor="#E7E7E7">
             <td colspan="2" align="center" valign="middle">
-                          <?php echo tep_draw_form('login', 'password_forgotten.php?action=process'); ?>
+                <?php echo tep_draw_form('login', FILENAME_PASSWORD_FORGOTTEN, 'action=process'); ?>
                             <table width="280" border="0" cellspacing="0" cellpadding="2">
                               <tr>
                                 <td class="login_heading" valign="top">&nbsp;<b><?php echo HEADING_PASSWORD_FORGOTTEN; ?></b></td>

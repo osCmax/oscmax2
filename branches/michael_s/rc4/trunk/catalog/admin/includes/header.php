@@ -23,7 +23,8 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
 <?php /* BOF: MOD - Admin Security */ ?>
 <?php /* old- <td class="headerBarContent">&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, '', 'NONSSL') . '" class="headerLink">' . HEADER_TITLE_TOP . '</a>'; ?></td> */ ?>
 <?php /* old- <td class="headerBarContent" align="right"><?php echo '<a href="http://www.oscommerce.com" class="headerLink">' . HEADER_TITLE_SUPPORT_SITE . '</a> &nbsp;|&nbsp; <a href="' . tep_catalog_href_link() . '" class="headerLink">' . HEADER_TITLE_ONLINE_CATALOG . '</a> &nbsp;|&nbsp; <a href="' . tep_href_link(FILENAME_DEFAULT, '', 'NONSSL') . '" class="headerLink">' . HEADER_TITLE_ADMINISTRATION . '</a>'; ?>&nbsp;&nbsp;</td> */ ?>
-    <td class="headerBarContent">&nbsp;&nbsp;<?php
+    <td class="headerBarContent">&nbsp;&nbsp;
+<?php
   if (tep_session_is_registered('login_id')) {
     echo '<a href="' . tep_href_link(FILENAME_ADMIN_ACCOUNT, '', 'SSL') . '" class="headerLink">' . HEADER_TITLE_ACCOUNT . '</a> | <a href="' . tep_href_link(FILENAME_LOGOFF, '', 'NONSSL') . '" class="headerLink">' . HEADER_TITLE_LOGOFF . '</a>';
   } else {

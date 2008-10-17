@@ -37,4 +37,13 @@ define('TEXT_FORGOTTEN_SUCCESS', 'Ein neues Kennwort ist zu Ihrer E-mail Adresse
 
 define('ADMIN_EMAIL_SUBJECT', 'Neues Kennwort');
 define('ADMIN_EMAIL_TEXT', 'Hallo %s,' . "\n\n" . 'Sie können die Administration mit dem folgenden Kennwort zugänglich machen. Ändern Sie bitte aus Sicherheitsgründen sofort Ihr Kennwort!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Kennwort: %s' . "\n\n" . 'Danke!' . "\n" . '%s' . "\n\n" . 'Dieses ist eine automatisierte Nachricht, bitte antworten Sie nicht!');
+define('TEXT_USERNAME', 'Username:');
+define('TEXT_PASSWORD', 'Password:');
+
+define('TEXT_CREATE_FIRST_ADMINISTRATOR', 'No administrators exist in the database table. Please fill in the following information to create the first administrator. (A manual login is still required after this step)');
+
+define('ERROR_INVALID_ADMINISTRATOR', 'Error: Invalid administrator login attempt.');
+
+define('BUTTON_LOGIN', 'Login');
+define('BUTTON_CREATE_ADMINISTRATOR', 'Create Administrator');
 ?>

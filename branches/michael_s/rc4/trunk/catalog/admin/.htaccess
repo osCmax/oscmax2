@@ -17,13 +17,13 @@
 # The following makes adjustments to the SSL protocol for Internet
 # Explorer browsers
 
-<IfModule mod_setenvif.c>
-  <IfDefine SSL>
-    SetEnvIf User-Agent ".*MSIE.*" \
-             nokeepalive ssl-unclean-shutdown \
-             downgrade-1.0 force-response-1.0
-  </IfDefine>
-</IfModule>
+#<IfModule mod_setenvif.c>
+#  <IfDefine SSL>
+#    SetEnvIf User-Agent ".*MSIE.*" \
+#             nokeepalive ssl-unclean-shutdown \
+#             downgrade-1.0 force-response-1.0
+#  </IfDefine>
+#</IfModule>
 
 # BOF: MS2 update 501112-Added
 # If Search Engine Friendly URLs do not work, try enabling the

@@ -82,6 +82,8 @@ $Id: checkout_confirmation.php 3 2006-05-27 04:59:07Z user $
 //  require(DIR_WS_CLASSES . 'order_total.php');
 //  $order_total_modules = new order_total;
 // EOF: MOD - ICW CREDIT CLASS SYSTEM
+// Line added: Mod RC2A
+  $order_total_modules->process();
 
 // Stock Check
   $any_out_of_stock = false;

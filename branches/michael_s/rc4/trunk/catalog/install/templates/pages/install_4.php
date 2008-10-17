@@ -140,11 +140,12 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
                    '  define(\'DIR_FS_CATALOG_LANGUAGES\', DIR_FS_CATALOG . \'includes/languages/\');' . "\n" .
                    '  define(\'DIR_FS_CATALOG_IMAGES\', DIR_FS_CATALOG . \'images/\');' . "\n" .
                    '  define(\'DIR_FS_CATALOG_MODULES\', DIR_FS_CATALOG . \'includes/modules/\');' . "\n" .
-                   '  define(\'DIR_FS_BACKUP\', DIR_FS_ADMIN . \'backups/\');' . "\n\n" .
+                   '  define(\'DIR_FS_BACKUP\', DIR_FS_ADMIN . \'backups/\');' . "\n" .
+                   '  define(\'DIR_FCKEDITOR\', DIR_FS_CATALOG . \'FCKeditor/\');' . "\n" .
+                   '  define(\'DIR_WS_FCKEDITOR\', DIR_WS_CATALOG . \'FCKeditor/\');' . "\n" .
+                   '' . "\n" .
+                   '// define our database connection' . "\n" .
                    '  define(\'DB_SERVER\', \'' . trim($HTTP_POST_VARS['DB_SERVER']) . '\');' . "\n" .
-                     '  define(\'DIR_FCKEDITOR\', DIR_FS_CATALOG . \'FCKeditor/\');' . "\n" .
-                     '  define(\'DIR_WS_FCKEDITOR\', DIR_WS_CATALOG . \'FCKeditor/\');' . "\n" .
-                     '' . "\n" .
                    '  define(\'DB_SERVER_USERNAME\', \'' . trim($HTTP_POST_VARS['DB_SERVER_USERNAME']) . '\');' . "\n" .
                    '  define(\'DB_SERVER_PASSWORD\', \'' . trim($HTTP_POST_VARS['DB_SERVER_PASSWORD']) . '\');' . "\n" .
                    '  define(\'DB_DATABASE\', \'' . trim($HTTP_POST_VARS['DB_DATABASE']) . '\');' . "\n" .

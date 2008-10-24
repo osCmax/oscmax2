@@ -132,29 +132,6 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
     $languages_id = $lng->language['id'];
   }
 
-// redirect to login page if administrator is not yet logged in
-  if (!tep_session_is_registered('admin')) {
-    $redirect = false;
-
-    $current_page = basename($PHP_SELF);
-
-    if ($current_page != FILENAME_LOGIN) {
-      if (!tep_session_is_registered('redirect_origin')) {
-        tep_session_register('redirect_origin');
-
-        $redirect_origin = array('page' => $current_page,
-                                 'get' => $HTTP_GET_VARS);
-      }
-
-      $redirect = true;
-    }
-
-    if ($redirect == true) {
-      tep_redirect(tep_href_link(FILENAME_LOGIN));
-    }
-
-    unset($redirect);
-  }
 
 // include the language translations
   require(DIR_WS_LANGUAGES . $language . '.php');

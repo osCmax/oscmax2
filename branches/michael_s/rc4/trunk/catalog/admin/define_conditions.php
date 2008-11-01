@@ -36,7 +36,7 @@ $Id: define_conditions.php 14 2006-07-28 17:42:07Z user $
   require(DIR_FCKEDITOR . 'fckeditor.php');
 // This will cause it to look for 'conditions_content.php'
 
-  $HTTP_GET_VARS['filename'] = 'conditions_content.php';
+  $HTTP_GET_VARS['filename'] = DEFINE_CONDITIONS_CONTENT;
 
   switch ($HTTP_GET_VARS['action']) {
     case 'save':

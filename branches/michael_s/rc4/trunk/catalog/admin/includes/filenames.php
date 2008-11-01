@@ -94,6 +94,11 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_DEFINE_PRIVACY', 'define_privacy.php');
   define('FILENAME_DEFINE_SHIPPING', 'define_shipping.php');
   define('FILENAME_DEFINE_CONTACT_US','define_contact_us.php');
+  define('FILENAME_DEFINE_MAINPAGE_CONTENT', 'mainpage.php');
+  define('FILENAME_DEFINE_CONDITIONS_CONTENT', 'conditions_content.php');
+  define('FILENAME_DEFINE_ABOUT_US_CONTENT','about_us_content.php');
+  define('FILENAME_DEFINE_PRIVACY_CONTENT', 'privacy_content.php');
+  define('FILENAME_DEFINE_SHIPPING_CONTENT', 'shipping_content.php');
   define('FILENAME_INFOBOX_CONFIGURATION', 'infobox_configuration.php');
   define('FILENAME_POPUP_INFOBOX_HELP', 'popup_infobox_help.php');
 // EOF: MOD - wysiwyg content pages

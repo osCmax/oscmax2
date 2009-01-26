@@ -45,7 +45,7 @@ define('HTML_PARAMS','dir="LTR" lang="en"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0');
+define('TITLE', 'osCMax v2.0 RC3.0.3');
 
 // header text in includes/header.php
 define('HEADER_TITLE_CREATE_ACCOUNT', 'Create an Account');

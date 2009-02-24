@@ -255,7 +255,7 @@ class SEO_URL_INSTALLER{
                 
                 $x = 0;
                 $this->default_config = array();
-                $this->default_config['SEO_ENABLED'] = array('DEFAULT' => 'true',
+                $this->default_config['SEO_ENABLED'] = array('DEFAULT' => 'false',
                                                                                                      'QUERY' => "INSERT INTO `".TABLE_CONFIGURATION."` VALUES (NULL, 'Enable SEO URLs?', 'SEO_ENABLED', 'true', 'Enable the SEO URLs?  This is a global setting and will turn them off completely.', GROUP_INSERT_ID, ".$x.", NOW(), NOW(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),')"
                                                                                                      );
                 $x++;
@@ -263,7 +263,7 @@ class SEO_URL_INSTALLER{
                                                                                                                                               'QUERY' => "INSERT INTO `".TABLE_CONFIGURATION."` VALUES (NULL, 'Add cPath to product URLs?', 'SEO_ADD_CPATH_TO_PRODUCT_URLS', 'false', 'This setting will append the cPath to the end of product URLs (i.e. - some-product-p-1.html?cPath=xx).', GROUP_INSERT_ID, ".$x.", NOW(), NOW(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),')"
                                                                                                                                                 );
                 $x++;
-                $this->default_config['SEO_ADD_CAT_PARENT'] = array('DEFAULT' => 'true',
+                $this->default_config['SEO_ADD_CAT_PARENT'] = array('DEFAULT' => 'false',
                                                                                                                            'QUERY' => "INSERT INTO `".TABLE_CONFIGURATION."` VALUES (NULL, 'Add category parent to begining of URLs?', 'SEO_ADD_CAT_PARENT', 'true', 'This setting will add the category parent name to the beginning of the category URLs (i.e. - parent-category-c-1.html).', GROUP_INSERT_ID, ".$x.", NOW(), NOW(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),')"
                                                                                                                         );
                 $x++;

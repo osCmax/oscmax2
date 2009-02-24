@@ -35,7 +35,7 @@ $Id: currencies.php 3 2006-05-27 04:59:07Z user $
     function format($number, $calculate_currency_value = true, $currency_type = '', $currency_value = '') {
       global $currency;
 
-      if (empty($currency_type)) $currency_type = $currency;
+      if (empty($currency_type)) $currency_type = strtoupper($currency);
 
       if ($calculate_currency_value == true) {
         $rate = (tep_not_null($currency_value)) ? $currency_value : $this->currencies[$currency_type]['value'];

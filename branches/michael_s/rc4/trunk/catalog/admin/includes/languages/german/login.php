@@ -5,20 +5,20 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
 
 if ($HTTP_GET_VARS['origin'] == FILENAME_CHECKOUT_PAYMENT) {
-define('NAVBAR_TITLE', 'Anmelden');
-define('HEADING_TITLE', 'Melden Sie sich an');
+  define('NAVBAR_TITLE', 'Anmelden');
+  define('HEADING_TITLE', 'Melden Sie sich an');
   define('TEXT_STEP_BY_STEP', 'We\'ll walk you through the process, step by step.');
 } else {
-define('NAVBAR_TITLE', 'Zeichen Innen');
-define('HEADING_TITLE', 'Willkommen. Bitte Zeichen Innen');
-define('TEXT_STEP_BY_STEP', ''); // should be empty
-
+  define('NAVBAR_TITLE', 'Zeichen Innen');
+  define('HEADING_TITLE', 'Willkommen. Bitte Zeichen Innen');
+  define('TEXT_STEP_BY_STEP', ''); // should be empty
+}
 
 define('HEADING_RETURNING_ADMIN', 'Sicherer Zugang');
 define('HEADING_PASSWORD_FORGOTTEN', 'Kennwort Vergessen:');
@@ -26,6 +26,7 @@ define('TEXT_RETURNING_ADMIN', 'Nur Personal!');
 define('ENTRY_EMAIL_ADDRESS', 'Email Adresse:');
 define('ENTRY_PASSWORD', 'Kennwort:');
 define('ENTRY_FIRSTNAME', 'Vorname:');
+define('ENTRY_LASTNAME', 'Nachname:');
 define('IMAGE_BUTTON_LOGIN', 'Reichen Sie ein');
 
 define('TEXT_PASSWORD_FORGOTTEN', 'Kennwort vergessen?');
@@ -37,13 +38,13 @@ define('TEXT_FORGOTTEN_SUCCESS', 'Ein neues Kennwort ist zu Ihrer E-mail Adresse
 
 define('ADMIN_EMAIL_SUBJECT', 'Neues Kennwort');
 define('ADMIN_EMAIL_TEXT', 'Hallo %s,' . "\n\n" . 'Sie können die Administration mit dem folgenden Kennwort zugänglich machen. Ändern Sie bitte aus Sicherheitsgründen sofort Ihr Kennwort!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Kennwort: %s' . "\n\n" . 'Danke!' . "\n" . '%s' . "\n\n" . 'Dieses ist eine automatisierte Nachricht, bitte antworten Sie nicht!');
-define('TEXT_USERNAME', 'Username:');
-define('TEXT_PASSWORD', 'Password:');
+define('TEXT_USERNAME', 'Benutzername:');
+define('TEXT_PASSWORD', 'Kennwort:');
 
 define('TEXT_CREATE_FIRST_ADMINISTRATOR', 'No administrators exist in the database table. Please fill in the following information to create the first administrator. (A manual login is still required after this step)');
 
 define('ERROR_INVALID_ADMINISTRATOR', 'Error: Invalid administrator login attempt.');
 
-define('BUTTON_LOGIN', 'Login');
+define('BUTTON_LOGIN', 'Zeichen Innen');
 define('BUTTON_CREATE_ADMINISTRATOR', 'Create Administrator');
 ?>

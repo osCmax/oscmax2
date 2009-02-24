@@ -2,10 +2,10 @@
 /*
   $Id: rpc.php 1768 2008-01-07 17:38:40Z hpdl $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright (c) 2008 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */

@@ -2,7 +2,7 @@
 # http://oscdox.com
 #
 # Default Database For osCMax v2.0 RC4
-# Copyright (c) 2008 osCMax
+# Copyright (c) 2009 osCMax
 #
 # Released under the GNU General Public License
 #
@@ -50,6 +50,7 @@ DROP TABLE IF EXISTS admin;
 CREATE TABLE admin (
   admin_id int NOT NULL auto_increment,
   admin_groups_id int,
+  admin_username varchar(32) NOT NULL,
   admin_firstname varchar(32) NOT NULL,
   admin_lastname varchar(32),
   admin_email_address varchar(96) NOT NULL,
@@ -59,7 +60,8 @@ CREATE TABLE admin (
   admin_logdate datetime,
   admin_lognum int NOT NULL DEFAULT '0',
   PRIMARY KEY (admin_id),
-  UNIQUE KEY admin_email_address (admin_email_address)
+  UNIQUE KEY admin_username (admin_username),
+  UNIQUE KEY admin_email_address (admin_email_address) 
 );
 
 DROP TABLE IF EXISTS admin_files;

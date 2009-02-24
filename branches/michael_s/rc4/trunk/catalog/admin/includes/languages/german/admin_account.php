@@ -5,7 +5,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -15,6 +15,7 @@ define('HEADING_TITLE', 'Admin Konto');
 define('TABLE_HEADING_ACCOUNT', 'Mein Konto');
 
 define('TEXT_INFO_FULLNAME', '<b>Name: </b>');
+define('TEXT_INFO_USERNAME', '<b>Benutzername: </b>');
 define('TEXT_INFO_FIRSTNAME', '<b>Vorname: </b>');
 define('TEXT_INFO_LASTNAME', '<b>Letzter Name: </b>');
 define('TEXT_INFO_EMAIL', '<b>Email Address: </b>');
@@ -37,10 +38,12 @@ define('TEXT_INFO_INTRO_DEFAULT_FIRST_TIME', '<br><b>Warnung:</b><br>Hallo <b>%s
 define('TEXT_INFO_INTRO_DEFAULT_FIRST', '<br><b>WARNING:</b><br>Hallo <b>%s</b>, Wir empfehlen eine Änderung Ihrer Email von <font color="red">admin@localhost</font> und Ihres Kennworts!');
 define('TEXT_INFO_INTRO_EDIT_PROCESS', 'Alles fängt werden angefordert auf. Klicken speichert, um einzureichen.');
 
+define('JS_ALERT_USERNAME',         '- Erfordert: Benutzername \n');
 define('JS_ALERT_FIRSTNAME',        '- Erfordert: Vorname \n');
 define('JS_ALERT_LASTNAME',         '- Erfordert: Nachname \n');
 define('JS_ALERT_EMAIL',            '- Erfordert: Email Addresse \n');
 define('JS_ALERT_PASSWORD',         '- Erfordert: Kennwort \n');
+define('JS_ALERT_USERNAME_LENGTH',  '- Benutzername ist zu kurz ');
 define('JS_ALERT_FIRSTNAME_LENGTH', '- Vorname ist zu kurz ');
 define('JS_ALERT_LASTNAME_LENGTH',  '- Nachnahme ist zu kurz ');
 define('JS_ALERT_PASSWORD_LENGTH',  '- Kennwort ist zu kurz ');

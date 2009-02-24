@@ -2,10 +2,10 @@
 /*
   $Id: compatibility.php 1739 2007-12-20 00:52:16Z hpdl $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCMax Power E-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2007 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */

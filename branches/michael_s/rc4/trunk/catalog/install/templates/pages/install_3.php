@@ -5,7 +5,7 @@ $Id: install_3.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2008 osCMax
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -48,8 +48,12 @@ $Id: install_3.php 3 2006-05-27 04:59:07Z user $
         <td class="inputDescription">The name of the online store that is presented to the public.</td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Store Owner Name<br />' . osc_draw_input_field('CFG_STORE_OWNER_NAME', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The name of the store owner that is presented to the public.</td>
+        <td class="inputField"><?php echo 'Store Owner First Name<br />' . osc_draw_input_field('CFG_STORE_OWNER_FIRSTNAME', null, 'class="text"'); ?></td>
+        <td class="inputDescription">The first name of the store owner that is presented to the public.</td>
+      </tr>
+      <tr>
+        <td class="inputField"><?php echo 'Store Owner Last Name<br />' . osc_draw_input_field('CFG_STORE_OWNER_LASTNAME', null, 'class="text"'); ?></td>
+        <td class="inputDescription">The last name of the store owner that is presented to the public.</td>
       </tr>
       <tr>
         <td class="inputField"><?php echo 'Store Owner E-Mail Address<br />' . osc_draw_input_field('CFG_STORE_OWNER_EMAIL_ADDRESS', null, 'class="text"'); ?></td>
@@ -60,7 +64,7 @@ $Id: install_3.php 3 2006-05-27 04:59:07Z user $
         <td class="inputDescription">The administrator username to use for the administration tool.</td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Administrator Password<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text"'); ?></td>
+        <td class="inputField"><?php echo 'Administrator Password<br />' . osc_draw_password_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text"'); ?></td>
         <td class="inputDescription">The password to use for the administrator account.</td>
       </tr>
     </table>

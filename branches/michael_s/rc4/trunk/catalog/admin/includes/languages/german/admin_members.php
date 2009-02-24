@@ -5,7 +5,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -20,6 +20,7 @@ if ($HTTP_GET_VARS['gID']) {
 
 define('TEXT_COUNT_GROUPS', 'Gruppen: ');
 
+define('TABLE_HEADING_USERNAME', 'Benutzername');
 define('TABLE_HEADING_NAME', 'Name');
 define('TABLE_HEADING_EMAIL', 'Email Address');
 define('TABLE_HEADING_PASSWORD', 'Kennwort');
@@ -48,6 +49,7 @@ define('TEXT_INFO_DELETE_INTRO', 'Entfernen Sie <nobr><b>%s</b></nobr> von den <
 define('TEXT_INFO_DELETE_INTRO_NOT', 'Sie können nicht <nobr>%s Gruppe löschen!</nobr>');
 define('TEXT_INFO_EDIT_INTRO', 'Stellen Sie Erlaubnis waagerecht ausgerichtet hier ein: ');
 
+define('TEXT_INFO_USERNAME', 'Benutzername: ');
 define('TEXT_INFO_FULLNAME', 'Name: ');
 define('TEXT_INFO_FIRSTNAME', 'Vorname: ');
 define('TEXT_INFO_LASTNAME', 'Nachname: ');
@@ -61,6 +63,7 @@ define('TEXT_INFO_LOGNUM', 'Log-number: ');
 define('TEXT_INFO_GROUP', 'Gruppe: ');
 define('TEXT_INFO_ERROR', '<font color="red">Email Addresse ist bereits vergeben! Bitte erneut versuchen!</font>');
 
+define('JS_ALERT_USERNAME', '- Erfordert: Benutzername \n');
 define('JS_ALERT_FIRSTNAME', '- Erfordert: Vorname \n');
 define('JS_ALERT_LASTNAME', '- Erfordert: Nachname \n');
 define('JS_ALERT_EMAIL', '- Erfordert: Email Addresse \n');

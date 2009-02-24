@@ -5,7 +5,7 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -13,11 +13,11 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   require('includes/application_top.php');
 
   if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
-    $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
+    $username = tep_db_prepare_input($HTTP_POST_VARS['username']);
     $password = tep_db_prepare_input($HTTP_POST_VARS['password']);
 
-// Check if email exists
-    $check_admin_query = tep_db_query("select admin_id as login_id, admin_groups_id as login_groups_id, admin_firstname as login_firstname, admin_email_address as login_email_address, admin_password as login_password, admin_modified as login_modified, admin_logdate as login_logdate, admin_lognum as login_lognum from " . TABLE_ADMIN . " where admin_email_address = '" . tep_db_input($email_address) . "'");
+// Check if usename exists
+    $check_admin_query = tep_db_query("select admin_id as login_id, admin_groups_id as login_groups_id, admin_username as login_username, admin_password as login_password, admin_modified as login_modified, admin_logdate as login_logdate, admin_lognum as login_lognum from " . TABLE_ADMIN . " where admin_username = '" . tep_db_input($username) . "'");
     if (!tep_db_num_rows($check_admin_query)) {
       $HTTP_GET_VARS['login'] = 'fail';
     } else {
@@ -32,24 +32,24 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 
         $login_id = $check_admin['login_id'];
         $login_groups_id = $check_admin[login_groups_id];
-        $login_firstname = $check_admin['login_firstname'];
-        $login_email_address = $check_admin['login_email_address'];
+        $login_username = $check_admin['login_username'];
         $login_logdate = $check_admin['login_logdate'];
         $login_lognum = $check_admin['login_lognum'];
         $login_modified = $check_admin['login_modified'];
 
         tep_session_register('login_id');
         tep_session_register('login_groups_id');
-        tep_session_register('login_first_name');
+        tep_session_register('login_username');
 
         //$date_now = date('Ymd');
         tep_db_query("update " . TABLE_ADMIN . " set admin_logdate = now(), admin_lognum = admin_lognum+1 where admin_id = '" . $login_id . "'");
 
-        if (($login_lognum == 0) || !($login_logdate) || ($login_email_address == 'admin@localhost') || ($login_modified == '0000-00-00 00:00:00')) {
-          tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT));
-        } else {
+// There is no more default ADMIN - so don't need to check for DEFAULT user
+//      if (($login_lognum == 0) || !($login_logdate) || ($login_email_address == 'admin@localhost') || ($login_modified == '0000-00-00 00:00:00')) {
+//        tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT));
+//      } else {
           tep_redirect(tep_href_link(FILENAME_DEFAULT));
-        }
+//      }
 
       }
     }
@@ -61,6 +61,7 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
+<meta name="robots" content="noindex,nofollow">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -106,8 +107,8 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   }
 ?>
                                     <tr>
-                                      <td class="login"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
-                                      <td class="login"><?php echo tep_draw_input_field('email_address'); ?></td>
+                                      <td class="login"><?php echo ENTRY_USERNAME; ?></td>
+                                      <td class="login"><?php echo tep_draw_input_field('username'); ?></td>
                                     </tr>
                                     <tr>
                                       <td class="login"><?php echo ENTRY_PASSWORD; ?></td>

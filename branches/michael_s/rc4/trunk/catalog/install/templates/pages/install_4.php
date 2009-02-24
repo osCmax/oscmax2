@@ -5,7 +5,7 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2008 osCMax
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -16,19 +16,19 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
   osc_db_select_db(trim($HTTP_POST_VARS['DB_DATABASE']));
 
   osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "' . trim($HTTP_POST_VARS['CFG_STORE_NAME']) . '" where configuration_key = "STORE_NAME"');
-  osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_NAME']) . '" where configuration_key = "STORE_OWNER"');
+  osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_FIRSTNAME']) . ' ' .  trim($HTTP_POST_VARS['CFG_STORE_OWNER_LASTNAME']) . '" where configuration_key = "STORE_OWNER"');
   osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '" where configuration_key = "STORE_OWNER_EMAIL_ADDRESS"');
 
   if (!empty($HTTP_POST_VARS['CFG_STORE_OWNER_NAME']) && !empty($HTTP_POST_VARS['CFG_STORE_OWNER_EMAIL_ADDRESS'])) {
     osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "\"' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_NAME']) . '\" <' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '>" where configuration_key = "EMAIL_FROM"');
   }
 
-  $check_query = osc_db_query('select admin_email_address from ' . TABLE_ADMINISTRATORS . ' where admin_email_address = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
+  $check_query = osc_db_query('select admin_username from ' . TABLE_ADMINISTRATORS . ' where admin_user_name = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
 
   if (osc_db_num_rows($check_query)) {
-    osc_db_query('update ' . TABLE_ADMINISTRATORS . ' set admin_password = "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '" where admin_email_address = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
+    osc_db_query('update ' . TABLE_ADMINISTRATORS . ' set admin_password = "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '" where admin_username = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
   } else {
-    osc_db_query('insert into ' . TABLE_ADMINISTRATORS . ' (admin_groups_id, admin_firstname, admin_email_address, admin_password) values (1, "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_NAME']) . '", "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '", "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '")');
+    osc_db_query('insert into ' . TABLE_ADMINISTRATORS . ' (admin_groups_id, admin_username, admin_firstname, admin_lastname, admin_email_address, admin_password, admin_created) values (1, "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '", "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_FIRSTNAME']) . '", "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_LASTNAME']) . '", "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '", "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '", now())');
   }
 ?>
 

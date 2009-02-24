@@ -5,7 +5,7 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -15,19 +15,19 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
   
   if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
     $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
-    $firstname = tep_db_prepare_input($HTTP_POST_VARS['firstname']);
+    $username = tep_db_prepare_input($HTTP_POST_VARS['username']);
     $log_times = $HTTP_POST_VARS['log_times']+1;
     if ($log_times >= 4) {
       tep_session_register('password_forgotten');
     }
       
 // Check if email exists
-    $check_admin_query = tep_db_query("select admin_id as check_id, admin_firstname as check_firstname, admin_lastname as check_lastname, admin_email_address as check_email_address from " . TABLE_ADMIN . " where admin_email_address = '" . tep_db_input($email_address) . "'");
+    $check_admin_query = tep_db_query("select admin_id as check_id, admin_username as check_username, admin_lastname as check_lastname, admin_email_address as check_email_address from " . TABLE_ADMIN . " where admin_email_address = '" . tep_db_input($email_address) . "'");
     if (!tep_db_num_rows($check_admin_query)) {
       $HTTP_GET_VARS['login'] = 'fail';
     } else {
       $check_admin = tep_db_fetch_array($check_admin_query);
-      if ($check_admin['check_firstname'] != $firstname) {
+      if ($check_admin['check_username'] != $username) {
         $HTTP_GET_VARS['login'] = 'fail';
       } else {
         $HTTP_GET_VARS['login'] = 'success';
@@ -47,7 +47,7 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
         }
         $makePassword = randomize();
       
-        tep_mail($check_admin['check_firstname'] . ' ' . $check_admin['admin_lastname'], $check_admin['check_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $check_admin['check_firstname'], HTTP_SERVER . DIR_WS_ADMIN, $check_admin['check_email_address'], $makePassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);            
+        tep_mail($check_admin['check_username'] . ' ' . $check_admin['admin_lastname'], $check_admin['check_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $check_admin['check_username'], HTTP_SERVER . DIR_WS_ADMIN, $check_admin['check_email_address'], $makePassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);            
         tep_db_query("update " . TABLE_ADMIN . " set admin_password = '" . tep_encrypt_password($makePassword) . "' where admin_id = '" . $check_admin['check_id'] . "'");
       }
     }
@@ -124,8 +124,8 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
     }
 ?>                                    
                                     <tr>
-                                      <td class="login"><?php echo ENTRY_FIRSTNAME; ?></td>
-                                      <td class="login"><?php echo tep_draw_input_field('firstname'); ?></td>
+                                      <td class="login"><?php echo ENTRY_USERNAME; ?></td>
+                                      <td class="login"><?php echo tep_draw_input_field('username'); ?></td>
                                     </tr>
                                     <tr>
                                       <td class="login"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>

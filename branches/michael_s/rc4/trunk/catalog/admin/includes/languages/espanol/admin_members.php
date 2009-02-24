@@ -5,7 +5,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -20,7 +20,8 @@ if ($HTTP_GET_VARS['gID']) {
 
 define('TEXT_COUNT_GROUPS', 'Grupos: ');
 
-define('TABLE_HEADING_NAME', 'Nombre');
+define('TABLE_HEADING_USERNAME', 'Nombre de usuario');
+define('TABLE_HEADING_NAME', 'Nombre completo');
 define('TABLE_HEADING_EMAIL', 'Email');
 define('TABLE_HEADING_PASSWORD', 'Password');
 define('TABLE_HEADING_CONFIRM', 'Confirma Password');
@@ -48,6 +49,7 @@ define('TEXT_INFO_DELETE_INTRO', 'Remover <nobr><b>%s</b></nobr> desde <nobr>Mie
 define('TEXT_INFO_DELETE_INTRO_NOT', 'No puedes eliminar el <nobr>grupo %s!</nobr>');
 define('TEXT_INFO_EDIT_INTRO', 'Configura nivel de permiso aqui: ');
 
+define('TEXT_INFO_USERNAME', 'Nombre de usuario: ');
 define('TEXT_INFO_FULLNAME', 'Nombre completo: ');
 define('TEXT_INFO_FIRSTNAME', 'Nombre: ');
 define('TEXT_INFO_LASTNAME', 'Apellido: ');
@@ -61,6 +63,7 @@ define('TEXT_INFO_LOGNUM', 'Log Numero: ');
 define('TEXT_INFO_GROUP', 'Nivel Grupo: ');
 define('TEXT_INFO_ERROR', '<font color="red">Direccion Email ya utilizado!</font>');
 
+define('JS_ALERT_USERNAME', '- Obligatorio: Nombre de usuario \n');
 define('JS_ALERT_FIRSTNAME', '- Obligatorio: Nombre \n');
 define('JS_ALERT_LASTNAME', '- Obligatorio: Apellido \n');
 define('JS_ALERT_EMAIL', '- Obligatorio: Dirección Email \n');
@@ -80,6 +83,7 @@ define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>NOTA:</b><li><b>edita:</b> edita no
 define('TEXT_INFO_DELETE_GROUPS_INTRO', 'Esto elimina tambien los miembros del grupo. Quieres eliminar el <nobr>grupo <b>%s</b>?</nobr>');
 define('TEXT_INFO_DELETE_GROUPS_INTRO_NOT', 'No puedes eliminar estos grupos!');
 define('TEXT_INFO_GROUPS_INTRO', 'Elijes un nombre de grupo univoco. Click <b>sigue</b> para enviar.');
+define('TEXT_INFO_EDIT_GROUPS_INTRO', 'Elijes un nombre de grupo univoco. Click <b>sigue</b> para enviar.');
 
 define('TEXT_INFO_HEADING_EDIT_GROUP', 'Grupo Admin');
 define('TEXT_INFO_HEADING_GROUPS', 'Nuevo Grupo');

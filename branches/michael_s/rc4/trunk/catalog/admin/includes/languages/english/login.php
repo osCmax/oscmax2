@@ -5,7 +5,7 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2008 osCMax
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -23,9 +23,10 @@ if ($HTTP_GET_VARS['origin'] == FILENAME_CHECKOUT_PAYMENT) {
 define('HEADING_RETURNING_ADMIN', 'Login Panel:');
 define('HEADING_PASSWORD_FORGOTTEN', 'Password Forgotten:');
 define('TEXT_RETURNING_ADMIN', 'Staff only!');
-define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
+define('ENTRY_USERNAME', 'Username:');
 define('ENTRY_PASSWORD', 'Password:');
 define('ENTRY_FIRSTNAME', 'First Name:');
+define('ENTRY_LASTNAME', 'Last Name:');
 define('IMAGE_BUTTON_LOGIN', 'Submit');
 
 define('TEXT_PASSWORD_FORGOTTEN', 'Password forgotten?');

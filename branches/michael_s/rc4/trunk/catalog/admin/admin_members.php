@@ -5,7 +5,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -40,6 +40,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
           $makePassword = randomize();
 
           $sql_data_array = array('admin_groups_id' => tep_db_prepare_input($HTTP_POST_VARS['admin_groups_id']),
+                                  'admin_username' => tep_db_prepare_input($HTTP_POST_VARS['admin_username']),
                                   'admin_firstname' => tep_db_prepare_input($HTTP_POST_VARS['admin_firstname']),
                                   'admin_lastname' => tep_db_prepare_input($HTTP_POST_VARS['admin_lastname']),
                                   'admin_email_address' => tep_db_prepare_input($HTTP_POST_VARS['admin_email_address']),
@@ -49,7 +50,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
           tep_db_perform(TABLE_ADMIN, $sql_data_array);
           $admin_id = tep_db_insert_id();
 
-          tep_mail($HTTP_POST_VARS['admin_firstname'] . ' ' . $HTTP_POST_VARS['admin_lastname'], $HTTP_POST_VARS['admin_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $HTTP_POST_VARS['admin_firstname'], HTTP_SERVER . DIR_WS_ADMIN, $HTTP_POST_VARS['admin_email_address'], $makePassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+          tep_mail($HTTP_POST_VARS['admin_firstname'] . ' ' . $HTTP_POST_VARS['admin_lastname'], $HTTP_POST_VARS['admin_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $HTTP_POST_VARS['admin_username'], HTTP_SERVER . DIR_WS_ADMIN, $HTTP_POST_VARS['admin_email_address'], $makePassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
           tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $HTTP_GET_VARS['page'] . '&mID=' . $admin_id));
         }
@@ -69,6 +70,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
           tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $HTTP_GET_VARS['page'] . 'mID=' . $HTTP_GET_VARS['mID'] . '&error=email&action=edit_member'));
         } else {
           $sql_data_array = array('admin_groups_id' => tep_db_prepare_input($HTTP_POST_VARS['admin_groups_id']),
+                                  'admin_username' => tep_db_prepare_input($HTTP_POST_VARS['admin_username']),
                                   'admin_firstname' => tep_db_prepare_input($HTTP_POST_VARS['admin_firstname']),
                                   'admin_lastname' => tep_db_prepare_input($HTTP_POST_VARS['admin_lastname']),
                                   'admin_email_address' => tep_db_prepare_input($HTTP_POST_VARS['admin_email_address']),
@@ -76,7 +78,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
 
           tep_db_perform(TABLE_ADMIN, $sql_data_array, 'update', 'admin_id = \'' . $admin_id . '\'');
 
-          tep_mail($HTTP_POST_VARS['admin_firstname'] . ' ' . $HTTP_POST_VARS['admin_lastname'], $HTTP_POST_VARS['admin_email_address'], ADMIN_EMAIL_EDIT_SUBJECT, sprintf(ADMIN_EMAIL_EDIT_TEXT, $HTTP_POST_VARS['admin_firstname'], HTTP_SERVER . DIR_WS_ADMIN, $HTTP_POST_VARS['admin_email_address'], $hiddenPassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+          tep_mail($HTTP_POST_VARS['admin_username'] . ' ' . $HTTP_POST_VARS['admin_lastname'], $HTTP_POST_VARS['admin_email_address'], ADMIN_EMAIL_EDIT_SUBJECT, sprintf(ADMIN_EMAIL_EDIT_TEXT, $HTTP_POST_VARS['admin_username'], HTTP_SERVER . DIR_WS_ADMIN, $HTTP_POST_VARS['admin_email_address'], $hiddenPassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
           tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $HTTP_GET_VARS['page'] . '&mID=' . $admin_id));
         }
@@ -338,6 +340,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
 ?>
             <table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
+                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_USERNAME; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NAME; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_EMAIL; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_GROUPS; ?></td>
@@ -345,7 +348,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-  $db_admin_query_raw = "select * from " . TABLE_ADMIN . " order by admin_firstname";
+  $db_admin_query_raw = "select * from " . TABLE_ADMIN . " order by admin_username";
 
   $db_admin_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $db_admin_query_raw, $db_admin_query_numrows);
   $db_admin_query = tep_db_query($db_admin_query_raw);
@@ -365,6 +368,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
       echo '                  <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'hand\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $HTTP_GET_VARS['page'] . '&mID=' . $admin['admin_id']) . '\'">' . "\n";
     }
 ?>
+                <td class="dataTableContent">&nbsp;<?php echo $admin['admin_username']; ?></td>
                 <td class="dataTableContent">&nbsp;<?php echo $admin['admin_firstname']; ?>&nbsp;<?php echo $admin['admin_lastname']; ?></td>
                 <td class="dataTableContent"><?php echo $admin['admin_email_address']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo $admin_group['admin_groups_name']; ?></td>
@@ -399,6 +403,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
       if ($HTTP_GET_VARS['error']) {
         $contents[] = array('text' => TEXT_INFO_ERROR);
       }
+      $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_USERNAME . '<br>&nbsp;' . tep_draw_input_field('admin_username'));
       $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_FIRSTNAME . '<br>&nbsp;' . tep_draw_input_field('admin_firstname'));
       $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_LASTNAME . '<br>&nbsp;' . tep_draw_input_field('admin_lastname'));
       $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_EMAIL . '<br>&nbsp;' . tep_draw_input_field('admin_email_address'));
@@ -422,6 +427,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
       }
 
       $contents[] = array('text' => tep_draw_hidden_field('admin_id', $mInfo->admin_id));
+      $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_USERNAME . '<br>&nbsp;' . tep_draw_input_field('admin_username', $mInfo->admin_username));
       $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_FIRSTNAME . '<br>&nbsp;' . tep_draw_input_field('admin_firstname', $mInfo->admin_firstname));
       $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_LASTNAME . '<br>&nbsp;' . tep_draw_input_field('admin_lastname', $mInfo->admin_lastname));
       $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_EMAIL . '<br>&nbsp;' . tep_draw_input_field('admin_email_address', $mInfo->admin_email_address));
@@ -442,12 +448,13 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
     case 'del_member':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE . '</b>');
       if ($mInfo->admin_id == 1 || $mInfo->admin_email_address == STORE_OWNER_EMAIL_ADDRESS) {
-      $contents[] = array('align' => 'center', 'text' => '<br><a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $HTTP_GET_VARS['page'] . '&mID=' . $mInfo->admin_id) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a><br>&nbsp;');
+        $contents[] = array('align' => 'center', 'text' => '<br><a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $HTTP_GET_VARS['page'] . '&mID=' . $mInfo->admin_id) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a><br>&nbsp;');
       } else {
-      $contents = array('form' => tep_draw_form('edit', FILENAME_ADMIN_MEMBERS, 'action=member_delete&page=' . $page . '&mID=' . $admin['admin_id'], 'post', 'enctype="multipart/form-data"'));
-      $contents[] = array('text' => tep_draw_hidden_field('admin_id', $mInfo->admin_id));
-      $contents[] = array('align' => 'center', 'text' =>  sprintf(TEXT_INFO_DELETE_INTRO, $mInfo->admin_firstname . ' ' . $mInfo->admin_lastname));
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $HTTP_GET_VARS['page'] . '&mID=' . $HTTP_GET_VARS['mID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents = array('form' => tep_draw_form('edit', FILENAME_ADMIN_MEMBERS, 'action=member_delete&page=' . $page . '&mID=' . $admin['admin_id'], 'post', 'enctype="multipart/form-data"'));
+        $contents[] = array('text' => tep_draw_hidden_field('admin_id', $mInfo->admin_id));
+        $contents[] = array('align' => 'center', 'text' =>  sprintf(TEXT_INFO_DELETE_INTRO, $mInfo->admin_username));
+        $contents[] = array('align' => 'center', 'text' =>  sprintf(TEXT_INFO_DELETE_INTRO, $mInfo->admin_firstname . ' ' . $mInfo->admin_lastname));
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $HTTP_GET_VARS['page'] . '&mID=' . $HTTP_GET_VARS['mID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       }
       break;
 
@@ -522,6 +529,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
       if (is_object($mInfo)) {
         $heading[] = array('text' => '<b>&nbsp;' . TEXT_INFO_HEADING_DEFAULT . '</b>');
         $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $HTTP_GET_VARS['page'] . '&mID=' . $mInfo->admin_id . '&action=edit_member') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $HTTP_GET_VARS['page'] . '&mID=' . $mInfo->admin_id . '&action=del_member') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a><br>&nbsp;');
+        $contents[] = array('text' => '&nbsp;<b>' . TEXT_INFO_USERNAME . '</b><br>&nbsp;' . $mInfo->admin_username);
         $contents[] = array('text' => '&nbsp;<b>' . TEXT_INFO_FULLNAME . '</b><br>&nbsp;' . $mInfo->admin_firstname . ' ' . $mInfo->admin_lastname);
         $contents[] = array('text' => '&nbsp;<b>' . TEXT_INFO_EMAIL . '</b><br>&nbsp;' . $mInfo->admin_email_address);
         $contents[] = array('text' => '&nbsp;<b>' . TEXT_INFO_GROUP . '</b>' . $mInfo->admin_groups_name);

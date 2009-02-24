@@ -5,7 +5,7 @@ $Id: logoff.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -16,7 +16,7 @@ $Id: logoff.php 3 2006-05-27 04:59:07Z user $
 
 //tep_session_destroy();
   tep_session_unregister('login_id');
-  tep_session_unregister('login_firstname');
+  tep_session_unregister('login_username');
   tep_session_unregister('login_groups_id');
 
 ?>

@@ -5,7 +5,7 @@ $Id: account_check.js.php 14 2006-07-28 17:42:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -20,9 +20,15 @@ if (substr(basename($PHP_SELF), 0, 12) == 'admin_member') {
 function validateForm() {
   var p,z,xEmail,errors='',dbEmail,result=0,i;
 
+  var adminUserName = document.newmember.admin_username.value;
   var adminName1 = document.newmember.admin_firstname.value;
   var adminName2 = document.newmember.admin_lastname.value;
   var adminEmail = document.newmember.admin_email_address.value;
+  if (adminUserName == '') {
+    errors+='<?php echo JS_ALERT_USERNAME; ?>';
+  } else if (adminUserName.length < <?php echo ENTRY_USERNAME_MIN_LENGTH; ?>) {
+    errors+='- Username must be longer than  <?php echo (ENTRY_USERNAME_MIN_LENGTH); ?>\n';
+  }
 
   if (adminName1 == '') {
     errors+='<?php echo JS_ALERT_FIRSTNAME; ?>';
@@ -91,11 +97,17 @@ function checkSub(obj) {
 function validateForm() {
   var p,z,xEmail,errors='',dbEmail,result=0,i;
 
+  var adminUserName = document.account.admin_username.value;
   var adminName1 = document.account.admin_firstname.value;
   var adminName2 = document.account.admin_lastname.value;
   var adminEmail = document.account.admin_email_address.value;
   var adminPass1 = document.account.admin_password.value;
   var adminPass2 = document.account.admin_password_confirm.value;
+  if (adminUserName == '') {
+    errors+='<?php echo JS_ALERT_USERNAME; ?>';
+  } else if (adminUserName.length < <?php echo ENTRY_USERNAME_MIN_LENGTH; ?>) {
+    errors+='<?php echo JS_ALERT_USERNAME_LENGTH . ENTRY_USERNAME_MIN_LENGTH; ?>\n';
+  }
 
   if (adminName1 == '') {
     errors+='<?php echo JS_ALERT_FIRSTNAME; ?>';

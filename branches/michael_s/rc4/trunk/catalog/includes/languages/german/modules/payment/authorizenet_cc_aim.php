@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: authorizenet_cc_aim.php 1794 2008-01-11 13:51:10Z hpdl $
+  $Id: authorizenet_cc_aim.php 1794 2008-01-11 13:51:10Z user $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright (c) 2008 osCommerce
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */

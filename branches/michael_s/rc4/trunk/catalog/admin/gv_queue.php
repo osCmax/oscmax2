@@ -97,8 +97,9 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
               </tr>
 <?php
   $gv_query_raw = "select c.customers_firstname, c.customers_lastname, gv.unique_id, gv.date_created, gv.amount, gv.order_id from " . TABLE_CUSTOMERS . " c, " . TABLE_COUPON_GV_QUEUE . " gv where (gv.customer_id = c.customers_id and gv.release_flag = 'N')";
-  $gv_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $gv_query_raw, $gv_query_numrows);
   $gv_query = tep_db_query($gv_query_raw);
+  $gv_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $gv_query_raw, $gv_query_numrows);
+
   while ($gv_list = tep_db_fetch_array($gv_query)) {
     if (((!$HTTP_GET_VARS['gid']) || (@$HTTP_GET_VARS['gid'] == $gv_list['unique_id'])) && (!$gInfo)) {
       $gInfo = new objectInfo($gv_list);

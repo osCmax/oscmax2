@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: chronopay.php 1782 2008-01-10 01:10:52Z hpdl $
+  $Id: chronopay.php 1782 2008-01-10 01:10:52Z user $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright (c) 2008 osCommerce
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */

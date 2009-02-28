@@ -16,4 +16,7 @@ define('BOX_SEND_TO_FRIEND', 'Envíe Vale de Regalo');
 define('VOUCHER_REDEEMED', 'Vale Redimido');
 define('CART_COUPON', 'Cupon :');
 define('CART_COUPON_INFO', 'más información');
+
+define('MODULE_ORDER_TOTAL_COUPON_TEXT_ERROR', 'Coupon Redemption');
+define('ERROR_REDEEMED_AMOUNT_ZERO', '<BR>***HOWEVER:No reducion available, please see the coupon restrictions***');
 ?>

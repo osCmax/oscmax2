@@ -21,9 +21,10 @@ var $shiptotal;
     }
 
     function restore_contents() {
-// LINE CHANGED: MOD - ICW Gift Voucher System
-// OLD global $customer_id;
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+//    global $customer_id;
       global $customer_id, $gv_id, $REMOTE_ADDR;
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
       if (!tep_session_is_registered('customer_id')) return false;
 
@@ -45,14 +46,14 @@ var $shiptotal;
             tep_db_query("update " . TABLE_CUSTOMERS_BASKET . " set customers_basket_quantity = '" . tep_db_input($qty) . "' where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id) . "'");
           }
         }
-//BOF - ICW ADDDED FOR CREDIT CLASS GV
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
         if (tep_session_is_registered('gv_id')) {
           $gv_query = tep_db_query("insert into  " . TABLE_COUPON_REDEEM_TRACK . " (coupon_id, customer_id, redeem_date, redeem_ip) values ('" . $gv_id . "', '" . (int)$customer_id . "', now(),'" . $REMOTE_ADDR . "')");
           $gv_update = tep_db_query("update " . TABLE_COUPONS . " set coupon_active = 'N' where coupon_id = '" . $gv_id . "'");
           tep_gv_account_update($customer_id, $gv_id);
           tep_session_unregister('gv_id');
         }
-//EOF - ICW ADDDED FOR CREDIT CLASS GV
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
       }
 
 // reset per-session cart contents, but not the database contents
@@ -93,26 +94,26 @@ var $shiptotal;
     function add_cart($products_id, $qty = '1', $attributes = '', $notify = true) {
       global $new_products_id_in_cart, $customer_id;
 
-// BOF: MS2 update 501112 - Changed
       $products_id_string = tep_get_uprid($products_id, $attributes);
       $products_id = tep_get_prid($products_id_string);
-// BOF: MS2 update 060817 - Changed
+
       if (defined('MAX_QTY_IN_CART') && (MAX_QTY_IN_CART > 0) && ((int)$qty > MAX_QTY_IN_CART)) {
         $qty = MAX_QTY_IN_CART;
       }
+
       $attributes_pass_check = true;
 
       if (is_array($attributes)) {
-       reset($attributes);
-       while (list($option, $value) = each($attributes)) {
-        if (!is_numeric($option) || !is_numeric($value)) {
-        $attributes_pass_check = false;
-        break;
+        reset($attributes);
+        while (list($option, $value) = each($attributes)) {
+          if (!is_numeric($option) || !is_numeric($value)) {
+            $attributes_pass_check = false;
+            break;
+          }
         }
-       }
       }
-       if (is_numeric($products_id) && is_numeric($qty) && ($attributes_pass_check == true)) {
-// EOF MS2 update 060817 - Changed       	
+
+      if (is_numeric($products_id) && is_numeric($qty) && ($attributes_pass_check == true)) {
         $check_product_query = tep_db_query("select products_status from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
         $check_product = tep_db_fetch_array($check_product_query);
 
@@ -145,19 +146,18 @@ var $shiptotal;
           $this->cartID = $this->generate_cart_id();
         }
       }
-// EOF: MS2 update 501112 - Changed
     }
 
     function update_quantity($products_id, $quantity = '', $attributes = '') {
       global $customer_id;
 
-// BOF: MS2 update 501112 - Changed
       $products_id_string = tep_get_uprid($products_id, $attributes);
       $products_id = tep_get_prid($products_id_string);
-// BOF: MS2 update 060817 - Changed
+
       if (defined('MAX_QTY_IN_CART') && (MAX_QTY_IN_CART > 0) && ((int)$quantity > MAX_QTY_IN_CART)) {
         $quantity = MAX_QTY_IN_CART;
       }
+
       $attributes_pass_check = true;
 
       if (is_array($attributes)) {
@@ -171,7 +171,6 @@ var $shiptotal;
       }
 
       if (is_numeric($products_id) && isset($this->contents[$products_id_string]) && is_numeric($quantity) && ($attributes_pass_check == true)) {
-// EOF MS2 update 060817 - Changed
         $this->contents[$products_id_string] = array('qty' => (int)$quantity);
 // update database
         if (tep_session_is_registered('customer_id')) tep_db_query("update " . TABLE_CUSTOMERS_BASKET . " set customers_basket_quantity = '" . (int)$quantity . "' where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id_string) . "'");
@@ -183,7 +182,6 @@ var $shiptotal;
 // update database
             if (tep_session_is_registered('customer_id')) tep_db_query("update " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " set products_options_value_id = '" . (int)$value . "' where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id_string) . "' and products_options_id = '" . (int)$option . "'");
           }
-// EOF: MS2 update 501112 - Changed
         }
       }
     }
@@ -204,7 +202,7 @@ var $shiptotal;
       }
     }
 
-    function count_contents() {  // get total number of items in cart
+    function count_contents() {  // get total number of items in cart 
       $total_items = 0;
       if (is_array($this->contents)) {
         reset($this->contents);
@@ -264,8 +262,10 @@ var $shiptotal;
 
     function calculate() {
       global $currencies;
-// LINE ADDED: MOD - ICW Gift Voucher System
+
+//  LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
       $this->total_virtual = 0;
+
       $this->total = 0;
       $this->weight = 0;
 // LINE ADDED: MOD - indvship
@@ -289,14 +289,16 @@ var $shiptotal;
 // LINE MOFIFIED - Added "products_ship_price"
         $product_query = tep_db_query("select products_id, products_price, products_ship_price, products_tax_class_id, products_weight from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
         if ($product = tep_db_fetch_array($product_query)) {
-// BOF: MOD - ICW ORDER TOTAL CREDIT CLASS
+
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
           $no_count = 1;
           $gv_query = tep_db_query("select products_model from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
           $gv_result = tep_db_fetch_array($gv_query);
           if (ereg('^GIFT', $gv_result['products_model'])) {
             $no_count = 0;
           }
-// EOF: MOD - ICW ORDER TOTAL CREDIT CLASS
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
           $prid = $product['products_id'];
           $products_tax = tep_get_tax_rate($product['products_tax_class_id']);
           $products_price = $product['products_price'];
@@ -319,9 +321,11 @@ var $shiptotal;
               $products_price = $customer_group_price['customers_group_price'];
             }    
           }
-// EOF: MOD - Separate Pricing Per Customer
-          $this->total_virtual += tep_add_tax($products_price, $products_tax) * $qty * $no_count;// ICW CREDIT CLASS;
-          $this->weight_virtual += ($qty * $products_weight) * $no_count;// ICW CREDIT CLASS;
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+          $this->total_virtual += $currencies->calculate_price($products_price, $products_tax, $qty * $no_count);
+          $this->weight_virtual += ($qty * $products_weight) * $no_count;
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
           $this->total += $currencies->calculate_price($products_price, $products_tax, $qty);
 // LINE ADDED: MOD - indvship
           $this->shiptotal += ($products_ship_price * $qty);
@@ -436,7 +440,8 @@ function get_shiptotal() {
 
       return $this->weight;
     }
-// BOF: MOD - ICW ORDER TOTAL CREDIT CLASS
+
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
     function show_total_virtual() {
       $this->calculate();
 
@@ -448,7 +453,8 @@ function get_shiptotal() {
 
       return $this->weight_virtual;
     }
-// EOF: MOD - ICW ORDER TOTAL CREDIT CLASS
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
     function generate_cart_id($length = 5) {
       return tep_create_random_value($length, 'digits');
     }
@@ -489,7 +495,8 @@ function get_shiptotal() {
                 }
               }
             }
-// BOF: MOD - ICW ORDER TOTAL CREDIT CLASS
+
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
           } elseif ($this->show_weight() == 0) {
             reset($this->contents);
             while (list($products_id, ) = each($this->contents)) {
@@ -519,7 +526,8 @@ function get_shiptotal() {
                 }
               }
             }
-// EOF: MOD - ICW ORDER TOTAL CREDIT CLASS
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
           } else {
             switch ($this->content_type) {
               case 'virtual':
@@ -547,13 +555,13 @@ function get_shiptotal() {
         $this->$key=$kv['value'];
       }
     }
-// BOF: MOD - ICW ORDER TOTAL CREDIT CLASS
-   // amend count_contents to show nil contents for shipping
-   // as we don't want to quote for 'virtual' item
-   // GLOBAL CONSTANTS if NO_COUNT_ZERO_WEIGHT is true then we don't count any product with a weight
-   // which is less than or equal to MINIMUM_WEIGHT
-   // otherwise we just don't count gift certificates
 
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+// amend count_contents to show nil contents for shipping
+// as we don't want to quote for 'virtual' item
+// GLOBAL CONSTANTS if NO_COUNT_ZERO_WEIGHT is true then we don't count any product with a weight
+// which is less than or equal to MINIMUM_WEIGHT
+// otherwise we just don't count gift certificates
     function count_contents_virtual() {  // get total number of items in cart disregard gift vouchers
       $total_items = 0;
       if (is_array($this->contents)) {
@@ -577,6 +585,6 @@ function get_shiptotal() {
       }
       return $total_items;
     }
-// EOF: MOD - ICW ORDER TOTAL CREDIT CLASS
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
   }
 ?>

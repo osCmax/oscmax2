@@ -18,4 +18,6 @@ define('EMAIL_SUBJECT', 'Consulta desde ' . STORE_NAME);
 define('ENTRY_NAME', 'Nombre Completo:');
 define('ENTRY_EMAIL', 'Direcci&oacute;n E-Mail:');
 define('ENTRY_ENQUIRY', 'Consulta:');
+
+define('ENTRY_EMAIL_CONTENT_CHECK_ERROR', 'Missing content, please type a message.');
 ?>

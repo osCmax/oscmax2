@@ -72,9 +72,9 @@
 
         // if there is a invoice number use first order query otherwise use second date style order query
         if ($invoicenumbers != '') {
-          $orders_query = tep_db_query("select o.orders_id,h.comments,MIN(h.date_added) from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS_HISTORY . " h where o.orders_id in (" . tep_db_input($invoicenumbers) . ") and h.orders_id = o.orders_id" . $pull_w_status . $get_customer_comments . ' group by o.orders_id');
+          $orders_query = tep_db_query("select o.orders_id,o.orders_prefix,h.comments,MIN(h.date_added) from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS_HISTORY . " h where o.orders_id in (" . tep_db_input($invoicenumbers) . ") and h.orders_id = o.orders_id" . $pull_w_status . $get_customer_comments . ' group by o.orders_id');
         } else {  
-          $orders_query = tep_db_query("select o.orders_id,h.comments,MIN(h.date_added) from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS_HISTORY . " h where o.date_purchased between '" . tep_db_input($startdate) . "' and '" . tep_db_input($enddate) . " 23:59:59'  and h.orders_id = o.orders_id" . $pull_w_status . $get_customer_comments . ' group by o.orders_id');
+          $orders_query = tep_db_query("select o.orders_id,o.orders_prefix,h.comments,MIN(h.date_added) from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS_HISTORY . " h where o.date_purchased between '" . tep_db_input($startdate) . "' and '" . tep_db_input($enddate) . " 23:59:59'  and h.orders_id = o.orders_id" . $pull_w_status . $get_customer_comments . ' group by o.orders_id');
         }
  
  
@@ -93,7 +93,6 @@
           require(BATCH_PRINT_INC . 'templates/' . $HTTP_POST_VARS['file_type']);
 
   // end pdf layout section     ###############################
-
 
           if ($HTTP_POST_VARS['status'] && ($HTTP_POST_VARS['status'] != $order->info['orders_status'])){
             $customer_notified = 0; 
@@ -264,9 +263,5 @@
     } else {
       return false;
     }
-
   }
-
-
-
 ?>

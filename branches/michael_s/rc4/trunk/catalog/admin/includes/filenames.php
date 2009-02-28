@@ -10,13 +10,6 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   Released under the GNU General Public License
 */
 
-  define('FILENAME_ADMIN_ACCOUNT', 'admin_account.php');
-  define('FILENAME_ADMIN_FILES', 'admin_files.php');
-  define('FILENAME_ADMIN_MEMBERS', 'admin_members.php');
-  Define('FILENAME_FORBIDDEN', 'forbidden.php');
-  define('FILENAME_LOGIN', 'login.php');
-  define('FILENAME_LOGOFF', 'logoff.php');
-  define('FILENAME_PASSWORD_FORGOTTEN', 'password_forgotten.php');
 // define the filenames used in the project
   define('FILENAME_BACKUP', 'backup.php');
   define('FILENAME_BANNER_MANAGER', 'banner_manager.php');
@@ -72,16 +65,11 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_ORDERS_EDIT_AJAX', 'edit_orders_ajax.php');
 // EOF: MOD - Create & Edit Order & customers
 
-// BOF: MOD - Version Control & Bookmark MODULE for Contributions 0.1.4
-  define('FILENAME_INSTALLED_CONTRIBUTIONS','installed_contributions.php');
-  define('FILENAME_INSTALLED_CONTRIBUTIONS_HELP','installed_contributions_help.php');
-// EOF: MOD - Version Control & Bookmark MODULE for Contributions 0.1.4
-
 // BOF: MOD - Admin w/access levels
   define('FILENAME_ADMIN_ACCOUNT', 'admin_account.php');
   define('FILENAME_ADMIN_FILES', 'admin_files.php');
   define('FILENAME_ADMIN_MEMBERS', 'admin_members.php');
-  Define('FILENAME_FORBIDEN', 'forbiden.php');
+  define('FILENAME_FORBIDDEN', 'forbidden.php');
   define('FILENAME_LOGIN', 'login.php');
   define('FILENAME_LOGOFF', 'logoff.php');
   define('FILENAME_PASSWORD_FORGOTTEN', 'password_forgotten.php');
@@ -124,6 +112,7 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_RECOVER_CART_SALES', 'recover_cart_sales.php');
 // LINE ADDED
   define('FILENAME_STATS_RECOVER_CART_SALES', 'stats_recover_cart_sales.php');
+
 // BOF: MOD - QT Pro
   define('FILENAME_STATS_LOW_STOCK_ATTRIB', 'stats_low_stock_attrib.php');
   define('FILENAME_STOCK', 'stock.php');
@@ -138,4 +127,6 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_SHIPPING_MANIFEST', 'shipping_manifest.php');
 // EOF: MOD - fedex
 
+// LINE ADDED: CREDIT CLASS Gift Voucher Contribution
+  define('FILENAME_STATS_CREDITS', 'stats_credits.php');
 ?>

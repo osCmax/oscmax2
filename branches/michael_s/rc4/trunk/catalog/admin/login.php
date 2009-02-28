@@ -86,7 +86,8 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
                               <tr>
                                 <td height="100%" valign="top" align="center">
                                 <table border="0" height="100%" cellspacing="0" cellpadding="1" bgcolor="#666666">
-                                  <tr><td><table border="0" width="100%" height="100%" cellspacing="3" cellpadding="2" bgcolor="#F3F3F3">
+                                  <tr><td>
+                                    <table border="0" width="100%" height="100%" cellspacing="3" cellpadding="2" bgcolor="#F3F3F3">
 <?php
   if ($HTTP_GET_VARS['login'] == 'fail') {
     $info_message = TEXT_LOGIN_ERROR;
@@ -94,39 +95,39 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 
   if (isset($info_message)) {
 ?>
-                                    <tr>
-                                      <td colspan="2" class="smallText" align="center"><?php echo $info_message; ?></td>
-                                    </tr>
+                            <tr>
+                              <td colspan="2" class="smallText" align="center"><?php echo $info_message; ?></td>
+                            </tr>
 <?php
   } else {
 ?>
-                                    <tr>
-                                      <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-                                    </tr>
+                            <tr>
+                              <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+                            </tr>
 <?php
   }
 ?>
-                                    <tr>
-                                      <td class="login"><?php echo ENTRY_USERNAME; ?></td>
-                                      <td class="login"><?php echo tep_draw_input_field('username'); ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="login"><?php echo ENTRY_PASSWORD; ?></td>
-                                      <td class="login"><?php echo tep_draw_password_field('password'); ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td colspan="2" align="right" valign="top"><?php echo tep_image_submit('button_confirm.gif', IMAGE_BUTTON_LOGIN); ?></td>
-                                    </tr>
-                                  </table></td></tr>
-                                </table>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td valign="top" align="right"><?php echo '<a class="sub" href="' . tep_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . TEXT_PASSWORD_FORGOTTEN . '</a><span class="sub">&nbsp;</span>'; ?></td>
-                              </tr>
-                            </table>
-                          </form>
-
+                            <tr>
+                              <td class="login"><?php echo ENTRY_USERNAME; ?></td>
+                              <td class="login"><?php echo tep_draw_input_field('username'); ?></td>
+                            </tr>
+                            <tr>
+                              <td class="login"><?php echo ENTRY_PASSWORD; ?></td>
+                              <td class="login"><?php echo tep_draw_password_field('password'); ?></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2" align="right" valign="top"><?php echo tep_image_submit('button_confirm.gif', IMAGE_BUTTON_LOGIN); ?></td>
+                            </tr>
+                          </table>
+                        </td></tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td valign="top" align="right"><?php echo '<a class="sub" href="' . tep_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . TEXT_PASSWORD_FORGOTTEN . '</a><span class="sub">&nbsp;</span>'; ?></td>
+                  </tr>
+                </table>
+              </form>
             </td>
           </tr>
         </table></td>

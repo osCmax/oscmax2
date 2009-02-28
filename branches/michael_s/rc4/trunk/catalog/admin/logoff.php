@@ -40,28 +40,30 @@ $Id: logoff.php 3 2006-05-27 04:59:07Z user $
           </tr>
           <tr bgcolor="#E7E7E7">
             <td colspan="2" align="center" valign="middle">
-                            <table width="280" border="0" cellspacing="0" cellpadding="2">
-                              <tr>
-                                <td class="login_heading" valign="top"><b><?php echo HEADING_TITLE; ?></b></td>
-                              </tr>
-                              <tr>
-                                <td class="login_heading"><?php echo TEXT_MAIN; ?></td>
-                              </tr>
-                              <tr>
-                                <td class="login_heading" align="right"><?php echo '<a class="login_heading" href="' . tep_href_link(FILENAME_LOGIN, '', 'SSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
-                              </tr>
-                              <tr>
-                                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '30'); ?></td>
-                              </tr>
-                            </table>
-            </td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php require(DIR_WS_INCLUDES . 'footer.php'); ?></td>
-      </tr>
-    </table></td>
+                  <table width="280" border="0" cellspacing="0" cellpadding="2">
+                    <tr>
+                      <td class="login_heading" valign="top"><b><?php echo HEADING_TITLE; ?></b></td>
+                    </tr>
+                    <tr>
+                      <td class="login_heading"><?php echo TEXT_MAIN; ?></td>
+                    </tr>
+                    <tr>
+                      <td class="login_heading" align="right"><?php echo '<a class="login_heading" href="' . tep_href_link(FILENAME_LOGIN, '', 'SSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '30'); ?></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td><?php require(DIR_WS_INCLUDES . 'footer.php'); ?></td>
+        </tr>
+      </table>
+    </td>
   </tr>
 </table>
 

@@ -5,7 +5,7 @@ $Id: downloads.php 14 2006-07-28 17:42:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */
@@ -74,7 +74,7 @@ $Id: downloads.php 14 2006-07-28 17:42:07Z user $
 // LINE REMOVED: MOD - Downloads Controller Show Button
 //
 ?>
-          </tr>  
+          </tr>
         </table></td>
       </tr>
 <?php

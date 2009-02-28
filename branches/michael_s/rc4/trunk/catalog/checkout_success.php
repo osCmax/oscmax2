@@ -37,7 +37,12 @@ $Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
           $notify_string .= 'notify[]=' . $notify[$i] . '&';
         }
       }
+
+      if (!empty($notify_string)) {
+        $notify_string = 'action=notify&' . substr($notify_string, 0, -1);
+      }
     }
+
 // BOF:
 //    tep_redirect(tep_href_link(FILENAME_DEFAULT, $notify_string));
 // Added a check for a Guest checkout and cleared the session - 030411 
@@ -71,7 +76,7 @@ $Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
   }
 
 // BOF: MOD - PWA:  Added a check for a Guest checkout and cleared the session - 030411 v0.71
-if (tep_session_is_registered('noaccount')) {
+if (!tep_session_is_registered('noaccount')) {
  $order_update = array('purchased_without_account' => '1');
  tep_db_perform(TABLE_ORDERS, $order_update, 'update', "orders_id = '".$orders['orders_id']."'");
 //  tep_db_query("insert into " . TABLE_ORDERS . " (purchased_without_account) values ('1') where orders_id = '" . (int)$orders['orders_id'] . "'");

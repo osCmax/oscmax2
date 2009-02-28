@@ -227,8 +227,7 @@ function popupWindow(url) {
           <tr>
             <td class="main" colspan=2><?php echo TEXT_AFFILIATE_INDIVIDUAL_BANNER_HELP;?>
           </tr>
-<?php  // Added Category Banners 
-?>
+<?php /* Added Category Banners */ ?>
           <tr>
             <td class="main"><?php echo TEXT_BANNERS_LINKED_CATEGORY; ?></td>
             <td class="main"><?php echo tep_draw_input_field('affiliate_category_id', $abInfo->affiliate_category_id, '', false); ?></td>
@@ -239,8 +238,7 @@ function popupWindow(url) {
           <tr>
             <td class="main" colspan=2>&nbsp;&nbsp;</b><?php echo '<a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_AFFILIATE_VALIDCATS) . '\')"><b>' . TEXT_AFFILIATE_VALIDPRODUCTS . '</b></a>'; ?>&nbsp;&nbsp;<?php echo TEXT_AFFILIATE_CATEGORY_BANNER_VIEW;?></td>
           </tr>
-<?php // End Category Banners
-?>
+<?php /* End Category Banners */ ?>
           <tr>
             <td class="main" colspan=2><?php echo TEXT_AFFILIATE_CATEGORY_BANNER_HELP;?>
           </tr>
@@ -290,11 +288,9 @@ function popupWindow(url) {
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_BANNERS; ?></td>
-<?php // Added Category Banners
-?>
+<?php /* Added Category Banners */ ?>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_CATEGORY_ID; ?></td>
-<?php // End Category Banners
-?>
+<?php /* End Category Banners */ ?>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_PRODUCT_ID; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_STATISTICS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
@@ -322,11 +318,9 @@ function popupWindow(url) {
       }
 ?>
                 <td class="dataTableContent"><?php echo '<a href="javascript:popupImageWindow(\'' . FILENAME_AFFILIATE_POPUP_IMAGE . '?banner=' . $affiliate_banners['affiliate_banners_id'] . '\')">' . tep_image(DIR_WS_IMAGES . 'icon_popup.gif', ICON_PREVIEW) . '</a>&nbsp;' . $affiliate_banners['affiliate_banners_title']; ?></td>
-<?php // Added Category Banners
-?>
+<?php /* Added Category Banners */ ?>
                 <td class="dataTableContent" align="right"><?php if ($affiliate_banners['affiliate_category_id']>0) echo $affiliate_banners['affiliate_category_id']; else echo '&nbsp;'; ?></td>
-<?php // End Category Banners
-?>
+<?php /* End Category Banners */ ?>
                 <td class="dataTableContent" align="right"><?php if ($affiliate_banners['affiliate_products_id']>0) echo $affiliate_banners['affiliate_products_id']; else echo '&nbsp;'; ?></td>
                 <td class="dataTableContent" align="right"><?php echo $affiliate_banners_shown . ' / ' . $affiliate_banners_clicked; ?></td>
                 <td class="dataTableContent" align="right"><?php if ( (is_object($abInfo)) && ($affiliate_banners['affiliate_banners_id'] == $abInfo->affiliate_banners_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $HTTP_GET_VARS['page'] . '&abID=' . $affiliate_banners['affiliate_banners_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>

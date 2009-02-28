@@ -24,12 +24,12 @@ define('EMAIL_WELCOME', 'We welcome you to <b>' . STORE_NAME . '</b>.' . "\n\n")
 define('EMAIL_TEXT', 'You can now take part in the <b>various services</b> we have to offer you. Some of these services include:' . "\n\n" . '<li><b>Permanent Cart</b> - Any products added to your online cart remain there until you remove them, or check them out.' . "\n" . '<li><b>Address Book</b> - We can now deliver your products to another address other than yours! This is perfect to send birthday gifts direct to the birthday-person themselves.' . "\n" . '<li><b>Order History</b> - View your history of purchases that you have made with us.' . "\n" . '<li><b>Products Reviews</b> - Share your opinions on products with our other customers.' . "\n\n");
 define('EMAIL_CONTACT', 'For help with any of our online services, please email the store-owner: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n\n");
 define('EMAIL_WARNING', '<b>Note:</b> This email address was given to us by one of our customers. If you did not signup to be a member, please send an email to ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n");
-
-// BOF: MOD - ICW Credit class gift voucher
-define('EMAIL_GV_INCENTIVE_HEADER', "\n\n" .'As part of our welcome to new customers, we have sent you an e-Gift Voucher valued at:  %s');
-define('EMAIL_GV_REDEEM', 'The redeem code for the e-Gift Voucher is:  %s, you can enter the redeem code when checking out while making a purchase');
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+define('EMAIL_GV_INCENTIVE_HEADER', "\n\n" .'As part of our welcome to new customers, we have sent you an e-Gift Voucher worth %s');
+define('EMAIL_GV_REDEEM', 'The redeem code for the e-Gift Voucher is %s, you can enter the redeem code when checking out while making a purchase');
 define('EMAIL_GV_LINK', 'or by following this link ');
-define('EMAIL_COUPON_INCENTIVE_HEADER', 'Thank you for shopping with us! We would like to welcome you with this special discount coupon.' . "\n");
-define('EMAIL_COUPON_REDEEM', 'To use the coupon enter the following code during checkout.' . "\n" . 'Coupon Code: %s');
-// EOF: MOD - ICW Credit class gift voucher end
+define('EMAIL_COUPON_INCENTIVE_HEADER', 'Congratulations, to make your first visit to our online shop a more rewarding experience we are sending you an e-Discount Coupon.' . "\n" .
+                                        ' Below are details of the Discount Coupon created just for you' . "\n");
+define('EMAIL_COUPON_REDEEM', 'To use the coupon enter the redeem code which is %s during checkout while making a purchase');
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 ?>

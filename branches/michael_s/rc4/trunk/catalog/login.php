@@ -114,7 +114,7 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 
         tep_db_query("update " . TABLE_CUSTOMERS_INFO . " set customers_info_date_of_last_logon = now(), customers_info_number_of_logons = customers_info_number_of_logons+1 where customers_info_id = '" . (int)$customer_id . "'");
 
-// BOF: MOD - GV CREDIT CLASS
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
 // add these new codes:
         if (tep_session_is_registered('floating_gv_code')) {
           $gv_query = tep_db_query("SELECT c.coupon_id, c.coupon_amount, IF(rt.coupon_id>0, 'true', 'false') AS redeemed FROM ". TABLE_COUPONS ." c LEFT JOIN ". TABLE_COUPON_REDEEM_TRACK." rt USING(coupon_id), ". TABLE_COUPON_EMAIL_TRACK ." et WHERE c.coupon_code = '". $floating_gv_code ."' AND c.coupon_id = et.coupon_id");
@@ -130,7 +130,7 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
             }
           }
         }
-// EOF: MOD - GV CREDIT CLASS
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
 // restore cart contents
         $cart->restore_contents();

@@ -77,7 +77,8 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
 
       return $output_string;
     }
-// BOF: MOD - ICW ORDER TOTAL CREDIT CLASS/GV SYSTEM
+
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
 //
 // This function is called in checkout payment after display of payment methods. It actually calls
 // two credit class functions.
@@ -112,6 +113,7 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
         $close_string  .= '<tr><td width="100%">' .  tep_draw_separator('pixel_trans.gif', '100%', '10') . '</td></tr>';
         reset($this->modules);
         $output_string = '';
+
         while (list(, $value) = each($this->modules)) {
           $class = substr($value, 0, strrpos($value, '.'));
           if ($GLOBALS[$class]->enabled && $GLOBALS[$class]->credit_class) {
@@ -126,7 +128,6 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
               $output_string .= '  </tr>' . "\n";
               $output_string .= $selection_string;
             }
-
           }
         }
         if ($output_string != '') {
@@ -137,14 +138,36 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
       return $output_string;
     }
 
+  	function sub_credit_selection(){
+  		$selection_string = '';
+      $close_string = '';
+      $credit_class_string = '';
+      if (MODULE_ORDER_TOTAL_INSTALLED) {
 
-//            if ($selection_string !='') {
-//              $output_string .= '</td>' . "\n";
-//              $output_string .= $selection_string;
-//            }
+        reset($this->modules);
+        $output_string = '';
+        while (list(, $value) = each($this->modules)) {
+          $class = substr($value, 0, strrpos($value, '.'));
+          if ($GLOBALS[$class]->enabled && $GLOBALS[$class]->credit_class) {
+            $use_credit_string = $GLOBALS[$class]->use_credit_amount();
+            if ($selection_string =='') $selection_string = $GLOBALS[$class]->credit_selection();
+            if ( ($use_credit_string !='' ) || ($selection_string != '') ) {
 
-
-
+              $output_string = /*' <tr><td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td><td colspan=2><table border="0" cellpadding="2" cellspacing="0" width="100%"><tr class="moduleRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" >' . "\n" .
+                               '   <td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td>' .*/
+                              $use_credit_string;
+              $output_string .= '<td width="10">' . tep_draw_separator('pixel_trans.gif', '10', '1') . '</td>';
+              $output_string .= '  </tr></table></td><td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td></tr>' . "\n";
+            }
+          }
+        }
+        if ($output_string != '') {
+          //$output_string =  $output_string;
+          //$output_string .= $close_string;
+        }
+      }
+      return $output_string;
+    }
 
 // update_credit_account is called in checkout process on a per product basis. It's purpose
 // is to decide whether each product in the cart should add something to a credit account.
@@ -152,17 +175,20 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
 // to the Gift Voucher account.
 // Another use would be to check if the product would give reward points and add these to the points/reward account.
 //
-    function update_credit_account($i) {
+// CCGV 5.19 Fix for GV Queue with Paypal IPN
+    function update_credit_account($i, $order_id=0) {
       if (MODULE_ORDER_TOTAL_INSTALLED) {
         reset($this->modules);
         while (list(, $value) = each($this->modules)) {
           $class = substr($value, 0, strrpos($value, '.'));
           if ( ($GLOBALS[$class]->enabled && $GLOBALS[$class]->credit_class) ) {
-            $GLOBALS[$class]->update_credit_account($i);
+// CCGV 5.19 Fix for GV Queue with Paypal IPN
+          $GLOBALS[$class]->update_credit_account($i, $order_id);
           }
         }
       }
     }
+
 // This function is called in checkout confirmation.
 // It's main use is for credit classes that use the credit_selection() method. This is usually for
 // entering redeem codes(Gift Vouchers/Discount Coupons). This function is used to validate these codes.
@@ -178,43 +204,51 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
           if ( ($GLOBALS[$class]->enabled && $GLOBALS[$class]->credit_class) ) {
             $post_var = 'c' . $GLOBALS[$class]->code;
             if ($HTTP_POST_VARS[$post_var]) {
-              if (!tep_session_is_registered($post_var)) tep_session_register($post_var);
-// 2 LINEs ADDED: Credit Class v5.13 by Rigadin: have to register the new created variable as global cause we are in a function
-                $post_var = $HTTP_POST_VARS[$post_var]; // Rigadin: does not work because not global variable
-            }
+ 							if (!tep_session_is_registered($post_var)) tep_session_register($post_var);
+      				$post_var = $HTTP_POST_VARS[$post_var];
+						}
             $GLOBALS[$class]->collect_posts();
           }
         }
       }
     }
+
 // pre_confirmation_check is called on checkout confirmation. It's function is to decide whether the
 // credits available are greater than the order total. If they are then a variable (credit_covers) is set to
 // true. This is used to bypass the payment method. In other words if the Gift Voucher is more than the order
 // total, we don't want to go to paypal etc.
 //
     function pre_confirmation_check() {
-      global $payment, $order, $credit_covers;
+      global $payment, $order, $credit_covers, $customer_id;
       if (MODULE_ORDER_TOTAL_INSTALLED) {
+  
         $total_deductions  = 0;
         reset($this->modules);
         $order_total = $order->info['total'];
         while (list(, $value) = each($this->modules)) {
           $class = substr($value, 0, strrpos($value, '.'));
-          $order_total=$this->get_order_total_main($class,$order_total);
+          $order_total = $this->get_order_total_main($class,$order_total);
           if ( ($GLOBALS[$class]->enabled && $GLOBALS[$class]->credit_class) ) {
             $total_deductions = $total_deductions + $GLOBALS[$class]->pre_confirmation_check($order_total);
             $order_total = $order_total - $GLOBALS[$class]->pre_confirmation_check($order_total);
           }
         }
-        if ($order->info['total'] - $total_deductions <= 0 ) {
-          if(!tep_session_is_registered('credit_covers')) tep_session_register('credit_covers');
+
+        $gv_query=tep_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id = '" . $customer_id . "'");
+        $gv_result=tep_db_fetch_array($gv_query);
+        $gv_payment_amount = $gv_result['amount'];
+
+        if ($order->info['total'] - $gv_payment_amount <= 0 ) {
+          if (tep_session_is_registered('cot_gv')) {
+          	if(!tep_session_is_registered('credit_covers')) tep_session_register('credit_covers');
             $credit_covers = true;
           }
-	else{   // belts and suspenders to get rid of credit_covers variable if it gets set once and they put something else in the cart
-          if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');	
-        }
+        } else {   // belts and suspenders to get rid of credit_covers variable if it gets set once and they put something else in the cart
+    	    if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');
+      	}
       }
     }
+
 // this function is called in checkout process. it tests whether a decision was made at checkout payment to use
 // the credit amount be applied aginst the order. If so some action is taken. E.g. for a Gift voucher the account
 // is reduced the order total amount.
@@ -230,6 +264,7 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
         }
       }
     }
+
 // Called in checkout process to clear session variables created by each credit class module.
 //
     function clear_posts() {
@@ -240,21 +275,21 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
           $class = substr($value, 0, strrpos($value, '.'));
           if ( ($GLOBALS[$class]->enabled && $GLOBALS[$class]->credit_class) ) {
             $post_var = 'c' . $GLOBALS[$class]->code;
-	            if (tep_session_is_registered($post_var)) tep_session_unregister($post_var);
+            if (tep_session_is_registered($post_var)) tep_session_unregister($post_var);
           }
         }
       }
     }
+
 // Called at various times. This function calulates the total value of the order that the
 // credit will be appled aginst. This varies depending on whether the credit class applies
 // to shipping & tax
 //
     function get_order_total_main($class, $order_total) {
       global $credit, $order;
-//      if ($GLOBALS[$class]->include_tax == 'false') $order_total=$order_total-$order->info['tax'];
-//      if ($GLOBALS[$class]->include_shipping == 'false') $order_total=$order_total-$order->info['shipping_cost'];
       return $order_total;
     }
-// EOF: MOD - ICW ORDER TOTAL CREDIT CLASS/GV SYSTEM
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
   }
 ?>

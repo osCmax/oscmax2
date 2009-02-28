@@ -479,6 +479,12 @@
 <?php
   }
 ?>
+          <tr>
+            <td class="main">&nbsp;<?php echo ENTRY_COUNTRY; ?></td>
+<?php // BOF: MOD - Country-State Selector ?>
+            <td class="main">&nbsp;&nbsp;<?php echo tep_get_country_list('country',$a_country,'onChange="return refresh_form(affiliate_details);"') . '&nbsp;<br>' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
+<?php // EOF: MOD - Country-State Selector ?>
+          </tr>
         </table></td>
       </tr>
     </table></td>

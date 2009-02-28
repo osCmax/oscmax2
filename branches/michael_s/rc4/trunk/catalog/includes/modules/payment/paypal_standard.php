@@ -220,7 +220,11 @@
             tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
 
             $order_products_id = tep_db_insert_id();
-
+// Start - CREDIT CLASS Gift Voucher Contribution
+// CCGV 5.19 Fix for GV Queue with Paypal IPN
+//          $order_total_modules->update_credit_account($i);
+            $order_total_modules->update_credit_account($i,$insert_id);
+// End - CREDIT CLASS Gift Voucher Contribution
             $attributes_exist = '0';
             if (isset($order->products[$i]['attributes'])) {
               $attributes_exist = '1';
@@ -463,6 +467,10 @@
 // Update products_ordered (for bestsellers list)
         tep_db_query("update " . TABLE_PRODUCTS . " set products_ordered = products_ordered + " . sprintf('%d', $order->products[$i]['qty']) . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
 
+// Start - CREDIT CLASS Gift Voucher Contribution
+        $order_total_modules->update_credit_account($i);
+// End - CREDIT CLASS Gift Voucher Contribution
+
 //------insert customer choosen option to order--------
         $attributes_exist = '0';
         $products_ordered_attributes = '';
@@ -498,6 +506,9 @@
         $products_ordered .= $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . ' (' . $order->products[$i]['model'] . ') = ' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . $products_ordered_attributes . "\n";
       }
 
+// Start - CREDIT CLASS Gift Voucher Contribution
+      $order_total_modules->apply_credit();
+// End - CREDIT CLASS Gift Voucher Contribution
 // lets start with the email confirmation
       $email_order = STORE_NAME . "\n" .
                      EMAIL_SEPARATOR . "\n" .
@@ -555,6 +566,9 @@
       tep_session_unregister('payment');
       tep_session_unregister('comments');
 
+// Start - CREDIT CLASS Gift Voucher Contribution
+      $order_total_modules->clear_posts();
+// End - CREDIT CLASS Gift Voucher Contribution
       tep_session_unregister('cart_PayPal_Standard_ID');
 
       tep_redirect(tep_href_link(FILENAME_CHECKOUT_SUCCESS, '', 'SSL'));

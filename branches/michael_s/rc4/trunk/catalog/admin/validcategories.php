@@ -5,8 +5,6 @@
   osCMax Power E-Commerce
   http://oscdox.com
 
-  
-
   Copyright 2006 osCMax2002 Richard Fielder
 
   Released under the GNU General Public License

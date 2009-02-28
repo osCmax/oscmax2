@@ -75,6 +75,12 @@ $Id: product_listing.php 3 2006-05-27 04:59:07Z user $
         $lc_text = TABLE_HEADING_BUY_NOW;
 // LINE ADDED
         $lc_align = 'center';
+// BOF: Mod - Wishlist 
+        if (tep_session_is_registered('customer_id')) { //only registered users 
+//'add to wishlist' button bellow the 'buy now' button in the list of products. 
+          $lc_text .= '< BR >' . tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO,tep_get_all_get_params(array('action')) . 'action=add_product')) . tep_image_submit('button_wishlist.gif', IMAGE_BUTTON_ADD_WISHLIST,'name="wishlist" value="wishlist" width="80%"') . '</form >'; 
+        } 
+// EOF: Mod - Wishlist
         break;
     }
 
@@ -100,10 +106,10 @@ $Id: product_listing.php 3 2006-05-27 04:59:07Z user $
   } else {
    $customer_group_id = $sppc_customer_group_id;
   }
-	while ($_listing = tep_db_fetch_array($listing_query)) {
-	$listing[] = $_listing;
-	$list_of_prdct_ids[] = $_listing['products_id'];
-	}
+  while ($_listing = tep_db_fetch_array($listing_query)) {
+    $listing[] = $_listing;
+    $list_of_prdct_ids[] = $_listing['products_id'];
+  }
 // next part is a debug feature, when uncommented it will print the info that this module receives
  /*
    echo '<pre>';
@@ -112,56 +118,56 @@ $Id: product_listing.php 3 2006-05-27 04:59:07Z user $
  */
   $select_list_of_prdct_ids = "products_id = '".$list_of_prdct_ids[0]."' ";
   if ($no_of_listings > 1) {
-   for ($n = 1 ; $n < count($list_of_prdct_ids) ; $n++) {
-   $select_list_of_prdct_ids .= "or products_id = '".$list_of_prdct_ids[$n]."' ";
-   }
-}
+    for ($n = 1 ; $n < count($list_of_prdct_ids) ; $n++) {
+      $select_list_of_prdct_ids .= "or products_id = '".$list_of_prdct_ids[$n]."' ";
+    }
+  }
 
 // get all product prices for products with the particular customer_group_id
 // however not necessary for customer_group_id = 0
-if ($customer_group_id != '0') {
-  $pg_query = tep_db_query("select pg.products_id, customers_group_price as price from " . TABLE_PRODUCTS_GROUPS . " pg where (".$select_list_of_prdct_ids.") and pg.customers_group_id = '".$customer_group_id."' ");
- //   $no_of_pg_products = tep_db_num_rows($pg_query) ;
-	while ($pg_array = tep_db_fetch_array($pg_query)) {
-	$new_prices[] = array ('products_id' => $pg_array['products_id'], 'products_price' => $pg_array['price'], 'specials_new_products_price' => '', 'final_price' => $pg_array['price']);
-	}
-   for ($x = 0; $x < $no_of_listings; $x++) {
+  if ($customer_group_id != '0') {
+    $pg_query = tep_db_query("select pg.products_id, customers_group_price as price from " . TABLE_PRODUCTS_GROUPS . " pg where (".$select_list_of_prdct_ids.") and pg.customers_group_id = '".$customer_group_id."' ");
+//  $no_of_pg_products = tep_db_num_rows($pg_query) ;
+    while ($pg_array = tep_db_fetch_array($pg_query)) {
+      $new_prices[] = array ('products_id' => $pg_array['products_id'], 'products_price' => $pg_array['price'], 'specials_new_products_price' => '', 'final_price' => $pg_array['price']);
+    }
+    for ($x = 0; $x < $no_of_listings; $x++) {
 // replace products prices with those from customers_group table
       if(!empty($new_prices)) {
-         for ($i = 0; $i < count($new_prices); $i++) {
-	    if( $listing[$x]['products_id'] == $new_prices[$i]['products_id'] ) {
-		$listing[$x]['products_price'] = $new_prices[$i]['products_price'];
-		$listing[$x]['final_price'] = $new_prices[$i]['final_price'];
-		}
-	    }
-	} // end if(!empty($new_prices)
-	$listing[$x]['specials_new_products_price'] = ''; // makes sure that a retail specials price doesn't carry over to another customer group
-	$listing[$x]['final_price'] = $listing[$x]['products_price']; // final price should not be the retail special price
-   } // end for ($x = 0; $x < $no_of_listings; $x++)
-} // end if ($customer_group_id != '0')
+        for ($i = 0; $i < count($new_prices); $i++) {
+          if( $listing[$x]['products_id'] == $new_prices[$i]['products_id'] ) {
+            $listing[$x]['products_price'] = $new_prices[$i]['products_price'];
+            $listing[$x]['final_price'] = $new_prices[$i]['final_price'];
+          }
+        }
+      } // end if(!empty($new_prices)
+      $listing[$x]['specials_new_products_price'] = ''; // makes sure that a retail specials price doesn't carry over to another customer group
+      $listing[$x]['final_price'] = $listing[$x]['products_price']; // final price should not be the retail special price
+    } // end for ($x = 0; $x < $no_of_listings; $x++)
+  } // end if ($customer_group_id != '0')
 
 // an extra query is needed for all the specials
 
-	$specials_query = tep_db_query("select products_id, specials_new_products_price from " . TABLE_SPECIALS . " where (".$select_list_of_prdct_ids.") and status = '1' and customers_group_id = '" .$customer_group_id. "'");
-	while ($specials_array = tep_db_fetch_array($specials_query)) {
-	$new_s_prices[] = array ('products_id' => $specials_array['products_id'], 'products_price' => '', 'specials_new_products_price' => $specials_array['specials_new_products_price'] , 'final_price' => $specials_array['specials_new_products_price']);
-	}
+  $specials_query = tep_db_query("select products_id, specials_new_products_price from " . TABLE_SPECIALS . " where (".$select_list_of_prdct_ids.") and status = '1' and customers_group_id = '" .$customer_group_id. "'");
+  while ($specials_array = tep_db_fetch_array($specials_query)) {
+  $new_s_prices[] = array ('products_id' => $specials_array['products_id'], 'products_price' => '', 'specials_new_products_price' => $specials_array['specials_new_products_price'] , 'final_price' => $specials_array['specials_new_products_price']);
+  }
 
 // add the correct specials_new_products_price and replace final_price
-	for ($x = 0; $x < $no_of_listings; $x++) {
+  for ($x = 0; $x < $no_of_listings; $x++) {
 
         if(!empty($new_s_prices)) {
-	    for ($i = 0; $i < count($new_s_prices); $i++) {
-		 if( $listing[$x]['products_id'] == $new_s_prices[$i]['products_id'] ) {
-		   $listing[$x]['specials_new_products_price'] = $new_s_prices[$i]['specials_new_products_price'];
-		   $listing[$x]['final_price'] = $new_s_prices[$i]['final_price'];
-		 }
-	       }
-	   } // end if(!empty($new_s_prices)
-	} // end for ($x = 0; $x < $no_of_listings; $x++)
+      for ($i = 0; $i < count($new_s_prices); $i++) {
+     if( $listing[$x]['products_id'] == $new_s_prices[$i]['products_id'] ) {
+       $listing[$x]['specials_new_products_price'] = $new_s_prices[$i]['specials_new_products_price'];
+       $listing[$x]['final_price'] = $new_s_prices[$i]['final_price'];
+     }
+         }
+     } // end if(!empty($new_s_prices)
+  } // end for ($x = 0; $x < $no_of_listings; $x++)
 
 //    while ($listing = tep_db_fetch_array($listing_query)) { (was original code)
-	for ($x = 0; $x < $no_of_listings; $x++) {
+  for ($x = 0; $x < $no_of_listings; $x++) {
 // EOF: MOD - Separate Pricing per Customer
 
       $rows++;
@@ -199,7 +205,7 @@ if ($customer_group_id != '0') {
             $lc_align = 'right';
 
             if (tep_not_null($listing[$x]['specials_new_products_price'])) {
-              $lc_text = '&nbsp;<span style="text-decoration:line-through">' .  $currencies->display_price($listing[$x]['products_price'], tep_get_tax_rate($listing[$x]['products_tax_class_id'])) . '</span>&nbsp;&nbsp;<span class="productSpecialPrice">' . $currencies->display_price($listing[$x]['specials_new_products_price'], tep_get_tax_rate($listing[$x]['products_tax_class_id'])) . '</span>&nbsp;';
+              $lc_text = '&nbsp;<s>' .  $currencies->display_price($listing[$x]['products_price'], tep_get_tax_rate($listing[$x]['products_tax_class_id'])) . '</s>&nbsp;&nbsp;<span class="productSpecialPrice">' . $currencies->display_price($listing[$x]['specials_new_products_price'], tep_get_tax_rate($listing[$x]['products_tax_class_id'])) . '</span>&nbsp;';
             } else {
               $lc_text = '&nbsp;' . $currencies->display_price($listing[$x]['products_price'], tep_get_tax_rate($listing[$x]['products_tax_class_id'])) . '&nbsp;';
             }

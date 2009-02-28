@@ -20,12 +20,6 @@ $Id: shopping_cart.php 3 2006-05-27 04:59:07Z user $
 ?>
 <!-- shopping_cart //-->
 
-<script language="javascript"><!--
-function couponpopupWindow(url) {
-window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=450,height=280,screenX=150,screenY=150,top=150,left=150')
-}
-//--></script> 
-
 <?php
 
   $boxHeading = BOX_HEADING_SHOPPING_CART;
@@ -36,8 +30,24 @@ window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,m
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
   $boxContent = '';
+
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+// CREDIT CLASS script moved for compatibility with STS
+//$cart_contents_string = '';
+  $cart_contents_string ="
+<script language=\"javascript\">
+function couponpopupWindow(url) {
+  window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=450,height=280,screenX=150,screenY=150,top=150,left=150')
+}
+//--></script>";
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
   if ($cart->count_contents() > 0) {
     $boxContent .= '<table border="0" width="100%" cellspacing="0" cellpadding="0">';
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+// Modified in v5.13 for STS compatibility
+    $boxContent .= '<table border="0" width="100%" cellspacing="0" cellpadding="0">'; // Modified in v5.13 by Rigadin for STS compatibility
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
     $products = $cart->get_products();
     for ($i=0, $n=sizeof($products); $i<$n; $i++) {
       $boxContent .= '<tr><td align="right" valign="top" class="infoBoxContents">';
@@ -72,7 +82,7 @@ window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,m
     $boxContent .= '<div align="right">' . $currencies->format($cart->show_total()) . '</div>';
 
   }
-// ICW ADDED FOR CREDIT CLASS GV
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   if (tep_session_is_registered('customer_id')) {
     $gv_query = tep_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id = '" . $customer_id . "'");
     $gv_result = tep_db_fetch_array($gv_query);
@@ -90,16 +100,18 @@ window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,m
 
   }
   if (tep_session_is_registered('cc_id') && $cc_id) {
+    $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . $cc_id . "'");
+    $coupon = tep_db_fetch_array($coupon_query);
+    $coupon_desc_query = tep_db_query("select * from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . $cc_id . "' and language_id = '" . $languages_id . "'");
+    $coupon_desc = tep_db_fetch_array($coupon_desc_query);
+    $text_coupon_help = sprintf("%s",$coupon_desc['coupon_name']);
     $boxContent .= tep_draw_separator();
     $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smalltext">' . CART_COUPON . '</td><td class="smalltext" align="right" valign="bottom">' . '<a href="javascript:couponpopupWindow(\'' . tep_href_link(FILENAME_POPUP_COUPON_HELP, 'cID=' . $cc_id) . '\')">' . CART_COUPON_INFO . '</a>' . '</td></tr></table>';
 
   }
-
-// ADDED FOR CREDIT CLASS GV END ADDITTION
-
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
 include (bts_select('boxes', $box_base_name)); // BTS 1.5
-
 
   $boxLink = '';
 

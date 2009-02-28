@@ -65,7 +65,7 @@ body { background-color: #ffffff; color: #000000; margin: 0px;
 /*  Line below old colour was #ffffff */
 .dataTableHeadingContent { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: bold; }
 .dataTableRow { background-color: #F0F1F1; }
-.dataTableRowSelected { background-color: #DEE4E8;}
+.dataTableRowSelected { background-color: #DEE4E8; }
 .dataTableRowOver { background-color: #FFFFFF; cursor: pointer; cursor: hand; }
 .dataTableContent { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; }
 

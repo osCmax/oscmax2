@@ -22,14 +22,14 @@ define('TABLE_HEADING_VOUCHER_VALUE', 'Gutscheinwert');
 define('TABLE_HEADING_DATE_PURCHASED', 'Bestelldatum');
 define('TABLE_HEADING_ACTION', 'Aktion');
 
-define('TEXT_REDEEM_COUPON_MESSAGE_HEADER', 'You recently purchased a Gift Voucher from our online store.' . "\n"
-                                          . 'For security reasons this was not made immediately available to you.' . "\n"
-                                          . 'However this amount has now been released. You can now visit our store' . "\n"
-                                          . 'and send the value via email to someone else' . "\n\n");
+define('TEXT_REDEEM_COUPON_MESSAGE_HEADER', 'Sie haben soeben einen Gutschein in unserem Webshop bestellt.' . "\n"
+                                          . 'Aus Sicherheitsgründen ist dieser Gutschein nicht sofort verfügbar.' . "\n"
+                                          . 'Sie können nun Ihren Gutschein verbuchen' . "\n"
+                                          . 'und per E-Mail versenden' . "\n\n");
 
-define('TEXT_REDEEM_COUPON_MESSAGE_AMOUNT', 'The Gift Voucher(s) you purchased are worth %s' . "\n\n");
+define('TEXT_REDEEM_COUPON_MESSAGE_AMOUNT', 'Der von Ihnen bestellte Gutschein hat einen Wert von %s' . "\n\n");
 
 define('TEXT_REDEEM_COUPON_MESSAGE_BODY', '');
 define('TEXT_REDEEM_COUPON_MESSAGE_FOOTER', '');
-define('TEXT_REDEEM_COUPON_SUBJECT', 'Gift Voucher Purchase');
+define('TEXT_REDEEM_COUPON_SUBJECT', 'Gutschein kaufen');
 ?>

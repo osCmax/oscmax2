@@ -188,9 +188,6 @@ $Id: define_shipping.php 14 2006-07-28 17:42:07Z user $
       $dir->close();
     }
 ?>
-
-
-
               </tr>
             </table></td>
           </tr>

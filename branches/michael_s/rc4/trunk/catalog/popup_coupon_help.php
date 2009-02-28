@@ -53,7 +53,7 @@ BODY { margin-bottom: 10px; margin-left: 10px; margin-right: 10px; margin-top: 1
     default:
   }
   if ($coupon['coupon_minimum_order'] > 0 ) $text_coupon_help .= sprintf(TEXT_COUPON_HELP_MINORDER, $currencies->format($coupon['coupon_minimum_order']));
-  $text_coupon_help .= sprintf(TEXT_COUPON_HELP_DATE, tep_date_short($coupon['coupon_start_date']),tep_date_short($coupon['coupon_expire_date'])); 
+  $text_coupon_help .= sprintf(TEXT_COUPON_HELP_DATE, tep_date_short($coupon['coupon_start_date']),tep_date_short($coupon['coupon_expire_date']));
   $text_coupon_help .= '<b>' . TEXT_COUPON_HELP_RESTRICT . '</b>';
   $text_coupon_help .= '<br><br>' .  TEXT_COUPON_HELP_CATEGORIES;
   $coupon_get=tep_db_query("select restrict_to_categories from " . TABLE_COUPONS . " where coupon_id='".$HTTP_GET_VARS['cID']."'");
@@ -64,7 +64,7 @@ BODY { margin-bottom: 10px; margin-left: 10px; margin-right: 10px; margin-top: 1
     $result = tep_db_query("SELECT * FROM categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '" . $languages_id . "' and categories.categories_id='" . $cat_ids[$i] . "'");
     if ($row = tep_db_fetch_array($result)) {
     $cats .= '<br>' . $row["categories_name"];
-    } 
+    }
   }
   if ($cats=='') $cats = '<br>NONE';
   $text_coupon_help .= $cats;

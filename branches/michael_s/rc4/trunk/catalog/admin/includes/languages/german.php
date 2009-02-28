@@ -15,16 +15,16 @@ $Id: german.php 3 2006-05-27 04:59:07Z user $
 define('HEADER_TITLE_ACCOUNT', 'Mein Konto');
 define('HEADER_TITLE_LOGOFF', 'Logoff');
 
-// Verwalter Konto
+// Admin Account
 define('BOX_HEADING_MY_ACCOUNT', 'Mein Konto');
 
-// Konfiguration Kastentext in includes/boxes/administrator.php
+// configuration box text in includes/boxes/administrator.php
 define('BOX_HEADING_ADMINISTRATOR', 'Verwalter');
 define('BOX_ADMINISTRATOR_MEMBERS', 'Mitgliedsgruppen');
 define('BOX_ADMINISTRATOR_MEMBER', 'Mitglieder');
 define('BOX_ADMINISTRATOR_BOXES', 'Akte Zugang');
 
-// Bilder
+// images
 define('IMAGE_FILE_PERMISSION', 'Akte Erlaubnis');
 define('IMAGE_GROUPS', 'Gruppen Liste');
 define('IMAGE_INSERT_FILE', 'Setzen Sie Akte Ein');
@@ -33,7 +33,7 @@ define('IMAGE_NEW_GROUP', 'Neue Gruppe');
 define('IMAGE_NEW_MEMBER', 'Neues Mitglied');
 define('IMAGE_NEXT', 'Zunächst');
 
-// Konstanten für Gebrauch in der tep_prev_next_display Funktion
+// constants for use in tep_prev_next_display function
 define('TEXT_DISPLAY_NUMBER_OF_FILENAMES', '<b>%d</b> bis <b>%d</b> anzeigen (von <b>%d</b> Dateinamen)');
 define('TEXT_DISPLAY_NUMBER_OF_MEMBERS', '<b>%d</b> bis <b>%d</b> anzeigen (von <b>%d</b> Mitgliedern)');
 // EOF: MOD - Admin w/levels
@@ -71,7 +71,7 @@ define('HTML_PARAMS','dir="ltr" lang="de"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0');
+define('TITLE', 'osCMax v2.0 SVN/RC4');
 
 // BOF: MOD - ORDER EDIT
 // Create account & order
@@ -492,8 +492,8 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Warning: File uploads are disabled in t
 // LINE ADDED - XSell
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Products'); // X-Sell
 
-// LINE ADDED -  Credit Class GV
-REQUIRE(DIR_WS_LANGUAGES . 'add_ccgvdc_german.php');
+// LINE ADDED - CREDIT CLASS Gift Voucher Contribution
+require(DIR_WS_LANGUAGES . 'add_ccgvdc_german.php');
 
 // BOF: MOD - Article Manager
 define('BOX_HEADING_ARTICLES', 'Article Manager');

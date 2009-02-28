@@ -18,7 +18,7 @@ $Id: article_reviews_info.php 3 2006-05-27 04:59:07Z user $
   require('includes/application_top.php');
 
   if (isset($HTTP_GET_VARS['reviews_id']) && tep_not_null($HTTP_GET_VARS['reviews_id']) && isset($HTTP_GET_VARS['articles_id']) && tep_not_null($HTTP_GET_VARS['articles_id'])) {
-    $review_check_query = tep_db_query("SELECT COUNT(*) as total from " . TABLE_ARTICLE_REVIEWS . " r, " . TABLE_ARTICLE_REVIEWS_DESCRIPTION . " rd where r.reviews_id = '" . (int)$HTTP_GET_VARS['reviews_id'] . "' and r.articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "'");
+    $review_check_query = tep_db_query("select count(*) as total from " . TABLE_ARTICLE_REVIEWS . " r, " . TABLE_ARTICLE_REVIEWS_DESCRIPTION . " rd where r.reviews_id = '" . (int)$HTTP_GET_VARS['reviews_id'] . "' and r.articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "'");
     $review_check = tep_db_fetch_array($review_check_query);
 
     if ($review_check['total'] < 1) {

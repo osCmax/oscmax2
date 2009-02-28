@@ -71,7 +71,7 @@ define('HTML_PARAMS','dir="ltr" lang="en"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0 SVN/RC4');
+define('TITLE', PROJECT_VERSION);
 
 // BOF: MOD - ORDER EDIT
 // Create account & order
@@ -168,10 +168,10 @@ define('PASSWORD_HIDDEN', '--HIDDEN--');
 
 // header text in includes/header.php
 define('HEADER_TITLE_TOP', 'Admin');
-define('HEADER_TITLE_SUPPORT_SITE', 'osCDox');
+define('HEADER_TITLE_SUPPORT_SITE', 'osCMax Forums');
 define('HEADER_TITLE_ONLINE_CATALOG', 'Catalog');
 define('HEADER_TITLE_ADMINISTRATION', 'Admin');
-define('HEADER_TITLE_OSCDOX', 'osCDox.com');
+define('HEADER_TITLE_OSCDOX', 'osCMax User Manual');
 define('HEADER_TITLE_AABOX', 'osCMax');
 
 // text for gender

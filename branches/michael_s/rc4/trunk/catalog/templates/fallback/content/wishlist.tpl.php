@@ -1,5 +1,5 @@
 <!-- body_text //-->
-  <td width="100%" valign="top"><?php echo tep_draw_form('wishlist_form', tep_href_link(FILENAME_WISHLIST)); ?>
+<?php echo tep_draw_form('wishlist_form', tep_href_link(FILENAME_WISHLIST)); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td>
@@ -172,9 +172,8 @@
                 <td class="main"><?php echo TEXT_YOUR_EMAIL; ?></td>
                 <td class="main"><?php echo tep_draw_input_field('your_email', $your_email); ?></td>
               </tr>
-            </td>
-          </tr>
-        </table>
+				</table></td>
+			  </tr>
         <tr>
           <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
         </tr>
@@ -262,6 +261,5 @@
   }
 ?>
 <!-- customer_wishlist_eof //-->
-</td>
 
 <!-- body_text_eof //-->

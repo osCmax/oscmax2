@@ -31,7 +31,7 @@ $Id: footer.php 3 2006-05-27 04:59:07Z user $
 */
 ?>
 Powered by <a href="http://www.oscmax.com" target="_blank"><?php echo PROJECT_VERSION; ?></a><br>
-Copyright &copy; 2000 - <? echo date("Y"); ?> <a href="http://www.oscmax.com" target="_blank">osCMax</a><br>
+Copyright &copy; 2000 - <php? echo date("Y"); ?> <a href="http://www.oscmax.com" target="_blank">osCMax</a><br>
 osCMax provides no warranty and is redistributable under the <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a>
     </td>
   </tr>

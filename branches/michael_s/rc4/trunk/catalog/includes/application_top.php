@@ -16,7 +16,7 @@ $Id: application_top.php 3 2006-05-27 04:59:07Z user $
 $debug = array();
 
 // set the level of error reporting
-  error_reporting(E_ALL & ~E_NOTICE);
+  error_reporting(E_ALL ^ E_NOTICE);
 
 // check support for register_globals
   if (function_exists('ini_get') && (ini_get('register_globals') == false) && (PHP_VERSION < 4.3) ) {
@@ -38,7 +38,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 
 // define the project version
-  define('PROJECT_VERSION', 'osCMax v2.0');
+  define('PROJECT_VERSION', 'osCMax v2.0 RC4');
 // some code to solve compatibility issues
   require(DIR_WS_FUNCTIONS . 'compatibility.php');
 

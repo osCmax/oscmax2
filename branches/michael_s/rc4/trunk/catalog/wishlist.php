@@ -107,7 +107,6 @@ $Id: wishlist.php 3 2006-05-27 04:59:07Z user $
       }
 
     //Check each posted name => email for errors.
-    $email = HTTP_POST_VARS['email'];
     $j = 0;
     foreach($HTTP_POST_VARS['friend'] as $friendx) {
       if($j == 0) {

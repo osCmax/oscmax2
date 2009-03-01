@@ -18,9 +18,8 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
 // LINE CHANGED: MOD - Downloads Controller - Added $cart
       global $payment, $language, $PHP_SELF, $cart;
 
-// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-      if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED) && !$module == 'credit_covers') {
-// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+      if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED)) {
+// BOF: MOD - Separate Pricing Per Customer, next line original code
 //      $this->modules = explode(';', MODULE_PAYMENT_INSTALLED);
         global $sppc_customer_group_id, $customer_id;
         if(!tep_session_is_registered('sppc_customer_group_id')) { 
@@ -118,28 +117,14 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
       }
     }
 
-// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-// function javascript_validation() {
-  function javascript_validation($coversAll) {
-	//added the $coversAll to be able to pass whether or not the voucher will cover the whole
-	//price or not.  If it does, then let checkout proceed when just it is passed.
+    function javascript_validation() {
       $js = '';
       if (is_array($this->modules)) {
-        if ($coversAll) {
-          $addThis='if (document.checkout_payment.cot_gv.checked) {
-            payment_value='cot_gv';
-          } else ';
-        } else {
-          $addThis='';
-        }
-// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
         $js = '<script language="javascript"><!-- ' . "\n" .
               'function check_form() {' . "\n" .
               '  var error = 0;' . "\n" .
               '  var error_message = "' . JS_ERROR . '";' . "\n" .
-// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-              '  var payment_value = null;' . "\n" .$addThis . 
-// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+              '  var payment_value = null;' . "\n" .
               '  if (document.checkout_payment.payment.length) {' . "\n" .
               '    for (var i=0; i<document.checkout_payment.payment.length; i++) {' . "\n" .
               '      if (document.checkout_payment.payment[i].checked) {' . "\n" .
@@ -160,15 +145,13 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
           }
         }
 
-// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-//        $js .= "\n" . '  if (payment_value == null) {' . "\n" .
+// LINE CHANGED: MOD - ICW CREDIT CLASS Gift Voucher System -Added: && submitter != 1
         $js .= "\n" . '  if (payment_value == null && submitter != 1) {' . "\n" .
                '    error_message = error_message + "' . JS_ERROR_NO_PAYMENT_MODULE_SELECTED . '";' . "\n" .
                '    error = 1;' . "\n" .
                '  }' . "\n\n" .
-//               '  if (error == 1) {' . "\n" .
+// LINE CHANGED: MOD - ICW CREDIT CLASS Gift Voucher System -Added: && submitter != 1
                '  if (error == 1 && submitter != 1) {' . "\n" .
-// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
                '    alert(error_message);' . "\n" .
                '    return false;' . "\n" .
                '  } else {' . "\n" .
@@ -213,29 +196,28 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
 
       return $selection_array;
     }
+// BOF: MOD - ICW CREDIT CLASS Gift Voucher System
+ // check credit covers was setup to test whether credit covers is set in other parts of the code
+function check_credit_covers() {
+	global $credit_covers;
 
-// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-// check credit covers was setup to test whether credit covers is set in other parts of the code
-  function check_credit_covers() {
-  	global $credit_covers;
-
-  	return $credit_covers;
-  }
-// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
-
+	return $credit_covers;
+}
+// EOF: MOD - ICW CREDIT CLASS Gift Voucher System
     function pre_confirmation_check() {
-// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-      global $credit_covers, $payment_modules; 
+// LINE ADDED: MOD - ICW CREDIT CLASS Gift Voucher System
+      global $credit_covers, $payment_modules;
       if (is_array($this->modules)) {
         if (is_object($GLOBALS[$this->selected_module]) && ($GLOBALS[$this->selected_module]->enabled) ) {
-          if ($credit_covers) {
+// BOF: MOD - ICW CREDIT CLASS Gift Voucher System
+          if ($credit_covers) { 
             $GLOBALS[$this->selected_module]->enabled = false;
             $GLOBALS[$this->selected_module] = NULL;
             $payment_modules = '';
           } else {
+// EOF: MOD - ICW CREDIT CLASS Gift Voucher System
             $GLOBALS[$this->selected_module]->pre_confirmation_check();
-          }
-// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+          } // ADDED LINE: MOD - ICW CREDIT CLASS Gift Voucher System
         }
       }
     }

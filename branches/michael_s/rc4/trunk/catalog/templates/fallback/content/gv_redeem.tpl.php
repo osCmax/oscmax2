@@ -5,7 +5,7 @@
           <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr> 
                 <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_specials.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                <td align="right">&nbsp;</td>
               </tr>
             </table></td>
         </tr>
@@ -22,12 +22,7 @@
 // so output a message.
   $message = sprintf(TEXT_VALID_GV, $currencies->format($coupon['coupon_amount']));
   if ($error) {
-
-// BOF - MOD: GV_REDEEM_EXPLOIT_FIX (GVREF)
-//  $message = TEXT_INVALID_GV;
-    $message = $gv_error_message;
-// EOF - MOD: GV_REDEEM_EXPLOIT_FIX (GVREF)
-  
+    $message = TEXT_INVALID_GV;
   }
 ?>
               <tr> 

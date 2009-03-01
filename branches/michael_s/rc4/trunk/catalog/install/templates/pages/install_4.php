@@ -84,18 +84,6 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
   }
 
   $file_contents = '<?php' . "\n" .
-                   '/*' . "\n" .
-                   '  osCMax v2.0, Open Source E-Commerce Solutions' . "\n" .
-                   '  http://www.osCDox.com' . "\n" .
-                   '' . "\n" .
-                   '  Copyright 2009 osCMax' . "\n" .
-                   '' . "\n" .
-                   '  Released under the GNU General Public License' . "\n" .
-                   '*/' . "\n" .
-                   '' . "\n" .
-                   '// Define the webserver and path parameters' . "\n" .
-                   '// * DIR_FS_* = Filesystem directories (local/physical)' . "\n" .
-                   '// * DIR_WS_* = Webserver directories (virtual/URL)' . "\n" .
                    '  define(\'HTTP_SERVER\', \'' . $http_server . '\');' . "\n" .
                    '  define(\'HTTPS_SERVER\', \'' . $http_server . '\');' . "\n" .
                    '  define(\'ENABLE_SSL\', false);' . "\n" .
@@ -113,13 +101,10 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
                    '  define(\'DIR_WS_CLASSES\', DIR_WS_INCLUDES . \'classes/\');' . "\n" .
                    '  define(\'DIR_WS_MODULES\', DIR_WS_INCLUDES . \'modules/\');' . "\n" .
                    '  define(\'DIR_WS_LANGUAGES\', DIR_WS_INCLUDES . \'languages/\');' . "\n\n" .
-                   '' . "\n" .
                    '  define(\'DIR_WS_DOWNLOAD_PUBLIC\', \'pub/\');' . "\n" .
                    '  define(\'DIR_FS_CATALOG\', \'' . $dir_fs_document_root . '\');' . "\n" .
                    '  define(\'DIR_FS_DOWNLOAD\', DIR_FS_CATALOG . \'download/\');' . "\n" .
                    '  define(\'DIR_FS_DOWNLOAD_PUBLIC\', DIR_FS_CATALOG . \'pub/\');' . "\n\n" .
-                   '' . "\n" .
-                   '// define our database connection' . "\n" .
                    '  define(\'DB_SERVER\', \'' . trim($HTTP_POST_VARS['DB_SERVER']) . '\');' . "\n" .
                    '  define(\'DB_SERVER_USERNAME\', \'' . trim($HTTP_POST_VARS['DB_SERVER_USERNAME']) . '\');' . "\n" .
                    '  define(\'DB_SERVER_PASSWORD\', \'' . trim($HTTP_POST_VARS['DB_SERVER_PASSWORD']) . '\');' . "\n" .
@@ -133,18 +118,6 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
   fclose($fp);
 
   $file_contents = '<?php' . "\n" .
-                   '/*' . "\n" .
-                   '  osCMax v2.0, Open Source E-Commerce Solutions' . "\n" .
-                   '  http://www.osCDox.com' . "\n" .
-                   '' . "\n" .
-                   '  Copyright 2009 osCMax, 2008 osCommerce' . "\n" .
-                   '' . "\n" .
-                   '  Released under the GNU General Public License' . "\n" .
-                   '*/' . "\n" .
-                   '' . "\n" .
-                   '// Define the webserver and path parameters' . "\n" .
-                   '// * DIR_FS_* = Filesystem directories (local/physical)' . "\n" .
-                   '// * DIR_WS_* = Webserver directories (virtual/URL)' . "\n" .
                    '  define(\'HTTP_SERVER\', \'' . $http_server . '\');' . "\n" .
                    '  define(\'HTTP_CATALOG_SERVER\', \'' . $http_server . '\');' . "\n" .
                    '  define(\'HTTPS_CATALOG_SERVER\', \'' . $http_server . '\');' . "\n" .

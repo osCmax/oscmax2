@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: rpc.php 1768 2008-01-07 17:38:40Z user $
+  $Id: rpc.php 1768 2008-01-07 17:38:40Z hpdl $
 
   osCMax Power E-Commerce
   http://oscdox.com

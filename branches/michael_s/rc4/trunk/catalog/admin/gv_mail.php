@@ -40,13 +40,12 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
     $subject = tep_db_prepare_input($HTTP_POST_VARS['subject']);
     while ($mail = tep_db_fetch_array($mail_query)) {
       $id1 = create_coupon_code($mail['customers_email_address']);
-      $message = $HTTP_POST_VARS['message'];
+      $message = tep_db_prepare_input($HTTP_POST_VARS['message']);
       $message .= "\n\n" . TEXT_GV_WORTH  . $currencies->format($HTTP_POST_VARS['amount']) . "\n\n";
       $message .= TEXT_TO_REDEEM;
       $message .= TEXT_WHICH_IS . $id1 . TEXT_IN_CASE . "\n\n";
       if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') {
-//        $message .= HTTP_SERVER  . DIR_WS_CATALOG . 'gv_redeem.php' . '/gv_no,'.$id1 . "\n\n";
-        $message .= HTTP_SERVER  . DIR_WS_CATALOG . 'gv_redeem.php' . '/gv_no/'.$id1 . "\n\n";
+        $message .= HTTP_SERVER  . DIR_WS_CATALOG . 'gv_redeem.php' . '/gv_no,'.$id1 . "\n\n";
       } else {
         $message .= HTTP_SERVER  . DIR_WS_CATALOG . 'gv_redeem.php' . '?gv_no='.$id1 . "\n\n";
       }
@@ -55,13 +54,13 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
       //Let's build a message object using the email class
       $mimemessage = new email(array('X-Mailer: osCommerce bulk mailer'));
       // add the message to the object
-// BOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled)
-      if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {
-        $mimemessage->add_text($message);
-      } else {
-        $mimemessage->add_html($message);
-      }
-// EOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled)
+// MaxiDVD Added Line For WYSIWYG HTML Area: BOF (Send TEXT Email when WYSIWYG Disabled)
+    if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {
+    $mimemessage->add_text($message);
+    } else {
+    $mimemessage->add_html($message);
+    }
+// MaxiDVD Added Line For WYSIWYG HTML Area: EOF (Send HTML Email when WYSIWYG Enabled)
       $mimemessage->build_message();
 
       $mimemessage->send($mail['customers_firstname'] . ' ' . $mail['customers_lastname'], $mail['customers_email_address'], '', $from, $subject);
@@ -87,14 +86,11 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
       $mimemessage = new email(array('X-Mailer: osCMax 2.0'));
       // add the message to the object
 
-// BOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled)
-      if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {
-        $mimemessage->add_text($message);
-      } else {
-        $mimemessage->add_html($message);
-      }
-// EOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled)
-
+    if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {
+    $mimemessage->add_text($message);
+    } else {
+    $mimemessage->add_html($message);
+    }
       $mimemessage->build_message();
       $mimemessage->send('Friend', $HTTP_POST_VARS['email_to'], '', $from, $subject);
       // Now create the coupon email entry
@@ -203,9 +199,7 @@ define('customers_email_address', 'string', 'Customer or Newsletter Group');
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
               <tr>
-<?php // BOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled) ?>
-                <td class="smallText"><b><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') { echo (stripslashes($HTTP_POST_VARS['message'])); } else { echo htmlspecialchars(stripslashes($HTTP_POST_VARS['message'])); } ?></td>
-<?php // EOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled) ?>
+                <td class="smallText"><b>  <?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') { echo (stripslashes($HTTP_POST_VARS['message'])); } else { echo htmlspecialchars(stripslashes($HTTP_POST_VARS['message'])); } ?></td>
               </tr>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -223,23 +217,15 @@ define('customers_email_address', 'string', 'Customer or Newsletter Group');
 ?>
                 <table border="0" width="100%" cellpadding="0" cellspacing="2">
                   <tr>
-<?php // BOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled) ?>
-                    <tr>
-                      <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_GV_MAIL) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
+
+                     <tr>
+                    <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_GV_MAIL) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
                     </tr>
                     <td class="smallText">
-                      <?php
-                        if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {
-                          echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="back"');
-                        }
-                        if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {
-                          echo(TEXT_EMAIL_BUTTON_HTML);
-                        } else {
-                          echo(TEXT_EMAIL_BUTTON_TEXT);
-                        }
-                      ?>
+                <?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable'){echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="back"');
+                } ?><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {echo(TEXT_EMAIL_BUTTON_HTML);
+                 } else { echo(TEXT_EMAIL_BUTTON_TEXT); } ?>
                     </td>
-<?php // EOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled) ?>
                   </tr>
                 </table></td>
               </tr>
@@ -301,32 +287,22 @@ define('customers_email_address', 'string', 'Customer or Newsletter Group');
               </tr>
               <tr>
                 <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
-<?php // BOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled) ?>
-                <td><?php
-                  if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
+                <td><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
 // Line Changed - MOD: Ajustable Editor Window
-                    echo tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, ' ') .'</td>';
-                  } else {
-                    echo tep_draw_textarea_field('message', 'soft', '60', '15') .'</td>';
-                  }
+                	echo tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, ' ') .'</td>';
+                } else { echo tep_draw_textarea_field('message', 'soft', '60', '15') .'</td>';
+                }
                 ?>
-<?php // EOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled) ?>
               </tr>
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
               <tr>
-<?php // BOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled) ?>
-                <td colspan="2" align="right">
-                  <?php
-                    if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable'){
-                      echo tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL, 'onClick="validate();return returnVal;"');
-                    } else {
-                      echo tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL);
-                    }
-                  ?>
+                 <td colspan="2" align="right">
+                 <?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable'){ echo tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL, 'onClick="validate();return returnVal;"');
+                   } else {
+                echo tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); }?>
                 </td>
-<?php // EOF - MOD: WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled) ?>
               </tr>
             </table></td>
           </form></tr>

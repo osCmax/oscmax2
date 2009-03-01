@@ -35,25 +35,27 @@
 # Fix certain PHP values
 # (commented out by default to prevent errors occuring on certain
 # servers)
-
+#
 #<IfModule mod_php4.c>
 #  php_value session.use_trans_sid 0
 #  php_value register_globals 1
 #</IfModule>
-# BOF: MOD - Ultimate SEO URLs
 ## SEO Url's .htaccess file
 ## If you want to use the Apache Mod-Rewrite method for SEO URL's
+## Uncomment one of the two code blocks below, depending on where your store is installed:
 ## NOTE: This requires that you are on an apache web server with mod_rewrite enabled.
 
-#<IfModule mod_rewrite.c>
+## If installed in a subfolder, uncomment the below block and change /folder/ to
+## The directory where your shop is installed. For instance, if installed in the catalog directory
+## Change it to /catalog/
+
+
+
 #Options +FollowSymLinks
-#RewriteEngine On
+#RewriteEngine On 
 
-# Change "catalog" to your catalog directory name:
-#RewriteBase /catalog/
-## If installed to the base home/root directory, uncomment the below code only:
-#RewriteBase /
-
+# Change "folder" to your catalog directory name
+#RewriteBase /directory/
 #RewriteRule ^(.*)-p-(.*).html$ product_info.php?products_id=$2&%{QUERY_STRING}
 #RewriteRule ^(.*)-c-(.*).html$ index.php?cPath=$2&%{QUERY_STRING}
 #RewriteRule ^(.*)-m-([0-9]+).html$ index.php?manufacturers_id=$2&%{QUERY_STRING}
@@ -63,5 +65,16 @@
 #RewriteRule ^(.*)-pr-([0-9]+).html$ product_reviews.php?products_id=$2&%{QUERY_STRING}
 #RewriteRule ^(.*)-pri-([0-9]+).html$ product_reviews_info.php?products_id=$2&%{QUERY_STRING}
 #RewriteRule ^(.*)-i-([0-9]+).html$ information.php?info_id=$2&%{QUERY_STRING}
-#</ifModule>
-# EOF: MOD - Ultimate SEO URLs
+
+## If installed to the base home/root directory, uncomment the below code only:
+
+#RewriteBase /
+#RewriteRule ^(.*)-p-(.*).html$ product_info.php?products_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-c-(.*).html$ index.php?cPath=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-m-([0-9]+).html$ index.php?manufacturers_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-pi-([0-9]+).html$ popup_image.php?pID=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-t-([0-9]+).html$ articles.php?tPath=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-a-([0-9]+).html$ article_info.php?articles_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-pr-([0-9]+).html$ product_reviews.php?products_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-pri-([0-9]+).html$ product_reviews_info.php?products_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-i-([0-9]+).html$ information.php?info_id=$2&%{QUERY_STRING}

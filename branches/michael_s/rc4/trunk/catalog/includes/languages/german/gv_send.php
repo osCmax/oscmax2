@@ -2,10 +2,12 @@
 /*
 $Id: gv_send.php 3 2006-05-27 04:59:07Z user $
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  The Exchange Project - Community Made Shopping!
+  http://www.theexchangeproject.org
 
-  Copyright 2006 osCMax
+  Gift Voucher System v1.0
+  Copyright 2006 osCMax2001,2002 Ian C Wilson
+  http://www.phesis.org
 
   Released under the GNU General Public License
 */

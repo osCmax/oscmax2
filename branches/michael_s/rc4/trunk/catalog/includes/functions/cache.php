@@ -102,7 +102,6 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
     global $cPath, $language, $languages_id, $tree, $cPath_array, $categories_string, $cat_name, $boxContent, $box_base_name;
 
     $cache_output = '';
-
     if (($refresh == true) || !read_cache($cache_output, 'categories_box-' . str_replace ( '/', '-', bts_select('boxes', $box_base_name)) . '-' . $language . '.cache' . $cPath, $auto_expire)) {
       ob_start();
       include(DIR_WS_BOXES . 'categories.php');
@@ -119,7 +118,6 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
 // Cache the manufacturers box
   function tep_cache_manufacturers_box($auto_expire = false, $refresh = false) {
     global $HTTP_GET_VARS, $language;
-
     $cache_output = '';
 
     $manufacturers_id = '';
@@ -144,7 +142,7 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
   function tep_cache_also_purchased($auto_expire = false, $refresh = false) {
     global $HTTP_GET_VARS, $language, $languages_id;
 
-    $cache_output = '';
+$cache_output = '';
 
     if (isset($HTTP_GET_VARS['products_id']) && is_numeric($HTTP_GET_VARS['products_id'])) {
       if (($refresh == true) || !read_cache($cache_output, 'also_purchased-' . $language . '.cache' . $HTTP_GET_VARS['products_id'], $auto_expire)) {

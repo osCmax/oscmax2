@@ -12,7 +12,7 @@ $Id: english.php 3 2006-05-27 04:59:07Z user $
 
 // BOF: MOD - Admin w/levels
 // header text in includes/header.php
-define('HEADER_TITLE_ACCOUNT', 'My Account/Password');
+define('HEADER_TITLE_ACCOUNT', 'My Account');
 define('HEADER_TITLE_LOGOFF', 'Logoff');
 
 // Admin Account
@@ -71,7 +71,7 @@ define('HTML_PARAMS','dir="ltr" lang="en"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', PROJECT_VERSION);
+define('TITLE', 'osCMax v2.0 RC4');
 
 // BOF: MOD - ORDER EDIT
 // Create account & order
@@ -168,10 +168,10 @@ define('PASSWORD_HIDDEN', '--HIDDEN--');
 
 // header text in includes/header.php
 define('HEADER_TITLE_TOP', 'Admin');
-define('HEADER_TITLE_SUPPORT_SITE', 'osCMax Forums');
+define('HEADER_TITLE_SUPPORT_SITE', 'osCDox');
 define('HEADER_TITLE_ONLINE_CATALOG', 'Catalog');
 define('HEADER_TITLE_ADMINISTRATION', 'Admin');
-define('HEADER_TITLE_OSCDOX', 'osCMax User Manual');
+define('HEADER_TITLE_OSCDOX', 'osCDox.com');
 define('HEADER_TITLE_AABOX', 'osCMax');
 
 // text for gender
@@ -317,7 +317,7 @@ define('JS_STATE_SELECT', '-- Select Above --');
 define('JS_ZONE', '* The \'State\' entry must be selected from the list for this country.');
 define('JS_COUNTRY', '* The \'Country\' value must be chosen.\n');
 define('JS_TELEPHONE', '* The \'Telephone Number\' entry must have at least ' . ENTRY_TELEPHONE_MIN_LENGTH . ' characters.\n');
-define('JS_PASSWORD', '* The \'Password\' and \'Confirmation\' entries must match and have at least ' . ENTRY_PASSWORD_MIN_LENGTH . ' characters.\n');
+define('JS_PASSWORD', '* The \'Password\' amd \'Confirmation\' entries must match amd have at least ' . ENTRY_PASSWORD_MIN_LENGTH . ' characters.\n');
 
 define('JS_ORDER_DOES_NOT_EXIST', 'Order Number %s does not exist!');
 
@@ -492,7 +492,7 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Warning: File uploads are disabled in t
 // LINE ADDED - XSell
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Products'); // X-Sell
 
-// LINE ADDED - CREDIT CLASS Gift Voucher Contribution
+// LINE ADDED -  Credit Class GV
 require(DIR_WS_LANGUAGES . 'add_ccgvdc_english.php');
 
 // BOF: MOD - Article Manager
@@ -514,4 +514,5 @@ define('IMAGE_ORDERS_TRACK','Track FedEx Shipment');
 define('IMAGE_ORDERS_CANCEL_SHIPMENT','Cancel FedEx Shipment');
 define('BOX_SHIPPING_MANIFEST','Fedx Shipping Manifest');
 // EOF: MOD - FedEx
+
 ?>

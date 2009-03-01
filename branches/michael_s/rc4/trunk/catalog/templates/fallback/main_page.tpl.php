@@ -63,6 +63,7 @@ function CVVPopUpWindow(url) {
 //--></script>
 <?php
 	//// END:  Added for Dynamic MoPics v3.000
+
 ?>
 
 </head>
@@ -87,9 +88,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr class="header">
     <td valign="middle"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . 'store_logo.gif', STORE_NAME) . '</a>'; ?></td>
-<?php /* BOF: Mod - Wishlist */ ?>
-    <td align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_account.gif', HEADER_TITLE_MY_ACCOUNT) . '</a>&nbsp;&nbsp;<a href="<?php echo tep_href_link(FILENAME_WISHLIST); ?>"><?php echo BOX_HEADING_CUSTOMER_WISHLIST; ?></a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_IMAGES . 'header_cart.gif', HEADER_TITLE_CART_CONTENTS) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_checkout.gif', HEADER_TITLE_CHECKOUT) . '</a>'; ?>&nbsp;&nbsp;</td>
-<?php /* EOF: Mod - Wishlist */ ?>
+    <td align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_account.gif', HEADER_TITLE_MY_ACCOUNT) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_IMAGES . 'header_cart.gif', HEADER_TITLE_CART_CONTENTS) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_checkout.gif', HEADER_TITLE_CHECKOUT) . '</a>'; ?>&nbsp;&nbsp;</td>
   </tr>
 </table>
 <table border="0" width="100%" cellspacing="0" cellpadding="1">
@@ -119,16 +118,16 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 <table border="0" width="100%" cellspacing="3" cellpadding="3">
   <tr>
     <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
-<?php
-// Hide Left Column if not to show
-if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
-?>
+						<?php
+             // Hide Left Column if not to show
+                if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
+             ?>
 <!-- left_navigation //-->
 <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
 <!-- left_navigation_eof //-->
-<?php
-}
-?>
+            <?php
+             }
+            ?>
     </table></td>
 <!-- content //-->
     <td width="100%" valign="top"><?php
@@ -136,16 +135,16 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='f
   ?></td>
 <!-- content_eof //-->
     <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
-<?php
-// Hide column_left.php if not to show
-if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
-?>								
+             <?php
+             // Hide column_left.php if not to show
+                if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
+             ?>								
 <!-- right_navigation //-->
-  <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
+<?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
 <!-- right_navigation_eof //-->
-<?php
-}
-?>  		 
+             <?php
+             }
+            ?>  		 
     </table></td>
   </tr>
 </table>
@@ -156,7 +155,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false') {
 ?>
 <!-- footer //-->
-  <?php require(DIR_WS_INCLUDES . 'counter.php'); ?>
+<?php require(DIR_WS_INCLUDES . 'counter.php'); ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="1">
   <tr class="footer">
     <td class="footer">&nbsp;&nbsp;<?php echo strftime(DATE_FORMAT_LONG); ?>&nbsp;&nbsp;</td>

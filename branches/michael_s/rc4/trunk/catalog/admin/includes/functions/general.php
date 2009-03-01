@@ -1032,12 +1032,11 @@ $select_array[$i] . '"';
     tep_db_query("delete from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'");
     tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
     tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
- 
-// BOF: MOD - Wishlist addition to delete products from the wishlist when deleted 
+   
+//Wishlist addition to delete products from the wishlist when deleted 
     tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = '" . (int)$product_id . "'"); 
-    tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'"); 
-// EOF: MOD - Wishlist addition to delete products from the wishlist when deleted 
- 
+    tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'");   
+   
     $product_reviews_query = tep_db_query("select reviews_id from " . TABLE_REVIEWS . " where products_id = '" . (int)$product_id . "'");
     while ($product_reviews = tep_db_fetch_array($product_reviews_query)) {
       tep_db_query("delete from " . TABLE_REVIEWS_DESCRIPTION . " where reviews_id = '" . (int)$product_reviews['reviews_id'] . "'");
@@ -1341,7 +1340,7 @@ $select_array[$i] . '"';
       return 0;
     }
   }
-
+  
 ////
 // Returns the tax rate for a tax class
 // TABLES: tax_rates
@@ -1471,7 +1470,7 @@ $select_array[$i] . '"';
 
     return $tmp_array;
   }
-
+  
 // BOF: MOD - Order Editor
 //////create a pull down for all payment installed payment methods for Order Editor configuration
 // Get list of all payment modules available
@@ -1518,7 +1517,6 @@ $select_array[$i] . '"';
 		}
 /////end payment method dropdown
 // EOF: MOD - Order Editor
-
 // LINE ADDED: MOD - Downloads Controller
   require(DIR_WS_FUNCTIONS . 'downloads_controller.php');
 

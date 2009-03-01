@@ -2,41 +2,13 @@
 /*
   $Id: french.php,v 1.1 2005/05/04 20:09:41 tropic Exp $
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCommerce, Open Source E-Commerce Solutions
+  http://www.oscommerce.com
 
-  Copyright 2006 osCMax
+  Copyright (c) 2003 osCommerce
 
   Released under the GNU General Public License
 */
-
-// BOF: MOD - Admin w/levels
-// header text in includes/header.php
-define('HEADER_TITLE_ACCOUNT', 'My Account/Password');
-define('HEADER_TITLE_LOGOFF', 'Logoff');
-
-// Admin Account
-define('BOX_HEADING_MY_ACCOUNT', 'My Account');
-
-// configuration box text in includes/boxes/administrator.php
-define('BOX_HEADING_ADMINISTRATOR', 'Administrator');
-define('BOX_ADMINISTRATOR_MEMBERS', 'Member Groups');
-define('BOX_ADMINISTRATOR_MEMBER', 'Members');
-define('BOX_ADMINISTRATOR_BOXES', 'File Access');
-
-// images
-define('IMAGE_FILE_PERMISSION', 'File Permissions');
-define('IMAGE_GROUPS', 'Groups List');
-define('IMAGE_INSERT_FILE', 'Insert File');
-define('IMAGE_MEMBERS', 'Members List');
-define('IMAGE_NEW_GROUP', 'New Group');
-define('IMAGE_NEW_MEMBER', 'New Member');
-define('IMAGE_NEXT', 'Next');
-
-// constants for use in tep_prev_next_display function
-define('TEXT_DISPLAY_NUMBER_OF_FILENAMES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> filenames)');
-define('TEXT_DISPLAY_NUMBER_OF_MEMBERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> members)');
-// EOF: MOD - Admin w/levels
 
 // look in your $PATH_LOCALE/locale directory for available locales..
 // on RedHat6.0 I used 'en_US'
@@ -48,9 +20,6 @@ define('DATE_FORMAT_LONG', '%A %d %B, %Y'); // this is used for strftime()
 define('DATE_FORMAT', 'm/d/Y'); // this is used for date()
 define('PHP_DATE_TIME_FORMAT', 'd/m/Y H:i:s'); // this is used for date()
 define('DATE_TIME_FORMAT', DATE_FORMAT_SHORT . ' %H:%M:%S');
-
-// LINE ADDED: MOD -Separate Pricing per Customer
-define('ENTRY_CUSTOMERS_GROUP_NAME', 'Customer Group:');
 
 ////
 // Return date in raw format
@@ -64,6 +33,37 @@ function tep_date_raw($date, $reverse = false) {
   }
 }
 
+
+// translation by CRDD (coroidedroite@yahoo.fr)
+
+//Admin begin
+// header text in includes/header.php
+define('HEADER_TITLE_ACCOUNT', 'Mon Compte');
+define('HEADER_TITLE_LOGOFF', 'D&eacute;connexion');
+
+// Admin Account
+define('BOX_HEADING_MY_ACCOUNT', 'Mon Compte');
+
+// configuration box text in includes/boxes/administrator.php
+define('BOX_HEADING_ADMINISTRATOR', 'Administrateur');
+define('BOX_ADMINISTRATOR_MEMBERS', 'Groupes de membres');
+define('BOX_ADMINISTRATOR_MEMBER', 'Membres');
+define('BOX_ADMINISTRATOR_BOXES', 'Acc&egrave;s Fichiers');
+
+// images
+define('IMAGE_FILE_PERMISSION', 'Autorisation Fichiers');
+define('IMAGE_GROUPS', 'Liste des Groupes');
+define('IMAGE_INSERT_FILE', 'Ins&eacute;rer Fichier');
+define('IMAGE_MEMBERS', 'Listes des membres');
+define('IMAGE_NEW_GROUP', 'Nouveau Groupe');
+define('IMAGE_NEW_MEMBER', 'Nouveau Membre');
+define('IMAGE_NEXT', 'Suivant');
+
+// constants for use in tep_prev_next_display function
+define('TEXT_DISPLAY_NUMBER_OF_FILENAMES', 'Affichage de <b>%d</b> à <b>%d</b> (sur <b>%d</b> listes)');
+define('TEXT_DISPLAY_NUMBER_OF_MEMBERS', 'Affichage de <b>%d</b> à <b>%d</b> (sur <b>%d</b> membres)');
+//Admin end
+
 // Global entries for the <html> tag
 define('HTML_PARAMS','dir="ltr" lang="fr"');
 
@@ -71,108 +71,13 @@ define('HTML_PARAMS','dir="ltr" lang="fr"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0 SVN/RC4');
-
-// BOF: MOD - ORDER EDIT
-// Create account & order
-define('BOX_HEADING_MANUAL_ORDER', 'Manual Orders');
-define('BOX_MANUAL_ORDER_CREATE_ACCOUNT', 'Create Account');
-define('BOX_MANUAL_ORDER_CREATE_ORDER', 'Create Order');
-
-// pull down default text
-define('PULL_DOWN_DEFAULT', 'Please Select');
-define('TYPE_BELOW', 'Type Below');
-
-define('JS_ERROR', 'Errors have occured during the process of your form!\nPlease make the following corrections:\n\n');
-
-define('JS_GENDER', '* The \'Gender\' value must be chosen.\n');
-define('JS_FIRST_NAME', '* The \'First Name\' entry must have at least ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' characters.\n');
-define('JS_LAST_NAME', '* The \'Last Name\' entry must have at least ' . ENTRY_LAST_NAME_MIN_LENGTH . ' characters.\n');
-define('JS_DOB', '* The \'Date of Birth\' entry must be in the format: xx/xx/xxxx (month/day/year).\n');
-define('JS_EMAIL_ADDRESS', '* The \'E-Mail Address\' entry must have at least ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' characters.\n');
-define('JS_ADDRESS', '* The \'Street Address\' entry must have at least ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' characters.\n');
-define('JS_POST_CODE', '* The \'Post Code\' entry must have at least ' . ENTRY_POSTCODE_MIN_LENGTH . ' characters.\n');
-define('JS_CITY', '* The \'City\' entry must have at least ' . ENTRY_CITY_MIN_LENGTH . ' characters.\n');
-define('JS_STATE', '* The \'State\' entry must be selected.\n');
-define('JS_STATE_SELECT', '-- Select Above --');
-define('JS_ZONE', '* The \'State\' entry must be selected from the list for this country.\n');
-define('JS_COUNTRY', '* The \'Country\' entry must be selected.\n');
-define('JS_TELEPHONE', '* The \'Telephone Number\' entry must have at least ' . ENTRY_TELEPHONE_MIN_LENGTH . ' characters.\n');
-define('JS_PASSWORD', '* The \'Password\' and \'Confirmation\' entries must match and have at least ' . ENTRY_PASSWORD_MIN_LENGTH . ' characters.\n');
-
-define('CATEGORY_COMPANY', 'Company Details');
-define('CATEGORY_PERSONAL', 'Personal Details');
-define('CATEGORY_ADDRESS', 'Address');
-define('CATEGORY_CONTACT', 'Contact Information');
-define('CATEGORY_OPTIONS', 'Options');
-define('CATEGORY_PASSWORD', 'Password');
-define('CATEGORY_CORRECT', 'If this is the right customer, press the Confirm button below.');
-define('ENTRY_CUSTOMERS_ID', 'ID:');
-define('ENTRY_CUSTOMERS_ID_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_COMPANY', 'Company Name:');
-define('ENTRY_COMPANY_ERROR', '');
-define('ENTRY_COMPANY_TEXT', '');
-define('ENTRY_GENDER', 'Gender:');
-define('ENTRY_GENDER_ERROR', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_GENDER_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_FIRST_NAME', 'First Name:');
-define('ENTRY_FIRST_NAME_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_FIRST_NAME_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_LAST_NAME', 'Last Name:');
-define('ENTRY_LAST_NAME_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_LAST_NAME_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_LAST_NAME_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_DATE_OF_BIRTH', 'Date of Birth:');
-define('ENTRY_DATE_OF_BIRTH_ERROR', '&nbsp;<small><font color="#FF0000">(eg. 05/21/1970)</font></small>');
-define('ENTRY_DATE_OF_BIRTH_TEXT', '&nbsp;<small>(eg. 05/21/1970) <font color="#AABBDD">required</font></small>');
-define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
-define('ENTRY_EMAIL_ADDRESS_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', '&nbsp;<small><font color="#FF0000">Your email address doesn\'t appear to be valid!</font></small>');
-define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', '&nbsp;<small><font color="#FF0000">email address already exists!</font></small>');
-define('ENTRY_EMAIL_ADDRESS_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_STREET_ADDRESS', 'Street Address:');
-define('ENTRY_STREET_ADDRESS_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_STREET_ADDRESS_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_SUBURB', 'Suburb:');
-define('ENTRY_SUBURB_ERROR', '');
-define('ENTRY_SUBURB_TEXT', '');
-define('ENTRY_POST_CODE', 'Post Code:');
-define('ENTRY_POST_CODE_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_POSTCODE_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_POST_CODE_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_CITY', 'City:'); //Changed for osCMax bug #27
-define('ENTRY_CITY_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_CITY_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_CITY_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_STATE', 'State/Province:');
-define('ENTRY_STATE_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
-define('ENTRY_STATE_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_COUNTRY', 'Country:');
-define('ENTRY_COUNTRY_ERROR', '');
-define('ENTRY_COUNTRY_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_TELEPHONE_NUMBER', 'Telephone Number:');
-define('ENTRY_TELEPHONE_NUMBER_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_TELEPHONE_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_TELEPHONE_NUMBER_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_FAX_NUMBER', 'Fax Number:');
-define('ENTRY_FAX_NUMBER_ERROR', '');
-define('ENTRY_FAX_NUMBER_TEXT', '');
-define('ENTRY_NEWSLETTER', 'Newsletter:');
-define('ENTRY_NEWSLETTER_TEXT', '');
-define('ENTRY_NEWSLETTER_YES', 'Subscribed');
-define('ENTRY_NEWSLETTER_NO', 'Unsubscribed');
-define('ENTRY_NEWSLETTER_ERROR', '');
-define('ENTRY_PASSWORD', 'Password:');
-define('ENTRY_PASSWORD_CONFIRMATION', 'Password Confirmation:');
-define('ENTRY_PASSWORD_CONFIRMATION_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_PASSWORD_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_PASSWORD_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_PASSWORD_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('PASSWORD_HIDDEN', '--HIDDEN--');
-// EOF: MOD - ORDER EDIT
+define('TITLE', 'osCommerce');
 
 // header text in includes/header.php
-define('HEADER_TITLE_TOP', 'Admin');
+define('HEADER_TITLE_TOP', 'Administration');
 define('HEADER_TITLE_SUPPORT_SITE', 'Supporter le site');
 define('HEADER_TITLE_ONLINE_CATALOG', 'Boutique');
 define('HEADER_TITLE_ADMINISTRATION', 'Administration');
-define('HEADER_TITLE_OSCDOX', 'osCDox.com');
-define('HEADER_TITLE_AABOX', 'osCMax');
 
 // text for gender
 define('MALE', 'Homme');
@@ -186,29 +91,6 @@ define('BOX_HEADING_CONFIGURATION', 'Configuration');
 define('BOX_CONFIGURATION_MYSTORE', 'Mon magasin');
 define('BOX_CONFIGURATION_LOGGING', 'Identification');
 define('BOX_CONFIGURATION_CACHE', 'Cache');
-
-// BOF: Added for super-friendly admin menu:
-define('BOX_CONFIGURATION_MIN_VALUES', 'Min Values');
-define('BOX_CONFIGURATION_MAX_VALUES', 'Max Values');
-define('BOX_CONFIGURATION_IMAGES', 'Images');
-define('BOX_CONFIGURATION_CUSTOMER_DETAILS', 'Customer Details');
-define('BOX_CONFIGURATION_SHIPPING', 'Shipping');
-define('BOX_CONFIGURATION_PAGE_CACHE', 'Page Cache Settings');
-define('BOX_CONFIGURATION_PRODUCT_LISTING', 'Product Listing');
-define('BOX_CONFIGURATION_PRODUCT_INFO', 'Product Information');
-define('BOX_CONFIGURATION_EMAIL', 'Email');
-define('BOX_CONFIGURATION_DOWNLOAD', 'Download');
-define('BOX_CONFIGURATION_GZIP', 'GZip');
-define('BOX_CONFIGURATION_SESSIONS', 'Sessions');
-define('BOX_CONFIGURATION_STOCK', 'Stock');
-define('BOX_CONFIGURATION_WYSIWYG', 'WYSIWYG Editor');
-define('BOX_CONFIGURATION_AFFILIATE', 'Affiliate Program');
-define('BOX_CONFIGURATION_ACCOUNTS', 'Accounts');
-define('BOX_CONFIGURATION_MAINTENANCE', 'Site Maintenance');
-define('BOX_CONFIGURATION_MOPICS', 'Dynamic MoPics');
-define('BOX_CONFIGURATION_PRINT', 'Printable Catalog');
-define('BOX_CONFIGURATION_SEO', 'SEO URLs');
-// EOF: Added for super-friendly admin menu:
 
 // modules box text in includes/boxes/modules.php
 define('BOX_HEADING_MODULES', 'Modules');
@@ -224,26 +106,12 @@ define('BOX_CATALOG_MANUFACTURERS', 'Fabricants');
 define('BOX_CATALOG_REVIEWS', 'Commentaires');
 define('BOX_CATALOG_SPECIALS', 'Promotions');
 define('BOX_CATALOG_PRODUCTS_EXPECTED', 'Produits &agrave; venir');
-// 2 LINES ADDED - EasyPopulate and Attrib Manager
-define('BOX_CATALOG_EASYPOPULATE', 'EasyPopulate');
-define('BOX_CATALOG_ATTRIBUTE_MANAGER', 'Attribute Manager');
-// BOF: Added INFO Pages
-define('BOX_CATALOG_DEFINE_MAINPAGE', 'Define MainPage');
-define('BOX_CATALOG_DEFINE_CONDITIONS', 'Conditions Page');
-define('BOX_CATALOG_DEFINE_PRIVACY', 'Privacy Page');
-define('BOX_CATALOG_DEFINE_SHIPPING', 'Shipping Page');
-// EOF: Added INFO Pages
 
 // customers box text in includes/boxes/customers.php
 define('BOX_HEADING_CUSTOMERS', 'Clients');
 define('BOX_CUSTOMERS_CUSTOMERS', 'Clients');
 define('BOX_CUSTOMERS_ORDERS', 'Commandes');
-// LINE ADDED - Edit customer order
-define('BOX_CUSTOMERS_EDIT_ORDERS', 'Edit Orders');
 
-// BOF: MOD - Separate Pricing Per Customer
-define('BOX_CUSTOMERS_GROUPS', 'Customers Groups');
-// EOF: MOD - Separate Pricing Per Customer
 // taxes box text in includes/boxes/taxes.php
 define('BOX_HEADING_LOCATION_AND_TAXES', 'Lieux/Taxes');
 define('BOX_TAXES_COUNTRIES', 'Pays');
@@ -262,8 +130,6 @@ define('BOX_REPORTS_ORDERS_TOTAL', 'Meilleures commandes');
 define('BOX_HEADING_TOOLS', 'Outils');
 define('BOX_TOOLS_BACKUP', 'Sauvegarde');
 define('BOX_TOOLS_BANNER_MANAGER', 'Gestion Banni&egrave;res');
-// LINE ADDED: MOD - Batch Print Center
-define('BOX_TOOLS_BATCH_CENTER', 'Batch Print Center');
 define('BOX_TOOLS_CACHE', 'Gestion Cache');
 define('BOX_TOOLS_DEFINE_LANGUAGE', 'D&eacute;finir langues');
 define('BOX_TOOLS_FILE_MANAGER', 'Gestion Fichiers');
@@ -277,16 +143,6 @@ define('BOX_HEADING_LOCALIZATION', 'Pays');
 define('BOX_LOCALIZATION_CURRENCIES', 'Devises');
 define('BOX_LOCALIZATION_LANGUAGES', 'Langues');
 define('BOX_LOCALIZATION_ORDERS_STATUS', 'Statut Commandes');
-
-// ADDED 2 LINE- recover cart box text
-define('BOX_REPORTS_RECOVER_CART_SALES', 'Recover Carts');
-define('BOX_TOOLS_RECOVER_CART', 'Recover Carts');
-
-// LINE ADDED - Monthly Tax-Sales totals
-define('BOX_REPORTS_MONTHLY_SALES', 'Monthly Sales/Tax');
-
-// LINE ADDED - InfoBox Admin in includes/boxes/info_boxes.php
-define('BOX_HEADING_BOXES', 'Infobox Admin');
 
 // javascript messages
 define('JS_ERROR', 'Une erreur est survenue durant le traitement de votre formulaire!\nVeuillez effectuer les corrections suivantes:\n\n');
@@ -338,19 +194,10 @@ define('ENTRY_DATE_OF_BIRTH_ERROR', '&nbsp;<span class="errorText">(ex. 21/05/19
 define('ENTRY_EMAIL_ADDRESS', 'Adresse email&nbsp;:');
 define('ENTRY_EMAIL_ADDRESS_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' caract&egrave;res</span>');
 define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', '&nbsp;<span class="errorText">L\'adresse email ne semble pas valide&nbsp;!</span>');
+
 define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', '&nbsp;<span class="errorText">Cette adresse email existe d&eacute;j&agrave;&nbsp;!</span>');
 define('ENTRY_COMPANY', 'Soci&eacute;t&eacute;&nbsp;:');
 define('ENTRY_COMPANY_ERROR', '');
-
-// BOF: MOD - Separate Pricing Per Customer
-define('ENTRY_COMPANY_TAX_ID', 'Company\'s tax id number:');
-define('ENTRY_COMPANY_TAX_ID_ERROR', '');
-define('ENTRY_CUSTOMERS_GROUP_REQUEST_AUTHENTICATION', 'Switch off alert for authentication:');
-define('ENTRY_CUSTOMERS_GROUP_RA_NO', 'Alert off');
-define('ENTRY_CUSTOMERS_GROUP_RA_YES', 'Alert on');
-define('ENTRY_CUSTOMERS_GROUP_RA_ERROR', '');
-// EOF: MOD - Separate Pricing Per Customer
-
 define('ENTRY_STREET_ADDRESS', 'Adresse&nbsp;:');
 define('ENTRY_STREET_ADDRESS_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' caract&egrave;res</span>');
 define('ENTRY_SUBURB', 'Comp. adresse&nbsp;:');
@@ -367,6 +214,7 @@ define('ENTRY_TELEPHONE_NUMBER', 'T&eacute;l&eacute;phone&nbsp;:');
 define('ENTRY_TELEPHONE_NUMBER_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_TELEPHONE_MIN_LENGTH . ' caract&egrave;res</span>');
 define('ENTRY_FAX_NUMBER', 'Fax&nbsp;:');
 define('ENTRY_FAX_NUMBER_ERROR', '');
+
 define('ENTRY_NEWSLETTER', 'Newsletter&nbsp;:');
 define('ENTRY_NEWSLETTER_YES', 's\'inscrire');
 define('ENTRY_NEWSLETTER_NO', 'se d&eacute;sinscrire');
@@ -460,10 +308,9 @@ define('TEXT_DISPLAY_NUMBER_OF_TAX_ZONES', 'Voir de <b>%d</b> &agrave; <b>%d</b>
 define('TEXT_DISPLAY_NUMBER_OF_TAX_RATES', 'Voir de <b>%d</b> &agrave; <b>%d</b> (sur <b>%d</b> taux de taxation)');
 define('TEXT_DISPLAY_NUMBER_OF_ZONES', 'Voir de <b>%d</b> &agrave; <b>%d</b> (sur <b>%d</b> r&eacute;gions)');
 
-//BOF: MOD - Catagories Discriptions
-define('TEXT_EDIT_CATEGORIES_HEADING_TITLE', 'Category Heading Title:');
-define('TEXT_EDIT_CATEGORIES_DESCRIPTION', 'Category Description:');
-//EOF: MOD - Catagories Discriptions
+//added missing instruction [www.wadaan.net]
+define('TEXT_INFO_EDIT_GROUP_INTRO','Editer Introduction Groupe');
+//end
 
 define('PREVNEXT_BUTTON_PREV', '&lt;&lt;');
 define('PREVNEXT_BUTTON_NEXT', '&gt;&gt;');
@@ -488,30 +335,4 @@ define('ERROR_FILETYPE_NOT_ALLOWED', 'Erreur&nbsp;: Le type du fichier &agrave; 
 define('SUCCESS_FILE_SAVED_SUCCESSFULLY', 'Succ&egrave;s&nbsp;: Le fichier &agrave; t&eacute;l&eacute;charger a &eacute;t&eacute; enregistr&eacute; avec succ&egrave;s.');
 define('WARNING_NO_FILE_UPLOADED', 'Attention&nbsp;: Aucun fichier t&eacute;l&eacute;charg&eacute;.');
 define('WARNING_FILE_UPLOADS_DISABLED', 'Attention&nbsp;: Le t&eacute;l&eacute;chargement de fichiers a &eacute;t&eacute; d&eacute;sactiv&eacute; dans le fichier de configuration de php&nbsp;: php.ini.');
-
-// LINE ADDED - XSell
-define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Products'); // X-Sell
-
-// LINE ADDED - CREDIT CLASS Gift Voucher Contribution
-require(DIR_WS_LANGUAGES . 'add_ccgvdc_french.php');
-
-// BOF: MOD - Article Manager
-define('BOX_HEADING_ARTICLES', 'Article Manager');
-define('BOX_TOPICS_ARTICLES', 'Topics/Articles');
-define('BOX_ARTICLES_CONFIG', 'Configuration');
-define('BOX_ARTICLES_AUTHORS', 'Authors');
-define('BOX_ARTICLES_REVIEWS', 'Reviews');
-define('BOX_ARTICLES_XSELL', 'Cross-Sell Articles');
-define('IMAGE_NEW_TOPIC', 'New Topic');
-define('IMAGE_NEW_ARTICLE', 'New Article');
-define('TEXT_DISPLAY_NUMBER_OF_AUTHORS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> authors)');
-// EOF: MOD - Article Manager
-
-// BOF: MOD - FedEx
-define('IMAGE_ORDERS_SHIP', 'Ship Package');
-define('IMAGE_ORDERS_FEDEX_LABEL','View or Print FedEx Shipping Label');
-define('IMAGE_ORDERS_TRACK','Track FedEx Shipment');
-define('IMAGE_ORDERS_CANCEL_SHIPMENT','Cancel FedEx Shipment');
-define('BOX_SHIPPING_MANIFEST','Fedx Shipping Manifest');
-// EOF: MOD - FedEx
 ?>

@@ -28,12 +28,10 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
       $this->tax_class  = MODULE_ORDER_TOTAL_GV_TAX_CLASS;
       $this->show_redeem_box = MODULE_ORDER_TOTAL_GV_REDEEM_BOX;
       $this->credit_class = true;
-//    $this->checkbox = $this->user_prompt . '<input type="checkbox" onClick="submitFunction()" name="' . 'c' . $this->code . '">';
-      $this->checkbox = $this->user_prompt . '<input type="checkbox" onClick="clearRadeos()" name="' . 'c' . $this->code . '">';
+      $this->checkbox = $this->user_prompt . '<input type="checkbox" onClick="submitFunction()" name="' . 'c' . $this->code . '">';
       $this->output = array();
     }
 
-// if you set it in admin to not include tax or shipping in the amount
     function process() {
       global $order, $currencies, $cot_gv;
 //      if ($_SESSION['cot_gv']) {  // old code Strider
@@ -49,34 +47,14 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
 //          $od_amount -= $tod_amount;
 //          $order->info['total'] -= $tod_amount;
 //        }
-//        $order->info['total'] = $order->info['total'] - $od_amount;
-        $order->info['total'] = tep_round($order->info['total'],2);
-        $od_amount = tep_round($od_amount,2);
         $order->info['total'] = $order->info['total'] - $od_amount;
         if ($od_amount > 0) {
           $this->output[] = array('title' => $this->title . ':',
                            'text' => '<b>' . $currencies->format($od_amount) . '</b>',
                            'value' => $od_amount);
         }
-      }
+      } 
     }
-
-function mod_process() {
-     global $currencies;
-       $my_order_total = $this->get_order_total();
-       $my_od_amount = $this->calculate_credit($my_order_total);
-       if ($this->calculate_tax != "None") {
-         $tod_amount = $this->calculate_tax_deduction($my_order_total, $my_od_amount, $this->calculate_tax);
-         $my_od_amount = $this->calculate_credit($my_order_total);
-       }
-       $this->deduction = $my_od_amount;
-       //$order->info['total'] = $order->info['total'] - $my_od_amount;
-       if ($my_od_amount > 0) {
-         $this->my_output[] = array('title' => $this->title . ':',
-                          'text' => '<b>' . $currencies->format($my_od_amount) . '</b>',
-                          'value' => $my_od_amount);
-       }
-   }
 
     function selection_test() {
       global $customer_id;
@@ -87,68 +65,54 @@ function mod_process() {
       }
     }
 
-  function pre_confirmation_check($order_total) {
-                global $cot_gv, $order;
-//                if ($_SESSION['cot_gv']) {  // old code Strider
-                        $od_amount = 0; // set the default amount we will send back
-                  if (tep_session_is_registered('cot_gv')) {
+    function pre_confirmation_check($order_total) {
+		global $cot_gv, $order;
+//		if ($_SESSION['cot_gv']) {  // old code Strider
+			$od_amount = 0; // set the default amount we will send back
+		  if (tep_session_is_registered('cot_gv')) {
 // pre confirmation check doesn't do a true order process. It just attempts to see if
 // there is enough to handle the order. But depending on settings it will not be shown
 // all of the order so this is why we do this runaround jane. What do we know so far.
 // nothing. Since we need to know if we process the full amount we need to call get order total
 // if there has been something before us then
 
-              if ($this->include_tax == 'false') {
-                                        $order_total = $order_total - $order->info['tax'];
-                                }
-              if ($this->include_shipping == 'false') {
-                                        $order_total = $order_total - $order->info['shipping_cost'];
-                                }
-                                $od_amount = $this->calculate_credit($order_total);
+	      if ($this->include_tax == 'false') {
+					$order_total = $order_total - $order->info['tax'];
+				}
+  	    if ($this->include_shipping == 'false') {
+					$order_total = $order_total - $order->info['shipping_cost'];
+				}
+				$od_amount = $this->calculate_credit($order_total);
 
 
-                                if ($this->calculate_tax != "None") {
-                                        $tod_amount = $this->calculate_tax_deduction($order_total, $od_amount, $this->calculate_tax);
-                                        $od_amount = $this->calculate_credit($order_total)+$tod_amount;
-                                }
-                        }
-                return $od_amount;
-        }
+				if ($this->calculate_tax != "None") {
+					$tod_amount = $this->calculate_tax_deduction($order_total, $od_amount, $this->calculate_tax);
+					$od_amount = $this->calculate_credit($order_total)+$tod_amount;
+				}
+			}
+		return $od_amount;
+	}
     // original code
-        /*function pre_confirmation_check($order_total) {
+	/*function pre_confirmation_check($order_total) {
       if ($SESSION['cot_gv']) {
         $gv_payment_amount = $this->calculate_credit($order_total);
       }
       return $gv_payment_amount;
-     } */
+    } */
 
     function use_credit_amount() {
-		global $cot_gv, $currencies;
-//      $_SESSION['cot_gv'] = false;     // old code - Strider
-      $cot_gv = false;
-      if ($this->selection_test()) {
-        $output_string = $this->checkbox . '</b>' . '</td>' . "\n";}
-
-      return $output_string;
-    }
-
-	function use_credit_amount_sub() {
 		global $cot_gv;
 //      $_SESSION['cot_gv'] = false;     // old code - Strider
       $cot_gv = false;
       if ($this->selection_test()) {
-        $output_string .=  '    <td align="right" class="main" colspan=2>';
+        $output_string .=  '    <td align="right" class="main">';
         $output_string .= '<b>' . $this->checkbox . '</b>' . '</td>' . "\n";
       }
       return $output_string;
     }
 
-// CCGV 5.19 Fix for GV Queue with Paypal IPN
-  function update_credit_account($i, $order_id=0) {
-    global $order, $customer_id, $insert_id, $REMOTE_ADDR;
-// CCGV 5.19 Fix for GV Queue with Paypal IPN
-    if (!$order_id) $order_id = $insert_id;
-
+    function update_credit_account($i) {
+      global $order, $customer_id, $insert_id, $REMOTE_ADDR;
       if (ereg('^GIFT', addslashes($order->products[$i]['model']))) {
         $gv_order_amount = ($order->products[$i]['final_price'] * $order->products[$i]['qty']);
         if ($this->credit_tax=='true') $gv_order_amount = $gv_order_amount * (100 + $order->products[$i]['tax']) / 100;
@@ -162,7 +126,7 @@ function mod_process() {
           if ($gv_result = tep_db_fetch_array($gv_query)) {
             $total_gv_amount = $gv_result['amount'];
             $customer_gv = true;
-          }
+          }     
           $total_gv_amount = $total_gv_amount + $gv_order_amount;
           if ($customer_gv) {
             $gv_update=tep_db_query("update " . TABLE_COUPON_GV_CUSTOMER . " set amount = '" . $total_gv_amount . "' where customer_id = '" . $customer_id . "'");
@@ -208,32 +172,30 @@ function mod_process() {
     function collect_posts() {
 // Security Update + $cot_gv added in Global in v5.13 by Rigadin + updated URL parameters of all tep_redirect function called inside this function
       global $currencies, $HTTP_POST_VARS, $customer_id, $coupon_no, $REMOTE_ADDR, $cot_gv;
-        
       if ($HTTP_POST_VARS['gv_redeem_code']) {
-// Security update by Rigadin in v5.13: add slashes in front of user input
+	    // Security update by Rigadin in v5.13: add slashes in front of user input
         $gv_query = tep_db_query("select coupon_id, coupon_type, coupon_amount from " . TABLE_COUPONS . " where coupon_code = '" . tep_db_input($HTTP_POST_VARS['gv_redeem_code']) . "'");
         $gv_result = tep_db_fetch_array($gv_query);
         if (tep_db_num_rows($gv_query) != 0) {
           $redeem_query = tep_db_query("select * from " . TABLE_COUPON_REDEEM_TRACK . " where coupon_id = '" . $gv_result['coupon_id'] . "'");
-          if ( (tep_db_num_rows($redeem_query) != 0) && ($gv_result['coupon_type'] == 'G') ) {
-                  // error, this coupon has been redeemed already.
+          if ( (tep_db_num_rows($redeem_query) != 0) && ($gv_result['coupon_type'] == 'G') ) {   
+		  // error, this coupon has been redeemed already.
             tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_INVALID_REDEEM_GV), 'SSL'));
           }
         }
-                // Next line added by Rigadin in v5.13 to give an error when unknown code entered
-                elseif ($HTTP_POST_VARS['submit_redeem_x']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_INVALID_REDEEM_GV), 'SSL'));
-                
+		// Next line added by Rigadin in v5.13 to give an error when unknown code entered
+		elseif ($HTTP_POST_VARS['submit_redeem_x']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_INVALID_REDEEM_GV), 'SSL'));
         if ($gv_result['coupon_type'] == 'G') {
           $gv_amount = $gv_result['coupon_amount'];
           // Things to set
           // ip address of claimant
           // customer id of claimant
-          // date
+          // date 
           // redemption flag
           // now update customer account with gv_amount
           $gv_amount_query=tep_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id = '" . $customer_id . "'");
           $customer_gv = false;
-          $total_gv_amount = $gv_amount;
+          $total_gv_amount = $gv_amount;;
           if ($gv_amount_result = tep_db_fetch_array($gv_amount_query)) {
             $total_gv_amount = $gv_amount_result['amount'] + $gv_amount;
             $customer_gv = true;
@@ -248,11 +210,10 @@ function mod_process() {
             $gv_insert = tep_db_query("insert into " . TABLE_COUPON_GV_CUSTOMER . " (customer_id, amount) values ('" . $customer_id . "', '" . $total_gv_amount . "')");
           }
           tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_REDEEMED_AMOUNT. $currencies->format($gv_amount)), 'SSL'));
-       }
+       }  
      }
-     // v5.13a Generates an error if redeem button pressed without code entered
-     if ($HTTP_POST_VARS['submit_redeem_x'] && !$HTTP_POST_VARS['gv_redeem_code']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
-   }
+     if ($HTTP_POST_VARS['submit_redeem_x'] && $gv_result['coupon_type'] == 'G') tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
+   }  
 
     function calculate_credit($amount) {
       global $customer_id, $order;
@@ -275,7 +236,7 @@ function mod_process() {
         case 'Standard':
         // Amended line, was giving an error when a zero value was arriving here. v5.13 by Rigadin
         //$ratio1 = tep_round($od_amount / $amount,2);
-        $ratio1= ($amount==0? 0 : tep_round($od_amount / $amount,2) );
+        $ratio1= ($amout==0? 0 : tep_round($od_amount / $amount,2) );
         $tod_amount = 0;
         reset($order->info['tax_groups']);
         while (list($key, $value) = each($order->info['tax_groups'])) {
@@ -325,8 +286,8 @@ function mod_process() {
       if ($this->include_shipping == 'false') $order_total = $order_total - $order->info['shipping_cost'];
 
       return $order_total;
-    }
-        
+    }    
+// START added by Rigadin in v5.13, needed to show module errors on checkout_payment page
     function get_error() {
       global $HTTP_GET_VARS;
 
@@ -335,6 +296,7 @@ function mod_process() {
 
       return $error;
     }
+// END added by Rigadin		
 
     function check() {
       if (!isset($this->check)) {

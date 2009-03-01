@@ -2,10 +2,10 @@
 /*
   $Id: wishlist_email.php,v 1 2003/11/20
 
-  osCMax Power E-Commerce
+  OS Commerce - Community Made Shopping!
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2006 osCMax2000,2001 The Exchange Project
 
   Released under the GNU General Public License
 */

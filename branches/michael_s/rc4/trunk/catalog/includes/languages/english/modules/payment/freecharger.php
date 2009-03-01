@@ -1,6 +1,8 @@
 <?php
 /*
-$Id: freecharger.php
+  WebMakers.com Added: Free Payments and Shipping
+  Written by Linda McGrath osCOMMERCE@WebMakers.com
+  http://www.thewebmakerscorner.com
 
   osCMax Power E-Commerce
   http://oscdox.com

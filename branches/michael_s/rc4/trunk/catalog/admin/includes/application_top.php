@@ -132,6 +132,7 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
     $languages_id = $lng->language['id'];
   }
 
+
 // include the language translations
   require(DIR_WS_LANGUAGES . $language . '.php');
   $current_page = basename($PHP_SELF);
@@ -221,7 +222,7 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
 // LINE ADDED: MOD - OSC-AFFILIATE
   require('includes/affiliate_application_top.php');
 
-// LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
+// LINE ADDED: MOD - giftvoucher
   require(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
   
 // LINE ADDED: MOD - articles functions

@@ -20,5 +20,5 @@ define('TEXT_CURRENT_REVIEWS', 'Comentarios actuales:');
 define('BOX_TEXT_TELL_A_FRIEND', 'D&iacute;selo a un amigo');
 define('TEXT_TELL_A_FRIEND', 'H&aacute;blale a un amigo de esta noticia:');
 define('TEXT_XSELL_ARTICLES', 'Productos relacionados con esta noticia:');
-define('HEADING_TITLE', 'Noticia');
+
 ?>

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: shopping_cart.php 1739 2007-12-20 00:52:16Z user $
+$Id: shopping_cart.php 3 2006-05-27 04:59:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2008 osCMax
+  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
 */

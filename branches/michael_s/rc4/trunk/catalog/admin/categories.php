@@ -21,11 +21,10 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
   $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
 
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-// If the action will affect the cache entries 
-  if ( eregi("(insert|update|setflag)", $action) ) 
-  include_once('includes/reset_seo_cache.php'); 
-// EOF: MOD - Ultimate SEO URLs - by Chemo
+// Ultimate SEO URLs v2.1
+// If the action will affect the cache entries
+    if ( eregi("(insert|update|setflag)", $action) ) include_once('includes/reset_seo_cache.php');
+
 
   if (tep_not_null($action)) {
     switch ($action) {
@@ -65,7 +64,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 // EOF: MOD for Categories Description 1.5
           $sort_order = tep_db_prepare_input($HTTP_POST_VARS['sort_order']);
 
-          $sql_data_array = array('sort_order' => (int)$sort_order);
+        $sql_data_array = array('sort_order' => (int)$sort_order);
 
           if ($action == 'insert_category') {
             $insert_sql_data = array('parent_id' => $current_category_id,
@@ -682,7 +681,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                        'products_last_modified' => '',
                        'products_date_available' => '',
                        'products_status' => '',
-                       'products_tax_class_id' => '',
+                           'products_tax_class_id' => '',
                        'manufacturers_id' => '');
 
     $pInfo = new objectInfo($parameters);
@@ -837,7 +836,7 @@ function updateNet() {
             <td class="main"><?php echo TEXT_PRODUCTS_PRICE_GROSS; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'OnKeyUp="updateNet()"'); ?></td>
           </tr>
-<?php // BOF: MOD - indvship ?>
+<?php // EOF: MOD - indvship ?>
           <tr>
             <td class="main"><?php echo 'Indv. Shipping Price:'; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_ship_price', $pInfo->products_ship_price); ?></td>
@@ -1095,7 +1094,7 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
 
           echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
         }
-      }
+       }
       $languages = tep_get_languages();
       for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
         echo tep_draw_hidden_field('products_name[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($products_name[$languages[$i]['id']])));
@@ -1198,8 +1197,7 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
     $products_count = 0;
     if (isset($HTTP_GET_VARS['search'])) {
 // LINE CHANGED: Added p.products_shipped_price
-// LINE CHANGED: MOD - Admin Categories/Products Search Improvement
-      $products_query = tep_db_query("select p.products_id, p.products_model, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and (pd.products_name like '%" . tep_db_input($search) . "%' or p.products_model like '%" . tep_db_input($search) . "%') order by pd.products_name");
+     $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and (pd.products_name like '%" . tep_db_input($search) . "%' or p.products_model like '%" . tep_db_input($search) . "%') order by pd.products_name");
     } else {
 // LINE CHANGED: Added p.products_shipped_price   
      $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by pd.products_name");

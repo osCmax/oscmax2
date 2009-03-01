@@ -71,7 +71,7 @@ define('HTML_PARAMS','dir="ltr" lang="es"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0 SVN/RC4');
+define('TITLE', 'osCMax v2.0');
 
 // BOF: MOD - ORDER EDIT
 // Create account & order
@@ -165,12 +165,11 @@ define('ENTRY_PASSWORD_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY
 define('ENTRY_PASSWORD_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
 define('PASSWORD_HIDDEN', '--HIDDEN--');
 // EOF: MOD - ORDER EDIT
-
 // header text in includes/header.php
-define('HEADER_TITLE_TOP', 'Administraci&oacute;n');
-define('HEADER_TITLE_SUPPORT_SITE', 'osCMax');
-define('HEADER_TITLE_ONLINE_CATALOG', 'Cat&aacute;logo');
-define('HEADER_TITLE_ADMINISTRATION', 'Administraci&oacute;n');
+define('HEADER_TITLE_TOP', 'Admin');
+define('HEADER_TITLE_SUPPORT_SITE', 'Soporte');
+define('HEADER_TITLE_ONLINE_CATALOG', 'Catalogo');
+define('HEADER_TITLE_ADMINISTRATION', 'Admin');
 define('HEADER_TITLE_OSCDOX', 'osCDox.com');
 define('HEADER_TITLE_AABOX', 'osCMax');
 
@@ -224,7 +223,6 @@ define('BOX_CATALOG_MANUFACTURERS', 'Fabricantes');
 define('BOX_CATALOG_REVIEWS', 'Comentarios');
 define('BOX_CATALOG_SPECIALS', 'Ofertas');
 define('BOX_CATALOG_PRODUCTS_EXPECTED', 'Pr&oacute;ximamente');
-
 // 2 LINES ADDED - EasyPopulate and Attrib Manager
 define('BOX_CATALOG_EASYPOPULATE', 'Facilpublicacion');
 define('BOX_CATALOG_ATTRIBUTE_MANAGER', 'Administrador de Atributos');
@@ -412,8 +410,8 @@ define('IMAGE_ORDERS', 'Pedidos');
 define('IMAGE_ORDERS_INVOICE', 'Factura');
 define('IMAGE_ORDERS_PACKINGSLIP', 'Albar&aacute;n');
 define('IMAGE_PREVIEW', 'Ver');
-define('IMAGE_RESTORE', 'Restaurar');
 define('IMAGE_RESET', 'Resetear');
+define('IMAGE_RESTORE', 'Restaurar');
 define('IMAGE_SAVE', 'Grabar');
 define('IMAGE_SEARCH', 'Buscar');
 define('IMAGE_SELECT', 'Seleccionar');
@@ -488,12 +486,11 @@ define('ERROR_FILETYPE_NOT_ALLOWED', 'Error: Extension de fichero no permitida.'
 define('SUCCESS_FILE_SAVED_SUCCESSFULLY', 'Exito: Fichero guardado con &eacute;xito.');
 define('WARNING_NO_FILE_UPLOADED', 'Advertencia: No se ha subido ningun archivo.');
 define('WARNING_FILE_UPLOADS_DISABLED', 'Warning: Se ha desactivado la subida de archivos en el fichero de configuraci&oacute;n php.ini.');
-
 // LINE ADDED - XSell
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Productos cruzados en la venta'); // X-Sell
 
-// LINE ADDED - CREDIT CLASS Gift Voucher Contribution
-require(DIR_WS_LANGUAGES . 'add_ccgvdc_espanol.php');
+// LINE ADDED -  Credit Class GV
+REQUIRE(DIR_WS_LANGUAGES . 'add_ccgvdc_espanol.php');
 
 // BOF: MOD - Article Manager
 define('BOX_HEADING_ARTICLES', 'Article Manager');

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: worldpay_junior.php 1807 2008-01-13 00:50:08Z user $
+  $Id: worldpay_junior.php 1807 2008-01-13 00:50:08Z hpdl $
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCommerce, Open Source E-Commerce Solutions
+  http://www.oscommerce.com
 
-  Copyright 2008 osCMax
+  Copyright (c) 2008 osCommerce
 
   Released under the GNU General Public License
 */

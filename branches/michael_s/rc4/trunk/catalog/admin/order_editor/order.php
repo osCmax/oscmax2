@@ -98,7 +98,7 @@
                              'format_id' => $order['billing_address_format_id']);
 
 	  
-      $index = 0;
+	  $index = 0;
       $orders_products_query = tep_db_query("select op.orders_products_id, op.products_id, op.products_name, op.products_model, op.products_price, op.products_tax, op.products_quantity, op.final_price, p.products_tax_class_id, p.products_weight, p.products_id from " . TABLE_ORDERS_PRODUCTS . " op INNER JOIN " . TABLE_PRODUCTS . " p on op.products_id = p.products_id where orders_id = '" . (int)$order_id . "' order by op.orders_products_id");
 
       while ($orders_products = tep_db_fetch_array($orders_products_query)) {

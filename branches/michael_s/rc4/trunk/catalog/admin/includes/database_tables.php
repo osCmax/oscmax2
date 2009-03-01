@@ -94,4 +94,5 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
 define('TABLE_WISHLIST', 'customers_wishlist'); 
 define('TABLE_WISHLIST_ATTRIBUTES', 'customers_wishlist_attributes');
 // EOF: MOD - ARTICLES
+
 ?>

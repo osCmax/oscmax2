@@ -28,7 +28,6 @@ define('TEXT_EMAIL_SUCCESSFUL_SENT', 'Tu e-mail acerca de <b>%s</b> ha sido corr
 define('TEXT_EMAIL_SUBJECT', 'Tu amigo %s te ha recomendado este fant$aacute;stico producto de %s');
 define('TEXT_EMAIL_INTRO', 'Hola %s!' . "\n\n" . 'Tu amigo, %s, cree que puedes estar interesado en %s de %s.');
 define('TEXT_EMAIL_LINK', 'Para visualizar el producto haz click en el v&iacute;nculo de abajo o bien copia y pega el v&iacute;nculo en tu navegador:' . "\n\n" . '%s');
-// LINE ADDED: MOD - ARTICLE MANAGER
 define('TEXT_EMAIL_LINK_ARTICLE', 'Para visualizar el producto haz click en el v&iacute;nculo de abajo o bien copia y pega el v&iacute;nculo en tu navegador:' . "\n\n" . '%s');
 define('TEXT_EMAIL_SIGNATURE', 'Gracias,' . "\n\n" . '%s');
 

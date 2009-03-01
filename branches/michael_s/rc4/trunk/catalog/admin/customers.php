@@ -1216,14 +1216,6 @@ function check_form() {
 <!-- body_text_eof //-->
   </tr>
 </table>
-<?php // BOF: MOD - Edit Order - Ajout/edite commande et compte client
-  $customersrecords = mysql_query("SELECT * FROM customers") or die ("Wha Happen??? Error 1");
-  while($customerrows = tep_db_fetch_array($customersrecords)) {
-    $e = mysql_query("SELECT * FROM address_book WHERE customers_id ='$customerrows[customers_id]'") or die ("What Happen??? Error 2"); 
-    $real = tep_db_fetch_array($e);
-    $updatedefaultaddress = mysql_query("UPDATE customers SET customers_default_address_id = '$real[address_book_id]' WHERE customers_id='$customerrows[customers_id]'") or die ("What Happen??? Error 3");
-  }
-// BOF: MOD - Edit Order - Ajout/edite commande et compte client ?>
 <!-- body_eof //-->
 
 <!-- footer //-->

@@ -101,6 +101,9 @@ define('ENTRY_PASSWORD_TEXT', '&nbsp;');
 define('PASSWORD_HIDDEN', '--HIDDEN--');
 // ### END ORDER MAKER ###
 
+
+
+
 define('HEADING_TITLE', 'Step-by-Step Manual Order Entry');
 define('HEADING_CREATE', 'Confirm client details:'); 
 

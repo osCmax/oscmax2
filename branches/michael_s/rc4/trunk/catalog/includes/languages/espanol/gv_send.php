@@ -2,10 +2,12 @@
 /*
 $Id: gv_send.php 3 2006-05-27 04:59:07Z user $
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  The Exchange Project - Community Made Shopping!
+  http://www.theexchangeproject.org
 
-  Copyright 2006 osCMax
+  Gift Voucher System v1.0
+  Copyright 2006 osCMax2001,2002 Ian C Wilson
+  http://www.phesis.org
 
   Released under the GNU General Public License
 */
@@ -28,12 +30,12 @@ define('TEXT_SUCCESS', 'Congratulations, your Gift Voucher has successfully been
 
 
 define('EMAIL_SEPARATOR', '----------------------------------------------------------------------------------------');
-define('EMAIL_GV_TEXT_HEADER', 'Congratulations, You have received a gift voucher worth %s');
+define('EMAIL_GV_TEXT_HEADER', 'Congratulations, You have received a gift voucher valued at %s ');
 define('EMAIL_GV_TEXT_SUBJECT', 'A gift from %s');
 define('EMAIL_GV_FROM', 'This Gift Voucher has been sent to you by %s');
 define('EMAIL_GV_MESSAGE', 'With a message saying ');
 define('EMAIL_GV_SEND_TO', 'Hi, %s');
-define('EMAIL_GV_REDEEM', 'To redeem this Gift Voucher, please click on the link below. Please also write down the redemption code which is %s. In case you have problems.');
+define('EMAIL_GV_REDEEM', 'To redeem this Gift Voucher, please click on the link below. Please also write down the redemption code which is :  %s. In case you have problems with the below link.');
 define('EMAIL_GV_LINK', 'To redeem please click ');
 define('EMAIL_GV_VISIT', ' or visit ');
 define('EMAIL_GV_ENTER', ' and enter the code ');

@@ -249,13 +249,12 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 ?>
               <tr>
 <?php /* MOD: QT Pro Added 1 to colspan */ ?>
-<?php /* Line changed: Mod RC2A */ ?>
-                <td colspan="4" class="pageHeading">&nbsp;<?php echo HEADING_TITLE_OPT; ?>&nbsp;</td>
-<?php /* Line removed: Mod RC2A */ ?>
+                <td colspan="3" class="pageHeading">&nbsp;<?php echo HEADING_TITLE_OPT; ?>&nbsp;</td>
+                <td align="right"><br><form name="option_order_by" action="<?php echo FILENAME_PRODUCTS_ATTRIBUTES; ?>"><select name="selected" onChange="go_option()"><option value="products_options_id"<?php if ($option_order_by == 'products_options_id') { echo ' SELECTED'; } ?>><?php echo TEXT_OPTION_ID; ?></option><option value="products_options_name"<?php if ($option_order_by == 'products_options_name') { echo ' SELECTED'; } ?>><?php echo TEXT_OPTION_NAME; ?></option></select></form></td>
               </tr>
               <tr>
 <?php /* MOD: QT Pro Added 1 to colspan */ ?>
-                <td colspan="4" class="smallText" align="right">
+                <td colspan="4" class="smallText">
 <?php
     $options = "select * from " . TABLE_PRODUCTS_OPTIONS . " where language_id = '" . (int)$languages_id . "' order by products_options_id";
     $options_split = new splitPageResults($option_page, MAX_ROW_LISTS_OPTIONS, $options, $options_query_numrows);
@@ -313,8 +312,7 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 <?php /* BOF: QT Pro */ ?>
                 <td align="center" class="smallText">&nbsp;<?php echo $options_values['products_options_track_stock']?"Yes":"No"; ?></td>
 <?php /* EOF: QT Pro */ ?>
-<?php /* Line changed: Mod RC2A */ ?>
-                <td align="center" class="smallText">&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_option&option_id=' . $options_values['products_options_id'] . '&' . $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_edit.gif', IMAGE_UPDATE); ?></a>&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_product_option&option_id=' . $options_values['products_options_id'] . '&' . $page_info, 'NONSSL') , '">'; ?><?php echo tep_image_button('button_delete.gif', IMAGE_DELETE); ?></a>&nbsp;</td>
+                <td align="center" class="smallText">&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_option&option_id=' . $options_values['products_options_id'] . '&option_order_by=' . $option_order_by . '&option_page=' . $option_page, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_edit.gif', IMAGE_UPDATE); ?></a>&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_product_option&option_id=' . $options_values['products_options_id'], 'NONSSL') , '">'; ?><?php echo tep_image_button('button_delete.gif', IMAGE_DELETE); ?></a>&nbsp;</td>
 <?php
       }
 ?>
@@ -426,13 +424,10 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
   } else {
 ?>
               <tr>
-<?php /* Line changed: Mod RC2A */ ?>
-                <td colspan="4" class="pageHeading">&nbsp;<?php echo HEADING_TITLE_VAL; ?>&nbsp;</td>
-<?php /* Line removed: Mod RC2A */ ?>
+                <td colspan="3" class="pageHeading">&nbsp;<?php echo HEADING_TITLE_VAL; ?>&nbsp;</td>
               </tr>
               <tr>
-<?php /* Line changed: Mod RC2A */ ?>
-                <td colspan="4" class="smallText" align="right">
+                <td colspan="4" class="smallText">
 <?php
     $values = "select pov.products_options_values_id, pov.products_options_values_name, pov2po.products_options_id from " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov left join " . TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS . " pov2po on pov.products_options_values_id = pov2po.products_options_values_id where pov.language_id = '" . (int)$languages_id . "' order by pov.products_options_values_id";
     $values_split = new splitPageResults($value_page, MAX_ROW_LISTS_OPTIONS, $values, $values_query_numrows);
@@ -495,8 +490,7 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
                 <td align="center" class="smallText">&nbsp;<?php echo $values_values["products_options_values_id"]; ?>&nbsp;</td>
                 <td align="center" class="smallText">&nbsp;<?php echo $options_name; ?>&nbsp;</td>
                 <td class="smallText">&nbsp;<?php echo $values_name; ?>&nbsp;</td>
-<?php /* Line changed: Mod RC2A */ ?>
-                <td align="center" class="smallText">&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_option_value&value_id=' . $values_values['products_options_values_id'] . '&' . $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_edit.gif', IMAGE_UPDATE); ?></a>&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_option_value&value_id=' . $values_values['products_options_values_id'] . '&' . $page_info, 'NONSSL') , '">'; ?><?php echo tep_image_button('button_delete.gif', IMAGE_DELETE); ?></a>&nbsp;</td>
+                <td align="center" class="smallText">&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_option_value&value_id=' . $values_values['products_options_values_id'] . (isset($HTTP_GET_VARS['value_page']) ? '&value_page=' . $HTTP_GET_VARS['value_page'] : ''), 'NONSSL') . '">'; ?><?php echo tep_image_button('button_edit.gif', IMAGE_UPDATE); ?></a>&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_option_value&value_id=' . $values_values['products_options_values_id'], 'NONSSL') , '">'; ?><?php echo tep_image_button('button_delete.gif', IMAGE_DELETE); ?></a>&nbsp;</td>
 <?php
       }
       $max_values_id_query = tep_db_query("select max(products_options_values_id) + 1 as next_id from " . TABLE_PRODUCTS_OPTIONS_VALUES);
@@ -512,8 +506,8 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
     if ($action != 'update_option_value') {
 ?>
               <tr class="<?php echo (floor($rows/2) == ($rows/2) ? 'attributes-even' : 'attributes-odd'); ?>">
-<?php // Line changed: Mod RC2A
-      echo '<form name="values" action="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=add_product_option_values&' . $page_info, 'NONSSL') . '" method="post">';
+<?php
+      echo '<form name="values" action="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=add_product_option_values&value_page=' . $value_page, 'NONSSL') . '" method="post">';
 ?>
                 <td align="center" class="smallText">&nbsp;<?php echo $next_id; ?>&nbsp;</td>
                 <td align="center" class="smallText">&nbsp;<select name="option_id">

@@ -16,11 +16,9 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
   define('MODULE_PAYMENT_PAYPAL_IPN_TEXT_SELECTION', '<img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" align="left" style="margin-right:7px;"> Credit/Debit Card (via PayPal)');
   define('MODULE_PAYMENT_PAYPAL_IPN_TEXT_LAST_CONFIRM', '<img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" align="left" style="margin-right:7px;"> Credit/Debit Card (via PayPal)');
   // EOF add by AlexStudio
-
   // Sets the text for the "continue" button on the PayPal Payment Complete Page
   // Maximum of 60 characters!  
   define('CONFIRMATION_BUTTON_TEXT', 'Complete your Order Confirmation');
-  
   define('EMAIL_PAYPAL_PENDING_NOTICE', 'Your payment is currently pending. We will send you a copy of your order once the payment has cleared.');
   
   define('EMAIL_TEXT_SUBJECT', 'Order Process');

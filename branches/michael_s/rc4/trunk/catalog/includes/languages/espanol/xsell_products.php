@@ -1,11 +1,10 @@
 <?php
 /*
-$Id: xsell_products.php 3 2006-05-27 04:59:07Z user $
+  $Id: xsell_products.php, v1
+  The Exchange Project - Community Made Shopping!
+  http://www.theexchangeproject.org
 
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2006 osCMax2000,2001 The Exchange Project
 
   Released under the GNU General Public License
 */

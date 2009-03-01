@@ -21,6 +21,7 @@ define('HEADING_TITLE_STATUS','Status:');
 define('TEXT_ALL_PAYMENTS','All Payments');
 define('TEXT_NO_PAYMENT_HISTORY', 'No Payment History Available');
 
+
 define('TABLE_HEADING_ACTION', 'Action');
 define('TABLE_HEADING_STATUS', 'Status');
 define('TABLE_HEADING_AFILIATE_NAME', 'Affiliate');
@@ -57,6 +58,7 @@ define('TEXT_INFO_HEADING_DELETE_PAYMENT','Delete Payment');
 define('IMAGE_AFFILIATE_BILLING','Start Billing Engine');
 
 define('ERROR_PAYMENT_DOES_NOT_EXIST','Payment does not exist');
+
 
 define('SUCCESS_BILLING','Your Affiliates have been sucessfully billed');
 define('SUCCESS_PAYMENT_UPDATED','The Payment status has been updated successfully');

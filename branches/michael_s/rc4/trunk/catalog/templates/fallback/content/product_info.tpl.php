@@ -59,14 +59,15 @@
     } else {
       $products_name = $product_info['products_name'];
     }
-
+    
 // BOF: Mod - Wishlist
 //DISPLAY PRODUCT WAS ADDED TO WISHLIST IF WISHLIST REDIRECT IS ENABLED
-    if(tep_session_is_registered('wishlist_id')) {
-?>  
-      <tr>
-        <td class="messageStackSuccess"><?php echo PRODUCT_ADDED_TO_WISHLIST; ?></td>
-      </tr> 
+        if(tep_session_is_registered('wishlist_id')) { 
+        
+      ?>  
+        <tr>  
+           <td class="messageStackSuccess"><?php echo PRODUCT_ADDED_TO_WISHLIST; ?></td>
+        </tr> 
 <?php
       tep_session_unregister('wishlist_id');
     }
@@ -97,11 +98,11 @@
 			if ($lg_image_ext = mopics_file_exists(DIR_FS_CATALOG . $image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
 				$image_size = @getimagesize(DIR_FS_CATALOG . $image_lg . '.' . $lg_image_ext);
 ?>
-<script language="javascript" type="text/javascript"><!--
-document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $product_info['products_id'] . '&type=' . $lg_image_ext); ?>\',\'<?php echo ((int)$image_size[1] + 30); ?>\',\'<?php echo ((int)$image_size[0] + 5); ?>\');"><?php echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>');
+          <script language="javascript" type="text/javascript"><!--
+            document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $product_info['products_id'] . '&type=' . $lg_image_ext); ?>\',\'<?php echo ((int)$image_size[1] + 30); ?>\',\'<?php echo ((int)$image_size[0] + 5); ?>\');"><?php echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>');
 //--></script>
 <noscript>
-<a href="<?php echo tep_href_link($image_lg . '.' . $lg_image_ext); ?>" target="_blank"><?php echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>
+            <a href="<?php echo tep_href_link($image_lg . '.' . $lg_image_ext); ?>" target="_blank"><?php echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>
 </noscript>
 <?php
 			} else {
@@ -110,6 +111,7 @@ document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENA
 ?>
               </td>
             </tr>
+
           </table>
 <?php
     }
@@ -224,7 +226,7 @@ document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENA
      include(DIR_WS_MODULES . FILENAME_XSELL_PRODUCTS);
       include(DIR_WS_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
     }
-  }
+   }
 ?>
         </td>
       </tr>

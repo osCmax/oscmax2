@@ -34,10 +34,10 @@ define('TABLE_HEADING_OT_VALUES', 'Value:');
 define('TABLE_HEADING_SHIPPING_QUOTES', 'Shipping Quotes:');
 define('TABLE_HEADING_NO_SHIPPING_QUOTES', 'There are no shipping quotes to display!');
 
-define('TABLE_HEADING_CUSTOMER_NOTIFIED', 'Notificación al cliente');
-define('TABLE_HEADING_DATE_ADDED', 'Fecha de pedido');
+define('TABLE_HEADING_CUSTOMER_NOTIFIED', 'Customer<br>Notified');
+define('TABLE_HEADING_DATE_ADDED', 'Date Added');
 
-define('ENTRY_CUSTOMER', 'Nombre');
+define('ENTRY_CUSTOMER', 'Cliente');
 define('ENTRY_NAME', 'Nombre:');
 define('ENTRY_CITY_STATE', 'Población, Estado:');
 define('ENTRY_SHIPPING_ADDRESS', 'Dirección de envío');
@@ -155,4 +155,5 @@ define('AJAX_NEW_ORDER_EMAIL', 'Are you sure you want to send a new order confir
 define('AJAX_INPUT_NEW_EMAIL_COMMENTS', 'Please input any comments you may have here.  It is ok to leave this blank if you do not wish to include comments.  Please remember as you type that hitting the "enter" key will result in submitting the comments as they appear.  It is not yet possible to include line breaks.');
 define('AJAX_SUCCESS_EMAIL_SENT', 'Success!  A new order confirmation email was sent to %s');
 define('AJAX_WORKING', 'Working, please wait....');
+
 ?>

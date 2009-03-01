@@ -38,4 +38,13 @@ define('TEXT_FORGOTTEN_SUCCESS', 'Le nouveau mot de passe a &eacute;t&eacute; en
 
 define('ADMIN_EMAIL_SUBJECT', 'Nouveau mot de passe');
 define('ADMIN_EMAIL_TEXT', 'Bonjour %s,' . "\n\n" . 'Vous pouvez acceder au module administration avec le mot de passe suivant. Une fois connect&eacute;, veuillez le modifier!' . "\n\n" . 'Site : %s' . "\n" . 'Login: %s' . "\n" . 'Mot de passe: %s' . "\n\n" . 'Merci!' . "\n" . '%s' . "\n\n" . 'Ceci est un email automatique, veuillez ne pas r&eacute;pondre &agrave; ce message!');
+define('TEXT_USERNAME', 'Nom d'utilisateur:');
+define('TEXT_PASSWORD', 'Mot de passe:');
+
+define('TEXT_CREATE_FIRST_ADMINISTRATOR', 'No administrators exist in the database table. Please fill in the following information to create the first administrator. (A manual login is still required after this step)');
+
+define('ERROR_INVALID_ADMINISTRATOR', 'Error: Invalid administrator login attempt.');
+
+define('BUTTON_LOGIN', 'Login');
+define('BUTTON_CREATE_ADMINISTRATOR', 'Create Administrator');
 ?>

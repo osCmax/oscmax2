@@ -116,19 +116,19 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
     <td width="<?php echo BOX_WIDTH; ?>" valign="top">
     		<table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="0">
 						
-<?php
-// Hide column_left.php if not to show
-if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
-?>
-          <!-- left_navigation //-->
-  <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
-          <!-- left_navigation_eof //-->
-<?php
-}
-?>
+						<?php
+             // Hide column_left.php if not to show
+                if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
+             ?>
+						<!-- left_navigation //-->						
+            <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
+						<!-- left_navigation_eof //-->
+            <?php
+             }
+            ?>
 				</table>
     </td>
-<!-- content //-->
+		<!-- content //-->
     <td width="100%" valign="top">
 				<!-- TS table added to restrict content in center box  -->
 					<table width="480" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -142,19 +142,20 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='f
 					</table>
 					<!-- TS end table for center box area -->
    </td>
-<!-- content_eof //-->
+		<!-- content_eof //-->
    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
    			<table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="0">
-<?php
-// Hide column_left.php if not to show
-  if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
-?>								
-<!-- right_navigation //-->
-  <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
-<!-- right_navigation_eof //-->
-<?php
-}
-?>  		 
+						<?php
+             // Hide column_left.php if not to show
+                if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
+             ?>								
+				    <!-- right_navigation //-->
+            <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
+				    <!-- right_navigation_eof //-->
+             <?php
+             }
+            ?>  		 
+   		 
    		 </table>
    </td>
  </tr>
@@ -166,7 +167,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='f
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false') {
 ?>
 <!-- footer //-->
-  <?php require(DIR_WS_INCLUDES . 'counter.php'); ?>
+<?php require(DIR_WS_INCLUDES . 'counter.php'); ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr class="footer">
     <td class="footer">&nbsp;&nbsp;<?php echo strftime(DATE_FORMAT_LONG); ?>&nbsp;&nbsp;</td>

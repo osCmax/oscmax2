@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: compatibility.php 1739 2007-12-20 00:52:16Z user $
+  $Id: compatibility.php 1739 2007-12-20 00:52:16Z hpdl $
 
   osCMax Power E-Commerce
   http://www.oscmax.com

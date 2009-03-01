@@ -28,10 +28,4 @@ define('TABLE_HEADING_COMMENTS', 'Agregue Los Comentarios Sobre Su Orden');
 
 define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continuar con el Proceso de Compra');
 define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'para confirmar este pedido.');
-
-// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-// product summary text in checkout_payment.php
-define('HEADING_PRODUCTS', 'Products Ordered');
-define('TEXT_EDIT', 'Edit');
-// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 ?>

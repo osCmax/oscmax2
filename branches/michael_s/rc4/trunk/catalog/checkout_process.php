@@ -49,7 +49,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 
 // load selected payment module
   require(DIR_WS_CLASSES . 'payment.php');
-// LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
+// LINE ADDED: MOD - ICW CREDIT CLASS
   if ($credit_covers) $payment='';
   $payment_modules = new payment($payment);
 
@@ -79,6 +79,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
   if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
     tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   }
+// MOVED BELOW Authorizenet ADC
+// load the before_process function from the payment modules
+// $payment_modules->before_process();
 
   require(DIR_WS_CLASSES . 'order_total.php');
   $order_total_modules = new order_total;
@@ -94,41 +97,41 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
                           'customers_street_address' => $order->customer['street_address'],
                           'customers_suburb' => $order->customer['suburb'],
                           'customers_city' => $order->customer['city'],
-                          'customers_postcode' => $order->customer['postcode'], 
-                          'customers_state' => $order->customer['state'], 
-                          'customers_country' => $order->customer['country']['title'], 
-                          'customers_telephone' => $order->customer['telephone'], 
+                          'customers_postcode' => $order->customer['postcode'],
+                          'customers_state' => $order->customer['state'],
+                          'customers_country' => $order->customer['country']['title'],
+                          'customers_telephone' => $order->customer['telephone'],
                           'customers_email_address' => $order->customer['email_address'],
-                          'customers_address_format_id' => $order->customer['format_id'], 
+                          'customers_address_format_id' => $order->customer['format_id'],
                           'delivery_name' => trim($order->delivery['firstname'] . ' ' . $order->delivery['lastname']),
                           'delivery_company' => $order->delivery['company'],
-                          'delivery_street_address' => $order->delivery['street_address'], 
-                          'delivery_suburb' => $order->delivery['suburb'], 
-                          'delivery_city' => $order->delivery['city'], 
-                          'delivery_postcode' => $order->delivery['postcode'], 
-                          'delivery_state' => $order->delivery['state'], 
-                          'delivery_country' => $order->delivery['country']['title'], 
-                          'delivery_address_format_id' => $order->delivery['format_id'], 
-                          'billing_name' => $order->billing['firstname'] . ' ' . $order->billing['lastname'], 
+                          'delivery_street_address' => $order->delivery['street_address'],
+                          'delivery_suburb' => $order->delivery['suburb'],
+                          'delivery_city' => $order->delivery['city'],
+                          'delivery_postcode' => $order->delivery['postcode'],
+                          'delivery_state' => $order->delivery['state'],
+                          'delivery_country' => $order->delivery['country']['title'],
+                          'delivery_address_format_id' => $order->delivery['format_id'],
+                          'billing_name' => $order->billing['firstname'] . ' ' . $order->billing['lastname'],
                           'billing_company' => $order->billing['company'],
-                          'billing_street_address' => $order->billing['street_address'], 
-                          'billing_suburb' => $order->billing['suburb'], 
-                          'billing_city' => $order->billing['city'], 
-                          'billing_postcode' => $order->billing['postcode'], 
-                          'billing_state' => $order->billing['state'], 
-                          'billing_country' => $order->billing['country']['title'], 
-                          'billing_address_format_id' => $order->billing['format_id'], 
-                          'payment_method' => $order->info['payment_method'], 
+                          'billing_street_address' => $order->billing['street_address'],
+                          'billing_suburb' => $order->billing['suburb'],
+                          'billing_city' => $order->billing['city'],
+                          'billing_postcode' => $order->billing['postcode'],
+                          'billing_state' => $order->billing['state'],
+                          'billing_country' => $order->billing['country']['title'],
+                          'billing_address_format_id' => $order->billing['format_id'],
+                          'payment_method' => $order->info['payment_method'],
                           'shipping_module' => $shipping['id'],
-                          'cc_type' => $order->info['cc_type'], 
-                          'cc_owner' => $order->info['cc_owner'], 
-                          'cc_number' => $order->info['cc_number'], 
-                          'cc_expires' => $order->info['cc_expires'], 
-                          'date_purchased' => 'now()', 
+                          'cc_type' => $order->info['cc_type'],
+                          'cc_owner' => $order->info['cc_owner'],
+                          'cc_number' => $order->info['cc_number'],
+                          'cc_expires' => $order->info['cc_expires'],
+                          'date_purchased' => 'now()',
 // LINE ADDED: MOD - Downloads Controller
                           'last_modified' => 'now()',
-                          'orders_status' => $order->info['order_status'], 
-                          'currency' => $order->info['currency'], 
+                          'orders_status' => $order->info['order_status'],
+                          'currency' => $order->info['currency'],
                           'currency_value' => $order->info['currency_value']);
   tep_db_perform(TABLE_ORDERS, $sql_data_array);
   $insert_id = tep_db_insert_id();
@@ -136,16 +139,16 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
     $sql_data_array = array('orders_id' => $insert_id,
                             'title' => $order_totals[$i]['title'],
                             'text' => $order_totals[$i]['text'],
-                            'value' => $order_totals[$i]['value'], 
-                            'class' => $order_totals[$i]['code'], 
+                            'value' => $order_totals[$i]['value'],
+                            'class' => $order_totals[$i]['code'],
                             'sort_order' => $order_totals[$i]['sort_order']);
     tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
   }
 
   $customer_notification = (SEND_EMAILS == 'true') ? '1' : '0';
-  $sql_data_array = array('orders_id' => $insert_id, 
-                          'orders_status_id' => $order->info['order_status'], 
-                          'date_added' => 'now()', 
+  $sql_data_array = array('orders_id' => $insert_id,
+                          'orders_status_id' => $order->info['order_status'],
+                          'date_added' => 'now()',
                           'customer_notified' => $customer_notification,
                           'comments' => $order->info['comments']);
   tep_db_perform(TABLE_ORDERS_STATUS_HISTORY, $sql_data_array);
@@ -163,7 +166,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 // BOF: QT Pro - move from below
       $products_attributes = $order->products[$i]['attributes'];
 // BOF: QT Pro - move from below
-//    if (DOWNLOAD_ENABLED == 'true') {
+//      if (DOWNLOAD_ENABLED == 'true') {
 // EOF: MOD - QT Pro
         $stock_query_raw = "SELECT products_quantity, pad.products_attributes_filename
                             FROM " . TABLE_PRODUCTS . " p
@@ -181,9 +184,6 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
           $stock_query_raw .= " AND pa.options_id = '" . $products_attributes[0]['option_id'] . "' AND pa.options_values_id = '" . $products_attributes[0]['value_id'] . "'";
         }
         $stock_query = tep_db_query($stock_query_raw);
-//    } else {
-//      $stock_query = tep_db_query("select products_quantity from " . TABLE_PRODUCTS . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
-//    }
 // BOF: MOD - QT Pro
       if (tep_db_num_rows($stock_query) > 0) {
         $stock_values = tep_db_fetch_array($stock_query);
@@ -247,16 +247,19 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
         }
       }
 // LINE ADDED: MOD - QT Pro
-    } else { 
-      if ( is_array($order->products[$i]['attributes']) ) {
-        $products_stock_attributes_array = array();
-        foreach ($order->products[$i]['attributes'] as $attribute) {
-            $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
-        }
-        asort($products_stock_attributes_array, SORT_NUMERIC);
-        $products_stock_attributes = implode(",", $products_stock_attributes_array);
-      }
     }
+
+//**si** 14-11-05 fix missing att list
+else {
+	if ( is_array($order->products[$i]['attributes']) ) {
+	  $products_stock_attributes_array = array();
+	  foreach ($order->products[$i]['attributes'] as $attribute) {
+	      $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
+		}
+		asort($products_stock_attributes_array, SORT_NUMERIC);
+		$products_stock_attributes = implode(",", $products_stock_attributes_array);
+	}
+}
 //**si** 14-11-05 end
 // Update products_ordered (for bestsellers list)
     tep_db_query("update " . TABLE_PRODUCTS . " set products_ordered = products_ordered + " . sprintf('%d', $order->products[$i]['qty']) . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
@@ -274,11 +277,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
                             'products_stock_attributes' => $products_stock_attributes);
     tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
     $order_products_id = tep_db_insert_id();
-
-// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-// CCGV 5.19 Fix for GV Queue with Paypal IPN
-  $order_total_modules->update_credit_account($i,$insert_id);
-// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+    
+// LINE ADDED: MOD - CCGV
+$order_total_modules->update_credit_account($i);    
 
 //------insert customer choosen option to order--------
     $attributes_exist = '0';
@@ -331,10 +332,8 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 
     $products_ordered .= $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . ' (' . $order->products[$i]['model'] . ') = ' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . $products_ordered_attributes . "\n";
   }
-
-// LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
-  $order_total_modules->apply_credit();
-
+// LINE ADDED: MOD - ICW CREDIT CLASS SYSTEM
+$order_total_modules->apply_credit();
 // lets start with the email confirmation
 // LINE ADDED: PWA - Add test for PWA - no display of invoice URL if PWA customer
 if (!tep_session_is_registered('noaccount')) {
@@ -369,7 +368,7 @@ if (!tep_session_is_registered('noaccount')) {
   }
 
   if ($order->content_type != 'virtual') {
-    $email_order .= "\n" . EMAIL_TEXT_DELIVERY_ADDRESS . "\n" . 
+    $email_order .= "\n" . EMAIL_TEXT_DELIVERY_ADDRESS . "\n" .
                     EMAIL_SEPARATOR . "\n" .
                     tep_address_label($customer_id, $sendto, 0, '', "\n") . "\n";
   }
@@ -378,11 +377,11 @@ if (!tep_session_is_registered('noaccount')) {
                   EMAIL_SEPARATOR . "\n" .
                   tep_address_label($customer_id, $billto, 0, '', "\n") . "\n\n";
   if (is_object($$payment)) {
-    $email_order .= EMAIL_TEXT_PAYMENT_METHOD . "\n" . 
+    $email_order .= EMAIL_TEXT_PAYMENT_METHOD . "\n" .
                     EMAIL_SEPARATOR . "\n";
     $payment_class = $$payment;
     $email_order .= $order->info['payment_method'] . "\n\n";
-    if ($payment_class->email_footer) { 
+    if ($payment_class->email_footer) {
       $email_order .= $payment_class->email_footer . "\n\n";
     }
   }
@@ -410,13 +409,10 @@ if (!tep_session_is_registered('noaccount')) {
   tep_session_unregister('shipping');
   tep_session_unregister('payment');
   tep_session_unregister('comments');
-
-// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+// BOF: MOD - ICW CREDIT CLASS SYSTEM
   if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');
   $order_total_modules->clear_posts();
-// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
-
+// EOF: MOD - ICW CREDIT CLASS SYSTEM
   tep_redirect(tep_href_link(FILENAME_CHECKOUT_SUCCESS, '', 'SSL'));
-
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

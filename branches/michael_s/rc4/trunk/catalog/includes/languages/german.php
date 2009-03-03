@@ -96,6 +96,12 @@ define('BOX_REVIEWS_TEXT_OF_5_STARS', '%s von 5 Sternen!');
 define('BOX_HEADING_SHOPPING_CART', 'Warenkorb');
 define('BOX_SHOPPING_CART_EMPTY', '0 Produkte');
 
+// BOF: MOD - Wishlist 3.5
+//wishlist box text in includes/boxes/wishlist.php 
+define('BOX_HEADING_CUSTOMER_WISHLIST', 'My Wishlist'); 
+define('TEXT_WISHLIST_COUNT', 'Currently %s items are on your Wish List.');
+// EOF: MOD - Wishlist 3.5
+
 // order_history box text in includes/boxes/order_history.php
 define('BOX_HEADING_CUSTOMER_ORDERS', 'Bestell&uuml;bersicht');
 
@@ -104,7 +110,7 @@ define('BOX_HEADING_BESTSELLERS', 'Bestseller');
 define('BOX_HEADING_BESTSELLERS_IN', 'Bestseller<br>&nbsp;&nbsp;');
 
 // notifications box text in includes/boxes/products_notifications.php
-define('BOX_HEADING_NOTIFICATIONS', 'Benachrich-<br>tigungen');
+define('BOX_HEADING_NOTIFICATIONS', 'Benachrichtigungen');
 define('BOX_NOTIFICATIONS_NOTIFY', 'Benachrichtigen Sie mich &uuml;ber Aktuelles zu diesem Artikel <b>%s</b>');
 define('BOX_NOTIFICATIONS_NOTIFY_REMOVE', 'Benachrichtigen Sie mich nicht mehr zu diesem Artikel <b>%s</b>');
 
@@ -341,26 +347,8 @@ define('TEXT_CCVAL_ERROR_INVALID_DATE', 'Das "G&uuml;ltig bis" Datum ist ung&uum
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'Die "KreditkarteNummer", die Sie angegeben haben, ist ung&uuml;ltig. Bitte korrigieren Sie Ihre Angaben.');
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Die ersten 4 Ziffern Ihrer Kreditkarte sind: %s. Wenn diese Angaben stimmen, wird dieser Kartentyp leider nicht akzeptiert. Bitte korrigieren Sie Ihre Angaben gegebenfalls.');
 
-/*
-  The following copyright announcement can only be
-  appropriately modified or removed if the layout of
-  the site theme has been modified to distinguish
-  itself from the default osCMax/osCDox-copyrighted
-  theme.
-
-  For more information please go to the osCMax
-  support site:
-
-  http://oscdox.com/
-
-  Please leave this comment intact together with the
-  following copyright announcement.
-*/
-define('FOOTER_TEXT_BODY', 'Copyright &copy; 2005 <a href="http://oscdox.com">osCDox</a>, <a href="http://aabox.com">AABox Web Hosting</a>,<br>
+define('FOOTER_TEXT_BODY', 'Copyright &copy; 2005 <a href="http://oscdox.com">osCDox</a>, <a href="http://aabox.com">AABox Web Hosting</a><br>
 Powered by <a href="http://www.oscmax.com" target="_blank">osCMax v2.0</a>');
-
-// ADDED LINE: MOD - Gift and Voucher
-require(DIR_WS_LANGUAGES . 'add_ccgvdc_german.php');
 
 // BOF: MOD - Checkout Without Account
 define('IMAGE_BUTTON_CREATE_ACCOUNT', 'Create Account');
@@ -397,15 +385,8 @@ define('LOGIN_BOX_LOGOFF','Abmeldung');
 define('LOGIN_BOX_PRODUCTS_NEW','New Products');
 // EOF: MOD - Login Box My Account
 
-// BOF: MOD - Wish List 2.3 box text in includes/boxes/wishlist.php
-define('BOX_HEADING_CUSTOMER_WISHLIST', 'Meine Wunschliste');
-define('BOX_WISHLIST_EMPTY', 'Sie haben keine Artikel in Ihrer Wunschliste');
-define('IMAGE_BUTTON_ADD_WISHLIST', 'Der Wunschliste hinzuf&uuml;gen');
-define('TEXT_WISHLIST_COUNT', 'Currently %s items are on your Wishlist.');
-define('TEXT_DISPLAY_NUMBER_OF_WISHLIST', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> items on your wishlist)');
-define('BOX_HEADING_CUSTOMER_WISHLIST_HELP', 'Wunschlisten Hilfe');
-define('BOX_HEADING_SEND_WISHLIST', 'Wunschzettel versenden');
-define('BOX_TEXT_MOVE_TO_CART', 'In den Warenkorb');
-define('BOX_TEXT_DELETE', 'Löschen');
-// EOF: MOD - Wish List 2.3 box text in includes/boxes/wishlist.php
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+define('FILENAME_STATS_CREDITS', 'stats_credits.php');
+require(DIR_WS_LANGUAGES . 'add_ccgvdc_german.php');
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 ?>

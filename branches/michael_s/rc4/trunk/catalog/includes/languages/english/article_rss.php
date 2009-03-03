@@ -9,7 +9,7 @@
 
   Released under the GNU General Public License
 */
-define('NEWS_TITLE', 'Silvermoon Articles');
-define('NEWS_DESCRIPTION', 'Jewelry and chainmail news from Silvermoon-Jewelry.com');
+define('NEWS_TITLE', 'Articles RSS Feed');
+define('NEWS_DESCRIPTION', 'RSS News Feed');
 
 ?>

@@ -343,15 +343,12 @@ define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Warning: I am not able to wri
 define('WARNING_SESSION_AUTO_START', 'Warning: session.auto_start is enabled - please disable this php feature in php.ini and restart the web server.');
 define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Warning: The downloadable products directory does not exist: ' . DIR_FS_DOWNLOAD . '. Downloadable products will not work until this directory is valid.');
 
-define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The expiry date entered for the credit card is invalid. Please check the date and try again.');
-define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The credit card number entered is invalid. Please check the number and try again.');
-define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first four digits of the number entered are: %s. If that number is correct, we do not accept that type of credit card. If it is wrong, please try again.');
+define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The expiry date entered for the credit card is invalid.<br>Please check the date and try again.');
+define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The credit card number entered is invalid.<br>Please check the number and try again.');
+define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first four digits of the number entered are: %s<br>If that number is correct, we do not accept that type of credit card.<br>If it is wrong, please try again.');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; 2005 <a href="http://oscdox.com">osCDox</a>, <a href="http://aabox.com">AABox Web Hosting</a><br>
 Powered by <a href="http://www.oscmax.com" target="_blank">osCMax v2.0</a>');
-
-// ADDED LINE: MOD - Gift and Voucher
-require(DIR_WS_LANGUAGES . 'add_ccgvdc_english.php');
 
 // BOF: MOD - Checkout Without Account
 define('IMAGE_BUTTON_CREATE_ACCOUNT', 'Create Account');
@@ -387,4 +384,9 @@ define('LOGIN_BOX_MY_ACCOUNT','General information');
 define('LOGIN_BOX_LOGOFF','Log off');
 define('LOGIN_BOX_PRODUCTS_NEW','New Products');
 // EOF: MOD - Login Box My Account
+
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+define('FILENAME_STATS_CREDITS', 'stats_credits.php');
+require(DIR_WS_LANGUAGES . 'add_ccgvdc_english.php');
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 ?>

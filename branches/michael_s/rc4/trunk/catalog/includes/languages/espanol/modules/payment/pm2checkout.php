@@ -5,22 +5,16 @@ $Id: pm2checkout.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */
 
   define('MODULE_PAYMENT_2CHECKOUT_TEXT_TITLE', '2CheckOut');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_DESCRIPTION', 'Tarjeta de Cr&eacute;dito para Pruebas:<br><br>Numero: 4111111111111111<br>Caducidad: Cualquiera');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_TYPE', 'Tipo:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_OWNER', 'Titular de la Tarjeta:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_OWNER_FIRST_NAME', 'Nombre del Titular:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_OWNER_LAST_NAME', 'Apellidos del Titular:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_NUMBER', 'N&uacute;mero de la Tarjeta:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_EXPIRES', 'Fecha de Caducidad:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_CHECKNUMBER', 'N&uacute;mero de comprobaci&oacute;n:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_CHECKNUMBER_LOCATION', '(lo puede encontrar en la parte de atr&aacute;s de la tarjeta de credito)');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_JS_CC_NUMBER', '* El n&uacute;mero de la tarjeta de cr&eacute;dito debe tener al menos ' . CC_NUMBER_MIN_LENGTH . ' caracteres.\n');
+  define('MODULE_PAYMENT_2CHECKOUT_TEXT_PUBLIC_TITLE', '2Checkout');
+  define('MODULE_PAYMENT_2CHECKOUT_TEXT_PUBLIC_DESCRIPTION', 'Tarjeta de Cr&eacute;dito or Alternativas');
+  define('MODULE_PAYMENT_2CHECKOUT_TEXT_DESCRIPTION', '<img src="images/icon_popup.gif" border="0">&nbsp;<a href="https://www.2checkout.com/2co/signup?affiliate=1255821" target="_blank" style="text-decoration: underline; font-weight: bold;">Visita la web de 2Checkout</a>&nbsp;<a href="javascript:toggleDivBlock(\'pm2checkoutInfo\');">(info)</a><span id="pm2checkoutInfo" style="display: none;"><br><i>Con el uso del Link para usar 2Checkout osCommerce dar a cada Cliente nuevo un pequeno Bonus.</i></span><br><br>Tarjeta de Cr&eacute;dito para Pruebas:<br><br>Numero: 4111111111111111<br>Caducidad: Cualquiera');
   define('MODULE_PAYMENT_2CHECKOUT_TEXT_ERROR_MESSAGE', 'Ha ocurrido un error procesando su tarjeta de cr&eacute;dito, por favor int&eacute;ntelo de nuevo.');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_ERROR', 'Error de Tarjeta de Cr&eacute;dito!');
+  define('MODULE_PAYMENT_2CHECKOUT_TEXT_WARNING_DEMO_MODE', 'In Review: Transaction performed in demo mode.');
+  define('MODULE_PAYMENT_2CHECKOUT_TEXT_WARNING_TRANSACTION_ORDER', 'In Review: Transaction total did not match order total.');
 ?>

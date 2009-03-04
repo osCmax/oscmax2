@@ -72,7 +72,7 @@ window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,m
     $boxContent .= '<div align="right">' . $currencies->format($cart->show_total()) . '</div>';
 
   }
-// ICW ADDED FOR CREDIT CLASS GV
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   if (tep_session_is_registered('customer_id')) {
     $gv_query = tep_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id = '" . $customer_id . "'");
     $gv_result = tep_db_fetch_array($gv_query);
@@ -94,8 +94,7 @@ window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,m
     $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smalltext">' . CART_COUPON . '</td><td class="smalltext" align="right" valign="bottom">' . '<a href="javascript:couponpopupWindow(\'' . tep_href_link(FILENAME_POPUP_COUPON_HELP, 'cID=' . $cc_id) . '\')">' . CART_COUPON_INFO . '</a>' . '</td></tr></table>';
 
   }
-
-// ADDED FOR CREDIT CLASS GV END ADDITTION
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
 
 include (bts_select('boxes', $box_base_name)); // BTS 1.5

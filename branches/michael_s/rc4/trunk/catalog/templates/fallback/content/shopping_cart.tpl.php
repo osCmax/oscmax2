@@ -41,6 +41,7 @@
           echo tep_draw_hidden_field('id[' . $products[$i]['id'] . '][' . $option . ']', $value);
 //++++ QT Pro: Begin Changed code
           $attributes = tep_db_query("select popt.products_options_name, popt.products_options_track_stock, poval.products_options_values_name, pa.options_values_price, pa.price_prefix
+//++++ QT Pro: End Changed Code									   
                                       from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa
                                       where pa.products_id = '" . (int)$products[$i]['id'] . "'
                                        and pa.options_id = '" . (int)$option . "'
@@ -49,7 +50,6 @@
                                        and pa.options_values_id = poval.products_options_values_id
                                        and popt.language_id = '" . (int)$languages_id . "'
                                        and poval.language_id = '" . (int)$languages_id . "'");
-//++++ QT Pro: End Changed Code									   
           $attributes_values = tep_db_fetch_array($attributes);
 
           $products[$i][$option]['products_options_name'] = $attributes_values['products_options_name'];
@@ -86,8 +86,8 @@
 //++++ QT Pro: Begin Changed code
         if (isset($products[$i]['attributes']) && is_array($products[$i]['attributes'])) {
           $stock_check = tep_check_stock($products[$i]['id'], $products[$i]['quantity'], $products[$i]['attributes']); 
-        }else{
-        $stock_check = tep_check_stock($products[$i]['id'], $products[$i]['quantity']);
+        } else {
+          $stock_check = tep_check_stock($products[$i]['id'], $products[$i]['quantity']);
         }
 //++++ QT Pro: End Changed Code
         if (tep_not_null($stock_check)) {

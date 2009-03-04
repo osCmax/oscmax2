@@ -22,7 +22,11 @@
 // so output a message.
   $message = sprintf(TEXT_VALID_GV, $currencies->format($coupon['coupon_amount']));
   if ($error) {
-    $message = TEXT_INVALID_GV;
+// BOF - MOD: GV_REDEEM_EXPLOIT_FIX (GVREF)
+//  $message = TEXT_INVALID_GV;
+    $message = $gv_error_message;
+// EOF - MOD: GV_REDEEM_EXPLOIT_FIX (GVREF)
+  
   }
 ?>
               <tr> 

@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: express.php 1803 2008-01-11 18:16:37Z user $
+  $Id: express_uk.php 1803 2008-01-11 18:16:37Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
@@ -15,7 +15,7 @@
 
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
-    $snapshot = array('page' => 'ext/modules/payment/paypal/express.php',
+    $snapshot = array('page' => 'ext/modules/payment/paypal/express_uk.php',
                       'mode' => $request_type,
                       'get' => $HTTP_GET_VARS,
                       'post' => $HTTP_POST_VARS);
@@ -30,19 +30,20 @@
     tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
   }
 
-  require('includes/modules/payment/paypal_express.php');
+  require(DIR_WS_LANGUAGES . $language . '/modules/payment/paypal_uk_express.php');
+  require('includes/modules/payment/paypal_uk_express.php');
 
-  $paypal_express = new paypal_express();
+  $paypal_uk_express = new paypal_uk_express();
 
-  if (!$paypal_express->check() || !$paypal_express->enabled) {
+  if (!$paypal_uk_express->check() || !$paypal_uk_express->enabled) {
     tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
   }
 
-  if (MODULE_PAYMENT_PAYPAL_EXPRESS_TRANSACTION_SERVER == 'Live') {
-    $api_url = 'https://api-3t.paypal.com/nvp';
+  if (MODULE_PAYMENT_PAYPAL_UK_EXPRESS_TRANSACTION_SERVER == 'Live') {
+    $api_url = 'https://payflowpro.verisign.com/transaction';
     $paypal_url = 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout';
   } else {
-    $api_url = 'https://api-3t.sandbox.paypal.com/nvp';
+    $api_url = 'https://pilot-payflowpro.verisign.com/transaction';
     $paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout';
   }
 
@@ -61,33 +62,35 @@
   if (!tep_session_is_registered('cartID')) tep_session_register('cartID');
   $cartID = $cart->cartID;
 
-  $params = array('USER' => MODULE_PAYMENT_PAYPAL_EXPRESS_API_USERNAME,
-                  'PWD' => MODULE_PAYMENT_PAYPAL_EXPRESS_API_PASSWORD,
-                  'VERSION' => '3.2',
-                  'SIGNATURE' => MODULE_PAYMENT_PAYPAL_EXPRESS_API_SIGNATURE);
+  $params = array('USER' => (tep_not_null(MODULE_PAYMENT_PAYPAL_UK_EXPRESS_USERNAME) ? MODULE_PAYMENT_PAYPAL_UK_EXPRESS_USERNAME : MODULE_PAYMENT_PAYPAL_UK_EXPRESS_VENDOR),
+                  'VENDOR' => MODULE_PAYMENT_PAYPAL_UK_EXPRESS_VENDOR,
+                  'PARTNER' => MODULE_PAYMENT_PAYPAL_UK_EXPRESS_PARTNER,
+                  'PWD' => MODULE_PAYMENT_PAYPAL_UK_EXPRESS_PASSWORD,
+                  'TENDER' => 'P',
+                  'TRXTYPE' => ((MODULE_PAYMENT_PAYPAL_UK_EXPRESS_TRANSACTION_METHOD == 'Sale') ? 'S' : 'A'));
 
   switch ($HTTP_GET_VARS['osC_Action']) {
     case 'retrieve':
-      $params['METHOD'] = 'GetExpressCheckoutDetails';
+      $params['ACTION'] = 'G';
       $params['TOKEN'] = $HTTP_GET_VARS['token'];
 
       $post_string = '';
 
       foreach ($params as $key => $value) {
-        $post_string .= $key . '=' . urlencode(trim($value)) . '&';
+        $post_string .= $key . '[' . strlen(trim($value)) . ']=' . trim($value) . '&';
       }
 
       $post_string = substr($post_string, 0, -1);
 
-      $response = $paypal_express->sendTransactionToGateway($api_url, $post_string);
+      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUEST-ID: ' . md5($cartID . tep_session_id() . rand())));
       $response_array = array();
       parse_str($response, $response_array);
 
-      if (($response_array['ACK'] == 'Success') || ($response_array['ACK'] == 'SuccessWithWarning')) {
+      if ($response_array['RESULT'] == '0') {
         include(DIR_WS_CLASSES . 'order.php');
 
         if ($cart->get_content_type() != 'virtual') {
-          $country_iso_code_2 = tep_db_prepare_input($response_array['SHIPTOCOUNTRYCODE']);
+          $country_iso_code_2 = tep_db_prepare_input($response_array['SHIPTOCOUNTRY']);
           $zone_code = tep_db_prepare_input($response_array['SHIPTOSTATE']);
 
           $country_query = tep_db_query("select countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id from " . TABLE_COUNTRIES . " where countries_iso_code_2 = '" . tep_db_input($country_iso_code_2) . "'");
@@ -104,8 +107,8 @@
             $zone_id = $zone['zone_id'];
           }
 
-          $sendto = array('firstname' => substr($response_array['SHIPTONAME'], 0, strpos($response_array['SHIPTONAME'], ' ')),
-                          'lastname' => substr($response_array['SHIPTONAME'], strpos($response_array['SHIPTONAME'], ' ')+1),
+          $sendto = array('firstname' => $response_array['FIRSTNAME'],
+                          'lastname' => $response_array['LASTNAME'],
                           'company' => '',
                           'street_address' => $response_array['SHIPTOSTREET'],
                           'suburb' => '',
@@ -202,13 +205,13 @@
           }
 
           if (!tep_session_is_registered('payment')) tep_session_register('payment');
-          $payment = $paypal_express->code;
+          $payment = $paypal_uk_express->code;
 
-          if (!tep_session_is_registered('ppe_token')) tep_session_register('ppe_token');
-          $ppe_token = $response_array['TOKEN'];
+          if (!tep_session_is_registered('ppeuk_token')) tep_session_register('ppeuk_token');
+          $ppeuk_token = $response_array['TOKEN'];
 
-          if (!tep_session_is_registered('ppe_payerid')) tep_session_register('ppe_payerid');
-          $ppe_payerid = $response_array['PAYERID'];
+          if (!tep_session_is_registered('ppeuk_payerid')) tep_session_register('ppeuk_payerid');
+          $ppeuk_payerid = $response_array['PAYERID'];
 
           tep_redirect(tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'));
         } else {
@@ -218,18 +221,41 @@
           $sendto = false;
 
           if (!tep_session_is_registered('payment')) tep_session_register('payment');
-          $payment = $paypal_express->code;
+          $payment = $paypal_uk_express->code;
 
-          if (!tep_session_is_registered('ppe_token')) tep_session_register('ppe_token');
-          $ppe_token = $response_array['TOKEN'];
+          if (!tep_session_is_registered('ppeuk_token')) tep_session_register('ppeuk_token');
+          $ppeuk_token = $response_array['TOKEN'];
 
-          if (!tep_session_is_registered('ppe_payerid')) tep_session_register('ppe_payerid');
-          $ppe_payerid = $response_array['PAYERID'];
+          if (!tep_session_is_registered('ppeuk_payerid')) tep_session_register('ppeuk_payerid');
+          $ppeuk_payerid = $response_array['PAYERID'];
 
           tep_redirect(tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'));
         }
       } else {
-        tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, 'error_message=' . stripslashes($response_array['L_LONGMESSAGE0']), 'SSL'));
+        switch ($response_array['RESULT']) {
+          case '1':
+          case '26':
+            $error_message = MODULE_PAYMENT_PAYPAL_UK_EXPRESS_ERROR_CFG_ERROR;
+            break;
+
+          case '7':
+            $error_message = MODULE_PAYMENT_PAYPAL_UK_EXPRESS_ERROR_ADDRESS;
+            break;
+
+          case '12':
+            $error_message = MODULE_PAYMENT_PAYPAL_UK_EXPRESS_ERROR_DECLINED;
+            break;
+
+          case '1000':
+            $error_message = MODULE_PAYMENT_PAYPAL_UK_EXPRESS_ERROR_EXPRESS_DISABLED;
+            break;
+
+          default:
+            $error_message = MODULE_PAYMENT_PAYPAL_UK_EXPRESS_ERROR_GENERAL;
+            break;
+        }
+
+        tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, 'error_message=' . urlencode($error_message), 'SSL'));
       }
 
       break;
@@ -238,12 +264,12 @@
       include(DIR_WS_CLASSES . 'order.php');
       $order = new order;
 
-      $params['METHOD'] = 'SetExpressCheckout';
-      $params['PAYMENTACTION'] = ((MODULE_PAYMENT_PAYPAL_EXPRESS_TRANSACTION_METHOD == 'Sale') ? 'Sale' : 'Authorization');
-      $params['RETURNURL'] = tep_href_link('ext/modules/payment/paypal/express.php', 'osC_Action=retrieve', 'SSL', true, false);
+      $params['ACTION'] = 'S';
+      $params['CURRENCY'] = $order->info['currency'];
+      $params['EMAIL'] = $order->customer['email_address'];
+      $params['AMT'] = $paypal_uk_express->format_raw($order->info['total']);
+      $params['RETURNURL'] = tep_href_link('ext/modules/payment/paypal/express_uk.php', 'osC_Action=retrieve', 'SSL', true, false);
       $params['CANCELURL'] = tep_href_link(FILENAME_SHOPPING_CART, '', 'SSL', true, false);
-      $params['AMT'] = $paypal_express->format_raw($order->info['total']);
-      $params['CURRENCYCODE'] = $order->info['currency'];
 
       if ($order->content_type == 'virtual') {
         $params['NOSHIPPING'] = '1';
@@ -252,19 +278,34 @@
       $post_string = '';
 
       foreach ($params as $key => $value) {
-        $post_string .= $key . '=' . urlencode(trim($value)) . '&';
+        $post_string .= $key . '[' . strlen(trim($value)) . ']=' . trim($value) . '&';
       }
 
       $post_string = substr($post_string, 0, -1);
 
-      $response = $paypal_express->sendTransactionToGateway($api_url, $post_string);
+      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUEST-ID: ' . md5($cartID . tep_session_id() . rand())));
       $response_array = array();
       parse_str($response, $response_array);
 
-      if (($response_array['ACK'] == 'Success') || ($response_array['ACK'] == 'SuccessWithWarning')) {
+      if ($response_array['RESULT'] == '0') {
         tep_redirect($paypal_url . '&token=' . $response_array['TOKEN']);
       } else {
-        tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, 'error_message=' . stripslashes($response_array['L_LONGMESSAGE0']), 'SSL'));
+        switch ($response_array['RESULT']) {
+          case '1':
+          case '26':
+            $error_message = MODULE_PAYMENT_PAYPAL_UK_EXPRESS_ERROR_CFG_ERROR;
+            break;
+
+          case '1000':
+            $error_message = MODULE_PAYMENT_PAYPAL_UK_EXPRESS_ERROR_EXPRESS_DISABLED;
+            break;
+
+          default:
+            $error_message = MODULE_PAYMENT_PAYPAL_UK_EXPRESS_ERROR_GENERAL;
+            break;
+        }
+
+        tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, 'error_message=' . urlencode($error_message), 'SSL'));
       }
 
       break;

@@ -34,7 +34,6 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
       if (isset($value['value'])) {
         return $value['value'];
       }
-
       return '';
     }
 
@@ -97,7 +96,6 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
     if ($sane_session_id == false) {
       tep_redirect(tep_href_link(FILENAME_DEFAULT, '', 'NONSSL', false));
     }
-
     return session_start();
   }
 

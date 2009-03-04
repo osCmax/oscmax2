@@ -73,9 +73,9 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
   function tep_count_articles_in_topic($topic_id, $include_inactive = false) {
     $articles_count = 0;
     if ($include_inactive == true) {
-      $articles_query = tep_db_query("SELECT COUNT(*) as total from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_TO_TOPICS . " a2t where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a2t.topics_id = '" . (int)$topic_id . "'");
+      $articles_query = tep_db_query("select count(*) as total from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_TO_TOPICS . " a2t where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a2t.topics_id = '" . (int)$topic_id . "'");
     } else {
-      $articles_query = tep_db_query("SELECT COUNT(*) as total from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_TO_TOPICS . " a2t where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a.articles_status = '1' and a2t.topics_id = '" . (int)$topic_id . "'");
+      $articles_query = tep_db_query("select count(*) as total from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_TO_TOPICS . " a2t where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a.articles_status = '1' and a2t.topics_id = '" . (int)$topic_id . "'");
     }
     $articles = tep_db_fetch_array($articles_query);
     $articles_count += $articles['total'];
@@ -94,7 +94,7 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 // Return true if the topic has subtopics
 // TABLES: topics
   function tep_has_topic_subtopics($topic_id) {
-    $child_topic_query = tep_db_query("SELECT COUNT(*) as count from " . TABLE_TOPICS . " where parent_id = '" . (int)$topic_id . "'");
+    $child_topic_query = tep_db_query("select count(*) as count from " . TABLE_TOPICS . " where parent_id = '" . (int)$topic_id . "'");
     $child_topic = tep_db_fetch_array($child_topic_query);
 
     if ($child_topic['count'] > 0) {

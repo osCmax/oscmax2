@@ -142,6 +142,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 // Output a form input field
   function tep_draw_input_field($name, $value = '', $parameters = '', $type = 'text', $reinsert_value = true) {
     global $HTTP_GET_VARS, $HTTP_POST_VARS;
+
     $field = '<input type="' . tep_output_string($type) . '" name="' . tep_output_string($name) . '"';
 
     if ( ($reinsert_value == true) && ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) ) {
@@ -173,6 +174,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 // Output a selection field - alias function for tep_draw_checkbox_field() and tep_draw_radio_field()
   function tep_draw_selection_field($name, $type, $value = '', $checked = false, $parameters = '') {
     global $HTTP_GET_VARS, $HTTP_POST_VARS;
+
     $selection = '<input type="' . tep_output_string($type) . '" name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($value)) $selection .= ' value="' . tep_output_string($value) . '"';
@@ -204,6 +206,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 // Output a form textarea field
   function tep_draw_textarea_field($name, $wrap, $width, $height, $text = '', $parameters = '', $reinsert_value = true) {
     global $HTTP_GET_VARS, $HTTP_POST_VARS;
+
     $field = '<textarea name="' . tep_output_string($name) . '" wrap="' . tep_output_string($wrap) . '" cols="' . tep_output_string($width) . '" rows="' . tep_output_string($height) . '"';
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
@@ -217,7 +220,6 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
         $field .= tep_output_string_protected(stripslashes($HTTP_POST_VARS[$name]));
       }
     } elseif (tep_not_null($text)) {
-// LINE CHANGED: MS2 update 501112 - Added: tep_output_string_protected(...)
       $field .= tep_output_string_protected($text);
     }
 
@@ -230,6 +232,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 // Output a form hidden field
   function tep_draw_hidden_field($name, $value = '', $parameters = '') {
     global $HTTP_GET_VARS, $HTTP_POST_VARS;
+
     $field = '<input type="hidden" name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($value)) {
@@ -263,6 +266,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 // Output a form pull down menu
   function tep_draw_pull_down_menu($name, $values, $default = '', $parameters = '', $required = false) {
     global $HTTP_GET_VARS, $HTTP_POST_VARS;
+
     $field = '<select name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;

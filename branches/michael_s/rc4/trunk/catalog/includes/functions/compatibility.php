@@ -8,7 +8,6 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
   Copyright 2006 osCMax
 
   Released under the GNU General Public License
-
 */
 
 ////
@@ -38,9 +37,9 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
     $HTTP_POST_FILES =& $_FILES;
     $HTTP_SERVER_VARS =& $_SERVER;
   } else {
-  if (!is_array($HTTP_GET_VARS)) $HTTP_GET_VARS = array();
-  if (!is_array($HTTP_POST_VARS)) $HTTP_POST_VARS = array();
-  if (!is_array($HTTP_COOKIE_VARS)) $HTTP_COOKIE_VARS = array();
+    if (!is_array($HTTP_GET_VARS)) $HTTP_GET_VARS = array();
+    if (!is_array($HTTP_POST_VARS)) $HTTP_POST_VARS = array();
+    if (!is_array($HTTP_COOKIE_VARS)) $HTTP_COOKIE_VARS = array();
   }
 
 // handle magic_quotes_gpc turned off.

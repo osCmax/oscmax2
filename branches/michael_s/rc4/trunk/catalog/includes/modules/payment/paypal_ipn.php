@@ -8,9 +8,6 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
   Copyright 2006 osCMax
 
   Released under the GNU General Public License
-  Original Authors: Harald Ponce de Leon, Mark Evans 
-  Updates by PandA.nl, Navyhost, Zoeticlight, David, gravyface, AlexStudio, windfjf and Terra
-  v2.3 Updated by AlexStudio
 */
 
   class paypal_ipn {

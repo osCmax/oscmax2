@@ -1,12 +1,12 @@
 <?php
 /*
-  $Id: sofortueberweisung_direct.php 1782 2008-01-10 01:10:52Z hpdl $
+  $Id: sofortueberweisung_direct.php 1782 2008-01-10 01:10:52Z user $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
+  Copyright 2008 osCMax
   Copyright (c) 2006 - 2007 Henri Schmidhuber (http://www.in-solution.de)
-  Copyright (c) 2008 osCommerce
 
   Released under the GNU General Public License
 */

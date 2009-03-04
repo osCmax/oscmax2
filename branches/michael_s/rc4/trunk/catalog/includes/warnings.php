@@ -1,4 +1,14 @@
 <?php
+/*
+$Id: warnings.php 1 2008-09-22 11:11:07Z user $
+
+  osCMax Power E-Commerce
+  http://oscdox.com
+
+  Copyright 2008 osCMax
+
+  Released under the GNU General Public License
+*/
 
 // check if the 'install' directory exists, and warn of its existence
   if (WARN_INSTALL_EXISTENCE == 'true') {

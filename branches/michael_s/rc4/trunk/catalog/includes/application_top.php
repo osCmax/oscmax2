@@ -38,7 +38,8 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 
 // define the project version
-  define('PROJECT_VERSION', 'osCMax v2.0');
+  define('PROJECT_VERSION', 'osCMax v2.0 RC4');
+
 // some code to solve compatibility issues
   require(DIR_WS_FUNCTIONS . 'compatibility.php');
 
@@ -134,7 +135,6 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
 // include navigation history class
   require(DIR_WS_CLASSES . 'navigation_history.php');
-
 
 // check if sessions are supported, otherwise use the php3 compatible session class
   if (!function_exists('session_start')) {
@@ -334,6 +334,7 @@ if (isset($HTTP_GET_VARS['pName']) && defined(urldecode($HTTP_GET_VARS['pName'])
       $currency = (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') ? LANGUAGE_CURRENCY : DEFAULT_CURRENCY;
     }
   }
+
 // navigation history
   if (tep_session_is_registered('navigation')) {
     if (PHP_VERSION < 4) {
@@ -387,13 +388,13 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
 
     if (DISPLAY_CART == 'true') {
       $goto =  FILENAME_SHOPPING_CART;
-// LINE MOD: ADDED 'cName', 'pName'
-     $parameters = array('action', 'cPath', 'products_id', 'pid', 'cName', 'pName');
+// LINE MOD: Ultimate SEO URLs v2.1 removed 'cName', 'pName'
+     $parameters = array('action', 'cPath', 'products_id', 'pid');
     } else {
       $goto = basename($PHP_SELF);
       if ($HTTP_GET_VARS['action'] == 'buy_now') {
-// LINE MOD: ADDED 'pName'
-        $parameters = array('action', 'pid', 'products_id', 'pName');
+// LINE MOD: Ultimate SEO URLs v2.1 removed 'pName'
+        $parameters = array('action', 'pid', 'products_id');
       } else {
         $parameters = array('action', 'pid');
       }

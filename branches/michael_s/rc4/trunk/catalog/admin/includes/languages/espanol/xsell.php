@@ -1,13 +1,17 @@
 <?php
+/*
 $Id: xsell.php 3 2006-05-27 04:59:07Z user $ 
-osCMax Power E-Commerce 
-http://oscdox.com 
-Copyright 2006 osCMax2005 osCMax, 2002 osCommerce 
 
-Released under the GNU General Public License 
-xsell.php
-Original Idea From Isaac Mualem im@imwebdesigning.com <mailto:im@imwebdesigning.com> 
-Complete Recoding From Stephen Walker admin@snjcomputers.com
+  osCMax Power E-Commerce
+  http://oscdox.com
+
+  Copyright 2008 osCMax
+
+  Released under the GNU General Public License
+
+  xsell.php
+  Original Idea From Isaac Mualem im@imwebdesigning.com <mailto:im@imwebdesigning.com> 
+  Complete Recoding From Stephen Walker admin@snjcomputers.com
 */ 
 
 define('CROSS_SELL_SUCCESS', 'Cross Sell Items Successfully Update For Cross Sell Product #'.$_GET['add_related_product_ID']);

@@ -83,7 +83,7 @@ $Id: gv_send.php 14 2006-07-28 17:42:07Z user $
         $gv_email .= stripslashes($HTTP_POST_VARS['message']) . "\n\n";
       } 
       $gv_email .= sprintf(EMAIL_GV_REDEEM, $id1) . "\n\n";
-      $gv_email .= EMAIL_GV_LINK . tep_href_link(FILENAME_GV_REDEEM, 'gv_no=' . $id1,'NONSSL',false);;
+      $gv_email .= EMAIL_GV_LINK . ' ' . "<a HREF='" . tep_href_link(FILENAME_GV_REDEEM, 'gv_no=' . $id1,'NONSSL',false) . "'>" . tep_href_link(FILENAME_GV_REDEEM, 'gv_no=' .       $id1,'NONSSL',false) . "</a>\n" ;
       $gv_email .= "\n\n";  
       $gv_email .= EMAIL_GV_FIXED_FOOTER . "\n\n";
       $gv_email .= EMAIL_GV_SHOP_FOOTER . "\n\n";;

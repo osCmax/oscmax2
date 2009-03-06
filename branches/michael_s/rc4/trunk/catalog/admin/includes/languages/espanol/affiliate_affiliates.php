@@ -19,11 +19,12 @@ define('HEADING_TITLE_SEARCH', 'Buscar:');
 
 define('TABLE_HEADING_FIRSTNAME', 'Nombre');
 define('TABLE_HEADING_LASTNAME', 'Apellido');
-define('TABLE_HEADING_USERHOMEPAGE', 'Homepage');
 define('TABLE_HEADING_COMMISSION','Commission');
+define('TABLE_HEADING_USERHOMEPAGE', 'Homepage');
 define('TABLE_HEADING_ACCOUNT_CREATED', 'Cuenta Creada');
 define('TABLE_HEADING_ACTION', 'Accion');
 define('TABLE_HEADING_AFFILIATE_ID','Afiliado ID');
+define('TABLE_HEADING_AFFILIATE_STATUS', 'Status');
 
 define('TEXT_DATE_ACCOUNT_CREATED', 'Cuenta Creada:');
 define('TEXT_DATE_ACCOUNT_LAST_MODIFIED', 'Ultima Modificacion:');

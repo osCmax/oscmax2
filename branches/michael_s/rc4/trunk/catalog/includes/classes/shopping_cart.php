@@ -100,6 +100,7 @@ var $shiptotal;
       if (defined('MAX_QTY_IN_CART') && (MAX_QTY_IN_CART > 0) && ((int)$qty > MAX_QTY_IN_CART)) {
         $qty = MAX_QTY_IN_CART;
       }
+
       $attributes_pass_check = true;
 
       if (is_array($attributes)) {
@@ -111,7 +112,8 @@ var $shiptotal;
           }
         }
       }
-       if (is_numeric($products_id) && is_numeric($qty) && ($attributes_pass_check == true)) {
+
+      if (is_numeric($products_id) && is_numeric($qty) && ($attributes_pass_check == true)) {
         $check_product_query = tep_db_query("select products_status from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
         $check_product = tep_db_fetch_array($check_product_query);
 
@@ -155,6 +157,7 @@ var $shiptotal;
       if (defined('MAX_QTY_IN_CART') && (MAX_QTY_IN_CART > 0) && ((int)$quantity > MAX_QTY_IN_CART)) {
         $quantity = MAX_QTY_IN_CART;
       }
+
       $attributes_pass_check = true;
 
       if (is_array($attributes)) {
@@ -259,6 +262,7 @@ var $shiptotal;
 
     function calculate() {
       global $currencies;
+
 //  LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
       $this->total_virtual = 0;
 
@@ -294,6 +298,7 @@ var $shiptotal;
             $no_count = 0;
           }
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
           $prid = $product['products_id'];
           $products_tax = tep_get_tax_rate($product['products_tax_class_id']);
           $products_price = $product['products_price'];
@@ -320,6 +325,7 @@ var $shiptotal;
           $this->total_virtual += tep_add_tax($products_price, $products_tax) * $qty * $no_count;// ICW CREDIT CLASS;
           $this->weight_virtual += ($qty * $products_weight) * $no_count;
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
           $this->total += $currencies->calculate_price($products_price, $products_tax, $qty);
 // LINE ADDED: MOD - indvship
           $this->shiptotal += ($products_ship_price * $qty);
@@ -521,6 +527,7 @@ function get_shiptotal() {
               }
             }
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
           } else {
             switch ($this->content_type) {
               case 'virtual':

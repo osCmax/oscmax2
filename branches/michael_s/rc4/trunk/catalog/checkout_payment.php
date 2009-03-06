@@ -39,9 +39,10 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
       tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
     }
   }
-// LINE ADDED: MOD - CVGC Credit Class
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
 // if we have been here before and are coming back get rid of the credit covers variable
 	if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');  //ICW ADDED FOR CREDIT CLASS SYSTEM
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
 // Stock Check
   if ( (STOCK_CHECK == 'true') && (STOCK_ALLOW_CHECKOUT != 'true') ) {
@@ -89,11 +90,11 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
 
   require(DIR_WS_CLASSES . 'order.php');
   $order = new order;
-// BOF: MOD - ICW CREDIT CLASS SYSTEM
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   require(DIR_WS_CLASSES . 'order_total.php');
   $order_total_modules = new order_total;
   $order_total_modules->clear_posts();
-// EOF: MOD - ICW CREDIT CLASS SYSTEM
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
   if (!tep_session_is_registered('comments')) tep_session_register('comments');
   if (isset($HTTP_POST_VARS['comments']) && tep_not_null($HTTP_POST_VARS['comments'])) {
@@ -102,7 +103,7 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
 
   $total_weight = $cart->show_weight();
   $total_count = $cart->count_contents();
-// LINE ADDED: MOD - ICW CREDIT CLASS SYSTEM
+// LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
   $total_count = $cart->count_contents_virtual();
 
 // load all enabled payment modules
@@ -115,8 +116,9 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
 
   $content = CONTENT_CHECKOUT_PAYMENT;
+  
   $javascript = $content . '.js.php';
-
+  
   include (bts_select('main', $content_template)); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');

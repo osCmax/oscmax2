@@ -1,22 +1,22 @@
 <?php
-DEFINE('FILENAME_GV_QUEUE', 'gv_queue.php');
-DEFINE('FILENAME_GV_MAIL', 'gv_mail.php');
-DEFINE('FILENAME_GV_SENT', 'gv_sent.php');
-define('FILENAME_COUPON_ADMIN', 'coupon_admin.php');
+  define('FILENAME_GV_QUEUE', 'gv_queue.php');
+  define('FILENAME_GV_MAIL', 'gv_mail.php');
+  define('FILENAME_GV_SENT', 'gv_sent.php');
+  define('FILENAME_COUPON_ADMIN', 'coupon_admin.php');
 
-define('TABLE_COUPON_GV_QUEUE', 'coupon_gv_queue');
-define('TABLE_COUPON_GV_CUSTOMER', 'coupon_gv_customer');
-define('TABLE_COUPON_EMAIL_TRACK', 'coupon_email_track');
-define('TABLE_COUPON_REDEEM_TRACK', 'coupon_redeem_track');
-define('TABLE_COUPONS', 'coupons');
-define('TABLE_COUPONS_DESCRIPTION', 'coupons_description');
+  define('TABLE_COUPON_GV_QUEUE', 'coupon_gv_queue');
+  define('TABLE_COUPON_GV_CUSTOMER', 'coupon_gv_customer');
+  define('TABLE_COUPON_EMAIL_TRACK', 'coupon_email_track');
+  define('TABLE_COUPON_REDEEM_TRACK', 'coupon_redeem_track');
+  define('TABLE_COUPONS', 'coupons');
+  define('TABLE_COUPONS_DESCRIPTION', 'coupons_description');
 
 // Below are some defines which affect the way the discount coupon/gift voucher system work
 // Be careful when editing them.
 //
 // Set the length of the redeem code, the longer the more secure
 
-define('SECURITY_CODE_LENGTH', '6');
+  define('SECURITY_CODE_LENGTH', '6');
 
 ////
 // Create a Coupon Code. length may be between 1 and 16 Characters

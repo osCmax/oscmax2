@@ -63,8 +63,8 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
           $expires_date .= (strlen($day) == 1) ? '0' . $day : $day;
         }
 // BOF: MOD - Separate Pricing Per Customer
-/*        tep_db_query("insert into " . TABLE_SPECIALS . " (products_id, specials_new_products_price, specials_date_added, expires_date, status) values ('" . (int)$products_id . "', '" . tep_db_input($specials_price) . "', now(), '" . tep_db_input($expires_date) . "', '1')"); */
-    tep_db_query("insert into " . TABLE_SPECIALS . " (products_id, specials_new_products_price, specials_date_added, expires_date, status, customers_group_id) values ('" . (int)$products_id . "', '" . tep_db_input($specials_price) . "', now(), '" . tep_db_input($expires_date) . "', '1', ".(int)$customers_group.")");
+/*      tep_db_query("insert into " . TABLE_SPECIALS . " (products_id, specials_new_products_price, specials_date_added, expires_date, status) values ('" . (int)$products_id . "', '" . tep_db_input($specials_price) . "', now(), '" . tep_db_input($expires_date) . "', '1')"); */
+        tep_db_query("insert into " . TABLE_SPECIALS . " (products_id, specials_new_products_price, specials_date_added, expires_date, status, customers_group_id) values ('" . (int)$products_id . "', '" . tep_db_input($specials_price) . "', now(), '" . tep_db_input($expires_date) . "', '1', " . (int)$customers_group . ")");
 // EOF: MOD - Separate Pricing Per Customer
         tep_redirect(tep_href_link(FILENAME_SPECIALS, 'page=' . $HTTP_GET_VARS['page']));
         break;
@@ -166,7 +166,7 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
     } 
 */
       $specials_array = array();
-      $specials_query = tep_db_query("select p.products_id, s.customers_group_id from " .  TABLE_PRODUCTS . " p, " . TABLE_SPECIALS . " s where s.products_id = p.products_id");
+      $specials_query = tep_db_query("select p.products_id, s.customers_group_id from " . TABLE_PRODUCTS . " p, " . TABLE_SPECIALS . " s where s.products_id = p.products_id");
       while ($specials = tep_db_fetch_array($specials_query)) {
         $specials_array[] = (int)$specials['products_id'].":".(int)$specials['customers_group_id'];
       }
@@ -271,7 +271,7 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
         echo '                  <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_SPECIALS, 'page=' . $HTTP_GET_VARS['page'] . '&sID=' . $specials['specials_id']) . '\'">' . "\n";
       }
 ?>
-                <td  class="dataTableContent"><?php echo $specials['products_name']; ?></td>
+                <td class="dataTableContent"><?php echo $specials['products_name']; ?></td>
 <?php /* LINE MOD Separate Pricing Per Customer added "$all_groups[$specials['customers_group_id']]" */ ?>
                 <td  class="dataTableContent" align="right"><span class="oldPrice"><?php echo $currencies->format($specials['products_price']); ?></span> <span class="specialPrice"><?php echo $currencies->format($specials['specials_new_products_price'])." (".$all_groups[$specials['customers_group_id']].")"; ?></span></td>
                 <td  class="dataTableContent" align="right">

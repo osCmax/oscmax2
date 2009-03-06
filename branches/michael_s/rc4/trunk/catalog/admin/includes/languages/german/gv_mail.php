@@ -15,7 +15,7 @@ define('HEADING_TITLE', 'Gutschein an Kunden versenden');
 define('TEXT_CUSTOMER', 'Kunde:');
 define('TEXT_SUBJECT', 'Betreff:');
 define('TEXT_FROM', 'Absender:');
-define('TEXT_TO', 'eMail an:');
+define('TEXT_TO', 'E-Mail an:');
 define('TEXT_AMOUNT', 'Betrag:');
 define('TEXT_MESSAGE', 'Nachricht:');
 define('TEXT_SINGLE_EMAIL', '<span class="smallText">Use this for sending single emails, otherwise use dropdown above</span>');
@@ -28,15 +28,15 @@ define('ERROR_NO_CUSTOMER_SELECTED', 'Fehler: Es wurde kein Kunde ausgew&auml;hl
 define('ERROR_NO_AMOUNT_SELECTED', 'Fehler: Sie haben keinen Betrag f&uuml;r den Gutschein eingegeben.');
 
 define('TEXT_GV_WORTH', 'Gutscheinwert ');
-define('TEXT_TO_REDEEM', 'Um den Gutschein einzulsen, klicken Sie auf den unten stehenden Link. Bitte notieren Sie sich den Gutschein-Code.');
-define('TEXT_WHICH_IS', 'welches ist');
-define('TEXT_IN_CASE', ' falls Sie Probleme haben.');
-define('TEXT_OR_VISIT', 'oder besuchen Sie ');
-define('TEXT_ENTER_CODE', ' und geben den Gutschein-Code ein ');
+define('TEXT_TO_REDEEM', 'Um Ihren Gutschein zu verbuchen, klicken Sie auf den unten stehenden Link. Bitte notieren Sie sich zur Sicherheit Ihren persönlichen Gutschein-Code.');
+define('TEXT_WHICH_IS', 'Ihr Gutscheincode lautet: ');
+define('TEXT_IN_CASE', ' Falls es wider Erwarten zu Problemen beim verbuchen kommen sollte.');
+define('TEXT_OR_VISIT', 'besuchen Sie unsere Webseite');
+define('TEXT_ENTER_CODE', ' und geben den Gutschein-Code bitte manuell ein ');
 
-define ('TEXT_REDEEM_COUPON_MESSAGE_HEADER', 'You recently purchasd a Gift Voucher from our site, for security reasons, the amount of the Gift Voucher was not immediatley credited to you. The shop owner has now released this amount.');
-define ('TEXT_REDEEM_COUPON_MESSAGE_AMOUNT', "\n\n" . 'The value of the Gift Voucher was %s');
-define ('TEXT_REDEEM_COUPON_MESSAGE_BODY', "\n\n" . 'You can now visit our site, login and send the Gift Voucher amount to anyone you want.');
+define ('TEXT_REDEEM_COUPON_MESSAGE_HEADER', 'Sie haben in unserem Webshop einen Gutschein gekauft, welcher aus Sicherheitsgründen nicht sofort freigeschaltet wurde. Dieses Guthaben steht Ihnen nun zur Verfügung.');
+define ('TEXT_REDEEM_COUPON_MESSAGE_AMOUNT', "\n\n" . 'Der Wert Ihres Gutscheines beträgt %s');
+define ('TEXT_REDEEM_COUPON_MESSAGE_BODY', "\n\n" . 'Sie können nun über Ihren persönlichen Account den Gutschein versenden.');
 define ('TEXT_REDEEM_COUPON_MESSAGE_FOOTER', "\n\n");
 //Added line
 define ('TEXT_EMAIL_BUTTON_TEXT', 'The Back Button is Disabled when using the WYSIWYG editor');

@@ -52,7 +52,7 @@ $Id: column_left.php 3 2006-05-27 04:59:07Z user $
   if (tep_admin_check_boxes('affiliate.php') == true) {
     require(DIR_WS_BOXES . 'affiliate.php');
   }
-// ADDED: Coupon - ICW CREDIT CLASS GV SYSTEM
+// ADDED: CREDIT CLASS Gift Voucher Contribution
   if (tep_admin_check_boxes('gv_admin.php') == true) {
     require(DIR_WS_BOXES . 'gv_admin.php');
   }

@@ -1,4 +1,15 @@
 <?php
+/*
+$Id: packaging.php 1 2009-01-20 04:59:07Z user $
+
+  osCMax Power E-Commerce
+  http://oscdox.com
+
+  Copyright 2008 osCMax
+
+  Released under the GNU General Public License
+*/
+
 	define('CONFIRM_DELETE', 'Are you sure you want to remove this package?');
 	define('DELETE_PACKAGE', 'Delete package');
 	define('CREATE_NEW_PACKAGE', 'Create new package');

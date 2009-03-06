@@ -1,6 +1,7 @@
 <?php
 /*
 $Id: information.php 3 2006-05-27 04:59:07Z user $
+
   osCMax Power E-Commerce
   http://oscdox.com
 

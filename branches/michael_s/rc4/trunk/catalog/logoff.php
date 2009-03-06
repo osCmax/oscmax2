@@ -32,10 +32,12 @@ $Id: logoff.php 3 2006-05-27 04:59:07Z user $
   tep_session_unregister('customer_country_id');
   tep_session_unregister('customer_zone_id');
   tep_session_unregister('comments');
-// BOF: MOD - ICW - logout -> unregister GIFT VOUCHER sessions
+  
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   tep_session_unregister('gv_id');
   tep_session_unregister('cc_id');
-// EOF: MOD - ICW - logout -> unregister GIFT VOUCHER sessions
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
   $cart->reset();
   
 // BOF: MOD - Wishlist 3.5

@@ -14,7 +14,7 @@ $Id: gv_sent.php 14 2006-07-28 17:42:07Z user $
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Gutscheine versandt');
+define('HEADING_TITLE', 'Gutscheine versenden');
 
 define('TABLE_HEADING_SENDERS_NAME', 'Absender');
 define('TABLE_HEADING_VOUCHER_VALUE', 'Gutscheinwert');

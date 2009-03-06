@@ -4,11 +4,12 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
-
+define('TEXT_COUPON_REDEEMED', 'Redeemed Coupons');
+define('REDEEM_DATE_LAST', 'Date Last Redeemed');
 define('TOP_BAR_TITLE', 'Statistics');
 define('HEADING_TITLE', 'Discount Coupons');
 define('HEADING_TITLE_STATUS', 'Status : ');
@@ -79,4 +80,12 @@ define('COUPON_USES_COUPON_HELP', 'The maximum number of times the coupon can be
 define('COUPON_USES_USER_HELP', 'Number of times a user can use the coupon, leave blank for no limit.');
 define('COUPON_PRODUCTS_HELP', 'A comma separated list of product_ids that this coupon can be used with. Leave blank for no restrictions.');
 define('COUPON_CATEGORIES_HELP', 'A comma separated list of cpaths that this coupon can be used with, leave blank for no restrictions.');
+define('ERROR_NO_COUPON_AMOUNT', 'Error: No coupon amount has been entered. Either enter an amount or select free shipping.');
+define('ERROR_COUPON_EXISTS', 'Error: A coupon with the same coupon code already exists.');
+define('COUPON_BUTTON_EMAIL_VOUCHER', 'Email Voucher');
+define('COUPON_BUTTON_EDIT_VOUCHER', 'Edit Voucher');
+define('COUPON_BUTTON_DELETE_VOUCHER', 'Delete Voucher');
+define('COUPON_BUTTON_VOUCHER_REPORT', 'Voucher Report');
+define('COUPON_STATUS', 'Status');
+define('COUPON_STATUS_HELP', 'Set to ' . IMAGE_ICON_STATUS_RED . ' to disable customers\' ability to use the coupon.');
 ?>

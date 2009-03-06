@@ -256,7 +256,7 @@ function check_form() {
  } // end for ($i = 0, $n = sizeof($directory_array); $i < $n; $i++)
 ?>
 	   <tr>
-            <td class="main" style="padding-left: 30px; padding-right: 10px; padding-top: 10px;"><?php echo ENTRY_PAYMENT_SET_EXPLAIN ?></td>
+           <td class="main" style="padding-left: 30px; padding-right: 10px; padding-top: 10px;"><?php echo ENTRY_PAYMENT_SET_EXPLAIN ?></td>
            </tr>
         </table></td>
       </tr>
@@ -452,15 +452,15 @@ function check_form() {
 
   for ($y = 0; $y < sizeof($installed_modules) ; $y++) {
 ?>
-	   <tr>
+	        <tr>
             <td class="main"><?php echo tep_draw_checkbox_field('payment_allowed[' . $y . ']', $installed_modules[$y]['file_name'] , 0); ?>&#160;&#160;<?php echo $installed_modules[$y]['title']; ?></td>
-           </tr>
+          </tr>
 <?php
  } // end for ($y = 0; $y < sizeof($installed_modules) ; $y++)
 ?>
-	   <tr>
+	        <tr>
             <td class="main" style="padding-left: 30px; padding-right: 10px; padding-top: 10px;"><?php echo ENTRY_PAYMENT_SET_EXPLAIN ?></td>
-           </tr>
+          </tr>
         </table></td>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>

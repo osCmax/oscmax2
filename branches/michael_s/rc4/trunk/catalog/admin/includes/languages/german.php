@@ -492,7 +492,7 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Warning: File uploads are disabled in t
 // LINE ADDED - XSell
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Products'); // X-Sell
 
-// LINE ADDED -  Credit Class GV
+// LINE ADDED - CREDIT CLASS Gift Voucher Contribution
 REQUIRE(DIR_WS_LANGUAGES . 'add_ccgvdc_german.php');
 
 // BOF: MOD - Article Manager

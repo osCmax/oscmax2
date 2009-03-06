@@ -385,11 +385,11 @@ $Id: orders.php 14 2006-07-28 17:42:07Z user $
 <?php
     if ($order->info['payment_method'] == 'paypal'  && isset($HTTP_GET_VARS['refer']) && $HTTP_GET_VARS['refer'] == 'ipn'){
 ?>
-           <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $HTTP_GET_VARS['oID']) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $HTTP_GET_VARS['oID']) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_PAYPAL_IPN, tep_get_all_get_params(array('action','oID','refer'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
+        <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $HTTP_GET_VARS['oID']) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $HTTP_GET_VARS['oID']) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_PAYPAL_IPN, tep_get_all_get_params(array('action','oID','refer'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
 <?php
     } else {
 ?>
-       <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS_EDIT, 'oID=' . $_GET['oID']) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('action'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a> '; ?></td>
+        <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS_EDIT, 'oID=' . $_GET['oID']) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('action'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a> '; ?></td>
 <?php
     }//else not paypal
 // EOF: MOD - PayPal IPN ?>
@@ -487,46 +487,46 @@ $Id: orders.php 14 2006-07-28 17:42:07Z user $
       if (isset($oInfo) && is_object($oInfo)) {
         $heading[] = array('text' => '<b>[' . $oInfo->orders_id . ']&nbsp;&nbsp;' . tep_datetime_short($oInfo->date_purchased) . '</b>');
 
-// BOF: MOD - FedEx 
+// BOF: MOD - FedEx
 // first determine whether this is on the test or production server to send
 // in the url (there may be a better place to do this...)
-	$value_query = tep_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_SHIPPING_FEDEX1_SERVER'");
-	$value = tep_db_fetch_array($value_query);
-	$fedex_gateway = $value['configuration_value'];	
+        $value_query = tep_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_SHIPPING_FEDEX1_SERVER'");
+        $value = tep_db_fetch_array($value_query);
+        $fedex_gateway = $value['configuration_value'];
 
 // check for a fedex tracking number in the order record
 // if yes tracking number, show "fedex label," "track" and "cancel" options
-	$fedex_tracking = $oInfo->fedex_tracking;
+        $fedex_tracking = $oInfo->fedex_tracking;
 
-// get the current order status				
-	$check_fedex_status_query = tep_db_query("select orders_status from " . TABLE_ORDERS . " where orders_id = '" . $oInfo->orders_id . "'");
-	$check_fedex_status = tep_db_fetch_array($check_fedex_status_query);
+// get the current order status
+        $check_fedex_status_query = tep_db_query("select orders_status from " . TABLE_ORDERS . " where orders_id = '" . $oInfo->orders_id . "'");
+        $check_fedex_status = tep_db_fetch_array($check_fedex_status_query);
 
-	if ($fedex_tracking) {
+        if ($fedex_tracking) {
 // display the label
           $contents[] = array('align' => 'center', 'text' => '<a href="fedex_popup.php?num=' . $fedex_tracking . '&oID=' . $oInfo->orders_id . '">' . tep_image_button('button_fedex_label.gif', IMAGE_ORDERS_FEDEX_LABEL) . '</a>');
-					
+
 // track the package (no gateway needs to be specified)
           $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_TRACK_FEDEX, 'oID=' .$oInfo->orders_id . '&num=' . $fedex_tracking) . '&fedex_gateway=track">' . tep_image_button('button_track.gif', IMAGE_ORDERS_TRACK) . '</a>');
 
-// cancel the request				
-					
+// cancel the request
+
           $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SHIP_FEDEX, 'oID=' .$oInfo->orders_id . '&num=' . $fedex_tracking . '&action=cancel&fedex_gateway=' . $fedex_gateway) . '" onClick="return(window.confirm(\'Cancel shipment of order number ' . $oInfo->orders_id . '?\'));">' . tep_image_button('button_cancel_shipment.gif', IMAGE_ORDERS_CANCEL_SHIPMENT) . '</a>');
         }
 // if no fedex tracking number, AND if the order has not been manually marked "delivered,"
 // display the "ship" button
 
-        elseif ((!$fedex_tracking) && (($check_fedex_status['orders_status']) != 3)) {			
-          $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SHIP_FEDEX, 'oID=' .$oInfo->orders_id . '&action=new&status=3') . '">' . tep_image_button('button_ship.gif', IMAGE_ORDERS_SHIP) . '</a>');
-        }
-// EOF: MOD - FedEx 
-       $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=edit') . '">' . tep_image_button('button_details.gif', IMAGE_DETAILS) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
-$contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $oInfo->orders_id) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $oInfo->orders_id) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_EDIT, 'oID=' . $oInfo->orders_id) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a>');
-$contents[] = array('text' => '<br>' . TEXT_DATE_ORDER_CREATED . ' ' . tep_date_short($oInfo->date_purchased));
-        if (tep_not_null($oInfo->last_modified)) $contents[] = array('text' => TEXT_DATE_ORDER_LAST_MODIFIED . ' ' . tep_date_short($oInfo->last_modified));
-        $contents[] = array('text' => '<br>' . TEXT_INFO_PAYMENT_METHOD . ' '  . $oInfo->payment_method);
+      } elseif ((!$fedex_tracking) && (($check_fedex_status['orders_status']) != 3)) {
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SHIP_FEDEX, 'oID=' .$oInfo->orders_id . '&action=new&status=3') . '">' . tep_image_button('button_ship.gif', IMAGE_ORDERS_SHIP) . '</a>');
       }
-      break;
+// EOF: MOD - FedEx
+      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=edit') . '">' . tep_image_button('button_details.gif', IMAGE_DETAILS) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $oInfo->orders_id) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $oInfo->orders_id) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_EDIT, 'oID=' . $oInfo->orders_id) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a>');
+      $contents[] = array('text' => '<br>' . TEXT_DATE_ORDER_CREATED . ' ' . tep_date_short($oInfo->date_purchased));
+      if (tep_not_null($oInfo->last_modified)) $contents[] = array('text' => TEXT_DATE_ORDER_LAST_MODIFIED . ' ' . tep_date_short($oInfo->last_modified));
+      $contents[] = array('text' => '<br>' . TEXT_INFO_PAYMENT_METHOD . ' '  . $oInfo->payment_method);
+    }
+    break;
   }
 
   if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {

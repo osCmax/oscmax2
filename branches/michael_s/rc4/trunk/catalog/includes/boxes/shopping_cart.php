@@ -96,9 +96,7 @@ window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,m
   }
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
-
 include (bts_select('boxes', $box_base_name)); // BTS 1.5
-
 
   $boxLink = '';
 

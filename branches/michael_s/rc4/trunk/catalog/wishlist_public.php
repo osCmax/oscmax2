@@ -25,17 +25,11 @@ if((isset($_GET['public_id'])) && ($_GET['public_id'] == '')) {
 
   $public_id = $_GET['public_id'];
 
-/*******************************************************************
-****************** QUERY CUSTOMER INFO FROM ID *********************
-*******************************************************************/
-
+// QUERY CUSTOMER INFO FROM ID
  	$customer_query = tep_db_query("select customers_firstname from " . TABLE_CUSTOMERS . " where customers_id = '" . $public_id . "'");
 	$customer = tep_db_fetch_array($customer_query);
 
-/*******************************************************************
-****************** ADD PRODUCT TO SHOPPING CART ********************
-*******************************************************************/
-
+// ADD PRODUCT TO SHOPPING CART
   if (isset($HTTP_POST_VARS['add_wishprod'])) {
 	if(isset($HTTP_POST_VARS['add_prod_x'])) {
 		foreach ($HTTP_POST_VARS['add_wishprod'] as $value) {

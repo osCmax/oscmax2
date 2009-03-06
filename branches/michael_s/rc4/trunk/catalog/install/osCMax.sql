@@ -56,7 +56,7 @@ CREATE TABLE admin (
   admin_email_address varchar(96) NOT NULL,
   admin_password varchar(40) NOT NULL,
   admin_created datetime,
-  admin_modified datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+  admin_modified datetime NOT NULL,
   admin_logdate datetime,
   admin_lognum int NOT NULL DEFAULT '0',
   PRIMARY KEY (admin_id),
@@ -85,33 +85,33 @@ CREATE TABLE admin_groups (
 DROP TABLE IF EXISTS affiliate_affiliate;
 CREATE TABLE affiliate_affiliate (
   affiliate_id int NOT NULL auto_increment,
-  affiliate_gender char(1) NOT NULL default '',
-  affiliate_firstname varchar(32) NOT NULL default '',
-  affiliate_lastname varchar(32) NOT NULL default '',
-  affiliate_dob datetime NOT NULL default '0000-00-00 00:00:00',
-  affiliate_email_address varchar(96) NOT NULL default '',
-  affiliate_telephone varchar(32) NOT NULL default '',
-  affiliate_fax varchar(32) NOT NULL default '',
-  affiliate_password varchar(40) NOT NULL default '',
-  affiliate_homepage varchar(96) NOT NULL default '',
-  affiliate_street_address varchar(64) NOT NULL default '',
-  affiliate_suburb varchar(64) NOT NULL default '',
-  affiliate_city varchar(32) NOT NULL default '',
-  affiliate_postcode varchar(10) NOT NULL default '',
-  affiliate_state varchar(32) NOT NULL default '',
+  affiliate_gender char(1) NOT NULL,
+  affiliate_firstname varchar(32) NOT NULL,
+  affiliate_lastname varchar(32) NOT NULL,
+  affiliate_dob datetime NOT NULL,
+  affiliate_email_address varchar(96) NOT NULL,
+  affiliate_telephone varchar(32) NOT NULL,
+  affiliate_fax varchar(32) NOT NULL,
+  affiliate_password varchar(40) NOT NULL,
+  affiliate_homepage varchar(96) NOT NULL,
+  affiliate_street_address varchar(64) NOT NULL,
+  affiliate_suburb varchar(64) NOT NULL,
+  affiliate_city varchar(32) NOT NULL,
+  affiliate_postcode varchar(10) NOT NULL,
+  affiliate_state varchar(32) NOT NULL,
   affiliate_country_id int NOT NULL default '0',
   affiliate_zone_id int NOT NULL default '0',
   affiliate_agb tinyint(4) NOT NULL default '0',
-  affiliate_company varchar(60) NOT NULL default '',
-  affiliate_company_taxid varchar(64) NOT NULL default '',
+  affiliate_company varchar(60) NOT NULL,
+  affiliate_company_taxid varchar(64) NOT NULL,
   affiliate_commission_percent decimal(4,2) NOT NULL default '0.00',
-  affiliate_payment_check varchar(100) NOT NULL default '',
-  affiliate_payment_paypal varchar(64) NOT NULL default '',
-  affiliate_payment_bank_name varchar(64) NOT NULL default '',
-  affiliate_payment_bank_branch_number varchar(64) NOT NULL default '',
-  affiliate_payment_bank_swift_code varchar(64) NOT NULL default '',
-  affiliate_payment_bank_account_name varchar(64) NOT NULL default '',
-  affiliate_payment_bank_account_number varchar(64) NOT NULL default '',
+  affiliate_payment_check varchar(100) NOT NULL,
+  affiliate_payment_paypal varchar(64) NOT NULL,
+  affiliate_payment_bank_name varchar(64) NOT NULL,
+  affiliate_payment_bank_branch_number varchar(64) NOT NULL,
+  affiliate_payment_bank_swift_code varchar(64) NOT NULL,
+  affiliate_payment_bank_account_name varchar(64) NOT NULL,
+  affiliate_payment_bank_account_number varchar(64) NOT NULL,
   affiliate_date_of_last_logon datetime NOT NULL default '0000-00-00 00:00:00',
   affiliate_number_of_logons int NOT NULL default '0',
   affiliate_date_account_created datetime NOT NULL default '0000-00-00 00:00:00',
@@ -126,11 +126,11 @@ CREATE TABLE affiliate_affiliate (
 DROP TABLE IF EXISTS affiliate_banners;
 CREATE TABLE affiliate_banners (
   affiliate_banners_id int NOT NULL auto_increment,
-  affiliate_banners_title varchar(64) NOT NULL default '',
+  affiliate_banners_title varchar(64) NOT NULL,
   affiliate_products_id int NOT NULL default '0',
-  affiliate_category_id int(11) NOT NULL default '0',
-  affiliate_banners_image varchar(64) NOT NULL default '',
-  affiliate_banners_group varchar(10) NOT NULL default '',
+  affiliate_category_id int NOT NULL default '0',
+  affiliate_banners_image varchar(64) NOT NULL,
+  affiliate_banners_group varchar(10) NOT NULL,
   affiliate_banners_html_text text,
   affiliate_expires_impressions int(7) default '0',
   affiliate_expires_date datetime default NULL,
@@ -169,7 +169,7 @@ CREATE TABLE affiliate_clickthroughs (
 
 DROP TABLE IF EXISTS affiliate_news;
 CREATE TABLE affiliate_news (
-  news_id int(11) NOT NULL auto_increment,
+  news_id int NOT NULL auto_increment,
   date_added datetime NOT NULL default '0000-00-00 00:00:00',
   news_status tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (news_id)
@@ -177,10 +177,10 @@ CREATE TABLE affiliate_news (
 
 DROP TABLE IF EXISTS affiliate_newsletters;
 CREATE TABLE affiliate_newsletters (
-  affiliate_newsletters_id int(11) NOT NULL auto_increment,
-  title varchar(255) NOT NULL default '',
+  affiliate_newsletters_id int NOT NULL auto_increment,
+  title varchar(255) NOT NULL,
   content text NOT NULL,
-  module varchar(255) NOT NULL default '',
+  module varchar(255) NOT NULL,
   date_added datetime NOT NULL default '0000-00-00 00:00:00',
   date_sent datetime default NULL,
   `status` int(1) default NULL,
@@ -190,10 +190,10 @@ CREATE TABLE affiliate_newsletters (
 
 DROP TABLE IF EXISTS affiliate_news_contents;
 CREATE TABLE affiliate_news_contents (
-  affiliate_news_contents_id int(11) NOT NULL auto_increment,
-  affiliate_news_id int(11) NOT NULL default '0',
-  affiliate_news_languages_id int(11) NOT NULL default '0',
-  affiliate_news_headlines varchar(255) NOT NULL default '',
+  affiliate_news_contents_id int NOT NULL auto_increment,
+  affiliate_news_id int NOT NULL default '0',
+  affiliate_news_languages_id int NOT NULL default '0',
+  affiliate_news_headlines varchar(255) NOT NULL,
   affiliate_news_contents text NOT NULL,
   PRIMARY KEY  (affiliate_news_contents_id),
   KEY affiliate_news_id (affiliate_news_id),
@@ -210,14 +210,14 @@ CREATE TABLE affiliate_payment (
   affiliate_payment_date datetime NOT NULL default '0000-00-00 00:00:00',
   affiliate_payment_last_modified datetime NOT NULL default '0000-00-00 00:00:00',
   affiliate_payment_status int(5) NOT NULL default '0',
-  affiliate_firstname varchar(32) NOT NULL default '',
-  affiliate_lastname varchar(32) NOT NULL default '',
-  affiliate_street_address varchar(64) NOT NULL default '',
-  affiliate_suburb varchar(64) NOT NULL default '',
-  affiliate_city varchar(32) NOT NULL default '',
-  affiliate_postcode varchar(10) NOT NULL default '',
+  affiliate_firstname varchar(32) NOT NULL,
+  affiliate_lastname varchar(32) NOT NULL,
+  affiliate_street_address varchar(64) NOT NULL,
+  affiliate_suburb varchar(64) NOT NULL,
+  affiliate_city varchar(32) NOT NULL,
+  affiliate_postcode varchar(10) NOT NULL,
   affiliate_country varchar(32) NOT NULL default '0',
-  affiliate_company varchar(60) NOT NULL default '',
+  affiliate_company varchar(60) NOT NULL,
   affiliate_state varchar(32) NOT NULL default '0',
   affiliate_address_format_id int(5) NOT NULL default '0',
   affiliate_last_modified datetime NOT NULL default '0000-00-00 00:00:00',
@@ -229,7 +229,7 @@ DROP TABLE IF EXISTS affiliate_payment_status;
 CREATE TABLE affiliate_payment_status (
   affiliate_payment_status_id int NOT NULL default '0',
   affiliate_language_id int NOT NULL default '1',
-  affiliate_payment_status_name varchar(32) NOT NULL default '',
+  affiliate_payment_status_name varchar(32) NOT NULL,
   PRIMARY KEY (affiliate_payment_status_id,affiliate_language_id),
   KEY idx_affiliate_payment_status_name (affiliate_payment_status_name)
 );
@@ -250,25 +250,24 @@ DROP TABLE IF EXISTS affiliate_sales;
 CREATE TABLE affiliate_sales (
   affiliate_id int NOT NULL default '0',
   affiliate_date datetime NOT NULL default '0000-00-00 00:00:00',
-  affiliate_browser varchar(100) NOT NULL default '',
-  affiliate_ipaddress varchar(20) NOT NULL default '',
+  affiliate_browser varchar(100) NOT NULL,
+  affiliate_ipaddress varchar(20) NOT NULL,
   affiliate_orders_id int NOT NULL default '0',
   affiliate_value decimal(15,2) NOT NULL default '0.00',
   affiliate_payment decimal(15,2) NOT NULL default '0.00',
   affiliate_clickthroughs_id int NOT NULL default '0',
   affiliate_billing_status int(5) NOT NULL default '0',
-  affiliate_payment_date datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_payment_date datetime NOT NULL,
   affiliate_payment_id int NOT NULL default '0',
   affiliate_percent decimal(4,2) NOT NULL default '0.00',
   affiliate_salesman int NOT NULL default '0',
   PRIMARY KEY (affiliate_orders_id,affiliate_id)
 );
 
-
 DROP TABLE IF EXISTS articles;
 CREATE TABLE articles (
   articles_id int NOT NULL auto_increment,
-  articles_date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  articles_date_added datetime NOT NULL,
   articles_last_modified datetime,
   articles_date_available datetime,
   articles_status tinyint(1) NOT NULL default '0',
@@ -389,9 +388,9 @@ CREATE TABLE cache (
   cache_global tinyint(1) NOT NULL default '1',
   cache_gzip tinyint(1) NOT NULL default '1',
   cache_method varchar(20) NOT NULL default 'RETURN',
-  cache_date datetime NOT NULL default '0000-00-00 00:00:00',
-  cache_expires datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (cache_id,cache_language_id),
+  cache_date datetime NOT NULL,
+  cache_expires datetime NOT NULL,
+  PRIMARY KEY (cache_id, cache_language_id),
   KEY cache_id (cache_id),
   KEY cache_language_id (cache_language_id),
   KEY cache_global (cache_global)
@@ -506,7 +505,7 @@ CREATE TABLE coupon_email_track (
   sent_firstname varchar(32) default NULL,
   sent_lastname varchar(32) default NULL,
   emailed_to varchar(32) default NULL,
-  date_sent datetime NOT NULL default '0000-00-00 00:00:00',
+  date_sent datetime NOT NULL,
   PRIMARY KEY (unique_id)
 );
 
@@ -524,7 +523,7 @@ CREATE TABLE coupon_gv_queue (
   customer_id int(5) NOT NULL default '0',
   order_id int(5) NOT NULL default '0',
   amount decimal(8,4) NOT NULL default '0.0000',
-  date_created datetime NOT NULL default '0000-00-00 00:00:00',
+  date_created datetime NOT NULL,
   ipaddr varchar(32) NOT NULL,
   release_flag char(1) NOT NULL default 'N',
   PRIMARY KEY (unique_id),
@@ -632,10 +631,15 @@ CREATE TABLE customers_info (
 
 DROP TABLE IF EXISTS customers_wishlist;
 CREATE TABLE customers_wishlist (
-  products_id tinytext NOT NULL,
-  customers_id int(13) NOT NULL default '0'
-) TYPE=MyISAM;
-
+  products_id int NOT NULL,
+  customers_id int NOT NULL,
+  products_model varchar(13),
+  products_name varchar(64) NOT NULL,
+  products_price decimal(8,2) DEFAULT '0.00' NOT NULL,
+  final_price decimal(8,2) DEFAULT '0.00' NOT NULL,
+  products_quantity int(2) NOT NULL default '0',
+  wishlist_name varchar(64) 
+);
 
 DROP TABLE IF EXISTS customers_wishlist_attributes;
 CREATE TABLE customers_wishlist_attributes (
@@ -653,7 +657,7 @@ CREATE TABLE geo_zones (
   geo_zone_name varchar(32) NOT NULL,
   geo_zone_description varchar(255) NOT NULL,
   last_modified datetime,
-  date_added datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+  date_added datetime NOT NULL,
   PRIMARY KEY (geo_zone_id)
 );
 
@@ -805,7 +809,7 @@ CREATE TABLE orders_products_download (
   orders_products_download_id int NOT NULL auto_increment,
   orders_id int NOT NULL default '0',
   orders_products_id int NOT NULL default '0',
-  orders_products_filename varchar(255) NOT NULL default '',
+  orders_products_filename varchar(255) NOT NULL,
   download_maxdays int(2) NOT NULL default '0',
   download_count int(2) NOT NULL default '0',
   PRIMARY KEY (orders_products_download_id),
@@ -895,7 +899,7 @@ CREATE TABLE paypal_ipn (
   txn_id varchar(17) NOT NULL,
   notify_version varchar(17) NOT NULL,
   verify_sign varchar(64) NOT NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  date_added datetime NOT NULL,
   PRIMARY KEY (paypal_ipn_id,txn_id),
   KEY idx_paypal_ipn_paypal_ipn_id (paypal_ipn_id)
 );
@@ -940,7 +944,7 @@ CREATE TABLE products_attributes (
 DROP TABLE IF EXISTS products_attributes_download;
 CREATE TABLE products_attributes_download (
   products_attributes_id int NOT NULL,
-  products_attributes_filename varchar(255) NOT NULL default '',
+  products_attributes_filename varchar(255) NOT NULL,
   products_attributes_maxdays int(2) default '0',
   products_attributes_maxcount int(2) default '0',
   PRIMARY KEY (products_attributes_id)
@@ -950,7 +954,7 @@ DROP TABLE IF EXISTS products_description;
 CREATE TABLE products_description (
   products_id int NOT NULL auto_increment,
   language_id int NOT NULL default '1',
-  products_name varchar(64) NOT NULL default '',
+  products_name varchar(64) NOT NULL,
   products_description text,
   products_url varchar(255) default NULL,
   products_viewed int(5) default '0',
@@ -1087,7 +1091,7 @@ CREATE TABLE search_queries_sorted (
 DROP TABLE IF EXISTS sessions;
 CREATE TABLE sessions (
   sesskey varchar(32) NOT NULL,
-  expiry int(11) unsigned NOT NULL,
+  expiry int unsigned NOT NULL,
   value text NOT NULL,
   PRIMARY KEY (sesskey)
 );
@@ -1223,7 +1227,8 @@ CREATE TABLE zones (
   zone_code varchar(32) NOT NULL,
   zone_name varchar(32) NOT NULL,
   PRIMARY KEY (zone_id),
-  KEY idx_zones_country_id (zone_country_id)
+  KEY idx_zones_country_id (zone_country_id),
+  KEY idx_zones_to_geo_zones_country_id (zone_country_id)
 );
 
 DROP TABLE IF EXISTS zones_to_geo_zones;
@@ -1248,128 +1253,128 @@ INSERT INTO address_format VALUES (3,'$firstname $lastname$cr$streets$cr$city$cr
 INSERT INTO address_format VALUES (4,'$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country','$postcode / $country');
 INSERT INTO address_format VALUES (5,'$firstname $lastname$cr$streets$cr$postcode $city$cr$country','$city / $country');
 
-# INSERT INTO admin (admin_id, admin_groups_id, admin_firstname, admin_lastname, admin_email_address, admin_password, admin_created, admin_modified, admin_logdate, admin_lognum) VALUES ('1', '1', 'Default', 'Admin', 'admin@localhost.com', '05cdeb1aeaffec1c7ae3f12c570a658c:81', '2003-07-17 11:35:03', '2003-08-02 19:43:11', '2005-09-18 21:02:52', '1');
-
-INSERT INTO admin_files VALUES (1, 'administrator.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (2, 'configuration.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (3, 'catalog.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (4, 'modules.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (5, 'customers.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (6, 'taxes.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (7, 'localization.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (8, 'reports.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (9, 'tools.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (10, 'admin_members.php', 0, 1, '1');
-INSERT INTO admin_files VALUES (11, 'admin_files.php', 0, 1, '1');
-INSERT INTO admin_files VALUES (12, 'configuration.php', 0, 2, '1');
-INSERT INTO admin_files VALUES (13, 'categories.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (14, 'products_attributes.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (15, 'manufacturers.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (16, 'reviews.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (17, 'specials.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (18, 'products_expected.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (19, 'modules.php', 0, 4, '1');
-INSERT INTO admin_files VALUES (20, 'customers.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (21, 'orders.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (22, 'countries.php', 0, 6, '1');
-INSERT INTO admin_files VALUES (23, 'zones.php', 0, 6, '1');
-INSERT INTO admin_files VALUES (24, 'geo_zones.php', 0, 6, '1');
-INSERT INTO admin_files VALUES (25, 'tax_classes.php', 0, 6, '1');
-INSERT INTO admin_files VALUES (26, 'tax_rates.php', 0, 6, '1');
-INSERT INTO admin_files VALUES (27, 'currencies.php', 0, 7, '1');
-INSERT INTO admin_files VALUES (28, 'languages.php', 0, 7, '1');
-INSERT INTO admin_files VALUES (29, 'orders_status.php', 0, 7, '1');
-INSERT INTO admin_files VALUES (30, 'stats_products_viewed.php', 0, 8, '1');
-INSERT INTO admin_files VALUES (31, 'stats_products_purchased.php', 0, 8, '1');
-INSERT INTO admin_files VALUES (32, 'stats_customers.php', 0, 8, '1');
-INSERT INTO admin_files VALUES (33, 'backup.php', 0, 9, '1');
-INSERT INTO admin_files VALUES (34, 'banner_manager.php', 0, 9, '1');
-INSERT INTO admin_files VALUES (35, 'cache.php', 0, 9, '1');
-INSERT INTO admin_files VALUES (36, 'define_language.php', 0, 9, '1');
-INSERT INTO admin_files VALUES (37, 'file_manager.php', 0, 9, '1');
-INSERT INTO admin_files VALUES (38, 'mail.php', 0, 9, '1');
-INSERT INTO admin_files VALUES (39, 'newsletters.php', 0, 9, '1');
-INSERT INTO admin_files VALUES (40, 'server_info.php', 0, 9, '1');
-INSERT INTO admin_files VALUES (41, 'whos_online.php', 0, 9, '1');
-INSERT INTO admin_files VALUES (42, 'banner_statistics.php', 0, 9, '1');
-INSERT INTO admin_files VALUES (43, 'affiliate.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (44, 'affiliate_affiliates.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (45, 'affiliate_clicks.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (46, 'affiliate_banners.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (47, 'affiliate_contact.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (48, 'affiliate_invoice.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (49, 'affiliate_payment.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (50, 'affiliate_popup_image.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (51, 'affiliate_sales.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (52, 'affiliate_statistics.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (53, 'affiliate_summary.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (54, 'gv_admin.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (55, 'coupon_admin.php', 0, 54, '1');
-INSERT INTO admin_files VALUES (56, 'gv_queue.php', 0, 54, '1');
-INSERT INTO admin_files VALUES (57, 'gv_mail.php', 0, 54, '1');
-INSERT INTO admin_files VALUES (58, 'gv_sent.php', 0, 54, '1');
-INSERT INTO admin_files VALUES (59, 'paypalipn.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (60, 'paypalipn_tests.php', 0, 59, '1');
-INSERT INTO admin_files VALUES (61, 'paypalipn_txn.php', 0, 59, '1');
-INSERT INTO admin_files VALUES (62, 'coupon_restrict.php', 0, 54, '1');
-INSERT INTO admin_files VALUES (64, 'xsell_products.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (65, 'easypopulate.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (68, 'define_mainpage.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (70, 'edit_orders.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (71, 'validproducts.php', 0, 54, '1');
-INSERT INTO admin_files VALUES (72, 'validcategories.php', 0, 54, '1');
-INSERT INTO admin_files VALUES (73, 'listcategories.php', 0, 54, '1');
-INSERT INTO admin_files VALUES (74, 'listproducts.php', 0, 54, '1');
-INSERT INTO admin_files VALUES (75, 'new_attributes.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (80, 'paypal_ipn_order.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (78, 'paypal_ipn.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (81, 'articles.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (82, 'article_reviews.php', 0, 81, '1');
-INSERT INTO admin_files VALUES (83, 'articles.php', 0, 81, '1');
-INSERT INTO admin_files VALUES (84, 'articles_config.php', 0, 81, '1');
-INSERT INTO admin_files VALUES (85, 'articles_xsell.php', 0, 81, '1');
-INSERT INTO admin_files VALUES (86, 'authors.php', 0, 81, '1');
-INSERT INTO admin_files VALUES (87, 'recover_cart_sales.php', 0, 8, '1');
-INSERT INTO admin_files VALUES (88, 'stats_recover_cart_sales.php', 0, 8, '1');
-INSERT INTO admin_files VALUES (89, 'stats_monthly_sales.php', 0, 8, '1');
-INSERT INTO admin_files VALUES (90, 'batch_print.php', 0, 9, '1');
-INSERT INTO admin_files VALUES (91, 'stock.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (92, 'stats_low_stock_attrib.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (93, 'info_boxes.php', 1, 0, '1');
-INSERT INTO admin_files VALUES (94, 'infobox_configuration.php', 0, 93, '1');
-INSERT INTO admin_files VALUES (95, 'popup_infobox_help.php', 0, 93, '1');
-INSERT INTO admin_files VALUES (98, 'customers_groups.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (99, 'define_conditions.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (100, 'define_privacy.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (101, 'define_shipping.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (102, 'xsell.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (103, 'create_account.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (104, 'create_account_process.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (105, 'create_account_success.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (106, 'create_order.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (107, 'create_order_process.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (108, 'easypopulate_functions.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (109, 'new_attributes_change.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (110, 'new_attributes_config.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (111, 'new_attributes_functions.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (112, 'new_attributes_include.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (113, 'new_attributes_select.php', 0, 3, '1');
-INSERT INTO admin_files VALUES (114, 'ship_fedex.php', 0, 8, '1');
-INSERT INTO admin_files VALUES (115, 'fedex_popup.php', 0, 8, '1');
-INSERT INTO admin_files VALUES (116, 'shipping_manifest.php', 0, 8, '1');
-INSERT INTO admin_files VALUES (117, 'track_fedex.php', 0, 8, '1');
-INSERT INTO admin_files VALUES (118, 'paypal_info.php', 0, 1, '1');
-INSERT INTO admin_files VALUES (119, 'affiliate_info.php', 0, 1, '1');
-INSERT INTO admin_files VALUES (120, 'domain_info.php', 0, 1, '1');
-INSERT INTO admin_files VALUES (121, 'hosting_info.php', 0, 1, '1');
-INSERT INTO admin_files VALUES (122, 'merchant_info.php', 0, 1, '1');
-INSERT INTO admin_files VALUES (123, 'ssl_info.php', 0, 1, '1');
-INSERT INTO admin_files VALUES (124, 'affiliate_news.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (125, 'affiliate_newsletters.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (126, 'affiliate_validcats.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (127, 'affiliate_validproducts.php', 0, 43, '1');
-INSERT INTO admin_files VALUES (128, 'edit_orders_add_product.php', 0, 5, '1');
-INSERT INTO admin_files VALUES (129, 'edit_orders_ajax.php', 0, 5, '1');
+# INSERT INTO admin VALUES ('1','1','Admin','Default','Admin','admin@localhost.com','05cdeb1aeaffec1c7ae3f12c570a658c:81',now(),NULL,NULL,'1');
+  
+INSERT INTO admin_files VALUES (1,'administrator.php',1,0,'1');
+INSERT INTO admin_files VALUES (2,'configuration.php',1,0,'1');
+INSERT INTO admin_files VALUES (3,'catalog.php',1,0,'1');
+INSERT INTO admin_files VALUES (4,'modules.php',1,0,'1');
+INSERT INTO admin_files VALUES (5,'customers.php',1,0,'1');
+INSERT INTO admin_files VALUES (6,'taxes.php',1,0,'1');
+INSERT INTO admin_files VALUES (7,'localization.php',1,0,'1');
+INSERT INTO admin_files VALUES (8,'reports.php',1,0,'1');
+INSERT INTO admin_files VALUES (9,'tools.php',1,0,'1');
+INSERT INTO admin_files VALUES (10,'admin_members.php',0,1,'1');
+INSERT INTO admin_files VALUES (11,'admin_files.php',0,1,'1');
+INSERT INTO admin_files VALUES (12,'configuration.php',0,2,'1');
+INSERT INTO admin_files VALUES (13,'categories.php',0,3,'1');
+INSERT INTO admin_files VALUES (14,'products_attributes.php',0,3,'1');
+INSERT INTO admin_files VALUES (15,'manufacturers.php',0,3,'1');
+INSERT INTO admin_files VALUES (16,'reviews.php',0,3,'1');
+INSERT INTO admin_files VALUES (17,'specials.php',0,3,'1');
+INSERT INTO admin_files VALUES (18,'products_expected.php',0,3,'1');
+INSERT INTO admin_files VALUES (19,'modules.php',0,4,'1');
+INSERT INTO admin_files VALUES (20,'customers.php',0,5,'1');
+INSERT INTO admin_files VALUES (21,'orders.php',0,5,'1');
+INSERT INTO admin_files VALUES (22,'countries.php',0,6,'1');
+INSERT INTO admin_files VALUES (23,'zones.php',0,6,'1');
+INSERT INTO admin_files VALUES (24,'geo_zones.php',0,6,'1');
+INSERT INTO admin_files VALUES (25,'tax_classes.php',0,6,'1');
+INSERT INTO admin_files VALUES (26,'tax_rates.php',0,6,'1');
+INSERT INTO admin_files VALUES (27,'currencies.php',0,7,'1');
+INSERT INTO admin_files VALUES (28,'languages.php',0,7,'1');
+INSERT INTO admin_files VALUES (29,'orders_status.php',0,7,'1');
+INSERT INTO admin_files VALUES (30,'stats_products_viewed.php',0,8,'1');
+INSERT INTO admin_files VALUES (31,'stats_products_purchased.php',0,8,'1');
+INSERT INTO admin_files VALUES (32,'stats_customers.php',0,8,'1');
+INSERT INTO admin_files VALUES (33,'backup.php',0,9,'1');
+INSERT INTO admin_files VALUES (34,'banner_manager.php',0,9,'1');
+INSERT INTO admin_files VALUES (35,'cache.php',0,9,'1');
+INSERT INTO admin_files VALUES (36,'define_language.php',0,9,'1');
+INSERT INTO admin_files VALUES (37,'file_manager.php',0,9,'1');
+INSERT INTO admin_files VALUES (38,'mail.php',0,9,'1');
+INSERT INTO admin_files VALUES (39,'newsletters.php',0,9,'1');
+INSERT INTO admin_files VALUES (40,'server_info.php',0,9,'1');
+INSERT INTO admin_files VALUES (41,'whos_online.php',0,9,'1');
+INSERT INTO admin_files VALUES (42,'banner_statistics.php',0,9,'1');
+INSERT INTO admin_files VALUES (43,'affiliate.php',1,0,'1');
+INSERT INTO admin_files VALUES (44,'affiliate_affiliates.php',0,43,'1');
+INSERT INTO admin_files VALUES (45,'affiliate_clicks.php',0,43,'1');
+INSERT INTO admin_files VALUES (46,'affiliate_banners.php',0,43,'1');
+INSERT INTO admin_files VALUES (47,'affiliate_contact.php',0,43,'1');
+INSERT INTO admin_files VALUES (48,'affiliate_invoice.php',0,43,'1');
+INSERT INTO admin_files VALUES (49,'affiliate_payment.php',0,43,'1');
+INSERT INTO admin_files VALUES (50,'affiliate_popup_image.php',0,43,'1');
+INSERT INTO admin_files VALUES (51,'affiliate_sales.php',0,43,'1');
+INSERT INTO admin_files VALUES (52,'affiliate_statistics.php',0,43,'1');
+INSERT INTO admin_files VALUES (53,'affiliate_summary.php',0,43,'1');
+INSERT INTO admin_files VALUES (54,'gv_admin.php',1,0,'1');
+INSERT INTO admin_files VALUES (55,'coupon_admin.php',0,54,'1');
+INSERT INTO admin_files VALUES (56,'gv_queue.php',0,54,'1');
+INSERT INTO admin_files VALUES (57,'gv_mail.php',0,54,'1');
+INSERT INTO admin_files VALUES (58,'gv_sent.php',0,54,'1');
+INSERT INTO admin_files VALUES (59,'paypalipn.php',1,0,'1');
+INSERT INTO admin_files VALUES (60,'paypalipn_tests.php',0,59,'1');
+INSERT INTO admin_files VALUES (61,'paypalipn_txn.php',0,59,'1');
+INSERT INTO admin_files VALUES (62,'coupon_restrict.php',0,54,'1');
+INSERT INTO admin_files VALUES (64,'xsell_products.php',0,3,'1');
+INSERT INTO admin_files VALUES (65,'easypopulate.php',0,3,'1');
+INSERT INTO admin_files VALUES (68,'define_mainpage.php',0,3,'1');
+INSERT INTO admin_files VALUES (70,'edit_orders.php',0,5,'1');
+INSERT INTO admin_files VALUES (71,'validproducts.php',0,54,'1');
+INSERT INTO admin_files VALUES (72,'validcategories.php',0,54,'1');
+INSERT INTO admin_files VALUES (73,'listcategories.php',0,54,'1');
+INSERT INTO admin_files VALUES (74,'listproducts.php',0,54,'1');
+INSERT INTO admin_files VALUES (75,'new_attributes.php',0,3,'1');
+INSERT INTO admin_files VALUES (80,'paypal_ipn_order.php',0,5,'1');
+INSERT INTO admin_files VALUES (78,'paypal_ipn.php',0,5,'1');
+INSERT INTO admin_files VALUES (81,'articles.php',1,0,'1');
+INSERT INTO admin_files VALUES (82,'article_reviews.php',0,81,'1');
+INSERT INTO admin_files VALUES (83,'articles.php',0,81,'1');
+INSERT INTO admin_files VALUES (84,'articles_config.php',0,81,'1');
+INSERT INTO admin_files VALUES (85,'articles_xsell.php',0,81,'1');
+INSERT INTO admin_files VALUES (86,'authors.php',0,81,'1');
+INSERT INTO admin_files VALUES (87,'recover_cart_sales.php',0,8,'1');
+INSERT INTO admin_files VALUES (88,'stats_recover_cart_sales.php',0,8,'1');
+INSERT INTO admin_files VALUES (89,'stats_monthly_sales.php',0,8,'1');
+INSERT INTO admin_files VALUES (90,'batch_print.php',0,9,'1');
+INSERT INTO admin_files VALUES (91,'stock.php',0,3,'1');
+INSERT INTO admin_files VALUES (92,'stats_low_stock_attrib.php',0,3,'1');
+INSERT INTO admin_files VALUES (93,'info_boxes.php',1,0,'1');
+INSERT INTO admin_files VALUES (94,'infobox_configuration.php',0,93,'1');
+INSERT INTO admin_files VALUES (95,'popup_infobox_help.php',0,93,'1');
+INSERT INTO admin_files VALUES (98,'customers_groups.php',0,5,'1');
+INSERT INTO admin_files VALUES (99,'define_conditions.php',0,3,'1');
+INSERT INTO admin_files VALUES (100,'define_privacy.php',0,3,'1');
+INSERT INTO admin_files VALUES (101,'define_shipping.php',0,3,'1');
+INSERT INTO admin_files VALUES (102,'xsell.php',0,3,'1');
+INSERT INTO admin_files VALUES (103,'create_account.php',0,5,'1');
+INSERT INTO admin_files VALUES (104,'create_account_process.php',0,5,'1');
+INSERT INTO admin_files VALUES (105,'create_account_success.php',0,5,'1');
+INSERT INTO admin_files VALUES (106,'create_order.php',0,5,'1');
+INSERT INTO admin_files VALUES (107,'create_order_process.php',0,5,'1');
+INSERT INTO admin_files VALUES (108,'easypopulate_functions.php',0,3,'1');
+INSERT INTO admin_files VALUES (109,'new_attributes_change.php',0,3,'1');
+INSERT INTO admin_files VALUES (110,'new_attributes_config.php',0,3,'1');
+INSERT INTO admin_files VALUES (111,'new_attributes_functions.php',0,3,'1');
+INSERT INTO admin_files VALUES (112,'new_attributes_include.php',0,3,'1');
+INSERT INTO admin_files VALUES (113,'new_attributes_select.php',0,3,'1');
+INSERT INTO admin_files VALUES (114,'ship_fedex.php',0,8,'1');
+INSERT INTO admin_files VALUES (115,'fedex_popup.php',0,8,'1');
+INSERT INTO admin_files VALUES (116,'shipping_manifest.php',0,8,'1');
+INSERT INTO admin_files VALUES (117,'track_fedex.php',0,8,'1');
+INSERT INTO admin_files VALUES (118,'paypal_info.php',0,1,'1');
+INSERT INTO admin_files VALUES (119,'affiliate_info.php',0,1,'1');
+INSERT INTO admin_files VALUES (120,'domain_info.php',0,1,'1');
+INSERT INTO admin_files VALUES (121,'hosting_info.php',0,1,'1');
+INSERT INTO admin_files VALUES (122,'merchant_info.php',0,1,'1');
+INSERT INTO admin_files VALUES (123,'ssl_info.php',0,1,'1');
+INSERT INTO admin_files VALUES (124,'affiliate_news.php',0,43,'1');
+INSERT INTO admin_files VALUES (125,'affiliate_newsletters.php',0,43,'1');
+INSERT INTO admin_files VALUES (126,'affiliate_validcats.php',0,43,'1');
+INSERT INTO admin_files VALUES (127,'affiliate_validproducts.php',0,43,'1');
+INSERT INTO admin_files VALUES (128,'edit_orders_add_product.php',0,5,'1');
+INSERT INTO admin_files VALUES (129,'edit_orders_ajax.php',0,5,'1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
@@ -1459,20 +1464,6 @@ INSERT INTO configuration VALUES (67,'State','ACCOUNT_STATE','true','Display sta
 INSERT INTO configuration VALUES (68,'Installed Modules','MODULE_PAYMENT_INSTALLED','','List of payment module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: cc.php;cod.php;paypal.php)','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (69,'Installed Modules','MODULE_ORDER_TOTAL_INSTALLED','ot_subtotal.php;ot_shipping.php;ot_tax.php;ot_loyalty_discount.php;ot_loworderfee.php;ot_coupon.php;ot_gv.php;ot_total.php','List of order_total module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: ot_subtotal.php;ot_tax.php;ot_shipping.php;ot_total.php)','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (70,'Installed Modules','MODULE_SHIPPING_INSTALLED','','List of shipping module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: ups.php;flat.php;item.php)','6','0',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (71,'Enable Cash On Delivery Module','MODULE_PAYMENT_COD_STATUS','True','Do you want to accept Cash On Delevery payments?','6','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), ');
-INSERT INTO configuration VALUES (72,'Payment Zone','MODULE_PAYMENT_COD_ZONE','0','If a zone is selected, only enable this payment method for that zone.','6','2',NULL,now(),'tep_get_zone_class_title','tep_cfg_pull_down_zone_classes(');
-INSERT INTO configuration VALUES (73,'Sort order of display.','MODULE_PAYMENT_COD_SORT_ORDER','0','Sort order of display. Lowest is displayed first.','6','0',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (74,'Set Order Status','MODULE_PAYMENT_COD_ORDER_STATUS_ID','0','Set the status of orders made with this payment module to this value','6','0',NULL,now(),'tep_get_order_status_name','tep_cfg_pull_down_order_statuses(');
-INSERT INTO configuration VALUES (75,'Enable Credit Card Module','MODULE_PAYMENT_CC_STATUS','True','Do you want to accept credit card payments?','6','0',NULL,now(),NULL,'tep_cfg_select_option(array(\'True\', \'False\'), ');
-INSERT INTO configuration VALUES (76,'Split Credit Card E-Mail Address','MODULE_PAYMENT_CC_EMAIL','','If an e-mail address is entered, the middle digits of the credit card number will be sent to the e-mail address (the outside digits are stored in the database with the middle digits censored)','6','0',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (77,'Sort order of display.','MODULE_PAYMENT_CC_SORT_ORDER','0','Sort order of display. Lowest is displayed first.','6','0' ,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (78,'Payment Zone','MODULE_PAYMENT_CC_ZONE','0','If a zone is selected, only enable this payment method for that zone.','6','2',NULL,now(),'tep_get_zone_class_title','tep_cfg_pull_down_zone_classes(');
-INSERT INTO configuration VALUES (79,'Set Order Status','MODULE_PAYMENT_CC_ORDER_STATUS_ID','0','Set the status of orders made with this payment module to this value','6','0',NULL,now(),'tep_cfg_pull_down_order_statuses(','tep_get_order_status_name');
-INSERT INTO configuration VALUES (80,'Enable Flat Shipping','MODULE_SHIPPING_FLAT_STATUS','True','Do you want to offer flat rate shipping?','6','0',NULL,now(),NULL,'tep_cfg_select_option(array(\'True\', \'False\'), ');
-INSERT INTO configuration VALUES (81,'Shipping Cost','MODULE_SHIPPING_FLAT_COST','5.00','The shipping cost for all orders using this shipping method.','6','0',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (82,'Tax Class','MODULE_SHIPPING_FLAT_TAX_CLASS','0','Use the following tax class on the shipping fee.','6','0',NULL,now(),'tep_get_tax_class_title','tep_cfg_pull_down_tax_classes(');
-INSERT INTO configuration VALUES (83,'Shipping Zone','MODULE_SHIPPING_FLAT_ZONE','0','If a zone is selected, only enable this shipping method for that zone.','6','0',NULL,now(),'tep_get_zone_class_title','tep_cfg_pull_down_zone_classes(');
-INSERT INTO configuration VALUES (84,'Sort Order','MODULE_SHIPPING_FLAT_SORT_ORDER','0','Sort order of display.','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (85,'Default Currency','DEFAULT_CURRENCY','USD','Default Currency','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (86,'Default Language','DEFAULT_LANGUAGE','en','Default Language','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (87,'Default Order Status For New Orders','DEFAULT_ORDERS_STATUS_ID','1','When a new order is created, this order status will be assigned to it.','6','0',NULL,now(),NULL,NULL);
@@ -1700,14 +1691,26 @@ INSERT INTO configuration VALUES (777,'Disable URL Parameters?','PAGE_CACHE_DISA
 INSERT INTO configuration VALUES (778,'Delete Cache Files?','PAGE_CACHE_DELETE_FILES','true','If set to true the next catalog page request will delete all the cache files and then reset this value to false again.<br><br>Contribution by: <b>Chemo</b>',55,5,'NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (779,'Config Cache Update File?','PAGE_CACHE_UPDATE_CONFIG_FILES','none','If you have a configuration cache contribution enter the FULL path to the update file.<br><br>Contribution by: <b>Chemo</b>',55,6,NULL,now(),NULL,NULL);
 
-INSERT INTO configuration VALUES (780,'Enable SEO URLs?','SEO_URLS','false','Enable the SEO URLs?  This is a global setting and will turn them off completely.',60,0,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (781,'Choose URL Type','SEO_URLS_TYPE','cName','Choose which SEO URL format to use:<br><br><b>cName =></b> /index.php?cName=XXX<br><b>Rewrite =></b> /XXX-c-1.html',60,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'cName\',\'Rewrite\'),');
-INSERT INTO configuration VALUES (782,'Filter Short Words','SEO_URLS_FILTER_SHORT_WORDS','3','This setting only affects the Rewrite option.  It will filter words less than or equal to the value from the URL.',60,2,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (783,'Reset SEO URLs Cache','SEO_URLS_CACHE_RESET','false','This will reset the cache data for SEO',60,3,NULL,now(),'tep_reset_cache_data_seo_urls','tep_cfg_select_option(array(\'reset\',\'false\'),');
-
+INSERT INTO `configuration` VALUES(1469, 'Enable SEO URLs?', 'SEO_ENABLED', 'false', 'Enable the SEO URLs?  This is a global setting and will turn them off completely.', 60, 0, '2009-02-25 22:59:02', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1470, 'Add cPath to product URLs?', 'SEO_ADD_CPATH_TO_PRODUCT_URLS', 'false', 'This setting will append the cPath to the end of product URLs (i.e. - some-product-p-1.html?cPath=xx).', 60, 1, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1471, 'Add category parent to begining of URLs?', 'SEO_ADD_CAT_PARENT', 'false', 'This setting will add the category parent name to the beginning of the category URLs (i.e. - parent-category-c-1.html).', 60, 2, '2009-02-25 22:59:09', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1472, 'Filter Short Words', 'SEO_URLS_FILTER_SHORT_WORDS', '3', 'This setting will filter words less than or equal to the value from the URL.', 60, 3, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, NULL);
+INSERT INTO `configuration` VALUES(1473, 'Output W3C valid URLs (parameter string)?', 'SEO_URLS_USE_W3C_VALID', 'false', 'This setting will output W3C valid URLs.', 60, 4, '2009-02-25 22:59:15', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1474, 'Enable SEO cache to save queries?', 'USE_SEO_CACHE_GLOBAL', 'false', 'This is a global setting and will turn off caching completely.', 60, 5, '2009-02-25 22:59:22', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1475, 'Enable product cache?', 'USE_SEO_CACHE_PRODUCTS', 'true', 'This will turn off caching for the products.', 60, 6, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1476, 'Enable categories cache?', 'USE_SEO_CACHE_CATEGORIES', 'true', 'This will turn off caching for the categories.', 60, 7, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1477, 'Enable manufacturers cache?', 'USE_SEO_CACHE_MANUFACTURERS', 'true', 'This will turn off caching for the manufacturers.', 60, 8, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1478, 'Enable articles cache?', 'USE_SEO_CACHE_ARTICLES', 'true', 'This will turn off caching for the articles.', 60, 9, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1479, 'Enable topics cache?', 'USE_SEO_CACHE_TOPICS', 'true', 'This will turn off caching for the article topics.', 60, 10, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1480, 'Enable information cache?', 'USE_SEO_CACHE_INFO_PAGES', 'true', 'This will turn off caching for the information pages.', 60, 11, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1481, 'Enable automatic redirects?', 'USE_SEO_REDIRECT', 'false', 'This will activate the automatic redirect code and send 301 headers for old to new URLs.', 60, 12, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1482, 'Choose URL Rewrite Type', 'SEO_REWRITE_TYPE', 'Rewrite', 'Choose which SEO URL format to use.', 60, 13, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''Rewrite''),');
+INSERT INTO `configuration` VALUES(1483, 'Enter special character conversions', 'SEO_CHAR_CONVERT_SET', '', 'This setting will convert characters.<br><br>The format <b>MUST</b> be in the form: <b>char=>conv,char2=>conv2</b>', 60, 14, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, NULL);
+INSERT INTO `configuration` VALUES(1484, 'Remove all non-alphanumeric characters?', 'SEO_REMOVE_ALL_SPEC_CHARS', 'false', 'This will remove all non-letters and non-numbers.  This should be handy to remove all special characters with 1 setting.', 60, 15, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1485, 'Reset SEO URLs Cache', 'SEO_URLS_CACHE_RESET', 'false', 'This will reset the cache data for SEO', 60, 16, '2009-02-25 22:57:59', '2009-02-25 22:57:59', 'tep_reset_cache_data_seo_urls', 'tep_cfg_select_option(array(''reset'', ''false''),');
+INSERT INTO `configuration` VALUES(1486, 'Enable Seo URL validation?', 'FWR_VALIDATION_ON', 'false', 'Enable the SEO URL validation?', 75, 1, NULL, '2009-02-25 22:57:25', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (1073,'Move tax to total amount','MOVE_TAX_TO_TOTAL_AMOUNT','True','Do you want to move the tax to the total amount? If true PayPal will allways show the total amount including tax. (needs Aggregate i.s.o. Per Item to function)',6,4,NULL,now(),NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), ');
 INSERT INTO configuration VALUES (498,'Purchase Without Account','PWA_ON','true','Allow Customers to purchase without an account',40,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
-# INSERT INTO configuration VALUES (1200,'Order Editor- Display Payment Method dropdown?','DISPLAY_PAYMENT_METHOD_DROPDOWN','true','Display Payment Method in Order Editor as dropdown menu (true) or as input field (false)','1',21,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 # New RC4 entires
 INSERT INTO configuration VALUES (1202,'Admin Editor Default Width','HTML_AREA_WYSIWYG_EDITOR_WIDTH','550','How WIDE should the HTMLAREA be in pixels (default: 550)',25,66,NULL,now(),NULL,'');
@@ -1726,17 +1729,16 @@ INSERT INTO configuration VALUES (1214,'Use Affiliate-tier','AFFILATE_USE_TIER',
 INSERT INTO configuration VALUES (1215,'Number of Tierlevels','AFFILIATE_TIER_LEVELS','0','Number of Tierlevels',35,12,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1216,'Percentage Rate for the Tierlevels','AFFILIATE_TIER_PERCENTAGE','8.00;5.00;1.00','Percent Rates for the tierlevels<br>Example: 8.00;5.00;1.00',35,13,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1217,'Affiliate News','MAX_DISPLAY_AFFILIATE_NEWS','3','Maximum number of items to display on the Affiliate News page',35,14,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1291,'Max Wish List','MAX_DISPLAY_WISHLIST_PRODUCTS','12','How many wish list items to show per page on the main wishlist.php file',65,0,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1292,'Max Wish List Box','MAX_DISPLAY_WISHLIST_BOX','4','How many wish list items to display in the infobox before it changes to a counter',65,0,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1293,'Display Emails','DISPLAY_WISHLIST_EMAILS','10','How many emails to display when the customer emails their wishlist link',65,0,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1294,'Wishlist Redirect','WISHLIST_REDIRECT','No','Do you want to redirect back to the product_info.php page when a customer adds a product to their wishlist?',65,0,NULL,now(),NULL,'tep_cfg_select_option(array(\'Yes\',\'No\'),');
+INSERT INTO configuration VALUES (1304,'Display the Payment Method dropdown?','ORDER_EDITOR_PAYMENT_DROPDOWN','true','Based on this selection Order Editor will display the payment method as a dropdown menu (true) or as an input field (false).',70,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (1305,'Use prices from Separate Pricing Per Customer?','ORDER_EDITOR_USE_SPPC','false','Leave this set at false unless SPPC is installed.',70,3,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (1306,'Allow the use of AJAX to update order information?','ORDER_EDITOR_USE_AJAX','true','This must be set to false if using a browser on which JavaScript is disabled or not available.',70,4,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (1307,'Select your credit card payment method','ORDER_EDITOR_CREDIT_CARD','Credit Card','Order Editor will display the credit card fields when this payment method is selected.',70,5,NULL,now(),NULL,'tep_cfg_pull_down_payment_methods(');
-INSERT INTO configuration VALUES (1294,'Wishlist Redirect','WISHLIST_REDIRECT','No','Do you want to redirect back to the product_info.php page when a customer adds a product to their wishlist?',65,0,NULL,now(),NULL,'tep_cfg_select_option(array(\'Yes\',\'No\'),');
-INSERT INTO configuration VALUES (1293,'Display Emails','DISPLAY_WISHLIST_EMAILS','10','How many emails to display when the customer emails their wishlist link',65,0,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (1292,'Max Wish List Box','MAX_DISPLAY_WISHLIST_BOX','4','How many wish list items to display in the infobox before it changes to a counter',65,0,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (1291,'Max Wish List','MAX_DISPLAY_WISHLIST_PRODUCTS','12','How many wish list items to show per page on the main wishlist.php file',65,0,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (1305,'Use prices from Separate Pricing Per Customer?','ORDER_EDITOR_USE_SPPC','false','Leave this set at false unless SPPC is installed.',70,3,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (1304,'Display the Payment Method dropdown?','ORDER_EDITOR_PAYMENT_DROPDOWN','true','Based on this selection Order Editor will display the payment method as a dropdown menu (true) or as an input field (false).',70,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (1450,'Purchase without account shipping address','PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SHIPPING','yes','Do you allow customers without account to create separately shipping address?',5,'11',NULL,now(),NULL,'tep_cfg_select_option(array(\'yes\',\'no\'),');
 INSERT INTO configuration VALUES (1449,'Purchase without account','PURCHASE_WITHOUT_ACCOUNT','yes','Do you allow customers to purchase without an account?',5,'10',NULL,now(),NULL,'tep_cfg_select_option(array(\'yes\',\'no\'),');
-INSERT INTO configuration VALUES (1468,'Enable Seo URL validation?','FWR_VALIDATION_ON','false','Enable the SEO URL validation?',75,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (1450,'Purchase without account shipping address','PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SHIPPING','yes','Do you allow customers without account to create separately shipping address?',5,'11',NULL,now(),NULL,'tep_cfg_select_option(array(\'yes\',\'no\'),');
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
@@ -1755,11 +1757,11 @@ INSERT INTO configuration_group VALUES (14,'GZip Compression','GZip compression 
 INSERT INTO configuration_group VALUES (15,'Sessions','Session options',15,1);
 # osCMax added....
 INSERT INTO configuration_group VALUES (16,'Site Maintenance','Site Maintenance Options',16,1);
-INSERT INTO configuration_group VALUES (25,'WYSIWYG Editor','HTMLArea Options', 15,1);
-INSERT INTO configuration_group VALUES (30,'Printable Catalog','Options for Printable Catalog', 30,1);
-INSERT INTO configuration_group VALUES (35,'Affiliate Program','Options for the Affiliate Program', 50,1);
+INSERT INTO configuration_group VALUES (25,'WYSIWYG Editor','HTMLArea Options',15,1);
+INSERT INTO configuration_group VALUES (30,'Printable Catalog','Options for Printable Catalog',30,1);
+INSERT INTO configuration_group VALUES (35,'Affiliate Program','Options for the Affiliate Program',50,1);
 INSERT INTO configuration_group VALUES (40,'Accounts','Configuration of Account settings',40,1);
-INSERT INTO configuration_group VALUES (45,'Dynamic MoPics','The options which configure Dynamic MoPics.', 45,1);
+INSERT INTO configuration_group VALUES (45,'Dynamic MoPics','The options which configure Dynamic MoPics.',45,1);
 INSERT INTO configuration_group VALUES (50,'Product Information','Product Information page configuration options',8,1);
 INSERT INTO configuration_group VALUES (55,'Page Cache Settings','Settings for the page cache contribution', 20,1);
 INSERT INTO configuration_group VALUES (60,'SEO URLs','Options for Ultimate SEO URLs by Chemo', 902,1);
@@ -2017,45 +2019,45 @@ INSERT INTO languages VALUES (1,'English','en','icon.gif','english',1);
 INSERT INTO languages VALUES (2,'Deutsch','de','icon.gif','german',2);
 INSERT INTO languages VALUES (3,'Espa�ol','es','icon.gif','espanol',3);
 
-INSERT INTO orders_status VALUES ('1','1','Pending','1','0');
-INSERT INTO orders_status VALUES ('1','2','Offen','1','0');
-INSERT INTO orders_status VALUES ('1','3','Pendiente','1','0');
-INSERT INTO orders_status VALUES ('2','1','Processing','1','1');
-INSERT INTO orders_status VALUES ('2','2','In Bearbeitung','1','1');
-INSERT INTO orders_status VALUES ('2','3','Proceso','1','1');
-INSERT INTO orders_status VALUES ('3','1','Delivered','1','1');
-INSERT INTO orders_status VALUES ('3','2','Versendet','1','1');
-INSERT INTO orders_status VALUES ('3','3','Entregado','1','1');
-INSERT INTO orders_status VALUES ('100000','1','Updated','1','0');
-INSERT INTO orders_status VALUES ('100000','2','Updated','1','0');
-INSERT INTO orders_status VALUES ('100000','3','Updated','1','0');
-INSERT INTO orders_status VALUES ('100001','1','Preparing [PayPal IPN]','1','0');
-INSERT INTO orders_status VALUES ('100001','2','Preparing [PayPal IPN]','1','0');
-INSERT INTO orders_status VALUES ('100001','3','Preparing [PayPal IPN]','1','0');
-INSERT INTO orders_status VALUES ('100002','1','Preparing [PayPal Standard]','0','0');
-INSERT INTO orders_status VALUES ('100002','2','Preparing [PayPal Standard]','0','0');
-INSERT INTO orders_status VALUES ('100002','3','Preparing [PayPal Standard]','0','0');
-INSERT INTO orders_status VALUES ('100003','1','Sofortüberweisung Vorbereitung','0','0');
-INSERT INTO orders_status VALUES ('100003','2','Sofortüberweisung Vorbereitung','0','0');
-INSERT INTO orders_status VALUES ('100003','3','Sofortüberweisung Vorbereitung','0','0');
-INSERT INTO orders_status VALUES ('100','1','Google New','1','0');
-INSERT INTO orders_status VALUES ('100','2','Google New','1','0');
-INSERT INTO orders_status VALUES ('100','3','Google New','1','0');
-INSERT INTO orders_status VALUES ('101','1','Google Processing','1','0');
-INSERT INTO orders_status VALUES ('101','2','Google Processing','1','0');
-INSERT INTO orders_status VALUES ('101','3','Google Processing','1','0');
-INSERT INTO orders_status VALUES ('102','1','Google Shipped','1','0');
-INSERT INTO orders_status VALUES ('102','2','Google Shipped','1','0');
-INSERT INTO orders_status VALUES ('102','3','Google Shipped','1','0');
-INSERT INTO orders_status VALUES ('103','1','Google Refunded','1','0');
-INSERT INTO orders_status VALUES ('103','2','Google Refunded','1','0');
-INSERT INTO orders_status VALUES ('103','3','Google Refunded','1','0');
-INSERT INTO orders_status VALUES ('104','1','Google Shipped and Refunded','1','0');
-INSERT INTO orders_status VALUES ('104','2','Google Shipped and Refunded','1','0');
-INSERT INTO orders_status VALUES ('104','3','Google Shipped and Refunded','1','0');
-INSERT INTO orders_status VALUES ('105','1','Google Canceled','1','0');
-INSERT INTO orders_status VALUES ('105','2','Google Canceled','1','0');
-INSERT INTO orders_status VALUES ('105','3','Google Canceled','1','0');
+INSERT INTO orders_status VALUES (1,1,'Pending',1,0);
+INSERT INTO orders_status VALUES (1,2,'Offen',1,0);
+INSERT INTO orders_status VALUES (1,3,'Pendiente',1,0);
+INSERT INTO orders_status VALUES (2,1,'Processing',1,1);
+INSERT INTO orders_status VALUES (2,2,'In Bearbeitung',1,1);
+INSERT INTO orders_status VALUES (2,3,'Proceso',1,1);
+INSERT INTO orders_status VALUES (3,1,'Delivered',1,1);
+INSERT INTO orders_status VALUES (3,2,'Versendet',1,1);
+INSERT INTO orders_status VALUES (3,3,'Entregado',1,1);
+INSERT INTO orders_status VALUES (100000,1,'Updated',1,0);
+INSERT INTO orders_status VALUES (100000,2,'Updated',1,0);
+INSERT INTO orders_status VALUES (100000,3,'Updated',1,0);
+INSERT INTO orders_status VALUES (100001,1,'Preparing [PayPal IPN]',1,0);
+INSERT INTO orders_status VALUES (100001,2,'Preparing [PayPal IPN]',1,0);
+INSERT INTO orders_status VALUES (100001,3,'Preparing [PayPal IPN]',1,0);
+INSERT INTO orders_status VALUES (100002,1,'Preparing [PayPal Standard]',0,0);
+INSERT INTO orders_status VALUES (100002,2,'Preparing [PayPal Standard]',0,0);
+INSERT INTO orders_status VALUES (100002,3,'Preparing [PayPal Standard]',0,0);
+INSERT INTO orders_status VALUES (100003,1,'Sofortüberweisung Vorbereitung',0,0);
+INSERT INTO orders_status VALUES (100003,2,'Sofortüberweisung Vorbereitung',0,0);
+INSERT INTO orders_status VALUES (100003,3,'Sofortüberweisung Vorbereitung',0,0);
+INSERT INTO orders_status VALUES (100,1,'Google New',1,0);
+INSERT INTO orders_status VALUES (100,2,'Google New',1,0);
+INSERT INTO orders_status VALUES (100,3,'Google New',1,0);
+INSERT INTO orders_status VALUES (101,1,'Google Processing',1,0);
+INSERT INTO orders_status VALUES (101,2,'Google Processing',1,0);
+INSERT INTO orders_status VALUES (101,3,'Google Processing',1,0);
+INSERT INTO orders_status VALUES (102,1,'Google Shipped',1,0);
+INSERT INTO orders_status VALUES (102,2,'Google Shipped',1,0);
+INSERT INTO orders_status VALUES (102,3,'Google Shipped',1,0);
+INSERT INTO orders_status VALUES (103,1,'Google Refunded',1,0);
+INSERT INTO orders_status VALUES (103,2,'Google Refunded',1,0);
+INSERT INTO orders_status VALUES (103,3,'Google Refunded',1,0);
+INSERT INTO orders_status VALUES (104,1,'Google Shipped and Refunded',1,0);
+INSERT INTO orders_status VALUES (104,2,'Google Shipped and Refunded',1,0);
+INSERT INTO orders_status VALUES (104,3,'Google Shipped and Refunded',1,0);
+INSERT INTO orders_status VALUES (105,1,'Google Canceled',1,0);
+INSERT INTO orders_status VALUES (105,2,'Google Canceled',1,0);
+INSERT INTO orders_status VALUES (105,3,'Google Canceled',1,0);
 
 INSERT INTO products_attributes_download  VALUES (11, 'Dhtml-coolmenu.zip',7,10);
 
@@ -2074,7 +2076,7 @@ INSERT INTO tax_class VALUES (2,'Taxable Item','Any taxable item',now(),now());
 INSERT INTO tax_class VALUES (3,'Non Taxable','Non Taxable Goods',now(),now());
 
 # USA/Florida
-INSERT INTO tax_rates VALUES (1, 1, 1, 1, 7.0, 'FL TAX 7.0%',now(),now());
+INSERT INTO tax_rates VALUES (1,1,1,1,7.0,'FL TAX 7.0%',now(),now());
 INSERT INTO geo_zones (geo_zone_id,geo_zone_name,geo_zone_description,date_added) VALUES (1,"Florida","Florida local sales tax zone",now());
 INSERT INTO zones_to_geo_zones (association_id,zone_country_id,zone_id,geo_zone_id,date_added) VALUES (1,223,18,1,now());
 

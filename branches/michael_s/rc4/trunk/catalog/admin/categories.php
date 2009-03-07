@@ -271,6 +271,10 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                                   'products_price' => tep_db_prepare_input($HTTP_POST_VARS['products_price']),
                                   'products_date_available' => $products_date_available,
                                   'products_weight' => (float)tep_db_prepare_input($HTTP_POST_VARS['products_weight']),
+                                  'products_height' => tep_db_prepare_input($HTTP_POST_VARS['products_height']),
+                                  'products_length' => tep_db_prepare_input($HTTP_POST_VARS['products_length']),
+                                  'products_width' => tep_db_prepare_input($HTTP_POST_VARS['products_width']),
+                                  'products_ready_to_ship' => tep_db_prepare_input($HTTP_POST_VARS['products_ready_to_ship']),
                                   'products_status' => tep_db_prepare_input($HTTP_POST_VARS['products_status']),
                                   'products_tax_class_id' => tep_db_prepare_input($HTTP_POST_VARS['products_tax_class_id']),
                                   'manufacturers_id' => (int)tep_db_prepare_input($HTTP_POST_VARS['manufacturers_id']));
@@ -367,13 +371,13 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
               $messageStack->add_session(ERROR_CANNOT_LINK_TO_SAME_CATEGORY, 'error');
             }
           } elseif ($HTTP_POST_VARS['copy_as'] == 'duplicate') {
-// LINE MODED: Added "products_ship_price"
-            $product_query = tep_db_query("select products_ship_price, products_quantity, products_model, products_image, products_price, products_date_available, products_weight, products_tax_class_id, manufacturers_id from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
+// LINE MODED: Added "products_ship_price and dimensions for upsxml"
+            $product_query = tep_db_query("select products_ship_price, products_quantity, products_model, products_image, products_price, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_tax_class_id, manufacturers_id from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
             $product = tep_db_fetch_array($product_query);
 
 // LINE CHANGED: MS2 update 501112 - Added :(empty($product['products_date_available']) ? "null" : ...{some code}... ") . "
-// LINE MODED: Added "products_ship_price"
-            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_price, products_date_added, products_date_available, products_weight, products_status, products_tax_class_id, manufacturers_id) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "', now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "')");           
+// LINE MODED: Added "products_ship_price and dimensions for upsxml"
+            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ". '" . tep_db_input($product['products_weight']) . "', '0', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "')");
             $dup_products_id = tep_db_insert_id();
 
             $description_query = tep_db_query("select language_id, products_name, products_description, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
@@ -677,6 +681,10 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                        'products_image' => '',
                        'products_price' => '',
                        'products_weight' => '',
+                       'products_length' => '',
+                       'products_width' => '',
+                       'products_height' => '',
+                       'products_ready_to_ship' => '',
                        'products_date_added' => '',
                        'products_last_modified' => '',
                        'products_date_available' => '',
@@ -688,7 +696,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
     if (isset($HTTP_GET_VARS['pID']) && empty($HTTP_POST_VARS)) {
 //LINE MODED: Added "p.products_ship_price"
-      $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+      $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
       $product = tep_db_fetch_array($product_query);
 
       $pInfo->objectInfo($product);
@@ -964,6 +972,22 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
             <td class="main"><?php echo TEXT_PRODUCTS_WEIGHT; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_weight', $pInfo->products_weight); ?></td>
           </tr>
+          <tr>
+            <td class="main"><?php echo TEXT_PRODUCTS_LENGTH; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_length', $pInfo->products_length); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo TEXT_PRODUCTS_WIDTH; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_width', $pInfo->products_width); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo TEXT_PRODUCTS_HEIGHT; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_height', $pInfo->products_height); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo TEXT_PRODUCTS_READY_TO_SHIP; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_checkbox_field('products_ready_to_ship', '1', (($product['products_ready_to_ship'] == '1') ? true : false)); ?></td>
+          </tr>
         </table></td>
       </tr>
       <tr>
@@ -981,8 +1005,8 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
       $products_description = $HTTP_POST_VARS['products_description'];
       $products_url = $HTTP_POST_VARS['products_url'];
     } else {
-// LINE CHANGED: Added p.products_shipped_price
-      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "'");
+// LINE CHANGED: Added p.products_shipped_price and dimensions for upsxml
+      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "'");
       $product = tep_db_fetch_array($product_query);
 
       $pInfo = new objectInfo($product);

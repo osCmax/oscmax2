@@ -1208,6 +1208,14 @@ CREATE TABLE topics_description (
   KEY idx_topics_name (topics_name)
 );
 
+DROP TABLE IF EXISTS ups_boxes_used;
+CREATE TABLE ups_boxes_used (
+  id int NOT NULL auto_increment,
+  date datetime DEFAULT NULL,
+  customers_id int NOT NULL,
+  boxes text,
+  PRIMARY KEY  (id)
+);
 
 DROP TABLE IF EXISTS whos_online;
 CREATE TABLE whos_online (
@@ -1536,24 +1544,24 @@ INSERT INTO configuration VALUES (143,'Recreate Session','SESSION_RECREATE','Fal
 # osCMax added
 INSERT INTO configuration VALUES (144,'PRODUCT DESCRIPTIONS use WYSIWYG HTMLAREA?','HTML_AREA_WYSIWYG_DISABLE','Enable','Enable/Disable WYSIWYG box','25','0',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
 INSERT INTO configuration VALUES (145,'Product Description Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_PD','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','10',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
-INSERT INTO configuration VALUES (146,'Product Description Layout Width','HTML_AREA_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','15',NULL,now(),NULL, \');
-INSERT INTO configuration VALUES (147,'Product Description Layout Height','HTML_AREA_WYSIWYG_HEIGHT','240','How HIGH should the HTMLAREA be in pixels (default: 240)','25','19',NULL,now(),NULL, \');
+INSERT INTO configuration VALUES (146,'Product Description Layout Width','HTML_AREA_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','15',NULL,now(),NULL, '');
+INSERT INTO configuration VALUES (147,'Product Description Layout Height','HTML_AREA_WYSIWYG_HEIGHT','240','How HIGH should the HTMLAREA be in pixels (default: 240)','25','19',NULL,now(),NULL, '');
 INSERT INTO configuration VALUES (148,'CUSTOMER EMAILS use WYSIWYG HTMLAREA?','HTML_AREA_WYSIWYG_DISABLE_EMAIL','Enable','Use WYSIWYG Area in Email Customers','25','20',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
 INSERT INTO configuration VALUES (149,'Customer Email Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_EMAIL','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','21',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
-INSERT INTO configuration VALUES (150,'Customer Email Layout Width','EMAIL_AREA_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','25',NULL,now(),NULL, \');
-INSERT INTO configuration VALUES (151,'Customer Email Layout Height','EMAIL_AREA_WYSIWYG_HEIGHT','140','How HIGH should the HTMLAREA be in pixels (default: 140)','25','29',NULL,now(),NULL, \');
+INSERT INTO configuration VALUES (150,'Customer Email Layout Width','EMAIL_AREA_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','25',NULL,now(),NULL, '');
+INSERT INTO configuration VALUES (151,'Customer Email Layout Height','EMAIL_AREA_WYSIWYG_HEIGHT','140','How HIGH should the HTMLAREA be in pixels (default: 140)','25','29',NULL,now(),NULL, '');
 INSERT INTO configuration VALUES (152,'NEWSLETTER EMAILS use WYSIWYG HTMLAREA?','HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER','Enable','Use WYSIWYG Area in Email Newsletter','25','30',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
 INSERT INTO configuration VALUES (153,'Newsletter Email Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_NEWSLETTER','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','32',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
-INSERT INTO configuration VALUES (154,'Newsletter Email Layout Width','NEWSLETTER_EMAIL_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','35',NULL,now(),NULL, \');
-INSERT INTO configuration VALUES (155,'Newsletter Email Layout Height','NEWSLETTER_EMAIL_WYSIWYG_HEIGHT','140','How HIGH should the HTMLAREA be in pixels (default: 140)','25','39',NULL,now(),NULL, \');
+INSERT INTO configuration VALUES (154,'Newsletter Email Layout Width','NEWSLETTER_EMAIL_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','35',NULL,now(),NULL, '');
+INSERT INTO configuration VALUES (155,'Newsletter Email Layout Height','NEWSLETTER_EMAIL_WYSIWYG_HEIGHT','140','How HIGH should the HTMLAREA be in pixels (default: 140)','25','39',NULL,now(),NULL, '');
 INSERT INTO configuration VALUES (156,'DEFINE MAINPAGE use WYSIWYG HTMLAREA?','HTML_AREA_WYSIWYG_DISABLE_DEFINE','Enable','Use WYSIWYG Area in Define Mainpage','25','40',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
 INSERT INTO configuration VALUES (157,'Define Mainpage Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_DEFINE','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','41',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
-INSERT INTO configuration VALUES (158,'Define Mainpage Layout Width','DEFINE_MAINPAGE_WYSIWYG_WIDTH','605','How WIDE should the HTMLAREA be in pixels (default: 505)','25','42',NULL,now(),NULL, \');
-INSERT INTO configuration VALUES (159,'Define Mainpage Layout Height','DEFINE_MAINPAGE_WYSIWYG_HEIGHT','300','How HIGH should the HTMLAREA be in pixels (default: 140)','25','43',NULL,now(),NULL, \');
+INSERT INTO configuration VALUES (158,'Define Mainpage Layout Width','DEFINE_MAINPAGE_WYSIWYG_WIDTH','605','How WIDE should the HTMLAREA be in pixels (default: 505)','25','42',NULL,now(),NULL, '');
+INSERT INTO configuration VALUES (159,'Define Mainpage Layout Height','DEFINE_MAINPAGE_WYSIWYG_HEIGHT','300','How HIGH should the HTMLAREA be in pixels (default: 140)','25','43',NULL,now(),NULL, '');
 INSERT INTO configuration VALUES (160,'GLOBAL - User Interface Font Type','HTML_AREA_WYSIWYG_FONT_TYPE','Verdana','User Interface Font Type<br>(not saved to product description)','25','45',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Arial\', \'Courier New\', \'Georgia\', \'Impact\', \'Tahoma\', \'Times New Roman\', \'Verdana\', \'Wingdings\'),');
 INSERT INTO configuration VALUES (161,'GLOBAL - User Interface Font Size','HTML_AREA_WYSIWYG_FONT_SIZE','12','User Interface Font Size (not saved to product description)<p><b>10 Equals 10 pt','25','50',NULL,now(),NULL, 'tep_cfg_select_option(array(\\\'8\\\', \\\'10\\\', \\\'12\\\', \\\'14\\\', \\\'18\\\', \\\'24\\\', \\\'36\\\'),');
-INSERT INTO configuration VALUES (162,'GLOBAL - User Interface Font Colour','HTML_AREA_WYSIWYG_FONT_COLOUR','Black','White, Black, C0C0C0, Red, FFFFFF, Yellow, Pink, Blue, Gray, 000000, ect..<br>basically any colour or HTML colour code!<br>(not saved to product description)','25','55',NULL,now(),NULL, \');
-INSERT INTO configuration VALUES (163,'GLOBAL - User Interface Background Colour','HTML_AREA_WYSIWYG_BG_COLOUR','White','White, Black, C0C0C0, Red, FFFFFF, Yellow, Pink, Blue, Gray, 000000, ect..<br>basically any colour or html colour code!<br>(not saved to product description)','25','60',NULL,now(),NULL, \');
+INSERT INTO configuration VALUES (162,'GLOBAL - User Interface Font Colour','HTML_AREA_WYSIWYG_FONT_COLOUR','Black','White, Black, C0C0C0, Red, FFFFFF, Yellow, Pink, Blue, Gray, 000000, ect..<br>basically any colour or HTML colour code!<br>(not saved to product description)','25','55',NULL,now(),NULL,'');
+INSERT INTO configuration VALUES (163,'GLOBAL - User Interface Background Colour','HTML_AREA_WYSIWYG_BG_COLOUR','White','White, Black, C0C0C0, Red, FFFFFF, Yellow, Pink, Blue, Gray, 000000, ect..<br>basically any colour or html colour code!<br>(not saved to product description)','25','60',NULL,now(),NULL, '');
 INSERT INTO configuration VALUES (164,'GLOBAL - ALLOW DEBUG MODE?','HTML_AREA_WYSIWYG_DEBUG','0','Moniter Live-html, It updates as you type in a 2nd field above it.<p>Disable Debug = 0<br>Enable Debug = 1<br>Default = 0 OFF','25','65',NULL,now(),NULL, 'tep_cfg_select_option(array(\'0\', \'1\'),');
 INSERT INTO configuration VALUES (178,'Display Total','MODULE_ORDER_TOTAL_COUPON_STATUS','true','Do you want to display the Discount Coupon value?','6','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (179,'Sort Order','MODULE_ORDER_TOTAL_COUPON_SORT_ORDER','9','Sort order of display.','6','2',NULL,now(),NULL,NULL);
@@ -1688,7 +1696,7 @@ INSERT INTO configuration VALUES (774,'Enable Page Cache','ENABLE_PAGE_CACHE','f
 INSERT INTO configuration VALUES (775,'Cache Lifetime','PAGE_CACHE_LIFETIME','5','How long to cache the pages (in minutes) ?<br><br>Contribution by: <b>Chemo</b>',55,2,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (776,'Turn on Debug Mode?','PAGE_CACHE_DEBUG_MODE','false','Turn on the global debug output (located at the footer) ? This affects ALL browsers and is NOT for live shops!  YOu can turn on debug mode JUST for your browser by adding "?debug=1" to your URL.<br><br>Contribution by: <b>Chemo</b>',55,'3',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (777,'Disable URL Parameters?','PAGE_CACHE_DISABLE_PARAMETERS','false','In some cases (such as search engine safe URL\'s) or large number of affiliate referrals will cause excessive page writing.<br><br>Contribution by: <b>Chemo</b>',55,4,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (778,'Delete Cache Files?','PAGE_CACHE_DELETE_FILES','true','If set to true the next catalog page request will delete all the cache files and then reset this value to false again.<br><br>Contribution by: <b>Chemo</b>',55,5,'NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (778,'Delete Cache Files?','PAGE_CACHE_DELETE_FILES','true','If set to true the next catalog page request will delete all the cache files and then reset this value to false again.<br><br>Contribution by: <b>Chemo</b>',55,5,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (779,'Config Cache Update File?','PAGE_CACHE_UPDATE_CONFIG_FILES','none','If you have a configuration cache contribution enter the FULL path to the update file.<br><br>Contribution by: <b>Chemo</b>',55,6,NULL,now(),NULL,NULL);
 
 INSERT INTO `configuration` VALUES(1469, 'Enable SEO URLs?', 'SEO_ENABLED', 'false', 'Enable the SEO URLs?  This is a global setting and will turn them off completely.', 60, 0, '2009-02-25 22:59:02', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
@@ -1739,6 +1747,12 @@ INSERT INTO configuration VALUES (1306,'Allow the use of AJAX to update order in
 INSERT INTO configuration VALUES (1307,'Select your credit card payment method','ORDER_EDITOR_CREDIT_CARD','Credit Card','Order Editor will display the credit card fields when this payment method is selected.',70,5,NULL,now(),NULL,'tep_cfg_pull_down_payment_methods(');
 INSERT INTO configuration VALUES (1449,'Purchase without account','PURCHASE_WITHOUT_ACCOUNT','yes','Do you allow customers to purchase without an account?',5,'10',NULL,now(),NULL,'tep_cfg_select_option(array(\'yes\',\'no\'),');
 INSERT INTO configuration VALUES (1450,'Purchase without account shipping address','PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SHIPPING','yes','Do you allow customers without account to create separately shipping address?',5,'11',NULL,now(),NULL,'tep_cfg_select_option(array(\'yes\',\'no\'),');
+INSERT INTO configuration VALUES (1487, 'Dimensions Support', 'SHIPPING_DIMENSIONS_SUPPORT', 'No', 'Do you use the additional dimensions support (read dimensions.txt in the UPSXML package)?', 7, 6, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''No'', ''Ready-to-ship only'', ''With product dimensions''), ');
+INSERT INTO configuration VALUES (1488, 'Unit Weight', 'SHIPPING_UNIT_WEIGHT', 'LBS', 'By what unit are your packages weighed?', 7, 7, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''LBS'', ''KGS''), ');
+INSERT INTO configuration VALUES (1489, 'Unit Length', 'SHIPPING_UNIT_LENGTH', 'IN', 'By what unit are your packages sized?', 7, 8, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''IN'', ''CM''), ');
+INSERT INTO configuration VALUES (1490, 'Store result of packing routines', 'SHIPPING_STORE_BOXES_USED', 'false', 'Do you want to store the results of the packing routines in the database? See file store_ups_boxes_used.txt in UPSXML package for details and modifications needed.', 7, 9, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''true'', ''false''), ');
+
+
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);

@@ -1,9 +1,9 @@
 <tr>
   <td class="pageHeading" colspan="3"><?php $pageTitle ?></td>
 </tr>
-<form ACTION="<?php $PHP_SELF?>" METHOD="POST" NAME="SUBMIT_ATTRIBUTES">
-  <input TYPE="HIDDEN" NAME="current_product_id" VALUE="<?php $current_product_id?>">
-  <input TYPE="HIDDEN" NAME="action" VALUE="change">
+<form action="<?=$PHP_SELF?>" method="post" name="submit_attributes">
+<input type="hidden" name="current_product_id" value="<?=$current_product_id?>">
+<input type="hidden" name="action" value="change">
 <?php
 
   if ( $cPath ) echo "<input TYPE=\"HIDDEN\" NAME=\"cPathID\" VALUE=\"" . $cPath . "\">";
@@ -136,7 +136,6 @@
   }
 ?>
   <tr>
-    <td colspan="10" class="main"><br><input TYPE="image" src="<?php $adminImages?>button_save.gif">&nbsp;&nbsp;&nbsp;<?php $backLink?><img src="<?php $adminImages?>button_cancel.gif" border="0"></a></td>
+<td colspan="10" class="main"><br><input type="image" src="<?=$adminImages?>button_save.gif">&nbsp;&nbsp;&nbsp;<?=$backLink?><img src="<?=$adminImages?>button_cancel.gif" border="0"></a></td>
   </tr>
 </form>
-

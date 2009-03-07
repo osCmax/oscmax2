@@ -303,6 +303,10 @@ var $shiptotal;
           $products_tax = tep_get_tax_rate($product['products_tax_class_id']);
           $products_price = $product['products_price'];
           $products_weight = $product['products_weight'];
+          $products_length = $product['products_length'];
+          $products_width = $product['products_width'];
+          $products_height = $product['products_height'];
+          $products_ready_to_ship = $product['products_ready_to_ship'];
 //LINE ADDED - mod indvship
           $products_ship_price = $product['products_ship_price'];
 
@@ -412,6 +416,10 @@ var $shiptotal;
                                     'price' => $products_price,
                                     'quantity' => $this->contents[$products_id]['qty'],
                                     'weight' => $products['products_weight'],
+                                    'length' => $products['products_length'],
+                                    'width' => $products['products_width'],
+                                    'height' => $products['products_height'],
+                                    'ready_to_ship' => $products['products_ready_to_ship'],
                                     'final_price' => ($products_price + $this->attributes_price($products_id)),
                                     'tax_class_id' => $products['products_tax_class_id'],
                                     'attributes' => (isset($this->contents[$products_id]['attributes']) ? $this->contents[$products_id]['attributes'] : ''));

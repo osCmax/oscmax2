@@ -271,6 +271,8 @@ define('BOX_TOOLS_MAIL', 'Send Email');
 define('BOX_TOOLS_NEWSLETTER_MANAGER', 'Newsletter Manager');
 define('BOX_TOOLS_SERVER_INFO', 'Server Info');
 define('BOX_TOOLS_WHOS_ONLINE', 'Who\'s Online');
+define('BOX_TOOLS_PACKAGING', 'Packaging');
+define('BOX_TOOLS_UPS_BOXES_USED', 'UPS boxes used');
 
 // localizaion box text in includes/boxes/localization.php
 define('BOX_HEADING_LOCALIZATION', 'Localization');

@@ -1,13 +1,9 @@
 
 Graphic Customization of your osCMax AABox template
 ######################################
-Supplied by www.TemplateShopper.com
-
 Please note:
 This explanation only applies to OSC stores running the Template
 Contribution - standard on OSCMAX.
-
-Graphics do not fall under the GPL/GNU open-source license.
 
 *****BACK UP! BACK UP! BACK UP!*****
 Ensure you back up your database before starting and where files are overwritten
@@ -64,16 +60,3 @@ are for the square or curved corners of the infobox and are grey in the standard
 You can remake these in the color of your choice, but the spacing is best controlled in the
 stylesheet by adding 'padding-left : 4px;' to TD.infoBoxHeading and replacing the 3 corner images
 with a 1pixel x 1 pixel transparent gif (this saves removing the reference in each infobox).
-
-Please refer to the OSCDOX forums for any further questions.
-
-######################################
-www.Templateshopper.com supplies a range of 'Blank Templates' from US$ 29 in
-Photoshop (.psd) and Fireworks (.png) layered formats. (If you do not have either -
-both are available for 30 day free trial download.)
-Also available are complete graphic upgrades for OSCMAX stores including slices, php files and
-button sets from US$69
-Additionally we offer a custom template design service from US$299. Email your requirements to
-info@templateshopper.com
-######################################
-

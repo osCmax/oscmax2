@@ -50,7 +50,7 @@ $Id: main_page.php 3 2006-05-27 04:59:07Z user $
 </div>
 
 <div id="pageFooter">
-	Copyright &copy; 2000-<php? echo date("Y"); ?> <a href="http://www.osCMax.com" target="_blank">osCMax</a> <br />osCMax provides no warranty and is redistributable under the <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a>
+	Copyright &copy; 2000-<?php echo date("Y"); ?> <a href="http://www.osCMax.com" target="_blank">osCMax</a> <br />osCMax provides no warranty and is redistributable under the <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a>
 </div>
 
 </body>

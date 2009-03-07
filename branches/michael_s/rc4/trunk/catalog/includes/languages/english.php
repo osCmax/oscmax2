@@ -347,8 +347,8 @@ define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The expiry date entered for the credit 
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The credit card number entered is invalid.<br>Please check the number and try again.');
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first four digits of the number entered are: %s<br>If that number is correct, we do not accept that type of credit card.<br>If it is wrong, please try again.');
 
-define('FOOTER_TEXT_BODY', 'Copyright &copy; 2005 <a href="http://oscdox.com">osCDox</a>, <a href="http://aabox.com">AABox Web Hosting</a><br>
-Powered by <a href="http://www.oscmax.com" target="_blank">osCMax v2.0</a>');
+define('FOOTER_TEXT_BODY', 'Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCMax</a><br>Powered by <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
+
 
 // BOF: MOD - Checkout Without Account
 define('IMAGE_BUTTON_CREATE_ACCOUNT', 'Create Account');

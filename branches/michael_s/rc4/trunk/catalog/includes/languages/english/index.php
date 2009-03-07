@@ -36,7 +36,7 @@ if ( ($category_depth == 'products') || (isset($HTTP_GET_VARS['manufacturers_id'
   define('TEXT_ALL_CATEGORIES', 'All Categories');
   define('TEXT_ALL_MANUFACTURERS', 'All Manufacturers');
 } elseif ($category_depth == 'top') {
-  define('HEADING_TITLE', 'Welcome to AABox.com\'s osCMax v2.0 - change this in /english/index.php');
+  define('HEADING_TITLE', '');
 } elseif ($category_depth == 'nested') {
   define('HEADING_TITLE', 'Categories');
 }

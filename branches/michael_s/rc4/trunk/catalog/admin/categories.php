@@ -299,6 +299,11 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
             tep_db_perform(TABLE_PRODUCTS, $sql_data_array, 'update', "products_id = '" . (int)$products_id . "'");
           }
+          
+//BOF: MOD - AJAX Attribute Manager 
+          require_once('attributeManager/includes/attributeManagerUpdateAtomic.inc.php'); 
+//EOF: MOD - AJAX Attribute Manager 
+
 
 // BOF: MOD - Separate Price per Customer
           $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id != '0' order by customers_group_id");
@@ -424,8 +429,11 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
+<!-- AJAX Attribute Manager  -->
+<?php require_once( 'attributeManager/includes/attributeManagerHeader.inc.php' )?>
+<!-- AJAX Attribute Manager  end -->
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="SetFocus();">
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="goOnLoad();">
 <div id="spiffycalendar" class="text"></div>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
@@ -844,6 +852,12 @@ function updateNet() {
             <td class="main"><?php echo TEXT_PRODUCTS_PRICE_GROSS; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'OnKeyUp="updateNet()"'); ?></td>
           </tr>
+          <!-- AJAX Attribute Manager  -->
+          <tr>
+          	<td colspan="2"><?php require_once( 'attributeManager/includes/attributeManagerPlaceHolder.inc.php' )?></td>
+          </tr>
+          <!-- AJAX Attribute Manager end -->
+
 <?php // EOF: MOD - indvship ?>
           <tr>
             <td class="main"><?php echo 'Indv. Shipping Price:'; ?></td>

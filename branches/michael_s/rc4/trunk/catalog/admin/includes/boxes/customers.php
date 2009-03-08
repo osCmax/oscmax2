@@ -27,7 +27,6 @@ $Id: customers.php 3 2006-05-27 04:59:07Z user $
 //old-                               '<a href="' . tep_href_link(FILENAME_ORDERS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CUSTOMERS_ORDERS . '</a>');
 		$contents[] = array('text'  => tep_admin_files_boxes(FILENAME_CUSTOMERS, BOX_CUSTOMERS_CUSTOMERS) .
                                    tep_admin_files_boxes(FILENAME_CUSTOMERS_GROUPS, BOX_CUSTOMERS_GROUPS) .
-                                   tep_admin_files_boxes(FILENAME_BATCH_PRINT, BOX_TOOLS_BATCH_CENTER) .
                                    tep_admin_files_boxes(FILENAME_CREATE_ACCOUNT, BOX_MANUAL_ORDER_CREATE_ACCOUNT) .
                                    tep_admin_files_boxes(FILENAME_CREATE_ORDER, BOX_MANUAL_ORDER_CREATE_ORDER) .
                                    tep_admin_files_boxes(FILENAME_ORDERS, BOX_CUSTOMERS_ORDERS));

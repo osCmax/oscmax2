@@ -116,7 +116,7 @@ $Id: index.php 14 2006-07-28 17:42:07Z user $
                      'access' => tep_admin_check_boxes('configuration.php'),
                      'image' => 'configuration.gif',
                      'href' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=1'),
-                     'cols' => 12,
+                     'cols' => 14,
                      'children' => array(array('title' => BOX_CONFIGURATION_MYSTORE, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=1')),
                                          array('title' => BOX_CONFIGURATION_MIN_VALUES, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=2')),
                                          array('title' => BOX_CONFIGURATION_MAX_VALUES, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=3')),
@@ -124,7 +124,7 @@ $Id: index.php 14 2006-07-28 17:42:07Z user $
                                          array('title' => BOX_CONFIGURATION_CUSTOMER_DETAILS, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=5')),
                                          array('title' => BOX_CONFIGURATION_SHIPPING, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=7')),
                                          array('title' => BOX_CONFIGURATION_PRODUCT_LISTING, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=8')),
-                                         array('title' => BOX_CONFIGURATION_PRODUCT_INFO, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=888001')),
+                                         array('title' => BOX_CONFIGURATION_PRODUCT_INFO, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=50')),
                                          array('title' => BOX_CONFIGURATION_STOCK, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=9')),
                                          array('title' => BOX_CONFIGURATION_LOGGING, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=10')),
                                          array('title' => BOX_CONFIGURATION_CACHE, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=11')),
@@ -132,14 +132,17 @@ $Id: index.php 14 2006-07-28 17:42:07Z user $
                                          array('title' => BOX_CONFIGURATION_DOWNLOAD, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=13')),
                                          array('title' => BOX_CONFIGURATION_GZIP, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=14')),
                                          array('title' => BOX_CONFIGURATION_SESSIONS, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=15')),
-                                         array('title' => BOX_CONFIGURATION_WYSIWYG, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=112')),
-                                         array('title' => BOX_CONFIGURATION_AFFILIATE, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=900')),
+                                         array('title' => BOX_CONFIGURATION_WYSIWYG, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=25')),
+                                         array('title' => BOX_CONFIGURATION_AFFILIATE, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=35')),
                                          array('title' => BOX_CONFIGURATION_ACCOUNTS, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=40')),
                                          array('title' => BOX_CONFIGURATION_MAINTENANCE, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=16')),
-                                         array('title' => BOX_CONFIGURATION_PAGE_CACHE, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=26229')),
-                                         array('title' => BOX_CONFIGURATION_MOPICS, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=901')),
-                                         array('title' => BOX_CONFIGURATION_PRINT, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=899')),
-                                         array('title' => BOX_CONFIGURATION_SEO, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=888002')))),
+                                         array('title' => BOX_CONFIGURATION_PAGE_CACHE, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=55')),
+                                         array('title' => BOX_CONFIGURATION_MOPICS, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=45')),
+                                         array('title' => BOX_CONFIGURATION_PRINT, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=30')),
+                                         array('title' => BOX_CONFIGURATION_SEO, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=60')),
+                                         array('title' => BOX_CONFIGURATION_WISHLIST, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=65')),
+                                         array('title' => BOX_CONFIGURATION_EDITOR, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=70')),
+                                         array('title' => BOX_CONFIGURATION_SEO_VALIDATION, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=75')))),
 
                array('title' => BOX_HEADING_LOCATION_AND_TAXES,
 // Added line for Admin w/access levels
@@ -242,7 +245,7 @@ a:hover.headerLink { font-family: Verdana, Arial, sans-serif; font-size: 10px; c
         <td><table border="0" width="600" height="440" cellspacing="0" cellpadding="0">
           <tr bgcolor="#ffffff" height="50">
             <td height="50"><?php echo '<a href="http://www.oscmax.com">' . tep_image(DIR_WS_IMAGES . 'oscmax-logo.png', 'osCMax v2.0', '85', '80') . '</a>'; ?></td>
-            <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.aabox.com" target="_blank" class="headerLink">osCMax Hosting</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.oscdox.com" class="headerLink">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '" class="headerLink">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '" class="headerLink">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp<br>Current Version: <?php echo PROJECT_VERSION ?>&nbsp;&nbsp;</td>
+            <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.oscmax.com/forums/" class="headerLink">' . BOX_ENTRY_SUPPORT_FORUMS . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '" class="headerLink">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '" class="headerLink">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp<br>Current Version: <?php echo PROJECT_VERSION ?>&nbsp;&nbsp;</td>
           </tr>
           <tr bgcolor="#E7E7E7">
             <td colspan="2"><table border="0" width="100%" height="390" cellspacing="0" cellpadding="0">
@@ -260,13 +263,13 @@ a:hover.headerLink { font-family: Verdana, Arial, sans-serif; font-size: 10px; c
   $contents[] = array('params' => 'class="infoBox"',
                       'text'  => '<a href="http://www.oscmax.com" target="_blank">' . BOX_ENTRY_SUPPORT_SITE . '</a><br>' .
                                  '<a href="http://www.oscmax.com/forums" target="_blank">' . BOX_ENTRY_SUPPORT_FORUMS . '</a><br>' .
-                                 '<a href="http://www.osCDox.com/mailinglist/index.php?p=subscribe&id=1" target="_blank">' . BOX_ENTRY_MAILING_LISTS . '</a><br>' .
+                                 '<a href="http://www.oscmax.com/template_store_oscmax_skins_0" target="_blank">' . BOX_ENTRY_TEMPLATE_STORE . '</a><br>' .
                                  '<a href="http://bugtrack.oscmax.com/" target="_blank">' . BOX_ENTRY_BUG_REPORTS . '</a><br>' .
-                                 '<a href="https://www.paypal.com/us/mrb/pal=CDCRNFVMQRHTC" target="_blank">' . BOX_ENTRY_PAYPAL . '</a><br>' .
-                                 '<a href="http://www.aabox.com/merchant-accounts.htm?oscmax" target="_blank">' . BOX_ENTRY_MERCHANT . '</a><br>' .
-                                 '<a href="http://www.aabox.com/domains.htm?oscmax" target="_blank">' . BOX_ENTRY_DOMAINS . '</a><br>' .
-                                 '<a href="http://www.aabox.com/ssl-compare.htm?oscmax" target="_blank">' . BOX_ENTRY_SSL . '</a><br>' .
-               			 '<a href="http://www.aabox.com/virtual-hosting-oscmax.htm" target="_blank">' . BOX_ENTRY_AABOX . '</a>');
+                                 '<a href="https://www.paypal.com/us/mrb/pal=QFHLNU89TLJYA" target="_blank">' . BOX_ENTRY_PAYPAL . '</a><br>' .
+                                 '<a href="https://www.cdgcommerce.com/internet-services.php?R=1017" target="_blank">' . BOX_ENTRY_MERCHANT . '</a><br>');
+                            //   '<a href="http://www.aabox.com/domains.htm?oscmax" target="_blank">' . BOX_ENTRY_DOMAINS . '</a><br>' .
+                            //   '<a href="http://www.aabox.com/ssl-compare.htm?oscmax" target="_blank">' . BOX_ENTRY_SSL . '</a><br>' .
+               	            //	 '<a href="http://www.aabox.com/virtual-hosting-oscmax.htm" target="_blank">' . BOX_ENTRY_AABOX . '</a>');
 
   $box = new box;
   echo $box->menuBox($heading, $contents);

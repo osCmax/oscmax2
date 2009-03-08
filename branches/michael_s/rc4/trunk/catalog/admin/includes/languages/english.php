@@ -208,6 +208,9 @@ define('BOX_CONFIGURATION_MAINTENANCE', 'Site Maintenance');
 define('BOX_CONFIGURATION_MOPICS', 'Dynamic MoPics');
 define('BOX_CONFIGURATION_PRINT', 'Printable Catalog');
 define('BOX_CONFIGURATION_SEO', 'SEO URLs');
+define('BOX_CONFIGURATION_WISHLIST', 'Wishlist Settings');
+define('BOX_CONFIGURATION_EDITOR', 'Order Edtior');
+define('BOX_CONFIGURATION_SEO_VALIDATION', 'SEO URL Validation');
 // EOF: Added for super-friendly admin menu:
 
 // modules box text in includes/boxes/modules.php

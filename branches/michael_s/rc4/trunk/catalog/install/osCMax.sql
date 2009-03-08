@@ -1057,10 +1057,13 @@ CREATE TABLE reviews_description (
 
 DROP TABLE IF EXISTS scart;
 CREATE TABLE scart (
-  scartid int NOT NULL auto_increment,
-  customers_id int NOT NULL default '0',
+  scartid int(11) NOT NULL AUTO_INCREMENT,
+  customers_id int(11) NOT NULL,
   dateadded varchar(8) NOT NULL,
-  PRIMARY KEY (scartid)
+  datemodified varchar(8) NOT NULL,
+  PRIMARY KEY (scartid),
+  UNIQUE KEY scartid (scartid),
+  UNIQUE KEY customers_id (customers_id)
 );
 
 DROP TABLE IF EXISTS searchword_swap;
@@ -1085,8 +1088,6 @@ CREATE TABLE search_queries_sorted (
   search_count int NOT NULL default '0',
   PRIMARY KEY (search_id)
 );
-
-
 
 DROP TABLE IF EXISTS sessions;
 CREATE TABLE sessions (
@@ -1751,6 +1752,27 @@ INSERT INTO configuration VALUES (1487, 'Dimensions Support', 'SHIPPING_DIMENSIO
 INSERT INTO configuration VALUES (1488, 'Unit Weight', 'SHIPPING_UNIT_WEIGHT', 'LBS', 'By what unit are your packages weighed?', 7, 7, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''LBS'', ''KGS''), ');
 INSERT INTO configuration VALUES (1489, 'Unit Length', 'SHIPPING_UNIT_LENGTH', 'IN', 'By what unit are your packages sized?', 7, 8, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''IN'', ''CM''), ');
 INSERT INTO configuration VALUES (1490, 'Store result of packing routines', 'SHIPPING_STORE_BOXES_USED', 'false', 'Do you want to store the results of the packing routines in the database? See file store_ups_boxes_used.txt in UPSXML package for details and modifications needed.', 7, 9, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (1491, 'Look back days', 'RCS_BASE_DAYS', '30', 'Number of days to look back from today for abandoned carts.', 80, 10, NULL, '2009-03-07 22:31:53', '', '');
+INSERT INTO configuration VALUES (1492, 'Skip days', 'RCS_SKIP_DAYS', '5', 'Number of days to skip when looking for abandoned carts.', 80, 11, NULL, '2009-03-07 22:31:53', '', '');
+INSERT INTO configuration VALUES (1493, 'Sales Results Report days', 'RCS_REPORT_DAYS', '90', 'Number of days the sales results report takes into account. The more days the longer the SQL queries!.', 80, 15, NULL, '2009-03-07 22:31:53', '', '');
+INSERT INTO configuration VALUES (1494, 'Use Calculated taxes', 'RCS_INCLUDE_TAX_IN_PRICES', 'false', 'Try to calculate the tax when determining prices. This may not be 100% correct as determing location being shopped from, etc. may be incorrect.', 80, 16, NULL, '2009-03-07 22:31:53', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (1495, 'Use Fixed tax rate', 'RCS_USE_FIXED_TAX_IN_PRICES', 'false', 'Use a fixed tax rate when determining prices (rate set below). Overridden if ''Use Calculated taxes'' is true.', 80, 17, NULL, '2009-03-07 22:31:53', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (1496, 'Fixed Tax Rate', 'RCS_FIXED_TAX_RATE', '10.00', 'The fixed tax rate for use when ''Use Fixed tax rate'' is true and ''Use Calculated taxes'' is false.<br><br>Use decimal values, ie: 8.50 for 8 1/2%', 80, 18, NULL, '2009-03-07 22:31:53', '', '');
+INSERT INTO configuration VALUES (1497, 'E-Mail time to live', 'RCS_EMAIL_TTL', '90', 'Number of days to give for emails before they no longer show as being sent', 80, 20, NULL, '2009-03-07 22:31:53', '', '');
+INSERT INTO configuration VALUES (1498, 'Friendly E-Mails', 'RCS_EMAIL_FRIENDLY', 'true', 'If <b>true</b> then the customer''s name will be used in the greeting. If <b>false</b> then a generic greeting will be used.', 80, 30, NULL, '2009-03-07 22:31:53', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (1499, 'E-Mail Copies to', 'RCS_EMAIL_COPIES_TO', '', 'If you want copies of emails that are sent to customers by this contribution, enter the email address here. If empty no copies are sent', 80, 35, NULL, '2009-03-07 22:31:53', '', '');
+INSERT INTO configuration VALUES (1500, 'Show Attributes', 'RCS_SHOW_ATTRIBUTES', 'false', 'Controls display of item attributes.<br><br>Some sites have attributes for their items.<br><br>Set this to <b>true</b> if yours does and you want to show them, otherwise set to <b>false</b>.', 80, 40, NULL, '2009-03-07 22:31:53', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (1501, 'Ignore Customers with Sessions', 'RCS_CHECK_SESSIONS', 'false', 'If you want the tool to ignore customers with an active session (ie, probably still shopping) set this to <b>true</b>.<br><br>Setting this to <b>false</b> will operate in the default manner of ignoring session data & using less resources.', 80, 40, NULL, '2009-03-07 22:31:53', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (1502, 'Current Customer Color', 'RCS_CURCUST_COLOR', '0000FF', 'Color for the word/phrase used to notate a current customer<br><br>A current customer is someone who has purchased items from your store in the past.', 80, 50, NULL, '2009-03-07 22:31:53', '', '');
+INSERT INTO configuration VALUES (1503, 'Uncontacted hilight color', 'RCS_UNCONTACTED_COLOR', '9FFF9F', 'Row highlight color for uncontacted customers.<br><br>An uncontacted customer is one that you have <i>not</i> used this tool to send an email to before.', 80, 60, NULL, '2009-03-07 22:31:53', '', '');
+INSERT INTO configuration VALUES (1504, 'Contacted hilight color', 'RCS_CONTACTED_COLOR', 'FF9F9F', 'Row highlight color for contacted customers.<br><br>An contacted customer is one that you <i>have</i> used this tool to send an email to before.', 80, 70, NULL, '2009-03-07 22:31:53', '', '');
+INSERT INTO configuration VALUES (1505, 'Matching Order Hilight', 'RCS_MATCHED_ORDER_COLOR', '9FFFFF', 'Row highlight color for entrees that may have a matching order.<br><br>An entry will be marked with this color if an order contains one or more of an item in the abandoned cart <b>and</b> matches either the cart''s customer email address or database ID.', 80, 72, NULL, '2009-03-07 22:31:53', '', '');
+INSERT INTO configuration VALUES (1506, 'Skip Carts w/Matched Orders', 'RCS_SKIP_MATCHED_CARTS', 'true', 'To ignore carts with an a matching order set this to <b>true</b>.<br><br>Setting this to <b>false</b> will cause entries with a matching order to show, along with the matching order''s status.<br><br>See documentation for details.', 80, 80, NULL, '2009-03-07 22:31:53', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (1507, 'Autocheck "safe" carts to email', 'RCS_AUTO_CHECK', 'true', 'To check entries which are most likely safe to email (ie, not existing customers, not previously emailed, etc.) set this to <b>true</b>.<br><br>Setting this to <b>false</b> will leave all entries unchecked (must manually check entries to send an email to)', 80, 82, NULL, '2009-03-07 22:31:53', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (1508, 'Match orders from any date', 'RCS_CARTS_MATCH_ALL_DATES', 'true', 'If <b>true</b> then any order found with a matching item will be considered a matched order.<br><br>If <b>false</b> only orders placed after the abandoned cart are considered.', 80, 84, NULL, '2009-03-07 22:31:53', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (1509, 'Lowest Pending sales status', 'RCS_PENDING_SALE_STATUS', '1', 'The highest value that an order can have and still be considered pending. Any value higher than this will be considered by RCS as sale which completed.<br><br>See documentation for details.', 80, 85, NULL, '2009-03-07 22:31:53', 'tep_get_order_status_name', 'tep_cfg_pull_down_order_statuses(');
+INSERT INTO configuration VALUES (1510, 'Report Even Row Style', 'RCS_REPORT_EVEN_STYLE', 'dataTableRow', 'Style for even rows in results report. Typical options are <i>dataTableRow</i> and <i>attributes-even</i>.', 80, 90, NULL, '2009-03-07 22:31:53', '', '');
+INSERT INTO configuration VALUES (1511, 'Report Odd Row Style', 'RCS_REPORT_ODD_STYLE', '', 'Style for odd rows in results report. Typical options are NULL (ie, no entry) and <i>attributes-odd</i>.', 80, 92, NULL, '2009-03-07 22:31:53', '', '');
 
 
 
@@ -1782,6 +1804,8 @@ INSERT INTO configuration_group VALUES (60,'SEO URLs','Options for Ultimate SEO 
 INSERT INTO configuration_group VALUES (65,'Wish List Settings','Settings for your Wish List', 25,1);
 INSERT INTO configuration_group VALUES (70,'Order Editor','Configuration options for Order Editor', 903,1);
 INSERT INTO configuration_group VALUES (75,'SEO URL Validation','Validation For Ultimate SEO URLs', 950,1);
+INSERT INTO configuration_group VALUES (80, 'Recover Cart Sales', 'Recover Cart Sales (RCS) Configuration Values', 55, 1);
+
 
 INSERT INTO countries VALUES (1,'Afghanistan','AF','AFG','1');
 INSERT INTO countries VALUES (2,'Albania','AL','ALB','1');

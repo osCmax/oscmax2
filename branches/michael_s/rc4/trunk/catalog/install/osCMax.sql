@@ -1384,6 +1384,7 @@ INSERT INTO admin_files VALUES (126,'affiliate_validcats.php',0,43,'1');
 INSERT INTO admin_files VALUES (127,'affiliate_validproducts.php',0,43,'1');
 INSERT INTO admin_files VALUES (128,'edit_orders_add_product.php',0,5,'1');
 INSERT INTO admin_files VALUES (129,'edit_orders_ajax.php',0,5,'1');
+INSERT INTO admin_files VALUES (130, 'attributeManager.php', 0, 3, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');

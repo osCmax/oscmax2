@@ -106,7 +106,7 @@ document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENA
 </noscript>
 <?php
 			} else {
-          echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+          echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
 			}
 ?>
               </td>

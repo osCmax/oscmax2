@@ -844,6 +844,28 @@ function tep_selected_file($filename) {
   }
 
 ////
+// Return a product's special price (returns nothing if there is no offer)
+// TABLES: products
+  function tep_get_products_special_price($product_id) {
+// BOF: MOD - Separate Pricing Per Customer
+//  $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status");
+    global $sppc_customer_group_id;
+
+    if(!tep_session_is_registered('sppc_customer_group_id')) {
+      $customer_group_id = '0';
+    } else {
+      $customer_group_id = $sppc_customer_group_id;
+    }
+    $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status and customers_group_id = '" . (int)$customer_group_id . "'");
+// EOF: MOD - Separate_Pricing Per Customer
+
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['specials_new_products_price'];
+  }
+
+
+////
 // Sets timeout for the current script.
 // Cant be used in safe mode.
   function tep_set_time_limit($limit) {

@@ -23,7 +23,7 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
     osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "\"' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_NAME']) . '\" <' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '>" where configuration_key = "EMAIL_FROM"');
   }
 
-  $check_query = osc_db_query('select admin_username from ' . TABLE_ADMINISTRATORS . ' where admin_user_name = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
+  $check_query = osc_db_query('select admin_username from ' . TABLE_ADMINISTRATORS . ' where admin_username = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
 
   if (osc_db_num_rows($check_query)) {
     osc_db_query('update ' . TABLE_ADMINISTRATORS . ' set admin_password = "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '" where admin_username = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');

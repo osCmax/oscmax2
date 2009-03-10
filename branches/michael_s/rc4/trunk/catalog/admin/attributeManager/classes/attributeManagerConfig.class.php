@@ -57,7 +57,7 @@ class attributeManagerConfig {
 		$this->add('AM_TABLE_ATTRIBUTES_TO_TEMPLATES','am_attributes_to_templates');
 		
 		
-		$this->add('AM_USE_SORT_ORDER' , true);
+		$this->add('AM_USE_SORT_ORDER' , false);
 		$this->add('AM_USE_QT_PRO' , false); // DO NOT USE STILL IN DEV
 		
 		/**

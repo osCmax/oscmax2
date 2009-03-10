@@ -71,7 +71,7 @@ $ban_id=$affiliate_banners['affiliate_banners_id'];
           </tr>
           </table>
 <?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-<? 
+<?php 
    }
 }
 ?>

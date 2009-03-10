@@ -58,7 +58,7 @@
           </tr>
           </table>
 <?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-<? }
+<?php }
    }
 }
 ?>

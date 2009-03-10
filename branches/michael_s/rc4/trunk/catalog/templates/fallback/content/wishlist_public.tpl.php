@@ -190,7 +190,7 @@
 ?>
 </table></form>
 
-<?
+<?php
 } else { // Nothing in the customers wishlist
 
 ?>

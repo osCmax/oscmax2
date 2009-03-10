@@ -141,8 +141,8 @@ if ($HTTP_GET_VARS['delete']) {
 <?php // Are we doing an e-mail to some customers?
 if (count($custid) > 0 ) {  ?>
             <tr>
-              <td class="pageHeading" align="left" colspan=2 width="50%"><? echo HEADING_TITLE; ?> </td>
-              <td class="pageHeading" align="left" colspan=4 width="50%"><? echo HEADING_EMAIL_SENT; ?> </td>
+              <td class="pageHeading" align="left" colspan=2 width="50%"><?php echo HEADING_TITLE; ?> </td>
+              <td class="pageHeading" align="left" colspan=4 width="50%"><?php echo HEADING_EMAIL_SENT; ?> </td>
             </tr>
             <tr class="dataTableHeadingRow">
               <td class="dataTableHeadingContent" align="left" colspan="1" width="15%" nowrap><?php echo TABLE_HEADING_CUSTOMER; ?></td>
@@ -303,7 +303,7 @@ else	 //we are NOT doing an e-mail to some customers
             <tr>
               <td class="pageHeading" align="left" width="50%" colspan="4"><?php echo HEADING_TITLE; ?></td>
               <td class="pageHeading" align="right" width="50%" colspan="4">
-                <form method=post action=<? echo $PHP_SELF;?> >
+                <form method=post action=<?php echo $PHP_SELF;?> >
                   <table align="right" width="100%">
                     <tr class="dataTableContent" align="right">
                       <td><?php echo DAYS_FIELD_PREFIX; ?><input type=text size=4 width=4 value=<?php echo $sdate; ?> name=sdate> - <input type=text size=4 width=4 value=<?php echo $tdate; ?> name=tdate><?php echo DAYS_FIELD_POSTFIX; ?><input type=submit value="<?php echo DAYS_FIELD_BUTTON; ?>"></td>

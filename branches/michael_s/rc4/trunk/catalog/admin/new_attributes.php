@@ -4,6 +4,10 @@
 
   require('new_attributes_config.php');
   require('includes/application_top.php');
+  $action = (isset($HTTP_POST_VARS['action']) ? $HTTP_POST_VARS['action'] : '');
+  $current_product_id = (isset($HTTP_POST_VARS['current_product_id']) ? $HTTP_POST_VARS['current_product_id'] : '');
+  $optionValues = (isset($HTTP_POST_VARS['optionValues']) ? $HTTP_POST_VARS['optionValues'] : '');
+  $languageFilter = $languages_id;
 
   if ( $cPathID && $action == "change" )
   {

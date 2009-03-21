@@ -100,7 +100,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
     $articles_name_query = tep_db_query("select articles_name from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$reviews['articles_id'] . "' and language_id = '" . (int)$languages_id . "'");
     $articles_name = tep_db_fetch_array($articles_name_query);
 
-    $rInfo_array = array_merge($reviews, $articles, $articles_name);
+    $rInfo_array = array_merge((array)$reviews, (array)$articles, (array)$articles_name);
     $rInfo = new objectInfo($rInfo_array);
 ?>
       <tr><?php echo tep_draw_form('review', FILENAME_ARTICLE_REVIEWS, 'page=' . $HTTP_GET_VARS['page'] . '&rID=' . $HTTP_GET_VARS['rID'] . '&action=preview'); ?>

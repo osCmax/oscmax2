@@ -10,66 +10,6 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   Released under the GNU General Public License
 */
 
-/// Begin mods for Order Editor
-// Return the tax description for a zone / class
-// TABLES: tax_rates;
-  function tep_get_tax_description($class_id, $country_id, $zone_id) {
-    $tax_query = tep_db_query("select tax_description from " . TABLE_TAX_RATES . " tr left join " . TABLE_ZONES_TO_GEO_ZONES . " za on (tr.tax_zone_id = za.geo_zone_id) left join " . TABLE_GEO_ZONES . " tz on (tz.geo_zone_id = tr.tax_zone_id) where (za.zone_country_id is null or za.zone_country_id = '0' or za.zone_country_id = '" . (int)$country_id . "') and (za.zone_id is null or za.zone_id = '0' or za.zone_id = '" . (int)$zone_id . "') and tr.tax_class_id = '" . (int)$class_id . "' order by tr.tax_priority");
-    if (tep_db_num_rows($tax_query)) {
-      $tax_description = '';
-      while ($tax = tep_db_fetch_array($tax_query)) {
-        $tax_description .= $tax['tax_description'] . ' + ';
-      }
-      $tax_description = substr($tax_description, 0, -3);
-
-      return $tax_description;
-    } else {
-      return ENTRY_TAX;
-    }
-  }
-
-////
-
-// Function    : tep_get_country_id
-  // Arguments   : country_name		country name string
-  // Return      : country_id
-  // Description : Function to retrieve the country_id based on the country's name
-  function tep_get_country_id($country_name) {
-    $country_id_query = tep_db_query("select * from " . TABLE_COUNTRIES . " where countries_name = '" . $country_name . "'");
-    if (!tep_db_num_rows($country_id_query)) {
-      return 0;
-    }
-    else {
-      $country_id_row = tep_db_fetch_array($country_id_query);
-      return $country_id_row['countries_id'];
-    }
-  }
-
-   // Function    : tep_get_zone_id
-  // Arguments   : country_id		country id string    zone_name		state/province name
-  // Return      : zone_id
-  // Description : Function to retrieve the zone_id based on the zone's name
-  function tep_get_zone_id($country_id, $zone_name) {
-    $zone_id_query = tep_db_query("select * from " . TABLE_ZONES . " where zone_country_id = '" . $country_id . "' and zone_name = '" . $zone_name . "'");
-    if (!tep_db_num_rows($zone_id_query)) {
-      return 0;
-    }
-    else {
-      $zone_id_row = tep_db_fetch_array($zone_id_query);
-      return $zone_id_row['zone_id'];
-    }
-  }
-  
-
-// Function    : tep_html_quotes
-  // Arguments   : string	any string
-  // Return      : string with single quotes converted to html equivalent
-  // Description : Function to change quotes to HTML equivalents for form inputs.
-  function tep_html_quotes($string) {
-    return str_replace("'", "&#39;", $string);
-  }
-
-/////end Order Editor mods
 // BOF: MOD - Admin w/access levels
 //Check login and file access
 function tep_admin_check_login() {
@@ -78,10 +18,10 @@ function tep_admin_check_login() {
     tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
   } else {
     $filename = basename( $PHP_SELF );
-    if ($filename != FILENAME_DEFAULT && $filename != FILENAME_FORBIDEN && $filename != FILENAME_LOGOFF && $filename != FILENAME_ADMIN_ACCOUNT && $filename != FILENAME_POPUP_IMAGE && $filename != 'packingslip.php' && $filename != 'invoice.php') {
+    if ($filename != FILENAME_DEFAULT && $filename != FILENAME_FORBIDDEN && $filename != FILENAME_LOGOFF && $filename != FILENAME_ADMIN_ACCOUNT && $filename != FILENAME_POPUP_IMAGE && $filename != 'packingslip.php' && $filename != 'invoice.php') {
       $db_file_query = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where FIND_IN_SET( '" . $login_groups_id . "', admin_groups_id) and admin_files_name = '" . $filename . "'");
       if (!tep_db_num_rows($db_file_query)) {
-        tep_redirect(tep_href_link(FILENAME_FORBIDEN));
+        tep_redirect(tep_href_link(FILENAME_FORBIDDEN));
       }
     }
   }
@@ -904,6 +844,28 @@ function tep_selected_file($filename) {
   }
 
 ////
+// Return a product's special price (returns nothing if there is no offer)
+// TABLES: products
+  function tep_get_products_special_price($product_id) {
+// BOF: MOD - Separate Pricing Per Customer
+//  $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status");
+    global $sppc_customer_group_id;
+
+    if(!tep_session_is_registered('sppc_customer_group_id')) {
+      $customer_group_id = '0';
+    } else {
+      $customer_group_id = $sppc_customer_group_id;
+    }
+    $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status and customers_group_id = '" . (int)$customer_group_id . "'");
+// EOF: MOD - Separate_Pricing Per Customer
+
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['specials_new_products_price'];
+  }
+
+
+////
 // Sets timeout for the current script.
 // Cant be used in safe mode.
   function tep_set_time_limit($limit) {
@@ -1090,9 +1052,14 @@ $select_array[$i] . '"';
     tep_db_query("delete from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$product_id . "'");
     tep_db_query("delete from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "'");
     tep_db_query("delete from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'");
-    tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where products_id = '" . (int)$product_id . "'");
-    tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'");
-
+    tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
+    tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
+ 
+// BOF: MOD - Wishlist addition to delete products from the wishlist when deleted 
+    tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = '" . (int)$product_id . "'"); 
+    tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'"); 
+// EOF: MOD - Wishlist addition to delete products from the wishlist when deleted 
+ 
     $product_reviews_query = tep_db_query("select reviews_id from " . TABLE_REVIEWS . " where products_id = '" . (int)$product_id . "'");
     while ($product_reviews = tep_db_fetch_array($product_reviews_query)) {
       tep_db_query("delete from " . TABLE_REVIEWS_DESCRIPTION . " where reviews_id = '" . (int)$product_reviews['reviews_id'] . "'");
@@ -1356,54 +1323,22 @@ $select_array[$i] . '"';
 
 ////
 // Add tax to a products price
-  function tep_add_tax($price, $tax) {
-    global $currencies;
-
-    if (DISPLAY_PRICE_WITH_TAX == 'true') {
-      return tep_round($price, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']) + tep_calculate_tax($price, $tax);
+  function tep_add_tax($price, $tax, $override = false) {
+    if ( ( (DISPLAY_PRICE_WITH_TAX == 'true') || ($override == true) ) && ($tax > 0) ) {
+      return $price + tep_calculate_tax($price, $tax);
     } else {
-      return tep_round($price, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']);
+      return $price;
     }
   }
 
 // Calculates Tax rounding the result
   function tep_calculate_tax($price, $tax) {
-    global $currencies;
-
-    return tep_round($price * $tax / 100, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']);
+    return $price * $tax / 100;
   }
 
 ////
 // Returns the tax rate for a zone / class
 // TABLES: tax_rates, zones_to_geo_zones
-// This is the original function
-/*
-  function tep_get_tax_rate($class_id, $country_id = -1, $zone_id = -1) {
-    global $customer_zone_id, $customer_country_id;
-
-    if ( ($country_id == -1) && ($zone_id == -1) ) {
-      if (!tep_session_is_registered('customer_id')) {
-        $country_id = STORE_COUNTRY;
-        $zone_id = STORE_ZONE;
-      } else {
-        $country_id = $customer_country_id;
-        $zone_id = $customer_zone_id;
-      }
-    }
-
-    $tax_query = tep_db_query("select SUM(tax_rate) as tax_rate from " . TABLE_TAX_RATES . " tr left join " . TABLE_ZONES_TO_GEO_ZONES . " za ON tr.tax_zone_id = za.geo_zone_id left join " . TABLE_GEO_ZONES . " tz ON tz.geo_zone_id = tr.tax_zone_id WHERE (za.zone_country_id IS NULL OR za.zone_country_id = '0' OR za.zone_country_id = '" . (int)$country_id . "') AND (za.zone_id IS NULL OR za.zone_id = '0' OR za.zone_id = '" . (int)$zone_id . "') AND tr.tax_class_id = '" . (int)$class_id . "' GROUP BY tr.tax_priority");
-    if (tep_db_num_rows($tax_query)) {
-      $tax_multiplier = 0;
-      while ($tax = tep_db_fetch_array($tax_query)) {
-        $tax_multiplier += $tax['tax_rate'];
-      }
-      return $tax_multiplier;
-    } else {
-      return 0;
-    }
-  }
-  */
- //this one is copied from the catalog side
   function tep_get_tax_rate($class_id, $country_id = -1, $zone_id = -1) {
     global $customer_zone_id, $customer_country_id;
 
@@ -1428,7 +1363,7 @@ $select_array[$i] . '"';
       return 0;
     }
   }
-  
+
 ////
 // Returns the tax rate for a tax class
 // TABLES: tax_rates
@@ -1558,6 +1493,54 @@ $select_array[$i] . '"';
 
     return $tmp_array;
   }
+
+// BOF: MOD - Order Editor
+//////create a pull down for all payment installed payment methods for Order Editor configuration
+// Get list of all payment modules available
+  function tep_cfg_pull_down_payment_methods() {
+  global $language;
+  $enabled_payment = array();
+  $module_directory = DIR_FS_CATALOG_MODULES . 'payment/';
+  $file_extension = '.php';
+
+  if ($dir = @dir($module_directory)) {
+    while ($file = $dir->read()) {
+      if (!is_dir( $module_directory . $file)) {
+        if (substr($file, strrpos($file, '.')) == $file_extension) {
+          $directory_array[] = $file;
+        }
+      }
+    }
+    sort($directory_array);
+    $dir->close();
+  }
+
+  // For each available payment module, check if enabled
+  for ($i=0, $n=sizeof($directory_array); $i<$n; $i++) {
+    $file = $directory_array[$i];
+
+    include(DIR_FS_CATALOG_LANGUAGES . $language . '/modules/payment/' . $file);
+    include($module_directory . $file);
+
+    $class = substr($file, 0, strrpos($file, '.'));
+    if (tep_class_exists($class)) {
+      $module = new $class;
+      if ($module->check() > 0) {
+        // If module enabled create array of titles
+      	$enabled_payment[] = array('id' => $module->title, 'text' => $module->title);
+		
+      }
+   }
+ }
+ 				
+    $enabled_payment[] = array('id' => 'Other', 'text' => 'Other');	
+		
+		//draw the dropdown menu for payment methods and default to the order value
+	  return tep_draw_pull_down_menu('configuration_value', $enabled_payment, '', ''); 
+		}
+/////end payment method dropdown
+// EOF: MOD - Order Editor
+
 // LINE ADDED: MOD - Downloads Controller
   require(DIR_WS_FUNCTIONS . 'downloads_controller.php');
 

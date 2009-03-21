@@ -43,7 +43,7 @@
         $product_info['products_price']= $scustomer_group_price['customers_group_price'];
 	}
 // EOF Separate Price per Customer
-      $products_price = '<s>' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s> <span class="productSpecialPrice">' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span>';
+      $products_price = '<span style="text-decoration:line-through">' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span> <span class="productSpecialPrice">' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span>';
     } else {
 // BOF Separate Price per Customer
         $scustomer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id']. "' and customers_group_id =  '" . $customer_group_id . "'");
@@ -59,6 +59,18 @@
     } else {
       $products_name = $product_info['products_name'];
     }
+
+// BOF: Mod - Wishlist
+//DISPLAY PRODUCT WAS ADDED TO WISHLIST IF WISHLIST REDIRECT IS ENABLED
+    if(tep_session_is_registered('wishlist_id')) {
+?>  
+      <tr>
+        <td class="messageStackSuccess"><?php echo PRODUCT_ADDED_TO_WISHLIST; ?></td>
+      </tr> 
+<?php
+      tep_session_unregister('wishlist_id');
+    }
+// EOF: Mod - Wishlist
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -85,20 +97,20 @@
 			if ($lg_image_ext = mopics_file_exists(DIR_FS_CATALOG . $image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
 				$image_size = @getimagesize(DIR_FS_CATALOG . $image_lg . '.' . $lg_image_ext);
 ?>
-          <script language="javascript" type="text/javascript"><!--
-            document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $product_info['products_id'] . '&type=' . $lg_image_ext); ?>\',\'<?php echo ((int)$image_size[1] + 30); ?>\',\'<?php echo ((int)$image_size[0] + 5); ?>\');"><?php echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>');
+
+<script language="javascript" type="text/javascript"><!--
+document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $product_info['products_id'] . '&type=' . $lg_image_ext); ?>\',\'<?php echo ((int)$image_size[1] + 30); ?>\',\'<?php echo ((int)$image_size[0] + 5); ?>\');"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>');
 //--></script>
 <noscript>
-            <a href="<?php echo tep_href_link($image_lg . '.' . $lg_image_ext); ?>" target="_blank"><?php echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>
+<a href="<?php echo tep_href_link($image_lg . '.' . $lg_image_ext); ?>" target="_blank"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>
 </noscript>
 <?php
 			} else {
-          echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+          echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
 			}
 ?>
               </td>
             </tr>
-
           </table>
 <?php
     }
@@ -188,9 +200,9 @@
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                 <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params()) . '">' . tep_image_button('button_reviews.gif', IMAGE_BUTTON_REVIEWS) . '</a>'; ?></td>
-                <!-- Wish List 2.3 Start -->
-                <td align="center" class="main"><?php echo tep_draw_hidden_field('wishlist_action', 'add_wishlist') . tep_image_submit('button_wishlist.gif', IMAGE_BUTTON_ADD_WISHLIST, 'onClick="document.cart_quantity.action=\''. tep_href_link(FILENAME_WISHLIST, tep_get_all_get_params(array('action')) . 'action=add_wishlist') . '\';document.cart_quantity.submit();"'); ?></td>
-                <!-- Wish List 2.3 End   -->
+                <!-- Wish List 3.5 Start -->
+                <td align="center"><?php echo tep_image_submit('button_wishlist.gif', 'Add to Wishlist', 'name="wishlist" value="wishlist"'); ?></td>
+                <!-- Wish List 3.5 End   -->
                 <td class="main" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
@@ -213,7 +225,7 @@
      include(DIR_WS_MODULES . FILENAME_XSELL_PRODUCTS);
       include(DIR_WS_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
     }
-   }
+  }
 ?>
         </td>
       </tr>

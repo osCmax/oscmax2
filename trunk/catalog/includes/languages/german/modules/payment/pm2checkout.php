@@ -5,22 +5,16 @@ $Id: pm2checkout.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */
 
   define('MODULE_PAYMENT_2CHECKOUT_TEXT_TITLE', '2CheckOut');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_DESCRIPTION', 'Kreditkarten Test Info:<br><br>CC#: 4111111111111111<br>G&uuml;ltig bis: Any');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_TYPE', 'Typ:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_OWNER', 'Kreditkarteninhaber:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_OWNER_FIRST_NAME', 'Kreditkarteninhaber Vorname:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_OWNER_LAST_NAME', 'Kreditkarteninhaber Nachname:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_NUMBER', 'Kreditkarten-Nr.:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_EXPIRES', 'G&uuml;ltig bis:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_CHECKNUMBER', 'Karten-Pr&uuml;fnummer:');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_CREDIT_CARD_CHECKNUMBER_LOCATION', '(Auf der Kartenr&uuml;ckseite im Unterschriftsfeld)');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_JS_CC_NUMBER', '* Die \'Kreditkarten-Nr.\' muss mindestens aus ' . CC_NUMBER_MIN_LENGTH . ' Zahlen bestehen.\n');
+  define('MODULE_PAYMENT_2CHECKOUT_TEXT_PUBLIC_TITLE', '2Checkout');
+  define('MODULE_PAYMENT_2CHECKOUT_TEXT_PUBLIC_DESCRIPTION', 'Kreditkarten und Alternativen');
+  define('MODULE_PAYMENT_2CHECKOUT_TEXT_DESCRIPTION', '<img src="images/icon_popup.gif" border="0">&nbsp;<a href="https://www.2checkout.com/2co/signup?affiliate=1255821" target="_blank" style="text-decoration: underline; font-weight: bold;">2Checkout Webseite besuchen</a>&nbsp;<a href="javascript:toggleDivBlock(\'pm2checkoutInfo\');">(info)</a><span id="pm2checkoutInfo" style="display: none;"><br><i>Bei Benutzung dieses Links erh&auml;lt osCMax f&uuml;r eine Neukundenvermittlung einen kleinen Bonus.</i></span><br><br>Kreditkarten Test Info:<br><br>CC#: 4111111111111111<br>G&uuml;ltig bis: Any');
   define('MODULE_PAYMENT_2CHECKOUT_TEXT_ERROR_MESSAGE', 'Bei der &Uuml;berp&uuml;fung Ihrer Kreditkarte ist ein Fehler aufgetreten! Bitte versuchen Sie es nochmal.');
-  define('MODULE_PAYMENT_2CHECKOUT_TEXT_ERROR', 'Fehler bei der &Uuml;berp&uuml;fung der Kreditkarte!');
+  define('MODULE_PAYMENT_2CHECKOUT_TEXT_WARNING_DEMO_MODE', 'In Review: Transaction performed in demo mode.');
+  define('MODULE_PAYMENT_2CHECKOUT_TEXT_WARNING_TRANSACTION_ORDER', 'In Review: Transaction total did not match order total.');
 ?>

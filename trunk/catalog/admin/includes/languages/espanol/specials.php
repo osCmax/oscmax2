@@ -25,6 +25,7 @@ define('TEXT_SPECIALS_EXPIRES_DATE', 'Fecha de Caducidad:');
 define('TEXT_SPECIALS_PRICE_TIP', '<b>Notas:</b><ul><li>Puedes introducir un porcentaje de reduccion del precio del producto, por ejemplo: <b>20%</b></li><li>Si por el contrario, introduces un precio de oferta debes de usar el punto como separador decimal \'.\' (punto decimal), por ejemplo: <b>49.99</b></li><li>Deja la fecha de caducidad vacia si no quieres caducidad</li></ul>');
 
 define('TEXT_INFO_DATE_ADDED', 'Fecha Alta:');
+define('TEXT_IMAGE_NONEXISTENT', 'IMAGE DOES NOT EXIST');
 define('TEXT_INFO_LAST_MODIFIED', 'Ultima Modificaci&oacute;n:');
 define('TEXT_INFO_NEW_PRICE', 'Nuevo Precio:');
 define('TEXT_INFO_ORIGINAL_PRICE', 'Precio Original:');

@@ -5,7 +5,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -35,6 +35,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
         $admin_id = tep_db_prepare_input($HTTP_POST_VARS['id_info']);
         $admin_email_address = tep_db_prepare_input($HTTP_POST_VARS['admin_email_address']);
         $stored_email[] = 'NONE';
+        $hiddenPassword = '-hidden-';
 
         $check_email_query = tep_db_query("select admin_email_address from " . TABLE_ADMIN . " where admin_id <> " . $admin_id . "");
         while ($check_email = tep_db_fetch_array($check_email_query)) {
@@ -44,7 +45,8 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
         if (in_array($HTTP_POST_VARS['admin_email_address'], $stored_email)) {
           tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'action=edit_process&error=email'));
         } else {
-          $sql_data_array = array('admin_firstname' => tep_db_prepare_input($HTTP_POST_VARS['admin_firstname']),
+          $sql_data_array = array('admin_username' => tep_db_prepare_input($HTTP_POST_VARS['admin_username']),
+                                  'admin_firstname' => tep_db_prepare_input($HTTP_POST_VARS['admin_firstname']),
                                   'admin_lastname' => tep_db_prepare_input($HTTP_POST_VARS['admin_lastname']),
                                   'admin_email_address' => tep_db_prepare_input($HTTP_POST_VARS['admin_email_address']),
                                   'admin_password' => tep_encrypt_password(tep_db_prepare_input($HTTP_POST_VARS['admin_password'])),
@@ -52,7 +54,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
 
           tep_db_perform(TABLE_ADMIN, $sql_data_array, 'update', 'admin_id = \'' . $admin_id . '\'');
 
-          tep_mail($HTTP_POST_VARS['admin_firstname'] . ' ' . $HTTP_POST_VARS['admin_lastname'], $HTTP_POST_VARS['admin_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $HTTP_POST_VARS['admin_firstname'], HTTP_SERVER . DIR_WS_ADMIN, $HTTP_POST_VARS['admin_email_address'], $hiddenPassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+          tep_mail($HTTP_POST_VARS['admin_firstname'] . ' ' . $HTTP_POST_VARS['admin_lastname'], $HTTP_POST_VARS['admin_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $HTTP_POST_VARS['admin_username'], HTTP_SERVER . DIR_WS_ADMIN, $HTTP_POST_VARS['admin_email_address'], $hiddenPassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
           tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'page=' . $HTTP_GET_VARS['page'] . '&mID=' . $admin_id));
         }
@@ -100,7 +102,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
           <tr>
             <td valign="top">
 <?php
-  $my_account_query = tep_db_query ("select a.admin_id, a.admin_firstname, a.admin_lastname, a.admin_email_address, a.admin_created, a.admin_modified, a.admin_logdate, a.admin_lognum, g.admin_groups_name from " . TABLE_ADMIN . " a, " . TABLE_ADMIN_GROUPS . " g where a.admin_id= " . $login_id . " and g.admin_groups_id= " . $login_groups_id . "");
+  $my_account_query = tep_db_query ("select a.admin_id, a.admin_firstname, a.admin_lastname, a.admin_username, a.admin_email_address, a.admin_created, a.admin_modified, a.admin_logdate, a.admin_lognum, g.admin_groups_name from " . TABLE_ADMIN . " a, " . TABLE_ADMIN_GROUPS . " g where a.admin_id= " . $login_id . " and g.admin_groups_id= " . $login_groups_id . "");
   $myAccount = tep_db_fetch_array($my_account_query);
 ?>
             <table border="0" width="100%" cellspacing="0" cellpadding="2" align="center">
@@ -114,6 +116,10 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
 <?php
     if ( ($HTTP_GET_VARS['action'] == 'edit_process') && (tep_session_is_registered('confirm_account')) ) {
 ?>
+                    <tr>
+                      <td class="dataTableContent"><nobr><?php echo TEXT_INFO_USERNAME; ?>&nbsp;&nbsp;&nbsp;</nobr></td>
+                      <td class="dataTableContent"><?php echo tep_draw_input_field('admin_username', $myAccount['admin_username']); ?></td>
+                    </tr>
                     <tr>
                       <td class="dataTableContent"><nobr><?php echo TEXT_INFO_FIRSTNAME; ?>&nbsp;&nbsp;&nbsp;</nobr></td>
                       <td class="dataTableContent"><?php echo tep_draw_input_field('admin_firstname', $myAccount['admin_firstname']); ?></td>
@@ -140,6 +146,10 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
       tep_session_unregister('confirm_account');
     }
 ?>
+                    <tr>
+                      <td class="dataTableContent"><nobr><?php echo TEXT_INFO_USERNAME; ?>&nbsp;&nbsp;&nbsp;</nobr></td>
+                      <td class="dataTableContent"><?php echo $myAccount['admin_username'] . ' ' . $myAccount['admin_username']; ?></td>
+                    </tr>
                     <tr>
                       <td class="dataTableContent"><nobr><?php echo TEXT_INFO_FULLNAME; ?>&nbsp;&nbsp;&nbsp;</nobr></td>
                       <td class="dataTableContent"><?php echo $myAccount['admin_firstname'] . ' ' . $myAccount['admin_lastname']; ?></td>
@@ -207,9 +217,9 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
       $contents[] = array('text' => TEXT_INFO_INTRO_DEFAULT);
       //$contents[] = array('align' => 'center', 'text' => tep_image_submit('button_edit.gif', IMAGE_EDIT) . '<br>&nbsp');
       if ($myAccount['admin_email_address'] == 'admin@localhost') {
-        $contents[] = array('text' => sprintf(TEXT_INFO_INTRO_DEFAULT_FIRST, $myAccount['admin_firstname']) . '<br>&nbsp');
+        $contents[] = array('text' => sprintf(TEXT_INFO_INTRO_DEFAULT_FIRST, $myAccount['admin_username']) . '<br>&nbsp');
       } elseif (($myAccount['admin_modified'] == '0000-00-00 00:00:00') || ($myAccount['admin_logdate'] <= 1) ) {
-        $contents[] = array('text' => sprintf(TEXT_INFO_INTRO_DEFAULT_FIRST_TIME, $myAccount['admin_firstname']) . '<br>&nbsp');
+        $contents[] = array('text' => sprintf(TEXT_INFO_INTRO_DEFAULT_FIRST_TIME, $myAccount['admin_username']) . '<br>&nbsp');
       }
 
   }

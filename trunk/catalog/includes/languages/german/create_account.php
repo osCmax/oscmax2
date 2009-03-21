@@ -25,11 +25,11 @@ define('EMAIL_TEXT', 'Sie können jetzt unseren <b>Online-Service</b> nutzen. Der
 define('EMAIL_CONTACT', 'Falls Sie Fragen zu unserem Kunden-Service haben, wenden Sie sich bitte an den Vertrieb: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n\n");
 define('EMAIL_WARNING', '<b>Achtung:</b> Diese eMail-Adresse wurde uns von einem Kunden bekannt gegeben. Falls Sie sich nicht angemeldet haben, senden Sie bitte eine eMail an ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n");
 
-// BOF: MOD - ICW Credit class gift voucher
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
 define('EMAIL_GV_INCENTIVE_HEADER', 'Als kleines Willkommensgeschenk senden wir Ihnen einen Gutschein nber %s');
 define('EMAIL_GV_REDEEM', 'Ihr pers˜nlicher Gutscheincode lautet %s. Sie k˜nnen diese Gutschrift entweder wShrend dem Bestellvorgang verbuchen');
 define('EMAIL_GV_LINK', 'oder direkt nber diesen Link: ');
 define('EMAIL_COUPON_INCENTIVE_HEADER', 'Herzlich Willkommen in unserem Webshop. Fnr Ihren ersten Einkauf verfngen Sie nber einen kleinen Einkaufsgutschein,' . "\n" . ' alle notwendigen Informationen diesbeznglich finden Sie hier:' . "\n\n");
 define('EMAIL_COUPON_REDEEM', 'Geben Sie einfach Ihren pers˜nlichen Code   %s wShrend des Bezahlvorganges ' . "\n" . 'ein');
-// EOF: MOD - ICW Credit class gift voucher end
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 ?>

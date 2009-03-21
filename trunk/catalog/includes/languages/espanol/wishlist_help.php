@@ -2,10 +2,10 @@
 /*
   $Id: wishlist_help.php,v 1 2002/11/09
 
-  The Exchange Project - Community Made Shopping!
-  http://www.theexchangeproject.org
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2006 osCMax2000,2001 The Exchange Project
+  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
 */
@@ -16,9 +16,7 @@ define('HEADING_TITLE', 'My Wishlist F.A.Q.');
 define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');
 
 define('TEXT_INFORMATION', '<b>What is ' . BOX_HEADING_CUSTOMER_WISHLIST . '?</b><br>' .
-// BoF Modification by: Rob Woodgate 
 BOX_HEADING_CUSTOMER_WISHLIST . ' is a convenient way for you to save a reminder of an item you would like to purchase later or an item that is not currently in stock.
-<!-- EoF Modification by: Rob Woodgate -->
 <br>
 <br>
 <b>How do I add items to ' . BOX_HEADING_CUSTOMER_WISHLIST . '? </b><br>

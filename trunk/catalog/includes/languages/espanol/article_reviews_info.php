@@ -10,12 +10,12 @@ $Id: article_reviews_info.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Review');
-define('HEADING_TITLE', 'Review of ');
-define('SUB_TITLE_ARTICLE', 'Article:');
-define('SUB_TITLE_FROM', 'From:');
-define('SUB_TITLE_DATE', 'Date:');
-define('SUB_TITLE_REVIEW', 'Review:');
-define('SUB_TITLE_RATING', 'Rating:');
-define('TEXT_OF_5_STARS', '%s of 5 Stars');
+define('NAVBAR_TITLE', 'Comentario');
+define('HEADING_TITLE', 'Comentario de ');
+define('SUB_TITLE_ARTICLE', 'Noticia:');
+define('SUB_TITLE_FROM', 'De:');
+define('SUB_TITLE_DATE', 'Fecha:');
+define('SUB_TITLE_REVIEW', 'Comentario:');
+define('SUB_TITLE_RATING', 'Puntuaci&oacute;n:');
+define('TEXT_OF_5_STARS', '%s de 5 estrellas');
 ?>

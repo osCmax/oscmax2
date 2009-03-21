@@ -66,10 +66,11 @@ $Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
     $error = false; // reset error flag
 
     if (ACCOUNT_GENDER == 'true') {
-      if ( ($a_gender != 'm') && ($a_gender != 'f') ) {
-
+      if (($a_gender == 'm') || ($a_gender == 'f')) {
+        $entry_gender_error = false;
+      } else {
         $error = true;
-        $messageStack->add('create_account', ENTRY_GENDER_ERROR);
+        $entry_gender_error = true;
       }
     }
 
@@ -96,24 +97,18 @@ $Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
       }
     }
   
-    if (strlen($email_address) < ENTRY_EMAIL_ADDRESS_MIN_LENGTH) {
+    if (strlen($a_email_address) < ENTRY_EMAIL_ADDRESS_MIN_LENGTH) {
       $error = true;
-
-      $messageStack->add('account_edit', ENTRY_EMAIL_ADDRESS_ERROR);
+      $entry_email_address_error = true;
+    } else {
+      $entry_email_address_error = false;
     }
 
-    if (!tep_validate_email($email_address)) {
+    if (!tep_validate_email($a_email_address)) {
       $error = true;
-
-      $messageStack->add('account_edit', ENTRY_EMAIL_ADDRESS_CHECK_ERROR);
-    }
-
-    $check_email_query = tep_db_query("select count(*) as total from " . TABLE_AFFILIATE . " where affiliate_email_address = '" . tep_db_input($email_address) . "' and affiliate_id != '" . (int)$affiliate_id . "'");
-    $check_email = tep_db_fetch_array($check_email_query);
-    if ($check_email['total'] > 0) {
-      $error = true;
-
-      $messageStack->add('account_edit', ENTRY_EMAIL_ADDRESS_ERROR_EXISTS);
+      $entry_email_address_check_error = true;
+    } else {
+      $entry_email_address_check_error = false;
     }
 
     if (strlen($a_street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH) {
@@ -157,9 +152,9 @@ $Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
       $entry_password_error = true;
     }
 
-    $check_email = tep_db_query("select affiliate_email_address from " . TABLE_AFFILIATE . " where affiliate_email_address = '" . tep_db_input($a_email_address) . "'");
-
-    if (tep_db_num_rows($check_email)) {
+    $check_email_query = tep_db_query("select count(*) as total from " . TABLE_AFFILIATE . " where affiliate_email_address = '" .  tep_db_input($a_email_address) . "' and affiliate_id != '" . tep_db_input($affiliate_id) . "'");
+    $check_email = tep_db_fetch_array($check_email_query);
+    if ($check_email['total'] > 0) {
       $error = true;
       $entry_email_address_exists = true;
     } else {
@@ -179,10 +174,6 @@ $Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
       $entry_homepage_error = false;
     }
 
-    if (!$a_agb) {
-	  $error=true;
-	  $entry_agb_error=true;
-    }
 
     // Check Company
     $entry_company_error = false;
@@ -216,8 +207,7 @@ $Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
                               'affiliate_telephone' => $a_telephone,
                               'affiliate_fax' => $a_fax,
                               'affiliate_homepage' => $a_homepage,
-                              'affiliate_password' => tep_encrypt_password($a_password),
-                              'affiliate_agb' => '1');
+                              'affiliate_password' => tep_encrypt_password($a_password));
 
       if (ACCOUNT_GENDER == 'true') $sql_data_array['affiliate_gender'] = $a_gender;
       if (ACCOUNT_DOB == 'true') $sql_data_array['affiliate_dob'] = tep_date_raw($a_dob);
@@ -226,6 +216,15 @@ $Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
         $sql_data_array['affiliate_company_taxid'] = $a_company_taxid;
       }
       if (ACCOUNT_SUBURB == 'true') $sql_data_array['affiliate_suburb'] = $a_suburb;
+      if (ACCOUNT_STATE == 'true') {
+        if ($a_zone_id > 0) {
+          $sql_data_array['affiliate_zone_id'] = $a_zone_id;
+          $sql_data_array['affiliate_state'] = '';
+        } else {
+          $sql_data_array['affiliate_zone_id'] = '0';
+          $sql_data_array['affiliate_state'] = $a_state;
+        }
+      }
 
       $sql_data_array['affiliate_date_account_last_modified'] = 'now()';
 

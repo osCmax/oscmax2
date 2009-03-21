@@ -43,20 +43,26 @@ $Id: file_manager.php 14 2006-07-28 17:42:07Z user $
         if (!$tep_remove_error) tep_redirect(tep_href_link(FILENAME_FILE_MANAGER));
         break;
       case 'insert':
-        if (mkdir($current_path . '/' . $HTTP_POST_VARS['folder_name'], 0777)) {
+        if (isset($HTTP_POST_VARS['folder_name']) && tep_not_null(basename($HTTP_POST_VARS['folder_name'])) && mkdir($current_path . '/' . basename($HTTP_POST_VARS['folder_name']), 0777)) {
           tep_redirect(tep_href_link(FILENAME_FILE_MANAGER, 'info=' . urlencode($HTTP_POST_VARS['folder_name'])));
         }
         break;
       case 'save':
-        if ($fp = fopen($current_path . '/' . $HTTP_POST_VARS['filename'], 'w+')) {
-          fputs($fp, stripslashes($HTTP_POST_VARS['file_contents']));
-          fclose($fp);
-          tep_redirect(tep_href_link(FILENAME_FILE_MANAGER, 'info=' . urlencode($HTTP_POST_VARS['filename'])));
+        if (isset($HTTP_POST_VARS['filename']) && tep_not_null(basename($HTTP_POST_VARS['filename']))) {
+          if (is_writeable($current_path) && ($fp = fopen($current_path . '/' . basename($HTTP_POST_VARS['filename']), 'w+'))) {
+            fputs($fp, stripslashes($HTTP_POST_VARS['file_contents']));
+            fclose($fp);
+            tep_redirect(tep_href_link(FILENAME_FILE_MANAGER, 'info=' . urlencode(basename($HTTP_POST_VARS['filename']))));
+          }
+        } else {
+          $action = 'new_file';
+          $directory_writeable = true;
+          $messageStack->add(ERROR_FILENAME_EMPTY, 'error');
         }
         break;
       case 'processuploads':
         for ($i=1; $i<6; $i++) {
-          if (isset($GLOBALS['file_' . $i]) && tep_not_null($GLOBALS['file_' . $i])) {
+          if (is_uploaded_file($HTTP_POST_FILES['file_' . $i]['tmp_name'])) {
             new upload('file_' . $i, $current_path);
           }
         }
@@ -132,7 +138,7 @@ $Id: file_manager.php 14 2006-07-28 17:42:07Z user $
             <td class="pageHeading"><?php echo HEADING_TITLE . '<br><span class="smallText">' . $current_path . '</span>'; ?></td>
             <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', '1', HEADING_IMAGE_HEIGHT); ?></td>
             <td class="pageHeading" align="right"><?php echo tep_draw_pull_down_menu('goto', $goto_array, $current_path, 'onChange="this.form.submit();"'); ?></td>
-          </form></tr>
+          <?php echo tep_hide_session_id(); ?></form></tr>
         </table></td>
       </tr>
 <?php
@@ -145,8 +151,7 @@ $Id: file_manager.php 14 2006-07-28 17:42:07Z user $
       $filename_input_field = tep_draw_input_field('filename');
     } elseif ($action == 'edit') {
       if ($file_array = file($current_path . '/' . $HTTP_GET_VARS['info'])) {
-// LINE CHANGED: MS2 update 501112 - Replaced htmlspecialchars with addslashes
-        $file_contents = addslashes(implode('', $file_array));
+        $file_contents = implode('', $file_array);
       }
       $filename_input_field = $HTTP_GET_VARS['info'] . tep_draw_hidden_field('filename', $HTTP_GET_VARS['info']);
     }

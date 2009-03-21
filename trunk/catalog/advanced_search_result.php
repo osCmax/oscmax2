@@ -111,7 +111,7 @@ $Id: advanced_search_result.php 3 2006-05-27 04:59:07Z user $
     }
 
     if (tep_not_null($keywords)) {
-      if (!tep_parse_search_string($keywords, $search_keywords)) {
+      if (!tep_parse_search_string(stripslashes($keywords), $search_keywords)) {	
         $error = true;
 
         $messageStack->add_session('search', ERROR_INVALID_KEYWORDS);

@@ -21,6 +21,8 @@
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','main_layout.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','print.css')); // BTSv1.5 ?>" media="print">
 <link rel="stylesheet" type="text/css" href="<?php echo DIR_WS_TEMPLATES; ?>coolmenu.css">
+<?php require('includes/javascript/form_check.js.php'); ?>
+
 <style type="text/css">
 <!--
 <?php
@@ -96,7 +98,7 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 <div id="pageFrame">
 
 <div id="logoFrame">
-  <img id="logo" src="<?php echo (bts_select('images','logo.gif')); // BTSv1.5 ?>" alt="Logo">
+  <img id="logo" src="<?php echo (bts_select('images','store_logo.gif')); // BTSv1.5 ?>" alt="osCMax">
   <div id="imageNav"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_account.gif', HEADER_TITLE_MY_ACCOUNT) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_IMAGES . 'header_cart.gif', HEADER_TITLE_CART_CONTENTS) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_checkout.gif', HEADER_TITLE_CHECKOUT) . '</a>'; ?></div>
 </div>
 
@@ -121,25 +123,8 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 <!-- begin bannerFrame -->
 <div id="bannerFrame">
   <div id="copyRight"><?php
-/*
-  The following copyright announcement can only be
-  appropriately modified or removed if the layout of
-  the site theme has been modified to distinguish
-  itself from the default osCommerce-copyrighted
-  theme.
-
-  For more information please read the following
-  Frequently Asked Questions entry on the osCommerce
-  support site:
-
-  http://oscdox.com/community.php/faq,26/q,50
-
-  Please leave this comment intact together with the
-  following copyright announcement.
-*/
-
-//  echo FOOTER_TEXT_BODY
-?>A <a href="http://www.panda.nl" target="_blank">PandA.nl</a> creation 2003<br>Powered by <a href="http://oscdox.com" target="_blank">osCommerce</a></div>
+  echo FOOTER_TEXT_BODY
+?></div>
 <?php
   if ($banner = tep_banner_exists('dynamic', '468x50')) {
 ?>

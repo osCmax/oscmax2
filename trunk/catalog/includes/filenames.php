@@ -76,9 +76,10 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('CONTENT_ARTICLES_REVIEWS_WRITE', 'article_reviews_write');
   define('CONTENT_ARTICLES_MAIN', 'articles');
   define('CONTENT_ARTICLES_NEW', 'articles_new');
- //BTS for Wishlist 2.3
+ //BTS for Wishlist 3.5
   define('CONTENT_WISHLIST', 'wishlist');
   define('CONTENT_WISHLIST_HELP', 'wishlist_help');
+  define('CONTENT_WISHLIST_PUBLIC', 'wishlist_public');
   define('CONTENT_WISHLIST_SEND', 'wishlist_email');
 
 // LINE ADDED: WYSIWYG HTML Area
@@ -106,6 +107,7 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('FILENAME_ARTICLES_NEW', 'articles_new.php');
   define('FILENAME_ARTICLES_UPCOMING', 'articles_upcoming.php');
   define('FILENAME_ARTICLES_XSELL', 'articles_xsell.php');
+  define('FILENAME_ARTICLES_PXSELL', 'articles_pxsell.php');
   define('FILENAME_NEW_ARTICLES', 'new_articles.php');
   define('FILENAME_CATALOG_PRODUCTS_WITH_IMAGES', 'catalog_products_with_images.php'); // CATALOG_PRODUCTS_WITH_IMAGES_mod
   define('FILENAME_CHECKOUT_CONFIRMATION', CONTENT_CHECKOUT_CONFIRMATION . '.php');
@@ -195,11 +197,11 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('FILENAME_ORDER_INFO', 'Order_Info.php');
   define('FILENAME_ORDER_INFO_PROCESS', 'Order_Info_Process.php');
 // EOF: MOD - Checkout Without Account Modifications
-// BOF: MOD - Wish List 2.3
-  define('FILENAME_WISHLIST_SEND', 'wishlist_email.php');
+// BOF: MOD - Wish List 3.5
   define('FILENAME_WISHLIST', 'wishlist.php');
   define('FILENAME_WISHLIST_HELP', 'wishlist_help.php');
-// EOF: MOD - Wish List 2.3
+  define('FILENAME_WISHLIST_PUBLIC', 'wishlist_public.php');
+// EOF: MOD - Wish List 3.5
 // BOF: MOD - FedEx
   define('FILENAME_FEDEX_TRACK', 'track_fedex.php');
   define('CONTENT_FEDEX_TRACK', 'track_fedex');

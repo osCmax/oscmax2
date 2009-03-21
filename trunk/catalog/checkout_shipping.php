@@ -48,12 +48,14 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $ship
     $sendto = $customer_default_address_id;
   } else {
 // verify the selected shipping address
-    $check_address_query = tep_db_query("select count(*) as total from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customer_id . "' and address_book_id = '" . (int)$sendto . "'");
-    $check_address = tep_db_fetch_array($check_address_query);
+    if ( (is_array($sendto) && empty($sendto)) || is_numeric($sendto) ) {
+      $check_address_query = tep_db_query("select count(*) as total from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customer_id . "' and address_book_id = '" . (int)$sendto . "'");
+      $check_address = tep_db_fetch_array($check_address_query);
 
-    if ($check_address['total'] != '1') {
-      $sendto = $customer_default_address_id;
-      if (tep_session_is_registered('shipping')) tep_session_unregister('shipping');
+      if ($check_address['total'] != '1') {
+        $sendto = $customer_default_address_id;
+        if (tep_session_is_registered('shipping')) tep_session_unregister('shipping');
+      }
     }
   }
 
@@ -67,9 +69,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $ship
 
 // if the order contains only virtual products, forward the customer to the billing page as
 // a shipping address is not needed
-// LINE CHANGED: MOD - ICW CREDIT CLASS GV AMENDE LINE BELOW
+// LINE CHANGED: MOD - CREDIT CLASS Gift Voucher Contribution
 //  if ($order->content_type == 'virtual') {
-  if (($order->content_type == 'virtual') || ($order->content_type == 'virtual_weight')) {
+  if (($order->content_type == 'virtual') || ($order->content_type == 'virtual_weight') ) {
     if (!tep_session_is_registered('shipping')) tep_session_register('shipping');
     $shipping = false;
     $sendto = false;
@@ -78,6 +80,20 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $ship
 
   $total_weight = $cart->show_weight();
   $total_count = $cart->count_contents();
+// BOF: MOD - UPSXML 1.3.3 
+  if (defined('SHIPPING_DIMENSIONS_SUPPORT') && SHIPPING_DIMENSIONS_SUPPORT == 'Ready-to-ship only') {
+    $dimensions_support = 1;
+  } elseif (defined('SHIPPING_DIMENSIONS_SUPPORT') && SHIPPING_DIMENSIONS_SUPPORT == 'With product dimensions') {
+    $dimensions_support = 2;
+  } else {
+    $dimensions_support = 0;
+  }
+
+  if ($dimensions_support > 0) {
+    require(DIR_WS_CLASSES . 'packing.php');
+    $packing = new packing;
+  }
+// EOF: MOD - UPSXML 1.3.3
 
 // load all enabled shipping modules
   require(DIR_WS_CLASSES . 'shipping.php');
@@ -150,9 +166,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $ship
       }
     } else {
       $shipping = false;
-                
+
       tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
-    }    
+    }
   }
 
 // get all available shipping quotes

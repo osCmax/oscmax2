@@ -27,12 +27,14 @@ $Id: address_book_details.php 10 2006-06-22 03:56:08Z user $
         <td><table border="0" cellspacing="2" cellpadding="2">
 <?php
   if (ACCOUNT_GENDER == 'true') {
+    $male = $female = false;
     if (isset($gender)) {
       $male = ($gender == 'm') ? true : false;
-    } else {
+      $female = !$male;
+    } elseif (isset($entry['entry_gender'])) {
       $male = ($entry['entry_gender'] == 'm') ? true : false;
+      $female = !$male;
     }
-    $female = !$male;
 ?>
           <tr>
             <td class="main"><?php echo ENTRY_GENDER; ?></td>

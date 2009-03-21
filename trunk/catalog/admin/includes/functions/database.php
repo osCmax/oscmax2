@@ -111,8 +111,9 @@ $Id: database.php 14 2006-07-28 17:42:07Z user $
     return mysql_data_seek($db_query, $row_number);
   }
 
-  function tep_db_insert_id() {
-    return mysql_insert_id();
+  function tep_db_insert_id($link = 'db_link') {
+    global $$link;
+    return mysql_insert_id($$link);
   }
 
   function tep_db_free_result($db_query) {

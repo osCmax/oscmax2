@@ -40,4 +40,5 @@ define ('TEXT_REDEEM_COUPON_MESSAGE_BODY', "\n\n" . 'You can now visit our site,
 define ('TEXT_REDEEM_COUPON_MESSAGE_FOOTER', "\n\n");
 //Added line
 define ('TEXT_EMAIL_BUTTON_TEXT', 'The Back Button is Disabled when using the WYSIWYG editor');
+define ('TEXT_EMAIL_BUTTON_HTML', '<br>Return to previous page');
 ?>

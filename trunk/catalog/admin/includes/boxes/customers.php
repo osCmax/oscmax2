@@ -21,14 +21,14 @@ $Id: customers.php 3 2006-05-27 04:59:07Z user $
                      'link'  => tep_href_link(FILENAME_CUSTOMERS, 'selected_box=customers'));
 
   if ($selected_box == 'customers') {
-    $contents[] = array('text'  =>
+
 //BOF: MOD - Admin Sercurty
 //old-$contents[] = array('text'  => '<a href="' . tep_href_link(FILENAME_CUSTOMERS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CUSTOMERS_CUSTOMERS . '</a><br>' .
 //old-                               '<a href="' . tep_href_link(FILENAME_ORDERS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CUSTOMERS_ORDERS . '</a>');
-                                   tep_admin_files_boxes(FILENAME_CUSTOMERS, BOX_CUSTOMERS_CUSTOMERS) .
-                                   tep_admin_files_boxes('customers_groups.php' , BOX_CUSTOMERS_GROUPS) .
-                                   tep_admin_files_boxes(FILENAME_CREATE_ACCOUNT, BOX_MANUAL_ORDER_CREATE_ACCOUNT).
-                                   tep_admin_files_boxes(FILENAME_CREATE_ORDER, BOX_MANUAL_ORDER_CREATE_ORDER).
+		$contents[] = array('text'  => tep_admin_files_boxes(FILENAME_CUSTOMERS, BOX_CUSTOMERS_CUSTOMERS) .
+                                   tep_admin_files_boxes(FILENAME_CUSTOMERS_GROUPS, BOX_CUSTOMERS_GROUPS) .
+                                   tep_admin_files_boxes(FILENAME_CREATE_ACCOUNT, BOX_MANUAL_ORDER_CREATE_ACCOUNT) .
+                                   tep_admin_files_boxes(FILENAME_CREATE_ORDER, BOX_MANUAL_ORDER_CREATE_ORDER) .
                                    tep_admin_files_boxes(FILENAME_ORDERS, BOX_CUSTOMERS_ORDERS));
 //EOF: MOD - Admin Security
   }

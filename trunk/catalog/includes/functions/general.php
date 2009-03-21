@@ -261,14 +261,14 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
         $cPath_new = $current_category_id;
       } else {
         $cPath_new = '';
-	if (!tep_not_null($parent_id) || !tep_not_null($grand_parent_id) ) {
-	$parent_query = tep_db_query("select c.parent_id, pcategories.parent_id as grand_parent_id from categories c, categories AS pcategories where c.categories_id = '" . (int)$cPath_array[($cp_size-1)] . "' and pcategories.categories_id = '" . (int)$current_category_id . "'");
-	
-	$parent_categories = tep_db_fetch_array($parent_query);
-	$grand_parent_id = $parent_categories['grand_parent_id'];
-	$parent_id = $parent_categories['parent_id'];
-	}
-	if ($parent_id == $grand_parent_id) {	
+        if (!tep_not_null($parent_id) || !tep_not_null($grand_parent_id) ) {
+        $parent_query = tep_db_query("select c.parent_id, pcategories.parent_id as grand_parent_id from categories c, categories AS pcategories where c.categories_id = '" . (int)$cPath_array[($cp_size-1)] . "' and pcategories.categories_id = '" . (int)$current_category_id . "'");
+  
+        $parent_categories = tep_db_fetch_array($parent_query);
+        $grand_parent_id = $parent_categories['grand_parent_id'];
+        $parent_id = $parent_categories['parent_id'];
+        }
+        if ($parent_id == $grand_parent_id) {  
           for ($i=0; $i<($cp_size-1); $i++) {
             $cPath_new .= '_' . $cPath_array[$i];
           }
@@ -288,8 +288,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     }
 
     return 'cPath=' . $cPath_new;
-  } 
-
+  }
 
 ////
 // Returns the clients browser
@@ -369,28 +368,25 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
      }
 
      if ($customer_group_tax_exempt == '1') {
-	     return 0;
+       return 0;
      }
  return $osC_Tax->getTaxRate($class_id, $country_id, $zone_id);
 }
-
 // EOF: MOD - Separate Pricing Per Customer, show_tax modification
-
 
 ////
 // Return the tax description for a zone / class
 // TABLES: tax_rates;
   function tep_get_tax_description($class_id, $country_id, $zone_id) {
 // BOF: MOD - Separate Pricing Per Customer, show_tax modification
-  	 global $osC_Tax;
-  	 return $osC_Tax->getTaxRateDescription($class_id, $country_id, $zone_id);
+     global $osC_Tax;
+     return $osC_Tax->getTaxRateDescription($class_id, $country_id, $zone_id);
 // EOF: MOD - Separate Pricing Per Customer, show_tax modification
     }
 
 ////
 // Add tax to a products price
   function tep_add_tax($price, $tax) {
-    global $currencies;
 // BOF: MOD - Separate Pricing Per Customer, show_tax modification
 // next line was original code
 //    if ( (DISPLAY_PRICE_WITH_TAX == 'true') && ($tax > 0) ) {
@@ -406,17 +402,15 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
  //    echo $sppc_customer_group_tax_exempt;
      if ( (DISPLAY_PRICE_WITH_TAX == 'true') && ($tax > 0) && ($customer_group_show_tax == '1')) {
 // EOF: MOD - Separate Pricing Per Customer, show_tax modification
-      return tep_round($price, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']) + tep_calculate_tax($price, $tax);
+      return $price + tep_calculate_tax($price, $tax);
     } else {
-      return tep_round($price, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']);
+      return $price;
     }
   }
 
 // Calculates Tax rounding the result
   function tep_calculate_tax($price, $tax) {
-    global $currencies;
-
-    return tep_round($price * $tax / 100, $currencies->currencies[DEFAULT_CURRENCY]['decimal_places']);
+    return $price * $tax / 100;
   }
 
 ////
@@ -498,7 +492,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
         $state = tep_get_zone_code($address['country_id'], $address['zone_id'], $state);
       }
     } elseif (isset($address['country']) && tep_not_null($address['country'])) {
-      $country = tep_output_string_protected($address['country']);
+      $country = tep_output_string_protected($address['country']['title']);
     } else {
       $country = '';
     }
@@ -545,6 +539,9 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 // Return a formatted address
 // TABLES: customers, address_book
   function tep_address_label($customers_id, $address_id = 1, $html = false, $boln = '', $eoln = "\n") {
+    if (is_array($address_id) && !empty($address_id)) {
+      return tep_address_format($address_id['address_format_id'], $address_id, $html, $boln, $eoln);
+    }
     $address_query = tep_db_query("select entry_firstname as firstname, entry_lastname as lastname, entry_company as company, entry_street_address as street_address, entry_suburb as suburb, entry_city as city, entry_postcode as postcode, entry_state as state, entry_zone_id as zone_id, entry_country_id as country_id from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customers_id . "' and address_book_id = '" . (int)$address_id . "'");
     $address = tep_db_fetch_array($address_query);
 
@@ -982,6 +979,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
             break;
           }
         }
+
         if ($attributes_check == true) {
           $uprid .= $attributes_ids;
         }
@@ -994,7 +992,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
           $attributes_check = true;
           $attributes_ids = '';
 
-  // strpos()+1 to remove up to and including the first { which would create an empty array element in explode()
+// strpos()+1 to remove up to and including the first { which would create an empty array element in explode()
           $attributes = explode('{', substr($prid, strpos($prid, '{')+1));
 
           for ($i=0, $n=sizeof($attributes); $i<$n; $i++) {
@@ -1077,10 +1075,10 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     //$to_email_address and $from_email_address are checked with tep_validate_email().
     $to_name = preg_replace('/[\n|\r].*/', '', $to_name);
     $email_subject = preg_replace('/[\n|\r].*/', '', $email_subject);
-    $from_email_name = preg_replace('/[\n|\r].*/', '', $from_name);
+    $from_email_name = preg_replace('/[\n|\r].*/', '', $from_email_name);
 
     // Instantiate a new mail object
-    $message = new email(array('X-Mailer: osCommerce Mailer'));
+    $message = new email(array('X-Mailer: osCMax Mailer'));
 
     // Build the text version
     $text = strip_tags($email_text);
@@ -1239,9 +1237,10 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   function tep_currency_exists($code) {
     $code = tep_db_prepare_input($code);
 
-    $currency_code = tep_db_query("select currencies_id from " . TABLE_CURRENCIES . " where code = '" . tep_db_input($code) . "'");
-    if (tep_db_num_rows($currency_code)) {
-      return $code;
+    $currency_query = tep_db_query("select code from " . TABLE_CURRENCIES . " where code = '" . tep_db_input($code) . "' limit 1");
+    if (tep_db_num_rows($currency_query)) {
+      $currency = tep_db_fetch_array($currency_query);
+      return $currency['code'];
     } else {
       return false;
     }
@@ -1295,13 +1294,15 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   }
 
   function tep_get_ip_address() {
-    if (isset($_SERVER)) {
-      if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-      } elseif (isset($_SERVER['HTTP_CLIENT_IP'])) {
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    global $HTTP_SERVER_VARS;
+
+    if (isset($HTTP_SERVER_VARS)) {
+      if (isset($HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'];
+      } elseif (isset($HTTP_SERVER_VARS['HTTP_CLIENT_IP'])) {
+        $ip = $HTTP_SERVER_VARS['HTTP_CLIENT_IP'];
       } else {
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $HTTP_SERVER_VARS['REMOTE_ADDR'];
       }
     } else {
       if (getenv('HTTP_X_FORWARDED_FOR')) {
@@ -1317,7 +1318,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   }
 
   function tep_count_customer_orders($id = '', $check_session = true) {
-    global $customer_id;
+    global $customer_id, $languages_id;
 
     if (is_numeric($id) == false) {
       if (tep_session_is_registered('customer_id')) {
@@ -1333,7 +1334,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
       }
     }
 
-    $orders_check_query = tep_db_query("select count(*) as total from " . TABLE_ORDERS . " where customers_id = '" . (int)$id . "'");
+    $orders_check_query = tep_db_query("select count(*) as total from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS . " s where o.customers_id = '" . (int)$id . "' and o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and s.public_flag = '1'");
     $orders_check = tep_db_fetch_array($orders_check_query);
 
     return $orders_check['total'];
@@ -1372,41 +1373,112 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   }
 
 // BOF: MOD - Downloads Controller
-require(DIR_WS_FUNCTIONS . 'downloads_controller.php');
+  require(DIR_WS_FUNCTIONS . 'downloads_controller.php');
 // EOF: MOD - Downloads Controller
 
 // BOF: MOD - Ultimate SEO URLs - by Chemo
 // Funtion to reset SEO URLs database cache entries
-function tep_reset_cache_data_seo_urls($action){
-	switch ($action){
-		case 'reset':
-			tep_db_query("DELETE FROM cache WHERE cache_name LIKE '%seo_urls%'");
-			tep_db_query("UPDATE configuration SET configuration_value='false' WHERE configuration_key='SEO_URLS_CACHE_RESET'");
-			break;
-		default:
-			break;
-	}
-	# The return value is used to set the value upon viewing
-	# It's NOT returining a false to indicate failure!!
-	return 'false';
-}
+  function tep_reset_cache_data_seo_urls($action){
+    switch ($action){
+      case 'reset':
+        tep_db_query("DELETE FROM cache WHERE cache_name LIKE '%seo_urls%'");
+        tep_db_query("UPDATE configuration SET configuration_value='false' WHERE configuration_key='SEO_URLS_CACHE_RESET'");
+        break;
+      default:
+        break;
+    }
+    # The return value is used to set the value upon viewing
+    # It's NOT returining a false to indicate failure!!
+    return 'false';
+  }
 // EOF: MOD - Ultimate SEO URLs - by Chemo
 
 // BOF: MOD - FedEx
 // link to fedex shipment tracker
-	function tep_track_fedex($order_id)
-	{
-		$fedex_query = tep_db_query("select fedex_tracking from " . TABLE_ORDERS . " where orders_id =
-
-'" . (int)$order_id . "'");
-		$fedexArray = tep_db_fetch_array($fedex_query);
-		$fedex_tracking = $fedexArray['fedex_tracking'];
-
-		$trackLink = tep_href_link(FILENAME_TRACK_FEDEX);
-		if ($fedex_tracking) {
-			$trackLink = $trackLink . '?&track=' . $fedex_tracking;
-		}
-		return $trackLink;
-	}
+  function tep_track_fedex($order_id) {
+    $fedex_query = tep_db_query("select fedex_tracking from " . TABLE_ORDERS . " where orders_id = '" . (int)$order_id . "'");
+    $fedexArray = tep_db_fetch_array($fedex_query);
+    $fedex_tracking = $fedexArray['fedex_tracking'];
+    $trackLink = false;
+    if ($fedex_tracking) {
+      $trackLink = tep_href_link(FILENAME_TRACK_FEDEX) . '?&track=' . $fedex_tracking;
+    }
+    return $trackLink;
+  }
 // EOF: MOD - FedEx
+
+// BOF: Mod - Validate SEO URLs
+  function tep_validate_seo_urls() {
+    global $HTTP_GET_VARS, $request_type;
+    ( $request_type == 'NONSSL' ? $fwr_server_port = HTTP_SERVER : $fwr_server_port = HTTPS_SERVER );
+    $querystring = str_replace('?', '&', $_SERVER['REQUEST_URI']);
+    if (isset($HTTP_GET_VARS['products_id']))
+    $get_id_vars = str_replace(strstr($HTTP_GET_VARS['products_id'], '{'), '', $HTTP_GET_VARS['products_id']); // Remove attributes
+    $qs_parts = explode('&', $querystring); // explode the querystring into an array
+    $count = count($qs_parts);
+    $added_uri = array();
+    $remove_nasties = array('%3C', '%3E', '<', '>', ':/', 'http', 'HTTP'); // We do tep_sanitize_string() later anyway
+    for ( $i=0; $i<$count; $i++ ) { // We don't want to introduce vulnerability do we :)
+      switch($qs_parts[$i]) {
+        case(false !== strpos($qs_parts[$i], '.html')):
+          $core = urldecode($qs_parts[$i]); // Found the path
+          ( (strstr($core, '{') !== false) ? ($core = str_replace(strstr($core, '{'), '', $core) . '.html') : NULL ); // Remove attributes
+          break;
+        case(false !== strpos($qs_parts[$i], 'osCsid')):
+          $seo_sid = $qs_parts[$i]; // Found the osCsid
+          break;
+        default:
+          $added_uri[] = ( urldecode(str_replace($remove_nasties, '', $qs_parts[$i])) ); // Found the additional querystring (e.g. &page=3&sort=2a from split_page_results)
+        }
+      }
+      $do_validation = true; // Set to false later if it is not an seo url so that other .html files pass through unhindered
+      // If -x- is in the querystring create var $querytype which is a string which explodes into an array on -
+      ( strpos($_SERVER['REQUEST_URI'], '-p-') ? ($querytype = 'filename_product_info-products_id=' . $get_id_vars) :
+      ( strpos($_SERVER['REQUEST_URI'], '-c-') ? ($querytype = 'filename_default-cPath=' . $HTTP_GET_VARS['cPath']) :
+      ( strpos($_SERVER['REQUEST_URI'], '-m-') ? ($querytype = 'filename_default-manufacturers_id=' . $HTTP_GET_VARS['manufacturers_id']) :
+      ( strpos($_SERVER['REQUEST_URI'], '-pi-') ? ($querytype = 'filename_popup_image-pID=' . $HTTP_GET_VARS['pID']) :
+      ( strpos($_SERVER['REQUEST_URI'], '-t-') ? ($querytype = 'filename_articles-tPath=' . $HTTP_GET_VARS['tPath']) :
+      ( strpos($_SERVER['REQUEST_URI'], '-a-') ? ($querytype = 'filename_article_info-articles_id=' . $HTTP_GET_VARS['articles_id']) :
+      ( strpos($_SERVER['REQUEST_URI'], '-pr-') ? ($querytype = 'filename_product_reviews-products_id=' . $get_id_vars) :
+      ( strpos($_SERVER['REQUEST_URI'], '-pri-') ? ($querytype = 'filename_product_reviews_info-products_id=' . $get_id_vars) :
+      ( strpos($_SERVER['REQUEST_URI'], '-prw-') ? ($querytype = 'filename_product_reviews_write-products_id=' . $get_id_vars) :
+      ( strpos($_SERVER['REQUEST_URI'], '-i-') ? ($querytype = 'filename_information-info_id=' . $HTTP_GET_VARS['info_id']) :
+      ( strpos($_SERVER['REQUEST_URI'], '-links-') ? ($querytype = 'filename_links-lPath=' . $HTTP_GET_VARS['lPath']) :
+      $do_validation = false )))))))))) );
+
+      if ( true === $do_validation ) { // It's an SEO URL so we will validate it
+        $validate_array = explode('-', $querytype); // Gives e.g. $validate_array[0] = filename_default, $validate_array[1] = products_id=xx
+        $linkreturned = tep_href_link(constant(strtoupper($validate_array[0])), $validate_array[1]); // Get a propper new SEO link
+        // Rebuild the extra querystring
+        ( (strpos($linkreturned, '?') !== false) ? ($seperator = '&') : ($seperator = '?') ); // Is there an osCsid on $linkreturned?
+        $count = count($added_uri); // Count the extra querystring items
+        for ($i=0; $i<$count; $i++)
+        if ($i == 0) $linkreturned = $linkreturned . $seperator . tep_sanitize_string($added_uri[$i]); //add the first using seperator ? or &
+        else $linkreturned = $linkreturned . '&' . tep_sanitize_string($added_uri[$i]); // Just add "&" this time
+        $linkreturnedstripped = str_replace( strstr($linkreturned, '?'), '', $linkreturned); // Strip osCsid to allow a match with $core
+        $linktest = str_replace($fwr_server_port . DIR_WS_HTTP_CATALOG, '', $linkreturned); // Pair the url down to the querystring
+        if (strpos($linktest, '-') === 0) { // If the link returned by seo.class.php has no text mysite.com/-c-xxx.html
+        four_o_four_die(); // Product/category does not exist so die here with a 404
+        exit;
+      } else if ( $fwr_server_port . $core != $linkreturnedstripped ) { // Link looks bad so 301
+        $linkreturned = str_replace('&amp;', '&', $linkreturned); // Just in case those sneaky W3C urls tried to throw in an &amp;
+        header("HTTP/1.0 301 Moved Permanently"); // redirect to the good version
+        header("Location: $linkreturned"); // 301 redirect
+        exit;
+      }
+    } // We're not doing validation as the -p-, -c- etc was not found
+  }
+
+  function four_o_four_die() { // 404 then redirect doesn't work as Google records a 302 so we need to die here with a 404
+    echo
+      header("HTTP/1.0 404 Not Found") .
+      '<p align="left" style="font-size: large;">&nbsp;&nbsp;404 Page not found!</p>
+      <div align="center" style="width: 100%; margin-top: 70px;">
+      <div align="center" style="font-family: verdana; font-size: 0.8em; color: #818181; padding: 90px 10px 90px 10px; width: 60%; border: 1px solid #818181;">
+      This product/category does not exist it may have been deleted.<p />
+      To return to ' . STORE_NAME .
+      '. Please click here <a href="' . tep_href_link(FILENAME_DEFAULT) . '" title="' . STORE_NAME . '">back to ' . STORE_NAME . '</a>
+      </div></div>';
+  }
+// EOF: Mod - Validate SEO URLs
 ?>

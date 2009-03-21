@@ -114,7 +114,7 @@ tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID))
 <?php
 $count_left=0;
 $count_right=0;
-  $configuration_query = tep_db_query("select configuration_id, configuration_title, configuration_value, configuration_column, location from " . theme_configuration . " where configuration_group_id = '" . $HTTP_GET_VARS['gID'] . "' order by configuration_column ");
+  $configuration_query = tep_db_query("select configuration_id, configuration_title, configuration_value, configuration_column, location from " . TABLE_THEME_CONFIGURATION . " where configuration_group_id = '" . $HTTP_GET_VARS['gID'] . "' order by configuration_column ");
   while ($configuration = tep_db_fetch_array($configuration_query)) {
 
       $cfgloc = $configuration['location'];
@@ -124,7 +124,7 @@ if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
 
 
     if (((!$HTTP_GET_VARS['cID']) || (@$HTTP_GET_VARS['cID'] == $configuration['configuration_id'])) && (!$cInfo) && (substr($HTTP_GET_VARS['action'], 0, 3) != 'new')) {
-      $cfg_extra_query = tep_db_query("select configuration_key, configuration_description, configuration_column,date_added, last_modified from " . theme_configuration . " where configuration_id = '" . $configuration['configuration_id'] . "'");
+      $cfg_extra_query = tep_db_query("select configuration_key, configuration_description, configuration_column,date_added, last_modified from " . TABLE_THEME_CONFIGURATION . " where configuration_id = '" . $configuration['configuration_id'] . "'");
       $cfg_extra = tep_db_fetch_array($cfg_extra_query);
 
       $cInfo_array = array_merge($configuration, $cfg_extra);
@@ -188,7 +188,7 @@ case 'new':
       $value_field_value =  (tep_cfg_select_option(array('yes', 'no'),$cInfo->configuration_value));
 
 
-      $contents = array('form' => tep_draw_form('theme_configuration', FILENAME_INFOBOX_CONFIGURATION, tep_get_all_get_params(array('action')) . 'action=insert', 'post', 'onSubmit="return check_form();"') . tep_draw_hidden_field('cID', $cInfo->configuration_id));
+      $contents = array('form' => tep_draw_form('TABLE_THEME_CONFIGURATION', FILENAME_INFOBOX_CONFIGURATION, tep_get_all_get_params(array('action')) . 'action=insert', 'post', 'onSubmit="return check_form();"') . tep_draw_hidden_field('cID', $cInfo->configuration_id));
 
       $contents[] = array('text' => TEXT_INFO_INSERT_INTRO);
       $contents[] = array('text' => '<br><a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_POPUP_INFOBOX_HELP,'action=filename') . '\')">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a><b>   Filename</b><br> ' . tep_draw_input_field('configuration_title','what\'s new','','true'));

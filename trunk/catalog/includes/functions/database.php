@@ -109,8 +109,9 @@ global $$link, $debug;
     return mysql_data_seek($db_query, $row_number);
   }
 
-  function tep_db_insert_id() {
-    return mysql_insert_id();
+  function tep_db_insert_id($link = 'db_link') {
+    global $$link;
+    return mysql_insert_id($$link);
   }
 
   function tep_db_free_result($db_query) {

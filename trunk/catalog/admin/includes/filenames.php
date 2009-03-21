@@ -38,6 +38,7 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_ORDERS_INVOICE', 'invoice.php');
   define('FILENAME_ORDERS_PACKINGSLIP', 'packingslip.php');
   define('FILENAME_ORDERS_STATUS', 'orders_status.php');
+  define('FILENAME_PACKAGING', 'packaging.php');
   define('FILENAME_POPUP_IMAGE', 'popup_image.php');
   define('FILENAME_PRODUCTS_ATTRIBUTES', 'products_attributes.php');
   define('FILENAME_PRODUCTS_EXPECTED', 'products_expected.php');
@@ -61,18 +62,15 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_CREATE_ORDER', 'create_order.php');
   define('FILENAME_ORDERS_EDIT', 'edit_orders.php');
   define('FILENAME_EDIT_ORDERS', 'edit_orders.php');
+  define('FILENAME_ORDERS_EDIT_ADD_PRODUCT', 'edit_orders_add_product.php');
+  define('FILENAME_ORDERS_EDIT_AJAX', 'edit_orders_ajax.php');
 // EOF: MOD - Create & Edit Order & customers
-
-// BOF: MOD - Version Control & Bookmark MODULE for Contributions 0.1.4
-  define('FILENAME_INSTALLED_CONTRIBUTIONS','installed_contributions.php');
-  define('FILENAME_INSTALLED_CONTRIBUTIONS_HELP','installed_contributions_help.php');
-// EOF: MOD - Version Control & Bookmark MODULE for Contributions 0.1.4
 
 // BOF: MOD - Admin w/access levels
   define('FILENAME_ADMIN_ACCOUNT', 'admin_account.php');
   define('FILENAME_ADMIN_FILES', 'admin_files.php');
   define('FILENAME_ADMIN_MEMBERS', 'admin_members.php');
-  Define('FILENAME_FORBIDEN', 'forbiden.php');
+  define('FILENAME_FORBIDDEN', 'forbidden.php');
   define('FILENAME_LOGIN', 'login.php');
   define('FILENAME_LOGOFF', 'logoff.php');
   define('FILENAME_PASSWORD_FORGOTTEN', 'password_forgotten.php');
@@ -85,6 +83,11 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_DEFINE_PRIVACY', 'define_privacy.php');
   define('FILENAME_DEFINE_SHIPPING', 'define_shipping.php');
   define('FILENAME_DEFINE_CONTACT_US','define_contact_us.php');
+  define('FILENAME_DEFINE_MAINPAGE_CONTENT', 'mainpage.php');
+  define('FILENAME_DEFINE_CONDITIONS_CONTENT', 'conditions_content.php');
+  define('FILENAME_DEFINE_ABOUT_US_CONTENT','about_us_content.php');
+  define('FILENAME_DEFINE_PRIVACY_CONTENT', 'privacy_content.php');
+  define('FILENAME_DEFINE_SHIPPING_CONTENT', 'shipping_content.php');
   define('FILENAME_INFOBOX_CONFIGURATION', 'infobox_configuration.php');
   define('FILENAME_POPUP_INFOBOX_HELP', 'popup_infobox_help.php');
 // EOF: MOD - wysiwyg content pages

@@ -24,6 +24,7 @@ define('TABLE_HEADING_USERHOMEPAGE', 'Homepage');
 define('TABLE_HEADING_ACCOUNT_CREATED', 'Zugang erstellt am');
 define('TABLE_HEADING_ACTION', 'Aktion');
 define('TABLE_HEADING_AFFILIATE_ID','Partner ID');
+define('TABLE_HEADING_AFFILIATE_STATUS', 'Status');
 
 define('TEXT_DATE_ACCOUNT_CREATED', 'Zugang erstellt am:');
 define('TEXT_DATE_ACCOUNT_LAST_MODIFIED', 'letzte &Auml;nderung:');

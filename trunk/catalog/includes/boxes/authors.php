@@ -13,7 +13,7 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 
   $authors_query = tep_db_query("select authors_id, authors_name from " . TABLE_AUTHORS . " order by authors_name");
-  $authors_id == authors_id;
+  if ($number_of_author_rows = tep_db_num_rows($authors_query)) {
 
 ?>
 <!-- authors //-->
@@ -64,7 +64,7 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
 
 //    new infoBox($info_box_contents);
 
-
+}
 ?>
 
 <!-- authors_eof //-->

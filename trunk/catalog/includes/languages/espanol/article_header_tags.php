@@ -36,15 +36,15 @@ $Id: article_header_tags.php 3 2006-05-27 04:59:07Z user $
 define('HTTA_ARTICLES_ON','1'); // Include HEAD_TITLE_TAG_ALL in Title
 define('HTKA_ARTICLES_ON','1'); // Include HEAD_KEY_TAG_ALL in Keywords
 define('HTDA_ARTICLES_ON','1'); // Include HEAD_DESC_TAG_ALL in Description
-define('HEAD_TITLE_TAG_ARTICLES','Articles');
-define('HEAD_DESC_TAG_ARTICLES','Articles');
-define('HEAD_KEY_TAG_ARTICLES','articles');
+define('HEAD_TITLE_TAG_ARTICLES','Noticias');
+define('HEAD_DESC_TAG_ARTICLES','Noticias');
+define('HEAD_KEY_TAG_ARTICLES','noticias');
 
 // article_info.php - if left blank in articles_description table these values will be used
 define('HTTA_ARTICLE_INFO_ON','1');
 define('HTKA_ARTICLE_INFO_ON','1');
 define('HTDA_ARTICLE_INFO_ON','1');
-define('HEAD_TITLE_TAG_ARTICLE_INFO','Articles');
+define('HEAD_TITLE_TAG_ARTICLE_INFO','Noticias');
 define('HEAD_DESC_TAG_ARTICLE_INFO','');
 define('HEAD_KEY_TAG_ARTICLE_INFO','');
 

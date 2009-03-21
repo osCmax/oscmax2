@@ -5,7 +5,7 @@ $Id: shopping_cart.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */
@@ -23,4 +23,5 @@ define('SUB_TITLE_TOTAL', 'Total:');
 
 define('OUT_OF_STOCK_CANT_CHECKOUT', 'Products marked with ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' don\'t exist in desired quantity in our stock.<br>Please alter the quantity of products marked with (' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . '), Thank you');
 define('OUT_OF_STOCK_CAN_CHECKOUT', 'Products marked with ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' don\'t exist in desired quantity in our stock.<br>You can buy them anyway and check the quantity we have in stock for immediate delivery in the checkout process.');
+define('TEXT_ALTERNATIVE_CHECKOUT_METHODS', '- OR -');
 ?>

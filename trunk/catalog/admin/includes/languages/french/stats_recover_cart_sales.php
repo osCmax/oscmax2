@@ -9,28 +9,14 @@ $Id: stats_recover_cart_sales.php 3 2006-05-27 04:59:07Z user $
 
   Released under the GNU General Public License
 
-  Modifed by Aalst (stats_recover_cart_sales.php,v 1.2)
+  Modifed by Aalst (stats_recover_cart_sales.php,v 1.2 .. 1.36)
   aalst@aalst.com
-  Nov 28th 2003
 
-  Modifed by Aalst (stats_recover_cart_sales.php,v 1.3)
-  aalst@aalst.com
-  Nov 29th 2003
-
-  Modifed by Aalst (stats_recover_cart_sales.php,v 1.3.5)
-  aalst@aalst.com
-  Nov 30th 2003
-
-  Modifed by Aalst (stats_recover_cart_sales.php,v 1.3.6)
-  aalst@aalst.com
-  Dec 2nd 2003
-
-  Modifed by Lane (stats_recover_cart_sales.php,v 1.4d/e)
+  Modifed by Lane (stats_recover_cart_sales.php,v 1.4d .. 2.22)
   lane@ifd.com www.osc-modsquad.com / www.ifd.com
-  Nov 12, 2004
 */
 
-define('HEADING_TITLE', 'Rapport paniers non validés v1.4e');
+define('HEADING_TITLE', 'Rapport paniers non validés v2.22');
 define('DAYS_FIELD_PREFIX', 'Montrer depuis ');
 define('DAYS_FIELD_POSTFIX', ' jours ');
 define('DAYS_FIELD_BUTTON', 'Go');
@@ -42,6 +28,6 @@ define('TABLE_HEADING_ORDER_STATUS', 'Statut');
 define('TABLE_HEADING_ORDER_AMOUNT', 'Montant');
 define('TOTAL_RECORDS', 'Enregistrement examinés:');
 define('TOTAL_SALES', 'Ventes:');
-define('TOTAL_SALES_EXPLANATION', ' (Ventes possibles des clients qui abanoned des chariots et ont été annoncés par l'intermédiaire de RCS)');
+define('TOTAL_SALES_EXPLANATION', ' clients notifiés ont acheté');
 define('TOTAL_RECOVERED', 'Total Recouvré:');
 ?>

@@ -12,14 +12,26 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
 
   include('includes/application_top.php');
 
+// BOF: Downloads Controller - Free Shipping
+// Reset $shipping if free shipping is on and weight is not 0
+if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $cart->show_weight()!=0) {
+  tep_session_unregister('shipping');
+}
+// EOF: Downloads Controller - Free Shipping
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot(array('mode' => 'SSL', 'page' => FILENAME_CHECKOUT_PAYMENT));
     tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
   }
 
-  if (!tep_session_is_registered('sendto')) {
-    tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
+// if there is nothing in the customers cart, redirect them to the shopping cart page
+  if ($cart->count_contents() < 1) {
+    tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+  }
+
+// if no shipping method has been selected, redirect the customer to the shipping method selection page
+  if (!tep_session_is_registered('shipping') || !tep_session_is_registered('sendto')) {
+    tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
   }
 
   if ( (tep_not_null(MODULE_PAYMENT_INSTALLED)) && (!tep_session_is_registered('payment')) ) {
@@ -37,7 +49,7 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
 
 // load selected payment module
   require(DIR_WS_CLASSES . 'payment.php');
-// LINE ADDED: MOD - ICW CREDIT CLASS
+// LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
   if ($credit_covers) $payment='';
   $payment_modules = new payment($payment);
 
@@ -48,22 +60,30 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_CLASSES . 'order.php');
   $order = new order;
 
-// MOVED BELOW Authorizenet ADC
-// load the before_process function from the payment modules
-// $payment_modules->before_process();
+// Stock Check
+  $any_out_of_stock = false;
+  if (STOCK_CHECK == 'true') {
+    for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
+      if (tep_check_stock($order->products[$i]['id'], $order->products[$i]['qty'])) {
+        $any_out_of_stock = true;
+      }
+    }
+    // Out of Stock
+    if ( (STOCK_ALLOW_CHECKOUT != 'true') && ($any_out_of_stock == true) ) {
+      tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+    }
+  }
+
+  $payment_modules->update_status();
+
+  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+    tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+  }
 
   require(DIR_WS_CLASSES . 'order_total.php');
   $order_total_modules = new order_total;
 
   $order_totals = $order_total_modules->process();
-
-// BOF: MOD - Authorizenet ADC Direct Connection
-// Make sure the /catalog/includes/class/order.php is included
-// and $order object is created before this!!!
-  if(MODULE_PAYMENT_AUTHORIZENET_STATUS == "True") {
-		include(DIR_WS_MODULES . 'authorizenet_direct.php');
-	}
-// EOF: MOD - Authorizenet ADC Direct Connection
 
 // load the before_process function from the payment modules
   $payment_modules->before_process();
@@ -74,40 +94,41 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
                           'customers_street_address' => $order->customer['street_address'],
                           'customers_suburb' => $order->customer['suburb'],
                           'customers_city' => $order->customer['city'],
-                          'customers_postcode' => $order->customer['postcode'],
-                          'customers_state' => $order->customer['state'],
-                          'customers_country' => $order->customer['country']['title'],
-                          'customers_telephone' => $order->customer['telephone'],
+                          'customers_postcode' => $order->customer['postcode'], 
+                          'customers_state' => $order->customer['state'], 
+                          'customers_country' => $order->customer['country']['title'], 
+                          'customers_telephone' => $order->customer['telephone'], 
                           'customers_email_address' => $order->customer['email_address'],
-                          'customers_address_format_id' => $order->customer['format_id'],
-                          'delivery_name' => $order->delivery['firstname'] . ' ' . $order->delivery['lastname'],
+                          'customers_address_format_id' => $order->customer['format_id'], 
+                          'delivery_name' => trim($order->delivery['firstname'] . ' ' . $order->delivery['lastname']),
                           'delivery_company' => $order->delivery['company'],
-                          'delivery_street_address' => $order->delivery['street_address'],
-                          'delivery_suburb' => $order->delivery['suburb'],
-                          'delivery_city' => $order->delivery['city'],
-                          'delivery_postcode' => $order->delivery['postcode'],
-                          'delivery_state' => $order->delivery['state'],
-                          'delivery_country' => $order->delivery['country']['title'],
-                          'delivery_address_format_id' => $order->delivery['format_id'],
-                          'billing_name' => $order->billing['firstname'] . ' ' . $order->billing['lastname'],
+                          'delivery_street_address' => $order->delivery['street_address'], 
+                          'delivery_suburb' => $order->delivery['suburb'], 
+                          'delivery_city' => $order->delivery['city'], 
+                          'delivery_postcode' => $order->delivery['postcode'], 
+                          'delivery_state' => $order->delivery['state'], 
+                          'delivery_country' => $order->delivery['country']['title'], 
+                          'delivery_address_format_id' => $order->delivery['format_id'], 
+                          'billing_name' => $order->billing['firstname'] . ' ' . $order->billing['lastname'], 
                           'billing_company' => $order->billing['company'],
-                          'billing_street_address' => $order->billing['street_address'],
-                          'billing_suburb' => $order->billing['suburb'],
-                          'billing_city' => $order->billing['city'],
-                          'billing_postcode' => $order->billing['postcode'],
-                          'billing_state' => $order->billing['state'],
-                          'billing_country' => $order->billing['country']['title'],
-                          'billing_address_format_id' => $order->billing['format_id'],
-                          'payment_method' => $order->info['payment_method'],
-                          'cc_type' => $order->info['cc_type'],
-                          'cc_owner' => $order->info['cc_owner'],
-                          'cc_number' => $order->info['cc_number'],
-                          'cc_expires' => $order->info['cc_expires'],
-                          'date_purchased' => 'now()',
+                          'billing_street_address' => $order->billing['street_address'], 
+                          'billing_suburb' => $order->billing['suburb'], 
+                          'billing_city' => $order->billing['city'], 
+                          'billing_postcode' => $order->billing['postcode'], 
+                          'billing_state' => $order->billing['state'], 
+                          'billing_country' => $order->billing['country']['title'], 
+                          'billing_address_format_id' => $order->billing['format_id'], 
+                          'payment_method' => $order->info['payment_method'], 
+                          'shipping_module' => $shipping['id'],
+                          'cc_type' => $order->info['cc_type'], 
+                          'cc_owner' => $order->info['cc_owner'], 
+                          'cc_number' => $order->info['cc_number'], 
+                          'cc_expires' => $order->info['cc_expires'], 
+                          'date_purchased' => 'now()', 
 // LINE ADDED: MOD - Downloads Controller
                           'last_modified' => 'now()',
-                          'orders_status' => $order->info['order_status'],
-                          'currency' => $order->info['currency'],
+                          'orders_status' => $order->info['order_status'], 
+                          'currency' => $order->info['currency'], 
                           'currency_value' => $order->info['currency_value']);
   tep_db_perform(TABLE_ORDERS, $sql_data_array);
   $insert_id = tep_db_insert_id();
@@ -115,16 +136,16 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
     $sql_data_array = array('orders_id' => $insert_id,
                             'title' => $order_totals[$i]['title'],
                             'text' => $order_totals[$i]['text'],
-                            'value' => $order_totals[$i]['value'],
-                            'class' => $order_totals[$i]['code'],
+                            'value' => $order_totals[$i]['value'], 
+                            'class' => $order_totals[$i]['code'], 
                             'sort_order' => $order_totals[$i]['sort_order']);
     tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
   }
 
   $customer_notification = (SEND_EMAILS == 'true') ? '1' : '0';
-  $sql_data_array = array('orders_id' => $insert_id,
-                          'orders_status_id' => $order->info['order_status'],
-                          'date_added' => 'now()',
+  $sql_data_array = array('orders_id' => $insert_id, 
+                          'orders_status_id' => $order->info['order_status'], 
+                          'date_added' => 'now()', 
                           'customer_notified' => $customer_notification,
                           'comments' => $order->info['comments']);
   tep_db_perform(TABLE_ORDERS_STATUS_HISTORY, $sql_data_array);
@@ -136,11 +157,13 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
 
   for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
 // Stock Update - Joao Correia
-// BOF: MOD - QT Pro
+// LINE ADDED: MOD - QT Pro
     $products_stock_attributes=null;
     if (STOCK_LIMITED == 'true') {
-        $products_attributes = $order->products[$i]['attributes'];
-      if (DOWNLOAD_ENABLED == 'true') {
+// BOF: QT Pro - move from below
+      $products_attributes = $order->products[$i]['attributes'];
+// BOF: QT Pro - move from below
+//    if (DOWNLOAD_ENABLED == 'true') {
 // EOF: MOD - QT Pro
         $stock_query_raw = "SELECT products_quantity, pad.products_attributes_filename
                             FROM " . TABLE_PRODUCTS . " p
@@ -151,7 +174,9 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
                             WHERE p.products_id = '" . tep_get_prid($order->products[$i]['id']) . "'";
 // Will work with only one option for downloadable products
 // otherwise, we have to build the query dynamically with a loop
-        $products_attributes = $order->products[$i]['attributes'];
+// BOF: QT Pro - move to above
+//      $products_attributes = $order->products[$i]['attributes'];
+// EOF: QT Pro - move to above
         if (is_array($products_attributes)) {
           $stock_query_raw .= " AND pa.options_id = '" . $products_attributes[0]['option_id'] . "' AND pa.options_values_id = '" . $products_attributes[0]['value_id'] . "'";
         }
@@ -159,8 +184,7 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
 // BOF: MOD - QT Pro
       if (tep_db_num_rows($stock_query) > 0) {
         $stock_values = tep_db_fetch_array($stock_query);
-      }
-            $actual_stock_bought = $order->products[$i]['qty'];
+        $actual_stock_bought = $order->products[$i]['qty'];
         $download_selected = false;
         if ((DOWNLOAD_ENABLED == 'true') && isset($stock_values['products_attributes_filename']) && tep_not_null($stock_values['products_attributes_filename'])) {
           $download_selected = true;
@@ -168,25 +192,34 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
         }
 //      If not downloadable and attributes present, adjust attribute stock
         if (!$download_selected && is_array($products_attributes)) {
-                $all_nonstocked = true;
-                $products_stock_attributes_array = array();
-                foreach ($products_attributes as $attribute) {
-                    if ($attribute['track_stock'] == 1) {
-                      $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
-                      $all_nonstocked = false;
-                    }
-                }
-                if ($all_nonstocked) {
-                    $actual_stock_bought = $order->products[$i]['qty'];
-                }  else {
-                  asort($products_stock_attributes_array, SORT_NUMERIC);
-                  $products_stock_attributes = implode(",", $products_stock_attributes_array);
-                  $attributes_stock_query = tep_db_query("select products_stock_quantity from " . TABLE_PRODUCTS_STOCK . " where products_stock_attributes = '$products_stock_attributes' AND products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
-                  if (tep_db_num_rows($attributes_stock_query) > 0) {
-                      $attributes_stock_values = tep_db_fetch_array($attributes_stock_query);
-                      $attributes_stock_left = $attributes_stock_values['products_stock_quantity'] - $order->products[$i]['qty'];
-                      tep_db_query("update " . TABLE_PRODUCTS_STOCK . " set products_stock_quantity = '" . $attributes_stock_left . "' where products_stock_attributes = '$products_stock_attributes' AND products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
-                      $actual_stock_bought = ($attributes_stock_left < 1) ? $attributes_stock_values['products_stock_quantity'] : $order->products[$i]['qty'];
+          $all_nonstocked = true;
+          $products_stock_attributes_array = array();
+          foreach ($products_attributes as $attribute) {
+//**si** 14-11-05 fix missing att list
+//            if ($attribute['track_stock'] == 1) {
+//              $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
+            $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
+            if ($attribute['track_stock'] == 1) {
+//**si** 14-11-05 end
+              $all_nonstocked = false;
+            }
+          }
+          if ($all_nonstocked) {
+            $actual_stock_bought = $order->products[$i]['qty'];
+//**si** 14-11-05 fix missing att list
+            asort($products_stock_attributes_array, SORT_NUMERIC);
+            $products_stock_attributes = implode(",", $products_stock_attributes_array);
+//**si** 14-11-05 end
+
+          }  else {
+            asort($products_stock_attributes_array, SORT_NUMERIC);
+            $products_stock_attributes = implode(",", $products_stock_attributes_array);
+            $attributes_stock_query = tep_db_query("select products_stock_quantity from " . TABLE_PRODUCTS_STOCK . " where products_stock_attributes = '$products_stock_attributes' AND products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+            if (tep_db_num_rows($attributes_stock_query) > 0) {
+              $attributes_stock_values = tep_db_fetch_array($attributes_stock_query);
+              $attributes_stock_left = $attributes_stock_values['products_stock_quantity'] - $order->products[$i]['qty'];
+              tep_db_query("update " . TABLE_PRODUCTS_STOCK . " set products_stock_quantity = '" . $attributes_stock_left . "' where products_stock_attributes = '$products_stock_attributes' AND products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+              $actual_stock_bought = ($attributes_stock_left < 1) ? $attributes_stock_values['products_stock_quantity'] : $order->products[$i]['qty'];
             } else {
               $attributes_stock_left = 0 - $order->products[$i]['qty'];
               tep_db_query("insert into " . TABLE_PRODUCTS_STOCK . " (products_id, products_stock_attributes, products_stock_quantity) values ('" . tep_get_prid($order->products[$i]['id']) . "', '" . $products_stock_attributes . "', '" . $attributes_stock_left . "')");
@@ -210,12 +243,21 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
           }
         }
       }
-// BOF: MOD - QT Pro
+// LINE ADDED: MOD - QT Pro
+    } else { 
+      if ( is_array($order->products[$i]['attributes']) ) {
+        $products_stock_attributes_array = array();
+        foreach ($order->products[$i]['attributes'] as $attribute) {
+            $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
+        }
+        asort($products_stock_attributes_array, SORT_NUMERIC);
+        $products_stock_attributes = implode(",", $products_stock_attributes_array);
+      }
     }
-// EOF: MOD - QT Pro
+//**si** 14-11-05 end
 // Update products_ordered (for bestsellers list)
     tep_db_query("update " . TABLE_PRODUCTS . " set products_ordered = products_ordered + " . sprintf('%d', $order->products[$i]['qty']) . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
-// BOF: MOD - QT Pro
+// LINE ADDED: MOD - QT Pro
     if (!isset($products_stock_attributes)) $products_stock_attributes=null;
     $sql_data_array = array('orders_id' => $insert_id,
                             'products_id' => tep_get_prid($order->products[$i]['id']),
@@ -225,11 +267,15 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
                             'final_price' => $order->products[$i]['final_price'],
                             'products_tax' => $order->products[$i]['tax'],
                             'products_quantity' => $order->products[$i]['qty'],//);
+// LINE ADDED: MOD - QT Pro
                             'products_stock_attributes' => $products_stock_attributes);
-// EOF: MOD - QT Pro
     tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
     $order_products_id = tep_db_insert_id();
-// LINE ADDED: MOD - ICW CREDIT CLASS SYSTEM
+
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+$order_total_modules->update_credit_account($i);    
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
 //------insert customer choosen option to order--------
     $attributes_exist = '0';
     $products_ordered_attributes = '';
@@ -271,8 +317,6 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
                                   'download_count' => $attributes_values['products_attributes_maxcount']);
           tep_db_perform(TABLE_ORDERS_PRODUCTS_DOWNLOAD, $sql_data_array);
         }
-// LINE CHANGED: MOD - clr 030714 changing to use values from $orders->products and adding call to tep_decode_specialchars()
-//      $products_ordered_attributes .= "\n\t" . $attributes_values['products_options_name'] . ' ' . tep_decode_specialchars($order->products[$i]['attributes'][$j]['value']);
         $products_ordered_attributes .= "\n\t" . $attributes_values['products_options_name'] . ' ' . $attributes_values['products_options_values_name'];
       }
     }
@@ -283,8 +327,10 @@ $Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
 
     $products_ordered .= $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . ' (' . $order->products[$i]['model'] . ') = ' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . $products_ordered_attributes . "\n";
   }
-// LINE ADDED: MOD - ICW CREDIT CLASS SYSTEM
-$order_total_modules->apply_credit();
+
+// LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
+  $order_total_modules->apply_credit();
+
 // lets start with the email confirmation
 // LINE ADDED: PWA - Add test for PWA - no display of invoice URL if PWA customer
 if (!tep_session_is_registered('noaccount')) {
@@ -319,7 +365,7 @@ if (!tep_session_is_registered('noaccount')) {
   }
 
   if ($order->content_type != 'virtual') {
-    $email_order .= "\n" . EMAIL_TEXT_DELIVERY_ADDRESS . "\n" .
+    $email_order .= "\n" . EMAIL_TEXT_DELIVERY_ADDRESS . "\n" . 
                     EMAIL_SEPARATOR . "\n" .
                     tep_address_label($customer_id, $sendto, 0, '', "\n") . "\n";
   }
@@ -328,11 +374,11 @@ if (!tep_session_is_registered('noaccount')) {
                   EMAIL_SEPARATOR . "\n" .
                   tep_address_label($customer_id, $billto, 0, '', "\n") . "\n\n";
   if (is_object($$payment)) {
-    $email_order .= EMAIL_TEXT_PAYMENT_METHOD . "\n" .
+    $email_order .= EMAIL_TEXT_PAYMENT_METHOD . "\n" . 
                     EMAIL_SEPARATOR . "\n";
     $payment_class = $$payment;
-    $email_order .= $payment_class->title . "\n\n";
-    if ($payment_class->email_footer) {
+    $email_order .= $order->info['payment_method'] . "\n\n";
+    if ($payment_class->email_footer) { 
       $email_order .= $payment_class->email_footer . "\n\n";
     }
   }
@@ -346,6 +392,9 @@ if (!tep_session_is_registered('noaccount')) {
 // LINE ADDED: MOD - OSC-AFFILIATE
   require(DIR_WS_INCLUDES . 'affiliate_checkout_process.php');
 
+// remove items from wishlist if customer purchased them 
+  $wishList->clear();
+
 // load the after_process function from the payment modules
   $payment_modules->after_process();
 
@@ -357,10 +406,13 @@ if (!tep_session_is_registered('noaccount')) {
   tep_session_unregister('shipping');
   tep_session_unregister('payment');
   tep_session_unregister('comments');
-// BOF: MOD - ICW CREDIT CLASS SYSTEM
+
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');
   $order_total_modules->clear_posts();
-// EOF: MOD - ICW CREDIT CLASS SYSTEM
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
   tep_redirect(tep_href_link(FILENAME_CHECKOUT_SUCCESS, '', 'SSL'));
+
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

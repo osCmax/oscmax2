@@ -5,7 +5,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -20,7 +20,8 @@ if ($HTTP_GET_VARS['gID']) {
 
 define('TEXT_COUNT_GROUPS', 'Groups: ');
 
-define('TABLE_HEADING_NAME', 'Name');
+define('TABLE_HEADING_USERNAME', 'User Name');
+define('TABLE_HEADING_NAME', 'Full Name');
 define('TABLE_HEADING_EMAIL', 'Email Address');
 define('TABLE_HEADING_PASSWORD', 'Password');
 define('TABLE_HEADING_CONFIRM', 'Confirm Password');
@@ -48,6 +49,7 @@ define('TEXT_INFO_DELETE_INTRO', 'Remove <nobr><b>%s</b></nobr> from <nobr>Admin
 define('TEXT_INFO_DELETE_INTRO_NOT', 'You can not delete <nobr>%s group!</nobr>');
 define('TEXT_INFO_EDIT_INTRO', 'Set permission level here: ');
 
+define('TEXT_INFO_USERNAME', 'Username: ');
 define('TEXT_INFO_FULLNAME', 'Name: ');
 define('TEXT_INFO_FIRSTNAME', 'Firstname: ');
 define('TEXT_INFO_LASTNAME', 'Lastname: ');
@@ -61,6 +63,7 @@ define('TEXT_INFO_LOGNUM', 'Log Number: ');
 define('TEXT_INFO_GROUP', 'Group Level: ');
 define('TEXT_INFO_ERROR', '<font color="red">Email address has already been used! Please try again.</font>');
 
+define('JS_ALERT_USERNAME', '- Required: Username \n');
 define('JS_ALERT_FIRSTNAME', '- Required: Firstname \n');
 define('JS_ALERT_LASTNAME', '- Required: Lastname \n');
 define('JS_ALERT_EMAIL', '- Required: Email address \n');
@@ -70,6 +73,8 @@ define('JS_ALERT_LEVEL', '- Required: Group Member \n');
 
 define('ADMIN_EMAIL_SUBJECT', 'New Admin Member');
 define('ADMIN_EMAIL_TEXT', 'Hi %s,' . "\n\n" . 'You can access the admin panel with the following password. Once you access the admin, please change your password!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is an automated response, please do not reply!');
+define('ADMIN_EMAIL_EDIT_SUBJECT', 'Admin Member Profile Edit');
+define('ADMIN_EMAIL_EDIT_TEXT', 'Hi %s,' . "\n\n" . 'Your personal information has been updated by an administrator.' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is an automated response, please do not reply!');
 
 define('TEXT_INFO_HEADING_DEFAULT_GROUPS', 'Admin Group ');
 define('TEXT_INFO_HEADING_DELETE_GROUPS', 'Delete Group ');
@@ -78,7 +83,9 @@ define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>NOTE:</b><li><b>edit:</b> edit grou
 define('TEXT_INFO_DELETE_GROUPS_INTRO', 'It\'s also will delete member of this group. Are you sure want to delete <nobr><b>%s</b> group?</nobr>');
 define('TEXT_INFO_DELETE_GROUPS_INTRO_NOT', 'You can not delete this groups!');
 define('TEXT_INFO_GROUPS_INTRO', 'Give an unique group name. Click next to submit.');
+define('TEXT_INFO_EDIT_GROUPS_INTRO', 'Give an unique group name. Click next to submit.');
 
+define('TEXT_INFO_HEADING_EDIT_GROUP', 'Admin Group');
 define('TEXT_INFO_HEADING_GROUPS', 'New Group');
 define('TEXT_INFO_GROUPS_NAME', ' <b>Group Name:</b><br>Give an unique group name. Then, click next to submit.<br>');
 define('TEXT_INFO_GROUPS_NAME_FALSE', '<font color="red"><b>ERROR:</b> At least the group name must have more than 5 character!</font>');

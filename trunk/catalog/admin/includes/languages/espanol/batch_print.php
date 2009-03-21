@@ -1,4 +1,8 @@
 <?php
+/*
+  $Id:Batch_print.php, user Exp $
+*/
+define('TEXT_ORDER_NUMBERS_RANGES', 'Order Number (s), either one # or  range, # - #, or #,#,#');
 define('HEADING_TITLE', 'Batch Print Center');
 define('TABLE_HEADING_COMMENTS', 'Comments');
 define('TABLE_HEADING_PRODUCTS_MODEL', 'Model');
@@ -26,6 +30,37 @@ define('ENTRY_TOTAL', 'Total:');
 define('TEXT_ORDER_NUMBER','Order Number:');
 define('TEXT_ORDER_DATE','Order Date:');
 define('TEXT_ORDER_FORMAT','F j, Y');
+define('TEXT_CHOOSE_TEMPLATE','Choose the template of file you wish to print');
+define('TEXT_CHOOSE_TEMPLATE','Please either enter the order numbers/ranges you want extracted to PDF:<br>(eg. 2577,2580-2585,2588)');
+define('TEXT_DATES_ORDERS_EXTRACTRED','Or enter the dates of orders you want extracted to PDF:<br>(enter date in YYYY-MM-DD format)');
+define('TEXT_FROM','From:');
+define('TEXT_TO','Delivery: ');
+define('TEXT_PRINTING_LABELS_BILLING_DELIVERY','When Printing Labels :- Use Billing Address or Delivery Address?');
+define('TEXT_DELIVERY','Delivery: ');
+define('TEXT_BILLING','Billing: ');
+define('TEXT_POSITION_START_PRINTING', 'Position to Start printing from:<br>(0 position is top left label, they increase from left to right then from top to bottom)');
+define('TEXT_INCLUDE_ORDERS_STATUS', 'Only include orders with the status:<br>if none, all orders will be included)');
+define('TEXT_SHOW_ORDER','Show order date?');
+define('TEXT_SHOW_PHONE_NUMBER','Show customer\'s telephone number?');
+define('TEXT_SHOW_EMAIL_CUSTOMER','Show customer\'s e-mail address?');
+define('TEXT_PAYMENT_INFORMATION','Show payment information?');
+define('TEXT_SHOW_CREDIT_CARD_NUMBER','Show credit card number? (for credit card orders only)');
+define('TEXT_AUTOMACILLLY_CHANGE_ORDER','Automatically change order statuses to:<br>(if None, no statuses will be changed.)');
+define('TEXT_SHOW_OREDERS_COMMENTS','Show orders without comments?<br>(Will NOT show order with comments placed by the customer at time of order.)');
+define('TEXT_NOTIFY_CUSTOMER','Notify the customer via e-mail?<br>(This will notify the customer via e-mail with the comments in the batch print  language file.)');
+define('TEXT_BANK','Bank: ');
+define('TEXT_POST','Post: ');
+define('TEXT_SALES','Sales: ');
+define('TEXT_PACKED_BY','Packed By:  ______________________');
+define('TEXT_VERIFIED_BY','Verified By:  ______________________');
+define('TEXT_DEAR','Dear ');
+define('TEXT_THX_CHRISMAS','Thanks for your continued support -----');
+define('TEXT_RETURNS_LABEL', 'Returns Label Order: ');
+define('TEXT_SHIPPING_LABEL', 'Shipping Label Order: ');
+define('SHIP_FROM_COUNTRY', '');  //eg. 'United Kingdom'
+define('WEBSITE', 'www.Your site.com');
+define('TEXT_RETURNS', 'We hope you don\'t need it but we have provided a returns label just in case. Please see our returns policy at www.Your site.com/shipping.php');
+define('TEXT_TO', 'To:');
 // Change this to a general comment that you would like
 define('BATCH_COMMENTS','Automatic order update notification.');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');

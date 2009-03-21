@@ -90,13 +90,13 @@ if(($_POST['name'] != "" && $_POST["Action"] == "newpackage") || ($_POST['id'] !
 }
 
 //********** Delete Package
-if($_GET['id'] != "" && $_GET["Action"] == "deletepackage") {
-    tep_db_query("delete from " . TABLE_PACKAGING . " where package_id = '" . $_GET['id'] . "'");
+if($_POST['id'] != "" && $_POST["Action"] == "deletepackage") {
+    tep_db_query("delete from " . TABLE_PACKAGING . " where package_id = '" . $_POST['id'] . "'");
 }
 
 // ********* Display Packages
 DisplayPackages($activeid, $error);
-switch ($Action) {
+switch ($_GET['Action']) {
     case "shownewpackageform":
     showNewPackageForm();
     break;
@@ -184,11 +184,14 @@ function DisplayPackages($activeid,$error) {
             echo '<td><a href="' . tep_href_link(FILENAME_PACKAGING, 'id=' . $packages[$i]['id'] ). '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', ICON_INFO) . '</a>'; 
         }
     }
-    echo '</td></tr></table><br>';
-    echo '<a href="' . tep_href_link( FILENAME_PACKAGING ) . '?Action=shownewpackageform&id=' . $_GET['id'] . '">'.tep_image_button('button_new_package.gif', NEW_ADMIN).'</a>&nbsp;';
-    echo '<a href="' . tep_href_link( FILENAME_PACKAGING ) . '?Action=showupdatepackageform&id=' . $_GET['id'] . '">'.tep_image_button('button_edit.gif', NEW_ADMIN).'</a>&nbsp;' ;	 
-    echo '<a href="' . tep_href_link( FILENAME_PACKAGING ) . '?Action=showconfirmdeletepackageform&id=' . $_GET['id'] . '">'.tep_image_button('button_delete.gif', NEW_ADMIN).'</a>' ;	 
-    echo '</td><td class="infoBoxContent" valign="top">';
+    echo '</td></tr></table><br>'."\n";
+    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=shownewpackageform') .  '">'.tep_image_button('button_new_package.gif', 'New Package').'</a>&nbsp;';
+    if ($activeid == "") {
+        $activeid = $packages[0]['id'];
+        }
+    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=showupdatepackageform&id='.$activeid.'') . '">'.tep_image_button('button_edit.gif', IMAGE_EDIT).'</a>&nbsp;' ;	 
+    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=showconfirmdeletepackageform&id='.$activeid.'') . '">'.tep_image_button('button_delete.gif', IMAGE_DELETE).'</a>' ;
+   echo '</td><td class="infoBoxContent" valign="top">'."\n";
 }
 
 //******************************   showNewPackageForm()
@@ -202,20 +205,21 @@ function showNewPackageForm() {
         }
     }
 
-    echo "<table cellspacing='0' width='100%' cellpadding='0'> <tr><td colspan='2' class='infoBoxHeading'>". CREATE_NEW_PACKAGE."</td></tr></table>";
+    echo "<table cellspacing='0' width='100%' cellpadding='0'><tr>\n";
+    echo "<td colspan='2' class='infoBoxHeading'>". CREATE_NEW_PACKAGE."</td></tr></table>\n";
     
     echo tep_draw_form("newpackage", FILENAME_PACKAGING);
     echo tep_draw_hidden_field("Action", "newpackage");
-    echo '<table><tr><td class="infoBoxContent"><b>'.HEADING_NAME.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_NAME_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("name").'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_DESCRIPTION.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_DESCRIPTION_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("description").'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_LENGTH.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_LENGTH_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("length").'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_WIDTH.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_WIDTH_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("width").'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_HEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_HEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("height").'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_EMPTY_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_EMPTY_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("empty_weight").'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_MAX_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_MAX_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("max_weight").'</td></tr>';
+    echo '<table><tr><td class="infoBoxContent"><b>'.HEADING_NAME.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_NAME_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("name").'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_DESCRIPTION.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_DESCRIPTION_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("description").'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_LENGTH.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_LENGTH_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("length").'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_WIDTH.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_WIDTH_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("width").'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_HEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_HEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("height").'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_EMPTY_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_EMPTY_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("empty_weight").'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_MAX_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_MAX_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("max_weight").'</td></tr>'."\n";
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_COST.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_COST_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("cost", $cost).'</td></tr>';
-    echo '<tr><td colspan="2">'. tep_image_submit('button_confirm.gif', 'Save these values as a new package.') ;
-    echo '&nbsp;&nbsp;<a href="' . tep_href_link( FILENAME_PACKAGING,'id='.$_GET["id"] ) . '">'.tep_image_button('button_cancel.gif', IMAGE_CANCEL) .'</A>' ;	 
+    echo '<tr><td colspan="2">'. tep_image_submit('button_update.gif', 'Save these values as a new package.') ;
+    echo '&nbsp;&nbsp;<a href="' . tep_href_link( FILENAME_PACKAGING ) . '">'.tep_image_button('button_cancel.gif', IMAGE_CANCEL) .'</A>' ;	 
     echo "</td></tr></table>" ;
     echo ("</form>");
 }
@@ -232,22 +236,22 @@ function showUpdatePackageForm() {
             }
         }
     }
-    echo "<table cellspacing='0' width='100%' cellpadding='0'> <tr><td colspan='2' class='infoBoxHeading'>". UPDATE_PACKAGE."</td></tr></table>";
-    echo tep_draw_form("updatepackage", FILENAME_PACKAGING.'?id='.$_GET['id']);
+    echo "<table cellspacing='0' width='100%' cellpadding='0'> <tr><td colspan='2' class='infoBoxHeading'>". UPDATE_PACKAGE."</td></tr></table>\n";
+    echo tep_draw_form("updatepackage", FILENAME_PACKAGING, 'id='.$activepackage['id'], 'post');
     echo tep_draw_hidden_field("Action", "updatepackage");
     echo tep_draw_hidden_field("id", $activepackage['id']);
-    echo '<table><tr><td class="infoBoxContent"><b>'.HEADING_NAME.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_NAME_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("name", $activepackage['name']).'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_DESCRIPTION.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_DESCRIPTION_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("description", $activepackage['description']).'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_LENGTH.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_LENGTH_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("length", $activepackage['length']).'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_WIDTH.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_WIDTH_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("width", $activepackage['width']).'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_HEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_HEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("height", $activepackage['height']).'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_EMPTY_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_EMPTY_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("empty_weight", $activepackage['empty_weight']).'</td></tr>';
-    echo '<tr><td class="infoBoxContent"><b>'.HEADING_MAX_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_MAX_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("max_weight", $activepackage['max_weight']).'</td></tr>';
+    echo '<table><tr><td class="infoBoxContent"><b>'.HEADING_NAME.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_NAME_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("name", $activepackage['name']).'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_DESCRIPTION.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_DESCRIPTION_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("description", $activepackage['description']).'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_LENGTH.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_LENGTH_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("length", $activepackage['length']).'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_WIDTH.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_WIDTH_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("width", $activepackage['width']).'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_HEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_HEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("height", $activepackage['height']).'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_EMPTY_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_EMPTY_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("empty_weight", $activepackage['empty_weight']).'</td></tr>'."\n";
+    echo '<tr><td class="infoBoxContent"><b>'.HEADING_MAX_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_MAX_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("max_weight", $activepackage['max_weight']).'</td></tr>'."\n";
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_COST.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_COST_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("cost", $activepackage['cost']).'</td></tr>';
-    echo '<tr><td colspan="2">'. tep_image_submit('button_confirm.gif', 'Update the package with these values.') ;
-    echo '&nbsp;&nbsp;<a href="' . tep_href_link( FILENAME_PACKAGING,'id='.$_GET["id"] ) . '">'.tep_image_button('button_cancel.gif', IMAGE_CANCEL) .'</a>' ;	 
-    echo "</td></tr></table>" ;
-    echo ("</form>");
+    echo '<tr><td colspan="2">'. tep_image_submit('button_update.gif', 'Update the package with these values.') ;
+    echo '&nbsp;&nbsp;<a href="' . tep_href_link( FILENAME_PACKAGING,'id='.$activepackage['id'] ) . '">'.tep_image_button('button_cancel.gif', IMAGE_CANCEL) .'</a>'."\n";	 
+    echo "</td></tr></table>\n" ;
+    echo ("</form>\n");
 }
 
 //*************************** showConfirmDeletePackageForm()
@@ -261,13 +265,18 @@ function showConfirmDeletePackageForm() {
         }
     }
     echo "<table cellspacing='0' width='100%' cellpadding='0'> <tr><td colspan='2' class='infoBoxHeading'>". DELETE_PACKAGE."</td></tr></table>";
+    echo tep_draw_form("confirmDeletePackage", FILENAME_PACKAGING);
+    echo tep_draw_hidden_field("Action", "deletepackage");
+    echo tep_draw_hidden_field("id", $_GET['id']);
     echo '<table cellpadding="5"><tr><td class="infoBoxContent">'.CONFIRM_DELETE.'</td></tr>' ;
     echo "<tr><td>".$package_name."</td></td>";
     echo "<tr><td>";
     //echo tep_image_submit('button_confirm.gif', 'ok') ;
-    echo '<a href="' . tep_href_link( FILENAME_PACKAGING,'Action=deletepackage&id='.$_GET["id"] ) . '">'.tep_image_button('button_confirm.gif', IMAGE_CONFIRM) .'</a>' ;	 
-    echo '&nbsp;&nbsp;<a href="' . tep_href_link( FILENAME_PACKAGING,'id='.$_GET["id"] ) . '">'.tep_image_button('button_cancel.gif', IMAGE_CANCEL) .'</a>' ;	 
-    echo '</td></tr></table>';
+//    echo '<a href="' . tep_href_link( FILENAME_PACKAGING ) . '">'.tep_image_button('button_confirm.gif', IMAGE_CONFIRM) .'</a>' ;
+    echo tep_image_submit('button_confirm.gif', IMAGE_CONFIRM) ;	 
+    echo '&nbsp;&nbsp;<a href="' . tep_href_link( FILENAME_PACKAGING ) . '">'.tep_image_button('button_cancel.gif', IMAGE_CANCEL) .'</a>' ;	 
+    echo '</td></tr></table>'."\n";
+    echo '</form>'."\n";
 }
 
 //************************  ShowPackageInfo()
@@ -287,18 +296,18 @@ function showPackageInfoForm() {
         echo '<SPAN class="errorText">'.$error.'</SPAN>';
     }
 
-    echo                         "<table cellspacing='0' width='100%' cellpadding='0'><tr><td colspan='2' class='infoBoxHeading'>". HEADING_INFO ."</td></tr></table>";
+    echo "<table cellspacing='0' width='100%' cellpadding='0'><tr>\n<td colspan='2' class='infoBoxHeading'><b>". HEADING_INFO ."</b></td></tr></table>\n";
     if (count($packages) != 0) {
-        echo '<table>';
-        echo '<tr><td class="infoBoxContent"><b>'.    HEADING_NAME    .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['name'].'</td></tr>';
-        echo '<tr><td class="infoBoxContent"><b>'. HEADING_DESCRIPTION.'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['description'].'</td></tr>';
-        echo '<tr><td class="infoBoxContent"><b>'.   HEADING_LENGTH   .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['length'].'</td></tr>';
-        echo '<tr><td class="infoBoxContent"><b>'.   HEADING_WIDTH    .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['width'].'</td></tr>';
-        echo '<tr><td class="infoBoxContent"><b>'.   HEADING_HEIGHT   .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['height'].'</td></tr>';
-        echo '<tr><td class="infoBoxContent"><b>'.HEADING_EMPTY_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['empty_weight'].'</td></tr>';
-        echo '<tr><td class="infoBoxContent"><b>'. HEADING_MAX_WEIGHT .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['max_weight'].'</td></tr>';
-        echo '<tr><td class="infoBoxContent"><b>'.    HEADING_COST    .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['cost'].'</td></tr>';
-        echo "</table>";
+        echo '<table>'."\n";
+        echo '<tr><td class="infoBoxContent"><b>'.    HEADING_NAME    .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['name'].'</td></tr>'."\n";
+        echo '<tr><td class="infoBoxContent"><b>'. HEADING_DESCRIPTION.'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['description'].'</td></tr>'."\n";
+        echo '<tr><td class="infoBoxContent"><b>'.   HEADING_LENGTH   .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['length'].'</td></tr>'."\n";
+        echo '<tr><td class="infoBoxContent"><b>'.   HEADING_WIDTH    .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['width'].'</td></tr>'."\n";
+        echo '<tr><td class="infoBoxContent"><b>'.   HEADING_HEIGHT   .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['height'].'</td></tr>'."\n";
+        echo '<tr><td class="infoBoxContent"><b>'.HEADING_EMPTY_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['empty_weight'].'</td></tr>'."\n";
+        echo '<tr><td class="infoBoxContent"><b>'. HEADING_MAX_WEIGHT .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['max_weight'].'</td></tr>'."\n";
+        echo '<tr><td class="infoBoxContent"><b>'.    HEADING_COST    .'</b></td></tr><tr><td class="infoBoxContent">'.$activepackage['cost'].'</td></tr>'."\n";
+        echo "</table>\n";
     }
     echo "";
 }

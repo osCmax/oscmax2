@@ -23,7 +23,7 @@ $Id: create_order.php 3 2006-05-27 04:59:07Z user $
 	if (tep_db_num_rows($result) > 0)
 	{
  		// Query Successful
- 		$SelectCustomerBox = "<select name='Customer'><option value=''>Select Customer</option>\n";
+ 		$SelectCustomerBox = "<select name='Customer'><option value=''>" . TEXT_SELECT_CUST . "</option>\n";
  		while($db_Row = tep_db_fetch_array($result))
  		{ $SelectCustomerBox .= "<option value='" . $db_Row["customers_id"] . "'";
 		  if(IsSet($HTTP_GET_VARS['Customer']) and $db_Row["customers_id"]==$HTTP_GET_VARS['Customer'])
@@ -34,6 +34,22 @@ $Id: create_order.php 3 2006-05-27 04:59:07Z user $
 		}
 		
 		$SelectCustomerBox .= "</select>\n";
+	}
+	
+	$query = tep_db_query("select code, value from " . TABLE_CURRENCIES . " ORDER BY code");
+	$result = $query;
+	
+	if (tep_db_num_rows($result) > 0)
+	{
+ 		// Query Successful
+ 		$SelectCurrencyBox = "<select name='Currency'><option value='' SELECTED>" . TEXT_SELECT_CURRENCY . "</option>\n";
+ 		while($db_Row = tep_db_fetch_array($result))
+ 		{ 
+			$SelectCurrencyBox .= "<option value='" . $db_Row["code"] . " , " . $db_Row["value"] . "'";
+		  	$SelectCurrencyBox .= ">" . $db_Row["code"] . "</option>\n";
+		}
+		
+		$SelectCurrencyBox .= "</select>\n";
 	}
 
 	if(IsSet($HTTP_GET_VARS['Customer']))
@@ -71,7 +87,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
   require(DIR_WS_INCLUDES . 'header_tags.php');
 } else {
 ?> 
-  <title>Step-by-Step Manual Order Entry - Step 1</title>
+  <title><?php echo HEADING_TITLE ?></title>
         	<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 		<?php require('includes/form_check.js.php'); ?>
 		</head>
@@ -95,7 +111,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <td valign="top">
 		<table border='0' bgcolor='#7c6bce' width='100%'>
 			<tr>
-			  <td class=main><font color='#ffffff'><b>Step 1 - Choose customer</b></td>
+			  <td class=main><font color='#ffffff'><b><?php echo TEXT_STEP_1 ?></b></td>
 			</tr>
 		</table>
 		<table border='0' cellpadding='7'><tr><td class="main" valign="top">
@@ -104,8 +120,8 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 	print "<form action='$PHP_SELF' method='GET'>\n";
 	print "<table border='0'>\n";
 	print "<tr>\n";
-	print "<td><font class=main><b>Select Customer :</b></font><br><br>$SelectCustomerBox</td>\n";
-	print "<td valign='bottom'><input type='submit' value=\"Submit\"></td>\n";
+	print "<td><br>$SelectCustomerBox</td>\n";
+	print "<td valign='bottom'><input type='submit' value=\"" . BUTTON_SUBMIT . "\"></td>\n";
 	print "</tr>\n";
 	print "</table>\n";
 	print "</form>\n";
@@ -114,8 +130,8 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 	print "<form action='$PHP_SELF' method='GET'>\n";
 	print "<table border='0'>\n";
 	print "<tr>\n";
-	print "<td><font class=main><b><br>Or Enter Client Number :</b></font><br><br><input type=text name='Customer_nr'></td>\n";
-	print "<td valign='bottom'><input type='submit' value=\"Submit\"></td>\n";
+	print "<td><font class=main><b><br>" . TEXT_OR_BY . "</b></font><br><br><input type=text name='Customer_nr'></td>\n";
+	print "<td valign='bottom'><input type='submit' value=\"" . BUTTON_SUBMIT . "\"></td>\n";
 	print "</tr>\n";
 	print "</table>\n";
 	print "</form>\n";

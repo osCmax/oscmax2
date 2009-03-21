@@ -25,9 +25,13 @@
           </tr>
         </table></td>
       </tr>
-<?php require('add_checkout_success.php'); //ICW CREDIT CLASS/GV SYSTEM ?>
+<?php
+// Start - CREDIT CLASS Gift Voucher Contribution
+  require('add_checkout_success.php');
+// End - CREDIT CLASS Gift Voucher Contribution
+ ?>
       <tr>
-              <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
         <td align="right" class="main"><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></td>

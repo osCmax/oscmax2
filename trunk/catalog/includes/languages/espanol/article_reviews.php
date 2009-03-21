@@ -10,12 +10,12 @@ $Id: article_reviews.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Reviews of ');
-define('NAVBAR_TITLE', 'Reviews');
+define('HEADING_TITLE', 'Comentarios de ');
+define('NAVBAR_TITLE', 'Comentarios');
 
-define('TEXT_NO_ARTICLE_REVIEWS', 'There are currently no aproved reviews for this article.');
-define('TEXT_OF_5_STARS', '%s out of 5 Stars');
-define('TEXT_REVIEW_VIEWS', 'Number of times read: ');
-define('TEXT_READ_REVIEW', 'Read Review...');
+define('TEXT_NO_ARTICLE_REVIEWS', 'Actualmente no hay comentarios aprobados para esta noticia.');
+define('TEXT_OF_5_STARS', '%s de 5 estrellas');
+define('TEXT_REVIEW_VIEWS', 'N&uacute;mero de veces que se ha leido: ');
+define('TEXT_READ_REVIEW', 'Leer comentario...');
 
 ?>

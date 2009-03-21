@@ -3,14 +3,13 @@ define('BOX_HEADING_GV_ADMIN', 'Gutscheine');
 define('BOX_GV_ADMIN_QUEUE', 'Gutschein Queue');
 define('BOX_GV_ADMIN_MAIL', 'Gutschein eMail');
 define('BOX_GV_ADMIN_SENT', 'Gutscheine versandt');
-define('BOX_HEADING_COUPON_ADMIN','Rabattkupons');
 define('BOX_COUPON_ADMIN','Kupon Administrator');
 
 define('IMAGE_RELEASE', 'Gutschein einl&ouml;sen');
 
 define('_JANUARY', 'Januar');
 define('_FEBRUARY', 'Februar');
-define('_MARCH', 'M�z');
+define('_MARCH', 'Mïrz');
 define('_APRIL', 'April');
 define('_MAY', 'Mai');
 define('_JUNE', 'Juni');

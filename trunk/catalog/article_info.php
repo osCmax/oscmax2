@@ -22,8 +22,8 @@ $Id: article_info.php 3 2006-05-27 04:59:07Z user $
   $article_check_query = tep_db_query("select count(*) as total from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_status = '1' and a.articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and ad.articles_id = a.articles_id and ad.language_id = '" . (int)$languages_id . "'");
   $article_check = tep_db_fetch_array($article_check_query);
 
-
-  $breadcrumb->add(HEADING_TITLE, tep_href_link(FILENAME_ARTICLE_INFO, '', 'NONSSL'));
+  //Commented to correct articles breadcrumb adding a bad link
+  // $breadcrumb->add(HEADING_TITLE, tep_href_link(FILENAME_ARTICLE_INFO, '', 'NONSSL'));
 
   $content = CONTENT_ARTICLES;
 

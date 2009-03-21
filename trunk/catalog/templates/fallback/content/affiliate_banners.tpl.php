@@ -1,113 +1,144 @@
      <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB; ?>"> 
-      <tr> 
+      <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_specials.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-          <tr>
-            <td class="main" colspan=2><?php echo TEXT_INFORMATION; ?></td>
+            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'affiliate_links.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
           </tr>
         </table></td>
       </tr>
       <tr>
-        <td><table width="100%" border="0" cellspacing="0" cellpadding="2">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="infoBoxHeading" align="center"><?php echo TEXT_AFFILIATE_INDIVIDUAL_BANNER . ' ' . $affiliate_banners['affiliate_banners_title']; ?></td>
+            <td class="main"><?php echo TEXT_INFORMATION; ?></td>
           </tr>
-          <tr>
-            <td class="smallText" align="center"><?php echo TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO . tep_draw_form('individual_banner', tep_href_link(FILENAME_AFFILIATE_BANNERS) ) . "\n" . tep_draw_input_field('individual_banner_id', '', 'size="5"') . "&nbsp;&nbsp;" . tep_image_submit('button_affiliate_build_a_link.gif', IMAGE_BUTTON_BUILD_A_LINK); ?></form></td>
-          </tr>
-<?php
-  if (tep_not_null($HTTP_POST_VARS['individual_banner_id']) || tep_not_null($HTTP_GET_VARS['individual_banner_id'])) {
+        </table></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
 
-    if (tep_not_null($HTTP_POST_VARS['individual_banner_id'])) $individual_banner_id = $HTTP_POST_VARS['individual_banner_id'];
-    if ($HTTP_GET_VARS['individual_banner_id']) $individual_banner_id = $HTTP_GET_VARS['individual_banner_id'];
-    $affiliate_pbanners_values = tep_db_query("select p.products_image, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . $individual_banner_id . "' and pd.products_id = '" . $individual_banner_id . "' and p.products_status = '1' and pd.language_id = '" . $languages_id . "'");
-    if ($affiliate_pbanners = tep_db_fetch_array($affiliate_pbanners_values)) {
-      switch (AFFILIATE_KIND_OF_BANNERS) {
-        case 1:
-          $link = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_PRODUCT_INFO . '?ref=' . $affiliate_id . '&products_id=' . $individual_banner_id . '&affiliate_banner_id=1" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_pbanners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_pbanners['products_name'] . '"></a>';
-          break;
-        case 2: // Link to Products
-          $link = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_PRODUCT_INFO . '?ref=' . $affiliate_id . '&products_id=' . $individual_banner_id . '&affiliate_banner_id=1" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_SHOW_BANNER . '?ref=' . $affiliate_id . '&affiliate_pbanner_id=' . $individual_banner_id . '" border="0" alt="' . $affiliate_pbanners['products_name'] . '"></a>';
-          break;
-      }
-    }
-?>
+      <tr>
+        <td colspan="4"><img src="images/pixel_trans.gif" border="0" alt="" width="100%" height="10"></td>
+      </tr>
+      <tr>
+        <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="smallText" align="center"><br><?php echo $link; ?></td>
+            <td class="main"><b><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_BANNERS, '', 'SSL'). '">' . TEXT_AFFILIATE_BANNERS . '</a>';?></b></td>
           </tr>
-          <tr>
-            <td class="smallText" align="center"><?php echo TEXT_AFFILIATE_INFO; ?></td>
-          </tr>
-          <tr>
-            <td align="center">
-            	<?php 
-            	   $link = htmlspecialchars($link, ENT_QUOTES);
-                 echo tep_draw_textarea_field('affiliate_banner', 'soft', '60', '6', $link); 
-              ?>
-            </td>
-          </tr>
-<?php
-  }
-?>
         </table></td>
       </tr>
       <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
+        <td colspan="4"><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+          <tr class="infoBoxContents">
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+                <td width="60"><img src="images/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
+                <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+                <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                  <tr>
+                    <td class="main"><img src="images/arrow_green.gif" border="0" alt="" width="12" height="10">&nbsp;<?php echo TEXT_INFORMATION_BANNERS_BANNERS ;?></td>
+                    <td width="200" class="main" align="left"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_BANNERS, '', 'SSL') . '">' . tep_image_button('button_affiliate_banners.gif', IMAGE_BANNERS) . '</a>';?></td>
+                  </tr>
+                  </table></td>
+               <td width="10" align="right"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+             </tr>
+           </table></td>
+         </tr>
+        </table></td>
       </tr>
-<?php
-  if (tep_db_num_rows($affiliate_banners_values)) {
-
-    while ($affiliate_banners = tep_db_fetch_array($affiliate_banners_values)) {
-      $affiliate_products_query = tep_db_query("select products_name from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . $affiliate_banners['affiliate_products_id'] . "' and language_id = '" . $languages_id . "'");
-      $affiliate_products = tep_db_fetch_array($affiliate_products_query);
-      $prod_id = $affiliate_banners['affiliate_products_id'];
-      $ban_id = $affiliate_banners['affiliate_banners_id'];
-      switch (AFFILIATE_KIND_OF_BANNERS) {
-        case 1: // Link to Products
-          if ($prod_id > 0) {
-            $link = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_PRODUCT_INFO . '?ref=' . $affiliate_id . '&products_id=' . $prod_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_products['products_name'] . '"></a>';
-          } else { // generic_link
-            $link = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_banners['affiliate_banners_title'] . '"></a>';
-          }
-          break;
-        case 2: // Link to Products
-          if ($prod_id > 0) {
-            $link = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_PRODUCT_INFO . '?ref=' . $affiliate_id . '&products_id=' . $prod_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_SHOW_BANNER . '?ref=' . $affiliate_id . '&affiliate_banner_id=' . $ban_id . '" border="0" alt="' . $affiliate_products['products_name'] . '"></a>';
-          } else { // generic_link
-            $link = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_SHOW_BANNER . '?ref=' . $affiliate_id . '&affiliate_banner_id=' . $ban_id . '" border="0" alt="' . $affiliate_banners['affiliate_banners_title'] . '"></a>';
-          }
-          break;
-      }
-?>
       <tr>
-        <td><table width="100%" border="0" cellspacing="0" cellpadding="2">
+        <td colspan="4"><img src="images/pixel_trans.gif" border="0" alt="" width="100%" height="10"></td>
+      </tr>
+      <tr>
+        <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="infoBoxHeading" align="center"><?php echo TEXT_AFFILIATE_NAME . ' ' . $affiliate_banners['affiliate_banners_title']; ?></td>
-          </tr>
-          <tr>
-            <td class="smallText" align="center"><br><?php echo $link; ?></td>
-          </tr>
-          <tr>
-            <td class="smallText" align="center"><?php echo TEXT_AFFILIATE_INFO; ?></td>
-          </tr>
-          <tr>
-            <td class="smallText" align="center">
-              <?php 
-                $link = htmlspecialchars($link, ENT_QUOTES);
-                echo tep_draw_textarea_field('affiliate_banner', 'soft', '60', '6', $link); 
-              ?>
-            </td>
+            <td class="main"><b><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_PRODUCT, '', 'SSL'). '">' . TEXT_AFFILIATE_BANNERS_PRODUCT . '</a>';?></b></td>
           </tr>
         </table></td>
-      </tr>	
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
       </tr>
-<?php
-    }
-  }
-?>
+      <tr>
+        <td colspan="4"><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+          <tr class="infoBoxContents">
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+                <td width="60"><img src="images/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
+                <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+                <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                  <tr>
+                    <td class="main"><img src="images/arrow_green.gif" border="0" alt="" width="12" height="10">&nbsp;<?php echo TEXT_INFORMATION_BANNERS_PRODUCT ;?></td>
+                    <td width="200" class="main" align="left"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_PRODUCT, '', 'SSL') . '">' . tep_image_button('button_affiliate_product.gif', IMAGE_PRODUCT) . '</a>';?></td>
+                  </tr>
+                  </table></td>
+               <td width="10" align="right"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+             </tr>
+           </table></td>
+         </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td colspan="4"><img src="images/pixel_trans.gif" border="0" alt="" width="100%" height="10"></td>
+      </tr>
+      <tr>
+        <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+          <tr>
+            <td class="main"><b><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_BUILD, '', 'SSL'). '">' . TEXT_AFFILIATE_BANNERS_BUILD . '</a>';?></b></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td colspan="4"><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+          <tr class="infoBoxContents">
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+                <td width="60"><img src="images/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
+                <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+                <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                  <tr>
+                    <td class="main"><img src="images/arrow_green.gif" border="0" alt="" width="12" height="10">&nbsp;<?php echo TEXT_INFORMATION_BANNERS_BUILD ;?></td>
+                    <td width="200" class="main" align="left"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_BUILD, '', 'SSL') . '">' . tep_image_button('button_affiliate_build_a_link.gif', IMAGE_BUILD) . '</a>';?></td>
+                  </tr>
+                  </table></td>
+               <td width="10" align="right"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+             </tr>
+           </table></td>
+         </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td colspan="4"><img src="images/pixel_trans.gif" border="0" alt="" width="100%" height="10"></td>
+      </tr>
+      <tr>
+        <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+          <tr>
+            <td class="main"><b><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_TEXT, '', 'SSL'). '">' . TEXT_AFFILIATE_BANNERS_TEXT . '</a>';?></b></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td colspan="4"><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+          <tr class="infoBoxContents">
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+                <td width="60"><img src="images/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
+                <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+                <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                  <tr>
+                    <td class="main"><img src="images/arrow_green.gif" border="0" alt="" width="12" height="10">&nbsp;<?php echo TEXT_INFORMATION_BANNERS_TEXT ;?> x</td>
+                    <td width="200" class="main" align="left"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_TEXT, '', 'SSL') . '">' . tep_image_button('button_affiliate_text.gif', IMAGE_TEXT) . '</a>';?></td>
+                  </tr>
+                  </table></td>
+               <td width="10" align="right"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
+             </tr>
+           </table></td>
+         </tr>
+        </table></td>
+      </tr>
     </table>

@@ -142,7 +142,7 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 
   if (DISPLAY_NEW_ARTICLES=='true') {
     if (SHOW_ARTICLE_COUNTS == 'true') {
-      $articles_new_query = tep_db_query("select a.articles_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_TO_TOPICS . " a2t left join " . TABLE_TOPICS_DESCRIPTION . " td on a2t.topics_id = td.topics_id left join " . TABLE_AUTHORS . " au on a.authors_id = au.authors_id, " . TABLE_ARTICLES_DESCRIPTION . " ad where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a.articles_status = '1' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' and a.articles_date_added > SUBDATE(now( ), INTERVAL '" . NEW_ARTICLES_DAYS_DISPLAY . "' DAY)");
+      $articles_new_query = tep_db_query("select a.articles_id from (" . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_TO_TOPICS . " a2t) left join " . TABLE_TOPICS_DESCRIPTION . " td on (a2t.topics_id = td.topics_id) left join " . TABLE_AUTHORS . " au on (a.authors_id = au.authors_id), " . TABLE_ARTICLES_DESCRIPTION . " ad where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a.articles_status = '1' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' and a.articles_date_added > SUBDATE(now( ), INTERVAL '" . NEW_ARTICLES_DAYS_DISPLAY . "' DAY)");
       $articles_new_count = ' (' . tep_db_num_rows($articles_new_query) . ')';
     } else {
       $articles_new_count = '';
@@ -164,7 +164,7 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 
   if (DISPLAY_ALL_ARTICLES=='true') {
     if (SHOW_ARTICLE_COUNTS == 'true') {
-      $articles_all_query = tep_db_query("select a.articles_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_TO_TOPICS . " a2t left join " . TABLE_TOPICS_DESCRIPTION . " td on a2t.topics_id = td.topics_id left join " . TABLE_AUTHORS . " au on a.authors_id = au.authors_id, " . TABLE_ARTICLES_DESCRIPTION . " ad where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a.articles_status = '1' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "'");
+      $articles_all_query = tep_db_query("select a.articles_id from (" . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_TO_TOPICS . " a2t) left join " . TABLE_TOPICS_DESCRIPTION . " td on (a2t.topics_id = td.topics_id) left join " . TABLE_AUTHORS . " au on (a.authors_id = au.authors_id), " . TABLE_ARTICLES_DESCRIPTION . " ad where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a.articles_status = '1' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "'");
       $articles_all_count = ' (' . tep_db_num_rows($articles_all_query) . ')';
     } else {
       $articles_all_count = '';

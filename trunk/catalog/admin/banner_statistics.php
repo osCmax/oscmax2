@@ -94,7 +94,7 @@ $Id: banner_statistics.php 3 2006-05-27 04:59:07Z user $
   }
 ?>
             </td>
-          <?php echo tep_draw_hidden_field('page', $HTTP_GET_VARS['page']) . tep_draw_hidden_field('bID', $HTTP_GET_VARS['bID']); ?></form></tr>
+          <?php echo tep_draw_hidden_field('page', $HTTP_GET_VARS['page']) . tep_draw_hidden_field('bID', $HTTP_GET_VARS['bID']) . tep_hide_session_id(); ?></form></tr>
         </table></td>
       </tr>
       <tr>

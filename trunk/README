@@ -1,11 +1,11 @@
-osCMax v2.0 Release notes May 2005
-Copyright (c) AABox Web Hosting, osCDox, osCMax 2003-2005
+osCMax v2.0 Release notes March 2009
+Copyright (c) AABox Web Hosting, osCDox, osCMax 2003-2009
 
 ------------------------------------------------------------------------------
 1. Introduction To osCMax
 ------------------------------------------------------------------------------
 
-osCMax is based on the ecommerce application osCommerce MS2 and is an
+osCMax is based on the ecommerce application osCommerce 2.2RC2a and is an
 extension of that application.
 
 It is a marked improvement over standard osCommerce in many ways. osCMax
@@ -16,11 +16,11 @@ osCMax continues the tradition of using the open source platforms of PHP and
 MySQL to drive its success as one of the best e-commerce solutions available
 today.
 
-osCMax is able to run on any PHP3, PHP4, PHP5 enabled web server, on any
+osCMax is able to run on any PHP5 enabled web server, on any
 environment that PHP and MySQL supports, which includes Linux, Solaris, BSD,
 and Microsoft Windows environments.
 
-Join the osCMax community at http://oscdox.com to get support, encouragement,
+Join the osCMax community at http://oscmax.com to get support, encouragement,
 and see what is happening with this exciting project.
 
 ------------------------------------------------------------------------------

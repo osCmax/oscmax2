@@ -8,9 +8,6 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
   Copyright 2006 osCMax
 
   Released under the GNU General Public License
-
-  Modified by Marco Canini, <m.canini@libero.it>
-  - Fixed a bug with arrays in $HTTP_xxx_VARS
 */
 
 ////
@@ -21,19 +18,29 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
   function do_magic_quotes_gpc(&$ar) {
     if (!is_array($ar)) return false;
 
+    reset($ar);
     while (list($key, $value) = each($ar)) {
-      if (is_array($value)) {
-        do_magic_quotes_gpc($value);
+      if (is_array($ar[$key])) {
+         do_magic_quotes_gpc($ar[$key]);
       } else {
         $ar[$key] = addslashes($value);
       }
     }
+    reset($ar);
   }
 
-// $HTTP_xxx_VARS are always set on php4
-  if (!is_array($HTTP_GET_VARS)) $HTTP_GET_VARS = array();
-  if (!is_array($HTTP_POST_VARS)) $HTTP_POST_VARS = array();
-  if (!is_array($HTTP_COOKIE_VARS)) $HTTP_COOKIE_VARS = array();
+  if (PHP_VERSION >= 4.1) {
+    $HTTP_GET_VARS =& $_GET;
+    $HTTP_POST_VARS =& $_POST;
+    $HTTP_COOKIE_VARS =& $_COOKIE;
+    $HTTP_SESSION_VARS =& $_SESSION;
+    $HTTP_POST_FILES =& $_FILES;
+    $HTTP_SERVER_VARS =& $_SERVER;
+  } else {
+    if (!is_array($HTTP_GET_VARS)) $HTTP_GET_VARS = array();
+    if (!is_array($HTTP_POST_VARS)) $HTTP_POST_VARS = array();
+    if (!is_array($HTTP_COOKIE_VARS)) $HTTP_COOKIE_VARS = array();
+  }
 
 // handle magic_quotes_gpc turned off.
   if (!get_magic_quotes_gpc()) {

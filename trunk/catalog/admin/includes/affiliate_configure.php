@@ -15,7 +15,7 @@ $Id: affiliate_configure.php 3 2006-05-27 04:59:07Z user $
 */
 
   define ('AFFILIATE_NOTIFY_AFTER_BILLING','true'); // Nofify affiliate if he got a new invoice
-  define ('AFFILIATE_DELETE_ORDERS','false');       // Delete affiliate_sales if an order is deleted (Warning: Only not yet billed sales are deleted)
+  define ('AFFILIATE_DELETE_ORDERS','true');       // Delete affiliate_sales if an order is deleted (Warning: Only not yet billed sales are deleted)
 
   define ('AFFILIATE_TAX_ID','1');  // Tax Rates used for billing the affiliates 
                                    // you get this from the URl (tID) when you select you Tax Rate at the admin: tax_rates.php?tID=1

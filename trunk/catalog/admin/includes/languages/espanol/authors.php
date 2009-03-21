@@ -10,35 +10,35 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Authors');
+define('HEADING_TITLE', 'Autores');
 
-define('TABLE_HEADING_AUTHORS', 'Authors');
-define('TABLE_HEADING_ACTION', 'Action');
+define('TABLE_HEADING_AUTHORS', 'Autores');
+define('TABLE_HEADING_ACTION', 'Acci&oacute;n');
 
-define('TEXT_HEADING_NEW_AUTHOR', 'New Author');
-define('TEXT_HEADING_EDIT_AUTHOR', 'Edit Author');
-define('TEXT_HEADING_DELETE_AUTHOR', 'Delete Author');
+define('TEXT_HEADING_NEW_AUTHOR', 'Nuevo autor');
+define('TEXT_HEADING_EDIT_AUTHOR', 'Editar autor');
+define('TEXT_HEADING_DELETE_AUTHOR', 'Borrar autor');
 
-define('TEXT_ARTICLE_BY', 'Article by ');
-define('TEXT_MORE_INFORMATION', 'For more information, please visit this authors <a href="http://%s" target="_blank">web page</a>.');
+define('TEXT_ARTICLE_BY', 'Noticia por ');
+define('TEXT_MORE_INFORMATION', 'Para obtener m&aacute;s informaci&oacute;n, por favor visita estos autores <a href="http://%s" target="_blank">aqu&iacute;</a>.');
 
-define('TEXT_AUTHORS', 'Authors:');
-define('TEXT_DATE_ADDED', 'Date Added:');
-define('TEXT_LAST_MODIFIED', 'Last Modified:');
-define('TEXT_ARTICLES', 'Articles:');
+define('TEXT_AUTHORS', 'Autores:');
+define('TEXT_DATE_ADDED', 'Fecha de publicaci&oacute;n:');
+define('TEXT_LAST_MODIFIED', '&Uacute;ltima modificaci&oacute;n:');
+define('TEXT_ARTICLES', 'Noticias:');
 
-define('TEXT_NEW_INTRO', 'Please fill out the following information for the new author');
-define('TEXT_EDIT_INTRO', 'Please make any necessary changes.');
+define('TEXT_NEW_INTRO', 'Por favor rellena la siguienet informaci&oacute;n para el nuevo autor');
+define('TEXT_EDIT_INTRO', 'Por favor haz los cambios necesarios.');
 
-define('TEXT_AUTHORS_NAME', 'Authors Name:');
-define('TEXT_AUTHORS_DESCRIPTION', 'Authors Description:');
-define('TEXT_AUTHORS_URL', 'Authors URL:');
+define('TEXT_AUTHORS_NAME', 'Nombre de los autores:');
+define('TEXT_AUTHORS_DESCRIPTION', 'Descripci&oacute;n de los autores:');
+define('TEXT_AUTHORS_URL', 'URL de los autores:');
 
-define('TEXT_DELETE_INTRO', 'Are you sure you want to delete this author?');
-define('TEXT_DELETE_ARTICLES', 'Delete articles from this author? (including article reviews and upcoming articles)');
-define('TEXT_DELETE_WARNING_ARTICLES', '<b>WARNING:</b> There are %s articles still linked to this author!');
+define('TEXT_DELETE_INTRO', '¿Est&aacute;s seguro que quieres borrar a este autor?');
+define('TEXT_DELETE_ARTICLES', '¿Desea borrar las noticias de este autor? (Incluyendo los comentarios y las noticias pendientes de publicaci&oacute;n)');
+define('TEXT_DELETE_WARNING_ARTICLES', '<b>WARNING:</b> ¡Hay %s noticias vinculadas a este autor!');
 
-define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Error: I can not write to this directory. Please set the right user permissions on: %s');
-define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Error: Directory does not exist: %s');
+define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Error: No es posible escribir en este directorio. Por favor corrige los permisos de acceso de: %s');
+define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Error: El directorio no existe: %s');
 
 ?>

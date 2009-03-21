@@ -1,7 +1,7 @@
 <TR>
-<TD class="pageHeading" colspan="3"><?php $pageTitle ?></TD>
+<TD class="pageHeading" colspan="3"><?=$pageTitle?></TD>
 </TR>
-<FORM ACTION="<?php $PHP_SELF?>" NAME="SELECT_PRODUCT" METHOD="POST">
+<FORM ACTION="<?=$PHP_SELF?>" NAME="SELECT_PRODUCT" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="action" VALUE="select">
 <?php
 echo "<TR>";

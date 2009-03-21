@@ -8,1906 +8,1631 @@ $Id: edit_orders.php 14 2006-07-28 17:42:07Z user $
   Copyright 2006 osCMax
 
   Released under the GNU General Public License
-  
+
   Original file written by Jonathan Hilgeman of SiteCreative.com
-    
+
 */
-  
-  // First things first: get the required includes, classes, etc.
+
   require('includes/application_top.php');
 
+  // include the appropriate functions & classes
+  include('order_editor/functions.php');
+  include('order_editor/cart.php');
+  include('order_editor/order.php');
+  include('order_editor/shipping.php');
+  include('order_editor/http_client.php');
+
+ 
+  // Include currencies class
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
-  
-  include(DIR_WS_CLASSES . 'order.php');
 
-  //set a default tax class
-  //shipping tax is added to the default tax class
-   $default_tax_class = 1; 
-   
- // Then we get down to the nitty gritty
-   $orders_statuses = array();
+ 
+ //orders status
+  $orders_statuses = array();
   $orders_status_array = array();
   $orders_status_query = tep_db_query("select orders_status_id, orders_status_name from " . TABLE_ORDERS_STATUS . " where language_id = '" . (int)$languages_id . "'");
   while ($orders_status = tep_db_fetch_array($orders_status_query)) {
     $orders_statuses[] = array('id' => $orders_status['orders_status_id'],
                                'text' => $orders_status['orders_status_name']);
-    $orders_status_array[$orders_status['orders_status_id']] = $orders_status['orders_status_name'];
+
+  $orders_status_array[$orders_status['orders_status_id']] = $orders_status['orders_status_name'];
   }
 
   $action = (isset($_GET['action']) ? $_GET['action'] : 'edit');
 
-  // Update Inventory Quantity
-  if (tep_not_null($action)) {
+  if (isset($action)) {
     switch ($action) {
-    	
-	// 1. UPDATE ORDER ###############################################################################################
-	case 'update_order':
-		
-		$oID = tep_db_prepare_input($_GET['oID']);
-		$order = new order($oID);
-		$status = tep_db_prepare_input($_POST['status']);
-		//tax business
-		//Following three functions are defined in includes/functions/general.php
-		$countryid = tep_get_country_id($_POST['update_delivery_country']);
-		$zoneid = tep_get_zone_id($countryid, $_POST['update_delivery_state']);
-		$default_tax_name  = tep_get_tax_description($default_tax_class, $countryid, $zoneid);
-		
-		// 1.1 UPDATE ORDER INFO #####
-		
-		$UpdateOrders = "UPDATE " . TABLE_ORDERS . " SET 
-	    customers_name = '" . tep_db_input(stripslashes($_POST['update_customer_name'])) . "',
-	    customers_company = '" . tep_db_input(stripslashes($_POST['update_customer_company'])) . "',
-	    customers_street_address = '" . tep_db_input(stripslashes($_POST['update_customer_street_address'])) . "',
-	    customers_suburb = '" . tep_db_input(stripslashes($_POST['update_customer_suburb'])) . "',
-	    customers_city = '" . tep_db_input(stripslashes($_POST['update_customer_city'])) . "',
-	    customers_state = '" . tep_db_input(stripslashes($_POST['update_customer_state'])) . "',
-	    customers_postcode = '" . tep_db_input($_POST['update_customer_postcode']) . "',
-	    customers_country = '" . tep_db_input(stripslashes($_POST['update_customer_country'])) . "',
-	    customers_telephone = '" . tep_db_input($_POST['update_customer_telephone']) . "',
-	    customers_email_address = '" . tep_db_input($_POST['update_customer_email_address']) . "',";
-		
-		$UpdateOrders .= "
-		billing_name = '" . tep_db_input(stripslashes($_POST['update_billing_name'])) . "',
-		billing_company = '" . tep_db_input(stripslashes($_POST['update_billing_company'])) . "',
-	    billing_street_address = '" . tep_db_input(stripslashes($_POST['update_billing_street_address'])) . "',
-		billing_suburb = '" . tep_db_input(stripslashes($_POST['update_billing_suburb'])) . "',
-		billing_city = '" . tep_db_input(stripslashes($_POST['update_billing_city'])) . "',
-		billing_state = '" . tep_db_input(stripslashes($_POST['update_billing_state'])) . "',
-		billing_postcode = '" . tep_db_input($_POST['update_billing_postcode']) . "',
-		billing_country = '" . tep_db_input(stripslashes($_POST['update_billing_country'])) . "',";
-		
-		$UpdateOrders .= "
-		delivery_name = '" . tep_db_input(stripslashes($_POST['update_delivery_name'])) . "',
-		delivery_company = '" . tep_db_input(stripslashes($_POST['update_delivery_company'])) . "',
-		delivery_street_address = '" . tep_db_input(stripslashes($_POST['update_delivery_street_address'])) . "',
-		delivery_suburb = '" . tep_db_input(stripslashes($_POST['update_delivery_suburb'])) . "',
-		delivery_city = '" . tep_db_input(stripslashes($_POST['update_delivery_city'])) . "',
-		delivery_state = '" . tep_db_input(stripslashes($_POST['update_delivery_state'])) . "',
-		delivery_postcode = '" . tep_db_input($_POST['update_delivery_postcode']) . "',
-		delivery_country = '" . tep_db_input(stripslashes($_POST['update_delivery_country'])) . "',
-               	payment_method = '" . tep_db_input(stripslashes($_POST['update_info_payment_method'])) . "',
-		cc_type = '" . tep_db_input($_POST['update_info_cc_type']) . "',
-		cc_owner = '" . tep_db_input($_POST['update_info_cc_owner']) . "',
-		cc_number = '" . tep_db_input($_POST['update_info_cc_number']) . "',
-		cc_expires = '" . tep_db_input($_POST['update_info_cc_expires']) . "',
-		shipping_tax = '" . tep_db_input($_POST['update_shipping_tax']) . "'";
-		
-		$UpdateOrders .= " where orders_id = '" . tep_db_input($_GET['oID']) . "';";
 
-		tep_db_query($UpdateOrders);
-		$order_updated = true;
+    ////
+    // Update Order
+      case 'update_order':
+        $oID = tep_db_prepare_input($_GET['oID']);
+        $status = tep_db_prepare_input($_POST['status']);
 
-    // 1.2 UPDATE STATUS HISTORY & SEND EMAIL TO CUSTOMER IF NECESSARY #####
+        // Set this Session's variables
+        if (isset($_POST['billing_same_as_customer'])) $_SESSION['billing_same_as_customer'] = $_POST['billing_same_as_customer'];
+        if (isset($_POST['shipping_same_as_billing'])) $_SESSION['shipping_same_as_billing'] = $_POST['shipping_same_as_billing'];
 
-    $check_status_query = tep_db_query("SELECT
-	customers_name, customers_email_address, orders_status, date_purchased 
-	FROM " . TABLE_ORDERS . " WHERE orders_id = '" . (int)$oID . "'");
-    $check_status = tep_db_fetch_array($check_status_query); 
-	
-  if (($check_status['orders_status'] != $_POST['status']) || (tep_not_null($_POST['comments']))) {
+        // Update Order Info
+        //figure out the new currency value
+        $currency_value_query = tep_db_query("SELECT value 
+                                              FROM " . TABLE_CURRENCIES . " 
+                                              WHERE code = '" . $_POST['update_info_payment_currency'] . "'");
+        $currency_value = tep_db_fetch_array($currency_value_query);
 
-        tep_db_query("UPDATE " . TABLE_ORDERS . " SET 
-					  orders_status = '" . tep_db_input($_POST['status']) . "', 
-                      last_modified = now() 
-                      WHERE orders_id = '" . (int)$oID . "'");
-		
-		 // Notify Customer ?
-      $customer_notified = '0';
-			if (isset($_POST['notify']) && ($_POST['notify'] == 'on')) {
-			  $notify_comments = '';
-			  if (isset($_POST['notify_comments']) && ($_POST['notify_comments'] == 'on')) {
-			    $notify_comments = sprintf(EMAIL_TEXT_COMMENTS_UPDATE, $_POST['comments']) . "\n\n";
-			  }
-			  $email = STORE_NAME . "\n" . EMAIL_SEPARATOR . "\n" . EMAIL_TEXT_ORDER_NUMBER . ' ' . $oID . "\n" . EMAIL_TEXT_INVOICE_URL . ' ' . tep_catalog_href_link(FILENAME_CATALOG_ACCOUNT_HISTORY_INFO, 'order_id=' . $oID, 'SSL') . "\n" . EMAIL_TEXT_DATE_ORDERED . ' ' . tep_date_long($check_status['date_purchased']) . "\n\n" . sprintf(EMAIL_TEXT_STATUS_UPDATE, $orders_status_array[$status]) . $notify_comments . sprintf(EMAIL_TEXT_STATUS_UPDATE2);
-			  tep_mail($check_status['customers_name'], $check_status['customers_email_address'], EMAIL_TEXT_SUBJECT, $email, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
-			  $customer_notified = '1';
-			}			  
-          		
-			tep_db_query("INSERT into " . TABLE_ORDERS_STATUS_HISTORY . " 
-			(orders_id, orders_status_id, date_added, customer_notified, comments) 
-			values ('" . tep_db_input($_GET['oID']) . "', 
-				'" . tep_db_input($_POST['status']) . "', 
-				now(), 
-				" . tep_db_input($customer_notified) . ", 
-				'" . tep_db_input($_POST['comments'])  . "')");
-			}
+        //figure out the country, state
+        $update_customer_state = tep_get_zone_name($_POST['update_customer_country_id'], $_POST['update_customer_zone_id'], $_POST['update_customer_state']);
+        $update_customer_country = tep_get_country_name($_POST['update_customer_country_id']);
+        $update_billing_state = tep_get_zone_name($_POST['update_billing_country_id'], $_POST['update_billing_zone_id'], $_POST['update_billing_state']);
+        $update_billing_country = tep_get_country_name($_POST['update_billing_country_id']);
+        $update_delivery_state = tep_get_zone_name($_POST['update_delivery_country_id'], $_POST['update_delivery_zone_id'], $_POST['update_delivery_state']);
+        $update_delivery_country = tep_get_country_name($_POST['update_delivery_country_id']);
 
-	// 1.3 UPDATE PRODUCTS #####
-		$RunningSubTotal = 0;
-		$RunningTax = array($default_tax_name => 0);
+        $sql_data_array = array(
+            'customers_name' => tep_db_input(tep_db_prepare_input($_POST['update_customer_name'])),
+            'customers_company' => tep_db_input(tep_db_prepare_input($_POST['update_customer_company'])),
+            'customers_street_address' => tep_db_input(tep_db_prepare_input($_POST['update_customer_street_address'])),
+            'customers_suburb' => tep_db_input(tep_db_prepare_input($_POST['update_customer_suburb'])),
+            'customers_city' => tep_db_input(tep_db_prepare_input($_POST['update_customer_city'])),
+            'customers_state' => tep_db_input(tep_db_prepare_input($update_customer_state)),
+            'customers_postcode' => tep_db_input(tep_db_prepare_input($_POST['update_customer_postcode'])),
+            'customers_country' => tep_db_input(tep_db_prepare_input($update_customer_country)),
+            'customers_telephone' => tep_db_input(tep_db_prepare_input($_POST['update_customer_telephone'])),
+            'customers_email_address' => tep_db_input(tep_db_prepare_input($_POST['update_customer_email_address'])),
 
-    // Do pre-check for subtotal field existence
-		$ot_subtotal_found = false;
-		$ot_total_found = false;
-		if (is_array ($_POST['update_totals'])) {
-	foreach($_POST['update_totals'] as $total_details) {
-		  extract($total_details,EXTR_PREFIX_ALL,"ot");
-			if($ot_class == "ot_subtotal") {
-			  $ot_subtotal_found = true;
-    	break;
-			}
-			
-			if($ot_class == "ot_total"){
-			$ot_total_found = true;
-			break;
-			}
-		}//end foreach() 
-		}//end if (is_array())
-		        
-		// 1.3.1 Update orders_products Table
-		if (is_array ($_POST['update_products'])){
-		foreach($_POST['update_products'] as $orders_products_id => $products_details)	{
-		if (!tep_not_null($products_details["qty"])) $products_details["qty"] = 0;
-		
-			// 1.3.1.1 Update Inventory Quantity
-			$order_query = tep_db_query("SELECT products_id, products_quantity 
-			FROM " . TABLE_ORDERS_PRODUCTS . " 
-			WHERE orders_id = '" . (int)$oID . "'
-			AND orders_products_id = '$orders_products_id'");
-			$order = tep_db_fetch_array($order_query);
-			
-			// First we do a stock check 
-			
-			if ($products_details["qty"] != $order['products_quantity']){
-			$quantity_difference = ($products_details["qty"] - $order['products_quantity']);
-				if (STOCK_CHECK == 'true'){
-				    tep_db_query("UPDATE " . TABLE_PRODUCTS . " SET 
-					products_quantity = products_quantity - " . $quantity_difference . ",
-					products_ordered = products_ordered + " . $quantity_difference . " 
-					WHERE products_id = '" . (int)$order['products_id'] . "'");
-					} else {
-					tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
-					products_ordered = products_ordered + " . $quantity_difference . "
-					WHERE products_id = '" . (int)$order['products_id'] . "'");
-				}
-			}
-               
-			 //Then we check if the product should be deleted  
-			 if (isset($products_details['delete'])){
-			 //update quantities first
-			 if (STOCK_CHECK == 'true'){
-				    tep_db_query("UPDATE " . TABLE_PRODUCTS . " SET 
-					products_quantity = products_quantity + " . $products_details["qty"] . ",
-					products_ordered = products_ordered - " . $products_details["qty"] . " 
-					WHERE products_id = '" . (int)$order['products_id'] . "'");
-					} else {
-					tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
-					products_ordered = products_ordered - " . $products_details["qty"] . "
-					WHERE products_id = '" . (int)$order['products_id'] . "'");
-					}
-					
-			//then delete the little bugger
-			$Query = "DELETE FROM " . TABLE_ORDERS_PRODUCTS . " 
-			WHERE orders_id = '" . (int)$oID . "' 
-			AND orders_products_id = '$orders_products_id';";
-				tep_db_query($Query);
-							
-				// and all its attributes
-				if(isset($products_details[attributes]))
-				{
-				$Query = "DELETE FROM " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " 
-				WHERE orders_id = '" . (int)$oID . "' 
-				AND orders_products_id = '$orders_products_id';";
-				tep_db_query($Query);
-				}
-				
-			
-			}// end of if (isset($products_details['delete']))
-			
-			   else { // if we don't delete, we update
-				$Query = "UPDATE " . TABLE_ORDERS_PRODUCTS . " SET
-					products_model = '" . $products_details["model"] . "',
-					products_name = '" . tep_html_quotes($products_details["name"]) . "',
-					products_price = '" . $products_details["price"] . "',
-					final_price = '" . $products_details["final_price"] . "',
-					products_tax = '" . $products_details["tax"] . "',
-					products_quantity = '" . $products_details["qty"] . "'
-					WHERE orders_id = '" . (int)$oID . "'
-					AND orders_products_id = '$orders_products_id';";
-				tep_db_query($Query);
-                        	
-   				//update subtotal and total during update function
-				if (DISPLAY_PRICE_WITH_TAX == 'true') {
-				$RunningSubTotal += (($products_details['tax']/100 + 1) * ($products_details['qty'] * $products_details['final_price'])); 
-				} else {
-				$RunningSubTotal += $products_details["qty"] * $products_details["final_price"];
-				}
-                
-				$RunningTax[$products_details['tax_description']] += (($products_details['tax']/100) * ($products_details['qty'] * $products_details['final_price']));
-				
-				// Update Any Attributes
-				if(isset($products_details[attributes]))
-				{ foreach($products_details["attributes"] as $orders_products_attributes_id => $attributes_details) {
-					$Query = "UPDATE " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " set
-						products_options = '" . $attributes_details["option"] . "',
-						products_options_values = '" . $attributes_details["value"] . "',
-						options_values_price ='" . $attributes_details["price"] . "',
-						price_prefix ='" . $attributes_details["prefix"] . "'
-						where orders_products_attributes_id = '$orders_products_attributes_id';";
-						tep_db_query($Query);
-					}//end of foreach($products_details["attributes"]
-				}// end of if(isset($products_details[attributes]))
-				}// end of if/else (isset($products_details['delete']))
-			
-		}//end of foreach
-		}//end of if (is_array())
-		
-		// 1.4 UPDATE SHIPPING, CUSTOM FEES, DISOUNTS, TAXES, AND TOTALS #####
-		
-	// 1.4.0.1 Shipping Tax
-		 	
-			if (is_array ($_POST['update_totals'])){
-			foreach($_POST['update_totals'] as $total_index => $total_details)
-			{
-				extract($total_details,EXTR_PREFIX_ALL,"ot");
-				if($ot_class == "ot_shipping")//a good place to add in custom total components
-				{
-				    if (DISPLAY_PRICE_WITH_TAX == 'true') {//the shipping charge includes tax
-			$RunningTax[$default_tax_name] += ($ot_value * $_POST['update_shipping_tax']) / ($_POST['update_shipping_tax'] + 100);
-					} else { //shipping tax is in addition to the shipping charge
-	$RunningTax[$default_tax_name] += (($_POST['update_shipping_tax'] / 100) * $ot_value);
-					}
-				}
-			  }
-		    }
-		
-		//1.4.1.0
-		$RunningTotal = 0;
-		$sort_order = 0;
-			
-			// 1.4.1.1  If ot_tax doesn't exist, but $RunningTax has been calculated, create an appropriate entry in the db and add tax to the subtotal or total as appropriate
-			if (array_sum($RunningTax) != 0) {
-			foreach ($RunningTax as $key => $val) {
-			
-			if (is_array ($_POST['update_totals'])){//1
-			foreach($_POST['update_totals'] as $total_details)	{//2
-				extract($total_details,EXTR_PREFIX_ALL,"ot");
-				$ot_tax_found = 0;
-				 if (($ot_class == "ot_tax") && (preg_replace("/:$/","",$ot_title) == $key))
-				 {//3
-					$ot_tax_found = 1;
-					break;
-					}//end 3
-				}//end 2
-//bizzarro code needed to input text value into db properly
-//I still don't understand why 
-//text = '" . $currencies->format($val, true, $order->info['currency'], $order->info['currency_value']) . "', 
-//isn't adequate.  Maybe I never will
-	if ($ot_class == "ot_total" || $ot_class == "ot_tax" || $ot_class == "ot_subtotal" || 
-	$ot_class == "ot_shipping" || $ot_class == "ot_custom" || $ot_class == "ot_loworderfee") {
-		$order = new order($oID);
-        $RunningTax[$default_tax_name] += 0 * $products_details['tax'] / $order->info['currency_value'] / 100 ; 
-		  }//end bizarro code
-				}// end 1
-			
-				if (($val > 0) && ($ot_tax_found != 1)) {
-				$sort_order++;
-			$Query = "INSERT INTO " . TABLE_ORDERS_TOTAL . " SET
-			orders_id = '" . (int)$oID . "',
-			title ='" . $key . ":',
-            text = '" . $currencies->format($val, true, $order->info['currency'], $order->info['currency_value']) . "',
-		    value = '" . $val . "',
-			class = 'ot_tax',
-			sort_order = '2'";
-			tep_db_query($Query);
-			$ot_tax_found = 1;
-						
-			if (DISPLAY_PRICE_WITH_TAX != 'true') {
-				 $RunningTotal += $val;
-				} //end if (DISPLAY_PRICE_WITH_TAX != 'true')
-				} //end if (($val > 0) && ($ot_tax_found != 1)) {
-			 } //end foreach ($RunningTax as $key => $val)
-		} //end if (array_sum($RunningTax) != 0)
-						
-  ////////////////////OPTIONAL- create entries for subtotal and/or total if none exists
-				/*			
-			//1.4.1.2
-			/////////////////////////Add in subtotal to db if it doesn't already exist
-			if (($RunningSubTotal >0) && ($ot_subtotal_found != true)) {
-				$Query = 'INSERT INTO ' . TABLE_ORDERS_TOTAL . ' SET
-							orders_id = "' . (int)$oID . '",
-							title ="' . ENTRY_SUB_TOTAL . '",
-							text = "' . $currencies->format($RunningSubTotal, true, $order->info['currency'], $order->info['currency_value']) . '",
-				            value = "' . $RunningSubTotal . '",
-							class = "ot_subtotal",
-							sort_order = "1"';
-						tep_db_query($Query);
-						$ot_subtotal_found = true;
-						$RunningTotal += $RunningSubTotal;
-						}
-						
-						//1.4.1.3
-  /////////////////////////Add in total to db if it doesn't already exist
-			if (($RunningTotal >0) && ($ot_total_found != true)) {
-				$Query = 'INSERT INTO ' . TABLE_ORDERS_TOTAL . ' SET
-							orders_id = "' . (int)$oID . '",
-							title ="' . ENTRY_TOTAL . '",
-							text = "' . $currencies->format($RunningTotal, true, $order->info['currency'], $order->info['currency_value']) . '",
-				            value = "' . $RunningTotal . '",
-							class = "ot_total",
-							sort_order = "4"';
-						tep_db_query($Query);
-						$ot_total_found = true;
-						}
-						*/
-  //////////////////////////end optional section
-						
-	// 1.4.2. Summing up total
-			if (is_array ($_POST['update_totals'])) {
-			foreach($_POST['update_totals'] as $total_index => $total_details)	{ 
-			
-			extract($total_details,EXTR_PREFIX_ALL,"ot");
-			if (trim($ot_title)) {
-			     $sort_order++;
-					
-					if ($ot_class == "ot_subtotal") {
-						$ot_value = $RunningSubTotal;
-					}	
-										
-					if ($ot_class == "ot_tax") {
-						$ot_value = $RunningTax[preg_replace("/:$/","",$ot_title)];
-					}
+            'billing_name' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_name'] : $_POST['update_billing_name']))),
+            'billing_company' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_company'] : $_POST['update_billing_company']))),
+            'billing_street_address' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_street_address'] : $_POST['update_billing_street_address']))),
+            'billing_suburb' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_suburb'] : $_POST['update_billing_suburb']))),
+            'billing_city' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_city'] : $_POST['update_billing_city']))),
+            'billing_state' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $update_customer_state : $update_billing_state))),
+            'billing_postcode' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_postcode'] : $_POST['update_billing_postcode']))),
+            'billing_country' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $update_customer_country : $update_billing_country))),
 
-				   	if ($ot_class == "ot_total") {
-					$ot_value = $RunningTotal;
-				         		          
-				    if ( !$ot_subtotal_found ) 
-				    { // There was no subtotal on this order, lets add the running subtotal in.
-				     $ot_value +=  $RunningSubTotal;
-				     }
-				     }
-									
-			  // Set $ot_text (display-formatted value)
-              $order = new order($oID);
-              $ot_text = $currencies->format($ot_value, true, $order->info['currency'], $order->info['currency_value']);
-						
-				if ($ot_class == "ot_total") {
-				$ot_text = "<b>" . $ot_text . "</b>";
-					}
-					
-					if($ot_total_id > 0) { // Already in database --> Update
-						$Query = "UPDATE " . TABLE_ORDERS_TOTAL . " SET
-							title = '" . $ot_title . "',
-							text = '" . $ot_text . "',
-							value = '" . $ot_value . "',
-							sort_order = '" . $sort_order . "'
-							WHERE orders_total_id = '". $ot_total_id . "'
-							AND orders_id = '" . (int)$oID . "'";
-						tep_db_query($Query);
-					} else { // New Insert (ie ot_custom)
-						$Query = "INSERT INTO " . TABLE_ORDERS_TOTAL . " SET
-							orders_id = '" . (int)$oID . "',
-							title = '" . $ot_title . "',
-							text = '" . $ot_text . "',
-							value = '" . $ot_value . "',
-							class = '" . $ot_class . "',
-							sort_order = '" . $sort_order . "'";
-						tep_db_query($Query);
-					}
-										
-					if ($ot_class == "ot_tax") {
-					
-					if (DISPLAY_PRICE_WITH_TAX != 'true') { 
-					//we don't add tax to the total here because it's already added to the subtotal
-						$RunningTotal += $ot_value;
-						}
-						} else {
-						$RunningTotal += $ot_value;
-						}
-				}
-				
-	if (!trim($ot_value) && ($ot_class != "ot_shipping") && ($ot_class != "ot_subtotal") && ($ot_class != "ot_total")) { // value = 0 => Delete Total Piece
-				
-					$Query = "DELETE from " . TABLE_ORDERS_TOTAL . " 
-					WHERE orders_id = '" . (int)$oID . "' 
-					AND orders_total_id = '$ot_total_id'";
-					tep_db_query($Query);
-				}
-				
-		}
-}//end if (is_array())
-		
-		// 1.5 SUCCESS MESSAGE #####
-		
-		if ($order_updated)	{
-			$messageStack->add_session(SUCCESS_ORDER_UPDATED, 'success');
-		}
 
-		tep_redirect(tep_href_link(FILENAME_ORDERS_EDIT, tep_get_all_get_params(array('action')) . 'action=edit'));
-		
-	break;
+            'delivery_name' => tep_db_input(tep_db_prepare_input(((isset($_POST['shipping_same_as_billing']) && $_POST['shipping_same_as_billing'] == 'on') ? (($_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_name'] : $_POST['update_billing_name']) : $_POST['update_delivery_name']))),
+            'delivery_company' => tep_db_input(tep_db_prepare_input(((isset($_POST['shipping_same_as_billing']) && $_POST['shipping_same_as_billing'] == 'on') ? (($_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_company'] : $_POST['update_billing_company']) : $_POST['update_delivery_company']))),
+            'delivery_street_address' => tep_db_input(tep_db_prepare_input(((isset($_POST['shipping_same_as_billing']) && $_POST['shipping_same_as_billing'] == 'on') ? (($_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_street_address'] : $_POST['update_billing_street_address']) : $_POST['update_delivery_street_address']))),
+            'delivery_suburb' => tep_db_input(tep_db_prepare_input(((isset($_POST['shipping_same_as_billing']) && $_POST['shipping_same_as_billing'] == 'on') ? (($_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_suburb'] : $_POST['update_billing_suburb']) : $_POST['update_delivery_suburb']))),
+            'delivery_city' => tep_db_input(tep_db_prepare_input(((isset($_POST['shipping_same_as_billing']) && $_POST['shipping_same_as_billing'] == 'on') ? (($_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_city'] : $_POST['update_billing_city']) : $_POST['update_delivery_city']))),
+            'delivery_state' => tep_db_input(tep_db_prepare_input(((isset($_POST['shipping_same_as_billing']) && $_POST['shipping_same_as_billing'] == 'on') ? (($_POST['billing_same_as_customer'] == 'on') ? $update_customer_state : $update_billing_state) : $update_delivery_state))),
+            'delivery_postcode' => tep_db_input(tep_db_prepare_input(((isset($_POST['shipping_same_as_billing']) && $_POST['shipping_same_as_billing'] == 'on') ? (($_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_postcode'] : $_POST['update_billing_postcode']) : $_POST['update_delivery_postcode']))),
+            'delivery_country' => tep_db_input(tep_db_prepare_input(((isset($_POST['shipping_same_as_billing']) && $_POST['shipping_same_as_billing'] == 'on') ? (($_POST['billing_same_as_customer'] == 'on') ? $update_customer_country : $update_billing_country) : $update_delivery_country))),
 
-	// 2. ADD A PRODUCT ###############################################################################################
-	case 'add_product':
-	
-		if($_POST['step'] == 5)
-		{
-		// 2.1 GET ORDER INFO #####
-			
-			$oID = tep_db_prepare_input($_GET['oID']);
-			$order = new order($oID);
-			$AddedOptionsPrice = 0;
-			
-			//tax business
-			// Following three functions are defined in includes/functions/general.php
-			$countryid = tep_get_country_id($order->delivery["country"]);
-			$zoneid = tep_get_zone_id($countryid, $order->delivery["state"]);
-			$default_tax_name  = tep_get_tax_description($default_tax_class, $countryid, $zoneid);
-			
-		// 2.1.1 Get Product Attribute Info
-			if(is_array ($_POST['add_product_options']))
-			{
-				foreach($_POST['add_product_options'] as $option_id => $option_value_id)
-				{
-					$result = tep_db_query("SELECT * FROM " . TABLE_PRODUCTS_ATTRIBUTES . " 
-					pa LEFT JOIN " . TABLE_PRODUCTS_OPTIONS . " po 
-					ON po.products_options_id=pa.options_id 
-					LEFT JOIN " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov 
-					ON pov.products_options_values_id=pa.options_values_id 
-					WHERE products_id=" . $_POST['add_product_products_id'] . " 
-					and options_id=" . $option_id . " 
-					and options_values_id=" . $option_value_id . " 
-					and po.language_id = '" . (int)$languages_id . "' 
-					and pov.language_id = '" . (int)$languages_id . "'");
-					
-					$row = tep_db_fetch_array($result);
-					extract($row, EXTR_PREFIX_ALL, "opt");
-					if ($opt_price_prefix == '-')
-					{$AddedOptionsPrice -= $opt_options_values_price;}
-					else //default to positive
-					{$AddedOptionsPrice += $opt_options_values_price;}
-					$option_value_details[$option_id][$option_value_id] = array (
-					"options_values_price" => $opt_options_values_price,
-					"price_prefix" => $opt_price_prefix);
-					$option_names[$option_id] = $opt_products_options_name;
-					$option_values_names[$option_value_id] = $opt_products_options_values_name;
-				}
-			}
+            'payment_method' => tep_db_input(tep_db_prepare_input($_POST['update_info_payment_method'])),
+            'currency' => tep_db_input(tep_db_prepare_input($_POST['update_info_payment_currency'])),
+            'currency_value' => tep_db_input(tep_db_prepare_input($currency_value['value'])),
+            'cc_type' => tep_db_prepare_input($_POST['update_info_cc_type']),
+            'cc_owner' => tep_db_prepare_input($_POST['update_info_cc_owner']),
+            'cc_number' => tep_db_input(tep_db_prepare_input($_POST['update_info_cc_number'])),
+            'cc_expires' => tep_db_prepare_input($_POST['update_info_cc_expires']),
+            'last_modified' => 'now()');
 
-	// 2.1.2 Get Product Info
-				$InfoQuery = "SELECT 
-				p.products_model, p.products_price, pd.products_name, p.products_tax_class_id 
-				from " . TABLE_PRODUCTS . " p
-				LEFT JOIN " . TABLE_PRODUCTS_DESCRIPTION . " pd 
-				ON pd.products_id=p.products_id 
-				WHERE p.products_id=" . $_POST['add_product_products_id'] . " 
-				AND pd.language_id = '" . (int)$languages_id . "'";
-			    $result = tep_db_query($InfoQuery);
+        tep_db_perform(TABLE_ORDERS, $sql_data_array, 'update', 'orders_id = \'' . tep_db_input($oID) . '\'');
+        $order_updated = true;
 
-			$row = tep_db_fetch_array($result);
-			extract($row, EXTR_PREFIX_ALL, "p");
-			
-			// 2.1.3  Pull specials price from db if there is an active offer
-			$special_price = tep_db_query("
-			SELECT specials_new_products_price 
-			FROM " . TABLE_SPECIALS . " 
-			WHERE products_id =". $_POST['add_product_products_id'] . " 
-			AND status");
-			$new_price = tep_db_fetch_array($special_price);
-			
-			if ($new_price) 
-			{ $p_products_price = $new_price['specials_new_products_price']; }
-			
-			// 2.2 UPDATE ORDER ####
-            $Query = "INSERT INTO " . TABLE_ORDERS_PRODUCTS . " SET
-              orders_id = '" . (int)$oID . "',
-              products_id = '" . $_POST['add_product_products_id'] . "',
-              products_model = '" . $p_products_model . "',
-              products_name = '" . tep_html_quotes($p_products_name) . "',
-              products_price = '". $p_products_price . "',
-              final_price = '" . ($p_products_price + $AddedOptionsPrice) . "',
-           products_tax = '" . tep_get_tax_rate($p_products_tax_class_id, $countryid, $zoneid) . "',
-              products_quantity = '" . $_POST['add_product_quantity'] . "'";
-              tep_db_query($Query);
-              $new_product_id = tep_db_insert_id();
-			
-			// 2.2.1 Update inventory Quantity
-			//This is only done if store is set up to use stock
-			if (STOCK_CHECK == 'true'){
-			tep_db_query("UPDATE " . TABLE_PRODUCTS . " SET
-			products_quantity = products_quantity - " . $_POST['add_product_quantity'] . " 
-			WHERE products_id = '" . $_POST['add_product_products_id'] . "'");
-			}
-			
-			//2.2.1.1 Update products_ordered info
-			tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
-			products_ordered = products_ordered + " . $_POST['add_product_quantity'] . "
-			WHERE products_id = '" . $_POST['add_product_products_id'] . "'");
-           			
-			//2.2.1.2 keep a record of the products attributes
-			if (is_array ($_POST['add_product_options'])) {
-				foreach($_POST['add_product_options'] as $option_id => $option_value_id) {
-				$Query = "INSERT INTO " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " SET
-						orders_id = '" . (int)$oID . "',
-						orders_products_id = '" . $new_product_id . "',
-						products_options = '" . $option_names[$option_id] . "',
-						products_options_values = '" . 
-						tep_db_input($option_values_names[$option_value_id]) . "',
-						
-                       options_values_price = '" . 
-		$option_value_details[$option_id][$option_value_id]['options_values_price'] . "',
-		
-						price_prefix = '" . 
-						$option_value_details[$option_id][$option_value_id]['price_prefix'] . "'";
-						
-					tep_db_query($Query);
-				}
-			}
-			
-			// 2.2.2 Calculate Tax and Sub-Totals
-			$order = new order($oID);
-			$RunningSubTotal = 0;
-			$RunningTax = array($default_tax_name => 0);
 
-       		//just adding in shipping tax, don't mind me
-		$ot_shipping_query = tep_db_query("
-		SELECT class, value 
-		FROM " . TABLE_ORDERS_TOTAL . " 
-		WHERE orders_id = '" . (int)$oID . "'");
-		$ot_shipping_value = tep_db_fetch_array($ot_shipping_query);
-			
-			
-	if ($ot_shipping_value['class'] == 'ot_shipping')//a good place to add in other fields to tax
-		{
-		if (DISPLAY_PRICE_WITH_TAX == 'true') {
-			$RunningTax[$default_tax_name] += ($ot_shipping_value['value'] * $order->info['shipping_tax'] / ($order->info['shipping_tax'] + 100));
-				} else {
-			$RunningTax[$default_tax_name] += (($order->info['shipping_tax'] / 100) * $ot_shipping_value['value']);
-					
-					}// end if (DISPLAY_PRICE_WITH_TAX == 'true') {
-					}// end if ($ot_shipping_value['class'] == 'ot_shipping')
-		
-		// end shipping tax calcs
-			 
-  for ($i=0; $i<sizeof($order->products); $i++) {
+  // UPDATE STATUS HISTORY & SEND EMAIL TO CUSTOMER IF NECESSARY #####
 
-        // This calculatiion of Subtotal and Tax is part of the 'add a product' process
-		if (DISPLAY_PRICE_WITH_TAX == 'true') {
-		$RunningSubTotal += (($order->products[$i]['tax'] / 100 + 1) * ($order->products[$i]['qty'] * $order->products[$i]['final_price']));
-		} else {
-		$RunningSubTotal += ($order->products[$i]['qty'] * $order->products[$i]['final_price']);
-		}
-		
-		$RunningTax[$order->products[$i]['tax_description']] += (($order->products[$i]['tax'] / 100) * ($order->products[$i]['qty'] * $order->products[$i]['final_price']));		
-			
-			}// end of for ($i=0; $i<sizeof($order->products); $i++) {
-			
-			
-			
-		// 2.2.2.1 Tax
-		foreach ($RunningTax as $key => $val) {
-			$Query = 'UPDATE ' . TABLE_ORDERS_TOTAL . ' set
-			text = "' . $currencies->format($val, true, $order->info['currency'], $order->info['currency_value']) . '",
-			value = "' . $val . '"
-			WHERE class= "ot_tax" 
-			AND title = "' . $key . '" 
-			AND orders_id= "' . (int)$oID . '"';
-			tep_db_query($Query);
-			}
-			
-			
-			// 2.2.2.2 Sub-Total
-			$Query = 'UPDATE ' . TABLE_ORDERS_TOTAL . ' SET
-				text = "' . $currencies->format($RunningSubTotal, true, $order->info['currency'], $order->info['currency_value']) . '",
-				value = "' . $RunningSubTotal . '"
-				WHERE class="ot_subtotal" 
-				AND orders_id= "' . (int)$oID . '"';
-			tep_db_query($Query);
-			
-			// 2.2.2.3 Total
-			if (DISPLAY_PRICE_WITH_TAX == 'true') {
-			$Query = 'SELECT sum(value) 
-			AS total_value from ' . TABLE_ORDERS_TOTAL . '
-			WHERE class != "ot_total" 
-			AND class != "ot_tax" 
-			AND orders_id= "' . (int)$oID . '"';
-			$result = tep_db_query($Query);
-			$row = tep_db_fetch_array($result);
-			$Total = $row['total_value'];
-			} else {
-			$Query = 'SELECT sum(value) 
-			AS total_value from ' . TABLE_ORDERS_TOTAL . '
-			WHERE class != "ot_total" 
-			AND orders_id= "' . (int)$oID . '"';
-			$result = tep_db_query($Query);
-			$row = tep_db_fetch_array($result);
-			$Total = $row['total_value'];
-			}
+        $check_status_query = tep_db_query(" SELECT customers_name, customers_email_address, orders_status, date_purchased FROM " . TABLE_ORDERS . " WHERE orders_id = '" . (int)$oID . "'");
 
-			$Query = 'UPDATE ' . TABLE_ORDERS_TOTAL . ' set
-				text = "' . $currencies->format($Total, true, $order->info['currency'], $order->info['currency_value']) . '",
-				value = "' . $Total . '"
-				WHERE class="ot_total" and orders_id= "' . (int)$oID . '"';
-			tep_db_query($Query);
+        $check_status = tep_db_fetch_array($check_status_query); 
 
-			// 2.3 REDIRECTION #####
-			tep_redirect(tep_href_link(FILENAME_ORDERS_EDIT, tep_get_all_get_params(array('action')) . 'action=edit'));
+        if (($check_status['orders_status'] != $_POST['status']) || (tep_not_null($_POST['comments']))) {
 
-		}
-	
-	  break;
-		
+          tep_db_query("UPDATE " . TABLE_ORDERS . " SET 
+              orders_status = '" . tep_db_input($_POST['status']) . "', 
+              last_modified = now() 
+              WHERE orders_id = '" . (int)$oID . "'");
+
+          // Notify Customer ?
+          $customer_notified = '0';
+          if (isset($_POST['notify']) && ($_POST['notify'] == 'on')) {
+            $notify_comments = '';
+            if (isset($_POST['notify_comments']) && ($_POST['notify_comments'] == 'on')) {
+              $notify_comments = sprintf(EMAIL_TEXT_COMMENTS_UPDATE, $_POST['comments']) . "\n\n";
+            }
+            $email = STORE_NAME . "\n" .
+                EMAIL_SEPARATOR . "\n" . 
+                EMAIL_TEXT_ORDER_NUMBER . ' ' . (int)$oID . "\n" . 
+                EMAIL_TEXT_INVOICE_URL . ' ' . tep_catalog_href_link(FILENAME_CATALOG_ACCOUNT_HISTORY_INFO, 'order_id=' . (int)$oID, 'SSL') . "\n" . 
+                EMAIL_TEXT_DATE_ORDERED . ' ' . tep_date_long($check_status['date_purchased']) . "\n\n" . sprintf(EMAIL_TEXT_STATUS_UPDATE, $orders_status_array[$status]) . $notify_comments . sprintf(EMAIL_TEXT_STATUS_UPDATE2);
+
+            tep_mail($check_status['customers_name'], $check_status['customers_email_address'], EMAIL_TEXT_SUBJECT, $email, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+
+            $customer_notified = '1';
+          }
+
+          tep_db_query("INSERT into " . TABLE_ORDERS_STATUS_HISTORY . " 
+          (orders_id, orders_status_id, date_added, customer_notified, comments) 
+          values ('" . tep_db_input($_GET['oID']) . "', 
+              '" . tep_db_input($_POST['status']) . "', 
+              now(), 
+              " . tep_db_input($customer_notified) . ", 
+              '" . tep_db_input(tep_db_prepare_input($_POST['comments']))  . "')");
+        }
+
+        // Update Products
+        if (is_array($_POST['update_products'])) {
+          foreach($_POST['update_products'] as $orders_products_id => $products_details) {
+
+          //  Update Inventory Quantity
+          $order_query = tep_db_query("
+          SELECT products_id, products_quantity 
+              FROM " . TABLE_ORDERS_PRODUCTS . " 
+              WHERE orders_id = '" . (int)$oID . "'
+              AND orders_products_id = '" . (int)$orders_products_id . "'");
+          $order_products = tep_db_fetch_array($order_query);
+
+          // First we do a stock check 
+
+          if ($products_details['qty'] != $order_products['products_quantity']){
+//Bugfix when update products quantity negative - changed $order to $order_products
+          $quantity_difference = ($products_details['qty'] - $order_products['products_quantity']);
+            if (STOCK_LIMITED == 'true'){
+              tep_db_query("UPDATE " . TABLE_PRODUCTS . " SET 
+                  products_quantity = products_quantity - " . $quantity_difference . ",
+                  products_ordered = products_ordered + " . $quantity_difference . " 
+                  WHERE products_id = '" . (int)$order_products['products_id'] . "'");
+            } else {
+              tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+                  products_ordered = products_ordered + " . $quantity_difference . "
+                  WHERE products_id = '" . (int)$order_products['products_id'] . "'");
+            }
+          }
+
+ 
+          if ( (isset($products_details['delete'])) && ($products_details['delete'] == 'on') ) {
+          //check first to see if product should be deleted
+ 
+          //update quantities first
+          if (STOCK_LIMITED == 'true'){
+            tep_db_query("UPDATE " . TABLE_PRODUCTS . " SET 
+                products_quantity = products_quantity + " . $products_details["qty"] . ",
+                products_ordered = products_ordered - " . $products_details["qty"] . " 
+                WHERE products_id = '" . (int)$order_products['products_id'] . "'");
+          } else {
+          tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+              products_ordered = products_ordered - " . $products_details["qty"] . "
+              WHERE products_id = '" . (int)$order_products['products_id'] . "'");
+          }
+ 
+          tep_db_query("DELETE FROM " . TABLE_ORDERS_PRODUCTS . "
+              WHERE orders_id = '" . (int)$oID . "'
+              AND orders_products_id = '" . (int)$orders_products_id . "'");
+
+          tep_db_query("DELETE FROM " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . "
+              WHERE orders_id = '" . (int)$oID . "'
+              AND orders_products_id = '" . (int)$orders_products_id . "'");
+
+          tep_db_query("DELETE FROM " . TABLE_ORDERS_PRODUCTS_DOWNLOAD . "
+              WHERE orders_id = '" . (int)$oID . "'
+              AND orders_products_id = '" . (int)$orders_products_id . "'");
+ 
+        } else {
+          //not deleted=> updated
+ 
+          // Update orders_products Table
+          $Query = "UPDATE " . TABLE_ORDERS_PRODUCTS . " SET
+              products_model = '" . $products_details["model"] . "',
+              products_name = '" . oe_html_quotes($products_details["name"]) . "',
+              products_price = '" . $products_details["price"] . "',
+              final_price = '" . $products_details["final_price"] . "',
+              products_tax = '" . $products_details["tax"] . "',
+              products_quantity = '" . $products_details["qty"] . "'
+              WHERE orders_id = '" . (int)$oID . "'
+              AND orders_products_id = '$orders_products_id';";
+          tep_db_query($Query);
+
+          // Update Any Attributes
+          if(isset($products_details['attributes'])) { 
+            foreach($products_details['attributes'] as $orders_products_attributes_id => $attributes_details) {
+            $Query = "UPDATE " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " set
+                products_options = '" . $attributes_details["option"] . "',
+                products_options_values = '" . $attributes_details["value"] . "',
+                options_values_price ='" . $attributes_details["price"] . "',
+                price_prefix ='" . $attributes_details["prefix"] . "'
+                where orders_products_attributes_id = '$orders_products_attributes_id';";
+                tep_db_query($Query);
+            }//end of foreach($products_details["attributes"]
+          }// end of if(isset($products_details[attributes]))
+
+        } //end if/else product details delete= on
+      } //end foreach post update products
+    }//end if is-array update products
+
+
+    //update any downloads that may exist
+    if (is_array($_POST['update_downloads'])) {
+      foreach($_POST['update_downloads'] as $orders_products_download_id => $download_details) {
+        $Query = "UPDATE " . TABLE_ORDERS_PRODUCTS_DOWNLOAD . " SET
+            orders_products_filename = '" . $download_details["filename"] . "',
+            download_maxdays = '" . $download_details["maxdays"] . "',
+            download_count = '" . $download_details["maxcount"] . "'
+            WHERE orders_id = '" . (int)$oID . "'
+            AND orders_products_download_id = '$orders_products_download_id';";
+        tep_db_query($Query);
+      }
+    }  //end downloads
+
+
+        //delete or update comments
+    if (is_array($_POST['update_comments'])) {
+      foreach($_POST['update_comments'] as $orders_status_history_id => $comments_details) {
+
+        if (isset($comments_details['delete'])){
+
+          $Query = "DELETE FROM " . TABLE_ORDERS_STATUS_HISTORY . " 
+              WHERE orders_id = '" . (int)$oID . "' 
+              AND orders_status_history_id = '$orders_status_history_id';";
+          tep_db_query($Query);
+
+        } else {
+
+          $Query = "UPDATE " . TABLE_ORDERS_STATUS_HISTORY . " SET
+              comments = '" . $comments_details["comments"] . "'
+              WHERE orders_id = '" . (int)$oID . "'
+              AND orders_status_history_id = '$orders_status_history_id';";
+          tep_db_query($Query);
+        }
+      }
+    }//end comments update section
+
+    $shipping = array();
+
+    if (is_array($_POST['update_totals'])) {
+      foreach($_POST['update_totals'] as $total_index => $total_details) {
+        extract($total_details, EXTR_PREFIX_ALL, "ot");
+        if ($ot_class == "ot_shipping") {
+          $shipping['cost'] = $ot_value;
+          $shipping['title'] = $ot_title;
+          $shipping['id'] = $ot_id;
+        } // end if ($ot_class == "ot_shipping")
+      } //end foreach
+    } //end if is_array
+
+      if (tep_not_null($shipping['id'])) {
+        tep_db_query("UPDATE " . TABLE_ORDERS . " SET shipping_module = '" . $shipping['id'] . "' WHERE orders_id = '" . (int)$oID . "'");
+      }
+
+      $order = new manualOrder($oID);
+      $order->adjust_zones();
+
+      $cart = new manualCart();
+      $cart->restore_contents($oID);
+      $total_count = $cart->count_contents();
+      $total_weight = $cart->show_weight();
+
+      // Get the shipping quotes- if we don't have shipping quotes shipping tax calculation can't happen
+      $shipping_modules = new shipping;
+      $shipping_quotes = $shipping_modules->quote();
+
+      if (DISPLAY_PRICE_WITH_TAX == 'true') {//extract the base shipping cost or the ot_shipping module will add tax to it again
+        $module = substr($GLOBALS['shipping']['id'], 0, strpos($GLOBALS['shipping']['id'], '_'));
+        $tax = tep_get_tax_rate($GLOBALS[$module]->tax_class, $order->delivery['country']['id'], $order->delivery['zone_id']);
+        $order->info['total'] -= ( $order->info['shipping_cost'] - ($order->info['shipping_cost'] / (1 + ($tax /100))) );
+        $order->info['shipping_cost'] = ($order->info['shipping_cost'] / (1 + ($tax /100)));
+      }
+
+    //this is where we call the order total modules
+      require( 'order_editor/order_total.php');
+      $order_total_modules = new order_total();
+      $order_totals = $order_total_modules->process();
+
+      $current_ot_totals_array = array();
+      $current_ot_titles_array = array();
+      $current_ot_totals_query = tep_db_query("select class, title from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . (int)$oID . "' order by sort_order");
+      while ($current_ot_totals = tep_db_fetch_array($current_ot_totals_query)) {
+        $current_ot_totals_array[] = $current_ot_totals['class'];
+        $current_ot_titles_array[] = $current_ot_totals['title'];
+      }
+
+      tep_db_query("DELETE FROM " . TABLE_ORDERS_TOTAL . " WHERE orders_id = '" . (int)$oID . "'");
+
+      $j=1; //giving something a sort order of 0 ain't my bag baby
+      $new_order_totals = array();
+
+      if (is_array($_POST['update_totals'])) { //1
+        foreach($_POST['update_totals'] as $total_index => $total_details) { //2
+          extract($total_details, EXTR_PREFIX_ALL, "ot");
+          if (!strstr($ot_class, 'ot_custom')) { //3
+            for ($i=0, $n=sizeof($order_totals); $i<$n; $i++) { //4
+
+              if ($order_totals[$i]['code'] == 'ot_tax') { //5
+                $new_ot_total = ((in_array($order_totals[$i]['title'], $current_ot_titles_array)) ? false : true);
+              } else { //within 5
+                $new_ot_total = ((in_array($order_totals[$i]['code'], $current_ot_totals_array)) ? false : true);
+              }  //end 5 if ($order_totals[$i]['code'] == 'ot_tax')
+ 
+              if ( ( ($order_totals[$i]['code'] == 'ot_tax') && ($order_totals[$i]['code'] == $ot_class) && ($order_totals[$i]['title'] == $ot_title) ) || ( ($order_totals[$i]['code'] != 'ot_tax') && ($order_totals[$i]['code'] == $ot_class) ) ) { //6
+                //only good for components that show up in the $order_totals array
+
+                if ($ot_title != '') { //7
+                  $new_order_totals[] = array('title' => $ot_title,
+                                              'text' => (($ot_class != 'ot_total') ? $order_totals[$i]['text'] : '<b>' . $currencies->format($order->info['total'], true, $order->info['currency'], $order->info['currency_value']) . '</b>'),
+                                              'value' => (($order_totals[$i]['code'] != 'ot_total') ? $order_totals[$i]['value'] : $order->info['total']),
+                                              'code' => $order_totals[$i]['code'],
+                                              'sort_order' => $j);
+                  $written_ot_totals_array[] = $ot_class;
+                  $written_ot_titles_array[] = $ot_title;
+                  $j++;
+                } else { //within 7
+
+              $order->info['total'] += ($ot_value*(-1)); 
+              $written_ot_totals_array[] = $ot_class;
+              $written_ot_titles_array[] = $ot_title; 
+
+            } //end 7
+
+          } elseif ( ($new_ot_total) && (!in_array($order_totals[$i]['title'], $current_ot_titles_array)) ) { //within 6
+
+            $new_order_totals[] = array('title' => $order_totals[$i]['title'],
+                                        'text' => $order_totals[$i]['text'],
+                                        'value' => $order_totals[$i]['value'],
+                                        'code' => $order_totals[$i]['code'],
+                                        'sort_order' => $j);
+            $current_ot_totals_array[] = $order_totals[$i]['code'];
+            $current_ot_titles_array[] = $order_totals[$i]['title'];
+            $written_ot_totals_array[] = $ot_class;
+            $written_ot_titles_array[] = $ot_title;
+            $j++;
+            //echo $order_totals[$i]['code'] . "<br>"; for debugging- use of this results in errors
+
+          } elseif ($new_ot_total) { //also within 6
+            $order->info['total'] += ($order_totals[$i]['value']*(-1));
+            $current_ot_totals_array[] = $order_totals[$i]['code'];
+            $written_ot_totals_array[] = $ot_class;
+            $written_ot_titles_array[] = $ot_title;
+          }//end 6
+       }//end 4
+     } elseif ( (tep_not_null($ot_value)) && (tep_not_null($ot_title)) ) { // this modifies if (!strstr($ot_class, 'ot_custom')) { //3
+        $new_order_totals[] = array('title' => $ot_title,
+                                    'text' => $currencies->format($ot_value, true, $order->info['currency'], $order->info['currency_value']),
+                                    'value' => $ot_value,
+                                    'code' => 'ot_custom_' . $j,
+                                    'sort_order' => $j);
+        $order->info['total'] += $ot_value;
+        $written_ot_totals_array[] = $ot_class;
+        $written_ot_titles_array[] = $ot_title;
+        $j++;
+      } //end 3
+
+      //save ot_skippy from certain annihilation
+      if ( (!in_array($ot_class, $written_ot_totals_array)) && (!in_array($ot_title, $written_ot_titles_array)) && (tep_not_null($ot_value)) && (tep_not_null($ot_title)) && ($ot_class != 'ot_tax') && ($ot_class != 'ot_loworderfee') ) { //7
+      //this is supposed to catch the oddball components that don't show up in $order_totals
+ 
+        $new_order_totals[] = array('title' => $ot_title,
+                                    'text' => $currencies->format($ot_value, true, $order->info['currency'], $order->info['currency_value']),
+                                    'value' => $ot_value,
+                                    'code' => $ot_class,
+                                    'sort_order' => $j);
+        //$current_ot_totals_array[] = $order_totals[$i]['code'];
+        //$current_ot_titles_array[] = $order_totals[$i]['title'];
+        $written_ot_totals_array[] = $ot_class;
+        $written_ot_titles_array[] = $ot_title;
+        $j++;
+ 
+      } //end 7
+    } //end 2
+  } else {//within 1
+  // $_POST['update_totals'] is not an array => write in all order total components that have been generated by the sundry modules
+    for ($i=0, $n=sizeof($order_totals); $i<$n; $i++) { //8
+      $new_order_totals[] = array('title' => $order_totals[$i]['title'],
+                                  'text' => $order_totals[$i]['text'],
+                                  'value' => $order_totals[$i]['value'],
+                                  'code' => $order_totals[$i]['code'],
+                                  'sort_order' => $j);
+        $j++;
+
+      } //end 8
+
+    } //end if (is_array($_POST['update_totals'])) { //1
+
+    for ($i=0, $n=sizeof($new_order_totals); $i<$n; $i++) {
+      $sql_data_array = array('orders_id' => $oID,
+                              'title' => $new_order_totals[$i]['title'],
+                              'text' => $new_order_totals[$i]['text'],
+                              'value' => $new_order_totals[$i]['value'], 
+                              'class' => $new_order_totals[$i]['code'], 
+                              'sort_order' => $new_order_totals[$i]['sort_order']);
+      tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
+    }
+
+
+    if (isset($_POST['subaction'])) {
+      switch($_POST['subaction']) {
+        case 'add_product':
+          tep_redirect(tep_href_link(FILENAME_ORDERS_EDIT, tep_get_all_get_params(array('action')) . 'action=edit#products'));
+          break;
+      }
+    }
+
+    // 1.5 SUCCESS MESSAGE #####
+
+
+  // CHECK FOR NEW EMAIL CONFIRMATION
+
+    if ( (isset($_POST['nC1'])) || (isset($_POST['nC2'])) || (isset($_POST['nC3'])) ) {
+  //then the user selected the option of sending a new email
+
+    tep_redirect(tep_href_link(FILENAME_ORDERS_EDIT, tep_get_all_get_params(array('action')) . 'action=email')); 
+  //redirect to the email case
+ 
+  } else  { 
+     //email? email?  We don't need no stinkin email!
+ 
+    if ($order_updated)  {
+      $messageStack->add_session(SUCCESS_ORDER_UPDATED, 'success');
+    }
+
+    tep_redirect(tep_href_link(FILENAME_ORDERS_EDIT, tep_get_all_get_params(array('action')) . 'action=edit'));
+
   }
-}
 
-  if (($action == 'edit') && isset($_GET['oID'])) {
+  break;
+
+  // 3. NEW ORDER EMAIL ###############################################################################################
+  case 'email':
+
     $oID = tep_db_prepare_input($_GET['oID']);
+    $order = new manualOrder($oID);
 
+    for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
+    //loop all the products in the order
+    $products_ordered_attributes = '';
+    if ( (isset($order->products[$i]['attributes'])) && (sizeof($order->products[$i]['attributes']) > 0) ) {
+      for ($j=0, $n2=sizeof($order->products[$i]['attributes']); $j<$n2; $j++) {
+        $products_ordered_attributes .= "\n\t" . $order->products[$i]['attributes'][$j]['option'] . ' ' . $order->products[$i]['attributes'][$j]['value'];
+      }
+    }
+
+    $products_ordered .= $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . $products_model . ' = ' . $currencies->format(tep_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax']) * $order->products[$i]['qty'], true, $order->info['currency'], $order->info['currency_value']) . $products_ordered_attributes . "\n";
+  }
+ 
+  //Build the email
+  $email_order = STORE_NAME . "\n" . 
+      EMAIL_SEPARATOR . "\n" . 
+      EMAIL_TEXT_ORDER_NUMBER . ' ' . (int)$oID . "\n" .
+      EMAIL_TEXT_INVOICE_URL . ' ' . tep_catalog_href_link(FILENAME_CATALOG_ACCOUNT_HISTORY_INFO, 'order_id=' . (int)$oID, 'SSL') . "\n" .
+      EMAIL_TEXT_DATE_MODIFIED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
+
+  $email_order .= EMAIL_TEXT_PRODUCTS . "\n" . 
+                  EMAIL_SEPARATOR . "\n" . 
+                  $products_ordered . 
+                  EMAIL_SEPARATOR . "\n";
+
+  for ($i=0, $n=sizeof($order->totals); $i<$n; $i++) {
+    $email_order .= strip_tags($order->totals[$i]['title']) . ' ' . strip_tags($order->totals[$i]['text']) . "\n";
+  }
+
+  if ($order->content_type != 'virtual') {
+    $email_order .= "\n" . EMAIL_TEXT_DELIVERY_ADDRESS . "\n" . 
+                    EMAIL_SEPARATOR . "\n" .
+                    $order->delivery['name'] . "\n";
+    if ($order->delivery['company']) {
+    $email_order .= $order->delivery['company'] . "\n";
+    }
+    $email_order .= $order->delivery['street_address'] . "\n";
+    if ($order->delivery['suburb']) {
+      $email_order .= $order->delivery['suburb'] . "\n";
+    }
+    $email_order .= $order->customer['city'] . "\n";
+    if ($order->delivery['state']) {
+      $email_order .= $order->delivery['state'] . "\n";
+    }
+    $email_order .= $order->customer['postcode'] . "\n" .
+                    $order->delivery['country'] . "\n";
+    }
+
+    $email_order .= "\n" . EMAIL_TEXT_BILLING_ADDRESS . "\n" .
+                    EMAIL_SEPARATOR . "\n" .
+                    $order->billing['name'] . "\n";
+    if ($order->billing['company']) {
+      $email_order .= $order->billing['company'] . "\n";
+    }
+    $email_order .= $order->billing['street_address'] . "\n";
+    if ($order->billing['suburb']) {
+      $email_order .= $order->billing['suburb'] . "\n";
+                      }
+    $email_order .= $order->customer['city'] . "\n";
+    if ($order->billing['state']) {
+      $email_order .= $order->billing['state'] . "\n";
+    }
+    $email_order .= $order->customer['postcode'] . "\n" .
+                    $order->billing['country'] . "\n\n";
+
+    $email_order .= EMAIL_TEXT_PAYMENT_METHOD . "\n" . 
+                    EMAIL_SEPARATOR . "\n";
+    $email_order .= $order->info['payment_method'] . "\n\n";
+
+
+      //  if ( ($order->info['payment_method'] == ORDER_EDITOR_SEND_INFO_PAYMENT_METHOD) && (EMAIL_TEXT_PAYMENT_INFO) ) { 
+      //     $email_order .= EMAIL_TEXT_PAYMENT_INFO . "\n\n";
+      //   }
+      //I'm not entirely sure what the purpose of this is so it is being shelved for now
+
+    if (EMAIL_TEXT_FOOTER) {
+      $email_order .= EMAIL_TEXT_FOOTER . "\n\n";
+    }
+
+    //code for plain text emails which changes the € sign to EUR, otherwise the email will show ? instead of €
+    $email_order = str_replace("€","EUR",$email_order);
+    $email_order = str_replace("&nbsp;"," ",$email_order);
+
+    //code which replaces the <br> tags within EMAIL_TEXT_PAYMENT_INFO and EMAIL_TEXT_FOOTER with the proper \n
+    $email_order = str_replace("<br>","\n",$email_order);
+
+    //send the email to the customer
+    tep_mail($order->customer['name'], $order->customer['email_address'], EMAIL_TEXT_SUBJECT, $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+
+   // send emails to other people as necessary
+    if (SEND_EXTRA_ORDER_EMAILS_TO != '') {
+      tep_mail('', SEND_EXTRA_ORDER_EMAILS_TO, EMAIL_TEXT_SUBJECT, $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+    }
+
+         //do the dirty
+ 
+    $messageStack->add_session(SUCCESS_EMAIL_SENT, 'success');
+
+    tep_redirect(tep_href_link(FILENAME_ORDERS_EDIT, tep_get_all_get_params(array('action')) . 'action=edit'));
+
+    break;
+
+
+  ////
+  // Edit Order
+  case 'edit':
+    if (!isset($_GET['oID'])) {
+      $messageStack->add(ERROR_NO_ORDER_SELECTED, 'error');
+      break;
+    }
+    $oID = tep_db_prepare_input($_GET['oID']);
     $orders_query = tep_db_query("select orders_id from " . TABLE_ORDERS . " where orders_id = '" . (int)$oID . "'");
     $order_exists = true;
     if (!tep_db_num_rows($orders_query)) {
       $order_exists = false;
       $messageStack->add(sprintf(ERROR_ORDER_DOES_NOT_EXIST, $oID), 'error');
+      break;
+    }
+
+      $order = new manualOrder($oID);
+      $shippingKey = $order->adjust_totals($oID);
+      $order->adjust_zones();
+
+      $cart = new manualCart();
+      $cart->restore_contents($oID);
+      $total_count = $cart->count_contents();
+      $total_weight = $cart->show_weight();
+
+      // Get the shipping quotes
+      $shipping_modules = new shipping;
+      $shipping_quotes = $shipping_modules->quote();
+ 
+ 
+      break;
     }
   }
-?>
 
-<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+  // currecies drop-down array
+  $currency_query = tep_db_query("select distinct title, code from " . TABLE_CURRENCIES . " order by code ASC");
+  $currency_array = array();
+  while($currency = tep_db_fetch_array($currency_query)) {
+    $currency_array[] = array('id' => $currency['code'],
+                              'text' => $currency['code'] . ' - ' . $currency['title']);
+  }
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
-<style type="text/css">
-  
-  .SubTitle {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  font-weight: bold;
-  color: #29ADB8;
-  }
-  
-  .hidden
-  {
-  position: absolute;
-  left: -1500em;
-  }
-  
-  .update1 {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  background-color: #DBF5F7;
-  }
-  
-  .update2 {
-  background-color: #AFE9ED;
-  }
-  
-  .update3 {
-  background-color: #97E1E8;
-  }
-  
-  .update4 {
-  background-color: #79DAE1;
-  }
-  
-  .update5 {
-  background-color: #4DCCD7;
-  }
-  
-  
-</style>
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+
+  <?php include('order_editor/css.php');
+      //because if you haven't got your css, what have you got?
+      ?>
+
 <script language="javascript" src="includes/general.js"></script>
-<script type="text/javascript" src="includes/javascript/overlib_mini.js"><!-- overLIB (c) Erik Bosrup --></script>
+
+  <?php include('order_editor/javascript.php');
+      //because if you haven't got your javascript, what have you got?
+      ?>
+ 
 </head>
 <body>
+<div id="dhtmltooltip"></div>
+
+<script type="text/javascript">
+
+/***********************************************
+* Cool DHTML tooltip script- © Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+/***********************************************
+* For Order Editor
+* This has to stay here for the tooltips to work correctly
+* I tried sticking it with the rest of the javascript, but it has to be inside the <body> tag
+*
+***********************************************/
+
+var offsetxpoint=-60 //Customize x offset of tooltip
+var offsetypoint=20 //Customize y offset of tooltip
+var ie=document.all
+var ns6=document.getElementById && !document.all
+var enabletip=false
+if (ie||ns6)
+var tipobj=document.all? document.all["dhtmltooltip"] : document.getElementById? document.getElementById("dhtmltooltip") : ""
+
+function ietruebody(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+function ddrivetip(thetext, thecolor, thewidth){
+if (ns6||ie){
+if (typeof thewidth!="undefined") tipobj.style.width=thewidth+"px"
+if (typeof thecolor!="undefined" && thecolor!="") tipobj.style.backgroundColor=thecolor
+tipobj.innerHTML=thetext
+enabletip=true
+return false
+}
+}
+
+function positiontip(e){
+if (enabletip){
+var curX=(ns6)?e.pageX : event.clientX+ietruebody().scrollLeft;
+var curY=(ns6)?e.pageY : event.clientY+ietruebody().scrollTop;
+//Find out how close the mouse is to the corner of the window
+var rightedge=ie&&!window.opera? ietruebody().clientWidth-event.clientX-offsetxpoint : window.innerWidth-e.clientX-offsetxpoint-20
+var bottomedge=ie&&!window.opera? ietruebody().clientHeight-event.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+
+var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+
+//if the horizontal distance isn't enough to accomodate the width of the context menu
+if (rightedge<tipobj.offsetWidth)
+//move the horizontal position of the menu to the left by it's width
+tipobj.style.left=ie? ietruebody().scrollLeft+event.clientX-tipobj.offsetWidth+"px" : window.pageXOffset+e.clientX-tipobj.offsetWidth+"px"
+else if (curX<leftedge)
+tipobj.style.left="5px"
+else
+//position the horizontal position of the menu where the mouse is positioned
+tipobj.style.left=curX+offsetxpoint+"px"
+
+//same concept with the vertical position
+if (bottomedge<tipobj.offsetHeight)
+tipobj.style.top=ie? ietruebody().scrollTop+event.clientY-tipobj.offsetHeight-offsetypoint+"px" : window.pageYOffset+e.clientY-tipobj.offsetHeight-offsetypoint+"px"
+else
+tipobj.style.top=curY+offsetypoint+"px"
+tipobj.style.visibility="visible"
+}
+}
+
+function hideddrivetip(){
+if (ns6||ie){
+enabletip=false
+tipobj.style.visibility="hidden"
+tipobj.style.left="-1000px"
+tipobj.style.backgroundColor='white'
+tipobj.style.width='200'
+}
+}
+
+document.onmousemove=positiontip
+
+</script>
+
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
 
 <!-- body //-->
-
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+    <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
 <!-- left_navigation //-->
 <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
 <!-- left_navigation_eof //-->
-    </table></td>
+    </table>
+    </td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-		
-<?php if (($action == 'edit') && ($order_exists == true)) { $order = new order($oID); ?>
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <td width="100%" valign="top">
+
+ <?php
+ 
+   if (($action == 'edit') && ($order_exists == true)) {
+ 
+   echo tep_draw_form('edit_order', FILENAME_ORDERS_EDIT, tep_get_all_get_params(array('action')) . 'action=update_order');
+
+ ?>
+
+      <div id="header">
+
+      <p id="headerTitle" class="pageHeading"><?php echo sprintf(HEADING_TITLE, $oID, tep_datetime_short($order->info['date_purchased'])); ?></p>
+
+          <ul>
+
+       <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>
+        <script language="JavaScript" type="text/javascript"><!--
+        //this button only works with javascript and is therefore only displayed on browsers with javascript enabled
+              document.write("<li><a href=\"javascript:newOrderEmail()\"><img src=\"includes/languages/<?php echo $language; ?>/images/buttons/button_new_order_email.gif\" border=\"0\" alt=\"<?php echo IMAGE_NEW_ORDER_EMAIL; ?>\" title=\"<?php echo IMAGE_NEW_ORDER_EMAIL; ?>\" ></a></li>");
+             //--></script>
+         <?php } ?>
+
+        <li><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $_GET['oID'] . '&action=edit') . '">' . tep_image_button('button_details.gif', IMAGE_EDIT) . '</a>'; ?></li>
+        <li><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a>'; ?></li>
+        <li><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a>'; ?></li>
+        <li><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('action'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a> '; ?></li>
+      </ul>
+
+    </div>
+ 
+      <div id="ordersMessageStack">
+         <?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?>
+      </div>
+
+  <?php if (ORDER_EDITOR_USE_AJAX != 'true') { ?>
+  <!-- Begin Update Block, only for non-ajax use -->
+
+           <div class="updateBlock">
+              <div class="update1"><?php echo HINT_PRESS_UPDATE; ?></div>
+              <div class="update2">&nbsp;</div>
+              <div class="update3">&nbsp;</div>
+              <div class="update4" align="center"><?php echo ENTRY_SEND_NEW_ORDER_CONFIRMATION; ?>&nbsp;<?php echo tep_draw_checkbox_field('nC1', '', false); ?></div>
+              <div class="update5" align="center"><?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?></div>
+          </div>
+
+    <br>
+    <br>
+    <!-- End of Update Block -->
+    <?php } ?>
+
+
+    <!-- customer_info bof //-->
+
+        <table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE . '&nbsp;(' . HEADING_TITLE_NUMBER . '&nbsp;' . $oID . '&nbsp;' . HEADING_TITLE_DATE  . '&nbsp;' . tep_datetime_short($order->info['date_purchased']) . ')'; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
-             <td class="pageHeading" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $_GET['oID'] . '&action=edit') . '">' . tep_image_button('button_details.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('action'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a> '; ?></td>
-          </tr>
-		</table></td>
-      </tr>
+            <td valign="top">
+            <!-- customer_info bof //-->
+            <table width="100%" border="0" cellspacing="0" cellpadding="2" style="border: 1px solid #C9C9C9;">
+              <tr class="dataTableHeadingRow"> 
+                <td colspan="4" class="dataTableHeadingContent" valign="top"><?php echo ENTRY_CUSTOMER; ?></td>
+              </tr>
+              <tr class="dataTableRow"> 
+                <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_NAME; ?></td>
+                <td colspan="3" valign="top" class="dataTableContent"><input name="update_customer_name" size="37" value="<?php echo stripslashes($order->customer['name']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('customers_name', encodeURIComponent(this.value))"<?php } ?>></td>
+              </tr>
+              <tr class="dataTableRow"> 
+                <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_COMPANY; ?></td>
+                <td colspan="3" valign="top" class="dataTableContent"><input name="update_customer_company" size="37" value="<?php echo stripslashes($order->customer['company']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('customers_company', encodeURIComponent(this.value))"<?php } ?>></td>
+              </tr>
+              <tr class="dataTableRow"> 
+                <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_STREET_ADDRESS; ?></td>
+                <td colspan="3" valign="top" class="dataTableContent" nowrap><input name="update_customer_street_address" size="37" value="<?php echo stripslashes($order->customer['street_address']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('customers_street_address', encodeURIComponent(this.value))"<?php } ?>></td>
+              </tr>
+              <tr class="dataTableRow"> 
+                <td class="dataTableContent" valign="middle" align="right"><?php echo ENTRY_SUBURB; ?></td>
+                <td colspan="3" valign="top" class="dataTableContent" nowrap><input name="update_customer_suburb" size="37" value="<?php echo stripslashes($order->customer['suburb']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('customers_suburb', encodeURIComponent(this.value))"<?php } ?>></td>
+              </tr>
+              <tr class="dataTableRow"> 
+                <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_CITY_STATE; ?></td>
+                <td colspan="2" valign="top" class="dataTableContent" nowrap><input name="update_customer_city" size="15" value="<?php echo stripslashes($order->customer['city']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('customers_city', encodeURIComponent(this.value))"<?php } ?>>,</td>
+                <td valign="top" class="dataTableContent"><span id="customerStateMenu">
+        <?php if (ORDER_EDITOR_USE_AJAX == 'true') {
+        echo tep_draw_pull_down_menu('update_customer_zone_id', tep_get_country_zones($order->customer['country_id']), $order->customer['zone_id'], 'style="width: 200px;" onChange="updateOrdersField(\'customers_state\', this.options[this.selectedIndex].text);"'); 
+        } else {
+        echo tep_draw_pull_down_menu('update_customer_zone_id', tep_get_country_zones($order->customer['country_id']), $order->customer['zone_id'], 'style="width: 200px;"');
+        }?></span><span id="customerStateInput"><input name="update_customer_state" size="15" value="<?php echo stripslashes($order->customer['state']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('customers_state', encodeURIComponent(this.value))"<?php } ?>></span></td>
+              </tr>
+              <tr class="dataTableRow"> 
+                <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_POST_CODE; ?></td>
+                <td class="dataTableContent" valign="top"><input name="update_customer_postcode" size="5" value="<?php echo $order->customer['postcode']; ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('customers_postcode', encodeURIComponent(this.value))"<?php } ?>></td>
+                <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_COUNTRY; ?></td>
+                <td class="dataTableContent" valign="top">
+        <?php if (ORDER_EDITOR_USE_AJAX == 'true') {
+        echo tep_draw_pull_down_menu('update_customer_country_id', tep_get_countries(), $order->customer['country_id'], 'style="width: 200px;" onChange="update_zone(\'update_customer_country_id\', \'update_customer_zone_id\', \'customerStateInput\', \'customerStateMenu\'); updateOrdersField(\'customers_country\', this.options[this.selectedIndex].text);"'); 
+        } else {
+        echo tep_draw_pull_down_menu('update_customer_country_id', tep_get_countries(), $order->customer['country_id'], 'style="width: 200px;" onChange="update_zone(\'update_customer_country_id\', \'update_customer_zone_id\', \'customerStateInput\', \'customerStateMenu\');"'); 
+        } ?></td>
+              </tr>
+              <tr class="dataTableRow"> 
+                <td colspan="4" style="border-top: 1px solid #C9C9C9;"><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
+              </tr>
+              <tr class="dataTableRow"> 
+                <td class="dataTableContent" valign="middle" align="right"><?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
+                <td colspan="3" valign="top" class="dataTableContent"><input name="update_customer_telephone" size="15" value="<?php echo $order->customer['telephone']; ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('customers_telephone', encodeURIComponent(this.value))"<?php } ?>></td>
+              </tr>
+              <tr class="dataTableRow"> 
+                <td class="dataTableContent" valign="middle" align="right"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
+                <td colspan="3" valign="top" class="dataTableContent"><input name="update_customer_email_address" size="35" value="<?php echo $order->customer['email_address']; ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('customers_email_address', encodeURIComponent(this.value))"<?php } ?>></td>
+              </tr>
+            </table>
 
-<!-- Begin Addresses Block -->
-     <tr><?php echo tep_draw_form('edit_order', FILENAME_ORDERS_EDIT, tep_get_all_get_params(array('action')) . 'action=update_order'); ?>
-	  </tr>
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
-      </tr>   
+      <!-- customer_info_eof //-->
+            <!-- shipping_address bof -->
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid #C9C9C9;">
+              <tr>
+                <td class="dataTableContent">
+                <table width="100%" cellspacing="0" cellpadding="2">
+                  <tr class="dataTableHeadingRow"> 
+           <td class="dataTableHeadingContent" valign="top" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_SHIPPING_ADDRESS); ?>')"; onMouseout="hideddrivetip()"><?php echo ENTRY_SHIPPING_ADDRESS; ?> 
+             <script language="JavaScript" type="text/javascript">
+                   <!--
+                    document.write("<img src=\"images/icon_info.gif\" border= \"0\" width=\"13\" height=\"13\">");
+                 //-->
+                  </script>
 
-	<!-- Begin Update Block -->
-      <tr>
-	      <td>
-          <table width="100%" border="0" cellpadding="2" cellspacing="1">
-            <tr>
-              <td class="update1"><?php echo HINT_PRESS_UPDATE; ?></td>
-              <td class="update2" width="10">&nbsp;</td>
-              <td class="update3" width="10">&nbsp;</td>
-              <td class="update4" width="10">&nbsp;</td>
-              <td class="update5" width="120" align="center"><?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?></td>
-	          </tr>
-          </table>
-				</td>
-      </tr>
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>   
-	<!-- End of Update Block -->
-
-      <tr>
-	    <td class="SubTitle" valign="bottom"><?php echo MENUE_TITLE_CUSTOMER; ?></td>
-	  </tr>
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
-      </tr>   
-
-			<tr>
-			  <td>
-      <script language="javascript"><!--
-
-<?php echo "DISPLAY_PAYMENT_METHOD_DROPDOWN = '".DISPLAY_PAYMENT_METHOD_DROPDOWN."';"; ?>
-
-<?php $countryid = tep_get_country_id($order->delivery["country"]);
-	$zoneid = tep_get_zone_id($countryid, $order->delivery["state"]);
-	$default_tax_name  = tep_get_tax_description($default_tax_class, $countryid, $zoneid);
-	//default tax class is set at the top of the file
-    echo "defaultTaxName = '" . $default_tax_name . "';"; ?>
-
-addLoadListener(init);
-
-function init()
-{
-  var optional = document.getElementById("optional");
-  optional.className = "hidden";
-  //START dropdown option for payment method by quick_fixer
-  //new browsers support W3C - DOM Level 2
-	if (document.getElementById) {
-		//for payment dropdown menu use this
-  		if (DISPLAY_PAYMENT_METHOD_DROPDOWN == 'true') { 
-			var selObj = document.getElementById('update_info_payment_method');
-			var selIndex = selObj.selectedIndex;
-		
-			//optional FOR TESTING WITH DROPDOWN input fields named txtIndex, txtValue and, txtText which outputs the index value***
-			//0,1,2, based on position; the optional value (which may be different than the text value displayed); and the text value displayed in***
-			//the dropdown menu
-			//var txtIndexObj = document.getElementById('txtIndex');
-			//var txtValueObj = document.getElementById('txtValue');
-			//var txtTextObj = document.getElementById('txtText');
-			//optional input fields***
-			//OUTPUT optional input fields***
-			//txtIndexObj.value = selIndex;
-			//txtValueObj.value = selObj.options[selIndex].value;
-			//txtTextObj.value = selObj.options[selIndex].text;
-			//OUTPUT optional input fields***
-			//text in lieu of value supported by firefox and mozilla but not others SO MAKE SURE text and optional value are the same (in the payment dropdown they are)
-			if (selObj.options[selIndex].text) {
-				var paymentMethod = selObj.options[selIndex].text;
-			}
-			else {
-				var paymentMethod = selObj.options[selIndex].value;
-			}
-		}
-		else {
-			//if you only use an input field to display payment method use this
-			var selObj = document.getElementById('update_info_payment_method');
-			var paymentMethod = selObj.value;
-		}
-			              
-	}
-	//old browsers that don't support W3C - DOM Level 2
-	else {
-		//for payment dropdown menu use this
-  		if (DISPLAY_PAYMENT_METHOD_DROPDOWN == 'true') { 
-			var selObj = document.edit_order.update_info_payment_method;
-			var selIndex = selObj.selectedIndex;
-		
-			//optional FOR TESTING WITH DROPDOWN input fields named txtIndex, txtValue and, txtText which outputs the index value***
-			//0,1,2, based on position; the optional value (which may be different than the text value displayed); and the text value displayed in***
-			//the dropdown menu
-			//var txtIndexObj = document.forms.edit_order["txtIndex"].value;
-			//var txtValueObj = document.forms.edit_order["txtValue"].value;
-			//var txtTextObj = document.forms.edit_order["txtText"].value;
-			//optional input fields***
-			//OUTPUT optional input fields***
-			//txtIndexObj.value = selIndex;
-			//txtValueObj.value = selObj.options[selIndex].value;
-			//txtTextObj.value = selObj.options[selIndex].text;
-			//OUTPUT optional input fields***
-			//text in lieu of value supported by firefox and mozilla but not others SO MAKE SURE text and optional value are the same (in the payment dropdown they are)
-			if (selObj.options[selIndex].text) {
-				var paymentMethod = selObj.options[selIndex].text;
-			}
-			else {
-				var paymentMethod = selObj.options[selIndex].value;
-			}
-		}
-		else {
-			//if you only use an input field to display payment method use this
-			var paymentMethod = document.forms.edit_order["update_info_payment_method"].value;
-		}
-	}
-//END dropdown option for payment method by quick_fixer
-  if (paymentMethod == "<?php echo ENTRY_CREDIT_CARD ?>") {
-  optional.className = "";
-  return true;
-  } else {
-  optional.className = "hidden";
-  return true;
-  }
-  
- }
-
-  function addLoadListener(fn)
-{
-  if (typeof window.addEventListener != 'undefined')
-  {
-    window.addEventListener('load', fn, false);
-  }
-  else if (typeof document.addEventListener != 'undefined')
-  {
-    document.addEventListener('load', fn, false);
-  }
-  else if (typeof window.attachEvent != 'undefined')
-  {
-    window.attachEvent('onload', fn);
-  }
-  else
-  {
-    var oldfn = window.onload;
-    if (typeof window.onload != 'function')
-    {
-      window.onload = fn;
-    }
-    else
-    {
-      window.onload = function()
-      {
-        oldfn();
-        fn();
-      };
-    }
-  }
-}
-  
-  function doRound(x, places) {  //we only have so much space
-    return Math.round(x * Math.pow(10, places)) / Math.pow(10, places);
- }
- 
- function doFormat(x, places)  //keeps all calculated values the same length
-{
-var a = doRound(x, places);
-var s = a.toString();
-
-var decimalIndex = s.indexOf(".");
-if (places > 0 && decimalIndex < 0)
-{
-decimalIndex = s.length;
-s += '.';
-}
-while (decimalIndex + places + 1 > s.length)
-{
-s += '0';
-}
-return s;
-}
-
- function getAttributesPrices(pid){ //get any attributes prices that may exist 
-var sum =0;
-var el=document.getElementsByTagName('input');//all the input elements
-for(var i=0;i<el.length;i++){
-if(el[i].id.indexOf(pid)>-1){
-var aid=el[i].id.replace(pid,'').replace('a', '');//extract the attribute id
-var p=el[i].id.replace(pid,'').replace(/\d/g,'');
-if((p=='a') && (document.getElementById(pid + '_' + aid + '_prefix').value) == '-') {
-sum-=Number(el[i].value);
-}
-if((p=='a') && (document.getElementById(pid + '_' + aid + '_prefix').value) == '+') {
-sum+=Number(el[i].value);
-}
-}
-}
-return sum
-}
-
-function getTaxTotals(action, taxdescription){ //find the right place to put the tax totals
-var sum =0;
-var el=document.getElementsByTagName('input');//all the input elements
-for(var i=0;i<el.length;i++){
-
-if (action == 'tax'){
-if(el[i].id.indexOf(taxdescription)>-1){
-var p=el[i].id.replace(taxdescription,'').replace(/\d/g,'');
-//defaultTaxName=replace(defaultTaxName,'').replace(/\d/g,'');//strip numbers from defaultTaxName because function strips numbers from the id
-if(p=='p'){
-sum+=Number(el[i].value);
-}//end p = p
-
-//shipping tax is added to the default tax class
-  if ((p == 'ot_shipping') || (p == defaultTaxName + 'ot_shipping')) {
-  var taxRate = document.getElementById("shipping_tax-" + defaultTaxName).value;
-  <?php
-  if (DISPLAY_PRICE_WITH_TAX == 'true') { ?>//shipping tax is part of the shipping charge
-  sum += Number(el[i].value) * taxRate / (Number(taxRate) + 100); 
-  <?php } else { ?>//shipping tax is in addition to the shipping charge
-  sum += Number(el[i].value) * taxRate / 100; 
-  <?php } ?>
-  }//end if p == ot_shipping
- 
-}//end if taxdescription >-1
-}//end if action = tax
-
-} //end for(var i=0;i<el.length;i++){
-return sum
-} //end function getTaxTotals
-
-  function updateTotals(action, taxdescription){ //do the totals
-  var sum =0;
-  var el=document.getElementsByTagName('input');//all the input elements
-  for(var i=0;i<el.length;i++){
-  var pid=el[i].id.replace(/\d/g,'');//removes the numbers from id
- 
-  if (action == 'subtotal') {
-  <?php if (DISPLAY_PRICE_WITH_TAX == 'true') { ?>
-  if(pid == 'p-total_incl')// display price with tax => total including tax
-  <?php } else { ?>
-  if(pid == 'p-total_excl')// display price without tax => total excluding tax
-  <?php } ?>
-  {
-  sum+=Number(el[i].value);
-  }
-  } 
-
-  if ((action == 'weight') && (pid == 'p-total_weight')) {
-  sum += Number(el[i].value);
-  }
-
-if (action =='total'){
-//I cheat here- the grand total always includes the value of the various totals including tax of 
-//each item, regardless of individual shop settings.  So I take the various Total incls, all the
-//ot_customs, ot_loworderfees, and any ot_shipping value, and voila
-if ((pid ==  'ot_custom') || (pid == defaultTaxName + 'ot_shipping') || (pid == 'p-total_incl') || (pid == 'ot_loworderfee')) {
-sum += Number(el[i].value);
-  }
-  
- <?php
- if (DISPLAY_PRICE_WITH_TAX != 'true') //when set to true, shipping charge already includes tax
- {  ?>
- //calculates the shipping tax 
- //This has to be done independently since the grand total doesn't count the various tax totals
-  if (pid == defaultTaxName + 'ot_shipping') {
-  var taxRate = document.getElementById("shipping_tax-" + defaultTaxName).value; 
-  sum += Number(el[i].value) * taxRate / 100; 
-    }//end if pid == defaultTaxName + 'ot_shipping'
-   <?php } ?>
-   
-    } //end if action == total
-
-  } //end for(var i=0;i<el.length;i++)
-  
-  return sum
-  }//end function updateTotals()
-  
-  function updatePrices(action, pid, taxdescription) { 
-  //calculates all the different values as new entries are typed
-    var qty = document.getElementById(pid + "-qty").value;
-	var taxRate = document.getElementById(pid + "-tax").value;
-	var weight = document.getElementById(pid + "-weight").value;
-	var attValue = getAttributesPrices(pid);
-			
-	if ((action == 'qty') || (action == 'tax') || (action == 'att_price') || (action == 'price')) {
-	
-	var finalPriceValue = document.getElementById(pid + "-price").value;
-	var priceInclValue = document.getElementById(pid + "-price").value;
-	var totalInclValue = document.getElementById(pid + "-price").value;
-	var totalExclValue = document.getElementById(pid + "-price").value;
-	var totalWeight = document.getElementById(pid + "-weight").value;
-			
-	finalPriceValue = Number(attValue) + Number(finalPriceValue);
-	priceInclValue = ( Number(attValue) + Number(priceInclValue) ) * ((taxRate / 100) + 1);
-	totalInclValue = ( Number(attValue) + Number(totalInclValue) ) * ((taxRate / 100) + 1) * qty;
-	totalExclValue = ( Number(attValue) + Number(totalExclValue) ) * qty;
-	totalWeight = totalWeight * qty;
-	taxValue = taxRate * finalPriceValue / 100 * qty;
-	
-	}
-	
-	if (action == 'final_price') {
-	
-	var priceValue = document.getElementById(pid + "-final_price").value;
-	var priceInclValue = document.getElementById(pid + "-final_price").value;
-	var totalInclValue = document.getElementById(pid + "-final_price").value;
-	var totalExclValue = document.getElementById(pid + "-final_price").value;
-	var taxValue = document.getElementById(pid + "-final_price").value;
-		
-	priceValue = Number(priceValue) - Number(attValue);
-	priceInclValue = priceInclValue * ((taxRate / 100) + 1);
-	totalInclValue = totalInclValue * ((taxRate / 100) + 1) * qty;
-	totalExclValue = totalExclValue * qty;
-	taxValue = taxRate * taxValue / 100 * qty;
-		
-	} //end if ((action == 'qty') || (action == 'tax') || (action == 'final_price')) 
-	
-	if (action == 'price_incl') {
-	
-	var priceValue = document.getElementById(pid + "-price_incl").value;
-	var finalPriceValue = document.getElementById(pid + "-price_incl").value;
-	var totalInclValue = document.getElementById(pid + "-price_incl").value;
-	var totalExclValue = document.getElementById(pid + "-price_incl").value;
-		
-	priceValue = Number(finalPriceValue / ((taxRate / 100) + 1)) - Number(attValue);
-	finalPriceValue = finalPriceValue / ((taxRate / 100) + 1);
-	totalInclValue = totalInclValue * qty;
-	totalExclValue = totalExclValue * qty / ((taxRate / 100) + 1);
-	taxValue = taxRate * finalPriceValue / 100 * qty;
-	
-	} //end of if (action == 'price_incl')
-	
-	if (action == 'total_excl') {
-	
-	var priceValue = document.getElementById(pid + "-total_excl").value;
-	var finalPriceValue = document.getElementById(pid + "-total_excl").value;
-	var priceInclValue = document.getElementById(pid + "-total_excl").value;
-	var totalInclValue = document.getElementById(pid + "-total_excl").value;
-			
-	priceValue = ( Number (finalPriceValue / qty) ) - Number (attValue);
-	finalPriceValue = finalPriceValue / qty;
-	priceInclValue = priceInclValue * ((taxRate / 100) + 1) / qty;
-	totalInclValue = totalInclValue * ((taxRate / 100) + 1);
-	taxValue = taxRate * finalPriceValue / 100 * qty;
-	
-	} //end of if (action == 'total_excl')
-	
-	if (action == 'total_incl') {
-	
-	var priceValue = document.getElementById(pid + "-total_incl").value;
-	var finalPriceValue = document.getElementById(pid + "-total_incl").value;
-	var priceInclValue = document.getElementById(pid + "-total_incl").value;
-	var totalExclValue = document.getElementById(pid + "-total_incl").value;
-		
-	priceValue = Number (finalPriceValue / ((taxRate / 100) + 1) / qty) - Number(attValue)
-	finalPriceValue = finalPriceValue / ((taxRate / 100) + 1) / qty;
-	priceInclValue = priceInclValue / qty;
-	totalExclValue = totalExclValue / ((taxRate / 100) + 1);
-	taxValue = taxRate * finalPriceValue / 100 * qty;
-	
-	} //end of if (action == 'total_incl')
-	
-	if (action == 'qty') {
-	document.getElementById(pid + "-total_weight").value = doFormat(totalWeight, 2);
-	var totalOrderWeight = updateTotals('weight');//performed after formatting weight above
-	document.getElementById("total_order_weight").value = doFormat(totalOrderWeight, 2);
-	}
-	
-	if ((action != 'qty') && (action != 'tax') && (action != 'att_price') && (action != 'price')) {
-	document.getElementById(pid + "-price").value = doFormat(priceValue, 4);
-	}
-	
-	if (action != 'final_price') {
-	document.getElementById(pid + "-final_price").value = doFormat(finalPriceValue, 4);
-	}
-	
-	if ((action != 'qty') && (action != 'price_incl')) {
-	document.getElementById(pid + "-price_incl").value = doFormat(priceInclValue, 4);
-	}
-	
-	if ((action != 'tax') && (action != 'total_excl')) {
-	document.getElementById(pid + "-total_excl").value = doFormat(totalExclValue, 4);
-	}
-	
-	if (action != 'total_incl') {
-	document.getElementById(pid + "-total_incl").value = doFormat(totalInclValue, 4);
-	}
-	
-	document.getElementById(taxdescription + pid).value = doFormat(taxValue, 4);
-	
-	var subTotal = updateTotals('subtotal', taxdescription);
-	document.getElementById("ot_subtotal").value = doFormat(subTotal, 4);
-	
-	var taxTotal = getTaxTotals('tax', taxdescription);
-	var field = document.getElementById(taxdescription + "-total");
-    if (field) field.value = doFormat(taxTotal, 4);//tax fields won't necessarily exist
-	
-	var preTotal = updateTotals('total', taxdescription);
-	//var total = Number(preTotal) + Number(subTotal);
-	document.getElementById("ot_total").value = doFormat(preTotal, 4);
-	
-	} //end function updatePrices(action, pid)
-	
-    function getTotals(action, taxdescription) { 
-	//called when updating editable total components such as shipping
-	var subTotal = updateTotals('subtotal', taxdescription);
-	document.getElementById("ot_subtotal").value = doFormat(subTotal, 4);
-	
-	//need to perform special step if shipping charge is changed
-	if (action == 'shipping') {
-	var taxTotal = getTaxTotals('tax', taxdescription);
-	var field = document.getElementById(taxdescription + "-total");
-	if (field) field.value = doFormat(taxTotal, 4);
-	}//end if action == shipping
-	
-	var preTotal = updateTotals('total', taxdescription);
-	//var total = Number(preTotal) + Number(subTotal);
-	document.getElementById("ot_total").value = doFormat(preTotal, 4);
-	} //end function updateTotals
-
- //--></script>
- 
-<table border="0" class="dataTableRow" cellpadding="2" cellspacing="0">
-  <tr class="dataTableHeadingRow">
-    <td class="dataTableHeadingContent" width="80"></td>
-    <td class="dataTableHeadingContent" width="150"><?php echo ENTRY_CUSTOMER_ADDRESS; ?></td>
-    <td class="dataTableHeadingContent" width="6">&nbsp;</td>
-    <td class="dataTableHeadingContent" width="150"><?php echo ENTRY_SHIPPING_ADDRESS; ?> <a href="#" onMouseOver="return overlib('<?php echo HINT_SHIPPING_ADDRESS; ?>', BELOW, RIGHT);" onMouseOut="return nd();" ><img src="images/icon_info.gif" border= "0" width="13" height="13" /></a></td>
-	 <td class="dataTableHeadingContent" width="6">&nbsp;</td>
-    <td class="dataTableHeadingContent" width="150"><?php echo ENTRY_BILLING_ADDRESS; ?></td>
-  </tr>
- <?php
-  if (ACCOUNT_COMPANY == 'true') {
-?>
- <tr>
-    <td class="main"><b><?php echo ENTRY_CUSTOMER_COMPANY; ?>: </b></td>
-    <td><span class="main"><input name="update_customer_company" size="30" value="<?php echo tep_html_quotes($order->customer['company']); ?>" /></span></td>
-		<td>&nbsp;</td>
-    <td><span class="main"><input name="update_delivery_company" size="30" value="<?php echo tep_html_quotes($order->delivery['company']); ?>" /></span></td>
-	<td>&nbsp;</td>
-    <td><span class="main"><input name="update_billing_company" size="30" value="<?php echo tep_html_quotes($order->billing['company']); ?>" /></span></td>
-  </tr>
-  <?php
-  }
-?>
-  <tr>
-    <td class="main"><b><?php echo ENTRY_CUSTOMER_NAME; ?>: </b></td>
-    <td><span class="main"><input name="update_customer_name" size="30" value="<?php echo tep_html_quotes($order->customer['name']); ?>" /></span></td>
-    <td>&nbsp;</td>
-    <td><span class="main"><input name="update_delivery_name" size="30" value="<?php echo tep_html_quotes($order->delivery['name']); ?>" /></span></td>
-	<td>&nbsp;</td>
-    <td><span class="main"><input name="update_billing_name" size="30" value="<?php echo tep_html_quotes($order->billing['name']); ?>" /></span></td>
-  </tr>
-  <tr>
-    <td class="main"><b><?php echo ENTRY_ADDRESS; ?>: </b></td>
-    <td><span class="main"><input name="update_customer_street_address" size="30" value="<?php echo tep_html_quotes($order->customer['street_address']); ?>" /></span></td>
-    <td>&nbsp;</td>
-    <td><span class="main"><input name="update_delivery_street_address" size="30" value="<?php echo tep_html_quotes($order->delivery['street_address']); ?>" /></span></td>
-	<td>&nbsp;</td>
-    <td><span class="main"><input name="update_billing_street_address" size="30" value="<?php echo tep_html_quotes($order->billing['street_address']); ?>" /></span></td>
-  </tr>
-  <?php
-  if (ACCOUNT_SUBURB == 'true') {
-?>
-  <tr>
-    <td class="main"><b><?php echo ENTRY_CUSTOMER_SUBURB; ?>: </b></td>
-    <td><span class="main"><input name="update_customer_suburb" size="30" value="<?php echo tep_html_quotes($order->customer['suburb']); ?>" /></span></td>
-    <td>&nbsp;</td>
-    <td><span class="main"><input name="update_delivery_suburb" size="30" value="<?php echo tep_html_quotes($order->delivery['suburb']); ?>" /></span></td>
-	<td>&nbsp;</td>
-    <td><span class="main"><input name="update_billing_suburb" size="30" value="<?php echo tep_html_quotes($order->billing['suburb']); ?>" /></span></td>
-  </tr>
-  <?php
-  }
-?>
-  <tr>
-    <td class="main"><b><?php echo ENTRY_CUSTOMER_CITY; ?>: </b></td>
-    <td><span class="main"><input name="update_customer_city" size="30" value="<?php echo tep_html_quotes($order->customer['city']); ?>" /></span></td>
-    <td>&nbsp;</td>
-    <td><span class="main"><input name="update_delivery_city" size="30" value="<?php echo tep_html_quotes($order->delivery['city']); ?>" /></span></td>
-	<td>&nbsp;</td>
-    <td><span class="main"><input name="update_billing_city" size="30" value="<?php echo tep_html_quotes($order->billing['city']); ?>" /></span></td>
-  </tr>
-  <?php
-  if (ACCOUNT_STATE == 'true') {
-?>
-  <tr>
-    <td class="main"><b><?php echo ENTRY_CUSTOMER_STATE; ?>: </b></td>
-    <td><span class="main"><input name="update_customer_state" size="30" value="<?php echo tep_html_quotes($order->customer['state']); ?>" /></span></td>
-    <td>&nbsp;</td>
-    <td><span class="main"><input name="update_delivery_state" size="30" value="<?php echo tep_html_quotes($order->delivery['state']); ?>" /></span></td>
-	<td>&nbsp;</td>
-    <td><span class="main"><input name="update_billing_state" size="30" value="<?php echo tep_html_quotes($order->billing['state']); ?>" /></span></td>
-  </tr>
-  <?php
-  }
-?>
-  <tr>
-    <td class="main"><b><?php echo ENTRY_CUSTOMER_POSTCODE; ?>: </b></td>
-    <td><span class="main"><input name="update_customer_postcode" size="30" value="<?php echo $order->customer['postcode']; ?>" /></span></td>
-    <td>&nbsp;</td>
-    <td><span class="main"><input name="update_delivery_postcode" size="30" value="<?php echo $order->delivery['postcode']; ?>" /></span></td>
-	 <td>&nbsp;</td>
-    <td><span class="main"><input name="update_billing_postcode" size="30" value="<?php echo $order->billing['postcode']; ?>" /></span></td>
-  </tr>
-  <tr>
-    <td class="main"><b><?php echo ENTRY_CUSTOMER_COUNTRY; ?>: </b></td>
-    <td><span class="main"><input name="update_customer_country" size="30" value="<?php echo tep_html_quotes($order->customer['country']); ?>" /></span></td>
-    <td>&nbsp;</td>
-    <td><span class="main"><input name="update_delivery_country" size="30" value="<?php echo tep_html_quotes($order->delivery['country']); ?>" /></span></td>
-	<td>&nbsp;</td>
-    <td><span class="main"><input name="update_billing_country" size="30" value="<?php echo tep_html_quotes($order->billing['country']); ?>" /></span></td>
-  </tr>
-  <tr>
-    <td class="main"><b><?php echo ENTRY_CUSTOMER_PHONE; ?>: </b></td>
-    <td><span class="main"><input name="update_customer_telephone" size="30" value="<?php echo $order->customer['telephone']; ?>" /></span></td>
-   <td colspan="4"></td>
-  </tr>
-  <tr>
-    <td class="main"><b><?php echo ENTRY_CUSTOMER_EMAIL; ?>: </b></td>
-    <td><span class="main"><input name="update_customer_email_address" size="30" value="<?php echo $order->customer['email_address']; ?>" /></span></td>
-  <td colspan="4"></td>
-	</tr>
-</table>
-				</td>
-			</tr>
-<!-- End Addresses Block -->
-
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>      
-
-<!-- Begin Payment Block -->
-      <tr>
-	      <td class="SubTitle"><?php echo MENUE_TITLE_PAYMENT; ?></td>
-			</tr>
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
-      </tr>   
-      <tr>
-	      <td>
-				
-<table border="0" cellspacing="0" cellpadding="2" class="dataTableRow">
-  <tr class="dataTableHeadingRow">
-    <td colspan="2" class="dataTableHeadingContent" valign="bottom"><?php echo ENTRY_PAYMENT_METHOD; ?> <a href="#" onMouseOver="return overlib('<?php echo HINT_UPDATE_TO_CC . ENTRY_CREDIT_CARD . HINT_UPDATE_TO_CC2; ?>', BELOW, RIGHT);" onMouseOut="return nd();" ><img src="images/icon_info.gif" border="0" width="13" height="13" /></a></td>
-	</tr>
-  <tr>
-	  <td colspan="2" class="main">
-	  <?php 
-	  //START for payment dropdown menu use this by quick_fixer
-  		if (DISPLAY_PAYMENT_METHOD_DROPDOWN == 'true') { 
-		
-		  // Get list of all payment modules available
-  $enabled_payment = array();
-  $module_directory = DIR_FS_CATALOG_MODULES . 'payment/';
-  $file_extension = substr($PHP_SELF, strrpos($PHP_SELF, '.'));
-
-  if ($dir = @dir($module_directory)) {
-    while ($file = $dir->read()) {
-      if (!is_dir( $module_directory . $file)) {
-        if (substr($file, strrpos($file, '.')) == $file_extension) {
-          $directory_array[] = $file;
-        }
-      }
-    }
-    sort($directory_array);
-    $dir->close();
-  }
-
-  // For each available payment module, check if enabled
-  for ($i=0, $n=sizeof($directory_array); $i<$n; $i++) {
-    $file = $directory_array[$i];
-
-    include(DIR_FS_CATALOG_LANGUAGES . $language . '/modules/payment/' . $file);
-    include($module_directory . $file);
-
-    $class = substr($file, 0, strrpos($file, '.'));
-    if (tep_class_exists($class)) {
-      $module = new $class;
-      if ($module->check() > 0) {
-        // If module enabled create array of titles
-      	$enabled_payment[] = array('id' => $module->title, 'text' => $module->title);
-		
-		//if the payment method is the same as the payment module title then don't add it to dropdown menu
-		if ($module->title == $order->info['payment_method']) {
-			$paymentMatchExists='true';	
-		}
-      }
-   }
- }
- 		//just in case the payment method found in db is not the same as the payment module title then make it part of the dropdown array or else it cannot be the selected default value
-		if ($paymentMatchExists !='true') {
-			$enabled_payment[] = array('id' => $order->info['payment_method'], 'text' => $order->info['payment_method']);	
- }
- $enabled_payment[] = array('id' => 'Other', 'text' => 'Other');	
-		//draw the dropdown menu for payment methods and default to the order value
-	  		echo tep_draw_pull_down_menu('update_info_payment_method', $enabled_payment, $order->info['payment_method'], 'id="update_info_payment_method" onChange="init()"'); 
-		}
-	  	else {
-		//draw the input field for payment methods and default to the order value
-	  ?><input name="update_info_payment_method" size="35" value="<?php echo $order->info['payment_method']; ?>" id="update_info_payment_method" onKeyUp="init()"/><?php
-	  }
-	  //END for payment dropdown menu use this by quick_fixer
-	?></td>
-	</tr>
-
-	<!-- Begin Credit Card Info Block -->
-	  <tr><td>
-	  
-	  <table id="optional">
-	 <tr>
-	    <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-	  </tr>
-	  <tr>
-	    <td class="main"><?php echo ENTRY_CREDIT_CARD_TYPE; ?></td>
-	    <td class="main"><input name="update_info_cc_type" size="20" value="<?php echo $order->info['cc_type']; ?>" /></td>
-	  </tr>
-	  <tr>
-	    <td class="main"><?php echo ENTRY_CREDIT_CARD_OWNER; ?></td>
-	    <td class="main"><input name="update_info_cc_owner" size="20" value="<?php echo $order->info['cc_owner']; ?>" /></td>
-	  </tr>
-	  <tr>
-	    <td class="main"><?php echo ENTRY_CREDIT_CARD_NUMBER; ?></td>
-	    <td class="main"><input name="update_info_cc_number" size="20" value="<?php echo $order->info['cc_number']; ?>" /></td>
-	  </tr>
-	  <tr>
-	    <td class="main"><?php echo ENTRY_CREDIT_CARD_EXPIRES; ?></td>
-	    <td class="main"><input name="update_info_cc_expires" size="4" value="<?php echo $order->info['cc_expires']; ?>" maxlength="4" /></td>
-	  </tr>
-	  </table>
-	  
-	  </td></tr>
-	
-  <!-- End Credit Card Info Block -->
-	
-</table>
- 
-   </td>
-      </tr>
-	 
-<!-- End Payment Block -->
-	
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-
-<!-- Begin Products Listing Block -->
-      <tr>
-	      <td class="SubTitle"><?php echo MENUE_TITLE_ORDER; ?> <a href="#" onMouseOver="return overlib('<?php echo HINT_PRODUCTS_PRICES; ?>', BELOW, RIGHT);" onMouseOut="return nd();" ><img src="images/icon_info.gif" border= "0" width="13" height="13" /></a></td>
-			</tr>
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
-      </tr>   
-      <tr>
-	      <td>
-	
-	<table border="0" width="100%" cellspacing="0" cellpadding="2">
-		<tr class="dataTableHeadingRow">
-	  <td class="dataTableHeadingContent"><?php  echo TABLE_HEADING_DELETE; ?></td>
-	  <td class="dataTableHeadingContent"><?php  echo TABLE_HEADING_QUANTITY; ?></td>
-	  <td class="dataTableHeadingContent"><?php  echo TABLE_HEADING_PRODUCTS; ?></td>
-	  <td class="dataTableHeadingContent"><?php  echo TABLE_HEADING_PRODUCTS_MODEL; ?></td>
-	  <td class="dataTableHeadingContent"><?php  echo TABLE_HEADING_TAX; ?></td>
-	  <td class="dataTableHeadingContent"><?php  echo TABLE_HEADING_BASE_PRICE; ?> <a href="#" onMouseOver="return overlib('<?php echo HINT_BASE_PRICE; ?>', BELOW, RIGHT);" onMouseOut="return nd();" ><img src="images/icon_info.gif" border= "0" width="13" height="13" /></a></td>
-	  <td class="dataTableHeadingContent"><?php  echo TABLE_HEADING_UNIT_PRICE; ?> <a href="#" onMouseOver="return overlib('<?php echo HINT_PRICE_EXCL; ?>', BELOW, RIGHT);" onMouseOut="return nd();" ><img src="images/icon_info.gif" border= "0" width="13" height="13" /></a></td>
-	  <td class="dataTableHeadingContent"><?php  echo TABLE_HEADING_UNIT_PRICE_TAXED; ?> <a href="#" onMouseOver="return overlib('<?php echo HINT_PRICE_INCL; ?>', BELOW, RIGHT);" onMouseOut="return nd();" ><img src="images/icon_info.gif" border= "0" width="13" height="13" /></a></td>
-	  <td class="dataTableHeadingContent"><?php  echo TABLE_HEADING_TOTAL_PRICE; ?> <a href="#" onMouseOver="return overlib('<?php echo HINT_TOTAL_EXCL; ?>', BELOW, RIGHT);" onMouseOut="return nd();" ><img src="images/icon_info.gif" border= "0" width="13" height="13" /></a></td>
-	  <td class="dataTableHeadingContent"><?php  echo TABLE_HEADING_TOTAL_PRICE_TAXED; ?> <a href="#" onMouseOver="return overlib('<?php echo HINT_TOTAL_INCL; ?>', BELOW, RIGHT);" onMouseOut="return nd();" ><img src="images/icon_info.gif" border= "0" width="13" height="13" /></a></td>
-	  <td class="dataTableHeadingContent"><?php  echo TABLE_HEADING_PRODUCTS_WEIGHT; ?></td>
-	</tr>
-	<?php
-
-	for ($i=0; $i<sizeof($order->products); $i++) {
-	//calculate total weight
-	$products_weight = array($order->products[$i]['weight'] * $order->products[$i]['qty']);
-    foreach ($products_weight as $key => $value);
-    $total_weight += $value;
-    //end total weight
-	$orders_products_id = $order->products[$i]['orders_products_id'];
-		$RowStyle = "dataTableContent";
-		echo '	  <tr class="dataTableRow">' . "\n" .
-		     '	    <td class="' . $RowStyle . '" valign="top"><div align="center">' . "<input name='update_products[$orders_products_id][delete]' type='checkbox' /></div></td>\n" . 
-			 '	    <td class="' . $RowStyle . '" align="right" valign="top"><div align="center">' . "<input name='update_products[$orders_products_id][qty]' size='2' value='" . $order->products[$i]['qty'] . "' onKeyUp=\"updatePrices('qty', 'p" . $orders_products_id . "', '" . $order->products[$i]['tax_description'] . "')\" id='p" . $orders_products_id . "-qty' /></div></td>\n" . 
- 		     '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][name]' size='35' value='" . $order->products[$i]['name'] . "'>";
-		
-		// Has Attributes? 
-		if (sizeof($order->products[$i]['attributes']) > 0) {
-			for ($j=0; $j<sizeof($order->products[$i]['attributes']); $j++) {
-				$orders_products_attributes_id = $order->products[$i]['attributes'][$j]['orders_products_attributes_id'];
-				echo '<br /><nobr><small>&nbsp;<i> - ' . "<input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][option]' size='6' value='" . $order->products[$i]['attributes'][$j]['option'] . "'>" . ': ' . "<input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][value]' size='10' value='" . $order->products[$i]['attributes'][$j]['value'] . "'>" . ': ' . "</i><input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][prefix]' size='1' id='p" . $orders_products_id . "_" . $orders_products_attributes_id . "_prefix' value='" . $order->products[$i]['attributes'][$j]['prefix'] . "' onKeyUp=\"updatePrices('att_price', 'p" . $orders_products_id . "', '" . $order->products[$i]['tax_description'] . "', '" . $orders_products_attributes_id . "')\">" . ': ' . "<input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][price]' size='7' value='" . $order->products[$i]['attributes'][$j]['price'] . "' onKeyUp=\"updatePrices('att_price', 'p" . $orders_products_id . "', '" . $order->products[$i]['tax_description'] . "', '" . $orders_products_attributes_id . "')\" id='p". $orders_products_id . "a" . $orders_products_attributes_id . "'>";
-				echo '</small></nobr>';
-			}
-		}
-		
-		echo '	    </td>' . "\n" .
-		     '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][model]' size='12' value='" . $order->products[$i]['model'] . "'>" . '</td>' . "\n" .
-		     '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "' onKeyUp=\"updatePrices('tax', 'p" . $orders_products_id . "', '" . $order->products[$i]['tax_description'] . "')\" id='p" . $orders_products_id . "-tax' />" . 
-			 "<input type='hidden' name='update_products[$orders_products_id][tax_description]' value='".$order->products[$i]['tax_description']."'>" . 
-			 "<input type='hidden' name='" . $order->products[$i]['tax_description'] . 'p' . $orders_products_id . "' id='" . $order->products[$i]['tax_description'] . 'p' . $orders_products_id . "' value='" . number_format(($order->products[$i]['tax'] * $order->products[$i]['final_price'] / 100 * $order->products[$i]['qty']), 4, '.', '') . "'>" . 
-			 '</td>' . "\n" .
-		     '	    <td class="' . $RowStyle . '" align="right" valign="top">' . "<input name='update_products[$orders_products_id][price]' size='7' value='" . number_format($order->products[$i]['price'], 4, '.', '') . "' onKeyUp=\"updatePrices('price', 'p" . $orders_products_id . "', '" . $order->products[$i]['tax_description'] . "')\" id='p" . $orders_products_id . "-price' />" . '</td>' . "\n" .
-			 '	    <td class="' . $RowStyle . '" align="right" valign="top">' . "<input name='update_products[$orders_products_id][final_price]' size='7' value='" . number_format($order->products[$i]['final_price'], 4, '.', '') . "' onKeyUp=\"updatePrices('final_price', 'p" . $orders_products_id . "', '" . $order->products[$i]['tax_description'] . "')\" id='p" . $orders_products_id . "-final_price' />" . '</td>' . "\n" . 
-		     '	    <td class="' . $RowStyle . '" align="right" valign="top">' . "<input name='update_products[$orders_products_id][price_incl]' size='7' value='" . number_format(($order->products[$i]['final_price'] * (($order->products[$i]['tax']/100) + 1)), 4, '.', '') . "' onKeyUp=\"updatePrices('price_incl', 'p" . $orders_products_id . "', '" . $order->products[$i]['tax_description'] . "')\" id='p" . $orders_products_id . "-price_incl' />" . '</td>' . "\n" . 
-		     '	    <td class="' . $RowStyle . '" align="right" valign="top">' . "<input name='update_products[$orders_products_id][total_excl]' size='7' value='" . number_format($order->products[$i]['final_price'] * $order->products[$i]['qty'], 4, '.', '') . "' onKeyUp=\"updatePrices('total_excl', 'p" . $orders_products_id . "', '" . $order->products[$i]['tax_description'] . "')\" id='p" . $orders_products_id . "-total_excl' />" . '</td>' . "\n" . 
-		     '	    <td class="' . $RowStyle . '" align="right" valign="top">' . "<input name='update_products[$orders_products_id][total_incl]' size='7' value='" . number_format((($order->products[$i]['final_price'] * (($order->products[$i]['tax']/100) + 1))) * $order->products[$i]['qty'], 4, '.', '') . "' onKeyUp=\"updatePrices('total_incl', 'p" . $orders_products_id . "', '" . $order->products[$i]['tax_description'] . "')\" id='p" . $orders_products_id . "-total_incl' />" . '</td>' . "\n" .
-			 '	    <td class="' . $RowStyle . '" align="right" valign="top">'  . 
-		"<input name='update_products[$orders_products_id][total_weight]' size='6' value='" . number_format(($order->products[$i]['weight'] * $order->products[$i]['qty']), 2, '.', '') . "' id='p" . $orders_products_id . "-total_weight' readonly='readonly'>" . "<input type='hidden' name='update_products[$orders_products_id][weight]' value='" . $order->products[$i]['weight'] . "' id='p" . $orders_products_id . "-weight'>"  . '</td>' . "\n" .
-			 '	  </tr>' . "\n" .
-			 '     <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>' . "\n";
-	}
-?>
-</table> 
         </td>
-      <tr>
-	      <td>
-		<table width="100%" cellpadding="0" cellspacing="0">
-					  <tr>
-  <td align="right"><?php echo '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=add_product&step=1') . '">' . tep_image_button('button_add_article.gif', ADDING_TITLE) . '</a>'; ?></td>
-						</tr>
-					</table>
-			  </td>
-      </tr>
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-			
-	<!-- End Products Listings Block -->
+                  </tr>
 
-	<!-- Begin Update Block -->
-      <tr>
-	      <td>
-          <table width="100%" border="0" cellpadding="2" cellspacing="1">
-            <tr>
-              <td class="update1"><?php echo HINT_PRESS_UPDATE; ?></td>
-              <td class="update2" width="10">&nbsp;</td>
-              <td class="update3" width="10">&nbsp;</td>
-              <td class="update4" width="10">&nbsp;</td>
-              <td class="update5" width="120" align="center"><?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?></td>
-	          </tr>
-          </table>
-				</td>
-      </tr>
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>   
-	<!-- End of Update Block -->
+                  <?php if (ORDER_EDITOR_USE_AJAX != 'true') { ?>
+          <tr class="dataTableRow"> 
+                    <td valign="middle" class="dataTableContent"><input type="checkbox" name="shipping_same_as_billing"> <?php echo TEXT_SHIPPING_SAME_AS_BILLING; ?></td>
+                  </tr>
+          <?php } ?>
 
-	<!-- Begin Order Total Block -->
-      <tr>
-	      <td class="SubTitle"><?php echo MENUE_TITLE_TOTAL; ?> <a href="#" onMouseOver="return overlib('<?php echo HINT_TOTALS; ?>', BELOW, RIGHT);" onMouseOut="return nd();" ><img src="images/icon_info.gif" border= "0" width="13" height="13" /></a></td>
-			</tr>
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
-      </tr>   
-      <tr>
-	      <td>
-	<table border="0" cellspacing="0" cellpadding="2" class="dataTableRow">
-      <tr class="dataTableHeadingRow">
-	  <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_TOTAL_MODULE; ?></td>
-	  <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS_WEIGHT; ?></td>
-	  <td class="dataTableHeadingContent"width="1"><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
-	  </tr>
-	  <tr>
-	  <td class="smallText" align="right"><b><?php echo TABLE_HEADING_TOTAL_WEIGHT; ?></b></td>
-	  <td class="smallText" align="right"><?php  echo '<input name="total_order_weight" id="total_order_weight" size="10" value="' . number_format($total_weight, 2, '.', '') . '" readonly="readonly" />'; ?></td>
-	  <td></td>
-	   </tr>
-	<tr class="dataTableHeadingRow">
-	  <td class="dataTableHeadingContent"></td>
-	  <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_TAX; ?></td>
-	  <td class="dataTableHeadingContent"width="1"><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
-	  </tr>
-	  <tr>
-	  <td class="smallText" align="right"><b><?php echo TABLE_HEADING_SHIPPING_TAX; ?></b></td>
-	  <td class="smallText" align="right"><input name="update_shipping_tax" size="10" onKeyUp="getTotals('shipping', '<?php 
-	$countryid = tep_get_country_id($order->delivery["country"]);
-	$zoneid = tep_get_zone_id($countryid, $order->delivery["state"]);
-	$default_tax_name  = tep_get_tax_description($default_tax_class, $countryid, $zoneid);
-	//default tax class is set at the top of the file
-	echo $default_tax_name; ?>')" value="<?php echo tep_display_tax_value($order->info['shipping_tax']); ?>" id="shipping_tax-<?php echo $default_tax_name; ?>" /></td>
-	  <td></td>
-	   </tr>
-		<tr class="dataTableHeadingRow">
-	  <td class="dataTableHeadingContent"></td>
-	  <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_TOTAL_AMOUNT; ?></td>
-	  <td class="dataTableHeadingContent"width="1"><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
-	</tr>
-<?php
-// START OF MAKING ALL INPUT FIELDS THE SAME LENGTH 
-	$max_length = 0;
-	$TotalsLengthArray = array();
-	for ($i=0; $i<sizeof($order->totals); $i++) {
-		$TotalsLengthArray[] = array("Name" => $order->totals[$i]['title']);
-	}
-	reset($TotalsLengthArray);
-	foreach($TotalsLengthArray as $TotalIndex => $TotalDetails) {
-		if (strlen($TotalDetails["Name"]) > $max_length) {
-			$max_length = strlen($TotalDetails["Name"]);
-		}
-	}
-// END OF MAKING ALL INPUT FIELDS THE SAME LENGTH
+                </table>
+                </td>
+              </tr>
+              <tr id="shippingAddressEntry">
+                <td class="dataTableContent">
+                <table width="100%" cellspacing="0" cellpadding="2">
+                  <tr class="dataTableRow"> 
+                    <td colspan="4" style="border-top: 1px solid #C9C9C9;"><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
+                  </tr>
+                  <tr class="dataTableRow"> 
+                    <td class="dataTableContent" valign="middle" align="right"><?php echo ENTRY_NAME; ?></td>
+                    <td colspan="3" valign="top" class="dataTableContent"><input name="update_delivery_name" size="37" value="<?php echo stripslashes($order->delivery['name']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('delivery_name', encodeURIComponent(this.value))"<?php } ?>></td>
+                  </tr>
+                  <tr class="dataTableRow"> 
+                    <td class="dataTableContent" valign="middle" align="right"><?php echo ENTRY_COMPANY; ?></td>
+                    <td colspan="3" valign="top" class="dataTableContent"><input name="update_delivery_company" size="37" value="<?php echo stripslashes($order->delivery['company']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('delivery_company', encodeURIComponent(this.value))"<?php } ?>></td>
+                  </tr>
+                  <tr class="dataTableRow"> 
+                    <td class="dataTableContent" valign="middle" align="right"><?php echo ENTRY_STREET_ADDRESS; ?></td>
+                    <td colspan="3" valign="top" class="dataTableContent"><input name="update_delivery_street_address" size="37" value="<?php echo stripslashes($order->delivery['street_address']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('delivery_street_address', encodeURIComponent(this.value))"<?php } ?>></td>
+                  </tr>
+                  <tr class="dataTableRow"> 
+                    <td class="dataTableContent" valign="middle" align="right"><?php echo ENTRY_SUBURB; ?></td>
+                    <td colspan="3" valign="top" class="dataTableContent"><input name="update_delivery_suburb" size="37" value="<?php echo stripslashes($order->delivery['suburb']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('delivery_suburb', encodeURIComponent(this.value))"<?php } ?>></td>
+                  </tr>
+                  <tr class="dataTableRow">
+                    <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_CITY_STATE; ?></td>
+                    <td colspan="2" valign="top" class="dataTableContent" nowrap><input name="update_delivery_city" size="15" value="<?php echo stripslashes($order->delivery['city']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('delivery_city', encodeURIComponent(this.value))"<?php } ?>>,</td>
+                    <td valign="top" class="dataTableContent"><span id="deliveryStateMenu">
+          <?php if (ORDER_EDITOR_USE_AJAX == 'true') { 
+        echo tep_draw_pull_down_menu('update_delivery_zone_id', tep_get_country_zones($order->delivery['country_id']), $order->delivery['zone_id'], 'style="width: 200px;" onChange="updateShippingZone(\'delivery_state\', this.options[this.selectedIndex].text);"'); 
+          } else {
+          echo tep_draw_pull_down_menu('update_delivery_zone_id', tep_get_country_zones($order->delivery['country_id']), $order->delivery['zone_id'], 'style="width: 200px;"'); 
+          } ?>
+          </span><span id="deliveryStateInput"><input name="update_delivery_state" size="15" value="<?php echo stripslashes($order->delivery['state']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateShippingZone('delivery_state', encodeURIComponent(this.value))"<?php } ?>></span></td>
+                  </tr>
+                  <tr class="dataTableRow"> 
+                    <td class="dataTableContent" valign="middle" align="right"><?php echo ENTRY_POST_CODE; ?></td>
+                    <td class="dataTableContent" valign="top"><input name="update_delivery_postcode" size="5" value="<?php echo $order->delivery['postcode']; ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateShippingZone('delivery_postcode', encodeURIComponent(this.value))"<?php } ?>></td>
+                    <td class="dataTableContent" valign="middle" align="right"><?php echo ENTRY_COUNTRY; ?></td>
+                    <td class="dataTableContent" valign="top">
+          <?php if (ORDER_EDITOR_USE_AJAX == 'true') {
+          echo tep_draw_pull_down_menu('update_delivery_country_id', tep_get_countries(), $order->delivery['country_id'], 'style="width: 200px;" onchange="update_zone(\'update_delivery_country_id\', \'update_delivery_zone_id\', \'deliveryStateInput\', \'deliveryStateMenu\'); updateShippingZone(\'delivery_country\', this.options[this.selectedIndex].text);"'); 
+          } else {
+          echo tep_draw_pull_down_menu('update_delivery_country_id', tep_get_countries(), $order->delivery['country_id'], 'style="width: 200px;" onchange="update_zone(\'update_delivery_country_id\', \'update_delivery_zone_id\', \'deliveryStateInput\', \'deliveryStateMenu\');"'); 
+          }
+          ?></td>
+                  </tr> 
+                </table>
+                </td>
+              </tr>
+            </table>
+            <!-- shipping_address_eof //-->
+            </td>
+            <td valign="top" width="10">&nbsp;</td>
+            <td valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid #C9C9C9;">
+              <!-- billing_address bof //-->
+              <tr>
+                <td class="dataTableContent">
+                <table width="100%" cellspacing="0" cellpadding="2">
+                  <tr class="dataTableHeadingRow"> 
+                    <td colspan="4" class="dataTableHeadingContent" valign="top"><?php echo ENTRY_BILLING_ADDRESS; ?></td>
+                  </tr>
 
-	$TotalsArray = array();
-		for ($i=0; $i<sizeof($order->totals); $i++) {
-		$TotalsArray[] = array(
-		"Name" => $order->totals[$i]['title'], 
-		"Price" => number_format($order->totals[$i]['value'], 2, '.', ''), 
-		"Class" => $order->totals[$i]['class'], 
-		"TotalID" => $order->totals[$i]['orders_total_id']);
-		
-		$TotalsArray[] = array(
-		"Name" => "", 
-		"Price" => "", 
-		"Class" => "ot_custom", 
-		"TotalID" => "0");
-	}
-	
-	array_pop($TotalsArray);
-	foreach($TotalsArray as $TotalIndex => $TotalDetails)
-	{
-		$TotalStyle = "smallText";
-		
-		if ($TotalDetails["Class"] == "ot_total" || $TotalDetails["Class"] == "ot_subtotal") {
-			$id = $TotalDetails["Class"];//subtotal and total should each only exist once
-			
-			} elseif ($TotalDetails["Class"] == "ot_tax") {
-			$id = preg_replace("/:$/", "", $TotalDetails["Name"]) . '-total';
-			
-			} elseif ($TotalDetails["Class"] == "ot_shipping") {
-			$id = $default_tax_name . $TotalDetails["Class"] . $TotalIndex;
-			
-			} else {
-			$id = $TotalDetails["Class"] . $TotalIndex;
-			}
-			
-		if(//tax, subtotal, and total are not editable, but have all the same format
-		$TotalDetails["Class"] == "ot_total" || 
-		$TotalDetails["Class"] == "ot_subtotal" || 
-		$TotalDetails["Class"] == "ot_tax")
-		{
-					
-			echo '	<tr>' . "\n" .
-				   '		<td align="right" class="' . $TotalStyle . '"><b>' . $TotalDetails["Name"] . '</b></td>' .
-				   '		<td align="right" class="' . $TotalStyle . '">' . 
-				            "<input name='" . $TotalDetails["Name"] . "' size='10' value='" . $TotalDetails["Price"] . "' id='" . $id . "' readonly='readonly' />" . 
-						    "<input name='update_totals[$TotalIndex][title]' type='hidden' value='" . trim($TotalDetails["Name"]) . "'>" . 
-						    "<input name='update_totals[$TotalIndex][value]' type='hidden' value='" . $TotalDetails["Price"] . "'>" . 
-						    "<input name='update_totals[$TotalIndex][class]' type='hidden' value='" . $TotalDetails["Class"] . "'>\n" . 
-						    "<input type='hidden' name='update_totals[$TotalIndex][total_id]' value='" . $TotalDetails["TotalID"] . "'>" . '</td>' . 
-				   '		<td align="right" class="' . $TotalStyle . '"><b>' . tep_draw_separator('pixel_trans.gif', '1', '17') . '</b>' . 
-				   '	</tr>' . "\n";
-		}
-		else //the other total components are editable
-		{
-			echo '	<tr>' . "\n" .
-				   '		<td align="right" class="' . $TotalStyle . '">' . "<input name='update_totals[$TotalIndex][title]' size='" . $max_length . "' value='" . tep_html_quotes($TotalDetails["Name"]) . "'>" . '</td>' . "\n" .
-				   '		<td align="right" class="' . $TotalStyle . '">' . "<input name='update_totals[$TotalIndex][value]' size='10' value='" . $TotalDetails["Price"] . "' id='" . $id . "' onKeyUp=\"getTotals('shipping', '" . $default_tax_name . "')\">" . 
-						    "<input type='hidden' name='update_totals[$TotalIndex][class]' value='" . $TotalDetails["Class"] . "'>" . 
-						    "<input type='hidden' name='update_totals[$TotalIndex][total_id]' value='" . $TotalDetails["TotalID"] . "'>" . 
-				   '		<td align="right" class="' . $TotalStyle . '"><b>' . tep_draw_separator('pixel_trans.gif', '1', '17') . '</b>' . 
-					 '   </td>' . "\n" .
-				   '	</tr>' . "\n";
-		}
-	}
-	
-		?>
-</table>
+          <?php if (ORDER_EDITOR_USE_AJAX != 'true') { ?>
+                  <tr class="dataTableRow"> 
+                    <td colspan="4" valign="middle" class="dataTableContent"><input type="checkbox" name="billing_same_as_customer"> <?php echo TEXT_BILLING_SAME_AS_CUSTOMER; ?></td>
+                  </tr>
+          <?php } ?>
 
-	      </td>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-	<!-- End Order Total Block -->
-	
-	<!-- Begin Status Block -->
-      <tr>
-	      <td class="SubTitle"><?php echo MENUE_TITLE_STATUS; ?></td>
-			</tr>
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
-      </tr> 
-      <tr>
-        <td class="main">
-				  
-<table border="0" cellspacing="0" cellpadding="2" class="dataTableRow">
-  <tr class="dataTableHeadingRow">
-    <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_DATE_ADDED; ?></td>
-    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>
-    <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_CUSTOMER_NOTIFIED; ?></td>
-    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>
-    <td class="dataTableHeadingContent" align="left"><?php echo HEADING_TITLE_STATUS; ?></td>
-   <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>
-    <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_COMMENTS; ?></td>
-   </tr>
-<?php
-$orders_history_query = tep_db_query("select * from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . tep_db_input($oID) . "' order by date_added");
-if (tep_db_num_rows($orders_history_query)) {
-  while ($orders_history = tep_db_fetch_array($orders_history_query)) {
-    echo '  <tr>' . "\n" .
-         '    <td class="smallText" align="center">' . tep_datetime_short($orders_history['date_added']) . '</td>' . "\n" .
-         '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .
-         '    <td class="smallText" align="center">';
-    if ($orders_history['customer_notified'] == '1') {
-      echo tep_image(DIR_WS_ICONS . 'tick.gif', ICON_TICK) . "</td>\n";
-    } else {
-      echo tep_image(DIR_WS_ICONS . 'cross.gif', ICON_CROSS) . "</td>\n";
-    }
-    echo '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .
-         '    <td class="smallText" align="left">' . $orders_status_array[$orders_history['orders_status_id']] . '</td>' . "\n";
-   echo '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .
-           '    <td class="smallText" align="left">' . nl2br(tep_db_output($orders_history['comments'])) . '&nbsp;</td>' . "\n";
-  echo '  </tr>' . "\n";
-  }
-} else {
-  echo '  <tr>' . "\n" .
-       '    <td class="smallText" colspan="5">' . TEXT_NO_ORDER_HISTORY . '</td>' . "\n" .
-       '  </tr>' . "\n";
-}
+                </table>
+                </td>
+              </tr>
+              <tr id="billingAddressEntry">
+                <td class="dataTableContent">
+                <table width="100%" cellspacing="0" cellpadding="2"> 
+                  <tr class="dataTableRow">
+                    <td colspan="4" style="border-top: 1px solid #C9C9C9;"><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
+                  </tr>
+                  <tr class="dataTableRow"> 
+                    <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_NAME; ?></td>
+                    <td colspan="3" valign="top" class="dataTableContent"><input name="update_billing_name" size="37" value="<?php echo stripslashes($order->billing['name']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('billing_name', encodeURIComponent(this.value))"<?php } ?>></td>
+                  </tr>
+                  <tr class="dataTableRow"> 
+                    <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_COMPANY; ?></td>
+                    <td colspan="3" valign="top" class="dataTableContent"><input name="update_billing_company" size="37" value="<?php echo stripslashes($order->billing['company']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('billing_company', encodeURIComponent(this.value))"<?php } ?>></td>
+                  </tr>
+                  <tr class="dataTableRow"> 
+                    <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_STREET_ADDRESS; ?></td>
+                    <td colspan="3" valign="top" class="dataTableContent"><input name="update_billing_street_address" size="37" value="<?php echo stripslashes($order->billing['street_address']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('billing_street_address', encodeURIComponent(this.value))"<?php } ?>></td>
+                  </tr>
+                  <tr class="dataTableRow"> 
+                    <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_SUBURB; ?></td>
+                    <td colspan="3" valign="top" class="dataTableContent"><input name="update_billing_suburb" size="37" value="<?php echo stripslashes($order->billing['suburb']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('billing_suburb', encodeURIComponent(this.value))"<?php } ?>></td>
+                  </tr>
+                  <tr class="dataTableRow"> 
+                    <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_CITY_STATE; ?></td>
+                    <td colspan="2" valign="top" class="dataTableContent" nowrap><input name="update_billing_city" size="15" value="<?php echo stripslashes($order->billing['city']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('billing_city', encodeURIComponent(this.value))"<?php } ?>>,</td>
+                    <td valign="top" class="dataTableContent"><span id="billingStateMenu">
+          <?php if (ORDER_EDITOR_USE_AJAX == 'true') {
+          echo tep_draw_pull_down_menu('update_billing_zone_id', tep_get_country_zones($order->billing['country_id']), $order->billing['zone_id'], 'style="width: 200px;" onChange="updateOrdersField(\'billing_state\', this.options[this.selectedIndex].text);"'); 
+          } else {
+          echo tep_draw_pull_down_menu('update_billing_zone_id', tep_get_country_zones($order->billing['country_id']), $order->billing['zone_id'], 'style="width: 200px;"');
+          } ?>
+          </span><span id="billingStateInput"><input name="update_billing_state" size="15" value="<?php echo stripslashes($order->billing['state']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('billing_state', encodeURIComponent(this.value))"<?php } ?>></span></td>
+                  </tr>
+                  <tr class="dataTableRow"> 
+                    <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_POST_CODE; ?></td>
+                    <td class="dataTableContent" valign="top"><input name="update_billing_postcode" size="5" value="<?php echo $order->billing['postcode']; ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('billing_postcode', encodeURIComponent(this.value))"<?php } ?>></td>
+                    <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_COUNTRY; ?></td>
+                    <td class="dataTableContent" valign="top">
+          <?php if (ORDER_EDITOR_USE_AJAX == 'true') {
+          echo tep_draw_pull_down_menu('update_billing_country_id', tep_get_countries(), $order->billing['country_id'], 'style="width: 200px;" onchange="update_zone(\'update_billing_country_id\', \'update_billing_zone_id\', \'billingStateInput\', \'billingStateMenu\'); updateOrdersField(\'billing_country\', this.options[this.selectedIndex].text);"'); 
+          } else {
+          echo tep_draw_pull_down_menu('update_billing_country_id', tep_get_countries(), $order->billing['country_id'], 'style="width: 200px;" onchange="update_zone(\'update_billing_country_id\', \'update_billing_zone_id\', \'billingStateInput\', \'billingStateMenu\'); updateOrdersField(\'billing_country\', this.options[this.selectedIndex].text);"'); 
+          } ?></td>
+                  </tr>
+                </table>
+                </td>
+              </tr>
+              <!-- billing_address_eof //-->
+              <!-- payment_method bof //-->
+              <tr>
+                <td class="dataTableContent">
+ 
+      <table cellspacing="0" cellpadding="2" width="100%">
+        <tr class="dataTableHeadingRow"> 
+          <td colspan="2" class="dataTableHeadingContent" valign="bottom" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_UPDATE_TO_CC); ?>')" onMouseout="hideddrivetip()"><?php echo ENTRY_PAYMENT_METHOD; ?>
+
+          <script language="JavaScript" type="text/javascript">
+                   <!--
+                    document.write("<img src=\"images/icon_info.gif\" border= \"0\" width=\"13\" height=\"13\">");
+                 //-->
+                  </script>
+
+      </td>
+
+         <td></td>
+           <td class="dataTableHeadingContent" valign="bottom" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_UPDATE_CURRENCY); ?>')" onMouseout="hideddrivetip()"><?php echo ENTRY_CURRENCY_TYPE; ?> 
+
+            <script language="JavaScript" type="text/javascript">
+                   <!--
+                    document.write("<img src=\"images/icon_info.gif\" border= \"0\" width=\"13\" height=\"13\">");
+                 //-->
+                  </script>
+
+             </td>
+           <td></td>
+           <td class="dataTableHeadingContent"><?php echo ENTRY_CURRENCY_VALUE; ?></td>
+         </tr>
+
+       <tr class="dataTableRow"> 
+         <td colspan="2" class="main">
+         <?php 
+          //START for payment dropdown menu use this by quick_fixer
+            if (ORDER_EDITOR_PAYMENT_DROPDOWN == 'true') { 
+
+        // Get list of all payment modules available
+            $enabled_payment = array();
+            $module_directory = DIR_FS_CATALOG_MODULES . 'payment/';
+            $file_extension = substr($PHP_SELF, strrpos($PHP_SELF, '.'));
+
+             if ($dir = @dir($module_directory)) {
+              while ($file = $dir->read()) {
+               if (!is_dir( $module_directory . $file)) {
+                if (substr($file, strrpos($file, '.')) == $file_extension) {
+                   $directory_array[] = $file;
+                 }
+               }
+             }
+            sort($directory_array);
+            $dir->close();
+           }
+
+          // For each available payment module, check if enabled
+          for ($i=0, $n=sizeof($directory_array); $i<$n; $i++) {
+          $file = $directory_array[$i];
+
+          include(DIR_FS_CATALOG_LANGUAGES . $language . '/modules/payment/' . $file);
+          include($module_directory . $file);
+
+          $class = substr($file, 0, strrpos($file, '.'));
+          if (tep_class_exists($class)) {
+             $module = new $class;
+             if ($module->check() > 0) {
+              // If module enabled create array of titles
+               $enabled_payment[] = array('id' => $module->title, 'text' => $module->title);
+
+          //if the payment method is the same as the payment module title then don't add it to dropdown menu
+          if ($module->title == $order->info['payment_method']) {
+            $paymentMatchExists='true';
+             }
+              }
+            }
+          }
+     //just in case the payment method found in db is not the same as the payment module title then make it part of the dropdown array or else it cannot be the selected default value
+      if ($paymentMatchExists !='true') {
+      $enabled_payment[] = array('id' => $order->info['payment_method'], 'text' => $order->info['payment_method']);
+           }
+            $enabled_payment[] = array('id' => 'Other', 'text' => 'Other');
+        //draw the dropdown menu for payment methods and default to the order value
+          if (ORDER_EDITOR_USE_AJAX == 'true') {
+        echo tep_draw_pull_down_menu('update_info_payment_method', $enabled_payment, $order->info['payment_method'], 'id="update_info_payment_method" style="width: 150px;" onChange="init(); updateOrdersField(\'payment_method\', this.options[this.selectedIndex].text)"'); 
+        } else {
+        echo tep_draw_pull_down_menu('update_info_payment_method', $enabled_payment, $order->info['payment_method'], 'id="update_info_payment_method" style="width: 150px;" onChange="init();"'); 
+        }
+        }  else { //draw the input field for payment methods and default to the order value  ?>
+
+       <input name="update_info_payment_method" size="35" value="<?php echo $order->info['payment_method']; ?>" id="update_info_payment_method" onChange="init();<?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?> updateOrdersField('payment_method', encodeURIComponent(this.value));<?php } ?>">
+ 
+       <?php } //END for payment dropdown menu use this by quick_fixer ?>
+ 
+       </td>
+
+         <td width="20">
+         </td>
+
+          <td>
+       <?php
+           ///get the currency info
+              reset($currencies->currencies);
+              $currencies_array = array();
+                while (list($key, $value) = each($currencies->currencies)) {
+                      $currencies_array[] = array('id' => $key, 'text' => $value['title']);
+                 }
+
+               echo tep_draw_pull_down_menu('update_info_payment_currency', $currencies_array, $order->info['currency'], 'id="update_info_payment_currency" onChange="currency(this.value)"'); 
+
 ?>
-</table>
+          </td>
 
-			  </td>
+         <td width="10">
+         </td>
+
+       <td>
+      <input name="update_info_payment_currency_value" size="15" readonly="readonly" id="update_info_payment_currency_value" value="<?php echo $order->info['currency_value']; ?>">
+     </td>
+      </tr>
+
+                  <!-- credit_card bof //-->
+    <tr class="dataTableRow"> 
+      <td colspan="6">
+
+    <table id="optional"><!--  -->
+   <tr>
+      <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+    </tr>
+    <tr>
+      <td class="main"><?php echo ENTRY_CREDIT_CARD_TYPE; ?></td>
+  <td class="main"><input name="update_info_cc_type" size="32" value="<?php echo $order->info['cc_type']; ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('cc_type', encodeURIComponent(this.value))"<?php } ?>></td>
+    </tr>
+    <tr>
+      <td class="main"><?php echo ENTRY_CREDIT_CARD_OWNER; ?></td>
+      <td class="main"><input name="update_info_cc_owner" size="32" value="<?php echo $order->info['cc_owner']; ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('cc_owner', encodeURIComponent(this.value))<?php } ?>"></td>
+    </tr>
+    <tr>
+      <td class="main"><?php echo ENTRY_CREDIT_CARD_NUMBER; ?></td>
+      <td class="main"><input name="update_info_cc_number" size="32" value="<?php echo $order->info['cc_number']; ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('cc_number', encodeURIComponent(this.value))"<?php } ?>></td>
+    </tr>
+    <tr>
+      <td class="main"><?php echo ENTRY_CREDIT_CARD_EXPIRES; ?></td>
+      <td class="main"><input name="update_info_cc_expires" size="4" value="<?php echo $order->info['cc_expires']; ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('cc_expires', encodeURIComponent(this.value))"<?php } ?>></td>
+    </tr>
+  </table>
+
+   </td>
+  </tr>
+ </table>
+
+        </td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+
+  <div id="productsMessageStack">
+    <?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?>
+    </div>
+
+
+  <div width="100%" style="border: 1px solid #C9C9C9;"> 
+    <a name="products"></a>
+    <!-- product_listing bof //-->
+ 
+    <table border="0" width="100%" cellspacing="0" cellpadding="2" id="productsTable">
+      <tr class="dataTableHeadingRow">
+      <td class="dataTableHeadingContent"><div align="center"><?php echo TABLE_HEADING_DELETE; ?></div></td>
+      <td class="dataTableHeadingContent"><div align="center"><?php echo TABLE_HEADING_QUANTITY; ?></div></td>
+      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
+      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS_MODEL; ?></td>
+      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_TAX; ?></td>
+      <td class="dataTableHeadingContent" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_BASE_PRICE); ?>')"; onMouseout="hideddrivetip()"><?php  echo TABLE_HEADING_BASE_PRICE; ?> <script language="JavaScript" type="text/javascript">
+      <!--
+      document.write("<img src=\"images/icon_info.gif\" border= \"0\" width=\"13\" height=\"13\">");
+      //-->
+      </script></td>
+      <td class="dataTableHeadingContent" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_PRICE_EXCL); ?>')"; onMouseout="hideddrivetip()"><?php  echo TABLE_HEADING_UNIT_PRICE; ?> <script language="JavaScript" type="text/javascript">
+      <!--
+      document.write("<img src=\"images/icon_info.gif\" border= \"0\" width=\"13\" height=\"13\">");
+      //-->
+      </script></td>
+      <td class="dataTableHeadingContent" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_PRICE_INCL); ?>')"; onMouseout="hideddrivetip()"><?php  echo TABLE_HEADING_UNIT_PRICE_TAXED; ?> <script language="JavaScript" type="text/javascript">
+      <!--
+      document.write("<img src=\"images/icon_info.gif\" border= \"0\" width=\"13\" height=\"13\">");
+      //-->
+      </script></td>
+      <td class="dataTableHeadingContent" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_TOTAL_EXCL); ?>')"; onMouseout="hideddrivetip()"><?php  echo TABLE_HEADING_TOTAL_PRICE; ?> <script language="JavaScript" type="text/javascript">
+      <!--
+      document.write("<img src=\"images/icon_info.gif\" border= \"0\" width=\"13\" height=\"13\">");
+      //-->
+      </script></td>
+      <td class="dataTableHeadingContent" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_TOTAL_INCL); ?>')"; onMouseout="hideddrivetip()"><?php  echo TABLE_HEADING_TOTAL_PRICE_TAXED; ?> <script language="JavaScript" type="text/javascript">
+      <!--
+      document.write("<img src=\"images/icon_info.gif\" border= \"0\" width=\"13\" height=\"13\">");
+      //-->
+      </script></td>
+    </tr>
+<?php
+  if (sizeof($order->products)) {
+    for ($i=0; $i<sizeof($order->products); $i++) {
+      $orders_products_id = $order->products[$i]['orders_products_id'];  ?>
+ 
+    <tr class="dataTableRow">
+
+      <td class="dataTableContent" valign="top"><div align="center"><input type="checkbox" name="<?php echo "update_products[" . $orders_products_id . "][delete]"; ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onClick="updateProductsField('delete', '<?php echo $orders_products_id; ?>', 'delete', this.checked, this)"<?php } ?>></div></td>
+      <td class="dataTableContent" valign="top"><div align="center"><input name="<?php echo "update_products[" . $orders_products_id . "][qty]"; ?>" size="2" onKeyUp="updatePrices('qty', '<?php echo $orders_products_id; ?>')" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateProductsField('reload1', '<?php echo $orders_products_id; ?>', 'products_quantity', encodeURIComponent(this.value))"<?php } ?> value="<?php echo $order->products[$i]['qty']; ?>" id="<?php echo "update_products[" . $orders_products_id . "][qty]"; ?>"></div></td>
+      <td class="dataTableContent" valign="top"><input name="<?php echo "update_products[" . $orders_products_id . "][name]"; ?>" size="50" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateProductsField('update', '<?php echo $orders_products_id; ?>', 'products_name', encodeURIComponent(this.value))"<?php } ?> value='<?php echo oe_html_quotes($order->products[$i]['name']); ?>'>
+
+  <?php
+      // Has Attributes?
+      if (isset($order->products[$i]['attributes']) && (sizeof($order->products[$i]['attributes']) > 0)) {
+        for ($j=0; $j<sizeof($order->products[$i]['attributes']); $j++) {
+          $orders_products_attributes_id = $order->products[$i]['attributes'][$j]['orders_products_attributes_id'];
+        if (ORDER_EDITOR_USE_AJAX == 'true') {
+          echo '<br><nobr><small>&nbsp;<i> - ' . "<input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][option]' size='6' value='" . oe_html_quotes($order->products[$i]['attributes'][$j]['option']) . "' onChange=\"updateAttributesField('simple', 'products_options', '" . $orders_products_attributes_id . "', '" . $orders_products_id . "', encodeURIComponent(this.value))\">" . ': ' . "<input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][value]' size='10' value='" . oe_html_quotes($order->products[$i]['attributes'][$j]['value']) . "' onChange=\"updateAttributesField('simple', 'products_options_values', '" . $orders_products_attributes_id . "', '" . $orders_products_id . "', encodeURIComponent(this.value))\">" . ': ' . "</i><input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][prefix]' size='1' id='p" . $orders_products_id . "_" . $orders_products_attributes_id . "_prefix' value='" . $order->products[$i]['attributes'][$j]['prefix'] . "' onKeyUp=\"updatePrices('att_price', '" . $orders_products_id . "')\" onChange=\"updateAttributesField('hard', 'price_prefix', '" . $orders_products_attributes_id . "', '" . $orders_products_id . "', encodeURIComponent(this.value))\">" . ': ' . "<input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][price]' size='7' value='" . $order->products[$i]['attributes'][$j]['price'] . "' onKeyUp=\"updatePrices('att_price', '" . $orders_products_id . "')\" onChange=\"updateAttributesField('hard', 'options_values_price', '" . $orders_products_attributes_id . "', '" . $orders_products_id . "', encodeURIComponent(this.value))\" id='p". $orders_products_id . "a" . $orders_products_attributes_id . "'>";
+        } else {
+          echo '<br><nobr><small>&nbsp;<i> - ' . "<input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][option]' size='6' value='" . oe_html_quotes($order->products[$i]['attributes'][$j]['option']) . "'>" . ': ' . "<input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][value]' size='10' value='" . oe_html_quotes($order->products[$i]['attributes'][$j]['value']) . "'>" . ': ' . "</i><input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][prefix]' size='1' id='p" . $orders_products_id . "_" . $orders_products_attributes_id . "_prefix' value='" . $order->products[$i]['attributes'][$j]['prefix'] . "' onKeyUp=\"updatePrices('att_price', '" . $orders_products_id . "')\">" . ': ' . "<input name='update_products[$orders_products_id][attributes][$orders_products_attributes_id][price]' size='7' value='" . $order->products[$i]['attributes'][$j]['price'] . "' onKeyUp=\"updatePrices('att_price', '" . $orders_products_id . "')\" id='p". $orders_products_id . "a" . $orders_products_attributes_id . "'>";
+        }
+        echo '</small></nobr>';
+      }  //end for ($j=0; $j<sizeof($order->products[$i]['attributes']); $j++) {
+
+      //Has downloads?
+
+    if (DOWNLOAD_ENABLED == 'true') {
+      $downloads_count = 1;
+      $d_index = 0;
+      $download_query_raw ="SELECT orders_products_download_id, orders_products_filename, download_maxdays, download_count
+                           FROM " . TABLE_ORDERS_PRODUCTS_DOWNLOAD . " 
+                           WHERE orders_products_id='" . $orders_products_id . "'
+                           AND orders_id='" . (int)$oID . "'
+                           ORDER BY orders_products_download_id";
+
+      $download_query = tep_db_query($download_query_raw);
+
+      //
+      if (isset($downloads->products)) unset($downloads->products);
+      //
+
+      if (tep_db_num_rows($download_query) > 0) {
+        while ($download = tep_db_fetch_array($download_query)) {
+
+          $downloads->products[$d_index] = array(
+                    'id' => $download['orders_products_download_id'],
+                    'filename' => $download['orders_products_filename'],
+                    'maxdays' => $download['download_maxdays'],
+                    'maxcount' => $download['download_count']);
+
+          $d_index++; 
+        } 
+      }
+
+      if (isset($downloads->products) && (sizeof($downloads->products) > 0)) {
+        for ($mm=0; $mm<sizeof($downloads->products); $mm++) {
+          $id =  $downloads->products[$mm]['id'];
+          echo '<br><small>';
+          echo '<nobr>' . ENTRY_DOWNLOAD_COUNT . $downloads_count . "";
+          echo ' </nobr><br>' . "\n";
+
+          if (ORDER_EDITOR_USE_AJAX == 'true') {
+            echo '<nobr>&nbsp;- ' . ENTRY_DOWNLOAD_FILENAME . ": <input name='update_downloads[" . $id . "][filename]' size='12' value='" . $downloads->products[$mm]['filename'] . "' onChange=\"updateDownloads('orders_products_filename', '" . $id . "', '" . $orders_products_id . "', this.value)\">";
+            echo ' </nobr><br>' . "\n";
+            echo '<nobr>&nbsp;- ' . ENTRY_DOWNLOAD_MAXDAYS . ": <input name='update_downloads[" . $id . "][maxdays]' size='6' value='" . $downloads->products[$mm]['maxdays'] . "' onChange=\"updateDownloads('download_maxdays', '" . $id . "', '" . $orders_products_id . "', this.value)\">";
+            echo ' </nobr><br>' . "\n";
+            echo '<nobr>&nbsp;- ' . ENTRY_DOWNLOAD_MAXCOUNT . ": <input name='update_downloads[" . $id . "][maxcount]' size='6' value='" . $downloads->products[$mm]['maxcount'] . "' onChange=\"updateDownloads('download_count', '" . $id . "', '" . $orders_products_id . "', this.value)\">";
+          } else {
+            echo '<nobr>&nbsp;- ' . ENTRY_DOWNLOAD_FILENAME . ": <input name='update_downloads[" . $id . "][filename]' size='12' value='" . $downloads->products[$mm]['filename'] . "'>";
+            echo ' </nobr><br>' . "\n";
+            echo '<nobr>&nbsp;- ' . ENTRY_DOWNLOAD_MAXDAYS . ": <input name='update_downloads[" . $id . "][maxdays]' size='6' value='" . $downloads->products[$mm]['maxdays'] . "'>";
+            echo ' </nobr><br>' . "\n";
+            echo '<nobr>&nbsp;- ' . ENTRY_DOWNLOAD_MAXCOUNT . ": <input name='update_downloads[" . $id . "][maxcount]' size='6' value='" . $downloads->products[$mm]['maxcount'] . "'>";
+          }
+
+          echo ' </nobr>' . "\n";
+          echo '<br></small>';
+          $downloads_count++;
+        } //end  for ($mm=0; $mm<sizeof($download_query); $mm++) {
+      }
+    } //end download
+  } //end if (sizeof($order->products[$i]['attributes']) > 0) {
+?>
+        </td>
+        <td class="dataTableContent" valign="top"><input name="<?php echo "update_products[" . $orders_products_id . "][model]"; ?>" size="12" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateProductsField('update', '<?php echo $orders_products_id; ?>', 'products_model', encodeURIComponent(this.value))"<?php } ?> value="<?php echo $order->products[$i]['model']; ?>"></td>
+        <td class="dataTableContent" valign="top"><input name="<?php echo "update_products[" . $orders_products_id . "][tax]"; ?>" size="5" onKeyUp="updatePrices('tax', '<?php echo $orders_products_id; ?>')" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateProductsField('reload1', '<?php echo $orders_products_id; ?>', 'products_tax', encodeURIComponent(this.value))"<?php } ?> value="<?php echo tep_display_tax_value($order->products[$i]['tax']); ?>" id="<?php echo "update_products[" . $orders_products_id . "][tax]"; ?>">%</td>
+        <td class="dataTableContent" valign="top"><input name="<?php echo "update_products[" . $orders_products_id . "][price]"; ?>" size="5" onKeyUp="updatePrices('price', '<?php echo $orders_products_id; ?>')" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateProductsField('reload2', '<?php echo $orders_products_id; ?>')"<?php } ?> value="<?php echo number_format($order->products[$i]['price'], 4, '.', ''); ?>" id="<?php echo "update_products[" . $orders_products_id . "][price]"; ?>"></td>
+        <td class="dataTableContent" valign="top"><input name="<?php echo "update_products[" . $orders_products_id . "][final_price]"; ?>" size="5" onKeyUp="updatePrices('final_price', '<?php echo $orders_products_id; ?>')" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateProductsField('reload2', '<?php echo $orders_products_id; ?>')"<?php } ?> value="<?php echo number_format($order->products[$i]['final_price'], 4, '.', ''); ?>" id="<?php echo "update_products[" . $orders_products_id . "][final_price]"; ?>"></td>
+        <td class="dataTableContent" valign="top"><input name="<?php echo "update_products[" . $orders_products_id . "][price_incl]"; ?>" size="5" value="<?php echo number_format(($order->products[$i]['final_price'] * (($order->products[$i]['tax']/100) + 1)), 4, '.', ''); ?>" onKeyUp="updatePrices('price_incl', '<?php echo $orders_products_id; ?>')" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateProductsField('reload2', '<?php echo $orders_products_id; ?>')"<?php } ?> id="<?php echo "update_products[" . $orders_products_id . "][price_incl]"; ?>"></td>
+        <td class="dataTableContent" valign="top"><input name="<?php echo "update_products[" . $orders_products_id . "][total_excl]"; ?>" size="5" value="<?php echo number_format($order->products[$i]['final_price'] * $order->products[$i]['qty'], 4, '.', ''); ?>" onKeyUp="updatePrices('total_excl', '<?php echo $orders_products_id; ?>')" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateProductsField('reload2', '<?php echo $orders_products_id; ?>')"<?php } ?> id="<?php echo "update_products[" . $orders_products_id . "][total_excl]"; ?>"></td>
+        <td class="dataTableContent" valign="top"><input name="<?php echo "update_products[" . $orders_products_id . "][total_incl]"; ?>" size="5" value="<?php echo number_format((($order->products[$i]['final_price'] * (($order->products[$i]['tax']/100) + 1))) * $order->products[$i]['qty'], 4, '.', ''); ?>" onKeyUp="updatePrices('total_incl', '<?php echo $orders_products_id; ?>')" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateProductsField('reload2', '<?php echo $orders_products_id; ?>')"<?php } ?> id="<?php echo "update_products[" . $orders_products_id . "][total_incl]"; ?>"></td>
+      </tr>
+ 
+<?php
+    }
+  } else {
+    //the order has no products
+?>
+      <tr class="dataTableRow">
+        <td colspan="10" class="dataTableContent" valign="middle" align="center" style="padding: 20px 0 20px 0;"><?php echo TEXT_NO_ORDER_PRODUCTS; ?></td>
+      </tr>
+      <tr class="dataTableRow"> 
+        <td colspan="10" style="border-bottom: 1px solid #C9C9C9;"><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
+      </tr>
+<?php
+  }
+?>
+    </table><!-- product_listing_eof //-->
+
+    <div id="totalsBlock">
+    <table width="100%">
+      <tr><td>
+ 
+      <table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top" width="100%">
+            <br>
+            <div>
+              <a href="<?php echo tep_href_link(FILENAME_ORDERS_EDIT_ADD_PRODUCT, 'oID=' . $_GET['oID'] . '&step=1'); ?>" target="addProducts" onClick="openWindow('<?php echo tep_href_link(FILENAME_ORDERS_EDIT_ADD_PRODUCT, 'oID=' . $_GET['oID'] . '&step=1'); ?>','addProducts');return false"><?php echo tep_image_button('button_add_article.gif', TEXT_ADD_NEW_PRODUCT); ?></a><input type="hidden" name="subaction" value="">
+            </div>
+            <br>
+          </td>
+ 
+<!-- order_totals bof //-->
+          <td align="right" rowspan="2" valign="top" nowrap class="dataTableRow" style="border: 1px solid #C9C9C9;">
+            <table border="0" cellspacing="0" cellpadding="2">
+              <tr class="dataTableHeadingRow">
+                <td class="dataTableHeadingContent" width="15" nowrap onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_TOTALS); ?>')"; onMouseout="hideddrivetip()"> <script language="JavaScript" type="text/javascript">
+                <!--
+                document.write("<img src=\"images/icon_info.gif\" border= \"0\" width=\"13\" height=\"13\">");
+                //-->
+                </script></td>
+                <td class="dataTableHeadingContent" nowrap><?php echo TABLE_HEADING_OT_TOTALS; ?></td>
+                <td class="dataTableHeadingContent" colspan="2" nowrap><?php echo TABLE_HEADING_OT_VALUES; ?></td>
+              </tr>
+<?php
+  for ($i=0; $i<sizeof($order->totals); $i++) {
+
+    $id = $order->totals[$i]['class'];
+
+    if ($order->totals[$i]['class'] == 'ot_shipping') {
+      if (tep_not_null($order->info['shipping_id'])) {
+        $shipping_module_id = $order->info['shipping_id'];
+      } else {
+        //here we could create logic to attempt to determine the shipping module used if it's not in the database
+        $shipping_module_id = '';
+      }
+    } else {
+      $shipping_module_id = '';
+    } //end if ($order->totals[$i]['class'] == 'ot_shipping') {
+ 
+    $rowStyle = (($i % 2) ? 'dataTableRowOver' : 'dataTableRow');
+    if ( ($order->totals[$i]['class'] == 'ot_total') || ($order->totals[$i]['class'] == 'ot_subtotal') || ($order->totals[$i]['class'] == 'ot_tax') || ($order->totals[$i]['class'] == 'ot_loworderfee') ) {
+      echo '                  <tr class="' . $rowStyle . '">' . "\n";
+      if ($order->totals[$i]['class'] != 'ot_total') {
+        echo '                    <td class="dataTableContent" valign="middle" height="15">
+    <script language="JavaScript" type="text/javascript">
+    <!--
+    document.write("<span id=\"update_totals['.$i.']\"><a href=\"javascript:setCustomOTVisibility(\'update_totals['.($i+1).']\', \'visible\', \'update_totals['.$i.']\');\"><img src=\"order_editor/images/plus.gif\" border=\"0\" alt=\"' . IMAGE_ADD_NEW_OT . '\" title=\"' . IMAGE_ADD_NEW_OT . '\"></a></span>");
+    //-->
+        </script></td>' . "\n";
+      } else {
+        echo '                    <td class="dataTableContent" valign="middle">&nbsp;</td>' . "\n";
+      }
+
+      echo '                    <td align="right" class="dataTableContent"><input name="update_totals['.$i.'][title]" value="' . trim($order->totals[$i]['title']) . '" readonly="readonly"></td>' . "\n";
+
+      if ($order->info['currency'] != DEFAULT_CURRENCY) echo '                    <td class="dataTableContent">&nbsp;</td>' . "\n";
+      echo '                    <td align="right" class="dataTableContent" nowrap>' . $order->totals[$i]['text'] . '<input name="update_totals['.$i.'][value]" type="hidden" value="' . number_format($order->totals[$i]['value'], 2, '.', '') . '"><input name="update_totals['.$i.'][class]" type="hidden" value="' . $order->totals[$i]['class'] . '"></td>' . "\n" .
+           '                  </tr>' . "\n";
+    } else {
+      if ($i % 2) {
+        echo '                        <script language="JavaScript" type="text/javascript">
+        <!--
+        document.write("<tr class=\"' . $rowStyle . '\" id=\"update_totals['.$i.']\" style=\"visibility: hidden; display: none;\"><td class=\"dataTableContent\" valign=\"middle\" height=\"15\"><a href=\"javascript:setCustomOTVisibility(\'update_totals['.($i).']\', \'hidden\', \'update_totals['.($i-1).']\');\"><img src=\"order_editor/images/minus.gif\" border=\"0\" alt=\"' . IMAGE_REMOVE_NEW_OT . '\" title=\"' . IMAGE_REMOVE_NEW_OT . '\"></a></td>");
+        //-->
+        </script>
+ 
+        <noscript><tr class="' . $rowStyle . '" id="update_totals['.$i.']" >' . "\n" .
+             '                    <td class="dataTableContent" valign="middle" height="15"></td></noscript>' . "\n";
+      } else {
+        echo '                  <tr class="' . $rowStyle . '">' . "\n" .
+             '                    <td class="dataTableContent" valign="middle" height="15">
+      <script language="JavaScript" type="text/javascript">
+      <!--
+      document.write("<span id=\"update_totals['.$i.']\"><a href=\"javascript:setCustomOTVisibility(\'update_totals['.($i+1).']\', \'visible\', \'update_totals['.$i.']\');\"><img src=\"order_editor/images/plus.gif\" border=\"0\" alt=\"' . IMAGE_ADD_NEW_OT . '\" title=\"' . IMAGE_ADD_NEW_OT . '\"></a></span>");
+      //-->
+      </script></td>' . "\n";
+      }
+
+      if (ORDER_EDITOR_USE_AJAX == 'true') {
+        echo '                    <td align="right" class="dataTableContent"><input name="update_totals['.$i.'][title]" id="'.$id.'[title]" value="' . trim($order->totals[$i]['title']) . '" onChange="obtainTotals()"></td>' . "\n" .
+             '                    <td align="right" class="dataTableContent"><input name="update_totals['.$i.'][value]" id="'.$id.'[value]" value="' . number_format($order->totals[$i]['value'], 2, '.', '') . '" size="6" onChange="obtainTotals()"><input name="update_totals['.$i.'][class]" type="hidden" value="' . $order->totals[$i]['class'] . '"><input name="update_totals['.$i.'][id]" type="hidden" value="' . $shipping_module_id . '" id="' . $id . '[id]"></td>' . "\n";
+      } else {
+        echo '                    <td align="right" class="dataTableContent"><input name="update_totals['.$i.'][title]" id="'.$id.'[title]" value="' . trim($order->totals[$i]['title']) . '"></td>' . "\n" .
+             '                    <td align="right" class="dataTableContent"><input name="update_totals['.$i.'][value]" id="'.$id.'[value]" value="' . number_format($order->totals[$i]['value'], 2, '.', '') . '" size="6"><input name="update_totals['.$i.'][class]" type="hidden" value="' . $order->totals[$i]['class'] . '"><input name="update_totals['.$i.'][id]" type="hidden" value="' . $shipping_module_id . '" id="' . $id . '[id]"></td>' . "\n";
+      }
+ 
+      if ($order->info['currency'] != DEFAULT_CURRENCY) echo '                    <td align="right" class="dataTableContent" nowrap>' . $order->totals[$i]['text'] . '</td>' . "\n";
+      echo '                  </tr>' . "\n";
+    }
+  }
+?>
+                </table>
+        </td>
+        <!-- order_totals_eof //-->
       </tr>
       <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
+        <td valign="bottom">
+
+<?php 
+  if (sizeof($shipping_quotes) > 0) {
+?>
+        <!-- shipping_quote bof //-->
+        <table width="550" cellspacing="0" cellpadding="2" style="border: 1px solid #C9C9C9;">
+          <tr class="dataTableHeadingRow">
+            <td class="dataTableHeadingContent" colspan="3"><?php echo TABLE_HEADING_SHIPPING_QUOTES; ?></td>
+          </tr>
+
+
+<?php
+    $r = 0;
+    for ($i=0, $n=sizeof($shipping_quotes); $i<$n; $i++) {
+      for ($j=0, $n2=sizeof($shipping_quotes[$i]['methods']); $j<$n2; $j++) {
+        $r++;
+    if (!isset($shipping_quotes[$i]['tax'])) $shipping_quotes[$i]['tax'] = 0;
+      $rowClass = ((($r/2) == (floor($r/2))) ? 'dataTableRowOver' : 'dataTableRow');
+      echo '                  <tr class="' . $rowClass . '" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this, \'' . $rowClass . '\')" onClick="selectRowEffect(this, ' . $r . '); setShipping(' . $r . ');">' .
+           '                    <td class="dataTableContent" valign="top" align="left">
+       <script language="JavaScript" type="text/javascript">
+        <!--
+        document.write("<input type=\"radio\" name=\"shipping\" id=\"shipping_radio_' . $r . '\" value=\"' . $shipping_quotes[$i]['id'] . '_' . $shipping_quotes[$i]['methods'][$j]['id'].'\">");
+        //-->
+       </script>
+       <input type="hidden" id="update_shipping[' . $r . '][title]" name="update_shipping[' . $r . '][title]" value="'.$shipping_quotes[$i]['module'] . ' (' . $shipping_quotes[$i]['methods'][$j]['title'].'):">' . "\n" .
+       '      <input type="hidden" id="update_shipping[' . $r . '][value]" name="update_shipping[' . $r . '][value]" value="'.tep_add_tax($shipping_quotes[$i]['methods'][$j]['cost'], $shipping_quotes[$i]['tax']).'">' . "\n" .
+       '      <input type="hidden" id="update_shipping[' . $r . '][id]" name="update_shipping[' . $r . '][id]" value="' . $shipping_quotes[$i]['id'] . '_' . $shipping_quotes[$i]['methods'][$j]['id'] . '">' . "\n" .
+       '      <td class="dataTableContent" valign="top">' . $shipping_quotes[$i]['module'] . ' (' . $shipping_quotes[$i]['methods'][$j]['title'] . '):</td>' . "\n" . 
+       '      <td class="dataTableContent" align="right">' . $currencies->format(tep_add_tax($shipping_quotes[$i]['methods'][$j]['cost'], $shipping_quotes[$i]['tax']), true, $order->info['currency'], $order->info['currency_value']) . '</td>' . "\n" . 
+       '                  </tr>';
+      }
+    }
+?>
+                  <tr class="dataTableHeadingRow">
+                    <td class="dataTableHeadingContent" colspan="3"><?php echo sprintf(TEXT_PACKAGE_WEIGHT_COUNT, $shipping_num_boxes . ' x ' . $shipping_weight, $total_count); ?></td>
+                  </tr>
+                </table>
+                <!-- shipping_quote_eof //-->
+<?php
+  } else {
+    echo AJAX_NO_QUOTES;
+  }
+?>                </td>
+              </tr> 
+            </table>
+
+      </td></tr>
+     </table> 
+    </div>
+    </div> <!-- this is end of the master div for the whole totals/shipping area -->
+
+  <?php if (ORDER_EDITOR_USE_AJAX != 'true') { ?> 
+    <!-- Begin Update Block, only for non-javascript browsers -->
+
+    <br>
+    <div class="updateBlock">
+      <div class="update1"><?php echo HINT_PRESS_UPDATE; ?></div>
+      <div class="update2">&nbsp;</div>
+      <div class="update3">&nbsp;</div>
+      <div class="update4" align="center"><?php echo ENTRY_SEND_NEW_ORDER_CONFIRMATION; ?>&nbsp;<?php echo tep_draw_checkbox_field('nC1', '', false); ?></div>
+      <div class="update5" align="center"><?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?></div>
+    </div>
+
+    <br>
+    <div><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></div>
+ 
+   <!-- End of Update Block -->
+	 <?php } ?>
+
+    <div id="historyMessageStack">
+      <?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?>
+    </div>
+
+    <div id="commentsBlock">
+    <table style="border: 1px solid #C9C9C9;" cellspacing="0" cellpadding="2" class="dataTableRow" id="commentsTable">
+       <tr class="dataTableHeadingRow">
+        <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_DELETE; ?></td>
+        <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>
+        <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_DATE_ADDED; ?></td>
+        <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>
+        <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_CUSTOMER_NOTIFIED; ?></td>
+        <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>
+        <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_STATUS; ?></td>
+        <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>
+        <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_COMMENTS; ?></td>
       </tr>
-      <tr>
-			  <td>	
-						
-<table border="0" cellspacing="0" cellpadding="2" class="dataTableRow">
+<?php
+    $orders_history_query = tep_db_query("SELECT orders_status_history_id, orders_status_id, date_added, customer_notified, comments 
+                                        FROM " . TABLE_ORDERS_STATUS_HISTORY . " 
+                                        WHERE orders_id = '" . (int)$oID . "' 
+                                        ORDER BY date_added");
+    if (tep_db_num_rows($orders_history_query)) {
+      while ($orders_history = tep_db_fetch_array($orders_history_query)) {
+
+      $r++;
+      $rowClass = ((($r/2) == (floor($r/2))) ? 'dataTableRowOver' : 'dataTableRow');
+
+      if (ORDER_EDITOR_USE_AJAX == 'true') { 
+        echo '  <tr class="' . $rowClass . '" id="commentRow' . $orders_history['orders_status_history_id'] . '" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this, \'' . $rowClass . '\')">' . "\n" .
+             '    <td class="smallText" align="center"><div id="do_not_delete"><input name="update_comments[' . $orders_history['orders_status_history_id'] . '][delete]" type="checkbox" onClick="updateCommentsField(\'delete\', \'' . $orders_history['orders_status_history_id'] . '\', this.checked, \'\', this)"></div></td>' . "\n" . 
+             '    <td class="dataTableHeadingContent" align="left" width="10"> </td>' . "\n" .
+             '    <td class="smallText" align="center">' . tep_datetime_short($orders_history['date_added']) . '</td>' . "\n" .
+             '    <td class="dataTableHeadingContent" align="left" width="10"> </td>' . "\n" .
+             '    <td class="smallText" align="center">';
+      } else {
+        echo '  <tr class="' . $rowClass . '" id="commentRow' . $orders_history['orders_status_history_id'] . '" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this, \'' . $rowClass . '\')">' . "\n" .
+             '    <td class="smallText" align="center"><div id="do_not_delete"><input name="update_comments[' . $orders_history['orders_status_history_id'] . '][delete]" type="checkbox"></div></td>' . "\n" . 
+             '    <td class="dataTableHeadingContent" align="left" width="10"> </td>' . "\n" .
+             '    <td class="smallText" align="center">' . tep_datetime_short($orders_history['date_added']) . '</td>' . "\n" .
+             '    <td class="dataTableHeadingContent" align="left" width="10"> </td>' . "\n" .
+             '    <td class="smallText" align="center">';
+      }
+
+      if ($orders_history['customer_notified'] == '1') {
+        echo tep_image(DIR_WS_ICONS . 'tick.gif', ICON_TICK) . "</td>\n";
+      } else {
+        echo tep_image(DIR_WS_ICONS . 'cross.gif', ICON_CROSS) . "</td>\n";
+      }
+ 
+      echo '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .
+           '    <td class="smallText" align="left">' . $orders_status_array[$orders_history['orders_status_id']] . '</td>' . "\n";
+      echo '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .
+           '    <td class="smallText" align="left">';
+
+      if (ORDER_EDITOR_USE_AJAX == 'true') { 
+        echo tep_draw_textarea_field("update_comments[" . $orders_history['orders_status_history_id'] . "][comments]", "soft", "40", "5", 
+              "" .  tep_db_output($orders_history['comments']) . "", "onChange=\"updateCommentsField('update', '" . $orders_history['orders_status_history_id'] . "', 'false', encodeURIComponent(this.value))\"") . '' . "\n" .
+            '    </td>' . "\n";
+      } else {
+        echo tep_draw_textarea_field("update_comments[" . $orders_history['orders_status_history_id'] . "][comments]", "soft", "40", "5", 
+             "" .  tep_db_output($orders_history['comments']) . "") . '' . "\n" .
+             '    </td>' . "\n";
+      }
+ 
+      echo '  </tr>' . "\n";
+
+    }
+  } else {
+    echo '  <tr>' . "\n" .
+         '    <td class="smallText" colspan="5">' . TEXT_NO_ORDER_HISTORY . '</td>' . "\n" .
+         '  </tr>' . "\n";
+  }
+
+?>
+  </table> 
+  </div>
+
+  <div>
+    <?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?>
+  </div>
+  <br>
+
+<table style="border: 1px solid #C9C9C9;" cellspacing="0" cellpadding="2" class="dataTableRow">
   <tr class="dataTableHeadingRow">
-    <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_STATUS; ?></td>
+    <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_NEW_STATUS; ?></td>
     <td class="main" width="10">&nbsp;</td>
     <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_COMMENTS; ?></td>
   </tr>
-	<tr>
-	  <td>
-		  <table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td>
+      <table border="0" cellspacing="0" cellpadding="2">
+
         <tr>
           <td class="main"><b><?php echo ENTRY_STATUS; ?></b></td>
-          <td class="main" align="right"><?php echo tep_draw_pull_down_menu('status', $orders_statuses, $order->info['orders_status']); ?></td>
+          <td class="main" align="right"><?php echo tep_draw_pull_down_menu('status', $orders_statuses, $order->info['orders_status'], 'id="status"'); ?></td>
         </tr>
         <tr>
           <td class="main"><b><?php echo ENTRY_NOTIFY_CUSTOMER; ?></b></td>
-          <td class="main" align="right"><?php echo tep_draw_checkbox_field('notify', '', false); ?></td>
+          <td class="main" align="right"><?php echo oe_draw_checkbox_field('notify', '', false, '', 'id="notify"'); ?></td>
         </tr>
         <tr>
           <td class="main"><b><?php echo ENTRY_NOTIFY_COMMENTS; ?></b></td>
-          <td class="main" align="right"><?php echo tep_draw_checkbox_field('notify_comments', '', false); ?></td>
+          <td class="main" align="right"><?php echo oe_draw_checkbox_field('notify_comments', '', false, '', 'id="notify_comments"'); ?></td>
         </tr>
      </table>
-	  </td>
+    </td>
     <td class="main" width="10">&nbsp;</td>
     <td class="main">
-    <?php echo tep_draw_textarea_field('comments', 'soft', '40', '5', ''); ?>
+    <?php echo tep_draw_textarea_field('comments', 'soft', '40', '5', '', 'id="comments"'); ?>
     </td>
   </tr>
-</table>
-			  </td>
-			</tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-	<!-- End of Status Block -->
-	
-	<!-- Begin Update Block -->
-	
-      <tr>
-	      <td class="SubTitle"><?php echo MENUE_TITLE_UPDATE; ?></td>
-			</tr>
-      <tr>
-	      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
-      </tr>   
-      <tr>
-	      <td>
-          <table width="100%" border="0" cellpadding="2" cellspacing="1">
-            <tr>
-              <td class="update1"><?php echo HINT_PRESS_UPDATE; ?></td>
-              <td class="update2" width="10">&nbsp;</td>
-              <td class="update3" width="10">&nbsp;</td>
-              <td class="update4" width="10">&nbsp;</td>
-              <td class="update5" width="120" align="center"><?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?></td>
-	          </tr>
-          </table>
-				</td>
-      </tr>
-	<!-- End of Update Block -->
-	
-      </form>
-			
-<?php
-}
-if($action == "add_product")
-{
-?>
-      <tr>
-        <td width="100%">
-				  <table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tr>
-		      <td class="pageHeading"><?php echo ADDING_TITLE; ?> (No. <?php echo $oID; ?>)</td>
-              <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
-              <td class="pageHeading" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS_EDIT, tep_get_all_get_params(array('action'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
-            </tr>
-          </table>
-				</td>
-      </tr>
 
-<?php
-	// ############################################################################
-	//   Get List of All Products
-	// ############################################################################
+<?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?> 
+  <script language="JavaScript" type="text/javascript">
+  <!--
+  document.write("<tr>");
+  document.write("<td colspan=\"3\" align=\"right\">");
+  document.write("<input type=\"button\" name=\"comments_button\" value=\"<?php echo oe_html_no_quote(AJAX_SUBMIT_COMMENT); ?>\" onClick=\"javascript:getNewComment();\">");
+  document.write("</td>");
+  document.write("</tr>");
+  //-->
+  </script>
+<?php } ?>
 
-		$result = tep_db_query("
-		SELECT products_name, p.products_id, categories_name, ptc.categories_id 
-		FROM " . TABLE_PRODUCTS . " p 
-		LEFT JOIN " . TABLE_PRODUCTS_DESCRIPTION . " pd 
-		ON pd.products_id=p.products_id 
-		LEFT JOIN " . TABLE_PRODUCTS_TO_CATEGORIES . " ptc 
-		ON ptc.products_id=p.products_id 
-		LEFT JOIN " . TABLE_CATEGORIES_DESCRIPTION . " cd 
-		ON cd.categories_id=ptc.categories_id 
-		WHERE pd.language_id = '" . (int)$languages_id . "' 
-		ORDER BY categories_name");
-		while($row = tep_db_fetch_array($result))
-		{
-			extract($row,EXTR_PREFIX_ALL,"db");
-			$ProductList[$db_categories_id][$db_products_id] = $db_products_name;
-			$CategoryList[$db_categories_id] = $db_categories_name;
-			$LastCategory = $db_categories_name;
-		}
-		
-	// ############################################################################
-	//   Add Products Steps
-	// ############################################################################
-	echo '<tr><td><table border="0">' . "\n";
-		
-		// Set Defaults
-			if(!isset($_POST['add_product_categories_id']))
-			$add_product_categories_id = 0;
+    </table>
 
-			if(!isset($_POST['add_product_products_id']))
-			$add_product_products_id = 0;
-			
-			// Step 1: Choose Category
-			echo '<tr class="dataTableRow">' . tep_draw_form('addProduct', FILENAME_ORDERS_EDIT,'oID=' . $_GET['oID'] . '&action=' . $_GET['action']) . "\n";
-			echo '<td class="dataTableContent" align="right"><b>' . ADDPRODUCT_TEXT_STEP . ' 1:</b></td>' .  "\n";
-			echo '<td class="dataTableContent" valign="top">';
-			if (isset($_POST['add_product_categories_id'])) {
-			$current_category_id = $_POST['add_product_categories_id'];
-			}
-			echo ' ' . tep_draw_pull_down_menu('add_product_categories_id', tep_get_category_tree(), $current_category_id, 'onChange="this.form.submit();"');
-			echo '<input type="hidden" name="step" value="2">' . "\n";
-			echo '</td>' . "\n";
-			echo '<td class="dataTableContent">' . ADDPRODUCT_TEXT_STEP1 . '</td>' . "\n";
-			echo '</form></tr>' . "\n";
-			echo '<tr><td colspan="3">&nbsp;</td></tr>' . "\n";
-		   
-		// Step 2: Choose Product
-           if(($_POST['step'] > 1) && ($_POST['add_product_categories_id'] > 0))
-		   {
-           echo '<tr class="dataTableRow">' . tep_draw_form('addProduct', FILENAME_ORDERS_EDIT,'oID=' . $_GET['oID'] . '&action=' . $_GET['action']) . "\n";
-           echo '<td class="dataTableContent" align="right"><b>' . ADDPRODUCT_TEXT_STEP . ' 2: </b></td>' . "\n";
-           echo '<td class="dataTableContent" valign="top"><select name="add_product_products_id" onChange="this.form.submit();">';
-           $ProductOptions = "<option value='0'>" . ADDPRODUCT_TEXT_SELECT_PRODUCT . "\n";
-           asort($ProductList[$_POST['add_product_categories_id']]);
-           foreach($ProductList[$_POST['add_product_categories_id']] as $ProductID => $ProductName)
-           {
-              $ProductOptions .= "<option value='$ProductID'> $ProductName\n";
-           }
-		   if(isset($_POST['add_product_products_id'])){
-         $ProductOptions = str_replace("value='" . $_POST['add_product_products_id'] . "'", "value='" . $_POST['add_product_products_id'] . "' selected=\"selected\"", $ProductOptions);
-           }
-		   echo ' ' . $ProductOptions .  ' ';
-           echo '</select></td>' . "\n";
-           echo '<input type="hidden" name="add_product_categories_id" value=' . $_POST['add_product_categories_id'] . '>';
-           echo '<input type="hidden" name="step" value="3">' . "\n";
-           echo '<td class="dataTableContent">' . ADDPRODUCT_TEXT_STEP2 . '</td>' . "\n";
-           echo '</form></tr>' . "\n";
-           echo '<tr><td colspan="3">&nbsp;</td></tr>' . "\n";
-           }
+    <div>
+    <?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?>
+    </div>
 
-		// Step 3: Choose Options
-		if(($_POST['step'] > 2) && ($_POST['add_product_products_id'] > 0))
-		
-		{
-			// Get Options for Products	
-           $products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . $_POST['add_product_products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");
-    $products_attributes = tep_db_fetch_array($products_attributes_query);
-    if ($products_attributes['total'] == 0) {
-				echo '<tr class="dataTableRow">' . "\n";
-				echo '<td class="dataTableContent" align="right"><b>' . ADDPRODUCT_TEXT_STEP . ' 3: </b></td>' . "\n";
-				echo '<td class="dataTableContent" valign="top" colspan="2"><i>' . ADDPRODUCT_TEXT_OPTIONS_NOTEXIST . '</i></td>' . "\n";
-				echo '</tr>' . "\n";
-				$_POST['step'] = 4;
-			}
-			else //product options exist
-			{
-			echo '<tr class="dataTableRow">' . tep_draw_form('addProduct', FILENAME_ORDERS_EDIT,'oID=' . $_GET['oID'] . '&action=' . $_GET['action']) . "\n";
-				echo '<td class="dataTableContent" align="right"><b>' . ADDPRODUCT_TEXT_STEP . ' 3: </b></td><td class="dataTableContent" valign="top">';
-				
-				$products_options_name_query = tep_db_query("select distinct popt.products_options_id, popt.products_options_name from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . $_POST['add_product_products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "' order by popt.products_options_name");
-      while ($products_options_name = tep_db_fetch_array($products_options_name_query)) {
-        $products_options_array = array();
-        $products_options_query = tep_db_query("select pov.products_options_values_id, pov.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov where pa.products_id = '" . $_POST['add_product_products_id'] . "' and pa.options_id = '" . (int)$products_options_name['products_options_id'] . "' and pa.options_values_id = pov.products_options_values_id and pov.language_id = '" . (int)$languages_id . "'");
-        while ($products_options = tep_db_fetch_array($products_options_query)) {
-          $products_options_array[] = array('id' => $products_options['products_options_values_id'], 'text' => $products_options['products_options_values_name']);
-          if ($products_options['options_values_price'] != '0') {
-            $products_options_array[sizeof($products_options_array)-1]['text'] .= ' (' . $products_options['price_prefix'] . $currencies->display_price($products_options['options_values_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) .') ';
-          }
+  <!-- End of Status Block -->
+
+  <?php if (ORDER_EDITOR_USE_AJAX != 'true') { ?> 
+<!-- Begin Update Block, only for non-javascript browsers -->
+    <div class="updateBlock">
+        <div class="update1"><?php echo HINT_PRESS_UPDATE; ?></div>
+        <div class="update2">&nbsp;</div>
+        <div class="update3">&nbsp;</div>
+        <div class="update4" align="center"><?php echo ENTRY_SEND_NEW_ORDER_CONFIRMATION; ?>&nbsp;<?php echo tep_draw_checkbox_field('nC1', '', false); ?></div>
+        <div class="update5" align="center"><?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?></div>
+    </div>
+
+    <br>
+    <div><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></div>
+
+  <!-- End of Update Block -->
+  <?php   }  //end if (ORDER_EDITOR_USE_AJAX != 'true') {
+          echo '</form>';
         }
-
-        if(isset($_POST['add_product_options'])) {
-          $selected_attribute = $_POST['add_product_options'][$products_options_name['products_options_id']];
-        } else {
-          $selected_attribute = false;
-        }
-			echo $products_options_name['products_options_name'] . ':' . "\n";
-			echo tep_draw_pull_down_menu('add_product_options[' . $products_options_name['products_options_id'] . ']', $products_options_array, $selected_attribute) . '<br />' . "\n";
-		}
-		
-				echo '</td>';
-				echo '<td class="dataTableContent" align="center"><input type="submit" value="' . ADDPRODUCT_TEXT_OPTIONS_CONFIRM . '">';
-				echo '<input type="hidden" name="add_product_categories_id" value=' . $_POST['add_product_categories_id']. '>';
-				echo '<input type="hidden" name="add_product_products_id" value=' . $_POST['add_product_products_id'] . '>';
-				echo '<input type="hidden" name="step" value="4">';
-				echo '</td>' . "\n";
-				echo '</form></tr>' . "\n";
-			}
-
-			echo '<tr><td colspan="3">&nbsp;</td></tr>' . "\n";
-		}
-
-		// Step 4: Confirm
-		if($_POST['step'] > 3)
-		
-		{
-		   	echo '<tr class="dataTableRow">' . tep_draw_form('addProduct', FILENAME_ORDERS_EDIT,'oID=' . $_GET['oID'] . '&action=' . $_GET['action']) . "\n";
-			echo '<td class="dataTableContent" align="right"><b>' . ADDPRODUCT_TEXT_STEP . ' 4: </b></td>';
-			echo '<td class="dataTableContent" valign="top"><input name="add_product_quantity" size="2" value="1"> ' . ADDPRODUCT_TEXT_CONFIRM_QUANTITY . '</td>';
-			echo '<td class="dataTableContent" align="center"><input type="submit" value="' . ADDPRODUCT_TEXT_CONFIRM_ADDNOW . '">';
-
-			if(is_array ($_POST['add_product_options']))
-			{
-				foreach($_POST['add_product_options'] as $option_id => $option_value_id)
-				{
-					echo '<input type="hidden" name="add_product_options[' . $option_id . ']" value="' . $option_value_id . '">';
-				}
-			}
-			echo '<input type="hidden" name="add_product_categories_id" value=' . $_POST['add_product_categories_id'] . '>';
-			echo '<input type="hidden" name="add_product_products_id" value=' . $_POST['add_product_products_id'] . '>';
-			echo '<input type="hidden" name="step" value="5">';
-			echo '</td>' . "\n";
-			echo '</form></tr>' . "\n";
-		}
-		
-		echo '</table></td></tr>' . "\n";
-}  
 ?>
-    </table></td>
 <!-- body_text_eof //-->
-  </tr></table>
+    </td>
+  </tr>
+  </table>
 <!-- body_eof //-->
+
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
-<br />
+<br>
 </body>
 </html>
-<?php require(DIR_WS_INCLUDES . 'application_bottom.php');
-?>
+<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

@@ -5,7 +5,7 @@ $Id: file_manager.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */
@@ -35,4 +35,5 @@ define('ERROR_FILE_NOT_WRITEABLE', 'Error: No puedo escribir en este fichero. As
 define('ERROR_DIRECTORY_NOT_REMOVEABLE', 'Error: No puedo eliminar el directorio. Asigne los permisos adecuados a: %s');
 define('ERROR_FILE_NOT_REMOVEABLE', 'Error: No puedo eliminar este fichero. Asigne los permisos adecuados a: %s');
 define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Error: No existe el directorio: %s');
+define('ERROR_FILENAME_EMPTY', 'Error: Please enter a filename to store the contents in.');
 ?>

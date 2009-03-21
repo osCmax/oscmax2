@@ -29,7 +29,7 @@
       </tr>
 <?php
   } else {
-    $article_info_query = tep_db_query("select a.articles_id, a.articles_date_added, a.articles_date_available, a.authors_id, ad.articles_name, ad.articles_description, ad.articles_url, au.authors_name from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_AUTHORS . " au where a.articles_status = '1' and a.articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and ad.articles_id = a.articles_id and a.authors_id = au.authors_id and ad.language_id = '" . (int)$languages_id . "'");
+    $article_info_query = tep_db_query("select a.articles_id, a.articles_date_added, a.articles_date_available, a.authors_id, ad.articles_name, ad.articles_description, ad.articles_url, au.authors_name from " . TABLE_ARTICLES . " a left join " . TABLE_AUTHORS . " au using(authors_id), " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_status = '1' and a.articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and ad.articles_id = a.articles_id and ad.language_id = '" . (int)$languages_id . "'");
     $article_info = tep_db_fetch_array($article_info_query);
 
     tep_db_query("update " . TABLE_ARTICLES_DESCRIPTION . " set articles_viewed = articles_viewed+1 where articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and language_id = '" . (int)$languages_id . "'");
@@ -42,7 +42,11 @@
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading" valign="bottom"><?php echo $articles_name; ?></td>
-            <td class="main" align="right" valign="bottom"><?php echo TEXT_BY . '<a href="' . tep_href_link(FILENAME_ARTICLES,'authors_id=' . $articles_author_id) . '">' . $articles_author . '</a>'; ?></td>
+             <td class="main" align="right" valign="bottom">
+             <?php
+             if (tep_not_null($articles_author) && DISPLAY_AUTHOR_ARTICLE_LISTING == 'true') echo TEXT_BY . '<a href="' . tep_href_link(FILENAME_ARTICLES,'authors_id=' . $articles_author_id) . '">' . $articles_author . '</a>';
+             ?>
+             </td>
           </tr>
         </table></td>
       </tr>
@@ -58,14 +62,15 @@
     if (tep_not_null($article_info['articles_url'])) {
 ?>
       <tr>
-        <td class="main"><?php echo sprintf(TEXT_MORE_INFORMATION, tep_href_link(FILENAME_REDIRECT, 'action=url&goto=' . urlencode($article_info['articles_url']), 'NONSSL', true, false)); ?></td>
+        <td class="main"><?php //echo sprintf(TEXT_MORE_INFORMATION, tep_href_link(FILENAME_REDIRECT, 'action=url&goto=' . urlencode($article_info['articles_url']), 'NONSSL', true, false)); 
+		echo sprintf(TEXT_MORE_INFORMATION, tep_href_link(FILENAME_REDIRECT, 'action=arturl&goto=' . urlencode($article_info['articles_url']), 'NONSSL', true, false)); ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
 <?php
     }
-
+if (DISPLAY_DATE_ADDED_ARTICLE_LISTING == 'true') {
     if ($article_info['articles_date_available'] > date('Y-m-d H:i:s')) {
 ?>
       <tr>
@@ -79,13 +84,14 @@
       </tr>
 <?php
     }
+}
 ?>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
 <?php
   if (ENABLE_ARTICLE_REVIEWS == 'true') {
-    $reviews_query = tep_db_query("select count(*) as count from " . TABLE_ARTICLE_REVIEWS . " where articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and approved = '1'");
+    $reviews_query = tep_db_query("SELECT COUNT(*) as count from " . TABLE_ARTICLE_REVIEWS . " where articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and approved = '1'");
     $reviews = tep_db_fetch_array($reviews_query);
 ?>
       <tr>

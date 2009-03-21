@@ -42,6 +42,8 @@ define('PRODUCTS_COLUMN_SIZE', '172');
 define('PRODUCT_LISTING_BKGD_COLOR',GREY);
 define('MODEL_COLUMN_SIZE', '37');
 define('PRICING_COLUMN_SIZES', '67');
+$vilains = array("&#224;", "&#225;",  "&#226;", "&#227;", "&#228;", "&#229;", "&#230;", "&#231;", "&#232;", "&#233;", "&#234;", "&#235;", "&#236;", "&#237;", "&#238;", "&#239;", "&#240;", "&#241;", "&#242;", "&#243;", "&#244;", "&#245;", "&#246;", "&#247;", "&#248;", "&#249;", "&#250;", "&#251;", "&#252;", "&#253;", "&#254;", "&#255;", "&#223;","&#39;", "&nbsp;", "&agrave;", "&aacute;", "&atilde;","&auml;", "&Arond;", "&egrave;", "&aelig;", "&ecirc;", "&euml;", "&igrave;", "&iacute;", "&Iacute;", "&icirc;", "&iuml;", "&ograve;", "&oacute;", "&ocirc;", "&otilde;", "&ouml;", "&oslash;", "&ugrave;", "&uacute;", "&ucirc;", "&uuml;", "&ntilde;", "&ccedil;", "&yacute;", "&lt;","&gt;", "&amp;");
+$cools = array('à','á','â','ã','ä','å','æ','ç','è','é','ê','ë','ì','í','î','ï','ð','ñ','ò','ó','ô','õ','ö','÷','ø','ù','ú','û','ü','ý','þ','ÿ','ß','\'', ' ','à','á','ã','ä','å','è','æ','ê','ë','ì','í','î','Î','ï','ò','ó','ô','õ','ö','ø','ù','ú','û','ü','ñ','ç','ý','<','>','&');
 
 $currencies = new currencies();
 //$pdf->setPreferences(array("HideToolbar" => 'false', "HideWindowUI" => 'false'));
@@ -64,8 +66,8 @@ $pdf->roundedRectangle(300,730,255,85,10,$f=0);
 //$pdf->rectangle(535,769,10,10);
 //$pdf->rectangle(535,790,10,10);
 //$pdf->addText(310,790,GENERAL_FONT_SIZE,'In Stock');
-$pdf->addText(310,769,GENERAL_FONT_SIZE,'Packed By ______________________');
-$pdf->addText(310,748,GENERAL_FONT_SIZE,'Verified By ______________________');
+$pdf->addText(310,769,GENERAL_FONT_SIZE, TEXT_PACKED_BY );
+$pdf->addText(310,748,GENERAL_FONT_SIZE, TEXT_VERIFIED_BY );
 
 
 // line between header order number and order date
@@ -75,7 +77,7 @@ $pdf->ezSetY($y);
 $dup_y = $y;
 
 // order number
-$y = $pdf->ezText("<b>" . TEXT_ORDER_NUMBER . " </b>" . $orders['orders_id'] ."\n\n",SUB_HEADING_FONT_SIZE);
+$y = $pdf->ezText("<b>" . TEXT_ORDER_NUMBER . " </b>" . $orders['orders_prefix'] . $orders['orders_id'] ."\n\n",SUB_HEADING_FONT_SIZE);
 
 // order date
 if ($HTTP_POST_VARS['show_order_date']) { 
@@ -150,9 +152,9 @@ $pos = $pdf->ezText("<b>" . ENTRY_EMAIL . "</b> " .$order->customer['email_addre
 // divider between email and payment method 
  $pos -= SECTION_DIVIDER;
  $pdf->ezSetY($pos);
- 
+
 // payment method  and type
-$pos = $pdf->ezText("<b>" . ENTRY_PAYMENT_METHOD . "</b> " . $order->info['payment_method'],GENERAL_FONT_SIZE);
+$pos = $pdf->ezText("<b>" . ENTRY_PAYMENT_METHOD . "</b> " . str_replace($vilains , $cools, $order->info['payment_method']),GENERAL_FONT_SIZE);
 // shipping method - I don't use this so this code is a guess for those that do
 //$pos = $pdf->ezText("<b>" . ENTRY_SHIPPING_METHOD . "</b> " . $order->info['shipping_method'],GENERAL_FONT_SIZE);
 

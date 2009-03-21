@@ -45,7 +45,7 @@ define('HTML_PARAMS','dir="LTR" lang="en"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0 RC3.0.3');
+define('TITLE', STORE_NAME);
 
 // header text in includes/header.php
 define('HEADER_TITLE_CREATE_ACCOUNT', 'Create an Account');
@@ -95,6 +95,12 @@ define('BOX_REVIEWS_TEXT_OF_5_STARS', '%s of 5 Stars!');
 // shopping_cart box text in includes/boxes/shopping_cart.php
 define('BOX_HEADING_SHOPPING_CART', 'Shopping Cart');
 define('BOX_SHOPPING_CART_EMPTY', '0 items');
+
+// BOF: MOD - Wishlist 3.5
+//wishlist box text in includes/boxes/wishlist.php 
+define('BOX_HEADING_CUSTOMER_WISHLIST', 'My Wishlist'); 
+define('TEXT_WISHLIST_COUNT', 'Currently %s items are on your Wish List.');
+// EOF: MOD - Wishlist 3.5
 
 // order_history box text in includes/boxes/order_history.php
 define('BOX_HEADING_CUSTOMER_ORDERS', 'Order History');
@@ -341,26 +347,8 @@ define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The expiry date entered for the credit 
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The credit card number entered is invalid.<br>Please check the number and try again.');
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first four digits of the number entered are: %s<br>If that number is correct, we do not accept that type of credit card.<br>If it is wrong, please try again.');
 
-/*
-  The following copyright announcement can only be
-  appropriately modified or removed if the layout of
-  the site theme has been modified to distinguish
-  itself from the default osCMax/osCDox-copyrighted
-  theme.
+define('FOOTER_TEXT_BODY', 'Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCMax</a><br>Powered by <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
 
-  For more information please go to the osCMax
-  support site:
-
-  http://oscdox.com/
-
-  Please leave this comment intact together with the
-  following copyright announcement.
-*/
-define('FOOTER_TEXT_BODY', 'Copyright &copy; 2005 <a href="http://oscdox.com">osCDox</a>, <a href="http://aabox.com">AABox Web Hosting</a><br>
-Powered by <a href="http://www.oscmax.com" target="_blank">osCMax v2.0</a>');
-
-// ADDED LINE: MOD - Gift and Voucher
-require(DIR_WS_LANGUAGES . 'add_ccgvdc_english.php');
 
 // BOF: MOD - Checkout Without Account
 define('IMAGE_BUTTON_CREATE_ACCOUNT', 'Create Account');
@@ -381,11 +369,11 @@ define('NAVBAR_TITLE_DEFAULT', 'Articles');
 
 // BOF: MOD - Login Box My Account
 define('BOX_HEADING_LOGIN_BOX', 'Sign in');
-define('BOX_LOGINBOX_EMAIL', '<center>E-mail address:</center>');
-define('BOX_LOGINBOX_PASSWORD', '<center>Password:<center>');
-define('BOX_LOGINBOX_TEXT_NEW', '<center>Create an Account<center>');
-define('BOX_LOGINBOX_NEW', '<center><u>create an account</u><center>');
-define('BOX_LOGINBOX_FORGOT_PASSWORD', '<center><u>(forgotten)</u></center><br>');
+define('BOX_LOGINBOX_EMAIL', 'E-mail address:');
+define('BOX_LOGINBOX_PASSWORD', 'Password:');
+define('BOX_LOGINBOX_TEXT_NEW', 'Create an Account');
+define('BOX_LOGINBOX_NEW', 'create an account');
+define('BOX_LOGINBOX_FORGOT_PASSWORD', 'Password forgotten');
 define('IMAGE_BUTTON_LOGIN', 'Login');
 define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','My account info');
 define('LOGIN_BOX_ACCOUNT_EDIT','Edit account info.');
@@ -397,15 +385,8 @@ define('LOGIN_BOX_LOGOFF','Log off');
 define('LOGIN_BOX_PRODUCTS_NEW','New Products');
 // EOF: MOD - Login Box My Account
 
-// BOF: MOD - Wish List 2.3 box text in includes/boxes/wishlist.php
-define('BOX_HEADING_CUSTOMER_WISHLIST', 'My Wishlist');
-define('BOX_WISHLIST_EMPTY', 'You have no items on your Wishlist');
-define('IMAGE_BUTTON_ADD_WISHLIST', 'Add to Wishlist');
-define('TEXT_WISHLIST_COUNT', 'Currently %s items are on your Wishlist.');
-define('TEXT_DISPLAY_NUMBER_OF_WISHLIST', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> items on your wishlist)');
-define('BOX_HEADING_CUSTOMER_WISHLIST_HELP', 'Wishlist Help');
-define('BOX_HEADING_SEND_WISHLIST', 'Send your Wishlist');
-define('BOX_TEXT_MOVE_TO_CART', 'Move to Cart');
-define('BOX_TEXT_DELETE', 'Delete');
-// EOF: MOD - Wish List 2.3 box text in includes/boxes/wishlist.php
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+define('FILENAME_STATS_CREDITS', 'stats_credits.php');
+require(DIR_WS_LANGUAGES . 'add_ccgvdc_english.php');
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 ?>

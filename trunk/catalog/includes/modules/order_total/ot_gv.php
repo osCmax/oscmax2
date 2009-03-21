@@ -236,7 +236,7 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
         case 'Standard':
         // Amended line, was giving an error when a zero value was arriving here. v5.13 by Rigadin
         //$ratio1 = tep_round($od_amount / $amount,2);
-        $ratio1= ($amout==0? 0 : tep_round($od_amount / $amount,2) );
+        $ratio1= ($amount==0? 0 : tep_round($od_amount / $amount,2) );
         $tod_amount = 0;
         reset($order->info['tax_groups']);
         while (list($key, $value) = each($order->info['tax_groups'])) {

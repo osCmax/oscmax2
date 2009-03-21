@@ -37,213 +37,19 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 // EOF: MOD - Ultimate SEO URLs - by Chemo
 
 ////
+////
+// Ultimate SEO URLs v2.1
 // The HTML href link wrapper function
   function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true) {
-    global $request_type, $session_started, $SID;
-
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-    $seo = ( defined('SEO_URLS') ? SEO_URLS : false );
-    $seo_rewrite_type = ( defined('SEO_URLS_TYPE') ? SEO_URLS_TYPE : false );
-    $seo_pages = array('index.php', 'product_info.php');
-    if ( !in_array($page, $seo_pages) ) $seo = false;
-// EOF: MOD - Ultimate SEO URLs - by Chemo
-
-    if (!tep_not_null($page)) {
-      die('</td></tr></table></td></tr></table><br><br><font color="#ff0000"><b>Error!</b></font><br><br><b>Unable to determine the page link!<br><br>');
-    }
-
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-    if ($page == '/') $page = '';
-// EOF: MOD - Ultimate SEO URLs - by Chemo
-
-    if ($connection == 'NONSSL') {
-      $link = HTTP_SERVER . DIR_WS_HTTP_CATALOG;
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-    $seo_link = HTTP_SERVER . DIR_WS_HTTP_CATALOG;
-    $seo_rewrite_link = HTTP_SERVER . DIR_WS_HTTP_CATALOG;
-// EOF: MOD - Ultimate SEO URLs - by Chemo
-    } elseif ($connection == 'SSL') {
-      if (ENABLE_SSL == true) {
-        $link = HTTPS_SERVER . DIR_WS_HTTPS_CATALOG;
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-        $seo_link = HTTPS_SERVER . DIR_WS_HTTPS_CATALOG;
-        $seo_rewrite_link = HTTPS_SERVER . DIR_WS_HTTPS_CATALOG;
-// EOF: MOD - Ultimate SEO URLs - by Chemo
-      } else {
-        $link = HTTP_SERVER . DIR_WS_HTTP_CATALOG;
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-        $seo_link = HTTP_SERVER . DIR_WS_HTTP_CATALOG;
-        $seo_rewrite_link = HTTP_SERVER . DIR_WS_HTTP_CATALOG;
-// EOF: MOD - Ultimate SEO URLs - by Chemo
-      }
-    } else {
-      die('</td></tr></table></td></tr></table><br><br><font color="#ff0000"><b>Error!</b></font><br><br><b>Unable to determine connection method on a link!<br><br>Known methods: NONSSL SSL</b><br><br>');
-    }
-
-    if (tep_not_null($parameters)) {
-      $link .= $page . '?' . tep_output_string($parameters);
-      $separator = '&';
-
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-# Start exploding the parameters to extract the values
-# Also, we could use parse_str($parameters) and would probably be more clean
-      if ($seo == 'true'){
-        $p = explode('&', $parameters);
-        krsort($p);
-        $params = array();
-
-        if ( $seo_rewrite_type == 'Rewrite' ){
-          foreach ($p as $index => $valuepair) {
-            $p2 = explode('=', $valuepair);
-            switch ($p2[0]){
-              case 'products_id':
-                $rewrite_product = true;
-                if ( defined('PRODUCT_NAME_'.$p2[1]) ){
-                  $rewrite_page_product = short_name(constant('PRODUCT_NAME_'.$p2[1])) . '-p-' . $p2[1] . '.html';
-                } else { $seo = false; }
-              break;
-
-              case 'cPath':
-                $rewrite_category = true;
-                if ( defined('CATEGORY_NAME_'.$p2[1]) ){
-                  $rewrite_page_category = short_name(constant('CATEGORY_NAME_'.$p2[1])) . '-c-' . $p2[1] . '.html';
-                } else { $seo = false; }
-              break;
-
-// manufacturer addition by WebPixie
-              case 'manufacturers_id':
-                $rewrite_manufacturer = true;
-                if ( defined('MANUFACTURER_NAME_'.$p2[1]) ){
-                  $rewrite_page_manufacturer = short_name(constant('MANUFACTURER_NAME_'.$p2[1])) . '-m-' . $p2[1] . '.html';
-                } else { $seo = false; }
-              break;
-// end manufacturer addition by WebPixie
-
-              default:
-                $params[$p2[0]] = $p2[1];
-              break;
-            } # switch
-          } # end foreach
-          $params_stripped = implode_assoc($params);
-          switch (true){
-            case ( $rewrite_product && $rewrite_category ):
-            case ( $rewrite_product ):
-              $rewrite_page = $rewrite_page_product;
-              $rewrite_category = false;
-            break;
-            case ( $rewrite_category ):
-              $rewrite_page = $rewrite_page_category;
-            break;
-// manufacturer addition by WebPixie
-            case ( $rewrite_manufacturer ):
-              $rewrite_page = $rewrite_page_manufacturer;
-            break;
-// end manufacturer addition by WebPixie
-            default:
-              $seo = false;
-            break;
-          } #end switch true
-        $seo_rewrite_link .= $rewrite_page . ( tep_not_null($params_stripped) ? '?'.tep_output_string($params_stripped) : '' );
-        $separator = ( tep_not_null($params_stripped) ? '&' : '?' );
-        } else {
-          foreach ($p as $index => $valuepair) {
-            $p2 = explode('=', $valuepair);
-            switch ($p2[0]){
-              case 'products_id':
-                if ( defined('PRODUCT_NAME_'.$p2[1]) ){
-                  $params['pName'] = constant('PRODUCT_NAME_'.$p2[1]);
-                } else { $seo = false; }
-              break;
-  
-              case 'cPath':
-                if ( defined('CATEGORY_NAME_'.$p2[1]) ){
-                  $params['cName'] = constant('CATEGORY_NAME_'.$p2[1]);
-                } else { $seo = false; }
-              break;
-  
-  // manufacturer addition by WebPixie
-              case 'manufacturers_id':
-                if ( defined('MANUFACTURER_NAME_'.$p2[1]) ){
-                  $params['mName'] = constant('MANUFACTURER_NAME_'.$p2[1]);
-                } else { $seo = false; }
-              break;
-  // end manufacturer addition by WebPixie
-  
-              default:
-                $params[$p2[0]] = $p2[1];
-              break;
-            } # switch
-          } # end foreach
-          $params_stripped = implode_assoc($params);
-          $seo_link .= $page . '?'.tep_output_string($params_stripped);
-          $separator = '&';
-        } # end if/else
-      } # end if $seo
-// EOF: MOD - Ultimate SEO URLs - by Chemo
-    } else {
-      $link .= $page;
-      $separator = '?';
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-//  }
-      $seo = false;
-    } # end if(tep_not_null($parameters)
-// EOF: MOD - Ultimate SEO URLs - by Chemo
-
-    while ( (substr($link, -1) == '&') || (substr($link, -1) == '?') ) $link = substr($link, 0, -1);
-
-// Add the session ID when moving from different HTTP and HTTPS servers, or when SID is defined
-    if ( ($add_session_id == true) && ($session_started == true) && (SESSION_FORCE_COOKIE_USE == 'False') ) {
-      if (tep_not_null($SID)) {
-        $_sid = $SID;
-      } elseif ( ( ($request_type == 'NONSSL') && ($connection == 'SSL') && (ENABLE_SSL == true) ) || ( ($request_type == 'SSL') && ($connection == 'NONSSL') ) ) {
-        if (HTTP_COOKIE_DOMAIN != HTTPS_COOKIE_DOMAIN) {
-          $_sid = tep_session_name() . '=' . tep_session_id();
-        }
-      }
-    }
-
-    if ( (SEARCH_ENGINE_FRIENDLY_URLS == 'true') && ($search_engine_safe == true) ) {
-      while (strstr($link, '&&')) $link = str_replace('&&', '&', $link);
-// LINE ADDED: MOD - Ultimate SEO URLs - by Chemo
-      while (strstr($seo_link, '&&')) $seo_link = str_replace('&&', '&', $seo_link);
-
-      $link = str_replace('?', '/', $link);
-      $link = str_replace('&', '/', $link);
-      $link = str_replace('=', '/', $link);
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-      $seo_link = str_replace('?', '/', $seo_link);
-      $seo_link = str_replace('&', '/', $seo_link);
-      $seo_link = str_replace('=', '/', $seo_link);
-      $seo_rewrite_link = str_replace('?', '/', $seo_rewrite_link);
-      $seo_rewrite_link = str_replace('&', '/', $seo_rewrite_link);
-      $seo_rewrite_link = str_replace('=', '/', $seo_rewrite_link);
-// EOF: MOD - Ultimate SEO URLs - by Chemo
-
-      $separator = '?';
-    }
-
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-//  if (isset($_sid)) {
-//    $link .= $separator . $_sid;
-//  }
-//    return $link;
-    if (!tep_session_is_registered('customer_id') && ENABLE_PAGE_CACHE == 'true' && class_exists('page_cache')) {
-      $link .= $separator . '<osCsid>';
-      $seo_link .= $separator . '<osCsid>';
-      $seo_rewrite_link .= $separator . '<osCsid>';
-    } elseif (isset($_sid)) {
-// LINES CHANGED: MS2 update 501112 - Added tep_output_string(...)
-      $link .= $separator . tep_output_string($_sid);
-      $seo_link .= $separator . tep_output_string($_sid);
-      $seo_rewrite_link .= $separator . tep_output_string($_sid);
-    }
-
-    if ($seo == 'true') {
-      return ($seo_rewrite_type == 'Rewrite' ? $seo_rewrite_link : $seo_link);
-    } else {
-      return $link;
-    }
-// EOF: MOD - Ultimate SEO URLs - by Chemo
+        global $seo_urls;                
+                if ( !is_object($seo_urls) ){
+                        if ( !class_exists('SEO_URL') ){
+                                include_once(DIR_WS_CLASSES . 'seo.class.php');
+                        }
+                        global $languages_id;
+                        $seo_urls = new SEO_URL($languages_id);
+                }
+        return $seo_urls->href_link($page, $parameters, $connection, $add_session_id);
   }
 
 ////
@@ -265,10 +71,10 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
       if ($image_size = @getimagesize($src)) {
         if (empty($width) && tep_not_null($height)) {
           $ratio = $height / $image_size[1];
-          $width = $image_size[0] * $ratio;
+          $width = intval($image_size[0] * $ratio);
         } elseif (tep_not_null($width) && empty($height)) {
           $ratio = $width / $image_size[0];
-          $height = $image_size[1] * $ratio;
+          $height = intval($image_size[1] * $ratio);
         } elseif (empty($width) && empty($height)) {
           $width = $image_size[0];
           $height = $image_size[1];
@@ -335,11 +141,19 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a form input field
   function tep_draw_input_field($name, $value = '', $parameters = '', $type = 'text', $reinsert_value = true) {
+    global $HTTP_GET_VARS, $HTTP_POST_VARS;
+
     $field = '<input type="' . tep_output_string($type) . '" name="' . tep_output_string($name) . '"';
 
-    if ( (isset($GLOBALS[$name])) && ($reinsert_value == true) ) {
-      $field .= ' value="' . tep_output_string(stripslashes($GLOBALS[$name])) . '"';
-    } elseif (tep_not_null($value)) {
+    if ( ($reinsert_value == true) && ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) ) {
+      if (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) {
+        $value = stripslashes($HTTP_GET_VARS[$name]);
+      } elseif (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) {
+        $value = stripslashes($HTTP_POST_VARS[$name]);
+      }
+    }
+
+    if (tep_not_null($value)) {
       $field .= ' value="' . tep_output_string($value) . '"';
     }
 
@@ -359,11 +173,13 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a selection field - alias function for tep_draw_checkbox_field() and tep_draw_radio_field()
   function tep_draw_selection_field($name, $type, $value = '', $checked = false, $parameters = '') {
+    global $HTTP_GET_VARS, $HTTP_POST_VARS;
+
     $selection = '<input type="' . tep_output_string($type) . '" name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($value)) $selection .= ' value="' . tep_output_string($value) . '"';
 
-    if ( ($checked == true) || ( isset($GLOBALS[$name]) && is_string($GLOBALS[$name]) && ( ($GLOBALS[$name] == 'on') || (isset($value) && (stripslashes($GLOBALS[$name]) == $value)) ) ) ) {
+    if ( ($checked == true) || (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name]) && (($HTTP_GET_VARS[$name] == 'on') || (stripslashes($HTTP_GET_VARS[$name]) == $value))) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name]) && (($HTTP_POST_VARS[$name] == 'on') || (stripslashes($HTTP_POST_VARS[$name]) == $value))) ) {
       $selection .= ' CHECKED';
     }
 
@@ -389,17 +205,21 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a form textarea field
   function tep_draw_textarea_field($name, $wrap, $width, $height, $text = '', $parameters = '', $reinsert_value = true) {
+    global $HTTP_GET_VARS, $HTTP_POST_VARS;
+
     $field = '<textarea name="' . tep_output_string($name) . '" wrap="' . tep_output_string($wrap) . '" cols="' . tep_output_string($width) . '" rows="' . tep_output_string($height) . '"';
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
     $field .= '>';
 
-    if ( (isset($GLOBALS[$name])) && ($reinsert_value == true) ) {
-// LINE CHANGED: MS2 update 501112 - Added: tep_output_string_protected(...)
-      $field .= tep_output_string_protected(stripslashes($GLOBALS[$name]));
+    if ( ($reinsert_value == true) && ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) ) {
+      if (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) {
+        $field .= tep_output_string_protected(stripslashes($HTTP_GET_VARS[$name]));
+      } elseif (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) {
+        $field .= tep_output_string_protected(stripslashes($HTTP_POST_VARS[$name]));
+      }
     } elseif (tep_not_null($text)) {
-// LINE CHANGED: MS2 update 501112 - Added: tep_output_string_protected(...)
       $field .= tep_output_string_protected($text);
     }
 
@@ -411,12 +231,18 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a form hidden field
   function tep_draw_hidden_field($name, $value = '', $parameters = '') {
+    global $HTTP_GET_VARS, $HTTP_POST_VARS;
+
     $field = '<input type="hidden" name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($value)) {
       $field .= ' value="' . tep_output_string($value) . '"';
-    } elseif (isset($GLOBALS[$name])) {
-      $field .= ' value="' . tep_output_string(stripslashes($GLOBALS[$name])) . '"';
+    } elseif ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) {
+      if ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) ) {
+        $field .= ' value="' . tep_output_string(stripslashes($HTTP_GET_VARS[$name])) . '"';
+      } elseif ( (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) {
+        $field .= ' value="' . tep_output_string(stripslashes($HTTP_POST_VARS[$name])) . '"';
+      }
     }
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
@@ -439,13 +265,21 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a form pull down menu
   function tep_draw_pull_down_menu($name, $values, $default = '', $parameters = '', $required = false) {
+    global $HTTP_GET_VARS, $HTTP_POST_VARS;
+
     $field = '<select name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
     $field .= '>';
 
-    if (empty($default) && isset($GLOBALS[$name])) $default = stripslashes($GLOBALS[$name]);
+    if (empty($default) && ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) ) {
+      if (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) {
+        $default = stripslashes($HTTP_GET_VARS[$name]);
+      } elseif (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) {
+        $default = stripslashes($HTTP_POST_VARS[$name]);
+      }
+    }
 
     for ($i=0, $n=sizeof($values); $i<$n; $i++) {
       $field .= '<option value="' . tep_output_string($values[$i]['id']) . '"';

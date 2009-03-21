@@ -30,7 +30,7 @@ $Id: stats_recover_cart_sales.php 3 2006-05-27 04:59:07Z user $
   Nov 12, 2004
 */
 
-define('HEADING_TITLE', 'Recover Cart Sales Report v1.4e');
+define('HEADING_TITLE', 'Recover Cart Sales Report v2.22');
 define('DAYS_FIELD_PREFIX', 'Zeige die letzen ');
 define('DAYS_FIELD_POSTFIX', ' Tage ');
 define('DAYS_FIELD_BUTTON', 'OK');

@@ -23,6 +23,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
 
 // define the database table names used in the contribution
   define('TABLE_AFFILIATE', 'affiliate_affiliate');
+  define('TABLE_AFFILIATE_NEWS', 'affiliate_news');
 // if you change this -> affiliate_show_banner must be changed too
   define('TABLE_AFFILIATE_BANNERS', 'affiliate_banners');
   define('TABLE_AFFILIATE_BANNERS_HISTORY', 'affiliate_banners_history');
@@ -42,6 +43,9 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_AFFILIATE_DETAILS', 'affiliate_details.php');
   define('FILENAME_AFFILIATE_DETAILS_OK', 'affiliate_details_ok.php');
   define('FILENAME_AFFILIATE_TERMS','affiliate_terms.php');
+  define('FILENAME_AFFILIATE_TERMS_POPUP','affiliate_terms_popup.php');
+  define('FILENAME_AFFILIATE_NEWS', 'affiliate_news.php');
+  define('FILENAME_AFFILIATE_NEWSLETTER', 'affiliate_newsletter.php');
 
   define('FILENAME_AFFILIATE_HELP_1', 'affiliate_help1.php');
   define('FILENAME_AFFILIATE_HELP_2', 'affiliate_help2.php');
@@ -51,12 +55,36 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_AFFILIATE_HELP_6', 'affiliate_help6.php');
   define('FILENAME_AFFILIATE_HELP_7', 'affiliate_help7.php');
   define('FILENAME_AFFILIATE_HELP_8', 'affiliate_help8.php');
+  define('FILENAME_AFFILIATE_HELP_9', 'affiliate_help9.php');
+  define('FILENAME_AFFILIATE_HELP_10', 'affiliate_help10.php');
+  define('FILENAME_AFFILIATE_HELP_11', 'affiliate_help11.php');
+  define('FILENAME_AFFILIATE_HELP_12', 'affiliate_help12.php');
+  define('FILENAME_AFFILIATE_HELP_13', 'affiliate_help13.php');
+  define('FILENAME_AFFILIATE_HELP_14', 'affiliate_help14.php');
+  define('FILENAME_AFFILIATE_HELP_15', 'affiliate_help15.php');
+  define('FILENAME_AFFILIATE_HELP_16', 'affiliate_help16.php');
+  define('FILENAME_AFFILIATE_HELP_17', 'affiliate_help17.php');
+  define('FILENAME_AFFILIATE_HELP_18', 'affiliate_help18.php');
+  define('FILENAME_AFFILIATE_HELP_19', 'affiliate_help19.php');
+  define('FILENAME_AFFILIATE_HELP_20', 'affiliate_help20.php');
+  define('FILENAME_AFFILIATE_HELP_21', 'affiliate_help21.php');
+  define('FILENAME_AFFILIATE_HELP_22', 'affiliate_help22.php');
+	define('FILENAME_AFFILIATE_BANNERS_CATEGORY', 'affiliate_banners_category.php');
+  define('FILENAME_AFFILIATE_BANNERS_BUILD_CAT', 'affiliate_banners_build_cat.php');
+  define('FILENAME_AFFILIATE_VALIDCATS', 'affiliate_validcats.php');
   define('FILENAME_AFFILIATE_INFO', 'affiliate_info.php');
-
+	define('TABLE_AFFILIATE_NEWS_CONTENTS', 'affiliate_news_contents');
   define('FILENAME_AFFILIATE_BANNERS', 'affiliate_banners.php');
+  define('FILENAME_AFFILIATE_BANNERS_BANNERS', 'affiliate_banners_banners.php');
+  define('FILENAME_AFFILIATE_BANNERS_BUILD', 'affiliate_banners_build.php');
+  define('FILENAME_AFFILIATE_BANNERS_PRODUCT', 'affiliate_banners_product.php');
+  define('FILENAME_AFFILIATE_BANNERS_TEXT', 'affiliate_banners_text.php');
   define('FILENAME_AFFILIATE_SHOW_BANNER', 'affiliate_show_banner.php');
+  define('FILENAME_AFFILIATE_REPORTS', 'affiliate_reports.php');
   define('FILENAME_AFFILIATE_CLICKS', 'affiliate_clicks.php');
+  define('FILENAME_AFFILIATE_VALIDPRODUCTS', 'affiliate_validproducts.php');
 
+  define('FILENAME_AFFILIATE_PASSWORD', 'affiliate_password.php');
   define('FILENAME_AFFILIATE_PASSWORD_FORGOTTEN', 'affiliate_password_forgotten.php');
 
   define('FILENAME_AFFILIATE_LOGOUT', 'affiliate_logout.php');

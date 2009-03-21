@@ -1,4 +1,14 @@
 <?php
+/*
+$Id: track_fedex.php 1 2009-01-20 04:59:07Z user $
+
+  osCMax Power E-Commerce
+  http://oscdox.com
+
+  Copyright 2008 osCMax
+
+  Released under the GNU General Public License
+*/
 
 	define('HEADING_TITLE','Shipment Tracking Information');
 	define('PACKAGE_IN_TRANSIT','This package is currently in transit. Last known status: ');

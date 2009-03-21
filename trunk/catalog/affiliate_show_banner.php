@@ -67,9 +67,9 @@ $Id: affiliate_show_banner.php 14 2006-07-28 17:42:07Z user $
 ?>
     <table border=1 cellpadding=2 cellspacing=2>
       <tr><td colspan=2>Check the pathes! (catalog/includes/configure.php)</td></tr>
-      <tr><td>absolute path to picture:</td><td><?php echo DIR_FS_DOCUMENT_ROOT . DIR_WS_CATALOG. DIR_WS_IMAGES . $banner; ?></td></tr>
-      <tr><td>build with:</td><td>DIR_FS_DOCUMENT_ROOT . DIR_WS_CATALOG . DIR_WS_IMAGES . $banner</td></tr>
-      <tr><td>DIR_FS_DOCUMENT_ROOT</td><td><?php echo DIR_FS_DOCUMENT_ROOT; ?></td></tr>
+      <tr><td>absolute path to picture:</td><td><?php echo DIR_FS_CATALOG . DIR_WS_IMAGES . $banner; ?></td></tr>
+      <tr><td>build with:</td><td>DIR_FS_CATALOG . DIR_WS_IMAGES . $banner</td></tr>
+      <tr><td>DIR_FS_CATALOG</td><td><?php echo DIR_FS_CATALOG; ?></td></tr>
       <tr><td>DIR_WS_CATALOG</td><td><?php echo DIR_WS_CATALOG ; ?></td></tr>
       <tr><td>DIR_WS_IMAGES</td><td><?php echo DIR_WS_IMAGES; ?></td></tr>
       <tr><td>$banner</td><td><?php echo $banner; ?></td></tr>

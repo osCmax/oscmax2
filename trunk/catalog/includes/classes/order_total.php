@@ -38,6 +38,7 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
         while (list(, $value) = each($this->modules)) {
           $class = substr($value, 0, strrpos($value, '.'));
           if ($GLOBALS[$class]->enabled) {
+            $GLOBALS[$class]->output = array();
             $GLOBALS[$class]->process();
 
             for ($i=0, $n=sizeof($GLOBALS[$class]->output); $i<$n; $i++) {
@@ -76,7 +77,8 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
 
       return $output_string;
     }
-// BOF: MOD - ICW ORDER TOTAL CREDIT CLASS/GV SYSTEM
+
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
 //
 // This function is called in checkout payment after display of payment methods. It actually calls
 // two credit class functions.

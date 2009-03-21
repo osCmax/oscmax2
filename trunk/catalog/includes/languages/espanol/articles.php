@@ -11,41 +11,42 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 */
 
 define('TEXT_MAIN', '');
-define('TABLE_HEADING_NEW_ARTICLES', 'New Articles in %s');
+define('TABLE_HEADING_NEW_ARTICLES', 'Nuevas noticias en %s');
 
 if ( ($topic_depth == 'articles') || (isset($HTTP_GET_VARS['authors_id'])) ) {
   define('HEADING_TITLE', $topics['topics_name']);
-  define('TABLE_HEADING_ARTICLES', 'Articles');
-  define('TABLE_HEADING_AUTHOR', 'Author');
-  define('TEXT_NO_ARTICLES', 'There are currently no articles in this topic.');
-  define('TEXT_NO_ARTICLES2', 'There are currently no articles available from this author.');
-  define('TEXT_NUMBER_OF_ARTICLES', 'Number of Articles: ');
-  define('TEXT_SHOW', 'Display:');
-  define('TEXT_NOW', '\' now');
-  define('TEXT_ALL_TOPICS', 'All Topics');
-  define('TEXT_ALL_AUTHORS', 'All Authors');
-  define('TEXT_ARTICLES_BY', 'Articles by ');
-  define('TEXT_ARTICLES', 'Below is a list of articles with the most recent ones listed first.');  
-  define('TEXT_DATE_ADDED', 'Published:');
-  define('TEXT_AUTHOR', 'Author:');
-  define('TEXT_TOPIC', 'Topic:');
-  define('TEXT_BY', 'by');
-  define('TEXT_READ_MORE', 'Read More...');
-  define('TEXT_MORE_INFORMATION', 'For more information, please visit this authors <a href="http://%s" target="_blank">web page</a>.');
-} elseif ($topic_depth == 'top') {
-  define('HEADING_TITLE', 'All Articles');
-  define('TEXT_ALL_ARTICLES', 'Below is a list of all articles with the most recent ones listed first.');
-  define('TEXT_CURRENT_ARTICLES', 'Current Articles');
-  define('TEXT_UPCOMING_ARTICLES', 'Upcoming Articles');
-  define('TEXT_NO_ARTICLES', 'There are currently no articles listed.');
-  define('TEXT_DATE_ADDED', 'Published:');
-  define('TEXT_DATE_EXPECTED', 'Expected:');
-  define('TEXT_AUTHOR', 'Author:');
-  define('TEXT_TOPIC', 'Topic:');
-  define('TEXT_BY', 'by');
-  define('TEXT_READ_MORE', 'Read More...');
+  define('TABLE_HEADING_ARTICLES', 'Noticias');
+  define('TABLE_HEADING_AUTHOR', 'Autor');
+  define('TEXT_NO_ARTICLES', 'Actualmente no hay noticias en esta secci&oacute;n.');
+  define('TEXT_NO_ARTICLES2', 'Actualmente no ha noticias disponible de este autor.');
+  define('TEXT_NUMBER_OF_ARTICLES', 'N&uacute;mero de noticias: ');
+  define('TEXT_SHOW', 'Mostrar:');
+  define('TEXT_NOW', '\' ahora');
+  define('TEXT_ALL_TOPICS', 'Todas las secciones');
+  define('TEXT_ALL_AUTHORS', 'Todos los autores');
+  define('TEXT_ARTICLES_BY', 'Noticias por ');
+  define('TEXT_ARTICLES', 'Debajo hay una lista de todas las noticias con las m&aacute;s recientes listadas al principio.');
+  define('TEXT_DATE_ADDED', 'Publicado:');
+  define('TEXT_AUTHOR', 'Autor:');
+  define('TEXT_TOPIC', 'Secci&oacute;n:');
+  define('TEXT_BY', 'por');
+  define('TEXT_READ_MORE', 'Leer m&aacute;s...');
+  define('TEXT_MORE_INFORMATION', 'Para obtener m&aacute;s informaci&oacute;n, visita estos autores <a href="http://%s" target="_blank">aqu&iacute;</a>.');
+} elseif ($topic_depth == 'arriba') {
+  define('HEADING_TITLE', 'Todas las noticias');
+  define('TEXT_ALL_ARTICLES', 'Debajo hay una lista de todas las noticias con las m&aacute;s recientes listadas al principio.');
+  define('TEXT_ARTICLES', 'Debajo hay una lista de todas las noticias con las m&aacute;s recientes listadas al principio.');  
+  define('TEXT_CURRENT_ARTICLES', 'Noticias disponibles');
+  define('TEXT_UPCOMING_ARTICLES', 'Pr&oacute;ximas noticias');
+  define('TEXT_NO_ARTICLES', 'TNo hay noticias disponibles.');
+  define('TEXT_DATE_ADDED', 'Publicado:');
+  define('TEXT_DATE_EXPECTED', 'Esperado:');
+  define('TEXT_AUTHOR', 'Autor:');
+  define('TEXT_TOPIC', 'Secci&oacute;n:');
+  define('TEXT_BY', 'por');
+  define('TEXT_READ_MORE', 'Leer m&aacute;s...');
 } elseif ($topic_depth == 'nested') {
-  define('HEADING_TITLE', 'Articles');
+  define('HEADING_TITLE', 'Noticias');
 }
 
 ?>

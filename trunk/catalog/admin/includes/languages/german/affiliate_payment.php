@@ -37,6 +37,7 @@ define('TEXT_DATE_ORDER_LAST_MODIFIED', 'letzte &Auml;nderung:');
 define('TEXT_AFFILIATE_PAYMENT', 'Provision');
 define('TEXT_AFFILIATE_BILLED', 'Abrechnungsdatum');
 define('TEXT_AFFILIATE', 'Partner');
+define('TEXT_INFO_HEADING_DELETE_PAYMENT', 'Abrechnung l&ouml;schen');
 define('TEXT_INFO_DELETE_INTRO', 'Sind Sie sicher, das Sie diese Provisionszahlung l&ouml;schen m&ouml;chten?');
 define('TEXT_DISPLAY_NUMBER_OF_PAYMENTS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Provisionszahlungen)');
 

@@ -17,6 +17,15 @@ define('TABLE_HEADING_GROUPS', 'Grupos');
 define('TABLE_HEADING_ACTION', 'Accion');
 define('TABLE_HEADING_STATISTICS', 'Vistas / Clicks');
 define('TABLE_HEADING_PRODUCT_ID', 'Productos ID');
+define('TEXT_VALID_CATEGORIES_LIST', 'Available Categories List');
+define('TEXT_VALID_CATEGORIES_ID', 'Category #');
+define('TEXT_VALID_CATEGORIES_NAME', 'Categories Name');
+define('TABLE_HEADING_CATEGORY_ID', 'Cat ID');
+define('TEXT_BANNERS_LINKED_CATEGORY','Category ID');
+define('TEXT_BANNERS_LINKED_CATEGORY_NOTE','If you want to link the Banner to a specific CATEGORY enter its CATEGORY ID here. If you want to link to the default page enter "0"');
+define('TEXT_AFFILIATE_VALIDCATS', 'Click Here:');
+define('TEXT_AFFILIATE_CATEGORY_BANNER_VIEW', 'to view available CATEGORIES.');
+define('TEXT_AFFILIATE_CATEGORY_BANNER_HELP', 'Select the category number from the popup window and enter the number in the Category ID field.');
 
 define('TEXT_BANNERS_TITLE', 'Titulo:');
 define('TEXT_BANNERS_GROUP', 'Grupo:');
@@ -33,6 +42,15 @@ define('TEXT_BANNERS_LINKED_PRODUCT_NOTE','If you want to link the Banner to a s
 define('TEXT_BANNERS_DATE_ADDED', 'Añadido el:');
 define('TEXT_BANNERS_STATUS_CHANGE', 'Cambio Estado: %s');
 
+define('TEXT_AFFILIATE_VALIDPRODUCTS', 'Click Here:');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_VIEW', 'to view available products.');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_HELP', 'Select the product number from the popup window and enter the number in the Product ID field.');
+
+define('TEXT_VALID_PRODUCTS_LIST', 'Available Products List');
+define('TEXT_VALID_PRODUCTS_ID', 'Product #');
+define('TEXT_VALID_PRODUCTS_NAME', 'Products Name');
+
+define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');
 define('TEXT_INFO_DELETE_INTRO', 'Seguro que quiere eliminar este banner?');
 define('TEXT_INFO_DELETE_IMAGE', 'Borrar imagen');
 

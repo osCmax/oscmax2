@@ -35,6 +35,7 @@ if ( ($topic_depth == 'articles') || (isset($HTTP_GET_VARS['authors_id'])) ) {
 } elseif ($topic_depth == 'top') {
   define('HEADING_TITLE', 'All Articles');
   define('TEXT_ALL_ARTICLES', 'Below is a list of all articles with the most recent ones listed first.');
+  define('TEXT_ARTICLES', 'Below is a list of all articles with the most recent ones listed first.');  
   define('TEXT_CURRENT_ARTICLES', 'Current Articles');
   define('TEXT_UPCOMING_ARTICLES', 'Upcoming Articles');
   define('TEXT_NO_ARTICLES', 'There are currently no articles listed.');

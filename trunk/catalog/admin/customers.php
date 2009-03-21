@@ -157,7 +157,7 @@ $Id: customers.php 3 2006-05-27 04:59:07Z user $
                 $entry_state_error = true;
               }
             } else {
-              if ($entry_state == false) {
+              if (strlen($entry_state) < ENTRY_STATE_MIN_LENGTH) {
                 $error = true;
                 $entry_state_error = true;
               }
@@ -355,39 +355,39 @@ function check_form() {
   }
 <?php } ?>
 
-  if (customers_firstname == "" || customers_firstname.length < <?php echo ENTRY_FIRST_NAME_MIN_LENGTH; ?>) {
+  if (customers_firstname.length < <?php echo ENTRY_FIRST_NAME_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo JS_FIRST_NAME; ?>";
     error = 1;
   }
 
-  if (customers_lastname == "" || customers_lastname.length < <?php echo ENTRY_LAST_NAME_MIN_LENGTH; ?>) {
+  if (customers_lastname.length < <?php echo ENTRY_LAST_NAME_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo JS_LAST_NAME; ?>";
     error = 1;
   }
 
 <?php if (ACCOUNT_DOB == 'true') { ?>
-  if (customers_dob == "" || customers_dob.length < <?php echo ENTRY_DOB_MIN_LENGTH; ?>) {
+  if (customers_dob.length < <?php echo ENTRY_DOB_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo JS_DOB; ?>";
     error = 1;
   }
 <?php } ?>
 
-  if (customers_email_address == "" || customers_email_address.length < <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>) {
+  if (customers_email_address.length < <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo JS_EMAIL_ADDRESS; ?>";
     error = 1;
   }
 
-  if (entry_street_address == "" || entry_street_address.length < <?php echo ENTRY_STREET_ADDRESS_MIN_LENGTH; ?>) {
+  if (entry_street_address.length < <?php echo ENTRY_STREET_ADDRESS_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo JS_ADDRESS; ?>";
     error = 1;
   }
 
-  if (entry_postcode == "" || entry_postcode.length < <?php echo ENTRY_POSTCODE_MIN_LENGTH; ?>) {
+  if (entry_postcode.length < <?php echo ENTRY_POSTCODE_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo JS_POST_CODE; ?>";
     error = 1;
   }
 
-  if (entry_city == "" || entry_city.length < <?php echo ENTRY_CITY_MIN_LENGTH; ?>) {
+  if (entry_city.length < <?php echo ENTRY_CITY_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo JS_CITY; ?>";
     error = 1;
   }
@@ -396,7 +396,7 @@ function check_form() {
   if (ACCOUNT_STATE == 'true') {
 ?>
   if (document.customers.elements['entry_state'].type != "hidden") {
-    if (document.customers.entry_state.value == '' || document.customers.entry_state.value.length < <?php echo ENTRY_STATE_MIN_LENGTH; ?> ) {
+    if (document.customers.entry_state.value.length < <?php echo ENTRY_STATE_MIN_LENGTH; ?>) {
        error_message = error_message + "<?php echo JS_STATE; ?>";
        error = 1;
     }
@@ -412,7 +412,7 @@ function check_form() {
     }
   }
 
-  if (customers_telephone == "" || customers_telephone.length < <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>) {
+  if (customers_telephone.length < <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo JS_TELEPHONE; ?>";
     error = 1;
   }
@@ -981,7 +981,7 @@ function check_form() {
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
             <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
             <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search'); ?></td>
-          </form></tr>
+          <?php echo tep_hide_session_id(); ?></form></tr>
         </table></td>
       </tr>
       <tr>
@@ -1216,14 +1216,6 @@ function check_form() {
 <!-- body_text_eof //-->
   </tr>
 </table>
-<?php // BOF: MOD - Edit Order - Ajout/edite commande et compte client
-  $customersrecords = mysql_query("SELECT * FROM customers") or die ("Wha Happen??? Error 1");
-  while($customerrows = tep_db_fetch_array($customersrecords)) {
-    $e = mysql_query("SELECT * FROM address_book WHERE customers_id ='$customerrows[customers_id]'") or die ("What Happen??? Error 2"); 
-    $real = tep_db_fetch_array($e);
-    $updatedefaultaddress = mysql_query("UPDATE customers SET customers_default_address_id = '$real[address_book_id]' WHERE customers_id='$customerrows[customers_id]'") or die ("What Happen??? Error 3");
-  }
-// BOF: MOD - Edit Order - Ajout/edite commande et compte client ?>
 <!-- body_eof //-->
 
 <!-- footer //-->

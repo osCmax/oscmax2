@@ -5,14 +5,13 @@ $Id: password_funcs.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
 
 ////
-// This funstion validates a plain text password with an
-// encrpyted password
+// This function compares a plain text password with an encrpyted password
   function tep_validate_password($plain, $encrypted) {
     if (tep_not_null($plain) && tep_not_null($encrypted)) {
 // split apart the hash / salt
@@ -29,7 +28,7 @@ $Id: password_funcs.php 3 2006-05-27 04:59:07Z user $
   }
 
 ////
-// This function makes a new password from a plaintext password. 
+// This function makes a new encrypted password from a plain text password.
   function tep_encrypt_password($plain) {
     $password = '';
 

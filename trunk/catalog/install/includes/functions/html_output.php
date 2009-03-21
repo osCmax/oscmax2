@@ -10,12 +10,12 @@ $Id: html_output.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-  function osc_draw_input_field($name, $text = '', $type = 'text', $parameters = '', $reinsert_value = true) {
-    $field = '<input type="' . $type . '" name="' . $name . '"';
-    if ( ($key = $GLOBALS[$name]) || ($key = $GLOBALS['HTTP_GET_VARS'][$name]) || ($key = $GLOBALS['HTTP_POST_VARS'][$name]) || ($key = $GLOBALS['HTTP_SESSION_VARS'][$name]) && ($reinsert_value) ) {
+  function osc_draw_input_field($name, $value = null, $parameters = null, $override = true, $type = 'text') {
+    $field = '<input type="' . $type . '" name="' . $name . '" id="' . $name . '"';
+    if ( ($key = $GLOBALS[$name]) || ($key = $GLOBALS['HTTP_GET_VARS'][$name]) || ($key = $GLOBALS['HTTP_POST_VARS'][$name]) || ($key = $GLOBALS['HTTP_SESSION_VARS'][$name]) && ($override) ) {
       $field .= ' value="' . $key . '"';
-    } elseif ($text != '') {
-      $field .= ' value="' . $text . '"';
+    } elseif ($value != '') {
+      $field .= ' value="' . $value . '"';
     }
     if ($parameters) $field.= ' ' . $parameters;
     $field .= '>';
@@ -23,30 +23,11 @@ $Id: html_output.php 3 2006-05-27 04:59:07Z user $
     return $field;
   }
 
-  function osc_draw_password_field($name, $text = '') {
-    return osc_draw_input_field($name, $text, 'password', '', false);
+  function osc_draw_password_field($name, $parameters = null) {
+    return osc_draw_input_field($name, null, $parameters, false, 'password');
   }
 
   function osc_draw_hidden_field($name, $value) {
     return '<input type="hidden" name="' . $name . '" value="' . $value . '">';
-  }
-
-  function osc_draw_selection_field($name, $type, $value = '', $checked = false) {
-    $selection = '<input type="' . $type . '" name="' . $name . '"';
-    if ($value != '') $selection .= ' value="' . $value . '"';
-    if ( ($checked == true) || ($GLOBALS[$name] == 'on') || ($value == 'on') || ($value && $GLOBALS[$name] == $value) ) {
-      $selection .= ' CHECKED';
-    }
-    $selection .= '>';
-
-    return $selection;
-  }
-
-  function osc_draw_checkbox_field($name, $value = '', $checked = false) {
-    return osc_draw_selection_field($name, 'checkbox', $value, $checked);
-  }
-
-  function osc_draw_radio_field($name, $value = '', $checked = false) {
-    return osc_draw_selection_field($name, 'radio', $value, $checked);
   }
 ?>

@@ -13,6 +13,8 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
 // define the database table names used in the project
   define('TABLE_ADDRESS_BOOK', 'address_book');
   define('TABLE_ADDRESS_FORMAT', 'address_format');
+// Line added: Mod RC2A
+  define('TABLE_ADMINISTRATORS', 'admin');
 // BOF: MOD - Article Manager
   define('TABLE_ARTICLE_REVIEWS', 'article_reviews');
   define('TABLE_ARTICLE_REVIEWS_DESCRIPTION', 'article_reviews_description');
@@ -74,10 +76,10 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
   define('TABLE_ZONES', 'zones');
 // LINE ADDED: MOD - Xsell Products
   define('TABLE_PRODUCTS_XSELL', 'products_xsell'); 
-// BOF: MOD - Wish List 2.3
+// BOF: MOD - Wish List 3.5
   define('TABLE_WISHLIST', 'customers_wishlist');
   define('TABLE_WISHLIST_ATTRIBUTES', 'customers_wishlist_attributes');
-// EOF: MOD - Wish List 2.3
+// EOF: MOD - Wish List 3.5
 // LINE ADDED: MOD - QT Pro: Begin Changed code
   define('TABLE_PRODUCTS_STOCK', 'products_stock');
 // BOF: MOD - Separate Pricing per Customer
@@ -92,4 +94,5 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
 
 // LINE ADDED
   define('TABLE_PACKAGING', 'packaging');
+  define('TABLE_UPS_BOXES_USED', 'ups_boxes_used');
 ?>

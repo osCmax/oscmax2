@@ -10,35 +10,6 @@ $Id: general.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-  function osc_in_array($value, $array) {
-    if (!$array) $array = array();
-
-    if (function_exists('in_array')) {
-      if (is_array($value)) {
-        for ($i=0; $i<sizeof($value); $i++) {
-          if (in_array($value[$i], $array)) return true;
-        }
-        return false;
-      } else {
-        return in_array($value, $array);
-      }
-    } else {
-      reset($array);
-      while (list(,$key_value) = each($array)) {
-        if (is_array($value)) {
-          for ($i=0; $i<sizeof($value); $i++) {
-            if ($key_value == $value[$i]) return true;
-          }
-          return false;
-        } else {
-          if ($key_value == $value) return true;
-        }
-      }
-    }
-
-    return false;
-  }
-
 ////
 // Sets timeout for the current script.
 // Cant be used in safe mode.
@@ -46,5 +17,42 @@ $Id: general.php 3 2006-05-27 04:59:07Z user $
     if (!get_cfg_var('safe_mode')) {
       set_time_limit($limit);
     }
+  }
+
+  function osc_realpath($directory) {
+    return str_replace('\\', '/', realpath($directory));
+  }
+
+  function osc_rand($min = null, $max = null) {
+    static $seeded;
+
+    if (!isset($seeded)) {
+      mt_srand((double)microtime()*1000000);
+      $seeded = true;
+    }
+
+    if (isset($min) && isset($max)) {
+      if ($min >= $max) {
+        return $min;
+      } else {
+        return mt_rand($min, $max);
+      }
+    } else {
+      return mt_rand();
+    }
+  }
+
+  function osc_encrypt_string($plain) {
+    $password = '';
+
+    for ($i=0; $i<10; $i++) {
+      $password .= osc_rand();
+    }
+
+    $salt = substr(md5($password), 0, 2);
+
+    $password = md5($salt . $plain) . ':' . $salt;
+
+    return $password;
   }
 ?>

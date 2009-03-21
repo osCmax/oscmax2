@@ -12,30 +12,30 @@ $Id: german.php 3 2006-05-27 04:59:07Z user $
 
 // BOF: MOD - Admin w/levels
 // header text in includes/header.php
-define('HEADER_TITLE_ACCOUNT', 'My Account/Password');
+define('HEADER_TITLE_ACCOUNT', 'Mein Konto');
 define('HEADER_TITLE_LOGOFF', 'Logoff');
 
-// Admin Account
-define('BOX_HEADING_MY_ACCOUNT', 'My Account');
+// Verwalter Konto
+define('BOX_HEADING_MY_ACCOUNT', 'Mein Konto');
 
-// configuration box text in includes/boxes/administrator.php
-define('BOX_HEADING_ADMINISTRATOR', 'Administrator');
-define('BOX_ADMINISTRATOR_MEMBERS', 'Member Groups');
-define('BOX_ADMINISTRATOR_MEMBER', 'Members');
-define('BOX_ADMINISTRATOR_BOXES', 'File Access');
+// Konfiguration Kastentext in includes/boxes/administrator.php
+define('BOX_HEADING_ADMINISTRATOR', 'Verwalter');
+define('BOX_ADMINISTRATOR_MEMBERS', 'Mitgliedsgruppen');
+define('BOX_ADMINISTRATOR_MEMBER', 'Mitglieder');
+define('BOX_ADMINISTRATOR_BOXES', 'Akte Zugang');
 
-// images
-define('IMAGE_FILE_PERMISSION', 'File Permission');
-define('IMAGE_GROUPS', 'Groups List');
-define('IMAGE_INSERT_FILE', 'Insert File');
-define('IMAGE_MEMBERS', 'Members List');
-define('IMAGE_NEW_GROUP', 'New Group');
-define('IMAGE_NEW_MEMBER', 'New Member');
-define('IMAGE_NEXT', 'Next');
+// Bilder
+define('IMAGE_FILE_PERMISSION', 'Akte Erlaubnis');
+define('IMAGE_GROUPS', 'Gruppen Liste');
+define('IMAGE_INSERT_FILE', 'Setzen Sie Akte Ein');
+define('IMAGE_MEMBERS', 'Mitgliedsliste');
+define('IMAGE_NEW_GROUP', 'Neue Gruppe');
+define('IMAGE_NEW_MEMBER', 'Neues Mitglied');
+define('IMAGE_NEXT', 'Zunächst');
 
-// constants for use in tep_prev_next_display function
-define('TEXT_DISPLAY_NUMBER_OF_FILENAMES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> filenames)');
-define('TEXT_DISPLAY_NUMBER_OF_MEMBERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> members)');
+// Konstanten für Gebrauch in der tep_prev_next_display Funktion
+define('TEXT_DISPLAY_NUMBER_OF_FILENAMES', '<b>%d</b> bis <b>%d</b> anzeigen (von <b>%d</b> Dateinamen)');
+define('TEXT_DISPLAY_NUMBER_OF_MEMBERS', '<b>%d</b> bis <b>%d</b> anzeigen (von <b>%d</b> Mitgliedern)');
 // EOF: MOD - Admin w/levels
 
 // look in your $PATH_LOCALE/locale directory for available locales..
@@ -492,7 +492,7 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Warning: File uploads are disabled in t
 // LINE ADDED - XSell
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Products'); // X-Sell
 
-// LINE ADDED -  Credit Class GV
+// LINE ADDED - CREDIT CLASS Gift Voucher Contribution
 REQUIRE(DIR_WS_LANGUAGES . 'add_ccgvdc_german.php');
 
 // BOF: MOD - Article Manager

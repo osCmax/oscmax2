@@ -13,7 +13,7 @@
 <?php
   $products_new_array = array();
 
-  $products_new_query_raw = "select p.products_id, pd.products_name, p.products_image, p.products_price, p.products_tax_class_id, p.products_date_added, m.manufacturers_name from " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on (p.manufacturers_id = m.manufacturers_id), " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and month(p.products_date_added) = month(now()) order by p.products_date_added DESC, pd.products_name";
+  $products_new_query_raw = "select p.products_id, p.products_model, pd.products_name, p.products_image, p.products_price, p.products_tax_class_id, p.products_date_added, m.manufacturers_name from " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on (p.manufacturers_id = m.manufacturers_id), " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and month(p.products_date_added) = month(now()) order by p.products_date_added DESC, pd.products_name";
   $products_new_split = new splitPageResults($products_new_query_raw, MAX_DISPLAY_PRODUCTS_NEW);
 
   if (($products_new_split->number_of_rows > 0) && ((PREV_NEXT_BAR_LOCATION == '1') || (PREV_NEXT_BAR_LOCATION == '3'))) {
@@ -101,14 +101,21 @@ if ($customer_group_id != '0') {
 //	} // end for ($x = 0; $x < $no_of_products_new; $x++)
 		
 	if (tep_not_null($products_new[$x]['specials_new_products_price'])) {
-	        $products_price = '<s>' . $currencies->display_price($products_new[$x]['products_price'], tep_get_tax_rate($products_new[$x]['products_tax_class_id'])) . '</s> <span class="productSpecialPrice">' . $currencies->display_price($products_new[$x]['specials_new_products_price'], tep_get_tax_rate($products_new[$x]['products_tax_class_id'])) . '</span>';
+	        $products_price = '<span style="text-decoration:line-through">' . $currencies->display_price($products_new[$x]['products_price'], tep_get_tax_rate($products_new[$x]['products_tax_class_id'])) . '</span> <span class="productSpecialPrice">' . $currencies->display_price($products_new[$x]['specials_new_products_price'], tep_get_tax_rate($products_new[$x]['products_tax_class_id'])) . '</span>';
 	} else {
 		$products_price = $currencies->display_price($products_new[$x]['products_price'], tep_get_tax_rate($products_new[$x]['products_tax_class_id']));
 	}
 ?>
           <tr>
             <td width="<?php echo SMALL_IMAGE_WIDTH + 10; ?>" valign="top" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products_new[$x]['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $products_new[$x]['products_image'], $products_new[$x]['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>'; ?></td>
-            <td valign="top" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products_new[$x]['products_id']) . '"><b><u>' . $products_new[$x]['products_name'] . '</u></b></a><br>' . TEXT_DATE_ADDED . ' ' . tep_date_long($products_new[$x]['products_date_added']) . '<br>' . TEXT_MANUFACTURER . ' ' . $products_new[$x]['manufacturers_name'] . '<br><br>' . TEXT_PRICE . ' ' . $products_price; ?></td>
+            <td valign="top" class="main"><?php 
+	$display_manufacturer = '';
+	if (PRODUCT_LIST_MANUFACTURER)$display_manufacturer = '<br>' . TEXT_MANUFACTURER . ' ' . $products_new[$x]['manufacturers_name'] ;
+            
+            echo '<a href="' 
+            . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products_new[$x]['products_id']) . '"><strong><u>' . $products_new[$x]['products_name'] . '</u></strong></a><br>Model:'. $products_new[$x]['products_model'] . '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_long($products_new[$x]['products_date_added']) 
+            . $display_manufacturer
+            . '<br><br>' . TEXT_PRICE . ' ' . $products_price; ?></td>
             <td align="right" valign="middle" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_NEW, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $products_new[$x]['products_id']) . '">' . tep_image_button('button_in_cart.gif', IMAGE_BUTTON_IN_CART) . '</a>'; ?></td>
           </tr>
           <tr>

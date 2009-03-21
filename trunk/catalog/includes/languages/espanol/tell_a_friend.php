@@ -10,30 +10,30 @@ $Id: tell_a_friend.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Enviar a un Amigo');
+define('NAVBAR_TITLE', 'D&iacute;selo a un amigo');
 
-define('HEADING_TITLE', 'Enviar informaci&oacute;n sobre \'%s\' un amigo');
+define('HEADING_TITLE', 'H&aacute;blale a un amigo sobre \'%s\'');
 
-define('FORM_TITLE_CUSTOMER_DETAILS', 'Tus Datos');
-define('FORM_TITLE_FRIEND_DETAILS', 'Los Datos De Tu Amigo');
-define('FORM_TITLE_FRIEND_MESSAGE', 'Tu Mensaje');
+define('FORM_TITLE_CUSTOMER_DETAILS', 'Tus datos');
+define('FORM_TITLE_FRIEND_DETAILS', 'Los datos de tus amigos');
+define('FORM_TITLE_FRIEND_MESSAGE', 'Tu mensaje');
 
-define('FORM_FIELD_CUSTOMER_NAME', 'Tu Nombre:');
-define('FORM_FIELD_CUSTOMER_EMAIL', 'Tu Email:');
-define('FORM_FIELD_FRIEND_NAME', 'El Nombre De Tu Amigo:');
-define('FORM_FIELD_FRIEND_EMAIL', 'El Email De Tu Amigo:');
+define('FORM_FIELD_CUSTOMER_NAME', 'Tu nombre:');
+define('FORM_FIELD_CUSTOMER_EMAIL', 'Tu direcci&oacute;n e-mail:');
+define('FORM_FIELD_FRIEND_NAME', 'El nombre de tus amigos:');
+define('FORM_FIELD_FRIEND_EMAIL', 'La direcci&oacute;n e-mail de tus amigos:');
 
-define('TEXT_EMAIL_SUCCESSFUL_SENT', 'Tu email sobre <b>%s</b> ha sido enviado con &eacute;xito a <b>%s</b>.');
+define('TEXT_EMAIL_SUCCESSFUL_SENT', 'Tu e-mail acerca de <b>%s</b> ha sido correctamente enviado a <b>%s</b>.');
 
-define('TEXT_EMAIL_SUBJECT', 'Tu amigo %s te quiere recomendar "%s"');
-define('TEXT_EMAIL_INTRO', 'Hola %s!' . "\n\n" . 'Tu amigo %s, pensó que estarias interesado en %s de %s.');
-define('TEXT_EMAIL_LINK', 'Para ver el producto usa el siguiente enlace:' . "\n\n" . '%s');
+define('TEXT_EMAIL_SUBJECT', 'Tu amigo %s te ha recomendado este fant$aacute;stico producto de %s');
+define('TEXT_EMAIL_INTRO', 'Hola %s!' . "\n\n" . 'Tu amigo, %s, cree que puedes estar interesado en %s de %s.');
+define('TEXT_EMAIL_LINK', 'Para visualizar el producto haz click en el v&iacute;nculo de abajo o bien copia y pega el v&iacute;nculo en tu navegador:' . "\n\n" . '%s');
 // LINE ADDED: MOD - ARTICLE MANAGER
-define('TEXT_EMAIL_LINK_ARTICLE', 'To view the article click on the link below or copy and paste the link into your web browser:' . "\n\n" . '%s');
-define('TEXT_EMAIL_SIGNATURE', 'Atentamente,' . "\n\n" . '%s');
+define('TEXT_EMAIL_LINK_ARTICLE', 'Para visualizar el producto haz click en el v&iacute;nculo de abajo o bien copia y pega el v&iacute;nculo en tu navegador:' . "\n\n" . '%s');
+define('TEXT_EMAIL_SIGNATURE', 'Gracias,' . "\n\n" . '%s');
 
-define('ERROR_TO_NAME', 'Error: La direcci&oacute;n de su amigo no puede estar vacia.');
-define('ERROR_TO_ADDRESS', 'Error: La direcci&oacute;n de su amigo debe ser v&aacute;lida.');
-define('ERROR_FROM_NAME', 'Error: Su nombre no debe estar vacio.');
-define('ERROR_FROM_ADDRESS', 'Error: Su direcci&oacute;n de email debe de ser v&aacute;lida.');
+define('ERROR_TO_NAME', 'Error: Debes rellenar en nombre de tus amigos.');
+define('ERROR_TO_ADDRESS', 'Error: La direcci&oacute;n e-mail de tus amigos no esta escrita correctamente.');
+define('ERROR_FROM_NAME', 'Error: Debes rellenar tu nombre.');
+define('ERROR_FROM_ADDRESS', 'Error: Tu direcci&oacute;n e-mail no est&aacute; escrita correctamente.');
 ?>

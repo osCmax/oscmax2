@@ -18,12 +18,10 @@ $debug = array();
 // set the level of error reporting
   error_reporting(E_ALL & ~E_NOTICE);
 
-// check if register_globals is enabled.
-// since this is a temporary measure this message is hardcoded. The requirement will be removed before 2.2 is finalized.
-  if (function_exists('ini_get')) {
-    ini_get('register_globals') or exit('FATAL ERROR: register_globals is disabled in php.ini, please enable it!');
+// check support for register_globals
+  if (function_exists('ini_get') && (ini_get('register_globals') == false) && (PHP_VERSION < 4.3) ) {
+    exit('Server Requirement Error: register_globals is disabled in your PHP configuration. This can be enabled in your php.ini configuration file or in the .htaccess file in your catalog directory. Please use PHP 4.3+ if register_globals cannot be enabled on the server.');
   }
-
 // LINE ADDED: added to support PHP 5.0.x by TJ
 $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
@@ -40,7 +38,10 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 
 // define the project version
-  define('PROJECT_VERSION', 'osCMax v2.0');
+  define('PROJECT_VERSION', 'osCMax v2.0 RC4');
+
+// some code to solve compatibility issues
+  require(DIR_WS_FUNCTIONS . 'compatibility.php');
 
 // set the type of request (secure or not)
   $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
@@ -124,14 +125,16 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 // include cache functions if enabled
   if (USE_CACHE == 'true') include(DIR_WS_FUNCTIONS . 'cache.php');
 
+// BOF: MOD - Wishlist 3.5  
+// include wishlist class
+   require(DIR_WS_CLASSES . 'wishlist.php');  
+// EOF: MOD - Wishlist 3.5
+
 // include shopping cart class
   require(DIR_WS_CLASSES . 'shopping_cart.php');
 
 // include navigation history class
   require(DIR_WS_CLASSES . 'navigation_history.php');
-
-// some code to solve compatibility issues
-  require(DIR_WS_FUNCTIONS . 'compatibility.php');
 
 // check if sessions are supported, otherwise use the php3 compatible session class
   if (!function_exists('session_start')) {
@@ -199,6 +202,10 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   } else {
     tep_session_start();
     $session_started = true;
+  }
+
+  if ( ($session_started == true) && (PHP_VERSION >= 4.3) && function_exists('ini_get') && (ini_get('register_globals') == false) ) {
+    extract($_SESSION, EXTR_OVERWRITE+EXTR_REFS);
   }
 
 // set SID once, even if empty
@@ -293,8 +300,16 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 # include the cache class
   include('includes/classes/cache.class.php');
   $cache = new cache($languages_id);
-# include the Ultimate SEO URLs cache file
-  include('includes/seo_cache.php');
+// Ultimate SEO URLs v2.1
+    include_once(DIR_WS_CLASSES . 'seo.class.php');
+        if ( !is_object($seo_urls) ){
+                $seo_urls = new SEO_URL($languages_id);
+        }
+// Validate SEO URL        
+     if ( is_object($seo_urls) && (strpos($_SERVER['REQUEST_URI'], '.html') !== false) && (defined('FWR_VALIDATION_ON') && FWR_VALIDATION_ON === 'true') ) { // SEO URLS is active and there is .html in the querystring
+       tep_validate_seo_urls();
+      }
+        
   # Get the cache - no parameters will get all GLOBAL cache entries for this language
   $cache->get_cache('GLOBAL');
 
@@ -313,8 +328,8 @@ if (isset($HTTP_GET_VARS['pName']) && defined(urldecode($HTTP_GET_VARS['pName'])
   if (!tep_session_is_registered('currency') || isset($HTTP_GET_VARS['currency']) || ( (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') && (LANGUAGE_CURRENCY != $currency) ) ) {
     if (!tep_session_is_registered('currency')) tep_session_register('currency');
 
-    if (isset($HTTP_GET_VARS['currency'])) {
-      if (!$currency = tep_currency_exists($HTTP_GET_VARS['currency'])) $currency = (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') ? LANGUAGE_CURRENCY : DEFAULT_CURRENCY;
+    if (isset($HTTP_GET_VARS['currency']) && $currencies->is_set($HTTP_GET_VARS['currency'])) {
+      $currency = $HTTP_GET_VARS['currency'];
     } else {
       $currency = (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') ? LANGUAGE_CURRENCY : DEFAULT_CURRENCY;
     }
@@ -343,6 +358,27 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
 }
 // EOF: MOD - Down for Maintenance
 
+// BOF: MOD - Wishlist 3.5
+// wishlist data
+ if(!tep_session_is_registered('wishList')) { 
+        tep_session_register('wishList'); 
+        $wishList = new wishlist; 
+     } 
+     
+ //Wishlist actions (must be before shopping cart actions) 
+   if(isset($HTTP_POST_VARS['wishlist_x'])) { 
+      if(isset($HTTP_POST_VARS['products_id'])) {
+          if(isset($HTTP_POST_VARS['id'])) {
+              $attributes_id = $HTTP_POST_VARS['id']; 
+              tep_session_register('attributes_id'); 
+           } 
+           $wishlist_id = $HTTP_POST_VARS['products_id']; 
+           tep_session_register('wishlist_id'); 
+      } 
+      tep_redirect(tep_href_link(FILENAME_WISHLIST)); 
+   }
+// EOF: MOD - Wishlist 3.5
+
 // Shopping cart actions
   if (isset($HTTP_GET_VARS['action'])) {
 // redirect the customer to a friendly cookie-must-be-enabled page if cookies are disabled
@@ -352,13 +388,13 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
 
     if (DISPLAY_CART == 'true') {
       $goto =  FILENAME_SHOPPING_CART;
-// LINE MOD: ADDED 'cName', 'pName'
-     $parameters = array('action', 'cPath', 'products_id', 'pid', 'cName', 'pName');
+// LINE MOD: Ultimate SEO URLs v2.1 removed 'cName', 'pName'
+     $parameters = array('action', 'cPath', 'products_id', 'pid');
     } else {
       $goto = basename($PHP_SELF);
       if ($HTTP_GET_VARS['action'] == 'buy_now') {
-// LINE MOD: ADDED 'pName'
-        $parameters = array('action', 'pid', 'products_id', 'pName');
+// LINE MOD: Ultimate SEO URLs v2.1 removed 'pName'
+        $parameters = array('action', 'pid', 'products_id');
       } else {
         $parameters = array('action', 'pid');
       }
@@ -411,42 +447,15 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
               $attributes=$attributes + $HTTP_POST_VARS['id'];
           }
         }
-                              // No offer is made or direct offers are disabled
-                              // so the default price is accepted
-                              $offeracceptable = true;
-                              // Addition for Make An Offer
-                              if (MAO_ACCEPT_OFFER_DIRECTLY == 'true') {
-					if (!$HTTP_POST_VARS['newpriceoffer'] == '') {
-						$offeracceptable = mao_check_offer($HTTP_POST_VARS['newpriceoffer'], $HTTP_POST_VARS['products_id']);
-						if ($offeracceptable == true) {
-							if (!tep_session_is_registered('mao_accepted_offer')) {
-								$mao_accepted_offer = array();
-								$mao_accepted = array('productid' => $HTTP_POST_VARS['products_id'],'newprice' => $HTTP_POST_VARS['newpriceoffer'],'initialvaluta' => $currency);
-								array_push($mao_accepted_offer, $mao_accepted);
-								tep_session_register('mao_accepted_offer');
-							} else {
-								$mao_accepted = array('productid' => $HTTP_POST_VARS['products_id'],'newprice' => $HTTP_POST_VARS['newpriceoffer'],'initialvaluta' => $currency);
-								array_push($mao_accepted_offer, $mao_accepted);
-							}
-						}
-					}
-				}
-				if ($offeracceptable == true) {
-					tep_session_unregister('mao_low_offer');
         $cart->add_cart($HTTP_POST_VARS['products_id'], $cart->get_quantity(tep_get_uprid($HTTP_POST_VARS['products_id'], $attributes))+1, $attributes);
 // EOF: MOD - QT Pro
-            }
+                    }
    }         
         tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
         break;
 // performed by the 'buy now' button in product listings and review page
       case 'buy_now' :        if (isset($HTTP_GET_VARS['products_id'])) {
-// BOF: MOD - Wish List 2.3
-            if (tep_session_is_registered('customer_id')) {
-              tep_db_query("delete from " . TABLE_WISHLIST . " WHERE customers_id=$customer_id AND products_id=$products_id");
-              tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " WHERE customers_id=$customer_id AND products_id=$products_id");
-            }
-// EOF: MOD - Wish List 2.3
+
             if (tep_has_product_attributes($HTTP_GET_VARS['products_id'])) {
               tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['products_id']));
             } else {
@@ -503,10 +512,6 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
                               }
                               break;
       case 'cust_order' :     if (tep_session_is_registered('customer_id') && isset($HTTP_GET_VARS['pid'])) {
-// BOF: MOD - Wish List 2.3
-                                tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = '" . $HTTP_GET_VARS['pid'] . "' and customers_id = '" . $customer_id . "'");
-                                tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " WHERE customers_id=$customer_id AND products_id='" . $HTTP_GET_VARS['pid']."'");
-// EOF: MOD - Wish List 2.3
                                 if (tep_has_product_attributes($HTTP_GET_VARS['pid'])) {
                                   tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['pid']));
                                 } else {
@@ -515,88 +520,11 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
                               }
                               tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
                               break;
-// BOF: MOD - Wish List 2.3
-// Remove item from the Wish List
-                            case 'remove_wishlist':
-                              tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = '" . $HTTP_GET_VARS['pid'] . "' and customers_id = '" . $customer_id . "'");
-                              tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " WHERE customers_id=$customer_id AND products_id= '" . $HTTP_GET_VARS['pid'] . "'");
-                              tep_redirect(tep_href_link(FILENAME_WISHLIST));
-                              break;
+
                             } // end switch $HTTP_GET_VARS['action']
                           } // end if is set $HTTP_GET_VARS['action']
 
-// Shopping cart actions through POST variables from forms
-                        if (isset($HTTP_POST_VARS['wishlist_action'])) {
-// redirect the customer to a friendly cookie-must-be-enabled page if cookies are disabled
-                          if ($session_started == false) {
-                            tep_redirect(tep_href_link(FILENAME_COOKIE_USAGE));
-                          }
-                          $goto = basename($PHP_SELF);
-                          switch ($HTTP_POST_VARS['wishlist_action']) {
-// Customer wants to update the product quantity in their shopping cart
-                          case 'add_wishlist' :  if (ereg('^[0-9]+$', $HTTP_POST_VARS['products_id'])) {
-                                if ($HTTP_POST_VARS['products_id']) {
-                                  if ($customer_id > 0) {
-                    // Queries below replace old product instead of adding to queatity.
-                                    tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = '" . $HTTP_POST_VARS['products_id'] . "' and customers_id = '" . $customer_id . "'");
-                                    tep_db_query("insert into " . TABLE_WISHLIST . " (customers_id, products_id, products_model, products_name, products_price) values ('" . $customer_id . "', '" . $products_id . "', '" . $products_model . "', '" . $products_name . "', '" . $products_price . "' )");
-                                    tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " where products_id = '" . $HTTP_POST_VARS['products_id'] . "' and customers_id = '" . $customer_id . "'");
-                                    // Read array of options and values for attributes in id[]
-                                    if (isset ($id)) {
-                                      foreach($id as $att_option=>$att_value) {
-                                        // Add to customers_wishlist_attributes table
-                                        tep_db_query("insert into " . TABLE_WISHLIST_ATTRIBUTES . " (customers_id, products_id, products_options_id , products_options_value_id) values ('" . $customer_id . "', '" . $products_id . "', '" . $att_option . "', '" . $att_value . "' )");
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                              break;
 
-      case 'wishlist_add_cart' :if (ereg('^[0-9]+$', $HTTP_POST_VARS['products_id'])) {
-                                  if ($HTTP_POST_VARS['products_id']) {
-                                  if ($customer_id > 0) {
-                                    tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = '" . $HTTP_POST_VARS['products_id'] . "' and customers_id = '" . $customer_id . "'");
-                                    tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " where products_id = '" . $HTTP_POST_VARS['products_id'] . "' and customers_id = '" . $customer_id . "'");
-                                    // Read array of options and values for attributes in id[]
-                                    if (isset($HTTP_POST_VARS['products_id']) && is_numeric($HTTP_POST_VARS['products_id'])) {
-                                       $cart->add_cart($HTTP_POST_VARS['products_id'], $cart->get_quantity(tep_get_uprid($HTTP_POST_VARS['products_id'], $HTTP_POST_VARS['id']))+1, $HTTP_POST_VARS['id']);
-                                    }
-                                    tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
-                                    break;
-                                  }
-                                }
-                              }
-                              break;
-
- // Wishlist Checkboxes
- case 'add_delete_products_wishlist':
-              if (isset($HTTP_POST_VARS['add_wishprod'])) {
-                 if ($HTTP_POST_VARS['borrar'] == 0) {
-   // 'borrar' form variable refers to deleting products in array $add_wishprod[] from wishlist
-                  foreach ($HTTP_POST_VARS['add_wishprod'] as $value) {
-                    if (ereg('^[0-9]+$', $value)) {
-                      $cart->add_cart($value, $cart->get_quantity(tep_get_uprid($value, $HTTP_POST_VARS['id'][$value]))+1, $HTTP_POST_VARS['id'][$value]);
-                      tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = $value and customers_id = '" . $customer_id . "'");
-                      tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " where products_id = '$value' and customers_id = '" . $customer_id . "'");
-                    }
-                  }
-              tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
-            }
-          if ($HTTP_POST_VARS['borrar'] == 1) {
-            foreach ($HTTP_POST_VARS['add_wishprod'] as $value) {
-              if (ereg('^[0-9]+$', $value)) {
-                tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = $value and customers_id = '" . $customer_id . "'");
-                tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " where products_id = '$value' and customers_id = '" . $customer_id . "'");
-              }
-            }
-            tep_redirect(tep_href_link(FILENAME_WISHLIST));
-          }
-        }
-      break;
-    } // end switch ($HTTP_POST_VARS['wishlist_action'])
-  } // end isset($HTTP_POST_VARS)
-// EOF: MOD - Wish List 2.3
 // include the who's online functions
   require(DIR_WS_FUNCTIONS . 'whos_online.php');
   tep_update_whos_online();

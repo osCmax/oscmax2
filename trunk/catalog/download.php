@@ -20,7 +20,7 @@ $Id: download.php 3 2006-05-27 04:59:07Z user $
   }
   
 // Check that order_id, customer_id and filename match
-  $downloads_query = tep_db_query("select date_format(o.date_purchased, '%Y-%m-%d') as date_purchased_day, opd.download_maxdays, opd.download_count, opd.download_maxdays, opd.orders_products_filename from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS_PRODUCTS_DOWNLOAD . " opd where o.customers_id = '" . $customer_id . "' and o.orders_id = '" . (int)$HTTP_GET_VARS['order'] . "' and o.orders_id = op.orders_id and op.orders_products_id = opd.orders_products_id and opd.orders_products_download_id = '" . (int)$HTTP_GET_VARS['id'] . "' and opd.orders_products_filename != ''");
+  $downloads_query = tep_db_query("select date_format(o.date_purchased, '%Y-%m-%d') as date_purchased_day, opd.download_maxdays, opd.download_count, opd.download_maxdays, opd.orders_products_filename from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS_PRODUCTS_DOWNLOAD . " opd, " . TABLE_ORDERS_STATUS . " os where o.customers_id = '" . $customer_id . "' and o.orders_id = '" . (int)$HTTP_GET_VARS['order'] . "' and o.orders_id = op.orders_id and op.orders_products_id = opd.orders_products_id and opd.orders_products_download_id = '" . (int)$HTTP_GET_VARS['id'] . "' and opd.orders_products_filename != '' and o.orders_status = os.orders_status_id and os.downloads_flag = '1' and os.language_id = '" . (int)$languages_id . "'");
   if (!tep_db_num_rows($downloads_query)) die;
   $downloads = tep_db_fetch_array($downloads_query);
 // MySQL 3.22 does not have INTERVAL
@@ -90,10 +90,11 @@ function tep_unlink_temp_dir($dir)
     umask(0000);
     mkdir(DIR_FS_DOWNLOAD_PUBLIC . $tempdir, 0777);
     symlink(DIR_FS_DOWNLOAD . $downloads['orders_products_filename'], DIR_FS_DOWNLOAD_PUBLIC . $tempdir . '/' . $downloads['orders_products_filename']);
-    tep_redirect(DIR_WS_DOWNLOAD_PUBLIC . $tempdir . '/' . $downloads['orders_products_filename']);
-  } else {
-// This will work on all systems, but will need considerable resources
-// We could also loop with fread($fp, 4096) to save memory
-    readfile(DIR_FS_DOWNLOAD . $downloads['orders_products_filename']);
+    if (file_exists(DIR_FS_DOWNLOAD_PUBLIC . $tempdir . '/' . $downloads['orders_products_filename'])) {
+      tep_redirect(tep_href_link(DIR_WS_DOWNLOAD_PUBLIC . $tempdir . '/' . $downloads['orders_products_filename']));
+    }
   }
+
+// Fallback to readfile() delivery method. This will work on all systems, but will need considerable resources
+  readfile(DIR_FS_DOWNLOAD . $downloads['orders_products_filename']);
 ?>

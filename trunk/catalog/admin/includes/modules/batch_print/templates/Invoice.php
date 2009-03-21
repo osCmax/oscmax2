@@ -42,6 +42,8 @@ define('PRODUCTS_COLUMN_SIZE', '165');
 define('PRODUCT_LISTING_BKGD_COLOR',GREY);
 define('MODEL_COLUMN_SIZE', '37');
 define('PRICING_COLUMN_SIZES', '67');
+$vilains = array("&#224;", "&#225;",  "&#226;", "&#227;", "&#228;", "&#229;", "&#230;", "&#231;", "&#232;", "&#233;", "&#234;", "&#235;", "&#236;", "&#237;", "&#238;", "&#239;", "&#240;", "&#241;", "&#242;", "&#243;", "&#244;", "&#245;", "&#246;", "&#247;", "&#248;", "&#249;", "&#250;", "&#251;", "&#252;", "&#253;", "&#254;", "&#255;", "&#223;","&#39;", "&nbsp;", "&agrave;", "&aacute;", "&atilde;","&auml;", "&Arond;", "&egrave;", "&aelig;", "&ecirc;", "&euml;", "&igrave;", "&iacute;", "&Iacute;", "&icirc;", "&iuml;", "&ograve;", "&oacute;", "&ocirc;", "&otilde;", "&ouml;", "&oslash;", "&ugrave;", "&uacute;", "&ucirc;", "&uuml;", "&ntilde;", "&ccedil;", "&yacute;", "&lt;","&gt;", "&amp;");
+$cools = array('à','á','â','ã','ä','å','æ','ç','è','é','ê','ë','ì','í','î','ï','ð','ñ','ò','ó','ô','õ','ö','÷','ø','ù','ú','û','ü','ý','þ','ÿ','ß','\'', ' ','à','á','ã','ä','å','è','æ','ê','ë','ì','í','î','Î','ï','ò','ó','ô','õ','ö','ø','ù','ú','û','ü','ñ','ç','ý','<','>','&');
 
 $currencies = new currencies();
 
@@ -54,18 +56,18 @@ $y = $pdf->ezText(STORE_NAME_ADDRESS,COMPANY_HEADER_FONT_SIZE);
 $y -= 10; 
 
 // logo image  set to right of the above .. change first number to move sideways    
-//$pdf->addJpegFromFile(BATCH_PRINT_INC . 'templates/' . 'invoicelogo.jpg',365,730,85,85); 
+$pdf->addJpegFromFile(BATCH_PRINT_INC . 'templates/' . 'invoicelogo.jpg',365,730,85,85); 
 
 // extra info boxs to be used by staff
 $pdf->setStrokeColor(0,0,0);
 $pdf->setLineStyle(1);
-$pdf->roundedRectangle(470,350,85,85,10,$f=0);
-$pdf->rectangle(535,375,10,10);
-$pdf->rectangle(535,395,10,10);
-$pdf->rectangle(535,415,10,10);
-$pdf->addText(480,375,GENERAL_FONT_SIZE,Bank);
-$pdf->addText(480,395,GENERAL_FONT_SIZE,Post);
-$pdf->addText(480,415,GENERAL_FONT_SIZE,Sale);
+$pdf->roundedRectangle(470,730,85,85,10,$f=0);
+$pdf->rectangle(535,748,10,10);
+$pdf->rectangle(535,769,10,10);
+$pdf->rectangle(535,790,10,10);
+$pdf->addText(480,790,GENERAL_FONT_SIZE,TEXT_BANK);
+$pdf->addText(480,769,GENERAL_FONT_SIZE,TEXT_POST);
+$pdf->addText(480,748,GENERAL_FONT_SIZE,TEXT_SALES);
 
 
 // line between header order number and order date
@@ -75,7 +77,7 @@ $pdf->ezSetY($y);
 $dup_y = $y;
 
 // order number
-$y = $pdf->ezText("<b>" . TEXT_ORDER_NUMBER . " </b>" . $orders['orders_id'] ."\n\n",SUB_HEADING_FONT_SIZE);
+$y = $pdf->ezText("<b>" . TEXT_ORDER_NUMBER . " </b>" . $orders['orders_prefix'] . $orders['orders_id'] ."\n\n",SUB_HEADING_FONT_SIZE);
 
 // order date
 if ($HTTP_POST_VARS['show_order_date']) { 
@@ -89,7 +91,7 @@ if ($HTTP_POST_VARS['show_order_date']) {
 //left rounded rectangle around sold to info
 $pdf->setStrokeColor(0,0,0);
 $pdf->setLineStyle(1);
-$pdf->roundedRectangle(28,650,260,120,10,$f=0);
+$pdf->roundedRectangle(28,580,260,120,10,$f=0);
 
 
 // sold to info in left rectangle    
@@ -115,7 +117,7 @@ $pdf->addText($indent,$pos -= GENERAL_LEADING,GENERAL_FONT_SIZE,$cty_st_zip);
 // right rounded rectangle around ship to info
 $pdf->setStrokeColor(0,0,0);
 $pdf->setLineStyle(1);
-$pdf->roundedRectangle(298,650,260,120,10,$f=0);
+$pdf->roundedRectangle(298,580,260,120,10,$f=0);
 
 
 
@@ -171,7 +173,7 @@ $pos = $pdf->ezText("");
  
 // payment method  
 if ($HTTP_POST_VARS['show_pay_method']) {
-$pos = $pdf->ezText("<b>" . ENTRY_PAYMENT_METHOD . "</b> " . $order->info['payment_method'],GENERAL_FONT_SIZE);
+$pos = $pdf->ezText("<b>" . ENTRY_PAYMENT_METHOD . "</b> " . str_replace($vilains , $cools, $order->info['payment_method']),GENERAL_FONT_SIZE);
 
 if ($order->info['payment_method'] == PAYMENT_TYPE) {
 $pos = $pdf->ezText("<b>" . ENTRY_PAYMENT_TYPE . "</b> " . $order->info['cc_type'],GENERAL_FONT_SIZE);
@@ -276,7 +278,7 @@ $pos -= PRODUCT_TABLE_BOTTOM_MARGIN;
 	
 	for ($i = 0, $n = sizeof($order->totals); $i < $n; $i++) {
 	
-$pdf->addText(LEFT_MARGIN ,$pos -= PRODUCT_TOTALS_LEADING,PRODUCT_TOTALS_FONT_SIZE,"<b>" . $order->totals[$i]['title'] . "</b>");
+$pdf->addText (LEFT_MARGIN ,$pos -= PRODUCT_TOTALS_LEADING,PRODUCT_TOTALS_FONT_SIZE,"<b>" . str_replace($vilains , $cools ,$order->totals[$i]['title']) . "</b>");
 $pdf->addText($x,$pos,PRODUCT_TOTALS_FONT_SIZE,$order->totals[$i]['text'], $order->info['currency_value']);
 		
 		} //EOFOR
@@ -284,7 +286,7 @@ $pdf->addText($x,$pos,PRODUCT_TOTALS_FONT_SIZE,$order->totals[$i]['text'], $orde
 $pos -= SECTION_DIVIDER;
 
 
-$innum = $orders['orders_id'];
+$innum = $orders['orders_prefix'].$orders['orders_id'];
 $orders_comments_query = tep_db_query("select comments,date_added from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '$innum' order by date_added");
 if (tep_db_num_rows($orders_comments_query)) {
     while ($orders_comments = tep_db_fetch_array($orders_comments_query)) {
@@ -299,7 +301,7 @@ if (tep_db_num_rows($orders_comments_query)) {
 
 
 
-require(BATCH_PRINT_INC . 'templates/' . 'grid.php');
+//require(BATCH_PRINT_INC . 'templates/' . 'grid.php');
 
 
 }

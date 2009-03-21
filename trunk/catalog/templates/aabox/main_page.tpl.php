@@ -62,11 +62,9 @@ function CVVPopUpWindow(url) {
 //--></script>
 <?php
 	//// END:  Added for Dynamic MoPics v3.000
-
-
 ?>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" onload="selectRowEffect(this, 0)">
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0">
  <!-- coolMenu //-->
  <?php
  if (DISPLAY_DHTML_MENU == 'CoolMenu') {
@@ -87,6 +85,9 @@ TS: 750 pixel centered table for all pages of store -->
 <?php
 // include i.e. template switcher in every template
 if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common_top.php')); // BTSv1.5
+
+// BOF Added: Down for Maintenance Hide header if not to show
+if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false') {
 ?>
 <!-- header //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -106,18 +107,28 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 	<!-- TSend of lower header cell remove above <tr> to </tr> to remove this section -->
 </table>
 <!-- header_eof //-->
-
-<!-- body // TS: background OSCMAX_box_bg.jpg images added -->
+<?php
+}
+?>
+<!-- body //-->
 <table background="images/OSCMAX_box_bg.jpg" border="0" width="100%" cellspacing="0" cellpadding="2">
   <tr>
     <td width="<?php echo BOX_WIDTH; ?>" valign="top">
     		<table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="0">
-						<!-- left_navigation //-->
-<?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
-						<!-- left_navigation_eof //-->
-    		</table>
+						
+<?php
+// Hide column_left.php if not to show
+if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
+?>
+          <!-- left_navigation //-->
+  <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
+          <!-- left_navigation_eof //-->
+<?php
+}
+?>
+				</table>
     </td>
-		<!-- content //-->
+<!-- content //-->
     <td width="100%" valign="top">
 				<!-- TS table added to restrict content in center box  -->
 					<table width="480" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -131,20 +142,31 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 					</table>
 					<!-- TS end table for center box area -->
    </td>
-		<!-- content_eof //-->
+<!-- content_eof //-->
    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
    			<table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="0">
-				<!-- right_navigation //-->
-<?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
-				<!-- right_navigation_eof //-->
+<?php
+// Hide column_left.php if not to show
+  if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
+?>								
+<!-- right_navigation //-->
+  <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
+<!-- right_navigation_eof //-->
+<?php
+}
+?>  		 
    		 </table>
    </td>
  </tr>
 </table>
 <!-- body_eof //-->
 
+<?php
+// BOF Added: Down for Maintenance Hide footer.php if not to show
+if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false') {
+?>
 <!-- footer //-->
-<?php require(DIR_WS_INCLUDES . 'counter.php'); ?>
+  <?php require(DIR_WS_INCLUDES . 'counter.php'); ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr class="footer">
     <td class="footer">&nbsp;&nbsp;<?php echo strftime(DATE_FORMAT_LONG); ?>&nbsp;&nbsp;</td>
@@ -161,12 +183,6 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
   the site theme has been modified to distinguish
   itself from the default osCommerce-copyrighted
   theme or the default osCMax copyrighted theme.
-
-  For more information please read the following
-  Frequently Asked Questions entry on the osCommerce
-  support site:
-
-  http://oscdox.com/community.php/faq,26/q,50
 
   Please leave this comment intact together with the
   following copyright announcement.
@@ -191,6 +207,9 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
   }
 ?>
 <!-- footer_eof //-->
+<?php
+}
+?>
 <!-- TS closing tags of 750 pixel table -->
 </td>
   </tr>

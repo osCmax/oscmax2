@@ -36,7 +36,7 @@ $Id: define_mainpage.php 14 2006-07-28 17:42:07Z user $
   require(DIR_FCKEDITOR . 'fckeditor.php');
 // This will cause it to look for 'mainpage.php'
 
-  $HTTP_GET_VARS['filename'] = 'mainpage.php';
+  $HTTP_GET_VARS['filename'] = FILENAME_DEFINE_MAINPAGE_CONTENT;
 
   switch ($HTTP_GET_VARS['action']) {
     case 'save':
@@ -134,7 +134,8 @@ $Id: define_mainpage.php 14 2006-07-28 17:42:07Z user $
               </tr>
               <tr>
                 <td class="main"><?php if (HTML_AREA_WYSIWYG_DISABLE_DEFINE == 'Enable') {
-                echo tep_draw_fckeditor('file_contents', '550', '300', $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
+// Line Changed - MOD: Ajustable Editor Window
+                echo tep_draw_fckeditor('file_contents', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
               } else { echo tep_draw_textarea_field('file_contents', 'soft', '100%', '30', $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
                }
                ?>

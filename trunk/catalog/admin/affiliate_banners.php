@@ -28,13 +28,16 @@ $Id: affiliate_banners.php 14 2006-07-28 17:42:07Z user $
           $messageStack->add_session(ERROR_UNKNOWN_STATUS_FLAG, 'error');
         }
 
-        tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'page=' . $HTTP_GET_VARS['page'] . '&abID=' . $HTTP_GET_VARS['abID']));
+        tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $HTTP_GET_VARS['page'] . '&abID=' . $HTTP_GET_VARS['abID']));
         break;
       case 'insert':
       case 'update':
         $affiliate_banners_id = tep_db_prepare_input($HTTP_POST_VARS['affiliate_banners_id']);
         $affiliate_banners_title = tep_db_prepare_input($HTTP_POST_VARS['affiliate_banners_title']);
         $affiliate_products_id  = tep_db_prepare_input($HTTP_POST_VARS['affiliate_products_id']);
+// Added Category Banners
+        $affiliate_category_id  = tep_db_prepare_input($HTTP_POST_VARS['affiliate_category_id']);
+// End Category Banners
         $new_affiliate_banners_group = tep_db_prepare_input($HTTP_POST_VARS['new_affiliate_banners_group']);
         $affiliate_banners_group = (empty($new_affiliate_banners_group)) ? tep_db_prepare_input($HTTP_POST_VARS['affiliate_banners_group']) : $new_affiliate_banners_group;
         $affiliate_banners_image_target = tep_db_prepare_input($HTTP_POST_VARS['affiliate_banners_image_target']);
@@ -74,8 +77,14 @@ $Id: affiliate_banners.php 14 2006-07-28 17:42:07Z user $
           }
 
           if (!$affiliate_products_id) $affiliate_products_id="0";
+// Added Category Banners
+          if (!$affiliate_category_id) $affiliate_category_id="0";
+// End Category Banners
             $sql_data_array = array('affiliate_banners_title' => $affiliate_banners_title,
                                     'affiliate_products_id' => $affiliate_products_id,
+// Added Category Banners
+                                    'affiliate_category_id' => $affiliate_category_id,
+// End Category Banners
                                     'affiliate_banners_image' => $db_image_location,
                                     'affiliate_banners_group' => $affiliate_banners_group);
 
@@ -96,7 +105,7 @@ $Id: affiliate_banners.php 14 2006-07-28 17:42:07Z user $
             $messageStack->add_session(SUCCESS_BANNER_UPDATED, 'success');
           }
 
-          tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'page=' . $HTTP_GET_VARS['page'] . '&abID=' . $affiliate_banners_id));
+          tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $HTTP_GET_VARS['page'] . '&abID=' . $affiliate_banners_id));
         } else {
           $HTTP_GET_VARS['action'] = 'new';
         }
@@ -124,7 +133,7 @@ $Id: affiliate_banners.php 14 2006-07-28 17:42:07Z user $
 
         $messageStack->add_session(SUCCESS_BANNER_REMOVED, 'success');
 
-        tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'page=' . $HTTP_GET_VARS['page']));
+        tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $HTTP_GET_VARS['page']));
         break;
     }
   }
@@ -137,7 +146,12 @@ $Id: affiliate_banners.php 14 2006-07-28 17:42:07Z user $
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript"><!--
 function popupImageWindow(url) {
-  window.open(url,'popupImageWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,width=100,height=100,screenX=150,screenY=150,top=150,left=150')
+  window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=600,height=300,screenX=150,screenY=150,top=150,left=150')
+}
+//--></script>
+<script language="javascript"><!--
+function popupWindow(url) {
+  window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=600,height=300,screenX=150,screenY=150,top=150,left=150')
 }
 //--></script>
 </head>
@@ -208,6 +222,29 @@ function popupImageWindow(url) {
             <td class="main" colspan=2><?php echo TEXT_BANNERS_LINKED_PRODUCT_NOTE ?></td>
           </tr>
           <tr>
+            <td class="main" colspan=2>&nbsp;&nbsp;</b><?php echo '<a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_AFFILIATE_VALIDPRODUCTS) . '\')"><b>' . TEXT_AFFILIATE_VALIDPRODUCTS . '</b></a>'; ?>&nbsp;&nbsp;<?php echo TEXT_AFFILIATE_INDIVIDUAL_BANNER_VIEW;?></td>
+          </tr>
+          <tr>
+            <td class="main" colspan=2><?php echo TEXT_AFFILIATE_INDIVIDUAL_BANNER_HELP;?>
+          </tr>
+<?php  // Added Category Banners 
+?>
+          <tr>
+            <td class="main"><?php echo TEXT_BANNERS_LINKED_CATEGORY; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('affiliate_category_id', $abInfo->affiliate_category_id, '', false); ?></td>
+          </tr>
+          <tr>
+            <td class="main" colspan=2><?php echo TEXT_BANNERS_LINKED_CATEGORY_NOTE ?></td>
+          </tr>
+          <tr>
+            <td class="main" colspan=2>&nbsp;&nbsp;</b><?php echo '<a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_AFFILIATE_VALIDCATS) . '\')"><b>' . TEXT_AFFILIATE_VALIDPRODUCTS . '</b></a>'; ?>&nbsp;&nbsp;<?php echo TEXT_AFFILIATE_CATEGORY_BANNER_VIEW;?></td>
+          </tr>
+<?php // End Category Banners
+?>
+          <tr>
+            <td class="main" colspan=2><?php echo TEXT_AFFILIATE_CATEGORY_BANNER_HELP;?>
+          </tr>
+          <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
 <?php
@@ -240,7 +277,7 @@ function popupImageWindow(url) {
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main" align="right" valign="top" nowrap><?php echo (($form_action == 'insert') ? tep_image_submit('button_insert.gif', IMAGE_INSERT) : tep_image_submit('button_update.gif', IMAGE_UPDATE)). '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'page=' . $HTTP_GET_VARS['page'] . '&abID=' . $HTTP_GET_VARS['abID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+            <td class="main" align="right" valign="top" nowrap><?php echo (($form_action == 'insert') ? tep_image_submit('button_insert.gif', IMAGE_INSERT) : tep_image_submit('button_update.gif', IMAGE_UPDATE)). '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $HTTP_GET_VARS['page'] . '&abID=' . $HTTP_GET_VARS['abID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
           </tr>
         </table></td>
       </form></tr>
@@ -253,6 +290,11 @@ function popupImageWindow(url) {
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_BANNERS; ?></td>
+<?php // Added Category Banners
+?>
+                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_CATEGORY_ID; ?></td>
+<?php // End Category Banners
+?>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_PRODUCT_ID; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_STATISTICS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
@@ -280,9 +322,14 @@ function popupImageWindow(url) {
       }
 ?>
                 <td class="dataTableContent"><?php echo '<a href="javascript:popupImageWindow(\'' . FILENAME_AFFILIATE_POPUP_IMAGE . '?banner=' . $affiliate_banners['affiliate_banners_id'] . '\')">' . tep_image(DIR_WS_IMAGES . 'icon_popup.gif', ICON_PREVIEW) . '</a>&nbsp;' . $affiliate_banners['affiliate_banners_title']; ?></td>
+<?php // Added Category Banners
+?>
+                <td class="dataTableContent" align="right"><?php if ($affiliate_banners['affiliate_category_id']>0) echo $affiliate_banners['affiliate_category_id']; else echo '&nbsp;'; ?></td>
+<?php // End Category Banners
+?>
                 <td class="dataTableContent" align="right"><?php if ($affiliate_banners['affiliate_products_id']>0) echo $affiliate_banners['affiliate_products_id']; else echo '&nbsp;'; ?></td>
                 <td class="dataTableContent" align="right"><?php echo $affiliate_banners_shown . ' / ' . $affiliate_banners_clicked; ?></td>
-                <td class="dataTableContent" align="right"><?php if ( (is_object($abInfo)) && ($affiliate_banners['affiliate_banners_id'] == $abInfo->affiliate_banners_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'page=' . $HTTP_GET_VARS['page'] . '&abID=' . $affiliate_banners['affiliate_banners_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($abInfo)) && ($affiliate_banners['affiliate_banners_id'] == $abInfo->affiliate_banners_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $HTTP_GET_VARS['page'] . '&abID=' . $affiliate_banners['affiliate_banners_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
@@ -294,7 +341,7 @@ function popupImageWindow(url) {
                     <td class="smallText" align="right"><?php echo $affiliate_banners_split->display_links($affiliate_banners_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page']); ?></td>
                   </tr>
                   <tr>
-                    <td align="right" colspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'action=new') . '">' . tep_image_button('button_new_banner.gif', IMAGE_NEW_BANNER) . '</a>'; ?></td>
+                    <td align="right" colspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&action=new') . '">' . tep_image_button('button_new_banner.gif', IMAGE_NEW_BANNER) . '</a>'; ?></td>
                   </tr>
                 </table></td>
               </tr>
@@ -310,7 +357,7 @@ function popupImageWindow(url) {
       $contents[] = array('text' => TEXT_INFO_DELETE_INTRO);
       $contents[] = array('text' => '<br><b>' . $abInfo->affiliate_banners_title . '</b>');
       if ($abInfo->affiliate_banners_image) $contents[] = array('text' => '<br>' . tep_draw_checkbox_field('delete_image', 'on', true) . ' ' . TEXT_INFO_DELETE_IMAGE);
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'page=' . $HTTP_GET_VARS['page'] . '&abID=' . $HTTP_GET_VARS['abID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $HTTP_GET_VARS['page'] . '&abID=' . $HTTP_GET_VARS['abID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     default:
       if (is_object($abInfo)) {
@@ -319,7 +366,7 @@ function popupImageWindow(url) {
         $product_description = tep_db_fetch_array($product_description_query);
         $heading[] = array('text' => '<b>' . $abInfo->affiliate_banners_title . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'page=' . $HTTP_GET_VARS['page'] . '&abID=' . $abInfo->affiliate_banners_id . '&action=new') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'page=' . $HTTP_GET_VARS['page'] . '&abID=' . $abInfo->affiliate_banners_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $HTTP_GET_VARS['page'] . '&abID=' . $abInfo->affiliate_banners_id . '&action=new') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $HTTP_GET_VARS['page'] . '&abID=' . $abInfo->affiliate_banners_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
         $contents[] = array('text' => $product_description['products_name']);
         $contents[] = array('text' => '<br>' . TEXT_BANNERS_DATE_ADDED . ' ' . tep_date_short($abInfo->affiliate_date_added));
         $contents[] = array('text' => '' . sprintf(TEXT_BANNERS_STATUS_CHANGE, tep_date_short($abInfo->affiliate_date_status_change)));

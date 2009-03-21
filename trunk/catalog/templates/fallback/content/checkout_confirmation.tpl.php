@@ -1,3 +1,12 @@
+    <?php
+  	  	  	if (isset($$payment->form_action_url)) {
+  	  	  	$form_action_url = $$payment->form_action_url;
+  	  	  	  } else {
+  	  	  	    $form_action_url = tep_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL');
+  	  	  	  }
+  	  	  	
+  	  	  	  echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
+  	 ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -201,19 +210,12 @@
           <tr>
             <td align="right" class="main">
 <?php
-  if (isset($$payment->form_action_url)) {
-    $form_action_url = $$payment->form_action_url;
-  } else {
-    $form_action_url = tep_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL');
-  }
-
-  echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
 
   if (is_array($payment_modules->modules)) {
     echo $payment_modules->process_button();
   }
 
-  echo tep_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONFIRM_ORDER) . '</form>' . "\n";
+  echo tep_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONFIRM_ORDER) . "\n";
 ?>
             </td>
           </tr>
@@ -254,4 +256,4 @@
           </tr>
         </table></td>
       </tr>
-    </table>
+    </table></form>

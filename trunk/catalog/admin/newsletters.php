@@ -39,7 +39,7 @@ $Id: newsletters.php 3 2006-05-27 04:59:07Z user $
           $newsletter_error = true;
         }
 
-        if (empty($module)) {
+        if (empty($newsletter_module)) {
           $messageStack->add(ERROR_NEWSLETTER_MODULE, 'error');
           $newsletter_error = true;
         }
@@ -194,8 +194,8 @@ $Id: newsletters.php 3 2006-05-27 04:59:07Z user $
 <?php // BOF: MOD - WYSIWYG HTML Area Box
 /*          <td class="main"><?php echo tep_draw_textarea_field('content', 'soft', '100%', '20', $nInfo->content); ?></td> */ ?>
             <td class="main"><?php if (HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER == 'Enable') {
-            	 echo tep_draw_fckeditor('content', '550', '300', $nInfo->content) . '</td>';
-            	} else { tep_draw_textarea_field('content', 'soft', '100%', '20', $nInfo->content) . '</td>';
+            	 echo tep_draw_fckeditor('content', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, $nInfo->content) . '</td>';
+            	} else { echo tep_draw_textarea_field('content', 'soft', '100%', '20', $nInfo->content) . '</td>';
              }
             ?>
 <?php /* EOF: MOD - WYSIWYG HTML Area Box */ ?>

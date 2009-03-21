@@ -120,7 +120,7 @@
                     <td class="main" align="right">
 <?php
     if (sizeof($selection) > 1) {
-      echo tep_draw_radio_field('payment', $selection[$i]['id']);
+      echo tep_draw_radio_field('payment', $selection[$i]['id'], ($selection[$i]['id'] == $payment));
     } else {
       echo tep_draw_hidden_field('payment', $selection[$i]['id']);
     }
@@ -190,7 +190,7 @@
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td><?php echo tep_draw_textarea_field('comments', 'soft', '60', '5'); ?></td>
+                <td><?php echo tep_draw_textarea_field('comments', 'soft', '60', '5', $comments); ?></td>
               </tr>
             </table></td>
           </tr>

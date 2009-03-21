@@ -9,6 +9,10 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
 
   Released under the GNU General Public License
 */
+  if ( (PHP_VERSION >= 4.3) && ((bool)ini_get('register_globals') == false) ) {
+    @ini_set('session.bug_compat_42', 1);
+    @ini_set('session.bug_compat_warn', 0);
+  }
 
   if (STORE_SESSIONS == 'mysql') {
     if (!$SESS_LIFE = get_cfg_var('session.gc_maxlifetime')) {
@@ -30,8 +34,7 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
       if (isset($value['value'])) {
         return $value['value'];
       }
-
-      return false;
+      return '';
     }
 
     function _sess_write($key, $val) {
@@ -64,7 +67,6 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
   }
 
   function tep_session_start() {
-// BOF: MS2 update 501112 - Added
     global $HTTP_GET_VARS, $HTTP_POST_VARS, $HTTP_COOKIE_VARS;
 
     $sane_session_id = true;
@@ -94,7 +96,6 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
     if ($sane_session_id == false) {
       tep_redirect(tep_href_link(FILENAME_DEFAULT, '', 'NONSSL', false));
     }
-// EOF: MS2 update 501112 - Added
     return session_start();
   }
 
@@ -102,18 +103,34 @@ $Id: sessions.php 14 2006-07-28 17:42:07Z user $
     global $session_started;
 
     if ($session_started == true) {
-      return session_register($variable);
-    } else {
-      return false;
+      if (PHP_VERSION < 4.3) {
+        return session_register($variable);
+      } else {
+        if (isset($GLOBALS[$variable])) {
+          $_SESSION[$variable] =& $GLOBALS[$variable];
+        } else {
+          $_SESSION[$variable] = null;
+        }
+      }
     }
+
+    return false;
   }
 
   function tep_session_is_registered($variable) {
-    return session_is_registered($variable);
+    if (PHP_VERSION < 4.3) {
+      return session_is_registered($variable);
+    } else {
+      return isset($_SESSION) && array_key_exists($variable, $_SESSION);
+    }
   }
 
   function tep_session_unregister($variable) {
-    return session_unregister($variable);
+    if (PHP_VERSION < 4.3) {
+      return session_unregister($variable);
+    } else {
+      unset($_SESSION[$variable]);
+    }
   }
 
   function tep_session_id($sessid = '') {

@@ -38,8 +38,13 @@ $Id: affiliate_clicks.php 14 2006-07-28 17:42:07Z user $
     ";
   $affiliate_clickthroughs_split = new splitPageResults($affiliate_clickthroughs_raw, MAX_DISPLAY_SEARCH_RESULTS);
 
-  $content = affiliate_clicks; 
+  $affiliate_clickthroughs_numrows_raw = "select count(*) as count from " . TABLE_AFFILIATE_CLICKTHROUGHS . " where affiliate_id = '" . $affiliate_id . "'";
+  $affiliate_clickthroughs_query = tep_db_query($affiliate_clickthroughs_numrows_raw);
+  $affiliate_clickthroughs_numrows = tep_db_fetch_array($affiliate_clickthroughs_query);
+  $affiliate_clickthroughs_numrows =$affiliate_clickthroughs_numrows['count'];
 
+  $content = affiliate_clicks;
+   
   include (bts_select('main', $content_template)); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 

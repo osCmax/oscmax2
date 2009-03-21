@@ -1,11 +1,6 @@
 <?php
 /*
-  Created by: Linda McGrath osCOMMERCE@WebMakers.com
-  
-  Update by: fram 05-05-2003
-  Updated by: Donald Harriman - 08-08-2003 - MS2
-
-  down_for_maintenance.php v1.1
+$Id: down_for_maintenance.php 3 2006-05-27 04:59:07Z user $
   
   osCMax Power E-Commerce
   http://oscdox.com

@@ -48,7 +48,7 @@
 // check to see if there are deeper topics within the current topic
       $topic_links = array_reverse($tPath_array);
       for($i=0, $n=sizeof($topic_links); $i<$n; $i++) {
-        $topics_query = ("select a.articles_id from (articles a, articles_to_topics a2t) left join topics_description td on a2t.topics_id = td.topics_id left join authors au on a.authors_id = au.authors_id, articles_description ad where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a.articles_status = '1' and a.articles_id = ad.articles_id and ad.language_id = '1' and td.language_id = '1' and a.articles_date_added > SUBDATE(now( ), INTERVAL '30' DAY ");
+        $topics_query = tep_db_query("SELECT COUNT(*) as total from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.parent_id = '" . (int)$topic_links[$i] . "' and t.topics_id = td.topics_id and td.language_id = '" . (int)$languages_id . "'");
         $topics = tep_db_fetch_array($topics_query);
         if ($topics['total'] < 1) {
           // do nothing, go through the loop
@@ -61,26 +61,12 @@
       $topics_query = tep_db_query("select t.topics_id, td.topics_name, t.parent_id from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.parent_id = '" . (int)$current_topic_id . "' and t.topics_id = td.topics_id and td.language_id = '" . (int)$languages_id . "' order by sort_order, td.topics_name");
     }
 
-//    $number_of_topics = tep_db_num_rows($topics_query);
-
-//  $rows = 0;
-//    while ($topics = tep_db_fetch_array($topics_query)) {
-//      $rows++;
-//      $tPath_new = tep_get_path($topics['topics_id']);
-//      $width = (int)(100 / MAX_DISPLAY_TOPICS_PER_ROW) . '%';
-//      echo '                <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . tep_href_link(FILENAME_ARTICLES, $tPath_new) . '">' . tep_image(DIR_WS_IMAGES . $topics['topics_image'], $topics['topics_name'], SUBTOPIC_IMAGE_WIDTH, SUBTOPIC_IMAGE_HEIGHT) . '<br>' . $topics['topics_name'] . '</a></td>' . "\n";
-//      if ((($rows / MAX_DISPLAY_TOPICS_PER_ROW) == floor($rows / MAX_DISPLAY_TOPICS_PER_ROW)) && ($rows != $number_of_topics)) {
-//        echo '              </tr>' . "\n";
-//        echo '              <tr>' . "\n";
- //     }
- //   }
-
 // needed for the new articles module shown below
     $new_articles_topic_id = $current_topic_id;
 ?>
-                    </tr>
-                  </table></td>
               </tr>
+            </table></td>
+          </tr>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>
@@ -105,25 +91,25 @@
     if (isset($HTTP_GET_VARS['authors_id'])) {
       if (isset($HTTP_GET_VARS['filter_id']) && tep_not_null($HTTP_GET_VARS['filter_id'])) {
 // We are asked to show only a specific topic
-        $listing_sql = "select a.articles_id, a.authors_id, a.articles_date_added, ad.articles_name, ad.articles_head_desc_tag, au.authors_name, td.topics_name, a2t.topics_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad left join " . TABLE_AUTHORS . " au on a.authors_id = au.authors_id, " . TABLE_ARTICLES_TO_TOPICS . " a2t left join " . TABLE_TOPICS_DESCRIPTION . " td on a2t.topics_id = td.topics_id where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_status = '1' and au.authors_id = '" . (int)$HTTP_GET_VARS['authors_id'] . "' and a.articles_id = a2t.articles_id and ad.articles_id = a2t.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' and a2t.topics_id = '" . (int)$HTTP_GET_VARS['filter_id'] . "' order by a.articles_date_added desc, ad.articles_name";
+        $listing_sql = "select a.articles_id, a.authors_id, a.articles_date_added, ad.articles_name, ad.articles_head_desc_tag, au.authors_name, td.topics_name, a2t.topics_id from " . TABLE_ARTICLES . " a left join " . TABLE_AUTHORS . " au using(authors_id), " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t left join " . TABLE_TOPICS_DESCRIPTION . " td using(topics_id) where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_status = '1' and au.authors_id = '" . (int)$HTTP_GET_VARS['authors_id'] . "' and a.articles_id = a2t.articles_id and ad.articles_id = a2t.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' and a2t.topics_id = '" . (int)$HTTP_GET_VARS['filter_id'] . "' order by a.articles_date_added desc, ad.articles_name";
       } else {
 // We show them all
-        $listing_sql = "select a.articles_id, a.authors_id, a.articles_date_added, ad.articles_name, ad.articles_head_desc_tag, au.authors_name, td.topics_name, a2t.topics_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad left join " . TABLE_AUTHORS . " au on a.authors_id = au.authors_id, " . TABLE_ARTICLES_TO_TOPICS . " a2t left join " . TABLE_TOPICS_DESCRIPTION . " td on a2t.topics_id = td.topics_id where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_status = '1' and au.authors_id = '" . (int)$HTTP_GET_VARS['authors_id'] . "' and a.articles_id = a2t.articles_id and ad.articles_id = a2t.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' order by a.articles_date_added desc, ad.articles_name";
+        $listing_sql = "select a.articles_id, a.authors_id, a.articles_date_added, ad.articles_name, ad.articles_head_desc_tag, au.authors_name, td.topics_name, a2t.topics_id from " . TABLE_ARTICLES . " a left join " . TABLE_AUTHORS . " au using(authors_id), " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t left join " . TABLE_TOPICS_DESCRIPTION . " td using(topics_id) where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_status = '1' and au.authors_id = '" . (int)$HTTP_GET_VARS['authors_id'] . "' and a.articles_id = a2t.articles_id and ad.articles_id = a2t.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' order by a.articles_date_added desc, ad.articles_name";
       }
     } else {
 // show the articles in a given category
       if (isset($HTTP_GET_VARS['filter_id']) && tep_not_null($HTTP_GET_VARS['filter_id'])) {
 // We are asked to show only specific catgeory
-        $listing_sql = "select a.articles_id, a.authors_id, a.articles_date_added, ad.articles_name, ad.articles_head_desc_tag, au.authors_name, td.topics_name, a2t.topics_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad left join " . TABLE_AUTHORS . " au on a.authors_id = au.authors_id, " . TABLE_ARTICLES_TO_TOPICS . " a2t left join " . TABLE_TOPICS_DESCRIPTION . " td on a2t.topics_id = td.topics_id where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_status = '1' and a.articles_id = a2t.articles_id and ad.articles_id = a2t.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' and a2t.topics_id = '" . (int)$current_topic_id . "' and au.authors_id = '" . (int)$HTTP_GET_VARS['filter_id'] . "' order by a.articles_date_added desc, ad.articles_name";
+        $listing_sql = "select a.articles_id, a.authors_id, a.articles_date_added, ad.articles_name, ad.articles_head_desc_tag, au.authors_name, td.topics_name, a2t.topics_id from " . TABLE_ARTICLES . " a left join " . TABLE_AUTHORS . " au using(authors_id), " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t left join " . TABLE_TOPICS_DESCRIPTION . " td using(topics_id) where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_status = '1' and a.articles_id = a2t.articles_id and ad.articles_id = a2t.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' and a2t.topics_id = '" . (int)$current_topic_id . "' and au.authors_id = '" . (int)$HTTP_GET_VARS['filter_id'] . "' order by a.articles_date_added desc, ad.articles_name";
       } else {
 // We show them all
-        $listing_sql = "select a.articles_id, a.authors_id, a.articles_date_added, ad.articles_name, ad.articles_head_desc_tag, au.authors_name, td.topics_name, a2t.topics_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad left join " . TABLE_AUTHORS . " au on a.authors_id = au.authors_id, " . TABLE_ARTICLES_TO_TOPICS . " a2t left join " . TABLE_TOPICS_DESCRIPTION . " td on a2t.topics_id = td.topics_id where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_status = '1' and a.articles_id = a2t.articles_id and ad.articles_id = a2t.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' and a2t.topics_id = '" . (int)$current_topic_id . "' order by a.articles_date_added desc, ad.articles_name";
+        $listing_sql = "select a.articles_id, a.authors_id, a.articles_date_added, ad.articles_name, ad.articles_head_desc_tag, au.authors_name, td.topics_name, a2t.topics_id from " . TABLE_ARTICLES . " a left join " . TABLE_AUTHORS . " au using(authors_id), " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t left join " . TABLE_TOPICS_DESCRIPTION . " td using(topics_id) where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_status = '1' and a.articles_id = a2t.articles_id and ad.articles_id = a2t.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' and a2t.topics_id = '" . (int)$current_topic_id . "' order by a.articles_date_added desc, ad.articles_name";
       }
     }
 ?>
     <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-        <tr>
-          <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td valign="top" align="left" class="pageHeading">
                   <?php
@@ -243,95 +229,29 @@
         </tr>
         <?php
   $articles_all_array = array();
-  $articles_all_query_raw = "select a.articles_id, a.articles_date_added, ad.articles_name, ad.articles_head_desc_tag, au.authors_id, au.authors_name, td.topics_id, td.topics_name from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_TO_TOPICS . " a2t left join " . TABLE_TOPICS_DESCRIPTION . " td on a2t.topics_id = td.topics_id left join " . TABLE_AUTHORS . " au on a.authors_id = au.authors_id, " . TABLE_ARTICLES_DESCRIPTION . " ad where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a.articles_status = '1' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' order by a.articles_date_added desc, ad.articles_name";
+  $articles_all_query_raw = "select a.articles_id, a.articles_date_added, ad.articles_name, ad.articles_head_desc_tag, au.authors_id, au.authors_name, td.topics_id, td.topics_name from ((" . TABLE_ARTICLES . " a), " . TABLE_ARTICLES_TO_TOPICS . " a2t) left join " . TABLE_TOPICS_DESCRIPTION . " td on a2t.topics_id = td.topics_id left join " . TABLE_AUTHORS . " au on a.authors_id = au.authors_id, " . TABLE_ARTICLES_DESCRIPTION . " ad where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a.articles_status = '1' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "' order by a.articles_date_added desc, ad.articles_name";
+  $listing_sql = $articles_all_query_raw;
 
-  $articles_all_split = new splitPageResults($articles_all_query_raw, MAX_ARTICLES_PER_PAGE);
-  if (($articles_all_split->number_of_rows > 0) && ((ARTICLE_PREV_NEXT_BAR_LOCATION == 'top') || (ARTICLE_PREV_NEXT_BAR_LOCATION == 'both'))) {
+  //$articles_all_split = new splitPageResults($articles_all_query_raw, MAX_ARTICLES_PER_PAGE);
+
 ?>
-        <tr>
-          <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td class="smallText"><?php echo $articles_all_split->display_count(TEXT_DISPLAY_NUMBER_OF_ARTICLES); ?></td>
-                <td align="right" class="smallText"><?php echo TEXT_RESULT_PAGE . ' ' . $articles_all_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></td>
-              </tr>
-            </table></td>
-        </tr>
-        <tr>
-          <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-        </tr>
-        <?php
-  }
-?>
-        <tr>
-          <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <?php
-  if ($articles_all_split->number_of_rows > 0) {
-    $articles_all_query = tep_db_query($articles_all_split->sql_query);
-?>
-              <tr>
-                <td class="main"><?php echo TEXT_ALL_ARTICLES; ?></td>
-              </tr>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-              </tr>
-              <?php
-    while ($articles_all = tep_db_fetch_array($articles_all_query)) {
-?>
-              <tr>
-                <td valign="top" class="main" width="75%">
-                  <?php
-  echo '<a href="' . tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $articles_all['articles_id']) . '"><b>' . $articles_all['articles_name'] . '</b></a> ';
-  if (DISPLAY_AUTHOR_ARTICLE_LISTING == 'true' && tep_not_null($articles_all['authors_name'])) {
-   echo TEXT_BY . ' ' . '<a href="' . tep_href_link(FILENAME_ARTICLES, 'authors_id=' . $articles_all['authors_id']) . '"> ' . $articles_all['authors_name'] . '</a>';
-  }
-?>
-                </td>
-                <?php
-      if (DISPLAY_TOPIC_ARTICLE_LISTING == 'true' && tep_not_null($articles_all['topics_name'])) {
-?>
-                <td valign="top" class="main" width="25%" nowrap><?php echo TEXT_TOPIC . '&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $articles_all['topics_id']) . '">' . $articles_all['topics_name'] . '</a>'; ?></td>
-                <?php
-      }
-?>
-              </tr>
-              <?php
-      if (DISPLAY_ABSTRACT_ARTICLE_LISTING == 'true') {
-?>
-              <tr>
-                <td class="main" style="padding-left:15px"><?php echo clean_html_comments(substr($articles_all['articles_head_desc_tag'],0, MAX_ARTICLE_ABSTRACT_LENGTH)) . ((strlen($articles_all['articles_head_desc_tag']) >= MAX_ARTICLE_ABSTRACT_LENGTH) ? '...' : ''); ?></td>
-              </tr>
-              <?php
-      }
-      if (DISPLAY_DATE_ADDED_ARTICLE_LISTING == 'true') {
-?>
-              <tr>
-                <td class="smalltext" style="padding-left:15px"><?php echo TEXT_DATE_ADDED . ' ' . tep_date_long($articles_all['articles_date_added']); ?></td>
-              </tr>
-              <?php
-      }
-      if (DISPLAY_ABSTRACT_ARTICLE_LISTING == 'true' || DISPLAY_DATE_ADDED_ARTICLE_LISTING) {
-?>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-              </tr>
-              <?php
- }
-    } // End of listing loop
-  } else {
-?>
-              <tr>
-                <td class="main"><?php echo TEXT_NO_ARTICLES; ?></td>
-              </tr>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-              </tr>
-              <?php
-  }
-?>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-              </tr>
-            </table></td>
+      <tr>
+        <td><?php include(DIR_WS_MODULES . FILENAME_ARTICLE_LISTING); ?></td>
+      </tr>
+	  
+	  
+	  
+	  
+	  
+	  
+      <tr>
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+          </tr>
+		  
+      <tr>
+        </table></td>
         </tr>
         <?php
   if (($articles_all_split->number_of_rows > 0) && ((ARTICLE_PREV_NEXT_BAR_LOCATION == 'bottom') || (ARTICLE_PREV_NEXT_BAR_LOCATION == 'both'))) {

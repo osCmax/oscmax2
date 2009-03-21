@@ -10,41 +10,41 @@ $Id: article_reviews.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Article Reviews');
+define('HEADING_TITLE', 'Comentarios de noticias');
 
-define('TABLE_HEADING_ARTICLES', 'Articles');
-define('TABLE_HEADING_RATING', 'Rating');
-define('TABLE_HEADING_DATE_ADDED', 'Date Added');
-define('TABLE_HEADING_ACTION', 'Action');
+define('TABLE_HEADING_ARTICLES', 'Noticias');
+define('TABLE_HEADING_RATING', 'Puntuaci&oacute;n');
+define('TABLE_HEADING_DATE_ADDED', 'Fecha añadida');
+define('TABLE_HEADING_ACTION', 'Acci&oacute;n');
 
-define('ENTRY_ARTICLE', 'Article:');
-define('ENTRY_FROM', 'From:');
-define('ENTRY_DATE', 'Date:');
-define('ENTRY_REVIEW', 'Review:');
-define('ENTRY_REVIEW_TEXT', '<small><font color="#ff0000"><b>NOTE:</b></font></small>&nbsp;HTML is not translated!&nbsp;');
-define('ENTRY_RATING', 'Rating:');
+define('ENTRY_ARTICLE', 'Noticia:');
+define('ENTRY_FROM', 'De:');
+define('ENTRY_DATE', 'Fecha:');
+define('ENTRY_REVIEW', 'Comentario:');
+define('ENTRY_REVIEW_TEXT', '<small><font color="#ff0000"><b>NOTA:</b></font></small>&nbsp;el HTML no es traducido!&nbsp;');
+define('ENTRY_RATING', 'Puntuaci&oacute;n:');
 
-define('TEXT_INFO_DELETE_REVIEW_INTRO', 'Are you sure you want to delete this review?');
+define('TEXT_INFO_DELETE_REVIEW_INTRO', 'Estas seguro de que quieres borrar &eacute;ste comentario?');
 
-define('TEXT_INFO_DATE_ADDED', 'Date Added:');
-define('TEXT_INFO_LAST_MODIFIED', 'Last Modified:');
-define('TEXT_INFO_REVIEW_AUTHOR', 'Reviewer:');
-define('TEXT_INFO_REVIEW_RATING', 'Rating:');
-define('TEXT_INFO_REVIEW_READ', 'Read:');
-define('TEXT_INFO_REVIEW_SIZE', 'Size:');
-define('TEXT_INFO_ARTICLES_AVERAGE_RATING', 'Average Rating:');
+define('TEXT_INFO_DATE_ADDED', 'Fecha añadida:');
+define('TEXT_INFO_LAST_MODIFIED', '&Uacute;ltima modificaci&oacute;n:');
+define('TEXT_INFO_REVIEW_AUTHOR', 'Autor del comentario:');
+define('TEXT_INFO_REVIEW_RATING', 'Puntuaci&oacute;n:');
+define('TEXT_INFO_REVIEW_READ', 'Leer:');
+define('TEXT_INFO_REVIEW_SIZE', 'Tamaño:');
+define('TEXT_INFO_ARTICLES_AVERAGE_RATING', 'Puntuaci&oacute;n media:');
 
-define('TEXT_IMAGE_NONEXISTENT', 'IMAGE DOES NOT EXIST');
+define('TEXT_IMAGE_NONEXISTENT', 'LA IMAGEN NO EXISTE');
 
-define('TEXT_OF_5_STARS', '%s of 5 Stars!');
-define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excellent</b></font></small>');
-define('TEXT_BAD', '<small><font color="#ff0000"><b>Poor</b></font></small>');
-define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Delete Review');
+define('TEXT_OF_5_STARS', '%s de 5 estrellas!');
+define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excelente</b></font></small>');
+define('TEXT_BAD', '<small><font color="#ff0000"><b>Pobre</b></font></small>');
+define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Borrar comentario');
 /* <Mav was here!> */
-define('TEXT_APPROVED', 'Approved') ;
-define('TEXT_APPROVE', 'Approve') ;
-define('TEXT_DISAPPROVE', 'Disapprove') ;
-define('TEXT_YES', 'Yes') ;
+define('TEXT_APPROVED', 'Aprobado') ;
+define('TEXT_APPROVE', 'Aprobar') ;
+define('TEXT_DISAPPROVE', 'Desaprobar') ;
+define('TEXT_YES', 'S&iacute;') ;
 define('TEXT_NO', 'No') ;
 /* </Mav was here!> */
 

@@ -41,8 +41,8 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
     $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
     // BOF Separate Pricing Per Customer, added: field for tax id number
     if (ACCOUNT_COMPANY == 'true') { 
-    $company = tep_db_prepare_input($HTTP_POST_VARS['company']);
-    $company_tax_id = tep_db_prepare_input($HTTP_POST_VARS['company_tax_id']);
+      $company = tep_db_prepare_input($HTTP_POST_VARS['company']);
+      $company_tax_id = tep_db_prepare_input($HTTP_POST_VARS['company_tax_id']);
     }
     // EOF Separate Pricing Per Customer, added: field for tax id number
     $street_address = tep_db_prepare_input($HTTP_POST_VARS['street_address']);
@@ -280,6 +280,11 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 
 // restore cart contents
       $cart->restore_contents();
+      
+//BOF: MOD - Wishlist 3.5
+// restore wishlist to sesssion
+        $wishList->restore_wishlist();
+//EOF: MOD - Wishlist 3.5      
 
 // build the message content
       $name = $firstname . ' ' . $lastname;
@@ -295,7 +300,8 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
       }
 
       $email_text .= EMAIL_WELCOME . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;
-// BOF: MOD - CREDIT CLASS CODE
+
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   if (NEW_SIGNUP_GIFT_VOUCHER_AMOUNT > 0) {
     $coupon_code = create_coupon_code();
     $insert_query = tep_db_query("insert into " . TABLE_COUPONS . " (coupon_code, coupon_type, coupon_amount, date_created) values ('" . $coupon_code . "', 'G', '" . NEW_SIGNUP_GIFT_VOUCHER_AMOUNT . "', now())");
@@ -308,7 +314,7 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
                    "\n\n";
   }
   if (NEW_SIGNUP_DISCOUNT_COUPON != '') {
-    $coupon_code = NEW_SIGNUP_DISCOUNT_COUPON;
+		$coupon_code = NEW_SIGNUP_DISCOUNT_COUPON;
     $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_code = '" . $coupon_code . "'");
     $coupon = tep_db_fetch_array($coupon_query);
     $coupon_id = $coupon['coupon_code'];    
@@ -319,9 +325,6 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
                    sprintf("%s", $coupon_desc['coupon_description']) ."\n\n" .
                    sprintf(EMAIL_COUPON_REDEEM, $coupon['coupon_code']) . "\n\n" .
                    "\n\n";
-
-
-
   }
 //    $email_text .= EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;
   //---------
@@ -340,7 +343,7 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
           }
         }
       }
-// EOF: MOD - CREDIT CLASS CODE
+// BOF: MOD - GV_REDEEM_EXPLOIT_FIX (GVREF)
 
       tep_mail($name, $email_address, EMAIL_SUBJECT, $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 

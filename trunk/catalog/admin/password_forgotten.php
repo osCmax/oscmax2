@@ -5,7 +5,7 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -15,19 +15,19 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
   
   if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
     $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
-    $firstname = tep_db_prepare_input($HTTP_POST_VARS['firstname']);
+    $username = tep_db_prepare_input($HTTP_POST_VARS['username']);
     $log_times = $HTTP_POST_VARS['log_times']+1;
     if ($log_times >= 4) {
       tep_session_register('password_forgotten');
     }
       
 // Check if email exists
-    $check_admin_query = tep_db_query("select admin_id as check_id, admin_firstname as check_firstname, admin_lastname as check_lastname, admin_email_address as check_email_address from " . TABLE_ADMIN . " where admin_email_address = '" . tep_db_input($email_address) . "'");
+    $check_admin_query = tep_db_query("select admin_id as check_id, admin_username as check_username, admin_lastname as check_lastname, admin_email_address as check_email_address from " . TABLE_ADMIN . " where admin_email_address = '" . tep_db_input($email_address) . "'");
     if (!tep_db_num_rows($check_admin_query)) {
       $HTTP_GET_VARS['login'] = 'fail';
     } else {
       $check_admin = tep_db_fetch_array($check_admin_query);
-      if ($check_admin['check_firstname'] != $firstname) {
+      if ($check_admin['check_username'] != $username) {
         $HTTP_GET_VARS['login'] = 'fail';
       } else {
         $HTTP_GET_VARS['login'] = 'success';
@@ -47,7 +47,7 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
         }
         $makePassword = randomize();
       
-        tep_mail($check_admin['check_firstname'] . ' ' . $check_admin['admin_lastname'], $check_admin['check_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $check_admin['check_firstname'], HTTP_SERVER . DIR_WS_ADMIN, $check_admin['check_email_address'], $makePassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);            
+        tep_mail($check_admin['check_username'] . ' ' . $check_admin['admin_lastname'], $check_admin['check_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $check_admin['check_username'], HTTP_SERVER . DIR_WS_ADMIN, $check_admin['check_email_address'], $makePassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);            
         tep_db_query("update " . TABLE_ADMIN . " set admin_password = '" . tep_encrypt_password($makePassword) . "' where admin_id = '" . $check_admin['check_id'] . "'");
       }
     }
@@ -59,19 +59,7 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
-<style type="text/css"><!--
-a { color:#080381; text-decoration:none; }
-a:hover { color: #616161; text-decoration:underline; }
-a.text:link, a.text:visited { color: #858585; text-decoration: none; }
-a:text:hover { color: #000000; text-decoration: underline; }
-a.sub:link, a.sub:visited { color: #6B6B6B; text-decoration: none; }
-A.sub:hover { color: #919191; text-decoration: underline; }
-.sub { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; line-height: 1.5; color: #535353; }
-.text { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000; }
-.smallText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
-.login_heading { font-family: Verdana, Arial, sans-serif; font-size: 12px; color: #010101;}
-.login { font-family: Verdana, Arial, sans-serif; font-size: 12px; color: #000000;}
-//--></style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 
@@ -81,12 +69,12 @@ A.sub:hover { color: #919191; text-decoration: underline; }
       <tr bgcolor="#000000">
         <td><table border="0" width="600" height="440" cellspacing="0" cellpadding="0">
           <tr bgcolor="#ffffff" height="50">
-            <td height="50"><?php echo '<a href="http://aabox.com/virtual-hosting-oscmax.htm">' . tep_image(DIR_WS_IMAGES . 'oscmax.gif', 'osCMax v2.0', '169', '56') . '</a>'; ?></td>
+            <td height="50"><?php echo '<a href="http://www.oscmax.com/">' . tep_image(DIR_WS_IMAGES . 'oscmax.gif', 'osCMax v2.0', '169', '56') . '</a>'; ?></td>
             <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.aabox.com/?oscmax" target="_blank" class="headerLink">AABox Web Hosting</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://oscdox.com" class="headerLink">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp;</td>
           </tr>
           <tr bgcolor="#E7E7E7">
             <td colspan="2" align="center" valign="middle">
-                          <?php echo tep_draw_form('login', 'password_forgotten.php?action=process'); ?>
+                <?php echo tep_draw_form('login', FILENAME_PASSWORD_FORGOTTEN, 'action=process'); ?>
                             <table width="280" border="0" cellspacing="0" cellpadding="2">
                               <tr>
                                 <td class="login_heading" valign="top">&nbsp;<b><?php echo HEADING_PASSWORD_FORGOTTEN; ?></b></td>
@@ -136,8 +124,8 @@ A.sub:hover { color: #919191; text-decoration: underline; }
     }
 ?>                                    
                                     <tr>
-                                      <td class="login"><?php echo ENTRY_FIRSTNAME; ?></td>
-                                      <td class="login"><?php echo tep_draw_input_field('firstname'); ?></td>
+                                      <td class="login"><?php echo ENTRY_USERNAME; ?></td>
+                                      <td class="login"><?php echo tep_draw_input_field('username'); ?></td>
                                     </tr>
                                     <tr>
                                       <td class="login"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>

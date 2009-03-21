@@ -35,7 +35,7 @@ if (!tep_session_is_registered('customer_id')) {
   $box_base_name = 'loginbox'; // for easy unique box template setup (added BTSv1.2)
 
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
-  $boxContent_attributes = ' align="center"';
+//  $boxContent_attributes = ' align="center"';
   
 //    $boxContent = array();
 //    $boxContent[] = array('text'  => BOX_HEADING_LOGIN_BOX);
@@ -48,16 +48,16 @@ if (!tep_session_is_registered('customer_id')) {
 <?php
 
   
-  $boxContent = '<table border="0" width="100%" cellspacing="0" cellpadding="0">';
-  $boxContent .= '<tr><td align="center" valign="top" class="infoBoxContents">';
-	$boxContent .= tep_draw_form('login', tep_href_link(FILENAME_LOGIN, 'action=process', 'SSL'));
-	$boxContent .= BOX_LOGINBOX_EMAIL . tep_draw_input_field('email_address', '', 'size="10" maxlength="100" style="width: ' . (BOX_WIDTH-30) . 'px"') . '<br><br>';
-	$boxContent .= BOX_LOGINBOX_PASSWORD . tep_draw_password_field('password', '', 'size="10" maxlength="40" style="width: ' . (BOX_WIDTH-30) . 'px"') . '<br><br>';
+ // $boxContent = '<table border="0" width="100%" cellspacing="0" cellpadding="0">';
+ // $boxContent .= '<tr><td align="center" valign="top">';
+	$boxContent = tep_draw_form('login', tep_href_link(FILENAME_LOGIN, 'action=process', 'SSL'));
+	$boxContent .= BOX_LOGINBOX_EMAIL . '<br>' . tep_draw_input_field('email_address', '', 'size="10" maxlength="100" style="width: ' . (BOX_WIDTH-30) . 'px"') . '<br>';
+	$boxContent .= BOX_LOGINBOX_PASSWORD . '<br>' . tep_draw_password_field('password', '', 'size="10" maxlength="40" style="width: ' . (BOX_WIDTH-30) . 'px"') . '<br>';
 	$boxContent .= tep_image_submit('button_login.gif', IMAGE_BUTTON_LOGIN);
-	$boxContent .= '</form>';
-	$boxContent .= '<a href="' . tep_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . BOX_LOGINBOX_FORGOT_PASSWORD . '</a>';
-	$boxContent .= '<br>' . '<a href="' . tep_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL'). '">' . BOX_LOGINBOX_TEXT_NEW. '</a>';
-  $boxContent .= '</td></tr></table>';
+	$boxContent .= '<br></form>';
+	$boxContent .= '<a href="' . tep_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '" >' . BOX_LOGINBOX_FORGOT_PASSWORD . '</a>';
+  $boxContent .= '<br>' . '<a href="' . tep_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL'). '">' . BOX_LOGINBOX_TEXT_NEW. '</a>';
+//  $boxContent .= '</td></tr></table>';
   
   
 // 	$boxContent = array();

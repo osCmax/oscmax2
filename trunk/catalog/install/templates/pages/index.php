@@ -17,7 +17,7 @@ $Id: index.php 3 2006-05-27 04:59:07Z user $
 ?>
 
 <div class="mainBlock">
-  <h1>Welcome to osCMax Power E-Commerce v2.0 RC4!</h1>
+  <h1>Welcome to osCMax Power E-Commerce v2.0.0</h1>
 
   <p>osCMax Power E-Commerce allows you to sell products worldwide with your own online store. The administration side manages products, customers, orders, newsletters, specials, and more to successfully build and thrive on the success of your online business.</p>
   <p>osCMax Power E-Commerce is based on osCommerce Online Merchant 2.2 and is aimed at making deployment of your site faster and easier than ever. osCMax Power E-Commerce is backwards compatible with osCommerce Online Merchant 2.2 and thus you can leverage the largest community for an online shopping cart solution: over 140,000 registered store owners and developers who help one another out and have provided over 4,000 add-ons that extend the features and potential of your online store.</p>

@@ -71,7 +71,7 @@ define('HTML_PARAMS','dir="ltr" lang="es"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0 SVN/RC4');
+define('TITLE', PROJECT_VERSION);
 
 // BOF: MOD - ORDER EDIT
 // Create account & order

@@ -40,8 +40,7 @@
         while (list($option, $value) = each($products[$i]['attributes'])) {
           echo tep_draw_hidden_field('id[' . $products[$i]['id'] . '][' . $option . ']', $value);
 //++++ QT Pro: Begin Changed code
-          $attributes = tep_db_query("select popt.products_options_name, popt.products_options_track_stock, poval.products_options_values_name, pa.options_values_price, pa.price_prefix
-//++++ QT Pro: End Changed Code									   
+          $attributes = tep_db_query("select popt.products_options_name, popt.products_options_track_stock, poval.products_options_values_name, pa.options_values_price, pa.price_prefix							   
                                       from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa
                                       where pa.products_id = '" . (int)$products[$i]['id'] . "'
                                        and pa.options_id = '" . (int)$option . "'

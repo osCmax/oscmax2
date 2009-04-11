@@ -174,9 +174,12 @@ DELETE FROM configuration WHERE configuration.configuration_key = 'DISPLAY_PAYME
 UPDATE admin SET admin_username = admin_email_address;
 
 UPDATE configuration SET configuration_description = 'Monitor Live-html,It updates as you type in a 2nd field above it.<p><p>Disable Debug = 0<p>Enable Debug = 1<p>Default = 0 OFF' WHERE configuration.configuration_id =534 LIMIT 1 ;
+UPDATE configuration SET configuration_group_id = '25' WHERE configuration.configuration_group_id =112 ;
 UPDATE configuration SET configuration_group_id = '30' WHERE configuration.configuration_group_id =899 ;
+UPDATE configuration SET configuration_group_id = '45' WHERE configuration.configuration_group_id =901 ;
+UPDATE configuration SET configuration_group_id = '50' WHERE configuration.configuration_group_id =888001 ;
 UPDATE configuration SET configuration_group_id = '55' WHERE configuration.configuration_group_id =26229 ;
-UPDATE configuration SET configuration_group_id = '55' WHERE configuration.configuration_group_id =26229 ;
+
 
 UPDATE configuration_group SET configuration_group_id = '25', configuration_group_title = 'WYSIWYG Editor', configuration_group_description = 'HTMLArea Options', sort_order = '15' WHERE configuration_group.configuration_group_id =112 LIMIT 1 ;
 UPDATE configuration_group SET configuration_group_id = '30', sort_order = '30', sort_order = '30' WHERE configuration_group.configuration_group_id =899 LIMIT 1 ;

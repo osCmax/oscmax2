@@ -118,9 +118,29 @@ $Id: wishlist.php 3 2006-05-27 04:59:07Z user $
 	  	}
 
 		//Check each posted name => email for errors.
-		$j = 0;
-		foreach($HTTP_POST_VARS['friend'] as $friendx) {
-			if($j == 0) {
+    $j = 0;
+    foreach($_POST['friend'] as $friendx) {
+    // secure post
+    $friendx = strip_tags($friendx);
+
+    if($j == 0) {
+    $friend = $_POST['friend'];
+
+    // secure posts
+    $x = 0;
+    foreach ($friend as $value) {
+        $friend[$x] = strip_tags($value);
+        $x++;
+     }
+
+    $email = $_POST['email'];
+    $x = 0;
+    foreach ($email as $value) {
+    $email[$x] = strip_tags($value);
+    $x++;
+   }
+
+
 				if($friend[0] == '' && $email[0] == '') {
 					$error = true;
 					$email_errors .= "<div class=\"messageStackError\"><img src=\"images/icons/error.gif\" /> " . ERROR_ONE_EMAIL . "</div>";

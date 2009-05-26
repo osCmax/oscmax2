@@ -1,0 +1,74 @@
+/*
+$Id: dynamic_mopics.css 3 2006-05-27 04:59:07Z user $
+
+  Dynamic MoPics version 3.000, built for osCommerce MS2
+
+  Copyright 2006 osCMax2004-2005 Josh Dechant
+
+  Released under the GNU General Public License
+*/
+
+BODY.popupImage {
+	background: #FFFFFF;
+	color: #000000;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+.screenshotsBlock {
+	border: 1px solid #bbc3d3;
+	background: #f8f8f9;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+.screenshotsHeaderText {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #ffffff;
+	text-align: left;
+	background: url("images/infobox/corner_left.gif") top left no-repeat;
+	padding: 0 0 0 15px;
+	margin: 0;
+}
+
+.screenshotsHeader {
+	background: #bbc3d3 url("images/infobox/corner_right.gif") top right no-repeat;
+	padding: 0;
+	margin: 10px 0 0 0;
+}
+
+.screenshots {
+	float: left;
+	width: 25%; /* the width sets the number of images per row (i.e., 50% = 2 per row, 33% = 3 per row, 25% = 4 per row, 20% = 5 per row, etc) */
+	text-align: center;
+	padding: 5px 0 5px 0;
+	margin: 0;
+}
+
+.screenshots a:hover {
+	text-decoration: none;
+}
+
+.screenshots IMG {
+	border: 3px double #bbc3d3;
+}
+
+.clearScreenshots {
+	clear: both;
+	height: 1px;
+	width: 100px;
+}
+
+.clearScreenshots hr {
+	display: none;
+}
+
+.noScreenshots {
+	text-align: center;
+	padding: 15px 0 15px 0;
+	margin: 0;
+}

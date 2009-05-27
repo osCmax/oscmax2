@@ -40,6 +40,14 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 
 	// Are there any extra thumbnails for this product?
 	if (mopics_file_exists(DIR_FS_CATALOG . str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN))) {
+	?>
+	<tr>
+      	<td>
+				<div class="screenshotsHeader">
+					<div class="screenshotsHeaderText"><?php echo TEXT_OTHER_PRODUCT_IMAGES; ?></div>
+				</div>
+				<div class="screenshotsBlock"> 
+				<?
 
 		$row = 0;
 
@@ -107,8 +115,12 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 
 		// All thumbnails have been found and displayed; clear all of the CSS floats
 		echo '<div class="clearScreenshots"><hr /></div>';
-	} else {
-		// No extra images found for this product
-		echo '<p class="noScreenshots"><span class="smallText">' . TEXT_NO_MOPICS . '</span></p>';
-	}
-?>
+	} //else {
+		// No extra images found for this product no longer needed 
+		//echo '<p class="noScreenshots"><span class="smallText">' . TEXT_NO_MOPICS . '</span></p>';
+	//} 
+	?>
+	<!-- 1/23/09 -->
+	 </div>
+	</td>
+      </tr>

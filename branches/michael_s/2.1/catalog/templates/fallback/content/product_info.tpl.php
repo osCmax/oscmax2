@@ -133,19 +133,14 @@ document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENA
         </td>
       </tr>
 <?php
-		//// BEGIN:  Added for Dynamic MoPics v3.000
-?>
-      <tr>
-      	<td>
-				<div class="screenshotsHeader">
-					<div class="screenshotsHeaderText"><?php echo TEXT_OTHER_PRODUCT_IMAGES; ?></div>
-				</div>
-				<div class="screenshotsBlock">
-					<?php include(DIR_WS_MODULES . 'dynamic_mopics.php'); ?>
-   			        </div>
-	</td>
-      </tr>
-<?php
+//// BEGIN:  Added for Dynamic MoPics v3.000
+ if (is_file(DIR_WS_IMAGES . $product_info['products_image']) && $product_info['products_image'] != "pixel_trans.gif"){ 
+     
+      	
+					 include(DIR_WS_MODULES . 'dynamic_mopics.php'); 
+   	
+	   } 
+
 		//// END:  Added for Dynamic MoPics v3.000
 ?>
       <tr>

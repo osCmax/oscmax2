@@ -39,21 +39,19 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 	$replace = array($image_base, $i);
 
 	// Are there any extra thumbnails for this product?
-	if (mopics_file_exists(DIR_FS_CATALOG . str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN))) {
+	if (mopics_file_exists(str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN))) {
 	?>
 	<tr>
       	<td>
-				<div class="screenshotsHeader">
-					<div class="screenshotsHeaderText"><?php echo TEXT_OTHER_PRODUCT_IMAGES; ?></div>
-				</div>
-				<div class="screenshotsBlock"> 
-				<?
-
-		$row = 0;
-
-		// Loop until all of this product's thumbnails have been found and displayed…
-		while ($image_ext = mopics_file_exists(DIR_FS_CATALOG .  str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN))) {
-
+		<div class="screenshotsHeader">
+		<div class="screenshotsHeaderText"><?php echo TEXT_OTHER_PRODUCT_IMAGES; ?></div>
+		</div>
+		<div class="screenshotsBlock"> 
+          <div align="center">
+	<?
+	$row = 0;
+	// Loop until all of this product's thumbnails have been found and displayed
+		while ($image_ext = mopics_file_exists(str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN))) {
 			$row++;
 
 			// Set the thumbnail image for this loop
@@ -66,14 +64,12 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 			$replace_lg = array($image_base_lg, $i);
 
 			// Only link to the popup if a larger image exists
-			if ($lg_image_ext = mopics_file_exists(DIR_FS_CATALOG . str_replace($search, $replace_lg, DYNAMIC_MOPICS_PATTERN), DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
-
+			if ($lg_image_ext = mopics_file_exists(str_replace($search, $replace_lg, DYNAMIC_MOPICS_PATTERN))) {
 				// Set the large image for this loop
 				$image_lg = str_replace($search, $replace_lg, DYNAMIC_MOPICS_PATTERN) . '.' . $lg_image_ext;
 
 				// Get the large image's size
-				$image_size = @getimagesize(DIR_FS_CATALOG . $image_lg);
-
+				$image_size = @getimagesize(DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $image_lg);
 				// Set large image's URL for clients with javascript disabled
 				$extraImageURL = tep_href_link($image_lg);
 
@@ -84,8 +80,7 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 				$extraImagePopupWidth = ((int)$image_size[0] + 5);
 
 				// Set the large image's popup height
-				$extraImagePopupHeight = ((int)$image_size[1] + 30);
-
+				$extraImagePopupHeight = ((int)$image_size[1] + 20);
 				// Set the large image's popup URL text
 				$extraImageURLText = TEXT_CLICK_TO_ENLARGE;
 
@@ -93,9 +88,12 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 				$extraImagePopupURL = tep_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $product_info['products_id'] . '&pic=' . $i . '&type=' . $lg_image_ext);
 ?>
 				<div class="screenshots">
-          <script language="javascript" type="text/javascript"><!--
-            document.write('<a href="javascript:popupImage(\'<?php echo $extraImagePopupURL; ?>\',\'<?php echo $extraImagePopupHeight; ?>\',\'<?php echo $extraImagePopupWidth; ?>\');"><?php echo $extraImagePopupImage; ?><br /><span class="smallText"><?php echo $extraImageURLText; ?></span></a>');
-          //--></script>
+<!-- LIGHTBOX/SLIMBOX -->
+<script language="javascript"><!--
+document.write('<?php echo '<a href="' . tep_href_link($image_lg) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >'
+. $extraImagePopupImage; ?><br /><span class="smallText"><?php echo $extraImageURLText; ?></span></a>');
+//--></script>
+<!-- EOF LIGHTBOX/SLIMBOX -->
           <noscript>
             <a href="<?php echo $extraImageURL; ?>" target="_blank"><?php echo $extraImageImage; ?><br /><span class="smallText"><?php echo $extraImageURLText; ?></span></a>
           </noscript>
@@ -115,12 +113,11 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 
 		// All thumbnails have been found and displayed; clear all of the CSS floats
 		echo '<div class="clearScreenshots"><hr /></div>';
-	} //else {
-		// No extra images found for this product no longer needed 
-		//echo '<p class="noScreenshots"><span class="smallText">' . TEXT_NO_MOPICS . '</span></p>';
-	//} 
-	?>
-	<!-- 1/23/09 -->
-	 </div>
-	</td>
-      </tr>
+	} else {
+		// No extra images found for this product
+		// echo '<p class="noScreenshots"><span class="smallText">' . TEXT_NO_MOPICS . '</span></p>';
+	}
+?>
+           </div>
+       </td>
+    </tr>

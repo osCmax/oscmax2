@@ -924,6 +924,7 @@ CREATE TABLE products (
   products_width decimal(6,2) NOT NULL default '12.00',
   products_height decimal(6,2) NOT NULL default '12.00',
   products_ready_to_ship int(1) NOT NULL default '0',
+  products_image varchar(64) NULL, 
   PRIMARY KEY (products_id),
   KEY idx_products_model (products_model),
   KEY idx_products_date_added (products_date_added)
@@ -1661,7 +1662,11 @@ INSERT INTO configuration VALUES (531,'WYSIWYG Editor Font Size','ARTICLE_MANAGE
 INSERT INTO configuration VALUES (532,'WYSIWYG Editor Font Colour','ARTICLE_MANAGER_WYSIWYG_FONT_COLOUR','Black','White,Black,C0C0C0,Red,FFFFFF,Yellow,Pink,Blue,Gray,000000,etc...<br>basically any colour or HTML colour code!<br>(not saved to content)',456,28,NULL,now(),NULL,'');
 INSERT INTO configuration VALUES (533,'WYSIWYG Editor Background Colour','ARTICLE_MANAGER_WYSIWYG_BG_COLOUR','White','White,Black,C0C0C0,Red,FFFFFF,Yellow,Pink,Blue,Gray,000000,etc...<br>basically any colour or html colour code!<br>(not saved to content)',456,29,NULL,now(),NULL,'');
 INSERT INTO configuration VALUES (534,'WYSIWYG Editor Allow Debug Mode?','ARTICLE_MANAGER_WYSIWYG_DEBUG','0','Monitor Live-html,It updates as you type in a 2nd field above it.<p>Disable Debug = 0<br>Enable Debug = 1<br>Default = 0 OFF',456,30,NULL,now(),NULL,'tep_cfg_select_option(array(\'0\',\'1\'),');
-
+INSERT INTO configuration VALUES (599,'Category Images Directory','CATEGORY_IMAGES_DIR','categories/','The directory inside catalog/images where your category images are stored.',45,0,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (595,'Product Image Width','PRODUCT_IMAGE_WIDTH','150','The main product image \(thumbnail\) in product information pages.',4,20,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (596,'Product Image Height','PRODUCT_IMAGE_HEIGHT','','The main product image \(thumbnail\) in product information pages.',4,21,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (597,'Product Popup Image Width','POPOP_IMAGE_WIDTH','','Limits the popup product image \(enlarged\) size in product information pages. Unused by default',4,22,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (598,'Product Popup Image Height','POPUP_IMAGE_HEIGHT','','Limits the popup product image \(enlarged\) size in product information pages. Unused by default',4,23,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (391,'Down For Maintenance Start Time','TEXT_DATE_TIME','2008-05-03 14:23:52','Show when down for maintenance',16,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (700,'Number of Columns for product listings','PRODUCT_LIST_NUM_COLUMNS','4','How many prodcuts per row do you want to display on your product listing page?',8,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (701,'Minimum X-Sell products Listed','MIN_DISPLAY_XSELL','1','How many x-sell products per page',8,20,NULL,now(),NULL,NULL);

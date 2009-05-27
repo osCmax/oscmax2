@@ -119,7 +119,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             $categories_image = '';
           } else {
         $categories_image = new upload('categories_image');
-        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES);
+		        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
 
         if ($categories_image->parse() && $categories_image->save()) {
               tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
@@ -282,7 +282,10 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
           if (isset($HTTP_POST_VARS['products_image']) && tep_not_null($HTTP_POST_VARS['products_image']) && ($HTTP_POST_VARS['products_image'] != 'none')) {
             $sql_data_array['products_image'] = tep_db_prepare_input($HTTP_POST_VARS['products_image']);
           }
-
+// Not working currently - need correct syntax
+//          if (isset($HTTP_POST_VARS['products_thumb']) && tep_not_null($HTTP_POST_VARS['products_thumb']) && ($HTTP_POST_VARS['products_thumb'] != 'none')) {
+//            $sql_data_array['products_thumb'] = tep_db_prepare_input($HTTP_POST_VARS['products_thumb']);
+//          }
           if ($action == 'insert_product') {
             $insert_sql_data = array('products_date_added' => 'now()');
 
@@ -377,12 +380,12 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             }
           } elseif ($HTTP_POST_VARS['copy_as'] == 'duplicate') {
 // LINE MODED: Added "products_ship_price and dimensions for upsxml"
-            $product_query = tep_db_query("select products_ship_price, products_quantity, products_model, products_image, products_price, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_tax_class_id, manufacturers_id from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
+            $product_query = tep_db_query("select products_ship_price, products_quantity, products_model, products_image, products_price, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_tax_class_id, manufacturers_id, products_thumb from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
             $product = tep_db_fetch_array($product_query);
 
 // LINE CHANGED: MS2 update 501112 - Added :(empty($product['products_date_available']) ? "null" : ...{some code}... ") . "
 // LINE MODED: Added "products_ship_price and dimensions for upsxml"
-            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "')");  
+            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id, products_thumb) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "', '" . tep_db_input($product['products_thumb']) . "')");  
             $dup_products_id = tep_db_insert_id();
 
             $description_query = tep_db_query("select language_id, products_name, products_description, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
@@ -405,19 +408,31 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
       case 'new_product_preview':
 // copy image only if modified
         $products_image = new upload('products_image');
-        $products_image->set_destination(DIR_FS_CATALOG_IMAGES);
+        $products_image->set_destination(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);
         if ($products_image->parse() && $products_image->save()) {
           $products_image_name = $products_image->filename;
         } else {
           $products_image_name = (isset($HTTP_POST_VARS['products_previous_image']) ? $HTTP_POST_VARS['products_previous_image'] : '');
+        }
+        $products_thumb = new upload('products_thumb');
+        $products_thumb->set_destination(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR);
+        if ($products_thumb->parse() && $products_thumb->save()) {
+          $products_thumb_name = $products_thumb->filename;
+        } else {
+          $products_thumb_name = (isset($HTTP_POST_VARS['products_previous_thumb']) ? $HTTP_POST_VARS['products_previous_thumb'] : '');
         }
         break;
     }
   }
 
 // check if the catalog image directory exists
-  if (is_dir(DIR_FS_CATALOG_IMAGES)) {
-    if (!is_writeable(DIR_FS_CATALOG_IMAGES)) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
+  if (is_dir(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR)) {
+    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR)) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
+  } else {
+    $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
+  }
+  if (is_dir(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR)) {
+    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR)) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
   } else {
     $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
   }
@@ -572,7 +587,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
 // copy image only if modified
         $categories_image = new upload('categories_image');
-        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES);
+        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
         if ($categories_image->parse() && $categories_image->save()) {
           $categories_image_name = $categories_image->filename;
         } else {
@@ -620,7 +635,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . $categories_image_name, $cInfo->categories_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'align="right" hspace="5" vspace="5"') . $cInfo->categories_description; ?></td>
+        <td class="main"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image_name, $cInfo->categories_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'align="right" hspace="5" vspace="5"') . $cInfo->categories_description; ?></td>
       </tr>
 
 <?php
@@ -697,14 +712,15 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                        'products_last_modified' => '',
                        'products_date_available' => '',
                        'products_status' => '',
-                           'products_tax_class_id' => '',
-                       'manufacturers_id' => '');
+                       'products_tax_class_id' => '',
+                       'manufacturers_id' => '',
+                       'products_thumb' => '');
 
     $pInfo = new objectInfo($parameters);
 
     if (isset($HTTP_GET_VARS['pID']) && empty($HTTP_POST_VARS)) {
 //LINE MODED: Added "p.products_ship_price"
-      $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+      $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.manufacturers_id, p.products_thumb from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
       $product = tep_db_fetch_array($product_query);
 
       $pInfo->objectInfo($product);
@@ -962,7 +978,11 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_IMAGE; ?></td>
+            <td class="main"><?php echo TEXT_PRODUCTS_THUMB; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_file_field('products_thumb') . '<br>' . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $pInfo->products_thumb . tep_draw_hidden_field('products_previous_thumb', $pInfo->products_thumb); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo TEXT_PRODUCTS_IMAGE; ?><br/>(filenames must match)</td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_file_field('products_image') . '<br>' . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $pInfo->products_image . tep_draw_hidden_field('products_previous_image', $pInfo->products_image); ?></td>
           </tr>
           <tr>
@@ -1056,7 +1076,10 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . $products_image_name, $pInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'align="right" hspace="5" vspace="5"') . $pInfo->products_description; ?></td>
+        <td class="main"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image_name, $pInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'align="right" hspace="5" vspace="5"') . $pInfo->products_description; ?></td>
+      </tr>
+      <tr>
+        <td class="main"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $products_image_name, $pInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'align="right" hspace="5" vspace="5"'); ?></td>
       </tr>
 <?php
       if ($pInfo->products_url) {
@@ -1331,7 +1354,7 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
         }
 
         $contents[] = array('text' => '<br>' . TEXT_EDIT_CATEGORIES_NAME . $category_inputs_string);
-        $contents[] = array('text' => '<br>' . tep_image(DIR_WS_CATALOG_IMAGES . $cInfo->categories_image, $cInfo->categories_name) . '<br>' . DIR_WS_CATALOG_IMAGES . '<br><b>' . $cInfo->categories_image . '</b>');
+        $contents[] = array('text' => '<br>' . tep_image(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name) . '<br>' . DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . '<br><b>' . $cInfo->categories_image . '</b>');
         $contents[] = array('text' => '<br>' . TEXT_EDIT_CATEGORIES_IMAGE . '<br>' . tep_draw_file_field('categories_image'));
         $contents[] = array('text' => '<br>' . TEXT_EDIT_SORT_ORDER . '<br>' . tep_draw_input_field('sort_order', $cInfo->sort_order, 'size="2"'));
         $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $cInfo->categories_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
@@ -1409,7 +1432,8 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
             $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=edit_category') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=delete_category') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=move_category') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a>');
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
             if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
-            $contents[] = array('text' => '<br>' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
+//            $contents[] = array('text' => '<br>' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
+            $contents[] = array('text' => '<br>' . tep_info_image(CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
             $contents[] = array('text' => '<br>' . TEXT_SUBCATEGORIES . ' ' . $cInfo->childs_count . '<br>' . TEXT_PRODUCTS . ' ' . $cInfo->products_count);
           } elseif (isset($pInfo) && is_object($pInfo)) { // product info box contents
             $heading[] = array('text' => '<b>' . tep_get_products_name($pInfo->products_id, $languages_id) . '</b>');
@@ -1420,7 +1444,13 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($pInfo->products_date_added));
             if (tep_not_null($pInfo->products_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($pInfo->products_last_modified));
             if (date('Y-m-d') < $pInfo->products_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . tep_date_short($pInfo->products_date_available));
-            $contents[] = array('text' => '<br>' . tep_info_image($pInfo->products_image, $pInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '<br>' . $pInfo->products_image);
+// BOF: MoPics in Admin
+//            $contents[] = array('text' => '<br>' . tep_info_image($pInfo->products_image, $pInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '<br>' . $pInfo->products_image);       	
+	    $contents[] = array('text' => '<br />Existing images (if any):<br />');
+            $contents[] = array('text' => '<br />Main Image (thumbnail):<br />' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $pInfo->products_image . '<br /><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /><br>');
+// once thumbnail is in SQL: $contents[] = array('text' => '<br />Thumbnail:<br />' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $pInfo->products_thumb . '<br /><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $pInfo->products_thumb . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /><br>');
+            $contents[] = array('text' => '<br />Large Image:<br />' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $pInfo->products_image . '<br /><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /><br>');
+// EOF: MoPics in Admin
             $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price) . '<br>' . TEXT_PRODUCTS_QUANTITY_INFO . ' ' . $pInfo->products_quantity);
             $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_AVERAGE_RATING . ' ' . number_format($pInfo->average_rating, 2) . '%');
           }

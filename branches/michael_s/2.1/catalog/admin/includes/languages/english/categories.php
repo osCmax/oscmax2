@@ -77,7 +77,7 @@ define('TEXT_PRODUCTS_NAME', 'Products Name:');
 define('TEXT_PRODUCTS_DESCRIPTION', 'Products Description:');
 define('TEXT_PRODUCTS_QUANTITY', 'Products Quantity:');
 define('TEXT_PRODUCTS_MODEL', 'Products Model:');
-define('TEXT_PRODUCTS_IMAGE', 'Products Image:');
+define('TEXT_PRODUCTS_IMAGE', '<small>(optional) </small>Large Image:');
 define('TEXT_PRODUCTS_URL', 'Products URL:');
 define('TEXT_PRODUCTS_URL_WITHOUT_HTTP', '<small>(without http://)</small>');
 define('TEXT_PRODUCTS_PRICE_NET', 'Products Price (Net):');
@@ -99,4 +99,7 @@ define('ERROR_CANNOT_LINK_TO_SAME_CATEGORY', 'Error: Can not link products in th
 define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Error: Catalog images directory is not writeable: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Error: Catalog images directory does not exist: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CANNOT_MOVE_CATEGORY_TO_PARENT', 'Error: Category cannot be moved into child category.');
+
+define('TEXT_UPLOAD_DYNAMIC_MOPICS', 'Additional Images (optional):');
+define('TEXT_PRODUCTS_THUMB', 'Main Image <small>(thumbnail)</small>:');
 ?>

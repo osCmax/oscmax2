@@ -179,14 +179,9 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 <br>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td align="center">
-
-    All content and Images Copyright &copy; 2009 <?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a>'; ?>
-    <br />
-
-  </td>
     <td align="center" class="smallText">  
-  
+     All content and Images Copyright &copy; 2009 <?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a>'; ?>
+     <br>
 <?php
 /*
   The following copyright announcement can only be

@@ -64,6 +64,16 @@ function CVVPopUpWindow(url) {
 <?php
 	//// END:  Added for Dynamic MoPics v3.000
 ?>
+<!-- BOF LIGHTBOX -->
+<!-- Lightbox commented out in favour of Slimbox
+	<script type="text/javascript" src="lightbox/prototype.js"></script>
+	<script type="text/javascript" src="lightbox/scriptaculous.js?load=effects"></script>
+	<link rel="stylesheet" href="lightbox/lightbox.css" type="text/css" media="screen"> 
+	<script type="text/javascript" src="lightbox/builder.js"></script>
+	<script type="text/javascript" src="lightbox/lightbox.js"></script>  
+-->
+<!-- EOF LIGHTBOX -->
+
 <!-- BOF SLIMBOX2 -->
 <script type="text/javascript" src="slimbox2/jquery.js"></script>
 <script type="text/javascript" src="slimbox2/slimbox2.js"></script>
@@ -169,7 +179,14 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 <br>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td align="center" class="smallText">
+    <td align="center">
+
+    All content and Images Copyright &copy; 2009 <?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a>'; ?>
+    <br />
+
+  </td>
+    <td align="center" class="smallText">  
+  
 <?php
 /*
   The following copyright announcement can only be
@@ -201,6 +218,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
   <tr>
     <td align="center"><?php echo tep_display_banner('static', $banner); ?></td>
   </tr>
+
 </table>
 <?php
   }

@@ -135,15 +135,18 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
     }
 ?>
         </td>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+
+<center>
 <?php
-//// BEGIN:  Added for Dynamic MoPics v3.000
+		//// BEGIN:  Added for Dynamic MoPics v3.000
  if (is_file(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image']) && DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'] != "pixel_trans.gif"){
  					 include(DIR_WS_MODULES . 'dynamic_mopics.php');   	
 	   } 
-
 		//// END:  Added for Dynamic MoPics v3.000
 ?>
+</center>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>

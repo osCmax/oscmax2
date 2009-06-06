@@ -97,7 +97,7 @@
 			if ($lg_image_ext = mopics_file_exists($image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
 				$image_size = @getimagesize($image_lg . '.' . $lg_image_ext);
 				
-			//BOF LIGHTBOX
+			//BOF SLIMBOX
 			$lightlarge = $image_lg . "." . $lg_image_ext;
 ?>
 <script language="javascript"><!--
@@ -106,7 +106,7 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
 <noscript>
 <?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], $product_info['products_name'], PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
 </noscript>
-<!--		 EOF LIGHTBOX   -->
+<!--		 EOF SLIMBOX   -->
 
 <?php
 			} else {

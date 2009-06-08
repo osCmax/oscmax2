@@ -94,4 +94,15 @@
     $date_selector .= '</select>';
     return $date_selector;
   }
+////
+// Sets the status of a coupon
+  function tep_set_coupon_status($coupon_id, $status) {
+    if ($status == 'Y') {
+      return tep_db_query("update " . TABLE_COUPONS . " set coupon_active = 'Y', date_modified = now() where coupon_id = '" . (int)$coupon_id . "'");
+    } elseif ($status == 'N') {
+      return tep_db_query("update " . TABLE_COUPONS . " set coupon_active = 'N', date_modified = now() where coupon_id = '" . (int)$coupon_id . "'");
+    } else {
+      return -1;
+    }
+  }
 ?>

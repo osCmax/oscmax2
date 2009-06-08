@@ -273,7 +273,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
     $order_products_id = tep_db_insert_id();
 
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-$order_total_modules->update_credit_account($i);    
+  $order_total_modules->update_credit_account($i,$insert_id);
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
 //------insert customer choosen option to order--------

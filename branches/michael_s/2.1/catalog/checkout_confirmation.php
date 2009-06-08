@@ -50,9 +50,11 @@ $Id: checkout_confirmation.php 3 2006-05-27 04:59:07Z user $
 
 // load the selected payment module
   require(DIR_WS_CLASSES . 'payment.php');
-  $payment_modules = new payment($payment);
-// LINE ADDED: MOD - ICW CREDIT CLASS SYSTEM
+// Start - CREDIT CLASS Gift Voucher Contribution
+  if ($credit_covers) $payment='credit_covers'; 
   require(DIR_WS_CLASSES . 'order_total.php');
+// End - CREDIT CLASS Gift Voucher Contribution
+  $payment_modules = new payment($payment);
 
   require(DIR_WS_CLASSES . 'order.php');
   $order = new order;
@@ -63,11 +65,15 @@ $Id: checkout_confirmation.php 3 2006-05-27 04:59:07Z user $
   $order_total_modules->collect_posts();
   $order_total_modules->pre_confirmation_check();
 
+// >>> FOR ERROR gv_redeem_code NULL 
+if (isset($_POST['gv_redeem_code']) && ($_POST['gv_redeem_code'] == null)) {tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));} 
+// <<< end for error
 //  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
 //    tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   if ( (is_array($payment_modules->modules)) && (sizeof($payment_modules->modules) > 1) && (!is_object($$payment)) && (!$credit_covers) ) {
-    tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error=ccerr&error=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));  // Rigadin in v5.13: modified error coding in URL
-// EOF: MOD - ICW ADDED FOR CREDIT CLASS SYSTEM
+// End - CREDIT CLASS Gift Voucher Contribution
+
+    tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   }
 
   if (is_array($payment_modules->modules)) {
@@ -82,6 +88,7 @@ $Id: checkout_confirmation.php 3 2006-05-27 04:59:07Z user $
 //  require(DIR_WS_CLASSES . 'order_total.php');
 //  $order_total_modules = new order_total;
 // EOF: MOD - ICW CREDIT CLASS SYSTEM
+
 
 // Stock Check
   $any_out_of_stock = false;

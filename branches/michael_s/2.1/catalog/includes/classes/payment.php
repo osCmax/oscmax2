@@ -18,7 +18,9 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
 // LINE CHANGED: MOD - Downloads Controller - Added $cart
       global $payment, $language, $PHP_SELF, $cart;
 
-      if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED)) {
+// Start - CREDIT CLASS Gift Voucher Contribution
+      if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED) && !$module == 'credit_covers') {
+// End - CREDIT CLASS Gift Voucher Contribution
 // BOF: MOD - Separate Pricing Per Customer, next line original code
 //      $this->modules = explode(';', MODULE_PAYMENT_INSTALLED);
         global $sppc_customer_group_id, $customer_id;
@@ -117,14 +119,28 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
       }
     }
 
-    function javascript_validation() {
+// BOF - CREDIT CLASS Gift Voucher Contribution
+// function javascript_validation() {
+  function javascript_validation($coversAll) {
+	//added the $coversAll to be able to pass whether or not the voucher will cover the whole
+	//price or not.  If it does, then let checkout proceed when just it is passed.
       $js = '';
       if (is_array($this->modules)) {
+        if ($coversAll) {
+          $addThis='if (document.checkout_payment.cot_gv.checked) {
+            payment_value=\'cot_gv\';
+          } else ';
+        } else {
+          $addThis='';
+        }
+// EOF - CREDIT CLASS Gift Voucher Contribution
         $js = '<script language="javascript"><!-- ' . "\n" .
               'function check_form() {' . "\n" .
               '  var error = 0;' . "\n" .
               '  var error_message = "' . JS_ERROR . '";' . "\n" .
-              '  var payment_value = null;' . "\n" .
+// BOF - CREDIT CLASS Gift Voucher Contribution
+              '  var payment_value = null;' . "\n" .$addThis . 
+// EOF - CREDIT CLASS Gift Voucher Contribution
               '  if (document.checkout_payment.payment.length) {' . "\n" .
               '    for (var i=0; i<document.checkout_payment.payment.length; i++) {' . "\n" .
               '      if (document.checkout_payment.payment[i].checked) {' . "\n" .

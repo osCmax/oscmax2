@@ -79,15 +79,15 @@ function use_credit_amount() {
 
 function credit_selection() {
 global $customer_id, $currencies, $language;
-	$selection_string = '';
-	$selection_string .= '<tr>' . "\n";
-	$selection_string .= ' <td width="10">' . tep_draw_separator('pixel_trans.gif', '10', '1') .'</td>';
-	$selection_string .= ' <td class="main">' . "\n";
-	$image_submit = '<input type="image" name="submit_redeem" onClick="submitFunction()" src="' . DIR_WS_LANGUAGES . $language . '/images/buttons/button_redeem.gif" border="0" alt="' . IMAGE_REDEEM_VOUCHER . '" title = "' . IMAGE_REDEEM_VOUCHER . '">';
-	$selection_string .= TEXT_ENTER_COUPON_CODE . tep_draw_input_field('gv_redeem_code') . '</td>';
-	$selection_string .= ' <td align="right">' . $image_submit . '</td>';
-	$selection_string .= ' <td width="10">' . tep_draw_separator('pixel_trans.gif', '10', '1') . '</td>';
-	$selection_string .= '</tr>' . "\n";
+  // START Checkout Display Fix by BTBlomberg
+  $selection_string  = '<tr><td></td><td class="main">';		
+  $selection_string .= tep_draw_form('checkout_payment_gift', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post');
+  $selection_string .= '<div><br /> ';
+  $selection_string .= TEXT_ENTER_GV_CODE . tep_draw_input_field('gv_redeem_code', 'redeem code') ;
+  $selection_string .= ' ';
+  $selection_string .= tep_image_submit('button_redeem.gif', IMAGE_REDEEM_VOUCHER, 'onclick="return submitFunction()"');
+  $selection_string .= '</div><br /></form></td></tr>';
+	// END Checkout Display Fix by BTBlomberg
 	return $selection_string;
 }
 
@@ -138,10 +138,43 @@ global $HTTP_POST_VARS, $customer_id, $currencies, $cc_id;
 		if ($coupon_result['coupon_minimum_order']>0) $coupon_amount .= 'on orders greater than ' . $coupon_result['coupon_minimum_order'];
 		if (!tep_session_is_registered('cc_id')) tep_session_register('cc_id'); //Fred - this was commented out before
 		$cc_id = $coupon_result['coupon_id']; //Fred ADDED, set the global and session variable
-		// $_SESSION['cc_id'] = $coupon_result['coupon_id']; //Fred commented out, do not use $_SESSION[] due to backward comp. Reference the global var instead.
-	}
-	if ($HTTP_POST_VARS['submit_redeem_coupon_x'] && !$HTTP_POST_VARS['gv_redeem_code']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
-	}
+    tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_REDEEMED_AMOUNT), 'SSL')); // Added in v5.13a by Rigadin
+*/
+    global $order,$ot_coupon,$currency;
+// BEGIN >>> CCVG 5.15 - Custom Modification - fix Coupon code redemption error
+// Moved code up a few lines
+    if (!tep_session_is_registered('cc_id')) tep_session_register('cc_id');
+    $cc_id = $coupon_result['coupon_id'];
+// END <<< CCVG 5.15 - Custom Modification - fix Coupon code redemption error
+
+    $coupon_amount= tep_round($ot_coupon->pre_confirmation_check($order->info['subtotal']), $currencies->currencies[$currency]['decimal_places']); // $cc_id
+/* you will need to uncomment this if your tax order total module is AFTER shipping eg you have all of your tax, including tax from shipping module, in your tax total.
+    if ($coupon_result['coupon_type']=='S')  {
+      //if not zero rated add vat to shipping
+      $coupon_amount = tep_add_tax($coupon_amount, '17.5');
+    }
+*/
+    $coupon_amount_out = $currencies->format($coupon_amount) . ' ';
+    if ($coupon_result['coupon_minimum_order']>0) $coupon_amount_out .= 'on orders greater than ' . $currencies->format($coupon_result['coupon_minimum_order']);
+
+    if (!tep_session_is_registered('cc_id')) tep_session_register('cc_id');
+    $cc_id = $coupon_result['coupon_id'];
+
+    if ( strlen($cc_id)>0 && $coupon_amount==0 ) {
+// ccgv coupon restrictions error fix
+//  $err_msg = ERROR_REDEEMED_AMOUNT.ERROR_REDEEMED_AMOUNT_ZERO;
+    $err_msg = ERROR_REDEEMED_AMOUNT_ZERO;
+    } else {
+      $err_msg = ERROR_REDEEMED_AMOUNT.$coupon_amount_out;
+    }
+    tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode($err_msg), 'SSL'));
+//**si** 09-11-05 end
+
+    // $_SESSION['cc_id'] = $coupon_result['coupon_id']; //Fred commented out, do not use $_SESSION[] due to backward comp. Reference the global var instead.
+    } // ENDIF valid coupon code
+  } // ENDIF code entered
+  // v5.13a If no code entered and coupon redeem button pressed, give an alarm
+  if ($HTTP_POST_VARS['submit_redeem_coupon_x']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
 }
 
 function calculate_credit($amount) {
@@ -157,6 +190,7 @@ global $customer_id, $order, $cc_id;
 			$get_result = tep_db_fetch_array($coupon_get);
 			$c_deduct = $get_result['coupon_amount'];
 			if ($get_result['coupon_type']=='S') $c_deduct = $order->info['shipping_cost'];
+      if ($get_result['coupon_type']=='S' && $get_result['coupon_amount'] > 0 ) $c_deduct = $order->info['shipping_cost'] + $get_result['coupon_amount'];
 			if ($get_result['coupon_minimum_order'] <= $this->get_order_total()) {
 				if ($get_result['restrict_to_products'] || $get_result['restrict_to_categories']) {
 					for ($i=0; $i<sizeof($order->products); $i++) {
@@ -175,7 +209,7 @@ global $customer_id, $order, $cc_id;
 											*/
 											//$pr_c = $order->products[$i]['final_price']*$order->products[$i]['qty'];
 											//$pr_c = $this->product_price($pr_ids[$ii]); //Fred 2003-10-28, fix for the row above, otherwise the discount is calc based on price excl VAT!
-											$pr_c = $this->product_price($order->products[$i]['id']); //osCMax bugfix #47
+             									          $pr_c = ($order->products[$i]['final_price'] * $order->products[$i]['qty']);
 											$pod_amount = round($pr_c*10)/10*$c_deduct/100;
 											$od_amount = $od_amount + $pod_amount;
 										} else {
@@ -204,13 +238,16 @@ global $customer_id, $order, $cc_id;
 													*/
 													//$od_amount = round($amount*10)/10*$c_deduct/100;
 													//$pr_c = $order->products[$i]['final_price']*$order->products[$i]['qty'];
-													//$pr_c = $this->product_price(tep_get_prid($order->products[$i]['id'])); //Fred 2003-10-28, fix for the row above, otherwise the discount is calc based on price excl VAT!
-													$pr_c = $this->product_price($order->products[$i]['id']); //osCMax bugfix #47
-													$pod_amount = round($pr_c*10)/10*$c_deduct/100;
-													$od_amount = $od_amount + $pod_amount;
-												} else {
-													$od_amount = $c_deduct;
-												}
+                          $pr_c = $this->product_price(tep_get_prid($order->products[$i]['id'])); //Fred 2003-10-28, fix for the row above, otherwise the discount is calc based on price excl VAT!
+                          // Fix for bug that causes to deduct the coupon amount from the shipping costs.
+                          $pr_c = $this->product_price($order->products[$i]['id']);
+                          $pod_amount = round($pr_c*10)/10*$c_deduct/100;
+                          $od_amount = $od_amount + $pod_amount;
+                          continue 3;  // v5.13a Tanaka 2005-4-30: to prevent double counting of a product discount
+                        } else {
+                          $od_amount = $c_deduct;
+                          continue 3;  // Tanaka 2005-4-30: to prevent double counting of a product discount
+                        }
 											}
 										}
 									}
@@ -228,7 +265,7 @@ global $customer_id, $order, $cc_id;
 			}
 		if ($od_amount>$amount) $od_amount = $amount;
 		}
-	return $od_amount;
+  return tep_round($od_amount,2);
 }
 
 function calculate_tax_deduction($amount, $od_amount, $method) {
@@ -266,10 +303,24 @@ global $customer_id, $order, $cc_id, $cart;
 						}
 					}
 					if ($get_result['restrict_to_categories']) {
-						$cat_ids = split("[,]", $get_result['restrict_to_categories']);
-						for ($c = 0; $c < sizeof($cat_ids); $c++) {
-							$cat_query = tep_db_query("select products_id from products_to_categories where products_id = '" . $products_id . "' and categories_id = '" . $cat_ids[$i] . "'");
-							if (tep_db_num_rows($cat_query) !=0 ) $valid_product = true;
+            // Tanaka 2005-4-30:  Original Code
+            /*$cat_ids = split("[,]", $get_result['restrict_to_categories']);
+            for ($c = 0; $c < sizeof($cat_ids); $c++) {
+              // Tanaka 2005-4-30:  changed $products_id to $t_prid and changed $i to $c
+              $cat_query = tep_db_query("select products_id from products_to_categories where products_id = '" . $t_prid . "' and categories_id = '" . $cat_ids[$c] . "'");
+              if (tep_db_num_rows($cat_query) !=0 ) $valid_product = true;
+            }*/
+            // v5.13a Tanaka 2005-4-30:  New code, this correctly identifies valid products in subcategories
+            $cat_ids = split("[,]", $get_result['restrict_to_categories']);
+            $my_path = tep_get_product_path($t_prid);
+            $sub_cat_ids = split("[_]", $my_path);
+            for ($iii = 0; $iii < count($sub_cat_ids); $iii++) {
+              for ($ii = 0; $ii < count($cat_ids); $ii++) {
+                if ($sub_cat_ids[$iii] == $cat_ids[$ii]) {
+                  $valid_product = true;
+                  continue 2;
+                }
+              }
 						}
 					}
 					if ($valid_product) {
@@ -366,7 +417,7 @@ global $customer_id, $order, $cc_id, $cart;
 return $tod_amount;
 }
 
-function update_credit_account($i) {
+  function update_credit_account($i, $order_id=0) {
 	return false;
 }
 

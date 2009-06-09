@@ -129,6 +129,8 @@ global $HTTP_POST_VARS, $customer_id, $currencies, $cc_id;
 		if (tep_db_num_rows($coupon_count_customer)>=$coupon_result['uses_per_user'] && $coupon_result['uses_per_user'] > 0) {
 			tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_INVALID_USES_USER_COUPON . $coupon_result['uses_per_user'] . TIMES ), 'SSL'));
 		}
+//**si** 09-11-05
+/*
 		if ($coupon_result['coupon_type']=='S') {
 			$coupon_amount = $order->info['shipping_cost'];
 		} else {

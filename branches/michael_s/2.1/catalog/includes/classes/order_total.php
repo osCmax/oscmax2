@@ -203,8 +203,7 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
             $post_var = 'c' . $GLOBALS[$class]->code;
             if ($HTTP_POST_VARS[$post_var]) {
               if (!tep_session_is_registered($post_var)) tep_session_register($post_var);
-// 2 LINEs ADDED: Credit Class v5.13 by Rigadin: have to register the new created variable as global cause we are in a function
-                $post_var = $HTTP_POST_VARS[$post_var]; // Rigadin: does not work because not global variable
+      				$post_var = $HTTP_POST_VARS[$post_var];
             }
             $GLOBALS[$class]->collect_posts();
           }

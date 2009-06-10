@@ -6,6 +6,9 @@
   	  	  	  }
   	  	  	
   	  	  	  echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
+// Start - CREDIT CLASS Gift Voucher Contribution
+  echo tep_draw_hidden_field('gv_redeem_code', $HTTP_POST_VARS['gv_redeem_code']); 
+// End - CREDIT CLASS Gift Voucher Contribution
   	 ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
@@ -128,7 +131,6 @@
             <td width="70%" valign="top" align="right"><table border="0" cellspacing="0" cellpadding="2">
 <?php
   if (MODULE_ORDER_TOTAL_INSTALLED) {
-    $order_total_modules->process();
     echo $order_total_modules->output();
   }
 ?>

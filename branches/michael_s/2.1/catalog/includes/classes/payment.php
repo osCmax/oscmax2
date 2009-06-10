@@ -19,7 +19,7 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
       global $payment, $language, $PHP_SELF, $cart;
 
 // Start - CREDIT CLASS Gift Voucher Contribution
-      if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED) && !$module == 'credit_covers') {
+      if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED) && $module != 'credit_covers') {
 // End - CREDIT CLASS Gift Voucher Contribution
 // BOF: MOD - Separate Pricing Per Customer, next line original code
 //      $this->modules = explode(';', MODULE_PAYMENT_INSTALLED);

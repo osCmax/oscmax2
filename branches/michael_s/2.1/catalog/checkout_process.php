@@ -50,7 +50,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 // load selected payment module
   require(DIR_WS_CLASSES . 'payment.php');
 // LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
-  if ($credit_covers) $payment='';
+  if ($credit_covers) $payment='credit covers';
   $payment_modules = new payment($payment);
 
 // load the selected shipping module

@@ -257,6 +257,7 @@ define('BOX_HEADING_REPORTS', 'Rapports');
 define('BOX_REPORTS_PRODUCTS_VIEWED', 'Produits consult&eacute;s');
 define('BOX_REPORTS_PRODUCTS_PURCHASED', 'Produits achet&eacute;s');
 define('BOX_REPORTS_ORDERS_TOTAL', 'Meilleures commandes');
+define('BOX_REPORTS_CREDITS', 'Customer Credits Report');
 
 // tools text in includes/boxes/tools.php
 define('BOX_HEADING_TOOLS', 'Outils');

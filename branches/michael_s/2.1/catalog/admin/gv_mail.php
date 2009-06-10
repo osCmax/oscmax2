@@ -40,7 +40,7 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
     $subject = tep_db_prepare_input($HTTP_POST_VARS['subject']);
     while ($mail = tep_db_fetch_array($mail_query)) {
       $id1 = create_coupon_code($mail['customers_email_address']);
-      $message = tep_db_prepare_input($HTTP_POST_VARS['message']);
+      $message = $HTTP_POST_VARS['message'];
       $message .= "\n\n" . TEXT_GV_WORTH  . $currencies->format($HTTP_POST_VARS['amount']) . "\n\n";
       $message .= TEXT_TO_REDEEM;
       $message .= TEXT_WHICH_IS . $id1 . TEXT_IN_CASE . "\n\n";

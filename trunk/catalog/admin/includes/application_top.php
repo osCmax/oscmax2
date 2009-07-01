@@ -34,8 +34,8 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
   require(DIR_WS_FUNCTIONS . 'compatibility.php');
 
 // set php_self in the local scope
-  $PHP_SELF = (isset($HTTP_SERVER_VARS['PHP_SELF']) ? $HTTP_SERVER_VARS['PHP_SELF'] : $HTTP_SERVER_VARS['SCRIPT_NAME']);
-
+  $PHP_SELF = $_SERVER['PHP_SELF'];
+  
 // Used in the "Backup Manager" to compress backups
   define('LOCAL_EXE_GZIP', '/usr/bin/gzip');
   define('LOCAL_EXE_GUNZIP', '/usr/bin/gunzip');
@@ -134,7 +134,7 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
 
 // include the language translations
   require(DIR_WS_LANGUAGES . $language . '.php');
-  $current_page = basename($PHP_SELF);
+  $current_page = basename($_SERVER['SCRIPT_FILENAME']);
   if (file_exists(DIR_WS_LANGUAGES . $language . '/' . $current_page)) {
     include(DIR_WS_LANGUAGES . $language . '/' . $current_page);
   }
@@ -213,7 +213,7 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
   }
 
 // BOF: MOD - Admin w/access levels
-  if (basename($PHP_SELF) != FILENAME_LOGIN && basename($PHP_SELF) != FILENAME_PASSWORD_FORGOTTEN && basename($PHP_SELF) != FILENAME_FORBIDDEN) {
+  if (basename($_SERVER['SCRIPT_FILENAME']) != FILENAME_LOGIN && basename($_SERVER['SCRIPT_FILENAME']) != FILENAME_PASSWORD_FORGOTTEN && basename($_SERVER['SCRIPT_FILENAME']) != FILENAME_FORBIDDEN) {
     tep_admin_check_login();
   }
 // EOF: MOD - Admin w/access levels

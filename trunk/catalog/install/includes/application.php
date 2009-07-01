@@ -18,5 +18,5 @@ $Id: application.php 3 2006-05-27 04:59:07Z user $
   require('includes/functions/database.php');
   require('includes/functions/html_output.php');
   
-  define('PROJECT_VERSION', 'v2.0.2');
+  define('PROJECT_VERSION', 'v2.0.3');
 ?>

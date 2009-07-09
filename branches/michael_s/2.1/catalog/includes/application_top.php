@@ -341,6 +341,8 @@ if (isset($HTTP_GET_VARS['pName']) && defined(urldecode($HTTP_GET_VARS['pName'])
       $broken_navigation = $navigation;
       $navigation = new navigationHistory;
       $navigation->unserialize($broken_navigation);
+    } else {
+      $navigation = new navigationHistory;
     }
   } else {
     tep_session_register('navigation');

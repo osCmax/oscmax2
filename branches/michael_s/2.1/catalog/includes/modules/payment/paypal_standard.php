@@ -222,8 +222,10 @@
             $order_products_id = tep_db_insert_id();
 // Start - CREDIT CLASS Gift Voucher Contribution
 // CCGV 5.19 Fix for GV Queue with Paypal IPN
+        if (isset($order_total_modules)) {
 //          $order_total_modules->update_credit_account($i);
             $order_total_modules->update_credit_account($i,$insert_id);
+        }
 // End - CREDIT CLASS Gift Voucher Contribution
             $attributes_exist = '0';
             if (isset($order->products[$i]['attributes'])) {
@@ -468,7 +470,9 @@
         tep_db_query("update " . TABLE_PRODUCTS . " set products_ordered = products_ordered + " . sprintf('%d', $order->products[$i]['qty']) . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
 
 // Start - CREDIT CLASS Gift Voucher Contribution
-        $order_total_modules->update_credit_account($i);
+       if (isset($order_total_modules)) { 
+            $order_total_modules->update_credit_account($i);
+        }
 // End - CREDIT CLASS Gift Voucher Contribution
 
 //------insert customer choosen option to order--------
@@ -507,7 +511,9 @@
       }
 
 // Start - CREDIT CLASS Gift Voucher Contribution
-      $order_total_modules->apply_credit();
+      if (isset($order_total_modules)) {
+          $order_total_modules->apply_credit();
+        }
 // End - CREDIT CLASS Gift Voucher Contribution
 // lets start with the email confirmation
       $email_order = STORE_NAME . "\n" .
@@ -567,7 +573,9 @@
       tep_session_unregister('comments');
 
 // Start - CREDIT CLASS Gift Voucher Contribution
-      $order_total_modules->clear_posts();
+      if (isset($order_total_modules)) {
+          $order_total_modules->clear_posts();
+      }
 // End - CREDIT CLASS Gift Voucher Contribution
       tep_session_unregister('cart_PayPal_Standard_ID');
 

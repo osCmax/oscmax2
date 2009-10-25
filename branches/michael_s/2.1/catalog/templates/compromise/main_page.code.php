@@ -66,7 +66,7 @@
        
 //begin{cataloglogo}
   // show logo      
-  echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . 'oscommerce.gif', 'osCommerce') . '</a>'; 
+  echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . 'store_logo.gif', STORE_NAME) . '</a>'; 
 //end{cataloglogo}
         
 //begin{myaccountlogo}

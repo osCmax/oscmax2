@@ -36,8 +36,6 @@ $Id: tools.php 3 2006-05-27 04:59:07Z user $
                                    tep_admin_files_boxes(FILENAME_BANNER_MANAGER, BOX_TOOLS_BANNER_MANAGER) .
                                    tep_admin_files_boxes(FILENAME_BATCH_PRINT, BOX_TOOLS_BATCH_CENTER) . 
                                    tep_admin_files_boxes(FILENAME_CACHE, BOX_TOOLS_CACHE) .
-                                   tep_admin_files_boxes(FILENAME_DEFINE_LANGUAGE, BOX_TOOLS_DEFINE_LANGUAGE) .
-                                   tep_admin_files_boxes(FILENAME_FILE_MANAGER, BOX_TOOLS_FILE_MANAGER) .
                                    tep_admin_files_boxes(FILENAME_MAIL, BOX_TOOLS_MAIL) .
                                    tep_admin_files_boxes(FILENAME_NEWSLETTERS, BOX_TOOLS_NEWSLETTER_MANAGER) .
                                    tep_admin_files_boxes(FILENAME_SERVER_INFO, BOX_TOOLS_SERVER_INFO) .

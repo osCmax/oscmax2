@@ -28,7 +28,7 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
   require('includes/configure.php');
 
 // Define the project version
-  define('PROJECT_VERSION', 'osCMax v2.0.3');
+  define('PROJECT_VERSION', 'osCMax v2.0.4');
 
 // some code to solve compatibility issues
   require(DIR_WS_FUNCTIONS . 'compatibility.php');

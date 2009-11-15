@@ -31,6 +31,8 @@ $Id: reports.php 3 2006-05-27 04:59:07Z user $
                                    tep_admin_files_boxes(FILENAME_STATS_RECOVER_CART_SALES, BOX_REPORTS_RECOVER_CART_SALES) .
                                    tep_admin_files_boxes(FILENAME_SHIPPING_MANIFEST, BOX_SHIPPING_MANIFEST) .
                                    tep_admin_files_boxes(FILENAME_STATS_CUSTOMERS, BOX_REPORTS_ORDERS_TOTAL) .
+                                   tep_admin_files_boxes(FILENAME_STATS_LOW_STOCK_ATTRIB, BOX_REPORTS_STATS_LOW_STOCK_ATTRIB) .
+
 				   tep_admin_files_boxes(FILENAME_STATS_CREDITS, BOX_REPORTS_CREDITS));
 // BOF: MOD - Admin w/access levels
   }

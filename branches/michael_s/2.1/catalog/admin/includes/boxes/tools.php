@@ -41,7 +41,9 @@ $Id: tools.php 3 2006-05-27 04:59:07Z user $
                                    tep_admin_files_boxes(FILENAME_SERVER_INFO, BOX_TOOLS_SERVER_INFO) .
                                    tep_admin_files_boxes(FILENAME_PACKAGING, BOX_TOOLS_PACKAGING) .
                                    tep_admin_files_boxes(FILENAME_UPS_BOXES_USED, BOX_TOOLS_UPS_BOXES_USED) .
-                                   tep_admin_files_boxes(FILENAME_WHOS_ONLINE, BOX_TOOLS_WHOS_ONLINE));
+                                   tep_admin_files_boxes(FILENAME_UPS_BOXES_USED, 'QTPro Doctor') .
+                                   
+				   tep_admin_files_boxes(FILENAME_QTPRODOCTOR, BOX_TOOLS_WHOS_ONLINE));
 // EOF: MOD - Admin w/access levels
   }
 

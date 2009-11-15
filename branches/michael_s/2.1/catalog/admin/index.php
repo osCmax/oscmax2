@@ -235,6 +235,15 @@ a:hover.headerLink { font-family: Verdana, Arial, sans-serif; font-size: 10px; c
 //--></style>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<?php //++++ QT Pro: Begin added code
+
+$qtpro_sick_count = qtpro_sick_product_count();
+if($qtpro_sick_count != 0){
+?>
+<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr><td class="messageStackWarning"><?php echo 'Warning: There are '. $qtpro_sick_count . ' sick products in the database. Please visit <a href="' . tep_href_link(FILENAME_QTPRODOCTOR) . '" class="headerLink">the QTPro doctor</a>.'; ?></td></tr></table>
+<?php
+}
+//++++ QT Pro: End added code ?>
 <br>
 <table border="0" width="600" height="100%" cellspacing="0" cellpadding="0" align="center" valign="middle">
   <tr>

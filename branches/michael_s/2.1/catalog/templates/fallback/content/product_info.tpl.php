@@ -122,6 +122,15 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
 ?>
           <p><?php echo stripslashes($product_info['products_description']); ?></p>
 <?php
+//++++ QT Pro: Begin Changed code
+    if (tep_not_null($product_info['products_image'])) {
+?>
+              </td>
+            </tr>
+          </table>
+<?php
+}
+//++++ QT Pro: End Changed Code
     $products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$HTTP_GET_VARS['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");
     $products_attributes = tep_db_fetch_array($products_attributes_query);
     if ($products_attributes['total'] > 0) {
@@ -131,8 +140,12 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
       $class = 'pad_' . PRODINFO_ATTRIBUTE_PLUGIN;
       $pad = new $class($products_id);
       echo $pad->draw();
-//++++ QT Pro: End Changed Code
     }
+
+//Display a table with which attributecombinations is on stock to the customer?
+if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "qtpro_stock_table.php"); endif;
+
+//++++ QT Pro: End Changed Code
 ?>
         </td>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

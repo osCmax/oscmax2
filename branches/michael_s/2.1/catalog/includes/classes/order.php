@@ -326,13 +326,7 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
 // LINE CHANGED: MOD - QT Pro added "popt.products_options_track_stock"
             $attributes_query = tep_db_query("select popt.products_options_name, popt.products_options_track_stock, poval.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . (int)$products[$i]['id'] . "' and pa.options_id = '" . (int)$option . "' and pa.options_id = popt.products_options_id and pa.options_values_id = '" . (int)$value . "' and pa.options_values_id = poval.products_options_values_id and popt.language_id = '" . (int)$languages_id . "' and poval.language_id = '" . (int)$languages_id . "'");
             $attributes = tep_db_fetch_array($attributes_query);
-
-// BOF: MOD - QT Pro: Determine if attribute is a text attribute and change products array if it is.
-            if ($value == PRODUCTS_OPTIONS_VALUE_TEXT_ID){
-              $attr_value = $products[$i]['attributes_values'][$option];
-            } else {
-              $attr_value = $attributes['products_options_values_name'];
-            }
+//++++ QT Pro: Begin Changed code
             $this->products[$index]['attributes'][$subindex] = array('option' => $attributes['products_options_name'],
                                                                      'value' => $attributes['products_options_values_name'],
                                                                      'option_id' => $option,

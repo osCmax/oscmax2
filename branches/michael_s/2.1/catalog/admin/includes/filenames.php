@@ -116,6 +116,7 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
 // BOF: MOD - QT Pro
   define('FILENAME_STATS_LOW_STOCK_ATTRIB', 'stats_low_stock_attrib.php');
   define('FILENAME_STOCK', 'stock.php');
+  define('FILENAME_QTPRODOCTOR', 'qtprodoctor.php');
 // EOF: MOD - QT Pro
 
 // LINE ADDED: Special Price per Customer 4.0

@@ -1,9 +1,20 @@
 
-    <?php echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL'), 'post', 'onSubmit="return check_form(create_account);"') . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <!-- PWA BOF -->
+    <?php echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, (isset($HTTP_GET_VARS['guest'])? 'guest=guest':''), 'SSL'), 'post', 'onSubmit="return check_form(create_account);"') . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <!-- PWA EOF -->
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+            <?php
+            // PWA BOF
+            if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest'])){
+            ?>
+              <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+            <?php }else{ ?>
+              <td class="pageHeading"><?php echo HEADING_TITLE_PWA; ?></td>
+            <?php }
+            // PWA EOF 
+            ?>
             <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_account.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
           </tr>
         </table></td>
@@ -200,6 +211,11 @@
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+<?php
+// PWA BOF
+  if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest'])) {
+// PWA EOF
+?>
       <tr>
         <td class="main"><b><?php echo CATEGORY_OPTIONS; ?></b></td>
       </tr>
@@ -237,6 +253,18 @@
           </tr>
         </table></td>
       </tr>
+<?php
+  // PWA BOF
+  }
+  else
+  { // Ingo PWA Ende
+?>
+ <tr>
+   <td><?php echo tep_draw_hidden_field('guest', 'guest'); ?></td>
+ </tr>
+<?php } 
+// PWA EOF
+?>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>

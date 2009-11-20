@@ -25,12 +25,6 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_LOGIN);
 
   $error = false;
-// BOF: MOD - PWA 0.70 :
-  if($HTTP_GET_VARS['login'] == 'fail') {
-    $fail_reason = (!empty($HTTP_GET_VARS['reason'])) ? urldecode($HTTP_GET_VARS['reason']): TEXT_LOGIN_ERROR;
-    $messageStack->add('login', $fail_reason);
-  }
-// EOF: MOD - PWA 0.70 :
   if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
     $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
     $password = tep_db_prepare_input($HTTP_POST_VARS['password']);
@@ -38,7 +32,7 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 // Check if email exists
 // LINE CHANGED: MOD - Separate Pricing per Customer
 //  $check_customer_query = tep_db_query("select customers_id, customers_firstname, customers_password, customers_email_address, customers_default_address_id from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "'");
-    $check_customer_query = tep_db_query("select customers_id, customers_firstname, customers_group_id, customers_password, customers_email_address, customers_default_address_id from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "'");
+    $check_customer_query = tep_db_query("select customers_id, customers_firstname, customers_group_id, customers_password, customers_email_address, customers_default_address_id , guest_account from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "' and guest_account='0'");
     if (!tep_db_num_rows($check_customer_query)) {
       $error = true;
     } else {

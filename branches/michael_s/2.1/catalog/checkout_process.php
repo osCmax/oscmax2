@@ -100,6 +100,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
                           'customers_telephone' => $order->customer['telephone'], 
                           'customers_email_address' => $order->customer['email_address'],
                           'customers_address_format_id' => $order->customer['format_id'], 
+ // PWA BOF
+                          'customers_dummy_account' => $order->customer['is_dummy_account'], 
+ // PWA EOF
                           'delivery_name' => trim($order->delivery['firstname'] . ' ' . $order->delivery['lastname']),
                           'delivery_company' => $order->delivery['company'],
                           'delivery_street_address' => $order->delivery['street_address'], 
@@ -314,13 +317,16 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
   $order_total_modules->apply_credit();
 
 // lets start with the email confirmation
-// LINE ADDED: PWA - Add test for PWA - no display of invoice URL if PWA customer
-if (!tep_session_is_registered('noaccount')) {
   $email_order = STORE_NAME . "\n" .
                  EMAIL_SEPARATOR . "\n" .
                  EMAIL_TEXT_ORDER_NUMBER . ' ' . $insert_id . "\n" .
                  EMAIL_TEXT_INVOICE_URL . ' ' . tep_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id=' . $insert_id, 'SSL', false) . "\n" .
                  EMAIL_TEXT_DATE_ORDERED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
+ // PWA BOF
+  if ($order->customer['is_dummy_account']) {
+    $email_order .= EMAIL_WARNING . "\n\n";
+  }
+  // PWA EOF
   if ($order->info['comments']) {
     $email_order .= tep_db_output($order->info['comments']) . "\n\n";
   }
@@ -328,19 +334,6 @@ if (!tep_session_is_registered('noaccount')) {
                   EMAIL_SEPARATOR . "\n" .
                   $products_ordered .
                   EMAIL_SEPARATOR . "\n";
-  } else {
-  $email_order = STORE_NAME . "\n" .
-                 EMAIL_SEPARATOR . "\n" .
-                 EMAIL_TEXT_ORDER_NUMBER . ' ' . $insert_id . "\n" .
-                 EMAIL_TEXT_DATE_ORDERED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
-  if ($order->info['comments']) {
-    $email_order .= tep_db_output($order->info['comments']) . "\n\n";
-  }
-  $email_order .= EMAIL_TEXT_PRODUCTS . "\n" .
-                  EMAIL_SEPARATOR . "\n" .
-                  $products_ordered .
-                  EMAIL_SEPARATOR . "\n";
-  }
 
   for ($i=0, $n=sizeof($order_totals); $i<$n; $i++) {
     $email_order .= strip_tags($order_totals[$i]['title']) . ' ' . strip_tags($order_totals[$i]['text']) . "\n";
@@ -389,6 +382,12 @@ if (!tep_session_is_registered('noaccount')) {
   tep_session_unregister('payment');
   tep_session_unregister('comments');
 
+  // PWA BOF 2b
+  if (tep_session_is_registered('customer_is_guest')){
+    //delete the temporary account
+    tep_db_query("delete from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$customer_id . "'");
+  }
+  // PWA EOF 2b
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');
   $order_total_modules->clear_posts();

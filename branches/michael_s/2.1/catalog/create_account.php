@@ -17,6 +17,9 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
+// PWA EOF
+  if (isset($HTTP_GET_VARS['guest']) && $cart->count_contents() < 1) tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+// PWA BOF
 // needs to be included earlier to set the success message in the messageStack
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CREATE_ACCOUNT);
 
@@ -110,32 +113,14 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 
       $messageStack->add('create_account', ENTRY_EMAIL_ADDRESS_CHECK_ERROR);
     } else {
-      $check_email_query = tep_db_query("select count(*) as total from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "'");
+      // PWA BOF 2b
+      $check_email_query = tep_db_query("select count(*) as total from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "' and guest_account != '1'");
+      // PWA EOF 2b
       $check_email = tep_db_fetch_array($check_email_query);
-// BOF: MOD - PWA
-//      if ($check_email['total'] > 0) {
-//        $error = true;
-//        $messageStack->add('create_account', ENTRY_EMAIL_ADDRESS_ERROR_EXISTS);
       if ($check_email['total'] > 0) {
-//PWA delete account
-        $get_customer_info = tep_db_query("select customers_id, customers_email_address, purchased_without_account from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "'");
-        $customer_info = tep_db_fetch_array($get_customer_info); 
-        $customer_id = $customer_info['customers_id']; 
-        $customer_email_address = $customer_info['customers_email_address']; 
-        $customer_pwa = $customer_info['purchased_without_account']; 
-        if ($customer_pwa !='1') {
            $error = true;
 
            $messageStack->add('create_account', ENTRY_EMAIL_ADDRESS_ERROR_EXISTS);
-        } else {   
-          tep_db_query("delete from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $customer_id . "'");   
-          tep_db_query("delete from " . TABLE_CUSTOMERS . " where customers_id = '" . $customer_id . "'");   
-          tep_db_query("delete from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . $customer_id . "'");   
-          tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where customers_id = '" . $customer_id . "'");   
-          tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id = '" . $customer_id . "'");   
-          tep_db_query("delete from " . TABLE_WHOS_ONLINE . " where customer_id = '" . $customer_id . "'"); 
-        }  
-// EOF: MOD - PWA
       }
     }
 
@@ -193,6 +178,9 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
       $messageStack->add('create_account', ENTRY_TELEPHONE_NUMBER_ERROR);
     }
 
+// PWA BOF
+    if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest'])) {
+// PWA EOF
 
     if (strlen($password) < ENTRY_PASSWORD_MIN_LENGTH) {
       $error = true;
@@ -203,15 +191,31 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 
       $messageStack->add('create_account', ENTRY_PASSWORD_ERROR_NOT_MATCHING);
     }
+// PWA BOF
+} 
+// PWA EOF
 
     if ($error == false) {
+		// PWA BOF 2b
+		if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest']))
+		{
+			$dbPass = tep_encrypt_password($password);
+			$guestaccount = '0';
+		}else{
+			$dbPass = 'null';
+			$guestaccount = '1';
+		}
+		// PWA EOF 2b
       $sql_data_array = array('customers_firstname' => $firstname,
                               'customers_lastname' => $lastname,
                               'customers_email_address' => $email_address,
                               'customers_telephone' => $telephone,
                               'customers_fax' => $fax,
                               'customers_newsletter' => $newsletter,
-                              'customers_password' => tep_encrypt_password($password));
+                              // PWA BOF 2b
+                              'customers_password' => $dbPass,
+                              'guest_account' => $guestaccount);
+                              // PWA EOF 2b
 
       if (ACCOUNT_GENDER == 'true') $sql_data_array['customers_gender'] = $gender;
       if (ACCOUNT_DOB == 'true') $sql_data_array['customers_dob'] = tep_date_raw($dob);
@@ -256,6 +260,10 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
         }
       }
 
+// PWA BOF
+     if (isset($HTTP_GET_VARS['guest']) or isset($HTTP_POST_VARS['guest']))
+       tep_session_register('customer_is_guest');
+// PWA EOF
       tep_db_perform(TABLE_ADDRESS_BOOK, $sql_data_array);
 
       $address_id = tep_db_insert_id();
@@ -278,6 +286,9 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
       tep_session_register('customer_country_id');
       tep_session_register('customer_zone_id');
 
+// PWA BOF
+      if (isset($HTTP_GET_VARS['guest']) or isset($HTTP_POST_VARS['guest'])) tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING));
+// PWA EOF
 // restore cart contents
       $cart->restore_contents();
       
@@ -367,11 +378,14 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 if ($HTTP_POST_VARS['action'] == 'refresh') {$state = '';}
 if (!isset($country)){$country = DEFAULT_COUNTRY;}
 // EOF: MOD - Country-State Selector 
-
-  $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL'));
-
+ // PWA BOF
+ if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest'])){
+   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL'));
+ }else{
+   $breadcrumb->add(NAVBAR_TITLE_PWA, tep_href_link(FILENAME_CREATE_ACCOUNT, 'guest=guest', 'SSL'));
+ }
+// PWA EOF
   $content = CONTENT_CREATE_ACCOUNT;
-
   include (bts_select('main', $content_template)); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');

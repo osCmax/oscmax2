@@ -630,26 +630,21 @@ CREATE TABLE customers_info (
 );
 
 DROP TABLE IF EXISTS customers_wishlist;
-CREATE TABLE customers_wishlist (
-  products_id int NOT NULL,
-  customers_id int NOT NULL,
-  products_model varchar(13),
-  products_name varchar(64) NOT NULL,
-  products_price decimal(8,2) DEFAULT '0.00' NOT NULL,
-  final_price decimal(8,2) DEFAULT '0.00' NOT NULL,
-  products_quantity int(2) NOT NULL default '0',
-  wishlist_name varchar(64) 
-);
+CREATE TABLE `customers_wishlist` (
+  `products_id` tinytext NOT NULL,
+  `customers_id` int(13) NOT NULL default '0'
+) TYPE=MyISAM;
+
 
 DROP TABLE IF EXISTS customers_wishlist_attributes;
-CREATE TABLE customers_wishlist_attributes (
-  customers_wishlist_attributes_id int NOT NULL auto_increment,
-  customers_id int NOT NULL default '0',
-  products_id tinytext NOT NULL,
-  products_options_id int NOT NULL default '0',
-  products_options_value_id int NOT NULL default '0',
-  PRIMARY KEY (customers_wishlist_attributes_id)
-);
+CREATE TABLE `customers_wishlist_attributes` (
+  `customers_wishlist_attributes_id` int(11) NOT NULL auto_increment,
+  `customers_id` int(11) NOT NULL default '0',
+  `products_id` tinytext NOT NULL,
+  `products_options_id` int(11) NOT NULL default '0',
+  `products_options_value_id` int(11) NOT NULL default '0',
+  PRIMARY KEY (`customers_wishlist_attributes_id`)
+) TYPE=MyISAM; 
 
 DROP TABLE IF EXISTS geo_zones;
 CREATE TABLE geo_zones (

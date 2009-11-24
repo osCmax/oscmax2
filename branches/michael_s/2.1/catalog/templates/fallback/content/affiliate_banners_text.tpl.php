@@ -1,5 +1,5 @@
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -78,5 +78,5 @@ $ban_id=$affiliate_banners['affiliate_banners_id'];
           </table>
 	 </td>
       </tr>
-     </table></td>
+     </table>
 <!-- body_text_eof //-->

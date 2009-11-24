@@ -173,6 +173,7 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('CONTENT_AFFILIATE', 'affiliate_signup_ok');
   define('CONTENT_AFFILIATE', 'affiliate_summary');
   define('CONTENT_AFFILIATE', 'affiliate_terms');
+  define('FILENAME_CATEGORIES_INFO', 'index.php'); 
 // EOF: MOD - Affiliate Mod
 
 // BOF: MOD Xsell Products

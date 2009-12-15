@@ -1,0 +1,110 @@
+/*
+$Id: dynamic_mopics.css 3 2006-05-27 04:59:07Z user $
+
+  Dynamic MoPics version 3.000, built for osCommerce MS2
+
+  Copyright 2006 osCMax2004-2005 Josh Dechant
+
+  Released under the GNU General Public License
+*/
+
+BODY.popupImage {
+	background: #FFFFFF;
+	color: #000000;
+	text-align: center;
+	padding: 0;
+	margin-bottom: 20px;
+}
+
+.screenshotsBlock {
+	align: center;
+	width: 100%;
+	border: 1px solid #bbc3d3;
+	background: #f8f8f9;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+.screenshotsHeaderText {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background-image:  url('images/box_header.jpg');
+	background-repeat: repeat-x;
+	background-position: top center;
+  color: white;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.screenshotsHeader {
+	width: 100%;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background-image:  url('images/box_header.jpg');
+	background-repeat: repeat-x;
+	background-position: top center;
+  color: white;
+}
+
+#screenshotsHeader {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background-image:  url('images/box_header.jpg');
+  background-repeat: repeat-x;
+  background-position: top center;
+  color: white;
+  font-weight: bold;
+}
+
+#screenshotsHeaderText {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background-image:  url('images/box_header.jpg');
+  background-repeat: repeat-x;
+  background-position: top center;
+  color: white;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.screenshots {
+	display: -moz-inline-box;
+	vertical-align: top; 
+	display: inline-block;
+	text-align: center;
+	padding: 5px 0 5px 0;
+	margin-left: auto ;
+	margin-right: auto ;
+} /* for Firefox 3 */
+
+* html .screenshots {
+	display: inline;
+	padding: 5px 0 5px 5px;
+} 
+
+.screenshots IMG {
+	vertical-align: top;
+	display: inline;
+	border: 3px double #bbc3d3;
+}
+
+.screenshots a:hover {
+	text-decoration: none;
+}
+
+.clearScreenshots {
+	clear: both;
+	height: 1px;
+	width: 100px;
+}
+
+.clearScreenshots hr {
+	display: none;
+}
+
+.noScreenshots {
+	text-align: center;
+	padding: 15px 0 15px 0;
+	margin: 0;
+}

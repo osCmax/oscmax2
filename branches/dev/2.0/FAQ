@@ -1,0 +1,120 @@
+$Id: FAQ,v 1.1.1.1 2005/01/15 06:43:44 Michael Sasek Exp $
+
+osCommerce Frequently Asked Questions
+Copyright (c) osCommerce 2003
+
+*** The information presented here is old. It will be updated throughout   ***
+*** the osCommerce 2.2 Milestone path.                                     ***
+
+------------------------------------------------------------------------------
+Questions
+------------------------------------------------------------------------------
+
+01. How can I check my php configuration?
+
+02. How does the versioning of this project work?
+
+03. How can I extract the project tar.gz package under a windows environment?
+
+04. Why can't I get variables to be parsed among pages?
+
+05. Why is the session-ID screwing up my urls in href links?
+
+06. I receive an error of not being able to write to the parse_time_log file.
+
+07. I get one of these errors: Fatal error: Call to undefined function:
+    count_contents(), Fatal error: Call to undefined function: restore_cart(),
+    etc.
+
+08. How do I install a snapshot on top of an exisiting distribution?
+
+09. Will a snapshot overwrite my existing (modified) application_top.php?
+
+10. How do I remove one of the boxes on the left hand side, or the right hand
+    side?
+
+------------------------------------------------------------------------------
+q. How can I check my php configuration?
+------------------------------------------------------------------------------
+a. Call phpinfo() in a script:
+
+   <? phpinfo(); ?>
+
+------------------------------------------------------------------------------
+q. How does the versioning of this project work?
+------------------------------------------------------------------------------
+a. Preview Release 1.0   - initial release.
+   Preview Release 1.1   - bugfixes and updates.
+   Preview Release <=2.1 - stablizing framework releases.
+   >=2.2                 - stable releases.
+
+------------------------------------------------------------------------------
+q. How can I extract the project tar.gz package under a windows environment?
+------------------------------------------------------------------------------
+a. WinZIP is able to extract gzip/tar archives. Download it at www.winzip.com
+
+------------------------------------------------------------------------------
+q. Why can't I get variables to be parsed among pages?
+------------------------------------------------------------------------------
+a. Your PHP is not compiled to track variables.
+
+   Compile PHP with --enable-track-vars
+
+------------------------------------------------------------------------------
+q. Why is the session-ID screwing up my urls in href links?
+------------------------------------------------------------------------------
+a. This project uses a custom function for all href links, called
+   tep_href_link(). This function is used for normal href links, forms, and
+   header redirects. The best way to avoid this problem is to use the function
+   as:
+
+<?php
+  echo '<a href="' . tep_href_link('index.php', 'a=b') . '">my link</a>';
+?>
+
+------------------------------------------------------------------------------
+q. I receive an error of not being able to write to the parse_time_log file.
+------------------------------------------------------------------------------
+a. This file needs to have the correct write permissions for the apache user
+   to be able to write to it. If you continue to get this error, create a 0
+   byte file with the right permissions.
+
+------------------------------------------------------------------------------
+q. I get one of these errors: Fatal error: Call to undefined function:
+   count_contents(), Fatal error: Call to undefined function: restore_cart(),
+   etc.
+------------------------------------------------------------------------------
+a. PHP3 and some PHP4 betas dont unserialize objects properly. To get it to
+   work, edit the file application_top.php and enable the following setting:
+   
+   define('REPAIR_BROKEN_CART', '1');
+
+------------------------------------------------------------------------------
+q. How do I install a snapshot on top of an exisiting distribution?
+------------------------------------------------------------------------------
+a. You just untar it and copy it out like you would have for the initail
+   install.
+
+------------------------------------------------------------------------------
+q. Will a snapshot overwrite my existing (modified) application_top.php?
+------------------------------------------------------------------------------
+a. Yes it will overwrite applcation_top.php since that file exists in the
+   distribution. You will have to 'diff' the files to see all the changes that
+   have been made.
+
+   You may take your changes and put them in
+   catalog/includes/local/configure.php and then use the application_top.php
+   unmodified. This way, next time you download a new snapshot, you will have
+   all your changes in one file that will not be over-written by the
+   distrbution.
+
+------------------------------------------------------------------------------
+q. How do I remove one of the boxes on the left hand side, or the right hand
+   side?
+------------------------------------------------------------------------------
+a. Each box is defined in a file for that column. All boxes on the left hand
+   side is defined in catalog/includes/column_left.php, and all boxes on the
+   right hand side is defined in catalog/includes/column_right.php.
+
+   To remove a box, you can simple comment out the 'include' line, or remove
+   it totally.

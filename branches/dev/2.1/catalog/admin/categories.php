@@ -23,7 +23,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
 // Ultimate SEO URLs v2.1
 // If the action will affect the cache entries
-    if ( eregi("(insert|update|setflag)", $action) ) include_once('includes/reset_seo_cache.php');
+    if ( preg_match("{(insert|update|setflag)}i", $action) ) include_once('includes/reset_seo_cache.php');
 
 
   if (tep_not_null($action)) {

@@ -478,8 +478,8 @@ $customer = tep_db_fetch_array($customer_query);
 <?php
     break;
   case 'update_preview':
-  $coupon_min_order = (($HTTP_POST_VARS['coupon_min_order'] == round($HTTP_POST_VARS['coupon_min_order'])) ? number_format($HTTP_POST_VARS['coupon_min_order'], 2) : number_format($HTTP_POST_VARS['coupon_min_order'], 2));
-  $coupon_amount = (($HTTP_POST_VARS['coupon_amount'] == round($HTTP_POST_VARS['coupon_amount'])) ? number_format($HTTP_POST_VARS['coupon_amount'], 2) : number_format($HTTP_POST_VARS['coupon_amount'], 2));
+  $coupon_min_order = (($HTTP_POST_VARS['coupon_min_order'] == round($HTTP_POST_VARS['coupon_min_order'])) ? number_format((double)$HTTP_POST_VARS['coupon_min_order'], 2) : number_format($HTTP_POST_VARS['coupon_min_order'], 2));
+  $coupon_amount = (($HTTP_POST_VARS['coupon_amount'] == round($HTTP_POST_VARS['coupon_amount'])) ? number_format((double)$HTTP_POST_VARS['coupon_amount'], 2) : number_format($HTTP_POST_VARS['coupon_amount'], 2));
 ?>
       <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
@@ -762,32 +762,32 @@ $customer = tep_db_fetch_array($customer_query);
 <?php
 // molafish: fixed reset to default of dates when editing an existing coupon or showing an error message
     if ($HTTP_GET_VARS['action'] == 'new' && !$HTTP_POST_VARS['coupon_startdate'] && !$HTTP_GET_VARS['oldaction'] == 'new') {
-      $coupon_startdate = split("[-]", date('Y-m-d'));
+      $coupon_startdate = explode("[-]", date('Y-m-d'));
     } elseif (tep_not_null($HTTP_POST_VARS['coupon_startdate'])) {
-      $coupon_startdate = split("[-]", $HTTP_POST_VARS['coupon_startdate']);
+      $coupon_startdate = explode("[-]", $HTTP_POST_VARS['coupon_startdate']);
     } elseif (!$HTTP_GET_VARS['oldaction'] == 'new') {   // for action=voucheredit
-      $coupon_startdate = split("[-]", date('Y-m-d', strtotime($coupon['coupon_start_date'])));
+      $coupon_startdate = explode("[-]", date('Y-m-d', strtotime($coupon['coupon_start_date'])));
     } else {   // error is being displayed
-      $coupon_startdate = split("[-]", date('Y-m-d', mktime(0, 0, 0, $HTTP_POST_VARS['coupon_startdate_month'],$HTTP_POST_VARS['coupon_startdate_day'] ,$HTTP_POST_VARS['coupon_startdate_year'] )));
+      $coupon_startdate = explode("[-]", date('Y-m-d', mktime(0, 0, 0, $HTTP_POST_VARS['coupon_startdate_month'],$HTTP_POST_VARS['coupon_startdate_day'] ,$HTTP_POST_VARS['coupon_startdate_year'] )));
     }
     if ($HTTP_GET_VARS['action'] == 'new' && !$HTTP_POST_VARS['coupon_finishdate'] && !$HTTP_GET_VARS['oldaction'] == 'new') {
-      $coupon_finishdate = split("[-]", date('Y-m-d'));
+      $coupon_finishdate = explode("[-]", date('Y-m-d'));
       $coupon_finishdate[0] = $coupon_finishdate[0] + 1;
     } elseif (tep_not_null($HTTP_POST_VARS['coupon_finishdate'])) {
-      $coupon_finishdate = split("[-]", $HTTP_POST_VARS['coupon_finishdate']);
+      $coupon_finishdate = explode("[-]", $HTTP_POST_VARS['coupon_finishdate']);
     } elseif (!$HTTP_GET_VARS['oldaction'] == 'new') {   // for action=voucheredit
-      $coupon_finishdate = split("[-]", date('Y-m-d', strtotime($coupon['coupon_expire_date'])));
+      $coupon_finishdate = explode("[-]", date('Y-m-d', strtotime($coupon['coupon_expire_date'])));
     } else {   // error is being displayed
-      $coupon_finishdate = split("[-]", date('Y-m-d', mktime(0, 0, 0, $HTTP_POST_VARS['coupon_finishdate_month'],$HTTP_POST_VARS['coupon_finishdate_day'] ,$HTTP_POST_VARS['coupon_finishdate_year'] )));
+      $coupon_finishdate = explode("[-]", date('Y-m-d', mktime(0, 0, 0, $HTTP_POST_VARS['coupon_finishdate_month'],$HTTP_POST_VARS['coupon_finishdate_day'] ,$HTTP_POST_VARS['coupon_finishdate_year'] )));
     }
 ?>
         <td align="left" class="main"><?php echo COUPON_STARTDATE; ?></td>
-        <td align="left"><?php echo tep_draw_date_selector('coupon_startdate', mktime(0,0,0, $coupon_startdate[1], $coupon_startdate[2], $coupon_startdate[0], 0)); ?></td>
+        <td align="left"><?php echo tep_draw_date_selector('coupon_startdate', mktime(0,0,0, $coupon_startdate[1], $coupon_startdate[2], $coupon_startdate[0])); ?></td>
         <td align="left" class="main"><?php echo COUPON_STARTDATE_HELP; ?></td>
       </tr>
       <tr>
         <td align="left" class="main"><?php echo COUPON_FINISHDATE; ?></td>
-        <td align="left"><?php echo tep_draw_date_selector('coupon_finishdate', mktime(0,0,0, $coupon_finishdate[1], $coupon_finishdate[2], $coupon_finishdate[0], 0)); ?></td>
+        <td align="left"><?php echo tep_draw_date_selector('coupon_finishdate', mktime(0,0,0, $coupon_finishdate[1], $coupon_finishdate[2], $coupon_finishdate[0])); ?></td>
         <td align="left" class="main"><?php echo COUPON_FINISHDATE_HELP; ?></td>
       </tr>
 <?php

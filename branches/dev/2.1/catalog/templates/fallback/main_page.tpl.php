@@ -64,21 +64,12 @@ function CVVPopUpWindow(url) {
 <?php
 	//// END:  Added for Dynamic MoPics v3.000
 ?>
-<!-- BOF LIGHTBOX -->
-<!-- Lightbox commented out in favour of Slimbox
-	<script type="text/javascript" src="lightbox/prototype.js"></script>
-	<script type="text/javascript" src="lightbox/scriptaculous.js?load=effects"></script>
-	<link rel="stylesheet" href="lightbox/lightbox.css" type="text/css" media="screen"> 
-	<script type="text/javascript" src="lightbox/builder.js"></script>
-	<script type="text/javascript" src="lightbox/lightbox.js"></script>  
--->
-<!-- EOF LIGHTBOX -->
 
-<!-- BOF SLIMBOX2 -->
+<!-- BOF SLIMBOX2 
 <script type="text/javascript" src="slimbox2/jquery.js"></script>
 <script type="text/javascript" src="slimbox2/slimbox2.js"></script>
 <link rel="stylesheet" href="slimbox2/slimbox2.css" type="text/css" media="screen" />
-<!-- EOF SLIMBOX2 -->
+ EOF SLIMBOX2 -->
 
 </head>
 <body>

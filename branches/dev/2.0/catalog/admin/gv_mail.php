@@ -45,7 +45,7 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
       $message .= TEXT_TO_REDEEM;
       $message .= TEXT_WHICH_IS . $id1 . TEXT_IN_CASE . "\n\n";
       if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') {
-        $message .= HTTP_SERVER  . DIR_WS_CATALOG . 'gv_redeem.php' . '/gv_no,'.$id1 . "\n\n";
+        $message .= HTTP_SERVER  . DIR_WS_CATALOG . 'gv_redeem.php' . '/gv_no/'.$id1 . "\n\n";
       } else {
         $message .= HTTP_SERVER  . DIR_WS_CATALOG . 'gv_redeem.php' . '?gv_no='.$id1 . "\n\n";
       }
@@ -66,7 +66,7 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
       $mimemessage->send($mail['customers_firstname'] . ' ' . $mail['customers_lastname'], $mail['customers_email_address'], '', $from, $subject);
       // Now create the coupon main and email entry
       $insert_query = tep_db_query("insert into " . TABLE_COUPONS . " (coupon_code, coupon_type, coupon_amount, date_created) values ('" . $id1 . "', 'G', '" . $HTTP_POST_VARS['amount'] . "', now())");
-      $insert_id = tep_db_insert_id();
+      $insert_id = tep_db_insert_id($insert_query);
       $insert_query = tep_db_query("insert into " . TABLE_COUPON_EMAIL_TRACK . " (coupon_id, customer_id_sent, sent_firstname, emailed_to, date_sent) values ('" . $insert_id ."', '0', 'Admin', '" . $mail['customers_email_address'] . "', now() )");
     }
     if ($HTTP_POST_VARS['email_to']) {
@@ -119,15 +119,8 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-       <script language="JavaScript">
-<!-- Begin
-       function init() {
-define('customers_email_address', 'string', 'Customer or Newsletter Group');
-}
-//  End -->
-</script>
 </head>
-<body OnLoad="init()" marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->

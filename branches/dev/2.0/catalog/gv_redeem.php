@@ -34,20 +34,8 @@ tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
     if (tep_db_num_rows($gv_query) >0) {
       $coupon = tep_db_fetch_array($gv_query);
 
-// BOF - MOD: GV_REDEEM_EXPLOIT_FIX (GVREF)
-      if ((tep_session_is_registered('customer_id')) && $voucher_not_redeemed) {
-        $gv_id = $coupon['coupon_id'];
-        $gv_query = tep_db_query("insert into  " . TABLE_COUPON_REDEEM_TRACK . " (coupon_id, customer_id, redeem_date, redeem_ip) values ('" . $coupon['coupon_id'] . "', '" . $customer_id . "', now(),'" . $REMOTE_ADDR . "')");
-        $gv_update = tep_db_query("update " . TABLE_COUPONS . " set coupon_active = 'N' where coupon_id = '" . $coupon['coupon_id'] . "'");
-        tep_gv_account_update($customer_id, $gv_id);
-        $error = false;
-      } elseif($voucher_not_redeemed) {
-// EOF - MOD: GV_REDEEM_EXPLOIT_FIX (GVREF)
-
       $redeem_query = tep_db_query("select coupon_id from ". TABLE_COUPON_REDEEM_TRACK . " where coupon_id = '" . $coupon['coupon_id'] . "'");
 
- // BOF - MOD: GV_REDEEM_EXPLOIT_FIX (GVREF)
- /*
       if (tep_db_num_rows($redeem_query) == 0 ) {
         // check for required session variables
         if (!tep_session_is_registered('gv_id')) {
@@ -58,27 +46,11 @@ tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
       } else {
         $error = true;
       }
- */
-
-        if (!tep_session_is_registered('floating_gv_code')) {
-          tep_session_register('floating_gv_code');
-          $floating_gv_code = $HTTP_GET_VARS['gv_no'];
-          $gv_error_message = TEXT_NEEDS_TO_LOGIN;
-        } else {
-          $gv_error_message = TEXT_INVALID_GV;
-        }
-      } else {
-        $gv_error_message = TEXT_INVALID_GV;
-      }
-// EOF - MOD: GV_REDEEM_EXPLOIT_FIX (GVREF)
-
     }
   } else {
     tep_redirect(FILENAME_DEFAULT);
   }
   
- // BOF - MOD: GV_REDEEM_EXPLOIT_FIX (GVREF)
-  /*
   if ((!$error) && (tep_session_is_registered('customer_id'))) {
     // Update redeem status
     $gv_query = tep_db_query("insert into  " . TABLE_COUPON_REDEEM_TRACK . " (coupon_id, customer_id, redeem_date, redeem_ip) values ('" . $coupon['coupon_id'] . "', '" . $customer_id . "', now(),'" . $REMOTE_ADDR . "')");
@@ -87,8 +59,6 @@ tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
     tep_session_unregister('gv_id');   
   } 
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_GV_REDEEM);
-  */
-  // EOF - MOD: GV_REDEEM_EXPLOIT_FIX (GVREF)
 
   $breadcrumb->add(NAVBAR_TITLE); 
 

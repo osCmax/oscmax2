@@ -232,10 +232,9 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
               </tr>
 <?php
     $cc_query_raw = "select * from " . TABLE_COUPON_REDEEM_TRACK . " where coupon_id = '" . (int)$coupon_id . "'";
-    $cc_query = tep_db_query($cc_query_raw);
     $cc_query_numrows = tep_db_num_rows($cc_query);
     $cc_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $cc_query_raw, $cc_query_numrows);
-
+    $cc_query = tep_db_query($cc_query_raw);
     while ($cc_list = tep_db_fetch_array($cc_query)) {
       $rows++;
       if (strlen($rows) < 2) {

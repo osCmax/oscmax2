@@ -44,7 +44,7 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
   }
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
 // if we have been here before and are coming back get rid of the credit covers variable
-	if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');  //ICW ADDED FOR CREDIT CLASS SYSTEM
+  if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');
   if(tep_session_is_registered('cot_gv')) tep_session_unregister('cot_gv');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
@@ -74,7 +74,7 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
 // EOF: MOD - QT Pro
     }
   }
-// Start - CREDIT CLASS Gift Voucher Contribution
+/// Start - CREDIT CLASS Gift Voucher Contribution
 // #################### THIS MOD IS OPTIONAL! ######################
 // load the selected shipping module
  require(DIR_WS_CLASSES . 'shipping.php');

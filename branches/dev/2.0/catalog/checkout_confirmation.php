@@ -60,7 +60,8 @@ $Id: checkout_confirmation.php 3 2006-05-27 04:59:07Z user $
   $order = new order;
 
   $payment_modules->update_status();
-// BOF: MOD - ICW ADDED FOR CREDIT CLASS SYSTEM
+
+// Start - CREDIT CLASS Gift Voucher Contribution
   $order_total_modules = new order_total;
   $order_total_modules->collect_posts();
   $order_total_modules->pre_confirmation_check();
@@ -68,8 +69,8 @@ $Id: checkout_confirmation.php 3 2006-05-27 04:59:07Z user $
 // >>> FOR ERROR gv_redeem_code NULL 
 if (isset($_POST['gv_redeem_code']) && ($_POST['gv_redeem_code'] == null)) {tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));} 
 // <<< end for error
+
 //  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
-//    tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   if ( (is_array($payment_modules->modules)) && (sizeof($payment_modules->modules) > 1) && (!is_object($$payment)) && (!$credit_covers) ) {
 // End - CREDIT CLASS Gift Voucher Contribution
 
@@ -83,13 +84,13 @@ if (isset($_POST['gv_redeem_code']) && ($_POST['gv_redeem_code'] == null)) {tep_
 // load the selected shipping module
   require(DIR_WS_CLASSES . 'shipping.php');
   $shipping_modules = new shipping($shipping);
-// BOF: MOD - ICW CREDIT CLASS SYSTEM
-// ICW Credit class amendment Lines below repositioned
+
+// Start - CREDIT CLASS Gift Voucher Contribution
 //  require(DIR_WS_CLASSES . 'order_total.php');
 //  $order_total_modules = new order_total;
-// EOF: MOD - ICW CREDIT CLASS SYSTEM
+// End - CREDIT CLASS Gift Voucher Contribution
 
-
+  $order_total_modules->process();
 // Stock Check
   $any_out_of_stock = false;
   if (STOCK_CHECK == 'true') {

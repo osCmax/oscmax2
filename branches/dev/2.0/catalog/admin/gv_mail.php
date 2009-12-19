@@ -66,13 +66,13 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
       $mimemessage->send($mail['customers_firstname'] . ' ' . $mail['customers_lastname'], $mail['customers_email_address'], '', $from, $subject);
       // Now create the coupon main and email entry
       $insert_query = tep_db_query("insert into " . TABLE_COUPONS . " (coupon_code, coupon_type, coupon_amount, date_created) values ('" . $id1 . "', 'G', '" . $HTTP_POST_VARS['amount'] . "', now())");
-      $insert_id = tep_db_insert_id($insert_query);
+      $insert_id = tep_db_insert_id();
       $insert_query = tep_db_query("insert into " . TABLE_COUPON_EMAIL_TRACK . " (coupon_id, customer_id_sent, sent_firstname, emailed_to, date_sent) values ('" . $insert_id ."', '0', 'Admin', '" . $mail['customers_email_address'] . "', now() )");
     }
     if ($HTTP_POST_VARS['email_to']) {
       $id1 = create_coupon_code($HTTP_POST_VARS['email_to']);
       $message = tep_db_prepare_input($HTTP_POST_VARS['message']);
-      $message .= "\n\n" . TEXT_GV_WORTH  . "$nbsp" . $currencies->format($HTTP_POST_VARS['amount']) . "\n\n";
+      $message .= "\n\n" . TEXT_GV_WORTH  . $currencies->format($HTTP_POST_VARS['amount']) . "\n\n";
       $message .= TEXT_TO_REDEEM;
       $message .= TEXT_WHICH_IS . "$nbsp\:" . $id1 . TEXT_IN_CASE . "\n\n";
       if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') {
@@ -95,7 +95,7 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
       $mimemessage->send('Friend', $HTTP_POST_VARS['email_to'], '', $from, $subject);
       // Now create the coupon email entry
       $insert_query = tep_db_query("insert into " . TABLE_COUPONS . " (coupon_code, coupon_type, coupon_amount, date_created) values ('" . $id1 . "', 'G', '" . $HTTP_POST_VARS['amount'] . "', now())");
-      $insert_id = tep_db_insert_id($insert_query);
+      $insert_id = tep_db_insert_id();
       $insert_query = tep_db_query("insert into " . TABLE_COUPON_EMAIL_TRACK . " (coupon_id, customer_id_sent, sent_firstname, emailed_to, date_sent) values ('" . $insert_id ."', '0', 'Admin', '" . $HTTP_POST_VARS['email_to'] . "', now() )");
     }
     tep_redirect(tep_href_link(FILENAME_GV_MAIL, 'mail_sent_to=' . urlencode($mail_sent_to)));

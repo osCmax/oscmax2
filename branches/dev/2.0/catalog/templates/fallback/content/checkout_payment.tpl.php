@@ -39,6 +39,64 @@
 <?php
   }
 ?>
+<?php // Start - CREDIT CLASS Gift Voucher Contribution ?>
+<?php // #################### THIS MOD IS OPTIONAL! ###################### ?>
+      <tr>
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+          <tr>
+            <td class="main"><b><?php echo HEADING_PRODUCTS; ?></b><?  echo ' <a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+          <tr class="infoBoxContents">
+            <td>
+              <table border="0" width="100%" cellspacing="0" cellpadding="2">
+<?php
+ //}
+
+  for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
+    echo '                <tr>' . "\n" .
+         '                  <td width="10%" class="main" align="right" valign="top" width="30">' . $order->products[$i]['qty'] . ' x</td>' . "\n" .
+         '                  <td width="60%" class="main" valign="top">' . $order->products[$i]['name'];
+
+   if (STOCK_CHECK == 'true') {
+     echo tep_check_stock($order->products[$i]['id'], $order->products[$i]['qty']);
+   }
+
+   if ( (isset($order->products[$i]['attributes'])) && (sizeof($order->products[$i]['attributes']) > 0) ) {
+     for ($j=0, $n2=sizeof($order->products[$i]['attributes']); $j<$n2; $j++) {
+       echo '<br><nobr><small> <i> - ' . $order->products[$i]['attributes'][$j]['option'] . ': ' . $order->products[$i]['attributes'][$j]['value'] . '</i></small></nobr>';
+     }
+   }
+
+   echo '                </td>' . "\n";
+
+   if (sizeof($order->info['tax_groups']) > 1) echo '                <td class="main" valign="top" align="right">' . tep_display_tax_value($order->products[$i]['tax']) . '% </td>' . "\n";
+
+   echo '                <td width="30%"class="main" align="right" valign="top">' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . ' </td>' . "\n" .
+        '              </tr>' . "\n";
+  }
+?>
+                <tr>
+                  <td COLSPAN="3" valign="top" align="right">
+                    <table border="0" cellspacing="0" cellpadding="3">
+ <?php
+  if (MODULE_ORDER_TOTAL_INSTALLED) {
+    echo $order_total_modules->output();
+  }
+?>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table></td>
+      </tr>
+<?php // #################### THIS MOD WAS OPTIONAL! ###################### ?>
+<?php // End - CREDIT CLASS Gift Voucher Contribution ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
@@ -75,9 +133,15 @@
             <td class="main"><b><?php echo TABLE_HEADING_PAYMENT_METHOD; ?></b></td>
           </tr>
         </table></td>
+<?php
+// BOF - CREDIT CLASS Gift Voucher Contribution
+        echo $order_total_modules->credit_selection();
+// EOF - CREDIT CLASS Gift Voucher Contribution ?>
       </tr>
       <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+<?php // BOF - CREDIT CLASS Gift Voucher Contribution ?>
+        <td><?php echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onsubmit="return check_form();"'); ?><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+<?php // EOF - CREDIT CLASS Gift Voucher Contribution ?>
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
@@ -167,6 +231,17 @@
 <?php
     $radio_buttons++;
   }
+// Start - CREDIT CLASS Gift Voucher Contribution
+if (tep_session_is_registered('customer_id')) {
+if ($gv_result['amount']>0){
+  echo '              <tr><td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td><td colspan=2>' . "\n" .
+       '              <table border="0" cellpadding="2" cellspacing="0" width="100%"><tr class="moduleRow" onmouseover="rowOverEffect(this)" onclick="clearRadeos()" onmouseout="rowOutEffect(this)" >' . "\n" .
+       '              <td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td><td class="main">' . $gv_result['text'];
+
+  echo $order_total_modules->sub_credit_selection();
+  }
+}
+// End - CREDIT CLASS Gift Voucher Contribution
 ?>
             </table></td>
           </tr>
@@ -175,9 +250,6 @@
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
-<?php
-  echo $order_total_modules->credit_selection();//ICW ADDED FOR CREDIT CLASS SYSTEM
-?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>

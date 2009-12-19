@@ -94,18 +94,19 @@
               <td align="center" class="smallText">
 <?php
 			$image_lg = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);
-			if ($lg_image_ext = mopics_file_exists(DIR_FS_CATALOG . $image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
-				$image_size = @getimagesize(DIR_FS_CATALOG . $image_lg . '.' . $lg_image_ext);
-				$lightlarge = $image_lg . "." . $lg_image_ext;
-
+			if ($lg_image_ext = mopics_file_exists($image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
+				$image_size = @getimagesize($image_lg . '.' . $lg_image_ext);
+				
+			//BOF SLIMBOX
+			$lightlarge = $image_lg . "." . $lg_image_ext;
 ?>
-
 <script language="javascript"><!--
-document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_IMAGES . $product_info['products_image'], $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="5" vspace="5"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>');
+document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], $product_info['products_name'], PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>');
 //--></script>
 <noscript>
-<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_IMAGES . $product_info['products_image'], $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="5" vspace="5"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
+<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], $product_info['products_name'], PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
 </noscript>
+<!--		 EOF SLIMBOX   -->
 
 <?php
 			} else {
@@ -134,27 +135,16 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
     }
 ?>
         </td>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
 <?php
 		//// BEGIN:  Added for Dynamic MoPics v3.000
-?>
-      <tr>
-      	<td>
-		    
-				<div class="screenshotsHeader">
-					<div class="screenshotsHeaderText"><?php echo TEXT_OTHER_PRODUCT_IMAGES; ?></div>
-				</div>
-				<div class="screenshotsBlock">
-				    
-					<?php include(DIR_WS_MODULES . 'dynamic_mopics.php'); ?>
-					
-   			    </div>
-					
-	</td>
-      </tr>
-<?php
+ if (is_file(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image']) && DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'] != "pixel_trans.gif"){
+ 					 include(DIR_WS_MODULES . 'dynamic_mopics.php');   	
+	   } 
 		//// END:  Added for Dynamic MoPics v3.000
 ?>
+</center>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>

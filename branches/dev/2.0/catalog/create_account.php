@@ -305,7 +305,7 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
   if (NEW_SIGNUP_GIFT_VOUCHER_AMOUNT > 0) {
     $coupon_code = create_coupon_code();
     $insert_query = tep_db_query("insert into " . TABLE_COUPONS . " (coupon_code, coupon_type, coupon_amount, date_created) values ('" . $coupon_code . "', 'G', '" . NEW_SIGNUP_GIFT_VOUCHER_AMOUNT . "', now())");
-    $insert_id = tep_db_insert_id($insert_query);
+        $insert_id = tep_db_insert_id();
     $insert_query = tep_db_query("insert into " . TABLE_COUPON_EMAIL_TRACK . " (coupon_id, customer_id_sent, sent_firstname, emailed_to, date_sent) values ('" . $insert_id ."', '0', 'Admin', '" . $email_address . "', now() )");
 
     $email_text .= sprintf(EMAIL_GV_INCENTIVE_HEADER, $currencies->format(NEW_SIGNUP_GIFT_VOUCHER_AMOUNT)) . "\n\n" .
@@ -317,7 +317,7 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 		$coupon_code = NEW_SIGNUP_DISCOUNT_COUPON;
     $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_code = '" . $coupon_code . "'");
     $coupon = tep_db_fetch_array($coupon_query);
-    $coupon_id = $coupon['coupon_code'];    
+    $coupon_id = $coupon['coupon_id'];		
     $coupon_desc_query = tep_db_query("select * from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . $coupon_id . "' and language_id = '" . (int)$languages_id . "'");
     $coupon_desc = tep_db_fetch_array($coupon_desc_query);
     $insert_query = tep_db_query("insert into " . TABLE_COUPON_EMAIL_TRACK . " (coupon_id, customer_id_sent, sent_firstname, emailed_to, date_sent) values ('" . $coupon_id ."', '0', 'Admin', '" . $email_address . "', now() )");

@@ -71,7 +71,7 @@ define('HTML_PARAMS','dir="ltr" lang="de"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0');
+define('TITLE', 'osCMax v2.1');
 
 // BOF: MOD - ORDER EDIT
 // Create account & order

@@ -35,6 +35,7 @@ $Id: logoff.php 3 2006-05-27 04:59:07Z user $
   
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   tep_session_unregister('gv_id');
+  tep_session_unregister('cot_gv');
   tep_session_unregister('cc_id');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 

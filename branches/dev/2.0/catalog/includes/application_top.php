@@ -669,8 +669,8 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
   define('WARN_DOWNLOAD_DIRECTORY_NOT_READABLE', 'true');
 // LINE ADDED: MOD - OSC-AFFILIATE
   require(DIR_WS_INCLUDES . 'affiliate_application_top.php');
-// LINE ADDED: MOD - GC Credit Class
-  REQUIRE(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
+// LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
+  require(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
 
 // LINE ADDED: MOD - BTS
   require(DIR_WS_INCLUDES . 'configure_bts.php');

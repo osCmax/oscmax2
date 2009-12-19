@@ -164,7 +164,7 @@ function bts_template_switch() {
     }
   }
 
-  if ((ereg('^[[:alnum:]|_|-]+$', $tplDir)) && (is_dir (DIR_WS_TEMPLATES_BASE . $tplDir))){
+  if ((preg_match('{^[[:alnum:]|_|-]+$}', $tplDir)) && (is_dir (DIR_WS_TEMPLATES_BASE . $tplDir))){
     // 'Input Validated' only allow alfanumeric characters and underscores in template name
     define('DIR_WS_TEMPLATES', DIR_WS_TEMPLATES_BASE . $tplDir . '/' );
   } else {

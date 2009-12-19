@@ -84,18 +84,18 @@ document.write('<?php echo '<a href="' . tep_href_link($image_lg) . '" target="_
 			} else {
 				// No larger image found; Only display the thumbnail without a "click to enlarge" link
 				echo '<div class="screenshots">' . $extraImageImage . '</div>';
-			}
+			
 			// Increase current count
 			$i++;
 			// Update the replace for the str_replace pattern search/replace for next image in the sequence
 			$replace = array($image_base, $i);
-		}
+		
 		// All thumbnails have been found and displayed; clear all of the CSS floats
 		echo '<div class="clearScreenshots"><hr /></div>';
-	} else {
+	} 
 		// No extra images found for this product
 		// echo '<p class="noScreenshots"><span class="smallText">' . TEXT_NO_MOPICS . '</span></p>';
-	}
+	
 ?>
            </div>
        </td>

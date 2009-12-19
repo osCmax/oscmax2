@@ -442,7 +442,7 @@ global $order, $cart, $customer_id, $cc_id;
 		$t_prid = tep_get_prid($products[$i]['id']);
 		$gv_query = tep_db_query("select products_price, products_tax_class_id, products_model from " . TABLE_PRODUCTS . " where products_id = '" . $t_prid . "'");
 		$gv_result = tep_db_fetch_array($gv_query);
-		if (ereg('^GIFT', addslashes($gv_result['products_model']))) {
+		if (preg_match('/^GIFT/', addslashes($gv_result['products_model']))) {
 			$qty = $cart->get_quantity($t_prid);
 			$products_tax = tep_get_tax_rate($gv_result['products_tax_class_id']);
 			if ($this->include_tax =='false') {

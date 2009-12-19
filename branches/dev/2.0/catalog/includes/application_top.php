@@ -98,6 +98,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
       $GET_array = array();
       $PHP_SELF = str_replace(getenv('PATH_INFO'), '', $PHP_SELF);
       $vars = explode('/', substr(getenv('PATH_INFO'), 1));
+      do_magic_quotes_gpc($vars);
       for ($i=0, $n=sizeof($vars); $i<$n; $i++) {
         if (strpos($vars[$i], '[]')) {
           $GET_array[substr($vars[$i], 0, -2)][] = $vars[$i+1];
@@ -207,6 +208,12 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
   if ( ($session_started == true) && (PHP_VERSION >= 4.3) && function_exists('ini_get') && (ini_get('register_globals') == false) ) {
     extract($_SESSION, EXTR_OVERWRITE+EXTR_REFS);
+  }
+
+// initialize a session token
+  if (!tep_session_is_registered('sessiontoken')) {
+    $sessiontoken = md5(tep_rand() . tep_rand() . tep_rand() . tep_rand());
+    tep_session_register('sessiontoken');
   }
 
 // set SID once, even if empty
@@ -412,7 +419,7 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
             while (list($key, $value) = each($HTTP_POST_VARS)) {
               if (is_array($value)) {
                 while (list($key2, $value2) = each($value)) {
-                  if (ereg ("(.*)\]\[(.*)", $key2, $var)) {
+                                          if (preg_match ("/(.*)\]\[(.*)/", $key2, $var)) {
                     $id2[$var[1]][$var[2]] = $value2;
                   }
                 }
@@ -519,10 +526,8 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
                               }
                               tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
                               break;
-
-                            } // end switch $HTTP_GET_VARS['action']
-                          } // end if is set $HTTP_GET_VARS['action']
-
+    }
+  }
 
 // include the who's online functions
   require(DIR_WS_FUNCTIONS . 'whos_online.php');

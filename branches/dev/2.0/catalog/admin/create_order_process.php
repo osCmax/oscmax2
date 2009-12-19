@@ -34,7 +34,7 @@ $Id: create_order_process.php 3 2006-05-27 04:59:07Z user $
   $zone_id = tep_db_prepare_input($HTTP_POST_VARS['zone_id']);
   $state = tep_db_prepare_input($HTTP_POST_VARS['state']);
   $country = tep_db_prepare_input($HTTP_POST_VARS['country']);
-  $format_id = "1";
+  $format_id = tep_get_address_format_id($address['country_id']);
   $size = "1";
   $payment_method = DEFAULT_PAYMENT_METHOD;
   $new_value = "1";

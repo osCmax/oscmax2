@@ -234,8 +234,8 @@ td.style.backgroundColor="DFE4F4";
 	 <tr bgcolor='#DFE4F4'>
 	  <td class="dataTableContent" align="center">&nbsp;<?php echo $products['products_id'];?>&nbsp;</td>
 	  <td class="dataTableContent" align="center">&nbsp;<?php echo $products['products_model'];?>&nbsp;</td>
-	  <td class="dataTableContent" align="center">&nbsp;<?php echo ((is_file('../images/'.$products['products_image'])) ?  tep_image('../images/'.$products['products_image'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) : '<br>No Image<br>');?>&nbsp;</td>
-	  <td class="dataTableContent">&nbsp;<?php echo tep_draw_hidden_field('product[]', $products['products_id']) . tep_draw_checkbox_field('cross[]', $products['products_id'], ((tep_db_num_rows($xsold_query) > 0) ? true : false), '', ' onMouseOver="this.style.cursor=\'hand\'"');?>&nbsp;<label onMouseOver="this.style.cursor='hand'"><?php echo TEXT_CROSS_SELL;?></label>&nbsp;</td>
+    <td class="dataTableContent" align="center">&nbsp;<?php echo ((is_file('../images/'.DYNAMIC_MOPICS_THUMBS_DIR.$products['products_image'])) ? tep_image('../images/'.DYNAMIC_MOPICS_THUMBS_DIR.$products['products_image'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) : 'No Image');?>&nbsp;</td>
+ 	  <td class="dataTableContent">&nbsp;<?php echo tep_draw_hidden_field('product[]', $products['products_id']) . tep_draw_checkbox_field('cross[]', $products['products_id'], ((tep_db_num_rows($xsold_query) > 0) ? true : false), '', ' onMouseOver="this.style.cursor=\'hand\'"');?>&nbsp;<label onMouseOver="this.style.cursor='hand'"><?php echo TEXT_CROSS_SELL;?></label>&nbsp;</td>
 	  <td class="dataTableContent">&nbsp;<?php echo $products['products_name'];?>&nbsp;</td>
 	  <td class="dataTableContent">&nbsp;<?php echo $currencies->format($products['products_price']);?>&nbsp;</td>
 	 </tr>

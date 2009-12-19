@@ -3,7 +3,7 @@
   osCMax v2.0, Open Source E-Commerce Solutions
   http://www.osCDox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2003 osCommerce
+  Copyright 2008 osCMax, 2008 osCommerce
 
   Released under the GNU General Public License
 */
@@ -11,15 +11,15 @@
 // Define the webserver and path parameters
 // * DIR_FS_* = Filesystem directories (local/physical)
 // * DIR_WS_* = Webserver directories (virtual/URL)
-  define('HTTP_SERVER', ''); // eg, http://localhost - should not be empty for productive servers
-  define('HTTP_CATALOG_SERVER', '');
-  define('HTTPS_CATALOG_SERVER', '');
-  define('ENABLE_SSL_CATALOG', ''); // secure webserver for catalog module
-  define('DIR_FS_DOCUMENT_ROOT', ''); // where the pages are located on the server
-  define('DIR_WS_ADMIN', ''); // absolute path required
-  define('DIR_FS_ADMIN', ''); // absolute pate required
-  define('DIR_WS_CATALOG', ''); // absolute path required
-  define('DIR_FS_CATALOG', ''); // absolute path required
+  define('HTTP_SERVER', 'http://localhost');
+  define('HTTP_CATALOG_SERVER', 'http://localhost');
+  define('HTTPS_CATALOG_SERVER', 'http://localhost');
+  define('ENABLE_SSL_CATALOG', 'false');
+  define('DIR_FS_DOCUMENT_ROOT', 'C:/xampp/htdocs/dev_oscmax/catalog/');
+  define('DIR_WS_ADMIN', '/dev_oscmax/catalog/admin/');
+  define('DIR_FS_ADMIN', 'C:/xampp/htdocs/dev_oscmax/catalog/admin/');
+  define('DIR_WS_CATALOG', '/dev_oscmax/catalog/');
+  define('DIR_FS_CATALOG', 'C:/xampp/htdocs/dev_oscmax/catalog/');
   define('DIR_WS_IMAGES', 'images/');
   define('DIR_WS_ICONS', DIR_WS_IMAGES . 'icons/');
   define('DIR_WS_CATALOG_IMAGES', DIR_WS_CATALOG . 'images/');
@@ -38,10 +38,10 @@
   define('DIR_WS_FCKEDITOR', DIR_WS_CATALOG . 'FCKeditor/');
 
 // define our database connection
-  define('DB_SERVER', ''); // eg, localhost - should not be empty for productive servers
-  define('DB_SERVER_USERNAME', '');
+  define('DB_SERVER', 'localhost');
+  define('DB_SERVER_USERNAME', 'root');
   define('DB_SERVER_PASSWORD', '');
-  define('DB_DATABASE', '');
-  define('USE_PCONNECT', 'false'); // use persisstent connections?
-  define('STORE_SESSIONS', 'mysql'); // leave empty '' for default handler or set to 'mysql'
+  define('DB_DATABASE', 'oscmax_21dev');
+  define('USE_PCONNECT', 'false');
+  define('STORE_SESSIONS', 'mysql');
 ?>

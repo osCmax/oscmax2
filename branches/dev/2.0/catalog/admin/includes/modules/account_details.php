@@ -477,9 +477,9 @@ elseif
       </tr>
     </table></td>
   </tr>
-*/ ?>
+
 
 <?php
- // }
+  }
 ?>
 </table>

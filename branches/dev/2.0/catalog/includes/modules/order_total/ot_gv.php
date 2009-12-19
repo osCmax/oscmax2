@@ -148,7 +148,7 @@ function mod_process() {
     global $order, $customer_id, $insert_id, $REMOTE_ADDR;
 // CCGV 5.19 Fix for GV Queue with Paypal IPN
     if (!$order_id) $order_id = $insert_id;
-      if (ereg('^GIFT', addslashes($order->products[$i]['model']))) {
+      if (preg_match('/^GIFT/', addslashes($order->products[$i]['model']))) {
         $gv_order_amount = ($order->products[$i]['final_price'] * $order->products[$i]['qty']);
         if ($this->credit_tax=='true') $gv_order_amount = $gv_order_amount * (100 + $order->products[$i]['tax']) / 100;
 //        $gv_order_amount += 0.001;

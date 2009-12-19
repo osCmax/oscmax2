@@ -23,7 +23,7 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
       $this->sort_order = MODULE_PAYMENT_PAYPAL_IPN_SORT_ORDER;
       $this->enabled = ((MODULE_PAYMENT_PAYPAL_IPN_STATUS == 'True') ? true : false);
       $this->email_footer = MODULE_PAYMENT_PAYPAL_IPN_TEXT_EMAIL_FOOTER;
-      $this->identifier = 'osCommerce PayPal IPN v2.3.3';
+      $this->identifier = 'osCommerce PayPal IPN v2.4';
       // BOF Additional show text added by AlexStudio
       $this->show = MODULE_PAYMENT_PAYPAL_IPN_TEXT_SELECTION;
       $this->last_confirm = MODULE_PAYMENT_PAYPAL_IPN_TEXT_LAST_CONFIRM;
@@ -71,7 +71,9 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
 
     function selection() {
       return array('id' => $this->code,
+                   // BOF Additional show text addedby AlexStudio
                    'module' => $this->show);
+                   // EOF Additional show text added by AlexStudio
     }
 
     function pre_confirmation_check() {
@@ -262,8 +264,14 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
             }
           }
 
+        // FS start
+        $GLOBALS['cart_PayPal_IPN_ID'] = $cartID . '-' . $insert_id;
+        // FS stop
           tep_session_register('cart_PayPal_IPN_ID');
-          $_SESSION['cart_PayPal_IPN_ID'] = $cartID . '-' . $insert_id;
+        // FS start
+        // Terra register globals fix
+        //$_SESSION['cart_PayPal_IPN_ID'] = $cartID . '-' . $insert_id;
+        // FS stop
         }
       }
       // BOF Confirmation Info added by AlexStudio
@@ -435,9 +443,16 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
         $parameters['cmd'] = '_ext-enter';
         $parameters['redirect_cmd'] = '_xclick';
         $parameters['item_name'] = STORE_NAME;
+		///CCGV extras by Alexander Dimelow - better to calculate separate otherwise the shipping Free vaucher/code never will work
+		 $shipping = number_format($order_total['ot_shipping'] * $currencies->get_value($my_currency), $currencies->get_decimal_places($my_currency));
         // BOF shipping & handling fix by AlexStudio
         if(MOVE_TAX_TO_TOTAL_AMOUNT == 'True') {
+			///CCGV extras by Alexander Dimelow
+			 if (isset($order_total['ot_gv']) || isset($order_total['ot_coupon'])) {
+          $parameters['amount'] = number_format((($subtotal + $order->info['tax'] + $shipping) * $currencies->get_value($my_currency)) - $order_total['ot_gv'] - $order_total['ot_coupon'], $currencies->get_decimal_places($my_currency));
+			 }else{
           $parameters['amount'] = number_format(($subtotal + $order->info['tax']) * $currencies->get_value($my_currency), $currencies->get_decimal_places($my_currency));
+			 }
         } else {
           // default
           $parameters['amount'] = number_format($subtotal * $currencies->get_value($my_currency), $currencies->get_decimal_places($my_currency));
@@ -509,7 +524,8 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
       $parameters['notify_url'] = tep_href_link('ext/modules/payment/paypal_ipn/ipn.php', 'language=' . $_SESSION['language'], 'SSL', false, false);
       $parameters['cbt'] = CONFIRMATION_BUTTON_TEXT;  
       $parameters['return'] = tep_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL');
-      $parameters['cancel_return'] = tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL');
+//      $parameters['cancel_return'] = tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL');
+      $parameters['cancel_return'] = tep_href_link(FILENAME_SHOPPING_CART, 'ipn=cancel_ipn&order='.$parameters['invoice'], 'SSL');
       $parameters['bn'] = $this->identifier;
       $parameters['lc'] = $order->customer['country']['iso_code_2'];
       

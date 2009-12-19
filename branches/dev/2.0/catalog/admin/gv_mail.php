@@ -40,7 +40,7 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
     $subject = tep_db_prepare_input($HTTP_POST_VARS['subject']);
     while ($mail = tep_db_fetch_array($mail_query)) {
       $id1 = create_coupon_code($mail['customers_email_address']);
-      $message = tep_db_prepare_input($HTTP_POST_VARS['message']);
+      $message = $HTTP_POST_VARS['message'];
       $message .= "\n\n" . TEXT_GV_WORTH  . $currencies->format($HTTP_POST_VARS['amount']) . "\n\n";
       $message .= TEXT_TO_REDEEM;
       $message .= TEXT_WHICH_IS . $id1 . TEXT_IN_CASE . "\n\n";
@@ -66,7 +66,7 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
       $mimemessage->send($mail['customers_firstname'] . ' ' . $mail['customers_lastname'], $mail['customers_email_address'], '', $from, $subject);
       // Now create the coupon main and email entry
       $insert_query = tep_db_query("insert into " . TABLE_COUPONS . " (coupon_code, coupon_type, coupon_amount, date_created) values ('" . $id1 . "', 'G', '" . $HTTP_POST_VARS['amount'] . "', now())");
-      $insert_id = tep_db_insert_id($insert_query);
+      $insert_id = tep_db_insert_id();
       $insert_query = tep_db_query("insert into " . TABLE_COUPON_EMAIL_TRACK . " (coupon_id, customer_id_sent, sent_firstname, emailed_to, date_sent) values ('" . $insert_id ."', '0', 'Admin', '" . $mail['customers_email_address'] . "', now() )");
     }
     if ($HTTP_POST_VARS['email_to']) {
@@ -83,7 +83,7 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
       $message .= TEXT_OR_VISIT . HTTP_SERVER  . DIR_WS_CATALOG  . TEXT_ENTER_CODE;
 
       //Let's build a message object using the email class
-      $mimemessage = new email(array('X-Mailer: osCMax 2.0'));
+      $mimemessage = new email(array('X-Mailer: osCMax 2.1'));
       // add the message to the object
 
     if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {

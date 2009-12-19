@@ -99,3 +99,6 @@ FORM { display: inline; }
 .main { font-family: Verdana, Arial, sans-serif; font-size: 12px; }
 .errorText { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #ff0000; }
 
+/*QTpro*/
+.OutofStock { background-color: #FFCACB; }
+.OutofStockAttrib { font-family: Verdana, Arial, sans-serif; font-size: 10px;  background-color: #FFCACB; color: #000000; }

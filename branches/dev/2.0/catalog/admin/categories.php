@@ -278,6 +278,12 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                                   'products_status' => tep_db_prepare_input($HTTP_POST_VARS['products_status']),
                                   'products_tax_class_id' => tep_db_prepare_input($HTTP_POST_VARS['products_tax_class_id']),
                                   'manufacturers_id' => (int)tep_db_prepare_input($HTTP_POST_VARS['manufacturers_id']));
+		//++++ QT Pro: Begin Added code
+			if($product_investigation['has_tracked_options'] or $product_investigation['stock_entries_count'] > 0){
+				//Do not modify the stock from this page if the product has database entries or has tracked options
+				unset($sql_data_array['products_quantity']);
+			}
+		//++++ QT Pro: End Added code
 
           if (isset($HTTP_POST_VARS['products_image']) && tep_not_null($HTTP_POST_VARS['products_image']) && ($HTTP_POST_VARS['products_image'] != 'none')) {
             $sql_data_array['products_image'] = tep_db_prepare_input($HTTP_POST_VARS['products_image']);
@@ -436,6 +442,11 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
   } else {
     $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
   }
+  //++++ QT Pro: Begin Changed code
+  if($product_investigation['any_problems']){
+  	$messageStack->add('<b>Warning: </b>'. qtpro_doctor_formulate_product_investigation($product_investigation, 'short_suggestion') ,'warning');
+  }
+  //++++ QT Pro: End Changed code
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -965,7 +976,20 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_QUANTITY; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_quantity', $pInfo->products_quantity); ?></td>
+             <?php //++++ QT Pro: Begin Changed code
+			if($product_investigation['has_tracked_options'] or $product_investigation['stock_entries_count'] > 0)
+			{
+		  	?>
+			<td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;<a href="' . tep_href_link("stock.php", 'product_id=' . $pInfo->products_id) . ' " target="_blank">' . tep_image_button('button_stock.gif', "Stock") . '</a>'?></td>
+			<?php 
+			
+			}else{
+			?>
+			<td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_quantity', $pInfo->products_quantity); ?></td>
+			<?php 
+			}
+			//++++ QT Pro: End Changed code
+		  	?>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>

@@ -56,14 +56,21 @@ $Id: stats_low_stock_attrib.php 3 2006-05-27 04:59:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<script language="javascript" src="includes/general.js"></script>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
-
+<!-- header //-->
+<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+<!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="3" cellpadding="3">
+<table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td></td>
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+<!-- left_navigation //-->
+<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+<!-- left_navigation_eof //-->
+        </table></td>
 <!-- body_text //-->
     <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
@@ -76,22 +83,22 @@ $Id: stats_low_stock_attrib.php 3 2006-05-27 04:59:07Z user $
         </table></td>
       </tr>
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
       
           <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="formAreaTitle"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
+				<td class="formAreaTitle"><?php echo TABLE_HEADING_MODEL; ?></td>
                 <td class="formAreaTitle"><?php echo TABLE_HEADING_QUANTITY; ?></td>
                 
                 <td class="formAreaTitle" align="right"><?php echo TABLE_HEADING_PRICE; ?>&nbsp;</td>
-                
-              </tr>
+                         </tr>
               <tr>
-                <td colspan="3"><hr></td>
-              </tr>
+                <td colspan="4"><hr></td>
+			                </tr>
 <?php
-  $products_query_raw = "select p.products_id, pd.products_name, p.products_quantity,p.products_price, l.name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_LANGUAGES . " l where p.products_id = pd.products_id and p.products_id = pd.products_id and l.languages_id = pd.language_id and pd.language_id = '" . (int)$languages_id . "' order by pd.products_name ASC";
+  $products_query_raw = "select p.products_id, pd.products_name, p.products_model, p.products_quantity,p.products_price, l.name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_LANGUAGES . " l where p.products_id = pd.products_id and p.products_id = pd.products_id and l.languages_id = pd.language_id and pd.language_id = '" . (int)$languages_id . "' order by pd.products_name ASC";
   
   $products_query = tep_db_query($products_query_raw);
   while ($products = tep_db_fetch_array($products_query)) {
@@ -101,19 +108,19 @@ $Id: stats_low_stock_attrib.php 3 2006-05-27 04:59:07Z user $
       $products_stock_query=tep_db_query("SELECT products_stock_attributes, products_stock_quantity 
                                           FROM " . TABLE_PRODUCTS_STOCK . " 
                                           WHERE products_id=" . $products['products_id'] ." 
-                                          AND products_stock_quantity < '" . STOCK_REORDER_LEVEL ."' 
                                           ORDER BY products_stock_attributes");
       $products_stock_rows=tep_db_num_rows($products_stock_query);
-      if (($products['products_quantity'] < STOCK_REORDER_LEVEL) || ($products_stock_rows > 0)) {
-        $products_quantity=($products_stock_rows > 0) ? '&nbsp;' : $products['products_quantity'];
+	  // Highlight products with low stock
+	  													   if ($products['products_quantity'] > STOCK_REORDER_LEVEL){
+					   $trclass="dataTableRow";
+					    } else { 
+						$trclass="OutofStock";
+						 } 
+						 
+      //if (($products['products_quantity'] > (-1)) || ($products_stock_rows > 0)) {  //Note from Olof Larsson: I commented this out as we would like to se oversold products to. We would like to see the stockreport for ALL products regardles quantity right?
+        $products_quantity= $products['products_quantity'];
         $products_price=($products_stock_rows > 0) ? '&nbsp;' : $currencies->format($products['products_price']);
 ?>
-              <tr class="tableRow">
-               <td class="formAreaTitle"><?php echo '<a href="' . tep_href_link(FILENAME_STOCK, 'product_id=' . $products['products_id']) . '"><font size="+1"><strong>' . $products['products_name'] . '</strong></font></a>'; ?>&nbsp;</td>
-
-               <td class="dataTableContent"><?php echo $products_quantity; ?></td>
-               <td class="dataTableContent" align="right"><?php echo $products_price; ?>&nbsp;</td>
-              </tr>
              
               
               <?php
@@ -129,16 +136,27 @@ $Id: stats_low_stock_attrib.php 3 2006-05-27 04:59:07Z user $
                                                        AND patrib.options_id = popt.products_options_id 
                                                        AND popt.products_options_track_stock = '1' 
                                                        AND popt.language_id = '" . (int)$languages_id . "' 
-                                                       ORDER BY popt.products_options_id");
+                                                       ORDER BY popt.products_options_id");												   
+						 
 ?>
-            <tr class="dataTableRow">
+<td colspan="4"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1.2'); ?></td>
+
+					   <tr class="dataTableRow">
+               <td class="dataTableContent" cellpadding="2"><?php echo '<a href="' . tep_href_link(FILENAME_STOCK, 'product_id=' . $products['products_id']) . '">' . $products['products_name'] .'</a>'; ?>&nbsp;</td>
+			   <td class="dataTableContent" cellpadding="2"><?php echo $products['products_model']; ?></td>
+               <td class="dataTableContent" cellpadding="2"><?php echo $products_quantity; ?></td>
+               <td class="dataTableContent" align="right" cellpadding="2"><?php echo $products_price; ?>&nbsp;</td>
+			   <td><BR></td>
+              </tr>
+			  
+		    <tr class="dataTableRow">
               <td class="main">
                 <table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr class="dataTableRow">
+                  <tr class="dataTableRowSelected">
 <?php
           // build headng line with option names
           while ($products_options_name = tep_db_fetch_array($products_options_name_query)) {
-            echo "                    <td class=\"main\">" . $products_options_name['products_options_name'] . "</td>\n";
+            echo "                    <td class=\"smalltext\">&nbsp;<u>" . $products_options_name['products_options_name'] . "</u></td>\n";
           }
 ?>
                   </tr>
@@ -156,41 +174,75 @@ $Id: stats_low_stock_attrib.php 3 2006-05-27 04:59:07Z user $
     
           // now display the attribute value names, table the html for quantity & price to get everything
           // to line up right
-          $quantity_html_table="                <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"2\">\n";
-          $quantity_html_table.="                  <tr class=\"dataTableRow\"><td class=\"main\" colspan=\"" . sizeof($products_options_array) . "\">&nbsp;</td></tr>\n";
+		  $model_html_table="                <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"2\">\n";
+          $model_html_table.="                  <tr class=\"dataTableRowSelected\"><td class=\"smalltext\" colspan=\"" . sizeof($products_options_array) . "\">&nbsp;</td></tr>\n";
+          $quantity_html_table="               <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"2\">\n";
+          $quantity_html_table.="                  <tr class=\"dataTableRowSelected\"><td class=\"smalltext\" colspan=\"" . sizeof($products_options_array) . "\">&nbsp;</td></tr>\n";
           $price_html_table="                <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"2\">\n";
-          $price_html_table.="                  <tr class=\"dataTableRow\"><td class=\"main\" colspan=\"" . sizeof($products_options_array) . "\">&nbsp;</td></tr>\n";
+          $price_html_table.="                  <tr class=\"dataTableRowSelected\"><td class=\"smalltext\" colspan=\"" . sizeof($products_options_array) . "\">&nbsp;</td></tr>\n";
           while($products_stock_values=tep_db_fetch_array($products_stock_query)) {
             $attributes=explode(",",$products_stock_values['products_stock_attributes']);
-            echo "                  <tr class=\"dataTableRowSelected\">\n";
+            echo "                  <tr class=\"dataTableRowSelected\">\n"; 
+			
+			$model_html_table.="                  <tr class=\"dataTableRowSelected\">\n";
             $quantity_html_table.="                  <tr class=\"dataTableRowSelected\">\n";
             $price_html_table.="                  <tr class=\"dataTableRowSelected\">\n";
             $total_price=$products['products_price'];
+			
+			// Highlight products out of stock
+	  			 if (($products_stock_values['products_stock_quantity']) > STOCK_REORDER_LEVEL){
+					   $trclassstock="dataTableContent";
+					    } else {
+						$trclassstock="OutofStockAttrib";
+					 	}
+						
+						
             foreach($attributes as $attribute) {
               $attr=explode("-",$attribute);
-              echo "                    <td class=smalltext>".tep_values_name($attr[1])."</td>\n";
+              echo "<td class=\" " . $trclassstock . " \" >&nbsp;&nbsp;".tep_values_name($attr[1])."</td>\n";
               $total_price+=$attributes_price[$attr[0]][$attr[1]];
             }
+			 $total_price=$currencies->format($total_price);
             echo "                  </tr>\n";
-            $quantity_html_table.="                    <td class=smalltext>" . $products_stock_values['products_stock_quantity'] . "</td>\n";
-            $quantity_html_table.="                  </tr>\n";
-            $price_html_table.="                    <td align=\"right\" class=smalltext>" . $total_price . "&nbsp;</td>\n";
-            $price_html_table.="                  </tr>\n";
+
+			$model_html_table.="<td class=\"" . $trclassstock . " \">&nbsp;</td>\n";
+			$model_html_table.="</tr>\n";
+            $quantity_html_table.="<td class=\"" . $trclassstock . " \">" . $products_stock_values['products_stock_quantity'] . "</td>\n";
+            $quantity_html_table.="</tr>\n";
+            $price_html_table.="<td align=\"right\" class=\" " . $trclassstock . " \">" . $total_price . "&nbsp;</td>\n";
+            $price_html_table.="</tr>\n";
           }
           echo "                </table>\n";
           echo "              </td>\n";
+		  $model_html_table.="                </table>\n";
           $quantity_html_table.="                </table>\n";
           $price_html_table.="                </table>\n";
+          echo "              <td class=smalltext>" . $model_html_table . "</td>\n";
           echo "              <td class=smalltext>" . $quantity_html_table . "</td>\n";
-          echo "              <td>" . $price_html_table . "</td>\n";
+		  echo "              <td class=smalltext>" . $price_html_table . "</td>\n";
           echo "            </tr>\n";
-        }
-      }
+        
+		}
+		  else { ?>
+		   <td colspan="4"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1.2'); ?></td>
+                <tr class="<?php echo $trclass; ?>">
+				
+               <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_STOCK, 'product_id=' . $products['products_id']) . '">' . $products['products_name'] .'</a>'; ?>&nbsp;</td>
+               <td class="dataTableContent"><?php echo $products['products_model']; ?></td>
+               <td class="dataTableContent"><?php echo $products_quantity; ?></td>
+               <td class="dataTableContent" align="right"><?php echo $products_price; ?>&nbsp;</td>
+			   <td><BR></td>
+              </tr>
+			  
+			  <?php }
+		//} //Note from Olof Larsson: I commented this out as we would like to se oversold products to. We would like to see the stockreport for ALL products regardles quantity right?
   ////////////////////////// End Attributes
+  
   }
+   
 ?>
               <tr>
-                <td colspan="3"><?php echo tep_draw_separator(); ?></td>
+                <td colspan="4"><?php echo tep_draw_separator(); ?></td>
               </tr>
             </table></td>
           </tr>
@@ -201,6 +253,10 @@ $Id: stats_low_stock_attrib.php 3 2006-05-27 04:59:07Z user $
   </tr>
 </table>
 <!-- body_eof //-->
+
+<!-- footer //-->
+<?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
+<!-- footer_eof //-->
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

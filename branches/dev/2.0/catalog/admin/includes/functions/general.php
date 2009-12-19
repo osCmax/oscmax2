@@ -1127,6 +1127,9 @@ function tep_selected_file($filename) {
       tep_reset_cache_block('categories');
       tep_reset_cache_block('also_purchased');
     }
+	//++++ QT Pro: Begin Changed code
+	qtpro_doctor_amputate_all_from_product($product_id);
+	//++++ QT Pro: End Changed code
   }
 
   function tep_remove_order($order_id, $restock = false) {
@@ -1138,21 +1141,21 @@ function tep_selected_file($filename) {
       $order_query = tep_db_query("select products_id, products_quantity, products_stock_attributes from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . (int)$order_id . "'");
       while ($order = tep_db_fetch_array($order_query)) {
         $product_stock_adjust = 0;
-          if (tep_not_null($order['products_stock_attributes'])) {
+        if (tep_not_null($order['products_stock_attributes'])) {
           if ($order['products_stock_attributes'] != '$$DOWNLOAD$$') {
-            $attributes_stock_query = tep_db_query("SELECT products_stock_quantity
-                                                    FROM " . TABLE_PRODUCTS_STOCK . "
-                                                    WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "'
+            $attributes_stock_query = tep_db_query("SELECT products_stock_quantity 
+                                                    FROM " . TABLE_PRODUCTS_STOCK . " 
+                                                    WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "' 
                                                     AND products_id = '" . (int)$order['products_id'] . "'");
             if (tep_db_num_rows($attributes_stock_query) > 0) {
                 $attributes_stock_values = tep_db_fetch_array($attributes_stock_query);
-                tep_db_query("UPDATE " . TABLE_PRODUCTS_STOCK . "
-                              SET products_stock_quantity = products_stock_quantity + '" . (int)$order['products_quantity'] . "'
-                              WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "'
+                tep_db_query("UPDATE " . TABLE_PRODUCTS_STOCK . " 
+                              SET products_stock_quantity = products_stock_quantity + '" . (int)$order['products_quantity'] . "' 
+                              WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "' 
                               AND products_id = '" . (int)$order['products_id'] . "'");
                 $product_stock_adjust = min($order['products_quantity'],  $order['products_quantity']+$attributes_stock_values['products_stock_quantity']);
             } else {
-                tep_db_query("INSERT into " . TABLE_PRODUCTS_STOCK . "
+                tep_db_query("INSERT into " . TABLE_PRODUCTS_STOCK . " 
                               (products_id, products_stock_attributes, products_stock_quantity)
                               VALUES ('" . (int)$order['products_id'] . "', '" . $order['products_stock_attributes'] . "', '" . (int)$order['products_quantity'] . "')");
                 $product_stock_adjust = $order['products_quantity'];
@@ -1160,11 +1163,11 @@ function tep_selected_file($filename) {
           }
         } else {
             $product_stock_adjust = $order['products_quantity'];
-        }
-        tep_db_query("UPDATE " . TABLE_PRODUCTS . "
-                      SET products_quantity = products_quantity + " . $product_stock_adjust . ", products_ordered = products_ordered - " . (int)$order['products_quantity'] . "
+        } 
+        tep_db_query("UPDATE " . TABLE_PRODUCTS . " 
+                      SET products_quantity = products_quantity + " . $product_stock_adjust . ", products_ordered = products_ordered - " . (int)$order['products_quantity'] . " 
                       WHERE products_id = '" . (int)$order['products_id'] . "'");
-// EOF: MOD - QT Pro
+//++++ QT Pro: End Changed Code
       }
     }
     tep_db_query("delete from " . TABLE_ORDERS . " where orders_id = '" . (int)$order_id . "'");
@@ -1551,6 +1554,9 @@ function tep_selected_file($filename) {
     return $tmp_array;
   }
 
+//++++ QT Pro: Begin Changed code
+require(DIR_WS_FUNCTIONS . 'qtpro_functions.php');
+//++++ QT Pro: End Changed code
 // BOF: MOD - Order Editor
 //////create a pull down for all payment installed payment methods for Order Editor configuration
 // Get list of all payment modules available

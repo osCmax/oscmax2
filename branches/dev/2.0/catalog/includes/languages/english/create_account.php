@@ -11,6 +11,10 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 */
 
 define('NAVBAR_TITLE', 'Create an Account');
+// PWA BOF
+define('NAVBAR_TITLE_PWA', 'Enter Billing & Shipping Information');
+define('HEADING_TITLE_PWA', 'Billing & Shipping Information');
+// PWA EOF
 
 define('HEADING_TITLE', 'My Account Information');
 

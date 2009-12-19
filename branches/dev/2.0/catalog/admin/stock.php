@@ -114,13 +114,18 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
       $option_names[$list[_option_id]]=$list[_option];
       $product_name=$list[products_name];
     }
-  } else {
-    $flag=0;
-    $q=tep_db_query("select products_quantity,products_name from " . TABLE_PRODUCTS . " p,products_description pd where pd.products_id=" . (int)$VARS['product_id'] . " and p.products_id=" . (int)$VARS['product_id']);
+ } 
+ //Commented out so items with 0 stock will show up in the stock report.
+ else {
+  //  $flag=0;
+   $q=tep_db_query("select products_quantity,products_name from " . TABLE_PRODUCTS . " p,products_description pd where pd.products_id=" . (int)$VARS['product_id'] . " and p.products_id=" . (int)$VARS['product_id']);
     $list=tep_db_fetch_array($q);
     $db_quantity=$list[products_quantity];
     $product_name=stripslashes($list[products_name]);
   }
+  
+  $product_investigation = qtpro_doctor_investigate_product($VARS['product_id']);
+  
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -145,12 +150,14 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
 <!-- body_text //-->
     <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td>
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo PRODUCTS_STOCK.": $product_name"; ?></td>
+	  		<td class="pageHeading"><?php echo PRODUCTS_STOCK . ': ' . $product_name . '<td align="right"></td><br><br>'; ?></td>
             <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
           </tr>
-        </table></td>
+        </table>
+		</td>
       </tr>
       <tr>
         <td><form action="<?php echo $PHP_SELF;?>" method=get>
@@ -206,8 +213,76 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
         </table>
         </form></td>
       </tr>
-<tr><td><br>
-<?php  echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, '', 'NONSSL') . '" class="menuBoxContentLink">Back to Products Category</a> &nbsp;&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_STATS_LOW_STOCK_ATTRIB, '', 'NONSSL') . '" class="menuBoxContentLink">Back to Low Stock Report for Attributes</a>';?>
+<tr><td>
+
+<br>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="dataTableHeadingRow">
+<table width="100%" class="boxText" border="0" cellspacing="3" cellpadding="6"> 
+<tr valign="top">
+	<td class="dataTableHeadingContent" width="400" style="font-size: 12;">QTPro Doctor</td>
+	<td class="dataTableHeadingContent" style="font-size: 12;">Links</td>
+	
+</tr>
+
+<tr valign="top">
+	<td class="menuBoxHeading" width="400">
+	<span style="font-family: Verdana, Arial, sans-serif; font-size: 10px; color: black;">
+	<?php 
+  		//$product_investigation = qtpro_doctor_investigate_product($VARS['product_id']); //Defoined above? behövs då ej här
+		print qtpro_doctor_formulate_product_investigation($product_investigation, 'detailed');
+  	?>
+	</span>
+	</td>
+	
+    <td class="menuBoxHeading">
+	<?php 
+	
+	
+	echo '<br><ul><li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $VARS['product_id'] . '&action=new_product') . '" class="menuBoxContentLink">Edit this product</a></li>';
+	echo '<li><a href="' . tep_href_link(FILENAME_STATS_LOW_STOCK_ATTRIB, '', 'NONSSL') . '" class="menuBoxContentLink">Go to the low stock report</a><br></li>';
+	
+	//class="menuBoxHeading columnLeft
+	//We shall now generate links back to the product in the admin/categories.php page.
+	//The same product can exist in differend categories.
+	  
+	  //Generate both the text (in $path_array) and the parameter (in $cpath_string_array)
+	  $raw_path_array =tep_generate_category_path($VARS['product_id'], 'product');
+	  $path_array = array();
+	  $cpath_string_array = array();
+	  foreach($raw_path_array as $raw_path){
+	    $path_in_progress='';
+		$cpath_string_in_progress='';
+	  	foreach($raw_path as $raw_path_piece){
+	      $path_in_progress .= $raw_path_piece['text'].' >> ';
+		  $cpath_string_in_progress .= $raw_path_piece['id'].'_';
+	    }
+		$path_array[]= substr($path_in_progress, 0, -4);
+		$cpath_string_array[] = substr($cpath_string_in_progress, 0, -1);
+	  }
+	  
+	  if (sizeof($raw_path_array)>0) {
+
+
+		$curr_pos = 0;
+		foreach($path_array as $neverusedvariable) {
+		  print '<li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID='.$VARS['product_id'].'&cPath='. $cpath_string_array[$curr_pos] , 'NONSSL') . '" class="menuBoxContentLink">Go to this product in '.$path_array[$curr_pos].'</a></li>';
+		  $curr_pos++;
+		}
+	 }else{
+	 	print '<span style="font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #FF1111; font-weight: normal; text-decoration: none;">Warning! This product does not seem to exist in any category. Your customers can\'t find it.</span>';
+	 }
+	 
+	echo '</ul>';
+	 
+	?>
+	</td>
+
+  </tr>
+</table></table>
+
+
+
 </td></tr>
     </table></td>
 <!-- body_text_eof //-->

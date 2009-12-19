@@ -630,26 +630,21 @@ CREATE TABLE customers_info (
 );
 
 DROP TABLE IF EXISTS customers_wishlist;
-CREATE TABLE customers_wishlist (
-  products_id int NOT NULL,
-  customers_id int NOT NULL,
-  products_model varchar(13),
-  products_name varchar(64) NOT NULL,
-  products_price decimal(8,2) DEFAULT '0.00' NOT NULL,
-  final_price decimal(8,2) DEFAULT '0.00' NOT NULL,
-  products_quantity int(2) NOT NULL default '0',
-  wishlist_name varchar(64) 
-);
+CREATE TABLE `customers_wishlist` (
+  `products_id` tinytext NOT NULL,
+  `customers_id` int(13) NOT NULL default '0'
+) TYPE=MyISAM;
+
 
 DROP TABLE IF EXISTS customers_wishlist_attributes;
-CREATE TABLE customers_wishlist_attributes (
-  customers_wishlist_attributes_id int NOT NULL auto_increment,
-  customers_id int NOT NULL default '0',
-  products_id tinytext NOT NULL,
-  products_options_id int NOT NULL default '0',
-  products_options_value_id int NOT NULL default '0',
-  PRIMARY KEY (customers_wishlist_attributes_id)
-);
+CREATE TABLE `customers_wishlist_attributes` (
+  `customers_wishlist_attributes_id` int(11) NOT NULL auto_increment,
+  `customers_id` int(11) NOT NULL default '0',
+  `products_id` tinytext NOT NULL,
+  `products_options_id` int(11) NOT NULL default '0',
+  `products_options_value_id` int(11) NOT NULL default '0',
+  PRIMARY KEY (`customers_wishlist_attributes_id`)
+) TYPE=MyISAM; 
 
 DROP TABLE IF EXISTS geo_zones;
 CREATE TABLE geo_zones (
@@ -2071,36 +2066,6 @@ INSERT INTO orders_status VALUES (2,3,'Proceso',1,1);
 INSERT INTO orders_status VALUES (3,1,'Delivered',1,1);
 INSERT INTO orders_status VALUES (3,2,'Versendet',1,1);
 INSERT INTO orders_status VALUES (3,3,'Entregado',1,1);
-INSERT INTO orders_status VALUES (100000,1,'Updated',1,0);
-INSERT INTO orders_status VALUES (100000,2,'Updated',1,0);
-INSERT INTO orders_status VALUES (100000,3,'Updated',1,0);
-INSERT INTO orders_status VALUES (100001,1,'Preparing [PayPal IPN]',1,0);
-INSERT INTO orders_status VALUES (100001,2,'Preparing [PayPal IPN]',1,0);
-INSERT INTO orders_status VALUES (100001,3,'Preparing [PayPal IPN]',1,0);
-INSERT INTO orders_status VALUES (100002,1,'Preparing [PayPal Standard]',0,0);
-INSERT INTO orders_status VALUES (100002,2,'Preparing [PayPal Standard]',0,0);
-INSERT INTO orders_status VALUES (100002,3,'Preparing [PayPal Standard]',0,0);
-INSERT INTO orders_status VALUES (100003,1,'Sofortüberweisung Vorbereitung',0,0);
-INSERT INTO orders_status VALUES (100003,2,'Sofortüberweisung Vorbereitung',0,0);
-INSERT INTO orders_status VALUES (100003,3,'Sofortüberweisung Vorbereitung',0,0);
-INSERT INTO orders_status VALUES (100,1,'Google New',1,0);
-INSERT INTO orders_status VALUES (100,2,'Google New',1,0);
-INSERT INTO orders_status VALUES (100,3,'Google New',1,0);
-INSERT INTO orders_status VALUES (101,1,'Google Processing',1,0);
-INSERT INTO orders_status VALUES (101,2,'Google Processing',1,0);
-INSERT INTO orders_status VALUES (101,3,'Google Processing',1,0);
-INSERT INTO orders_status VALUES (102,1,'Google Shipped',1,0);
-INSERT INTO orders_status VALUES (102,2,'Google Shipped',1,0);
-INSERT INTO orders_status VALUES (102,3,'Google Shipped',1,0);
-INSERT INTO orders_status VALUES (103,1,'Google Refunded',1,0);
-INSERT INTO orders_status VALUES (103,2,'Google Refunded',1,0);
-INSERT INTO orders_status VALUES (103,3,'Google Refunded',1,0);
-INSERT INTO orders_status VALUES (104,1,'Google Shipped and Refunded',1,0);
-INSERT INTO orders_status VALUES (104,2,'Google Shipped and Refunded',1,0);
-INSERT INTO orders_status VALUES (104,3,'Google Shipped and Refunded',1,0);
-INSERT INTO orders_status VALUES (105,1,'Google Canceled',1,0);
-INSERT INTO orders_status VALUES (105,2,'Google Canceled',1,0);
-INSERT INTO orders_status VALUES (105,3,'Google Canceled',1,0);
 
 INSERT INTO products_attributes_download  VALUES (11, 'Dhtml-coolmenu.zip',7,10);
 

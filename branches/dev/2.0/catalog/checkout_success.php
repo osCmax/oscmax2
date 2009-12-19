@@ -37,24 +37,18 @@ $Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
           $notify_string .= 'notify[]=' . $notify[$i] . '&';
         }
       }
+      if (!empty($notify_string)) {
+        $notify_string = 'action=notify&' . substr($notify_string, 0, -1);
+    }
     }
 
-// BOF:
-//    tep_redirect(tep_href_link(FILENAME_DEFAULT, $notify_string));
-// Added a check for a Guest checkout and cleared the session - 030411 
-    if (tep_session_is_registered('noaccount')) { 
-      tep_session_destroy(); 
-      tep_redirect(tep_href_link(FILENAME_DEFAULT, '', 'NONSSL')); 
-    } else { 
-      tep_redirect(tep_href_link(FILENAME_DEFAULT, $notify_string, 'SSL')); 
-    }
-// EOF:
+    tep_redirect(tep_href_link(FILENAME_DEFAULT, $notify_string));
   }
 
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_SUCCESS);
 
   $breadcrumb->add(NAVBAR_TITLE_1);
-//  $breadcrumb->add(NAVBAR_TITLE_2);  //Removed for PWA 0.8
+  $breadcrumb->add(NAVBAR_TITLE_2);
 
   $global_query = tep_db_query("select global_product_notifications from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . (int)$customer_id . "'");
   $global = tep_db_fetch_array($global_query);
@@ -70,40 +64,6 @@ $Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
                                 'text' => $products['products_name']);
     }
   }
-
-// BOF: MOD - PWA:  Added a check for a Guest checkout and cleared the session - 030411 v0.71
-if (tep_session_is_registered('noaccount')) {
- $order_update = array('purchased_without_account' => '1');
- tep_db_perform(TABLE_ORDERS, $order_update, 'update', "orders_id = '".$orders['orders_id']."'");
-//  tep_db_query("insert into " . TABLE_ORDERS . " (purchased_without_account) values ('1') where orders_id = '" . (int)$orders['orders_id'] . "'");
- tep_db_query("delete from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . tep_db_input($customer_id) . "'");
- tep_db_query("delete from " . TABLE_CUSTOMERS . " where customers_id = '" . tep_db_input($customer_id) . "'");
- tep_db_query("delete from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . tep_db_input($customer_id) . "'");
- tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where customers_id = '" . tep_db_input($customer_id) . "'");
- tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id = '" . tep_db_input($customer_id) . "'");
- tep_db_query("delete from " . TABLE_WHOS_ONLINE . " where customer_id = '" . tep_db_input($customer_id) . "'");
- tep_session_destroy();
-
-// BOF: Bugfix 0000062
-// OK, so this was a PWA, so lets check for other MIA PWA accounts, and clear them as well!!
-  $old_customers_query = tep_db_query("select c.customers_id, c.purchased_without_account as pwa, ci.customers_info_date_account_created as date from " . TABLE_CUSTOMERS_INFO . " ci left join " . TABLE_CUSTOMERS . " c on ci.customers_info_id = c.customers_id");
-  while ($old_customer = tep_db_fetch_array($old_customers_query)) {
-//the second and third part of this if statement should be moved into the mysql select as a where clause...
-    if ((!tep_session_is_registered($old_customer['customers_id'])) && //dont't want to delete PWA accounts with registered sessions...
-        ((strtotime($old_customer['date']) + (60*60)) < time()) && //make sure the MIA PWA account is at least an hour old (is this old enough? ...its worked well for me so far... a session is 24 minutes, so I figure its safe)
-        ($old_customer['pwa'] == 1) ) { //Oh, and make sure it IS a PWA...
-//Then delete it like we did above... might be able to compact this code, but...
-      tep_db_query("delete from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $old_customer['customers_id'] . "'");
-      tep_db_query("delete from " . TABLE_CUSTOMERS . " where customers_id = '" . $old_customer['customers_id'] . "'");
-      tep_db_query("delete from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . $old_customer['customers_id'] . "'");
-      tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where customers_id = '" . $old_customer['customers_id'] . "'");
-      tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id = '" . $old_customer['customers_id'] . "'");
-      tep_db_query("delete from " . TABLE_WHOS_ONLINE . " where customer_id = '" . $old_customer['customers_id'] . "'");
-    }
-  }
-// EOF: Bugfix 0000062
-}
-// EOF: MOD - PWA:  Added a check for a Guest checkout and cleared the session - 030411 v0.71
 
   $content = CONTENT_CHECKOUT_SUCCESS;
 

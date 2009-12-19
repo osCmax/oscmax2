@@ -248,13 +248,10 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
   } else {
 ?>
               <tr>
-<?php /* MOD: QT Pro Added 1 to colspan */ ?>
                 <td colspan="3" class="pageHeading">&nbsp;<?php echo HEADING_TITLE_OPT; ?>&nbsp;</td>
-                <td align="right"><br><form name="option_order_by" action="<?php echo FILENAME_PRODUCTS_ATTRIBUTES; ?>"><select name="selected" onChange="go_option()"><option value="products_options_id"<?php if ($option_order_by == 'products_options_id') { echo ' SELECTED'; } ?>><?php echo TEXT_OPTION_ID; ?></option><option value="products_options_name"<?php if ($option_order_by == 'products_options_name') { echo ' SELECTED'; } ?>><?php echo TEXT_OPTION_NAME; ?></option></select></form></td>
               </tr>
               <tr>
-<?php /* MOD: QT Pro Added 1 to colspan */ ?>
-                <td colspan="4" class="smallText">
+                <td colspan="3" class="smallText" align="right">
 <?php
     $options = "select * from " . TABLE_PRODUCTS_OPTIONS . " where language_id = '" . (int)$languages_id . "' order by products_options_id";
     $options_split = new splitPageResults($option_page, MAX_ROW_LISTS_OPTIONS, $options, $options_query_numrows);
@@ -264,20 +261,34 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
                 </td>
               </tr>
               <tr>
-<?php /* MOD: QT Pro Added 1 to colspan */ ?>
+<?php
+//++++ QT Pro: Begin Changed code
+?>
                 <td colspan="4"><?php echo tep_black_line(); ?></td>
+<?php
+//++++ QT Pro: End Changed Code
+?>
               </tr>
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_ID; ?>&nbsp;</td>
                 <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_OPT_NAME; ?>&nbsp;</td>
-<?php /* BOF: QT Pro changed "TABLE_HEADING_OPT_TYPE" to "TABLE_HEADING_TRACK_STOCK" */ ?>
+<?php
+//++++ QT Pro: Begin Changed code
+?>
                 <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_TRACK_STOCK; ?>&nbsp;</td>
-<?php /* EOF: QT Pro */ ?>
+<?php
+//++++ QT Pro: End Changed Code
+?>
                 <td class="dataTableHeadingContent" align="center">&nbsp;<?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
               <tr>
-<?php /* MOD: QT Pro Added 1 to colspan */ ?>
+<?php
+//++++ QT Pro: Begin Changed code
+?>
                 <td colspan="4"><?php echo tep_black_line(); ?></td>
+<?php
+//++++ QT Pro: End Changed Code
+?>
               </tr>
 <?php
     $next_id = 1;
@@ -299,9 +310,13 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 ?>
                 <td align="center" class="smallText">&nbsp;<?php echo $options_values['products_options_id']; ?><input type="hidden" name="option_id" value="<?php echo $options_values['products_options_id']; ?>">&nbsp;</td>
                 <td class="smallText"><?php echo $inputs; ?></td>
-<?php /* BOF: QT Pro */ ?>
-                <td align="center" class="smallText"><input type=checkbox name=track_stock <?php echo $options_values['products_options_track_stock']?"checked":""; ?>></td>
-<?php /* EOF: QT Pro */ ?>
+<?php
+//++++ QT Pro: Begin Changed code
+?>
+                <td align="center" class="smallText"><input type=checkbox name=track_stock <? echo $options_values['products_options_track_stock']?"checked":""; ?>></td>
+<?php
+//++++ QT Pro: End Changed Code
+?>
                 <td align="center" class="smallText">&nbsp;<?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?>&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_cancel.gif', IMAGE_CANCEL); ?></a>&nbsp;</td>
 <?php
         echo '</form>' . "\n";
@@ -309,9 +324,13 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 ?>
                 <td align="center" class="smallText">&nbsp;<?php echo $options_values["products_options_id"]; ?>&nbsp;</td>
                 <td class="smallText">&nbsp;<?php echo $options_values["products_options_name"]; ?>&nbsp;</td>
-<?php /* BOF: QT Pro */ ?>
+<?php
+//++++ QT Pro: Begin Changed code
+?>
                 <td align="center" class="smallText">&nbsp;<?php echo $options_values['products_options_track_stock']?"Yes":"No"; ?></td>
-<?php /* EOF: QT Pro */ ?>
+<?php
+//++++ QT Pro: End Changed Code
+?>
                 <td align="center" class="smallText">&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_option&option_id=' . $options_values['products_options_id'] . '&option_order_by=' . $option_order_by . '&option_page=' . $option_page, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_edit.gif', IMAGE_UPDATE); ?></a>&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_product_option&option_id=' . $options_values['products_options_id'], 'NONSSL') , '">'; ?><?php echo tep_image_button('button_delete.gif', IMAGE_DELETE); ?></a>&nbsp;</td>
 <?php
       }
@@ -324,8 +343,13 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
     }
 ?>
               <tr>
-<?php /* MOD: QT Pro Added 1 to colspan */ ?>
+<?php
+//++++ QT Pro: Begin Changed code
+?>
                 <td colspan="4"><?php echo tep_black_line(); ?></td>
+<?php
+//++++ QT Pro: End Changed Code
+?>
               </tr>
 <?php
     if ($action != 'update_option') {
@@ -340,17 +364,24 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 ?>
                 <td align="center" class="smallText">&nbsp;<?php echo $next_id; ?>&nbsp;</td>
                 <td class="smallText"><?php echo $inputs; ?></td>
-<?php /* BOF: QT Pro */ ?>
+<?php
+//++++ QT Pro: Begin Changed code
+?>
                 <td align="center" ><input type=checkbox name=track_stock></td>
                 <td align="left" class="smallText">&nbsp;<?php echo tep_image_submit('button_insert.gif', IMAGE_INSERT); ?>&nbsp;</td>
-<?php /* EOF: QT Pro */ ?>
 <?php
+//++++ QT Pro: End Changed Code
       echo '</form>';
 ?>
               </tr>
               <tr>
-<?php /* MOD: QT Pro Added 1 to colspan */ ?>
+<?php
+//++++ QT Pro: Begin Changed code
+?>
                 <td colspan="4"><?php echo tep_black_line(); ?></td>
+<?php
+//++++ QT Pro: End Changed Code
+?>
               </tr>
 <?php
     }

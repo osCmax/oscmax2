@@ -27,6 +27,7 @@
 define('HEADING_TITLE', 'Low Stock Report');
 
 define('TABLE_HEADING_PRODUCTS', 'Products');
+define('TABLE_HEADING_MODEL', 'Model');
 define('TABLE_HEADING_QUANTITY', 'Quantity');
 define('TABLE_HEADING_PRICE', 'Price');
 ?>

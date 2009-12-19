@@ -119,7 +119,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $ship
     }
 
     $free_shipping = false;
-    if ( ($pass == true) && ($order->info['total'] >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) ) {
+    if ( ($pass == true) && ($order->info['subtotal'] >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) ) {
       $free_shipping = true;
 
       include(DIR_WS_LANGUAGES . $language . '/modules/order_total/ot_shipping.php');

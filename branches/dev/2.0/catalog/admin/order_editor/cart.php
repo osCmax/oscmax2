@@ -13,6 +13,9 @@
   class manualCart {
     var $contents, $total, $weight;
 
+    // mod indvship
+var $shiptotal;
+// end indvship
     function manualCart() {
       $this->reset();
     }
@@ -35,6 +38,9 @@
     function reset() {
       $this->contents = array();
       $this->total = 0;
+      // mod indvship
+      $this->shiptotal = 0;
+      // end indvship
     }
 
     function count_contents() {  // get total number of items in cart 
@@ -83,6 +89,9 @@
     function calculate() {
       $this->total = 0;
       $this->weight = 0;
+      // mod indvship
+      $this->shiptotal = 0;
+      // end indvship
       if (!is_array($this->contents)) return 0;
 
       reset($this->contents);
@@ -90,13 +99,16 @@
         $qty = $this->contents[$products_id]['qty'];
 
 // products price
-        $product_query = tep_db_query("select products_id, products_price, products_tax_class_id, products_weight from " . TABLE_PRODUCTS . " where products_id='" . tep_get_prid($products_id) . "'");
+        $product_query = tep_db_query("select products_id, products_price, products_ship_price, products_tax_class_id, products_weight from " . TABLE_PRODUCTS . " where products_id='" . tep_get_prid($products_id) . "'");
         if ($product = tep_db_fetch_array($product_query)) {
           $prid = $product['products_id'];
           $products_tax = tep_get_tax_rate($product['products_tax_class_id']);
           $products_price = $product['products_price'];
           $products_weight = $product['products_weight'];
 
+          // mod indvship
+          $products_ship_price = $product['products_ship_price'];
+          // end indvship
           $specials_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . $prid . "' and status = '1'");
           if (tep_db_num_rows ($specials_query)) {
             $specials = tep_db_fetch_array($specials_query);
@@ -104,6 +116,9 @@
           }
 
           $this->total += tep_add_tax($products_price, $products_tax) * $qty;
+          // mod indvship
+          $this->shiptotal += ($products_ship_price * $qty);
+          // end indvship
           $this->weight += ($qty * $products_weight);
         }
 
@@ -177,7 +192,11 @@
 
       return $this->total;
     }
+    function get_shiptotal() {
+    $this->calculate();
 
+    return $this->shiptotal;
+    }
     function show_weight() {
       $this->calculate();
 

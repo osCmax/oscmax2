@@ -571,6 +571,7 @@ CREATE TABLE customers (
   customers_fax varchar(32),
   customers_password varchar(40) NOT NULL,
   customers_newsletter char(1),
+  guest_account tinyint(1) NOT NULL default '0',
   customers_login varchar(96) DEFAULT NULL,
   customers_group_name varchar(27) DEFAULT 'Retail' NOT NULL,
   customers_group_id int NOT NULL default '0',

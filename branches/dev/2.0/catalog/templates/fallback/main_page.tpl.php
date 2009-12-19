@@ -28,6 +28,7 @@ function CVVPopUpWindow(url) {
 <meta name="keywords" content="<?php echo META_TAG_KEYWORDS; ?>">
 <meta name="description" content="<?php echo META_TAG_DESCRIPTION; ?>">
 <base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','dynamic_mopics.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','stylesheet.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','stylesheet-new.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','print.css')); // BTSv1.5 ?>" media="print">
@@ -44,14 +45,13 @@ function CVVPopUpWindow(url) {
 <?php
 	//// BEGIN:  Added for Dynamic MoPics v3.000
 ?>
-<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','dynamic_mopics.css')); // BTSv1.5 ?>">
 <script language="javascript" type="text/javascript"><!--
 	function popupImage(url, imageHeight, imageWidth) {
-		var newImageHeight = (parseInt(imageHeight) + 40);
+		var newImageHeight = (parseInt(imageHeight) + 20);
 		var yPos = ((screen.height / 2) - (parseInt(newImageHeight) / 2));
 		var xPos = ((screen.width / 2) - (parseInt(imageWidth) / 2));
 
-		imageWindow = window.open(url,'popupImages','toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,width=' + imageWidth + ',height=' + newImageHeight + ',screenY=' + yPos + ',screenX=' + xPos + ',top=' + yPos + ',left=' + xPos);
+		imageWindow = window.open(url,'popupImages','toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=' + imageWidth + ',height=' + newImageHeight + ',screenY=' + yPos + ',screenX=' + xPos + ',top=' + yPos + ',left=' + xPos);
 
 		imageWindow.moveTo(xPos, yPos);
 		imageWindow.resizeTo(parseInt(imageWidth), parseInt(newImageHeight));
@@ -64,6 +64,21 @@ function CVVPopUpWindow(url) {
 <?php
 	//// END:  Added for Dynamic MoPics v3.000
 ?>
+<!-- BOF LIGHTBOX -->
+<!-- Lightbox commented out in favour of Slimbox
+	<script type="text/javascript" src="lightbox/prototype.js"></script>
+	<script type="text/javascript" src="lightbox/scriptaculous.js?load=effects"></script>
+	<link rel="stylesheet" href="lightbox/lightbox.css" type="text/css" media="screen"> 
+	<script type="text/javascript" src="lightbox/builder.js"></script>
+	<script type="text/javascript" src="lightbox/lightbox.js"></script>  
+-->
+<!-- EOF LIGHTBOX -->
+
+<!-- BOF SLIMBOX2 -->
+<script type="text/javascript" src="slimbox2/jquery.js"></script>
+<script type="text/javascript" src="slimbox2/slimbox2.js"></script>
+<link rel="stylesheet" href="slimbox2/slimbox2.css" type="text/css" media="screen" />
+<!-- EOF SLIMBOX2 -->
 
 </head>
 <body>
@@ -164,7 +179,9 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 <br>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td align="center" class="smallText">
+    <td align="center" class="smallText">  
+     All content and Images Copyright &copy; 2009 <?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a>'; ?>
+     <br>
 <?php
 /*
   The following copyright announcement can only be
@@ -196,6 +213,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
   <tr>
     <td align="center"><?php echo tep_display_banner('static', $banner); ?></td>
   </tr>
+
 </table>
 <?php
   }

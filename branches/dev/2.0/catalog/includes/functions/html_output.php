@@ -98,10 +98,15 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // The HTML form submit button wrapper function
 // Outputs a button in the selected language
-  function tep_image_submit($image, $alt = '', $parameters = '') {
+ function tep_image_submit($image, $alt = '', $parameters = '') {
     global $language;
 
-    $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image) . '" border="0" alt="' . tep_output_string($alt) . '"';
+    if(is_file(DIR_WS_TEMPLATES . $language. '/images/buttons/' . $image)) {
+        $image_submit = '<input type="image" src="' .
+            tep_output_string(DIR_WS_TEMPLATES . $language. '/images/buttons/' . $image) . '" border="0" alt="' . tep_output_string($alt) . '"';
+    } else {
+        $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image) . '" border="0" alt="' . tep_output_string($alt) . '"';
+    }
 
     if (tep_not_null($alt)) $image_submit .= ' title=" ' . tep_output_string($alt) . ' "';
 
@@ -116,8 +121,11 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 // Output a function button in the selected language
   function tep_image_button($image, $alt = '', $parameters = '') {
     global $language;
-
-    return tep_image(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image, $alt, '', '', $parameters);
+    if(is_file(DIR_WS_TEMPLATES . $language .'/images/buttons/' . $image)) {
+        return tep_image(DIR_WS_TEMPLATES . $language .'/images/buttons/' . $image, $alt, '', '', $parameters);
+    } else {
+        return tep_image(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image, $alt, '', '', $parameters);
+    }
   }
 
 ////

@@ -94,16 +94,20 @@
               <td align="center" class="smallText">
 <?php
 			$image_lg = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);
-			if ($lg_image_ext = mopics_file_exists(DIR_FS_CATALOG . $image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
-				$image_size = @getimagesize(DIR_FS_CATALOG . $image_lg . '.' . $lg_image_ext);
+			if ($lg_image_ext = mopics_file_exists($image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
+				$image_size = @getimagesize($image_lg . '.' . $lg_image_ext);
+				
+			//BOF LIGHTBOX
+			$lightlarge = $image_lg . "." . $lg_image_ext;
 ?>
-
-<script language="javascript" type="text/javascript"><!--
-document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $product_info['products_id'] . '&type=' . $lg_image_ext); ?>\',\'<?php echo ((int)$image_size[1] + 30); ?>\',\'<?php echo ((int)$image_size[0] + 5); ?>\');"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>');
+<script language="javascript"><!--
+document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], $product_info['products_name'], PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>');
 //--></script>
 <noscript>
-<a href="<?php echo tep_href_link($image_lg . '.' . $lg_image_ext); ?>" target="_blank"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>
+<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], $product_info['products_name'], PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
 </noscript>
+<!--		 EOF LIGHTBOX   -->
+
 <?php
 			} else {
           echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
@@ -131,23 +135,18 @@ document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENA
     }
 ?>
         </td>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+
+<center>
 <?php
 		//// BEGIN:  Added for Dynamic MoPics v3.000
-?>
-      <tr>
-      	<td>
-				<div class="screenshotsHeader">
-					<div class="screenshotsHeaderText"><?php echo TEXT_OTHER_PRODUCT_IMAGES; ?></div>
-				</div>
-				<div class="screenshotsBlock">
-					<?php include(DIR_WS_MODULES . 'dynamic_mopics.php'); ?>
-   			        </div>
-	</td>
-      </tr>
-<?php
+ if (is_file(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image']) && DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'] != "pixel_trans.gif"){
+ 					 include(DIR_WS_MODULES . 'dynamic_mopics.php');   	
+	   } 
 		//// END:  Added for Dynamic MoPics v3.000
 ?>
+</center>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>

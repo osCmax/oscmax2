@@ -13,10 +13,12 @@ BODY.popupImage {
 	color: #000000;
 	text-align: center;
 	padding: 0;
-	margin: 0;
+	margin-bottom: 20px;
 }
 
 .screenshotsBlock {
+	align: center;
+	width: 100%;
 	border: 1px solid #bbc3d3;
 	background: #f8f8f9;
 	text-align: center;
@@ -26,35 +28,69 @@ BODY.popupImage {
 
 .screenshotsHeaderText {
   font-family: Verdana, Arial, sans-serif;
-  font-size: 11px;
+  font-size: 10px;
+  background-image:  url('images/box_header.jpg');
+	background-repeat: repeat-x;
+	background-position: top center;
+  color: white;
   font-weight: bold;
-  color: #ffffff;
-	text-align: left;
-	background: url("images/infobox/corner_left.gif") top left no-repeat;
-	padding: 0 0 0 15px;
-	margin: 0;
+  margin-left: 10px;
 }
 
 .screenshotsHeader {
-	background: #bbc3d3 url("images/infobox/corner_right.gif") top right no-repeat;
-	padding: 0;
-	margin: 10px 0 0 0;
+	width: 100%;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background-image:  url('images/box_header.jpg');
+	background-repeat: repeat-x;
+	background-position: top center;
+  color: white;
+}
+
+#screenshotsHeader {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background-image:  url('images/box_header.jpg');
+  background-repeat: repeat-x;
+  background-position: top center;
+  color: white;
+  font-weight: bold;
+}
+
+#screenshotsHeaderText {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background-image:  url('images/box_header.jpg');
+  background-repeat: repeat-x;
+  background-position: top center;
+  color: white;
+  font-weight: bold;
+  margin-left: 10px;
 }
 
 .screenshots {
-	float: left;
-	width: 25%; /* the width sets the number of images per row (i.e., 50% = 2 per row, 33% = 3 per row, 25% = 4 per row, 20% = 5 per row, etc) */
+	display: -moz-inline-box;
+	vertical-align: top; 
+	display: inline-block;
 	text-align: center;
 	padding: 5px 0 5px 0;
-	margin: 0;
+	margin-left: auto ;
+	margin-right: auto ;
+} /* for Firefox 3 */
+
+* html .screenshots {
+	display: inline;
+	padding: 5px 0 5px 5px;
+} 
+
+.screenshots IMG {
+	vertical-align: top;
+	display: inline;
+	border: 3px double #bbc3d3;
 }
 
 .screenshots a:hover {
 	text-decoration: none;
-}
-
-.screenshots IMG {
-	border: 3px double #bbc3d3;
 }
 
 .clearScreenshots {

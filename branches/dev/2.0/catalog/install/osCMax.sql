@@ -906,25 +906,26 @@ CREATE TABLE paypal_ipn (
 
 DROP TABLE IF EXISTS products;
 CREATE TABLE products (
-  products_id int NOT NULL auto_increment,
+  products_id int(11) NOT NULL auto_increment,
   products_quantity int(4) NOT NULL,
-  products_model varchar(12),
-  products_image varchar(64),
+  products_model varchar(12) default NULL,
+  products_image varchar(64) default NULL,
   products_price decimal(15,4) NOT NULL,
   products_date_added datetime NOT NULL,
-  products_last_modified datetime,
-  products_date_available datetime,
+  products_last_modified datetime default NULL,
+  products_date_available datetime default NULL,
   products_weight decimal(5,2) NOT NULL,
   products_status tinyint(1) NOT NULL,
-  products_tax_class_id int NOT NULL,
-  manufacturers_id int NULL,
-  products_ordered int NOT NULL default '0',
+  products_tax_class_id int(11) NOT NULL,
+  manufacturers_id int(11) default NULL,
+  products_ordered int(11) NOT NULL default '0',
   products_ship_price decimal(15,4) NOT NULL default '0.0000',
   products_length decimal(6,2) NOT NULL default '12.00',
   products_width decimal(6,2) NOT NULL default '12.00',
   products_height decimal(6,2) NOT NULL default '12.00',
   products_ready_to_ship int(1) NOT NULL default '0',
-  PRIMARY KEY (products_id),
+  products_thumb varchar(64) default NULL,
+  PRIMARY KEY  (products_id),
   KEY idx_products_model (products_model),
   KEY idx_products_date_added (products_date_added)
 );
@@ -1592,6 +1593,7 @@ INSERT INTO configuration VALUES (503,'Thumbnail Image Types','DYNAMIC_MOPICS_TH
 INSERT INTO configuration VALUES (499,'Big Images Directory','DYNAMIC_MOPICS_BIGIMAGES_DIR','images_big/','The directory inside catalog/images where your big images are stored.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (500,'Thumbnail Images Directory','DYNAMIC_MOPICS_THUMBS_DIR','thumbs/','The directory inside catalog/images where you extra image thumbs are stored.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (501,'Main Thumbnail In "Thumbnail Images Directory"','DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR','false','If you store your product\'s main thumbnail in the "Thumbnail Images Directory" set this to true.  If it is in the main image directory (uploaded via osCommerce admin),set it false.',45,0,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES(599, 'Category Images Directory', 'CATEGORY_IMAGES_DIR', 'categories/', 'The directory inside catalog/images where your category images are stored.', 45, 0, NULL, '2009-05-28 15:34:10', NULL, NULL);
 INSERT INTO configuration VALUES (502,'Extra Image Pattern','DYNAMIC_MOPICS_PATTERN','imagebase_{1}','Your custom defined pattern for extra images.  imagebase is the base of the main thumbnail.  Place the counting method between brackets {}.  Current counting methods can be 1,a,or A.  See readme for more information.',45,0,NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (458,'Template Switching Allowed','TEMPLATE_SWITCHING_ALLOWED','false','Allow template switching through the url (for easy new template testing).',1,22,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
@@ -1661,7 +1663,6 @@ INSERT INTO configuration VALUES (531,'WYSIWYG Editor Font Size','ARTICLE_MANAGE
 INSERT INTO configuration VALUES (532,'WYSIWYG Editor Font Colour','ARTICLE_MANAGER_WYSIWYG_FONT_COLOUR','Black','White,Black,C0C0C0,Red,FFFFFF,Yellow,Pink,Blue,Gray,000000,etc...<br>basically any colour or HTML colour code!<br>(not saved to content)',456,28,NULL,now(),NULL,'');
 INSERT INTO configuration VALUES (533,'WYSIWYG Editor Background Colour','ARTICLE_MANAGER_WYSIWYG_BG_COLOUR','White','White,Black,C0C0C0,Red,FFFFFF,Yellow,Pink,Blue,Gray,000000,etc...<br>basically any colour or html colour code!<br>(not saved to content)',456,29,NULL,now(),NULL,'');
 INSERT INTO configuration VALUES (534,'WYSIWYG Editor Allow Debug Mode?','ARTICLE_MANAGER_WYSIWYG_DEBUG','0','Monitor Live-html,It updates as you type in a 2nd field above it.<p>Disable Debug = 0<br>Enable Debug = 1<br>Default = 0 OFF',456,30,NULL,now(),NULL,'tep_cfg_select_option(array(\'0\',\'1\'),');
-
 INSERT INTO configuration VALUES (391,'Down For Maintenance Start Time','TEXT_DATE_TIME','2008-05-03 14:23:52','Show when down for maintenance',16,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (700,'Number of Columns for product listings','PRODUCT_LIST_NUM_COLUMNS','4','How many prodcuts per row do you want to display on your product listing page?',8,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (701,'Minimum X-Sell products Listed','MIN_DISPLAY_XSELL','1','How many x-sell products per page',8,20,NULL,now(),NULL,NULL);
@@ -1777,6 +1778,9 @@ INSERT INTO configuration VALUES (1511, 'Report Odd Row Style', 'RCS_REPORT_ODD_
 
 
 
+INSERT INTO configuration VALUES(596, 'Product Image Height', 'PRODUCT_IMAGE_HEIGHT', '', 'The main product image (thumbnail) in product information pages.', 4, 21, NULL, '2009-05-28 15:34:10', NULL, NULL);
+INSERT INTO configuration VALUES(597, 'Product Popup Image Width', 'POPOP_IMAGE_WIDTH', '', 'Limits the popup product image (enlarged) size in product information pages. Unused by default', 4, 22, NULL, '2009-05-28 15:34:10', NULL, NULL);
+INSERT INTO configuration VALUES(598, 'Product Popup Image Height', 'POPUP_IMAGE_HEIGHT', '', 'Limits the popup product image (enlarged) size in product information pages. Unused by default', 4, 23, NULL, '2009-05-28 15:34:10', NULL, NULL);
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
 INSERT INTO configuration_group VALUES (3,'Maximum Values','The maximum values for functions / data',3,1);

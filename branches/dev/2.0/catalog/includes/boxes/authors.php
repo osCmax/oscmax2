@@ -25,10 +25,7 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
 
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
-//    $info_box_contents = array();
-//    $info_box_contents[] = array('text' => BOX_HEADING_AUTHORS);
 
-//    new infoBoxHeading($info_box_contents, false, false);
 
 
     if ($number_of_author_rows <= MAX_DISPLAY_AUTHORS_IN_A_LIST) {
@@ -42,7 +39,7 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
 
       $authors_list = substr($authors_list, 0, -4);
 
-//    $info_box_contents = array();
+
       $boxContent = $authors_list;
     } else {
 // Display a drop-down
@@ -57,21 +54,18 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
                                        'text' => $authors_name);
       }
 
-      $boxContent = array();
-      $boxContent[] = array('form' => tep_draw_form('authors', tep_href_link(FILENAME_ARTICLES, '', 'NONSSL', false), 'get'),
-                                   'text' => tep_draw_pull_down_menu('authors_id', $authors_array, (isset($HTTP_GET_VARS['authors_id']) ? $HTTP_GET_VARS['authors_id'] : ''), 'onChange="this.form.submit();" size="' . MAX_AUTHORS_LIST . '" style="width: 100%"') . tep_hide_session_id());
+      
+      $boxContent = tep_draw_form('authors', tep_href_link(FILENAME_ARTICLES, '', 'NONSSL', false), 'get');
+      $boxContent .= tep_draw_pull_down_menu('authors_id', $authors_array, (isset($HTTP_GET_VARS['authors_id']) ? $HTTP_GET_VARS['authors_id'] : ''), 'onChange="this.form.submit();" size="' . MAX_AUTHORS_LIST . '" style="width: 100%"') . tep_hide_session_id();
+       $boxContent .= '</form>';
+
+
+
     }
 
-//    new infoBox($info_box_contents);
 
+include (bts_select('boxes', $box_base_name)); // BTS 1.5
 }
 ?>
 
 <!-- authors_eof //-->
-<?php
-
-include (bts_select('boxes', $box_base_name)); // BTS 1.5
-
-$boxContent = '';
-$boxHeading = '';
-?>

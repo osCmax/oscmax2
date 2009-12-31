@@ -14,7 +14,7 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
   define('PAGE_PARSE_START_TIME', microtime());
 
 // Set the level of error reporting
-  error_reporting(E_ALL & ~E_NOTICE);
+  error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 
 // check support for register_globals
   if (function_exists('ini_get') && (ini_get('register_globals') == false) && (PHP_VERSION < 4.3) ) {

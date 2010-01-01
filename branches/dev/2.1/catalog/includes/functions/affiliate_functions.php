@@ -15,7 +15,7 @@ $Id: affiliate_functions.php 14 2006-07-28 17:42:07Z user $
 */
 
   function affiliate_check_url($url) {
-    return eregi("^https?://[a-z0-9]([-_.]?[a-z0-9])+[.][a-z0-9][a-z0-9/=?.&\~_-]+$",$url);
+    return preg_match("{^https?://[a-z0-9]([-_.]?[a-z0-9])+[.][a-z0-9][a-z0-9/=?.&\~_-]+$}i",$url);
   }
 
   function affiliate_insert ($sql_data_array, $affiliate_parent = 0) {

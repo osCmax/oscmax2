@@ -5,7 +5,7 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */
@@ -21,7 +21,7 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
     reset($ar);
     while (list($key, $value) = each($ar)) {
       if (is_array($ar[$key])) {
-         do_magic_quotes_gpc($ar[$key]);
+        do_magic_quotes_gpc($ar[$key]);
       } else {
         $ar[$key] = addslashes($value);
       }
@@ -47,6 +47,11 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
     do_magic_quotes_gpc($HTTP_GET_VARS);
     do_magic_quotes_gpc($HTTP_POST_VARS);
     do_magic_quotes_gpc($HTTP_COOKIE_VARS);
+  }
+
+// set default timezone if none exists (PHP 5.3 throws an E_WARNING)
+  if ((strlen(ini_get('date.timezone')) < 1) && function_exists('date_default_timezone_set')) {
+    date_default_timezone_set(@date_default_timezone_get());
   }
 
   if (!function_exists('array_splice')) {
@@ -118,7 +123,7 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
 
   if (!function_exists('is_numeric')) {
     function is_numeric($param) {
-      return ereg('^[0-9]{1,50}.?[0-9]{0,50}$', $param);
+      return preg_match('/^[0-9]{1,50}.?[0-9]{0,50}$/', $param);
     }
   }
 
@@ -166,9 +171,9 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
   if (!function_exists('checkdnsrr')) {
     function checkdnsrr($host, $type) {
       if(tep_not_null($host) && tep_not_null($type)) {
-        @exec("nslookup -type=$type $host", $output);
+        @exec("nslookup -type=" . escapeshellarg($type) . " " . escapeshellarg($host), $output);
         while(list($k, $line) = each($output)) {
-          if(eregi("^$host", $line)) {
+          if(preg_match("/^$host/i", $line)) {
             return true;
           }
         }

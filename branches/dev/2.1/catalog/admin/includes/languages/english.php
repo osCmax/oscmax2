@@ -454,4 +454,7 @@ define('IMAGE_ORDERS_TRACK','Track FedEx Shipment');
 define('IMAGE_ORDERS_CANCEL_SHIPMENT','Cancel FedEx Shipment');
 define('BOX_SHIPPING_MANIFEST','Fedx Shipping Manifest');
 // EOF: MOD - FedEx
+// BOF PHONE ORDER
+  define('BOX_PHONE_ORDER', 'Phone Order');
+// EOF PHONE ORDER
 ?>

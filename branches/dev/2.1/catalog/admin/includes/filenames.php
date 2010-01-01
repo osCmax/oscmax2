@@ -129,4 +129,7 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
 // EOF: MOD - fedex
 // LINE ADDED: CREDIT CLASS Gift Voucher Contribution
   define('FILENAME_STATS_CREDITS', 'stats_credits.php');
+// BOF PHONE ORDER
+  define('FILENAME_PHONE_ORDER', 'phone_order.php');
+// EOF PHONE ORDER
 ?>

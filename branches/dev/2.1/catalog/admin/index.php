@@ -53,6 +53,9 @@ $Id: index.php 14 2006-07-28 17:42:07Z user $
                      'children' => array(array('title' => BOX_CUSTOMERS_CUSTOMERS, 'link' => tep_href_link(FILENAME_CUSTOMERS, 'selected_box=customers')),
                                          array('title' => BOX_CUSTOMERS_GROUPS, 'link' => tep_href_link(FILENAME_CUSTOMERS_GROUPS, 'selected_box=customers')),
                                          array('title' => BOX_MANUAL_ORDER_CREATE_ACCOUNT, 'link' => tep_href_link(FILENAME_CREATE_ACCOUNT, 'selected_box=customers')),
+                                         // BOF
+					 array('title' => BOX_PHONE_ORDER, 'link' => tep_href_link(FILENAME_PHONE_ORDER, 'selected_box=customers')),
+					 // EOF
                                          array('title' => BOX_MANUAL_ORDER_CREATE_ORDER, 'link' => tep_href_link(FILENAME_CREATE_ORDER, 'selected_box=customers')),
                                          array('title' => BOX_CUSTOMERS_ORDERS, 'link' => tep_href_link(FILENAME_ORDERS, 'selected_box=customers')))),
                array('title' => BOX_HEADING_REPORTS,

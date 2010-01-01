@@ -309,6 +309,9 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
       } else {
         $email_text = sprintf(EMAIL_GREET_NONE, $firstname);
       }
+	  // BOF PHONE ORDER
+	  $email_text .= EMAIL_ACCOUNT_DETAILS . EMAIL_ACCOUNT_USERNAME . $email_address . EMAIL_ACCOUNT_PASSWORD  . $password . "\n\n";
+	  // EOF PHONE ORDER
 
       $email_text .= EMAIL_WELCOME . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;
 

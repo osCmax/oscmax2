@@ -25,7 +25,13 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_LOGIN);
 
   $error = false;
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
+  // BOF PHONE ORDER
+
+  //if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
+
+  if ((isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) || ((isset($HTTP_POST_VARS['action']) && ($HTTP_POST_VARS['action'] == 'process')))) {
+
+  // EOF PHONE ORDER
     $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
     $password = tep_db_prepare_input($HTTP_POST_VARS['password']);
 
@@ -38,11 +44,23 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
     } else {
       $check_customer = tep_db_fetch_array($check_customer_query);
 // Check that password is good
-      if (!tep_validate_password($password, $check_customer['customers_password'])) {
+      // BOF PHONE ORDER
+
+	  //if (!tep_validate_password($password, $check_customer['customers_password'])) {
+
+	  if (!tep_validate_password($password, $check_customer['customers_password']) && !isset($HTTP_POST_VARS['action'])) {
+
+	  
         $error = true;
       } else {
-        if (SESSION_RECREATE == 'True') {
-          tep_session_recreate();
+        if (SESSION_RECREATE == 'True' && !isset($HTTP_POST_VARS['action'])) {
+
+		//echo "sdsd";
+
+		if(isset($HTTP_POST_VARS['phoneorder']) && ($HTTP_POST_VARS['phoneorder'] == 'order')){
+          	tep_session_recreate();
+		}
+	// EOF PHONE ORDER	
         }
 // BOF: MOD - Separate Pricing Per Customer: choice for logging in under any customer_group_id
 // note that tax rates depend on your registered address!

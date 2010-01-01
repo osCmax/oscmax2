@@ -52,7 +52,7 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
       $message .= TEXT_OR_VISIT . HTTP_SERVER  . DIR_WS_CATALOG . TEXT_ENTER_CODE;
 
       //Let's build a message object using the email class
-      $mimemessage = new email(array('X-Mailer: osCommerce bulk mailer'));
+      $mimemessage = new email(array('X-Mailer: osCMax bulk mailer'));
       // add the message to the object
 // MaxiDVD Added Line For WYSIWYG HTML Area: BOF (Send TEXT Email when WYSIWYG Disabled)
     if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {

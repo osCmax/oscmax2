@@ -200,7 +200,7 @@ function selectAll(FormName, SelectBox) {
         }
       }
 
-      $mimemessage = new email(array('X-Mailer: osCommerce bulk mailer'));
+      $mimemessage = new email(array('X-Mailer: osCMax bulk mailer'));
 
 // BOF: MOD - WYSIWYG HTML Area (Send TEXT Product Notifications v1.7 when WYSIWYG Disabled)
       if (HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER == 'Disable') {

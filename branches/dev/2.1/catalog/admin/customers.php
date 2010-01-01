@@ -19,6 +19,14 @@ $Id: customers.php 3 2006-05-27 04:59:07Z user $
 
   if (tep_not_null($action)) {
     switch ($action) {
+	  ### begin customer notes by tabsl v0.1|2007 ###
+	  case 'deletenotes':
+	  	tep_db_query("DELETE FROM customers_notes WHERE customers_notes_id = ".$_GET["notesid"]." AND customers_id = ".$_GET["cID"]);
+		tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $_GET["cID"] . '&action=notes'));
+	  case 'newnotes':
+	  	tep_db_query("INSERT INTO customers_notes (customers_id, customers_notes_editor, customers_notes_message, customers_notes_date) VALUES (".$_GET["cID"].", '".$_POST["editor"]."', '".$_POST["message"]."', NOW())");
+		tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $_GET["cID"] . '&action=notes'));
+	  ### end customer notes by tabsl v0.1|2007 ###
       case 'update':
         $customers_id = tep_db_prepare_input($HTTP_GET_VARS['cID']);
         $customers_firstname = tep_db_prepare_input($HTTP_POST_VARS['customers_firstname']);
@@ -973,6 +981,53 @@ function check_form() {
         <td align="right" class="main"><?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE) . ' <a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('action'))) .'">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
       </tr></form>
 <?php
+  ### begin customer notes by tabsl v0.1|2007 ###
+  } elseif ($action == 'notes') {
+?>
+	<tr>
+		<td class="main">
+			<br><strong>Remarks</strong><br><br>
+			<hr size="-1" color="#57BBED">
+			<form action="<?php echo tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=newnotes'); ?>" method="post" name="notes">
+			Notes: &nbsp;<input type="text" name="message" size="120" value=""><br>
+			Added By: &nbsp;<input type="text" name="editor" size="15" value="">
+                        <input type="submit" name="submit" value="Submit">
+			</form>
+			<hr size="-1" color="#57BBED"><br>
+			<table border="0" align="center" cellpadding="6" cellspacing="0" width="100%">
+				<tr>
+					<td class="main" width=""><strong><small>Notes</small></strong></td>
+					<td class="main" width="100" align="center"><strong><small>Date</small></strong></td>
+					<td class="main" width="100" align="center"><strong><small>Added By</small></strong></td>
+					<td width="70" align="right">&nbsp;</td>
+				</tr>
+<?php
+                                 function notedate($fdate) {
+					list($year, $month, $day) = explode("-", $fdate);
+					return sprintf("%02d-%02d-%04d", $month, $day, $year);
+				}
+				$ias_notes["result"] = tep_db_query("SELECT * FROM customers_notes WHERE customers_id = ".$_GET["cID"]);
+				if(!tep_db_num_rows($ias_notes["result"])) {
+					echo '<tr height="40">';
+					echo '	<td colspan="4" class="main" align="center"><em>No customer notes available!</em></td>';
+					echo '</tr>';
+				} else {
+					while($ias_notes["row"] = tep_db_fetch_array($ias_notes["result"])){
+					if ($bg == "#ffffff") { $bg = "#EEF7FD"; } else { $bg = "#ffffff"; }
+						echo '<tr bgcolor="'.$bg.'">';
+						echo '	<td class="main">'.$ias_notes["row"]["customers_notes_message"].'</td>';
+						echo '	<td class="main" align="center">'.notedate($ias_notes["row"]["customers_notes_date"]).'</td>';
+						echo '	<td class="main" align="center">'.$ias_notes["row"]["customers_notes_editor"].'</td>';
+	 					echo '	<td align="center"><a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=deletenotes&notesid='.$ias_notes["row"]["customers_notes_id"]) . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a></td>';
+						echo '</tr>';
+					}
+				}
+				?>
+			</table>
+		</td>
+	</tr>
+<?php
+  ### end customer notes by tabsl v0.1|2007 ###
   } else {
 ?>
       <tr>
@@ -1070,22 +1125,42 @@ function check_form() {
       } else {
         echo '          <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID')) . 'cID=' . $customers['customers_id']) . '\'">' . "\n";
       }
+	  ### begin customer notes by tabsl v0.1|2007 ###
+	  $ias_notes_marker = false;
+	  $ias_notes_mark = tep_db_query("SELECT customers_notes_id FROM customers_notes WHERE customers_id = ".$customers['customers_id']);
+	  $font = "";
+	  $font_end = "";
+	  if(tep_db_num_rows($ias_notes_mark)) {
+		$ias_notes_marker = true;
+		$font = "<font color=red>";
+		$font_end = "</font>";
+	  };
+	  ### end customer notes by tabsl v0.1|2007 ###
 // BOF: MOD - customer_sort_admin_v1 adapted for Separate Pricing Per Customer ?>
                 <td class="dataTableContent"><?php
+				echo $font;
       if (strlen($customers['entry_company']) > 16 ) {
         print ("<acronym title=\"".$customers['entry_company']."\">".substr($customers['entry_company'], 0, 16)."&#160;</acronym>");
       } else {
-        echo $customers['entry_company']; } ?></td>
+                echo $customers['entry_company']; } 
+				echo $font_end;
+				?></td>
                 <td class="dataTableContent"><?php 
+				echo $font;
       if (strlen($customers['customers_lastname']) > 15 ) {
         print ("<acronym title=\"".$customers['customers_lastname']."\">".substr($customers['customers_lastname'], 0, 15)."&#160;</acronym>");
       } else {
-        echo $customers['customers_lastname']; } ?></td>
+                echo $customers['customers_lastname']; } 
+				echo $font_end;
+		?></td>
                 <td class="dataTableContent"><?php
+				echo $font;
       if (strlen($customers['customers_firstname']) > 15 ) {
         print ("<acronym title=\"".$customers['customers_firstname']."\">".substr($customers['customers_firstname'], 0, 15)."&#160;</acronym>");
       } else {
-      echo $customers['customers_firstname']; } ?></td>
+            echo $customers['customers_firstname']; } 
+				echo $font_end;
+		?></td>
                 <td class="dataTableContent"><?php
       if (strlen($customers['customers_group_name']) > 17 ) {
         print ("<acronym title=\"".$customers['customers_group_name']."\"> ".substr($customers['customers_group_name'], 0, 17)."&#160;</acronym>");
@@ -1186,7 +1261,7 @@ function check_form() {
 // LINE CHANGED: MOD - Separate Pricing Per Customer: dark grey field with customer name higher
 //      $heading[] = array('text' => '<b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
         $heading[] = array('text' => ''. tep_draw_separator('pixel_trans.gif', '11', '12') .'&nbsp;<br><b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=confirm') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_orders.gif', IMAGE_ORDERS) . '</a> <a href="' . tep_href_link(FILENAME_MAIL, 'selected_box=tools&customer=' . $cInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=confirm') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_orders.gif', IMAGE_ORDERS) . '</a> <a href="' . tep_href_link(FILENAME_MAIL, 'selected_box=tools&customer=' . $cInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a><br><br><a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=notes') . '">' . tep_image_button('button_notes.gif', "notes") . '</a>');
         $contents[] = array('text' => '<br>' . TEXT_DATE_ACCOUNT_CREATED . ' ' . tep_date_short($cInfo->date_account_created));
         $contents[] = array('text' => '<br>' . TEXT_DATE_ACCOUNT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->date_account_last_modified));
         $contents[] = array('text' => '<br>' . TEXT_INFO_DATE_LAST_LOGON . ' '  . tep_date_short($cInfo->date_last_logon));

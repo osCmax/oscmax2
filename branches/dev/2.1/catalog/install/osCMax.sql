@@ -630,6 +630,16 @@ CREATE TABLE customers_info (
   PRIMARY KEY (customers_info_id)
 );
 
+DROP TABLE IF EXISTS customers_notes;
+CREATE TABLE customers_notes (
+  customers_notes_id int(11) NOT NULL auto_increment,
+  customers_id int(11) NOT NULL,
+  customers_notes_message text NOT NULL,
+  customers_notes_editor varchar(20) NOT NULL,
+  customers_notes_date date NOT NULL,
+  PRIMARY KEY  (`customers_notes_id`)
+);
+
 DROP TABLE IF EXISTS customers_wishlist;
 CREATE TABLE `customers_wishlist` (
   `products_id` tinytext NOT NULL,

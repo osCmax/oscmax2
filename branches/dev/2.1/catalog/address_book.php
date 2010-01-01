@@ -28,7 +28,7 @@ $Id: address_book.php 3 2006-05-27 04:59:07Z user $
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL'));
 
   $content = CONTENT_ADDRESS_BOOK;
-  $javascript = $content . '.js';
+  $javascript = $content . '.js.php';
 
   include (bts_select('main', $content_template)); // BTSv1.5
 

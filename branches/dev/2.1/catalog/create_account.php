@@ -386,6 +386,7 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
  }
 // PWA EOF
   $content = CONTENT_CREATE_ACCOUNT;
+  $javascript = 'form_check.js.php';
   include (bts_select('main', $content_template)); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');

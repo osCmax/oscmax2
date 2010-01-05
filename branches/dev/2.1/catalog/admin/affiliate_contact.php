@@ -16,7 +16,7 @@ $Id: affiliate_contact.php 14 2006-07-28 17:42:07Z user $
 
   require('includes/application_top.php');
 //LINE ADDED
-  require(DIR_FCKEDITOR . 'fckeditor.php');
+
   if ( ($HTTP_GET_VARS['action'] == 'send_email_to_user') && ($HTTP_POST_VARS['affiliate_email_address']) && (!$HTTP_POST_VARS['back_x']) ) {
     switch ($HTTP_POST_VARS['affiliate_email_address']) {
       case '***':
@@ -73,6 +73,9 @@ $Id: affiliate_contact.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<!-- CKeditor -->
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
+<!-- CKeditor End -->
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
@@ -206,8 +209,9 @@ $Id: affiliate_contact.php 14 2006-07-28 17:42:07Z user $
                 <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
 <?php /*old       echo tep_draw_textarea_field('message', 'soft', '60', '15');  */ ?>
                 <td><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
-// Line Changed - MOD: Ajustable Editor Window
-                	echo (tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, '')) . '</td>';
+// Line Changed - MOD: CKeditor
+                	//echo (tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, '')) . '</td>';
+			echo (tep_draw_textarea_field('message', 'soft', '70', '15', '' ,'class="ckeditor"')) . '</td>';
                 } else {
                 	echo (tep_draw_textarea_field('message', 'soft', '70', '15')) . '</td>';
                 }

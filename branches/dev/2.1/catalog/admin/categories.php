@@ -14,8 +14,6 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 // LINE ADDED: Categories Description 1.5
   require('includes/functions/categories_description.php');
 
-// LINE ADDED: FCKEditor
-  require(DIR_FCKEDITOR . 'fckeditor.php');
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
@@ -455,6 +453,9 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
+<!-- CKeditor -->
+<script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
+<!-- CKeditor End -->
 <!-- AJAX Attribute Manager  -->
 <?php require_once( 'attributeManager/includes/attributeManagerHeader.inc.php' )?>
 <!-- AJAX Attribute Manager  end -->
@@ -550,10 +551,16 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                 <td class="main">
                 <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
 // Line Changed - MOD: Ajustable Editor Window
-                  echo tep_draw_fckeditor ('categories_description[' . $languages[$i]['id'] . ']', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, (isset($categories_description[$languages[$i]['id']]) ? stripslashes($categories_description[$languages[$i]['id']]) : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
-                  } else { echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','soft','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
-                }
+                  // BOF: CKeditor
+		  //echo tep_draw_fckeditor ('categories_description[' . $languages[$i]['id'] . ']', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, (isset($categories_description[$languages[$i]['id']]) ? stripslashes($categories_description[$languages[$i]['id']]) : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
+                           echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','soft','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id'])),'id = category_description[' . $languages[$i]['id'] . '] class="ckeditor"') . '</td>';
+		  } else { echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','soft','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
+                } // EOF: CKeditor
                 ?>
+		
+		
+		
+		
               </tr>
             </table></td>
           </tr>
@@ -958,10 +965,13 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
 <?php // BOF: MOD WYSIWYG Editor
 /*              <td class="main"><?php echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($products_description[$languages[$i]['id']]) ? $products_description[$languages[$i]['id']] : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))); ?></td> */?>
                 <td class="main"><?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
-      echo tep_draw_fckeditor ('products_description[' . $languages[$i]['id'] . ']', '550', '300', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))) . '</td>';
-// LINE MODIFIED: BUGFIX 0000083 - Not using fck Editor in admin categ/products won't save description
+      // BOF: MOD CKeditor
+      echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '10', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])),'id = products_description[' . $languages[$i]['id'] . '] class="ckeditor"');	
+      //echo tep_draw_fckeditor ('products_description[' . $languages[$i]['id'] . ']', '550', '300', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))) . '</td>';
+      // EOF: MOD CKeditor
+
     } else {
-// LINE CHANGED: MS2 update 501112 - Added: stripslashes(...)
+
       echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'].']','soft','70','15',(isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))) . '</td>';
     }
 // EOF: MOD WYSIWYG Editor ?>

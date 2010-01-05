@@ -454,7 +454,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
 <!-- CKeditor -->
-<script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
 <!-- CKeditor End -->
 <!-- AJAX Attribute Manager  -->
 <?php require_once( 'attributeManager/includes/attributeManagerHeader.inc.php' )?>

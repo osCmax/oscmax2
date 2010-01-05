@@ -35,10 +35,10 @@ function &amGetAttributeManagerInstance($get) {
 			
 			amSessionRegister(AM_SESSION_VAR_NAME, array());
 	
-		$attributeManager =& new attributeManagerAtomic(amGetSesssionVariable(AM_SESSION_VAR_NAME));
+		$attributeManager = new attributeManagerAtomic(amGetSesssionVariable(AM_SESSION_VAR_NAME));
 	}
 	else
-		$attributeManager =& new attributeManagerInstant($_GET['products_id']);
+		$attributeManager = new attributeManagerInstant($_GET['products_id']);
 		
 	return $attributeManager;
 }

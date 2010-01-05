@@ -111,7 +111,7 @@ global $$link, $debug;
 
   function tep_db_insert_id($link = 'db_link') {
     global $$link;
-    return mysql_insert_id($$link);
+    return mysql_insert_id();
   }
 
   function tep_db_free_result($db_query) {

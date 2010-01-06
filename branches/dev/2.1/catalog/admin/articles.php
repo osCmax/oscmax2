@@ -11,7 +11,7 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
 */
 
   require('includes/application_top.php');
-  require(DIR_FCKEDITOR . 'fckeditor.php');
+
   $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
 
   if (tep_not_null($action)) {
@@ -335,9 +335,12 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 // EOF: WebMakers.com Changed: Header Tag Controller v1.0
 ?>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<!-- CKeditor -->
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
+<!-- CKeditor End -->
 <script language="javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="SetFocus();">
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
 <div id="spiffycalendar" class="text"></div>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
@@ -423,7 +426,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
               <tr>
                 <td class="main" valign="top"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
 // Line Changed - MOD: Ajustable Editor Window
-                	 echo tep_draw_fckeditor('topics_description[' . $languages[$i]['id'] . ']', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
+                	 //echo tep_draw_fckeditor('topics_description[' . $languages[$i]['id'] . ']', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
+					 echo (tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>'; 
+                     
                } else { echo tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
               }
               ?>
@@ -713,7 +718,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
               <tr>
                 <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
                 <td class="main"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-                	 echo tep_draw_fckeditor('articles_description[' . $languages[$i]['id'] . ']', '550', '300', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']))) . '</td>' ;
+                	 //echo tep_draw_fckeditor('articles_description[' . $languages[$i]['id'] . ']', '550', '300', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']))) . '</td>' ;
+					 echo (tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>';
+					 
                } else { echo tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']))) . '</td>' ;
               }
               ?>

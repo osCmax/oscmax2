@@ -190,14 +190,13 @@ define('BOX_TOOLS_BANNER_MANAGER', 'Banner Manager');
 // LINE ADDED: MOD - Batch Print Center
 define('BOX_TOOLS_BATCH_CENTER', 'Batch Print Center');
 define('BOX_TOOLS_CACHE', 'Cache Control');
-define('BOX_TOOLS_DEFINE_LANGUAGE', 'Define Languages');
-define('BOX_TOOLS_FILE_MANAGER', 'File Manager');
 define('BOX_TOOLS_MAIL', 'Send Email');
 define('BOX_TOOLS_NEWSLETTER_MANAGER', 'Newsletter Manager');
 define('BOX_TOOLS_SERVER_INFO', 'Server Info');
 define('BOX_TOOLS_WHOS_ONLINE', 'Who\'s Online');
 define('BOX_TOOLS_PACKAGING', 'Packaging');
 define('BOX_TOOLS_UPS_BOXES_USED', 'UPS boxes used');
+define('BOX_TOOLS_QTPRODOCTOR', 'QTPro Doctor');
 
 // localizaion box text in includes/boxes/localization.php
 define('BOX_HEADING_LOCALIZATION', 'Localization');

@@ -102,3 +102,10 @@ FORM { display: inline; }
 /*QTpro*/
 .OutofStock { background-color: #FFCACB; }
 .OutofStockAttrib { font-family: Verdana, Arial, sans-serif; font-size: 10px;  background-color: #FFCACB; color: #000000; }
+
+/*Header*/
+a.header { font-family: Verdana, Arial, sans-serif; font-size: 12px; color: #606060; text-decoration: none;}
+
+/*Footer*/
+.footer { font-family: Verdana, Arial, sans-serif; font-size: 10px;  background-color: #606060; color: #FFFFFF; }
+a.footer { font-family: Verdana, Arial, sans-serif; font-size: 10px;  background-color: #606060; color: #FFFFFF; text-decoration: none;}

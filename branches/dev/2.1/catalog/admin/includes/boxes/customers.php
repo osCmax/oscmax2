@@ -1,44 +1,24 @@
 <?php
 /*
-$Id: customers.php 3 2006-05-27 04:59:07Z user $
+$Id: customers.php 2009-11-14 19:38:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax, 2006 osCMax ,2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
 */
 ?>
 <!-- customers //-->
-          <tr>
-            <td>
 <?php
-  $heading = array();
-  $contents = array();
-
-  $heading[] = array('text'  => BOX_HEADING_CUSTOMERS,
-                     'link'  => tep_href_link(FILENAME_CUSTOMERS, 'selected_box=customers'));
-
-  if ($selected_box == 'customers') {
-
-//BOF: MOD - Admin Sercurty
-//old-$contents[] = array('text'  => '<a href="' . tep_href_link(FILENAME_CUSTOMERS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CUSTOMERS_CUSTOMERS . '</a><br>' .
-//old-                               '<a href="' . tep_href_link(FILENAME_ORDERS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CUSTOMERS_ORDERS . '</a>');
-		$contents[] = array('text'  => tep_admin_files_boxes(FILENAME_CUSTOMERS, BOX_CUSTOMERS_CUSTOMERS) .
-                                   tep_admin_files_boxes(FILENAME_CUSTOMERS_GROUPS, BOX_CUSTOMERS_GROUPS) .
-                                   tep_admin_files_boxes(FILENAME_CREATE_ACCOUNT, BOX_MANUAL_ORDER_CREATE_ACCOUNT) .
-				   // BOF PHONE ORDER
-				   tep_admin_files_boxes(FILENAME_PHONE_ORDER, BOX_PHONE_ORDER).
-				   // EOF PHONE ORDER
-                                   tep_admin_files_boxes(FILENAME_CREATE_ORDER, BOX_MANUAL_ORDER_CREATE_ORDER) .
-                                   tep_admin_files_boxes(FILENAME_ORDERS, BOX_CUSTOMERS_ORDERS));
-//EOF: MOD - Admin Security
-  }
-
-  $box = new box;
-  echo $box->menuBox($heading, $contents);
+  $contents = '';
+  $contents = (	   				   tep_admin_jqmenu(FILENAME_CUSTOMERS, BOX_CUSTOMERS_CUSTOMERS) .
+                                   tep_admin_jqmenu(FILENAME_CUSTOMERS_GROUPS, BOX_CUSTOMERS_GROUPS) .
+                                   tep_admin_jqmenu(FILENAME_CREATE_ACCOUNT, BOX_MANUAL_ORDER_CREATE_ACCOUNT) .
+                                   tep_admin_jqmenu(FILENAME_CREATE_ORDER, BOX_MANUAL_ORDER_CREATE_ORDER) .
+								   tep_admin_jqmenu(FILENAME_CUSTOMERS_EXPORT, BOX_CUSTOMERS_EXPORT) . 
+                                   tep_admin_jqmenu(FILENAME_ORDERS, BOX_CUSTOMERS_ORDERS));
+  print_r($contents);
 ?>
-            </td>
-          </tr>
 <!-- customers_eof //-->

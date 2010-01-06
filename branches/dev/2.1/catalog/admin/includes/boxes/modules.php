@@ -1,34 +1,22 @@
 <?php
 /*
-$Id: modules.php 3 2006-05-27 04:59:07Z user $
+$Id: administrator.php 2009-11-14 19:38:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2009 osCMax, 2006 osCMax ,2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
 */
 ?>
-<!-- modules //-->
-          <tr>
-            <td>
+<!-- modules -->
 <?php
-  $heading = array();
-  $contents = array();
+$contents = '';
 
-  $heading[] = array('text'  => BOX_HEADING_MODULES,
-                     'link'  => tep_href_link(FILENAME_MODULES, 'set=payment&selected_box=modules'));
-
-  if ($selected_box == 'modules') {
-    $contents[] = array('text'  => '<a href="' . tep_href_link(FILENAME_MODULES, 'set=payment', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_MODULES_PAYMENT . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_MODULES, 'set=shipping', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_MODULES_SHIPPING . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_MODULES, 'set=ordertotal', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_MODULES_ORDER_TOTAL . '</a>');
-  }
-
-  $box = new box;
-  echo $box->menuBox($heading, $contents);
+    $contents = (				   '<li><a href="' . tep_href_link(FILENAME_MODULES, 'set=payment', 'NONSSL') . '">' . BOX_MODULES_PAYMENT . '</a></li>' .
+                                   '<li><a href="' . tep_href_link(FILENAME_MODULES, 'set=shipping', 'NONSSL') . '">' . BOX_MODULES_SHIPPING . '</a></li>' .
+                                   '<li><a href="' . tep_href_link(FILENAME_MODULES, 'set=ordertotal', 'NONSSL') . '">' . BOX_MODULES_ORDER_TOTAL . '</a></li>');
+  print_r($contents);
 ?>
-            </td>
-          </tr>
 <!-- modules_eof //-->

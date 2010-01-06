@@ -1,44 +1,27 @@
 <?php
 /*
-$Id: affiliate.php 14 2006-07-28 17:42:07Z user $
-
-  OSC-Affiliate
-
-  Contribution based on:
+$Id: affiliate.php 2009-11-14 19:38:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax
+  Copyright 2009 osCMax, 2006 osCMax, 2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
 */
 ?>
 <!-- affiliates //-->
-          <tr>
-            <td>
 <?php
-  $heading = array();
-  $contents = array();
-
-  $heading[] = array('text'  => BOX_HEADING_AFFILIATE,
-                     'link'  => tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('selected_box')) . 'selected_box=affiliate'));
-
-  if ($selected_box == 'affiliate') {
-    $contents[] = array('text'  => '<a href="' . tep_href_link(FILENAME_AFFILIATE_SUMMARY, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_SUMMARY . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_AFFILIATE, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_PAYMENT . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_AFFILIATE_SALES, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_SALES . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_AFFILIATE_CLICKS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_CLICKS . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_BANNERS . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_NEWS . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_NEWSLETTER_MANAGER . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_AFFILIATE_CONTACT . '</a>');
-  }
-
-  $box = new box;
-  echo $box->menuBox($heading, $contents);
+  $contents = '';
+  $contents = (  				   tep_admin_jqmenu(FILENAME_AFFILIATE_SUMMARY, BOX_AFFILIATE_SUMMARY) .
+                                   tep_admin_jqmenu(FILENAME_AFFILIATE, BOX_AFFILIATE) .   
+                                   tep_admin_jqmenu(FILENAME_AFFILIATE_PAYMENT, BOX_AFFILIATE_PAYMENT) .   
+                                   tep_admin_jqmenu(FILENAME_AFFILIATE_SALES, BOX_AFFILIATE_SALES) .   
+                                   tep_admin_jqmenu(FILENAME_AFFILIATE_CLICKS, BOX_AFFILIATE_CLICKS) .   
+                                   tep_admin_jqmenu(FILENAME_AFFILIATE_BANNER_MANAGER, BOX_AFFILIATE_BANNERS) .   
+                                   tep_admin_jqmenu(FILENAME_AFFILIATE_NEWS, BOX_AFFILIATE_NEWS) .
+								   tep_admin_jqmenu(FILENAME_AFFILIATE_NEWSLETTERS, BOX_AFFILIATE_NEWSLETTER_MANAGER) .
+								   tep_admin_jqmenu(FILENAME_AFFILIATE_CONTACT, BOX_AFFILIATE_CONTACT));
+  print_r($contents);
 ?>
-            </td>
-          </tr>
 <!-- affiliates_eof //-->

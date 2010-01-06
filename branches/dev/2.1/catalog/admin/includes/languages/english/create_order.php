@@ -42,12 +42,14 @@ define('CATEGORY_CONTACT', 'Contact Information');
 define('CATEGORY_OPTIONS', 'Options');
 define('CATEGORY_PASSWORD', 'Password');
 define('CATEGORY_CORRECT', 'If this is the right customer, press the Confirm button below.');
-define('ENTRY_CUSTOMERS_ID', 'ID:');
+define('ENTRY_CUSTOMERS_ID', 'Customer ID:');
 define('ENTRY_CUSTOMERS_ID_TEXT', '&nbsp;');
 define('ENTRY_COMPANY', 'Company Name:');
 define('ENTRY_COMPANY_ERROR', '');
 define('ENTRY_COMPANY_TEXT', '');
 define('ENTRY_GENDER', 'Gender:');
+define('ENTRY_GENDER_FEMALE', 'Female:');
+define('ENTRY_GENDER_MALE', 'Male:');
 define('ENTRY_GENDER_ERROR', '&nbsp;');
 define('ENTRY_GENDER_TEXT', '&nbsp;');
 define('ENTRY_FIRST_NAME', 'First Name:');
@@ -100,16 +102,27 @@ define('ENTRY_PASSWORD_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY
 define('ENTRY_PASSWORD_TEXT', '&nbsp;');
 define('PASSWORD_HIDDEN', '--HIDDEN--');
 // ### END ORDER MAKER ###
+define('CREATE_ORDER_TEXT_EXISTING_CUST', 'Existing Customer Account');
+define('CREATE_ORDER_TEXT_NEW_CUST', 'New Customer Account');
+define('CREATE_ORDER_TEXT_NO_CUST', 'Without Customer Account');
 
-define('HEADING_TITLE', 'Step-by-Step Manual Order Entry');
-define('HEADING_CREATE', 'Confirm client details:'); 
+define('HEADING_TITLE', 'New Order');
+define('TEXT_SELECT_CUST', '- Select a Customer -'); 
 
-define('TEXT_SELECT_CUST', 'Select a client:'); 
-define('TEXT_SELECT_CURRENCY', 'Select currency:');
-define('BUTTON_TEXT_SELECT_CUST', 'Select a client:'); 
-define('TEXT_OR_BY', 'or set client ID:'); 
-define('TEXT_STEP_1', 'Step 1 - Choose a client and verify the details');
-define('BUTTON_SUBMIT', 'confirm');
-define('ENTRY_CURRENCY','Devise');
-define('CATEGORY_ORDER_DETAILS','Choose currency:');
+define('TEXT_SELECT_CURRENCY', '- Select a Currency -');
+define('TEXT_SELECT_CURRENCY_TITLE', 'Select a Currency');
+define('BUTTON_TEXT_SELECT_CUST', 'Select a customer:'); 
+define('TEXT_OR_BY', 'or select by customer ID:'); 
+define('TEXT_STEP_1', 'Step 1 - Choose a customer to prefill the form or choose another option and enter custom details.');
+define('TEXT_STEP_2', 'Step 2 - Confirm existing customer account details or enter new customer/shipping/billing details.');
+define('BUTTON_SUBMIT', 'Select');
+define('ENTRY_CURRENCY','Currency: ');
+define('ENTRY_ADMIN','Order Entered By:');
+define('TEXT_CS','Customer Service');
+
+define('ACCOUNT_EXTRAS','Account Extras');
+define('ENTRY_ACCOUNT_PASSWORD','Password');
+define('ENTRY_NEWSLETTER_SUBSCRIBE','Newsletter');
+define('ENTRY_ACCOUNT_PASSWORD_TEXT','');
+define('ENTRY_NEWSLETTER_SUBSCRIBE_TEXT','1 = subscribed, or 0 (Zero) = not subscribed.');
 ?>

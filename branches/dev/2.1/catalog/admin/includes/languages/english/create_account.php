@@ -44,5 +44,6 @@ define('ENTRY_TELEPHONE_NUMBER_TEXT', '&nbsp;');
 define('ENTRY_FAX_NUMBER', 'Fax Number:');
 define('ENTRY_FAX_NUMBER_ERROR', '');
 define('ENTRY_FAX_NUMBER_TEXT', '');
+define('ENTRY_NEWSLETTER_TEXT', '');
 
 ?>

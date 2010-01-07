@@ -16,8 +16,8 @@ $Id: customers.php 2009-11-14 19:38:07Z user $
   $contents = (	   				   tep_admin_jqmenu(FILENAME_CUSTOMERS, BOX_CUSTOMERS_CUSTOMERS) .
                                    tep_admin_jqmenu(FILENAME_CUSTOMERS_GROUPS, BOX_CUSTOMERS_GROUPS) .
                                    tep_admin_jqmenu(FILENAME_CREATE_ACCOUNT, BOX_MANUAL_ORDER_CREATE_ACCOUNT) .
+								   tep_admin_jqmenu(FILENAME_PHONE_ORDER, BOX_PHONE_ORDER) .
                                    tep_admin_jqmenu(FILENAME_CREATE_ORDER, BOX_MANUAL_ORDER_CREATE_ORDER) .
-								   tep_admin_jqmenu(FILENAME_CUSTOMERS_EXPORT, BOX_CUSTOMERS_EXPORT) . 
                                    tep_admin_jqmenu(FILENAME_ORDERS, BOX_CUSTOMERS_ORDERS));
   print_r($contents);
 ?>

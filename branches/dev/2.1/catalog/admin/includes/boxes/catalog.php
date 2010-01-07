@@ -22,7 +22,6 @@ $Id: catalog.php 2009-11-14 19:38:07Z user $
                                    tep_admin_jqmenu(FILENAME_EASYPOPULATE, BOX_CATALOG_EASYPOPULATE) .
                                    tep_admin_jqmenu(FILENAME_NEW_ATTRIBUTES, BOX_CATALOG_ATTRIBUTE_MANAGER) .
                                    tep_admin_jqmenu(FILENAME_PRODUCTS_EXPECTED, BOX_CATALOG_PRODUCTS_EXPECTED) .
-								   tep_admin_jqmenu(FILENAME_FLASH_CAROUSEL, BOX_FLASH_CAROUSEL_PRODUCTS) .
 // Added: info boxes
 							'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Define Pages</a><ul>' .
 								   tep_admin_jqmenu(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE) .

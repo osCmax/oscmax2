@@ -190,6 +190,7 @@ define('BOX_TOOLS_BANNER_MANAGER', 'Banner Manager');
 // LINE ADDED: MOD - Batch Print Center
 define('BOX_TOOLS_BATCH_CENTER', 'Batch Print Center');
 define('BOX_TOOLS_CACHE', 'Cache Control');
+define('BOX_TOOLS_QTPRODOCTOR', 'QTPro Doctor');
 define('BOX_TOOLS_DEFINE_LANGUAGE', 'Define Languages');
 define('BOX_TOOLS_FILE_MANAGER', 'File Manager');
 define('BOX_TOOLS_MAIL', 'Send Email');
@@ -253,6 +254,7 @@ define('CATEGORY_ADDRESS', 'Address');
 define('CATEGORY_CONTACT', 'Contact');
 define('CATEGORY_COMPANY', 'Company');
 define('CATEGORY_OPTIONS', 'Options');
+define('CATEGORY_PASSWORD', 'Password');
 
 define('ENTRY_GENDER', 'Gender:');
 define('ENTRY_GENDER_ERROR', '&nbsp;<span class="errorText">required</span>');

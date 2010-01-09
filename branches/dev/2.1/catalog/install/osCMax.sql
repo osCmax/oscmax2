@@ -1259,6 +1259,25 @@ CREATE TABLE zones_to_geo_zones (
   KEY idx_zones_to_geo_zones_country_id (zone_country_id)
 );
 
+DROP TABLE IF EXISTS admin_log;
+CREATE TABLE IF NOT EXISTS `admin_log` (
+  `login_number` int(11) NOT NULL auto_increment,
+  `user_name` varchar(32) default NULL,
+  `ip_address` varchar(32) default NULL,
+  `type` varchar(32) default NULL,
+  `login_time` varchar(32) default NULL,
+  PRIMARY KEY  (`login_number`)
+);
+
+DROP TABLE IF EXISTS customer_log;
+CREATE TABLE IF NOT EXISTS `customer_log` (
+  `login_number` int(11) NOT NULL auto_increment,
+  `user_name` varchar(200) default NULL,
+  `ip_address` varchar(32) default NULL,
+  `type` varchar(200) default NULL,
+  `login_time` varchar(64) default NULL,
+  PRIMARY KEY  (`login_number`)
+);
 
 # data
 
@@ -1391,7 +1410,10 @@ INSERT INTO admin_files VALUES (126,'affiliate_validcats.php',0,43,'1');
 INSERT INTO admin_files VALUES (127,'affiliate_validproducts.php',0,43,'1');
 INSERT INTO admin_files VALUES (128,'edit_orders_add_product.php',0,5,'1');
 INSERT INTO admin_files VALUES (129,'edit_orders_ajax.php',0,5,'1');
-INSERT INTO admin_files VALUES (130, 'attributeManager.php', 0, 3, '1');
+INSERT INTO admin_files VALUES (130,'attributeManager.php', 0, 3, '1');
+INSERT INTO admin_files VALUES (131,'phone_order.php', 0, 5, '1');
+INSERT INTO admin_files VALUES (132,'stats_admin_logging.php', 0, 8, '1');
+INSERT INTO admin_files VALUES (133,'stats_cust_logging.php', 0, 8, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');

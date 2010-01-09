@@ -183,6 +183,9 @@ define('BOX_REPORTS_CREDITS', 'Customer Credits Report');
 //++++ QT Pro: Begin Changed code
 define('BOX_REPORTS_STATS_LOW_STOCK_ATTRIB', 'Stock Report');
 //++++ QT Pro: End Changed Code
+define('BOX_REPORTS_ADMIN_LOGGING', 'Admin Log');
+define('BOX_REPORTS_CUST_LOGGING', 'Customer Log');
+
 // tools text in includes/boxes/tools.php
 define('BOX_HEADING_TOOLS', 'Tools');
 define('BOX_TOOLS_BACKUP', 'Database Backup');

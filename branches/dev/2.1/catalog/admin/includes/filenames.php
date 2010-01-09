@@ -118,6 +118,8 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_STOCK', 'stock.php');
   define('FILENAME_QTPRODOCTOR', 'qtprodoctor.php');
 // EOF: MOD - QT Pro
+  define('FILENAME_STATS_ADMIN_LOGGING', 'stats_admin_logging.php');
+  define('FILENAME_STATS_CUST_LOGGING', 'stats_cust_logging.php');
 
 // LINE ADDED: Special Price per Customer 4.0
   define('FILENAME_CUSTOMERS_GROUPS', 'customers_groups.php');

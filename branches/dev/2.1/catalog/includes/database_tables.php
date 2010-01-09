@@ -95,4 +95,8 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
 // LINE ADDED
   define('TABLE_PACKAGING', 'packaging');
   define('TABLE_UPS_BOXES_USED', 'ups_boxes_used');
+  
+// BOF: Customer Logging
+  define('TABLE_CUSTOMER_LOG','customer_log');
+// EOF: Customer Logging
 ?>

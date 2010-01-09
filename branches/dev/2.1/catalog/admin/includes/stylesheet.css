@@ -68,6 +68,10 @@ body { background-color: #ffffff; color: #000000; margin: 0px;
 .dataTableRowSelected { background-color: #DEE4E8; }
 .dataTableRowOver { background-color: #FFFFFF; cursor: pointer; cursor: hand; }
 .dataTableContent { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; }
+.dataTableRowAlert { background-color: #ffe6e6; }
+.dataTableRowOverAlert { background-color: #ff0000; cursor: pointer; curor: hand; } 
+.dataTableRowWarning { background-color: #ffffbb; }
+.dataTableRowOverWarning { background-color: #FFFF00; cursor: pointer; curor: hand; }
 
 /* info box */
 .infoBoxHeading { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #ffffff; background-color: #B3BAC5; }

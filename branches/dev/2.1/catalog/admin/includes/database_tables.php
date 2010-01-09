@@ -91,7 +91,13 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
   define('TABLE_SHIPPING_MANIFEST','shipping_manifest');
 
 // BOF: MOD - Wishlist  
-define('TABLE_WISHLIST', 'customers_wishlist'); 
-define('TABLE_WISHLIST_ATTRIBUTES', 'customers_wishlist_attributes');
+  define('TABLE_WISHLIST', 'customers_wishlist'); 
+  define('TABLE_WISHLIST_ATTRIBUTES', 'customers_wishlist_attributes');
 // EOF: MOD - ARTICLES
+
+// BOF: Admin & Customer Logging
+  define('TABLE_ADMIN_LOG','admin_log');
+  define('TABLE_CUSTOMER_LOG', 'customer_log');
+// EOF: Admin & Customer Logging
+
 ?>

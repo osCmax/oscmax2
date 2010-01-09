@@ -19,11 +19,19 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 // Check if usename exists
     $check_admin_query = tep_db_query("select admin_id as login_id, admin_groups_id as login_groups_id, admin_username as login_username, admin_password as login_password, admin_modified as login_modified, admin_logdate as login_logdate, admin_lognum as login_lognum from " . TABLE_ADMIN . " where admin_username = '" . tep_db_input($username) . "'");
     if (!tep_db_num_rows($check_admin_query)) {
+
+//Added by PGM
+tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', '" . date('F j, Y, g:i a') . "')");
+
       $HTTP_GET_VARS['login'] = 'fail';
     } else {
       $check_admin = tep_db_fetch_array($check_admin_query);
       // Check that password is good
       if (!tep_validate_password($password, $check_admin['login_password'])) {
+
+//Added by PGM
+tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', '" . date('F j, Y, g:i a') . "')");
+
         $HTTP_GET_VARS['login'] = 'fail';
       } else {
         if (tep_session_is_registered('password_forgotten')) {
@@ -43,6 +51,9 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 
         //$date_now = date('Ymd');
         tep_db_query("update " . TABLE_ADMIN . " set admin_logdate = now(), admin_lognum = admin_lognum+1 where admin_id = '" . $login_id . "'");
+
+//Added by PGM
+tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $login_username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', '" . date('F j, Y, g:i a') . "')");
 
 // There is no more default ADMIN - so don't need to check for DEFAULT user
 //      if (($login_lognum == 0) || !($login_logdate) || ($login_email_address == 'admin@localhost') || ($login_modified == '0000-00-00 00:00:00')) {

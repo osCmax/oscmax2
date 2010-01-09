@@ -15,6 +15,10 @@ $Id: logoff.php 3 2006-05-27 04:59:07Z user $
   @include(DIR_WS_LANGUAGES . $language . '/' . FILENAME_LOGOFF);
 
 //tep_session_destroy();
+
+//Added by PGM
+tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $login_username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged Out', '" . date('F j, Y, g:i a') . "')");
+
   tep_session_unregister('login_id');
   tep_session_unregister('login_username');
   tep_session_unregister('login_groups_id');

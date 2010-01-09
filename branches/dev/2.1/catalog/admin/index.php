@@ -93,7 +93,7 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
 <div id="tabs-3">
   <table width="95%" align="center">
     <tr valign="top">
-      <td>Admin Logging Coming Soon!<?php //include('includes/modules/dashboard/admin_logging.php'); ?></td>
+      <td><?php include('includes/modules/dashboard/admin_logging.php'); ?></td>
     </tr>
   </table>
 </div>
@@ -101,7 +101,7 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
 <div id="tabs-4">
   <table width="95%" align="center">
     <tr valign="top">
-      <td>Customer Logging Coming Soon!<?php //include('includes/modules/dashboard/customer_logging.php'); ?></td>
+      <td><?php include('includes/modules/dashboard/customer_logging.php'); ?></td>
     </tr>
   </table>
 </div>

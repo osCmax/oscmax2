@@ -26,10 +26,14 @@ function SetFocus() {
 
 function rowOverEffect(object) {
   if (object.className == 'dataTableRow') object.className = 'dataTableRowOver';
+  if (object.className == 'dataTableRowAlert') object.className = 'dataTableRowOverAlert';
+  if (object.className == 'dataTableRowWarning') object.className = 'dataTableRowOverWarning';
 }
 
 function rowOutEffect(object) {
   if (object.className == 'dataTableRowOver') object.className = 'dataTableRow';
+  if (object.className == 'dataTableRowOverAlert') object.className = 'dataTableRowAlert';
+  if (object.className == 'dataTableRowOverWarning') object.className = 'dataTableRowWarning';
 }
 function toggleDivBlock(id) {
   if (document.getElementById) {

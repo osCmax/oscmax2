@@ -40,7 +40,10 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 //  $check_customer_query = tep_db_query("select customers_id, customers_firstname, customers_password, customers_email_address, customers_default_address_id from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "'");
     $check_customer_query = tep_db_query("select customers_id, customers_firstname, customers_group_id, customers_password, customers_email_address, customers_default_address_id , guest_account from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "' and guest_account='0'");
     if (!tep_db_num_rows($check_customer_query)) {
-      $error = true;
+      	$error = true;
+	  	//Added by PGM
+		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', '" . date('F j, Y, g:i a') . "')");
+
     } else {
       $check_customer = tep_db_fetch_array($check_customer_query);
 // Check that password is good
@@ -52,10 +55,16 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 
 	  
         $error = true;
+		//Added by PGM
+		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', '" . date('F j, Y, g:i a') . "')");
+
       } else {
         if (SESSION_RECREATE == 'True' && !isset($HTTP_POST_VARS['action'])) {
 
 		//echo "sdsd";
+		//Added by PGM
+		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', '" . date('F j, Y, g:i a') . "')");
+
 
 		if(isset($HTTP_POST_VARS['phoneorder']) && ($HTTP_POST_VARS['phoneorder'] == 'order')){
           	tep_session_recreate();

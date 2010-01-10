@@ -1414,6 +1414,7 @@ INSERT INTO admin_files VALUES (130,'attributeManager.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (131,'phone_order.php', 0, 5, '1');
 INSERT INTO admin_files VALUES (132,'stats_admin_logging.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (133,'stats_cust_logging.php', 0, 8, '1');
+INSERT INTO admin_files VALUES (134,'customer_export.php', 0, 5, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');

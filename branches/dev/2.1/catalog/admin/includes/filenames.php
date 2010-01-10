@@ -129,9 +129,15 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_SHIP_FEDEX', 'ship_fedex.php');
   define('FILENAME_SHIPPING_MANIFEST', 'shipping_manifest.php');
 // EOF: MOD - fedex
+
 // LINE ADDED: CREDIT CLASS Gift Voucher Contribution
   define('FILENAME_STATS_CREDITS', 'stats_credits.php');
-// BOF PHONE ORDER
+
+// BOF: PHONE ORDER
   define('FILENAME_PHONE_ORDER', 'phone_order.php');
-// EOF PHONE ORDER
+// EOF: PHONE ORDER
+
+// BOF: EXPORT CUSTOMERS TO CSV
+  define('FILENAME_CUSTOMERS_EXPORT', 'customer_export.php');
+// EOF: EXPORT CUSTOMERS TO CSV
 ?>

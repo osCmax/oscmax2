@@ -459,7 +459,12 @@ define('IMAGE_ORDERS_TRACK','Track FedEx Shipment');
 define('IMAGE_ORDERS_CANCEL_SHIPMENT','Cancel FedEx Shipment');
 define('BOX_SHIPPING_MANIFEST','Fedx Shipping Manifest');
 // EOF: MOD - FedEx
-// BOF PHONE ORDER
+
+// BOF: PHONE ORDER
   define('BOX_PHONE_ORDER', 'Phone Order');
-// EOF PHONE ORDER
+// EOF: PHONE ORDER
+
+// BOF: EXPORT CUSTOMERS TO CSV
+  define('BOX_CUSTOMERS_EXPORT', 'Export Customers');
+// EOF: EXPORT CUSTOMERS TO CSV
 ?>

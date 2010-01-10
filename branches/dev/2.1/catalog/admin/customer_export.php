@@ -13,7 +13,7 @@
   require('includes/application_top.php');
   if (!$_POST['submit']) {
 ?>
-<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//DE">
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
@@ -30,9 +30,7 @@
     <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
         <!-- left_navigation //-->
         <?php require(DIR_WS_INCLUDES.'column_left.php'); ?>
-        <script>
-new Rico.Accordion( $('accordionDiv'), {panelHeight:210, collapsedBg:'#B3BAC5', expandedBg:'#C9C9C9', hoverBg: '#C9C9C9', borderColor:'#C9C9C9', expandedTextColor:'#616060', onLoadShowTab:'5'} );
-</script>
+        
         <!-- left_navigation_eof //-->
       </table></td>
     <!-- body_text //-->
@@ -136,13 +134,12 @@ new Rico.Accordion( $('accordionDiv'), {panelHeight:210, collapsedBg:'#B3BAC5', 
   </tr>
 </table>
 <!-- footer //-->
-<center>
-  <font color="#666666" size="2"></font>
-</center>
+<?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
 <br>
 </body>
 </html>
+
 <?php
 }
 else

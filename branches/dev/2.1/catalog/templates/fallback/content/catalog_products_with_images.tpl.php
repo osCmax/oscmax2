@@ -17,6 +17,9 @@
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <?php
+	  if (isset($HTTP_GET_VARS['listing'])) { 
+	  	$listing = $HTTP_GET_VARS['listing'];
+	  }
           switch ($listing) {
               case "image":
               $order = "p.products_image,";

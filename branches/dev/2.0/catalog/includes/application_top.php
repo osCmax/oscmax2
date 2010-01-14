@@ -38,7 +38,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 
 // define the project version
-  define('PROJECT_VERSION', 'osCMax v2.0.4');
+  define('PROJECT_VERSION', 'osCMax v2.0.15 SVN');
 
 
 // some code to solve compatibility issues

@@ -139,8 +139,7 @@ $Id: index.php 14 2006-07-28 17:42:07Z user $
                                          array('title' => BOX_CONFIGURATION_PRINT, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=30')),
                                          array('title' => BOX_CONFIGURATION_SEO, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=60')),
                                          array('title' => BOX_CONFIGURATION_WISHLIST, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=65')),
-                                         array('title' => BOX_CONFIGURATION_EDITOR, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=70')),
-                                         array('title' => BOX_CONFIGURATION_SEO_VALIDATION, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=75')))),
+                                         array('title' => BOX_CONFIGURATION_EDITOR, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=70')))),
 
                array('title' => BOX_HEADING_LOCATION_AND_TAXES,
 // Added line for Admin w/access levels

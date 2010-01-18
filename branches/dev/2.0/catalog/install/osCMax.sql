@@ -1406,7 +1406,6 @@ INSERT INTO configuration VALUES (7,'Expected Sort Order','EXPECTED_PRODUCTS_SOR
 INSERT INTO configuration VALUES (8,'Expected Sort Field','EXPECTED_PRODUCTS_FIELD','date_expected','The column to sort by in the expected products box.','1','9',NULL,now(),NULL,'tep_cfg_select_option(array(''products_name'',''date_expected''),');
 INSERT INTO configuration VALUES (9,'Switch To Default Language Currency','USE_DEFAULT_LANGUAGE_CURRENCY','false','Automatically switch to the language\'s currency when it is changed','1','10',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (10,'Send Extra Order Emails To','SEND_EXTRA_ORDER_EMAILS_TO','','Send extra order emails to the following email addresses,in this format: Name 1 &lt;email@address1&gt;,Name 2 &lt;email@address2&gt;','1','11',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (11,'Use Search-Engine Safe URLs (still in development)','SEARCH_ENGINE_FRIENDLY_URLS','false','Use search-engine safe urls for all site links','1','12',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (12,'Display Cart After Adding Product','DISPLAY_CART','true','Display the shopping cart after adding a product (or return back to their origin)','1','14',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (13,'Allow Guest To Tell A Friend','ALLOW_GUEST_TO_TELL_A_FRIEND','false','Allow guests to tell a friend about a product','1','15',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (14,'Default Search Operator','ADVANCED_SEARCH_DEFAULT_OPERATOR','and','Default search operators','1','17',NULL,now(),NULL,'tep_cfg_select_option(array(\'and\', \'or\'),');
@@ -1453,7 +1452,7 @@ INSERT INTO configuration VALUES (52,'Customer Order History Box','MAX_DISPLAY_P
 INSERT INTO configuration VALUES (53,'Order History','MAX_DISPLAY_ORDER_HISTORY','10','Maximum number of orders to display in the order history page','3','18',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (54,'Product Quantities In Shopping Cart','MAX_QTY_IN_CART','99','Maximum number of product quantities that can be added to the shopping cart (0 for no limit)','3','19',NULL,now(),NULL,NULL);
 
-INSERT INTO configuration VALUES (55,'Small Image Width','SMALL_IMAGE_WIDTH','150','The pixel width of small images','4','1',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (55,'Small Image Width','SMALL_IMAGE_WIDTH','120','The pixel width of small images','4','1',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (56,'Small Image Height','SMALL_IMAGE_HEIGHT','','The pixel height of small images','4','2',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (57,'Heading Image Width','HEADING_IMAGE_WIDTH','100','The pixel width of heading images','4','3',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (58,'Heading Image Height','HEADING_IMAGE_HEIGHT','','The pixel height of heading images','4','4',NULL,now(),NULL,NULL);
@@ -1515,7 +1514,7 @@ INSERT INTO configuration VALUES (121,'Log Date Format','STORE_PARSE_DATE_TIME_F
 INSERT INTO configuration VALUES (122,'Display The Page Parse Time','DISPLAY_PAGE_PARSE_TIME','false','Display the page parse time (store page parse time must be enabled)','10','4',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (123,'Store Database Queries','STORE_DB_TRANSACTIONS','false','Store the database queries in the page parse time log (PHP4 only)','10','5',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 
-INSERT INTO configuration VALUES (124,'Use Cache','USE_CACHE','false','Use caching features','11','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (124,'Use Cache','USE_CACHE','false','Use caching features.<br>CAUTION. This may cause issues and crash your site. Test first!','11','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (125,'Cache Directory','DIR_FS_CACHE','/tmp/','The directory where the cached files are saved','11','2',NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (126,'E-Mail Transport Method','EMAIL_TRANSPORT','sendmail','Defines if this server uses a local connection to sendmail or uses an SMTP connection via TCP/IP. Servers running on Windows and MacOS should change this setting to SMTP.','12','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'sendmail\', \'smtp\'),');
@@ -1714,8 +1713,8 @@ INSERT INTO `configuration` VALUES(1481, 'Enable automatic redirects?', 'USE_SEO
 INSERT INTO `configuration` VALUES(1482, 'Choose URL Rewrite Type', 'SEO_REWRITE_TYPE', 'Rewrite', 'Choose which SEO URL format to use.', 60, 13, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''Rewrite''),');
 INSERT INTO `configuration` VALUES(1483, 'Enter special character conversions', 'SEO_CHAR_CONVERT_SET', '', 'This setting will convert characters.<br><br>The format <b>MUST</b> be in the form: <b>char=>conv,char2=>conv2</b>', 60, 14, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, NULL);
 INSERT INTO `configuration` VALUES(1484, 'Remove all non-alphanumeric characters?', 'SEO_REMOVE_ALL_SPEC_CHARS', 'false', 'This will remove all non-letters and non-numbers.  This should be handy to remove all special characters with 1 setting.', 60, 15, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO `configuration` VALUES(1485, 'Reset SEO URLs Cache', 'SEO_URLS_CACHE_RESET', 'false', 'This will reset the cache data for SEO', 60, 16, '2009-02-25 22:57:59', '2009-02-25 22:57:59', 'tep_reset_cache_data_seo_urls', 'tep_cfg_select_option(array(''reset'', ''false''),');
-INSERT INTO `configuration` VALUES(1486, 'Enable Seo URL validation?', 'FWR_VALIDATION_ON', 'false', 'Enable the SEO URL validation?', 75, 1, NULL, '2009-02-25 22:57:25', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1485, 'Reset SEO URLs Cache', 'SEO_URLS_CACHE_RESET', 'false', 'This will reset the cache data for SEO', 60, 17, '2009-02-25 22:57:59', '2009-02-25 22:57:59', 'tep_reset_cache_data_seo_urls', 'tep_cfg_select_option(array(''reset'', ''false''),');
+INSERT INTO `configuration` VALUES(1486, 'Enable Seo URL validation?', 'FWR_VALIDATION_ON', 'false', 'Enable the SEO URL validation?', 60, 16, NULL, '2009-02-25 22:57:25', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (1073,'Move tax to total amount','MOVE_TAX_TO_TOTAL_AMOUNT','True','Do you want to move the tax to the total amount? If true PayPal will allways show the total amount including tax. (needs Aggregate i.s.o. Per Item to function)',6,4,NULL,now(),NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), ');
 INSERT INTO configuration VALUES (498,'Purchase Without Account','PWA_ON','true','Allow Customers to purchase without an account',40,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 
@@ -1804,7 +1803,6 @@ INSERT INTO configuration_group VALUES (55,'Page Cache Settings','Settings for t
 INSERT INTO configuration_group VALUES (60,'SEO URLs','Options for Ultimate SEO URLs by Chemo', 902,1);
 INSERT INTO configuration_group VALUES (65,'Wish List Settings','Settings for your Wish List', 25,1);
 INSERT INTO configuration_group VALUES (70,'Order Editor','Configuration options for Order Editor', 903,1);
-INSERT INTO configuration_group VALUES (75,'SEO URL Validation','Validation For Ultimate SEO URLs', 950,1);
 INSERT INTO configuration_group VALUES (80, 'Recover Cart Sales', 'Recover Cart Sales (RCS) Configuration Values', 55, 1);
 
 

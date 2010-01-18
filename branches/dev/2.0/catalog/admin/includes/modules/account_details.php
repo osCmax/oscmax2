@@ -434,7 +434,7 @@ elseif
       </tr>
     </table></td>
   </tr>
-<?php/*
+
 <?php
   if (!$is_read_only) {
 ?>

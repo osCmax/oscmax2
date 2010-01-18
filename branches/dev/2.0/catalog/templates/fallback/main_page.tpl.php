@@ -65,11 +65,12 @@ function CVVPopUpWindow(url) {
 	//// END:  Added for Dynamic MoPics v3.000
 ?>
 
-<!-- BOF SLIMBOX2 
+
+<!-- BOF SLIMBOX2 -->
 <script type="text/javascript" src="slimbox2/jquery.js"></script>
 <script type="text/javascript" src="slimbox2/slimbox2.js"></script>
 <link rel="stylesheet" href="slimbox2/slimbox2.css" type="text/css" media="screen" />
- EOF SLIMBOX2 -->
+<!-- EOF SLIMBOX2 -->
 
 </head>
 <body>

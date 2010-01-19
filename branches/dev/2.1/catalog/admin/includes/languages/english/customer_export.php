@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Customer Export');
+define('HEADING_TITLE', 'Customer Export v1.5');
 define('TABLE_HEADING_CUSTOMER_EXPORT', 'Export and Save Customer Data onto your Local Machine. All customer records will be compiled into one text file.');
 
 define('TITLE_ID', 'cID');

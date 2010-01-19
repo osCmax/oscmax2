@@ -1752,7 +1752,7 @@ INSERT INTO `configuration` VALUES(1486, 'Enable Seo URL validation?', 'FWR_VALI
 INSERT INTO configuration VALUES (1073,'Move tax to total amount','MOVE_TAX_TO_TOTAL_AMOUNT','True','Do you want to move the tax to the total amount? If true PayPal will allways show the total amount including tax. (needs Aggregate i.s.o. Per Item to function)',6,4,NULL,now(),NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), ');
 INSERT INTO configuration VALUES (498,'Purchase Without Account','PWA_ON','true','Allow Customers to purchase without an account',40,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 
-# New RC4 entires
+# New RC4 entries
 INSERT INTO configuration VALUES (1202,'Admin Editor Default Width','HTML_AREA_WYSIWYG_EDITOR_WIDTH','550','How WIDE should the HTMLAREA be in pixels (default: 550)',25,66,NULL,now(),NULL,'');
 INSERT INTO configuration VALUES (1203,'Admin Editor Default Height','HTML_AREA_WYSIWYG_EDITOR_HEIGHT','300','How HIGH should the HTMLAREA be in pixels (default: 300)',25,67,NULL,now(),NULL,'');
 INSERT INTO configuration VALUES (1204,'E-Mail Address','AFFILIATE_EMAIL_ADDRESS','<affiliate@localhost.com>','The E Mail Address for the Affiliate Program',35,1,NULL,now(),NULL,NULL);
@@ -1805,11 +1805,17 @@ INSERT INTO configuration VALUES (1509, 'Lowest Pending sales status', 'RCS_PEND
 INSERT INTO configuration VALUES (1510, 'Report Even Row Style', 'RCS_REPORT_EVEN_STYLE', 'dataTableRow', 'Style for even rows in results report. Typical options are <i>dataTableRow</i> and <i>attributes-even</i>.', 80, 90, NULL, '2009-03-07 22:31:53', '', '');
 INSERT INTO configuration VALUES (1511, 'Report Odd Row Style', 'RCS_REPORT_ODD_STYLE', '', 'Style for odd rows in results report. Typical options are NULL (ie, no entry) and <i>attributes-odd</i>.', 80, 92, NULL, '2009-03-07 22:31:53', '', '');
 
+#New v2.1 Entries
+INSERT INTO configuration values ('2100', 'Enable Google Analytics', 'GOOGLE_ANALYTICS_STATUS', 'false', 'Enable Google Analytics?', '85', '1', '', '2010-01-19 00:00:00', '', 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration values ('2101', 'Google Analytics UA Tracking Code', 'GOOGLE_UA_CODE', 'UA-XXXXXXX-X', 'Put in your Google Analytics Tracking Code', '85', '2', '', '2010-01-19 00:00:00', '', 'tep_cfg_textarea(');
+INSERT INTO configuration values ('2102', 'Google Analytics Sub-Domain Setting', 'GOOGLE_SUBDOMAIN', 'none', 'If your store is part of a subdomain eg. onlinestore.yourdomain.com put in your the domain name eg. <font color=red>.</font>yourdomain.com, if not type leave the default <font color=red>none</font>', '85', '3', '', '2010-01-19 00:00:00', '', 'tep_cfg_textarea(');
 
 
 INSERT INTO configuration VALUES(596, 'Product Image Height', 'PRODUCT_IMAGE_HEIGHT', '', 'The main product image (thumbnail) in product information pages.', 4, 21, NULL, '2009-05-28 15:34:10', NULL, NULL);
 INSERT INTO configuration VALUES(597, 'Product Popup Image Width', 'POPOP_IMAGE_WIDTH', '', 'Limits the popup product image (enlarged) size in product information pages. Unused by default', 4, 22, NULL, '2009-05-28 15:34:10', NULL, NULL);
 INSERT INTO configuration VALUES(598, 'Product Popup Image Height', 'POPUP_IMAGE_HEIGHT', '', 'Limits the popup product image (enlarged) size in product information pages. Unused by default', 4, 23, NULL, '2009-05-28 15:34:10', NULL, NULL);
+
+
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
 INSERT INTO configuration_group VALUES (3,'Maximum Values','The maximum values for functions / data',3,1);
@@ -1838,7 +1844,8 @@ INSERT INTO configuration_group VALUES (60,'SEO URLs','Options for Ultimate SEO 
 INSERT INTO configuration_group VALUES (65,'Wish List Settings','Settings for your Wish List', 25,1);
 INSERT INTO configuration_group VALUES (70,'Order Editor','Configuration options for Order Editor', 903,1);
 INSERT INTO configuration_group VALUES (75,'SEO URL Validation','Validation For Ultimate SEO URLs', 950,1);
-INSERT INTO configuration_group VALUES (80, 'Recover Cart Sales', 'Recover Cart Sales (RCS) Configuration Values', 55, 1);
+INSERT INTO configuration_group VALUES (80,'Recover Cart Sales', 'Recover Cart Sales (RCS) Configuration Values', 55, 1);
+INSERT INTO configuration_group VALUES (85,'Google Analytics', 'Google Analytics Settings', 99, 1);
 
 
 INSERT INTO countries VALUES (1,'Afghanistan','AF','AFG','1');

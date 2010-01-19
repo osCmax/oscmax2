@@ -57,7 +57,10 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=60', 'NONSSL') . '">SEO URLs</a></li>' .
                    '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=75', 'NONSSL') . '">SEO URL Validation</a></li>' .
 				'</ul>' .   
-				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=80', 'NONSSL') . '">Order Editor</a></li>'
+				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=80', 'NONSSL') . '">Order Editor</a></li>' .
+				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Google</a><ul>' .
+					'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=85', 'NONSSL') . '">Google Analytics</a></li>' .
+				'</ul>'
 				);
 
   print_r($contents);

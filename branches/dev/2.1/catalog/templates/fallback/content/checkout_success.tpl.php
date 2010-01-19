@@ -73,3 +73,24 @@
       </tr>
 <?php if (DOWNLOAD_ENABLED == 'true') include(DIR_WS_MODULES . 'downloads.php'); ?>
     </table></form>
+    
+<!-- BOF: Google Analytics Code -->
+	
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+    
+	<script type="text/javascript">
+		var pageTracker = _gat._getTracker("<?php echo (GOOGLE_UA_CODE); ?>");
+		pageTracker._initData();
+		<?php if (GOOGLE_SUBDOMAIN != 'none') {
+		pageTracker._setDomainName("<?php echo (GOOGLE_SUBDOMAIN); ?>");
+		}; ?>
+		pageTracker._trackPageview();
+		
+		<?php include(DIR_WS_MODULES . 'analytics/analytics.php'); ?>
+
+	</script>
+
+<!-- EOF: Google Analytics Code -->

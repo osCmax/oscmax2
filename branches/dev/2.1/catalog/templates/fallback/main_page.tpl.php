@@ -208,5 +208,24 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 <?php
 }
 ?>
+
+<?php if (GOOGLE_ANALYTICS_STATUS == 'true') { ?>	
+<!-- BOF: Google Analytics Code -->
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+    
+	<script type="text/javascript">
+		var pageTracker = _gat._getTracker("<?php echo (GOOGLE_UA_CODE); ?>");
+		pageTracker._initData();
+		<?php if (GOOGLE_SUBDOMAIN != 'none') {
+		echo 'pageTracker._setDomainName("'  . GOOGLE_SUBDOMAIN .'");';
+		} ?>
+		
+		pageTracker._trackPageview();
+	</script>
+<!-- EOF: Google Analytics Code -->
+<?php } ?>
 </body>
 </html>

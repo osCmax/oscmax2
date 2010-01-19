@@ -920,7 +920,6 @@ CREATE TABLE products (
   products_width decimal(6,2) NOT NULL default '12.00',
   products_height decimal(6,2) NOT NULL default '12.00',
   products_ready_to_ship int(1) NOT NULL default '0',
-  products_thumb varchar(64) default NULL,
   PRIMARY KEY  (products_id),
   KEY idx_products_model (products_model),
   KEY idx_products_date_added (products_date_added)
@@ -1771,7 +1770,7 @@ INSERT INTO configuration VALUES (1509, 'Lowest Pending sales status', 'RCS_PEND
 INSERT INTO configuration VALUES (1510, 'Report Even Row Style', 'RCS_REPORT_EVEN_STYLE', 'dataTableRow', 'Style for even rows in results report. Typical options are <i>dataTableRow</i> and <i>attributes-even</i>.', 80, 90, NULL, '2009-03-07 22:31:53', '', '');
 INSERT INTO configuration VALUES (1511, 'Report Odd Row Style', 'RCS_REPORT_ODD_STYLE', '', 'Style for odd rows in results report. Typical options are NULL (ie, no entry) and <i>attributes-odd</i>.', 80, 92, NULL, '2009-03-07 22:31:53', '', '');
 
-INSERT INTO configuration VALUES (595,'Product Image Width','PRODUCT_IMAGE_WIDTH','150','The main product image \(thumbnail\) in product information pages.',4,20,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (595,'Product Image Width','PRODUCT_IMAGE_WIDTH','120','The main product image \(thumbnail\) in product information pages.',4,20,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (596,'Product Image Height','PRODUCT_IMAGE_HEIGHT','','The main product image \(thumbnail\) in product information pages. Do NOT specify both!',4,21,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (597,'Product Popup Image Width','POPUP_IMAGE_WIDTH','800','Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,22,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (598,'Product Popup Image Height','POPUP_IMAGE_HEIGHT','600','Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,23,NULL,now(),NULL,NULL);

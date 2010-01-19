@@ -1,16 +1,15 @@
 <?php
 /*
-$Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
-  Dynamic MoPics version 3.000, built for osCommerce MS2
-  Copyright 2006 osCMax2004-2005 Josh Dechant
-  Released under the GNU General Public License
+$Id: dynamic_mopics_admin.php 3 2009-11-17 00:50:07Z user $
 
- Dynamic MoPics: Modded by ejsolutions (E Jonsen) April 2009 oscMax v2.0.2
+  Dynamic MoPics Admin, built for osCMax 2.0.4/2.1 ejsolutions
+  Copyright 2006 osCMax2004-2005 
+  Released under the GNU General Public License
   ---------------------------------------------------
   osCMax Power E-Commerce
   http://oscdox.com
-
   Copyright 2006 osCMax
+
   Released under the GNU General Public License
 */
 	// Backwards support for older osCommerce versions
@@ -18,9 +17,9 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 		$product_info =& $product_info_values;
 	}
 	// Set the thumbnail basename; replaces "imagebase" in the user's pattern
-	$image_base = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR);
+	$image_base = mopics_get_imagebase($products_image_name, $root_thumbs);
 	// Set the large image's basename; replaces "imagebase" in the user's pattern
-	$image_base_lg = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);
+	$image_base_lg = mopics_get_imagebase($products_image_name, $root_images_dir);
 	// Get the counting method for the user's pattern (1,2,3; a,b,c; A,B,C; etc)
 	$i = mopics_getmethod(DYNAMIC_MOPICS_PATTERN);
 	// Set the search for the str_replace pattern search/replace
@@ -33,57 +32,57 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 	<tr>
       	<td>
 		<div class="screenshotsHeader">
-		<div class="screenshotsHeaderText"><?php echo TEXT_OTHER_PRODUCT_IMAGES; ?></div>
+		<div class="screenshotsHeaderText">Other images for this product:</div>
 		</div>
 		<div class="screenshotsBlock"> 
-          <div align="center">
-	<?
+		           <div align="center">
+				<div class="screenshots">
+       <?php
 	$row = 0;
+
 	// Loop until all of this product's thumbnails have been found and displayed
 		while ($image_ext = mopics_file_exists(str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN))) {
 			$row++;
 			// Set the thumbnail image for this loop
 			$image = str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN) . '.' . $image_ext;
+			$html_image = "../" . str_replace(DIR_FS_CATALOG, '', $image);
 			// Parse this thumbnail through tep_image for clients with javascript disabled
-			$extraImageImage = tep_image($image, stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+			$extraImageImage = tep_image($image, stripslashes($products_image_name), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
 			// Set large image replacement for the str_replace pattern search/replace
 			$replace_lg = array($image_base_lg, $i);
 			// Only link to the popup if a larger image exists
 			if ($lg_image_ext = mopics_file_exists(str_replace($search, $replace_lg, DYNAMIC_MOPICS_PATTERN))) {
+
 				// Set the large image for this loop
 				$image_lg = str_replace($search, $replace_lg, DYNAMIC_MOPICS_PATTERN) . '.' . $lg_image_ext;
+				$html_image_lg = HTTP_SERVER . DIR_WS_CATALOG . str_replace(DIR_FS_CATALOG, '', $image_lg);
+			
 				// Get the large image's size
-				$image_size = @getimagesize(DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $image_lg);
+				$image_size = @getimagesize($html_images_dir . $image_lg);
 				// Set large image's URL for clients with javascript disabled
 				$extraImageURL = tep_href_link($image_lg);
 				// Parse this thumbnail through tep_image for clients with javascript enabled
-				$extraImagePopupImage = tep_image($image, addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+				$extraImagePopupImage = tep_image($image, addslashes($products_image_name), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
 				// Set the large image's popup width
 				$extraImagePopupWidth = ((int)$image_size[0] + 5);
 				// Set the large image's popup height
-				$extraImagePopupHeight = ((int)$image_size[1] + 20);
-				// Set the large image's popup URL text
-				$extraImageURLText = TEXT_CLICK_TO_ENLARGE;
-				// Set the large image's popup URL
-				$extraImagePopupURL = tep_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $product_info['products_id'] . '&pic=' . $i . '&type=' . $lg_image_ext);
+				$extraImagePopupHeight = ((int)$image_size[1] + 30);
+
 ?>
-				<div class="screenshots">
-               
+<centre>
 <!-- LIGHTBOX/SLIMBOX -->
 <script language="javascript"><!--
-document.write('<?php echo '<a href="' . tep_href_link($image_lg) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >'
-. $extraImagePopupImage; ?><br /><span class="smallText"><?php echo $extraImageURLText; ?></span></a>');
+document.write('<?php echo '<a href="' . $html_image_lg . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image($html_image, $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '</a>'; ?>');
 //--></script>
 <!-- EOF LIGHTBOX/SLIMBOX -->
-
           <noscript>
-            <a href="<?php echo $extraImageURL; ?>" target="_blank"><?php echo $extraImageImage; ?><br /><span class="smallText"><?php echo $extraImageURLText; ?></span></a>
+            <a href="<?php echo $html_image_lg; ?>" target="_blank"><?php echo '<img src="' . $html_image . '">'; ?></a>
           </noscript>
-				</div>
+</centre>
 <?php
 			} else {
 				// No larger image found; Only display the thumbnail without a "click to enlarge" link
-				echo '<div class="screenshots">' . $extraImageImage . '</div>';
+				echo '<div class="screenshots">' . $html_image_lg . '</div>';
 			}
 			// Increase current count
 			$i++;

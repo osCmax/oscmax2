@@ -12,6 +12,17 @@ $Id: stats_customers.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
+  
+  switch($action) {
+// reset the customer log
+  case 'reset_customer_log':
+	  tep_db_query("delete from " . TABLE_CUSTOMER_LOG);
+	  tep_db_query("optimize table " . TABLE_CUSTOMER_LOG);
+	  $messageStack->add_session('Customer Log data reset (Log start number continues from previous record).  Customer Log table has been optimized.', 'success');
+	  tep_redirect(tep_href_link(FILENAME_STATS_CUST_LOGGING));
+  break;
+  }
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -92,8 +103,9 @@ $Id: stats_customers.php 3 2006-05-27 04:59:07Z user $
           <tr>
             <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td class="smallText" valign="top"><?php echo $logging_split->display_count($logging_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_LOGS); ?></td>
-                <td class="smallText" align="right"><?php echo $logging_split->display_links($logging_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page']); ?>&nbsp;</td>
+                <td class="smallText" align="left" width="45%"><?php echo $logging_split->display_count($logging_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_LOGS); ?></td>
+                <td class="smallText" align="center" width="10%"><?php echo '<a href="' . tep_href_link(FILENAME_STATS_CUST_LOGGING, 'action=reset_customer_log') . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
+                <td class="smallText" align="right" width="45%"><?php echo $logging_split->display_links($logging_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page']); ?>&nbsp;</td>
               </tr>
             </table></td>
           </tr>

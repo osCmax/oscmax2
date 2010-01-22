@@ -252,6 +252,7 @@ define('CATEGORY_ADDRESS', 'Address');
 define('CATEGORY_CONTACT', 'Contact');
 define('CATEGORY_COMPANY', 'Company');
 define('CATEGORY_OPTIONS', 'Options');
+define('CATEGORY_PASSWORD', 'Your Password');
 
 define('ENTRY_GENDER', 'Gender:');
 define('ENTRY_GENDER_ERROR', '&nbsp;<span class="errorText">required</span>');

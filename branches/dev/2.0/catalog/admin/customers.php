@@ -429,7 +429,7 @@ function check_form() {
   }
 ?>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="SetFocus();">
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -469,7 +469,7 @@ function check_form() {
     if (ACCOUNT_GENDER == 'true') {
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_GENDER; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_GENDER; ?></td>
             <td class="main">
 <?php
     if ($error == true) {
@@ -488,7 +488,7 @@ function check_form() {
     }
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_FIRST_NAME; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_FIRST_NAME; ?></td>
             <td class="main">
 <?php
   if ($error == true) {
@@ -503,7 +503,7 @@ function check_form() {
 ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo ENTRY_LAST_NAME; ?></td>
+            <td class="main"  width="150"><?php echo ENTRY_LAST_NAME; ?></td>
             <td class="main">
 <?php
   if ($error == true) {
@@ -521,7 +521,7 @@ function check_form() {
     if (ACCOUNT_DOB == 'true') {
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_DATE_OF_BIRTH; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_DATE_OF_BIRTH; ?></td>
             <td class="main">
 
 <?php
@@ -540,7 +540,7 @@ function check_form() {
     }
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
             <td class="main">
 <?php
   if ($error == true) {
@@ -572,7 +572,7 @@ function check_form() {
       <tr>
         <td class="formArea"><table border="0" cellspacing="2" cellpadding="2">
           <tr>
-            <td class="main"><?php echo ENTRY_COMPANY; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_COMPANY; ?></td>
             <td class="main">
 <?php
     if ($error == true) {
@@ -588,7 +588,7 @@ function check_form() {
 <?php // BOF: MOD - Separate Pricing per Customer ?>
           </tr>
           <tr>
-            <td class="main"><?php echo ENTRY_COMPANY_TAX_ID; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_COMPANY_TAX_ID; ?></td>
             <td class="main">
 <?php 
     if ($error == true) {
@@ -603,7 +603,7 @@ function check_form() {
 ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo ENTRY_CUSTOMERS_GROUP_REQUEST_AUTHENTICATION; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_CUSTOMERS_GROUP_REQUEST_AUTHENTICATION; ?></td>
             <td class="main">
 <?php
     if ($error == true) {
@@ -634,7 +634,7 @@ function check_form() {
       <tr>
         <td class="formArea"><table border="0" cellspacing="2" cellpadding="2">
           <tr>
-            <td class="main"><?php echo ENTRY_STREET_ADDRESS; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_STREET_ADDRESS; ?></td>
             <td class="main">
 <?php
   if ($error == true) {
@@ -652,7 +652,7 @@ function check_form() {
     if (ACCOUNT_SUBURB == 'true') {
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_SUBURB; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_SUBURB; ?></td>
             <td class="main">
 <?php
     if ($error == true) {
@@ -670,7 +670,7 @@ function check_form() {
     }
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_POST_CODE; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_POST_CODE; ?></td>
             <td class="main">
 <?php
   if ($error == true) {
@@ -685,7 +685,7 @@ function check_form() {
 ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo ENTRY_CITY; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_CITY; ?></td>
             <td class="main">
 <?php
   if ($error == true) {
@@ -703,7 +703,7 @@ function check_form() {
     if (ACCOUNT_STATE == 'true') {
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_STATE; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_STATE; ?></td>
             <td class="main">
 <?php
     $entry_state = tep_get_zone_name($cInfo->entry_country_id, $cInfo->entry_zone_id, $cInfo->entry_state);
@@ -732,7 +732,7 @@ function check_form() {
     }
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_COUNTRY; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_COUNTRY; ?></td>
             <td class="main">
 <?php
   if ($error == true) {
@@ -757,7 +757,7 @@ function check_form() {
       <tr>
         <td class="formArea"><table border="0" cellspacing="2" cellpadding="2">
           <tr>
-            <td class="main"><?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
             <td class="main">
 <?php
   if ($error == true) {
@@ -772,7 +772,7 @@ function check_form() {
 ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo ENTRY_FAX_NUMBER; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_FAX_NUMBER; ?></td>
             <td class="main">
 <?php
   if ($processed == true) {
@@ -793,7 +793,7 @@ function check_form() {
       <tr>
         <td class="formArea"><table border="0" cellspacing="2" cellpadding="2">
           <tr>
-            <td class="main"><?php echo ENTRY_NEWSLETTER; ?></td>
+            <td class="main" width="150"><?php echo ENTRY_NEWSLETTER; ?></td>
             <td class="main">
 <?php
   if ($processed == true) {
@@ -810,7 +810,7 @@ function check_form() {
           </tr>
 <?php // BOF: MOD - Separate Pricing per Customer ?>
 <tr>
-  <td class="main"><?php echo ENTRY_CUSTOMERS_GROUP_NAME; ?></td>
+  <td class="main" width="150"><?php echo ENTRY_CUSTOMERS_GROUP_NAME; ?></td>
 <?php
   if ($processed != true) {
   $index = 0;

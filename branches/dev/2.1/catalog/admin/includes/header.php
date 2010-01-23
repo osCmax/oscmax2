@@ -91,7 +91,7 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
 
 <div id="searchtabs-2" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_CATEGORIES, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
 
-<div id="searchtabs-3" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('oID', '', $orderparams, false, '', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
+<div id="searchtabs-3" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, '', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
 
 </div>
 </td></tr>

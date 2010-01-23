@@ -11,6 +11,41 @@ $Id: orders.php 14 2006-07-28 17:42:07Z user $
 */
 
   require('includes/application_top.php');
+// BOF: Orders search by customer information
+
+// search query (oid, customer or company)
+$search_query = null;
+if ( isset($_GET['q']) && $_GET['q']!="" ){ // query is set in address
+
+$search_query=$_GET['q'];
+
+if (preg_match("/^\d+$/",$search_query)) { // oid
+
+// show given order
+tep_redirect(tep_href_link(FILENAME_ORDERS, 'oID=' . $search_query .
+'&action=edit'));
+exit;
+
+} else { // name (customer or company)
+
+$q_array = explode(' ', ($search_query));
+$q_customer = '(o.customers_name LIKE \'%' . $q_array[0] . '%\'';
+$q_company = '(o.customers_company LIKE \'%' . $q_array[0] . '%\'';
+// more than one search term
+for ($i = 1 ; $i < sizeof($q_array) ; $i++) {
+$q_customer .= ' OR o.customers_name LIKE \'%' . $q_array[$i] . '%\'';
+$q_company .= ' OR o.customers_company LIKE \'%' . $q_array[$i] . '%\'';
+}
+$q_customer .= ')';
+$q_company .= ')';
+$search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
+
+
+}
+
+} // ends if ($search_query = $_GET['q'])
+
+// EOF: Orders search by customer information
 
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
@@ -406,7 +441,14 @@ $Id: orders.php 14 2006-07-28 17:42:07Z user $
             <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
             <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr><?php echo tep_draw_form('orders', FILENAME_ORDERS, '', 'get'); ?>
-                <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('oID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?></td>
+    <!-- //BOF: Orders Search by customer info 
+    <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('oID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?></td> 
+    //EOF: Orders Search by customer info -->
+    <td class="smallText" align="right"><?php
+    $onfocus=' onfocus="this.value=\'\';"';
+    echo HEADING_TITLE_SEARCH_ALL . ' ' . tep_draw_input_field('q', '', "size=\"32\"$onfocus");
+
+    ?>
               <?php echo tep_hide_session_id(); ?></form></tr>
               <tr><?php echo tep_draw_form('status', FILENAME_ORDERS, '', 'get'); ?>
                 <td class="smallText" align="right"><?php echo HEADING_TITLE_STATUS . ' ' . tep_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)), $orders_statuses), '', 'onChange="this.form.submit();"'); ?></td>
@@ -430,17 +472,19 @@ $Id: orders.php 14 2006-07-28 17:42:07Z user $
     if (isset($HTTP_GET_VARS['cID'])) {
       $cID = tep_db_prepare_input($HTTP_GET_VARS['cID']);
 //LINE CHANGED: MOD - fedex added "o.fedex_tracking"
+// BOF: Orders search by customers info - Changed queries below - added " . (!is_null($search_query)?$search_query:''). "
       $orders_query_raw = "select o.orders_id, o.customers_name, o.customers_id, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, o.fedex_tracking, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.customers_id = '" . (int)$cID . "' and o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and ot.class = 'ot_total' order by orders_id DESC";
 // LINE CHANGED: MS2 update 501112
 //  } elseif (isset($HTTP_GET_VARS['status'])) {
     } elseif (isset($HTTP_GET_VARS['status']) && is_numeric($HTTP_GET_VARS['status']) && ($HTTP_GET_VARS['status'] > 0)) {
       $status = tep_db_prepare_input($HTTP_GET_VARS['status']);
 //LINE CHANGED: MOD - fedex added "o.fedex_tracking"
-      $orders_query_raw = "select o.orders_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, o.fedex_tracking, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and s.orders_status_id = '" . (int)$status . "' and ot.class = 'ot_total' order by o.orders_id DESC";
+      $orders_query_raw = "select o.orders_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, o.fedex_tracking, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and s.orders_status_id = '" . (int)$status . "' and ot.class = 'ot_total'  " . (!is_null($search_query)?$search_query:''). " order by o.orders_id DESC";
     } else {
 //LINE CHANGED: MOD - fedex added "o.fedex_tracking"
-      $orders_query_raw = "select o.orders_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, o.fedex_tracking, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and ot.class = 'ot_total' order by o.orders_id DESC";
+      $orders_query_raw = "select o.orders_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, o.fedex_tracking, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and ot.class = 'ot_total' " . (!is_null($search_query)?$search_query:''). " order by o.orders_id DESC";
     }
+// EOF: Orders search by customers info    
     $orders_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $orders_query_raw, $orders_query_numrows);
     $orders_query = tep_db_query($orders_query_raw);
     while ($orders = tep_db_fetch_array($orders_query)) {

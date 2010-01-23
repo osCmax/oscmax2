@@ -129,8 +129,8 @@
           fclose($fp);
         } else { message_handler('FAILED_TO_OPEN'); }
         // changed below to cause pdf to open in a new window 
-        $message =  'A PDF of ' . $num . ' record(s) was successful! 
-        <a href="'.$fname.'" target="_blank"><b>Click here</b></a> to download the order file.';
+        $message =  'Success: PDF of ' . $num . ' record(s) was created successfully. Please 
+        <a href="'.$fname.'" target="_blank"><b>click here</b></a> to open the file.';
 
       case 0:
 

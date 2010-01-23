@@ -34,7 +34,7 @@ define('TEXT_CHOOSE_TEMPLATE','Choose the template of file you wish to print');
 define('TEXT_CHOOSE_TEMPLATE','Please either enter the order numbers/ranges you want extracted to PDF:<br>(eg. 2577,2580-2585,2588)');
 define('TEXT_DATES_ORDERS_EXTRACTRED','Or enter the dates of orders you want extracted to PDF:<br>(enter date in YYYY-MM-DD format)');
 define('TEXT_FROM','From:');
-define('TEXT_TO','Delivery: ');
+define('TEXT_TO','To: ');
 define('TEXT_PRINTING_LABELS_BILLING_DELIVERY','When Printing Labels :- Use Billing Address or Delivery Address?');
 define('TEXT_DELIVERY','Delivery: ');
 define('TEXT_BILLING','Billing: ');
@@ -77,12 +77,12 @@ define('GREY', '0.9,0.9,0.9');
 define('DARK_GREY', '0.7,0.7,0.7');
 
 // Error and Messages
-$error['ERROR_INVALID_INPUT'] = 'Internal Error: Unrecognized or invalid script input.';
-$error['ERROR_BAD_DATE'] =  'Invalid date, Please enter a valid date in Year-Month-Day (0000-00-00) format.';
-$error['ERROR_BAD_INVOICENUMBERS'] =  'Invalid Invoice numbers, Please enter a valid format. (eg. 2577,2580-2585,2588)';
-$error['NO_ORDERS'] =  'There were no orders selected for export, try changing your order options.';
-$error['SET_PERMISSIONS'] = 'Can\'t write to directory!  Please set the permissions of your temp_pdf folder to CHMOD 0777';
-$error['FAILED_TO_OPEN'] = 'Could not open file for writing, make sure correct permissions are set';
+$error['ERROR_INVALID_INPUT'] = 'Error: Internal Error: Unrecognized or invalid script input.';
+$error['ERROR_BAD_DATE'] =  'Error: Invalid date, Please enter a valid date in Year-Month-Day (0000-00-00) format.';
+$error['ERROR_BAD_INVOICENUMBERS'] =  'Error: Invalid Invoice numbers, Please enter a valid format. (eg. 2577,2580-2585,2588)';
+$error['NO_ORDERS'] =  'Error: There were no orders selected for export, try changing your order options.';
+$error['SET_PERMISSIONS'] = 'Error: Can\'t write to directory!  Please set the permissions of your temp_pdf folder to CHMOD 0755';
+$error['FAILED_TO_OPEN'] = 'Error: Could not open file for writing, make sure correct permissions are set';
 
 // PDF FONT SIZES
 define('COMPANY_HEADER_FONT_SIZE','14');

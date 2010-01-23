@@ -80,9 +80,9 @@
 				
 				default:
 					print "<h1 class=\"pageHeading\">QTPro Doctor - Overview</h1>";
-					print "You currently have <b>". qtpro_normal_product_count()."</b> products in your store.<br>";
-					print "<b>".qtpro_tracked_product_count()."</b> of them have options with tracked stock.<br>";
-					print "In the database we currently have <b>". qtpro_number_of_trash_stock_rows() . "</b> trash rows.";
+					print "<table><tr><td class='main'>You currently have <b>". qtpro_normal_product_count()."</b> products in your store.</td></tr>";
+					print "<tr><td class='main'><b>".qtpro_tracked_product_count()."</b> of them have options with tracked stock.</td></tr>";
+					print "<tr><td class='main'>In the database we currently have <b>". qtpro_number_of_trash_stock_rows() . "</b> trash rows.</td></tr></table>";
 					//print "<b>".qtpro_sick_product_count()."</b> of the producks with tracked stock is sick.<br><br>";
 					qtpro_doctor_formulate_database_investigation();
 

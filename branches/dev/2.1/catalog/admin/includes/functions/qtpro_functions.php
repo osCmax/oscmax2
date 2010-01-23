@@ -173,7 +173,7 @@ return $facts_array;
 }
 
 function qtpro_doctor_formulate_database_investigation(){
-	print "<p>Sick products in the database:</p>";
+	print "<table><tr><td>&nbsp;</td></tr><tr><td class='main'><b>Sick products in the database:</b></td></tr></table></p>";
 	$prod_query = tep_db_query("SELECT products_id FROM " . TABLE_PRODUCTS);
 	while($product = tep_db_fetch_array($prod_query)){
 		$investigation= qtpro_doctor_investigate_product($product['products_id']);
@@ -189,11 +189,11 @@ $str_ret ='';
 		case 'short_suggestion':
 			if($facts_array['any_problems']){
 				if($facts_array['summary_and_calc_stock_match'] != true && $facts_array['stock_entries_healthy'] != true){
-					$str_ret ='The database entries for this products stock is messy and the summary stock calculation is wrong. Please take a look at this <a href="' . tep_href_link("stock.php", 'product_id=' . $facts_array['id']) . '" class="headerLink">products stock</a>.';
+					$str_ret ='The database entries for this products stock is messy and the summary stock calculation is wrong. Please take a look at this <a href="' . tep_href_link("stock.php", 'product_id=' . $facts_array['id']) . '"><b>products stock</b></a>.';
 				}elseif(!$facts_array['summary_and_calc_stock_match']){
-					$str_ret ='The summary stock calculation is wrong. Please take a look at this <a href="' . tep_href_link("stock.php", 'product_id=' . $facts_array['id']) . ' " class="headerLink">products stock</a>.';
+					$str_ret ='The summary stock calculation is wrong. Please take a look at this <a href="' . tep_href_link("stock.php", 'product_id=' . $facts_array['id']) . ' "><b>products stock</b></a>.';
 				}elseif(!$facts_array['stock_entries_healthy']){
-					$str_ret ='The database entries for this products stock is messy. Please take a look at this <a href="' . tep_href_link("stock.php", 'product_id=' . $facts_array['id']) . ' " class="headerLink">products stock</a>.';
+					$str_ret ='The database entries for this products stock is messy. Please take a look at this <a href="' . tep_href_link("stock.php", 'product_id=' . $facts_array['id']) . ' "><b>products stock</b></a>.';
 				}else{
 					$str_ret ="Errorcatsh 754780+94322354678";
 				}

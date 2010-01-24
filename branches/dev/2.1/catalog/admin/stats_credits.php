@@ -42,7 +42,7 @@
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -74,7 +74,7 @@
       $rows = '0' . $rows;
     }
 ?>
-              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<?php echo tep_href_link(FILENAME_CUSTOMERS, 'search=' . $customers['customers_lastname'], 'NONSSL'); ?>'">
+              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="document.location.href='<?php echo tep_href_link(FILENAME_CUSTOMERS, 'search=' . $customers['customers_lastname'], 'NONSSL'); ?>'">
                 <td class="dataTableContent"><?php echo $rows; ?>.</td>
                 <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS, 'search=' . $customers['customers_lastname'], 'NONSSL') . '">' . $customers['customers_firstname'] . ' ' . $customers['customers_lastname'] . '</a>'; ?></td>
 <!--                <td class="dataTableContent" align="right"><?php echo $currencies->format($customers['ordersum']); ?>&nbsp;</td> -->

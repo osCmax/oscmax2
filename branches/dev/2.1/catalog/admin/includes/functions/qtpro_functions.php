@@ -213,13 +213,13 @@ $str_ret ='';
 			//Talk about summary and calc stock
 			if($facts_array['summary_and_calc_stock_match']){
 				$str_ret .='<span style="color:green; font-weight: bold; font-size:1.2em;">The stock quantity summary is ok</span><br />
-				This means that the current summary of this products quantity, which is in the database, is the value we get if we calculates it from scratch right now.<br />
+				This means that the current summary of this products quantity, which is in the database, is the value we get if we calculate it from scratch right now.<br />
 				<b>The Summary stock is: '. $facts_array['summary_stock'] .'</b><br /><br />';
 			}else{
 				$str_ret .='<span style="color:red; font-weight: bold; font-size:1.2em;">The stock quantity summary is NOT ok</span><br />
-				This means that the current summary of this products quantity, which is in the database, isn\'t the value we get if we calculates it from scratch right now.<br />
+				This means that the current summary of this products quantity, which is in the database, isn\'t the value we get if we calculate it from scratch right now.<br />
 				<b>The current summary stock is: '. $facts_array['summary_stock'] .'</b><br />
-				<b>If we calculates it we get: '. $facts_array['calc_stock'] .'</b><br /><br />';
+				<b>If we calculate it we get: '. $facts_array['calc_stock'] .'</b><br /><br />';
 			}
 
 			//Talk about the health of the stock entries

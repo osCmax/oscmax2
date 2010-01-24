@@ -109,7 +109,7 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
 <div id="tabs-5">
   <table width="95%" align="center">
     <tr valign="top">
-      <td>HTTP Error Logging Coming Soon!<?php //include('includes/modules/dashboard/http_error.php'); ?></td>
+      <td><?php include('includes/modules/dashboard/http_error.php'); ?></td>
     </tr>
   </table>
 </div>

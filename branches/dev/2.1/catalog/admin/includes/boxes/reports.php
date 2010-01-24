@@ -23,7 +23,8 @@ $Id: reports.php 2009-11-14 19:38:07Z user $
 								   tep_admin_jqmenu(FILENAME_STATS_LOW_STOCK_ATTRIB, BOX_REPORTS_STATS_LOW_STOCK_ATTRIB) .
 								   tep_admin_jqmenu(FILENAME_STATS_CREDITS, BOX_REPORTS_CREDITS) .
 								   tep_admin_jqmenu(FILENAME_STATS_ADMIN_LOGGING, BOX_REPORTS_ADMIN_LOGGING) .
-								   tep_admin_jqmenu(FILENAME_STATS_CUST_LOGGING, BOX_REPORTS_CUST_LOGGING));
+								   tep_admin_jqmenu(FILENAME_STATS_CUST_LOGGING, BOX_REPORTS_CUST_LOGGING) .
+								   tep_admin_jqmenu(FILENAME_STATS_HTTP_ERROR, BOX_REPORTS_HTTP_ERROR));
   print_r($contents);
 ?>
 <!-- reports_eof //-->

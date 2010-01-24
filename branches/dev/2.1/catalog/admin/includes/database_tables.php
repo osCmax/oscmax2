@@ -100,4 +100,7 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
   define('TABLE_CUSTOMER_LOG', 'customer_log');
 // EOF: Admin & Customer Logging
 
+// BOF: Http Error Logging
+  define('TABLE_HTTP_ERROR', 'http_error');
+// EOF: Http Error Logging
 ?>

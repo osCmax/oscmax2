@@ -185,6 +185,7 @@ define('BOX_REPORTS_STATS_LOW_STOCK_ATTRIB', 'Stock Report');
 //++++ QT Pro: End Changed Code
 define('BOX_REPORTS_ADMIN_LOGGING', 'Admin Log');
 define('BOX_REPORTS_CUST_LOGGING', 'Customer Log');
+define('BOX_REPORTS_HTTP_ERROR', 'Http Error Log');
 
 // tools text in includes/boxes/tools.php
 define('BOX_HEADING_TOOLS', 'Tools');

@@ -210,4 +210,8 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('FILENAME_SHIP_FEDEX', 'ship_fedex.php');
   define('FILENAME_SHIPPING_MANIFEST', 'shipping_manifest.php');
 // EOF: MOD - FedEx
+
+// BOF: Http Error Log
+  define('FILENAME_HTTP_ERROR', 'http_error.php');
+// EOF: Http Error Log  
 ?>

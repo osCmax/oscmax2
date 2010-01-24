@@ -1260,23 +1260,35 @@ CREATE TABLE zones_to_geo_zones (
 );
 
 DROP TABLE IF EXISTS admin_log;
-CREATE TABLE IF NOT EXISTS `admin_log` (
-  `login_number` int(11) NOT NULL auto_increment,
-  `user_name` varchar(32) default NULL,
-  `ip_address` varchar(32) default NULL,
-  `type` varchar(32) default NULL,
-  `login_time` varchar(32) default NULL,
-  PRIMARY KEY  (`login_number`)
+CREATE TABLE admin_log (
+  login_number int(11) NOT NULL auto_increment,
+  user_name varchar(32) default NULL,
+  ip_address varchar(32) default NULL,
+  type varchar(32) default NULL,
+  login_time varchar(32) default NULL,
+  PRIMARY KEY  (login_number)
 );
 
 DROP TABLE IF EXISTS customer_log;
-CREATE TABLE IF NOT EXISTS `customer_log` (
-  `login_number` int(11) NOT NULL auto_increment,
-  `user_name` varchar(200) default NULL,
-  `ip_address` varchar(32) default NULL,
-  `type` varchar(200) default NULL,
-  `login_time` varchar(64) default NULL,
-  PRIMARY KEY  (`login_number`)
+CREATE TABLE customer_log (
+  login_number int(11) NOT NULL auto_increment,
+  user_name varchar(200) default NULL,
+  ip_address varchar(32) default NULL,
+  type varchar(200) default NULL,
+  login_time varchar(64) default NULL,
+  PRIMARY KEY  (login_number)
+);
+
+DROP TABLE IF EXISTS http_error;
+CREATE TABLE http_error (
+  error_number int(11) NOT NULL AUTO_INCREMENT,
+  error_code varchar(250) DEFAULT NULL,
+  error_url varchar(250) DEFAULT NULL,
+  error_ip varchar(250) DEFAULT NULL,
+  error_browser varchar(250) DEFAULT NULL,
+  error_refer varchar(250) DEFAULT NULL,
+  error_timestamp varchar(250) DEFAULT NULL,
+  PRIMARY KEY (error_number)
 );
 
 # data

@@ -140,4 +140,8 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
 // BOF: EXPORT CUSTOMERS TO CSV
   define('FILENAME_CUSTOMERS_EXPORT', 'customer_export.php');
 // EOF: EXPORT CUSTOMERS TO CSV
+
+// BOF: Http Error Log
+  define('FILENAME_STATS_HTTP_ERROR', 'stats_http_error.php');
+// EOF: Http Error Log 
 ?>

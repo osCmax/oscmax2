@@ -313,7 +313,7 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 <?php
 //++++ QT Pro: Begin Changed code
 ?>
-                <td align="center" class="smallText"><input type=checkbox name=track_stock <? echo $options_values['products_options_track_stock']?"checked":""; ?>></td>
+                <td align="center" class="smallText"><input type=checkbox name=track_stock <?php echo $options_values['products_options_track_stock']?"checked":""; ?> ></td>
 <?php
 //++++ QT Pro: End Changed Code
 ?>

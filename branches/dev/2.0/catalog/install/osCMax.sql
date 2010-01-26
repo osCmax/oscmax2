@@ -1660,8 +1660,6 @@ INSERT INTO configuration VALUES (534,'WYSIWYG Editor Allow Debug Mode?','ARTICL
 INSERT INTO configuration VALUES (391,'Down For Maintenance Start Time','TEXT_DATE_TIME','2008-05-03 14:23:52','Show when down for maintenance',16,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (700,'Number of Columns for product listings','PRODUCT_LIST_NUM_COLUMNS','4','How many prodcuts per row do you want to display on your product listing page?',8,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (701,'Minimum X-Sell products Listed','MIN_DISPLAY_XSELL','1','How many x-sell products per page',8,20,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (652,'Max Wish List Box','MAX_DISPLAY_WISHLIST_BOX','4','How many wish list items to display in the infobox before it changes to a counter',3,0,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (651,'Max Wish List','MAX_DISPLAY_WISHLIST_PRODUCTS','12','How many wish list items to show per page on the main wishlist.php file',3,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (650,'Product Display Type (Default = 0 or Columns = 1)','PRODUCT_LIST_TYPE','1','Do you want to display products one per row or multiple columns per row?',8,10,NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (645,'Tax Class','MODULE_ORDER_TOTAL_LOWORDERFEE_TAX_CLASS','0','Use the following tax class on the low order fee.',6,7,NULL,now(),'tep_get_tax_class_title','tep_cfg_pull_down_tax_classes(');

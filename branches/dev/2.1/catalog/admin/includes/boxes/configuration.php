@@ -37,15 +37,15 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=8', 'NONSSL') . '">Product Listing</a></li>' .
                    '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=50', 'NONSSL') . '">Product Information</a></li>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=9', 'NONSSL') . '">Stock</a></li>' .
-				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=65', 'NONSSL') . '">Printable Catalog</a></li>' .
+				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=30', 'NONSSL') . '">Printable Catalog</a></li>' .
 				'</ul>' .
 				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Logging / Cache</a><ul>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=10', 'NONSSL') . '">Logging</a></li>' .
                    '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=11', 'NONSSL') . '">Cache</a></li>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=55', 'NONSSL') . '">Page Cache Settings</a></li>' .
 				'</ul>' .
-				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7', 'NONSSL') . '">Email Options</a></li>' .
-				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7', 'NONSSL') . '">Download</a></li>' .
+				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=12', 'NONSSL') . '">Email Options</a></li>' .
+				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=13', 'NONSSL') . '">Download</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=14', 'NONSSL') . '">GZIP Compression</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=25', 'NONSSL') . '">FCK Editor</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=15', 'NONSSL') . '">Sessions</a></li>' .
@@ -57,7 +57,7 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=60', 'NONSSL') . '">SEO URLs</a></li>' .
                    '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=75', 'NONSSL') . '">SEO URL Validation</a></li>' .
 				'</ul>' .   
-				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=80', 'NONSSL') . '">Order Editor</a></li>' .
+				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=70', 'NONSSL') . '">Order Editor</a></li>' .
 				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Google</a><ul>' .
 					'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=85', 'NONSSL') . '">Google Analytics</a></li>' .
 				'</ul>'

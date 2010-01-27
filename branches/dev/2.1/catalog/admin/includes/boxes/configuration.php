@@ -37,6 +37,7 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=8', 'NONSSL') . '">Product Listing</a></li>' .
                    '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=50', 'NONSSL') . '">Product Information</a></li>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=9', 'NONSSL') . '">Stock</a></li>' .
+				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=13', 'NONSSL') . '">Downloads</a></li>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=30', 'NONSSL') . '">Printable Catalog</a></li>' .
 				'</ul>' .
 				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Logging / Cache</a><ul>' .
@@ -45,12 +46,10 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=55', 'NONSSL') . '">Page Cache Settings</a></li>' .
 				'</ul>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=12', 'NONSSL') . '">Email Options</a></li>' .
-				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=13', 'NONSSL') . '">Download</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=14', 'NONSSL') . '">GZIP Compression</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=25', 'NONSSL') . '">FCK Editor</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=15', 'NONSSL') . '">Sessions</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=65', 'NONSSL') . '">Wish List Settings</a></li>' .
-				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=30', 'NONSSL') . '">Printable Catalog</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=35', 'NONSSL') . '">Affiliate Program</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=80', 'NONSSL') . '">Recover Cart Sales</a></li>' .
 				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">SEO</a><ul>' .
@@ -60,7 +59,14 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=70', 'NONSSL') . '">Order Editor</a></li>' .
 				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Google</a><ul>' .
 					'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=85', 'NONSSL') . '">Google Analytics</a></li>' .
-				'</ul>'
+				'</ul>' .
+				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Define Pages</a><ul>' .
+								   tep_admin_jqmenu(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE) .
+								   tep_admin_jqmenu(FILENAME_DEFINE_ABOUT, BOX_CATALOG_DEFINE_ABOUT) .
+								   tep_admin_jqmenu(FILENAME_DEFINE_PRIVACY, BOX_CATALOG_DEFINE_PRIVACY) .
+                                   tep_admin_jqmenu(FILENAME_DEFINE_CONDITIONS, BOX_CATALOG_DEFINE_CONDITIONS) .
+                                   tep_admin_jqmenu(FILENAME_DEFINE_SHIPPING, BOX_CATALOG_DEFINE_SHIPPING) .
+				'</ul></li>'
 				);
 
   print_r($contents);

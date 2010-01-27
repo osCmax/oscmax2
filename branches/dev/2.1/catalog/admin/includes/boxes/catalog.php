@@ -21,15 +21,7 @@ $Id: catalog.php 2009-11-14 19:38:07Z user $
                                    tep_admin_jqmenu(FILENAME_XSELL_PRODUCTS, BOX_CATALOG_XSELL_PRODUCTS) .
                                    tep_admin_jqmenu(FILENAME_EASYPOPULATE, BOX_CATALOG_EASYPOPULATE) .
                                    tep_admin_jqmenu(FILENAME_NEW_ATTRIBUTES, BOX_CATALOG_ATTRIBUTE_MANAGER) .
-                                   tep_admin_jqmenu(FILENAME_PRODUCTS_EXPECTED, BOX_CATALOG_PRODUCTS_EXPECTED) .
-// Added: info boxes
-							'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Define Pages</a><ul>' .
-								   tep_admin_jqmenu(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE) .
-								   tep_admin_jqmenu(FILENAME_DEFINE_ABOUT, BOX_CATALOG_DEFINE_ABOUT) .
-								   tep_admin_jqmenu(FILENAME_DEFINE_PRIVACY, BOX_CATALOG_DEFINE_PRIVACY) .
-                                   tep_admin_jqmenu(FILENAME_DEFINE_CONDITIONS, BOX_CATALOG_DEFINE_CONDITIONS) .
-                                   tep_admin_jqmenu(FILENAME_DEFINE_SHIPPING, BOX_CATALOG_DEFINE_SHIPPING) .
-							'</ul></li>');
+                                   tep_admin_jqmenu(FILENAME_PRODUCTS_EXPECTED, BOX_CATALOG_PRODUCTS_EXPECTED));
 // EOF: MOD - Admin w/access levels
 
   print_r($contents);

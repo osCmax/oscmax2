@@ -1382,6 +1382,11 @@ INSERT INTO admin_files VALUES (128,'edit_orders_add_product.php',0,5,'1');
 INSERT INTO admin_files VALUES (129,'edit_orders_ajax.php',0,5,'1');
 INSERT INTO admin_files VALUES (130, 'attributeManager.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (131,'qtprodoctor.php',0,9,'1');
+#Bugfix 324: Missing values
+INSERT INTO admin_files VALUES (132,'packaging.php',0,9,'1');
+INSERT INTO admin_files VALUES (133,'ups_boxes_used.php',0,9,'1');
+INSERT INTO admin_files VALUES (134,'stats_credits.php',0,8,'1');
+
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
 INSERT INTO admin_groups VALUES (2,'Customer Service');

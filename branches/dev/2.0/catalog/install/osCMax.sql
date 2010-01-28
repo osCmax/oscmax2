@@ -1713,7 +1713,8 @@ INSERT INTO `configuration` VALUES(1484, 'Remove all non-alphanumeric characters
 INSERT INTO `configuration` VALUES(1485, 'Reset SEO URLs Cache', 'SEO_URLS_CACHE_RESET', 'false', 'This will reset the cache data for SEO', 60, 17, '2009-02-25 22:57:59', '2009-02-25 22:57:59', 'tep_reset_cache_data_seo_urls', 'tep_cfg_select_option(array(''reset'', ''false''),');
 INSERT INTO `configuration` VALUES(1486, 'Enable Seo URL validation?', 'FWR_VALIDATION_ON', 'false', 'Enable the SEO URL validation?', 60, 16, NULL, '2009-02-25 22:57:25', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (1073,'Move tax to total amount','MOVE_TAX_TO_TOTAL_AMOUNT','True','Do you want to move the tax to the total amount? If true PayPal will allways show the total amount including tax. (needs Aggregate i.s.o. Per Item to function)',6,4,NULL,now(),NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), ');
-INSERT INTO configuration VALUES (498,'Purchase Without Account','PWA_ON','true','Allow Customers to purchase without an account',40,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+#Bugfix 327:Removed duplicate PWA settings
+#INSERT INTO configuration VALUES (498,'Purchase Without Account','PWA_ON','true','Allow Customers to purchase without an account',40,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 # New RC4 entires
 INSERT INTO configuration VALUES (1202,'Admin Editor Default Width','HTML_AREA_WYSIWYG_EDITOR_WIDTH','700','How WIDE should the HTMLAREA be in pixels (default: 550)',25,66,NULL,now(),NULL,'');
@@ -1793,7 +1794,8 @@ INSERT INTO configuration_group VALUES (16,'Site Maintenance','Site Maintenance 
 INSERT INTO configuration_group VALUES (25,'WYSIWYG Editor','HTMLArea Options',15,1);
 INSERT INTO configuration_group VALUES (30,'Printable Catalog','Options for Printable Catalog',30,1);
 INSERT INTO configuration_group VALUES (35,'Affiliate Program','Options for the Affiliate Program',50,1);
-INSERT INTO configuration_group VALUES (40,'Accounts','Configuration of Account settings',40,1);
+#Bugfix 327: Removed duplicate PWA settings
+#INSERT INTO configuration_group VALUES (40,'Accounts','Configuration of Account settings',40,1);
 INSERT INTO configuration_group VALUES (45,'Dynamic MoPics','The options which configure Dynamic MoPics.',45,1);
 INSERT INTO configuration_group VALUES (50,'Product Information','Product Information page configuration options',8,1);
 INSERT INTO configuration_group VALUES (55,'Page Cache Settings','Settings for the page cache contribution', 20,1);

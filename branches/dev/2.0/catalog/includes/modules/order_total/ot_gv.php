@@ -170,7 +170,7 @@ function mod_process() {
           }
         } else {
          // GV_QUEUE is true - so queue the gv for release by store owner
-          $gv_insert=tep_db_query("insert into " . TABLE_COUPON_GV_QUEUE . " (customer_id, order_id, amount, date_created, ipaddr) values ('" . $customer_id . "', '" . $insert_id . "', '" . $gv_order_amount . "', NOW(), '" . $REMOTE_ADDR . "')");
+          $gv_insert=tep_db_query("insert into " . TABLE_COUPON_GV_QUEUE . " (customer_id, order_id, amount, date_created, ipaddr) values ('" . $customer_id . "', '" . $order_id . "', '" . $gv_order_amount . "', NOW(), '" . $REMOTE_ADDR . "')");
         }
       }
     }

@@ -87,7 +87,6 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_AFFILIATE_PASSWORD', 'affiliate_password.php');
   define('FILENAME_AFFILIATE_PASSWORD_FORGOTTEN', 'affiliate_password_forgotten.php');
 
-  define('FILENAME_AFFILIATE_LOGOUT', 'affiliate_logout.php');
   define('FILENAME_AFFILIATE_SALES', 'affiliate_sales.php');
   define('FILENAME_AFFILIATE_SIGNUP', 'affiliate_signup.php');
 

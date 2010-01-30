@@ -4,7 +4,6 @@
   define('FILENAME_GV_REDEEM_PROCESS', 'gv_redeem_process.php');
   define('FILENAME_GV_SEND', 'gv_send.php');
   define('FILENAME_GV_SEND_PROCESS', 'gv_send_process.php');
-  define('FILENAME_PRODUCT_LISTING_COL', 'product_listing_col.php');
   define('FILENAME_POPUP_COUPON_HELP', 'popup_coupon_help.php');
 
   define('TABLE_COUPON_GV_CUSTOMER', 'coupon_gv_customer');

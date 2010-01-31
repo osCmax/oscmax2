@@ -17,6 +17,7 @@ $Id: reports.php 2009-11-14 19:38:07Z user $
   $contents = (					   tep_admin_jqmenu(FILENAME_STATS_PRODUCTS_VIEWED, BOX_REPORTS_PRODUCTS_VIEWED) .
                                    tep_admin_jqmenu(FILENAME_STATS_PRODUCTS_PURCHASED, BOX_REPORTS_PRODUCTS_PURCHASED) .
                                    tep_admin_jqmenu(FILENAME_STATS_CUSTOMERS, BOX_REPORTS_ORDERS_TOTAL) .
+								   tep_admin_jqmenu(FILENAME_STATS_REGISTER_CUSTOMER_NO_PURCHASE, BOX_REPORTS_STATS_REGISTER_CUSTOMER_NO_PURCHASE) .
                                    tep_admin_jqmenu(FILENAME_STATS_MONTHLY_SALES, BOX_REPORTS_MONTHLY_SALES) .
                                    tep_admin_jqmenu(FILENAME_STATS_RECOVER_CART_SALES, BOX_REPORTS_RECOVER_CART_SALES) .
 								   tep_admin_jqmenu(FILENAME_SHIPPING_MANIFEST, BOX_SHIPPING_MANIFEST) .

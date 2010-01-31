@@ -462,10 +462,14 @@ define('BOX_SHIPPING_MANIFEST','Fedx Shipping Manifest');
 // EOF: MOD - FedEx
 
 // BOF: PHONE ORDER
-  define('BOX_PHONE_ORDER', 'Phone Order');
+define('BOX_PHONE_ORDER', 'Phone Order');
 // EOF: PHONE ORDER
 
 // BOF: EXPORT CUSTOMERS TO CSV
-  define('BOX_CUSTOMERS_EXPORT', 'Export Customers');
+define('BOX_CUSTOMERS_EXPORT', 'Export Customers');
 // EOF: EXPORT CUSTOMERS TO CSV
+
+// BOF: Customers with purchases report
+define('BOX_REPORTS_STATS_REGISTER_CUSTOMER_NO_PURCHASE', 'No purchases report');
+// EOF: Customers with purchases report
 ?>

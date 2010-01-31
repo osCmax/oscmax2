@@ -34,7 +34,7 @@ $Id: column_left.php 3 2006-05-27 04:59:07Z user $
     $column['cfgtitle'] = str_replace(' ', '_', $column['cfgtitle']);
     $column['cfgtitle'] = str_replace("'", '', $column['cfgtitle']);
 
-    if ( ($column[cfgvalue] == 'yes') && ($column[cfgcol] == 'left')) {
+    if ( ($column['cfgvalue'] == 'yes') && ($column['cfgcol'] == 'left')) {
       define($column['cfgkey'],$column['box_heading']);
 
       if ( file_exists(DIR_WS_BOXES . $column['cfgtitle'] . '.php') ) {

@@ -17,6 +17,8 @@ $Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
+// LINE ADDED: MOD - Added for Dynamic MoPics v3.000
+  require(DIR_WS_FUNCTIONS . 'dynamic_mopics.php');
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot();
     tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));

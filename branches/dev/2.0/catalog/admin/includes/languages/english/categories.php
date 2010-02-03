@@ -19,7 +19,7 @@ define('TABLE_HEADING_CATEGORIES_PRODUCTS', 'Categories / Products');
 define('TABLE_HEADING_ACTION', 'Action');
 define('TABLE_HEADING_STATUS', 'Status');
 
-define('TEXT_NEW_PRODUCT', 'New Product in &quot;%s&quot;');
+define('TEXT_NEW_PRODUCT', 'Add/Edit Product in &quot;%s&quot;');
 define('TEXT_CATEGORIES', 'Categories:');
 define('TEXT_SUBCATEGORIES', 'Subcategories:');
 define('TEXT_PRODUCTS', 'Products:');

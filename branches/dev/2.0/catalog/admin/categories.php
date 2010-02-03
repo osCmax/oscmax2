@@ -820,21 +820,19 @@ function updateNet() {
         <td><table border="0" cellspacing="0" cellpadding="2">
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_STATUS; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE; ?></td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_DATE_AVAILABLE; ?><br><small>(YYYY-MM-DD)</small></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;'; ?><script language="javascript">dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script></td>
+            <td class="main" colspan="2">
+            <?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE .
+            tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_DATE_AVAILABLE . '&nbsp;<small>(YYYY-MM-DD)</small>&nbsp;'; ?>
+            <script language="javascript">dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_MANUFACTURER; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, $pInfo->manufacturers_id); ?></td>
+            <td class="main" colspan="2">
+            <?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, $pInfo->manufacturers_id) .
+            tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_MODEL . '&nbsp;&nbsp;' . tep_draw_input_field('products_model', $pInfo->products_model); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -859,30 +857,13 @@ function updateNet() {
           </tr>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price', $pInfo->products_price, 'onKeyUp="updateGross()"'); ?></td>
-          </tr>
-          <tr bgcolor="#ebebff">
-            <td class="main"><?php echo TEXT_PRODUCTS_PRICE_GROSS; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'OnKeyUp="updateNet()"'); ?></td>
-          </tr>
-          <!-- AJAX Attribute Manager  -->
-          <tr>
-          	<td colspan="2"><?php require_once( 'attributeManager/includes/attributeManagerPlaceHolder.inc.php' )?></td>
-          </tr>
-          <!-- AJAX Attribute Manager end -->
-
-<?php // EOF: MOD - indvship ?>
-          <tr>
-            <td class="main"><?php echo 'Indv. Shipping Price:'; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_ship_price', $pInfo->products_ship_price); ?></td>
-          </tr>
-<?php // EOF: MOD - indvship ?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+            <td class="main" colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price', $pInfo->products_price, 'onKeyUp="updateGross()"') .
+            tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_PRICE_GROSS . '&nbsp;' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'OnKeyUp="updateNet()"'); ?></td>
           </tr>
 <script language="javascript"><!--
 updateGross();
 //--></script>
+
 <?php
 // BOF: MOD - Separate Pricing Per Customer
     $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id != '0' order by customers_group_id");
@@ -897,11 +878,9 @@ updateGross();
  if (!$header) { ?>
 
     <tr bgcolor="#ebebff">
-    <td class="main" colspan="2" style="font-style: italic">Note that if a field is left empty, no price for that customer group will be inserted in the database.<br />
-If a field is filled, but the checkbox is unchecked no price will be inserted either.<br />
-If a price is already inserted in the database, but the checkbox unchecked it will be removed from the database.
+    <td class="main" colspan="2" style="font-style: italic"><?php echo TEXT_SPPC_HELP; ?>
 <?php if (isset($pInfo->sppcoption[$customers_group['customers_group_id']])) { // when a preview was done and the back button used
-print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</strong>\n");
+print (TEXT_SPPC_WARNING);
 } ?>
 </td>
     </tr>
@@ -932,8 +911,16 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+<!-- EOF: MOD - Separate Pricing Per Customer  -->
+          <!-- AJAX Attribute Manager  -->
+          <tr>
+          	<td colspan="2"><?php require_once( 'attributeManager/includes/attributeManagerPlaceHolder.inc.php' )?></td>
+          </tr>
+          <!-- AJAX Attribute Manager end -->
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
 <?php
-// EOF: MOD - Separate Pricing Per Customer
     for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
 ?>
           <tr>
@@ -981,15 +968,11 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_MODEL; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_model', $pInfo->products_model); ?></td>
-          </tr>
-          <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
 <!-- image directory -->
           <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_IMAGE_DIRECTORY; ?></td>
+            <td class="main" bgcolor="#DDDDDD"><?php echo TEXT_PRODUCTS_IMAGE_DIRECTORY; ?></td>
 						<?php // place allowed sub-dirs in array, non-recursive
 						$dir_array = array();
 						if ($handle = opendir($root_images_dir)) {
@@ -1007,16 +990,16 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
 					   $drop_array[] = array('id' => $img_dir, 'text' => $img_dir);
 					 }
  ?>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('directory', $drop_array) . '&nbsp;&nbsp;' . TEXT_PRODUCTS_IMAGE_NEW_FOLDER . tep_draw_input_field('new_directory'); ?></td>
+            <td class="main" bgcolor="#DDDDDD"><?php echo tep_draw_separator('pixel_trans.gif', '25', '15') . tep_draw_pull_down_menu('directory', $drop_array) . tep_draw_separator('pixel_trans.gif', '25', '15') . TEXT_PRODUCTS_IMAGE_NEW_FOLDER . tep_draw_separator('pixel_trans.gif', '20', '15') . tep_draw_input_field('new_directory'); ?></td>
           </tr>
           <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+            <td colspan="2" bgcolor="#DDDDDD"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
 <!-- eof image directory -->
           <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_IMAGE; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_file_field('products_image') . '<br>' . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $pInfo->products_image . tep_draw_hidden_field('products_previous_image', $pInfo->products_image); ?></td>
-          </tr>
+            <td class="main" bgcolor="#DDDDDD"><?php echo TEXT_PRODUCTS_IMAGE; ?></td>
+            <td class="main" bgcolor="#DDDDDD"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_file_field('products_image') . '&nbsp;' . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $pInfo->products_image . tep_draw_hidden_field('products_previous_image', $pInfo->products_image); ?></td>
+          </tr>         
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
@@ -1041,6 +1024,12 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+<?php // EOF: MOD - indvship ?>
+          <tr bgcolor="#ebebff">
+            <td class="main"><?php echo 'Indv. Shipping Price:'; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_ship_price', $pInfo->products_ship_price); ?></td>
+          </tr>
+<?php // EOF: MOD - indvship ?>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_SHIPPING_DIMENSIONS; ?></td>
             <td class="main" colspan="2">
@@ -1048,7 +1037,7 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
             tep_draw_separator('pixel_trans.gif', '18', '18') . TEXT_PRODUCTS_WIDTH .  '&nbsp;&nbsp;' . tep_draw_input_field('products_width', $pInfo->products_width) .
             tep_draw_separator('pixel_trans.gif', '18', '18') . TEXT_PRODUCTS_HEIGHT .  '&nbsp;&nbsp;' . tep_draw_input_field('products_height', $pInfo->products_height); ?></td>
           </tr>
-          <tr>
+          <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_READY_TO_SHIP; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_checkbox_field('products_ready_to_ship', '1', (($product['products_ready_to_ship'] == '1') ? true : false)); ?></td>
           </tr>

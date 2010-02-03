@@ -19,7 +19,7 @@ define('TABLE_HEADING_CATEGORIES_PRODUCTS', 'Categories / Products');
 define('TABLE_HEADING_ACTION', 'Action');
 define('TABLE_HEADING_STATUS', 'Status');
 
-define('TEXT_NEW_PRODUCT', 'Add/Edit Product in &quot;%s&quot;');
+define('TEXT_NEW_PRODUCT', 'New Product in &quot;%s&quot;');
 define('TEXT_CATEGORIES', 'Categories:');
 define('TEXT_SUBCATEGORIES', 'Subcategories:');
 define('TEXT_PRODUCTS', 'Products:');
@@ -113,4 +113,9 @@ define('TEXT_PRODUCTS_MOPICS', 'Extra Image:');
 define('TEXT_MOPICS_WARNING', 'Select Image Directory above PRIOR to uploading');
 
 define('TEXT_SHIPPING_DIMENSIONS', 'Shipping Dimensions');
+
+define('TEXT_SPPC_HELP', '<hr />Group Pricing:<br />If a field is left empty, no price for that customer group will be inserted in the database.<br />
+If a field is filled, but the checkbox is unchecked no price will be inserted either.<br />
+If a price is already inserted in the database, but the checkbox unchecked it will be removed from the database.');
+define('TEXT_SPPC_WARNING', '<br /><strong>Make sure you uncheck the appropriate boxes again!</strong><br />');
 ?>

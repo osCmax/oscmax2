@@ -14,8 +14,9 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
   define('PAGE_PARSE_START_TIME', microtime());
 
 // Set the level of error reporting
-  error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
-
+//  error_reporting(E_ALL);
+  error_reporting(E_ALL & ~E_NOTICE & ~'E_DEPRECATED');
+  
 // check support for register_globals
   if (function_exists('ini_get') && (ini_get('register_globals') == false) && (PHP_VERSION < 4.3) ) {
     exit('Server Requirement Error: register_globals is disabled in your PHP configuration. This can be enabled in your php.ini configuration file or in the .htaccess file in your catalog directory. Please use PHP 4.3+ if register_globals cannot be enabled on the server.');
@@ -218,9 +219,6 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
   }
 // EOF: MOD - Admin w/access levels
 
-// LINE ADDED: MOD - OSC-AFFILIATE
-  require('includes/affiliate_application_top.php');
-
 // LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
   require(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
   
@@ -246,4 +244,7 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
 // BOF: FedEx Labels
   define('DIR_WS_FEDEX_LABELS', DIR_WS_IMAGES . 'fedex/');
 // EOF: FedEx Labels
+
+// Include OSC-AFFILIATE
+  require(DIR_WS_INCLUDES . 'affiliate_application_top.php');
 ?>

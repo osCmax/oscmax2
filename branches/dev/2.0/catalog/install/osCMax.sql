@@ -84,116 +84,118 @@ CREATE TABLE admin_groups (
 
 DROP TABLE IF EXISTS affiliate_affiliate;
 CREATE TABLE affiliate_affiliate (
-  affiliate_id int NOT NULL auto_increment,
-  affiliate_gender char(1) NOT NULL,
-  affiliate_firstname varchar(32) NOT NULL,
-  affiliate_lastname varchar(32) NOT NULL,
-  affiliate_dob datetime NOT NULL,
-  affiliate_email_address varchar(96) NOT NULL,
-  affiliate_telephone varchar(32) NOT NULL,
-  affiliate_fax varchar(32) NOT NULL,
-  affiliate_password varchar(40) NOT NULL,
-  affiliate_homepage varchar(96) NOT NULL,
-  affiliate_street_address varchar(64) NOT NULL,
-  affiliate_suburb varchar(64) NOT NULL,
-  affiliate_city varchar(32) NOT NULL,
-  affiliate_postcode varchar(10) NOT NULL,
-  affiliate_state varchar(32) NOT NULL,
-  affiliate_country_id int NOT NULL default '0',
-  affiliate_zone_id int NOT NULL default '0',
+  affiliate_id int(11) NOT NULL auto_increment,
+  affiliate_gender char(1) NOT NULL default '',
+  affiliate_firstname varchar(32) NOT NULL default '',
+  affiliate_lastname varchar(32) NOT NULL default '',
+  affiliate_dob datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_email_address varchar(96) NOT NULL default '',
+  affiliate_telephone varchar(32) NOT NULL default '',
+  affiliate_fax varchar(32) NOT NULL default '',
+  affiliate_password varchar(40) NOT NULL default '',
+  affiliate_homepage varchar(96) NOT NULL default '',
+  affiliate_street_address varchar(64) NOT NULL default '',
+  affiliate_suburb varchar(64) NOT NULL default '',
+  affiliate_city varchar(32) NOT NULL default '',
+  affiliate_postcode varchar(10) NOT NULL default '',
+  affiliate_state varchar(32) NOT NULL default '',
+  affiliate_country_id int(11) NOT NULL default '0',
+  affiliate_zone_id int(11) NOT NULL default '0',
   affiliate_agb tinyint(4) NOT NULL default '0',
-  affiliate_company varchar(60) NOT NULL,
-  affiliate_company_taxid varchar(64) NOT NULL,
-  affiliate_commission_percent decimal(4,2) NOT NULL default '0.00',
-  affiliate_payment_check varchar(100) NOT NULL,
-  affiliate_payment_paypal varchar(64) NOT NULL,
-  affiliate_payment_bank_name varchar(64) NOT NULL,
-  affiliate_payment_bank_branch_number varchar(64) NOT NULL,
-  affiliate_payment_bank_swift_code varchar(64) NOT NULL,
-  affiliate_payment_bank_account_name varchar(64) NOT NULL,
-  affiliate_payment_bank_account_number varchar(64) NOT NULL,
+  affiliate_company varchar(60) NOT NULL default '',
+  affiliate_company_taxid varchar(64) NOT NULL default '',
+  affiliate_commission_percent DECIMAL(4,2) NOT NULL default '0.00',
+  affiliate_payment_check varchar(100) NOT NULL default '',
+  affiliate_payment_paypal varchar(64) NOT NULL default '',
+  affiliate_payment_bank_name varchar(64) NOT NULL default '',
+  affiliate_payment_bank_branch_number varchar(64) NOT NULL default '',
+  affiliate_payment_bank_swift_code varchar(64) NOT NULL default '',
+  affiliate_payment_bank_account_name varchar(64) NOT NULL default '',
+  affiliate_payment_bank_account_number varchar(64) NOT NULL default '',
   affiliate_date_of_last_logon datetime NOT NULL default '0000-00-00 00:00:00',
-  affiliate_number_of_logons int NOT NULL default '0',
+  affiliate_number_of_logons int(11) NOT NULL default '0',
   affiliate_date_account_created datetime NOT NULL default '0000-00-00 00:00:00',
   affiliate_date_account_last_modified datetime NOT NULL default '0000-00-00 00:00:00',
-  affiliate_lft int NOT NULL,
-  affiliate_rgt int NOT NULL,
-  affiliate_root int NOT NULL,
+  affiliate_lft int(11) NOT NULL,
+  affiliate_rgt int(11) NOT NULL,
+  affiliate_root int(11) NOT NULL,
   affiliate_newsletter char(1) NOT NULL default '1',
   PRIMARY KEY (affiliate_id)
 );
 
 DROP TABLE IF EXISTS affiliate_banners;
 CREATE TABLE affiliate_banners (
-  affiliate_banners_id int NOT NULL auto_increment,
-  affiliate_banners_title varchar(64) NOT NULL,
-  affiliate_products_id int NOT NULL default '0',
-  affiliate_category_id int NOT NULL default '0',
-  affiliate_banners_image varchar(64) NOT NULL,
-  affiliate_banners_group varchar(10) NOT NULL,
-  affiliate_banners_html_text text,
-  affiliate_expires_impressions int(7) default '0',
-  affiliate_expires_date datetime default NULL,
-  affiliate_date_scheduled datetime default NULL,
-  affiliate_date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  affiliate_date_status_change datetime default NULL,
-  affiliate_status int(1) NOT NULL default '1',
-  PRIMARY KEY (affiliate_banners_id)
+affiliate_banners_id int(11) NOT NULL auto_increment,
+affiliate_banners_title varchar(64) NOT NULL default '',
+affiliate_products_id int(11) NOT NULL default '0',
+affiliate_category_id int(11) NOT NULL default '0',
+affiliate_banners_image varchar(64) NOT NULL default '',
+affiliate_banners_group varchar(10) NOT NULL default '',
+affiliate_banners_html_text text,
+affiliate_expires_impressions int(7) default '0',
+affiliate_expires_date datetime default NULL,
+affiliate_date_scheduled datetime default NULL,
+affiliate_date_added datetime NOT NULL default '0000-00-00 00:00:00',
+affiliate_date_status_change datetime default NULL,
+affiliate_status int(1) NOT NULL default '1',
+PRIMARY KEY (affiliate_banners_id)
 );
 
 DROP TABLE IF EXISTS affiliate_banners_history;
 CREATE TABLE affiliate_banners_history (
-  affiliate_banners_history_id int NOT NULL auto_increment,
-  affiliate_banners_products_id int NOT NULL default '0',
-  affiliate_banners_id int NOT NULL default '0',
-  affiliate_banners_affiliate_id int NOT NULL default '0',
-  affiliate_banners_shown int NOT NULL default '0',
+  affiliate_banners_history_id int(11) NOT NULL auto_increment,
+  affiliate_banners_products_id int(11) NOT NULL default '0',
+  affiliate_banners_id int(11) NOT NULL default '0',
+  affiliate_banners_affiliate_id int(11) NOT NULL default '0',
+  affiliate_banners_shown int(11) NOT NULL default '0',
   affiliate_banners_clicks tinyint(4) NOT NULL default '0',
   affiliate_banners_history_date date NOT NULL default '0000-00-00',
-  PRIMARY KEY (affiliate_banners_history_id, affiliate_banners_products_id)
+  PRIMARY KEY  (affiliate_banners_history_id,affiliate_banners_products_id)
 );
 
 DROP TABLE IF EXISTS affiliate_clickthroughs;
 CREATE TABLE affiliate_clickthroughs (
-  affiliate_clickthrough_id int NOT NULL auto_increment,
-  affiliate_id int NOT NULL default '0',
+  affiliate_clickthrough_id int(11) NOT NULL auto_increment,
+  affiliate_id int(11) NOT NULL default '0',
   affiliate_clientdate datetime NOT NULL default '0000-00-00 00:00:00',
   affiliate_clientbrowser varchar(200) default 'Could Not Find This Data',
   affiliate_clientip varchar(50) default 'Could Not Find This Data',
   affiliate_clientreferer varchar(200) default 'none detected (maybe a direct link)',
-  affiliate_products_id int default '0',
-  affiliate_banner_id int NOT NULL default '0',
-  PRIMARY KEY (affiliate_clickthrough_id),
+  affiliate_products_id int(11) default '0',
+  affiliate_banner_id int(11) NOT NULL default '0',
+  PRIMARY KEY  (affiliate_clickthrough_id),
   KEY refid (affiliate_id)
 );
 
 DROP TABLE IF EXISTS affiliate_news;
 CREATE TABLE affiliate_news (
-  news_id int NOT NULL auto_increment,
+  news_id int(11) NOT NULL auto_increment,
+  headline varchar(255) NOT NULL default '',
+  content text NOT NULL,
   date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  news_status tinyint(1) NOT NULL default '0',
-  PRIMARY KEY  (news_id)
+  STATUS tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`news_id`)
 );
 
 DROP TABLE IF EXISTS affiliate_newsletters;
 CREATE TABLE affiliate_newsletters (
-  affiliate_newsletters_id int NOT NULL auto_increment,
+  affiliate_newsletters_id int(11) NOT NULL auto_increment,
   title varchar(255) NOT NULL,
   content text NOT NULL,
   module varchar(255) NOT NULL,
   date_added datetime NOT NULL default '0000-00-00 00:00:00',
   date_sent datetime default NULL,
-  `status` int(1) default NULL,
+  status int(1) default NULL,
   locked int(1) default '0',
   PRIMARY KEY  (affiliate_newsletters_id)
 );
 
 DROP TABLE IF EXISTS affiliate_news_contents;
 CREATE TABLE affiliate_news_contents (
-  affiliate_news_contents_id int NOT NULL auto_increment,
-  affiliate_news_id int NOT NULL default '0',
-  affiliate_news_languages_id int NOT NULL default '0',
-  affiliate_news_headlines varchar(255) NOT NULL,
+  affiliate_news_contents_id int(11) NOT NULL auto_increment,
+  affiliate_news_id int(11) NOT NULL default '0',
+  affiliate_news_languages_id int(11) NOT NULL default '0',
+  affiliate_news_headlines varchar(255) NOT NULL default '',
   affiliate_news_contents text NOT NULL,
   PRIMARY KEY  (affiliate_news_contents_id),
   KEY affiliate_news_id (affiliate_news_id),
@@ -202,65 +204,65 @@ CREATE TABLE affiliate_news_contents (
 
 DROP TABLE IF EXISTS affiliate_payment;
 CREATE TABLE affiliate_payment (
-  affiliate_payment_id int NOT NULL auto_increment,
-  affiliate_id int NOT NULL default '0',
+  affiliate_payment_id int(11) NOT NULL auto_increment,
+  affiliate_id int(11) NOT NULL default '0',
   affiliate_payment decimal(15,2) NOT NULL default '0.00',
   affiliate_payment_tax decimal(15,2) NOT NULL default '0.00',
   affiliate_payment_total decimal(15,2) NOT NULL default '0.00',
   affiliate_payment_date datetime NOT NULL default '0000-00-00 00:00:00',
   affiliate_payment_last_modified datetime NOT NULL default '0000-00-00 00:00:00',
   affiliate_payment_status int(5) NOT NULL default '0',
-  affiliate_firstname varchar(32) NOT NULL,
-  affiliate_lastname varchar(32) NOT NULL,
-  affiliate_street_address varchar(64) NOT NULL,
-  affiliate_suburb varchar(64) NOT NULL,
-  affiliate_city varchar(32) NOT NULL,
-  affiliate_postcode varchar(10) NOT NULL,
+  affiliate_firstname varchar(32) NOT NULL default '',
+  affiliate_lastname varchar(32) NOT NULL default '',
+  affiliate_street_address varchar(64) NOT NULL default '',
+  affiliate_suburb varchar(64) NOT NULL default '',
+  affiliate_city varchar(32) NOT NULL default '',
+  affiliate_postcode varchar(10) NOT NULL default '',
   affiliate_country varchar(32) NOT NULL default '0',
-  affiliate_company varchar(60) NOT NULL,
+  affiliate_company varchar(60) NOT NULL default '',
   affiliate_state varchar(32) NOT NULL default '0',
   affiliate_address_format_id int(5) NOT NULL default '0',
   affiliate_last_modified datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY (affiliate_payment_id)
+  PRIMARY KEY  (affiliate_payment_id)
 );
 
 
 DROP TABLE IF EXISTS affiliate_payment_status;
 CREATE TABLE affiliate_payment_status (
-  affiliate_payment_status_id int NOT NULL default '0',
-  affiliate_language_id int NOT NULL default '1',
-  affiliate_payment_status_name varchar(32) NOT NULL,
-  PRIMARY KEY (affiliate_payment_status_id,affiliate_language_id),
+  affiliate_payment_status_id int(11) NOT NULL default '0',
+  affiliate_language_id int(11) NOT NULL default '1',
+  affiliate_payment_status_name varchar(32) NOT NULL default '',
+  PRIMARY KEY  (affiliate_payment_status_id,affiliate_language_id),
   KEY idx_affiliate_payment_status_name (affiliate_payment_status_name)
 );
 
 
 DROP TABLE IF EXISTS affiliate_payment_status_history;
 CREATE TABLE affiliate_payment_status_history (
-  affiliate_status_history_id int NOT NULL auto_increment,
-  affiliate_payment_id int NOT NULL default '0',
+  affiliate_status_history_id int(11) NOT NULL auto_increment,
+  affiliate_payment_id int(11) NOT NULL default '0',
   affiliate_new_value int(5) NOT NULL default '0',
   affiliate_old_value int(5) default NULL,
   affiliate_date_added datetime NOT NULL default '0000-00-00 00:00:00',
   affiliate_notified int(1) default '0',
-  PRIMARY KEY (affiliate_status_history_id)
+  PRIMARY KEY  (affiliate_status_history_id)
 );
 
 DROP TABLE IF EXISTS affiliate_sales;
 CREATE TABLE affiliate_sales (
-  affiliate_id int NOT NULL default '0',
+  affiliate_id int(11) NOT NULL default '0',
   affiliate_date datetime NOT NULL default '0000-00-00 00:00:00',
-  affiliate_browser varchar(100) NOT NULL,
-  affiliate_ipaddress varchar(20) NOT NULL,
-  affiliate_orders_id int NOT NULL default '0',
+  affiliate_browser varchar(100) NOT NULL default '',
+  affiliate_ipaddress varchar(20) NOT NULL default '',
+  affiliate_orders_id int(11) NOT NULL default '0',
   affiliate_value decimal(15,2) NOT NULL default '0.00',
   affiliate_payment decimal(15,2) NOT NULL default '0.00',
-  affiliate_clickthroughs_id int NOT NULL default '0',
+  affiliate_clickthroughs_id int(11) NOT NULL default '0',
   affiliate_billing_status int(5) NOT NULL default '0',
-  affiliate_payment_date datetime NOT NULL,
-  affiliate_payment_id int NOT NULL default '0',
+  affiliate_payment_date datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_payment_id int(11) NOT NULL default '0',
   affiliate_percent decimal(4,2) NOT NULL default '0.00',
-  affiliate_salesman int NOT NULL default '0',
+  affiliate_salesman int(11) NOT NULL default '0',
   PRIMARY KEY (affiliate_orders_id,affiliate_id)
 );
 
@@ -464,6 +466,7 @@ CREATE TABLE countries (
   countries_iso_code_2 char(2) NOT NULL,
   countries_iso_code_3 char(3) NOT NULL,
   address_format_id int NOT NULL,
+  active tinyint(3) unsigned DEFAULT '0',
   PRIMARY KEY (countries_id),
   KEY IDX_COUNTRIES_NAME (countries_name)
 );

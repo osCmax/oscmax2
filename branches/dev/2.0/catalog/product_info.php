@@ -25,7 +25,7 @@ $Id: product_info.php 3 2006-05-27 04:59:07Z user $
   $product_check = tep_db_fetch_array($product_check_query);
 
   $content = CONTENT_PRODUCT_INFO;
-  $javascript = 'popup_window.js';
+  $javascript = $content . '.js.php';
 
   
 

@@ -1,16 +1,4 @@
-<?php
-/*
-$Id: form_check.js.php 3 2006-05-27 04:59:07Z user $
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
-
-  Released under the GNU General Public License
-*/
-?>
-<script language="javascript"><!--
+<script language="javascript" type="text/javascript"><!--
 var form = "";
 var submitted = false;
 var error = false;
@@ -20,7 +8,8 @@ function check_input(field_name, field_size, message) {
   if (form.elements[field_name] && (form.elements[field_name].type != "hidden")) {
     var field_value = form.elements[field_name].value;
 
-    if (field_value.length < field_size) {
+// LINE MOD: added 'field_size >0 &&'
+    if ((field_size > 0 && field_value == '') || field_value.length < field_size) {
       error_message = error_message + "* " + message + "\n";
       error = true;
     }
@@ -63,7 +52,7 @@ function check_password(field_name_1, field_name_2, field_size, message_1, messa
     var password = form.elements[field_name_1].value;
     var confirmation = form.elements[field_name_2].value;
 
-    if (password.length < field_size) {
+    if (password == '' || password.length < field_size) {
       error_message = error_message + "* " + message_1 + "\n";
       error = true;
     } else if (password != confirmation) {
@@ -79,10 +68,10 @@ function check_password_new(field_name_1, field_name_2, field_name_3, field_size
     var password_new = form.elements[field_name_2].value;
     var password_confirmation = form.elements[field_name_3].value;
 
-    if (password_current.length < field_size) {
+    if (password_current == '' || password_current.length < field_size) {
       error_message = error_message + "* " + message_1 + "\n";
       error = true;
-    } else if (password_new.length < field_size) {
+    } else if (password_new == '' || password_new.length < field_size) {
       error_message = error_message + "* " + message_2 + "\n";
       error = true;
     } else if (password_new != password_confirmation) {
@@ -120,15 +109,8 @@ function check_form(form_name) {
 
   check_input("telephone", <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>, "<?php echo ENTRY_TELEPHONE_NUMBER_ERROR; ?>");
 
-<?php
-// PWA BOF
-  if (!isset($HTTP_GET_VARS['guest'])) {
-?>
   check_password("password", "confirmation", <?php echo ENTRY_PASSWORD_MIN_LENGTH; ?>, "<?php echo ENTRY_PASSWORD_ERROR; ?>", "<?php echo ENTRY_PASSWORD_ERROR_NOT_MATCHING; ?>");
   check_password_new("password_current", "password_new", "password_confirmation", <?php echo ENTRY_PASSWORD_MIN_LENGTH; ?>, "<?php echo ENTRY_PASSWORD_ERROR; ?>", "<?php echo ENTRY_PASSWORD_NEW_ERROR; ?>", "<?php echo ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING; ?>");
-<?php
-  } // PWA EOF
-?>
 
   if (error == true) {
     alert(error_message);
@@ -137,5 +119,66 @@ function check_form(form_name) {
     submitted = true;
     return true;
   }
+}
+//--></script>
+
+<script language="javascript" type="text/javascript"><!--
+function getObject(name) { 
+   var ns4 = (document.layers) ? true : false; 
+   var w3c = (document.getElementById) ? true : false; 
+   var ie4 = (document.all) ? true : false; 
+
+   if (ns4) return eval('document.' + name); 
+   if (w3c) return document.getElementById(name); 
+   if (ie4) return eval('document.all.' + name); 
+   return false; 
+}
+
+//Gets the browser specific XmlHttpRequest Object
+function getXmlHttpRequestObject() {
+	if (window.XMLHttpRequest) {
+		return new XMLHttpRequest();
+	} else if(window.ActiveXObject) {
+		return new ActiveXObject("Microsoft.XMLHTTP");
+	} else {
+		alert("Your browser does not support this feature.  Please upgrade or use a different browser. Older (pre-v2.8) versions of Order Editor do not have this restriction.");
+	}
+}
+
+//Our XmlHttpRequest object to get the auto suggest
+var request = getXmlHttpRequestObject();
+/***************************************************
+ GET STATES FUNCTIONS 
+ ***************************************************/
+function getStates(countryID, div_element) {
+	if (request.readyState == 4 || request.readyState == 0) {
+		// indicator make visible here..
+		getObject("indicator").style.visibility = 'visible';
+		var contentType = "application/x-www-form-urlencoded; charset=UTF-8";
+		var fields = "action=getStates&country="+countryID;
+					
+		request.open("POST", 'create_account.php', true);
+		//request.onreadystatechange = getStatesRequest;
+		request.onreadystatechange = function() {
+			getStatesRequest(request, div_element);
+		};
+		
+		request.setRequestHeader("Content-Type", contentType);		
+		request.send(fields);
+	}
+}										
+//Called when the AJAX response is returned.
+function getStatesRequest(request, div_element) {
+	if (request.readyState == 4) {
+		var obj_div = getObject(div_element);
+		// make hidden
+		getObject('indicator').style.visibility = 'hidden';
+	  obj_div.innerHTML = request.responseText;
+		
+		for (i=0; i<obj_div.childNodes.length; i++){
+			if (obj_div.childNodes[i].nodeName=="SELECT")
+				obj_div.childNodes[i].focus();
+		}
+	}
 }
 //--></script>

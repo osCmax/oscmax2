@@ -15,7 +15,7 @@
 
 // class constructor
     function paypal_standard() {
-      global $order;
+      global $order, $order_total_modules;
 
       $this->signature = 'paypal|paypal_standard|1.0|2.2';
 

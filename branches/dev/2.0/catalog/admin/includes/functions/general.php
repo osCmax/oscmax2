@@ -833,6 +833,17 @@ function tep_selected_file($filename) {
       return -1;
     }
   }
+////
+// Sets the status of countries
+  function tep_set_active_country($countries_id, $active) {
+    if ($active == '1') {
+      return tep_db_query("update " . TABLE_COUNTRIES . " set active = '1' where countries_id = '" . (int)$countries_id . "'");
+    } elseif ($active == '0') {
+      return tep_db_query("update " . TABLE_COUNTRIES . " set active = '0' where countries_id = '" . (int)$countries_id . "'");
+    } else {
+      return -1;
+    }
+  }
 
 ////
 // Sets the status of a product

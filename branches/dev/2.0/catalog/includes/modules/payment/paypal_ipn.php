@@ -82,6 +82,8 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
 
     function confirmation() {
       global $cartID, $cart_PayPal_IPN_ID, $customer_id, $languages_id, $order, $order_total_modules;
+      // Line Added - osCAffiliate support
+      global $affiliate_ref, $affiliate_clientdate, $affiliate_clientbrowser, $affiliate_clientip, $affiliate_clickthroughs_id, $HTTP_SESSION_VARS;
 
      // if (tep_session_is_registered('cartID')) {
      if (array_key_exists('cartID', $_SESSION)) {
@@ -278,6 +280,8 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
       $confirmation = array('title' => MODULE_PAYMENT_PAYPAL_IPN_TEXT_LAST_CONFIRM, 'fields' => array());
       return $confirmation;
       // EOF Confirmation Info added by AlexStudio
+        // Include OSC-AFFILIATE
+ 	 require(DIR_WS_INCLUDES . 'affiliate_checkout_process.php');     
     }
 
     function process_button() {

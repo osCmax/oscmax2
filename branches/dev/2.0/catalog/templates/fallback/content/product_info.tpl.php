@@ -78,6 +78,8 @@
             <td class="pageHeading" valign="top"><?php echo $products_name; ?></td>
             <td class="pageHeading" align="right" valign="top"><?php echo $products_price; ?></td>
           </tr>
+	  
+	 
         </table></td>
       </tr>
       <tr>
@@ -116,6 +118,7 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
 //++++ QT Pro: Begin Changed code
     if (tep_not_null($product_info['products_image'])) {
 ?>
+
               </td>
             </tr>
           </table>
@@ -157,6 +160,7 @@ if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "q
 		//// END:  Added for Dynamic MoPics v3.000
 ?>
 </center>
+
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
@@ -212,7 +216,16 @@ if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "q
                 <!-- Wish List 3.5 Start -->
                 <td align="center"><?php echo tep_image_submit('button_wishlist.gif', 'Add to Wishlist', 'name="wishlist" value="wishlist"'); ?></td>
                 <!-- Wish List 3.5 End   -->
-                <td class="main" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
+
+                <td class="main" align="right">
+		<?php 
+			if (tep_session_is_registered('affiliate_id')) { 
+				echo  tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART) . '<br><a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_BUILD, 'individual_banner_id=' . $product_info['products_id']) .'" target="_self">' . tep_image('includes/languages/english/images/buttons/button_affiliate_build_a_link.gif', 'Make a link') . ' </a>';
+				 
+	       } else { 
+	       	        echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); 
+			} 
+	       ?></td>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
             </table></td>
@@ -224,6 +237,8 @@ if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "q
       </tr>
       <tr>
         <td>
+	
+	
 <?php
 
 //added for cross -sell

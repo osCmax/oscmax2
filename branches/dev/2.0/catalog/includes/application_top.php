@@ -673,8 +673,6 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
   define('WARN_SESSION_DIRECTORY_NOT_WRITEABLE', 'true');
   define('WARN_SESSION_AUTO_START', 'true');
   define('WARN_DOWNLOAD_DIRECTORY_NOT_READABLE', 'true');
-// LINE ADDED: MOD - OSC-AFFILIATE
-  require(DIR_WS_INCLUDES . 'affiliate_application_top.php');
 // LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
   require(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
 
@@ -712,4 +710,8 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
 // PWA BOF
   if (tep_session_is_registered('customer_id') && tep_session_is_registered('customer_is_guest') && substr(basename($PHP_SELF),0,7)=='account') tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
 // PWA EOF
+
+// LINE ADDED: MOD - OSC-AFFILIATE
+  require(DIR_WS_INCLUDES . 'affiliate_application_top.php');
+
 ?>

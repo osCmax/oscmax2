@@ -67,6 +67,18 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
   if ($messageStack->size > 0) {
     echo $messageStack->output();
   }
+  
+    $languages = tep_get_languages();
+  $languages_array = array();
+  $languages_selected = DEFAULT_LANGUAGE;
+  for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
+    $languages_array[] = array('id' => $languages[$i]['code'],
+                               'text' => $languages[$i]['name']);
+    if ($languages[$i]['directory'] == $language) {
+      $languages_selected = $languages[$i]['code'];
+    }
+  }
+  
 ?>
 <?php
   $my_userid_query = tep_db_query ("select a.admin_id, a.admin_username, g.admin_groups_name from " . TABLE_ADMIN . " a, " . TABLE_ADMIN_GROUPS . " g where a.admin_id= " . $login_id . " and g.admin_groups_id= " . $login_groups_id . "");
@@ -94,20 +106,23 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
 <div id="searchtabs-3" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, '', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
 
 </div>
-</td></tr>
+</td>
+</tr>
 </table>
 
   </td>
   <td class="smalltext" align="right">
+  	<?php echo tep_draw_form('languages', 'index.php', '', 'get'); ?>
+  	<?php echo tep_draw_pull_down_menu('language', $languages_array, $languages_selected, 'onChange="this.form.submit();"'); ?>
+  	<?php echo tep_hide_session_id(); ?></form>
 
-<?php echo '<a href="' . tep_href_link(FILENAME_ADMIN_ACCOUNT, '', 'SSL') . '" class="header"' . '">'; ?>
+	<?php echo '<a href="' . tep_href_link(FILENAME_ADMIN_ACCOUNT, '', 'SSL') . '" class="header"' . '">'; ?>
+	<?php echo tep_image(DIR_WS_ICONS . 'book_key.png', 'Manage Account'); ?> Welcome, <?php echo $myLogin['admin_username']; ?>.</a>
+	<?php echo '<a href="' . tep_catalog_href_link('admin/logoff.php') . '" class="header">'; ?>
+	<?php echo tep_image(DIR_WS_ICONS . 'exit.png', 'Logoff'); ?> Logoff &nbsp;
 
-<?php echo tep_image(DIR_WS_ICONS . 'book_key.png', 'Manage Account'); ?> Welcome, <?php echo $myLogin['admin_username']; ?>.</a>
-
-<?php echo '<a href="' . tep_catalog_href_link('admin/logoff.php') . '" class="header">'; ?>
-<?php echo tep_image(DIR_WS_ICONS . 'exit.png', 'Logoff'); ?> Logoff &nbsp;
-
-</td></tr>
+  </td>
+</tr>
 
 <?php require(DIR_WS_INCLUDES . 'shortcuts.php'); ?>
 

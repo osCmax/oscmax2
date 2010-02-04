@@ -118,4 +118,6 @@ define('TEXT_SPPC_HELP', '<hr />Group Pricing:<br />If a field is left empty, no
 If a field is filled, but the checkbox is unchecked no price will be inserted either.<br />
 If a price is already inserted in the database, but the checkbox unchecked it will be removed from the database.');
 define('TEXT_SPPC_WARNING', '<br /><strong>Make sure you uncheck the appropriate boxes again!</strong><br />');
+
+define('TEXT_CLICK_TO_ENLARGE', 'Click to enlarge');
 ?>

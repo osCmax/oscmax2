@@ -16,7 +16,7 @@ $Id: application_top.php 3 2006-05-27 04:59:07Z user $
 $debug = array();
 
 // set the level of error reporting
-  error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+  error_reporting(E_ALL & ~E_NOTICE & ~'E_DEPRECATED');
 
 // check support for register_globals
   if (function_exists('ini_get') && (ini_get('register_globals') == false) && (PHP_VERSION < 4.3) ) {

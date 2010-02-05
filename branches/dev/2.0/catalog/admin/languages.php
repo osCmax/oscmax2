@@ -55,6 +55,25 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
         while ($manufacturers = tep_db_fetch_array($manufacturers_query)) {
           tep_db_query("insert into " . TABLE_MANUFACTURERS_INFO . " (manufacturers_id, languages_id, manufacturers_url) values ('" . $manufacturers['manufacturers_id'] . "', '" . (int)$insert_id . "', '" . tep_db_input($manufacturers['manufacturers_url']) . "')");
         }
+// BOF: Articles Manager bugfix #349
+// create additional topics_description records
+        $topics_query = tep_db_query("select t.topics_id, td.topics_name, td.topics_heading_title, td.topics_description from " . TABLE_TOPICS . " t left join " . TABLE_TOPICS_DESCRIPTION . " td on t.topics_id = td.topics_id where td.language_id = '" . (int)$languages_id . "'");
+        while ($topics = tep_db_fetch_array($topics_query)) {
+          tep_db_query("insert into " . TABLE_TOPICS_DESCRIPTION . " (topics_id, language_id, topics_name, topics_heading_title, topics_description) values ('" . (int)$topics['topics_id'] . "', '" . (int)$insert_id . "', '" . tep_db_input($topics['topics_name']) . "',  '" . tep_db_input($topics['topics_heading_title']) . "',  '" . tep_db_input($topics['topics_description']) . "')");
+        }
+
+// create additional articles_description records
+        $articles_query = tep_db_query("select a.articles_id, ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag from " . TABLE_ARTICLES . " a left join " . TABLE_ARTICLES_DESCRIPTION . " ad on a.articles_id = ad.articles_id where ad.language_id = '" . (int)$languages_id . "'");
+        while ($articles = tep_db_fetch_array($articles_query)) {
+          tep_db_query("insert into " . TABLE_ARTICLES_DESCRIPTION . " (articles_id, language_id, articles_name, articles_description, articles_url, articles_head_title_tag, articles_head_desc_tag, articles_head_keywords_tag) values ('" . (int)$articles['articles_id'] . "', '" . (int)$insert_id . "', '" . tep_db_input($articles['articles_name']) . "', '" . tep_db_input($articles['articles_description']) . "', '" . tep_db_input($articles['articles_url']) . "', '" . tep_db_input($articles['articles_head_title_tag']) . "', '" . tep_db_input($articles['articles_head_desc_tag']) . "', '" . tep_db_input($articles['articles_head_keywords_tag']) . "')");
+        }                                                            
+
+// create additional authors_info records
+        $authors_query = tep_db_query("select au.authors_id, ai.authors_description, ai.authors_url from " . TABLE_AUTHORS . " au left join " . TABLE_AUTHORS_INFO . " ai on au.authors_id = ai.authors_id where ai.languages_id = '" . (int)$languages_id . "'");
+        while ($authors = tep_db_fetch_array($authors_query)) {
+          tep_db_query("insert into " . TABLE_AUTHORS_INFO . " (authors_id, languages_id, authors_description, authors_url) values ('" . $authors['authors_id'] . "', '" . (int)$insert_id . "', '" . tep_db_input($authors['authors_description']) . "', '" . tep_db_input($authors['authors_url']) . "')");
+        }
+// EOF: Articles Manager bugfix #349
 
 // create additional orders_status records
         $orders_status_query = tep_db_query("select orders_status_id, orders_status_name from " . TABLE_ORDERS_STATUS . " where language_id = '" . (int)$languages_id . "'");

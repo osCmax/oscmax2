@@ -1254,12 +1254,13 @@ CREATE TABLE zones_to_geo_zones (
 
 # data
 
-# 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany
+# 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany, 6 - UK
 INSERT INTO address_format VALUES (1,'$firstname $lastname$cr$streets$cr$city,$postcode$cr$statecomma$country','$city / $country');
 INSERT INTO address_format VALUES (2,'$firstname $lastname$cr$streets$cr$city,$state    $postcode$cr$country','$city,$state / $country');
 INSERT INTO address_format VALUES (3,'$firstname $lastname$cr$streets$cr$city$cr$postcode - $statecomma$country','$state / $country');
 INSERT INTO address_format VALUES (4,'$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country','$postcode / $country');
 INSERT INTO address_format VALUES (5,'$firstname $lastname$cr$streets$cr$postcode $city$cr$country','$city / $country');
+INSERT INTO address_format VALUES (6,'$firstname $lastname$cr$streets$cr$suburb$cr$city$cr$state$cr$postcode$cr$country','$city / $country');
 
 # INSERT INTO admin VALUES ('1','1','Admin','Default','Admin','admin@localhost.com','05cdeb1aeaffec1c7ae3f12c570a658c:81',now(),NULL,NULL,'1');
   
@@ -1819,7 +1820,7 @@ INSERT INTO `countries` VALUES(2, 'Albania', 'AL', 'ALB', 1, 0);
 INSERT INTO `countries` VALUES(3, 'Algeria', 'DZ', 'DZA', 1, 0);
 INSERT INTO `countries` VALUES(4, 'American Samoa', 'AS', 'ASM', 1, 0);
 INSERT INTO `countries` VALUES(5, 'Andorra', 'AD', 'AND', 1, 0);
-INSERT INTO `countries` VALUES(6, 'Angola', 'AO', 'AGO', 1, 1);
+INSERT INTO `countries` VALUES(6, 'Angola', 'AO', 'AGO', 1, 0);
 INSERT INTO `countries` VALUES(7, 'Anguilla', 'AI', 'AIA', 1, 0);
 INSERT INTO `countries` VALUES(8, 'Antarctica', 'AQ', 'ATA', 1, 0);
 INSERT INTO `countries` VALUES(9, 'Antigua and Barbuda', 'AG', 'ATG', 1, 0);
@@ -2035,7 +2036,7 @@ INSERT INTO `countries` VALUES(218, 'Tuvalu', 'TV', 'TUV', 1, 0);
 INSERT INTO `countries` VALUES(219, 'Uganda', 'UG', 'UGA', 1, 0);
 INSERT INTO `countries` VALUES(220, 'Ukraine', 'UA', 'UKR', 1, 0);
 INSERT INTO `countries` VALUES(221, 'United Arab Emirates', 'AE', 'ARE', 1, 0);
-INSERT INTO `countries` VALUES(222, 'United Kingdom', 'GB', 'GBR', 1, 1);
+INSERT INTO `countries` VALUES(222, 'United Kingdom', 'GB', 'GBR', 6, 1);
 INSERT INTO `countries` VALUES(223, 'United States', 'US', 'USA', 2, 1);
 INSERT INTO `countries` VALUES(224, 'United States Minor Outlying Islands', 'UM', 'UMI', 1, 0);
 INSERT INTO `countries` VALUES(225, 'Uruguay', 'UY', 'URY', 1, 0);

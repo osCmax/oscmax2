@@ -173,7 +173,7 @@ CREATE TABLE affiliate_news (
   headline varchar(255) NOT NULL default '',
   content text NOT NULL,
   date_added datetime NOT NULL default '0000-00-00 00:00:00',
-  STATUS tinyint(1) NOT NULL default '0',
+  news_status tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`news_id`)
 );
 

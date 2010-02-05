@@ -78,7 +78,7 @@ define('TEXT_PRODUCTS_DESCRIPTION', 'Description:');
 define('TEXT_PRODUCTS_QUANTITY', 'Quantity:');
 define('TEXT_PRODUCTS_MODEL', 'Ref/Model:');
 define('TEXT_PRODUCTS_IMAGE', 'Product Image:');
-define('TEXT_PRODUCTS_URL', 'Product URL:');
+define('TEXT_PRODUCTS_URL', 'URL:');
 define('TEXT_PRODUCTS_URL_WITHOUT_HTTP', '<small>(without http://)</small>');
 define('TEXT_PRODUCTS_PRICE_NET', 'Price (Net):');
 define('TEXT_PRODUCTS_PRICE_GROSS', 'Price (Gross):');

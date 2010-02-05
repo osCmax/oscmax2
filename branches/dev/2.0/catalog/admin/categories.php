@@ -836,8 +836,8 @@ function updateNet() {
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_MANUFACTURER; ?></td>
             <td class="main" colspan="2">
-            <?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, $pInfo->manufacturers_id) .
-            tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_MODEL . '&nbsp;&nbsp;' . tep_draw_input_field('products_model', $pInfo->products_model); ?></td>
+            <?php echo tep_draw_separator('pixel_trans.gif', '24', '12') . '&nbsp;' . tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, $pInfo->manufacturers_id) .
+            tep_draw_separator('pixel_trans.gif', '40', '12') . TEXT_PRODUCTS_MODEL . '&nbsp;&nbsp;' . tep_draw_input_field('products_model', $pInfo->products_model); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -848,7 +848,16 @@ function updateNet() {
           <tr>
             <td class="main"><?php if ($i == 0) echo TEXT_PRODUCTS_NAME; ?></td>
 <?php /* LINE CHANGED: MS2 update 501112 - Added: stripslashes(...) */ ?>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (isset($products_name[$languages[$i]['id']]) ? stripslashes($products_name[$languages[$i]['id']]) : tep_get_products_name($pInfo->products_id, $languages[$i]['id']))); ?></td>
+            <td class="main">
+            <?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (isset($products_name[$languages[$i]['id']]) ? stripslashes($products_name[$languages[$i]['id']]) : tep_get_products_name($pInfo->products_id, $languages[$i]['id']))) .
+            tep_draw_separator('pixel_trans.gif', '15', '12') ; ?>
+            <?php if ($i == 0) {
+                        echo TEXT_PRODUCTS_URL . TEXT_PRODUCTS_URL_WITHOUT_HTTP . tep_draw_separator('pixel_trans.gif', '30', '12');
+                        } else {
+                        echo tep_draw_separator('pixel_trans.gif', '140', '12');
+                        }
+            echo tep_draw_input_field('products_url[' . $languages[$i]['id'] . ']', (isset($products_url[$languages[$i]['id']]) ? stripslashes($products_url[$languages[$i]['id']]) : tep_get_products_url($pInfo->products_id, $languages[$i]['id']))); ?>
+            </td>
           </tr>
 <?php
     }
@@ -970,11 +979,9 @@ print (TEXT_SPPC_WARNING);
 		  	?>
           </tr>
           <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '15'); ?></td>
           </tr>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
+
 <!-- image directory -->
           <tr>
             <td class="main" bgcolor="#DDDDDD"><?php echo TEXT_PRODUCTS_IMAGE_DIRECTORY; ?></td>
@@ -1008,20 +1015,6 @@ print (TEXT_SPPC_WARNING);
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
-          <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_PRODUCTS_URL . '<br><small>' . TEXT_PRODUCTS_URL_WITHOUT_HTTP . '</small>'; ?></td>
-<?php /* LINE CHANGED: MS2 update 501112 - Added: stripslashes(...) */ ?>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('products_url[' . $languages[$i]['id'] . ']', (isset($products_url[$languages[$i]['id']]) ? stripslashes($products_url[$languages[$i]['id']]) : tep_get_products_url($pInfo->products_id, $languages[$i]['id']))); ?></td>
-          </tr>
-<?php
-    }
-?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_WEIGHT; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_weight', $pInfo->products_weight); ?></td>
@@ -1038,9 +1031,9 @@ print (TEXT_SPPC_WARNING);
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_SHIPPING_DIMENSIONS; ?></td>
             <td class="main" colspan="2">
-            <?php echo tep_draw_separator('pixel_trans.gif', '24', '18') . TEXT_PRODUCTS_LENGTH .  '&nbsp;&nbsp;' . tep_draw_input_field('products_length', $pInfo->products_length) .
-            tep_draw_separator('pixel_trans.gif', '18', '18') . TEXT_PRODUCTS_WIDTH .  '&nbsp;&nbsp;' . tep_draw_input_field('products_width', $pInfo->products_width) .
-            tep_draw_separator('pixel_trans.gif', '18', '18') . TEXT_PRODUCTS_HEIGHT .  '&nbsp;&nbsp;' . tep_draw_input_field('products_height', $pInfo->products_height); ?></td>
+            <?php echo tep_draw_separator('pixel_trans.gif', '26', '12') . TEXT_PRODUCTS_LENGTH .  '&nbsp;' . tep_draw_input_field('products_length', $pInfo->products_length) .
+            tep_draw_separator('pixel_trans.gif', '10', '12') . TEXT_PRODUCTS_WIDTH .  '&nbsp;' . tep_draw_input_field('products_width', $pInfo->products_width) .
+            tep_draw_separator('pixel_trans.gif', '10', '12') . TEXT_PRODUCTS_HEIGHT .  '&nbsp;' . tep_draw_input_field('products_height', $pInfo->products_height); ?></td>
           </tr>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_READY_TO_SHIP; ?></td>

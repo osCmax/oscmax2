@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: ot_coupon.php,v 1.1.2.5 2003/05/14 22:52:59 wilt Exp $
+  $Id: ot_coupon.php,v 1.2.2.1 2005/06/12 00:04:43 Michael Sasek Exp $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 */
@@ -17,7 +17,9 @@
   define('TAX_NOT_INCLUDED', ' [Taxe non incluse]');
   define('MODULE_ORDER_TOTAL_COUPON_USER_PROMPT', '');
   define('ERROR_NO_INVALID_REDEEM_COUPON', 'Code du coupon invalide');
-  define('ERROR_REDEEMED_AMOUNT_ZERO', 'a valid coupon number. HOWEVER: No reduction will be applied, please see the coupon restrictions that was sent within your offer email**');
+// ccgv coupon restrictions error fix
+// define('ERROR_REDEEMED_AMOUNT_ZERO', 'a valid coupon number. HOWEVER: No reduction will be applied, please see the coupon restrictions that was sent within your offer email**');
+  define('ERROR_REDEEMED_AMOUNT_ZERO', '*** This is a valid coupon code. HOWEVER: No price reduction can be applied, please see the coupon restrictions that were sent with your email offer. **');
   define('ERROR_INVALID_STARTDATE_COUPON', 'Ce coupon n\'est plus valable');
   define('ERROR_INVALID_FINISDATE_COUPON', 'Ce coupon a expir&eacute;');
   define('ERROR_INVALID_USES_COUPON', 'Ce coupon peut seulement &ecirc;tre utilis&eacute; ');  

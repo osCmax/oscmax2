@@ -1,7 +1,7 @@
 <?php
 define('BOX_INFORMATION_GV', 'Gift Voucher FAQ');
 define('VOUCHER_BALANCE', 'Voucher Balance');
-define('BOX_HEADING_GIFT_VOUCHER', 'Gift Voucher Account'); 
+define('BOX_HEADING_GIFT_VOUCHER', 'Gift Voucher Account');
 define('GV_FAQ', 'Gift Voucher FAQ');
 define('ERROR_REDEEMED_AMOUNT', 'The coupon has been successfully applied for ');
 define('ERROR_NO_REDEEM_CODE', 'You did not enter a redeem code.');  

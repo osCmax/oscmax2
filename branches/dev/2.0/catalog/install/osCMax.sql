@@ -1223,9 +1223,21 @@ CREATE TABLE whos_online (
   full_name varchar(64) NOT NULL,
   session_id varchar(128) NOT NULL,
   ip_address varchar(15) NOT NULL,
+  hostname VARCHAR(255) NOT NULL,
+  country_code varchar(2) NOT NULL,
+  country_name VARCHAR(64) NOT NULL,
+  region_name VARCHAR(64) NOT NULL,
+  city VARCHAR(64) NOT NULL,
+  latitude FLOAT NOT NULL,
+  longitude FLOAT NOT NULL,
   time_entry varchar(14) NOT NULL,
   time_last_click varchar(14) NOT NULL,
-  last_page_url text NOT NULL
+  last_page_url text NOT NULL,
+  http_referer VARCHAR(255) NOT NULL,
+  user_agent VARCHAR(255) NOT NULL,
+  PRIMARY KEY (customer_id),
+  KEY idx_ip_address (ip_address),
+  KEY idx_country_code (country_code)
 );
 
 DROP TABLE IF EXISTS zones;
@@ -1479,6 +1491,7 @@ INSERT INTO configuration VALUES (67,'State','ACCOUNT_STATE','true','Display sta
 INSERT INTO configuration VALUES (68,'Installed Modules','MODULE_PAYMENT_INSTALLED','','List of payment module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: cc.php;cod.php;paypal.php)','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (69,'Installed Modules','MODULE_ORDER_TOTAL_INSTALLED','ot_subtotal.php;ot_shipping.php;ot_tax.php;ot_loyalty_discount.php;ot_loworderfee.php;ot_coupon.php;ot_gv.php;ot_total.php','List of order_total module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: ot_subtotal.php;ot_tax.php;ot_shipping.php;ot_total.php)','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (70,'Installed Modules','MODULE_SHIPPING_INSTALLED','','List of shipping module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: ups.php;flat.php;item.php)','6','0',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES ('77','Google Maps Key','GOOGLE_MAPS_KEY','YOURKEY','Put your Google Maps API Key here.<br><br>You can get one at http://code.google.com/apis/maps/signup.html','1','25',NULL,now(), NULL, 'tep_cfg_textarea(');
 INSERT INTO configuration VALUES (85,'Default Currency','DEFAULT_CURRENCY','USD','Default Currency','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (86,'Default Language','DEFAULT_LANGUAGE','en','Default Language','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (87,'Default Order Status For New Orders','DEFAULT_ORDERS_STATUS_ID','1','When a new order is created, this order status will be assigned to it.','6','0',NULL,now(),NULL,NULL);

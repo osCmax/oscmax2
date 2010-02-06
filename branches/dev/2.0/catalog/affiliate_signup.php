@@ -49,7 +49,7 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
     $a_suburb = tep_db_prepare_input($HTTP_POST_VARS['a_suburb']);
     $a_postcode = tep_db_prepare_input($HTTP_POST_VARS['a_postcode']);
     $a_city = tep_db_prepare_input($HTTP_POST_VARS['a_city']);
-    $a_country=tep_db_prepare_input($_POST['a_country']);
+    $a_country=tep_db_prepare_input($HTTP_POST_VARS['a_country']);
     $a_zone_id = tep_db_prepare_input($HTTP_POST_VARS['a_zone_id']);
     $a_state = tep_db_prepare_input($HTTP_POST_VARS['a_state']);
     $a_telephone = tep_db_prepare_input($HTTP_POST_VARS['a_telephone']);
@@ -136,18 +136,6 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
       $entry_country_error = false;
     }
     
-    if (ACCOUNT_STATE == 'true') {
-      // +Country-State Selector
-      if ($zone_id == 0) {
-      // -Country-State Selector
-
-        if (strlen($state) < ENTRY_STATE_MIN_LENGTH) {
-          $error = true;
-
-          $messageStack->add('affiliate_signup', ENTRY_STATE_ERROR);
-        }
-      }
-    }
 
     if (strlen($a_telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
       $error = true;
@@ -241,15 +229,20 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
       }
       if (ACCOUNT_SUBURB == 'true') $sql_data_array['affiliate_suburb'] = $a_suburb;
       
-      if (ACCOUNT_STATE == 'true') {
-        if ($a_zone_id > 0) {
-          $sql_data_array['affiliate_zone_id'] = $a_zone_id;
-          $sql_data_array['affiliate_state'] = '';
-        } else {
-          $sql_data_array['affiliate_zone_id'] = '0';
-          $sql_data_array['affiliate_state'] = $a_state;
+   if (ACCOUNT_STATE == 'true') {
+      // +Country-State Selector
+      if ($a_zone_id == 0) {
+      // -Country-State Selector
+
+        if (strlen($a_state) < ENTRY_STATE_MIN_LENGTH) {
+          $error = true;
+
+          $messageStack->add('affiliate_signup', ENTRY_STATE_ERROR);
         }
       }
+    }
+
+	  
 
       $sql_data_array['affiliate_date_account_created'] = 'now()';
 
@@ -275,7 +268,7 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
       tep_redirect(tep_href_link(FILENAME_AFFILIATE_SIGNUP_OK, '', 'SSL'));
     }
  // +Country-State Selector 
-if (!isset($country)){$country = DEFAULT_COUNTRY;}
+if (!isset($country)){$a_country = DEFAULT_COUNTRY;}
 // -Country-State Selector
   }
 

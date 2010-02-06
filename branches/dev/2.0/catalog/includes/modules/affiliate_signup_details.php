@@ -436,7 +436,7 @@
 <div id="states">
 				<?php
 				// +Country-State Selector
-				echo ajax_get_zones_html($entry['entry_country_id'],($entry['entry_zone_id'] == 0 ? $entry['entry_state'] : $entry['entry_zone_id']), false);
+				echo ajax_get_zones_html($affiliate['affiliate_country_id'],($affiliate['affiliate_zone_id'] == 0 ? $affiliate['affiliate_state'] : $affiliate['affiliate_zone_id']), false);
 				// -Country-State Selector
 				?>
 				</div></td>
@@ -447,7 +447,7 @@
           <tr>
             <td class="main" width="230">&nbsp;<?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
 			<?php // +Country-State Selector ?>
-            <td class="main">&nbsp;&nbsp;<?php echo tep_get_country_list('country', $entry['affiliate_country_id'],'onChange="getStates(this.value,\'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
+            <td class="main">&nbsp;&nbsp;<?php echo tep_get_country_list('a_country', $affiliate['affiliate_country_id'],'onChange="getStates(this.value,\'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
             <?php // -Country-State Selector ?>
           </tr>
           

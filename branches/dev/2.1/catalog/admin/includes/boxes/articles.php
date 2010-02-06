@@ -14,11 +14,11 @@ $Id: articles.php 3 2009-11-14 19:38:07Z user $
 <!-- articles //-->
 <?php
   $contents = '';
-  $contents = ( 				  tep_admin_jqmenu(FILENAME_ARTICLES, BOX_TOPICS_ARTICLES) .
-								  tep_admin_jqmenu(FILENAME_ARTICLES_CONFIG, BOX_ARTICLES_CONFIG) .
-								  tep_admin_jqmenu(FILENAME_AUTHORS, BOX_ARTICLES_AUTHORS) .
-								  tep_admin_jqmenu(FILENAME_ARTICLE_REVIEWS, BOX_ARTICLES_REVIEWS) .
-								  tep_admin_jqmenu(FILENAME_ARTICLES_XSELL, BOX_ARTICLES_XSELL));
+  $contents = ( 				  tep_admin_jqmenu(FILENAME_ARTICLES, BOX_TOPICS_ARTICLES, TOP) .
+								  tep_admin_jqmenu(FILENAME_ARTICLES_CONFIG, BOX_ARTICLES_CONFIG, TOP) .
+								  tep_admin_jqmenu(FILENAME_AUTHORS, BOX_ARTICLES_AUTHORS, TOP) .
+								  tep_admin_jqmenu(FILENAME_ARTICLE_REVIEWS, BOX_ARTICLES_REVIEWS, TOP) .
+								  tep_admin_jqmenu(FILENAME_ARTICLES_XSELL, BOX_ARTICLES_XSELL, TOP));
   print_r($contents);
 ?>
 <!-- articles_eof //-->

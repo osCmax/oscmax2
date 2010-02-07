@@ -463,6 +463,6 @@ define('IMAGE_ORDERS_SHIP', 'Ship Package');
 define('IMAGE_ORDERS_FEDEX_LABEL','View or Print FedEx Shipping Label');
 define('IMAGE_ORDERS_TRACK','Track FedEx Shipment');
 define('IMAGE_ORDERS_CANCEL_SHIPMENT','Cancel FedEx Shipment');
-define('BOX_SHIPPING_MANIFEST','Fedx Shipping Manifest');
+define('BOX_SHIPPING_MANIFEST','FedEx Shipping Manifest');
 // EOF: MOD - FedEx
 ?>

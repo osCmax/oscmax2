@@ -29,11 +29,11 @@ $Id: reports.php 3 2006-05-27 04:59:07Z user $
                                    tep_admin_files_boxes(FILENAME_STATS_PRODUCTS_PURCHASED, BOX_REPORTS_PRODUCTS_PURCHASED) .
                                    tep_admin_files_boxes(FILENAME_STATS_MONTHLY_SALES, BOX_REPORTS_MONTHLY_SALES) .
                                    tep_admin_files_boxes(FILENAME_STATS_RECOVER_CART_SALES, BOX_REPORTS_RECOVER_CART_SALES) .
-                                   tep_admin_files_boxes(FILENAME_SHIPPING_MANIFEST, BOX_SHIPPING_MANIFEST) .
+//                                 tep_admin_files_boxes(FILENAME_SHIPPING_MANIFEST, BOX_SHIPPING_MANIFEST) .
                                    tep_admin_files_boxes(FILENAME_STATS_CUSTOMERS, BOX_REPORTS_ORDERS_TOTAL) .
                                    tep_admin_files_boxes(FILENAME_STATS_LOW_STOCK_ATTRIB, BOX_REPORTS_STATS_LOW_STOCK_ATTRIB) .
-
-				   tep_admin_files_boxes(FILENAME_STATS_CREDITS, BOX_REPORTS_CREDITS));
+				   tep_admin_files_boxes(FILENAME_STATS_CREDITS, BOX_REPORTS_CREDITS) .
+				   '<a href="' . tep_href_link(FILENAME_SHIPPING_MANIFEST, '', 'NONSSL') . '" target="_blank" class="menuBoxContentLink">' . BOX_SHIPPING_MANIFEST . '</a><br />' );
 // BOF: MOD - Admin w/access levels
   }
 

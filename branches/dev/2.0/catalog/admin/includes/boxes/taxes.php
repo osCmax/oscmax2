@@ -27,11 +27,11 @@ $Id: taxes.php 3 2006-05-27 04:59:07Z user $
 //                                   '<a href="' . tep_href_link(FILENAME_GEO_ZONES, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_TAXES_GEO_ZONES . '</a><br>' .
 //                                   '<a href="' . tep_href_link(FILENAME_TAX_CLASSES, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_TAXES_TAX_CLASSES . '</a><br>' .
 //                                   '<a href="' . tep_href_link(FILENAME_TAX_RATES, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_TAXES_TAX_RATES . '</a>');
-    $contents[] = array('text'  => tep_admin_files_boxes(FILENAME_COUNTRIES, BOX_TAXES_COUNTRIES) .
-                                   tep_admin_files_boxes(FILENAME_ZONES, BOX_TAXES_ZONES) .
-                                   tep_admin_files_boxes(FILENAME_GEO_ZONES, BOX_TAXES_GEO_ZONES) .
-                                   tep_admin_files_boxes(FILENAME_TAX_CLASSES, BOX_TAXES_TAX_CLASSES) .
-                                   tep_admin_files_boxes(FILENAME_TAX_RATES, BOX_TAXES_TAX_RATES));
+    $contents[] = array('text'  => tep_admin_files_boxes(FILENAME_COUNTRIES, BOX_TAXES_COUNTRIES, TOP) .
+                                   tep_admin_files_boxes(FILENAME_ZONES, BOX_TAXES_ZONES, TOP) .
+                                   tep_admin_files_boxes(FILENAME_GEO_ZONES, BOX_TAXES_GEO_ZONES, TOP) .
+                                   tep_admin_files_boxes(FILENAME_TAX_CLASSES, BOX_TAXES_TAX_CLASSES, TOP) .
+                                   tep_admin_files_boxes(FILENAME_TAX_RATES, BOX_TAXES_TAX_RATES, TOP));
 // EOF: MOD - Admin w/access levels
   }
 

@@ -190,7 +190,7 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
 			$dbPass = tep_encrypt_password($password);
 			$guestaccount = '0';
 		}else{
-			$dbPass = 'null';
+			$dbPass = '';
 			$guestaccount = '1';
 		}
 		// PWA EOF 2b

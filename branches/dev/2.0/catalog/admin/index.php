@@ -65,7 +65,7 @@ $Id: index.php 14 2006-07-28 17:42:07Z user $
                                          array('title' => BOX_REPORTS_PRODUCTS_PURCHASED, 'link' => tep_href_link(FILENAME_STATS_PRODUCTS_PURCHASED, 'selected_box=reports')),
                                          array('title' => BOX_REPORTS_MONTHLY_SALES, 'link' => tep_href_link(FILENAME_STATS_MONTHLY_SALES, 'selected_box=reports')),
                                          array('title' => BOX_REPORTS_RECOVER_CART_SALES, 'link' => tep_href_link(FILENAME_RECOVER_CART_SALES, 'selected_box=reports')),
-                                         array('title' => BOX_SHIPPING_MANIFEST, 'link' => tep_href_link(FILENAME_SHIPPING_MANIFEST, 'selected_box=reports')),
+                                         array('title' => BOX_SHIPPING_MANIFEST, 'link' => tep_href_link(FILENAME_SHIPPING_MANIFEST, 'selected_box=reports' ) . ' "target="_blank'),
                                          array('title' => BOX_REPORTS_ORDERS_TOTAL, 'link' => tep_href_link(FILENAME_STATS_CUSTOMERS, 'selected_box=reports')))),
 
 

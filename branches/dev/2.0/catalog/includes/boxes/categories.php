@@ -54,7 +54,7 @@ $Id: categories.php 3 2006-05-27 04:59:07Z user $
     }
     
     if ($cat_name == $tree[$counter]['name']) {
-      $boxContent .= '<span class="errorText">';
+      $boxContent .= '<span class="SelectedCategory">';
     }
 
 // display category name

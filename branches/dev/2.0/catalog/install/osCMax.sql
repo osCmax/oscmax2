@@ -1755,6 +1755,14 @@ INSERT INTO configuration VALUES (1214,'Use Affiliate-tier','AFFILATE_USE_TIER',
 INSERT INTO configuration VALUES (1215,'Number of Tierlevels','AFFILIATE_TIER_LEVELS','0','Number of Tierlevels',35,12,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1216,'Percentage Rate for the Tierlevels','AFFILIATE_TIER_PERCENTAGE','8.00;5.00;1.00','Percent Rates for the tierlevels<br>Example: 8.00;5.00;1.00',35,13,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1217,'Affiliate News','MAX_DISPLAY_AFFILIATE_NEWS','3','Maximum number of items to display on the Affiliate News page',35,14,NULL,now(),NULL,NULL);
+
+# Edit to add configuration vars from affiliate_configure.php
+INSERT INTO configuration VALUES (1218,'Notify Affiliate of new invoice?','AFFILIATE_NOTIFY_AFTER_BILLING','true','Nofify affiliate if they have got a new invoice',35,15,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (1219,'Delete affiliate sale if order deleted?','AFFILIATE_NOTIFY_AFTER_BILLING','true','Delete affiliate sales if an order is deleted (Warning: Only not yet billed sales are deleted)',35,16,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (1220,'Tax Rates used for billing the affiliates','AFFILIATE_TAX_ID','1','Set the tax rate for billing affiliates',35,17,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1221,'Maintain affiliate clickthroughs','AFFILIATE_DELETE_CLICKTHROUGHS','false','To keep the clickthrough report small you can set the days after which they are deleted (when calling affiliate_summary in the admin).  Set to false or set the number of days.',35,18,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1222,'Maintain affiliate banner history','AFFILIATE_DELETE_AFFILIATE_BANNER_HISTORY','false','To keep affiliate banner history table  small you can set the days after which they are deleted (when calling affiliate_summary in the admin). Set to false or set the number of days.',35,19,NULL,now(),NULL,NULL);
+
 INSERT INTO configuration VALUES (1291,'Max Wish List','MAX_DISPLAY_WISHLIST_PRODUCTS','12','How many wish list items to show per page on the main wishlist.php file',65,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1292,'Max Wish List Box','MAX_DISPLAY_WISHLIST_BOX','4','How many wish list items to display in the infobox before it changes to a counter',65,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1293,'Display Emails','DISPLAY_WISHLIST_EMAILS','3','How many emails to display when the customer emails their wishlist link',65,0,NULL,now(),NULL,NULL);

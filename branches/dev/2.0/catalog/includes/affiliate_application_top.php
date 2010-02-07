@@ -18,7 +18,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
 // Set the local configuration parameters - mainly for developers
   if (file_exists(DIR_WS_INCLUDES . 'local/affiliate_configure.php')) include(DIR_WS_INCLUDES . 'local/affiliate_configure.php');
 
-  require(DIR_WS_INCLUDES . 'affiliate_configure.php');
+//  require(DIR_WS_INCLUDES . 'affiliate_configure.php');
   require(DIR_WS_FUNCTIONS . 'affiliate_functions.php');
 
 // define the database table names used in the contribution

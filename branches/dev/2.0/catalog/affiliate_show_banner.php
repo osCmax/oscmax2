@@ -35,7 +35,7 @@ $Id: affiliate_show_banner.php 14 2006-07-28 17:42:07Z user $
   if (file_exists('includes/local/configure.php')) include('includes/local/configure.php');
   require('includes/configure.php');
   if (file_exists('includes/local/affiliate_configure.php')) include('includes/local/affiliate_configure.php');
-  require('includes/affiliate_configure.php');
+//  require('includes/affiliate_configure.php');
 
 // include the database functions
   require(DIR_WS_FUNCTIONS . 'database.php');

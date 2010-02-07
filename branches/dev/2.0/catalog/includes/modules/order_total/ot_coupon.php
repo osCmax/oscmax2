@@ -80,13 +80,13 @@ function use_credit_amount() {
 function credit_selection() {
 global $customer_id, $currencies, $language;
   // START Checkout Display Fix by BTBlomberg
-  $selection_string  = '<tr><td></td><td class="main">';		
+  $selection_string  = '<tr><td></td><td>';		
   $selection_string .= tep_draw_form('checkout_payment_gift', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post');
-  $selection_string .= '<div><br /> ';
-  $selection_string .= TEXT_ENTER_GV_CODE . tep_draw_input_field('gv_redeem_code', 'redeem code') ;
-  $selection_string .= ' ';
+  $selection_string .= '<table border="0" width="100%"><tr><td class="main" width="275">';
+  $selection_string .= TEXT_ENTER_GV_CODE . tep_draw_input_field('gv_redeem_code', TEXT_GV_CODE_INPUT_DEFAULT) ;
+  $selection_string .= '</td><td align="left">';
   $selection_string .= tep_image_submit('button_redeem.gif', IMAGE_REDEEM_VOUCHER, 'onclick="return submitFunction()"');
-  $selection_string .= '</div><br /></form></td></tr>';
+  $selection_string .= '</td></tr></table></form></td></tr>';
 	// END Checkout Display Fix by BTBlomberg
 	return $selection_string;
 }

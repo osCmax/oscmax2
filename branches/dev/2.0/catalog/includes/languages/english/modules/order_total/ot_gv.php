@@ -17,5 +17,6 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
   define('TAX_NOT_INCLUDED', ' [Tax not included]');
   define('MODULE_ORDER_TOTAL_GV_USER_PROMPT', ' <b>to be used from Gift Vouchers</td><td align=right>');
   define('TEXT_ENTER_GV_CODE', 'Enter Redeem Code  ');
+  define('TEXT_GV_CODE_INPUT_DEFAULT', '');
   define('MODULE_ORDER_TOTAL_GV_TEXT_ERROR', 'Gift Voucher/Discount coupon');
 ?>

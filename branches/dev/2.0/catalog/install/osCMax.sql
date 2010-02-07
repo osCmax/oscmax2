@@ -1235,7 +1235,6 @@ CREATE TABLE whos_online (
   last_page_url text NOT NULL,
   http_referer VARCHAR(255) NOT NULL,
   user_agent VARCHAR(255) NOT NULL,
-  PRIMARY KEY (customer_id),
   KEY idx_ip_address (ip_address),
   KEY idx_country_code (country_code)
 );

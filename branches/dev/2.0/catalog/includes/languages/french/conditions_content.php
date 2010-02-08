@@ -1,16 +1,16 @@
 <p style="text-align: justify;"><span style="font-family: Calibri;"><u><b>1/ Notre soci&eacute;t&eacute;</b></u><br />
-BURRO-NET,SARL au capital de 1500 &euro; <br />
-N&deg;Siret : 503 676 124 00020<br />
-N&deg; TVA Intra. : FR20503676124 <br />
-Code APE: 6202A<br />
-7, place du pont<br />
-66400 C&eacute;ret, France<br />
-<a href="https://tuxane.com/shop/contact_us.php">Mail</a> : shop@burro-net.com </span></p>
-<p style="text-align: justify;"><span style="font-family: Calibri;">Horaires d'ouverture : Du Lundi au Samedi : de 9h00 &agrave; 19h00<br />
-T&eacute;l. : 04.68.82.73.20<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<a href="contact_us.php">Mail</a> Contact  </span></p>
+<p style="text-align: justify;"><span style="font-family: Calibri;">Horaires d'ouverture : <br />
+T&eacute;l. : <br />
 <br />
 <u><b>2 / Objet </b></u><br />
-Les pr&eacute;sentes conditions g&eacute;n&eacute;rales de vente ont pour objet de d&eacute;finir les droits et obligations des parties dans le cadre de la vente en ligne de biens propos&eacute;s par la  soci&eacute;t&eacute; &agrave; responsabilit&eacute; limit&eacute;e BURRO-NET &agrave; toute personne physique ou morale, d&eacute;sign&eacute;es ci-apr&egrave;s comme CLIENT. <br />
+Les pr&eacute;sentes conditions g&eacute;n&eacute;rales de vente ont pour objet de d&eacute;finir les droits et obligations des parties dans le cadre de la vente en ligne de biens propos&eacute;s par la  soci&eacute;t&eacute; &agrave; responsabilit&eacute; limit&eacute;e ... &agrave; toute personne physique ou morale, d&eacute;sign&eacute;es ci-apr&egrave;s comme CLIENT. <br />
 <br />
 <u><b>3/ Prix</b></u><br />
 Tous les prix des produits destin&eacute;s aux personnes physiques s'entendent en euros (TVA incluse au taux en vigueur). Ils ne tiennent pas compte des frais de livraison, factur&eacute;s en sus, et indiqu&eacute;s lors de la validation de la commande. <br />
@@ -30,13 +30,13 @@ Livraison France : Colissimo Suivi avec assurance<br />
 Livraison UE : Colissimo Suivi Europe avec assurance<br />
 Livraison Hors UE : Colissimo Suivi International avec assurance <br />
 <br />
-BURRO-NET s'engage a mettre &agrave; la disposition du transporteur les produits command&eacute;s dans un d&eacute;lai maximum de 96h, jours ouvr&eacute;s, apr&egrave;s encaissement du r&egrave;glement. Les d&eacute;lais de livraisons sont de 48 heures pour toute la France. Pour les autres pays, la livraison se r&eacute;alisera en fonction du temps d'acheminement incombant aux postes locales. Nous d&eacute;clinons toute responsabilit&eacute; quant &agrave; l'allongement des d&eacute;lais de livraison du fait du transporteur,  notamment en cas de perte des produits ou de gr&egrave;ve. <br />
+... s'engage a mettre &agrave; la disposition du transporteur les produits command&eacute;s dans un d&eacute;lai maximum de 96h, jours ouvr&eacute;s, apr&egrave;s encaissement du r&egrave;glement. Les d&eacute;lais de livraisons sont de 48 heures pour toute la France. Pour les autres pays, la livraison se r&eacute;alisera en fonction du temps d'acheminement incombant aux postes locales. Nous d&eacute;clinons toute responsabilit&eacute; quant &agrave; l'allongement des d&eacute;lais de livraison du fait du transporteur,  notamment en cas de perte des produits ou de gr&egrave;ve. <br />
 Toute r&eacute;ception doit &ecirc;tre effectu&eacute;e en pr&eacute;sence du livreur et doit &ecirc;tre syst&eacute;matiquement v&eacute;rifi&eacute;e dans son contenu avant de signer et valider le bon de livraison. En cas d'anomalie lors de la livraison, vous devez l'indiquez par &eacute;crit accompagn&eacute; de votre signature. <br />
 <br />
 <u><b>7/Confirmation de commande</b></u> <br />
 A chaque &eacute;tape du traitement de votre commande (r&eacute;ception, changement &eacute;ventuel de disponibilit&eacute;, exp&eacute;dition)  un mail vous est envoy&eacute;. Le mail confirmant le traitement de votre commande et l'envoi de votre colis vous pr&eacute;cisera le num&eacute;ro de suivi et le lien vers le site du transporteur pour le suivi de la livraison. <br />
 <br />
-BURRO-NET se r&eacute;serve la possibilit&eacute; de ne pas confirmer une commande pour quelque raison que ce soit (probl&egrave;me concernant la commande re&ccedil;ue ou probl&egrave;me d'approvisionnement d'articles). <br />
+... se r&eacute;serve la possibilit&eacute; de ne pas confirmer une commande pour quelque raison que ce soit (probl&egrave;me concernant la commande re&ccedil;ue ou probl&egrave;me d'approvisionnement d'articles). <br />
 Elle dispose de 5 jours ouvr&eacute;s pour vous indiquer qu'elle ne peut satisfaire la commande et vous demander de modifier sinon d'annuler celle-ci. <br />
 <br />
 <u><b>8/ D&eacute;lai de r&eacute;tractation</b></u> <br />
@@ -48,22 +48,21 @@ Le remboursement sera fait sous un maximum de 30 jours ouvr&eacute;s, les frais 
 <br />
 <u><b>9/ Informations</b></u><br />
 Pour toutes les questions concernant les commandes ou les produits : <br />
-SARL BURRO-NET<br />
-7, place du pont<br />
-66400 C&eacute;ret, France<br />
-Mail : shop@burro.net.com </span></p>
+<br />
+<br />
+br />
+Mail :  </span></p>
 <p style="text-align: justify;"><span style="font-family: Calibri;"><u><b>10/ Clause de r&eacute;serve de propri&eacute;t&eacute;</b></u> <br />
-Les produits demeurent la propri&eacute;t&eacute; de la SARL BURRO-NET jusqu'au complet encaissement du prix par notre soci&eacute;t&eacute;. Jusqu'&agrave; cette date,  la marchandise livr&eacute;e est consid&eacute;r&eacute;e comme consign&eacute;e et l'acheteur supporte le risque des dommages que ce mat&eacute;riel pourrait subir ou<br />
-occasionner pour quelque cause que ce soit. Cependant, toute clause contraire, en cas de non respect par l'acheteur d'une des &eacute;ch&eacute;ances de paiement, BURRO-NET sans pr&eacute;judice de ses autres droits, pourra obtenir, par lettre recommand&eacute;e, la restitution du mat&eacute;riel aux frais de l'acheteur jusqu'&agrave; ex&eacute;cution par ce dernier de la totalit&eacute; des engagements. <br />
+Les produits demeurent la propri&eacute;t&eacute; de la ... jusqu'au complet encaissement du prix par notre soci&eacute;t&eacute;. Jusqu'&agrave; cette date,  la marchandise livr&eacute;e est consid&eacute;r&eacute;e comme consign&eacute;e et l'acheteur supporte le risque des dommages que ce mat&eacute;riel pourrait subir ou<br />
+occasionner pour quelque cause que ce soit. Cependant, toute clause contraire, en cas de non respect par l'acheteur d'une des &eacute;ch&eacute;ances de paiement, ... sans pr&eacute;judice de ses autres droits, pourra obtenir, par lettre recommand&eacute;e, la restitution du mat&eacute;riel aux frais de l'acheteur jusqu'&agrave; ex&eacute;cution par ce dernier de la totalit&eacute; des engagements. <br />
 <br />
 <u><b>11/ Droit applicable</b></u> <br />
-Le pr&eacute;sent contrat est soumis &agrave; la loi fran&ccedil;aise. La langue du pr&eacute;sent contrat est le fran&ccedil;ais. En cas de litige, le Tribunal de Commerce de Perpignan (France) sera comp&eacute;tent. <br />
+Le pr&eacute;sent contrat est soumis &agrave; la loi fran&ccedil;aise. La langue du pr&eacute;sent contrat est le fran&ccedil;ais. En cas de litige, le Tribunal de Commerce de .... (France) sera comp&eacute;tent. <br />
 <br />
 <u><b>12/ Informations nominatives</b></u> <br />
-BURRO-NET s'engage &agrave; ne pas divulguer &agrave; des tiers les informations que vous nous communiquez. Celles-ci sont confidentielles. En cons&eacute;quence,  conform&eacute;ment &agrave; la loi informatique et libert&eacute;s du 6 janvier 1978, vous disposez d'un droit d'acc&egrave;s, de rectification et d'opposition aux donn&eacute;es personnelles vous concernant. <br />
+.... s'engage &agrave; ne pas divulguer &agrave; des tiers les informations que vous nous communiquez. Celles-ci sont confidentielles. En cons&eacute;quence,  conform&eacute;ment &agrave; la loi informatique et libert&eacute;s du 6 janvier 1978, vous disposez d'un droit d'acc&egrave;s, de rectification et d'opposition aux donn&eacute;es personnelles vous concernant. <br />
 <br />
 <u><b>13/ Propri&eacute;t&eacute; intellectuelle</b></u><br />
-Les sites http://shop.burro-net.com et https://tuxane.com/shop sont la propri&eacute;t&eacute; de la SARL BURRO-NET en sa totalit&eacute;, ainsi que l'ensemble des droits y aff&eacute;rant. <br />
-Tous les textes, ouvrages, illustrations et images reproduits sur http://shop.burro-net.com et </span><span style="font-family: Calibri;">https://tuxane.com/shop</span><span style="font-family: Calibri;"> sont r&eacute;serv&eacute;s au titre du droit d'auteur ainsi qu'au titre de la propri&eacute;t&eacute; intellectuelle, et pour le monde entier. A ce titre et conform&eacute;ment aux dispositions du Code de la Propri&eacute;t&eacute; Intellectuelle , seule est autoris&eacute;e l'utilisation pour un usage priv&eacute;, sous r&eacute;serve de dispositions diff&eacute;rentes, voire plus restrictives, du Code de la Propri&eacute;t&eacute; Intellectuelle. <br />
+Tous les textes, ouvrages, illustrations et images reproduits sont r&eacute;serv&eacute;s au titre du droit d'auteur ainsi qu'au titre de la propri&eacute;t&eacute; intellectuelle, et pour le monde entier. A ce titre et conform&eacute;ment aux dispositions du Code de la Propri&eacute;t&eacute; Intellectuelle , seule est autoris&eacute;e l'utilisation pour un usage priv&eacute;, sous r&eacute;serve de dispositions diff&eacute;rentes, voire plus restrictives, du Code de la Propri&eacute;t&eacute; Intellectuelle. <br />
 <br />
-Toute reproduction, totale ou partielle, est syst&eacute;matiquement soumise &agrave; l'autorisation de BURRO-NET</span></p>
+Toute reproduction, totale ou partielle, est syst&eacute;matiquement soumise &agrave; l'autorisation </span></p>

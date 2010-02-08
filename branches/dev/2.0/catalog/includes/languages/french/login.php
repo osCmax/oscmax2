@@ -35,6 +35,6 @@ define('PROCEED_TO_CHECKOUT', 'Procédez à la commande sans enregistrement.');
 
 // BOF Separate Pricing Per Customer
 // define the email address that can change customer_group_id on login
-define('SPPC_TOGGLE_LOGIN_PASSWORD', 'jens@tuxane.com');
+define('SPPC_TOGGLE_LOGIN_PASSWORD', '');
 // EOF Separate Pricing Per Customer
 ?>

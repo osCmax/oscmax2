@@ -11,7 +11,7 @@
   Translated by Gunt - Contact : webmaster@webdesigner.com.fr
 */
 
-define('NAVBAR_TITLE', 'Conditions Générales de Vente, SARL burro-net');
+define('NAVBAR_TITLE', 'Conditions Générales de Vente');
 define('HEADING_TITLE', 'Conditions Générales de Vente');
 
 # define('TEXT_INFORMATION', 'Mettre ici vos informations conditions d\'usage.');

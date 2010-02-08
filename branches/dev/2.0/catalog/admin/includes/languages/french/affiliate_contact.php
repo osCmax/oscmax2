@@ -14,16 +14,16 @@ $Id: affiliate_contact.php 14 2006-07-28 17:42:07Z user $
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Send Email To Affiliates');
+define('HEADING_TITLE', 'Envoyer Email aux affiliés');
 
-define('TEXT_AFFILIATE', 'Affiliate:');
-define('TEXT_SUBJECT', 'Subject:');
+define('TEXT_AFFILIATE', 'Affilié:');
+define('TEXT_SUBJECT', 'Sujet:');
 define('TEXT_FROM', 'From:');
 define('TEXT_MESSAGE', 'Message:');
-define('TEXT_SELECT_AFFILIATE', 'Select Affiliate');
-define('TEXT_ALL_AFFILIATES', 'All Affiliates');
-define('TEXT_NEWSLETTER_AFFILIATES', 'To All Affiliate Newsletter Subscribers');
+define('TEXT_SELECT_AFFILIATE', 'Sélectionnez un affilié');
+define('TEXT_ALL_AFFILIATES', 'Tous les Affiliés');
+define('TEXT_NEWSLETTER_AFFILIATES', 'A Tous les Affiliés inscris à la Newsletter');
 
-define('NOTICE_EMAIL_SENT_TO', 'Notice: Email sent to: %s');
-define('ERROR_NO_AFFILIATE_SELECTED', 'Error: No Affiliate has been selected.');
+define('NOTICE_EMAIL_SENT_TO', 'Remarque: Email Envoyé à: %s');
+define('ERROR_NO_AFFILIATE_SELECTED', 'Erreur: Pas d\'Affilié sélectionné.');
 ?>

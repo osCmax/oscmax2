@@ -14,13 +14,13 @@
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program - Contact Form');
+define('NAVBAR_TITLE', 'Programme d\'affiliation');
+define('HEADING_TITLE', 'Programme d\'affiliation - Contactez-nous');
 
-define('TEXT_SUCCESS', 'Your message has been successfully sent to the Affiliate Program Team');
+define('TEXT_SUCCESS', 'Votre message a bien été envoyé à notre équipe du Programme d\'affiliation');
 
-define('EMAIL_SUBJECT', 'Affiliate Program');
-define('ENTRY_NAME', 'Your Full Name:');
-define('ENTRY_EMAIL', 'Your E-Mail:');
-define('ENTRY_ENQUIRY', 'Your Message:');
+define('EMAIL_SUBJECT', 'Programme d\'affiliation');
+define('ENTRY_NAME', 'Votre nom complet :');
+define('ENTRY_EMAIL', 'Votre E-Mail :');
+define('ENTRY_ENQUIRY', 'Votre Message :');
 ?>

@@ -14,20 +14,20 @@
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program: Sales');
+define('NAVBAR_TITLE', 'Programme d\'affiliation');
+define('HEADING_TITLE', 'Programme d\'affiliation - Ventes');
 
 define('TABLE_HEADING_DATE', 'Date');
-define('TABLE_HEADING_SALES', 'Affiliate Earnings (excl.)');
-define('TABLE_HEADING_VALUE', 'Sale Value (excl.)');
-define('TABLE_HEADING_PERCENTAGE','Commission Rate');
-define('TABLE_HEADING_STATUS', 'Sale Status');
+define('TABLE_HEADING_SALES', 'Val. comm');
+define('TABLE_HEADING_VALUE', 'Valeur de vente (excl.)');
+define('TABLE_HEADING_PERCENTAGE','Tx de comm');
+define('TABLE_HEADING_STATUS', 'Statut');
 
-define('TEXT_DELETED_ORDER_BY_ADMIN', 'Deleted (Admin)');
-define('TEXT_INFORMATION_SALES_TOTAL', 'Your current earnings amount (excl.) to:');
-define('TEXT_INFORMATION_SALES_TOTAL2', '<br>Only delivered sales are counted!');
-define('TEXT_NO_SALES', 'No sales have been recorded yet.');
-define('TEXT_DISPLAY_NUMBER_OF_SALES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> sales)');
+define('TEXT_DELETED_ORDER_BY_ADMIN', 'Supprimé (Admin)');
+define('TEXT_INFORMATION_SALES_TOTAL', 'Le montant actuel de vos revenus s\'élève à :');
+define('TEXT_INFORMATION_SALES_TOTAL2', '<br>Seules des ventes finalisées sont comptées !');
+define('TEXT_NO_SALES', 'Aucunes ventes réalisées actuellement.');
+define('TEXT_DISPLAY_NUMBER_OF_SALES', 'Afficher de <b>%d</b> à <b>%d</b> (sur les <b>%d</b> ventes)');
 
-define('TEXT_AFFILIATE_HEADER', 'Sales from your website:');
+define('TEXT_AFFILIATE_HEADER', 'Ventes venant de votre sit internet :');
 ?>

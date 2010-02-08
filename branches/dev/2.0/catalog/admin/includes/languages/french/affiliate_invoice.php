@@ -14,20 +14,20 @@ $Id: affiliate_invoice.php 14 2006-07-28 17:42:07Z user $
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Affiliate Invoice');
+define('HEADING_TITLE', 'Affilié Facture');
 
-define ('TEXT_AFFILIATE','Affiliate');
-define ('TEXT_AFFILIATE_PAYMENT','Payment');
-define ('TEXT_AFFILIATE_BILLED','Billing Day');
-define('TABLE_HEADING_ORDER_ID', 'Order ID');
+define ('TEXT_AFFILIATE','Affiliation');
+define ('TEXT_AFFILIATE_PAYMENT','Paiement');
+define ('TEXT_AFFILIATE_BILLED','Jour de facturation');
+define('TABLE_HEADING_ORDER_ID', 'ID de commande');
 define('TABLE_HEADING_ORDER_DATE', 'Date');
-define('TABLE_HEADING_ORDER_VALUE', 'Order Value');
-define('TABLE_HEADING_COMMISSION_RATE', 'Commission Rate');
-define('TABLE_HEADING_COMMISSION_VALUE', 'Commission Value');
-define('TABLE_HEADING_TOTAL', 'Total');
+define('TABLE_HEADING_ORDER_VALUE', 'Valeur de la commande');
+define('TABLE_HEADING_COMMISSION_RATE', 'Taux de commissionnement');
+define('TABLE_HEADING_COMMISSION_VALUE', 'Valeur de la Commission');
+define('TABLE_HEADING_TOTAL', 'Atal');
 
-define('TEXT_SUB_TOTAL', 'Sub-Total');
-define('TEXT_TAX', 'Tax');
-define('TEXT_TOTAL', 'Total');
+define('TEXT_SUB_TOTAL', 'Sous-Atal');
+define('TEXT_TAX', 'Taxe');
+define('TEXT_TOTAL', 'Atal');
 define('ENTRY_PERCENT', '%');
 ?>

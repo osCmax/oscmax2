@@ -14,16 +14,16 @@
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program: Clickthroughs');
+define('NAVBAR_TITLE', 'Programme d\'affiliation');
+define('HEADING_TITLE', 'Programme d\'affiliation - Clics');
 
 define('TABLE_HEADING_DATE', 'Date');
-define('TABLE_HEADING_REFFERED', 'Referrer');
-define('TABLE_HEADING_IP', 'IP Address');
-define('TABLE_HEADING_BROWSER', 'Browser');
-define('TABLE_HEADING_CLICKED_PRODUCT', 'Product');
+define('TABLE_HEADING_REFFERED', 'Referrant');
+define('TABLE_HEADING_IP', 'Addresse IP');
+define('TABLE_HEADING_BROWSER', 'Navigateur');
+define('TABLE_HEADING_CLICKED_PRODUCT', 'Produit ou Page');
 
-define('TEXT_AFFILIATE_HEADER', 'Total clickthroughs from your site:');
-define('TEXT_NO_CLICKS', 'No clickthroughs have been recorded from your site.');
-define('TEXT_DISPLAY_NUMBER_OF_CLICKS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> clickthroughs)');
+define('TEXT_AFFILIATE_HEADER', 'Nb total de clics venant de votre site web :');
+define('TEXT_NO_CLICKS', 'Aucun clic n\'a été enregistré venant de votre site web.');
+define('TEXT_DISPLAY_NUMBER_OF_CLICKS', 'Afficher de <b>%d</b> à <b>%d</b> (of <b>%d</b> clics venants ici)');
 ?>

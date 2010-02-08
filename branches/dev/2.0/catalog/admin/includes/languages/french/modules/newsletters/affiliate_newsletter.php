@@ -16,5 +16,5 @@
 
 
 
-define('TEXT_COUNT_AFFILIATES', 'Affiliates receiving newsletter: %s');
+define('TEXT_COUNT_AFFILIATES', 'Affiliés recevant le bulletin %s');
 ?>

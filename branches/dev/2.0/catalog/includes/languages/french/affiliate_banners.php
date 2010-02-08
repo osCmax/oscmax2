@@ -14,14 +14,15 @@
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program: Banners');
+define('NAVBAR_TITLE', 'Programme d\'affiliation - Bannières / Liens');
+define('HEADING_TITLE', 'Programme d\'affiliation - Liens');
 
-define('TEXT_AFFILIATE_NAME', 'Banner Name:');
-define('TEXT_INFORMATION', 'Choose the banner or link you want to display on your website from the choices below:');
-define('TEXT_AFFILIATE_INFO', 'Copy the code shown below and paste into your website');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER', 'BUILD-A-LINK');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO', 'Enter the product number you wish to link to.');
+define('TEXT_AFFILIATE_NAME', 'Nom de la bannière');
+define('TEXT_INFORMATION', 'Liste des liens utilisables sur votre site internet.');
 
-define('IMAGE_BUTTON_BUILD_A_LINK','Build a Link for a Product Banner.');
+define('TEXT_AFFILIATE_INFO', 'Copiez / Collez le code affiché ici sur la(les) page(s) de votre site internet');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER', 'Creer un Lien Produit');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO', 'Entrez le N° du produit pour lequel vous souhaitez créer un lien et appuyez sur Enter&nbsp;');
+
+define('IMAGE_BUTTON_BUILD_A_LINK','Creer un Lien');
 ?>

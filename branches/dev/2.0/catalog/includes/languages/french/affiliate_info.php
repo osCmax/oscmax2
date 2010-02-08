@@ -14,9 +14,9 @@
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program');
+define('NAVBAR_TITLE', 'Programme d\'Affiliation');
+define('HEADING_TITLE', 'Programme d\'Affiliation');
 
-define('HEADING_AFFILIATE_PROGRAM_TITLE', 'The ' . STORE_NAME . ' Affiliate Program');
-define('TEXT_INFORMATION', 'Your Affiliate Information Goes in Here');
+define('HEADING_AFFILIATE_PROGRAM_TITLE', 'Le Programme d\'Affiliation  ' . STORE_NAME);
+define('TEXT_INFORMATION', 'Votre information d\'Affiliation est entre ici.');
 ?>

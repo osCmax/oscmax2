@@ -14,8 +14,8 @@
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program Account Details');
-define('NAVBAR_TITLE_1', 'The Affiliate Program');
-define('NAVBAR_TITLE_2', 'Edit Affiliate Account');
-define('HEADING_TITLE', 'The Affiliate Program - Your Account Details<br><small>You may edit any information below:</small>');
+define('NAVBAR_TITLE', 'Le Programme d\'affiliation');
+define('NAVBAR_TITLE_1', 'Le Programme d\'affiliation');
+define('NAVBAR_TITLE_2', 'Edition du Compte Affilié');
+define('HEADING_TITLE', 'Programme d\'affiliation <br>- Détails de votre compte<br><small>Vous pouvez éditer n\'importe quelle information ici :</small>');
 ?>

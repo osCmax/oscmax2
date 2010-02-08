@@ -14,6 +14,6 @@
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Your Account Details were changed!');
+define('NAVBAR_TITLE', 'Programme d\'affiliation');
+define('HEADING_TITLE', 'Vos modifications ont été faites !');
 ?>

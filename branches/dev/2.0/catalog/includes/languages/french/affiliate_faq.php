@@ -14,11 +14,11 @@
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program FAQ');
-define('HEADING_TITLE', 'Affiliate Program - Frequently Asked Questions');
+define('NAVBAR_TITLE', 'Programme d\'affiliation - FAQ');
+define('HEADING_TITLE', 'Programme d\'affiliation <br>- Questions fréquemment posées');
 
-define('TEXT_INFORMATION', '' . STORE_NAME . ' has compiled this info so that you may be better informed about our affiliate program.<br>
- If you have any questions please <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT). '">' . BOX_AFFILIATE_CONTACT . '</a> for more information.<br>
+define('TEXT_INFORMATION', '' . STORE_NAME . ' a compilé ces infos afin de mieu vous informer sur notre programme d\'affiliation.<br>
+ Si vous avez la moindre question, n\'hésitez pas à <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT). '">' . BOX_AFFILIATE_CONTACT . '</a> pour de plus amples informations.<br>
 <ul>
 <li><a href="' . tep_href_link('affiliate_faq.php') . '#1">Question 1?</a>
 <li><a href="' . tep_href_link('affiliate_faq.php') . '#2">Question 2?</a>

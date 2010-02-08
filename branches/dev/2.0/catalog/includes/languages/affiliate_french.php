@@ -14,54 +14,56 @@
   Released under the GNU General Public License
 */
 
-define('BOX_INFORMATION_AFFILIATE', 'The Affiliate Program');
-define('BOX_HEADING_AFFILIATE', 'Affiliate Program');
-define('BOX_HEADING_AFFILIATE_NEWS', 'Affiliate News');
-define('BOX_AFFILIATE_INFO', 'Affiliate Information');
-define('BOX_AFFILIATE_SUMMARY', 'Affiliate Summary');
-define('BOX_AFFILIATE_ACCOUNT', 'Edit Affiliate Account');
-define('BOX_AFFILIATE_CLICKRATE', 'Clickthrough Report');
-define('BOX_AFFILIATE_PAYMENT', 'Payment Report');
-define('BOX_AFFILIATE_SALES', 'Sales Report');
-define('BOX_AFFILIATE_BANNERS', 'Affiliate Banners');
-define('BOX_AFFILIATE_CONTACT', 'Contact Us');
-define('BOX_AFFILIATE_FAQ', 'Affiliate Program FAQ');
-define('BOX_AFFILIATE_LOGIN', 'Affiliate Log In');
-define('BOX_AFFILIATE_LOGOUT', 'Affiliate Log Out');
+define('BOX_INFORMATION_AFFILIATE', 'Le programme d\'affiliation');
+define('BOX_HEADING_AFFILIATE', 'Programme d\'affiliation');
+define('BOX_HEADING_AFFILIATE_NEWS', 'Nouvelles pour les affili&eacute;s');
 
-define('ENTRY_AFFILIATE_PAYMENT_DETAILS', 'Payable to:');
-define('ENTRY_AFFILIATE_ACCEPT_AGB', 'Check here to indicate that you have read and agree to the <a target="_new" href="' . tep_href_link(FILENAME_AFFILIATE_TERMS, '', 'SSL') . '">Associates Terms & Conditions</a>.');
-define('ENTRY_AFFILIATE_AGB_ERROR', ' &nbsp;<small><font color="#FF0000">You must accept our Associates Terms & Conditions</font></small>');
-define('ENTRY_AFFILIATE_PAYMENT_CHECK', 'Check Payee Name:');
+define('BOX_AFFILIATE_INFO', 'Information');
+define('BOX_AFFILIATE_SUMMARY', 'Sommaire');
+define('BOX_AFFILIATE_ACCOUNT', 'Editer mon compte');
+define('BOX_AFFILIATE_CLICKRATE', 'Rapport de clics');
+define('BOX_AFFILIATE_PAYMENT', 'Rapport des paiements');
+define('BOX_AFFILIATE_SALES', 'Journal de ventes');
+define('BOX_AFFILIATE_BANNERS', 'Bannières / Liens');
+
+define('BOX_AFFILIATE_CONTACT', 'Nous contacter');
+define('BOX_AFFILIATE_FAQ', 'FAQ');
+define('BOX_AFFILIATE_LOGIN', 'Connection');
+define('BOX_AFFILIATE_LOGOUT', 'D&eacute;connection');
+
+define('ENTRY_AFFILIATE_PAYMENT_DETAILS', 'Payable à :');
+define('ENTRY_AFFILIATE_ACCEPT_AGB', 'Cochez si vous avez lu et accepté les ');
+define('ENTRY_AFFILIATE_ACCEPT_AGB_TEXT', 'Termes et Conditions du programme d\'affiliation ');
+define('ENTRY_AFFILIATE_AGB_ERROR', ' &nbsp;<small><font style="errorText">Vous devez accepter les Termes et Conditions de notre programme d\'affiliation</font></small>');
+define('ENTRY_AFFILIATE_PAYMENT_CHECK', 'Chèque payable à :');
 define('ENTRY_AFFILIATE_PAYMENT_CHECK_TEXT', '');
-define('ENTRY_AFFILIATE_PAYMENT_CHECK_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
-define('ENTRY_AFFILIATE_PAYMENT_PAYPAL', 'PayPal Account Email:');
+define('ENTRY_AFFILIATE_PAYMENT_CHECK_ERROR', '&nbsp;<small><font style="errorText">requis</font></small>');
+define('ENTRY_AFFILIATE_PAYMENT_PAYPAL', 'Email compte Paypal :');
 define('ENTRY_AFFILIATE_PAYMENT_PAYPAL_TEXT', '');
-define('ENTRY_AFFILIATE_PAYMENT_PAYPAL_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_NAME', 'Bank Name:');
+define('ENTRY_AFFILIATE_PAYMENT_PAYPAL_ERROR', '&nbsp;<small><font style="errorText">requis</font></small>');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_NAME', 'Nom de votre banque :');
 define('ENTRY_AFFILIATE_PAYMENT_BANK_NAME_TEXT', '');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_NAME_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NAME', 'Account Name:');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_NAME_ERROR', '&nbsp;<small><font style="errorText">requis</font></small>');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NAME', 'Titulaire du compte :');
 define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NAME_TEXT', '');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NAME_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER', 'Account Number:');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NAME_ERROR', '&nbsp;<small><font style="errorText">requis</font></small>');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER', 'N° de Compte :');
 define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER_TEXT', '');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER', 'ABA/BSB number (branch number):');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER_ERROR', '&nbsp;<small><font style="errorText">requis</font></small>');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER', 'ABA/BSB number (U.S. only) :');
 define('ENTRY_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER_TEXT', '');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_SWIFT_CODE', 'SWIFT Code:');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER_ERROR', '&nbsp;<small><font style="errorText">requis</font></small>');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_SWIFT_CODE', 'Code SWIFT/BIC :');
 define('ENTRY_AFFILIATE_PAYMENT_BANK_SWIFT_CODE_TEXT', '');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_SWIFT_CODE_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
-define('ENTRY_AFFILIATE_COMPANY', 'Company');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_SWIFT_CODE_ERROR', '&nbsp;<small><font style="errorText">requis</font></small>');
+define('ENTRY_AFFILIATE_COMPANY', 'Société :');
 define('ENTRY_AFFILIATE_COMPANY_TEXT', '');
-define('ENTRY_AFFILIATE_COMPANY_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
-define('ENTRY_AFFILIATE_COMPANY_TAXID', 'VAT-Id.:');
+define('ENTRY_AFFILIATE_COMPANY_ERROR', '&nbsp;<small><font style="errorText">requis</font></small>');
+define('ENTRY_AFFILIATE_COMPANY_TAXID', 'N° TVA Intra. :');
 define('ENTRY_AFFILIATE_COMPANY_TAXID_TEXT', '');
-define('ENTRY_AFFILIATE_COMPANY_TAXID_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
-define('ENTRY_AFFILIATE_HOMEPAGE', 'Homepage');
-define('ENTRY_AFFILIATE_HOMEPAGE_TEXT', '&nbsp;<small><font color="#AABBDD">required (http://)</font></small>');
-define('ENTRY_AFFILIATE_HOMEPAGE_ERROR', '&nbsp;<small><font color="#FF0000">required (http://)</font></small>');
-
-define('CATEGORY_PAYMENT_DETAILS', 'You get your money by:');
+define('ENTRY_AFFILIATE_COMPANY_TAXID_ERROR', '&nbsp;<small><font style="errorText">requis</font></small>');
+define('ENTRY_AFFILIATE_HOMEPAGE', 'Site internet :');
+define('ENTRY_AFFILIATE_HOMEPAGE_TEXT', '&nbsp;<small><font color="#AABBDD">requis (http://)</font></small>');
+define('ENTRY_AFFILIATE_HOMEPAGE_ERROR', '&nbsp;<small><font style="errorText">requis (http://)</font></small>');
+define('CATEGORY_PAYMENT_DETAILS', 'Moyen(s) de paiement choisi(s) :');
 ?>

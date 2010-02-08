@@ -14,23 +14,21 @@
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program - Sign Up');
+define('NAVBAR_TITLE', 'Programme d\'Affiliation');
+define('HEADING_TITLE', 'Programmeme d\'Affiliation - Inscription');
 
-define('MAIL_AFFILIATE_SUBJECT', 'Welcome to the Affiliate Program');
-define('MAIL_AFFILIATE_HEADER', 'Dear Affiliate,
+define('MAIL_AFFILIATE_SUBJECT', 'Bienvenue sur notre Programme d\'affiliation');
+define('MAIL_AFFILIATE_HEADER', 'Cher Affilié,
 
-thank you for joining the Affiliate Program.
+Merci d\'avoir rejoint notre Programme d\'affiliation.
 
-Your Account Information:
-***********************
+Vos Informations de Compte :
+****************************
 
 ');
-define('MAIL_AFFILIATE_ID', 'Your Affiliate ID is: ');
-define('MAIL_AFFILIATE_USERNAME', 'Your Affiliate Username is: ');
-define('MAIL_AFFILIATE_PASSWORD', 'Your Password is: ');
-define('MAIL_AFFILIATE_LINK', 'Link to your account here:');
-define('MAIL_AFFILIATE_FOOTER', 'Have fun earning referal fees!
-
-Your Affiliate Team');
+define('MAIL_AFFILIATE_ID', 'Votre ID Affilié est :' . "\n");
+define('MAIL_AFFILIATE_USERNAME', 'Votre nom d\'affilié est :' . "\n");
+define('MAIL_AFFILIATE_PASSWORD', 'Votre mot de passe est :' . "\n\n");
+define('MAIL_AFFILIATE_LINK', 'Lien afin d\'acceder à votre compte :');
+define('MAIL_AFFILIATE_FOOTER', 'En espérant que vous gagnerez beaucoup !'."\n\n".'L\'équipe d\'affiliation');
 ?>

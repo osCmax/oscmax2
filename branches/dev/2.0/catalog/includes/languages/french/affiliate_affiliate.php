@@ -14,23 +14,23 @@
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Login');
-define('HEADING_TITLE', 'Affiliate Login');
-define('HEADING_TITLE_ERROR', 'Registration Error');
+define('NAVBAR_TITLE', 'Accès Affiliation');
+define('HEADING_TITLE', 'Accès Affiliation');
+define('HEADING_TITLE_ERROR', 'Erreur d\'enregistrement');
 
-define('TEXT_AFFILIATE_LOGOFF', 'Log Out');
-define('TEXT_AFFILIATE_ID', 'Affiliate Email:');
-define('TEXT_AFFILIATE_PASSWORD', 'Password:');
+define('TEXT_AFFILIATE_LOGOFF', 'Déconnection');
+define('TEXT_AFFILIATE_ID', 'Email de l\'affilié :');
+define('TEXT_AFFILIATE_PASSWORD', 'Mot de passe :');
 
-define('HEADING_NEW_AFFILIATE', 'New Affiliate');
-define('TEXT_NEW_AFFILIATE', 'I am a new affiliate.');
-define('TEXT_NEW_AFFILIATE_INTRODUCTION', 'By creating an affiliate account at ' . STORE_NAME . ' you will be able to earn valuable extra revenue by referring your website\'s visitors to us.');
-define('TEXT_NEW_AFFILIATE_TERMS', 'Our Affiliate Terms & Conditions');
+define('HEADING_NEW_AFFILIATE', 'Nouvel affilié');
+define('TEXT_NEW_AFFILIATE', 'Je suis un nouvel affilié.');
+define('TEXT_NEW_AFFILIATE_INTRODUCTION', 'En créant un compte affilié sur ' . STORE_NAME . ' vous pourrez gagner des revenus supplémentaires en envoyant vos visiteurs sur notre site internet.');
+define('TEXT_NEW_AFFILIATE_TERMS', 'Termes et Conditions de l\'affiliation. Cliquez ici.');
 
-define('HEADING_RETURNING_AFFILIATE', 'Returning Affiliate');
-define('TEXT_RETURNING_AFFILIATE', 'I am a returning affiliate.');
+define('HEADING_RETURNING_AFFILIATE', 'Déjà inscrit');
+define('TEXT_RETURNING_AFFILIATE', 'Accès pour les affiliés inscrits.');
 
-define('TEXT_AFFILIATE_PASSWORD_FORGOTTEN', 'Password forgotten? Click here.');
+define('TEXT_AFFILIATE_PASSWORD_FORGOTTEN', 'Mot de passe perdu ? Cliquez ici.');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> No match for \'Affiliate ID\' and/or \'Password\'.');
+define('TEXT_LOGIN_ERROR', '<font style="errorText"><b>ERREUR:</b></font> Données manquantes pour \'Email de l\'affilié\' et/ou \'Mot de passe\'.');
 ?>

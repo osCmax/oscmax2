@@ -2,90 +2,7 @@
 /*
   $Id: whos_online.php,v 3.5 2008/08/21 SteveDallas Exp $
   
-  2009 Oct 11 v3.6.6 MarcusDesign				Added the ability to look up the meaning of the different words in 'user agent'. 
-
-  2009 Sep 03 v.3.6.5 www.ellinas.org			Added a missing file from previous full package and made some file and sql fixes for the user_agent to work (or to work properly).
-  												I used the full package 3.6.3 from Vag and also included the bugfix 3.6.4 from AndreD.
-												*** Please visit my website www.ellinas.org and click on any of the google ads that might interest you :)
-  
-  2009 Aug 15 v3.6.3 Vag						Added a space after "HTTP Referer URL:"
-												Google Maps Key is now stored in the database and you can add/change it from the Admin area
-												Changed domain strings with constants to make updates of new versions easier to install
-												Country flag is shown only when its image exists
-
-  2009 Aug 21 v3.6.2 dr_lucas					Added mouse-over DHTML tooltip with location information. Hover the flag with your mouse to see the information.
-  
-  2009 Aug 18 v3.6.1 Marc Andre Caron			Added mysql_real_escape_string before inserting geolocation and stripslashes when reading from DB for country name,
-												region name and city
-  
-  2009 Aug 15 v3.6 Vag							You see a flag of the country and the logo of the ISP (only certain ISPs are included, mostly greek ones) before the IP.
-												You see images of the browser and the OS before the User Agent string (almost all are included).
-												You see the logo of the referer (ony some major ones and some greek ones are included) before the formatted referer string.
-												The referer URL is formatted, so for certain search engines you only see the search keyphrases instead.
-												"ID: 0" and "Name: Guest" are not displayed anymore - Except from the green color, you see the 'Guest' string anyway.
-												The strings in the report at the end are different for singular and plural.
-												Added the file admin/includes/functions/whos_online.php with functions for most of the above.
-												The language files are updated.
-
-  2009 Aug 15 v3.5.9 Vag						Language files are updated (TEXT_SHOW_MAP is added and some words are translated from english)
-												The bug that was showing everyone as a bot on the map is fixed
-												The Google maps bots that go to "/visitors_georss.php" are not shown (they were becoming too many if Refresh rate was less than 2 minutes)
-												IP Address geolocation and Visitors World Map are included
-												Some characters in city names were garbled, this is fixed
-
-  2009 Aug 9 v3.5.8 Vag							Added option for showing the map (Visitors World Map should be installed)
-
-  2009 Aug 9 v3.5.6 dr_lucas					Added 15 seconds refresh interval.
-												Fixed/Removed the requirement for matching STORE_SESSION in order to see the carts.
-												Now you can see the carts even if STORE_SESSION does not match.
-  
-  2009 Aug 5 v3.5.5  Marc-Andre Caron			Added IP address geolocation (country,region,city) with IPInfoDB XML API (http://www.ipinfodb.com/ip_location_api.php).
-  
-  2008 Aug 21 v3.5.4 Glen Hoag aka SteveDallas	Changed "onChange" action to "onclick" on the Show Bots checkbox
-												to fix MSIE problem.  Thanks to Scott McFadden (Bushmaster)
-												Last Refresh Time display format can be either 12 hr or 24 hr clock
-												Based on post by Claudio di Francesco (cdfcool)
-												Entry and Last Click fields displayed in same format as Last Refresh Time
-												Based on work for v3.5.3 by theintoy
-												Formatting change to align total visitors number with others
-												Miscellaneous formatting changes
-												Workaround for timeout that occurs when suhosin session data encryption is used
-												Carts not viewable when suhosin installed
-
-  2008 Aug 19 v3.5.3 CWS aka theintoy			Added a hidden field for the oscAdminId
-												Changed all references to HTTP_GET_VARS to $_GET
-												Formatted a the options into a table
-
-  2008 Jul 02 v3.5.1 Glen Hoag aka SteveDallas	Two fixes for register_globals=off compatibility:
-												Drop-down menus retain their values (problem in MS2; global fix exists in RC1)
-												Carts display correct contents when selected
-
-  2008 Jun 13 v3.5   Glen Hoag aka SteveDallas	Moved hostname resolution to catalog/includes/functions/whos_online.php
-												to reduce admin tool load
-												Removed "manual bot detection" code.  Install latest spiders.txt instead
-												http://addons.oscommerce.com/info/2455
-												Moved version number out of language files; it is now appended to
-												HEADING_TITLE in this file.
-												Changed refresh time and profile display to drop-down menus.
-												Added "Show Bots" checkbox
-												Fixed SQL Table name bug for non-standard tables, from v3.4.1 by lynkit
-												The following changes are courtesy of Mike Challis (CRUZN8R):
-												Cleaned up usage of get vars on refresh
-												Added wordwrap to referer URL
-												Added active customer count to summary
-
-  2007 Dec 4  v3.3.2 Glen Hoag aka SteveDallas	Removed bug introduced by previous contributor that
-												prevented cart display if STORE_SESSIONS was set to null
-
-  2007 Dec 2  v3.3.1 Glen Hoag aka SteveDallas	Minor fix to correct link for IP lookup
-
-  2007 Dec 1  v3.3   Glen Hoag aka SteveDallas	Many fixes for HTML 4.01 DTD conformance
-												Rewrote product/category name display for robustness
-												Added product/category name display for Ultimate SEO URLs
-												Fixed gethostbyname errors
-												Rewrote duplicate counting code
-
-  updated version number because of version number jumble and provide installation instructions.
+  2009 Oct 11 v3.6.6 MarcusDesign
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
@@ -455,7 +372,7 @@ echo '<b>' . TABLE_HEADING_IP_ADDRESS . ':</b> ' . "<a href=http://www.ipinfodb.
                 <table border="0" width="100%" cellspacing="0" cellpadding="0">
                   <tr>
                     <td class="pageHeading"><?php echo HEADING_TITLE . " " . $wo_version; ?></td>
-                    <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                    <td class="pageHeading" align="right">&nbsp;</td>
                   </tr>
                 </table>
               </td>

@@ -216,8 +216,6 @@ $Id: ipn.php 3 2006-05-27 04:59:07Z user $
 // Let's put all the product info together into a string
             $products_ordered .= $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . $products_model . ' = ' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . $products_ordered_attributes . "\n";
           }        // PRODUCT LOOP ENDS HERE
-#######################################################
-
 // lets start with the email confirmation
 // BOF content type fix by AlexStudio
             $content_type = '';

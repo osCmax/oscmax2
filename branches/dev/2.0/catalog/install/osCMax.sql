@@ -2077,7 +2077,7 @@ INSERT INTO `countries` VALUES(239, 'Zimbabwe', 'ZW', 'ZWE', 1, 0);
 
 
 INSERT INTO currencies VALUES (1,'US Dollar','USD','$','','.',',','2','1.0000',now());
-INSERT INTO currencies VALUES (2,'Euro','EUR','','EUR','.',',','2','1.1036',now());
+INSERT INTO currencies VALUES (2,'Euro','EUR','','EUR','.',',','2','1.0000',now());
 INSERT INTO currencies VALUES (3,'UK Pound','GBP','£','','.',',','2','1.0000',now());
 
 

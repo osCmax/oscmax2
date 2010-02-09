@@ -1,8 +1,8 @@
 # osCMax Power E-Commerce
 # http://oscdox.com
 #
-# Default Database For osCMax v2.0 RC4
-# Copyright (c) 2009 osCMax
+# Default Database For osCMax v2.0.15
+# Copyright (c) 2010 osCMax
 #
 # Released under the GNU General Public License
 #
@@ -13,8 +13,7 @@
 #       * Any tables you add here should be added in admin/backup.php
 #         and in catalog/install/includes/functions/database.php
 #       * To see the 'diff'erence between MySQL databases, use
-#         the mysqldiff perl script located in the extras
-#         directory of the 'catalog' module.
+#         mysqldiff.
 #       * Comments should be like these, full line comments.
 #         (don't use inline comments)
 
@@ -466,7 +465,7 @@ CREATE TABLE countries (
   countries_iso_code_2 char(2) NOT NULL,
   countries_iso_code_3 char(3) NOT NULL,
   address_format_id int NOT NULL,
-  active tinyint(3) unsigned DEFAULT '0',
+  active tinyint(3) unsigned DEFAULT '1',
   PRIMARY KEY (countries_id),
   KEY IDX_COUNTRIES_NAME (countries_name)
 );

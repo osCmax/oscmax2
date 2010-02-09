@@ -46,7 +46,7 @@ header('Pragma: no-cache');                                    # HTTP/1.0
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>osCMax Database Update - RC3 to 2.0 Stable</title>
+  <title>osCMax Database Update - v2.0.4 to v2.0.15</title>
   <style type="text/css">
     body {
       font-family: Verdana, Arial, sans-serif;
@@ -68,7 +68,7 @@ header('Pragma: no-cache');                                    # HTTP/1.0
 </head>
 <body>
 
-<h2>osCMax RC3 to 2.0 Stable<br>Database Upgrade Script</h2>
+<h2>osCMax 2.0.4 to 2.0.15 Stable<br>Database Upgrade Script</h2>
 <p><strong>Before proceeding, please make a backup of your database.</strong><br>Do not run this updater more than once, <br>or you will get duplicate entries in your database</p>
 <p>Specify the correct settings<br />to connect to your database.</p>
 
@@ -95,7 +95,7 @@ if (is_param($_POST['hostname'])
         and is_param($_POST['username'])        
         and is_param($_POST['database'])
         ) {
-    $file = 'rc3_to_stable.sql';
+    $file = '2.0.4_to_2.0.15.sql';
     if (! file_exists($file)) {
         show_error(sprintf('File "%s" does not exist.', $file));
     } else if (! is_file($file)) {
@@ -135,7 +135,7 @@ if (is_param($_POST['hostname'])
                 mysql_check_error();
             }
         }
-        echo "<center><p>You have successfully upgraded your osCMax RC3 database to osCMax 2.0 Stable format.</p><br><br><strong>Delete this file from your server now!</strong></center>\n";
+        echo "<center><p>You have successfully upgraded your osCMax 2.0.4 database to osCMax 2.0.15 format.</p><br><br><strong>Delete this file from your server now!</strong></center>\n";
     }
 }
 ?>
@@ -143,7 +143,7 @@ if (is_param($_POST['hostname'])
 
 <p>( <a href="<?php echo $_SERVER['PHP_SELF']; ?>">new</a> )</p>
 
-<p><small>Copyright &copy; 2009 <a href="http://www.oscmax.com/">osCMax</a></small></p>
+<p><small>Copyright &copy; 2010 <a href="http://www.oscmax.com/">osCMax</a></small></p>
 
 </body>
 </html>

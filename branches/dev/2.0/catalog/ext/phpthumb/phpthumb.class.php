@@ -66,7 +66,7 @@ class phpthumb {
 	// See phpThumb.config.php for descriptions of what each of these settings do
 
 	// * Directory Configuration
-	var $config_cache_directory                      = null;
+	var $config_cache_directory                      = 'cache/';
 	var $config_cache_directory_depth                = 0;
 	var $config_cache_disable_warning                = true;
 	var $config_cache_source_enabled                 = false;

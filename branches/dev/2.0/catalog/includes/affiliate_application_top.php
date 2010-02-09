@@ -18,7 +18,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
 // Set the local configuration parameters - mainly for developers
   if (file_exists(DIR_WS_INCLUDES . 'local/affiliate_configure.php')) include(DIR_WS_INCLUDES . 'local/affiliate_configure.php');
 
-//  require(DIR_WS_INCLUDES . 'affiliate_configure.php');
+  require(DIR_WS_INCLUDES . 'affiliate_configure.php');
   require(DIR_WS_FUNCTIONS . 'affiliate_functions.php');
 
 // define the database table names used in the contribution
@@ -69,11 +69,11 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_AFFILIATE_HELP_20', 'affiliate_help20.php');
   define('FILENAME_AFFILIATE_HELP_21', 'affiliate_help21.php');
   define('FILENAME_AFFILIATE_HELP_22', 'affiliate_help22.php');
-	define('FILENAME_AFFILIATE_BANNERS_CATEGORY', 'affiliate_banners_category.php');
+  define('FILENAME_AFFILIATE_BANNERS_CATEGORY', 'affiliate_banners_category.php');
   define('FILENAME_AFFILIATE_BANNERS_BUILD_CAT', 'affiliate_banners_build_cat.php');
   define('FILENAME_AFFILIATE_VALIDCATS', 'affiliate_validcats.php');
   define('FILENAME_AFFILIATE_INFO', 'affiliate_info.php');
-	define('TABLE_AFFILIATE_NEWS_CONTENTS', 'affiliate_news_contents');
+  define('TABLE_AFFILIATE_NEWS_CONTENTS', 'affiliate_news_contents');
   define('FILENAME_AFFILIATE_BANNERS', 'affiliate_banners.php');
   define('FILENAME_AFFILIATE_BANNERS_BANNERS', 'affiliate_banners_banners.php');
   define('FILENAME_AFFILIATE_BANNERS_BUILD', 'affiliate_banners_build.php');
@@ -97,20 +97,20 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_LANGUAGES . 'affiliate_' . $language . '.php');
 
   $affiliate_clientdate = (date ("Y-m-d H:i:s"));
-  $affiliate_clientbrowser = $HTTP_SERVER_VARS["HTTP_USER_AGENT"];
-  $affiliate_clientip = $HTTP_SERVER_VARS["REMOTE_ADDR"];
-  $affiliate_clientreferer = $HTTP_SERVER_VARS["HTTP_REFERER"];
+  $affiliate_clientbrowser = $_SERVER["HTTP_USER_AGENT"];
+  $affiliate_clientip = $_SERVER["REMOTE_ADDR"];
+  $affiliate_clientreferer = $_SERVER["HTTP_REFERER"];
 
-  if (!$HTTP_SESSION_VARS['affiliate_ref']) {
+  if (!$_SESSION['affiliate_ref']) {
     tep_session_register('affiliate_ref');
     tep_session_register('affiliate_clickthroughs_id');
-    if (($HTTP_GET_VARS['ref'] || $HTTP_POST_VARS['ref'])) {
-      if ($HTTP_GET_VARS['ref']) $affiliate_ref = $HTTP_GET_VARS['ref'];
-      if ($HTTP_POST_VARS['ref']) $affiliate_ref = $HTTP_POST_VARS['ref'];
-      if ($HTTP_GET_VARS['products_id']) $affiliate_products_id = $HTTP_GET_VARS['products_id'];
-      if ($HTTP_POST_VARS['products_id']) $affiliate_products_id = $HTTP_POST_VARS['products_id'];
-      if ($HTTP_GET_VARS['affiliate_banner_id']) $affiliate_banner_id = $HTTP_GET_VARS['affiliate_banner_id'];
-      if ($HTTP_POST_VARS['affiliate_banner_id']) $affiliate_banner_id = $HTTP_POST_VARS['affiliate_banner_id'];
+    if (($_GET['ref'] || $_POST['ref'])) {
+      if ($_GET['ref']) $affiliate_ref = $_GET['ref'];
+      if ($_POST['ref']) $affiliate_ref = $_POST['ref'];
+      if ($_GET['products_id']) $affiliate_products_id = $_GET['products_id'];
+      if ($_POST['products_id']) $affiliate_products_id = $_POST['products_id'];
+      if ($_GET['affiliate_banner_id']) $affiliate_banner_id = $_GET['affiliate_banner_id'];
+      if ($_POST['affiliate_banner_id']) $affiliate_banner_id = $_POST['affiliate_banner_id'];
 
       if (!$link_to) $link_to = "0";
       $sql_data_array = array('affiliate_id' => $affiliate_ref,
@@ -147,7 +147,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
     setcookie('affiliate_ref', $affiliate_ref, time() + AFFILIATE_COOKIE_LIFETIME);
     }
     if ($HTTP_COOKIE_VARS['affiliate_ref']) { // Customer comes back and is registered in cookie
-      $affiliate_ref = $HTTP_COOKIE_VARS['affiliate_ref'];
+      $affiliate_ref = $_COOKIE['affiliate_ref'];
     }
   }
 

@@ -20,6 +20,8 @@
  *   - 01-Oct-2006: use of XHTML/CSS, superglobals and code cleanup
  */
 
+  error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+
 # Check if variable is a non-empty, non-whitespace string.
 function is_param($var) {
     $var = trim($var);

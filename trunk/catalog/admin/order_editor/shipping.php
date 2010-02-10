@@ -15,7 +15,10 @@
 
 // class constructor
     function shipping($module = '') {
-      global $language, $PHP_SELF;
+      global $language, $PHP_SELF, $cart;
+// BOF: Individual Shipping Prices      
+      $shiptotal = $cart->get_shiptotal();
+// EOF: Individual Shipping Prices
 
       if (defined('MODULE_SHIPPING_INSTALLED') && tep_not_null(MODULE_SHIPPING_INSTALLED)) {
         $this->modules = explode(';', MODULE_SHIPPING_INSTALLED);
@@ -26,10 +29,22 @@
           $include_modules[] = array('class' => substr($module['id'], 0, strpos($module['id'], '_')), 'file' => substr($module['id'], 0, strpos($module['id'], '_')) . '.' . substr($PHP_SELF, (strrpos($PHP_SELF, '.')+1)));
         } else {
           reset($this->modules);
+// BOF: Individual Shipping Prices
+// Show either normal shipping modules or Individual shipping module when Individual Shipping Module is On
+          // Show Individual Shipping Only
+          if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $shiptotal) {
+            $include_modules[] = array('class'=> 'indvship', 'file' => 'indvship.php');
+          } else {
+          // All Other Shipping Modules
           while (list(, $value) = each($this->modules)) {
             $class = substr($value, 0, strrpos($value, '.'));
-            $include_modules[] = array('class' => $class, 'file' => $value);
+              // Don't show Individual Shipping Module
+              if ($class != 'indvship')  {
+                $include_modules[] = array('class' => $class, 'file' => $value);
+              }
+            }
           }
+// EOF: Individual Shipping Prices
         }
 
         for ($i=0, $n=sizeof($include_modules); $i<$n; $i++) {

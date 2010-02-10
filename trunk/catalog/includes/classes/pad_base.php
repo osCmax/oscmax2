@@ -85,20 +85,14 @@
   
 */
     function pad_base($products_id=0) {
-
-
-      $this->products_id  = $products_id;
-      
+      $this->products_id = $products_id;
       if ($this->products_id != 0) {
-        $tax_class_query = tep_db_query('SELECT products_tax_class_id 
-                                         FROM ' . TABLE_PRODUCTS . " 
-                                         WHERE products_id = '" . (int)$products_id . "'");
+        $tax_class_query = tep_db_query('SELECT p.products_tax_class_id, IF(s.status, s.specials_new_products_price, p.products_price) as products_price FROM ' . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id WHERE p.products_id = '" . (int)$products_id . "'");
         $tax_class_array = tep_db_fetch_array($tax_class_query);
         $this->products_tax_class_id = $tax_class_array['products_tax_class_id'];
+        $this->products_original_price = $tax_class_array['products_price'];
       }
-      
       $this->_SetConfigurationProperties('PRODINFO_ATTRIBUTE_');
-
     }
 
 
@@ -117,15 +111,11 @@
   
 */
     function _SetConfigurationProperties($prefix) {
-
       $this->show_out_of_stock    = constant($prefix . 'SHOW_OUT_OF_STOCK');
       $this->mark_out_of_stock    = constant($prefix . 'MARK_OUT_OF_STOCK');
       $this->out_of_stock_msgline = constant($prefix . 'OUT_OF_STOCK_MSGLINE');
       $this->no_add_out_of_stock  = constant($prefix . 'NO_ADD_OUT_OF_STOCK');
-
     }
-
-
 /*
     Method: draw
   
@@ -149,20 +139,12 @@
   
 */
     function draw() {
-
       $out=$this->_draw_table_start();
-
       $out.=$this->_draw_stocked_attributes();
-      
       $out.=$this->_draw_nonstocked_attributes();
-    
       $out.=$this->_draw_table_end();
-      
       return $out;
-      
     }
-
-
 /*
     Method: _draw_table_start
   
@@ -185,8 +167,6 @@
       $out.='            </tr>';
       return $out;
     }
-
-
 /*
     Method: _draw_stocked_attributes
   
@@ -217,8 +197,6 @@
       }
       return $out;
     }
-
-
 /*
     Method: _draw_nonstocked_attributes
   
@@ -245,8 +223,6 @@
       }
       return $out;
     }
-
-
 /*
     Method: _draw_table_end
   
@@ -265,8 +241,6 @@
     function _draw_table_end() {
       return '           </table>';
     }
-
-
 /*
     Method: _build_attributes_array
   
@@ -311,14 +285,32 @@
       
       $products_options_name_query = tep_db_query("select distinct popt.products_options_id, popt.products_options_name, popt.products_options_track_stock from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$this->products_id . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "' " . $stocked_where . " order by popt.products_options_name");
       $attributes=array();
+	  
       while ($products_options_name = tep_db_fetch_array($products_options_name_query)) {
         $products_options_array = array();
         $products_options_query = tep_db_query("select pov.products_options_values_id, pov.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov where pa.products_id = '" . (int)$this->products_id . "' and pa.options_id = '" . (int)$products_options_name['products_options_id'] . "' and pa.options_values_id = pov.products_options_values_id and pov.language_id = '" . (int)$languages_id . "'");
         while ($products_options = tep_db_fetch_array($products_options_query)) {
-          $products_options_array[] = array('id' => $products_options['products_options_values_id'], 'text' => $products_options['products_options_values_name']);
-          if ($products_options['options_values_price'] != '0') {
-            $products_options_array[sizeof($products_options_array)-1]['text'] .= ' (' . $products_options['price_prefix'] . $currencies->display_price($products_options['options_values_price'], tep_get_tax_rate($this->products_tax_class_id)) .')';
-          }
+
+$products_options_array[] = array('id' => $products_options['products_options_values_id'], 'text' => $products_options['products_options_values_name']);
+
+
+if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
+//Option prices will displayed as a final product price. This can (currently) only be used with a satisfying result if you have only one option per product.
+
+  if ($products_options['price_prefix'] == '-') {// in case price lowers, don't add values, subtract.
+    $show_price = 0.0 + $this->products_original_price - $products_options['options_values_price']; // force float (in case) using the 0.0;
+  } else {
+    $show_price = 0.0 + $this->products_original_price + $products_options['options_values_price']; // force float (in case) using the 0.0;
+  }
+
+  $products_options_array[sizeof($products_options_array)-1]['text'] .= '&nbsp;'.$currencies->display_price( $show_price, tep_get_tax_rate($this->products_tax_class_id)).' ';
+
+}else{ //Display the option prices as differece prices with +/- prefix as usually
+  if ($products_options['options_values_price'] != '0') {
+    $products_options_array[sizeof($products_options_array)-1]['text'] .= ' (' . $products_options['price_prefix'] . $currencies->display_price($products_options['options_values_price'], tep_get_tax_rate($this->products_tax_class_id)) .')';
+  }
+}
+
         }
         if (isset($cart->contents[$this->products_id]['attributes'][$products_options_name['products_options_id']]))
           $selected = $cart->contents[$this->products_id]['attributes'][$products_options_name['products_options_id']];

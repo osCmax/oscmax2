@@ -35,7 +35,7 @@ $Id: column_left.php 3 2006-05-27 04:59:07Z user $
   }
   if (tep_admin_check_boxes('customers.php') == true) {
     require(DIR_WS_BOXES . 'customers.php');
-  }
+   }
   if (tep_admin_check_boxes('taxes.php') == true) {
     require(DIR_WS_BOXES . 'taxes.php');
   }

@@ -20,6 +20,12 @@ $Id: logoff.php 3 2006-05-27 04:59:07Z user $
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_LOGOFF);
 
   $breadcrumb->add(NAVBAR_TITLE);
+  // PWA BOF 2b
+  if (tep_session_is_registered('customer_is_guest')){
+    //delete the temporary account
+    tep_db_query("delete from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$customer_id . "'");
+  }
+  // PWA EOF 2b
 
   tep_session_unregister('customer_id');
   tep_session_unregister('customer_default_address_id');
@@ -32,9 +38,12 @@ $Id: logoff.php 3 2006-05-27 04:59:07Z user $
   tep_session_unregister('customer_country_id');
   tep_session_unregister('customer_zone_id');
   tep_session_unregister('comments');
-  
+// PWA BOF
+  tep_session_unregister('customer_is_guest');
+// PWA EOF
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   tep_session_unregister('gv_id');
+  tep_session_unregister('cot_gv');
   tep_session_unregister('cc_id');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 

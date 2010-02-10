@@ -78,6 +78,8 @@
             <td class="pageHeading" valign="top"><?php echo $products_name; ?></td>
             <td class="pageHeading" align="right" valign="top"><?php echo $products_price; ?></td>
           </tr>
+	  
+	 
         </table></td>
       </tr>
       <tr>
@@ -94,30 +96,41 @@
               <td align="center" class="smallText">
 <?php
 			$image_lg = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);
-			if ($lg_image_ext = mopics_file_exists(DIR_FS_CATALOG . $image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
-				$image_size = @getimagesize(DIR_FS_CATALOG . $image_lg . '.' . $lg_image_ext);
+			if ($lg_image_ext = mopics_file_exists($image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
+				$image_size = @getimagesize($image_lg . '.' . $lg_image_ext);
+				
+			//BOF SLIMBOX
+			$lightlarge = $image_lg . "." . $lg_image_ext;
 ?>
-
-<script language="javascript" type="text/javascript"><!--
-document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $product_info['products_id'] . '&type=' . $lg_image_ext); ?>\',\'<?php echo ((int)$image_size[1] + 30); ?>\',\'<?php echo ((int)$image_size[0] + 5); ?>\');"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>');
+<script language="javascript"><!--
+document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>');
 //--></script>
 <noscript>
-<a href="<?php echo tep_href_link($image_lg . '.' . $lg_image_ext); ?>" target="_blank"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?><br /><span class="smallText"><?php echo TEXT_CLICK_TO_ENLARGE; ?></span></a>
+<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
 </noscript>
+<!--		 EOF SLIMBOX   -->
+
 <?php
 			} else {
           echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
 			}
+
+//++++ QT Pro: Begin Changed code
+    if (tep_not_null($product_info['products_image'])) {
 ?>
+
               </td>
             </tr>
           </table>
 <?php
-    }
+}
+//++++ QT Pro: End Changed Code
+} 
 		//// END:  Added for Dynamic MoPics v3.000
 ?>
           <p><?php echo stripslashes($product_info['products_description']); ?></p>
 <?php
+
     $products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$HTTP_GET_VARS['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");
     $products_attributes = tep_db_fetch_array($products_attributes_query);
     if ($products_attributes['total'] > 0) {
@@ -127,27 +140,27 @@ document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENA
       $class = 'pad_' . PRODINFO_ATTRIBUTE_PLUGIN;
       $pad = new $class($products_id);
       echo $pad->draw();
-//++++ QT Pro: End Changed Code
     }
+
+//Display a table with which attributecombinations is on stock to the customer?
+if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "qtpro_stock_table.php"); endif;
+
+//++++ QT Pro: End Changed Code
 ?>
         </td>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+
+<center>
 <?php
 		//// BEGIN:  Added for Dynamic MoPics v3.000
-?>
-      <tr>
-      	<td>
-				<div class="screenshotsHeader">
-					<div class="screenshotsHeaderText"><?php echo TEXT_OTHER_PRODUCT_IMAGES; ?></div>
-				</div>
-				<div class="screenshotsBlock">
-					<?php include(DIR_WS_MODULES . 'dynamic_mopics.php'); ?>
-   			        </div>
-	</td>
-      </tr>
-<?php
+ if (is_file(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image']) && DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'] != "pixel_trans.gif"){
+ 					 include(DIR_WS_MODULES . 'dynamic_mopics.php');   	
+	   } 
 		//// END:  Added for Dynamic MoPics v3.000
 ?>
+</center>
+
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
@@ -203,7 +216,16 @@ document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENA
                 <!-- Wish List 3.5 Start -->
                 <td align="center"><?php echo tep_image_submit('button_wishlist.gif', 'Add to Wishlist', 'name="wishlist" value="wishlist"'); ?></td>
                 <!-- Wish List 3.5 End   -->
-                <td class="main" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
+
+                <td class="main" align="right">
+		<?php 
+			if (tep_session_is_registered('affiliate_id')) { 
+				echo  tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART) . '<br><a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_BUILD, 'individual_banner_id=' . $product_info['products_id']) .'" target="_self">' . tep_image('includes/languages/english/images/buttons/button_affiliate_build_a_link.gif', 'Make a link') . ' </a>';
+				 
+	       } else { 
+	       	        echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); 
+			} 
+	       ?></td>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
             </table></td>
@@ -215,6 +237,8 @@ document.write('<a href="javascript:popupImage(\'<?php echo tep_href_link(FILENA
       </tr>
       <tr>
         <td>
+	
+	
 <?php
 
 //added for cross -sell

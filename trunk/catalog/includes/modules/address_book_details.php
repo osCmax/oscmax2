@@ -112,38 +112,22 @@ $Id: address_book_details.php 10 2006-06-22 03:56:08Z user $
           <tr>
             <td class="main"><?php echo ENTRY_STATE; ?></td>
             <td class="main">
-<?php
-// BOF: MOD - Country-State Selector
-//  if ($process == true) {
-//    if ($entry_state_has_zones == true) {
-    $zones_array = array();
-//      $zones_query = tep_db_query("select zone_name from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "' order by zone_name");
-    $zones_query = tep_db_query("select zone_name, zone_id from " . TABLE_ZONES . " where zone_country_id = '" . (int)$entry['entry_country_id'] . "' order by zone_name");
-    while ($zones_values = tep_db_fetch_array($zones_query)) {
-//        $zones_array[] = array('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
-      $zones_array[] = array('id' => $zones_values['zone_id'], 'text' => $zones_values['zone_name']);
-    }
-    if (count($zones_array) > 0) {
-      echo tep_draw_pull_down_menu('zone_id', $zones_array, $entry['entry_zone_id']);
-      echo tep_draw_hidden_field('state', '');
-    } else {
-//    echo tep_draw_input_field('state', tep_get_zone_name($entry['entry_country_id'], $entry['entry_zone_id'], $entry['entry_state']));
-      echo tep_draw_input_field('state', $entry['entry_state']);
-    }
-// EOF: MOD - Country-State Selector
-
-    if (tep_not_null(ENTRY_STATE_TEXT)) echo '&nbsp;<span class="inputRequirement">' . ENTRY_STATE_TEXT;
-?></td>
+<div id="states">
+				<?php
+				// +Country-State Selector
+				echo ajax_get_zones_html($entry['entry_country_id'],($entry['entry_zone_id'] == 0 ? $entry['entry_state'] : $entry['entry_zone_id']), false);
+				// -Country-State Selector
+				?>
+				</div></td>
           </tr>
 <?php
   }
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_COUNTRY; ?></td>
-<?php /* LINE CHANGED: MOD - Country-State Selector */
-/*          <td class="main"><?php echo tep_get_country_list('country', $entry['entry_country_id']) . ' ' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td> */
-?>
-            <td class="main"><?php echo tep_get_country_list('country', $entry['entry_country_id'],'onChange="return refresh_form(addressbook);"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
+			<?php // +Country-State Selector ?>
+            <td class="main"><?php echo tep_get_country_list('country', $entry['entry_country_id'],'onChange="getStates(this.value,\'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
+            <?php // -Country-State Selector ?>
           </tr>
 <?php
   if ((isset($HTTP_GET_VARS['edit']) && ($customer_default_address_id != $HTTP_GET_VARS['edit'])) || (isset($HTTP_GET_VARS['edit']) == false) ) {

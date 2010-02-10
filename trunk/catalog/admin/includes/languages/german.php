@@ -71,7 +71,7 @@ define('HTML_PARAMS','dir="ltr" lang="de"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.0');
+define('TITLE', 'osCMax v2.1');
 
 // BOF: MOD - ORDER EDIT
 // Create account & order
@@ -257,6 +257,7 @@ define('BOX_HEADING_REPORTS', 'Berichte');
 define('BOX_REPORTS_PRODUCTS_VIEWED', 'besuchte Artikel');
 define('BOX_REPORTS_PRODUCTS_PURCHASED', 'gekaufte Artikel');
 define('BOX_REPORTS_ORDERS_TOTAL', 'Kunden-Bestellstatistik');
+define('BOX_REPORTS_CREDITS', 'Customer Credits Report');
 
 // tools text in includes/boxes/tools.php
 define('BOX_HEADING_TOOLS', 'Hilfsprogramme');

@@ -31,17 +31,18 @@ $Id: tools.php 3 2006-05-27 04:59:07Z user $
 //                                   '<a href="' . tep_href_link(FILENAME_NEWSLETTERS) . '" class="menuBoxContentLink">' . BOX_TOOLS_NEWSLETTER_MANAGER . '</a><br>' .
 //                                   '<a href="' . tep_href_link(FILENAME_SERVER_INFO) . '" class="menuBoxContentLink">' . BOX_TOOLS_SERVER_INFO . '</a><br>' .
 //                                   '<a href="' . tep_href_link(FILENAME_WHOS_ONLINE) . '" class="menuBoxContentLink">' . BOX_TOOLS_WHOS_ONLINE . '</a>');
-    $contents[] = array('text'  => tep_admin_files_boxes(FILENAME_RECOVER_CART_SALES, BOX_TOOLS_RECOVER_CART) .
-                                   tep_admin_files_boxes(FILENAME_BACKUP, BOX_TOOLS_BACKUP) .
-                                   tep_admin_files_boxes(FILENAME_BANNER_MANAGER, BOX_TOOLS_BANNER_MANAGER) .
-                                   tep_admin_files_boxes(FILENAME_BATCH_PRINT, BOX_TOOLS_BATCH_CENTER) . 
-                                   tep_admin_files_boxes(FILENAME_CACHE, BOX_TOOLS_CACHE) .
-                                   tep_admin_files_boxes(FILENAME_MAIL, BOX_TOOLS_MAIL) .
-                                   tep_admin_files_boxes(FILENAME_NEWSLETTERS, BOX_TOOLS_NEWSLETTER_MANAGER) .
-                                   tep_admin_files_boxes(FILENAME_SERVER_INFO, BOX_TOOLS_SERVER_INFO) .
-                                   tep_admin_files_boxes(FILENAME_PACKAGING, BOX_TOOLS_PACKAGING) .
-                                   tep_admin_files_boxes(FILENAME_UPS_BOXES_USED, BOX_TOOLS_UPS_BOXES_USED) .
-                                   tep_admin_files_boxes(FILENAME_WHOS_ONLINE, BOX_TOOLS_WHOS_ONLINE));
+    $contents[] = array('text'  => tep_admin_files_boxes(FILENAME_BACKUP, BOX_TOOLS_BACKUP, TOP) .
+                                   tep_admin_files_boxes(FILENAME_RECOVER_CART_SALES, BOX_TOOLS_RECOVER_CART, TOP) .
+                                   tep_admin_files_boxes(FILENAME_BANNER_MANAGER, BOX_TOOLS_BANNER_MANAGER, TOP) .
+                                   tep_admin_files_boxes(FILENAME_BATCH_PRINT, BOX_TOOLS_BATCH_CENTER, TOP) . 
+                                   tep_admin_files_boxes(FILENAME_MAIL, BOX_TOOLS_MAIL, TOP) .
+                                   tep_admin_files_boxes(FILENAME_NEWSLETTERS, BOX_TOOLS_NEWSLETTER_MANAGER, TOP) .
+                                   tep_admin_files_boxes(FILENAME_PACKAGING, BOX_TOOLS_PACKAGING, TOP) .
+                                   tep_admin_files_boxes(FILENAME_UPS_BOXES_USED, BOX_TOOLS_UPS_BOXES_USED, TOP) .
+                                   tep_admin_files_boxes(FILENAME_QTPRODOCTOR, BOX_TOOLS_QTPRODOCTOR, TOP) .
+                                   tep_admin_files_boxes(FILENAME_CACHE, BOX_TOOLS_CACHE, TOP) .
+                                   tep_admin_files_boxes(FILENAME_SERVER_INFO, BOX_TOOLS_SERVER_INFO, TOP) .
+                                   tep_admin_files_boxes(FILENAME_WHOS_ONLINE, BOX_TOOLS_WHOS_ONLINE, TOP));
 // EOF: MOD - Admin w/access levels
   }
 

@@ -120,8 +120,15 @@ function check_form(form_name) {
 
   check_input("telephone", <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>, "<?php echo ENTRY_TELEPHONE_NUMBER_ERROR; ?>");
 
+<?php
+// PWA BOF
+  if (!isset($HTTP_GET_VARS['guest'])) {
+?>
   check_password("password", "confirmation", <?php echo ENTRY_PASSWORD_MIN_LENGTH; ?>, "<?php echo ENTRY_PASSWORD_ERROR; ?>", "<?php echo ENTRY_PASSWORD_ERROR_NOT_MATCHING; ?>");
   check_password_new("password_current", "password_new", "password_confirmation", <?php echo ENTRY_PASSWORD_MIN_LENGTH; ?>, "<?php echo ENTRY_PASSWORD_ERROR; ?>", "<?php echo ENTRY_PASSWORD_NEW_ERROR; ?>", "<?php echo ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING; ?>");
+<?php
+  } // PWA EOF
+?>
 
   if (error == true) {
     alert(error_message);
@@ -131,13 +138,4 @@ function check_form(form_name) {
     return true;
   }
 }
-<?php // BOF: MOD - Country-State Selector ?>
-function refresh_form(form_name) {
-   form_name.action.value = 'refresh';
-   form_name.state.value = '';
-   form_name.submit();
-   return true;
-   }
-<?php // EOF: MOD - Country-State Selector ?>
-   
 //--></script>

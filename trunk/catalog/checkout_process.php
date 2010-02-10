@@ -50,7 +50,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 // load selected payment module
   require(DIR_WS_CLASSES . 'payment.php');
 // LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
-  if ($credit_covers) $payment='';
+  if ($credit_covers) $payment='credit covers';
   $payment_modules = new payment($payment);
 
 // load the selected shipping module
@@ -100,6 +100,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
                           'customers_telephone' => $order->customer['telephone'], 
                           'customers_email_address' => $order->customer['email_address'],
                           'customers_address_format_id' => $order->customer['format_id'], 
+ // PWA BOF
+                          'customers_dummy_account' => $order->customer['is_dummy_account'], 
+ // PWA EOF
                           'delivery_name' => trim($order->delivery['firstname'] . ' ' . $order->delivery['lastname']),
                           'delivery_company' => $order->delivery['company'],
                           'delivery_street_address' => $order->delivery['street_address'], 
@@ -181,7 +184,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
           $stock_query_raw .= " AND pa.options_id = '" . $products_attributes[0]['option_id'] . "' AND pa.options_values_id = '" . $products_attributes[0]['value_id'] . "'";
         }
         $stock_query = tep_db_query($stock_query_raw);
-// BOF: MOD - QT Pro
+      } else {
+        $stock_query = tep_db_query("select products_quantity from " . TABLE_PRODUCTS . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+      }
       if (tep_db_num_rows($stock_query) > 0) {
         $stock_values = tep_db_fetch_array($stock_query);
         $actual_stock_bought = $order->products[$i]['qty'];
@@ -195,22 +200,13 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
           $all_nonstocked = true;
           $products_stock_attributes_array = array();
           foreach ($products_attributes as $attribute) {
-//**si** 14-11-05 fix missing att list
-//            if ($attribute['track_stock'] == 1) {
-//              $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
-            $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
             if ($attribute['track_stock'] == 1) {
-//**si** 14-11-05 end
+              $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
               $all_nonstocked = false;
             }
-          }
+          } 
           if ($all_nonstocked) {
             $actual_stock_bought = $order->products[$i]['qty'];
-//**si** 14-11-05 fix missing att list
-            asort($products_stock_attributes_array, SORT_NUMERIC);
-            $products_stock_attributes = implode(",", $products_stock_attributes_array);
-//**si** 14-11-05 end
-
           }  else {
             asort($products_stock_attributes_array, SORT_NUMERIC);
             $products_stock_attributes = implode(",", $products_stock_attributes_array);
@@ -240,21 +236,10 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 // EOF: MOD - QT Pro
           if ( ($stock_left < 1) && (STOCK_ALLOW_CHECKOUT == 'false') ) {
             tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0' where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
-          }
         }
-      }
-// LINE ADDED: MOD - QT Pro
-    } else { 
-      if ( is_array($order->products[$i]['attributes']) ) {
-        $products_stock_attributes_array = array();
-        foreach ($order->products[$i]['attributes'] as $attribute) {
-            $products_stock_attributes_array[] = $attribute['option_id'] . "-" . $attribute['value_id'];
-        }
-        asort($products_stock_attributes_array, SORT_NUMERIC);
-        $products_stock_attributes = implode(",", $products_stock_attributes_array);
       }
     }
-//**si** 14-11-05 end
+
 // Update products_ordered (for bestsellers list)
     tep_db_query("update " . TABLE_PRODUCTS . " set products_ordered = products_ordered + " . sprintf('%d', $order->products[$i]['qty']) . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
 // LINE ADDED: MOD - QT Pro
@@ -266,14 +251,14 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
                             'products_price' => $order->products[$i]['price'],
                             'final_price' => $order->products[$i]['final_price'],
                             'products_tax' => $order->products[$i]['tax'],
-                            'products_quantity' => $order->products[$i]['qty'],//);
+                            'products_quantity' => $order->products[$i]['qty'],
 // LINE ADDED: MOD - QT Pro
                             'products_stock_attributes' => $products_stock_attributes);
     tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
     $order_products_id = tep_db_insert_id();
 
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-$order_total_modules->update_credit_account($i);    
+  $order_total_modules->update_credit_account($i,$insert_id);
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
 //------insert customer choosen option to order--------
@@ -332,13 +317,16 @@ $order_total_modules->update_credit_account($i);
   $order_total_modules->apply_credit();
 
 // lets start with the email confirmation
-// LINE ADDED: PWA - Add test for PWA - no display of invoice URL if PWA customer
-if (!tep_session_is_registered('noaccount')) {
   $email_order = STORE_NAME . "\n" .
                  EMAIL_SEPARATOR . "\n" .
                  EMAIL_TEXT_ORDER_NUMBER . ' ' . $insert_id . "\n" .
                  EMAIL_TEXT_INVOICE_URL . ' ' . tep_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id=' . $insert_id, 'SSL', false) . "\n" .
                  EMAIL_TEXT_DATE_ORDERED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
+ // PWA BOF
+  if ($order->customer['is_dummy_account']) {
+    $email_order .= EMAIL_WARNING . "\n\n";
+  }
+  // PWA EOF
   if ($order->info['comments']) {
     $email_order .= tep_db_output($order->info['comments']) . "\n\n";
   }
@@ -346,19 +334,6 @@ if (!tep_session_is_registered('noaccount')) {
                   EMAIL_SEPARATOR . "\n" .
                   $products_ordered .
                   EMAIL_SEPARATOR . "\n";
-  } else {
-  $email_order = STORE_NAME . "\n" .
-                 EMAIL_SEPARATOR . "\n" .
-                 EMAIL_TEXT_ORDER_NUMBER . ' ' . $insert_id . "\n" .
-                 EMAIL_TEXT_DATE_ORDERED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
-  if ($order->info['comments']) {
-    $email_order .= tep_db_output($order->info['comments']) . "\n\n";
-  }
-  $email_order .= EMAIL_TEXT_PRODUCTS . "\n" .
-                  EMAIL_SEPARATOR . "\n" .
-                  $products_ordered .
-                  EMAIL_SEPARATOR . "\n";
-  }
 
   for ($i=0, $n=sizeof($order_totals); $i<$n; $i++) {
     $email_order .= strip_tags($order_totals[$i]['title']) . ' ' . strip_tags($order_totals[$i]['text']) . "\n";
@@ -407,6 +382,12 @@ if (!tep_session_is_registered('noaccount')) {
   tep_session_unregister('payment');
   tep_session_unregister('comments');
 
+  // PWA BOF 2b
+  if (tep_session_is_registered('customer_is_guest')){
+    //delete the temporary account
+    tep_db_query("delete from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$customer_id . "'");
+  }
+  // PWA EOF 2b
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');
   $order_total_modules->clear_posts();

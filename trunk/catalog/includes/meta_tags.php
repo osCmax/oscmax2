@@ -9,10 +9,8 @@
 if(!defined(META_TEXT_PRICE)) define ('META_TEXT_PRICE', '');
 // Define Primary Section Output
 define('PRIMARY_SECTION', ' : ');
-define('TITLE', 'AABox Web Hosting');
 // Define Secondary Section Output
 define('SECONDARY_SECTION', ' - ');
-
 // Define Tertiary Section Output
 define('TERTIARY_SECTION', ',  ');
 

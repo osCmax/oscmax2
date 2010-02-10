@@ -38,7 +38,7 @@ $Id: ot_shipping.php 3 2006-05-27 04:59:07Z user $
             $pass = false; break;
         }
 
-        if ( ($pass == true) && ( ($order->info['total'] - $order->info['shipping_cost']) >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) ) {
+        if ( ($pass == true) && ( ($order->info['subtotal'] - $order->info['shipping_cost']) >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) ) {
           $order->info['shipping_method'] = FREE_SHIPPING_TITLE;
           $order->info['total'] -= $order->info['shipping_cost'];
           $order->info['shipping_cost'] = 0;

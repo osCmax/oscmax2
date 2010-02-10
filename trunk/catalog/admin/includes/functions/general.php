@@ -47,13 +47,13 @@ function tep_admin_check_boxes($filename, $boxes='') {
 
 ////
 //Return files stored in box that can be accessed by user
-function tep_admin_files_boxes($filename, $sub_box_name) {
+function tep_admin_files_boxes($filename, $sub_box_name, $target_window) {
   global $login_groups_id;
   $sub_boxes = '';
 
   $dbquery = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where FIND_IN_SET( '" . $login_groups_id . "', admin_groups_id) and admin_files_is_boxes = '0' and admin_files_name = '" . $filename . "'");
   if (tep_db_num_rows($dbquery)) {
-    $sub_boxes = '<a href="' . tep_href_link($filename) . '" class="menuBoxContentLink">' . $sub_box_name . '</a><br>';
+    $sub_boxes = '<a href="' . tep_href_link($filename) . '" class="menuBoxContentLink" target="_' . $target_window . '">' . $sub_box_name . '</a><br>';
   }
   return $sub_boxes;
 }
@@ -438,6 +438,21 @@ function tep_selected_file($filename) {
     return $geo_zone_name;
   }
 
+////
+// Returns the address_format_id for the given country
+// TABLES: countries;
+  function tep_get_address_format_id($country_id) {
+    $address_format_query = tep_db_query("select address_format_id as format_id from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$country_id . "'");
+    if (tep_db_num_rows($address_format_query)) {
+      $address_format = tep_db_fetch_array($address_format_query);
+      return $address_format['format_id'];
+    } else {
+      return '1';
+    }
+  }
+
+
+
   function tep_address_format($address_format_id, $address, $html, $boln, $eoln) {
     $address_format_query = tep_db_query("select address_format as format from " . TABLE_ADDRESS_FORMAT . " where address_format_id = '" . (int)$address_format_id . "'");
     $address_format = tep_db_fetch_array($address_format_query);
@@ -818,6 +833,17 @@ function tep_selected_file($filename) {
       return -1;
     }
   }
+////
+// Sets the status of countries
+  function tep_set_active_country($countries_id, $active) {
+    if ($active == '1') {
+      return tep_db_query("update " . TABLE_COUNTRIES . " set active = '1' where countries_id = '" . (int)$countries_id . "'");
+    } elseif ($active == '0') {
+      return tep_db_query("update " . TABLE_COUNTRIES . " set active = '0' where countries_id = '" . (int)$countries_id . "'");
+    } else {
+      return -1;
+    }
+  }
 
 ////
 // Sets the status of a product
@@ -906,14 +932,12 @@ function tep_selected_file($filename) {
     return $string;
   }
 
-// BOF: MOD - USPS Methods 2.5
+// USPS Methods 3.0
 // Alias function for Store configuration values in the Administration Tool
   function tep_cfg_select_multioption($select_array, $key_value, $key = '') {
     for ($i=0; $i<sizeof($select_array); $i++) {
-      $name = (($key) ? 'configuration[' . $key . '][]' :
-'configuration_value');
-      $string .= '<br><input type="checkbox" name="' . $name . '" value="' .
-$select_array[$i] . '"';
+      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+      $string .= '<br><input type="checkbox" name="' . $name . '" value="' . $select_array[$i] . '"';
       $key_values = explode( ", ", $key_value);
       if ( in_array($select_array[$i], $key_values) ) $string .= ' CHECKED';
       $string .= '> ' . $select_array[$i];
@@ -921,7 +945,66 @@ $select_array[$i] . '"';
     $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
     return $string;
   }
-// EOF: MOD - USPS Methods 2.5
+
+// USPS Methods.  Added by Greg Deeth
+// Alias function for Store configuration values in the Administration Tool.
+// Creates multiple text input boxes in a list.
+// Remember to add blank default values: 1, 2, , , 5, 6, ...
+  function tep_cfg_multiinput_list($select_array, $key_value, $key = '') {
+    $key_values = explode( ", ", $key_value);
+
+    for ($i=0; $i<sizeof($select_array); $i++) {
+      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+      $string .= '<br><input type="text" name="' . $name . '" value="' . $key_values[$i] . '"> ' . $select_array[$i];
+    }
+    $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
+    return $string;
+  }
+
+// USPS Methods.  Added by Greg Deeth
+// Alias function for Store configuration values in the Administration Tool.
+// Creates a text input box on either side of the option, adds <= OPTION <= and makes a list.
+// Remember to add blank default values: 1, 2, , , 5, 6, ...
+  function tep_cfg_multiinput_duallist_oz($select_array, $key_value, $key = '') {
+    $key_values = explode( ", ", $key_value);
+    $string .= '<center>';
+
+    for ($i=0; $i<sizeof($select_array); $i++) {
+	$current_key_value = current($key_values);
+
+      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+      $string .= '<br><input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
+	$string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
+	next($key_values);
+	$current_key_value = current($key_values);
+	$string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
+	next($key_values);
+    }
+    $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
+
+    $string .= '</center>';
+    return $string;
+  }
+  function tep_cfg_multiinput_duallist_lb($select_array, $key_value, $key = '') {
+    $key_values = explode( ", ", $key_value);
+    $string .= '<center>';
+
+    for ($i=0; $i<sizeof($select_array); $i++) {
+	$current_key_value = current($key_values);
+
+      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+      $string .= '<br><input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
+	$string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
+	next($key_values);
+	$current_key_value = current($key_values);
+	$string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
+	next($key_values);
+    }
+    $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
+
+    $string .= '</center>';
+    return $string;
+  }
 
 ////
 // Retreive server information
@@ -1070,6 +1153,9 @@ $select_array[$i] . '"';
       tep_reset_cache_block('categories');
       tep_reset_cache_block('also_purchased');
     }
+	//++++ QT Pro: Begin Changed code
+	qtpro_doctor_amputate_all_from_product($product_id);
+	//++++ QT Pro: End Changed code
   }
 
   function tep_remove_order($order_id, $restock = false) {
@@ -1081,21 +1167,21 @@ $select_array[$i] . '"';
       $order_query = tep_db_query("select products_id, products_quantity, products_stock_attributes from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . (int)$order_id . "'");
       while ($order = tep_db_fetch_array($order_query)) {
         $product_stock_adjust = 0;
-          if (tep_not_null($order['products_stock_attributes'])) {
+        if (tep_not_null($order['products_stock_attributes'])) {
           if ($order['products_stock_attributes'] != '$$DOWNLOAD$$') {
-            $attributes_stock_query = tep_db_query("SELECT products_stock_quantity
-                                                    FROM " . TABLE_PRODUCTS_STOCK . "
-                                                    WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "'
+            $attributes_stock_query = tep_db_query("SELECT products_stock_quantity 
+                                                    FROM " . TABLE_PRODUCTS_STOCK . " 
+                                                    WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "' 
                                                     AND products_id = '" . (int)$order['products_id'] . "'");
             if (tep_db_num_rows($attributes_stock_query) > 0) {
                 $attributes_stock_values = tep_db_fetch_array($attributes_stock_query);
-                tep_db_query("UPDATE " . TABLE_PRODUCTS_STOCK . "
-                              SET products_stock_quantity = products_stock_quantity + '" . (int)$order['products_quantity'] . "'
-                              WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "'
+                tep_db_query("UPDATE " . TABLE_PRODUCTS_STOCK . " 
+                              SET products_stock_quantity = products_stock_quantity + '" . (int)$order['products_quantity'] . "' 
+                              WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "' 
                               AND products_id = '" . (int)$order['products_id'] . "'");
                 $product_stock_adjust = min($order['products_quantity'],  $order['products_quantity']+$attributes_stock_values['products_stock_quantity']);
             } else {
-                tep_db_query("INSERT into " . TABLE_PRODUCTS_STOCK . "
+                tep_db_query("INSERT into " . TABLE_PRODUCTS_STOCK . " 
                               (products_id, products_stock_attributes, products_stock_quantity)
                               VALUES ('" . (int)$order['products_id'] . "', '" . $order['products_stock_attributes'] . "', '" . (int)$order['products_quantity'] . "')");
                 $product_stock_adjust = $order['products_quantity'];
@@ -1103,11 +1189,11 @@ $select_array[$i] . '"';
           }
         } else {
             $product_stock_adjust = $order['products_quantity'];
-        }
-        tep_db_query("UPDATE " . TABLE_PRODUCTS . "
-                      SET products_quantity = products_quantity + " . $product_stock_adjust . ", products_ordered = products_ordered - " . (int)$order['products_quantity'] . "
+        } 
+        tep_db_query("UPDATE " . TABLE_PRODUCTS . " 
+                      SET products_quantity = products_quantity + " . $product_stock_adjust . ", products_ordered = products_ordered - " . (int)$order['products_quantity'] . " 
                       WHERE products_id = '" . (int)$order['products_id'] . "'");
-// EOF: MOD - QT Pro
+//++++ QT Pro: End Changed Code
       }
     }
     tep_db_query("delete from " . TABLE_ORDERS . " where orders_id = '" . (int)$order_id . "'");
@@ -1494,6 +1580,9 @@ $select_array[$i] . '"';
     return $tmp_array;
   }
 
+//++++ QT Pro: Begin Changed code
+require(DIR_WS_FUNCTIONS . 'qtpro_functions.php');
+//++++ QT Pro: End Changed code
 // BOF: MOD - Order Editor
 //////create a pull down for all payment installed payment methods for Order Editor configuration
 // Get list of all payment modules available

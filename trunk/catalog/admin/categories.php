@@ -20,10 +20,12 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
   $currencies = new currencies();
 
   $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
-
+// BOF instant update & image directory 
+  require_once('includes/functions/instant_update.php');
+// EOF instant update & image directory	
 // Ultimate SEO URLs v2.1
 // If the action will affect the cache entries
-    if ( eregi("(insert|update|setflag)", $action) ) include_once('includes/reset_seo_cache.php');
+    if ( preg_match("{(insert|update|setflag)}i", $action) ) include_once('includes/reset_seo_cache.php');
 
 
   if (tep_not_null($action)) {
@@ -119,7 +121,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             $categories_image = '';
           } else {
         $categories_image = new upload('categories_image');
-        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES);
+		        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
 
         if ($categories_image->parse() && $categories_image->save()) {
               tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
@@ -278,6 +280,12 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                                   'products_status' => tep_db_prepare_input($HTTP_POST_VARS['products_status']),
                                   'products_tax_class_id' => tep_db_prepare_input($HTTP_POST_VARS['products_tax_class_id']),
                                   'manufacturers_id' => (int)tep_db_prepare_input($HTTP_POST_VARS['manufacturers_id']));
+		//++++ QT Pro: Begin Added code
+			if($product_investigation['has_tracked_options'] or $product_investigation['stock_entries_count'] > 0){
+				//Do not modify the stock from this page if the product has database entries or has tracked options
+				unset($sql_data_array['products_quantity']);
+			}
+		//++++ QT Pro: End Added code
 
           if (isset($HTTP_POST_VARS['products_image']) && tep_not_null($HTTP_POST_VARS['products_image']) && ($HTTP_POST_VARS['products_image'] != 'none')) {
             $sql_data_array['products_image'] = tep_db_prepare_input($HTTP_POST_VARS['products_image']);
@@ -356,8 +364,10 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             tep_reset_cache_block('categories');
             tep_reset_cache_block('also_purchased');
           }
+// BOF instant update  redirect not needed + it stops messages.
+//          tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products_id));
+// EOF instant update
 
-          tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products_id));
         }
         break;
       case 'copy_to_confirm':
@@ -402,26 +412,29 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
         tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $categories_id . '&pID=' . $products_id));
         break;
-      case 'new_product_preview':
-// copy image only if modified
-        $products_image = new upload('products_image');
-        $products_image->set_destination(DIR_FS_CATALOG_IMAGES);
-        if ($products_image->parse() && $products_image->save()) {
-          $products_image_name = $products_image->filename;
-        } else {
-          $products_image_name = (isset($HTTP_POST_VARS['products_previous_image']) ? $HTTP_POST_VARS['products_previous_image'] : '');
-        }
-        break;
+//      case 'new_product_preview':
+// section moved, instant update
     }
   }
 
 // check if the catalog image directory exists
-  if (is_dir(DIR_FS_CATALOG_IMAGES)) {
-    if (!is_writeable(DIR_FS_CATALOG_IMAGES)) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
+  if (is_dir(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR)) {
+    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR)) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
   } else {
     $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
   }
+  if (is_dir(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR)) {
+    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR)) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
+  } else {
+    $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
+  }
+  //++++ QT Pro: Begin Changed code
+  if($product_investigation['any_problems']){
+  	$messageStack->add('<b>Warning: </b>'. qtpro_doctor_formulate_product_investigation($product_investigation, 'short_suggestion') ,'warning');
+  }
+  //++++ QT Pro: End Changed code
 ?>
+
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
 <head>
@@ -432,8 +445,13 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 <!-- AJAX Attribute Manager  -->
 <?php require_once( 'attributeManager/includes/attributeManagerHeader.inc.php' )?>
 <!-- AJAX Attribute Manager  end -->
+<!--// SLIMBOX2 -->
+	<link rel="stylesheet" href="../slimbox2/slimbox2.css" type="text/css" media="screen">
+    <script type="text/javascript" src="../slimbox2/jquery.js"></script>
+	<script type="text/javascript" src="../slimbox2/slimbox2.js"></script>
+<!--// SLIMBOX2 -->
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="goOnLoad();">
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="goOnLoad();">
 <div id="spiffycalendar" class="text"></div>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
@@ -478,7 +496,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo sprintf($text_new_or_edit, tep_output_generated_category_path($current_category_id)); ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -572,7 +590,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
 // copy image only if modified
         $categories_image = new upload('categories_image');
-        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES);
+        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
         if ($categories_image->parse() && $categories_image->save()) {
           $categories_image_name = $categories_image->filename;
         } else {
@@ -620,7 +638,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . $categories_image_name, $cInfo->categories_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'align="right" hspace="5" vspace="5"') . $cInfo->categories_description; ?></td>
+        <td class="main"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image_name, $cInfo->categories_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'align="right" hspace="5" vspace="5"') . $cInfo->categories_description; ?></td>
       </tr>
 
 <?php
@@ -697,7 +715,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                        'products_last_modified' => '',
                        'products_date_available' => '',
                        'products_status' => '',
-                           'products_tax_class_id' => '',
+                       'products_tax_class_id' => '',
                        'manufacturers_id' => '');
 
     $pInfo = new objectInfo($parameters);
@@ -796,7 +814,7 @@ function updateNet() {
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo sprintf(TEXT_NEW_PRODUCT, tep_output_generated_category_path($current_category_id)); ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -807,21 +825,19 @@ function updateNet() {
         <td><table border="0" cellspacing="0" cellpadding="2">
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_STATUS; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE; ?></td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_DATE_AVAILABLE; ?><br><small>(YYYY-MM-DD)</small></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;'; ?><script language="javascript">dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script></td>
+            <td class="main" colspan="2">
+            <?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE .
+            tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_DATE_AVAILABLE . '&nbsp;<small>(YYYY-MM-DD)</small>&nbsp;'; ?>
+            <script language="javascript">dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_MANUFACTURER; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, $pInfo->manufacturers_id); ?></td>
+            <td class="main" colspan="2">
+            <?php echo tep_draw_separator('pixel_trans.gif', '24', '12') . '&nbsp;' . tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, $pInfo->manufacturers_id) .
+            tep_draw_separator('pixel_trans.gif', '40', '12') . TEXT_PRODUCTS_MODEL . '&nbsp;&nbsp;' . tep_draw_input_field('products_model', $pInfo->products_model); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -832,7 +848,16 @@ function updateNet() {
           <tr>
             <td class="main"><?php if ($i == 0) echo TEXT_PRODUCTS_NAME; ?></td>
 <?php /* LINE CHANGED: MS2 update 501112 - Added: stripslashes(...) */ ?>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (isset($products_name[$languages[$i]['id']]) ? stripslashes($products_name[$languages[$i]['id']]) : tep_get_products_name($pInfo->products_id, $languages[$i]['id']))); ?></td>
+            <td class="main">
+            <?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (isset($products_name[$languages[$i]['id']]) ? stripslashes($products_name[$languages[$i]['id']]) : tep_get_products_name($pInfo->products_id, $languages[$i]['id']))) .
+            tep_draw_separator('pixel_trans.gif', '15', '12') ; ?>
+            <?php if ($i == 0) {
+                        echo TEXT_PRODUCTS_URL . TEXT_PRODUCTS_URL_WITHOUT_HTTP . tep_draw_separator('pixel_trans.gif', '30', '12');
+                        } else {
+                        echo tep_draw_separator('pixel_trans.gif', '140', '12');
+                        }
+            echo tep_draw_input_field('products_url[' . $languages[$i]['id'] . ']', (isset($products_url[$languages[$i]['id']]) ? stripslashes($products_url[$languages[$i]['id']]) : tep_get_products_url($pInfo->products_id, $languages[$i]['id']))); ?>
+            </td>
           </tr>
 <?php
     }
@@ -846,30 +871,13 @@ function updateNet() {
           </tr>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price', $pInfo->products_price, 'onKeyUp="updateGross()"'); ?></td>
-          </tr>
-          <tr bgcolor="#ebebff">
-            <td class="main"><?php echo TEXT_PRODUCTS_PRICE_GROSS; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'OnKeyUp="updateNet()"'); ?></td>
-          </tr>
-          <!-- AJAX Attribute Manager  -->
-          <tr>
-          	<td colspan="2"><?php require_once( 'attributeManager/includes/attributeManagerPlaceHolder.inc.php' )?></td>
-          </tr>
-          <!-- AJAX Attribute Manager end -->
-
-<?php // EOF: MOD - indvship ?>
-          <tr>
-            <td class="main"><?php echo 'Indv. Shipping Price:'; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_ship_price', $pInfo->products_ship_price); ?></td>
-          </tr>
-<?php // EOF: MOD - indvship ?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+            <td class="main" colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price', $pInfo->products_price, 'onKeyUp="updateGross()"') .
+            tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_PRICE_GROSS . '&nbsp;' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'OnKeyUp="updateNet()"'); ?></td>
           </tr>
 <script language="javascript"><!--
 updateGross();
 //--></script>
+
 <?php
 // BOF: MOD - Separate Pricing Per Customer
     $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id != '0' order by customers_group_id");
@@ -884,11 +892,9 @@ updateGross();
  if (!$header) { ?>
 
     <tr bgcolor="#ebebff">
-    <td class="main" colspan="2" style="font-style: italic">Note that if a field is left empty, no price for that customer group will be inserted in the database.<br />
-If a field is filled, but the checkbox is unchecked no price will be inserted either.<br />
-If a price is already inserted in the database, but the checkbox unchecked it will be removed from the database.
+    <td class="main" colspan="2" style="font-style: italic"><?php echo TEXT_SPPC_HELP; ?>
 <?php if (isset($pInfo->sppcoption[$customers_group['customers_group_id']])) { // when a preview was done and the back button used
-print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</strong>\n");
+print (TEXT_SPPC_WARNING);
 } ?>
 </td>
     </tr>
@@ -919,8 +925,16 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+<!-- EOF: MOD - Separate Pricing Per Customer  -->
+          <!-- AJAX Attribute Manager  -->
+          <tr>
+          	<td colspan="2"><?php require_once( 'attributeManager/includes/attributeManagerPlaceHolder.inc.php' )?></td>
+          </tr>
+          <!-- AJAX Attribute Manager end -->
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
 <?php
-// EOF: MOD - Separate Pricing Per Customer
     for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
 ?>
           <tr>
@@ -949,36 +963,55 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_QUANTITY; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_quantity', $pInfo->products_quantity); ?></td>
+             <?php //++++ QT Pro: Begin Changed code
+			if($product_investigation['has_tracked_options'] or $product_investigation['stock_entries_count'] > 0)
+			{
+		  	?>
+			<td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;<a href="' . tep_href_link("stock.php", 'product_id=' . $pInfo->products_id) . ' " target="_blank">' . tep_image_button('button_stock.gif', "Stock") . '</a>'?></td>
+			<?php 
+			
+			}else{
+			?>
+			<td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_quantity', $pInfo->products_quantity); ?></td>
+			<?php 
+			}
+			//++++ QT Pro: End Changed code
+		  	?>
           </tr>
           <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '15'); ?></td>
+          </tr>
+
+<!-- image directory -->
+          <tr>
+            <td class="main" bgcolor="#DDDDDD"><?php echo TEXT_PRODUCTS_IMAGE_DIRECTORY; ?></td>
+						<?php // place allowed sub-dirs in array, non-recursive
+						$dir_array = array();
+						if ($handle = opendir($root_images_dir)) {
+								while (false !== ($file = readdir($handle))) {
+								if ($file != "." && $file != "..") {
+										if (is_dir($root_images_dir.$file) && !in_array($file,$exclude_folders)) $dir_array[] = preg_replace("/\/\//si", "/", $file);
+								}
+						}
+						closedir($handle);
+						sort($dir_array);
+						} else { die("<center><br><br><b> " . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_1 . " (" . $root_images_dir . ") " . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_2 . "</b></center><br><br>");}
+ 					 $drop_array[0] = array('id' => '', 'text' => TEXT_PRODUCTS_IMAGE_ROOT_DIRECTORY);
+
+					 foreach($dir_array as $img_dir) {
+					   $drop_array[] = array('id' => $img_dir, 'text' => $img_dir);
+					 }
+ ?>
+            <td class="main" bgcolor="#DDDDDD"><?php echo tep_draw_separator('pixel_trans.gif', '25', '15') . tep_draw_pull_down_menu('directory', $drop_array) . tep_draw_separator('pixel_trans.gif', '25', '15') . TEXT_PRODUCTS_IMAGE_NEW_FOLDER . tep_draw_separator('pixel_trans.gif', '20', '15') . tep_draw_input_field('new_directory'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_MODEL; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_model', $pInfo->products_model); ?></td>
+            <td colspan="2" bgcolor="#DDDDDD"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+<!-- eof image directory -->
           <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_IMAGE; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_file_field('products_image') . '<br>' . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $pInfo->products_image . tep_draw_hidden_field('products_previous_image', $pInfo->products_image); ?></td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
-          <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_PRODUCTS_URL . '<br><small>' . TEXT_PRODUCTS_URL_WITHOUT_HTTP . '</small>'; ?></td>
-<?php /* LINE CHANGED: MS2 update 501112 - Added: stripslashes(...) */ ?>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('products_url[' . $languages[$i]['id'] . ']', (isset($products_url[$languages[$i]['id']]) ? stripslashes($products_url[$languages[$i]['id']]) : tep_get_products_url($pInfo->products_id, $languages[$i]['id']))); ?></td>
-          </tr>
-<?php
-    }
-?>
+            <td class="main" bgcolor="#DDDDDD"><?php echo TEXT_PRODUCTS_IMAGE; ?></td>
+            <td class="main" bgcolor="#DDDDDD"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_file_field('products_image') . '&nbsp;' . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $pInfo->products_image . tep_draw_hidden_field('products_previous_image', $pInfo->products_image); ?></td>
+          </tr>         
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
@@ -987,18 +1020,22 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_weight', $pInfo->products_weight); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_LENGTH; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_length', $pInfo->products_length); ?></td>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_WIDTH; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_width', $pInfo->products_width); ?></td>
+<?php // EOF: MOD - indvship ?>
+          <tr bgcolor="#ebebff">
+            <td class="main"><?php echo 'Indv. Shipping Price:'; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_ship_price', $pInfo->products_ship_price); ?></td>
           </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_HEIGHT; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_height', $pInfo->products_height); ?></td>
+<?php // EOF: MOD - indvship ?>
+          <tr bgcolor="#ebebff">
+            <td class="main"><?php echo TEXT_SHIPPING_DIMENSIONS; ?></td>
+            <td class="main" colspan="2">
+            <?php echo tep_draw_separator('pixel_trans.gif', '26', '12') . TEXT_PRODUCTS_LENGTH .  '&nbsp;' . tep_draw_input_field('products_length', $pInfo->products_length) .
+            tep_draw_separator('pixel_trans.gif', '10', '12') . TEXT_PRODUCTS_WIDTH .  '&nbsp;' . tep_draw_input_field('products_width', $pInfo->products_width) .
+            tep_draw_separator('pixel_trans.gif', '10', '12') . TEXT_PRODUCTS_HEIGHT .  '&nbsp;' . tep_draw_input_field('products_height', $pInfo->products_height); ?></td>
           </tr>
-          <tr>
+          <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_READY_TO_SHIP; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_checkbox_field('products_ready_to_ship', '1', (($product['products_ready_to_ship'] == '1') ? true : false)); ?></td>
           </tr>
@@ -1008,7 +1045,10 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main" align="right"><?php echo tep_draw_hidden_field('products_date_added', (tep_not_null($pInfo->products_date_added) ? $pInfo->products_date_added : date('Y-m-d'))) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+<!-- instant update -->
+       <td class="main" align="right"><?php echo (isset($_GET['pID']) ? TEXT_PRODUCTS_UPDATE_PRODUCT : TEXT_PRODUCTS_INSERT_PRODUCT ) . TEXT_PRODUCTS_WITHOUT_PREVIEW; ?><input type="checkbox" name="instant_update" ></td>
+<!-- EOF instant update  -->           
+        <td class="main" align="right"><?php echo tep_draw_hidden_field('products_date_added', (tep_not_null($pInfo->products_date_added) ? $pInfo->products_date_added : date('Y-m-d'))) . tep_image_submit('button_update.gif', TEXT_PRODUCTS_UPDATE_PRODUCT) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
       </tr>
     </table></form>
 <?php
@@ -1056,13 +1096,18 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . $products_image_name, $pInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'align="right" hspace="5" vspace="5"') . $pInfo->products_description; ?></td>
+        <td class="main" valign="top" width="70%">
+                        <?php echo $pInfo->products_description; ?>
+        </td>
+        <td width="25%">
+		<?php echo '<a href="' . $html_images_dir . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image($html_thumbs . $products_image_name, $product_info['products_name'], PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4" align="right"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?> 
+        </td>
       </tr>
 <?php
       if ($pInfo->products_url) {
 ?>
       <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+        <td width="100%"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
         <td class="main"><?php echo sprintf(TEXT_PRODUCT_MORE_INFORMATION, $pInfo->products_url); ?></td>
@@ -1071,7 +1116,7 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
       }
 ?>
       <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+        <td width="100%"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
 <?php
       if ($pInfo->products_date_available > date('Y-m-d')) {
@@ -1331,7 +1376,7 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
         }
 
         $contents[] = array('text' => '<br>' . TEXT_EDIT_CATEGORIES_NAME . $category_inputs_string);
-        $contents[] = array('text' => '<br>' . tep_image(DIR_WS_CATALOG_IMAGES . $cInfo->categories_image, $cInfo->categories_name) . '<br>' . DIR_WS_CATALOG_IMAGES . '<br><b>' . $cInfo->categories_image . '</b>');
+        $contents[] = array('text' => '<br>' . tep_image(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name) . '<br>' . DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . '<br><b>' . $cInfo->categories_image . '</b>');
         $contents[] = array('text' => '<br>' . TEXT_EDIT_CATEGORIES_IMAGE . '<br>' . tep_draw_file_field('categories_image'));
         $contents[] = array('text' => '<br>' . TEXT_EDIT_SORT_ORDER . '<br>' . tep_draw_input_field('sort_order', $cInfo->sort_order, 'size="2"'));
         $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $cInfo->categories_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
@@ -1409,7 +1454,8 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
             $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=edit_category') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=delete_category') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=move_category') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a>');
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
             if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
-            $contents[] = array('text' => '<br>' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
+//            $contents[] = array('text' => '<br>' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
+            $contents[] = array('text' => '<br>' . tep_info_image(CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
             $contents[] = array('text' => '<br>' . TEXT_SUBCATEGORIES . ' ' . $cInfo->childs_count . '<br>' . TEXT_PRODUCTS . ' ' . $cInfo->products_count);
           } elseif (isset($pInfo) && is_object($pInfo)) { // product info box contents
             $heading[] = array('text' => '<b>' . tep_get_products_name($pInfo->products_id, $languages_id) . '</b>');
@@ -1420,7 +1466,9 @@ print ("<br />\n<strong>Make sure you uncheck the appropriate boxes again!</stro
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($pInfo->products_date_added));
             if (tep_not_null($pInfo->products_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($pInfo->products_last_modified));
             if (date('Y-m-d') < $pInfo->products_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . tep_date_short($pInfo->products_date_available));
-            $contents[] = array('text' => '<br>' . tep_info_image($pInfo->products_image, $pInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '<br>' . $pInfo->products_image);
+// BOF: MoPics in Admin
+           $contents[] = array('text' => 'Main Image (shown as a thumbnail):<br />' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '<br /><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /><br>');
+// EOF: MoPics in Admin
             $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price) . '<br>' . TEXT_PRODUCTS_QUANTITY_INFO . ' ' . $pInfo->products_quantity);
             $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_AVERAGE_RATING . ' ' . number_format($pInfo->average_rating, 2) . '%');
           }

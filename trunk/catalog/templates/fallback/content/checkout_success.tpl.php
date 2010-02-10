@@ -5,6 +5,9 @@
             <td valign="top"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_man_on_board.gif', $HEADING_TITLE); ?></td>
             <td valign="top" class="main"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?><div align="center" class="pageHeading"><?php echo $HEADING_TITLE; ?></div><br><?php echo $TEXT_SUCCESS; ?><br><br>
 <?php
+  //PWA BOF
+  if (!tep_session_is_registered('customer_is_guest')){
+  //PWA BOF
   if ($global['global_product_notifications'] != '1') {
     echo TEXT_NOTIFY_PRODUCTS . '<br><p class="productsNotifications">';
 
@@ -19,7 +22,10 @@
     echo '</p>';
   } else {
     echo TEXT_SEE_ORDERS . '<br><br>' . TEXT_CONTACT_STORE_OWNER;
+    }
+  //PWA BOF
   }
+  //PWA BOF
 ?>
             <h3><?php echo TEXT_THANKS_FOR_SHOPPING; ?></h3></td>
           </tr>

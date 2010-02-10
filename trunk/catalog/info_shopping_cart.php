@@ -22,7 +22,7 @@ $Id: info_shopping_cart.php 3 2006-05-27 04:59:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
-<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<link rel="stylesheet" type="text/css" href="<?php echo DIR_WS_TEMPLATES; ?>/stylesheet.css">
 </head>
 <body>
 <p class="main"><b><?php echo HEADING_TITLE; ?></b><br><?php echo tep_draw_separator(); ?></p>

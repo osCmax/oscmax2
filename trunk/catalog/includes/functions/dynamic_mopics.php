@@ -11,7 +11,7 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 
 	function mopics_file_exists($file_base, $file_types = DYNAMIC_MOPICS_THUMB_IMAGE_TYPES) {
 		$file_types = str_replace(' ', '', $file_types);
-		$file_types = split('[,]', $file_types);
+		$file_types = preg_split('/[,]/', $file_types);
 		
 		foreach ($file_types as $file_type) {
 			if (file_exists($file_base . '.' . $file_type)) {

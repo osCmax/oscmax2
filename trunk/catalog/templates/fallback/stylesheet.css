@@ -272,6 +272,8 @@ SPAN.errorText {
   color: #ff0000;
 }
 
+SPAN.SelectedCategory { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; }
+
 .moduleRow { }
 .moduleRowOver { background-color: #D7E9F7; cursor: pointer; cursor: hand; }
 .moduleRowSelected { background-color: #E9F4FC; }
@@ -280,11 +282,24 @@ SPAN.errorText {
 .checkoutBarCurrent { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; }
 
 /* message box */
-
+/*
 .messageBox { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 .messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-size: 10px; background-color: #ffb3b5; }
 .messageStackSuccess { font-family: Verdana, Arial, sans-serif; font-size: 10px; background-color: #99ff00; }
+*/
+
+/* BOF: PGM Restyled Message Boxes */
+.messageBox { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+.messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color: #ffe6e6; border:solid 1px #ff8e90; padding:5px; }
+.messageStackSuccess { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#CCFFCC; border:solid 1px #006600; padding:5px; }
+.messageStackAlert{ font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#FFFF99; border:solid 1px #FFCC00; padding:5px; }
+/* EOF: PGM Restyled Message Boxes */
 
 /* input requirement */
-
 .inputRequirement { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #ff0000; }
+
+/* Small Ajax-throbber image */
+#indicator {
+    float:right;
+    visibility:hidden;
+}

@@ -28,6 +28,9 @@ define('TEXT_NO_MOPICS', 'No other images currently available');
 define('TEXT_OUT_OF_STOCK', 'Out of stock');
 define('TEXT_OUT_OF_STOCK_MESSAGE', 'The combination of options you have selected is currently out of stock.  Please select another combination.');
 define('TEXT_SELECT_OPTIONS', 'You must select product options before adding this product to your cart.');
+define('STOCK_LIST_IN_PI_TEXT_HEADING', 'Currently on stock:');
+define('STOCK_LIST_IN_PI_TEXT_PRICE', 'Price');
+define('STOCK_LIST_IN_PI_TEXT_STOCK', 'Qty.');
 // EOF: MOD - QT Pro
 // BOF: MOD - Wishlist 3.5 
 define('PRODUCT_ADDED_TO_WISHLIST', 'Product has been successfully added to your wishlist');

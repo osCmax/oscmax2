@@ -26,4 +26,6 @@ define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to delete this country?'
 define('TEXT_INFO_HEADING_NEW_COUNTRY', 'New Country');
 define('TEXT_INFO_HEADING_EDIT_COUNTRY', 'Edit Country');
 define('TEXT_INFO_HEADING_DELETE_COUNTRY', 'Delete Country');
+define('TEXT_INFO_ACTIVE', 'Active (set 1 to activate, 0 otherwise):');
+define('TABLE_HEADING_ACTIVE', 'Activated');
 ?>

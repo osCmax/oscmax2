@@ -1,8 +1,8 @@
 <TR>
 <TD class="pageHeading" colspan="3"><?=$pageTitle?></TD>
 </TR>
-<FORM ACTION="<?=$PHP_SELF?>" METHOD="POST" NAME="SUBMIT_ATTRIBUTES">
-<INPUT TYPE="HIDDEN" NAME="current_product_id" VALUE="<?=$current_product_id?>">
+<FORM ACTION="<?php echo $PHP_SELF ?>" METHOD="POST" NAME="SUBMIT_ATTRIBUTES">
+<INPUT TYPE="HIDDEN" NAME="current_product_id" VALUE="<?php echo $current_product_id ?>">
 <INPUT TYPE="HIDDEN" NAME="action" VALUE="change">
 <?php
 
@@ -165,7 +165,7 @@ if ($matches) {
 
 ?>
 <TR>
-<TD colspan="10" class="main"><BR><INPUT TYPE="image" src="<?=$adminImages?>button_save.gif">&nbsp;&nbsp;&nbsp;<?=$backLink?><img src="<?=$adminImages?>button_cancel.gif" border="0"></A></TD>
+<TD colspan="10" class="main"><BR><INPUT TYPE="image" src="<?php echo $adminImages ?>button_save.gif">&nbsp;&nbsp;&nbsp;<?=$backLink?><img src="<?php echo $adminImages ?>button_cancel.gif" border="0"></A></TD>
 </TR>
 </FORM>
 

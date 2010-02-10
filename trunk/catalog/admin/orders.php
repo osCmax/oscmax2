@@ -141,7 +141,9 @@ $Id: orders.php 14 2006-07-28 17:42:07Z user $
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+            <!-- PWA BOF -->
+            <td class="pageHeading"><?php echo HEADING_TITLE . (($order->customer['is_dummy_account'])? ' <b>no account!</b>':''); ?></td>
+            <!-- PWA EOF -->
             <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
 <?php
 // BOF: MOD - PayPal IPN

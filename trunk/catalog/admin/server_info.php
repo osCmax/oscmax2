@@ -40,7 +40,7 @@ $Id: server_info.php 3 2006-05-27 04:59:07Z user $
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -109,9 +109,9 @@ hr {display: none;}
     ob_end_clean();
 
     $phpinfo = str_replace('border: 1px', '', $phpinfo);
-    ereg('<body>(.*)</body>', $phpinfo, $regs);
+    preg_match('{<body>(.*)</body>}xsmi', $phpinfo, $regs);
     echo '<table border="1" cellpadding="3" width="600" style="border: 0px; border-color: #000000;">' .
-         '  <tr><td><a href="http://oscdox.com"><img border="0" src="images/oscmax.gif" alt=" osCMax " /></a><h2 class="p"> ' . PROJECT_VERSION . '</h1></td>' .
+         '  <tr><td><a href="http://www.oscmax.com"><img border="0" src="images/oscmax-logo.png" alt=" osCMax " /></a><h1 class="p"> ' . PROJECT_VERSION . '</h1></td>' .
          '  </tr>' .
          '</table>';
     echo $regs[1];

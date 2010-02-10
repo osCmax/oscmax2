@@ -83,88 +83,7 @@ define('BOX_MANUAL_ORDER_CREATE_ORDER', 'Create Order');
 define('PULL_DOWN_DEFAULT', 'Please Select');
 define('TYPE_BELOW', 'Type Below');
 
-define('JS_ERROR', 'Errors have occured during the process of your form!\nPlease make the following corrections:\n\n');
 
-define('JS_GENDER', '* The \'Gender\' value must be chosen.\n');
-define('JS_FIRST_NAME', '* The \'First Name\' entry must have at least ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' characters.\n');
-define('JS_LAST_NAME', '* The \'Last Name\' entry must have at least ' . ENTRY_LAST_NAME_MIN_LENGTH . ' characters.\n');
-define('JS_DOB', '* The \'Date of Birth\' entry must be in the format: xx/xx/xxxx (month/day/year).\n');
-define('JS_EMAIL_ADDRESS', '* The \'E-Mail Address\' entry must have at least ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' characters.\n');
-define('JS_ADDRESS', '* The \'Street Address\' entry must have at least ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' characters.\n');
-define('JS_POST_CODE', '* The \'Post Code\' entry must have at least ' . ENTRY_POSTCODE_MIN_LENGTH . ' characters.\n');
-define('JS_CITY', '* The \'City\' entry must have at least ' . ENTRY_CITY_MIN_LENGTH . ' characters.\n');
-define('JS_STATE', '* The \'State\' entry must be selected.\n');
-define('JS_STATE_SELECT', '-- Select Above --');
-define('JS_ZONE', '* The \'State\' entry must be selected from the list for this country.\n');
-define('JS_COUNTRY', '* The \'Country\' entry must be selected.\n');
-define('JS_TELEPHONE', '* The \'Telephone Number\' entry must have at least ' . ENTRY_TELEPHONE_MIN_LENGTH . ' characters.\n');
-define('JS_PASSWORD', '* The \'Password\' and \'Confirmation\' entries must match and have at least ' . ENTRY_PASSWORD_MIN_LENGTH . ' characters.\n');
-
-define('CATEGORY_COMPANY', 'Company Details');
-define('CATEGORY_PERSONAL', 'Personal Details');
-define('CATEGORY_ADDRESS', 'Address');
-define('CATEGORY_CONTACT', 'Contact Information');
-define('CATEGORY_OPTIONS', 'Options');
-define('CATEGORY_PASSWORD', 'Password');
-define('CATEGORY_CORRECT', 'If this is the right customer, press the Confirm button below.');
-define('ENTRY_CUSTOMERS_ID', 'ID:');
-define('ENTRY_CUSTOMERS_ID_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_COMPANY', 'Company Name:');
-define('ENTRY_COMPANY_ERROR', '');
-define('ENTRY_COMPANY_TEXT', '');
-define('ENTRY_GENDER', 'Gender:');
-define('ENTRY_GENDER_ERROR', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_GENDER_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_FIRST_NAME', 'First Name:');
-define('ENTRY_FIRST_NAME_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_FIRST_NAME_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_LAST_NAME', 'Last Name:');
-define('ENTRY_LAST_NAME_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_LAST_NAME_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_LAST_NAME_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_DATE_OF_BIRTH', 'Date of Birth:');
-define('ENTRY_DATE_OF_BIRTH_ERROR', '&nbsp;<small><font color="#FF0000">(eg. 05/21/1970)</font></small>');
-define('ENTRY_DATE_OF_BIRTH_TEXT', '&nbsp;<small>(eg. 05/21/1970) <font color="#AABBDD">required</font></small>');
-define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
-define('ENTRY_EMAIL_ADDRESS_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', '&nbsp;<small><font color="#FF0000">Your email address doesn\'t appear to be valid!</font></small>');
-define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', '&nbsp;<small><font color="#FF0000">email address already exists!</font></small>');
-define('ENTRY_EMAIL_ADDRESS_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_STREET_ADDRESS', 'Street Address:');
-define('ENTRY_STREET_ADDRESS_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_STREET_ADDRESS_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_SUBURB', 'Suburb:');
-define('ENTRY_SUBURB_ERROR', '');
-define('ENTRY_SUBURB_TEXT', '');
-define('ENTRY_POST_CODE', 'Post Code:');
-define('ENTRY_POST_CODE_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_POSTCODE_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_POST_CODE_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_CITY', 'City:'); //Changed for osCMax bug #27
-define('ENTRY_CITY_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_CITY_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_CITY_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_STATE', 'State/Province:');
-define('ENTRY_STATE_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
-define('ENTRY_STATE_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_COUNTRY', 'Country:');
-define('ENTRY_COUNTRY_ERROR', '');
-define('ENTRY_COUNTRY_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_TELEPHONE_NUMBER', 'Telephone Number:');
-define('ENTRY_TELEPHONE_NUMBER_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_TELEPHONE_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_TELEPHONE_NUMBER_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_FAX_NUMBER', 'Fax Number:');
-define('ENTRY_FAX_NUMBER_ERROR', '');
-define('ENTRY_FAX_NUMBER_TEXT', '');
-define('ENTRY_NEWSLETTER', 'Newsletter:');
-define('ENTRY_NEWSLETTER_TEXT', '');
-define('ENTRY_NEWSLETTER_YES', 'Subscribed');
-define('ENTRY_NEWSLETTER_NO', 'Unsubscribed');
-define('ENTRY_NEWSLETTER_ERROR', '');
-define('ENTRY_PASSWORD', 'Password:');
-define('ENTRY_PASSWORD_CONFIRMATION', 'Password Confirmation:');
-define('ENTRY_PASSWORD_CONFIRMATION_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_PASSWORD_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_PASSWORD_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_PASSWORD_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('PASSWORD_HIDDEN', '--HIDDEN--');
-// EOF: MOD - ORDER EDIT
 
 // header text in includes/header.php
 define('HEADER_TITLE_TOP', 'Admin');
@@ -209,7 +128,7 @@ define('BOX_CONFIGURATION_MOPICS', 'Dynamic MoPics');
 define('BOX_CONFIGURATION_PRINT', 'Printable Catalog');
 define('BOX_CONFIGURATION_SEO', 'SEO URLs');
 define('BOX_CONFIGURATION_WISHLIST', 'Wishlist Settings');
-define('BOX_CONFIGURATION_EDITOR', 'Order Edtior');
+define('BOX_CONFIGURATION_EDITOR', 'Order Editor');
 define('BOX_CONFIGURATION_SEO_VALIDATION', 'SEO URL Validation');
 // EOF: Added for super-friendly admin menu:
 
@@ -260,7 +179,10 @@ define('BOX_HEADING_REPORTS', 'Reports');
 define('BOX_REPORTS_PRODUCTS_VIEWED', 'Products Viewed');
 define('BOX_REPORTS_PRODUCTS_PURCHASED', 'Products Purchased');
 define('BOX_REPORTS_ORDERS_TOTAL', 'Customer Orders-Total');
-
+define('BOX_REPORTS_CREDITS', 'Customer Credits Report');
+//++++ QT Pro: Begin Changed code
+define('BOX_REPORTS_STATS_LOW_STOCK_ATTRIB', 'Stock Report');
+//++++ QT Pro: End Changed Code
 // tools text in includes/boxes/tools.php
 define('BOX_HEADING_TOOLS', 'Tools');
 define('BOX_TOOLS_BACKUP', 'Database Backup');
@@ -268,14 +190,13 @@ define('BOX_TOOLS_BANNER_MANAGER', 'Banner Manager');
 // LINE ADDED: MOD - Batch Print Center
 define('BOX_TOOLS_BATCH_CENTER', 'Batch Print Center');
 define('BOX_TOOLS_CACHE', 'Cache Control');
-define('BOX_TOOLS_DEFINE_LANGUAGE', 'Define Languages');
-define('BOX_TOOLS_FILE_MANAGER', 'File Manager');
 define('BOX_TOOLS_MAIL', 'Send Email');
 define('BOX_TOOLS_NEWSLETTER_MANAGER', 'Newsletter Manager');
 define('BOX_TOOLS_SERVER_INFO', 'Server Info');
 define('BOX_TOOLS_WHOS_ONLINE', 'Who\'s Online');
 define('BOX_TOOLS_PACKAGING', 'Packaging');
 define('BOX_TOOLS_UPS_BOXES_USED', 'UPS boxes used');
+define('BOX_TOOLS_QTPRODOCTOR', 'QTPro Doctor');
 
 // localizaion box text in includes/boxes/localization.php
 define('BOX_HEADING_LOCALIZATION', 'Localization');
@@ -331,21 +252,64 @@ define('CATEGORY_ADDRESS', 'Address');
 define('CATEGORY_CONTACT', 'Contact');
 define('CATEGORY_COMPANY', 'Company');
 define('CATEGORY_OPTIONS', 'Options');
+define('CATEGORY_PASSWORD', 'Your Password');
 
 define('ENTRY_GENDER', 'Gender:');
 define('ENTRY_GENDER_ERROR', '&nbsp;<span class="errorText">required</span>');
+define('ENTRY_GENDER_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
 define('ENTRY_FIRST_NAME', 'First Name:');
 define('ENTRY_FIRST_NAME_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' chars</span>');
+define('ENTRY_FIRST_NAME_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
 define('ENTRY_LAST_NAME', 'Last Name:');
 define('ENTRY_LAST_NAME_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_LAST_NAME_MIN_LENGTH . ' chars</span>');
+define('ENTRY_LAST_NAME_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
 define('ENTRY_DATE_OF_BIRTH', 'Date of Birth:');
 define('ENTRY_DATE_OF_BIRTH_ERROR', '&nbsp;<span class="errorText">(eg. 05/21/1970)</span>');
+define('ENTRY_DATE_OF_BIRTH_TEXT', '&nbsp;<small>(eg. 05/21/1970) <font color="#AABBDD">required</font></small>');
 define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
 define('ENTRY_EMAIL_ADDRESS_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' chars</span>');
 define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', '&nbsp;<span class="errorText">The email address doesn\'t appear to be valid!</span>');
 define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', '&nbsp;<span class="errorText">This email address already exists!</span>');
+define('ENTRY_EMAIL_ADDRESS_TEXT', '*');
 define('ENTRY_COMPANY', 'Company name:');
 define('ENTRY_COMPANY_ERROR', '');
+define('ENTRY_STREET_ADDRESS', 'Street Address:');
+define('ENTRY_STREET_ADDRESS_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' chars</span>');
+define('ENTRY_STREET_ADDRESS_TEXT', '*');
+define('ENTRY_SUBURB', 'Suburb:');
+define('ENTRY_SUBURB_ERROR', '');
+define('ENTRY_SUBURB_TEXT', '');
+define('ENTRY_POST_CODE', 'Post Code:');
+define('ENTRY_POST_CODE_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_POSTCODE_MIN_LENGTH . ' chars</span>');
+define('ENTRY_POST_CODE_TEXT', '*');
+define('ENTRY_CITY', 'City:');
+define('ENTRY_CITY_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_CITY_MIN_LENGTH . ' chars</span>');
+define('ENTRY_CITY_TEXT', '*');
+define('ENTRY_STATE', 'State:');
+define('ENTRY_STATE_ERROR', '&nbsp;<span class="errorText">required</span>');
+define('ENTRY_STATE_TEXT', '* (Select country first)');
+define('ENTRY_COUNTRY', 'Country:');
+define('ENTRY_COUNTRY_ERROR', '');
+define('ENTRY_COUNTRY_TEXT', '* (Page will refresh when changed)');
+define('ENTRY_TELEPHONE_NUMBER', 'Telephone Number:');
+define('ENTRY_TELEPHONE_NUMBER_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_TELEPHONE_MIN_LENGTH . ' chars</span>');
+define('ENTRY_TELEPHONE_NUMBER_TEXT', '*');
+define('ENTRY_FAX_NUMBER', 'Fax Number:');
+define('ENTRY_FAX_NUMBER_ERROR', '');
+define('ENTRY_FAX_NUMBER_TEXT', '');
+define('ENTRY_NEWSLETTER', 'Newsletter:');
+define('ENTRY_NEWSLETTER_TEXT', '');
+define('ENTRY_NEWSLETTER_YES', 'Subscribed');
+define('ENTRY_NEWSLETTER_NO', 'Unsubscribed');
+define('ENTRY_NEWSLETTER_ERROR', '');
+define('ENTRY_PASSWORD', 'Password:');
+define('ENTRY_PASSWORD_CONFIRMATION', 'Password Confirmation:');
+define('ENTRY_PASSWORD_CONFIRMATION_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
+define('ENTRY_PASSWORD_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_PASSWORD_MIN_LENGTH . ' chars</font></small>');
+define('ENTRY_PASSWORD_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
+define('PASSWORD_HIDDEN', '--HIDDEN--');
+// EOF: MOD - ORDER EDIT
+
 
 // BOF: MOD - Separate Pricing Per Customer
 define('ENTRY_COMPANY_TAX_ID', 'Company\'s tax id number:');
@@ -356,26 +320,7 @@ define('ENTRY_CUSTOMERS_GROUP_RA_YES', 'Alert on');
 define('ENTRY_CUSTOMERS_GROUP_RA_ERROR', '');
 // EOF: MOD - Separate Pricing Per Customer
 
-define('ENTRY_STREET_ADDRESS', 'Street Address:');
-define('ENTRY_STREET_ADDRESS_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' chars</span>');
-define('ENTRY_SUBURB', 'Suburb:');
-define('ENTRY_SUBURB_ERROR', '');
-define('ENTRY_POST_CODE', 'Post Code:');
-define('ENTRY_POST_CODE_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_POSTCODE_MIN_LENGTH . ' chars</span>');
-define('ENTRY_CITY', 'City:');
-define('ENTRY_CITY_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_CITY_MIN_LENGTH . ' chars</span>');
-define('ENTRY_STATE', 'State:');
-define('ENTRY_STATE_ERROR', '&nbsp;<span class="errorText">required</span>');
-define('ENTRY_COUNTRY', 'Country:');
-define('ENTRY_COUNTRY_ERROR', '');
-define('ENTRY_TELEPHONE_NUMBER', 'Telephone Number:');
-define('ENTRY_TELEPHONE_NUMBER_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_TELEPHONE_MIN_LENGTH . ' chars</span>');
-define('ENTRY_FAX_NUMBER', 'Fax Number:');
-define('ENTRY_FAX_NUMBER_ERROR', '');
-define('ENTRY_NEWSLETTER', 'Newsletter:');
-define('ENTRY_NEWSLETTER_YES', 'Subscribed');
-define('ENTRY_NEWSLETTER_NO', 'Unsubscribed');
-define('ENTRY_NEWSLETTER_ERROR', '');
+
 
 // images
 define('IMAGE_ANI_SEND_EMAIL', 'Sending E-Mail');
@@ -464,6 +409,7 @@ define('TEXT_DISPLAY_NUMBER_OF_TAX_CLASSES', 'Displaying <b>%d</b> to <b>%d</b> 
 define('TEXT_DISPLAY_NUMBER_OF_TAX_ZONES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> tax zones)');
 define('TEXT_DISPLAY_NUMBER_OF_TAX_RATES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> tax rates)');
 define('TEXT_DISPLAY_NUMBER_OF_ZONES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> zones)');
+define('TEXT_DISPLAY_NUMBER_OF_SHIPMENTS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> shipments)');
 
 //BOF: MOD - Catagories Discriptions
 define('TEXT_EDIT_CATEGORIES_HEADING_TITLE', 'Category Heading Title:');
@@ -517,6 +463,6 @@ define('IMAGE_ORDERS_SHIP', 'Ship Package');
 define('IMAGE_ORDERS_FEDEX_LABEL','View or Print FedEx Shipping Label');
 define('IMAGE_ORDERS_TRACK','Track FedEx Shipment');
 define('IMAGE_ORDERS_CANCEL_SHIPMENT','Cancel FedEx Shipment');
-define('BOX_SHIPPING_MANIFEST','Fedx Shipping Manifest');
+define('BOX_SHIPPING_MANIFEST','FedEx Shipping Manifest');
 // EOF: MOD - FedEx
 ?>

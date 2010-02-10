@@ -21,7 +21,9 @@ $Id: column_right.php 3 2006-05-27 04:59:07Z user $
 
   if (isset($HTTP_GET_VARS['products_id'])) include(DIR_WS_BOXES . 'manufacturer_info.php');
 
-  if (tep_session_is_registered('customer_id')) include(DIR_WS_BOXES . 'order_history.php');
+// PWA EOF
+  if (tep_session_is_registered('customer_id') && (! tep_session_is_registered('customer_is_guest')) ) include(DIR_WS_BOXES . 'order_history.php');
+// PWA BOF
 
   if (isset($HTTP_GET_VARS['products_id'])) {
     if (tep_session_is_registered('customer_id')) {
@@ -63,7 +65,7 @@ $Id: column_right.php 3 2006-05-27 04:59:07Z user $
     $column['cfgtitle'] = str_replace(' ', '_', $column['cfgtitle']);
     $column['cfgtitle'] = str_replace("'", '', $column['cfgtitle']);
 
-    if ( ($column[cfgvalue] == 'yes') && ($column[cfgcol] == 'right')) {
+    if ( ($column['cfgvalue'] == 'yes') && ($column['cfgcol'] == 'right')) {
 
       define($column['cfgkey'],$column['box_heading']);
 

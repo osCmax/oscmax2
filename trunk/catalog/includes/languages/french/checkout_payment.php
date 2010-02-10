@@ -1,37 +1,37 @@
 <?php
 /*
-  $Id: checkout_payment.php,v 1.14 2003/02/06 17:38:16 thomasamoulton Exp $
+  $Id: checkout_payment.php,v 1.1.1.1.2.1 2005/06/12 00:03:46 Michael Sasek Exp $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Checkout');
-define('NAVBAR_TITLE_2', 'Payment Method');
+define('NAVBAR_TITLE_1', 'Commande');
+define('NAVBAR_TITLE_2', 'M&eacute;thode de paiement');
 
-define('HEADING_TITLE', 'Payment Information');
+define('HEADING_TITLE', 'Information paiement');
 
-define('TABLE_HEADING_BILLING_ADDRESS', 'Billing Address');
-define('TEXT_SELECTED_BILLING_DESTINATION', 'Please choose from your address book where you would like the invoice to be sent to.');
-define('TITLE_BILLING_ADDRESS', 'Billing Address:');
+define('TABLE_HEADING_BILLING_ADDRESS', 'Adresse de facturation');
+define('TEXT_SELECTED_BILLING_DESTINATION', 'Veuillez choisir dans votre carnet d\'adresses l\'adresse o&ugrave; vous voudriez que la facture soit exp&eacute;di&eacute;e');
+define('TITLE_BILLING_ADDRESS', 'Adresse de facturation:');
 
-define('TABLE_HEADING_PAYMENT_METHOD', 'Payment Method');
-define('TEXT_SELECT_PAYMENT_METHOD', 'Please select the preferred payment method to use on this order.');
-define('TITLE_PLEASE_SELECT', 'Please Select');
-define('TEXT_ENTER_PAYMENT_INFORMATION', 'This is currently the only payment method available to use on this order.');
+define('TABLE_HEADING_PAYMENT_METHOD', 'M&eacute;thode de paiement');
+define('TEXT_SELECT_PAYMENT_METHOD', 'Veuillez choisir la m&eacute;thode pr&eacute;f&eacute;r&eacute;e de paiement &agrave; utiliser pour cette commande.');
+define('TITLE_PLEASE_SELECT', 'Veuillez choisir');
+define('TEXT_ENTER_PAYMENT_INFORMATION', 'C\'est actuellement la seule m&eacute;thode de paiement disponible pour cette commande.');
 
-define('TABLE_HEADING_COMMENTS', 'Add Comments About Your Order');
+define('TABLE_HEADING_COMMENTS', 'Ajoutez des commentaires au sujet de votre commande');
 
-define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continue Checkout Procedure');
-define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'to confirm this order.');
+define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continuer la proc&eacute;dure de commande');
+define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'Confirmer cette commande.');
 
-// Start - CREDIT CLASS Gift Voucher Contribution
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
 // product summary text in checkout_payment.php
-define('HEADING_PRODUCTS', 'Products Ordered');
-define('TEXT_EDIT', 'Edit');
-// End - CREDIT CLASS Gift Voucher Contribution
+define('HEADING_PRODUCTS', 'Produits command&eacute;s');
+define('TEXT_EDIT', '&Eacute;diter');
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 ?>

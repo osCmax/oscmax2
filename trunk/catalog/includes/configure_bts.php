@@ -92,7 +92,14 @@ function bts_select($template_type, $filename = '') {
     break;
 
     case 'javascript':
-      $path = '';
+       // Load different javascript files per page
+      if(is_file(DIR_WS_TEMPLATES . 'javascript/' . basename($filename, '.php') . '.js.php')) {
+        $path = DIR_WS_TEMPLATES . 'javascript/' . basename($filename, '.php') . '.js.php';
+      } elseif (is_file(DIR_WS_TEMPLATES_FALLBACK . 'javascript/' . basename($filename, '.php') . '.js.php')) {
+        $path = DIR_WS_TEMPLATES_FALLBACK . 'javascript/' . basename($filename, '.php') . '.js.php';
+      } else {
+        return (FALSE);
+      }
     break;
 
     case 'stylesheet':
@@ -164,7 +171,7 @@ function bts_template_switch() {
     }
   }
 
-  if ((ereg('^[[:alnum:]|_|-]+$', $tplDir)) && (is_dir (DIR_WS_TEMPLATES_BASE . $tplDir))){
+  if ((preg_match('{^[[:alnum:]|_|-]+$}', $tplDir)) && (is_dir (DIR_WS_TEMPLATES_BASE . $tplDir))){
     // 'Input Validated' only allow alfanumeric characters and underscores in template name
     define('DIR_WS_TEMPLATES', DIR_WS_TEMPLATES_BASE . $tplDir . '/' );
   } else {

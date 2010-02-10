@@ -2,12 +2,12 @@
 /*
   $Id: gv_send.php,v 1.1.2.1 2003/04/18 17:25:44 wilt Exp $
 
-  The Exchange Project - Community Made Shopping!
-  http://www.theexchangeproject.org
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Gift Voucher System v1.0
-  Copyright (c) 2001,2002 Ian C Wilson
-  http://www.phesis.org
+  Copyright 2006 osCMax
+
+  French version Copyrite 2003 - Configure That! Computer Services
 
   Released under the GNU General Public License
 */
@@ -30,16 +30,16 @@ define('TEXT_SUCCESS', 'F&eacute;licitations, votre ch&egrave;que cadeau a &eacu
 
 
 define('EMAIL_SEPARATOR', '----------------------------------------------------------------------------------------');
-define('EMAIL_GV_TEXT_HEADER', 'Félicitations, Vous avez reçu un chèque cadeau d\'une valeur de %s');
+define('EMAIL_GV_TEXT_HEADER', 'Des félicitations, vous avez reçu un bon de cadeau en valeur %s');
 define('EMAIL_GV_TEXT_SUBJECT', 'Un cadeau de %s');
-define('EMAIL_GV_FROM', 'Ce chèque cadeau vous a été envoyé par %s');
-define('EMAIL_GV_MESSAGE', 'Avec le message suivant ');
-define('EMAIL_GV_SEND_TO', '%s');
-define('EMAIL_GV_REDEEM', 'Pour utiliser ce chèque cadeau, cliquez sur le lien ci-dessous. Notez bien le code du chèque cadeau qui est %s. Dans le cas où vous auriez des problèmes.');
-define('EMAIL_GV_LINK', 'Pour utiliser le chèque cadeau. ');
+define('EMAIL_GV_FROM', 'Ce bon de cadeau vous a été envoyé près %s');
+define('EMAIL_GV_MESSAGE', 'Avec une énonciation de message ');
+define('EMAIL_GV_SEND_TO', 'Bonjour, %s');
+define('EMAIL_GV_REDEEM', 'Pour racheter ce bon de cadeau, cliquetez svp dessus le lien ci-dessous. Veuillez noter également le code de rachat qui est' . "\n" . ' %s ' . "\n" . 'Au cas où vous auriez des problèmes.');
+define('EMAIL_GV_LINK', 'Pour racheter svp cliquetez ');
 define('EMAIL_GV_VISIT', ' ou visite ');
-define('EMAIL_GV_ENTER', ' et entrez le code ');
-define('EMAIL_GV_FIXED_FOOTER', 'Si vous avez des problèmes pour utiliser ce chèque Cadeau utilisez le lien ci-dessus.' . "\n" . 
-                                'Vous pouvez aussi entrer le code du chèque cadeau pendant le processus du paiement dans notre magasin.' . "\n\n");
+define('EMAIL_GV_ENTER', ' et écrivez le code ');
+define('EMAIL_GV_FIXED_FOOTER', 'Si vous êtes ayez les problèmes racheter le bon de cadeau en utilisant le lien automatisé ci-dessus, ' . "\n" .
+                                'vous pouvez également écrire le code de bon de cadeau pendant le procédé de contrôle à notre magasin.' . "\n\n");
 define('EMAIL_GV_SHOP_FOOTER', '');
 ?>

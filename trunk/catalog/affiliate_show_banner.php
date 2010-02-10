@@ -35,7 +35,7 @@ $Id: affiliate_show_banner.php 14 2006-07-28 17:42:07Z user $
   if (file_exists('includes/local/configure.php')) include('includes/local/configure.php');
   require('includes/configure.php');
   if (file_exists('includes/local/affiliate_configure.php')) include('includes/local/affiliate_configure.php');
-  require('includes/affiliate_configure.php');
+//  require('includes/affiliate_configure.php');
 
 // include the database functions
   require(DIR_WS_FUNCTIONS . 'database.php');
@@ -55,20 +55,24 @@ $Id: affiliate_show_banner.php 14 2006-07-28 17:42:07Z user $
     } else {
       $img_name=$pic;
     }
+$len = filesize($pic);
     header ("Content-type: image/$img_type");
-    header ("Content-Disposition: inline; filename=$img_name");
-    fpassthru($fp);
-    // The file is closed when fpassthru() is done reading it (leaving handle useless).  
-    // fclose ($fp);
-    exit();
-  }
+header ("Content-Length: $len");
+header ("Content-Disposition: inline; filename=images/$img_name");
+fpassthru($fp);
+// The file is closed when fpassthru() is done reading it (leaving handle useless).
+fclose ($fp);
+exit();
+
+
+}
 
   function affiliate_debug($banner,$sql) {
 ?>
     <table border=1 cellpadding=2 cellspacing=2>
       <tr><td colspan=2>Check the pathes! (catalog/includes/configure.php)</td></tr>
       <tr><td>absolute path to picture:</td><td><?php echo DIR_FS_CATALOG . DIR_WS_IMAGES . $banner; ?></td></tr>
-      <tr><td>build with:</td><td>DIR_FS_CATALOG . DIR_WS_IMAGES . $banner</td></tr>
+      <tr><td>build with:</td><td><?php echo DIR_FS_CATALOG . DIR_WS_IMAGES . $banner ?></td></tr>
       <tr><td>DIR_FS_CATALOG</td><td><?php echo DIR_FS_CATALOG; ?></td></tr>
       <tr><td>DIR_WS_CATALOG</td><td><?php echo DIR_WS_CATALOG ; ?></td></tr>
       <tr><td>DIR_WS_IMAGES</td><td><?php echo DIR_WS_IMAGES; ?></td></tr>
@@ -78,7 +82,7 @@ $Id: affiliate_show_banner.php 14 2006-07-28 17:42:07Z user $
       <tr><td>SQL-Query:</td><td><?php if ($banner) echo "Got Result"; else echo "No result"; ?></td></tr>
       <tr><td>Locating Pic</td><td>
 <?php 
-    $pic = DIR_FS_CATALOG . DIR_WS_IMAGES . $banner;
+    $pic =  DIR_WS_IMAGES . $banner;
     echo $pic . "<br>";
     if (!is_file($pic)) {
       echo "failed<br>";
@@ -92,17 +96,17 @@ $Id: affiliate_show_banner.php 14 2006-07-28 17:42:07Z user $
     exit();
   }
 
-// Register needed Post / Get Variables
-  if ($HTTP_GET_VARS['ref']) $affiliate_id=$HTTP_GET_VARS['ref'];
-  if ($HTTP_POST_VARS['ref']) $affiliate_id=$HTTP_POST_VARS['ref'];
-
-  if ($HTTP_GET_VARS['affiliate_banner_id']) $banner_id = $HTTP_GET_VARS['affiliate_banner_id'];
-  if ($HTTP_POST_VARS['affiliate_banner_id']) $banner_id = $HTTP_POST_VARS['affiliate_banner_id'];
-  if ($HTTP_GET_VARS['affiliate_pbanner_id']) $prod_banner_id = $HTTP_GET_VARS['affiliate_pbanner_id'];
-  if ($HTTP_POST_VARS['affiliate_pbanner_id']) $prod_banner_id = $HTTP_POST_VARS['affiliate_pbanner_id'];
-
-  $banner = '';
+  $banner_id = '';
   $products_id = '';
+// Register needed Post / Get Variables
+if (isset($_GET['ref'])) $affiliate_id=$_GET['ref'];
+if (isset($_POST['ref'])) $affiliate_id=$_POST['ref'];
+if (isset($_GET['affiliate_banner_id'])) $banner_id = $_GET['affiliate_banner_id'];
+if (isset($_POST['affiliate_banner_id'])) $banner_id = $_POST['affiliate_banner_id'];
+if (isset($_GET['affiliate_pbanner_id'])) $prod_banner_id = $_GET['affiliate_pbanner_id'];
+if (isset($_POST['affiliate_pbanner_id'])) $prod_banner_id = $_POST['affiliate_pbanner_id'];
+
+  
 
   if ($banner_id) {
     $sql = "select affiliate_banners_image, affiliate_products_id from " . TABLE_AFFILIATE_BANNERS . " where affiliate_banners_id = '" . $banner_id  . "' and affiliate_status = 1";
@@ -127,7 +131,7 @@ $Id: affiliate_show_banner.php 14 2006-07-28 17:42:07Z user $
   if (AFFILIATE_SHOW_BANNERS_DEBUG == 'true') affiliate_debug($banner,$sql);
 
   if ($banner) {
-    $pic = DIR_FS_CATALOG . DIR_WS_IMAGES . $banner;
+    $pic = DIR_WS_IMAGES . $banner;
 
     // Show Banner only if it exists:
     if (is_file($pic)) {

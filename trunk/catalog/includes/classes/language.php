@@ -84,7 +84,7 @@ $Id: language.php 3 2006-05-27 04:59:07Z user $
       for ($i=0, $n=sizeof($this->browser_languages); $i<$n; $i++) {
         reset($this->languages);
         while (list($key, $value) = each($this->languages)) {
-          if (eregi('^(' . $value . ')(;q=[0-9]\\.[0-9])?$', $this->browser_languages[$i]) && isset($this->catalog_languages[$key])) {
+          if (preg_match('{^(' . $value . ')(;q=[0-9]\\.[0-9])?$}i', $this->browser_languages[$i]) && isset($this->catalog_languages[$key])) {
             $this->language = $this->catalog_languages[$key];
             break 2;
           }

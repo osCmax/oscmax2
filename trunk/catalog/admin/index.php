@@ -65,7 +65,7 @@ $Id: index.php 14 2006-07-28 17:42:07Z user $
                                          array('title' => BOX_REPORTS_PRODUCTS_PURCHASED, 'link' => tep_href_link(FILENAME_STATS_PRODUCTS_PURCHASED, 'selected_box=reports')),
                                          array('title' => BOX_REPORTS_MONTHLY_SALES, 'link' => tep_href_link(FILENAME_STATS_MONTHLY_SALES, 'selected_box=reports')),
                                          array('title' => BOX_REPORTS_RECOVER_CART_SALES, 'link' => tep_href_link(FILENAME_RECOVER_CART_SALES, 'selected_box=reports')),
-                                         array('title' => BOX_SHIPPING_MANIFEST, 'link' => tep_href_link(FILENAME_SHIPPING_MANIFEST, 'selected_box=reports')),
+                                         array('title' => BOX_SHIPPING_MANIFEST, 'link' => tep_href_link(FILENAME_SHIPPING_MANIFEST, 'selected_box=reports' ) . ' "target="_blank'),
                                          array('title' => BOX_REPORTS_ORDERS_TOTAL, 'link' => tep_href_link(FILENAME_STATS_CUSTOMERS, 'selected_box=reports')))),
 
 
@@ -139,8 +139,7 @@ $Id: index.php 14 2006-07-28 17:42:07Z user $
                                          array('title' => BOX_CONFIGURATION_PRINT, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=30')),
                                          array('title' => BOX_CONFIGURATION_SEO, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=60')),
                                          array('title' => BOX_CONFIGURATION_WISHLIST, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=65')),
-                                         array('title' => BOX_CONFIGURATION_EDITOR, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=70')),
-                                         array('title' => BOX_CONFIGURATION_SEO_VALIDATION, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=75')))),
+                                         array('title' => BOX_CONFIGURATION_EDITOR, 'link' => tep_href_link(FILENAME_CONFIGURATION, 'selected_box=configuration&gID=70')))),
 
                array('title' => BOX_HEADING_LOCATION_AND_TAXES,
 // Added line for Admin w/access levels
@@ -235,6 +234,15 @@ a:hover.headerLink { font-family: Verdana, Arial, sans-serif; font-size: 10px; c
 //--></style>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<?php //++++ QT Pro: Begin added code
+
+$qtpro_sick_count = qtpro_sick_product_count();
+if($qtpro_sick_count != 0){
+?>
+<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr><td class="messageStackWarning"><?php echo 'Warning: There are '. $qtpro_sick_count . ' sick products in the database. Please visit <a href="' . tep_href_link(FILENAME_QTPRODOCTOR) . '" class="headerLink">the QTPro doctor</a>.'; ?></td></tr></table>
+<?php
+}
+//++++ QT Pro: End added code ?>
 <br>
 <table border="0" width="600" height="100%" cellspacing="0" cellpadding="0" align="center" valign="middle">
   <tr>

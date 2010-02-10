@@ -59,9 +59,9 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   }
 
   function tep_sanitize_string($string) {
-    $string = ereg_replace(' +', ' ', trim($string));
-
-    return preg_replace("/[<>]/", '_', $string);
+    $patterns = array ('/ +/','/[<>]/');
+    $replace = array (' ', '_');
+    return preg_replace($patterns, $replace, trim($string));
   }
 
 ////
@@ -222,7 +222,10 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     $countries_array = array();
     if (tep_not_null($countries_id)) {
       if ($with_iso_codes == true) {
-        $countries = tep_db_query("select countries_name, countries_iso_code_2, countries_iso_code_3 from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "' order by countries_name");
+        // Ajax Country-state selector
+        //$countries = tep_db_query("select countries_name, countries_iso_code_2, countries_iso_code_3 from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "' order by countries_name");
+        $countries = tep_db_query("select countries_name, countries_iso_code_2, countries_iso_code_3 from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "' and active = 1 order by countries_name");
+
         $countries_values = tep_db_fetch_array($countries);
         $countries_array = array('countries_name' => $countries_values['countries_name'],
                                  'countries_iso_code_2' => $countries_values['countries_iso_code_2'],
@@ -233,7 +236,9 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
         $countries_array = array('countries_name' => $countries_values['countries_name']);
       }
     } else {
-      $countries = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . " order by countries_name");
+      // Ajax Country-state selector 
+      //$countries = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . " order by countries_name");
+      $countries = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . " where active = 1 order by countries_name");
       while ($countries_values = tep_db_fetch_array($countries)) {
         $countries_array[] = array('countries_id' => $countries_values['countries_id'],
                                    'countries_name' => $countries_values['countries_name']);
@@ -352,6 +357,45 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     }
 
     return $number;
+  }
+
+////
+// Round up function for non whole numbers by GREG DEETH
+// The value for the precision variable determines how many digits after the decimal and rounds the last digit up to the next value
+// Precision = 0 -> xx.xxxx = x+
+// Precision = 1 -> xx.xxxx = xx.+
+// Precision = 2 -> xx.xxxx = xx.x+
+  function tep_round_up($number, $precision) {
+	$number_whole = '';
+	$num_left_dec = 0;
+	$num_right_dec = 0;
+	$num_digits = strlen($number);
+	$number_out = '';
+	$i = 0;
+	while ($i + 1 <= strlen($number))
+	{
+		$current_digit = substr($number, $i, ($i + 1) - $num_digits);
+		if ($current_digit == '.') {
+			$i = $num_digits + 1;
+			$num_left_dec = strlen($number_whole);
+			$num_right_dec = ($num_left_dec + 1) - $num_digits;
+		} else {
+			$number_whole = $number_whole . $current_digit;
+			$i = $i + 1;
+		}
+	}
+	if ($num_digits > 3 && $precision < ($num_digits - $num_left_dec - 1) && $precision >= 0) {
+		$i = $precision;
+		$addable = 1;
+		while ($i > 0) {
+			$addable = $addable * .1;
+			$i = $i - 1;
+		} 
+		$number_out = substr($number, 0, $num_right_dec + $precision) + $addable;
+	} else {
+		$number_out = $number;
+	}
+	return $number_out;
   }
 
 ////
@@ -630,7 +674,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     if (@date('Y', mktime($hour, $minute, $second, $month, $day, $year)) == $year) {
       return date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, $year));
     } else {
-      return ereg_replace('2037' . '$', $year, date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037)));
+      return preg_replace('/2037$/', $year, date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037)));
     }
   }
 
@@ -640,7 +684,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     $search_str = trim(strtolower($search_str));
 
 // Break up $search_str on whitespace; quoted string will be reconstructed later
-    $pieces = split('[[:space:]]+', $search_str);
+    $pieces = preg_split('/[[:space:]]+/', $search_str);
     $objects = array();
     $tmpstring = '';
     $flag = '';
@@ -681,7 +725,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 */
 
 // Add this word to the $tmpstring, starting the $tmpstring
-        $tmpstring = trim(ereg_replace('"', ' ', $pieces[$k]));
+        $tmpstring = trim(preg_replace('/"/', ' ', $pieces[$k]));
 
 // Check for one possible exception to the rule. That there is a single quoted word.
         if (substr($pieces[$k], -1 ) == '"') {
@@ -731,7 +775,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
    $piece onto the tail of the string, push the $tmpstring onto the $haves,
    kill the $tmpstring, turn the $flag "off", and return.
 */
-            $tmpstring .= ' ' . trim(ereg_replace('"', ' ', $pieces[$k]));
+            $tmpstring .= ' ' . trim(preg_replace('/"/', ' ', $pieces[$k]));
 
 // Push the $tmpstring onto the array of stuff to search for
             $objects[] = trim($tmpstring);
@@ -1066,10 +1110,10 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     if (SEND_EMAILS != 'true') return false;
 
     //Dont send any injection type mails.
-    if (eregi('Content-Type:', $to_name)) return false;
-    if (eregi('Content-Type:', $email_subject)) return false;
-    if (eregi('Content-Type:', $from_email_name)) return false;
-    if (eregi('Content-Type:', $email_text)) return false;
+    if (preg_match('/Content-Type:/i', $to_name)) return false;
+    if (preg_match('/Content-Type:/i', $email_subject)) return false;
+    if (preg_match('/Content-Type:/i', $from_email_name)) return false;
+    if (preg_match('/Content-Type:/i', $email_text)) return false;
 
     //Remove any newline and anything after it on the header fields of the mail.
     //$to_email_address and $from_email_address are checked with tep_validate_email().
@@ -1109,7 +1153,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 ////
 // Get the number of times a word/character is present in a string
   function tep_word_count($string, $needle) {
-    $temp_array = split($needle, $string);
+    $temp_array = preg_split('/' . $needle . '/', $string);
 
     return sizeof($temp_array);
   }
@@ -1119,7 +1163,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 
     if (empty($modules)) return $count;
 
-    $modules_array = split(';', $modules);
+    $modules_array = explode(';', $modules);
 
     for ($i=0, $n=sizeof($modules_array); $i<$n; $i++) {
       $class = substr($modules_array[$i], 0, strrpos($modules_array[$i], '.'));
@@ -1153,11 +1197,11 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
         $char = chr(tep_rand(0,255));
       }
       if ($type == 'mixed') {
-        if (eregi('^[a-z0-9]$', $char)) $rand_value .= $char;
+        if (preg_match('{^[a-z0-9]$}i', $char)) $rand_value .= $char;
       } elseif ($type == 'chars') {
-        if (eregi('^[a-z]$', $char)) $rand_value .= $char;
+        if (preg_match('{^[a-z]$}i', $char)) $rand_value .= $char;
       } elseif ($type == 'digits') {
-        if (ereg('^[0-9]$', $char)) $rand_value .= $char;
+        if (preg_match('{^[0-9]$}i', $char)) $rand_value .= $char;
       }
     }
 
@@ -1366,7 +1410,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 // nl2br() prior PHP 4.2.0 did not convert linefeeds on all OSs (it only converted \n)
   function tep_convert_linefeeds($from, $to, $string) {
     if ((PHP_VERSION < "4.0.5") && is_array($from)) {
-      return ereg_replace('(' . implode('|', $from) . ')', $to, $string);
+      return preg_replace('/(' . implode('|', $from) . ')/', $to, $string);
     } else {
       return str_replace($from, $to, $string);
     }

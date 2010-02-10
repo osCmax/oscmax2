@@ -17,6 +17,9 @@
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <?php
+	  if (isset($HTTP_GET_VARS['listing'])) { 
+	  	$listing = $HTTP_GET_VARS['listing'];
+	  }
           switch ($listing) {
               case "image":
               $order = "p.products_image,";
@@ -146,7 +149,7 @@
 			<table border="0" cellspacing="0" cellpadding="2">
 			<tr>
 			<td width="30%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=manufacturers', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
+			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=manufacturers', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=manufacturers-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
 			<td width="70%" rowspan="2" align="left" class="TableHeading">
 			<?php echo TABLE_HEADING_MANUFACTURERS; ?>
 			</td>
@@ -162,7 +165,7 @@
 			<table border="0" cellspacing="0" cellpadding="2">
 			<tr>
 			<td width="30%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=name', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
+			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=name', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=name-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
 
 			<td width="70%" rowspan="2" align="left" class="TableHeading">
 			<?php echo TABLE_HEADING_PRODUCTS; ?>
@@ -178,7 +181,7 @@
 			<table border="0" cellspacing="0" cellpadding="2">
 			<tr>
 			<td width="30%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=products_description', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
+			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=products_description', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=products_description-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
 
 			<td width="70%" rowspan="2" align="left" class="TableHeading">
 			<?php echo TABLE_HEADING_DESCRIPTION; ?>
@@ -195,7 +198,7 @@
 			<table border="0" cellspacing="0" cellpadding="2">
 			<tr>
 			<td width="17%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=categories', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
+			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=categories', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=categories-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
 
 			<td width="83%" rowspan="2" align="left" class="TableHeading">
 			<?php echo TABLE_HEADING_CATEGORIES; ?>
@@ -211,7 +214,7 @@
 			<table border="0" cellspacing="0" cellpadding="2">
 			<tr>
 			<td width="25%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=model', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
+			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=model', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=model-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
 
 			</td>
 			<td width="75%" rowspan="2" align="left" class="TableHeading">
@@ -228,7 +231,7 @@
 			<table border="0" cellspacing="0" cellpadding="2">
 			<tr>
 			<td width="25%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=upc', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
+			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=upc', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=upc-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
 
 			</td>
 			<td width="75%" rowspan="2" align="left" class="TableHeading">
@@ -245,7 +248,7 @@
 			<table border="0" cellspacing="0" cellpadding="2">
 			<tr>
 			<td width="25%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=quantity', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
+			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=quantity', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=quantity-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
 
 			</td>
 			<td width="75%" rowspan="2" align="left" class="TableHeading">
@@ -262,7 +265,7 @@
 			<table border="0" cellspacing="0" cellpadding="2">
 			<tr>
 			<td width="25%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=weight', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
+			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=weight', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=weight-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
 
 			</td>
 			<td width="75%" rowspan="2" align="left" class="TableHeading">
@@ -279,7 +282,7 @@
 			<table border="0" cellspacing="0" cellpadding="2">
 			<tr>
 			<td width="30%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=price', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
+			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=price', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=price-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
 
 			</td>
 			<td width="70%" rowspan="2" align="left" class="TableHeading">

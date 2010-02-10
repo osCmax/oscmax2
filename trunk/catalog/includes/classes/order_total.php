@@ -116,7 +116,6 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
         while (list(, $value) = each($this->modules)) {
           $class = substr($value, 0, strrpos($value, '.'));
           if ($GLOBALS[$class]->enabled && $GLOBALS[$class]->credit_class) {
-            $use_credit_string = $GLOBALS[$class]->use_credit_amount();
             if ($selection_string =='') $selection_string = $GLOBALS[$class]->credit_selection();
             if ( ($use_credit_string !='' ) || ($selection_string != '') ) {
               $output_string .=  '<tr colspan="4"><td colspan="4" width="100%">' .  tep_draw_separator('pixel_trans.gif', '100%', '10') . '</td></tr>';
@@ -138,14 +137,36 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
       return $output_string;
     }
 
+  	function sub_credit_selection(){
+  		$selection_string = '';
+      $close_string = '';
+      $credit_class_string = '';
+      if (MODULE_ORDER_TOTAL_INSTALLED) {
 
-//            if ($selection_string !='') {
-//              $output_string .= '</td>' . "\n";
-//              $output_string .= $selection_string;
-//            }
+        reset($this->modules);
+        $output_string = '';
+        while (list(, $value) = each($this->modules)) {
+          $class = substr($value, 0, strrpos($value, '.'));
+          if ($GLOBALS[$class]->enabled && $GLOBALS[$class]->credit_class) {
+            $use_credit_string = $GLOBALS[$class]->use_credit_amount();
+            if ($selection_string =='') $selection_string = $GLOBALS[$class]->credit_selection();
+            if ( ($use_credit_string !='' ) || ($selection_string != '') ) {
 
-
-
+              $output_string = /*' <tr><td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td><td colspan=2><table border="0" cellpadding="2" cellspacing="0" width="100%"><tr class="moduleRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" >' . "\n" .
+                               '   <td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td>' .*/
+                              $use_credit_string;
+              $output_string .= '<td width="10">' . tep_draw_separator('pixel_trans.gif', '10', '1') . '</td>';
+              $output_string .= '  </tr></table></td><td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td></tr>' . "\n";
+            }
+          }
+        }
+        if ($output_string != '') {
+          //$output_string =  $output_string;
+          //$output_string .= $close_string;
+        }
+      }
+      return $output_string;
+    }
 
 // update_credit_account is called in checkout process on a per product basis. It's purpose
 // is to decide whether each product in the cart should add something to a credit account.
@@ -153,13 +174,15 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
 // to the Gift Voucher account.
 // Another use would be to check if the product would give reward points and add these to the points/reward account.
 //
-    function update_credit_account($i) {
+// CCGV 5.19 Fix for GV Queue with Paypal IPN
+    function update_credit_account($i, $order_id=0) {
       if (MODULE_ORDER_TOTAL_INSTALLED) {
         reset($this->modules);
         while (list(, $value) = each($this->modules)) {
           $class = substr($value, 0, strrpos($value, '.'));
           if ( ($GLOBALS[$class]->enabled && $GLOBALS[$class]->credit_class) ) {
-            $GLOBALS[$class]->update_credit_account($i);
+// CCGV 5.19 Fix for GV Queue with Paypal IPN
+          $GLOBALS[$class]->update_credit_account($i, $order_id);
           }
         }
       }
@@ -180,8 +203,7 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
             $post_var = 'c' . $GLOBALS[$class]->code;
             if ($HTTP_POST_VARS[$post_var]) {
               if (!tep_session_is_registered($post_var)) tep_session_register($post_var);
-// 2 LINEs ADDED: Credit Class v5.13 by Rigadin: have to register the new created variable as global cause we are in a function
-                $post_var = $HTTP_POST_VARS[$post_var]; // Rigadin: does not work because not global variable
+      				$post_var = $HTTP_POST_VARS[$post_var];
             }
             $GLOBALS[$class]->collect_posts();
           }
@@ -194,7 +216,7 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
 // total, we don't want to go to paypal etc.
 //
     function pre_confirmation_check() {
-      global $payment, $order, $credit_covers;
+      global $payment, $order, $credit_covers, $customer_id;
       if (MODULE_ORDER_TOTAL_INSTALLED) {
         $total_deductions  = 0;
         reset($this->modules);
@@ -207,11 +229,16 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
             $order_total = $order_total - $GLOBALS[$class]->pre_confirmation_check($order_total);
           }
         }
-        if ($order->info['total'] - $total_deductions <= 0 ) {
-          if(!tep_session_is_registered('credit_covers')) tep_session_register('credit_covers');
+        $gv_query=tep_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id = '" . $customer_id . "'");
+        $gv_result=tep_db_fetch_array($gv_query);
+        $gv_payment_amount = $gv_result['amount'];
+
+        if ($order->info['total'] - $gv_payment_amount <= 0 ) {
+          if (tep_session_is_registered('cot_gv')) {
+          	if(!tep_session_is_registered('credit_covers')) tep_session_register('credit_covers');
             $credit_covers = true;
           }
-	else{   // belts and suspenders to get rid of credit_covers variable if it gets set once and they put something else in the cart
+        } else {   // belts and suspenders to get rid of credit_covers variable if it gets set once and they put something else in the cart
           if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');	
         }
       }

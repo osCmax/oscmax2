@@ -19,35 +19,35 @@ $Id: affiliate_affiliates.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
-  if ($HTTP_GET_VARS['action']) {
-    switch ($HTTP_GET_VARS['action']) {
+  if ($_GET['action']) {
+    switch ($_GET['action']) {
       case 'update':
-        $affiliate_id = tep_db_prepare_input($HTTP_GET_VARS['acID']);
-        $affiliate_gender = tep_db_prepare_input($HTTP_POST_VARS['affiliate_gender']);
-        $affiliate_firstname = tep_db_prepare_input($HTTP_POST_VARS['affiliate_firstname']);
-        $affiliate_lastname = tep_db_prepare_input($HTTP_POST_VARS['affiliate_lastname']);
-        $affiliate_dob = tep_db_prepare_input($HTTP_POST_VARS['affiliate_dob']);
-        $affiliate_email_address = tep_db_prepare_input($HTTP_POST_VARS['affiliate_email_address']);
-        $affiliate_company = tep_db_prepare_input($HTTP_POST_VARS['affiliate_company']);
-        $affiliate_company_taxid = tep_db_prepare_input($HTTP_POST_VARS['affiliate_company_taxid']);
-        $affiliate_payment_check = tep_db_prepare_input($HTTP_POST_VARS['affiliate_payment_check']);
-        $affiliate_payment_paypal = tep_db_prepare_input($HTTP_POST_VARS['affiliate_payment_paypal']);
-        $affiliate_payment_bank_name = tep_db_prepare_input($HTTP_POST_VARS['affiliate_payment_bank_name']);
-        $affiliate_payment_bank_branch_number = tep_db_prepare_input($HTTP_POST_VARS['affiliate_payment_bank_branch_number']);
-        $affiliate_payment_bank_swift_code = tep_db_prepare_input($HTTP_POST_VARS['affiliate_payment_bank_swift_code']);
-        $affiliate_payment_bank_account_name = tep_db_prepare_input($HTTP_POST_VARS['affiliate_payment_bank_account_name']);
-        $affiliate_payment_bank_account_number = tep_db_prepare_input($HTTP_POST_VARS['affiliate_payment_bank_account_number']);
-        $affiliate_street_address = tep_db_prepare_input($HTTP_POST_VARS['affiliate_street_address']);
-        $affiliate_suburb = tep_db_prepare_input($HTTP_POST_VARS['affiliate_suburb']);
-        $affiliate_postcode=tep_db_prepare_input($HTTP_POST_VARS['affiliate_postcode']);
-        $affiliate_city = tep_db_prepare_input($HTTP_POST_VARS['affiliate_city']);
-        $affiliate_country_id=tep_db_prepare_input($HTTP_POST_VARS['affiliate_country_id']);
-        $affiliate_telephone=tep_db_prepare_input($HTTP_POST_VARS['affiliate_telephone']);
-        $affiliate_fax=tep_db_prepare_input($HTTP_POST_VARS['affiliate_fax']);
-        $affiliate_homepage=tep_db_prepare_input($HTTP_POST_VARS['affiliate_homepage']);
-        $affiliate_state = tep_db_prepare_input($HTTP_POST_VARS['affiliate_state']);
-        $affiliatey_zone_id = tep_db_prepare_input($HTTP_POST_VARS['affiliate_zone_id']);
-        $affiliate_commission_percent = tep_db_prepare_input($HTTP_POST_VARS['affiliate_commission_percent']);
+        $affiliate_id = tep_db_prepare_input($_GET['acID']);
+        $affiliate_gender = tep_db_prepare_input($_POST['affiliate_gender']);
+        $affiliate_firstname = tep_db_prepare_input($_POST['affiliate_firstname']);
+        $affiliate_lastname = tep_db_prepare_input($_POST['affiliate_lastname']);
+        $affiliate_dob = tep_db_prepare_input($_POST['affiliate_dob']);
+        $affiliate_email_address = tep_db_prepare_input($_POST['affiliate_email_address']);
+        $affiliate_company = tep_db_prepare_input($_POST['affiliate_company']);
+        $affiliate_company_taxid = tep_db_prepare_input($_POST['affiliate_company_taxid']);
+        $affiliate_payment_check = tep_db_prepare_input($_POST['affiliate_payment_check']);
+        $affiliate_payment_paypal = tep_db_prepare_input($_POST['affiliate_payment_paypal']);
+        $affiliate_payment_bank_name = tep_db_prepare_input($_POST['affiliate_payment_bank_name']);
+        $affiliate_payment_bank_branch_number = tep_db_prepare_input($_POST['affiliate_payment_bank_branch_number']);
+        $affiliate_payment_bank_swift_code = tep_db_prepare_input($_POST['affiliate_payment_bank_swift_code']);
+        $affiliate_payment_bank_account_name = tep_db_prepare_input($_POST['affiliate_payment_bank_account_name']);
+        $affiliate_payment_bank_account_number = tep_db_prepare_input($_POST['affiliate_payment_bank_account_number']);
+        $affiliate_street_address = tep_db_prepare_input($_POST['affiliate_street_address']);
+        $affiliate_suburb = tep_db_prepare_input($_POST['affiliate_suburb']);
+        $affiliate_postcode=tep_db_prepare_input($_POST['affiliate_postcode']);
+        $affiliate_city = tep_db_prepare_input($_POST['affiliate_city']);
+        $affiliate_country_id=tep_db_prepare_input($_POST['affiliate_country_id']);
+        $affiliate_telephone=tep_db_prepare_input($_POST['affiliate_telephone']);
+        $affiliate_fax=tep_db_prepare_input($_POST['affiliate_fax']);
+        $affiliate_homepage=tep_db_prepare_input($_POST['affiliate_homepage']);
+        $affiliate_state = tep_db_prepare_input($_POST['affiliate_state']);
+        $affiliatey_zone_id = tep_db_prepare_input($_POST['affiliate_zone_id']);
+        $affiliate_commission_percent = tep_db_prepare_input($_POST['affiliate_commission_percent']);
         if ($affiliate_zone_id > 0) $affiliate_state = '';
         // If someone uses , instead of .
         $affiliate_commission_percent = str_replace (',' , '.' , $affiliate_commission_percent);
@@ -91,7 +91,7 @@ $Id: affiliate_affiliates.php 14 2006-07-28 17:42:07Z user $
         tep_redirect(tep_href_link(FILENAME_AFFILIATE, tep_get_all_get_params(array('acID', 'action')) . 'acID=' . $affiliate_id));
         break;
       case 'deleteconfirm':
-        $affiliate_id = tep_db_prepare_input($HTTP_GET_VARS['acID']);
+        $affiliate_id = tep_db_prepare_input($_GET['acID']);
 
         affiliate_delete(tep_db_input($affiliate_id)); 
 
@@ -108,7 +108,7 @@ $Id: affiliate_affiliates.php 14 2006-07-28 17:42:07Z user $
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
 <?php
-  if ($HTTP_GET_VARS['action'] == 'edit') {
+  if ($_GET['action'] == 'edit') {
 ?>
 <script language="javascript"><!--
 function resetStateText(theForm) {
@@ -247,8 +247,8 @@ function check_form() {
 <!-- body_text //-->
     <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
-  if ($HTTP_GET_VARS['action'] == 'edit') {
-    $affiliate_query = tep_db_query("select * from " . TABLE_AFFILIATE . " where affiliate_id = '" . $HTTP_GET_VARS['acID'] . "'");
+  if ($_GET['action'] == 'edit') {
+    $affiliate_query = tep_db_query("select * from " . TABLE_AFFILIATE . " where affiliate_id = '" . $_GET['acID'] . "'");
     $affiliate = tep_db_fetch_array($affiliate_query);
     $aInfo = new objectInfo($affiliate);
 ?>
@@ -256,7 +256,7 @@ function check_form() {
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -486,19 +486,19 @@ function check_form() {
               </tr>
 <?php
     $search = '';
-    if ( ($HTTP_GET_VARS['search']) && (tep_not_null($HTTP_GET_VARS['search'])) ) {
-      $keywords = tep_db_input(tep_db_prepare_input($HTTP_GET_VARS['search']));
+    if ( ($_GET['search']) && (tep_not_null($_GET['search'])) ) {
+      $keywords = tep_db_input(tep_db_prepare_input($_GET['search']));
       $search = " where affiliate_id like '" . $keywords . "' or affiliate_firstname like '" . $keywords . "' or affiliate_lastname like '" . $keywords . "' or affiliate_email_address like '" . $keywords . "'";
     }
     $affiliate_query_raw = "select * from " . TABLE_AFFILIATE . $search . " order by affiliate_lastname";
-    $affiliate_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, 
+    $affiliate_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, 
     $affiliate_query_raw, $affiliate_query_numrows);
     $affiliate_query = tep_db_query($affiliate_query_raw);
     while ($affiliate = tep_db_fetch_array($affiliate_query)) {
       $info_query = tep_db_query("select affiliate_commission_percent, affiliate_date_account_created as date_account_created, affiliate_date_account_last_modified as date_account_last_modified, affiliate_date_of_last_logon as date_last_logon, affiliate_number_of_logons as number_of_logons from " . TABLE_AFFILIATE . " where affiliate_id = '" . $affiliate['affiliate_id'] . "'");
       $info = tep_db_fetch_array($info_query);
 
-      if (((!$HTTP_GET_VARS['acID']) || (@$HTTP_GET_VARS['acID'] == $affiliate['affiliate_id'])) && (!$aInfo)) {
+      if (((!$_GET['acID']) || (@$_GET['acID'] == $affiliate['affiliate_id'])) && (!$aInfo)) {
         $country_query = tep_db_query("select countries_name from " . TABLE_COUNTRIES . " where countries_id = '" . $affiliate['affiliate_country_id'] . "'");
         $country = tep_db_fetch_array($country_query);
 
@@ -528,11 +528,11 @@ function check_form() {
               <tr>
                 <td colspan="6"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td class="smallText" valign="top"><?php echo $affiliate_split->display_count($affiliate_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_AFFILIATES); ?></td>
-                    <td class="smallText" align="right"><?php echo $affiliate_split->display_links($affiliate_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y', 'acID'))); ?></td>
+                    <td class="smallText" valign="top"><?php echo $affiliate_split->display_count($affiliate_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_AFFILIATES); ?></td>
+                    <td class="smallText" align="right"><?php echo $affiliate_split->display_links($affiliate_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y', 'acID'))); ?></td>
                   </tr>
 <?php
-    if (tep_not_null($HTTP_GET_VARS['search'])) {
+    if (tep_not_null($_GET['search'])) {
 ?>
                   <tr>
                     <td align="right" colspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE) . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
@@ -546,7 +546,7 @@ function check_form() {
 <?php
   $heading = array();
   $contents = array();
-  switch ($HTTP_GET_VARS['action']) {
+  switch ($_GET['action']) {
     case 'confirm':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_CUSTOMER . '</b>');
 
@@ -568,7 +568,13 @@ function check_form() {
         $contents[] = array('text' => '' . TEXT_DATE_ACCOUNT_LAST_MODIFIED . ' ' . tep_date_short($aInfo->date_account_last_modified));
         $contents[] = array('text' => '' . TEXT_INFO_DATE_LAST_LOGON . ' '  . tep_date_short($aInfo->date_last_logon));
         $contents[] = array('text' => '' . TEXT_INFO_NUMBER_OF_LOGONS . ' ' . $aInfo->number_of_logons);
-        $contents[] = array('text' => '' . TEXT_INFO_COMMISSION . ' ' . $aInfo->affiliate_commission_percent . ' %');
+	if ($aInfo->affiliate_commission_percent > AFFILIATE_PERCENT) {
+		$contents[] = array('text' => '' . TEXT_INFO_COMMISSION . ' ' . $aInfo->affiliate_commission_percent . ' %');
+		} else {
+		$contents[] = array('text' => '' . TEXT_INFO_COMMISSION . ' ' . AFFILIATE_PERCENT . ' %');       	 
+        }
+		
+
         $contents[] = array('text' => '' . TEXT_INFO_COUNTRY . ' ' . $aInfo->countries_name);
         $contents[] = array('text' => '' . TEXT_INFO_NUMBER_OF_SALES . ' ' . $affiliate_sales['count'],'');
         $contents[] = array('text' => '' . TEXT_INFO_SALES_TOTAL . ' ' . $currencies->display_price($affiliate_sales['total'],''));

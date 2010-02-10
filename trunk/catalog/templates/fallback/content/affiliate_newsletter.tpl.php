@@ -1,5 +1,5 @@
 <!-- body_text //-->
-    <td width="100%" valign="top"><?php echo tep_draw_form('account_newsletter', tep_href_link(FILENAME_AFFILIATE_NEWSLETTER, '', 'SSL')) . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <?php echo tep_draw_form('account_newsletter', tep_href_link(FILENAME_AFFILIATE_NEWSLETTER, '', 'SSL')) . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -59,5 +59,5 @@
           </tr>
         </table></td>
       </tr>
-    </table></form></td>
+    </table></form>
 <!-- body_text_eof //-->

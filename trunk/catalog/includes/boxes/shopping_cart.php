@@ -90,6 +90,11 @@ window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,m
 
   }
   if (tep_session_is_registered('cc_id') && $cc_id) {
+ $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . $cc_id . "'");
+ $coupon = tep_db_fetch_array($coupon_query);
+ $coupon_desc_query = tep_db_query("select * from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . $cc_id . "' and language_id = '" . $languages_id . "'");
+ $coupon_desc = tep_db_fetch_array($coupon_desc_query);
+ $text_coupon_help = sprintf("%s",$coupon_desc['coupon_name']);
     $boxContent .= tep_draw_separator();
     $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smalltext">' . CART_COUPON . '</td><td class="smalltext" align="right" valign="bottom">' . '<a href="javascript:couponpopupWindow(\'' . tep_href_link(FILENAME_POPUP_COUPON_HELP, 'cID=' . $cc_id) . '\')">' . CART_COUPON_INFO . '</a>' . '</td></tr></table>';
 

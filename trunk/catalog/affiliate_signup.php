@@ -22,6 +22,12 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
 
   require('includes/application_top.php');
 
+  // +Country-State Selector
+  require(DIR_WS_FUNCTIONS . 'ajax.php');
+if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates' && isset($HTTP_POST_VARS['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($HTTP_POST_VARS['country']), true);
+} else {
+  // -Country-State Selector
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_SIGNUP);
 
   if (isset($HTTP_POST_VARS['action'])) {
@@ -130,38 +136,6 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
       $entry_country_error = false;
     }
     
-    if (ACCOUNT_STATE == 'true') {
-      if ($entry_country_error) {
-        $entry_state_error = true;
-      } else {
-        $a_zone_id = 0;
-        $entry_state_error = false;
-        $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . tep_db_input($a_country) . "'");
-        $check_value = tep_db_fetch_array($check_query);
-        $entry_state_has_zones = ($check_value['total'] > 0);
-        if ($entry_state_has_zones) {
-          $zone_query = tep_db_query("select zone_id from " . TABLE_ZONES . " where zone_country_id = '" . tep_db_input($a_country) . "' and zone_name = '" . tep_db_input($a_state) . "'");
-          if (tep_db_num_rows($zone_query) == 1) {
-            $zone_values = tep_db_fetch_array($zone_query);
-            $a_zone_id = $zone_values['zone_id'];
-          } else {
-            $zone_query = tep_db_query("select zone_id from " . TABLE_ZONES . " where zone_country_id = '" . tep_db_input($a_country) . "' and zone_code = '" . tep_db_input($a_state) . "'");
-            if (tep_db_num_rows($zone_query) == 1) {
-              $zone_values = tep_db_fetch_array($zone_query);
-              $a_zone_id = $zone_values['zone_id'];
-            } else {
-              $error = true;
-              $entry_state_error = true;
-            }
-          }
-        } else {
-          if (!$a_state) {
-            $error = true;
-            $entry_state_error = true;
-          }
-        }
-      }
-    }
 
     if (strlen($a_telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
       $error = true;
@@ -255,15 +229,20 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
       }
       if (ACCOUNT_SUBURB == 'true') $sql_data_array['affiliate_suburb'] = $a_suburb;
       
-      if (ACCOUNT_STATE == 'true') {
-        if ($a_zone_id > 0) {
-          $sql_data_array['affiliate_zone_id'] = $a_zone_id;
-          $sql_data_array['affiliate_state'] = '';
-        } else {
-          $sql_data_array['affiliate_zone_id'] = '0';
-          $sql_data_array['affiliate_state'] = $a_state;
+   if (ACCOUNT_STATE == 'true') {
+      // +Country-State Selector
+      if ($a_zone_id == 0) {
+      // -Country-State Selector
+
+        if (strlen($a_state) < ENTRY_STATE_MIN_LENGTH) {
+          $error = true;
+
+          $messageStack->add('affiliate_signup', ENTRY_STATE_ERROR);
         }
       }
+    }
+
+	  
 
       $sql_data_array['affiliate_date_account_created'] = 'now()';
 
@@ -288,6 +267,9 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
       tep_session_register('affiliate_name');
       tep_redirect(tep_href_link(FILENAME_AFFILIATE_SIGNUP_OK, '', 'SSL'));
     }
+ // +Country-State Selector 
+if (!isset($country)){$a_country = DEFAULT_COUNTRY;}
+// -Country-State Selector
   }
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_AFFILIATE_SIGNUP, '', 'SSL'));
@@ -297,4 +279,7 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
   include (bts_select('main', $content_template)); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
+// +Country-State Selector 
+}
+// -Country-State Selector 
 ?>

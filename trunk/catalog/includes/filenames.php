@@ -157,22 +157,23 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
 
 // BOF: MOD - Affiliate Mod
   define('CONTENT_AFFILIATE', 'affiliate_affiliate');
-  define('CONTENT_AFFILIATE', 'affiliate_banners');
-  define('CONTENT_AFFILIATE', 'affiliate_clicks');
-  define('CONTENT_AFFILIATE', 'affiliate_contact');
-  define('CONTENT_AFFILIATE', 'affiliate_details');
-  define('CONTENT_AFFILIATE', 'affiliate_details_ok');
-  define('CONTENT_AFFILIATE', 'affiliate_faq');
-  define('CONTENT_AFFILIATE', 'affiliate_info');
-  define('CONTENT_AFFILIATE', 'affiliate_logout');
-  define('CONTENT_AFFILIATE', 'affiliate_password_forgotten');
-  define('CONTENT_AFFILIATE', 'affiliate_payment');
-  define('CONTENT_AFFILIATE', 'affiliate_sales');
-  define('CONTENT_AFFILIATE', 'affiliate_show_banner');
-  define('CONTENT_AFFILIATE', 'affiliate_signup');
-  define('CONTENT_AFFILIATE', 'affiliate_signup_ok');
-  define('CONTENT_AFFILIATE', 'affiliate_summary');
-  define('CONTENT_AFFILIATE', 'affiliate_terms');
+  define('CONTENT_AFFILIATE_BANNERS', 'affiliate_banners');
+  define('CONTENT_AFFILIATE_CLICKS', 'affiliate_clicks');
+  define('CONTENT_AFFILIATE_CONTACT', 'affiliate_contact');
+  define('CONTENT_AFFILIATE_DETAILS', 'affiliate_details');
+  define('CONTENT_AFFILIATE_DETAILS_OK', 'affiliate_details_ok');
+  define('CONTENT_AFFILIATE_FAQ', 'affiliate_faq');
+  define('CONTENT_AFFILIATE_INFO', 'affiliate_info');
+  define('CONTENT_AFFILIATE_LOGOUT', 'affiliate_logout');
+  define('CONTENT_AFFILIATE_PASSWORD_FORGOTTEN', 'affiliate_password_forgotten');
+  define('CONTENT_AFFILIATE_PAYMENT', 'affiliate_payment');
+  define('CONTENT_AFFILIATE_SALES', 'affiliate_sales');
+  define('CONTENT_AFFILIATE_SHOW_BANNER', 'affiliate_show_banner');
+  define('CONTENT_AFFILIATE_SIGNUP', 'affiliate_signup');
+  define('CONTENT_AFFILIATE_SIGNUP_OK', 'affiliate_signup_ok');
+  define('CONTENT_AFFILIATE_SUMMARY', 'affiliate_summary');
+  define('CONTENT_AFFILIATE_TERMS', 'affiliate_terms');
+  define('FILENAME_CATEGORIES_INFO', 'index.php'); 
 // EOF: MOD - Affiliate Mod
 
 // BOF: MOD Xsell Products

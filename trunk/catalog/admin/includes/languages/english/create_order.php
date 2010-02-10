@@ -110,6 +110,6 @@ define('BUTTON_TEXT_SELECT_CUST', 'Select a client:');
 define('TEXT_OR_BY', 'or set client ID:'); 
 define('TEXT_STEP_1', 'Step 1 - Choose a client and verify the details');
 define('BUTTON_SUBMIT', 'confirm');
-define('ENTRY_CURRENCY','Devise');
+define('ENTRY_CURRENCY','Currency:');
 define('CATEGORY_ORDER_DETAILS','Choose currency:');
 ?>

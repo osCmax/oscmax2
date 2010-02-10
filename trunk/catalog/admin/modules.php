@@ -99,7 +99,7 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -240,7 +240,7 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
           $keys .= '<b>' . $value['title'] . '</b><br>';
           if ($value['use_function']) {
             $use_function = $value['use_function'];
-            if (ereg('->', $use_function)) {
+            if (preg_match('/->/', $use_function)) {
               $class_method = explode('->', $use_function);
               if (!is_object(${$class_method[0]})) {
                 include(DIR_WS_CLASSES . $class_method[0] . '.php');

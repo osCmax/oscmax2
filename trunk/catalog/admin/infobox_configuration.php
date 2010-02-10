@@ -25,11 +25,11 @@ $Id: infobox_configuration.php 3 2006-05-27 04:59:07Z user $
 tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID));
         break;
       case 'setflagcolumn': //set the status of a box left or right.
-        if ( ($HTTP_GET_VARS['flag'] == 'left') || ($HTTP_GET_VARS['flag'] == 'right') ) {
-          if ($HTTP_GET_VARS['cID']) {
-            tep_db_query("update " . TABLE_THEME_CONFIGURATION . " set configuration_column = '" . $HTTP_GET_VARS['flag'] . "' where configuration_id = '" . (int)$cID . "'");
+       if ( ($HTTP_GET_VARS['flag'] == 'left') || ($HTTP_GET_VARS['flag'] == 'right') ) {
+         if ($HTTP_GET_VARS['cID']) {
+           tep_db_query("update " . TABLE_THEME_CONFIGURATION . " set configuration_column = '" . $HTTP_GET_VARS['flag'] . "' where configuration_id = '" . $HTTP_GET_VARS['cID'] . "'");
           }
-        }
+        }        
 
 tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID));
         break;
@@ -96,7 +96,7 @@ tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID))
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADER_TITLE;?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>

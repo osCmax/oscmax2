@@ -619,7 +619,7 @@ function mirror_out ($field) {
 	global $csv_accum;
 	echo $field;
 	$field = strip_tags($field);
-	$field = ereg_replace (",","",$field);
+	$field = preg_replace ("{,}","",$field);
 	if ($csv_accum=='') $csv_accum=$field; 
 	else 
 	{if (strrpos($csv_accum,chr(10)) == (strlen($csv_accum)-1)) $csv_accum .= $field;

@@ -1,11 +1,12 @@
 <?php
 /*
-  $Id: popup_coupon_help.php,v 1.1.2.4 2003/05/01 22:04:29 wilt Exp $
+  $Id: popup_coupon_help.php,v 1.1.1.1.2.1 2005/06/12 00:04:34 Michael Sasek Exp $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2006 osCMax
+  French version Copyrite 2003 - Configure That! Computer Services
 
   Released under the GNU General Public License
 */

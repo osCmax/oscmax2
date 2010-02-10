@@ -28,7 +28,9 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
       $this->tax_class  = MODULE_ORDER_TOTAL_GV_TAX_CLASS;
       $this->show_redeem_box = MODULE_ORDER_TOTAL_GV_REDEEM_BOX;
       $this->credit_class = true;
-      $this->checkbox = $this->user_prompt . '<input type="checkbox" onClick="submitFunction()" name="' . 'c' . $this->code . '">';
+//      $this->checkbox = $this->user_prompt . '<input type="checkbox" onClick="submitFunction()" name="' . 'c' . $this->code . '">';
+	$this->checkbox = $this->user_prompt . '<input type="checkbox" onClick="clearRadeos()" name="' . 'c' . $this->code . '">';
+ // #################### End Added CGV JONYO ######################
       $this->output = array();
     }
 
@@ -47,6 +49,9 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
 //          $od_amount -= $tod_amount;
 //          $order->info['total'] -= $tod_amount;
 //        }
+//        $order->info['total'] = $order->info['total'] - $od_amount;
+        $order->info['total'] = tep_round($order->info['total'],2);
+        $od_amount = tep_round($od_amount,2);
         $order->info['total'] = $order->info['total'] - $od_amount;
         if ($od_amount > 0) {
           $this->output[] = array('title' => $this->title . ':',
@@ -55,6 +60,22 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
         }
       } 
     }
+function mod_process() {
+     global $currencies;
+       $my_order_total = $this->get_order_total();
+       $my_od_amount = $this->calculate_credit($my_order_total);
+       if ($this->calculate_tax != "None") {
+         $tod_amount = $this->calculate_tax_deduction($my_order_total, $my_od_amount, $this->calculate_tax);
+         $my_od_amount = $this->calculate_credit($my_order_total);
+       }
+       $this->deduction = $my_od_amount;
+       //$order->info['total'] = $order->info['total'] - $my_od_amount;
+       if ($my_od_amount > 0) {
+         $this->my_output[] = array('title' => $this->title . ':',
+                          'text' => '<b>' . $currencies->format($my_od_amount) . '</b>',
+                          'value' => $my_od_amount);
+       }
+   }
 
     function selection_test() {
       global $customer_id;
@@ -101,19 +122,33 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
     } */
 
     function use_credit_amount() {
+		global $cot_gv, $currencies;
+//      $_SESSION['cot_gv'] = false;     // old code - Strider
+      $cot_gv = false;
+      if ($this->selection_test()) {
+        $output_string = $this->checkbox . '</b>' . '</td>' . "\n";}
+
+      return $output_string;
+    }
+
+	function use_credit_amount_sub() {
 		global $cot_gv;
 //      $_SESSION['cot_gv'] = false;     // old code - Strider
       $cot_gv = false;
       if ($this->selection_test()) {
-        $output_string .=  '    <td align="right" class="main">';
+        $output_string .=  '    <td align="right" class="main" colspan=2>';
         $output_string .= '<b>' . $this->checkbox . '</b>' . '</td>' . "\n";
       }
       return $output_string;
     }
 
-    function update_credit_account($i) {
-      global $order, $customer_id, $insert_id, $REMOTE_ADDR;
-      if (ereg('^GIFT', addslashes($order->products[$i]['model']))) {
+// CCGV 5.19 Fix for GV Queue with Paypal IPN
+
+  function update_credit_account($i, $order_id=0) {
+    global $order, $customer_id, $insert_id, $REMOTE_ADDR;
+// CCGV 5.19 Fix for GV Queue with Paypal IPN
+    if (!$order_id) $order_id = $insert_id;
+      if (preg_match('/^GIFT/', addslashes($order->products[$i]['model']))) {
         $gv_order_amount = ($order->products[$i]['final_price'] * $order->products[$i]['qty']);
         if ($this->credit_tax=='true') $gv_order_amount = $gv_order_amount * (100 + $order->products[$i]['tax']) / 100;
 //        $gv_order_amount += 0.001;
@@ -135,7 +170,7 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
           }
         } else {
          // GV_QUEUE is true - so queue the gv for release by store owner
-          $gv_insert=tep_db_query("insert into " . TABLE_COUPON_GV_QUEUE . " (customer_id, order_id, amount, date_created, ipaddr) values ('" . $customer_id . "', '" . $insert_id . "', '" . $gv_order_amount . "', NOW(), '" . $REMOTE_ADDR . "')");
+          $gv_insert=tep_db_query("insert into " . TABLE_COUPON_GV_QUEUE . " (customer_id, order_id, amount, date_created, ipaddr) values ('" . $customer_id . "', '" . $order_id . "', '" . $gv_order_amount . "', NOW(), '" . $REMOTE_ADDR . "')");
         }
       }
     }
@@ -195,7 +230,7 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
           // now update customer account with gv_amount
           $gv_amount_query=tep_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id = '" . $customer_id . "'");
           $customer_gv = false;
-          $total_gv_amount = $gv_amount;;
+          $total_gv_amount = $gv_amount;
           if ($gv_amount_result = tep_db_fetch_array($gv_amount_query)) {
             $total_gv_amount = $gv_amount_result['amount'] + $gv_amount;
             $customer_gv = true;
@@ -212,7 +247,7 @@ $Id: ot_gv.php 3 2006-05-27 04:59:07Z user $
           tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_REDEEMED_AMOUNT. $currencies->format($gv_amount)), 'SSL'));
        }  
      }
-     if ($HTTP_POST_VARS['submit_redeem_x'] && $gv_result['coupon_type'] == 'G') tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
+     if ($HTTP_POST_VARS['submit_redeem_x'] && !$HTTP_POST_VARS['gv_redeem_code']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
    }  
 
     function calculate_credit($amount) {

@@ -20,6 +20,12 @@ $Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
+  // +Country-State Selector
+  require(DIR_WS_FUNCTIONS . 'ajax.php');
+if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates' && isset($HTTP_POST_VARS['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($HTTP_POST_VARS['country']), true);
+} else {
+  // -Country-State Selector
   $details == 'true';
   if (!tep_session_is_registered('affiliate_id')) {
     $navigation->set_snapshot();
@@ -60,9 +66,6 @@ $Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
     $a_homepage = tep_db_prepare_input($HTTP_POST_VARS['a_homepage']);
     $a_password = tep_db_prepare_input($HTTP_POST_VARS['a_password']);
 
-// BOF: MOD - Country-State Selector
-	if ($process) {
-// EOF: MOD - Country-State Selector
     $error = false; // reset error flag
 
     if (ACCOUNT_GENDER == 'true') {
@@ -132,6 +135,24 @@ $Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
       $entry_city_error = false;
     }
 
+    if (is_numeric($country) == false) {
+      $error = true;
+
+      $messageStack->add('create_account', ENTRY_COUNTRY_ERROR);
+    }
+
+    if (ACCOUNT_STATE == 'true') {
+      // +Country-State Selector
+      if ($zone_id == 0) {
+      // -Country-State Selector
+
+        if (strlen($state) < ENTRY_STATE_MIN_LENGTH) {
+          $error = true;
+
+          $messageStack->add('create_account', ENTRY_STATE_ERROR);
+        }
+      }
+    }
     if (strlen($a_telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
       $error = true;
       $entry_telephone_error = true;

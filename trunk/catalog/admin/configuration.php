@@ -79,7 +79,7 @@ $Id: configuration.php 3 2006-05-27 04:59:07Z user $
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo $cfg_group['configuration_group_title']; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -97,7 +97,7 @@ $Id: configuration.php 3 2006-05-27 04:59:07Z user $
   while ($configuration = tep_db_fetch_array($configuration_query)) {
     if (tep_not_null($configuration['use_function'])) {
       $use_function = $configuration['use_function'];
-      if (ereg('->', $use_function)) {
+      if (preg_match('{->}', $use_function)) {
         $class_method = explode('->', $use_function);
         if (!is_object(${$class_method[0]})) {
           include(DIR_WS_CLASSES . $class_method[0] . '.php');

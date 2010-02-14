@@ -31,7 +31,7 @@ $Id: affiliate_checkout_process.php 14 2006-07-28 17:42:07Z user $
   if ($affiliate_percent < AFFILIATE_PERCENT) $affiliate_percent = AFFILIATE_PERCENT;
   $affiliate_payment = tep_round(($affiliate_total * $affiliate_percent / 100), 2);
    
-  if ($HTTP_SESSION_VARS['affiliate_ref']) {
+  if ($_SESSION['affiliate_ref']) {
     $sql_data_array = array('affiliate_id' => $affiliate_ref,
                             'affiliate_date' => $affiliate_clientdate,
                             'affiliate_browser' => $affiliate_clientbrowser,

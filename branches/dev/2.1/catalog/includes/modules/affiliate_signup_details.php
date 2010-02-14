@@ -60,12 +60,12 @@
     echo $affiliate['affiliate_firstname'];
   } elseif ($error == true) {
     if ($entry_firstname_error == true) {
-      echo tep_draw_input_field('a_firstname') . '&nbsp;' . ENTRY_FIRST_NAME_ERROR;
+      echo tep_draw_input_field('a_firstname') . '&nbsp;<span class="inputRequirement">' . ENTRY_FIRST_NAME_ERROR . '</span>';
     } else {
       echo $a_firstname . tep_draw_hidden_field('a_firstname');
     }
   } else {
-    echo tep_draw_input_field('a_firstname', $affiliate['affiliate_firstname']) . '&nbsp;' . ENTRY_FIRST_NAME_TEXT;
+    echo tep_draw_input_field('a_firstname', $affiliate['affiliate_firstname']) . '&nbsp;<span class="inputRequirement">' . ENTRY_FIRST_NAME_TEXT .'</span>';
   }
 ?>
             </td>
@@ -78,12 +78,12 @@
     echo $affiliate['affiliate_lastname'];
   } elseif ($error == true) {
     if ($entry_lastname_error == true) {
-      echo tep_draw_input_field('a_lastname') . '&nbsp;' . ENTRY_LAST_NAME_ERROR;
+      echo tep_draw_input_field('a_lastname') . '&nbsp;<span class="inputRequirement">' . ENTRY_LAST_NAME_ERROR . '</span>';
     } else {
       echo $a_lastname . tep_draw_hidden_field('a_lastname');
     }
   } else {
-    echo tep_draw_input_field('a_lastname', $affiliate['affiliate_lastname']) . '&nbsp;' . ENTRY_FIRST_NAME_TEXT;
+    echo tep_draw_input_field('a_lastname', $affiliate['affiliate_lastname']) . '&nbsp;<span class="inputRequirement">' . ENTRY_FIRST_NAME_TEXT . '</span>';
   }
 ?>
             </td>
@@ -99,12 +99,12 @@
       echo tep_date_short($affiliate['affiliate_dob']);
     } elseif ($error == true) {
       if ($entry_date_of_birth_error == true) {
-        echo tep_draw_input_field('a_dob') . '&nbsp;' . ENTRY_DATE_OF_BIRTH_ERROR;
+        echo tep_draw_input_field('a_dob') . '&nbsp;<span class="inputRequirement">' . ENTRY_DATE_OF_BIRTH_ERROR . '</span>';
       } else {
         echo $a_dob . tep_draw_hidden_field('a_dob');
       }
     } else {
-      echo tep_draw_input_field('a_dob', tep_date_short($affiliate['affiliate_dob'])) . '&nbsp;' . ENTRY_DATE_OF_BIRTH_TEXT;
+      echo tep_draw_input_field('a_dob', tep_date_short($affiliate['affiliate_dob'])) . '&nbsp;<span class="inputRequirement">' . ENTRY_DATE_OF_BIRTH_TEXT . '</span>';
     }
 ?>
             </td>
@@ -120,16 +120,16 @@
     echo $affiliate['affiliate_email_address'];
   } elseif ($error == true) {
     if ($entry_email_address_error == true) {
-      echo tep_draw_input_field('a_email_address') . '&nbsp;' . ENTRY_EMAIL_ADDRESS_ERROR;
+      echo tep_draw_input_field('a_email_address') . '&nbsp;<span class="inputRequirement">' . ENTRY_EMAIL_ADDRESS_ERROR . '</span>';
     } elseif ($entry_email_address_check_error == true) {
-      echo tep_draw_input_field('a_email_address') . '&nbsp;' . ENTRY_EMAIL_ADDRESS_CHECK_ERROR;
+      echo tep_draw_input_field('a_email_address') . '&nbsp;<span class="inputRequirement">' . ENTRY_EMAIL_ADDRESS_CHECK_ERROR . '</span>';
     } elseif ($entry_email_address_exists == true) {
-      echo tep_draw_input_field('a_email_address') . '&nbsp;' . ENTRY_EMAIL_ADDRESS_ERROR_EXISTS;
+      echo tep_draw_input_field('a_email_address') . '&nbsp;<span class="inputRequirement">' . ENTRY_EMAIL_ADDRESS_ERROR_EXISTS . '</span>';
     } else {
       echo $a_email_address . tep_draw_hidden_field('a_email_address');
     }
   } else {
-    echo tep_draw_input_field('a_email_address', $affiliate['affiliate_email_address']) . '&nbsp;' . ENTRY_EMAIL_ADDRESS_TEXT;
+    echo tep_draw_input_field('a_email_address', $affiliate['affiliate_email_address']) . '&nbsp;<span class="inputRequirement">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>';
   }
 ?>
             </td>
@@ -357,12 +357,12 @@
     echo $affiliate['affiliate_street_address'];
   } elseif ($error == true) {
     if ($entry_street_address_error == true) {
-      echo tep_draw_input_field('a_street_address') . '&nbsp;' . ENTRY_STREET_ADDRESS_ERROR;
+      echo tep_draw_input_field('a_street_address') . '&nbsp;<span class="inputRequirement">' . ENTRY_STREET_ADDRESS_ERROR . '</span>';
     } else {
       echo $a_street_address . tep_draw_hidden_field('a_street_address');
     }
   } else {
-    echo tep_draw_input_field('a_street_address', $affiliate['affiliate_street_address']) . '&nbsp;' . ENTRY_STREET_ADDRESS_TEXT;
+    echo tep_draw_input_field('a_street_address', $affiliate['affiliate_street_address']) . '&nbsp;<span class="inputRequirement">' . ENTRY_STREET_ADDRESS_TEXT . '</span>';
   }
 ?>
             </td>
@@ -378,12 +378,12 @@
       echo $affiliate['affiliate_suburb'];
     } elseif ($error == true) {
       if ($entry_suburb_error == true) {
-        echo tep_draw_input_field('a_suburb') . '&nbsp;' . ENTRY_SUBURB_ERROR;
+        echo tep_draw_input_field('a_suburb') . '&nbsp;<span class="inputRequirement">' . ENTRY_SUBURB_ERROR . '</span>';
       } else {
         echo $a_suburb . tep_draw_hidden_field('a_suburb');
       }
     } else {
-      echo tep_draw_input_field('a_suburb', $affiliate['affiliate_suburb']) . '&nbsp;' . ENTRY_SUBURB_TEXT;
+      echo tep_draw_input_field('a_suburb', $affiliate['affiliate_suburb']) . '&nbsp;<span class="inputRequirement">' . ENTRY_SUBURB_TEXT . '</span>';
     }
 ?>
             </td>
@@ -399,12 +399,12 @@
     echo $affiliate['affiliate_postcode'];
   } elseif ($error == true) {
     if ($entry_post_code_error == true) {
-      echo tep_draw_input_field('a_postcode') . '&nbsp;' . ENTRY_POST_CODE_ERROR;
+      echo tep_draw_input_field('a_postcode') . '&nbsp;<span class="inputRequirement">' . ENTRY_POST_CODE_ERROR . '</span>';
     } else {
       echo $a_postcode . tep_draw_hidden_field('a_postcode');
     }
   } else {
-    echo tep_draw_input_field('a_postcode', $affiliate['affiliate_postcode']) . '&nbsp;' . ENTRY_POST_CODE_TEXT;
+    echo tep_draw_input_field('a_postcode', $affiliate['affiliate_postcode']) . '&nbsp;<span class="inputRequirement">' . ENTRY_POST_CODE_TEXT . '</span>';
   }
 ?>
             </td>
@@ -417,30 +417,12 @@
     echo $affiliate['affiliate_city'];
   } elseif ($error == true) {
     if ($entry_city_error == true) {
-      echo tep_draw_input_field('a_city') . '&nbsp;' . ENTRY_CITY_ERROR;
+      echo tep_draw_input_field('a_city') . '&nbsp;<span class="inputRequirement">' . ENTRY_CITY_ERROR . '</span>';
     } else {
       echo $a_city . tep_draw_hidden_field('a_city');
     }
   } else {
-    echo tep_draw_input_field('a_city', $affiliate['affiliate_city']) . '&nbsp;' . ENTRY_CITY_TEXT;
-  }
-?>
-            </td>
-          </tr>
-          <tr>
-            <td class="main" width="230">&nbsp;<?php echo ENTRY_COUNTRY; ?></td>
-            <td class="main">&nbsp;
-<?php
-  if ($is_read_only == true) {
-    echo tep_get_country_name($affiliate['affiliate_country_id']);
-  } elseif ($error == true) {
-    if ($entry_country_error == true) {
-      echo tep_get_country_list('a_country') . '&nbsp;' . ENTRY_COUNTRY_ERROR;
-    } else {
-      echo tep_get_country_name($a_country) . tep_draw_hidden_field('a_country');
-    }
-  } else {
-    echo tep_get_country_list('a_country', $affiliate['affiliate_country_id']) . '&nbsp;' . ENTRY_COUNTRY_TEXT;
+    echo tep_draw_input_field('a_city', $affiliate['affiliate_city']) . '&nbsp;<span class="inputRequirement">' . ENTRY_CITY_TEXT . '</span>';
   }
 ?>
             </td>
@@ -451,34 +433,28 @@
           <tr>
             <td class="main" width="230">&nbsp;<?php echo ENTRY_STATE; ?></td>
             <td class="main">&nbsp;
-<?php
-    $state = tep_get_zone_name($a_country, $a_zone_id, $a_state);
-    if ($is_read_only == true) {
-      echo tep_get_zone_name($affiliate['affiliate_country_id'], $affiliate['affiliate_zone_id'], $affiliate['affiliate_state']);
-    } elseif ($error == true) {
-      if ($entry_state_error == true) {
-        if ($entry_state_has_zones == true) {
-          $zones_array = array();
-          $zones_query = tep_db_query("select zone_name from " . TABLE_ZONES . " where zone_country_id = '" . tep_db_input($a_country) . "' order by zone_name");
-          while ($zones_values = tep_db_fetch_array($zones_query)) {
-            $zones_array[] = array('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
-          }
-          echo tep_draw_pull_down_menu('a_state', $zones_array) . '&nbsp;' . ENTRY_STATE_ERROR;
-        } else {
-          echo tep_draw_input_field('a_state') . '&nbsp;' . ENTRY_STATE_ERROR;
-        }
-      } else {
-        echo $state . tep_draw_hidden_field('a_zone_id') . tep_draw_hidden_field('a_state');
-      }
-    } else {
-      echo tep_draw_input_field('a_state', tep_get_zone_name($affiliate['affiliate_country_id'], $affiliate['affiliate_zone_id'], $affiliate['affiliate_state'])) . '&nbsp;' . ENTRY_STATE_TEXT;
-    }
-?>
-            </td>
+<div id="states">
+				<?php
+				// +Country-State Selector
+				echo ajax_get_zones_html($affiliate['affiliate_country_id'],($affiliate['affiliate_zone_id'] == 0 ? $affiliate['affiliate_state'] : $affiliate['affiliate_zone_id']), false);
+				// -Country-State Selector
+				?>
+				</div></td>
           </tr>
 <?php
   }
 ?>
+          <tr>
+            <td class="main" width="230">&nbsp;<?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
+			<?php // +Country-State Selector ?>
+            <td class="main">&nbsp;&nbsp;<?php echo tep_get_country_list('a_country', $affiliate['affiliate_country_id'],'onChange="getStates(this.value,\'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
+            <?php // -Country-State Selector ?>
+          </tr>
+          
+            </td>
+          </tr>
+
+
         </table></td>
       </tr>
     </table></td>
@@ -498,12 +474,12 @@
     echo $affiliate['affiliate_telephone'];
   } elseif ($error == true) {
     if ($entry_telephone_error == true) {
-      echo tep_draw_input_field('a_telephone') . '&nbsp;' . ENTRY_TELEPHONE_NUMBER_ERROR;
+      echo tep_draw_input_field('a_telephone') . '&nbsp;<span class="inputRequirement">' . ENTRY_TELEPHONE_NUMBER_ERROR . '</span>';
     } else {
       echo $a_telephone . tep_draw_hidden_field('a_telephone');
     }
   } else {
-    echo tep_draw_input_field('a_telephone', $affiliate['affiliate_telephone']) . '&nbsp;' . ENTRY_TELEPHONE_NUMBER_TEXT;
+    echo tep_draw_input_field('a_telephone', $affiliate['affiliate_telephone']) . '&nbsp;<span class="inputRequirement">' . ENTRY_TELEPHONE_NUMBER_TEXT . '</span>';
   }
 ?>
             </td>
@@ -534,12 +510,12 @@
     echo $affiliate['affiliate_homepage'];
   } elseif ($error == true) {
     if ($entry_homepage_error == true) {
-      echo tep_draw_input_field('a_homepage') . '&nbsp;' . ENTRY_AFFILIATE_HOMEPAGE_ERROR;
+      echo tep_draw_input_field('a_homepage') . '&nbsp;<span class="inputRequirement">' . ENTRY_AFFILIATE_HOMEPAGE_ERROR . '</span>';
     } else {
       echo $a_homepage . tep_draw_hidden_field('a_homepage');
     }
   } else {
-    echo tep_draw_input_field('a_homepage', $affiliate['affiliate_homepage']) . '&nbsp;' . ENTRY_AFFILIATE_HOMEPAGE_TEXT;
+    echo tep_draw_input_field('a_homepage', $affiliate['affiliate_homepage']) . '&nbsp;<span class="inputRequirement">' . ENTRY_AFFILIATE_HOMEPAGE_TEXT . '</span>';
   }
 ?>
             </td>
@@ -564,12 +540,12 @@
 <?php
     if ($error == true) {
       if ($entry_password_error == true) {
-        echo tep_draw_password_field('a_password') . '&nbsp;' . ENTRY_PASSWORD_ERROR;
+        echo tep_draw_password_field('a_password') . '&nbsp;<span class="inputRequirement">' . ENTRY_PASSWORD_ERROR . '</span>';
       } else {
         echo PASSWORD_HIDDEN . tep_draw_hidden_field('a_password') . tep_draw_hidden_field('a_confirmation');
       }
     } else {
-      echo tep_draw_password_field('a_password') . '&nbsp;' . ENTRY_PASSWORD_TEXT;
+      echo tep_draw_password_field('a_password') . '&nbsp;<span class="inputRequirement">' . ENTRY_PASSWORD_TEXT . '</span>';
     }
 ?>
             </td>
@@ -581,7 +557,7 @@
             <td class="main" width="230">&nbsp;<?php echo ENTRY_PASSWORD_CONFIRMATION; ?></td>
             <td class="main">&nbsp;
 <?php
-      echo tep_draw_password_field('a_confirmation') . '&nbsp;' . ENTRY_PASSWORD_CONFIRMATION_TEXT;
+      echo tep_draw_password_field('a_confirmation') . '&nbsp;<span class="inputRequirement">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>';
 ?>
             </td>
           </tr>

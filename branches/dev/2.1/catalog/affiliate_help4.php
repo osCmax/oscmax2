@@ -26,7 +26,7 @@ $Id: affiliate_help4.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
 <title><?php echo TITLE; ?></title>
-<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<link rel="stylesheet" type="text/css" href="<?php echo DIR_WS_TEMPLATES; ?>/stylesheet.css">
 </head>
 <style type="text/css"><!--
 BODY { margin-bottom: 10px; margin-left: 10px; margin-right: 10px; margin-top: 10px; }

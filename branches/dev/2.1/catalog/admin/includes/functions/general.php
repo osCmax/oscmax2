@@ -47,13 +47,13 @@ function tep_admin_check_boxes($filename, $boxes='') {
 
 ////
 //Return files stored in box that can be accessed by user
-function tep_admin_files_boxes($filename, $sub_box_name) {
+function tep_admin_files_boxes($filename, $sub_box_name, $target_window) {
   global $login_groups_id;
   $sub_boxes = '';
 
   $dbquery = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where FIND_IN_SET( '" . $login_groups_id . "', admin_groups_id) and admin_files_is_boxes = '0' and admin_files_name = '" . $filename . "'");
   if (tep_db_num_rows($dbquery)) {
-    $sub_boxes = '<a href="' . tep_href_link($filename) . '" class="menuBoxContentLink">' . $sub_box_name . '</a><br>';
+    $sub_boxes = '<a href="' . tep_href_link($filename) . '" class="menuBoxContentLink" target="_' . $target_window . '">' . $sub_box_name . '</a><br>';
   }
   return $sub_boxes;
 }

@@ -17,6 +17,8 @@ $Id: product_reviews_info.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
+// LINE ADDED: MOD - Added for Dynamic MoPics v3.000
+  require(DIR_WS_FUNCTIONS . 'dynamic_mopics.php');
 // BOF: MOD - Separate Pricing Per Customer
 // global variable (session) $sppc_customer_group_id -> local variable customer_group_id
   if(!tep_session_is_registered('sppc_customer_group_id')) { 

@@ -1,12 +1,11 @@
 <?php
 /*
-  $Id: ot_gv.php,v 1.2.2.4 2003/05/14 22:52:59 wilt Exp $
+  $Id: ot_gv.php, french, v 1.2.2.4 2003/09/12 20:00:00 jpf Exp $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright (c) 2002 osCommerce
-
+  Copyright 2006 osCMax
   Released under the GNU General Public License
 */
   define('IMAGE_REDEEM_VOUCHER', 'Apply Coupon Code');

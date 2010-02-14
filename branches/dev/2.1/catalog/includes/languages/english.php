@@ -374,7 +374,6 @@ define('BOX_LOGINBOX_PASSWORD', 'Password:');
 define('BOX_LOGINBOX_TEXT_NEW', 'Create an Account');
 define('BOX_LOGINBOX_NEW', 'create an account');
 define('BOX_LOGINBOX_FORGOT_PASSWORD', 'Password forgotten');
-define('IMAGE_BUTTON_LOGIN', 'Login');
 define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','My account info');
 define('LOGIN_BOX_ACCOUNT_EDIT','Edit account info.');
 define('LOGIN_BOX_ACCOUNT_HISTORY','Account history');

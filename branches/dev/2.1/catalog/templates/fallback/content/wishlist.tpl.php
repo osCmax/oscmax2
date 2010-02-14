@@ -160,7 +160,7 @@
       <td align="center">
         <table border="0" width="400px" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main" colspan="2"><table cellpadding="2" cellspacing="0">
+            <td class="main" colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td colspan="2"><?php echo $guest_errors; ?></td>
               </tr>

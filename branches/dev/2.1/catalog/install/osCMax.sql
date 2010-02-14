@@ -1,8 +1,8 @@
 # osCMax Power E-Commerce
 # http://oscdox.com
 #
-# Default Database For osCMax v2.0 RC4
-# Copyright (c) 2009 osCMax
+# Default Database For osCMax v2.0.15
+# Copyright (c) 2010 osCMax
 #
 # Released under the GNU General Public License
 #
@@ -13,8 +13,7 @@
 #       * Any tables you add here should be added in admin/backup.php
 #         and in catalog/install/includes/functions/database.php
 #       * To see the 'diff'erence between MySQL databases, use
-#         the mysqldiff perl script located in the extras
-#         directory of the 'catalog' module.
+#         mysqldiff.
 #       * Comments should be like these, full line comments.
 #         (don't use inline comments)
 
@@ -464,6 +463,7 @@ CREATE TABLE countries (
   countries_iso_code_2 char(2) NOT NULL,
   countries_iso_code_3 char(3) NOT NULL,
   address_format_id int NOT NULL,
+  active tinyint(3) unsigned DEFAULT '1',
   PRIMARY KEY (countries_id),
   KEY IDX_COUNTRIES_NAME (countries_name)
 );
@@ -930,7 +930,6 @@ CREATE TABLE products (
   products_width decimal(6,2) NOT NULL default '12.00',
   products_height decimal(6,2) NOT NULL default '12.00',
   products_ready_to_ship int(1) NOT NULL default '0',
-  products_thumb varchar(64) default NULL,
   PRIMARY KEY  (products_id),
   KEY idx_products_model (products_model),
   KEY idx_products_date_added (products_date_added)
@@ -1231,9 +1230,20 @@ CREATE TABLE whos_online (
   full_name varchar(64) NOT NULL,
   session_id varchar(128) NOT NULL,
   ip_address varchar(15) NOT NULL,
+  hostname VARCHAR(255) NOT NULL,
+  country_code varchar(2) NOT NULL,
+  country_name VARCHAR(64) NOT NULL,
+  region_name VARCHAR(64) NOT NULL,
+  city VARCHAR(64) NOT NULL,
+  latitude FLOAT NOT NULL,
+  longitude FLOAT NOT NULL,
   time_entry varchar(14) NOT NULL,
   time_last_click varchar(14) NOT NULL,
-  last_page_url text NOT NULL
+  last_page_url text NOT NULL,
+  http_referer VARCHAR(255) NOT NULL,
+  user_agent VARCHAR(255) NOT NULL,
+  KEY idx_ip_address (ip_address),
+  KEY idx_country_code (country_code)
 );
 
 DROP TABLE IF EXISTS zones;
@@ -1293,12 +1303,13 @@ CREATE TABLE http_error (
 
 # data
 
-# 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany
+# 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany, 6 - UK
 INSERT INTO address_format VALUES (1,'$firstname $lastname$cr$streets$cr$city,$postcode$cr$statecomma$country','$city / $country');
 INSERT INTO address_format VALUES (2,'$firstname $lastname$cr$streets$cr$city,$state    $postcode$cr$country','$city,$state / $country');
 INSERT INTO address_format VALUES (3,'$firstname $lastname$cr$streets$cr$city$cr$postcode - $statecomma$country','$state / $country');
 INSERT INTO address_format VALUES (4,'$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country','$postcode / $country');
 INSERT INTO address_format VALUES (5,'$firstname $lastname$cr$streets$cr$postcode $city$cr$country','$city / $country');
+INSERT INTO address_format VALUES (6,'$firstname $lastname$cr$streets$cr$suburb$cr$city$cr$state$cr$postcode$cr$country','$city / $country');
 
 # INSERT INTO admin VALUES ('1','1','Admin','Default','Admin','admin@localhost.com','05cdeb1aeaffec1c7ae3f12c570a658c:81',now(),NULL,NULL,'1');
   
@@ -1427,6 +1438,12 @@ INSERT INTO admin_files VALUES (131,'phone_order.php', 0, 5, '1');
 INSERT INTO admin_files VALUES (132,'stats_admin_logging.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (133,'stats_cust_logging.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (134,'customer_export.php', 0, 5, '1');
+#Bugfix 324: Missing values
+INSERT INTO admin_files VALUES (135,'packaging.php',0,9,'1');
+INSERT INTO admin_files VALUES (136,'ups_boxes_used.php',0,9,'1');
+INSERT INTO admin_files VALUES (137,'stats_credits.php',0,8,'1');
+INSERT INTO admin_files VALUES (138,'treeview.php',0,54,'1');
+INSERT INTO admin_files VALUES (139,'qtprodoctor.php',0,9,'1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
@@ -1451,7 +1468,6 @@ INSERT INTO configuration VALUES (7,'Expected Sort Order','EXPECTED_PRODUCTS_SOR
 INSERT INTO configuration VALUES (8,'Expected Sort Field','EXPECTED_PRODUCTS_FIELD','date_expected','The column to sort by in the expected products box.','1','9',NULL,now(),NULL,'tep_cfg_select_option(array(''products_name'',''date_expected''),');
 INSERT INTO configuration VALUES (9,'Switch To Default Language Currency','USE_DEFAULT_LANGUAGE_CURRENCY','false','Automatically switch to the language\'s currency when it is changed','1','10',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (10,'Send Extra Order Emails To','SEND_EXTRA_ORDER_EMAILS_TO','','Send extra order emails to the following email addresses,in this format: Name 1 &lt;email@address1&gt;,Name 2 &lt;email@address2&gt;','1','11',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (11,'Use Search-Engine Safe URLs (still in development)','SEARCH_ENGINE_FRIENDLY_URLS','false','Use search-engine safe urls for all site links','1','12',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (12,'Display Cart After Adding Product','DISPLAY_CART','true','Display the shopping cart after adding a product (or return back to their origin)','1','14',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (13,'Allow Guest To Tell A Friend','ALLOW_GUEST_TO_TELL_A_FRIEND','false','Allow guests to tell a friend about a product','1','15',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (14,'Default Search Operator','ADVANCED_SEARCH_DEFAULT_OPERATOR','and','Default search operators','1','17',NULL,now(),NULL,'tep_cfg_select_option(array(\'and\', \'or\'),');
@@ -1498,10 +1514,10 @@ INSERT INTO configuration VALUES (52,'Customer Order History Box','MAX_DISPLAY_P
 INSERT INTO configuration VALUES (53,'Order History','MAX_DISPLAY_ORDER_HISTORY','10','Maximum number of orders to display in the order history page','3','18',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (54,'Product Quantities In Shopping Cart','MAX_QTY_IN_CART','99','Maximum number of product quantities that can be added to the shopping cart (0 for no limit)','3','19',NULL,now(),NULL,NULL);
 
-INSERT INTO configuration VALUES (55,'Small Image Width','SMALL_IMAGE_WIDTH','100','The pixel width of small images','4','1',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (56,'Small Image Height','SMALL_IMAGE_HEIGHT','80','The pixel height of small images','4','2',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (57,'Heading Image Width','HEADING_IMAGE_WIDTH','57','The pixel width of heading images','4','3',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (58,'Heading Image Height','HEADING_IMAGE_HEIGHT','40','The pixel height of heading images','4','4',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (55,'Small Image Width','SMALL_IMAGE_WIDTH','120','The pixel width of small images','4','1',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (56,'Small Image Height','SMALL_IMAGE_HEIGHT','','The pixel height of small images','4','2',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (57,'Heading Image Width','HEADING_IMAGE_WIDTH','100','The pixel width of heading images','4','3',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (58,'Heading Image Height','HEADING_IMAGE_HEIGHT','','The pixel height of heading images','4','4',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (59,'Subcategory Image Width','SUBCATEGORY_IMAGE_WIDTH','100','The pixel width of subcategory images','4','5',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (60,'Subcategory Image Height','SUBCATEGORY_IMAGE_HEIGHT','57','The pixel height of subcategory images','4','6',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (61,'Calculate Image Size','CONFIG_CALCULATE_IMAGE_SIZE','true','Calculate the size of images?','4','7',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
@@ -1516,6 +1532,7 @@ INSERT INTO configuration VALUES (67,'State','ACCOUNT_STATE','true','Display sta
 INSERT INTO configuration VALUES (68,'Installed Modules','MODULE_PAYMENT_INSTALLED','','List of payment module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: cc.php;cod.php;paypal.php)','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (69,'Installed Modules','MODULE_ORDER_TOTAL_INSTALLED','ot_subtotal.php;ot_shipping.php;ot_tax.php;ot_loyalty_discount.php;ot_loworderfee.php;ot_coupon.php;ot_gv.php;ot_total.php','List of order_total module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: ot_subtotal.php;ot_tax.php;ot_shipping.php;ot_total.php)','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (70,'Installed Modules','MODULE_SHIPPING_INSTALLED','','List of shipping module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: ups.php;flat.php;item.php)','6','0',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES ('77','Google Maps Key','GOOGLE_MAPS_KEY','YOURKEY','Put your Google Maps API Key here.<br><br>You can get one at http://code.google.com/apis/maps/signup.html','1','25',NULL,now(), NULL, 'tep_cfg_textarea(');
 INSERT INTO configuration VALUES (85,'Default Currency','DEFAULT_CURRENCY','USD','Default Currency','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (86,'Default Language','DEFAULT_LANGUAGE','en','Default Language','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (87,'Default Order Status For New Orders','DEFAULT_ORDERS_STATUS_ID','1','When a new order is created, this order status will be assigned to it.','6','0',NULL,now(),NULL,NULL);
@@ -1560,7 +1577,7 @@ INSERT INTO configuration VALUES (121,'Log Date Format','STORE_PARSE_DATE_TIME_F
 INSERT INTO configuration VALUES (122,'Display The Page Parse Time','DISPLAY_PAGE_PARSE_TIME','false','Display the page parse time (store page parse time must be enabled)','10','4',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (123,'Store Database Queries','STORE_DB_TRANSACTIONS','false','Store the database queries in the page parse time log (PHP4 only)','10','5',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 
-INSERT INTO configuration VALUES (124,'Use Cache','USE_CACHE','false','Use caching features','11','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (124,'Use Cache','USE_CACHE','false','Use caching features.<br>CAUTION. This may cause issues and crash your site. Test first!','11','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (125,'Cache Directory','DIR_FS_CACHE','/tmp/','The directory where the cached files are saved','11','2',NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (126,'E-Mail Transport Method','EMAIL_TRANSPORT','sendmail','Defines if this server uses a local connection to sendmail or uses an SMTP connection via TCP/IP. Servers running on Windows and MacOS should change this setting to SMTP.','12','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'sendmail\', \'smtp\'),');
@@ -1707,8 +1724,6 @@ INSERT INTO configuration VALUES (534,'WYSIWYG Editor Allow Debug Mode?','ARTICL
 INSERT INTO configuration VALUES (391,'Down For Maintenance Start Time','TEXT_DATE_TIME','2008-05-03 14:23:52','Show when down for maintenance',16,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (700,'Number of Columns for product listings','PRODUCT_LIST_NUM_COLUMNS','4','How many prodcuts per row do you want to display on your product listing page?',8,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (701,'Minimum X-Sell products Listed','MIN_DISPLAY_XSELL','1','How many x-sell products per page',8,20,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (652,'Max Wish List Box','MAX_DISPLAY_WISHLIST_BOX','4','How many wish list items to display in the infobox before it changes to a counter',3,0,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (651,'Max Wish List','MAX_DISPLAY_WISHLIST_PRODUCTS','12','How many wish list items to show per page on the main wishlist.php file',3,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (650,'Product Display Type (Default = 0 or Columns = 1)','PRODUCT_LIST_TYPE','1','Do you want to display products one per row or multiple columns per row?',8,10,NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (645,'Tax Class','MODULE_ORDER_TOTAL_LOWORDERFEE_TAX_CLASS','0','Use the following tax class on the low order fee.',6,7,NULL,now(),'tep_get_tax_class_title','tep_cfg_pull_down_tax_classes(');
@@ -1759,8 +1774,8 @@ INSERT INTO `configuration` VALUES(1481, 'Enable automatic redirects?', 'USE_SEO
 INSERT INTO `configuration` VALUES(1482, 'Choose URL Rewrite Type', 'SEO_REWRITE_TYPE', 'Rewrite', 'Choose which SEO URL format to use.', 60, 13, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''Rewrite''),');
 INSERT INTO `configuration` VALUES(1483, 'Enter special character conversions', 'SEO_CHAR_CONVERT_SET', '', 'This setting will convert characters.<br><br>The format <b>MUST</b> be in the form: <b>char=>conv,char2=>conv2</b>', 60, 14, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, NULL);
 INSERT INTO `configuration` VALUES(1484, 'Remove all non-alphanumeric characters?', 'SEO_REMOVE_ALL_SPEC_CHARS', 'false', 'This will remove all non-letters and non-numbers.  This should be handy to remove all special characters with 1 setting.', 60, 15, '2009-02-25 22:57:59', '2009-02-25 22:57:59', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO `configuration` VALUES(1485, 'Reset SEO URLs Cache', 'SEO_URLS_CACHE_RESET', 'false', 'This will reset the cache data for SEO', 60, 16, '2009-02-25 22:57:59', '2009-02-25 22:57:59', 'tep_reset_cache_data_seo_urls', 'tep_cfg_select_option(array(''reset'', ''false''),');
-INSERT INTO `configuration` VALUES(1486, 'Enable Seo URL validation?', 'FWR_VALIDATION_ON', 'false', 'Enable the SEO URL validation?', 75, 1, NULL, '2009-02-25 22:57:25', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO `configuration` VALUES(1485, 'Reset SEO URLs Cache', 'SEO_URLS_CACHE_RESET', 'false', 'This will reset the cache data for SEO', 60, 17, '2009-02-25 22:57:59', '2009-02-25 22:57:59', 'tep_reset_cache_data_seo_urls', 'tep_cfg_select_option(array(''reset'', ''false''),');
+INSERT INTO `configuration` VALUES(1486, 'Enable Seo URL validation?', 'FWR_VALIDATION_ON', 'false', 'Enable the SEO URL validation?', 60, 16, NULL, '2009-02-25 22:57:25', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (1073,'Move tax to total amount','MOVE_TAX_TO_TOTAL_AMOUNT','True','Do you want to move the tax to the total amount? If true PayPal will allways show the total amount including tax. (needs Aggregate i.s.o. Per Item to function)',6,4,NULL,now(),NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), ');
 INSERT INTO configuration VALUES (498,'Purchase Without Account','PWA_ON','true','Allow Customers to purchase without an account',40,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 
@@ -1781,9 +1796,17 @@ INSERT INTO configuration VALUES (1214,'Use Affiliate-tier','AFFILATE_USE_TIER',
 INSERT INTO configuration VALUES (1215,'Number of Tierlevels','AFFILIATE_TIER_LEVELS','0','Number of Tierlevels',35,12,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1216,'Percentage Rate for the Tierlevels','AFFILIATE_TIER_PERCENTAGE','8.00;5.00;1.00','Percent Rates for the tierlevels<br>Example: 8.00;5.00;1.00',35,13,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1217,'Affiliate News','MAX_DISPLAY_AFFILIATE_NEWS','3','Maximum number of items to display on the Affiliate News page',35,14,NULL,now(),NULL,NULL);
+
+# Edit to add configuration vars from affiliate_configure.php
+INSERT INTO configuration VALUES (1218,'Notify Affiliate of new invoice?','AFFILIATE_NOTIFY_AFTER_BILLING','true','Nofify affiliate if they have got a new invoice',35,15,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (1219,'Delete affiliate sale if order deleted?','AFFILIATE_NOTIFY_AFTER_BILLING','true','Delete affiliate sales if an order is deleted (Warning: Only not yet billed sales are deleted)',35,16,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (1220,'Tax Rates used for billing the affiliates','AFFILIATE_TAX_ID','1','Set the tax rate for billing affiliates',35,17,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1221,'Maintain affiliate clickthroughs','AFFILIATE_DELETE_CLICKTHROUGHS','false','To keep the clickthrough report small you can set the days after which they are deleted (when calling affiliate_summary in the admin).  Set to false or set the number of days.',35,18,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1222,'Maintain affiliate banner history','AFFILIATE_DELETE_AFFILIATE_BANNER_HISTORY','false','To keep affiliate banner history table  small you can set the days after which they are deleted (when calling affiliate_summary in the admin). Set to false or set the number of days.',35,19,NULL,now(),NULL,NULL);
+
 INSERT INTO configuration VALUES (1291,'Max Wish List','MAX_DISPLAY_WISHLIST_PRODUCTS','12','How many wish list items to show per page on the main wishlist.php file',65,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1292,'Max Wish List Box','MAX_DISPLAY_WISHLIST_BOX','4','How many wish list items to display in the infobox before it changes to a counter',65,0,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (1293,'Display Emails','DISPLAY_WISHLIST_EMAILS','10','How many emails to display when the customer emails their wishlist link',65,0,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1293,'Display Emails','DISPLAY_WISHLIST_EMAILS','3','How many emails to display when the customer emails their wishlist link',65,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1294,'Wishlist Redirect','WISHLIST_REDIRECT','No','Do you want to redirect back to the product_info.php page when a customer adds a product to their wishlist?',65,0,NULL,now(),NULL,'tep_cfg_select_option(array(\'Yes\',\'No\'),');
 INSERT INTO configuration VALUES (1304,'Display the Payment Method dropdown?','ORDER_EDITOR_PAYMENT_DROPDOWN','true','Based on this selection Order Editor will display the payment method as a dropdown menu (true) or as an input field (false).',70,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (1305,'Use prices from Separate Pricing Per Customer?','ORDER_EDITOR_USE_SPPC','false','Leave this set at false unless SPPC is installed.',70,3,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
@@ -1816,6 +1839,11 @@ INSERT INTO configuration VALUES (1508, 'Match orders from any date', 'RCS_CARTS
 INSERT INTO configuration VALUES (1509, 'Lowest Pending sales status', 'RCS_PENDING_SALE_STATUS', '1', 'The highest value that an order can have and still be considered pending. Any value higher than this will be considered by RCS as sale which completed.<br><br>See documentation for details.', 80, 85, NULL, '2009-03-07 22:31:53', 'tep_get_order_status_name', 'tep_cfg_pull_down_order_statuses(');
 INSERT INTO configuration VALUES (1510, 'Report Even Row Style', 'RCS_REPORT_EVEN_STYLE', 'dataTableRow', 'Style for even rows in results report. Typical options are <i>dataTableRow</i> and <i>attributes-even</i>.', 80, 90, NULL, '2009-03-07 22:31:53', '', '');
 INSERT INTO configuration VALUES (1511, 'Report Odd Row Style', 'RCS_REPORT_ODD_STYLE', '', 'Style for odd rows in results report. Typical options are NULL (ie, no entry) and <i>attributes-odd</i>.', 80, 92, NULL, '2009-03-07 22:31:53', '', '');
+
+INSERT INTO configuration VALUES (595,'Product Image Width','PRODUCT_IMAGE_WIDTH','120','The main product image \(thumbnail\) in product information pages.',4,20,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (596,'Product Image Height','PRODUCT_IMAGE_HEIGHT','','The main product image \(thumbnail\) in product information pages. Do NOT specify both!',4,21,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (597,'Product Popup Image Width','POPUP_IMAGE_WIDTH','800','Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,22,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (598,'Product Popup Image Height','POPUP_IMAGE_HEIGHT','600','Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,23,NULL,now(),NULL,NULL);
 
 #New v2.1 Entries
 INSERT INTO configuration values ('2100', 'Enable Google Analytics', 'GOOGLE_ANALYTICS_STATUS', 'false', 'Enable Google Analytics?', '85', '1', '', '2010-01-19 00:00:00', '', 'tep_cfg_select_option(array(\'true\', \'false\'),');
@@ -1855,253 +1883,255 @@ INSERT INTO configuration_group VALUES (55,'Page Cache Settings','Settings for t
 INSERT INTO configuration_group VALUES (60,'SEO URLs','Options for Ultimate SEO URLs by Chemo', 902,1);
 INSERT INTO configuration_group VALUES (65,'Wish List Settings','Settings for your Wish List', 25,1);
 INSERT INTO configuration_group VALUES (70,'Order Editor','Configuration options for Order Editor', 903,1);
-INSERT INTO configuration_group VALUES (75,'SEO URL Validation','Validation For Ultimate SEO URLs', 950,1);
 INSERT INTO configuration_group VALUES (80,'Recover Cart Sales', 'Recover Cart Sales (RCS) Configuration Values', 55, 1);
 INSERT INTO configuration_group VALUES (85,'Google Analytics', 'Google Analytics Settings', 99, 1);
 
 
-INSERT INTO countries VALUES (1,'Afghanistan','AF','AFG','1');
-INSERT INTO countries VALUES (2,'Albania','AL','ALB','1');
-INSERT INTO countries VALUES (3,'Algeria','DZ','DZA','1');
-INSERT INTO countries VALUES (4,'American Samoa','AS','ASM','1');
-INSERT INTO countries VALUES (5,'Andorra','AD','AND','1');
-INSERT INTO countries VALUES (6,'Angola','AO','AGO','1');
-INSERT INTO countries VALUES (7,'Anguilla','AI','AIA','1');
-INSERT INTO countries VALUES (8,'Antarctica','AQ','ATA','1');
-INSERT INTO countries VALUES (9,'Antigua and Barbuda','AG','ATG','1');
-INSERT INTO countries VALUES (10,'Argentina','AR','ARG','1');
-INSERT INTO countries VALUES (11,'Armenia','AM','ARM','1');
-INSERT INTO countries VALUES (12,'Aruba','AW','ABW','1');
-INSERT INTO countries VALUES (13,'Australia','AU','AUS','1');
-INSERT INTO countries VALUES (14,'Austria','AT','AUT','5');
-INSERT INTO countries VALUES (15,'Azerbaijan','AZ','AZE','1');
-INSERT INTO countries VALUES (16,'Bahamas','BS','BHS','1');
-INSERT INTO countries VALUES (17,'Bahrain','BH','BHR','1');
-INSERT INTO countries VALUES (18,'Bangladesh','BD','BGD','1');
-INSERT INTO countries VALUES (19,'Barbados','BB','BRB','1');
-INSERT INTO countries VALUES (20,'Belarus','BY','BLR','1');
-INSERT INTO countries VALUES (21,'Belgium','BE','BEL','1');
-INSERT INTO countries VALUES (22,'Belize','BZ','BLZ','1');
-INSERT INTO countries VALUES (23,'Benin','BJ','BEN','1');
-INSERT INTO countries VALUES (24,'Bermuda','BM','BMU','1');
-INSERT INTO countries VALUES (25,'Bhutan','BT','BTN','1');
-INSERT INTO countries VALUES (26,'Bolivia','BO','BOL','1');
-INSERT INTO countries VALUES (27,'Bosnia and Herzegowina','BA','BIH','1');
-INSERT INTO countries VALUES (28,'Botswana','BW','BWA','1');
-INSERT INTO countries VALUES (29,'Bouvet Island','BV','BVT','1');
-INSERT INTO countries VALUES (30,'Brazil','BR','BRA','1');
-INSERT INTO countries VALUES (31,'British Indian Ocean Territory','IO','IOT','1');
-INSERT INTO countries VALUES (32,'Brunei Darussalam','BN','BRN','1');
-INSERT INTO countries VALUES (33,'Bulgaria','BG','BGR','1');
-INSERT INTO countries VALUES (34,'Burkina Faso','BF','BFA','1');
-INSERT INTO countries VALUES (35,'Burundi','BI','BDI','1');
-INSERT INTO countries VALUES (36,'Cambodia','KH','KHM','1');
-INSERT INTO countries VALUES (37,'Cameroon','CM','CMR','1');
-INSERT INTO countries VALUES (38,'Canada','CA','CAN','1');
-INSERT INTO countries VALUES (39,'Cape Verde','CV','CPV','1');
-INSERT INTO countries VALUES (40,'Cayman Islands','KY','CYM','1');
-INSERT INTO countries VALUES (41,'Central African Republic','CF','CAF','1');
-INSERT INTO countries VALUES (42,'Chad','TD','TCD','1');
-INSERT INTO countries VALUES (43,'Chile','CL','CHL','1');
-INSERT INTO countries VALUES (44,'China','CN','CHN','1');
-INSERT INTO countries VALUES (45,'Christmas Island','CX','CXR','1');
-INSERT INTO countries VALUES (46,'Cocos (Keeling) Islands','CC','CCK','1');
-INSERT INTO countries VALUES (47,'Colombia','CO','COL','1');
-INSERT INTO countries VALUES (48,'Comoros','KM','COM','1');
-INSERT INTO countries VALUES (49,'Congo','CG','COG','1');
-INSERT INTO countries VALUES (50,'Cook Islands','CK','COK','1');
-INSERT INTO countries VALUES (51,'Costa Rica','CR','CRI','1');
-INSERT INTO countries VALUES (52,'Cote D\'Ivoire','CI','CIV','1');
-INSERT INTO countries VALUES (53,'Croatia','HR','HRV','1');
-INSERT INTO countries VALUES (54,'Cuba','CU','CUB','1');
-INSERT INTO countries VALUES (55,'Cyprus','CY','CYP','1');
-INSERT INTO countries VALUES (56,'Czech Republic','CZ','CZE','1');
-INSERT INTO countries VALUES (57,'Denmark','DK','DNK','1');
-INSERT INTO countries VALUES (58,'Djibouti','DJ','DJI','1');
-INSERT INTO countries VALUES (59,'Dominica','DM','DMA','1');
-INSERT INTO countries VALUES (60,'Dominican Republic','DO','DOM','1');
-INSERT INTO countries VALUES (61,'East Timor','TP','TMP','1');
-INSERT INTO countries VALUES (62,'Ecuador','EC','ECU','1');
-INSERT INTO countries VALUES (63,'Egypt','EG','EGY','1');
-INSERT INTO countries VALUES (64,'El Salvador','SV','SLV','1');
-INSERT INTO countries VALUES (65,'Equatorial Guinea','GQ','GNQ','1');
-INSERT INTO countries VALUES (66,'Eritrea','ER','ERI','1');
-INSERT INTO countries VALUES (67,'Estonia','EE','EST','1');
-INSERT INTO countries VALUES (68,'Ethiopia','ET','ETH','1');
-INSERT INTO countries VALUES (69,'Falkland Islands (Malvinas)','FK','FLK','1');
-INSERT INTO countries VALUES (70,'Faroe Islands','FO','FRO','1');
-INSERT INTO countries VALUES (71,'Fiji','FJ','FJI','1');
-INSERT INTO countries VALUES (72,'Finland','FI','FIN','1');
-INSERT INTO countries VALUES (73,'France','FR','FRA','1');
-INSERT INTO countries VALUES (74,'France, Metropolitan','FX','FXX','1');
-INSERT INTO countries VALUES (75,'French Guiana','GF','GUF','1');
-INSERT INTO countries VALUES (76,'French Polynesia','PF','PYF','1');
-INSERT INTO countries VALUES (77,'French Southern Territories','TF','ATF','1');
-INSERT INTO countries VALUES (78,'Gabon','GA','GAB','1');
-INSERT INTO countries VALUES (79,'Gambia','GM','GMB','1');
-INSERT INTO countries VALUES (80,'Georgia','GE','GEO','1');
-INSERT INTO countries VALUES (81,'Germany','DE','DEU','5');
-INSERT INTO countries VALUES (82,'Ghana','GH','GHA','1');
-INSERT INTO countries VALUES (83,'Gibraltar','GI','GIB','1');
-INSERT INTO countries VALUES (84,'Greece','GR','GRC','1');
-INSERT INTO countries VALUES (85,'Greenland','GL','GRL','1');
-INSERT INTO countries VALUES (86,'Grenada','GD','GRD','1');
-INSERT INTO countries VALUES (87,'Guadeloupe','GP','GLP','1');
-INSERT INTO countries VALUES (88,'Guam','GU','GUM','1');
-INSERT INTO countries VALUES (89,'Guatemala','GT','GTM','1');
-INSERT INTO countries VALUES (90,'Guinea','GN','GIN','1');
-INSERT INTO countries VALUES (91,'Guinea-bissau','GW','GNB','1');
-INSERT INTO countries VALUES (92,'Guyana','GY','GUY','1');
-INSERT INTO countries VALUES (93,'Haiti','HT','HTI','1');
-INSERT INTO countries VALUES (94,'Heard and Mc Donald Islands','HM','HMD','1');
-INSERT INTO countries VALUES (95,'Honduras','HN','HND','1');
-INSERT INTO countries VALUES (96,'Hong Kong','HK','HKG','1');
-INSERT INTO countries VALUES (97,'Hungary','HU','HUN','1');
-INSERT INTO countries VALUES (98,'Iceland','IS','ISL','1');
-INSERT INTO countries VALUES (99,'India','IN','IND','1');
-INSERT INTO countries VALUES (100,'Indonesia','ID','IDN','1');
-INSERT INTO countries VALUES (101,'Iran (Islamic Republic of)','IR','IRN','1');
-INSERT INTO countries VALUES (102,'Iraq','IQ','IRQ','1');
-INSERT INTO countries VALUES (103,'Ireland','IE','IRL','1');
-INSERT INTO countries VALUES (104,'Israel','IL','ISR','1');
-INSERT INTO countries VALUES (105,'Italy','IT','ITA','1');
-INSERT INTO countries VALUES (106,'Jamaica','JM','JAM','1');
-INSERT INTO countries VALUES (107,'Japan','JP','JPN','1');
-INSERT INTO countries VALUES (108,'Jordan','JO','JOR','1');
-INSERT INTO countries VALUES (109,'Kazakhstan','KZ','KAZ','1');
-INSERT INTO countries VALUES (110,'Kenya','KE','KEN','1');
-INSERT INTO countries VALUES (111,'Kiribati','KI','KIR','1');
-INSERT INTO countries VALUES (112,'Korea, Democratic People\'s Republic of','KP','PRK','1');
-INSERT INTO countries VALUES (113,'Korea, Republic of','KR','KOR','1');
-INSERT INTO countries VALUES (114,'Kuwait','KW','KWT','1');
-INSERT INTO countries VALUES (115,'Kyrgyzstan','KG','KGZ','1');
-INSERT INTO countries VALUES (116,'Lao People\'s Democratic Republic','LA','LAO','1');
-INSERT INTO countries VALUES (117,'Latvia','LV','LVA','1');
-INSERT INTO countries VALUES (118,'Lebanon','LB','LBN','1');
-INSERT INTO countries VALUES (119,'Lesotho','LS','LSO','1');
-INSERT INTO countries VALUES (120,'Liberia','LR','LBR','1');
-INSERT INTO countries VALUES (121,'Libyan Arab Jamahiriya','LY','LBY','1');
-INSERT INTO countries VALUES (122,'Liechtenstein','LI','LIE','1');
-INSERT INTO countries VALUES (123,'Lithuania','LT','LTU','1');
-INSERT INTO countries VALUES (124,'Luxembourg','LU','LUX','1');
-INSERT INTO countries VALUES (125,'Macau','MO','MAC','1');
-INSERT INTO countries VALUES (126,'Macedonia, The Former Yugoslav Republic of','MK','MKD','1');
-INSERT INTO countries VALUES (127,'Madagascar','MG','MDG','1');
-INSERT INTO countries VALUES (128,'Malawi','MW','MWI','1');
-INSERT INTO countries VALUES (129,'Malaysia','MY','MYS','1');
-INSERT INTO countries VALUES (130,'Maldives','MV','MDV','1');
-INSERT INTO countries VALUES (131,'Mali','ML','MLI','1');
-INSERT INTO countries VALUES (132,'Malta','MT','MLT','1');
-INSERT INTO countries VALUES (133,'Marshall Islands','MH','MHL','1');
-INSERT INTO countries VALUES (134,'Martinique','MQ','MTQ','1');
-INSERT INTO countries VALUES (135,'Mauritania','MR','MRT','1');
-INSERT INTO countries VALUES (136,'Mauritius','MU','MUS','1');
-INSERT INTO countries VALUES (137,'Mayotte','YT','MYT','1');
-INSERT INTO countries VALUES (138,'Mexico','MX','MEX','1');
-INSERT INTO countries VALUES (139,'Micronesia, Federated States of','FM','FSM','1');
-INSERT INTO countries VALUES (140,'Moldova, Republic of','MD','MDA','1');
-INSERT INTO countries VALUES (141,'Monaco','MC','MCO','1');
-INSERT INTO countries VALUES (142,'Mongolia','MN','MNG','1');
-INSERT INTO countries VALUES (143,'Montserrat','MS','MSR','1');
-INSERT INTO countries VALUES (144,'Morocco','MA','MAR','1');
-INSERT INTO countries VALUES (145,'Mozambique','MZ','MOZ','1');
-INSERT INTO countries VALUES (146,'Myanmar','MM','MMR','1');
-INSERT INTO countries VALUES (147,'Namibia','NA','NAM','1');
-INSERT INTO countries VALUES (148,'Nauru','NR','NRU','1');
-INSERT INTO countries VALUES (149,'Nepal','NP','NPL','1');
-INSERT INTO countries VALUES (150,'Netherlands','NL','NLD','1');
-INSERT INTO countries VALUES (151,'Netherlands Antilles','AN','ANT','1');
-INSERT INTO countries VALUES (152,'New Caledonia','NC','NCL','1');
-INSERT INTO countries VALUES (153,'New Zealand','NZ','NZL','1');
-INSERT INTO countries VALUES (154,'Nicaragua','NI','NIC','1');
-INSERT INTO countries VALUES (155,'Niger','NE','NER','1');
-INSERT INTO countries VALUES (156,'Nigeria','NG','NGA','1');
-INSERT INTO countries VALUES (157,'Niue','NU','NIU','1');
-INSERT INTO countries VALUES (158,'Norfolk Island','NF','NFK','1');
-INSERT INTO countries VALUES (159,'Northern Mariana Islands','MP','MNP','1');
-INSERT INTO countries VALUES (160,'Norway','NO','NOR','1');
-INSERT INTO countries VALUES (161,'Oman','OM','OMN','1');
-INSERT INTO countries VALUES (162,'Pakistan','PK','PAK','1');
-INSERT INTO countries VALUES (163,'Palau','PW','PLW','1');
-INSERT INTO countries VALUES (164,'Panama','PA','PAN','1');
-INSERT INTO countries VALUES (165,'Papua New Guinea','PG','PNG','1');
-INSERT INTO countries VALUES (166,'Paraguay','PY','PRY','1');
-INSERT INTO countries VALUES (167,'Peru','PE','PER','1');
-INSERT INTO countries VALUES (168,'Philippines','PH','PHL','1');
-INSERT INTO countries VALUES (169,'Pitcairn','PN','PCN','1');
-INSERT INTO countries VALUES (170,'Poland','PL','POL','1');
-INSERT INTO countries VALUES (171,'Portugal','PT','PRT','1');
-INSERT INTO countries VALUES (172,'Puerto Rico','PR','PRI','1');
-INSERT INTO countries VALUES (173,'Qatar','QA','QAT','1');
-INSERT INTO countries VALUES (174,'Reunion','RE','REU','1');
-INSERT INTO countries VALUES (175,'Romania','RO','ROM','1');
-INSERT INTO countries VALUES (176,'Russian Federation','RU','RUS','1');
-INSERT INTO countries VALUES (177,'Rwanda','RW','RWA','1');
-INSERT INTO countries VALUES (178,'Saint Kitts and Nevis','KN','KNA','1');
-INSERT INTO countries VALUES (179,'Saint Lucia','LC','LCA','1');
-INSERT INTO countries VALUES (180,'Saint Vincent and the Grenadines','VC','VCT','1');
-INSERT INTO countries VALUES (181,'Samoa','WS','WSM','1');
-INSERT INTO countries VALUES (182,'San Marino','SM','SMR','1');
-INSERT INTO countries VALUES (183,'Sao Tome and Principe','ST','STP','1');
-INSERT INTO countries VALUES (184,'Saudi Arabia','SA','SAU','1');
-INSERT INTO countries VALUES (185,'Senegal','SN','SEN','1');
-INSERT INTO countries VALUES (186,'Seychelles','SC','SYC','1');
-INSERT INTO countries VALUES (187,'Sierra Leone','SL','SLE','1');
-INSERT INTO countries VALUES (188,'Singapore','SG','SGP','4');
-INSERT INTO countries VALUES (189,'Slovakia (Slovak Republic)','SK','SVK','1');
-INSERT INTO countries VALUES (190,'Slovenia','SI','SVN','1');
-INSERT INTO countries VALUES (191,'Solomon Islands','SB','SLB','1');
-INSERT INTO countries VALUES (192,'Somalia','SO','SOM','1');
-INSERT INTO countries VALUES (193,'South Africa','ZA','ZAF','1');
-INSERT INTO countries VALUES (194,'South Georgia and the South Sandwich Islands','GS','SGS','1');
-INSERT INTO countries VALUES (195,'Spain','ES','ESP','3');
-INSERT INTO countries VALUES (196,'Sri Lanka','LK','LKA','1');
-INSERT INTO countries VALUES (197,'St. Helena','SH','SHN','1');
-INSERT INTO countries VALUES (198,'St. Pierre and Miquelon','PM','SPM','1');
-INSERT INTO countries VALUES (199,'Sudan','SD','SDN','1');
-INSERT INTO countries VALUES (200,'Suriname','SR','SUR','1');
-INSERT INTO countries VALUES (201,'Svalbard and Jan Mayen Islands','SJ','SJM','1');
-INSERT INTO countries VALUES (202,'Swaziland','SZ','SWZ','1');
-INSERT INTO countries VALUES (203,'Sweden','SE','SWE','1');
-INSERT INTO countries VALUES (204,'Switzerland','CH','CHE','1');
-INSERT INTO countries VALUES (205,'Syrian Arab Republic','SY','SYR','1');
-INSERT INTO countries VALUES (206,'Taiwan','TW','TWN','1');
-INSERT INTO countries VALUES (207,'Tajikistan','TJ','TJK','1');
-INSERT INTO countries VALUES (208,'Tanzania, United Republic of','TZ','TZA','1');
-INSERT INTO countries VALUES (209,'Thailand','TH','THA','1');
-INSERT INTO countries VALUES (210,'Togo','TG','TGO','1');
-INSERT INTO countries VALUES (211,'Tokelau','TK','TKL','1');
-INSERT INTO countries VALUES (212,'Tonga','TO','TON','1');
-INSERT INTO countries VALUES (213,'Trinidad and Tobago','TT','TTO','1');
-INSERT INTO countries VALUES (214,'Tunisia','TN','TUN','1');
-INSERT INTO countries VALUES (215,'Turkey','TR','TUR','1');
-INSERT INTO countries VALUES (216,'Turkmenistan','TM','TKM','1');
-INSERT INTO countries VALUES (217,'Turks and Caicos Islands','TC','TCA','1');
-INSERT INTO countries VALUES (218,'Tuvalu','TV','TUV','1');
-INSERT INTO countries VALUES (219,'Uganda','UG','UGA','1');
-INSERT INTO countries VALUES (220,'Ukraine','UA','UKR','1');
-INSERT INTO countries VALUES (221,'United Arab Emirates','AE','ARE','1');
-INSERT INTO countries VALUES (222,'United Kingdom','GB','GBR','1');
-INSERT INTO countries VALUES (223,'United States','US','USA','2');
-INSERT INTO countries VALUES (224,'United States Minor Outlying Islands','UM','UMI','1');
-INSERT INTO countries VALUES (225,'Uruguay','UY','URY','1');
-INSERT INTO countries VALUES (226,'Uzbekistan','UZ','UZB','1');
-INSERT INTO countries VALUES (227,'Vanuatu','VU','VUT','1');
-INSERT INTO countries VALUES (228,'Vatican City State (Holy See)','VA','VAT','1');
-INSERT INTO countries VALUES (229,'Venezuela','VE','VEN','1');
-INSERT INTO countries VALUES (230,'Viet Nam','VN','VNM','1');
-INSERT INTO countries VALUES (231,'Virgin Islands (British)','VG','VGB','1');
-INSERT INTO countries VALUES (232,'Virgin Islands (U.S.)','VI','VIR','1');
-INSERT INTO countries VALUES (233,'Wallis and Futuna Islands','WF','WLF','1');
-INSERT INTO countries VALUES (234,'Western Sahara','EH','ESH','1');
-INSERT INTO countries VALUES (235,'Yemen','YE','YEM','1');
-INSERT INTO countries VALUES (236,'Yugoslavia','YU','YUG','1');
-INSERT INTO countries VALUES (237,'Zaire','ZR','ZAR','1');
-INSERT INTO countries VALUES (238,'Zambia','ZM','ZMB','1');
-INSERT INTO countries VALUES (239,'Zimbabwe','ZW','ZWE','1');
+INSERT INTO `countries` VALUES(1, 'Afghanistan', 'AF', 'AFG', 1, 0);
+INSERT INTO `countries` VALUES(2, 'Albania', 'AL', 'ALB', 1, 0);
+INSERT INTO `countries` VALUES(3, 'Algeria', 'DZ', 'DZA', 1, 0);
+INSERT INTO `countries` VALUES(4, 'American Samoa', 'AS', 'ASM', 1, 0);
+INSERT INTO `countries` VALUES(5, 'Andorra', 'AD', 'AND', 1, 0);
+INSERT INTO `countries` VALUES(6, 'Angola', 'AO', 'AGO', 1, 0);
+INSERT INTO `countries` VALUES(7, 'Anguilla', 'AI', 'AIA', 1, 0);
+INSERT INTO `countries` VALUES(8, 'Antarctica', 'AQ', 'ATA', 1, 0);
+INSERT INTO `countries` VALUES(9, 'Antigua and Barbuda', 'AG', 'ATG', 1, 0);
+INSERT INTO `countries` VALUES(10, 'Argentina', 'AR', 'ARG', 1, 0);
+INSERT INTO `countries` VALUES(11, 'Armenia', 'AM', 'ARM', 1, 0);
+INSERT INTO `countries` VALUES(12, 'Aruba', 'AW', 'ABW', 1, 0);
+INSERT INTO `countries` VALUES(13, 'Australia', 'AU', 'AUS', 1, 0);
+INSERT INTO `countries` VALUES(14, 'Austria', 'AT', 'AUT', 5, 0);
+INSERT INTO `countries` VALUES(15, 'Azerbaijan', 'AZ', 'AZE', 1, 0);
+INSERT INTO `countries` VALUES(16, 'Bahamas', 'BS', 'BHS', 1, 0);
+INSERT INTO `countries` VALUES(17, 'Bahrain', 'BH', 'BHR', 1, 0);
+INSERT INTO `countries` VALUES(18, 'Bangladesh', 'BD', 'BGD', 1, 0);
+INSERT INTO `countries` VALUES(19, 'Barbados', 'BB', 'BRB', 1, 0);
+INSERT INTO `countries` VALUES(20, 'Belarus', 'BY', 'BLR', 1, 0);
+INSERT INTO `countries` VALUES(21, 'Belgium', 'BE', 'BEL', 1, 0);
+INSERT INTO `countries` VALUES(22, 'Belize', 'BZ', 'BLZ', 1, 0);
+INSERT INTO `countries` VALUES(23, 'Benin', 'BJ', 'BEN', 1, 0);
+INSERT INTO `countries` VALUES(24, 'Bermuda', 'BM', 'BMU', 1, 0);
+INSERT INTO `countries` VALUES(25, 'Bhutan', 'BT', 'BTN', 1, 0);
+INSERT INTO `countries` VALUES(26, 'Bolivia', 'BO', 'BOL', 1, 0);
+INSERT INTO `countries` VALUES(27, 'Bosnia and Herzegowina', 'BA', 'BIH', 1, 0);
+INSERT INTO `countries` VALUES(28, 'Botswana', 'BW', 'BWA', 1, 0);
+INSERT INTO `countries` VALUES(29, 'Bouvet Island', 'BV', 'BVT', 1, 0);
+INSERT INTO `countries` VALUES(30, 'Brazil', 'BR', 'BRA', 1, 0);
+INSERT INTO `countries` VALUES(31, 'British Indian Ocean Territory', 'IO', 'IOT', 1, 0);
+INSERT INTO `countries` VALUES(32, 'Brunei Darussalam', 'BN', 'BRN', 1, 0);
+INSERT INTO `countries` VALUES(33, 'Bulgaria', 'BG', 'BGR', 1, 0);
+INSERT INTO `countries` VALUES(34, 'Burkina Faso', 'BF', 'BFA', 1, 0);
+INSERT INTO `countries` VALUES(35, 'Burundi', 'BI', 'BDI', 1, 0);
+INSERT INTO `countries` VALUES(36, 'Cambodia', 'KH', 'KHM', 1, 0);
+INSERT INTO `countries` VALUES(37, 'Cameroon', 'CM', 'CMR', 1, 0);
+INSERT INTO `countries` VALUES(38, 'Canada', 'CA', 'CAN', 1, 0);
+INSERT INTO `countries` VALUES(39, 'Cape Verde', 'CV', 'CPV', 1, 0);
+INSERT INTO `countries` VALUES(40, 'Cayman Islands', 'KY', 'CYM', 1, 0);
+INSERT INTO `countries` VALUES(41, 'Central African Republic', 'CF', 'CAF', 1, 0);
+INSERT INTO `countries` VALUES(42, 'Chad', 'TD', 'TCD', 1, 0);
+INSERT INTO `countries` VALUES(43, 'Chile', 'CL', 'CHL', 1, 0);
+INSERT INTO `countries` VALUES(44, 'China', 'CN', 'CHN', 1, 0);
+INSERT INTO `countries` VALUES(45, 'Christmas Island', 'CX', 'CXR', 1, 0);
+INSERT INTO `countries` VALUES(46, 'Cocos (Keeling) Islands', 'CC', 'CCK', 1, 0);
+INSERT INTO `countries` VALUES(47, 'Colombia', 'CO', 'COL', 1, 0);
+INSERT INTO `countries` VALUES(48, 'Comoros', 'KM', 'COM', 1, 0);
+INSERT INTO `countries` VALUES(49, 'Congo', 'CG', 'COG', 1, 0);
+INSERT INTO `countries` VALUES(50, 'Cook Islands', 'CK', 'COK', 1, 0);
+INSERT INTO `countries` VALUES(51, 'Costa Rica', 'CR', 'CRI', 1, 0);
+INSERT INTO `countries` VALUES(52, 'Cote D''Ivoire', 'CI', 'CIV', 1, 0);
+INSERT INTO `countries` VALUES(53, 'Croatia', 'HR', 'HRV', 1, 0);
+INSERT INTO `countries` VALUES(54, 'Cuba', 'CU', 'CUB', 1, 0);
+INSERT INTO `countries` VALUES(55, 'Cyprus', 'CY', 'CYP', 1, 0);
+INSERT INTO `countries` VALUES(56, 'Czech Republic', 'CZ', 'CZE', 1, 0);
+INSERT INTO `countries` VALUES(57, 'Denmark', 'DK', 'DNK', 1, 0);
+INSERT INTO `countries` VALUES(58, 'Djibouti', 'DJ', 'DJI', 1, 0);
+INSERT INTO `countries` VALUES(59, 'Dominica', 'DM', 'DMA', 1, 0);
+INSERT INTO `countries` VALUES(60, 'Dominican Republic', 'DO', 'DOM', 1, 0);
+INSERT INTO `countries` VALUES(61, 'East Timor', 'TP', 'TMP', 1, 0);
+INSERT INTO `countries` VALUES(62, 'Ecuador', 'EC', 'ECU', 1, 0);
+INSERT INTO `countries` VALUES(63, 'Egypt', 'EG', 'EGY', 1, 0);
+INSERT INTO `countries` VALUES(64, 'El Salvador', 'SV', 'SLV', 1, 0);
+INSERT INTO `countries` VALUES(65, 'Equatorial Guinea', 'GQ', 'GNQ', 1, 0);
+INSERT INTO `countries` VALUES(66, 'Eritrea', 'ER', 'ERI', 1, 0);
+INSERT INTO `countries` VALUES(67, 'Estonia', 'EE', 'EST', 1, 0);
+INSERT INTO `countries` VALUES(68, 'Ethiopia', 'ET', 'ETH', 1, 0);
+INSERT INTO `countries` VALUES(69, 'Falkland Islands (Malvinas)', 'FK', 'FLK', 1, 0);
+INSERT INTO `countries` VALUES(70, 'Faroe Islands', 'FO', 'FRO', 1, 0);
+INSERT INTO `countries` VALUES(71, 'Fiji', 'FJ', 'FJI', 1, 0);
+INSERT INTO `countries` VALUES(72, 'Finland', 'FI', 'FIN', 1, 0);
+INSERT INTO `countries` VALUES(73, 'France', 'FR', 'FRA', 1, 0);
+INSERT INTO `countries` VALUES(74, 'France, Metropolitan', 'FX', 'FXX', 1, 0);
+INSERT INTO `countries` VALUES(75, 'French Guiana', 'GF', 'GUF', 1, 0);
+INSERT INTO `countries` VALUES(76, 'French Polynesia', 'PF', 'PYF', 1, 0);
+INSERT INTO `countries` VALUES(77, 'French Southern Territories', 'TF', 'ATF', 1, 0);
+INSERT INTO `countries` VALUES(78, 'Gabon', 'GA', 'GAB', 1, 0);
+INSERT INTO `countries` VALUES(79, 'Gambia', 'GM', 'GMB', 1, 0);
+INSERT INTO `countries` VALUES(80, 'Georgia', 'GE', 'GEO', 1, 0);
+INSERT INTO `countries` VALUES(81, 'Germany', 'DE', 'DEU', 5, 0);
+INSERT INTO `countries` VALUES(82, 'Ghana', 'GH', 'GHA', 1, 0);
+INSERT INTO `countries` VALUES(83, 'Gibraltar', 'GI', 'GIB', 1, 0);
+INSERT INTO `countries` VALUES(84, 'Greece', 'GR', 'GRC', 1, 0);
+INSERT INTO `countries` VALUES(85, 'Greenland', 'GL', 'GRL', 1, 0);
+INSERT INTO `countries` VALUES(86, 'Grenada', 'GD', 'GRD', 1, 0);
+INSERT INTO `countries` VALUES(87, 'Guadeloupe', 'GP', 'GLP', 1, 0);
+INSERT INTO `countries` VALUES(88, 'Guam', 'GU', 'GUM', 1, 0);
+INSERT INTO `countries` VALUES(89, 'Guatemala', 'GT', 'GTM', 1, 0);
+INSERT INTO `countries` VALUES(90, 'Guinea', 'GN', 'GIN', 1, 0);
+INSERT INTO `countries` VALUES(91, 'Guinea-bissau', 'GW', 'GNB', 1, 0);
+INSERT INTO `countries` VALUES(92, 'Guyana', 'GY', 'GUY', 1, 0);
+INSERT INTO `countries` VALUES(93, 'Haiti', 'HT', 'HTI', 1, 0);
+INSERT INTO `countries` VALUES(94, 'Heard and Mc Donald Islands', 'HM', 'HMD', 1, 0);
+INSERT INTO `countries` VALUES(95, 'Honduras', 'HN', 'HND', 1, 0);
+INSERT INTO `countries` VALUES(96, 'Hong Kong', 'HK', 'HKG', 1, 0);
+INSERT INTO `countries` VALUES(97, 'Hungary', 'HU', 'HUN', 1, 0);
+INSERT INTO `countries` VALUES(98, 'Iceland', 'IS', 'ISL', 1, 0);
+INSERT INTO `countries` VALUES(99, 'India', 'IN', 'IND', 1, 0);
+INSERT INTO `countries` VALUES(100, 'Indonesia', 'ID', 'IDN', 1, 0);
+INSERT INTO `countries` VALUES(101, 'Iran (Islamic Republic of)', 'IR', 'IRN', 1, 0);
+INSERT INTO `countries` VALUES(102, 'Iraq', 'IQ', 'IRQ', 1, 0);
+INSERT INTO `countries` VALUES(103, 'Ireland', 'IE', 'IRL', 1, 0);
+INSERT INTO `countries` VALUES(104, 'Israel', 'IL', 'ISR', 1, 0);
+INSERT INTO `countries` VALUES(105, 'Italy', 'IT', 'ITA', 1, 0);
+INSERT INTO `countries` VALUES(106, 'Jamaica', 'JM', 'JAM', 1, 0);
+INSERT INTO `countries` VALUES(107, 'Japan', 'JP', 'JPN', 1, 0);
+INSERT INTO `countries` VALUES(108, 'Jordan', 'JO', 'JOR', 1, 0);
+INSERT INTO `countries` VALUES(109, 'Kazakhstan', 'KZ', 'KAZ', 1, 0);
+INSERT INTO `countries` VALUES(110, 'Kenya', 'KE', 'KEN', 1, 0);
+INSERT INTO `countries` VALUES(111, 'Kiribati', 'KI', 'KIR', 1, 0);
+INSERT INTO `countries` VALUES(112, 'Korea, Democratic People''s Republic of', 'KP', 'PRK', 1, 0);
+INSERT INTO `countries` VALUES(113, 'Korea, Republic of', 'KR', 'KOR', 1, 0);
+INSERT INTO `countries` VALUES(114, 'Kuwait', 'KW', 'KWT', 1, 0);
+INSERT INTO `countries` VALUES(115, 'Kyrgyzstan', 'KG', 'KGZ', 1, 0);
+INSERT INTO `countries` VALUES(116, 'Lao People''s Democratic Republic', 'LA', 'LAO', 1, 0);
+INSERT INTO `countries` VALUES(117, 'Latvia', 'LV', 'LVA', 1, 0);
+INSERT INTO `countries` VALUES(118, 'Lebanon', 'LB', 'LBN', 1, 0);
+INSERT INTO `countries` VALUES(119, 'Lesotho', 'LS', 'LSO', 1, 0);
+INSERT INTO `countries` VALUES(120, 'Liberia', 'LR', 'LBR', 1, 0);
+INSERT INTO `countries` VALUES(121, 'Libyan Arab Jamahiriya', 'LY', 'LBY', 1, 0);
+INSERT INTO `countries` VALUES(122, 'Liechtenstein', 'LI', 'LIE', 1, 0);
+INSERT INTO `countries` VALUES(123, 'Lithuania', 'LT', 'LTU', 1, 0);
+INSERT INTO `countries` VALUES(124, 'Luxembourg', 'LU', 'LUX', 1, 0);
+INSERT INTO `countries` VALUES(125, 'Macau', 'MO', 'MAC', 1, 0);
+INSERT INTO `countries` VALUES(126, 'Macedonia, The Former Yugoslav Republic of', 'MK', 'MKD', 1, 0);
+INSERT INTO `countries` VALUES(127, 'Madagascar', 'MG', 'MDG', 1, 0);
+INSERT INTO `countries` VALUES(128, 'Malawi', 'MW', 'MWI', 1, 0);
+INSERT INTO `countries` VALUES(129, 'Malaysia', 'MY', 'MYS', 1, 0);
+INSERT INTO `countries` VALUES(130, 'Maldives', 'MV', 'MDV', 1, 0);
+INSERT INTO `countries` VALUES(131, 'Mali', 'ML', 'MLI', 1, 0);
+INSERT INTO `countries` VALUES(132, 'Malta', 'MT', 'MLT', 1, 0);
+INSERT INTO `countries` VALUES(133, 'Marshall Islands', 'MH', 'MHL', 1, 0);
+INSERT INTO `countries` VALUES(134, 'Martinique', 'MQ', 'MTQ', 1, 0);
+INSERT INTO `countries` VALUES(135, 'Mauritania', 'MR', 'MRT', 1, 0);
+INSERT INTO `countries` VALUES(136, 'Mauritius', 'MU', 'MUS', 1, 0);
+INSERT INTO `countries` VALUES(137, 'Mayotte', 'YT', 'MYT', 1, 0);
+INSERT INTO `countries` VALUES(138, 'Mexico', 'MX', 'MEX', 1, 0);
+INSERT INTO `countries` VALUES(139, 'Micronesia, Federated States of', 'FM', 'FSM', 1, 0);
+INSERT INTO `countries` VALUES(140, 'Moldova, Republic of', 'MD', 'MDA', 1, 0);
+INSERT INTO `countries` VALUES(141, 'Monaco', 'MC', 'MCO', 1, 0);
+INSERT INTO `countries` VALUES(142, 'Mongolia', 'MN', 'MNG', 1, 0);
+INSERT INTO `countries` VALUES(143, 'Montserrat', 'MS', 'MSR', 1, 0);
+INSERT INTO `countries` VALUES(144, 'Morocco', 'MA', 'MAR', 1, 0);
+INSERT INTO `countries` VALUES(145, 'Mozambique', 'MZ', 'MOZ', 1, 0);
+INSERT INTO `countries` VALUES(146, 'Myanmar', 'MM', 'MMR', 1, 0);
+INSERT INTO `countries` VALUES(147, 'Namibia', 'NA', 'NAM', 1, 0);
+INSERT INTO `countries` VALUES(148, 'Nauru', 'NR', 'NRU', 1, 0);
+INSERT INTO `countries` VALUES(149, 'Nepal', 'NP', 'NPL', 1, 0);
+INSERT INTO `countries` VALUES(150, 'Netherlands', 'NL', 'NLD', 1, 0);
+INSERT INTO `countries` VALUES(151, 'Netherlands Antilles', 'AN', 'ANT', 1, 0);
+INSERT INTO `countries` VALUES(152, 'New Caledonia', 'NC', 'NCL', 1, 0);
+INSERT INTO `countries` VALUES(153, 'New Zealand', 'NZ', 'NZL', 1, 0);
+INSERT INTO `countries` VALUES(154, 'Nicaragua', 'NI', 'NIC', 1, 0);
+INSERT INTO `countries` VALUES(155, 'Niger', 'NE', 'NER', 1, 0);
+INSERT INTO `countries` VALUES(156, 'Nigeria', 'NG', 'NGA', 1, 0);
+INSERT INTO `countries` VALUES(157, 'Niue', 'NU', 'NIU', 1, 0);
+INSERT INTO `countries` VALUES(158, 'Norfolk Island', 'NF', 'NFK', 1, 0);
+INSERT INTO `countries` VALUES(159, 'Northern Mariana Islands', 'MP', 'MNP', 1, 0);
+INSERT INTO `countries` VALUES(160, 'Norway', 'NO', 'NOR', 1, 0);
+INSERT INTO `countries` VALUES(161, 'Oman', 'OM', 'OMN', 1, 0);
+INSERT INTO `countries` VALUES(162, 'Pakistan', 'PK', 'PAK', 1, 0);
+INSERT INTO `countries` VALUES(163, 'Palau', 'PW', 'PLW', 1, 0);
+INSERT INTO `countries` VALUES(164, 'Panama', 'PA', 'PAN', 1, 0);
+INSERT INTO `countries` VALUES(165, 'Papua New Guinea', 'PG', 'PNG', 1, 0);
+INSERT INTO `countries` VALUES(166, 'Paraguay', 'PY', 'PRY', 1, 0);
+INSERT INTO `countries` VALUES(167, 'Peru', 'PE', 'PER', 1, 0);
+INSERT INTO `countries` VALUES(168, 'Philippines', 'PH', 'PHL', 1, 0);
+INSERT INTO `countries` VALUES(169, 'Pitcairn', 'PN', 'PCN', 1, 0);
+INSERT INTO `countries` VALUES(170, 'Poland', 'PL', 'POL', 1, 0);
+INSERT INTO `countries` VALUES(171, 'Portugal', 'PT', 'PRT', 1, 0);
+INSERT INTO `countries` VALUES(172, 'Puerto Rico', 'PR', 'PRI', 1, 0);
+INSERT INTO `countries` VALUES(173, 'Qatar', 'QA', 'QAT', 1, 0);
+INSERT INTO `countries` VALUES(174, 'Reunion', 'RE', 'REU', 1, 0);
+INSERT INTO `countries` VALUES(175, 'Romania', 'RO', 'ROM', 1, 0);
+INSERT INTO `countries` VALUES(176, 'Russian Federation', 'RU', 'RUS', 1, 0);
+INSERT INTO `countries` VALUES(177, 'Rwanda', 'RW', 'RWA', 1, 0);
+INSERT INTO `countries` VALUES(178, 'Saint Kitts and Nevis', 'KN', 'KNA', 1, 0);
+INSERT INTO `countries` VALUES(179, 'Saint Lucia', 'LC', 'LCA', 1, 0);
+INSERT INTO `countries` VALUES(180, 'Saint Vincent and the Grenadines', 'VC', 'VCT', 1, 0);
+INSERT INTO `countries` VALUES(181, 'Samoa', 'WS', 'WSM', 1, 0);
+INSERT INTO `countries` VALUES(182, 'San Marino', 'SM', 'SMR', 1, 0);
+INSERT INTO `countries` VALUES(183, 'Sao Tome and Principe', 'ST', 'STP', 1, 0);
+INSERT INTO `countries` VALUES(184, 'Saudi Arabia', 'SA', 'SAU', 1, 0);
+INSERT INTO `countries` VALUES(185, 'Senegal', 'SN', 'SEN', 1, 0);
+INSERT INTO `countries` VALUES(186, 'Seychelles', 'SC', 'SYC', 1, 0);
+INSERT INTO `countries` VALUES(187, 'Sierra Leone', 'SL', 'SLE', 1, 0);
+INSERT INTO `countries` VALUES(188, 'Singapore', 'SG', 'SGP', 4, 0);
+INSERT INTO `countries` VALUES(189, 'Slovakia (Slovak Republic)', 'SK', 'SVK', 1, 0);
+INSERT INTO `countries` VALUES(190, 'Slovenia', 'SI', 'SVN', 1, 0);
+INSERT INTO `countries` VALUES(191, 'Solomon Islands', 'SB', 'SLB', 1, 0);
+INSERT INTO `countries` VALUES(192, 'Somalia', 'SO', 'SOM', 1, 0);
+INSERT INTO `countries` VALUES(193, 'South Africa', 'ZA', 'ZAF', 1, 0);
+INSERT INTO `countries` VALUES(194, 'South Georgia and the South Sandwich Islands', 'GS', 'SGS', 1, 0);
+INSERT INTO `countries` VALUES(195, 'Spain', 'ES', 'ESP', 3, 0);
+INSERT INTO `countries` VALUES(196, 'Sri Lanka', 'LK', 'LKA', 1, 0);
+INSERT INTO `countries` VALUES(197, 'St. Helena', 'SH', 'SHN', 1, 0);
+INSERT INTO `countries` VALUES(198, 'St. Pierre and Miquelon', 'PM', 'SPM', 1, 0);
+INSERT INTO `countries` VALUES(199, 'Sudan', 'SD', 'SDN', 1, 0);
+INSERT INTO `countries` VALUES(200, 'Suriname', 'SR', 'SUR', 1, 0);
+INSERT INTO `countries` VALUES(201, 'Svalbard and Jan Mayen Islands', 'SJ', 'SJM', 1, 0);
+INSERT INTO `countries` VALUES(202, 'Swaziland', 'SZ', 'SWZ', 1, 0);
+INSERT INTO `countries` VALUES(203, 'Sweden', 'SE', 'SWE', 1, 0);
+INSERT INTO `countries` VALUES(204, 'Switzerland', 'CH', 'CHE', 1, 0);
+INSERT INTO `countries` VALUES(205, 'Syrian Arab Republic', 'SY', 'SYR', 1, 0);
+INSERT INTO `countries` VALUES(206, 'Taiwan', 'TW', 'TWN', 1, 0);
+INSERT INTO `countries` VALUES(207, 'Tajikistan', 'TJ', 'TJK', 1, 0);
+INSERT INTO `countries` VALUES(208, 'Tanzania, United Republic of', 'TZ', 'TZA', 1, 0);
+INSERT INTO `countries` VALUES(209, 'Thailand', 'TH', 'THA', 1, 0);
+INSERT INTO `countries` VALUES(210, 'Togo', 'TG', 'TGO', 1, 0);
+INSERT INTO `countries` VALUES(211, 'Tokelau', 'TK', 'TKL', 1, 0);
+INSERT INTO `countries` VALUES(212, 'Tonga', 'TO', 'TON', 1, 0);
+INSERT INTO `countries` VALUES(213, 'Trinidad and Tobago', 'TT', 'TTO', 1, 0);
+INSERT INTO `countries` VALUES(214, 'Tunisia', 'TN', 'TUN', 1, 0);
+INSERT INTO `countries` VALUES(215, 'Turkey', 'TR', 'TUR', 1, 0);
+INSERT INTO `countries` VALUES(216, 'Turkmenistan', 'TM', 'TKM', 1, 0);
+INSERT INTO `countries` VALUES(217, 'Turks and Caicos Islands', 'TC', 'TCA', 1, 0);
+INSERT INTO `countries` VALUES(218, 'Tuvalu', 'TV', 'TUV', 1, 0);
+INSERT INTO `countries` VALUES(219, 'Uganda', 'UG', 'UGA', 1, 0);
+INSERT INTO `countries` VALUES(220, 'Ukraine', 'UA', 'UKR', 1, 0);
+INSERT INTO `countries` VALUES(221, 'United Arab Emirates', 'AE', 'ARE', 1, 0);
+INSERT INTO `countries` VALUES(222, 'United Kingdom', 'GB', 'GBR', 6, 1);
+INSERT INTO `countries` VALUES(223, 'United States', 'US', 'USA', 2, 1);
+INSERT INTO `countries` VALUES(224, 'United States Minor Outlying Islands', 'UM', 'UMI', 1, 0);
+INSERT INTO `countries` VALUES(225, 'Uruguay', 'UY', 'URY', 1, 0);
+INSERT INTO `countries` VALUES(226, 'Uzbekistan', 'UZ', 'UZB', 1, 0);
+INSERT INTO `countries` VALUES(227, 'Vanuatu', 'VU', 'VUT', 1, 0);
+INSERT INTO `countries` VALUES(228, 'Vatican City State (Holy See)', 'VA', 'VAT', 1, 0);
+INSERT INTO `countries` VALUES(229, 'Venezuela', 'VE', 'VEN', 1, 0);
+INSERT INTO `countries` VALUES(230, 'Viet Nam', 'VN', 'VNM', 1, 0);
+INSERT INTO `countries` VALUES(231, 'Virgin Islands (British)', 'VG', 'VGB', 1, 0);
+INSERT INTO `countries` VALUES(232, 'Virgin Islands (U.S.)', 'VI', 'VIR', 1, 0);
+INSERT INTO `countries` VALUES(233, 'Wallis and Futuna Islands', 'WF', 'WLF', 1, 0);
+INSERT INTO `countries` VALUES(234, 'Western Sahara', 'EH', 'ESH', 1, 0);
+INSERT INTO `countries` VALUES(235, 'Yemen', 'YE', 'YEM', 1, 0);
+INSERT INTO `countries` VALUES(236, 'Yugoslavia', 'YU', 'YUG', 1, 0);
+INSERT INTO `countries` VALUES(237, 'Zaire', 'ZR', 'ZAR', 1, 0);
+INSERT INTO `countries` VALUES(238, 'Zambia', 'ZM', 'ZMB', 1, 0);
+INSERT INTO `countries` VALUES(239, 'Zimbabwe', 'ZW', 'ZWE', 1, 0);
+
 
 INSERT INTO currencies VALUES (1,'US Dollar','USD','$','','.',',','2','1.0000',now());
-INSERT INTO currencies VALUES (2,'Euro','EUR','','EUR','.',',','2','1.1036',now());
+INSERT INTO currencies VALUES (2,'Euro','EUR','','EUR','.',',','2','1.0000',now());
+INSERT INTO currencies VALUES (3,'UK Pound','GBP','£','','.',',','2','1.0000',now());
+
 
 INSERT INTO customers_groups VALUES (0,'Retail','1','0','','');
 INSERT INTO customers_groups VALUES (1,'Wholesale','0','0','','');

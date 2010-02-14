@@ -219,7 +219,9 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
             tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
 
             $order_products_id = tep_db_insert_id();
-
+// Added Bugfix 157            
+            $order_total_modules->update_credit_account($i);
+             
             $attributes_exist = '0';
             if (isset($order->products[$i]['attributes'])) {
               $attributes_exist = '1';
@@ -449,7 +451,7 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
         if(MOVE_TAX_TO_TOTAL_AMOUNT == 'True') {
 			///CCGV extras by Alexander Dimelow
 			 if (isset($order_total['ot_gv']) || isset($order_total['ot_coupon'])) {
-          $parameters['amount'] = number_format((($subtotal + $order->info['tax'] + $shipping) * $currencies->get_value($my_currency)) - $order_total['ot_gv'] - $order_total['ot_coupon'], $currencies->get_decimal_places($my_currency));
+          $parameters['amount'] = number_format((($subtotal + $order->info['tax']) * $currencies->get_value($my_currency)) - $order_total['ot_gv'] - $order_total['ot_coupon'], $currencies->get_decimal_places($my_currency));
 			 }else{
           $parameters['amount'] = number_format(($subtotal + $order->info['tax']) * $currencies->get_value($my_currency), $currencies->get_decimal_places($my_currency));
 			 }
@@ -605,7 +607,10 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
     }
 
     function before_process() {
-      global $cart;
+      global $cart, $order_total_modules; //mg - added $order_total_modules as fix for Bugfix 157
+      //global $cart;
+	  
+	   $order_total_modules->apply_credit();//ICW ADDED FOR CREDIT CLASS SYSTEM
 
       $cart->reset(true);
 
@@ -615,6 +620,9 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
       tep_session_unregister('shipping');
       tep_session_unregister('payment');
       tep_session_unregister('comments');
+      // Added Bugfix 157
+      if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');
+      $order_total_modules->clear_posts();
 
       tep_session_unregister('cart_PayPal_IPN_ID');
 

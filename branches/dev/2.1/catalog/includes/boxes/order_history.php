@@ -37,7 +37,7 @@ $Id: order_history.php 3 2006-05-27 04:59:07Z user $
       while ($products = tep_db_fetch_array($products_query)) {
         $boxContent .= '  <tr>' .
                                    '    <td class="infoBoxContents"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products['products_id']) . '">' . $products['products_name'] . '</a></td>' .
-                                   '    <td class="infoBoxContents" align="right" valign="top"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=cust_order&pid=' . $products['products_id']) . '">' . tep_image(DIR_WS_ICONS . 'cart.gif', ICON_CART) . '</a></td>' .
+                                   '    <td class="infoBoxContents" align="right" valign="top"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=cust_order&pid=' . $products['products_id']) . '">' . tep_image(DIR_WS_ICONS . 'cart.png', ICON_CART) . '</a></td>' .
                                    '  </tr>';
       }
       $boxContent .= '</table>';

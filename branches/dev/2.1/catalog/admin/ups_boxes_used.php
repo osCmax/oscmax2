@@ -220,7 +220,7 @@ function rowUBUOutEffect(object) {
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_CUSTOMER_ID; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_DATE; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_SHIPMENT_ID; ?></td>
-                <td class="dataTableHeadingContent" align="center"><input type="checkbox" name="batchFlag" id="batchFlag" onclick="flagCheckboxes(this);" /></td>
+                <td class="dataTableHeadingContent" align="center"><input type="checkbox" name="batchFlag" id="batchFlag" onClick="flagCheckboxes(this);" /></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
@@ -267,7 +267,7 @@ function rowUBUOutEffect(object) {
 ?>
               <tr>
                 <td colspan="4" align="right"><?php echo tep_image_submit('trash.png', IMAGE_BATCH_DELETE); ?></td>
-                <td align="center"><input type="checkbox" name="batchFlag" id="batchFlag" onclick="flagCheckboxes(this);" /></td>
+                <td align="center"><input type="checkbox" name="batchFlag" id="batchFlag" onClick="flagCheckboxes(this);" /></td>
                 <td>&#160;</td>
               </tr></form>
               <tr>

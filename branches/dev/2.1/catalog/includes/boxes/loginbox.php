@@ -53,8 +53,8 @@ if (!tep_session_is_registered('customer_id')) {
 	$boxContent = tep_draw_form('login', tep_href_link(FILENAME_LOGIN, 'action=process', 'SSL'));
 	$boxContent .= BOX_LOGINBOX_EMAIL . '<br>' . tep_draw_input_field('email_address', '', 'size="10" maxlength="100" style="width: ' . (BOX_WIDTH-30) . 'px"') . '<br>';
 	$boxContent .= BOX_LOGINBOX_PASSWORD . '<br>' . tep_draw_password_field('password', '', 'size="10" maxlength="40" style="width: ' . (BOX_WIDTH-30) . 'px"') . '<br>';
-	$boxContent .= tep_image_submit('button_login.gif', IMAGE_BUTTON_LOGIN);
-	$boxContent .= '<br></form>';
+	$boxContent .= '<table width="100%"><tr><td align="center">' . tep_image_submit('button_login.gif', IMAGE_BUTTON_LOGIN) . '</td></tr></table>';
+	$boxContent .= '</form>';
 	$boxContent .= '<a href="' . tep_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '" >' . BOX_LOGINBOX_FORGOT_PASSWORD . '</a>';
   $boxContent .= '<br>' . '<a href="' . tep_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL'). '">' . BOX_LOGINBOX_TEXT_NEW. '</a>';
 //  $boxContent .= '</td></tr></table>';

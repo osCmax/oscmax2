@@ -87,7 +87,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
     $female = ($account['customers_gender'] == 'f') ? true : false;
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_GENDER; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_GENDER; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only) {
@@ -108,7 +108,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
   }
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_FIRST_NAME; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_FIRST_NAME; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
@@ -125,7 +125,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 ?></td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_LAST_NAME; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_LAST_NAME; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
@@ -145,7 +145,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
   if (ACCOUNT_DOB == 'true') {
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_DATE_OF_BIRTH; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_DATE_OF_BIRTH; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only) {
@@ -165,7 +165,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
   }
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_EMAIL_ADDRESS; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_EMAIL_ADDRESS; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
@@ -200,7 +200,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_COMPANY; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_COMPANY; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only) {
@@ -231,7 +231,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_STREET_ADDRESS; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_STREET_ADDRESS; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
@@ -251,7 +251,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
   if (ACCOUNT_SUBURB == 'true') {
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_SUBURB; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_SUBURB; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only) {
@@ -271,7 +271,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
   }
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_POST_CODE; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_POST_CODE; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
@@ -288,7 +288,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 ?></td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_CITY; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_CITY; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
@@ -308,7 +308,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
   if (ACCOUNT_STATE == 'true') {
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_STATE; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_STATE; ?></td>
             <td class="main">&nbsp;
 <?php
     $state = sbs_get_zone_name($country, $zone_id);
@@ -338,7 +338,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
      }
 ?>
              <tr>
-               <td class="main">&nbsp;<?php echo ENTRY_COUNTRY; ?></td>
+               <td class="main" width="170">&nbsp;<?php echo ENTRY_COUNTRY; ?></td>
                <td class="main">&nbsp;
 <?php
       $account['entry_country_id'] = STORE_COUNTRY;
@@ -368,7 +368,7 @@ elseif
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
@@ -385,7 +385,7 @@ elseif
 ?></td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_FAX_NUMBER; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_FAX_NUMBER; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
@@ -409,7 +409,7 @@ elseif
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_NEWSLETTER; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_NEWSLETTER; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
@@ -434,7 +434,7 @@ elseif
       </tr>
     </table></td>
   </tr>
-<?php/*
+
 <?php
   if (!$is_read_only) {
 ?>
@@ -446,7 +446,7 @@ elseif
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_PASSWORD; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_PASSWORD; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($error) {
@@ -464,7 +464,7 @@ elseif
     if ( (!$error) || ($entry_password_error) ) {
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_PASSWORD_CONFIRMATION; ?></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_PASSWORD_CONFIRMATION; ?></td>
             <td class="main">&nbsp;
 <?php
       echo tep_draw_password_field('confirmation') . '&nbsp;' . ENTRY_PASSWORD_CONFIRMATION_TEXT;

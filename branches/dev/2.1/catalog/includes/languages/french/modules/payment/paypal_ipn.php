@@ -1,9 +1,9 @@
 <?php
 /*
-  $Id: paypal_ipn.php,v 1.1.2.2 2004/12/07 20:19:15 sparky Exp $
+  $Id: paypal_ipn.php,v 1.1.2.1 2005/06/12 00:04:29 Michael Sasek Exp $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
   Copyright (c) 2004 osCommerce
 

@@ -12,6 +12,7 @@ define('TEXT_COUPON_REDEEMED', 'Redeemed Coupons');
 define('REDEEM_DATE_LAST', 'Date Last Redeemed');
 define('TOP_BAR_TITLE', 'Statistics');
 define('HEADING_TITLE', 'Discount Coupons');
+define('HEADING_TITLE_PREVIEW', 'Discount Coupons Preview');
 define('HEADING_TITLE_STATUS', 'Status : ');
 define('TEXT_CUSTOMER', 'Customer:');
 define('TEXT_COUPON', 'Coupon Name');
@@ -86,6 +87,7 @@ define('COUPON_BUTTON_EMAIL_VOUCHER', 'Email Voucher');
 define('COUPON_BUTTON_EDIT_VOUCHER', 'Edit Voucher');
 define('COUPON_BUTTON_DELETE_VOUCHER', 'Delete Voucher');
 define('COUPON_BUTTON_VOUCHER_REPORT', 'Voucher Report');
+define('COUPON_BUTTON_PREVIEW', 'Preview Coupon');
 define('COUPON_STATUS', 'Status');
 define('COUPON_STATUS_HELP', 'Set to ' . IMAGE_ICON_STATUS_RED . ' to disable customers\' ability to use the coupon.');
 ?>

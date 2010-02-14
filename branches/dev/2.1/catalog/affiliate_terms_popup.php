@@ -26,7 +26,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
 <title><?php echo TITLE; ?></title>
-<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<link rel="stylesheet" type="text/css" href="<?php echo DIR_WS_TEMPLATES; ?>/stylesheet.css">
 </head>
 <body marginwidth="10" marginheight="10" topmargin="10" bottommargin="10" leftmargin="10" rightmargin="10">
       <tr>
@@ -48,7 +48,7 @@
         </table></td>
       </tr>
 
-<p class="smallText" align="right"><?php echo '<a href="javascript:window.close()">' . TEXT_CLOSE_WINDOW . '</a>'; ?></p>
+<p class="smallText" align="right"><?php echo '<a href="javascript:window.close()">Close Window [x]</a>'; ?></p>
 
 </body>
 </html>

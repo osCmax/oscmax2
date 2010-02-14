@@ -1,4 +1,3 @@
-<p><font face="Arial">
 <p><font face="arial, helvetica, sans-serif">To modify the content of this page, go to the admin panel and click on the <strong>Catalog </strong>link. Then click on the <strong>Define MainPage</strong> link. It will open a wysiwyg editor where you can easily add new content.<br />
 ------------------------------------------------------------<br />
 </font><font face="arial, helvetica, sans-serif">This is <strong><em><?php echo PROJECT_VERSION; ?></em></strong>, the power e-commerce shopping cart system. <br />

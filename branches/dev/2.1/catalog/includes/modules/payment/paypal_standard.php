@@ -395,7 +395,7 @@
     }
 
     function before_process() {
-      global $customer_id, $order, $order_totals, $sendto, $billto, $languages_id, $payment, $currencies, $cart, $cart_PayPal_Standard_ID;
+      global $customer_id, $order, $order_totals, $sendto, $billto, $languages_id, $payment, $currencies, $cart, $cart_PayPal_Standard_ID, $order_total_modules;
       global $$payment;
 
       $order_id = substr($cart_PayPal_Standard_ID, strpos($cart_PayPal_Standard_ID, '-')+1);
@@ -629,8 +629,8 @@
       tep_session_unregister('shipping');
       tep_session_unregister('payment');
       tep_session_unregister('comments');
-
-// Start - CREDIT CLASS Gift Voucher Contribution
+      // Added Bugfix 157
+      if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');
       if (isset($order_total_modules)) {
           $order_total_modules->clear_posts();
       }

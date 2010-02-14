@@ -1,0 +1,67 @@
+# $Id: .htaccess  1 2003/06/12 10:53:20 Michael Sasek$
+#
+# This is used with Apache WebServers
+#
+# For this to work, you must include the parameter 'Options' to
+# the AllowOverride configuration
+#
+# Example:
+#
+# <Directory "/usr/local/apache/htdocs">
+#   AllowOverride Options
+# </Directory>
+#
+# 'All' with also work. (This configuration is in the
+# apache/conf/httpd.conf file)
+
+# The following makes adjustments to the SSL protocol for Internet
+# Explorer browsers
+
+# BOF: Mod RC2A
+#<IfModule mod_setenvif.c>
+#  <IfDefine SSL>
+#    SetEnvIf User-Agent ".*MSIE.*" \
+#             nokeepalive ssl-unclean-shutdown \
+#             downgrade-1.0 force-response-1.0
+#  </IfDefine>
+#</IfModule>
+# EOF: Mod RC2A
+
+# If Search Engine Friendly URLs do not work, try enabling the
+# following Apache configuration parameter
+
+# AcceptPathInfo On
+
+# Fix certain PHP values
+# (commented out by default to prevent errors occuring on certain
+# servers)
+
+#<IfModule mod_php4.c>
+#  php_value session.use_trans_sid 0
+#  php_value register_globals 1
+#</IfModule>
+# BOF: MOD - Ultimate SEO URLs
+## SEO Url's .htaccess file
+## If you want to use the Apache Mod-Rewrite method for SEO URL's
+## NOTE: This requires that you are on an apache web server with mod_rewrite enabled.
+
+#<IfModule mod_rewrite.c>
+#Options +FollowSymLinks
+#RewriteEngine On
+
+# Change "catalog" to your catalog directory name:
+#RewriteBase /catalog/
+## If installed to the base home/root directory, uncomment the below code only:
+#RewriteBase /
+
+#RewriteRule ^(.*)-p-(.*).html$ product_info.php?products_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-c-(.*).html$ index.php?cPath=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-m-([0-9]+).html$ index.php?manufacturers_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-pi-([0-9]+).html$ popup_image.php?pID=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-t-([0-9]+).html$ articles.php?tPath=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-a-([0-9]+).html$ article_info.php?articles_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-pr-([0-9]+).html$ product_reviews.php?products_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-pri-([0-9]+).html$ product_reviews_info.php?products_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-i-([0-9]+).html$ information.php?info_id=$2&%{QUERY_STRING}
+#</ifModule>
+# EOF: MOD - Ultimate SEO URLs

@@ -128,7 +128,7 @@ define('BOX_CONFIGURATION_MOPICS', 'Dynamic MoPics');
 define('BOX_CONFIGURATION_PRINT', 'Printable Catalog');
 define('BOX_CONFIGURATION_SEO', 'SEO URLs');
 define('BOX_CONFIGURATION_WISHLIST', 'Wishlist Settings');
-define('BOX_CONFIGURATION_EDITOR', 'Order Edtior');
+define('BOX_CONFIGURATION_EDITOR', 'Order Editor');
 define('BOX_CONFIGURATION_SEO_VALIDATION', 'SEO URL Validation');
 // EOF: Added for super-friendly admin menu:
 
@@ -405,6 +405,7 @@ define('TEXT_DISPLAY_NUMBER_OF_TAX_CLASSES', 'Displaying <b>%d</b> to <b>%d</b> 
 define('TEXT_DISPLAY_NUMBER_OF_TAX_ZONES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> tax zones)');
 define('TEXT_DISPLAY_NUMBER_OF_TAX_RATES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> tax rates)');
 define('TEXT_DISPLAY_NUMBER_OF_ZONES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> zones)');
+define('TEXT_DISPLAY_NUMBER_OF_SHIPMENTS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> shipments)');
 
 //BOF: MOD - Catagories Discriptions
 define('TEXT_EDIT_CATEGORIES_HEADING_TITLE', 'Category Heading Title:');
@@ -458,7 +459,7 @@ define('IMAGE_ORDERS_SHIP', 'Ship Package');
 define('IMAGE_ORDERS_FEDEX_LABEL','View or Print FedEx Shipping Label');
 define('IMAGE_ORDERS_TRACK','Track FedEx Shipment');
 define('IMAGE_ORDERS_CANCEL_SHIPMENT','Cancel FedEx Shipment');
-define('BOX_SHIPPING_MANIFEST','Fedx Shipping Manifest');
+define('BOX_SHIPPING_MANIFEST','FedEx Shipping Manifest');
 // EOF: MOD - FedEx
 
 // BOF: PHONE ORDER

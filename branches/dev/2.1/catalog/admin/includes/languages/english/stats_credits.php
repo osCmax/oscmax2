@@ -10,9 +10,9 @@
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Aktuelles Kundenguthaben');
+define('HEADING_TITLE', 'Customer Credits Report');
 
-define('TABLE_HEADING_NUMBER', 'Nr.');
+define('TABLE_HEADING_NUMBER', '#');
 define('TABLE_HEADING_CUSTOMERS', 'Customer');
 define('TABLE_HEADING_TOTAL_PURCHASED', 'Credit');
 ?>

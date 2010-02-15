@@ -120,4 +120,11 @@ If a price is already inserted in the database, but the checkbox unchecked it wi
 define('TEXT_SPPC_WARNING', '<br /><strong>Make sure you uncheck the appropriate boxes again!</strong><br />');
 
 define('TEXT_CLICK_TO_ENLARGE', 'Click to enlarge');
+
+define('TAB1', 'Tab 1');
+define('TAB2', 'Tab 2');
+define('TAB3', 'Tab 3');
+define('TAB4', 'Tab 4');
+define('TAB5', 'Tab 5');
+define('TAB6', 'Tab 6');
 ?>

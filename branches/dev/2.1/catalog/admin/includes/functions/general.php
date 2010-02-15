@@ -640,6 +640,52 @@ function tep_selected_file($filename) {
     return $product['products_description'];
   }
 
+// BOF: Tabs by PGM
+
+  function tep_get_tab1($product_id, $language_id) {
+    $product_query = tep_db_query("select tab1 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab1'];
+  }
+
+  function tep_get_tab2($product_id, $language_id) {
+    $product_query = tep_db_query("select tab2 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab2'];
+  }
+
+  function tep_get_tab3($product_id, $language_id) {
+    $product_query = tep_db_query("select tab3 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab3'];
+  }
+
+  function tep_get_tab4($product_id, $language_id) {
+    $product_query = tep_db_query("select tab4 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab4'];
+  }
+
+  function tep_get_tab5($product_id, $language_id) {
+    $product_query = tep_db_query("select tab5 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab5'];
+  }
+
+  function tep_get_tab6($product_id, $language_id) {
+    $product_query = tep_db_query("select tab6 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab6'];
+  }
+
+// EOF: Tabs by PGM
+
   function tep_get_products_url($product_id, $language_id) {
     $product_query = tep_db_query("select products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
     $product = tep_db_fetch_array($product_query);
@@ -972,15 +1018,15 @@ function tep_selected_file($filename) {
     $string .= '<center>';
 
     for ($i=0; $i<sizeof($select_array); $i++) {
-	$current_key_value = current($key_values);
+        $current_key_value = current($key_values);
 
       $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
       $string .= '<br><input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
-	$string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
-	next($key_values);
-	$current_key_value = current($key_values);
-	$string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
-	next($key_values);
+        $string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
+        next($key_values);
+        $current_key_value = current($key_values);
+        $string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
+        next($key_values);
     }
     $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
 
@@ -992,15 +1038,15 @@ function tep_selected_file($filename) {
     $string .= '<center>';
 
     for ($i=0; $i<sizeof($select_array); $i++) {
-	$current_key_value = current($key_values);
+        $current_key_value = current($key_values);
 
       $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
       $string .= '<br><input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
-	$string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
-	next($key_values);
-	$current_key_value = current($key_values);
-	$string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
-	next($key_values);
+        $string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
+        next($key_values);
+        $current_key_value = current($key_values);
+        $string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
+        next($key_values);
     }
     $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
 
@@ -1155,9 +1201,9 @@ function tep_selected_file($filename) {
       tep_reset_cache_block('categories');
       tep_reset_cache_block('also_purchased');
     }
-	//++++ QT Pro: Begin Changed code
-	qtpro_doctor_amputate_all_from_product($product_id);
-	//++++ QT Pro: End Changed code
+        //++++ QT Pro: Begin Changed code
+        qtpro_doctor_amputate_all_from_product($product_id);
+        //++++ QT Pro: End Changed code
   }
 
   function tep_remove_order($order_id, $restock = false) {
@@ -1618,17 +1664,17 @@ require(DIR_WS_FUNCTIONS . 'qtpro_functions.php');
       $module = new $class;
       if ($module->check() > 0) {
         // If module enabled create array of titles
-      	$enabled_payment[] = array('id' => $module->title, 'text' => $module->title);
-		
+        $enabled_payment[] = array('id' => $module->title, 'text' => $module->title);
+                
       }
    }
  }
- 				
-    $enabled_payment[] = array('id' => 'Other', 'text' => 'Other');	
-		
-		//draw the dropdown menu for payment methods and default to the order value
-	  return tep_draw_pull_down_menu('configuration_value', $enabled_payment, '', ''); 
-		}
+                                
+    $enabled_payment[] = array('id' => 'Other', 'text' => 'Other');     
+                
+                //draw the dropdown menu for payment methods and default to the order value
+          return tep_draw_pull_down_menu('configuration_value', $enabled_payment, '', ''); 
+                }
 /////end payment method dropdown
 // EOF: MOD - Order Editor
 

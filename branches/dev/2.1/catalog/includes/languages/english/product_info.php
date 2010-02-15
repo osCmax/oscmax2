@@ -35,4 +35,11 @@ define('STOCK_LIST_IN_PI_TEXT_STOCK', 'Qty.');
 // BOF: MOD - Wishlist 3.5 
 define('PRODUCT_ADDED_TO_WISHLIST', 'Product has been successfully added to your wishlist');
 // EOF: MOD - Wishlist 3.5 
+define('TAB0', 'Description');
+define('TAB1', 'Tab 1');
+define('TAB2', 'Tab 2');
+define('TAB3', 'Tab 3');
+define('TAB4', 'Tab 4');
+define('TAB5', 'Tab 5');
+define('TAB6', 'Tab 6');
 ?>

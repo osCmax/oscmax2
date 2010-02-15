@@ -962,6 +962,12 @@ CREATE TABLE products_description (
   language_id int NOT NULL default '1',
   products_name varchar(64) NOT NULL,
   products_description text,
+  tab1 text,
+  tab2 text,
+  tab3 text,
+  tab4 text,
+  tab5 text,
+  tab6 text,
   products_url varchar(255) default NULL,
   products_viewed int(5) default '0',
   PRIMARY KEY (products_id,language_id),
@@ -1854,6 +1860,9 @@ INSERT INTO configuration values ('2102', 'Google Analytics Sub-Domain Setting',
 INSERT INTO configuration VALUES(596, 'Product Image Height', 'PRODUCT_IMAGE_HEIGHT', '', 'The main product image (thumbnail) in product information pages.', 4, 21, NULL, '2009-05-28 15:34:10', NULL, NULL);
 INSERT INTO configuration VALUES(597, 'Product Popup Image Width', 'POPOP_IMAGE_WIDTH', '', 'Limits the popup product image (enlarged) size in product information pages. Unused by default', 4, 22, NULL, '2009-05-28 15:34:10', NULL, NULL);
 INSERT INTO configuration VALUES(598, 'Product Popup Image Height', 'POPUP_IMAGE_HEIGHT', '', 'Limits the popup product image (enlarged) size in product information pages. Unused by default', 4, 23, NULL, '2009-05-28 15:34:10', NULL, NULL);
+
+#New v2.1 Entries
+INSERT INTO configuration VALUES (2500,'Use Tabs to display extra product information?','USE_PRODUCT_DESCRIPTION_TABS','True','Use tabs for product info?',8,20,NULL,now(),NULL,'tep_cfg_select_option(array(''true'', ''false''),');
 
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);

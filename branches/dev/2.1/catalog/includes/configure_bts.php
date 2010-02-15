@@ -92,7 +92,14 @@ function bts_select($template_type, $filename = '') {
     break;
 
     case 'javascript':
-      $path = '';
+       // Load different javascript files per page
+      if(is_file(DIR_WS_TEMPLATES . 'javascript/' . basename($filename, '.php') . '.js.php')) {
+        $path = DIR_WS_TEMPLATES . 'javascript/' . basename($filename, '.php') . '.js.php';
+      } elseif (is_file(DIR_WS_TEMPLATES_FALLBACK . 'javascript/' . basename($filename, '.php') . '.js.php')) {
+        $path = DIR_WS_TEMPLATES_FALLBACK . 'javascript/' . basename($filename, '.php') . '.js.php';
+      } else {
+        return (FALSE);
+      }
     break;
 
     case 'stylesheet':

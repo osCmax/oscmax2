@@ -48,10 +48,18 @@ $("a#showhelp").click(function() {
     $("#searchtabs").tabs();
     $("#tabs").tabs();
 
-    }); 
+    $("#descriptiontabs0").tabs();
+	$("#descriptiontabs1").tabs();
+	$("#descriptiontabs2").tabs();
+	$("#descriptiontabs3").tabs();
+	$("#descriptiontabs4").tabs();
+	$("#descriptiontabs5").tabs();
+
+	$("#languagetabs").tabs();
+
+}); 
 
 </script>
-
 <?php
 /*
 $Id: header.php 3 2006-05-27 04:59:07Z user $

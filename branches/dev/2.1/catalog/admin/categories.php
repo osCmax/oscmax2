@@ -20,7 +20,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
   $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
 // BOF instant update & image directory 
   require_once('includes/functions/instant_update.php');
-// EOF instant update & image directory	
+// EOF instant update & image directory 
 // Ultimate SEO URLs v2.1
 // If the action will affect the cache entries
     if ( preg_match("{(insert|update|setflag)}i", $action) ) include_once('includes/reset_seo_cache.php');
@@ -119,7 +119,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             $categories_image = '';
           } else {
         $categories_image = new upload('categories_image');
-		        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
+                        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
 
         if ($categories_image->parse() && $categories_image->save()) {
               tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
@@ -278,12 +278,12 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                                   'products_status' => tep_db_prepare_input($HTTP_POST_VARS['products_status']),
                                   'products_tax_class_id' => tep_db_prepare_input($HTTP_POST_VARS['products_tax_class_id']),
                                   'manufacturers_id' => (int)tep_db_prepare_input($HTTP_POST_VARS['manufacturers_id']));
-		//++++ QT Pro: Begin Added code
-			if($product_investigation['has_tracked_options'] or $product_investigation['stock_entries_count'] > 0){
-				//Do not modify the stock from this page if the product has database entries or has tracked options
-				unset($sql_data_array['products_quantity']);
-			}
-		//++++ QT Pro: End Added code
+                //++++ QT Pro: Begin Added code
+                        if($product_investigation['has_tracked_options'] or $product_investigation['stock_entries_count'] > 0){
+                                //Do not modify the stock from this page if the product has database entries or has tracked options
+                                unset($sql_data_array['products_quantity']);
+                        }
+                //++++ QT Pro: End Added code
 
           if (isset($HTTP_POST_VARS['products_image']) && tep_not_null($HTTP_POST_VARS['products_image']) && ($HTTP_POST_VARS['products_image'] != 'none')) {
             $sql_data_array['products_image'] = tep_db_prepare_input($HTTP_POST_VARS['products_image']);
@@ -344,6 +344,14 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
             $sql_data_array = array('products_name' => tep_db_prepare_input($HTTP_POST_VARS['products_name'][$language_id]),
                                     'products_description' => tep_db_prepare_input($HTTP_POST_VARS['products_description'][$language_id]),
+// BOF: Tabs by PGM				   
+				    'tab1' => tep_db_prepare_input($HTTP_POST_VARS['tab1'][$language_id]),
+				    'tab2' => tep_db_prepare_input($HTTP_POST_VARS['tab2'][$language_id]),
+  				    'tab3' => tep_db_prepare_input($HTTP_POST_VARS['tab3'][$language_id]),
+				    'tab4' => tep_db_prepare_input($HTTP_POST_VARS['tab4'][$language_id]),
+ 				    'tab5' => tep_db_prepare_input($HTTP_POST_VARS['tab5'][$language_id]),
+				    'tab6' => tep_db_prepare_input($HTTP_POST_VARS['tab6'][$language_id]),
+// EOF: Tabs by PGM
                                     'products_url' => tep_db_prepare_input($HTTP_POST_VARS['products_url'][$language_id]));
 
             if ($action == 'insert_product') {
@@ -393,9 +401,13 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "')");  
             $dup_products_id = tep_db_insert_id();
 
-            $description_query = tep_db_query("select language_id, products_name, products_description, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
+// Tabs by PGM LINE EDIT
+            $description_query = tep_db_query("select language_id, products_name, products_description, tab1, tab2, tab3, tab4, tab5, tab6, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
+//          $description_query = tep_db_query("select language_id, products_name, products_description, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
             while ($description = tep_db_fetch_array($description_query)) {
-              tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
+// Tabs by PGM LINE EDIT
+              tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, tab1, tab2, tab3, tab4, tab5, tab6, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['tab1']) . "', '" . tep_db_input($description['tab2']) . "', '" . tep_db_input($description['tab3']) . "', '" . tep_db_input($description['tab4']) . "', '" . tep_db_input($description['tab5']) . "', '" . tep_db_input($description['tab6']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
+//	      tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
             }
 
             tep_db_query("insert into " . TABLE_PRODUCTS_TO_CATEGORIES . " (products_id, categories_id) values ('" . (int)$dup_products_id . "', '" . (int)$categories_id . "')");
@@ -428,7 +440,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
   }
   //++++ QT Pro: Begin Changed code
   if($product_investigation['any_problems']){
-  	$messageStack->add('<b>Warning: </b>'. qtpro_doctor_formulate_product_investigation($product_investigation, 'short_suggestion') ,'warning');
+        $messageStack->add('<b>Warning: </b>'. qtpro_doctor_formulate_product_investigation($product_investigation, 'short_suggestion') ,'warning');
   }
   //++++ QT Pro: End Changed code
 ?>
@@ -447,9 +459,9 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 <?php require_once( 'attributeManager/includes/attributeManagerHeader.inc.php' )?>
 <!-- AJAX Attribute Manager  end -->
 <!--// SLIMBOX2 -->
-	<link rel="stylesheet" href="../slimbox2/slimbox2.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="../slimbox2/slimbox2.css" type="text/css" media="screen">
     <script type="text/javascript" src="../slimbox2/jquery.js"></script>
-	<script type="text/javascript" src="../slimbox2/slimbox2.js"></script>
+        <script type="text/javascript" src="../slimbox2/slimbox2.js"></script>
 <!--// SLIMBOX2 -->
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="goOnLoad();">
@@ -544,15 +556,15 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                 <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
 // Line Changed - MOD: Ajustable Editor Window
                   // BOF: CKeditor
-		  //echo tep_draw_fckeditor ('categories_description[' . $languages[$i]['id'] . ']', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, (isset($categories_description[$languages[$i]['id']]) ? stripslashes($categories_description[$languages[$i]['id']]) : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
+                  //echo tep_draw_fckeditor ('categories_description[' . $languages[$i]['id'] . ']', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, (isset($categories_description[$languages[$i]['id']]) ? stripslashes($categories_description[$languages[$i]['id']]) : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
                            echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','soft','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id'])),'id = category_description[' . $languages[$i]['id'] . '] class="ckeditor"') . '</td>';
-		  } else { echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','soft','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
+                  } else { echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','soft','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
                 } // EOF: CKeditor
                 ?>
-		
-		
-		
-		
+                
+                
+                
+                
               </tr>
             </table></td>
           </tr>
@@ -707,6 +719,14 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 // EOF: MOD  new_category / edit_category (when ALLOW_CATEGORY_DESCRIPTIONS is 'true') 
     $parameters = array('products_name' => '',
                        'products_description' => '',
+// BOF: Tabs by PGM
+                       'tab1' => '',
+                       'tab2' => '',
+                       'tab3' => '',
+                       'tab4' => '',
+                       'tab5' => '',
+                       'tab6' => '',
+// EOF: Tabs by PGM
                        'products_url' => '',
                        'products_id' => '',
                        'products_quantity' => '',
@@ -729,7 +749,9 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
     if (isset($HTTP_GET_VARS['pID']) && empty($HTTP_POST_VARS)) {
 //LINE MODED: Added "p.products_ship_price"
-      $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+//    $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+//LINE MODED: Tabs by PGM      
+      $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
       $product = tep_db_fetch_array($product_query);
 
       $pInfo->objectInfo($product);
@@ -737,6 +759,14 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
       $pInfo->objectInfo($HTTP_POST_VARS);
       $products_name = $HTTP_POST_VARS['products_name'];
       $products_description = $HTTP_POST_VARS['products_description'];
+// BOF: Tabs by PGM
+      $tab1 = $HTTP_POST_VARS['tab1'];
+      $tab2 = $HTTP_POST_VARS['tab2'];
+      $tab3 = $HTTP_POST_VARS['tab3'];
+      $tab4 = $HTTP_POST_VARS['tab4'];
+      $tab5 = $HTTP_POST_VARS['tab5'];
+      $tab6 = $HTTP_POST_VARS['tab6'];
+// EOF: Tabs by PGM
       $products_url = $HTTP_POST_VARS['products_url'];
     }
 
@@ -935,14 +965,19 @@ print (TEXT_SPPC_WARNING);
 <!-- EOF: MOD - Separate Pricing Per Customer  -->
           <!-- AJAX Attribute Manager  -->
           <tr>
-          	<td colspan="2"><?php require_once( 'attributeManager/includes/attributeManagerPlaceHolder.inc.php' )?></td>
+                <td colspan="2"><?php require_once( 'attributeManager/includes/attributeManagerPlaceHolder.inc.php' )?></td>
           </tr>
           <!-- AJAX Attribute Manager end -->
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+
 <?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+// BOF: Tabs by PGM
+if(USE_PRODUCT_DESCRIPTION_TABS != 'True') { 
+// EOF: Tabs by PGM
+
+	for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
 ?>
           <tr>
             <td class="main" valign="top"><?php if ($i == 0) echo TEXT_PRODUCTS_DESCRIPTION; ?></td>
@@ -953,7 +988,7 @@ print (TEXT_SPPC_WARNING);
 /*              <td class="main"><?php echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($products_description[$languages[$i]['id']]) ? $products_description[$languages[$i]['id']] : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))); ?></td> */?>
                 <td class="main"><?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
       // BOF: MOD CKeditor
-      echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '10', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])),'id = products_description[' . $languages[$i]['id'] . '] class="ckeditor"');	
+      echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '10', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])),'id = products_description[' . $languages[$i]['id'] . '] class="ckeditor"');    
       //echo tep_draw_fckeditor ('products_description[' . $languages[$i]['id'] . ']', '550', '300', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))) . '</td>';
       // EOF: MOD CKeditor
 
@@ -968,25 +1003,32 @@ print (TEXT_SPPC_WARNING);
 <?php
     }
 ?>
+
+<?php
+// BOF: Tabs by PGM
+} else { include ('includes/modules/product_tabs.php'); } 
+// EOF: Tabs by PGM
+?>
+
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_QUANTITY; ?></td>
              <?php //++++ QT Pro: Begin Changed code
-			if($product_investigation['has_tracked_options'] or $product_investigation['stock_entries_count'] > 0)
-			{
-		  	?>
-			<td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;<a href="' . tep_href_link("stock.php", 'product_id=' . $pInfo->products_id) . ' " target="_blank">' . tep_image_button('button_stock.gif', "Stock") . '</a>'?></td>
-			<?php 
-			
-			}else{
-			?>
-			<td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_quantity', $pInfo->products_quantity); ?></td>
-			<?php 
-			}
-			//++++ QT Pro: End Changed code
-		  	?>
+                        if($product_investigation['has_tracked_options'] or $product_investigation['stock_entries_count'] > 0)
+                        {
+                        ?>
+                        <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;<a href="' . tep_href_link("stock.php", 'product_id=' . $pInfo->products_id) . ' " target="_blank">' . tep_image_button('button_stock.gif', "Stock") . '</a>'?></td>
+                        <?php 
+                        
+                        }else{
+                        ?>
+                        <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_quantity', $pInfo->products_quantity); ?></td>
+                        <?php 
+                        }
+                        //++++ QT Pro: End Changed code
+                        ?>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '15'); ?></td>
@@ -995,22 +1037,22 @@ print (TEXT_SPPC_WARNING);
 <!-- image directory -->
           <tr>
             <td class="main" bgcolor="#DDDDDD"><?php echo TEXT_PRODUCTS_IMAGE_DIRECTORY; ?></td>
-						<?php // place allowed sub-dirs in array, non-recursive
-						$dir_array = array();
-						if ($handle = opendir($root_images_dir)) {
-								while (false !== ($file = readdir($handle))) {
-								if ($file != "." && $file != "..") {
-										if (is_dir($root_images_dir.$file) && !in_array($file,$exclude_folders)) $dir_array[] = preg_replace("/\/\//si", "/", $file);
-								}
-						}
-						closedir($handle);
-						sort($dir_array);
-						} else { die("<center><br><br><b> " . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_1 . " (" . $root_images_dir . ") " . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_2 . "</b></center><br><br>");}
- 					 $drop_array[0] = array('id' => '', 'text' => TEXT_PRODUCTS_IMAGE_ROOT_DIRECTORY);
+                                                <?php // place allowed sub-dirs in array, non-recursive
+                                                $dir_array = array();
+                                                if ($handle = opendir($root_images_dir)) {
+                                                                while (false !== ($file = readdir($handle))) {
+                                                                if ($file != "." && $file != "..") {
+                                                                                if (is_dir($root_images_dir.$file) && !in_array($file,$exclude_folders)) $dir_array[] = preg_replace("/\/\//si", "/", $file);
+                                                                }
+                                                }
+                                                closedir($handle);
+                                                sort($dir_array);
+                                                } else { die("<center><br><br><b> " . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_1 . " (" . $root_images_dir . ") " . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_2 . "</b></center><br><br>");}
+                                         $drop_array[0] = array('id' => '', 'text' => TEXT_PRODUCTS_IMAGE_ROOT_DIRECTORY);
 
-					 foreach($dir_array as $img_dir) {
-					   $drop_array[] = array('id' => $img_dir, 'text' => $img_dir);
-					 }
+                                         foreach($dir_array as $img_dir) {
+                                           $drop_array[] = array('id' => $img_dir, 'text' => $img_dir);
+                                         }
  ?>
             <td class="main" bgcolor="#DDDDDD"><?php echo tep_draw_separator('pixel_trans.gif', '25', '15') . tep_draw_pull_down_menu('directory', $drop_array) . tep_draw_separator('pixel_trans.gif', '25', '15') . TEXT_PRODUCTS_IMAGE_NEW_FOLDER . tep_draw_separator('pixel_trans.gif', '20', '15') . tep_draw_input_field('new_directory'); ?></td>
           </tr>
@@ -1067,10 +1109,21 @@ print (TEXT_SPPC_WARNING);
       $pInfo = new objectInfo($HTTP_POST_VARS);
       $products_name = $HTTP_POST_VARS['products_name'];
       $products_description = $HTTP_POST_VARS['products_description'];
+// BOF: Tabs by PGM
+      $tab1 = $HTTP_POST_VARS['tab1'];
+      $tab2 = $HTTP_POST_VARS['tab2'];
+      $tab3 = $HTTP_POST_VARS['tab3'];
+      $tab4 = $HTTP_POST_VARS['tab4'];
+      $tab5 = $HTTP_POST_VARS['tab5'];
+      $tab6 = $HTTP_POST_VARS['tab6'];
+// EOF: Tabs by PGM
       $products_url = $HTTP_POST_VARS['products_url'];
     } else {
 // LINE CHANGED: Added p.products_shipped_price and dimensions for upsxml
-      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "'");
+//    $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "'");
+// LINE MODED: Tabs by PGM
+      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "'");
+
       $product = tep_db_fetch_array($product_query);
 
       $pInfo = new objectInfo($product);
@@ -1086,10 +1139,26 @@ print (TEXT_SPPC_WARNING);
       if (isset($HTTP_GET_VARS['read']) && ($HTTP_GET_VARS['read'] == 'only')) {
         $pInfo->products_name = tep_get_products_name($pInfo->products_id, $languages[$i]['id']);
         $pInfo->products_description = tep_get_products_description($pInfo->products_id, $languages[$i]['id']);
+// BOF: Tabs by PGM
+        $pInfo->tab1 = tep_get_tab1($pInfo->products_id, $languages[$i]['id']);
+        $pInfo->tab2 = tep_get_tab2($pInfo->products_id, $languages[$i]['id']);
+        $pInfo->tab3 = tep_get_tab3($pInfo->products_id, $languages[$i]['id']);
+        $pInfo->tab4 = tep_get_tab4($pInfo->products_id, $languages[$i]['id']);
+        $pInfo->tab5 = tep_get_tab5($pInfo->products_id, $languages[$i]['id']);
+        $pInfo->tab6 = tep_get_tab6($pInfo->products_id, $languages[$i]['id']);
+// EOF: Tabs by PGM
         $pInfo->products_url = tep_get_products_url($pInfo->products_id, $languages[$i]['id']);
       } else {
         $pInfo->products_name = tep_db_prepare_input($products_name[$languages[$i]['id']]);
         $pInfo->products_description = tep_db_prepare_input($products_description[$languages[$i]['id']]);
+// BOF: Tabs by PGM
+        $pInfo->tab1 = tep_db_prepare_input($tab1[$languages[$i]['id']]);
+        $pInfo->tab2 = tep_db_prepare_input($tab2[$languages[$i]['id']]);
+        $pInfo->tab3 = tep_db_prepare_input($tab3[$languages[$i]['id']]);
+        $pInfo->tab4 = tep_db_prepare_input($tab4[$languages[$i]['id']]);
+        $pInfo->tab5 = tep_db_prepare_input($tab5[$languages[$i]['id']]);
+        $pInfo->tab6 = tep_db_prepare_input($tab6[$languages[$i]['id']]);
+// EOF: Tabs by PGM
         $pInfo->products_url = tep_db_prepare_input($products_url[$languages[$i]['id']]);
       }
 ?>
@@ -1110,7 +1179,7 @@ print (TEXT_SPPC_WARNING);
                         <?php echo $pInfo->products_description; ?>
         </td>
         <td width="25%">
-		<?php echo '<a href="' . $html_images_dir . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image($html_thumbs . $products_image_name, $product_info['products_name'], PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4" align="right"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?> 
+                <?php echo '<a href="' . $html_images_dir . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image($html_thumbs . $products_image_name, $product_info['products_name'], PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4" align="right"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?> 
         </td>
       </tr>
 <?php
@@ -1192,6 +1261,14 @@ print (TEXT_SPPC_WARNING);
       for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
         echo tep_draw_hidden_field('products_name[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($products_name[$languages[$i]['id']])));
         echo tep_draw_hidden_field('products_description[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($products_description[$languages[$i]['id']])));
+// BOF: Tabs by PGM
+        echo tep_draw_hidden_field('tab1[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab1[$languages[$i]['id']])));
+        echo tep_draw_hidden_field('tab2[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab2[$languages[$i]['id']])));
+        echo tep_draw_hidden_field('tab3[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab3[$languages[$i]['id']])));
+        echo tep_draw_hidden_field('tab4[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab4[$languages[$i]['id']])));
+        echo tep_draw_hidden_field('tab5[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab5[$languages[$i]['id']])));
+        echo tep_draw_hidden_field('tab6[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab6[$languages[$i]['id']])));
+// EOF: Tabs by PGM
         echo tep_draw_hidden_field('products_url[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($products_url[$languages[$i]['id']])));
       }
       echo tep_draw_hidden_field('products_image', stripslashes($products_image_name));

@@ -473,4 +473,9 @@ define('BOX_CUSTOMERS_EXPORT', 'Export Customers');
 // BOF: Customers with purchases report
 define('BOX_REPORTS_STATS_REGISTER_CUSTOMER_NO_PURCHASE', 'No purchases report');
 // EOF: Customers with purchases report
+
+//BOF Quicker Product Edit
+define('IMAGE_ICON_EDIT', 'Quick Edit');
+// EOF Quicker Product Edit
+
 ?>

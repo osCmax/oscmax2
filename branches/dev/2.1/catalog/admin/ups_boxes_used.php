@@ -140,7 +140,7 @@ function rowUBUOutEffect(object) {
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
             <td class="pageHeading" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_UPS_BOXES_USED, tep_get_all_get_params(array('action', 'chooseID', 'inputID', 'cID', 'ubuID')) . (isset($ubuID) ? 'ubuID=' . $ubuID . '': '') . (isset($cID) ? '&cID=' . $cID . '': '')) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
           </tr>
         </table></td>
@@ -202,7 +202,7 @@ function rowUBUOutEffect(object) {
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
             <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr><?php echo tep_draw_form('shipments', FILENAME_UPS_BOXES_USED, '', 'get'); ?>
                 <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_pull_down_menu('chooseID', $search_id_array) . ' ' . tep_draw_input_field('inputID', '', 'size="12"') . tep_draw_hidden_field('action', 'details'); ?></td>

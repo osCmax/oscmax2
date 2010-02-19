@@ -83,7 +83,7 @@ $Id: define_shipping.php 14 2006-07-28 17:42:07Z user $
 <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
 <!-- CKeditor End -->
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="HTMLArea.replaceAll(config);">
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="HTMLArea.replaceAll(config);">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -102,7 +102,7 @@ $Id: define_shipping.php 14 2006-07-28 17:42:07Z user $
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr><?php echo tep_draw_form('lng', FILENAME_DEFINE_SHIPPING, '', 'get'); ?>
             <td class="pageHeading"><?php echo BOX_CATALOG_DEFINE_SHIPPING; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', '1', HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
             <td class="pageHeading" align="right"><?php echo tep_draw_pull_down_menu('lngdir', $languages_array, '', 'onChange="this.form.submit();"'); ?></td>
           </form></tr>
         </table></td>

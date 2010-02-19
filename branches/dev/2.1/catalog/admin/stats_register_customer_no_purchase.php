@@ -67,7 +67,7 @@
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo "Customer with no purchases from " . $date1 . " to ".$date2; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
 		   <tr>
             <form method="GET" action=" <?php echo basename($_SERVER['PHP_SELF']) . '?date1=' . $date1.'&date2='.$date2; ?>" name="dailyreportform">
@@ -124,7 +124,7 @@
     }
 ?>
               
-              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<?php echo tep_href_link(FILENAME_CUSTOMERS, 'search='. $customers['customers_id'], 'NONSSL'); ?>'">
+              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="document.location.href='<?php echo tep_href_link(FILENAME_CUSTOMERS, 'search='. $customers['customers_id'], 'NONSSL'); ?>'">
 
                 <td class="dataTableContent"><?php echo $rows; ?>.</td>
                 <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS, 'search=' . tep_customers_lname($customers['customers_id']), 'NONSSL') . '">' . tep_customers_name($customers['customers_id']) . '</a>'; ?></td>

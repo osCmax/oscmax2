@@ -179,7 +179,7 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
             <!-- PWA BOF -->
             <td class="pageHeading"><?php echo HEADING_TITLE . (($order->customer['is_dummy_account'])? ' <b>no account!</b>':''); ?></td>
             <!-- PWA EOF -->
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
 <?php
 // BOF: MOD - PayPal IPN
     if ($order->info['payment_method'] == 'paypal'  && isset($HTTP_GET_VARS['refer']) && $HTTP_GET_VARS['refer'] == 'ipn'){
@@ -438,7 +438,7 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
             <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr><?php echo tep_draw_form('orders', FILENAME_ORDERS, '', 'get'); ?>
     <!-- //BOF: Orders Search by customer info 

@@ -78,7 +78,7 @@ if ($debug) {
 							echo ', ' . ORDER_NUMBER . $order;
 							}
 						?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
             <td class="pageHeading" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('action'))) . 'oID=' . $order . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
           </tr>
         </table></td>

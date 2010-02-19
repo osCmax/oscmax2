@@ -648,7 +648,7 @@ function validate() {
 							echo ERROR_NO_ORDER_SPECIFIED;
 							}
 						?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
             <td class="pageHeading" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS, 'oID=' . $order) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
             <?php echo $order_item_html;?>
 
@@ -788,7 +788,7 @@ function validate() {
 							echo ERROR_NO_ORDER_SPECIFIED;
 							}
 						?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
             <td class="pageHeading" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS, 'oID=' . $order) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
             <?php echo $order_item_html;?>
           </tr>

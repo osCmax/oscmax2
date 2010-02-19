@@ -68,7 +68,7 @@ class attributeManagerConfig {
         /**
          * Use More Product Weight plugin? (http://addons.oscommerce.com/info/2706) (added by RusNN)
          */
-        $this->add('AM_USE_MPW', false);
+        $this->add('AM_USE_MPW', true);
         
 		/**
 		 * Sort order tables

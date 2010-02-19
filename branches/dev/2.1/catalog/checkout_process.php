@@ -268,20 +268,22 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
       $attributes_exist = '1';
       for ($j=0, $n2=sizeof($order->products[$i]['attributes']); $j<$n2; $j++) {
         if (DOWNLOAD_ENABLED == 'true') {
-          $attributes_query = "select popt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix, pad.products_attributes_maxdays, pad.products_attributes_maxcount , pad.products_attributes_filename
-                               from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa
+//Line Modded for More Product Weight - pgm
+          $attributes_query = "select popt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix, pa.options_values_weight, pa.weight_prefix, pad.products_attributes_maxdays, pad.products_attributes_maxcount , pad.products_attributes_filename 
+                               from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa 
                                left join " . TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD . " pad
                                 on pa.products_attributes_id=pad.products_attributes_id
-                               where pa.products_id = '" . $order->products[$i]['id'] . "'
-                                and pa.options_id = '" . $order->products[$i]['attributes'][$j]['option_id'] . "'
-                                and pa.options_id = popt.products_options_id
-                                and pa.options_values_id = '" . $order->products[$i]['attributes'][$j]['value_id'] . "'
-                                and pa.options_values_id = poval.products_options_values_id
-                                and popt.language_id = '" . $languages_id . "'
+                               where pa.products_id = '" . $order->products[$i]['id'] . "' 
+                                and pa.options_id = '" . $order->products[$i]['attributes'][$j]['option_id'] . "' 
+                                and pa.options_id = popt.products_options_id 
+                                and pa.options_values_id = '" . $order->products[$i]['attributes'][$j]['value_id'] . "' 
+                                and pa.options_values_id = poval.products_options_values_id 
+                                and popt.language_id = '" . $languages_id . "' 
                                 and poval.language_id = '" . $languages_id . "'";
           $attributes = tep_db_query($attributes_query);
         } else {
-          $attributes = tep_db_query("select popt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . $order->products[$i]['id'] . "' and pa.options_id = '" . $order->products[$i]['attributes'][$j]['option_id'] . "' and pa.options_id = popt.products_options_id and pa.options_values_id = '" . $order->products[$i]['attributes'][$j]['value_id'] . "' and pa.options_values_id = poval.products_options_values_id and popt.language_id = '" . $languages_id . "' and poval.language_id = '" . $languages_id . "'");
+//Line Modded for More Product Weight - pgm
+          $attributes = tep_db_query("select popt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix, pa.options_values_weight, pa.weight_prefix from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . $order->products[$i]['id'] . "' and pa.options_id = '" . $order->products[$i]['attributes'][$j]['option_id'] . "' and pa.options_id = popt.products_options_id and pa.options_values_id = '" . $order->products[$i]['attributes'][$j]['value_id'] . "' and pa.options_values_id = poval.products_options_values_id and popt.language_id = '" . $languages_id . "' and poval.language_id = '" . $languages_id . "'");
         }
         $attributes_values = tep_db_fetch_array($attributes);
 
@@ -291,7 +293,11 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 //                              'products_options_values' => $attributes_values['products_options_values_name'],
                                 'products_options_values' => $order->products[$i]['attributes'][$j]['value'],
                                 'options_values_price' => $attributes_values['options_values_price'],
-                                'price_prefix' => $attributes_values['price_prefix']);
+// START: More Product Weight
+                                'price_prefix' => $attributes_values['price_prefix'],
+                                'options_values_weight' => $attributes_values['options_values_weight'], 
+                                'weight_prefix' => $attributes_values['weight_prefix']);
+// END: More Product Weight
         tep_db_perform(TABLE_ORDERS_PRODUCTS_ATTRIBUTES, $sql_data_array);
 
         if ((DOWNLOAD_ENABLED == 'true') && isset($attributes_values['products_attributes_filename']) && tep_not_null($attributes_values['products_attributes_filename'])) {

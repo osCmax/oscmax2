@@ -58,10 +58,16 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
         $values_id = tep_db_prepare_input($HTTP_POST_VARS['values_id']);
         $value_price = tep_db_prepare_input($HTTP_POST_VARS['value_price']);
         $price_prefix = tep_db_prepare_input($HTTP_POST_VARS['price_prefix']);
+// START: More Product Weight
+        $value_weight = tep_db_prepare_input($HTTP_POST_VARS['value_weight']);
+        $price_prefix = tep_db_prepare_input($HTTP_POST_VARS['weight_prefix']);
 
-        tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values (null, '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . (float)tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "')");
+        // tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values (null, '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "')");
+        tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values (null, '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . (float)tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "', '" . tep_db_input($value_weight) . "', '" . tep_db_input($weight_prefix) . "')");
+        // END: More Product Weight
 
         if (DOWNLOAD_ENABLED == 'true') {
+
           $products_attributes_id = tep_db_insert_id();
 
           $products_attributes_filename = tep_db_prepare_input($HTTP_POST_VARS['products_attributes_filename']);
@@ -111,8 +117,13 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
         $value_price = tep_db_prepare_input($HTTP_POST_VARS['value_price']);
         $price_prefix = tep_db_prepare_input($HTTP_POST_VARS['price_prefix']);
         $attribute_id = tep_db_prepare_input($HTTP_POST_VARS['attribute_id']);
+        // START: More Product Weight
+        $value_weight = tep_db_prepare_input($HTTP_POST_VARS['value_weight']);
+        $price_prefix = tep_db_prepare_input($HTTP_POST_VARS['weight_prefix']);
 
-        tep_db_query("update " . TABLE_PRODUCTS_ATTRIBUTES . " set products_id = '" . (int)$products_id . "', options_id = '" . (int)$options_id . "', options_values_id = '" . (int)$values_id . "', options_values_price = '" . (float)tep_db_input($value_price) . "', price_prefix = '" . tep_db_input($price_prefix) . "' where products_attributes_id = '" . (int)$attribute_id . "'");
+        // tep_db_query("update " . TABLE_PRODUCTS_ATTRIBUTES . " set products_id = '" . (int)$products_id . "', options_id = '" . (int)$options_id . "', options_values_id = '" . (int)$values_id . "', options_values_price = '" . (float)tep_db_input($value_price) . "', price_prefix = '" . tep_db_input($price_prefix) . "' where products_attributes_id = '" . (int)$attribute_id . "'");
+        tep_db_query("update " . TABLE_PRODUCTS_ATTRIBUTES . " set products_id = '" . (int)$products_id . "', options_id = '" . (int)$options_id . "', options_values_id = '" . (int)$values_id . "', options_values_price = '" . (float)tep_db_input($value_price) . "', price_prefix = '" . tep_db_input($price_prefix) . "', options_values_weight = '" . tep_db_input($value_weight) . "', weight_prefix = '" . tep_db_input($weight_prefix) . "' where products_attributes_id = '" . (int)$attribute_id . "'");
+        // END: More Product Weight
 
         if (DOWNLOAD_ENABLED == 'true') {
           $products_attributes_filename = tep_db_prepare_input($HTTP_POST_VARS['products_attributes_filename']);
@@ -161,6 +172,13 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<script language="javascript"><!--
+function go_option() {
+  if (document.option_order_by.selected.options[document.option_order_by.selected.selectedIndex].value != "none") {
+    location = "<?php echo tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'option_page=' . ($HTTP_GET_VARS['option_page'] ? $HTTP_GET_VARS['option_page'] : 1)); ?>&option_order_by="+document.option_order_by.selected.options[document.option_order_by.selected.selectedIndex].value;
+  }
+}
+//--></script>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
@@ -190,6 +208,7 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 ?>
               <tr>
                 <td class="pageHeading">&nbsp;<?php echo $options_values['products_options_name']; ?>&nbsp;</td>
+                <td>&nbsp;<?php echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '53'); ?>&nbsp;</td>
               </tr>
               <tr>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -246,9 +265,15 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
               </tr>
 <?php
   } else {
+    if (isset($HTTP_GET_VARS['option_order_by'])) {
+      $option_order_by = $HTTP_GET_VARS['option_order_by'];
+    } else {
+      $option_order_by = 'products_options_id';
+    }
 ?>
               <tr>
-                <td colspan="3" class="pageHeading">&nbsp;<?php echo HEADING_TITLE_OPT; ?>&nbsp;</td>
+                <td colspan="2" class="pageHeading">&nbsp;<?php echo HEADING_TITLE_OPT; ?>&nbsp;</td>
+                <td align="right"><br><form name="option_order_by" action="<?php echo FILENAME_PRODUCTS_ATTRIBUTES; ?>"><select name="selected" onChange="go_option()"><option value="products_options_id"<?php if ($option_order_by == 'products_options_id') { echo ' SELECTED'; } ?>><?php echo TEXT_OPTION_ID; ?></option><option value="products_options_name"<?php if ($option_order_by == 'products_options_name') { echo ' SELECTED'; } ?>><?php echo TEXT_OPTION_NAME; ?></option></select></form></td>
               </tr>
               <tr>
                 <td colspan="3" class="smallText" align="right">
@@ -605,7 +630,10 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
         </table>
         <form name="attributes" action="<?php echo tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=' . $form_action . '&' . $page_info); ?>" method="post"><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td colspan="7"><?php echo tep_black_line(); ?></td>
+            <!-- START: More Product Weight -->
+            <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
+            <td colspan="9"><?php echo tep_black_line(); ?></td>
+            <!-- END: More Product Weight -->
           </tr>
           <tr class="dataTableHeadingRow">
             <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_ID; ?>&nbsp;</td>
@@ -614,10 +642,17 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
             <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_OPT_VALUE; ?>&nbsp;</td>
             <td class="dataTableHeadingContent" align="right">&nbsp;<?php echo TABLE_HEADING_OPT_PRICE; ?>&nbsp;</td>
             <td class="dataTableHeadingContent" align="center">&nbsp;<?php echo TABLE_HEADING_OPT_PRICE_PREFIX; ?>&nbsp;</td>
+            <!-- START: More Product Weight -->
+            <td class="dataTableHeadingContent" align="right">&nbsp;<?php echo TABLE_HEADING_OPT_WEIGHT; ?>&nbsp;</td>
+            <td class="dataTableHeadingContent" align="center">&nbsp;<?php echo TABLE_HEADING_OPT_WEIGHT_PREFIX; ?>&nbsp;</td>
+            <!-- END: More Product Weight -->
             <td class="dataTableHeadingContent" align="center">&nbsp;<?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
           </tr>
           <tr>
-            <td colspan="7"><?php echo tep_black_line(); ?></td>
+            <!-- START: More Product Weight -->
+            <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
+            <td colspan="9"><?php echo tep_black_line(); ?></td>
+            <!-- END: More Product Weight -->
           </tr>
 <?php
   $next_id = 1;
@@ -671,7 +706,11 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
             </select>&nbsp;</td>
             <td align="right" class="smallText">&nbsp;<input type="text" name="value_price" value="<?php echo $attributes_values['options_values_price']; ?>" size="6">&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<input type="text" name="price_prefix" value="<?php echo $attributes_values['price_prefix']; ?>" size="2">&nbsp;</td>
-            <td align="center" class="smallText">&nbsp;<?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?>&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_cancel.gif', IMAGE_CANCEL); ?></a>&nbsp;</td>
+            <!-- START: More Product Weight -->
+            <td align="right" class="smallText">&nbsp;<input type="text" name="value_weight" value="<?php echo $attributes_values['options_values_weight']; ?>" size="6">&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<input type="text" name="weight_prefix" value="<?php echo $attributes_values['weight_prefix']; ?>" size="2">&nbsp;</td>
+            <!-- END: More Product Weight -->
+            <td align="center" class="smallText">&nbsp;<?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?>&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, '&attribute_page=' . $attribute_page, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_cancel.gif', IMAGE_CANCEL); ?></a>&nbsp;</td>
 <?php
       if (DOWNLOAD_ENABLED == 'true') {
         $download_query_raw ="select products_attributes_filename, products_attributes_maxdays, products_attributes_maxcount 
@@ -687,7 +726,10 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 ?>
           <tr class="<?php echo (!($rows % 2)? 'attributes-even' : 'attributes-odd');?>">
             <td>&nbsp;</td>
-            <td colspan="5">
+            <!-- START: More Product Weight -->
+            <!-- <td colspan="5"> -->
+            <td colspan="7">
+            <!-- END: More Product Weight -->
               <table>
                 <tr class="<?php echo (!($rows % 2)? 'attributes-even' : 'attributes-odd');?>">
                   <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_DOWNLOAD; ?>&nbsp;</td>
@@ -714,7 +756,11 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
             <td class="smallText">&nbsp;<b><?php echo $values_name; ?></b>&nbsp;</td>
             <td align="right" class="smallText">&nbsp;<b><?php echo $attributes_values["options_values_price"]; ?></b>&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<b><?php echo $attributes_values["price_prefix"]; ?></b>&nbsp;</td>
-            <td align="center" class="smallText">&nbsp;<b><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_attribute&attribute_id=' . $HTTP_GET_VARS['attribute_id'] . '&' . $page_info) . '">'; ?><?php echo tep_image_button('button_confirm.gif', IMAGE_CONFIRM); ?></a>&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_cancel.gif', IMAGE_CANCEL); ?></a>&nbsp;</b></td>
+            <!-- START: More Product Weight -->
+            <td align="right" class="smallText">&nbsp;<b><?php echo $attributes_values["options_values_weight"]; ?></b>&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<b><?php echo $attributes_values["weight_prefix"]; ?></b>&nbsp;</td>
+            <!-- END: More Product Weight -->
+            <td align="center" class="smallText">&nbsp;<b><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_attribute&attribute_id=' . $HTTP_GET_VARS['attribute_id']) . '">'; ?><?php echo tep_image_button('button_confirm.gif', IMAGE_CONFIRM); ?></a>&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, '&option_page=' . $option_page . '&value_page=' . $value_page . '&attribute_page=' . $attribute_page, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_cancel.gif', IMAGE_CANCEL); ?></a>&nbsp;</b></td>
 <?php
     } else {
 ?>
@@ -724,7 +770,11 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
             <td class="smallText">&nbsp;<?php echo $values_name; ?>&nbsp;</td>
             <td align="right" class="smallText">&nbsp;<?php echo $attributes_values["options_values_price"]; ?>&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<?php echo $attributes_values["price_prefix"]; ?>&nbsp;</td>
-            <td align="center" class="smallText">&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_attribute&attribute_id=' . $attributes_values['products_attributes_id'] . '&' . $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_edit.gif', IMAGE_UPDATE); ?></a>&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_product_attribute&attribute_id=' . $attributes_values['products_attributes_id'] . '&' . $page_info, 'NONSSL') , '">'; ?><?php echo tep_image_button('button_delete.gif', IMAGE_DELETE); ?></a>&nbsp;</td>
+            <!-- START: More Product Weight -->
+            <td align="right" class="smallText">&nbsp;<?php echo $attributes_values["options_values_weight"]; ?>&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<?php echo $attributes_values["weight_prefix"]; ?>&nbsp;</td>
+            <!-- END: More Product Weight -->
+            <td align="center" class="smallText">&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_attribute&attribute_id=' . $attributes_values['products_attributes_id'] . '&attribute_page=' . $attribute_page, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_edit.gif', IMAGE_UPDATE); ?></a>&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_product_attribute&attribute_id=' . $attributes_values['products_attributes_id'] . '&attribute_page=' . $attribute_page, 'NONSSL') , '">'; ?><?php echo tep_image_button('button_delete.gif', IMAGE_DELETE); ?></a>&nbsp;</td>
 <?php
     }
     $max_attributes_id_query = tep_db_query("select max(products_attributes_id) + 1 as next_id from " . TABLE_PRODUCTS_ATTRIBUTES);
@@ -737,7 +787,10 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
   if ($action != 'update_attribute') {
 ?>
           <tr>
-            <td colspan="7"><?php echo tep_black_line(); ?></td>
+            <!-- START: More Product Weight -->
+            <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
+            <td colspan="9"><?php echo tep_black_line(); ?></td>
+            <!-- END: More Product Weight -->
           </tr>
           <tr class="<?php echo (floor($rows/2) == ($rows/2) ? 'attributes-even' : 'attributes-odd'); ?>">
             <td class="smallText">&nbsp;<?php echo $next_id; ?>&nbsp;</td>
@@ -767,6 +820,10 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
             </select>&nbsp;</td>
             <td align="right" class="smallText">&nbsp;<input type="text" name="value_price" size="6">&nbsp;</td>
             <td align="right" class="smallText">&nbsp;<input type="text" name="price_prefix" size="2" value="+">&nbsp;</td>
+            <!-- START: More Product Weight -->
+            <td align="right" class="smallText">&nbsp;<input type="text" name="value_weight" size="6">&nbsp;</td>
+            <td align="right" class="smallText">&nbsp;<input type="text" name="weight_prefix" size="2" value="+">&nbsp;</td>
+            <!-- END: More Product Weight -->
             <td align="center" class="smallText">&nbsp;<?php echo tep_image_submit('button_insert.gif', IMAGE_INSERT); ?>&nbsp;</td>
           </tr>
 <?php
@@ -776,7 +833,10 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 ?>
           <tr class="<?php echo (!($rows % 2)? 'attributes-even' : 'attributes-odd');?>">
             <td>&nbsp;</td>
-            <td colspan="5">
+            <!-- START: More Product Weight -->
+            <!-- <td colspan="5"> -->
+            <td colspan="7">
+            <!-- END: More Product Weight -->
               <table>
                 <tr class="<?php echo (!($rows % 2)? 'attributes-even' : 'attributes-odd');?>">
                   <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_DOWNLOAD; ?>&nbsp;</td>
@@ -798,7 +858,10 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
   }
 ?>
           <tr>
-            <td colspan="7"><?php echo tep_black_line(); ?></td>
+            <!-- START: More Product Weight -->
+            <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
+            <td colspan="9"><?php echo tep_black_line(); ?></td>
+            <!-- END: More Product Weight -->
           </tr>
         </table></form></td>
       </tr>

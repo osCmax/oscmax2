@@ -166,6 +166,7 @@ var $shiptotal;
         reset($attributes);
         while (list($option, $value) = each($attributes)) {
           if (!is_numeric($option) || !is_numeric($value)) {
+
             $attributes_pass_check = false;
             break;
           }
@@ -342,13 +343,23 @@ var $shiptotal;
         if (isset($this->contents[$products_id]['attributes'])) {
           reset($this->contents[$products_id]['attributes']);
           while (list($option, $value) = each($this->contents[$products_id]['attributes'])) {
-            $attribute_price_query = tep_db_query("select options_values_price, price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$prid . "' and options_id = '" . (int)$option . "' and options_values_id = '" . (int)$value . "'");
+			// START: More Product Weight
+            // $attribute_price_query = tep_db_query("select options_values_price, price_prefix, options_values_weight from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$prid . "' and options_id = '" . (int)$option . "' and options_values_id = '" . (int)$value . "'");
+            $attribute_price_query = tep_db_query("select options_values_price, price_prefix, options_values_weight, weight_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$prid . "' and options_id = '" . (int)$option . "' and options_values_id = '" . (int)$value . "'");
+			// END: More Product Weight
             $attribute_price = tep_db_fetch_array($attribute_price_query);
             if ($attribute_price['price_prefix'] == '+') {
               $this->total += $currencies->calculate_price($attribute_price['options_values_price'], $products_tax, $qty);
             } else {
               $this->total -= $currencies->calculate_price($attribute_price['options_values_price'], $products_tax, $qty);
             }
+			// START: More Product Weight
+            if ($attribute_price['weight_prefix'] == '+') {
+              $this->weight += $qty * $attribute_price['options_values_weight'];
+            } else {
+              $this->weight -= $qty * $attribute_price['options_values_weight'];
+            }
+			// END: More Product Weight
           }
         }
       }

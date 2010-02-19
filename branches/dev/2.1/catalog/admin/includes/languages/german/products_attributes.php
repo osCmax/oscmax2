@@ -34,4 +34,10 @@ define('TEXT_WARNING_OF_DELETE', 'Mit dieser Option sind Artikel, sowie Optionsm
 define('TEXT_OK_TO_DELETE', 'Mit dieser Option sind keine Artikel, sowie Optionsmerkmale verbunden - Sie kann gel&ouml;scht werden.');
 define('TEXT_OPTION_ID', 'Options ID');
 define('TEXT_OPTION_NAME', 'Optionsname');
+
+// START: More Product Weight
+define('TABLE_HEADING_OPT_WEIGHT', 'Gewicht');
+define('TABLE_HEADING_OPT_WEIGHT_PREFIX', '+/-');
+// END: More Product Weight
+
 ?>

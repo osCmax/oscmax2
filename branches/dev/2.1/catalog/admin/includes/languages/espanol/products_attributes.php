@@ -34,4 +34,10 @@ define('TEXT_WARNING_OF_DELETE', 'Esta opcion tiene productos y valores - no es 
 define('TEXT_OK_TO_DELETE', 'Esta opcion no esta en uso - es seguro eliminarla.');
 define('TEXT_OPTION_ID', 'ID de Opci&oacute;n');
 define('TEXT_OPTION_NAME', 'Nombre de Opci&oacute;n');
+
+// START: More Product Weight
+define('TABLE_HEADING_OPT_WEIGHT', 'Peso');
+define('TABLE_HEADING_OPT_WEIGHT_PREFIX', 'Prefijo');
+// END: More Product Weight
+
 ?>

@@ -51,7 +51,7 @@ if(AM_USE_SORT_ORDER) {
 }
 
 if(AM_USE_QT_PRO) {
-	$return .='	<td>'.AM_AJAX_TRACK_STOCK.' <img src="attributeManager/images/icon_up.png" id="imgCheck_1" onclick="checkBox(1)" title="'.AM_AJAX_TRACK_STOCK_IMGALT.'" />
+	$return .='	<td>'.AM_AJAX_TRACK_STOCK.' <img src="attributeManager/images/icon_unchecked.gif" id="imgCheck_1" onclick="checkBox(1)" title="'.AM_AJAX_TRACK_STOCK_IMGALT.'" />
 		    '. tep_draw_hidden_field('stockTracking_1', '0', $style).'
 			</td>';
 } else {

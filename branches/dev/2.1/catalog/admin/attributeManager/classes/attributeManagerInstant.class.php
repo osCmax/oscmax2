@@ -38,11 +38,11 @@ class attributeManagerInstant extends attributeManager {
 		$this->registerPageAction('removeOptionFromProduct','removeOptionFromProduct');
 		$this->registerPageAction('removeOptionValueFromProduct','removeOptionValueFromProduct');
 		// QT Pro Plugin
-		$this->registerPageAction('RemoveStockOptionValueFromProduct','RemoveStockOptionValueFromProduct');
-		$this->registerPageAction('AddStockToProduct','AddStockToProduct');
+		$this->registerPageAction('removeStockOptionValueFromProduct','removeStockOptionValueFromProduct');
+		$this->registerPageAction('addStockToProduct','addStockToProduct');
+        $this->registerPageAction('updateProductStockQuantity','updateProductStockQuantity');
 		// QT Pro Plugin
 		$this->registerPageAction('update','update');
-		$this->registerPageAction('updateProductStockQuantity','updateProductStockQuantity');
 		
 		if(AM_USE_SORT_ORDER) {
 			$this->registerPageAction('moveOption','moveOption');
@@ -81,7 +81,7 @@ class attributeManagerInstant extends attributeManager {
 		$this->getAndPrepare('price', $get, $price);
 		$this->getAndPrepare('prefix', $get, $prefix);
 		$this->getAndPrepare('sortOrder', $get, $sortOrder);
-		
+        
 		if((empty($price))||($price=='0')){
 			$price='0.0000';
 		}else{
@@ -100,6 +100,25 @@ class attributeManagerInstant extends attributeManager {
 			'options_values_price' => $price,
 			'price_prefix' => $prefix
 		);
+
+        if (AM_USE_MPW) {
+          $this->getAndPrepare('weight', $get, $weight);
+          $this->getAndPrepare('weight_prefix', $get, $weight_prefix);
+        
+          if((empty($weight))||($weight=='0')){
+            $weight='0.0000';
+          }else{
+            if((empty($weight_prefix))||($weight_prefix==' ')){
+              $weight_prefix='+';
+            }
+          }
+          if(empty($weight_prefix)){
+            $weight_prefix=' ';
+          }
+          
+          $data['options_values_weight'] = $weight;
+          $data['weight_prefix'] = $weight_prefix;
+        }
 		
 		if (AM_USE_SORT_ORDER) {
 		
@@ -239,6 +258,40 @@ class attributeManagerInstant extends attributeManager {
 
 
 // Begin QT Pro Plugin	
+    /**
+     * Checks product quantity and sets product status consider STOCK_ALLOW_CHECKOUT setting
+     * @access public
+     * @author Peter aka RusNN 
+     * @param $quantity Quantity of product in stock
+     * @return void
+     */
+    function checkProductStatus($quantity) {
+        if (($quantity < 1) && (STOCK_ALLOW_CHECKOUT == 'false')) {
+          $data = array(
+            'products_status' => '0'
+          );
+          amDB::perform(TABLE_PRODUCTS, $data, 'update', "products_id='" . $this->intPID . "'");
+        }
+    }
+
+    /**
+     * Sets the product quantity to a value calculating based on a sum of all products stock options
+     * @access public
+     * @author Peter aka RusNN 
+     * @param void
+     * @return void
+     */
+    function repairStock() {
+        $query = amDB::query("select sum(products_stock_quantity) as summa from " . TABLE_PRODUCTS_STOCK . " where products_id='" . $this->intPID . "' and products_stock_quantity>0");
+        $list = amDB::fetchArray($query);
+        $data = array(
+            'products_quantity' => (empty($list['summa'])) ? '0' : $list['summa']
+        );
+        amDB::perform(TABLE_PRODUCTS, $data, 'update', "products_id='" . $this->intPID . "'");
+        
+        $this->checkProductStatus($list['summa']);
+    }
+
 	/**
 	 * Removes a specific stock option value from a the current product // for QT pro Plugin
 	 * @access public
@@ -246,83 +299,88 @@ class attributeManagerInstant extends attributeManager {
 	 * @param $get $_GET
 	 * @return void
 	 */
-	function RemoveStockOptionValueFromProduct($get) {
+	function removeStockOptionValueFromProduct($get) {
 		$this->getAndPrepare('option_id',$get,$optionId);
 		amDB::query("delete from ".TABLE_PRODUCTS_STOCK." where products_stock_id = '$optionId'");// and products_id = '$this->intPID'");
+
+        $this->repairStock();
 	}
-	/**
-	 * Removes a specific stock option value from a the current product // for QT pro Plugin
-	 * @access public
-	 * @author Greg A. aka phocea
-	 * @param $get $_GET
-	 * @return void
-	 */
-	/**
-	 * Adds the selected attribute to the current product
-	 * @access public
-	 * @author Sam West aka Nimmit - osc@kangaroopartners.com
-	 * @param $get $_GET
-	 * @return void
-	 */
+
+    /**
+     * Adds the selected attribute to the current product
+     * @access public
+     * @author Sam West aka Nimmit - osc@kangaroopartners.com
+     * @author correction made by RusNN
+     * @param $get $_GET
+     * @return void
+     */
 	function addStockToProduct($get) {
-		
-//		$this->getAndPrepare('option_id', $get, $optionId);
-//		$this->getAndPrepare('option_value_id', $get, $optionValueId);
-//		$this->getAndPrepare('price', $get, $price);
-//		$this->getAndPrepare('prefix', $get, $prefix);
-//		$this->getAndPrepare('sortOrder', $get, $sortOrder);
-		$this->getAndPrepare('stockQuantity',$get,$stockQuantity);
-		
-		amDB::query("delete from ".TABLE_PRODUCTS_STOCK." where products_stock_id = '$stockQuantity'");// and products_id = '$this->intPID'");
-//		$data = array(
-//			'products_id' => $this->intPID,
-//			'options_id' => $optionId,
-//			'options_values_id' => $optionValueId,
-//			'options_values_price' => $price,
-//			'price_prefix' => $prefix,
-//			AM_FIELD_OPTION_VALUE_SORT_ORDER => $sortOrder
-//		);
-//		
-//		amDB::perform(TABLE_PRODUCTS_ATTRIBUTES, $data);
+        $inputok = true;
+        
+		// Work out how many option were sent
+		while(list($v1,$v2)=each($get)) {
+		  if (preg_match("/^option(\d+)$/",$v1,$m1)) {
+		    if (is_numeric($v2) and ($v2==(int)$v2)) {
+              $val_array[]=$m1[1]."-".$v2;
+            } else {
+              $inputok = false;
+            }
+      	  }
+    	}
+    		
+    	if (($inputok)) {
+            $this->getAndPrepare('stockQuantity',$get,$stockQuantity);
+
+            if (!empty($val_array)) {
+              // Products has at least one assigned option or options combination, so set quantity for option combination and total options quantity for product itself
+    		  sort($val_array, SORT_NUMERIC);
+    		  $val=join(",",$val_array);
+
+    		  $q = amDB::query("select products_stock_id as stock_id from " . TABLE_PRODUCTS_STOCK . " where products_id ='$this->intPID' and products_stock_attributes='" . $val . "' order by products_stock_attributes");
+    		  if (amDB::numRows($q) > 0) {
+    			  $stock_item = amDB::fetchArray($q);
+    			  $stock_id = $stock_item['stock_id'];
+    			  if ($stockQuantity=intval($stockQuantity)) {
+                      $data = array(
+                          'products_stock_quantity' => (int)$stockQuantity
+                      );
+                      // New value for option combination - updates DB
+    				  amDB::perform(TABLE_PRODUCTS_STOCK, $data, 'update', "products_stock_id=$stock_id");
+    			  } else {
+                      if (AM_DELETE_ZERO_STOCK) {
+                        // If user inputs 0 (zero), delete such combination
+    				    amDB::query("delete from " . TABLE_PRODUCTS_STOCK . " where products_stock_id=$stock_id");
+                      } else {
+                        // Set combination qty to 0
+                        $data = array(
+                            'products_stock_quantity' => '0'
+                        );
+                        // New value for option combination - updates DB
+                        amDB::perform(TABLE_PRODUCTS_STOCK, $data, 'update', "products_stock_id=$stock_id");
+                      }
+        		  }
+      		  } else {
+                  // No such combination, insert new one
+                  $data = array(
+                     'products_id' => $this->intPID,
+                     'products_stock_attributes' => $val,
+                     'products_stock_quantity' => (int)$stockQuantity
+                  );
+        		  amDB::perform(TABLE_PRODUCTS_STOCK, $data);
+        	  }
+              
+              $this->repairStock();
+            } else {
+              // No options available for the product, so sets the overall product quantity
+              $data = array(
+                  'products_quantity' => (empty($stockQuantity)) ? '0' : $stockQuantity
+              );
+              amDB::perform(TABLE_PRODUCTS, $data, 'update', "products_id='" . $this->intPID . "'");
+              
+              $this->checkProductStatus($stockQuantity);
+            }
+    	}
 	}
-	
-//	function addStockToProduct($get) {
-//		customPrompt('debug','we are here');
-//		$inputok = true;
-//		// Work out how many option were sent
-//		while(list($v1,$v2)=each($get)) {
-//			if (preg_match("/^option(\d+)$/",$v1,$m1)) {
-//				if (is_numeric($v2) and ($v2==(int)$v2)) $val_array[]=$m1[1]."-".$v2;
-//        		else $inputok = false;
-//      			}
-//    		}
-//    		
-//    		$this->getAndPrepare('stockQuantity',$get,$stockQuantity);
-//    		if (($inputok)) {
-//    			sort($val_array, SORT_NUMERIC);
-//    			$val=join(",",$val_array);
-//    			$q=tep_db_query("select products_stock_id as stock_id from " . TABLE_PRODUCTS_STOCK . " where products_id ='$this->intPID' and products_stock_attributes='" . $val . "' order by products_stock_attributes");
-//    			if (tep_db_num_rows($q)>0) {
-//    				$stock_item=tep_db_fetch_array($q);
-//    				$stock_id=$stock_item[stock_id];
-//    				if ($stockQuantity=intval($stockQuantity)) {
-//    					amDB::query("update " . TABLE_PRODUCTS_STOCK . " set products_stock_quantity=" . (int)$stockQuantity . " where products_stock_id=$stock_id");
-//
-//    				} else {
-//    					amDB::query("delete from " . TABLE_PRODUCTS_STOCK . " where products_stock_id=$stock_id");
-//        			}
-//      			} else {
-//        			amDB::query("insert into " . TABLE_PRODUCTS_STOCK . " values (0," . $this->intPID . ",'$val'," . (int)$stockQuantity . ")");
-//        		}
-//      			$q=tep_db_query("select sum(products_stock_quantity) as summa from " . TABLE_PRODUCTS_STOCK . " where products_id=" . (int)$VARS['product_id'] . " and products_stock_quantity>0");
-//      			$list=tep_db_fetch_array($q);
-//      			$summa= (empty($list[summa])) ? 0 : $list[summa];
-//      			amDB::query("update " . TABLE_PRODUCTS . " set products_quantity=$summa where products_id=" . $this->intPID);
-//      			if (($summa<1) && (STOCK_ALLOW_CHECKOUT == 'false')) {
-//        			amDB::query("update " . TABLE_PRODUCTS . " set products_status='0' where products_id=" . $this->intPI);
-//      			}
-//    		}
-//	}
 
 	/**
 	 * Updates the quantity on the products stock table
@@ -331,13 +389,14 @@ class attributeManagerInstant extends attributeManager {
 	 * @return void
 	 */
 	function updateProductStockQuantity($get) {
-		customprompt();
 		$this->getAndPrepare('products_stock_id', $get, $products_stock_id);
 		$this->getAndPrepare('productStockQuantity', $get, $productStockQuantity);		
 		$data = array( 
-			'product_stock_quantity' => $productStockQuantity
+			'products_stock_quantity' => $productStockQuantity
 		);
 		amDB::perform(TABLE_PRODUCTS_STOCK,$data, 'update',"products_stock_id='$products_stock_id'");
+
+        $this->repairStock();
 	}
 // End QT Pro Plugin
 
@@ -365,8 +424,25 @@ class attributeManagerInstant extends attributeManager {
 		
 		$data = array( 
 			'options_values_price' => $price,
-			'price_prefix' => $prefix
+			'price_prefix' => $prefix,
 		);
+
+        if (AM_USE_MPW) {
+          $this->getAndPrepare('weight', $get, $weight);
+          $this->getAndPrepare('weight_prefix', $get, $weight_prefix);
+
+          if((empty($weight))||($weight=='0')){
+            $weight='0.0000';
+          }else{
+            if((empty($weight_prefix))||($weight_prefix==' ')){
+              $weight_prefix='+';
+            }
+          }
+          
+          $data['options_values_weight'] = $weight;
+          $data['weight_prefix'] = $weight_prefix;
+        }
+
 		/*if (AM_USE_SORT_ORDER) {
 			$data[AM_FIELD_OPTION_VALUE_SORT_ORDER] = $sortOrder;
 		}
@@ -414,6 +490,11 @@ class attributeManagerInstant extends attributeManager {
 				$this->arrAllProductOptionsAndValues[$optionsId]['values'][$res['options_values_id']]['name'] = $allOptionsAndValues[$optionsId]['values'][$res['options_values_id']];
 				$this->arrAllProductOptionsAndValues[$optionsId]['values'][$res['options_values_id']]['price'] = $res['options_values_price'];
 				$this->arrAllProductOptionsAndValues[$optionsId]['values'][$res['options_values_id']]['prefix'] = $res['price_prefix'];
+        
+                if (AM_USE_MPW) {
+                  $this->arrAllProductOptionsAndValues[$optionsId]['values'][$res['options_values_id']]['weight'] = $res['options_values_weight'];
+                  $this->arrAllProductOptionsAndValues[$optionsId]['values'][$res['options_values_id']]['weight_prefix'] = $res['weight_prefix'];
+                }
 //----------------------------
 // Change: Add download attributes function for AM
 // @author Urs Nyffenegger ak mytool

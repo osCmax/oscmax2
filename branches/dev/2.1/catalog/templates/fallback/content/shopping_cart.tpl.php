@@ -1,9 +1,24 @@
+<?php
+// START REMOVE FROM CART BUTTON AND CLEAR CART MOD
+switch ($HTTP_GET_VARS['action']) {
+	case 'remove_product' :    if (isset($HTTP_GET_VARS['products_id'])) {
+	               	               $cart->remove($HTTP_GET_VARS['products_id']);
+        	                       }
+            	                   break;
+								   
+	case 'clear_cart' :     $cart->reset(true);
+                              break;
+}
+define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Remove Product');
+// END REMOVE FROM CART BUTTON AND CLEAR CART MOD
+?>
+
     <?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_SHOPPING_CART, 'action=update_product')); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_cart.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -73,8 +88,9 @@
       $cur_row = sizeof($info_box_contents) - 1;
 
       $info_box_contents[$cur_row][] = array('align' => 'center',
-                                             'params' => 'class="productListing-data" valign="top"',
-                                             'text' => tep_draw_checkbox_field('cart_delete[]', $products[$i]['id']));
+                                             'params' => 'class="productListing-data" valign="middle"',
+                                             //  'text' => tep_draw_checkbox_field('cart_delete[]', $products[$i]['id']));
+											 'text' => '<a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'action=remove_product&products_id='.$products[$i]['id'].'', 'NONSSL').'">' . tep_image(DIR_WS_ICONS . 'basket_delete.png', IMAGE_BUTTON_REMOVE_PRODUCT, 16, 16) . '</a>');
 
       $products_name = '<table border="0" cellspacing="2" cellpadding="2">' .
                        '  <tr>' .
@@ -112,7 +128,7 @@
 
       $info_box_contents[$cur_row][] = array('align' => 'center',
                                              'params' => 'class="productListing-data" valign="top"',
-                                             'text' => tep_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'size="4"') . tep_draw_hidden_field('products_id[]', $products[$i]['id']));
+                                             'text' => tep_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'size="4" style="width:30px; text-align:center;" onblur="document.cart_quantity.submit();"') . tep_draw_hidden_field('products_id[]', $products[$i]['id']));
 
       $info_box_contents[$cur_row][] = array('align' => 'right',
                                              'params' => 'class="productListing-data" valign="top"',
@@ -155,7 +171,8 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td class="main"><?php echo tep_image_submit('button_update_cart.gif', IMAGE_BUTTON_UPDATE_CART); ?></td>
+                <td class="main"><a href="<?php echo tep_href_link(FILENAME_SHOPPING_CART, 'action=clear_cart', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_CART . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_cart.gif', 'Clear Basket'); ?></a></td>
+
 <?php
     $back = sizeof($navigation->path)-2;
     if (isset($navigation->path[$back])) {
@@ -164,6 +181,9 @@
 <?php
     }
 ?>
+<noscript>
+<td class="main"><?php echo tep_image_submit('button_update_cart.gif', IMAGE_BUTTON_UPDATE_CART); ?></td>
+</noscript>
                 <td align="right" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image_button('button_checkout.gif', IMAGE_BUTTON_CHECKOUT) . '</a>'; ?></td>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
@@ -220,4 +240,3 @@
   }
 ?>
     </table></form>
-

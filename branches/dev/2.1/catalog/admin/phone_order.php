@@ -21,7 +21,7 @@ $result = $query;
 //require_once("../dBug.php");
 //new dBug($result);
 if (tep_db_num_rows($result) > 0){	// Query Successful
-	$SelectCustomerBox = "<select name='Customer' onChange='this.form.submit();'><option value=''>Select Customer</option>\n";
+	$SelectCustomerBox = "<select name='Customer' onChange='this.form.submit();'><option value=''>" . SELECT_CUSTOMER . "</option>\n";
 
 	while($db_Row = tep_db_fetch_array($result)){ 	
 
@@ -97,7 +97,7 @@ require(DIR_WS_INCLUDES . 'header_tags.php');
 						<td>
 						<form action="<?php echo $PHP_SELF?>" method="post">
 							<input type="text" value="<?php echo $_POST['cust2']?>" name="cust2" />
-							<input type="submit" name="secu" value="Search" />
+							<input type="submit" name="secu" value="<?php echo SEARCH ?>" />
 						</form>
 						</td>
 					
@@ -105,7 +105,7 @@ require(DIR_WS_INCLUDES . 'header_tags.php');
 					<tr>
                       <td><?php
 					  	  echo '<form action="' . $PHP_SELF. '" method="POST">';
-                          echo '<font class="main"><b>Select Customer :</b></font><br><br>';
+                          echo '<font class="main"><b>' . SELECT_CUSTOMER . '</b></font><br><br>';
                           echo $SelectCustomerBox;
                           echo '</form>';
 						?>
@@ -121,7 +121,7 @@ require(DIR_WS_INCLUDES . 'header_tags.php');
 						  echo '<input type="hidden" name="email_address" value="'.$CustomerEmail.'">';
 					  echo '<input type="hidden" name="action" value="process">';
 						  echo '<input type="hidden" name="phoneorder" value="order">';
-						  echo '<input type="submit" value="Submit"></form>';
+						  echo '<input type="submit" value="' . SUBMIT .'"></form>';
 					  }
 					  ?>
                       </td>
@@ -136,8 +136,8 @@ require(DIR_WS_INCLUDES . 'header_tags.php');
 				    }
 					print "<table border='0'>\n";
 					print "<tr>\n";
-					print "<td><font class=main><b><br>Or Create New Customer :</b></font>";
-					print "<td valign='bottom'><input type='submit' value='New Customer'></td>\n";
+					print "<td><font class=main><b><br>" . CREATE_NEW . "</b></font>";
+					print "<td valign='bottom'><input type='submit' value='" . NEW_CUSTOMER . "'></td>\n";
 					print "</tr>\n";
 					print "</table>\n";
 					print "</form>\n";
@@ -162,4 +162,3 @@ require(DIR_WS_INCLUDES . 'header_tags.php');
 	require(DIR_WS_INCLUDES . 'application_bottom.php'); 
 }
 ?>
-

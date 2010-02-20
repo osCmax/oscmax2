@@ -11,4 +11,9 @@
 */
 
 define('HEADING_TITLE', 'Phone Order');
+define('SELECT_CUSTOMER', 'Select Customer');
+define('SEARCH', 'Search');
+define('SUBMIT', 'Submit');
+define('CREATE_NEW', 'Or Create New Customer :');
+define('NEW_CUSTOMER', 'New Customer');
 ?>

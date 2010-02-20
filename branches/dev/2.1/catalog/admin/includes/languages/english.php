@@ -474,8 +474,12 @@ define('BOX_CUSTOMERS_EXPORT', 'Export Customers');
 define('BOX_REPORTS_STATS_REGISTER_CUSTOMER_NO_PURCHASE', 'No purchases report');
 // EOF: Customers with purchases report
 
-//BOF Quicker Product Edit
+// BOF: Quicker Product Edit
 define('IMAGE_ICON_EDIT', 'Quick Edit');
-// EOF Quicker Product Edit
+// EOF: Quicker Product Edit
+
+// BOF: Google SiteMap
+define('BOX_GOOGLE_SITEMAP', 'Google SiteMaps');
+// EOF: Google SiteMap
 
 ?>

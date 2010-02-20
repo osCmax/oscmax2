@@ -59,6 +59,7 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=70', 'NONSSL') . '">Order Editor</a></li>' .
 				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Google</a><ul>' .
 					'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=85', 'NONSSL') . '">Google Analytics</a></li>' .
+					tep_admin_jqmenu(FILENAME_GOOGLE_SITEMAP, BOX_GOOGLE_SITEMAP, TOP) .
 				'</ul>' .
 				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Define Pages</a><ul>' .
 								   tep_admin_jqmenu(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, TOP) .

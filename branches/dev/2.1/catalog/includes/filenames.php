@@ -214,4 +214,8 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
 // BOF: Http Error Log
   define('FILENAME_HTTP_ERROR', 'http_error.php');
 // EOF: Http Error Log  
+
+// BOF: Google Sitmap
+  define('FILENAME_GOOGLE_SITEMAPS', 'sitemaps.index.php');
+// EOF: Google Sitmap
 ?>

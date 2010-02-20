@@ -148,6 +148,10 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
 // EOF: Http Error Log 
 
 // BOF: Customers with purchases report
-define('FILENAME_STATS_REGISTER_CUSTOMER_NO_PURCHASE', 'stats_register_customer_no_purchase.php');
+  define('FILENAME_STATS_REGISTER_CUSTOMER_NO_PURCHASE', 'stats_register_customer_no_purchase.php');
 // EOF: Customers with purchases report
+
+// BOF: Google SiteMap
+  define('FILENAME_GOOGLE_SITEMAP', 'googlesitemap.php');
+// EOF: Google SiteMap
 ?>

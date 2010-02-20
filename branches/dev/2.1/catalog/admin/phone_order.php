@@ -114,9 +114,9 @@ require(DIR_WS_INCLUDES . 'header_tags.php');
                       <td valign='bottom'><?php
 					  if(isset($HTTP_POST_VARS['Customer'])){
 						  if (ENABLE_SSL_CATALOG == 'true') {
-							echo '<form action="'.DIR_WS_CATALOG.'login.php" method="POST" target="_blank">';
+							echo '<form action="' . HTTPS_CATALOG_SERVER . DIR_WS_CATALOG . 'login.php" method="POST" target="_blank">';
 						  } else {
-							echo '<form action="'.DIR_WS_CATALOG.'/login.php" method="POST" target="_blank">';
+							echo '<form action="' . HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'login.php" method="POST" target="_blank">';
 						  }
 						  echo '<input type="hidden" name="email_address" value="'.$CustomerEmail.'">';
 					  echo '<input type="hidden" name="action" value="process">';
@@ -130,9 +130,9 @@ require(DIR_WS_INCLUDES . 'header_tags.php');
 
                   <?php
 				    if (ENABLE_SSL_CATALOG == 'true') {
-						echo '<form action="'.HTTP_CATALOG_SERVER.'/create_account.php" method="POST" target="_blank">';
+						echo '<form action="' . HTTPS_CATALOG_SERVER . DIR_WS_CATALOG  . 'create_account.php" method="POST" target="_blank">';
 				    } else {
-						echo '<form action="'.HTTP_CATALOG_SERVER.'/create_account.php" method="POST" target="_blank">';
+						echo '<form action="' . HTTP_CATALOG_SERVER . DIR_WS_CATALOG  . 'create_account.php" method="POST" target="_blank">';
 				    }
 					print "<table border='0'>\n";
 					print "<tr>\n";

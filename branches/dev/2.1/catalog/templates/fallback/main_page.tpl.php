@@ -80,6 +80,13 @@ function CVVPopUpWindow(url) {
  }
  ?>
 <!-- coolMenu_eof //-->
+
+<!-- BOF SLIMBOX2 -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+<script type="text/javascript" src="slimbox2/slimbox2.js"></script>
+<link rel="stylesheet" href="slimbox2/slimbox2.css" type="text/css" media="screen" />
+<!-- EOF SLIMBOX2 -->
+
 <!-- warnings //-->
 <?php require(DIR_WS_INCLUDES . 'warnings.php'); ?>
 <!-- warning_eof //-->

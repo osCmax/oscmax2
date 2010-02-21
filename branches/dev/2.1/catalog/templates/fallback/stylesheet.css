@@ -298,9 +298,9 @@ SPAN.errorText {
 
 /* TAB CODE FOR PRODUCT.INFO.TPL.PHP PAGE by PGM*/
 #tabs { display: block; float: left; }
-a.tab { border-collapse: collapse; border-style: solid solid none solid; border-color: #9eb2b1; 
-        border-width: 1px 1px 0px 1px; background-color: silver; padding: 2px 0.5em 0px 0.5em; 
+a.tab { border-collapse: collapse; border-style: solid solid none solid; border-color: #b6b7cb; 
+        border-width: 1px 1px 0px 1px; background-color: #f8f8f9; padding: 2px 0.5em 0px 0.5em; 
         margin-top: 4px; margin-right: 2px; font-family: Verdana; text-decoration: none; width: 100px;
         text-align: center; float: left; }
-a.tab:hover { border-color: #9eb2b1; background-color: white; }
-.panel { border: solid 1px #9eb2b1; background-color: white; padding: 5px; height: 300px; overflow: auto; clear: left; }
+a.tab:hover { border-color: #b6b7cb; background-color: white; }
+.panel { border: solid 1px #b6b7cb; background-color: white; padding: 5px; height: 300px; overflow: auto; clear: left; }

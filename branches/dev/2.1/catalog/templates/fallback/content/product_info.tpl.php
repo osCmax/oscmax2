@@ -166,9 +166,6 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
 		//// END:  Added for Dynamic MoPics v3.000
 ?>
 
-
-
-
 <center>
 <?php
 		//// BEGIN:  Added for Dynamic MoPics v3.000
@@ -181,10 +178,7 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
-
 <?php
-    }
-
     if (tep_not_null($product_info['products_url'])) {
 ?>
       <tr>
@@ -217,14 +211,16 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
       	<td>
         	<table width="100%">
               <tr>
-                <td class="main" align="left" width="15%"><?php echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count']; ?></td>
-
+                <td class="main" align="left" width="15%">
 				<?php
                     $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "'");
                     $reviews = tep_db_fetch_array($reviews_query);
                     if ($reviews['count'] > 0) {
                 ?>
-
+				<?php echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count']; ?></td>
+				<?php
+    				}
+				?>	
 				<?php if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) { ?>
                 <td align="center" class="smallText" width="70%"><?php echo sprintf(TEXT_DATE_AVAILABLE, tep_date_long($product_info['products_date_available'])); ?></td>
                 <?php } else { ?>

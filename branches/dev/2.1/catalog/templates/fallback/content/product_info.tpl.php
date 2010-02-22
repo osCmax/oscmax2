@@ -1,4 +1,4 @@
-    <?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?><table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
   if ($product_check['total'] < 1) {
    // BOF Separate Price per Customer
@@ -73,12 +73,14 @@
 // EOF: Mod - Wishlist
 ?>
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td>
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading" valign="top"><?php echo $products_name; ?></td>
             <td class="pageHeading" align="right" valign="top"><?php echo $products_price; ?></td>
           </tr>
-        </table></td>
+        </table>
+        </td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -89,9 +91,47 @@
 		//// BEGIN:  Added for Dynamic MoPics v3.000
     if (tep_not_null($product_info['products_image'])) {
 ?>
-          <table border="0" cellspacing="0" cellpadding="2" align="right">
-            <tr>
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr valign="top">
+              <td align="left" width="100%">
+				<table width="100%">
+					<tr><td width="100%">
+					<?php
+                    // BOF: Tabs by PGM
+                    if(USE_PRODUCT_DESCRIPTION_TABS != 'True') { 
+                              echo stripslashes($product_info['products_description']);
+                              } else {
+                              include(DIR_WS_MODULES . 'product_tabs.php'); }
+                    // EOF: Tabs by PGM
+                    ?>
+                    </td></tr>
+                    <tr>
+                    	<td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+                    </tr>
+                    <tr><td class="prod_attributes">
+                    <?php
+
+    $products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$HTTP_GET_VARS['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");
+    $products_attributes = tep_db_fetch_array($products_attributes_query);
+    if ($products_attributes['total'] > 0) {
+//++++ QT Pro: Begin Changed code
+      $products_id=(preg_match("/^\d{1,10}(\{\d{1,10}\}\d{1,10})*$/",$HTTP_GET_VARS['products_id']) ? $HTTP_GET_VARS['products_id'] : (int)$HTTP_GET_VARS['products_id']); 
+      require(DIR_WS_CLASSES . 'pad_' . PRODINFO_ATTRIBUTE_PLUGIN . '.php');
+      $class = 'pad_' . PRODINFO_ATTRIBUTE_PLUGIN;
+      $pad = new $class($products_id);
+      echo $pad->draw();
+    }
+
+//Display a table with which attributecombinations is on stock to the customer?
+if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "qtpro_stock_table.php"); endif;
+
+//++++ QT Pro: End Changed Code
+?>
+					</td></tr>
+                 </table>              
+              </td>
               <td align="center" class="smallText">
+              <?php echo tep_draw_separator('pixel_trans.gif', '100%', '25'); ?>
 <?php
 			$image_lg = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);
 			if ($lg_image_ext = mopics_file_exists($image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
@@ -125,35 +165,9 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
 } 
 		//// END:  Added for Dynamic MoPics v3.000
 ?>
-<?php
-// BOF: Tabs by PGM
-if(USE_PRODUCT_DESCRIPTION_TABS != 'True') { 
-          echo stripslashes($product_info['products_description']);
-          } else {
-          include(DIR_WS_MODULES . 'product_tabs.php'); }
-// EOF: Tabs by PGM
-?>
-<?php
 
-    $products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$HTTP_GET_VARS['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");
-    $products_attributes = tep_db_fetch_array($products_attributes_query);
-    if ($products_attributes['total'] > 0) {
-//++++ QT Pro: Begin Changed code
-      $products_id=(preg_match("/^\d{1,10}(\{\d{1,10}\}\d{1,10})*$/",$HTTP_GET_VARS['products_id']) ? $HTTP_GET_VARS['products_id'] : (int)$HTTP_GET_VARS['products_id']); 
-      require(DIR_WS_CLASSES . 'pad_' . PRODINFO_ATTRIBUTE_PLUGIN . '.php');
-      $class = 'pad_' . PRODINFO_ATTRIBUTE_PLUGIN;
-      $pad = new $class($products_id);
-      echo $pad->draw();
-    }
 
-//Display a table with which attributecombinations is on stock to the customer?
-if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "qtpro_stock_table.php"); endif;
 
-//++++ QT Pro: End Changed Code
-?>
-        </td>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
 
 <center>
 <?php
@@ -167,17 +181,7 @@ if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "q
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
-<?php
-    $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "'");
-    $reviews = tep_db_fetch_array($reviews_query);
-    if ($reviews['count'] > 0) {
-?>
-      <tr>
-        <td class="main"><?php echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count']; ?></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
+
 <?php
     }
 
@@ -191,24 +195,7 @@ if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "q
       </tr>
 <?php
     }
-
-    if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) {
 ?>
-      <tr>
-        <td align="center" class="smallText"><?php echo sprintf(TEXT_DATE_AVAILABLE, tep_date_long($product_info['products_date_available'])); ?></td>
-      </tr>
-<?php
-    } else {
-?>
-      <tr>
-        <td align="center" class="smallText"><?php echo sprintf(TEXT_DATE_ADDED, tep_date_long($product_info['products_date_added'])); ?></td>
-      </tr>
-<?php
-    }
-?>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
       <tr>
         <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
           <tr class="infoBoxContents">
@@ -226,6 +213,27 @@ if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "q
           </tr>
         </table></td>
       </tr>
+      <tr>
+      	<td>
+        	<table width="100%">
+              <tr>
+                <td class="main" align="left" width="15%"><?php echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count']; ?></td>
+
+				<?php
+                    $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "'");
+                    $reviews = tep_db_fetch_array($reviews_query);
+                    if ($reviews['count'] > 0) {
+                ?>
+
+				<?php if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) { ?>
+                <td align="center" class="smallText" width="70%"><?php echo sprintf(TEXT_DATE_AVAILABLE, tep_date_long($product_info['products_date_available'])); ?></td>
+                <?php } else { ?>
+                <td align="center" class="smallText" width="70%"><?php echo sprintf(TEXT_DATE_ADDED, tep_date_long($product_info['products_date_added'])); ?></td>
+                <?php } ?>
+                <td align="right" width="15%">&nbsp;</td>
+              </tr>
+			</table>
+        </td>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>

@@ -1,3 +1,15 @@
+
+<script language="javascript" type="text/javascript">
+/********************************
+*  Addition for Authorize.net Consolidated
+*  by Austin519 - CVV PopUp Window
+*  If using a custom checkout_payment.php
+*  paste the following lines into your file
+********************************/
+function CVVPopUpWindow(url) {
+	window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=600,height=233,screenX=150,screenY=150,top=150,left=150')
+}
+</script>
 <script language="javascript" type="text/javascript"><!--
 var selected;
 var submitter = null;

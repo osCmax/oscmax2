@@ -10,17 +10,6 @@
 ?>>
 
 <head>
-<script language="javascript" type="text/javascript">
-/********************************
-*  Addition for Authorize.net Consolidated
-*  by Austin519 - CVV PopUp Window
-*  If using a custom checkout_payment.php
-*  paste the following lines into your file
-********************************/
-function CVVPopUpWindow(url) {
-	window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=600,height=233,screenX=150,screenY=150,top=150,left=150')
-}
-</script>
 
 <?php require(DIR_WS_INCLUDES . 'meta_tags.php'); ?>
 <title><?php echo META_TAG_TITLE; ?></title>
@@ -45,48 +34,26 @@ function CVVPopUpWindow(url) {
   if (isset($javascript) && file_exists(DIR_WS_JAVASCRIPT . basename($javascript))) { require(DIR_WS_JAVASCRIPT . basename($javascript)); }
 
   } 
-?> 
- <!-- coolMenu //-->
-<?php
-	//// BEGIN:  Added for Dynamic MoPics v3.000
+  if (DISPLAY_DHTML_MENU == 'CoolMenu') {
+    echo '<!-- coolMenu //-->';
+ 	echo '<SCRIPT LANGUAGE="JavaScript1.2" SRC="includes/coolMenu.js"></SCRIPT>';
+	echo '<!-- coolMenu_eof //-->';
+ }
+
+
+
+
 ?>
-<script language="javascript" type="text/javascript"><!--
-	function popupImage(url, imageHeight, imageWidth) {
-		var newImageHeight = (parseInt(imageHeight) + 20);
-		var yPos = ((screen.height / 2) - (parseInt(newImageHeight) / 2));
-		var xPos = ((screen.width / 2) - (parseInt(imageWidth) / 2));
-
-		imageWindow = window.open(url,'popupImages','toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=' + imageWidth + ',height=' + newImageHeight + ',screenY=' + yPos + ',screenX=' + xPos + ',top=' + yPos + ',left=' + xPos);
-
-		imageWindow.moveTo(xPos, yPos);
-		imageWindow.resizeTo(parseInt(imageWidth), parseInt(newImageHeight));
-
-		if (window.focus) {
-			imageWindow.focus();
-		}
-	}
-//--></script>
-<?php
-	//// END:  Added for Dynamic MoPics v3.000
-?>
-
-
 </head>
 <body>
- <!-- coolMenu //-->
+ 
  <?php
  if (DISPLAY_DHTML_MENU == 'CoolMenu') {
+    echo '<!-- coolMenu //-->';
  	require(DIR_WS_INCLUDES . 'coolmenu.php');
+	echo '<!-- coolMenu_eof //-->';
  }
  ?>
-<!-- coolMenu_eof //-->
-
-<!-- BOF SLIMBOX2 -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
-<script type="text/javascript" src="slimbox2/slimbox2.js"></script>
-<link rel="stylesheet" href="slimbox2/slimbox2.css" type="text/css" media="screen" />
-<!-- EOF SLIMBOX2 -->
-
 <!-- warnings //-->
 <?php require(DIR_WS_INCLUDES . 'warnings.php'); ?>
 <!-- warning_eof //-->

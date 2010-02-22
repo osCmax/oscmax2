@@ -1,5 +1,10 @@
-<script src="http://cdn.jquerytools.org/1.1.2/jquery.tools.min.js"></script>
-<script type="text/javascript" src="includes/javascript/slimbox-2/js/slimbox2.js"></script>
+<script src="http://www.google.com/jsapi"></script>
+<script>
+  // Load jQuery
+  google.load("jquery", "1.4.0");
+</script>
+<script type="text/javascript" src="slimbox2/slimbox2.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','slimbox2.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','dynamic_mopics.css')); // BTSv1.5 ?>">
 <script language="javascript" type="text/javascript"><!--
 	function popupImage(url, imageHeight, imageWidth) {

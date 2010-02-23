@@ -67,6 +67,11 @@ $Id: install_3.php 3 2006-05-27 04:59:07Z user $
         <td class="inputField"><?php echo 'Administrator Password<br />' . osc_draw_password_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text"'); ?></td>
         <td class="inputDescription">The password to use for the administrator account.</td>
       </tr>
+      <tr>
+        <td class="inputField"><?php echo 'Admin Folder Name<br />' . osc_draw_input_field('CFG_ADMIN_FOLDER', 'admin', 'class="text"'); ?></td>
+        <td class="inputDescription">The name of folder in which the admin files should be kept.  It is <b>recommended that you change this</b> from the default setting of <b>admin</b> to improve your site's security. If you want to read more about security please <a href="http://wiki.oscdox.com/setting_up_security" target="_blank">read the wiki</a>.</td>
+      </tr>
+
     </table>
 
     <p align="right"><input type="image" src="images/button_continue.gif" border="0" alt="Continue" id="inputButton" />&nbsp;&nbsp;<a href="index.php"><img src="images/button_cancel.gif" border="0" alt="Cancel" /></a></p>

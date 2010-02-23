@@ -30,6 +30,10 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
   } else {
     osc_db_query('insert into ' . TABLE_ADMINISTRATORS . ' (admin_groups_id, admin_username, admin_firstname, admin_lastname, admin_email_address, admin_password, admin_created) values (1, "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '", "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_FIRSTNAME']) . '", "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_LASTNAME']) . '", "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '", "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '", now())');
   }
+  
+  $admin_folder = trim($HTTP_POST_VARS['CFG_ADMIN_FOLDER']);
+  
+  rename ('../admin', '../' . $admin_folder);
 ?>
 
 <div class="mainBlock">
@@ -150,8 +154,8 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
                    '  define(\'HTTPS_CATALOG_SERVER\', \'' . $http_server . '\');' . "\n" .
                    '  define(\'ENABLE_SSL_CATALOG\', \'false\');' . "\n" .
                    '  define(\'DIR_FS_DOCUMENT_ROOT\', \'' . $dir_fs_document_root . '\');' . "\n" .
-                   '  define(\'DIR_WS_ADMIN\', \'' . $http_catalog . 'admin/\');' . "\n" .
-                   '  define(\'DIR_FS_ADMIN\', \'' . $dir_fs_document_root . 'admin/\');' . "\n" .
+                   '  define(\'DIR_WS_ADMIN\', \'' . $http_catalog . $admin_folder . '/\');' . "\n" .
+                   '  define(\'DIR_FS_ADMIN\', \'' . $dir_fs_document_root . $admin_folder . '/\');' . "\n" .
                    '  define(\'DIR_WS_CATALOG\', \'' . $http_catalog . '\');' . "\n" .
                    '  define(\'DIR_FS_CATALOG\', \'' . $dir_fs_document_root . '\');' . "\n" .
                    '  define(\'DIR_WS_IMAGES\', \'images/\');' . "\n" .
@@ -180,7 +184,7 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
                    '  define(\'STORE_SESSIONS\', \'mysql\');' . "\n" .
                    '?>';
 
-  $fp = fopen($dir_fs_document_root . 'admin/includes/configure.php', 'w');
+  $fp = fopen($dir_fs_document_root . $admin_folder . '/includes/configure.php', 'w');
   fputs($fp, $file_contents);
   fclose($fp);
 ?>
@@ -192,7 +196,7 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
     <table border="0" width="99%" cellspacing="0" cellpadding="0">
       <tr>
         <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . 'index.php'; ?>" target="_blank"><img src="images/button_catalog.gif" border="0" alt="Catalog" /></a></td>
-        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . 'admin/index.php'; ?>" target="_blank"><img src="images/button_administration_tool.gif" border="0" alt="Administration Tool" /></a></td>
+        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . $admin_folder . '/index.php'; ?>" target="_blank"><img src="images/button_administration_tool.gif" border="0" alt="Administration Tool" /></a></td>
       </tr>
     </table>
   </div>

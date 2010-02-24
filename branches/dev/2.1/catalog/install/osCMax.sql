@@ -1846,23 +1846,18 @@ INSERT INTO configuration VALUES (1509, 'Lowest Pending sales status', 'RCS_PEND
 INSERT INTO configuration VALUES (1510, 'Report Even Row Style', 'RCS_REPORT_EVEN_STYLE', 'dataTableRow', 'Style for even rows in results report. Typical options are <i>dataTableRow</i> and <i>attributes-even</i>.', 80, 90, NULL, '2009-03-07 22:31:53', '', '');
 INSERT INTO configuration VALUES (1511, 'Report Odd Row Style', 'RCS_REPORT_ODD_STYLE', '', 'Style for odd rows in results report. Typical options are NULL (ie, no entry) and <i>attributes-odd</i>.', 80, 92, NULL, '2009-03-07 22:31:53', '', '');
 
-INSERT INTO configuration VALUES (595,'Product Image Width','PRODUCT_IMAGE_WIDTH','120','The main product image \(thumbnail\) in product information pages.',4,20,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (596,'Product Image Height','PRODUCT_IMAGE_HEIGHT','','The main product image \(thumbnail\) in product information pages. Do NOT specify both!',4,21,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (597,'Product Popup Image Width','POPUP_IMAGE_WIDTH','800','Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,22,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (598,'Product Popup Image Height','POPUP_IMAGE_HEIGHT','600','Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,23,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (595, 'Product Image Width', 'PRODUCT_IMAGE_WIDTH', '120', 'The main product image \(thumbnail\) in product information pages.',4,20,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (596, 'Product Image Height', 'PRODUCT_IMAGE_HEIGHT', '', 'The main product image \(thumbnail\) in product information pages. Do NOT specify both!',4,21,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (597, 'Product Popup Image Width', 'POPUP_IMAGE_WIDTH', '800', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,22,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (598, 'Product Popup Image Height', 'POPUP_IMAGE_HEIGHT', '600', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,23,NULL,now(),NULL,NULL);
 
 #New v2.1 Entries
-INSERT INTO configuration values ('2100', 'Enable Google Analytics', 'GOOGLE_ANALYTICS_STATUS', 'false', 'Enable Google Analytics?', '85', '1', '', '2010-01-19 00:00:00', '', 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration values ('2101', 'Google Analytics UA Tracking Code', 'GOOGLE_UA_CODE', 'UA-XXXXXXX-X', 'Put in your Google Analytics Tracking Code', '85', '2', '', '2010-01-19 00:00:00', '', 'tep_cfg_textarea(');
-INSERT INTO configuration values ('2102', 'Google Analytics Sub-Domain Setting', 'GOOGLE_SUBDOMAIN', 'none', 'If your store is part of a subdomain eg. onlinestore.yourdomain.com put in your the domain name eg. <font color=red>.</font>yourdomain.com, if not type leave the default <font color=red>none</font>', '85', '3', '', '2010-01-19 00:00:00', '', 'tep_cfg_textarea(');
-
-
-INSERT INTO configuration VALUES(596, 'Product Image Height', 'PRODUCT_IMAGE_HEIGHT', '', 'The main product image (thumbnail) in product information pages.', 4, 21, NULL, '2009-05-28 15:34:10', NULL, NULL);
-INSERT INTO configuration VALUES(597, 'Product Popup Image Width', 'POPOP_IMAGE_WIDTH', '', 'Limits the popup product image (enlarged) size in product information pages. Unused by default', 4, 22, NULL, '2009-05-28 15:34:10', NULL, NULL);
-INSERT INTO configuration VALUES(598, 'Product Popup Image Height', 'POPUP_IMAGE_HEIGHT', '', 'Limits the popup product image (enlarged) size in product information pages. Unused by default', 4, 23, NULL, '2009-05-28 15:34:10', NULL, NULL);
+INSERT INTO configuration VALUES (2100, 'Enable Google Analytics', 'GOOGLE_ANALYTICS_STATUS', 'false', 'Enable Google Analytics?', 85, 1, '', now(), '', 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (2101, 'Google Analytics UA Tracking Code', 'GOOGLE_UA_CODE', 'UA-XXXXXXX-X', 'Put in your Google Analytics Tracking Code', 85, 2, '', now(), '', 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES (2102, 'Google Analytics Sub-Domain Setting', 'GOOGLE_SUBDOMAIN', 'none', 'If your store is part of a subdomain eg. onlinestore.yourdomain.com put in your the domain name eg. <font color=red>.</font>yourdomain.com, if not type leave the default <font color=red>none</font>', 85, 3, '', now(), '', 'tep_cfg_textarea(');
 
 #New v2.1 Entries
-INSERT INTO configuration VALUES (2500,'Use Tabs to display extra product information?','USE_PRODUCT_DESCRIPTION_TABS','True','Use tabs for product info?',8,20,NULL,now(),NULL,'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2500, 'Use Tabs to display extra product information?', 'USE_PRODUCT_DESCRIPTION_TABS', 'True', 'Use tabs for product info?', 8, 20, NULL,now(),NULL,'tep_cfg_select_option(array(''true'', ''false''),');
 
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);

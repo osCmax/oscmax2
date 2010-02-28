@@ -4,6 +4,7 @@ $Id: shopping_cart.php 14 2006-07-28 17:42:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
+  adapted for Separate Pricing Per Customer v4.2 2008/03/07, Hide products and categories from groups 2008/08/03
 
   Copyright 2006 osCMax
 
@@ -60,14 +61,52 @@ var $shiptotal;
       $this->reset(false);
 
       $products_query = tep_db_query("select products_id, customers_basket_quantity from " . TABLE_CUSTOMERS_BASKET . " where customers_id = '" . (int)$customer_id . "'");
-      while ($products = tep_db_fetch_array($products_query)) {
-        $this->contents[$products['products_id']] = array('qty' => $products['customers_basket_quantity']);
+//      while ($products = tep_db_fetch_array($products_query)) {
+//         $this->contents[$products['products_id']] = array('qty' => $products['customers_basket_quantity']);
+// // attributes
+//         $attributes_query = tep_db_query("select products_options_id, products_options_value_id from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products['products_id']) . "'");
+//         while ($attributes = tep_db_fetch_array($attributes_query)) {
+//           $this->contents[$products['products_id']]['attributes'][$attributes['products_options_id']] = $attributes['products_options_value_id'];
+//         }
+//       }
+// BOF SPPC Hide products and categories from groups
+          $no_of_products_in_basket = 0;
+      while ($_products = tep_db_fetch_array($products_query)) {
+        $temp_post_get_array[] = $_products['products_id'];
+            $products[] = $_products;
+            $no_of_products_in_basket += 1;
+       }
+  if ($no_of_products_in_basket > 0) {
+            $hide_status_products = array();
+            $hide_status_products = tep_get_hide_status($hide_status_products, $this->cg_id, $temp_post_get_array);
+            for ($i=0 ; $i < $no_of_products_in_basket; $i++) {
+              foreach($hide_status_products as $key => $subarray) {
+                if ($subarray['products_id'] == tep_get_prid($products[$i]['products_id']) && $subarray['hidden'] == '0') {
+// not hidden for this customer, can be added to the object shoppingCart
+        $this->contents[$products[$i]['products_id']] = array('qty' => $products[$i]['customers_basket_quantity']);
 // attributes
-        $attributes_query = tep_db_query("select products_options_id, products_options_value_id from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products['products_id']) . "'");
-        while ($attributes = tep_db_fetch_array($attributes_query)) {
-          $this->contents[$products['products_id']]['attributes'][$attributes['products_options_id']] = $attributes['products_options_value_id'];
-        }
-      }
+                   $attributes_query = tep_db_query("select products_options_id, products_options_value_id from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products[$i]['products_id']) . "'");
+                   while ($attributes = tep_db_fetch_array($attributes_query)) {  $this->contents[$products[$i]['products_id']]['attributes'][$attributes['products_options_id']] = $attributes['products_options_value_id'];
+                   }
+                } elseif ($subarray['products_id'] == tep_get_prid($products[$i]['products_id']) && $subarray['hidden'] == '1') {
+// product is hidden for the customer, don't add to object shoppingCart, delete from db next
+                $products_to_delete_from_cb[] = $products[$i]['products_id'];
+                } // end if/elseif
+              }// end foreach ($hide_status_products as $key => $subarray)
+            } // end for ($i=0 ; $i < $no_of_products_in_basket; $i++)
+
+// delete from the database those products that are hidden from this customer
+      if (tep_not_null($products_to_delete_from_cb)) {
+         $no_of_iterations = count($products_to_delete_from_cb);
+// since the products_id in the table customer_basket and customer_basket_attributes can contain
+// attributes like 1{4}2{3}6 we need to delete them one by one for the two tables
+        for ($y = 0; $y < $no_of_iterations; $y++) {
+           tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where customers_id = '" . (int)$customer_id . "' and (products_id = '" . (int)$products_to_delete_from_cb[$y] . "' or products_id REGEXP '^" .  (int)$products_to_delete_from_cb[$y] . "{');");
+           tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id = '" . (int)$customer_id . "' and (products_id = '" . (int)$products_to_delete_from_cb[$y] . "' or products_id REGEXP '^" .  (int)$products_to_delete_from_cb[$y] . "{');");
+         } // end for ($y = 0; $y < $no_of_iterations; $y++)
+      } // end if (tep_not_null($products_to_delete_from_cb))
+} // end if ($no_of_products_in_basket > 0)
+// EOF SPPC Hide products and categories from groups
 
       $this->cleanup();
 // assign a temporary unique ID to the order contents to prevent hack attempts during the checkout procedure

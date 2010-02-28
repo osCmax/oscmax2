@@ -4,7 +4,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
-
+adapted for Separate Pricing Per Customer v4.20 2005/01/29 and Hide products and categories from customer groups 
   Copyright 2006 osCMax
 
   Released under the GNU General Public License
@@ -1251,9 +1251,41 @@ function tep_selected_file($filename) {
     tep_db_query("delete from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . (int)$order_id . "'");
   }
 
-  function tep_reset_cache_block($cache_block) {
+//  function tep_reset_cache_block($cache_block) {
+//     global $cache_blocks;
+// 
+//     for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
+//       if ($cache_blocks[$i]['code'] == $cache_block) {
+//         if ($cache_blocks[$i]['multiple']) {
+//           if ($dir = @opendir(DIR_FS_CACHE)) {
+//             while ($cache_file = readdir($dir)) {
+//               $cached_file = $cache_blocks[$i]['file'];
+//               $languages = tep_get_languages();
+//               for ($j=0, $k=sizeof($languages); $j<$k; $j++) {
+//                 $cached_file_unlink = ereg_replace('-language', '-' . $languages[$j]['directory'], $cached_file);
+//                 if (ereg('^' . $cached_file_unlink, $cache_file)) {
+//                   @unlink(DIR_FS_CACHE . $cache_file);
+//                 }
+//               }
+//             }
+//             closedir($dir);
+//           }
+//         } else {
+//           $cached_file = $cache_blocks[$i]['file'];
+//           $languages = tep_get_languages();
+//           for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+//             $cached_file = ereg_replace('-language', '-' . $languages[$i]['directory'], $cached_file);
+//             @unlink(DIR_FS_CACHE . $cached_file);
+//           }
+//         }
+//         break;
+//       }
+//     }
+//   }
+//  adapted for Hide products and categories from customer groups for SPPC 2008/08/02
+   function tep_reset_cache_block($cache_block) {
     global $cache_blocks;
-
+    
     for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
       if ($cache_blocks[$i]['code'] == $cache_block) {
         if ($cache_blocks[$i]['multiple']) {
@@ -1263,7 +1295,9 @@ function tep_selected_file($filename) {
               $languages = tep_get_languages();
               for ($j=0, $k=sizeof($languages); $j<$k; $j++) {
                 $cached_file_unlink = ereg_replace('-language', '-' . $languages[$j]['directory'], $cached_file);
-                if (ereg('^' . $cached_file_unlink, $cache_file)) {
+                // if the file name starts with one of those we are looking for and is a cache file (by
+                // checking if it contains the string ".cache" we delete the cache file
+                if (ereg('^' . $cached_file_unlink, $cache_file) && strstr($cache_file, '.cache')) {
                   @unlink(DIR_FS_CACHE . $cache_file);
                 }
               }
@@ -1271,6 +1305,8 @@ function tep_selected_file($filename) {
             closedir($dir);
           }
         } else {
+          // not used using hide products or regular osC, but if so, it assumes the $cache_blocks[$i]['file'] does 
+          // contain the .cache on the end for example whatever_box-language.cache
           $cached_file = $cache_blocks[$i]['file'];
           $languages = tep_get_languages();
           for ($i=0, $n=sizeof($languages); $i<$n; $i++) {

@@ -4,6 +4,7 @@ $Id: categories.php 3 2006-05-27 04:59:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
+  adapted for Separate Pricing Per Customer, Hide products and categories from groups 2008/08/04
 
   Copyright 2006 osCMax
 
@@ -33,7 +34,10 @@ $Id: categories.php 3 2006-05-27 04:59:07Z user $
   function tep_show_category($counter) {
     
 // BoF - Contribution Category Box Enhancement 1.1
-    global $tree, $boxContent, $cPath_array, $cat_name;
+//  global $tree, $boxContent, $cPath_array, $cat_name;
+//adapted for Separate Pricing Per Customer, Hide products and categories from groups
+//    global $tree, $categories_string, $cPath_array, $customer_group_id;
+    global $tree, $boxContent, $cPath_array, $customer_group_id, $cat_name;
 
     for ($i=0; $i<$tree[$counter]['level']; $i++) {
       $boxContent .= "&nbsp;&nbsp;";
@@ -101,7 +105,10 @@ $Id: categories.php 3 2006-05-27 04:59:07Z user $
   $boxContent = '';
   $tree = array();
 
-  $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' order by sort_order, cd.categories_name");
+// categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' order by sort_order, cd.categories_name");
+// BOF SPPC hide categories from groups
+  $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 order by sort_order, cd.categories_name");
+// EOF SPPC hide categories from groups
   while ($categories = tep_db_fetch_array($categories_query))  {
     $tree[$categories['categories_id']] = array('name' => $categories['categories_name'],
                                                 'parent' => $categories['parent_id'],
@@ -127,7 +134,10 @@ $Id: categories.php 3 2006-05-27 04:59:07Z user $
     while (list($key, $value) = each($cPath_array)) {
       unset($parent_id);
       unset($first_id);
-      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$value . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' order by sort_order, cd.categories_name");
+//      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$value . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' order by sort_order, cd.categories_name");
+      // BOF SPPC hide categories from groups
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$value . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 order by sort_order, cd.categories_name");
+      // EOF SPPC hide categories from groups
       if (tep_db_num_rows($categories_query)) {
         $new_path .= $value;
         while ($row = tep_db_fetch_array($categories_query)) {

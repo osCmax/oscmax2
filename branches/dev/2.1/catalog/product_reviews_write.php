@@ -24,7 +24,19 @@ $Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
     tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
   }
 
-  $product_info_query = tep_db_query("select p.products_id, p.products_model, p.products_image, p.products_price, p.products_tax_class_id, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+//  $product_info_query = tep_db_query("select p.products_id, p.products_model, p.products_image, p.products_price, p.products_tax_class_id, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+
+// BOF Separate Pricing Per Customer 
+ 
+  if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+    $customer_group_id = $_SESSION['sppc_customer_group_id'];
+  } else {
+    $customer_group_id = '0';
+  }
+
+  $product_info_query = tep_db_query("select p.products_id, p.products_model, p.products_image, p.products_price, p.products_tax_class_id, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
+// EOF Separate Pricing Per Customer, Hide products and categories from groups 
+
   if (!tep_db_num_rows($product_info_query)) {
     tep_redirect(tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params(array('action'))));
   } else {
@@ -61,12 +73,13 @@ $Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
     }
   }
 
-// BOF: MOD - Separate Pricing Per Customer
-  if(!tep_session_is_registered('sppc_customer_group_id')) { 
-  $customer_group_id = '0';
-  } else {
-   $customer_group_id = $sppc_customer_group_id;
-  }
+// BOF: MOD - Separate Pricing Per Customer 
+// deleted for Hide products and categories from groups
+//  if(!tep_session_is_registered('sppc_customer_group_id')) { 
+//  $customer_group_id = '0';
+//  } else {
+//   $customer_group_id = $sppc_customer_group_id;
+//  }
   
      if ($customer_group_id !='0') {
 	$customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and customers_group_id =  '" . $customer_group_id . "'");

@@ -1,6 +1,10 @@
     <?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?><table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
   if ($product_check['total'] < 1) {
+//  adapted for Separate Pricing Per Customer v4.2 2007/06/23, Hide products and categories from groups 2008/08/05
+// BOF Separate Pricing Per Customer, Hide products and categories from groups
+      $hide_product = true; // needed for column_right
+// EOF Separate Pricing Per Customer, Hide products and categories from groups
    // BOF Separate Price per Customer
      if(!tep_session_is_registered('sppc_customer_group_id')) { 
      $customer_group_id = '0';

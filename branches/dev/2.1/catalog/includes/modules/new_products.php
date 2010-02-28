@@ -4,6 +4,7 @@ $Id: new_products.php 3 2006-05-27 04:59:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
+  adapted for Separate Pricing Per Customer v4.2, Hide products and categories from groups 2008/08/05
 
   Copyright 2008 osCMax
 
@@ -21,21 +22,35 @@ $Id: new_products.php 3 2006-05-27 04:59:07Z user $
 //  new contentBoxHeading($info_box_contents);
   new infoBoxHeading($box_content, false, false, tep_href_link(FILENAME_PRODUCTS_NEW));
 
-  if ( (!isset($new_products_category_id)) || ($new_products_category_id == '0') ) {
-//  $new_products_query = tep_db_query("select p.products_id, p.products_image, p.products_tax_class_id, if(s.status, s.specials_new_products_price, p.products_price) as products_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id where products_status = '1' order by p.products_date_added desc limit " . MAX_DISPLAY_NEW_PRODUCTS);
-    $new_products_query = tep_db_query("select p.products_id, p.products_image, p.products_tax_class_id, p.products_price as products_price from " . TABLE_PRODUCTS . " p where products_status = '1' and month(p.products_date_added) = month(now()) order by p.products_date_added desc limit " . MAX_DISPLAY_NEW_PRODUCTS); 
-  } else {
-//  $new_products_query = tep_db_query("select distinct p.products_id, p.products_image, p.products_tax_class_id, if(s.status, s.specials_new_products_price, p.products_price) as products_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . TABLE_CATEGORIES . " c where p.products_id = p2c.products_id and p2c.categories_id = c.categories_id and c.parent_id = '" . (int)$new_products_category_id . "' and p.products_status = '1' order by p.products_date_added desc limit " . MAX_DISPLAY_NEW_PRODUCTS);
-    $new_products_query = tep_db_query("select distinct p.products_id, p.products_image, p.products_tax_class_id, p.products_price as products_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . TABLE_CATEGORIES . " c where p.products_id = p2c.products_id and p2c.categories_id = c.categories_id and c.parent_id = '" . (int)$new_products_category_id . "' and p.products_status = '1' and month(p.products_date_added) = month(now()) order by p.products_date_added desc limit ". MAX_DISPLAY_NEW_PRODUCTS);
-  }
+//  if ( (!isset($new_products_category_id)) || ($new_products_category_id == '0') ) {
+// //  $new_products_query = tep_db_query("select p.products_id, p.products_image, p.products_tax_class_id, if(s.status, s.specials_new_products_price, p.products_price) as products_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id where products_status = '1' order by p.products_date_added desc limit " . MAX_DISPLAY_NEW_PRODUCTS);
+//     $new_products_query = tep_db_query("select p.products_id, p.products_image, p.products_tax_class_id, p.products_price as products_price from " . TABLE_PRODUCTS . " p where products_status = '1' and month(p.products_date_added) = month(now()) order by p.products_date_added desc limit " . MAX_DISPLAY_NEW_PRODUCTS); 
+//   } else {
+// //  $new_products_query = tep_db_query("select distinct p.products_id, p.products_image, p.products_tax_class_id, if(s.status, s.specials_new_products_price, p.products_price) as products_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . TABLE_CATEGORIES . " c where p.products_id = p2c.products_id and p2c.categories_id = c.categories_id and c.parent_id = '" . (int)$new_products_category_id . "' and p.products_status = '1' order by p.products_date_added desc limit " . MAX_DISPLAY_NEW_PRODUCTS);
+//     $new_products_query = tep_db_query("select distinct p.products_id, p.products_image, p.products_tax_class_id, p.products_price as products_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . TABLE_CATEGORIES . " c where p.products_id = p2c.products_id and p2c.categories_id = c.categories_id and c.parent_id = '" . (int)$new_products_category_id . "' and p.products_status = '1' and month(p.products_date_added) = month(now()) order by p.products_date_added desc limit ". MAX_DISPLAY_NEW_PRODUCTS);
+//   }
+// 
+// // global variable (session) $sppc_customer_group_id -> local variable customer_group_id
+//   if(!tep_session_is_registered('sppc_customer_group_id')) { 
+//   $customer_group_id = '0';
+//   } else {
+//    $customer_group_id = $sppc_customer_group_id;
+//   }
+//  
+  // global variable (session) $sppc_customer_group_id -> local variable customer_group_id
 
-// global variable (session) $sppc_customer_group_id -> local variable customer_group_id
-  if(!tep_session_is_registered('sppc_customer_group_id')) { 
-  $customer_group_id = '0';
+   if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+      $customer_group_id = $_SESSION['sppc_customer_group_id'];
+    } else {
+     $customer_group_id = '0';
+   }
+
+  if ( (!isset($new_products_category_id)) || ($new_products_category_id == '0') ) {
+// BOF Separate Pricing per Customer, Hide products and categories from groups
+    $new_products_query = tep_db_query("select distinct p.products_id, p.products_image, p.products_tax_class_id, p.products_price as products_price, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = pd.products_id and products_status = '1' and find_in_set('" . $customer_group_id . "', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 and pd.language_id = '" . (int)$languages_id . "' order by p.products_date_added desc limit " . MAX_DISPLAY_NEW_PRODUCTS); 
   } else {
-   $customer_group_id = $sppc_customer_group_id;
+    $new_products_query = tep_db_query("select distinct p.products_id, p.products_image, p.products_tax_class_id, p.products_price as products_price, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = pd.products_id and c.parent_id = '" . (int)$new_products_category_id . "' and p.products_status = '1' and find_in_set('" . $customer_group_id . "', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 and pd.language_id = '" . (int)$languages_id . "' order by p.products_date_added desc limit ". MAX_DISPLAY_NEW_PRODUCTS);
   }
- 
   if (($no_of_new_products = tep_db_num_rows($new_products_query)) > 0) {
 	  while ($_new_products = tep_db_fetch_array($new_products_query)) {
 	$new_products[] = $_new_products;

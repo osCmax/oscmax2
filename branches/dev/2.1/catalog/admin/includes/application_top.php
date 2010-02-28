@@ -4,6 +4,7 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
+adapted for Hide products and categories from customer groups for SPPC 2008/08/02
 
   Copyright 2006 osCMax
 
@@ -193,9 +194,14 @@ $Id: application_top.php 18 2006-08-04 19:02:36Z user $
 
 // the following cache blocks are used in the Tools->Cache section
 // ('language' in the filename is automatically replaced by available languages)
-  $cache_blocks = array(array('title' => TEXT_CACHE_CATEGORIES, 'code' => 'categories', 'file' => 'categories_box-language.cache', 'multiple' => true),
-                        array('title' => TEXT_CACHE_MANUFACTURERS, 'code' => 'manufacturers', 'file' => 'manufacturers_box-language.cache', 'multiple' => true),
-                        array('title' => TEXT_CACHE_ALSO_PURCHASED, 'code' => 'also_purchased', 'file' => 'also_purchased-language.cache', 'multiple' => true)
+//  $cache_blocks = array(array('title' => TEXT_CACHE_CATEGORIES, 'code' => 'categories', 'file' => 'categories_box-language.cache', 'multiple' => true),
+//                         array('title' => TEXT_CACHE_MANUFACTURERS, 'code' => 'manufacturers', 'file' => 'manufacturers_box-language.cache', 'multiple' => true),
+//                         array('title' => TEXT_CACHE_ALSO_PURCHASED, 'code' => 'also_purchased', 'file' => 'also_purchased-language.cache', 'multiple' => true)
+//                        );
+// adapted for Hide products and categories from groups
+  $cache_blocks = array(array('title' => TEXT_CACHE_CATEGORIES, 'code' => 'categories', 'file' => 'categories_box-language-cg', 'multiple' => true),
+                        array('title' => TEXT_CACHE_MANUFACTURERS, 'code' => 'manufacturers', 'file' => 'manufacturers_box-language', 'multiple' => true),
+                        array('title' => TEXT_CACHE_ALSO_PURCHASED, 'code' => 'also_purchased', 'file' => 'also_purchased-language-cg', 'multiple' => true)
                        );
 
 // check if a default currency is set

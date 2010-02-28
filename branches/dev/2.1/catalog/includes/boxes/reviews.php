@@ -24,10 +24,26 @@ $Id: reviews.php 3 2006-05-27 04:59:07Z user $
   $box_base_name = 'reviews'; // for easy unique box template setup (added BTSv1.2)
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
-  $random_select = "select r.reviews_id, r.reviews_rating, p.products_id, p.products_image, pd.products_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = r.products_id and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'";
+//  $random_select = "select r.reviews_id, r.reviews_rating, p.products_id, p.products_image, pd.products_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = r.products_id and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'";
+//   if (isset($HTTP_GET_VARS['products_id'])) {
+//     $random_select .= " and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "'";
+//   }
+// BOF Hide products and categories from groups
+ 
+   if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+      $customer_group_id = $_SESSION['sppc_customer_group_id'];
+    } else {
+     $customer_group_id = '0';
+   }
+
+  $random_select = "select r.reviews_id, r.reviews_rating, p.products_id, p.products_image, pd.products_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.products_id = r.products_id and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'";
   if (isset($HTTP_GET_VARS['products_id'])) {
     $random_select .= " and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "'";
   }
+    $random_select .= " and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 ";
+    $random_select .= " and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 ";
+ // EOF Hide products and categories from groups
+
   $random_select .= " order by r.reviews_id desc limit " . MAX_RANDOM_SELECT_REVIEWS;
   $random_product = tep_random_select($random_select);
 

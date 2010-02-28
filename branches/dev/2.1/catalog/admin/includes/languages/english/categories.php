@@ -127,4 +127,15 @@ define('TAB3', 'Tab 3');
 define('TAB4', 'Tab 4');
 define('TAB5', 'Tab 5');
 define('TAB6', 'Tab 6');
+
+// BOF Hide product from groups
+define('TEXT_HIDE_PRODUCTS_FROM_GROUP', 'Select Groups To Hide This Product From:');
+define('TEXT_HIDDEN_FROM_GROUPS', 'Hidden from groups: ');
+define('TEXT_GROUPS_NONE', 'none');
+define('TEXT_HIDE_CATEGORIES_FROM_GROUPS', 'Hide categories from groups:');
+define('TABLE_HEADING_HIDE_CATEGORIES', 'Hidden');
+// 0: Icons for all groups for which the category or product is hidden, mouse-over the icons to see what group
+// 1: Only one icon and only if the category or product is hidden for a group, mouse-over the icon to what groups
+define('LAYOUT_HIDE_FROM', '0'); 
+// EOF Hide product from groups
 ?>

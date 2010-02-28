@@ -4,6 +4,7 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
+  adapted for Hide products from customer groups for SPPC (#3059) and Optimize Categories Box (#5173) 2007/06/10
 
   Copyright 2006 osCMax
 
@@ -79,26 +80,51 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
       }
     }
 
-    for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
-      $cached_file = ereg_replace('-language', '-' . $language, $cache_blocks[$i]['file']);
-
-      if (file_exists(DIR_FS_CACHE . $cached_file)) {
-        $cache_mtime = strftime(DATE_TIME_FORMAT, filemtime(DIR_FS_CACHE . $cached_file));
-      } else {
-        $cache_mtime = TEXT_FILE_DOES_NOT_EXIST;
+//    for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
+//       $cached_file = ereg_replace('-language', '-' . $language, $cache_blocks[$i]['file']);
+// 
+//       if (file_exists(DIR_FS_CACHE . $cached_file)) {
+//         $cache_mtime = strftime(DATE_TIME_FORMAT, filemtime(DIR_FS_CACHE . $cached_file));
+//       } else {
+//         $cache_mtime = TEXT_FILE_DOES_NOT_EXIST;
+//         $dir = dir(DIR_FS_CACHE);
+// 
+//         while ($cache_file = $dir->read()) {
+//           $cached_file = ereg_replace('-language', '-' . $language, $cache_blocks[$i]['file']);
+// 
+//           if (ereg('^' . $cached_file, $cache_file)) {
+//             $cache_mtime = strftime(DATE_TIME_FORMAT, filemtime(DIR_FS_CACHE . $cache_file));
+//             break;
+//           }
+//         }
+// 
+//         $dir->close();
+//       }
+// adapted for Hide products and categories from customer groups for SPPC 2008/08/02
         $dir = dir(DIR_FS_CACHE);
+        $cached_file_array = array();
 
         while ($cache_file = $dir->read()) {
-          $cached_file = ereg_replace('-language', '-' . $language, $cache_blocks[$i]['file']);
+          if (strstr($cache_file, '.cache')) {
+          $cached_file_array[] = explode('.cache' , $cache_file);
+          }
+        }
+          $dir->close();
 
-          if (ereg('^' . $cached_file, $cache_file)) {
-            $cache_mtime = strftime(DATE_TIME_FORMAT, filemtime(DIR_FS_CACHE . $cache_file));
+      for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
+        $cache_mtime = TEXT_FILE_DOES_NOT_EXIST;
+        $cache_block_file = ereg_replace('-language', '-' . $language, $cache_blocks[$i]['file']);
+
+      foreach($cached_file_array as $key => $sub_cached_file_array) {
+         // if the file name starts with the kind of file we are looking for, example: categories_box-english
+           if (strpos($sub_cached_file_array[0], $cache_block_file, 0) !== false) {
+            $name_of_file = $sub_cached_file_array[0] . '.cache' . $sub_cached_file_array[1];
+            $cache_mtime = strftime(DATE_TIME_FORMAT, filemtime(DIR_FS_CACHE . $name_of_file));
+            // if one file per kind exist, then we know if there is at least one cache file so break
             break;
           }
         }
 
-        $dir->close();
-      }
 ?>
               <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
                 <td class="dataTableContent"><?php echo $cache_blocks[$i]['title']; ?></td>

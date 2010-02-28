@@ -4,6 +4,7 @@ $Id: column_right.php 3 2006-05-27 04:59:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
+  adapted for Separate Pricing Per Customer v4.2.x, Hide products and categories from groups 2008/08/05
 
   Copyright 2006 osCMax
 
@@ -19,35 +20,78 @@ $Id: column_right.php 3 2006-05-27 04:59:07Z user $
   if (tep_session_is_registered('customer_id')) include(DIR_WS_BOXES .'wishlist.php');
 // EOF: Wish List 2.3 End
 
-  if (isset($HTTP_GET_VARS['products_id'])) include(DIR_WS_BOXES . 'manufacturer_info.php');
+//  if (isset($HTTP_GET_VARS['products_id'])) include(DIR_WS_BOXES . 'manufacturer_info.php');
+// 
+//   if (tep_session_is_registered('customer_id')) include(DIR_WS_BOXES . 'order_history.php');
+// 
+//   if (isset($HTTP_GET_VARS['products_id'])) {
+//     if (tep_session_is_registered('customer_id')) {
+//       $check_query = tep_db_query("select count(*) as count from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . (int)$customer_id . "' and global_product_notifications = '1'");
+//       $check = tep_db_fetch_array($check_query);
+//       if ($check['count'] > 0) {
+//         include(DIR_WS_BOXES . 'best_sellers.php');
+//       } else {
+//         include(DIR_WS_BOXES . 'product_notifications.php');
+//       }
+//     } else {
+//       include(DIR_WS_BOXES . 'product_notifications.php');
+//     }
+//   } else {
+//     include(DIR_WS_BOXES . 'best_sellers.php');
+//   }
+// 
+//   if (isset($HTTP_GET_VARS['products_id'])) {
+//     if (basename($PHP_SELF) != FILENAME_TELL_A_FRIEND) include(DIR_WS_BOXES . 'tell_a_friend.php');
+//   } else {
+//     include(DIR_WS_BOXES . 'specials.php');
+//   }
+// 
+//   require(DIR_WS_BOXES . 'reviews.php');
+// BOF Separate Pricing Per Customer v4.2, Hide products and categories from groups
 
-// PWA EOF
+  if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+  $customer_group_id = $_SESSION['sppc_customer_group_id'];
+  } else {
+   $customer_group_id = '0';
+  }  
+  global $hide_product; // is determined in product_info.php
+// on other pages we'll check it with a query
+   if (!isset($hide_product) && isset($HTTP_GET_VARS['products_id'])) {
+      $hide_product = tep_get_hide_status_single($customer_group_id, (int)$HTTP_GET_VARS['products_id']);
+   }
+
+  if (isset($HTTP_GET_VARS['products_id']) && $hide_product == false) include(DIR_WS_BOXES . 'manufacturer_info.php');
+
   if (tep_session_is_registered('customer_id') && (! tep_session_is_registered('customer_is_guest')) ) include(DIR_WS_BOXES . 'order_history.php');
-// PWA BOF
 
   if (isset($HTTP_GET_VARS['products_id'])) {
     if (tep_session_is_registered('customer_id')) {
-      $check_query = tep_db_query("select count(*) as count from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . (int)$customer_id . "' and global_product_notifications = '1'");
+     $check_query = tep_db_query("select count(*) as count from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . (int)$customer_id . "' and global_product_notifications = '1'");
       $check = tep_db_fetch_array($check_query);
-      if ($check['count'] > 0) {
+     if ($check['count'] > 0) {
         include(DIR_WS_BOXES . 'best_sellers.php');
-      } else {
-        include(DIR_WS_BOXES . 'product_notifications.php');
-      }
+     } else {
+        (($hide_product == false )? include(DIR_WS_BOXES . 'product_notifications.php') : '');
+     }
     } else {
-      include(DIR_WS_BOXES . 'product_notifications.php');
+      (($hide_product == false)? include(DIR_WS_BOXES . 'product_notifications.php') : '');
     }
-  } else {
-    include(DIR_WS_BOXES . 'best_sellers.php');
+  } else { 
+   include(DIR_WS_BOXES . 'best_sellers.php');
   }
 
   if (isset($HTTP_GET_VARS['products_id'])) {
-    if (basename($PHP_SELF) != FILENAME_TELL_A_FRIEND) include(DIR_WS_BOXES . 'tell_a_friend.php');
+    if (basename($PHP_SELF) != FILENAME_TELL_A_FRIEND && $hide_product == false) { include(DIR_WS_BOXES . 'tell_a_friend.php');
+  } // end if (basename($PHP_SELF) != FILENAME_TELL_A_FRIEND && $hide_product == false)
   } else {
     include(DIR_WS_BOXES . 'specials.php');
-  }
+  } // end if (isset($HTTP_GET_VARS['products_id']))
 
+  if ($hide_product == false) {
   require(DIR_WS_BOXES . 'reviews.php');
+  }
+// EOF Separate Pricing Per Customer v4.2, Hide products and categories from groups
+
 // BOF: MOD - Article Manager
   require(DIR_WS_BOXES . 'authors.php');
   require(DIR_WS_BOXES . 'articles.php');

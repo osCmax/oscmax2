@@ -403,6 +403,7 @@ CREATE TABLE categories (
   sort_order int(3),
   date_added datetime,
   last_modified datetime,
+  categories_hide_from_groups VARCHAR(255) DEFAULT '@' NOT NULL,
   PRIMARY KEY (categories_id),
   KEY idx_categories_parent_id (parent_id)
 );
@@ -930,6 +931,7 @@ CREATE TABLE products (
   products_width decimal(6,2) NOT NULL default '12.00',
   products_height decimal(6,2) NOT NULL default '12.00',
   products_ready_to_ship int(1) NOT NULL default '0',
+  products_hide_from_groups VARCHAR(255) NOT NULL DEFAULT '@',
   PRIMARY KEY  (products_id),
   KEY idx_products_model (products_model),
   KEY idx_products_date_added (products_date_added)

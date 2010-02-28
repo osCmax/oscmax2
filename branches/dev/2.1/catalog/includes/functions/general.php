@@ -4,6 +4,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
+  adapted for Separate Pricing Per Customer v4.2 2007/06/23, Hide products and categories from groups 2008/08/03
 
   Copyright 2006 osCMax
 
@@ -455,17 +456,37 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 ////
 // Return the number of products in a category
 // TABLES: products, products_to_categories, categories
+//  function tep_count_products_in_category($category_id, $include_inactive = false) {
+//     $products_count = 0;
+//     if ($include_inactive == true) {
+//       $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$category_id . "'");
+//     } else {
+//       $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = p2c.products_id and p.products_status = '1' and p2c.categories_id = '" . (int)$category_id . "'");
+//     }
+//     $products = tep_db_fetch_array($products_query);
+//     $products_count += $products['total'];
+// 
+//     $child_categories_query = tep_db_query("select categories_id from " . TABLE_CATEGORIES . " where parent_id = '" . (int)$category_id . "'");
   function tep_count_products_in_category($category_id, $include_inactive = false) {
+  // BOF Separate Pricing Per Customer, hide products and categories for groups
+     global $sppc_customer_group_id;
+     if(!tep_session_is_registered('sppc_customer_group_id')) { 
+     $customer_group_id = '0';
+     } else {
+      $customer_group_id = $sppc_customer_group_id;
+     }
     $products_count = 0;
     if ($include_inactive == true) {
-      $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$category_id . "'");
+      $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$category_id . "' and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
     } else {
-      $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = p2c.products_id and p.products_status = '1' and p2c.categories_id = '" . (int)$category_id . "'");
-    }
-    $products = tep_db_fetch_array($products_query);
+      $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = p2c.products_id and p.products_status = '1' and p2c.categories_id = '" . (int)$category_id . "' and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
+    }   
+        $products = tep_db_fetch_array($products_query);
     $products_count += $products['total'];
+// no need to find child categories that are hidden from this customer or have a higher level category that is hidden
+    $child_categories_query = tep_db_query("select categories_id from " . TABLE_CATEGORIES . " where parent_id = '" . (int)$category_id . "' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
+// EOF Separate Pricing Per Customer, hide products and categories for groups
 
-    $child_categories_query = tep_db_query("select categories_id from " . TABLE_CATEGORIES . " where parent_id = '" . (int)$category_id . "'");
     if (tep_db_num_rows($child_categories_query)) {
       while ($child_categories = tep_db_fetch_array($child_categories_query)) {
         $products_count += tep_count_products_in_category($child_categories['categories_id'], $include_inactive);
@@ -600,7 +621,16 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 
     if (!is_array($categories_array)) $categories_array = array();
 
-    $categories_query = tep_db_query("select c.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where parent_id = '" . (int)$parent_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+//    $categories_query = tep_db_query("select c.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where parent_id = '" . (int)$parent_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+    // BOF SPPC Hide categories for groups
+    if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+      $customer_group_id = $_SESSION['sppc_customer_group_id'];
+    } else {
+     $customer_group_id = '0';
+    }
+    
+    $categories_query = tep_db_query("select c.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where parent_id = '" . (int)$parent_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 order by sort_order, cd.categories_name");
+    // EOF SPPC Hide categories for groups
     while ($categories = tep_db_fetch_array($categories_query)) {
       $categories_array[] = array('id' => $categories['categories_id'],
                                   'text' => $indent . $categories['categories_name']);
@@ -1520,4 +1550,85 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
       </div></div>';
   }
 // EOF: Mod - Validate SEO URLs
+// BOF SPPC, hide products and categories from groups
+  function tep_get_hide_status_single($customer_group_id, $pid_for_hide) {
+      $hide_query = tep_db_query("select find_in_set('" . $customer_group_id . "', products_hide_from_groups) as hide_or_not, find_in_set('" . $customer_group_id . "', categories_hide_from_groups) as in_hidden_category from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = '" . $pid_for_hide . "'");
+// since a product can be in more than one category (linked products) we have 
+// to check for the possibility of more than one row returned
+       while ($_hide_product_array = tep_db_fetch_array($hide_query)) {
+         $hide_product_array[] = $_hide_product_array; 
+       }
+      if (is_array($hide_product_array)) { // if products_id exists
+        foreach ($hide_product_array as $key => $hide_product_sub_array) {
+          if ($hide_product_sub_array['hide_or_not'] != '0') { 
+            $hide_product = true; 
+           }
+// if the product is also present in a category that is not hidden it should be  
+// possible to buy it, delete it, get notifications etcetera
+           elseif ($hide_product_sub_array['in_hidden_category'] == '0') {
+             $hide_product = false; 
+// no need to continue with foreach
+           break;
+         } elseif ($hide_product_sub_array['in_hidden_category'] != '0') {
+           $hide_product = true;
+         } 
+       } // end  foreach ($hide_product_array as $key => $hide_product_sub_array)
+      } else { // if a product_id doesn't exist
+        $hide_product = true;
+      }
+   return $hide_product;
+   }
+
+  function tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array) {
+      foreach ($temp_post_get_array as $key => $value) {
+        $int_products_id = tep_get_prid($value);
+// the November 13 updated MS2.2 function tep_get_prid 
+// can return false with an invalid products_id 
+        if ($int_products_id != false ) {
+          $int_products_id_array[] = $int_products_id;
+        }
+        $list_of_products_ids = implode(',', $int_products_id_array);
+     } // end foreach ($temp_post_get_array as $key => $value)
+
+     $hide_query = tep_db_query("select p.products_id, find_in_set('".$customer_group_id."', products_hide_from_groups) as hide_or_not, find_in_set('".$customer_group_id."', categories_hide_from_groups) as in_hidden_category from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id in (" . $list_of_products_ids . ")");
+// since a product can be in more than one category (linked products) we have to check for the
+// possibility of more than one row returned for each products_id where "hide_or_not"
+// is the same for every row, but "in_hidden_category" can be different
+       unset($int_products_id_array); // start over
+         $int_products_id_array = array();
+         if (tep_not_null($hide_status_products)) {
+           foreach($hide_status_products as $key => $subarray) {
+             $int_products_id_array[] = $hide_status_products['products_id'];
+            }
+         } // end if (tep_not_null($hide_status_products))
+      while ($hide_products_array = tep_db_fetch_array($hide_query)) {
+        $cat_hidden = '1';
+        $prod_hidden = '0';
+          if ($hide_products_array['hide_or_not'] != '0') {
+            $prod_hidden = '1';
+          } elseif ($hide_products_array['in_hidden_category'] == '0') {
+             $cat_hidden = '0';
+          }
+          if ($prod_hidden == '0' && $cat_hidden == '0') { 
+            $hidden = '0'; 
+          } else {
+            $hidden = '1';
+           }
+            if (in_array($hide_products_array['products_id'], $int_products_id_array)) {
+              foreach($hide_status_products as $key => $subarray) {
+                if ($subarray['products_id'] == $hide_products_array['products_id']) {
+                  if ($subarray['hidden'] == '1' && $subarray['prod_hidden'] == '0' && $cat_hidden == '0') {
+// product is not a hidden one and now found to be in a category that is not hidden
+                  $hide_status_products[$key]['hidden'] = '0';
+                  }
+                } // end if ($subarray['products_id'] == $hide_products_array['products_id'])
+               } // end foreach ($hide_status_products as $key => $subarray)
+            } else { 
+              $hide_status_products[] = array('products_id' => $hide_products_array['products_id'], 'hidden' => $hidden, 'prod_hidden' => $prod_hidden);
+            }
+        $int_products_id_array[] = $hide_products_array['products_id'];
+      } // end while
+     return $hide_status_products;
+  }
+// EOF SPPC, hide products and categories from groups
 ?>

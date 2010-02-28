@@ -208,12 +208,21 @@
     if ($pto > 0) $where_str .= " and (IF(s.status AND s.customers_group_id = '" . $customer_group_id . "', s.specials_new_products_price, p.products_price) <= " . (double)$pto . ")";
    }
    } 
+//  adapted for Separate Pricing Per Customer 2007/02/26, Hide products and categories from groups 2008/08/05
     // EOF Separate Pricing Per Customer
-
+// 
+//   if ( (DISPLAY_PRICE_WITH_TAX == 'true') && (tep_not_null($pfrom) || tep_not_null($pto)) ) {
+//     $where_str .= " group by p.products_id, tr.tax_priority";
+//   }
+// 
+ // EOF Separate Pricing Per Customer BOF Hide products and categories from groups
+ 
+ $where_str .= " and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 ";
+ $where_str .= " and find_in_set('".$customer_group_id."', categories_hide_from_groups) = 0 ";
+ // EOF hide products and categories from group
   if ( (DISPLAY_PRICE_WITH_TAX == 'true') && (tep_not_null($pfrom) || tep_not_null($pto)) ) {
     $where_str .= " group by p.products_id, tr.tax_priority";
   }
-
   if ( (!isset($HTTP_GET_VARS['sort'])) || (!ereg('[1-8][ad]', $HTTP_GET_VARS['sort'])) || (substr($HTTP_GET_VARS['sort'], 0, 1) > sizeof($column_list)) ) {
     for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
       if ($column_list[$i] == 'PRODUCT_LIST_NAME') {

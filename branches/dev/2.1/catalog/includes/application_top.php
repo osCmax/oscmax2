@@ -4,6 +4,7 @@ $Id: application_top.php 3 2006-05-27 04:59:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
+  adapted for Separate Pricing Per Customer 4.2.x, Hide products and categories from groups 2008/08/03
 
   Copyright 2006 osCMax
 
@@ -387,11 +388,68 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
 // EOF: MOD - Wishlist 3.5
 
 // Shopping cart actions
+//   if (isset($HTTP_GET_VARS['action'])) {
+// // redirect the customer to a friendly cookie-must-be-enabled page if cookies are disabled
+//     if ($session_started == false) {
+//       tep_redirect(tep_href_link(FILENAME_COOKIE_USAGE));
+//     }
+// BOF Separate Pricing Per Customer, Hide products and categories from groups
+
+  if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+    $customer_group_id = $_SESSION['sppc_customer_group_id'];
+  } else {
+    $customer_group_id = '0';
+  }
+  
+
+// Shopping cart actions
   if (isset($HTTP_GET_VARS['action'])) {
 // redirect the customer to a friendly cookie-must-be-enabled page if cookies are disabled
     if ($session_started == false) {
       tep_redirect(tep_href_link(FILENAME_COOKIE_USAGE));
     }
+      $hide_product = false;
+   /* the shopping_cart page and some others sends an array 'products_id' or 'notify'. 
+      That is dealt with separately. For the following code two new functions (tep_get_hide_status  
+      and tep_get_hide_status_single) should have been added to /includes/functions/general.php */
+      if (isset($HTTP_POST_VARS['products_id']) && !is_array($HTTP_POST_VARS['products_id'])) {
+         $pid_for_hide = (int)$HTTP_POST_VARS['products_id'];
+      } elseif (isset($HTTP_GET_VARS['products_id'])) {
+         $pid_for_hide = (int)$HTTP_GET_VARS['products_id'];
+      } elseif (isset($HTTP_GET_VARS['pid'])) {
+         $pid_for_hide = (int)$HTTP_GET_VARS['pid'];
+      } elseif (isset($HTTP_GET_VARS['notify']) && !is_array($HTTP_GET_VARS['notify'])) {
+         $pid_for_hide = (int)$HTTP_GET_VARS['notify'];
+         } elseif (isset($HTTP_POST_VARS['notify']) && !is_array($HTTP_POST_VARS['notify'])) {
+            $pid_for_hide = (int)$HTTP_POST_VARS['notify'];
+         }
+     if (tep_not_null($pid_for_hide)) {
+         $hide_product = tep_get_hide_status_single($customer_group_id, $pid_for_hide);
+     } else {
+         $hide_product = false;
+     } // end if/else (tep_not_null($pid_for_hide))
+  
+      $temp_post_get_array = array();
+      $hide_status_products = array();
+      if (is_array($HTTP_POST_VARS['products_id']) && tep_not_null($HTTP_POST_VARS['products_id']) && tep_not_null($HTTP_POST_VARS['products_id'][0])) {
+         $temp_post_get_array = $HTTP_POST_VARS['products_id'];
+         $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
+      } 
+      if (is_array($HTTP_GET_VARS['products_id']) && tep_not_null($HTTP_GET_VARS['products_id']) && tep_not_null($HTTP_GET_VARS['products_id'][0])) {
+         $temp_post_get_array = $HTTP_GET_VARS['products_id'];
+         $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
+      }
+      if (is_array($HTTP_POST_VARS['notify']) && tep_not_null($HTTP_POST_VARS['notify']) && tep_not_null($HTTP_POST_VARS['notify'][0])) {
+         $temp_post_get_array = $HTTP_POST_VARS['notify'];
+         $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
+      } 
+      if (is_array($HTTP_GET_VARS['notify']) && tep_not_null($HTTP_GET_VARS['notify']) && tep_not_null($HTTP_GET_VARS['notify'][0])) {
+      $temp_post_get_array = $HTTP_GET_VARS['notify'];
+         $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
+     }
+
+    if (!$hide_product) { // product does not need to be hidden from the customer group
+// EOF Separate Pricing Per Customer v4.2.x, Hide products from groups mod
 
     if (DISPLAY_CART == 'true') {
       $goto =  FILENAME_SHOPPING_CART;
@@ -428,7 +486,14 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
           } else {
             $attributes = ($HTTP_POST_VARS['id'][$HTTP_POST_VARS['products_id'][$i]]) ? $HTTP_POST_VARS['id'][$HTTP_POST_VARS['products_id'][$i]] : '';
           }
-          $cart->add_cart($HTTP_POST_VARS['products_id'][$i], $HTTP_POST_VARS['cart_quantity'][$i], $attributes, false);
+//          $cart->add_cart($HTTP_POST_VARS['products_id'][$i], $HTTP_POST_VARS['cart_quantity'][$i], $attributes, false);
+// BOF SPPC, Hide products and categories from groups
+                                  foreach($hide_status_products as $key => $subarray) {
+                                    if ($subarray['products_id'] == tep_get_prid($HTTP_POST_VARS['products_id'][$i]) && $subarray['hidden'] == '0') {
+                                  $cart->add_cart($HTTP_POST_VARS['products_id'][$i], $HTTP_POST_VARS['cart_quantity'][$i], $attributes, false);
+                                  }
+                                  } // end foreach($hide_status_products as $key => $subarray)
+// EOF SPPC, Hide products and categories from groups
         }
       }
       tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
@@ -494,9 +559,24 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
                       for ($i=0, $n=sizeof($notify); $i<$n; $i++) {
                         $check_query = tep_db_query("select count(*) as count from " . TABLE_PRODUCTS_NOTIFICATIONS . " where products_id = '" . $notify[$i] . "' and customers_id = '" . $customer_id . "'");
                         $check = tep_db_fetch_array($check_query);
-                        if ($check['count'] < 1) {
-                          tep_db_query("insert into " . TABLE_PRODUCTS_NOTIFICATIONS . " (products_id, customers_id, date_added) values ('" . $notify[$i] . "', '" . $customer_id . "', now())");
-                        }
+//                        if ($check['count'] < 1) {
+//                          tep_db_query("insert into " . TABLE_PRODUCTS_NOTIFICATIONS . " (products_id, customers_id, date_added) values ('" . $notify[$i] . "', '" . $customer_id . "', now())");
+//                        }
+// BOF SPPC, Hide products and categories from groups
+      if (is_array($hide_status_products) && tep_not_null($hide_status_products)) {
+                                  foreach($hide_status_products as $key => $subarray) {
+                                    if ($subarray['products_id'] == tep_get_prid($notify[$i]) && $subarray['hidden'] == '0') {
+                                      if ($check['count'] < 1) {
+                                        tep_db_query("insert into " . TABLE_PRODUCTS_NOTIFICATIONS . " (products_id, customers_id, date_added) values ('" . $notify[$i] . "', '" . $customer_id . "', now())");
+                                      }
+                                    } // end if ($subarray['products_id'] == tep_get_prid($notify[$i])...
+                                  } // end foreach ($hide_status_products as $key => $subarray)
+      } else {
+                                    if ($check['count'] < 1) {
+                                      tep_db_query("insert into " . TABLE_PRODUCTS_NOTIFICATIONS . " (products_id, customers_id, date_added) values ('" . $notify[$i] . "', '" . $customer_id . "', now())");
+                                    }
+      }
+// EOF SPPC, Hide products and categories from groups
                       }
                       tep_redirect(tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'notify'))));
                     } else {
@@ -525,8 +605,20 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
                               }
                               tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
                               break;
+
+//                            } // end switch $HTTP_GET_VARS['action']
+//                           } // end if is set $HTTP_GET_VARS['action']
+// 
+// 
+// // include the who's online functions
+
+    } // end switch
+// BOF Separate Pricing Per Customer v4.2.x, Hide products from groups mod
+    } else { // $hide_product is true
+       tep_redirect(tep_href_link(FILENAME_DEFAULT));
     }
-  }
+// EOF Separate Pricing Per Customer v4.2.x, Hide products from groups mod
+  } // if (isset($HTTP_GET_VARS['action']))
 
 // include the who's online functions
   require(DIR_WS_FUNCTIONS . 'whos_online.php');
@@ -578,9 +670,16 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
   $breadcrumb->add(HEADER_TITLE_CATALOG, tep_href_link(FILENAME_DEFAULT));
 
 // add category names or the manufacturer name to the breadcrumb trail
+//   if (isset($cPath_array)) {
+//     for ($i=0, $n=sizeof($cPath_array); $i<$n; $i++) {
+//       $categories_query = tep_db_query("select categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . (int)$cPath_array[$i] . "' and language_id = '" . (int)$languages_id . "'");
+// add category names or the manufacturer name to the breadcrumb trail
+// BOF SPPC Hide products and categories from groups
   if (isset($cPath_array)) {
-    for ($i=0, $n=sizeof($cPath_array); $i<$n; $i++) {
-      $categories_query = tep_db_query("select categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . (int)$cPath_array[$i] . "' and language_id = '" . (int)$languages_id . "'");
+    for ($i=0, $n=sizeof($cPath_array); $i<$n; $i++) {   
+      $categories_query = tep_db_query("select categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " cd left join " . TABLE_CATEGORIES . " c using(categories_id) where cd.categories_id = '" . (int)$cPath_array[$i] . "' and language_id = '" . (int)$languages_id . "' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
+// EOF SPPC Hide products and categories from groups
+
       if (tep_db_num_rows($categories_query) > 0) {
         $categories = tep_db_fetch_array($categories_query);
         $breadcrumb->add($categories['categories_name'], tep_href_link(FILENAME_DEFAULT, 'cPath=' . implode('_', array_slice($cPath_array, 0, ($i+1)))));
@@ -598,7 +697,12 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
 
 // add the products model to the breadcrumb trail
   if (isset($HTTP_GET_VARS['products_id'])) {
-    $model_query = tep_db_query("select products_model from " . TABLE_PRODUCTS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "'");
+//    $model_query = tep_db_query("select products_model from " . TABLE_PRODUCTS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "'");
+// BOF SPPC Hide products and categories from groups
+    $model_query = tep_db_query("select p.products_model from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
+// EOF SPPC Hide products and categories from groups
+
+
     if (tep_db_num_rows($model_query)) {
       $model = tep_db_fetch_array($model_query);
       $breadcrumb->add($model['products_model'], tep_href_link(FILENAME_PRODUCT_INFO, 'cPath=' . $cPath . '&products_id=' . $HTTP_GET_VARS['products_id']));

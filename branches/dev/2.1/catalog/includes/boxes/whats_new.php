@@ -4,6 +4,7 @@ $Id: whats_new.php 3 2006-05-27 04:59:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
+  adapted for Separate Pricing Per Customer v4.2 2007/08/10, Hide products and categories from groups 2008/08/04
 
   Copyright 2006 osCMax
 
@@ -13,7 +14,12 @@ $Id: whats_new.php 3 2006-05-27 04:59:07Z user $
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 
 
-  if ($random_product = tep_random_select("select products_id, products_image, products_tax_class_id, products_price from " . TABLE_PRODUCTS . " where products_status = '1' order by products_date_added desc limit " . MAX_RANDOM_SELECT_NEW)) {
+//  if ($random_product = tep_random_select("select products_id, products_image, products_tax_class_id, products_price from " . TABLE_PRODUCTS . " where products_status = '1' order by products_date_added desc limit " . MAX_RANDOM_SELECT_NEW)) {
+ // BOF Hide products and categories from groups
+  if ($random_product = tep_random_select("select p.products_id, products_image, products_tax_class_id, products_price from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_TO_CATEGORIES .  " using(products_id) left join " . TABLE_CATEGORIES . " using(categories_id) where products_status = '1' and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 order by products_date_added desc limit " . MAX_RANDOM_SELECT_NEW)) {
+ // EOF Hide products and categories from groups
+
+
 ?>
 <!-- whats_new //-->
 <?php

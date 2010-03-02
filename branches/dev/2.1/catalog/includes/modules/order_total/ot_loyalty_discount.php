@@ -49,7 +49,7 @@ $Id: ot_loyalty_discount.php 14 2006-07-28 17:42:07Z user $
   function calculate_credit($amount_order, $amount_cum_order) {
     global $order;
     $od_amount=0;
-    $table_cost = split("[:,]" , MODULE_LOYALTY_DISCOUNT_TABLE);
+    $table_cost = preg_split('/[:,]/' , MODULE_LOYALTY_DISCOUNT_TABLE);
     for ($i = 0; $i < count($table_cost); $i+=2) {
           if ($amount_cum_order >= $table_cost[$i]) {
             $od_pc = $table_cost[$i+1];
@@ -83,7 +83,7 @@ $Id: ot_loyalty_discount.php 14 2006-07-28 17:42:07Z user $
       $t_prid = tep_get_prid($products[$i]['id']);
       $gv_query = tep_db_query("select products_price, products_tax_class_id, products_model from " . TABLE_PRODUCTS . " where products_id = '" . $t_prid . "'");
       $gv_result = tep_db_fetch_array($gv_query);
-      if (ereg('^GIFT', addslashes($gv_result['products_model']))) { 
+      if (preg_match('/^GIFT/im', addslashes($gv_result['products_model']))) {
         $qty = $cart->get_quantity($t_prid);
         $products_tax = tep_get_tax_rate($gv_result['products_tax_class_id']);
         if ($this->include_tax =='false') {

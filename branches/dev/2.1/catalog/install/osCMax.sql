@@ -1586,7 +1586,7 @@ INSERT INTO configuration VALUES (122,'Display The Page Parse Time','DISPLAY_PAG
 INSERT INTO configuration VALUES (123,'Store Database Queries','STORE_DB_TRANSACTIONS','false','Store the database queries in the page parse time log (PHP4 only)','10','5',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 INSERT INTO configuration VALUES (124,'Use Cache','USE_CACHE','false','Use caching features.<br>CAUTION. This may cause issues and crash your site. Test first!','11','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (125,'Cache Directory','DIR_FS_CACHE','/tmp/','The directory where the cached files are saved','11','2',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (125,'Cache Directory','DIR_FS_CACHE','cache/','The directory where the cached files are saved','11','2',NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (126,'E-Mail Transport Method','EMAIL_TRANSPORT','sendmail','Defines if this server uses a local connection to sendmail or uses an SMTP connection via TCP/IP. Servers running on Windows and MacOS should change this setting to SMTP.','12','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'sendmail\', \'smtp\'),');
 INSERT INTO configuration VALUES (127,'E-Mail Linefeeds','EMAIL_LINEFEED','LF','Defines the character sequence used to separate mail headers.','12','2',NULL,now(),NULL, 'tep_cfg_select_option(array(\'LF\', \'CRLF\'),');
@@ -1860,7 +1860,10 @@ INSERT INTO configuration VALUES (2102, 'Google Analytics Sub-Domain Setting', '
 
 #New v2.1 Entries
 INSERT INTO configuration VALUES (2500, 'Use Tabs to display extra product information?', 'USE_PRODUCT_DESCRIPTION_TABS', 'True', 'Use tabs for product info?', 8, 20, NULL,now(),NULL,'tep_cfg_select_option(array(''true'', ''false''),');
-
+INSERT INTO configuration VALUES(2501, 'Enable FWR Menu = true/false', 'FWR_SUCKERTREE_MENU_ON', 'true', 'True to use the FWR menu. False to use standard', 86, 1, '2010-03-01 23:29:26', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES(2502, 'Choose sort params = categories_id or sort_order', 'FWR_MENU_ORDER_BY', 'c.categories_id', 'Choose categories_id or sort_order preferences', 86, 2, '2010-03-01 23:12:12', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''c.categories_id'', ''c.sort_order''),');
+INSERT INTO configuration VALUES(2503, 'Cache path: True uses standard osc DIR_FS_CACHE.<br />False will try to write to catalog root.', 'FWR_MENU_CACHE_PATH', 'DIR_FS_CACHE', 'Choose true to use the standard cache path as set in configuration<br />False will attempt to write to shop root.', 86, 3, '2010-03-01 23:36:28', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''DIR_FS_CACHE'', ''false''),');
+INSERT INTO configuration VALUES(2504, 'Reset the categories menu.', 'FWR_MENU_RESET', 'false', 'Choose true to rebuild the categories menu', 86, 4, '2010-03-02 21:36:40', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
@@ -1891,6 +1894,7 @@ INSERT INTO configuration_group VALUES (65,'Wish List Settings','Settings for yo
 INSERT INTO configuration_group VALUES (70,'Order Editor','Configuration options for Order Editor', 903,1);
 INSERT INTO configuration_group VALUES (80,'Recover Cart Sales', 'Recover Cart Sales (RCS) Configuration Values', 55, 1);
 INSERT INTO configuration_group VALUES (85,'Google Analytics', 'Google Analytics Settings', 99, 1);
+INSERT INTO configuration_group VALUES(86, 'FWR Menu', 'SEO Pop Out Multilayer Menu', 904, 1);
 
 
 INSERT INTO `countries` VALUES(1, 'Afghanistan', 'AF', 'AFG', 1, 0);

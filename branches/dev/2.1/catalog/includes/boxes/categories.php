@@ -13,6 +13,10 @@ $Id: categories.php 3 2006-05-27 04:59:07Z user $
 
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 
+if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
+include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
+} else
+
    if ((USE_CACHE == 'true') && empty($SID)) {
      echo tep_cache_categories_box();
    } else {

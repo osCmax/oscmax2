@@ -72,7 +72,7 @@ function cOut(td)
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo "Cross-Sell (X-Sell) Admin"; ?></td>
+            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
@@ -126,10 +126,10 @@ function cOut(td)
 				
             <table border="0" cellspacing="1" cellpadding="2" bgcolor="#999999">
               <tr class="dataTableHeadingRow"> 
-                <td class="dataTableHeadingContent" nowrap align=center>ID</td>
-                <td class="dataTableHeadingContent">Product Name</td>
-                <td class="dataTableHeadingContent" nowrap>Cross-Associated Products</td>
-                <td class="dataTableHeadingContent" colspan=3 nowrap align=center>Cross Sell Actions</td>
+                <td class="dataTableHeadingContent" nowrap align=center><?php echo TABLE_HEADING_PRODUCT_ID; ?></td>
+                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCT_NAME; ?></td>
+                <td class="dataTableHeadingContent" nowrap><?php echo TABLE_HEADING_CROSS_PRODUCTS ?></td>
+                <td class="dataTableHeadingContent" colspan=3 nowrap align=center><?php echo TABLE_HEADING_CROSS_SELL_ACTIONS; ?></td>
               </tr>
                <?php 
 			   $num_of_products = sizeof($PRODUCTS_id);
@@ -151,11 +151,11 @@ function cOut(td)
 						}
 					else
 						echo "<td class=\"dataTableContent\">--</td>\n";
-					echo '<td class="dataTableContent"  valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS, 'add_related_product_ID=' . $PRODUCTS_id[$i], 'NONSSL') . '">Add</a>&nbsp;</td><td class="dataTableContent" valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS, 'add_related_product_ID=' . $PRODUCTS_id[$i], 'NONSSL') . '">Remove</a>&nbsp;</td>';
+					echo '<td class="dataTableContent"  valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS, 'add_related_product_ID=' . $PRODUCTS_id[$i], 'NONSSL') . '"><?php echo TEXT_CROSS_SELL_ADD; ?></a>&nbsp;</td><td class="dataTableContent" valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS, 'add_related_product_ID=' . $PRODUCTS_id[$i], 'NONSSL') . '"><?php echo TEXT_CROSS_SELL_REMOVE; ?></a>&nbsp;</td>';
 									
 					if (count($Related_items)>1)
 					{
-					  echo '<td class="dataTableContent" valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS, 'sort=1&add_related_product_ID=' . $PRODUCTS_id[$i], 'NONSSL') . '">Sort</a>&nbsp;</td>';
+					  echo '<td class="dataTableContent" valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS, 'sort=1&add_related_product_ID=' . $PRODUCTS_id[$i], 'NONSSL') . '"><?php echo TEXT_CROSS_SELL_SORT; ?></a>&nbsp;</td>';
 					} else {
 						echo "<td class=\"dataTableContent\" valign=top align=center>--</td>";
 						}
@@ -183,7 +183,7 @@ function cOut(td)
 	    if (!tep_db_query($query))
 		exit('could not insert to DB');
 	  }
-	  echo '<a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS, '', 'NONSSL') . '">Click Here to add a new cross sale</a><br>' . "\n";
+	  echo '<a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS, '', 'NONSSL') . '"><?php echo TEXT_NEW_CROSS_SELL; ?></a><br>' . "\n";
 	  if ($_POST[xsell_id])
 		echo '<a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS, 'sort=1&add_related_product_ID=' . $_POST[add_related_product_ID], 'NONSSL') . '">Click here to sort (top to bottom) the added cross sale</a>' . "\n";
 	}
@@ -202,8 +202,8 @@ function cOut(td)
 ?>
 
                   <td class="dataTableHeadingContent">&nbsp;</td>
-                  <td class="dataTableHeadingContent" nowrap>Item #</td>
-                  <td class="dataTableHeadingContent">Item Name</td>
+                  <td class="dataTableHeadingContent" nowrap><?php echo TABLE_HEADING_ITEM_NO; ?></td>
+                  <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_ITEM_NAME; ?></td>
                   <td class="dataTableHeadingContent">$Price</td>
                 </tr>
 	
@@ -267,10 +267,10 @@ function cOut(td)
 	<form method="post" action="<?php tep_href_link(FILENAME_XSELL_PRODUCTS, 'sort=1&add_related_product_ID=' . $add_related_product_ID, 'NONSSL'); ?>">
               <table cellpadding="2" cellspacing="1" bgcolor=999999 border="0">
                 <tr class="dataTableHeadingRow"> 
-                  <td class="dataTableHeadingContent" width="75">Product ID</td>
-                  <td class="dataTableHeadingContent">Name</td>
-                  <td class="dataTableHeadingContent" width="150">Price</td>
-                  <td class="dataTableHeadingContent" width="150">Order (1=Top)</td>
+                  <td class="dataTableHeadingContent" width="75"><?php echo TABLE_HEADING_PRODUCT_ID; ?></td>
+                  <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NAME; ?></td>
+                  <td class="dataTableHeadingContent" width="150"><?php echo TABLE_HEADING_PRICE; ?></td>
+                  <td class="dataTableHeadingContent" width="150"><?php echo TABLE_HEADING_ORDER; ?></td>
                 </tr>
 				<?php 
 				$query = "select * from " . TABLE_PRODUCTS_XSELL . " WHERE products_id = '".$add_related_product_ID."'";

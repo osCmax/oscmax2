@@ -129,27 +129,27 @@ function popupWindow(url) {
                   <td width="15%" class="dataTableContent"></td>
                 </tr>
                 <tr>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_IMPRESSIONS; ?><?php echo '<a href="javascript:popupWindow(\'' . (HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_HELP_1) . '\')">' . TEXT_SUMMARY_HELP . '</a>'; ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_IMPRESSIONS; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_IMPRESSIONS_HELP . '">' . TEXT_SUMMARY_HELP; ?></span></td>
                   <td width="15%" class="dataTableContent"><?php echo $affiliate_impressions; ?></td>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_VISITS; ?><?php echo '<a href="javascript:popupWindow(\'' . (HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_HELP_2) . '\')">' . TEXT_SUMMARY_HELP . '</a>'; ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_VISITS; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_VISITS_HELP . '">' . TEXT_SUMMARY_HELP; ?></span></td>
                   <td width="15%" class="dataTableContent"><?php echo $affiliate_clickthroughs; ?></td>
                 </tr>
                 <tr>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_TRANSACTIONS; ?><?php echo '<a href="javascript:popupWindow(\'' . (HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_HELP_3) . '\')">' . TEXT_SUMMARY_HELP . '</a>'; ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_TRANSACTIONS; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_TRANSACTIONS_HELP . '">' . TEXT_SUMMARY_HELP; ?></td>
                   <td width="15%" class="dataTableContent"><?php echo $affiliate_transactions; ?></td>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_CONVERSION; ?><?php echo '<a href="javascript:popupWindow(\'' . (HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_HELP_4) . '\')">' . TEXT_SUMMARY_HELP . '</a>'; ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_CONVERSION_HELP . '">' . TEXT_SUMMARY_HELP; ?></td>
                   <td width="15%" class="dataTableContent"><?php echo $affiliate_conversions;?></td>
                 </tr>
                 <tr>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_AMOUNT; ?><?php echo '<a href="javascript:popupWindow(\'' . (HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_HELP_5) . '\')">' . TEXT_SUMMARY_HELP . '</a>'; ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_AMOUNT; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_AMOUNT_HELP . '">' . TEXT_SUMMARY_HELP; ?></td>
                   <td width="15%" class="dataTableContent"><?php echo $currencies->display_price($affiliate_amount, ''); ?></td>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_AVERAGE; ?><?php echo '<a href="javascript:popupWindow(\'' . (HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_HELP_6) . '\')">' . TEXT_SUMMARY_HELP . '</a>'; ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_AVERAGE; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_AVERAGE_HELP . '">' . TEXT_SUMMARY_HELP; ?></td>
                   <td width="15%" class="dataTableContent"><?php echo $currencies->display_price($affiliate_average, ''); ?></td>
                 </tr>
                 <tr>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_COMMISSION_RATE; ?><?php echo '<a href="javascript:popupWindow(\'' . (HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_HELP_7) . '\')">' . TEXT_SUMMARY_HELP . '</a>'; ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_COMMISSION_RATE; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_COMMISSION_RATE_HELP . '">' . TEXT_SUMMARY_HELP; ?></td>
                   <td width="15%" class="dataTableContent"><?php echo tep_round(AFFILIATE_PERCENT, 2) . ' %'; ?></td>
-                  <td width="35%" align="right" class="dataTableContent"><b><?php echo TEXT_COMMISSION; ?><?php echo '<a href="javascript:popupWindow(\'' . (HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_HELP_8) . '\')">' . TEXT_SUMMARY_HELP . '</a>'; ?></b></td>
+                  <td width="35%" align="right" class="dataTableContent"><b><?php echo TEXT_COMMISSION; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_COMMISSION_HELP . '">' . TEXT_SUMMARY_HELP; ?></td>
                   <td width="15%" class="dataTableContent"><b><?php echo $currencies->display_price($affiliate_commission, ''); ?></b></td>
                 </tr>
                 <tr>

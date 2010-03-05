@@ -7,6 +7,10 @@
 <script type="text/javascript" src="includes/javascript/supersubs.js"></script>
 <link rel="stylesheet" type="text/css" href="includes/javascript/superfish.css">
 
+<script type="text/javascript" src="includes/javascript/jquery.cluetip.min.js" ></script>
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery.cluetip.css" >
+
+
 <script type="text/javascript"> 
 // initialise Superfish & jQuery UI Tabs
 
@@ -56,6 +60,8 @@ $("a#showhelp").click(function() {
 	$("#descriptiontabs5").tabs();
 
 	$("#languagetabs").tabs();
+
+    $('span[title]').cluetip({splitTitle: '|', arrows: true, dropShadow: false, cluetipClass: 'jtip'});
 
 }); 
 

@@ -73,7 +73,8 @@
   for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
     echo '          <tr>' . "\n" .
          '            <td class="main" align="right" valign="top" width="30">' . $order->products[$i]['qty'] . '&nbsp;x</td>' . "\n" .
-         '            <td class="main" valign="top">' . $order->products[$i]['name'];
+		 '			  <td class="main" valign="top">' . '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . ($order->products[$i]['id']), 'NONSSL') . '" >' . $order->products[$i]['name'] . '</a>';
+
 
     if ( (isset($order->products[$i]['attributes'])) && (sizeof($order->products[$i]['attributes']) > 0) ) {
       for ($j=0, $n2=sizeof($order->products[$i]['attributes']); $j<$n2; $j++) {
@@ -82,6 +83,8 @@
     }
 
     echo '</td>' . "\n";
+	
+	echo '<td align="right"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . ($order->products[$i]['id']), 'NONSSL') . '" >' . tep_image(DIR_WS_ICONS . 'cart.png', 're-order item') . '</a></td>';
 
     if (sizeof($order->info['tax_groups']) > 1) {
       echo '            <td class="main" valign="top" align="right">' . tep_display_tax_value($order->products[$i]['tax']) . '%</td>' . "\n";

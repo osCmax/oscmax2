@@ -1446,12 +1446,15 @@ INSERT INTO admin_files VALUES (131,'phone_order.php', 0, 5, '1');
 INSERT INTO admin_files VALUES (132,'stats_admin_logging.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (133,'stats_cust_logging.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (134,'customer_export.php', 0, 5, '1');
-#Bugfix 324: Missing values
 INSERT INTO admin_files VALUES (135,'packaging.php',0,9,'1');
 INSERT INTO admin_files VALUES (136,'ups_boxes_used.php',0,9,'1');
 INSERT INTO admin_files VALUES (137,'stats_credits.php',0,8,'1');
 INSERT INTO admin_files VALUES (138,'treeview.php',0,54,'1');
 INSERT INTO admin_files VALUES (139,'qtprodoctor.php',0,9,'1');
+INSERT INTO admin_files VALUES (140,'googlesitemap.php', 0, 2, '1');
+INSERT INTO admin_files VALUES (141,'common_reports.php', 0, 8, '1');
+INSERT INTO admin_files VALUES (142,'stats_http_error.php', 0, 8, '1');
+INSERT INTO admin_files VALUES (143,'stats_register_customer_no_purchase.php', 0, 8, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
@@ -1860,10 +1863,11 @@ INSERT INTO configuration VALUES (2102, 'Google Analytics Sub-Domain Setting', '
 
 #New v2.1 Entries
 INSERT INTO configuration VALUES (2500, 'Use Tabs to display extra product information?', 'USE_PRODUCT_DESCRIPTION_TABS', 'True', 'Use tabs for product info?', 8, 20, NULL,now(),NULL,'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO configuration VALUES(2501, 'Enable FWR Menu = true/false', 'FWR_SUCKERTREE_MENU_ON', 'true', 'True to use the FWR menu. False to use standard', 86, 1, '2010-03-01 23:29:26', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO configuration VALUES(2502, 'Choose sort params = categories_id or sort_order', 'FWR_MENU_ORDER_BY', 'c.categories_id', 'Choose categories_id or sort_order preferences', 86, 2, '2010-03-01 23:12:12', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''c.categories_id'', ''c.sort_order''),');
-INSERT INTO configuration VALUES(2503, 'Cache path: True uses standard osc DIR_FS_CACHE.<br />False will try to write to catalog root.', 'FWR_MENU_CACHE_PATH', 'DIR_FS_CACHE', 'Choose true to use the standard cache path as set in configuration<br />False will attempt to write to shop root.', 86, 3, '2010-03-01 23:36:28', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''DIR_FS_CACHE'', ''false''),');
-INSERT INTO configuration VALUES(2504, 'Reset the categories menu.', 'FWR_MENU_RESET', 'false', 'Choose true to rebuild the categories menu', 86, 4, '2010-03-02 21:36:40', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2501, 'Enable FWR Menu = true/false', 'FWR_SUCKERTREE_MENU_ON', 'true', 'True to use the FWR menu. False to use standard', 86, 1, '2010-03-01 23:29:26', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2502, 'Choose sort params = categories_id or sort_order', 'FWR_MENU_ORDER_BY', 'c.categories_id', 'Choose categories_id or sort_order preferences', 86, 2, '2010-03-01 23:12:12', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''c.categories_id'', ''c.sort_order''),');
+INSERT INTO configuration VALUES (2503, 'Cache path: True uses standard osc DIR_FS_CACHE.<br />False will try to write to catalog root.', 'FWR_MENU_CACHE_PATH', 'DIR_FS_CACHE', 'Choose true to use the standard cache path as set in configuration<br />False will attempt to write to shop root.', 86, 3, '2010-03-01 23:36:28', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''DIR_FS_CACHE'', ''false''),');
+INSERT INTO configuration VALUES (2504, 'Reset the categories menu.', 'FWR_MENU_RESET', 'false', 'Choose true to rebuild the categories menu', 86, 4, '2010-03-02 21:36:40', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);

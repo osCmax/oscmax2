@@ -906,8 +906,8 @@ DROP TABLE IF EXISTS products;
 CREATE TABLE products (
   products_id int(11) NOT NULL auto_increment,
   products_quantity int(4) NOT NULL,
-  products_model varchar(12) default NULL,
-  products_image varchar(64) default NULL,
+  products_model varchar(24) default NULL,
+  products_image varchar(80) default NULL,
   products_price decimal(15,4) NOT NULL,
   products_date_added datetime NOT NULL,
   products_last_modified datetime default NULL,

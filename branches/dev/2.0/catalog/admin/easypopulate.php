@@ -153,7 +153,7 @@ define ('EP_INACTIVATE_ZERO_QUANTITIES', false);  // default is false
 // If you increase the Model Number size, you must increase the size of the field
 // in the database. Use a SQL tool like phpMyAdmin (see your host) and change the
 // "products_model" field of the "products" table in your osCommerce Database.
-define ('EP_MODEL_NUMBER_SIZE', 12); // default is 12
+define ('EP_MODEL_NUMBER_SIZE', 24); // default is 12
 
 
 //**** Price includes tax? ****
@@ -326,7 +326,7 @@ define ('EP_FROOGLE_PRODUCT_INFO_PATH', HTTP_CATALOG_SERVER . DIR_WS_CATALOG . "
 
 // **** Froogle product image path ****
 // Set this to the path to your images directory
-define ('EP_FROOGLE_IMAGE_PATH', HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES);
+define ('EP_FROOGLE_IMAGE_PATH', HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES. DYNAMICS_MOPICS_THUMBS_DIR);
 
 // **** Froogle - search engine friendly setting
 // if your store has SEARCH ENGINE FRIENDLY URLS set, then turn this to true

@@ -172,6 +172,22 @@
                 <td class="main"><?php echo TEXT_YOUR_EMAIL; ?></td>
                 <td class="main"><?php echo tep_draw_input_field('your_email', $your_email); ?></td>
               </tr>
+<?php if (RECAPTCHA_ON == 'true') { ?>
+<!-- start modification for reCaptcha -->
+              <tr>
+                <td class="smalltext" colspan="2"><b><?php echo WISHLIST_SECURITY_CHECK; ?></b></td>
+              </tr>
+              <tr>
+								<script>
+								var RecaptchaOptions = {
+								   theme : 'white',
+								   tabindex : 3
+								};
+								</script>              	
+                <td class="main" align="center" colspan="2"><?php echo recaptcha_get_html($publickey); ?></td>
+              </tr>
+<!-- end modification for reCaptcha -->
+<?php } ?>
 				</table></td>
 			  </tr>
         <tr>

@@ -16,6 +16,26 @@ $Id: wishlist.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_WISHLIST);
+  
+  // start modification for reCaptcha
+  require_once('includes/classes/recaptchalib.php');
+  $publickey = RECAPTCHA_PUBLIC_KEY;
+  $privatekey = RECAPTCHA_PRIVATE_KEY;
+  // end modification for reCaptcha
+  
+  	
+	// start modification for reCaptcha
+    // the response from reCAPTCHA
+    $resp = null;
+
+    // was there a reCAPTCHA response?
+    $resp = recaptcha_check_answer ($privatekey,
+    $_SERVER["REMOTE_ADDR"],
+    $_POST["recaptcha_challenge_field"],
+    $_POST["recaptcha_response_field"]);
+	
+    // end modification for reCaptcha
+
 
 /*******************************************************************
 ******* ADD PRODUCT TO WISHLIST IF PRODUCT ID IS REGISTERED ********
@@ -101,6 +121,15 @@ $Id: wishlist.php 3 2006-05-27 04:59:07Z user $
 			} elseif(!tep_validate_email($_POST['your_email'])) {
 				$error = true;
 				$guest_errors .= "<div class=\"messageStackError\"><img src=\"images/icons/error.gif\" /> " . ERROR_VALID_EMAIL . "</div>";
+			}
+
+			if (RECAPTCHA_ON == 'true') {
+			// reCAPTCHA
+			if (!$resp->is_valid) { 
+	    		$error = true;
+				$guest_errors .= "<div class=\"messageStackError\"><img src=\"images/icons/error.gif\" /> " .  WISHLIST_SECURITY_CHECK_ERROR . " (reCAPTCHA output: " . $resp->error . ")</div>";
+        	}
+			// reCAPTCHA
 			}
 
 			$from_name = stripslashes($_POST['your_name']);

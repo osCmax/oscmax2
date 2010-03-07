@@ -53,4 +53,7 @@ define('ERROR_ONE_EMAIL' , 'You must include at least one name and email.');
 define('ERROR_ENTER_EMAIL' , 'Please enter an email address.');
 define('ERROR_ENTER_NAME' , 'Please enter the email recipients name.');
 define('ERROR_MESSAGE', 'Please include a brief message.');
+
+define('WISHLIST_SECURITY_CHECK', 'Please complete this security question: ');
+define('WISHLIST_SECURITY_CHECK_ERROR', 'The Security Check code wasn\'t typed correctly. Try again.');
 ?>

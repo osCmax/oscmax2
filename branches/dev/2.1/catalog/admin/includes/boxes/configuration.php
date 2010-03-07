@@ -27,6 +27,7 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=40', 'NONSSL') . '">Accounts</a></li>' .   
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=16', 'NONSSL') . '">Site Maintenance</a></li>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=86', 'NONSSL') . '">SEO Pop Out Menu</a></li>' .
+				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=87', 'NONSSL') . '">reCaptcha Form</a></li>' .
 				'</ul>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=4', 'NONSSL') . '">Images</a><ul>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=4', 'NONSSL') . '">Images</a></li>' .

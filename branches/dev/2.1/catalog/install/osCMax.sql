@@ -1662,7 +1662,7 @@ INSERT INTO configuration VALUES (503,'Thumbnail Image Types','DYNAMIC_MOPICS_TH
 INSERT INTO configuration VALUES (499,'Big Images Directory','DYNAMIC_MOPICS_BIGIMAGES_DIR','images_big/','The directory inside catalog/images where your big images are stored.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (500,'Thumbnail Images Directory','DYNAMIC_MOPICS_THUMBS_DIR','thumbs/','The directory inside catalog/images where you extra image thumbs are stored.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (501,'Main Thumbnail In "Thumbnail Images Directory"','DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR','false','If you store your product\'s main thumbnail in the "Thumbnail Images Directory" set this to true.  If it is in the main image directory (uploaded via osCommerce admin),set it false.',45,0,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES(599, 'Category Images Directory', 'CATEGORY_IMAGES_DIR', 'categories/', 'The directory inside catalog/images where your category images are stored.', 45, 0, NULL, '2009-05-28 15:34:10', NULL, NULL);
+INSERT INTO configuration VALUES (599, 'Category Images Directory', 'CATEGORY_IMAGES_DIR', 'categories/', 'The directory inside catalog/images where your category images are stored.', 45, 0, NULL, '2009-05-28 15:34:10', NULL, NULL);
 INSERT INTO configuration VALUES (502,'Extra Image Pattern','DYNAMIC_MOPICS_PATTERN','imagebase_{1}','Your custom defined pattern for extra images.  imagebase is the base of the main thumbnail.  Place the counting method between brackets {}.  Current counting methods can be 1,a,or A.  See readme for more information.',45,0,NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (458,'Template Switching Allowed','TEMPLATE_SWITCHING_ALLOWED','false','Allow template switching through the url (for easy new template testing).',1,22,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
@@ -1867,6 +1867,9 @@ INSERT INTO configuration VALUES (2501, 'Enable FWR Menu = true/false', 'FWR_SUC
 INSERT INTO configuration VALUES (2502, 'Choose sort params = categories_id or sort_order', 'FWR_MENU_ORDER_BY', 'c.categories_id', 'Choose categories_id or sort_order preferences', 86, 2, '2010-03-01 23:12:12', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''c.categories_id'', ''c.sort_order''),');
 INSERT INTO configuration VALUES (2503, 'Cache path: True uses standard osc DIR_FS_CACHE.<br />False will try to write to catalog root.', 'FWR_MENU_CACHE_PATH', 'DIR_FS_CACHE', 'Choose true to use the standard cache path as set in configuration<br />False will attempt to write to shop root.', 86, 3, '2010-03-01 23:36:28', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''DIR_FS_CACHE'', ''false''),');
 INSERT INTO configuration VALUES (2504, 'Reset the categories menu.', 'FWR_MENU_RESET', 'false', 'Choose true to rebuild the categories menu', 86, 4, '2010-03-02 21:36:40', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2505, 'Enable reCaptcha Form = true/false', 'RECAPTCHA_ON', 'false', 'Set to true to enable protection. You must get a reCaptcha key from their <a href=\"http://recaptcha.net/\" target=\"_blank\">website (www.recaptcha.net)</a> and enter the Public and Private Keys before enabling this functionality.', 87, 1, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2506, 'Public Key', 'RECAPTCHA_PUBLIC_KEY', '', 'Enter your reCaptcha Public Key',87, 2, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2507, 'Private Key', 'RECAPTCHA_PRIVATE_KEY',  '', 'Enter your reCaptcha Private Key', 87, 3, NULL, now(), NULL, NULL);
 
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
@@ -1898,7 +1901,8 @@ INSERT INTO configuration_group VALUES (65,'Wish List Settings','Settings for yo
 INSERT INTO configuration_group VALUES (70,'Order Editor','Configuration options for Order Editor', 903,1);
 INSERT INTO configuration_group VALUES (80,'Recover Cart Sales', 'Recover Cart Sales (RCS) Configuration Values', 55, 1);
 INSERT INTO configuration_group VALUES (85,'Google Analytics', 'Google Analytics Settings', 99, 1);
-INSERT INTO configuration_group VALUES(86, 'FWR Menu', 'SEO Pop Out Multilayer Menu', 904, 1);
+INSERT INTO configuration_group VALUES (86,'FWR Menu', 'SEO Pop Out Multilayer Menu', 904, 1);
+INSERT INTO configuration_group VALUES (87,'reCaptcha', 'reCaptcha Settings', 905, 1); 
 
 
 INSERT INTO `countries` VALUES(1, 'Afghanistan', 'AF', 'AFG', 1, 0);

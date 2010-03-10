@@ -16,7 +16,9 @@ $Id: wishlist.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_WISHLIST);
-  
+
+if (RECAPTCHA_ON == 'true') {
+
   // start modification for reCaptcha
   require_once('includes/classes/recaptchalib.php');
   $publickey = RECAPTCHA_PUBLIC_KEY;
@@ -35,6 +37,7 @@ $Id: wishlist.php 3 2006-05-27 04:59:07Z user $
     $_POST["recaptcha_response_field"]);
 	
     // end modification for reCaptcha
+}
 
 
 /*******************************************************************

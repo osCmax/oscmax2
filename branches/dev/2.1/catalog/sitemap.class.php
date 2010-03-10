@@ -1108,16 +1108,7 @@ class GoogleSitemap{
 
 	function hrefLink($page, $parameters, $connection, $add_session_id) {
 
-		//if ( defined('SEO_URLS') && SEO_URLS == 'true' || defined('SEO_ENABLED') && SEO_ENABLED == 'true' ) {
-		if ( (SEARCH_ENGINE_FRIENDLY_URLS == 'true') ) {
-
-			return tep_href_link($page, $parameters, $connection, $add_session_id);
-
-		} else {
-
 			return $this->base_url . $page . '?' . $parameters;
-
-		}
 
 	} # end function
 

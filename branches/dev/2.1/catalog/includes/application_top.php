@@ -92,30 +92,6 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
     }
   }
 
-// set the HTTP GET parameters manually if search_engine_friendly_urls is enabled
-  if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') {
-    if (strlen(getenv('PATH_INFO')) > 1) {
-      $GET_array = array();
-      $PHP_SELF = str_replace(getenv('PATH_INFO'), '', $PHP_SELF);
-      $vars = explode('/', substr(getenv('PATH_INFO'), 1));
-      do_magic_quotes_gpc($vars);
-      for ($i=0, $n=sizeof($vars); $i<$n; $i++) {
-        if (strpos($vars[$i], '[]')) {
-          $GET_array[substr($vars[$i], 0, -2)][] = $vars[$i+1];
-        } else {
-          $HTTP_GET_VARS[$vars[$i]] = $vars[$i+1];
-        }
-        $i++;
-      }
-
-      if (sizeof($GET_array) > 0) {
-        while (list($key, $value) = each($GET_array)) {
-          $HTTP_GET_VARS[$key] = $value;
-        }
-      }
-    }
-  }
-
 // define general functions used application-wide
   require(DIR_WS_FUNCTIONS . 'general.php');
   require(DIR_WS_FUNCTIONS . 'html_output.php');

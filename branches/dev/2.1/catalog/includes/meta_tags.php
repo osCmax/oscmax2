@@ -6,7 +6,7 @@
 
 // define META_TEXT_PRICE in your includes/languages/english/index.php file if you want a price prefix
 // so for example add: "define('META_TEXT_PRICE', 'Price: ');" to this index.php file (without the outer double quotes)
-if(!defined(META_TEXT_PRICE)) define ('META_TEXT_PRICE', '');
+if(!defined('META_TEXT_PRICE')) define ('META_TEXT_PRICE', '');
 // Define Primary Section Output
 define('PRIMARY_SECTION', ' : ');
 // Define Secondary Section Output
@@ -43,6 +43,7 @@ switch ($languages_id) {
     $web_site_tagline = '';
   }
   // Get all top category names for use with web site keywords
+  $mt_keywords_string ='';
   $mt_categories_query = tep_db_query("select cd.categories_name from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."'");
   while ($mt_categories = tep_db_fetch_array($mt_categories_query))  {
     $mt_keywords_string .= $mt_categories['categories_name'] . ',';

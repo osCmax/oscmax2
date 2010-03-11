@@ -3,7 +3,7 @@
   // Load jQuery
   google.load("jquery", "1.4.0");
 </script>
-<script type="text/javascript" src="slimbox2/slimbox2.js"></script>
+<script type="text/javascript" src="includes/javascript/slimbox2/slimbox2.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','slimbox2.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','dynamic_mopics.css')); // BTSv1.5 ?>">
 <script language="javascript" type="text/javascript"><!--

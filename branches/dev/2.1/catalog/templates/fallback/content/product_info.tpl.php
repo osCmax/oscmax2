@@ -204,7 +204,12 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
                 <!-- Wish List 3.5 Start -->
                 <td align="center"><?php echo tep_image_submit('button_wishlist.gif', 'Add to Wishlist', 'name="wishlist" value="wishlist"'); ?></td>
                 <!-- Wish List 3.5 End   -->
+                <?php // START: PGM Edit to switch Add to Cart image if stock = 0
+				if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
+                <td class="main" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_OUT_OF_STOCK); ?></td>
+                <?php } else { ?>
                 <td class="main" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
+                <?php } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
             </table></td>

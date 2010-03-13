@@ -279,6 +279,7 @@ define('IMAGE_BUTTON_DELETE', 'Löschen');
 define('IMAGE_BUTTON_EDIT_ACCOUNT', 'Daten ändern');
 define('IMAGE_BUTTON_HISTORY', 'Bestellübersicht');
 define('IMAGE_BUTTON_LOGIN', 'Anmelden');
+define('IMAGE_OUT_OF_STOCK', 'Nicht Verfügbar');
 define('IMAGE_BUTTON_IN_CART', 'In den Warenkorb');
 define('IMAGE_BUTTON_NOTIFICATIONS', 'Benachrichtigungen');
 define('IMAGE_BUTTON_QUICK_FIND', 'Schnellsuche');

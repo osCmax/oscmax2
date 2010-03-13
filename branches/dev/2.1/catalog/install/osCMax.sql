@@ -1870,6 +1870,7 @@ INSERT INTO configuration VALUES (2504, 'Reset the categories menu.', 'FWR_MENU_
 INSERT INTO configuration VALUES (2505, 'Enable reCaptcha Form = true/false', 'RECAPTCHA_ON', 'false', 'Set to true to enable protection. You must get a reCaptcha key from their <a href=\"http://recaptcha.net/\" target=\"_blank\">website (www.recaptcha.net)</a> and enter the Public and Private Keys before enabling this functionality.', 87, 1, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (2506, 'Public Key', 'RECAPTCHA_PUBLIC_KEY', '', 'Enter your reCaptcha Public Key',87, 2, NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (2507, 'Private Key', 'RECAPTCHA_PRIVATE_KEY',  '', 'Enter your reCaptcha Private Key', 87, 3, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2508, 'Switch Add to Cart Image?','STOCK_IMAGE_SWITCH','true','Would you like to switch the Add to Cart image on the product info page?','9','6',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);

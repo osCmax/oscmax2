@@ -286,6 +286,7 @@ define('IMAGE_BUTTON_EDIT_ACCOUNT', '&Eacute;diter Compte');
 define('IMAGE_BUTTON_HISTORY', 'Historique des commandes');
 define('IMAGE_BUTTON_LOGIN', 'Identifiant');
 define('IMAGE_BUTTON_IN_CART', 'Ajouter au panier : ');
+define('IMAGE_OUT_OF_STOCK', 'Indisponible');
 define('IMAGE_BUTTON_NOTIFICATIONS', 'Surveillance Produit');
 define('IMAGE_BUTTON_QUICK_FIND', 'Recherche rapide');
 define('IMAGE_BUTTON_REMOVE_NOTIFICATIONS', 'Supprimer les surveillances produits');

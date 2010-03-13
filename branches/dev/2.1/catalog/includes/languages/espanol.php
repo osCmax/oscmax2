@@ -280,6 +280,7 @@ define('IMAGE_BUTTON_EDIT_ACCOUNT', 'Editar Cuenta');
 define('IMAGE_BUTTON_HISTORY', 'Historial de Pedidos');
 define('IMAGE_BUTTON_LOGIN', 'Entrar');
 define('IMAGE_BUTTON_IN_CART', 'A&ntilde;adir a la Cesta');
+define('IMAGE_OUT_OF_STOCK', 'No Disponible');
 define('IMAGE_BUTTON_NOTIFICATIONS', 'Notificaciones');
 define('IMAGE_BUTTON_QUICK_FIND', 'B&uacute;squeda R&aacute;pida');
 define('IMAGE_BUTTON_REMOVE_NOTIFICATIONS', 'Eliminar Notificaciones');

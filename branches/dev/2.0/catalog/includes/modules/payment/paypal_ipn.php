@@ -221,8 +221,8 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
             tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
 
             $order_products_id = tep_db_insert_id();
-// Added Bugfix 157            
-            $order_total_modules->update_credit_account($i);
+// Bugfix #362           
+            $order_total_modules->update_credit_account($i,$insert_id);
              
             $attributes_exist = '0';
             if (isset($order->products[$i]['attributes'])) {

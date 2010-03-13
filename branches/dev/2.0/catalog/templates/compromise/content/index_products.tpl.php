@@ -60,10 +60,10 @@
     }
 ?>
    <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_heading_title'])) ) { ?>
-            <td align="right"><?php echo tep_image(DIR_WS_IMAGES . $image, $category['categories_heading_title'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td align="right"><?php echo tep_image(DIR_WS_IMAGES . CATEGORY_IMAGES_DIR . $image, $category['categories_heading_title'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
           </tr>
         <?php } else { ?>
-          <td align="right"><?php echo tep_image(DIR_WS_IMAGES . $image, HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+          <td align="right"><?php echo tep_image(DIR_WS_IMAGES . CATEGORY_IMAGES_DIR . $image, HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
           </tr>
         <?php } ?>
 	  <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_description'])) ) { ?>

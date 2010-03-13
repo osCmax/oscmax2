@@ -3,11 +3,11 @@
 <head>
 <?php require(DIR_WS_INCLUDES . 'meta_tags.php'); ?>
 <title><?php echo META_TAG_TITLE; ?></title>
-<base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
-<meta name="description" content="<?php echo META_TAG_DESCRIPTION; ?>" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <meta name="keywords" content="<?php echo META_TAG_KEYWORDS; ?>" />
+<meta name="description" content="<?php echo META_TAG_DESCRIPTION; ?>" />
+<base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','stylesheet.css')); // BTSv1.5 ?>">
-  <link rel="stylesheet" type="text/css" href="dynamic_mopics.css">
 <style type="text/css">
 <!--
 body {

@@ -204,12 +204,30 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
                 <!-- Wish List 3.5 Start -->
                 <td align="center"><?php echo tep_image_submit('button_wishlist.gif', 'Add to Wishlist', 'name="wishlist" value="wishlist"'); ?></td>
                 <!-- Wish List 3.5 End   -->
-                <?php // START: PGM Edit to switch Add to Cart image if stock = 0
-				if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
-                <td class="main" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_OUT_OF_STOCK); ?></td>
-                <?php } else { ?>
-                <td class="main" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
-                <?php } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
+                <!-- ADDED PLUS AND MINUS BUTTONS PGM -->
+                    <td class="main" align="right" width="250">
+                            <table width="200" border="0" cellpadding="0">
+                                  <tr height="0">
+                                    <td width="25"></td>
+                                    <td width="25"></td>
+                                    <td width="150">
+                                  </tr>
+                                  <tr>
+                                    <td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',+1)" /></td>
+                                    <td rowspan="2" align="center"><input name="quantity" type="text" class="moduleRow" id="product-quantity-{{product.id}}" style="text-align:center" onkeyup="changeQty('field');" value="1" size="2" maxlength="2" /></td>
+									<?php // START: PGM Edit to switch Add to Cart image if stock = 0
+									if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
+                                    <td rowspan="2" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_BUTTON_IN_CART); ?></td>
+                					<?php } else { ?>
+                					<td rowspan="2" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
+                					<?php } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
+                                  </tr>
+                                  <tr>
+                                    <td align="center"><img src="<?php echo DIR_WS_ICONS . 'minus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',-1)" /></td>
+                                  </tr>
+                              </table>
+                    </td>
+                <!-- ADDED PLUS AND MINUS BUTTONS PGM -->
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
             </table></td>

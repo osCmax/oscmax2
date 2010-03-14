@@ -494,7 +494,7 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
               $attributes=$attributes + $HTTP_POST_VARS['id'];
           }
         }
-        $cart->add_cart($HTTP_POST_VARS['products_id'], $cart->get_quantity(tep_get_uprid($HTTP_POST_VARS['products_id'], $attributes))+1, $attributes);
+        $cart->add_cart($HTTP_POST_VARS['products_id'], $cart->get_quantity(tep_get_uprid($HTTP_POST_VARS['products_id'], $attributes))+$_POST['quantity'], $attributes);
 // EOF: MOD - QT Pro
                     }
         tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));

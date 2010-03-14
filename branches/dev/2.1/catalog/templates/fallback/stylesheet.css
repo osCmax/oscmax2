@@ -310,6 +310,8 @@ ul.semtabs {
   margin:0;
   clear:both;
   height:25px;
+  padding-left: 0px;
+  border-left: 1px solid #b6b7cb;
   list-style:none !important;
 }
 ul.semtabs li {
@@ -324,7 +326,9 @@ ul.semtabs li a {
   line-height:15px;
   display:block;
   padding: 5px 10px;
-  border: 1px solid #b6b7cb;
+  border-right: 1px solid #b6b7cb;
+  border-top: 1px solid #b6b7cb;
+  border-bottom: 1px solid #b6b7cb;
   text-decoration:none;
   font-weight:bold;
   background-color:#f8f8f9;

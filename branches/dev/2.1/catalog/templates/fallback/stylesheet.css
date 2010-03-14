@@ -296,43 +296,42 @@ SPAN.errorText {
 
 .inputRequirement { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #ff0000; }
 
-/* TAB CODE FOR PRODUCT.INFO.TPL.PHP PAGE by PGM*/
-.minitabsNav ul {
-	overflow: hidden;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	border-bottom: 0px solid #b6b7cb;
-	margin-bottom: 0px;
-}
-
-.minitabsNav li {
-	float: left;
-	padding: 4px 8px;
-	margin: 0 5px 0 0;
-	color: #999;
-	font-size: 0.9em;
-	cursor: pointer;
-	font-weight: bold;
-	border-left: 1px solid #b6b7cb;
-	border-right: 1px solid #b6b7cb;
-	border-top: 1px solid #b6b7cb;
-}
-
-.minitabsNav li.active {
-	background: #F1F1F1;
-	color: #0554AF;
-	border-bottom: none;
-	border-left: 1px solid #b6b7cb;
-	border-right: 1px solid #b6b7cb;
-	border-top: 1px solid #b6b7cb;
-}
-
-.minitabsContent {
-	clear: both;
-	padding: 5px;
-	vertical-align: top;
-	border: 1px solid #b6b7cb;
-}
-
 td.prod_attributes { border: 1px solid #b6b7cb; }
+
+/* TAB CODE FOR PRODUCT.INFO.TPL.PHP PAGE by PGM*/
+/*semantic tabs*/
+.panel {
+  border: 1px solid #b6b7cb;
+  padding: 5px;
+  font-family: Verdana, Arial, sans-serif; font-size: 12px;
+}
+ul.semtabs {
+  font-family: Verdana, Arial, sans-serif; font-size: 12px;
+  margin:0;
+  clear:both;
+  height:25px;
+  list-style:none !important;
+}
+ul.semtabs li {
+  float:left;
+  height:25px;
+  display:block;
+  margin:0 !important;
+  background-image:none;
+}
+ul.semtabs li a {
+/*  height:15px;*/
+  line-height:15px;
+  display:block;
+  padding: 5px 10px;
+  border: 1px solid #b6b7cb;
+  text-decoration:none;
+  font-weight:bold;
+  background-color:#f8f8f9;
+}
+ul.semtabs li.active a {
+  background-color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+  color: #000000;
+}
+/*end semantic tabs*/

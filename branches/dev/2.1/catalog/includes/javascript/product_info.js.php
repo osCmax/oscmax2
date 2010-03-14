@@ -24,73 +24,87 @@
 //--></script>
 <script language="javascript" type="text/javascript">
 <!--// TABS -->
-/**
- * minitabs (jQuery plugin)
- * Nizam Sayeed (nizam@nomadjourney.com)
- * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php) 
- *
- * Version: 1.0
- * Requires: jQuery 1.2.6+
- * 
- * Based on simpleTabs (http://supercanard.phpnet.org/jquery-test/simpleTabs/)
- * Originally developed by: Jonathan Coulet (j.coulet@gmail.com)
- *
- * Example:
- *
- *     $( '#myTabs' ).minitabs({
- *         first: '#minitabFoo',
- *         callback: myFunc,
- *         speed: 'slow'
- *     });
- *
- **/
-(function( $ ) {
-	$.fn.minitabs = function( opt ) {
-		var options = jQuery.extend( {
-			first: '',            // id of first tab to activate
-			callback: null,       // callback function when a tab is switched
-			speed: 'fast'         // transition effect speed
-		}, opt );
+/*
+jquery.semantictabs.js
+Creates semantic tabs from nested divs
+Chris Yates
 
-		$( this ).each( function() {
-			var tabContainer = '#' + this.id;
-			hideAll();
+Inspired by Niall Doherty's jQuery Coda-Slider v1.1 - http://www.ndoherty.com/coda-slider
 
-			// if first tab id is not provided, try to guess
-			if( options.first == '' ) {
-				var first = $( this ).children( 'div.minitabsNav' ).children( 
-					'ul' ).children( 'li' )[ 0 ];
-				options.first = '#' + $( first ).attr( 'id' );
-			}
-			changeTab( options.first );
-			
-			// hide all tab content divs
-			function hideAll() {
-				$( tabContainer + ' .minitabsContent' ).hide();
-			}
-			
-			// change active tab
-			function changeTab( tabId ) {
-				hideAll();
-				$( tabContainer + ' .minitabsNav li' ).removeClass( 'active' );
-				$( tabContainer + ' .minitabsNav ' + tabId ).addClass( 'active' );
-				$( tabContainer + ' div.minitabsContent' + tabId ).fadeIn( options.speed );
-				if( $.isFunction( options.callback ) ) {
-					options.callback.apply();
-				}
-			}
+Usage:
+$("#mycontainer").semantictabs({
+  panel:'.mypanelclass',         //-- Selector of individual panel body
+  head:'headelement',           //-- Selector of element containing panel header
+  active:':first',              //-- Which panel to activate by default
+  activate:':eq(2)'             //-- Argument used to activate panel programmatically
+});
 
-			// attach tab click event
-			$( tabContainer + ' .minitabsNav li' ).click( function() {
-				changeTab( '#' + this.id );
-			});
-		});
+1 Nov 2007
+
+Bug fixes 15 Dec 2009:
+http://plugins.jquery.com/node/11834
+http://plugins.jquery.com/node/8486
+(thanks zenmonkey)
+
+Feature update 4 Jan 2010:
+Now works with arbitrary jQuery selectors, not just 'class' attribute.
+
+*/
+
+jQuery.fn.semantictabs = function(passedArgsObj) {
+  /* defaults */
+  var defaults = {panel:'.panel', head:'h3', active:':first', activate:false};
+
+  /* override the defaults if necessary */
+  var args = jQuery.extend(defaults,passedArgsObj);
+  
+  // Allow activation of specific tab, by index
+	if (args.activate) {
+	  return this.each(function(){
+	    var container = jQuery(this);
+			container.find(args.panel).hide();
+			container.find("ul.tabs li").removeClass("active");
+			container.find(args.panel + ":eq(" + args.activate + ")").show();
+			container.find("ul.tabs li:eq(" + args.activate + ")").addClass("active");      
+	  });
+	} else {
+    return this.each(function(){
+  		// Load behavior
+  		var container = jQuery(this);
+      container.find(args.panel).hide();
+  		container.find(args.panel + args.active).show();
+  		container.prepend("<ul class=\"tabs semtabs\"></ul>");
+  		container.find(args.panel).each( function() {
+  		  var title = jQuery(this).find(args.head).text();
+  		  this.title = title;
+  			container.find("ul.tabs").append("<li><a href=\"javascript:void(0);\">"+title+"</a></li>");
+  		});
+  		container.find("ul li" + args.active).addClass("active");
+  		// Tab click behavior
+  		container.find("ul.tabs li").click(function(){
+  			container.find(args.panel).hide();
+  			container.find("ul.tabs li").removeClass("active");
+  			container.find(args.panel + "[title='"+jQuery(this).text()+"']").show();
+  			jQuery(this).addClass("active");
+  		});                                
+  		container.find("#remtabs").click(function(){
+  			container.find("ul.tabs").remove();
+  			container.find(args.container + " " + args.panel).show();
+  			container.find("#remtabs").remove();
+  		});
+  	});
 	}
-})( jQuery );
-
-$( document ).ready( function() {			
-			$( '#container' ).minitabs();
-		});
-
+		
+};
 <!--// TABS-->
+</script>
+<script type="text/javascript"> 
+// initialise Tabs
+
+$(document).ready(function(){
+	$("#mytabset").semantictabs({
+  		head:'h4',        //-- Selector of element containing panel header, i.e. h3
+  		active:':first'            //-- Which panel to activate by default
+	});
+});
 </script>

@@ -54,15 +54,17 @@
 ## If installed to the base home/root directory, uncomment the below code only:
 #RewriteBase /
 
-#RewriteRule ^(.*)-p-(.*).html$ product_info.php?products_id=$2&%{QUERY_STRING}
-#RewriteRule ^(.*)-c-(.*).html$ index.php?cPath=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-p-([0-9]+).html$ product_info.php?products_id=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-c-([0-9_]+).html$ index.php?cPath=$2&%{QUERY_STRING}
 #RewriteRule ^(.*)-m-([0-9]+).html$ index.php?manufacturers_id=$2&%{QUERY_STRING}
 #RewriteRule ^(.*)-pi-([0-9]+).html$ popup_image.php?pID=$2&%{QUERY_STRING}
-#RewriteRule ^(.*)-t-([0-9]+).html$ articles.php?tPath=$2&%{QUERY_STRING}
+#RewriteRule ^(.*)-t-([0-9_]+).html$ articles.php?tPath=$2&%{QUERY_STRING}
 #RewriteRule ^(.*)-a-([0-9]+).html$ article_info.php?articles_id=$2&%{QUERY_STRING}
 #RewriteRule ^(.*)-pr-([0-9]+).html$ product_reviews.php?products_id=$2&%{QUERY_STRING}
 #RewriteRule ^(.*)-pri-([0-9]+).html$ product_reviews_info.php?products_id=$2&%{QUERY_STRING}
 #RewriteRule ^(.*)-i-([0-9]+).html$ information.php?info_id=$2&%{QUERY_STRING}
+# Links contribution
+#RewriteRule ^(.*)-links-([0-9_]+).html$ links.php?lPath=$2&%{QUERY_STRING}
 #</ifModule>
 # EOF: MOD - Ultimate SEO URLs
 
@@ -73,18 +75,18 @@
 # eg. or in the root: /http_error.php?error_id=400
 # Don't forget to put the / at the start of the link
 
-ErrorDocument 400 /catalog/http_error.php?error_id=400
-ErrorDocument 401 /catalog/http_error.php?error_id=401
-ErrorDocument 403 /catalog/http_error.php?error_id=403
-ErrorDocument 404 /catalog/http_error.php?error_id=404
-ErrorDocument 405 /catalog/http_error.php?error_id=405
-ErrorDocument 408 /catalog/http_error.php?error_id=408
-ErrorDocument 415 /catalog/http_error.php?error_id=415
-ErrorDocument 500 /catalog/http_error.php?error_id=500
-ErrorDocument 501 /catalog/http_error.php?error_id=501
-ErrorDocument 502 /catalog/http_error.php?error_id=502
-ErrorDocument 503 /catalog/http_error.php?error_id=503
-ErrorDocument 505 /catalog/http_error.php?error_id=505
-ErrorDocument 504 /catalog/http_error.php?error_id=504
+ErrorDocument 400 /http_error.php?error_id=400
+ErrorDocument 401 /http_error.php?error_id=401
+ErrorDocument 403 /http_error.php?error_id=403
+ErrorDocument 404 /http_error.php?error_id=404
+ErrorDocument 405 /http_error.php?error_id=405
+ErrorDocument 408 /http_error.php?error_id=408
+ErrorDocument 415 /http_error.php?error_id=415
+ErrorDocument 500 /http_error.php?error_id=500
+ErrorDocument 501 /http_error.php?error_id=501
+ErrorDocument 502 /http_error.php?error_id=502
+ErrorDocument 503 /http_error.php?error_id=503
+ErrorDocument 505 /http_error.php?error_id=505
+ErrorDocument 504 /http_error.php?error_id=504
 
 # EOF: MOD - Http Error Log by pgm

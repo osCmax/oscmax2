@@ -15,15 +15,12 @@
 */
 
 function request_uri() { 
-
   if (isset($_SERVER['REQUEST_URI'])) { 
     $uri = $_SERVER['REQUEST_URI']; 
-  } 
-  else { 
+  } else {
     if (isset($_SERVER['argv'])) { 
       $uri = $_SERVER['PHP_SELF'] .'?'. $_SERVER['argv'][0]; 
-    } 
-    else { 
+    } else {
       $uri = $_SERVER['PHP_SELF'] .'?'. $_SERVER['QUERY_STRING']; 
     } 
   } 
@@ -90,6 +87,13 @@ function wo_get_host_from_addr($ip_address) {
 // WOL 1.6 EOF
     }
 
+  // fix E_Notice error for HTTP_REFERER JW 9-09
+  if (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '') {
+    $wo_http_referer = $_SERVER['HTTP_REFERER'];
+  } else {
+    $wo_http_referer = 'None' ;
+    return $wo_http_referer ;
+  }
 
 // remove entries that have expired
     tep_db_query("delete from " . TABLE_WHOS_ONLINE . " where time_last_click < '" . $xx_mins_ago . "'");
@@ -106,10 +110,17 @@ function wo_get_host_from_addr($ip_address) {
       } else {
         $wo_hostname = $wo_ip['hostname'];
       }
-      tep_db_query("update " . TABLE_WHOS_ONLINE . " set customer_id = '" . (int)$wo_customer_id . "', full_name = '" . tep_db_input($wo_full_name) . "', ip_address = '" . tep_db_input($wo_ip_address) . "', hostname = '" . tep_db_input($wo_hostname) . "', time_last_click = '" . tep_db_input($current_time) . "', last_page_url = '" . tep_db_input($wo_last_page_url) . "' where session_id = '" . tep_db_input($wo_session_id) . "'");
+    tep_db_query("update " . TABLE_WHOS_ONLINE . " set customer_id = '" . (int)$wo_customer_id . "', full_name = '" . tep_db_input($wo_full_name) . "', ip_address = '"
+      . tep_db_input($wo_ip_address) . "', hostname = '" . tep_db_input($wo_hostname) . "', time_last_click = '" . tep_db_input($current_time) . "', last_page_url = '"
+      . tep_db_input($wo_last_page_url) . "' where session_id = '" . tep_db_input($wo_session_id) . "'");
     } else {
       $wo_hostname = wo_get_host_from_addr($wo_ip_address);
-      tep_db_query("insert into " . TABLE_WHOS_ONLINE . " (customer_id, full_name, session_id, ip_address, hostname, time_entry, time_last_click, last_page_url, http_referer, user_agent) values ('" . (int)$wo_customer_id . "', '" . tep_db_input($wo_full_name) . "', '" . tep_db_input($wo_session_id) . "', '" . tep_db_input($wo_ip_address) . "', '" . tep_db_input($wo_hostname) . "', '" . tep_db_input($current_time) . "', '" . tep_db_input($current_time) . "', '" . tep_db_input($wo_last_page_url) . "', '" . tep_db_input($_SERVER['HTTP_REFERER']) . "', '" . tep_db_input($user_agent) . "')");
+    tep_db_query("insert into " . TABLE_WHOS_ONLINE
+      . " (customer_id, full_name, session_id, ip_address, hostname, time_entry, time_last_click, last_page_url, http_referer, user_agent) values ('"
+      . (int)$wo_customer_id . "', '" . tep_db_input($wo_full_name) . "', '" . tep_db_input($wo_session_id) . "', '" . tep_db_input($wo_ip_address) . "', '"
+      . tep_db_input($wo_hostname) . "', '"
+      . tep_db_input($current_time) . "', '" . tep_db_input($current_time) . "', '" . tep_db_input($wo_last_page_url) . "', '"
+      . tep_db_input($wo_http_referer) . "', '" . tep_db_input($user_agent) . "')");
     }
   }
 ?>

@@ -19,19 +19,23 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   }
 
 ////
+// ULTIMATE Seo Urls 5 by FWR Media
 // Redirect to another page or site
   function tep_redirect($url) {
-// BOF: MS2 update 501112 - Added
     if ( (strstr($url, "\n") != false) || (strstr($url, "\r") != false) ) {
       tep_redirect(tep_href_link(FILENAME_DEFAULT, '', 'NONSSL', false));
     }
-// EOF: MS2 update 501112 - Added
+
     if ( (ENABLE_SSL == true) && (getenv('HTTPS') == 'on') ) { // We are loading an SSL page
       if (substr($url, 0, strlen(HTTP_SERVER)) == HTTP_SERVER) { // NONSSL url
         $url = HTTPS_SERVER . substr($url, strlen(HTTP_SERVER)); // Change it to SSL
       }
     }
 
+    if ( false !== strpos($url, '&amp;') ){
+      $url = str_replace('&amp;', '&', $url);
+    }
+    session_write_close();
     header('Location: ' . $url);
 
     tep_exit();
@@ -1028,19 +1032,15 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 ////
 // Return a product ID with attributes
   function tep_get_uprid($prid, $params) {
-// LINE ADDED: MS2 update 501112
     if (is_numeric($prid)) {
-      $uprid = $prid;
-// BOF: MS2 update 501112 - Added
-//  if ( (is_array($params)) && (!strstr($prid, '{')) ) {
+      $uprid = (int)$prid;
+
       if (is_array($params) && (sizeof($params) > 0)) {
         $attributes_check = true;
         $attributes_ids = '';
+
         reset($params);
-// EOF: MS2 update 501112 - Added
         while (list($option, $value) = each($params)) {
-// BOF: MS2 update 501112 - Added
-//      $uprid = $uprid . '{' . $option . '}' . $value;
           if (is_numeric($option) && is_numeric($value)) {
             $attributes_ids .= '{' . (int)$option . '}' . (int)$value;
           } else {
@@ -1081,7 +1081,6 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
         }
       } else {
         return false;
-// EOF: MS2 update 501112 - Added
       }
     }
 
@@ -1093,14 +1092,11 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   function tep_get_prid($uprid) {
     $pieces = explode('{', $uprid);
 
-// LINE ADDED: MS2 update 501112
     if (is_numeric($pieces[0])) {
-      return $pieces[0];
-// BOF: MS2 update 501112 - Added
+      return (int)$pieces[0];
     } else {
       return false;
     }
-// EOF: MS2 update 501112 - Added
   }
 
 ////
@@ -1362,28 +1358,64 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     setcookie($name, $value, $expire, $path, (tep_not_null($domain) ? $domain : ''), $secure);
   }
 
+  function tep_validate_ip_address($ip_address) {
+    if (function_exists('filter_var') && defined('FILTER_VALIDATE_IP')) {
+      return filter_var($ip_address, FILTER_VALIDATE_IP, array('flags' => FILTER_FLAG_IPV4));
+    }
+
+    if (preg_match('/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/', $ip_address)) {
+      $parts = explode('.', $ip_address);
+
+      foreach ($parts as $ip_parts) {
+        if ( (intval($ip_parts) > 255) || (intval($ip_parts) < 0) ) {
+          return false; // number is not within 0-255
+        }
+      }
+
+      return true;
+    }
+
+    return false;
+  }
+
   function tep_get_ip_address() {
     global $HTTP_SERVER_VARS;
 
-    if (isset($HTTP_SERVER_VARS)) {
-      if (isset($HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'])) {
-        $ip = $HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'];
-      } elseif (isset($HTTP_SERVER_VARS['HTTP_CLIENT_IP'])) {
-        $ip = $HTTP_SERVER_VARS['HTTP_CLIENT_IP'];
-      } else {
-        $ip = $HTTP_SERVER_VARS['REMOTE_ADDR'];
-      }
-    } else {
-      if (getenv('HTTP_X_FORWARDED_FOR')) {
-        $ip = getenv('HTTP_X_FORWARDED_FOR');
-      } elseif (getenv('HTTP_CLIENT_IP')) {
-        $ip = getenv('HTTP_CLIENT_IP');
-      } else {
-        $ip = getenv('REMOTE_ADDR');
+    $ip_address = null;
+    $ip_addresses = array();
+
+    if (isset($HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR']) && !empty($HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'])) {
+      foreach ( array_reverse(explode(',', $HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'])) as $x_ip ) {
+        $x_ip = trim($x_ip);
+
+        if (tep_validate_ip_address($x_ip)) {
+          $ip_addresses[] = $x_ip;
+        }
       }
     }
 
-    return $ip;
+    if (isset($HTTP_SERVER_VARS['HTTP_CLIENT_IP']) && !empty($HTTP_SERVER_VARS['HTTP_CLIENT_IP'])) {
+      $ip_addresses[] = $HTTP_SERVER_VARS['HTTP_CLIENT_IP'];
+    }
+
+    if (isset($HTTP_SERVER_VARS['HTTP_X_CLUSTER_CLIENT_IP']) && !empty($HTTP_SERVER_VARS['HTTP_X_CLUSTER_CLIENT_IP'])) {
+      $ip_addresses[] = $HTTP_SERVER_VARS['HTTP_X_CLUSTER_CLIENT_IP'];
+    }
+
+    if (isset($HTTP_SERVER_VARS['HTTP_PROXY_USER']) && !empty($HTTP_SERVER_VARS['HTTP_PROXY_USER'])) {
+      $ip_addresses[] = $HTTP_SERVER_VARS['HTTP_PROXY_USER'];
+    }
+
+    $ip_addresses[] = $HTTP_SERVER_VARS['REMOTE_ADDR'];
+
+    foreach ( $ip_addresses as $ip ) {
+      if (!empty($ip) && tep_validate_ip_address($ip)) {
+        $ip_address = $ip;
+        break;
+      }
+    }
+
+    return $ip_address;
   }
 
   function tep_count_customer_orders($id = '', $check_session = true) {

@@ -10,44 +10,14 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
   Released under the GNU General Public License
 */
 
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-  function implode_assoc($array, $inner_glue='=', $outer_glue='&') {
-    $output = array();
-    foreach( $array as $key => $item )
-    $output[] = $key . $inner_glue . $item;
-  
-    return implode($outer_glue, $output);
-  }
-  
-  function short_name($str, $limit=3){
-    if (defined('SEO_URLS_FILTER_SHORT_WORDS')) $limit = SEO_URLS_FILTER_SHORT_WORDS;
-    $foo = explode('-', $str);
-    foreach($foo as $index => $value){
-      switch (true){
-        case ( strlen($value) <= $limit ):
-          continue;
-        default:
-          $container[] = $value;
-          break;
-      }
-    } # end foreach
-    $container = ( sizeof($container) > 1 ? implode('-', $container) : $str );
-    return $container;
-  }
-// EOF: MOD - Ultimate SEO URLs - by Chemo
-
 ////
-////
-// Ultimate SEO URLs v2.1
+// ULTIMATE Seo Urls 5 by FWR Media
 // The HTML href link wrapper function
   function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true) {
-        global $seo_urls;                
-                if ( !is_object($seo_urls) ){
-                        if ( !class_exists('SEO_URL') ){
-                                include_once(DIR_WS_CLASSES . 'seo.class.php');
-                        }
-                        global $languages_id;
-                        $seo_urls = new SEO_URL($languages_id);
+    global $seo_urls, $languages_id, $request_type, $session_started, $sid;                
+    if ( !is_object($seo_urls) ){
+      include_once DIR_WS_MODULES . 'ultimate_seo_urls5' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'usu.php';
+      $seo_urls = new usu($languages_id, $request_type, $session_started, $sid);
                 }
         return $seo_urls->href_link($page, $parameters, $connection, $add_session_id);
   }
@@ -61,7 +31,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
 // alt is added to the img tag even if it is null to prevent browsers from outputting
 // the image filename as default
-    $image = '<img src="' . tep_output_string($src) . '" border="0" alt="' . tep_output_string($alt) . '"';
+    $image = '<img src="' . tep_output_string($src) . '" class="img" alt="' . tep_output_string($alt) . '"';
 
     if (tep_not_null($alt)) {
       $image .= ' title=" ' . tep_output_string($alt) . ' "';
@@ -103,9 +73,9 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
     if(is_file(DIR_WS_TEMPLATES . $language. '/images/buttons/' . $image)) {
         $image_submit = '<input type="image" src="' .
-            tep_output_string(DIR_WS_TEMPLATES . $language. '/images/buttons/' . $image) . '" border="0" alt="' . tep_output_string($alt) . '"';
+            tep_output_string(DIR_WS_TEMPLATES . $language. '/images/buttons/' . $image) . '" class="img" alt="' . tep_output_string($alt) . '"';
     } else {
-        $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image) . '" border="0" alt="' . tep_output_string($alt) . '"';
+        $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image) . '" class="img" alt="' . tep_output_string($alt) . '"';
     }
 
     if (tep_not_null($alt)) $image_submit .= ' title=" ' . tep_output_string($alt) . ' "';

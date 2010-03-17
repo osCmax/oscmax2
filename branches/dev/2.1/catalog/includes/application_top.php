@@ -45,10 +45,35 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   require(DIR_WS_FUNCTIONS . 'compatibility.php');
 
 // set the type of request (secure or not)
-  $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
+  $request_type = (isset($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on')) ? 'SSL' : 'NONSSL';
 
+  /**
+  * USU5 function to return the base filename
+  */
+  function usu5_base_filename() {
+    // Probably won't get past SCRIPT_NAME unless this is reporting cgi location
+    $base = new ArrayIterator( array( 'SCRIPT_NAME', 'PHP_SELF', 'REQUEST_URI', 'ORIG_PATH_INFO', 'HTTP_X_ORIGINAL_URL', 'HTTP_X_REWRITE_URL' ) );
+    while ( $base->valid() ) {
+      if ( array_key_exists(  $base->current(), $_SERVER ) && !empty(  $_SERVER[$base->current()] ) ) {
+        if ( false !== strpos( $_SERVER[$base->current()], '.php' ) ) {
+          preg_match( '@[a-z0-9_]+\.php@i', $_SERVER[$base->current()], $matches );
+          if ( is_array( $matches ) && ( array_key_exists( 0, $matches ) )
+                                    && ( substr( $matches[0], -4, 4 ) == '.php' )
+                                    && ( is_readable( $matches[0] ) || ( false !== strpos( $_SERVER[$base->current()], 'ext/modules/' ) ) ) ) {
+            return $matches[0];
+          }
+        }
+      }
+      $base->next();
+    }
+    // Some odd server set ups return / for SCRIPT_NAME and PHP_SELF when accessed as mysite.com (no index.php) where they usually return /index.php
+    if ( ( $_SERVER['SCRIPT_NAME'] == '/' ) || ( $_SERVER['PHP_SELF'] == '/' ) ) {
+      return HTTP_SERVER;
+    }
+    trigger_error( 'USU5 could not find a valid base filename, please inform the developer.', E_USER_WARNING );
+  } // End function
 // set php_self in the local scope
-  if (!isset($PHP_SELF)) $PHP_SELF = $HTTP_SERVER_VARS['PHP_SELF'];
+  $PHP_SELF = usu5_base_filename();
 
   if ($request_type == 'NONSSL') {
     define('DIR_WS_CATALOG', DIR_WS_HTTP_CATALOG);
@@ -281,31 +306,14 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   require(DIR_WS_LANGUAGES . $language . '.php');
 
 // BOF: MOD
-# include the cache class
-  include('includes/classes/cache.class.php');
-  $cache = new cache($languages_id);
-// Ultimate SEO URLs v2.1
-    include_once(DIR_WS_CLASSES . 'seo.class.php');
-        if ( !is_object($seo_urls) ){
-                $seo_urls = new SEO_URL($languages_id);
-        }
-// Validate SEO URL        
-     if ( is_object($seo_urls) && (strpos($_SERVER['REQUEST_URI'], '.html') !== false) && (defined('FWR_VALIDATION_ON') && FWR_VALIDATION_ON === 'true') ) { // SEO URLS is active and there is .html in the querystring
-       tep_validate_seo_urls();
-      }
-        
-  # Get the cache - no parameters will get all GLOBAL cache entries for this language
-  $cache->get_cache('GLOBAL');
+// ULTIMATE Seo Urls 5 by FWR Media
+  if (!isset($seo_urls) || !is_object($seo_urls)) {
+    include_once DIR_WS_MODULES . 'ultimate_seo_urls5' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'usu.php';
+    $seo_urls = new usu($languages_id, $request_type, $session_started, $SID);
+  }
+  $seo_urls->initiate($SID, $languages_id, $language);
 
-
-if ( isset($HTTP_GET_VARS['cName']) && defined(urldecode($HTTP_GET_VARS['cName'])) ) {
-  $cPath = str_replace( 'cPath=', '', constant(urldecode($HTTP_GET_VARS['cName'])) );
-  $HTTP_GET_VARS['cPath'] = $cPath;
-}
-if (isset($HTTP_GET_VARS['pName']) && defined(urldecode($HTTP_GET_VARS['pName'])) ) {
-  $pid = str_replace('products_id=', '', constant(urldecode($HTTP_GET_VARS['pName'])));
-  $HTTP_GET_VARS['products_id'] = (int)$pid;
-}
+// EOF: ULTIMATE Seo Urls 5 by FWR Media
 // EOF: MOD
 
 // currency
@@ -508,19 +516,9 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
               $cart->add_cart($HTTP_GET_VARS['products_id'], $cart->get_quantity($HTTP_GET_VARS['products_id'])+1);
             }
           }
-// BOF: MOD - Ultimate SEO URLs
-//        tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
-//        break;
-          if ( (defined('SEO_URLS') && SEO_URLS == 'true') && (defined('SEO_URLS_TYPE') && SEO_URLS_TYPE == 'Rewrite') ){
-            $cPath = tep_get_product_path($HTTP_GET_VARS['products_id']);
-            $cPath_array = tep_parse_category_path($cPath);
-            $cPath = implode('_', $cPath_array);
-            tep_redirect(tep_href_link($goto, 'cPath=' . $cPath . '&' . tep_get_all_get_params($parameters)));
-          } else {
             tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
-          }
           break;
-// EOF: MOD - Ultimate SEO URLs
+
       case 'notify' : if (tep_session_is_registered('customer_id')) {
                       if (isset($HTTP_GET_VARS['products_id'])) {
                         $notify = $HTTP_GET_VARS['products_id'];

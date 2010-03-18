@@ -113,6 +113,8 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_RECOVER_CART_SALES', 'recover_cart_sales.php');
 // LINE ADDED
   define('FILENAME_STATS_RECOVER_CART_SALES', 'stats_recover_cart_sales.php');
+  define('FILENAME_CATALOG_PRODUCT_INFO', 'product_info.php');
+
 // BOF: MOD - QT Pro
   define('FILENAME_STATS_LOW_STOCK_ATTRIB', 'stats_low_stock_attrib.php');
   define('FILENAME_STOCK', 'stock.php');

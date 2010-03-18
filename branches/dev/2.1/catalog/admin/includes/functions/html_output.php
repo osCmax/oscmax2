@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: html_output.php 14 2006-07-28 17:42:07Z user $
+$Id: html_output.php $
 
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */
@@ -64,9 +64,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
 ////
 // The HTML image wrapper function
-// LINE CHNAGED: MS2 update 501112 - changed 'params' to 'parameters'
   function tep_image($src, $alt = '', $width = '', $height = '', $parameters = '') {
-// BOF: MS2 update 501112-Added all 'tep_not_null()'
     $image = '<img src="' . tep_output_string($src) . '" border="0" alt="' . tep_output_string($alt) . '"';
 
     if (tep_not_null($alt)) {
@@ -79,7 +77,6 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
     if (tep_not_null($parameters)) $image .= ' ' . $parameters;
 
-// EOF: MS2 update 501112
     $image .= '>';
 
     return $image;
@@ -272,7 +269,6 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
         $field .= tep_output_string_protected(stripslashes($HTTP_POST_VARS[$name]));
       }
     } elseif (tep_not_null($text)) {
-// LINE CHANGED: MS2 update 501112 - Added 'tep_output_string_protected()'
       $field .= tep_output_string_protected($text);
     }
 

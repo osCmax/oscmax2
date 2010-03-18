@@ -1,19 +1,19 @@
 <?php
 /*
-$Id: upload.php 3 2006-05-27 04:59:07Z user $
+$Id: upload.php $
 
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2006 osCMax
+  Copyright 2010 osCMax
 
   Released under the GNU General Public License
 */
 
   class upload {
-    var $file, $filename, $destination, $permissions, $extensions, $tmp_filename, $message_location;
+    var $file, $filename, $destination, $permissions, $extensions, $tmp_filename, $message_location, $saved;
 
-    function upload($file = '', $destination = '', $permissions = '777', $extensions = '') {
+    function upload($file = '', $destination = '', $permissions = '644', $extensions = '') {
       $this->set_file($file);
       $this->set_destination($destination);
       $this->set_permissions($permissions);
@@ -27,6 +27,8 @@ $Id: upload.php 3 2006-05-27 04:59:07Z user $
         if ( ($this->parse() == true) && ($this->save() == true) ) {
           return true;
         } else {
+// self destruct
+          $this == null;
 
           return false;
         }
@@ -34,19 +36,23 @@ $Id: upload.php 3 2006-05-27 04:59:07Z user $
     }
 
     function parse() {
-      global $HTTP_POST_FILES, $messageStack;
+      global $messageStack;
 
-      $file = array();
       if (isset($_FILES[$this->file])) {
         $file = array('name' => $_FILES[$this->file]['name'],
                       'type' => $_FILES[$this->file]['type'],
                       'size' => $_FILES[$this->file]['size'],
                       'tmp_name' => $_FILES[$this->file]['tmp_name']);
-      } elseif (isset($HTTP_POST_FILES[$this->file])) {
-        $file = array('name' => $HTTP_POST_FILES[$this->file]['name'],
-                      'type' => $HTTP_POST_FILES[$this->file]['type'],
-                      'size' => $HTTP_POST_FILES[$this->file]['size'],
-                      'tmp_name' => $HTTP_POST_FILES[$this->file]['tmp_name']);
+      } elseif (isset($GLOBALS['_FILES'][$this->file])) {
+        $file = array('name' => $_FILES[$this->file]['name'],
+                      'type' => $_FILES[$this->file]['type'],
+                      'size' => $_FILES[$this->file]['size'],
+                      'tmp_name' => $_FILES[$this->file]['tmp_name']);
+      } else {
+        $file = array('name' => (isset($GLOBALS[$this->file . '_name']) ? $GLOBALS[$this->file . '_name'] : ''),
+                      'type' => (isset($GLOBALS[$this->file . '_type']) ? $GLOBALS[$this->file . '_type'] : ''),
+                      'size' => (isset($GLOBALS[$this->file . '_size']) ? $GLOBALS[$this->file . '_size'] : ''),
+                      'tmp_name' => (isset($GLOBALS[$this->file]) ? $GLOBALS[$this->file] : ''));
       }
 
       if ( tep_not_null($file['tmp_name']) && ($file['tmp_name'] != 'none') && is_uploaded_file($file['tmp_name']) ) {
@@ -91,6 +97,7 @@ $Id: upload.php 3 2006-05-27 04:59:07Z user $
         } else {
           $messageStack->add_session(SUCCESS_FILE_SAVED_SUCCESSFULLY, 'success');
         }
+    $this->saved = true;
 
         return true;
       } else {
@@ -99,7 +106,7 @@ $Id: upload.php 3 2006-05-27 04:59:07Z user $
         } else {
           $messageStack->add_session(ERROR_FILE_NOT_SAVED, 'error');
         }
-
+    $this->saved = false;
         return false;
       }
     }

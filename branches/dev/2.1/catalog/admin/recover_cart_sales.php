@@ -248,9 +248,9 @@ if (count($custid) > 0 ) {  ?>
 		$email = EMAIL_TEXT_LOGIN;
 
 		if( EMAIL_USE_HTML == 'true' )
-			$email .= '  <a HREF="' . tep_catalog_href_link(FILENAME_CATALOG_LOGIN, '', 'SSL') . '">' . tep_catalog_href_link(FILENAME_CATALOG_LOGIN, '', 'SSL')  . '</a>';
+			$email .= '  <a HREF="' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL') . '">' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL')  . '</a>';
 		else
-			$email .= '  (' . tep_catalog_href_link(FILENAME_CATALOG_LOGIN, '', 'SSL') . ')';
+			$email .= '  (' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL') . ')';
 
 		$email .= "\n" . EMAIL_SEPARATOR . "\n\n";
 
@@ -294,7 +294,7 @@ if (count($custid) > 0 ) {  ?>
 	}
 	echo "<tr><td colspan=8 align='right' class='dataTableContent'><b>" . TABLE_CART_TOTAL . "</b>" . $currencies->format($tprice) . "</td> </tr>";
 	echo "<tr><td colspan=6 align='right'><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES, "action=delete&customer_id=" . $cid . "&tdate=" . $tdate . "&sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>  </tr>\n";
-	echo "<tr><td colspan=6 align=center><a href=".$PHP_SELF.">" . TEXT_RETURN . "</a></td></tr>";
+	echo "<tr><td colspan=6 align=center><a href=". $_SERVER['PHP_SELF'] .">" . TEXT_RETURN . "</a></td></tr>";
 }
 else	 //we are NOT doing an e-mail to some customers
 {
@@ -303,16 +303,16 @@ else	 //we are NOT doing an e-mail to some customers
             <tr>
               <td class="pageHeading" align="left" width="50%" colspan="4"><?php echo HEADING_TITLE; ?></td>
               <td class="pageHeading" align="right" width="50%" colspan="4">
-                <form method=post action=<?php echo $PHP_SELF;?> >
+                <form method=post action="<?php echo $_SERVER['PHP_SELF'];?>" >
                   <table align="right" width="100%">
                     <tr class="dataTableContent" align="right">
-                      <td><?php echo DAYS_FIELD_PREFIX; ?><input type=text size=4 width=4 value=<?php echo $sdate; ?> name=sdate> - <input type=text size=4 width=4 value=<?php echo $tdate; ?> name=tdate><?php echo DAYS_FIELD_POSTFIX; ?><input type=submit value="<?php echo DAYS_FIELD_BUTTON; ?>"></td>
+                      <td><?php echo DAYS_FIELD_PREFIX; ?><input type=text size=4 width=4 value="<?php echo $sdate; ?>" name=sdate> - <input type=text size=4 width=4 value="<?php echo $tdate; ?>" name=tdate><?php echo DAYS_FIELD_POSTFIX; ?><input type=submit value="<?php echo DAYS_FIELD_BUTTON; ?>"></td>
                     </tr>
                   </table>
                 </form>
               </td>
             </tr>
-<form method=post action=<?php echo $PHP_SELF; ?>>
+<form method=post action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <tr class="dataTableHeadingRow">
               <td class="dataTableHeadingContent" align="left" colspan="2" width="10%" nowrap><?php echo TABLE_HEADING_CONTACT; ?></td>
               <td class="dataTableHeadingContent" align="left" colspan="1" width="15%" nowrap><?php echo TABLE_HEADING_DATE; ?></td>

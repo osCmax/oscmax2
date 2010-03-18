@@ -133,9 +133,9 @@ function tep_selected_file($filename) {
   }
 
   function tep_sanitize_string($string) {
-    $string = ereg_replace(' +', ' ', $string);
-
-    return preg_replace("/[<>]/", '_', $string);
+    $patterns = array ('/ +/','/[<>]/');
+    $replace = array (' ', '_');
+    return preg_replace($patterns, $replace, trim($string));
   }
 
   function tep_customers_name($customers_id) {
@@ -921,25 +921,20 @@ function tep_selected_file($filename) {
 // Return a product's special price (returns nothing if there is no offer)
 // TABLES: products
   function tep_get_products_special_price($product_id) {
-// BOF: MOD - Separate Pricing Per Customer
-//  $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status");
-    global $sppc_customer_group_id;
+// BOF Separate Pricing Per Customer
+  if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+    $customer_group_id = $_SESSION['sppc_customer_group_id'];
+  } else {
+    $customer_group_id = '0';
+  }
 
-    if(!tep_session_is_registered('sppc_customer_group_id')) {
-      $customer_group_id = '0';
-    } else {
-      $customer_group_id = $sppc_customer_group_id;
-    }
     $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status and customers_group_id = '" . (int)$customer_group_id . "'");
-// EOF: MOD - Separate_Pricing Per Customer
-
+// EOF Separate Pricing Per Customer
     $product = tep_db_fetch_array($product_query);
 
     return $product['specials_new_products_price'];
   }
 
-
-////
 // Sets timeout for the current script.
 // Cant be used in safe mode.
   function tep_set_time_limit($limit) {
@@ -1294,10 +1289,10 @@ function tep_selected_file($filename) {
               $cached_file = $cache_blocks[$i]['file'];
               $languages = tep_get_languages();
               for ($j=0, $k=sizeof($languages); $j<$k; $j++) {
-                $cached_file_unlink = ereg_replace('-language', '-' . $languages[$j]['directory'], $cached_file);
+                $cached_file_unlink = preg_replace('/-language/', '-' . $languages[$j]['directory'], $cached_file);
                 // if the file name starts with one of those we are looking for and is a cache file (by
                 // checking if it contains the string ".cache" we delete the cache file
-                if (ereg('^' . $cached_file_unlink, $cache_file) && strstr($cache_file, '.cache')) {
+                if (preg_match('/^' . $cached_file_unlink .'/', $cache_file)) {
                   @unlink(DIR_FS_CACHE . $cache_file);
                 }
               }
@@ -1310,7 +1305,7 @@ function tep_selected_file($filename) {
           $cached_file = $cache_blocks[$i]['file'];
           $languages = tep_get_languages();
           for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-            $cached_file = ereg_replace('-language', '-' . $languages[$i]['directory'], $cached_file);
+            $cached_file = preg_replace('/-language/', '-' . $languages[$i]['directory'], $cached_file);
             @unlink(DIR_FS_CACHE . $cached_file);
           }
         }
@@ -1483,12 +1478,7 @@ function tep_selected_file($filename) {
 ////
 // Wrapper function for round() for php3 compatibility
   function tep_round($value, $precision) {
-    if (PHP_VERSION < 4) {
-      $exp = pow(10, $precision);
-      return round($value * $exp) / $exp;
-    } else {
-      return round($value, $precision);
-    }
+    return round($value, $precision);
   }
 
 ////
@@ -1553,8 +1543,7 @@ function tep_selected_file($filename) {
   function tep_call_function($function, $parameter, $object = '') {
     if ($object == '') {
       return call_user_func($function, $parameter);
-    } elseif (PHP_VERSION < 4) {
-      return call_user_method($function, $object, $parameter);
+
     } else {
       return call_user_func(array($object, $function), $parameter);
     }
@@ -1751,22 +1740,49 @@ require(DIR_WS_FUNCTIONS . 'qtpro_functions.php');
   }
 // EOF: MOD - FedEx functions
 
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-// Funtion to reset SEO URLs database cache entries
-  function tep_reset_cache_data_seo_urls($action){
-    switch ($action){
-      case 'reset':
-        tep_db_query("DELETE FROM cache WHERE cache_name LIKE '%seo_urls%'");
-        tep_db_query("UPDATE configuration SET configuration_value='false' WHERE configuration_key='SEO_URLS_CACHE_RESET'");
+// ULTIMATE Seo Urls 5 by FWR Media
+// Reset the seo urls cache
+function tep_reset_cache_data_seo_urls($action = false){
+  if ( $action == 'reset' ){
+    $usu5_path = DIR_FS_CATALOG . DIR_WS_MODULES . 'ultimate_seo_urls5' . DIRECTORY_SEPARATOR;
+    switch( SEO_URLS_CACHE_SYSTEM ){
+      case 'FileSystem':
+        $path_to_cache = realpath($usu5_path . 'cache') . DIRECTORY_SEPARATOR;
+        $it = new DirectoryIterator($path_to_cache);
+        while( $it->valid() ){
+          if ( !$it->isDot() && is_readable($path_to_cache . $it->getFilename()) && (substr($it->getFilename(), -6) == '.cache') ){
+            unlink($path_to_cache . $it->getFilename());
+          }
+          $it->next();
+        }
         break;
-      default:
+      case 'Database':
+        tep_db_query("TRUNCATE TABLE `usu_cache`");
+        break;
+      case 'Memcached':
+        if ( class_exists('Memcache') ){
+          include_once $usu5_path . 'interfaces' . DIRECTORY_SEPARATOR . 'Interface_Cache.php';
+          include_once $usu5_path . 'classes' . DIRECTORY_SEPARATOR . 'Usu_Cache_Memcached.php';
+          $mc = new Usu_Cache_Memcached('dummy');
+          $mc->flushOut();
+        }
         break;
     }
-    # The return value is used to set the value upon viewing
-    # It's NOT returining a false to indicate failure!!
-    return 'false';
+    tep_db_query("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value='false' WHERE configuration_key='SEO_URLS_CACHE_RESET'");
   }
-// EOF: MOD - Ultimate SEO URLs - by Chemo
+}
+
+
+  function tep_get_products_seo_url($product_id, $language_id = 0) {
+    global $languages_id;
+
+    if ($language_id == 0) $language_id = $languages_id;
+    $product_query = tep_db_query("select products_seo_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['products_seo_url'];
+  }
+// EOF: ULTIMATE Seo Urls 5 by FWR Media
 
 // BOF: MOD - WebMakers.com Pull the shipping method used on an order
 // Return orders shipping method

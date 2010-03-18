@@ -39,7 +39,7 @@ tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $username . "
         }
 
         $login_id = $check_admin['login_id'];
-        $login_groups_id = $check_admin[login_groups_id];
+      $login_groups_id = $check_admin['login_groups_id'];
         $login_username = $check_admin['login_username'];
         $login_logdate = $check_admin['login_logdate'];
         $login_lognum = $check_admin['login_lognum'];
@@ -100,7 +100,7 @@ tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $login_userna
                                   <tr><td>
                                     <table border="0" width="100%" height="100%" cellspacing="3" cellpadding="2" bgcolor="#F3F3F3">
 <?php
-  if ($HTTP_GET_VARS['login'] == 'fail') {
+  if (isset($HTTP_GET_VARS['login']) && ($HTTP_GET_VARS['login'] == 'fail')) {
     $info_message = TEXT_LOGIN_ERROR;
   }
 

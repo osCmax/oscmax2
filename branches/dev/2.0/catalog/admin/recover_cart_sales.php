@@ -248,9 +248,9 @@ if (count($custid) > 0 ) {  ?>
 		$email = EMAIL_TEXT_LOGIN;
 
 		if( EMAIL_USE_HTML == 'true' )
-			$email .= '  <a HREF="' . tep_catalog_href_link(FILENAME_CATALOG_LOGIN, '', 'SSL') . '">' . tep_catalog_href_link(FILENAME_CATALOG_LOGIN, '', 'SSL')  . '</a>';
+			$email .= '  <a HREF="' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL') . '">' . tep_catalog_href_link(FILENAME_CATALOG_LOGIN, '', 'SSL')  . '</a>';
 		else
-			$email .= '  (' . tep_catalog_href_link(FILENAME_CATALOG_LOGIN, '', 'SSL') . ')';
+			$email .= '  (' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL') . ')';
 
 		$email .= "\n" . EMAIL_SEPARATOR . "\n\n";
 
@@ -278,7 +278,7 @@ if (count($custid) > 0 ) {  ?>
 		if( tep_not_null(RCS_EMAIL_COPIES_TO) )
 			$outEmailAddr .= ', ' . RCS_EMAIL_COPIES_TO;
 
-		tep_mail('', $outEmailAddr, EMAIL_TEXT_SUBJECT, $email, '', STORE_OWNER . EMAIL_FROM);
+		tep_mail('', $outEmailAddr, EMAIL_TEXT_SUBJECT, $email, '', EMAIL_FROM);
 
 		$mline = "";
 

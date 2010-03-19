@@ -220,7 +220,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
     if ($is_read_only) {
       echo sbs_get_zone_name($address['entry_country_id'], $account['entry_zone_id'], $account['entry_state']);
     } else {
-      echo tep_draw_input_field('state', sbs_get_zone_name($address['entry_country_id'], $address['entry_zone_id'], $address['entry_state'])) . '&nbsp;' . ENTRY_STATE_TEXT;
+      echo tep_draw_input_field('state', sbs_get_zone_name($address['entry_country_id'], $address['entry_zone_id'], $address['entry_state'])) . '&nbsp; *';
     }
 ?></td>
              </tr>
@@ -234,7 +234,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 	if ($is_read_only) {
            echo tep_get_country_name($address['entry_country_id']);
 	} else { 
-	echo tep_draw_input_field('country', tep_get_country_name($address['entry_country_id'])) . '&nbsp;' . ENTRY_COUNTRY_TEXT;
+	echo tep_draw_input_field('country', tep_get_country_name($address['entry_country_id'])) . '&nbsp; *' ;
 
      }
 ?>

@@ -13,7 +13,7 @@
  * Changes to this file by JCKeebaugh 2007/10/02 as follows: Removed call-time
  * pass-by-reference in eight places in the XML Class (six lines.) The original
  * six lines are commented out, just below the modified lines.
- * 
+ *
  * These changes are released under the license stated in the header.
  */
 
@@ -22,7 +22,7 @@
 # and returns an equivalent PHP data structure
 ###################################################################################
 function & XML_unserialize(&$xml){
-	$xml_parser = &new XML();
+	$xml_parser = new XML();
 	$data = &$xml_parser->parse($xml);
 	$xml_parser->destruct();
 	return $data;

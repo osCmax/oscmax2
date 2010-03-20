@@ -6,7 +6,7 @@
       $hide_product = true; // needed for column_right
 // EOF Separate Pricing Per Customer, Hide products and categories from groups
    // BOF Separate Price per Customer
-     if(!tep_session_is_registered('sppc_customer_group_id')) { 
+     if(!tep_session_is_registered('sppc_customer_group_id')) {
      $customer_group_id = '0';
      } else {
       $customer_group_id = $sppc_customer_group_id;
@@ -45,7 +45,7 @@
         $scustomer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id']. "' and customers_group_id =  '" . $customer_group_id . "'");
         if ($scustomer_group_price = tep_db_fetch_array($scustomer_group_price_query)) {
         $product_info['products_price']= $scustomer_group_price['customers_group_price'];
-	}
+    }
 // EOF Separate Price per Customer
       $products_price = '<span style="text-decoration:line-through">' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span> <span class="productSpecialPrice">' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span>';
     } else {
@@ -53,7 +53,7 @@
         $scustomer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id']. "' and customers_group_id =  '" . $customer_group_id . "'");
         if ($scustomer_group_price = tep_db_fetch_array($scustomer_group_price_query)) {
         $product_info['products_price']= $scustomer_group_price['customers_group_price'];
-	}
+    }
 // EOF Separate Price per Customer
       $products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
     }
@@ -67,10 +67,10 @@
 // BOF: Mod - Wishlist
 //DISPLAY PRODUCT WAS ADDED TO WISHLIST IF WISHLIST REDIRECT IS ENABLED
     if(tep_session_is_registered('wishlist_id')) {
-?>  
+?>
       <tr>
         <td class="messageStackSuccess"><?php echo PRODUCT_ADDED_TO_WISHLIST; ?></td>
-      </tr> 
+      </tr>
 <?php
       tep_session_unregister('wishlist_id');
     }
@@ -92,17 +92,17 @@
       <tr>
         <td class="main">
 <?php
-		//// BEGIN:  Added for Dynamic MoPics v3.000
+        //// BEGIN:  Added for Dynamic MoPics v3.000
     if (tep_not_null($product_info['products_image'])) {
 ?>
           <table border="0" cellspacing="0" cellpadding="0">
             <tr valign="top">
               <td align="left" width="100%">
-				<table width="100%">
-					<tr><td width="100%">
-					<?php
+                <table width="100%">
+                    <tr><td width="100%">
+                    <?php
                     // BOF: Tabs by PGM
-                    if(USE_PRODUCT_DESCRIPTION_TABS != 'True') { 
+                    if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
                               echo stripslashes($product_info['products_description']);
                               } else {
                               include(DIR_WS_MODULES . 'product_tabs.php'); }
@@ -110,7 +110,7 @@
                     ?>
                     </td></tr>
                     <tr>
-                    	<td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+                        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
                     </tr>
                     <tr><td class="prod_attributes">
                     <?php
@@ -119,7 +119,7 @@
     $products_attributes = tep_db_fetch_array($products_attributes_query);
     if ($products_attributes['total'] > 0) {
 //++++ QT Pro: Begin Changed code
-      $products_id=(preg_match("/^\d{1,10}(\{\d{1,10}\}\d{1,10})*$/",$HTTP_GET_VARS['products_id']) ? $HTTP_GET_VARS['products_id'] : (int)$HTTP_GET_VARS['products_id']); 
+      $products_id=(preg_match("/^\d{1,10}(\{\d{1,10}\}\d{1,10})*$/",$HTTP_GET_VARS['products_id']) ? $HTTP_GET_VARS['products_id'] : (int)$HTTP_GET_VARS['products_id']);
       require(DIR_WS_CLASSES . 'pad_' . PRODINFO_ATTRIBUTE_PLUGIN . '.php');
       $class = 'pad_' . PRODINFO_ATTRIBUTE_PLUGIN;
       $pad = new $class($products_id);
@@ -131,18 +131,18 @@ if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "q
 
 //++++ QT Pro: End Changed Code
 ?>
-					</td></tr>
-                 </table>              
+                    </td></tr>
+                 </table>
               </td>
               <td align="center" class="smallText">
               <?php echo tep_draw_separator('pixel_trans.gif', '100%', '25'); ?>
 <?php
-			$image_lg = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);
-			if ($lg_image_ext = mopics_file_exists($image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
-				$image_size = @getimagesize($image_lg . '.' . $lg_image_ext);
-				
-			//BOF SLIMBOX
-			$lightlarge = $image_lg . "." . $lg_image_ext;
+            $image_lg = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);
+            if ($lg_image_ext = mopics_file_exists($image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
+                $image_size = @getimagesize($image_lg . '.' . $lg_image_ext);
+
+            //BOF SLIMBOX
+            $lightlarge = $image_lg . "." . $lg_image_ext;
 ?>
 <script language="javascript"><!--
 document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>');
@@ -150,12 +150,12 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
 <noscript>
 <?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
 </noscript>
-<!--		 EOF SLIMBOX   -->
+<!--         EOF SLIMBOX   -->
 
 <?php
-			} else {
+            } else {
           echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
-			}
+            }
 
 //++++ QT Pro: Begin Changed code
     if (tep_not_null($product_info['products_image'])) {
@@ -166,17 +166,17 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
 <?php
 }
 //++++ QT Pro: End Changed Code
-} 
-		//// END:  Added for Dynamic MoPics v3.000
+}
+        //// END:  Added for Dynamic MoPics v3.000
 ?>
 
 <center>
 <?php
-		//// BEGIN:  Added for Dynamic MoPics v3.000
+        //// BEGIN:  Added for Dynamic MoPics v3.000
  if (is_file(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image']) && DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'] != "pixel_trans.gif"){
- 					 include(DIR_WS_MODULES . 'dynamic_mopics.php');   	
-	   } 
-		//// END:  Added for Dynamic MoPics v3.000
+                     include(DIR_WS_MODULES . 'dynamic_mopics.php');
+       }
+        //// END:  Added for Dynamic MoPics v3.000
 ?>
 </center>
       <tr>
@@ -206,27 +206,27 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
                 <!-- Wish List 3.5 End   -->
                 <!-- ADDED PLUS AND MINUS BUTTONS PGM -->
                     <td class="main" align="right" width="250">
-                            <table width="200" border="0" cellpadding="0">
-                                  <tr height="0">
-                                    <td width="25"></td>
-                                    <td width="25"></td>
-                                    <td width="150">
-                                  </tr>
-                                  <tr>
-                                    <td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',+1)" /></td>
-                                    <td rowspan="2" align="center"><input name="quantity" type="text" class="moduleRow" id="product-quantity-{{product.id}}" style="text-align:center" onkeyup="changeQty('field');" value="1" size="2" maxlength="2" /></td>
-									<?php // START: PGM Edit to switch Add to Cart image if stock = 0
-									if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
-                                    <td rowspan="2" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_BUTTON_IN_CART); ?></td>
-                					<?php } else { ?>
-                					<td rowspan="2" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
-                					<?php } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
-                                  </tr>
-                                  <tr>
-                                    <td align="center"><img src="<?php echo DIR_WS_ICONS . 'minus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',-1)" /></td>
-                                  </tr>
-                              </table>
-                    </td>
+                      <table width="200" border="0" cellpadding="0">
+                          <tr>
+                            <td width="25"></td>
+                            <td width="25"></td>
+                            <td width="150">
+                          </tr>
+                          <tr>
+                            <td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',+1)" alt="plus 1" ></td>
+                            <td rowspan="2" align="center"><input name="quantity" type="text" class="moduleRow" id="product-quantity-{{product.id}}" style="text-align:center" value="1" size="2" maxlength="2" /></td>
+                            <?php // START: PGM Edit to switch Add to Cart image if stock = 0
+                            if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
+                            <td rowspan="2" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_BUTTON_IN_CART); ?></td>
+                            <?php } else { ?>
+                            <td rowspan="2" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
+                            <?php } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
+                          </tr>
+                          <tr>
+                            <td align="center"><img src="<?php echo DIR_WS_ICONS . 'minus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',-1)" alt="minus 1" ></td>
+                          </tr>
+                        </table>
+                   </td>
                 <!-- ADDED PLUS AND MINUS BUTTONS PGM -->
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
@@ -235,27 +235,27 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
         </table></td>
       </tr>
       <tr>
-      	<td>
-        	<table width="100%">
+        <td>
+            <table width="100%">
               <tr>
                 <td class="main" align="left" width="15%">
-				<?php
+                <?php
                     $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "'");
                     $reviews = tep_db_fetch_array($reviews_query);
                     if ($reviews['count'] > 0) {
                 ?>
-				<?php echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count']; ?></td>
-				<?php
-    				}
-				?>	
-				<?php if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) { ?>
+                <?php echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count']; ?></td>
+                <?php
+                    }
+                ?>
+                <?php if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) { ?>
                 <td align="center" class="smallText" width="70%"><?php echo sprintf(TEXT_DATE_AVAILABLE, tep_date_long($product_info['products_date_available'])); ?></td>
                 <?php } else { ?>
                 <td align="center" class="smallText" width="70%"><?php echo sprintf(TEXT_DATE_ADDED, tep_date_long($product_info['products_date_added'])); ?></td>
                 <?php } ?>
                 <td align="right" width="15%">&nbsp;</td>
               </tr>
-			</table>
+            </table>
         </td>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

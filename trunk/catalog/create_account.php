@@ -158,7 +158,7 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
           $messageStack->add('create_account', ENTRY_STATE_ERROR);
         }
       }
-    
+    }
 
     if (strlen($telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
       $error = true;
@@ -362,7 +362,6 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
 
       tep_redirect(tep_href_link(FILENAME_CREATE_ACCOUNT_SUCCESS, '', 'SSL'));
     }
-  }
  
 // BOF: MOD - Country-State Selector 
  }

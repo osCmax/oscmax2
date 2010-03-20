@@ -106,7 +106,7 @@ if ($customer_group_id != '0') {
 	}
 ?>
           <tr>
-            <td width="<?php echo SMALL_IMAGE_WIDTH + 10; ?>" valign="top" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products_new[$x]['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $products_new[$x]['products_image'], $products_new[$x]['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>'; ?></td>
+            <td width="<?php echo SMALL_IMAGE_WIDTH + 10; ?>" valign="top" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products_new[$x]['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_new[$x]['products_image'],addslashes($products_new[$x]['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>'; ?></td>
             <td valign="top" class="main"><?php 
 	$display_manufacturer = '';
 	if (PRODUCT_LIST_MANUFACTURER)$display_manufacturer = '<br>' . TEXT_MANUFACTURER . ' ' . $products_new[$x]['manufacturers_name'] ;

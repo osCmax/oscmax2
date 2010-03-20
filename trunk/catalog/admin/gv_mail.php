@@ -11,7 +11,7 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
 */
 
   require('includes/application_top.php');
-  require(DIR_FCKEDITOR . 'fckeditor.php');
+
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
@@ -119,6 +119,9 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<!-- CKeditor -->
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
+<!-- CKeditor End -->
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
@@ -281,9 +284,11 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
               <tr>
                 <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
                 <td><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
-// Line Changed - MOD: Ajustable Editor Window
-                	echo tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, ' ') .'</td>';
-                } else { echo tep_draw_textarea_field('message', 'soft', '60', '15') .'</td>';
+// Line Changed - MOD: CKeditor
+                	//echo (tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, '')) . '</td>';
+			echo (tep_draw_textarea_field('message', 'soft', '70', '15', '' ,'class="ckeditor"')) . '</td>';
+                } else {
+                	echo (tep_draw_textarea_field('message', 'soft', '70', '15')) . '</td>';
                 }
                 ?>
               </tr>

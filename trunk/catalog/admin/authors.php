@@ -11,7 +11,7 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
 */
 
   require('includes/application_top.php');
-  require(DIR_FCKEDITOR . 'fckeditor.php');
+  
   $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
 
   if (tep_not_null($action)) {
@@ -106,6 +106,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 // EOF: WebMakers.com Changed: Header Tag Controller v1.0
 ?>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<!-- CKeditor -->
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
+<!-- CKeditor End -->
 <script language="javascript" src="includes/general.js"></script>
 <script language="javascript"><!--
 function popupImageWindow(url) {
@@ -113,7 +116,7 @@ function popupImageWindow(url) {
 }
 //--></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="SetFocus();">
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -171,7 +174,8 @@ function popupImageWindow(url) {
                   <td class="main">
                   <?php
 // Line Changed - MOD: Ajustable Editor Window
-                  echo tep_draw_fckeditor('authors_description[' . $languages[$i]['id'] . ']',HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT,''); ?></td>
+                  //echo tep_draw_fckeditor('authors_description[' . $languages[$i]['id'] . ']',HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT,'');
+                  echo (tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', '', 'class="ckeditor"')); ?></td>
            <?php } else { ?>
                   <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', ''); ?></td>
            <?php } ?>
@@ -246,7 +250,8 @@ function popupImageWindow(url) {
                   <td class="main">
                   <?php
 // Line Changed - MOD: Ajustable Editor Window
-                  echo tep_draw_fckeditor('authors_description[' . $languages[$i]['id'] . ']',HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, tep_get_author_description($authors['authors_id'], $languages[$i]['id'])); ?></td>
+                  // echo tep_draw_fckeditor('authors_description[' . $languages[$i]['id'] . ']',HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, tep_get_author_description($authors['authors_id'], $languages[$i]['id']));
+                  echo (tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', tep_get_author_description($authors['authors_id'], $languages[$i]['id']), 'class="ckeditor"')); ?></td>
            <?php } else { ?>
                   <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', tep_get_author_description($authors['authors_id'], $languages[$i]['id'])); ?></td>
            <?php } ?>

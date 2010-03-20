@@ -357,7 +357,7 @@ function tep_selected_file($filename) {
   }
 
   function tep_get_country_name($country_id) {
-    $country_query = tep_db_query("select countries_name from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$country_id . "'");
+    $country_query = tep_db_query("select countries_name from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$country_id . "' and active = 1 order by countries_name");
 
     if (!tep_db_num_rows($country_query)) {
       return $country_id;
@@ -696,7 +696,7 @@ function tep_selected_file($filename) {
     return $categories_count;
   }
 
-////
+//// BOF: Modified $countries_query to use new Active switch for countries
 // Returns an array with countries
 // TABLES: countries
   function tep_get_countries($default = '') {
@@ -705,7 +705,7 @@ function tep_selected_file($filename) {
       $countries_array[] = array('id' => '',
                                  'text' => $default);
     }
-    $countries_query = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . " order by countries_name");
+    $countries_query = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . "  where active = 1 order by countries_name");
     while ($countries = tep_db_fetch_array($countries_query)) {
       $countries_array[] = array('id' => $countries['countries_id'],
                                  'text' => $countries['countries_name']);
@@ -1350,7 +1350,7 @@ function tep_selected_file($filename) {
     if (SEND_EMAILS != 'true') return false;
 
     // Instantiate a new mail object
-    $message = new email(array('X-Mailer: osCommerce'));
+    $message = new email(array('X-Mailer: osCMax'));
 
     // Build the text version
     $text = strip_tags($email_text);

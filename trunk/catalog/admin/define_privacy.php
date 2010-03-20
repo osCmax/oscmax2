@@ -33,7 +33,6 @@ $Id: define_privacy.php 14 2006-07-28 17:42:07Z user $
 */
 
   require('includes/application_top.php');
-  require(DIR_FCKEDITOR . 'fckeditor.php');
 // This will cause it to look for 'conditions_content.php'
 
   $HTTP_GET_VARS['filename'] = FILENAME_DEFINE_PRIVACY_CONTENT;
@@ -80,6 +79,9 @@ $Id: define_privacy.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<!-- CKeditor -->
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
+<!-- CKeditor End -->
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="HTMLArea.replaceAll(config);">
 <!-- header //-->
@@ -135,9 +137,11 @@ $Id: define_privacy.php 14 2006-07-28 17:42:07Z user $
               <tr>
                 <td class="main"><?php if (HTML_AREA_WYSIWYG_DISABLE_DEFINE == 'Enable') {
 // Line Changed - MOD: Ajustable Editor Window
-                echo tep_draw_fckeditor('file_contents', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
-              } else { echo tep_draw_textarea_field('file_contents', 'soft', '100%', '30', $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
-               }
+              // BOF: CKeditor
+	      //echo tep_draw_fckeditor('file_contents', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
+                echo tep_draw_textarea_field('file_contents', 'soft', '100%', '30', $file_contents, 'class="ckeditor"', (($file_writeable) ? '' : 'readonly'))  . '</td>';
+	      } else { echo tep_draw_textarea_field('file_contents', 'soft', '100%', '30', $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
+               } // EOF: CKeditor
                ?>
                </tr>
               <tr>

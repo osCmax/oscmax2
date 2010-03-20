@@ -29,7 +29,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo DIR_WS_TEMPLATES; ?>/stylesheet.css">
 <head>
 <body>
-<table width="580" class="infoBoxContents">
+<table width="580" class="infoBox">
 <tr>
 <td colspan="2" class="infoBoxHeading" align="center"><?php echo TEXT_VALID_PRODUCTS_LIST; ?></td>
 </tr>

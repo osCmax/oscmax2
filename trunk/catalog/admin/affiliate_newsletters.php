@@ -16,7 +16,7 @@
 
   require('includes/application_top.php');
 
-  require(DIR_FCKEDITOR . 'fckeditor.php');
+
   $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
 
   if (tep_not_null($action)) {
@@ -108,6 +108,9 @@
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
+<!-- CKeditor -->
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
+<!-- CKeditor End -->
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <div id="spiffycalendar" class="text"></div>
@@ -198,9 +201,11 @@
 <?php // BOF: MOD - WYSIWYG HTML Area Box
 /*          <td class="main"><?php echo tep_draw_textarea_field('content', 'soft', '100%', '20', $nInfo->content); ?></td> */ ?>
             <td class="main"><?php if (HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER == 'Enable') {
-            	 echo tep_draw_fckeditor('content', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, $nInfo->content) . '</td>';
-            	} else { echo tep_draw_textarea_field('content', 'soft', '100%', '20', $nInfo->content) . '</td>';
-             }
+	    // BOF: CKeditor
+            	 //echo tep_draw_fckeditor('content', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, $nInfo->content) . '</td>';
+            	 echo tep_draw_textarea_field('content', 'soft', '100%', '20', $nInfo->content, 'class="ckeditor"') . '</td>';
+		} else { echo tep_draw_textarea_field('content', 'soft', '100%', '20', $nInfo->content) . '</td>';
+             } // EOF: CKeditor
             ?>
 <?php /* EOF: MOD - WYSIWYG HTML Area Box */ ?>
           </tr>

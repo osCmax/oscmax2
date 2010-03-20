@@ -364,3 +364,20 @@ TD.pageHeading, DIV.pageHeading {
 	padding-left: 10px;
 	border-left: 4px solid #F57601;
 	}
+/* Small Ajax-throbber image */
+#indicator {
+    float:right;
+    visibility:hidden;
+}
+
+.infoBox {
+  background: #ffffff;
+}
+
+.infoBoxContents {
+  /*background: #f8f8f9;*/
+  font-size: 14px;
+  	border-bottom-style: dashed;
+	border-bottom-width: 1px;
+	border-bottom-color: #BCBCBC;
+}

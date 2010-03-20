@@ -11,8 +11,7 @@ $Id: mail.php 3 2006-05-27 04:59:07Z user $
 */
 
   require('includes/application_top.php');
-// LINE ADDED: WYSIWYG FCKEditor
-  require(DIR_FCKEDITOR . 'fckeditor.php');
+
   $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
 
   if ( ($action == 'send_email_to_user') && isset($HTTP_POST_VARS['customers_email_address']) && !isset($HTTP_POST_VARS['back_x']) ) {
@@ -78,6 +77,9 @@ define('customers_email_address', 'string', 'Customer or Newsletter Group');
 }
 //  End -->
 </script>
+<!-- CKeditor -->
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
+<!-- CKeditor End -->
 </head>
 <body OnLoad="init()" marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
@@ -215,9 +217,11 @@ define('customers_email_address', 'string', 'Customer or Newsletter Group');
               <tr>
                 <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
                 <td><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
-// Line Changed - MOD: Ajustable Editor Window
-                	echo tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, ' ') .'</td>';
-                } else { echo tep_draw_textarea_field('message', 'soft', '60', '15') .'</td>';
+// Line Changed - MOD: CKeditor
+                	//echo (tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, '')) . '</td>';
+			echo (tep_draw_textarea_field('message', 'soft', '70', '15', '' ,'class="ckeditor"')) . '</td>';
+                } else {
+                	echo (tep_draw_textarea_field('message', 'soft', '70', '15')) . '</td>';
                 }
                 ?>
               </tr>

@@ -11,7 +11,7 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
   require(DIR_WS_CLASSES . 'currencies.php');
-  require(DIR_FCKEDITOR . 'fckeditor.php');
+
 
   $currencies = new currencies();
 

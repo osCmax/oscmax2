@@ -32,20 +32,25 @@ function sbs_get_zone_name($country_id, $zone_id) {
 // TABLES: countries
   function sbs_get_countries($countries_id = '', $with_iso_codes = false) {
     $countries_array = array();
-    if ($countries_id) {
-      if ($with_iso_codes) {
-        $countries = tep_db_query("select countries_name, countries_iso_code_2, countries_iso_code_3 from " . TABLE_COUNTRIES . " where countries_id = '" . $countries_id . "' order by countries_name");
+    if (tep_not_null($countries_id)) {
+      if ($with_iso_codes == true) {
+        // Ajax Country-state selector
+        //$countries = tep_db_query("select countries_name, countries_iso_code_2, countries_iso_code_3 from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "' order by countries_name");
+        $countries = tep_db_query("select countries_name, countries_iso_code_2, countries_iso_code_3 from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "' and active = 1 order by countries_name");
+
         $countries_values = tep_db_fetch_array($countries);
         $countries_array = array('countries_name' => $countries_values['countries_name'],
                                  'countries_iso_code_2' => $countries_values['countries_iso_code_2'],
                                  'countries_iso_code_3' => $countries_values['countries_iso_code_3']);
       } else {
-        $countries = tep_db_query("select countries_name from " . TABLE_COUNTRIES . " where countries_id = '" . $countries_id . "'");
+        $countries = tep_db_query("select countries_name from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "'");
         $countries_values = tep_db_fetch_array($countries);
         $countries_array = array('countries_name' => $countries_values['countries_name']);
       }
     } else {
-      $countries = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . " order by countries_name");
+      // Ajax Country-state selector 
+      //$countries = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . " order by countries_name");
+      $countries = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . " where active = 1 order by countries_name");
       while ($countries_values = tep_db_fetch_array($countries)) {
         $countries_array[] = array('countries_id' => $countries_values['countries_id'],
                                    'countries_name' => $countries_values['countries_name']);
@@ -53,7 +58,7 @@ function sbs_get_zone_name($country_id, $zone_id) {
     }
 
     return $countries_array;
-  } 
+  }
   ////
 function sbs_get_country_list($name, $selected = '', $parameters = '') { 
    $countries_array = array(array('id' => '', 'text' => PULL_DOWN_DEFAULT)); 
@@ -66,8 +71,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
    return tep_draw_pull_down_menu($name, $countries_array, $selected, $parameters); 
 }
 
-
-////
+///
 // Alias function to tep_get_countries, which also returns the countries iso codes
  /* function tep_get_countries_with_iso_codes($countries_id) {
     return tep_get_countries($countries_id, true);
@@ -309,37 +313,26 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 ?>
           <tr>
             <td class="main" width="170">&nbsp;<?php echo ENTRY_STATE; ?></td>
-            <td class="main">&nbsp;
+                      <td class="main"><div id="states">
 <?php
     $state = sbs_get_zone_name($country, $zone_id);
     if ($is_read_only) {
       echo sbs_get_zone_name($account['entry_country_id'], $account['entry_zone_id']);
-    } elseif ($error) {
-      if ($entry_state_error) {
-        if ($entry_state_has_zones) {
-          $zones_array = array();
-          $zones_query = tep_db_query("select zone_name from " . TABLE_ZONES . " where zone_country_id = '" . tep_db_input($country) . "' order by zone_name");
-          while ($zones_values = tep_db_fetch_array($zones_query)) {
-            $zones_array[] = array('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
-          }
-          echo tep_draw_pull_down_menu('state', $zones_array) . '&nbsp;' . ENTRY_STATE_ERROR;
-        } else {
-          echo tep_draw_input_field('state') . '&nbsp;' . ENTRY_STATE_ERROR;
-        }
-      } else {
-        echo $state . tep_draw_hidden_field('zone_id') . tep_draw_hidden_field('state');
-      }
     } else {
-      echo tep_draw_input_field('state', sbs_get_zone_name($account['entry_country_id'], $account['entry_zone_id'], $account['entry_state'])) . '&nbsp;' . ENTRY_STATE_TEXT;
+     
+				// +Country-State Selector
+				echo ajax_get_zones_html($country,'',false);
+				// -Country-State Selector
     }
 ?></td>
-             </tr>
+              </tr>
 <?php
      }
 ?>
              <tr>
-               <td class="main" width="170">&nbsp;<?php echo ENTRY_COUNTRY; ?></td>
-               <td class="main">&nbsp;
+                <td class="main"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
+				<?php // +Country-State Selector ?>
+                <td class="main">
 <?php
       $account['entry_country_id'] = STORE_COUNTRY;
 	 if ($is_read_only) {       echo tep_get_country_name($account['entry_country_id']);     } 
@@ -352,7 +345,8 @@ elseif
          echo tep_get_country_name($country) . tep_draw_hidden_field('country');
        }
      } else {
-       echo sbs_get_country_list('country', $account['entry_country_id']) . '&nbsp;' . ENTRY_COUNTRY_TEXT;
+	 		echo sbs_get_country_list('country',$country,'onChange="getStates(this.value, \'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); 
+			// -Country-State Selector
      }
 ?></td>
           </tr>

@@ -84,7 +84,8 @@ $Id: countries.php 3 2006-05-27 04:59:07Z user $
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_COUNTRY_NAME; ?></td>
-                <td class="dataTableHeadingContent" align="center" colspan="2"><?php echo TABLE_HEADING_COUNTRY_CODES; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_COUNTRY_CODES . ' (2)'; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_COUNTRY_CODES . ' (3)'; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
@@ -103,8 +104,8 @@ $Id: countries.php 3 2006-05-27 04:59:07Z user $
     }
 ?>
                 <td class="dataTableContent"><?php echo $countries['countries_name']; ?></td>
-                <td class="dataTableContent" align="center" width="40"><?php echo $countries['countries_iso_code_2']; ?></td>
-                <td class="dataTableContent" align="center" width="40"><?php echo $countries['countries_iso_code_3']; ?></td>
+                <td class="dataTableContent" align="center"><?php echo $countries['countries_iso_code_2']; ?></td>
+                <td class="dataTableContent" align="center"><?php echo $countries['countries_iso_code_3']; ?></td>
                 <td class="dataTableContent" align="right"><?php if (isset($cInfo) && is_object($cInfo) && ($countries['countries_id'] == $cInfo->countries_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_COUNTRIES, 'page=' . $HTTP_GET_VARS['page'] . '&cID=' . $countries['countries_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php

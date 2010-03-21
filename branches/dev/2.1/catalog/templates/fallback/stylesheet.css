@@ -235,6 +235,11 @@ TEXTAREA {
   font-size: 11px;
 }
 
+.input-style
+{ 
+border: 1px solid #BBC3D3;
+}
+
 SPAN.greetUser {
   font-family: Verdana, Arial, sans-serif;
   font-size: 12px;
@@ -272,7 +277,7 @@ SPAN.errorText {
   color: #ff0000;
 }
 
-.moduleRow { }
+.moduleRow { border: 1px solid #BBC3D3 }
 .moduleRowOver { background-color: #D7E9F7; cursor: pointer; cursor: hand; }
 .moduleRowSelected { background-color: #E9F4FC; }
 

@@ -142,7 +142,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
-    $field .= '>';
+    $field .= 'class="input-style">';
 
     return $field;
   }

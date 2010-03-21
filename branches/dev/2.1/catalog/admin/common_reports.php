@@ -16,7 +16,7 @@
       $date1 = $_SESSION['date1'];
     }
   
-    if ((preg_match('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})/', $_GET['date2'])) {
+    if (preg_match('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})/', $_GET['date2'])) {
       $_SESSION['date2'] = $_GET["date2"];
       $date2 = $_SESSION['date2'];
     } else {

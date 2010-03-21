@@ -23,8 +23,11 @@ $Id: affiliate.php 14 2006-07-28 17:42:07Z user $
   $boxHeading = BOX_HEADING_AFFILIATE; 
   $corner_left = 'square'; 
   $corner_right = 'square'; 
+  $boxContent_attributes = '';
+  $boxLink = '';
+  
   $box_base_name = 'categories'; // for easy unique box template setup (added BTSv1.2)
-
+  
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
   if (tep_session_is_registered('affiliate_id')) { 

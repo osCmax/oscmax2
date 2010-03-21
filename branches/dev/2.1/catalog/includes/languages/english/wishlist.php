@@ -11,6 +11,7 @@ $Id: wishlist.php 3 2006-05-27 04:59:07Z user $
 */
 
 define('NAVBAR_TITLE_WISHLIST', 'My Wish List');
+define('NAVBAR_TITLE_1', 'Wish List');
 define('HEADING_TITLE', 'My Wish List contains:');
 define('HEADING_TITLE2', '\'s Wish List contains:');
 define('BOX_TEXT_PRICE', 'Price');

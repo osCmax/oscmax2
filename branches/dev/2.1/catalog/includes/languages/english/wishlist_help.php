@@ -11,6 +11,8 @@ $Id: wishlist_help.php 3 2006-05-27 04:59:07Z user $
 */
 
 define('NAVBAR_TITLE', 'My Wishlist F.A.Q.');
+define('NAVBAR_TITLE_1', 'Wishlist F.A.Q.');
+
 define('HEADING_TITLE', 'My Wishlist F.A.Q.');
 
 define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');

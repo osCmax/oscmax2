@@ -14,6 +14,7 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 
   function tep_show_topic($counter) {
     global $tree, $topics_string, $tPath_array;
+	$topic_string = '';
 
     for ($i=0; $i<$tree[$counter]['level']; $i++) {
       $topics_string .= "&nbsp;&nbsp;";

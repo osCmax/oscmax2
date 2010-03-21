@@ -66,7 +66,7 @@ function tep_admin_jqmenu($filename, $sub_box_name, $target_window) {
 
   $dbquery = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where FIND_IN_SET( '" . $login_groups_id . "', admin_groups_id) and admin_files_is_boxes = '0' and admin_files_name = '" . $filename . "'");
   if (tep_db_num_rows($dbquery)) {
-    $menu_items = '<li><a href="' . tep_href_link($filename) . '" target="_' . $target_window . '">' . $sub_box_name . '</a></li>';
+    $menu_items = '<li><a href="' . tep_href_link($filename) . '" target="_' . strtolower($target_window) . '">' . $sub_box_name . '</a></li>';
   }
   return $menu_items;
 }

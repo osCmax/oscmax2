@@ -77,8 +77,8 @@ $Id: install_3.php 3 2006-05-27 04:59:07Z user $
     <p align="right"><input type="image" src="images/button_continue.gif" border="0" alt="Continue" id="inputButton" />&nbsp;&nbsp;<a href="index.php"><img src="images/button_cancel.gif" border="0" alt="Cancel" /></a></p>
 
 <?php
-  reset($HTTP_POST_VARS);
-  while (list($key, $value) = each($HTTP_POST_VARS)) {
+  reset($_POST);
+  while (list($key, $value) = each($_POST)) {
     if (($key != 'x') && ($key != 'y')) {
       if (is_array($value)) {
         for ($i=0, $n=sizeof($value); $i<$n; $i++) {

@@ -17,7 +17,7 @@ define('TABLE_HEADING_DATE_EXPECTED', 'Datum');
 // LINE ADDED: MOD - default specials
 define('TABLE_HEADING_DEFAULT_SPECIALS', 'Specials For %s');
 
-if ( ($category_depth == 'products') || (isset($HTTP_GET_VARS['manufacturers_id'])) ) {
+if ( ($category_depth == 'products') || (isset($_GET['manufacturers_id'])) ) {
   define('HEADING_TITLE', 'Unser Angebot');
   define('TABLE_HEADING_IMAGE', '');
   define('TABLE_HEADING_MODEL', 'Artikel-Nr.');

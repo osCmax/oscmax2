@@ -17,8 +17,8 @@
   if (!tep_session_is_registered('customer_id')) {
     $snapshot = array('page' => 'ext/modules/payment/paypal/express.php',
                       'mode' => $request_type,
-                      'get' => $HTTP_GET_VARS,
-                      'post' => $HTTP_POST_VARS);
+                      'get' => $_GET,
+                      'post' => $_POST);
 
     $navigation->set_snapshot($snapshot);
 
@@ -66,10 +66,10 @@
                   'VERSION' => '3.2',
                   'SIGNATURE' => MODULE_PAYMENT_PAYPAL_EXPRESS_API_SIGNATURE);
 
-  switch ($HTTP_GET_VARS['osC_Action']) {
+  switch ($_GET['osC_Action']) {
     case 'retrieve':
       $params['METHOD'] = 'GetExpressCheckoutDetails';
-      $params['TOKEN'] = $HTTP_GET_VARS['token'];
+      $params['TOKEN'] = $_GET['token'];
 
       $post_string = '';
 

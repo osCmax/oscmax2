@@ -1,13 +1,13 @@
 
     <!-- PWA BOF -->
-    <?php echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, (isset($HTTP_GET_VARS['guest'])? 'guest=guest':''), 'SSL'), 'post', 'onSubmit="return check_form(create_account);"') . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <?php echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, (isset($_GET['guest'])? 'guest=guest':''), 'SSL'), 'post', 'onSubmit="return check_form(create_account);"') . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
     <!-- PWA EOF -->
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <?php
             // PWA BOF
-            if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest'])){
+            if (!isset($_GET['guest']) && !isset($_POST['guest'])){
             ?>
               <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
             <?php }else{ ?>
@@ -213,7 +213,7 @@
       </tr>
 <?php
 // PWA BOF
-  if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest'])) {
+  if (!isset($_GET['guest']) && !isset($_POST['guest'])) {
 // PWA EOF
 ?>
       <tr>

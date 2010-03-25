@@ -19,20 +19,20 @@ $Id: affiliate_statistics.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
-  $affiliate_banner_history_raw = "select sum(affiliate_banners_shown) as count from " . TABLE_AFFILIATE_BANNERS_HISTORY .  " where affiliate_banners_affiliate_id  = '" .  $HTTP_GET_VARS['acID'] . "'";
+  $affiliate_banner_history_raw = "select sum(affiliate_banners_shown) as count from " . TABLE_AFFILIATE_BANNERS_HISTORY .  " where affiliate_banners_affiliate_id  = '" .  $_GET['acID'] . "'";
   $affiliate_banner_history_query = tep_db_query($affiliate_banner_history_raw);
   $affiliate_banner_history = tep_db_fetch_array($affiliate_banner_history_query);
   $affiliate_impressions = $affiliate_banner_history['count'];
   if ($affiliate_impressions == 0) $affiliate_impressions = "n/a"; 
   
-  $affiliate_query = tep_db_query("select * from " . TABLE_AFFILIATE . " where affiliate_id ='" . $HTTP_GET_VARS['acID'] . "'");
+  $affiliate_query = tep_db_query("select * from " . TABLE_AFFILIATE . " where affiliate_id ='" . $_GET['acID'] . "'");
  
   $affiliate = tep_db_fetch_array($affiliate_query);
   $affiliate_percent = 0;
   $affiliate_percent = $affiliate['affiliate_commission_percent'];
   if ($affiliate_percent < AFFILIATE_PERCENT) $affiliate_percent = AFFILIATE_PERCENT;
   
-  $affiliate_clickthroughs_raw = "select count(*) as count from " . TABLE_AFFILIATE_CLICKTHROUGHS . " where affiliate_id = '" . $HTTP_GET_VARS['acID'] . "'";
+  $affiliate_clickthroughs_raw = "select count(*) as count from " . TABLE_AFFILIATE_CLICKTHROUGHS . " where affiliate_id = '" . $_GET['acID'] . "'";
   $affiliate_clickthroughs_query = tep_db_query($affiliate_clickthroughs_raw);
   $affiliate_clickthroughs = tep_db_fetch_array($affiliate_clickthroughs_query);
   $affiliate_clickthroughs = $affiliate_clickthroughs['count'];
@@ -40,7 +40,7 @@ $Id: affiliate_statistics.php 14 2006-07-28 17:42:07Z user $
   $affiliate_sales_raw = "
     select count(*) as count, sum(affiliate_value) as total, sum(affiliate_payment) as payment from " . TABLE_AFFILIATE_SALES . " a 
     left join " . TABLE_ORDERS . " o on (a.affiliate_orders_id=o.orders_id) 
-    where a.affiliate_id = '" . $HTTP_GET_VARS['acID'] . "' and o.orders_status >= " . AFFILIATE_PAYMENT_ORDER_MIN_STATUS . "
+    where a.affiliate_id = '" . $_GET['acID'] . "' and o.orders_status >= " . AFFILIATE_PAYMENT_ORDER_MIN_STATUS . "
     ";
   $affiliate_sales_query = tep_db_query($affiliate_sales_raw);
   $affiliate_sales = tep_db_fetch_array($affiliate_sales_query);
@@ -147,7 +147,7 @@ function popupWindow(url) {
                   <td colspan="4"><?php echo tep_draw_separator(); ?></td>
                 </tr>
                 <tr>
-                  <td align="right" class="dataTableContent" colspan="4"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_CLICKS, 'acID=' . $HTTP_GET_VARS['acID']) . '">' . tep_image_button('button_affiliate_clickthroughs.gif', IMAGE_CLICKTHROUGHS) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_SALES, 'acID=' . $HTTP_GET_VARS['acID']) . '">' . tep_image_button('button_affiliate_sales.gif', IMAGE_SALES) . '</a>'; ?></td>
+                  <td align="right" class="dataTableContent" colspan="4"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_CLICKS, 'acID=' . $_GET['acID']) . '">' . tep_image_button('button_affiliate_clickthroughs.gif', IMAGE_CLICKTHROUGHS) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_SALES, 'acID=' . $_GET['acID']) . '">' . tep_image_button('button_affiliate_sales.gif', IMAGE_SALES) . '</a>'; ?></td>
                 </tr>
               </center>
             </table></td>

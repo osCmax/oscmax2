@@ -13,7 +13,7 @@
           <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
         </tr>
         <?php
-  if ($HTTP_GET_VARS['action'] == 'process') {
+  if ($_GET['action'] == 'process') {
 ?>
       <tr>
         <td class="main"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_man_on_board.gif', HEADING_TITLE, '0', '0', 'align="left"') . TEXT_SUCCESS; ?><br><br><?php echo 'gv '.$id1; ?></td>
@@ -23,7 +23,7 @@
       </tr>
 <?php
   }  
-  if ($HTTP_GET_VARS['action'] == 'send' && !$error) {
+  if ($_GET['action'] == 'send' && !$error) {
     // validate entries
       $gv_amount = (double) $gv_amount;
       $gv_query = tep_db_query("select customers_firstname, customers_lastname from " . TABLE_CUSTOMERS . " where customers_id = '" . $customer_id . "'");
@@ -33,21 +33,21 @@
       <tr>
         <td><form action="<?php echo tep_href_link(FILENAME_GV_SEND, 'action=process', 'NONSSL'); ?>" method="post"><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main"><?php echo sprintf(MAIN_MESSAGE, $currencies->format($HTTP_POST_VARS['amount']), stripslashes($HTTP_POST_VARS['to_name']), $HTTP_POST_VARS['email'], stripslashes($HTTP_POST_VARS['to_name']), $currencies->format($HTTP_POST_VARS['amount']), $send_name); ?></td>
+            <td class="main"><?php echo sprintf(MAIN_MESSAGE, $currencies->format($_POST['amount']), stripslashes($_POST['to_name']), $_POST['email'], stripslashes($_POST['to_name']), $currencies->format($_POST['amount']), $send_name); ?></td>
           </tr>
 <?php
-      if ($HTTP_POST_VARS['message']) {
+      if ($_POST['message']) {
 ?>
            <tr>
             <td class="main"><?php echo sprintf(PERSONAL_MESSAGE, $gv_result['customers_firstname']); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo stripslashes($HTTP_POST_VARS['message']); ?></td>
+            <td class="main"><?php echo stripslashes($_POST['message']); ?></td>
           </tr>
 <?php
       }
 
-      echo tep_draw_hidden_field('send_name', $send_name) . tep_draw_hidden_field('to_name', stripslashes($HTTP_POST_VARS['to_name'])) . tep_draw_hidden_field('email', $HTTP_POST_VARS['email']) . tep_draw_hidden_field('amount', $gv_amount) . tep_draw_hidden_field('message', stripslashes($HTTP_POST_VARS['message']));
+      echo tep_draw_hidden_field('send_name', $send_name) . tep_draw_hidden_field('to_name', stripslashes($_POST['to_name'])) . tep_draw_hidden_field('email', $_POST['email']) . tep_draw_hidden_field('amount', $gv_amount) . tep_draw_hidden_field('message', stripslashes($_POST['message']));
 ?>
           <tr>
             <td class="main"><?php echo tep_image_submit('button_back.gif', IMAGE_BUTTON_BACK, 'name=back') . '</a>'; ?></td>
@@ -56,7 +56,7 @@
         </table></form></td>
       </tr>
 <?php
-  } elseif ($HTTP_GET_VARS['action']=='' || $error) {
+  } elseif ($_GET['action']=='' || $error) {
 ?>
       <tr>
         <td class="main"><?php echo HEADING_TEXT; ?></td>
@@ -64,16 +64,16 @@
       <tr>
         <td><form action="<?php echo tep_href_link(FILENAME_GV_SEND, 'action=send', 'NONSSL'); ?>" method="post"><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main"><?php echo ENTRY_NAME; ?><br><?php echo tep_draw_input_field('to_name', stripslashes($HTTP_POST_VARS['to_name']));?></td>
+            <td class="main"><?php echo ENTRY_NAME; ?><br><?php echo tep_draw_input_field('to_name', stripslashes($_POST['to_name']));?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo ENTRY_EMAIL; ?><br><?php echo tep_draw_input_field('email', $HTTP_POST_VARS['email']); if ($error) echo $error_email; ?></td>
+            <td class="main"><?php echo ENTRY_EMAIL; ?><br><?php echo tep_draw_input_field('email', $_POST['email']); if ($error) echo $error_email; ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo ENTRY_AMOUNT; ?><br><?php echo tep_draw_input_field('amount', $HTTP_POST_VARS['amount'], '', '', false); if ($error) echo $error_amount; ?></td>
+            <td class="main"><?php echo ENTRY_AMOUNT; ?><br><?php echo tep_draw_input_field('amount', $_POST['amount'], '', '', false); if ($error) echo $error_amount; ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo ENTRY_MESSAGE; ?><br><?php echo tep_draw_textarea_field('message', 'soft', 50, 15, stripslashes($HTTP_POST_VARS['message'])); ?></td>
+            <td class="main"><?php echo ENTRY_MESSAGE; ?><br><?php echo tep_draw_textarea_field('message', 'soft', 50, 15, stripslashes($_POST['message'])); ?></td>
           </tr>
         </table>
         <table border="0" width="100%" cellspacing="0" cellpadding="2">

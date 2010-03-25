@@ -64,8 +64,8 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_LANGUAGES . 'affiliate_' . $language . '.php');
 
 // If an order is deleted delete the sale too (optional)
-  if ($HTTP_GET_VARS['action'] == 'deleteconfirm' && basename($HTTP_SERVER_VARS['SCRIPT_FILENAME']) == FILENAME_ORDERS && AFFILIATE_DELETE_ORDERS == 'true') {
-    $affiliate_oID = tep_db_prepare_input($HTTP_GET_VARS['oID']);
+  if ($_GET['action'] == 'deleteconfirm' && basename($HTTP_SERVER_VARS['SCRIPT_FILENAME']) == FILENAME_ORDERS && AFFILIATE_DELETE_ORDERS == 'true') {
+    $affiliate_oID = tep_db_prepare_input($_GET['oID']);
     tep_db_query("delete from " . TABLE_AFFILIATE_SALES . " where affiliate_orders_id = '" . tep_db_input($affiliate_oID) . "' and affiliate_billing_status != 1");
   }
 ?>

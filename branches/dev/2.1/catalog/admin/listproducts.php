@@ -36,7 +36,7 @@ td {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: xx-small}
 </td>
 </tr>
 <?php
-   $coupon_get=tep_db_query("select restrict_to_products,restrict_to_categories from " . TABLE_COUPONS . "  where coupon_id='".$HTTP_GET_VARS['cid']."'");
+   $coupon_get=tep_db_query("select restrict_to_products,restrict_to_categories from " . TABLE_COUPONS . "  where coupon_id='".$_GET['cid']."'");
    $get_result=tep_db_fetch_array($coupon_get);
 
     echo "<tr><th>Product ID</th><th>Product Name</th><th>Product Size</th></tr><tr>";

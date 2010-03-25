@@ -18,7 +18,7 @@ $Id: downloads.php 14 2006-07-28 17:42:07Z user $
     $orders = tep_db_fetch_array($orders_query);
     $last_order = $orders['orders_id'];
   } else {
-    $last_order = $HTTP_GET_VARS['order_id'];
+    $last_order = $_GET['order_id'];
   }
 
 // Now get all downloadable products in that order

@@ -27,9 +27,9 @@
   $newsletter_query = tep_db_query("select affiliate_newsletter from " . TABLE_AFFILIATE . " where affiliate_id = '" . (int)$affiliate_id . "'");
   $newsletter = tep_db_fetch_array($newsletter_query);
 
-  if (isset($HTTP_POST_VARS['action']) && ($HTTP_POST_VARS['action'] == 'process')) {
-    if (isset($HTTP_POST_VARS['newsletter_affiliate']) && is_numeric($HTTP_POST_VARS['newsletter_affiliate'])) {
-      $newsletter_affiliate = tep_db_prepare_input($HTTP_POST_VARS['newsletter_affiliate']);
+  if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
+    if (isset($_POST['newsletter_affiliate']) && is_numeric($_POST['newsletter_affiliate'])) {
+      $newsletter_affiliate = tep_db_prepare_input($_POST['newsletter_affiliate']);
     } else {
       $newsletter_affiliate = '0';
     }

@@ -1,5 +1,5 @@
 <?php
-  if (!isset($HTTP_GET_VARS['delete'])) {
+  if (!isset($_GET['delete'])) {
     include('includes/javascript/form_check.js.php');
   }
 ?>

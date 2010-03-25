@@ -59,10 +59,10 @@
     }
 
     function get_error() {
-      global $HTTP_GET_VARS;
+      global $_GET;
 
       $error = array('title' => 'Error',
-                     'error' => stripslashes(urldecode($HTTP_GET_VARS['error'])));
+                     'error' => stripslashes(urldecode($_GET['error'])));
 
       return $error;
     }

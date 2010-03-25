@@ -1,8 +1,8 @@
 <?php
 // START REMOVE FROM CART BUTTON AND CLEAR CART MOD
-switch ($HTTP_GET_VARS['action']) {
-	case 'remove_product' :    if (isset($HTTP_GET_VARS['products_id'])) {
-	               	               $cart->remove($HTTP_GET_VARS['products_id']);
+switch ($_GET['action']) {
+	case 'remove_product' :    if (isset($_GET['products_id'])) {
+	               	               $cart->remove($_GET['products_id']);
         	                       }
             	                   break;
 								   

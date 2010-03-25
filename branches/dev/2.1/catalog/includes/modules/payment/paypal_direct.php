@@ -118,10 +118,10 @@
 
     function pre_confirmation_check() {
       if (MODULE_PAYMENT_PAYPAL_DIRECT_CARD_INPUT_PAGE == 'Payment') {
-        global $HTTP_POST_VARS;
+        global $_POST;
 
-        if (!isset($HTTP_POST_VARS['cc_owner']) || empty($HTTP_POST_VARS['cc_owner']) || (strlen($HTTP_POST_VARS['cc_owner']) < CC_OWNER_MIN_LENGTH) || !isset($HTTP_POST_VARS['cc_type']) || !isset($this->cc_types[$HTTP_POST_VARS['cc_type']]) || !isset($HTTP_POST_VARS['cc_number_nh-dns']) || empty($HTTP_POST_VARS['cc_number_nh-dns']) || (strlen($HTTP_POST_VARS['cc_number_nh-dns']) < CC_NUMBER_MIN_LENGTH)) {
-          $payment_error_return = 'payment_error=' . $this->code . '&error=' . urlencode(MODULE_PAYMENT_PAYPAL_DIRECT_ERROR_ALL_FIELDS_REQUIRED) . '&cc_owner=' . urlencode($HTTP_POST_VARS['cc_owner']) . '&cc_starts_month=' . $HTTP_POST_VARS['cc_starts_month'] . '&cc_starts_year=' . $HTTP_POST_VARS['cc_starts_year'] . '&cc_expires_month=' . $HTTP_POST_VARS['cc_expires_month'] . '&cc_expires_year=' . $HTTP_POST_VARS['cc_expires_year'];
+        if (!isset($_POST['cc_owner']) || empty($_POST['cc_owner']) || (strlen($_POST['cc_owner']) < CC_OWNER_MIN_LENGTH) || !isset($_POST['cc_type']) || !isset($this->cc_types[$_POST['cc_type']]) || !isset($_POST['cc_number_nh-dns']) || empty($_POST['cc_number_nh-dns']) || (strlen($_POST['cc_number_nh-dns']) < CC_NUMBER_MIN_LENGTH)) {
+          $payment_error_return = 'payment_error=' . $this->code . '&error=' . urlencode(MODULE_PAYMENT_PAYPAL_DIRECT_ERROR_ALL_FIELDS_REQUIRED) . '&cc_owner=' . urlencode($_POST['cc_owner']) . '&cc_starts_month=' . $_POST['cc_starts_month'] . '&cc_starts_year=' . $_POST['cc_starts_year'] . '&cc_expires_month=' . $_POST['cc_expires_month'] . '&cc_expires_year=' . $_POST['cc_expires_year'];
 
           tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, $payment_error_return, 'SSL', true, false));
         }
@@ -134,24 +134,24 @@
       $confirmation = array();
 
       if (MODULE_PAYMENT_PAYPAL_DIRECT_CARD_INPUT_PAGE == 'Payment') {
-        global $HTTP_POST_VARS;
+        global $_POST;
 
         $confirmation['fields'] = array(array('title' => MODULE_PAYMENT_PAYPAL_DIRECT_CARD_OWNER,
-                                              'field' => $HTTP_POST_VARS['cc_owner']),
+                                              'field' => $_POST['cc_owner']),
                                         array('title' => MODULE_PAYMENT_PAYPAL_DIRECT_CARD_TYPE,
-                                              'field' => $this->cc_types[$HTTP_POST_VARS['cc_type']]),
+                                              'field' => $this->cc_types[$_POST['cc_type']]),
                                         array('title' => MODULE_PAYMENT_PAYPAL_DIRECT_CARD_NUMBER,
-                                              'field' => str_repeat('X', strlen($HTTP_POST_VARS['cc_number_nh-dns']) - 4) . substr($HTTP_POST_VARS['cc_number_nh-dns'], -4)),
+                                              'field' => str_repeat('X', strlen($_POST['cc_number_nh-dns']) - 4) . substr($_POST['cc_number_nh-dns'], -4)),
                                         array('title' => MODULE_PAYMENT_PAYPAL_DIRECT_CARD_VALID_FROM,
-                                              'field' => $HTTP_POST_VARS['cc_starts_month'] . '/' . $HTTP_POST_VARS['cc_starts_year']),
+                                              'field' => $_POST['cc_starts_month'] . '/' . $_POST['cc_starts_year']),
                                         array('title' => MODULE_PAYMENT_PAYPAL_DIRECT_CARD_EXPIRES,
-                                              'field' => $HTTP_POST_VARS['cc_expires_month'] . '/' . $HTTP_POST_VARS['cc_expires_year']),
+                                              'field' => $_POST['cc_expires_month'] . '/' . $_POST['cc_expires_year']),
                                         array('title' => MODULE_PAYMENT_PAYPAL_DIRECT_CARD_CVC,
-                                              'field' => $HTTP_POST_VARS['cc_cvc_nh-dns']));
+                                              'field' => $_POST['cc_cvc_nh-dns']));
 
-        if (isset($HTTP_POST_VARS['cc_issue_nh-dns']) && !empty($HTTP_POST_VARS['cc_issue_nh-dns'])) {
+        if (isset($_POST['cc_issue_nh-dns']) && !empty($_POST['cc_issue_nh-dns'])) {
           $confirmation['fields'][] = array('title' => MODULE_PAYMENT_PAYPAL_DIRECT_CARD_ISSUE_NUMBER,
-                                            'field' => $HTTP_POST_VARS['cc_issue_nh-dns']);
+                                            'field' => $_POST['cc_issue_nh-dns']);
         }
       } else {
         global $order;
@@ -200,17 +200,17 @@
 
     function process_button() {
       if (MODULE_PAYMENT_PAYPAL_DIRECT_CARD_INPUT_PAGE == 'Payment') {
-        global $HTTP_POST_VARS;
+        global $_POST;
 
-        $process_button_string = tep_draw_hidden_field('cc_owner', $HTTP_POST_VARS['cc_owner']) .
-                                 tep_draw_hidden_field('cc_type', $HTTP_POST_VARS['cc_type']) .
-                                 tep_draw_hidden_field('cc_number_nh-dns', $HTTP_POST_VARS['cc_number_nh-dns']) .
-                                 tep_draw_hidden_field('cc_starts_month', $HTTP_POST_VARS['cc_starts_month']) .
-                                 tep_draw_hidden_field('cc_starts_year', $HTTP_POST_VARS['cc_starts_year']) .
-                                 tep_draw_hidden_field('cc_expires_month', $HTTP_POST_VARS['cc_expires_month']) .
-                                 tep_draw_hidden_field('cc_expires_year', $HTTP_POST_VARS['cc_expires_year']) .
-                                 tep_draw_hidden_field('cc_cvc_nh-dns', $HTTP_POST_VARS['cc_cvc_nh-dns']) .
-                                 tep_draw_hidden_field('cc_issue_nh-dns', $HTTP_POST_VARS['cc_issue_nh-dns']);
+        $process_button_string = tep_draw_hidden_field('cc_owner', $_POST['cc_owner']) .
+                                 tep_draw_hidden_field('cc_type', $_POST['cc_type']) .
+                                 tep_draw_hidden_field('cc_number_nh-dns', $_POST['cc_number_nh-dns']) .
+                                 tep_draw_hidden_field('cc_starts_month', $_POST['cc_starts_month']) .
+                                 tep_draw_hidden_field('cc_starts_year', $_POST['cc_starts_year']) .
+                                 tep_draw_hidden_field('cc_expires_month', $_POST['cc_expires_month']) .
+                                 tep_draw_hidden_field('cc_expires_year', $_POST['cc_expires_year']) .
+                                 tep_draw_hidden_field('cc_cvc_nh-dns', $_POST['cc_cvc_nh-dns']) .
+                                 tep_draw_hidden_field('cc_issue_nh-dns', $_POST['cc_issue_nh-dns']);
 
         return $process_button_string;
       }
@@ -219,9 +219,9 @@
     }
 
     function before_process() {
-      global $HTTP_POST_VARS, $order, $sendto;
+      global $_POST, $order, $sendto;
 
-      if (isset($HTTP_POST_VARS['cc_owner']) && !empty($HTTP_POST_VARS['cc_owner']) && isset($HTTP_POST_VARS['cc_type']) && isset($this->cc_types[$HTTP_POST_VARS['cc_type']]) && isset($HTTP_POST_VARS['cc_number_nh-dns']) && !empty($HTTP_POST_VARS['cc_number_nh-dns'])) {
+      if (isset($_POST['cc_owner']) && !empty($_POST['cc_owner']) && isset($_POST['cc_type']) && isset($this->cc_types[$_POST['cc_type']]) && isset($_POST['cc_number_nh-dns']) && !empty($_POST['cc_number_nh-dns'])) {
         if (MODULE_PAYMENT_PAYPAL_DIRECT_TRANSACTION_SERVER == 'Live') {
           $api_url = 'https://api-3t.paypal.com/nvp';
         } else {
@@ -236,13 +236,13 @@
                         'PAYMENTACTION' => ((MODULE_PAYMENT_PAYPAL_DIRECT_TRANSACTION_METHOD == 'Sale') ? 'Sale' : 'Authorization'),
                         'IPADDRESS' => tep_get_ip_address(),
                         'AMT' => $this->format_raw($order->info['total']),
-                        'CREDITCARDTYPE' => $HTTP_POST_VARS['cc_type'],
-                        'ACCT' => $HTTP_POST_VARS['cc_number_nh-dns'],
-                        'STARTDATE' => $HTTP_POST_VARS['cc_starts_month'] . $HTTP_POST_VARS['cc_starts_year'],
-                        'EXPDATE' => $HTTP_POST_VARS['cc_expires_month'] . $HTTP_POST_VARS['cc_expires_year'],
-                        'CVV2' => $HTTP_POST_VARS['cc_cvc_nh-dns'],
-                        'FIRSTNAME' => substr($HTTP_POST_VARS['cc_owner'], 0, strpos($HTTP_POST_VARS['cc_owner'], ' ')),
-                        'LASTNAME' => substr($HTTP_POST_VARS['cc_owner'], strpos($HTTP_POST_VARS['cc_owner'], ' ')+1),
+                        'CREDITCARDTYPE' => $_POST['cc_type'],
+                        'ACCT' => $_POST['cc_number_nh-dns'],
+                        'STARTDATE' => $_POST['cc_starts_month'] . $_POST['cc_starts_year'],
+                        'EXPDATE' => $_POST['cc_expires_month'] . $_POST['cc_expires_year'],
+                        'CVV2' => $_POST['cc_cvc_nh-dns'],
+                        'FIRSTNAME' => substr($_POST['cc_owner'], 0, strpos($_POST['cc_owner'], ' ')),
+                        'LASTNAME' => substr($_POST['cc_owner'], strpos($_POST['cc_owner'], ' ')+1),
                         'STREET' => $order->billing['street_address'],
                         'CITY' => $order->billing['city'],
                         'STATE' => tep_get_zone_code($order->billing['country']['id'], $order->billing['zone_id'], $order->billing['state']),
@@ -253,8 +253,8 @@
                         'CURRENCYCODE' => $order->info['currency'],
                         'BUTTONSOURCE' => 'osCommerce22_Default_DP');
 
-        if ( ($HTTP_POST_VARS['cc_type'] == 'SWITCH') || ($HTTP_POST_VARS['cc_type'] == 'SOLO') ) {
-          $params['ISSUENUMBER'] = $HTTP_POST_VARS['cc_issue_nh-dns'];
+        if ( ($_POST['cc_type'] == 'SWITCH') || ($_POST['cc_type'] == 'SOLO') ) {
+          $params['ISSUENUMBER'] = $_POST['cc_issue_nh-dns'];
         }
 
         if (is_numeric($sendto) && ($sendto > 0)) {
@@ -292,9 +292,9 @@
 
     function get_error() {
       if (MODULE_PAYMENT_PAYPAL_DIRECT_CARD_INPUT_PAGE == 'Payment') {
-        global $HTTP_GET_VARS;
+        global $_GET;
 
-        $error = array('error' => stripslashes(urldecode($HTTP_GET_VARS['error'])));
+        $error = array('error' => stripslashes(urldecode($_GET['error'])));
 
         return $error;
       }

@@ -39,7 +39,7 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLES);
 
-  if ($topic_depth == 'top' && !isset($HTTP_GET_VARS['authors_id'])) {
+  if ($topic_depth == 'top' && !isset($_GET['authors_id'])) {
     $breadcrumb->add(NAVBAR_TITLE_DEFAULT, tep_href_link(FILENAME_ARTICLES));
   }
 

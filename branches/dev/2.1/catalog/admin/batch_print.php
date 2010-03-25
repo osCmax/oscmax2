@@ -2,20 +2,20 @@
 
   require('includes/application_top.php');
   $pageloop = "0";
-  if ($HTTP_GET_VARS['mkey']) {
+  if ($_GET['mkey']) {
 
-    $key = $HTTP_GET_VARS['mkey']; 
+    $key = $_GET['mkey']; 
     $message = $error[$key]; 
-    $HTTP_GET_VARS['act'] = 0; 
+    $_GET['act'] = 0; 
 
   }
 
-  if ($HTTP_GET_VARS['act'] == '') { $HTTP_GET_VARS['act'] = 0; }
+  if ($_GET['act'] == '') { $_GET['act'] = 0; }
 
-  if (strlen($HTTP_GET_VARS['act']) == 1 && is_numeric($HTTP_GET_VARS['act']))
+  if (strlen($_GET['act']) == 1 && is_numeric($_GET['act']))
     {
 
-    switch ($HTTP_GET_VARS['act']) {
+    switch ($_GET['act']) {
 
       case 1:
 
@@ -23,10 +23,10 @@
         // if it is empty skip down to the check date entered code.
         if ($invoicenumbers != '') {
 
-          if (!isset($HTTP_POST_VARS['invoicenumbers'])) { message_handler('ERROR_BAD_INVOICENUMBERS');  }
+          if (!isset($_POST['invoicenumbers'])) { message_handler('ERROR_BAD_INVOICENUMBERS');  }
           if (!is_writeable(BATCH_PDF_DIR)) { message_handler('SET_PERMISSIONS'); }
           $time0   = time();
-          $invoicenumbers = tep_db_prepare_input($HTTP_POST_VARS['invoicenumbers']);
+          $invoicenumbers = tep_db_prepare_input($_POST['invoicenumbers']);
           $arr_no = explode(',',$invoicenumbers);
           foreach ($arr_no as $key=>$value) {
             $arr_no[$key]=trim($value);
@@ -41,17 +41,17 @@
 
 
   // CHECK DATE ENTERED, GRAB ALL ORDERS FROM THAT DATE, AND CREATE PDF FOR ORDERS
-          if (!isset($HTTP_POST_VARS['startdate'])) { message_handler(); }
-          if ((strlen($HTTP_POST_VARS['startdate']) != 10) || verify_start_date($HTTP_POST_VARS['startdate'])) { message_handler('ERROR_BAD_DATE'); }
+          if (!isset($_POST['startdate'])) { message_handler(); }
+          if ((strlen($_POST['startdate']) != 10) || verify_start_date($_POST['startdate'])) { message_handler('ERROR_BAD_DATE'); }
           if (!is_writeable(BATCH_PDF_DIR)) { message_handler('SET_PERMISSIONS'); }
           $time0   = time();
-          $startdate = tep_db_prepare_input($HTTP_POST_VARS['startdate']);
+          $startdate = tep_db_prepare_input($_POST['startdate']);
 
-          if (!isset($HTTP_POST_VARS['enddate'])) { message_handler(); }
-          if ((strlen($HTTP_POST_VARS['enddate']) != 10) || verify_end_date($HTTP_POST_VARS['enddate'])) { message_handler('ERROR_BAD_DATE'); }
+          if (!isset($_POST['enddate'])) { message_handler(); }
+          if ((strlen($_POST['enddate']) != 10) || verify_end_date($_POST['enddate'])) { message_handler('ERROR_BAD_DATE'); }
           if (!is_writeable(BATCH_PDF_DIR)) { message_handler('SET_PERMISSIONS'); }
           $time0   = time();
-          $enddate = tep_db_prepare_input($HTTP_POST_VARS['enddate']);
+          $enddate = tep_db_prepare_input($_POST['enddate']);
         }
 
         require(DIR_WS_CLASSES . 'currencies.php');
@@ -60,14 +60,14 @@
 
 
         //grab only the page size and layout from template
-        require(BATCH_PRINT_INC . 'templates/' . $HTTP_POST_VARS['file_type']);
+        require(BATCH_PRINT_INC . 'templates/' . $_POST['file_type']);
         $pageloop = "1";
-        //$pdf = new Cezpdf($HTTP_POST_VARS['page'],$HTTP_POST_VARS['orientation']);
+        //$pdf = new Cezpdf($_POST['page'],$_POST['orientation']);
 
 
 
-        if ($HTTP_POST_VARS['show_comments']) { $get_customer_comments = ' and h.orders_status_id = ' . DEFAULT_ORDERS_STATUS_ID; }
-        if ($HTTP_POST_VARS['pull_status']){ $pull_w_status = " and o.orders_status = ". $HTTP_POST_VARS['pull_status']; }
+        if ($_POST['show_comments']) { $get_customer_comments = ' and h.orders_status_id = ' . DEFAULT_ORDERS_STATUS_ID; }
+        if ($_POST['pull_status']){ $pull_w_status = " and o.orders_status = ". $_POST['pull_status']; }
 
 
         // if there is a invoice number use first order query otherwise use second date style order query
@@ -90,16 +90,16 @@
 
   // start of pdf layout ..   ################################
 
-          require(BATCH_PRINT_INC . 'templates/' . $HTTP_POST_VARS['file_type']);
+          require(BATCH_PRINT_INC . 'templates/' . $_POST['file_type']);
 
   // end pdf layout section     ###############################
 
-          if ($HTTP_POST_VARS['status'] && ($HTTP_POST_VARS['status'] != $order->info['orders_status'])){
+          if ($_POST['status'] && ($_POST['status'] != $order->info['orders_status'])){
             $customer_notified = 0; 
-            $status = tep_db_prepare_input($HTTP_POST_VARS['status']);
+            $status = tep_db_prepare_input($_POST['status']);
             $notify_comments = sprintf(EMAIL_TEXT_COMMENTS_UPDATE, BATCH_COMMENTS) . "\n\n";
 
-            if ($HTTP_POST_VARS['notify']) {
+            if ($_POST['notify']) {
               $status_query = tep_db_query("select orders_status_name as name from " . TABLE_ORDERS_STATUS . " where language_id = '" . $languages_id . "' and orders_status_id = " . tep_db_input($status));
               $status_name = tep_db_fetch_array($status_query);
 
@@ -211,7 +211,7 @@
     global $order;
     global $orders;
     global $languages_id;
-    global $HTTP_POST_VARS;
+    global $_POST;
     if ($order){
       if ($billing == true)
         $addressparts = explode("\n", tep_address_format($order->billing['format_id'], $order->billing, 1, '', " \n"));
@@ -227,12 +227,12 @@
       }
       $pdf->addText($x + LABEL_WIDTH - ORDERIDXOFFSET - 22,$y + ORDERIDYOFFSET,ORDERIDFONTSIZE,$orders['orders_id']);
 
-      if ($HTTP_POST_VARS['status'] && ($HTTP_POST_VARS['status'] != $order->info['orders_status'])){
+      if ($_POST['status'] && ($_POST['status'] != $order->info['orders_status'])){
         $customer_notified = 0; 
-        $status = tep_db_prepare_input($HTTP_POST_VARS['status']);
+        $status = tep_db_prepare_input($_POST['status']);
         $notify_comments = sprintf(EMAIL_TEXT_COMMENTS_UPDATE, BATCH_COMMENTS) . "\n\n";
 
-        if ($HTTP_POST_VARS['notify']) {
+        if ($_POST['notify']) {
           $status_query = tep_db_query("select orders_status_name as name from " . TABLE_ORDERS_STATUS . " where language_id = " . $languages_id . " and orders_status_id = " . tep_db_input($status));
           $status_name = tep_db_fetch_array($status_query);
 

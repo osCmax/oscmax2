@@ -12,14 +12,14 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
 
   require('includes/application_top.php');
 
-  $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   if (tep_not_null($action)) {
     switch ($action) {
       case 'setflag':
-        if ( ($HTTP_GET_VARS['flag'] == '0') || ($HTTP_GET_VARS['flag'] == '1') ) {
-          if (isset($HTTP_GET_VARS['aID'])) {
-            tep_set_article_status($HTTP_GET_VARS['aID'], $HTTP_GET_VARS['flag']);
+        if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') ) {
+          if (isset($_GET['aID'])) {
+            tep_set_article_status($_GET['aID'], $_GET['flag']);
           }
 
           if (USE_CACHE == 'true') {
@@ -27,22 +27,22 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
           }
         }
 
-        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $HTTP_GET_VARS['tPath'] . '&aID=' . $HTTP_GET_VARS['aID']));
+        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $_GET['tPath'] . '&aID=' . $_GET['aID']));
         break;
       case 'new_topic':
       case 'edit_topic':
-        $HTTP_GET_VARS['action']=$HTTP_GET_VARS['action'] . '_ACD';
+        $_GET['action']=$_GET['action'] . '_ACD';
         break;
       case 'insert_topic':
       case 'update_topic':
-        if ( ($HTTP_POST_VARS['edit_x']) || ($HTTP_POST_VARS['edit_y']) ) {
-          $HTTP_GET_VARS['action'] = 'edit_topic_ACD';
+        if ( ($_POST['edit_x']) || ($_POST['edit_y']) ) {
+          $_GET['action'] = 'edit_topic_ACD';
         } else {
-        if (isset($HTTP_POST_VARS['topics_id'])) $topics_id = tep_db_prepare_input($HTTP_POST_VARS['topics_id']);
+        if (isset($_POST['topics_id'])) $topics_id = tep_db_prepare_input($_POST['topics_id']);
           if ($topics_id == '') {
-            $topics_id = tep_db_prepare_input($HTTP_GET_VARS['tID']);
+            $topics_id = tep_db_prepare_input($_GET['tID']);
             }
-        $sort_order = tep_db_prepare_input($HTTP_POST_VARS['sort_order']);
+        $sort_order = tep_db_prepare_input($_POST['sort_order']);
 
         $sql_data_array = array('sort_order' => $sort_order);
 
@@ -68,9 +68,9 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
 
           $language_id = $languages[$i]['id'];
 
-          $sql_data_array = array('topics_name' => tep_db_prepare_input($HTTP_POST_VARS['topics_name'][$language_id]),
-                                  'topics_heading_title' => tep_db_prepare_input($HTTP_POST_VARS['topics_heading_title'][$language_id]),
-                                  'topics_description' => tep_db_prepare_input($HTTP_POST_VARS['topics_description'][$language_id]));
+          $sql_data_array = array('topics_name' => tep_db_prepare_input($_POST['topics_name'][$language_id]),
+                                  'topics_heading_title' => tep_db_prepare_input($_POST['topics_heading_title'][$language_id]),
+                                  'topics_description' => tep_db_prepare_input($_POST['topics_description'][$language_id]));
 
           if ($action == 'insert_topic') {
             $insert_sql_data = array('topics_id' => $topics_id,
@@ -92,8 +92,8 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
         break;
         }
       case 'delete_topic_confirm':
-        if (isset($HTTP_POST_VARS['topics_id'])) {
-          $topics_id = tep_db_prepare_input($HTTP_POST_VARS['topics_id']);
+        if (isset($_POST['topics_id'])) {
+          $topics_id = tep_db_prepare_input($_POST['topics_id']);
 
           $topics = tep_get_topic_tree($topics_id, '', '0', '', true);
           $articles = array();
@@ -142,9 +142,9 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
         tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath));
         break;
       case 'delete_article_confirm':
-        if (isset($HTTP_POST_VARS['articles_id']) && isset($HTTP_POST_VARS['article_topics']) && is_array($HTTP_POST_VARS['article_topics'])) {
-          $article_id = tep_db_prepare_input($HTTP_POST_VARS['articles_id']);
-          $article_topics = $HTTP_POST_VARS['article_topics'];
+        if (isset($_POST['articles_id']) && isset($_POST['article_topics']) && is_array($_POST['article_topics'])) {
+          $article_id = tep_db_prepare_input($_POST['articles_id']);
+          $article_topics = $_POST['article_topics'];
 
           for ($i=0, $n=sizeof($article_topics); $i<$n; $i++) {
             tep_db_query("delete from " . TABLE_ARTICLES_TO_TOPICS . " where articles_id = '" . (int)$article_id . "' and topics_id = '" . (int)$article_topics[$i] . "'");
@@ -165,9 +165,9 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
         tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath));
         break;
       case 'move_topic_confirm':
-        if (isset($HTTP_POST_VARS['topics_id']) && ($HTTP_POST_VARS['topics_id'] != $HTTP_POST_VARS['move_to_topic_id'])) {
-          $topics_id = tep_db_prepare_input($HTTP_POST_VARS['topics_id']);
-          $new_parent_id = tep_db_prepare_input($HTTP_POST_VARS['move_to_topic_id']);
+        if (isset($_POST['topics_id']) && ($_POST['topics_id'] != $_POST['move_to_topic_id'])) {
+          $topics_id = tep_db_prepare_input($_POST['topics_id']);
+          $new_parent_id = tep_db_prepare_input($_POST['move_to_topic_id']);
 
           $path = explode('_', tep_get_generated_topic_path_ids($new_parent_id));
 
@@ -188,8 +188,8 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
 
         break;
       case 'move_article_confirm':
-        $articles_id = tep_db_prepare_input($HTTP_POST_VARS['articles_id']);
-        $new_parent_id = tep_db_prepare_input($HTTP_POST_VARS['move_to_topic_id']);
+        $articles_id = tep_db_prepare_input($_POST['articles_id']);
+        $new_parent_id = tep_db_prepare_input($_POST['move_to_topic_id']);
 
         $duplicate_check_query = tep_db_query("select count(*) as total from " . TABLE_ARTICLES_TO_TOPICS . " where articles_id = '" . (int)$articles_id . "' and topics_id = '" . (int)$new_parent_id . "'");
         $duplicate_check = tep_db_fetch_array($duplicate_check_query);
@@ -203,22 +203,22 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
         break;
       case 'insert_article':
       case 'update_article':
-        if (isset($HTTP_POST_VARS['edit_x']) || isset($HTTP_POST_VARS['edit_y'])) {
+        if (isset($_POST['edit_x']) || isset($_POST['edit_y'])) {
           $action = 'new_article';
         } else {
-          if (isset($HTTP_GET_VARS['aID'])) $articles_id = tep_db_prepare_input($HTTP_GET_VARS['aID']);
-          $articles_date_available = tep_db_prepare_input($HTTP_POST_VARS['articles_date_available']);
+          if (isset($_GET['aID'])) $articles_id = tep_db_prepare_input($_GET['aID']);
+          $articles_date_available = tep_db_prepare_input($_POST['articles_date_available']);
 
           $articles_date_available = (date('Y-m-d') < $articles_date_available) ? $articles_date_available : 'null';
 
           $sql_data_array = array('articles_date_available' => $articles_date_available,
-                                  'articles_status' => tep_db_prepare_input($HTTP_POST_VARS['articles_status']),
-                                  'authors_id' => tep_db_prepare_input($HTTP_POST_VARS['authors_id']));
+                                  'articles_status' => tep_db_prepare_input($_POST['articles_status']),
+                                  'authors_id' => tep_db_prepare_input($_POST['authors_id']));
 
           if ($action == 'insert_article') {
             // If expected article then articles_date _added becomes articles_date_available
-            if (isset($HTTP_POST_VARS['articles_date_available']) && tep_not_null($HTTP_POST_VARS['articles_date_available'])) {
-              $insert_sql_data = array('articles_date_added' => tep_db_prepare_input($HTTP_POST_VARS['articles_date_available']));
+            if (isset($_POST['articles_date_available']) && tep_not_null($_POST['articles_date_available'])) {
+              $insert_sql_data = array('articles_date_added' => tep_db_prepare_input($_POST['articles_date_available']));
             } else {
               $insert_sql_data = array('articles_date_added' => 'now()');
             }
@@ -231,8 +231,8 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
           } elseif ($action == 'update_article') {
             $update_sql_data = array('articles_last_modified' => 'now()');
             // If expected article then articles_date _added becomes articles_date_available
-            if (isset($HTTP_POST_VARS['articles_date_available']) && tep_not_null($HTTP_POST_VARS['articles_date_available'])) {
-              $update_sql_data = array('articles_date_added' => tep_db_prepare_input($HTTP_POST_VARS['articles_date_available']));
+            if (isset($_POST['articles_date_available']) && tep_not_null($_POST['articles_date_available'])) {
+              $update_sql_data = array('articles_date_added' => tep_db_prepare_input($_POST['articles_date_available']));
             }
 
             $sql_data_array = array_merge($sql_data_array, $update_sql_data);
@@ -244,12 +244,12 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
           for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
             $language_id = $languages[$i]['id'];
 
-            $sql_data_array = array('articles_name' => tep_db_prepare_input($HTTP_POST_VARS['articles_name'][$language_id]),
-                                    'articles_description' => tep_db_prepare_input($HTTP_POST_VARS['articles_description'][$language_id]),
-                                    'articles_url' => tep_db_prepare_input($HTTP_POST_VARS['articles_url'][$language_id]),
-                                    'articles_head_title_tag' => tep_db_prepare_input($HTTP_POST_VARS['articles_head_title_tag'][$language_id]),
-                                    'articles_head_desc_tag' => tep_db_prepare_input($HTTP_POST_VARS['articles_head_desc_tag'][$language_id]),
-                                    'articles_head_keywords_tag' => tep_db_prepare_input($HTTP_POST_VARS['articles_head_keywords_tag'][$language_id]));
+            $sql_data_array = array('articles_name' => tep_db_prepare_input($_POST['articles_name'][$language_id]),
+                                    'articles_description' => tep_db_prepare_input($_POST['articles_description'][$language_id]),
+                                    'articles_url' => tep_db_prepare_input($_POST['articles_url'][$language_id]),
+                                    'articles_head_title_tag' => tep_db_prepare_input($_POST['articles_head_title_tag'][$language_id]),
+                                    'articles_head_desc_tag' => tep_db_prepare_input($_POST['articles_head_desc_tag'][$language_id]),
+                                    'articles_head_keywords_tag' => tep_db_prepare_input($_POST['articles_head_keywords_tag'][$language_id]));
 
             if ($action == 'insert_article') {
               $insert_sql_data = array('articles_id' => $articles_id,
@@ -271,11 +271,11 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
         }
         break;
       case 'copy_to_confirm':
-        if (isset($HTTP_POST_VARS['articles_id']) && isset($HTTP_POST_VARS['topics_id'])) {
-          $articles_id = tep_db_prepare_input($HTTP_POST_VARS['articles_id']);
-          $topics_id = tep_db_prepare_input($HTTP_POST_VARS['topics_id']);
+        if (isset($_POST['articles_id']) && isset($_POST['topics_id'])) {
+          $articles_id = tep_db_prepare_input($_POST['articles_id']);
+          $topics_id = tep_db_prepare_input($_POST['topics_id']);
 
-          if ($HTTP_POST_VARS['copy_as'] == 'link') {
+          if ($_POST['copy_as'] == 'link') {
             if ($topics_id != $current_topic_id) {
               $check_query = tep_db_query("select count(*) as total from " . TABLE_ARTICLES_TO_TOPICS . " where articles_id = '" . (int)$articles_id . "' and topics_id = '" . (int)$topics_id . "'");
               $check = tep_db_fetch_array($check_query);
@@ -285,7 +285,7 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
             } else {
               $messageStack->add_session(ERROR_CANNOT_LINK_TO_SAME_TOPIC, 'error');
             }
-          } elseif ($HTTP_POST_VARS['copy_as'] == 'duplicate') {
+          } elseif ($_POST['copy_as'] == 'duplicate') {
             $article_query = tep_db_query("select articles_date_available, authors_id from " . TABLE_ARTICLES . " where articles_id = '" . (int)$articles_id . "'");
             $article = tep_db_fetch_array($article_query);
 
@@ -358,25 +358,25 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
      <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
  <?php
    //----- new_topic / edit_topic  -----
-  if ($HTTP_GET_VARS['action'] == 'new_topic_ACD' || $HTTP_GET_VARS['action'] == 'edit_topic_ACD') {
-    if ( ($HTTP_GET_VARS['tID']) && (!$HTTP_POST_VARS) ) {
-      $topics_query = tep_db_query("select t.topics_id, td.topics_name, td.topics_heading_title, td.topics_description, t.parent_id, t.sort_order, t.date_added, t.last_modified from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = '" . $HTTP_GET_VARS['tID'] . "' and t.topics_id = td.topics_id and td.language_id = '" . $languages_id . "' order by t.sort_order, td.topics_name");
+  if ($_GET['action'] == 'new_topic_ACD' || $_GET['action'] == 'edit_topic_ACD') {
+    if ( ($_GET['tID']) && (!$_POST) ) {
+      $topics_query = tep_db_query("select t.topics_id, td.topics_name, td.topics_heading_title, td.topics_description, t.parent_id, t.sort_order, t.date_added, t.last_modified from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = '" . $_GET['tID'] . "' and t.topics_id = td.topics_id and td.language_id = '" . $languages_id . "' order by t.sort_order, td.topics_name");
       $topic = tep_db_fetch_array($topics_query);
 
       $tInfo = new objectInfo($topic);
-    } elseif ($HTTP_POST_VARS) {
-      $tInfo = new objectInfo($HTTP_POST_VARS);
-      $topics_name = $HTTP_POST_VARS['topics_name'];
-      $topics_heading_title = $HTTP_POST_VARS['topics_heading_title'];
-      $topics_description = $HTTP_POST_VARS['topics_description'];
-      $topics_url = $HTTP_POST_VARS['topics_url'];
+    } elseif ($_POST) {
+      $tInfo = new objectInfo($_POST);
+      $topics_name = $_POST['topics_name'];
+      $topics_heading_title = $_POST['topics_heading_title'];
+      $topics_description = $_POST['topics_description'];
+      $topics_url = $_POST['topics_url'];
     } else {
       $tInfo = new objectInfo(array());
     }
 
     $languages = tep_get_languages();
 
-    $text_new_or_edit = ($HTTP_GET_VARS['action']=='new_topic_ACD') ? TEXT_INFO_HEADING_NEW_TOPIC : TEXT_INFO_HEADING_EDIT_TOPIC;
+    $text_new_or_edit = ($_GET['action']=='new_topic_ACD') ? TEXT_INFO_HEADING_NEW_TOPIC : TEXT_INFO_HEADING_EDIT_TOPIC;
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -389,7 +389,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
-      <tr><?php echo tep_draw_form('new_topic', FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $HTTP_GET_VARS['tID'] . '&action=new_topic_preview', 'post', 'enctype="multipart/form-data"'); ?>
+      <tr><?php echo tep_draw_form('new_topic', FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $_GET['tID'] . '&action=new_topic_preview', 'post', 'enctype="multipart/form-data"'); ?>
         <td><table border="0" cellspacing="0" cellpadding="2">
 <?php
     for ($i=0; $i<sizeof($languages); $i++) {
@@ -454,32 +454,32 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main" align="right"><?php echo tep_draw_hidden_field('topics_date_added', (($tInfo->date_added) ? $tInfo->date_added : date('Y-m-d'))) . tep_draw_hidden_field('parent_id', $tInfo->parent_id) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $HTTP_GET_VARS['tID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+        <td class="main" align="right"><?php echo tep_draw_hidden_field('topics_date_added', (($tInfo->date_added) ? $tInfo->date_added : date('Y-m-d'))) . tep_draw_hidden_field('parent_id', $tInfo->parent_id) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $_GET['tID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
       </form></tr>
 
 <?php
 
   //----- new_topic_preview -----
-  } elseif ($HTTP_GET_VARS['action'] == 'new_topic_preview') {
-    if ($HTTP_POST_VARS) {
-      $tInfo = new objectInfo($HTTP_POST_VARS);
-      $topics_name = $HTTP_POST_VARS['topics_name'];
-      $topics_heading_title = $HTTP_POST_VARS['topics_heading_title'];
-      $topics_description = $HTTP_POST_VARS['topics_description'];
+  } elseif ($_GET['action'] == 'new_topic_preview') {
+    if ($_POST) {
+      $tInfo = new objectInfo($_POST);
+      $topics_name = $_POST['topics_name'];
+      $topics_heading_title = $_POST['topics_heading_title'];
+      $topics_description = $_POST['topics_description'];
     } else {
-      $topic_query = tep_db_query("select t.topics_id, td.language_id, td.topics_name, td.topics_heading_title, td.topics_description, t.sort_order, t.date_added, t.last_modified from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = td.topics_id and t.topics_id = '" . $HTTP_GET_VARS['tID'] . "'");
+      $topic_query = tep_db_query("select t.topics_id, td.language_id, td.topics_name, td.topics_heading_title, td.topics_description, t.sort_order, t.date_added, t.last_modified from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = td.topics_id and t.topics_id = '" . $_GET['tID'] . "'");
       $topic = tep_db_fetch_array($topic_query);
 
       $tInfo = new objectInfo($topic);
     }
 
-    $form_action = ($HTTP_GET_VARS['tID']) ? 'update_topic' : 'insert_topic';
+    $form_action = ($_GET['tID']) ? 'update_topic' : 'insert_topic';
 
-    echo tep_draw_form($form_action, FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $HTTP_GET_VARS['tID'] . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
+    echo tep_draw_form($form_action, FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $_GET['tID'] . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
 
     $languages = tep_get_languages();
     for ($i=0; $i<sizeof($languages); $i++) {
-      if ($HTTP_GET_VARS['read'] == 'only') {
+      if ($_GET['read'] == 'only') {
         $tInfo->topics_name = tep_get_topic_name($tInfo->topics_id, $languages[$i]['id']);
         $tInfo->topics_heading_title = tep_get_topic_heading_title($tInfo->topics_id, $languages[$i]['id']);
         $tInfo->topics_description = tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']);
@@ -505,14 +505,14 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 
 <?php
     }
-    if ($HTTP_GET_VARS['read'] == 'only') {
-      if ($HTTP_GET_VARS['origin']) {
-        $pos_params = strpos($HTTP_GET_VARS['origin'], '?', 0);
+    if ($_GET['read'] == 'only') {
+      if ($_GET['origin']) {
+        $pos_params = strpos($_GET['origin'], '?', 0);
         if ($pos_params != false) {
-          $back_url = substr($HTTP_GET_VARS['origin'], 0, $pos_params);
-          $back_url_params = substr($HTTP_GET_VARS['origin'], $pos_params + 1);
+          $back_url = substr($_GET['origin'], 0, $pos_params);
+          $back_url_params = substr($_GET['origin'], $pos_params + 1);
         } else {
-          $back_url = $HTTP_GET_VARS['origin'];
+          $back_url = $_GET['origin'];
           $back_url_params = '';
         }
       } else {
@@ -530,9 +530,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         <td align="right" class="smallText">
 <?php
 /* Re-Post all POST'ed variables */
-      reset($HTTP_POST_VARS);
-      while (list($key, $value) = each($HTTP_POST_VARS)) {
-        if (!is_array($HTTP_POST_VARS[$key])) {
+      reset($_POST);
+      while (list($key, $value) = each($_POST)) {
+        if (!is_array($_POST[$key])) {
           echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
         }
       }
@@ -545,12 +545,12 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 
       echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="edit"') . '&nbsp;&nbsp;';
 
-      if ($HTTP_GET_VARS['tID']) {
+      if ($_GET['tID']) {
         echo tep_image_submit('button_update.gif', IMAGE_UPDATE);
       } else {
         echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
       }
-      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $HTTP_GET_VARS['tID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
+      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $_GET['tID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
 ?></td>
       </form></tr>
 <?php
@@ -571,19 +571,19 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 
     $aInfo = new objectInfo($parameters);
 
-    if (isset($HTTP_GET_VARS['aID']) && empty($HTTP_POST_VARS)) {
-      $article_query = tep_db_query("select ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_id, a.articles_date_added, a.articles_last_modified, date_format(a.articles_date_available, '%Y-%m-%d') as articles_date_available, a.articles_status, a.authors_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = '" . (int)$HTTP_GET_VARS['aID'] . "' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "'");
+    if (isset($_GET['aID']) && empty($_POST)) {
+      $article_query = tep_db_query("select ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_id, a.articles_date_added, a.articles_last_modified, date_format(a.articles_date_available, '%Y-%m-%d') as articles_date_available, a.articles_status, a.authors_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = '" . (int)$_GET['aID'] . "' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "'");
       $article = tep_db_fetch_array($article_query);
 
       $aInfo->objectInfo($article);
-    } elseif (tep_not_null($HTTP_POST_VARS)) {
-      $aInfo->objectInfo($HTTP_POST_VARS);
-      $articles_name = $HTTP_POST_VARS['articles_name'];
-      $articles_description = $HTTP_POST_VARS['articles_description'];
-      $articles_url = $HTTP_POST_VARS['articles_url'];
-      $articles_head_title_tag = $HTTP_POST_VARS['articles_head_title_tag'];
-      $articles_head_desc_tag = $HTTP_POST_VARS['articles_head_desc_tag'];
-      $articles_head_keywords_tag = $HTTP_POST_VARS['articles_head_keywords_tag'];
+    } elseif (tep_not_null($_POST)) {
+      $aInfo->objectInfo($_POST);
+      $articles_name = $_POST['articles_name'];
+      $articles_description = $_POST['articles_description'];
+      $articles_url = $_POST['articles_url'];
+      $articles_head_title_tag = $_POST['articles_head_title_tag'];
+      $articles_head_desc_tag = $_POST['articles_head_desc_tag'];
+      $articles_head_keywords_tag = $_POST['articles_head_keywords_tag'];
     }
 
     $authors_array = array(array('id' => '', 'text' => TEXT_NONE));
@@ -609,7 +609,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
   var dateAvailable = new ctlSpiffyCalendarBox("dateAvailable", "new_article", "articles_date_available","btnDate1","<?php echo $aInfo->articles_date_available; ?>",scBTNMODE_CUSTOMBLUE);
 -->
 </script>
-    <?php echo tep_draw_form('new_article', FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($HTTP_GET_VARS['aID']) ? '&aID=' . $HTTP_GET_VARS['aID'] : '') . '&action=article_preview', 'post', 'enctype="multipart/form-data"'); ?>
+    <?php echo tep_draw_form('new_article', FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($_GET['aID']) ? '&aID=' . $_GET['aID'] : '') . '&action=article_preview', 'post', 'enctype="multipart/form-data"'); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -750,7 +750,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main" align="right"><?php echo tep_draw_hidden_field('articles_date_added', (tep_not_null($aInfo->articles_date_added) ? $aInfo->articles_date_added : date('Y-m-d'))) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($HTTP_GET_VARS['aID']) ? '&aID=' . $HTTP_GET_VARS['aID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+        <td class="main" align="right"><?php echo tep_draw_hidden_field('articles_date_added', (tep_not_null($aInfo->articles_date_added) ? $aInfo->articles_date_added : date('Y-m-d'))) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($_GET['aID']) ? '&aID=' . $_GET['aID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
       </tr>
     </table></form>
 <?php
@@ -774,28 +774,28 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <?php
   }
   } elseif ($action == 'article_preview') {
-    if (tep_not_null($HTTP_POST_VARS)) {
-      $aInfo = new objectInfo($HTTP_POST_VARS);
-      $articles_name = $HTTP_POST_VARS['articles_name'];
-      $articles_description = $HTTP_POST_VARS['articles_description'];
-      $articles_url = $HTTP_POST_VARS['articles_url'];
-      $articles_head_title_tag = $HTTP_POST_VARS['articles_head_title_tag'];
-      $articles_head_desc_tag = $HTTP_POST_VARS['articles_head_desc_tag'];
-      $articles_head_keywords_tag = $HTTP_POST_VARS['articles_head_keywords_tag'];
+    if (tep_not_null($_POST)) {
+      $aInfo = new objectInfo($_POST);
+      $articles_name = $_POST['articles_name'];
+      $articles_description = $_POST['articles_description'];
+      $articles_url = $_POST['articles_url'];
+      $articles_head_title_tag = $_POST['articles_head_title_tag'];
+      $articles_head_desc_tag = $_POST['articles_head_desc_tag'];
+      $articles_head_keywords_tag = $_POST['articles_head_keywords_tag'];
     } else {
-      $article_query = tep_db_query("select a.articles_id, ad.language_id, ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a.authors_id  from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = ad.articles_id and a.articles_id = '" . (int)$HTTP_GET_VARS['aID'] . "'");
+      $article_query = tep_db_query("select a.articles_id, ad.language_id, ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a.authors_id  from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = ad.articles_id and a.articles_id = '" . (int)$_GET['aID'] . "'");
       $article = tep_db_fetch_array($article_query);
 
       $aInfo = new objectInfo($article);
     }
 
-    $form_action = (isset($HTTP_GET_VARS['aID'])) ? 'update_article' : 'insert_article';
+    $form_action = (isset($_GET['aID'])) ? 'update_article' : 'insert_article';
 
-    echo tep_draw_form($form_action, FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($HTTP_GET_VARS['aID']) ? '&aID=' . $HTTP_GET_VARS['aID'] : '') . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
+    echo tep_draw_form($form_action, FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($_GET['aID']) ? '&aID=' . $_GET['aID'] : '') . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
 
     $languages = tep_get_languages();
     for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-      if (isset($HTTP_GET_VARS['read']) && ($HTTP_GET_VARS['read'] == 'only')) {
+      if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
         $aInfo->articles_name = tep_get_articles_name($aInfo->articles_id, $languages[$i]['id']);
         $aInfo->articles_description = tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']);
         $aInfo->articles_url = tep_get_articles_url($aInfo->articles_id, $languages[$i]['id']);
@@ -867,14 +867,14 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <?php
     }
 
-    if (isset($HTTP_GET_VARS['read']) && ($HTTP_GET_VARS['read'] == 'only')) {
-      if (isset($HTTP_GET_VARS['origin'])) {
-        $pos_params = strpos($HTTP_GET_VARS['origin'], '?', 0);
+    if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
+      if (isset($_GET['origin'])) {
+        $pos_params = strpos($_GET['origin'], '?', 0);
         if ($pos_params != false) {
-          $back_url = substr($HTTP_GET_VARS['origin'], 0, $pos_params);
-          $back_url_params = substr($HTTP_GET_VARS['origin'], $pos_params + 1);
+          $back_url = substr($_GET['origin'], 0, $pos_params);
+          $back_url_params = substr($_GET['origin'], $pos_params + 1);
         } else {
-          $back_url = $HTTP_GET_VARS['origin'];
+          $back_url = $_GET['origin'];
           $back_url_params = '';
         }
       } else {
@@ -892,9 +892,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         <td align="right" class="smallText">
 <?php
 /* Re-Post all POST'ed variables */
-      reset($HTTP_POST_VARS);
-      while (list($key, $value) = each($HTTP_POST_VARS)) {
-        if (!is_array($HTTP_POST_VARS[$key])) {
+      reset($_POST);
+      while (list($key, $value) = each($_POST)) {
+        if (!is_array($_POST[$key])) {
           echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
         }
       }
@@ -910,12 +910,12 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 
       echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="edit"') . '&nbsp;&nbsp;';
 
-      if (isset($HTTP_GET_VARS['aID'])) {
+      if (isset($_GET['aID'])) {
         echo tep_image_submit('button_update.gif', IMAGE_UPDATE);
       } else {
         echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
       }
-      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($HTTP_GET_VARS['aID']) ? '&aID=' . $HTTP_GET_VARS['aID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
+      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($_GET['aID']) ? '&aID=' . $_GET['aID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
 ?></td>
       </tr>
     </table></form>
@@ -964,8 +964,8 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <?php
     $topics_count = 0;
     $rows = 0;
-    if (isset($HTTP_GET_VARS['search'])) {
-      $search = tep_db_prepare_input($HTTP_GET_VARS['search']);
+    if (isset($_GET['search'])) {
+      $search = tep_db_prepare_input($_GET['search']);
 
       $topics_query = tep_db_query("select t.topics_id, td.topics_name, t.parent_id, t.sort_order, t.date_added, t.last_modified from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = td.topics_id and td.language_id = '" . (int)$languages_id . "' and td.topics_name like '%" . tep_db_input($search) . "%' order by t.sort_order, td.topics_name");
     } else {
@@ -976,9 +976,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       $rows++;
 
 // Get parent_id for subtopics if search
-      if (isset($HTTP_GET_VARS['search'])) $tPath= $topics['parent_id'];
+      if (isset($_GET['search'])) $tPath= $topics['parent_id'];
 
-      if ((!isset($HTTP_GET_VARS['tID']) && !isset($HTTP_GET_VARS['aID']) || (isset($HTTP_GET_VARS['tID']) && ($HTTP_GET_VARS['tID'] == $topics['topics_id']))) && !isset($tInfo) && (substr($action, 0, 3) != 'new')) {
+      if ((!isset($_GET['tID']) && !isset($_GET['aID']) || (isset($_GET['tID']) && ($_GET['tID'] == $topics['topics_id']))) && !isset($tInfo) && (substr($action, 0, 3) != 'new')) {
         $topic_childs = array('childs_count' => tep_childs_in_topic_count($topics['topics_id']));
         $topic_articles = array('articles_count' => tep_articles_in_topic_count($topics['topics_id']));
 
@@ -1000,7 +1000,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
     }
 
     $articles_count = 0;
-    if (isset($HTTP_GET_VARS['search'])) {
+    if (isset($_GET['search'])) {
       $articles_query = tep_db_query("select a.articles_id, ad.articles_name, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a2t.topics_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t where a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and a.articles_id = a2t.articles_id and ad.articles_name like '%" . tep_db_input($search) . "%' order by ad.articles_name");
     } else {
       $articles_query = tep_db_query("select a.articles_id, ad.articles_name, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t where a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and a.articles_id = a2t.articles_id and a2t.topics_id = '" . (int)$current_topic_id . "' order by ad.articles_name");
@@ -1010,9 +1010,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       $rows++;
 
 // Get topics_id for article if search
-      if (isset($HTTP_GET_VARS['search'])) $tPath = $articles['topics_id'];
+      if (isset($_GET['search'])) $tPath = $articles['topics_id'];
 
-      if ( (!isset($HTTP_GET_VARS['aID']) && !isset($HTTP_GET_VARS['tID']) || (isset($HTTP_GET_VARS['aID']) && ($HTTP_GET_VARS['aID'] == $articles['articles_id']))) && !isset($aInfo) && !isset($tInfo) && (substr($action, 0, 3) != 'new')) {
+      if ( (!isset($_GET['aID']) && !isset($_GET['tID']) || (isset($_GET['aID']) && ($_GET['aID'] == $articles['articles_id']))) && !isset($aInfo) && !isset($tInfo) && (substr($action, 0, 3) != 'new')) {
 // find out the rating average from customer reviews
         $reviews_query = tep_db_query("select (avg(reviews_rating) / 5 * 100) as average_rating from " . TABLE_ARTICLE_REVIEWS . " where articles_id = '" . (int)$articles['articles_id'] . "'");
         $reviews = tep_db_fetch_array($reviews_query);
@@ -1057,7 +1057,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
                 <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText"><?php echo TEXT_TOPICS . '&nbsp;' . $topics_count . '<br>' . TEXT_ARTICLES . '&nbsp;' . $articles_count; ?></td>
-                    <td align="right" class="smallText"><?php if (sizeof($tPath_array) > 0) echo '<a href="' . tep_href_link(FILENAME_ARTICLES, $tPath_back . 'tID=' . $current_topic_id) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>&nbsp;'; if (!isset($HTTP_GET_VARS['search'])) echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&action=new_topic') . '">' . tep_image_button('button_new_topic.gif', IMAGE_NEW_TOPIC) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&action=new_article') . '">' . tep_image_button('button_new_article.gif', IMAGE_NEW_ARTICLE) . '</a>'; ?>&nbsp;</td>
+                    <td align="right" class="smallText"><?php if (sizeof($tPath_array) > 0) echo '<a href="' . tep_href_link(FILENAME_ARTICLES, $tPath_back . 'tID=' . $current_topic_id) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>&nbsp;'; if (!isset($_GET['search'])) echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&action=new_topic') . '">' . tep_image_button('button_new_topic.gif', IMAGE_NEW_TOPIC) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&action=new_article') . '">' . tep_image_button('button_new_article.gif', IMAGE_NEW_ARTICLE) . '</a>'; ?>&nbsp;</td>
                   </tr>
                 </table></td>
               </tr>

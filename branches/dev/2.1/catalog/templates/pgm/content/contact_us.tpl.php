@@ -22,7 +22,7 @@
 <?php
   }
 
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'success')) {
+  if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
 ?>
       <tr>
         <td class="main" align="center"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_man_on_board.gif', HEADING_TITLE, '0', '0', 'align="left"') . TEXT_SUCCESS; ?></td>

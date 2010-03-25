@@ -13,10 +13,10 @@
                 <td class="dataTableHeadingContent" width="50">Error Type</td>
           	</tr>
 <?php
-  if (isset($HTTP_GET_VARS['page']) && ($HTTP_GET_VARS['page'] > 1)) $rows = $HTTP_GET_VARS['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
+  if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
   $http_error_query_raw = "select he.error_number, he.error_code, he.error_url, he.error_ip, he. error_browser, he.error_refer, he.error_timestamp from " . TABLE_HTTP_ERROR . " he order by he.error_number DESC";
 
-  $http_error_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $http_error_query_raw, $http_error_query_numrows);
+  $http_error_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $http_error_query_raw, $http_error_query_numrows);
 // fix counted customers
   $http_error_query_numrows = tep_db_query("select error_number from " . TABLE_HTTP_ERROR . " group by error_number");
   $http_error_query_numrows = tep_db_num_rows($http_error_query_numrows);

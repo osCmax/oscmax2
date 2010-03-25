@@ -12,26 +12,26 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
 
   require('../includes/database_tables.php');
 
-  osc_db_connect(trim($HTTP_POST_VARS['DB_SERVER']), trim($HTTP_POST_VARS['DB_SERVER_USERNAME']), trim($HTTP_POST_VARS['DB_SERVER_PASSWORD']));
-  osc_db_select_db(trim($HTTP_POST_VARS['DB_DATABASE']));
+  osc_db_connect(trim($_POST['DB_SERVER']), trim($_POST['DB_SERVER_USERNAME']), trim($_POST['DB_SERVER_PASSWORD']));
+  osc_db_select_db(trim($_POST['DB_DATABASE']));
 
-  osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "' . trim($HTTP_POST_VARS['CFG_STORE_NAME']) . '" where configuration_key = "STORE_NAME"');
-  osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_FIRSTNAME']) . ' ' .  trim($HTTP_POST_VARS['CFG_STORE_OWNER_LASTNAME']) . '" where configuration_key = "STORE_OWNER"');
-  osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '" where configuration_key = "STORE_OWNER_EMAIL_ADDRESS"');
+  osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "' . trim($_POST['CFG_STORE_NAME']) . '" where configuration_key = "STORE_NAME"');
+  osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "' . trim($_POST['CFG_STORE_OWNER_FIRSTNAME']) . ' ' .  trim($_POST['CFG_STORE_OWNER_LASTNAME']) . '" where configuration_key = "STORE_OWNER"');
+  osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "' . trim($_POST['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '" where configuration_key = "STORE_OWNER_EMAIL_ADDRESS"');
 
-  if (!empty($HTTP_POST_VARS['CFG_STORE_OWNER_NAME']) && !empty($HTTP_POST_VARS['CFG_STORE_OWNER_EMAIL_ADDRESS'])) {
-    osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "\"' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_NAME']) . '\" <' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '>" where configuration_key = "EMAIL_FROM"');
+  if (!empty($_POST['CFG_STORE_OWNER_NAME']) && !empty($_POST['CFG_STORE_OWNER_EMAIL_ADDRESS'])) {
+    osc_db_query('update ' . TABLE_CONFIGURATION . ' set configuration_value = "\"' . trim($_POST['CFG_STORE_OWNER_NAME']) . '\" <' . trim($_POST['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '>" where configuration_key = "EMAIL_FROM"');
   }
 
-  $check_query = osc_db_query('select admin_username from ' . TABLE_ADMINISTRATORS . ' where admin_username = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
+  $check_query = osc_db_query('select admin_username from ' . TABLE_ADMINISTRATORS . ' where admin_username = "' . trim($_POST['CFG_ADMINISTRATOR_USERNAME']) . '"');
 
   if (osc_db_num_rows($check_query)) {
-    osc_db_query('update ' . TABLE_ADMINISTRATORS . ' set admin_password = "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '" where admin_username = "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '"');
+    osc_db_query('update ' . TABLE_ADMINISTRATORS . ' set admin_password = "' . osc_encrypt_string(trim($_POST['CFG_ADMINISTRATOR_PASSWORD'])) . '" where admin_username = "' . trim($_POST['CFG_ADMINISTRATOR_USERNAME']) . '"');
   } else {
-    osc_db_query('insert into ' . TABLE_ADMINISTRATORS . ' (admin_groups_id, admin_username, admin_firstname, admin_lastname, admin_email_address, admin_password, admin_created) values (1, "' . trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_USERNAME']) . '", "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_FIRSTNAME']) . '", "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_LASTNAME']) . '", "' . trim($HTTP_POST_VARS['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '", "' . osc_encrypt_string(trim($HTTP_POST_VARS['CFG_ADMINISTRATOR_PASSWORD'])) . '", now())');
+    osc_db_query('insert into ' . TABLE_ADMINISTRATORS . ' (admin_groups_id, admin_username, admin_firstname, admin_lastname, admin_email_address, admin_password, admin_created) values (1, "' . trim($_POST['CFG_ADMINISTRATOR_USERNAME']) . '", "' . trim($_POST['CFG_STORE_OWNER_FIRSTNAME']) . '", "' . trim($_POST['CFG_STORE_OWNER_LASTNAME']) . '", "' . trim($_POST['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '", "' . osc_encrypt_string(trim($_POST['CFG_ADMINISTRATOR_PASSWORD'])) . '", now())');
   }
   
-  $admin_folder = trim($HTTP_POST_VARS['CFG_ADMIN_FOLDER']);
+  $admin_folder = trim($_POST['CFG_ADMIN_FOLDER']);
   
   rename ('../admin', '../' . $admin_folder);
 ?>
@@ -67,7 +67,7 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
     <h2>Finished!</h2>
 
 <?php
-  $dir_fs_document_root = $HTTP_POST_VARS['DIR_FS_DOCUMENT_ROOT'];
+  $dir_fs_document_root = $_POST['DIR_FS_DOCUMENT_ROOT'];
   if ((substr($dir_fs_document_root, -1) != '\\') && (substr($dir_fs_document_root, -1) != '/')) {
     if (strrpos($dir_fs_document_root, '\\') !== false) {
       $dir_fs_document_root .= '\\';
@@ -76,7 +76,7 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
     }
   }
 
-  $http_url = parse_url($HTTP_POST_VARS['HTTP_WWW_ADDRESS']);
+  $http_url = parse_url($_POST['HTTP_WWW_ADDRESS']);
   $http_server = $http_url['scheme'] . '://' . $http_url['host'];
   $http_catalog = $http_url['path'];
   if (isset($http_url['port']) && !empty($http_url['port'])) {
@@ -124,10 +124,10 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
                    '  define(\'DIR_FS_DOWNLOAD_PUBLIC\', DIR_FS_CATALOG . \'pub/\');' . "\n\n" .
                    '' . "\n" .
                    '// define our database connection' . "\n" .
-                   '  define(\'DB_SERVER\', \'' . trim($HTTP_POST_VARS['DB_SERVER']) . '\');' . "\n" .
-                   '  define(\'DB_SERVER_USERNAME\', \'' . trim($HTTP_POST_VARS['DB_SERVER_USERNAME']) . '\');' . "\n" .
-                   '  define(\'DB_SERVER_PASSWORD\', \'' . trim($HTTP_POST_VARS['DB_SERVER_PASSWORD']) . '\');' . "\n" .
-                   '  define(\'DB_DATABASE\', \'' . trim($HTTP_POST_VARS['DB_DATABASE']) . '\');' . "\n" .
+                   '  define(\'DB_SERVER\', \'' . trim($_POST['DB_SERVER']) . '\');' . "\n" .
+                   '  define(\'DB_SERVER_USERNAME\', \'' . trim($_POST['DB_SERVER_USERNAME']) . '\');' . "\n" .
+                   '  define(\'DB_SERVER_PASSWORD\', \'' . trim($_POST['DB_SERVER_PASSWORD']) . '\');' . "\n" .
+                   '  define(\'DB_DATABASE\', \'' . trim($_POST['DB_DATABASE']) . '\');' . "\n" .
                    '  define(\'USE_PCONNECT\', \'false\');' . "\n" .
                    '  define(\'STORE_SESSIONS\', \'mysql\');' . "\n" .
                    '?>';
@@ -176,10 +176,10 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
                    '  define(\'DIR_WS_FCKEDITOR\', DIR_WS_CATALOG . \'FCKeditor/\');' . "\n" .
                    '' . "\n" .
                    '// define our database connection' . "\n" .
-                   '  define(\'DB_SERVER\', \'' . trim($HTTP_POST_VARS['DB_SERVER']) . '\');' . "\n" .
-                   '  define(\'DB_SERVER_USERNAME\', \'' . trim($HTTP_POST_VARS['DB_SERVER_USERNAME']) . '\');' . "\n" .
-                   '  define(\'DB_SERVER_PASSWORD\', \'' . trim($HTTP_POST_VARS['DB_SERVER_PASSWORD']) . '\');' . "\n" .
-                   '  define(\'DB_DATABASE\', \'' . trim($HTTP_POST_VARS['DB_DATABASE']) . '\');' . "\n" .
+                   '  define(\'DB_SERVER\', \'' . trim($_POST['DB_SERVER']) . '\');' . "\n" .
+                   '  define(\'DB_SERVER_USERNAME\', \'' . trim($_POST['DB_SERVER_USERNAME']) . '\');' . "\n" .
+                   '  define(\'DB_SERVER_PASSWORD\', \'' . trim($_POST['DB_SERVER_PASSWORD']) . '\');' . "\n" .
+                   '  define(\'DB_DATABASE\', \'' . trim($_POST['DB_DATABASE']) . '\');' . "\n" .
                    '  define(\'USE_PCONNECT\', \'false\');' . "\n" .
                    '  define(\'STORE_SESSIONS\', \'mysql\');' . "\n" .
                    '?>';

@@ -22,11 +22,11 @@ $Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
     tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
   }
 
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'update')) {
+  if (isset($_GET['action']) && ($_GET['action'] == 'update')) {
     $notify_string = '';
 
-    if (isset($HTTP_POST_VARS['notify']) && !empty($HTTP_POST_VARS['notify'])) {
-      $notify = $HTTP_POST_VARS['notify'];
+    if (isset($_POST['notify']) && !empty($_POST['notify'])) {
+      $notify = $_POST['notify'];
 
       if (!is_array($notify)) {
         $notify = array($notify);

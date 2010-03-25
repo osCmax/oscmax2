@@ -80,7 +80,7 @@ $dup_y = $y;
 $y = $pdf->ezText("<b>" . TEXT_ORDER_NUMBER . " </b>" . $orders['orders_prefix'] . $orders['orders_id'] ."\n\n",SUB_HEADING_FONT_SIZE);
 
 // order date
-if ($HTTP_POST_VARS['show_order_date']) { 
+if ($_POST['show_order_date']) { 
 	$pdf->ezSetY($dup_y);
 	$pdf->ezText("<b>" . TEXT_ORDER_DATE . " </b>" . date(TEXT_ORDER_FORMAT, strtotime($order->info['date_purchased'])) ."\n\n",SUB_HEADING_FONT_SIZE,array('justification'=>'right'));
 	}
@@ -146,15 +146,15 @@ $pdf->addText($indent,$pos -= GENERAL_LEADING,GENERAL_FONT_SIZE,$country);
 
 
 // phone and email statments .. added blank lines if turned off so as to maintain layout
-if ($HTTP_POST_VARS['show_phone'] || $HTTP_POST_VARS['show_email'] ) {
+if ($_POST['show_phone'] || $_POST['show_email'] ) {
 
 $pos -= SECTION_DIVIDER;
 $pdf->ezSetY($pos - 40 );
 
-if ($HTTP_POST_VARS['show_phone']) {
+if ($_POST['show_phone']) {
 $pos = $pdf->ezText("<b>" . ENTRY_PHONE . "</b> " . $order->customer['telephone'],GENERAL_FONT_SIZE);
 
-}  if ($HTTP_POST_VARS['show_email']) {
+}  if ($_POST['show_email']) {
 $pos = $pdf->ezText("<b>" . ENTRY_EMAIL . "</b> " .$order->customer['email_address'],GENERAL_FONT_SIZE);
 }
 } else {
@@ -172,13 +172,13 @@ $pos = $pdf->ezText("");
  $pdf->ezSetY($pos);
  
 // payment method  
-if ($HTTP_POST_VARS['show_pay_method']) {
+if ($_POST['show_pay_method']) {
 $pos = $pdf->ezText("<b>" . ENTRY_PAYMENT_METHOD . "</b> " . str_replace($vilains , $cools, $order->info['payment_method']),GENERAL_FONT_SIZE);
 
 if ($order->info['payment_method'] == PAYMENT_TYPE) {
 $pos = $pdf->ezText("<b>" . ENTRY_PAYMENT_TYPE . "</b> " . $order->info['cc_type'],GENERAL_FONT_SIZE);
 $pos = $pdf->ezText("<b>" . ENTRY_CC_OWNER . "</b> " . $order->info['cc_owner'],GENERAL_FONT_SIZE);
-		if ($HTTP_POST_VARS['show_cc']) {
+		if ($_POST['show_cc']) {
 		$pos = $pdf->ezText("<b>" . ENTRY_CC_NUMBER . "</b> " . $order->info['cc_number'],GENERAL_FONT_SIZE);
 		}
 		

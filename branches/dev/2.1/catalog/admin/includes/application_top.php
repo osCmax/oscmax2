@@ -105,7 +105,7 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
   }
 
 // set the language
-  if (!tep_session_is_registered('language') || isset($HTTP_GET_VARS['language'])) {
+  if (!tep_session_is_registered('language') || isset($_GET['language'])) {
     if (!tep_session_is_registered('language')) {
       tep_session_register('language');
       tep_session_register('languages_id');
@@ -114,8 +114,8 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
     include(DIR_WS_CLASSES . 'language.php');
     $lng = new language();
 
-    if (isset($HTTP_GET_VARS['language']) && tep_not_null($HTTP_GET_VARS['language'])) {
-      $lng->set_language($HTTP_GET_VARS['language']);
+    if (isset($_GET['language']) && tep_not_null($_GET['language'])) {
+      $lng->set_language($_GET['language']);
     } else {
       $lng->get_browser_language();
     }
@@ -159,8 +159,8 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
   require(DIR_WS_CLASSES . 'upload.php');
 
 // calculate category path
-  if (isset($HTTP_GET_VARS['cPath'])) {
-    $cPath = $HTTP_GET_VARS['cPath'];
+  if (isset($_GET['cPath'])) {
+    $cPath = $_GET['cPath'];
   } else {
     $cPath = '';
   }
@@ -179,8 +179,8 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
     $selected_box = 'configuration';
   }
 
-  if (isset($HTTP_GET_VARS['selected_box'])) {
-    $selected_box = $HTTP_GET_VARS['selected_box'];
+  if (isset($_GET['selected_box'])) {
+    $selected_box = $_GET['selected_box'];
   }
 
 // the following cache blocks are used in the Tools->Cache section
@@ -225,8 +225,8 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
   require(DIR_WS_FUNCTIONS . 'articles.php');
 
 // BOF: MOD - Article Manager
-  if (isset($HTTP_GET_VARS['tPath'])) {
-    $tPath = $HTTP_GET_VARS['tPath'];
+  if (isset($_GET['tPath'])) {
+    $tPath = $_GET['tPath'];
   } else {
     $tPath = '';
   }

@@ -10,9 +10,9 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-if ($HTTP_GET_VARS['gID']) {
+if ($_GET['gID']) {
   define('HEADING_TITLE', 'Admin Gruppen');
-} elseif ($HTTP_GET_VARS['gPath']) {
+} elseif ($_GET['gPath']) {
   define('HEADING_TITLE', 'Definieren Sie Gruppen');
 } else {
   define('HEADING_TITLE', 'Admin Mitglieder');
@@ -95,7 +95,7 @@ define('TEXT_INFO_GROUPS_BOXES', '<b>Kasten-Erlaubnis:</b><br>Geben Sie Zugang z
 define('TEXT_INFO_GROUPS_BOXES_INCLUDE', 'Schließen Sie die Akten mit ein, die innen gespeichert werden: ');
 
 define('TEXT_INFO_HEADING_DEFINE', 'Definieren Sie Gruppe');
-if ($HTTP_GET_VARS['gPath'] == 1) {
+if ($_GET['gPath'] == 1) {
   define('TEXT_INFO_DEFINE_INTRO', '<b>%s :</b><br>Sie können nicht Akte Erlaubnis für diese Gruppe ändern.<br><br>');
 } else {
   define('TEXT_INFO_DEFINE_INTRO', '<b>%s :</b><br>Ändern Sie Erlaubnis für diese Gruppe, indem Sie Kästen und Akten vorwählen oder unselecting. Klicken speichert, um Ihre Änderungen einzureichen.<br><br>');

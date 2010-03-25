@@ -7,7 +7,7 @@
   	  	  	
   	  	  	  echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
 // Start - CREDIT CLASS Gift Voucher Contribution
-  echo tep_draw_hidden_field('gv_redeem_code', $HTTP_POST_VARS['gv_redeem_code']); 
+  echo tep_draw_hidden_field('gv_redeem_code', $_POST['gv_redeem_code']); 
 // End - CREDIT CLASS Gift Voucher Contribution
   	 ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">

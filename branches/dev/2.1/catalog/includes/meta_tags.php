@@ -109,7 +109,7 @@ switch ($languages_id) {
     	break;
 // END UPDATE
     case CONTENT_ARTICLES:
-      $mt_articles_query = tep_db_query("select articles_id, language_id, articles_head_title_tag from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and language_id = '" . (int)$languages_id . "'");
+      $mt_articles_query = tep_db_query("select articles_id, language_id, articles_head_title_tag from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$_GET['articles_id'] . "' and language_id = '" . (int)$languages_id . "'");
       $mt_articles = tep_db_fetch_array($mt_articles_query);
 
       define('META_TAG_TITLE', $mt_articles['articles_head_title_tag'] . PRIMARY_SECTION . TITLE . $web_site_tagline);
@@ -190,8 +190,8 @@ switch ($languages_id) {
     	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_category['categories_name']);
       break;
     case CONTENT_INDEX_PRODUCTS:
-      if (isset($HTTP_GET_VARS['manufacturers_id'])) {
-    	  $mt_manufacturer_query = tep_db_query("select manufacturers_name from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "'");
+      if (isset($_GET['manufacturers_id'])) {
+    	  $mt_manufacturer_query = tep_db_query("select manufacturers_name from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
         $mt_manufacturer = tep_db_fetch_array($mt_manufacturer_query);
 
     	  define('META_TAG_TITLE', $mt_manufacturer['manufacturers_name'] . PRIMARY_SECTION . TITLE . $web_site_tagline);
@@ -219,9 +219,9 @@ switch ($languages_id) {
     case CONTENT_PRODUCT_INFO:
 //BOF - SPPC
       if (tep_session_is_registered('sppc_customer_group_id')){
-        $mt_product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, p.products_model, pg.customers_group_price as products_price, p.products_tax_class_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd , " . TABLE_PRODUCTS_GROUPS . " pg where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and p.products_id = pg.products_id and pg.customers_group_id = '" . $sppc_customer_group_id . "' and pd.language_id = '" . (int)$languages_id . "'");
+        $mt_product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, p.products_model, pg.customers_group_price as products_price, p.products_tax_class_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd , " . TABLE_PRODUCTS_GROUPS . " pg where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and p.products_id = pg.products_id and pg.customers_group_id = '" . $sppc_customer_group_id . "' and pd.language_id = '" . (int)$languages_id . "'");
       }
-      $mt_product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, p.products_model, p.products_price, p.products_tax_class_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
+      $mt_product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, p.products_model, p.products_price, p.products_tax_class_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
 //EOF - SPPC
       $mt_product_info = tep_db_fetch_array($mt_product_info_query);
 
@@ -247,7 +247,7 @@ switch ($languages_id) {
     	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_products_name);
       break;
     case CONTENT_PRODUCT_REVIEWS:
-      $mt_review_query = tep_db_query("select p.products_id, pd.products_name, p.products_model, p.products_price, p.products_tax_class_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
+      $mt_review_query = tep_db_query("select p.products_id, pd.products_name, p.products_model, p.products_price, p.products_tax_class_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
       $mt_review = tep_db_fetch_array($mt_review_query);
 
       if ($mt_new_price = tep_get_products_special_price($mt_review['products_id'])) {
@@ -268,7 +268,7 @@ switch ($languages_id) {
     	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_products_name);
       break;
     case CONTENT_PRODUCT_REVIEWS_INFO:
-      $mt_review_query = tep_db_query("select rd.reviews_text, r.reviews_rating, r.reviews_id, r.customers_name, p.products_id, p.products_price, p.products_tax_class_id, p.products_model, pd.products_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where r.reviews_id = '" . (int)$HTTP_GET_VARS['reviews_id'] . "' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and r.products_id = p.products_id and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '". (int)$languages_id . "'");
+      $mt_review_query = tep_db_query("select rd.reviews_text, r.reviews_rating, r.reviews_id, r.customers_name, p.products_id, p.products_price, p.products_tax_class_id, p.products_model, pd.products_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where r.reviews_id = '" . (int)$_GET['reviews_id'] . "' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and r.products_id = p.products_id and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '". (int)$languages_id . "'");
       $mt_review = tep_db_fetch_array($mt_review_query);
 
       if ($mt_new_price = tep_get_products_special_price($mt_review['products_id'])) {

@@ -16,8 +16,8 @@
   require('includes/application_top.php');
   require(DIR_WS_FUNCTIONS . 'ship_fedex.php');
 
-	$action = $HTTP_GET_VARS['action'];
-	$order = $HTTP_GET_VARS['oID'];
+	$action = $_GET['action'];
+	$order = $_GET['oID'];
 	$send_email_on_shipping = 0;   //set to 0 to disable, set to 1 to enable automatic email of tracking number
 	
 ////
@@ -109,7 +109,7 @@
 //// some form variables		
 		
 // format the form date (comes in as mm-dd-yyyy)
-		$date_array = explode('-',$HTTP_POST_VARS['pickup_date']);
+		$date_array = explode('-',$_POST['pickup_date']);
 		$corrected_date = $date_array[2] . $date_array[0] . $date_array[1];
 				
 // determine whether the ship date is today or later
@@ -125,32 +125,32 @@
      	0=> 	$transaction_code // transaction code
       ,16=>   $delivery_state // delivery state
       ,13=>   $order_info['delivery_street_address'] // delivery address
-      ,1273=> $HTTP_POST_VARS['packaging_type'] // packaging type (01 is customer packaging)
-      ,1274=> $HTTP_POST_VARS['service_type'] // 
+      ,1273=> $_POST['packaging_type'] // packaging type (01 is customer packaging)
+      ,1274=> $_POST['service_type'] // 
       ,18=>   $delivery_phone // customer's phone number
       ,15=>   $order_info['delivery_city']
-      ,23=>   $HTTP_POST_VARS['bill_type'] // payment type (1 is bill to sender)
+      ,23=>   $_POST['bill_type'] // payment type (1 is bill to sender)
       ,117=>  $senders_country // sender's country
       ,17=>   $order_info['delivery_postcode'] // postal code it's going to
       ,50=>   $delivery_country // country it's going to
       ,11 =>	$order_info['delivery_company'] // recipient's company name
 			,12=>   name_case($order_info['delivery_name']) // recipient's contact name
-      ,1333=> $HTTP_POST_VARS['dropoff_type'] // drop off type (1 is regular pickup)
+      ,1333=> $_POST['dropoff_type'] // drop off type (1 is regular pickup)
 			,1415=> $order_value . '.00' // total order value, forced to 2 decimal places
       ,1368 => 2 // label type (2 is standard)
       ,1369 => 1 // printer type (1 is laser)
       ,1370 => 5 // label media (5 is plain paper)
-      ,3002 => $HTTP_POST_VARS['package_invoice'] // invoice number
-      ,25 => $HTTP_POST_VARS['package_reference'] // reference number
-      ,3001 => $HTTP_POST_VARS['package_po'] // purchase order number
-      ,38 => $HTTP_POST_VARS['package_department'] // department name
+      ,3002 => $_POST['package_invoice'] // invoice number
+      ,25 => $_POST['package_reference'] // reference number
+      ,3001 => $_POST['package_po'] // purchase order number
+      ,38 => $_POST['package_department'] // department name
 			,24 => $corrected_date  // ship date					
 			,1119 => $future // future day shipment
 			,2975 => 'Y'	// keep your fedex number off the label
 	    );
 
 // if it's home delivery (90), add the "residential delivery flag" (440)
-		if ($HTTP_POST_VARS['service_type'] == 90) {
+		if ($_POST['service_type'] == 90) {
 			$shipData[440] = 'Y';
 			}
 		else {
@@ -159,7 +159,7 @@
 
 // if it's an oversized shipment...
 		if ($oversized) {
-			$shipData[3124] = $HTTP_POST_VARS['oversized'];
+			$shipData[3124] = $_POST['oversized'];
 			}
 				
 ////
@@ -204,7 +204,7 @@
 
 // determine shipment type (either ground or express)
 // (this is used in the call to fedexdc.php)
-		if (($HTTP_POST_VARS['service_type'] == 92) or ($HTTP_POST_VARS['service_type'] == 90)) {
+		if (($_POST['service_type'] == 92) or ($_POST['service_type'] == 90)) {
 			$ship_type = 'ship_ground';
 			}
 		else {
@@ -214,7 +214,7 @@
 ////
 // request shipment(s) and post data to shipping manifest
 
-		for ($i = 1; $HTTP_POST_VARS['package_num'] >= $i; $i++) {
+		for ($i = 1; $_POST['package_num'] >= $i; $i++) {
 			
 // data for shipping_manifest
 			$manifest_data = array (
@@ -232,26 +232,26 @@
 			package_value => $order_value,
 			oversized => $oversized,
 			pickup_date => $corrected_date,
-			shipping_type => $HTTP_POST_VARS['service_type'],
+			shipping_type => $_POST['service_type'],
 			residential => $shipData[440],
 			cod => '',
 			);
 						
 // get the package weight/total weight and format it to one decimal place
-			$total_weight = round($HTTP_POST_VARS['package_weight'], 1);
+			$total_weight = round($_POST['package_weight'], 1);
 			$total_weight = sprintf("%01.1f", $total_weight);
 
 // deal with multiple packages
 
-			if ($HTTP_POST_VARS['package_num'] > 1 ) {
-				$shipData[116] = $HTTP_POST_VARS['package_num'];
+			if ($_POST['package_num'] > 1 ) {
+				$shipData[116] = $_POST['package_num'];
 				$shipData[1117] = $i;
 				$manifest_data['multiple'] = $i;
 						
 				if ($i == 1) {
 					if ($debug) {
 						$shipData[1400] = $total_weight;
-						$package_weight = $HTTP_POST_VARS['package_' . $i . '_weight'];
+						$package_weight = $_POST['package_' . $i . '_weight'];
 						$package_weight = sprintf("%01.1f", $package_weight);
 						$shipData[1401] = $package_weight;
 						echo SHIPMENT_REQUEST_DATA . $i . ':<br><pre>';
@@ -264,7 +264,7 @@
 						}
 					else {
 						$shipData[1400] = $total_weight;						
-						$package_weight = round($HTTP_POST_VARS['package_' . $i . '_weight'],1);
+						$package_weight = round($_POST['package_' . $i . '_weight'],1);
 						$package_weight = sprintf("%01.1f", $package_weight);
 						$shipData[1401] = $package_weight;
 						$master_trackNum = tep_ship_request($shipData,$ship_type,$order);
@@ -274,7 +274,7 @@
 				else {
 					if ($debug) {
 						$shipData[1123] = 'master_trackNum';
-						$package_weight = $HTTP_POST_VARS['package_' . $i . '_weight'];
+						$package_weight = $_POST['package_' . $i . '_weight'];
 						$package_weight = sprintf("%01.1f", $package_weight);
 						$shipData[1401] = $package_weight;
 						echo SHIPMENT_REQUEST_DATA . $i . ':<br><pre>';
@@ -287,7 +287,7 @@
 						}
 					else {
 						$shipData[1123] = $master_trackNum;
-						$package_weight = round($HTTP_POST_VARS['package_' . $i . '_weight'],1);
+						$package_weight = round($_POST['package_' . $i . '_weight'],1);
 						$package_weight = sprintf("%01.1f", $package_weight);
 						$shipData[1401] = $package_weight;
 						$trackNum = tep_ship_request($shipData,$ship_type,$order);
@@ -296,7 +296,7 @@
 					}
 				}
 // for single package shipments
-			elseif ($HTTP_POST_VARS['package_num'] == 1) {
+			elseif ($_POST['package_num'] == 1) {
 				if ($debug) {
 					$shipData[1401] = $total_weight;
 					echo SHIPMENT_REQUEST_DATA . $i . ':<br><pre>';
@@ -485,7 +485,7 @@
 // make the form for additional shipment information
 	
 	elseif($action=='new') {
-		$order = $HTTP_GET_VARS['oID'];
+		$order = $_GET['oID'];
 
 // determine if we're using test or production gateway
 		$value_query = tep_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_SHIPPING_FEDEX1_SERVER'");
@@ -660,11 +660,11 @@ function validate() {
         		<?php
         			// if quantity = 1, skip to shipping directly
         			if ($order_qty == 1){
-					    echo tep_draw_form('ship_fedex', FILENAME_SHIP_FEDEX, 'cPath=' . $cPath . '&cID=' . $HTTP_GET_VARS['cID'] . '&oID=' . $order . '&action=ship', 'post', 'enctype="multipart/form-data"  onsubmit="validate();"');
+					    echo tep_draw_form('ship_fedex', FILENAME_SHIP_FEDEX, 'cPath=' . $cPath . '&cID=' . $_GET['cID'] . '&oID=' . $order . '&action=ship', 'post', 'enctype="multipart/form-data"  onsubmit="validate();"');
 					}
 					// otherwise, go to a 2nd screen to key in individual weights
 					else {
-						echo tep_draw_form('ship_fedex', FILENAME_SHIP_FEDEX, 'cPath=' . $cPath . '&cID=' . $HTTP_GET_VARS['cID'] . '&oID=' . $order . '&action=post1', 'post', 'enctype="multipart/form-data"  onsubmit="validate();"');
+						echo tep_draw_form('ship_fedex', FILENAME_SHIP_FEDEX, 'cPath=' . $cPath . '&cID=' . $_GET['cID'] . '&oID=' . $order . '&action=post1', 'post', 'enctype="multipart/form-data"  onsubmit="validate();"');
 					}
 				?>
 					<input type="hidden" name="order_item_html" value='<?php echo urlencode(serialize($order_item_html)); ?>'/>
@@ -774,9 +774,9 @@ function validate() {
 	// new form accepts total weight and individual weights
 	// if there are multiple packages
 	elseif ($action=='post1') {
-		$package_num = $HTTP_POST_VARS['package_num'];
-		$order_item_html = unserialize(urldecode($HTTP_POST_VARS['order_item_html']));
-		$item_weights = unserialize(urldecode($HTTP_POST_VARS['item_weights']));
+		$package_num = $_POST['package_num'];
+		$order_item_html = unserialize(urldecode($_POST['order_item_html']));
+		$item_weights = unserialize(urldecode($_POST['item_weights']));
 ?>		
           <tr>
             <td class="pageHeading"><?php 
@@ -796,21 +796,21 @@ function validate() {
       </tr>
       <tr>
         <td>
-					<?php echo tep_draw_form('ship_fedex', FILENAME_SHIP_FEDEX, 'cPath=' . $cPath . '&cID=' . $HTTP_GET_VARS['cID'] . '&oID=' . $order . '&action=ship', 'post', 'enctype="multipart/form-data"  onsubmit="validate();"'); ?>
+					<?php echo tep_draw_form('ship_fedex', FILENAME_SHIP_FEDEX, 'cPath=' . $cPath . '&cID=' . $_GET['cID'] . '&oID=' . $order . '&action=ship', 'post', 'enctype="multipart/form-data"  onsubmit="validate();"'); ?>
 					<input type="hidden" name="fedex_gateway" value="<?php echo $fedex_gateway; ?>"/>
 					<input type="hidden" name="package_num" value = "<?php echo $package_num; ?>"/>
-					<input type="hidden" name="oversized" value="<?php echo $HTTP_POST_VARS['oversized']; ?>"/>
-					<input type="hidden" name="residential" value="<?php echo $HTTP_POST_VARS['residential']; ?>"/>
-					<input type="hidden" name="packaging_type" value="<?php echo $HTTP_POST_VARS['packaging_type']; ?>"/>
-					<input type="hidden" name="service_type" value="<?php echo $HTTP_POST_VARS['service_type']; ?>"/>
-					<input type="hidden" name="payment_type" value="<?php echo $HTTP_POST_VARS['payment_type']; ?>"/>
-					<input type="hidden" name="bill_type" value="<?php echo $HTTP_POST_VARS['bill_type']; ?>"/>
-					<input type="hidden" name="dropoff_type" value="<?php echo $HTTP_POST_VARS['dropoff_type']; ?>"/>
-					<input type="hidden" name="pickup_date" value="<?php echo $HTTP_POST_VARS['pickup_date']; ?>"/>
-					<input type="hidden" name="package_invoice" value="<?php echo $HTTP_POST_VARS['package_invoice']; ?>"/>
-					<input type="hidden" name="package_reference" value="<?php echo $HTTP_POST_VARS['package_reference']; ?>"/>
-					<input type="hidden" name="package_po" value="<?php echo $HTTP_POST_VARS['package_po']; ?>"/>
-					<input type="hidden" name="package_department" value="<?php echo $HTTP_POST_VARS['package_department']; ?>"/>
+					<input type="hidden" name="oversized" value="<?php echo $_POST['oversized']; ?>"/>
+					<input type="hidden" name="residential" value="<?php echo $_POST['residential']; ?>"/>
+					<input type="hidden" name="packaging_type" value="<?php echo $_POST['packaging_type']; ?>"/>
+					<input type="hidden" name="service_type" value="<?php echo $_POST['service_type']; ?>"/>
+					<input type="hidden" name="payment_type" value="<?php echo $_POST['payment_type']; ?>"/>
+					<input type="hidden" name="bill_type" value="<?php echo $_POST['bill_type']; ?>"/>
+					<input type="hidden" name="dropoff_type" value="<?php echo $_POST['dropoff_type']; ?>"/>
+					<input type="hidden" name="pickup_date" value="<?php echo $_POST['pickup_date']; ?>"/>
+					<input type="hidden" name="package_invoice" value="<?php echo $_POST['package_invoice']; ?>"/>
+					<input type="hidden" name="package_reference" value="<?php echo $_POST['package_reference']; ?>"/>
+					<input type="hidden" name="package_po" value="<?php echo $_POST['package_po']; ?>"/>
+					<input type="hidden" name="package_department" value="<?php echo $_POST['package_department']; ?>"/>
 					<table width="70%" border="0" cellspacing="0" cellpadding="2">
           	<tr>
           	  <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '1', '15'); ?></td>

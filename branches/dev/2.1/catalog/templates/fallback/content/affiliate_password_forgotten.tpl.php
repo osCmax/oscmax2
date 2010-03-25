@@ -23,7 +23,7 @@
             </table></td>
           </tr>
 <?php
-  if (isset($HTTP_GET_VARS['email']) && ($HTTP_GET_VARS['email'] == 'nonexistent')) {
+  if (isset($_GET['email']) && ($_GET['email'] == 'nonexistent')) {
     echo '          <tr>' . "\n";
     echo '            <td colspan="2" class="smallText">' .  TEXT_NO_EMAIL_ADDRESS_FOUND . '</td>' . "\n";
     echo '          </tr>' . "\n";

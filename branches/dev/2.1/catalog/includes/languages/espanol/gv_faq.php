@@ -20,7 +20,7 @@ define('TEXT_INFORMATION', '<a name="Top"></a>
   <a href="'.tep_href_link(FILENAME_GV_FAQ,'faq_item=4','NONSSL').'">Redeeming Gift Vouchers</a><br>
   <a href="'.tep_href_link(FILENAME_GV_FAQ,'faq_item=5','NONSSL').'">When problems occur</a><br>
 ');
-switch ($HTTP_GET_VARS['faq_item']) {
+switch ($_GET['faq_item']) {
   case '1':
 define('SUB_HEADING_TITLE','Purchasing Gift Vouchers.');
 define('SUB_HEADING_TEXT','Gift Vouchers are purchased just like any other item in our store. You can 

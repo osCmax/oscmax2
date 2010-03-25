@@ -68,7 +68,7 @@ if ($phpThumb->GenerateThumbnail()) { // this line is VERY important, do not rem
 }
 // end thumbnail creation                
         } else {
-          $products_image_name = (isset($HTTP_POST_VARS['products_previous_image']) ? $HTTP_POST_VARS['products_previous_image'] : '');
+          $products_image_name = (isset($_POST['products_previous_image']) ? $_POST['products_previous_image'] : '');
         }
 
 	if ($_POST['instant_update'] == 'on') { 

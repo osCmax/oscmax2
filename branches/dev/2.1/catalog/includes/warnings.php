@@ -52,21 +52,21 @@ $Id: warnings.php 1 2008-09-22 11:11:07Z user $
     echo $messageStack->output('header');
   }
 
-  if (isset($HTTP_GET_VARS['error_message']) && tep_not_null($HTTP_GET_VARS['error_message'])) {
+  if (isset($_GET['error_message']) && tep_not_null($_GET['error_message'])) {
 ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
   <tr class="headerError">
-    <td class="headerError"><?php echo htmlspecialchars(stripslashes(urldecode($HTTP_GET_VARS['error_message']))); ?></td>
+    <td class="headerError"><?php echo htmlspecialchars(stripslashes(urldecode($_GET['error_message']))); ?></td>
   </tr>
 </table>
 <?php
   }
 
-  if (isset($HTTP_GET_VARS['info_message']) && tep_not_null($HTTP_GET_VARS['info_message'])) {
+  if (isset($_GET['info_message']) && tep_not_null($_GET['info_message'])) {
 ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
   <tr class="headerInfo">
-    <td class="headerInfo"><?php echo htmlspecialchars(stripslashes(urldecode($HTTP_GET_VARS['info_message']))); ?></td>
+    <td class="headerInfo"><?php echo htmlspecialchars(stripslashes(urldecode($_GET['info_message']))); ?></td>
   </tr>
 </table>
 <?php

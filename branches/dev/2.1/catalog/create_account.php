@@ -18,7 +18,7 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
   require('includes/application_top.php');
 
 // PWA EOF
-  if (isset($HTTP_GET_VARS['guest']) && $cart->count_contents() < 1) tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+  if (isset($_GET['guest']) && $cart->count_contents() < 1) tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
 // PWA BOF
 // needs to be included earlier to set the success message in the messageStack
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CREATE_ACCOUNT);
@@ -26,50 +26,50 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
   $process = false;
 // BOF: MOD - Country-State Selector
   $refresh = false;
-  if (isset($HTTP_POST_VARS['action']) && (($HTTP_POST_VARS['action'] == 'process') || ($HTTP_POST_VARS['action'] == 'refresh'))) {
-    if ($HTTP_POST_VARS['action'] == 'process')  $process = true;
-  if ($HTTP_POST_VARS['action'] == 'refresh') $refresh = true;
+  if (isset($_POST['action']) && (($_POST['action'] == 'process') || ($_POST['action'] == 'refresh'))) {
+    if ($_POST['action'] == 'process')  $process = true;
+  if ($_POST['action'] == 'refresh') $refresh = true;
 // EOF: MOD - Country-State Selector
 
     if (ACCOUNT_GENDER == 'true') {
-      if (isset($HTTP_POST_VARS['gender'])) {
-        $gender = tep_db_prepare_input($HTTP_POST_VARS['gender']);
+      if (isset($_POST['gender'])) {
+        $gender = tep_db_prepare_input($_POST['gender']);
       } else {
         $gender = false;
       }
     }
-    $firstname = tep_db_prepare_input($HTTP_POST_VARS['firstname']);
-    $lastname = tep_db_prepare_input($HTTP_POST_VARS['lastname']);
-    if (ACCOUNT_DOB == 'true') $dob = tep_db_prepare_input($HTTP_POST_VARS['dob']);
-    $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
+    $firstname = tep_db_prepare_input($_POST['firstname']);
+    $lastname = tep_db_prepare_input($_POST['lastname']);
+    if (ACCOUNT_DOB == 'true') $dob = tep_db_prepare_input($_POST['dob']);
+    $email_address = tep_db_prepare_input($_POST['email_address']);
     // BOF Separate Pricing Per Customer, added: field for tax id number
     if (ACCOUNT_COMPANY == 'true') { 
-      $company = tep_db_prepare_input($HTTP_POST_VARS['company']);
-      $company_tax_id = tep_db_prepare_input($HTTP_POST_VARS['company_tax_id']);
+      $company = tep_db_prepare_input($_POST['company']);
+      $company_tax_id = tep_db_prepare_input($_POST['company_tax_id']);
     }
     // EOF Separate Pricing Per Customer, added: field for tax id number
-    $street_address = tep_db_prepare_input($HTTP_POST_VARS['street_address']);
-    if (ACCOUNT_SUBURB == 'true') $suburb = tep_db_prepare_input($HTTP_POST_VARS['suburb']);
-    $postcode = tep_db_prepare_input($HTTP_POST_VARS['postcode']);
-    $city = tep_db_prepare_input($HTTP_POST_VARS['city']);
+    $street_address = tep_db_prepare_input($_POST['street_address']);
+    if (ACCOUNT_SUBURB == 'true') $suburb = tep_db_prepare_input($_POST['suburb']);
+    $postcode = tep_db_prepare_input($_POST['postcode']);
+    $city = tep_db_prepare_input($_POST['city']);
     if (ACCOUNT_STATE == 'true') {
-      $state = tep_db_prepare_input($HTTP_POST_VARS['state']);
-      if (isset($HTTP_POST_VARS['zone_id'])) {
-        $zone_id = tep_db_prepare_input($HTTP_POST_VARS['zone_id']);
+      $state = tep_db_prepare_input($_POST['state']);
+      if (isset($_POST['zone_id'])) {
+        $zone_id = tep_db_prepare_input($_POST['zone_id']);
       } else {
         $zone_id = false;
       }
     }
-    $country = tep_db_prepare_input($HTTP_POST_VARS['country']);
-    $telephone = tep_db_prepare_input($HTTP_POST_VARS['telephone']);
-    $fax = tep_db_prepare_input($HTTP_POST_VARS['fax']);
-    if (isset($HTTP_POST_VARS['newsletter'])) {
-      $newsletter = tep_db_prepare_input($HTTP_POST_VARS['newsletter']);
+    $country = tep_db_prepare_input($_POST['country']);
+    $telephone = tep_db_prepare_input($_POST['telephone']);
+    $fax = tep_db_prepare_input($_POST['fax']);
+    if (isset($_POST['newsletter'])) {
+      $newsletter = tep_db_prepare_input($_POST['newsletter']);
     } else {
       $newsletter = false;
     }
-    $password = tep_db_prepare_input($HTTP_POST_VARS['password']);
-    $confirmation = tep_db_prepare_input($HTTP_POST_VARS['confirmation']);
+    $password = tep_db_prepare_input($_POST['password']);
+    $confirmation = tep_db_prepare_input($_POST['confirmation']);
 
 // BOF: MOD - Country-State Selector
     if ($process) {
@@ -179,7 +179,7 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
     }
 
 // PWA BOF
-    if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest'])) {
+    if (!isset($_GET['guest']) && !isset($_POST['guest'])) {
 // PWA EOF
 
     if (strlen($password) < ENTRY_PASSWORD_MIN_LENGTH) {
@@ -197,7 +197,7 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 
     if ($error == false) {
 		// PWA BOF 2b
-		if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest']))
+		if (!isset($_GET['guest']) && !isset($_POST['guest']))
 		{
 			$dbPass = tep_encrypt_password($password);
 			$guestaccount = '0';
@@ -261,7 +261,7 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
       }
 
 // PWA BOF
-     if (isset($HTTP_GET_VARS['guest']) or isset($HTTP_POST_VARS['guest']))
+     if (isset($_GET['guest']) or isset($_POST['guest']))
        tep_session_register('customer_is_guest');
 // PWA EOF
       tep_db_perform(TABLE_ADDRESS_BOOK, $sql_data_array);
@@ -287,7 +287,7 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
       tep_session_register('customer_zone_id');
 
 // PWA BOF
-      if (isset($HTTP_GET_VARS['guest']) or isset($HTTP_POST_VARS['guest'])) tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING));
+      if (isset($_GET['guest']) or isset($_POST['guest'])) tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING));
 // PWA EOF
 // restore cart contents
       $cart->restore_contents();
@@ -378,11 +378,11 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
  
 // BOF: MOD - Country-State Selector 
  }
-if ($HTTP_POST_VARS['action'] == 'refresh') {$state = '';}
+if ($_POST['action'] == 'refresh') {$state = '';}
 if (!isset($country)){$country = DEFAULT_COUNTRY;}
 // EOF: MOD - Country-State Selector 
  // PWA BOF
- if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest'])){
+ if (!isset($_GET['guest']) && !isset($_POST['guest'])){
    $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL'));
  }else{
    $breadcrumb->add(NAVBAR_TITLE_PWA, tep_href_link(FILENAME_CREATE_ACCOUNT, 'guest=guest', 'SSL'));

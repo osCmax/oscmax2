@@ -14,11 +14,11 @@ $Id: articles_config.php 3 2006-05-27 04:59:07Z user $
   $gID = 456;
   require('includes/application_top.php');
 
-  if ($HTTP_GET_VARS['action']) {
-    switch ($HTTP_GET_VARS['action']) {
+  if ($_GET['action']) {
+    switch ($_GET['action']) {
       case 'save':
-        $configuration_value = tep_db_prepare_input($HTTP_POST_VARS['configuration_value']);
-        $cID = tep_db_prepare_input($HTTP_GET_VARS['cID']);
+        $configuration_value = tep_db_prepare_input($_POST['configuration_value']);
+        $cID = tep_db_prepare_input($_GET['cID']);
 
         tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_input($configuration_value) . "', last_modified = now() where configuration_id = '" . tep_db_input($cID) . "'");
         tep_redirect(tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $gID . '&cID=' . $cID));
@@ -88,7 +88,7 @@ $Id: articles_config.php 3 2006-05-27 04:59:07Z user $
       $cfgValue = $configuration['configuration_value'];
     }
 
-    if (((!$HTTP_GET_VARS['cID']) || (@$HTTP_GET_VARS['cID'] == $configuration['configuration_id'])) && (!$cInfo) && (substr($HTTP_GET_VARS['action'], 0, 3) != 'new')) {
+    if (((!$_GET['cID']) || (@$_GET['cID'] == $configuration['configuration_id'])) && (!$cInfo) && (substr($_GET['action'], 0, 3) != 'new')) {
       $cfg_extra_query = tep_db_query("select configuration_key, configuration_description, date_added, last_modified, use_function, set_function from " . TABLE_CONFIGURATION . " where configuration_id = '" . $configuration['configuration_id'] . "'");
       $cfg_extra = tep_db_fetch_array($cfg_extra_query);
 
@@ -113,7 +113,7 @@ $Id: articles_config.php 3 2006-05-27 04:59:07Z user $
 <?php
   $heading = array();
   $contents = array();
-  switch ($HTTP_GET_VARS['action']) {
+  switch ($_GET['action']) {
     case 'edit':
       $heading[] = array('text' => '<b>' . $cInfo->configuration_title . '</b>');
 

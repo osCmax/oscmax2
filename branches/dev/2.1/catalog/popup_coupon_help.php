@@ -31,10 +31,10 @@ BODY { margin-bottom: 10px; margin-left: 10px; margin-right: 10px; margin-top: 1
 
 <?php
 // v5.13: security flaw fixed in query
-//  $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . $HTTP_GET_VARS['cID'] . "'");
-  $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . intval($HTTP_GET_VARS['cID']) . "'");
+//  $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . $_GET['cID'] . "'");
+  $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . intval($_GET['cID']) . "'");
   $coupon = tep_db_fetch_array($coupon_query);
-  $coupon_desc_query = tep_db_query("select * from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . $HTTP_GET_VARS['cID'] . "' and language_id = '" . $languages_id . "'");
+  $coupon_desc_query = tep_db_query("select * from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . $_GET['cID'] . "' and language_id = '" . $languages_id . "'");
   $coupon_desc = tep_db_fetch_array($coupon_desc_query);
   $text_coupon_help = TEXT_COUPON_HELP_HEADER;
   //$text_coupon_help .= sprintf(TEXT_COUPON_HELP_NAME, $coupon_desc['coupon_name']);
@@ -56,7 +56,7 @@ BODY { margin-bottom: 10px; margin-left: 10px; margin-right: 10px; margin-top: 1
   //$text_coupon_help .= sprintf(TEXT_COUPON_HELP_DATE, tep_date_short($coupon['coupon_start_date']),tep_date_short($coupon['coupon_expire_date']));
   //$text_coupon_help .= '<b>' . TEXT_COUPON_HELP_RESTRICT . '</b>';
   //$text_coupon_help .= '<br><br>' .  TEXT_COUPON_HELP_CATEGORIES;
-  //$coupon_get=tep_db_query("select restrict_to_categories from " . TABLE_COUPONS . " where coupon_id='".$HTTP_GET_VARS['cID']."'");
+  //$coupon_get=tep_db_query("select restrict_to_categories from " . TABLE_COUPONS . " where coupon_id='".$_GET['cID']."'");
   //$get_result=tep_db_fetch_array($coupon_get);
 
   $cat_ids = explode("[,]", $get_result['restrict_to_categories']);
@@ -69,7 +69,7 @@ BODY { margin-bottom: 10px; margin-left: 10px; margin-right: 10px; margin-top: 1
   if ($cats=='') $cats = '<br>NONE';
   //$text_coupon_help .= $cats;
   //$text_coupon_help .= '<br><br>' .  TEXT_COUPON_HELP_PRODUCTS;
-  //$coupon_get=tep_db_query("select restrict_to_products from " . TABLE_COUPONS . "  where coupon_id='".$HTTP_GET_VARS['cID']."'");
+  //$coupon_get=tep_db_query("select restrict_to_products from " . TABLE_COUPONS . "  where coupon_id='".$_GET['cID']."'");
   //$get_result=tep_db_fetch_array($coupon_get);
 
   $pr_ids = explode("[,]", $get_result['restrict_to_products']);

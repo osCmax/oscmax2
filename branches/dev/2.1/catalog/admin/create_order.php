@@ -26,7 +26,7 @@ $Id: create_order.php 3 2006-05-27 04:59:07Z user $
  		$SelectCustomerBox = "<select name='Customer'><option value=''>" . TEXT_SELECT_CUST . "</option>\n";
  		while($db_Row = tep_db_fetch_array($result))
  		{ $SelectCustomerBox .= "<option value='" . $db_Row["customers_id"] . "'";
-		  if(IsSet($HTTP_GET_VARS['Customer']) and $db_Row["customers_id"]==$HTTP_GET_VARS['Customer'])
+		  if(IsSet($_GET['Customer']) and $db_Row["customers_id"]==$_GET['Customer'])
 			$SelectCustomerBox .= " SELECTED ";
 		  //$SelectCustomerBox .= ">" . $db_Row["customers_lastname"] . " , " . $db_Row["customers_firstname"] . " - " . $db_Row["customers_id"] . "</option>\n"; 
 		  $SelectCustomerBox .= ">" . $db_Row["customers_lastname"] . " , " . $db_Row["customers_firstname"] . "</option>\n";
@@ -52,20 +52,20 @@ $Id: create_order.php 3 2006-05-27 04:59:07Z user $
 		$SelectCurrencyBox .= "</select>\n";
 	}
 
-	if(IsSet($HTTP_GET_VARS['Customer']))
+	if(IsSet($_GET['Customer']))
 	{
- 	$account_query = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . $HTTP_GET_VARS['Customer'] . "'");
+ 	$account_query = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . $_GET['Customer'] . "'");
  	$account = tep_db_fetch_array($account_query);
  	$customer = $account['customers_id'];
- 	$address_query = tep_db_query("select * from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $HTTP_GET_VARS['Customer'] . "'");
+ 	$address_query = tep_db_query("select * from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $_GET['Customer'] . "'");
  	$address = tep_db_fetch_array($address_query);
  	//$customer = $account['customers_id'];
-	} elseif (IsSet($HTTP_GET_VARS['Customer_nr']))
+	} elseif (IsSet($_GET['Customer_nr']))
 	{
- 	$account_query = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . $HTTP_GET_VARS['Customer_nr'] . "'");
+ 	$account_query = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . $_GET['Customer_nr'] . "'");
  	$account = tep_db_fetch_array($account_query);
  	$customer = $account['customers_id'];
- 	$address_query = tep_db_query("select * from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $HTTP_GET_VARS['Customer_nr'] . "'");
+ 	$address_query = tep_db_query("select * from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $_GET['Customer_nr'] . "'");
  	$address = tep_db_fetch_array($address_query);
  	//$customer = $account['customers_id'];
 	}

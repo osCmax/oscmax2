@@ -20,11 +20,11 @@ $Id: column_right.php 3 2006-05-27 04:59:07Z user $
   if (tep_session_is_registered('customer_id')) include(DIR_WS_BOXES .'wishlist.php');
 // EOF: Wish List 2.3 End
 
-//  if (isset($HTTP_GET_VARS['products_id'])) include(DIR_WS_BOXES . 'manufacturer_info.php');
+//  if (isset($_GET['products_id'])) include(DIR_WS_BOXES . 'manufacturer_info.php');
 // 
 //   if (tep_session_is_registered('customer_id')) include(DIR_WS_BOXES . 'order_history.php');
 // 
-//   if (isset($HTTP_GET_VARS['products_id'])) {
+//   if (isset($_GET['products_id'])) {
 //     if (tep_session_is_registered('customer_id')) {
 //       $check_query = tep_db_query("select count(*) as count from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . (int)$customer_id . "' and global_product_notifications = '1'");
 //       $check = tep_db_fetch_array($check_query);
@@ -40,7 +40,7 @@ $Id: column_right.php 3 2006-05-27 04:59:07Z user $
 //     include(DIR_WS_BOXES . 'best_sellers.php');
 //   }
 // 
-//   if (isset($HTTP_GET_VARS['products_id'])) {
+//   if (isset($_GET['products_id'])) {
 //     if (basename($PHP_SELF) != FILENAME_TELL_A_FRIEND) include(DIR_WS_BOXES . 'tell_a_friend.php');
 //   } else {
 //     include(DIR_WS_BOXES . 'specials.php');
@@ -56,15 +56,15 @@ $Id: column_right.php 3 2006-05-27 04:59:07Z user $
   }  
   global $hide_product; // is determined in product_info.php
 // on other pages we'll check it with a query
-   if (!isset($hide_product) && isset($HTTP_GET_VARS['products_id'])) {
-      $hide_product = tep_get_hide_status_single($customer_group_id, (int)$HTTP_GET_VARS['products_id']);
+   if (!isset($hide_product) && isset($_GET['products_id'])) {
+      $hide_product = tep_get_hide_status_single($customer_group_id, (int)$_GET['products_id']);
    }
 
-  if (isset($HTTP_GET_VARS['products_id']) && $hide_product == false) include(DIR_WS_BOXES . 'manufacturer_info.php');
+  if (isset($_GET['products_id']) && $hide_product == false) include(DIR_WS_BOXES . 'manufacturer_info.php');
 
   if (tep_session_is_registered('customer_id') && (! tep_session_is_registered('customer_is_guest')) ) include(DIR_WS_BOXES . 'order_history.php');
 
-  if (isset($HTTP_GET_VARS['products_id'])) {
+  if (isset($_GET['products_id'])) {
     if (tep_session_is_registered('customer_id')) {
      $check_query = tep_db_query("select count(*) as count from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . (int)$customer_id . "' and global_product_notifications = '1'");
       $check = tep_db_fetch_array($check_query);
@@ -80,12 +80,12 @@ $Id: column_right.php 3 2006-05-27 04:59:07Z user $
    include(DIR_WS_BOXES . 'best_sellers.php');
   }
 
-  if (isset($HTTP_GET_VARS['products_id'])) {
+  if (isset($_GET['products_id'])) {
     if (basename($PHP_SELF) != FILENAME_TELL_A_FRIEND && $hide_product == false) { include(DIR_WS_BOXES . 'tell_a_friend.php');
   } // end if (basename($PHP_SELF) != FILENAME_TELL_A_FRIEND && $hide_product == false)
   } else {
     include(DIR_WS_BOXES . 'specials.php');
-  } // end if (isset($HTTP_GET_VARS['products_id']))
+  } // end if (isset($_GET['products_id']))
 
   if ($hide_product == false) {
   require(DIR_WS_BOXES . 'reviews.php');

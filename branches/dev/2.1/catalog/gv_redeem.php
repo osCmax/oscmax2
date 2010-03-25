@@ -27,9 +27,9 @@ $navigation->set_snapshot();
 tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
 }
 // check for a voucher number in the url
-  if (isset($HTTP_GET_VARS['gv_no'])) {
+  if (isset($_GET['gv_no'])) {
     $error = true;
- $voucher_number=tep_db_prepare_input($HTTP_GET_VARS['gv_no']);
+ $voucher_number=tep_db_prepare_input($_GET['gv_no']);
     $gv_query = tep_db_query("select c.coupon_id, c.coupon_amount from " . TABLE_COUPONS . " c, " . TABLE_COUPON_EMAIL_TRACK . " et where coupon_code = '" . addslashes($voucher_number) . "' and c.coupon_id = et.coupon_id");
     if (tep_db_num_rows($gv_query) >0) {
       $coupon = tep_db_fetch_array($gv_query);

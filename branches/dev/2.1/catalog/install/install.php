@@ -14,8 +14,8 @@ $Id: install.php 3 2006-05-27 04:59:07Z user $
 
   $page_contents = 'install.php';
 
-  if (isset($HTTP_GET_VARS['step']) && is_numeric($HTTP_GET_VARS['step'])) {
-    switch ($HTTP_GET_VARS['step']) {
+  if (isset($_GET['step']) && is_numeric($_GET['step'])) {
+    switch ($_GET['step']) {
       case '2':
         $page_contents = 'install_2.php';
         break;

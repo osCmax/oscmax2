@@ -322,7 +322,7 @@
         if ($check['orders_status'] == MODULE_PAYMENT_WORLDPAY_JUNIOR_PREPARE_ORDER_STATUS_ID) {
           $hash_result = false;
 
-          if (isset($HTTP_GET_VARS['hash']) && !empty($HTTP_GET_VARS['hash']) && ($HTTP_GET_VARS['hash'] == md5(tep_session_name() . $customer_id . $order_id . $language . number_format($order->info['total'], 2) . MODULE_PAYMENT_WORLDPAY_JUNIOR_MD5_PASSWORD))) {
+          if (isset($_GET['hash']) && !empty($_GET['hash']) && ($_GET['hash'] == md5(tep_session_name() . $customer_id . $order_id . $language . number_format($order->info['total'], 2) . MODULE_PAYMENT_WORLDPAY_JUNIOR_MD5_PASSWORD))) {
             $hash_result = true;
           }
 

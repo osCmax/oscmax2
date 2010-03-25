@@ -8,9 +8,9 @@
 	
 	$debug = 0; // 1 for yes, 0 for no
 	
-	$action = $HTTP_GET_VARS['action'];
-	$order = $HTTP_GET_VARS['oID'];
-	$tracking_number = $HTTP_GET_VARS['num'];
+	$action = $_GET['action'];
+	$order = $_GET['oID'];
+	$tracking_number = $_GET['num'];
 
 	include(DIR_WS_INCLUDES . 'fedexdc.php');
 

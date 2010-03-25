@@ -27,7 +27,7 @@ if (tep_db_num_rows($result) > 0){	// Query Successful
 
 		$SelectCustomerBox .= "<option value='" . $db_Row["customers_id"] . "'";
 
-	  	if(isset($HTTP_POST_VARS['Customer']) and $db_Row["customers_id"]==$HTTP_POST_VARS['Customer']){
+	  	if(isset($_POST['Customer']) and $db_Row["customers_id"]==$_POST['Customer']){
 	
 			$SelectCustomerBox .= " SELECTED ";
 			$CustomerEmail = $db_Row["customers_email_address"];
@@ -112,7 +112,7 @@ require(DIR_WS_INCLUDES . 'header_tags.php');
 					
 						</td>
                       <td valign='bottom'><?php
-					  if(isset($HTTP_POST_VARS['Customer'])){
+					  if(isset($_POST['Customer'])){
 						  if (ENABLE_SSL_CATALOG == 'true') {
 							echo '<form action="' . HTTPS_CATALOG_SERVER . DIR_WS_CATALOG . 'login.php" method="POST" target="_blank">';
 						  } else {

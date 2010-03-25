@@ -22,7 +22,7 @@
 <?php
   }
 
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'success')) {
+  if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
 ?>
       <tr valign="middle">
         <td class="messagestacksuccess" align="center"><?php echo tep_image(DIR_WS_IMAGES . 'icons/icon_add.png', ''); ?> &nbsp;<?php echo  TEXT_SUCCESS; ?></td>

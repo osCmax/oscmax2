@@ -149,7 +149,7 @@
     * Break up an seo url into component parts
     */
     private function extractByMarkers() {
-      global $HTTP_GET_VARS;
+      global $_GET;
       foreach ( usu::$registry->vars['markers'] as $marker => $qskey ) {
         if ( false !== strpos( $this->filestring, $marker ) ) {
           // Found an seo marker so explode into two component parts
@@ -157,7 +157,7 @@
           // assign the key=>value pair to _GET
           $value =  ( false !== strpos( $tmp[1], '.html' ) ) ? usu::cleanse( str_replace( '.html', '', $tmp[1] ) ) : usu::cleanse( $tmp[1] ); 
           $_GET[$qskey] = $value;
-          $HTTP_GET_VARS[$qskey] = $value;
+          $_GET[$qskey] = $value;
 
           return $qskey . '=' .  $value;
         } 
@@ -186,14 +186,14 @@
     
     // extract _GET from the "experimental" osC search engine friendly urls
     private function extractByDirSeparator() {
-    global $HTTP_GET_VARS;  
+    global $_GET;  
       $tmp = explode( '/', $this->filestring );
       $count = count( $tmp );
       for ( $i=0; $i<$count; $i=$i+2 ) {
         $newget[filter_var( $tmp[$i], FILTER_SANITIZE_STRING )] = usu::cleanse( $tmp[$i+1] );
         // assign cleansed key=>value pair to _GET
         $_GET[filter_var( $tmp[$i], FILTER_SANITIZE_STRING )] = usu::cleanse( $tmp[$i+1] );
-        $HTTP_GET_VARS[filter_var( $tmp[$i], FILTER_SANITIZE_STRING )] = usu::cleanse( $tmp[$i+1] );
+        $_GET[filter_var( $tmp[$i], FILTER_SANITIZE_STRING )] = usu::cleanse( $tmp[$i+1] );
       }
       // Newly created _GET array added to the querystring and converted to _GET string
       $getstring = http_build_query( $newget ) . '&' . $this->querystring;

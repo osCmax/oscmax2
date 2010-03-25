@@ -12,12 +12,12 @@
 
   require('includes/application_top.php');
 
-  if(isset($HTTP_GET_VARS['action'])){
-  	$doctor_action = $HTTP_GET_VARS['action'];
+  if(isset($_GET['action'])){
+  	$doctor_action = $_GET['action'];
   }
   
-  if(isset($HTTP_GET_VARS['pID'])){
-  	$products_id = $HTTP_GET_VARS['pID'];
+  if(isset($_GET['pID'])){
+  	$products_id = $_GET['pID'];
   }
   
 ?>

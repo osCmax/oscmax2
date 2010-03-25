@@ -18,7 +18,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
-  $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
 // BOF instant update & image directory 
   require_once('includes/functions/instant_update.php');
 // EOF instant update & image directory 
@@ -30,9 +30,9 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
   if (tep_not_null($action)) {
     switch ($action) {
       case 'setflag':
-        if ( ($HTTP_GET_VARS['flag'] == '0') || ($HTTP_GET_VARS['flag'] == '1') ) {
-          if (isset($HTTP_GET_VARS['pID'])) {
-            tep_set_product_status($HTTP_GET_VARS['pID'], $HTTP_GET_VARS['flag']);
+        if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') ) {
+          if (isset($_GET['pID'])) {
+            tep_set_product_status($_GET['pID'], $_GET['flag']);
           }
 
           if (USE_CACHE == 'true') {
@@ -41,41 +41,41 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
           }
         }
 
-        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $HTTP_GET_VARS['cPath'] . '&pID=' . $HTTP_GET_VARS['pID']));
+        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&pID=' . $_GET['pID']));
         break;
 // BOF: MOD for Categories Description 1.5
       case 'new_category':
       case 'edit_category':
         if (ALLOW_CATEGORY_DESCRIPTIONS == 'true')
-          $HTTP_GET_VARS['action']=$HTTP_GET_VARS['action'] . '_ACD';
+          $_GET['action']=$_GET['action'] . '_ACD';
         break;
 // EOF: MOD for Categories Description 1.5
       case 'insert_category':
       case 'update_category':
 // BOF: MOD for Categories Description 1.5
-        if ( ($HTTP_POST_VARS['edit_x']) || ($HTTP_POST_VARS['edit_y']) ) {
-          $HTTP_GET_VARS['action'] = 'edit_category_ACD';
+        if ( ($_POST['edit_x']) || ($_POST['edit_y']) ) {
+          $_GET['action'] = 'edit_category_ACD';
         } else {
 // EOF: MOD for Categories Description 1.5
-          if (isset($HTTP_POST_VARS['categories_id'])) $categories_id = tep_db_prepare_input($HTTP_POST_VARS['categories_id']);
+          if (isset($_POST['categories_id'])) $categories_id = tep_db_prepare_input($_POST['categories_id']);
 // BOF: MOD for Categories Description 1.5
           if ($categories_id == '') {
-             $categories_id = tep_db_prepare_input($HTTP_GET_VARS['cID']);
+             $categories_id = tep_db_prepare_input($_GET['cID']);
            }
 // EOF: MOD for Categories Description 1.5
-//          $sort_order = tep_db_prepare_input($HTTP_POST_VARS['sort_order']);
+//          $sort_order = tep_db_prepare_input($_POST['sort_order']);
 
 //        $sql_data_array = array('sort_order' => (int)$sort_order);
 // BOF Separate Pricing Per Customer, hide categories from groups
         $hide_cats_from_these_groups = '@,';
-          if ( $HTTP_POST_VARS['hide_cat'] ) { // if any of the checkboxes are checked
-              foreach($HTTP_POST_VARS['hide_cat'] as $val) {
+          if ( $_POST['hide_cat'] ) { // if any of the checkboxes are checked
+              foreach($_POST['hide_cat'] as $val) {
               $hide_cats_from_these_groups .= tep_db_prepare_input($val).','; 
               } // end foreach
            }
            $hide_cats_from_these_groups = substr($hide_cats_from_these_groups,0,strlen($hide_cats_from_these_groups)-1); // remove last comma
 
-        $sort_order = tep_db_prepare_input($HTTP_POST_VARS['sort_order']);
+        $sort_order = tep_db_prepare_input($_POST['sort_order']);
 
         $sql_data_array = array('sort_order' => $sort_order,
         'categories_hide_from_groups' => $hide_cats_from_these_groups);
@@ -100,7 +100,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
             $languages = tep_get_languages();
             for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-              $categories_name_array = $HTTP_POST_VARS['categories_name'];
+              $categories_name_array = $_POST['categories_name'];
 
               $language_id = $languages[$i]['id'];
 
@@ -108,9 +108,9 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
 // BOF: MOD for Categories Description 1.5
               if (ALLOW_CATEGORY_DESCRIPTIONS == 'true') {
-                $sql_data_array = array('categories_name' => tep_db_prepare_input($HTTP_POST_VARS['categories_name'][$language_id]),
-                                        'categories_heading_title' => tep_db_prepare_input($HTTP_POST_VARS['categories_heading_title'][$language_id]),
-                                        'categories_description' => tep_db_prepare_input($HTTP_POST_VARS['categories_description'][$language_id]));
+                $sql_data_array = array('categories_name' => tep_db_prepare_input($_POST['categories_name'][$language_id]),
+                                        'categories_heading_title' => tep_db_prepare_input($_POST['categories_heading_title'][$language_id]),
+                                        'categories_description' => tep_db_prepare_input($_POST['categories_description'][$language_id]));
               }
 // EOF: MOD for Categories Description 1.5
               if ($action == 'insert_category') {
@@ -130,7 +130,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 //          tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . //tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
 //Added the following to replacce above code
           if (ALLOW_CATEGORY_DESCRIPTIONS == 'true') {
-            tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . $HTTP_POST_VARS['categories_image'] . "' where categories_id = '" .  tep_db_input($categories_id) . "'");
+            tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . $_POST['categories_image'] . "' where categories_id = '" .  tep_db_input($categories_id) . "'");
             $categories_image = '';
           } else {
         $categories_image = new upload('categories_image');
@@ -153,8 +153,8 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 // EOF: MOD for Categories Description 1.5
         break;
       case 'delete_category_confirm':
-        if (isset($HTTP_POST_VARS['categories_id'])) {
-          $categories_id = tep_db_prepare_input($HTTP_POST_VARS['categories_id']);
+        if (isset($_POST['categories_id'])) {
+          $categories_id = tep_db_prepare_input($_POST['categories_id']);
 
           $categories = tep_get_category_tree($categories_id, '', '0', '', true);
           $products = array();
@@ -204,9 +204,9 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath));
         break;
       case 'delete_product_confirm':
-        if (isset($HTTP_POST_VARS['products_id']) && isset($HTTP_POST_VARS['product_categories']) && is_array($HTTP_POST_VARS['product_categories'])) {
-          $product_id = tep_db_prepare_input($HTTP_POST_VARS['products_id']);
-          $product_categories = $HTTP_POST_VARS['product_categories'];
+        if (isset($_POST['products_id']) && isset($_POST['product_categories']) && is_array($_POST['product_categories'])) {
+          $product_id = tep_db_prepare_input($_POST['products_id']);
+          $product_categories = $_POST['product_categories'];
 
           for ($i=0, $n=sizeof($product_categories); $i<$n; $i++) {
             tep_db_query("delete from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$product_id . "' and categories_id = '" . (int)$product_categories[$i] . "'");
@@ -231,9 +231,9 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath));
         break;
       case 'move_category_confirm':
-        if (isset($HTTP_POST_VARS['categories_id']) && ($HTTP_POST_VARS['categories_id'] != $HTTP_POST_VARS['move_to_category_id'])) {
-          $categories_id = tep_db_prepare_input($HTTP_POST_VARS['categories_id']);
-          $new_parent_id = tep_db_prepare_input($HTTP_POST_VARS['move_to_category_id']);
+        if (isset($_POST['categories_id']) && ($_POST['categories_id'] != $_POST['move_to_category_id'])) {
+          $categories_id = tep_db_prepare_input($_POST['categories_id']);
+          $new_parent_id = tep_db_prepare_input($_POST['move_to_category_id']);
 
           $path = explode('_', tep_get_generated_category_path_ids($new_parent_id));
 
@@ -255,8 +255,8 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
         break;
       case 'move_product_confirm':
-        $products_id = tep_db_prepare_input($HTTP_POST_VARS['products_id']);
-        $new_parent_id = tep_db_prepare_input($HTTP_POST_VARS['move_to_category_id']);
+        $products_id = tep_db_prepare_input($_POST['products_id']);
+        $new_parent_id = tep_db_prepare_input($_POST['move_to_category_id']);
 
         $duplicate_check_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$products_id . "' and categories_id = '" . (int)$new_parent_id . "'");
         $duplicate_check = tep_db_fetch_array($duplicate_check_query);
@@ -271,40 +271,40 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         break;
       case 'insert_product':
       case 'update_product':
-        if (isset($HTTP_POST_VARS['edit_x']) || isset($HTTP_POST_VARS['edit_y'])) {
+        if (isset($_POST['edit_x']) || isset($_POST['edit_y'])) {
           $action = 'new_product';
         } else {
-          if (isset($HTTP_GET_VARS['pID'])) $products_id = tep_db_prepare_input($HTTP_GET_VARS['pID']);
-          $products_date_available = tep_db_prepare_input($HTTP_POST_VARS['products_date_available']);
+          if (isset($_GET['pID'])) $products_id = tep_db_prepare_input($_GET['pID']);
+          $products_date_available = tep_db_prepare_input($_POST['products_date_available']);
 
           $products_date_available = (date('Y-m-d') < $products_date_available) ? $products_date_available : 'null';
 // BOF Separate Pricing Per Customer, hide products and categories from groups
     $hide_from_these_groups = '@,';
-             if ( $HTTP_POST_VARS['hide'] ) { // if any of the checkboxes are checked
-                 foreach($HTTP_POST_VARS['hide'] as $val) {
+             if ( $_POST['hide'] ) { // if any of the checkboxes are checked
+                 foreach($_POST['hide'] as $val) {
                  $hide_from_these_groups .= tep_db_prepare_input($val).','; 
                  } // end foreach
               }
      $hide_from_these_groups = substr($hide_from_these_groups,0,strlen($hide_from_these_groups)-1); // remove last comma
 // EOF Separate Pricing Per Customer, hide products and categories from groups
 
-          $sql_data_array = array('products_quantity' => (int)tep_db_prepare_input($HTTP_POST_VARS['products_quantity']),
+          $sql_data_array = array('products_quantity' => (int)tep_db_prepare_input($_POST['products_quantity']),
 //LINE ADDED: MOD - indvship
-                                  'products_ship_price' => tep_db_prepare_input($HTTP_POST_VARS['products_ship_price']), //indvship
-                                  'products_model' => tep_db_prepare_input($HTTP_POST_VARS['products_model']),
-                                  'products_price' => tep_db_prepare_input($HTTP_POST_VARS['products_price']),
+                                  'products_ship_price' => tep_db_prepare_input($_POST['products_ship_price']), //indvship
+                                  'products_model' => tep_db_prepare_input($_POST['products_model']),
+                                  'products_price' => tep_db_prepare_input($_POST['products_price']),
                                   'products_date_available' => $products_date_available,
-                                  'products_weight' => (float)tep_db_prepare_input($HTTP_POST_VARS['products_weight']),
-                                  'products_height' => tep_db_prepare_input($HTTP_POST_VARS['products_height']),
-                                  'products_length' => tep_db_prepare_input($HTTP_POST_VARS['products_length']),
-                                  'products_width' => tep_db_prepare_input($HTTP_POST_VARS['products_width']),
-                                  'products_ready_to_ship' => tep_db_prepare_input($HTTP_POST_VARS['products_ready_to_ship']),
-                                  'products_status' => tep_db_prepare_input($HTTP_POST_VARS['products_status']),
-                                  'products_tax_class_id' => tep_db_prepare_input($HTTP_POST_VARS['products_tax_class_id']),
+                                  'products_weight' => (float)tep_db_prepare_input($_POST['products_weight']),
+                                  'products_height' => tep_db_prepare_input($_POST['products_height']),
+                                  'products_length' => tep_db_prepare_input($_POST['products_length']),
+                                  'products_width' => tep_db_prepare_input($_POST['products_width']),
+                                  'products_ready_to_ship' => tep_db_prepare_input($_POST['products_ready_to_ship']),
+                                  'products_status' => tep_db_prepare_input($_POST['products_status']),
+                                  'products_tax_class_id' => tep_db_prepare_input($_POST['products_tax_class_id']),
 // BOF Separate Price Per Customer, hide for these groups modification
                                   'products_hide_from_groups' => $hide_from_these_groups,
 // EOF Separate Price Per Customer, hide for these groups modification
-                                  'manufacturers_id' => (int)tep_db_prepare_input($HTTP_POST_VARS['manufacturers_id']));
+                                  'manufacturers_id' => (int)tep_db_prepare_input($_POST['manufacturers_id']));
 		//++++ QT Pro: Begin Added code
 			if($product_investigation['has_tracked_options'] or $product_investigation['stock_entries_count'] > 0){
 				//Do not modify the stock from this page if the product has database entries or has tracked options
@@ -313,8 +313,8 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
 		//++++ QT Pro: End Added code
 
-          if (isset($HTTP_POST_VARS['products_image']) && tep_not_null($HTTP_POST_VARS['products_image']) && ($HTTP_POST_VARS['products_image'] != 'none')) {
-            $sql_data_array['products_image'] = tep_db_prepare_input($HTTP_POST_VARS['products_image']);
+          if (isset($_POST['products_image']) && tep_not_null($_POST['products_image']) && ($_POST['products_image'] != 'none')) {
+            $sql_data_array['products_image'] = tep_db_prepare_input($_POST['products_image']);
           }
 
           if ($action == 'insert_product') {
@@ -345,12 +345,12 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             $attributes_query = tep_db_query("select customers_group_id, customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where ((products_id = '" . $products_id . "') && (customers_group_id = " . $customers_group['customers_group_id'] . ")) order by customers_group_id");
             $attributes = tep_db_fetch_array($attributes_query);
             if (tep_db_num_rows($attributes_query) > 0) {
-              if ($HTTP_POST_VARS['sppcoption'][$customers_group['customers_group_id']]) {// this is checking if the check box is checked
-                if ( ($HTTP_POST_VARS['sppcprice'][$customers_group['customers_group_id']] <> $attributes['customers_group_price']) && ($attributes['customers_group_id'] == $customers_group['customers_group_id']) ) {
-                tep_db_query("update " . TABLE_PRODUCTS_GROUPS . " set customers_group_price = '" . $HTTP_POST_VARS['sppcprice'][$customers_group['customers_group_id']] . "' where customers_group_id = '" . $attributes['customers_group_id'] . "' and products_id = '" . $products_id . "'");
+              if ($_POST['sppcoption'][$customers_group['customers_group_id']]) {// this is checking if the check box is checked
+                if ( ($_POST['sppcprice'][$customers_group['customers_group_id']] <> $attributes['customers_group_price']) && ($attributes['customers_group_id'] == $customers_group['customers_group_id']) ) {
+                tep_db_query("update " . TABLE_PRODUCTS_GROUPS . " set customers_group_price = '" . $_POST['sppcprice'][$customers_group['customers_group_id']] . "' where customers_group_id = '" . $attributes['customers_group_id'] . "' and products_id = '" . $products_id . "'");
                   $attributes = tep_db_fetch_array($attributes_query);
                 }
-                elseif (($HTTP_POST_VARS['sppcprice'][$customers_group['customers_group_id']] == $attributes['customers_group_price'])) {
+                elseif (($_POST['sppcprice'][$customers_group['customers_group_id']] == $attributes['customers_group_price'])) {
                 $attributes = tep_db_fetch_array($attributes_query);
                 }
               }
@@ -359,8 +359,8 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                 $attributes = tep_db_fetch_array($attributes_query);
               }
             }
-            elseif (($HTTP_POST_VARS['sppcoption'][$customers_group['customers_group_id']]) && ($HTTP_POST_VARS['sppcprice'][$customers_group['customers_group_id']] != '')) {
-              tep_db_query("insert into " . TABLE_PRODUCTS_GROUPS . " (products_id, customers_group_id, customers_group_price) values ('" . $products_id . "', '" . $customers_group['customers_group_id'] . "', '" . $HTTP_POST_VARS['sppcprice'][$customers_group['customers_group_id']] . "')");
+            elseif (($_POST['sppcoption'][$customers_group['customers_group_id']]) && ($_POST['sppcprice'][$customers_group['customers_group_id']] != '')) {
+              tep_db_query("insert into " . TABLE_PRODUCTS_GROUPS . " (products_id, customers_group_id, customers_group_price) values ('" . $products_id . "', '" . $customers_group['customers_group_id'] . "', '" . $_POST['sppcprice'][$customers_group['customers_group_id']] . "')");
               $attributes = tep_db_fetch_array($attributes_query);
             }
           }
@@ -370,17 +370,17 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
           for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
             $language_id = $languages[$i]['id'];
 
-            $sql_data_array = array('products_name' => tep_db_prepare_input($HTTP_POST_VARS['products_name'][$language_id]),
-                                    'products_description' => tep_db_prepare_input($HTTP_POST_VARS['products_description'][$language_id]),
+            $sql_data_array = array('products_name' => tep_db_prepare_input($_POST['products_name'][$language_id]),
+                                    'products_description' => tep_db_prepare_input($_POST['products_description'][$language_id]),
 // BOF: Tabs by PGM				   
-				    'tab1' => tep_db_prepare_input($HTTP_POST_VARS['tab1'][$language_id]),
-				    'tab2' => tep_db_prepare_input($HTTP_POST_VARS['tab2'][$language_id]),
-  				    'tab3' => tep_db_prepare_input($HTTP_POST_VARS['tab3'][$language_id]),
-				    'tab4' => tep_db_prepare_input($HTTP_POST_VARS['tab4'][$language_id]),
- 				    'tab5' => tep_db_prepare_input($HTTP_POST_VARS['tab5'][$language_id]),
-				    'tab6' => tep_db_prepare_input($HTTP_POST_VARS['tab6'][$language_id]),
+				    'tab1' => tep_db_prepare_input($_POST['tab1'][$language_id]),
+				    'tab2' => tep_db_prepare_input($_POST['tab2'][$language_id]),
+  				    'tab3' => tep_db_prepare_input($_POST['tab3'][$language_id]),
+				    'tab4' => tep_db_prepare_input($_POST['tab4'][$language_id]),
+ 				    'tab5' => tep_db_prepare_input($_POST['tab5'][$language_id]),
+				    'tab6' => tep_db_prepare_input($_POST['tab6'][$language_id]),
 // EOF: Tabs by PGM
-                                    'products_url' => tep_db_prepare_input($HTTP_POST_VARS['products_url'][$language_id]));
+                                    'products_url' => tep_db_prepare_input($_POST['products_url'][$language_id]));
 
             if ($action == 'insert_product') {
               $insert_sql_data = array('products_id' => $products_id,
@@ -405,11 +405,11 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         }
         break;
       case 'copy_to_confirm':
-        if (isset($HTTP_POST_VARS['products_id']) && isset($HTTP_POST_VARS['categories_id'])) {
-          $products_id = tep_db_prepare_input($HTTP_POST_VARS['products_id']);
-          $categories_id = tep_db_prepare_input($HTTP_POST_VARS['categories_id']);
+        if (isset($_POST['products_id']) && isset($_POST['categories_id'])) {
+          $products_id = tep_db_prepare_input($_POST['products_id']);
+          $categories_id = tep_db_prepare_input($_POST['categories_id']);
 
-          if ($HTTP_POST_VARS['copy_as'] == 'link') {
+          if ($_POST['copy_as'] == 'link') {
             if ($categories_id != $current_category_id) {
               $check_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$products_id . "' and categories_id = '" . (int)$categories_id . "'");
               $check = tep_db_fetch_array($check_query);
@@ -419,7 +419,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             } else {
               $messageStack->add_session(ERROR_CANNOT_LINK_TO_SAME_CATEGORY, 'error');
             }
-          } elseif ($HTTP_POST_VARS['copy_as'] == 'duplicate') {
+          } elseif ($_POST['copy_as'] == 'duplicate') {
 // LINE MODED: Added "products_ship_price and dimensions for upsxml"
             $product_query = tep_db_query("select products_ship_price, products_quantity, products_model, products_image, products_price, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_tax_class_id, manufacturers_id from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
             $product = tep_db_fetch_array($product_query);
@@ -513,25 +513,25 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 ?>
        <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
   <?php   //----- new_category / edit_category (when ALLOW_CATEGORY_DESCRIPTIONS is 'true') -----
-  if ($HTTP_GET_VARS['action'] == 'new_category_ACD' || $HTTP_GET_VARS['action'] == 'edit_category_ACD') {
-    if ( ($HTTP_GET_VARS['cID']) && (!$HTTP_POST_VARS) ) {
-      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . $HTTP_GET_VARS['cID'] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . $languages_id . "' order by c.sort_order, cd.categories_name");
+  if ($_GET['action'] == 'new_category_ACD' || $_GET['action'] == 'edit_category_ACD') {
+    if ( ($_GET['cID']) && (!$_POST) ) {
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . $_GET['cID'] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . $languages_id . "' order by c.sort_order, cd.categories_name");
       $category = tep_db_fetch_array($categories_query);
 
       $cInfo = new objectInfo($category);
-    } elseif ($HTTP_POST_VARS) {
-      $cInfo = new objectInfo($HTTP_POST_VARS);
-      $categories_name = $HTTP_POST_VARS['categories_name'];
-      $categories_heading_title = $HTTP_POST_VARS['categories_heading_title'];
-      $categories_description = $HTTP_POST_VARS['categories_description'];
-      $categories_url = $HTTP_POST_VARS['categories_url'];
+    } elseif ($_POST) {
+      $cInfo = new objectInfo($_POST);
+      $categories_name = $_POST['categories_name'];
+      $categories_heading_title = $_POST['categories_heading_title'];
+      $categories_description = $_POST['categories_description'];
+      $categories_url = $_POST['categories_url'];
     } else {
       $cInfo = new objectInfo(array());
     }
 
     $languages = tep_get_languages();
 
-    $text_new_or_edit = ($HTTP_GET_VARS['action']=='new_category_ACD') ? TEXT_INFO_HEADING_NEW_CATEGORY : TEXT_INFO_HEADING_EDIT_CATEGORY;
+    $text_new_or_edit = ($_GET['action']=='new_category_ACD') ? TEXT_INFO_HEADING_NEW_CATEGORY : TEXT_INFO_HEADING_EDIT_CATEGORY;
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -544,7 +544,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
-      <tr><?php echo tep_draw_form('new_category', FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $HTTP_GET_VARS['cID'] . '&action=new_category_preview', 'post', 'enctype="multipart/form-data"'); ?>
+      <tr><?php echo tep_draw_form('new_category', FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $_GET['cID'] . '&action=new_category_preview', 'post', 'enctype="multipart/form-data"'); ?>
         <td><table border="0" cellspacing="0" cellpadding="2">
 <?php
     for ($i=0; $i<sizeof($languages); $i++) {
@@ -623,17 +623,17 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main" align="right"><?php echo tep_draw_hidden_field('categories_date_added', (($cInfo->date_added) ? $cInfo->date_added : date('Y-m-d'))) . tep_draw_hidden_field('parent_id', $cInfo->parent_id) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $HTTP_GET_VARS['cID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+        <td class="main" align="right"><?php echo tep_draw_hidden_field('categories_date_added', (($cInfo->date_added) ? $cInfo->date_added : date('Y-m-d'))) . tep_draw_hidden_field('parent_id', $cInfo->parent_id) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $_GET['cID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
       </form></tr>
 <?php
 
   //----- new_category_preview (active when ALLOW_CATEGORY_DESCRIPTIONS is 'true') -----
-  } elseif ($HTTP_GET_VARS['action'] == 'new_category_preview') {
-    if ($HTTP_POST_VARS) {
-      $cInfo = new objectInfo($HTTP_POST_VARS);
-      $categories_name = $HTTP_POST_VARS['categories_name'];
-      $categories_heading_title = $HTTP_POST_VARS['categories_heading_title'];
-      $categories_description = $HTTP_POST_VARS['categories_description'];
+  } elseif ($_GET['action'] == 'new_category_preview') {
+    if ($_POST) {
+      $cInfo = new objectInfo($_POST);
+      $categories_name = $_POST['categories_name'];
+      $categories_heading_title = $_POST['categories_heading_title'];
+      $categories_description = $_POST['categories_description'];
 
 // copy image only if modified
         $categories_image = new upload('categories_image');
@@ -641,30 +641,30 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         if ($categories_image->parse() && $categories_image->save()) {
           $categories_image_name = $categories_image->filename;
         } else {
-        $categories_image_name = $HTTP_POST_VARS['categories_previous_image'];
+        $categories_image_name = $_POST['categories_previous_image'];
       }
 #     if ( ($categories_image != 'none') && ($categories_image != '') ) {
 #       $image_location = DIR_FS_CATALOG_IMAGES . $categories_image_name;
 #       if (file_exists($image_location)) @unlink($image_location);
 #       copy($categories_image, $image_location);
 #     } else {
-#       $categories_image_name = $HTTP_POST_VARS['categories_previous_image'];
+#       $categories_image_name = $_POST['categories_previous_image'];
 #     }
     } else {
-      $category_query = tep_db_query("select c.categories_id, cd.language_id, cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image, c.sort_order, c.date_added, c.last_modified from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and c.categories_id = '" . $HTTP_GET_VARS['cID'] . "'");
+      $category_query = tep_db_query("select c.categories_id, cd.language_id, cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image, c.sort_order, c.date_added, c.last_modified from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and c.categories_id = '" . $_GET['cID'] . "'");
       $category = tep_db_fetch_array($category_query);
 
       $cInfo = new objectInfo($category);
       $categories_image_name = $cInfo->categories_image;
     }
 
-    $form_action = ($HTTP_GET_VARS['cID']) ? 'update_category' : 'insert_category';
+    $form_action = ($_GET['cID']) ? 'update_category' : 'insert_category';
 
-    echo tep_draw_form($form_action, FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $HTTP_GET_VARS['cID'] . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
+    echo tep_draw_form($form_action, FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $_GET['cID'] . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
 
     $languages = tep_get_languages();
     for ($i=0; $i<sizeof($languages); $i++) {
-      if ($HTTP_GET_VARS['read'] == 'only') {
+      if ($_GET['read'] == 'only') {
         $cInfo->categories_name = tep_get_category_name($cInfo->categories_id, $languages[$i]['id']);
         $cInfo->categories_heading_title = tep_get_category_heading_title($cInfo->categories_id, $languages[$i]['id']);
         $cInfo->categories_description = tep_get_category_description($cInfo->categories_id, $languages[$i]['id']);
@@ -690,14 +690,14 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
 <?php
     }
-    if ($HTTP_GET_VARS['read'] == 'only') {
-      if ($HTTP_GET_VARS['origin']) {
-        $pos_params = strpos($HTTP_GET_VARS['origin'], '?', 0);
+    if ($_GET['read'] == 'only') {
+      if ($_GET['origin']) {
+        $pos_params = strpos($_GET['origin'], '?', 0);
         if ($pos_params != false) {
-          $back_url = substr($HTTP_GET_VARS['origin'], 0, $pos_params);
-          $back_url_params = substr($HTTP_GET_VARS['origin'], $pos_params + 1);
+          $back_url = substr($_GET['origin'], 0, $pos_params);
+          $back_url_params = substr($_GET['origin'], $pos_params + 1);
         } else {
-          $back_url = $HTTP_GET_VARS['origin'];
+          $back_url = $_GET['origin'];
           $back_url_params = '';
         }
       } else {
@@ -715,9 +715,9 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         <td align="right" class="smallText">
 <?php
 /* Re-Post all POST'ed variables */
-      reset($HTTP_POST_VARS);
-      while (list($key, $value) = each($HTTP_POST_VARS)) {
-        if (!is_array($HTTP_POST_VARS[$key])) {
+      reset($_POST);
+      while (list($key, $value) = each($_POST)) {
+        if (!is_array($_POST[$key])) {
           echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
         }
       }
@@ -732,12 +732,12 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
       echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="edit"') . '&nbsp;&nbsp;';
 
-      if ($HTTP_GET_VARS['cID']) {
+      if ($_GET['cID']) {
         echo tep_image_submit('button_update.gif', IMAGE_UPDATE);
       } else {
         echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
       }
-      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $HTTP_GET_VARS['cID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
+      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $_GET['cID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
 ?></td>
       </form></tr>
 <?php
@@ -778,28 +778,28 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
     $pInfo = new objectInfo($parameters);
 
-    if (isset($HTTP_GET_VARS['pID']) && empty($HTTP_POST_VARS)) { // BOF SPPC hide from groups mod
+    if (isset($_GET['pID']) && empty($_POST)) { // BOF SPPC hide from groups mod
 //LINE MODED: Added "p.products_ship_price"
-//    $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id,                              p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+//    $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id,                              p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
 //LINE MODED: SPPC hide from groups mod & Tabs by PGM      
-	  $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+	  $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
 // EOF SPPC hide from groups mod
       $product = tep_db_fetch_array($product_query);
 
       $pInfo->objectInfo($product);
-    } elseif (tep_not_null($HTTP_POST_VARS)) {
-      $pInfo->objectInfo($HTTP_POST_VARS);
-      $products_name = $HTTP_POST_VARS['products_name'];
-      $products_description = $HTTP_POST_VARS['products_description'];
+    } elseif (tep_not_null($_POST)) {
+      $pInfo->objectInfo($_POST);
+      $products_name = $_POST['products_name'];
+      $products_description = $_POST['products_description'];
 // BOF: Tabs by PGM
-      $tab1 = $HTTP_POST_VARS['tab1'];
-      $tab2 = $HTTP_POST_VARS['tab2'];
-      $tab3 = $HTTP_POST_VARS['tab3'];
-      $tab4 = $HTTP_POST_VARS['tab4'];
-      $tab5 = $HTTP_POST_VARS['tab5'];
-      $tab6 = $HTTP_POST_VARS['tab6'];
+      $tab1 = $_POST['tab1'];
+      $tab2 = $_POST['tab2'];
+      $tab3 = $_POST['tab3'];
+      $tab4 = $_POST['tab4'];
+      $tab5 = $_POST['tab5'];
+      $tab6 = $_POST['tab6'];
 // EOF: Tabs by PGM
-      $products_url = $HTTP_POST_VARS['products_url'];
+      $products_url = $_POST['products_url'];
     }
 
     $manufacturers_array = array(array('id' => '', 'text' => TEXT_NONE));
@@ -877,7 +877,7 @@ function updateNet() {
   document.forms["new_product"].products_price.value = doRound(netValue, 4);
 }
 //--></script>
-    <?php echo tep_draw_form('new_product', FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : '') . '&action=new_product_preview', 'post', 'enctype="multipart/form-data"'); ?>
+    <?php echo tep_draw_form('new_product', FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&pID=' . $_GET['pID'] : '') . '&action=new_product_preview', 'post', 'enctype="multipart/form-data"'); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -1164,29 +1164,29 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 <!-- instant update -->
        <td class="main" align="right"><?php echo (isset($_GET['pID']) ? TEXT_PRODUCTS_UPDATE_PRODUCT : TEXT_PRODUCTS_INSERT_PRODUCT ) . TEXT_PRODUCTS_WITHOUT_PREVIEW; ?><input type="checkbox" name="instant_update" ></td>
 <!-- EOF instant update  -->           
-        <td class="main" align="right"><?php echo tep_draw_hidden_field('products_date_added', (tep_not_null($pInfo->products_date_added) ? $pInfo->products_date_added : date('Y-m-d'))) . tep_image_submit('button_update.gif', TEXT_PRODUCTS_UPDATE_PRODUCT) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+        <td class="main" align="right"><?php echo tep_draw_hidden_field('products_date_added', (tep_not_null($pInfo->products_date_added) ? $pInfo->products_date_added : date('Y-m-d'))) . tep_image_submit('button_update.gif', TEXT_PRODUCTS_UPDATE_PRODUCT) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&pID=' . $_GET['pID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
       </tr>
     </table></form>
 <?php
   } elseif ($action == 'new_product_preview') {
-    if (tep_not_null($HTTP_POST_VARS)) {
-      $pInfo = new objectInfo($HTTP_POST_VARS);
-      $products_name = $HTTP_POST_VARS['products_name'];
-      $products_description = $HTTP_POST_VARS['products_description'];
+    if (tep_not_null($_POST)) {
+      $pInfo = new objectInfo($_POST);
+      $products_name = $_POST['products_name'];
+      $products_description = $_POST['products_description'];
 // BOF: Tabs by PGM
-      $tab1 = $HTTP_POST_VARS['tab1'];
-      $tab2 = $HTTP_POST_VARS['tab2'];
-      $tab3 = $HTTP_POST_VARS['tab3'];
-      $tab4 = $HTTP_POST_VARS['tab4'];
-      $tab5 = $HTTP_POST_VARS['tab5'];
-      $tab6 = $HTTP_POST_VARS['tab6'];
+      $tab1 = $_POST['tab1'];
+      $tab2 = $_POST['tab2'];
+      $tab3 = $_POST['tab3'];
+      $tab4 = $_POST['tab4'];
+      $tab5 = $_POST['tab5'];
+      $tab6 = $_POST['tab6'];
 // EOF: Tabs by PGM
-      $products_url = $HTTP_POST_VARS['products_url'];
+      $products_url = $_POST['products_url'];
     } else {
 // LINE CHANGED: Added p.products_shipped_price and dimensions for upsxml
-//    $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "'");
+//    $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'");
 // LINE MODED: Tabs by PGM
-      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "'");
+      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'");
 
       $product = tep_db_fetch_array($product_query);
 
@@ -1194,13 +1194,13 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
       $products_image_name = $pInfo->products_image;
     }
 
-    $form_action = (isset($HTTP_GET_VARS['pID'])) ? 'update_product' : 'insert_product';
+    $form_action = (isset($_GET['pID'])) ? 'update_product' : 'insert_product';
 
-    echo tep_draw_form($form_action, FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : '') . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
+    echo tep_draw_form($form_action, FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&pID=' . $_GET['pID'] : '') . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
 
     $languages = tep_get_languages();
     for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-      if (isset($HTTP_GET_VARS['read']) && ($HTTP_GET_VARS['read'] == 'only')) {
+      if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
         $pInfo->products_name = tep_get_products_name($pInfo->products_id, $languages[$i]['id']);
         $pInfo->products_description = tep_get_products_description($pInfo->products_id, $languages[$i]['id']);
 // BOF: Tabs by PGM
@@ -1282,14 +1282,14 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 <?php
     }
 
-    if (isset($HTTP_GET_VARS['read']) && ($HTTP_GET_VARS['read'] == 'only')) {
-      if (isset($HTTP_GET_VARS['origin'])) {
-        $pos_params = strpos($HTTP_GET_VARS['origin'], '?', 0);
+    if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
+      if (isset($_GET['origin'])) {
+        $pos_params = strpos($_GET['origin'], '?', 0);
         if ($pos_params != false) {
-          $back_url = substr($HTTP_GET_VARS['origin'], 0, $pos_params);
-          $back_url_params = substr($HTTP_GET_VARS['origin'], $pos_params + 1);
+          $back_url = substr($_GET['origin'], 0, $pos_params);
+          $back_url_params = substr($_GET['origin'], $pos_params + 1);
         } else {
-          $back_url = $HTTP_GET_VARS['origin'];
+          $back_url = $_GET['origin'];
           $back_url_params = '';
         }
       } else {
@@ -1307,10 +1307,10 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         <td align="right" class="smallText">
 <?php
 /* Re-Post all POST'ed variables */
-      reset($HTTP_POST_VARS);
-      while (list($key, $value) = each($HTTP_POST_VARS)) {
+      reset($_POST);
+      while (list($key, $value) = each($_POST)) {
 // BOF: MOD - Separate Pricing Per Customer
-//        if (!is_array($HTTP_POST_VARS[$key])) {
+//        if (!is_array($_POST[$key])) {
           if (is_array($value)) {
             while (list($k, $v) = each($value)) {
               echo tep_draw_hidden_field($key . '[' . $k . ']', htmlspecialchars(stripslashes($v)));
@@ -1339,12 +1339,12 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 
       echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="edit"') . '&nbsp;&nbsp;';
 
-      if (isset($HTTP_GET_VARS['pID'])) {
+      if (isset($_GET['pID'])) {
         echo tep_image_submit('button_update.gif', IMAGE_UPDATE);
       } else {
         echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
       }
-      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
+      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&pID=' . $_GET['pID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
 ?></td>
       </tr>
     </table></form>
@@ -1396,8 +1396,8 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 <?php
 //    $categories_count = 0;
 //     $rows = 0;
-//     if (isset($HTTP_GET_VARS['search'])) {
-//       $search = tep_db_prepare_input($HTTP_GET_VARS['search']);
+//     if (isset($_GET['search'])) {
+//       $search = tep_db_prepare_input($_GET['search']);
 // 
 //       $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and cd.categories_name like '%" . tep_db_input($search) . "%' order by c.sort_order, cd.categories_name");
 //     } else {
@@ -1410,8 +1410,8 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
     while ($customer_groups = tep_db_fetch_array($customers_group_query)) {
       $customers_groups[] = array('id' => $customer_groups['customers_group_id'], 'text' => $customer_groups['customers_group_name']);  
     }
-    if (isset($HTTP_GET_VARS['search'])) {
-      $search = tep_db_prepare_input($HTTP_GET_VARS['search']);
+    if (isset($_GET['search'])) {
+      $search = tep_db_prepare_input($_GET['search']);
 
       $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.categories_hide_from_groups from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and cd.categories_name like '%" . tep_db_input($search) . "%' order by c.sort_order, cd.categories_name");
     } else {
@@ -1423,9 +1423,9 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
       $rows++;
 
 // Get parent_id for subcategories if search
-      if (isset($HTTP_GET_VARS['search'])) $cPath= $categories['parent_id'];
+      if (isset($_GET['search'])) $cPath= $categories['parent_id'];
 
-      if ((!isset($HTTP_GET_VARS['cID']) && !isset($HTTP_GET_VARS['pID']) || (isset($HTTP_GET_VARS['cID']) && ($HTTP_GET_VARS['cID'] == $categories['categories_id']))) && !isset($cInfo) && (substr($action, 0, 3) != 'new')) {
+      if ((!isset($_GET['cID']) && !isset($_GET['pID']) || (isset($_GET['cID']) && ($_GET['cID'] == $categories['categories_id']))) && !isset($cInfo) && (substr($action, 0, 3) != 'new')) {
         $category_childs = array('childs_count' => tep_childs_in_category_count($categories['categories_id']));
         $category_products = array('products_count' => tep_products_in_category_count($categories['categories_id']));
 
@@ -1482,7 +1482,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
     }
 
     $products_count = 0;
-    if (isset($HTTP_GET_VARS['search'])) {
+    if (isset($_GET['search'])) {
 // LINE CHANGED: Added p.products_shipped_price
 //    $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status,                              p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and (pd.products_name like '%" . tep_db_input($search) . "%' or p.products_model like '%" . tep_db_input($search) . "%') order by pd.products_name");
 // BOF SPPC hide products from groups
@@ -1499,9 +1499,9 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
       $rows++;
 
 // Get categories_id for product if search
-      if (isset($HTTP_GET_VARS['search'])) $cPath = $products['categories_id'];
+      if (isset($_GET['search'])) $cPath = $products['categories_id'];
 
-      if ( (!isset($HTTP_GET_VARS['pID']) && !isset($HTTP_GET_VARS['cID']) || (isset($HTTP_GET_VARS['pID']) && ($HTTP_GET_VARS['pID'] == $products['products_id']))) && !isset($pInfo) && !isset($cInfo) && (substr($action, 0, 3) != 'new')) {
+      if ( (!isset($_GET['pID']) && !isset($_GET['cID']) || (isset($_GET['pID']) && ($_GET['pID'] == $products['products_id']))) && !isset($pInfo) && !isset($cInfo) && (substr($action, 0, 3) != 'new')) {
 // find out the rating average from customer reviews
         $reviews_query = tep_db_query("select (avg(reviews_rating) / 5 * 100) as average_rating from " . TABLE_REVIEWS . " where products_id = '" . (int)$products['products_id'] . "'");
         $reviews = tep_db_fetch_array($reviews_query);
@@ -1585,7 +1585,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
                 <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText"><?php echo TEXT_CATEGORIES . '&nbsp;' . $categories_count . '<br>' . TEXT_PRODUCTS . '&nbsp;' . $products_count; ?></td>
-                    <td align="right" class="smallText"><?php if (sizeof($cPath_array) > 0) echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, $cPath_back . 'cID=' . $current_category_id) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>&nbsp;'; if (!isset($HTTP_GET_VARS['search'])) echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&action=new_category') . '">' . tep_image_button('button_new_category.gif', IMAGE_NEW_CATEGORY) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&action=new_product') . '">' . tep_image_button('button_new_product.gif', IMAGE_NEW_PRODUCT) . '</a>'; ?>&nbsp;</td>
+                    <td align="right" class="smallText"><?php if (sizeof($cPath_array) > 0) echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, $cPath_back . 'cID=' . $current_category_id) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>&nbsp;'; if (!isset($_GET['search'])) echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&action=new_category') . '">' . tep_image_button('button_new_category.gif', IMAGE_NEW_CATEGORY) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&action=new_product') . '">' . tep_image_button('button_new_product.gif', IMAGE_NEW_PRODUCT) . '</a>'; ?>&nbsp;</td>
                   </tr>
                 </table></td>
               </tr>

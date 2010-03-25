@@ -15,13 +15,13 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
 
   $currencies = new currencies();
 
-  if ($HTTP_GET_VARS['selected_box']) {
-    $HTTP_GET_VARS['action']='';
-    $HTTP_GET_VARS['old_action']='';
+  if ($_GET['selected_box']) {
+    $_GET['action']='';
+    $_GET['old_action']='';
   }
   
-  if (($HTTP_GET_VARS['action'] == 'send_email_to_user') && ($HTTP_POST_VARS['customers_email_address']) && (!$HTTP_POST_VARS['back_x'])) {
-    switch ($HTTP_POST_VARS['customers_email_address']) {
+  if (($_GET['action'] == 'send_email_to_user') && ($_POST['customers_email_address']) && (!$_POST['back_x'])) {
+    switch ($_POST['customers_email_address']) {
     case '***':
       $mail_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from " . TABLE_CUSTOMERS);
       $mail_sent_to = TEXT_ALL_CUSTOMERS;
@@ -31,20 +31,20 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
       $mail_sent_to = TEXT_NEWSLETTER_CUSTOMERS;
       break;
     default:
-      $customers_email_address = tep_db_prepare_input($HTTP_POST_VARS['customers_email_address']);
+      $customers_email_address = tep_db_prepare_input($_POST['customers_email_address']);
       $mail_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($customers_email_address) . "'");
-      $mail_sent_to = $HTTP_POST_VARS['customers_email_address'];
+      $mail_sent_to = $_POST['customers_email_address'];
       break;
     }
-    $coupon_query = tep_db_query("select coupon_code from " . TABLE_COUPONS . " where coupon_id = '" . $HTTP_GET_VARS['cid'] . "'");
+    $coupon_query = tep_db_query("select coupon_code from " . TABLE_COUPONS . " where coupon_id = '" . $_GET['cid'] . "'");
     $coupon_result = tep_db_fetch_array($coupon_query);
-    $coupon_name_query = tep_db_query("select coupon_name from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . $HTTP_GET_VARS['cid'] . "' and language_id = '" . $languages_id . "'");
+    $coupon_name_query = tep_db_query("select coupon_name from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . $_GET['cid'] . "' and language_id = '" . $languages_id . "'");
     $coupon_name = tep_db_fetch_array($coupon_name_query);
 
-    $from = tep_db_prepare_input($HTTP_POST_VARS['from']);
-    $subject = tep_db_prepare_input($HTTP_POST_VARS['subject']);
+    $from = tep_db_prepare_input($_POST['from']);
+    $subject = tep_db_prepare_input($_POST['subject']);
     while ($mail = tep_db_fetch_array($mail_query)) {
-      $message = tep_db_prepare_input($HTTP_POST_VARS['message']);
+      $message = tep_db_prepare_input($_POST['message']);
       $message .= "\n\n" . TEXT_TO_REDEEM . "\n\n";
       $message .= TEXT_VOUCHER_IS . $coupon_result['coupon_code'] . "\n\n";
       $message .= TEXT_REMEMBER . "\n\n";
@@ -67,99 +67,99 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
     tep_redirect(tep_href_link(FILENAME_COUPON_ADMIN, 'mail_sent_to=' . urlencode($mail_sent_to)));
   }
  
-  if ( ($HTTP_GET_VARS['action'] == 'preview_email') && (!$HTTP_POST_VARS['customers_email_address']) ) {
-    $HTTP_GET_VARS['action'] = 'email';
+  if ( ($_GET['action'] == 'preview_email') && (!$_POST['customers_email_address']) ) {
+    $_GET['action'] = 'email';
     $messageStack->add(ERROR_NO_CUSTOMER_SELECTED, 'error');
   }
 
-  if ($HTTP_GET_VARS['mail_sent_to']) {
-    $messageStack->add(sprintf(NOTICE_EMAIL_SENT_TO, $HTTP_GET_VARS['mail_sent_to']), 'notice');
+  if ($_GET['mail_sent_to']) {
+    $messageStack->add(sprintf(NOTICE_EMAIL_SENT_TO, $_GET['mail_sent_to']), 'notice');
   }
 
-  $coupon_id = ((isset($HTTP_GET_VARS['cid'])) ? tep_db_prepare_input($HTTP_GET_VARS['cid']) : '');
-  switch ($HTTP_GET_VARS['action']) {
+  $coupon_id = ((isset($_GET['cid'])) ? tep_db_prepare_input($_GET['cid']) : '');
+  switch ($_GET['action']) {
     case 'setflag':
-      if ( ($HTTP_GET_VARS['flag'] == 'N') || ($HTTP_GET_VARS['flag'] == 'Y') ) {
-        if (isset($HTTP_GET_VARS['cid'])) {
-          tep_set_coupon_status($coupon_id, $HTTP_GET_VARS['flag']);
+      if ( ($_GET['flag'] == 'N') || ($_GET['flag'] == 'Y') ) {
+        if (isset($_GET['cid'])) {
+          tep_set_coupon_status($coupon_id, $_GET['flag']);
         }
       }
-      tep_redirect(tep_href_link(FILENAME_COUPON_ADMIN, '&cid=' . $HTTP_GET_VARS['cid']));
+      tep_redirect(tep_href_link(FILENAME_COUPON_ADMIN, '&cid=' . $_GET['cid']));
       break;
     case 'confirmdelete':
       $delete_query=tep_db_query("delete from " . TABLE_COUPONS . " where coupon_id='" . (int)$coupon_id . "'");
       break;
     case 'update':
       // get all HTTP_POST_VARS and validate
-      $HTTP_POST_VARS['coupon_code'] = trim($HTTP_POST_VARS['coupon_code']);
+      $_POST['coupon_code'] = trim($_POST['coupon_code']);
         $languages = tep_get_languages();
         for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
           $language_id = $languages[$i]['id'];
-          if ($HTTP_POST_VARS['coupon_name'][$language_id]) $HTTP_POST_VARS['coupon_name'][$language_id] = trim($HTTP_POST_VARS['coupon_name'][$language_id]);
-          if ($HTTP_POST_VARS['coupon_desc'][$language_id]) $HTTP_POST_VARS['coupon_desc'][$language_id] = trim($HTTP_POST_VARS['coupon_desc'][$language_id]);
+          if ($_POST['coupon_name'][$language_id]) $_POST['coupon_name'][$language_id] = trim($_POST['coupon_name'][$language_id]);
+          if ($_POST['coupon_desc'][$language_id]) $_POST['coupon_desc'][$language_id] = trim($_POST['coupon_desc'][$language_id]);
         }
-      $HTTP_POST_VARS['coupon_amount'] = trim($HTTP_POST_VARS['coupon_amount']);
+      $_POST['coupon_amount'] = trim($_POST['coupon_amount']);
       $update_errors = 0;
-      if ((!tep_not_null($HTTP_POST_VARS['coupon_amount'])) && (!tep_not_null($HTTP_POST_VARS['coupon_free_ship']))) {
+      if ((!tep_not_null($_POST['coupon_amount'])) && (!tep_not_null($_POST['coupon_free_ship']))) {
         $update_errors = 1;
         $messageStack->add(ERROR_NO_COUPON_AMOUNT, 'error');
       }
-      $coupon_code = ((tep_not_null($HTTP_POST_VARS['coupon_code'])) ? $HTTP_POST_VARS['coupon_code'] : create_coupon_code());
+      $coupon_code = ((tep_not_null($_POST['coupon_code'])) ? $_POST['coupon_code'] : create_coupon_code());
 
       $query1 = tep_db_query("select coupon_code from " . TABLE_COUPONS . " where coupon_code = '" . tep_db_prepare_input($coupon_code) . "'");
-      if (tep_db_num_rows($query1) && $HTTP_POST_VARS['coupon_code'] && $HTTP_GET_VARS['oldaction'] != 'voucheredit')  {
+      if (tep_db_num_rows($query1) && $_POST['coupon_code'] && $_GET['oldaction'] != 'voucheredit')  {
         $update_errors = 1;
         $messageStack->add(ERROR_COUPON_EXISTS, 'error');
       }
       if ($update_errors != 0) {
-        $HTTP_GET_VARS['action'] = 'new';
+        $_GET['action'] = 'new';
       } else {
-        $HTTP_GET_VARS['action'] = 'update_preview';
+        $_GET['action'] = 'update_preview';
       }
       break;
     case 'update_confirm':
-      if ( ($HTTP_POST_VARS['back_x']) || ($HTTP_POST_VARS['back_y']) ) {
-        if ($HTTP_GET_VARS['oldaction'] == 'voucheredit') {
-          $HTTP_GET_VARS['action'] = 'voucheredit';
+      if ( ($_POST['back_x']) || ($_POST['back_y']) ) {
+        if ($_GET['oldaction'] == 'voucheredit') {
+          $_GET['action'] = 'voucheredit';
         } else {
-        $HTTP_GET_VARS['action'] = 'new';
+        $_GET['action'] = 'new';
         }
       } else {
         $coupon_type = "F";
-        $coupon_amount = $HTTP_POST_VARS['coupon_amount'];
-        if (substr($HTTP_POST_VARS['coupon_amount'], -1) == '%') $coupon_type='P';
-        if ($HTTP_POST_VARS['coupon_free_ship']) {
+        $coupon_amount = $_POST['coupon_amount'];
+        if (substr($_POST['coupon_amount'], -1) == '%') $coupon_type='P';
+        if ($_POST['coupon_free_ship']) {
           $coupon_type = 'S';
           $coupon_amount = 0;
         }
-        $sql_data_array = array('coupon_active' => tep_db_prepare_input($HTTP_POST_VARS['coupon_status']),
-                                'coupon_code' => tep_db_prepare_input($HTTP_POST_VARS['coupon_code']),
+        $sql_data_array = array('coupon_active' => tep_db_prepare_input($_POST['coupon_status']),
+                                'coupon_code' => tep_db_prepare_input($_POST['coupon_code']),
                                 'coupon_amount' => tep_db_prepare_input($coupon_amount),
                                 'coupon_type' => tep_db_prepare_input($coupon_type),
-                                'uses_per_coupon' => tep_db_prepare_input($HTTP_POST_VARS['coupon_uses_coupon']),
-                                'uses_per_user' => tep_db_prepare_input($HTTP_POST_VARS['coupon_uses_user']),
-                                'coupon_minimum_order' => tep_db_prepare_input($HTTP_POST_VARS['coupon_min_order']),
-                                'restrict_to_products' => tep_db_prepare_input($HTTP_POST_VARS['coupon_products']),
-                                'restrict_to_categories' => tep_db_prepare_input($HTTP_POST_VARS['coupon_categories']),
-                                'coupon_start_date' => $HTTP_POST_VARS['coupon_startdate'],
-                                'coupon_expire_date' => $HTTP_POST_VARS['coupon_finishdate'],
-                                'date_created' => (($HTTP_POST_VARS['date_created'] != '0') ? $HTTP_POST_VARS['date_created'] : 'now()'),
+                                'uses_per_coupon' => tep_db_prepare_input($_POST['coupon_uses_coupon']),
+                                'uses_per_user' => tep_db_prepare_input($_POST['coupon_uses_user']),
+                                'coupon_minimum_order' => tep_db_prepare_input($_POST['coupon_min_order']),
+                                'restrict_to_products' => tep_db_prepare_input($_POST['coupon_products']),
+                                'restrict_to_categories' => tep_db_prepare_input($_POST['coupon_categories']),
+                                'coupon_start_date' => $_POST['coupon_startdate'],
+                                'coupon_expire_date' => $_POST['coupon_finishdate'],
+                                'date_created' => (($_POST['date_created'] != '0') ? $_POST['date_created'] : 'now()'),
                                 'date_modified' => 'now()');
         $languages = tep_get_languages();
         for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
           $language_id = $languages[$i]['id'];
-          $sql_data_marray[$i] = array('coupon_name' => tep_db_prepare_input($HTTP_POST_VARS['coupon_name'][$language_id]),
-                                 'coupon_description' => tep_db_prepare_input($HTTP_POST_VARS['coupon_desc'][$language_id])
+          $sql_data_marray[$i] = array('coupon_name' => tep_db_prepare_input($_POST['coupon_name'][$language_id]),
+                                 'coupon_description' => tep_db_prepare_input($_POST['coupon_desc'][$language_id])
                                  );
         }
-//        $query = tep_db_query("select coupon_code from " . TABLE_COUPONS . " where coupon_code = '" . tep_db_prepare_input($HTTP_POST_VARS['coupon_code']) . "'");
+//        $query = tep_db_query("select coupon_code from " . TABLE_COUPONS . " where coupon_code = '" . tep_db_prepare_input($_POST['coupon_code']) . "'");
 //        if (!tep_db_num_rows($query)) {
-        if ($HTTP_GET_VARS['oldaction']=='voucheredit') {
+        if ($_GET['oldaction']=='voucheredit') {
           tep_db_perform(TABLE_COUPONS, $sql_data_array, 'update', "coupon_id='" . (int)$coupon_id . "'"); 
           for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
           $language_id = $languages[$i]['id'];
-            $update = tep_db_query("update " . TABLE_COUPONS_DESCRIPTION . " set coupon_name = '" . tep_db_prepare_input($HTTP_POST_VARS['coupon_name'][$language_id]) . "', coupon_description = '" . tep_db_prepare_input($HTTP_POST_VARS['coupon_desc'][$language_id]) . "' where coupon_id = '" . (int)$coupon_id . "' and language_id = '" . $language_id . "'");
-//            tep_db_perform(TABLE_COUPONS_DESCRIPTION, $sql_data_marray[$i], 'update', "coupon_id='" . $HTTP_GET_VARS['cid']."'");
+            $update = tep_db_query("update " . TABLE_COUPONS_DESCRIPTION . " set coupon_name = '" . tep_db_prepare_input($_POST['coupon_name'][$language_id]) . "', coupon_description = '" . tep_db_prepare_input($_POST['coupon_desc'][$language_id]) . "' where coupon_id = '" . (int)$coupon_id . "' and language_id = '" . $language_id . "'");
+//            tep_db_perform(TABLE_COUPONS_DESCRIPTION, $sql_data_marray[$i], 'update', "coupon_id='" . $_GET['cid']."'");
           }
         } else {
           $query = tep_db_perform(TABLE_COUPONS, $sql_data_array);
@@ -207,7 +207,7 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
     </table></td>
 <!-- body_text //-->
 <?php
-  switch ($HTTP_GET_VARS['action']) {
+  switch ($_GET['action']) {
   case 'voucherreport':
 ?>
       <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -234,14 +234,14 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
     $cc_query_raw = "select * from " . TABLE_COUPON_REDEEM_TRACK . " where coupon_id = '" . (int)$coupon_id . "'";
     $cc_query = tep_db_query($cc_query_raw);
     $cc_query_numrows = tep_db_num_rows($cc_query);
-    $cc_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $cc_query_raw, $cc_query_numrows);
+    $cc_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $cc_query_raw, $cc_query_numrows);
 
     while ($cc_list = tep_db_fetch_array($cc_query)) {
       $rows++;
       if (strlen($rows) < 2) {
         $rows = '0' . $rows;
       }
-      if (((!$HTTP_GET_VARS['uid']) || (@$HTTP_GET_VARS['uid'] == $cc_list['unique_id'])) && (!$cInfo)) {
+      if (((!$_GET['uid']) || (@$_GET['uid'] == $cc_list['unique_id'])) && (!$cInfo)) {
         $cInfo = new objectInfo($cc_list);
       }
       if ( (is_object($cInfo)) && ($cc_list['unique_id'] == $cInfo->unique_id) ) {
@@ -257,7 +257,7 @@ $customer = tep_db_fetch_array($customer_query);
                 <td class="dataTableContent" align="center"><?php echo $customer['customers_firstname'] . ' ' . $customer['customers_lastname']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo $cc_list['redeem_ip']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo tep_date_short($cc_list['redeem_date']); ?></td>
-                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($cc_list['unique_id'] == $cInfo->unique_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_COUPON_ADMIN, 'page=' . $HTTP_GET_VARS['page'] . '&cid=' . $cc_list['coupon_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($cc_list['unique_id'] == $cInfo->unique_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_COUPON_ADMIN, 'page=' . $_GET['page'] . '&cid=' . $cc_list['coupon_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
@@ -271,7 +271,7 @@ $customer = tep_db_fetch_array($customer_query);
       $coupon_desc = tep_db_fetch_array($coupon_description_query);
       $count_customers = tep_db_query("select * from " . TABLE_COUPON_REDEEM_TRACK . " where coupon_id = '" . (int)$coupon_id . "' and customer_id = '" . $cInfo->customer_id . "'");
        
-      $heading[] = array('text' => '<b>[' . $HTTP_GET_VARS['cid'] . ']' . COUPON_NAME . ' ' . $coupon_desc['coupon_name'] . '</b>');
+      $heading[] = array('text' => '<b>[' . $_GET['cid'] . ']' . COUPON_NAME . ' ' . $coupon_desc['coupon_name'] . '</b>');
       $contents[] = array('text' => '<b>' . TEXT_REDEMPTIONS . '</b>');
       $contents[] = array('text' => TEXT_REDEMPTIONS_TOTAL . ':' . tep_db_num_rows($cc_query));
       $contents[] = array('text' => TEXT_REDEMPTIONS_CUSTOMER . ':' . tep_db_num_rows($count_customers));
@@ -290,7 +290,7 @@ $customer = tep_db_fetch_array($customer_query);
     $coupon_result = tep_db_fetch_array($coupon_query);
     $coupon_name_query = tep_db_query("select coupon_name from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . (int)$coupon_id . "' and language_id = '" . $languages_id . "'");
     $coupon_name = tep_db_fetch_array($coupon_name_query);
-    switch ($HTTP_POST_VARS['customers_email_address']) {
+    switch ($_POST['customers_email_address']) {
     case '***':
       $mail_sent_to = TEXT_ALL_CUSTOMERS;
       break;
@@ -298,7 +298,7 @@ $customer = tep_db_fetch_array($customer_query);
       $mail_sent_to = TEXT_NEWSLETTER_CUSTOMERS;
       break;
     default:
-      $mail_sent_to = $HTTP_POST_VARS['customers_email_address'];
+      $mail_sent_to = $_POST['customers_email_address'];
       break;
     }
 ?>
@@ -312,7 +312,7 @@ $customer = tep_db_fetch_array($customer_query);
         </table></td>
       </tr>
       <tr>
-          <tr><?php echo tep_draw_form('mail', FILENAME_COUPON_ADMIN, 'action=send_email_to_user&cid=' . $HTTP_GET_VARS['cid']); ?>
+          <tr><?php echo tep_draw_form('mail', FILENAME_COUPON_ADMIN, 'action=send_email_to_user&cid=' . $_GET['cid']); ?>
             <td><table border="0" width="100%" cellpadding="0" cellspacing="2">
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -330,19 +330,19 @@ $customer = tep_db_fetch_array($customer_query);
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
               <tr>
-                <td class="smallText"><b><?php echo TEXT_FROM; ?></b><br><?php echo htmlspecialchars(stripslashes($HTTP_POST_VARS['from'])); ?></td>
+                <td class="smallText"><b><?php echo TEXT_FROM; ?></b><br><?php echo htmlspecialchars(stripslashes($_POST['from'])); ?></td>
               </tr>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
               <tr>
-                <td class="smallText"><b><?php echo TEXT_SUBJECT; ?></b><br><?php echo htmlspecialchars(stripslashes($HTTP_POST_VARS['subject'])); ?></td>
+                <td class="smallText"><b><?php echo TEXT_SUBJECT; ?></b><br><?php echo htmlspecialchars(stripslashes($_POST['subject'])); ?></td>
               </tr>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
               <tr>
-                <td class="smallText"><b><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') { echo (stripslashes($HTTP_POST_VARS['message'])); } else { echo htmlspecialchars(stripslashes($HTTP_POST_VARS['message'])); } ?></td>
+                <td class="smallText"><b><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') { echo (stripslashes($_POST['message'])); } else { echo htmlspecialchars(stripslashes($_POST['message'])); } ?></td>
               </tr>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -351,9 +351,9 @@ $customer = tep_db_fetch_array($customer_query);
                 <td>
 <?php
 /* Re-Post all POST'ed variables */
-    reset($HTTP_POST_VARS);
-    while (list($key, $value) = each($HTTP_POST_VARS)) {
-      if (!is_array($HTTP_POST_VARS[$key])) {
+    reset($_POST);
+    while (list($key, $value) = each($_POST)) {
+      if (!is_array($_POST[$key])) {
         echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
       }
     }
@@ -393,7 +393,7 @@ $customer = tep_db_fetch_array($customer_query);
       </tr>
       <tr>
 
-          <tr><?php echo tep_draw_form('mail', FILENAME_COUPON_ADMIN, 'action=preview_email&cid='. $HTTP_GET_VARS['cid']); ?>
+          <tr><?php echo tep_draw_form('mail', FILENAME_COUPON_ADMIN, 'action=preview_email&cid='. $_GET['cid']); ?>
             <td><table border="0" cellpadding="0" cellspacing="2">
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -421,7 +421,7 @@ $customer = tep_db_fetch_array($customer_query);
               </tr>
               <tr>
                 <td class="main"><?php echo TEXT_CUSTOMER; ?>&nbsp;&nbsp;</td>
-                <td><?php echo tep_draw_pull_down_menu('customers_email_address', $customers, $HTTP_GET_VARS['customer']);?></td>
+                <td><?php echo tep_draw_pull_down_menu('customers_email_address', $customers, $_GET['customer']);?></td>
               </tr>
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -478,8 +478,8 @@ $customer = tep_db_fetch_array($customer_query);
 <?php
     break;
   case 'update_preview':
-  $coupon_min_order = (($HTTP_POST_VARS['coupon_min_order'] == round($HTTP_POST_VARS['coupon_min_order'])) ? number_format((double)$HTTP_POST_VARS['coupon_min_order'], 2) : number_format($HTTP_POST_VARS['coupon_min_order'], 2));
-  $coupon_amount = (($HTTP_POST_VARS['coupon_amount'] == round($HTTP_POST_VARS['coupon_amount'])) ? number_format((double)$HTTP_POST_VARS['coupon_amount'], 2) : number_format($HTTP_POST_VARS['coupon_amount'], 2));
+  $coupon_min_order = (($_POST['coupon_min_order'] == round($_POST['coupon_min_order'])) ? number_format((double)$_POST['coupon_min_order'], 2) : number_format($_POST['coupon_min_order'], 2));
+  $coupon_amount = (($_POST['coupon_amount'] == round($_POST['coupon_amount'])) ? number_format((double)$_POST['coupon_amount'], 2) : number_format($_POST['coupon_amount'], 2));
 ?>
       <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
@@ -492,11 +492,11 @@ $customer = tep_db_fetch_array($customer_query);
       </tr>
       <tr>
       <td class="main">
-<?php echo tep_draw_form('coupon', 'coupon_admin.php', 'action=update_confirm&oldaction=' . $HTTP_GET_VARS['oldaction'] . '&cid=' . $HTTP_GET_VARS['cid']); ?>
+<?php echo tep_draw_form('coupon', 'coupon_admin.php', 'action=update_confirm&oldaction=' . $_GET['oldaction'] . '&cid=' . $_GET['cid']); ?>
       <table border="0" width="100%" cellspacing="0" cellpadding="6">
       <tr>
         <td align="left" class="main" width="270"><?php echo COUPON_STATUS; ?></td>
-        <td align="left" class="main"><?php echo (($HTTP_POST_VARS['coupon_status'] == 'Y') ? IMAGE_ICON_STATUS_GREEN : IMAGE_ICON_STATUS_RED); ?></td>
+        <td align="left" class="main"><?php echo (($_POST['coupon_status'] == 'Y') ? IMAGE_ICON_STATUS_GREEN : IMAGE_ICON_STATUS_RED); ?></td>
       </tr>
 <?php
         $languages = tep_get_languages();
@@ -505,7 +505,7 @@ $customer = tep_db_fetch_array($customer_query);
 ?>
       <tr>
         <td align="left" class="main"><?php echo COUPON_NAME; ?></td>
-        <td align="left" class="main"><?php echo $HTTP_POST_VARS['coupon_name'][$language_id]; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_name'][$language_id]; ?></td>
       </tr>
 <?php
 }
@@ -517,14 +517,14 @@ $customer = tep_db_fetch_array($customer_query);
 ?>
       <tr>
         <td align="left" class="main"><?php echo COUPON_DESC; ?></td>
-        <td align="left" class="main"><?php echo $HTTP_POST_VARS['coupon_desc'][$language_id]; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_desc'][$language_id]; ?></td>
       </tr>
 <?php
 }
 ?>
       <tr>
         <td align="left" class="main"><?php echo COUPON_AMOUNT; ?></td>
-        <td align="left" class="main"><?php if (!$HTTP_POST_VARS['coupon_free_ship']) echo $coupon_amount; ?></td>
+        <td align="left" class="main"><?php if (!$_POST['coupon_free_ship']) echo $coupon_amount; ?></td>
       </tr>
 
       <tr>
@@ -535,7 +535,7 @@ $customer = tep_db_fetch_array($customer_query);
       <tr>
         <td align="left" class="main"><?php echo COUPON_FREE_SHIP; ?></td>
 <?php
-    if ($HTTP_POST_VARS['coupon_free_ship']) {
+    if ($_POST['coupon_free_ship']) {
 ?>
         <td align="left" class="main"><?php echo TEXT_FREE_SHIPPING; ?></td>
 <?php
@@ -549,8 +549,8 @@ $customer = tep_db_fetch_array($customer_query);
       <tr>
         <td align="left" class="main"><?php echo COUPON_CODE; ?></td>
 <?php
-    if ($HTTP_POST_VARS['coupon_code']) {
-      $c_code = $HTTP_POST_VARS['coupon_code'];
+    if ($_POST['coupon_code']) {
+      $c_code = $_POST['coupon_code'];
     } else {
       $c_code = $coupon_code;
     }
@@ -560,28 +560,28 @@ $customer = tep_db_fetch_array($customer_query);
 
       <tr>
         <td align="left" class="main"><?php echo COUPON_USES_COUPON; ?></td>
-        <td align="left" class="main"><?php echo $HTTP_POST_VARS['coupon_uses_coupon']; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_uses_coupon']; ?></td>
       </tr>
 
       <tr>
         <td align="left" class="main"><?php echo COUPON_USES_USER; ?></td>
-        <td align="left" class="main"><?php echo $HTTP_POST_VARS['coupon_uses_user']; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_uses_user']; ?></td>
       </tr>
 
        <tr>
         <td align="left" class="main"><?php echo COUPON_PRODUCTS; ?></td>
-        <td align="left" class="main"><?php echo $HTTP_POST_VARS['coupon_products']; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_products']; ?></td>
       </tr>
 
 
       <tr>
         <td align="left" class="main"><?php echo COUPON_CATEGORIES; ?></td>
-        <td align="left" class="main"><?php echo $HTTP_POST_VARS['coupon_categories']; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_categories']; ?></td>
       </tr>
       <tr>
         <td align="left" class="main"><?php echo COUPON_STARTDATE; ?></td>
 <?php
-    $start_date = date(DATE_FORMAT, mktime(0, 0, 0, $HTTP_POST_VARS['coupon_startdate_month'],$HTTP_POST_VARS['coupon_startdate_day'] ,$HTTP_POST_VARS['coupon_startdate_year'] ));
+    $start_date = date(DATE_FORMAT, mktime(0, 0, 0, $_POST['coupon_startdate_month'],$_POST['coupon_startdate_day'] ,$_POST['coupon_startdate_year'] ));
 ?>
         <td align="left" class="main"><?php echo $start_date; ?></td>
       </tr>
@@ -589,30 +589,30 @@ $customer = tep_db_fetch_array($customer_query);
       <tr>
         <td align="left" class="main"><?php echo COUPON_FINISHDATE; ?></td>
 <?php
-    $finish_date = date(DATE_FORMAT, mktime(0, 0, 0, $HTTP_POST_VARS['coupon_finishdate_month'],$HTTP_POST_VARS['coupon_finishdate_day'] ,$HTTP_POST_VARS['coupon_finishdate_year'] ));
-    echo date('Y-m-d', mktime(0, 0, 0, $HTTP_POST_VARS['coupon_startdate_month'],$HTTP_POST_VARS['coupon_startdate_day'] ,$HTTP_POST_VARS['coupon_startdate_year'] ));
+    $finish_date = date(DATE_FORMAT, mktime(0, 0, 0, $_POST['coupon_finishdate_month'],$_POST['coupon_finishdate_day'] ,$_POST['coupon_finishdate_year'] ));
+    echo date('Y-m-d', mktime(0, 0, 0, $_POST['coupon_startdate_month'],$_POST['coupon_startdate_day'] ,$_POST['coupon_startdate_year'] ));
 ?>
         <td align="left" class="main"><?php echo $finish_date; ?></td>
       </tr>
 <?php
-    echo tep_draw_hidden_field('coupon_status', $HTTP_POST_VARS['coupon_status']);
+    echo tep_draw_hidden_field('coupon_status', $_POST['coupon_status']);
         $languages = tep_get_languages();
         for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
           $language_id = $languages[$i]['id'];
-          echo tep_draw_hidden_field('coupon_name[' . $languages[$i]['id'] . ']', $HTTP_POST_VARS['coupon_name'][$language_id]);
-          echo tep_draw_hidden_field('coupon_desc[' . $languages[$i]['id'] . ']', $HTTP_POST_VARS['coupon_desc'][$language_id]);
+          echo tep_draw_hidden_field('coupon_name[' . $languages[$i]['id'] . ']', $_POST['coupon_name'][$language_id]);
+          echo tep_draw_hidden_field('coupon_desc[' . $languages[$i]['id'] . ']', $_POST['coupon_desc'][$language_id]);
        }
-    echo tep_draw_hidden_field('coupon_amount', $HTTP_POST_VARS['coupon_amount']);
-    echo tep_draw_hidden_field('coupon_min_order', $HTTP_POST_VARS['coupon_min_order']);
-    echo tep_draw_hidden_field('coupon_free_ship', $HTTP_POST_VARS['coupon_free_ship']);
+    echo tep_draw_hidden_field('coupon_amount', $_POST['coupon_amount']);
+    echo tep_draw_hidden_field('coupon_min_order', $_POST['coupon_min_order']);
+    echo tep_draw_hidden_field('coupon_free_ship', $_POST['coupon_free_ship']);
     echo tep_draw_hidden_field('coupon_code', $c_code);
-    echo tep_draw_hidden_field('coupon_uses_coupon', $HTTP_POST_VARS['coupon_uses_coupon']);
-    echo tep_draw_hidden_field('coupon_uses_user', $HTTP_POST_VARS['coupon_uses_user']);
-    echo tep_draw_hidden_field('coupon_products', $HTTP_POST_VARS['coupon_products']);
-    echo tep_draw_hidden_field('coupon_categories', $HTTP_POST_VARS['coupon_categories']);
-    echo tep_draw_hidden_field('coupon_startdate', date('Y-m-d', mktime(0, 0, 0, $HTTP_POST_VARS['coupon_startdate_month'],$HTTP_POST_VARS['coupon_startdate_day'] ,$HTTP_POST_VARS['coupon_startdate_year'] )));
-    echo tep_draw_hidden_field('coupon_finishdate', date('Y-m-d', mktime(0, 0, 0, $HTTP_POST_VARS['coupon_finishdate_month'],$HTTP_POST_VARS['coupon_finishdate_day'] ,$HTTP_POST_VARS['coupon_finishdate_year'] )));
-    echo tep_draw_hidden_field('date_created', ((tep_not_null($HTTP_POST_VARS['date_created'])) ? date('Y-m-d', strtotime($HTTP_POST_VARS['date_created'])) : '0'));
+    echo tep_draw_hidden_field('coupon_uses_coupon', $_POST['coupon_uses_coupon']);
+    echo tep_draw_hidden_field('coupon_uses_user', $_POST['coupon_uses_user']);
+    echo tep_draw_hidden_field('coupon_products', $_POST['coupon_products']);
+    echo tep_draw_hidden_field('coupon_categories', $_POST['coupon_categories']);
+    echo tep_draw_hidden_field('coupon_startdate', date('Y-m-d', mktime(0, 0, 0, $_POST['coupon_startdate_month'],$_POST['coupon_startdate_day'] ,$_POST['coupon_startdate_year'] )));
+    echo tep_draw_hidden_field('coupon_finishdate', date('Y-m-d', mktime(0, 0, 0, $_POST['coupon_finishdate_month'],$_POST['coupon_finishdate_day'] ,$_POST['coupon_finishdate_year'] )));
+    echo tep_draw_hidden_field('date_created', ((tep_not_null($_POST['date_created'])) ? date('Y-m-d', strtotime($_POST['date_created'])) : '0'));
 ?>
      <tr>
         <td align="center" class="main" colspan="2">
@@ -657,7 +657,7 @@ $customer = tep_db_fetch_array($customer_query);
     $coupon_status = $coupon['coupon_active'];
   case 'new':
 // molafish: set default if not editing an existing coupon or showing an error
-    if ($HTTP_GET_VARS['action'] == 'new' && !$HTTP_GET_VARS['oldaction'] == 'new') {
+    if ($_GET['action'] == 'new' && !$_GET['oldaction'] == 'new') {
       if (!$coupon_uses_user) {
         $coupon_uses_user=1;
       }
@@ -684,7 +684,7 @@ $customer = tep_db_fetch_array($customer_query);
       <tr>
       <td>
 <?php
-    echo tep_draw_form('coupon', 'coupon_admin.php', 'action=update&oldaction='. (($HTTP_GET_VARS['oldaction'] == 'voucheredit') ? $HTTP_GET_VARS['oldaction'] : $HTTP_GET_VARS['action']) . '&cid=' . $HTTP_GET_VARS['cid']);
+    echo tep_draw_form('coupon', 'coupon_admin.php', 'action=update&oldaction='. (($_GET['oldaction'] == 'voucheredit') ? $_GET['oldaction'] : $_GET['action']) . '&cid=' . $_GET['cid']);
 ?>
       <table border="0" width="100%" cellspacing="0" cellpadding="6">
       <tr>
@@ -762,24 +762,24 @@ $customer = tep_db_fetch_array($customer_query);
       <tr>
 <?php
 // molafish: fixed reset to default of dates when editing an existing coupon or showing an error message
-    if ($HTTP_GET_VARS['action'] == 'new' && !$HTTP_POST_VARS['coupon_startdate'] && !$HTTP_GET_VARS['oldaction'] == 'new') {
+    if ($_GET['action'] == 'new' && !$_POST['coupon_startdate'] && !$_GET['oldaction'] == 'new') {
       $coupon_startdate = explode("[-]", date('Y-m-d'));
-    } elseif (tep_not_null($HTTP_POST_VARS['coupon_startdate'])) {
-      $coupon_startdate = explode("[-]", $HTTP_POST_VARS['coupon_startdate']);
-    } elseif (!$HTTP_GET_VARS['oldaction'] == 'new') {   // for action=voucheredit
+    } elseif (tep_not_null($_POST['coupon_startdate'])) {
+      $coupon_startdate = explode("[-]", $_POST['coupon_startdate']);
+    } elseif (!$_GET['oldaction'] == 'new') {   // for action=voucheredit
       $coupon_startdate = explode("[-]", date('Y-m-d', strtotime($coupon['coupon_start_date'])));
     } else {   // error is being displayed
-      $coupon_startdate = explode("[-]", date('Y-m-d', mktime(0, 0, 0, $HTTP_POST_VARS['coupon_startdate_month'],$HTTP_POST_VARS['coupon_startdate_day'] ,$HTTP_POST_VARS['coupon_startdate_year'] )));
+      $coupon_startdate = explode("[-]", date('Y-m-d', mktime(0, 0, 0, $_POST['coupon_startdate_month'],$_POST['coupon_startdate_day'] ,$_POST['coupon_startdate_year'] )));
     }
-    if ($HTTP_GET_VARS['action'] == 'new' && !$HTTP_POST_VARS['coupon_finishdate'] && !$HTTP_GET_VARS['oldaction'] == 'new') {
+    if ($_GET['action'] == 'new' && !$_POST['coupon_finishdate'] && !$_GET['oldaction'] == 'new') {
       $coupon_finishdate = explode("[-]", date('Y-m-d'));
       $coupon_finishdate[0] = $coupon_finishdate[0] + 1;
-    } elseif (tep_not_null($HTTP_POST_VARS['coupon_finishdate'])) {
-      $coupon_finishdate = explode("[-]", $HTTP_POST_VARS['coupon_finishdate']);
-    } elseif (!$HTTP_GET_VARS['oldaction'] == 'new') {   // for action=voucheredit
+    } elseif (tep_not_null($_POST['coupon_finishdate'])) {
+      $coupon_finishdate = explode("[-]", $_POST['coupon_finishdate']);
+    } elseif (!$_GET['oldaction'] == 'new') {   // for action=voucheredit
       $coupon_finishdate = explode("[-]", date('Y-m-d', strtotime($coupon['coupon_expire_date'])));
     } else {   // error is being displayed
-      $coupon_finishdate = explode("[-]", date('Y-m-d', mktime(0, 0, 0, $HTTP_POST_VARS['coupon_finishdate_month'],$HTTP_POST_VARS['coupon_finishdate_day'] ,$HTTP_POST_VARS['coupon_finishdate_year'] )));
+      $coupon_finishdate = explode("[-]", date('Y-m-d', mktime(0, 0, 0, $_POST['coupon_finishdate_month'],$_POST['coupon_finishdate_day'] ,$_POST['coupon_finishdate_year'] )));
     }
 ?>
         <td align="left" class="main"><?php echo COUPON_STARTDATE; ?></td>
@@ -819,8 +819,8 @@ $customer = tep_db_fetch_array($customer_query);
     $status_array[] = array('id' => 'R', 'text' => TEXT_COUPON_REDEEMED);
     $status_array[] = array('id' => '*', 'text' => TEXT_COUPON_ALL);
 
-    if ($HTTP_GET_VARS['status']) {
-      $status = tep_db_prepare_input($HTTP_GET_VARS['status']);
+    if ($_GET['status']) {
+      $status = tep_db_prepare_input($_GET['status']);
     } else {
       // Changed from "Y" to "*" to see the Red Active and the Green Inactive status
       $status = '*';
@@ -845,13 +845,13 @@ $customer = tep_db_fetch_array($customer_query);
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-    if ($HTTP_GET_VARS['page'] > 1) $rows = $HTTP_GET_VARS['page'] * 20 - 20;
+    if ($_GET['page'] > 1) $rows = $_GET['page'] * 20 - 20;
     if ($status == 'Y' || $status == 'N') {
       $cc_query_raw = "select coupon_active, coupon_id, coupon_code, coupon_amount, coupon_minimum_order, coupon_type, coupon_start_date,coupon_expire_date,uses_per_user,uses_per_coupon,restrict_to_products, restrict_to_categories, date_created,date_modified from " . TABLE_COUPONS ." where coupon_active='" . tep_db_input($status) . "' and coupon_type != 'G'";
     } else {
       $cc_query_raw = "select coupon_active, coupon_id, coupon_code, coupon_amount, coupon_minimum_order, coupon_type, coupon_start_date,coupon_expire_date,uses_per_user,uses_per_coupon,restrict_to_products, restrict_to_categories, date_created,date_modified from " . TABLE_COUPONS . " where coupon_type != 'G'";
     }
-    $cc_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $cc_query_raw, $cc_query_numrows);
+    $cc_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $cc_query_raw, $cc_query_numrows);
     $cc_query = tep_db_query($cc_query_raw);
     while ($cc_list = tep_db_fetch_array($cc_query)) {
       $redeem_query = tep_db_query("select redeem_date from " . TABLE_COUPON_REDEEM_TRACK . " where coupon_id = '" . $cc_list['coupon_id'] . "'");
@@ -862,7 +862,7 @@ $customer = tep_db_fetch_array($customer_query);
       if (strlen($rows) < 2) {
         $rows = '0' . $rows;
       }
-      if (((!$HTTP_GET_VARS['cid']) || (@$HTTP_GET_VARS['cid'] == $cc_list['coupon_id'])) && (!$cInfo)) {
+      if (((!$_GET['cid']) || (@$_GET['cid'] == $cc_list['coupon_id'])) && (!$cInfo)) {
         $cInfo = new objectInfo($cc_list);
       }
       if ( (is_object($cInfo)) && ($cc_list['coupon_id'] == $cInfo->coupon_id) ) {
@@ -899,7 +899,7 @@ $customer = tep_db_fetch_array($customer_query);
         echo '<a href="' . tep_href_link(FILENAME_COUPON_ADMIN, 'action=setflag&flag=Y&cid=' . $cc_list['coupon_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
       }
 ?></td>
-                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($cc_list['coupon_id'] == $cInfo->coupon_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_COUPON_ADMIN, 'page=' . $HTTP_GET_VARS['page'] . '&cid=' . $cc_list['coupon_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($cc_list['coupon_id'] == $cInfo->coupon_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_COUPON_ADMIN, 'page=' . $_GET['page'] . '&cid=' . $cc_list['coupon_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
       $redeem_date = '';
@@ -914,12 +914,12 @@ $customer = tep_db_fetch_array($customer_query);
           <tr>
             <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td class="smallText">&nbsp;<?php echo $cc_split->display_count($cc_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_COUPONS); ?>&nbsp;</td>
-                <td align="right" class="smallText">&nbsp;<?php echo $cc_split->display_links($cc_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page'], 'status=' . $status); ?>&nbsp;</td>
+                <td class="smallText">&nbsp;<?php echo $cc_split->display_count($cc_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_COUPONS); ?>&nbsp;</td>
+                <td align="right" class="smallText">&nbsp;<?php echo $cc_split->display_links($cc_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], 'status=' . $status); ?>&nbsp;</td>
               </tr>
 
               <tr>
-                <td align="right" colspan="2" class="smallText"><?php echo '<a href="' . tep_href_link('coupon_admin.php', 'page=' . $HTTP_GET_VARS['page'] . '&cID=' . $cInfo->coupon_id . '&action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
+                <td align="right" colspan="2" class="smallText"><?php echo '<a href="' . tep_href_link('coupon_admin.php', 'page=' . $_GET['page'] . '&cID=' . $cInfo->coupon_id . '&action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
               </tr>
             </table></td>
           </tr>
@@ -930,7 +930,7 @@ $customer = tep_db_fetch_array($customer_query);
     $heading = array();
     $contents = array();
 
-    switch ($HTTP_GET_VARS['action']) {
+    switch ($_GET['action']) {
     case 'release':
       break;
     case 'voucherreport':
@@ -947,9 +947,9 @@ $customer = tep_db_fetch_array($customer_query);
         $amount = $currencies->format($amount);
       }
       $coupon_min_order = $currencies->format($cInfo->coupon_minimum_order);
-      if ($HTTP_GET_VARS['action'] == 'voucherdelete') {
+      if ($_GET['action'] == 'voucherdelete') {
         $contents[] = array('text'=> TEXT_CONFIRM_DELETE . '</br></br>' .
-                '<a href="'.tep_href_link('coupon_admin.php','action=confirmdelete&status=' . $status . (($HTTP_GET_VARS['page'] > 1) ? '&page=' . $HTTP_GET_VARS['page']: '') . '&cid='.$HTTP_GET_VARS['cid'],'NONSSL').'">'.tep_image_button('button_confirm.gif',IMAGE_CONFIRM).'</a>' .
+                '<a href="'.tep_href_link('coupon_admin.php','action=confirmdelete&status=' . $status . (($_GET['page'] > 1) ? '&page=' . $_GET['page']: '') . '&cid='.$_GET['cid'],'NONSSL').'">'.tep_image_button('button_confirm.gif',IMAGE_CONFIRM).'</a>' .
                 '<a href="'.tep_href_link('coupon_admin.php','cid='.$cInfo->coupon_id,'NONSSL').'">'.tep_image_button('button_cancel.gif',IMAGE_CANCEL).'</a>'
                 );
       } else {
@@ -977,7 +977,7 @@ $customer = tep_db_fetch_array($customer_query);
                      DATE_MODIFIED . '&nbsp;:&nbsp;' . tep_date_short($cInfo->date_modified) . '<br><br>' .
                      '<center><a href="'.tep_href_link('coupon_admin.php','action=email&cid='.$cInfo->coupon_id,'NONSSL').'">'.tep_image_button('button_email.gif',COUPON_BUTTON_EMAIL_VOUCHER).'</a>' .
                      '<a href="'.tep_href_link('coupon_admin.php','action=voucheredit&cid='.$cInfo->coupon_id,'NONSSL').'">'.tep_image_button('button_edit.gif',COUPON_BUTTON_EDIT_VOUCHER).'</a>' .
-                     '<a href="'.tep_href_link('coupon_admin.php','action=voucherdelete&status=' . $status . (($HTTP_GET_VARS['page'] > 1) ? '&page=' . $HTTP_GET_VARS['page']: '') . '&cid='.$cInfo->coupon_id,'NONSSL').'">'.tep_image_button('button_delete.gif',COUPON_BUTTON_DELETE_VOUCHER).'</a>' .
+                     '<a href="'.tep_href_link('coupon_admin.php','action=voucherdelete&status=' . $status . (($_GET['page'] > 1) ? '&page=' . $_GET['page']: '') . '&cid='.$cInfo->coupon_id,'NONSSL').'">'.tep_image_button('button_delete.gif',COUPON_BUTTON_DELETE_VOUCHER).'</a>' .
                      '<br><a href="'.tep_href_link('coupon_admin.php','action=voucherreport&cid='.$cInfo->coupon_id,'NONSSL').'">'.tep_image_button('button_report.gif',COUPON_BUTTON_VOUCHER_REPORT).'</a></center>');
         }
         break;

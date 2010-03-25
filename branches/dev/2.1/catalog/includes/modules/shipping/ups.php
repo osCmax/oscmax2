@@ -77,7 +77,7 @@ revised by Fritz Clapp as UPS Choice 1.8 2003/08/02
 
 // class methods
     function quote($method = '') {
-      global $HTTP_POST_VARS, $order, $shipping_weight, $shipping_num_boxes;
+      global $_POST, $order, $shipping_weight, $shipping_num_boxes;
 
       if ( (tep_not_null($method)) && (isset($this->types[$method])) ) {
         $prod = $method;

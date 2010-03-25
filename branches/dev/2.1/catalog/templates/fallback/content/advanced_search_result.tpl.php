@@ -64,8 +64,8 @@
    $status_tmp_product_prices_table = false;
    $status_need_to_get_prices = false;
    // find out if sorting by price has been requested
-   if ( (isset($HTTP_GET_VARS['sort'])) && (ereg('[1-8][ad]', $HTTP_GET_VARS['sort'])) && (substr($HTTP_GET_VARS['sort'], 0, 1) <= sizeof($column_list)) ){
-    $_sort_col = substr($HTTP_GET_VARS['sort'], 0 , 1);
+   if ( (isset($_GET['sort'])) && (ereg('[1-8][ad]', $_GET['sort'])) && (substr($_GET['sort'], 0, 1) <= sizeof($column_list)) ){
+    $_sort_col = substr($_GET['sort'], 0 , 1);
     if ($column_list[$_sort_col-1] == 'PRODUCT_LIST_PRICE') {
       $status_need_to_get_prices = true;
       }
@@ -125,12 +125,12 @@
 
   $where_str = " where p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = c.categories_id ";
 
-  if (isset($HTTP_GET_VARS['categories_id']) && tep_not_null($HTTP_GET_VARS['categories_id'])) {
-    if (isset($HTTP_GET_VARS['inc_subcat']) && ($HTTP_GET_VARS['inc_subcat'] == '1')) {
+  if (isset($_GET['categories_id']) && tep_not_null($_GET['categories_id'])) {
+    if (isset($_GET['inc_subcat']) && ($_GET['inc_subcat'] == '1')) {
       $subcategories_array = array();
-      tep_get_subcategories($subcategories_array, $HTTP_GET_VARS['categories_id']);
+      tep_get_subcategories($subcategories_array, $_GET['categories_id']);
 
-      $where_str .= " and p2c.products_id = p.products_id and p2c.products_id = pd.products_id and (p2c.categories_id = '" . (int)$HTTP_GET_VARS['categories_id'] . "'";
+      $where_str .= " and p2c.products_id = p.products_id and p2c.products_id = pd.products_id and (p2c.categories_id = '" . (int)$_GET['categories_id'] . "'";
 
       for ($i=0, $n=sizeof($subcategories_array); $i<$n; $i++ ) {
         $where_str .= " or p2c.categories_id = '" . (int)$subcategories_array[$i] . "'";
@@ -138,12 +138,12 @@
 
       $where_str .= ")";
     } else {
-      $where_str .= " and p2c.products_id = p.products_id and p2c.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$HTTP_GET_VARS['categories_id'] . "'";
+      $where_str .= " and p2c.products_id = p.products_id and p2c.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$_GET['categories_id'] . "'";
     }
   }
 
-  if (isset($HTTP_GET_VARS['manufacturers_id']) && tep_not_null($HTTP_GET_VARS['manufacturers_id'])) {
-    $where_str .= " and m.manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "'";
+  if (isset($_GET['manufacturers_id']) && tep_not_null($_GET['manufacturers_id'])) {
+    $where_str .= " and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'";
   }
 
   if (isset($search_keywords) && (sizeof($search_keywords) > 0)) {
@@ -159,7 +159,7 @@
         default:
           $keyword = tep_db_prepare_input($search_keywords[$i]);
           $where_str .= "(pd.products_name like '%" . tep_db_input($keyword) . "%' or p.products_model like '%" . tep_db_input($keyword) . "%' or m.manufacturers_name like '%" . tep_db_input($keyword) . "%'";
-          if (isset($HTTP_GET_VARS['search_in_description']) && ($HTTP_GET_VARS['search_in_description'] == '1')) $where_str .= " or pd.products_description like '%" . tep_db_input($keyword) . "%'";
+          if (isset($_GET['search_in_description']) && ($_GET['search_in_description'] == '1')) $where_str .= " or pd.products_description like '%" . tep_db_input($keyword) . "%'";
           $where_str .= ')';
           break;
       }
@@ -223,17 +223,17 @@
   if ( (DISPLAY_PRICE_WITH_TAX == 'true') && (tep_not_null($pfrom) || tep_not_null($pto)) ) {
     $where_str .= " group by p.products_id, tr.tax_priority";
   }
-  if ( (!isset($HTTP_GET_VARS['sort'])) || (!ereg('[1-8][ad]', $HTTP_GET_VARS['sort'])) || (substr($HTTP_GET_VARS['sort'], 0, 1) > sizeof($column_list)) ) {
+  if ( (!isset($_GET['sort'])) || (!ereg('[1-8][ad]', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
     for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
       if ($column_list[$i] == 'PRODUCT_LIST_NAME') {
-        $HTTP_GET_VARS['sort'] = $i+1 . 'a';
+        $_GET['sort'] = $i+1 . 'a';
         $order_str = ' order by pd.products_name';
         break;
       }
     }
   } else {
-    $sort_col = substr($HTTP_GET_VARS['sort'], 0 , 1);
-    $sort_order = substr($HTTP_GET_VARS['sort'], 1);
+    $sort_col = substr($_GET['sort'], 0 , 1);
+    $sort_order = substr($_GET['sort'], 1);
     $order_str = ' order by ';
     switch ($column_list[$sort_col-1]) {
       case 'PRODUCT_LIST_MODEL':

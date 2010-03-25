@@ -30,8 +30,8 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
   }
 
 // Always PHP_VERSION >= 4.1
-    $HTTP_GET_VARS =& $_GET;
-    $HTTP_POST_VARS =& $_POST;
+    $_GET =& $_GET;
+    $_POST =& $_POST;
     $HTTP_COOKIE_VARS =& $_COOKIE;
     $HTTP_SESSION_VARS =& $_SESSION;
     $HTTP_POST_FILES =& $_FILES;
@@ -39,8 +39,8 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
 
 // handle magic_quotes_gpc turned off.
   if (!get_magic_quotes_gpc()) {
-    do_magic_quotes_gpc($HTTP_GET_VARS);
-    do_magic_quotes_gpc($HTTP_POST_VARS);
+    do_magic_quotes_gpc($_GET);
+    do_magic_quotes_gpc($_POST);
     do_magic_quotes_gpc($HTTP_COOKIE_VARS);
   }
 

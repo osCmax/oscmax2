@@ -94,11 +94,11 @@ global $customer_id, $currencies, $language;
 
 function collect_posts() {
 // All tep_redirect URL parameters modified for this function in v5.13 by Rigadin
-global $HTTP_POST_VARS, $customer_id, $currencies, $cc_id;
-	if ($HTTP_POST_VARS['gv_redeem_code']) {
+global $_POST, $customer_id, $currencies, $cc_id;
+	if ($_POST['gv_redeem_code']) {
 
 // get some info from the coupon table
-	$coupon_query=tep_db_query("select coupon_id, coupon_amount, coupon_type, coupon_minimum_order,uses_per_coupon, uses_per_user, restrict_to_products,restrict_to_categories from " . TABLE_COUPONS . " where coupon_code='".$HTTP_POST_VARS['gv_redeem_code']."' and coupon_active='Y'");
+	$coupon_query=tep_db_query("select coupon_id, coupon_amount, coupon_type, coupon_minimum_order,uses_per_coupon, uses_per_user, restrict_to_products,restrict_to_categories from " . TABLE_COUPONS . " where coupon_code='".$_POST['gv_redeem_code']."' and coupon_active='Y'");
 	$coupon_result=tep_db_fetch_array($coupon_query);
 
 	if ($coupon_result['coupon_type'] != 'G') {
@@ -107,13 +107,13 @@ global $HTTP_POST_VARS, $customer_id, $currencies, $cc_id;
 			tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_INVALID_REDEEM_COUPON), 'SSL'));
 		}
 
-		$date_query=tep_db_query("select coupon_start_date from " . TABLE_COUPONS . " where coupon_start_date <= now() and coupon_code='".$HTTP_POST_VARS['gv_redeem_code']."'");
+		$date_query=tep_db_query("select coupon_start_date from " . TABLE_COUPONS . " where coupon_start_date <= now() and coupon_code='".$_POST['gv_redeem_code']."'");
 
 		if (tep_db_num_rows($date_query)==0) {
 			tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_INVALID_STARTDATE_COUPON), 'SSL'));
 		}
 
-		$date_query=tep_db_query("select coupon_expire_date from " . TABLE_COUPONS . " where coupon_expire_date >= now() and coupon_code='".$HTTP_POST_VARS['gv_redeem_code']."'");
+		$date_query=tep_db_query("select coupon_expire_date from " . TABLE_COUPONS . " where coupon_expire_date >= now() and coupon_code='".$_POST['gv_redeem_code']."'");
 
     if (tep_db_num_rows($date_query)==0) {
 			tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_INVALID_FINISDATE_COUPON), 'SSL'));
@@ -176,7 +176,7 @@ global $HTTP_POST_VARS, $customer_id, $currencies, $cc_id;
     } // ENDIF valid coupon code
   } // ENDIF code entered
   // v5.13a If no code entered and coupon redeem button pressed, give an alarm
-  if ($HTTP_POST_VARS['submit_redeem_coupon_x']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
+  if ($_POST['submit_redeem_coupon_x']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
 }
 
 function calculate_credit($amount) {
@@ -565,10 +565,10 @@ function product_price($product_id) {
 
 // START added by Rigadin in v5.13, needed to show module errors on checkout_payment page
     function get_error() {
-      global $HTTP_GET_VARS;
+      global $_GET;
 
       $error = array('title' => MODULE_ORDER_TOTAL_COUPON_TEXT_ERROR,
-                     'error' => stripslashes(urldecode($HTTP_GET_VARS['error'])));
+                     'error' => stripslashes(urldecode($_GET['error'])));
 
       return $error;
     }

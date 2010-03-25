@@ -80,7 +80,7 @@ $dup_y = $y;
 $y = $pdf->ezText("<b>" . TEXT_ORDER_NUMBER . " </b>" . $orders['orders_prefix'] . $orders['orders_id'] ."\n\n",SUB_HEADING_FONT_SIZE);
 
 // order date
-if ($HTTP_POST_VARS['show_order_date']) { 
+if ($_POST['show_order_date']) { 
 	$pdf->ezSetY($dup_y);
 	$pdf->ezText("<b>" . TEXT_ORDER_DATE . " </b>" . date(TEXT_ORDER_FORMAT, strtotime($order->info['date_purchased'])) ."\n\n",SUB_HEADING_FONT_SIZE,array('justification'=>'right'));
 	}

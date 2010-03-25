@@ -227,7 +227,7 @@ class upsxml {
 
     // class methods
     function quote($method = '') {
-        global $HTTP_POST_VARS, $order, $shipping_weight, $shipping_num_boxes, $total_weight, $boxcount, $cart, $packing;
+        global $_POST, $order, $shipping_weight, $shipping_num_boxes, $total_weight, $boxcount, $cart, $packing;
         // UPS purports that if the origin is left out, it defaults to the account's location. Yeah, right.
         $state = $order->delivery['state'];
         $zone_query = tep_db_query("select zone_code from " . TABLE_ZONES . " where zone_name = '" .  tep_db_input($order->delivery['state']) . "'");

@@ -59,11 +59,11 @@ if (RECAPTCHA_ON == 'true') {
 ****************** ADD PRODUCT TO SHOPPING CART ********************
 *******************************************************************/
 
-  if (isset($HTTP_POST_VARS['add_wishprod'])) {
-	if(isset($HTTP_POST_VARS['add_prod_x'])) {
-		foreach ($HTTP_POST_VARS['add_wishprod'] as $value) {
+  if (isset($_POST['add_wishprod'])) {
+	if(isset($_POST['add_prod_x'])) {
+		foreach ($_POST['add_wishprod'] as $value) {
 			$product_id = tep_get_prid($value);
-			$cart->add_cart($product_id, $cart->get_quantity(tep_get_uprid($product_id, $HTTP_POST_VARS['id'][$value]))+1, $HTTP_POST_VARS['id'][$value]);
+			$cart->add_cart($product_id, $cart->get_quantity(tep_get_uprid($product_id, $_POST['id'][$value]))+1, $_POST['id'][$value]);
 		}
 	}
   }
@@ -73,9 +73,9 @@ if (RECAPTCHA_ON == 'true') {
 ****************** DELETE PRODUCT FROM WISHLIST ********************
 *******************************************************************/
 
-  if (isset($HTTP_POST_VARS['add_wishprod'])) {
-	if(isset($HTTP_POST_VARS['delete_prod_x'])) {
-		foreach ($HTTP_POST_VARS['add_wishprod'] as $value) {
+  if (isset($_POST['add_wishprod'])) {
+	if(isset($_POST['delete_prod_x'])) {
+		foreach ($_POST['add_wishprod'] as $value) {
 			$wishList->remove($value);
 		}
 	}
@@ -86,14 +86,14 @@ if (RECAPTCHA_ON == 'true') {
 ************* EMAIL THE WISHLIST TO MULTIPLE FRIENDS ***************
 *******************************************************************/
 
-  if (isset($HTTP_POST_VARS['email_prod_x'])) {
+  if (isset($_POST['email_prod_x'])) {
 
 		$errors = false;
 		$guest_errors = "";
 		$email_errors = "";
 		$message_error = "";
 
-		if(strlen($HTTP_POST_VARS['message']) < '1') {
+		if(strlen($_POST['message']) < '1') {
 			$error = true;
 			$message_error .= "<div class=\"messageStackError\"><img src=\"images/icons/error.gif\" /> " . ERROR_MESSAGE . "</div>";
 		}			
@@ -111,7 +111,7 @@ if (RECAPTCHA_ON == 'true') {
 			$arr1 = array('$from_name', '$link');
 			$arr2 = array($from_name, $link);
 			$replace = str_replace($arr1, $arr2, WISHLIST_EMAIL_LINK);
-			$message = tep_db_prepare_input($HTTP_POST_VARS['message']);
+			$message = tep_db_prepare_input($_POST['message']);
 			$body = $message . $replace;
 		} else {
 			if(strlen($_POST['your_name']) < '1') {
@@ -138,12 +138,12 @@ if (RECAPTCHA_ON == 'true') {
 			$from_name = stripslashes($_POST['your_name']);
 			$from_email = $_POST['your_email'];
 			$subject = $from_name . ' ' . WISHLIST_EMAIL_SUBJECT;
-			$message = stripslashes($HTTP_POST_VARS['message']);
+			$message = stripslashes($_POST['message']);
 
 			$z = 0;
 			$prods = "";
-			foreach($HTTP_POST_VARS['prod_name'] as $name) {
-				$prods .= stripslashes($name) . "  " . stripslashes($HTTP_POST_VARS['prod_att'][$z]) . "\n" . $HTTP_POST_VARS['prod_link'][$z] . "\n\n";
+			foreach($_POST['prod_name'] as $name) {
+				$prods .= stripslashes($name) . "  " . stripslashes($_POST['prod_att'][$z]) . "\n" . $_POST['prod_link'][$z] . "\n\n";
 				$z++;
 			}
 			$body = $message . "\n\n" . $prods . "\n\n" . WISHLIST_EMAIL_GUEST;
@@ -199,7 +199,7 @@ if (RECAPTCHA_ON == 'true') {
 		}
 		if($error == false) {
 			$j = 0;
-			foreach($HTTP_POST_VARS['friend'] as $friendx) {
+			foreach($_POST['friend'] as $friendx) {
 				if($friendx != '') {
 					tep_mail($friendx, $email[$j], $subject, $friendx . ",\n\n" . $body, $from_name, $from_email);
 				}

@@ -33,7 +33,7 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
       $authors_list = '';
       while ($authors = tep_db_fetch_array($authors_query)) {
         $authors_name = ((strlen($authors['authors_name']) > MAX_DISPLAY_AUTHOR_NAME_LEN) ? substr($authors['authors_name'], 0, MAX_DISPLAY_AUTHOR_NAME_LEN) . '..' : $authors['authors_name']);
-        if (isset($HTTP_GET_VARS['authors_id']) && ($HTTP_GET_VARS['authors_id'] == $authors['authors_id'])) $authors_name = '<b>' . $authors_name .'</b>';
+        if (isset($_GET['authors_id']) && ($_GET['authors_id'] == $authors['authors_id'])) $authors_name = '<b>' . $authors_name .'</b>';
         $authors_list .= '<a href="' . tep_href_link(FILENAME_ARTICLES, 'authors_id=' . $authors['authors_id']) . '">' . $authors_name . '</a><br>';
       }
 
@@ -56,7 +56,7 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
 
       
       $boxContent = tep_draw_form('authors', tep_href_link(FILENAME_ARTICLES, '', 'NONSSL', false), 'get');
-      $boxContent .= tep_draw_pull_down_menu('authors_id', $authors_array, (isset($HTTP_GET_VARS['authors_id']) ? $HTTP_GET_VARS['authors_id'] : ''), 'onChange="this.form.submit();" size="' . MAX_AUTHORS_LIST . '" style="width: 100%"') . tep_hide_session_id();
+      $boxContent .= tep_draw_pull_down_menu('authors_id', $authors_array, (isset($_GET['authors_id']) ? $_GET['authors_id'] : ''), 'onChange="this.form.submit();" size="' . MAX_AUTHORS_LIST . '" style="width: 100%"') . tep_hide_session_id();
        $boxContent .= '</form>';
 
 

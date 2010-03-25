@@ -22,7 +22,7 @@
     $lng_exists = false;
     for ($i = 0, $n = sizeof($languages); $i < $n; $i++)
     {
-        if ($languages[$i]['directory'] == $HTTP_GET_VARS['lngdir']) {
+        if ($languages[$i]['directory'] == $_GET['lngdir']) {
          $lng_exists = true;
          $lng_display_id = $languages[$i]['id'];
         }
@@ -33,36 +33,36 @@
 
     if (!$lng_exists)
     {
-        $HTTP_POST_VARS ['lngdir'] = $language;
-        $HTTP_GET_VARS ['lngdir'] = $language;
+        $_POST ['lngdir'] = $language;
+        $_GET ['lngdir'] = $language;
     }
 
-  if ($HTTP_GET_VARS['action']) {
-    switch ($HTTP_GET_VARS['action']) {
+  if ($_GET['action']) {
+    switch ($_GET['action']) {
       case 'setflag': //set the status of a news item.
-        if ( ($HTTP_GET_VARS['flag'] == '0') || ($HTTP_GET_VARS['flag'] == '1') ) {
-          if ($HTTP_GET_VARS['affiliate_news_id']) {
-            tep_db_query("update " . TABLE_AFFILIATE_NEWS . " set news_status = '" . $HTTP_GET_VARS['flag'] . "' where news_id = '" . $HTTP_GET_VARS['affiliate_news_id'] . "'");
+        if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') ) {
+          if ($_GET['affiliate_news_id']) {
+            tep_db_query("update " . TABLE_AFFILIATE_NEWS . " set news_status = '" . $_GET['flag'] . "' where news_id = '" . $_GET['affiliate_news_id'] . "'");
           }
         }
 
-        tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWS, isset($HTTP_GET_VARS['lngdir']) ? 'lngdir=' . $HTTP_GET_VARS['lngdir']:''));
+        tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWS, isset($_GET['lngdir']) ? 'lngdir=' . $_GET['lngdir']:''));
         break;
 
       case 'delete_affiliate_news_confirm': //user has confirmed deletion of news article.
-        if ($HTTP_POST_VARS['affiliate_news_id']) {
-          $affiliate_news_id = tep_db_prepare_input($HTTP_POST_VARS['affiliate_news_id']);
+        if ($_POST['affiliate_news_id']) {
+          $affiliate_news_id = tep_db_prepare_input($_POST['affiliate_news_id']);
           tep_db_query("delete from " . TABLE_AFFILIATE_NEWS . " where news_id = '" . tep_db_input($affiliate_news_id) . "'");
           tep_db_query("delete from " . TABLE_AFFILIATE_NEWS_CONTENTS . " where affiliate_news_id = '" . tep_db_input($affiliate_news_id) . "'");
         }
 
-        tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWS, isset($HTTP_GET_VARS['lngdir']) ? 'lngdir=' . $HTTP_GET_VARS['lngdir']:''));
+        tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWS, isset($_GET['lngdir']) ? 'lngdir=' . $_GET['lngdir']:''));
         break;
 
       case 'insert_affiliate_news': //insert a new news article.
-         $a_headlines_array = $HTTP_POST_VARS['headlines'];
-         $a_contents_array = $HTTP_POST_VARS['contents'];
-         $a_languages_check_array = $HTTP_POST_VARS['a_languages_check'];
+         $a_headlines_array = $_POST['headlines'];
+         $a_contents_array = $_POST['contents'];
+         $a_languages_check_array = $_POST['a_languages_check'];
          $languages = tep_get_languages();
          for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
           $a_languages_id = $languages[$i]['id'];
@@ -85,17 +85,17 @@
           }
          }
 
-        tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWS, isset($HTTP_GET_VARS['lngdir']) ? 'lngdir=' . $HTTP_GET_VARS['lngdir']:''));
+        tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWS, isset($_GET['lngdir']) ? 'lngdir=' . $_GET['lngdir']:''));
         break;
 
       case 'update_affiliate_news': //user wants to modify a news article.
-        if(isset($HTTP_GET_VARS['affiliate_news_id'])) {
-         $a_news_id = tep_db_prepare_input($HTTP_GET_VARS['affiliate_news_id']);
-         $a_headlines_array = $HTTP_POST_VARS['headlines'];
-         $a_contents_array = $HTTP_POST_VARS['contents'];
-         $a_languages_check_array = $HTTP_POST_VARS['a_languages_check'];
-         $a_delete_lng_news_array = $HTTP_POST_VARS['delete_news'];
-         $a_count_lng_def = $HTTP_POST_VARS['a_count'];
+        if(isset($_GET['affiliate_news_id'])) {
+         $a_news_id = tep_db_prepare_input($_GET['affiliate_news_id']);
+         $a_headlines_array = $_POST['headlines'];
+         $a_contents_array = $_POST['contents'];
+         $a_languages_check_array = $_POST['a_languages_check'];
+         $a_delete_lng_news_array = $_POST['delete_news'];
+         $a_count_lng_def = $_POST['a_count'];
          $languages = tep_get_languages();
          for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
           $a_languages_id = $languages[$i]['id'];
@@ -128,7 +128,7 @@
           }
          }
         }
-        tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWS, isset($HTTP_GET_VARS['lngdir']) ? 'lngdir=' . $HTTP_GET_VARS['lngdir']:''));
+        tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWS, isset($_GET['lngdir']) ? 'lngdir=' . $_GET['lngdir']:''));
         break;
     }
   }
@@ -158,10 +158,10 @@
 <!-- body_text //-->
     <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
-  if ($HTTP_GET_VARS['action'] == 'new_affiliate_news') { //insert or edit a news item
+  if ($_GET['action'] == 'new_affiliate_news') { //insert or edit a news item
 
 // npe update begin multilingual 040908
-//      $affiliate_news_query = tep_db_query("se lect news_id, headline, content from " . TABLE_AFFILIATE_NEWS . " where news_id = '" . $HTTP_GET_VARS['affiliate_news_id'] . "' and languages_id ='" . $a_language . "'");
+//      $affiliate_news_query = tep_db_query("se lect news_id, headline, content from " . TABLE_AFFILIATE_NEWS . " where news_id = '" . $_GET['affiliate_news_id'] . "' and languages_id ='" . $a_language . "'");
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -174,14 +174,14 @@
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
-      <tr><?php echo tep_draw_form('new_affiliate_news', FILENAME_AFFILIATE_NEWS, (isset($HTTP_GET_VARS['affiliate_news_id']) ? 'affiliate_news_id=' . $HTTP_GET_VARS['affiliate_news_id'] . '&action=update_affiliate_news' : 'action=insert_affiliate_news' ). (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:''), 'post', 'enctype="multipart/form-data"'); ?>
+      <tr><?php echo tep_draw_form('new_affiliate_news', FILENAME_AFFILIATE_NEWS, (isset($_GET['affiliate_news_id']) ? 'affiliate_news_id=' . $_GET['affiliate_news_id'] . '&action=update_affiliate_news' : 'action=insert_affiliate_news' ). (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:''), 'post', 'enctype="multipart/form-data"'); ?>
         <td><table border="0" cellspacing="0" cellpadding="2">
  <?php
               $languages = tep_get_languages();
               for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
                $a_languages_id = $languages[$i]['id'];
-               if ( isset($HTTP_GET_VARS['affiliate_news_id']) ) { //editing exsiting news item
-      $affiliate_news_query = tep_db_query("select news_id, affiliate_news_contents_id, affiliate_news_headlines as headline, affiliate_news_contents as content, date_added, news_status from " . TABLE_AFFILIATE_NEWS . ", " . TABLE_AFFILIATE_NEWS_CONTENTS . " where news_id = '" . $HTTP_GET_VARS['affiliate_news_id'] . "' and news_id = affiliate_news_id and affiliate_news_languages_id ='" . $a_languages_id . "'");
+               if ( isset($_GET['affiliate_news_id']) ) { //editing exsiting news item
+      $affiliate_news_query = tep_db_query("select news_id, affiliate_news_contents_id, affiliate_news_headlines as headline, affiliate_news_contents as content, date_added, news_status from " . TABLE_AFFILIATE_NEWS . ", " . TABLE_AFFILIATE_NEWS_CONTENTS . " where news_id = '" . $_GET['affiliate_news_id'] . "' and news_id = affiliate_news_id and affiliate_news_languages_id ='" . $a_languages_id . "'");
       $affiliate_news = tep_db_fetch_array($affiliate_news_query);
 //      tep_draw_hidden_field('a_languages_check[' . $i . ']', 'set');
     } else { //adding new news item
@@ -205,8 +205,8 @@
             </td>
         <td class="main" align="right">
           <?php
-            isset($HTTP_GET_VARS['affiliate_news_id']) ? $cancel_button = '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $HTTP_GET_VARS['affiliate_news_id']) . (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:'') . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>' : $cancel_button = '';
-            echo (isset($HTTP_GET_VARS['affiliate_news_id']) ? tep_image_submit('button_update.gif', IMAGE_UPDATE) : tep_image_submit('button_insert.gif', IMAGE_INSERT) )  . $cancel_button ;
+            isset($_GET['affiliate_news_id']) ? $cancel_button = '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $_GET['affiliate_news_id']) . (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:'') . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>' : $cancel_button = '';
+            echo (isset($_GET['affiliate_news_id']) ? tep_image_submit('button_update.gif', IMAGE_UPDATE) : tep_image_submit('button_insert.gif', IMAGE_INSERT) )  . $cancel_button ;
           ?>
         </td>
           </tr>
@@ -238,8 +238,8 @@
 // npe admin begin edit languages on affiliate_news.php 040809 #change
 //          echo tep_draw_form('lng', FILENAME_AFFILIATE_NEWS, '', 'get');
           echo tep_draw_form('lng', FILENAME_AFFILIATE_NEWS, '', 'get');
-          if (isset($HTTP_GET_VARS['page'])) echo tep_draw_hidden_field('page', $HTTP_GET_VARS['page']);
-          if (isset($HTTP_GET_VARS['affiliate_news_id'])) echo tep_draw_hidden_field('affiliate_news_id', $HTTP_GET_VARS['affiliate_news_id']);
+          if (isset($_GET['page'])) echo tep_draw_hidden_field('page', $_GET['page']);
+          if (isset($_GET['affiliate_news_id'])) echo tep_draw_hidden_field('affiliate_news_id', $_GET['affiliate_news_id']);
 // npe admin end edit languages on edit_textdata.php 040809 #change
 ?>            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
@@ -274,25 +274,25 @@
       $affiliate_news_count++;
       $rows++;
 
-      if ( ((!$HTTP_GET_VARS['affiliate_news_id']) || (@$HTTP_GET_VARS['affiliate_news_id'] == $affiliate_news['news_id'])) && (!$selected_item) && (substr($HTTP_GET_VARS['action'], 0, 4) != 'new_') ) {
+      if ( ((!$_GET['affiliate_news_id']) || (@$_GET['affiliate_news_id'] == $affiliate_news['news_id'])) && (!$selected_item) && (substr($_GET['action'], 0, 4) != 'new_') ) {
         $selected_item = $affiliate_news;
       }
       if ( (is_array($selected_item)) && ($affiliate_news['news_id'] == $selected_item['news_id']) ) {
-        echo '              <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'hand\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $affiliate_news['news_id']) . (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:'') . '\'">' . "\n";
+        echo '              <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'hand\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $affiliate_news['news_id']) . (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:'') . '\'">' . "\n";
       } else {
-        echo '              <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'hand\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $affiliate_news['news_id']) . (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:'') . '\'">' . "\n";
+        echo '              <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'hand\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $affiliate_news['news_id']) . (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:'') . '\'">' . "\n";
       }
 ?>
                 <td class="dataTableContent"><?php echo '&nbsp;' . $affiliate_news['headline']; ?></td>
                 <td class="dataTableContent" align="center">
 <?php
       if ($affiliate_news['news_status'] == '1') {
-        echo tep_image(DIR_WS_IMAGES . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'action=setflag&flag=0&affiliate_news_id=' . $affiliate_news['news_id'] . (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:'')) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+        echo tep_image(DIR_WS_IMAGES . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'action=setflag&flag=0&affiliate_news_id=' . $affiliate_news['news_id'] . (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:'')) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
       } else {
-        echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'action=setflag&flag=1&affiliate_news_id=' . $affiliate_news['news_id'])  . (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:'') . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+        echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'action=setflag&flag=1&affiliate_news_id=' . $affiliate_news['news_id'])  . (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:'') . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
       }
 ?></td>
-                <td class="dataTableContent" align="right"><?php if ($affiliate_news['news_id'] == $HTTP_GET_VARS['affiliate_news_id']) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $affiliate_news['news_id']) . (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:'') . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ($affiliate_news['news_id'] == $_GET['affiliate_news_id']) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $affiliate_news['news_id']) . (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:'') . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
@@ -302,7 +302,7 @@
                 <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText"><?php echo '<br>' . TEXT_NEWS_ITEMS . '&nbsp;' . $affiliate_news_count; ?></td>
-                    <td align="right" class="smallText"><?php echo '&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'action=new_affiliate_news'  . (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:'')) . '">' . tep_image_button('button_new_news_item.gif', IMAGE_NEW_NEWS_ITEM) . '</a>'; ?>&nbsp;</td>
+                    <td align="right" class="smallText"><?php echo '&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'action=new_affiliate_news'  . (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:'')) . '">' . tep_image_button('button_new_news_item.gif', IMAGE_NEW_NEWS_ITEM) . '</a>'; ?>&nbsp;</td>
                   </tr>
                 </table></td>
               </tr>
@@ -310,16 +310,16 @@
 <?php
     $heading = array();
     $contents = array();
-    switch ($HTTP_GET_VARS['action']) {
+    switch ($_GET['action']) {
       case 'delete_affiliate_news': //generate box for confirming a news article deletion
         $heading[] = array('text'   => '<b>' . TEXT_INFO_HEADING_DELETE_ITEM . '</b>');
         
-        $contents = array('form'    => tep_draw_form('news', FILENAME_AFFILIATE_NEWS, 'action=delete_affiliate_news_confirm' . (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:'')) . tep_draw_hidden_field('affiliate_news_id', $HTTP_GET_VARS['affiliate_news_id']));
+        $contents = array('form'    => tep_draw_form('news', FILENAME_AFFILIATE_NEWS, 'action=delete_affiliate_news_confirm' . (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:'')) . tep_draw_hidden_field('affiliate_news_id', $_GET['affiliate_news_id']));
         $contents[] = array('text'  => TEXT_DELETE_ITEM_INTRO);
         $contents[] = array('text'  => '<br><b>' . $selected_item['headline'] . '</b>');
         
         $contents[] = array('align' => 'center',
-                            'text'  => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $selected_item['news_id']) . (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:'') . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+                            'text'  => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $selected_item['news_id']) . (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:'') . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
 
       default:
@@ -328,7 +328,7 @@
             $heading[] = array('text' => '<b>' . $selected_item['headline'] . '</b>');
 
             $contents[] = array('align' => 'center', 
-                                'text' => '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $selected_item['news_id'] . '&action=new_affiliate_news' . (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:'') ) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $selected_item['news_id'] . '&action=delete_affiliate_news' . (isset($HTTP_GET_VARS['lngdir']) ? '&lngdir=' . $HTTP_GET_VARS['lngdir']:'')) . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+                                'text' => '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $selected_item['news_id'] . '&action=new_affiliate_news' . (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:'') ) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $selected_item['news_id'] . '&action=delete_affiliate_news' . (isset($_GET['lngdir']) ? '&lngdir=' . $_GET['lngdir']:'')) . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
             $contents[] = array('text' => '<br>' . $selected_item['content']);
           }
         } else { // create category/product info

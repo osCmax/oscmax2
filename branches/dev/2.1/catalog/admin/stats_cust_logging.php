@@ -67,10 +67,10 @@ $Id: stats_customers.php 3 2006-05-27 04:59:07Z user $
 				<td class="dataTableHeadingContent"><?php echo TABLE_HEADING_EVENT; ?></td>
               </tr>
 <?php
-  if (isset($HTTP_GET_VARS['page']) && ($HTTP_GET_VARS['page'] > 1)) $rows = $HTTP_GET_VARS['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
+  if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
   $logging_query_raw = "select l.login_number, l.user_name, l.ip_address, l.type, l.login_time from " . TABLE_CUSTOMER_LOG . " l order by l.login_number DESC";
 
-  $logging_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $logging_query_raw, $logging_query_numrows);
+  $logging_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $logging_query_raw, $logging_query_numrows);
 // fix counted customers
   $logging_query_numrows = tep_db_query("select login_number from " . TABLE_CUSTOMER_LOG . " group by login_number");
   $logging_query_numrows = tep_db_num_rows($logging_query_numrows);
@@ -109,9 +109,9 @@ $Id: stats_customers.php 3 2006-05-27 04:59:07Z user $
           <tr>
             <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td class="smallText" align="left" width="45%"><?php echo $logging_split->display_count($logging_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_LOGS); ?></td>
+                <td class="smallText" align="left" width="45%"><?php echo $logging_split->display_count($logging_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_LOGS); ?></td>
                 <td class="smallText" align="center" width="10%"><?php echo '<a href="' . tep_href_link(FILENAME_STATS_CUST_LOGGING, 'action=reset_customer_log') . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
-                <td class="smallText" align="right" width="45%"><?php echo $logging_split->display_links($logging_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page']); ?>&nbsp;</td>
+                <td class="smallText" align="right" width="45%"><?php echo $logging_split->display_links($logging_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?>&nbsp;</td>
               </tr>
             </table></td>
           </tr>

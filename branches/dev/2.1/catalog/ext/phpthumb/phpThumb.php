@@ -20,7 +20,7 @@ $starttime = array_sum(explode(' ', microtime()));
 // this script relies on the superglobal arrays, fake it here for old PHP versions
 if (phpversion() < '4.1.0') {
 	$_SERVER = $HTTP_SERVER_VARS;
-	$_GET    = $HTTP_GET_VARS;
+	$_GET    = $_GET;
 }
 
 // instantiate a new phpThumb() object

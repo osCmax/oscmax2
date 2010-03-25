@@ -15,14 +15,14 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
 
   $current_boxes = DIR_FS_ADMIN . DIR_WS_BOXES;
 
-  if ($HTTP_GET_VARS['action']) {
-    switch ($HTTP_GET_VARS['action']) {
+  if ($_GET['action']) {
+    switch ($_GET['action']) {
       case 'check_password':
-        $check_pass_query = tep_db_query("select admin_password as confirm_password from " . TABLE_ADMIN . " where admin_id = '" . $HTTP_POST_VARS['id_info'] . "'");
+        $check_pass_query = tep_db_query("select admin_password as confirm_password from " . TABLE_ADMIN . " where admin_id = '" . $_POST['id_info'] . "'");
         $check_pass = tep_db_fetch_array($check_pass_query);
 
         // Check that password is good
-        if (!tep_validate_password($HTTP_POST_VARS['password_confirmation'], $check_pass['confirm_password'])) {
+        if (!tep_validate_password($_POST['password_confirmation'], $check_pass['confirm_password'])) {
           tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'action=check_account&error=password'));
         } else {
           //$confirm = 'confirm_account';
@@ -32,8 +32,8 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
 
         break;
       case 'save_account':
-        $admin_id = tep_db_prepare_input($HTTP_POST_VARS['id_info']);
-        $admin_email_address = tep_db_prepare_input($HTTP_POST_VARS['admin_email_address']);
+        $admin_id = tep_db_prepare_input($_POST['id_info']);
+        $admin_email_address = tep_db_prepare_input($_POST['admin_email_address']);
         $stored_email[] = 'NONE';
         $hiddenPassword = '-hidden-';
 
@@ -42,21 +42,21 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
           $stored_email[] = $check_email['admin_email_address'];
         }
 
-        if (in_array($HTTP_POST_VARS['admin_email_address'], $stored_email)) {
+        if (in_array($_POST['admin_email_address'], $stored_email)) {
           tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'action=edit_process&error=email'));
         } else {
-          $sql_data_array = array('admin_username' => tep_db_prepare_input($HTTP_POST_VARS['admin_username']),
-                                  'admin_firstname' => tep_db_prepare_input($HTTP_POST_VARS['admin_firstname']),
-                                  'admin_lastname' => tep_db_prepare_input($HTTP_POST_VARS['admin_lastname']),
-                                  'admin_email_address' => tep_db_prepare_input($HTTP_POST_VARS['admin_email_address']),
-                                  'admin_password' => tep_encrypt_password(tep_db_prepare_input($HTTP_POST_VARS['admin_password'])),
+          $sql_data_array = array('admin_username' => tep_db_prepare_input($_POST['admin_username']),
+                                  'admin_firstname' => tep_db_prepare_input($_POST['admin_firstname']),
+                                  'admin_lastname' => tep_db_prepare_input($_POST['admin_lastname']),
+                                  'admin_email_address' => tep_db_prepare_input($_POST['admin_email_address']),
+                                  'admin_password' => tep_encrypt_password(tep_db_prepare_input($_POST['admin_password'])),
                                   'admin_modified' => 'now()');
 
           tep_db_perform(TABLE_ADMIN, $sql_data_array, 'update', 'admin_id = \'' . $admin_id . '\'');
 
-          tep_mail($HTTP_POST_VARS['admin_firstname'] . ' ' . $HTTP_POST_VARS['admin_lastname'], $HTTP_POST_VARS['admin_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $HTTP_POST_VARS['admin_username'], HTTP_SERVER . DIR_WS_ADMIN, $HTTP_POST_VARS['admin_email_address'], $hiddenPassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+          tep_mail($_POST['admin_firstname'] . ' ' . $_POST['admin_lastname'], $_POST['admin_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $_POST['admin_username'], HTTP_SERVER . DIR_WS_ADMIN, $_POST['admin_email_address'], $hiddenPassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
-          tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'page=' . $HTTP_GET_VARS['page'] . '&mID=' . $admin_id));
+          tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'page=' . $_GET['page'] . '&mID=' . $admin_id));
         }
         break;
     }
@@ -87,7 +87,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
     </table></td>
 <!-- body_text //-->
     <td width="100%" valign="top">
-      <?php if ($HTTP_GET_VARS['action'] == 'edit_process') { echo tep_draw_form('account', FILENAME_ADMIN_ACCOUNT, 'action=save_account', 'post', 'enctype="multipart/form-data"'); } elseif ($HTTP_GET_VARS['action'] == 'check_account') { echo tep_draw_form('account', FILENAME_ADMIN_ACCOUNT, 'action=check_password', 'post', 'enctype="multipart/form-data"'); } else { echo tep_draw_form('account', FILENAME_ADMIN_ACCOUNT, 'action=check_account', 'post', 'enctype="multipart/form-data"'); } ?>
+      <?php if ($_GET['action'] == 'edit_process') { echo tep_draw_form('account', FILENAME_ADMIN_ACCOUNT, 'action=save_account', 'post', 'enctype="multipart/form-data"'); } elseif ($_GET['action'] == 'check_account') { echo tep_draw_form('account', FILENAME_ADMIN_ACCOUNT, 'action=check_password', 'post', 'enctype="multipart/form-data"'); } else { echo tep_draw_form('account', FILENAME_ADMIN_ACCOUNT, 'action=check_account', 'post', 'enctype="multipart/form-data"'); } ?>
       <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -114,7 +114,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
                 <td>
                   <table border="0" cellspacing="0" cellpadding="3">
 <?php
-    if ( ($HTTP_GET_VARS['action'] == 'edit_process') && (tep_session_is_registered('confirm_account')) ) {
+    if ( ($_GET['action'] == 'edit_process') && (tep_session_is_registered('confirm_account')) ) {
 ?>
                     <tr>
                       <td class="dataTableContent"><nobr><?php echo TEXT_INFO_USERNAME; ?>&nbsp;&nbsp;&nbsp;</nobr></td>
@@ -130,7 +130,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
                     </tr>
                     <tr>
                       <td class="dataTableContent"><nobr><?php echo TEXT_INFO_EMAIL; ?>&nbsp;&nbsp;&nbsp;</nobr></td>
-                      <td class="dataTableContent"><?php if ($HTTP_GET_VARS['error']) { echo tep_draw_input_field('admin_email_address', $myAccount['admin_email_address']) . ' <nobr>' . TEXT_INFO_ERROR . '</nobr>'; } else { echo tep_draw_input_field('admin_email_address', $myAccount['admin_email_address']); } ?></td>
+                      <td class="dataTableContent"><?php if ($_GET['error']) { echo tep_draw_input_field('admin_email_address', $myAccount['admin_email_address']) . ' <nobr>' . TEXT_INFO_ERROR . '</nobr>'; } else { echo tep_draw_input_field('admin_email_address', $myAccount['admin_email_address']); } ?></td>
                     </tr>
                     <tr>
                       <td class="dataTableContent"><nobr><?php echo TEXT_INFO_PASSWORD; ?>&nbsp;&nbsp;&nbsp;</nobr></td>
@@ -185,7 +185,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
                 </td>
               </tr>
               <tr>
-                <td><table width="100%" border="0" cellspacing="0" cellpadding="3"><tr><td class="smallText" valign="top"><?php echo TEXT_INFO_MODIFIED . $myAccount['admin_modified']; ?></td><td align="right"><?php if ($HTTP_GET_VARS['action'] == 'edit_process') { echo '<a href="' . tep_href_link(FILENAME_ADMIN_ACCOUNT) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a> '; if (tep_session_is_registered('confirm_account')) { echo tep_image_submit('button_save.gif', IMAGE_SAVE, 'onClick="validateForm();return document.returnValue"'); } } elseif ($HTTP_GET_VARS['action'] == 'check_account') { echo '&nbsp;'; } else { echo tep_image_submit('button_edit.gif', IMAGE_EDIT); } ?></td><tr></table></td>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="3"><tr><td class="smallText" valign="top"><?php echo TEXT_INFO_MODIFIED . $myAccount['admin_modified']; ?></td><td align="right"><?php if ($_GET['action'] == 'edit_process') { echo '<a href="' . tep_href_link(FILENAME_ADMIN_ACCOUNT) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a> '; if (tep_session_is_registered('confirm_account')) { echo tep_image_submit('button_save.gif', IMAGE_SAVE, 'onClick="validateForm();return document.returnValue"'); } } elseif ($_GET['action'] == 'check_account') { echo '&nbsp;'; } else { echo tep_image_submit('button_edit.gif', IMAGE_EDIT); } ?></td><tr></table></td>
               </tr>
             </table>
 
@@ -194,7 +194,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
 <?php
   $heading = array();
   $contents = array();
-  switch ($HTTP_GET_VARS['action']) {
+  switch ($_GET['action']) {
     case 'edit_process':
       $heading[] = array('text' => '<b>&nbsp;' . TEXT_INFO_HEADING_DEFAULT . '</b>');
 
@@ -205,7 +205,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
       $heading[] = array('text' => '<b>&nbsp;' . TEXT_INFO_HEADING_CONFIRM_PASSWORD . '</b>');
 
       $contents[] = array('text' => '&nbsp;' . TEXT_INFO_INTRO_CONFIRM_PASSWORD . tep_draw_hidden_field('id_info', $myAccount['admin_id']));
-      if ($HTTP_GET_VARS['error']) {
+      if ($_GET['error']) {
         $contents[] = array('text' => '&nbsp;' . TEXT_INFO_INTRO_CONFIRM_PASSWORD_ERROR);
       }
       $contents[] = array('align' => 'center', 'text' => tep_draw_password_field('password_confirmation'));

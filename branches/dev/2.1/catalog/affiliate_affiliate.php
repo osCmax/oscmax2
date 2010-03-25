@@ -18,21 +18,21 @@ $Id: affiliate_affiliate.php 3 2006-05-27 04:59:07Z user $
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
-    $affiliate_username = tep_db_prepare_input($HTTP_POST_VARS['affiliate_username']);
-    $affiliate_password = tep_db_prepare_input($HTTP_POST_VARS['affiliate_password']);
+  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
+    $affiliate_username = tep_db_prepare_input($_POST['affiliate_username']);
+    $affiliate_password = tep_db_prepare_input($_POST['affiliate_password']);
 
 // Check if username exists
     $check_affiliate_query = tep_db_query("select affiliate_id, affiliate_firstname, affiliate_password, affiliate_email_address from " . TABLE_AFFILIATE . " where affiliate_email_address = '" . tep_db_input($affiliate_username) . "'");
 
     if (!tep_db_num_rows($check_affiliate_query)) {
-      $HTTP_GET_VARS['login'] = 'fail';
+      $_GET['login'] = 'fail';
     } else {
       $check_affiliate = tep_db_fetch_array($check_affiliate_query);
 
 // Check that password is good
       if (!tep_validate_password($affiliate_password, $check_affiliate['affiliate_password'])) {
-        $HTTP_GET_VARS['login'] = 'fail';
+        $_GET['login'] = 'fail';
       } else {
         $affiliate_id = $check_affiliate['affiliate_id'];
         tep_session_register('affiliate_id');

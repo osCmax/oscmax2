@@ -26,7 +26,7 @@ tep_href_link('Order_Info_Process.php', '', 'SSL')
       <tr>
         <td>
 <?php
-  $email_address = tep_db_prepare_input($HTTP_GET_VARS['email_address']);
+  $email_address = tep_db_prepare_input($_GET['email_address']);
   $account['entry_country_id'] = STORE_COUNTRY;
 
   require(DIR_WS_MODULES . 'Order_Info_Check.php');

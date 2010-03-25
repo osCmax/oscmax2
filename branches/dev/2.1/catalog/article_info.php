@@ -19,7 +19,7 @@ $Id: article_info.php 3 2006-05-27 04:59:07Z user $
 
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLE_INFO);
 
-  $article_check_query = tep_db_query("select count(*) as total from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_status = '1' and a.articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and ad.articles_id = a.articles_id and ad.language_id = '" . (int)$languages_id . "'");
+  $article_check_query = tep_db_query("select count(*) as total from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_status = '1' and a.articles_id = '" . (int)$_GET['articles_id'] . "' and ad.articles_id = a.articles_id and ad.language_id = '" . (int)$languages_id . "'");
   $article_check = tep_db_fetch_array($article_check_query);
 
   //Commented to correct articles breadcrumb adding a bad link

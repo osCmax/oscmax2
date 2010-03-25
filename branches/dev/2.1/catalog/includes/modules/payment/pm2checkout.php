@@ -76,7 +76,7 @@ $Id: pm2checkout.php 14 2006-07-28 17:42:07Z user $
     }
 
     function process_button() {
-      global $HTTP_POST_VARS, $currencies, $currency, $order, $languages_id;
+      global $_POST, $currencies, $currency, $order, $languages_id;
 
       $process_button_string = tep_draw_hidden_field('sid', MODULE_PAYMENT_2CHECKOUT_LOGIN) .
                                tep_draw_hidden_field('total', number_format($order->info['total'], 2)) .
@@ -127,15 +127,15 @@ $Id: pm2checkout.php 14 2006-07-28 17:42:07Z user $
     }
 
     function before_process() {
-      global $HTTP_POST_VARS;
+      global $_POST;
 
-      if ($HTTP_POST_VARS['credit_card_processed'] != 'Y') {
+      if ($_POST['credit_card_processed'] != 'Y') {
         tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(MODULE_PAYMENT_2CHECKOUT_TEXT_ERROR_MESSAGE), 'SSL', true, false));
       }
     }
 
     function after_process() {
-      global $HTTP_POST_VARS, $order, $insert_id;
+      global $_POST, $order, $insert_id;
 
       if (MODULE_PAYMENT_2CHECKOUT_TESTMODE == 'Test') {
         $sql_data_array = array('orders_id' => (int)$insert_id, 
@@ -148,7 +148,7 @@ $Id: pm2checkout.php 14 2006-07-28 17:42:07Z user $
       }
 
       if (tep_not_null(MODULE_PAYMENT_2CHECKOUT_SECRET_WORD) && (MODULE_PAYMENT_2CHECKOUT_TESTMODE == 'Production')) {
-        if (md5(MODULE_PAYMENT_2CHECKOUT_SECRET_WORD . MODULE_PAYMENT_2CHECKOUT_LOGIN . $HTTP_POST_VARS['order_number'] . number_format($order->info['total'], 2)) != $HTTP_POST_VARS['key']) {
+        if (md5(MODULE_PAYMENT_2CHECKOUT_SECRET_WORD . MODULE_PAYMENT_2CHECKOUT_LOGIN . $_POST['order_number'] . number_format($order->info['total'], 2)) != $_POST['key']) {
           $sql_data_array = array('orders_id' => (int)$insert_id, 
                                   'orders_status_id' => (int)$order->info['order_status'], 
                                   'date_added' => 'now()', 

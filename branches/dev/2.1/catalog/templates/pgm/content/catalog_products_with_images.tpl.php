@@ -300,12 +300,12 @@
 
 <?php
   if (strlen($listing)>0) { $sort = $listing; } else { $sort = ""; }
-  if ($HTTP_GET_VARS['page'] > 1) {
-          $rows = $HTTP_GET_VARS['page'] * 20 - 20;
-          $page = $HTTP_GET_VARS['page'];
+  if ($_GET['page'] > 1) {
+          $rows = $_GET['page'] * 20 - 20;
+          $page = $_GET['page'];
   }
-  if ($HTTP_GET_VARS['page']<= 0) ($page --);
-  if ($HTTP_GET_VARS['page']== 1) ($page ++);
+  if ($_GET['page']<= 0) ($page --);
+  if ($_GET['page']== 1) ($page ++);
   if ($page <=0 ) $page = 1;
 
     $customers_group_id = '0';

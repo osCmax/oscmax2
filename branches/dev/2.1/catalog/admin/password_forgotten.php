@@ -13,10 +13,10 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
   require('includes/application_top.php');
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_LOGIN);
   
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
-    $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
-    $username = tep_db_prepare_input($HTTP_POST_VARS['username']);
-    $log_times = $HTTP_POST_VARS['log_times']+1;
+  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
+    $email_address = tep_db_prepare_input($_POST['email_address']);
+    $username = tep_db_prepare_input($_POST['username']);
+    $log_times = $_POST['log_times']+1;
     if ($log_times >= 4) {
       tep_session_register('password_forgotten');
     }
@@ -24,13 +24,13 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
 // Check if email exists
     $check_admin_query = tep_db_query("select admin_id as check_id, admin_username as check_username, admin_lastname as check_lastname, admin_email_address as check_email_address from " . TABLE_ADMIN . " where admin_email_address = '" . tep_db_input($email_address) . "'");
     if (!tep_db_num_rows($check_admin_query)) {
-      $HTTP_GET_VARS['login'] = 'fail';
+      $_GET['login'] = 'fail';
     } else {
       $check_admin = tep_db_fetch_array($check_admin_query);
       if ($check_admin['check_username'] != $username) {
-        $HTTP_GET_VARS['login'] = 'fail';
+        $_GET['login'] = 'fail';
       } else {
-        $HTTP_GET_VARS['login'] = 'success';
+        $_GET['login'] = 'success';
         
         function randomize() {
           $salt = "ABCDEFGHIJKLMNOPQRSTUVWXWZabchefghjkmnpqrstuvwxyz0123456789";
@@ -85,9 +85,9 @@ $Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
                                   <tr><td><table border="0" width="100%" height="100%" cellspacing="3" cellpadding="2" bgcolor="#F3F3F3">
 
 <?php
-  if ($HTTP_GET_VARS['login'] == 'success') {
+  if ($_GET['login'] == 'success') {
     $success_message = TEXT_FORGOTTEN_SUCCESS;
-  } elseif ($HTTP_GET_VARS['login'] == 'fail') {
+  } elseif ($_GET['login'] == 'fail') {
     $info_message = TEXT_FORGOTTEN_ERROR;
   }
   if (tep_session_is_registered('password_forgotten')) {

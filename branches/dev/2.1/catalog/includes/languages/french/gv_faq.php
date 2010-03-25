@@ -20,7 +20,7 @@ define('TEXT_INFORMATION', '<a name="Top"></a>
   <a href="'.tep_href_link(FILENAME_GV_FAQ,'faq_item=4','NONSSL').'">4 - Comment valider un ch&egrave;que cadeau ?</a><br>
   <a href="'.tep_href_link(FILENAME_GV_FAQ,'faq_item=5','NONSSL').'">5 - En cas de probl&egrave;mes !</a><br>
 ');
-switch ($HTTP_GET_VARS['faq_item']) {
+switch ($_GET['faq_item']) {
   case '1':
 define('SUB_HEADING_TITLE','<br><br>Pourquoi acheter des ch&egrave;ques cadeaux ?<br><br>');
 define('SUB_HEADING_TEXT','Tr&egrave;s utile, les ch&egrave;ques cadeaux peuvent servir pour faire plaisir &agrave; l\'un de vos proches, pour qui vous ne savez pas quoi lui offrir. Ils s\'ach&egrave;tent sur le site comme un article.<br><br>Si vous avez actuellement des ch&egrave;ques cadeaux sur votre compte, le solde appara&icirc;tra dans la bo&icirc;te panier en haut de la colonne de droite.<br><br>Vous pouvez utiliser ce solde au moment de passer une commande sur notre boutique ou bien en faire b&eacute;n&eacute;ficier vos proches par simple email.<br><br>');

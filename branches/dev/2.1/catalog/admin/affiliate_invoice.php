@@ -19,7 +19,7 @@ $Id: affiliate_invoice.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
-  $payments_query = tep_db_query("select * from " . TABLE_AFFILIATE_PAYMENT . " where affiliate_payment_id = '" . $HTTP_GET_VARS['pID'] . "'");
+  $payments_query = tep_db_query("select * from " . TABLE_AFFILIATE_PAYMENT . " where affiliate_payment_id = '" . $_GET['pID'] . "'");
   $payments = tep_db_fetch_array($payments_query);
 
   $affiliate_address['firstname'] = $payments['affiliate_firstname'];
@@ -93,7 +93,7 @@ $Id: affiliate_invoice.php 14 2006-07-28 17:42:07Z user $
         <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_COMMISSION_VALUE; ?></td>
       </tr>
 <?php
-  $affiliate_payment_query = tep_db_query("select * from " . TABLE_AFFILIATE_PAYMENT . " where affiliate_payment_id = '" . $HTTP_GET_VARS['pID'] . "'");
+  $affiliate_payment_query = tep_db_query("select * from " . TABLE_AFFILIATE_PAYMENT . " where affiliate_payment_id = '" . $_GET['pID'] . "'");
   $affiliate_payment = tep_db_fetch_array($affiliate_payment_query);
   $affiliate_sales_query = tep_db_query("select * from " . TABLE_AFFILIATE_SALES . " where affiliate_payment_id = '" . $payments['affiliate_payment_id'] . "' order by affiliate_payment_date desc");
   while ($affiliate_sales = tep_db_fetch_array($affiliate_sales_query)) {

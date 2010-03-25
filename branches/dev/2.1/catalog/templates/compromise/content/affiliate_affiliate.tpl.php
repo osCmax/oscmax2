@@ -10,7 +10,7 @@
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td> 
       </tr> 
 <?php 
-  if (isset($HTTP_GET_VARS['login']) && ($HTTP_GET_VARS['login'] == 'fail')) { 
+  if (isset($_GET['login']) && ($_GET['login'] == 'fail')) { 
     $info_message = TEXT_LOGIN_ERROR; 
   } 
 

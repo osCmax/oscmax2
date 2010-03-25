@@ -13,7 +13,7 @@
 define('TEXT_MAIN', '');
 define('TABLE_HEADING_NEW_ARTICLES', 'New Articles in %s');
 
-if ( ($topic_depth == 'articles') || (isset($HTTP_GET_VARS['authors_id'])) ) {
+if ( ($topic_depth == 'articles') || (isset($_GET['authors_id'])) ) {
   define('HEADING_TITLE', $topics['topics_name']);
   define('TABLE_HEADING_ARTICLES', 'Articles');
   define('TABLE_HEADING_AUTHOR', 'Author');

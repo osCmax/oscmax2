@@ -55,12 +55,12 @@ if (isset($_GET['help'])){
 //
 // entry for bouncing csv string back as file
 if (isset($_POST['csv'])) {
-if ($HTTP_POST_VARS['saveas']) {  // rebound posted csv as save file
-		$savename= $HTTP_POST_VARS['saveas'] . ".csv";
+if ($_POST['saveas']) {  // rebound posted csv as save file
+		$savename= $_POST['saveas'] . ".csv";
 		}
 		else $savename='unknown.csv';
 $csv_string = '';
-if ($HTTP_POST_VARS['csv']) $csv_string=$HTTP_POST_VARS['csv'];
+if ($_POST['csv']) $csv_string=$_POST['csv'];
   if (strlen($csv_string)>0){
   header("Expires: Mon, 26 Nov 1962 00:00:00 GMT");
   header("Last-Modified: " . gmdate('D,d M Y H:i:s') . ' GMT');
@@ -76,14 +76,14 @@ exit;
 //
 // entry for popup display of tax detail
 // show=ot_tax 
-if (isset($HTTP_GET_VARS['show'])) {
-	$ot_type = tep_db_prepare_input($HTTP_GET_VARS['show']);
-	$sel_month = tep_db_prepare_input($HTTP_GET_VARS['month']);
-	$sel_year = tep_db_prepare_input($HTTP_GET_VARS['year']);
+if (isset($_GET['show'])) {
+	$ot_type = tep_db_prepare_input($_GET['show']);
+	$sel_month = tep_db_prepare_input($_GET['month']);
+	$sel_year = tep_db_prepare_input($_GET['year']);
 	$sel_day = 0;
-	if (isset($HTTP_GET_VARS['day'])) $sel_day = tep_db_prepare_input($HTTP_GET_VARS['day']);
+	if (isset($_GET['day'])) $sel_day = tep_db_prepare_input($_GET['day']);
 	$status = '';
-	if ($HTTP_GET_VARS['status']) $status = tep_db_prepare_input($HTTP_GET_VARS['status']);
+	if ($_GET['status']) $status = tep_db_prepare_input($_GET['status']);
 	// construct query for selected detail
 	$detail_query_raw = "select sum(round(ot.value,2)) amount, ot.title description from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where ";
 	if ($status<>'') $detail_query_raw .= "o.orders_status ='" . $status . "' and ";
@@ -117,9 +117,9 @@ exit;
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <?php
 // set printer-friendly toggle
-(tep_db_prepare_input($HTTP_GET_VARS['print']=='yes')) ? $print=true : $print=false;
+(tep_db_prepare_input($_GET['print']=='yes')) ? $print=true : $print=false;
 // set inversion toggle
-(tep_db_prepare_input($HTTP_GET_VARS['invert']=='yes')) ? $invert=true : $invert=false;
+(tep_db_prepare_input($_GET['invert']=='yes')) ? $invert=true : $invert=false;
 ?>
 <!-- header //-->
 <?php if(!$print) require(DIR_WS_INCLUDES . 'header.php'); ?>
@@ -154,9 +154,9 @@ exit;
 <?php 
 // detect whether this is monthly detail request
 $sel_month = 0;
-	if ($HTTP_GET_VARS['month']&& $HTTP_GET_VARS['year']) {
-	$sel_month = tep_db_prepare_input($HTTP_GET_VARS['month']);
-	$sel_year = tep_db_prepare_input($HTTP_GET_VARS['year']);
+	if ($_GET['month']&& $_GET['year']) {
+	$sel_month = tep_db_prepare_input($_GET['month']);
+	$sel_year = tep_db_prepare_input($_GET['year']);
 	};
 // get list of orders_status names for dropdown selection
   $orders_statuses = array();
@@ -169,8 +169,8 @@ $sel_month = 0;
 	  };
 // name of status selection
 $orders_status_text = TEXT_ALL_ORDERS;
-if ($HTTP_GET_VARS['status']) {
-  $status = tep_db_prepare_input($HTTP_GET_VARS['status']);
+if ($_GET['status']) {
+  $status = tep_db_prepare_input($_GET['status']);
   $orders_status_query = tep_db_query("select orders_status_name from " . TABLE_ORDERS_STATUS . " where language_id = '" . $languages_id . "' and orders_status_id =" . $status);
   while ($orders_status = tep_db_fetch_array($orders_status_query)) {
 	  $orders_status_text = $orders_status['orders_status_name'];}
@@ -235,8 +235,8 @@ row for buttons to print, save, and help
 				<?php  // back button if monthly detail
 				if ($sel_month<>0)	 {
 				echo "<a href='" . $_SERVER['PHP_SELF'] . "?&selected_box=reports";
-				if (isset($HTTP_GET_VARS['status'])) echo "&status=" . $status;
-				if (isset($HTTP_GET_VARS['invert'])) echo "&invert=yes";
+				if (isset($_GET['status'])) echo "&status=" . $status;
+				if (isset($_GET['invert'])) echo "&invert=yes";
 				echo "' title='" . TEXT_BUTTON_REPORT_BACK_DESC . "'>" . TEXT_BUTTON_REPORT_BACK . "</a>";
 				};
 				?>
@@ -321,8 +321,8 @@ $csv_accum .= "\n";
 // order totals, the driving force 
 $status = '';
 $sales_query_raw = "select sum(round(ot.value,2)) gross_sales, monthname(o.date_purchased) row_month, year(o.date_purchased) row_year, month(o.date_purchased) i_month, dayofmonth(o.date_purchased) row_day  from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where ";
-if ($HTTP_GET_VARS['status']) {
-  $status = tep_db_prepare_input($HTTP_GET_VARS['status']);
+if ($_GET['status']) {
+  $status = tep_db_prepare_input($_GET['status']);
   $sales_query_raw .= "o.orders_status =" . $status . " and ";
 	};
 $sales_query_raw .= "ot.class = " . $class_val_total;

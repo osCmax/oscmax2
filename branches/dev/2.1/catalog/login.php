@@ -27,13 +27,13 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   $error = false;
   // BOF PHONE ORDER
 
-  //if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
+  //if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
 
-  if ((isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) || ((isset($HTTP_POST_VARS['action']) && ($HTTP_POST_VARS['action'] == 'process')))) {
+  if ((isset($_GET['action']) && ($_GET['action'] == 'process')) || ((isset($_POST['action']) && ($_POST['action'] == 'process')))) {
 
   // EOF PHONE ORDER
-    $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
-    $password = tep_db_prepare_input($HTTP_POST_VARS['password']);
+    $email_address = tep_db_prepare_input($_POST['email_address']);
+    $password = tep_db_prepare_input($_POST['password']);
 
 // Check if email exists
 // LINE CHANGED: MOD - Separate Pricing per Customer
@@ -51,7 +51,7 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 
 	  //if (!tep_validate_password($password, $check_customer['customers_password'])) {
 
-	  if (!tep_validate_password($password, $check_customer['customers_password']) && !isset($HTTP_POST_VARS['action'])) {
+	  if (!tep_validate_password($password, $check_customer['customers_password']) && !isset($_POST['action'])) {
 
 	  
         $error = true;
@@ -59,14 +59,14 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', '" . date('F j, Y, g:i a') . "')");
 
       } else {
-        if (SESSION_RECREATE == 'True' && !isset($HTTP_POST_VARS['action'])) {
+        if (SESSION_RECREATE == 'True' && !isset($_POST['action'])) {
 
 		//echo "sdsd";
 		//Added by PGM
 		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', '" . date('F j, Y, g:i a') . "')");
 
 
-		if(isset($HTTP_POST_VARS['phoneorder']) && ($HTTP_POST_VARS['phoneorder'] == 'order')){
+		if(isset($_POST['phoneorder']) && ($_POST['phoneorder'] == 'order')){
           	tep_session_recreate();
 		}
 	// EOF PHONE ORDER	

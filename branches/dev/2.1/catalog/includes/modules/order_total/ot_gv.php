@@ -206,10 +206,10 @@ function mod_process() {
 
     function collect_posts() {
 // Security Update + $cot_gv added in Global in v5.13 by Rigadin + updated URL parameters of all tep_redirect function called inside this function
-      global $currencies, $HTTP_POST_VARS, $customer_id, $coupon_no, $REMOTE_ADDR, $cot_gv;
-      if ($HTTP_POST_VARS['gv_redeem_code']) {
+      global $currencies, $_POST, $customer_id, $coupon_no, $REMOTE_ADDR, $cot_gv;
+      if ($_POST['gv_redeem_code']) {
 	    // Security update by Rigadin in v5.13: add slashes in front of user input
-        $gv_query = tep_db_query("select coupon_id, coupon_type, coupon_amount from " . TABLE_COUPONS . " where coupon_code = '" . tep_db_input($HTTP_POST_VARS['gv_redeem_code']) . "'");
+        $gv_query = tep_db_query("select coupon_id, coupon_type, coupon_amount from " . TABLE_COUPONS . " where coupon_code = '" . tep_db_input($_POST['gv_redeem_code']) . "'");
         $gv_result = tep_db_fetch_array($gv_query);
         if (tep_db_num_rows($gv_query) != 0) {
           $redeem_query = tep_db_query("select * from " . TABLE_COUPON_REDEEM_TRACK . " where coupon_id = '" . $gv_result['coupon_id'] . "'");
@@ -219,7 +219,7 @@ function mod_process() {
           }
         }
 		// Next line added by Rigadin in v5.13 to give an error when unknown code entered
-		elseif ($HTTP_POST_VARS['submit_redeem_x']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_INVALID_REDEEM_GV), 'SSL'));
+		elseif ($_POST['submit_redeem_x']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_INVALID_REDEEM_GV), 'SSL'));
         if ($gv_result['coupon_type'] == 'G') {
           $gv_amount = $gv_result['coupon_amount'];
           // Things to set
@@ -247,7 +247,7 @@ function mod_process() {
           tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_REDEEMED_AMOUNT. $currencies->format($gv_amount)), 'SSL'));
        }  
      }
-     if ($HTTP_POST_VARS['submit_redeem_x'] && !$HTTP_POST_VARS['gv_redeem_code']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
+     if ($_POST['submit_redeem_x'] && !$_POST['gv_redeem_code']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
    }  
 
     function calculate_credit($amount) {
@@ -324,10 +324,10 @@ function mod_process() {
     }    
 // START added by Rigadin in v5.13, needed to show module errors on checkout_payment page
     function get_error() {
-      global $HTTP_GET_VARS;
+      global $_GET;
 
       $error = array('title' => MODULE_ORDER_TOTAL_GV_TEXT_ERROR,
-                     'error' => stripslashes(urldecode($HTTP_GET_VARS['error'])));
+                     'error' => stripslashes(urldecode($_GET['error'])));
 
       return $error;
     }

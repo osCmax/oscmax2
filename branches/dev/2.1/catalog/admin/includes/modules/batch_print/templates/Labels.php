@@ -30,18 +30,18 @@ define('GENERAL_FONT_SIZE', '14');
 define('GENERAL_LINE_SPACING', '15');
 define('GENERAL_FONT_COLOR', BLACK);
 
-if ($HTTP_POST_VARS['pull_status']){ $pull_w_status = " and o.orders_status = ". $HTTP_POST_VARS['pull_status']; }
-if ($HTTP_POST_VARS['startpos']){ $startpos = $HTTP_POST_VARS['startpos']; }
+if ($_POST['pull_status']){ $pull_w_status = " and o.orders_status = ". $_POST['pull_status']; }
+if ($_POST['startpos']){ $startpos = $_POST['startpos']; }
 else { $startpos = 0; }
-if ($HTTP_POST_VARS['address']){ 
-if ($HTTP_POST_VARS['address'] == "billing")
+if ($_POST['address']){ 
+if ($_POST['address'] == "billing")
 $billing = true;
 else
 $billing = false;
 }
 else { $billing = false; }
 
-if ($HTTP_POST_VARS['endpos']){ $endpos = $HTTP_POST_VARS['endpos']; }
+if ($_POST['endpos']){ $endpos = $_POST['endpos']; }
 else { $endpos = NUM_LABELS_PER_PAGE; }
 
 

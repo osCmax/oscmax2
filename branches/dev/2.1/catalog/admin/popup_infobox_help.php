@@ -43,7 +43,7 @@ a:text:hover { color: #000000; text-decoration: underline; }
   $heading = array();
   $contents = array();
 
-    switch ($HTTP_GET_VARS['action']) {
+    switch ($_GET['action']) {
 
       case 'filename':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_INFOBOX . '</b>');

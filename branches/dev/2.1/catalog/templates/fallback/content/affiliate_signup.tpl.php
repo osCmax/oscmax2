@@ -13,7 +13,7 @@
       <tr>
         <td>
 <?php
-  if (isset($HTTP_GET_VARS['affiliate_email_address'])) $a_email_address = tep_db_prepare_input($HTTP_GET_VARS['affiliate_email_address']);
+  if (isset($_GET['affiliate_email_address'])) $a_email_address = tep_db_prepare_input($_GET['affiliate_email_address']);
   $affiliate['affiliate_country_id'] = STORE_COUNTRY;
 
   require(DIR_WS_MODULES . 'affiliate_signup_details.php');

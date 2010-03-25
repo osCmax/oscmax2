@@ -20,7 +20,7 @@ define('TEXT_INFORMATION', '<a name="Top"></a>
   <a href="'.tep_href_link(FILENAME_GV_FAQ,'faq_item=4','NONSSL').'">Gutscheine verbuchen</a><br>
   <a href="'.tep_href_link(FILENAME_GV_FAQ,'faq_item=5','NONSSL').'">Falls es zu Problemen kommen sollte :</a><br>
 ');
-switch ($HTTP_GET_VARS['faq_item']) {
+switch ($_GET['faq_item']) {
   case '1':
 define('SUB_HEADING_TITLE','Gutscheine kaufen');
 define('SUB_HEADING_TEXT','Gutscheine k÷nnen, falls sie im Shop angeboten werden, wie normale Artikel gekauft werden.

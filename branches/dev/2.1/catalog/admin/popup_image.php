@@ -12,11 +12,11 @@ $Id: popup_image.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
-  reset($HTTP_GET_VARS);
-  while (list($key, ) = each($HTTP_GET_VARS)) {
+  reset($_GET);
+  while (list($key, ) = each($_GET)) {
     switch ($key) {
       case 'banner':
-        $banners_id = tep_db_prepare_input($HTTP_GET_VARS['banner']);
+        $banners_id = tep_db_prepare_input($_GET['banner']);
 
         $banner_query = tep_db_query("select banners_title, banners_image, banners_html_text from " . TABLE_BANNERS . " where banners_id = '" . (int)$banners_id . "'");
         $banner = tep_db_fetch_array($banner_query);

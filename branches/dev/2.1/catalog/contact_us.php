@@ -26,10 +26,10 @@ $Id: contact_us.php 8 2006-06-22 02:48:59Z user $
   // end modification for reCaptcha
   
     $error = false;
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'send')) {
-    $name = tep_db_prepare_input($HTTP_POST_VARS['name']);
-    $email_address = tep_db_prepare_input($HTTP_POST_VARS['email']);
-    $enquiry = tep_db_prepare_input($HTTP_POST_VARS['enquiry']);
+  if (isset($_GET['action']) && ($_GET['action'] == 'send')) {
+    $name = tep_db_prepare_input($_POST['name']);
+    $email_address = tep_db_prepare_input($_POST['email']);
+    $enquiry = tep_db_prepare_input($_POST['enquiry']);
 	
 	// start modification for reCaptcha
     // the response from reCAPTCHA
@@ -53,10 +53,10 @@ $_POST['name'] = str_replace("Content-Type:","",$_POST['name']);
 // EOF: Added
 
   $error = false;
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'send')) {
-    $name = tep_db_prepare_input($HTTP_POST_VARS['name']);
-    $email_address = tep_db_prepare_input($HTTP_POST_VARS['email']);
-    $enquiry = tep_db_prepare_input($HTTP_POST_VARS['enquiry']);
+  if (isset($_GET['action']) && ($_GET['action'] == 'send')) {
+    $name = tep_db_prepare_input($_POST['name']);
+    $email_address = tep_db_prepare_input($_POST['email']);
+    $enquiry = tep_db_prepare_input($_POST['enquiry']);
   }
 
  // BOF: Remove blank emails

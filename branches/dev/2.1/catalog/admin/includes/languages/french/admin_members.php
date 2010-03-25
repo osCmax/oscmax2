@@ -10,9 +10,9 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-if ($HTTP_GET_VARS['gID']) {
+if ($_GET['gID']) {
   define('HEADING_TITLE', 'Groupes Administration');
-} elseif ($HTTP_GET_VARS['gPath']) {
+} elseif ($_GET['gPath']) {
   define('HEADING_TITLE', 'D&eacute;finir Groupes');
 } else {
   define('HEADING_TITLE', 'Administrateurs');
@@ -95,7 +95,7 @@ define('TEXT_INFO_GROUPS_BOXES', '<b>Autorisation Boites:</b><br> Donnez les dro
 define('TEXT_INFO_GROUPS_BOXES_INCLUDE', 'Fichiers stock&eacute;s dans: ');
 
 define('TEXT_INFO_HEADING_DEFINE', 'D&eacute;finir Groupe');
-if ($HTTP_GET_VARS['gPath'] == 1) {
+if ($_GET['gPath'] == 1) {
   define('TEXT_INFO_DEFINE_INTRO', '<b>%s :</b><br>Vous ne pouvez pas changer les droits pour ce groupe.<br><br>');
 } else {
   define('TEXT_INFO_DEFINE_INTRO', '<b>%s :</b><br>Changez les droits de ce groupe en s&eacute;lectionnant ou en d&eacute;s&eacute;lectionnant les boites et les fichiers propos&eacute;s. Cliquer sur <b>sauver</b> pour sauvegarder les changements.<br><br>');

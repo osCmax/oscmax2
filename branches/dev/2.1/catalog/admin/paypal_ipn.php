@@ -10,7 +10,7 @@ $Id: paypal_ipn.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
   require('includes/application_top.php');
-  $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
   include(DIR_WS_LANGUAGES.$language.'/paypal_ipn.php');
   include(DIR_WS_CLASSES . 'paypal_ipn.php');
 ?>
@@ -58,24 +58,24 @@ $Id: paypal_ipn.php 3 2006-05-27 04:59:07Z user $
               </tr>
 <?php
   $ipn_query_raw = "select p.paypal_ipn_id, p.txn_type, p.payment_type, p.payment_status, p.pending_reason, p.mc_currency, p.payer_status, p.mc_currency, p.date_added, po.paypal_ipn_id, po.mc_gross, o.paypal_ipn_id, o.orders_id from " . TABLE_PAYPAL_IPN . " as p, " . TABLE_PAYPAL_IPN_ORDERS . " as po, " .TABLE_ORDERS . " as o  where p.paypal_ipn_id = po.paypal_ipn_id AND po.paypal_ipn_id = o.paypal_ipn_id AND o.paypal_ipn_id = p.paypal_ipn_id order by o.orders_id DESC";
-  $ipn_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $ipn_query_raw, $ipn_query_numrows);
+  $ipn_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $ipn_query_raw, $ipn_query_numrows);
   $ipn_query = tep_db_query($ipn_query_raw);
   while ($ipn_trans = tep_db_fetch_array($ipn_query)) {
-    if ((!isset($HTTP_GET_VARS['ipnID']) || (isset($HTTP_GET_VARS['ipnID']) && ($HTTP_GET_VARS['ipnID'] == $ipn_trans['paypal_ipn_id']))) && !isset($ipnInfo) ) {
+    if ((!isset($_GET['ipnID']) || (isset($_GET['ipnID']) && ($_GET['ipnID'] == $ipn_trans['paypal_ipn_id']))) && !isset($ipnInfo) ) {
       $ipnInfo = new objectInfo($ipn_trans);
     }
 
     if (isset($ipnInfo) && is_object($ipnInfo) && ($ipn_trans['paypal_ipn_id'] == $ipnInfo->paypal_ipn_id) ) {
-      echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ORDERS, 'page=' . $HTTP_GET_VARS['page'] . '&ipnID=' . $ipnInfo->paypal_ipn_id . '&oID=' . $ipnInfo->orders_id . '&action=edit' . '&refer=ipn') . '\'">' . "\n";
+      echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ORDERS, 'page=' . $_GET['page'] . '&ipnID=' . $ipnInfo->paypal_ipn_id . '&oID=' . $ipnInfo->orders_id . '&action=edit' . '&refer=ipn') . '\'">' . "\n";
     } else {
-      echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_PAYPAL_IPN, 'page=' . $HTTP_GET_VARS['page'] . '&ipnID=' . $ipn_trans['paypal_ipn_id']) . '\'">' . "\n";
+      echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_PAYPAL_IPN, 'page=' . $_GET['page'] . '&ipnID=' . $ipn_trans['paypal_ipn_id']) . '\'">' . "\n";
     }
 ?>
                 <td class="dataTableContent"> <?php echo $ipn_trans['orders_id'] ?> </td>
                 <td class="dataTableContent"> <?php echo paypal_ipn::get_name('txn_type_name','txn_type_id',$ipn_trans['txn_type'],$language,TABLE_PAYPAL_IPN_TXN_TYPE); ?>
                 <td class="dataTableContent"><?php echo paypal_ipn::get_name('payment_status_name','payment_status_id',$ipn_trans['payment_status'],$language,TABLE_PAYPAL_IPN_PAYMENT_STATUS); ?></td>
                 <td class="dataTableContent" align="right"><?php echo paypal_ipn::get_name('mc_currency_name','mc_currency_id',$ipn_trans['mc_currency'],$language,TABLE_PAYPAL_IPN_MC_CURRENCY).' '.number_format($ipn_trans['mc_gross'], 2); ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($ipnInfo) && is_object($ipnInfo) && ($ipn_trans['paypal_ipn_id'] == $ipnInfo->paypal_ipn_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_PAYPAL_IPN, 'page=' . $HTTP_GET_VARS['page'] . '&ipnID=' . $ipn_trans['paypal_ipn_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if (isset($ipnInfo) && is_object($ipnInfo) && ($ipn_trans['paypal_ipn_id'] == $ipnInfo->paypal_ipn_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_PAYPAL_IPN, 'page=' . $_GET['page'] . '&ipnID=' . $ipn_trans['paypal_ipn_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
   }
@@ -83,8 +83,8 @@ $Id: paypal_ipn.php 3 2006-05-27 04:59:07Z user $
               <tr>
                 <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td class="smallText" valign="top"><?php echo $ipn_split->display_count($ipn_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], "Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> IPN's)"); ?></td>
-                    <td class="smallText" align="right"><?php echo $ipn_split->display_links($ipn_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page']); ?></td>
+                    <td class="smallText" valign="top"><?php echo $ipn_split->display_count($ipn_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], "Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> IPN's)"); ?></td>
+                    <td class="smallText" align="right"><?php echo $ipn_split->display_links($ipn_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
                   </tr>
                 </table></td>
               </tr>

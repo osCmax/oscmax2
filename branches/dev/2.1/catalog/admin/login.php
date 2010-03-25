@@ -12,9 +12,9 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
-    $username = tep_db_prepare_input($HTTP_POST_VARS['username']);
-    $password = tep_db_prepare_input($HTTP_POST_VARS['password']);
+  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
+    $username = tep_db_prepare_input($_POST['username']);
+    $password = tep_db_prepare_input($_POST['password']);
 
 // Check if usename exists
     $check_admin_query = tep_db_query("select admin_id as login_id, admin_groups_id as login_groups_id, admin_username as login_username, admin_password as login_password, admin_modified as login_modified, admin_logdate as login_logdate, admin_lognum as login_lognum from " . TABLE_ADMIN . " where admin_username = '" . tep_db_input($username) . "'");
@@ -23,7 +23,7 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 //Added by PGM
 tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', '" . date('F j, Y, g:i a') . "')");
 
-      $HTTP_GET_VARS['login'] = 'fail';
+      $_GET['login'] = 'fail';
     } else {
       $check_admin = tep_db_fetch_array($check_admin_query);
       // Check that password is good
@@ -32,7 +32,7 @@ tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $username . "
 //Added by PGM
 tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', '" . date('F j, Y, g:i a') . "')");
 
-        $HTTP_GET_VARS['login'] = 'fail';
+        $_GET['login'] = 'fail';
       } else {
         if (tep_session_is_registered('password_forgotten')) {
           tep_session_unregister('password_forgotten');
@@ -100,7 +100,7 @@ tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $login_userna
                                   <tr><td>
                                     <table border="0" width="100%" height="100%" cellspacing="3" cellpadding="2" bgcolor="#F3F3F3">
 <?php
-  if (isset($HTTP_GET_VARS['login']) && ($HTTP_GET_VARS['login'] == 'fail')) {
+  if (isset($_GET['login']) && ($_GET['login'] == 'fail')) {
     $info_message = TEXT_LOGIN_ERROR;
   }
 

@@ -10,9 +10,9 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-if ($HTTP_GET_VARS['gID']) {
+if ($_GET['gID']) {
   define('HEADING_TITLE', 'Grupos de Admin');
-} elseif ($HTTP_GET_VARS['gPath']) {
+} elseif ($_GET['gPath']) {
   define('HEADING_TITLE', 'Definicion Grupos');
 } else {
   define('HEADING_TITLE', 'Miembros de Admin');
@@ -95,7 +95,7 @@ define('TEXT_INFO_GROUPS_BOXES', '<b>Permiso  Boxes:</b><br>Das acceso al box se
 define('TEXT_INFO_GROUPS_BOXES_INCLUDE', 'Incluye file guardados en: ');
 
 define('TEXT_INFO_HEADING_DEFINE', 'Definir Grupo');
-if ($HTTP_GET_VARS['gPath'] == 1) {
+if ($_GET['gPath'] == 1) {
   define('TEXT_INFO_DEFINE_INTRO', '<b>%s :</b><br>No puedes cambiar los Permisos a los File por este grupo.<br><br>');
 } else {
   define('TEXT_INFO_DEFINE_INTRO', '<b>%s :</b><br>Cambia permiso a este grupo seleccionando o deseleccionando los boxes y los files. Click <b>grabar</b> para guardar cambios.<br><br>');

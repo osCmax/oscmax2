@@ -24,7 +24,7 @@ $debug = array();
     exit('Server Requirement Error: register_globals is disabled in your PHP configuration. This can be enabled in your php.ini configuration file or in the .htaccess file in your catalog directory. Please use PHP 4.3+ if register_globals cannot be enabled on the server.');
   }
 // LINE ADDED: added to support PHP 5.0.x by TJ
-$HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
+$_GET = $_GET; $_POST = $_POST;
 
 // Set the local configuration parameters - mainly for developers
   if (file_exists('includes/local/configure.php')) include('includes/local/configure.php');
@@ -156,10 +156,10 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 
 // set the session ID if it exists
-   if (isset($HTTP_POST_VARS[tep_session_name()])) {
-     tep_session_id($HTTP_POST_VARS[tep_session_name()]);
-   } elseif ( ($request_type == 'SSL') && isset($HTTP_GET_VARS[tep_session_name()]) ) {
-     tep_session_id($HTTP_GET_VARS[tep_session_name()]);
+   if (isset($_POST[tep_session_name()])) {
+     tep_session_id($_POST[tep_session_name()]);
+   } elseif ( ($request_type == 'SSL') && isset($_GET[tep_session_name()]) ) {
+     tep_session_id($_GET[tep_session_name()]);
    }
 
 // start the session
@@ -267,7 +267,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   require(DIR_WS_CLASSES . 'email.php');
 
 // set the language
-  if (!tep_session_is_registered('language') || isset($HTTP_GET_VARS['language'])) {
+  if (!tep_session_is_registered('language') || isset($_GET['language'])) {
     if (!tep_session_is_registered('language')) {
       tep_session_register('language');
       tep_session_register('languages_id');
@@ -276,8 +276,8 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
     include(DIR_WS_CLASSES . 'language.php');
     $lng = new language();
 
-    if (isset($HTTP_GET_VARS['language']) && tep_not_null($HTTP_GET_VARS['language'])) {
-      $lng->set_language($HTTP_GET_VARS['language']);
+    if (isset($_GET['language']) && tep_not_null($_GET['language'])) {
+      $lng->set_language($_GET['language']);
     } else {
       $lng->get_browser_language();
     }
@@ -301,11 +301,11 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 // EOF: MOD
 
 // currency
-  if (!tep_session_is_registered('currency') || isset($HTTP_GET_VARS['currency']) || ( (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') && (LANGUAGE_CURRENCY != $currency) ) ) {
+  if (!tep_session_is_registered('currency') || isset($_GET['currency']) || ( (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') && (LANGUAGE_CURRENCY != $currency) ) ) {
     if (!tep_session_is_registered('currency')) tep_session_register('currency');
 
-    if (isset($HTTP_GET_VARS['currency']) && $currencies->is_set($HTTP_GET_VARS['currency'])) {
-      $currency = $HTTP_GET_VARS['currency'];
+    if (isset($_GET['currency']) && $currencies->is_set($_GET['currency'])) {
+      $currency = $_GET['currency'];
     } else {
       $currency = (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') ? LANGUAGE_CURRENCY : DEFAULT_CURRENCY;
     }
@@ -336,13 +336,13 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
      } 
      
  //Wishlist actions (must be before shopping cart actions) 
-   if(isset($HTTP_POST_VARS['wishlist_x'])) { 
-      if(isset($HTTP_POST_VARS['products_id'])) {
-          if(isset($HTTP_POST_VARS['id'])) {
-              $attributes_id = $HTTP_POST_VARS['id']; 
+   if(isset($_POST['wishlist_x'])) { 
+      if(isset($_POST['products_id'])) {
+          if(isset($_POST['id'])) {
+              $attributes_id = $_POST['id']; 
               tep_session_register('attributes_id'); 
            } 
-           $wishlist_id = $HTTP_POST_VARS['products_id']; 
+           $wishlist_id = $_POST['products_id']; 
            tep_session_register('wishlist_id'); 
       } 
       tep_redirect(tep_href_link(FILENAME_WISHLIST)); 
@@ -350,7 +350,7 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
 // EOF: MOD - Wishlist 3.5
 
 // Shopping cart actions
-//   if (isset($HTTP_GET_VARS['action'])) {
+//   if (isset($_GET['action'])) {
 // // redirect the customer to a friendly cookie-must-be-enabled page if cookies are disabled
 //     if ($session_started == false) {
 //       tep_redirect(tep_href_link(FILENAME_COOKIE_USAGE));
@@ -365,7 +365,7 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
   
 
 // Shopping cart actions
-  if (isset($HTTP_GET_VARS['action'])) {
+  if (isset($_GET['action'])) {
 // redirect the customer to a friendly cookie-must-be-enabled page if cookies are disabled
     if ($session_started == false) {
       tep_redirect(tep_href_link(FILENAME_COOKIE_USAGE));
@@ -374,16 +374,16 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
    /* the shopping_cart page and some others sends an array 'products_id' or 'notify'. 
       That is dealt with separately. For the following code two new functions (tep_get_hide_status  
       and tep_get_hide_status_single) should have been added to /includes/functions/general.php */
-      if (isset($HTTP_POST_VARS['products_id']) && !is_array($HTTP_POST_VARS['products_id'])) {
-         $pid_for_hide = (int)$HTTP_POST_VARS['products_id'];
-      } elseif (isset($HTTP_GET_VARS['products_id'])) {
-         $pid_for_hide = (int)$HTTP_GET_VARS['products_id'];
-      } elseif (isset($HTTP_GET_VARS['pid'])) {
-         $pid_for_hide = (int)$HTTP_GET_VARS['pid'];
-      } elseif (isset($HTTP_GET_VARS['notify']) && !is_array($HTTP_GET_VARS['notify'])) {
-         $pid_for_hide = (int)$HTTP_GET_VARS['notify'];
-         } elseif (isset($HTTP_POST_VARS['notify']) && !is_array($HTTP_POST_VARS['notify'])) {
-            $pid_for_hide = (int)$HTTP_POST_VARS['notify'];
+      if (isset($_POST['products_id']) && !is_array($_POST['products_id'])) {
+         $pid_for_hide = (int)$_POST['products_id'];
+      } elseif (isset($_GET['products_id'])) {
+         $pid_for_hide = (int)$_GET['products_id'];
+      } elseif (isset($_GET['pid'])) {
+         $pid_for_hide = (int)$_GET['pid'];
+      } elseif (isset($_GET['notify']) && !is_array($_GET['notify'])) {
+         $pid_for_hide = (int)$_GET['notify'];
+         } elseif (isset($_POST['notify']) && !is_array($_POST['notify'])) {
+            $pid_for_hide = (int)$_POST['notify'];
          }
      if (tep_not_null($pid_for_hide)) {
          $hide_product = tep_get_hide_status_single($customer_group_id, $pid_for_hide);
@@ -393,20 +393,20 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
   
       $temp_post_get_array = array();
       $hide_status_products = array();
-      if (is_array($HTTP_POST_VARS['products_id']) && tep_not_null($HTTP_POST_VARS['products_id']) && tep_not_null($HTTP_POST_VARS['products_id'][0])) {
-         $temp_post_get_array = $HTTP_POST_VARS['products_id'];
+      if (is_array($_POST['products_id']) && tep_not_null($_POST['products_id']) && tep_not_null($_POST['products_id'][0])) {
+         $temp_post_get_array = $_POST['products_id'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
       } 
-      if (is_array($HTTP_GET_VARS['products_id']) && tep_not_null($HTTP_GET_VARS['products_id']) && tep_not_null($HTTP_GET_VARS['products_id'][0])) {
-         $temp_post_get_array = $HTTP_GET_VARS['products_id'];
+      if (is_array($_GET['products_id']) && tep_not_null($_GET['products_id']) && tep_not_null($_GET['products_id'][0])) {
+         $temp_post_get_array = $_GET['products_id'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
       }
-      if (is_array($HTTP_POST_VARS['notify']) && tep_not_null($HTTP_POST_VARS['notify']) && tep_not_null($HTTP_POST_VARS['notify'][0])) {
-         $temp_post_get_array = $HTTP_POST_VARS['notify'];
+      if (is_array($_POST['notify']) && tep_not_null($_POST['notify']) && tep_not_null($_POST['notify'][0])) {
+         $temp_post_get_array = $_POST['notify'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
       } 
-      if (is_array($HTTP_GET_VARS['notify']) && tep_not_null($HTTP_GET_VARS['notify']) && tep_not_null($HTTP_GET_VARS['notify'][0])) {
-      $temp_post_get_array = $HTTP_GET_VARS['notify'];
+      if (is_array($_GET['notify']) && tep_not_null($_GET['notify']) && tep_not_null($_GET['notify'][0])) {
+      $temp_post_get_array = $_GET['notify'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
      }
 
@@ -419,25 +419,25 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
      $parameters = array('action', 'cPath', 'products_id', 'pid');
     } else {
       $goto = basename($PHP_SELF);
-      if ($HTTP_GET_VARS['action'] == 'buy_now') {
+      if ($_GET['action'] == 'buy_now') {
 // LINE MOD: Ultimate SEO URLs v2.1 removed 'pName'
         $parameters = array('action', 'pid', 'products_id');
       } else {
         $parameters = array('action', 'pid');
       }
     }
-    switch ($HTTP_GET_VARS['action']) {
+    switch ($_GET['action']) {
       // customer wants to update the product quantity in their shopping cart
-      case 'update_product' : for ($i=0, $n=sizeof($HTTP_POST_VARS['products_id']); $i<$n; $i++) {
-        if (in_array($HTTP_POST_VARS['products_id'][$i], (is_array($HTTP_POST_VARS['cart_delete']) ? $HTTP_POST_VARS['cart_delete'] : array()))) {
-          $cart->remove($HTTP_POST_VARS['products_id'][$i]);
+      case 'update_product' : for ($i=0, $n=sizeof($_POST['products_id']); $i<$n; $i++) {
+        if (in_array($_POST['products_id'][$i], (is_array($_POST['cart_delete']) ? $_POST['cart_delete'] : array()))) {
+          $cart->remove($_POST['products_id'][$i]);
           } else {
-            $attributes = ($HTTP_POST_VARS['id'][$HTTP_POST_VARS['products_id'][$i]]) ? $HTTP_POST_VARS['id'][$HTTP_POST_VARS['products_id'][$i]] : '';
-//          $cart->add_cart($HTTP_POST_VARS['products_id'][$i], $HTTP_POST_VARS['cart_quantity'][$i], $attributes, false);
+            $attributes = ($_POST['id'][$_POST['products_id'][$i]]) ? $_POST['id'][$_POST['products_id'][$i]] : '';
+//          $cart->add_cart($_POST['products_id'][$i], $_POST['cart_quantity'][$i], $attributes, false);
 // BOF SPPC, Hide products and categories from groups
                                   foreach($hide_status_products as $key => $subarray) {
-                                    if ($subarray['products_id'] == tep_get_prid($HTTP_POST_VARS['products_id'][$i]) && $subarray['hidden'] == '0') {
-                                  $cart->add_cart($HTTP_POST_VARS['products_id'][$i], $HTTP_POST_VARS['cart_quantity'][$i], $attributes, false);
+                                    if ($subarray['products_id'] == tep_get_prid($_POST['products_id'][$i]) && $subarray['hidden'] == '0') {
+                                  $cart->add_cart($_POST['products_id'][$i], $_POST['cart_quantity'][$i], $attributes, false);
                                   }
                                   } // end foreach($hide_status_products as $key => $subarray)
 // EOF SPPC, Hide products and categories from groups
@@ -447,48 +447,48 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
       break;
 // customer adds a product from the products page
 // BOF: MOD - QT Pro
-//    case 'add_product' :    if (isset($HTTP_POST_VARS['products_id']) && is_numeric($HTTP_POST_VARS['products_id'])) {
-//                              $cart->add_cart($HTTP_POST_VARS['products_id'], $cart->get_quantity(tep_get_uprid($HTTP_POST_VARS['products_id'], $HTTP_POST_VARS['id']))+1, $HTTP_POST_VARS['id']);
-      case 'add_product' :    if (isset($HTTP_POST_VARS['products_id']) && is_numeric($HTTP_POST_VARS['products_id']) && ($HTTP_POST_VARS['products_id']==(int)$HTTP_POST_VARS['products_id'])) {
+//    case 'add_product' :    if (isset($_POST['products_id']) && is_numeric($_POST['products_id'])) {
+//                              $cart->add_cart($_POST['products_id'], $cart->get_quantity(tep_get_uprid($_POST['products_id'], $_POST['id']))+1, $_POST['id']);
+      case 'add_product' :    if (isset($_POST['products_id']) && is_numeric($_POST['products_id']) && ($_POST['products_id']==(int)$_POST['products_id'])) {
         $attributes=array();
-        if (isset($HTTP_POST_VARS['attrcomb']) && (preg_match("/^\d{1,10}-\d{1,10}(,\d{1,10}-\d{1,10})*$/",$HTTP_POST_VARS['attrcomb']))) {
-          $attrlist=explode(',',$HTTP_POST_VARS['attrcomb']);
+        if (isset($_POST['attrcomb']) && (preg_match("/^\d{1,10}-\d{1,10}(,\d{1,10}-\d{1,10})*$/",$_POST['attrcomb']))) {
+          $attrlist=explode(',',$_POST['attrcomb']);
           foreach ($attrlist as $attr) {
             list($oid, $oval)=explode('-',$attr);
             if (is_numeric($oid) && $oid==(int)$oid && is_numeric($oval) && $oval==(int)$oval)
               $attributes[$oid]=$oval;
           }
         }
-        if (isset($HTTP_POST_VARS['id']) && is_array($HTTP_POST_VARS['id'])) {
-          foreach ($HTTP_POST_VARS['id'] as $key=>$val) {
+        if (isset($_POST['id']) && is_array($_POST['id'])) {
+          foreach ($_POST['id'] as $key=>$val) {
             if (is_numeric($key) && $key==(int)$key && is_numeric($val) && $val==(int)$val)
-              $attributes=$attributes + $HTTP_POST_VARS['id'];
+              $attributes=$attributes + $_POST['id'];
           }
         }
-        $cart->add_cart($HTTP_POST_VARS['products_id'], $cart->get_quantity(tep_get_uprid($HTTP_POST_VARS['products_id'], $attributes))+$_POST['quantity'], $attributes);
+        $cart->add_cart($_POST['products_id'], $cart->get_quantity(tep_get_uprid($_POST['products_id'], $attributes))+$_POST['quantity'], $attributes);
 // EOF: MOD - QT Pro
                     }
         tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
         break;
 // performed by the 'buy now' button in product listings and review page
-      case 'buy_now' :        if (isset($HTTP_GET_VARS['products_id'])) {
+      case 'buy_now' :        if (isset($_GET['products_id'])) {
 
-            if (tep_has_product_attributes($HTTP_GET_VARS['products_id'])) {
-              tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['products_id']));
+            if (tep_has_product_attributes($_GET['products_id'])) {
+              tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id']));
             } else {
-              $cart->add_cart($HTTP_GET_VARS['products_id'], $cart->get_quantity($HTTP_GET_VARS['products_id'])+1);
+              $cart->add_cart($_GET['products_id'], $cart->get_quantity($_GET['products_id'])+1);
             }
           }
             tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
           break;
 
       case 'notify' : if (tep_session_is_registered('customer_id')) {
-                      if (isset($HTTP_GET_VARS['products_id'])) {
-                        $notify = $HTTP_GET_VARS['products_id'];
-                      } elseif (isset($HTTP_GET_VARS['notify'])) {
-                        $notify = $HTTP_GET_VARS['notify'];
-                      } elseif (isset($HTTP_POST_VARS['notify'])) {
-                        $notify = $HTTP_POST_VARS['notify'];
+                      if (isset($_GET['products_id'])) {
+                        $notify = $_GET['products_id'];
+                      } elseif (isset($_GET['notify'])) {
+                        $notify = $_GET['notify'];
+                      } elseif (isset($_POST['notify'])) {
+                        $notify = $_POST['notify'];
                       } else {
                         tep_redirect(tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'notify'))));
                       }
@@ -521,11 +521,11 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
                       tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
                     }
                     break;
-      case 'notify_remove' :  if (tep_session_is_registered('customer_id') && isset($HTTP_GET_VARS['products_id'])) {
-                                $check_query = tep_db_query("select count(*) as count from " . TABLE_PRODUCTS_NOTIFICATIONS . " where products_id = '" . $HTTP_GET_VARS['products_id'] . "' and customers_id = '" . $customer_id . "'");
+      case 'notify_remove' :  if (tep_session_is_registered('customer_id') && isset($_GET['products_id'])) {
+                                $check_query = tep_db_query("select count(*) as count from " . TABLE_PRODUCTS_NOTIFICATIONS . " where products_id = '" . $_GET['products_id'] . "' and customers_id = '" . $customer_id . "'");
                                 $check = tep_db_fetch_array($check_query);
                                 if ($check['count'] > 0) {
-                                  tep_db_query("delete from " . TABLE_PRODUCTS_NOTIFICATIONS . " where products_id = '" . $HTTP_GET_VARS['products_id'] . "' and customers_id = '" . $customer_id . "'");
+                                  tep_db_query("delete from " . TABLE_PRODUCTS_NOTIFICATIONS . " where products_id = '" . $_GET['products_id'] . "' and customers_id = '" . $customer_id . "'");
                                 }
                                 tep_redirect(tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action'))));
                               } else {
@@ -533,18 +533,18 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
                                 tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
                               }
                               break;
-      case 'cust_order' :     if (tep_session_is_registered('customer_id') && isset($HTTP_GET_VARS['pid'])) {
-                                if (tep_has_product_attributes($HTTP_GET_VARS['pid'])) {
-                                  tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['pid']));
+      case 'cust_order' :     if (tep_session_is_registered('customer_id') && isset($_GET['pid'])) {
+                                if (tep_has_product_attributes($_GET['pid'])) {
+                                  tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['pid']));
                                 } else {
-                                  $cart->add_cart($HTTP_GET_VARS['pid'], $cart->get_quantity($HTTP_GET_VARS['pid'])+1);
+                                  $cart->add_cart($_GET['pid'], $cart->get_quantity($_GET['pid'])+1);
                                 }
                               }
                               tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
                               break;
 
-//                            } // end switch $HTTP_GET_VARS['action']
-//                           } // end if is set $HTTP_GET_VARS['action']
+//                            } // end switch $_GET['action']
+//                           } // end if is set $_GET['action']
 // 
 // 
 // // include the who's online functions
@@ -555,7 +555,7 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
        tep_redirect(tep_href_link(FILENAME_DEFAULT));
     }
 // EOF Separate Pricing Per Customer v4.2.x, Hide products from groups mod
-  } // if (isset($HTTP_GET_VARS['action']))
+  } // if (isset($_GET['action']))
 
 // include the who's online functions
   require(DIR_WS_FUNCTIONS . 'whos_online.php');
@@ -583,10 +583,10 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
   tep_expire_specials();
 
 // calculate category path
-  if (isset($HTTP_GET_VARS['cPath'])) {
-    $cPath = $HTTP_GET_VARS['cPath'];
-  } elseif (isset($HTTP_GET_VARS['products_id']) && !isset($HTTP_GET_VARS['manufacturers_id'])) {
-    $cPath = tep_get_product_path($HTTP_GET_VARS['products_id']);
+  if (isset($_GET['cPath'])) {
+    $cPath = $_GET['cPath'];
+  } elseif (isset($_GET['products_id']) && !isset($_GET['manufacturers_id'])) {
+    $cPath = tep_get_product_path($_GET['products_id']);
   } else {
     $cPath = '';
   }
@@ -624,25 +624,25 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
         break;
       }
     }
-  } elseif (isset($HTTP_GET_VARS['manufacturers_id'])) {
-    $manufacturers_query = tep_db_query("select manufacturers_name from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "'");
+  } elseif (isset($_GET['manufacturers_id'])) {
+    $manufacturers_query = tep_db_query("select manufacturers_name from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
     if (tep_db_num_rows($manufacturers_query)) {
       $manufacturers = tep_db_fetch_array($manufacturers_query);
-      $breadcrumb->add($manufacturers['manufacturers_name'], tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $HTTP_GET_VARS['manufacturers_id']));
+      $breadcrumb->add($manufacturers['manufacturers_name'], tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $_GET['manufacturers_id']));
     }
   }
 
 // add the products model to the breadcrumb trail
-  if (isset($HTTP_GET_VARS['products_id'])) {
-//    $model_query = tep_db_query("select products_model from " . TABLE_PRODUCTS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "'");
+  if (isset($_GET['products_id'])) {
+//    $model_query = tep_db_query("select products_model from " . TABLE_PRODUCTS . " where products_id = '" . (int)$_GET['products_id'] . "'");
 // BOF SPPC Hide products and categories from groups
-    $model_query = tep_db_query("select p.products_model from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
+    $model_query = tep_db_query("select p.products_model from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = '" . (int)$_GET['products_id'] . "' and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
 // EOF SPPC Hide products and categories from groups
 
 
     if (tep_db_num_rows($model_query)) {
       $model = tep_db_fetch_array($model_query);
-      $breadcrumb->add($model['products_model'], tep_href_link(FILENAME_PRODUCT_INFO, 'cPath=' . $cPath . '&products_id=' . $HTTP_GET_VARS['products_id']));
+      $breadcrumb->add($model['products_model'], tep_href_link(FILENAME_PRODUCT_INFO, 'cPath=' . $cPath . '&products_id=' . $_GET['products_id']));
     }
   }
 
@@ -651,10 +651,10 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
   require(DIR_WS_FUNCTIONS . 'article_header_tags.php');
 
 // calculate topic path
-  if (isset($HTTP_GET_VARS['tPath'])) {
-    $tPath = $HTTP_GET_VARS['tPath'];
-  } elseif (isset($HTTP_GET_VARS['articles_id']) && !isset($HTTP_GET_VARS['authors_id'])) {
-    $tPath = tep_get_article_path($HTTP_GET_VARS['articles_id']);
+  if (isset($_GET['tPath'])) {
+    $tPath = $_GET['tPath'];
+  } elseif (isset($_GET['articles_id']) && !isset($_GET['authors_id'])) {
+    $tPath = tep_get_article_path($_GET['articles_id']);
   } else {
     $tPath = '';
   }
@@ -678,23 +678,23 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
         break;
       }
     }
-  } elseif (isset($HTTP_GET_VARS['authors_id'])) {
-    $authors_query = tep_db_query("select authors_name from " . TABLE_AUTHORS . " where authors_id = '" . (int)$HTTP_GET_VARS['authors_id'] . "'");
+  } elseif (isset($_GET['authors_id'])) {
+    $authors_query = tep_db_query("select authors_name from " . TABLE_AUTHORS . " where authors_id = '" . (int)$_GET['authors_id'] . "'");
     if (tep_db_num_rows($authors_query)) {
       $authors = tep_db_fetch_array($authors_query);
-      $breadcrumb->add('Articles by ' . $authors['authors_name'], tep_href_link(FILENAME_ARTICLES, 'authors_id=' . $HTTP_GET_VARS['authors_id']));
+      $breadcrumb->add('Articles by ' . $authors['authors_name'], tep_href_link(FILENAME_ARTICLES, 'authors_id=' . $_GET['authors_id']));
     }
   }
 
 // add the articles name to the breadcrumb trail
-  if (isset($HTTP_GET_VARS['articles_id'])) {
-    $article_query = tep_db_query("select articles_name from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "'");
+  if (isset($_GET['articles_id'])) {
+    $article_query = tep_db_query("select articles_name from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$_GET['articles_id'] . "'");
     if (tep_db_num_rows($article_query)) {
       $article = tep_db_fetch_array($article_query);
-      if (isset($HTTP_GET_VARS['authors_id'])) {
-        $breadcrumb->add($article['articles_name'], tep_href_link(FILENAME_ARTICLE_INFO, 'authors_id=' . $HTTP_GET_VARS['authors_id'] . '&articles_id=' . $HTTP_GET_VARS['articles_id']));
+      if (isset($_GET['authors_id'])) {
+        $breadcrumb->add($article['articles_name'], tep_href_link(FILENAME_ARTICLE_INFO, 'authors_id=' . $_GET['authors_id'] . '&articles_id=' . $_GET['articles_id']));
       } else {
-        $breadcrumb->add($article['articles_name'], tep_href_link(FILENAME_ARTICLE_INFO, 'tPath=' . $tPath . '&articles_id=' . $HTTP_GET_VARS['articles_id']));
+        $breadcrumb->add($article['articles_name'], tep_href_link(FILENAME_ARTICLE_INFO, 'tPath=' . $tPath . '&articles_id=' . $_GET['articles_id']));
       }
     }
   }

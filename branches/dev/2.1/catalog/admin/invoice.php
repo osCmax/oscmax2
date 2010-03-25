@@ -15,7 +15,7 @@ $Id: invoice.php 3 2006-05-27 04:59:07Z user $
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
-  $oID = tep_db_prepare_input($HTTP_GET_VARS['oID']);
+  $oID = tep_db_prepare_input($_GET['oID']);
   $orders_query = tep_db_query("select orders_id from " . TABLE_ORDERS . " where orders_id = '" . (int)$oID . "'");
 
   include(DIR_WS_CLASSES . 'order.php');

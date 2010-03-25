@@ -25,41 +25,41 @@
     $cg_tax_exempt_array = array(array('id' => '1', 'text' => ENTRY_GROUP_TAX_EXEMPT_YES),
                               array('id' => '0', 'text' => ENTRY_GROUP_TAX_EXEMPT_NO));
   
-  $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   if (tep_not_null($action)) {
     switch ($action) {
 
       case 'update':
         $error = false;
-	    $customers_group_id = tep_db_prepare_input($HTTP_GET_VARS['cID']);
-		$customers_group_name = tep_db_prepare_input($HTTP_POST_VARS['customers_group_name']);
-		$customers_group_show_tax = tep_db_prepare_input($HTTP_POST_VARS['customers_group_show_tax']);
-		$customers_group_tax_exempt = tep_db_prepare_input($HTTP_POST_VARS['customers_group_tax_exempt']);
+	    $customers_group_id = tep_db_prepare_input($_GET['cID']);
+		$customers_group_name = tep_db_prepare_input($_POST['customers_group_name']);
+		$customers_group_show_tax = tep_db_prepare_input($_POST['customers_group_show_tax']);
+		$customers_group_tax_exempt = tep_db_prepare_input($_POST['customers_group_tax_exempt']);
 		$group_payment_allowed = '';
-		if ($HTTP_POST_VARS['payment_allowed'] && $HTTP_POST_VARS['group_payment_settings'] == '1') {
-		  while(list($key, $val) = each($HTTP_POST_VARS['payment_allowed'])) {
+		if ($_POST['payment_allowed'] && $_POST['group_payment_settings'] == '1') {
+		  while(list($key, $val) = each($_POST['payment_allowed'])) {
 		    if ($val == true) { 
 		    $group_payment_allowed .= tep_db_prepare_input($val).';'; 
 		    }
 		  } // end while
 		  $group_payment_allowed = substr($group_payment_allowed,0,strlen($group_payment_allowed)-1);
-		} // end if ($HTTP_POST_VARS['payment_allowed'])
+		} // end if ($_POST['payment_allowed'])
 		$group_shipment_allowed = '';
-		if ($HTTP_POST_VARS['shipping_allowed'] && $HTTP_POST_VARS['group_shipment_settings'] == '1') {
-		  while(list($key, $val) = each($HTTP_POST_VARS['shipping_allowed'])) {
+		if ($_POST['shipping_allowed'] && $_POST['group_shipment_settings'] == '1') {
+		  while(list($key, $val) = each($_POST['shipping_allowed'])) {
 		    if ($val == true) { 
 		    $group_shipment_allowed .= tep_db_prepare_input($val).';'; 
 		    }
 		  } // end while
 		  $group_shipment_allowed = substr($group_shipment_allowed,0,strlen($group_shipment_allowed)-1);
-		} // end if ($HTTP_POST_VARS['shipment_allowed'])
+		} // end if ($_POST['shipment_allowed'])
         tep_db_query("update " . TABLE_CUSTOMERS_GROUPS . " set customers_group_name='" . $customers_group_name . "', customers_group_show_tax = '" . $customers_group_show_tax . "', customers_group_tax_exempt = '" . $customers_group_tax_exempt . "', group_payment_allowed = '". $group_payment_allowed ."', group_shipment_allowed = '". $group_shipment_allowed ."' where customers_group_id = " . tep_db_input($customers_group_id) );
         tep_redirect(tep_href_link('customers_groups.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $customers_group_id));
 		break;
         
       case 'deleteconfirm':
-        $group_id = tep_db_prepare_input($HTTP_GET_VARS['cID']);
+        $group_id = tep_db_prepare_input($_GET['cID']);
         tep_db_query("delete from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id= " . $group_id); 
         $customers_id_query = tep_db_query("select customers_id from " . TABLE_CUSTOMERS . " where customers_group_id=" . $group_id);
         while($customers_id = tep_db_fetch_array($customers_id_query)) {
@@ -69,26 +69,26 @@
         break;
         
       case 'newconfirm' :
-        $customers_group_name = tep_db_prepare_input($HTTP_POST_VARS['customers_group_name']);
-	$customers_group_tax_exempt = tep_db_prepare_input($HTTP_POST_VARS['customers_group_tax_exempt']);
+        $customers_group_name = tep_db_prepare_input($_POST['customers_group_name']);
+	$customers_group_tax_exempt = tep_db_prepare_input($_POST['customers_group_tax_exempt']);
 	$group_payment_allowed = '';
-	if ($HTTP_POST_VARS['payment_allowed']) {
-	      while(list($key, $val) = each($HTTP_POST_VARS['payment_allowed'])) {
+	if ($_POST['payment_allowed']) {
+	      while(list($key, $val) = each($_POST['payment_allowed'])) {
 	         if ($val == true) { 
 	         $group_payment_allowed .= tep_db_prepare_input($val).';'; 
 	         }
 	      } // end while
 	   $group_payment_allowed = substr($group_payment_allowed,0,strlen($group_payment_allowed)-1);
-	} // end if ($HTTP_POST_VARS['payment_allowed'])
+	} // end if ($_POST['payment_allowed'])
 		$group_shipment_allowed = '';
-		if ($HTTP_POST_VARS['shipping_allowed'] && $HTTP_POST_VARS['group_shipment_settings'] == '1') {
-		  while(list($key, $val) = each($HTTP_POST_VARS['shipping_allowed'])) {
+		if ($_POST['shipping_allowed'] && $_POST['group_shipment_settings'] == '1') {
+		  while(list($key, $val) = each($_POST['shipping_allowed'])) {
 		    if ($val == true) { 
 		    $group_shipment_allowed .= tep_db_prepare_input($val).';'; 
 		    }
 		  } // end while
 		  $group_shipment_allowed = substr($group_shipment_allowed,0,strlen($group_shipment_allowed)-1);
-		} // end if ($HTTP_POST_VARS['shipment_allowed'])
+		} // end if ($_POST['shipment_allowed'])
         $last_id_query = tep_db_query("select MAX(customers_group_id) as last_cg_id from " . TABLE_CUSTOMERS_GROUPS . "");
         $last_cg_id_inserted = tep_db_fetch_array($last_id_query);
         $new_cg_id = $last_cg_id_inserted['last_cg_id'] +1;
@@ -124,8 +124,8 @@
     <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
 
 <?php
-  if ($HTTP_GET_VARS['action'] == 'edit') {
-    $customers_groups_query = tep_db_query("select c.customers_group_id, c.customers_group_name, c.customers_group_show_tax, c.customers_group_tax_exempt, c.group_payment_allowed, c.group_shipment_allowed from " . TABLE_CUSTOMERS_GROUPS . " c  where c.customers_group_id = '" . $HTTP_GET_VARS['cID'] . "'");
+  if ($_GET['action'] == 'edit') {
+    $customers_groups_query = tep_db_query("select c.customers_group_id, c.customers_group_name, c.customers_group_show_tax, c.customers_group_tax_exempt, c.group_payment_allowed, c.group_shipment_allowed from " . TABLE_CUSTOMERS_GROUPS . " c  where c.customers_group_id = '" . $_GET['cID'] . "'");
     $customers_groups = tep_db_fetch_array($customers_groups_query);
     $cInfo = new objectInfo($customers_groups);
    $payments_allowed = explode (";",$cInfo->group_payment_allowed);
@@ -314,7 +314,7 @@ function check_form() {
       </tr>
 
 <?php
-  } else if($HTTP_GET_VARS['action'] == 'newdiscount') {
+  } else if($_GET['action'] == 'newdiscount') {
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -329,7 +329,7 @@ function check_form() {
       </tr>
       
 <?php
-  } else if($HTTP_GET_VARS['action'] == 'new') {
+  } else if($_GET['action'] == 'new') {
      
 ?>
 <script language="javascript"><!--
@@ -550,20 +550,20 @@ function check_form() {
 
 <?php
     $search = '';
-    if ( ($HTTP_GET_VARS['search']) && (tep_not_null($HTTP_GET_VARS['search'])) ) {
-      $keywords = tep_db_input(tep_db_prepare_input($HTTP_GET_VARS['search']));
+    if ( ($_GET['search']) && (tep_not_null($_GET['search'])) ) {
+      $keywords = tep_db_input(tep_db_prepare_input($_GET['search']));
       $search = "where g.customers_group_name like '%" . $keywords . "%'";
     }
 
     $customers_groups_query_raw = "select g.customers_group_id, g.customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " g  " . $search . " order by $order";
-    $customers_groups_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_groups_query_raw, $customers_groups_query_numrows);
+    $customers_groups_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_groups_query_raw, $customers_groups_query_numrows);
     $customers_groups_query = tep_db_query($customers_groups_query_raw);
 
     while ($customers_groups = tep_db_fetch_array($customers_groups_query)) {
       $info_query = tep_db_query("select customers_info_date_account_created as date_account_created, customers_info_date_account_last_modified as date_account_last_modified, customers_info_date_of_last_logon as date_last_logon, customers_info_number_of_logons as number_of_logons from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . $customers_groups['customers_group_id'] . "'");
       $info = tep_db_fetch_array($info_query);
 
-      if ((!isset($HTTP_GET_VARS['cID']) || (@$HTTP_GET_VARS['cID'] == $customers_groups['customers_group_id'])) && (!$cInfo)) {
+      if ((!isset($_GET['cID']) || (@$_GET['cID'] == $customers_groups['customers_group_id'])) && (!$cInfo)) {
         $cInfo = new objectInfo($customers_groups);
       }
 
@@ -582,11 +582,11 @@ function check_form() {
               <tr>
                 <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td class="smallText" valign="top"><?php echo $customers_groups_split->display_count($customers_groups_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS_GROUPS); ?></td>
-                    <td class="smallText" align="right"><?php echo $customers_groups_split->display_links($customers_groups_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
+                    <td class="smallText" valign="top"><?php echo $customers_groups_split->display_count($customers_groups_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS_GROUPS); ?></td>
+                    <td class="smallText" align="right"><?php echo $customers_groups_split->display_links($customers_groups_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
                   </tr>
 <?php
-    if (tep_not_null($HTTP_GET_VARS['search'])) {
+    if (tep_not_null($_GET['search'])) {
 ?>
                   <tr>
                     <td align="right" colspan="2"><?php echo '<a href="' . tep_href_link('customers_groups.php') . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
@@ -595,7 +595,7 @@ function check_form() {
     } else {
 ?>
 			      <tr>
-                    <td align="right" colspan="2" class="smallText"><?php echo '<a href="' . tep_href_link('customers_groups.php', 'page=' . $HTTP_GET_VARS['page'] . '&action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
+                    <td align="right" colspan="2" class="smallText"><?php echo '<a href="' . tep_href_link('customers_groups.php', 'page=' . $_GET['page'] . '&action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
                   </tr>
 <?php
 	}
@@ -606,9 +606,9 @@ function check_form() {
 <?php
   $heading = array();
   $contents = array();
-  switch ($HTTP_GET_VARS['action']) {
+  switch ($_GET['action']) {
     case 'confirm':
-        if ($HTTP_GET_VARS['cID'] != '0') {
+        if ($_GET['cID'] != '0') {
             $heading[] = array('text' => ''. tep_draw_separator('pixel_trans.gif', '11', '12') .'&nbsp;<br><b>' . TEXT_INFO_HEADING_DELETE_GROUP . '</b>');
             $contents = array('form' => tep_draw_form('customers_groups', 'customers_groups.php', tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_group_id . '&action=deleteconfirm'));
             $contents[] = array('text' => TEXT_DELETE_INTRO . '<br><br><b>' . $cInfo->customers_group_name . ' </b>');

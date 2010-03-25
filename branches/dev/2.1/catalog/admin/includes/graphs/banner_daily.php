@@ -7,8 +7,8 @@ $Id: banner_daily.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
   include(DIR_WS_CLASSES . 'phplot.php');
-  $year = (($HTTP_GET_VARS['year']) ? $HTTP_GET_VARS['year'] : date('Y'));
-  $month = (($HTTP_GET_VARS['month']) ? $HTTP_GET_VARS['month'] : date('n'));
+  $year = (($_GET['year']) ? $_GET['year'] : date('Y'));
+  $month = (($_GET['month']) ? $_GET['month'] : date('n'));
   $days = (date('t', mktime(0,0,0,$month))+1);
   $stats = array();
   for ($i=1; $i<$days; $i++) {

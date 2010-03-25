@@ -20,18 +20,18 @@ $Id: recover_cart_sales.php 14 2006-07-28 17:42:07Z user $
  $currencies = new currencies();
 
 // Delete Entry Begin
-if ($HTTP_GET_VARS['action']=='delete') { 
-   $reset_query_raw = "delete from " . TABLE_CUSTOMERS_BASKET . " where customers_id=" . $HTTP_GET_VARS[customer_id]; 
+if ($_GET['action']=='delete') { 
+   $reset_query_raw = "delete from " . TABLE_CUSTOMERS_BASKET . " where customers_id=" . $_GET[customer_id]; 
    tep_db_query($reset_query_raw); 
 
-   $reset_query_raw2 = "delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id=" . $HTTP_GET_VARS[customer_id]; 
+   $reset_query_raw2 = "delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id=" . $_GET[customer_id]; 
    tep_db_query($reset_query_raw2);
 
-   tep_redirect(tep_href_link(FILENAME_RECOVER_CART_SALES, 'delete=1&customer_id='. $HTTP_GET_VARS['customer_id'] . '&tdate=' . $HTTP_GET_VARS['tdate'])); 
+   tep_redirect(tep_href_link(FILENAME_RECOVER_CART_SALES, 'delete=1&customer_id='. $_GET['customer_id'] . '&tdate=' . $_GET['tdate'])); 
 } 
 
-if ($HTTP_GET_VARS['delete']) { 
-   $messageStack->add(MESSAGE_STACK_CUSTOMER_ID . $HTTP_GET_VARS['customer_id'] . MESSAGE_STACK_DELETE_SUCCESS, 'success'); 
+if ($_GET['delete']) { 
+   $messageStack->add(MESSAGE_STACK_CUSTOMER_ID . $_GET['customer_id'] . MESSAGE_STACK_DELETE_SUCCESS, 'success'); 
 } 
 
 // Delete Entry End
@@ -226,7 +226,7 @@ if (count($custid) > 0 ) {  ?>
 
       $cline .= "<tr class='dataTableRow'>
                     <td class='dataTableContent' align='left'   width='15%' nowrap>" . $inrec2['model'] . "</td>
-                    <td class='dataTableContent' align='left'  colspan='2' width='55%'><a href='" . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&read=only&pID=' . $inrec['pid'] . '&origin=' . FILENAME_RECOVER_CART_SALES . '?page=' . $HTTP_GET_VARS['page'], 'NONSSL') . "'>" . $inrec2['name'] . "</a></td>
+                    <td class='dataTableContent' align='left'  colspan='2' width='55%'><a href='" . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&read=only&pID=' . $inrec['pid'] . '&origin=' . FILENAME_RECOVER_CART_SALES . '?page=' . $_GET['page'], 'NONSSL') . "'>" . $inrec2['name'] . "</a></td>
                     <td class='dataTableContent' align='center' width='10%' nowrap>" . $inrec['qty'] . "</td>
                     <td class='dataTableContent' align='right'  width='10%' nowrap>" . $pprice_formated . "</td>
                     <td class='dataTableContent' align='right'  width='10%' nowrap>" . $tpprice_formated . "</td>
@@ -533,7 +533,7 @@ else	 //we are NOT doing an e-mail to some customers
 			$cline .= "<tr class='dataTableRow'>
                     <td class='dataTableContent' align='left' vAlign='top' colspan='2' width='12%' nowrap> &nbsp;</td>
                     <td class='dataTableContent' align='left' vAlign='top' width='13%' nowrap>" . $inrec2['model'] . "</td>
-                    <td class='dataTableContent' align='left' vAlign='top' colspan='2' width='55%'><a href='" . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&read=only&pID=' . $inrec['pid'] . '&origin=' . FILENAME_RECOVER_CART_SALES . '?page=' . $HTTP_GET_VARS['page'], 'NONSSL') . "'><b>" . $inrec2['name'] . "</b></a>
+                    <td class='dataTableContent' align='left' vAlign='top' colspan='2' width='55%'><a href='" . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&read=only&pID=' . $inrec['pid'] . '&origin=' . FILENAME_RECOVER_CART_SALES . '?page=' . $_GET['page'], 'NONSSL') . "'><b>" . $inrec2['name'] . "</b></a>
                     " . $prodAttribs . "
                     </td>
                     <td class='dataTableContent' align='center' vAlign='top' width='5%' nowrap>" . $inrec['qty'] . "</td>

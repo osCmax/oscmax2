@@ -123,9 +123,9 @@
     }
 
     function before_process() {
-      global $HTTP_POST_VARS, $order, $sendto;
+      global $_POST, $order, $sendto;
 
-      if (isset($HTTP_POST_VARS['cc_owner']) && !empty($HTTP_POST_VARS['cc_owner']) && isset($HTTP_POST_VARS['cc_type']) && isset($this->cc_types[$HTTP_POST_VARS['cc_type']]) && isset($HTTP_POST_VARS['cc_number_nh-dns']) && !empty($HTTP_POST_VARS['cc_number_nh-dns'])) {
+      if (isset($_POST['cc_owner']) && !empty($_POST['cc_owner']) && isset($_POST['cc_type']) && isset($this->cc_types[$_POST['cc_type']]) && isset($_POST['cc_number_nh-dns']) && !empty($_POST['cc_number_nh-dns'])) {
         if (MODULE_PAYMENT_PAYPAL_UK_DIRECT_TRANSACTION_SERVER == 'Live') {
           $api_url = 'https://payflowpro.verisign.com/transaction';
         } else {
@@ -140,7 +140,7 @@
                         'TRXTYPE' => ((MODULE_PAYMENT_PAYPAL_UK_DIRECT_TRANSACTION_METHOD == 'Sale') ? 'S' : 'A'),
                         'AMT' => $this->format_raw($order->info['total']),
                         'CURRENCY' => $order->info['currency'],
-                        'NAME' => $HTTP_POST_VARS['cc_owner'],
+                        'NAME' => $_POST['cc_owner'],
                         'STREET' => $order->billing['street_address'],
                         'CITY' => $order->billing['city'],
                         'STATE' => tep_get_zone_code($order->billing['country']['id'], $order->billing['zone_id'], $order->billing['state']),
@@ -148,15 +148,15 @@
                         'ZIP' => $order->billing['postcode'],
                         'CLIENTIP' => tep_get_ip_address(),
                         'EMAIL' => $order->customer['email_address'],
-                        'ACCT' => $HTTP_POST_VARS['cc_number_nh-dns'],
-                        'ACCTTYPE' => $HTTP_POST_VARS['cc_type'],
-                        'CARDSTART' => $HTTP_POST_VARS['cc_starts_month'] . $HTTP_POST_VARS['cc_starts_year'],
-                        'EXPDATE' => $HTTP_POST_VARS['cc_expires_month'] . $HTTP_POST_VARS['cc_expires_year'],
-                        'CVV2' => $HTTP_POST_VARS['cc_cvc_nh-dns'],
+                        'ACCT' => $_POST['cc_number_nh-dns'],
+                        'ACCTTYPE' => $_POST['cc_type'],
+                        'CARDSTART' => $_POST['cc_starts_month'] . $_POST['cc_starts_year'],
+                        'EXPDATE' => $_POST['cc_expires_month'] . $_POST['cc_expires_year'],
+                        'CVV2' => $_POST['cc_cvc_nh-dns'],
                         'BUTTONSOURCE' => 'osCommerce22_Default_PRO2DP');
 
-        if ( ($HTTP_POST_VARS['cc_type'] == '9') || ($HTTP_POST_VARS['cc_type'] == 'S') ) {
-          $params['CARDISSUE'] = $HTTP_POST_VARS['cc_issue_nh-dns'];
+        if ( ($_POST['cc_type'] == '9') || ($_POST['cc_type'] == 'S') ) {
+          $params['CARDISSUE'] = $_POST['cc_issue_nh-dns'];
         }
 
         if (is_numeric($sendto) && ($sendto > 0)) {

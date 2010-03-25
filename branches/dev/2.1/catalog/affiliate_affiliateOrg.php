@@ -16,19 +16,19 @@ $Id: affiliate_affiliateOrg.php 14 2006-07-28 17:42:07Z user $
 
   require('includes/application_top.php');
 
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
-    $affiliate_username = tep_db_prepare_input($HTTP_POST_VARS['affiliate_username']);
-    $affiliate_password = tep_db_prepare_input($HTTP_POST_VARS['affiliate_password']);
+  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
+    $affiliate_username = tep_db_prepare_input($_POST['affiliate_username']);
+    $affiliate_password = tep_db_prepare_input($_POST['affiliate_password']);
 
 // Check if username exists
     $check_affiliate_query = tep_db_query("select affiliate_id, affiliate_firstname, affiliate_password, affiliate_email_address from " . TABLE_AFFILIATE . " where affiliate_email_address = '" . tep_db_input($affiliate_username) . "'");
     if (!tep_db_num_rows($check_affiliate_query)) {
-      $HTTP_GET_VARS['login'] = 'fail';
+      $_GET['login'] = 'fail';
     } else {
       $check_affiliate = tep_db_fetch_array($check_affiliate_query);
 // Check that password is good
       if (!tep_validate_password($affiliate_password, $check_affiliate['affiliate_password'])) {
-        $HTTP_GET_VARS['login'] = 'fail';
+        $_GET['login'] = 'fail';
       } else {
         $affiliate_id = $check_affiliate['affiliate_id'];
         tep_session_register('affiliate_id');
@@ -81,7 +81,7 @@ $Id: affiliate_affiliateOrg.php 14 2006-07-28 17:42:07Z user $
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
 <?php
-  if (isset($HTTP_GET_VARS['login']) && ($HTTP_GET_VARS['login'] == 'fail')) {
+  if (isset($_GET['login']) && ($_GET['login'] == 'fail')) {
     $info_message = TEXT_LOGIN_ERROR;
   }
 

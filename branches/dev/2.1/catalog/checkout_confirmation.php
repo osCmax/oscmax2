@@ -41,11 +41,11 @@ $Id: checkout_confirmation.php 3 2006-05-27 04:59:07Z user $
   }
 
   if (!tep_session_is_registered('payment')) tep_session_register('payment');
-  if (isset($HTTP_POST_VARS['payment'])) $payment = $HTTP_POST_VARS['payment'];
+  if (isset($_POST['payment'])) $payment = $_POST['payment'];
 
   if (!tep_session_is_registered('comments')) tep_session_register('comments');
-  if (tep_not_null($HTTP_POST_VARS['comments'])) {
-    $comments = tep_db_prepare_input($HTTP_POST_VARS['comments']);
+  if (tep_not_null($_POST['comments'])) {
+    $comments = tep_db_prepare_input($_POST['comments']);
   }
 
 // load the selected payment module

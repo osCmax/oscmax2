@@ -1,9 +1,9 @@
     <?php
       // Modify form processing depending on whether product or article
       if ($valid_product) {
-        echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&products_id=' . $HTTP_GET_VARS['products_id']));
+        echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&products_id=' . $_GET['products_id']));
         } else if ($valid_article) {
-          echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&articles_id=' . $HTTP_GET_VARS['articles_id']));
+          echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&articles_id=' . $_GET['articles_id']));
       }
     ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
@@ -113,9 +113,9 @@
                 <td><?php
                     // Modify back button depending on whether product or article
                     if ($valid_product) {
-                      echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['products_id']) . '">' . tep_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>';
+                      echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id']) . '">' . tep_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>';
                       } else if ($valid_article) {
-                        echo '<a href="' . tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $HTTP_GET_VARS['articles_id']) . '">' . tep_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>';
+                        echo '<a href="' . tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $_GET['articles_id']) . '">' . tep_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>';
                     }
                        ?></td>
                 <td align="right"><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></td>

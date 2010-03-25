@@ -126,18 +126,18 @@ $Id: secpay.php 3 2006-05-27 04:59:07Z user $
     }
 
     function before_process() {
-      global $HTTP_POST_VARS;
+      global $_POST;
 
-      if ($HTTP_POST_VARS['valid'] == 'true') {
+      if ($_POST['valid'] == 'true') {
         if ($remote_host = getenv('REMOTE_HOST')) {
           if ($remote_host != 'secpay.com') {
             $remote_host = gethostbyaddr($remote_host);
           }
           if ($remote_host != 'secpay.com') {
-            tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $HTTP_POST_VARS[tep_session_name()] . '&payment_error=' . $this->code, 'SSL', false, false));
+            tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $_POST[tep_session_name()] . '&payment_error=' . $this->code, 'SSL', false, false));
           }
         } else {
-          tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $HTTP_POST_VARS[tep_session_name()] . '&payment_error=' . $this->code, 'SSL', false, false));
+          tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $_POST[tep_session_name()] . '&payment_error=' . $this->code, 'SSL', false, false));
         }
       }
     }
@@ -147,10 +147,10 @@ $Id: secpay.php 3 2006-05-27 04:59:07Z user $
     }
 
     function get_error() {
-      global $HTTP_GET_VARS;
+      global $_GET;
 
-      if (isset($HTTP_GET_VARS['message']) && (strlen($HTTP_GET_VARS['message']) > 0)) {
-        $error = stripslashes(urldecode($HTTP_GET_VARS['message']));
+      if (isset($_GET['message']) && (strlen($_GET['message']) > 0)) {
+        $error = stripslashes(urldecode($_GET['message']));
       } else {
         $error = MODULE_PAYMENT_SECPAY_TEXT_ERROR_MESSAGE;
       }

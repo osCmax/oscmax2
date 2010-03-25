@@ -21,11 +21,11 @@ $Id: advanced_search_result.php 3 2006-05-27 04:59:07Z user $
 
   $error = false;
 
-  if ( (isset($HTTP_GET_VARS['keywords']) && empty($HTTP_GET_VARS['keywords'])) &&
-       (isset($HTTP_GET_VARS['dfrom']) && (empty($HTTP_GET_VARS['dfrom']) || ($HTTP_GET_VARS['dfrom'] == DOB_FORMAT_STRING))) &&
-       (isset($HTTP_GET_VARS['dto']) && (empty($HTTP_GET_VARS['dto']) || ($HTTP_GET_VARS['dto'] == DOB_FORMAT_STRING))) &&
-       (isset($HTTP_GET_VARS['pfrom']) && !is_numeric($HTTP_GET_VARS['pfrom'])) &&
-       (isset($HTTP_GET_VARS['pto']) && !is_numeric($HTTP_GET_VARS['pto'])) ) {
+  if ( (isset($_GET['keywords']) && empty($_GET['keywords'])) &&
+       (isset($_GET['dfrom']) && (empty($_GET['dfrom']) || ($_GET['dfrom'] == DOB_FORMAT_STRING))) &&
+       (isset($_GET['dto']) && (empty($_GET['dto']) || ($_GET['dto'] == DOB_FORMAT_STRING))) &&
+       (isset($_GET['pfrom']) && !is_numeric($_GET['pfrom'])) &&
+       (isset($_GET['pto']) && !is_numeric($_GET['pto'])) ) {
     $error = true;
 
     $messageStack->add_session('search', ERROR_AT_LEAST_ONE_INPUT);
@@ -36,24 +36,24 @@ $Id: advanced_search_result.php 3 2006-05-27 04:59:07Z user $
     $pto = '';
     $keywords = '';
 
-    if (isset($HTTP_GET_VARS['dfrom'])) {
-      $dfrom = (($HTTP_GET_VARS['dfrom'] == DOB_FORMAT_STRING) ? '' : $HTTP_GET_VARS['dfrom']);
+    if (isset($_GET['dfrom'])) {
+      $dfrom = (($_GET['dfrom'] == DOB_FORMAT_STRING) ? '' : $_GET['dfrom']);
     }
 
-    if (isset($HTTP_GET_VARS['dto'])) {
-      $dto = (($HTTP_GET_VARS['dto'] == DOB_FORMAT_STRING) ? '' : $HTTP_GET_VARS['dto']);
+    if (isset($_GET['dto'])) {
+      $dto = (($_GET['dto'] == DOB_FORMAT_STRING) ? '' : $_GET['dto']);
     }
 
-    if (isset($HTTP_GET_VARS['pfrom'])) {
-      $pfrom = $HTTP_GET_VARS['pfrom'];
+    if (isset($_GET['pfrom'])) {
+      $pfrom = $_GET['pfrom'];
     }
 
-    if (isset($HTTP_GET_VARS['pto'])) {
-      $pto = $HTTP_GET_VARS['pto'];
+    if (isset($_GET['pto'])) {
+      $pto = $_GET['pto'];
     }
 
-    if (isset($HTTP_GET_VARS['keywords'])) {
-      $keywords = $HTTP_GET_VARS['keywords'];
+    if (isset($_GET['keywords'])) {
+      $keywords = $_GET['keywords'];
     }
 
     $date_check_error = false;

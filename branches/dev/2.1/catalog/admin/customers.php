@@ -12,7 +12,7 @@ $Id: customers.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
-  $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   $error = false;
   $processed = false;
@@ -28,58 +28,58 @@ $Id: customers.php 3 2006-05-27 04:59:07Z user $
 		tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $_GET["cID"] . '&action=notes'));
 	  ### end customer notes by tabsl v0.1|2007 ###
       case 'update':
-        $customers_id = tep_db_prepare_input($HTTP_GET_VARS['cID']);
-        $customers_firstname = tep_db_prepare_input($HTTP_POST_VARS['customers_firstname']);
-        $customers_lastname = tep_db_prepare_input($HTTP_POST_VARS['customers_lastname']);
-        $customers_email_address = tep_db_prepare_input($HTTP_POST_VARS['customers_email_address']);
-        $customers_telephone = tep_db_prepare_input($HTTP_POST_VARS['customers_telephone']);
-        $customers_fax = tep_db_prepare_input($HTTP_POST_VARS['customers_fax']);
-        $customers_newsletter = tep_db_prepare_input($HTTP_POST_VARS['customers_newsletter']);
+        $customers_id = tep_db_prepare_input($_GET['cID']);
+        $customers_firstname = tep_db_prepare_input($_POST['customers_firstname']);
+        $customers_lastname = tep_db_prepare_input($_POST['customers_lastname']);
+        $customers_email_address = tep_db_prepare_input($_POST['customers_email_address']);
+        $customers_telephone = tep_db_prepare_input($_POST['customers_telephone']);
+        $customers_fax = tep_db_prepare_input($_POST['customers_fax']);
+        $customers_newsletter = tep_db_prepare_input($_POST['customers_newsletter']);
 // BOF: MOD - Separate Pricing per Customer
-        $customers_group_id = tep_db_prepare_input($HTTP_POST_VARS['customers_group_id']);
-        $customers_group_ra = tep_db_prepare_input($HTTP_POST_VARS['customers_group_ra']);
-        $entry_company_tax_id = tep_db_prepare_input($HTTP_POST_VARS['entry_company_tax_id']);
-        if ($HTTP_POST_VARS['customers_payment_allowed'] && $HTTP_POST_VARS['customers_payment_settings'] == '1') {
-          $customers_payment_allowed = tep_db_prepare_input($HTTP_POST_VARS['customers_payment_allowed']);
+        $customers_group_id = tep_db_prepare_input($_POST['customers_group_id']);
+        $customers_group_ra = tep_db_prepare_input($_POST['customers_group_ra']);
+        $entry_company_tax_id = tep_db_prepare_input($_POST['entry_company_tax_id']);
+        if ($_POST['customers_payment_allowed'] && $_POST['customers_payment_settings'] == '1') {
+          $customers_payment_allowed = tep_db_prepare_input($_POST['customers_payment_allowed']);
         } else { // no error with subsequent re-posting of variables  
           $customers_payment_allowed = '';
-          if ($HTTP_POST_VARS['payment_allowed'] && $HTTP_POST_VARS['customers_payment_settings'] == '1') {
-            while(list($key, $val) = each($HTTP_POST_VARS['payment_allowed'])) {
+          if ($_POST['payment_allowed'] && $_POST['customers_payment_settings'] == '1') {
+            while(list($key, $val) = each($_POST['payment_allowed'])) {
               if ($val == true) { 
                 $customers_payment_allowed .= tep_db_prepare_input($val).';'; 
               }
             } // end while
             $customers_payment_allowed = substr($customers_payment_allowed,0,strlen($customers_payment_allowed)-1);
-          } // end if ($HTTP_POST_VARS['payment_allowed'])
-        } // end else ($HTTP_POST_VARS['customers_payment_allowed']
-        if ($HTTP_POST_VARS['customers_shipment_allowed'] && $HTTP_POST_VARS['customers_shipment_settings'] == '1') {
-          $customers_shipment_allowed = tep_db_prepare_input($HTTP_POST_VARS['customers_shipment_allowed']);
+          } // end if ($_POST['payment_allowed'])
+        } // end else ($_POST['customers_payment_allowed']
+        if ($_POST['customers_shipment_allowed'] && $_POST['customers_shipment_settings'] == '1') {
+          $customers_shipment_allowed = tep_db_prepare_input($_POST['customers_shipment_allowed']);
         } else { // no error with subsequent re-posting of variables  
 
           $customers_shipment_allowed = '';
-          if ($HTTP_POST_VARS['shipping_allowed'] && $HTTP_POST_VARS['customers_shipment_settings'] == '1') {
-            while(list($key, $val) = each($HTTP_POST_VARS['shipping_allowed'])) {
+          if ($_POST['shipping_allowed'] && $_POST['customers_shipment_settings'] == '1') {
+            while(list($key, $val) = each($_POST['shipping_allowed'])) {
               if ($val == true) { 
                 $customers_shipment_allowed .= tep_db_prepare_input($val).';'; 
               }
             } // end while
             $customers_shipment_allowed = substr($customers_shipment_allowed,0,strlen($customers_shipment_allowed)-1);
-          } // end if ($HTTP_POST_VARS['shipment_allowed'])
-        } // end else ($HTTP_POST_VARS['customers_shipment_allowed']
+          } // end if ($_POST['shipment_allowed'])
+        } // end else ($_POST['customers_shipment_allowed']
 // EOF: MOD - Separate Pricing per Customer
-        $customers_gender = tep_db_prepare_input($HTTP_POST_VARS['customers_gender']);
-        $customers_dob = tep_db_prepare_input($HTTP_POST_VARS['customers_dob']);
+        $customers_gender = tep_db_prepare_input($_POST['customers_gender']);
+        $customers_dob = tep_db_prepare_input($_POST['customers_dob']);
 
-        $default_address_id = tep_db_prepare_input($HTTP_POST_VARS['default_address_id']);
-        $entry_street_address = tep_db_prepare_input($HTTP_POST_VARS['entry_street_address']);
-        $entry_suburb = tep_db_prepare_input($HTTP_POST_VARS['entry_suburb']);
-        $entry_postcode = tep_db_prepare_input($HTTP_POST_VARS['entry_postcode']);
-        $entry_city = tep_db_prepare_input($HTTP_POST_VARS['entry_city']);
-        $entry_country_id = tep_db_prepare_input($HTTP_POST_VARS['entry_country_id']);
+        $default_address_id = tep_db_prepare_input($_POST['default_address_id']);
+        $entry_street_address = tep_db_prepare_input($_POST['entry_street_address']);
+        $entry_suburb = tep_db_prepare_input($_POST['entry_suburb']);
+        $entry_postcode = tep_db_prepare_input($_POST['entry_postcode']);
+        $entry_city = tep_db_prepare_input($_POST['entry_city']);
+        $entry_country_id = tep_db_prepare_input($_POST['entry_country_id']);
 
-        $entry_company = tep_db_prepare_input($HTTP_POST_VARS['entry_company']);
-        $entry_state = tep_db_prepare_input($HTTP_POST_VARS['entry_state']);
-        if (isset($HTTP_POST_VARS['entry_zone_id'])) $entry_zone_id = tep_db_prepare_input($HTTP_POST_VARS['entry_zone_id']);
+        $entry_company = tep_db_prepare_input($_POST['entry_company']);
+        $entry_state = tep_db_prepare_input($_POST['entry_state']);
+        if (isset($_POST['entry_zone_id'])) $entry_zone_id = tep_db_prepare_input($_POST['entry_zone_id']);
 
         if (strlen($customers_firstname) < ENTRY_FIRST_NAME_MIN_LENGTH) {
           $error = true;
@@ -242,15 +242,15 @@ $Id: customers.php 3 2006-05-27 04:59:07Z user $
         tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $customers_id));
 
         } else if ($error == true) {
-          $cInfo = new objectInfo($HTTP_POST_VARS);
+          $cInfo = new objectInfo($_POST);
           $processed = true;
         }
 
         break;
       case 'deleteconfirm':
-        $customers_id = tep_db_prepare_input($HTTP_GET_VARS['cID']);
+        $customers_id = tep_db_prepare_input($_GET['cID']);
 
-        if (isset($HTTP_POST_VARS['delete_reviews']) && ($HTTP_POST_VARS['delete_reviews'] == 'on')) {
+        if (isset($_POST['delete_reviews']) && ($_POST['delete_reviews'] == 'on')) {
           $reviews_query = tep_db_query("select reviews_id from " . TABLE_REVIEWS . " where customers_id = '" . (int)$customers_id . "'");
           while ($reviews = tep_db_fetch_array($reviews_query)) {
             tep_db_query("delete from " . TABLE_REVIEWS_DESCRIPTION . " where reviews_id = '" . (int)$reviews['reviews_id'] . "'");
@@ -287,8 +287,8 @@ $Id: customers.php 3 2006-05-27 04:59:07Z user $
         break;
       default:
 // BOF: MOD - Separate Pricing per Customer
-//  old    $customers_query  =  tep_db_query("select  c.customers_id,  c.customers_gender,  c.customers_firstname,  c.customers_lastname,  c.customers_dob,  c.customers_email_address,  a.entry_company,  a.entry_street_address,  a.entry_suburb,  a.entry_postcode,  a.entry_city,  a.entry_state,  a.entry_zone_id,  a.entry_country_id,  c.customers_telephone,  c.customers_fax,  c.customers_newsletter,  c.customers_default_address_id  from  "  .  TABLE_CUSTOMERS  .  "  c  left  join  "  .  TABLE_ADDRESS_BOOK  .  "  a  on  c.customers_default_address_id  =  a.address_book_id  where  a.customers_id  =  c.customers_id  and  c.customers_id  =  '"  .  (int)$HTTP_GET_VARS['cID']  .  "'");
-        $customers_query = tep_db_query("select c.customers_id, c.customers_gender, c.customers_firstname, c.customers_lastname, c.customers_dob, c.customers_email_address, a.entry_company, a.entry_company_tax_id, a.entry_street_address, a.entry_suburb, a.entry_postcode, a.entry_city, a.entry_state, a.entry_zone_id, a.entry_country_id, c.customers_telephone, c.customers_fax, c.customers_newsletter, c.customers_group_id,  c.customers_group_ra, c.customers_payment_allowed, c.customers_shipment_allowed, c.customers_default_address_id from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_default_address_id = a.address_book_id where a.customers_id = c.customers_id and c.customers_id = '" . (int)$HTTP_GET_VARS['cID'] . "'");
+//  old    $customers_query  =  tep_db_query("select  c.customers_id,  c.customers_gender,  c.customers_firstname,  c.customers_lastname,  c.customers_dob,  c.customers_email_address,  a.entry_company,  a.entry_street_address,  a.entry_suburb,  a.entry_postcode,  a.entry_city,  a.entry_state,  a.entry_zone_id,  a.entry_country_id,  c.customers_telephone,  c.customers_fax,  c.customers_newsletter,  c.customers_default_address_id  from  "  .  TABLE_CUSTOMERS  .  "  c  left  join  "  .  TABLE_ADDRESS_BOOK  .  "  a  on  c.customers_default_address_id  =  a.address_book_id  where  a.customers_id  =  c.customers_id  and  c.customers_id  =  '"  .  (int)$_GET['cID']  .  "'");
+        $customers_query = tep_db_query("select c.customers_id, c.customers_gender, c.customers_firstname, c.customers_lastname, c.customers_dob, c.customers_email_address, a.entry_company, a.entry_company_tax_id, a.entry_street_address, a.entry_suburb, a.entry_postcode, a.entry_city, a.entry_state, a.entry_zone_id, a.entry_country_id, c.customers_telephone, c.customers_fax, c.customers_newsletter, c.customers_group_id,  c.customers_group_ra, c.customers_payment_allowed, c.customers_shipment_allowed, c.customers_default_address_id from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_default_address_id = a.address_book_id where a.customers_id = c.customers_id and c.customers_id = '" . (int)$_GET['cID'] . "'");
   
         $module_directory = DIR_FS_CATALOG_MODULES . 'payment/';
         $ship_module_directory = DIR_FS_CATALOG_MODULES . 'shipping/';
@@ -1094,20 +1094,20 @@ function check_form() {
               </tr>     
 <?php
     $search = '';
-    if (isset($HTTP_GET_VARS['search']) && tep_not_null($HTTP_GET_VARS['search'])) {
-      $keywords = tep_db_input(tep_db_prepare_input($HTTP_GET_VARS['search']));
+    if (isset($_GET['search']) && tep_not_null($_GET['search'])) {
+      $keywords = tep_db_input(tep_db_prepare_input($_GET['search']));
       $search = "where c.customers_lastname like '%" . $keywords . "%' or c.customers_firstname like '%" . $keywords . "%' or c.customers_email_address like '%" . $keywords . "%'";
     }
 // LINE CHANGED: MOD - customer_sort_admin_v1 adapted for Separate Pricing Per Customer
 //  $customers_query_raw = "select c.customers_id, c.customers_lastname, c.customers_firstname, c.customers_email_address, a.entry_country_id from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_id = a.customers_id and c.customers_default_address_id = a.address_book_id " . $search . " order by c.customers_lastname, c.customers_firstname";
     $customers_query_raw = "select c.customers_id, c.customers_lastname, c.customers_firstname, c.customers_email_address, c.customers_group_id, c.customers_group_ra, a.entry_country_id, a.entry_company, cg.customers_group_name from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_id = a.customers_id and c.customers_default_address_id = a.address_book_id left join customers_groups cg on c.customers_group_id = cg.customers_group_id " . $search . " order by $order";
-    $customers_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_query_raw, $customers_query_numrows);
+    $customers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_query_raw, $customers_query_numrows);
     $customers_query = tep_db_query($customers_query_raw);
     while ($customers = tep_db_fetch_array($customers_query)) {
       $info_query = tep_db_query("select customers_info_date_account_created as date_account_created, customers_info_date_account_last_modified as date_account_last_modified, customers_info_date_of_last_logon as date_last_logon, customers_info_number_of_logons as number_of_logons from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . $customers['customers_id'] . "'");
       $info = tep_db_fetch_array($info_query);
 
-      if ((!isset($HTTP_GET_VARS['cID']) || (isset($HTTP_GET_VARS['cID']) && ($HTTP_GET_VARS['cID'] == $customers['customers_id']))) && !isset($cInfo)) {
+      if ((!isset($_GET['cID']) || (isset($_GET['cID']) && ($_GET['cID'] == $customers['customers_id']))) && !isset($cInfo)) {
         $country_query = tep_db_query("select countries_name from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$customers['entry_country_id'] . "'");
         $country = tep_db_fetch_array($country_query);
 
@@ -1187,11 +1187,11 @@ function check_form() {
 <?php // LINE CHANGED: MOD customer_sort_admin_v1 adapted for Separate Pricing Per Customer colspan 4 to 7 ?>
                 <td colspan="7"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
-                    <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
+                    <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
+                    <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
                   </tr>
 <?php
-    if (isset($HTTP_GET_VARS['search']) && tep_not_null($HTTP_GET_VARS['search'])) {
+    if (isset($_GET['search']) && tep_not_null($_GET['search'])) {
 ?>
                   <tr>
                     <td align="right" colspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS) . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
@@ -1202,7 +1202,7 @@ function check_form() {
                 </table></td>
               </tr>
 <?php // BOF: MOD - Separate Pricing Per Customer: show numbers of customers in each customers group
-  if (!isset($HTTP_GET_VARS['search'])) {
+  if (!isset($_GET['search'])) {
   $customers_groups_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id ");
   while ($existing_customers_groups =  tep_db_fetch_array($customers_groups_query)) {
     $existing_customers_groups_array[] = array("id" => $existing_customers_groups['customers_group_id'], "text" => $existing_customers_groups['customers_group_name']);
@@ -1239,7 +1239,7 @@ function check_form() {
                  </table></td>
               <tr>
 <?php
-  } // end if (!isset($HTTP_GET_VARS['search']))
+  } // end if (!isset($_GET['search']))
 // EOF: MOD - Separate Pricing Per Customer: show numbers of customers in each customers group ?>
             </table></td>
 <?php

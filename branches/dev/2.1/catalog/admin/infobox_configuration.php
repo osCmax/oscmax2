@@ -12,51 +12,51 @@ $Id: infobox_configuration.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
-  if ($HTTP_GET_VARS['action']) {
-    switch ($HTTP_GET_VARS['action']) {
+  if ($_GET['action']) {
+    switch ($_GET['action']) {
 
       case 'setflag': //set the status of a news item.
-        if ( ($HTTP_GET_VARS['flag'] == 'no') || ($HTTP_GET_VARS['flag'] == 'yes') ) {
-          if ($HTTP_GET_VARS['cID']) {
-            tep_db_query("update " . TABLE_THEME_CONFIGURATION . " set configuration_value = '" . $HTTP_GET_VARS['flag'] . "' where configuration_id = '" . $HTTP_GET_VARS['cID'] . "'");
+        if ( ($_GET['flag'] == 'no') || ($_GET['flag'] == 'yes') ) {
+          if ($_GET['cID']) {
+            tep_db_query("update " . TABLE_THEME_CONFIGURATION . " set configuration_value = '" . $_GET['flag'] . "' where configuration_id = '" . $_GET['cID'] . "'");
           }
         }
 
 tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID));
         break;
       case 'setflagcolumn': //set the status of a box left or right.
-       if ( ($HTTP_GET_VARS['flag'] == 'left') || ($HTTP_GET_VARS['flag'] == 'right') ) {
-         if ($HTTP_GET_VARS['cID']) {
-           tep_db_query("update " . TABLE_THEME_CONFIGURATION . " set configuration_column = '" . $HTTP_GET_VARS['flag'] . "' where configuration_id = '" . $HTTP_GET_VARS['cID'] . "'");
+       if ( ($_GET['flag'] == 'left') || ($_GET['flag'] == 'right') ) {
+         if ($_GET['cID']) {
+           tep_db_query("update " . TABLE_THEME_CONFIGURATION . " set configuration_column = '" . $_GET['flag'] . "' where configuration_id = '" . $_GET['cID'] . "'");
           }
         }        
 
 tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID));
         break;
       case 'save':
-        $configuration_value = tep_db_prepare_input($HTTP_POST_VARS['configuration_value']);
-        $configuration_column = tep_db_prepare_input($HTTP_POST_VARS['configuration_column']);
-        $location = tep_db_prepare_input($HTTP_POST_VARS['location']);
-        $cID = tep_db_prepare_input($HTTP_GET_VARS['cID']);
+        $configuration_value = tep_db_prepare_input($_POST['configuration_value']);
+        $configuration_column = tep_db_prepare_input($_POST['configuration_column']);
+        $location = tep_db_prepare_input($_POST['location']);
+        $cID = tep_db_prepare_input($_GET['cID']);
 
         tep_db_query("update " . TABLE_THEME_CONFIGURATION . " set location = '" . tep_db_input($location) . "',configuration_column = '" . tep_db_input($configuration_column) . "', configuration_value = '" . tep_db_input($configuration_value) . "', last_modified = now() where configuration_id = '" . tep_db_input($cID) . "'");
-        tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID'] . '&cID=' . $cID));
+        tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cID));
         break;
 
  case 'insert':
-      $configuration_title = tep_db_prepare_input($HTTP_POST_VARS['configuration_title']);
-      $configuration_key = tep_db_prepare_input($HTTP_POST_VARS['configuration_key']);
-      $configuration_value = tep_db_prepare_input($HTTP_POST_VARS['configuration_value']);
-      $configuration_column = tep_db_prepare_input($HTTP_POST_VARS['configuration_column']);
-      $location = tep_db_prepare_input($HTTP_POST_VARS['location']);
-      $box_heading = tep_db_prepare_input($HTTP_POST_VARS['box_heading']);
+      $configuration_title = tep_db_prepare_input($_POST['configuration_title']);
+      $configuration_key = tep_db_prepare_input($_POST['configuration_key']);
+      $configuration_value = tep_db_prepare_input($_POST['configuration_value']);
+      $configuration_column = tep_db_prepare_input($_POST['configuration_column']);
+      $location = tep_db_prepare_input($_POST['location']);
+      $box_heading = tep_db_prepare_input($_POST['box_heading']);
 
       tep_db_query("insert into " . TABLE_THEME_CONFIGURATION . " (configuration_title, configuration_value, configuration_key, configuration_column, location, box_heading) values ('" . tep_db_input($configuration_title) . "', '" . tep_db_input($configuration_value) . "', '" . tep_db_input($configuration_key) . "', '" . tep_db_input($configuration_column) . "', '" . tep_db_input($location) . "', '" . tep_db_input($box_heading) . "')");
         tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID));
 
         break;
     case 'deleteconfirm':
-      $cID = tep_db_prepare_input($HTTP_GET_VARS['cID']);;
+      $cID = tep_db_prepare_input($_GET['cID']);;
 
       tep_db_query("delete from " . TABLE_THEME_CONFIGURATION . " where configuration_id = '" . tep_db_input($cID) . "'");
 
@@ -114,7 +114,7 @@ tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID))
 <?php
 $count_left=0;
 $count_right=0;
-  $configuration_query = tep_db_query("select configuration_id, configuration_title, configuration_value, configuration_column, location from " . TABLE_THEME_CONFIGURATION . " where configuration_group_id = '" . $HTTP_GET_VARS['gID'] . "' order by configuration_column ");
+  $configuration_query = tep_db_query("select configuration_id, configuration_title, configuration_value, configuration_column, location from " . TABLE_THEME_CONFIGURATION . " where configuration_group_id = '" . $_GET['gID'] . "' order by configuration_column ");
   while ($configuration = tep_db_fetch_array($configuration_query)) {
 
       $cfgloc = $configuration['location'];
@@ -123,7 +123,7 @@ $count_right=0;
 if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
 
 
-    if (((!$HTTP_GET_VARS['cID']) || (@$HTTP_GET_VARS['cID'] == $configuration['configuration_id'])) && (!$cInfo) && (substr($HTTP_GET_VARS['action'], 0, 3) != 'new')) {
+    if (((!$_GET['cID']) || (@$_GET['cID'] == $configuration['configuration_id'])) && (!$cInfo) && (substr($_GET['action'], 0, 3) != 'new')) {
       $cfg_extra_query = tep_db_query("select configuration_key, configuration_description, configuration_column,date_added, last_modified from " . TABLE_THEME_CONFIGURATION . " where configuration_id = '" . $configuration['configuration_id'] . "'");
       $cfg_extra = tep_db_fetch_array($cfg_extra_query);
 
@@ -132,9 +132,9 @@ if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
     }
 
     if ( (is_object($cInfo)) && ($configuration['configuration_id'] == $cInfo->configuration_id) ) {
-      echo '                  <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'hand\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID'] . '&cID=' . $cInfo->configuration_id . '&action=edit') . '\'">' . "\n";
+      echo '                  <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'hand\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id . '&action=edit') . '\'">' . "\n";
     } else {
-      echo '                  <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'hand\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID'] . '&cID=' . $configuration['configuration_id']) . '\'">' . "\n";
+      echo '                  <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'hand\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $configuration['configuration_id']) . '\'">' . "\n";
     }
 ?>
                 <td class="dataTableContent"><?php echo $configuration['configuration_title']; ?></td>
@@ -155,7 +155,7 @@ if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
 ?></td>
               <!--  <td class="dataTableContent" align="right"><?php echo htmlspecialchars($cfgcol); ?></td> -->
                 <td class="dataTableContent" align="center"><?php echo htmlspecialchars($cfgloc); ?></td>
-                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($configuration['configuration_id'] == $cInfo->configuration_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID'] . '&cID=' . $configuration['configuration_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($configuration['configuration_id'] == $cInfo->configuration_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $configuration['configuration_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
   }
@@ -165,7 +165,7 @@ if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
 <?php
   $heading = array();
   $contents = array();
-  switch ($HTTP_GET_VARS['action']) {
+  switch ($_GET['action']) {
     case 'edit':
       $heading[] = array('text' => '<b>' . $cInfo->configuration_title . '</b>');
 
@@ -176,10 +176,10 @@ if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
 
       $value_field_location =  tep_draw_input_field('location', $cInfo->location);
 
-      $contents = array('form' => tep_draw_form('configuration', FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID'] . '&cID=' . $cInfo->configuration_id . '&action=save'));
+      $contents = array('form' => tep_draw_form('configuration', FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id . '&action=save'));
       $contents[] = array('text' => TEXT_INFO_EDIT_INTRO);
       $contents[] = array('text' => '<br><b> Activate this box? </b><br>' . $value_field_value . '</b><br><br><b> Which column? </b><br>' . $value_field_column . '<br><br><b> What order? </b><br>' . $value_field_location);
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID'] . '&cID=' . $cInfo->configuration_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
 
 case 'new':
@@ -200,22 +200,22 @@ case 'new':
 
       $contents[] = array('text' => '<br><a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_POPUP_INFOBOX_HELP,'action=active') . '\')">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a><b>  Set this box Active? </b><br>' . $value_field_value . '</b><br>');
 
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_INFOBOX . '</b>');
 
-      $contents = array('form' => tep_draw_form('configuration', FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID'] . '&cID=' . $cInfo->configuration_id . '&action=deleteconfirm'));
+      $contents = array('form' => tep_draw_form('configuration', FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id . '&action=deleteconfirm'));
       $contents[] = array('text' => TEXT_INFO_DELETE_INTRO);
       $contents[] = array('align' => 'center','text' => '<br><b>' . $cInfo->configuration_title . '</b>');
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID'] . '&cID=' . $cInfo->configuration_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
 
     default:
       if (is_object($cInfo)) {
         $heading[] = array('text' => '<b>' . $cInfo->configuration_title . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID'] . '&cID=' . $cInfo->configuration_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID'] . '&cID=' . $cInfo->configuration_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a><br><br><a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $HTTP_GET_VARS['gID'] . '&action=new') . '">' . tep_image_button('button_new_infobox.gif', IMAGE_NEW_INFOBOX) . '</a> ');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a><br><br><a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&action=new') . '">' . tep_image_button('button_new_infobox.gif', IMAGE_NEW_INFOBOX) . '</a> ');
         $contents[] = array('text' => '<br>' . $cInfo->configuration_description);
 
         $contents[] = array('text' => '<br>' . TEXT_INFO_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));

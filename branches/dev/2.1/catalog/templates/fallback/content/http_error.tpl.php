@@ -2,7 +2,7 @@
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_HTTP_ERROR);
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ADVANCED_SEARCH);
 
-  switch ($HTTP_GET_VARS['error_id']) {
+  switch ($_GET['error_id']) {
      case '400':  $error_text = ERROR_400_DESC; break;
      case '401':  $error_text = ERROR_401_DESC; break;
      case '403':  $error_text = ERROR_403_DESC; break;
@@ -23,12 +23,12 @@
 
 // Send the HTTP Error to Store Owner
   if (EMAIL_HTTP_ERROR == 'true') {
-     tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, EMAIL_TEXT_SUBJECT, sprintf(EMAIL_BODY, HTTP_SERVER, $HTTP_GET_VARS['error_id'], $error_text, date("m/d/Y G:i:s"), HTTP_SERVER . $_SERVER['REQUEST_URI'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], $_SERVER['$HTTP_REFERER']), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, '');
+     tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, EMAIL_TEXT_SUBJECT, sprintf(EMAIL_BODY, HTTP_SERVER, $_GET['error_id'], $error_text, date("m/d/Y G:i:s"), HTTP_SERVER . $_SERVER['REQUEST_URI'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], $_SERVER['$HTTP_REFERER']), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, '');
   }
 
 // PGM Edit to store in dbase
 
-tep_db_query("insert into " . TABLE_HTTP_ERROR . " values ('', '" . $HTTP_GET_VARS['error_id'] . "', '" .  HTTP_SERVER . $_SERVER['REQUEST_URI'] . "', '" . $_SERVER['REMOTE_ADDR'] . "', '" . $_SERVER['HTTP_USER_AGENT'] . "', '" . $_SERVER['$HTTP_REFERER'] . "', '" . date('F j, Y, g:i a') . "')");
+tep_db_query("insert into " . TABLE_HTTP_ERROR . " values ('', '" . $_GET['error_id'] . "', '" .  HTTP_SERVER . $_SERVER['REQUEST_URI'] . "', '" . $_SERVER['REMOTE_ADDR'] . "', '" . $_SERVER['HTTP_USER_AGENT'] . "', '" . $_SERVER['$HTTP_REFERER'] . "', '" . date('F j, Y, g:i a') . "')");
 
 ?>
 
@@ -37,7 +37,7 @@ tep_db_query("insert into " . TABLE_HTTP_ERROR . " values ('', '" . $HTTP_GET_VA
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo sprintf(HEADING_TITLE, $HTTP_GET_VARS['error_id']); ?></td>
+            <td class="pageHeading"><?php echo sprintf(HEADING_TITLE, $_GET['error_id']); ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>

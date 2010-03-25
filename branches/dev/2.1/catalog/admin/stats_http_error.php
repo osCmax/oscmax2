@@ -64,10 +64,10 @@ $Id: stats_http_error.php 3 2009-11-19 15:09:00 user pgm
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_ERROR_TYPE; ?></td>
               </tr>
 <?php
-  if (isset($HTTP_GET_VARS['page']) && ($HTTP_GET_VARS['page'] > 1)) $rows = $HTTP_GET_VARS['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
+  if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
   $http_error_query_raw = "select he.error_number, he.error_code, he.error_url, he.error_ip, he. error_browser, he.error_refer, he.error_timestamp from " . TABLE_HTTP_ERROR . " he order by he.error_number DESC";
 
-  $http_error_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $http_error_query_raw, $http_error_query_numrows);
+  $http_error_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $http_error_query_raw, $http_error_query_numrows);
 // fix counted customers
   $http_error_query_numrows = tep_db_query("select error_number from " . TABLE_HTTP_ERROR . " group by error_number");
   $http_error_query_numrows = tep_db_num_rows($http_error_query_numrows);
@@ -99,9 +99,9 @@ $Id: stats_http_error.php 3 2009-11-19 15:09:00 user pgm
           <tr>
             <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td class="smallText" align="left" width="45%"><?php echo $http_error_split->display_count($http_error_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_ERRORS); ?></td>
+                <td class="smallText" align="left" width="45%"><?php echo $http_error_split->display_count($http_error_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_ERRORS); ?></td>
                 <td class="smallText" align="center" width="10%"><?php echo '<a href="' . tep_href_link(FILENAME_STATS_HTTP_ERROR, 'action=reset_http_error') . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
-                <td class="smallText" align="right" width="45%"><?php echo $http_error_split->display_links($http_error_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page']); ?>&nbsp;</td>
+                <td class="smallText" align="right" width="45%"><?php echo $http_error_split->display_links($http_error_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?>&nbsp;</td>
               </tr>
             </table></td>
           </tr>

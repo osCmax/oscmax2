@@ -1478,6 +1478,19 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_FUNCTIONS . 'downloads_controller.php');
 // EOF: MOD - Downloads Controller
 
+// BOF: MOD - FedEx
+// link to fedex shipment tracker
+  function tep_track_fedex($order_id) {
+    $fedex_query = tep_db_query("select fedex_tracking from " . TABLE_ORDERS . " where orders_id = '" . (int)$order_id . "'");
+    $fedexArray = tep_db_fetch_array($fedex_query);
+    $fedex_tracking = $fedexArray['fedex_tracking'];
+    $trackLink = false;
+    if ($fedex_tracking) {
+      $trackLink = tep_href_link(FILENAME_TRACK_FEDEX) . '?&track=' . $fedex_tracking;
+    }
+    return $trackLink;
+  }
+// EOF: MOD - FedEx
 // BOF SPPC, hide products and categories from groups
   function tep_get_hide_status_single($customer_group_id, $pid_for_hide) {
       $hide_query = tep_db_query("select find_in_set('" . $customer_group_id . "', products_hide_from_groups) as hide_or_not, find_in_set('" . $customer_group_id . "', categories_hide_from_groups) as in_hidden_category from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = '" . $pid_for_hide . "'");

@@ -21,8 +21,11 @@
 //end{stylesheet}
 
 //begin{javascript}
-  require('includes/javascript/form_check.js.php');
+if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exists for this page it will be loaded
+      require(bts_select('javascript', $PHP_SELF));
+} else {
   if (isset($javascript) && file_exists(DIR_WS_JAVASCRIPT . basename($javascript))) { require(DIR_WS_JAVASCRIPT . basename($javascript)); }
+}
 //end{javascript}
       
 //begin{mopics}	  

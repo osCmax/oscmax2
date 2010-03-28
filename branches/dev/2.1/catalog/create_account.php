@@ -374,8 +374,7 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 
       tep_redirect(tep_href_link(FILENAME_CREATE_ACCOUNT_SUCCESS, '', 'SSL'));
     }
-  }
- 
+ )
 // BOF: MOD - Country-State Selector 
  }
 if ($_POST['action'] == 'refresh') {$state = '';}

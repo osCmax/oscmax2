@@ -350,7 +350,7 @@ define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The expiry date entered for the credit 
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The credit card number entered is invalid. Please check the number and try again.');
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first four digits of the number entered are: %s. If this number is correct, we do not accept this type of credit card. If it is wrong, please try again.');
 
-define('FOOTER_TEXT_BODY', 'Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCMax</a><br>Powered by <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
+define('FOOTER_TEXT_BODY', 'All content and Images Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a><br> Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCMax</a><br>Powered by <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
 
 
 // BOF: MOD - Checkout Without Account

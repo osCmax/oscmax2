@@ -104,6 +104,8 @@
 
     function confirmation() {
       global $cartID, $cart_PayPal_Standard_ID, $customer_id, $languages_id, $order, $order_total_modules;
+      // Line Added - osCAffiliate support
+      global $affiliate_ref, $affiliate_clientdate, $affiliate_clientbrowser, $affiliate_clientip, $affiliate_clickthroughs_id, $HTTP_SESSION_VARS;
 
       if (tep_session_is_registered('cartID')) {
         $insert_order = false;
@@ -280,7 +282,7 @@
     }
 
     function process_button() {
-      global $customer_id, $order, $sendto, $currency, $cart_PayPal_Standard_ID, $shipping;
+      global $customer_id, $order, $sendto, $currency, $cart_PayPal_Standard_ID, $shipping, $order_total_modules;
 
       $process_button_string = '';
       $parameters = array('cmd' => '_xclick',
@@ -528,9 +530,9 @@
     tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
     $order_products_id = tep_db_insert_id();
 // Start - CREDIT CLASS Gift Voucher Contribution
-       if (isset($order_total_modules)) { 
-            $order_total_modules->update_credit_account($i);
-        }
+//       if (isset($order_total_modules)) { 
+//            $order_total_modules->update_credit_account($i);
+//        }
 // End - CREDIT CLASS Gift Voucher Contribution
 
 //------insert customer choosen option to order--------

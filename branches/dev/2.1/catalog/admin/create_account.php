@@ -15,6 +15,12 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 */
 
   require('includes/application_top.php');
+  // +Country-State Selector
+  require(DIR_WS_FUNCTIONS . 'ajax.php');
+if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates' && isset($HTTP_POST_VARS['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($HTTP_POST_VARS['country']), true);
+} else {
+  // -Country-State Selector
 
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CREATE_ACCOUNT);
 
@@ -26,6 +32,66 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
   <title><?php echo TITLE ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <?php require('includes/form_check.js.php'); ?>
+<script language="javascript" type="text/javascript"><!--
+function getObject(name) { 
+   var ns4 = (document.layers) ? true : false; 
+   var w3c = (document.getElementById) ? true : false; 
+   var ie4 = (document.all) ? true : false; 
+
+   if (ns4) return eval('document.' + name); 
+   if (w3c) return document.getElementById(name); 
+   if (ie4) return eval('document.all.' + name); 
+   return false; 
+}
+
+//Gets the browser specific XmlHttpRequest Object
+function getXmlHttpRequestObject() {
+	if (window.XMLHttpRequest) {
+		return new XMLHttpRequest();
+	} else if(window.ActiveXObject) {
+		return new ActiveXObject("Microsoft.XMLHTTP");
+	} else {
+		alert("Your browser does not support this feature.  Please upgrade or use a different browser. Older (pre-v2.8) versions of Order Editor do not have this restriction.");
+	}
+}
+
+//Our XmlHttpRequest object to get the auto suggest
+var request = getXmlHttpRequestObject();
+/***************************************************
+ GET STATES FUNCTIONS 
+ ***************************************************/
+function getStates(countryID, div_element) {
+	if (request.readyState == 4 || request.readyState == 0) {
+		// indicator make visible here..
+		getObject("indicator").style.visibility = 'visible';
+		var contentType = "application/x-www-form-urlencoded; charset=UTF-8";
+		var fields = "action=getStates&country="+countryID;
+					
+		request.open("POST", 'create_account.php', true);
+		//request.onreadystatechange = getStatesRequest;
+		request.onreadystatechange = function() {
+			getStatesRequest(request, div_element);
+		};
+		
+		request.setRequestHeader("Content-Type", contentType);		
+		request.send(fields);
+	}
+}										
+//Called when the AJAX response is returned.
+function getStatesRequest(request, div_element) {
+	if (request.readyState == 4) {
+		var obj_div = getObject(div_element);
+		// make hidden
+		getObject('indicator').style.visibility = 'hidden';
+	  obj_div.innerHTML = request.responseText;
+		
+		for (i=0; i<obj_div.childNodes.length; i++){
+			if (obj_div.childNodes[i].nodeName=="SELECT")
+				obj_div.childNodes[i].focus();
+		}
+	}
+}
+//--></script>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
@@ -67,6 +133,10 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
         <td>
 <?php
   //$email_address = tep_db_prepare_input($_GET['email_address']);
+   // +Country-State Selector 
+if (!isset($country)){$country = DEFAULT_COUNTRY;}
+// -Country-State Selector
+
   $account['entry_country_id'] = STORE_COUNTRY;
   $account['entry_zone_id'] = STORE_ZONE;
 
@@ -93,4 +163,9 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 <br>
 </body>
 </html>
-<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
+<?php
+// +Country-State Selector 
+}
+// -Country-State Selector 
+   require(DIR_WS_INCLUDES . 'application_bottom.php');
+?>

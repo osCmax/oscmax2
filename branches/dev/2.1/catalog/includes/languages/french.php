@@ -355,8 +355,7 @@ define('TEXT_CCVAL_ERROR_INVALID_DATE', 'La date d\'expiration entr&eacute;e pou
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'Le num&eacute; entr&eacute;e pour cette carte de cr&eacute;dit n\'est pas valide.<br>Veuillez v&eacute;rifier le num&eacute;ro et r&eacute;essayez.');
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Le code &agrave; 4 chiffres que vous avez entr&eacute; est: %s<br>Si ce code est correcte, nous n\'acceptons pas ce type de carte cr&eacute;dit.<br>S\'il est erron&eacute;, veuillez r&eacute;essayer.');
 
-define('FOOTER_TEXT_BODY', 'Copyright &copy; 2010 <a href="http://osCMax.com">osCMax</a>, <a href="http://aabox.com">AABox Web Hosting</a><br>
-Powered by <a href="http://www.oscmax.com" target="_blank">osCMax v2.0</a>');
+define('FOOTER_TEXT_BODY', 'All content and Images Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a><br> Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCMax</a><br>Powered by <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
 
 // ADDED LINE: MOD - Gift and Voucher
 require(DIR_WS_LANGUAGES . 'add_ccgvdc_french.php');

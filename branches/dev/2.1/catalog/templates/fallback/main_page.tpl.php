@@ -11,6 +11,7 @@
 
 <head>
 
+
 <?php require(DIR_WS_INCLUDES . 'meta_tags.php'); ?>
 <title><?php echo META_TAG_TITLE; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
@@ -144,7 +145,6 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
     <td align="center" class="smallText">  
-     All content and Images Copyright &copy; 2009 <?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a>'; ?>
      <br>
 <?php
 /*
@@ -152,13 +152,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
   appropriately modified or removed if the layout of
   the site theme has been modified to distinguish
   itself from the default osCommerce-copyrighted
-  theme.
-
-  For more information please read the following
-  Frequently Asked Questions entry on the osCommerce
-  support site:
-
-  http://oscdox.com/community.php/faq,26/q,50
+  theme or the default osCMax copyrighted theme.
 
   Please leave this comment intact together with the
   following copyright announcement.

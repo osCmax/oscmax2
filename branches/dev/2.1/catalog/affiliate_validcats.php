@@ -39,7 +39,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <head>
 <body marginwidth="10" marginheight="10" topmargin="10" bottommargin="10" leftmargin="10" rightmargin="10">
  
-	<table width="580" class="infoBoxContents">
+	<table width="580" class="infoBox">
 <tr>
 <td colspan="2" class="infoBoxHeading" align="center"><?php echo TEXT_VALID_CATEGORIES_LIST; ?></td>
 </tr>
@@ -48,7 +48,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
     $result = mysql_query("SELECT * FROM categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '" . $languages_id . "' ORDER BY categories_description.categories_name");
     if ($row = mysql_fetch_array($result)) {
         do {
-            echo "<td class='infoBoxContents'>&nbsp".$row["categories_id"]."</td>\n";
+            echo "<td class='infoBoxContents'> ".$row["categories_id"]."</td>\n";
             echo "<td class='infoBoxContents'>".$row["categories_name"]."</td>\n";
             echo "</tr>\n";
         }

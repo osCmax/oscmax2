@@ -28,8 +28,8 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
         $backup_file = 'db_' . DB_DATABASE . '-' . date('YmdHis') . '.sql';
         $fp = fopen(DIR_FS_BACKUP . $backup_file, 'w');
 
-        $schema = '# osCMax Power E-Commerce' . "\n" .
-                  '# http://oscdox.com' . "\n" .
+        $schema = '# osCMax Open Source Shopping Cart' . "\n" .
+                  '# http://www.oscmax.com' . "\n" .
                   '#' . "\n" .
                   '# Database Backup For ' . STORE_NAME . "\n" .
                   '# Copyright (c) osCMax ' . date('Y') . ' ' . STORE_OWNER . "\n" .
@@ -63,7 +63,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
             $schema .= ',' . "\n";
           }
 
-          $schema = ereg_replace(",\n$", '', $schema);
+          $schema = preg_replace("/,\n$/", '', $schema);
 
 // add the keys
           $index = array();
@@ -111,7 +111,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
                   $schema .= 'NULL, ';
                 } elseif (tep_not_null($rows[$i])) {
                   $row = addslashes($rows[$i]);
-                  $row = ereg_replace("\n#", "\n".'\#', $row);
+                  $row = preg_replace("/\n#/", "\n".'\#', $row);
 
                   $schema .= '\'' . $row . '\', ';
                 } else {
@@ -119,7 +119,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
                 }
               }
 
-              $schema = ereg_replace(', $', '', $schema) . ');' . "\n";
+              $schema = preg_replace('/, $/', '', $schema) . ');' . "\n";
               fputs($fp, $schema);
             }
           }
@@ -239,7 +239,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
               if ($next == '') { // get the last insert query
                 $next = 'insert';
               }
-              if ( (eregi('create', $next)) || (eregi('insert', $next)) || (eregi('drop t', $next)) ) {
+              if ( (preg_match('/create/i', $next)) || (preg_match('/insert/i', $next)) || (preg_match('/drop t/i', $next)) ) {
                 $query = substr($restore_query, 0, $i);
 
                 $next = '';
@@ -248,7 +248,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
                 $sql_length = strlen($restore_query);
                 $i = strpos($restore_query, ';')-1;
 
-                if (eregi('^create*', $query)) {
+                if (preg_match('/^create*/i', $query)) {
                   $table_name = trim(substr($query, stripos($query, 'table ')+6));
                   $table_name = substr($table_name, 0, strpos($table_name, ' '));
 
@@ -258,9 +258,6 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
             }
           }
 
-// BOF: Mod - QT Pro
-          tep_db_query("drop table if exists address_book, address_format, banners, banners_history, categories, categories_description, configuration, configuration_group, counter, counter_history, countries, currencies, customers, customers_basket, customers_basket_attributes, customers_info, languages, manufacturers, manufacturers_info, orders, orders_products, orders_status, orders_status_history, orders_products_attributes, orders_products_download, products, products_attributes, products_attributes_download, prodcts_description, products_options, products_options_values, products_options_values_to_products_options, products_stock, products_to_categories, reviews, reviews_description, sessions, specials, tax_class, tax_rates, geo_zones, whos_online, zones, zones_to_geo_zones");
-// EOF: Mod - QT Pro
           tep_db_query('drop table if exists ' . implode(', ', $drop_table_names));
           for ($i=0, $n=sizeof($sql_array); $i<$n; $i++) {
             tep_db_query($sql_array[$i]);

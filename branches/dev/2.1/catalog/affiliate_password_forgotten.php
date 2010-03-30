@@ -44,4 +44,5 @@ $Id: affiliate_password_forgotten.php 3 2006-05-27 04:59:07Z user $
   include (bts_select('main', $content_template)); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
+  }
 ?>

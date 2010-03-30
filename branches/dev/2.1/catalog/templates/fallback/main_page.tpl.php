@@ -1,4 +1,4 @@
-<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html <?php echo HTML_PARAMS;
   // BOF Separate Pricing Per Customer
     if(!tep_session_is_registered('sppc_customer_group_id')) {
@@ -10,7 +10,6 @@
 ?>>
 
 <head>
-
 
 <?php require(DIR_WS_INCLUDES . 'meta_tags.php'); ?>
 <title><?php echo META_TAG_TITLE; ?></title>

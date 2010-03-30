@@ -24,7 +24,7 @@ $debug = array();
     exit('Server Requirement Error: register_globals is disabled in your PHP configuration. This can be enabled in your php.ini configuration file or in the .htaccess file in your catalog directory. Please use PHP 4.3+ if register_globals cannot be enabled on the server.');
   }
 // LINE ADDED: added to support PHP 5.0.x by TJ
-$_GET = $_GET; $_POST = $_POST;
+$HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
 // Set the local configuration parameters - mainly for developers
   if (file_exists('includes/local/configure.php')) include('includes/local/configure.php');

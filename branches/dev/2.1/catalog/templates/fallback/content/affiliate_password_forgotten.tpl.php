@@ -1,10 +1,16 @@
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-
           </tr>
-        </td>
-      </tr>
+  
+<?php
+  if (isset($_GET['email']) && ($_GET['email'] == 'nonexistent')) {
+    echo '          <tr>' . "\n";
+    echo '            <td colspan="2" class="messageStackError">' .  TEXT_NO_EMAIL_ADDRESS_FOUND . '</td>' . "\n";
+    echo '          </tr>' . "\n";
+  }
+?>
+
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
@@ -22,13 +28,7 @@
               </tr>
             </table></td>
           </tr>
-<?php
-  if (isset($_GET['email']) && ($_GET['email'] == 'nonexistent')) {
-    echo '          <tr>' . "\n";
-    echo '            <td colspan="2" class="smallText">' .  TEXT_NO_EMAIL_ADDRESS_FOUND . '</td>' . "\n";
-    echo '          </tr>' . "\n";
-  }
-?>
+
         </table></form></td>
       </tr>
     </table>

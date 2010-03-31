@@ -16,6 +16,7 @@ $Id: stylesheet.css 3 2006-05-27 04:59:07Z user $
 .stockWarning { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #cc0033; }
 .productsNotifications { background: #f2f2f2; }
 .orderEdit { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #70d250; text-decoration: underline; }
+img { border: 0; border-collapse: collapse; }
 
 BODY {
   background: #bbbbbb;

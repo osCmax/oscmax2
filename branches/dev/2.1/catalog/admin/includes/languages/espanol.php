@@ -272,6 +272,9 @@ define('BOX_TOOLS_MAIL', 'Enviar Email');
 define('BOX_TOOLS_NEWSLETTER_MANAGER', 'Boletines');
 define('BOX_TOOLS_SERVER_INFO', 'Informaci&oacute;n');
 define('BOX_TOOLS_WHOS_ONLINE', 'Usuarios conectados');
+define('BOX_TOOLS_PACKAGING', 'Envases');
+define('BOX_TOOLS_UPS_BOXES_USED', 'UPS cajas usadas');
+define('BOX_TOOLS_QUICK_LINKS', 'Rápida Enlaces');
 
 // localizaion box text in includes/boxes/localization.php
 define('BOX_HEADING_LOCALIZATION', 'Localizaci&oacute;n');
@@ -460,6 +463,8 @@ define('TEXT_DISPLAY_NUMBER_OF_TAX_ZONES', 'Viendo del <b>%d</b> al <b>%d</b> (d
 define('TEXT_DISPLAY_NUMBER_OF_TAX_RATES', 'Viendo del <b>%d</b> al <b>%d</b> (de <b>%d</b> porcentajes de impuestos)');
 define('TEXT_DISPLAY_NUMBER_OF_TAX_CLASSES', 'Viendo del <b>%d</b> al <b>%d</b> (de <b>%d</b> tipos de impuesto)');
 define('TEXT_DISPLAY_NUMBER_OF_ZONES', 'Viendo del <b>%d</b> al <b>%d</b> (de <b>%d</b> zonas)');
+define('TEXT_DISPLAY_NUMBER_OF_SHIPMENTS', 'Viendo del <b>%d</b> al <b>%d</b> (de <b>%d</b> envíos)');
+define('TEXT_DISPLAY_NUMBER_OF_QUICK_LINKS', 'Viendo del <b>%d</b> al <b>%d</b> (de <b>%d</b> rápido enlaces)');
 
 //BOF: MOD - Catagories Discriptions
 define('TEXT_EDIT_CATEGORIES_HEADING_TITLE', 'Titulo del Encabezado de Categorías:');

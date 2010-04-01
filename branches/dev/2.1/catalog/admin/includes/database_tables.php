@@ -59,6 +59,10 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
   define('TABLE_SPECIALS', 'specials');
   define('TABLE_TAX_CLASS', 'tax_class');
   define('TABLE_TAX_RATES', 'tax_rates');
+
+// LINE ADDED - PGM - QUICK LINKS
+  define('TABLE_QUICK_LINKS', 'quick_links');
+
 // LINE ADDED
   define('TABLE_THEME_CONFIGURATION', 'theme_configuration');
   define('TABLE_GEO_ZONES', 'geo_zones');

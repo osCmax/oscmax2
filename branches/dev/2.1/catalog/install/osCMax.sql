@@ -1309,6 +1309,19 @@ CREATE TABLE http_error (
   PRIMARY KEY (error_number)
 );
 
+DROP TABLE IF EXISTS quick_links;
+CREATE TABLE IF NOT EXISTS quick_links (
+  quick_links_id int(11) NOT NULL AUTO_INCREMENT,
+  quick_links_name varchar(255) NOT NULL,
+  quick_links_link varchar(255) NOT NULL,
+  quick_links_target varchar(255) NOT NULL,
+  quick_links_sort_order int(11) NOT NULL,
+  date_added datetime NOT NULL,
+  last_modified datetime DEFAULT NULL,
+  quick_links_image varchar(255) NOT NULL,
+  PRIMARY KEY (quick_links_id)
+);
+
 # data
 
 # 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany, 6 - UK
@@ -1455,6 +1468,7 @@ INSERT INTO admin_files VALUES (140,'googlesitemap.php', 0, 2, '1');
 INSERT INTO admin_files VALUES (141,'common_reports.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (142,'stats_http_error.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (143,'stats_register_customer_no_purchase.php', 0, 8, '1');
+INSERT INTO admin_files VALUES (144,'quick_links.php', 0, 9, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
@@ -2398,3 +2412,16 @@ INSERT INTO zones VALUES (178,195,'Valladolid','Valladolid');
 INSERT INTO zones VALUES (179,195,'Vizcaya','Vizcaya');
 INSERT INTO zones VALUES (180,195,'Zamora','Zamora');
 INSERT INTO zones VALUES (181,195,'Zaragoza','Zaragoza');
+
+#Default Quick Links
+INSERT INTO quick_links VALUES (1, 'Home', 'index.php', '_top', 1, now(), now(), 'dashboard.png');
+INSERT INTO quick_links VALUES (2, 'Google Analytics', 'https://www.google.com/analytics/reporting/', '_blank', 2, now(), now(), 'analytics.png');
+INSERT INTO quick_links VALUES (3, 'Google Web Tools', 'https://www.google.com/webmasters/tools/dashboard', '_blank', 3, now(), now(), 'webtools.png');
+INSERT INTO quick_links VALUES (4, 'Pingdom', 'https://pp.pingdom.com/index.php/member/default', '_blank', 4, now(), now(), 'pingdom.png');
+INSERT INTO quick_links VALUES (5, 'Categories', 'categories.php', '_top', 5, now(), now(), 'categories.png');
+INSERT INTO quick_links VALUES (6, 'Cross Sell', 'xsell.php', '_top', 6, now(), now(), 'xsell.png');
+INSERT INTO quick_links VALUES (7, 'Backup', 'backup.png', '_top', 7, now(), now(), 'backup.png');
+INSERT INTO quick_links VALUES (8, 'Orders', 'orders.php', '_top', 8, now(), now(), 'orders.png');
+INSERT INTO quick_links VALUES (9, 'Customers', 'customers.php', '_top', 9, now(), now(), 'customers.png');
+INSERT INTO quick_links VALUES (10, 'Newsletters', 'newsletters.php', '_top', 10, now(), now(), 'newsletters.png');
+INSERT INTO quick_links VALUES (11, 'Goto Catalog', '../index.php', '_blank', 11, now(), now(), 'catalog.png');

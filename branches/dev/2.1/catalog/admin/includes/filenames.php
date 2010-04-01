@@ -54,6 +54,9 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_WHOS_ONLINE', 'whos_online.php');
   define('FILENAME_ZONES', 'zones.php');
 
+// LINE ADDED - PGM - QUICK LINKS
+  define('FILENAME_QUICK_LINKS', 'quick_links.php');
+
 // BOF: MOD - Create & Edit Order & customers
   define('FILENAME_CREATE_ACCOUNT', 'create_account.php');
   define('FILENAME_CREATE_ACCOUNT_PROCESS', 'create_account_process.php');

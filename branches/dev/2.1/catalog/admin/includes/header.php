@@ -101,31 +101,30 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
 
 <table border="0" width="100%" cellspacing="0" cellpadding="0" bgcolor="#F0F1F1">
 <tr valign="top">
-  <td></td>
-  <td rowspan="2"><a href="http://www.oscmax.com/" target="_blank" class="header"><?php echo tep_image(DIR_WS_IMAGES .'oscmax-logo.png'); ?></a></td>
-  <td rowspan="2">
-  <table width="236">
-<tr><td class="smalltext" align="center">
-<div id="searchtabs" class="ui-tabs">
-<ul>
-<li><a href="#searchtabs-1">Customers</a></li>
-<li><a href="#searchtabs-2">Products</a></li>
-<li><a href="#searchtabs-3">Orders</a></li>
-</ul>
-
-<div id="searchtabs-1" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_CUSTOMERS, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
-
-<div id="searchtabs-2" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_CATEGORIES, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
-
-<div id="searchtabs-3" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, '', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
-
-</div>
-</td>
-</tr>
-</table>
-
+  <td width="33%" align="left"><a href="http://www.oscmax.com/" target="_blank" class="header"><?php echo tep_image(DIR_WS_IMAGES .'oscmax-logo.png'); ?></a></td>
+  <td width="33%" align="center">
+    <table width="236">
+      <tr>
+        <td class="smalltext" align="center">
+            <div id="searchtabs" class="ui-tabs">
+                <ul>
+                <li><a href="#searchtabs-1">Customers</a></li>
+                <li><a href="#searchtabs-2">Products</a></li>
+                <li><a href="#searchtabs-3">Orders</a></li>
+                </ul>
+    
+                <div id="searchtabs-1" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_CUSTOMERS, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
+                
+                <div id="searchtabs-2" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_CATEGORIES, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
+                
+                <div id="searchtabs-3" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, '', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
+           
+            </div>
+	    </td>
+	  </tr>
+    </table>
   </td>
-  <td class="smalltext" align="right">
+  <td width="33%" class="smalltext" align="right">
   	<?php echo tep_draw_form('languages', 'index.php', '', 'get'); ?>
   	<?php echo tep_draw_pull_down_menu('language', $languages_array, $languages_selected, 'onChange="this.form.submit();"'); ?>
   	<?php echo tep_hide_session_id(); ?></form>
@@ -134,15 +133,11 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
 	<?php echo tep_image(DIR_WS_ICONS . 'book_key.png', 'Manage Account'); ?> Welcome, <?php echo $myLogin['admin_username']; ?>.</a>
 	<?php echo '<a href="' . tep_catalog_href_link('admin/logoff.php') . '" class="header">'; ?>
 	<?php echo tep_image(DIR_WS_ICONS . 'exit.png', 'Logoff'); ?> Logoff &nbsp;
-
   </td>
 </tr>
-
-<?php require(DIR_WS_INCLUDES . 'shortcuts.php'); ?>
-
 <tr style="background-color:#606060">
-<td colspan="4">
-<?php require(DIR_WS_INCLUDES . 'menu.php'); ?>
-</td>
+  <td colspan="4">
+    <?php require(DIR_WS_INCLUDES . 'menu.php'); ?>
+  </td>
 </tr>
 </table>

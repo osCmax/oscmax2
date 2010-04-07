@@ -29,7 +29,7 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
       $message .= sprintf(TEXT_REDEEM_COUPON_MESSAGE_AMOUNT, $currencies->format($gv_amount));
       $message .= TEXT_REDEEM_COUPON_MESSAGE_BODY;
       $message .= TEXT_REDEEM_COUPON_MESSAGE_FOOTER;
-      $mimemessage = new email(array('X-Mailer: osCMax bulk mailer'));
+      $mimemessage = new email(array('X-Mailer: osCMax Mailer'));
       // add the message to the object
       $mimemessage->add_text($message);
       $mimemessage->build_message();

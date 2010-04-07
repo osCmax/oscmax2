@@ -37,7 +37,7 @@ $Id: mail.php 3 2006-05-27 04:59:07Z user $
     $message = tep_db_prepare_input($_POST['message']);
 
     //Let's build a message object using the email class
-    $mimemessage = new email(array('X-Mailer: osCommerce'));
+    $mimemessage = new email(array('X-Mailer: osCMax Mailer'));
     // add the message to the object
     
 // BOF: MOD - WYSIWYG HTML Area (Send TEXT Email when WYSIWYG Disabled)

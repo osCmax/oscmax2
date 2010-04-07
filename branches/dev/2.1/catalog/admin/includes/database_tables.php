@@ -110,4 +110,8 @@ define('TABLE_UPS_BOXES_USED', 'ups_boxes_used');
 // BOF: Http Error Logging
   define('TABLE_HTTP_ERROR', 'http_error');
 // EOF: Http Error Logging
+
+// BOF: osCMax Help System - PGM
+  define('TABLE_HELP_PAGES', 'help_pages');
+// EOF: osCMax Help System - PGM
 ?>

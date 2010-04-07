@@ -23,31 +23,6 @@
         }).superfish();  // call supersubs first, then superfish, so that subs are 
                          // not display:none when measuring. Call before initialising 
                          // containing tabs for same reason. 
-
-//Set Help to Off
-    $("#help").closest("td").addClass("helpoff");
-    $("#hidehelp").hide();
-
-//Hide Help
-$("a#hidehelp").click(function() {
-     $(this).closest("td").removeClass("helpon");  
-     $(this).closest("td").addClass("helpoff");
-     $("#hidehelp").hide();
-     $("#showhelp").show(); 
-   });
-
-//Show Help
-$("a#showhelp").click(function() {
-     $(this).closest("td").removeClass("helpoff"); 
-     $(this).closest("td").addClass("helpon");
-     $("#showhelp").hide();
-     $("#hidehelp").show();
-     $("#help").load("http://www.google.com");
-   });
-
-// Accordion
-    $("#accordion").accordion({ autoHeight: false, header: "h3" });
-
 // Tabs
     $("#searchtabs").tabs();
     $("#tabs").tabs();
@@ -82,7 +57,7 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
     echo $messageStack->output();
   }
   
-    $languages = tep_get_languages();
+  $languages = tep_get_languages();
   $languages_array = array();
   $languages_selected = DEFAULT_LANGUAGE;
   for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
@@ -125,6 +100,21 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
     </table>
   </td>
   <td width="33%" class="smalltext" align="right">
+  
+  <?php
+$current_page = basename($_SERVER['SCRIPT_FILENAME']);
+
+//Could be extended to language specific help documents
+//$help_pages_query_raw = tep_db_query ("select current_page, help_page, help_page_title, language from " . TABLE_HELP_PAGES . " where current_page = '" . tep_db_input($current_page) . "' and language = '" . (int)$languages[$i]['id'] . "'");
+$help_pages_query_raw = tep_db_query ("select current_page, help_page, help_page_title, language from " . TABLE_HELP_PAGES . " where current_page = '" . tep_db_input($current_page) . "'");
+
+
+$help_pages_query = tep_db_fetch_array($help_pages_query_raw);
+
+if ($help_pages_query['help_page'] != '' ) {
+	echo '<a href="' . $help_pages_query['help_page'] . '" title="' . $help_pages_query['help_page_title'] . '" target="_blank">' . tep_image(DIR_WS_IMAGES . 'icons/help.png', 'Help') . '</a>';
+}
+?>
   	<?php echo tep_draw_form('languages', 'index.php', '', 'get'); ?>
   	<?php echo tep_draw_pull_down_menu('language', $languages_array, $languages_selected, 'onChange="this.form.submit();"'); ?>
   	<?php echo tep_hide_session_id(); ?></form>

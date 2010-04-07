@@ -68,22 +68,22 @@ ul.sf-menu li li li.sfHover ul {
 }
 .sf-menu li {
 	background:		#606060;
-	z-index:		9999; /*pgm fix for jQuery UI tabs*/
+	z-index:		500; /*pgm fix for jQuery UI tabs*/
 }
 .sf-menu li li {
 	background:		#606060;
-	z-index:		9999; /*pgm fix for jQuery UI tabs*/
+	z-index:		500; /*pgm fix for jQuery UI tabs*/
 }
 .sf-menu li li li {
 	background:		#606060;
-	z-index:		9999; /*pgm fix for jQuery UI tabs*/
+	z-index:		500; /*pgm fix for jQuery UI tabs*/
 }
 .sf-menu li:hover, .sf-menu li.sfHover,
 .sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
 	background:		#C9C9C9;
 	outline:		0;
 	color:			#000000;
-	z-index:		9999; /*pgm fix for jQuery UI tabs*/
+	z-index:		500; /*pgm fix for jQuery UI tabs*/
 }
 
 /*** arrows **/

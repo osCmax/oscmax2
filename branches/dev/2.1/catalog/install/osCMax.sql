@@ -1322,6 +1322,15 @@ CREATE TABLE IF NOT EXISTS quick_links (
   PRIMARY KEY (quick_links_id)
 );
 
+
+DROP TABLE IF EXISTS help_pages;
+CREATE TABLE IF NOT EXISTS help_pages (
+  current_page varchar(255) NOT NULL,
+  help_page varchar(255) NOT NULL,
+  help_page_title varchar(255) NOT NULL,
+  language int(11) NOT NULL
+);
+
 # data
 
 # 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany, 6 - UK
@@ -2425,3 +2434,23 @@ INSERT INTO quick_links VALUES (8, 'Orders', 'orders.php', '_top', 8, now(), now
 INSERT INTO quick_links VALUES (9, 'Customers', 'customers.php', '_top', 9, now(), now(), 'customers.png');
 INSERT INTO quick_links VALUES (10, 'Newsletters', 'newsletters.php', '_top', 10, now(), now(), 'newsletters.png');
 INSERT INTO quick_links VALUES (11, 'Goto Catalog', '../index.php', '_blank', 11, now(), now(), 'catalog.png');
+
+#Default Help Pages
+INSERT INTO help_pages VALUES ('index.php', 'http://wiki.oscdox.com', 'Testing', 0);
+INSERT INTO help_pages VALUES ('currencies.php', 'http://wiki.oscdox.com/currencies', 'Currencies', 0);
+INSERT INTO help_pages VALUES ('countries.php', 'http://wiki.oscdox.com/countries', 'Countries', 0);
+INSERT INTO help_pages VALUES ('admin_members.php', 'http://wiki.oscdox.com/member_groups', 'Admin Members', 0);
+INSERT INTO help_pages VALUES ('admin_files.php', 'http://wiki.oscdox.com/files_access', 'File Access', 0);
+INSERT INTO help_pages VALUES ('configuration.php', 'http://wiki.oscdox.com/configuration', 'Configuration', 0);
+INSERT INTO help_pages VALUES ('categories.php', 'http://wiki.oscdox.com/catalog#categoriesproducts', 'Categories', 0);
+INSERT INTO help_pages VALUES ('products_attributes.php', 'http://wiki.oscdox.com/catalog#products_attributes', 'Product Attributes', 0);
+INSERT INTO help_pages VALUES ('manufacturers.php', 'http://wiki.oscdox.com/catalog#manufacturers', 'Manufacturers', 0);
+INSERT INTO help_pages VALUES ('reviews.php', 'http://wiki.oscdox.com/catalog#reviews', 'Reviews', 0);
+INSERT INTO help_pages VALUES ('easypopulate.php', 'http://wiki.oscdox.com/easypopulate', 'Easy Populate', 0);
+INSERT INTO help_pages VALUES ('modules.php', 'http://wiki.oscdox.com/modules', 'Modules', 0);
+INSERT INTO help_pages VALUES ('customers.php', 'http://wiki.oscdox.com/customer', 'Customers', 0);
+INSERT INTO help_pages VALUES ('customer_groups.php', 'http://wiki.oscdox.com/customers_groups', 'Customer Groups', 0);
+INSERT INTO help_pages VALUES ('create_order.php', 'http://wiki.oscdox.com/create_order', 'Create Order', 0);
+INSERT INTO help_pages VALUES ('backup.php', 'http://wiki.oscdox.com/database_backup', 'Database Backup', 0);
+INSERT INTO help_pages VALUES ('infobox_configuration.php', 'http://wiki.oscdox.com/infobox_admin', 'Infobox Configuration', 0);
+INSERT INTO help_pages VALUES ('articles_config.php', 'http://wiki.oscdox.com/articles_configuration', 'Articles Configuration', 0);

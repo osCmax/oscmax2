@@ -130,17 +130,21 @@ function popupImageWindow(url) {
 <!-- left_navigation_eof //-->
     </table></td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <td width="100%" valign="top">
+    <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if ($action == 'new') {
 ?>
       <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td width="100%">
+        <table border="1" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo TEXT_HEADING_NEW_AUTHOR; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
-        </table></td>
+        </table>
+        </td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -154,69 +158,88 @@ function popupImageWindow(url) {
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo TEXT_AUTHORS_NAME; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '30', '1'); ?><?php echo TEXT_AUTHORS_NAME; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('authors_name', '', 'size="20"'); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+		  <tr>
+            <td colspan="2">
+
+<!-- // NEW AUTHOR TAB HEADER LOOP START //-->
+<div id="authortabs">
+	<ul>
+		<?php
+        $languages = tep_get_languages();
+        for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
+        ?>
+        	<li><a href="#authortabs-<?php echo $j; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$j]['directory'] . '/images/' . $languages[$j]['image'], $languages[$j]['name']); ?></a></li>
+        <?php } ?> 
+	</ul>
+<!-- // NEW AUTHOR TAB HEADER LOOP END //-->
+
 <?php
   $languages = tep_get_languages();
-  for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+  for ($i=0, $n=sizeof($languages); $i<$n; $i++) {  //START TAB CONTENTS LOOP
 ?>
-          <tr>
-            <td class="main" valign="top"><?php echo TEXT_AUTHORS_DESCRIPTION; ?></td>
-            <td>
-              <table border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;'; ?></td>
-           <?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') { ?>
-                  <td class="main">
-                  <?php
-// Line Changed - MOD: Ajustable Editor Window
-                  //echo tep_draw_fckeditor('authors_description[' . $languages[$i]['id'] . ']',HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT,'');
-                  echo (tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', '', 'class="ckeditor"')); ?></td>
-           <?php } else { ?>
-                  <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', ''); ?></td>
-           <?php } ?>
-                </tr>
-              </table>
+
+	<div id="authortabs-<?php echo $i; ?>">
+		<table width="100%">
+		  <tr>
+        	<td class="main" valign="top"><?php echo TEXT_AUTHORS_DESCRIPTION; ?></td>
+		  <?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') { ?>
+            <td class="main">
+            	<?php
+                	echo (tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', '', 'class="ckeditor"')); ?>
             </td>
-          <tr>
+           <?php } else { ?>
+            <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', ''); ?>
+            </td>
+           <?php } ?>
+          </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="main" valign="top"><?php echo TEXT_AUTHORS_URL; ?></td>
-            <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('authors_url[' . $languages[$i]['id'] . ']', '', 'size="30"'); ?></td>
-          <tr>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+            <td class="main"><?php echo TEXT_AUTHORS_URL; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('authors_url[' . $languages[$i]['id'] . ']', '', 'size="70"'); ?></td>
           </tr>
+        </table>
+	</div>
+
 <?php
-  }
+  } // END TAB CONTENTS LOOP
 ?>
-      <tr>
-        <td class="main">&nbsp;</td>
-        <td class="main" align="left"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_AUTHORS, 'page=' . $_GET['page'] . '&auID=' . $_GET['auID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
-      </form>
-      </tr>
+
+		    </td>
           </tr>
-        </table></td>
-      </tr>
+	      <tr>
+    	    <td class="main">&nbsp;</td>
+        	<td class="main" align="left"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_AUTHORS, 'page=' . $_GET['page'] . '&auID=' . $_GET['auID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+      		</form>
+      	  </tr>
+        </table>
+      </td>
+    </tr>
+    </table>
 <?php
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   } elseif ($action == 'edit') {
 
     $authors_query = tep_db_query("select authors_id, authors_name from " . TABLE_AUTHORS . " where authors_id = '" . $_GET['auID'] . "'");
     $authors = tep_db_fetch_array($authors_query)
 ?>
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+
+    <tr>
+        <td width="100%">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo TEXT_HEADING_EDIT_AUTHOR; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
-        </table></td>
+        </table>
+        </td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -236,50 +259,66 @@ function popupImageWindow(url) {
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+		  <tr>
+            <td colspan="2">
+
+<!-- // EDIT AUTHOR TAB HEADER LOOP START //-->
+<div id="authortabs">
+	<ul>
+		<?php
+        $languages = tep_get_languages();
+        for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
+        ?>
+        	<li><a href="#authortabs-<?php echo $j; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$j]['directory'] . '/images/' . $languages[$j]['image'], $languages[$j]['name']); ?></a></li>
+        <?php } ?> 
+	</ul>
+<!-- // EDIT AUTHOR TAB HEADER LOOP END //-->
+
 <?php
   $languages = tep_get_languages();
-  for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+  for ($i=0, $n=sizeof($languages); $i<$n; $i++) {  //START TAB CONTENTS LOOP
 ?>
-          <tr>
-            <td class="main" valign="top"><?php echo TEXT_AUTHORS_DESCRIPTION; ?></td>
-            <td>
-              <table border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;'; ?></td>
-           <?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') { ?>
-                  <td class="main">
-                  <?php
-// Line Changed - MOD: Ajustable Editor Window
-                  // echo tep_draw_fckeditor('authors_description[' . $languages[$i]['id'] . ']',HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, tep_get_author_description($authors['authors_id'], $languages[$i]['id']));
-                  echo (tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', tep_get_author_description($authors['authors_id'], $languages[$i]['id']), 'class="ckeditor"')); ?></td>
-           <?php } else { ?>
-                  <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', tep_get_author_description($authors['authors_id'], $languages[$i]['id'])); ?></td>
-           <?php } ?>
-                </tr>
-              </table>
+
+	<div id="authortabs-<?php echo $i; ?>">
+		<table width="100%">
+		  <tr>
+        	<td class="main" valign="top"><?php echo TEXT_AUTHORS_DESCRIPTION; ?></td>
+		  <?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') { ?>
+            <td class="main">
+            	<?php
+					echo (tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', tep_get_author_description($authors['authors_id'], $languages[$i]['id']), 'class="ckeditor"')); ?>
             </td>
-          <tr>
+          <?php } else { ?>
+            <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', tep_get_author_description($authors['authors_id'], $languages[$i]['id'])); ?>
+            </td>
+           <?php } ?>
+          </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="main" valign="top"><?php echo TEXT_AUTHORS_URL; ?></td>
-            <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('authors_url[' . $languages[$i]['id'] . ']', tep_get_author_url($authors['authors_id'], $languages[$i]['id']), 'size="30"'); ?></td>
-          <tr>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+            <td class="main"><?php echo TEXT_AUTHORS_URL; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('authors_url[' . $languages[$i]['id'] . ']', tep_get_author_url($authors['authors_id'], $languages[$i]['id']), 'size="70"'); ?></td>
           </tr>
+        </table>
+	</div>
+
 <?php
-  }
+  } // END TAB CONTENTS LOOP
 ?>
-      <tr>
-        <td class="main">&nbsp;</td>
-        <td class="main" align="left"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_AUTHORS, 'page=' . $_GET['page'] . '&auID=' . $authors['authors_id']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
-      </form>
-      </tr>
+
+		    </td>
           </tr>
-        </table></td>
-      </tr>
+	      <tr>
+    	    <td class="main">&nbsp;</td>
+        	<td class="main" align="left"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_AUTHORS, 'page=' . $_GET['page'] . '&auID=' . $_GET['auID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+      		</form>
+      	  </tr>
+        </table>
+      </td>
+    </tr>
+    </table>
+   
 <?php
   } elseif ($action == 'preview') {
 

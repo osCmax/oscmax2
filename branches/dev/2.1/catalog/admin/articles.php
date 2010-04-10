@@ -390,44 +390,52 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr><?php echo tep_draw_form('new_topic', FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $_GET['tID'] . '&action=new_topic_preview', 'post', 'enctype="multipart/form-data"'); ?>
-        <td><table border="0" cellspacing="0" cellpadding="2">
+        <td>
+        <table border="0" cellspacing="0" cellpadding="2">
+		  <tr>
+            <td>
+
+<!-- TOPICS TABS START --> 
+<!-- // NEW TOPIC TAB HEADER LOOP START //-->
+<div id="articletabs">
+	<ul>
+		<?php
+        $languages = tep_get_languages();
+        for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
+        ?>
+        	<li><a href="#articletabs-<?php echo $j; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$j]['directory'] . '/images/' . $languages[$j]['image'], $languages[$j]['name']); ?></a></li>
+        <?php } ?> 
+	</ul>
+<!-- // NEW TOPIC TAB HEADER LOOP END //-->
+
+<!-- // NEW TOPIC CONTENT LOOP START //-->
 <?php
-    for ($i=0; $i<sizeof($languages); $i++) {
+  $languages = tep_get_languages();
+  for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
 ?>
+
+	<div id="articletabs-<?php echo $i; ?>">
+		<table width="100%">
           <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_EDIT_TOPICS_NAME; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('topics_name[' . $languages[$i]['id'] . ']', (($topics_name[$languages[$i]['id']]) ? stripslashes($topics_name[$languages[$i]['id']]) : tep_get_topic_name($tInfo->topics_id, $languages[$i]['id']))); ?></td>
+            <td class="main"><?php echo TEXT_EDIT_TOPICS_NAME; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('topics_name[' . $languages[$i]['id'] . ']', (($topics_name[$languages[$i]['id']]) ? stripslashes($topics_name[$languages[$i]['id']]) : tep_get_topic_name($tInfo->topics_id, $languages[$i]['id']))); ?></td>
           </tr>
-<?php
-    }
-?>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-    for ($i=0; $i<sizeof($languages); $i++) {
-?>
           <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_EDIT_TOPICS_HEADING_TITLE; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('topics_heading_title[' . $languages[$i]['id'] . ']', (($topics_name[$languages[$i]['id']]) ? stripslashes($topics_name[$languages[$i]['id']]) : tep_get_topic_heading_title($tInfo->topics_id, $languages[$i]['id']))); ?></td>
+            <td class="main"><?php echo TEXT_EDIT_TOPICS_HEADING_TITLE; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('topics_heading_title[' . $languages[$i]['id'] . ']', (($topics_name[$languages[$i]['id']]) ? stripslashes($topics_name[$languages[$i]['id']]) : tep_get_topic_heading_title($tInfo->topics_id, $languages[$i]['id']))); ?></td>
           </tr>
-<?php
-    }
-?>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-    for ($i=0; $i<sizeof($languages); $i++) {
-?>
           <tr>
-            <td class="main" valign="top"><?php if ($i == 0) echo TEXT_EDIT_TOPICS_DESCRIPTION; ?></td>
+            <td class="main" valign="top"><?php echo TEXT_EDIT_TOPICS_DESCRIPTION; ?></td>
             <td><table border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="main" valign="top"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-// Line Changed - MOD: Ajustable Editor Window
-                	 //echo tep_draw_fckeditor('topics_description[' . $languages[$i]['id'] . ']', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
-					 echo (tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>'; 
+					    echo (tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>'; 
                      
                } else { echo tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
               }
@@ -435,27 +443,41 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
              </tr>
             </table></td>
           </tr>
-<?php
-    }
-?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          
+        </table>
+	</div>
+<?php } ?>
+<!-- // NEW TOPIC CONTENT LOOP END //-->
+    
+</div>
+<!-- TOPICS TABS END --> 
+    
+            </td>
           </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_EDIT_SORT_ORDER; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('sort_order', $tInfo->sort_order, 'size="2"'); ?></td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-        </table></td>
+	  <tr>
+          <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+      </tr>
+      <tr>
+        <td>
+          <table width="500">
+            <tr>
+              <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . TEXT_EDIT_SORT_ORDER; ?></td>
+              <td class="main"><?php echo tep_draw_input_field('sort_order', $tInfo->sort_order, 'size="2"'); ?></td>
+            </tr>
+          </table>
+        </td>      
+      </tr>
+      <tr>
+          <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
         <td class="main" align="right"><?php echo tep_draw_hidden_field('topics_date_added', (($tInfo->date_added) ? $tInfo->date_added : date('Y-m-d'))) . tep_draw_hidden_field('parent_id', $tInfo->parent_id) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $_GET['tID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
-      </form></tr>
+      </form>
+      </tr>
+    </table>
 
 <?php
 
@@ -646,104 +668,110 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
+          
           <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_ARTICLES_NAME; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('articles_name[' . $languages[$i]['id'] . ']', (isset($articles_name[$languages[$i]['id']]) ? $articles_name[$languages[$i]['id']] : tep_get_articles_name($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
-          </tr>
+            <td colspan="2">
+
+<!-- ARTICLE TABS START --> 
+<!-- // NEW ARTICLE TAB HEADER LOOP START //-->
+<div id="articletabs">
+	<ul>
+		<?php
+        $languages = tep_get_languages();
+        for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
+        ?>
+        	<li><a href="#articletabs-<?php echo $j; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$j]['directory'] . '/images/' . $languages[$j]['image'], $languages[$j]['name']); ?></a></li>
+        <?php } ?> 
+	</ul>
+<!-- // NEW ARTICLE TAB HEADER LOOP END //-->
+
+
+<!-- // NEW ARTICLE CONTENT LOOP START //-->
 <?php
-    }
+  $languages = tep_get_languages();
+  for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
 ?>
+
+	<div id="articletabs-<?php echo $i; ?>">
+		<table width="100%">
+          <tr>
+            <td class="main"><?php echo TEXT_ARTICLES_NAME; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('articles_name[' . $languages[$i]['id'] . ']', (isset($articles_name[$languages[$i]['id']]) ? $articles_name[$languages[$i]['id']] : tep_get_articles_name($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
+          </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
-          <tr bgcolor="#ffffcc">
-            <td class="main"><?php if ($i == 0) echo TEXT_ARTICLES_HEAD_TITLE_TAG; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('articles_head_title_tag[' . $languages[$i]['id'] . ']', (isset($articles_head_title_tag[$languages[$i]['id']]) ? $articles_head_title_tag[$languages[$i]['id']] : tep_get_articles_head_title_tag($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
+          <tr>
+            <td class="main"><?php echo TEXT_ARTICLES_HEAD_TITLE_TAG; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('articles_head_title_tag[' . $languages[$i]['id'] . ']', (isset($articles_head_title_tag[$languages[$i]['id']]) ? $articles_head_title_tag[$languages[$i]['id']] : tep_get_articles_head_title_tag($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
           </tr>
-<?php
-    }
-?>
-          <tr bgcolor="#ffffcc">
+          <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
-          <tr bgcolor="#ffffcc">
-            <td class="main" valign="top"><?php if ($i == 0) echo sprintf(TEXT_ARTICLES_HEAD_DESC_TAG, MAX_ARTICLE_ABSTRACT_LENGTH); ?></td>
-            <td><table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="main" valign="top"><?php echo sprintf(TEXT_ARTICLES_HEAD_DESC_TAG, MAX_ARTICLE_ABSTRACT_LENGTH); ?></td>
+            <td>
+            <table border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
+                <td class="main" valign="top"></td>
                 <td class="main"><?php echo tep_draw_textarea_field('articles_head_desc_tag[' . $languages[$i]['id'] . ']', 'soft', '70', '5', (isset($articles_head_desc_tag[$languages[$i]['id']]) ? $articles_head_desc_tag[$languages[$i]['id']] : tep_get_articles_head_desc_tag($aInfo->articles_id, $languages[$i]['id']))); ?></td>
               </tr>
-            </table></td>
+            </table>
+            </td>
           </tr>
-<?php
-    }
-?>
-          <tr bgcolor="#ffffcc">
+          <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
-          <tr bgcolor="#ffffcc">
-            <td class="main" valign="top"><?php if ($i == 0) echo TEXT_ARTICLES_HEAD_KEYWORDS_TAG; ?></td>
-            <td><table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="main" valign="top"><?php echo TEXT_ARTICLES_HEAD_KEYWORDS_TAG; ?></td>
+            <td>
+            <table border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
+                <td class="main" valign="top"></td>
                 <td class="main"><?php echo tep_draw_textarea_field('articles_head_keywords_tag[' . $languages[$i]['id'] . ']', 'soft', '70', '5', (isset($articles_head_keywords_tag[$languages[$i]['id']]) ? $articles_head_keywords_tag[$languages[$i]['id']] : tep_get_articles_head_keywords_tag($aInfo->articles_id, $languages[$i]['id']))); ?></td>
               </tr>
-            </table></td>
+            </table>
+            </td>
           </tr>
-<?php
-    }
-?>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
           <tr>
-            <td class="main" valign="top"><?php if ($i == 0) echo TEXT_ARTICLES_DESCRIPTION; ?></td>
-            <td><table border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
-                <td class="main"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-                	 //echo tep_draw_fckeditor('articles_description[' . $languages[$i]['id'] . ']', '550', '300', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']))) . '</td>' ;
-					 echo (tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>';
+            <td class="main" valign="top"><?php echo TEXT_ARTICLES_DESCRIPTION; ?></td>
+            <td>
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td class="main" valign="top"></td>
+                  <td class="main"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
+					    echo (tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>';
 					 
                } else { echo tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']))) . '</td>' ;
               }
               ?>
-
-              </tr>
-            </table></td>
+			      </td>
+                </tr>
+              </table>
+            </td>
           </tr>
-<?php
-    }
-?>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
           <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_ARTICLES_URL . '<br><small>' . TEXT_ARTICLES_URL_WITHOUT_HTTP . '</small>'; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('articles_url[' . $languages[$i]['id'] . ']', (isset($articles_url[$languages[$i]['id']]) ? $articles_url[$languages[$i]['id']] : tep_get_articles_url($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
-          </tr>
+            <td class="main"><?php echo TEXT_ARTICLES_URL . '<br><small>' . TEXT_ARTICLES_URL_WITHOUT_HTTP . '</small>'; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('articles_url[' . $languages[$i]['id'] . ']', (isset($articles_url[$languages[$i]['id']]) ? $articles_url[$languages[$i]['id']] : tep_get_articles_url($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
+           </tr>
+        </table>
+	</div>
+
+<!-- // NEW ARTICLE CONTENT LOOP END //-->
+
 <?php
     }
 ?>
+</div>
+<!-- // NEW ARTICLE CONTENT LOOP END //-->
+<!-- ARTICLE TABS END --> 
+
         </table></td>
       </tr>
       <tr>

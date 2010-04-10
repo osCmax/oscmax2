@@ -35,6 +35,8 @@
 	$("#descriptiontabs5").tabs();
 
 	$("#languagetabs").tabs();
+	$("#authortabs").tabs();
+	$("#articletabs").tabs();
 
     $('span[title]').cluetip({splitTitle: '|', arrows: true, dropShadow: false, cluetipClass: 'jtip'});
 

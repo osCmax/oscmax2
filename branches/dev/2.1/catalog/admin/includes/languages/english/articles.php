@@ -27,7 +27,7 @@ define('TEXT_SUBTOPICS', 'Subtopics:');
 define('TEXT_ARTICLES', 'Articles:');
 define('TEXT_ARTICLES_AVERAGE_RATING', 'Average Rating:');
 define('TEXT_ARTICLES_HEAD_TITLE_TAG', 'HTML Page Title:');
-define('TEXT_ARTICLES_HEAD_DESC_TAG', 'Meta Description:<br><small>(Article Abstract =<br>first %s charachters)</small>');
+define('TEXT_ARTICLES_HEAD_DESC_TAG', 'Meta Description:<br><small>(Article Abstract =<br>first %s characters)</small>');
 define('TEXT_ARTICLES_HEAD_KEYWORDS_TAG', 'Meta Keywords:');
 define('TEXT_DATE_ADDED', 'Date Added:');
 define('TEXT_DATE_AVAILABLE', 'Date Expected:');

@@ -137,17 +137,6 @@ $Id: menu.php 2009-11-14 19:38:07Z user $
     </li>
 <?php } ?>
 
-<!-- INFOBOXES -->
-<?php
-  if (tep_admin_check_boxes('info_boxes.php') == true) { ?>
-    <li>
-      <a href="#">Infoboxes</a>
-        <ul>
-           <?php require(DIR_WS_BOXES . 'info_boxes.php'); ?>
-        </ul>
-    </li>
-<?php } ?>
-
 <!-- ARTICLES -->
 <?php
   if (tep_admin_check_boxes('articles.php') == true) { ?>

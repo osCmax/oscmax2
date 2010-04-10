@@ -4,13 +4,13 @@
     	<td valign="top">
         <table border="0" width="100%" cellspacing="0" cellpadding="2">
         	<tr class="dataTableHeadingRow">
-            	<td class="dataTableHeadingContent" width="50">No.</td>
-                <td class="dataTableHeadingContent" width="100">Time</td>
-                <td class="dataTableHeadingContent" width="100">IP Address</td>
-                <td class="dataTableHeadingContent" width="200">URL</td>
-                <td class="dataTableHeadingContent">Browser</td>
-                <td class="dataTableHeadingContent" width="100">Referer</td>
-                <td class="dataTableHeadingContent" width="50">Error Type</td>
+            	<td class="dataTableHeadingContent" width="50"><?php echo DASHBOARD_NO; ?></td>
+                <td class="dataTableHeadingContent" width="100"><?php echo DASHBOARD_TIME; ?></td>
+                <td class="dataTableHeadingContent" width="100"><?php echo DASHBOARD_IP; ?></td>
+                <td class="dataTableHeadingContent" width="200"><?php echo DASHBOARD_HTTP_URL; ?></td>
+                <td class="dataTableHeadingContent"><?php echo DASHBOARD_HTTP_BROWSER; ?></td>
+                <td class="dataTableHeadingContent" width="100"><?php echo DASHBOARD_HTTP_REFER; ?></td>
+                <td class="dataTableHeadingContent" width="50"><?php echo DASHBOARD_HTTP_ERROR; ?></td>
           	</tr>
 <?php
   if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
@@ -44,7 +44,7 @@
   }
 ?>
             <tr>
-                <td colspan="4" align="left"><?php echo '<a href="' . FILENAME_STATS_HTTP_ERROR . '">'; ?>View complete report</td>
+                <td colspan="4" align="left"><?php echo '<a href="' . FILENAME_STATS_HTTP_ERROR . '">'; ?><?php echo VIEW_COMPLETE_REPORT; ?></td>
             </tr>
         </table>
         </td>

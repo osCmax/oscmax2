@@ -47,4 +47,10 @@ define('REPORTS_ORDERS', 'Pedidos');
 define('TOOLS_BACKUP', 'Copias');
 define('TOOLS_BANNERS', 'Banners');
 define('TOOLS_FILES', 'Ficheros');
+
+define('TEXT_TAB1', 'Venta');
+define('TEXT_TAB2', 'Productos');
+define('TEXT_TAB3', 'Admin Log');
+define('TEXT_TAB4', 'Customer Log');
+define('TEXT_TAB5', 'HTTP Error Log');
 ?>

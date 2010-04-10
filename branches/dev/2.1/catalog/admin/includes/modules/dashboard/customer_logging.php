@@ -4,11 +4,11 @@
     	<td valign="top">
         <table border="0" cellspacing="0" cellpadding="2" align="center" width="100%">
 			<tr class="dataTableHeadingRow">
-               	<td class="dataTableHeadingContent">No.</td>
-               	<td class="dataTableHeadingContent">Time</td>
-               	<td class="dataTableHeadingContent">IP Address</td>
-               	<td class="dataTableHeadingContent">User ID</td>
-               	<td class="dataTableHeadingContent">Event Type</td>
+               	<td class="dataTableHeadingContent"><?php echo DASHBOARD_NO; ?></td>
+               	<td class="dataTableHeadingContent"><?php echo DASHBOARD_TIME; ?></td>
+               	<td class="dataTableHeadingContent"><?php echo DASHBOARD_IP; ?></td>
+               	<td class="dataTableHeadingContent"><?php echo DASHBOARD_USER; ?></td>
+               	<td class="dataTableHeadingContent"><?php echo DASHBOARD_EVENT; ?></td>
         	</tr>
 <?php
 
@@ -41,7 +41,7 @@
         </td>
 	</tr>
     <tr>
-    	<td><?php echo '<a href="' . FILENAME_STATS_CUST_LOGGING . '">'; ?>View complete report</td>
+    	<td><?php echo '<a href="' . FILENAME_STATS_CUST_LOGGING . '">'; ?><?php echo VIEW_COMPLETE_REPORT; ?></td>
     </tr>
 </table>
 <!-- END CUSTOMER LOGGING -->

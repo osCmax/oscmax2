@@ -1,16 +1,16 @@
 <!-- BOF: Top 10 Customers //-->
 <table border="0" width="500" cellspacing="0" cellpadding="0" align="center">
 <tr>
-<td class="pageheading">Top Ten Customers</td>
+<td class="pageheading"><?php echo DASHBOARD_TOP_TEN; ?></td>
 </tr>
      <tr valign="top">
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent">Rank</td>
-                <td class="dataTableHeadingContent">Customer Name</td>
-                <td class="dataTableHeadingContent" align="center">Total</td>
+                <td class="dataTableHeadingContent"><?php echo DASHBOARD_RANK; ?></td>
+                <td class="dataTableHeadingContent"><?php echo DASHBOARD_TOP_TEN_CUSTOMER; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo DASHBOARD_TOP_TEN_TOTAL; ?></td>
               </tr>
 <?php
 
@@ -43,7 +43,7 @@
 ?>
 </table>
 </td></tr>
-     <tr><td><?php echo '<a href="' . FILENAME_STATS_CUSTOMERS . '">'; ?>View complete report</a>
+     <tr><td><?php echo '<a href="' . FILENAME_STATS_CUSTOMERS . '">'; ?><?php echo VIEW_COMPLETE_REPORT; ?></a>
      </td></tr>
 </table>
 </td></tr>

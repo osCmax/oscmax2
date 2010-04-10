@@ -33,11 +33,11 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
 
 <div id="tabs">
     <ul>
-        <li><a href="#tabs-1">Sales</a></li>
-        <li><a href="#tabs-2">Products</a></li>
-        <li><a href="#tabs-3">Admin Log</a></li>
-        <li><a href="#tabs-4">Customer Log</a></li>
-        <li><a href="#tabs-5">HTTP Error Log</a></li>
+        <li><a href="#tabs-1"><?php echo TEXT_TAB1; ?></a></li>
+        <li><a href="#tabs-2"><?php echo TEXT_TAB2; ?></a></li>
+        <li><a href="#tabs-3"><?php echo TEXT_TAB3; ?></a></li>
+        <li><a href="#tabs-4"><?php echo TEXT_TAB4; ?></a></li>
+        <li><a href="#tabs-5"><?php echo TEXT_TAB5; ?></a></li>
     </ul>
 
 <div id="tabs-1">

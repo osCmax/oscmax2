@@ -2,15 +2,15 @@
     
     <table border="0" width="500" cellspacing="0" cellpadding="0" align="center">
 <tr>
-<td class="pageheading">Products Purchased</td>
+<td class="pageheading"><?php echo DASHBOARD_PRODUCTS_P; ?></td>
 </tr>
           <tr>
             <td valign="top">
             <table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent">Rank</td>
-                <td class="dataTableHeadingContent">Products</td>
-                <td class="dataTableHeadingContent" align="center">Purchased</td>
+                <td class="dataTableHeadingContent"><?php echo DASHBOARD_RANK; ?></td>
+                <td class="dataTableHeadingContent"><?php echo DASHBOARD_PRODUCT; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo DASHBOARD_PRODUCTS_P_PURCHASED; ?></td>
               </tr>
 			<?php
               if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
@@ -35,7 +35,7 @@
             ?>
 		    </table>
     </td></tr>
-     <tr><td><?php echo '<a href="' . FILENAME_STATS_PRODUCTS_PURCHASED . '">'; ?>View complete report</a>
+     <tr><td><?php echo '<a href="' . FILENAME_STATS_PRODUCTS_PURCHASED . '">'; ?><?php echo VIEW_COMPLETE_REPORT; ?></a>
      </td></tr>
 </table>
     <!-- END OF PRODUCTS PURCHASED -->

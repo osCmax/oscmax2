@@ -47,4 +47,10 @@ define('REPORTS_ORDERS', 'Bestellungen');
 define('TOOLS_BACKUP', 'Datensicherung');
 define('TOOLS_BANNERS', 'Bannerverwaltung');
 define('TOOLS_FILES', 'Dateiverwaltung');
+
+define('TEXT_TAB1', 'Vertrieb');
+define('TEXT_TAB2', 'Produkte');
+define('TEXT_TAB3', 'Admin Log');
+define('TEXT_TAB4', 'Kunde Log');
+define('TEXT_TAB5', 'HTTP Fehler Log');
 ?>

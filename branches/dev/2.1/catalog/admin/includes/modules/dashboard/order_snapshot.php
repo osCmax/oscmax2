@@ -1,11 +1,11 @@
 <!-- START ORDER SNAPSHOT -->  
 <table border="0" width="500" cellspacing="0" cellpadding="2" align="center">
 <tr>
-<td class="pageheading">Orders Snapshot</td>
+<td class="pageheading"><?php echo DASHBOARD_ORDERS; ?></td>
 </tr>
   <tr class="dataTableHeadingRow">
-      <td class="dataTableHeadingContent">Order Status</td>
-      <td class="dataTableHeadingContent" align="center">Qty</td>
+      <td class="dataTableHeadingContent"><?php echo DASHBOARD_ORDERS_STATUS; ?></td>
+      <td class="dataTableHeadingContent" align="center"><?php echo DASHBOARD_QUANTITY; ?></td>
   <tr>        
   <?php
 $orders_contents = '';

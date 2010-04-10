@@ -48,4 +48,46 @@ define('REPORTS_ORDERS', 'Orders');
 define('TOOLS_BACKUP', 'Backup');
 define('TOOLS_BANNERS', 'Banners');
 define('TOOLS_FILES', 'Files');
+
+define('TEXT_TAB1', 'Sales');
+define('TEXT_TAB2', 'Products');
+define('TEXT_TAB3', 'Admin Log');
+define('TEXT_TAB4', 'Customer Log');
+define('TEXT_TAB5', 'HTTP Error Log');
+
+define('VIEW_COMPLETE_REPORT', 'View complete report');
+
+define('DASHBOARD_IP', 'IP Address');
+define('DASHBOARD_NO', 'No.');
+define('DASHBOARD_TIME', 'Date and Time');
+define('DASHBOARD_USER', 'User ID');
+define('DASHBOARD_EVENT', 'Event Type');
+define('DASHBOARD_RANK', 'Rank');
+define('DASHBOARD_PRODUCT', 'Product');
+define('DASHBOARD_QUANTITY', 'Qty');
+define('DASHBOARD_VIEWED', 'Products Viewed');
+
+define('DASHBOARD_TOP_TEN', 'Top Ten Customers');
+define('DASHBOARD_TOP_TEN_CUSTOMER', 'Customer Name');
+define('DASHBOARD_TOP_TEN_TOTAL', 'Total');
+
+define('DASHBOARD_ORDERS', 'Orders Snapshot');
+define('DASHBOARD_ORDERS_STATUS', 'Order Status');
+
+define('DASHBOARD_DATABASE', 'Database Snapshot');
+define('DASHBOARD_DATABASE_CUST', 'Number of customers:');
+define('DASHBOARD_DATABASE_PROD', 'Number of products:');
+define('DASHBOARD_DATABASE_SPEC', 'Special Offers:');
+
+
+define('DASHBOARD_PRODUCTS_V', 'Products Viewed');
+define('DASHBOARD_PRODUCTS_V_VIEWS', 'Views');
+
+define('DASHBOARD_PRODUCTS_P', 'Products Purchased');
+define('DASHBOARD_PRODUCTS_P_PURCHASED', 'Purchased');
+
+define('DASHBOARD_HTTP_URL', 'URL');
+define('DASHBOARD_HTTP_BROWSER', 'Browser');
+define('DASHBOARD_HTTP_REFER', 'Referer');
+define('DASHBOARD_HTTP_ERROR', 'Error Type');
 ?>

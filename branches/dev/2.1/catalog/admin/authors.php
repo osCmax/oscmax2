@@ -138,7 +138,7 @@ function popupImageWindow(url) {
 ?>
       <tr>
         <td width="100%">
-        <table border="1" width="100%" cellspacing="0" cellpadding="0">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo TEXT_HEADING_NEW_AUTHOR; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>

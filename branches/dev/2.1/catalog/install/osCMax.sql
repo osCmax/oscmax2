@@ -1331,6 +1331,25 @@ CREATE TABLE IF NOT EXISTS help_pages (
   language int(11) NOT NULL
 );
 
+DROP TABLE IF EXISTS feebmachine;
+CREATE TABLE IF NOT EXISTS feedmachine (
+  id int(11) NOT NULL auto_increment,
+  config_filename varchar(64) NOT NULL,
+  filename varchar(64) NOT NULL,
+  ftp_status tinyint(1) NOT NULL default '0',
+  ftp_server varchar(128) NOT NULL,
+  ftp_path varchar(128) NOT NULL,
+  ftp_username varchar(64) NOT NULL,
+  ftp_password varchar(128) NOT NULL,
+  ftp_upload_period int(11) NOT NULL,
+  language_code char(2) NOT NULL,
+  currency_code char(3) NOT NULL,
+  countries_iso_2 char(2) NOT NULL,
+  url_parameters varchar(255) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY config_filename (config_filename)
+);
+
 # data
 
 # 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany, 6 - UK
@@ -1478,6 +1497,12 @@ INSERT INTO admin_files VALUES (141,'common_reports.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (142,'stats_http_error.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (143,'stats_register_customer_no_purchase.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (144,'quick_links.php', 0, 9, '1');
+INSERT INTO admin_files VALUES (145,'feedmachine.php', 0, 3, '1');
+INSERT INTO admin_files VALUES (146,'feedmachine_admin.php', 0, 3, '1');
+INSERT INTO admin_files VALUES (147,'feedmachine_auto.php', 0, 3, '1');
+INSERT INTO admin_files VALUES (148,'feedmachine_config.php', 0, 3, '1');
+INSERT INTO admin_files VALUES (149,'feedmachine_loader.php', 0, 3, '1');
+INSERT INTO admin_files VALUES (150,'feedmachine_loadingbay.php', 0, 3, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');

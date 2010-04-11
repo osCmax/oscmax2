@@ -484,4 +484,9 @@ define('IMAGE_ICON_EDIT', 'Quick Edit');
 define('BOX_GOOGLE_SITEMAP', 'Google SiteMaps');
 // EOF: Google SiteMap
 
+// BOF: Feed Machine
+define('BOX_CATALOG_FEEDMACHINE', 'Feedmachine');
+// EOF: Feed Machine
+
+
 ?>

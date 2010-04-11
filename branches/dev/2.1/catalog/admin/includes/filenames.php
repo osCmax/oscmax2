@@ -159,4 +159,8 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
 // BOF: Google SiteMap
   define('FILENAME_GOOGLE_SITEMAP', 'googlesitemap.php');
 // EOF: Google SiteMap
+
+// BOF: Feed Machine
+ define('FILENAME_FEEDMACHINE', 'feedmachine_admin.php');
+// EOF: Feed Machine
 ?>

@@ -126,11 +126,7 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
   }
 
 // include the language translations
-  require(DIR_WS_LANGUAGES . $language . '.php');
-  $current_page = basename($_SERVER['SCRIPT_FILENAME']);
-  if (file_exists(DIR_WS_LANGUAGES . $language . '/' . $current_page)) {
-    include(DIR_WS_LANGUAGES . $language . '/' . $current_page);
-  }
+// Code moved further below since messageStack class must be initiated first.
 
 // define our localization functions
   require(DIR_WS_FUNCTIONS . 'localization.php');
@@ -158,6 +154,28 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
 
 // file uploading class
   require(DIR_WS_CLASSES . 'upload.php');
+  
+// include the language translations
+// BOF: [TiM's osC Solutions] Display english for missing language files
+  if (file_exists(DIR_WS_LANGUAGES . $language . '.php')) {
+    require_once(DIR_WS_LANGUAGES . $language . '.php');
+  } else {
+    if (file_exists(DIR_WS_LANGUAGES . 'english.php')) {
+      $messageStack->add('Missing language file ('. DIR_WS_LANGUAGES . $language . '.php). Using english instead.', 'error');
+      require_once(DIR_WS_LANGUAGES . 'english.php');
+    }
+  }
+
+  $current_page = basename($PHP_SELF);
+  if (file_exists(DIR_WS_LANGUAGES . $language . '/' . $current_page)) {
+    include_once(DIR_WS_LANGUAGES . $language . '/' . $current_page);
+  } else {
+    if (file_exists(DIR_WS_LANGUAGES . 'english/' . $current_page)) {
+      $messageStack->add('Missing language file ('. DIR_WS_LANGUAGES . $language . '/' . $current_page .'). Using english instead.', 'error');
+      include_once(DIR_WS_LANGUAGES . 'english/' . $current_page);
+    }
+  }
+// EOF: [TiM's osC Solutions] Display english for missing language files  
 
 // calculate category path
   if (isset($_GET['cPath'])) {

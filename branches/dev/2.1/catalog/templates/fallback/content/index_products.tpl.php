@@ -89,13 +89,18 @@
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
-        <td><?php if (PRODUCT_LIST_TYPE == 0) {
-
+        <td>
+        <?php
+		
+		if (PRODUCT_LIST_TYPE == 0) { $gridlist = 'list'; } else { $gridlist = 'grid'; }
+		  
+		$thumbnail_view = (isset($_GET['list']) ? $_GET['list'] : $gridlist); 
+		  
+		if ($thumbnail_view == 'list')  {
         include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
        } else {
-
         include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING_COL);
-      }
+       }
         ?>
         </td>
       </tr>

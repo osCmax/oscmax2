@@ -262,7 +262,18 @@
 
   $listing_sql = $select_str . $from_str . $where_str . $order_str;
 
-  require(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
+  // BOF: PGM EDIT TO ALLOW SWITCHING
+if (PRODUCT_LIST_TYPE == 0) { $gridlist = 'list'; } else { $gridlist = 'grid'; }
+		  
+		$thumbnail_view = (isset($_GET['list']) ? $_GET['list'] : $gridlist); 
+		  
+		if ($thumbnail_view == 'list')  {
+        include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
+       } else {
+        include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING_COL);
+      }
+// EOF: PGM EDIT TO ALLOW SWITCHING
+//  require(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
 ?>
         </td>
       </tr>

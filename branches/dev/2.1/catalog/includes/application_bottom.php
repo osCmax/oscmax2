@@ -18,6 +18,16 @@ if (!tep_session_is_registered('customer_id') && ENABLE_PAGE_CACHE == 'true' && 
 // EOF: MOD
 
 // close session (store variables)
+
+// BOF: MOD QPBPP for SPCC v4.2
+if (isset($_SESSION['min_order_qty_not_met'])) {
+  unset($_SESSION['min_order_qty_not_met']);
+}
+if (isset($_SESSION['qty_blocks_not_met'])) {
+  unset($_SESSION['qty_blocks_not_met']);
+}
+// EOF: MOD QPBPP for SPCC v4.2
+
   tep_session_close();
 
   if (STORE_PAGE_PARSE_TIME == 'true') {

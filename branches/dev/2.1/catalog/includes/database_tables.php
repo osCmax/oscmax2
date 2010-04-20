@@ -103,4 +103,10 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
 // BOF: Http Error Logging
   define('TABLE_HTTP_ERROR', 'http_error');
 // EOF: Http Error Logging
+
+// BOF QPBPP for SPPC v4.2
+  define('TABLE_PRODUCTS_PRICE_BREAK', 'products_price_break');
+  define('TABLE_DISCOUNT_CATEGORIES', 'discount_categories');
+  define('TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES', 'products_to_discount_categories');
+// EOF QPBPP for SPPC v4.2
 ?>

@@ -163,4 +163,9 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
 // BOF: Feed Machine
  define('FILENAME_FEEDMACHINE', 'feedmachine_admin.php');
 // EOF: Feed Machine
+
+// BOF QPBPP for SPPC v4.2 2008/03/07, QPBPP for SPPC v2.0 2008/09/05
+  define('FILENAME_DISCOUNT_CATEGORIES', 'discount_categories.php');
+  define('FILENAME_DISCOUNT_CATEGORIES_GROUPS_PP', 'discount_categories_groups_pp.php');
+// BOF QPBPP for SPPC
 ?>

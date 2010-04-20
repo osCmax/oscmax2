@@ -391,4 +391,9 @@ define('LOGIN_BOX_PRODUCTS_NEW','New Products');
 define('FILENAME_STATS_CREDITS', 'stats_credits.php');
 require(DIR_WS_LANGUAGES . 'add_ccgvdc_english.php');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
+// BOF QPBPP for SPPC
+define('MINIMUM_ORDER_NOTICE', 'Minimum order amount for %s is %d. Your cart has been updated to reflect this.');
+define('QUANTITY_BLOCKS_NOTICE', '%s can only by ordered in multiples of %d. Your cart has been updated to reflect this.');
+// EOF QPBPP for SPPC
 ?>

@@ -15,6 +15,7 @@ $Id: catalog.php 2009-11-14 19:38:07Z user $
   $contents = '';
   $contents = (                    tep_admin_jqmenu(FILENAME_CATEGORIES, BOX_CATALOG_CATEGORIES_PRODUCTS, TOP) .
                                    tep_admin_jqmenu(FILENAME_PRODUCTS_ATTRIBUTES, BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES, TOP) .
+								   tep_admin_jqmenu(FILENAME_DISCOUNT_CATEGORIES, BOX_CATALOG_CATEGORIES_DISCOUNT_CATEGORIES, TOP) .
                                    tep_admin_jqmenu(FILENAME_MANUFACTURERS, BOX_CATALOG_MANUFACTURERS, TOP) .
                                    tep_admin_jqmenu(FILENAME_REVIEWS, BOX_CATALOG_REVIEWS, TOP) .
                                    tep_admin_jqmenu(FILENAME_SPECIALS, BOX_CATALOG_SPECIALS, TOP) .

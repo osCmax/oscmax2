@@ -40,6 +40,13 @@
 
     $('span[title]').cluetip({splitTitle: '|', arrows: true, dropShadow: false, cluetipClass: 'jtip'});
 
+
+<!--//Tabs for QPBPP for SPPC -->
+/* Tabs for Languages */
+    $("#langtabs").tabs();
+/* Tabs for Customer Groups */
+    $("#qpbpp").tabs();
+
 }); 
 
 </script>

@@ -114,4 +114,10 @@ define('TABLE_UPS_BOXES_USED', 'ups_boxes_used');
 // BOF: osCMax Help System - PGM
   define('TABLE_HELP_PAGES', 'help_pages');
 // EOF: osCMax Help System - PGM
+
+// BOF QPBPP for SPPC v4.2 2006/06/22, QPBPP v2.0 2008/09/05
+  define('TABLE_PRODUCTS_PRICE_BREAK', 'products_price_break');
+  define('TABLE_DISCOUNT_CATEGORIES', 'discount_categories');
+  define('TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES', 'products_to_discount_categories');
+// BOF QPBPP for SPPC
 ?>

@@ -119,6 +119,13 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
         $customer_group_tax = tep_db_fetch_array($check_customer_group_tax);
         $sppc_customer_group_show_tax = (int)$customer_group_tax['customers_group_show_tax'];
         $sppc_customer_group_tax_exempt = (int)$customer_group_tax['customers_group_tax_exempt'];
+
+// PriceFormatterStore is already instantiated with the retail customer group id
+    if ($sppc_customer_group_id != 0) {
+      unset($pfs);
+      $pfs = new PriceFormatterStore;
+    }
+
 // EOF: MOD - Separate Pricing per Customer
         $customer_country_id = $check_country['entry_country_id'];
         $customer_zone_id = $check_country['entry_zone_id'];

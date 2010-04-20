@@ -161,6 +161,15 @@ define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Remove Product');
 <?php
       }
     }
+// BOF QPBPP for SPPC
+    if ($messageStack->size('cart_notice') > 0) {
+?>
+      <tr>
+        <td style="padding-top: 10px"><?php echo $messageStack->output('cart_notice'); ?></td>
+      </tr>
+<?php
+      }
+// EOF QPBPP for SPPC
 ?>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

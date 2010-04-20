@@ -932,6 +932,8 @@ CREATE TABLE products (
   products_height decimal(6,2) NOT NULL default '12.00',
   products_ready_to_ship int(1) NOT NULL default '0',
   products_hide_from_groups VARCHAR(255) NOT NULL DEFAULT '@',
+  products_qty_blocks INT(4) NOT NULL default '1',
+  products_min_order_qty INT(4) NOT NULL default '1',
   PRIMARY KEY  (products_id),
   KEY idx_products_model (products_model),
   KEY idx_products_date_added (products_date_added)
@@ -981,7 +983,9 @@ CREATE TABLE products_groups (
   customers_group_id int NOT NULL default '0',
   customers_group_price decimal(15,4) NOT NULL default '0.0000',
   products_id int NOT NULL default '0',
-  products_price decimal(15,4) NOT NULL default '0.0000'
+  products_price decimal(15,4) NOT NULL default '0.0000',
+  products_qty_blocks INT(4) NOT NULL default '1',
+  products_min_order_qty INT(4) NOT NULL default '1'
 );
 
 DROP TABLE IF EXISTS products_notifications;
@@ -1331,7 +1335,7 @@ CREATE TABLE IF NOT EXISTS help_pages (
   language int(11) NOT NULL
 );
 
-DROP TABLE IF EXISTS feebmachine;
+DROP TABLE IF EXISTS feedmachine;
 CREATE TABLE IF NOT EXISTS feedmachine (
   id int(11) NOT NULL auto_increment,
   config_filename varchar(64) NOT NULL,
@@ -1349,6 +1353,32 @@ CREATE TABLE IF NOT EXISTS feedmachine (
   PRIMARY KEY (id),
   UNIQUE KEY config_filename (config_filename)
 );
+
+DROP TABLE IF EXISTS products_price_break;
+CREATE TABLE products_price_break (
+  products_price_break_id int NOT NULL auto_increment,
+  products_id int(11) NOT NULL,
+  products_price decimal(15,4) NOT NULL default 0.0000,
+  products_qty int(11) NOT NULL default 0,
+  customers_group_id smallint UNSIGNED NOT NULL default '0',
+  PRIMARY KEY (products_price_break_id)
+);
+
+DROP TABLE IF EXISTS discount_categories;
+CREATE TABLE discount_categories (
+  discount_categories_id int NOT NULL auto_increment,
+  discount_categories_name varchar(255) NOT NULL,
+  PRIMARY KEY (discount_categories_id)
+);
+
+DROP TABLE IF EXISTS products_to_discount_categories;
+CREATE TABLE products_to_discount_categories (
+  products_id int NOT NULL,
+  discount_categories_id int NOT NULL,
+  customers_group_id smallint UNSIGNED NOT NULL default '0',
+  PRIMARY KEY (products_id, customers_group_id)
+);
+
 
 # data
 
@@ -1503,6 +1533,8 @@ INSERT INTO admin_files VALUES (147,'feedmachine_auto.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (148,'feedmachine_config.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (149,'feedmachine_loader.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (150,'feedmachine_loadingbay.php', 0, 3, '1');
+INSERT INTO admin_files VALUES (151,'discount_categories.php', 0, 3, '1');
+INSERT INTO admin_files VALUES (152,'discount_categories_groups_pp.php', 0, 3, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
@@ -1906,6 +1938,8 @@ INSERT INTO configuration VALUES (2505, 'Enable reCaptcha Form = true/false', 'R
 INSERT INTO configuration VALUES (2506, 'Public Key', 'RECAPTCHA_PUBLIC_KEY', '', 'Enter your reCaptcha Public Key',87, 2, NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (2507, 'Private Key', 'RECAPTCHA_PRIVATE_KEY',  '', 'Enter your reCaptcha Private Key', 87, 3, NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (2508, 'Switch Add to Cart Image?','STOCK_IMAGE_SWITCH','true','Would you like to switch the Add to Cart image on the product info page?','9','6',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (2509, 'Maximum number of price break levels', 'PRICE_BREAK_NOF_LEVELS', '10', 'Configures the number of price break levels that can be entered on admin side. Levels that are left empty will not be shown to the customer', 88, 1, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2510, 'Number of price breaks for dropdown', 'NOF_PRICE_BREAKS_FOR_DROPDOWN', '5', 'Set the number of price breaks at which you want to show a dropdown plus "from Low Price" instead of a table', 88, 2, now(), now(), NULL, NULL);
 
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
@@ -1939,6 +1973,7 @@ INSERT INTO configuration_group VALUES (80,'Recover Cart Sales', 'Recover Cart S
 INSERT INTO configuration_group VALUES (85,'Google Analytics', 'Google Analytics Settings', 99, 1);
 INSERT INTO configuration_group VALUES (86,'FWR Menu', 'SEO Pop Out Multilayer Menu', 904, 1);
 INSERT INTO configuration_group VALUES (87,'reCaptcha', 'reCaptcha Settings', 905, 1); 
+INSERT INTO configuration_group VALUES (88,'Price breaks', 'Configuration options for price breaks', 88, 1);
 
 
 INSERT INTO `countries` VALUES(1, 'Afghanistan', 'AF', 'AFG', 1, 1);

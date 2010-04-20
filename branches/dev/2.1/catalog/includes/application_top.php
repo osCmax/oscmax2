@@ -261,6 +261,14 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 // include currencies class and create an instance
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
+  
+// BOF QPBPP for SPPC
+  // include the price formatter classes for the price breaks contribution
+  require(DIR_WS_CLASSES . 'PriceFormatter.php');
+  $pf = new PriceFormatter;
+  require(DIR_WS_CLASSES . 'PriceFormatterStore.php');
+  $pfs = new PriceFormatterStore;
+// EOF QPBPP for SPPC
 
 // include the mail classes
   require(DIR_WS_CLASSES . 'mime.php');
@@ -465,7 +473,7 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
               $attributes=$attributes + $_POST['id'];
           }
         }
-        $cart->add_cart($_POST['products_id'], $cart->get_quantity(tep_get_uprid($_POST['products_id'], $attributes))+$_POST['quantity'], $attributes);
+        $cart->add_cart($_POST['products_id'], $cart->get_quantity(tep_get_uprid($_POST['products_id'], $attributes))+$_POST['cart_quantity'], $attributes);
 // EOF: MOD - QT Pro
                     }
         tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));

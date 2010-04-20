@@ -4,7 +4,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
-adapted for Separate Pricing Per Customer v4.20 2005/01/29 and Hide products and categories from customer groups 
+adapted for Separate Pricing Per Customer v4.20 2005/01/29, QPBPP for SPPC v2.0 2008/10/25 and Hide products and categories from customer groups 
   Copyright 2006 osCMax
 
   Released under the GNU General Public License
@@ -1175,6 +1175,10 @@ function tep_selected_file($filename) {
     tep_db_query("delete from " . TABLE_PRODUCTS . " where products_id = '" . (int)$product_id . "'");
 // LINE ADDED: MOD - Separate Price per Customer
     tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$product_id . "'");
+// BOF QPBPP for SPPC
+    tep_db_query("delete from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id = '" . (int)$product_id . "'");
+    tep_db_query("delete from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " where products_id = '" . (int)$product_id . "'");
+// EOF QPBPP for SPPC
     tep_db_query("delete from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$product_id . "'");
     tep_db_query("delete from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "'");
     tep_db_query("delete from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'");
@@ -1829,4 +1833,41 @@ function tep_reset_cache_data_seo_urls($action = false){
     }
   }
 // <<< END REGISTER_GLOBALS
+
+//BOF QPBPP for SPPC
+function qpbpp_insert_update_discount_cats($products_id, $current_discount_categories_id, $new_discount_categories_id, $customers_group_id) {
+  if (!tep_not_null($products_id)) {
+    return false; // if $products_id is not set stop here
+  }
+  if ($current_discount_categories_id == $new_discount_categories_id) {
+    return true; // if they are the same no update is necessary
+  }
+  if ($current_discount_categories_id == 0 && $new_discount_categories_id > 0) {
+    // insert needed
+    tep_db_query("insert into " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " (products_id, discount_categories_id, customers_group_id) values ('" . (int)$products_id . "', '" . (int)$new_discount_categories_id . "', '" . (int)$customers_group_id . "')");
+    return true;
+  }
+  if ($current_discount_categories_id > 0 && $new_discount_categories_id == 0) {
+    // delete needed
+    tep_db_query("delete from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " where products_id = '" . (int)$products_id . "' and customers_group_id = '" . (int)$customers_group_id . "'");
+    return true;
+  }
+  if ($current_discount_categories_id > 0 && ($current_discount_categories_id !== $new_discount_categories_id)) {
+    // update needed
+    tep_db_query("update " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " set discount_categories_id = '" . (int)$new_discount_categories_id . "' where products_id = '" . (int)$products_id . "' and discount_categories_id = '" . (int)$current_discount_categories_id . "' and customers_group_id = '" . (int)$customers_group_id . "'");
+    return true;
+  }
+  return false; // for good measure
+}
+
+  function sortByQty($a, $b) {
+    if ($a['products_qty'] == $b['products_qty']) {
+      return 0;
+    }
+     if ($a['products_qty'] < $b['products_qty']) {
+      return -1;
+    }
+      return 1;
+  }
+//EOF QPBPP for SPPC
 ?>

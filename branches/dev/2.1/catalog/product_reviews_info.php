@@ -57,7 +57,7 @@ $Id: product_reviews_info.php 3 2006-05-27 04:59:07Z user $
   }
   
     if ($customer_group_id !='0') {
-  $customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $review['products_id'] . "' and customers_group_id =  '" . $customer_group_id . "'");
+  $customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $review['products_id'] . "' and customers_group_id =  '" . $customer_group_id . "' and customers_group_price != null");
     if ($customer_group_price = tep_db_fetch_array($customer_group_price_query)) {
       $review['products_price'] = $customer_group_price['customers_group_price'];
     }

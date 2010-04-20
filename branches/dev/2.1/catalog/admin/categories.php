@@ -4,7 +4,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
-  adapted for Separate Pricing Per Customer v4.2 2007/08/05, Hide products and categories from groups 2008/08/03
+  adapted for Separate Pricing Per Customer v4.2 2007/08/05, QPBPP for SPPC v2.0 2008/11/23, Hide products and categories from groups 2008/08/03
 
   Copyright 2006 osCMax
 
@@ -17,6 +17,12 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
+  
+// BOF QPBPP for SPPC
+// include the admin version of price formatter for the price breaks contribution
+  require(DIR_WS_CLASSES . 'PriceFormatterAdmin.php');
+  $pf = new PriceFormatter;
+// EOF QPBPP for SPPC
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 // BOF instant update & image directory 
@@ -214,6 +220,10 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 // LINE ADDED: MOD - Separate Price per Customer
            tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . tep_db_input($product_id) . "' ");
           }
+		  
+// BOF QPBPP for SPPC
+            tep_db_query("delete from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id = '" . (int)$product_id . "'");
+// EOF QPBPP for SPPC
 
           $product_categories_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$product_id . "'");
           $product_categories = tep_db_fetch_array($product_categories_query);
@@ -293,6 +303,10 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                                   'products_ship_price' => tep_db_prepare_input($_POST['products_ship_price']), //indvship
                                   'products_model' => tep_db_prepare_input($_POST['products_model']),
                                   'products_price' => tep_db_prepare_input($_POST['products_price']),
+// BOF QPBPP for SPPC
+                                  'products_qty_blocks' => (($i = (int)tep_db_prepare_input($_POST['products_qty_blocks'][0])) < 1) ? 1 : $i,
+                                  'products_min_order_qty' => (($min_i = (int)tep_db_prepare_input($_POST['products_min_order_qty'][0])) < 1) ? 1 : $min_i,
+// EOF QPBPP for SPPC
                                   'products_date_available' => $products_date_available,
                                   'products_weight' => (float)tep_db_prepare_input($_POST['products_weight']),
                                   'products_height' => tep_db_prepare_input($_POST['products_height']),
@@ -339,32 +353,96 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 //EOF: MOD - AJAX Attribute Manager 
 
 
-// BOF: MOD - Separate Price per Customer
-          $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id != '0' order by customers_group_id");
-          while ($customers_group = tep_db_fetch_array($customers_group_query))  { // Gets all of the customers groups
-            $attributes_query = tep_db_query("select customers_group_id, customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where ((products_id = '" . $products_id . "') && (customers_group_id = " . $customers_group['customers_group_id'] . ")) order by customers_group_id");
-            $attributes = tep_db_fetch_array($attributes_query);
-            if (tep_db_num_rows($attributes_query) > 0) {
-              if ($_POST['sppcoption'][$customers_group['customers_group_id']]) {// this is checking if the check box is checked
-                if ( ($_POST['sppcprice'][$customers_group['customers_group_id']] <> $attributes['customers_group_price']) && ($attributes['customers_group_id'] == $customers_group['customers_group_id']) ) {
-                tep_db_query("update " . TABLE_PRODUCTS_GROUPS . " set customers_group_price = '" . $_POST['sppcprice'][$customers_group['customers_group_id']] . "' where customers_group_id = '" . $attributes['customers_group_id'] . "' and products_id = '" . $products_id . "'");
-                  $attributes = tep_db_fetch_array($attributes_query);
-                }
-                elseif (($_POST['sppcprice'][$customers_group['customers_group_id']] == $attributes['customers_group_price'])) {
-                $attributes = tep_db_fetch_array($attributes_query);
-                }
-              }
-              else {
-                tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where customers_group_id = '" . $customers_group['customers_group_id'] . "' and products_id = '" . $products_id . "'");
-                $attributes = tep_db_fetch_array($attributes_query);
-              }
-            }
-            elseif (($_POST['sppcoption'][$customers_group['customers_group_id']]) && ($_POST['sppcprice'][$customers_group['customers_group_id']] != '')) {
-              tep_db_query("insert into " . TABLE_PRODUCTS_GROUPS . " (products_id, customers_group_id, customers_group_price) values ('" . $products_id . "', '" . $customers_group['customers_group_id'] . "', '" . $_POST['sppcprice'][$customers_group['customers_group_id']] . "')");
-              $attributes = tep_db_fetch_array($attributes_query);
-            }
-          }
-// EOF: MOD - Separate Price per Customer
+// BOF QPBPP for SPPC
+// BOF entries in products_groups
+ $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id != '0' order by customers_group_id");
+while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets all of the customers groups
+  {
+  $attributes_query = tep_db_query("select customers_group_id, customers_group_price, products_qty_blocks, products_min_order_qty from " . TABLE_PRODUCTS_GROUPS . " where ((products_id = '" . $products_id . "') && (customers_group_id = " . $customers_group['customers_group_id'] . ")) order by customers_group_id");
+  $attributes = tep_db_fetch_array($attributes_query);
+// set default values for quantity blocks and min order quantity  
+  $pg_products_qty_blocks = 1;
+  $pg_products_min_order_qty = 1;
+  $delete_row_from_pg = false;
+
+  if (isset($_POST['products_qty_blocks'][$customers_group['customers_group_id']]) && (int)$_POST['products_qty_blocks'][$customers_group['customers_group_id']] > 1) {
+     $pg_products_qty_blocks = (int)$_POST['products_qty_blocks'][$customers_group['customers_group_id']];
+  }
+  if (isset($_POST['products_min_order_qty'][$customers_group['customers_group_id']]) && (int)$_POST['products_min_order_qty'][$customers_group['customers_group_id']] > 1) {
+     $pg_products_min_order_qty = (int)$_POST['products_min_order_qty'][$customers_group['customers_group_id']];
+  }
+  if ($_POST['sppcprice'][$customers_group['customers_group_id']] == '' && $pg_products_qty_blocks == 1 && $pg_products_min_order_qty == 1) {
+    $delete_row_from_pg = true; // no need to have default values for qty blocks and min order qty in the table
+  }
+  if ($_POST['sppcprice'][$customers_group['customers_group_id']] == '') {
+    $pg_cg_group_price = 'null';
+  } else {
+    $pg_cg_group_price = "'" . (float)$_POST['sppcprice'][$customers_group['customers_group_id']] . "'";
+  }
+
+  if (tep_db_num_rows($attributes_query) > 0 && $delete_row_from_pg == false) {
+// there is already a row inserted in products_groups, update instead of insert  
+    if ($_POST['sppcoption'][$customers_group['customers_group_id']]) { // this is checking if the check box is checked
+        tep_db_query("update " . TABLE_PRODUCTS_GROUPS . " set customers_group_price = " . $pg_cg_group_price . ", products_qty_blocks = " . $pg_products_qty_blocks . ", products_min_order_qty = " . $pg_products_min_order_qty . " where customers_group_id = '" . $attributes['customers_group_id'] . "' and products_id = '" . $products_id . "'");
+    }
+    else {
+      tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where customers_group_id = '" . $customers_group['customers_group_id'] . "' and products_id = '" . $products_id . "'");
+    }
+  } elseif (tep_db_num_rows($attributes_query) > 0 && $delete_row_from_pg == true) {
+      tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where customers_group_id = '" . $customers_group['customers_group_id'] . "' and products_id = '" . $products_id . "'");
+  } elseif (($_POST['sppcoption'][$customers_group['customers_group_id']]) && $delete_row_from_pg == false) {
+    tep_db_query("insert into " . TABLE_PRODUCTS_GROUPS . " (products_id, customers_group_id, customers_group_price, products_qty_blocks, products_min_order_qty) values ('" . $products_id . "', '" . $customers_group['customers_group_id'] . "', " . $pg_cg_group_price . ", " . $pg_products_qty_blocks . ", " . $pg_products_min_order_qty . ")");
+  }
+} // end while ($customers_group = tep_db_fetch_array($customers_group_query))
+// EOF entries in products_groups
+
+// BOF entries in products_to_discount_categories
+  foreach ($_POST['discount_categories_id'] as $dc_cg_id => $dc_id) {
+    $current_discount_category = (int)$_POST['current_discount_cat_id'][$dc_cg_id];
+    $new_discount_category = (int)$dc_id;
+    $discount_category_result = qpbpp_insert_update_discount_cats($products_id, $current_discount_category, $new_discount_category, $dc_cg_id);
+      if ($discount_category_result == false) {
+          $messageStack->add_session(ERROR_UPDATE_INSERT_DISCOUNT_CATEGORY, 'error');
+       }
+  } // end foreach ($_POST['discount_categories_id'] as $dc_cg_id => $dc_id
+// EOF entries in products_to_discount_categories
+
+// BOF entries in products_price_break
+  foreach ($_POST['products_price_break'] as $pbb_cg_id => $price_break_array) {
+    foreach ($price_break_array as $key1 => $products_price) {
+      $pb_action = 'insert'; // re-set default to insert
+      $where_clause = '';
+      if (isset($_POST['products_delete'][$pbb_cg_id][$key1]) && $_POST['products_delete'][$pbb_cg_id][$key1] == 'y' && isset($_POST['products_price_break_id'][$pbb_cg_id][$key1])) {
+        $delete_from_ppb_array[] = (int)$_POST['products_price_break_id'][$pbb_cg_id][$key1];
+        continue;
+      }
+      if (!tep_not_null($products_price)) {
+        continue; // if price is empty this price break is unused
+      } elseif (!tep_not_null($_POST['products_qty'][$pbb_cg_id][$key1])) {
+        continue; // if qty is not entered we will not update or insert this in the table
+      } else {
+        $sql_price_break_data_array = array(
+           'products_id' => (int)$products_id,
+           'products_price' => (float)$products_price,
+           'products_qty' => (int)$_POST['products_qty'][$pbb_cg_id][$key1],
+           'customers_group_id' => $pbb_cg_id
+           );
+               
+        if (isset($_POST['products_price_break_id'][$pbb_cg_id][$key1]) && (int)$_POST['products_price_break_id'][$pbb_cg_id][$key1] > 0) {
+          $pb_action = 'update';
+          $where_clause = " products_price_break_id = '" . (int)$_POST['products_price_break_id'][$pbb_cg_id][$key1] . "'";
+        }
+        tep_db_perform(TABLE_PRODUCTS_PRICE_BREAK, $sql_price_break_data_array, $pb_action, $where_clause);
+      } // end if/else (!tep_not_null($products_price))
+    } // end foreach ($price_break_array as $key1 => $products_price)
+  } // end foreach ($_POST['products_price_break'] as $pbb_cg_id => $price_break_array)
+  
+// delete the unwanted price breaks using their products_price_break_id's
+    if (isset($delete_from_ppb_array) && sizeof($delete_from_ppb_array > 0) && tep_not_null($delete_from_ppb_array[0])) {
+      tep_db_query("delete from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_price_break_id in (" . implode(',', $delete_from_ppb_array) . ")");
+    }
+// EOF entries in products_price_break
+// EOF QPBPP for SPPC
 
           $languages = tep_get_languages();
           for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
@@ -421,12 +499,14 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             }
           } elseif ($_POST['copy_as'] == 'duplicate') {
 // LINE MODED: Added "products_ship_price and dimensions for upsxml"
-            $product_query = tep_db_query("select products_ship_price, products_quantity, products_model, products_image, products_price, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_tax_class_id, manufacturers_id from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+            $product_query = tep_db_query("select products_ship_price, products_quantity, products_model, products_image, products_price, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_tax_class_id, manufacturers_id, products_qty_blocks, products_min_order_qty from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
             $product = tep_db_fetch_array($product_query);
 
 // LINE CHANGED: MS2 update 501112 - Added :(empty($product['products_date_available']) ? "null" : ...{some code}... ") . "
 // LINE MODED: Added "products_ship_price and dimensions for upsxml"
-            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "')");  
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id, products_qty_blocks, products_min_order_qty) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "', '" . (int)$product['products_qty_blocks'] . "', '" . (int)$product['products_min_order_qty'] . "')");  
             $dup_products_id = tep_db_insert_id();
 
 // Tabs by PGM LINE EDIT
@@ -440,6 +520,20 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
             tep_db_query("insert into " . TABLE_PRODUCTS_TO_CATEGORIES . " (products_id, categories_id) values ('" . (int)$dup_products_id . "', '" . (int)$categories_id . "')");
             $products_id = $dup_products_id;
+			
+// BOF Separate Pricing Per Customer originally 2006-04-26 by Infobroker
+      $cg_price_query = tep_db_query("select customers_group_id, customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $products_id . "' order by customers_group_id");
+
+// insert customer group prices in table products_groups when there are any for the copied product
+    if (tep_db_num_rows($cg_price_query) > 0) {
+      while ( $cg_prices = tep_db_fetch_array($cg_price_query)) {
+        tep_db_query("insert into " . TABLE_PRODUCTS_GROUPS . " (customers_group_id, customers_group_price, products_id) values ('" . (int)$cg_prices['customers_group_id'] . "', '" . tep_db_input($cg_prices['customers_group_price']) . "', '" . (int)$dup_products_id . "')");
+      } // end while ( $cg_prices = tep_db_fetch_array($cg_price_query))
+    } // end if (tep_db_num_rows($cg_price_query) > 0)
+    
+// EOF Separate Pricing Per Customer originally 2006-04-26 by Infobroker
+			
+			
           }
 
           if (USE_CACHE == 'true') {
@@ -491,6 +585,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
     <script type="text/javascript" src="../slimbox2/jquery.js"></script>
 	<script type="text/javascript" src="../slimbox2/slimbox2.js"></script>
 <!--// SLIMBOX2 -->
+
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="goOnLoad();">
 <div id="spiffycalendar" class="text"></div>
@@ -761,6 +856,10 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                        'products_model' => '',
                        'products_image' => '',
                        'products_price' => '',
+// BOF QPBPP for SPPC
+                       'products_qty_blocks' => '',
+                       'products_min_order_qty' => '',
+// EOF QPBPP for SPPC					   
                        'products_weight' => '',
                        'products_length' => '',
                        'products_width' => '',
@@ -781,12 +880,46 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
     if (isset($_GET['pID']) && empty($_POST)) { // BOF SPPC hide from groups mod
 //LINE MODED: Added "p.products_ship_price"
 //    $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id,                              p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
-//LINE MODED: SPPC hide from groups mod & Tabs by PGM      
-	  $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+//LINE MODED: SPPC hide from groups mod & Tabs by PGM
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+	  $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
 // EOF SPPC hide from groups mod
       $product = tep_db_fetch_array($product_query);
 
       $pInfo->objectInfo($product);
+	  
+// BOF QPBPP for SPPC
+// move retail settings for quantity blocks and min order qty to an array indexed
+// by customer_group_id, as we will get back in $_POST values
+      unset($pInfo->products_qty_blocks);
+      $pInfo->products_qty_blocks[0] = $product['products_qty_blocks'];
+      unset($pInfo->products_min_order_qty);
+      $pInfo->products_min_order_qty[0] = $product['products_min_order_qty'];
+// next is getting the group prices, products_qty_blocks, and products_min_order_qty for groups
+      $cg_prices_query = tep_db_query("select customers_group_id, customers_group_price, products_qty_blocks, products_min_order_qty from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $pInfo->products_id . "' order by customers_group_id");
+      while ($cg_prices = tep_db_fetch_array($cg_prices_query)) {
+// and adding them to $pInfo for later use
+        if (tep_not_null($cg_prices['customers_group_price'])) {
+        $pInfo->sppcprice[$cg_prices['customers_group_id']] = $cg_prices['customers_group_price'];
+        }
+        $pInfo->products_qty_blocks[$cg_prices['customers_group_id']] = $cg_prices['products_qty_blocks'];
+        $pInfo->products_min_order_qty[$cg_prices['customers_group_id']] = $cg_prices['products_min_order_qty'];
+      } // end while ($cg_prices = tep_db_fetch_array($cg_prices_query))
+      
+      $price_breaks_array = array();
+      $price_breaks_query = tep_db_query("select products_price_break_id, products_price, products_qty, customers_group_id from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id = '" . tep_db_input($pInfo->products_id) . "' order by customers_group_id, products_qty");
+      while ($price_break = tep_db_fetch_array($price_breaks_query)) {
+        $pInfo->products_price_break[$price_break['customers_group_id']][] = $price_break['products_price'];
+        $pInfo->products_qty[$price_break['customers_group_id']][] = $price_break['products_qty'];
+        $pInfo->products_price_break_id[$price_break['customers_group_id']][] = $price_break['products_price_break_id'];
+      }
+      $product_discount_categories = array();
+      $products_discount_query = tep_db_query("select customers_group_id, discount_categories_id from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " where products_id = '" . tep_db_input($pInfo->products_id) . "' order by customers_group_id");
+      while ($products_discount_results = tep_db_fetch_array($products_discount_query)) {
+        $pInfo->discount_categories_id[$products_discount_results['customers_group_id']] = $products_discount_results['discount_categories_id'];
+      }
+// EOF QPBPP for SPPC
+	  
     } elseif (tep_not_null($_POST)) {
       $pInfo->objectInfo($_POST);
       $products_name = $_POST['products_name'];
@@ -815,6 +948,15 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
       $tax_class_array[] = array('id' => $tax_class['tax_class_id'],
                                  'text' => $tax_class['tax_class_title']);
     }
+	
+// BOF QPBPP for SPPC
+    $discount_categories_array = array(array('id' => '0', 'text' => TEXT_NONE));
+    $discount_categories_query = tep_db_query("select discount_categories_id, discount_categories_name from " . TABLE_DISCOUNT_CATEGORIES . " order by discount_categories_name");
+    while ($discount_categories = tep_db_fetch_array($discount_categories_query)) {
+      $discount_categories_array[] = array('id' => $discount_categories['discount_categories_id'],
+                                           'text' => $discount_categories['discount_categories_name']);
+    }
+// EOF QPBPP for SPPC
 
     $languages = tep_get_languages();
 
@@ -858,6 +1000,10 @@ function getTaxRate() {
 function updateGross() {
   var taxRate = getTaxRate();
   var grossValue = document.forms["new_product"].products_price.value;
+  
+/* BOF QPBPP for SPPC - auto-update Retail readonly price field */
+  document.forms["new_product"].products_price_retail_net.value = document.forms["new_product"].products_price.value;
+/* EOF QPBPP for SPPC - auto-update Retail readonly price field */
 
   if (taxRate > 0) {
     grossValue = grossValue * ((taxRate / 100) + 1);
@@ -875,6 +1021,10 @@ function updateNet() {
   }
 
   document.forms["new_product"].products_price.value = doRound(netValue, 4);
+  
+/* BOF QPBPP for SPPC - auto-update Retail readonly price field */
+  document.forms["new_product"].products_price_retail_net.value = document.forms["new_product"].products_price.value;
+/* EOF QPBPP for SPPC - auto-update Retail readonly price field */  
 }
 //--></script>
     <?php echo tep_draw_form('new_product', FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&pID=' . $_GET['pID'] : '') . '&action=new_product_preview', 'post', 'enctype="multipart/form-data"'); ?>
@@ -943,74 +1093,128 @@ function updateNet() {
             <td class="main" colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price', $pInfo->products_price, 'onKeyUp="updateGross()"') .
             tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_PRICE_GROSS . '&nbsp;' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'OnKeyUp="updateNet()"'); ?></td>
           </tr>
+
+<!-- BOF Separate Pricing Per Customer - QPBPP for SPPC - in tabbed menu -->
+<?php
+// the query is changed to also get the results for group 0 (retail) so that the
+// results of the query can be used for others mods (like hide products, QPBPP for SPPC) too
+    $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id");
+    $header = false;
+    if (!tep_db_num_rows($customers_group_query) > 0) {
+      $messageStack->add_session(ERROR_ALL_CUSTOMER_GROUPS_DELETED, 'error');
+   } else {
+// to avoid confusion and/or duplication of code we re-use some code originally used
+// for the "hide products for customers groups for sppc" mod here so both can co-exist
+     while ($customers_group = tep_db_fetch_array($customers_group_query)) {
+       $_hide_customers_group[] = $customers_group;
+     }
+   } ?>
+          <tr>
+            <td colspan="2">
+              <div id="qpbpp" class="cgtabs">
+                <ul class="tabnav"> <?php
+                  foreach ($_hide_customers_group as $key => $cust_groups) {
+                    echo '  <li><a href="#pricebreak-' . $cust_groups['customers_group_id'] . '">' . $cust_groups['customers_group_name'] . '</a></li>' ."\n";
+                  }
+                ?>
+                </ul>
+<?php
+ foreach ($_hide_customers_group as $key => $cust_groups) {
+   $CustGroupID = $cust_groups['customers_group_id'];
+?>
+                  <div id="pricebreak-<?php echo $CustGroupID; ?>" class="tabdiv">
+                    <table border="0" width="100%">
+                      <tr bgcolor="#ebebff">
+                        <td class="main"><?php echo ENTRY_CUSTOMERS_GROUP_NAME ?></td>
+                        <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $cust_groups['customers_group_name']; ?></td>
+                      </tr>
+                      <tr bgcolor="#fffff">
+                        <td class="main" colspan="2"><small><i><?php if ($CustGroupID != 0) echo TEXT_CUSTOMERS_GROUPS_NOTE; ?></i></small></td>
+                      </tr>
+                      <tr bgcolor="#fffff">
+                        <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET ?></td>
+                        <td class="main"><?php
+                        if ($CustGroupID != 0) {
+                          if (isset($pInfo->sppcoption)) {
+                            echo tep_draw_checkbox_field('sppcoption[' . $CustGroupID . ']', 'sppcoption[' . $CustGroupID . ']', (isset($pInfo->sppcoption[$CustGroupID])) ? 1: 0);
+                          } else {
+                            echo tep_draw_checkbox_field('sppcoption[' . $CustGroupID . ']', 'sppcoption[' . $CustGroupID . ']', true);
+                          }
+                            if (isset($pInfo->sppcprice[$CustGroupID])) { 
+                              $sppc_cg_price = $pInfo->sppcprice[$CustGroupID];
+                            } else { // nothing in the db, nothing in the post variables
+                              $sppc_cg_price = '';
+                            }
+                            echo '&nbsp;' . tep_draw_input_field('sppcprice[' . $CustGroupID . ']', $sppc_cg_price );
+                        } else {
+                          echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_retail_net', $pInfo->products_price, 'readonly');
+                        } // end if/else ($CustGroupID != 0) ?>
+                        </td>
+                      </tr>
+                      <tr bgcolor="#ebebff">
+                        <td class="main"><?php echo TEXT_DISCOUNT_CATEGORY ?></td>
+                        <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('discount_categories_id[' . $CustGroupID . ']', $discount_categories_array, $pInfo->discount_categories_id[$CustGroupID]) . tep_draw_hidden_field('current_discount_cat_id[' . $CustGroupID . ']', (isset($pInfo->current_discount_cat_id[$CustGroupID]) ? (int)$pInfo->current_discount_cat_id[$CustGroupID] : $pInfo->discount_categories_id[$CustGroupID])); ?></td>
+                      </tr>
+                      <tr bgcolor="#ffffff">
+                        <td class="main"><?php echo TEXT_PRODUCTS_QTY_BLOCKS; ?></td>
+                        <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_qty_blocks[' . $CustGroupID . ']', $pInfo->products_qty_blocks[$CustGroupID], 'size="10"') . "&nbsp;" . TEXT_PRODUCTS_QTY_BLOCKS_HELP; ?></td>
+                      </tr>
+                      <tr bgcolor="#ebebff">
+                        <td class="main"><?php echo TEXT_PRODUCTS_MIN_ORDER_QTY; ?></td>
+                        <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_min_order_qty[' . $CustGroupID . ']', $pInfo->products_min_order_qty[$CustGroupID], 'size="10"') . "&nbsp;" . TEXT_PRODUCTS_MIN_ORDER_QTY_HELP; ?></td>
+                      </tr>
+<?php 
+    $i = 0; // for alternate coloring of rows (zebra striping)
+    for ($count = 0; $count <= (PRICE_BREAK_NOF_LEVELS - 1); $count++) {
+      $bgcolor = ($i++ & 1) ? '#ebebff' : '#ffffff'; // for zebra striping
+?>
+                      <tr bgcolor="<?php echo $bgcolor; ?>">
+                        <td class="main"><?php echo TEXT_PRODUCTS_PRICE  . " " . ($count + 1); ?></td>
+                        <td class="main" align="left"> <?php
+                            if(is_array($pInfo->products_price_break[$CustGroupID]) && array_key_exists($count, $pInfo->products_price_break[$CustGroupID])) {
+                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', $pInfo->products_price_break[$CustGroupID][$count], 'size="10"');
+                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;
+                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', $pInfo->products_qty[$CustGroupID][$count], 'size="10"');
+                              echo tep_draw_hidden_field('products_price_break_id[' . $CustGroupID .'][' . $count . ']', $pInfo->products_price_break_id[$CustGroupID][$count]);
+// only show a delete box for a price break that has been set (needed for when the
+// back button is used after a preview
+                              if (isset($pInfo->products_price_break_id[$CustGroupID][$count]) && tep_not_null($pInfo->products_price_break_id[$CustGroupID][$count])) {
+                                echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_checkbox_field('products_delete[' . $CustGroupID .'][' . $count . ']', 'y', (isset($pInfo->products_delete[$CustGroupID][$count]) ? 1 : 0)) . TEXT_PRODUCTS_DELETE;
+                              }
+                            } else {
+                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
+                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;
+                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
+                            } ?>
+                        </td>
+                      </tr>
+<?php
+   } // end for ($count = 0; $count <= (PRICE_BREAK_NOF_LEVELS - 1); $count++)
+?>
+                    </table>
+                  </div>
+<?php
+ } // end foreach ($_hide_customers_group as $key => $cust_groups)
+?>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+<!-- EOF  Separate Pricing Per Customer - QPBPP for SPPC - in tabbed menu -->
+
+
 <script language="javascript"><!--
 updateGross();
 //--></script>
 
-<?php
-// BOF: MOD - Separate Pricing Per Customer
-//    $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id != '0' order by customers_group_id");
-//     $header = false;
-//     while ($customers_group = tep_db_fetch_array($customers_group_query)) {
-// 
-//      if (tep_db_num_rows($customers_group_query) > 0) {
-// the query is changed to also get the results for group 0 (retail)
-// so that the results of the query can be used for the hide products mod too
-    $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id");
-    $header = false;
-    while ($customers_group = tep_db_fetch_array($customers_group_query)) {
-
-     if (tep_db_num_rows($customers_group_query) > 0) {
-// store results in an array here for the hide product modification
-       $_hide_customers_group[] = $customers_group;
-// if customer group is retail we stop here and continue with the next group
-       if ($customers_group['customers_group_id'] == 0) continue;
-		$attributes_query = tep_db_query("select customers_group_id, customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $pInfo->products_id . "' and customers_group_id = '" . $customers_group['customers_group_id'] . "' order by customers_group_id");
-     } else {
-         $attributes = array('customers_group_id' => 'new');
-     }
- if (!$header) { ?>
-
-    <tr bgcolor="#ebebff">
-    <td class="main" colspan="2" style="font-style: italic"><?php echo TEXT_SPPC_HELP; ?>
-<?php if (isset($pInfo->sppcoption[$customers_group['customers_group_id']])) { // when a preview was done and the back button used
-print (TEXT_SPPC_WARNING);
-} ?>
-</td>
-    </tr>
- <?php
- $header = true;
- } // end if (!header), makes sure this is only shown once
- ?>
-      <tr bgcolor="#ebebff">
-      <td class="main"><?php
-      echo tep_draw_checkbox_field('sppcoption[' . $customers_group['customers_group_id'] . ']', 'sppcoption[' . $customers_group['customers_group_id'] . ']', true) . '&nbsp;' . $customers_group['customers_group_name'];
-?>
- &nbsp;</td>
-       <td class="main"><?php
-       if ($attributes = tep_db_fetch_array($attributes_query)) {
-       echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('sppcprice[' . $customers_group['customers_group_id'] . ']', $attributes['customers_group_price']);
-       }  else {
-         if (isset($pInfo->sppcprice[$customers_group['customers_group_id']])) { // when a preview was done and the back button used
-           $sppc_cg_price = $pInfo->sppcprice[$customers_group['customers_group_id']];
-         } else { // nothing in the db, nothing in the post variables
-           $sppc_cg_price = '';
-         }
-     echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('sppcprice[' . $customers_group['customers_group_id'] . ']', $sppc_cg_price );
-   }  ?></td>
-    </tr>
-<?php
-        } // end while ($customers_group = tep_db_fetch_array($customers_group_query))
-?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-<!-- EOF: MOD - Separate Pricing Per Customer  -->
-          <!-- AJAX Attribute Manager  -->
+<!-- AJAX Attribute Manager  -->
           <tr>
           	<td colspan="2"><?php require_once( 'attributeManager/includes/attributeManagerPlaceHolder.inc.php' )?></td>
           </tr>
-          <!-- AJAX Attribute Manager end -->
+<!-- AJAX Attribute Manager end -->
+          
 <!-- BOF SPPC hide from groups mod -->
           <tr>
             <td colspan="2" class="main" ><?php echo TEXT_HIDE_PRODUCTS_FROM_GROUP; ?></td>
@@ -1182,16 +1386,41 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
       $tab6 = $_POST['tab6'];
 // EOF: Tabs by PGM
       $products_url = $_POST['products_url'];
-    } else {
 // LINE CHANGED: Added p.products_shipped_price and dimensions for upsxml
 //    $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'");
 // LINE MODED: Tabs by PGM
-      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'");
+
+// BOF QPBPP for SPPC
+      $price_breaks_array = array();
+      if (isset($_POST['products_price_break'][0]) && isset($_POST['products_qty'][0])) {
+        foreach ($_POST['products_price_break'][0] as $index => $products_price ) {
+          if (tep_not_null($products_price) && tep_not_null($_POST['products_qty'][0][$index]) && !isset($_POST['products_delete'][0][$index])) {
+            $price_breaks_array[] = array(
+              'products_price' => $products_price,
+              'products_qty' => $_POST['products_qty'][0][$index]);
+          }
+        } // end foreach ($_POST['products_price_break'][0] as ...
+      usort($price_breaks_array, "sortByQty");  
+      } // end if (isset($_POST['products_price_break'][0]) && ...
+// EOF QPBPP for SPPC
+
+      } else {
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'");
 
       $product = tep_db_fetch_array($product_query);
 
       $pInfo = new objectInfo($product);
       $products_image_name = $pInfo->products_image;
+	  
+// move retail settings for quantity blocks and min order qty to an array indexed
+// by customer_group_id, like we get back in $_POST values
+      unset($pInfo->products_qty_blocks);
+      $pInfo->products_qty_blocks[0] = $product['products_qty_blocks'];
+      unset($pInfo->products_min_order_qty);
+      $pInfo->products_min_order_qty[0] = $product['products_min_order_qty'];
+// price_breaks_array is taken care of by PriceFormatterAdmin.php
+// EOF QPBPP for SPPC
     }
 
     $form_action = (isset($_GET['pID'])) ? 'update_product' : 'insert_product';
@@ -1231,7 +1460,11 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $pInfo->products_name; ?></td>
-            <td class="pageHeading" align="right"><?php echo $currencies->format($pInfo->products_price); ?></td>
+            <td class="pageHeading" align="right"><?php
+// BOF QPBPP for SPPC
+            $pf->loadProduct((int)$HTTP_GET_VARS['pID'], $pInfo->products_price, $pInfo->products_tax_class_id, (int)$pInfo->products_qty_blocks[0], $price_breaks_array, (int)$pInfo->products_min_order_qty[0]);
+            echo $pf->getPriceString();
+// EOF QPBPP for SPPC ?></td>
           </tr>
         </table></td>
       </tr>
@@ -1309,14 +1542,19 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 /* Re-Post all POST'ed variables */
       reset($_POST);
       while (list($key, $value) = each($_POST)) {
-// BOF: MOD - Separate Pricing Per Customer
-//        if (!is_array($_POST[$key])) {
-          if (is_array($value)) {
-            while (list($k, $v) = each($value)) {
+// BOF Separate Pricing per Customer adapted for QPBPP for SPPC
+        if (is_array($value)) {
+          while (list($k, $v) = each($value)) {
+            if (is_array($v)) {
+              foreach ($v as $subkey => $subvalue) {
+                echo tep_draw_hidden_field($key . '[' . $k . '][' . $subkey . ']', htmlspecialchars(stripslashes($subvalue)));
+              }
+            } else {
               echo tep_draw_hidden_field($key . '[' . $k . ']', htmlspecialchars(stripslashes($v)));
             }
-          } else {
-// EOF: MOD - Separate Pricing Per Customer
+          }
+        } else {
+// EOF Separate Pricing per Customer adapted for QPBPP for SPPC
 
           echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
         }
@@ -1486,12 +1724,14 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 // LINE CHANGED: Added p.products_shipped_price
 //    $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status,                              p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and (pd.products_name like '%" . tep_db_input($search) . "%' or p.products_model like '%" . tep_db_input($search) . "%') order by pd.products_name");
 // BOF SPPC hide products from groups
-      $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_hide_from_groups, p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and (pd.products_name like '%" . tep_db_input($search) . "%' or p.products_model like '%" . tep_db_input($search) . "%') order by pd.products_name");
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+      $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_hide_from_groups, p.products_qty_blocks, p.products_min_order_qty, p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and (pd.products_name like '%" . tep_db_input($search) . "%' or p.products_model like '%" . tep_db_input($search) . "%') order by pd.products_name");
 
     } else {
 // LINE CHANGED: Added p.products_shipped_price   
 //    $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status from ". TABLE_PRODUCTS .                                                        " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by pd.products_name");
-      $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_hide_from_groups from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by pd.products_name");
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+      $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_hide_from_groups, p.products_qty_blocks, p.products_min_order_qty from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by pd.products_name");
 // EOF SPPC hide products from groups
     }
     while ($products = tep_db_fetch_array($products_query)) {
@@ -1754,6 +1994,50 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 // EOF: MoPics in Admin
             $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price) . '<br>' . TEXT_PRODUCTS_QUANTITY_INFO . ' ' . $pInfo->products_quantity);
             $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_AVERAGE_RATING . ' ' . number_format($pInfo->average_rating, 2) . '%');
+			
+//BOF QPBPP for SPPC v4.2
+            $retail_price = $pInfo->products_price;
+            unset($pInfo->products_price);
+            $pInfo->products_price[0] = $retail_price;
+            $retail_products_qty_blocks = $pInfo->products_qty_blocks;
+            unset($pInfo->products_qty_blocks);
+            $pInfo->products_qty_blocks[0] = $retail_products_qty_blocks;
+            $retail_products_min_order_qty = $pInfo->products_min_order_qty;
+            unset($pInfo->products_min_order_qty);
+            $pInfo->products_min_order_qty[0] = $retail_products_min_order_qty;
+// query the customer groups together with discount categories first, then products_groups 
+// for group prices, quantity blocks and min order quantities and lastly for price breaks.
+// the first query needs minimum MySQL version to be 4.1 (release date february 2003...)
+            $customer_groups_dc_query = tep_db_query("select cg.customers_group_id, cg.customers_group_name, dc.discount_categories_name from " . TABLE_CUSTOMERS_GROUPS . " cg left join (select customers_group_id, discount_categories_id from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " ptdc where ptdc.products_id = '" . $pInfo->products_id. "') as p2dc on p2dc.customers_group_id = cg.customers_group_id left join " . TABLE_DISCOUNT_CATEGORIES . " dc on p2dc.discount_categories_id = dc.discount_categories_id order by customers_group_id"); 
+            while ($customer_groups_dc_results =  tep_db_fetch_array($customer_groups_dc_query)) {
+              $customer_groups[$customer_groups_dc_results['customers_group_id']] = $customer_groups_dc_results['customers_group_name'];
+              $discount_categories[$customer_groups_dc_results['customers_group_id']] = $customer_groups_dc_results['discount_categories_name'];
+            }
+            if (count($customer_groups) > 1) {
+              $cg_group_price_query = tep_db_query("select customers_group_id, customers_group_price, products_qty_blocks, products_min_order_qty from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $pInfo->products_id. "'");
+              while ($cg_group_price_results = tep_db_fetch_array($cg_group_price_query)) {
+                $pInfo->products_price[$cg_group_price_results['customers_group_id']] = $cg_group_price_results['customers_group_price'];
+                $pInfo->products_qty_blocks[$cg_group_price_results['customers_group_id']] = $cg_group_price_results['products_qty_blocks'];
+                $pInfo->products_min_order_qty[$cg_group_price_results['customers_group_id']] = $cg_group_price_results['products_min_order_qty'];
+              }
+            } // end if (count($customer_groups) > 1)
+            $price_break_query = tep_db_query("select customers_group_id, products_price, products_qty from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id = '" . $pInfo->products_id. "' order by customers_group_id, products_qty");
+            while ($price_break_results = tep_db_fetch_array($price_break_query)) {
+              $price_breaks[$price_break_results['customers_group_id']][] = $price_break_results;
+            }
+            foreach ($customer_groups as $cg_id => $cg_name) {
+              $price_break_info = TEXT_PRICE_BREAK_INFO;
+              if (isset($price_breaks[$cg_id])) {
+                foreach ($price_breaks[$cg_id] as $key => $price_break) {
+                  $price_break_info .= $currencies->format($price_break['products_price']) . ' (' . $price_break['products_qty'] . ') <b>::</b> ';
+                }
+                $price_break_info = substr($price_break_info, 0, -10);
+              }
+              $contents[] = array('text' => '<p class="infoBoxHeading" style="font-weight:bold;">&nbsp;' . $cg_name . '</p><p>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . (isset($pInfo->products_price[$cg_id]) ? $currencies->format($pInfo->products_price[$cg_id]) : " - ") . '<br>' . TEXT_PRODUCTS_QTY_BLOCKS . ' ' . (isset($pInfo->products_qty_blocks[$cg_id]) ? $pInfo->products_qty_blocks[$cg_id] : "1") . '<br>' . TEXT_PRODUCTS_MIN_ORDER_QTY . ' ' . (isset($pInfo->products_min_order_qty[$cg_id]) ? $pInfo->products_min_order_qty[$cg_id] : "1") . '<br>'. TEXT_DISCOUNT_CATEGORY . ' ' . (isset($discount_categories[$cg_id]) ? $discount_categories[$cg_id] : TEXT_NONE) . '<br>' . $price_break_info . '</p>');            
+            }
+//EOF QPBPP for SPPC
+
+			
 // BOF SPPC hide products and categories from groups
        $product_hidden_from_string = '';
          for ($i = 0; $i < count($customers_groups); $i++) {

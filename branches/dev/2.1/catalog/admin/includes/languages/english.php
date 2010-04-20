@@ -141,6 +141,9 @@ define('BOX_MODULES_ORDER_TOTAL', 'Order Total');
 // categories box text in includes/boxes/catalog.php
 define('BOX_HEADING_CATALOG', 'Catalog');
 define('BOX_CATALOG_CATEGORIES_PRODUCTS', 'Categories/Products');
+// BOF QPBPP for SPPC
+define('BOX_CATALOG_CATEGORIES_DISCOUNT_CATEGORIES', 'Discount Categories');
+// EOF QPBPP for SPPC
 define('BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES', 'Products Attributes');
 define('BOX_CATALOG_MANUFACTURERS', 'Manufacturers');
 define('BOX_CATALOG_REVIEWS', 'Reviews');
@@ -370,6 +373,9 @@ define('IMAGE_UNLOCK', 'Unlock');
 define('IMAGE_UPDATE', 'Update');
 define('IMAGE_UPDATE_CURRENCIES', 'Update Exchange Rate');
 define('IMAGE_UPLOAD', 'Upload');
+// BOF QPBPP for SPPC
+define('IMAGE_SHOW_PRODUCTS', 'Show Products');
+// EOF QPBPP for SPPC
 
 define('ICON_CROSS', 'False');
 define('ICON_CURRENT_FOLDER', 'Current Folder');

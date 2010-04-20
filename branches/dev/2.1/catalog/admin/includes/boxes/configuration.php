@@ -38,6 +38,7 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Product Settings</a><ul>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=8', 'NONSSL') . '">Product Listing</a></li>' .
                    '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=50', 'NONSSL') . '">Product Information</a></li>' .
+				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=88', 'NONSSL') . '">Product Price Breaks</a></li>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=9', 'NONSSL') . '">Stock</a></li>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=13', 'NONSSL') . '">Downloads</a></li>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=30', 'NONSSL') . '">Printable Catalog</a></li>' .

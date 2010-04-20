@@ -64,7 +64,7 @@
    }
 }
 // now get all the customers_group_price's
-$pg_query = tep_db_query("select products_id, customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where (".$pg_list_of_prdct_ids.") and customers_group_id =  '" . $customer_group_id . "'");
+$pg_query = tep_db_query("select products_id, customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where (".$pg_list_of_prdct_ids.") and customers_group_id =  '" . $customer_group_id . "' and customers_group_price != null");
 // put all the info in an array called new_prices
 	while ($pg_array = tep_db_fetch_array($pg_query)) {
 	$new_prices[] = array ('products_id' => $pg_array['products_id'], 'products_price' => $pg_array['customers_group_price']);

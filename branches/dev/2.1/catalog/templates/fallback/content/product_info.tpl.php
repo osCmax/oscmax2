@@ -39,30 +39,17 @@
 
     tep_db_query("update " . TABLE_PRODUCTS_DESCRIPTION . " set products_viewed = products_viewed+1 where products_id = '" . (int)$_GET['products_id'] . "' and language_id = '" . (int)$languages_id . "'");
 
-    if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
-// BOF Separate Price per Customer
+// BOF QPBPP for SPPC
+    $pf->loadProduct((int)$_GET['products_id'], (int)$languages_id);
+    $products_price = $pf->getPriceString();
+// EOF QPBPP for SPPC
 
-        $scustomer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$_GET['products_id']. "' and customers_group_id =  '" . $customer_group_id . "'");
-        if ($scustomer_group_price = tep_db_fetch_array($scustomer_group_price_query)) {
-        $product_info['products_price']= $scustomer_group_price['customers_group_price'];
+// BOF QPBPP for SPPC
+  $min_order_qty = $pf->getMinOrderQty();
+    if ($min_order_qty > 1) {
+      $products_name .= '<br><span class="smallText">' . MINIMUM_ORDER_TEXT . $min_order_qty . '</span>';
     }
-// EOF Separate Price per Customer
-      $products_price = '<span style="text-decoration:line-through">' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span> <span class="productSpecialPrice">' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span>';
-    } else {
-// BOF Separate Price per Customer
-        $scustomer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$_GET['products_id']. "' and customers_group_id =  '" . $customer_group_id . "'");
-        if ($scustomer_group_price = tep_db_fetch_array($scustomer_group_price_query)) {
-        $product_info['products_price']= $scustomer_group_price['customers_group_price'];
-    }
-// EOF Separate Price per Customer
-      $products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
-    }
-
-    if (tep_not_null($product_info['products_model'])) {
-      $products_name = $product_info['products_name'] . '<br><span class="smallText">[' . $product_info['products_model'] . ']</span>';
-    } else {
-      $products_name = $product_info['products_name'];
-    }
+// EOF QPBPP for SPPC
 
 // BOF: Mod - Wishlist
 //DISPLAY PRODUCT WAS ADDED TO WISHLIST IF WISHLIST REDIRECT IS ENABLED
@@ -208,18 +195,21 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
                     <td class="main" align="right" width="250">
                       <table width="200" border="0" cellpadding="0">
                           <tr>
-                            <td width="25"></td>
-                            <td width="25"></td>
-                            <td width="150">
-                          </tr>
-                          <tr>
                             <td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',+1)" alt="plus 1" ></td>
-                            <td rowspan="2" align="center"><input name="quantity" type="text" class="moduleRow" id="product-quantity-{{product.id}}" style="text-align:center" value="1" size="2" maxlength="2" /></td>
+                            <td rowspan="2" align="center"><?php echo tep_draw_input_field('cart_quantity', $pf->adjustQty(1), 'size="2" id="product-quantity-{{product.id}}"'); ?></td>
                             <?php // START: PGM Edit to switch Add to Cart image if stock = 0
                             if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
-                            <td rowspan="2" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_BUTTON_IN_CART); ?></td>
+
+                <td class="main align="right" rowspan="2">
+					<?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_BUTTON_IN_CART); ?>
+                </td>
+
                             <?php } else { ?>
-                            <td rowspan="2" align="right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
+
+                <td class="main" align="right" rowspan="2">
+                	<?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?>
+                </td>
+
                             <?php } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
                           </tr>
                           <tr>

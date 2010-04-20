@@ -138,4 +138,25 @@ define('TABLE_HEADING_HIDE_CATEGORIES', 'Hidden');
 // 1: Only one icon and only if the category or product is hidden for a group, mouse-over the icon to what groups
 define('LAYOUT_HIDE_FROM', '0'); 
 // EOF Hide product from groups
+
+// BOF QPBPP for SPPC
+define('TEXT_PRODUCTS_QTY_BLOCKS', 'Quantity Blocks:');
+define('TEXT_PRODUCTS_QTY_BLOCKS_HELP', '(can only order in blocks of X quantity, defaults to 1)');
+define('TEXT_PRODUCTS_PRICE', 'Price level');
+define('TEXT_PRODUCTS_QTY', 'From');
+define('TEXT_PRODUCTS_DELETE', 'Delete');
+define('TEXT_ENTER_QUANTITY', 'Quantity');
+define('TEXT_PRICE_PER_PIECE', 'Price&nbsp;for&nbsp;each');
+define('TEXT_SAVINGS', 'Your savings');
+define('TEXT_DISCOUNT_CATEGORY', 'Discount category:');
+define('ERROR_UPDATE_INSERT_DISCOUNT_CATEGORY', 'Something went wrong when updating or inserting into the table discount_categories');
+define('ERROR_ALL_CUSTOMER_GROUPS_DELETED', 'All customer groups have been deleted, please re-enter at least retail in table customers_groups (see sppc_v421_install.sql)');
+define('TEXT_PRODUCTS_MIN_ORDER_QTY', 'Minimum order quantity:');
+define('TEXT_PRODUCTS_MIN_ORDER_QTY_HELP', '(defaults to 1,  no need to set a value)');
+define('TEXT_PRICE_BREAK_INFO', '<acronym title="as Price(Qty)">Price breaks</acronym>: ');
+define('PB_DROPDOWN_BEFORE', '');
+define('PB_DROPDOWN_BETWEEN', ' at ');
+define('PB_DROPDOWN_AFTER', ' each');
+define('PB_FROM', 'from');
+// EOF QPBPP for SPPC
 ?>

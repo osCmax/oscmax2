@@ -35,6 +35,8 @@ define('STOCK_LIST_IN_PI_TEXT_STOCK', 'Qty.');
 // BOF: MOD - Wishlist 3.5 
 define('PRODUCT_ADDED_TO_WISHLIST', 'Product has been successfully added to your wishlist');
 // EOF: MOD - Wishlist 3.5 
+
+// BOF: Tabs by PGM
 define('TAB0', 'Description');
 define('TAB1', 'Tab 1');
 define('TAB2', 'Tab 2');
@@ -42,4 +44,16 @@ define('TAB3', 'Tab 3');
 define('TAB4', 'Tab 4');
 define('TAB5', 'Tab 5');
 define('TAB6', 'Tab 6');
+// EOF: Tabs by PGM
+
+// BOF QPBPP for SPPC
+define('TEXT_ENTER_QUANTITY', 'Quantity');
+define('TEXT_PRICE_PER_PIECE', 'Price&nbsp;for&nbsp;each');
+define('TEXT_SAVINGS', 'Your savings');
+define('MINIMUM_ORDER_TEXT', 'Minimum order: ');
+define('PB_DROPDOWN_BEFORE', '');
+define('PB_DROPDOWN_BETWEEN', ' at ');
+define('PB_DROPDOWN_AFTER', ' each');
+define('PB_FROM', 'from');
+// BOF QPBPP for SPPC
 ?>

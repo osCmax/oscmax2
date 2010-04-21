@@ -38,4 +38,8 @@ define('TEXT_NO_COMMENTS_AVAILABLE', 'No comments available.');
 define('TABLE_HEADING_DOWNLOAD_DATE', 'Link expires: ');
 define('TABLE_HEADING_DOWNLOAD_COUNT', ' downloads remaining');
 define('HEADING_DOWNLOAD', 'Download links');
+
+// Customer Comments contrib
+ define ('ADD_COMMENTS', 'Add Comments or Questions to this Order');
+// Customer Comments contrib
 ?>

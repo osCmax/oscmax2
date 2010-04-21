@@ -1930,7 +1930,7 @@ INSERT INTO configuration VALUES (2102, 'Google Analytics Sub-Domain Setting', '
 
 #New v2.1 Entries
 INSERT INTO configuration VALUES (2500, 'Use Tabs to display extra product information?', 'USE_PRODUCT_DESCRIPTION_TABS', 'True', 'Use tabs for product info?', 8, 20, NULL,now(),NULL,'tep_cfg_select_option(array(''True'', ''False''),');
-INSERT INTO configuration VALUES (2501, 'Enable FWR Menu = true/false', 'FWR_SUCKERTREE_MENU_ON', 'true', 'True to use the FWR menu. False to use standard', 86, 1, '2010-03-01 23:29:26', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2501, 'Enable FWR Menu = true/false', 'FWR_SUCKERTREE_MENU_ON', 'false', 'True to use the FWR menu. False to use standard', 86, 1, '2010-03-01 23:29:26', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (2502, 'Choose sort params = categories_id or sort_order', 'FWR_MENU_ORDER_BY', 'c.categories_id', 'Choose categories_id or sort_order preferences', 86, 2, '2010-03-01 23:12:12', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''c.categories_id'', ''c.sort_order''),');
 INSERT INTO configuration VALUES (2503, 'Cache path: True uses standard osc DIR_FS_CACHE.<br />False will try to write to catalog root.', 'FWR_MENU_CACHE_PATH', 'DIR_FS_CACHE', 'Choose true to use the standard cache path as set in configuration<br />False will attempt to write to shop root.', 86, 3, '2010-03-01 23:36:28', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''DIR_FS_CACHE'', ''false''),');
 INSERT INTO configuration VALUES (2504, 'Reset the categories menu.', 'FWR_MENU_RESET', 'false', 'Choose true to rebuild the categories menu', 86, 4, '2010-03-02 21:36:40', '2010-03-01 23:12:12', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
@@ -1940,6 +1940,9 @@ INSERT INTO configuration VALUES (2507, 'Private Key', 'RECAPTCHA_PRIVATE_KEY', 
 INSERT INTO configuration VALUES (2508, 'Switch Add to Cart Image?','STOCK_IMAGE_SWITCH','true','Would you like to switch the Add to Cart image on the product info page?','9','6',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (2509, 'Maximum number of price break levels', 'PRICE_BREAK_NOF_LEVELS', '10', 'Configures the number of price break levels that can be entered on admin side. Levels that are left empty will not be shown to the customer', 88, 1, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2510, 'Number of price breaks for dropdown', 'NOF_PRICE_BREAKS_FOR_DROPDOWN', '5', 'Set the number of price breaks at which you want to show a dropdown plus "from Low Price" instead of a table', 88, 2, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2511, 'Send Email Notification when customer writes order comment?', 'CUSTOMER_COMMENTS_NOTIFY', 'false', 'Send email notification when customer adds comments to their order?', 5, '50', NULL , '0000-00-00 00:00:00', NULL , 'tep_cfg_select_option(array(''true'', ''false''),' );
+INSERT INTO configuration VALUES (2512, 'Set Order Status: when customers writes order comment', 'CUSTOMER_COMMENTS_NEW_STATUS', '4', 'Set the order status that is changed to when the customer makes a comment', 5, '51', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
+INSERT INTO configuration VALUES (2513, 'Set Order Status: (allows downloads) when customer writes order comment', 'CUSTOMER_COMMENTS_NEW_STATUS_DL', '5', 'Set the order status that is changed to when the customer makes a comment', 5, '52', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
 
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
@@ -2238,6 +2241,12 @@ INSERT INTO orders_status VALUES (2,3,'Proceso',1,1);
 INSERT INTO orders_status VALUES (3,1,'Delivered',1,1);
 INSERT INTO orders_status VALUES (3,2,'Versendet',1,1);
 INSERT INTO orders_status VALUES (3,3,'Entregado',1,1);
+INSERT INTO orders_status VALUES (4,1,'Customer Comment',1,0);
+INSERT INTO orders_status VALUES (4,2,'Kunden Kommentar',1,0);
+INSERT INTO orders_status VALUES (4,3,'Comentario del cliente',1,0);
+INSERT INTO orders_status VALUES (5,1,'Customer Comment (DL)',1,1);
+INSERT INTO orders_status VALUES (5,2,'Kunden Kommentar (DL)',1,1);
+INSERT INTO orders_status VALUES (5,3,'Comentario del cliente (DL)',1,1);
 
 INSERT INTO products_attributes_download  VALUES (11, 'Dhtml-coolmenu.zip',7,10);
 

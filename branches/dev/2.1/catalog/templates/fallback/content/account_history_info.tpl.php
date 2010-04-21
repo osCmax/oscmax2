@@ -155,10 +155,10 @@
 <?php
   $statuses_query = tep_db_query("select os.orders_status_name, osh.date_added, osh.comments from " . TABLE_ORDERS_STATUS . " os, " . TABLE_ORDERS_STATUS_HISTORY . " osh where osh.orders_id = '" . (int)$_GET['order_id'] . "' and osh.orders_status_id = os.orders_status_id and os.language_id = '" . (int)$languages_id . "' and os.public_flag = '1' order by osh.date_added");
   while ($statuses = tep_db_fetch_array($statuses_query)) {
-    echo '              <tr>' . "\n" .
-         '                <td class="main" valign="top" width="70">' . tep_date_short($statuses['date_added']) . '</td>' . "\n" .
-         '                <td class="main" valign="top" width="70">' . $statuses['orders_status_name'] . '</td>' . "\n" .
-         '                <td class="main" valign="top">' . (empty($statuses['comments']) ? '&nbsp;' : nl2br(tep_output_string_protected($statuses['comments']))) . '</td>' . "\n" .
+    echo '              <tr class="infoBoxContents">' . "\n" .
+         '                <td class="main" valign="top" width="10%">' . tep_date_short($statuses['date_added']) . '</td>' . "\n" .
+         '                <td class="main" valign="top" width="20%">' . $statuses['orders_status_name'] . '</td>' . "\n" .
+         '                <td class="main" valign="top" width="70%">' . (empty($statuses['comments']) ? '&nbsp;' : nl2br(tep_output_string_protected($statuses['comments']))) . '</td>' . "\n" .
          '              </tr>' . "\n";
   }
 ?>
@@ -166,6 +166,43 @@
           </tr>
         </table></td>
       </tr>
+      
+<!-- BEGIN Customer Comments contrib section 2 -->
+     <tr>
+       <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+     </tr>
+     <tr>
+       <td class="main"><b><?php echo ADD_COMMENTS; ?></b></td>
+     </tr>
+     <tr>
+       <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+     </tr>
+
+     <tr>
+       <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+         <tr class="infoBoxContents">
+           <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+             <tr>
+               <td>
+                 <?php echo tep_draw_form('status', tep_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'action=update_order&' . tep_get_all_get_params(array('action')) , 'SSL')); ?>
+                 <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                   <tr>
+                     <td><?php echo tep_draw_textarea_field('comments', 'soft', '60', '5'); ?></td>
+                   </tr>
+                   <tr>
+                    <td valign="top" align="right"><?php echo tep_image_submit('button_update.gif', IMAGE_BUTTON_UPDATE); ?>
+                    </td>
+                   </tr>
+                 </table></form>
+               </td>
+             </tr>
+           </table></td>
+         </tr>
+       </table></td>
+     </tr>
+
+<!-- END Customer Comments contrib section 2 -->
+      
 <?php
   if (DOWNLOAD_ENABLED == 'true') include(DIR_WS_MODULES . 'downloads.php');
 ?>

@@ -19,6 +19,7 @@ define('HEADING_TITLE_STATUS', 'Status:');
 define('HEADING_TITLE_SEARCH_ALL', 'Search (order id, customer or company name):');
 //EOF: Orders search by customers info
 define('TABLE_HEADING_COMMENTS', 'Comments');
+define('TABLE_HEADING_NEW_COMMENTS', 'Add New Comment');
 define('TABLE_HEADING_CUSTOMERS', 'Customers');
 define('TABLE_HEADING_ORDER_TOTAL', 'Order Total');
 define('TABLE_HEADING_DATE_PURCHASED', 'Date Purchased');

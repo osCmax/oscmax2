@@ -1870,4 +1870,20 @@ function qpbpp_insert_update_discount_cats($products_id, $current_discount_categ
       return 1;
   }
 //EOF QPBPP for SPPC
+
+// for customer comments
+  function tep_cfg_pull_down_status_change_cancel_list($order_status_id, $key = '') {
+    global $languages_id;
+
+    $name = (($key) ? 'configuration[' . $key . ']' : 'configuration_value');
+
+    $statuses_array = array(array('id' => '0', 'text' => TEXT_DEFAULT));
+    $statuses_query = tep_db_query("select orders_status_id, orders_status_name from " . TABLE_ORDERS_STATUS . " where language_id = '" . $languages_id . "' order by orders_status_id");
+    while ($statuses = tep_db_fetch_array($statuses_query)) {
+      $statuses_array[] = array('id' => $statuses['orders_status_id'],
+                                'text' => $statuses['orders_status_name']);
+    }
+
+    return tep_draw_pull_down_menu($name, $statuses_array, $order_status_id);
+  }
 ?>

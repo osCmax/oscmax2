@@ -396,4 +396,10 @@ require(DIR_WS_LANGUAGES . 'add_ccgvdc_english.php');
 define('MINIMUM_ORDER_NOTICE', 'Minimum order amount for %s is %d. Your cart has been updated to reflect this.');
 define('QUANTITY_BLOCKS_NOTICE', '%s can only by ordered in multiples of %d. Your cart has been updated to reflect this.');
 // EOF QPBPP for SPPC
+
+// begin Customer Comments contrib
+define('SUCCESS_ORDER_UPDATED', 'Success: Order has been successfully updated.');
+define('WARNING_ORDER_NOT_UPDATED', 'Warning: Nothing to change. The order was not updated.');
+// end Customer Comments contrib
+
 ?>

@@ -50,6 +50,14 @@
 }); 
 
 </script>
+<script language="javascript" type="text/javascript">
+<!--
+function setMessage() {
+var newmessage = document.status.responses.value;
+document.status.comments.value += newmessage;
+}
+//-->
+</script>
 <?php
 /*
 $Id: header.php 3 2006-05-27 04:59:07Z user $

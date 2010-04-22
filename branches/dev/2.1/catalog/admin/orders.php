@@ -410,13 +410,29 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
             	<tr class="dataTableRow">
                 	<td class="smallText"></td>
                     <td class="smallText" align="center"><?php echo tep_draw_checkbox_field('notify', '', true); ?></td>
-                    <td class="smallText"><?php echo tep_draw_pull_down_menu('status', $orders_statuses, $order->info['orders_status']); ?></td>
+                    <td class="smallText" align="center"><?php echo tep_draw_pull_down_menu('status', $orders_statuses, $order->info['orders_status']); ?></td>
                     <td class="smallText">
 						<table width="100%">
 							<tr>
-								<td><?php echo tep_draw_textarea_field('comments', 'soft', '50', '3'); ?></td>
+								<td><?php echo tep_draw_textarea_field('comments', 'soft', '50', '5'); ?></td>
                                 <td>
                                 	<table>
+                                    	<tr>
+                                        	<td>
+<!-- BOF: Canned Comments -->
+												<select name="responses" onchange="setMessage()">
+													<option value="">Select a comment..</option>
+													<?php
+														$get_premades_query = tep_db_query("select * from " . TABLE_ORDERS_PREMADE_COMMENTS . " order by id");
+														while($result = mysql_fetch_array($get_premades_query)) {
+															echo '<option value="'.$result["text"].'">'. $result["title"].'</option>';
+														}
+													?>
+												</select>
+<!-- EOF: Canned Comments -->
+                                                                                                     
+                                            </td>
+                                        </tr>
                                     	<tr>
                                         	<td class="smallText"><?php echo ENTRY_NOTIFY_COMMENTS; ?></b> <?php echo tep_draw_checkbox_field('notify_comments', '', true); ?></td>
                                         </tr>

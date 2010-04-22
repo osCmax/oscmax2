@@ -168,4 +168,8 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_DISCOUNT_CATEGORIES', 'discount_categories.php');
   define('FILENAME_DISCOUNT_CATEGORIES_GROUPS_PP', 'discount_categories_groups_pp.php');
 // BOF QPBPP for SPPC
+
+// BOF: Canned Comments
+define('FILENAME_PREMADE', 'premade_comments.php');
+// EOF: Canned Comments
 ?>

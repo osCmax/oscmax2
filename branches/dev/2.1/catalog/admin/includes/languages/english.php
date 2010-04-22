@@ -213,6 +213,7 @@ define('BOX_HEADING_LOCALIZATION', 'Localization');
 define('BOX_LOCALIZATION_CURRENCIES', 'Currencies');
 define('BOX_LOCALIZATION_LANGUAGES', 'Languages');
 define('BOX_LOCALIZATION_ORDERS_STATUS', 'Orders Status');
+define('BOX_PREMADE', 'Canned Comments');
 
 // ADDED 2 LINE- recover cart box text
 		define('BOX_REPORTS_RECOVER_CART_SALES', 'Recovered Sales Results');

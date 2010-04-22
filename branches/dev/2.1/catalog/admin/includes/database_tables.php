@@ -99,8 +99,8 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
   define('TABLE_WISHLIST_ATTRIBUTES', 'customers_wishlist_attributes');
 // EOF: MOD - ARTICLES
 
-define('TABLE_PACKAGING', 'packaging');
-define('TABLE_UPS_BOXES_USED', 'ups_boxes_used');
+  define('TABLE_PACKAGING', 'packaging');
+  define('TABLE_UPS_BOXES_USED', 'ups_boxes_used');
 
 // BOF: Admin & Customer Logging
   define('TABLE_ADMIN_LOG','admin_log');
@@ -120,4 +120,8 @@ define('TABLE_UPS_BOXES_USED', 'ups_boxes_used');
   define('TABLE_DISCOUNT_CATEGORIES', 'discount_categories');
   define('TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES', 'products_to_discount_categories');
 // BOF QPBPP for SPPC
+
+// BOF: Canned Comments
+  define('TABLE_ORDERS_PREMADE_COMMENTS', 'orders_premade_comments');
+// EOF: Canned Comments
 ?>

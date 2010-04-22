@@ -1379,6 +1379,14 @@ CREATE TABLE products_to_discount_categories (
   PRIMARY KEY (products_id, customers_group_id)
 );
 
+DROP TABLE IF EXISTS orders_premade_comments;
+CREATE TABLE IF NOT EXISTS orders_premade_comments (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  title varchar(100) NOT NULL DEFAULT '',
+  text text NOT NULL,
+  PRIMARY KEY (id)
+);
+
 
 # data
 
@@ -1535,6 +1543,7 @@ INSERT INTO admin_files VALUES (149,'feedmachine_loader.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (150,'feedmachine_loadingbay.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (151,'discount_categories.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (152,'discount_categories_groups_pp.php', 0, 3, '1');
+INSERT INTO admin_files VALUES (153,'premade_comments.php', 0, 7, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
@@ -2515,3 +2524,7 @@ INSERT INTO help_pages VALUES ('create_order.php', 'http://wiki.oscdox.com/creat
 INSERT INTO help_pages VALUES ('backup.php', 'http://wiki.oscdox.com/database_backup', 'Database Backup', 0);
 INSERT INTO help_pages VALUES ('infobox_configuration.php', 'http://wiki.oscdox.com/infobox_admin', 'Infobox Configuration', 0);
 INSERT INTO help_pages VALUES ('articles_config.php', 'http://wiki.oscdox.com/articles_configuration', 'Articles Configuration', 0);
+
+#Canned Comments
+INSERT INTO orders_premade_comments VALUES (1, 'Thank you for your custom', 'Thank you for your custom.');
+INSERT INTO orders_premade_comments VALUES (2, 'Out of stock when ordered', 'Unfortunately, your item was out of stock when the order was placed. It will despatch as soon as we receive it.');

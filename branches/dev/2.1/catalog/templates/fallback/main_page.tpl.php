@@ -45,7 +45,7 @@ echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet',
 ?>
 </head>
 <body>
- 
+
  <?php
  if (DISPLAY_DHTML_MENU == 'CoolMenu') {
     echo '<!-- coolMenu //-->';
@@ -56,12 +56,19 @@ echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet',
 <!-- warnings //-->
 <?php require(DIR_WS_INCLUDES . 'warnings.php'); ?>
 <!-- warning_eof //-->
+
+
 <?php
 // include i.e. template switcher in every template
 if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common_top.php')); // BTSv1.5
 // BOF Added: Down for Maintenance Hide header if not to show
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false') {
 ?>
+
+<!-- Store width controller -->
+<table width="<?php echo STORE_WIDTH; ?>" cellspacing="0" cellpadding="0" align="<?php echo STORE_ALIGN; ?>">
+<tr><td>
+
 <!-- header //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr class="header">
@@ -95,7 +102,9 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 <!-- body //-->
 <table border="0" width="100%" cellspacing="3" cellpadding="3">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+<?php // Show/Hide Left Column
+if (LEFT_COLUMN_SHOW != 'false') { ?>
+    <td width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
 <?php
 // Hide Left Column if not to show
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
@@ -107,12 +116,17 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='f
 }
 ?>
     </table></td>
+<?php
+} // end Show/Hide Left Column
+?>
 <!-- content //-->
     <td width="100%" valign="top"><?php
      require (bts_select ('content')); // BTSv1.5
   ?></td>
 <!-- content_eof //-->
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+<?php // Show/Hide Right Column
+if (RIGHT_COLUMN_SHOW != 'false') { ?>
+    <td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
 <?php
 // Hide column_left.php if not to show
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
@@ -124,6 +138,9 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='
 }
 ?>  		 
     </table></td>
+<?php
+} // end Show/Hide Right Column
+?>
   </tr>
 </table>
 <!-- body_eof //-->
@@ -198,5 +215,9 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 	</script>
 <!-- EOF: Google Analytics Code -->
 <?php } ?>
+
+</td></tr>
+</table>
+<!-- Store width controller -->
 </body>
 </html>

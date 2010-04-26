@@ -1632,7 +1632,7 @@ INSERT INTO configuration VALUES (67,'State','ACCOUNT_STATE','true','Display sta
 INSERT INTO configuration VALUES (68,'Installed Modules','MODULE_PAYMENT_INSTALLED','','List of payment module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: cc.php;cod.php;paypal.php)','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (69,'Installed Modules','MODULE_ORDER_TOTAL_INSTALLED','ot_subtotal.php;ot_shipping.php;ot_tax.php;ot_loyalty_discount.php;ot_loworderfee.php;ot_coupon.php;ot_gv.php;ot_total.php','List of order_total module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: ot_subtotal.php;ot_tax.php;ot_shipping.php;ot_total.php)','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (70,'Installed Modules','MODULE_SHIPPING_INSTALLED','','List of shipping module filenames separated by a semi-colon. This is automatically updated. No need to edit. (Example: ups.php;flat.php;item.php)','6','0',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES ('77','Google Maps Key','GOOGLE_MAPS_KEY','YOURKEY','Put your Google Maps API Key here.<br><br>You can get one at http://code.google.com/apis/maps/signup.html','1','25',NULL,now(), NULL, 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES ('77','Google Maps Key','GOOGLE_MAPS_KEY','YOURKEY','Put your Google Maps API Key here.<br><br>You can get one at http://code.google.com/apis/maps/signup.html','89','25',NULL,now(), NULL, 'tep_cfg_textarea(');
 INSERT INTO configuration VALUES (85,'Default Currency','DEFAULT_CURRENCY','USD','Default Currency','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (86,'Default Language','DEFAULT_LANGUAGE','en','Default Language','6','0',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (87,'Default Order Status For New Orders','DEFAULT_ORDERS_STATUS_ID','1','When a new order is created, this order status will be assigned to it.','6','0',NULL,now(),NULL,NULL);
@@ -1754,8 +1754,8 @@ INSERT INTO configuration VALUES (501,'Main Thumbnail In "Thumbnail Images Direc
 INSERT INTO configuration VALUES (599, 'Category Images Directory', 'CATEGORY_IMAGES_DIR', 'categories/', 'The directory inside catalog/images where your category images are stored.', 45, 0, NULL, '2009-05-28 15:34:10', NULL, NULL);
 INSERT INTO configuration VALUES (502,'Extra Image Pattern','DYNAMIC_MOPICS_PATTERN','imagebase_{1}','Your custom defined pattern for extra images.  imagebase is the base of the main thumbnail.  Place the counting method between brackets {}.  Current counting methods can be 1,a,or A.  See readme for more information.',45,0,NULL,now(),NULL,NULL);
 
-INSERT INTO configuration VALUES (458,'Template Switching Allowed','TEMPLATE_SWITCHING_ALLOWED','false','Allow template switching through the url (for easy new template testing).',1,22,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (457,'Default Template Directory','DIR_WS_TEMPLATES_DEFAULT','fallback','Subdirectory (in templates/) where the template files are stored which should be loaded by default.',1,22,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (458,'Template Switching Allowed','TEMPLATE_SWITCHING_ALLOWED','false','Allow template switching through the url (for easy new template testing).',201,2,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (457,'Default Template Directory','DIR_WS_TEMPLATES_DEFAULT','fallback','Subdirectory (in templates/) where the template files are stored which should be loaded by default.',201,1,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (231,'Enable Display a Dhtml menu','DISPLAY_DHTML_MENU','Default','Do you want to display a DHTML menu instead of the default text based?',1,19,NULL,now(),NULL,'tep_cfg_select_option(array(\'Default\',\'Dhtml\',\'CoolMenu\'),');
 
 INSERT INTO configuration VALUES (358,'Downloads Controller Update Status Value','DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE','100000','What orders_status resets the Download days and Max Downloads - Default is 4',13,90,NULL,now(),NULL,NULL);
@@ -1953,6 +1953,13 @@ INSERT INTO configuration VALUES (2511, 'Send Email Notification when customer w
 INSERT INTO configuration VALUES (2512, 'Set Order Status: when customers writes order comment', 'CUSTOMER_COMMENTS_NEW_STATUS', '4', 'Set the order status that is changed to when the customer makes a comment', 5, '51', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
 INSERT INTO configuration VALUES (2513, 'Set Order Status: (allows downloads) when customer writes order comment', 'CUSTOMER_COMMENTS_NEW_STATUS_DL', '5', 'Set the order status that is changed to when the customer makes a comment', 5, '52', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
 
+INSERT INTO configuration VALUES (2514, 'Set default store width for template', 'STORE_WIDTH', '100%', 'What width would you like your store to be?  You can use % or a fixed width in pixels','201','2',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (2515, 'Set default store alignment', 'STORE_ALIGN', 'center', 'How would you like to align your store?','201','3',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (2518, 'Set default left column width for template', 'BOX_WIDTH_LEFT', '125', 'What width would you like your left column to be in pixels? Please note that not all templates use this functionality.','201','5',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (2519, 'Set default right column width for template', 'BOX_WIDTH_RIGHT', '125', 'What width would you like your right column to be in pixels? Please note that not all templates use this functionality.','201','6',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (2520, 'Show/Hide left column','LEFT_COLUMN_SHOW','true','Would you like to show the left column in your template?','201','7',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (2521, 'Show/Hide right column','RIGHT_COLUMN_SHOW','true','Would you like to show the left column in your template?','201','8',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
@@ -1986,6 +1993,10 @@ INSERT INTO configuration_group VALUES (85,'Google Analytics', 'Google Analytics
 INSERT INTO configuration_group VALUES (86,'FWR Menu', 'SEO Pop Out Multilayer Menu', 904, 1);
 INSERT INTO configuration_group VALUES (87,'reCaptcha', 'reCaptcha Settings', 905, 1); 
 INSERT INTO configuration_group VALUES (88,'Price breaks', 'Configuration options for price breaks', 88, 1);
+INSERT INTO configuration_group VALUES (89,'Google Maps', 'Google Maps Settings', 89, 1);
+
+INSERT INTO configuration_group VALUES (201,'Template Setup', 'Template Settings', 201, 1);
+INSERT INTO configuration_group VALUES (202,'Page Modules', 'Page Module Settings', 202, 1);
 
 
 INSERT INTO `countries` VALUES(1, 'Afghanistan', 'AF', 'AFG', 1, 1);

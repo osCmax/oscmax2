@@ -1265,12 +1265,12 @@ CREATE TABLE zones_to_geo_zones (
 # data
 
 # 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany, 6 - UK
-INSERT INTO address_format VALUES (1,'$firstname $lastname$cr$streets$cr$city,$postcode$cr$statecomma$country','$city / $country');
-INSERT INTO address_format VALUES (2,'$firstname $lastname$cr$streets$cr$city,$state    $postcode$cr$country','$city,$state / $country');
-INSERT INTO address_format VALUES (3,'$firstname $lastname$cr$streets$cr$city$cr$postcode - $statecomma$country','$state / $country');
-INSERT INTO address_format VALUES (4,'$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country','$postcode / $country');
-INSERT INTO address_format VALUES (5,'$firstname $lastname$cr$streets$cr$postcode $city$cr$country','$city / $country');
-INSERT INTO address_format VALUES (6,'$firstname $lastname$cr$streets$cr$suburb$cr$city$cr$state$cr$postcode$cr$country','$city / $country');
+INSERT INTO address_format VALUES (1,'$firstname $lastname$cr$street$cr$city,$postcode$cr$state,$country','$city / $country');
+INSERT INTO address_format VALUES (2,'$firstname $lastname$cr$street$cr$city,$state    $postcode$cr$country','$city,$state / $country');
+INSERT INTO address_format VALUES (3,'$firstname $lastname$cr$street$cr$city$cr$postcode - $state,$country','$state / $country');
+INSERT INTO address_format VALUES (4,'$firstname $lastname$cr$street$cr$city ($postcode)$cr$country','$postcode / $country');
+INSERT INTO address_format VALUES (5,'$firstname $lastname$cr$street$cr$postcode $city$cr$country','$city / $country');
+INSERT INTO address_format VALUES (6,'$firstname $lastname$cr$street$cr$suburb$cr$city$cr$state$cr$postcode$cr$country','$city / $country');
 
 # INSERT INTO admin VALUES ('1','1','Admin','Default','Admin','admin@localhost.com','05cdeb1aeaffec1c7ae3f12c570a658c:81',now(),NULL,NULL,'1');
   

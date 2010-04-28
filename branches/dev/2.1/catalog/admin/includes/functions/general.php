@@ -1886,4 +1886,23 @@ function qpbpp_insert_update_discount_cats($products_id, $current_discount_categ
 
     return tep_draw_pull_down_menu($name, $statuses_array, $order_status_id);
   }
+  
+function tep_cfg_pull_down_templates() {
+  $dir_array = array();
+  $name = (($key) ? 'configuration[' . $key . ']' : 'configuration_value');
+
+  if ($handle = opendir(DIR_FS_CATALOG.'templates/')) {
+    while (false !== ($file = readdir($handle))) {
+      if ($file != "." && $file != ".." && $file !=".svn") {
+        if (is_dir(DIR_FS_CATALOG.'templates/'.$file)) $dir_array[] = array('id' => $file, 'text' => $file);
+      }
+    }
+
+  closedir($handle);
+  sort($dir_array);
+
+  } else { die("<center><b>No Template Folders!</b></center>");}
+
+  return tep_draw_pull_down_menu($name, $dir_array, '');
+}  
 ?>

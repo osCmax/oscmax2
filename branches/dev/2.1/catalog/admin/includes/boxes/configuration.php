@@ -58,7 +58,7 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=456', 'NONSSL') . '">Article Configuration</a></li>' .
 				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Templates</a><ul>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=201', 'NONSSL') . '">Template Setup</a></li>' .
-				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=202', 'NONSSL') . '">Page Modules</a></li>' . 
+				   '<li><a href="' . tep_href_link('page_modules_configuration.php?tID=1') . '">Page Modules</a></li>' . 
 				   '<li><a href="' . tep_href_link('infobox_configuration.php?gID=1', 'NONSSL') . '">Infoboxes</a></li>' . 
 				'</ul>' .
 				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">SEO</a><ul>' .

@@ -124,4 +124,8 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
 // BOF: Canned Comments
   define('TABLE_ORDERS_PREMADE_COMMENTS', 'orders_premade_comments');
 // EOF: Canned Comments
+
+//BOF: Page Modules
+define('TABLE_PM_CONFIGURATION', 'pm_configuration');
+//EOF: Page Modules
 ?>

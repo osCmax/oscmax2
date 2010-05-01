@@ -218,4 +218,9 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
 // BOF: Google Sitmap
   define('FILENAME_GOOGLE_SITEMAPS', 'sitemaps.index.php');
 // EOF: Google Sitmap
+
+// BOF: Page Module Controller
+  define('FILENAME_INDEX_PAGE_MODULES', 'index_page_modules.php');
+  define('FILENAME_PI_PAGE_MODULES', 'pi_page_modules.php');
+// EOF: Page Module Controller  
 ?>

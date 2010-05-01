@@ -415,6 +415,7 @@ define('TEXT_DISPLAY_NUMBER_OF_TAX_RATES', 'Displaying <b>%d</b> to <b>%d</b> (o
 define('TEXT_DISPLAY_NUMBER_OF_ZONES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> zones)');
 define('TEXT_DISPLAY_NUMBER_OF_SHIPMENTS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> shipments)');
 define('TEXT_DISPLAY_NUMBER_OF_QUICK_LINKS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> quick links)');
+define('TEXT_DISPLAY_NUMBER_OF_PM_CONFIGURATION', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> modules)');
 
 //BOF: MOD - Catagories Discriptions
 define('TEXT_EDIT_CATEGORIES_HEADING_TITLE', 'Category Heading Title:');

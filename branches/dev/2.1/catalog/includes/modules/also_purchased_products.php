@@ -15,6 +15,13 @@ $Id: also_purchased_products.php 3 2006-05-27 04:59:07Z user $
 //    $orders_query = tep_db_query("select p.products_id, p.products_image from " . TABLE_ORDERS_PRODUCTS . " opa, " . TABLE_ORDERS_PRODUCTS . " opb, " . TABLE_ORDERS . " o, " . TABLE_PRODUCTS . " p where opa.products_id = '" . (int)$_GET['products_id'] . "' and opa.orders_id = opb.orders_id and opb.products_id != '" . (int)$_GET['products_id'] . "' and opb.products_id = p.products_id and opb.orders_id = o.orders_id and p.products_status = '1' group by p.products_id order by o.date_purchased desc limit " . MAX_DISPLAY_ALSO_PURCHASED);
 // BOF Separate Pricing Per Customer, Hide products and categories from groups
 
+//added for cross -sell
+   if ((USE_CACHE == 'true') && !SID) {
+    echo tep_cache_also_purchased(3600);
+
+} else {
+
+
   if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
     $customer_group_id = $_SESSION['sppc_customer_group_id'];
   } else {
@@ -56,4 +63,6 @@ $Id: also_purchased_products.php 3 2006-05-27 04:59:07Z user $
 <?php
     }
   }
+} // end if statement tep_cache_also_purchased
+  
 ?>

@@ -172,4 +172,8 @@ $Id: filenames.php 14 2006-07-28 17:42:07Z user $
 // BOF: Canned Comments
 define('FILENAME_PREMADE', 'premade_comments.php');
 // EOF: Canned Comments
+
+//BOF: Page Modules
+define('FILENAME_PM_CONFIGURATION', 'page_modules_configuration.php');
+//EOF: Page Modules
 ?>

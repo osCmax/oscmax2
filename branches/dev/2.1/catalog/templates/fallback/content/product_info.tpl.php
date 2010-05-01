@@ -252,16 +252,12 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
       </tr>
       <tr>
         <td>
-<?php
 
-//added for cross -sell
-   if ( (USE_CACHE == 'true') && !SID) {
-    echo tep_cache_also_purchased(3600);
-     include(DIR_WS_MODULES . FILENAME_XSELL_PRODUCTS);
-   } else {
-     include(DIR_WS_MODULES . FILENAME_XSELL_PRODUCTS);
-      include(DIR_WS_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
-    }
+<!-- Page Module Controller -->
+	<?php include (DIR_WS_MODULES . FILENAME_PI_PAGE_MODULES); ?>
+<!-- Page Module Controller -->
+
+<?php
   }
 ?>
         </td>

@@ -1387,6 +1387,20 @@ CREATE TABLE IF NOT EXISTS orders_premade_comments (
   PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS pm_configuration;
+CREATE TABLE IF NOT EXISTS pm_configuration (
+  pm_id int(11) NOT NULL AUTO_INCREMENT,
+  pm_title varchar(255) NOT NULL,
+  pm_description varchar(255) NOT NULL,
+  pm_filename varchar(255) NOT NULL,
+  pm_active varchar(255) NOT NULL,
+  pm_page varchar(255) NOT NULL,
+  pm_sort_order int(11) NOT NULL,
+  last_modified datetime NOT NULL,
+  date_added datetime NOT NULL,
+  PRIMARY KEY (`pm_id`)
+);
+
 
 # data
 
@@ -1544,6 +1558,7 @@ INSERT INTO admin_files VALUES (150,'feedmachine_loadingbay.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (151,'discount_categories.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (152,'discount_categories_groups_pp.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (153,'premade_comments.php', 0, 7, '1');
+INSERT INTO admin_files VALUES (154, 'page_modules_configuration.php', 0, 2, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
@@ -2539,3 +2554,10 @@ INSERT INTO help_pages VALUES ('articles_config.php', 'http://wiki.oscdox.com/ar
 #Canned Comments
 INSERT INTO orders_premade_comments VALUES (1, 'Thank you for your custom', 'Thank you for your custom.');
 INSERT INTO orders_premade_comments VALUES (2, 'Out of stock when ordered', 'Unfortunately, your item was out of stock when the order was placed. It will despatch as soon as we receive it.');
+
+#Page Module Controller
+INSERT INTO pm_configuration VALUES (1, 'Specials', 'Special Products Module', 'default_specials.php', 'yes', 'index', 1, now(), now());
+INSERT INTO pm_configuration VALUES (2, 'New Products', 'New Products Module', 'new_products.php', 'yes', 'index', 2, now(), now());
+INSERT INTO pm_configuration VALUES (3, 'Upcoming Products', 'Upcoming products module', 'upcoming_products.php', 'yes', 'index', 3, now(), now());
+INSERT INTO pm_configuration VALUES (4, 'Cross Sell Module', 'Cross Sell Module', 'xsell_products.php', 'yes', 'product_info', 1, now(), now());
+INSERT INTO pm_configuration VALUES (5, 'Also Purchased Module', 'Also Purchased Module', 'also_purchased_products.php', 'yes', 'product_info', 2, now(), now());

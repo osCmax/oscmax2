@@ -12,6 +12,8 @@ $Id: new_products.php 3 2006-05-27 04:59:07Z user $
 */
 ?>
 <!-- new_products //-->
+<tr>
+  <td>
 <?php
 
 // BOF: MOD - Separate Pricing per Customer
@@ -123,4 +125,6 @@ if(!empty($new_s_prices)) {
   new contentBox($box_content);
 // EOF: MOD - Separate Pricing per Customer
 ?>
+  </td>
+</tr>
 <!-- new_products_eof //-->

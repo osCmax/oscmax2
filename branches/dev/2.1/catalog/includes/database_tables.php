@@ -109,4 +109,8 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
   define('TABLE_DISCOUNT_CATEGORIES', 'discount_categories');
   define('TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES', 'products_to_discount_categories');
 // EOF QPBPP for SPPC v4.2
+
+// BOF: Page Module Controller
+  define('TABLE_PM_CONFIGURATION', 'pm_configuration');
+// EOF: Page Module Controller 
 ?>

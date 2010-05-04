@@ -27,7 +27,15 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
 <!-- header_eof //-->
 
 <!-- body //-->
-
+<table border="0" width="100%" cellspacing="2" cellpadding="2">
+  <tr>
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+<!-- left_navigation //-->
+<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+<!-- left_navigation_eof //-->
+    </table></td>
+<!-- body_text //-->
+<td valign="top">
 <table width="95%" align="center">
 <tr><td>
 

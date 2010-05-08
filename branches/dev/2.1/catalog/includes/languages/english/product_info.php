@@ -56,4 +56,16 @@ define('PB_DROPDOWN_BETWEEN', ' at ');
 define('PB_DROPDOWN_AFTER', ' each');
 define('PB_FROM', 'from');
 // BOF QPBPP for SPPC
+
+// BOF: previous next product
+define('PREV_NEXT_PRODUCT', '');
+define('PREV_NEXT_OF', ' of ');
+define('PREV_NEXT_IN', ' in ');
+define('ALT_PREVIOUS_PRODUCT', 'Previous Product');
+define('ALT_NEXT_PRODUCT', 'Next Product');
+define('ALT_FIRST_PRODUCT', 'First Product');
+define('ALT_LAST_PRODUCT', 'Last Product');
+
+// EOF: previous next product
+
 ?>

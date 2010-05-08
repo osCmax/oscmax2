@@ -248,9 +248,6 @@ document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target=
             </table>
         </td>
       <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-      <tr>
         <td>
 
 <!-- Page Module Controller -->

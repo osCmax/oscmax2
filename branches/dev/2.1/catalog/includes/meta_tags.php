@@ -311,4 +311,9 @@ switch ($languages_id) {
     define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . NAVBAR_TITLE_1);
     break;
 }
+
+// BOF: Remove & Prevent duplicate content with the canonical tag V1.3.2
+CanonicalLink( $xhtml = false, 'SSL' ); 
+// EOF: Remove & Prevent duplicate content with the canonical tag V1.3.2
+
 ?>

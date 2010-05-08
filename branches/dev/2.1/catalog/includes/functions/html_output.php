@@ -291,4 +291,64 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
     return tep_draw_pull_down_menu($name, $countries_array, $selected, $parameters);
   }
+
+////
+// remove duplicate content with canonical tag by Spooks 12/2009
+function CanonicalLink( $xhtml = false , $ssl = 'SSL' ) {
+global $request_type;
+$rem_index = false; // Set to true to additionally remove index.php from the uri
+$close_tag = ( false === $xhtml ? ' >' : ' />' ); $spage = '';
+$domain = ( $request_type == 'SSL' && $ssl == 'SSL' ? HTTPS_SERVER : HTTP_SERVER ); // gets the base URI
+
+// Find the file basename safely = PHP_SELF is unreliable - SCRIPT_NAME can show path to phpcgi
+	if ( array_key_exists( 'SCRIPT_NAME', $_SERVER ) 
+			&& ( substr( basename( $_SERVER['SCRIPT_NAME'] ), -4, 4 ) == '.php' ) ) {
+			$basefile = basename( $_SERVER['SCRIPT_NAME'] );
+	} elseif ( array_key_exists( 'PHP_SELF', $_SERVER )
+			&& ( substr( basename( $_SERVER['PHP_SELF'] ), -4, 4 ) == '.php' ) ) {
+			$basefile = basename( $_SERVER['PHP_SELF'] );
+	} else {
+	// No base file so we have to return nothing
+	return false;
+	}
+// Don't produce canonicals for SSL pages that bots shouldn't see
+$ignore_array = array( 'account', 'address', 'checkout', 'login', 'password', 'logoff' );
+// partial match to ssl filenames
+	foreach ( $ignore_array as $value ) {
+		$spage .= '(' . $value . ')|';
+	}
+	$spage = rtrim($spage,'|');	
+	if (preg_match("/$spage/", $basefile)) return false;
+	
+// REQUEST_URI usually doesn't exist on Windows servers ( sometimes ORIG_PATH_INFO doesn't either )
+	if ( array_key_exists( 'REQUEST_URI', $_SERVER ) ) {
+			$request_uri = $_SERVER['REQUEST_URI'];
+	} elseif( array_key_exists( 'ORIG_PATH_INFO', $_SERVER ) ) {
+			$request_uri = $_SERVER['ORIG_PATH_INFO'];
+	} else {
+// we need to fail here as we have no REQUEST_URI and return no canonical link html
+	return false;
+	}	
+$remove_array = array( 'currency','language','main_page','page','sort','ref','affiliate_banner_id','max','list');	
+// Add to this array any additional params you need to remove in the same format as the existing
+
+	$page_remove_array = array(FILENAME_PRODUCT_INFO => array('manufacturers_id', 'cPath'),
+			          FILENAME_DEFAULT	     => array() );
+								
+// remove page specific params, should be in same format as previous, given is manufacturers_id & cPath 
+// have to be removed in product_info.php only
+
+	if (is_array($page_remove_array[$basefile])) $remove_array = array_merge($remove_array, $page_remove_array[$basefile]);
+	
+	foreach ( $remove_array as $value ) {
+			$search[] = '/&*' . $value . '[=\/]+[\w%..\+]*\/?/i';
+	}
+	$search[] = ('/&*osCsid.*/'); $search[] = ('/\?\z/');	
+	if ($rem_index) $search[] = ('/index.php\/*/');	
+	$request_uri = preg_replace('/\?&/', '?', preg_replace($search, '', $request_uri )); 	
+ 
+	echo '<link rel="canonical" href="' . $domain . $request_uri . '"' . $close_tag . PHP_EOL;  
+} 
+////
+
 ?>

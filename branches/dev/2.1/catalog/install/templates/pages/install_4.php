@@ -31,9 +31,14 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
     osc_db_query('insert into ' . TABLE_ADMINISTRATORS . ' (admin_groups_id, admin_username, admin_firstname, admin_lastname, admin_email_address, admin_password, admin_created) values (1, "' . trim($_POST['CFG_ADMINISTRATOR_USERNAME']) . '", "' . trim($_POST['CFG_STORE_OWNER_FIRSTNAME']) . '", "' . trim($_POST['CFG_STORE_OWNER_LASTNAME']) . '", "' . trim($_POST['CFG_STORE_OWNER_EMAIL_ADDRESS']) . '", "' . osc_encrypt_string(trim($_POST['CFG_ADMINISTRATOR_PASSWORD'])) . '", now())');
   }
   
+// BOF: PGM Renaming the Admin Folder
   $admin_folder = trim($_POST['CFG_ADMIN_FOLDER']);
-  
-  rename ('../admin', '../' . $admin_folder);
+  if ($admin_folder != 'admin') {
+  	rename ('../admin', '../' . $admin_folder);
+	$admin_folder_renamed = 'true';
+  }
+// EOF: PGM Renaming the Admin Folder
+
 ?>
 
 <div class="mainBlock">
@@ -189,15 +194,37 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
   fclose($fp);
 ?>
 
-    <p>The installation and configuration was successful!</p>
-
-    <br />
-
-    <table border="0" width="99%" cellspacing="0" cellpadding="0">
-      <tr>
+<table width="99%" cellspacing="0" cellpadding="0">
+	<tr>
+	<?php
+	// BOF: PGM Renaming the Admin Folder
+	if ($admin_folder_renamed == 'true') {
+		echo '<td class="messageStackSuccess" colspan="2">Congratulations! Your admin folder has been renamed to ' . $admin_folder . '.<br><br>If you would like to read more information about further security measures you can take a look at the <a href="http://wiki.oscdox.com/setting_up_security" target="_blank">Wiki documentation.</a>';
+	} else {
+	  	echo '<td class="messageStackAlert" colspan="2">You have not renamed your <b>admin</b> folder!  We highly recommend that you do this on live stores to increase security.  <br><br>Please read the <a href="http://wiki.oscdox.com/setting_up_security" target="_blank">Wiki documentation for more information about securing your site properly.</a>';
+  	}
+	// EOF: PGM Renaming the Admin Folder
+	?>
+	<tr>
+		<td height="2">&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="messageStackSuccess" colspan="2">The installation and configuration was successful!</td>
+	</tr>
+    <tr>
+		<td height="2">&nbsp;</td>
+	</tr>
+    <tr>
+		<td colspan="2">You can now select to view your site by clicking on the buttons shown below:</td>
+	</tr>
+    <tr>
+		<td height="2">&nbsp;</td>
+	</tr>
+    <tr>
         <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . 'index.php'; ?>" target="_blank"><img src="images/button_catalog.gif" border="0" alt="Catalog" /></a></td>
         <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . $admin_folder . '/index.php'; ?>" target="_blank"><img src="images/button_administration_tool.gif" border="0" alt="Administration Tool" /></a></td>
-      </tr>
-    </table>
+    </tr>
+</table>
+
   </div>
 </div>

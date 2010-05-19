@@ -25,7 +25,6 @@ $Id: tools.php 2009-11-14 19:38:07Z user $
 								   tep_admin_jqmenu(FILENAME_QTPRODOCTOR, BOX_TOOLS_QTPRODOCTOR, TOP) .
 								   tep_admin_jqmenu(FILENAME_CACHE, BOX_TOOLS_CACHE, TOP) .
 								   tep_admin_jqmenu(FILENAME_SERVER_INFO, BOX_TOOLS_SERVER_INFO, TOP) .
-								   tep_admin_jqmenu(FILENAME_QUICK_LINKS, BOX_TOOLS_QUICK_LINKS, TOP) .
                                    tep_admin_jqmenu(FILENAME_WHOS_ONLINE, BOX_TOOLS_WHOS_ONLINE, TOP));
   print_r($contents);
 ?>

@@ -51,16 +51,24 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=12', 'NONSSL') . '">Email Options</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=14', 'NONSSL') . '">GZIP Compression</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=25', 'NONSSL') . '">CK Editor</a></li>' .
+				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Templates</a><ul>' .
+				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=201', 'NONSSL') . '">Template Setup</a></li>' .
+				   '<li><a href="' . tep_href_link('page_modules_configuration.php?tID=1') . '">Page Modules</a></li>' . 
+				   '<li><a href="' . tep_href_link('infobox_configuration.php?gID=1', 'NONSSL') . '">Infoboxes</a></li>' . 
+				   '<li><a href="' . tep_href_link('#', 'NONSSL') . '">Define Pages</a><ul>' .
+								   tep_admin_jqmenu(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, TOP) .
+								   tep_admin_jqmenu(FILENAME_DEFINE_ABOUT, BOX_CATALOG_DEFINE_ABOUT, TOP) .
+								   tep_admin_jqmenu(FILENAME_DEFINE_PRIVACY, BOX_CATALOG_DEFINE_PRIVACY, TOP) .
+                                   tep_admin_jqmenu(FILENAME_DEFINE_CONDITIONS, BOX_CATALOG_DEFINE_CONDITIONS, TOP) .
+                                   tep_admin_jqmenu(FILENAME_DEFINE_SHIPPING, BOX_CATALOG_DEFINE_SHIPPING, TOP) .
+						'</ul></li>' .
+								   tep_admin_jqmenu(FILENAME_QUICK_LINKS, BOX_TOOLS_QUICK_LINKS, TOP) .
+				'</ul>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=15', 'NONSSL') . '">Sessions</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=65', 'NONSSL') . '">Wish List Settings</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=35', 'NONSSL') . '">Affiliate Program</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=80', 'NONSSL') . '">Recover Cart Sales</a></li>' .
 				'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=456', 'NONSSL') . '">Article Configuration</a></li>' .
-				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Templates</a><ul>' .
-				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=201', 'NONSSL') . '">Template Setup</a></li>' .
-				   '<li><a href="' . tep_href_link('page_modules_configuration.php?tID=1') . '">Page Modules</a></li>' . 
-				   '<li><a href="' . tep_href_link('infobox_configuration.php?gID=1', 'NONSSL') . '">Infoboxes</a></li>' . 
-				'</ul>' .
 				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">SEO</a><ul>' .
 				   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=60', 'NONSSL') . '">SEO URLs</a></li>' .
                    '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=75', 'NONSSL') . '">SEO URL Validation</a></li>' .
@@ -70,14 +78,7 @@ $Id: configuration.php 2009-11-14 19:38:07Z user $
 					'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=85', 'NONSSL') . '">Google Analytics</a></li>' .
 					tep_admin_jqmenu(FILENAME_GOOGLE_SITEMAP, BOX_GOOGLE_SITEMAP, TOP) .
 					'<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=89', 'NONSSL') . '">Google Maps</a></li>' .
-				'</ul>' .
-				'<li><a href="' . tep_href_link('#', 'NONSSL') . '">Define Pages</a><ul>' .
-								   tep_admin_jqmenu(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, TOP) .
-								   tep_admin_jqmenu(FILENAME_DEFINE_ABOUT, BOX_CATALOG_DEFINE_ABOUT, TOP) .
-								   tep_admin_jqmenu(FILENAME_DEFINE_PRIVACY, BOX_CATALOG_DEFINE_PRIVACY, TOP) .
-                                   tep_admin_jqmenu(FILENAME_DEFINE_CONDITIONS, BOX_CATALOG_DEFINE_CONDITIONS, TOP) .
-                                   tep_admin_jqmenu(FILENAME_DEFINE_SHIPPING, BOX_CATALOG_DEFINE_SHIPPING, TOP) .
-				'</ul></li>'
+				'</ul>'
 				);
 
   print_r($contents);

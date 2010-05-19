@@ -16,7 +16,17 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
 
   if (tep_not_null($action)) {
     switch ($action) {
-      case 'insert':
+		
+	  case 'setflag': 
+        if (($_GET['flag'] == 'no') || ($_GET['flag'] == 'yes')) {
+          if ($_GET['tID']) {
+            tep_db_query("update " . TABLE_PM_CONFIGURATION . " set pm_active = '" . $_GET['flag'] . "' where pm_id = '" . $_GET['tID'] . "'");
+          }
+        }
+ 	    tep_redirect(tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&tID=' . $_GET['tID']));
+      break;
+      
+	  case 'insert':
         $pm_id = tep_db_prepare_input($_POST['pm_id']);
 		$pm_title = tep_db_prepare_input($_POST['pm_title']);
         $pm_filename = tep_db_prepare_input($_POST['pm_filename']);
@@ -28,6 +38,7 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
 
         tep_redirect(tep_href_link(FILENAME_PM_CONFIGURATION));
       break;
+	  
       case 'save':
         $pm_id = tep_db_prepare_input($_GET['tID']);
 		$pm_title = tep_db_prepare_input($_POST['pm_title']);
@@ -110,8 +121,16 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
 ?>
                 <td class="dataTableContent"><?php echo $links['pm_title']; ?></td>
                 <td class="dataTableContent"><?php echo $links['pm_filename']; ?></td>
-                <td class="dataTableContent"><?php echo $links['pm_page']; ?></td>
-                <td class="dataTableContent" align="center"><?php echo $links['pm_active']; ?></td>
+                <td class="dataTableContent"><?php echo $links['pm_page']; ?></td>               
+                <td class="dataTableContent" align="center">
+					<?php
+                          if ($links['pm_active'] == 'yes') {
+                            echo tep_image(DIR_WS_IMAGES . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&flag=no&page=1&tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+                          } else {
+                            echo '<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&flag=yes&page=1&tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+                          }
+                    ?>
+				</td>              
                 <td class="dataTableContent" align="center"><?php echo $links['pm_sort_order']; ?></td>
                 <td class="dataTableContent" align="right"><?php if (isset($trInfo) && is_object($trInfo) && ($links['pm_id'] == $trInfo->pm_id)) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
@@ -142,18 +161,20 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
 
   switch ($action) {
     case 'new':
+
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_PM_CONFIGURATION . '</b>');
 
       $contents = array('form' => tep_draw_form('links', FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&action=insert'));
       $contents[] = array('text' => TEXT_PM_CONFIGURATION_INSERT_INTRO);
       $contents[] = array('text' => '<br>' . TEXT_PM_TITLE . '<br>' . tep_draw_input_field('pm_title'));
       $contents[] = array('text' => '<br>' . TEXT_PM_FILENAME . '<br>' . tep_draw_input_field('pm_filename', 'FILENAME_'));
-	  $contents[] = array('text' => '<br>' . TEXT_PM_PAGE . '<br>' . tep_draw_input_field('pm_page'));
-	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_draw_input_field('pm_active'));
+	  $contents[] = array('text' => '<br>' . TEXT_PM_PAGE . '<br>' . tep_draw_input_field('pm_page', 'index'));
+	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_cfg_select_option(array('yes', 'no'),$trInfo->pm_active));
       $contents[] = array('text' => '<br>' . TEXT_PM_SORT_ORDER . '<br>' . tep_draw_input_field('pm_sort_order'));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
-      break;
-    case 'edit':
+    break;
+    
+	case 'edit':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_PM_CONFIGURATION . '</b>');
 
       $contents = array('form' => tep_draw_form('links', FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&tID=' . $trInfo->pm_id  . '&action=save'));
@@ -161,18 +182,20 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
       $contents[] = array('text' => '<br>' . TEXT_PM_TITLE . '<br>' . tep_draw_input_field('pm_title', $trInfo->pm_title));		
 	  $contents[] = array('text' => '<br>' . TEXT_PM_FILENAME . '<br>' . tep_draw_input_field('pm_filename', $trInfo->pm_filename));
       $contents[] = array('text' => '<br>' . TEXT_PM_PAGE . '<br>' . tep_draw_input_field('pm_page', $trInfo->pm_page));
-	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_draw_input_field('pm_active', $trInfo->pm_active));
+	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_cfg_select_option(array('yes', 'no'),$trInfo->pm_active));
       $contents[] = array('text' => '<br>' . TEXT_PM_SORT_ORDER . '<br>' . tep_draw_input_field('pm_sort_order', $trInfo->pm_sort_order));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&tID=' . $trInfo->pm_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
-      break;
-    case 'delete':
+    break;
+    
+	case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_PM_CONFIGURATION . '</b>');
 
       $contents = array('form' => tep_draw_form('links', FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&tID=' . $trInfo->pm_id  . '&action=deleteconfirm'));
       $contents[] = array('text' => TEXT_PM_CONFIGURATION_DELETE_INTRO);
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&tID=' . $trInfo->pm_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
-      break;
-    default:
+    break;
+    
+	default:
       if (is_object($trInfo)) {
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT_PM_CONFIGURATION . '</b>');
 						
@@ -180,7 +203,7 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
         $contents[] = array('text' => '<br>' . TEXT_PM_CONFIGURATION_DATE_ADDED . ' ' . tep_date_short($trInfo->date_added));
         $contents[] = array('text' => '' . TEXT_PM_CONFIGURATION_LAST_MODIFIED . ' ' . tep_date_short($trInfo->last_modified));
       }
-      break;
+    break;
   }
 
   if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {

@@ -15,7 +15,7 @@ define('HEADING_TITLE', 'Page Modules Display, Update and Create');
 define('TABLE_HEADING_PM_TITLE', 'Module Title');
 define('TABLE_HEADING_PM_FILENAME', 'Module Filename');
 define('TABLE_HEADING_PM_PAGE', 'Module Display Page');
-define('TABLE_HEADING_PM_ACTIVE', 'Active?');
+define('TABLE_HEADING_PM_ACTIVE', 'Status');
 define('TABLE_HEADING_PM_SORT_ORDER', 'Sort Order');
 
 define('TEXT_INFO_HEADING_EDIT_PM_CONFIGURATION', 'Edit Page Module');

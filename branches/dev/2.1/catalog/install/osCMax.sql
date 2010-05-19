@@ -1558,7 +1558,7 @@ INSERT INTO admin_files VALUES (150,'feedmachine_loadingbay.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (151,'discount_categories.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (152,'discount_categories_groups_pp.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (153,'premade_comments.php', 0, 7, '1');
-INSERT INTO admin_files VALUES (154, 'page_modules_configuration.php', 0, 2, '1');
+INSERT INTO admin_files VALUES (154,'page_modules_configuration.php', 0, 2, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
@@ -1718,27 +1718,28 @@ INSERT INTO configuration VALUES (142,'Prevent Spider Sessions','SESSION_BLOCK_S
 INSERT INTO configuration VALUES (143,'Recreate Session','SESSION_RECREATE','False','Recreate the session to generate a new session ID when the customer logs on or creates an account (PHP >=4.1 needed).','15','7',NULL,now(),NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),');
 
 # osCMax added
-INSERT INTO configuration VALUES (144,'PRODUCT DESCRIPTIONS use WYSIWYG HTMLAREA?','HTML_AREA_WYSIWYG_DISABLE','Enable','Enable/Disable WYSIWYG box','25','0',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
-INSERT INTO configuration VALUES (145,'Product Description Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_PD','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','10',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
-INSERT INTO configuration VALUES (146,'Product Description Layout Width','HTML_AREA_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','15',NULL,now(),NULL, '');
-INSERT INTO configuration VALUES (147,'Product Description Layout Height','HTML_AREA_WYSIWYG_HEIGHT','240','How HIGH should the HTMLAREA be in pixels (default: 240)','25','19',NULL,now(),NULL, '');
-INSERT INTO configuration VALUES (148,'CUSTOMER EMAILS use WYSIWYG HTMLAREA?','HTML_AREA_WYSIWYG_DISABLE_EMAIL','Enable','Use WYSIWYG Area in Email Customers','25','20',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
-INSERT INTO configuration VALUES (149,'Customer Email Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_EMAIL','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','21',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
-INSERT INTO configuration VALUES (150,'Customer Email Layout Width','EMAIL_AREA_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','25',NULL,now(),NULL, '');
-INSERT INTO configuration VALUES (151,'Customer Email Layout Height','EMAIL_AREA_WYSIWYG_HEIGHT','140','How HIGH should the HTMLAREA be in pixels (default: 140)','25','29',NULL,now(),NULL, '');
-INSERT INTO configuration VALUES (152,'NEWSLETTER EMAILS use WYSIWYG HTMLAREA?','HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER','Enable','Use WYSIWYG Area in Email Newsletter','25','30',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
-INSERT INTO configuration VALUES (153,'Newsletter Email Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_NEWSLETTER','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','32',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
-INSERT INTO configuration VALUES (154,'Newsletter Email Layout Width','NEWSLETTER_EMAIL_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','35',NULL,now(),NULL, '');
-INSERT INTO configuration VALUES (155,'Newsletter Email Layout Height','NEWSLETTER_EMAIL_WYSIWYG_HEIGHT','140','How HIGH should the HTMLAREA be in pixels (default: 140)','25','39',NULL,now(),NULL, '');
-INSERT INTO configuration VALUES (156,'DEFINE MAINPAGE use WYSIWYG HTMLAREA?','HTML_AREA_WYSIWYG_DISABLE_DEFINE','Enable','Use WYSIWYG Area in Define Mainpage','25','40',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
-INSERT INTO configuration VALUES (157,'Define Mainpage Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_DEFINE','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','41',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
-INSERT INTO configuration VALUES (158,'Define Mainpage Layout Width','DEFINE_MAINPAGE_WYSIWYG_WIDTH','605','How WIDE should the HTMLAREA be in pixels (default: 505)','25','42',NULL,now(),NULL, '');
-INSERT INTO configuration VALUES (159,'Define Mainpage Layout Height','DEFINE_MAINPAGE_WYSIWYG_HEIGHT','300','How HIGH should the HTMLAREA be in pixels (default: 140)','25','43',NULL,now(),NULL, '');
-INSERT INTO configuration VALUES (160,'GLOBAL - User Interface Font Type','HTML_AREA_WYSIWYG_FONT_TYPE','Verdana','User Interface Font Type<br>(not saved to product description)','25','45',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Arial\', \'Courier New\', \'Georgia\', \'Impact\', \'Tahoma\', \'Times New Roman\', \'Verdana\', \'Wingdings\'),');
-INSERT INTO configuration VALUES (161,'GLOBAL - User Interface Font Size','HTML_AREA_WYSIWYG_FONT_SIZE','12','User Interface Font Size (not saved to product description)<p><b>10 Equals 10 pt','25','50',NULL,now(),NULL, 'tep_cfg_select_option(array(\\\'8\\\', \\\'10\\\', \\\'12\\\', \\\'14\\\', \\\'18\\\', \\\'24\\\', \\\'36\\\'),');
-INSERT INTO configuration VALUES (162,'GLOBAL - User Interface Font Colour','HTML_AREA_WYSIWYG_FONT_COLOUR','Black','White, Black, C0C0C0, Red, FFFFFF, Yellow, Pink, Blue, Gray, 000000, ect..<br>basically any colour or HTML colour code!<br>(not saved to product description)','25','55',NULL,now(),NULL,'');
-INSERT INTO configuration VALUES (163,'GLOBAL - User Interface Background Colour','HTML_AREA_WYSIWYG_BG_COLOUR','White','White, Black, C0C0C0, Red, FFFFFF, Yellow, Pink, Blue, Gray, 000000, ect..<br>basically any colour or html colour code!<br>(not saved to product description)','25','60',NULL,now(),NULL, '');
-INSERT INTO configuration VALUES (164,'GLOBAL - ALLOW DEBUG MODE?','HTML_AREA_WYSIWYG_DEBUG','0','Moniter Live-html, It updates as you type in a 2nd field above it.<p>Disable Debug = 0<br>Enable Debug = 1<br>Default = 0 OFF','25','65',NULL,now(),NULL, 'tep_cfg_select_option(array(\'0\', \'1\'),');
+INSERT INTO configuration VALUES (144,'PRODUCT DESCRIPTIONS use WYSIWYG CK Editor?','HTML_AREA_WYSIWYG_DISABLE','Enable','Enable/Disable WYSIWYG box','25','0',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
+#INSERT INTO configuration VALUES (145,'Product Description Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_PD','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','10',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
+#INSERT INTO configuration VALUES (146,'Product Description Layout Width','HTML_AREA_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','15',NULL,now(),NULL, '');
+#INSERT INTO configuration VALUES (147,'Product Description Layout Height','HTML_AREA_WYSIWYG_HEIGHT','240','How HIGH should the HTMLAREA be in pixels (default: 240)','25','19',NULL,now(),NULL, '');
+INSERT INTO configuration VALUES (148,'CUSTOMER EMAILS use WYSIWYG CK Editor?','HTML_AREA_WYSIWYG_DISABLE_EMAIL','Enable','Use WYSIWYG Area in Email Customers','25','20',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
+#INSERT INTO configuration VALUES (149,'Customer Email Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_EMAIL','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','21',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
+#INSERT INTO configuration VALUES (150,'Customer Email Layout Width','EMAIL_AREA_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','25',NULL,now(),NULL, '');
+#INSERT INTO configuration VALUES (151,'Customer Email Layout Height','EMAIL_AREA_WYSIWYG_HEIGHT','140','How HIGH should the HTMLAREA be in pixels (default: 140)','25','29',NULL,now(),NULL, '');
+INSERT INTO configuration VALUES (152,'NEWSLETTER EMAILS use WYSIWYG CK Editor?','HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER','Enable','Use WYSIWYG Area in Email Newsletter','25','30',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
+#INSERT INTO configuration VALUES (153,'Newsletter Email Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_NEWSLETTER','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','32',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
+#INSERT INTO configuration VALUES (154,'Newsletter Email Layout Width','NEWSLETTER_EMAIL_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','35',NULL,now(),NULL, '');
+#INSERT INTO configuration VALUES (155,'Newsletter Email Layout Height','NEWSLETTER_EMAIL_WYSIWYG_HEIGHT','140','How HIGH should the HTMLAREA be in pixels (default: 140)','25','39',NULL,now(),NULL, '');
+INSERT INTO configuration VALUES (156,'DEFINE MAINPAGE use WYSIWYG CK Editor?','HTML_AREA_WYSIWYG_DISABLE_DEFINE','Enable','Use WYSIWYG Area in Define Mainpage','25','40',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
+#INSERT INTO configuration VALUES (157,'Define Mainpage Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_DEFINE','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','41',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
+#INSERT INTO configuration VALUES (158,'Define Mainpage Layout Width','DEFINE_MAINPAGE_WYSIWYG_WIDTH','605','How WIDE should the HTMLAREA be in pixels (default: 505)','25','42',NULL,now(),NULL, '');
+#INSERT INTO configuration VALUES (159,'Define Mainpage Layout Height','DEFINE_MAINPAGE_WYSIWYG_HEIGHT','300','How HIGH should the HTMLAREA be in pixels (default: 140)','25','43',NULL,now(),NULL, '');
+#INSERT INTO configuration VALUES (160,'GLOBAL - User Interface Font Type','HTML_AREA_WYSIWYG_FONT_TYPE','Verdana','User Interface Font Type<br>(not saved to product description)','25','45',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Arial\', \'Courier New\', \'Georgia\', \'Impact\', \'Tahoma\', \'Times New Roman\', \'Verdana\', \'Wingdings\'),');
+#INSERT INTO configuration VALUES (161,'GLOBAL - User Interface Font Size','HTML_AREA_WYSIWYG_FONT_SIZE','12','User Interface Font Size (not saved to product description)<p><b>10 Equals 10 pt','25','50',NULL,now(),NULL, 'tep_cfg_select_option(array(\\\'8\\\', \\\'10\\\', \\\'12\\\', \\\'14\\\', \\\'18\\\', \\\'24\\\', \\\'36\\\'),');
+#INSERT INTO configuration VALUES (162,'GLOBAL - User Interface Font Colour','HTML_AREA_WYSIWYG_FONT_COLOUR','Black','White, Black, C0C0C0, Red, FFFFFF, Yellow, Pink, Blue, Gray, 000000, ect..<br>basically any colour or HTML colour code!<br>(not saved to product description)','25','55',NULL,now(),NULL,'');
+#INSERT INTO configuration VALUES (163,'GLOBAL - User Interface Background Colour','HTML_AREA_WYSIWYG_BG_COLOUR','White','White, Black, C0C0C0, Red, FFFFFF, Yellow, Pink, Blue, Gray, 000000, ect..<br>basically any colour or html colour code!<br>(not saved to product description)','25','60',NULL,now(),NULL, '');
+#INSERT INTO configuration VALUES (164,'GLOBAL - ALLOW DEBUG MODE?','HTML_AREA_WYSIWYG_DEBUG','0','Moniter Live-html, It updates as you type in a 2nd field above it.<p>Disable Debug = 0<br>Enable Debug = 1<br>Default = 0 OFF','25','65',NULL,now(),NULL, 'tep_cfg_select_option(array(\'0\', \'1\'),');
+
 INSERT INTO configuration VALUES (178,'Display Total','MODULE_ORDER_TOTAL_COUPON_STATUS','true','Do you want to display the Discount Coupon value?','6','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (179,'Sort Order','MODULE_ORDER_TOTAL_COUPON_SORT_ORDER','9','Sort order of display.','6','2',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (180,'Include Shipping','MODULE_ORDER_TOTAL_COUPON_INC_SHIPPING','true','Include Shipping in calculation','6','5',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
@@ -1882,8 +1883,8 @@ INSERT INTO configuration VALUES (1073,'Move tax to total amount','MOVE_TAX_TO_T
 INSERT INTO configuration VALUES (498,'Purchase Without Account','PWA_ON','true','Allow Customers to purchase without an account',40,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 # New RC4 entries
-INSERT INTO configuration VALUES (1202,'Admin Editor Default Width','HTML_AREA_WYSIWYG_EDITOR_WIDTH','550','How WIDE should the HTMLAREA be in pixels (default: 550)',25,66,NULL,now(),NULL,'');
-INSERT INTO configuration VALUES (1203,'Admin Editor Default Height','HTML_AREA_WYSIWYG_EDITOR_HEIGHT','300','How HIGH should the HTMLAREA be in pixels (default: 300)',25,67,NULL,now(),NULL,'');
+#INSERT INTO configuration VALUES (1202,'Admin Editor Default Width','HTML_AREA_WYSIWYG_EDITOR_WIDTH','550','How WIDE should the HTMLAREA be in pixels (default: 550)',25,66,NULL,now(),NULL,'');
+#INSERT INTO configuration VALUES (1203,'Admin Editor Default Height','HTML_AREA_WYSIWYG_EDITOR_HEIGHT','300','How HIGH should the HTMLAREA be in pixels (default: 300)',25,67,NULL,now(),NULL,'');
 INSERT INTO configuration VALUES (1204,'E-Mail Address','AFFILIATE_EMAIL_ADDRESS','<affiliate@localhost.com>','The E Mail Address for the Affiliate Program',35,1,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1205,'Affiliate Pay Per Sale Payment % Rate','AFFILIATE_PERCENT','10.0000','Percentage Rate for the Affiliate Program',35,2,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (1206,'Payment Threshold','AFFILIATE_THRESHOLD','50.00','Payment Threshold for paying affiliates',35,3,NULL,now(),NULL,NULL);
@@ -1993,7 +1994,7 @@ INSERT INTO configuration_group VALUES (14,'GZip Compression','GZip compression 
 INSERT INTO configuration_group VALUES (15,'Sessions','Session options',15,1);
 # osCMax added....
 INSERT INTO configuration_group VALUES (16,'Site Maintenance','Site Maintenance Options',16,1);
-INSERT INTO configuration_group VALUES (25,'WYSIWYG Editor','HTMLArea Options',15,1);
+INSERT INTO configuration_group VALUES (25,'CK Editor','CK Editor Options',15,1);
 INSERT INTO configuration_group VALUES (30,'Printable Catalog','Options for Printable Catalog',30,1);
 INSERT INTO configuration_group VALUES (35,'Affiliate Program','Options for the Affiliate Program',50,1);
 INSERT INTO configuration_group VALUES (40,'Accounts','Configuration of Account settings',40,1);

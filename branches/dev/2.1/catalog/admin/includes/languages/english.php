@@ -120,7 +120,7 @@ define('BOX_CONFIGURATION_DOWNLOAD', 'Download');
 define('BOX_CONFIGURATION_GZIP', 'GZip');
 define('BOX_CONFIGURATION_SESSIONS', 'Sessions');
 define('BOX_CONFIGURATION_STOCK', 'Stock');
-define('BOX_CONFIGURATION_WYSIWYG', 'WYSIWYG Editor');
+define('BOX_CONFIGURATION_WYSIWYG', 'CK Editor');
 define('BOX_CONFIGURATION_AFFILIATE', 'Affiliate Program');
 define('BOX_CONFIGURATION_ACCOUNTS', 'Accounts');
 define('BOX_CONFIGURATION_MAINTENANCE', 'Site Maintenance');

@@ -184,6 +184,9 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
+<!-- CKeditor -->
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
+<!-- CKeditor End -->
 <link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
 <script language="JavaScript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
 <script language="javascript">
@@ -455,8 +458,11 @@ $customer = tep_db_fetch_array($customer_query);
                 <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
                 <td><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
 // Line Changed - MOD: Ajustable Editor Window
-                	echo tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, ' ') .'</td>';
-                } else { echo tep_draw_textarea_field('message', 'soft', '60', '15') .'</td>';
+// BOF: CKeditor
+//                	echo tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, ' ') .'</td>';
+				echo tep_draw_textarea_field('message', 'soft', '100%', '20', '', 'class="ckeditor"') . '</td>';
+// EOF: CKeditor				
+				} else { echo tep_draw_textarea_field('message', 'soft', '60', '15') .'</td>';
                 }
                 ?>
               </tr>

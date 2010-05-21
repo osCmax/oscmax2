@@ -103,6 +103,14 @@ $Id: products_expected.php 3 2006-05-27 04:59:07Z user $
     echo $box->infoBox($heading, $contents);
 
     echo '            </td>' . "\n";
+  } else {
+	$heading[] = array('text' => HEADING_NO_PRODUCTS_EXPECTED);
+    $contents[] = array('text' => TEXT_NO_PRODUCTS_EXPECTED);  
+	  
+	echo '            <td width="25%" valign="top">';
+	$box = new box;
+    echo $box->infoBox($heading, $contents);
+    echo '            </td>';  
   }
 ?>
           </tr>

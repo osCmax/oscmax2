@@ -492,6 +492,14 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
     echo $box->infoBox($heading, $contents);
 
     echo '            </td>' . "\n";
+  } else {
+	$heading[] = array('text' => HEADING_NO_BACKUP);
+    $contents[] = array('text' => TEXT_NO_BACKUP);  
+	  
+	echo '            <td width="25%" valign="top">';
+	$box = new box;
+    echo $box->infoBox($heading, $contents);
+    echo '            </td>';  
   }
 ?>
           </tr>

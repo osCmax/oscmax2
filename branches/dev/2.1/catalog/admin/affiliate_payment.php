@@ -320,9 +320,9 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
              '            <td class="smallText" align="center">' . tep_date_short($affiliate_history['affiliate_date_added']) . '</td>' . "\n" .
              '            <td class="smallText" align="center">';
         if ($affiliate_history['affiliate_notified'] == '1') {
-          echo tep_image(DIR_WS_ICONS . 'tick.gif', ICON_TICK);
+          echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK);
         } else {
-          echo tep_image(DIR_WS_ICONS . 'cross.gif', ICON_CROSS);
+          echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS);
         }
         echo '          </tr>' . "\n";
       }

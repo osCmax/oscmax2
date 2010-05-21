@@ -345,8 +345,8 @@
                 <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $affiliate_newsletters['affiliate_newsletters_id'] . '&action=preview') . '">' . tep_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $affiliate_newsletters['title']; ?></td>
                 <td class="dataTableContent" align="right"><?php echo number_format($affiliate_newsletters['content_length']) . ' bytes'; ?></td>
                 <td class="dataTableContent" align="right"><?php echo $affiliate_newsletters['module']; ?></td>
-                <td class="dataTableContent" align="center"><?php if ($affiliate_newsletters['status'] == '1') { echo tep_image(DIR_WS_ICONS . 'tick.gif', ICON_TICK); } else { echo tep_image(DIR_WS_ICONS . 'cross.gif', ICON_CROSS); } ?></td>
-                <td class="dataTableContent" align="center"><?php if ($affiliate_newsletters['locked'] > 0) { echo tep_image(DIR_WS_ICONS . 'locked.gif', ICON_LOCKED); } else { echo tep_image(DIR_WS_ICONS . 'unlocked.gif', ICON_UNLOCKED); } ?></td>
+                <td class="dataTableContent" align="center"><?php if ($affiliate_newsletters['status'] == '1') { echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK); } else { echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS); } ?></td>
+                <td class="dataTableContent" align="center"><?php if ($affiliate_newsletters['locked'] > 0) { echo tep_image(DIR_WS_ICONS . 'locked.png', ICON_LOCKED); } else { echo tep_image(DIR_WS_ICONS . 'unlocked.png', ICON_UNLOCKED); } ?></td>
                 <td class="dataTableContent" align="right"><?php if (isset($nInfo) && is_object($nInfo) && ($affiliate_newsletters['affiliate_newsletters_id'] == $nInfo->affiliate_newsletters_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $affiliate_newsletters['affiliate_newsletters_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php

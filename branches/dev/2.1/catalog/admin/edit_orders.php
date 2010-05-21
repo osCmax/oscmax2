@@ -1517,9 +1517,9 @@ document.onmousemove=positiontip
       }
 
       if ($orders_history['customer_notified'] == '1') {
-        echo tep_image(DIR_WS_ICONS . 'tick.gif', ICON_TICK) . "</td>\n";
+        echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK) . "</td>\n";
       } else {
-        echo tep_image(DIR_WS_ICONS . 'cross.gif', ICON_CROSS) . "</td>\n";
+        echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS) . "</td>\n";
       }
  
       echo '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .

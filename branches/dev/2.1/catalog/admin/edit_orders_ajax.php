@@ -606,9 +606,9 @@ if (tep_db_num_rows($orders_history_query)) {
          '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .
          '    <td class="smallText" align="center">';
     if ($orders_history['customer_notified'] == '1') {
-      echo tep_image(DIR_WS_ICONS . 'tick.gif', ICON_TICK) . "</td>\n";
+      echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK) . "</td>\n";
     } else {
-      echo tep_image(DIR_WS_ICONS . 'cross.gif', ICON_CROSS) . "</td>\n";
+      echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS) . "</td>\n";
     }
     echo '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .
          '    <td class="smallText" align="left">' . $orders_status_array[$orders_history['orders_status_id']] . '</td>' . "\n";

@@ -35,4 +35,8 @@ define('TEXT_INFO_STATUS_CHANGE', 'Status Change:');
 
 define('TEXT_INFO_HEADING_DELETE_SPECIALS', 'Delete Special');
 define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to delete the special products price?');
+
+define('HEADING_NO_SPECIALS', '<b>No Special Offers Set</b>');
+define('TEXT_NO_SPECIALS', 'Please click <b>New Product</b> to create a new Special Offer for your store.');
+
 ?>

@@ -10,7 +10,7 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-if ($_GET['origin'] == FILENAME_CHECKOUT_PAYMENT) {
+if ( isset($_GET['origin']) && $_GET['origin'] == FILENAME_CHECKOUT_PAYMENT) {
   define('NAVBAR_TITLE', 'Order');
   define('HEADING_TITLE', 'Ordering online is easy.');
   define('TEXT_STEP_BY_STEP', 'We\'ll walk you through the process, step by step.');
@@ -23,9 +23,7 @@ if ($_GET['origin'] == FILENAME_CHECKOUT_PAYMENT) {
 define('HEADING_RETURNING_ADMIN', 'Login Panel:');
 define('HEADING_PASSWORD_FORGOTTEN', 'Password Forgotten:');
 define('TEXT_RETURNING_ADMIN', 'Staff only!');
-define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
 define('ENTRY_USERNAME', 'Username:');
-define('ENTRY_PASSWORD', 'Password:');
 define('ENTRY_FIRSTNAME', 'First Name:');
 define('ENTRY_LASTNAME', 'Last Name:');
 define('IMAGE_BUTTON_LOGIN', 'Submit');

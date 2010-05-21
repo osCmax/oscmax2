@@ -55,6 +55,5 @@ define('ENTRY_AFFILIATE_COMMISSION','Pay per Sale Payment % Rate');
 define('CATEGORY_COMMISSION','Individual Commission');
 define('CATEGORY_PAYMENT_DETAILS','You get your money by:');
 
-define('TYPE_BELOW', 'Type below');
 define('PLEASE_SELECT', 'Select');
 ?>

@@ -40,10 +40,18 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
         $year = tep_db_prepare_input($_POST['year']);
 // BOF: MOD - Separate Pricing Per Customer
         $customers_group=tep_db_prepare_input($_POST['customers_group']);
-        $price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS. " WHERE products_id = ".(int)$products_id . " AND customers_group_id  = ".(int)$customers_group);
-        while ($gprices = tep_db_fetch_array($price_query)) {
-            $products_price = $gprices['customers_group_price'];
-        }
+		
+		if ($customers_group != '0') {
+        $price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " WHERE products_id = ".(int)$products_id . " AND customers_group_id  = ".(int)$customers_group);
+        	while ($gprices = tep_db_fetch_array($price_query)) {
+            	$products_price = $gprices['customers_group_price'];
+        	}
+		} else { // PGM fix for % on Retail prices - price must be fetched from the products table not product_groups as it is not in there!!
+		$price_query = tep_db_query("select products_price from " . TABLE_PRODUCTS . " WHERE products_id = ".(int)$products_id);	
+			while ($gprices = tep_db_fetch_array($price_query)) {
+            	$products_price = $gprices['products_price'];
+        	}
+		}
 // EOF: MOD - Separate Pricing Per Customer
         if (substr($specials_price, -1) == '%') {
 /* BOF: Bugfix 0000061
@@ -54,6 +62,7 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
 // EOF: Bugfix 0000061
 */
           $specials_price = ($products_price - (($specials_price / 100) * $products_price));
+		//  $specials_price = $specials_price;
         }
 
         $expires_date = '';
@@ -342,6 +351,14 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
     echo $box->infoBox($heading, $contents);
 
     echo '            </td>' . "\n";
+  } else {
+	$heading[] = array('text' => HEADING_NO_SPECIALS);
+    $contents[] = array('text' => TEXT_NO_SPECIALS);  
+	  
+	echo '            <td width="25%" valign="top">';
+	$box = new box;
+    echo $box->infoBox($heading, $contents);
+    echo '            </td>';  
   }
 }
 ?>

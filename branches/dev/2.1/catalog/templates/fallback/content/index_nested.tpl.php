@@ -13,7 +13,7 @@
 /* eof catdesc for bts1a */
              ?>
             </td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . CATEGORY_IMAGES_DIR . $category['categories_image'], $category['categories_name'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
 	  <!-- bof catdesc for bts1a, adding "categories_description" -->
           <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_description'])) ) { ?>

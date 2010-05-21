@@ -20,7 +20,7 @@
                }
 /* eof catdesc for bts1a */ ?>
                 </td>
-                <td valign="top" class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . $topic['topics_image'], $topic['topics_name'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                <td valign="top" class="pageHeading" align="right">&nbsp;</td>
               </tr>
               <?php if ( tep_not_null($topic['topics_description']) ) { ?>
               <tr>

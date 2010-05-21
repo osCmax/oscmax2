@@ -15,7 +15,7 @@
 <?php
   } else {
 ?> 
-            <td><?php echo TEXT_SITEMAP_UNAVAILABLE; ?></td>
+            <td class="main"><?php echo TEXT_SITEMAP_UNAVAILABLE; ?></td>
 <?php
   }
 ?>

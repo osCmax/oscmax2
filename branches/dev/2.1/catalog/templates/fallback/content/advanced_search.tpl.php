@@ -3,7 +3,7 @@
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE_1; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_browse.gif', HEADING_TITLE_1, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -37,10 +37,10 @@
                 <td><img src="images/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
               </tr>
               <tr>
-                <td class="boxText"><?php echo tep_draw_input_field('keywords', '', 'style="width: 100%"'); ?></td>
+                <td class="boxText" align="center"><?php echo tep_draw_input_field('keywords', '', 'style="width: 80%"'); ?></td>
               </tr>
               <tr>
-                <td align="right" class="boxText"><?php echo tep_draw_checkbox_field('search_in_description', '1') . ' ' . TEXT_SEARCH_IN_DESCRIPTION; ?></td>
+                <td class="boxText" align="center"><?php echo tep_draw_checkbox_field('search_in_description', '1') . ' ' . TEXT_SEARCH_IN_DESCRIPTION; ?></td>
               </tr>
               <tr>
                 <td><img src="images/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>

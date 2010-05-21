@@ -1043,6 +1043,9 @@ function check_form() {
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
 <?php // BOF: MOD - customer_sort_admin_v1 adapted for Separate Pricing Per Customer
+			
+		  $listing = (isset($_GET['listing']) ? $_GET['listing'] : '');
+
           switch ($listing) {
               case "id-asc":
               $order = "c.customers_id";

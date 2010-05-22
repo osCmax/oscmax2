@@ -81,4 +81,7 @@ define('EMAIL_TEXT_COMMENTS_UPDATE', 'The comments for your order are' . "\n\n%s
 define('ERROR_ORDER_DOES_NOT_EXIST', 'Error: Order does not exist.');
 define('SUCCESS_ORDER_UPDATED', 'Success: Order has been successfully updated.');
 define('WARNING_ORDER_NOT_UPDATED', 'Warning: Nothing to change. The order was not updated.');
+
+define('HEADING_CANNED_COMMENTS_HELP', 'Premade Comments Help');
+define('TEXT_CANNED_COMMENTS_HELP', 'In order to create new premade comments please go to <b>Localization --> Premade Comments</b> menu and follow the onscreen instructions.  <br><br>If you need further help please read the <b>Wiki</b>.');
 ?>

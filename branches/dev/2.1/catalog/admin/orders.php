@@ -363,9 +363,9 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="5" width="100%">
           <tr class="dataTableHeadingRow">
-            <td class="dataTableHeadingContent" width="200"><?php echo TABLE_HEADING_DATE_ADDED; ?></td>
-            <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_CUSTOMER_NOTIFIED; ?></td>
-            <td class="dataTableHeadingContent" width="200"><?php echo TABLE_HEADING_STATUS; ?></td>
+            <td class="dataTableHeadingContent" width="150"><?php echo TABLE_HEADING_DATE_ADDED; ?></td>
+            <td class="dataTableHeadingContent" width="150" align="center"><?php echo TABLE_HEADING_CUSTOMER_NOTIFIED; ?></td>
+            <td class="dataTableHeadingContent" width="180"><?php echo TABLE_HEADING_STATUS; ?></td>
             <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_COMMENTS; ?></td>
           </tr>
 <?php
@@ -402,9 +402,9 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
         <td class="main">
 			<table border="0" cellspacing="0" cellpadding="5" width="100%">
             	<tr class="dataTableHeadingRow">
-                	<td class="dataTableHeadingContent" width="200"></td>
-                    <td class="dataTableHeadingContent" align="center"><?php echo ENTRY_NOTIFY_CUSTOMER; ?></td>
-                    <td class="dataTableHeadingContent" width="200"><?php echo ENTRY_STATUS; ?></td>
+                	<td class="dataTableHeadingContent" width="150"></td>
+                    <td class="dataTableHeadingContent" width="150" align="center"><?php echo ENTRY_NOTIFY_CUSTOMER; ?></td>
+                    <td class="dataTableHeadingContent" width="180"><?php echo ENTRY_STATUS; ?></td>
                     <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NEW_COMMENTS; ?></td>
 	            </tr>                    
             	<tr class="dataTableRow">
@@ -418,9 +418,9 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
                                 <td>
                                 	<table>
                                     	<tr>
-                                        	<td>
+                                        	<td valign="top">
 <!-- BOF: Canned Comments -->
-												<select name="responses" onchange="setMessage()">
+												<select name="responses" onChange="setMessage()">
 													<option value="">Select a comment..</option>
 													<?php
 														$get_premades_query = tep_db_query("select * from " . TABLE_ORDERS_PREMADE_COMMENTS . " order by id");
@@ -429,6 +429,7 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
 														}
 													?>
 												</select>
+                                                <?php echo '<span title="' . HEADING_CANNED_COMMENTS_HELP . '|' . TEXT_CANNED_COMMENTS_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', 'Help') ?></span>
 <!-- EOF: Canned Comments -->
                                                                                                      
                                             </td>

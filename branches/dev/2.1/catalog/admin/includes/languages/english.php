@@ -213,11 +213,11 @@ define('BOX_HEADING_LOCALIZATION', 'Localization');
 define('BOX_LOCALIZATION_CURRENCIES', 'Currencies');
 define('BOX_LOCALIZATION_LANGUAGES', 'Languages');
 define('BOX_LOCALIZATION_ORDERS_STATUS', 'Orders Status');
-define('BOX_PREMADE', 'Canned Comments');
+define('BOX_PREMADE', 'Premade Comments');
 
 // ADDED 2 LINE- recover cart box text
-		define('BOX_REPORTS_RECOVER_CART_SALES', 'Recovered Sales Results');
-		define('BOX_TOOLS_RECOVER_CART', 'Recover Cart Sales');
+define('BOX_REPORTS_RECOVER_CART_SALES', 'Recovered Sales Results');
+define('BOX_TOOLS_RECOVER_CART', 'Recover Cart Sales');
 
 // LINE ADDED - Monthly Tax-Sales totals
 define('BOX_REPORTS_MONTHLY_SALES', 'Monthly Sales/Tax');

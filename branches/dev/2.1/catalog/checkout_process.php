@@ -184,9 +184,11 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
           $stock_query_raw .= " AND pa.options_id = '" . $products_attributes[0]['option_id'] . "' AND pa.options_values_id = '" . $products_attributes[0]['value_id'] . "'";
         }
         $stock_query = tep_db_query($stock_query_raw);
-      } else {
-        $stock_query = tep_db_query("select products_quantity from " . TABLE_PRODUCTS . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
-      }
+// BOF: QT Pro 
+//      } else {
+//       $stock_query = tep_db_query("select products_quantity from " . TABLE_PRODUCTS . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+//      }
+// EOF: QT Pro
       if (tep_db_num_rows($stock_query) > 0) {
         $stock_values = tep_db_fetch_array($stock_query);
         $actual_stock_bought = $order->products[$i]['qty'];
@@ -230,7 +232,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 // do not decrement quantities if products_attributes_filename exists
         if (!$download_selected) {
           $stock_left = $stock_values['products_quantity'] - $actual_stock_bought;
-          tep_db_query("UPDATE " . TABLE_PRODUCTS . " 
+          tep_db_query("UPDATE " . TABLE_PRODUCTS . "
                         SET products_quantity = products_quantity - '" . $actual_stock_bought . "' 
                         WHERE products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
 // EOF: MOD - QT Pro
@@ -239,7 +241,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
         }
       }
     }
-
+// BOF: QT Pro 
+    }
+// EOF: QT Pro
 // Update products_ordered (for bestsellers list)
     tep_db_query("update " . TABLE_PRODUCTS . " set products_ordered = products_ordered + " . sprintf('%d', $order->products[$i]['qty']) . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
 // LINE ADDED: MOD - QT Pro

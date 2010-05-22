@@ -9,7 +9,7 @@
 
   Released under the GNU General Public License
 */
-    
+
   function osc_href_link( $page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true ) {
 
     if ( !tep_not_null( $page ) ) {
@@ -48,9 +48,8 @@
         }
       }
     }
-
-
-    if ( ( 'SEARCH_ENGINE_FRIENDLY_URLS' == 'true' ) && ( $search_engine_safe == true ) ) {
+//commented out SEARCH_ENGINE_FRIENDLY_URLS since removed from oscmax 2.1 sql file
+/*   if ( ( SEARCH_ENGINE_FRIENDLY_URLS == 'true' ) && ( $search_engine_safe == true ) ) {
       while ( strstr( $link, '&&' ) ) $link = str_replace( '&&', '&', $link );
 
       $link = str_replace( '?', '/', $link );
@@ -59,7 +58,7 @@
 
       $separator = '?';
     }
-
+*/
     if ( isset( $_sid ) ) {
       $link .= $separator . tep_output_string( $_sid );
     }

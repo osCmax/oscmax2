@@ -1,6 +1,6 @@
 <?php
 define('BOX_HEADING_GV_ADMIN', 'Chèques cadeaux/Coupons');
-define('BOX_GV_ADMIN_QUEUE', 'Chèques cadeaux file d'attente');
+define('BOX_GV_ADMIN_QUEUE', 'Chèques cadeaux file d\'attente');
 define('BOX_GV_ADMIN_MAIL', 'Mail Chèques cadeaux');
 define('BOX_GV_ADMIN_SENT', 'Chèques cadeaux envoyés');
 define('BOX_COUPON_ADMIN','Coupon Admin');

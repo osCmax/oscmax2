@@ -471,6 +471,14 @@ function popupImageWindow(url) {
     echo $box->infoBox($heading, $contents);
 
     echo '            </td>' . "\n";
+  } else {
+	$heading[] = array('text' => HEADING_NO_AUTHORS);
+    $contents[] = array('text' => TEXT_NO_AUTHORS);  
+	  
+	echo '            <td width="25%" valign="top">';
+	$box = new box;
+    echo $box->infoBox($heading, $contents);
+    echo '            </td>';  
   }
 ?>
           </tr>

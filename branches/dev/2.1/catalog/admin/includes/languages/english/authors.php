@@ -41,4 +41,7 @@ define('TEXT_DELETE_WARNING_ARTICLES', '<b>WARNING:</b> There are %s articles st
 define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Error: I can not write to this directory. Please set the right user permissions on: %s');
 define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Error: Directory does not exist: %s');
 
+define('HEADING_NO_AUTHORS', 'No Authors');
+define('TEXT_NO_AUTHORS', 'You currently have no authors setup for your store.  <br><br>Please click <b>insert</b> to create one.');
+
 ?>

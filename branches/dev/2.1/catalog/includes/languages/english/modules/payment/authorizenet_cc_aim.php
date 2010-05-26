@@ -5,7 +5,7 @@
   osCMax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2008 osCMax
+  Copyright 2010 osCMax
 
   Released under the GNU General Public License
 */
@@ -23,4 +23,9 @@
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ERROR_INVALID_EXP_DATE', 'The credit card expiration date is invalid. Please check the card information and try again.');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ERROR_EXPIRED', 'The credit card has expired. Please try again with another card or payment method.');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ERROR_CVC', 'The credit card check number (CVC) is invalid. Please check the card information and try again.');
+
+  define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_AMEX', 'American Express');
+  define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_DISCOVER', 'Discover');
+  define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_MASTERCARD', 'Mastercard');
+  define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_VISA', 'Visa');
 ?>

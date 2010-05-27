@@ -34,12 +34,14 @@ tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID))
 tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID));
         break;
       case 'save':
+	    $configuration_title = tep_db_prepare_input($_POST['configuration_title']);
+        $configuration_key = tep_db_prepare_input($_POST['configuration_key']);
         $configuration_value = tep_db_prepare_input($_POST['configuration_value']);
         $configuration_column = tep_db_prepare_input($_POST['configuration_column']);
         $location = tep_db_prepare_input($_POST['location']);
         $cID = tep_db_prepare_input($_GET['cID']);
 
-        tep_db_query("update " . TABLE_THEME_CONFIGURATION . " set location = '" . tep_db_input($location) . "',configuration_column = '" . tep_db_input($configuration_column) . "', configuration_value = '" . tep_db_input($configuration_value) . "', last_modified = now() where configuration_id = '" . tep_db_input($cID) . "'");
+        tep_db_query("update " . TABLE_THEME_CONFIGURATION . " set configuration_title = '" . tep_db_input($configuration_title) . "', configuration_key = '" . tep_db_input($configuration_key) . "', location = '" . tep_db_input($location) . "', configuration_column = '" . tep_db_input($configuration_column) . "', configuration_value = '" . tep_db_input($configuration_value) . "', last_modified = now() where configuration_id = '" . tep_db_input($cID) . "'");
         tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cID));
         break;
 
@@ -105,11 +107,11 @@ tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID))
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CONFIGURATION_TITLE; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CONFIGURATION_VALUE; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_COLUMN; ?>&nbsp;</td>
-                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_SORT_ORDER; ?>&nbsp;</td>
-                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
+                <td class="dataTableHeadingContent" align="center" width="100"><?php echo TABLE_HEADING_STATUS; ?></td>
+                <td class="dataTableHeadingContent" align="center" width="100"><?php echo TABLE_HEADING_COLUMN; ?>&nbsp;</td>
+                <td class="dataTableHeadingContent" align="center" width="100"><?php echo TABLE_HEADING_SORT_ORDER; ?>&nbsp;</td>
+                <td class="dataTableHeadingContent" align="right" width="60"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
 $count_left=0;
@@ -138,7 +140,7 @@ if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
     }
 ?>
                 <td class="dataTableContent"><?php echo $configuration['configuration_title']; ?></td>
-                <td class="dataTableContent">
+                <td class="dataTableContent" align="center">
 <?php
       if ($configuration['configuration_value'] == 'yes') {
         echo tep_image(DIR_WS_IMAGES . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'action=setflag&flag=no&cID=' . $configuration['configuration_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
@@ -146,7 +148,7 @@ if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
         echo '<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'action=setflag&flag=yes&cID=' . $configuration['configuration_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
       }
 ?></td>
-                <td class="dataTableContent" align="right"><?php
+                <td class="dataTableContent" align="center"><?php
       if ($configuration['configuration_column'] == 'left') {
         echo tep_image(DIR_WS_IMAGES . 'icon_infobox_green.gif', IMAGE_INFOBOX_STATUS_GREEN, 14, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'action=setflagcolumn&flag=right&cID=' . $configuration['configuration_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_infobox_red_light.gif', IMAGE_INFOBOX_STATUS_RED_LIGHT, 14, 10) . '</a>';
       } else {
@@ -155,7 +157,7 @@ if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
 ?></td>
               <!--  <td class="dataTableContent" align="right"><?php echo htmlspecialchars($cfgcol); ?></td> -->
                 <td class="dataTableContent" align="center"><?php echo htmlspecialchars($cfgloc); ?></td>
-                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($configuration['configuration_id'] == $cInfo->configuration_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $configuration['configuration_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($configuration['configuration_id'] == $cInfo->configuration_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $configuration['configuration_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
   }
@@ -166,42 +168,50 @@ if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
   $heading = array();
   $contents = array();
   switch ($_GET['action']) {
-    case 'edit':
+	case 'edit':
       $heading[] = array('text' => '<b>' . $cInfo->configuration_title . '</b>');
 
       $value_field_value =  (tep_cfg_select_option(array('yes', 'no'),$cInfo->configuration_value));
 
-      $value_field_column =  tep_draw_input_field('configuration_column', $cInfo->configuration_column);
-
-
-      $value_field_location =  tep_draw_input_field('location', $cInfo->location);
-
       $contents = array('form' => tep_draw_form('configuration', FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id . '&action=save'));
       $contents[] = array('text' => TEXT_INFO_EDIT_INTRO);
-      $contents[] = array('text' => '<br><b> Activate this box? </b><br>' . $value_field_value . '</b><br><br><b> Which column? </b><br>' . $value_field_column . '<br><br><b> What order? </b><br>' . $value_field_location);
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
-      break;
+      
+	  $contents[] = array('text' => '<br><span title="' . TEXT_HELP_HEADING_NEW_INFOBOX . '|' . TEXT_INFOBOX_HELP_FILENAME . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><b>' . TEXT_INFOBOX_FILENAME . '</b><br> ' . tep_draw_input_field('configuration_title', $cInfo->configuration_title, '', 'true'));
+	  	  
+	  $contents[] = array('text' => '<br><span title="' . TEXT_HELP_HEADING_NEW_INFOBOX . '|' . TEXT_INFOBOX_HELP_DEFINE . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><b>' . TEXT_INFOBOX_DEFINE_KEY . '</b><br>' . tep_draw_input_field('configuration_key', $cInfo->configuration_key, '', 'true'));
+	  
+	  $contents[] = array('text' => '<br><span title="' . TEXT_HELP_HEADING_NEW_INFOBOX . '|' . TEXT_INFOBOX_HELP_COLUMN . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><b>' . TEXT_INFOBOX_COLUMN . '</b><br>' . tep_draw_input_field('configuration_column', $cInfo->configuration_column, 'maxlength="5"', 'true'));
+	  
+	  $contents[] = array('text' => '<br><span title="' . TEXT_HELP_HEADING_NEW_INFOBOX . '|' . TEXT_INFOBOX_HELP_POSITION . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><b>' . TEXT_INFOBOX_POSITION . '</b><br>' . tep_draw_input_field('location',$cInfo->location, '', 'true'));
 
-case 'new':
+	  $contents[] = array('text' => '<b>' . TEXT_INFOBOX_ACTIVE . '</b><br>' . $value_field_value . '</b><br><br>');
+	  
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+    break;
+
+	case 'new':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_INFOBOX . '</b>');
 
       $value_field_value =  (tep_cfg_select_option(array('yes', 'no'),$cInfo->configuration_value));
 
-
-      $contents = array('form' => tep_draw_form('TABLE_THEME_CONFIGURATION', FILENAME_INFOBOX_CONFIGURATION, tep_get_all_get_params(array('action')) . 'action=insert', 'post', 'onSubmit="return check_form();"') . tep_draw_hidden_field('cID', $cInfo->configuration_id));
+      $contents = array('form' => tep_draw_form('TABLE_THEME_CONFIGURATION', FILENAME_INFOBOX_CONFIGURATION, tep_get_all_get_params(array('action')) . 'action=insert', 'post', 'onSubmit="javascript check_form();"') . tep_draw_hidden_field('cID', $cInfo->configuration_id));
 
       $contents[] = array('text' => TEXT_INFO_INSERT_INTRO);
-      $contents[] = array('text' => '<br><a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_POPUP_INFOBOX_HELP,'action=filename') . '\')">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a><b>   Filename</b><br> ' . tep_draw_input_field('configuration_title','what\'s new','','true'));
-      $contents[] = array('text' => '<br><a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_POPUP_INFOBOX_HELP,'action=heading') . '\')">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a><b>  The infoBox heading? </b>' . tep_draw_input_field('box_heading','What\'s New','','true'));
-      $contents[] = array('text' => '<br><a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_POPUP_INFOBOX_HELP,'action=define') . '\')">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a><b>  Define key </b><br>' . tep_draw_input_field('configuration_key','BOX_HEADING_????','','true'));
+      $contents[] = array('text' => '<br><span title="' . TEXT_HELP_HEADING_NEW_INFOBOX . '|' . TEXT_INFOBOX_HELP_FILENAME . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><b>' . TEXT_INFOBOX_FILENAME . '</b><br> ' . tep_draw_input_field('configuration_title','what\'s new','','true'));
+	  
+	  //This is set in languages - otherwise BOX_HEADINGS could not be multi-lingual
+      //$contents[] = array('text' => '<br><span title="' . TEXT_HELP_HEADING_NEW_INFOBOX . '|' . TEXT_INFOBOX_HELP_HEADING . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><b>The infoBox heading? </b>' . tep_draw_input_field('box_heading','What\'s New','','true'));
+	  
+      $contents[] = array('text' => '<br><span title="' . TEXT_HELP_HEADING_NEW_INFOBOX . '|' . TEXT_INFOBOX_HELP_DEFINE . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><b>' . TEXT_INFOBOX_DEFINE_KEY . '</b><br>' . tep_draw_input_field('configuration_key','BOX_HEADING_????','','true'));
 
-      $contents[] = array('text' => '<br><a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_POPUP_INFOBOX_HELP,'action=column') . '\')">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a><b>  Which column? </b><br>' . tep_draw_input_field('configuration_column','','maxlength="5"','true'));
-      $contents[] = array('text' => '<br><a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_POPUP_INFOBOX_HELP,'action=position') . '\')">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a><b>  what Position? </b><br>' . tep_draw_input_field('location'));
+      $contents[] = array('text' => '<br><span title="' . TEXT_HELP_HEADING_NEW_INFOBOX . '|' . TEXT_INFOBOX_HELP_COLUMN . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><b>' . TEXT_INFOBOX_COLUMN . '</b><br>' . tep_draw_input_field('configuration_column','left','maxlength="5"','true'));
+	  
+      $contents[] = array('text' => '<br><span title="' . TEXT_HELP_HEADING_NEW_INFOBOX . '|' . TEXT_INFOBOX_HELP_POSITION . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><b>' . TEXT_INFOBOX_POSITION . '</b><br>' . tep_draw_input_field('location','10'));
 
-      $contents[] = array('text' => '<br><a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_POPUP_INFOBOX_HELP,'action=active') . '\')">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a><b>  Set this box Active? </b><br>' . $value_field_value . '</b><br>');
+      $contents[] = array('text' => '<br><span title="' . TEXT_HELP_HEADING_NEW_INFOBOX . '|' . TEXT_INFOBOX_HELP_ACTIVE . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><b>' . TEXT_INFOBOX_ACTIVE . '</b><br>' . $value_field_value . '</b><br>');
 
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
-      break;
+    break;
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_INFOBOX . '</b>');
 
@@ -209,7 +219,7 @@ case 'new':
       $contents[] = array('text' => TEXT_INFO_DELETE_INTRO);
       $contents[] = array('align' => 'center','text' => '<br><b>' . $cInfo->configuration_title . '</b>');
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
-      break;
+    break;
 
     default:
       if (is_object($cInfo)) {
@@ -222,7 +232,7 @@ case 'new':
         if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
         $contents[] = array('text' => '<br>There are currently <br>'. $count_left . ' boxes in the left column and <br>'. $count_right . ' boxes in the right column');
       }
-      break;
+    break;
   }
 
   if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
@@ -253,48 +263,3 @@ case 'new':
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
-<SCRIPT language=JavaScript>
-
-function check_form() {
-  var error = 0;
-  var error_message = "<?php echo JS_ERROR; ?>";
-
-  var configuration_title = document.theme_configuration.configuration_title.value;
-  var box_heading = document.theme_configuration.box_heading.value;
-  var configuration_key = document.theme_configuration.configuration_key.value;
-  var configuration_column = document.theme_configuration.configuration_column.value;
-
-  if (configuration_title == "") {
-    error_message = error_message + "<?php echo JS_INFO_BOX_FILENAME; ?>";
-    error = 1;
-  }
-
-  if (box_heading == "") {
-    error_message = error_message + "<?php echo JS_INFO_BOX_HEADING; ?>";
-    error = 1;
-  }
-
-
-  if (configuration_key == "" || configuration_key == "BOX_HEADING_????") {
-    error_message = error_message + "<?php echo JS_BOX_HEADING; ?>";
-    error = 1;
-  }
-
-  if (configuration_column != "left" && configuration_column != "right") {
-    error_message = error_message + "<?php echo JS_BOX_LOCATION; ?>";
-    error = 1;
-  }
-
-  if (error == 1) {
-    alert(error_message);
-    return false;
-  } else {
-    return true;
-  }
-}
-
-function popupWindow(url) {
-  window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=500,height=280,screenX=150,screenY=150,top=150,left=150')
-}
-
-//--></script>

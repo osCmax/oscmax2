@@ -142,43 +142,19 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='
 } // end Show/Hide Right Column
 ?>
   </tr>
-</table>
 <!-- body_eof //-->
 
+<!-- footer //-->
 <?php
 // BOF Added: Down for Maintenance Hide footer.php if not to show
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false') {
 ?>
-<!-- footer //-->
-  <?php require(DIR_WS_INCLUDES . 'counter.php'); ?>
-<table border="0" width="100%" cellspacing="0" cellpadding="1">
-  <tr class="footer">
-    <td class="footer">&nbsp;&nbsp;<?php echo strftime(DATE_FORMAT_LONG); ?>&nbsp;&nbsp;</td>
-    <td align="right" class="footer">&nbsp;&nbsp;<?php echo $counter_now . ' ' . FOOTER_TEXT_REQUESTS_SINCE . ' ' . $counter_startdate_formatted; ?>&nbsp;&nbsp;</td>
-  </tr>
-</table>
-<br>
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    <td align="center" class="smallText">  
-     <br>
-<?php
-/*
-  The following copyright announcement can only be
-  appropriately modified or removed if the layout of
-  the site theme has been modified to distinguish
-  itself from the default osCommerce-copyrighted
-  theme or the default osCMax copyrighted theme.
 
-  Please leave this comment intact together with the
-  following copyright announcement.
-*/
-
-  echo FOOTER_TEXT_BODY
-?>
-    </td>
-  </tr>
+<!-- Page Module Controller -->
+	<?php include (DIR_WS_MODULES . FILENAME_COMMON_PAGE_MODULES); ?>
+<!-- Page Module Controller -->
 </table>
+
 <?php
   if ($banner = tep_banner_exists('dynamic', '468x50')) {
 ?>

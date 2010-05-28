@@ -2565,3 +2565,5 @@ INSERT INTO pm_configuration VALUES (3, 'Upcoming Products', 'Upcoming products 
 INSERT INTO pm_configuration VALUES (4, 'Cross Sell Module', 'Cross Sell Module', 'xsell_products.php', 'yes', 'product_info', 1, now(), now());
 INSERT INTO pm_configuration VALUES (5, 'Also Purchased Module', 'Also Purchased Module', 'also_purchased_products.php', 'yes', 'product_info', 2, now(), now());
 INSERT INTO pm_configuration VALUES (6, 'Previous Next Module', 'Previous Next Module', 'products_next_previous.php', 'yes', 'product_info', 3, now(), now());
+INSERT INTO pm_configuration VALUES (7, 'Counter', '', 'counter.php', 'yes', 'all', 2, now(), now());
+INSERT INTO pm_configuration VALUES (8, 'Copyright', '', 'copyright.php', 'yes', 'all', 3, now(), now());

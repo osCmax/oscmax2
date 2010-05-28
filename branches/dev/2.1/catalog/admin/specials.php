@@ -35,9 +35,8 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
         $products_id = tep_db_prepare_input($_POST['products_id']);
         $products_price = tep_db_prepare_input($_POST['products_price']);
         $specials_price = tep_db_prepare_input($_POST['specials_price']);
-        $day = tep_db_prepare_input($_POST['day']);
-        $month = tep_db_prepare_input($_POST['month']);
-        $year = tep_db_prepare_input($_POST['year']);
+        $expires_date = tep_db_prepare_input($_POST['expires_date']);
+		
 // BOF: MOD - Separate Pricing Per Customer
         $customers_group=tep_db_prepare_input($_POST['customers_group']);
 		
@@ -65,46 +64,31 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
 		//  $specials_price = $specials_price;
         }
 
-        $expires_date = '';
-        if (tep_not_null($day) && tep_not_null($month) && tep_not_null($year)) {
-          $expires_date = $year;
-          $expires_date .= (strlen($month) == 1) ? '0' . $month : $month;
-          $expires_date .= (strlen($day) == 1) ? '0' . $day : $day;
-        }
 // BOF: MOD - Separate Pricing Per Customer
 /*      tep_db_query("insert into " . TABLE_SPECIALS . " (products_id, specials_new_products_price, specials_date_added, expires_date, status) values ('" . (int)$products_id . "', '" . tep_db_input($specials_price) . "', now(), '" . tep_db_input($expires_date) . "', '1')"); */
         tep_db_query("insert into " . TABLE_SPECIALS . " (products_id, specials_new_products_price, specials_date_added, expires_date, status, customers_group_id) values ('" . (int)$products_id . "', '" . tep_db_input($specials_price) . "', now(), '" . tep_db_input($expires_date) . "', '1', " . (int)$customers_group . ")");
 // EOF: MOD - Separate Pricing Per Customer
         tep_redirect(tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page']));
-        break;
+      break;
       case 'update':
         $specials_id = tep_db_prepare_input($_POST['specials_id']);
         $products_price = tep_db_prepare_input($_POST['products_price']);
         $specials_price = tep_db_prepare_input($_POST['specials_price']);
-        $day = tep_db_prepare_input($_POST['day']);
-        $month = tep_db_prepare_input($_POST['month']);
-        $year = tep_db_prepare_input($_POST['year']);
-
+        $expires_date = tep_db_prepare_input($_POST['expires_date']);
+      
         if (substr($specials_price, -1) == '%') $specials_price = ($products_price - (($specials_price / 100) * $products_price));
-
-        $expires_date = '';
-        if (tep_not_null($day) && tep_not_null($month) && tep_not_null($year)) {
-          $expires_date = $year;
-          $expires_date .= (strlen($month) == 1) ? '0' . $month : $month;
-          $expires_date .= (strlen($day) == 1) ? '0' . $day : $day;
-        }
 
         tep_db_query("update " . TABLE_SPECIALS . " set specials_new_products_price = '" . tep_db_input($specials_price) . "', specials_last_modified = now(), expires_date = '" . tep_db_input($expires_date) . "' where specials_id = '" . (int)$specials_id . "'");
 
         tep_redirect(tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $specials_id));
-        break;
+      break;
       case 'deleteconfirm':
         $specials_id = tep_db_prepare_input($_GET['sID']);
 
         tep_db_query("delete from " . TABLE_SPECIALS . " where specials_id = '" . (int)$specials_id . "'");
 
         tep_redirect(tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page']));
-        break;
+      break;
     }
   }
 ?>
@@ -115,14 +99,6 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
-<?php
-  if ( ($action == 'new') || ($action == 'edit') ) {
-?>
-<link rel="stylesheet" type="text/css" href="includes/javascript/calendar.css">
-<script language="JavaScript" src="includes/javascript/calendarcode.js"></script>
-<?php
-  }
-?>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
 <div id="popupcalendar" class="text"></div>
@@ -215,7 +191,7 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_SPECIALS_EXPIRES_DATE; ?>&nbsp;</td>
-            <td class="main"><?php echo tep_draw_input_field('day', (isset($sInfo->expires_date) ? substr($sInfo->expires_date, 8, 2) : ''), 'size="2" maxlength="2" class="cal-TextBox"') . tep_draw_input_field('month', (isset($sInfo->expires_date) ? substr($sInfo->expires_date, 5, 2) : ''), 'size="2" maxlength="2" class="cal-TextBox"') . tep_draw_input_field('year', (isset($sInfo->expires_date) ? substr($sInfo->expires_date, 0, 4) : ''), 'size="4" maxlength="4" class="cal-TextBox"'); ?><a class="so-BtnLink" href="javascript:calClick();return false;" onMouseOver="calSwapImg('BTN_date', 'img_Date_OVER',true);" onMouseOut="calSwapImg('BTN_date', 'img_Date_UP',true);" onClick="calSwapImg('BTN_date', 'img_Date_DOWN');showCalendar('new_special','dteWhen','BTN_date');return false;"><?php echo tep_image(DIR_WS_IMAGES . 'cal_date_up.gif', 'Calendar', '22', '17', 'align="absmiddle" name="BTN_date"'); ?></a></td>
+            <td><?php echo tep_draw_input_field('expires_date', (isset($sInfo->expires_date) ? $sInfo->expires_date : ''), 'id="specials"'); ?></td>
           </tr>
         </table></td>
       </tr>

@@ -341,7 +341,6 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <script language="javascript" src="includes/general.js"></script>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
-<div id="spiffycalendar" class="text"></div>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -624,13 +623,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       default: $in_status = true; $out_status = false;
     }
 ?>
-<link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
-<script language="JavaScript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
-<script language="javascript">
-<!--
-  var dateAvailable = new ctlSpiffyCalendarBox("dateAvailable", "new_article", "articles_date_available","btnDate1","<?php echo $aInfo->articles_date_available; ?>",scBTNMODE_CUSTOMBLUE);
--->
-</script>
+
     <?php echo tep_draw_form('new_article', FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($_GET['aID']) ? '&aID=' . $_GET['aID'] : '') . '&action=article_preview', 'post', 'enctype="multipart/form-data"'); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
@@ -655,7 +648,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_ARTICLES_DATE_AVAILABLE; ?><br><small>(YYYY-MM-DD)</small></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;'; ?><script language="javascript">dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;'; ?><?php echo tep_draw_input_field('articles_date_available', (isset($sInfo->articles_date_available) ? $sInfo->articles_date_available : ''), 'id="articles"'); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>

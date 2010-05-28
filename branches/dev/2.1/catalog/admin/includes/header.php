@@ -23,6 +23,12 @@
         }).superfish();  // call supersubs first, then superfish, so that subs are 
                          // not display:none when measuring. Call before initialising 
                          // containing tabs for same reason. 
+
+// Datepickers
+    $('#product_available').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 2});
+    $('#specials').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 2});
+	$('#articles').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 2});
+
 // Tabs
     $("#searchtabs").tabs();
     $("#tabs").tabs();
@@ -46,6 +52,7 @@
     $("#langtabs").tabs();
 /* Tabs for Customer Groups */
     $("#qpbpp").tabs();
+
 
 }); 
 

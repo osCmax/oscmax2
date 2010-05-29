@@ -330,6 +330,7 @@ define('IMAGE_CANCEL', 'Cancel');
 define('IMAGE_CONFIRM', 'Confirm');
 define('IMAGE_COPY', 'Copy');
 define('IMAGE_COPY_TO', 'Copy To');
+define('IMAGE_CREATE_ORDER', 'Create Order');
 define('IMAGE_DETAILS', 'Details');
 define('IMAGE_DELETE', 'Delete');
 define('IMAGE_EDIT', 'Edit');

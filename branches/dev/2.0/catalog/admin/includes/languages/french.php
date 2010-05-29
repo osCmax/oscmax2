@@ -381,6 +381,7 @@ define('IMAGE_CANCEL', 'Annuler');
 define('IMAGE_CONFIRM', 'Valider');
 define('IMAGE_COPY', 'Copier');
 define('IMAGE_COPY_TO', 'Copier dans');
+define('IMAGE_CREATE_ORDER', 'Create Order');
 define('IMAGE_DEFINE', 'D&eacute;finir');
 define('IMAGE_DELETE', 'Supprimer');
 define('IMAGE_EDIT', 'Modifier');

@@ -1678,7 +1678,7 @@ INSERT INTO configuration VALUES (109,'Display Product Quantity','PRODUCT_LIST_Q
 INSERT INTO configuration VALUES (110,'Display Product Weight','PRODUCT_LIST_WEIGHT','0','Do you want to display the Product Weight?','8','7',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (111,'Display Buy Now column','PRODUCT_LIST_BUY_NOW','4','Do you want to display the Buy Now column?','8','8',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (112,'Display Category/Manufacturer Filter (0=disable; 1=enable)','PRODUCT_LIST_FILTER','1','Do you want to display the Category/Manufacturer Filter?','8','9',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (113,'Location of Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)','PREV_NEXT_BAR_LOCATION','2','Sets the location of the Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)','8','10',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (113,'Location of Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)','PREV_NEXT_BAR_LOCATION','3','Sets the location of the Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)','8','10',NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (114,'Check stock level','STOCK_CHECK','true','Check to see if sufficent stock is available','9','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (115,'Subtract stock','STOCK_LIMITED','true','Subtract product in stock by product orders','9','2',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');

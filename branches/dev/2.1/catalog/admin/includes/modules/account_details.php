@@ -330,7 +330,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
      }
 ?>
              <tr>
-                <td class="main"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
+                <td class="main"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></span></td>
 				<?php // +Country-State Selector ?>
                 <td class="main">
 <?php

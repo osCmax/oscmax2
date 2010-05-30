@@ -179,9 +179,9 @@ function DisplayPackages($activeid,$error) {
         echo '<td class="dataTableContent" align="center"><br>' . $packages[$i]['cost'] . '</td>';
 
         if ($activeid == $packages[$i]['id'] ) { 
-            echo '<td>' . tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); 
+            echo '<td>' . tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); 
         } else { 
-            echo '<td><a href="' . tep_href_link(FILENAME_PACKAGING, 'id=' . $packages[$i]['id'] ). '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', ICON_INFO) . '</a>'; 
+            echo '<td><a href="' . tep_href_link(FILENAME_PACKAGING, 'id=' . $packages[$i]['id'] ). '">' . tep_image(DIR_WS_ICONS . 'information.png', ICON_INFO) . '</a>'; 
         }
     }
     echo '</td></tr></table><br>'."\n";

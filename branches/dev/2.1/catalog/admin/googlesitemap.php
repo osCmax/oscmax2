@@ -60,12 +60,12 @@
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo TITLE_GOOGLE_SITEMAPS; ?></td>
-            <td class="pageHeading" align="right"><img src="images/google-sitemaps.gif" width="110" height="48"></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table>
           <table width="100%"  border="0" cellpadding="0" cellspacing="0" class="main">
             <tr>
-              <td width="78%" align="left" valign="top"><p><strong><?php echo OVERVIEW_TITLE_GOOGLE_SITEMAPS; ?></strong></p>
+              <td width="75%" align="left" valign="top"><p><strong><?php echo OVERVIEW_TITLE_GOOGLE_SITEMAPS; ?></strong></p>
                 <p><?php echo OVERVIEW_GOOGLE_SITEMAPS; ?></p>
                 <p><strong><?php echo INSTRUCTIONS_TITLE_GOOGLE_SITEMAPS; ?></strong></p>
                 <p><strong><font color="#FF0000"><?php echo INSTRUCTIONS_STEP1_GOOGLE_SITEMAPS; ?></font></strong><?php echo INSTRUCTIONS_CLICK_GOOGLE_SITEMAPS; ?><a href="javascript:(void 0)" class="splitPageLink" onClick="window.open('<?php echo $HTTP_SERVER . DIR_WS_CATALOG . $url;?>','google','resizable=0,statusbar=5,width=960,height=310,top=0,left=50,scrollbars=yes')"><strong><?php echo EXEC_GOOGLE_SITEMAPS; ?></strong></a><?php echo INSTRUCTIONS_END1_GOOGLE_SITEMAPS; ?></p>
@@ -73,14 +73,14 @@
                 <p><strong><font color="#FF0000"><?php echo INSTRUCTIONS_STEP2_GOOGLE_SITEMAPS; ?></font></strong><?php echo INSTRUCTIONS_CLICK_GOOGLE_SITEMAPS; ?><a href="javascript:(void 0)"  onClick="window.open('<?php echo $returned_url = GenerateSubmitURL();?>','google','resizable=1,statusbar=5,width=400,height=200,top=0,left=50,scrollbars=yes')" class="splitPageLink"><strong><?php echo EXEC_GOOGLE_SITEMAPS; ?></strong></a><?php echo INSTRUCTIONS_END2_GOOGLE_SITEMAPS; ?></p>
                 <p><?php echo INSTRUCTIONS_COMPLETE_GOOGLE_SITEMAPS; ?></p>
                 <p>&nbsp;</p></td>
-              <td width="22%" align="right" valign="top"><table width="98%"  border="0" cellpadding="1" cellspacing="0" bgcolor="#E1EEFF">
-                <tr>
-                  <td align="center" class="smallText"> <strong><?php echo WHATIS_TITLE_GOOGLE_SITEMAPS; ?></strong></td>
+              <td width="25%" align="right" valign="top"><table width="100%"  border="0" cellpadding="0" cellspacing="0">
+                <tr class="infoBoxHeading">
+                  <td align="left" class="smallText"> <strong><?php echo WHATIS_TITLE_GOOGLE_SITEMAPS; ?></strong></td>
                 </tr>
                 <tr>
-                  <td class="smallText"><table width="100%"  border="0" cellpadding="4" cellspacing="0" bgcolor="#F0F8FF">
+                  <td class="smallText"><table width="100%"  border="0" cellpadding="4" cellspacing="0">
                     <tr>
-                      <td align="left" valign="top" class="smallText"><p><?php echo WHATIS_TEXT_GOOGLE_SITEMAPS; ?></p>
+                      <td align="left" valign="top" class="infoBoxContent"><p><?php echo WHATIS_TEXT_GOOGLE_SITEMAPS; ?></p>
                         <p><?php echo WHATIS_REGISTER_GOOGLE_SITEMAPS; ?><strong><a href="www.google.com/webmasters/tools/" target="_blank" class="splitPageLink"><?php echo EXEC_GOOGLE_SITEMAPS; ?></a></strong>.</p>
                         </td>
                     </tr>

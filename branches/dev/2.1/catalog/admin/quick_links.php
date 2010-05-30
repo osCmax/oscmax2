@@ -113,7 +113,7 @@ $Id: quick_links.php 3 2010-03-31 user pgm
                 <td class="dataTableContent"><?php echo $links['quick_links_link']; ?></td>
                 <td class="dataTableContent"><?php echo $links['quick_links_target']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo $links['quick_links_sort_order']; ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($trInfo) && is_object($trInfo) && ($links['quick_links_id'] == $trInfo->quick_links_id)) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $links['quick_links_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if (isset($trInfo) && is_object($trInfo) && ($links['quick_links_id'] == $trInfo->quick_links_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $links['quick_links_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
   }

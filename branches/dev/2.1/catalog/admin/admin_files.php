@@ -115,7 +115,7 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
     }
 ?>
                 <td class="dataTableContent"><?php echo $files['admin_files_name']; ?></td>
-                <td class="dataTableContent" align="right"><?php if ( (is_object($fInfo)) && ($files['admin_files_id'] == $fInfo->admin_files_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&fID=' . $files['admin_files_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($fInfo)) && ($files['admin_files_id'] == $fInfo->admin_files_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&fID=' . $files['admin_files_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
   }
@@ -187,20 +187,20 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
                 <td class="dataTableContent" align="center"><?php
                                                if ( (is_object($cInfo)) && ($_GET['cID'] == $boxes[$i]['admin_boxes_id'])) {
                                                  if (substr($boxes[$i]['admin_boxes_id'], 0,1) == 'b') {
-                                                   echo tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', STATUS_BOX_NOT_INSTALLED, 10, 10) . '&nbsp;<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cID=' . $boxes[$i]['admin_boxes_id'] . '&box=' . $boxes[$i]['admin_boxes_name'] . '&action=box_store') . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', STATUS_BOX_INSTALL, 10, 10) . '</a>';
+                                                   echo tep_image(DIR_WS_ICONS . 'icon_status_red.gif', STATUS_BOX_NOT_INSTALLED, 10, 10) . '&nbsp;<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cID=' . $boxes[$i]['admin_boxes_id'] . '&box=' . $boxes[$i]['admin_boxes_name'] . '&action=box_store') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', STATUS_BOX_INSTALL, 10, 10) . '</a>';
                                                  } else {
-                                                   echo '<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cID=' . $_GET['cID'] . '&action=box_remove') . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', STATUS_BOX_REMOVE, 10, 10) . '</a>&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_green.gif', STATUS_BOX_INSTALLED, 10, 10);
+                                                   echo '<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cID=' . $_GET['cID'] . '&action=box_remove') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', STATUS_BOX_REMOVE, 10, 10) . '</a>&nbsp;' . tep_image(DIR_WS_ICONS .  'icon_status_green.gif', STATUS_BOX_INSTALLED, 10, 10);
                                                  }
                                                } else {
                                                  if (substr($boxes[$i]['admin_boxes_id'], 0,1) == 'b') {
-                                                   echo tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', '', 10, 10) . '&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', '', 10, 10) . '</a>';
+                                                   echo tep_image(DIR_WS_ICONS . 'icon_status_red.gif', '', 10, 10) . '&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', '', 10, 10) . '</a>';
                                                  } else {
-                                                   echo tep_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', '', 10, 10) . '</a>&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_green.gif', '', 10, 10);
+                                                   echo tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', '', 10, 10) . '</a>&nbsp;' . tep_image(DIR_WS_ICONS .  'icon_status_green.gif', '', 10, 10);
                                                  }
                                                }
                                              ?>
                 </td>
-                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($boxes[$i]['admin_boxes_id'] == $cInfo->admin_boxes_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cID=' . $db_cat['admin_boxes_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($boxes[$i]['admin_boxes_id'] == $cInfo->admin_boxes_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cID=' . $db_cat['admin_boxes_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
    $i++;

@@ -862,7 +862,7 @@ document.onmousemove=positiontip
            <td class="dataTableHeadingContent" valign="top" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_SHIPPING_ADDRESS); ?>')"; onMouseout="hideddrivetip()"><?php echo ENTRY_SHIPPING_ADDRESS; ?> 
              <script language="JavaScript" type="text/javascript">
                    <!--
-                    document.write("<img src=\"images/icon_info.gif\" border= \"0\" >");
+                    document.write("<img src=\"images/icons/information.png\" border= \"0\" >");
                  //-->
                   </script>
 
@@ -1007,7 +1007,7 @@ document.onmousemove=positiontip
 
           <script language="JavaScript" type="text/javascript">
                    <!--
-                    document.write("<img src=\"images/icon_info.gif\" border= \"0\">");
+                    document.write("<img src=\"images/icons/information.png\" border= \"0\">");
                  //-->
                   </script>
 
@@ -1018,7 +1018,7 @@ document.onmousemove=positiontip
 
             <script language="JavaScript" type="text/javascript">
                    <!--
-                    document.write("<img src=\"images/icon_info.gif\" border= \"0\" >");
+                    document.write("<img src=\"images/icons/information.png\" border= \"0\" >");
                  //-->
                   </script>
 
@@ -1169,27 +1169,27 @@ document.onmousemove=positiontip
       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_TAX; ?></td>
       <td class="dataTableHeadingContent" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_BASE_PRICE); ?>')"; onMouseout="hideddrivetip()"><?php  echo TABLE_HEADING_BASE_PRICE; ?> <script language="JavaScript" type="text/javascript">
       <!--
-      document.write("<img src=\"images/icon_info.gif\" border= \"0\" >");
+      document.write("<img src=\"images/icons/information.png\" border= \"0\" >");
       //-->
       </script></td>
       <td class="dataTableHeadingContent" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_PRICE_EXCL); ?>')"; onMouseout="hideddrivetip()"><?php  echo TABLE_HEADING_UNIT_PRICE; ?> <script language="JavaScript" type="text/javascript">
       <!--
-      document.write("<img src=\"images/icon_info.gif\" border= \"0\" >");
+      document.write("<img src=\"images/icons/information.png\" border= \"0\" >");
       //-->
       </script></td>
       <td class="dataTableHeadingContent" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_PRICE_INCL); ?>')"; onMouseout="hideddrivetip()"><?php  echo TABLE_HEADING_UNIT_PRICE_TAXED; ?> <script language="JavaScript" type="text/javascript">
       <!--
-      document.write("<img src=\"images/icon_info.gif\" border= \"0\" >");
+      document.write("<img src=\"images/icons/information.png\" border= \"0\" >");
       //-->
       </script></td>
       <td class="dataTableHeadingContent" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_TOTAL_EXCL); ?>')"; onMouseout="hideddrivetip()"><?php  echo TABLE_HEADING_TOTAL_PRICE; ?> <script language="JavaScript" type="text/javascript">
       <!--
-      document.write("<img src=\"images/icon_info.gif\" border= \"0\" >");
+      document.write("<img src=\"images/icons/information.png\" border= \"0\" >");
       //-->
       </script></td>
       <td class="dataTableHeadingContent" onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_TOTAL_INCL); ?>')"; onMouseout="hideddrivetip()"><?php  echo TABLE_HEADING_TOTAL_PRICE_TAXED; ?> <script language="JavaScript" type="text/javascript">
       <!--
-      document.write("<img src=\"images/icon_info.gif\" border= \"0\" >");
+      document.write("<img src=\"images/icons/information.png\" border= \"0\" >");
       //-->
       </script></td>
     </tr>
@@ -1322,7 +1322,7 @@ document.onmousemove=positiontip
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent" width="15" nowrap onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_TOTALS); ?>')"; onMouseout="hideddrivetip()"> <script language="JavaScript" type="text/javascript">
                 <!--
-                document.write("<img src=\"images/icon_info.gif\" border= \"0\" >");
+                document.write("<img src=\"images/icons/information.png\" border= \"0\" >");
                 //-->
                 </script></td>
                 <td class="dataTableHeadingContent" nowrap><?php echo TABLE_HEADING_OT_TOTALS; ?></td>

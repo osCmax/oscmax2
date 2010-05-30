@@ -56,13 +56,13 @@
   $show_type[] = array('id' => 'cust', 'text' => TEXT_CUSTOMERS);
 
 // Images used for status lights
-  $status_active_cart = 'icon_status_cart.gif'; // replace word cart with green if you don't want the new icon.
-  $status_active_cart_top = 'icon_status_cart_top.gif';
-  $status_inactive_cart = 'icon_status_cart_red.gif';
-  $status_active_nocart = 'summary_customers.gif';
-  $status_inactive_nocart = 'summary_customers_red.gif';
-  $status_active_bot = 'icon_status_green_border_light.gif';
-  $status_inactive_bot = 'icon_status_red_border_light.gif';
+  $status_active_cart = 'icons/icon_status_cart.gif'; // replace word cart with green if you don't want the new icon.
+  $status_active_cart_top = 'icons/icon_status_cart_top.gif';
+  $status_inactive_cart = 'icons/icon_status_cart_red.gif';
+  $status_active_nocart = 'icons/summary_customers.gif';
+  $status_inactive_nocart = 'icons/summary_customers_red.gif';
+  $status_active_bot = 'icons/icon_status_green_border_light.gif';
+  $status_inactive_bot = 'icons/icon_status_red_border_light.gif';
 
 // Text color used for table entries - different colored text for different users
 //   Named colors and Hex values should work fine here

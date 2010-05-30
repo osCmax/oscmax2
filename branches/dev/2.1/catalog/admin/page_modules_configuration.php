@@ -125,14 +125,14 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
                 <td class="dataTableContent" align="center">
 					<?php
                           if ($links['pm_active'] == 'yes') {
-                            echo tep_image(DIR_WS_IMAGES . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&flag=no&page=1&tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+                            echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&flag=no&page=1&tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
                           } else {
-                            echo '<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&flag=yes&page=1&tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+                            echo '<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&flag=yes&page=1&tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
                           }
                     ?>
 				</td>              
                 <td class="dataTableContent" align="center"><?php echo $links['pm_sort_order']; ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($trInfo) && is_object($trInfo) && ($links['pm_id'] == $trInfo->pm_id)) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if (isset($trInfo) && is_object($trInfo) && ($links['pm_id'] == $trInfo->pm_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
   }

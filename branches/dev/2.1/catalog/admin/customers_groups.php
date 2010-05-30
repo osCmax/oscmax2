@@ -574,7 +574,7 @@ function check_form() {
       }
 ?>
                 <td class="dataTableContent"><?php echo $customers_groups['customers_group_name']; ?></td>
-                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($customers_groups['customers_group_id'] == $cInfo->customers_group_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link('customers_groups.php', tep_get_all_get_params(array('cID')) . 'cID=' . $customers_groups['customers_group_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($customers_groups['customers_group_id'] == $cInfo->customers_group_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link('customers_groups.php', tep_get_all_get_params(array('cID')) . 'cID=' . $customers_groups['customers_group_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }

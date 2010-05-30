@@ -75,7 +75,7 @@ $Id: paypal_ipn.php 3 2006-05-27 04:59:07Z user $
                 <td class="dataTableContent"> <?php echo paypal_ipn::get_name('txn_type_name','txn_type_id',$ipn_trans['txn_type'],$language,TABLE_PAYPAL_IPN_TXN_TYPE); ?>
                 <td class="dataTableContent"><?php echo paypal_ipn::get_name('payment_status_name','payment_status_id',$ipn_trans['payment_status'],$language,TABLE_PAYPAL_IPN_PAYMENT_STATUS); ?></td>
                 <td class="dataTableContent" align="right"><?php echo paypal_ipn::get_name('mc_currency_name','mc_currency_id',$ipn_trans['mc_currency'],$language,TABLE_PAYPAL_IPN_MC_CURRENCY).' '.number_format($ipn_trans['mc_gross'], 2); ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($ipnInfo) && is_object($ipnInfo) && ($ipn_trans['paypal_ipn_id'] == $ipnInfo->paypal_ipn_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_PAYPAL_IPN, 'page=' . $_GET['page'] . '&ipnID=' . $ipn_trans['paypal_ipn_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if (isset($ipnInfo) && is_object($ipnInfo) && ($ipn_trans['paypal_ipn_id'] == $ipnInfo->paypal_ipn_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_PAYPAL_IPN, 'page=' . $_GET['page'] . '&ipnID=' . $ipn_trans['paypal_ipn_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
   }

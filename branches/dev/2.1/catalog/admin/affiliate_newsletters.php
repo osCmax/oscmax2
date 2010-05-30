@@ -290,7 +290,7 @@
       <tr>
         <td><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main" valign="middle"><?php echo tep_image(DIR_WS_IMAGES . 'ani_send_email.gif', IMAGE_ANI_SEND_EMAIL); ?></td>
+            <td class="main" valign="middle"><?php echo tep_image(DIR_WS_ICONS . 'ani_send_email.gif', IMAGE_ANI_SEND_EMAIL); ?></td>
             <td class="main" valign="middle"><b><?php echo TEXT_PLEASE_WAIT; ?></b></td>
           </tr>
         </table></td>
@@ -347,7 +347,7 @@
                 <td class="dataTableContent" align="right"><?php echo $affiliate_newsletters['module']; ?></td>
                 <td class="dataTableContent" align="center"><?php if ($affiliate_newsletters['status'] == '1') { echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK); } else { echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS); } ?></td>
                 <td class="dataTableContent" align="center"><?php if ($affiliate_newsletters['locked'] > 0) { echo tep_image(DIR_WS_ICONS . 'locked.png', ICON_LOCKED); } else { echo tep_image(DIR_WS_ICONS . 'unlocked.png', ICON_UNLOCKED); } ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($nInfo) && is_object($nInfo) && ($affiliate_newsletters['affiliate_newsletters_id'] == $nInfo->affiliate_newsletters_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $affiliate_newsletters['affiliate_newsletters_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if (isset($nInfo) && is_object($nInfo) && ($affiliate_newsletters['affiliate_newsletters_id'] == $nInfo->affiliate_newsletters_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $affiliate_newsletters['affiliate_newsletters_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }

@@ -380,8 +380,8 @@ $Id: html_graphs.php 3 2006-05-27 04:59:07Z user $
     $bars = array();
     $dbars = array();
     for ($i = 0, $n = sizeof($values); $i < $n; $i++) {
-      $bars[$i] = DIR_WS_IMAGES . 'graph_hbar_blue.gif';
-      $dbars[$i] = DIR_WS_IMAGES . 'graph_hbar_red.gif';
+      $bars[$i] = DIR_WS_ICONS . 'graph_hbar_blue.gif';
+      $dbars[$i] = DIR_WS_ICONS . 'graph_hbar_red.gif';
     }
 
     $graph_vals = @array('vlabel'=>TEXT_BANNERS_DATA,
@@ -426,8 +426,8 @@ $Id: html_graphs.php 3 2006-05-27 04:59:07Z user $
     $bars = array();
     $dbars = array();
     for ($i = 0, $n = sizeof($values); $i < $n; $i++) {
-      $bars[$i] = DIR_WS_IMAGES . 'graph_hbar_blue.gif';
-      $dbars[$i] = DIR_WS_IMAGES . 'graph_hbar_red.gif';
+      $bars[$i] = DIR_WS_ICONS . 'graph_hbar_blue.gif';
+      $dbars[$i] = DIR_WS_ICONS . 'graph_hbar_red.gif';
     }
 
     $graph_vals = @array('vlabel'=>TEXT_BANNERS_DATA,
@@ -480,8 +480,8 @@ $Id: html_graphs.php 3 2006-05-27 04:59:07Z user $
     $bars = array();
     $dbars = array();
     for ($i = 0, $n = sizeof($values); $i < $n; $i++) {
-      $bars[$i] = DIR_WS_IMAGES . 'graph_hbar_blue.gif';
-      $dbars[$i] = DIR_WS_IMAGES . 'graph_hbar_red.gif';
+      $bars[$i] = DIR_WS_ICONS . 'graph_hbar_blue.gif';
+      $dbars[$i] = DIR_WS_ICONS . 'graph_hbar_red.gif';
     }
 
     $graph_vals = @array('vlabel'=>TEXT_BANNERS_DATA,
@@ -537,8 +537,8 @@ $Id: html_graphs.php 3 2006-05-27 04:59:07Z user $
     $bars = array();
     $dbars = array();
     for ($i = 0, $n = sizeof($values); $i < $n; $i++) {
-      $bars[$i] = DIR_WS_IMAGES . 'graph_hbar_blue.gif';
-      $dbars[$i] = DIR_WS_IMAGES . 'graph_hbar_red.gif';
+      $bars[$i] = DIR_WS_ICONS . 'graph_hbar_blue.gif';
+      $dbars[$i] = DIR_WS_ICONS . 'graph_hbar_red.gif';
     }
 
     $graph_vals = @array('vlabel'=>TEXT_BANNERS_DATA,

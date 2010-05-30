@@ -123,7 +123,4 @@ a.footer { font-family: Verdana, Arial, sans-serif; font-size: 10px;  background
 .OutofStockAttrib { font-family: Verdana, Arial, sans-serif; font-size: 10px;  background-color: #FFCACB; color: #000000; }
 
 /* Small Ajax-throbber image */
-#indicator {
-    float:right;
-    visibility:hidden;
-}
+#indicator { float:right; visibility:hidden; }

@@ -45,7 +45,7 @@
                   </tr>
                   <tr>
                     <td class="main"><?php echo ENTRY_PASSWORD_NEW; ?></td>
-                    <td class="main"><?php echo tep_draw_password_field('password_new') . '&nbsp;' . (tep_not_null(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_NEW_TEXT . '</span>': ''); ?></td>
+                    <td class="main"><?php echo tep_draw_password_field_st('password_new') . '&nbsp;' . (tep_not_null(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_NEW_TEXT . '</span>': ''); ?></td>
                   </tr>
                   <tr>
                     <td class="main"><?php echo ENTRY_PASSWORD_CONFIRMATION; ?></td>

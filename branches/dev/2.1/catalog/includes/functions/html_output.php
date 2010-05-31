@@ -154,6 +154,12 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
   }
 
 ////
+// Output a form password field with strength tester
+  function tep_draw_password_field_st($name, $value = '', $parameters = 'maxlength="40" id="password_st"') {
+    return tep_draw_input_field($name, $value, $parameters, 'password', false);
+  }
+
+////
 // Output a selection field - alias function for tep_draw_checkbox_field() and tep_draw_radio_field()
   function tep_draw_selection_field($name, $type, $value = '', $checked = false, $parameters = '') {
     global $_GET, $_POST;

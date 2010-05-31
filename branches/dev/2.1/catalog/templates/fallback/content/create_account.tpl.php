@@ -243,7 +243,8 @@
             <td><table border="0" cellspacing="2" cellpadding="2">
               <tr>
                 <td class="main" width="150"><?php echo ENTRY_PASSWORD; ?></td>
-                <td class="main"><?php echo tep_draw_password_field('password') . '&nbsp;' . (tep_not_null(ENTRY_PASSWORD_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_TEXT . '</span>': ''); ?></td>
+                <td class="main"><?php echo tep_draw_password_field_st('password') . '&nbsp;' . (tep_not_null(ENTRY_PASSWORD_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_TEXT . '</span>': ''); ?>
+</td>
               </tr>
               <tr>
                 <td class="main" width="150"><?php echo ENTRY_PASSWORD_CONFIRMATION; ?></td>

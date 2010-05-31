@@ -1964,6 +1964,9 @@ INSERT INTO configuration VALUES (2519, 'Set default right column width for temp
 INSERT INTO configuration VALUES (2520, 'Show/Hide left column','LEFT_COLUMN_SHOW','true','Would you like to show the left column in your template?','201','7',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (2521, 'Show/Hide right column','RIGHT_COLUMN_SHOW','true','Would you like to show the left column in your template?','201','8',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 
+INSERT INTO configuration VALUES (2522, 'Show the product model in the breadcrumb?', 'BREADCRUMB_SHOW_PRODUCT_MODEL', 'False', 'Use tabs for product info?', 8, 20, NULL,now(),NULL,'tep_cfg_select_option(array(''True'', ''False''),');
+
+
 #New v2.1 Entries - Updated SEO 5 to 2601-2612 from 2505-2516 to avoid duplicates or conflicts
 INSERT INTO `configuration` VALUES(2601, 'Enable SEO URLs 5?', 'SEO_URLS_ENABLED', 'true', 'Turn Seo Urls 5 on', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
 INSERT INTO `configuration` VALUES(2602, 'Add cPath to product URLs?', 'SEO_URLS_ADD_CPATH_TO_PRODUCT_URLS', 'false', 'This setting will append the cPath to the end of product URLs (i.e. - some-product-p-1.html?cPath=xx).', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');

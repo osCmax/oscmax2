@@ -43,9 +43,9 @@ $file_type_array[] = array('id' => $file,'text' => $filename);
                 	<table>
                     	<tr>
                         	<td class="dataTableContent" ><?php echo TEXT_FROM; ?></td>
-							<td><script language="javascript">dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script></td>
+							<td><?php echo tep_draw_input_field('startdate', '', 'id="batch_print_start" autocomplete="off"'); ?></td>
                             <td class="dataTableContent" ><?php echo TEXT_TO; ?></td>
-							<td><script language="javascript">dateAvailable1.writeControl(); dateAvailable1.dateFormat="yyyy-MM-dd";</script></td>
+							<td><?php echo tep_draw_input_field('enddate', '', 'id="batch_print_end" autocomplete="off"'); ?></td>
                   		</tr>
                   	</table>
                </td>            

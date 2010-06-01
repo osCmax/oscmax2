@@ -4,12 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
-<script language="JavaScript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
-<script language="javascript">
-var dateAvailable=new ctlSpiffyCalendarBox("dateAvailable", "batch", "startdate","btnDate1","",scBTNMODE_CUSTOMBLUE);
-var dateAvailable1=new ctlSpiffyCalendarBox("dateAvailable1", "batch", "enddate","btnDate2","",scBTNMODE_CUSTOMBLUE);
-</script>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->

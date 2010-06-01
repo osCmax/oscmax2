@@ -1767,8 +1767,8 @@ INSERT INTO configuration VALUES (503,'Thumbnail Image Types','DYNAMIC_MOPICS_TH
 INSERT INTO configuration VALUES (499,'Big Images Directory','DYNAMIC_MOPICS_BIGIMAGES_DIR','images_big/','The directory inside catalog/images where your big images are stored.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (500,'Thumbnail Images Directory','DYNAMIC_MOPICS_THUMBS_DIR','thumbs/','The directory inside catalog/images where you extra image thumbs are stored.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (501,'Main Thumbnail In "Thumbnail Images Directory"','DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR','false','If you store your product\'s main thumbnail in the "Thumbnail Images Directory" set this to true.  If it is in the main image directory (uploaded via osCommerce admin),set it false.',45,0,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (599, 'Category Images Directory', 'CATEGORY_IMAGES_DIR', 'categories/', 'The directory inside catalog/images where your category images are stored.', 45, 0, NULL, '2009-05-28 15:34:10', NULL, NULL);
-INSERT INTO configuration VALUES (502,'Extra Image Pattern','DYNAMIC_MOPICS_PATTERN','imagebase_{1}','Your custom defined pattern for extra images.  imagebase is the base of the main thumbnail.  Place the counting method between brackets {}.  Current counting methods can be 1,a,or A.  See readme for more information.',45,0,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (599,'Category Images Directory', 'CATEGORY_IMAGES_DIR', 'categories/', 'The directory inside catalog/images where your category images are stored.', 45, 0, NULL, '2009-05-28 15:34:10', NULL, NULL);
+INSERT INTO configuration VALUES (502,'Extra Image Pattern','DYNAMIC_MOPICS_PATTERN','imagebase_{1}','Your custom defined pattern for extra images.  imagebase is the base of the main thumbnail.  Place the counting method between brackets {}.  Current counting methods can be 1,a,or A.  See readme for more information.',45,1,NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (458,'Template Switching Allowed','TEMPLATE_SWITCHING_ALLOWED','false','Allow template switching through the url (for easy new template testing).',201,2,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (457,'Default Template Directory','DIR_WS_TEMPLATES_DEFAULT','fallback','Subdirectory (in templates/) where the template files are stored which should be loaded by default.',201,1,NULL,now(),NULL,'tep_cfg_pull_down_templates(');
@@ -1965,7 +1965,7 @@ INSERT INTO configuration VALUES (2520, 'Show/Hide left column','LEFT_COLUMN_SHO
 INSERT INTO configuration VALUES (2521, 'Show/Hide right column','RIGHT_COLUMN_SHOW','true','Would you like to show the left column in your template?','201','8',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 INSERT INTO configuration VALUES (2522, 'Show the product model in the breadcrumb?', 'BREADCRUMB_SHOW_PRODUCT_MODEL', 'False', 'Use tabs for product info?', 8, 20, NULL,now(),NULL,'tep_cfg_select_option(array(''True'', ''False''),');
-
+INSERT INTO configuration VALUES (2523, 'Manufacturers Images Directory', 'MANUFACTURERS_IMAGES_DIR', 'manufacturers/', 'The directory inside catalog/images where your manufacturers images are stored.', 45, 0, NULL, now(), NULL, NULL);
 
 #New v2.1 Entries - Updated SEO 5 to 2601-2612 from 2505-2516 to avoid duplicates or conflicts
 INSERT INTO `configuration` VALUES(2601, 'Enable SEO URLs 5?', 'SEO_URLS_ENABLED', 'true', 'Turn Seo Urls 5 on', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');

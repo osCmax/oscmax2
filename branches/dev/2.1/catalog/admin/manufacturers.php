@@ -39,7 +39,7 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
         }
 
         if($_FILES['manufacturers_image']['name'] != '') {
-          if ($manufacturers_image = new upload('manufacturers_image', DIR_FS_CATALOG_IMAGES)) {
+          if ($manufacturers_image = new upload('manufacturers_image', DIR_FS_CATALOG_IMAGES . MANUFACTURERS_IMAGES_DIR)) {
             tep_db_query("update " . TABLE_MANUFACTURERS . " set manufacturers_image = '" . $manufacturers_image->filename . "' where manufacturers_id = '" . (int)$manufacturers_id . "'");
           }
         }
@@ -76,7 +76,7 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
           $manufacturer_query = tep_db_query("select manufacturers_image from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$manufacturers_id . "'");
           $manufacturer = tep_db_fetch_array($manufacturer_query);
 
-          $image_location = DIR_FS_DOCUMENT_ROOT . DIR_WS_CATALOG_IMAGES . $manufacturer['manufacturers_image'];
+          $image_location = DIR_FS_DOCUMENT_ROOT . DIR_WS_CATALOG_IMAGES . MANUFACTURERS_IMAGES_DIR . $manufacturer['manufacturers_image'];
 
           if (file_exists($image_location)) @unlink($image_location);
         }
@@ -245,8 +245,9 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
         $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
         $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($mInfo->date_added));
         if (tep_not_null($mInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($mInfo->last_modified));
-        $contents[] = array('text' => '<br>' . tep_info_image($mInfo->manufacturers_image, $mInfo->manufacturers_name));
-        $contents[] = array('text' => '<br>' . TEXT_PRODUCTS . ' ' . $mInfo->products_count);
+//        $contents[] = array('text' => '<br>' . tep_info_image($mInfo->manufacturers_image, $mInfo->manufacturers_name));
+        $contents[] = array('text' => '<br>' . tep_info_image(MANUFACTURERS_IMAGES_DIR . $mInfo->manufacturers_image, $mInfo->manufacturers_name));
+  	    $contents[] = array('text' => '<br>' . TEXT_PRODUCTS . ' ' . $mInfo->products_count);
       }
       break;
   }

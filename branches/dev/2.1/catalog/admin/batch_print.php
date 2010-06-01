@@ -21,7 +21,8 @@
 
         // check if invoice number is a empty field .. if its not empty do this ..
         // if it is empty skip down to the check date entered code.
-        if ($invoicenumbers != '') {
+        //if ($invoicenumbers != '') {
+	 	if ($_POST['invoicenumbers']) {
 
           if (!isset($_POST['invoicenumbers'])) { message_handler('ERROR_BAD_INVOICENUMBERS');  }
           if (!is_writeable(BATCH_PDF_DIR)) { message_handler('SET_PERMISSIONS'); }

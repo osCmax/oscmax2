@@ -9,7 +9,7 @@
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
-<div id="spiffycalendar" class="text"></div>  
+
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
@@ -38,7 +38,10 @@
                   <tr>
                     <td class="messageStackWarning"><?php echo $message; ?></td>
                   </tr>
-    	        <?php } 
-	  } ?>
+    	        <?php } ?>
+	  		<tr>
+        		<td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
+      		</tr>
+	  <?php } ?>
       <tr>
         <td>

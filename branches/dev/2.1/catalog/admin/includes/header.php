@@ -31,6 +31,27 @@
 	$('#batch_print_start').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
     $('#batch_print_end').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
 
+//Batch Print Center
+	$("#Labels").hide();
+	$("#Invoices").hide();
+    $("#file_type").change(function(){ 
+		var show_options = (this.value); 
+		if(show_options == 'Labels.php') {
+			$("#Invoices").hide();
+			$("#Labels").show();
+			$("#No_Options").hide();
+		} else {
+			if (show_options == 'Invoice.php') {
+        	$("#Invoices").show();
+			$("#Labels").hide();
+			$("#No_Options").hide();
+		} else {
+			$("#Invoices").hide();
+			$("#Labels").hide();
+			$("#No_Options").show();
+		}}
+	}); 
+
 // Tabs
     $("#searchtabs").tabs();
     $("#tabs").tabs();

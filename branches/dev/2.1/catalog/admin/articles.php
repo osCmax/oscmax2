@@ -213,6 +213,7 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
 
           $sql_data_array = array('articles_date_available' => $articles_date_available,
                                   'articles_status' => tep_db_prepare_input($_POST['articles_status']),
+								  'articles_index_status' => tep_db_prepare_input($_POST['articles_index_status']),
                                   'authors_id' => tep_db_prepare_input($_POST['authors_id']));
 
           if ($action == 'insert_article') {
@@ -289,7 +290,7 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
             $article_query = tep_db_query("select articles_date_available, authors_id from " . TABLE_ARTICLES . " where articles_id = '" . (int)$articles_id . "'");
             $article = tep_db_fetch_array($article_query);
 
-            tep_db_query("insert into " . TABLE_ARTICLES . " (articles_date_added, articles_date_available, articles_status, authors_id) values (now(), '" . tep_db_input($article['articles_date_available']) . "', '0', '" . (int)$article['authors_id'] . "')");
+            tep_db_query("insert into " . TABLE_ARTICLES . " (articles_date_added, articles_date_available, articles_status, articles_index_status, authors_id) values (now(), '" . tep_db_input($article['articles_date_available']) . "', '0', '0', '" . (int)$article['authors_id'] . "')");
             $dup_articles_id = tep_db_insert_id();
 
             $description_query = tep_db_query("select language_id, articles_name, articles_description, articles_url, articles_head_title_tag, articles_head_desc_tag, articles_head_keywords_tag from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$articles_id . "'");
@@ -588,12 +589,13 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
                        'articles_last_modified' => '',
                        'articles_date_available' => '',
                        'articles_status' => '',
+					   'articles_index_status' => '',
                        'authors_id' => '');
 
     $aInfo = new objectInfo($parameters);
 
     if (isset($_GET['aID']) && empty($_POST)) {
-      $article_query = tep_db_query("select ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_id, a.articles_date_added, a.articles_last_modified, date_format(a.articles_date_available, '%Y-%m-%d') as articles_date_available, a.articles_status, a.authors_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = '" . (int)$_GET['aID'] . "' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "'");
+      $article_query = tep_db_query("select ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_id, a.articles_date_added, a.articles_last_modified, date_format(a.articles_date_available, '%Y-%m-%d') as articles_date_available, a.articles_status, a.articles_index_status, a.authors_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = '" . (int)$_GET['aID'] . "' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "'");
       $article = tep_db_fetch_array($article_query);
 
       $aInfo->objectInfo($article);
@@ -622,6 +624,14 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       case '1':
       default: $in_status = true; $out_status = false;
     }
+	
+	if (!isset($aInfo->articles_index_status)) $aInfo->articles_index_status = '0';
+    switch ($aInfo->articles_index_status) {
+      case '0': $in_index_status = false; $out_index_status = true; break;
+      case '1':
+      default: $in_index_status = true; $out_index_status = false;
+    }
+	
 ?>
 
     <?php echo tep_draw_form('new_article', FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($_GET['aID']) ? '&aID=' . $_GET['aID'] : '') . '&action=article_preview', 'post', 'enctype="multipart/form-data"'); ?>
@@ -642,6 +652,13 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
           <tr>
             <td class="main"><?php echo TEXT_ARTICLES_STATUS; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('articles_status', '0', $out_status) . '&nbsp;' . TEXT_ARTICLE_NOT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('articles_status', '1', $in_status) . '&nbsp;' . TEXT_ARTICLE_AVAILABLE; ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo TEXT_ARTICLES_SHOW_ON_INDEX; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('articles_index_status', '0', $out_index_status) . '&nbsp;' . DO_NOT_SHOW_ON_INDEX . '&nbsp;' . tep_draw_radio_field('articles_index_status', '1', $in_index_status) . '&nbsp;' . DO_SHOW_ON_INDEX; ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -804,7 +821,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       $articles_head_desc_tag = $_POST['articles_head_desc_tag'];
       $articles_head_keywords_tag = $_POST['articles_head_keywords_tag'];
     } else {
-      $article_query = tep_db_query("select a.articles_id, ad.language_id, ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a.authors_id  from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = ad.articles_id and a.articles_id = '" . (int)$_GET['aID'] . "'");
+      $article_query = tep_db_query("select a.articles_id, ad.language_id, ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a.articles_index_status, a.authors_id  from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = ad.articles_id and a.articles_id = '" . (int)$_GET['aID'] . "'");
       $article = tep_db_fetch_array($article_query);
 
       $aInfo = new objectInfo($article);
@@ -1022,9 +1039,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 
     $articles_count = 0;
     if (isset($_GET['search'])) {
-      $articles_query = tep_db_query("select a.articles_id, ad.articles_name, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a2t.topics_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t where a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and a.articles_id = a2t.articles_id and ad.articles_name like '%" . tep_db_input($search) . "%' order by ad.articles_name");
+      $articles_query = tep_db_query("select a.articles_id, ad.articles_name, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a.articles_index_status, a2t.topics_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t where a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and a.articles_id = a2t.articles_id and ad.articles_name like '%" . tep_db_input($search) . "%' order by ad.articles_name");
     } else {
-      $articles_query = tep_db_query("select a.articles_id, ad.articles_name, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t where a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and a.articles_id = a2t.articles_id and a2t.topics_id = '" . (int)$current_topic_id . "' order by ad.articles_name");
+      $articles_query = tep_db_query("select a.articles_id, ad.articles_name, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a.articles_index_status from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t where a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and a.articles_id = a2t.articles_id and a2t.topics_id = '" . (int)$current_topic_id . "' order by ad.articles_name");
     }
     while ($articles = tep_db_fetch_array($articles_query)) {
       $articles_count++;
@@ -1050,7 +1067,11 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
                 <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $articles['articles_id'] . '&action=article_preview&read=only') . '">' . tep_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $articles['articles_name']; ?></td>
                 <td class="dataTableContent" align="center">
 <?php
-      if ($articles['articles_status'] == '1') {
+	  if ($articles['articles_index_status'] == '1') {
+        echo tep_image(DIR_WS_ICONS .  'warning.gif', IMAGE_SHOW_ON_INDEX, 10, 10) . '&nbsp;&nbsp;';
+	  }
+	  
+	  if ($articles['articles_status'] == '1') {
         echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'action=setflag&flag=0&aID=' . $articles['articles_id'] . '&tPath=' . $tPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
       } else {
         echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'action=setflag&flag=1&aID=' . $articles['articles_id'] . '&tPath=' . $tPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
@@ -1195,6 +1216,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
             if (tep_not_null($aInfo->articles_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($aInfo->articles_last_modified));
             if (date('Y-m-d') < $aInfo->articles_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . tep_date_short($aInfo->articles_date_available));
             $contents[] = array('text' => '<br>' . TEXT_ARTICLES_AVERAGE_RATING . ' ' . number_format($aInfo->average_rating, 2) . '%');
+			if ($aInfo->articles_index_status == '1') $contents[] = array('text' => '<br>' . tep_image(DIR_WS_ICONS .  'warning.gif', IMAGE_SHOW_ON_INDEX, 10, 10) . '&nbsp;&nbsp;' . IMAGE_SHOW_ON_INDEX);
           }
         } else { // create topic/article info
           $heading[] = array('text' => '<b>' . EMPTY_TOPIC . '</b>');

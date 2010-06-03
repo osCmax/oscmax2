@@ -367,3 +367,6 @@ A.filterbox {
 .password_strength_3 { background-color: #fcfbb1; }
 .password_strength_4 { background-color: #dafcb1; }
 .password_strength_5 { background-color: #bcfcb1; }
+
+/* Articles on home page */
+td.articleTextBox { border: 1px solid #b6b7cb; font-family: Verdana, Arial, sans-serif; font-size: 10px; padding-left: 10px; padding-right: 10px;}

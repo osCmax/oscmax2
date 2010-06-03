@@ -270,6 +270,7 @@ CREATE TABLE articles (
   articles_last_modified datetime,
   articles_date_available datetime,
   articles_status tinyint(1) NOT NULL default '0',
+  articles_index_status tinyint(1) NOT NULL DEFAULT '0',
   authors_id int,
   PRIMARY KEY (articles_id),
   KEY idx_articles_date_added (articles_date_added)
@@ -2570,3 +2571,5 @@ INSERT INTO pm_configuration VALUES (5, 'Also Purchased Module', 'Also Purchased
 INSERT INTO pm_configuration VALUES (6, 'Previous Next Module', 'Previous Next Module', 'products_next_previous.php', 'yes', 'product_info', 3, now(), now());
 INSERT INTO pm_configuration VALUES (7, 'Counter', '', 'counter.php', 'yes', 'all', 2, now(), now());
 INSERT INTO pm_configuration VALUES (8, 'Copyright', '', 'copyright.php', 'yes', 'all', 3, now(), now());
+INSERT INTO pm_configuration VALUES (9, 'Articles', '', 'index_articles.php', 'yes', 'index', 4, now(), now());
+

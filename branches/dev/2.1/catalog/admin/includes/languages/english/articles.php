@@ -91,4 +91,8 @@ define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Error: Catalog images dir
 define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Error: Catalog images directory does not exist: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CANNOT_MOVE_TOPIC_TO_PARENT', 'Error: Topic cannot be moved into child topic.');
 
+define('TEXT_ARTICLES_SHOW_ON_INDEX', 'Show this article on your home page?');
+define('DO_SHOW_ON_INDEX', 'Yes');
+define('DO_NOT_SHOW_ON_INDEX', 'No');
+define('IMAGE_SHOW_ON_INDEX', 'This article is shown on your home page.');
 ?>

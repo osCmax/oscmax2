@@ -176,4 +176,8 @@ define('FILENAME_PREMADE', 'premade_comments.php');
 //BOF: Page Modules
 define('FILENAME_PM_CONFIGURATION', 'page_modules_configuration.php');
 //EOF: Page Modules
+
+//BOF: Wishlist Report
+define('FILENAME_STATS_WISHLIST', 'stats_wishlist.php');
+//EOF: Wishlist Report
 ?>

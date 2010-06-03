@@ -189,6 +189,7 @@ define('BOX_REPORTS_STATS_LOW_STOCK_ATTRIB', 'Stock Report');
 define('BOX_REPORTS_ADMIN_LOGGING', 'Admin Log');
 define('BOX_REPORTS_CUST_LOGGING', 'Customer Log');
 define('BOX_REPORTS_HTTP_ERROR', 'Http Error Log');
+define('BOX_REPORTS_WISHLIST', 'Customer Wishlists');
 
 // tools text in includes/boxes/tools.php
 define('BOX_HEADING_TOOLS', 'Tools');

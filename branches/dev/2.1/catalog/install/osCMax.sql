@@ -1560,6 +1560,7 @@ INSERT INTO admin_files VALUES (151,'discount_categories.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (152,'discount_categories_groups_pp.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (153,'premade_comments.php', 0, 7, '1');
 INSERT INTO admin_files VALUES (154,'page_modules_configuration.php', 0, 2, '1');
+INSERT INTO admin_files VALUES (155,'stats_wishlist.php', 0, 8, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');

@@ -166,9 +166,18 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
     }
 ?>
       <tr><form name="new_special" <?php echo 'action="' . tep_href_link(FILENAME_SPECIALS, tep_get_all_get_params(array('action', 'info', 'sID')) . 'action=' . $form_action, 'NONSSL') . '"'; ?> method="post"><?php if ($form_action == 'update') echo tep_draw_hidden_field('specials_id', $_GET['sID']); ?>
-        <td><br><table border="0" cellspacing="0" cellpadding="2">
+        <td>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr><td width="75%" valign="top">
+        <table width="100%" border="0" cellspacing="0" cellpadding="2">
+          <tr class="dataTableHeadingRow">
+            <td class="dataTableHeadingContent" colspan="2">&nbsp;</td>
+          </tr>
           <tr>
-            <td class="main"><?php echo TEXT_SPECIALS_PRODUCT; ?>&nbsp;</td>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+		  <tr>
+            <td class="main" width="20%"><?php echo TEXT_SPECIALS_PRODUCT; ?>&nbsp;</td>
             <td class="main"><?php echo (isset($sInfo->products_name)) ? $sInfo->products_name . ' <small>(' . $currencies->format($sInfo->products_price) . ')</small>' : tep_draw_products_pull_down('products_id', 'style="font-size:10px"', $specials_array); echo tep_draw_hidden_field('products_price', (isset($sInfo->products_price) ? $sInfo->products_price : '')); ?></td>
           </tr>
 <?php php // BOF: MOD - Separate Pricing per Customer ?>
@@ -193,15 +202,23 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
             <td class="main"><?php echo TEXT_SPECIALS_EXPIRES_DATE; ?>&nbsp;</td>
             <td><?php echo tep_draw_input_field('expires_date', (isset($sInfo->expires_date) ? $sInfo->expires_date : ''), 'id="specials"'); ?></td>
           </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="main"><br><?php echo TEXT_SPECIALS_PRICE_TIP; ?></td>
-            <td class="main" align="right" valign="top"><br><?php echo (($form_action == 'insert') ? tep_image_submit('button_insert.gif', IMAGE_INSERT) : tep_image_submit('button_update.gif', IMAGE_UPDATE)). '&nbsp;&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . (isset($_GET['sID']) ? '&sID=' . $_GET['sID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+      	  <tr>
+            <td class="main"></td>
+            <td class="main" align="right" valign="top"><br><?php echo '<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . (isset($_GET['sID']) ? '&sID=' . $_GET['sID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>&nbsp;&nbsp;' . (($form_action == 'insert') ? tep_image_submit('button_insert.gif', IMAGE_INSERT) : tep_image_submit('button_update.gif', IMAGE_UPDATE)). '&nbsp;&nbsp;'; ?></td>
           </tr>
-        </table></td>
+        </table>
+        </td>
+        <td width="25%" valign="top">
+        	<table border="0" width="100%" cellspacing="0" cellpadding="2">
+            	<tr class="infoBoxHeading">
+                	<td>Specials Help</td>
+                </tr>
+                <tr class="infoBoxContent">
+                	<td class="infoBoxContent"><?php echo TEXT_SPECIALS_PRICE_TIP; ?></td>
+                </tr>
+            </table>
+        </td>
+        </tr></table>
       </form></tr>
 <?php
   } else {
@@ -315,8 +332,18 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
         $contents[] = array('text' => '' . TEXT_INFO_NEW_PRICE . ' ' . $currencies->format($sInfo->specials_new_products_price));
         $contents[] = array('text' => '' . TEXT_INFO_PERCENTAGE . ' ' . number_format(100 - (($sInfo->specials_new_products_price / $sInfo->products_price) * 100)) . '%');
 
-        $contents[] = array('text' => '<br>' . TEXT_INFO_EXPIRES_DATE . ' <b>' . tep_date_short($sInfo->expires_date) . '</b>');
-        $contents[] = array('text' => '' . TEXT_INFO_STATUS_CHANGE . ' ' . tep_date_short($sInfo->date_status_change));
+		if ($sInfo->expires_date < 1) {
+			$contents[] = array('text' => '<br>' . TEXT_INFO_EXPIRES_DATE . ' <b>Never</b>');
+		} else {
+			$contents[] = array('text' => '<br>' . TEXT_INFO_EXPIRES_DATE . ' <b>' . tep_date_short($sInfo->expires_date) . '</b>');
+		}
+        		
+		if (is_null($sInfo->date_status_change)) {
+			$contents[] = array('text' => '<br>' . TEXT_INFO_STATUS_CHANGE . ' <b>Currently Active</b>');
+		} else {
+			$contents[] = array('text' => '<br>' . TEXT_INFO_STATUS_CHANGE . ' <b>' . tep_date_short($sInfo->date_status_change) . '</b>');
+		}	
+		
       }
       break;
   }

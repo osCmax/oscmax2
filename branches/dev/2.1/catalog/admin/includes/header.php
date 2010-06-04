@@ -30,6 +30,11 @@
 	$('#articles').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 2});
 	$('#batch_print_start').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
     $('#batch_print_end').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
+    $('#banners_expires').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
+	$('#banners_scheduled').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
+	$('#nopurchases_start').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
+	$('#nopurchases_end').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
+
 
 //Batch Print Center
 	$("#Labels").hide();

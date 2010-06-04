@@ -25,30 +25,8 @@
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
-<script language="JavaScript" src="includes/javascript/spiffycal/spiffycal_v2_1.js"></script>
-<link rel="stylesheet" type="text/css" href="includes/javascript/spiffycal/spiffycal_v2_1.css">
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
-<div id="spiffycalendar" class="text"></div>
-<script language="javascript"><!--
-  var cal11 = new ctlSpiffyCalendarBox("cal11", "dailyreportform", "date1","btndate3","",scBTNMODE_CALBTN);
-  cal11.readonly=true;
-  cal11.displayLeft=true;
-  // cal1.JStoRunOnSelect="document.dailyreportform.submit();";
-  //cal1.JStoRunOnSelect="document.dailyreportform.action='<?php echo basename($_SERVER['PHP_SELF'])?>?date='+document.dailyreportform.reportdate.value; document.dailyreportform.submit();";
-  cal11.useDateRange=true;
-  cal11.setMinDate(2004,1,1);
-  cal11.setMaxDate( <?php echo $cal1maxdate; ?> );
-
-  var cal12 = new ctlSpiffyCalendarBox("cal12", "dailyreportform", "date2","btndate3","",scBTNMODE_CALBTN);
-  cal12.readonly=true;
-  cal12.displayLeft=true;
-  // cal1.JStoRunOnSelect="document.dailyreportform.submit();";
-  //cal1.JStoRunOnSelect="document.dailyreportform.action='<?php echo basename($_SERVER['PHP_SELF'])?>?date='+document.dailyreportform.reportdate.value; document.dailyreportform.submit();";
-  cal12.useDateRange=true;
-  cal12.setMinDate(2004,1,1);
-  cal12.setMaxDate( <?php echo $cal1maxdate; ?> );
-//--></script>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -76,9 +54,9 @@
                 <input type="hidden" name="action" value="dailyreportaction">
                 <?php // <br>cal1 value:<script language="javascript">document.write( document.forms.dailyreportform.action);</script><br> ?>
                 <?php echo 'Select Date '; ?>
-                <script language="javascript">cal11.writeControl(); cal11.dateFormat="yyyy-MM-dd"; dailyreportform.date1.value="<?php echo $date1; ?>"</script> 
+				<?php echo tep_draw_input_field('date1', $date1, 'id="nopurchases_start"'); ?>
                  - to -
-		        <script language="javascript">cal12.writeControl(); cal12.dateFormat="yyyy-MM-dd"; dailyreportform.date2.value="<?php echo $date2; ?>"</script>
+		        <?php echo tep_draw_input_field('date2', $date2, 'id="nopurchases_end"'); ?>
 		<input type="submit"></td>
                 </form>
 				
@@ -88,7 +66,7 @@
         </table></td>
       </tr>
       <tr>
-        <td><table border="0" width="90%" cellspacing="0" cellpadding="2">
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">

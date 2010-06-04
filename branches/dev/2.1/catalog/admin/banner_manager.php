@@ -91,24 +91,13 @@ $Id: banner_manager.php 3 2006-05-27 04:59:07Z user $
           }
 
           if (tep_not_null($expires_date)) {
-            list($day, $month, $year) = explode('/', $expires_date);
-
-            $expires_date = $year .
-                            ((strlen($month) == 1) ? '0' . $month : $month) .
-                            ((strlen($day) == 1) ? '0' . $day : $day);
-
+          
             tep_db_query("update " . TABLE_BANNERS . " set expires_date = '" . tep_db_input($expires_date) . "', expires_impressions = null where banners_id = '" . (int)$banners_id . "'");
           } elseif (tep_not_null($expires_impressions)) {
             tep_db_query("update " . TABLE_BANNERS . " set expires_impressions = '" . tep_db_input($expires_impressions) . "', expires_date = null where banners_id = '" . (int)$banners_id . "'");
           }
 
           if (tep_not_null($date_scheduled)) {
-            list($day, $month, $year) = explode('/', $date_scheduled);
-
-            $date_scheduled = $year .
-                              ((strlen($month) == 1) ? '0' . $month : $month) .
-                              ((strlen($day) == 1) ? '0' . $day : $day);
-
             tep_db_query("update " . TABLE_BANNERS . " set status = '0', date_scheduled = '" . tep_db_input($date_scheduled) . "' where banners_id = '" . (int)$banners_id . "'");
           }
 
@@ -199,7 +188,6 @@ function popupImageWindow(url) {
 //--></script>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
-<div id="spiffycalendar" class="text"></div>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -242,7 +230,7 @@ function popupImageWindow(url) {
 
       $bID = tep_db_prepare_input($_GET['bID']);
 
-      $banner_query = tep_db_query("select banners_title, banners_url, banners_image, banners_group, banners_html_text, status, date_format(date_scheduled, '%d/%m/%Y') as date_scheduled, date_format(expires_date, '%d/%m/%Y') as expires_date, expires_impressions, date_status_change from " . TABLE_BANNERS . " where banners_id = '" . (int)$bID . "'");
+      $banner_query = tep_db_query("select banners_title, banners_url, banners_image, banners_group, banners_html_text, status, date_format(date_scheduled, '%Y-%m-%d') as date_scheduled, date_format(expires_date, '%Y-%m-%d') as expires_date, expires_impressions, date_status_change from " . TABLE_BANNERS . " where banners_id = '" . (int)$bID . "'");
       $banner = tep_db_fetch_array($banner_query);
 
       $bInfo->objectInfo($banner);
@@ -256,17 +244,17 @@ function popupImageWindow(url) {
       $groups_array[] = array('id' => $groups['banners_group'], 'text' => $groups['banners_group']);
     }
 ?>
-<link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
-<script language="JavaScript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
-<script language="javascript">
-  var dateExpires = new ctlSpiffyCalendarBox("dateExpires", "new_banner", "expires_date","btnDate1","<?php echo $bInfo->expires_date; ?>",scBTNMODE_CUSTOMBLUE);
-  var dateScheduled = new ctlSpiffyCalendarBox("dateScheduled", "new_banner", "date_scheduled","btnDate2","<?php echo $bInfo->date_scheduled; ?>",scBTNMODE_CUSTOMBLUE);
-</script>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-      <tr><?php echo tep_draw_form('new_banner', FILENAME_BANNER_MANAGER, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'action=' . $form_action, 'post', 'enctype="multipart/form-data"'); if ($form_action == 'update') echo tep_draw_hidden_field('banners_id', $bID); ?>
-        <td><table border="0" cellspacing="0" cellpadding="2">
+    <tr><?php echo tep_draw_form('new_banner', FILENAME_BANNER_MANAGER, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'action=' . $form_action, 'post', 'enctype="multipart/form-data"'); if ($form_action == 'update') echo tep_draw_hidden_field('banners_id', $bID); ?>
+        <td>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr><td valign="top">
+        <table border="0" cellspacing="0" cellpadding="2" width="100%">
+          <tr class="dataTableHeadingRow">
+                <td class="dataTableHeadingContent" colspan="2">&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
           <tr>
             <td class="main"><?php echo TEXT_BANNERS_TITLE; ?></td>
             <td class="main"><?php echo tep_draw_input_field('banners_title', $bInfo->banners_title, '', true); ?></td>
@@ -304,29 +292,42 @@ function popupImageWindow(url) {
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo TEXT_BANNERS_SCHEDULED_AT; ?><br><small>(dd/mm/yyyy)</small></td>
-            <td valign="top" class="main"><script language="javascript">dateScheduled.writeControl(); dateScheduled.dateFormat="dd/MM/yyyy";</script></td>
+            <td class="main"><?php echo TEXT_BANNERS_SCHEDULED_AT; ?><br><small>(yyyy-mm-dd)</small></td>
+            <td valign="top" class="main"><?php echo tep_draw_input_field('date_scheduled', (isset($bInfo->date_scheduled) ? $bInfo->date_scheduled : ''), 'id="banners_scheduled"'); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td valign="top" class="main"><?php echo TEXT_BANNERS_EXPIRES_ON; ?><br><small>(dd/mm/yyyy)</small></td>
-            <td class="main"><script language="javascript">dateExpires.writeControl(); dateExpires.dateFormat="dd/MM/yyyy";</script><?php echo TEXT_BANNERS_OR_AT . '<br>' . tep_draw_input_field('expires_impressions', $bInfo->expires_impressions, 'maxlength="7" size="7"') . ' ' . TEXT_BANNERS_IMPRESSIONS; ?></td>
+            <td valign="top" class="main"><?php echo TEXT_BANNERS_EXPIRES_ON; ?><br><small>(yyyy-mm-yy)</small></td>
+            <td class="main"><?php echo tep_draw_input_field('expires_date', (isset($bInfo->expires_date) ? $bInfo->expires_date : ''), 'id="banners_expires"'); ?><?php echo TEXT_BANNERS_OR_AT . '<br>' . tep_draw_input_field('expires_impressions', $bInfo->expires_impressions, 'maxlength="7" size="7"') . ' ' . TEXT_BANNERS_IMPRESSIONS; ?></td>
           </tr>
-        </table></td>
+          <tr>
+            <td class="main"></td>
+            <td class="main" align="right" valign="top" nowrap><?php echo '<a href="' . tep_href_link(FILENAME_BANNER_MANAGER, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . (isset($_GET['bID']) ? 'bID=' . $_GET['bID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>&nbsp;&nbsp;' . (($form_action == 'insert') ? tep_image_submit('button_insert.gif', IMAGE_INSERT) : tep_image_submit('button_update.gif', IMAGE_UPDATE)) . '&nbsp;&nbsp;'; ?></td>
+          </tr>
+        </table>
+        </td>
+        <td width="25%" valign="top">
+        	<table border="0" cellspacing="0" cellpadding="2">
+            	<tr class="infoBoxHeading">
+                	<td><b><?php echo TEXT_BANNERS_HELP; ?></b></td>
+                </tr>
+                <tr class="infoBoxContent">
+                	<td class="infoBoxContent"><?php echo TEXT_BANNERS_BANNER_NOTE . '<br>' . TEXT_BANNERS_INSERT_NOTE . '<br>' . TEXT_BANNERS_EXPIRCY_NOTE . '<br>' . TEXT_BANNERS_SCHEDULE_NOTE; ?>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        </tr>
+        </table>
+        </td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="main"><?php echo TEXT_BANNERS_BANNER_NOTE . '<br>' . TEXT_BANNERS_INSERT_NOTE . '<br>' . TEXT_BANNERS_EXPIRCY_NOTE . '<br>' . TEXT_BANNERS_SCHEDULE_NOTE; ?></td>
-            <td class="main" align="right" valign="top" nowrap><?php echo (($form_action == 'insert') ? tep_image_submit('button_insert.gif', IMAGE_INSERT) : tep_image_submit('button_update.gif', IMAGE_UPDATE)). '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_BANNER_MANAGER, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . (isset($_GET['bID']) ? 'bID=' . $_GET['bID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
-          </tr>
-        </table></td>
-      </form></tr>
+       
+      </form>
 <?php
   } else {
 ?>

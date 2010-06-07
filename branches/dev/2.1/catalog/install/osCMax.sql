@@ -402,6 +402,8 @@ CREATE TABLE categories (
   categories_image varchar(64),
   parent_id int DEFAULT '0' NOT NULL,
   sort_order int(3),
+  categories_featured_until date default NULL,
+  categories_featured tinyint(1) default '0',
   date_added datetime,
   last_modified datetime,
   categories_hide_from_groups VARCHAR(255) DEFAULT '@' NOT NULL,
@@ -699,6 +701,10 @@ CREATE TABLE manufacturers (
   manufacturers_id int NOT NULL auto_increment,
   manufacturers_name varchar(32) NOT NULL,
   manufacturers_image varchar(64),
+  manufacturers_featured_until date default NULL,
+  manufacturers_featured tinyint(1) default '0',
+  manufacturer_featured_until date default NULL,
+  manufacturer_featured tinyint(1) default '0',
   date_added datetime NULL,
   last_modified datetime NULL,
   PRIMARY KEY (manufacturers_id),
@@ -922,8 +928,10 @@ CREATE TABLE products (
   products_date_added datetime NOT NULL,
   products_last_modified datetime default NULL,
   products_date_available datetime default NULL,
+  products_featured_until date default NULL,
   products_weight decimal(5,2) NOT NULL,
   products_status tinyint(1) NOT NULL,
+  products_featured tinyint(1) default '0',
   products_tax_class_id int(11) NOT NULL,
   manufacturers_id int(11) default NULL,
   products_ordered int(11) NOT NULL default '0',
@@ -966,6 +974,7 @@ CREATE TABLE products_description (
   products_id int NOT NULL auto_increment,
   language_id int NOT NULL default '1',
   products_name varchar(64) NOT NULL,
+  products_short text,
   products_description text,
   tab1 text,
   tab2 text,
@@ -1970,19 +1979,96 @@ INSERT INTO configuration VALUES (2522, 'Show the product model in the breadcrum
 INSERT INTO configuration VALUES (2523, 'Manufacturers Images Directory', 'MANUFACTURERS_IMAGES_DIR', 'manufacturers/', 'The directory inside catalog/images where your manufacturers images are stored.', 45, 0, NULL, now(), NULL, NULL);
 
 #New v2.1 Entries - Updated SEO 5 to 2601-2612 from 2505-2516 to avoid duplicates or conflicts
-INSERT INTO `configuration` VALUES(2601, 'Enable SEO URLs 5?', 'SEO_URLS_ENABLED', 'true', 'Turn Seo Urls 5 on', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
-INSERT INTO `configuration` VALUES(2602, 'Add cPath to product URLs?', 'SEO_URLS_ADD_CPATH_TO_PRODUCT_URLS', 'false', 'This setting will append the cPath to the end of product URLs (i.e. - some-product-p-1.html?cPath=xx).', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
-INSERT INTO `configuration` VALUES(2603, 'Add category parent to beginning of URLs?', 'SEO_URLS_ADD_CAT_PARENT', 'true', 'This setting will add the category parent name to the beginning of the category URLs (i.e. - parent-category-c-1.html).', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
-INSERT INTO `configuration` VALUES(2604, 'Filter Short Words', 'SEO_URLS_FILTER_SHORT_WORDS', '1', '<b>This setting will filter words.</b><br>1 = Remove words of 1 letter<br>2 = Remove words of 2 letters or less<br>3 = Remove words of 3 letters or less<br>', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''1'', ''2'', ''3''), ');
-INSERT INTO `configuration` VALUES(2605, 'Output W3C valid URLs?', 'SEO_URLS_USE_W3C_VALID', 'true', 'This setting will output W3C valid URLs.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
-INSERT INTO `configuration` VALUES(2606, 'Choose URL Rewrite Type', 'SEO_URLS_TYPE', 'rewrite', 'Choose SEO URL format:<br><b>rewrite</b><br>mysite.com/great-product-p-3.html<br><b>standard</b><br>mysite.com/product_info.php/great-product-p-3<p><i>Note: mod_rewrite has to be enabled for the rewrite option and AllowOveride set to all.</i></p>', 60, 902, '2010-03-17 04:41:29', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''rewrite'', ''standard''), ');
-INSERT INTO `configuration` VALUES(2607, 'Enter special character conversions. (Better to use the file based character conversions.See extras/character_conversion_pack/instructions.txt)', 'SEO_URLS_CHAR_CONVERT_SET', '', 'This setting will convert characters.<br><br>The format <b>MUST</b> be in the form: <b>char=>conv,char2=>conv2</b>', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', '');
-INSERT INTO `configuration` VALUES(2608, 'Remove all non-alphanumeric characters?', 'SEO_URLS_REMOVE_ALL_SPEC_CHARS', 'true', 'This will remove all non-letters and non-numbers. If your language has special characters then you will need to use the character conversion system.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
-INSERT INTO `configuration` VALUES(2609, 'Set the number of days to store the cache.', 'SEO_URLS_CACHE_DAYS', '7', 'Set the number of days you wish to retain cached data, after this the cache will auto reset.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', '');
-INSERT INTO `configuration` VALUES(2610, 'Reset SEO URLs Cache', 'SEO_URLS_CACHE_RESET', 'false', 'This will reset the cache data for SEO', 60, 902, '2010-03-17 04:40:49', '2010-03-17 08:14:36', 'tep_reset_cache_data_seo_urls', 'tep_cfg_select_option(array(''reset'', ''false''), ');
-INSERT INTO `configuration` VALUES(2611, 'Turn debug reporting on true/false.', 'SEO_URLS_OUPUT_PERFORMANCE', 'false', '<span style="color: red;">Debug reporting should <b>NOT</b> be set to ON on a live site</span><br>It is for dev reporting re: performance and queries.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
-INSERT INTO `configuration` VALUES(2612, 'Select caching system.', 'SEO_URLS_CACHE_SYSTEM', 'FileSystem', '<b>Filesystem:</b><br>Zero queries after cache load.<br><b>Database:</b><br>One query after cache load<br><b>Memcached:</b><br>Requires memcached in apache and php.ini.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''FileSystem'', ''Database'', ''Memcached''), ');
+INSERT INTO configuration VALUES (2601, 'Enable SEO URLs 5?', 'SEO_URLS_ENABLED', 'true', 'Turn Seo Urls 5 on', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (2602, 'Add cPath to product URLs?', 'SEO_URLS_ADD_CPATH_TO_PRODUCT_URLS', 'false', 'This setting will append the cPath to the end of product URLs (i.e. - some-product-p-1.html?cPath=xx).', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (2603, 'Add category parent to beginning of URLs?', 'SEO_URLS_ADD_CAT_PARENT', 'true', 'This setting will add the category parent name to the beginning of the category URLs (i.e. - parent-category-c-1.html).', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (2604, 'Filter Short Words', 'SEO_URLS_FILTER_SHORT_WORDS', '1', '<b>This setting will filter words.</b><br>1 = Remove words of 1 letter<br>2 = Remove words of 2 letters or less<br>3 = Remove words of 3 letters or less<br>', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''1'', ''2'', ''3''), ');
+INSERT INTO configuration VALUES (2605, 'Output W3C valid URLs?', 'SEO_URLS_USE_W3C_VALID', 'true', 'This setting will output W3C valid URLs.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (2606, 'Choose URL Rewrite Type', 'SEO_URLS_TYPE', 'rewrite', 'Choose SEO URL format:<br><b>rewrite</b><br>mysite.com/great-product-p-3.html<br><b>standard</b><br>mysite.com/product_info.php/great-product-p-3<p><i>Note: mod_rewrite has to be enabled for the rewrite option and AllowOveride set to all.</i></p>', 60, 902, '2010-03-17 04:41:29', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''rewrite'', ''standard''), ');
+INSERT INTO configuration VALUES (2607, 'Enter special character conversions. (Better to use the file based character conversions.See extras/character_conversion_pack/instructions.txt)', 'SEO_URLS_CHAR_CONVERT_SET', '', 'This setting will convert characters.<br><br>The format <b>MUST</b> be in the form: <b>char=>conv,char2=>conv2</b>', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', '');
+INSERT INTO configuration VALUES (2608, 'Remove all non-alphanumeric characters?', 'SEO_URLS_REMOVE_ALL_SPEC_CHARS', 'true', 'This will remove all non-letters and non-numbers. If your language has special characters then you will need to use the character conversion system.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (2609, 'Set the number of days to store the cache.', 'SEO_URLS_CACHE_DAYS', '7', 'Set the number of days you wish to retain cached data, after this the cache will auto reset.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', '');
+INSERT INTO configuration VALUES (2610, 'Reset SEO URLs Cache', 'SEO_URLS_CACHE_RESET', 'false', 'This will reset the cache data for SEO', 60, 902, '2010-03-17 04:40:49', '2010-03-17 08:14:36', 'tep_reset_cache_data_seo_urls', 'tep_cfg_select_option(array(''reset'', ''false''), ');
+INSERT INTO configuration VALUES (2611, 'Turn debug reporting on true/false.', 'SEO_URLS_OUPUT_PERFORMANCE', 'false', '<span style="color: red;">Debug reporting should <b>NOT</b> be set to ON on a live site</span><br>It is for dev reporting re: performance and queries.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (2612, 'Select caching system.', 'SEO_URLS_CACHE_SYSTEM', 'FileSystem', '<b>Filesystem:</b><br>Zero queries after cache load.<br><b>Database:</b><br>One query after cache load<br><b>Memcached:</b><br>Requires memcached in apache and php.ini.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''FileSystem'', ''Database'', ''Memcached''), ');
 
+#Open Feature Sets Start
+INSERT INTO configuration VALUES (3000, '<font color=blue>Show Featured Sets on Store Front</font>', 'SHOW_FEATURED_SETS_ON_STORE_FRONT', 'true', 'Would you like to see the Featured Sets displayed on the store front page?', 99, 1, '2005-10-19 02:56:40', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3001, '<font color=blue>Show Featured Sets on Categories</font>', 'SHOW_FEATURED_SETS_ON_CATEGORIES', 'true', 'Would you like to see the Featured Sets displayed on the categories page?', 99, 2, '2004-01-01 03:30:00', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3002, '<font color=blue>Show Featured Sets on Product Lists</font>', 'SHOW_FEATURED_SETS_ON_PRODUCT_LISTS', 'true', 'Would you like to see the Featured Sets displayed on the product list pages? This option best fits sites with multi-column type product list pages.', 99, 3, '2004-01-01 03:30:00', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3003, '<font color=blue>Show Featured Sets on Product Info</font>', 'SHOW_FEATURED_SETS_ON_PRODUCTS', 'true', 'Would you like to see the Featured Sets Products displayed on the products info page?', 99, 4, '2004-01-01 03:30:00', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+
+INSERT INTO configuration VALUES (3004, '<font color=green>Limit Product Features Focus</font>', 'OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES', 'true', 'Would you like to limit showing Featured Products to only showing the featured products that are within the currently displayed category?', 99, 5, '2004-01-01 03:30:00', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3005, '<font color=green>Limit Category Features Focus</font>', 'OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES', 'true', 'Would you like to limit showing Featured Catagories to only showing the products from the Featured Catagories that are within the currently displayed category?', 99, 6, '2004-01-01 03:30:00', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+
+INSERT INTO configuration VALUES (3006, '<font color=green>Suspend Featured Sets Expiring</font>', 'SUSPEND_FEATURED_SETS_EXPIRING', 'false', 'Would you like to suspend the Featured Sets expiring functionality? All Featured Sets will remain active while this is true.', 99, 7, '2004-01-01 03:30:00', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3007, '<font color=green>Show Buy Now Button</font>', 'FEATURED_SET_SHOW_BUY_NOW_BUTTONS', 'true', 'Would you like to show Buy Now Buttons on the Featured Set Pages?', 99, 8, '2004-01-01 03:30:00', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3008, '<font color=green>Limit Descriptions by Words or Chars</font>', 'OPEN_FEATURED_LIMIT_DESCRIPTION_BY', 'words', 'Would you like to limit the description size by number of words or by number of characters?', 99, 9, '2004-01-01 03:30:00', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''words'', ''chars''),');
+
+INSERT INTO configuration VALUES (3009, '<b>Display featured products</b>', 'FEATURED_PRODUCTS_DISPLAY', 'true', 'Show featured products?', 99, 11, '2005-11-04 21:16:41', '2004-06-06 21:19:24', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3010, 'Layout position of featured products section', 'FEATURED_PRODUCTS_POSITION', '1', '1= Top<br>2= Top Middle<br>3= Bottom Middle<br>4= Bottom.<br>', 99, 12, '2005-10-18 20:32:44', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''1'', ''2'', ''3'', ''4''),');
+INSERT INTO configuration VALUES (3011, 'Featured products maximum', 'MAX_DISPLAY_FEATURED_PRODUCTS', '6', 'How many featured products show?', 99, 13, '2005-10-19 04:35:43', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3012, 'Columns in featured products layout', 'FEATURED_PRODUCTS_COLUMNS', '3', 'How many columns do you want to use in your layout?', 99, 14, '2005-11-03 23:53:32', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3013, 'Words per short description when it''s not written', 'MAX_FEATURED_WORD_DESCRIPTION', '24', 'When you don''t enter short description, truncate description up to how many words?', 99, 15, '2004-06-06 21:41:43', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3014, 'Featured products period', 'DAYS_UNTIL_FEATURED_PRODUCTS', '30', 'How many days do you want to add to the current date when you click on the green light.', 99, 16, '2005-10-18 05:00:42', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3015, 'Choose a featured products set layout', 'FEATURED_SET', '4', '1= side by side<br>2= over  under<br>3= image, price over under, description side<br>4= image, price over under', 99, 17, '2005-11-03 23:53:25', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4''),');
+INSERT INTO configuration VALUES (3016, 'Choose a featured products set style', 'FEATURED_SET_STYLE', '6', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed<br>5= boxed w/box header<br>6= shadowboxed w/box header', 99, 18, '2005-11-03 23:47:46', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4'', ''5'', ''6''),');
+INSERT INTO configuration VALUES (3017, 'Choose a box grouping method', 'FEATURED_PRODUCTS_GROUPING', 'gbox', 'gbox= grouped in one box<br>sbox= each product in separate box', 99, 19, '2005-11-03 23:47:46', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_featured(array(''gbox'', ''sbox''),');
+INSERT INTO configuration VALUES (3018, 'Set the direction of the shadow', 'FEATURED_SET_STYLE_SHADOW', 'right', 'right or left', 99, 20, '2005-11-04 01:00:03', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''right'', ''left''),');
+INSERT INTO configuration VALUES (3019, 'Set the sort order for the feature products.', 'FEATURED_PRODUCTS_SORT_ORDER', 'rand()', '<br><b>product id, <br>product name, <br>product price, <br>random.</b><br>', 99, 21, '2004-06-10 23:54:40', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''p.products_id'', ''pd.products_name'', ''p.products_price'', ''rand()''),');
+INSERT INTO configuration VALUES (3020, 'Set the sort order for products by ascending or descending', 'FEATURED_PRODUCTS_DIRECTION', 'DESC', 'ASC=ascending or DESC=descending', 99, 22, '2004-06-10 23:54:59', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''ASC'', ''DESC''),');
+INSERT INTO configuration VALUES (3021, 'Products cellpadding', 'FEATURED_CELLPADDING', '14', 'Sets the cellpadding for the Products.<br>', 99, 23, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3022, 'Products separator vertical line height', 'FEATURED_VLINE_IMAGE_HEIGHT', '150', 'Sets the height of the vertical line divider', 99, 24, '2004-06-23 22:26:04', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3023, 'Products separator thickness', 'FEATURED_LINE_THICKNESS', '2', 'Sets the thickness of the product separator line. Only shows in Set Style #3.<br>', 99, 25, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3024, 'Products separator line color', 'FEATURED_LINE_COLOR', 'DDDDDD', 'Sets the color of the separator lines.<br><br>Enter a six digit hex number or click Pick Color to select one from a pallet.<br>', 99, 26, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_color(');
+
+INSERT INTO configuration VALUES (3025, '<b>Display featured manufacturers</b>', 'FEATURED_MANUFACTURERS_DISPLAY', 'true', 'Show featured manufacturers?', 99, 31, '2005-11-04 21:16:55', '2004-06-06 21:19:24', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3026, 'Layout position of featured manufacturers', 'FEATURED_MANUFACTURERS_POSITION', '2', '1= Top<br>2= Top Middle<br>3= Bottom Middle<br>4= Bottom.<br>', 99, 32, '2005-10-18 20:08:31', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''1'', ''2'', ''3'', ''4''),');
+INSERT INTO configuration VALUES (3027, 'Featured manufacturers maximum', 'MAX_DISPLAY_FEATURED_MANUFACTURERS', '6', 'How many featured manufacturers to show?', 99, 33, '2005-11-04 19:28:58', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3028, 'Columns in featured manufacturers layout', 'FEATURED_MANUFACTURERS_COLUMNS', '3', 'How many columns do you want to use in your layout?', 99, 34, '2005-11-04 18:14:43', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3029, 'Featured manufacturers period', 'DAYS_UNTIL_FEATURED_MANUFACTURERS', '30', 'How many days do you want to add to the current date when you click on the green light.', 99, 35, '2005-10-18 20:08:49', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3030, 'Choose a featured manufacturers set style', 'FEATURED_MANUFACTURERS_SET_STYLE', '6', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed<br>5= boxed w/box header<br>6= shadowboxed w/box header', 99, 36, '2005-11-03 23:47:46', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4'', ''5'', ''6''),');
+INSERT INTO configuration VALUES (3031, 'Set the sort order for the featured manufacturers.', 'FEATURED_MANUFACTURERS_SORT_ORDER', 'rand()', '<br><b>manufacturers id, <br>manufacturers name, <br>random.</b><br>', 99, 37, '2004-06-23 12:49:16', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''m.manufacturers_id'', ''m.manufacturers_name'', ''rand()''),');
+INSERT INTO configuration VALUES (3032, 'Set the manufacturers sort order by ascending or descending', 'FEATURED_MANUFACTURERS_DIRECTION', 'DESC', 'ASC=ascending or DESC=descending', 99, 38, '2004-06-10 23:54:59', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''ASC'', ''DESC''),');
+INSERT INTO configuration VALUES (3033, 'Manufacturers cellpadding', 'FEATURED_MANUFACTURERS_CELLPADDING', '14', 'Sets the cellpadding for the manufacturers.<br>', 99, 39, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3034, 'Manufacturers separator vertical line height', 'FEATURED_MANUFACTURERS_VLINE_IMAGE_HEIGHT', '150', 'Sets the height of the vertical line divider', 99, 40, '2004-06-23 22:26:04', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3035, 'Manufacturers separator thickness', 'FEATURED_MANUFACTURERS_LINE_THICKNESS', '2', 'Sets the thickness of the separator line. Only shows in Set Style #3.<br>', 99, 41, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3036, 'Manufacturers separator line color', 'FEATURED_MANUFACTURERS_LINE_COLOR', 'DDDDDD', 'Sets the color of the lines.<br><br>Enter a six digit hex number or click Pick Color to select one from a pallet.<br>', 99, 42, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_color(');
+
+INSERT INTO configuration VALUES (3037, '<b>Display featured manufacturer with products</b>', 'FEATURED_MANUFACTURER_DISPLAY', 'true', 'Show featured manufacturer with products?', 99, 51, '2005-10-18 20:25:15', '2004-06-06 21:19:24', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3038, 'Layout position of featured manufacturer with products', 'FEATURED_MANUFACTURER_POSITION', '3', '1= Top<br>2= Top Middle<br>3= Bottom Middle<br>4= Bottom.<br>', 99, 52, '2005-10-18 20:32:58', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''1'', ''2'', ''3'', ''4''),');
+INSERT INTO configuration VALUES (3039, 'Featured manufacturer with products maximum', 'MAX_DISPLAY_FEATURED_MANUFACTURER', '3', 'How many featured manufacturer with products show?', 99, 53, '2005-11-05 02:08:04', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3040, 'Columns in manufacturer with products layout', 'FEATURED_MANUFACTURER_COLUMNS', '3', 'How many columns do you want to use in your layout?', 99, 54, '2005-11-05 02:34:34', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3041, 'Words per short description when it''s not written', 'MAX_FEATURED_MANUFACTURER_WORD_DESCRIPTION', '24', 'When you don''t enter short description, truncate description up to how many words?', 99, 55, '2004-06-06 21:41:43', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3042, 'Featured manufacturer with products period', 'DAYS_UNTIL_FEATURED_MANUFACTURER', '30', 'How many days do you want to add to the current date when you click on the green light.', 99, 56, '2005-10-18 20:09:05', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3043, 'Choose a featured manufacturer with products set layout', 'FEATURED_MANUFACTURER_SET', '4', '1= side by side<br>2= over  under<br>3= image, price over under, description side<br>4= image, price over under', 99, 57, '2005-11-05 02:34:17', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4''),');
+INSERT INTO configuration VALUES (3044, 'Choose a featured manufacturer with products set style', 'FEATURED_MANUFACTURER_SET_STYLE', '4', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed<br>5= boxed w/box header<br>6= shadowboxed w/box header', 99, 58, '2005-11-05 02:41:08', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4'', ''5'', ''6''),');
+INSERT INTO configuration VALUES (3045, 'Choose a box grouping method for manufacturer with products', 'FEATURED_MANUFACTURER_GROUPING', 'gbox', 'gbox= grouped in one box<br>sbox= each product in separate box', 99, 59, '2005-11-05 02:41:08', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_featured(array(''gbox'', ''sbox''),');
+INSERT INTO configuration VALUES (3046, 'Set the direction of the shadow', 'FEATURED_MANUFACTURER_SET_STYLE_SHADOW', 'right', 'right or left', 99, 60, '2004-07-12 11:56:00', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''right'', ''left''),');
+INSERT INTO configuration VALUES (3047, 'Set the sort order for the feature manufacturer with products.', 'FEATURED_MANUFACTURER_SORT_ORDER', 'rand()', '<br><b>manufacturers id, <br>manufacturers name, <br>product id, <br>product name, <br>product price, <br>random.</b><br>', 99, 61, '2004-06-23 12:49:16', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''m.manufacturers_id'', ''m.manufacturers_name'', ''p.products_id'', ''pd.products_name'', ''p.products_price'', ''rand()''),');
+INSERT INTO configuration VALUES (3048, 'Set the manufacturer sort order by ascending or descending', 'FEATURED_MANUFACTURER_DIRECTION', 'DESC', 'ASC=ascending or DESC=descending', 99, 62, '2004-06-10 23:54:59', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''ASC'', ''DESC''),');
+INSERT INTO configuration VALUES (3049, 'Manufacturer with products cellpadding', 'MANUFACTURER_CELLPADDING', '14', 'Sets the cellpadding for the manufacturer.<br>', 99, 63, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3050, 'Manufacturer with products separator vertical line height', 'MANUFACTURER_VLINE_IMAGE_HEIGHT', '150', 'Sets the height of the vertical line divider', 99, 64, '2004-06-23 22:26:04', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3051, 'Manufacturer with products separator thickness', 'MANUFACTURER_LINE_THICKNESS', '2', 'Sets the thickness of the separator line. Only shows in Set Style #3.<br>', 99, 65, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3052, 'Manufacturer with products separator line color', 'MANUFACTURER_LINE_COLOR', 'DDDDDD', 'Sets the color of the lines.<br><br>Enter a six digit hex number or click Pick Color to select one from a pallet.<br>', 99, 66, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_color(');
+
+INSERT INTO configuration VALUES (3053, '<b>Display featured categories</b>', 'FEATURED_CATEGORIES_DISPLAY', 'true', 'Show featured categories?', 99, 71, '2005-11-05 02:50:48', '2004-06-06 21:19:24', '', 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3054, 'Layout position of featured categories', 'FEATURED_CATEGORIES_POSITION', '4', '1= Top<br>2= Top Middle<br>3= Bottom Middle<br>4= Bottom.<br>', 99, 72, '2005-10-18 20:33:09', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''1'', ''2'', ''3'', ''4''),');
+INSERT INTO configuration VALUES (3055, 'Featured categories maximum', 'MAX_DISPLAY_FEATURED_CATEGORIES', '6', 'How many featured categories show?', 99, 73, '2005-11-04 13:06:51', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3056, 'Columns in featured categories layout', 'FEATURED_CATEGORIES_COLUMNS', '3', 'How many columns do you want to use in your layout?', 99, 74, '2005-10-19 04:18:12', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3057, 'Words per short description when it''s not written', 'MAX_FEATURED_CATEGORIES_WORD_DESCRIPTION', '24', 'When you don''t enter short description, truncate description up to how many words?', 99, 75, '2004-06-06 21:41:43', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3058, 'Featured categories period', 'DAYS_UNTIL_FEATURED_CATEGORIES', '30', 'How many days do you want to add to the current date when you click on the green light.', 99, 76, '2005-10-18 11:21:55', '2004-06-06 21:19:24', NULL, NULL);
+INSERT INTO configuration VALUES (3059, 'Choose a featured categories set layout', 'FEATURED_CATEGORIES_SET', '4', '1= side by side<br>2= over  under<br>3= image, price over under, description side<br>4= image, price over under', 99, 77, '2005-10-19 04:17:45', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4''),');
+INSERT INTO configuration VALUES (3060, 'Choose a featured categories set style', 'FEATURED_CATEGORIES_SET_STYLE', '6', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed<br>5= boxed w/box header<br>6= shadowboxed w/box header', 99, 78, '2005-11-05 02:42:01', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4'', ''5'', ''6''),');
+INSERT INTO configuration VALUES (3061, 'Choose a box grouping method for categories', 'FEATURED_CATEGORIES_GROUPING', 'gbox', 'gbox= grouped in one box<br>sbox= each product in separate box', 99, 79, '2005-11-05 02:42:01', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_featured(array(''gbox'', ''sbox''),');
+INSERT INTO configuration VALUES (3062, 'Set the direction of the shadow', 'FEATURED_CATEGORIES_SET_STYLE_SHADOW', 'right', 'right or left', 99, 80, '2004-07-12 11:56:00', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''right'', ''left''),');
+INSERT INTO configuration VALUES (3063, 'Set the sort order for the feature categories.', 'FEATURED_CATEGORIES_SORT_ORDER', 'rand()', '<br><b>categories id, <br>categories name, <br>manufacturers id, <br>product id, <br>product name, <br>product price, <br>random.</b><br>', 99, 81, '2004-06-23 12:49:16', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''c.categories_id'', ''cd.categories_name'', ''m.manufacturers_id'', ''p.products_id'', ''pd.products_name'', ''p.products_price'', ''rand()''),');
+INSERT INTO configuration VALUES (3064, 'Set the categories sort order by ascending or descending', 'FEATURED_CATEGORIES_DIRECTION', 'DESC', 'ASC=ascending or DESC=descending', 99, 82, '2004-06-10 23:54:59', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(''ASC'', ''DESC''),');
+INSERT INTO configuration VALUES (3065, 'Categories cellpadding', 'CATEGORIES_CELLPADDING', '14', 'Sets the cellpadding for the category.<br>', 99, 83, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3066, 'Categories separator vertical line height', 'CATEGORIES_VLINE_IMAGE_HEIGHT', '150', 'Sets the height of the vertical line divider', 99, 84, '2004-06-23 22:26:04', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3067, 'Categories separator thickness', 'CATEGORIES_LINE_THICKNESS', '2', 'Sets the thickness of the separator line. Only shows in Set Style #3.<br>', 99, 85, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3068, 'Categories separator line color', 'CATEGORIES_LINE_COLOR', 'DDDDDD', 'Sets the color of the lines.<br><br>Enter a six digit hex number or click Pick Color to select one from a pallet.<br>', 99, 86, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_color(');
+#Open Featurd Sets End
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
@@ -2018,6 +2104,7 @@ INSERT INTO configuration_group VALUES (87,'reCaptcha', 'reCaptcha Settings', 90
 INSERT INTO configuration_group VALUES (88,'Price breaks', 'Configuration options for price breaks', 88, 1);
 INSERT INTO configuration_group VALUES (89,'Google Maps', 'Google Maps Settings', 89, 1);
 
+INSERT INTO configuration_group VALUES (99,'Featured Sets', 'Configure featured sets', 99, 1);   
 INSERT INTO configuration_group VALUES (201,'Template Setup', 'Template Settings', 201, 1);
 INSERT INTO configuration_group VALUES (202,'Page Modules', 'Page Module Settings', 202, 1);
 
@@ -2566,12 +2653,14 @@ INSERT INTO orders_premade_comments VALUES (2, 'Out of stock when ordered', 'Unf
 #Page Module Controller
 INSERT INTO pm_configuration VALUES (1, 'Specials', 'Special Products Module', 'default_specials.php', 'yes', 'index', 3, now(), now());
 INSERT INTO pm_configuration VALUES (2, 'New Products', 'New Products Module', 'new_products.php', 'yes', 'index', 4, now(), now());
-INSERT INTO pm_configuration VALUES (3, 'Upcoming Products', 'Upcoming products module', 'upcoming_products.php', 'yes', 'index', 6, now(), now());
+INSERT INTO pm_configuration VALUES (3, 'Upcoming Products', 'Upcoming products module', 'upcoming_products.php', 'yes', 'index', 7, now(), now());
 INSERT INTO pm_configuration VALUES (4, 'Cross Sell Module', 'Cross Sell Module', 'xsell_products.php', 'yes', 'product_info', 1, now(), now());
 INSERT INTO pm_configuration VALUES (5, 'Also Purchased Module', 'Also Purchased Module', 'also_purchased_products.php', 'yes', 'product_info', 2, now(), now());
-INSERT INTO pm_configuration VALUES (6, 'Previous Next Module', 'Previous Next Module', 'products_next_previous.php', 'yes', 'product_info', 3, now(), now());
+INSERT INTO pm_configuration VALUES (6, 'Previous Next Module', 'Previous Next Module', 'products_next_previous.php', 'yes', 'product_info', 4, now(), now());
 INSERT INTO pm_configuration VALUES (7, 'Counter', '', 'counter.php', 'yes', 'all', 2, now(), now());
 INSERT INTO pm_configuration VALUES (8, 'Copyright', '', 'copyright.php', 'yes', 'all', 3, now(), now());
-INSERT INTO pm_configuration VALUES (9, 'Articles', '', 'index_articles.php', 'yes', 'index', 5, now(), now());
+INSERT INTO pm_configuration VALUES (9, 'Articles', '', 'index_articles.php', 'yes', 'index', 6, now(), now());
 INSERT INTO pm_configuration VALUES (10, 'Greeting', '', 'index_greeting.php', 'yes', 'index', 1, now(), now());
 INSERT INTO pm_configuration VALUES (11, 'Define Mainpage', '', 'index_define_mainpage.php', 'yes', 'index', 2, now(), now());
+INSERT INTO pm_configuration VALUES (12, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'index', 5, now(), now());
+INSERT INTO pm_configuration VALUES (13, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'product_info', 3, now(), now());

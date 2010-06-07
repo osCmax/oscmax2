@@ -159,4 +159,19 @@ define('PB_DROPDOWN_BETWEEN', ' at ');
 define('PB_DROPDOWN_AFTER', ' each');
 define('PB_FROM', 'from');
 // EOF QPBPP for SPPC
+
+// BOF Open Featured Sets
+define('TEXT_PRODUCTS_SHORT', 'Products Short Description:');
+define('TABLE_HEADING_FEATURED', 'Featured Sets');
+define('TABLE_HEADING_FEATURED_PREVIEW', 'Featured Preview');
+define('TEXT_CATEGORIES_FEATURED', 'Featured Category');
+define('TEXT_CATEGORIES_YES', 'Yes');
+define('TEXT_CATEGORIES_NO', 'No');
+define('TEXT_CATEGORIES_FEATURED_DATE', 'Featured Until Date ');
+define('TEXT_PRODUCTS_FEATURED', 'Featured Products:');
+define('TEXT_PRODUCT_NO', 'No');
+define('TEXT_PRODUCT_YES', 'Yes');
+define('TEXT_MORE_INFO', 'more...');
+// EOF Open Featured Sets
+
 ?>

@@ -27,6 +27,7 @@
 <div id="descriptiontabs<?php echo $i ?>">
 	<ul>
 		<li><a href="#descriptiontabs<?php echo $i ?>-0"><?php echo TEXT_PRODUCTS_DESCRIPTION; ?></a></li>
+        <li><a href="#descriptiontabs<?php echo $i ?>-10"><?php echo TEXT_PRODUCTS_SHORT; ?></a></li>
 		<li><a href="#descriptiontabs<?php echo $i ?>-1"><?php echo TAB1; ?></a></li>
 		<li><a href="#descriptiontabs<?php echo $i ?>-2"><?php echo TAB2; ?></a></li>
 		<li><a href="#descriptiontabs<?php echo $i ?>-3"><?php echo TAB3; ?></a></li>
@@ -37,6 +38,10 @@
 
 	<div id="descriptiontabs<?php echo $i ?>-0">
         <?php echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '10', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])),'id = products_description[' . $languages[$i]['id'] . '] class="ckeditor"'); ?>   
+	</div>
+
+	<div id="descriptiontabs<?php echo $i ?>-10">
+        <?php echo tep_draw_textarea_field('products_short[' . $languages[$i]['id'] . ']', 'soft', '70', '10', (isset($products_short[$languages[$i]['id']]) ? stripslashes($products_short[$languages[$i]['id']]) : tep_get_products_short($pInfo->products_id, $languages[$i]['id'])),'id = products_short[' . $languages[$i]['id'] . '] class="ckeditor"'); ?>   
 	</div>
 
 	<div id="descriptiontabs<?php echo $i ?>-1">

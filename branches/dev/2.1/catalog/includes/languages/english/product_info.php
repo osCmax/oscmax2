@@ -46,7 +46,7 @@ define('TAB5', 'Tab 5');
 define('TAB6', 'Tab 6');
 // EOF: Tabs by PGM
 
-// BOF QPBPP for SPPC
+// BOF: QPBPP for SPPC
 define('TEXT_ENTER_QUANTITY', 'Quantity');
 define('TEXT_PRICE_PER_PIECE', 'Price&nbsp;for&nbsp;each');
 define('TEXT_SAVINGS', 'Your savings');
@@ -55,7 +55,7 @@ define('PB_DROPDOWN_BEFORE', '');
 define('PB_DROPDOWN_BETWEEN', ' at ');
 define('PB_DROPDOWN_AFTER', ' each');
 define('PB_FROM', 'from');
-// BOF QPBPP for SPPC
+// BOF: QPBPP for SPPC
 
 // BOF: previous next product
 define('PREV_NEXT_PRODUCT', '');
@@ -65,7 +65,15 @@ define('ALT_PREVIOUS_PRODUCT', 'Previous Product');
 define('ALT_NEXT_PRODUCT', 'Next Product');
 define('ALT_FIRST_PRODUCT', 'First Product');
 define('ALT_LAST_PRODUCT', 'Last Product');
-
 // EOF: previous next product
+
+// BOF: Open Featured Sets
+define('OPEN_FEATURED_BOX_HEADING', 'Featured');
+define('OPEN_FEATURED_BOX_CATEGORY_HEADING', "Featured");
+define('OPEN_FEATURED_BOX_MANUFACTURERS_HEADING', "Now Featuring");
+define('OPEN_FEATURED_BOX_MANUFACTURER_HEADING', "Now Featuring");
+define('OPEN_FEATURED_TABLE_HEADING_PRICE', ''); //Price: 
+define('TEXT_MORE_INFO', 'more...');
+// EOF: Open Featured Sets
 
 ?>

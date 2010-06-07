@@ -590,6 +590,20 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
   require(DIR_WS_FUNCTIONS . 'specials.php');
   tep_expire_specials();
 
+// BOF Open Featured Sets
+  require(DIR_WS_FUNCTIONS . 'featured_sets.php');
+  if (SUSPEND_FEATURED_SETS_EXPIRING=='false') {
+    // auto expire featured products
+    tep_expire_featured();
+    // auto expire featured manufacturers
+    tep_expire_featured_manufacturers();
+    // auto expire featured manufacturer
+    tep_expire_featured_manufacturer();
+    // auto expire featured categories
+    tep_expire_featured_categories();
+  }
+// EOF Open Featured Sets
+
 // calculate category path
   if (isset($_GET['cPath'])) {
     $cPath = $_GET['cPath'];

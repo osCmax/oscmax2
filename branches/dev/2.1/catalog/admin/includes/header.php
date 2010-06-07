@@ -34,7 +34,8 @@
 	$('#banners_scheduled').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
 	$('#nopurchases_start').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
 	$('#nopurchases_end').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
-
+	$('#products_featured_until').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
+	$('#categories_featured_until').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
 
 //Batch Print Center
 	$("#Labels").hide();
@@ -81,7 +82,7 @@
 /* Tabs for Customer Groups */
     $("#qpbpp").tabs();
 
-
+	$("#categorytabs").tabs();
 }); 
 
 </script>

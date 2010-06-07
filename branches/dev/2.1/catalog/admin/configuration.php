@@ -59,6 +59,9 @@ $Id: configuration.php 3 2006-05-27 04:59:07Z user $
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
+<?php // BOF Open Featured Sets ?>
+<script language="javascript" src="includes/javascript/ColorPicker2.js"></script>
+<?php // EOF Open Featured Sets ?>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
 <!-- header //-->

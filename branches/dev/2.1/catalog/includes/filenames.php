@@ -224,4 +224,16 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('FILENAME_PI_PAGE_MODULES', 'pi_page_modules.php');
   define('FILENAME_COMMON_PAGE_MODULES', 'common_page_modules.php');
 // EOF: Page Module Controller  
+
+// BOF: Open Featured Sets
+  define('FILENAME_FEATURED_SETS', 'featured_sets.php');
+  define('FILENAME_FEATURED_SBOX_CATEGORIES', 'featured_sbox_categories.php');
+  define('FILENAME_FEATURED_SBOX_MANUFACTURER', 'featured_sbox_manufacturer.php');
+  define('FILENAME_FEATURED_SBOX_PRODUCTS', 'featured_sbox_products.php');
+  define('FILENAME_FEATURED_MANUFACTURERS', 'featured_manufacturers.php');
+  define('FILENAME_FEATURED_GBOX_CATEGORIES', 'featured_gbox_categories.php');
+  define('FILENAME_FEATURED_GBOX_MANUFACTURER', 'featured_gbox_manufacturer.php');
+  define('FILENAME_FEATURED_GBOX_PRODUCTS', 'featured_gbox_products.php');
+// EOF: Open Featured Sets
+
 ?>

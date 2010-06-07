@@ -13,6 +13,10 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
 define('HEADING_TITLE', 'Manufacturers');
 
 define('TABLE_HEADING_MANUFACTURERS', 'Manufacturers');
+// BOF Open Featured Sets
+define('TABLE_HEADING_MANUFACTURER_FEATURED', 'Manufacturer with Products');
+define('TABLE_HEADING_MANUFACTURERS_FEATURED', 'Featured Manufacturers');
+// EOF Open Featured Sets
 define('TABLE_HEADING_ACTION', 'Action');
 
 define('TEXT_HEADING_NEW_MANUFACTURER', 'New Manufacturer');
@@ -20,6 +24,16 @@ define('TEXT_HEADING_EDIT_MANUFACTURER', 'Edit Manufacturer');
 define('TEXT_HEADING_DELETE_MANUFACTURER', 'Delete Manufacturer');
 
 define('TEXT_MANUFACTURERS', 'Manufacturers:');
+// BOF Open Featured Sets
+define('TEXT_MANUFACTURER_FEATURED', 'Featured Manufacturer');
+define('TEXT_MANUFACTURER_YES', 'Yes');
+define('TEXT_MANUFACTURER_NO', 'No');
+define('TEXT_MANUFACTURER_FEATURED_DATE', 'Featured Until Date ');
+define('TEXT_MANUFACTURERS_FEATURED', 'Featured Manufacturers');
+define('TEXT_MANUFACTURERS_YES', 'Yes');
+define('TEXT_MANUFACTURERS_NO', 'No');
+define('TEXT_MANUFACTURERS_FEATURED_DATE', 'Featured Until Date ');
+// EOF Open Featured Sets
 define('TEXT_DATE_ADDED', 'Date Added:');
 define('TEXT_LAST_MODIFIED', 'Last Modified:');
 define('TEXT_PRODUCTS', 'Products:');

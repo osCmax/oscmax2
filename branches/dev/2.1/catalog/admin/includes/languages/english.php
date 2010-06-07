@@ -378,6 +378,9 @@ define('IMAGE_UPLOAD', 'Upload');
 // BOF QPBPP for SPPC
 define('IMAGE_SHOW_PRODUCTS', 'Show Products');
 // EOF QPBPP for SPPC
+// BOF Open Featured Sets
+define('IMAGE_PICK_COLOR', 'Pick Color');
+// EOF Open Featured Sets
 
 define('ICON_CROSS', 'False');
 define('ICON_CURRENT_FOLDER', 'Current Folder');

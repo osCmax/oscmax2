@@ -640,6 +640,15 @@ function tep_selected_file($filename) {
     return $product['products_description'];
   }
 
+// BOF Open Featured Sets
+  function tep_get_products_short($product_id, $language_id) {
+    $product_query = tep_db_query("select products_short from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . $product_id . "' and language_id = '" . $language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['products_short'];
+  }
+// EOF Open Featured Sets
+
 // BOF: Tabs by PGM
 
   function tep_get_tab1($product_id, $language_id) {
@@ -899,11 +908,64 @@ function tep_selected_file($filename) {
     if ($status == '1') {
       return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '1', products_last_modified = now() where products_id = '" . (int)$products_id . "'");
     } elseif ($status == '0') {
-      return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0', products_last_modified = now() where products_id = '" . (int)$products_id . "'");
+	  // BOF Open Featured Sets
+      return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0',  products_featured = '0', products_last_modified = now() where products_id = '" . (int)$products_id . "'");
+ 	// EOF Open Featured Set
     } else {
       return -1;
     }
   }
+
+// BOF Open Featured Sets
+////
+// Sets the featured status of a product
+  function tep_set_product_featured($products_id, $featured) {
+    if ($featured == '1') {
+      return tep_db_query("update " . TABLE_PRODUCTS . " set products_featured = '1', products_last_modified = now(), products_featured_until = '". date('Y/m/d', time() + 86400 * DAYS_UNTIL_FEATURED_PRODUCTS)."' where products_id = '" . (int)$products_id . "'");
+    } elseif ($featured == '0') {
+      return tep_db_query("update " . TABLE_PRODUCTS . " set products_featured = '0', products_last_modified = now(), products_featured_until = NULL where products_id = '" . (int)$products_id . "'");
+    } else {
+      return -1;
+    }
+  }
+
+////
+// Sets the featured status of manufacturers
+  function tep_set_manufacturers_featured($manufacturers_id, $featured) {
+    if ($featured == '1') {
+      return tep_db_query("update " . TABLE_MANUFACTURERS . " set manufacturers_featured = '1', last_modified = now(), manufacturers_featured_until = '". date('Y/m/d', time() + 86400 * DAYS_UNTIL_FEATURED_MANUFACTURERS)."' where manufacturers_id = '" . (int)$manufacturers_id . "'");
+    } elseif ($featured == '0') {
+      return tep_db_query("update " . TABLE_MANUFACTURERS . " set manufacturers_featured = '0', last_modified = now(), manufacturers_featured_until = NULL where manufacturers_id = '" . (int)$manufacturers_id . "'");
+    } else {
+      return -1;
+    }
+  }
+
+////
+// Sets the featured status of manufacturer
+  function tep_set_manufacturer_featured($manufacturers_id, $featured) {
+    if ($featured == '1') {
+      return tep_db_query("update " . TABLE_MANUFACTURERS . " set manufacturer_featured = '1', last_modified = now(), manufacturer_featured_until = '". date('Y/m/d', time() + 86400 * DAYS_UNTIL_FEATURED_MANUFACTURER)."' where manufacturers_id = '" . (int)$manufacturers_id . "'");
+    } elseif ($featured == '0') {
+      return tep_db_query("update " . TABLE_MANUFACTURERS . " set manufacturer_featured = '0', last_modified = now(), manufacturer_featured_until = NULL where manufacturers_id = '" . (int)$manufacturers_id . "'");
+    } else {
+      return -1;
+    }
+  }
+
+////
+// Sets the featured status of categories
+  function tep_set_categories_featured($categories_id, $featured) {
+    if ($featured == '1') {
+      return tep_db_query("update " . TABLE_CATEGORIES . " set categories_featured = '1', last_modified = now(), categories_featured_until = '". date('Y/m/d', time() + 86400 * DAYS_UNTIL_FEATURED_CATEGORIES)."' where categories_id = '" . (int)$categories_id . "'");
+    } elseif ($featured == '0') {
+      return tep_db_query("update " . TABLE_CATEGORIES . " set categories_featured = '0', last_modified = now(), categories_featured_until = NULL where categories_id = '" . (int)$categories_id . "'");
+    } else {
+      return -1;
+    }
+  }
+// EOF Open Featured Sets
+
 
 ////
 // Sets the status of a product on special
@@ -1657,6 +1719,41 @@ function tep_selected_file($filename) {
     return $tmp_array;
   }
 
+// BOF Open Featured Sets
+////
+// Alias function for featured configuration values in the Administration Tool
+  function tep_cfg_select_featured($select_array, $key_value, $key = '') {
+    $string = '';
+
+    for ($i=0, $n=sizeof($select_array); $i<$n; $i++) {
+      $name = ((tep_not_null($key)) ? 'configuration[' . $key . ']' : 'configuration_value');
+
+      $string .= '<input type="radio" name="' . $name . '" value="' . $select_array[$i] . '"';
+
+      if ($key_value == $select_array[$i]) $string .= ' CHECKED';
+
+      $string .= '> ' . $select_array[$i];
+    }
+
+    return $string;
+  }
+  
+////
+// Alias function for Store configuration values in the Administration Tool
+  function tep_cfg_select_color($key_value, $key = '') {
+    $string = '';
+
+    $name = ((tep_not_null($key)) ? 'configuration[' . $key . ']' : 'configuration_value');
+
+    $string .= '<SCRIPT LANGUAGE="JavaScript"> var cp = new ColorPicker(\'window\'); </SCRIPT>';
+    $string .= '<br><table border="0" cellspacing="0" cellpadding="0"><tr><td><input type="text" name="' . $name . '" id="' . $name . '" value="' . $key_value . '" size="6"></td><td>&nbsp;</td>';
+    $string .= '<td><a href="javascript:;" onclick="cp.select(document.configuration.'.$name.',\'pick\');return false;" name="pick" id="pick">'.tep_image_button('button_pick_color.gif', IMAGE_PICK_COLOR).'</a></td></tr></table><br>';
+
+    return $string;
+  }
+// EOF Open Featured Sets
+
+
 //++++ QT Pro: Begin Changed code
 require(DIR_WS_FUNCTIONS . 'qtpro_functions.php');
 //++++ QT Pro: End Changed code
@@ -1886,7 +1983,8 @@ function qpbpp_insert_update_discount_cats($products_id, $current_discount_categ
 
     return tep_draw_pull_down_menu($name, $statuses_array, $order_status_id);
   }
-  
+
+// Function to create pulldown menu for templates by PGM
 function tep_cfg_pull_down_templates() {
   $dir_array = array();
   $name = (($key) ? 'configuration[' . $key . ']' : 'configuration_value');

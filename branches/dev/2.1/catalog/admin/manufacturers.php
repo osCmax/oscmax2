@@ -24,16 +24,28 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
         $sql_data_array = array('manufacturers_name' => $manufacturers_name);
 
         if ($action == 'insert') {
-          $insert_sql_data = array('date_added' => 'now()');
+          // BOF Open Featured Sets
+          $insert_sql_data = array('date_added' => 'now()',
+				   'manufacturers_featured' => tep_db_prepare_input($HTTP_POST_VARS['manufacturers_featured']),
+				   'manufacturers_featured_until' => tep_db_prepare_input($HTTP_POST_VARS['manufacturers_featured_until']),
+				   'manufacturer_featured' => tep_db_prepare_input($HTTP_POST_VARS['manufacturer_featured']),
+				   'manufacturer_featured_until' => tep_db_prepare_input($HTTP_POST_VARS['manufacturer_featured_until']));
+		  // EOF Open Featured Sets
 
           $sql_data_array = array_merge($sql_data_array, $insert_sql_data);
 
           tep_db_perform(TABLE_MANUFACTURERS, $sql_data_array);
           $manufacturers_id = tep_db_insert_id();
         } elseif ($action == 'save') {
-          $update_sql_data = array('last_modified' => 'now()');
-
-          $sql_data_array = array_merge($sql_data_array, $update_sql_data);
+          // BOF Open Featured Sets
+          $update_sql_data = array('last_modified' => 'now()',
+				   'manufacturers_featured' => tep_db_prepare_input($HTTP_POST_VARS['manufacturers_featured']),
+				   'manufacturers_featured_until' => tep_db_prepare_input($HTTP_POST_VARS['manufacturers_featured_until']),
+				   'manufacturer_featured' => tep_db_prepare_input($HTTP_POST_VARS['manufacturer_featured']),
+				   'manufacturer_featured_until' => tep_db_prepare_input($HTTP_POST_VARS['manufacturer_featured_until']));
+		  // EOF Open Featured Sets
+          
+		  $sql_data_array = array_merge($sql_data_array, $update_sql_data);
 
           tep_db_perform(TABLE_MANUFACTURERS, $sql_data_array, 'update', "manufacturers_id = '" . (int)$manufacturers_id . "'");
         }
@@ -69,6 +81,35 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
 
         tep_redirect(tep_href_link(FILENAME_MANUFACTURERS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'mID=' . $manufacturers_id));
         break;
+				
+// BOF Open Featured Sets		
+	  case 'setflag_manufacturers_featured':
+        if ( ($HTTP_GET_VARS['flag'] == '0') || ($HTTP_GET_VARS['flag'] == '1') ) {
+          if (isset($HTTP_GET_VARS['mID'])) {
+            tep_set_manufacturers_featured($HTTP_GET_VARS['mID'], $HTTP_GET_VARS['flag']);
+          }
+
+          if (USE_CACHE == 'true') {
+            tep_reset_cache_block('manufacturers');
+          }
+        }
+        tep_redirect(tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $HTTP_GET_VARS['page']));
+        break;
+
+	  case 'setflag_manufacturer_featured':
+        if ( ($HTTP_GET_VARS['flag'] == '0') || ($HTTP_GET_VARS['flag'] == '1') ) {
+          if (isset($HTTP_GET_VARS['mID'])) {
+            tep_set_manufacturer_featured($HTTP_GET_VARS['mID'], $HTTP_GET_VARS['flag']);
+          }
+
+          if (USE_CACHE == 'true') {
+            tep_reset_cache_block('manufacturers');
+          }
+        }
+        tep_redirect(tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $HTTP_GET_VARS['page']));
+        break;
+// EOF Open Featured Sets
+	
       case 'deleteconfirm':
         $manufacturers_id = tep_db_prepare_input($_GET['mID']);
 
@@ -108,9 +149,34 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+
+<?php
+ 	// BOF Open Featured Sets
+?>
+<link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
+<script language="JavaScript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
+<script language="JavaScript"><!-- 
+var ManufacturersFeaturedUntil = new ctlSpiffyCalendarBox("ManufacturersFeaturedUntil", "manufacturers", "manufacturers_featured_until","btnDate1","<?php echo $mInfo->manufacturers_featured_until; ?>", scBTNMODE_CUSTOMBLUE); 
+//--></script>
+<script language="JavaScript"><!-- 
+var ManufacturerFeaturedUntil = new ctlSpiffyCalendarBox("ManufacturerFeaturedUntil", "manufacturers", "manufacturer_featured_until","btnDate1","<?php echo $mInfo->manufacturer_featured_until; ?>", scBTNMODE_CUSTOMBLUE); 
+//--></script>
+<?php
+	// EOF Open Featured Sets
+?>
+
 <script language="javascript" src="includes/general.js"></script>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
+
+<?php
+ 	// BOF Open Featured Sets
+?>
+<div id="spiffycalendar" class="text"></div>
+<?php
+ 	// EOF Open Featured Sets
+?>
+
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -139,10 +205,20 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MANUFACTURERS; ?></td>
+                <?php
+ 	// BOF Open Featured Sets
+?>
+                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_MANUFACTURERS_FEATURED; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_MANUFACTURER_FEATURED; ?></td>
+<?php
+ 	// EOF Open Featured Sets
+?>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-  $manufacturers_query_raw = "select manufacturers_id, manufacturers_name, manufacturers_image, date_added, last_modified from " . TABLE_MANUFACTURERS . " order by manufacturers_name";
+  // BOF Open Featured Sets
+  $manufacturers_query_raw = "select manufacturers_id, manufacturers_name, manufacturers_image, date_added, last_modified, manufacturers_featured, manufacturers_featured_until, manufacturer_featured, manufacturer_featured_until from " . TABLE_MANUFACTURERS . " order by manufacturers_name";
+ 	// EOF Open Featured Sets
   $manufacturers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $manufacturers_query_raw, $manufacturers_query_numrows);
   $manufacturers_query = tep_db_query($manufacturers_query_raw);
   while ($manufacturers = tep_db_fetch_array($manufacturers_query)) {
@@ -161,13 +237,52 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
     }
 ?>
                 <td class="dataTableContent"><?php echo $manufacturers['manufacturers_name']; ?></td>
+                
+<?php
+ 	// BOF Open Featured Sets
+?>
+				<td class="dataTableContent" align="center">
+<?php
+	 if (!isset($mInfo) && is_object($mInfo) && ($mInfo->manufacturers_featured)) $mInfo->manufacturers_featured = '0';
+    switch ($mInfo->manufacturers_featured) {
+      case '0': $in_fms_status = false; $out_fms_status = true; break;
+      case '1':
+      default: $in_fms_status = true; $out_fms_status = false;
+	  }
+	  
+      if ($manufacturers['manufacturers_featured'] == '1') {
+        echo tep_image(DIR_WS_IMAGES . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'action=setflag_manufacturers_featured&flag=0&mID=' . $manufacturers['manufacturers_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+      } else {
+        echo '<a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'action=setflag_manufacturers_featured&flag=1&mID=' . $manufacturers['manufacturers_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+      }
+?></td>
+				<td class="dataTableContent" align="center">
+<?php
+	 if (!isset($mInfo) && is_object($mInfo) && ($mInfo->manufacturer_featured)) $mInfo->manufacturer_featured = '0';
+    switch ($mInfo->manufacturer_featured) {
+      case '0': $in_fm_status = false; $out_fm_status = true; break;
+      case '1':
+      default: $in_fm_status = true; $out_fm_status = false;
+	  }
+	  
+      if ($manufacturers['manufacturer_featured'] == '1') {
+        echo tep_image(DIR_WS_IMAGES . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'action=setflag_manufacturer_featured&flag=0&mID=' . $manufacturers['manufacturers_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+      } else {
+        echo '<a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'action=setflag_manufacturer_featured&flag=1&mID=' . $manufacturers['manufacturers_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+      }
+?></td>
+<?php
+ 	// EOF Open Featured Sets
+?>
+
+                
                 <td class="dataTableContent" align="right"><?php if (isset($mInfo) && is_object($mInfo) && ($manufacturers['manufacturers_id'] == $mInfo->manufacturers_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $manufacturers['manufacturers_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
   }
 ?>
               <tr>
-                <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText" valign="top"><?php echo $manufacturers_split->display_count($manufacturers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_MANUFACTURERS); ?></td>
                     <td class="smallText" align="right"><?php echo $manufacturers_split->display_links($manufacturers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
@@ -178,7 +293,7 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
   if (empty($action)) {
 ?>
               <tr>
-                <td align="right" colspan="2" class="smallText"><?php echo '<a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
+                <td align="right" colspan="5" class="smallText"><?php echo '<a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
               </tr>
 <?php
   }
@@ -197,6 +312,13 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
       $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_NAME . '<br>' . tep_draw_input_field('manufacturers_name'));
       $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_IMAGE . '<br>' . tep_draw_file_field('manufacturers_image'));
 
+// BOF Open Featured Sets
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED . '<br>' . tep_draw_radio_field('manufacturers_featured', '1', $in_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_YES . '&nbsp;' . tep_draw_radio_field('manufacturers_featured', '0', $out_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_NO);
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $mInfo->manufacturers_featured_until . '<br><script language="javascript">ManufacturersFeaturedUntil.writeControl(); ManufacturersFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED . '<br>' . tep_draw_radio_field('manufacturer_featured', '1', $in_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_YES . '&nbsp;' . tep_draw_radio_field('manufacturer_featured', '0', $out_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_NO);
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $mInfo->manufacturer_featured_until . '<br><script language="javascript">ManufacturerFeaturedUntil.writeControl(); ManufacturerFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+// EOF Open Featured Sets
+
       $manufacturer_inputs_string = '';
       $languages = tep_get_languages();
       for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
@@ -213,6 +335,13 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
       $contents[] = array('text' => TEXT_EDIT_INTRO);
       $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_NAME . '<br>' . tep_draw_input_field('manufacturers_name', $mInfo->manufacturers_name));
       $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_IMAGE . '<br>' . tep_draw_file_field('manufacturers_image') . '<br>' . $mInfo->manufacturers_image);
+
+// BOF Open Featured Sets
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED . '<br>' . tep_draw_radio_field('manufacturers_featured', '1', $in_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_YES . '&nbsp;' . tep_draw_radio_field('manufacturers_featured', '0', $out_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_NO);
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $mInfo->manufacturers_featured_until . '<br><script language="javascript">ManufacturersFeaturedUntil.writeControl(); ManufacturersFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED . '<br>' . tep_draw_radio_field('manufacturer_featured', '1', $in_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_YES . '&nbsp;' . tep_draw_radio_field('manufacturer_featured', '0', $out_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_NO);
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $mInfo->manufacturer_featured_until . '<br><script language="javascript">ManufacturerFeaturedUntil.writeControl(); ManufacturerFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+// EOF Open Featured Sets
 
       $manufacturer_inputs_string = '';
       $languages = tep_get_languages();

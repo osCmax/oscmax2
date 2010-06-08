@@ -38,4 +38,10 @@ define('TEXT_DELETE_INTRO', 'Are you sure you want to delete this customer?');
 define('TEXT_DELETE_REVIEWS', 'Delete %s review(s)');
 define('TEXT_INFO_HEADING_DELETE_CUSTOMER', 'Delete Customer');
 define('PLEASE_SELECT', 'Select One');
+
+define('IMAGE_BUTTON_ADD_COMMENT', 'Add Comment');
+define('TEXT_COMMENTS', 'Comments');
+define('TEXT_ADD_A_COMMENT', 'Add a comment:');
+define('TEXT_NOTES', 'Notes:');
+define('TEXT_AUTHOR', 'Author:');
 ?>

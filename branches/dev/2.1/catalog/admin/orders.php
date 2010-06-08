@@ -355,18 +355,57 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
         </table></td>
       </tr>
       <tr>
-        <td class="main"><br><b><?php echo TABLE_HEADING_COMMENTS; ?></b></td>
+        <td class="main"><b><?php echo TABLE_HEADING_COMMENTS; ?></b></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
+
+<?php
+	  $ias_notes_query = tep_db_query("SELECT DISTINCT customers_id, customers_notes_id, customers_notes_message, customers_notes_editor, customers_notes_date FROM customers_notes WHERE customers_id = " . $the_customers_id);
+			if(!tep_db_num_rows($ias_notes_query)) { // No Comments Available 
+			} else {
+?>				
+      <tr>
+        <td class="main"><table border="0" cellspacing="0" cellpadding="5" width="100%">
+          <tr class="dataTableHeadingRow">
+            <td class="dataTableHeadingContent" width="150"><?php echo TABLE_HEADING_DATE_ADDED; ?></td>
+            <td class="dataTableHeadingContent" width="150" align="center"><?php echo TABLE_HEADING_AUTHOR; ?></td>
+            <td class="dataTableHeadingContent" width="180"><?php echo TABLE_HEADING_STATUS; ?></td>
+            <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMER_COMMENTS; ?></td>
+          </tr>
+ <?php
+ 		function notedate($fdate) {
+					list($year, $month, $day) = explode("-", $fdate);
+					return sprintf("%02d-%02d-%04d", $month, $day, $year);
+		} // end function
+				
+		while ($ias_notes = tep_db_fetch_array($ias_notes_query)) {
+?>			
+		  <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+		    <td class="smallText" align="center"><?php echo tep_date_short($ias_notes['customers_notes_date']); ?></td>
+            <td class="smallText" align="center"><?php echo $ias_notes["customers_notes_editor"]; ?></td>
+            <td class="smallText"><?php echo TEXT_ACTIVE; ?></td>
+            <td class="smallText"><?php echo $ias_notes["customers_notes_message"]; ?></td>
+          </tr>  		
+<?php		
+		} // end while
+?>
+		</table></td>
+        </tr>
+ 		<tr>
+        	<td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+      	</tr>
+<?php
+	} // end if
+?>
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="5" width="100%">
           <tr class="dataTableHeadingRow">
             <td class="dataTableHeadingContent" width="150"><?php echo TABLE_HEADING_DATE_ADDED; ?></td>
             <td class="dataTableHeadingContent" width="150" align="center"><?php echo TABLE_HEADING_CUSTOMER_NOTIFIED; ?></td>
             <td class="dataTableHeadingContent" width="180"><?php echo TABLE_HEADING_STATUS; ?></td>
-            <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_COMMENTS; ?></td>
+            <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_ORDER_COMMENTS; ?></td>
           </tr>
 <?php
     $orders_history_query = tep_db_query("select orders_status_id, date_added, customer_notified, comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . tep_db_input($oID) . "' order by date_added");
@@ -393,7 +432,7 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
         </table></td>
       </tr>
       <tr>
-        <td class="main"><br><b><?php echo TABLE_HEADING_NEW_COMMENTS; ?></b></td>
+        <td class="main"><br><b><?php echo TABLE_HEADING_NEW_ORDER_COMMENTS; ?></b></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
@@ -405,7 +444,7 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
                 	<td class="dataTableHeadingContent" width="150"></td>
                     <td class="dataTableHeadingContent" width="150" align="center"><?php echo ENTRY_NOTIFY_CUSTOMER; ?></td>
                     <td class="dataTableHeadingContent" width="180"><?php echo ENTRY_STATUS; ?></td>
-                    <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NEW_COMMENTS; ?></td>
+                    <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NEW_ORDER_COMMENTS; ?></td>
 	            </tr>                    
             	<tr class="dataTableRow">
                 	<td class="smallText"></td>

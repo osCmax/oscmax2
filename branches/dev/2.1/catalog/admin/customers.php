@@ -1232,7 +1232,7 @@ $ias_notes_query = tep_db_query("SELECT DISTINCT customers_id, customers_notes_i
 	if(tep_db_num_rows($ias_notes_query) == 0) { // No Comments Available
 		$contents[] = array('text' => '<table width="100%>');
 	} else {
-		$contents[] = array('text' => '<table width="100%><tr><td colspan="2"><b>Comments:</b></td></tr>');
+		$contents[] = array('text' => '<table width="100%><tr><td colspan="2"><b>' . TEXT_COMMENTS .'</b></td></tr>');
 
         function notedate($fdate) {
 					list($year, $month, $day) = explode("-", $fdate);
@@ -1240,10 +1240,9 @@ $ias_notes_query = tep_db_query("SELECT DISTINCT customers_id, customers_notes_i
 		} // end function
 		
 		$comment_table_string = '';
-		$count = tep_db_num_rows($ias_notes_query);
-		$n=0;
-		while (($ias_notes = tep_db_fetch_array($ias_notes_query)) && ($n <= $count)) {
-		$n++;	
+		
+		while ($ias_notes = tep_db_fetch_array($ias_notes_query)) {
+			
 		$comment_table_string .= '<tr>';
 		$comment_table_string .= '  <td>';
 		$comment_table_string .= '    <table width="100%" cellpadding="2" cellspacing="0" border="0" style="background-color:#ffffff">';
@@ -1264,9 +1263,9 @@ $ias_notes_query = tep_db_query("SELECT DISTINCT customers_id, customers_notes_i
 	
 		$contents[] = array('text' => '<table width="100%"><tr><td><form action="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=newnotes') . '" method="post" name="notes">');
 
-		$contents[] = array('text' => '<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="smallText" colspan="3"><b>Add a comment:</b></td></tr>');
-		$contents[] = array('text' => '<tr><td class="smallText" valign="top">Notes:</td><td colspan="2"><TEXTAREA NAME="message" COLS=30 ROWS=6></TEXTAREA></td></tr>');
-		$contents[] = array('text' => '<tr><td class="smallText">Author:</td><td><input type="text" name="editor" size="12" value=""></td><td class="smallText" valign="top" align="right">' . tep_image_submit('button_add_comment.gif', IMAGE_BUTTON_ADD_COMMENT) . '&nbsp;&nbsp;&nbsp;</td></tr></table>');
+		$contents[] = array('text' => '<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="smallText" colspan="3"><b>' . TEXT_ADD_A_COMMENT . '</b></td></tr>');
+		$contents[] = array('text' => '<tr><td class="smallText" valign="top">' . TEXT_NOTES . '</td><td colspan="2"><TEXTAREA NAME="message" COLS=30 ROWS=6></TEXTAREA></td></tr>');
+		$contents[] = array('text' => '<tr><td class="smallText">' . TEXT_AUTHOR . '</td><td><input type="text" name="editor" size="12" value=""></td><td class="smallText" valign="top" align="right">' . tep_image_submit('button_add_comment.gif', IMAGE_BUTTON_ADD_COMMENT) . '&nbsp;&nbsp;&nbsp;</td></tr></table>');
 
 		$contents[] = array('text' => '</form></td></tr></table>');
 // EOF : PGM EDITS CUSTOMER NOTES

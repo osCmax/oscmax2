@@ -84,4 +84,10 @@ define('WARNING_ORDER_NOT_UPDATED', 'Warning: Nothing to change. The order was n
 
 define('HEADING_CANNED_COMMENTS_HELP', 'Premade Comments Help');
 define('TEXT_CANNED_COMMENTS_HELP', 'In order to create new premade comments please go to <b>Localization --> Premade Comments</b> menu and follow the onscreen instructions.  <br><br>If you need further help please read the <b>Wiki</b>.');
+
+define('TABLE_HEADING_AUTHOR', 'Author');
+define('TABLE_HEADING_CUSTOMER_COMMENTS', 'Customer Comments');
+define('TEXT_ACTIVE', 'Active');
+define('TABLE_HEADING_ORDER_COMMENTS', 'Order Comments');
+define('TABLE_HEADING_NEW_ORDER_COMMENTS', 'Add New Order Comment');
 ?>

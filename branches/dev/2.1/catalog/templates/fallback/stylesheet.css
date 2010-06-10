@@ -388,3 +388,6 @@ TD.featuredProducts A:hover, TD.featuredCategories A:hover, TD.featuredManufactu
   text-decoration: underline;
 }
 /* EOF: Open Featured Products */
+
+td.productinfo_boxes { border: 1px solid #b6b7cb; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 11px; padding:3px; }
+td.productinfo_imagebig { border: 1px solid #b6b7cb; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:3px; }

@@ -88,7 +88,7 @@
               unset($attributes[$o]['ovals'][$a]);
             }
           }
-          $out.='<tr><td align="right" class=main><b>'.$attributes[$o]['oname'].":</b></td><td class=main>".tep_draw_pull_down_menu('id['.$attributes[$o]['oid'].']',array_values($attributes[$o]['ovals']),$attributes[$o]['default'], "onchange=\"stkmsg(this.form);\"")."</td></tr>\n";
+          $out .= '<tr><td align="right" class="main"><b>' . $attributes[$o]['oname'] . ':</b></td><td class="main" align="left">' . tep_draw_pull_down_menu('id['.$attributes[$o]['oid'] . ']',array_values($attributes[$o]['ovals']),$attributes[$o]['default'], 'onchange=\"stkmsg(this.form);\"') . '</td></tr>';
         }        
         $out.=$this->_draw_out_of_stock_message_js($attributes);
         

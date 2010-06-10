@@ -161,7 +161,7 @@
   
 */
     function _draw_table_start() {
-      $out ='           <table border="0" cellspacing="0" cellpadding="2">';
+      $out ='           <table border="0" cellspacing="0" cellpadding="2" width="100%">';
       $out.='            <tr>';
       $out.='             <td class="main" colspan="2"><b>' . TEXT_PRODUCT_OPTIONS . '</b></td>';
       $out.='            </tr>';
@@ -192,7 +192,7 @@
       $attributes = $this->_build_attributes_array(true, false);
       if (sizeof($attributes)>0) {
         foreach ($attributes as $stocked) {
-          $out .= '<tr><td align="right" class=main><b>' . $stocked['oname'] . ":</b></td><td class=main>" . tep_draw_pull_down_menu('id['.$stocked['oid'].']',array_values($stocked['ovals']),$stocked['default']) . "</td></tr>\n";
+          $out .= '<tr><td align="right" class="main"><b>' . $stocked['oname'] . ':</b></td><td align="left">' . tep_draw_pull_down_menu('id['.$stocked['oid'].']',array_values($stocked['ovals']),$stocked['default']) . '</td></tr>';
         }
       }
       return $out;
@@ -219,7 +219,7 @@
       $nonstocked_attributes = $this->_build_attributes_array(false, true);
       foreach($nonstocked_attributes as $nonstocked)
       {
-        $out.='<tr><td align="right" class=main><b>'.$nonstocked['oname'].":</b></td><td class=main>".tep_draw_pull_down_menu('id['.$nonstocked['oid'].']',$nonstocked['ovals'],$nonstocked['default'])."</td></tr>\n";
+        $out.='<tr><td align="right" class="main"><b>' . $nonstocked['oname'] . ':</b></td><td align="left">' . tep_draw_pull_down_menu('id['.$nonstocked['oid'] . ']',$nonstocked['ovals'],$nonstocked['default']) . '</td></tr>';
       }
       return $out;
     }

@@ -2664,3 +2664,7 @@ INSERT INTO pm_configuration VALUES (10, 'Greeting', '', 'index_greeting.php', '
 INSERT INTO pm_configuration VALUES (11, 'Define Mainpage', '', 'index_define_mainpage.php', 'yes', 'index', 2, now(), now());
 INSERT INTO pm_configuration VALUES (12, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'index', 5, now(), now());
 INSERT INTO pm_configuration VALUES (13, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'product_info', 3, now(), now());
+
+#Fix for Articles to display if they are not in a topic
+INSERT INTO topics VALUES (0, NULL, 0, 0, now(), NULL);
+INSERT INTO topics_description VALUES (0, 1, 'Miscellaneous Articles', 'Miscellaneous', 'Articles that do not fall into a specific category.');

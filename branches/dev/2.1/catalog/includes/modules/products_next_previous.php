@@ -72,12 +72,8 @@
 	
 	if ($counter > 1) {
 ?>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-      <tr class="infoBoxContents">
-        <td align="center"><table border="0" cellspacing="0" cellpadding="3" class="infoBox">
-          <tr class="infoBoxContents">
+		<table border="0" cellspacing="0" cellpadding="3">
+          <tr>
 <?php
   if ($first != (int)$_GET['products_id']) {
 ?>
@@ -103,9 +99,13 @@
   }
 ?>
           </tr>
-          </table></td>
-      </tr>
+        </table>
 <?php
     }
+	// Add the spacer to the bottom of the page module ?>
+    <tr>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+    </tr>
+<?php
   }
 ?>

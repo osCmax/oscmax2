@@ -13,8 +13,7 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
   Copyright 2006 osCMax
   Released under the GNU General Public License
 */
-	// Backwards support for older osCommerce versions
-	if (isset($product_info_values) && is_object($product_info_values)) {
+if (isset($product_info_values) && is_object($product_info_values)) {
 		$product_info =& $product_info_values;
 	}
 	// Set the thumbnail basename; replaces "imagebase" in the user's pattern
@@ -31,13 +30,26 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 	if (mopics_file_exists(str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN))) {
 	?>
 	<tr>
-      	<td>
-		<div class="screenshotsHeader">
-		<div class="screenshotsHeaderText"><?php echo TEXT_OTHER_PRODUCT_IMAGES; ?></div>
-		</div>
-		<div class="screenshotsBlock"> 
-          <div align="center">
-	<?php
+      	<td class="productinfo_thumbnail">
+        <div class="screen2">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td>
+		      <img class="prev" src="images/icons/control_rewind.png" alt="prev">
+ 			</td>
+            <td>           
+			  <div id="slideshow">
+           		<ul>
+	
+<!-- If there are extra pictures we need to add the big image thumbnail to display as well otherwise you can not switch back! -->
+	<li>            
+      <?php 
+	  $image_ext = mopics_file_exists(str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN));
+	  $image_fix = $image_base_lg . '.' . $image_ext;
+	  echo '<a href="' . tep_href_link($image_fix) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' .  tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>';?>
+	</li>
+    	
+<?php	
 	$row = 0;
 	// Loop until all of this product's thumbnails have been found and displayed
 		while ($image_ext = mopics_file_exists(str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN))) {
@@ -67,23 +79,21 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 				// Set the large image's popup URL
 				$extraImagePopupURL = tep_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $product_info['products_id'] . '&pic=' . $i . '&type=' . $lg_image_ext);
 ?>
-				<div class="screenshots">
-               
-<!-- LIGHTBOX/SLIMBOX -->
-<script language="javascript"><!--
-document.write('<?php echo '<a href="' . tep_href_link($image_lg) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >'
-. $extraImagePopupImage; ?><br /><span class="smallText"><?php echo $extraImageURLText; ?></span></a>');
-//--></script>
-<!-- EOF LIGHTBOX/SLIMBOX -->
+				<li>             
+                  <!-- LIGHTBOX/SLIMBOX -->
+                  <script language="javascript"><!--
+                  document.write('<?php echo '<a href="' . tep_href_link($image_lg) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . $extraImagePopupImage; ?></a>');
+                  //--></script>
+                  <!-- EOF LIGHTBOX/SLIMBOX -->
 
-          <noscript>
-            <a href="<?php echo $extraImageURL; ?>" target="_blank"><?php echo $extraImageImage; ?><br /><span class="smallText"><?php echo $extraImageURLText; ?></span></a>
-          </noscript>
-				</div>
+                  <noscript>
+                    <a href="<?php echo $extraImageURL; ?>" target="_blank"><?php echo $extraImageImage; ?></a>
+                  </noscript>
+				</li>
 <?php
 			} else {
 				// No larger image found; Only display the thumbnail without a "click to enlarge" link
-				echo '<div class="screenshots">' . $extraImageImage . '</div>';
+				echo '<li>' . $extraImageImage . '</li>';
 			}
 			// Increase current count
 			$i++;
@@ -91,12 +101,22 @@ document.write('<?php echo '<a href="' . tep_href_link($image_lg) . '" target="_
 			$replace = array($image_base, $i);
 		}
 		// All thumbnails have been found and displayed; clear all of the CSS floats
-		echo '<div class="clearScreenshots"><hr /></div>';
+?>
+		        </ul>
+              </div>
+			</td>
+            <td>
+              <img class="next" src="images/icons/control_fastforward.png" alt="next">
+            </td>
+          </tr>
+        </table>
+        </div>
+        </td>
+      </tr>		
+
+<?php	
 	} else {
 		// No extra images found for this product
-		// echo '<p class="noScreenshots"><span class="smallText">' . TEXT_NO_MOPICS . '</span></p>';
-	}
-?>
-           </div>
-       </td>
-    </tr>
+		// echo '<p class="noScreenshots"><span class="smallText">' . TEXT_NO_MOPICS . '</span></p>';      
+    }
+?>			

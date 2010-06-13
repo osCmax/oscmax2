@@ -391,3 +391,16 @@ TD.featuredProducts A:hover, TD.featuredCategories A:hover, TD.featuredManufactu
 
 td.productinfo_boxes { border: 1px solid #b6b7cb; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 11px; padding:3px; }
 td.productinfo_imagebig { border: 1px solid #b6b7cb; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:3px; }
+td.productinfo_thumbnail  { border: 1px solid #b6b7cb; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; }
+
+/* ///////////////////////////////////////////////////////// */
+#slideshow ul, #slideshow li { padding:0; margin:0; list-style:none; }
+.next, .prev{ cursor:pointer; }
+
+#screen2{ position:relative; width:280px; margin:0px; }
+
+#slideshow{ overflow:hidden; width:280px; }
+  #slideshow ul{ width:3900px; padding-left:0px; }
+	#slideshow li{ float:left; margin:0 10px; cursor:pointer; }
+
+.clear{ clear:both; width:0; height:0; }

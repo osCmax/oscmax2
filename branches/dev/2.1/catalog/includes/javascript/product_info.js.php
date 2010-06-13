@@ -4,6 +4,8 @@
   google.load("jquery", "1.4.0");
 </script>
 <script type="text/javascript" src="includes/javascript/slimbox2/slimbox2.js"></script>
+<script type="text/javascript" src="includes/javascript/jquery.scrollTo-min.js"></script>
+<script type="text/javascript" src="includes/javascript/jquery.serialScroll-min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','slimbox2.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','dynamic_mopics.css')); // BTSv1.5 ?>">
 <script language="javascript" type="text/javascript"><!--
@@ -65,13 +67,13 @@ jQuery.fn.semantictabs = function(passedArgsObj) {
 			container.find(args.panel).hide();
 			container.find("ul.tabs li").removeClass("active");
 			container.find(args.panel + ":eq(" + args.activate + ")").show();
-			container.find("ul.tabs li:eq(" + args.activate + ")").addClass("active");      
+			container.find("ul.tabs li:eq(" + args.activate + ")").addClass("active");
 	  });
 	} else {
     return this.each(function(){
   		// Load behavior
   		var container = jQuery(this);
-      container.find(args.panel).hide();
+        container.find(args.panel).hide();
   		container.find(args.panel + args.active).show();
   		container.prepend("<ul class=\"tabs semtabs\"></ul>");
   		container.find(args.panel).each( function() {
@@ -96,7 +98,7 @@ jQuery.fn.semantictabs = function(passedArgsObj) {
 	}
 		
 };
-<!--// TABS-->
+<!--// TABS & SCROLLERS-->
 </script>
 <script type="text/javascript"> 
 // initialise Tabs
@@ -106,6 +108,33 @@ $(document).ready(function(){
   		head:'h4',        //-- Selector of element containing panel header, i.e. h3
   		active:':first'            //-- Which panel to activate by default
 	});
+
+	$("#slideshow ul li img").hover(
+    	function(){
+        var folderSwitch = $(this).attr("src").replace("thumbs", "images_big");
+		$(".productinfo_imagebig img").attr("src", folderSwitch);
+	});
+	
+	$("#slideshow ul li a").hover(
+    	function(){
+		var imageSwitch = $(this).attr("href");	
+		$(".productinfo_imagebig a").attr("href", imageSwitch);
+	});
+
+	$('#slideshow').serialScroll({
+		items:'li',
+		prev:'img.prev',
+		next:'img.next',
+		offset:-50, //when scrolling to photo, stop 230 before reaching it (from the left)
+		start:0, //as we are centering it, start at the 2nd
+		duration:1200,
+		force:true,
+		stop:true,
+		lock:false,
+		cycle:true, //don't pull back once you reach the end
+		jump: false //click on the images to scroll to them
+	});
+
 });
 </script>
 <script type="text/javascript"> 

@@ -90,20 +90,23 @@
             		$lightlarge = $image_lg . "." . $lg_image_ext;
 					?>               
 					<script language="javascript"><!--
-                    document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>');
+                    document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" id="image_big" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>');
     //-->
                     </script>
                     <noscript>
-                    <?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
+                    <?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
                     </noscript>
                     <?php
             	} else {
-          			echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+          			echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
             	}
 				?>
                 </td>
                 <!-- Image Big Ends -->
               </tr>
+              <tr>
+        		<td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      		  </tr>
               <tr>
                 <!-- Thumbnails Starts -->
               	<td width="300">
@@ -119,10 +122,22 @@
                 </td>
                 <!-- Thumbnails Ends -->
               </tr>
+              
+            <!-- Conditional URL Starts -->
+            <?php if (tep_not_null($product_info['products_url'])) { ?>
+              <tr>
+                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+              </tr>
+              <tr>
+                <td class="productinfo_boxes"><?php echo sprintf(TEXT_MORE_INFORMATION, tep_href_link(FILENAME_REDIRECT, 'action=url&goto=' . urlencode($product_info['products_url']), 'NONSSL', true, false)); ?></td>
+              </tr>
+            <?php } ?>
+            <!-- Conditional URL Starts -->
+            
             </table>
         <!-- Left Column Ends -->
         </td>
-        
+                
         <!-- Central Spacer Start -->
         <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '10'); ?></td>
         <!-- Central Spacer End -->
@@ -145,17 +160,6 @@
                 </td>
                 <!-- Description Ends -->
               </tr>
-
-            <!-- Conditional URL Starts -->
-            <?php if (tep_not_null($product_info['products_url'])) { ?>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="productinfo_boxes"><?php echo sprintf(TEXT_MORE_INFORMATION, tep_href_link(FILENAME_REDIRECT, 'action=url&goto=' . urlencode($product_info['products_url']), 'NONSSL', true, false)); ?></td>
-              </tr>
-            <?php } ?>
-            <!-- Conditional URL Starts -->
 
 			<!-- Conditional Atrributes Starts -->              
             <?php
@@ -241,7 +245,7 @@
         <td colspan="3">
           <table width="100%">
             <tr>
-              <td class="main" align="left" width="15%">
+              <td class="smallText" align="left" width="20%">
               <?php
                 $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " where products_id = '" . (int)$_GET['products_id'] . "'");
                 $reviews = tep_db_fetch_array($reviews_query);
@@ -251,11 +255,11 @@
 			  ?>	  
               </td>
               <?php if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) { ?>
-              <td align="center" class="smallText" width="70%"><?php echo sprintf(TEXT_DATE_AVAILABLE, tep_date_long($product_info['products_date_available'])); ?></td>
+              <td align="center" class="smallText" width="60%"><?php echo sprintf(TEXT_DATE_AVAILABLE, tep_date_long($product_info['products_date_available'])); ?></td>
               <?php } else { ?>
-              <td align="center" class="smallText" width="70%"><?php echo sprintf(TEXT_DATE_ADDED, tep_date_long($product_info['products_date_added'])); ?></td>
+              <td align="center" class="smallText" width="60%"><?php echo sprintf(TEXT_DATE_ADDED, tep_date_long($product_info['products_date_added'])); ?></td>
               <?php } ?>
-              <td align="right" width="15%">&nbsp;</td>
+              <td align="right" width="20%">&nbsp;</td>
             </tr>
           </table>
         </td>
@@ -268,7 +272,7 @@
       
       <!-- Page Module Controller Starts -->
       <tr>
-        <td colspan="3">
+        <td colspan="3" align="center">
       	  <?php include (DIR_WS_MODULES . FILENAME_PI_PAGE_MODULES); ?>
         </td>
       </tr>

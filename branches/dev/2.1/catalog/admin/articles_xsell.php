@@ -57,6 +57,10 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
       <table width="100%" border="0" cellpadding="0"  cellspacing="0">
         <tr><td align="left" class="main" valign="top">
         <?php
+		// Set right hand column arrays
+			$heading = array();
+		    $contents = array();
+		
     /* general_db_conct($query) function */
     /* calling the function:  list ($test_a, $test_b) = general_db_conct($query); */
     function general_db_conct($query_1)
@@ -91,6 +95,10 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
 
     if (! isset($_GET['add_related_article_ID']) )
     {
+		$heading[] = array('text' => '<b>Cross Sell Articles</b>');
+		$contents[] = array('text' => 'Please select an article that you wish to cross sell your products from by click on a row.<br><br>  If you want change the sort order that these products are shown in please click the <b>sort</b> link in the right hand column.');
+				
+		
         $query = "select a.articles_id, ad.articles_name, ad.articles_description, ad.articles_url from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where ad.articles_id = a.articles_id and ad.language_id = '" . (int)$languages_id . "' order by ad.articles_name";
     list ($articles_id, $articles_name, $articles_description, $articles_url) = general_db_conct($query);
     ?>
@@ -165,6 +173,11 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
             exit(TEXT_NO_INSERT);
         } 
       }  
+	  
+	  		  $heading[] = array('text' => '<b>Cross Sell Articles: Database Updated</b>');
+			  $contents[] = array('text' => 'Your changes have been saved to the database please either go back to the main page or click the link to sort the order in which the cross sell products are listed.');
+				  
+	  
       ?>
       		  <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#999999">
       		    <tr class="dataTableHeadingRow">
@@ -194,6 +207,8 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
 
     if (isset($_GET['add_related_article_ID']) && ! $_POST && ! isset($_GET['sort']))
     {   
+		$heading[] = array('text' => '<b>Cross Sell Articles</b>');
+		$contents[] = array('text' => 'Please select the category of the product you wish to cross sell.');
 	?>
 	<table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#999999">
       <tr class="dataTableHeadingRow">
@@ -201,8 +216,7 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
 	  </tr>
       <tr class="dataTableRow">
         <td class="dataTableContent">
-          <?php 
-		    echo tep_draw_form('goto', "articles_xsell.php", '', 'get') . tep_hide_session_id(); 
+          <?php  
 		    echo tep_draw_form('goto', "articles_xsell.php", '', 'get') . tep_hide_session_id();
         	echo '<input type="hidden" name="add_related_article_ID" value="'.(int)$_GET['add_related_article_ID'].'" />';
             echo SELECT_CATEGORY ."&nbsp;:" . tep_draw_pull_down_menu('cPath', tep_get_category_tree(), $current_category_id, 'onChange="this.form.submit();"');
@@ -215,6 +229,7 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
 	
 		<?php
         if (isset($_GET['cPath'])) {
+		$contents[] = array('text' => 'Then select the product you wish to add by checking the tick boxes.');
         ?>
     
       <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#999999">
@@ -240,7 +255,7 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
             for ($i=0; $i < $num_of_products; ++$i)
             {
 			  ?>
-              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)">
+              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
                 <td class="dataTableContent" align="center"><?php echo $products_id[$i];?></td>
                 <td class="dataTableContent"><?php echo $products_model[$i];?></td>
 	  			<td class="dataTableContent" align="center"><?php echo tep_image('../' . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image[$i], '', SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?></td>
@@ -294,7 +309,7 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
       $run_once=0;
       
       if ($_POST)
-      {
+      {  
         foreach ($_POST as $key_a => $value_a)
         {
           tep_db_connect();
@@ -304,7 +319,8 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
                   exit(TEXT_NO_UPDATE);
               else
                   if ($run_once==0)
-                  { ?>
+                  { 
+				  ?>
                 <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#999999">
                   <tr class="dataTableHeadingRow">
                     <td class="dataTableHeadingContent"><?php echo TEXT_DATABASE_UPDATED; ?></td>
@@ -374,15 +390,15 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
           </td>
           <td width="25%" valign="top">
           	<?php
-			$heading = array();
-		    $contents = array();
-
-			$heading[] = array('text' => '<b>Cross Sell Articles</b>');
-
-			$contents[] = array('text' => '<br><br><br>');
-
-			$box = new box;
-      		echo $box->infoBox($heading, $contents);
+			if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+			  	$box = new box;
+			  	echo $box->infoBox($heading, $contents);
+			} else {
+				$heading[] = array('text' => '<b>Cross Sell Articles</b>');
+				$contents[] = array('text' => '<br><br><br>');
+				$box = new box;
+				echo $box->infoBox($heading, $contents);
+			}
 			?>
           </td>
         </tr>   

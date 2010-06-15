@@ -175,12 +175,12 @@ define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Remove Product');
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-          <tr class="infoBoxContents">
+        <td class="productinfo_buttons"><table border="0" width="100%" cellspacing="1" cellpadding="2">
+          <tr>
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td class="main"><a href="<?php echo tep_href_link(FILENAME_SHOPPING_CART, 'action=clear_cart', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_CART . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_cart.gif', 'Clear Basket'); ?></a></td>
+                <td class="main" align="left"><a href="<?php echo tep_href_link(FILENAME_SHOPPING_CART, 'action=clear_cart', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_CART . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_cart.gif', 'Clear Basket'); ?></a></td>
 
 <?php
     $back = sizeof($navigation->path)-2;
@@ -233,8 +233,8 @@ define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Remove Product');
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-          <tr class="infoBoxContents">
+        <td class="productinfo_buttons"><table border="0" width="100%" cellspacing="1" cellpadding="2">
+          <tr>
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>

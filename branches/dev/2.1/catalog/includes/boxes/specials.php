@@ -36,11 +36,14 @@ $Id: specials.php 3 2006-05-27 04:59:07Z user $
 ?>
 <!-- specials //-->
 <?php
-  $boxHeading = BOX_HEADING_SPECIALS;
-  $corner_left = 'square';
-  $corner_right = 'square';
+  $boxHeading = '<a href="' . tep_href_link(FILENAME_SPECIALS) . '">' . BOX_HEADING_SPECIALS . '</a>';
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
   $boxContent_attributes = ' align="center"';
-  $boxLink = '<a href="' . tep_href_link(FILENAME_SPECIALS) . '"><img src="images/infobox/arrow_right.gif" border="0" alt="more" title=" more " width="12" height="10"></a>';
+  $boxLink = '<a href="' . tep_href_link(FILENAME_SPECIALS) . '"><img src="' . DIR_WS_TEMPLATES . 'images/infobox/arrow_right.png" border="0" alt="more" title=" more "></a>';
   $box_base_name = 'specials'; // for easy unique box template setup (added BTSv1.2)
 
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)

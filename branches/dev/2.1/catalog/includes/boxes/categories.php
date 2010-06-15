@@ -29,8 +29,12 @@ include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
 
 
   $boxHeading = BOX_HEADING_CATEGORIES;
-  $corner_left = 'rounded';
-  $corner_right = 'square';
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'square';
+  $corner_bottom_right = 'rounded';
+  
   $boxContent_attributes = '';
   $boxLink = '';
   

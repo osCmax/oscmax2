@@ -131,8 +131,8 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
     }
 
     $list_box_contents[0][] = array('align' => $lc_align,
-// OLD                              'params' => 'class="productListing-heading"',
-                                    'params' => $lc_class,
+	                                'params' => 'class="productListing-heading" style="cellpadding: 3px"',
+//                                    'params' => $lc_class,
                                     'text' => '&nbsp;' . $lc_text . '&nbsp;');
   }
 

@@ -22,7 +22,7 @@ $Id: new_products.php 3 2006-05-27 04:59:07Z user $
 //  $info_box_contents[] = array('text' => sprintf(TABLE_HEADING_NEW_PRODUCTS, strftime('%B')));
   $box_content[] = array('align' => 'left', 'text' => '<a href="' . tep_href_link(FILENAME_PRODUCTS_NEW) . '" class="headerNavigation">' . sprintf(TABLE_HEADING_NEW_PRODUCTS, strftime('%B') . '</a>'));
 //  new contentBoxHeading($info_box_contents);
-  new infoBoxHeading($box_content, false, false, tep_href_link(FILENAME_PRODUCTS_NEW));
+  new infoBoxHeading($box_content, true, true, tep_href_link(FILENAME_PRODUCTS_NEW));
 
 //  if ( (!isset($new_products_category_id)) || ($new_products_category_id == '0') ) {
 // //  $new_products_query = tep_db_query("select p.products_id, p.products_image, p.products_tax_class_id, if(s.status, s.specials_new_products_price, p.products_price) as products_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id where products_status = '1' order by p.products_date_added desc limit " . MAX_DISPLAY_NEW_PRODUCTS);

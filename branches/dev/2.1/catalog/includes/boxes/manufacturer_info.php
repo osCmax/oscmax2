@@ -21,9 +21,14 @@ $Id: manufacturer_info.php 3 2006-05-27 04:59:07Z user $
 <!-- manufacturer_info //-->
 <?php
       $boxHeading = BOX_HEADING_MANUFACTURER_INFO;
-      $corner_left = 'square';
-      $corner_right = 'square';
-      $box_base_name = 'manufacturer_info'; // for easy unique box template setup (added BTSv1.2)
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
+  $boxContent_attributes = '';
+  $box_base_name = 'manufacturer_info'; // for easy unique box template setup (added BTSv1.2)
 
       $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
       $boxContent = '<table border="0" width="100%" cellspacing="0" cellpadding="0">';

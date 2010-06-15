@@ -55,14 +55,19 @@ $Id: also_purchased_products.php 3 2006-05-27 04:59:07Z user $
           $col = 0;
           $row ++;
         }
-      }
+      } // end while
 
       new contentBox($info_box_contents);
 ?>
+<table cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+    </tr>
+</table>
 <!-- also_purchased_products_eof //-->
 <?php
-    }
-  }
+    } // end $num_products_ordered
+  } // end isset($_GET
 } // end if statement tep_cache_also_purchased
   
 ?>

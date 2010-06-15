@@ -23,11 +23,17 @@ $Id: product_notifications.php 3 2006-05-27 04:59:07Z user $
 <!-- notifications //-->
 <?php
     $boxHeading = BOX_HEADING_NOTIFICATIONS;
-    $corner_left = 'square';
-    $corner_right = 'square';
-    $boxLink = '<a href="' . tep_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', 'SSL') . '"><img src="images/infobox/arrow_right.gif" border="0" alt="more" title=" more " width="12" height="10"></a>';
-    $box_base_name = 'product_notifications'; // for easy unique box template setup (added BTSv1.2)
-    $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
+  $boxContent_attributes = '';
+  $boxLink = '<a href="' . tep_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', 'SSL') . '"><img src="images/infobox/arrow_right.gif" border="0" alt="more" title=" more " width="12" height="10"></a>';
+  
+  $box_base_name = 'product_notifications'; // for easy unique box template setup (added BTSv1.2)
+  $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
     if (tep_session_is_registered('customer_id')) {
       $check_query = tep_db_query("select count(*) as count from " . TABLE_PRODUCTS_NOTIFICATIONS . " where products_id = '" . (int)$_GET['products_id'] . "' and customers_id = '" . (int)$customer_id . "'");

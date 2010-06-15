@@ -20,9 +20,13 @@ $Id: affiliate.php 14 2006-07-28 17:42:07Z user $
 <!-- affiliate_system //--> 
 
 <?php 
-  $boxHeading = BOX_HEADING_AFFILIATE; 
-  $corner_left = 'square'; 
-  $corner_right = 'square'; 
+  $boxHeading = BOX_HEADING_AFFILIATE;
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
   $boxContent_attributes = '';
   $boxLink = '';
   

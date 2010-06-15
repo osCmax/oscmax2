@@ -64,8 +64,14 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 <!-- topics //-->
 <?php
   $boxHeading = BOX_HEADING_ARTICLES;
-  $corner_left = 'square';
-  $corner_right = 'square';
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
+  $boxContent_attributes = '';
+  
   $box_base_name = 'articles'; // for easy unique box template setup (added BTSv1.2)
 
 //  $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)

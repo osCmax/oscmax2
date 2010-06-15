@@ -65,11 +65,15 @@
 	      // EOF: Mod - Wishlist
 	?>
 	  <tr>
-        <td class="pageHeading" valign="top"><?php echo $product_info['products_name']; ?></td>
-        <td>&nbsp;</td>
-        <td class="pageHeading" align="right" valign="top"><?php echo $products_price; ?></td>
-      </tr>
-
+        <td class="productinfo_header" colspan="3">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" width="100%">
+            <tr>
+              <td class="pageHeading" valign="top"><?php echo $product_info['products_name']; ?></td>
+              <td class="pageHeading" align="right" valign="top"><?php echo $products_price; ?></td>  
+            </tr>
+          </table>
+        </td>
+	  </tr>
       <tr>
         <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
@@ -200,14 +204,14 @@
     
       <!-- Buttons Starts -->
       <tr>
-        <td colspan="3">
-          <table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-            <tr class="infoBoxContents">
+        <td colspan="3" class="productinfo_buttons">
+          <table border="0" width="100%" cellspacing="1" cellpadding="2">
+            <tr>
               <td>
                 <table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                	<td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params()) . '">' . tep_image_button('button_reviews.gif', IMAGE_BUTTON_REVIEWS) . '</a>'; ?></td>
+                	<td class="main" align="left"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params()) . '">' . tep_image_button('button_reviews.gif', IMAGE_BUTTON_REVIEWS) . '</a>'; ?></td>
                 	<!-- Wish List 3.5 Start -->
                 	<td align="center"><?php echo tep_image_submit('button_wishlist.gif', 'Add to Wishlist', 'name="wishlist" value="wishlist"'); ?></td>
  	                <!-- Wish List 3.5 End   -->

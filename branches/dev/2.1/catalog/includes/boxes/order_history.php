@@ -20,11 +20,17 @@ $Id: order_history.php 3 2006-05-27 04:59:07Z user $
 ?>
 <!-- customer_orders //-->
 <?php
-      $boxHeading = BOX_HEADING_CUSTOMER_ORDERS;
-      $corner_left = 'square';
-      $corner_right = 'square';
-      $box_base_name = 'order_history'; // for easy unique box template setup (added BTSv1.2)
-      $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
+  $boxHeading = BOX_HEADING_CUSTOMER_ORDERS;
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
+  $boxContent_attributes = '';
+  $box_base_name = 'order_history'; // for easy unique box template setup (added BTSv1.2)
+  
+  $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
       $product_ids = '';
       while ($orders = tep_db_fetch_array($orders_query)) {

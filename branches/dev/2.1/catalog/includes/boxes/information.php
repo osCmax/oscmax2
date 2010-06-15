@@ -13,8 +13,13 @@ $Id: information.php 3 2006-05-27 04:59:07Z user $
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 
   $boxHeading = BOX_HEADING_INFORMATION;
-  $corner_left = 'square';
-  $corner_right = 'square';
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
+  $boxContent_attributes = '';
   $box_base_name = 'information'; // for easy unique box template setup (added BTSv1.2)
 
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)

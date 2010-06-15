@@ -54,6 +54,7 @@ define('HEADER_TITLE_CREATE_ACCOUNT', 'Create an Account');
 define('HEADER_TITLE_MY_ACCOUNT', 'My Account');
 define('HEADER_TITLE_CART_CONTENTS', 'Cart Contents');
 define('HEADER_TITLE_CHECKOUT', 'Checkout');
+define('HEADER_TITLE_WISHLIST', 'Wishlist');
 define('HEADER_TITLE_TOP', 'Top');
 define('HEADER_TITLE_CATALOG', 'Catalog');
 define('HEADER_TITLE_LOGOFF', 'Log Off');

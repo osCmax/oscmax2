@@ -103,9 +103,11 @@
 <?php
     }
 	// Add the spacer to the bottom of the page module ?>
+<table cellpadding="0" cellspacing="0" border="0">
     <tr>
         <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
     </tr>
+</table>
 <?php
   }
 ?>

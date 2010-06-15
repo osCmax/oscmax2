@@ -98,31 +98,33 @@ $Id: boxes.php 3 2006-05-27 04:59:07Z user $
   }
 
   class infoBoxHeading extends tableBox {
-    function infoBoxHeading($contents, $left_corner = true, $right_corner = true, $right_arrow = false) {
+    function infoBoxHeading($contents, $left_corner = false, $right_corner = false, $right_arrow = false) {
       $this->table_cellpadding = '0';
 
       if ($left_corner == true) {
-        $left_corner = tep_image(DIR_WS_IMAGES . 'infobox/corner_left.gif');
+        $left_corner = tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_left.png');
       } else {
-        $left_corner = tep_image(DIR_WS_IMAGES . 'infobox/corner_right_left.gif');
+        $left_corner = tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_spacer.png');
       }
       if ($right_arrow == true) {
-        $right_arrow = '<a href="' . $right_arrow . '">' . tep_image(DIR_WS_IMAGES . 'infobox/arrow_right.gif', ICON_ARROW_RIGHT) . '</a>';
+        $right_arrow = '<a href="' . $right_arrow . '">' . tep_image(DIR_WS_TEMPLATES . 'images/infobox/arrow_right.png', ICON_ARROW_RIGHT) . '</a>';
       } else {
         $right_arrow = '';
       }
       if ($right_corner == true) {
-        $right_corner = $right_arrow . tep_image(DIR_WS_IMAGES . 'infobox/corner_right.gif');
+        $right_corner = tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_right.png');
       } else {
-        $right_corner = $right_arrow . tep_draw_separator('pixel_trans.gif', '11', '14');
+        $right_corner = tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_spacer.png');
       }
 
       $info_box_contents = array();
-      $info_box_contents[] = array(array('params' => 'height="14" class="infoBoxHeading"',
+      $info_box_contents[] = array(array('params' => 'class="infoBoxHeading"',
                                          'text' => $left_corner),
-                                   array('params' => 'width="100%" height="14" class="infoBoxHeading"',
+                                   array('params' => 'width="100%" class="infoBoxHeading"',
                                          'text' => $contents[0]['text']),
-                                   array('params' => 'height="14" class="infoBoxHeading" nowrap',
+                                   array('params' => 'class="infoBoxHeading"',
+                                         'text' => $right_arrow),
+                                   array('params' => 'class="infoBoxHeading" nowrap',
                                          'text' => $right_corner));
 
       $this->tableBox($info_box_contents, true);
@@ -134,13 +136,13 @@ $Id: boxes.php 3 2006-05-27 04:59:07Z user $
       $info_box_contents = array();
       $info_box_contents[] = array('text' => $this->contentBoxContents($contents));
       $this->table_cellpadding = '1';
-      $this->table_parameters = 'class="infoBox"';
+      $this->table_parameters = 'class="contentBox"';
       $this->tableBox($info_box_contents, true);
     }
 
     function contentBoxContents($contents) {
       $this->table_cellpadding = '4';
-      $this->table_parameters = 'class="infoBoxContents"';
+      $this->table_parameters = 'class="contentBoxContents"';
       return $this->tableBox($contents);
     }
   }
@@ -151,12 +153,12 @@ $Id: boxes.php 3 2006-05-27 04:59:07Z user $
       $this->table_cellpadding = '0';
 
       $info_box_contents = array();
-      $info_box_contents[] = array(array('params' => 'height="14" class="infoBoxHeading"',
-                                         'text' => tep_image(DIR_WS_IMAGES . 'infobox/corner_left.gif')),
-                                   array('params' => 'height="14" class="infoBoxHeading" width="100%"',
+      $info_box_contents[] = array(array('params' => 'class="contentBoxHeading"',
+                                         'text' => tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_left.png')),
+                                   array('params' => 'class="contentBoxHeading" width="100%"',
                                          'text' => $contents[0]['text']),
-                                   array('params' => 'height="14" class="infoBoxHeading"',
-                                         'text' => tep_image(DIR_WS_IMAGES . 'infobox/corner_right_left.gif')));
+                                   array('params' => 'class="contentBoxHeading"',
+                                         'text' => tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_right.png')));
 
       $this->tableBox($info_box_contents, true);
     }

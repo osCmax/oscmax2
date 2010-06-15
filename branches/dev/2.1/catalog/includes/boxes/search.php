@@ -16,8 +16,12 @@ $Id: search.php 3 2006-05-27 04:59:07Z user $
 <!-- search //-->
 <?php
   $boxHeading = BOX_HEADING_SEARCH;
-  $corner_left = 'square';
-  $corner_right = 'square';
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
   $boxContent_attributes = ' align="center"';
   $box_base_name = 'search'; // for easy unique box template setup (added BTSv1.2)
 

@@ -30,8 +30,12 @@ if ((!strstr($_SERVER['PHP_SELF'],'login.php')) && (!strstr($_SERVER['PHP_SELF']
 if (!tep_session_is_registered('customer_id')) {
 		
   $boxHeading = BOX_HEADING_LOGIN_BOX;
-  $corner_left = 'square';
-  $corner_right = 'square';
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded';
+  
+  $boxContent_attributes = ' align="center"';
   $box_base_name = 'loginbox'; // for easy unique box template setup (added BTSv1.2)
 
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)

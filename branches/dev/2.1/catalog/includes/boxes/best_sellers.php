@@ -38,8 +38,12 @@ $Id: best_sellers.php 3 2006-05-27 04:59:07Z user $
 <!-- best_sellers //-->
 <?php
   $boxHeading = BOX_HEADING_BESTSELLERS;
-  $corner_left = 'square';
-  $corner_right = 'square';
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
+  $boxContent_attributes = '';
   $box_base_name = 'best_sellers'; // for easy unique box template setup (added BTSv1.2)
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
@@ -47,7 +51,7 @@ $Id: best_sellers.php 3 2006-05-27 04:59:07Z user $
   $boxContent = '<table border="0" width="100%" cellspacing="0" cellpadding="1">';
   while ($best_sellers = tep_db_fetch_array($best_sellers_query)) {
     $rows++;
-    $boxContent .= '<tr><td class="infoBoxContents" valign="top">' . tep_row_number_format($rows) . '.</td><td class="infoBoxContents"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $best_sellers['products_id']) . '">' . $best_sellers['products_name'] . '</a></td></tr>';
+    $boxContent .= '<tr><td class="boxText" valign="top">' . tep_row_number_format($rows) . '.</td><td class="boxText"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $best_sellers['products_id']) . '">' . $best_sellers['products_name'] . '</a></td></tr>';
   }
   $boxContent .= '</table>';
 

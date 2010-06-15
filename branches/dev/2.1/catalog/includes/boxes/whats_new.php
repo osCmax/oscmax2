@@ -23,13 +23,19 @@ $Id: whats_new.php 3 2006-05-27 04:59:07Z user $
 ?>
 <!-- whats_new //-->
 <?php
-    $boxHeading = BOX_HEADING_WHATS_NEW;
-    $corner_left = 'square';
-    $corner_right = 'square';
-    $boxContent_attributes = ' align="center"';
-    $boxLink = '<a href="' . tep_href_link(FILENAME_PRODUCTS_NEW) . '"><img src="images/infobox/arrow_right.gif" border="0" alt="more" title=" more " width="12" height="10"></a>';
-    $box_base_name = 'whats_new'; // for easy unique box template setup (added BTSv1.2)
-    $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
+  $boxHeading = '<a href="' . tep_href_link(FILENAME_PRODUCTS_NEW) . '">' . BOX_HEADING_WHATS_NEW . '</a>';
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
+  $boxContent_attributes = '';    $boxContent_attributes = ' align="center"';
+  
+  $boxLink = '<a href="' . tep_href_link(FILENAME_PRODUCTS_NEW) . '"><img src="' . DIR_WS_TEMPLATES . 'images/infobox/arrow_right.png" border="0" alt="more" title=" more "></a>';
+  
+  $box_base_name = 'whats_new'; // for easy unique box template setup (added BTSv1.2)
+  $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
     $random_product['products_name'] = tep_get_products_name($random_product['products_id']);
     $random_product['specials_new_products_price'] = tep_get_products_special_price($random_product['products_id']);

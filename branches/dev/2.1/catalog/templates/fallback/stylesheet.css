@@ -27,7 +27,7 @@ A {
 }
 
 A:hover {
-  color: #AABBDD;
+  color: #666666;
   text-decoration: underline;
 }
 
@@ -40,19 +40,23 @@ TR.header {
 }
 
 TR.headerNavigation {
-  background: #bbc3d3;
+  background: #bbbbbb;
 }
 
 TD.headerNavigation {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
-  background: #bbc3d3;
-  color: #ffffff;
+  background: #bbbbbb;
+  color: #000000;
   font-weight : bold;
+  height:20px;
+  background-image:url(images/infobox/top_header.png);
+  background-repeat:repeat-x;
+  padding-right:5px;
 }
 
 A.headerNavigation { 
-  color: #FFFFFF; 
+  color: #000000; 
 }
 
 A.headerNavigation:hover {
@@ -89,90 +93,53 @@ TR.footer {
   background: #bbc3d3;
 }
 
+
 TD.footer {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
-  background: #bbc3d3;
-  color: #ffffff;
-  font-weight: bold;
+  background: #bbbbbb;
+  color: #000000;
+  font-weight : bold;
+  height:20px;
+  background-image:url(images/infobox/top_header.png);
+  background-repeat:repeat-x;
+  padding-right:5px;
 }
 
-.infoBox {
-  background: #b6b7cb;
-}
+.infoBox { background: #ffffff; border-left: 1px solid #dddddd; border-right: 1px solid #dddddd; }
+TD.infoBoxHeading { font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight: bold; color: #000000; background:url(images/infobox/top_header.png) repeat-x; height:20px; }
+.infoBoxContents { background: #ffffff; font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+.infoBoxNotice { background: #FF8E90; }
+.infoBoxNoticeContents { background: #FFE6E6; font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 
-.infoBoxContents {
-  background: #f8f8f9;
-  font-family: Verdana, Arial, sans-serif;
-  font-size: 10px;
-}
+TD.infoBox, SPAN.infoBox { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 
-.infoBoxNotice {
-  background: #FF8E90;
-}
+.contentBox { background: #ffffff; font-family: Verdana, Arial, sans-serif; font-size: 10px; border-left: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; }
+.contentBoxHeading { font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight: bold; color: #000000; background:url(images/infobox/top_header.png) repeat-x; height:20px; }
 
-.infoBoxNoticeContents {
-  background: #FFE6E6;
-  font-family: Verdana, Arial, sans-serif;
-  font-size: 10px;
-}
 
-TD.infoBoxHeading {
-  font-family: Verdana, Arial, sans-serif;
-  font-size: 10px;
-  font-weight: bold;
-  background: #bbc3d3;
-  color: #ffffff;
-}
+TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd, TR.productListing-odd, TR.productReviews-odd, TR.upcomingProducts-odd, TR.shippingOptions-odd { background: #ffffff; }
+TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.productListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even { background: #ffffff; }
 
-TD.infoBox, SPAN.infoBox {
-  font-family: Verdana, Arial, sans-serif;
-  font-size: 10px;
-}
+.productListing-heading { font-family: Verdana, Arial, sans-serif; font-size: 10px; background: #bbbbbb; color: #FFFFFF; font-weight: bold; }
+TABLE.productListing { border: 1px; border-style: solid; border-color: #dddddd; border-spacing: 1px; }
+TD.productListing-data { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 
-TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd, TR.productListing-odd, TR.productReviews-odd, TR.upcomingProducts-odd, TR.shippingOptions-odd {
-  background: #f8f8f9;
-}
+td.productinfo_header { border: 1px solid #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; padding-left:5px; }
+td.productinfo_boxes { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 11px; padding:3px; }
+td.productinfo_imagebig { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:3px; }
+td.productinfo_thumbnail  { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; }
+td.productinfo_buttons  { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; }
 
-TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.productListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even {
-  background: #f8f8f9;
-}
+td.login_boxes { border: 1px solid #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:5px; }
 
-TABLE.productListing {
-  border: 1px;
-  border-style: solid;
-  border-color: #b6b7cb;
-  border-spacing: 1px;
-}
+A.pageResults { color: #999999; }
+A.pageResults:hover { color: #999999; background: #FFFF33; }
 
-.productListing-heading {
-  font-family: Verdana, Arial, sans-serif;
-  font-size: 10px;
-  background: #b6b7cb;
-  color: #FFFFFF;
-  font-weight: bold;
-}
+TABLE.filterbox { font-family: Verdana, Arial, sans-serif; font-size: 10px; border: 1px solid #dddddd; border-spacing: 1px; background: #ffffff; }
+A.filterbox { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 
-TD.productListing-data {
-  font-family: Verdana, Arial, sans-serif;
-  font-size: 10px;
-}
-
-A.pageResults {
-  color: #0000FF;
-}
-
-A.pageResults:hover {
-  color: #0000FF;
-  background: #FFFF33;
-}
-
-TD.pageHeading, DIV.pageHeading {
-  font-family: Verdana, Arial, sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-  color: #9a9a9a;
-}
+TD.pageHeading, DIV.pageHeading { font-family: Verdana, Arial, sans-serif; font-size: 16px; font-weight: bold; color: #666666; }
 
 TR.subBar {
   background: #f4f7fd;
@@ -237,7 +204,7 @@ TEXTAREA {
 
 .input-style
 { 
-border: 1px solid #BBC3D3;
+border: 1px solid #dddddd;
 }
 
 SPAN.greetUser {
@@ -305,60 +272,12 @@ td.prod_attributes { border: 1px solid #b6b7cb; }
 
 /* TAB CODE FOR PRODUCT.INFO.TPL.PHP PAGE by PGM*/
 /*semantic tabs*/
-.panel {
-  border: 1px solid #b6b7cb;
-  padding: 5px;
-  font-family: Verdana, Arial, sans-serif; font-size: 12px;
-}
-ul.semtabs {
-  font-family: Verdana, Arial, sans-serif; font-size: 12px;
-  margin:0;
-  clear:both;
-  height:25px;
-  padding-left: 0px;
-  border-left: 1px solid #b6b7cb;
-  list-style:none !important;
-}
-ul.semtabs li {
-  float:left;
-  height:25px;
-  display:block;
-  margin:0 !important;
-  background-image:none;
-}
-ul.semtabs li a {
-/*  height:15px;*/
-  line-height:15px;
-  display:block;
-  padding: 5px 10px;
-  border-right: 1px solid #b6b7cb;
-  border-top: 1px solid #b6b7cb;
-  border-bottom: 1px solid #b6b7cb;
-  text-decoration:none;
-  font-weight:bold;
-  background-color:#f8f8f9;
-}
-ul.semtabs li.active a {
-  background-color: #ffffff;
-  border-bottom: 1px solid #ffffff;
-  color: #000000;
-}
+.panel { border: 1px solid #dddddd; padding: 5px; font-family: Verdana, Arial, sans-serif; font-size: 12px; }
+ul.semtabs { font-family: Verdana, Arial, sans-serif; font-size: 12px; margin:0; clear:both; height:25px; padding-left: 0px; border-left: 1px solid #dddddd; list-style:none !important; }
+ul.semtabs li { float:left; height:25px; display:block; margin:0 !important; background-image:none; }
+ul.semtabs li a { /*  height:15px;*/ line-height:15px; display:block; padding: 5px 10px; border-right: 1px solid #dddddd; border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd; text-decoration:none; font-weight:bold; background-color:#f8f8f9; }
+ul.semtabs li.active a { background-color: #ffffff; border-bottom: 1px solid #ffffff; color: #000000; }
 /*end semantic tabs*/
-
-TABLE.filterbox {
-	font-family: Verdana, Arial, sans-serif;
-    font-size: 10px;
-  	border: 1px;
-  	border-style: solid;
-  	border-color: #b6b7cb;
-  	border-spacing: 1px;
-	background: #f8f8f9;
-}
-
-A.filterbox {
-	font-family: Verdana, Arial, sans-serif;
-    font-size: 10px;
-}
 
 /* Password Strength */
 .password_strength { padding: 0 5px; display: inline-block;	}
@@ -369,7 +288,7 @@ A.filterbox {
 .password_strength_5 { background-color: #bcfcb1; }
 
 /* Articles on home page */
-td.articleTextBox { border: 1px solid #b6b7cb; font-family: Verdana, Arial, sans-serif; font-size: 10px; padding-left: 10px; padding-right: 10px;}
+td.articleTextBox { border-left: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 10px; padding-left: 10px; padding-right: 10px;}
 
 /* BOF: Open Featured Products */
 TD.featuredProducts, TD.featuredCategories, TD.featuredManufacturers, TD.featuredManufacturerWP {
@@ -389,10 +308,6 @@ TD.featuredProducts A:hover, TD.featuredCategories A:hover, TD.featuredManufactu
 }
 /* EOF: Open Featured Products */
 
-td.productinfo_boxes { border: 1px solid #b6b7cb; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 11px; padding:3px; }
-td.productinfo_imagebig { border: 1px solid #b6b7cb; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:3px; }
-td.productinfo_thumbnail  { border: 1px solid #b6b7cb; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; }
-
 /* ///////////////////////////////////////////////////////// */
 #slideshow ul, #slideshow li { padding:0; margin:0; list-style:none; }
 .next, .prev{ cursor:pointer; }
@@ -404,3 +319,6 @@ td.productinfo_thumbnail  { border: 1px solid #b6b7cb; text-align: center; font-
 	#slideshow li{ float:left; margin:0 10px; cursor:pointer; }
 
 .clear{ clear:both; width:0; height:0; }
+/* ///////////////////////////////////////////////////////// */
+
+.infoBoxBottom { background-image:url(images/infobox/bottom_center.png); background-repeat:repeat-x; }

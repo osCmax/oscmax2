@@ -28,10 +28,16 @@ window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,m
 
 <?php
 
-  $boxHeading = BOX_HEADING_SHOPPING_CART;
-  $corner_left = 'square';
-  $corner_right = 'rounded';
-  $boxLink = '<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '"><img src="images/infobox/arrow_right.gif" border="0" alt="more" title="more" width="12" height="10"></a>';
+  $boxHeading = '<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . BOX_HEADING_SHOPPING_CART . '</a>';
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded';
+  
+  $boxContent_attributes = '';  
+  
+  $boxLink = '<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '"><img src="' . DIR_WS_TEMPLATES . 'images/infobox/arrow_right.png" border="0" alt="more" title="more"></a>';
   $box_base_name = 'shopping_cart'; // for easy unique box template setup (added BTSv1.2)
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 

@@ -75,24 +75,24 @@
 		<table border="0" cellspacing="0" cellpadding="3">
           <tr>
 <?php
-  if ($first != (int)$_GET['products_id']) {
+          if ($first != (int)$_GET['products_id']) {
 ?>
             <td align="right" class="main" width="40"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, "$fPath&products_id=$first") . '">' . tep_image(DIR_WS_ICONS . 'control_start.png', ALT_FIRST_PRODUCT) . '</a>  <a href="' . tep_href_link(FILENAME_PRODUCT_INFO, "$fPath&products_id=$previous") . '">' . tep_image(DIR_WS_ICONS . 'control_rewind.png', ALT_PREVIOUS_PRODUCT) . '</a>'; ?></td>
 <?php
-  } else {
+          } else {
 ?>
             <td align="right" class="main" width="40">&nbsp;</td>
 <?php
-  }
+  		  }
 ?>
 
             <td align="center" class="main"><?php echo PREV_NEXT_PRODUCT . $position . PREV_NEXT_OF . $counter . PREV_NEXT_IN . $prev_next_in; ?></td>
 <?php
-  if ($last != (int)$_GET['products_id']) {
+  		  if ($last != (int)$_GET['products_id']) {
 ?>
             <td align="left" class="main" width="40"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, "$fPath&products_id=$next_item") . '">' . tep_image(DIR_WS_ICONS . 'control_fastforward.png', ALT_NEXT_PRODUCT) . '</a>  <a href="' . tep_href_link(FILENAME_PRODUCT_INFO, "$fPath&products_id=$last") . '">' . tep_image(DIR_WS_ICONS . 'control_end.png', ALT_LAST_PRODUCT) . '</a>'; ?></td>
 <?php
-  } else {
+  		  } else {
 ?>
             <td align="left" class="main" width="40">&nbsp;</td>
 <?php
@@ -100,14 +100,12 @@
 ?>
           </tr>
         </table>
+        <table cellpadding="0" cellspacing="0" border="0">
+    	  <tr>
+            <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+    	  </tr>
+		</table>
 <?php
     }
-	// Add the spacer to the bottom of the page module ?>
-<table cellpadding="0" cellspacing="0" border="0">
-    <tr>
-        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-    </tr>
-</table>
-<?php
   }
 ?>

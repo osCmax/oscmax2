@@ -530,6 +530,7 @@ CREATE TABLE coupon_gv_queue (
   date_created datetime NOT NULL,
   ipaddr varchar(32) NOT NULL,
   release_flag char(1) NOT NULL default 'N',
+  release_date datetime NOT NULL,
   PRIMARY KEY (unique_id),
   KEY uid (unique_id,customer_id,order_id)
 );

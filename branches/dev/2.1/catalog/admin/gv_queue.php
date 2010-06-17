@@ -49,7 +49,7 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
       } else {
         $gv_insert=tep_db_query("insert into " .TABLE_COUPON_GV_CUSTOMER . " (customer_id, amount) values ('".$gv_resulta['customer_id']."','".$total_gv_amount."')");
       }
-        $gv_update=tep_db_query("update " . TABLE_COUPON_GV_QUEUE . " set release_flag='Y' where unique_id='".$_GET['gid']."'");
+        $gv_update=tep_db_query("update " . TABLE_COUPON_GV_QUEUE . " set release_flag='Y', release_date = now() where unique_id='".$_GET['gid']."'");
       }
     }
   }
@@ -80,7 +80,7 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right">&nbsp;</td>
+            <td class="smallText" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -93,10 +93,12 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_ORDERS_ID; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_VOUCHER_VALUE; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_DATE_PURCHASED; ?></td>
+                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_RELEASED; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-  $gv_query_raw = "select c.customers_firstname, c.customers_lastname, gv.unique_id, gv.date_created, gv.amount, gv.order_id from " . TABLE_CUSTOMERS . " c, " . TABLE_COUPON_GV_QUEUE . " gv where (gv.customer_id = c.customers_id and gv.release_flag = 'N')";
+//  $gv_query_raw = "select c.customers_firstname, c.customers_lastname, gv.unique_id, gv.date_created, gv.amount, gv.order_id from " . TABLE_CUSTOMERS . " c, " . TABLE_COUPON_GV_QUEUE . " gv where (gv.customer_id = c.customers_id and gv.release_flag = 'N')";
+  $gv_query_raw = "select c.customers_firstname, c.customers_lastname, gv.unique_id, gv.date_created, gv.amount, gv.order_id, gv.release_flag, gv.release_date from " . TABLE_CUSTOMERS . " c, " . TABLE_COUPON_GV_QUEUE . " gv where gv.customer_id = c.customers_id order by gv.release_flag, gv.order_id";
   $gv_query = tep_db_query($gv_query_raw);
   $gv_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $gv_query_raw, $gv_query_numrows);
 
@@ -114,6 +116,12 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
                 <td class="dataTableContent" align="center"><?php echo $gv_list['order_id']; ?></td>
                 <td class="dataTableContent" align="right"><?php echo $currencies->format($gv_list['amount']); ?></td>
                 <td class="dataTableContent" align="right"><?php echo tep_datetime_short($gv_list['date_created']); ?></td>
+<?php // pgm adds release date column
+	  if ($gv_list['release_flag'] == 'Y') { ?>
+                <td class="dataTableContent" align="right"><?php echo tep_datetime_short($gv_list['release_date']); ?></td>
+<?php } else { ?>
+    			<td class="dataTableContent" align="right"><b>Not released</b></td>
+<?php } ?>
                 <td class="dataTableContent" align="right"><?php if ( (is_object($gInfo)) && ($gv_list['unique_id'] == $gInfo->unique_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_GV_QUEUE, 'page=' . $_GET['page'] . '&gid=' . $gv_list['unique_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
@@ -133,14 +141,22 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
   $contents = array();
   switch ($_GET['action']) {
     case 'release':
-      $heading[] = array('text' => '[' . $gInfo->unique_id . '] ' . tep_datetime_short($gInfo->date_created) . ' ' . $currencies->format($gInfo->amount));
+      $heading[] = array('text' => 'Coupon: ' . $gInfo->unique_id . ' | ' . tep_datetime_short($gInfo->date_created) . ' | ' . $currencies->format($gInfo->amount));
 
-      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link('gv_queue.php','action=confirmrelease&gid='.$gInfo->unique_id,'NONSSL').'">'.tep_image_button('button_confirm_red.gif', IMAGE_CONFIRM) . '</a> <a href="' . tep_href_link('gv_queue.php','action=cancel&gid=' . $gInfo->unique_id,'NONSSL') . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+$gv_check_raw = "select c.customers_firstname, c.customers_lastname, gv.unique_id, gv.date_created, gv.amount, gv.order_id, gv.release_flag, gv.release_date from " . TABLE_CUSTOMERS . " c, " . TABLE_COUPON_GV_QUEUE . " gv where (gv.customer_id = c.customers_id and gv.unique_id = '" . $_GET['gid'] . "')";
+		if ($gInfo->release_flag == 'Y') {
+			  $contents[] = array('align' => 'left', 'text' => TEXT_RELEASED_ALREADY . tep_datetime_short($gInfo->release_date));
+		} else {
+			  $contents[] = array('align' => 'left', 'text' => TEXT_PAYMENT_CHECK_CONFIRM . '<br><br><center><a href="' . tep_href_link('gv_queue.php','action=confirmrelease&gid='.$gInfo->unique_id,'NONSSL').'">'.tep_image_button('button_confirm_red.gif', IMAGE_CONFIRM) . '</a> <a href="' . tep_href_link('gv_queue.php','action=cancel&gid=' . $gInfo->unique_id,'NONSSL') . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a></center>');	
+		}
       break;
     default:
-      $heading[] = array('text' => '[' . $gInfo->unique_id . '] ' . tep_datetime_short($gInfo->date_created) . ' ' . $currencies->format($gInfo->amount));
-
-      $contents[] = array('align' => 'center','text' => '<a href="' . tep_href_link('gv_queue.php','action=release&gid=' . $gInfo->unique_id,'NONSSL'). '">' . tep_image_button('button_release.gif', IMAGE_RELEASE) . '</a>');
+      $heading[] = array('text' => 'Coupon: ' . $gInfo->unique_id . ' | ' . tep_datetime_short($gInfo->date_created) . ' | ' . $currencies->format($gInfo->amount));
+		if ($gInfo->release_flag == 'Y') {
+			  $contents[] = array('align' => 'left', 'text' => TEXT_RELEASED_ALREADY . tep_datetime_short($gInfo->release_date));
+		} else {
+			  $contents[] = array('align' => 'left', 'text' => TEXT_PAYMENT_CHECK . '<br><br><center><a href="' . tep_href_link('gv_queue.php','action=release&gid=' . $gInfo->unique_id,'NONSSL'). '">' . tep_image_button('button_release.gif', IMAGE_RELEASE) . '</a></center>');	
+		}
       break;
    }
 

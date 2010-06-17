@@ -136,7 +136,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
       $all_nonstocked = true;
       $attr_list='';
       $options_list=implode(",",array_keys($attributes));
-      $track_stock_query=tep_db_query("select products_options_id, products_options_track_stock from " . TABLE_PRODUCTS_OPTIONS . " where products_options_id in ($options_list) and language_id= '" . (int)$languages_id . "order by products_options_id'");
+      $track_stock_query=tep_db_query("select products_options_id, products_options_track_stock from " . TABLE_PRODUCTS_OPTIONS . " where products_options_id in ($options_list) and language_id= '" . (int)$languages_id . "' order by products_options_id");
       while($track_stock_array=tep_db_fetch_array($track_stock_query)) {
         if ($track_stock_array['products_options_track_stock']) {
           $attr_list.=$track_stock_array['products_options_id'] . '-' . $attributes[$track_stock_array['products_options_id']] . ',';

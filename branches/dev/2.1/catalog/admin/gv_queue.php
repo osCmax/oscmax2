@@ -15,7 +15,9 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
-  if ($_GET['action']=='confirmrelease' && isset($_GET['gid'])) {
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
+
+  if ($action=='confirmrelease' && isset($_GET['gid'])) {
     $gv_query=tep_db_query("select release_flag from " . TABLE_COUPON_GV_QUEUE . " where unique_id='".$_GET['gid']."'");
     $gv_result=tep_db_fetch_array($gv_query);
     if ($gv_result['release_flag']=='N') {
@@ -80,7 +82,28 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="smallText" align="right">&nbsp;</td>
+            <td class="smallText" align="right">
+            <td class="main" align="right">
+			<?php echo tep_draw_form('status', FILENAME_GV_QUEUE, '', 'get'); ?>
+				<?php
+                    $status_array[] = array('id' => 'Y', 'text' => TEXT_GV_REDEEMED);
+                    $status_array[] = array('id' => 'N', 'text' => TEXT_GV_PENDING);
+                    $status_array[] = array('id' => '*', 'text' => TEXT_GV_ALL);
+                
+                    if ($_GET['status']) {
+                      $status = tep_db_prepare_input($_GET['status']);
+                    } else {
+                      $status = '*';
+                    }
+					$filter = '';
+					if ($status == 'Y') { $filter = " and gv.release_flag = 'Y' "; } 
+					if ($status == 'N') { $filter = " and gv.release_flag = 'N' "; } 
+					
+                    echo HEADING_TITLE_STATUS . ' ' . tep_draw_pull_down_menu('status', $status_array, $status, 'onChange="this.form.submit();"');
+                ?>
+              </form>
+            </td>
+            <td width="25%">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -98,7 +121,7 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
               </tr>
 <?php
 //  $gv_query_raw = "select c.customers_firstname, c.customers_lastname, gv.unique_id, gv.date_created, gv.amount, gv.order_id from " . TABLE_CUSTOMERS . " c, " . TABLE_COUPON_GV_QUEUE . " gv where (gv.customer_id = c.customers_id and gv.release_flag = 'N')";
-  $gv_query_raw = "select c.customers_firstname, c.customers_lastname, gv.unique_id, gv.date_created, gv.amount, gv.order_id, gv.release_flag, gv.release_date from " . TABLE_CUSTOMERS . " c, " . TABLE_COUPON_GV_QUEUE . " gv where gv.customer_id = c.customers_id order by gv.release_flag, gv.order_id";
+  $gv_query_raw = "select c.customers_firstname, c.customers_lastname, gv.unique_id, gv.date_created, gv.amount, gv.order_id, gv.release_flag, gv.release_date from " . TABLE_CUSTOMERS . " c, " . TABLE_COUPON_GV_QUEUE . " gv where (gv.customer_id = c.customers_id " . $filter . ") order by gv.release_flag, gv.order_id";
   $gv_query = tep_db_query($gv_query_raw);
   $gv_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $gv_query_raw, $gv_query_numrows);
 
@@ -106,7 +129,7 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
     if (((!$_GET['gid']) || (@$_GET['gid'] == $gv_list['unique_id'])) && (!$gInfo)) {
       $gInfo = new objectInfo($gv_list);
     }
-    if ( (is_object($gInfo)) && ($gv_list['unique_id'] == $gInfo->unique_id) ) {
+	if ( (is_object($gInfo)) && ($gv_list['unique_id'] == $gInfo->unique_id) ) {
       echo '              <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'hand\'" onclick="document.location.href=\'' . tep_href_link('gv_queue.php', tep_get_all_get_params(array('gid', 'action')) . 'gid=' . $gInfo->unique_id . '&action=edit') . '\'">' . "\n";
     } else {
       echo '              <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'hand\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . tep_href_link('gv_queue.php', tep_get_all_get_params(array('gid', 'action')) . 'gid=' . $gv_list['unique_id']) . '\'">' . "\n";
@@ -120,7 +143,7 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
 	  if ($gv_list['release_flag'] == 'Y') { ?>
                 <td class="dataTableContent" align="right"><?php echo tep_datetime_short($gv_list['release_date']); ?></td>
 <?php } else { ?>
-    			<td class="dataTableContent" align="right"><b>Not released</b></td>
+    			<td class="dataTableContent" align="right"><b><?php echo TEXT_GV_STATUS; ?></b></td>
 <?php } ?>
                 <td class="dataTableContent" align="right"><?php if ( (is_object($gInfo)) && ($gv_list['unique_id'] == $gInfo->unique_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_GV_QUEUE, 'page=' . $_GET['page'] . '&gid=' . $gv_list['unique_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
@@ -139,7 +162,8 @@ $Id: gv_queue.php 14 2006-07-28 17:42:07Z user $
 <?php
   $heading = array();
   $contents = array();
-  switch ($_GET['action']) {
+  
+  switch ($action) {
     case 'release':
       $heading[] = array('text' => 'Coupon: ' . $gInfo->unique_id . ' | ' . tep_datetime_short($gInfo->date_created) . ' | ' . $currencies->format($gInfo->amount));
 

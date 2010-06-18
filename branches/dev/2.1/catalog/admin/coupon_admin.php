@@ -811,7 +811,7 @@ $customer = tep_db_fetch_array($customer_query);
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="main"><?php echo tep_draw_form('status', FILENAME_COUPON_ADMIN, '', 'get'); ?>
+            <td class="main" align="right"><?php echo tep_draw_form('status', FILENAME_COUPON_ADMIN, '', 'get'); ?>
 <?php
     $status_array[] = array('id' => 'Y', 'text' => TEXT_COUPON_ACTIVE);
     $status_array[] = array('id' => 'N', 'text' => TEXT_COUPON_INACTIVE);
@@ -828,6 +828,7 @@ $customer = tep_db_fetch_array($customer_query);
 ?>
               </form>
            </td>
+           <td width="25%">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -911,7 +912,7 @@ $customer = tep_db_fetch_array($customer_query);
     }
 ?>
           <tr>
-            <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+            <td colspan="6"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td class="smallText">&nbsp;<?php echo $cc_split->display_count($cc_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_COUPONS); ?>&nbsp;</td>
                 <td align="right" class="smallText">&nbsp;<?php echo $cc_split->display_links($cc_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], 'status=' . $status); ?>&nbsp;</td>

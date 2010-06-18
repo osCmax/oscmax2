@@ -10,7 +10,7 @@
                   <td class="infoBoxHeading"><img src="<?php echo DIR_WS_TEMPLATES;?>images/infobox/<?php switch ($corner_top_right) { case 'square': echo 'top_spacer.png';	break; case 'rounded': echo 'top_right.png'; break;} ?>" border="0" alt=""></td>
                 </tr>
               </table>
-              <table border="0" width="100%" cellspacing="0" cellpadding="0" class="infoBox">
+              <table border="0" width="100%" cellspacing="0" cellpadding="0" class="infoBoxColumn">
                 <tr>
                   <td>
                     <table border="0" width="100%" cellspacing="0" cellpadding="3">

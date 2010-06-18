@@ -38,7 +38,8 @@ TR.footer { background: #bbc3d3; }
 TD.footer { font-family: Verdana, Arial, sans-serif; font-size: 10px; background: #bbbbbb; color: #000000; font-weight : bold; height:20px;  background-image:url(images/infobox/top_header.png); background-repeat:repeat-x; padding-right:5px; }
 
 /* Infoboxes */
-.infoBox { background: #ffffff; border-left: 1px solid #dddddd; border-right: 1px solid #dddddd; }
+.infoBox { background: #ffffff; border: 1px solid #dddddd; }
+.infoBoxColumn { background: #ffffff; border-left: 1px solid #dddddd; border-right: 1px solid #dddddd; }
 TD.infoBoxHeading { font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight: bold; color: #000000; background:url(images/infobox/top_header.png) repeat-x; height:20px; }
 .infoBoxContents { background: #ffffff; font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 .infoBoxNotice { background: #FF8E90; }

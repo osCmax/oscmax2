@@ -32,7 +32,7 @@ include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
   
   $corner_top_left = 'rounded';
   $corner_top_right = 'rounded';
-  $corner_bottom_left = 'square';
+  $corner_bottom_left = 'rounded';
   $corner_bottom_right = 'rounded';
   
   $boxContent_attributes = '';

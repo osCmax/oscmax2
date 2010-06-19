@@ -166,15 +166,6 @@
               </table>
             </td>
           </tr>
-          <tr>
-            <td colspan="4" class="main" align="right">
-              <?php // re-order order code
-				echo tep_draw_form('order_reorder', tep_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id=' . $_GET['order_id'] . '&action=reorder'));
-				echo tep_image_submit('button_order_this_again.gif', 'Re-Order','','update_button');
-				echo '</form>';
-			  ?>
-            </td>
-          </tr>
         </table></td>
       </tr>
       

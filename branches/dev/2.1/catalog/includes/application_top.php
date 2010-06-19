@@ -478,12 +478,6 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
                     }
         tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
         break;
-// re-order product segment
-	  case 'reorder' : $reorder_result = tep_reorder($_GET['order_id']);
-		if ($reorder_result == '') {
-		tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING));
-		}
-		break;		
 // performed by the 'buy now' button in product listings and review page
       case 'buy_now' :        if (isset($_GET['products_id'])) {
 

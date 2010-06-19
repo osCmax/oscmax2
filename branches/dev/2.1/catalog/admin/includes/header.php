@@ -1,5 +1,5 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
-<link type="text/css" href="includes/javascript/jquery-ui-1.7.2.custom.css" rel="Stylesheet" />
+<link type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css" rel="Stylesheet" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
 
 <script type="text/javascript" src="includes/javascript/hoverIntent.js"></script>

@@ -90,4 +90,5 @@ define('TABLE_HEADING_CUSTOMER_COMMENTS', 'Customer Comments');
 define('TEXT_ACTIVE', 'Active');
 define('TABLE_HEADING_ORDER_COMMENTS', 'Order Comments');
 define('TABLE_HEADING_NEW_ORDER_COMMENTS', 'Add New Order Comment');
+define('TEXT_ORDER_SUMMARY', 'Order Summary');
 ?>

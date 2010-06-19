@@ -541,6 +541,7 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ORDER_TOTAL; ?></td>
+                <td></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_DATE_PURCHASED; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_STATUS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
@@ -577,6 +578,22 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
 ?>
                 <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $orders['orders_id'] . '&action=edit') . '">' . tep_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $orders['customers_name']; ?></td>
                 <td class="dataTableContent" align="right"><?php echo strip_tags($orders['order_total']); ?></td>
+                
+                <?php // BOF: Orders quick viewer
+				$order_viewer = "";
+				$products_query = tep_db_query("SELECT orders_products_id, products_name, products_quantity, products_model FROM " . TABLE_ORDERS_PRODUCTS . " WHERE orders_id = '" . $orders['orders_id'] . "' ");
+					while($products_rows = tep_db_fetch_array($products_query)) {
+						$order_viewer .= ($products_rows["products_quantity"]) . "x ". $products_rows["products_model"]. "  " . (tep_html_noquote($products_rows["products_name"])) . "<br>";
+						$result_attributes = tep_db_query("SELECT products_options, products_options_values FROM " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " WHERE orders_id = '" . $orders['orders_id']. "' AND orders_products_id = '" . $products_rows["orders_products_id"] . "' ORDER BY products_options");
+						while($row_attributes = tep_db_fetch_array($result_attributes)) {
+							$order_viewer .=" - " . (tep_html_noquote($row_attributes["products_options"])) . ": " . (tep_html_noquote($row_attributes["products_options_values"])) . "<br>";
+						}
+					}			
+				?>	
+                
+				<td><?php echo '<span title="' . TEXT_ORDER_SUMMARY . '|' . $order_viewer . '">' . tep_image(DIR_WS_ICONS . 'page_white_find.png'); ?></span></td>
+                <?php // EOF: Orders quick viewer ?>
+                
                 <td class="dataTableContent" align="center"><?php echo tep_datetime_short($orders['date_purchased']); ?></td>
                 <td class="dataTableContent" align="right"><?php echo $orders['orders_status_name']; ?></td>
                 <td class="dataTableContent" align="right"><?php if (isset($oInfo) && is_object($oInfo) && ($orders['orders_id'] == $oInfo->orders_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID')) . 'oID=' . $orders['orders_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>

@@ -2002,5 +2002,15 @@ function tep_cfg_pull_down_templates() {
   } else { die("<center><b>No Template Folders!</b></center>");}
 
   return tep_draw_pull_down_menu($name, $dir_array, '');
-}  
+}
+
+// strips apostrophes from strings
+  function tep_html_noquote($string) {
+    $string=str_replace('&#39;', '', $string);
+    $string=str_replace("'", "", $string);
+    $string=str_replace('"', '', $string);
+    $string=preg_replace("/\\r\\n|\\n|\\r/", "<BR>", $string); 
+  return $string;
+  }
+
 ?>

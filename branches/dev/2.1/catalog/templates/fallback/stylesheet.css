@@ -55,7 +55,8 @@ TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd,
 TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.productListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even { background: #ffffff; }
 
 /* Product Info*/
-.productListing-heading { font-family: Verdana, Arial, sans-serif; font-size: 10px; background: #bbbbbb; color: #FFFFFF; font-weight: bold; }
+.productListing-heading { font-family: Verdana, Arial, sans-serif; font-size: 10px; background: #bbbbbb; color: #FFFFFF; font-weight: bold; padding-top: 3px; }
+a.productListing-heading { text-decoration:none; }
 TABLE.productListing { border: 1px; border-style: solid; border-color: #dddddd; border-spacing: 1px; }
 TD.productListing-data { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 td.productinfo_header { border: 1px solid #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; padding-left:5px; }

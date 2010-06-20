@@ -6,6 +6,8 @@
 <script type="text/javascript" src="includes/javascript/slimbox2/slimbox2.js"></script>
 <script type="text/javascript" src="includes/javascript/jquery.scrollTo-min.js"></script>
 <script type="text/javascript" src="includes/javascript/jquery.serialScroll-min.js"></script>
+<script type="text/javascript" src="includes/javascript/jqzoom.pack.1.0.1.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','jqzoom.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','slimbox2.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','dynamic_mopics.css')); // BTSv1.5 ?>">
 <script language="javascript" type="text/javascript"><!--
@@ -134,6 +136,8 @@ $(document).ready(function(){
 		cycle:true, //don't pull back once you reach the end
 		jump: false //click on the images to scroll to them
 	});
+	
+	$('.imagezoomer').jqzoom({ zoomWidth: 330, zoomHeight: 300, xOffset: 10, yOffset: -8, position: "right", title: false, showPreload: true, showEffect: "fadein", hideEffect: "fadeout" });
 
 });
 </script>

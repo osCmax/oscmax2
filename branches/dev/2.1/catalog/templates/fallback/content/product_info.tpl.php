@@ -94,7 +94,7 @@
             		$lightlarge = $image_lg . "." . $lg_image_ext;
 					?>               
 					<script language="javascript"><!--
-                    document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" id="image_big" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>');
+                    document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" class="imagezoomer" target="_blank" id="image_big" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>');
     //-->
                     </script>
                     <noscript>

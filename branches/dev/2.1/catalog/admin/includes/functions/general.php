@@ -1745,7 +1745,7 @@ function tep_selected_file($filename) {
 
     $name = ((tep_not_null($key)) ? 'configuration[' . $key . ']' : 'configuration_value');
 
-    $string .= '<SCRIPT LANGUAGE="JavaScript"> var cp = new ColorPicker(\'window\'); </SCRIPT>';
+    $string .= '<script type="text/javascript"> var cp = new ColorPicker(\'window\'); </SCRIPT>';
     $string .= '<br><table border="0" cellspacing="0" cellpadding="0"><tr><td><input type="text" name="' . $name . '" id="' . $name . '" value="' . $key_value . '" size="6"></td><td>&nbsp;</td>';
     $string .= '<td><a href="javascript:;" onclick="cp.select(document.configuration.'.$name.',\'pick\');return false;" name="pick" id="pick">'.tep_image_button('button_pick_color.gif', IMAGE_PICK_COLOR).'</a></td></tr></table><br>';
 

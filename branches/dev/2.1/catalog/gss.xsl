@@ -87,7 +87,7 @@
 		  ]]>
 		</style>
         <link href="gss.css" type="text/css" rel="stylesheet"/>
-        <script language="JavaScript">
+        <script type="text/javascript">
 		  <![CDATA[
 			var selectedColor = "blue";
 			var defaultColor = "black";

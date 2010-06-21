@@ -114,7 +114,7 @@ exit;
 	echo 'includes/stylesheet.css';}
 	else echo 'includes/printer.css'; ?>">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <?php
 // set printer-friendly toggle
 (tep_db_prepare_input($_GET['print']=='yes')) ? $print=true : $print=false;

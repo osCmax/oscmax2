@@ -33,7 +33,7 @@ $Id: stats_recover_cart_sales.php 14 2006-07-28 17:42:07Z user $
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/menu.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 
 <!-- header //-->
 

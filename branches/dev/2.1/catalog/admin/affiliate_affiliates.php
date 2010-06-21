@@ -106,11 +106,11 @@ $Id: affiliate_affiliates.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript" src="includes/general.js"></script>
 <?php
   if ($_GET['action'] == 'edit') {
 ?>
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 function resetStateText(theForm) {
   theForm.affiliate_state.value = '';
   if (theForm.affiliate_zone_id.options.length > 1) {
@@ -231,7 +231,7 @@ function check_form() {
   }
 ?>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
+<body onLoad="SetFocus();">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->

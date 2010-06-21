@@ -75,11 +75,11 @@ $Id: account_history_info.php 3 2006-05-27 04:59:07Z user $
   }
 
 
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'updated')) {
+  if (isset($_GET['action']) && ($_GET['action'] == 'updated')) {
       $messageStack->add('header', SUCCESS_ORDER_UPDATED, 'success');
   }
 
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'not_updated')) {
+  if (isset($_GET['action']) && ($_GET['action'] == 'not_updated')) {
 	  $messageStack->add('header', WARNING_ORDER_NOT_UPDATED, 'warning');
   }
 // END Customer Comments contrib section 1

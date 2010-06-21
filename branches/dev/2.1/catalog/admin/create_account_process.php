@@ -16,8 +16,8 @@ $Id: create_account_process.php 3 2006-05-27 04:59:07Z user $
   require('includes/application_top.php');
   // +Country-State Selector
   require(DIR_WS_FUNCTIONS . 'ajax.php');
-if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates' && isset($HTTP_POST_VARS['country'])) {
-	ajax_get_zones_html(tep_db_prepare_input($HTTP_POST_VARS['country']), true);
+if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($_POST['country']), true);
 } else {
   // -Country-State Selector
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CREATE_ACCOUNT_PROCESS);
@@ -232,9 +232,9 @@ $password = $l1.$r1.$l2.$l3.$r2;
   }
 
     if (ACCOUNT_STATE == 'true') {
-      $state = tep_db_prepare_input($HTTP_POST_VARS['state']);
-      if (isset($HTTP_POST_VARS['zone_id'])) {
-        $zone_id = tep_db_prepare_input($HTTP_POST_VARS['zone_id']);
+      $state = tep_db_prepare_input($_POST['state']);
+      if (isset($_POST['zone_id'])) {
+        $zone_id = tep_db_prepare_input($_POST['zone_id']);
       } else {
         $zone_id = false;
       }
@@ -328,7 +328,7 @@ function getStatesRequest(request, div_element) {
 }
 //--></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php
   require(DIR_WS_INCLUDES . 'header.php');

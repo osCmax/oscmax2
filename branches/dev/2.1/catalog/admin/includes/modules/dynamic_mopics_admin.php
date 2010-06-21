@@ -71,7 +71,7 @@ $Id: dynamic_mopics_admin.php 3 2009-11-17 00:50:07Z user $
 ?>
 <centre>
 <!-- LIGHTBOX/SLIMBOX -->
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 document.write('<?php echo '<a href="' . $html_image_lg . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image($html_image, $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '</a>'; ?>');
 //--></script>
 <!-- EOF LIGHTBOX/SLIMBOX -->

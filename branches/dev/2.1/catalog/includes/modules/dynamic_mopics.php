@@ -81,7 +81,7 @@ if (isset($product_info_values) && is_object($product_info_values)) {
 ?>
 				<li>             
                   <!-- LIGHTBOX/SLIMBOX -->
-                  <script language="javascript"><!--
+                  <script type="text/javascript"><!--
                   document.write('<?php echo '<a href="' . tep_href_link($image_lg) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . $extraImagePopupImage; ?></a>');
                   //--></script>
                   <!-- EOF LIGHTBOX/SLIMBOX -->

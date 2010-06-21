@@ -76,7 +76,7 @@ tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $login_userna
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 
 <table border="0" width="600" height="100%" cellspacing="0" cellpadding="0" align="center" valign="middle">
   <tr>

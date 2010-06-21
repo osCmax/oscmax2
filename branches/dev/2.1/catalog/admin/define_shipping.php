@@ -83,7 +83,7 @@ $Id: define_shipping.php 14 2006-07-28 17:42:07Z user $
 <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
 <!-- CKeditor End -->
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="HTMLArea.replaceAll(config);">
+<body onLoad="HTMLArea.replaceAll(config);">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->

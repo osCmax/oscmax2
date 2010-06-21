@@ -635,7 +635,7 @@ $Id: edit_orders.php 14 2006-07-28 17:42:07Z user $
       //because if you haven't got your css, what have you got?
       ?>
 
-<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript" src="includes/general.js"></script>
 
   <?php include('order_editor/javascript.php');
       //because if you haven't got your javascript, what have you got?

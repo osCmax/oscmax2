@@ -66,7 +66,7 @@ $Id: article_reviews_write.php 3 2006-05-27 04:59:07Z user $
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_ARTICLE_REVIEWS, tep_get_all_get_params()));
 ?>
 
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 function checkForm() {
   var error = 0;
   var error_message = "<?php echo JS_ERROR; ?>";

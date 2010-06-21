@@ -67,7 +67,7 @@
 			//BOF SLIMBOX
 			$lightlarge = $image_lg . "." . $lg_image_ext;
 ?>
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($review['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $review['products_image'], addslashes($review['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>');
 //--></script>
 <noscript>

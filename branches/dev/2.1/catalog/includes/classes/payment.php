@@ -134,7 +134,7 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
           $addThis='';
         }
 // EOF - CREDIT CLASS Gift Voucher Contribution
-        $js = '<script language="javascript"><!-- ' . "\n" .
+        $js = '<script type="text/javascript"><!-- ' . "\n" .
               'function check_form() {' . "\n" .
               '  var error = 0;' . "\n" .
               '  var error_message = "' . JS_ERROR . '";' . "\n" .

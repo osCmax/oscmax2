@@ -11,7 +11,7 @@ $Id: form_check.js.php 3 2006-05-27 04:59:07Z user $
 */
 ?>
 
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 
 var submitted = false;
 

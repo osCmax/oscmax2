@@ -24,9 +24,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -52,7 +52,7 @@
             <td class="main" colspan="2">
                 
                 <input type="hidden" name="action" value="dailyreportaction">
-                <?php // <br>cal1 value:<script language="javascript">document.write( document.forms.dailyreportform.action);</script><br> ?>
+                <?php // <br>cal1 value:<script type="text/javascript">document.write( document.forms.dailyreportform.action);</script><br> ?>
                 <?php echo 'Select Date '; ?>
 				<?php echo tep_draw_input_field('date1', $date1, 'id="nopurchases_start"'); ?>
                  - to -

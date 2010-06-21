@@ -35,7 +35,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 		?>
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
 <head>
-<body marginwidth="10" marginheight="10" topmargin="10" bottommargin="10" leftmargin="10" rightmargin="10">
+<body>
  
 	<table width="580" class="infoBoxContents">
 <tr>

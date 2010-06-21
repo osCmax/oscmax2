@@ -634,17 +634,17 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 ?>
 <link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
 <script language="JavaScript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
-<script language="JavaScript"><!-- 
+<script type="text/javascript"><!-- 
 var CategoriesFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesFeaturedUntil", "newcategory", "categories_featured_until","btnDate1","<?php echo $cInfo->categories_featured_until; ?>", scBTNMODE_CUSTOMBLUE); 
 //--></script>
-<script language="JavaScript"><!-- 
+<script type="text/javascript"><!-- 
 var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeaturedUntil", "categories", "categories_featured_until","btnDate1","<?php echo $cInfo->categories_featured_until; ?>", scBTNMODE_CUSTOMBLUE); 
 //--></script>
 <?php
  	// EOF Open Featured Sets
 ?>
 
-<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript" src="includes/general.js"></script>
 <!-- CKeditor -->
 <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
 <!-- CKeditor End -->
@@ -658,7 +658,7 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
 <!--// SLIMBOX2 -->
 
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="goOnLoad();">
+<body onLoad="goOnLoad();">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -1087,7 +1087,7 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
 
 ?>
 
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 var tax_rates = new Array();
 <?php
     for ($i=0, $n=sizeof($tax_class_array); $i<$n; $i++) {
@@ -1333,7 +1333,7 @@ function updateNet() {
 <!-- EOF  Separate Pricing Per Customer - QPBPP for SPPC - in tabbed menu -->
 
 
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 updateGross();
 //--></script>
 
@@ -2116,7 +2116,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         $contents[] = array('text' => '<br>' . TEXT_SORT_ORDER . '<br>' . tep_draw_input_field('sort_order', '', 'size="2"'));
 // BOF Open Featured Sets
  		$contents[] = array('text' => '<br>' . TEXT_CATEGORIES_FEATURED . '<br>' . tep_draw_radio_field('categories_featured', '1', $in_fc_status) . '&nbsp;' . TEXT_CATEGORIES_YES . '&nbsp;' . tep_draw_radio_field('categories_featured', '0', $out_fc_status) . '&nbsp;' . TEXT_CATEGORIES_NO);
- 		$contents[] = array('text' => '<br>' . TEXT_CATEGORIES_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $cInfo->categories_featured_until . '<br><script language="javascript">CategoriesFeaturedUntil.writeControl(); CategoriesFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+ 		$contents[] = array('text' => '<br>' . TEXT_CATEGORIES_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $cInfo->categories_featured_until . '<br><script type="text/javascript">CategoriesFeaturedUntil.writeControl(); CategoriesFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
 // EOF Open Featured Sets
 // BOF SPPC hide products and categories from groups
         $category_hide_string = '<br>'. "\n" . TEXT_HIDE_CATEGORIES_FROM_GROUPS;
@@ -2145,7 +2145,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         $contents[] = array('text' => '<br>' . TEXT_EDIT_SORT_ORDER . '<br>' . tep_draw_input_field('sort_order', $cInfo->sort_order, 'size="2"'));
 // EOF Open Featured Sets
  		$contents[] = array('text' => '<br>' . TEXT_CATEGORIES_FEATURED . '<br>' . tep_draw_radio_field('categories_featured', '1', $in_fc_status) . '&nbsp;' . TEXT_CATEGORIES_YES . '&nbsp;' . tep_draw_radio_field('categories_featured', '0', $out_fc_status) . '&nbsp;' . TEXT_CATEGORIES_NO);
- 		$contents[] = array('text' => '<br>' . TEXT_CATEGORIES_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $cInfo->categories_featured_until . '<br><script language="javascript">CategoriesEditFeaturedUntil.writeControl(); CategoriesEditFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+ 		$contents[] = array('text' => '<br>' . TEXT_CATEGORIES_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $cInfo->categories_featured_until . '<br><script type="text/javascript">CategoriesEditFeaturedUntil.writeControl(); CategoriesEditFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
 // EOF Open Featured Sets
 // BOF SPPC hide products and categories from groups
         $category_hide_string = '<br>'. "\n" . TEXT_HIDE_CATEGORIES_FROM_GROUPS;

@@ -9,7 +9,7 @@ $Id: product_listing_col.php 14 2006-07-28 17:42:07Z user $
 
 $thumbnail_view = (isset($_GET['list']) ? $_GET['list'] : 'list'); 
 
-if (tep_not_null($HTTP_GET_VARS['sort'])) $_GET['sort'] = $HTTP_GET_VARS['sort'];
+if (tep_not_null($_GET['sort'])) $_GET['sort'] = $_GET['sort'];
 $max_results = (tep_not_null($_GET['max']) ? $_GET['max'] : MAX_DISPLAY_SEARCH_RESULTS);
 
 

@@ -38,7 +38,7 @@ $Id: affiliate_invoice.php 14 2006-07-28 17:42:07Z user $
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 
 <!-- body_text //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="2">

@@ -105,9 +105,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
+<body onLoad="SetFocus();">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -161,7 +161,7 @@
   }
 ?>
 
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 function check_form() {
   var error = 0;
 
@@ -332,7 +332,7 @@ function check_form() {
   } else if($_GET['action'] == 'new') {
      
 ?>
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 function check_form() {
   var error = 0;
 

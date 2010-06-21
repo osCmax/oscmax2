@@ -71,14 +71,14 @@ input {
 }
 -->
 </style>
-<script language="javascript" src="includes/general.js"></script>
-<script language="javascript"><!--
+<script type="text/javascript" src="includes/general.js"></script>
+<script type="text/javascript"><!--
 function runFeedmachine() {
   window.open('<?php echo tep_href_link('feedmachine_auto.php', 'force_update=1'); ?>','feedmachine_console','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=700,height=400,screenX=150,screenY=150,top=150,left=150')
 }
 //--></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
+<body onLoad="SetFocus();">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->

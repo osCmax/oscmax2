@@ -20,7 +20,7 @@ $Id: shopping_cart.php 3 2006-05-27 04:59:07Z user $
 ?>
 <!-- shopping_cart //-->
 
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 function couponpopupWindow(url) {
 window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=450,height=280,screenX=150,screenY=150,top=150,left=150')
 }

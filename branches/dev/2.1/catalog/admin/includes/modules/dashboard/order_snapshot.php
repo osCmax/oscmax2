@@ -15,7 +15,7 @@ $orders_contents = '';
     $orders_pending = tep_db_fetch_array($orders_pending_query);
 
 if (tep_admin_check_boxes(FILENAME_ORDERS, 'sub_boxes') == true) {
-      $orders_contents .= '<tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" ><td class="dataTableContent"><a href="' . tep_href_link(FILENAME_ORDERS, 'selected_box=customers&status=' . $orders_status['orders_status_id']) . '">' . $orders_status['orders_status_name'] . '</a>:</td><td class="dataTableContent" align="center"> ' . $orders_pending['count'] . '</td></tr>';
+      $orders_contents .= '<tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)"><td class="dataTableContent"><a href="' . tep_href_link(FILENAME_ORDERS, 'selected_box=customers&status=' . $orders_status['orders_status_id']) . '">' . $orders_status['orders_status_name'] . '</a>:</td><td class="dataTableContent" align="center"> ' . $orders_pending['count'] . '</td></tr>';
     } else {
       $orders_contents .= '' . $orders_status['orders_status_name'] . ': ' . $orders_pending['count'] . '<br>';
     }

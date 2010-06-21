@@ -1022,7 +1022,7 @@ if ( !empty($_GET['download']) && ($_GET['download'] == 'stream' or $_GET['downl
   }
 //--></script> 
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 
 <table border="0" width="100%" cellspacing="2" cellpadding="2">

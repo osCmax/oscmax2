@@ -34,4 +34,5 @@ define('TEXT_INFO_HEADING_DELETE_SHIPPING_ENTRIES', 'Delete Multiple Shipping en
 define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to delete this shipping entry?');
 define('TEXT_INFO_DELETE_INTRO_BATCH_DELETE', 'Are you sure you want to delete the following shipping entries?');
 define('TEXT_INFO_NUMBER_OF_BOXES', 'Number of boxes in shipment:');
+define('TEXT_DISPLAY_NUMBER_OF_SHIPMENTS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> shipments)');
 ?>

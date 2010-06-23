@@ -11,18 +11,18 @@
 <link rel="stylesheet" type="text/css" href="includes/javascript/jquery.cluetip.css" >
 
 
-<script type="text/javascript"> 
+<script type="text/javascript">
 // initialise Superfish & jQuery UI Tabs
 
-    $(document).ready(function(){ 
-        $("ul.sf-menu").supersubs({ 
-            minWidth:    12,   // minimum width of sub-menus in em units 
-            maxWidth:    27,   // maximum width of sub-menus in em units 
-            extraWidth:  1     // extra width can ensure lines don't sometimes turn over 
-                               // due to slight rounding differences and font-family 
-        }).superfish();  // call supersubs first, then superfish, so that subs are 
-                         // not display:none when measuring. Call before initialising 
-                         // containing tabs for same reason. 
+    $(document).ready(function(){
+        $("ul.sf-menu").supersubs({
+            minWidth:    12,   // minimum width of sub-menus in em units
+            maxWidth:    27,   // maximum width of sub-menus in em units
+            extraWidth:  1     // extra width can ensure lines don't sometimes turn over
+                               // due to slight rounding differences and font-family
+        }).superfish();  // call supersubs first, then superfish, so that subs are
+                         // not display:none when measuring. Call before initialising
+                         // containing tabs for same reason.
 
 // Datepickers
     $('#product_available').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 2});
@@ -40,8 +40,8 @@
 //Batch Print Center
 	$("#Labels").hide();
 	$("#Invoices").hide();
-    $("#file_type").change(function(){ 
-		var show_options = (this.value); 
+    $("#file_type").change(function(){
+		var show_options = (this.value);
 		if(show_options == 'Labels.php') {
 			$("#Invoices").hide();
 			$("#Labels").show();
@@ -56,7 +56,7 @@
 			$("#Labels").hide();
 			$("#No_Options").show();
 		}}
-	}); 
+	});
 
 // Tabs
     $("#searchtabs").tabs();
@@ -83,7 +83,7 @@
     $("#qpbpp").tabs();
 
 	$("#categorytabs").tabs();
-}); 
+});
 
 </script>
 <script language="javascript" type="text/javascript">
@@ -109,7 +109,7 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
   if ($messageStack->size > 0) {
     echo $messageStack->output();
   }
-  
+
   $languages = tep_get_languages();
   $languages_array = array();
   $languages_selected = DEFAULT_LANGUAGE;
@@ -120,7 +120,7 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
       $languages_selected = $languages[$i]['code'];
     }
   }
-  
+
 ?>
 <?php
   $my_userid_query = tep_db_query ("select a.admin_id, a.admin_username, g.admin_groups_name from " . TABLE_ADMIN . " a, " . TABLE_ADMIN_GROUPS . " g where a.admin_id= " . $login_id . " and g.admin_groups_id= " . $login_groups_id . "");
@@ -140,20 +140,20 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
                 <li><a href="#searchtabs-2">Products</a></li>
                 <li><a href="#searchtabs-3">Orders</a></li>
                 </ul>
-    
+
                 <div id="searchtabs-1" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_CUSTOMERS, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
-                
+
                 <div id="searchtabs-2" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_CATEGORIES, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
-                
+
                 <div id="searchtabs-3" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, '', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
-           
+
             </div>
 	    </td>
 	  </tr>
     </table>
   </td>
   <td width="33%" class="smalltext" align="right">
-  
+
   <?php
 $current_page = basename($_SERVER['SCRIPT_FILENAME']);
 
@@ -172,9 +172,9 @@ if ($help_pages_query['help_page'] != '' ) {
   	<?php echo tep_draw_pull_down_menu('language', $languages_array, $languages_selected, 'onChange="this.form.submit();"'); ?>
   	<?php echo tep_hide_session_id(); ?></form>
 
-	<?php echo '<a href="' . tep_href_link(FILENAME_ADMIN_ACCOUNT, '', 'SSL') . '" class="header"' . '>'; ?>
+	<?php echo '<a href="' . tep_href_link(FILENAME_ADMIN_ACCOUNT, '', 'SSL') . '" class="header"' . '">'; ?>
 	<?php echo tep_image(DIR_WS_ICONS . 'book_key.png', 'Manage Account'); ?> Welcome, <?php echo $myLogin['admin_username']; ?>.</a>
-	<?php echo '<a href="' . tep_catalog_href_link('admin/logoff.php') . '" class="header">'; ?>
+	<?php echo '<a href="' . tep_catalog_href_link(DIR_WS_ADMIN, 'logoff.php') . '" class="header">'; ?>
 	<?php echo tep_image(DIR_WS_ICONS . 'exit.png', 'Logoff'); ?> Logoff &nbsp;
   </td>
 </tr>

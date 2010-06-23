@@ -4,7 +4,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
-adapted for Separate Pricing Per Customer v4.20 2005/01/29, QPBPP for SPPC v2.0 2008/10/25 and Hide products and categories from customer groups 
+adapted for Separate Pricing Per Customer v4.20 2005/01/29, QPBPP for SPPC v2.0 2008/10/25 and Hide products and categories from customer groups
   Copyright 2006 osCMax
 
   Released under the GNU General Public License
@@ -227,7 +227,7 @@ function tep_selected_file($filename) {
     if (@date('Y', mktime($hour, $minute, $second, $month, $day, $year)) == $year) {
       return date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, $year));
     } else {
-      return ereg_replace('2037' . '$', $year, date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037)));
+      return preg_replace('/2037$/', $year, date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037)));
     }
 
   }
@@ -470,20 +470,20 @@ function tep_selected_file($filename) {
     $address_format_query = tep_db_query("select address_format as format from " . TABLE_ADDRESS_FORMAT . " where address_format_id = '" . (int)$address_format_id . "'");
     $address_format = tep_db_fetch_array($address_format_query);
 
-    $company = tep_output_string_protected($address['company']);
+    $company = tep_output_string_protected(ucwords($address['company']));
     if (isset($address['firstname']) && tep_not_null($address['firstname'])) {
-      $firstname = tep_output_string_protected($address['firstname']);
-      $lastname = tep_output_string_protected($address['lastname']);
+      $firstname = tep_output_string_protected (ucwords($address['firstname']));
+      $lastname = tep_output_string_protected(ucwords($address['lastname']));
     } elseif (isset($address['name']) && tep_not_null($address['name'])) {
-      $firstname = tep_output_string_protected($address['name']);
+      $firstname = tep_output_string_protected(ucwords($address['name']));
       $lastname = '';
     } else {
       $firstname = '';
       $lastname = '';
     }
-    $street = tep_output_string_protected($address['street_address']);
-    $suburb = tep_output_string_protected($address['suburb']);
-    $city = tep_output_string_protected($address['city']);
+    $street = tep_output_string_protected(ucwords($address['street_address']));
+    $suburb = tep_output_string_protected(ucwords($address['suburb']));
+    $city = tep_output_string_protected(ucwords($address['city']));
     $state = tep_output_string_protected($address['state']);
     if (isset($address['country_id']) && tep_not_null($address['country_id'])) {
       $country = tep_get_country_name($address['country_id']);
@@ -1037,84 +1037,10 @@ function tep_selected_file($filename) {
     return $string;
   }
 
-// USPS Methods 3.0
-// Alias function for Store configuration values in the Administration Tool
-  function tep_cfg_select_multioption($select_array, $key_value, $key = '') {
-    for ($i=0; $i<sizeof($select_array); $i++) {
-      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
-      $string .= '<br><input type="checkbox" name="' . $name . '" value="' . $select_array[$i] . '"';
-      $key_values = explode( ", ", $key_value);
-      if ( in_array($select_array[$i], $key_values) ) $string .= ' CHECKED';
-      $string .= '> ' . $select_array[$i];
-    }
-    $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
-    return $string;
-  }
-
-// USPS Methods.  Added by Greg Deeth
-// Alias function for Store configuration values in the Administration Tool.
-// Creates multiple text input boxes in a list.
-// Remember to add blank default values: 1, 2, , , 5, 6, ...
-  function tep_cfg_multiinput_list($select_array, $key_value, $key = '') {
-    $key_values = explode( ", ", $key_value);
-
-    for ($i=0; $i<sizeof($select_array); $i++) {
-      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
-      $string .= '<br><input type="text" name="' . $name . '" value="' . $key_values[$i] . '"> ' . $select_array[$i];
-    }
-    $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
-    return $string;
-  }
-
-// USPS Methods.  Added by Greg Deeth
-// Alias function for Store configuration values in the Administration Tool.
-// Creates a text input box on either side of the option, adds <= OPTION <= and makes a list.
-// Remember to add blank default values: 1, 2, , , 5, 6, ...
-  function tep_cfg_multiinput_duallist_oz($select_array, $key_value, $key = '') {
-    $key_values = explode( ", ", $key_value);
-    $string .= '<center>';
-
-    for ($i=0; $i<sizeof($select_array); $i++) {
-        $current_key_value = current($key_values);
-
-      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
-      $string .= '<br><input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
-        $string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
-        next($key_values);
-        $current_key_value = current($key_values);
-        $string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
-        next($key_values);
-    }
-    $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
-
-    $string .= '</center>';
-    return $string;
-  }
-  function tep_cfg_multiinput_duallist_lb($select_array, $key_value, $key = '') {
-    $key_values = explode( ", ", $key_value);
-    $string .= '<center>';
-
-    for ($i=0; $i<sizeof($select_array); $i++) {
-        $current_key_value = current($key_values);
-
-      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
-      $string .= '<br><input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
-        $string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
-        next($key_values);
-        $current_key_value = current($key_values);
-        $string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
-        next($key_values);
-    }
-    $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
-
-    $string .= '</center>';
-    return $string;
-  }
-
 ////
 // Retreive server information
   function tep_get_system_information() {
-    global $HTTP_SERVER_VARS;
+    global $_SERVER;
 
     $db_query = tep_db_query("select now() as datetime");
     $db = tep_db_fetch_array($db_query);
@@ -1127,7 +1053,7 @@ function tep_selected_file($filename) {
                  'host' => $host,
                  'ip' => gethostbyname($host),
                  'uptime' => @exec('uptime'),
-                 'http_server' => $HTTP_SERVER_VARS['SERVER_SOFTWARE'],
+                 'http_server' => $_SERVER['SERVER_SOFTWARE'],
                  'php' => PHP_VERSION,
                  'zend' => (function_exists('zend_version') ? zend_version() : ''),
                  'db_server' => DB_SERVER,
@@ -1246,12 +1172,12 @@ function tep_selected_file($filename) {
     tep_db_query("delete from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'");
     tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
     tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
- 
-// BOF: MOD - Wishlist addition to delete products from the wishlist when deleted 
-    tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = '" . (int)$product_id . "'"); 
-    tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'"); 
-// EOF: MOD - Wishlist addition to delete products from the wishlist when deleted 
- 
+
+// BOF: MOD - Wishlist addition to delete products from the wishlist when deleted
+    tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = '" . (int)$product_id . "'");
+    tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'");
+// EOF: MOD - Wishlist addition to delete products from the wishlist when deleted
+
     $product_reviews_query = tep_db_query("select reviews_id from " . TABLE_REVIEWS . " where products_id = '" . (int)$product_id . "'");
     while ($product_reviews = tep_db_fetch_array($product_reviews_query)) {
       tep_db_query("delete from " . TABLE_REVIEWS_DESCRIPTION . " where reviews_id = '" . (int)$product_reviews['reviews_id'] . "'");
@@ -1278,19 +1204,19 @@ function tep_selected_file($filename) {
         $product_stock_adjust = 0;
         if (tep_not_null($order['products_stock_attributes'])) {
           if ($order['products_stock_attributes'] != '$$DOWNLOAD$$') {
-            $attributes_stock_query = tep_db_query("SELECT products_stock_quantity 
-                                                    FROM " . TABLE_PRODUCTS_STOCK . " 
-                                                    WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "' 
+            $attributes_stock_query = tep_db_query("SELECT products_stock_quantity
+                                                    FROM " . TABLE_PRODUCTS_STOCK . "
+                                                    WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "'
                                                     AND products_id = '" . (int)$order['products_id'] . "'");
             if (tep_db_num_rows($attributes_stock_query) > 0) {
                 $attributes_stock_values = tep_db_fetch_array($attributes_stock_query);
-                tep_db_query("UPDATE " . TABLE_PRODUCTS_STOCK . " 
-                              SET products_stock_quantity = products_stock_quantity + '" . (int)$order['products_quantity'] . "' 
-                              WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "' 
+                tep_db_query("UPDATE " . TABLE_PRODUCTS_STOCK . "
+                              SET products_stock_quantity = products_stock_quantity + '" . (int)$order['products_quantity'] . "'
+                              WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "'
                               AND products_id = '" . (int)$order['products_id'] . "'");
                 $product_stock_adjust = min($order['products_quantity'],  $order['products_quantity']+$attributes_stock_values['products_stock_quantity']);
             } else {
-                tep_db_query("INSERT into " . TABLE_PRODUCTS_STOCK . " 
+                tep_db_query("INSERT into " . TABLE_PRODUCTS_STOCK . "
                               (products_id, products_stock_attributes, products_stock_quantity)
                               VALUES ('" . (int)$order['products_id'] . "', '" . $order['products_stock_attributes'] . "', '" . (int)$order['products_quantity'] . "')");
                 $product_stock_adjust = $order['products_quantity'];
@@ -1298,9 +1224,9 @@ function tep_selected_file($filename) {
           }
         } else {
             $product_stock_adjust = $order['products_quantity'];
-        } 
-        tep_db_query("UPDATE " . TABLE_PRODUCTS . " 
-                      SET products_quantity = products_quantity + " . $product_stock_adjust . ", products_ordered = products_ordered - " . (int)$order['products_quantity'] . " 
+        }
+        tep_db_query("UPDATE " . TABLE_PRODUCTS . "
+                      SET products_quantity = products_quantity + " . $product_stock_adjust . ", products_ordered = products_ordered - " . (int)$order['products_quantity'] . "
                       WHERE products_id = '" . (int)$order['products_id'] . "'");
 //++++ QT Pro: End Changed Code
       }
@@ -1314,7 +1240,7 @@ function tep_selected_file($filename) {
 
 //  function tep_reset_cache_block($cache_block) {
 //     global $cache_blocks;
-// 
+//
 //     for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
 //       if ($cache_blocks[$i]['code'] == $cache_block) {
 //         if ($cache_blocks[$i]['multiple']) {
@@ -1346,7 +1272,7 @@ function tep_selected_file($filename) {
 //  adapted for Hide products and categories from customer groups for SPPC 2008/08/02
    function tep_reset_cache_block($cache_block) {
     global $cache_blocks;
-    
+
     for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
       if ($cache_blocks[$i]['code'] == $cache_block) {
         if ($cache_blocks[$i]['multiple']) {
@@ -1366,7 +1292,7 @@ function tep_selected_file($filename) {
             closedir($dir);
           }
         } else {
-          // not used using hide products or regular osC, but if so, it assumes the $cache_blocks[$i]['file'] does 
+          // not used using hide products or regular osC, but if so, it assumes the $cache_blocks[$i]['file'] does
           // contain the .cache on the end for example whatever_box-language.cache
           $cached_file = $cache_blocks[$i]['file'];
           $languages = tep_get_languages();
@@ -1691,7 +1617,7 @@ function tep_selected_file($filename) {
 // nl2br() prior PHP 4.2.0 did not convert linefeeds on all OSs (it only converted \n)
   function tep_convert_linefeeds($from, $to, $string) {
     if ((PHP_VERSION < "4.0.5") && is_array($from)) {
-      return ereg_replace('(' . implode('|', $from) . ')', $to, $string);
+      return preg_replace('/(' . implode('|', $from) . ')/', $to, $string);
     } else {
       return str_replace($from, $to, $string);
     }
@@ -1737,7 +1663,7 @@ function tep_selected_file($filename) {
 
     return $string;
   }
-  
+
 ////
 // Alias function for Store configuration values in the Administration Tool
   function tep_cfg_select_color($key_value, $key = '') {
@@ -1745,7 +1671,7 @@ function tep_selected_file($filename) {
 
     $name = ((tep_not_null($key)) ? 'configuration[' . $key . ']' : 'configuration_value');
 
-    $string .= '<script type="text/javascript"> var cp = new ColorPicker(\'window\'); </SCRIPT>';
+    $string .= '<SCRIPT LANGUAGE="JavaScript"> var cp = new ColorPicker(\'window\'); </SCRIPT>';
     $string .= '<br><table border="0" cellspacing="0" cellpadding="0"><tr><td><input type="text" name="' . $name . '" id="' . $name . '" value="' . $key_value . '" size="6"></td><td>&nbsp;</td>';
     $string .= '<td><a href="javascript:;" onclick="cp.select(document.configuration.'.$name.',\'pick\');return false;" name="pick" id="pick">'.tep_image_button('button_pick_color.gif', IMAGE_PICK_COLOR).'</a></td></tr></table><br>';
 
@@ -1791,15 +1717,15 @@ require(DIR_WS_FUNCTIONS . 'qtpro_functions.php');
       if ($module->check() > 0) {
         // If module enabled create array of titles
         $enabled_payment[] = array('id' => $module->title, 'text' => $module->title);
-                
+
       }
    }
  }
-                                
-    $enabled_payment[] = array('id' => 'Other', 'text' => 'Other');     
-                
+
+    $enabled_payment[] = array('id' => 'Other', 'text' => 'Other');
+
                 //draw the dropdown menu for payment methods and default to the order value
-          return tep_draw_pull_down_menu('configuration_value', $enabled_payment, '', ''); 
+          return tep_draw_pull_down_menu('configuration_value', $enabled_payment, '', '');
                 }
 /////end payment method dropdown
 // EOF: MOD - Order Editor
@@ -2009,7 +1935,7 @@ function tep_cfg_pull_down_templates() {
     $string=str_replace('&#39;', '', $string);
     $string=str_replace("'", "", $string);
     $string=str_replace('"', '', $string);
-    $string=preg_replace("/\\r\\n|\\n|\\r/", "<BR>", $string); 
+    $string=preg_replace("/\\r\\n|\\n|\\r/", "<BR>", $string);
   return $string;
   }
 

@@ -15,7 +15,7 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
   $current_boxes = DIR_FS_ADMIN . DIR_WS_BOXES;
   $current_files = DIR_FS_ADMIN;
 
-  if ($_GET['action']) {
+  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
     switch ($_GET['action']) {
       case 'box_store':
         $sql_data_array = array('admin_files_name' => tep_db_prepare_input($_GET['box']),
@@ -86,7 +86,7 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
           <tr>
             <td valign="top">
 <?php
- if ($_GET['fID'] || $_GET['cPath']) {
+ if (isset($_GET['fID']) || (isset($_GET['cPath']))) {
   //$current_box_query_raw = "select admin_files_name as admin_box_name from " . TABLE_ADMIN_FILES . " where admin_files_id = " . $_GET['cPath'] . " ";
   $current_box_query = tep_db_query("select admin_files_name as admin_box_name from " . TABLE_ADMIN_FILES . " where admin_files_id = " . $_GET['cPath']);
   $current_box = tep_db_fetch_array($current_box_query);
@@ -170,7 +170,7 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
   $boxnum = sizeof($boxes);
   $i = 0;
   while ($i < $boxnum) {
-    if (((!$_GET['cID']) || ($_GET['none'] == $boxes[$i]['admin_boxes_id']) || ($_GET['cID'] == $boxes[$i]['admin_boxes_id'])) && (!$cInfo) ) {
+    if (((!isset($_GET['cID']) || ($_GET['none'] == $boxes[$i]['admin_boxes_id'])) || ((isset($_GET['cID']) == $boxes[$i]['admin_boxes_id'])) && (!$cInfo))) {
       $cInfo = new objectInfo($boxes[$i]);
     }
     if ( (is_object($cInfo)) && ($boxes[$i]['admin_boxes_id'] == $cInfo->admin_boxes_id) ) {
@@ -185,7 +185,7 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
 ?>
                 <td class="dataTableContent"><?php echo tep_image(DIR_WS_ICONS . 'folder.gif', ICON_FOLDER) . ' <b>' . ucfirst (substr_replace ($boxes[$i]['admin_boxes_name'], '' , -4)) . '</b>'; ?></td>
                 <td class="dataTableContent" align="center"><?php
-                                               if ( (is_object($cInfo)) && ($_GET['cID'] == $boxes[$i]['admin_boxes_id'])) {
+                                               if ( (is_object($cInfo)) && (isset($_GET['cID']) == $boxes[$i]['admin_boxes_id'])) {
                                                  if (substr($boxes[$i]['admin_boxes_id'], 0,1) == 'b') {
                                                    echo tep_image(DIR_WS_ICONS . 'icon_status_red.gif', STATUS_BOX_NOT_INSTALLED, 10, 10) . '&nbsp;<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cID=' . $boxes[$i]['admin_boxes_id'] . '&box=' . $boxes[$i]['admin_boxes_name'] . '&action=box_store') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', STATUS_BOX_INSTALL, 10, 10) . '</a>';
                                                  } else {
@@ -222,81 +222,82 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
 <?php
   $heading = array();
   $contents = array();
-  switch ($_GET['action']) {
-    case 'store_file':
-      $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_FILE . '</b>');
+  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
+    switch ($_GET['action']) {
+      case 'store_file':
+        $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_FILE . '</b>');
 
-      $file_query = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where admin_files_is_boxes = '0' ");
-      while ($fetch_files = tep_db_fetch_array($file_query)) {
-        $files_array[] = $fetch_files['admin_files_name'];
-      }
-
-      $file_dir = array();
-      $dir = dir(DIR_FS_ADMIN);
-
-      while ($file = $dir->read()) {
-        if ((substr("$file", -4) == '.php') && $file != FILENAME_DEFAULT && $file != FILENAME_LOGIN && $file != FILENAME_LOGOFF && $file != FILENAME_FORBIDDEN && $file != FILENAME_POPUP_IMAGE && $file != FILENAME_PASSWORD_FORGOTTEN && $file != FILENAME_ADMIN_ACCOUNT && $file != 'invoice.php' && $file != 'packingslip.php') {
-            $file_dir[] = $file;
+        $file_query = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where admin_files_is_boxes = '0' ");
+        while ($fetch_files = tep_db_fetch_array($file_query)) {
+          $files_array[] = $fetch_files['admin_files_name'];
         }
-      }
 
-      $result = $file_dir;
-      if (sizeof($files_array) > 0) {
-        $result = array_values (array_diff($file_dir, $files_array));
-      }
+        $file_dir = array();
+        $dir = dir(DIR_FS_ADMIN);
 
-      sort ($result);
-      reset ($result);
-      while (list ($key, $val) = each ($result)) {
-        $show[] = array('id' => $val,
-                        'text' => $val);
-      }
-
-      $contents = array('form' => tep_draw_form('store_file', FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&fID=' . $files['admin_files_id'] . '&action=file_store', 'post', 'enctype="multipart/form-data"'));
-      $contents[] = array('text' => '<b>' . TEXT_INFO_NEW_FILE_BOX .  ucfirst(substr_replace ($current_box['admin_box_name'], '', -4)) . '</b>');
-      $contents[] = array('text' => TEXT_INFO_NEW_FILE_INTRO );
-      $contents[] = array('align' => 'left', 'text' => '<br>&nbsp;' . tep_draw_pull_down_menu('admin_files_name', $show, $show));
-      $contents[] = array('text' => tep_draw_hidden_field('admin_files_to_boxes', $_GET['cPath']));
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
-      break;
-    case 'remove_file':
-      $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_FILE . '</b>');
-
-      $contents = array('form' => tep_draw_form('remove_file', FILENAME_ADMIN_FILES, 'action=file_remove&cPath=' . $_GET['cPath'] . '&fID=' . $files['admin_files_id'], 'post', 'enctype="multipart/form-data"'));
-      $contents[] = array('text' => tep_draw_hidden_field('admin_files_id', $_GET['fID']));
-      $contents[] = array('text' =>  sprintf(TEXT_INFO_DELETE_FILE_INTRO, $fInfo->admin_files_name, ucfirst(substr_replace ($current_box['admin_box_name'], '', -4))) );
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_confirm.gif', IMAGE_CONFIRM) . ' <a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&fID=' . $_GET['fID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
-      break;
-    default:
-      if (is_object($cInfo)) {
-        $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DEFAULT_BOXES . $cInfo->admin_boxes_name . '</b>');
-        if ( substr($cInfo->admin_boxes_id, 0,1) == 'b') {
-        $contents[] = array('text' => '<b>' . $cInfo->admin_boxes_name . ' ' . TEXT_INFO_DEFAULT_BOXES_NOT_INSTALLED . '</b><br>&nbsp;');
-        $contents[] = array('text' => TEXT_INFO_DEFAULT_BOXES_INTRO);
-        } else {
-        $contents = array('form' => tep_draw_form('newfile', FILENAME_ADMIN_FILES, 'cPath=' . $cInfo->admin_boxes_id . '&action=store_file', 'post', 'enctype="multipart/form-data"'));
-        $contents[] = array('align' => 'center', 'text' => tep_image_submit('button_admin_files.gif', IMAGE_INSERT_FILE) );
-        $contents[] = array('text' => tep_draw_hidden_field('this_category', $cInfo->admin_boxes_id));
-        $contents[] = array('text' => '<br>' . TEXT_INFO_DEFAULT_BOXES_INTRO);
+        while ($file = $dir->read()) {
+          if ((substr("$file", -4) == '.php') && $file != FILENAME_DEFAULT && $file != FILENAME_LOGIN && $file != FILENAME_LOGOFF && $file != FILENAME_FORBIDDEN && $file != FILENAME_POPUP_IMAGE && $file != FILENAME_PASSWORD_FORGOTTEN && $file != FILENAME_ADMIN_ACCOUNT && $file != 'invoice.php' && $file != 'packingslip.php') {
+              $file_dir[] = $file;
+          }
         }
-        $contents[] = array('text' => '<br>');
-      }
-      if (is_object($fInfo)) {
-        $heading[] = array('text' => '<b>' . TEXT_INFO_NEW_FILE_BOX .  ucfirst(substr_replace ($current_box['admin_box_name'], '', -4)) . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&action=store_file') . '">' . tep_image_button('button_admin_files.gif', IMAGE_INSERT_FILE) . '</a> <a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&fID=' . $fInfo->admin_files_id . '&action=remove_file') . '">' . tep_image_button('button_admin_remove.gif', IMAGE_DELETE) . '</a>');
-        $contents[] = array('text' => '<br>' . TEXT_INFO_DEFAULT_FILE_INTRO . ucfirst(substr_replace ($current_box['admin_box_name'], '', -4)));
-      }
+        $result = $file_dir;
+        if (sizeof($files_array) > 0) {
+          $result = array_values (array_diff($file_dir, $files_array));
+        }
+
+        sort ($result);
+        reset ($result);
+        while (list ($key, $val) = each ($result)) {
+          $show[] = array('id' => $val,
+                          'text' => $val);
+        }
+
+        $contents = array('form' => tep_draw_form('store_file', FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&fID=' . $files['admin_files_id'] . '&action=file_store', 'post', 'enctype="multipart/form-data"'));
+        $contents[] = array('text' => '<b>' . TEXT_INFO_NEW_FILE_BOX .  ucfirst(substr_replace ($current_box['admin_box_name'], '', -4)) . '</b>');
+        $contents[] = array('text' => TEXT_INFO_NEW_FILE_INTRO );
+        $contents[] = array('align' => 'left', 'text' => '<br>&nbsp;' . tep_draw_pull_down_menu('admin_files_name', $show, $show));
+        $contents[] = array('text' => tep_draw_hidden_field('admin_files_to_boxes', $_GET['cPath']));
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        break;
+      case 'remove_file':
+        $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_FILE . '</b>');
+
+        $contents = array('form' => tep_draw_form('remove_file', FILENAME_ADMIN_FILES, 'action=file_remove&cPath=' . $_GET['cPath'] . '&fID=' . $files['admin_files_id'], 'post', 'enctype="multipart/form-data"'));
+        $contents[] = array('text' => tep_draw_hidden_field('admin_files_id', $_GET['fID']));
+        $contents[] = array('text' =>  sprintf(TEXT_INFO_DELETE_FILE_INTRO, $fInfo->admin_files_name, ucfirst(substr_replace ($current_box['admin_box_name'], '', -4))) );
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_confirm.gif', IMAGE_CONFIRM) . ' <a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&fID=' . $_GET['fID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        break;
+      default:
+        if (is_object($cInfo)) {
+          $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DEFAULT_BOXES . $cInfo->admin_boxes_name . '</b>');
+          if ( substr($cInfo->admin_boxes_id, 0,1) == 'b') {
+          $contents[] = array('text' => '<b>' . $cInfo->admin_boxes_name . ' ' . TEXT_INFO_DEFAULT_BOXES_NOT_INSTALLED . '</b><br>&nbsp;');
+          $contents[] = array('text' => TEXT_INFO_DEFAULT_BOXES_INTRO);
+          } else {
+          $contents = array('form' => tep_draw_form('newfile', FILENAME_ADMIN_FILES, 'cPath=' . $cInfo->admin_boxes_id . '&action=store_file', 'post', 'enctype="multipart/form-data"'));
+          $contents[] = array('align' => 'center', 'text' => tep_image_submit('button_admin_files.gif', IMAGE_INSERT_FILE) );
+          $contents[] = array('text' => tep_draw_hidden_field('this_category', $cInfo->admin_boxes_id));
+          $contents[] = array('text' => '<br>' . TEXT_INFO_DEFAULT_BOXES_INTRO);
+          }
+          $contents[] = array('text' => '<br>');
+        }
+        if (is_object($fInfo)) {
+          $heading[] = array('text' => '<b>' . TEXT_INFO_NEW_FILE_BOX .  ucfirst(substr_replace ($current_box['admin_box_name'], '', -4)) . '</b>');
+
+          $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&action=store_file') . '">' . tep_image_button('button_admin_files.gif', IMAGE_INSERT_FILE) . '</a> <a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&fID=' . $fInfo->admin_files_id . '&action=remove_file') . '">' . tep_image_button('button_admin_remove.gif', IMAGE_DELETE) . '</a>');
+          $contents[] = array('text' => '<br>' . TEXT_INFO_DEFAULT_FILE_INTRO . ucfirst(substr_replace ($current_box['admin_box_name'], '', -4)));
+        }
+    }
   }
+    if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+      echo '            <td width="25%" valign="top">' . "\n";
 
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
-    echo '            <td width="25%" valign="top">' . "\n";
+      $box = new box;
+      echo $box->infoBox($heading, $contents);
 
-    $box = new box;
-    echo $box->infoBox($heading, $contents);
-
-    echo '            </td>' . "\n";
-  }
+      echo '            </td>' . "\n";
+    }
 ?>
           </tr>
         </table></td>

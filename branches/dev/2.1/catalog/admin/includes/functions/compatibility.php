@@ -30,8 +30,8 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
   }
 
 // Always PHP_VERSION >= 4.1
-    $_GET =& $_GET;
-    $_POST =& $_POST;
+    $HTTP_GET_VARS =& $_GET;
+    $HTTP_POST_VARS =& $_POST;
     $HTTP_COOKIE_VARS =& $_COOKIE;
     $HTTP_SESSION_VARS =& $_SESSION;
     $HTTP_POST_FILES =& $_FILES;

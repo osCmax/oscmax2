@@ -46,6 +46,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_AFFILIATE_VALIDPRODUCTS', 'affiliate_validproducts.php');
   define('FILENAME_AFFILIATE_VALIDCATS', 'affiliate_validcats.php');
   define('FILENAME_CATALOG_AFFILIATE_PAYMENT_INFO','affiliate_payment.php');
+  define('FILENAME_CATALOG_PRODUCT_INFO', 'product_info.php');
 
   define('TABLE_AFFILIATE', 'affiliate_affiliate');
   define('TABLE_AFFILIATE_NEWS', 'affiliate_news');

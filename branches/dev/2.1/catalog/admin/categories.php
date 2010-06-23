@@ -65,7 +65,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
         tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&pID=' . $_GET['pID']));
         break;
-		
+
       case 'setflag_categories_featured':
         if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') ) {
           if (isset($_GET['cID'])) {
@@ -84,7 +84,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
      //   tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath']));
         break;
 // EOF Open Featured Sets
-	
+
 // BOF: MOD for Categories Description 1.5
       case 'new_category':
       case 'edit_category':
@@ -634,11 +634,11 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 ?>
 <link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
 <script language="JavaScript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
-<script type="text/javascript"><!-- 
-var CategoriesFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesFeaturedUntil", "newcategory", "categories_featured_until","btnDate1","<?php echo $cInfo->categories_featured_until; ?>", scBTNMODE_CUSTOMBLUE); 
+<script type="text/javascript"><!--
+var CategoriesFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesFeaturedUntil", "newcategory", "categories_featured_until","btnDate1","<?php echo $cInfo->categories_featured_until; ?>", scBTNMODE_CUSTOMBLUE);
 //--></script>
-<script type="text/javascript"><!-- 
-var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeaturedUntil", "categories", "categories_featured_until","btnDate1","<?php echo $cInfo->categories_featured_until; ?>", scBTNMODE_CUSTOMBLUE); 
+<script type="text/javascript"><!--
+var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeaturedUntil", "categories", "categories_featured_until","btnDate1","<?php echo $cInfo->categories_featured_until; ?>", scBTNMODE_CUSTOMBLUE);
 //--></script>
 <?php
  	// EOF Open Featured Sets
@@ -678,7 +678,7 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
 ?>
        <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
   <?php   //----- new_category / edit_category (when ALLOW_CATEGORY_DESCRIPTIONS is 'true') -----
-  if ($_GET['action'] == 'new_category_ACD' || $_GET['action'] == 'edit_category_ACD') {
+  if (isset($_GET['action']) && ($_GET['action'] == 'new_category_ACD' ||  $_GET['action'] == 'edit_category_ACD')) {
     if ( ($_GET['cID']) && (!$_POST) ) {
       $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.categories_featured, c.categories_featured_until from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . $_GET['cID'] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . $languages_id . "' order by c.sort_order, cd.categories_name");
       $category = tep_db_fetch_array($categories_query);
@@ -720,8 +720,8 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
                       <a href="#categorytabs-<?php echo $i ?>">
                          <?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>
                       </a>
-                    </li>             		  
-                <?php } ?>        
+                    </li>
+                <?php } ?>
   			</ul>
 
             <?php for ($i=0; $i<sizeof($languages); $i++) { ?>
@@ -760,7 +760,7 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
             <?php } ?>
             </div>
             </td>
-          </tr>	          
+          </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
@@ -789,7 +789,7 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
             		echo tep_draw_checkbox_field('hide_cat[' . $customers_groups[$i]['id'] . ']',  $customers_groups[$i]['id'] , (in_array($customers_groups[$i]['id'], $hide_cat_from_groups_array)) ? 1: 0) . '&#160;&#160;' . $customers_groups[$i]['text'];
           		}
 		  	  echo '</td>';
-        
+
 				  // EOF SPPC hide products and categories from groups ?>
           </tr>
           <tr>
@@ -817,7 +817,7 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
 <?php
 
   //----- new_category_preview (active when ALLOW_CATEGORY_DESCRIPTIONS is 'true') -----
-  } elseif ($_GET['action'] == 'new_category_preview') {
+  } elseif (isset($_GET['action']) && ($_GET['action'] == 'new_category_preview')) {
     if ($_POST) {
       $cInfo = new objectInfo($_POST);
       $categories_name = $_POST['categories_name'];
@@ -1027,7 +1027,7 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
       $products_name = $_POST['products_name'];
 // BOF Open Featured Sets
       $products_short = $_POST['products_short'];
-// EOF Open Featured Sets	  
+// EOF Open Featured Sets
       $products_description = $_POST['products_description'];
 // BOF: Tabs by PGM
       $tab1 = $_POST['tab1'];
@@ -1075,7 +1075,7 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
       case '1':
       default: $in_status = true; $out_status = false;
     }
-	
+
 // BOF Open Featured Sets
 	if (empty($pInfo->products_featured)) $pInfo->products_featured = '0';
     switch ($pInfo->products_featured) {
@@ -1679,40 +1679,40 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 	  <tr>
         <td>
 		<b><?php echo TABLE_HEADING_FEATURED_PREVIEW; ?></b><br>
-		<table border="1" width="450" cellspacing="0" cellpadding="16"> 
-		<tr> 
-			<td> 
-				<table border="0" width="100%" cellspacing="0" cellpadding="2"> 
-				<tr> 
-					<td width="<?php echo SMALL_IMAGE_WIDTH + 10; ?>" rowspan="4" align="right" valign="top" class="main"><?php echo tep_image( ((!empty($_SERVER['HTTPS'])) ? HTTPS_CATALOG_SERVER : HTTP_CATALOG_SERVER).DIR_WS_CATALOG_IMAGES . $products_image_name, $pInfo->products_name, 0, 0, 'align="right" hspace="5" vspace="5"'); ?></td> 
-					<td width="80%" valign="top" class="main"><div align="left"><?php echo '<b><u>' . $pInfo->products_name . '</u></b>'; ?></div></td> 
-				</tr> 
-				<tr> 
-					<td valign="top" class="smalltext"><?php 
-					  if ($pInfo->products_short != '') { 
-						  echo $pInfo->products_short; 
-					  } else { 
-					   $bah = explode(" ", $pInfo->products_description); 
-					   for($desc=0 ; $desc<MAX_FEATURED_WORD_DESCRIPTION; $desc++) 
-						  { 
-						  echo "$bah[$desc] "; 
-						  } 
-						  echo '&nbsp;<a target="_blank" href="'.HTTP_CATALOG_SERVER.DIR_WS_CATALOG.'product_info.php?products_id='.(isset($_GET['pID'])?$_GET['pID']:'').'"><u>'.TEXT_MORE_INFO.'</u></a>'; 
-					  } 
-					?>  
-					</td> 
-				</tr> 
-				<tr> 
-					<td valign="top" class="main">&nbsp;</td> 
-				</tr> 
-				<tr> 
-					<td align="left" valign="top" class="smalltext"><?php echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo '<img src='.HTTP_CATALOG_SERVER.DIR_WS_CATALOG_LANGUAGES.'english/images/buttons/button_buy_now.gif>';?></td> 
-				</tr> 
+		<table border="1" width="450" cellspacing="0" cellpadding="16">
+		<tr>
+			<td>
+				<table border="0" width="100%" cellspacing="0" cellpadding="2">
+				<tr>
+					<td width="<?php echo SMALL_IMAGE_WIDTH + 10; ?>" rowspan="4" align="right" valign="top" class="main"><?php echo tep_image( ((!empty($_SERVER['HTTPS'])) ? HTTPS_CATALOG_SERVER : HTTP_CATALOG_SERVER).DIR_WS_CATALOG_IMAGES . $products_image_name, $pInfo->products_name, 0, 0, 'align="right" hspace="5" vspace="5"'); ?></td>
+					<td width="80%" valign="top" class="main"><div align="left"><?php echo '<b><u>' . $pInfo->products_name . '</u></b>'; ?></div></td>
+				</tr>
+				<tr>
+					<td valign="top" class="smalltext"><?php
+					  if ($pInfo->products_short != '') {
+						  echo $pInfo->products_short;
+					  } else {
+					   $bah = explode(" ", $pInfo->products_description);
+					   for($desc=0 ; $desc<MAX_FEATURED_WORD_DESCRIPTION; $desc++)
+						  {
+						  echo "$bah[$desc] ";
+						  }
+						  echo '&nbsp;<a target="_blank" href="'.HTTP_CATALOG_SERVER.DIR_WS_CATALOG.'product_info.php?products_id='.(isset($_GET['pID'])?$_GET['pID']:'').'"><u>'.TEXT_MORE_INFO.'</u></a>';
+					  }
+					?>
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" class="main">&nbsp;</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" class="smalltext"><?php echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo '<img src='.HTTP_CATALOG_SERVER.DIR_WS_CATALOG_LANGUAGES.'english/images/buttons/button_buy_now.gif>';?></td>
+				</tr>
 				</table>
-			</td> 
-		</tr> 
+			</td>
+		</tr>
 		</table>
-				 
+
 	    </td>
       </tr>
 	  <tr>
@@ -1845,7 +1845,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_FEATURED; ?></td>
 <?php
  	// EOF Open Featured Sets
-?>                
+?>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
@@ -1946,12 +1946,12 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
       case '1':
       default: $in_fc_status = true; $out_fc_status = false;
 	  }
-	  
+
       if ($categories['categories_featured'] == '1') {
         echo tep_image(DIR_WS_ICONS . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag_categories_featured&flag=0&cPath=' . $cPath . '&cID=' . $categories['categories_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
       } else {
         echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag_categories_featured&flag=1&cPath=' . $cPath . '&cID=' . $categories['categories_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
-      } 	   
+      }
 ?></td>
 <?php
  	// EOF Open Featured Sets

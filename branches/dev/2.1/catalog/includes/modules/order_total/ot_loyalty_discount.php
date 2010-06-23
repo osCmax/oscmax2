@@ -44,8 +44,8 @@ $Id: ot_loyalty_discount.php 14 2006-07-28 17:42:07Z user $
     }
 }
     }
-	  
-   
+
+
   function calculate_credit($amount_order, $amount_cum_order) {
     global $order;
     $od_amount=0;
@@ -66,7 +66,7 @@ $Id: ot_loyalty_discount.php 14 2006-07-28 17:42:07Z user $
       while (list($key, $value) = each($order->info['tax_groups'])) {
         $god_amount = round($value*10)/10*$od_pc/100;
         $order->info['tax_groups'][$key] = $order->info['tax_groups'][$key] - $god_amount;
-      }  
+      }
     }
     $od_amount = round($amount_order*10)/10*$od_pc/100;
     $od_amount = $od_amount + $tod_amount;
@@ -97,11 +97,11 @@ $Id: ot_loyalty_discount.php 14 2006-07-28 17:42:07Z user $
     if ($this->include_tax == 'false') $order_total=$order_total-$order->info['tax'];
     if ($this->include_shipping == 'false') $order_total=$order_total-$order->info['shipping_cost'];
     return $order_total;
-  }   
-    
+  }
+
 	function get_cum_order_total() {
 	  global $order, $customer_id;
-    $history_query_raw = "select o.date_purchased, ot.value as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where o.customers_id = '" . $customer_id . "' and ot.class = 'ot_subtotal' and o.orders_status = '" . $this->loyalty_order_status . "' order by date_purchased DESC";  
+    $history_query_raw = "select o.date_purchased, ot.value as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where o.customers_id = '" . $customer_id . "' and ot.class = 'ot_subtotal' and o.orders_status = '" . $this->loyalty_order_status . "' order by date_purchased DESC";
   	  $history_query = tep_db_query($history_query_raw);
 	  if (tep_db_num_rows($history_query)) {
 	  $cum_order_total = 0;
@@ -113,15 +113,15 @@ $Id: ot_loyalty_discount.php 14 2006-07-28 17:42:07Z user $
 	  }
 	  $this->cum_order_total = $cum_order_total;
 	  return $cum_order_total;
-	  
-	  }	
-	  else {
+
+
+	  } else {
 	  $cum_order_total = 0;
 	  $this->cum_order_total = $cum_order_total;
 	  return $cum_order_total;
-	  }	
+	  }
 	}
-    
+
 	function get_cutoff_date() {
 	  $rightnow = time();
 	  switch ($this->cum_order_period) {
@@ -150,10 +150,10 @@ $Id: ot_loyalty_discount.php 14 2006-07-28 17:42:07Z user $
 	  return $cutoff_date;
 	  }
 	}
-	
+
       function get_date_in_period($cutoff_date, $raw_date) {
     if ( ($raw_date == '0000-00-00 00:00:00') || ($raw_date == '') ) return false;
-	
+
     $year = (int)substr($raw_date, 0, 4);
     $month = (int)substr($raw_date, 5, 2);
     $day = (int)substr($raw_date, 8, 2);
@@ -165,8 +165,8 @@ $Id: ot_loyalty_discount.php 14 2006-07-28 17:42:07Z user $
 	if ($order_date_purchased >= $cutoff_date) {return true;}
 	else {return false;}
   }
-  
-  
+
+
     function check() {
       if (!isset($this->check)) {
         $check_query = tep_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_LOYALTY_DISCOUNT_STATUS'");

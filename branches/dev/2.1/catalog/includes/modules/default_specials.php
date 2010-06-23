@@ -16,10 +16,11 @@ $Id: default_specials.php 3 2006-05-27 04:59:07Z user $
      $default_specials_query = tep_db_query("select p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, p.products_image, s.specials_new_products_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_SPECIALS . " s where p.products_status = '1' and s.products_id = p.products_id and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and s.status = '1' and s.customers_group_id = ". (int)$customer_group_id." order by s.specials_date_added DESC limit " . MAX_DISPLAY_SPECIAL_PRODUCTS);
      $default_specials = tep_db_fetch_array($default_specials_query);
 
-         if (isset($default_specials['products_id'])) { ?>        
+       if (isset($default_specials['products_id'])) {
+?>
           <tr>
             <td>
-            
+
 <?php
 $info_box_contents = array();
 //  $info_box_contents[] = array('align' => 'left', 'text' => sprintf(TABLE_HEADING_DEFAULT_SPECIALS, strftime('%B')));
@@ -74,7 +75,7 @@ $pg_query = tep_db_query("select products_id, customers_group_price from " . TAB
           $info_box_contents[$row][$col] = array ('align' => 'center',
                                                   'params' =>'class="smallText"',
 //                                                'text' => '<td><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $specials[$x]['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $specials[$x]['products_image'], $specials[$x]['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $specials[$x]['products_id']) . '">' . $specials[$x]['products_name'] . '</a><br><span style="text-decoration:line-through">' . $currencies->display_price($specials[$x]['products_price'], tep_get_tax_rate($specials[$x]['products_tax_class_id'])) . '</span><br><span class="productSpecialPrice">' . $currencies->display_price($specials[$x]['specials_new_products_price'], tep_get_tax_rate($specials[$x]['products_tax_class_id'])) . '</td>');
-                                                  'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $specials[$x]['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $specials[$x]['products_image'], $specials[$x]['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $specials[$x]['products_id']) . '">' . $specials[$x]['products_name'] . '</a><br><span style="text-decoration:line-through">' . $currencies->display_price($specials[$x]['products_price'], tep_get_tax_rate($specials[$x]['products_tax_class_id'])) . '</span><br><span class="productSpecialPrice">' . $currencies->display_price($specials[$x]['specials_new_products_price'], tep_get_tax_rate($specials[$x]['products_tax_class_id']))); 
+                                                  'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $specials[$x]['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $specials[$x]['products_image'], $specials[$x]['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $specials[$x]['products_id']) . '">' . $specials[$x]['products_name'] . '</a><br><span style="text-decoration:line-through">' . $currencies->display_price($specials[$x]['products_price'], tep_get_tax_rate($specials[$x]['products_tax_class_id'])) . '</span><br><span class="productSpecialPrice">' . $currencies->display_price($specials[$x]['specials_new_products_price'], tep_get_tax_rate($specials[$x]['products_tax_class_id'])) . '</span>');
           $col ++;
           if ($col >= 3) {
           $col = 0;
@@ -93,7 +94,7 @@ $pg_query = tep_db_query("select products_id, customers_group_price from " . TAB
   new contentBox($info_box_contents);
 ?>
 <?php
-    } // Ends if at start of file to check for 0 specials   
+    } // Ends if at start of file to check for 0 specials
 ?>
           </td>
         </tr>

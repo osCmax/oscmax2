@@ -1,7 +1,7 @@
 <?php
 /*
   $Id: whos_online.php,v 3.5.4 2008/7/8 SteveDallas Exp $
-  
+
   2008 Jul 08 v3.5.4 Glen Hoag aka SteveDallas Modified TEXT_NUMBER_OF_CUSTOMERS for formatting change
   2008 Jun 13 v3.5   Glen Hoag aka SteveDallas Moved version number out of language files
                                                Added string TEXT_ACTIVE_CUSTOMERS
@@ -37,7 +37,6 @@ define('TABLE_HEADING_LAST_PAGE_URL', 'Last URL');
 define('TABLE_HEADING_ACTION', 'Action');
 define('TABLE_HEADING_SHOPPING_CART', 'Shopping cart');
 define('TEXT_SHOPPING_CART_SUBTOTAL', 'Subtotal');
-define('TEXT_NUMBER_OF_CUSTOMER', 'Visitors online (Considered inactive after 5 minutes. Removed after 15 minutes)');
 define('TEXT_NUMBER_OF_CUSTOMERS', 'Visitors online (Considered inactive after 5 minutes. Removed after 15 minutes)');
 define('TABLE_HEADING_HTTP_REFERER', 'Referer?');
 define('TEXT_HTTP_REFERER_URL', 'HTTP Referer URL');

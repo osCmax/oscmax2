@@ -1,16 +1,16 @@
 <?php
 /*
       QT Pro Version 4.1
-  
+
       pad_base.php
-  
+
       Contribution extension to:
         osCMax Power E-Commerce
         http://oscdox.com
-     
+
       Copyright 2006 osCMax2004, 2005 Ralph Day
       Released under the GNU General Public License
-  
+
       Based on prior works released under the GNU General Public License:
         QT Pro prior versions
           Ralph Day, October 2004
@@ -23,22 +23,22 @@
           11/2004 - Created
           12/2004 - Fix _draw_js_stock_array to prevent error when all attribute combinations are
                     out of stock.
-  
+
 *******************************************************************************************
-  
+
       QT Pro Product Attributes Display Plugin
-  
+
       pad_base.php - Base Class
-  
+
       Class Name: pad_base
-  
+
       This base class, although functional, is not intended to be installed and used
       directly.  It is extended by other classes to provide different display options
       for product attributes on the product information page (product_info.php).
-  
-  
+
+
       Methods:
-  
+
         pad_base                            constructor
         _SetConfigurationProperties         set local properties from DB config constants
         draw                                draw the product attributes
@@ -49,17 +49,17 @@
         _draw_js_stock_array                draw a Javascript array of in stock attribute combinations
         _build_attributes_array             build an array of the attributes for the product
         _build_attributes_combinations      build an array of the attribute combinations for the product
-  
+
       Properties:
-  
+
         products_id                         the product id for attribute display
         products_tax_class_id               the products tax class id
         show_out_of_stock                   show out of stock attributes flag
         mark_out_of_stock                   mark out of stock attributes flag
         out_of_stock_msgline                show out of stock message line flag
         no_add_out_of_stock                 prevent add to cart of out of stock attributes combinations
-  
-  
+
+
 */
   class pad_base {
     var $products_id;
@@ -72,17 +72,17 @@
 
 /*
     Method: pad_base
-  
+
     Class constructor
-  
+
     Parameters:
-  
+
       $products_id      integer     The product id of the product attributes are to be displayed for
-  
+
     Returns:
-  
+
       nothing
-  
+
 */
     function pad_base($products_id=0) {
       $this->products_id = $products_id;
@@ -98,17 +98,17 @@
 
 /*
     Method: _SetConfigurationProperties
-  
+
     Set local configuration properties from osCommerce configuration DB constants
-  
+
     Parameters:
-  
+
       $prefix      sting     Prefix for the osCommerce DB constants
-  
+
     Returns:
-  
+
       nothing
-  
+
 */
     function _SetConfigurationProperties($prefix) {
       $this->show_out_of_stock    = constant($prefix . 'SHOW_OUT_OF_STOCK');
@@ -118,25 +118,25 @@
     }
 /*
     Method: draw
-  
+
     Draws the product attributes.  This is the only method other than the constructor that is
     intended to be called by a user of this class.
-  
+
     Attributes that stock is tracked for are grouped first and drawn with one dropdown list per
-    attribute.  All attributes are drawn even if no stock is available for the attribute and no 
+    attribute.  All attributes are drawn even if no stock is available for the attribute and no
     indication is given that the attribute is out of stock.
-  
+
     Attributes that stock is not tracked for are then drawn with one dropdown list per
     attribute.
-  
+
     Parameters:
-  
+
       none
-  
+
     Returns:
-  
+
       string:       HTML for displaying the product attributes
-  
+
 */
     function draw() {
       $out=$this->_draw_table_start();
@@ -147,18 +147,18 @@
     }
 /*
     Method: _draw_table_start
-  
+
     Draws the start of a table to wrap the product attributes display.
     Intended for class internal use only.
-  
+
     Parameters:
-  
+
       none
-  
+
     Returns:
-  
+
       string:       HTML for start of table
-  
+
 */
     function _draw_table_start() {
       $out ='           <table border="0" cellspacing="0" cellpadding="2" width="100%">';
@@ -169,26 +169,26 @@
     }
 /*
     Method: _draw_stocked_attributes
-  
+
     Draws the product attributes that stock is tracked for.
     Intended for class internal use only.
-  
+
     Attributes that stock is tracked for are drawn with one dropdown list per attribute.
-    All attributes are drawn even if no stock is available for the attribute and no 
+    All attributes are drawn even if no stock is available for the attribute and no
     indication is given that the attribute is out of stock.
-  
+
     Parameters:
-  
+
       none
-  
+
     Returns:
-  
+
       string:       HTML for displaying the product attributes that stock is tracked for
-  
+
 */
     function _draw_stocked_attributes() {
       $out = '';
-    
+
       $attributes = $this->_build_attributes_array(true, false);
       if (sizeof($attributes)>0) {
         foreach ($attributes as $stocked) {
@@ -199,20 +199,20 @@
     }
 /*
     Method: _draw_nonstocked_attributes
-  
+
     Draws the product attributes that stock is not tracked for.
     Intended for class internal use only.
-  
+
     Attributes that stock is not tracked for are drawn with one dropdown list per attribute.
-  
+
     Parameters:
-  
+
       none
-  
+
     Returns:
-  
+
       string:       HTML for displaying the product attributes that stock is not tracked for
-  
+
 */
     function _draw_nonstocked_attributes() {
       $out='';
@@ -225,34 +225,34 @@
     }
 /*
     Method: _draw_table_end
-  
+
     Draws the end of a table to wrap the product attributes display.
     Intended for class internal use only.
-  
+
     Parameters:
-  
+
       none
-  
+
     Returns:
-  
+
       string:       HTML for end of table
-  
+
 */
     function _draw_table_end() {
       return '           </table>';
     }
 /*
     Method: _build_attributes_array
-  
+
     Build an array of the attributes for the product
-  
+
     Parameters:
-  
+
       $build_stocked        boolean   Flag indicating if stocked attributes should be built.
       $build_nonstocked     boolean   Flag indicating if non-stocked attribute should be built.
-  
+
     Returns:
-  
+
       array:                Array of attributes for the product of the form:
                               'oid'       => integer: products_options_id
                               'oname'     => string:  products_options_name
@@ -263,16 +263,16 @@
                                                       contains for this option id and should be the
                                                       default selection when this attribute is drawn.
                                                       Set to zero if the product id did not contain
-                                                      this option. 
-  
+                                                      this option.
+
 */
     function _build_attributes_array($build_stocked, $build_nonstocked) {
       global $languages_id;
       global $currencies;
       global $cart;
-    
+
       if (!($build_stocked | $build_nonstocked)) return null;
-      
+
       if ($build_stocked && $build_nonstocked) {
         $stocked_where='';
       }
@@ -282,13 +282,13 @@
       elseif ($build_nonstocked) {
         $stocked_where="and popt.products_options_track_stock = '0'";
       }
-      
+
       $products_options_name_query = tep_db_query("select distinct popt.products_options_id, popt.products_options_name, popt.products_options_track_stock from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$this->products_id . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "' " . $stocked_where . " order by popt.products_options_name");
       $attributes=array();
-	  
+
       while ($products_options_name = tep_db_fetch_array($products_options_name_query)) {
         $products_options_array = array();
-        $products_options_query = tep_db_query("select pov.products_options_values_id, pov.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov where pa.products_id = '" . (int)$this->products_id . "' and pa.options_id = '" . (int)$products_options_name['products_options_id'] . "' and pa.options_values_id = pov.products_options_values_id and pov.language_id = '" . (int)$languages_id . "'");
+        $products_options_query = tep_db_query("select pov.products_options_values_id, pov.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov where pa.products_id = '" . (int)$this->products_id . "' and pa.options_id = '" . (int)$products_options_name['products_options_id'] . "' and pa.options_values_id = pov.products_options_values_id and pov.language_id = '" . (int)$languages_id . "'" . "order by pov.products_options_values_name");
         while ($products_options = tep_db_fetch_array($products_options_query)) {
 
 $products_options_array[] = array('id' => $products_options['products_options_values_id'], 'text' => $products_options['products_options_values_name']);
@@ -314,7 +314,7 @@ if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
         }
         if (isset($cart->contents[$this->products_id]['attributes'][$products_options_name['products_options_id']]))
           $selected = $cart->contents[$this->products_id]['attributes'][$products_options_name['products_options_id']];
-        else 
+        else
           $selected = 0;
         $attributes[]=array('oid'=>$products_options_name['products_options_id'],
                             'oname'=>$products_options_name['products_options_name'],
@@ -327,11 +327,11 @@ if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
 
 /*
     Method: _build_attributes_combinations
-  
+
     A recursive method for building an array enumerating the attribute combinations for the product
-  
+
     Parameters:
-  
+
       $attributes             array     An array of the attributes that combinations will be built for.
                                         Format is as returned by _build_attributes_array.
       $showoos                boolean   Flag indicating if non-stocked attributes should be built.
@@ -339,10 +339,10 @@ if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
                                         attribute combination text.  'Right' if out of stock indication is
                                         to be appended at the end of the attribute combination text.
       $combinations           array     Array of the attribute combinations is returned in this parameter.
-                                        Should be set to an empty array before an external call to this method. 
+                                        Should be set to an empty array before an external call to this method.
                                           'comb'        => array:   array of a single attribute combination
                                                                       options_id => options_value_id
-                                          'id'          => string:  options/values string for this 
+                                          'id'          => string:  options/values string for this
                                                                     combination in the form for the
                                                                     key of the products_stock table
                                                                       opt_id-val_id,opt_id-val_id,...
@@ -355,9 +355,9 @@ if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
                                         be the default selection when the combination is drawn is returned in
                                         this parameter.  Determined from product id.  Should be set to zero
                                         before an external call to this method.
-  
+
     Parameters for internal recursion use only:
-  
+
       $oidindex               integer   Index into the $attributes array of the option to operate on.
       $comb                   array     Array containing option id/values of combination built so far
                                           products_options_id => products_options_value_id
@@ -365,17 +365,17 @@ if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
       $text                   string    Text for the options values constructed so far.
       $isselected             boolean   Flag indicating if so far all option values in this combination
                                         were indicated to be defaults in the product id.
-      
-  
+
+
     Returns:
-  
+
       see $combinations and $selected_combination parameters above
       no actual function return value.
-  
+
 */
     function _build_attributes_combinations($attributes, $showoos, $markoos, &$combinations, &$selected_combination, $oidindex=0, $comb=array(), $id="", $text='', $isselected=true) {
       global $cart;
-    
+
       foreach ($attributes[$oidindex]['ovals'] as $attrib) {
         $newcomb = $comb;
         $newcomb[$attributes[$oidindex]['oid']] = $attrib['id'];
@@ -383,13 +383,13 @@ if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
         $newtext = $text.", ".$attrib['text'];
         if (isset($cart->contents[$this->products_id]['attributes'][$attributes[$oidindex]['oid']]))
           $newisselected = ($cart->contents[$this->products_id]['attributes'][$attributes[$oidindex]['oid']] == $attrib['id']) ? $isselected : false;
-        else 
+        else
           $newisselected = false;
         if (isset($attributes[$oidindex+1])) {
           $this->_build_attributes_combinations($attributes, $showoos, $markoos, $combinations, $selected_combination, $oidindex+1, $newcomb, $newid, $newtext, $newisselected);
-        }
-        else {
+        } else {
           $is_out_of_stock=tep_check_stock(tep_get_prid($this->products_id),1,$newcomb);
+
           if (!$is_out_of_stock | ($showoos == true)) {
             switch ($markoos) {
               case 'Left':   $newtext=($is_out_of_stock ? TEXT_OUT_OF_STOCK.' - ' : '').substr($newtext,2);
@@ -409,19 +409,19 @@ if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
 
 /*
     Method: _draw_js_stock_array
-  
+
     Draw a Javascript array containing the given attribute combinations.
     Generally used to draw array of in-stock combinations for Javascript out of stock
     validation and messaging.
-  
+
     Parameters:
-  
+
       $combinations        array   Array of combinations to build the Javascript array for.
                                    Array must be of the form returned by _build_attributes_combinations
                                    Usually this array only contains in-stock combinations.
-  
+
     Returns:
-  
+
       string:                 Javacript array definition.  Excludes the "var xxx=" and terminating ";".  Form is:
                               {optval1:{optval2:{optval3:1,optval3:1}, optval2:{optval3:1}}, optval1:{optval2:{optval3:1}}}
                               For example if there are 3 options and the instock value combinations are:
@@ -432,7 +432,7 @@ if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
                                   3      5      8
                               The string returned would be
                                 {1:{5:{4:1,8:1}, 10:{4:1}}, 3:{5:{8:1}}}
-  
+
 */
     function _draw_js_stock_array($combinations) {
       if (!((isset($combinations)) && (is_array($combinations)) && (sizeof($combinations) > 0))){
@@ -444,21 +444,21 @@ if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
         $opts[]=$oid;
       }
       $out.='1';
-      
-      for ($combindex=1; $combindex<sizeof($combinations); $combindex++) {
+
+      for ($combindex = 1; $combindex < sizeof($combinations); $combindex++) {
         $comb=$combinations[$combindex]['comb'];
-        for ($i=0; $i<sizeof($opts)-1; $i++) {
+        for ($i = 0; $i < sizeof($opts) - 1; $i++) {
           if ($comb[$opts[$i]]!=$combinations[$combindex-1]['comb'][$opts[$i]]) break;
         }
         $out.=str_repeat('}',sizeof($opts)-1-$i).',';
-        if ($i<sizeof($opts)-1) {
-          for ($j=$i; $j<sizeof($opts)-1; $j++)
+        if ($i < sizeof($opts) - 1) {
+          for ($j = $i; $j < sizeof($opts) - 1; $j++)
             $out.=$comb[$opts[$j]].':{';
         }
         $out.=$comb[$opts[sizeof($opts)-1]].':1';
       }
       $out.=str_repeat('}',sizeof($opts));
-      
+
       return $out;
     }
 

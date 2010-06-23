@@ -10,16 +10,15 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   Released under the GNU General Public License
 */
 
-if ( isset($_GET['origin']) && $_GET['origin'] == FILENAME_CHECKOUT_PAYMENT) {
-  define('NAVBAR_TITLE', 'Order');
-  define('HEADING_TITLE', 'Ordering online is easy.');
-  define('TEXT_STEP_BY_STEP', 'We\'ll walk you through the process, step by step.');
-} else {
-  define('NAVBAR_TITLE', 'Login');
-  define('HEADING_TITLE', 'Welcome, Please Sign In');
-  define('TEXT_STEP_BY_STEP', ''); // should be empty
-}
+define('TEXT_CREATE_FIRST_ADMINISTRATOR', 'No administrators exist in the database table. Please fill in the following information to create the first administrator. (A manual login is still required after this step)');
 
+define('ERROR_INVALID_ADMINISTRATOR', 'Error: Invalid administrator login attempt.');
+
+define('BUTTON_LOGIN', 'Login');
+define('BUTTON_CREATE_ADMINISTRATOR', 'Create Administrator');
+define('NAVBAR_TITLE', 'Login');
+define('HEADING_TITLE', 'Admin Login');
+define('TEXT_STEP_BY_STEP', ''); // should be empty
 define('HEADING_RETURNING_ADMIN', 'Login Panel:');
 define('HEADING_PASSWORD_FORGOTTEN', 'Password Forgotten:');
 define('TEXT_RETURNING_ADMIN', 'Staff only!');

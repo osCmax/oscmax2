@@ -219,7 +219,7 @@
                     <td class="main" align="right" width="250">
                       <table width="200" border="0" cellpadding="0">
                         <tr>
-                       	  <td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',+1)" alt="plus 1" ></td>
+                       	  <td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',+1)" alt="plus 1" class="plusminus"></td>
                           <td rowspan="2" align="center"><?php echo tep_draw_input_field('cart_quantity', $pf->adjustQty(1), 'size="2" id="product-quantity-{{product.id}}"'); ?></td>
                           <?php // START: PGM Edit to switch Add to Cart image if stock = 0
                             if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
@@ -229,7 +229,7 @@
                             <?php } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
                         </tr>
                         <tr>
-                          <td align="center"><img src="<?php echo DIR_WS_ICONS . 'minus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',-1)" alt="minus 1" ></td>
+                          <td align="center"><img src="<?php echo DIR_WS_ICONS . 'minus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',-1)" alt="minus 1" class="plusminus"></td>
                         </tr>
                       </table>
                     </td>

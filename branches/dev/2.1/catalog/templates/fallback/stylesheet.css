@@ -66,6 +66,8 @@ td.productinfo_imagebig { border: 1px solid #dddddd; text-align: center; font-fa
 td.productinfo_thumbnail  { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; }
 td.productinfo_buttons  { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; }
 td.prod_attributes { border: 1px solid #dddddd; }
+img.plusminus { cursor: pointer; }
+
 
 td.login_boxes { border: 1px solid #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:5px; }
 

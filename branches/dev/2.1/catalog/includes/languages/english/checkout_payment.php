@@ -34,5 +34,6 @@ define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'to confirm this order.');
 define('HEADING_PRODUCTS', 'Products Ordered');
 define('TEXT_EDIT', 'Edit');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
-
+define('TERMS_PART_1', 'Please confirm that you have read our ');
+define('TERMS_PART_2', '<b><u>Terms and Conditions</u></b>');
 ?>

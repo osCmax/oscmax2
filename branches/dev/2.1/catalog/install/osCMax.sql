@@ -1992,6 +1992,9 @@ INSERT INTO configuration VALUES (2609, 'Set the number of days to store the cac
 INSERT INTO configuration VALUES (2610, 'Reset SEO URLs Cache', 'SEO_URLS_CACHE_RESET', 'false', 'This will reset the cache data for SEO', 60, 902, '2010-03-17 04:40:49', '2010-03-17 08:14:36', 'tep_reset_cache_data_seo_urls', 'tep_cfg_select_option(array(''reset'', ''false''), ');
 INSERT INTO configuration VALUES (2611, 'Turn debug reporting on true/false.', 'SEO_URLS_OUPUT_PERFORMANCE', 'false', '<span style="color: red;">Debug reporting should <b>NOT</b> be set to ON on a live site</span><br>It is for dev reporting re: performance and queries.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
 INSERT INTO configuration VALUES (2612, 'Select caching system.', 'SEO_URLS_CACHE_SYSTEM', 'FileSystem', '<b>Filesystem:</b><br>Zero queries after cache load.<br><b>Database:</b><br>One query after cache load<br><b>Memcached:</b><br>Requires memcached in apache and php.ini.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''FileSystem'', ''Database'', ''Memcached''), ');
+INSERT INTO configuration VALUES (2613, 'Terms and Conditions on create account', 'MAT', 'false', 'Force the customer to accept terms and conditions before being able to create an account?', 203, 0, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (2614, 'Terms and Conditions on payment page', 'MATC', 'false', 'Force the customer to accept terms and conditions before being able to checkout?', 203, 1, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+
 
 #Open Feature Sets Start
 INSERT INTO configuration VALUES (3000, '<font color=blue>Show Featured Sets on Store Front</font>', 'SHOW_FEATURED_SETS_ON_STORE_FRONT', 'true', 'Would you like to see the Featured Sets displayed on the store front page?', 99, 1, '2005-10-19 02:56:40', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
@@ -2108,6 +2111,7 @@ INSERT INTO configuration_group VALUES (89,'Google Maps', 'Google Maps Settings'
 INSERT INTO configuration_group VALUES (99,'Featured Sets', 'Configure featured sets', 99, 1);   
 INSERT INTO configuration_group VALUES (201,'Template Setup', 'Template Settings', 201, 1);
 INSERT INTO configuration_group VALUES (202,'Page Modules', 'Page Module Settings', 202, 1);
+INSERT INTO configuration_group VALUES (203,'Notifications', 'Notifications', 203, 1);
 
 
 INSERT INTO `countries` VALUES(1, 'Afghanistan', 'AF', 'AFG', 1, 1);

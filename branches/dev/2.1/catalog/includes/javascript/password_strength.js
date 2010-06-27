@@ -133,8 +133,3 @@ $.fn.password_strength = function(options)
 
 })(jQuery);
 </script>
-<script type="text/javascript">
-$(document).ready(function(){
-	$("#password_st").password_strength();
-});
-</script>

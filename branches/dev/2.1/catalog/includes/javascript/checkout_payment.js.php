@@ -1,3 +1,8 @@
+<script src="http://www.google.com/jsapi"></script>
+<script>
+  // Load jQuery
+  google.load("jquery", "1.4.0");
+</script>
 
 <script language="javascript" type="text/javascript">
 /********************************
@@ -84,6 +89,29 @@ if ($gv_result['amount']>=$temp){ $coversAll=true;
     document.checkout_payment.cot_gv.checked=!document.checkout_payment.cot_gv.checked;
   }<?php } ?>
 //--></script>
+
 <?php // echo $payment_modules->javascript_validation(); ?>
 <?php echo $payment_modules->javascript_validation($coversAll); ?>
 <?php // End - CREDIT CLASS Gift Voucher Contribution ?>
+
+<script type="text/javascript">
+function switchMATC() { 
+	if($("#MATC").attr("checked")) {
+		$("#MATCtd").attr("class", "messageStackSuccess");
+		$('#disableMATC').hide();
+    	$('#enableMATC').show();
+	} else {
+		$("#MATCtd").attr("class", "messageStackAlert");
+		$('#disableMATC').show();
+    	$('#enableMATC').hide();
+	}
+}
+
+function warnMATC() {
+		$("#MATCtd").attr("class", "messageStackWarning");
+}
+
+$(document).ready(function(){
+	$('#enableMATC').hide();
+});
+</script>

@@ -36,4 +36,7 @@ define('EMAIL_COUPON_INCENTIVE_HEADER', 'Congratulations, to make your first vis
                                         ' Below are details of the Discount Coupon created just for you' . "\n");
 define('EMAIL_COUPON_REDEEM', 'To use the coupon enter the redeem code which is %s during checkout while making a purchase');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+define('TERMS_PART_1', 'Please confirm that you have read our ');
+define('TERMS_PART_2', '<b><u>Terms and Conditions</u></b>');
+
 ?>

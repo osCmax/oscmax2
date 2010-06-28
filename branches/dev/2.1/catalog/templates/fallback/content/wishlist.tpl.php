@@ -36,6 +36,7 @@
         <td>
           <table border="0" width="100%" cellspacing="0" cellpadding="3" class="productListing">
             <tr>
+              <td class="productListing-heading"><?php echo BOX_TEXT_REMOVE; ?></td>
               <td class="productListing-heading"><?php echo BOX_TEXT_IMAGE; ?></td>
               <td class="productListing-heading"><?php echo BOX_TEXT_PRODUCT; ?></td>
               <td class="productListing-heading"><?php echo BOX_TEXT_PRICE; ?></td>
@@ -60,6 +61,7 @@
 
 ?>
             <tr class="<?php echo $class; ?>">
+              <td valign="middle" class="productListing-data" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=remove_product&wishlist_id=' . $wishlist_id . '', 'NONSSL').'">' . tep_image(DIR_WS_ICONS . 'basket_delete.png', IMAGE_BUTTON_REMOVE_PRODUCT, 16, 16) . '</a></td>'; ?>
               <td valign="top" class="productListing-data" align="left"><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?></a></td>
               <td valign="top" class="productListing-data" align="left" class="main"><b><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>"><?php echo $products['products_name']; ?></a></b>
                 <input type="hidden" name="prod_link[]" value="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>" />
@@ -136,8 +138,30 @@
       </table>
       </td>
     </tr>
+    
     <tr>
-      <td align="right"><br /><?php echo tep_image_submit('button_delete.gif', 'Delete From Wishlist', 'name="delete_prod" value="delete_prod"') . " " . tep_image_submit('button_in_cart.gif', 'Add to Cart', 'name="add_prod" value="add_prod"'); ?></td>
+      <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+    </tr>
+      
+    <tr>
+ 
+      <td class="productinfo_buttons">
+        <table border="0" width="100%" cellspacing="1" cellpadding="2">
+          <tr>
+            <td>
+              <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <tr>
+                  <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+                  <td align="left" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=clear_wishlist', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_WISHLIST . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_wishlist.gif', 'Clear Wishlist'); ?></td>
+                  <td align="right" class="main"><?php echo tep_image_submit('button_delete.gif', 'Delete From Wishlist', 'name="delete_prod" value="delete_prod"') . " " . tep_image_submit('button_in_cart.gif', 'Add to Cart', 'name="add_prod" value="add_prod"'); ?></td>
+                  <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+ 
     </tr>
   </table>
 <?php

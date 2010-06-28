@@ -14,6 +14,7 @@ define('NAVBAR_TITLE_WISHLIST', 'My Wish List');
 define('NAVBAR_TITLE_1', 'Wish List');
 define('HEADING_TITLE', 'My Wish List contains:');
 define('HEADING_TITLE2', '\'s Wish List contains:');
+define('BOX_TEXT_REMOVE', 'Remove');
 define('BOX_TEXT_PRICE', 'Price');
 define('BOX_TEXT_PRODUCT', 'Product Name');
 define('BOX_TEXT_IMAGE', 'Image');
@@ -57,4 +58,7 @@ define('ERROR_MESSAGE', 'Please include a brief message.');
 
 define('WISHLIST_SECURITY_CHECK', 'Please complete this security question: ');
 define('WISHLIST_SECURITY_CHECK_ERROR', 'The Security Check code wasn\'t typed correctly. Try again.');
+
+define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Remove Product');
+define('CLEAR_WISHLIST', 'Are you sure you want to clear your entire wishlist?');
 ?>

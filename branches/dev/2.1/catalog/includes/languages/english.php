@@ -54,7 +54,7 @@ define('HEADER_TITLE_CREATE_ACCOUNT', 'Create an Account');
 define('HEADER_TITLE_MY_ACCOUNT', 'My Account');
 define('HEADER_TITLE_CART_CONTENTS', 'Cart Contents');
 define('HEADER_TITLE_CHECKOUT', 'Checkout');
-define('HEADER_TITLE_WISHLIST', 'Wishlist');
+define('HEADER_TITLE_WISHLIST', 'Wish List');
 define('HEADER_TITLE_TOP', 'Top');
 define('HEADER_TITLE_CATALOG', 'Catalog');
 define('HEADER_TITLE_LOGOFF', 'Log Off');
@@ -101,7 +101,7 @@ define('BOX_SHOPPING_CART_EMPTY', '0 items');
 
 // BOF: MOD - Wishlist 3.5
 //wishlist box text in includes/boxes/wishlist.php 
-define('BOX_HEADING_CUSTOMER_WISHLIST', 'My Wishlist'); 
+define('BOX_HEADING_CUSTOMER_WISHLIST', 'My Wish List'); 
 define('TEXT_WISHLIST_COUNT', 'Currently %s items are on your Wish List.');
 // EOF: MOD - Wishlist 3.5
 

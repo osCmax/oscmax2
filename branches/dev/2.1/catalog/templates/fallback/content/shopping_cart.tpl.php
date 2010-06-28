@@ -9,7 +9,6 @@ switch ($_GET['action']) {
 	case 'clear_cart' :     $cart->reset(true);
                               break;
 }
-define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Remove Product');
 // END REMOVE FROM CART BUTTON AND CLEAR CART MOD
 ?>
 
@@ -180,7 +179,7 @@ define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Remove Product');
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td class="main" align="left"><a href="<?php echo tep_href_link(FILENAME_SHOPPING_CART, 'action=clear_cart', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_CART . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_cart.gif', 'Clear Basket'); ?></a></td>
+                <td class="main" align="left"><?php echo '<a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'action=clear_cart', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_CART . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_cart.gif', 'Clear Basket'); ?></a></td>
 
 <?php
     $back = sizeof($navigation->path)-2;

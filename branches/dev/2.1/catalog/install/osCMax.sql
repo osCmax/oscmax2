@@ -1994,6 +1994,9 @@ INSERT INTO configuration VALUES (2611, 'Turn debug reporting on true/false.', '
 INSERT INTO configuration VALUES (2612, 'Select caching system.', 'SEO_URLS_CACHE_SYSTEM', 'FileSystem', '<b>Filesystem:</b><br>Zero queries after cache load.<br><b>Database:</b><br>One query after cache load<br><b>Memcached:</b><br>Requires memcached in apache and php.ini.', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''FileSystem'', ''Database'', ''Memcached''), ');
 INSERT INTO configuration VALUES (2613, 'Terms and Conditions on create account', 'MAT', 'false', 'Force the customer to accept terms and conditions before being able to create an account?', 203, 0, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
 INSERT INTO configuration VALUES (2614, 'Terms and Conditions on payment page', 'MATC', 'false', 'Force the customer to accept terms and conditions before being able to checkout?', 203, 1, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (2615, 'Check for Javscript enabled?', 'JAVASCRIPT_CHECK', 'false', 'Do you want to check if the customer has got javascript enabled and if they do not display a warning at the top of the store pages?', 203, 2, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (2615, 'Check for Internet Explorer 6?', 'IE6_CHECK', 'false', 'Do you want to check if the customer is using IE6 and ask them to upgrade their browser?', 203, 3, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+
 
 
 #Open Feature Sets Start

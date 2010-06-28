@@ -35,6 +35,15 @@ $Id: warnings.php 1 2008-09-22 11:11:07Z user $
     }
   }
 
+// Check for IE6
+if (IE6_CHECK == 'true') {
+  $browser = $_SERVER['HTTP_USER_AGENT'];
+  $pos = (strrpos($browser, "MSIE 6.0"));
+	if($pos > 0) { 
+      $messageStack->add('header', WARNING_IE6_DETECTED, 'warning');
+	}
+}
+
 // check session.auto_start is disabled
   if ( (function_exists('ini_get')) && (WARN_SESSION_AUTO_START == 'true') ) {
     if (ini_get('session.auto_start') == '1') {
@@ -122,4 +131,19 @@ $Id: warnings.php 1 2008-09-22 11:11:07Z user $
 </table>
 <?php
   }
+
+// Check for javascript enabled
+if (JAVASCRIPT_CHECK == 'true') {
+?>
+
+<noscript>
+<table border="0" width="100%" cellspacing="0" cellpadding="2">
+  <tr>
+    <td class="messageStackAlert"><?php echo tep_image(DIR_WS_ICONS . 'warning.gif'); ?> <a href="http://www.google.com/search?q=enable+javascript+browser" target="_blank" class="nojavascript"><?php echo WARNING_JAVASCRIPT_DISABLED; ?></a></td>
+  </tr>
+</table>
+</noscript>
+
+<?php 
+}
 ?>

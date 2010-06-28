@@ -20,17 +20,21 @@
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-          <tr class="infoBoxContents">
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>'; ?></td>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
+        <td>
+          <table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+            <tr class="infoBoxContents">
+              <td>
+                <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                  <tr>
+                    <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+                    <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>'; ?></td>
+                    <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
       </tr>
     </table>
 <?php
@@ -52,7 +56,7 @@
     }
 // EOF QPBPP for SPPC
 ?>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+   <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<?php // BOF: Mod - Wishlist
 	      //DISPLAY PRODUCT WAS ADDED TO WISHLIST IF WISHLIST REDIRECT IS ENABLED
       if(tep_session_is_registered('wishlist_id')) { ?>
@@ -66,7 +70,7 @@
 	?>
 	  <tr>
         <td class="productinfo_header" colspan="3">
-          <table width="100%" border="0" cellspacing="0" cellpadding="0" width="100%">
+          <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
               <td class="pageHeading" valign="top"><?php echo $product_info['products_name']; ?></td>
               <td class="pageHeading" align="right" valign="top"><?php echo $products_price; ?></td>  
@@ -192,7 +196,7 @@
 				
 			//++++ QT Pro: End Changed Code
 			?>
-            <!-- Conditional Atrributes Starts -->
+            <!-- Conditional Atrributes Ends -->
           </table>        
         <!-- Right Column Ends -->
         </td>
@@ -223,7 +227,7 @@
                           <td rowspan="2" align="center"><?php echo tep_draw_input_field('cart_quantity', $pf->adjustQty(1), 'size="2" id="product-quantity-{{product.id}}"'); ?></td>
                           <?php // START: PGM Edit to switch Add to Cart image if stock = 0
                             if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
-							  <td class="main align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_BUTTON_IN_CART); ?></td>
+							  <td class="main" align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_BUTTON_IN_CART); ?></td>
 						    <?php } else { ?>
 						      <td class="main" align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
                             <?php } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
@@ -281,9 +285,8 @@
         </td>
       </tr>
       <!-- Page Module Controller Ends -->
-      
-</table>     
-
+  </table>
+  
 <?php
   } // end if wrapping entire code
 ?>

@@ -8,9 +8,10 @@
 
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-                        <td class="pageHeading">
+        <td>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading">
 <?php
 /* bof catdesc for bts1a, replacing "echo HEADING_TITLE;" by "categories_heading_title" */
              if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_heading_title'])) ) {
@@ -19,7 +20,7 @@
                  echo HEADING_TITLE;
                }
 /* eof catdesc for bts1a */ ?>
-            </td>
+              </td>
 <?php
 // optional Product List Filter
 //    if (PRODUCT_LIST_FILTER > 0) {
@@ -74,18 +75,19 @@
     }
 ?>
    <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_heading_title'])) ) { ?>
-            <td align="right"><?php echo tep_image(DIR_WS_IMAGES . $image_folder . $image, $category['categories_heading_title'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
+              <td align="right"><?php echo tep_image(DIR_WS_IMAGES . $image_folder . $image, $category['categories_heading_title'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            </tr>
         <?php } else { ?>
-          <td align="right"><?php echo tep_image(DIR_WS_IMAGES . $image_folder . $image, HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
+              <td align="right"><?php echo tep_image(DIR_WS_IMAGES . $image_folder . $image, HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            </tr>
         <?php } ?>
 	  <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_description'])) ) { ?>
-	  <tr>
-            <td align="left" colspan="2" class="category_desc"><?php echo $category['categories_description']; ?></td>
-	  </tr>
+	        <tr>
+              <td align="left" colspan="2" class="category_desc"><?php echo $category['categories_description']; ?></td>
+	        </tr>
 	  <?php } ?>
-        </table></td>
+          </table>
+        </td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -106,4 +108,4 @@
         ?>
         </td>
       </tr>
-  </table>
+    </table>

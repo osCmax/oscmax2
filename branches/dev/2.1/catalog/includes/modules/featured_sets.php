@@ -12,7 +12,8 @@ Made for:
   
 */ 
 ?>
-<tr>
+<table cellpadding="0" cellspacing="0" border="0">
+  <tr>
 	<td>
 <?php
   $configuration_query = tep_db_query("SELECT configuration_key as cfgKey, configuration_value as cfgValue from " . TABLE_CONFIGURATION);
@@ -185,4 +186,5 @@ echo "\n".'<!-- Featured_Sets_eof -->'."\n";
 
 ?>
 	</td>
-</tr>
+  </tr>
+</table>

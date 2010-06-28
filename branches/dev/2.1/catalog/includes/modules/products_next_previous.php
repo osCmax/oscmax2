@@ -72,6 +72,7 @@
 	
 	if ($counter > 1) {
 ?>
+	  <!-- Next Previous Module Starts -->
 		<table border="0" cellspacing="0" cellpadding="3">
           <tr>
 <?php
@@ -105,6 +106,7 @@
             <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
     	  </tr>
 		</table>
+      <!-- Next Previous Module Ends -->
 <?php
     }
   }

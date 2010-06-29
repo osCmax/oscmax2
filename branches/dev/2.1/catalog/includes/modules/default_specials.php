@@ -18,6 +18,7 @@ $Id: default_specials.php 3 2006-05-27 04:59:07Z user $
 
        if (isset($default_specials['products_id'])) {
 ?>
+	     <table width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
             <td>
 
@@ -93,9 +94,13 @@ $pg_query = tep_db_query("select products_id, customers_group_price from " . TAB
 }
   new contentBox($info_box_contents);
 ?>
+          </td>
+        </tr>
+        <tr>
+          <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+        </tr>
+      </table>
 <?php
     } // Ends if at start of file to check for 0 specials
 ?>
-          </td>
-        </tr>
 <!-- default_specials_eof //-->

@@ -14,8 +14,7 @@ $Id: upcoming_products.php 3 2006-05-27 04:59:07Z user $
   if (tep_db_num_rows($expected_query) > 0) {
 ?>
 <!-- upcoming_products //-->
-          <tr>
-            <td><br><table border="0" width="100%" cellspacing="0" cellpadding="2">
+            <table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td class="tableHeading">&nbsp;<?php echo TABLE_HEADING_UPCOMING_PRODUCTS; ?>&nbsp;</td>
                 <td align="right" class="tableHeading">&nbsp;<?php echo TABLE_HEADING_DATE_EXPECTED; ?>&nbsp;</td>
@@ -42,8 +41,7 @@ $Id: upcoming_products.php 3 2006-05-27 04:59:07Z user $
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator(); ?></td>
               </tr>
-            </table></td>
-          </tr>
+            </table>
 <!-- upcoming_products_eof //-->
 <?php
   }

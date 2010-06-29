@@ -12,9 +12,6 @@ Made for:
   
 */ 
 ?>
-<table cellpadding="0" cellspacing="0" border="0">
-  <tr>
-	<td>
 <?php
   $configuration_query = tep_db_query("SELECT configuration_key as cfgKey, configuration_value as cfgValue from " . TABLE_CONFIGURATION);
   while ($configuration = tep_db_fetch_array($configuration_query)) {
@@ -144,7 +141,11 @@ if ( (OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') && !empty($current_category
     }
 
 
-echo '<!-- Featured_Sets_bof -->'."\n";
+echo '<!-- Featured_Sets_bof //-->'."\n";
+echo '<table cellpadding="0" cellspacing="0" border="0">' . "\n";
+echo '  <tr>' . "\n";
+echo '    <td>' . "\n";
+
 
 if((FEATURED_PRODUCTS_DISPLAY == 'true') && (FEATURED_PRODUCTS_POSITION == '1')) {
     include(DIR_WS_MODULES  . (FEATURED_PRODUCTS_GROUPING=='sbox'?FILENAME_FEATURED_SBOX_PRODUCTS:FILENAME_FEATURED_GBOX_PRODUCTS));
@@ -182,9 +183,8 @@ if((FEATURED_PRODUCTS_DISPLAY == 'true') && (FEATURED_PRODUCTS_POSITION == '4'))
   }else if ((FEATURED_CATEGORIES_DISPLAY == 'true') && (FEATURED_CATEGORIES_POSITION == '4')) {
     include(DIR_WS_MODULES  . (FEATURED_CATEGORIES_GROUPING=='sbox'?FILENAME_FEATURED_SBOX_CATEGORIES:FILENAME_FEATURED_GBOX_CATEGORIES));
   } 
-echo "\n".'<!-- Featured_Sets_eof -->'."\n";
-
 ?>
 	</td>
   </tr>
 </table>
+<!-- Featured_Sets_eof //-->

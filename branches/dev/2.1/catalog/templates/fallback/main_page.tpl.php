@@ -104,7 +104,8 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
   <tr>
 <?php // Show/Hide Left Column
 if (LEFT_COLUMN_SHOW != 'false') { ?>
-    <td width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
+    <td width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
 <?php
 // Hide Left Column if not to show
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
@@ -115,18 +116,22 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='f
 <?php
 }
 ?>
-    </table></td>
+      </table>
+    </td>
 <?php
 } // end Show/Hide Left Column
 ?>
 <!-- content //-->
-    <td width="100%" valign="top"><?php
-     require (bts_select ('content')); // BTSv1.5
-  ?></td>
+    <td width="100%" valign="top">
+	  <?php
+        require (bts_select ('content')); // BTSv1.5
+  	  ?>
+    </td>
 <!-- content_eof //-->
 <?php // Show/Hide Right Column
 if (RIGHT_COLUMN_SHOW != 'false') { ?>
-    <td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
+    <td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
 <?php
 // Hide column_left.php if not to show
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
@@ -137,7 +142,8 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='
 <?php
 }
 ?>  		 
-    </table></td>
+      </table>
+    </td>
 <?php
 } // end Show/Hide Right Column
 ?>
@@ -149,10 +155,13 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='
 // BOF Added: Down for Maintenance Hide footer.php if not to show
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false') {
 ?>
-
-<!-- Page Module Controller -->
-	<?php include (DIR_WS_MODULES . FILENAME_COMMON_PAGE_MODULES); ?>
-<!-- Page Module Controller -->
+  <tr>
+    <td colspan="3">
+      <!-- Page Module Controller -->
+        <?php include (DIR_WS_MODULES . FILENAME_COMMON_PAGE_MODULES); ?>
+      <!-- Page Module Controller -->
+    </td>
+  </tr>
 </table>
 
 <?php

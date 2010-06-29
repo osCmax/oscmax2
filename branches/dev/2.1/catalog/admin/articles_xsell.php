@@ -26,6 +26,15 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script type="text/javascript" src="includes/general.js"></script>
+<script type="text/javascript">
+function ToggleCheckBox($cb) {
+	if($('#cb'+$cb).is(':checked')) {
+      $('#cb'+$cb).attr('checked', false);
+	} else {
+	  $('#cb'+$cb).attr('checked', true);
+	}
+}
+</script>
 </head>
 <body>
 <!-- header //-->
@@ -255,7 +264,7 @@ $Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
             for ($i=0; $i < $num_of_products; ++$i)
             {
 			  ?>
-              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="javascript:ToggleCheckBox(<?php echo $i; ?>)">
                 <td class="dataTableContent" align="center"><?php echo $products_id[$i];?></td>
                 <td class="dataTableContent"><?php echo $products_model[$i];?></td>
 	  			<td class="dataTableContent" align="center"><?php echo tep_image('../' . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image[$i], '', SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?></td>

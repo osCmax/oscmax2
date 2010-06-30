@@ -1409,7 +1409,21 @@ CREATE TABLE IF NOT EXISTS pm_configuration (
   pm_sort_order int(11) NOT NULL,
   last_modified datetime NOT NULL,
   date_added datetime NOT NULL,
-  PRIMARY KEY (`pm_id`)
+  PRIMARY KEY (pm_id)
+);
+
+
+DROP TABLE IF EXISTS slideshow;
+CREATE TABLE IF NOT EXISTS slideshow (
+  slideshow_id int(11) NOT NULL AUTO_INCREMENT,
+  slideshow_title varchar(255) NOT NULL,
+  slideshow_link varchar(255) NOT NULL,
+  slideshow_target varchar(255) NOT NULL,
+  slideshow_sort_order int(11) NOT NULL,
+  date_added datetime NOT NULL,
+  last_modified datetime DEFAULT NULL,
+  slideshow_image varchar(255) NOT NULL,
+  PRIMARY KEY (slideshow_id)
 );
 
 
@@ -1571,7 +1585,7 @@ INSERT INTO admin_files VALUES (152,'discount_categories_groups_pp.php', 0, 3, '
 INSERT INTO admin_files VALUES (153,'premade_comments.php', 0, 7, '1');
 INSERT INTO admin_files VALUES (154,'page_modules_configuration.php', 0, 2, '1');
 INSERT INTO admin_files VALUES (155,'stats_wishlist.php', 0, 8, '1');
-
+INSERT INTO admin_files VALUES (156,'slideshow.php', 0, 2, '1');
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
 INSERT INTO admin_groups VALUES (2,'Customer Service');
@@ -1943,7 +1957,7 @@ INSERT INTO configuration VALUES (1509, 'Lowest Pending sales status', 'RCS_PEND
 INSERT INTO configuration VALUES (1510, 'Report Even Row Style', 'RCS_REPORT_EVEN_STYLE', 'dataTableRow', 'Style for even rows in results report. Typical options are <i>dataTableRow</i> and <i>attributes-even</i>.', 80, 90, NULL, '2009-03-07 22:31:53', '', '');
 INSERT INTO configuration VALUES (1511, 'Report Odd Row Style', 'RCS_REPORT_ODD_STYLE', '', 'Style for odd rows in results report. Typical options are NULL (ie, no entry) and <i>attributes-odd</i>.', 80, 92, NULL, '2009-03-07 22:31:53', '', '');
 
-INSERT INTO configuration VALUES (595, 'Product Image Width', 'PRODUCT_IMAGE_WIDTH', '120', 'The main product image \(thumbnail\) in product information pages.',4,20,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (595, 'Product Image Width', 'PRODUCT_IMAGE_WIDTH', '300', 'The main product image \(thumbnail\) in product information pages.',4,20,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (596, 'Product Image Height', 'PRODUCT_IMAGE_HEIGHT', '', 'The main product image \(thumbnail\) in product information pages. Do NOT specify both!',4,21,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (597, 'Product Popup Image Width', 'POPUP_IMAGE_WIDTH', '800', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,22,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (598, 'Product Popup Image Height', 'POPUP_IMAGE_HEIGHT', '600', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,23,NULL,now(),NULL,NULL);
@@ -1980,7 +1994,7 @@ INSERT INTO configuration VALUES (2522, 'Show the product model in the breadcrum
 INSERT INTO configuration VALUES (2523, 'Manufacturers Images Directory', 'MANUFACTURERS_IMAGES_DIR', 'manufacturers/', 'The directory inside catalog/images where your manufacturers images are stored.', 45, 0, NULL, now(), NULL, NULL);
 
 #New v2.1 Entries - Updated SEO 5 to 2601-2612 from 2505-2516 to avoid duplicates or conflicts
-INSERT INTO configuration VALUES (2601, 'Enable SEO URLs 5?', 'SEO_URLS_ENABLED', 'true', 'Turn Seo Urls 5 on', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (2601, 'Enable SEO URLs 5?', 'SEO_URLS_ENABLED', 'false', 'Turn Seo Urls 5 on', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
 INSERT INTO configuration VALUES (2602, 'Add cPath to product URLs?', 'SEO_URLS_ADD_CPATH_TO_PRODUCT_URLS', 'false', 'This setting will append the cPath to the end of product URLs (i.e. - some-product-p-1.html?cPath=xx).', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
 INSERT INTO configuration VALUES (2603, 'Add category parent to beginning of URLs?', 'SEO_URLS_ADD_CAT_PARENT', 'true', 'This setting will add the category parent name to the beginning of the category URLs (i.e. - parent-category-c-1.html).', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''true'', ''false''), ');
 INSERT INTO configuration VALUES (2604, 'Filter Short Words', 'SEO_URLS_FILTER_SHORT_WORDS', '1', '<b>This setting will filter words.</b><br>1 = Remove words of 1 letter<br>2 = Remove words of 2 letters or less<br>3 = Remove words of 3 letters or less<br>', 60, 902, '2010-03-17 08:14:36', '2010-03-17 08:14:36', '', 'tep_cfg_select_option(array(''1'', ''2'', ''3''), ');
@@ -1996,6 +2010,33 @@ INSERT INTO configuration VALUES (2613, 'Terms and Conditions on create account'
 INSERT INTO configuration VALUES (2614, 'Terms and Conditions on payment page', 'MATC', 'false', 'Force the customer to accept terms and conditions before being able to checkout?', 203, 1, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
 INSERT INTO configuration VALUES (2615, 'Check for Javscript enabled?', 'JAVASCRIPT_CHECK', 'false', 'Do you want to check if the customer has got javascript enabled and if they do not display a warning at the top of the store pages?', 203, 2, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
 INSERT INTO configuration VALUES (2616, 'Check for Internet Explorer 6?', 'IE6_CHECK', 'false', 'Do you want to check if the customer is using IE6 and ask them to upgrade their browser?', 203, 3, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
+
+#Slideshow Settings by PGM
+INSERT INTO configuration VALUES (2641, 'Enable Slideshow?', 'DISPLAY_SLIDESHOW', 'true', 'Do you want to enable the slideshow?', 204, 0, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2617, 'Set Slideshow width', 'SLIDESHOW_WIDTH', '650', 'What width do you want your slideshow? (default: 650)', 204, 1, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2618, 'Set Slideshow height', 'SLIDESHOW_HEIGHT', '250', 'What height do you want your slideshow? (default: 250)', 204, 2, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2619, 'How do you want the slide to transition?', 'SLIDESHOW_TRANSITION', 'fade', 'What method of transistion do you want to use?', 204, 3, now(), now(), NULL, 'tep_cfg_select_option(array(\'fade\',\'horizontal-slider\',\'vertical-slider\'),'); 
+INSERT INTO configuration VALUES (2620, 'Slide Transition Speed', 'SLIDESHOW_TRANSITION_SPEED', '500', 'How long do you want the slide transistion effect to take in milliseconds? (default: 500)', 204, 4, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2621, 'Slide Interval Speed', 'SLIDESHOW_INTERVAL', '4000', 'How long do you want between slides? (default: 4000)', 204, 5, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2622, 'Display titlebar?', 'SLIDESHOW_DISPLAY_TITLE', 'true', 'Do you want to display the title bar over your slides?', 204, 6, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2623, 'Titlebar position', 'SLIDESHOW_TITLE_POSITION', 'bottom', 'Where would you like to display the title bar?', 204, 7, now(), now(), NULL, 'tep_cfg_select_option(array(\'top\',\'bottom\'),');
+INSERT INTO configuration VALUES (2624, 'What colour would you like the title bar to be?', 'SLIDESHOW_TITLE_COLOR', '#000000', 'What color would you like to use for the title bar?', 204, 8, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2625, 'Title bar transparency?', 'SLIDESHOW_TITLE_OPACITY', '0.5', 'What opacity would you like on the title bar? (range: 0 - 1, default: 0.5)', 204, 9, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2626, 'Set height of title bar', 'SLIDESHOW_TITLE_HEIGHT', '25', 'What height do you want the title overlay in pixels? (default: 25)', 204, 10, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2627, 'Would you like to use a small version of the main image for the thumbnails?', 'SLIDESHOW_MINATURE', 'false', 'If you want to use a minature of the slideshow image you may need to adjust the thumbnail size to suit.', 204, 11, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2628, 'Autohide thumbnails?', 'SLIDESHOW_THUMB_AUTOHIDE', 'false', 'Do you want to hide the thumbnails when the pointer is not over the slideshow?', 204, 12, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2629, 'Set thumbnail width for slideshow', 'SLIDESHOW_THUMB_WIDTH', '20', 'What width would you like the slideshow thumbnails to be in pixels?', 204, 13, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2630, 'Set thumbnail height for slideshow', 'SLIDESHOW_THUMB_HEIGHT', '20', 'What height would you like the slideshow thumbnails to be in pixels?', 204, 14, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2631, 'Where would you like to display the thumbnails?', 'SLIDESHOW_THUMB_POS', 'top-right', 'Where in the slideshow would you like to position the thumbnails?', 204, 15, now(), now(), NULL, 'tep_cfg_select_option(array(\'top-left\',\'top-right\',\'bottom-left\',\'bottom-right\'),');
+INSERT INTO configuration VALUES (2632, 'Which direction would you like to list the thumbnails?', 'SLIDESHOW_THUMB_ORIENTATION', 'horizontal', 'What direction would like to list your thumbnails?', 204, 16, now(), now(), NULL, 'tep_cfg_select_option(array(\'horizontal\',\'vertical\'),');
+INSERT INTO configuration VALUES (2633, 'Thumbnail border color', 'SLIDESHOW_THUMB_BORDER_COLOR', '#dddddd', 'What color would you like the border of the thumbnails to be?', 204, 17, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2634, 'Thumbnail background color', 'SLIDESHOW_THUMB_BACKGROUND_COLOR', '#333333', 'What color would you like the background of the thumbnails to be?', 204, 18, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2635, 'Thumbnail text font color', 'SLIDESHOW_THUMB_FONT_COLOR', '#ffffff', 'What color would you like the font of the thumbnails to be?', 204, 19, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2636, 'Display slide numbers in thumbnail?', 'SLIDESHOW_NUMBER', 'true', 'Do you want to display the slide number in the thumbnail?', 204, 20, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2637, 'Thumbnail text font size', 'SLIDESHOW_THUMB_FONT_SIZE', '10', 'What size font do you want to use in the thumbnails?', 204, 21, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2638, 'Active Thumbnail border color', 'SLIDESHOW_THUMB_ACTIVE_BORDER_COLOR', '#333333', 'What color would you like the border of the active thumbnail to be?', 204, 22, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2639, 'Active Thumbnail background color', 'SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', '#dddddd', 'What color would you like the background of the active thumbnail to be?', 204, 23, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2640, 'Active Thumbnail font color', 'SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', '#000000', 'What color would you like the font of the active thumbnail to be?', 204, 24, now(), now(), NULL, NULL);
 
 
 #Open Feature Sets Start
@@ -2658,20 +2699,26 @@ INSERT INTO orders_premade_comments VALUES (1, 'Thank you for your custom', 'Tha
 INSERT INTO orders_premade_comments VALUES (2, 'Out of stock when ordered', 'Unfortunately, your item was out of stock when the order was placed. It will despatch as soon as we receive it.');
 
 #Page Module Controller
-INSERT INTO pm_configuration VALUES (1, 'Specials', 'Special Products Module', 'default_specials.php', 'yes', 'index', 3, now(), now());
-INSERT INTO pm_configuration VALUES (2, 'New Products', 'New Products Module', 'new_products.php', 'yes', 'index', 4, now(), now());
+INSERT INTO pm_configuration VALUES (1, 'Specials', 'Special Products Module', 'default_specials.php', 'yes', 'index', 4, now(), now());
+INSERT INTO pm_configuration VALUES (2, 'New Products', 'New Products Module', 'new_products.php', 'yes', 'index', 5, now(), now());
 INSERT INTO pm_configuration VALUES (3, 'Upcoming Products', 'Upcoming products module', 'upcoming_products.php', 'yes', 'index', 7, now(), now());
 INSERT INTO pm_configuration VALUES (4, 'Cross Sell Module', 'Cross Sell Module', 'xsell_products.php', 'yes', 'product_info', 1, now(), now());
 INSERT INTO pm_configuration VALUES (5, 'Also Purchased Module', 'Also Purchased Module', 'also_purchased_products.php', 'yes', 'product_info', 2, now(), now());
 INSERT INTO pm_configuration VALUES (6, 'Previous Next Module', 'Previous Next Module', 'products_next_previous.php', 'yes', 'product_info', 4, now(), now());
 INSERT INTO pm_configuration VALUES (7, 'Counter', '', 'counter.php', 'yes', 'all', 2, now(), now());
 INSERT INTO pm_configuration VALUES (8, 'Copyright', '', 'copyright.php', 'yes', 'all', 3, now(), now());
-INSERT INTO pm_configuration VALUES (9, 'Articles', '', 'index_articles.php', 'yes', 'index', 6, now(), now());
-INSERT INTO pm_configuration VALUES (10, 'Greeting', '', 'index_greeting.php', 'yes', 'index', 1, now(), now());
-INSERT INTO pm_configuration VALUES (11, 'Define Mainpage', '', 'index_define_mainpage.php', 'yes', 'index', 2, now(), now());
-INSERT INTO pm_configuration VALUES (12, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'index', 5, now(), now());
+INSERT INTO pm_configuration VALUES (9, 'Articles', '', 'index_articles.php', 'yes', 'index', 7, now(), now());
+INSERT INTO pm_configuration VALUES (10, 'Greeting', '', 'index_greeting.php', 'yes', 'index', 2, now(), now());
+INSERT INTO pm_configuration VALUES (11, 'Define Mainpage', '', 'index_define_mainpage.php', 'yes', 'index', 3, now(), now());
+INSERT INTO pm_configuration VALUES (12, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'index', 6, now(), now());
 INSERT INTO pm_configuration VALUES (13, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'product_info', 3, now(), now());
+INSERT INTO pm_configuration VALUES (14, 'Slideshow', '', 'slideshow.php', 'yes', 'index', 1, now(), now());
 
 #Fix for Articles to display if they are not in a topic
 INSERT INTO topics VALUES (0, NULL, 0, 0, now(), NULL);
 INSERT INTO topics_description VALUES (0, 1, 'Miscellaneous Articles', 'Miscellaneous', 'Articles that do not fall into a specific category.');
+
+#Example Slideshow Slides
+INSERT INTO slideshow VALUES (1, 'osCmax - eCommerce to the max', 'http://www.oscmax.com/', 'top', 1, now(), now(), 'example_oscmax1.jpg');
+INSERT INTO slideshow VALUES (2, 'AABox - Pro web hosting', 'http://www.aabox.com/', 'top', 2, now(), now(), 'example_oscmax2.jpg');
+INSERT INTO slideshow VALUES (3, 'eJ Solutions', 'http://www.ejsolutions.co.uk/', 'top', 3, now(), now(), 'example_oscmax3.jpg');

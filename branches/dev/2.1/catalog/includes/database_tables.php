@@ -113,4 +113,6 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
 // BOF: Page Module Controller
   define('TABLE_PM_CONFIGURATION', 'pm_configuration');
 // EOF: Page Module Controller 
+
+define('TABLE_SLIDESHOW', 'slideshow');
 ?>

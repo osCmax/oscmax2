@@ -57,13 +57,17 @@ $contents = ('<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=1', 'N
               '<li><a href="' . tep_href_link('infobox_configuration.php?gID=1', 'NONSSL') . '">Infoboxes</a></li>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=99', 'NONSSL') . '">Open Featured Sets</a></li>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=203', 'NONSSL') . '">Notifications</a></li>' .
+			  '<li><a href="' . tep_href_link('#', 'NONSSL') . '">Slideshow</a><ul>' .
+			     '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=204', 'NONSSL') . '">Slideshow Settings</a></li>' .
+				 tep_admin_jqmenu(FILENAME_SLIDESHOW, BOX_TOOLS_SLIDESHOW, 'top') .
+			  '</ul></li>' .	 
               '<li><a href="' . tep_href_link('#', 'NONSSL') . '">Define Pages</a><ul>' .
-                 tep_admin_jqmenu(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, 'TOP') .
-                 tep_admin_jqmenu(FILENAME_DEFINE_PRIVACY, BOX_CATALOG_DEFINE_PRIVACY, 'TOP') .
-                 tep_admin_jqmenu(FILENAME_DEFINE_CONDITIONS, BOX_CATALOG_DEFINE_CONDITIONS, 'TOP') .
-                 tep_admin_jqmenu(FILENAME_DEFINE_SHIPPING, BOX_CATALOG_DEFINE_SHIPPING, 'TOP') .
+                 tep_admin_jqmenu(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, 'top') .
+                 tep_admin_jqmenu(FILENAME_DEFINE_PRIVACY, BOX_CATALOG_DEFINE_PRIVACY, 'top') .
+                 tep_admin_jqmenu(FILENAME_DEFINE_CONDITIONS, BOX_CATALOG_DEFINE_CONDITIONS, 'top') .
+                 tep_admin_jqmenu(FILENAME_DEFINE_SHIPPING, BOX_CATALOG_DEFINE_SHIPPING, 'top') .
               '</ul></li>' .
-                 tep_admin_jqmenu(FILENAME_QUICK_LINKS, BOX_TOOLS_QUICK_LINKS, 'TOP') .
+                 tep_admin_jqmenu(FILENAME_QUICK_LINKS, BOX_TOOLS_QUICK_LINKS, 'top') .
               '</ul>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=15', 'NONSSL') . '">Sessions</a></li>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=65', 'NONSSL') . '">Wish List Settings</a></li>' .
@@ -75,7 +79,7 @@ $contents = ('<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=1', 'N
               '</ul>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=70', 'NONSSL') . '">Order Editor</a></li>' .
               '<li><a href="' . tep_href_link('#', 'NONSSL') . '">Google</a><ul>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=85', 'NONSSL') . '">Google Analytics</a></li>' . tep_admin_jqmenu(FILENAME_GOOGLE_SITEMAP, BOX_GOOGLE_SITEMAP, 'TOP') .
+              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=85', 'NONSSL') . '">Google Analytics</a></li>' . tep_admin_jqmenu(FILENAME_GOOGLE_SITEMAP, BOX_GOOGLE_SITEMAP, 'top') .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=89', 'NONSSL') . '">Google Maps</a></li>' .
             '</ul>');
 

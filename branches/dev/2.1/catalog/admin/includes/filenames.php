@@ -180,4 +180,8 @@ define('FILENAME_PM_CONFIGURATION', 'page_modules_configuration.php');
 //BOF: Wishlist Report
 define('FILENAME_STATS_WISHLIST', 'stats_wishlist.php');
 //EOF: Wishlist Report
+
+//BOF: Slideshow
+define('FILENAME_SLIDESHOW', 'slideshow.php');
+//EOF: Slideshow
 ?>

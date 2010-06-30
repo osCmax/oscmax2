@@ -32,7 +32,18 @@
 } else {
   if (isset($javascript) && file_exists(DIR_WS_JAVASCRIPT . basename($javascript))) { require(DIR_WS_JAVASCRIPT . basename($javascript)); }
 
-  } 
+  }
+  
+  if (DISPLAY_SLIDESHOW == true) {
+	echo '<script src="http://www.google.com/jsapi"></script>';
+    echo '<script>' . "\n";
+	echo '// Load jQuery' . "\n";
+    echo 'google.load("jquery", "1.4.0");' . "\n";
+    echo '</script>' . "\n"; 
+ 	echo '<script type="text/javascript" src="' . DIR_WS_JAVASCRIPT . 'showcase.2.0.js"></script>';
+	require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
+  }
+  
   if (DISPLAY_DHTML_MENU == 'CoolMenu') {
     echo '<!-- coolMenu //-->';
  	echo '<SCRIPT LANGUAGE="JavaScript1.2" SRC="includes/coolMenu.js"></SCRIPT>';

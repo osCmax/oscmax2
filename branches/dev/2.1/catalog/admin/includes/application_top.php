@@ -17,7 +17,7 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
 // Set the level of error reporting
 //  error_reporting(E_ALL);
   error_reporting(E_ALL & ~E_NOTICE & ~'E_DEPRECATED');
-  
+
 // check support for register_globals
   if (function_exists('ini_get') && (ini_get('register_globals') == false) && (PHP_VERSION < 4.3) ) {
     exit('Server Requirement Error: register_globals is disabled in your PHP configuration. This can be enabled in your php.ini configuration file or in the .htaccess file in your catalog directory. Please use PHP 4.3+ if register_globals cannot be enabled on the server.');
@@ -37,7 +37,7 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
 
 // set php_self in the local scope
   $PHP_SELF = $_SERVER['PHP_SELF'];
-  
+
 // Used in the "Backup Manager" to compress backups
   define('LOCAL_EXE_GZIP', '/usr/bin/gzip');
   define('LOCAL_EXE_GUNZIP', '/usr/bin/gunzip');
@@ -65,7 +65,7 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
   tep_db_connect() or die('Unable to connect to database server!');
 
 // set application wide parameters
-  $configuration_query = tep_db_query('select configuration_key as cfgKey, configuration_value as cfgValue from ' . TABLE_CONFIGURATION);
+  $configuration_query = tep_db_query('select distinct configuration_key as cfgKey, configuration_value as cfgValue from ' . TABLE_CONFIGURATION);
   while ($configuration = tep_db_fetch_array($configuration_query)) {
     define($configuration['cfgKey'], $configuration['cfgValue']);
   }
@@ -154,7 +154,7 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
 
 // file uploading class
   require(DIR_WS_CLASSES . 'upload.php');
-  
+
 // include the language translations
 // BOF: [TiM's osC Solutions] Display english for missing language files
   if (file_exists(DIR_WS_LANGUAGES . $language . '.php')) {
@@ -175,7 +175,7 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
       include_once(DIR_WS_LANGUAGES . 'english/' . $current_page);
     }
   }
-// EOF: [TiM's osC Solutions] Display english for missing language files  
+// EOF: [TiM's osC Solutions] Display english for missing language files
 
 // calculate category path
   if (isset($_GET['cPath'])) {
@@ -239,7 +239,7 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
 
 // LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
   require(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
-  
+
 // LINE ADDED: MOD - articles functions
   require(DIR_WS_FUNCTIONS . 'articles.php');
 

@@ -14,8 +14,7 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
 
   $current_boxes = DIR_FS_ADMIN . DIR_WS_BOXES;
   $current_files = DIR_FS_ADMIN;
-
-  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
+  
     switch ($_GET['action']) {
       case 'box_store':
         $sql_data_array = array('admin_files_name' => tep_db_prepare_input($_GET['box']),
@@ -47,7 +46,7 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
         tep_redirect(tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath']));
         break;
     }
-  }
+  
 
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -86,7 +85,7 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
           <tr>
             <td valign="top">
 <?php
- if (isset($_GET['fID']) || (isset($_GET['cPath']))) {
+ if ($_GET['fID'] || $_GET['cPath']) {
   //$current_box_query_raw = "select admin_files_name as admin_box_name from " . TABLE_ADMIN_FILES . " where admin_files_id = " . $_GET['cPath'] . " ";
   $current_box_query = tep_db_query("select admin_files_name as admin_box_name from " . TABLE_ADMIN_FILES . " where admin_files_id = " . $_GET['cPath']);
   $current_box = tep_db_fetch_array($current_box_query);
@@ -170,7 +169,7 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
   $boxnum = sizeof($boxes);
   $i = 0;
   while ($i < $boxnum) {
-    if (((!isset($_GET['cID']) || ($_GET['none'] == $boxes[$i]['admin_boxes_id'])) || ((isset($_GET['cID']) == $boxes[$i]['admin_boxes_id'])) && (!$cInfo))) {
+    if (((!$_GET['cID']) || ($_GET['none'] == $boxes[$i]['admin_boxes_id']) || ($_GET['cID'] == $boxes[$i]['admin_boxes_id'])) && (!$cInfo) ) {
       $cInfo = new objectInfo($boxes[$i]);
     }
     if ( (is_object($cInfo)) && ($boxes[$i]['admin_boxes_id'] == $cInfo->admin_boxes_id) ) {
@@ -185,7 +184,7 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
 ?>
                 <td class="dataTableContent"><?php echo tep_image(DIR_WS_ICONS . 'folder.gif', ICON_FOLDER) . ' <b>' . ucfirst (substr_replace ($boxes[$i]['admin_boxes_name'], '' , -4)) . '</b>'; ?></td>
                 <td class="dataTableContent" align="center"><?php
-                                               if ( (is_object($cInfo)) && (isset($_GET['cID']) == $boxes[$i]['admin_boxes_id'])) {
+                                               if ( (is_object($cInfo)) && ($_GET['cID'] == $boxes[$i]['admin_boxes_id'])) {
                                                  if (substr($boxes[$i]['admin_boxes_id'], 0,1) == 'b') {
                                                    echo tep_image(DIR_WS_ICONS . 'icon_status_red.gif', STATUS_BOX_NOT_INSTALLED, 10, 10) . '&nbsp;<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cID=' . $boxes[$i]['admin_boxes_id'] . '&box=' . $boxes[$i]['admin_boxes_name'] . '&action=box_store') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', STATUS_BOX_INSTALL, 10, 10) . '</a>';
                                                  } else {
@@ -222,7 +221,6 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
 <?php
   $heading = array();
   $contents = array();
-  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
     switch ($_GET['action']) {
       case 'store_file':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_FILE . '</b>');
@@ -289,8 +287,8 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
           $contents[] = array('text' => '<br>' . TEXT_INFO_DEFAULT_FILE_INTRO . ucfirst(substr_replace ($current_box['admin_box_name'], '', -4)));
         }
     }
-  }
-    if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+
+  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
       echo '            <td width="25%" valign="top">' . "\n";
 
       $box = new box;

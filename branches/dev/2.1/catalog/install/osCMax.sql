@@ -1875,7 +1875,7 @@ INSERT INTO configuration VALUES (634,'Include Tax','MODULE_LOYALTY_DISCOUNT_INC
 INSERT INTO configuration VALUES (633,'Include Shipping','MODULE_LOYALTY_DISCOUNT_INC_SHIPPING','true','Include Shipping in calculation',6,3,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (632,'Sort Order','MODULE_LOYALTY_DISCOUNT_SORT_ORDER','4','Sort order of display.',6,2,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (631,'Display Total','MODULE_LOYALTY_DISCOUNT_STATUS','true','Do you want to enable the Order Discount?',6,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (60, 'Seo Urls 5', 'Options for ULTIMATE Seo Urls 5 by FWR Media', 902, 1);
+
 
 INSERT INTO configuration VALUES (747,'Printable Catalog-Show the Date?','PRODUCT_LIST_CATALOG_DATE_SHOW','hide','Do you want to display the Product Date Added (only valid if Display Printable Catalog Date column is set to -show-)',30,'18',NULL,now(),NULL,'tep_cfg_select_option(array(\'show\',\'hide\'),');
 INSERT INTO configuration VALUES (748,'Printable Catalog-Show Currency?','PRODUCT_LIST_CATALOG_CURRENCY','hide','Do you want to display the Currency Pull Down',30,19,NULL,now(),NULL,'tep_cfg_select_option(array(\'show\',\'hide\'),');
@@ -2144,7 +2144,7 @@ INSERT INTO configuration_group VALUES (40,'Accounts','Configuration of Account 
 INSERT INTO configuration_group VALUES (45,'Dynamic MoPics','The options which configure Dynamic MoPics.',45,1);
 INSERT INTO configuration_group VALUES (50,'Product Information','Product Information page configuration options',8,1);
 INSERT INTO configuration_group VALUES (55,'Page Cache Settings','Settings for the page cache contribution', 20,1);
-INSERT INTO configuration_group VALUES (60,'SEO URLs','Options for Ultimate SEO URLs by Chemo', 902,1);
+INSERT INTO configuration_group VALUES (60, 'Seo Urls 5','Options for ULTIMATE Seo Urls 5 by FWR Media', 902, 1);
 INSERT INTO configuration_group VALUES (65,'Wish List Settings','Settings for your Wish List', 25,1);
 INSERT INTO configuration_group VALUES (70,'Order Editor','Configuration options for Order Editor', 903,1);
 INSERT INTO configuration_group VALUES (80,'Recover Cart Sales', 'Recover Cart Sales (RCS) Configuration Values', 55, 1);

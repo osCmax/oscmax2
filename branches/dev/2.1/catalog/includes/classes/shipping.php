@@ -18,20 +18,20 @@ $Id: shipping.php 3 2006-05-27 04:59:07Z user $
 // LINE CHANGED: MOD - Downloads Controller - Added $cart
       global $language, $PHP_SELF, $cart;
 
-// LINE ADDED: MOD - Individual Shipping Prices      
+// LINE ADDED: MOD - Individual Shipping Prices
       $shiptotal = $cart->get_shiptotal();
 
       if (defined('MODULE_SHIPPING_INSTALLED') && tep_not_null(MODULE_SHIPPING_INSTALLED)) {
 // BOF: MOD - Separate Pricing Per Customer, next line original code
 //      $this->modules = explode(';', MODULE_SHIPPING_INSTALLED);
         global $sppc_customer_group_id, $customer_id;
-        if(!tep_session_is_registered('sppc_customer_group_id')) { 
-          $customer_group_id = '0';
+        if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+          $customer_group_id = $_SESSION['sppc_customer_group_id'];
         } else {
-          $customer_group_id = $sppc_customer_group_id;
+          $customer_group_id = '0';
         }
         $customer_shipment_query = tep_db_query("select IF(c.customers_shipment_allowed <> '', c.customers_shipment_allowed, cg.group_shipment_allowed) as shipment_allowed from " . TABLE_CUSTOMERS . " c, " . TABLE_CUSTOMERS_GROUPS . " cg where c.customers_id = '" . $customer_id . "' and cg.customers_group_id =  '" . $customer_group_id . "'");
-        if ($customer_shipment = tep_db_fetch_array($customer_shipment_query)  ) { 
+        if ($customer_shipment = tep_db_fetch_array($customer_shipment_query)  ) {
           if (tep_not_null($customer_shipment['shipment_allowed']) ) {
             $temp_shipment_array = explode(';', $customer_shipment['shipment_allowed']);
             $installed_modules = explode(';', MODULE_SHIPPING_INSTALLED);
@@ -42,7 +42,7 @@ $Id: shipping.php 3 2006-05-27 04:59:07Z user $
               }
             } // end for loop
             $this->modules = $shipment_array;
-          } else {  
+          } else {
             $this->modules = explode(';', MODULE_SHIPPING_INSTALLED);
           }
         } else { // default

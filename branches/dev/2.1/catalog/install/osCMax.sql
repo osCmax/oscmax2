@@ -2038,6 +2038,9 @@ INSERT INTO configuration VALUES (2638, 'Active Thumbnail border color', 'SLIDES
 INSERT INTO configuration VALUES (2639, 'Active Thumbnail background color', 'SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', '#dddddd', 'What color would you like the background of the active thumbnail to be?', 204, 23, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2640, 'Active Thumbnail font color', 'SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', '#000000', 'What color would you like the font of the active thumbnail to be?', 204, 24, now(), now(), NULL, NULL);
 
+INSERT INTO configuration VALUES (2642, 'Do you want to use an AJAX search suggest on the Search Infobox?', 'AJAX_SEARCH_SUGGEST', 'false', 'Would you like to use an AJAX Search Suggest?', 201, 25, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+
+
 
 #Open Feature Sets Start
 INSERT INTO configuration VALUES (3000, '<font color=blue>Show Featured Sets on Store Front</font>', 'SHOW_FEATURED_SETS_ON_STORE_FRONT', 'true', 'Would you like to see the Featured Sets displayed on the store front page?', 99, 1, '2005-10-19 02:56:40', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');

@@ -11,8 +11,8 @@
 */
 
   if (PHP_VERSION >= 4.1) {
-    $_GET =& $_GET;
-    $_POST =& $_POST;
+    $HTTP_GET_VARS =& $_GET;
+    $HTTP_POST_VARS =& $_POST;
     $HTTP_COOKIE_VARS =& $_COOKIE;
     $HTTP_SESSION_VARS =& $_SESSION;
     $HTTP_SERVER_VARS =& $_SERVER;

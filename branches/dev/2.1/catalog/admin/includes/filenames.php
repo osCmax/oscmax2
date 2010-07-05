@@ -184,4 +184,9 @@ define('FILENAME_STATS_WISHLIST', 'stats_wishlist.php');
 //BOF: Slideshow
 define('FILENAME_SLIDESHOW', 'slideshow.php');
 //EOF: Slideshow
+
+//BOF: Extra Product Fields
+define('FILENAME_EXTRA_FIELDS', 'extra_fields.php');
+define('FILENAME_EXTRA_VALUES', 'extra_values.php');
+//EOF: Extra Product Fields
 ?>

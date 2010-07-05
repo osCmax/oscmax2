@@ -59,8 +59,37 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 
 ?>
 <!-- PGM SORT ORDER, NUMBER DISPLAY, GRID SWITCH -->
-
+<!-- begin extra product fields -->
+		<table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox">
+          <tr>
+            <td class="main" align="right" colspan="2">
+            <?php
+              $epf_list = array();
+              foreach ($epf as $e) {
+                if ($e['restrict']) $epf_list[] = $e['field'];
+              }
+              echo tep_draw_form('epf_restrict', FILENAME_DEFAULT, 'get');
+              if (is_array($_GET) && (sizeof($_GET) > 0)) {
+                reset($_GET);
+                while (list($key, $value) = each($_GET)) {
+                  if ( (strlen($value) > 0) && ($key != tep_session_name()) && (!in_array($key, $epf_list)) ) {
+                    echo tep_draw_hidden_field($key, $value);
+                  }
+                }
+              }
+              foreach ($epf as $e) {
+                if ($e['restrict']) {
+                  echo sprintf(TEXT_RESTRICT_TO, $e['label'], tep_draw_pull_down_menu($e['field'], tep_build_epf_pulldown($e['id'], $languages_id, array(array('id' => '', 'text' => TEXT_ANY_VALUE))),'', 'onchange="this.form.submit()"')) . '<br>';
+                }
+              }
+             ?>
+             </form>
+            </td>
+          </tr>
+        </table>
+<!-- end extra product fields -->
 <?php
+echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   }
 
   $list_box_contents = array();
@@ -172,13 +201,39 @@ for ($x = 0; $x < $no_of_listings; $x++) {
            $lc_text = '&nbsp;' . $listing[$x]['products_model'] . '&nbsp;';
             break;
           case 'PRODUCT_LIST_NAME':
+            // begin extra product fields
+            $extra = '';
+            foreach ($epf as $e) {
+              if ($e['listing']) {
+                $mt = ($e['uses_list'] && !$e['multi_select'] ? ($listing[$e['field']] == 0) : !tep_not_null($listing[$e['field']]));
+                if (!$mt) { // only list fields that aren't empty
+                  $extra .= '<br><b>' . $e['label'] . ': </b>';
+                  if ($e['uses_list']) {
+                    if ($e['multi_select']) {
+                      $epf_values = explode('|', trim($listing[$e['field']], '|'));
+                      $epf_string = '';
+                      foreach ($epf_values as $v) {
+                        $epf_string .= tep_get_extra_field_list_value($v) . ', ';
+                      }
+                      $extra .= trim($epf_string, ', ');
+                    } else {
+                      $extra .= tep_get_extra_field_list_value($listing[$e['field']],$e['show_chain'] == 1);
+                    }
+                  } else {
+                    $extra .= $listing[$e['field']];
+                  }
+                }
+              }
+            }
+            // end extra product fields
             $lc_align = '';
             if (isset($_GET['manufacturers_id'])) {
-             $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $_GET['manufacturers_id'] . '&products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] . '</a>';
+              $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $_GET['manufacturers_id'] . '&products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] /*begin epf*/ . $extra /*end epf*/ . '</a>';
             } else {
-             $lc_text = '&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] . '</a>&nbsp;';
+              $lc_text = '&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] /*begin epf*/ . $extra /*end epf*/ . '</a>&nbsp;';
             }
             break;
+
           case 'PRODUCT_LIST_MANUFACTURER':
             $lc_align = '';
            $lc_text = '&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $listing[$x]['manufacturers_id']) . '">' . $listing[$x]['manufacturers_name'] . '</a>&nbsp;';

@@ -58,13 +58,13 @@
                 <td class="dataTableHeadingContent" align="right"><?php  if (!isset($orderby) or ($orderby == "value" and $sorted == "ASC"))  $to_sort = "DESC"; else $to_sort = "ASC"; echo '<a href="' . tep_href_link('stats_customers.php', 'orderby=value&sorted='. $to_sort) . '" class="main"><b>' . TABLE_HEADING_TOTAL_PURCHASED . '</b></a>';  ?></td>
               </tr>
 <?php
-  if (isset($HTTP_GET_VARS['page']) && ($HTTP_GET_VARS['page'] > 1)) $rows = $HTTP_GET_VARS['page'] * 50 - 50;
+  if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * 50 - 50;
     if ($orderby == "value") {$db_orderby = "ordersum";}
     elseif ($orderby == "sold") {$db_orderby = "ordertotal";}
     else {$db_orderby = "ordersum DESC";}
 
   $customers_query_raw = "select c.customers_firstname, c.customers_lastname, c.customers_id, count(DISTINCT o.orders_id) as ordertotal, sum(op.products_quantity * op.final_price) as ordersum from " . TABLE_CUSTOMERS . " c, " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where c.customers_id = o.customers_id and o.orders_id = op.orders_id group by c.customers_firstname, c.customers_lastname order by $db_orderby $sorted";
-  $customers_split = new splitPageResults($HTTP_GET_VARS['page'], '50', $customers_query_raw, $customers_query_numrows);
+  $customers_split = new splitPageResults($_GET['page'], '50', $customers_query_raw, $customers_query_numrows);
 // fix counted customers
   $customers_query_numrows = tep_db_query("select customers_id from " . TABLE_ORDERS . " group by customers_id");
   $customers_query_numrows = tep_db_num_rows($customers_query_numrows);
@@ -92,8 +92,8 @@
           <tr>
             <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, '50', $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
-                <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, '50', MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page'], "orderby=" . $orderby . "&sorted=" . $sorted); ?>&nbsp;</td>
+                <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, '50', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
+                <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, '50', MAX_DISPLAY_PAGE_LINKS, $_GET['page'], "orderby=" . $orderby . "&sorted=" . $sorted); ?>&nbsp;</td>
               </tr>
             </table></td>
           </tr>

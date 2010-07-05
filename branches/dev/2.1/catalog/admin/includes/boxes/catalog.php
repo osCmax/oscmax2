@@ -23,7 +23,9 @@ $Id: catalog.php 2009-11-14 19:38:07Z user $
                                    tep_admin_jqmenu(FILENAME_EASYPOPULATE, BOX_CATALOG_EASYPOPULATE, 'TOP') .
 								   tep_admin_jqmenu(FILENAME_FEEDMACHINE, BOX_CATALOG_FEEDMACHINE, 'TOP') .
                                    tep_admin_jqmenu(FILENAME_NEW_ATTRIBUTES, BOX_CATALOG_ATTRIBUTE_MANAGER, 'TOP') .
-                                   tep_admin_jqmenu(FILENAME_PRODUCTS_EXPECTED, BOX_CATALOG_PRODUCTS_EXPECTED, 'TOP'));
+                                   tep_admin_jqmenu(FILENAME_PRODUCTS_EXPECTED, BOX_CATALOG_PRODUCTS_EXPECTED, 'TOP') . 
+								   tep_admin_jqmenu(FILENAME_EXTRA_FIELDS, BOX_CATALOG_PRODUCTS_EXTRA_FIELDS, 'TOP') . 
+								   tep_admin_jqmenu(FILENAME_EXTRA_VALUES, BOX_CATALOG_PRODUCTS_EXTRA_VALUES, 'TOP'));
 // EOF: MOD - Admin w/access levels
 
   print_r($contents);

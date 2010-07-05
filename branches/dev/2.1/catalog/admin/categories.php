@@ -25,6 +25,79 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 // EOF QPBPP for SPPC
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
+// BOF: Extra Product Fields
+  function get_exclude_list($value_id) {
+    $exclude_list = array();
+    $query = tep_db_query('select value_id1 from ' . TABLE_EPF_EXCLUDE . ' where value_id2 = ' . (int)$value_id);
+    while ($check = tep_db_fetch_array($query)) {
+      $exclude_list[] = $check['value_id1'];
+    }
+    $query = tep_db_query('select value_id2 from ' . TABLE_EPF_EXCLUDE . ' where value_id1 = ' . (int)$value_id);
+    while ($check = tep_db_fetch_array($query)) {
+      $exclude_list[] = $check['value_id2'];
+    }
+    return $exclude_list;
+  }
+  function get_children($value_id) {
+    return explode(',', $value_id . tep_list_epf_children($value_id));
+  }
+  function get_parent_list($value_id) {
+    $sql = tep_db_query("select parent_id from " . TABLE_EPF_VALUES . " where value_id = " . (int)$value_id);
+    $value = tep_db_fetch_array($sql);
+    if ($value['parent_id'] > 0) {
+      return get_parent_list($value['parent_id']) . ',' . $value_id;
+    } else {
+      return $value_id;
+    }
+  }
+  $epf_query = tep_db_query("select * from " . TABLE_EPF . " e join " . TABLE_EPF_LABELS . " l where (e.epf_status or e.epf_show_in_admin) and (e.epf_id = l.epf_id) order by e.epf_order");
+  $epf = array();
+  $xfields = array();
+  $link_groups = array();
+  $linked_fields = array();
+  while ($e = tep_db_fetch_array($epf_query)) {  // retrieve all active extra fields for all languages
+    $field = 'extra_value';
+    if ($e['epf_uses_value_list']) {
+      if ($e['epf_multi_select']) {
+        $field .= '_ms';
+      } else {
+        $field .= '_id';
+      }
+    }
+    $field .= $e['epf_id'];
+    $values = '';
+    if ($e['epf_uses_value_list'] && $e['epf_active_for_language'] && ($e['epf_has_linked_field'] || $e['epf_multi_select'])) { // if field requires javascript during entry
+      $values = array();
+      $value_query = tep_db_query('select value_id, value_depends_on from ' . TABLE_EPF_VALUES . ' where epf_id = ' . (int)$e['epf_id'] . ' and languages_id = ' . (int)$e['languages_id']);
+      while ($v = tep_db_fetch_array($value_query)) {
+        $values[] = $v['value_id'];
+        if ($e['epf_has_linked_field'] && $e['epf_multi_select'] && ($v['value_depends_on'] != 0)) {
+          $linked_fields[$e['epf_links_to']][$e['languages_id']][$v['value_depends_on']][] = $v['value_id'];
+          if (!in_array($v['value_depends_on'], $link_groups[$e['epf_links_to']][$e['languages_id']])) $link_groups[$e['epf_links_to']][$e['languages_id']][] = $v['value_depends_on'];
+        }
+      }
+    }
+    $epf[] = array('id' => $e['epf_id'],
+                   'label' => $e['epf_label'],
+                   'uses_list' => $e['epf_uses_value_list'],
+                   'multi_select' => $e['epf_multi_select'],
+                   'show_chain' => $e['epf_show_parent_chain'],
+                   'checkbox' => $e['epf_checked_entry'],
+                   'display_type' => $e['epf_value_display_type'],
+                   'columns' => $e['epf_num_columns'],
+                   'linked' => $e['epf_has_linked_field'],
+                   'links_to' => $e['epf_links_to'],
+                   'size' => $e['epf_size'],
+                   'language' => $e['languages_id'],
+                   'language_active' => $e['epf_active_for_language'],
+                   'values' => $values,
+                   'textarea' => $e['epf_textarea'],
+                   'field' => $field);
+    if (!in_array( $field, $xfields))
+      $xfields[] = $field; // build list of distinct fields    
+  }
+// EOF: Extra Product Fields
+
 // BOF instant update & image directory
   require_once('includes/functions/instant_update.php');
 // EOF instant update & image directory
@@ -511,6 +584,71 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 // EOF: Tabs by PGM
                                     'products_url' => tep_db_prepare_input($_POST['products_url'][$language_id]));
 
+ // BOF: Extra Product Fields
+            foreach ($epf as $e) {
+              if ($e['language'] == $language_id) {
+                if ($e['language_active']) {
+                  if ($e['multi_select']) {
+                    if (empty($_POST[$e['field']][$language_id])) {
+                      $value = 'null';
+                    } else {
+                      //validate multi-select values in case JavaScript was turned off and couldn't prevent errors
+                      $value_list = $_POST[$e['field']][$language_id];
+                      if ($e['linked']) { // validate linked values if field is linked
+                        $link_validated_list = array();
+                        $lv = 0;
+                        foreach ($epf as $lf) {
+                          if ($lf['id'] == $e['links_to']) {
+                            $lv = (int)$_POST[$lf['field']][$language_id];
+                          }
+                        }
+                        $validation_query_raw = 'select value_id from ' . TABLE_EPF_VALUES . ' where epf_id = ' . (int)$e['id'] . ' and languages_id = ' . (int)$e['language'] . ' and ';
+                        if ($lv == 0) {
+                          $validation_query_raw .= 'value_depends_on = 0';
+                        } else {
+                          $validation_query_raw .= '(value_depends_on in (0,' . get_parent_list($lv) . '))';
+                        }
+                        $validation_query = tep_db_query($validation_query_raw);
+                        $valid_values = array();
+                        while ($valid = tep_db_fetch_array($validation_query)) {
+                          $valid_values[] = $valid['value_id'];
+                        }
+                        foreach ($value_list as $v) {
+                          if (in_array($v, $valid_values)) $link_validated_list[] = $v;
+                        }
+                      } else {
+                        $link_validated_list = $value_list;
+                      }
+                      $validated_value_list = array(); // validate excluded values
+                      $excluded_values = array();
+                      foreach ($link_validated_list as $v) {
+                        if (!in_array($v, $excluded_values)) {
+                          $validated_value_list[] = $v;
+                          $tmp = get_exclude_list($v);
+                          $excluded_values = array_merge($excluded_values, $tmp);
+                        }
+                      }
+                      $value = '|';
+                      $sort_query = tep_db_query('select value_id from ' . TABLE_EPF_VALUES . ' where epf_id = ' . (int)$e['id'] . ' and languages_id = ' . (int)$e['language'] . ' order by sort_order, epf_value');
+                      while ($val = tep_db_fetch_array($sort_query)) { // store input values in sorted order
+                        if (in_array($val['value_id'], $validated_value_list))
+                          $value .= tep_db_prepare_input($val['value_id']) . '|';
+                      }
+                    }
+                  } else {
+                    $value = tep_db_prepare_input($_POST[$e['field']][$language_id]);
+                    if ($value == '')
+                      $value = (($e['uses_list'] && !$e['multi_select']) ? 0 : 'null');
+                  }
+                  $extra = array($e['field'] => $value);
+                } else {
+                  $extra = array($e['field'] => (($e['uses_list'] && !$e['multi_select']) ? 0 : 'null'));
+                }
+                $sql_data_array = array_merge($sql_data_array, $extra);
+              }
+            }
+// EOF: Extra Product Fields
+
             if ($action == 'insert_product') {
               $insert_sql_data = array('products_id' => $products_id,
                                        'language_id' => $language_id);
@@ -656,7 +794,84 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
     <script type="text/javascript" src="../slimbox2/jquery.js"></script>
 	<script type="text/javascript" src="../slimbox2/slimbox2.js"></script>
 <!--// SLIMBOX2 -->
-
+<?php 
+// BOF: Extra Product Fields
+if ($action == 'new_product') {
+  foreach ($epf as $e) {
+    if ($e['language_active']) {
+      if ($e['multi_select']) {
+        echo '<script language="javascript" type="text/javascript">' . "\n";
+        echo "function process_" . $e['field'] . '_' . $e['language'] . "(id) {\n";
+        echo "  var thisbox = document.getElementById('ms' + id);\n";
+        echo "  if (thisbox.checked) {\n";
+        echo "    switch (id) {\n";
+        foreach ($e['values'] as $val) {
+          $el = get_exclude_list($val);
+          if (!empty($el)) {
+            echo "      case " . $val . ":\n";
+            foreach($el as $i) {
+              echo "        var cb = document.getElementById('ms" . $i . "');\n";
+              echo "        cb.checked = false;\n";
+            }
+            echo "        break;\n";
+          }
+        }
+        echo "      default: ;\n";
+        echo "    }\n";
+        echo "  }\n";
+        echo "}\n";
+        echo "</script>\n";
+      } elseif ($e['uses_list'] && $e['linked']) {
+        echo '<script language="javascript" type="text/javascript">' . "\n";
+        if ($e['checkbox']) {
+          echo "function process_" . $e['field'] . '_' . $e['language'] . "(id) {\n";
+        } else {
+          echo "function process_" . $e['field'] . '_' . $e['language'] . "() {\n";
+          echo "  var id = document.getElementById('lv" . $e['id'] . '_' . $e['language'] . "').value;\n";
+        }
+        if (!empty($link_groups[$e['id']][$e['language']])) {
+          foreach ($link_groups[$e['id']][$e['language']] as $val) {
+            echo "  var lf = document.getElementById('lf" . $e['id'] . '_' . $e['language'] . '_' . $val . "');\n";
+            echo "  lf.style.display = 'none'; lf.disabled = true;\n";
+            foreach ($linked_fields[$e['id']][$e['language']][$val] as $id) {
+              echo "  document.getElementById('ms" . $id . "').disabled = true;\n";
+            }
+          }
+          foreach ($link_groups[$e['id']][$e['language']] as $val) {
+            echo "  if (";
+            $first = true;
+            $enables = '';
+            foreach(get_children($val) as $x) {
+              if ($first) {
+                $first = false;
+              } else {
+                echo ' || ';
+              }
+              echo '(id == ' . $x . ')';
+            }
+            echo ") {\n";
+            echo "    var lf = document.getElementById('lf" . $e['id'] . '_' . $e['language'] . '_' . $val . "');\n";
+            echo "    lf.style.display = ''; lf.disabled = false;\n";
+            foreach ($linked_fields[$e['id']][$e['language']][$val] as $id) {
+              $enables .= "    document.getElementById('ms" . $id . "').disabled = false;\n";
+            }
+            echo $enables;
+            echo "  }\n";
+          }
+          foreach ($linked_fields[$e['id']][$e['language']] as $group) {
+            foreach ($group as $id) {
+              echo "  var lv = document.getElementById('ms" . $id . "');\n";
+              echo "  if (lv.disabled == true) { lv.checked = false; }\n";
+            }
+          }
+        }
+        echo "}\n";
+        echo "</script>\n";
+      }
+    }
+  }
+} // EOF: Extra Product Fields
+?>
 </head>
 <body onLoad="goOnLoad();">
 <!-- header //-->
@@ -976,6 +1191,12 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
 // EOF SPPC hide from groups mod
                        'manufacturers_id' => '');
 
+// BOF: Extra Product Fields
+    foreach ($xfields as $f) {
+      $parameters = array_merge($parameters, array($f => ''));
+    }
+// EOF: Extra Product Fields
+
     $pInfo = new objectInfo($parameters);
 
     if (isset($_GET['pID']) && empty($_POST)) { // BOF SPPC hide from groups mod
@@ -984,7 +1205,17 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
 //LINE MODED: SPPC hide from groups mod & Tabs by PGM
 // LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
 // LINE MODED: Open Feature Sets : Added ", p.products_featured, p.products_featured_until"
-	  $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+// BOF: Extra Product Fields
+//	  $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+
+	  $query = "select p.products_ship_price, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until ";
+	foreach ($xfields as $f) {
+      $query .= ", pd." . $f;
+      }
+      $query .= " from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'";
+	  $product_query = tep_db_query($query);
+// EOF: Extra Product Fields
+
 // EOF SPPC hide from groups mod
       $product = tep_db_fetch_array($product_query);
 
@@ -1042,7 +1273,13 @@ var CategoriesEditFeaturedUntil = new ctlSpiffyCalendarBox("CategoriesEditFeatur
       $products_featured = $_POST['products_featured'];
       $products_featured_until = $_POST['products_featured_until'];
 // EOF Open Featured Sets
-    }
+// BOF: Extra Product Fields
+      $extra = array();
+      foreach ($xfields as $f) {
+        $extra[$f] = $_POST[$f];
+      } // end for each
+// EOF: Extra Product Fields
+    } // end elseif
 
     $manufacturers_array = array(array('id' => '', 'text' => TEXT_NONE));
     $manufacturers_query = tep_db_query("select manufacturers_id, manufacturers_name from " . TABLE_MANUFACTURERS . " order by manufacturers_name");
@@ -1487,6 +1724,86 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
             <td class="main"><?php echo TEXT_PRODUCTS_WEIGHT; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_weight', $pInfo->products_weight); ?></td>
           </tr>
+<?php  
+// BOF: Extra Product Fields
+          foreach ($epf as $e) {
+        	  for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+        	    if ($e['language'] == $languages[$i]['id']) {
+        	      if ($e['language_active']) {
+      	          $currentval = (isset($extra[$e['field']][$languages[$i]['id']]) ? stripslashes($extra[$e['field']][$languages[$i]['id']]) : tep_get_product_extra_value($e['id'], $pInfo->products_id, $languages[$i]['id']));
+        	        if ($e['uses_list']) {
+        	          if ($e['multi_select']) {
+           	          $currentval = (isset($extra[$e['field']][$languages[$i]['id']]) ? $extra[$e['field']][$languages[$i]['id']] : explode('|', trim(tep_get_product_extra_value($e['id'], $pInfo->products_id, $languages[$i]['id']), '|')));
+        	            $value_query = tep_db_query('select value_id, value_depends_on from ' . TABLE_EPF_VALUES . ' where epf_id = ' . (int) $e['id'] . ' and languages_id = ' . (int)$e['language'] . ' order by value_depends_on, sort_order, epf_value');
+        	            $epfvals = array(array());
+        	            while ($val = tep_db_fetch_array($value_query)) {
+        	              $epfvals[$val['value_depends_on']][] = $val['value_id'];
+        	            }
+        	            $inp = '';
+        	            if ($e['linked']) {
+        	              $tmp =  (isset($extra['extra_value_id' . $e['links_to']][$languages[$i]['id']]) ? stripslashes($extra['extra_value_id' . $e['links_to']][$languages[$i]['id']]) : tep_get_product_extra_value($e['links_to'], $pInfo->products_id, $languages[$i]['id']));
+        	              $tmp = get_parent_list($tmp);
+        	              $current_linked_val = explode(',', $tmp);
+        	            } else {
+        	              $current_linked_val = array(0);
+        	            }
+        	            foreach ($epfvals as $key => $vallist) {
+                        $col = 0;
+                        if ($e['linked']) {
+                          $tparms = ' id="lf' . $e['links_to'] . '_' . $languages[$i]['id'] . '_' . $key . '"';
+                          if (($key != 0) && !in_array($key, $current_linked_val))
+                            $tparms .= ' style="display: none" disabled';
+                        } else {
+                          $tparms = '';
+                        }
+                        $inp .= '<table' . $tparms . '><tr>';
+                        foreach ($vallist as $value) {
+                          $col++;
+                          if ($col > $e['columns']) {
+                            $inp .= '</tr><tr>';
+                            $col = 1;
+                          }
+                          $inp .= '<td>' . tep_draw_checkbox_field($e['field'] . "[" . $languages[$i]['id'] . "][]", $value, in_array($value, $currentval), '', 'onClick="process_' . $e['field'] . '_' . $e['language'] . '(' . $value . ')" id="ms' . $value . '"') . '</td><td>' . ($value == '0' ? TEXT_NOT_APPLY : tep_get_extra_field_list_value($value, false, $e['display_type'])) . '<td><td>&nbsp;</td>';
+                        }
+                        $inp .= '</tr></table>';
+        	            }
+        	          } else {
+          	          $epfvals = tep_build_epf_pulldown($e['id'], $languages[$i]['id'], array(array('id' => 0, 'text' => TEXT_NOT_APPLY)));
+          	          if ($e['checkbox']) {
+                        $col = 0;
+                        $inp = '<table><tr>';
+                        foreach ($epfvals as $value) {
+                          $col++;
+                          if ($col > $e['columns']) {
+                            $inp .= '</tr><tr>';
+                            $col = 1;
+                          }
+                          $inp .= '<td>' . tep_draw_radio_field($e['field'] . "[" . $languages[$i]['id'] . "]", $value['id'], false, $currentval, ($e['linked'] ? 'onClick="process_' . $e['field'] . '_' . $e['language'] . '(' . $value['id'] . ')"' : '')) . '</td><td>' . ($value['id'] == '0' ? TEXT_NOT_APPLY : tep_get_extra_field_list_value($value['id'], false, $e['display_type'])) . '<td><td>&nbsp;</td>';
+                        }
+                        $inp .= '</tr></table>';
+          	          } else {
+          	            $inp = tep_draw_pull_down_menu($e['field'] . "[" . $languages[$i]['id'] . "]",  $epfvals, $currentval, ($e['linked'] ? 'onChange="process_' . $e['field'] . '_' . $e['language'] . '()" id="lv' . $e['id'] . '_' . $languages[$i]['id'] . '"' : ''));
+          	          }
+        	          }
+        	        } else {
+        	          if ($e['textarea']) {
+          	            $inp = tep_draw_textarea_field($e['field'] . "[" . $languages[$i]['id'] . "]", 'soft', '70', '5', $currentval, 'id="' . $e['field'] . "_" . $languages[$i]['id'] . '"');
+        	          } else {
+          	            $inp = tep_draw_input_field($e['field'] . "[" . $languages[$i]['id'] . "]", $currentval, "maxlength=" . $e['size'] . " size=" . $e['size']);
+        	          }
+        	        }
+?>
+          <tr bgcolor="#ebebff">
+            <td class="main"><?php echo $e['label']; ?>:</td>
+            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $inp; ?></td>
+          </tr>
+<?php
+                }
+              }
+            }
+          } 
+// EOF: Extra Product Fields
+?>        
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
@@ -1537,6 +1854,13 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
       $tab6 = $_POST['tab6'];
 // EOF: Tabs by PGM
       $products_url = $_POST['products_url'];
+// BOF: Extra Product Fields
+      $extra = array();
+      foreach ($xfields as $f) {
+        $extra[$f] = $_POST[$f];
+      }
+// EOF: Extra Product Fields
+	  
 // LINE CHANGED: Added p.products_shipped_price and dimensions for upsxml
 //    $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'");
 // LINE MODED: Tabs by PGM
@@ -1558,7 +1882,16 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
       } else {
 // LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
 // LINE MODED: Open Feature Sets : Added ", pd.products_short"
-      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'");
+//      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'");
+
+// BOF: Extra Product Fields
+        $query = "select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty ";
+	  foreach ($xfields as $f) {
+        $query .= ', pd.' . $f;
+      }       
+	    $query .= " from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'";
+	    $product_query = tep_db_query($query);
+// EOF: Extra Product Fields
 
       $product = tep_db_fetch_array($product_query);
 
@@ -1638,6 +1971,45 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         </td>
       </tr>
 <?php
+// BOF: Extra Product Fields
+         foreach ($epf as $e) {
+           if ($e['language'] == $languages[$i]['id']) {
+             if ($e['language_active']) {
+               if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
+                 $value = tep_get_product_extra_value($e['id'], $pInfo->products_id, $languages[$i]['id']);
+                 if ($e['multi_select'] && ($value != '')) {
+                   $value = explode('|', trim($value, '|'));
+                 }
+               } else {
+                 if ($e['multi_select']) {
+                   $value = $extra[$e['field']][$languages[$i]['id']];
+                 } else {
+                   $value = tep_db_prepare_input($extra[$e['field']][$languages[$i]['id']]);
+                   if ($e['uses_list'] && ($value == 0)) $value = '';
+                 }
+               }
+               if (tep_not_null($value)) {
+                 echo '<tr><td class="main"><b>' . $e['label'] . ': </b>';
+                 if ($e['uses_list']) {
+                   if ($e['multi_select']) {
+                     $output = array();
+                     foreach ($value as $val) {
+                       $output[] = tep_get_extra_field_list_value($val, $e['show_chain'], $e['display_type']);
+                     }
+                     echo implode(', ', $output);
+                   } else {
+                     echo tep_get_extra_field_list_value($value, $e['show_chain'], $e['display_type']);
+                   }
+                 } else {
+                   echo $value;
+                 }
+                 echo "</td></tr>\n";
+               }
+             }
+           }
+         }
+// EOF: Extra Product Fields
+	
       if ($pInfo->products_url) {
 ?>
       <tr>
@@ -1782,7 +2154,22 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         echo tep_draw_hidden_field('tab6[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab6[$languages[$i]['id']])));
 // EOF: Tabs by PGM
         echo tep_draw_hidden_field('products_url[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($products_url[$languages[$i]['id']])));
-      }
+// BOF: Extra Product Fields
+        foreach ($epf as $e) {
+          if ($e['language'] == $languages[$i]['id']) {
+            if ($e['language_active']) {
+              if ($e['multi_select']) {
+                foreach ($extra[$e['field']][$languages[$i]['id']] as $value) {
+                  echo tep_draw_hidden_field($e['field'] . '[' . $languages[$i]['id'] . '][]', htmlspecialchars(stripslashes($value)));
+                }
+              } else {
+                echo tep_draw_hidden_field($e['field'] . '[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($extra[$e['field']][$languages[$i]['id']])));
+              }
+            }
+          }
+        }
+// EOF: Extra Product Fields
+	  } // end for
       echo tep_draw_hidden_field('products_image', stripslashes($products_image_name));
 
       echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="edit"') . '&nbsp;&nbsp;';

@@ -502,5 +502,9 @@ define('BOX_GOOGLE_SITEMAP', 'Google SiteMaps');
 define('BOX_CATALOG_FEEDMACHINE', 'Feedmachine');
 // EOF: Feed Machine
 
-
+// BOF: Extra Product Fields
+define('TEXT_NOT_APPLY', 'Does Not Apply');
+define('BOX_CATALOG_PRODUCTS_EXTRA_FIELDS', 'Extra Product Fields');
+define('BOX_CATALOG_PRODUCTS_EXTRA_VALUES', 'Extra Field Values');
+// EOF: Extra Product Fields
 ?>

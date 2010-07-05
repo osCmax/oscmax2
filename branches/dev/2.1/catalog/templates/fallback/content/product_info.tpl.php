@@ -39,8 +39,18 @@
     </table>
 <?php
   } else {
-    $product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
-    $product_info = tep_db_fetch_array($product_info_query);
+// BOF: Product Extra Fields	  
+//    $product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
+
+	  $query = "select p.products_id, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id";
+	foreach ($epf as $e) {
+      $query .= ", pd." . $e['field'];
+    }  
+	  $query .= " from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'";
+
+	$product_info_query = tep_db_query($query);
+// EOF: Product Extra Fields	
+	$product_info = tep_db_fetch_array($product_info_query);
 
     tep_db_query("update " . TABLE_PRODUCTS_DESCRIPTION . " set products_viewed = products_viewed+1 where products_id = '" . (int)$_GET['products_id'] . "' and language_id = '" . (int)$languages_id . "'");
 
@@ -168,7 +178,37 @@
                 </td>
                 <!-- Description Ends -->
               </tr>
-
+              <!-- Product Extra Fields Starts -->
+			  <tr>
+              	<td class="productinfo_epf">
+                <?php
+                  // begin Extra Product Fields			  
+                  foreach ($epf as $e) {
+                    $mt = ($e['uses_list'] && !$e['multi_select'] ? ($product_info[$e['field']] == 0) : !tep_not_null($product_info[$e['field']]));
+					if (!$mt) { // only display if information is set for product
+                      echo '<b>' . $e['label'] . ': </b>';
+                      if ($e['uses_list']) {
+                        if ($e['multi_select']) {
+                          $values = explode('|', trim($product_info[$e['field']], '|'));
+                          $listing = array();
+                          foreach ($values as $val) {
+                            $listing[] = tep_get_extra_field_list_value($val, $e['show_chain'], $e['display_type']);
+                          }
+                          echo implode(', ', $listing);
+                        } else {
+                          echo tep_get_extra_field_list_value($product_info[$e['field']], $e['show_chain'], $e['display_type']);
+                        }
+                      } else {
+                        echo $product_info[$e['field']];
+                      }
+                      echo '<br>';
+                    }
+                  }
+                  // end Extra Product Fields
+                ?>
+                </td>
+              </tr>
+            <!-- Product Extra Fields Ends -->
 			<!-- Conditional Atrributes Starts -->              
             <?php
     		$products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$_GET['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");

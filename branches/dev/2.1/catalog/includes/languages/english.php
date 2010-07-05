@@ -395,22 +395,27 @@ define('FILENAME_STATS_CREDITS', 'stats_credits.php');
 require(DIR_WS_LANGUAGES . 'add_ccgvdc_english.php');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
-// BOF QPBPP for SPPC
+// BOF: QPBPP for SPPC
 define('MINIMUM_ORDER_NOTICE', 'Minimum order amount for %s is %d. Your cart has been updated to reflect this.');
 define('QUANTITY_BLOCKS_NOTICE', '%s can only by ordered in multiples of %d. Your cart has been updated to reflect this.');
-// EOF QPBPP for SPPC
+// EOF: QPBPP for SPPC
 
-// begin Customer Comments contrib
+// BOF: Customer Comments contrib
 define('SUCCESS_ORDER_UPDATED', 'Success: Order has been successfully updated.');
 define('WARNING_ORDER_NOT_UPDATED', 'Warning: Nothing to change. The order was not updated.');
-// end Customer Comments contrib
+// EOF: Customer Comments contrib
 
-// BOF Open Featured Sets
+// BOF: Open Featured Sets
 define('OPEN_FEATURED_BOX_HEADING', 'Featured');
 define('OPEN_FEATURED_BOX_CATEGORY_HEADING', "Featured Categories");
 define('OPEN_FEATURED_BOX_MANUFACTURERS_HEADING', "Now Featuring");
 define('OPEN_FEATURED_BOX_MANUFACTURER_HEADING', "Now Featuring");
 define('OPEN_FEATURED_TABLE_HEADING_PRICE', ''); //Price: 
 define('TEXT_MORE_INFO', 'more...');
-// EOF Open Featured Sets
+// EOF: Open Featured Sets
+
+// BOF: Extra Product Fields
+define('TEXT_ANY_VALUE', 'Any Value');
+define('TEXT_RESTRICT_TO', 'Restrict <b>%s</b> to: %s and its sub-values (if any).');
+// EOF: Extra Product Fields
 ?>

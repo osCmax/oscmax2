@@ -55,4 +55,10 @@ define('ERROR_PRICE_FROM_MUST_BE_NUM', 'Price From must be a number.');
 define('ERROR_PRICE_TO_MUST_BE_NUM', 'Price To must be a number.');
 define('ERROR_PRICE_TO_LESS_THAN_PRICE_FROM', 'Price To must be greater than or equal to Price From.');
 define('ERROR_INVALID_KEYWORDS', 'Invalid keywords.');
+
+define('TEXT_OPTIONAL', 'Entries in the fields below are optional unless the Search Criteria is` left blank. In that case at least one field below must have an entry.');
+define('TEXT_FOR_FIELD', 'For this field match ');
+define('TEXT_MATCH_ANY', 'ANY selected value or ');
+define('TEXT_MATCH_ALL', 'ALL selected values');
+
 ?>

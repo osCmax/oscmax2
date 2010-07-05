@@ -56,7 +56,7 @@
         echo tep_hide_session_id() . '</form></td>' . "\n";
       }
     }
-
+	
 // Get the right image for the top-right
     $image = DIR_WS_IMAGES . 'table_background_list.gif';
     if (isset($_GET['manufacturers_id'])) {

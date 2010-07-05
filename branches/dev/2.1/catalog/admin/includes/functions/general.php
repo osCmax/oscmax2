@@ -1939,4 +1939,73 @@ function tep_cfg_pull_down_templates() {
   return $string;
   }
 
+// BOF: Extra Product Fields
+  function tep_get_extra_field_list_value($value_id, $show_chain = false, $display_type = 0) {
+    $sql = tep_db_query("select epf_value, value_image, parent_id from " . TABLE_EPF_VALUES . " where value_id = " . (int)$value_id);
+    $value = tep_db_fetch_array($sql);
+    $display = $value['epf_value'];
+    if (tep_not_null($value['value_image'])) {
+      if ($display_type == 2) {
+      	$browser = (isset($_SERVER['HTTP_USER_AGENT']) ? strtolower($_SERVER['HTTP_USER_AGENT']) : '');
+      	$pos = strpos($browser, 'msie');
+      	if ($pos !== false) { // using Internet Explorer requires different display type for inline tables
+       	  $vpos = strpos($browser, ';', $pos);
+      	  $version = substr($browser, $pos +5, $vpos - $pos - 5);
+      	  if ($version < 9) {
+      	    $tt = 'inline';
+      	  } else {
+      	    $tt = 'inline-table';
+      	  }
+       	} else {
+      	  $tt = 'inline-table';
+        }
+        $display = '<table style="display: ' . $tt . '; vertical-align: middle; text-align: center"><tr><td>' . tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'epf/' . $value['value_image'], $value['epf_value']) . '<br />' . $value['epf_value'] . '</td></tr></table>';
+      } elseif ($display_type == 1) {
+        $display = tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'epf/' . $value['value_image'], $value['epf_value']);
+      }
+    }
+    if ($show_chain && ($value['parent_id'] > 0)) {
+      return tep_get_extra_field_list_value($value['parent_id'], true, $display_type) . ' | ' . $display;
+    } else {
+      return $display;
+    }
+  }
+  
+  function tep_list_epf_children($parent_id) {
+    $sql = tep_db_query("select value_id from " . TABLE_EPF_VALUES . " where parent_id = " . (int)$parent_id);
+    $list = '';
+    while ($i = tep_db_fetch_array($sql)) {
+      $list .= ',' . $i['value_id'] . tep_list_epf_children($i['value_id']);
+    }
+    return $list;
+  }
+  
+  function tep_build_epf_pulldown($epf_id, $languages_id, $value_array = '', $parent_id = 0, $indent = '') {
+    if (!is_array($value_array)) $value_array = array();
+    $sql = tep_db_query("select epf_value, value_id from " . TABLE_EPF_VALUES . " where epf_id = " . (int)$epf_id . " and languages_id = " . (int)$languages_id . " and parent_id = " . (int)$parent_id . " order by sort_order, epf_value");
+    while ($v = tep_db_fetch_array($sql)) {
+      $value_array[] = array('id' => $v['value_id'], 'text' => $indent . $v['epf_value']);
+      $value_array = tep_build_epf_pulldown($epf_id, $languages_id, $value_array, $v['value_id'], $indent . '&middot;');
+    }
+    return $value_array;
+  }
+  
+  function tep_get_product_extra_value($epf_id, $product_id, $language_id) {
+    $epf_query = tep_db_query("select epf_id, epf_uses_value_list, epf_multi_select from " . TABLE_EPF . " where epf_id = " . (int)$epf_id);
+    $e = tep_db_fetch_array($epf_query);
+    $field = 'extra_value';
+    if ($e['epf_uses_value_list']) {
+      if ($e['epf_multi_select']) {
+        $field .= '_ms';
+      } else {
+        $field .= '_id';
+      }
+    }
+    $field .= $e['epf_id'];
+    $product_query = tep_db_query("select " . $field . " from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+    return $product[$field];
+  }
+// EOF: Extra Product Fields
+
 ?>

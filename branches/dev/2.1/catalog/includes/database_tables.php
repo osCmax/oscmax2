@@ -114,5 +114,14 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
   define('TABLE_PM_CONFIGURATION', 'pm_configuration');
 // EOF: Page Module Controller 
 
+// BOF: Page Module Slideshow
 define('TABLE_SLIDESHOW', 'slideshow');
+// EOF: Page Module Slideshow
+
+// BOF: Extra Product Fields
+define('TABLE_EPF', 'extra_product_fields');
+define('TABLE_EPF_LABELS', 'extra_field_labels');
+define('TABLE_EPF_VALUES', 'extra_field_values');
+define('TABLE_EPF_EXCLUDE', 'extra_value_exclude');
+// EOF: Extra Product Fields
 ?>

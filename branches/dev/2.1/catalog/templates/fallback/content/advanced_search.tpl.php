@@ -68,6 +68,10 @@
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
+                <td></td>
+                <td class="fieldKey"><?php echo TEXT_OPTIONAL; ?></td>
+              </tr>
+              <tr>
                 <td class="fieldKey"><?php echo ENTRY_CATEGORIES; ?></td>
                 <td class="fieldValue"><?php echo tep_draw_pull_down_menu('categories_id', tep_get_categories(array(array('id' => '', 'text' => TEXT_ALL_CATEGORIES)))); ?></td>
               </tr>
@@ -82,6 +86,58 @@
                 <td class="fieldKey"><?php echo ENTRY_MANUFACTURERS; ?></td>
                 <td class="fieldValue"><?php echo tep_draw_pull_down_menu('manufacturers_id', tep_get_manufacturers(array(array('id' => '', 'text' => TEXT_ALL_MANUFACTURERS)))); ?></td>
               </tr>
+<?php
+// begin Extra Product Fields
+    foreach ($epf as $e) {
+?>
+              <tr>
+                <td class="fieldKey"><?php echo $e['label']; ?></td>
+                <td class="fieldValue">
+                <?php if ($e['uses_list']) {
+                  $epf_values = tep_build_epf_pulldown($e['id'], $languages_id);
+                  if ($e['multi_select']) { // multi-select field
+                    echo TEXT_FOR_FIELD . tep_draw_radio_field('match' . $e['id'], 'any', true) . TEXT_MATCH_ANY . tep_draw_radio_field('match' . $e['id'], 'all') . TEXT_MATCH_ALL . '</td></tr><tr><td class="fieldKey">' . $e['label'] . '</td><td class="fieldValue">';
+                    $col = 0;
+                    echo '<table><tr>';
+                    foreach ($epf_values as $value) {
+                      $col++;
+                      if ($col > $e['columns']) {
+                        echo '</tr><tr>';
+                        $col = 1;
+                      }
+                      echo '<td>' . tep_draw_checkbox_field($e['field'] . '[]', $value['id'], false, 'id="' . $value['id'] . '"') . '</td><td>' . tep_get_extra_field_list_value($value['id'], false, $e['display_type']) . '<td><td>&nbsp;</td>';
+                    }
+                    echo '</tr></table>';
+                  } else { // single select field
+                    $epf_values = array_merge( array(array('id' => '', 'text' => TEXT_ANY_VALUE)), $epf_values);
+                    if ($e['use_checkbox']) {
+                      $col = 0;
+                      echo '<table><tr>';
+                      foreach ($epf_values as $value) {
+                        $col++;
+                        if ($col > $e['columns']) {
+                          echo '</tr><tr>';
+                          $col = 1;
+                        }
+                        echo '<td>' . tep_draw_radio_field($e['field'], $value['id'], $value['id'] == '', 'id="' . $e['field'] . '_' . $value['id'] . '"') . '</td><td>' . ($value['id'] == '' ? TEXT_ANY_VALUE : tep_get_extra_field_list_value($value['id'], false, $e['display_type'])) . '<td><td>&nbsp;</td>';
+                      }
+                      echo '</tr></table>';
+                    } else {
+                      echo tep_draw_pull_down_menu($e['field'], $epf_values);
+                    }
+                  }
+                } else { // text field
+                  echo tep_draw_input_field($e['field'], '', 'style="width: 300px"');
+                } ?>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
+              </tr>
+<?php
+} 
+// end Extra Product Fields
+?>           
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>

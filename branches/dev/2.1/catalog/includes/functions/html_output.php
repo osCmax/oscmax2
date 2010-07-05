@@ -168,7 +168,9 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
     if (tep_not_null($value)) $selection .= ' value="' . tep_output_string($value) . '"';
 
-    if ( ($checked == true) || (isset($_GET[$name]) && is_string($_GET[$name]) && (($_GET[$name] == 'on') || (stripslashes($_GET[$name]) == $value))) || (isset($_POST[$name]) && is_string($_POST[$name]) && (($_POST[$name] == 'on') || (stripslashes($_POST[$name]) == $value))) ) {
+	if ( ($checked == true) || (isset($_GET[$name]) && is_string($_GET[$name]) && (($_GET[$name] == 'on') || (stripslashes($_GET[$name]) == $value))) || (isset($_POST[$name]) && is_string($_POST[$name]) && (($_POST[$name] == 'on') || (stripslashes($_POST[$name]) == $value))) /* added for checkbox fields */ || (isset($_GET[rtrim($name, '[]')]) && is_array($_GET[rtrim($name, '[]')]) && in_array($value, $_GET[rtrim($name, '[]')])) || (isset($_POST[rtrim($name, '[]')]) && is_array($_POST[rtrim($name, '[]')]) && in_array($value, $_POST[rtrim($name, '[]')])) /* end checkbox addition */ ) {
+//Line edited above for Product Extra Fields
+//    if ( ($checked == true) || (isset($_GET[$name]) && is_string($_GET[$name]) && (($_GET[$name] == 'on') || (stripslashes($_GET[$name]) == $value))) || (isset($_POST[$name]) && is_string($_POST[$name]) && (($_POST[$name] == 'on') || (stripslashes($_POST[$name]) == $value))) ) {
       $selection .= ' CHECKED';
     }
 

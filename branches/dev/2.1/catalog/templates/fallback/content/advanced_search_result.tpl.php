@@ -97,6 +97,12 @@
    // next line original select query
    // $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price ";
 
+// begin Extra Product Fields
+  foreach ($epf as $e) {
+    $select_str .= ', pd.' . $e['field'] . ' ';
+  }
+// end Extra Product Fields
+
   if ( (DISPLAY_PRICE_WITH_TAX == 'true') && (tep_not_null($pfrom) || tep_not_null($pto)) ) {
     $select_str .= ", SUM(tr.tax_rate) as tax_rate ";
   }
@@ -160,12 +166,88 @@
           $keyword = tep_db_prepare_input($search_keywords[$i]);
           $where_str .= "(pd.products_name like '%" . tep_db_input($keyword) . "%' or p.products_model like '%" . tep_db_input($keyword) . "%' or m.manufacturers_name like '%" . tep_db_input($keyword) . "%'";
           if (isset($_GET['search_in_description']) && ($_GET['search_in_description'] == '1')) $where_str .= " or pd.products_description like '%" . tep_db_input($keyword) . "%'";
+
+// begin Extra Product Fields
+          if (isset($_GET['search_in_description']) && ($_GET['search_in_description'] == '1')) // extra fields are part of product description and so should be searched only if searching in descriptions
+            foreach ($epf as $e) {
+              if ($e['uses_list']) {
+                $value_query = tep_db_query("select value_id from " . TABLE_EPF_VALUES . " where epf_id = " . (int)$e['id'] . " and languages_id = " . (int)$languages_id . " and epf_value like '%" . tep_db_input($keyword) . "%'");
+                if (tep_db_num_rows($value_query) > 0) { // only if keyword is found in value list for field
+                  $value_list = '';
+                  if ($e['multi_select']) {
+                    while ($vid = tep_db_fetch_array($value_query)) {
+                      $where_str .= " or pd." . $e['field'] . " like '%|" . (int)$vid['value_id'] . "|%'";
+                    }
+                  } else {
+                    while ($vid = tep_db_fetch_array($value_query)) {
+                      $value_list .= ',' . $vid['value_id'] . tep_list_epf_children($vid['value_id']);
+                    }
+                    $where_str .= " or (pd." . $e['field'] . " in (" . trim($value_list, ',') . "))";
+                  }
+                }
+              } else {
+                $where_str .= " or pd." . $e['field'] . " like '%" . tep_db_input($keyword) . "%'";
+              }
+            }
+// end Extra Fields Contribution
+
           $where_str .= ')';
           break;
       }
     }
     $where_str .= " )";
   }
+
+// begin Extra Product Fields
+foreach ($epf as $e) {
+  if ($e['search']) { // only process advanced searchable fields
+    $value = '';
+    if (isset($_GET[$e['field']]) && !empty($_GET[$e['field']]))
+      $value = $_GET[$e['field']]; // get value passed from advanced_search.php
+    if ($e['uses_list'] && ($value != '')) {
+      if ($e['multi_select']) {
+        if (is_array($value)) {
+          $match = $_GET['match' . $e['id']];
+          $where_str .= " and (";
+          $first = true;
+          foreach ($value as $vid) {
+            if ($first) {
+              $first = false;
+            } else {
+              $where_str .= ($match == 'all' ? ' and ' : ' or ');
+            }
+            $where_str .= "(pd." . $e['field'] . " like '%|" . (int)$vid . "|%')";
+          }
+          $where_str .= ")";
+        }
+      } else {
+        $where_str .= " and (pd." . $e['field'] . " in (" . (int)$value . tep_list_epf_children($value) . "))";
+      }
+    } else {
+      unset($epf_value_keywords); // erase any keywords from previous field
+      tep_parse_search_string($value, $epf_value_keywords);
+      if (($value != '') && isset($epf_value_keywords) && (sizeof($epf_value_keywords) > 0)) {
+        $where_str .= " and (";
+        for ($i=0, $n=sizeof($epf_value_keywords); $i<$n; $i++ ) {
+          switch ($epf_value_keywords[$i]) {
+            case '(':
+            case ')':
+            case 'and':
+            case 'or':
+              $where_str .= " " . $epf_value_keywords[$i] . " ";
+              break;
+            default:
+              $keyword = tep_db_prepare_input($epf_value_keywords[$i]);
+              $where_str .= "(pd." . $e['field'] . " like '%" . tep_db_input($keyword) . "%')";
+              break;
+          }
+        }
+        $where_str .= ")";
+      }
+    }
+  }
+}
+// end Extra Product Fields
 
   if (tep_not_null($dfrom)) {
     $where_str .= " and p.products_date_added >= '" . tep_date_raw($dfrom) . "'";

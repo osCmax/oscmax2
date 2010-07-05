@@ -133,6 +133,31 @@ global $customer_group_id;
       }
     }
 
+// BOF: Extra Product Fields
+    $epf_query = tep_db_query("select * from " . TABLE_EPF . " e join " . TABLE_EPF_LABELS . " l where e.epf_status and (e.epf_show_in_listing or e.epf_use_to_restrict_listings) and (e.epf_id = l.epf_id) and (l.languages_id = " . (int)$languages_id . ") and l.epf_active_for_language order by e.epf_order");
+    $epf = array();
+    while ($e = tep_db_fetch_array($epf_query)) {
+      $field = 'extra_value';
+      if ($e['epf_uses_value_list']) {
+        if ($e['epf_multi_select']) {
+          $field .= '_ms';
+        } else {
+          $field .= '_id';
+        }
+      }
+      $field .= $e['epf_id'];
+      $epf[] = array('id' => $e['epf_id'],
+                     'label' => $e['epf_label'],
+                     'uses_list' => $e['epf_uses_value_list'],
+                     'show_chain' => $e['epf_show_parent_chain'],
+                     'restrict' => $e['epf_use_to_restrict_listings'],
+                     'listing' => $e['epf_show_in_listing'],
+                     'multi_select' => $e['epf_multi_select'],
+                     'field' => $field);
+      $select_column_list .= 'pd.' . $field . ', ';
+    }
+// EOF: Extra Product Fields
+
 // BOF: MOD - Categories Description 1.5
 // Get the category name and description
     $category_query = tep_db_query("select cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . $current_category_id . "' and cd.categories_id = '" . $current_category_id . "' and cd.language_id = '" . $languages_id . "'");
@@ -251,6 +276,18 @@ global $customer_group_id;
  $listing_sql .= " and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 ";
  $listing_sql .= " and find_in_set('" . $customer_group_id . "', c.categories_hide_from_groups) = 0 ";
  // EOF SPPC Hide products and categories from groups
+
+// BOF: extra product fields
+    $restrict_by = '';
+    foreach ($epf as $e) {
+      if ($e['restrict']) {
+        if (isset($_GET[$e['field']]) && is_numeric($_GET[$e['field']])) {
+          $restrict_by .= ' and (pd.' . $e['field'] . ' in (' . (int)$_GET[$e['field']] . tep_list_epf_children($_GET[$e['field']]) . '))';
+        }
+      }       
+    }
+    $listing_sql .= $restrict_by;
+// EOF: extra product fields
 
     if ( (!isset($_GET['sort'])) || (!preg_match('/^[1-8][ad]$/', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
 

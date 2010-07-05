@@ -17,6 +17,14 @@ $Id: configuration.php 3 2006-05-27 04:59:07Z user $
   if (tep_not_null($action)) {
     switch ($action) {
       case 'save':
+      
+          /* One Page Checkout - BEGIN*/
+          if ($_GET['gID'] == 7575){
+              tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . $_POST['configuration_value'] . "', last_modified = now() where configuration_id = '" . (int)$_GET['cID'] . "'");
+              tep_redirect(tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $_GET['cID']));
+          }
+          /* One Page Checkout - END*/      
+      
         $configuration_value = tep_db_prepare_input($_POST['configuration_value']);
         $cID = tep_db_prepare_input($_GET['cID']);
 
@@ -149,6 +157,12 @@ $Id: configuration.php 3 2006-05-27 04:59:07Z user $
       } else {
         $value_field = tep_draw_input_field('configuration_value', $cInfo->configuration_value);
       }
+
+      /* One Page Checkout - BEGIN */
+      if ($cInfo->set_function && $_GET['gID'] == 7575) {
+        eval('$value_field = ' . $cInfo->set_function . '"' . $cInfo->configuration_value . '");');
+      }
+      /* One Page Checkout - END */
 
       $contents = array('form' => tep_draw_form('configuration', FILENAME_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id . '&action=save'));
       $contents[] = array('text' => TEXT_INFO_EDIT_INTRO);

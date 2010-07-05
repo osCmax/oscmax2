@@ -18,11 +18,21 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
   tep_session_unregister('shipping');
 }
 // EOF: Downloads Controller - Free Shipping
+/* One Page Checkout - BEGIN */
 // if the customer is not logged on, redirect them to the login page
-  if (!tep_session_is_registered('customer_id')) {
-    $navigation->set_snapshot(array('mode' => 'SSL', 'page' => FILENAME_CHECKOUT_PAYMENT));
-    tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+//  if (!tep_session_is_registered('customer_id')) {
+//    $navigation->set_snapshot(array('mode' => 'SSL', 'page' => FILENAME_CHECKOUT_PAYMENT));
+//    tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+//  }
+/* One Page Checkout - BEGIN */  
+  if (ONEPAGE_LOGIN_REQUIRED == 'true'){
+      if (!tep_session_is_registered('customer_id')) {
+          $navigation->set_snapshot(array('mode' => 'SSL', 'page' => FILENAME_CHECKOUT_PAYMENT));
+          tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+      }
   }
+/* One Page Checkout - END */  
+
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
   if ($cart->count_contents() < 1) {
@@ -31,7 +41,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
   if (!tep_session_is_registered('shipping') || !tep_session_is_registered('sendto')) {
-    tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+/* One Page Checkout - BEGIN */  
+//    tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+/* One Page Checkout - END */ 
   }
 
   if ( (tep_not_null(MODULE_PAYMENT_INSTALLED)) && (!tep_session_is_registered('payment')) ) {
@@ -46,6 +58,12 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
   }
 
   include(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_PROCESS);
+/* One Page Checkout - BEGIN */ 
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      require('includes/classes/onepage_checkout.php');
+      $onePageCheckout = new osC_onePageCheckout();
+  }
+/* One Page Checkout - END */
 
 // load selected payment module
   require(DIR_WS_CLASSES . 'payment.php');
@@ -59,6 +77,29 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 
   require(DIR_WS_CLASSES . 'order.php');
   $order = new order;
+
+/* One Page Checkout - BEGIN */
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $onePageCheckout->loadSessionVars();
+      $onePageCheckout->fixTaxes();
+      
+      /*
+       * This error report is due to the fact that we cannot duplicate some errors.
+       * please forward this email always if you recieve it
+       */
+      if ($order->customer['email_address'] == '' || $order->customer['firstname'] == '' || $order->billing['firstname'] == '' || $order->delivery['firstname'] == ''){
+        ob_start();
+        echo 'ONEPAGE::' . serialize($onepage);
+        echo 'SESSION::' . serialize($_SESSION);
+        echo 'SERVER::' . serialize($_SERVER);
+        echo 'ORDER::' . serialize($order);
+        $content = ob_get_contents();
+        mail(ONEPAGE_DEBUG_EMAIL_ADDRESS, 'Order Error: Please forward to I.T. Web Experts', $content);
+        unset($content);
+        ob_end_clean();
+      }
+  }
+/* One Page Checkout - END */
 
 // Stock Check
   $any_out_of_stock = false;
@@ -349,15 +390,33 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
     $email_order .= strip_tags($order_totals[$i]['title']) . ' ' . strip_tags($order_totals[$i]['text']) . "\n";
   }
 
+/* One Page Checkout - BEGIN */
+  $sendToFormatted = tep_address_label($customer_id, $sendto, 0, '', "\n");
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $sendToFormatted = $onePageCheckout->getAddressFormatted('sendto');
+  }
+  
+  $billToFormatted = tep_address_label($customer_id, $billto, 0, '', "\n");
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $billToFormatted = $onePageCheckout->getAddressFormatted('billto');
+  }
+/* One Page Checkout - END */
+
   if ($order->content_type != 'virtual') {
     $email_order .= "\n" . EMAIL_TEXT_DELIVERY_ADDRESS . "\n" . 
                     EMAIL_SEPARATOR . "\n" .
-                    tep_address_label($customer_id, $sendto, 0, '', "\n") . "\n";
+		    /* One Page Checkout - Begin */
+                    //tep_address_label($customer_id, $sendto, 0, '', "\n") . "\n";
+		    $sendToFormatted . "\n";
+		    /* One Page Checkout - End */
   }
 
   $email_order .= "\n" . EMAIL_TEXT_BILLING_ADDRESS . "\n" .
                   EMAIL_SEPARATOR . "\n" .
-                  tep_address_label($customer_id, $billto, 0, '', "\n") . "\n\n";
+		  /* One Page Checkout - Begin */
+                  //tep_address_label($customer_id, $billto, 0, '', "\n") . "\n\n";
+		  $billToFormatted . "\n";
+		  /* One Page Checkout - End */
   if (is_object($$payment)) {
     $email_order .= EMAIL_TEXT_PAYMENT_METHOD . "\n" . 
                     EMAIL_SEPARATOR . "\n";
@@ -384,6 +443,12 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
   $payment_modules->after_process();
 
   $cart->reset(true);
+
+/* One Page Checkout - BEGIN */
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $onepage['info']['order_id'] = $insert_id;
+  }
+/* One Page Checkout - END */
 
 // unregister session variables used during checkout
   tep_session_unregister('sendto');

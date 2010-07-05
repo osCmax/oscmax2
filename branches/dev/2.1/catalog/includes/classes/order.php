@@ -240,6 +240,12 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
                           'cc_expires' => '',
                           'shipping_method' => $shipping['title'],
                           'shipping_cost' => $shipping['cost'],
+/* One Page Checkout - BEGIN */  
+  // tax total fix start
+                          'shipping_tax' => $shipping['shipping_tax_total'],
+  // tax total fix end
+/* One Page Checkout - END */ 			  
+			  
                           'subtotal' => 0,
                           'tax' => 0,
                           'tax_groups' => array(),
@@ -376,8 +382,13 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
           if (isset($this->info['tax_groups']["$products_tax_description"])) {
             $this->info['tax_groups']["$products_tax_description"] += ($products_tax / 100) * $shown_price;
           } else {
-            $this->info['tax_groups']["$products_tax_description"] = ($products_tax / 100) * $shown_price;
-          }
+	    /* One Page Checkout - BEGIN */  
+            //$this->info['tax_groups']["$products_tax_description"] = ($products_tax / 100) * $shown_price;
+            // tax total fix start
+            $this->info['tax_groups']["$products_tax_description"] = ($products_tax / 100) * $shown_price + $this->info['shipping_tax'];
+	    // tax total fix end
+	    /* One Page Checkout - END */
+	  }
         }
 
         $index++;

@@ -7,6 +7,7 @@
      $customer_group_id = $sppc_customer_group_id;
     }
   // EOF Separate Pricing Per Customer
+ 
 ?>>
 
 <head>
@@ -33,17 +34,23 @@
   if (isset($javascript) && file_exists(DIR_WS_JAVASCRIPT . basename($javascript))) { require(DIR_WS_JAVASCRIPT . basename($javascript)); }
 
   }
+  $page =  $_SERVER["SCRIPT_NAME"];
+  $break = Explode('/', $page);
+  $pfile = $break[count($break) - 1];
+  //echo $pfile; //debug code - displays current page name.
   
-  if (DISPLAY_SLIDESHOW == true) {
-	echo '<script src="http://www.google.com/jsapi"></script>';
+  if ($pfile == 'index.php') {
+    if (DISPLAY_SLIDESHOW == true) {
+     
+    echo '<script src="http://www.google.com/jsapi"></script>';
     echo '<script>' . "\n";
-	echo '// Load jQuery' . "\n";
+    echo '// Load jQuery' . "\n";
     echo 'google.load("jquery", "1.4.0");' . "\n";
     echo '</script>' . "\n"; 
- 	echo '<script type="text/javascript" src="' . DIR_WS_JAVASCRIPT . 'showcase.2.0.js"></script>';
+    echo '<script type="text/javascript" src="' . DIR_WS_JAVASCRIPT . 'showcase.2.0.js"></script>';
 	require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
+    }
   }
-  
   if (DISPLAY_DHTML_MENU == 'CoolMenu') {
     echo '<!-- coolMenu //-->';
  	echo '<SCRIPT LANGUAGE="JavaScript1.2" SRC="includes/coolMenu.js"></SCRIPT>';
@@ -73,6 +80,8 @@ echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet',
 if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common_top.php')); // BTSv1.5
 // BOF Added: Down for Maintenance Hide header if not to show
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false') {
+
+ 
 ?>
 
 <!-- Store width controller -->
@@ -118,13 +127,31 @@ if (LEFT_COLUMN_SHOW != 'false') { ?>
       <table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
 <?php
 // Hide Left Column if not to show
+// BOF One Page Checkout custom column code
+
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
-?>
-<!-- left_navigation //-->
-<?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
-<!-- left_navigation_eof //-->
-<?php
-}
+              if ($pfile != 'checkout.php') {
+		     ?>
+		    <td class="leftcol" width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+		    <!-- left_navigation //-->
+		    <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
+		    <!-- left_navigation_eof //-->
+		    </table></td>
+		<?php
+	        } else {  
+	               if (ONEPAGE_SHOW_OSC_COLUMNS == 'true') {  
+			?>
+			    <td class="leftcol" width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+			    <!-- left_navigation //-->
+			    <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
+			    <!-- left_navigation_eof //-->
+			    </table></td>
+			<?php
+                        } 
+	       
+	          }
+     }	
+// EOF One Page Checkout custom column code     	  
 ?>
       </table>
     </td>
@@ -144,14 +171,40 @@ if (RIGHT_COLUMN_SHOW != 'false') { ?>
       <table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
 <?php
 // Hide column_left.php if not to show
+// BOF One Page Checkout custom column code
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
-?>								
-<!-- right_navigation //-->
-  <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
-<!-- right_navigation_eof //-->
-<?php
-}
-?>  		 
+              if ($pfile != 'checkout.php') {
+		     ?>
+		    <td class="rightcol" width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+		    <!-- right_navigation //-->
+		    <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
+		    <!-- right_navigation_eof //-->
+		    </table></td>
+		<?php
+	        } else {  
+	               if (ONEPAGE_SHOW_OSC_COLUMNS == 'true') {  
+			?>
+			    <td class="rightcol" width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+			    <!-- right_navigation //-->
+			    <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
+			    <!-- right_navigation_eof //-->
+			    </table></td>
+			<?php
+                        }  elseif (ONEPAGE_SHOW_CUSTOM_COLUMN == 'true'){
+			    ?>  
+				<td width="200px" valign="top"><table border="0" width="200px" cellspacing="0" cellpadding="2">
+			    <!-- right_navigation //-->
+			       <?php require(DIR_WS_INCLUDES . 'checkout/column_right.php'); ?>
+			    <!-- right_navigation_eof //-->
+				</table></td>
+     
+			<?php
+		       }
+     
+	        }
+      }
+// EOF One Page Checkout custom column code      		  
+?>  
       </table>
     </td>
 <?php

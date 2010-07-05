@@ -609,7 +609,9 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
     function before_process() {
       global $cart, $order_total_modules; //mg - added $order_total_modules as fix for Bugfix 157
       //global $cart;
-	  
+/* One Page Checkout - BEGIN */
+      global $$payment, $onePageCheckout;
+/* One Page Checkout - END */	  
 	   $order_total_modules->apply_credit();//ICW ADDED FOR CREDIT CLASS SYSTEM
 
       $cart->reset(true);

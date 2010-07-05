@@ -201,10 +201,10 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
         reset($this->modules);
         while (list(, $value) = each($this->modules)) {
           $class = substr($value, 0, strrpos($value, '.'));
-          if ($GLOBALS[$class]->enabled) {
+        //OPC  //if ($GLOBALS[$class]->enabled) {
             $selection = $GLOBALS[$class]->selection();
             if (is_array($selection)) $selection_array[] = $selection;
-          }
+       //OPC   //}
         }
       }
 

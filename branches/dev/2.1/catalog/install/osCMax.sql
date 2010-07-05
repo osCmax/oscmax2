@@ -2120,6 +2120,30 @@ INSERT INTO configuration VALUES (3067, 'Categories separator thickness', 'CATEG
 INSERT INTO configuration VALUES (3068, 'Categories separator line color', 'CATEGORIES_LINE_COLOR', 'DDDDDD', 'Sets the color of the lines.<br><br>Enter a six digit hex number or click Pick Color to select one from a pallet.<br>', 99, 86, '2005-10-18 11:10:33', '0000-00-00 00:00:00', NULL, 'tep_cfg_select_color(');
 #Open Featurd Sets End
 
+#One Page Checkout Begin
+INSERT INTO configuration VALUES(3069, 'Enable One Page Checkout', 'ONEPAGE_CHECKOUT_ENABLED', 'True', 'Enable one page checkout?', 7575, 1, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES(3070, 'Default Address Country', 'ONEPAGE_DEFAULT_COUNTRY', '223', 'Default country for new address and for checking out without account', 7575, 2, NULL, '2010-07-03 11:43:38', 'tep_get_country_name', 'tep_cfg_pull_down_country_list(');
+INSERT INTO configuration VALUES(3071, 'Account Creation', 'ONEPAGE_ACCOUNT_CREATE', 'create', '<b>required</b> - Password is required<br><b>optional</b> - Password is optional, no account created if empty<br><b>create</b> - Password is optional, account created with random password', 7575, 3, '2009-08-27 18:27:14', '2009-04-09 16:00:09', NULL, 'tep_cfg_select_option(array(''required'', ''optional'', ''create''),');
+INSERT INTO configuration VALUES(3072, 'Show Custom Right Column', 'ONEPAGE_SHOW_CUSTOM_COLUMN', 'true', 'Show custom right column', 7575, 4, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'',''false''),');
+INSERT INTO configuration VALUES(3073, 'Require Login', 'ONEPAGE_LOGIN_REQUIRED', 'false', 'Require customer to be logged in to proceed through checkout', 7575, 5, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES(3074, 'Show Oscommerce Columns', 'ONEPAGE_SHOW_OSC_COLUMNS', 'true', 'Show default oscommerce left and right columns', 7575, 6, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'',''false''),');
+INSERT INTO configuration VALUES(3075, 'Custom Colum Box #1 Heading', 'ONEPAGE_BOX_ONE_HEADING', '100% Private Secure SSL Transaction', 'Custom Colum Box #1 Heading', 7575, 15, NULL, '2010-07-03 11:43:38', NULL, NULL);
+INSERT INTO configuration VALUES(3076, 'Custom Colum Box #1 Content', 'ONEPAGE_BOX_ONE_CONTENT', 'Your shopping cart transaction is taking place on an encrypted SSL webpage, meaning it is secure and safe. We respect all of your private information and none of it will be shared with anyone in anyway.', 'Custom Colum Box #1 Content', 7575, 16, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES(3077, 'Custom Colum Box #2 Heading', 'ONEPAGE_BOX_TWO_HEADING', 'Ordering Information', 'Custom Colum Box #2 Heading', 7575, 17, NULL, '2010-07-03 11:43:38', NULL, NULL);
+INSERT INTO configuration VALUES(3078, 'Custom Colum Box #2 Content', 'ONEPAGE_BOX_TWO_CONTENT', '<b>Processing Time</b><br>We will process your order as quickly as possible. Typical processing time for orders shipped ground is 1 – 2 days. For expedited shipping (2 day or overnight) we make every effort to ship the order the same day if ordered before 2pm.<br><br><b>Order Tracking</b><br>After your order is placed, you can login anytime 24/7 to view the status of your order. When your order is shipped, you will receive a shipment notification with a tracking number.', 'Custom Colum Box #2 Content', 7575, 18, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES(3079, 'Send Debug Emails To:', 'ONEPAGE_DEBUG_EMAIL_ADDRESS', 'set.me.to.valid@email.address', 'This will send the debug emails to the specified email address these emails are used for debugging', 7575, 19, NULL, '2010-07-03 11:43:38', NULL, NULL);
+INSERT INTO configuration VALUES(3080, 'Show Address in input Fields', 'ONEPAGE_CHECKOUT_SHOW_ADDRESS_INPUT_FIELDS', 'False', 'Show address for logged in customers in input fields instead of just showing text?', 7575, 20, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES(3081, 'Make loader message popup', 'ONEPAGE_CHECKOUT_LOADER_POPUP', 'True', 'Make loader message popup?', 7575, 21, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES(3082, 'Auto-show billing/shipping modules', 'ONEPAGE_AUTO_SHOW_BILLING_SHIPPING', 'True', 'Auto-show billing/shipping modules?', 7575, 33, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES(3083, 'Auto-show billing/shipping Default Country', 'ONEPAGE_AUTO_SHOW_DEFAULT_COUNTRY', '223', 'Default Country for auto-show billing/shipping address', 7575, 34, NULL, '2010-07-03 11:43:38', 'tep_get_country_name', 'tep_cfg_pull_down_country_list(');
+INSERT INTO configuration VALUES(3084, 'Auto-show billing/shipping Default State', 'ONEPAGE_AUTO_SHOW_DEFAULT_STATE', '12', 'Default State for auto-show billing/shipping address', 7575, 35, NULL, '2010-07-03 11:43:38', 'tep_cfg_get_zone_name', 'tep_cfg_pull_down_zone_list_one_page(');
+INSERT INTO configuration VALUES(3085, 'Auto-show billing/shipping Default zip code', 'ONEPAGE_AUTO_SHOW_DEFAULT_ZIP', '93401', 'Default zip code for auto-show billing/shipping address', 7575, 36, NULL, '2010-07-03 11:43:38', NULL, NULL);
+INSERT INTO configuration VALUES(3086, 'Telephone Required', 'ONEPAGE_TELEPHONE', 'False', 'Telephone will be a required field?', 7575, 37, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES(3087, 'Move zip/post code input boxes below state', 'ONEPAGE_ZIP_BELOW', 'False', 'Move zip/post code input boxes below state?', 7575, 38, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES(3088, 'Dont show shipping and handling address checkbox or ship methods if weight of products = 0', 'ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'false', '', 7575, 100, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES(3089, 'Addresses Layout', 'ONEPAGE_ADDR_LAYOUT', 'vertical', '', 7575, 1000, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''vertical'', ''horizontal''), ');
+#One Page Checkout End
+
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
 INSERT INTO configuration_group VALUES (3,'Maximum Values','The maximum values for functions / data',3,1);
@@ -2158,7 +2182,7 @@ INSERT INTO configuration_group VALUES (99,'Featured Sets', 'Configure featured 
 INSERT INTO configuration_group VALUES (201,'Template Setup', 'Template Settings', 201, 1);
 INSERT INTO configuration_group VALUES (202,'Page Modules', 'Page Module Settings', 202, 1);
 INSERT INTO configuration_group VALUES (203,'Notifications', 'Notifications', 203, 1);
-
+INSERT INTO configuration_group VALUES(7575, 'One Page Checkout', 'Settings for one page checkout', 16, 1);
 
 INSERT INTO `countries` VALUES(1, 'Afghanistan', 'AF', 'AFG', 1, 1);
 INSERT INTO `countries` VALUES(2, 'Albania', 'AL', 'ALB', 1, 1);

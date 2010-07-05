@@ -16,6 +16,13 @@ $Id: checkout_shipping.php 3 2006-05-27 04:59:07Z user $
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
+/* One Page Checkout - BEGIN */  
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      tep_redirect(tep_href_link(FILENAME_CHECKOUT,tep_get_all_get_params(array(tep_session_name())), 'SSL'));
+    
+  }
+/* One Page Checkout - END */
+  
   require('includes/classes/http_client.php');
 
 // BOF: MOD - Downloads Controller - Free Shipping

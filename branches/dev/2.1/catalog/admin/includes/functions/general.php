@@ -842,6 +842,12 @@ function tep_selected_file($filename) {
     return tep_draw_pull_down_menu('configuration_value', tep_get_country_zones(STORE_COUNTRY), $zone_id);
   }
 
+          /* One Page Checkout - BEGIN*/
+        function tep_cfg_pull_down_zone_list_one_page($zone_id) {
+    return tep_draw_pull_down_menu('configuration_value', tep_get_country_zones(ONEPAGE_AUTO_SHOW_DEFAULT_COUNTRY), $zone_id);
+  }
+          /* One Page Checkout - END*/
+
   function tep_cfg_pull_down_tax_classes($tax_class_id, $key = '') {
     $name = (($key) ? 'configuration[' . $key . ']' : 'configuration_value');
 

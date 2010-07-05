@@ -7,7 +7,10 @@
 <?php
   //PWA BOF
   if (!tep_session_is_registered('customer_is_guest')){
-  //PWA BOF
+  //PWA EOF
+/* One Page Checkout - BEGIN */
+  if (tep_session_is_registered('customers_id')){
+/* One Page Checkout - END */
   if ($global['global_product_notifications'] != '1') {
     echo TEXT_NOTIFY_PRODUCTS . '<br><p class="productsNotifications">';
 
@@ -23,9 +26,12 @@
   } else {
     echo TEXT_SEE_ORDERS . '<br><br>' . TEXT_CONTACT_STORE_OWNER;
     }
+/* One Page Checkout - BEGIN */
+  }
+/* One Page Checkout - END */    
   //PWA BOF
   }
-  //PWA BOF
+  //PWA EOF
 ?>
             <h3><?php echo TEXT_THANKS_FOR_SHOPPING; ?></h3></td>
           </tr>

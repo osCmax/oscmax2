@@ -16,6 +16,12 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
+/* One Page Checkout - BEGIN */  
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      tep_redirect(tep_href_link(FILENAME_CHECKOUT,tep_get_all_get_params(array(tep_session_name())), 'SSL'));
+    
+  }
+/* One Page Checkout - END */  
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   if (tep_session_is_registered('cot_gv')) tep_session_unregister('cot_gv');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution

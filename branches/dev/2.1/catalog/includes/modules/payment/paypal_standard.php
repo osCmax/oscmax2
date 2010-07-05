@@ -68,6 +68,9 @@
 
     function selection() {
       global $cart_PayPal_Standard_ID;
+/* One Page Checkout - BEGIN */
+      global $onePageCheckout;
+/* One Page Checkout - END */
 
       if (tep_session_is_registered('cart_PayPal_Standard_ID')) {
         $order_id = substr($cart_PayPal_Standard_ID, strpos($cart_PayPal_Standard_ID, '-')+1);
@@ -398,7 +401,7 @@
 
     function before_process() {
       global $customer_id, $order, $order_totals, $sendto, $billto, $languages_id, $payment, $currencies, $cart, $cart_PayPal_Standard_ID, $order_total_modules;
-      global $$payment;
+      global $$payment, $onePageCheckout;
 
       $order_id = substr($cart_PayPal_Standard_ID, strpos($cart_PayPal_Standard_ID, '-')+1);
 
@@ -592,6 +595,19 @@
       for ($i=0, $n=sizeof($order_totals); $i<$n; $i++) {
         $email_order .= strip_tags($order_totals[$i]['title']) . ' ' . strip_tags($order_totals[$i]['text']) . "\n";
       }
+	  
+	  /* One Page Checkout - BEGIN */
+  $sendToFormatted = tep_address_label($customer_id, $sendto, 0, '', "\n");
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $sendToFormatted = $onePageCheckout->getAddressFormatted('sendto');
+  }
+  
+  $billToFormatted = tep_address_label($customer_id, $billto, 0, '', "\n");
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $billToFormatted = $onePageCheckout->getAddressFormatted('billto');
+  }
+/* One Page Checkout - END */
+  
 
       if ($order->content_type != 'virtual') {
         $email_order .= "\n" . EMAIL_TEXT_DELIVERY_ADDRESS . "\n" .

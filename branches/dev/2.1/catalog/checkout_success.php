@@ -16,11 +16,29 @@ $Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
-
+/* One Page Checkout - BEGIN */
 // if the customer is not logged on, redirect them to the shopping cart page
-  if (!tep_session_is_registered('customer_id')) {
-    tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+//  if (!tep_session_is_registered('customer_id')) {
+//    tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+//  }
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      if (!tep_session_is_registered('onepage')){
+          if (!tep_session_is_registered('customer_id')) {
+              tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+          }
+      }else{
+          require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT);
+          require_once('includes/functions/password_funcs.php');
+          require('includes/classes/onepage_checkout.php');
+          $onePageCheckout = new osC_onePageCheckout();
+          $onePageCheckout->createCustomerAccount();
+      }
+  }else{
+      if (!tep_session_is_registered('customer_id')) {
+          tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+      }
   }
+/* One Page Checkout - END */
 
   if (isset($_GET['action']) && ($_GET['action'] == 'update')) {
     $notify_string = '';

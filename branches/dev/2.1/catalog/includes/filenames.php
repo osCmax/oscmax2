@@ -81,6 +81,9 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('CONTENT_WISHLIST_HELP', 'wishlist_help');
   define('CONTENT_WISHLIST_PUBLIC', 'wishlist_public');
   define('CONTENT_WISHLIST_SEND', 'wishlist_email');
+  
+ // One Page Checkout
+  define('CONTENT_ONE_PAGE_CHECKOUT', 'checkout');   
 
 // LINE ADDED: WYSIWYG HTML Area
   define('FILENAME_DEFINE_MAINPAGE', 'mainpage.php');
@@ -110,6 +113,9 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('FILENAME_ARTICLES_PXSELL', 'articles_pxsell.php');
   define('FILENAME_NEW_ARTICLES', 'new_articles.php');
   define('FILENAME_CATALOG_PRODUCTS_WITH_IMAGES', 'catalog_products_with_images.php'); // CATALOG_PRODUCTS_WITH_IMAGES_mod
+/* One Page Checkout - BEGIN */  
+  define('FILENAME_CHECKOUT', 'checkout.php');
+/* One Page Checkout - END */ 
   define('FILENAME_CHECKOUT_CONFIRMATION', CONTENT_CHECKOUT_CONFIRMATION . '.php');
   define('FILENAME_CHECKOUT_PAYMENT', CONTENT_CHECKOUT_PAYMENT . '.php');
   define('FILENAME_CHECKOUT_PAYMENT_ADDRESS', CONTENT_CHECKOUT_PAYMENT_ADDRESS . '.php');

@@ -81,7 +81,7 @@ define('ERROR_LABEL', 'Field label for active language %s must not be blank!');
 define('WARNING_TRUNCATE', 'WARNING: Data will be lost if you reduce the field length to this size! Currently %d product descriptions contain values that are longer than this size! To avoid data loss this field would need to be at least %d characters long. If you really want to reduce the size of this field and cause data to be truncated then click the Save button to confirm the change.');
 define('WARNING_LANGUAGE_IN_USE', 'WARNING: This field currently has %d products with values set for the language %s! If you really want to deactivate the field for this language then click on the Save button to confirm the change. The currently entered information will not be deleted but it will also not be viewable or changeable.');
 define('HEADING_DELETE', 'Delete Extra Product Field #');
-define('TEXT_FIELD_DATA', '<b>Language:</b> %s <b>Label:</b> %s <b>Used By:</b> %d products');
+define('TEXT_FIELD_DATA', '&nbsp;<b>Label:</b> %s <b>Used By:</b> %d products');
 define('TEXT_ARE_SURE', 'Are you sure you want to delete this field?');
 define('TEXT_VALUES_GONE', ' All values stored in the value lists for this field will also be deleted!');
 define('TEXT_LINKS_DESTROYED', ' This field is linked to another field and all value links between this field and the other will be destroyed if you delete this field!');

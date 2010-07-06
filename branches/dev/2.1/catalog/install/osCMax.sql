@@ -1426,6 +1426,63 @@ CREATE TABLE IF NOT EXISTS slideshow (
   PRIMARY KEY (slideshow_id)
 );
 
+DROP TABLE IF EXISTS extra_product_fields;
+CREATE TABLE extra_product_fields (
+  epf_id int unsigned NOT NULL auto_increment,
+  epf_order int NOT NULL default 0,
+  epf_status tinyint(1) NOT NULL default 1,
+  epf_uses_value_list tinyint(1) not null default 0,
+  epf_advanced_search tinyint(1) not null default 1,
+  epf_show_in_listing tinyint(1) not null default 0,
+  epf_size tinyint unsigned not null default 64,
+  epf_use_as_meta_keyword tinyint(1) not null default 0,
+  epf_use_to_restrict_listings tinyint(1) not null default 0,
+  epf_show_parent_chain tinyint(1) not null default 0,
+  epf_quick_search tinyint(1) not null default 0,
+  epf_multi_select tinyint(1) not null default 0,
+  epf_checked_entry tinyint(1) not null default 0,
+  epf_value_display_type tinyint(1) not null default 0,
+  epf_num_columns tinyint unsigned not null default 1,
+  epf_has_linked_field tinyint(1) not null default 0,
+  epf_links_to int unsigned not null default 0,
+  epf_textarea tinyint(1) not null default 0,
+  epf_show_in_admin tinyint(1) not null default 1,
+  PRIMARY KEY (epf_id),
+  KEY IDX_ORDER (epf_order)
+);
+
+DROP TABLE IF EXISTS extra_field_labels;
+CREATE TABLE extra_field_labels (
+  epf_id int unsigned NOT NULL,
+  languages_id int NOT NULL,
+  epf_label varchar(64),
+  epf_active_for_language tinyint(1) not null default 1,
+  PRIMARY KEY (epf_id, languages_id)
+);
+
+DROP TABLE IF EXISTS extra_field_values;
+CREATE TABLE extra_field_values (
+  value_id int unsigned not null auto_increment,
+  epf_id int unsigned not null,
+  languages_id int not null,
+  parent_id int unsigned not null default 0,
+  sort_order int not null default 0,
+  epf_value varchar(64),
+  value_depends_on int unsigned not null default 0,
+  value_image varchar(255) default null,
+  primary key (value_id),
+  key IDX_EPF (epf_id, languages_id),
+  key IDX_LINK (value_depends_on)
+);
+
+DROP TABLE IF EXISTS extra_value_exclude;
+CREATE TABLE extra_value_exclude (
+  value_id1 int unsigned not null,
+  value_id2 int unsigned not null,
+  primary key (value_id1, value_id2)
+);
+
+
 
 # data
 
@@ -1586,6 +1643,9 @@ INSERT INTO admin_files VALUES (153,'premade_comments.php', 0, 7, '1');
 INSERT INTO admin_files VALUES (154,'page_modules_configuration.php', 0, 2, '1');
 INSERT INTO admin_files VALUES (155,'stats_wishlist.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (156,'slideshow.php', 0, 2, '1');
+INSERT INTO admin_files VALUES (157,'extra_fields.php', 0, 3, '1');
+INSERT INTO admin_files VALUES (158,'extra_values.php', 0, 3, '1');
+
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
 INSERT INTO admin_groups VALUES (2,'Customer Service');

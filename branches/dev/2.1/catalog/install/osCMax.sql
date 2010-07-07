@@ -2072,7 +2072,6 @@ INSERT INTO configuration VALUES (2615, 'Check for Javscript enabled?', 'JAVASCR
 INSERT INTO configuration VALUES (2616, 'Check for Internet Explorer 6?', 'IE6_CHECK', 'false', 'Do you want to check if the customer is using IE6 and ask them to upgrade their browser?', 203, 3, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
 
 #Slideshow Settings by PGM
-INSERT INTO configuration VALUES (2641, 'Enable Slideshow?', 'DISPLAY_SLIDESHOW', 'true', 'Do you want to enable the slideshow?', 204, 0, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
 INSERT INTO configuration VALUES (2617, 'Set Slideshow width', 'SLIDESHOW_WIDTH', '650', 'What width do you want your slideshow? (default: 650)', 204, 1, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2618, 'Set Slideshow height', 'SLIDESHOW_HEIGHT', '250', 'What height do you want your slideshow? (default: 250)', 204, 2, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2619, 'How do you want the slide to transition?', 'SLIDESHOW_TRANSITION', 'fade', 'What method of transistion do you want to use?', 204, 3, now(), now(), NULL, 'tep_cfg_select_option(array(\'fade\',\'horizontal-slider\',\'vertical-slider\'),'); 
@@ -2097,8 +2096,11 @@ INSERT INTO configuration VALUES (2637, 'Thumbnail text font size', 'SLIDESHOW_T
 INSERT INTO configuration VALUES (2638, 'Active Thumbnail border color', 'SLIDESHOW_THUMB_ACTIVE_BORDER_COLOR', '#333333', 'What color would you like the border of the active thumbnail to be?', 204, 22, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2639, 'Active Thumbnail background color', 'SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', '#dddddd', 'What color would you like the background of the active thumbnail to be?', 204, 23, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2640, 'Active Thumbnail font color', 'SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', '#000000', 'What color would you like the font of the active thumbnail to be?', 204, 24, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2641, 'Enable Slideshow?', 'DISPLAY_SLIDESHOW', 'true', 'Do you want to enable the slideshow?', 204, 0, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+#Slideshow Settings by PGM
 
 INSERT INTO configuration VALUES (2642, 'Do you want to use an AJAX search suggest on the Search Infobox?', 'AJAX_SEARCH_SUGGEST', 'false', 'Would you like to use an AJAX Search Suggest?', 201, 25, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2643, 'Use UK or US English Language','ENGLISH_SWITCH','US','Would you like to setup your store using UK or US English. (Date format, Address Titles, DoB, etc.)','1','10',NULL,now(),NULL,'tep_cfg_select_option(array(\'US\', \'UK\'),');
 
 
 

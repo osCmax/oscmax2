@@ -42,15 +42,56 @@ define('TEXT_DISPLAY_NUMBER_OF_MEMBERS', 'Displaying <b>%d</b> to <b>%d</b> (of 
 // on RedHat6.0 I used 'en_US'
 // on FreeBSD 4.0 I use 'en_US.ISO_8859-1'
 // this may not work under win32 environments..
+
+////
+if (ENGLISH_SWITCH == 'UK') { // Use UK format for store
+
+setlocale(LC_TIME, 'en_UK.ISO_8859-1');
+define('DATE_FORMAT_SHORT', '%d/%m/%Y');  // this is used for strftime()
+define('DATE_FORMAT_LONG', '%A %d %B, %Y'); // this is used for strftime()
+define('DATE_FORMAT', 'd/m/Y'); // this is used for date()
+define('PHP_DATE_TIME_FORMAT', 'd/m/Y H:i:s'); // this is used for date()
+define('DATE_TIME_FORMAT', DATE_FORMAT_SHORT . ' %H:%M:%S');
+
+////
+// Return date in raw format
+// $date should be in format dd/mm/yyyy
+// raw date is in format YYYYMMDD, or DDMMYYYY
+function tep_date_raw($date, $reverse = false) {
+  if ($reverse) {
+    return substr($date, 0, 2) . substr($date, 3, 2) . substr($date, 6, 4);
+  } else {
+    return substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
+  }
+}
+
+// text for date of birth example
+define('DOB_FORMAT_STRING', 'dd/mm/yyyy');
+
+define('JS_STATE', '* The \'County\' entry must be selected.\n');
+define('JS_DOB', '* The \'Date of Birth\' entry must be in the format: dd/mm/yyyy.\n');
+define('JS_ZONE', '* The \'County\' entry must be selected from the list for this country.');
+define('JS_POST_CODE', '* The \'Post Code\' entry must have at least ' . ENTRY_POSTCODE_MIN_LENGTH . ' characters.\n');
+
+define('ENTRY_SUBURB', 'Address Line 2:');
+define('ENTRY_SUBURB_ERROR', '');
+define('ENTRY_POST_CODE', 'Post Code:');
+define('ENTRY_POST_CODE_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_POSTCODE_MIN_LENGTH . ' chars</span>');
+define('ENTRY_DATE_OF_BIRTH_ERROR', '&nbsp;<span class="errorText">(eg. 21/05/1970)</span>');
+define('ENTRY_DATE_OF_BIRTH_TEXT', '&nbsp;<small>(eg. 21/05/1970) <font color="#AABBDD">required</font></small>');
+define('ENTRY_STATE', 'County:');
+define('ENTRY_STATE_ERROR', '&nbsp;<span class="errorText">required</span>');
+
+////
+} else { // Use US Format in Admin
+////
+
 setlocale(LC_TIME, 'en_US.ISO_8859-1');
 define('DATE_FORMAT_SHORT', '%m/%d/%Y');  // this is used for strftime()
 define('DATE_FORMAT_LONG', '%A %d %B, %Y'); // this is used for strftime()
 define('DATE_FORMAT', 'm/d/Y'); // this is used for date()
 define('PHP_DATE_TIME_FORMAT', 'm/d/Y H:i:s'); // this is used for date()
 define('DATE_TIME_FORMAT', DATE_FORMAT_SHORT . ' %H:%M:%S');
-
-// LINE ADDED: MOD -Separate Pricing per Customer
-define('ENTRY_CUSTOMERS_GROUP_NAME', 'Customer Group:');
 
 ////
 // Return date in raw format
@@ -64,8 +105,31 @@ function tep_date_raw($date, $reverse = false) {
   }
 }
 
+// text for date of birth example
+define('DOB_FORMAT_STRING', 'mm/dd/yyyy');
+
+define('JS_STATE', '* The \'State\' entry must be selected.\n');
+define('JS_DOB', '* The \'Date of Birth\' entry must be in the format: mm/dd/yyyy.\n');
+define('JS_ZONE', '* The \'State\' entry must be selected from the list for this country.');
+define('JS_POST_CODE', '* The \'Zip Code\' entry must have at least ' . ENTRY_POSTCODE_MIN_LENGTH . ' characters.\n');
+
+define('ENTRY_SUBURB', 'Suburb:');
+define('ENTRY_SUBURB_ERROR', '');
+define('ENTRY_POST_CODE', 'Zip Code:');
+define('ENTRY_POST_CODE_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_POSTCODE_MIN_LENGTH . ' chars</span>');
+define('ENTRY_DATE_OF_BIRTH_ERROR', '&nbsp;<span class="errorText">(eg. 05/21/1970)</span>');
+define('ENTRY_DATE_OF_BIRTH_TEXT', '&nbsp;<small>(eg. 05/21/1970) <font color="#AABBDD">required</font></small>');
+define('ENTRY_STATE', 'State:');
+define('ENTRY_STATE_ERROR', '&nbsp;<span class="errorText">required</span>');
+
+} //End Language if
+////
+
 // Global entries for the <html> tag
 define('HTML_PARAMS','dir="ltr" lang="en"');
+
+// LINE ADDED: MOD -Separate Pricing per Customer
+define('ENTRY_CUSTOMERS_GROUP_NAME', 'Customer Group:');
 
 // charset for web pages and emails
 define('CHARSET', 'iso-8859-1');
@@ -95,9 +159,6 @@ define('HEADER_TITLE_AABOX', 'osCMax');
 // text for gender
 define('MALE', 'Male');
 define('FEMALE', 'Female');
-
-// text for date of birth example
-define('DOB_FORMAT_STRING', 'mm/dd/yyyy');
 
 // configuration box text in includes/boxes/configuration.php
 define('BOX_HEADING_CONFIGURATION', 'Configuration');
@@ -245,14 +306,10 @@ define('JS_SPECIALS_PRODUCTS_PRICE', '* A new price for this product needs to be
 define('JS_GENDER', '* The \'Gender\' value must be chosen.\n');
 define('JS_FIRST_NAME', '* The \'First Name\' entry must have at least ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' characters.\n');
 define('JS_LAST_NAME', '* The \'Last Name\' entry must have at least ' . ENTRY_LAST_NAME_MIN_LENGTH . ' characters.\n');
-define('JS_DOB', '* The \'Date of Birth\' entry must be in the format: xx/xx/xxxx (month/date/year).\n');
 define('JS_EMAIL_ADDRESS', '* The \'E-Mail Address\' entry must have at least ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' characters.\n');
 define('JS_ADDRESS', '* The \'Street Address\' entry must have at least ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' characters.\n');
-define('JS_POST_CODE', '* The \'Post Code\' entry must have at least ' . ENTRY_POSTCODE_MIN_LENGTH . ' characters.\n');
 define('JS_CITY', '* The \'City\' entry must have at least ' . ENTRY_CITY_MIN_LENGTH . ' characters.\n');
-define('JS_STATE', '* The \'State\' entry must be selected.\n');
 define('JS_STATE_SELECT', '-- Select Above --');
-define('JS_ZONE', '* The \'State\' entry must be selected from the list for this country.');
 define('JS_COUNTRY', '* The \'Country\' value must be chosen.\n');
 define('JS_TELEPHONE', '* The \'Telephone Number\' entry must have at least ' . ENTRY_TELEPHONE_MIN_LENGTH . ' characters.\n');
 define('JS_PASSWORD', '* The \'Password\' and \'Confirmation\' entries must match and have at least ' . ENTRY_PASSWORD_MIN_LENGTH . ' characters.\n');
@@ -276,8 +333,6 @@ define('ENTRY_LAST_NAME', 'Last Name:');
 define('ENTRY_LAST_NAME_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_LAST_NAME_MIN_LENGTH . ' chars</span>');
 define('ENTRY_LAST_NAME_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
 define('ENTRY_DATE_OF_BIRTH', 'Date of Birth:');
-define('ENTRY_DATE_OF_BIRTH_ERROR', '&nbsp;<span class="errorText">(eg. 05/21/1970)</span>');
-define('ENTRY_DATE_OF_BIRTH_TEXT', '&nbsp;<small>(eg. 05/21/1970) <font color="#AABBDD">required</font></small>');
 define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
 define('ENTRY_EMAIL_ADDRESS_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' chars</span>');
 define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', '&nbsp;<span class="errorText">The email address doesn\'t appear to be valid!</span>');
@@ -286,14 +341,8 @@ define('ENTRY_COMPANY', 'Company name:');
 define('ENTRY_COMPANY_ERROR', '');
 define('ENTRY_STREET_ADDRESS', 'Street Address:');
 define('ENTRY_STREET_ADDRESS_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' chars</span>');
-define('ENTRY_SUBURB', 'Suburb:');
-define('ENTRY_SUBURB_ERROR', '');
-define('ENTRY_POST_CODE', 'Post Code:');
-define('ENTRY_POST_CODE_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_POSTCODE_MIN_LENGTH . ' chars</span>');
 define('ENTRY_CITY', 'City:');
 define('ENTRY_CITY_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_CITY_MIN_LENGTH . ' chars</span>');
-define('ENTRY_STATE', 'State:');
-define('ENTRY_STATE_ERROR', '&nbsp;<span class="errorText">required</span>');
 define('ENTRY_COUNTRY', 'Country:');
 define('ENTRY_COUNTRY_ERROR', '');
 define('ENTRY_TELEPHONE_NUMBER', 'Telephone Number:');

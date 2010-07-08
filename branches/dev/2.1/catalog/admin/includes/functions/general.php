@@ -1480,6 +1480,45 @@ function tep_selected_file($filename) {
   }
 
 ////
+// Round up function for non whole numbers by GREG DEETH
+// The value for the precision variable determines how many digits after the decimal and rounds the last digit up to the next value
+// Precision = 0 -> xx.xxxx = x+
+// Precision = 1 -> xx.xxxx = xx.+
+// Precision = 2 -> xx.xxxx = xx.x+
+  function tep_round_up($number, $precision) {
+    $number_whole = '';
+    $num_left_dec = 0;
+    $num_right_dec = 0;
+    $num_digits = strlen($number);
+    $number_out = '';
+    $i = 0;
+    while ($i + 1 <= strlen($number))
+    {
+        $current_digit = substr($number, $i, ($i + 1) - $num_digits);
+        if ($current_digit == '.') {
+            $i = $num_digits + 1;
+            $num_left_dec = strlen($number_whole);
+            $num_right_dec = ($num_left_dec + 1) - $num_digits;
+        } else {
+            $number_whole = $number_whole . $current_digit;
+            $i = $i + 1;
+        }
+    }
+    if ($num_digits > 3 && $precision < ($num_digits - $num_left_dec - 1) && $precision >= 0) {
+        $i = $precision;
+        $addable = 1;
+        while ($i > 0) {
+            $addable = $addable * .1;
+            $i = $i - 1;
+        } 
+        $number_out = substr($number, 0, $num_right_dec + $precision) + $addable;
+    } else {
+        $number_out = $number;
+    }
+    return $number_out;
+  }
+
+////
 // Add tax to a products price
   function tep_add_tax($price, $tax, $override = false) {
     if ( ( (DISPLAY_PRICE_WITH_TAX == 'true') || ($override == true) ) && ($tax > 0) ) {

@@ -97,4 +97,7 @@ define('TABLE_WISHLIST_ATTRIBUTES', 'customers_wishlist_attributes');
 
 define('TABLE_PACKAGING', 'packaging');
 define('TABLE_UPS_BOXES_USED', 'ups_boxes_used');
+
+define('TABLE_PRODUCTS_OPTIONS_TYPES', 'products_options_types');
+define('TABLE_PRODUCTS_OPTIONS_DESCRIPTION', 'products_options_description');
 ?>

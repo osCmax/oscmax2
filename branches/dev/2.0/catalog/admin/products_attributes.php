@@ -27,6 +27,8 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
       case 'add_product_options':
         $products_options_id = tep_db_prepare_input($HTTP_POST_VARS['products_options_id']);
         $option_name_array = $HTTP_POST_VARS['option_name'];
+		$option_type = $HTTP_POST_VARS['option_type'];	//clr 030714 update to add option type to products_option
+		$option_length = $HTTP_POST_VARS['option_length'];	//clr 030714 update to add option length to products_option
 
         for ($i=0, $n=sizeof($languages); $i<$n; $i ++) {
           $option_name = tep_db_prepare_input($option_name_array[$languages[$i]['id']]);
@@ -34,6 +36,15 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
           $track_stock=isset($HTTP_POST_VARS['track_stock'])?1:0;
           tep_db_query("insert into " . TABLE_PRODUCTS_OPTIONS . " (products_options_id, products_options_name, language_id,products_options_track_stock) values ('" . (int)$products_options_id . "', '" . tep_db_input($option_name) . "', '" . (int)$languages[$i]['id'] . "', '" . (int)$track_stock . "')");
 //EOF: MOD - QT Pro
+// iii 030811 added:  For TEXT and FILE option types, automatically add 
+// PRODUCTS_OPTIONS_VALUE_TEXT to the TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS
+        switch ($option_type) {
+          case PRODUCTS_OPTIONS_TYPE_TEXT:
+          case PRODUCTS_OPTIONS_TYPE_FILE:
+            tep_db_query("insert into " . TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS . " (products_options_values_id, products_options_id) values ('" . PRODUCTS_OPTIONS_VALUES_TEXT_ID .  "', '" .  (int)$products_options_id .  "')");
+            break;
+        }
+// iii 030811 added:  END
         }
         tep_redirect(tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info));
         break;
@@ -53,6 +64,12 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
         tep_redirect(tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info));
         break;
       case 'add_product_attributes':
+// iii 030811 added:  For TEXT and FILE option types, ignore option value 
+// entered by administrator and use PRODUCTS_OPTIONS_VALUES_TEXT instead.
+        $products_options_query = tep_db_query("select products_options_type from " . TABLE_PRODUCTS_OPTIONS . " where products_options_id = '" . $HTTP_POST_VARS['options_id'] . "'");
+        $products_options_array = tep_db_fetch_array($products_options_query);
+        $values_id = tep_db_prepare_input((($products_options_array['products_options_type'] == PRODUCTS_OPTIONS_TYPE_TEXT) or ($products_options_array['products_options_type'] == PRODUCTS_OPTIONS_TYPE_FILE)) ? PRODUCTS_OPTIONS_VALUE_TEXT_ID : $HTTP_POST_VARS['values_id']);
+// iii 030811 added:  END
         $products_id = tep_db_prepare_input($HTTP_POST_VARS['products_id']);
         $options_id = tep_db_prepare_input($HTTP_POST_VARS['options_id']);
         $values_id = tep_db_prepare_input($HTTP_POST_VARS['values_id']);
@@ -78,15 +95,28 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
       case 'update_option_name':
         $option_name_array = $HTTP_POST_VARS['option_name'];
         $option_id = tep_db_prepare_input($HTTP_POST_VARS['option_id']);
+        $option_type = $HTTP_POST_VARS['option_type'];	//clr 030714 update to add option type to products_option
+	$option_length = $HTTP_POST_VARS['option_length'];	//clr 030714 update to add option length to products_option
 
         for ($i=0, $n=sizeof($languages); $i<$n; $i ++) {
           $option_name = tep_db_prepare_input($option_name_array[$languages[$i]['id']]);
 //BOF: QT Pro
           $track_stock=isset($HTTP_POST_VARS['track_stock'])?1:0;
-          tep_db_query("update " . TABLE_PRODUCTS_OPTIONS . " set products_options_track_stock='" . (int)$track_stock . "',products_options_name = '" . tep_db_input($option_name) . "' where products_options_id = '" . (int)$option_id . "' and language_id = '" . (int)$languages[$i]['id'] . "'");
+          tep_db_query("update " . TABLE_PRODUCTS_OPTIONS . " set products_options_track_stock='".(int)$track_stock."', products_options_name = '" . tep_db_input($option_name) . "', products_options_type = '" . $option_type . "', products_options_length = '" . $option_length . "' where products_options_id = '" . (int)$option_id . "' and language_id = '" . (int)$languages[$i]['id'] . "'");
+//          tep_db_query("update " . TABLE_PRODUCTS_OPTIONS . " set products_options_track_stock='" . (int)$track_stock . "',products_options_name = '" . tep_db_input($option_name) . "' where products_options_id = '" . (int)$option_id . "' and language_id = '" . (int)$languages[$i]['id'] . "'");
 //EOF: QT Pro
         }
-
+// iii added 030811:  automate insertion or deletion of text option values
+        switch ($option_type) {
+          case PRODUCTS_OPTIONS_TYPE_TEXT:
+          case PRODUCTS_OPTIONS_TYPE_FILE:
+//            tep_db_query("delete from " . TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS . " where products_options_id = '" . $HTTP_POST_VARS['option_id'] . "'"); // disabled because this could cause trouble if someone changed types unintentionally and deleted all their option values.  Shops with small numbers of values per option should consider uncommenting this.
+            tep_db_query("insert into " . TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS . " values (NULL, '" . $HTTP_POST_VARS['option_id'] . "', '" . PRODUCTS_OPTIONS_VALUES_TEXT_ID . "')");
+            break;
+          default:
+            tep_db_query("delete from " . TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS . " where products_options_values_id = '" . PRODUCTS_OPTIONS_VALUES_TEXT_ID . "'");
+        }
+// iii added 030811:  END
         tep_redirect(tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info));
         break;
       case 'update_value':
@@ -105,9 +135,22 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
         tep_redirect(tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info));
         break;
       case 'update_product_attribute':
+// iii 030811 added:  Enforce rule that TEXT and FILE Options use value PRODUCTS_OPTIONS_VALUE_TEXT_ID
+        $products_options_query = tep_db_query("select products_options_type from " . TABLE_PRODUCTS_OPTIONS . " where products_options_id = '" . $HTTP_POST_VARS['options_id'] . "'");
+        $products_options_array = tep_db_fetch_array($products_options_query);
+        switch ($products_options_array['products_options_type']) {
+          case PRODUCTS_OPTIONS_TYPE_TEXT:
+          case PRODUCTS_OPTIONS_TYPE_FILE:
+            $values_id = PRODUCTS_OPTIONS_VALUE_TEXT_ID;
+            break;
+          default: 
+        $values_id = tep_db_prepare_input($HTTP_POST_VARS['values_id']);
+}
+// iii 030811 added END
+
         $products_id = tep_db_prepare_input($HTTP_POST_VARS['products_id']);
         $options_id = tep_db_prepare_input($HTTP_POST_VARS['options_id']);
-        $values_id = tep_db_prepare_input($HTTP_POST_VARS['values_id']);
+//        $values_id = tep_db_prepare_input($HTTP_POST_VARS['values_id']);
         $value_price = tep_db_prepare_input($HTTP_POST_VARS['value_price']);
         $price_prefix = tep_db_prepare_input($HTTP_POST_VARS['price_prefix']);
         $attribute_id = tep_db_prepare_input($HTTP_POST_VARS['attribute_id']);
@@ -154,6 +197,36 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
         break;
     }
   }
+
+//iii 031103 added to get results from database option type query
+  $products_options_types_list = array();
+  $products_options_types_query = tep_db_query("select products_options_types_id, products_options_types_name from " . TABLE_PRODUCTS_OPTIONS_TYPES . " where language_id='" . (int)$languages_id . "' order by products_options_types_id");
+  while ($products_options_type_array = tep_db_fetch_array($products_options_types_query)) {
+    $products_options_types_list[$products_options_type_array['products_options_types_id']] = $products_options_type_array['products_options_types_name'];
+  }
+  
+  //CLR 030312 add function to draw pulldown list of option types
+// Draw a pulldown for Option Types
+//iii 031103 modified to use results of database option type query from above
+function draw_optiontype_pulldown($name, $default = '') {
+  global $products_options_types_list;
+  $values = array();
+  foreach ($products_options_types_list as $id => $text) {
+    $values[] = array('id' => $id, 'text' => $text);
+  }
+
+  return tep_draw_pull_down_menu($name, $values, $default);
+}
+
+//CLR 030312 add function to translate type_id to name
+// Translate option_type_values to english string
+//iii 031103 modified to use results of database option type query from above
+function translate_type_to_name($opt_type) {
+  global $products_options_types_list;
+  return isset($products_options_types_list[$opt_type]) ? $products_options_types_list[$opt_type] : 'Error ' . $opt_type;
+
+}
+// iii 031103 added/modified:  END
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -194,7 +267,7 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
               <tr>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td colspan="3"><?php echo tep_black_line(); ?></td>
+                    <td colspan="5"><?php echo tep_black_line(); ?></td>
                   </tr>
 <?php
     $products = tep_db_query("select p.products_id, pd.products_name, pov.products_options_values_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov, " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_DESCRIPTION . " pd where pd.products_id = p.products_id and pov.language_id = '" . (int)$languages_id . "' and pd.language_id = '" . (int)$languages_id . "' and pa.products_id = p.products_id and pa.options_id='" . (int)$HTTP_GET_VARS['option_id'] . "' and pov.products_options_values_id = pa.options_values_id order by pd.products_name");
@@ -206,7 +279,7 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
                     <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_OPT_VALUE; ?>&nbsp;</td>
                   </tr>
                   <tr>
-                    <td colspan="3"><?php echo tep_black_line(); ?></td>
+                    <td colspan="5"><?php echo tep_black_line(); ?></td>
                   </tr>
 <?php
       $rows = 0;
@@ -222,22 +295,22 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
       }
 ?>
                   <tr>
-                    <td colspan="3"><?php echo tep_black_line(); ?></td>
+                    <td colspan="5"><?php echo tep_black_line(); ?></td>
                   </tr>
                   <tr>
-                    <td colspan="3" class="main"><br><?php echo TEXT_WARNING_OF_DELETE; ?></td>
+                    <td colspan="5" class="main"><br><?php echo TEXT_WARNING_OF_DELETE; ?></td>
                   </tr>
                   <tr>
-                    <td align="right" colspan="3" class="main"><br><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_cancel.gif', ' cancel '); ?></a>&nbsp;</td>
+                    <td align="right" colspan="5" class="main"><br><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_cancel.gif', ' cancel '); ?></a>&nbsp;</td>
                   </tr>
 <?php
     } else {
 ?>
                   <tr>
-                    <td class="main" colspan="3"><br><?php echo TEXT_OK_TO_DELETE; ?></td>
+                    <td class="main" colspan="5"><br><?php echo TEXT_OK_TO_DELETE; ?></td>
                   </tr>
                   <tr>
-                    <td class="main" align="right" colspan="3"><br><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_option&option_id=' . $HTTP_GET_VARS['option_id'] . '&' . $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_delete.gif', ' delete '); ?></a>&nbsp;&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_cancel.gif', ' cancel '); ?></a>&nbsp;</td>
+                    <td class="main" align="right" colspan="5"><br><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_option&option_id=' . $HTTP_GET_VARS['option_id'] . '&' . $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_delete.gif', ' delete '); ?></a>&nbsp;&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_cancel.gif', ' cancel '); ?></a>&nbsp;</td>
                   </tr>
 <?php
     }
@@ -248,10 +321,13 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
   } else {
 ?>
               <tr>
-                <td colspan="3" class="pageHeading">&nbsp;<?php echo HEADING_TITLE_OPT; ?>&nbsp;</td>
+<?php /* MOD: QT Pro Added 1 to colspan */ ?>
+                <td colspan="5" class="pageHeading">&nbsp;<?php echo HEADING_TITLE_OPT; ?>&nbsp;</td>
+                <td align="right"><br><form name="option_order_by" action="<?php echo FILENAME_PRODUCTS_ATTRIBUTES; ?>"><select name="selected" onChange="go_option()"><option value="products_options_id"<?php if ($option_order_by == 'products_options_id') { echo ' SELECTED'; } ?>><?php echo TEXT_OPTION_ID; ?></option><option value="products_options_name"<?php if ($option_order_by == 'products_options_name') { echo ' SELECTED'; } ?>><?php echo TEXT_OPTION_NAME; ?></option></select></form></td>
               </tr>
               <tr>
-                <td colspan="3" class="smallText" align="right">
+<?php /* MOD: QT Pro Added 1 to colspan */ ?>
+                <td colspan="5" class="smallText">
 <?php
     $options = "select * from " . TABLE_PRODUCTS_OPTIONS . " where language_id = '" . (int)$languages_id . "' order by products_options_id";
     $options_split = new splitPageResults($option_page, MAX_ROW_LISTS_OPTIONS, $options, $options_query_numrows);
@@ -261,34 +337,25 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
                 </td>
               </tr>
               <tr>
-<?php
-//++++ QT Pro: Begin Changed code
-?>
-                <td colspan="4"><?php echo tep_black_line(); ?></td>
-<?php
-//++++ QT Pro: End Changed Code
-?>
+<?php /* MOD: QT Pro Added 1 to colspan */ ?>
+                <td colspan="7"><?php echo tep_black_line(); ?></td>
               </tr>
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_ID; ?>&nbsp;</td>
                 <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_OPT_NAME; ?>&nbsp;</td>
-<?php
-//++++ QT Pro: Begin Changed code
-?>
+                <!-- CLR 030212 - Add column for option type //-->
+                <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_OPT_TYPE; ?>&nbsp;</td>	
+		<!-- CLR 030212 - Add column for option length //-->				
+    		<td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_OPT_LENGTH; ?>&nbsp;</td>	
+
+<?php /* BOF: QT Pro changed "TABLE_HEADING_OPT_TYPE" to "TABLE_HEADING_TRACK_STOCK" */ ?>
                 <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_TRACK_STOCK; ?>&nbsp;</td>
-<?php
-//++++ QT Pro: End Changed Code
-?>
+<?php /* EOF: QT Pro */ ?>
                 <td class="dataTableHeadingContent" align="center">&nbsp;<?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
               <tr>
-<?php
-//++++ QT Pro: Begin Changed code
-?>
-                <td colspan="4"><?php echo tep_black_line(); ?></td>
-<?php
-//++++ QT Pro: End Changed Code
-?>
+<?php /* MOD: QT Pro Added 1 to colspan */ ?>
+                <td colspan="7"><?php echo tep_black_line(); ?></td>
               </tr>
 <?php
     $next_id = 1;
@@ -310,13 +377,12 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 ?>
                 <td align="center" class="smallText">&nbsp;<?php echo $options_values['products_options_id']; ?><input type="hidden" name="option_id" value="<?php echo $options_values['products_options_id']; ?>">&nbsp;</td>
                 <td class="smallText"><?php echo $inputs; ?></td>
-<?php
-//++++ QT Pro: Begin Changed code
-?>
+                <td class="smallText"><?php echo draw_optiontype_pulldown('option_type', $options_values['products_options_type']); ?></td>	<!-- CLR 030212 - Add column for option type //-->
+                <td class="smallText"><?php echo ' <input type="text" name="option_length" size="4" value="' . $option_name['products_options_length'] . '">'; ?></td>	<!-- CLR 030212 - Add column for option length //-->
+
+<?php /* BOF: QT Pro */ ?>
                 <td align="center" class="smallText"><input type=checkbox name=track_stock <?php echo $options_values['products_options_track_stock']?"checked":""; ?> ></td>
-<?php
-//++++ QT Pro: End Changed Code
-?>
+<?php /* EOF: QT Pro */ ?>
                 <td align="center" class="smallText">&nbsp;<?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?>&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_cancel.gif', IMAGE_CANCEL); ?></a>&nbsp;</td>
 <?php
         echo '</form>' . "\n";
@@ -324,13 +390,12 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 ?>
                 <td align="center" class="smallText">&nbsp;<?php echo $options_values["products_options_id"]; ?>&nbsp;</td>
                 <td class="smallText">&nbsp;<?php echo $options_values["products_options_name"]; ?>&nbsp;</td>
-<?php
-//++++ QT Pro: Begin Changed code
-?>
+                <td class="smallText">&nbsp;<?php echo translate_type_to_name($options_values["products_options_type"]); ?>&nbsp;</td> <!-- CLR 030212 - Add column for option type //-->
+		<td class="smallText">&nbsp;<?php echo $options_values["products_options_length"]; ?>&nbsp;</td>	<!-- CLR 030212 - Add column for option length //-->
+
+<?php /* BOF: QT Pro */ ?>
                 <td align="center" class="smallText">&nbsp;<?php echo $options_values['products_options_track_stock']?"Yes":"No"; ?></td>
-<?php
-//++++ QT Pro: End Changed Code
-?>
+<?php /* EOF: QT Pro */ ?>
                 <td align="center" class="smallText">&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=update_option&option_id=' . $options_values['products_options_id'] . '&option_order_by=' . $option_order_by . '&option_page=' . $option_page, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_edit.gif', IMAGE_UPDATE); ?></a>&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_product_option&option_id=' . $options_values['products_options_id'], 'NONSSL') , '">'; ?><?php echo tep_image_button('button_delete.gif', IMAGE_DELETE); ?></a>&nbsp;</td>
 <?php
       }
@@ -343,13 +408,8 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
     }
 ?>
               <tr>
-<?php
-//++++ QT Pro: Begin Changed code
-?>
-                <td colspan="4"><?php echo tep_black_line(); ?></td>
-<?php
-//++++ QT Pro: End Changed Code
-?>
+<?php /* MOD: QT Pro Added 1 to colspan */ ?>
+                <td colspan="7"><?php echo tep_black_line(); ?></td>
               </tr>
 <?php
     if ($action != 'update_option') {
@@ -364,24 +424,21 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 ?>
                 <td align="center" class="smallText">&nbsp;<?php echo $next_id; ?>&nbsp;</td>
                 <td class="smallText"><?php echo $inputs; ?></td>
-<?php
-//++++ QT Pro: Begin Changed code
-?>
+		<td class="smallText"><?php echo draw_optiontype_pulldown('option_type'); ?></td>	<!-- CLR 030212 - Add column for option type //-->
+                <td class="smallText"><?php echo ' <input type="text" name="option_length" size="4" value="' . $option_name['products_options_length'] . '">'; ?></td>	<!-- CLR 030212 - Add column for option length //-->
+
+<?php /* BOF: QT Pro */ ?>
                 <td align="center" ><input type=checkbox name=track_stock></td>
                 <td align="left" class="smallText">&nbsp;<?php echo tep_image_submit('button_insert.gif', IMAGE_INSERT); ?>&nbsp;</td>
+<?php /* EOF: QT Pro */ ?>
 <?php
 //++++ QT Pro: End Changed Code
       echo '</form>';
 ?>
               </tr>
               <tr>
-<?php
-//++++ QT Pro: Begin Changed code
-?>
-                <td colspan="4"><?php echo tep_black_line(); ?></td>
-<?php
-//++++ QT Pro: End Changed Code
-?>
+<?php /* MOD: QT Pro Added 1 to colspan */ ?>
+                <td colspan="7"><?php echo tep_black_line(); ?></td>
               </tr>
 <?php
     }
@@ -402,7 +459,7 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
               <tr>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td colspan="3"><?php echo tep_black_line(); ?></td>
+                    <td colspan="5"><?php echo tep_black_line(); ?></td>
                   </tr>
 <?php
     $products = tep_db_query("select p.products_id, pd.products_name, po.products_options_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_OPTIONS . " po, " . TABLE_PRODUCTS_DESCRIPTION . " pd where pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' and po.language_id = '" . (int)$languages_id . "' and pa.products_id = p.products_id and pa.options_values_id='" . (int)$HTTP_GET_VARS['value_id'] . "' and po.products_options_id = pa.options_id order by pd.products_name");
@@ -414,7 +471,7 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
                     <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_OPT_NAME; ?>&nbsp;</td>
                   </tr>
                   <tr>
-                    <td colspan="3"><?php echo tep_black_line(); ?></td>
+                    <td colspan="5"><?php echo tep_black_line(); ?></td>
                   </tr>
 <?php
       while ($products_values = tep_db_fetch_array($products)) {
@@ -429,7 +486,7 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
       }
 ?>
                   <tr>
-                    <td colspan="3"><?php echo tep_black_line(); ?></td>
+                    <td colspan="5"><?php echo tep_black_line(); ?></td>
                   </tr>
                   <tr>
                     <td class="main" colspan="3"><br><?php echo TEXT_WARNING_OF_DELETE; ?></td>
@@ -485,6 +542,12 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
     $values = tep_db_query($values);
     while ($values_values = tep_db_fetch_array($values)) {
       $options_name = tep_options_name($values_values['products_options_id']);
+      $values_name = $values_values['products_options_values_name'];
+// iii 030813 added: Option Type Feature and File Uploading
+// fetch products_options_id for use if the option value is deleted
+// with TEXT and FILE Options, there are multiple options for the single TEXT 
+// value and only the single reference should be deleted
+      $option_id = $values_values['products_options_id'];
       $values_name = $values_values['products_options_values_name'];
       $rows++;
 ?>
@@ -593,7 +656,7 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
 ?>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="smallText" align="right">
+            <td class="smallText">
 <?php
   $attributes = "select pa.* from " . TABLE_PRODUCTS_ATTRIBUTES . " pa left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on pa.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' order by pd.products_name";
   $attributes_split = new splitPageResults($attribute_page, MAX_ROW_LISTS_OPTIONS, $attributes, $attributes_query_numrows);

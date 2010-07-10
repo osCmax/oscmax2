@@ -387,6 +387,12 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
    }
 // EOF: MOD - Wishlist 3.5
 
+// BOF: set product attribute types
+  define('PRODUCTS_OPTIONS_TYPE_SELECT', 0);
+  define('PRODUCTS_OPTIONS_TYPE_RADIO', 3);
+  define('PRODUCTS_OPTIONS_TYPE_CHECKBOX', 4);
+// BOF: set product attribute types
+
 // Shopping cart actions
   if (isset($HTTP_GET_VARS['action'])) {
 // redirect the customer to a friendly cookie-must-be-enabled page if cookies are disabled

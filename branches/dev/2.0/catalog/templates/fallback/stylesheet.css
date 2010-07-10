@@ -156,6 +156,7 @@ TABLE.productListing {
 TD.productListing-data {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
+  color: black;
 }
 
 A.pageResults {
@@ -227,6 +228,7 @@ SPAN.newItemInCart {
 CHECKBOX, INPUT, RADIO, SELECT {
   font-family: Verdana, Arial, sans-serif;
   font-size: 11px;
+  vertical-align: middle;
 }
 
 TEXTAREA {
@@ -302,4 +304,10 @@ SPAN.SelectedCategory { font-family: Verdana, Arial, sans-serif; font-size: 10px
 #indicator {
     float:right;
     visibility:hidden;
+}
+TD.options {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 11px;
+	color: black;
+	vertical-align: middle;
 }

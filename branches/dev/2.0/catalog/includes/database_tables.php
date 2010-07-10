@@ -95,4 +95,6 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
 // LINE ADDED
   define('TABLE_PACKAGING', 'packaging');
   define('TABLE_UPS_BOXES_USED', 'ups_boxes_used');
+  define('TABLE_PRODUCTS_OPTIONS_TYPES', 'products_options_types');
+  define('TABLE_PRODUCTS_OPTIONS_DESCRIPTION', 'products_options_description');
 ?>

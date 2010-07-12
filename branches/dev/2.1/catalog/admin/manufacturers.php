@@ -149,22 +149,6 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-
-<?php
- 	// BOF Open Featured Sets
-?>
-<link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
-<script language="JavaScript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
-<script type="text/javascript"><!-- 
-var ManufacturersFeaturedUntil = new ctlSpiffyCalendarBox("ManufacturersFeaturedUntil", "manufacturers", "manufacturers_featured_until","btnDate1","<?php echo $mInfo->manufacturers_featured_until; ?>", scBTNMODE_CUSTOMBLUE); 
-//--></script>
-<script type="text/javascript"><!-- 
-var ManufacturerFeaturedUntil = new ctlSpiffyCalendarBox("ManufacturerFeaturedUntil", "manufacturers", "manufacturer_featured_until","btnDate1","<?php echo $mInfo->manufacturer_featured_until; ?>", scBTNMODE_CUSTOMBLUE); 
-//--></script>
-<?php
-	// EOF Open Featured Sets
-?>
-
 <script type="text/javascript" src="includes/general.js"></script>
 </head>
 <body onLoad="SetFocus();">
@@ -314,9 +298,9 @@ var ManufacturerFeaturedUntil = new ctlSpiffyCalendarBox("ManufacturerFeaturedUn
 
 // BOF Open Featured Sets
       $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED . '<br>' . tep_draw_radio_field('manufacturers_featured', '1', $in_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_YES . '&nbsp;' . tep_draw_radio_field('manufacturers_featured', '0', $out_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_NO);
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $mInfo->manufacturers_featured_until . '<br><script type="text/javascript">ManufacturersFeaturedUntil.writeControl(); ManufacturersFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturers_featured_until', (isset($mInfo->manufacturers_featured_until) ? $mInfo->manufacturers_featured_until : ''), 'id="manufacturers"'));
       $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED . '<br>' . tep_draw_radio_field('manufacturer_featured', '1', $in_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_YES . '&nbsp;' . tep_draw_radio_field('manufacturer_featured', '0', $out_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_NO);
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $mInfo->manufacturer_featured_until . '<br><script type="text/javascript">ManufacturerFeaturedUntil.writeControl(); ManufacturerFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturer_featured_until', (isset($mInfo->manufacturer_featured_until) ? $mInfo->manufacturer_featured_until : ''), 'id="manufacturer"'));
 // EOF Open Featured Sets
 
       $manufacturer_inputs_string = '';
@@ -338,9 +322,9 @@ var ManufacturerFeaturedUntil = new ctlSpiffyCalendarBox("ManufacturerFeaturedUn
 
 // BOF Open Featured Sets
       $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED . '<br>' . tep_draw_radio_field('manufacturers_featured', '1', $in_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_YES . '&nbsp;' . tep_draw_radio_field('manufacturers_featured', '0', $out_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_NO);
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $mInfo->manufacturers_featured_until . '<br><script type="text/javascript">ManufacturersFeaturedUntil.writeControl(); ManufacturersFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturers_featured_until', (isset($mInfo->manufacturers_featured_until) ? $mInfo->manufacturers_featured_until : ''), 'id="manufacturers"'));
       $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED . '<br>' . tep_draw_radio_field('manufacturer_featured', '1', $in_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_YES . '&nbsp;' . tep_draw_radio_field('manufacturer_featured', '0', $out_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_NO);
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $mInfo->manufacturer_featured_until . '<br><script type="text/javascript">ManufacturerFeaturedUntil.writeControl(); ManufacturerFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturer_featured_until', (isset($mInfo->manufacturer_featured_until) ? $mInfo->manufacturer_featured_until : ''), 'id="manufacturer"'));
 // EOF Open Featured Sets
 
       $manufacturer_inputs_string = '';

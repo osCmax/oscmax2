@@ -132,7 +132,7 @@ if (LEFT_COLUMN_SHOW != 'false') { ?>
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
               if ($pfile != 'checkout.php') {
 		     ?>
-		    <td class="leftcol" width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+		    <td class="leftcol" width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
 		    <!-- left_navigation //-->
 		    <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
 		    <!-- left_navigation_eof //-->
@@ -141,7 +141,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='f
 	        } else {  
 	               if (ONEPAGE_SHOW_OSC_COLUMNS == 'true') {  
 			?>
-			    <td class="leftcol" width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+			    <td class="leftcol" width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
 			    <!-- left_navigation //-->
 			    <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
 			    <!-- left_navigation_eof //-->
@@ -175,7 +175,7 @@ if (RIGHT_COLUMN_SHOW != 'false') { ?>
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
               if ($pfile != 'checkout.php') {
 		     ?>
-		    <td class="rightcol" width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+		    <td class="rightcol" width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
 		    <!-- right_navigation //-->
 		    <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
 		    <!-- right_navigation_eof //-->
@@ -184,7 +184,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='
 	        } else {  
 	               if (ONEPAGE_SHOW_OSC_COLUMNS == 'true') {  
 			?>
-			    <td class="rightcol" width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+			    <td class="rightcol" width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
 			    <!-- right_navigation //-->
 			    <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
 			    <!-- right_navigation_eof //-->
@@ -192,7 +192,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='
 			<?php
                         }  elseif (ONEPAGE_SHOW_CUSTOM_COLUMN == 'true'){
 			    ?>  
-				<td width="200px" valign="top"><table border="0" width="200px" cellspacing="0" cellpadding="2">
+				<td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
 			    <!-- right_navigation //-->
 			       <?php require(DIR_WS_INCLUDES . 'checkout/column_right.php'); ?>
 			    <!-- right_navigation_eof //-->

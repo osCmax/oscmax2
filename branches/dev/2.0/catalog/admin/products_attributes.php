@@ -34,7 +34,7 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
           $option_name = tep_db_prepare_input($option_name_array[$languages[$i]['id']]);
 //BOF: MOD - QT Pro
           $track_stock=isset($HTTP_POST_VARS['track_stock'])?1:0;
-          tep_db_query("insert into " . TABLE_PRODUCTS_OPTIONS . " (products_options_id, products_options_name, language_id,products_options_track_stock) values ('" . (int)$products_options_id . "', '" . tep_db_input($option_name) . "', '" . (int)$languages[$i]['id'] . "', '" . (int)$track_stock . "')");
+          tep_db_query("insert into " . TABLE_PRODUCTS_OPTIONS . " (products_options_id, products_options_name, language_id, products_options_track_stock, products_options_type, products_options_length) values ('" . (int)$products_options_id . "', '" . tep_db_input($option_name) . "', '" . (int)$languages[$i]['id'] . "', '" . (int)$track_stock . "', '" . tep_db_input($option_type) . "', '" . tep_db_input($option_length) . "')");
 //EOF: MOD - QT Pro
 // iii 030811 added:  For TEXT and FILE option types, automatically add 
 // PRODUCTS_OPTIONS_VALUE_TEXT to the TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS

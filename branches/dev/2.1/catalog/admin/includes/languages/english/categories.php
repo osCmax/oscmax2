@@ -174,4 +174,6 @@ define('TEXT_PRODUCT_YES', 'Yes');
 define('TEXT_MORE_INFO', 'more...');
 // EOF Open Featured Sets
 
+define('HEADING_PRICE_HELP','Price Help');
+define('TEXT_PRICE_HELP','If you want to display <b>Contact for Price</b> set the price to -1');
 ?>

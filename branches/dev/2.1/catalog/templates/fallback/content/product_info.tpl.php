@@ -263,17 +263,22 @@
                     <td class="main" align="right" width="250">
                       <table width="200" border="0" cellpadding="0">
                         <tr>
-                       	  <td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',+1)" alt="plus 1" class="plusminus"></td>
-                          <td rowspan="2" align="center"><?php echo tep_draw_input_field('cart_quantity', $pf->adjustQty(1), 'size="2" id="product-quantity-{{product.id}}"'); ?></td>
-                          <?php // START: PGM Edit to switch Add to Cart image if stock = 0
-                            if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
-							  <td class="main" align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_BUTTON_IN_CART); ?></td>
-						    <?php } else { ?>
-						      <td class="main" align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
-                            <?php } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
+                        <?php // START EASY CALL FOR PRICE v1.4
+                          if ($product_info['products_price'] == CALL_FOR_PRICE_VALUE){ ?>
+						    <td class="main" align="right" rowspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Price Inquiry%0D%0A%0D%0AModel: ' . $listing[$x]['products_model'] . '%0D%0AProduct Name: ' . $listing[$x]['products_name'] . '%0D%0AProduct URL: ' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $listing[$x]['products_id'] .'%0D%0A%0D%0A') . '') . '">' . tep_image_submit('button_cfp.gif', IMAGE_BUTTON_CFP); ?></td>
+                        <?php } else { ?>  
+                       	  	<td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',+1)" alt="plus 1" class="plusminus"></td>
+                          	<td rowspan="2" align="center"><?php echo tep_draw_input_field('cart_quantity', $pf->adjustQty(1), 'size="2" id="product-quantity-{{product.id}}"'); ?></td>
+                            <?php // START: PGM Edit to switch Add to Cart image if stock = 0
+							  if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
+							    <td class="main" align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_BUTTON_IN_CART); ?></td>
+							<?php } else { ?>
+								<td class="main" align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
+							<?php } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
                         </tr>
                         <tr>
                           <td align="center"><img src="<?php echo DIR_WS_ICONS . 'minus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',-1)" alt="minus 1" class="plusminus"></td>
+                        <?php } // END: EASY CALL FOR PRICE v1.4 ?>
                         </tr>
                       </table>
                     </td>

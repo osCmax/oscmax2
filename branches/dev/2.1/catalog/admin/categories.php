@@ -1454,7 +1454,7 @@ function updateNet() {
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('products_tax_class_id', $tax_class_array, $pInfo->products_tax_class_id, 'onchange="updateGross()"'); ?></td>
           </tr>
           <tr bgcolor="#ebebff">
-            <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET; ?></td>
+            <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET; ?><?php echo '<span title="' . HEADING_PRICE_HELP . '|' . TEXT_PRICE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png'); ?></span></td>
             <td class="main" colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price', $pInfo->products_price, 'onKeyUp="updateGross()"') .
             tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_PRICE_GROSS . '&nbsp;' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'OnKeyUp="updateNet()"'); ?></td>
           </tr>

@@ -350,6 +350,7 @@ define('IMAGE_BUTTON_TELL_A_FRIEND', 'Tell a Friend');
 define('IMAGE_BUTTON_UPDATE', 'Update');
 define('IMAGE_BUTTON_UPDATE_CART', 'Update Cart');
 define('IMAGE_BUTTON_WRITE_REVIEW', 'Write Review');
+define('IMAGE_BUTTON_CFP', 'Contact for price');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'Delete');
 define('SMALL_IMAGE_BUTTON_EDIT', 'Edit');
@@ -471,4 +472,7 @@ define('TEXT_MORE_INFO', 'more...');
 define('TEXT_ANY_VALUE', 'Any Value');
 define('TEXT_RESTRICT_TO', 'Restrict <b>%s</b> to: %s and its sub-values (if any).');
 // EOF: Extra Product Fields
+
+// LINE ADDED: MOD - EASY CALL FOR PRICE v1.4
+define('TEXT_CALL_FOR_PRICE', '<a href="' . tep_href_link(FILENAME_CONTACT_US) . '">Contact for Price!</a>');
 ?>

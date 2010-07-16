@@ -76,7 +76,16 @@ $Id: currencies.php 3 2006-05-27 04:59:07Z user $
     }
 
     function display_price($products_price, $products_tax, $quantity = 1) {
-      return $this->format($this->calculate_price($products_price, $products_tax, $quantity));
-    }
+      // BOF: MOD - EASY CALL FOR PRICE v1.4
+	  // return $this->format($this->calculate_price($products_price, $products_tax, $quantity));
+	  define ('CALL_FOR_PRICE_VALUE', -1);
+	  if ($products_price > CALL_FOR_PRICE_VALUE){
+	    return $this->format($this->calculate_price($products_price, $products_tax, $quantity));
+	  } else {
+	    // You can set CALL_FOR_PRICE_TEXT to anything you want. Its style is determined by the page it is displayed on. Changes made here will be visible throughout your site.
+	    return TEXT_CALL_FOR_PRICE;
+	    // BOF: MOD - EASY CALL FOR PRICE v1.4
+	  }
+	}
   }
 ?>

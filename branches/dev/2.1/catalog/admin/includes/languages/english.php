@@ -556,4 +556,12 @@ define('TEXT_NOT_APPLY', 'Does Not Apply');
 define('BOX_CATALOG_PRODUCTS_EXTRA_FIELDS', 'Extra Product Fields');
 define('BOX_CATALOG_PRODUCTS_EXTRA_VALUES', 'Extra Field Values');
 // EOF: Extra Product Fields
+
+// BOF: MSRP
+define('TEXT_PRODUCTS_MSRP', '&nbsp;MSRP:&nbsp;');
+define('TEXT_PRODUCTS_OUR_PRICE', '&nbsp;Our&nbsp;Price:&nbsp;');
+define('TEXT_PRODUCTS_SALE', '&nbsp;Sale&nbsp;Price:&nbsp;');
+define('TEXT_PRODUCTS_SAVINGS', '&nbsp;You&nbsp;Save:&nbsp;');
+define('TEXT_PRODUCTS_PRICE_MSRP', 'Products MSRP:');
+// EOF: MSRP
 ?>

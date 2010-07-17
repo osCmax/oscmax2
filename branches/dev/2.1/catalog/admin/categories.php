@@ -419,6 +419,8 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 //LINE ADDED: MOD - indvship
                                   'products_ship_price' => tep_db_prepare_input($_POST['products_ship_price']), //indvship
                                   'products_model' => tep_db_prepare_input($_POST['products_model']),
+//LINE ADDED: MSRP								  
+								  'products_msrp' => tep_db_prepare_input($_POST['products_msrp']),
                                   'products_price' => tep_db_prepare_input($_POST['products_price']),
 // BOF QPBPP for SPPC
                                   'products_qty_blocks' => (($i = (int)tep_db_prepare_input($_POST['products_qty_blocks'][0])) < 1) ? 1 : $i,
@@ -690,14 +692,15 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 // LINE MODED: Added "products_ship_price and dimensions for upsxml"
 // LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
 // LINE MODED: Open Feature Sets: Added "products_featured, products_featured_until"
-            $product_query = tep_db_query("select products_ship_price, products_quantity, products_model, products_image, products_price, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_tax_class_id, manufacturers_id, products_qty_blocks, products_min_order_qty, products_featured, products_featured_until from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
+// LINE MODED: MSRP: Added "products_msrp,"
+            $product_query = tep_db_query("select products_ship_price, products_quantity, products_model, products_image, products_msrp, products_price, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_tax_class_id, manufacturers_id, products_qty_blocks, products_min_order_qty, products_featured, products_featured_until from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
             $product = tep_db_fetch_array($product_query);
 
 // LINE CHANGED: MS2 update 501112 - Added :(empty($product['products_date_available']) ? "null" : ...{some code}... ") . "
 // LINE MODED: Added "products_ship_price and dimensions for upsxml"
 // LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
 // LINE MODED: Open Feature Sets: Added "products_featured, products_featured_until"
-            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id, products_qty_blocks, products_min_order_qty, products_featured, products_featured_until) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "', '" . (int)$product['products_qty_blocks'] . "', '" . (int)$product['products_min_order_qty'] . "', '" . (int)$product['products_featured'] . "', '" . (int)$product['products_featured_until'] . "')");
+            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_msrp, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id, products_qty_blocks, products_min_order_qty, products_featured, products_featured_until) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_msrp']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "', '" . (int)$product['products_qty_blocks'] . "', '" . (int)$product['products_min_order_qty'] . "', '" . (int)$product['products_featured'] . "', '" . (int)$product['products_featured_until'] . "')");
             $dup_products_id = tep_db_insert_id();
 
 // Tabs by PGM LINE EDIT
@@ -1167,6 +1170,8 @@ if ($action == 'new_product') {
                        'products_quantity' => '',
                        'products_model' => '',
                        'products_image' => '',
+// LINED ADDED: MSRP
+					   'products_msrp' => '',
                        'products_price' => '',
 // BOF QPBPP for SPPC
                        'products_qty_blocks' => '',
@@ -1207,8 +1212,8 @@ if ($action == 'new_product') {
 // LINE MODED: Open Feature Sets : Added ", p.products_featured, p.products_featured_until"
 // BOF: Extra Product Fields
 //	  $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
-
-	  $query = "select p.products_ship_price, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until ";
+//LINE MODED: MSRP: Added "p.products_msrp,"
+	  $query = "select p.products_ship_price, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until ";
 	foreach ($xfields as $f) {
       $query .= ", pd." . $f;
       }
@@ -1452,6 +1457,10 @@ function updateNet() {
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_TAX_CLASS; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('products_tax_class_id', $tax_class_array, $pInfo->products_tax_class_id, 'onchange="updateGross()"'); ?></td>
+          </tr>
+          <tr bgcolor="#ebebff">
+            <td class="main"><?php echo TEXT_PRODUCTS_PRICE_MSRP; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_msrp', $pInfo->products_msrp); ?></td>
           </tr>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET; ?><?php echo '<span title="' . HEADING_PRICE_HELP . '|' . TEXT_PRICE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png'); ?></span></td>
@@ -1885,7 +1894,8 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 //      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'");
 
 // BOF: Extra Product Fields
-        $query = "select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty ";
+// LINE MODED: MSRP: Added "p.products_msrp,"
+        $query = "select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.product_msrp, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty ";
 	  foreach ($xfields as $f) {
         $query .= ', pd.' . $f;
       }       
@@ -1956,6 +1966,27 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
             $pf->loadProduct((int)$_GET['pID'], $pInfo->products_price, $pInfo->products_tax_class_id, (int)$pInfo->products_qty_blocks[0], $price_breaks_array, (int)$pInfo->products_min_order_qty[0]);
             echo $pf->getPriceString();
 // EOF QPBPP for SPPC ?></td>
+
+<?php //BOF: MSRP
+            $pricing = '<table class="PriceList" border="0" width="100%" cellspacing="0" cellpadding="0">';
+            $new_price = tep_get_products_special_price($HTTP_GET_VARS['pID']);
+            if ($pInfo->products_msrp > $pInfo->products_price)
+              $pricing .= '<tr><td>' . TEXT_PRODUCTS_MSRP . '</td><td align=right>' . $currencies->format($pInfo->products_msrp) . '</td><td></td></tr>';
+            $pricing .= '<tr><td>' . TEXT_PRODUCTS_OUR_PRICE . '</td><td align=right>' . $currencies->format($pInfo->products_price) . '</td><td></td></tr>';
+            if ($new_price != '')
+              {$pricing .= '<tr class="specialPrice"><td>' . TEXT_PRODUCTS_SALE . '</td><td align=right>' . $currencies->format($new_price) . '</td><td></td></tr>';}
+            if ($pInfo->products_msrp > $pInfo->products_price)
+              {if ($new_price != '')
+                {$pricing .= '<tr><td>' . TEXT_PRODUCTS_SAVINGS . '</td><td align=right>' . $currencies->format($pInfo->products_msrp -  $new_price) . '</td><td class="SavingsPercent">&nbsp;('. number_format(100 - (($new_price / $pInfo->products_msrp) * 100)) . '%)</td></tr>';}
+              else
+                {$pricing .= '<tr><td>' . TEXT_PRODUCTS_SAVINGS . '</td><td align=right>' . $currencies->format($pInfo->products_msrp -  $pInfo->products_price) . '</td><td class="SavingsPercent">&nbsp;('. number_format(100 - (($pInfo->products_price / $pInfo->products_msrp) * 100)) . '%)</td></tr>';}}
+            else
+              {if ($new_price != '')
+                {$pricing .= '<tr><td>' . TEXT_PRODUCTS_SAVINGS . '</td><td align=right>' . $currencies->format($pInfo->products_price -  $new_price) . '</td><td class="SavingsPercent">&nbsp;('. number_format(100 - (($new_price / $pInfo->products_price) * 100)) . '%)</td></tr>';}}
+            $pricing .= '</table>';
+            ?>
+            <td align="right" valign="top" width="10%"><?php echo $pricing; ?></td>
+<?php //EOF: MSRP ?>
           </tr>
         </table></td>
       </tr>
@@ -2356,14 +2387,16 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 // BOF SPPC hide products from groups
 // LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
 // LINE MODED: Open Feature Sets: Added ", p.products_featured, p.products_featured_until"
-      $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_hide_from_groups, p.products_qty_blocks, p.products_min_order_qty, p2c.categories_id, p.products_featured, p.products_featured_until from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and (pd.products_name like '%" . tep_db_input($search) . "%' or p.products_model like '%" . tep_db_input($search) . "%') order by pd.products_name");
+// LINE MODED: MSRP
+      $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_msrp, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_hide_from_groups, p.products_qty_blocks, p.products_min_order_qty, p2c.categories_id, p.products_featured, p.products_featured_until from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and (pd.products_name like '%" . tep_db_input($search) . "%' or p.products_model like '%" . tep_db_input($search) . "%') order by pd.products_name");
 
     } else {
 // LINE CHANGED: Added p.products_shipped_price
 //    $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status from ". TABLE_PRODUCTS .                                                        " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by pd.products_name");
 // LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
 // LINE MODED: Open Feature Sets: Added ", p.products_featured, p.products_featured_until"
-      $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_hide_from_groups, p.products_qty_blocks, p.products_min_order_qty, p.products_featured, p.products_featured_until from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by pd.products_name");
+// LINE MODED: MSRP
+      $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_msrp, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_hide_from_groups, p.products_qty_blocks, p.products_min_order_qty, p.products_featured, p.products_featured_until from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by pd.products_name");
 // EOF SPPC hide products from groups
     }
     while ($products = tep_db_fetch_array($products_query)) {
@@ -2646,7 +2679,24 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 // BOF: MoPics in Admin
            $contents[] = array('text' => 'Main Image (shown as a thumbnail):<br />' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '<br /><br /><center><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /></center>');
 // EOF: MoPics in Admin
-            $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price) . '<br>' . TEXT_PRODUCTS_QUANTITY_INFO . ' ' . $pInfo->products_quantity);
+
+// BOF: MSRP
+			if ($pInfo->products_msrp > $pInfo->products_price) {
+			  if ($new_price = tep_get_products_special_price($pInfo->products_id)) {
+				$products_price = '<span class="oldPrice">' . $currencies->format($pInfo->products_msrp) . '</span> <span class="listPrice">' . $currencies->format($pInfo->products_price) . '</span> <span class="specialPrice">' . $currencies->format($new_price) . '</span>';
+			  } else {
+				$products_price = '<span class="oldPrice">' . $currencies->format($pInfo->products_msrp) . '</span> ' . $currencies->format($pInfo->products_price);
+			  }
+			} else {
+			  if ($new_price = tep_get_products_special_price($pInfo->products_id)) {
+				$products_price = '<span class="oldPrice">' . $currencies->format($pInfo->products_price) . '</span> <span class="specialPrice">' . $currencies->format($new_price) . '</span>';
+			  } else {
+				$products_price = $currencies->format($pInfo->products_price);
+			  }
+			};
+// EOF: MSRP
+					$contents[] = array('text' => '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $products_price . '<br>' . TEXT_PRODUCTS_QUANTITY_INFO . ' ' . $pInfo->products_quantity);
+
             $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_AVERAGE_RATING . ' ' . number_format($pInfo->average_rating, 2) . '%');
 
 //BOF QPBPP for SPPC v4.2

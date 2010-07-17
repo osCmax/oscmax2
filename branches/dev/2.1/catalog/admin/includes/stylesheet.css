@@ -104,7 +104,8 @@ FORM { display: inline; }
 
 /* miscellaneous */
 .specialPrice { color: #ff0000; }
-.oldPrice { text-decoration: line-through; }
+.oldPrice { text-decoration: line-through; color: #006600; }
+.listPrice { text-decoration: line-through; color: #000000; }
 .fieldRequired { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #ff0000; }
 .smallText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 .main { font-family: Verdana, Arial, sans-serif; font-size: 12px; }
@@ -124,3 +125,7 @@ a.footer { font-family: Verdana, Arial, sans-serif; font-size: 10px;  background
 
 /* Small Ajax-throbber image */
 #indicator { float:right; visibility:hidden; }
+
+/* MSRP */
+.PriceList  { font-family: Verdana, Arial, sans-serif; color: #727272; font-size: 12px; font-weight: bold }
+.SavingsPercent  { font-size: 8px }

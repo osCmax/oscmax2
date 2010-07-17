@@ -925,6 +925,7 @@ CREATE TABLE products (
   products_quantity int(4) NOT NULL,
   products_model varchar(24) default NULL,
   products_image varchar(80) default NULL,
+  products_msrp decimal(15,4) NOT NULL,
   products_price decimal(15,4) NOT NULL,
   products_date_added datetime NOT NULL,
   products_last_modified datetime default NULL,

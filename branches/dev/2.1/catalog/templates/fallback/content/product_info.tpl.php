@@ -42,7 +42,7 @@
 // BOF: Product Extra Fields	  
 //    $product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
 
-	  $query = "select p.products_id, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id";
+	  $query = "select p.products_id, pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_msrp, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id";
 	foreach ($epf as $e) {
       $query .= ", pd." . $e['field'];
     }  
@@ -58,6 +58,30 @@
     $pf->loadProduct((int)$_GET['products_id'], (int)$languages_id);
     $products_price = $pf->getPriceString();
 // EOF QPBPP for SPPC
+
+// BOF: MSRP
+  if ($product_info['products_msrp'] != '' && $product_info['products_msrp'] != 0) { // If MSRP blank then hide everything
+    if ($product_info['products_msrp'] > $product_info['products_price']) { // If MSRP > Price then show MSRP price 
+	  //Draw MSRP table
+	  $msrp_products_price = '<table class="productinfo_msrp" align="right" border="0" width="100%" cellspacing="0" cellpadding="0">';
+      //check if on special offer
+	  $new_price = tep_get_products_special_price($product_info['products_id']);
+      //Add MSRP
+      $msrp_products_price .= '<tr class="PriceListBIG"><td align="right">' . TEXT_PRODUCTS_MSRP  . $currencies->display_price($product_info['products_msrp'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</td></tr>';
+	
+	  if ($new_price == '') { //Product not on special
+	    $msrp_products_price .= '<tr class="pricenowBIG"><td align="right">' . TEXT_PRODUCTS_OUR_PRICE . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</td></tr>';
+		$msrp_products_price .= '<tr class="savingBIG"><td align="right" >' . TEXT_PRODUCTS_SAVINGS_RRP .  $currencies->display_price(($product_info['products_msrp'] -  $product_info['products_price']), tep_get_tax_rate($product_info['products_tax_class_id'])) . '&nbsp;('. number_format(100 - (($product_info['products_price'] / $product_info['products_msrp']) * 100)) . '%)</td></tr>';
+	  } else { //Product is on special
+	    $msrp_products_price .= '<tr class="usualpriceBIG"><td align="right">' . TEXT_PRODUCTS_USUALPRICE .   $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</td></tr>';
+	    $msrp_products_price .= '<tr class="pricenowBIG"><td align="right">' . TEXT_PRODUCTS_PRICENOW .  $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</td></tr>';
+	    $msrp_products_price .= '<tr class="savingBIG"><td align="right" >' . TEXT_PRODUCTS_SAVINGS_RRP .  $currencies->display_price(($product_info['products_msrp'] -  $new_price), tep_get_tax_rate($product_info['products_tax_class_id'])) . '&nbsp;('. number_format(100 - (($new_price / $product_info['products_msrp']) * 100)) . '%)</td></tr>';
+	  }
+	//Close table and add spacer
+    $msrp_products_price .= '</table><tr><td>' . tep_draw_separator('pixel_trans.gif', '100%', '10') . '</td></tr>';
+	} // end if MSRP if less than price
+  } // end if MSRP is blank
+// EOF: MSRP
 
 // BOF QPBPP for SPPC
   $min_order_qty = $pf->getMinOrderQty();
@@ -164,6 +188,13 @@
         
         <!-- Right Column Starts -->
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+              <!-- MSRP Starts -->
+                <td valign="top">
+                  <?php echo $msrp_products_price; ?>
+                </td>
+              <!-- MSRP Ends -->  
+              </tr>
               <tr>
                 <!-- Description Starts -->
               	<td valign="top">

@@ -1895,7 +1895,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 
 // BOF: Extra Product Fields
 // LINE MODED: MSRP: Added "p.products_msrp,"
-        $query = "select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.product_msrp, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty ";
+        $query = "select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty ";
 	  foreach ($xfields as $f) {
         $query .= ', pd.' . $f;
       }       

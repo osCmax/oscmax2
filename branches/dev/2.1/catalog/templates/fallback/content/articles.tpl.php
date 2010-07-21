@@ -239,11 +239,6 @@
         <td><?php include(DIR_WS_MODULES . FILENAME_ARTICLE_LISTING); ?></td>
       </tr>
 	  
-	  
-	  
-	  
-	  
-	  
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>

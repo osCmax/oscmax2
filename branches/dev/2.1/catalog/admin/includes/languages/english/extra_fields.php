@@ -105,4 +105,8 @@ define('ERROR_ALREADY_LINKED', 'Error! Field %d is already linked to another fie
 define('TEXT_LINK_SUCCESS', 'Field %d has been successfully linked to field %d.');
 define('ERROR_NOT_LINKED', 'This field is not linked to another field!');
 define('TEXT_ADMIN_AVAILABLE', 'Available In Admin: ');
+
+define('HEADING_NO_EPF', 'Extra Product Fields');
+define('TEXT_NO_EPF', 'You currently have no extra fields set.<br><br>Please click <b>insert</b> to create a new one.');
+
 ?>

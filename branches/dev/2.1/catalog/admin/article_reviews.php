@@ -300,7 +300,15 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       echo $box->infoBox($heading, $contents);
 
       echo '            </td>' . "\n";
-    }
+    } else {
+	$heading[] = array('text' => HEADING_NO_ARTICLE_REVIEWS);
+    $contents[] = array('text' => TEXT_NO_ARTICLE_REVIEWS);  
+	  
+	echo '            <td width="25%" valign="top">';
+	$box = new box;
+    echo $box->infoBox($heading, $contents);
+    echo '            </td>';  
+  }
 ?>
           </tr>
         </table></td>

@@ -176,7 +176,7 @@ if ($help_pages_query['help_page'] != '' ) {
 
 	<?php echo '<a href="' . tep_href_link(FILENAME_ADMIN_ACCOUNT, '', 'SSL') . '" class="header"' . '">'; ?>
 	<?php echo tep_image(DIR_WS_ICONS . 'book_key.png', 'Manage Account'); ?> Welcome, <?php echo $myLogin['admin_username']; ?>.</a>
-	<?php echo '<a href="' . tep_catalog_href_link(DIR_WS_ADMIN, 'logoff.php') . '" class="header">'; ?>
+	<?php echo '<a href="' . tep_href_link(FILENAME_LOGOFF, '', 'SSL') . '" class="header">'; ?>
 	<?php echo tep_image(DIR_WS_ICONS . 'exit.png', 'Logoff'); ?> Logoff &nbsp;
   </td>
 </tr>

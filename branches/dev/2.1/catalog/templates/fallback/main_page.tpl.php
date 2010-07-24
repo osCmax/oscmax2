@@ -24,38 +24,7 @@
 <?php
 } else { ?> 
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','stylesheet.css')); // BTSv1.5 ?>">
-<?php  } ?> 
-<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','stylesheet-new.css')); // BTSv1.5 ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','print.css')); // BTSv1.5 ?>" media="print">
-<link rel="stylesheet" type="text/css" href="<?php echo DIR_WS_TEMPLATES; ?>coolmenu.css">
-   <?php if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exists for this page it will be loaded
-      require(bts_select('javascript', $PHP_SELF));
-} else {
-  if (isset($javascript) && file_exists(DIR_WS_JAVASCRIPT . basename($javascript))) { require(DIR_WS_JAVASCRIPT . basename($javascript)); }
-
-  }
-  $page =  $_SERVER["SCRIPT_NAME"];
-  $break = Explode('/', $page);
-  $pfile = $break[count($break) - 1];
-  //echo $pfile; //debug code - displays current page name.
-  
-  if ($pfile == 'index.php') {
-    if (DISPLAY_SLIDESHOW == true) {
-     
-    echo '<script src="http://www.google.com/jsapi"></script>';
-    echo '<script>' . "\n";
-    echo '// Load jQuery' . "\n";
-    echo 'google.load("jquery", "1.4.0");' . "\n";
-    echo '</script>' . "\n"; 
-    echo '<script type="text/javascript" src="' . DIR_WS_JAVASCRIPT . 'showcase.2.0.js"></script>';
-	require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
-    }
-  }
-  if (DISPLAY_DHTML_MENU == 'CoolMenu') {
-    echo '<!-- coolMenu //-->';
- 	echo '<SCRIPT LANGUAGE="JavaScript1.2" SRC="includes/coolMenu.js"></SCRIPT>';
-	echo '<!-- coolMenu_eof //-->';
- }
+<?php  } 
 
 if ( defined('FWR_SUCKERTREE_MENU_ON') && FWR_SUCKERTREE_MENU_ON === 'true' )
 echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet', 'fwr_suckertree_css_menu.css')) . '" />';
@@ -268,4 +237,34 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 </table>
 <!-- Store width controller -->
 </body>
+   <?php if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exists for this page it will be loaded
+      require(bts_select('javascript', $PHP_SELF));
+} else {
+  if (isset($javascript) && file_exists(DIR_WS_JAVASCRIPT . basename($javascript))) { require(DIR_WS_JAVASCRIPT . basename($javascript)); }
+
+  }
+  $page =  $_SERVER["SCRIPT_NAME"];
+  $break = Explode('/', $page);
+  $pfile = $break[count($break) - 1];
+  //echo $pfile; //debug code - displays current page name.
+  
+  if ($pfile == 'index.php') {
+    if (DISPLAY_SLIDESHOW == true) {
+     
+    echo '<script src="http://www.google.com/jsapi"></script>';
+    echo '<script>' . "\n";
+    echo '// Load jQuery' . "\n";
+    echo 'google.load("jquery", "1.4.0");' . "\n";
+    echo '</script>' . "\n"; 
+    echo '<script type="text/javascript" src="' . DIR_WS_JAVASCRIPT . 'showcase.2.0.js"></script>';
+	require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
+    }
+  }
+  if (DISPLAY_DHTML_MENU == 'CoolMenu') {
+    echo '<link rel="stylesheet" type="text/css" href="' . DIR_WS_TEMPLATES . 'coolmenu.css">';
+    echo '<!-- coolMenu //-->';
+ 	echo '<SCRIPT LANGUAGE="JavaScript1.2" SRC="includes/coolMenu.js"></SCRIPT>';
+	echo '<!-- coolMenu_eof //-->';
+ }
+ ?>
 </html>

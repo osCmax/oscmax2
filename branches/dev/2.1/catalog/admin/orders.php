@@ -474,7 +474,7 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
                                             </td>
                                         </tr>
                                     	<tr>
-                                        	<td class="smallText"><?php echo ENTRY_NOTIFY_COMMENTS; ?></b> <?php echo tep_draw_checkbox_field('notify_comments', '', true); ?></td>
+                                        	<td class="smallText"><b><?php echo ENTRY_NOTIFY_COMMENTS; ?></b> <?php echo tep_draw_checkbox_field('notify_comments', '', true); ?></td>
                                         </tr>
                                         <tr>
                                         	<td class="smallText" align="right"><?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?></td>

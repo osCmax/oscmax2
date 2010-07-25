@@ -6,7 +6,7 @@
   <tr class="dataTableHeadingRow">
       <td class="dataTableHeadingContent"><?php echo DASHBOARD_ORDERS_STATUS; ?></td>
       <td class="dataTableHeadingContent" align="center"><?php echo DASHBOARD_QUANTITY; ?></td>
-  <tr>        
+  </tr>        
   <?php
 $orders_contents = '';
   $orders_status_query = tep_db_query("select orders_status_name, orders_status_id from " . TABLE_ORDERS_STATUS . " where language_id = '" . $languages_id . "'");

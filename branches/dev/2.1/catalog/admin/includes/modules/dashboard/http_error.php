@@ -44,7 +44,7 @@
   }
 ?>
             <tr>
-                <td colspan="4" align="left"><?php echo '<a href="' . FILENAME_STATS_HTTP_ERROR . '">'; ?><?php echo VIEW_COMPLETE_REPORT; ?></td>
+                <td colspan="4" align="left"><?php echo '<a href="' . FILENAME_STATS_HTTP_ERROR . '">'; ?><?php echo VIEW_COMPLETE_REPORT; ?></a></td>
             </tr>
         </table>
         </td>

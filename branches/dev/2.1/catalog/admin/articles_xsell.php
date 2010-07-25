@@ -60,8 +60,9 @@ function ToggleCheckBox($cb) {
         </table></td>
       </tr>
 <!-- body_text //-->
-    <td width="100%" valign="top"> 
-      <!-- Start of cross sale //-->
+	  <tr>
+        <td width="100%" valign="top"> 
+        <!-- Start of cross sale //-->
 
       <table width="100%" border="0" cellpadding="0"  cellspacing="0">
         <tr><td align="left" class="main" valign="top">

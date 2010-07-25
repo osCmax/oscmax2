@@ -41,7 +41,7 @@
         </td>
 	</tr>
     <tr>
-    	<td><?php echo '<a href="' . FILENAME_STATS_ADMIN_LOGGING . '">'; ?><?php echo VIEW_COMPLETE_REPORT; ?></td>
+    	<td><?php echo '<a href="' . FILENAME_STATS_ADMIN_LOGGING . '">'; ?><?php echo VIEW_COMPLETE_REPORT; ?></a></td>
     </tr>
 </table>
 <!-- END STATS LOGGING -->

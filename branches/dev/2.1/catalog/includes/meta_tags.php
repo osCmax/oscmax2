@@ -108,14 +108,24 @@ switch ($languages_id) {
     	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . NAVBAR_TITLE_1);
     	break;
 // END UPDATE
-    case CONTENT_ARTICLES:
-      $mt_articles_query = tep_db_query("select articles_id, language_id, articles_head_title_tag from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$_GET['articles_id'] . "' and language_id = '" . (int)$languages_id . "'");
-      $mt_articles = tep_db_fetch_array($mt_articles_query);
-
-      define('META_TAG_TITLE', $mt_articles['articles_head_title_tag'] . PRIMARY_SECTION . TITLE . $web_site_tagline);
-    	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_articles['articles_head_title_tag'] . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
-    	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_articles['articles_head_title_tag']);
-      break;
+	case CONTENT_ARTICLES: 
+       $mt_articles_query = tep_db_query("select articles_id, language_id, articles_head_title_tag, articles_head_desc_tag, articles_head_keywords_tag from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and language_id = '" . (int)$languages_id . "'"); 
+       $mt_articles = tep_db_fetch_array($mt_articles_query); 
+	   
+	   define('META_TAG_TITLE', $mt_articles['articles_head_title_tag'] . PRIMARY_SECTION . TITLE . $web_site_tagline);  
+	   
+	   if (($mt_articles['articles_head_desc_tag'] == NULL) || ($mt_articles['articles_head_desc_tag'] == '')) {  
+	     define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_articles['articles_head_title_tag'] . SECONDARY_SECTION . WEB_SITE_KEYWORDS); 
+	   } else {
+		 define('META_TAG_DESCRIPTION', $mt_articles['articles_head_desc_tag']); 
+	   }
+	   
+	   if (($mt_articles['articles_head_keywords_tag'] == NULL) || ($mt_articles['articles_head_keywords_tag'] == '')) {  
+	     define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_articles['articles_head_title_tag']); 
+	   } else {
+		 define('META_TAG_KEYWORDS', $mt_articles['articles_head_keywords_tag']); 
+	   }
+	   break;
     case CONTENT_ARTICLES_MAIN:
       define('META_TAG_TITLE', HEADING_TITLE . PRIMARY_SECTION . TITLE . $web_site_tagline);
     	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE_1 . SECONDARY_SECTION . WEB_SITE_KEYWORDS);

@@ -349,6 +349,6 @@ jQuery(document).ready(function() {
 </table>
 
 <?php } ?>
-
+<?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
 </body>
 </html>

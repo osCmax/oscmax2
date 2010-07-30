@@ -1957,6 +1957,18 @@ INSERT INTO configuration VALUES (779,'Config Cache Update File?','PAGE_CACHE_UP
 INSERT INTO configuration VALUES (1073,'Move tax to total amount','MOVE_TAX_TO_TOTAL_AMOUNT','True','Do you want to move the tax to the total amount? If true PayPal will allways show the total amount including tax. (needs Aggregate i.s.o. Per Item to function)',6,4,NULL,now(),NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), ');
 INSERT INTO configuration VALUES (498,'Purchase Without Account','PWA_ON','true','Allow Customers to purchase without an account',40,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 
+# Slimbox Admin controls
+INSERT INTO configuration VALUES (1150,'Rotate multiple images','SLIMBOX_LOOP','false','Navigate between the first and last images of a Slimbox popup gallery, when there is more than one image to display.<br>Default is false.',4,30,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1151,'Background Opacity','SLIMBOX_OPACITY','0.8','1 is opaque, 0 is completely transparent. You can change the color in the CSS file.<br>Default is 0.8',4,31,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1152,'Overlay Fade Duration','SLIMBOX_FADE','400','The duration of overlay fade-in and fade-out animations (msec). Set to 1 to disable.<br>Default is 400.',4,32,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1153,'Resize Duration','SLIMBOX_RESIZE','400','The duration of resize animation for width and height (msec). Set to 1 to disable.<br>Default is 400.',4,33,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1154,'Resize Easing','SLIMBOX_EASING','\"swing\"','The easing effect to use for the resize animation <b>(jQuery Easing Plugin required)</b>.<br>Many easings require a longer execution, so adjust the resizeDuration option as well.<br>Default is the inbuilt \"swing\".',4,34,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1155,'Initial Width','SLIMBOX_WIDTH','100','The initial width of the box, in pixels.<br>Default is 100.',4,35,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1156,'Initial Height','SLIMBOX_HEIGHT','100','The initial height of the box, in pixels.<br>Default is 100.',4,36,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1157,'Image Animation','SLIMBOX_IMAGE','400','The duration of the image fade-in animation (msec). Set to 1 to disable.<br>Default is 400.',4,37,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1158,'Caption Animation','SLIMBOX_CAPTION','400','The duration of the caption animation (msec). Set to 1 to disable.<br>Default is 400.',4,38,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (1159,'Counter Text','SLIMBOX_COUNTER','\"Image {x} of {y}\"','Customize the text which appears when multiple images are shown.<br>{x} represents the current image and {y} the total number of images.<br>Set it to false - without quotes, or \"\" to disable.<br>Default is \"Image {x} of {y}\".',4,39,NULL,now(),NULL,NULL);
+
 # New RC4 entries
 #INSERT INTO configuration VALUES (1202,'Admin Editor Default Width','HTML_AREA_WYSIWYG_EDITOR_WIDTH','550','How WIDE should the HTMLAREA be in pixels (default: 550)',25,66,NULL,now(),NULL,'');
 #INSERT INTO configuration VALUES (1203,'Admin Editor Default Height','HTML_AREA_WYSIWYG_EDITOR_HEIGHT','300','How HIGH should the HTMLAREA be in pixels (default: 300)',25,67,NULL,now(),NULL,'');

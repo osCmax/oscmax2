@@ -267,4 +267,5 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 	echo '<!-- coolMenu_eof //-->';
  }
  ?>
+<?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
 </html>

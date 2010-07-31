@@ -112,7 +112,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     $customer_group_id = '0';
   }
 
-    $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status and customers_group_id = '" . (int)$customer_group_id . "'");
+    $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status ='1' and customers_group_id = '" . (int)$customer_group_id . "'");
 // EOF: MOD - Separate_Pricing Per Customer
 
     $product = tep_db_fetch_array($product_query);

@@ -249,15 +249,14 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
   //echo $pfile; //debug code - displays current page name.
   
   if ($pfile == 'index.php') {
-    if (DISPLAY_SLIDESHOW == true) {
-     
-    echo '<script src="http://www.google.com/jsapi"></script>';
-    echo '<script>' . "\n";
-    echo '// Load jQuery' . "\n";
-    echo 'google.load("jquery", "1.4.0");' . "\n";
-    echo '</script>' . "\n"; 
-    echo '<script type="text/javascript" src="' . DIR_WS_JAVASCRIPT . 'showcase.2.0.js"></script>';
-	require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
+    if ( (DISPLAY_SLIDESHOW == true) && (tep_not_null($_GET['cpath'])) ) {   
+      echo '<script src="http://www.google.com/jsapi"></script>';
+      echo '<script>' . "\n";
+      echo '// Load jQuery' . "\n";
+      echo 'google.load("jquery", "1.4.0");' . "\n";
+      echo '</script>' . "\n"; 
+      echo '<script type="text/javascript" src="' . DIR_WS_JAVASCRIPT . 'showcase.2.0.js"></script>';
+	  require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
     }
   }
   if (DISPLAY_DHTML_MENU == 'CoolMenu') {

@@ -1917,7 +1917,7 @@ INSERT INTO configuration VALUES (524,'Display Topic/Author Filter','ARTICLE_LIS
 INSERT INTO configuration VALUES (525,'Location of Prev/Next Navigation Bar','ARTICLE_PREV_NEXT_BAR_LOCATION','bottom','Sets the location of the Previous/Next Navigation Bar<br><br>(top; bottom; both)',456,21,NULL,now(),NULL,'tep_cfg_select_option(array(\'top\',\'bottom\',\'both\'),');
 INSERT INTO configuration VALUES (526,'Use WYSIWYG CKEditor?','ARTICLE_WYSIWYG_ENABLE','Enable','Use WYSIWYG CKEditor in Articles and Topic/Author Descriptions?',456,22,NULL,now(),NULL,'tep_cfg_select_option(array(\'Enable\',\'Disable\'),');
 INSERT INTO configuration VALUES (391,'Down For Maintenance Start Time','TEXT_DATE_TIME','2008-05-03 14:23:52','Show when down for maintenance',16,14,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (700,'Number of Columns for product listings','PRODUCT_LIST_NUM_COLUMNS','4','How many prodcuts per row do you want to display on your product listing page?',8,14,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (700,'Number of Columns for product listings','PRODUCT_LIST_NUM_COLUMNS','3','How many prodcuts per row do you want to display on your product listing page?',8,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (701,'Minimum X-Sell products Listed','MIN_DISPLAY_XSELL','1','How many x-sell products per page',8,20,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (650,'Product Display Type (Default = 0 or Columns = 1)','PRODUCT_LIST_TYPE','1','Do you want to display products one per row or multiple columns per row?',8,10,NULL,now(),NULL,NULL);
 

@@ -43,7 +43,7 @@
                         <td class="smallText" align="right"><?php echo TEXT_NO_HTML; ?></td>
                       </tr>
                       <tr>
-                        <td class="main"><?php echo '<b>' . SUB_TITLE_RATING . '</b> ' . TEXT_BAD . ' ' . tep_draw_radio_field('rating', '1') . ' ' . tep_draw_radio_field('rating', '2') . ' ' . tep_draw_radio_field('rating', '3') . ' ' . tep_draw_radio_field('rating', '4') . ' ' . tep_draw_radio_field('rating', '5') . ' ' . TEXT_GOOD; ?></td>
+                        <td class="main">Rating: <span id="stars-cap"></span><div id="stars-wrapper1"><?php echo tep_draw_radio_field('rating', '1', '', 'title="Poor"') . ' ' . tep_draw_radio_field('rating', '2', '', 'title="Fair"') . ' ' . tep_draw_radio_field('rating', '3','','title="Average"') . ' ' . tep_draw_radio_field('rating', '4','','title="Good"') . ' ' . tep_draw_radio_field('rating', '5','','title="Excellent"'); ?></div></td>
                       </tr>
                     </table></td>
                   </tr>

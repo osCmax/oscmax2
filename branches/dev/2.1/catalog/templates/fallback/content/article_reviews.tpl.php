@@ -61,7 +61,7 @@
                             <table border="0" width="100%" cellspacing="0" cellpadding="2">
                               <tr>
                                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                                <td valign="top" class="main"><?php echo tep_break_string(tep_output_string_protected($reviews['reviews_text']), 60, '-<br>') . '<br>' . '<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS_INFO, 'articles_id=' . $article_info['articles_id'] . '&reviews_id=' . $reviews['reviews_id']) . '">' . TEXT_READ_REVIEW . '</a><br><br><i>' . sprintf(TEXT_REVIEW_RATING, tep_image(DIR_WS_IMAGES . 'stars_' . $reviews['reviews_rating'] . '.gif', sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating'])), sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating'])) . '</i>'; ?></td>
+                                <td valign="top" class="main"><?php echo tep_break_string(tep_output_string_protected($reviews['reviews_text']), 60, '-<br>') . '<br>' . '<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS_INFO, 'articles_id=' . $article_info['articles_id'] . '&reviews_id=' . $reviews['reviews_id']) . '">' . TEXT_READ_REVIEW . '</a><br><br><i>' . sprintf(TEXT_REVIEW_RATING, tep_image(DIR_WS_IMAGES . 'icons/stars_' . $reviews['reviews_rating'] . '.gif', sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating'])), sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating'])) . '</i>'; ?></td>
                                 <td width="10" align="right"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                               </tr>
                             </table>

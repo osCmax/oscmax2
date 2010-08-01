@@ -80,11 +80,12 @@
 				
 				default:
 					print "<h1 class=\"pageHeading\">QTPro Doctor - Overview</h1>";
-					print "<table><tr><td class='main'>You currently have <b>". qtpro_normal_product_count()."</b> products in your store.</td></tr>";
-					print "<tr><td class='main'><b>".qtpro_tracked_product_count()."</b> of them have options with tracked stock.</td></tr>";
-					print "<tr><td class='main'>In the database we currently have <b>". qtpro_number_of_trash_stock_rows() . "</b> trash rows.</td></tr></table>";
+					print "<table><tr><td class='main'>You currently have <b>" . qtpro_normal_product_count() . " active</b> and <b>" . qtpro_inactive_product_count() . " inactive</b> products in your store</td></tr>";
+					print "<tr><td class='main'><b>" . qtpro_tracked_product_count() . "</b> of the active stocks and <b>" . qtpro_inactive_tracked_product_count() . "</b> of the inactive stocks have options with tracked stock.</td></tr>";
+					print "<tr><td class='main'>In the database we currently have <b>" . qtpro_number_of_trash_stock_rows() . "</b> trash rows.</td></tr></table>";
 					//print "<b>".qtpro_sick_product_count()."</b> of the producks with tracked stock is sick.<br><br>";
 					qtpro_doctor_formulate_database_investigation();
+					qtpro_doctor_formulate_inactive_database_investigation();
 
 					
 				break;

@@ -126,6 +126,10 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
   
   $product_investigation = qtpro_doctor_investigate_product($VARS['product_id']);
   
+  //PGM sets contents of right hand column arrays
+  $heading = array();
+  $contents = array();
+  
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -140,154 +144,163 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
 <!-- header_eof //-->
 
 <!-- body //-->
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
-  <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
-    </table></td>
+  <table border="0" width="100%" cellspacing="2" cellpadding="2">
+    <tr>
+      <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+        <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+          <!-- left_navigation //-->
+          <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+          <!-- left_navigation_eof //-->
+        </table>
+      </td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td>
-		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+      <td>
+        <table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-	  		<td class="pageHeading"><?php echo PRODUCTS_STOCK . ': ' . $product_name . '<td align="right"></td><br><br>'; ?></td>
-            <td class="pageHeading" align="right">&nbsp;</td>
+            <td width="75%">
+              <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <tr>
+                  <td>
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td class="pageHeading"><?php echo PRODUCTS_STOCK . ': ' . $product_name; ?></td>
+                        <td class="pageHeading" align="right">&nbsp;</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td><form action="<?php echo $PHP_SELF;?>" method=get>
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td valign="top">
+                          <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                            <tr class="dataTableHeadingRow">
+                            <?php
+                              $title_num=1;
+                              if ($flag) {
+                                while(list($k,$v)=each($options)) {
+                                  echo "<td class=\"dataTableHeadingContent\" valign=\"middle\">&nbsp;&nbsp;$option_names[$k]</td>";
+                                  $title[$title_num]=$k;
+                                }
+                                echo "<td class=\"dataTableHeadingContent\" valign=\"middle\"><span class=smalltext>Quantity</span></td><td width=\"100%\">&nbsp;</td>";
+                                echo "</tr>";
+                                $q=tep_db_query("select * from " . TABLE_PRODUCTS_STOCK . " where products_id=" . $VARS['product_id'] . " order by products_stock_attributes");
+                                while($rec=tep_db_fetch_array($q)) {
+                                  $val_array=explode(",",$rec[products_stock_attributes]);
+                                  echo "<tr>";
+                                  foreach($val_array as $val) {
+                                    if (preg_match("/^(\d+)-(\d+)$/",$val,$m1)) {
+                                      echo "<td class=smalltext>&nbsp;&nbsp;&nbsp;".tep_values_name($m1[2])."</td>";
+                                    } else {
+                                      echo "<td>&nbsp;</td>";
+                                    }
+                                  }
+                                  for($i=0;$i<sizeof($options)-sizeof($val_array);$i++) {
+                                    echo "<td>&nbsp;</td>";
+                                  }
+                                  echo "<td class=smalltext>&nbsp;&nbsp;&nbsp;&nbsp;$rec[products_stock_quantity]</td><td>&nbsp;</td></tr>";
+                                }
+                                echo "<tr>";
+                                reset($options);
+                                $i=0;
+                                while(list($k,$v)=each($options)) {
+                                  echo "<td class=dataTableHeadingRow><select name=option$k>";
+                                  foreach($v as $v1) {
+                                    echo "<option value=".$v1[1].">".$v1[0];
+                                  }
+                                  echo "</select></td>";
+                                  $i++;
+                                }
+                              } else {
+                                $i=1;
+                                echo "<td class=dataTableHeadingContent valign=\"middle\">Quantity</td>";
+                              }
+                              echo "<td class=dataTableHeadingRow valign=\"middle\"><input type=text name=quantity size=4 value=\"" . $db_quantity . "\"><input type=hidden name=product_id value=\"" . $VARS['product_id'] . "\">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow valign=\"middle\">&nbsp;<input type=submit name=action value=" . ($flag?"Add":"Update") . ">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow>&nbsp;</td>";
+                            ?>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </form></td>
+                </tr>
+                <tr>
+                  <td><br>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td class="dataTableHeadingRow">
+                          <table width="100%" class="boxText" border="0" cellspacing="3" cellpadding="6"> 
+                            <tr valign="top">
+                              <td class="dataTableHeadingContent" width="400" style="font-size: 12;">QTPro Doctor</td>
+                              <td class="dataTableHeadingContent" style="font-size: 12;">Links</td>
+                            </tr>
+                            <tr valign="top">
+                              <td class="menuBoxHeading" width="400">
+                                <span style="font-family: Verdana, Arial, sans-serif; font-size: 10px; color: black;">
+                                <?php 
+                                    //$product_investigation = qtpro_doctor_investigate_product($VARS['product_id']); //Defoined above? behövs då ej här
+                                    print qtpro_doctor_formulate_product_investigation($product_investigation, 'detailed');
+                                ?>
+                                </span>
+                              </td>
+                              <td class="menuBoxHeading">
+                                <?php 
+                                echo '<br><ul><li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $VARS['product_id'] . '&action=new_product') . '" class="menuBoxContentLink">Edit this product</a></li>';
+                                echo '<li><a href="' . tep_href_link(FILENAME_STATS_LOW_STOCK_ATTRIB, '', 'NONSSL') . '" class="menuBoxContentLink">Go to the low stock report</a><br></li>';
+            
+                                //class="menuBoxHeading columnLeft
+                                //We shall now generate links back to the product in the admin/categories.php page.
+                                //The same product can exist in differend categories.
+                                  
+                                  //Generate both the text (in $path_array) and the parameter (in $cpath_string_array)
+                                  $raw_path_array =tep_generate_category_path($VARS['product_id'], 'product');
+                                  $path_array = array();
+                                  $cpath_string_array = array();
+                                  foreach($raw_path_array as $raw_path){
+                                    $path_in_progress='';
+                                    $cpath_string_in_progress='';
+                                    foreach($raw_path as $raw_path_piece){
+                                      $path_in_progress .= $raw_path_piece['text'].' >> ';
+                                      $cpath_string_in_progress .= $raw_path_piece['id'].'_';
+                                    }
+                                    $path_array[]= substr($path_in_progress, 0, -4);
+                                    $cpath_string_array[] = substr($cpath_string_in_progress, 0, -1);
+                                  }
+                                  
+                                  if (sizeof($raw_path_array)>0) {
+                            
+                            
+                                    $curr_pos = 0;
+                                    foreach($path_array as $neverusedvariable) {
+                                      print '<li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID='.$VARS['product_id'].'&cPath='. $cpath_string_array[$curr_pos] , 'NONSSL') . '" class="menuBoxContentLink">Go to this product in '.$path_array[$curr_pos].'</a></li>';
+                                      $curr_pos++;
+                                    }
+                                 }else{
+                                    print '<span style="font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #FF1111; font-weight: normal; text-decoration: none;">Warning! This product does not seem to exist in any category. Your customers can\'t find it.</span>';
+                                 }
+                                 
+                                echo '</ul>';
+                                ?>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+    		</td>
+    		<td width="25%" valign="top">
+              <!-- QTPro $heading and $contents to go here -->
+            </td>
           </tr>
         </table>
-		</td>
-      </tr>
-      <tr>
-        <td><form action="<?php echo $PHP_SELF;?>" method=get>
-        <table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr class="dataTableHeadingRow">
-<?php
-  $title_num=1;
-  if ($flag) {
-    while(list($k,$v)=each($options)) {
-      echo "<td class=\"dataTableHeadingContent\">&nbsp;&nbsp;$option_names[$k]</td>";
-      $title[$title_num]=$k;
-    }
-    echo "<td class=\"dataTableHeadingContent\"><span class=smalltext>Quantity</span></td><td width=\"100%\">&nbsp;</td>";
-    echo "</tr>";
-    $q=tep_db_query("select * from " . TABLE_PRODUCTS_STOCK . " where products_id=" . $VARS['product_id'] . " order by products_stock_attributes");
-    while($rec=tep_db_fetch_array($q)) {
-      $val_array=explode(",",$rec[products_stock_attributes]);
-      echo "<tr>";
-      foreach($val_array as $val) {
-        if (preg_match("/^(\d+)-(\d+)$/",$val,$m1)) {
-          echo "<td class=smalltext>&nbsp;&nbsp;&nbsp;".tep_values_name($m1[2])."</td>";
-        } else {
-          echo "<td>&nbsp;</td>";
-        }
-      }
-      for($i=0;$i<sizeof($options)-sizeof($val_array);$i++) {
-        echo "<td>&nbsp;</td>";
-      }
-      echo "<td class=smalltext>&nbsp;&nbsp;&nbsp;&nbsp;$rec[products_stock_quantity]</td><td>&nbsp;</td></tr>";
-    }
-    echo "<tr>";
-    reset($options);
-    $i=0;
-    while(list($k,$v)=each($options)) {
-      echo "<td class=dataTableHeadingRow><select name=option$k>";
-      foreach($v as $v1) {
-        echo "<option value=".$v1[1].">".$v1[0];
-      }
-      echo "</select></td>";
-      $i++;
-    }
-  } else {
-    $i=1;
-    echo "<td class=dataTableHeadingContent>Quantity</td>";
-  }
-  echo "<td class=dataTableHeadingRow><input type=text name=quantity size=4 value=\"" . $db_quantity . "\"><input type=hidden name=product_id value=\"" . $VARS['product_id'] . "\">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow>&nbsp;<input type=submit name=action value=" . ($flag?"Add":"Update") . ">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow>&nbsp;</td>";
-?>
-              </tr>
-            </table></td>
-          </tr>
-        </table>
-        </form></td>
-      </tr>
-<tr><td>
-
-<br>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="dataTableHeadingRow">
-<table width="100%" class="boxText" border="0" cellspacing="3" cellpadding="6"> 
-<tr valign="top">
-	<td class="dataTableHeadingContent" width="400" style="font-size: 12;">QTPro Doctor</td>
-	<td class="dataTableHeadingContent" style="font-size: 12;">Links</td>
-	
-</tr>
-
-<tr valign="top">
-	<td class="menuBoxHeading" width="400">
-	<span style="font-family: Verdana, Arial, sans-serif; font-size: 10px; color: black;">
-	<?php 
-  		//$product_investigation = qtpro_doctor_investigate_product($VARS['product_id']); //Defoined above? behövs då ej här
-		print qtpro_doctor_formulate_product_investigation($product_investigation, 'detailed');
-  	?>
-	</span>
-	</td>
-	
-    <td class="menuBoxHeading">
-	<?php 
-	
-	
-	echo '<br><ul><li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $VARS['product_id'] . '&action=new_product') . '" class="menuBoxContentLink">Edit this product</a></li>';
-	echo '<li><a href="' . tep_href_link(FILENAME_STATS_LOW_STOCK_ATTRIB, '', 'NONSSL') . '" class="menuBoxContentLink">Go to the low stock report</a><br></li>';
-	
-	//class="menuBoxHeading columnLeft
-	//We shall now generate links back to the product in the admin/categories.php page.
-	//The same product can exist in differend categories.
-	  
-	  //Generate both the text (in $path_array) and the parameter (in $cpath_string_array)
-	  $raw_path_array =tep_generate_category_path($VARS['product_id'], 'product');
-	  $path_array = array();
-	  $cpath_string_array = array();
-	  foreach($raw_path_array as $raw_path){
-	    $path_in_progress='';
-		$cpath_string_in_progress='';
-	  	foreach($raw_path as $raw_path_piece){
-	      $path_in_progress .= $raw_path_piece['text'].' >> ';
-		  $cpath_string_in_progress .= $raw_path_piece['id'].'_';
-	    }
-		$path_array[]= substr($path_in_progress, 0, -4);
-		$cpath_string_array[] = substr($cpath_string_in_progress, 0, -1);
-	  }
-	  
-	  if (sizeof($raw_path_array)>0) {
-
-
-		$curr_pos = 0;
-		foreach($path_array as $neverusedvariable) {
-		  print '<li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID='.$VARS['product_id'].'&cPath='. $cpath_string_array[$curr_pos] , 'NONSSL') . '" class="menuBoxContentLink">Go to this product in '.$path_array[$curr_pos].'</a></li>';
-		  $curr_pos++;
-		}
-	 }else{
-	 	print '<span style="font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #FF1111; font-weight: normal; text-decoration: none;">Warning! This product does not seem to exist in any category. Your customers can\'t find it.</span>';
-	 }
-	 
-	echo '</ul>';
-	 
-	?>
-	</td>
-
-  </tr>
-</table></table>
-
-
-
-</td></tr>
-    </table></td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
+      </td>
+      <!-- body_text_eof //-->
+    </tr>
+  </table>
 <!-- body_eof //-->
 
 <!-- footer //-->

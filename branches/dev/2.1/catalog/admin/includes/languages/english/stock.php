@@ -27,6 +27,6 @@
   
   
 */
-define('PRODUCTS_STOCK',"Products stock");
-define('TABLE_TITLE_ATTRIBUTES',"Attributes");
+define('PRODUCTS_STOCK', 'Products stock');
+define('TABLE_TITLE_ATTRIBUTES', 'Attributes');
 ?>

@@ -57,6 +57,7 @@ $contents = ('<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=1', 'N
               '<li><a href="' . tep_href_link('infobox_configuration.php?gID=1', 'NONSSL') . '">Infoboxes</a></li>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=99', 'NONSSL') . '">Open Featured Sets</a></li>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7575', 'NONSSL') . '">One Page Checkout</a></li>' .
+			  '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=205', 'NONSSL') . '">Corner Banners</a></li>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=203', 'NONSSL') . '">Notifications</a></li>' .
 			  '<li><a href="' . tep_href_link('#', 'NONSSL') . '">Slideshow</a><ul>' .
 			     '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=204', 'NONSSL') . '">Slideshow Settings</a></li>' .

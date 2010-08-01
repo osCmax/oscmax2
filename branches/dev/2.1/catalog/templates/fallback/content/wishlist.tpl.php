@@ -34,7 +34,7 @@
 ?>
       <tr>
         <td>
-          <table border="0" width="100%" cellspacing="0" cellpadding="3" class="productListing">
+          <table border="0" width="100%" cellspacing="0" cellpadding="3" class="productListing-list">
             <tr>
               <td class="productListing-heading"><?php echo BOX_TEXT_REMOVE; ?></td>
               <td class="productListing-heading"><?php echo BOX_TEXT_IMAGE; ?></td>
@@ -61,9 +61,9 @@
 
 ?>
             <tr class="<?php echo $class; ?>">
-              <td valign="middle" class="productListing-data" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=remove_product&wishlist_id=' . $wishlist_id . '', 'NONSSL').'">' . tep_image(DIR_WS_ICONS . 'basket_delete.png', IMAGE_BUTTON_REMOVE_PRODUCT, 16, 16) . '</a></td>'; ?>
-              <td valign="top" class="productListing-data" align="left"><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?></a></td>
-              <td valign="top" class="productListing-data" align="left" class="main"><b><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>"><?php echo $products['products_name']; ?></a></b>
+              <td valign="middle" class="productListing-data-list" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=remove_product&wishlist_id=' . $wishlist_id . '', 'NONSSL').'">' . tep_image(DIR_WS_ICONS . 'basket_delete.png', IMAGE_BUTTON_REMOVE_PRODUCT, 16, 16) . '</a></td>'; ?>
+              <td valign="top" class="productListing-data-list" align="left"><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?></a></td>
+              <td valign="top" class="productListing-data-list" align="left" class="main"><b><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>"><?php echo $products['products_name']; ?></a></b>
                 <input type="hidden" name="prod_link[]" value="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>" />
                 <input type="hidden" name="prod_name[]" value="<?php echo $products['products_name']; ?>" />
 <?php
@@ -120,8 +120,8 @@
       $i++;
 ?>
             </td>
-            <td valign="top" class="productListing-data"><?php echo $products_price; ?></td>
-            <td valign="top" class="productListing-data" align="center">
+            <td valign="top" class="productListing-data-list"><?php echo $products_price; ?></td>
+            <td valign="top" class="productListing-data-list" align="center">
 <?php
 
 // PREVENT THE ITEM FROM BEING ADDED TO CART IF NO LONGER AVAILABLE

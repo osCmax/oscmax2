@@ -177,4 +177,11 @@ $Id: boxes.php 3 2006-05-27 04:59:07Z user $
       $this->tableBox($contents, true);
     }
   }
+
+  class productListingBoxList extends tableBox {
+    function productListingBoxList($contents) {
+      $this->table_parameters = 'class="productListing-list"';
+      $this->tableBox($contents, true);
+    }
+  }
 ?>

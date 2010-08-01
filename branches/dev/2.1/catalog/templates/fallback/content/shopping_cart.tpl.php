@@ -87,14 +87,14 @@ switch ($_GET['action']) {
       $cur_row = sizeof($info_box_contents) - 1;
 
       $info_box_contents[$cur_row][] = array('align' => 'center',
-                                             'params' => 'class="productListing-data" valign="middle"',
+                                             'params' => 'class="productListing-data-list" valign="middle"',
                                              //  'text' => tep_draw_checkbox_field('cart_delete[]', $products[$i]['id']));
 											 'text' => '<a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'action=remove_product&products_id='.$products[$i]['id'].'', 'NONSSL').'">' . tep_image(DIR_WS_ICONS . 'basket_delete.png', IMAGE_BUTTON_REMOVE_PRODUCT, 16, 16) . '</a>');
 
       $products_name = '<table border="0" cellspacing="2" cellpadding="2">' .
                        '  <tr>' .
-                       '    <td class="productListing-data" align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products[$i]['image'], $products[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td>' .
-                       '    <td class="productListing-data" valign="top"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '"><b>' . $products[$i]['name'] . '</b></a>';
+                       '    <td class="productListing-data-blank" align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products[$i]['image'], $products[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td>' .
+                       '    <td class="productListing-data-blank" valign="top"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '"><b>' . $products[$i]['name'] . '</b></a>';
 
       if (STOCK_CHECK == 'true') {
 //++++ QT Pro: Begin Changed code
@@ -122,19 +122,19 @@ switch ($_GET['action']) {
                         '  </tr>' .
                         '</table>';
 
-      $info_box_contents[$cur_row][] = array('params' => 'class="productListing-data"',
+      $info_box_contents[$cur_row][] = array('params' => 'class="productListing-data-list"',
                                              'text' => $products_name);
 
       $info_box_contents[$cur_row][] = array('align' => 'center',
-                                             'params' => 'class="productListing-data" valign="top"',
+                                             'params' => 'class="productListing-data-list" valign="top"',
                                              'text' => tep_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'size="4" style="width:30px; text-align:center;" onblur="document.cart_quantity.submit();"') . tep_draw_hidden_field('products_id[]', $products[$i]['id']));
 
       $info_box_contents[$cur_row][] = array('align' => 'right',
-                                             'params' => 'class="productListing-data" valign="top"',
+                                             'params' => 'class="productListing-data-list" valign="top"',
                                              'text' => '<b>' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</b>');
     }
 
-    new productListingBox($info_box_contents);
+    new productListingBoxList($info_box_contents);
 ?>
         </td>
       </tr>

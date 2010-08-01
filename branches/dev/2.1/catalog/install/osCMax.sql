@@ -2115,6 +2115,17 @@ INSERT INTO configuration VALUES (2641, 'Enable Slideshow?', 'DISPLAY_SLIDESHOW'
 INSERT INTO configuration VALUES (2642, 'Do you want to use an AJAX search suggest on the Search Infobox?', 'AJAX_SEARCH_SUGGEST', 'false', 'Would you like to use an AJAX Search Suggest?', 201, 25, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
 INSERT INTO configuration VALUES (2643, 'Use UK or US English Language','ENGLISH_SWITCH','US','Would you like to setup your store using UK or US English. (Date format, Address Titles, DoB, etc.)','1','10',NULL,now(),NULL,'tep_cfg_select_option(array(\'US\', \'UK\'),');
 
+#Corner Banners Start
+INSERT INTO configuration VALUES (2644, 'Last Few Remaining corner banner?', 'CB_LAST_FEW', 'true', 'Would you like to display the Last Few Remaining corner banner?<br><center><img src="../images/corner_banners/last_few.png"></center>', 205, 1, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2645, 'Last Few Remaining display level?', 'CB_LAST_FEW_NO', '5', 'At what level of remaining stock do you want to display the Last Few Remaining corner banner?', 205, 2, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2646, 'Top Rated corner banner?', 'CB_TOP_RATED', 'true', 'Would you like to display the Top Rated corner banner?<br><center><img src="../images/corner_banners/top_rated.png"></center>', 205, 3, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2647, 'Top Rated display level?', 'CB_TOP_RATED_NO', '4', 'At what level of rating do you want to display the Top Rated corner banner?', 205, 4, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2648, 'Featured Product corner banner?', 'CB_FEATURED', 'true', 'Would you like to display the Featured Product corner banner?<br><center><img src="../images/corner_banners/featured.png"></center>', 205, 5, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2649, 'Special Offer corner banner?', 'CB_SPECIALS', 'true', 'Would you like to display the Special Offer corner banner?<br><center><img src="../images/corner_banners/save50.png"></center>', 205, 6, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2650, 'Special Offer display level?', 'CB_SPECIALS_NO', '20', 'At what level of discount do you want to start displaying the Special Offer corner banner?<br><br>Please note that the Special Offer banners are rounded down to the <b>nearest 5%</b>.', 205, 7, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2651, 'Call for Price corner banner?', 'CB_CALL_FOR_PRICE', 'true', 'Would you like to display the Call for Price corner banner?<br><center><img src="../images/corner_banners/callforprice.png"></center>', 205, 8, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2652, 'Out of Stock corner banner?', 'CB_OUT_OF_STOCK', 'true', 'Would you like to display the Out of Stock corner banner?<br><center><img src="../images/corner_banners/out_of_stock.png"></center>', 205, 9, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+#Corner Banners End
 
 
 #Open Feature Sets Start
@@ -2253,11 +2264,15 @@ INSERT INTO configuration_group VALUES (87,'reCaptcha', 'reCaptcha Settings', 90
 INSERT INTO configuration_group VALUES (88,'Price breaks', 'Configuration options for price breaks', 88, 1);
 INSERT INTO configuration_group VALUES (89,'Google Maps', 'Google Maps Settings', 89, 1);
 
-INSERT INTO configuration_group VALUES (99,'Featured Sets', 'Configure featured sets', 99, 1);   
+INSERT INTO configuration_group VALUES (99,'Featured Sets', 'Configure featured sets', 99, 1); 
+  
 INSERT INTO configuration_group VALUES (201,'Template Setup', 'Template Settings', 201, 1);
 INSERT INTO configuration_group VALUES (202,'Page Modules', 'Page Module Settings', 202, 1);
 INSERT INTO configuration_group VALUES (203,'Notifications', 'Notifications', 203, 1);
-INSERT INTO configuration_group VALUES(7575, 'One Page Checkout', 'Settings for one page checkout', 16, 1);
+INSERT INTO configuration_group VALUES (204,'SlideShow Settings', 'SlideShow Settings', 204, 1);
+INSERT INTO configuration_group VALUES (205,'Corner Banners', 'Corner Banners', 205, 1);
+
+INSERT INTO configuration_group VALUES (7575, 'One Page Checkout', 'Settings for one page checkout', 16, 1);
 
 INSERT INTO `countries` VALUES(1, 'Afghanistan', 'AF', 'AFG', 1, 1);
 INSERT INTO `countries` VALUES(2, 'Albania', 'AL', 'ALB', 1, 1);

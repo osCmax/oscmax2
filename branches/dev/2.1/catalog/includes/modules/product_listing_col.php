@@ -3,6 +3,13 @@
 $Id: product_listing_col.php 14 2006-07-28 17:42:07Z user $
 */
 ?>
+<!-- PGM fix for Corner Banners in Internet Explorer -->
+<!--[if IE]>
+<style>
+img.corner_banner { display:inline-block; margin-left:-105px; margin-top:-7px; position:absolute; } 
+</style>
+<![endif]-->
+
 <!-- PGM SORT ORDER, NUMBER DISPLAY, GRID SWITCH -->
 
 <?php
@@ -196,6 +203,55 @@ for ($x = 0; $x < $no_of_listings; $x++) {
         $lc_align = '';
 
         switch ($column_list[$col]) {
+		  case 'PRODUCT_CORNER_BANNER':
+		  $lc_text = '';
+		  
+		  // Last Few Remaining Corner Banner
+		  if (CB_LAST_FEW == 'true') { 
+		    if ($listing[$x]['products_quantity'] <= CB_LAST_FEW_NO) {
+	 	      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/last_few.png">';
+            }	
+		  }
+		  // Top Rated Corner Banner
+		  if (CB_TOP_RATED == 'true') {
+		    $reviews_query = tep_db_query("select reviews_rating from " . TABLE_REVIEWS . " where products_id = '" . $listing[$x]['products_id'] . "'");
+              $reviews = tep_db_fetch_array($reviews_query);
+                if ($reviews['reviews_rating'] >= CB_TOP_RATED_NO) {
+                  $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/top_rated.png">';
+                }
+		  }
+		  // Featured Product Corner Banner
+		  if (CB_FEATURED == 'true') {
+		    if ($listing[$x]['products_featured'] == 1) {
+	 	      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/featured.png">';
+            }	
+		  }
+		  // Special Offer Price Corner Banner
+		  if (CB_SPECIALS == 'true') {
+		    if (tep_not_null($listing[$x]['specials_new_products_price'])) {			 
+			  //Find out discount and round to nearest 5
+			  $fullprice = $listing[$x]['products_price'];
+			  $saleprice = $listing[$x]['specials_new_products_price'];
+			  $discount = ((($fullprice - $saleprice) / $fullprice) * 100);
+			  $rounded_discount = floor($discount / 5) * 5; 
+			    if ($rounded_discount >= CB_SPECIALS_NO) { 
+                  $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/save' . $rounded_discount . '.png">';
+				}
+            } 
+		  }
+		  // Call for Price Corner Banner
+		  if (CB_CALL_FOR_PRICE == 'true') {
+		    if ($listing[$x]['products_price'] == CALL_FOR_PRICE_VALUE) {
+		      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/callforprice.png">';
+		    }
+		  }
+		  // Out of Stock Corner Banner
+		  if (CB_OUT_OF_STOCK == 'true') {
+		    if ($listing[$x]['products_quantity'] == 0) {
+		      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/out_of_stock.png">';
+		    }
+		  }	
+		  break;
           case 'PRODUCT_LIST_MODEL':
             $lc_align = '';
            $lc_text = '&nbsp;' . $listing[$x]['products_model'] . '&nbsp;';
@@ -280,19 +336,34 @@ for ($x = 0; $x < $no_of_listings; $x++) {
       $list_box_contents[$row][$column] = array('align' => 'center',
                                                 'params' => 'class="productListing-data"',
                                                 'text'  => $lc_text);
-      $column ++;
+	  
+	  $column ++;
+	  
+	  //Adds a spacer column between the product column - checks if it is the last column - if it is leave it out.
+	  if ($column != PRODUCT_LIST_NUM_COLUMNS + 2) { // Adds 2 to the column count to allow for spacers
+	  $list_box_contents[$row][$column] = array('align' => 'center',
+                                                'params' => 'class="productListing-data-spacer"',
+                                                'text'  => tep_draw_separator('pixel_trans.gif', '10', '10'));
+	  $column ++;
+	  }
 
-			if ($column >= PRODUCT_LIST_NUM_COLUMNS) {
-        $row ++;
-        $column = 0;
+			if ($column >= PRODUCT_LIST_NUM_COLUMNS + (PRODUCT_LIST_NUM_COLUMNS-1)) {
+        	  $row ++;
+			  // Add a row spacer between the product rows
+			  $list_box_contents[$row][0] = array('align' => 'center',
+                                                'params' => 'class="productListing-data-spacer"',
+                                                'text'  => tep_draw_separator('pixel_trans.gif', '10', '10'));
+			  
+			  $row ++;
+        	  $column = 0;
 			}
 
     } // line 102 (N of listing per current page)
     if ($column > 0){
-    	for ($x = $column; $x < PRODUCT_LIST_NUM_COLUMNS; $x++){
+    	for ($x = $column; $x < PRODUCT_LIST_NUM_COLUMNS + (PRODUCT_LIST_NUM_COLUMNS-1); $x++){ // Adds 2 to the column count to allow for spacers
     		
     		$list_box_contents[$row][$column] = array('align' => 'center',
-                                              'params' => 'class="productListing-data" ',
+                                              'params' => 'class="productListing-data-blank" ',
                                               'text'  => "&nbsp;");
  				$column++;
     		

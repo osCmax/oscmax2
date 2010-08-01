@@ -210,32 +210,38 @@
                 <!-- Description Ends -->
               </tr>
               <!-- Product Extra Fields Starts -->
-			  <tr>
-              	<td class="productinfo_epf">
-                <?php
-                  // begin Extra Product Fields			  
-                  foreach ($epf as $e) {
-                    $mt = ($e['uses_list'] && !$e['multi_select'] ? ($product_info[$e['field']] == 0) : !tep_not_null($product_info[$e['field']]));
-					if (!$mt) { // only display if information is set for product
-                      echo '<b>' . $e['label'] . ': </b>';
-                      if ($e['uses_list']) {
-                        if ($e['multi_select']) {
-                          $values = explode('|', trim($product_info[$e['field']], '|'));
-                          $listing = array();
-                          foreach ($values as $val) {
-                            $listing[] = tep_get_extra_field_list_value($val, $e['show_chain'], $e['display_type']);
+			  <?php
+                // begin Extra Product Fields		
+				$epf_number = count($epf);
+				if ($epf_number > 0 ) { ?>
+                  <tr>
+				    <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+				  </tr>
+				  <tr>
+              		<td class="productinfo_epf">
+                  <?php
+                    foreach ($epf as $e) {
+                      $mt = ($e['uses_list'] && !$e['multi_select'] ? ($product_info[$e['field']] == 0) : !tep_not_null($product_info[$e['field']]));
+					  if (!$mt) { // only display if information is set for product
+                        echo '<b>' . $e['label'] . ': </b>';
+                        if ($e['uses_list']) {
+                          if ($e['multi_select']) {
+                            $values = explode('|', trim($product_info[$e['field']], '|'));
+                            $listing = array();
+                            foreach ($values as $val) {
+                              $listing[] = tep_get_extra_field_list_value($val, $e['show_chain'], $e['display_type']);
+                            }
+                            echo implode(', ', $listing);
+                          } else {
+                            echo tep_get_extra_field_list_value($product_info[$e['field']], $e['show_chain'], $e['display_type']);
                           }
-                          echo implode(', ', $listing);
                         } else {
-                          echo tep_get_extra_field_list_value($product_info[$e['field']], $e['show_chain'], $e['display_type']);
+                          echo $product_info[$e['field']];
                         }
-                      } else {
-                        echo $product_info[$e['field']];
+                        echo '<br>';
                       }
-                      echo '<br>';
-                    }
-                  }
-                  // end Extra Product Fields
+                    } // end Extra Product Fields
+				  } // end if wrapping code
                 ?>
                 </td>
               </tr>

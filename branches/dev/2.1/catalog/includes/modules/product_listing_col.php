@@ -67,33 +67,38 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 ?>
 <!-- PGM SORT ORDER, NUMBER DISPLAY, GRID SWITCH -->
 <!-- begin extra product fields -->
-		<table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox">
-          <tr>
-            <td class="main" align="right" colspan="2">
+		
             <?php
-              $epf_list = array();
-              foreach ($epf as $e) {
-                if ($e['restrict']) $epf_list[] = $e['field'];
-              }
-              echo tep_draw_form('epf_restrict', FILENAME_DEFAULT, 'get');
-              if (is_array($_GET) && (sizeof($_GET) > 0)) {
-                reset($_GET);
-                while (list($key, $value) = each($_GET)) {
-                  if ( (strlen($value) > 0) && ($key != tep_session_name()) && (!in_array($key, $epf_list)) ) {
-                    echo tep_draw_hidden_field($key, $value);
-                  }
-                }
-              }
-              foreach ($epf as $e) {
-                if ($e['restrict']) {
-                  echo sprintf(TEXT_RESTRICT_TO, $e['label'], tep_draw_pull_down_menu($e['field'], tep_build_epf_pulldown($e['id'], $languages_id, array(array('id' => '', 'text' => TEXT_ANY_VALUE))),'', 'onchange="this.form.submit()"')) . '<br>';
-                }
-              }
-             ?>
-             </form>
-            </td>
-          </tr>
-        </table>
+            $epf_list = array();
+			$epf_number = count($epf);
+			if ($epf_number > 0) { // hide epf if blank ?>
+        	  <table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox">
+          		<tr>
+            	  <td class="main" align="right" colspan="2">
+					<?php      
+                      foreach ($epf as $e) {
+                        if ($e['restrict']) $epf_list[] = $e['field'];
+                      }
+                      echo tep_draw_form('epf_restrict', FILENAME_DEFAULT, 'get');
+                      if (is_array($_GET) && (sizeof($_GET) > 0)) {
+                        reset($_GET);
+                        while (list($key, $value) = each($_GET)) {
+                          if ( (strlen($value) > 0) && ($key != tep_session_name()) && (!in_array($key, $epf_list)) ) {
+                            echo tep_draw_hidden_field($key, $value);
+                          }
+                        }
+                      }
+                      foreach ($epf as $e) {
+                        if ($e['restrict']) {
+                          echo sprintf(TEXT_RESTRICT_TO, $e['label'], tep_draw_pull_down_menu($e['field'], tep_build_epf_pulldown($e['id'], $languages_id, array(array('id' => '', 'text' => TEXT_ANY_VALUE))),'', 'onchange="this.form.submit()"')) . '<br>';
+                        }
+                      }
+                      ?>
+                      </form>
+            	  </td>
+          		</tr>
+        	  </table>
+           <?php } // end if to hide epf ?>
 <!-- end extra product fields -->
 <?php
 echo tep_draw_separator('pixel_trans.gif', '100%', '10');

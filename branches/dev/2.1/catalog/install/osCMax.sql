@@ -1756,16 +1756,16 @@ INSERT INTO configuration VALUES (101,'Enter the Maximum Package Weight you will
 INSERT INTO configuration VALUES (102,'Package Tare weight.','SHIPPING_BOX_WEIGHT','1','What is the weight of typical packaging of small to medium packages?','7','4',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (103,'Larger packages - percentage increase.','SHIPPING_BOX_PADDING','10','For 10% enter 10','7','5',NULL,now(),NULL,NULL);
 
-INSERT INTO configuration VALUES (104,'Display Product Image','PRODUCT_LIST_IMAGE','1','Do you want to display the Product Image?','8','1',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (105,'Display Product Manufaturer Name','PRODUCT_LIST_MANUFACTURER','0','Do you want to display the Product Manufacturer Name?','8','2',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (106,'Display Product Model','PRODUCT_LIST_MODEL','0','Do you want to display the Product Model?','8','3',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (107,'Display Product Name','PRODUCT_LIST_NAME','2','Do you want to display the Product Name?','8','4',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (108,'Display Product Price','PRODUCT_LIST_PRICE','3','Do you want to display the Product Price','8','5',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (109,'Display Product Quantity','PRODUCT_LIST_QUANTITY','0','Do you want to display the Product Quantity?','8','6',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (110,'Display Product Weight','PRODUCT_LIST_WEIGHT','0','Do you want to display the Product Weight?','8','7',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (111,'Display Buy Now column','PRODUCT_LIST_BUY_NOW','4','Do you want to display the Buy Now column?','8','8',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (112,'Display Category/Manufacturer Filter (0=disable; 1=enable)','PRODUCT_LIST_FILTER','1','Do you want to display the Category/Manufacturer Filter?','8','9',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (113,'Location of Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)','PREV_NEXT_BAR_LOCATION','3','Sets the location of the Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)','8','10',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (104,'Display Product Image','PRODUCT_LIST_IMAGE','2','Do you want to display the Product Image?','8','2',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (105,'Display Product Manufaturer Name','PRODUCT_LIST_MANUFACTURER','0','Do you want to display the Product Manufacturer Name?','8','3',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (106,'Display Product Model','PRODUCT_LIST_MODEL','0','Do you want to display the Product Model?','8','4',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (107,'Display Product Name','PRODUCT_LIST_NAME','3','Do you want to display the Product Name?','8','5',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (108,'Display Product Price','PRODUCT_LIST_PRICE','4','Do you want to display the Product Price','8','6',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (109,'Display Product Quantity','PRODUCT_LIST_QUANTITY','0','Do you want to display the Product Quantity?','8','7',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (110,'Display Product Weight','PRODUCT_LIST_WEIGHT','0','Do you want to display the Product Weight?','8','8',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (111,'Display Buy Now column','PRODUCT_LIST_BUY_NOW','5','Do you want to display the Buy Now column?','8','9',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (112,'Display Category/Manufacturer Filter (0=disable; 1=enable)','PRODUCT_LIST_FILTER','1','Do you want to display the Category/Manufacturer Filter?','8','10',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (113,'Location of Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)','PREV_NEXT_BAR_LOCATION','3','Sets the location of the Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)','8','11',NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (114,'Check stock level','STOCK_CHECK','true','Check to see if sufficent stock is available','9','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (115,'Subtract stock','STOCK_LIMITED','true','Subtract product in stock by product orders','9','2',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
@@ -2125,6 +2125,7 @@ INSERT INTO configuration VALUES (2649, 'Special Offer corner banner?', 'CB_SPEC
 INSERT INTO configuration VALUES (2650, 'Special Offer display level?', 'CB_SPECIALS_NO', '20', 'At what level of discount do you want to start displaying the Special Offer corner banner?<br><br>Please note that the Special Offer banners are rounded down to the <b>nearest 5%</b>.', 205, 7, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2651, 'Call for Price corner banner?', 'CB_CALL_FOR_PRICE', 'true', 'Would you like to display the Call for Price corner banner?<br><center><img src="../images/corner_banners/callforprice.png"></center>', 205, 8, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
 INSERT INTO configuration VALUES (2652, 'Out of Stock corner banner?', 'CB_OUT_OF_STOCK', 'true', 'Would you like to display the Out of Stock corner banner?<br><center><img src="../images/corner_banners/out_of_stock.png"></center>', 205, 9, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2653, 'Display Corner Banners','PRODUCT_CORNER_BANNER','1','Do you want to display the Corner Banners?<br><br><b>Please note that this must be set to 1 to work properly as it needs to be shown before all other Product Listing items</b>','8','1',NULL,now(),NULL,NULL);
 #Corner Banners End
 
 

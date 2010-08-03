@@ -57,10 +57,10 @@ include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
     $boxContent .= tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">';
    
     if (tep_has_category_subcategories($counter)) {
-      $boxContent .= tep_image(DIR_WS_IMAGES . 'pointer_blue.gif', '');
+      $boxContent .= tep_image(DIR_WS_ICONS . 'pointer_blue.gif', '');
     }
     else {
-      $boxContent .= tep_image(DIR_WS_IMAGES . 'pointer_blue_light.gif', '');
+      $boxContent .= tep_image(DIR_WS_ICONS . 'pointer_blue_light.gif', '');
     }
 
     if (isset($cPath_array) && in_array($counter, $cPath_array)) {

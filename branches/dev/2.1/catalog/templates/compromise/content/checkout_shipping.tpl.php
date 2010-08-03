@@ -25,7 +25,7 @@
                 <td class="main" width="50%" valign="top"><?php echo TEXT_CHOOSE_SHIPPING_DESTINATION . '<br><br><a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL') . '">' . tep_image_button('button_change_address.gif', IMAGE_BUTTON_CHANGE_ADDRESS) . '</a>'; ?></td>
                 <td align="right" width="50%" valign="top"><table border="0" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td class="main" align="center" valign="top"><?php echo '<b>' . TITLE_SHIPPING_ADDRESS . '</b><br>' . tep_image(DIR_WS_IMAGES . 'arrow_south_east.gif'); ?></td>
+                    <td class="main" align="center" valign="top"><?php echo '<b>' . TITLE_SHIPPING_ADDRESS . '</b><br>' . tep_image(DIR_WS_ICONS . 'arrow_south_east.gif'); ?></td>
                     <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td> 
                     <td class="main" valign="top"><?php echo tep_address_label($customer_id, $sendto, true, ' ', '<br>'); ?></td>
                     <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td> 
@@ -59,7 +59,7 @@
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                 <td class="main" width="50%" valign="top"><?php echo TEXT_CHOOSE_SHIPPING_METHOD; ?></td>
-                <td class="main" width="50%" valign="top" align="right"><?php echo '<b>' . TITLE_PLEASE_SELECT . '</b><br>' . tep_image(DIR_WS_IMAGES . 'arrow_east_south.gif'); ?></td>
+                <td class="main" width="50%" valign="top" align="right"><?php echo '<b>' . TITLE_PLEASE_SELECT . '</b><br>' . tep_image(DIR_WS_ICONS . 'arrow_east_south.gif'); ?></td>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
 <?php
@@ -205,7 +205,7 @@
           <tr>
             <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
-                <td width="50%" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'checkout_bullet.gif'); ?></td>
+                <td width="50%" align="right"><?php echo tep_image(DIR_WS_ICONS . 'checkout_bullet.gif'); ?></td>
                 <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
               </tr>
             </table></td>

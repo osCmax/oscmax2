@@ -299,7 +299,7 @@
 		  <tr>
 			<td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
 			  <tr>
-				<td width="50%" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'checkout_bullet.gif'); ?></td>
+				<td width="50%" align="right"><?php echo tep_image(DIR_WS_ICONS . 'checkout_bullet.gif'); ?></td>
 				<td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
 			  </tr>
 			</table></td>

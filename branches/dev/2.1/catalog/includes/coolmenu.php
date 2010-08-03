@@ -77,7 +77,7 @@ define('SUB_CATEGORIES','4');
 		oCMenu.level[0].offsetX=0
 		oCMenu.level[0].offsetY=0
 		oCMenu.level[0].rows=0
-		oCMenu.level[0].arrow="images/arrow.gif"
+		oCMenu.level[0].arrow="images/icons/arrow.gif"
 		oCMenu.level[0].arrowWidth=11
 		oCMenu.level[0].arrowHeight=11
 		oCMenu.level[0].align="right"

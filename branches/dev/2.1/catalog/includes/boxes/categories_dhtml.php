@@ -74,7 +74,7 @@
 	var WebMasterCheck=0;			// menu tree checking on or off 1 or 0
 	var ShowArrow=0;				// Uses arrow gifs when 1
 	var KeepHilite=1;				// Keep selected path highligthed
-	var Arrws=['<?php echo DIR_WS_IMAGES; ?>tri.gif',5,10,'<?php echo DIR_WS_IMAGES; ?>tridown.gif',10,5,'<?php echo DIR_WS_IMAGES; ?>trileft.gif',5,10];	// Arrow source, width and height
+	var Arrws=['<?php echo DIR_WS_ICONS; ?>tri.gif',5,10,'<?php echo DIR_WS_ICONS; ?>tridown.gif',10,5,'<?php echo DIR_WS_ICONS; ?>trileft.gif',5,10];	// Arrow source, width and height
 
 function BeforeStart(){return}
 function AfterBuild(){return}

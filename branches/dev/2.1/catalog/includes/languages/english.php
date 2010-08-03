@@ -485,4 +485,7 @@ define('TEXT_PRODUCTS_SAVINGS_RRP', '&nbsp;You&nbsp;Save&nbsp;(Off&nbsp;RRP):&nb
 define('TEXT_PRODUCTS_PRICENOW', '&nbsp;NOW:&nbsp;');
 define('TEXT_PRODUCTS_USUALPRICE', '&nbsp;Normally:&nbsp;');
 // EOF: MSRP
+
+define('TEXT_LATEST_PRODUCTS', 'Latest Products');
+define('TEXT_SPECIALS', 'Specials');
 ?>

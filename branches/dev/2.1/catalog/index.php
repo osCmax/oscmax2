@@ -56,7 +56,7 @@ global $customer_group_id;
 
     $content = CONTENT_INDEX_NESTED;
 
-  } elseif ($category_depth == 'products' || isset($_GET['manufacturers_id'])) {
+  } elseif ( ($category_depth == 'products') || (isset($_GET['manufacturers_id'])) || (isset($_GET['show_specials'])) || (isset($_GET['new_products'])) ) {
 // create column list
     $define_list = array('PRODUCT_LIST_MODEL' => PRODUCT_LIST_MODEL,
                          'PRODUCT_LIST_NAME' => PRODUCT_LIST_NAME,
@@ -227,68 +227,84 @@ global $customer_group_id;
 //     if ( (!isset($_GET['sort'])) || (!ereg('^[1-8][ad]$', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
 //
 // show the products of a specified manufacturer
-    if (isset($_GET['manufacturers_id'])) {
-      if (isset($_GET['filter_id']) && tep_not_null($_GET['filter_id'])) {
-// We are asked to show only a specific category
-// BOF Separate Pricing Per Customer
-// LINE MODED: MSRP: Added "p.products_msrp,"
-// LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
-	if ($status_product_prices_table == true) { // changed for SPPC hide categories -- ok in mysql 5
-	$listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, tmp_pp.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . $product_prices_table . " as tmp_pp using(products_id), " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id), " . TABLE_MANUFACTURERS . " m where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$_GET['filter_id'] . "'";
-	} else { // either retail or no need to get correct special prices -- changed for mysql 5 and
-// SPPC hide categories for groups
-// LINE MODED: MSRP: Added "p.products_msrp,"
-// LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
-	$listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, p.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS_RETAIL_PRICES . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$_GET['filter_id'] . "'";
-	} // end else { // either retail...
+    if (isset($_GET['manufacturers_id'])) { // 1
+      if (isset($_GET['filter_id']) && tep_not_null($_GET['filter_id'])) { // 2
+        // We are asked to show only a specific category
+        // BOF Separate Pricing Per Customer
+        // LINE MODED: MSRP: Added "p.products_msrp,"
+        // LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
+	    if ($status_product_prices_table == true) { // 3 changed for SPPC hide categories -- ok in mysql 5
+	      $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, tmp_pp.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . $product_prices_table . " as tmp_pp using(products_id), " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id), " . TABLE_MANUFACTURERS . " m where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$_GET['filter_id'] . "'";
+	    } else { // 3 either retail or no need to get correct special prices -- changed for mysql 5 and
+        // SPPC hide categories for groups
+        // LINE MODED: MSRP: Added "p.products_msrp,"
+        // LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
+	      $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, p.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS_RETAIL_PRICES . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$_GET['filter_id'] . "'";
+	    } // 3 end else { // either retail...
 // EOF Separate Pricing Per Customer
-      } else {
-// We show them all
-// BOF Separate Pricing Per Customer
-// LINE MODED: MSRP: Added "p.products_msrp,"
-// LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
-        if ($status_product_prices_table == true) {
-        $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, tmp_pp.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . $product_prices_table . " as tmp_pp using(products_id) left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c on p.products_id = p2c.products_id left join " . TABLE_CATEGORIES . " c using(categories_id), " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m where p.products_status = '1' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'";
-	} else { // either retail or no need to get correct special prices -- changed for mysql 5 & SPPC hide categories
-// LINE MODED: MSRP: Added "p.products_msrp,"
-// LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
-        $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, p.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS_RETAIL_PRICES . " s on p.products_id = s.products_id left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c on p.products_id = p2c.products_id left join " . TABLE_CATEGORIES . " c using(categories_id), " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m where p.products_status = '1' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'";
-	} // end else { // either retail...
+      } else { // 2
+        // We show them all
+        // BOF Separate Pricing Per Customer
+        // LINE MODED: MSRP: Added "p.products_msrp,"
+        // LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
+        if ($status_product_prices_table == true) { // 4
+          $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, tmp_pp.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . $product_prices_table . " as tmp_pp using(products_id) left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c on p.products_id = p2c.products_id left join " . TABLE_CATEGORIES . " c using(categories_id), " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m where p.products_status = '1' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'";
+	    } else { // 4 either retail or no need to get correct special prices -- changed for mysql 5 & SPPC hide categories
+          // LINE MODED: MSRP: Added "p.products_msrp,"
+          // LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
+          $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, p.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS_RETAIL_PRICES . " s on p.products_id = s.products_id left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c on p.products_id = p2c.products_id left join " . TABLE_CATEGORIES . " c using(categories_id), " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m where p.products_status = '1' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'";
+	    } // 4 end else { // either retail...
 // EOF Separate Pricing Per Customer
-      }
-    } else {
-// show the products in a given categorie
-      if (isset($_GET['filter_id']) && tep_not_null($_GET['filter_id'])) {
+      } // 2 end
+	
+    } elseif (isset($_GET['show_specials']) && tep_not_null($_GET['show_specials'])) { // 1
+	// show only the specials  
+	  if ($status_product_prices_table == true) { // 6
+        $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, tmp_pp.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . $product_prices_table . " as tmp_pp using(products_id), " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and tmp_pp.status = '1'";
+      } else { // 6
+		$listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, p.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . TABLE_SPECIALS_RETAIL_PRICES . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and s.status = '1'";
+      } //6
+	} elseif (isset($_GET['new_products']) && tep_not_null($_GET['new_products'])) { // 1
+	// show only the new products
+	  if ($status_product_prices_table == true) { // 10
+        $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, tmp_pp.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . $product_prices_table . " as tmp_pp using(products_id), " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "'";
+      } else { // 10
+		$listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, p.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . TABLE_SPECIALS_RETAIL_PRICES . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "'";
+      } // 10
+	} else { // 1
+      // show the products in a given categorie
+      if (isset($_GET['filter_id']) && tep_not_null($_GET['filter_id'])) { //7
 // We are asked to show only specific catgeory;
 // BOF Separate Pricing Per Customer
 // LINE MODED: MSRP: Added "p.products_msrp,"
 // LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
-        if ($status_product_prices_table == true) { // ok for mysql 5, SPPC hide categories for groups added
-        $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, tmp_pp.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . $product_prices_table . " as tmp_pp using(products_id), " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['filter_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
-        } else { // either retail or no need to get correct special prices -- ok for mysql 5
+        if ($status_product_prices_table == true) { // 8 ok for mysql 5, SPPC hide categories for groups added
+          $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, tmp_pp.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . $product_prices_table . " as tmp_pp using(products_id), " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['filter_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
+        } else { // 8 either retail or no need to get correct special prices -- ok for mysql 5
 		// SPPC hide categories for groups added
 // LINE MODED: MSRP: Added "p.products_msrp,"
 // LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
-        $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, p.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_SPECIALS_RETAIL_PRICES . " s using(products_id) left join " . TABLE_CATEGORIES . " c on p2c.categories_id = c.categories_id where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['filter_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
-        } // end else { // either retail...
+          $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, p.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_SPECIALS_RETAIL_PRICES . " s using(products_id) left join " . TABLE_CATEGORIES . " c on p2c.categories_id = c.categories_id where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['filter_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
+        } // 8 end else { // either retail...
 // EOF Separate Pricing Per Customer
-      } else {
+      } else { // 7
 // We show them all
 // BOF Separate Pricing Per Customer --last query changed for mysql 5 compatibility
-        if ($status_product_prices_table == true) { // ok in mysql 5
+        if ($status_product_prices_table == true) { // 9 ok in mysql 5
 // SPPC hide categories for groups added
 // LINE MODED: MSRP: Added "p.products_msrp,"
 // LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
-        $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, tmp_pp.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . $product_prices_table . " as tmp_pp using(products_id), " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
-        } else { // either retail or no need to get correct special prices -- changed for mysql 5
+          $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, tmp_pp.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . $product_prices_table . " as tmp_pp using(products_id), " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
+        } else { // 9 either retail or no need to get correct special prices -- changed for mysql 5
 // SPPC hide categories for groups added
 // LINE MODED: MSRP: Added "p.products_msrp,"
 // LINE MODED: Corner Banners: Added "p.products_featured, p.products_quantity,"
-        $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, p.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . TABLE_SPECIALS_RETAIL_PRICES . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
-      } // end else { // either retail...
+          $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_msrp, p.products_price, p.products_tax_class_id, p.products_featured, p.products_quantity, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . TABLE_SPECIALS_RETAIL_PRICES . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
+        } // 9 end else { // either retail...
 // EOF Separate Pricing per Customer
-      }
-    }
+      } // 7
+    } // 1
+	
 // BOF SPPC Hide products and categories from groups
  $listing_sql .= " and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 ";
  $listing_sql .= " and find_in_set('" . $customer_group_id . "', c.categories_hide_from_groups) = 0 ";
@@ -343,6 +359,11 @@ global $customer_group_id;
           break;
       }
     }
+	
+// Add new products limit and order
+	if (isset($_GET['new_products']) && tep_not_null($_GET['new_products'])) { 
+      $listing_sql .= ", products_date_added";
+	}
 
     $content = CONTENT_INDEX_PRODUCTS;
 

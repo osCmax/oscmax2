@@ -25,8 +25,8 @@ $Id: default_specials.php 3 2006-05-27 04:59:07Z user $
 <?php
 $info_box_contents = array();
 //  $info_box_contents[] = array('align' => 'left', 'text' => sprintf(TABLE_HEADING_DEFAULT_SPECIALS, strftime('%B')));
-  $info_box_contents[] = array('align' => 'left', 'text' => '<a href="' . tep_href_link(FILENAME_SPECIALS) . '" class="headerNavigation">' . sprintf(TABLE_HEADING_DEFAULT_SPECIALS, strftime('%B') . '</a>'));
-  new infoBoxHeading($info_box_contents, true, true, tep_href_link(FILENAME_SPECIALS));
+  $info_box_contents[] = array('align' => 'left', 'text' => '<a href="' . tep_href_link(FILENAME_DEFAULT, "show_specials=1") . '" class="headerNavigation">' . sprintf(TABLE_HEADING_DEFAULT_SPECIALS, strftime('%B') . '</a>'));																																																																																					
+  new infoBoxHeading($info_box_contents, true, true, tep_href_link(FILENAME_DEFAULT, "show_specials=1"));
 
 // BOF Separate Price Per Customer
 //  global variable (session): $sppc_customers_group_id -> local variable $customer_group_id

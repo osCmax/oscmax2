@@ -108,7 +108,6 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
            <?php } // end if to hide epf ?>
 <!-- end extra product fields -->
 <?php
-echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   }
 
   $list_box_contents = array();

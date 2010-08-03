@@ -101,7 +101,6 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
            <?php } // end if to hide epf ?>
 <!-- end extra product fields -->
 <?php
-echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   }
 
   $list_box_contents = array();
@@ -390,11 +389,13 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 
   if ( ($listing_split->number_of_rows > 0) && ((PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3')) ) {
 ?>
+
 <table border="0" width="100%" cellspacing="0" cellpadding="0" border="0">
   <tr>
-  	<td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+    <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
   </tr>
 </table>
+
 <table class="filterbox" width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="smallText"><?php echo $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></td>

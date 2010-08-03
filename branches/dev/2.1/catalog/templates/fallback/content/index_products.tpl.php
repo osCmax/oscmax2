@@ -16,7 +16,11 @@
 /* bof catdesc for bts1a, replacing "echo HEADING_TITLE;" by "categories_heading_title" */
              if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_heading_title'])) ) {
                  echo $category['categories_heading_title'];
-               } else {
+               } elseif (isset($_GET['new_products']) && tep_not_null($_GET['new_products'])) { 
+			     echo TEXT_LATEST_PRODUCTS;
+			   } elseif (isset($_GET['show_specials']) && tep_not_null($_GET['show_specials'])) { 
+			     echo TEXT_SPECIALS;
+			   } else {
                  echo HEADING_TITLE;
                }
 /* eof catdesc for bts1a */ ?>

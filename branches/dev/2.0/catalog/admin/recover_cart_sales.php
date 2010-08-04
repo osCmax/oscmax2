@@ -15,7 +15,7 @@ $Id: recover_cart_sales.php 14 2006-07-28 17:42:07Z user $
  require('includes/application_top.php');
  require(DIR_WS_CLASSES . 'currencies.php');
 
- //link_post_variable('custid');	// fix to allow turning off register_globals in php - does not work w/standard osC (requires some other mod!)
+link_post_variable('custid');	// fix to allow turning off register_globals in php - does not work w/standard osC (requires some other mod!)
 
  $currencies = new currencies();
 

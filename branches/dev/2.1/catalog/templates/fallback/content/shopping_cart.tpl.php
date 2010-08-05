@@ -182,12 +182,24 @@ switch ($_GET['action']) {
                 <td class="main" align="left"><?php echo '<a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'action=clear_cart', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_CART . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_cart.gif', 'Clear Basket'); ?></a></td>
 
 <?php
-    $back = sizeof($navigation->path)-2;
-    if (isset($navigation->path[$back])) {
+//BOF Bugfix #384
+$back = sizeof($navigation->path)-2;
+$count = count($products);
+if( isset($products[$count-1]['id']) ) {
+$continueButtonId = tep_get_product_path(str_replace(strstr($products[$count-1]['id'], '{'), '', $products[$count-1]['id']));
+}
+if( isset($continueButtonId) ) {
 ?>
-                <td class="main"><?php echo '<a href="' . tep_href_link($navigation->path[$back]['page'], tep_array_to_string($navigation->path[$back]['get'], array('action')), $navigation->path[$back]['mode']) . '">' . tep_image_button('button_continue_shopping.gif', IMAGE_BUTTON_CONTINUE_SHOPPING) . '</a>'; ?></td>
+<td align="center" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'cPath=' . $continueButtonId) . '">' . tep_image_button('button_continue_shopping.gif', IMAGE_BUTTON_CONTINUE_SHOPPING) . '</a>'; ?></td>
 <?php
-    }
+// if (isset($navigation->path[$back])) { 
+} elseif (isset($navigation->path[$back])) {
+//
+?>
+<td align="center" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image_button('button_continue_shopping.gif', IMAGE_BUTTON_CONTINUE_SHOPPING) . '</a>'; ?></td>
+<?php
+}
+//EOF Bugfix #384
 ?>
 <noscript>
 <td class="main"><?php echo tep_image_submit('button_update_cart.gif', IMAGE_BUTTON_UPDATE_CART); ?></td>

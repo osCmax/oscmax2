@@ -87,11 +87,11 @@ define('TYPE_BELOW', 'Type Below');
 
 // header text in includes/header.php
 define('HEADER_TITLE_TOP', 'Admin');
-define('HEADER_TITLE_SUPPORT_SITE', 'osCMax Forums');
+define('HEADER_TITLE_SUPPORT_SITE', 'osCmax Forums');
 define('HEADER_TITLE_ONLINE_CATALOG', 'Catalog');
 define('HEADER_TITLE_ADMINISTRATION', 'Admin');
-define('HEADER_TITLE_OSCDOX', 'osCMax User Manual');
-define('HEADER_TITLE_AABOX', 'osCMax');
+define('HEADER_TITLE_OSCDOX', 'osCmax User Manual');
+define('HEADER_TITLE_AABOX', 'osCmax.com');
 
 // text for gender
 define('MALE', 'Male');

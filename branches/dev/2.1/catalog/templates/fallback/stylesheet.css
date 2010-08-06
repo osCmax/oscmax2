@@ -194,3 +194,12 @@ TD.featuredProducts A:hover, TD.featuredCategories A:hover, TD.featuredManufactu
 .ui-stars-cancel-hover a { background-position: 0 -16px; }
 .ui-stars-star-disabled, .ui-stars-star-disabled a, .ui-stars-cancel-disabled a { cursor: default !important; }
 /* EOF: Stars */
+
+/* BOF: Categories Box Styling */
+tr.level { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+tr.level0 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+tr.level01 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+tr.level012 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+tr.level0123 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+span.selectedCat { color: #ff0000; }
+/* EOF: Categories Box Styling */

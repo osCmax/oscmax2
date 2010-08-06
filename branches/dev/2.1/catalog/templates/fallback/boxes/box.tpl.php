@@ -4,7 +4,7 @@
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td class="infoBoxHeading"><img src="<?php echo DIR_WS_TEMPLATES;?>images/infobox/<?php switch ($corner_top_left) { case 'square': echo 'top_spacer.png';	break; case 'rounded': echo 'top_left.png'; break;} ?>" border="0"></td>
+                  <td class="infoBoxHeading"><img src="<?php echo DIR_WS_TEMPLATES;?>images/infobox/<?php switch ($corner_top_left) { case 'square': echo 'top_spacer.png';	break; case 'rounded': echo 'top_left.png'; break;} ?>" border="0" alt=""></td>
                   <td class="infoBoxHeading" width="100%" ><?php echo $boxHeading; ?></td>
                   <td class="infoBoxHeading"><?php echo $boxLink; ?></td>
                   <td class="infoBoxHeading"><img src="<?php echo DIR_WS_TEMPLATES;?>images/infobox/<?php switch ($corner_top_right) { case 'square': echo 'top_spacer.png';	break; case 'rounded': echo 'top_right.png'; break;} ?>" border="0" alt=""></td>
@@ -29,7 +29,7 @@
               </table>
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td><img src="<?php echo DIR_WS_TEMPLATES;?>images/infobox/<?php switch ($corner_bottom_left) { case 'square': echo 'bottom_left_sq.png';	break; case 'rounded': echo 'bottom_left.png'; break;} ?>" border="0"></td>
+                  <td><img src="<?php echo DIR_WS_TEMPLATES;?>images/infobox/<?php switch ($corner_bottom_left) { case 'square': echo 'bottom_left_sq.png';	break; case 'rounded': echo 'bottom_left.png'; break;} ?>" border="0" alt=""></td>
                   <td width="100%" height="5" class="infoBoxBottom"></td>
                   <td><img src="<?php echo DIR_WS_TEMPLATES;?>images/infobox/<?php switch ($corner_bottom_right) { case 'square': echo 'bottom_right_sq.png';	break; case 'rounded': echo 'bottom_right.png'; break;} ?>" border="0" alt=""></td>
                 </tr>

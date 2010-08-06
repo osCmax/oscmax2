@@ -14,7 +14,7 @@ $Id: categories.php 3 2006-05-27 04:59:07Z user $
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 
 if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
-include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
+  include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
 } else
 
    if ((USE_CACHE == 'true') && empty($SID)) {
@@ -27,7 +27,7 @@ include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
  	  include(DIR_WS_BOXES . 'coolmenu.php');
    } else {
 
-
+  $catlevel = 0;
   $boxHeading = BOX_HEADING_CATEGORIES;
   
   $corner_top_left = 'rounded';
@@ -41,21 +41,33 @@ include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
   $box_base_name = 'categories'; // for easy unique box template setup (added BTSv1.2)
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
+  
   function tep_show_category($counter) {
-    
-// BoF - Contribution Category Box Enhancement 1.1
-//  global $tree, $boxContent, $cPath_array, $cat_name;
-//adapted for Separate Pricing Per Customer, Hide products and categories from groups
-//    global $tree, $categories_string, $cPath_array, $customer_group_id;
-    global $tree, $boxContent, $cPath_array, $customer_group_id, $cat_name;
+  
+    $boxContent = '';
+    $boxContent .= '<table border="0" cellpadding="0" cellspacing="0" width="100%">';
 
-    for ($i=0; $i<$tree[$counter]['level']; $i++) {
+// BoF - Contribution Category Box Enhancement 1.1
+    global $tree, $boxContent, $cPath_array, $cat_name;
+
+    $cPath_new = 'cPath=' . $tree[$counter]['path'];
+
+	$boxContent .= '<table border="0" cellpadding="0" cellspacing="0" width="100%"><tr';
+
+	for ($i=0; $i<$tree[$counter]['level']; $i++) {
+      $catlevel .= $i;
+    }	
+
+	$boxContent .=' class="level' . $catlevel . '"><td width="' . BOX_WIDTH_LEFT . '" class="boxText">';
+
+	for ($i=0; $i<$tree[$counter]['level']; $i++) {
       $boxContent .= "&nbsp;&nbsp;";
     }
-    $cPath_new = 'cPath=' . $tree[$counter]['path'];
-    $boxContent .= '<a href="';
-    $boxContent .= tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">';
-   
+	
+	$boxContent .= '<a class="' . $catlevel .'level" href="';
+
+	$boxContent .= tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">';
+   	
     if (tep_has_category_subcategories($counter)) {
       $boxContent .= tep_image(DIR_WS_ICONS . 'pointer_blue.gif', '');
     }
@@ -63,15 +75,17 @@ include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
       $boxContent .= tep_image(DIR_WS_ICONS . 'pointer_blue_light.gif', '');
     }
 
+// highlights the active chain
+
     if (isset($cPath_array) && in_array($counter, $cPath_array)) {
       $boxContent .= '<b>';
     }
     
     if ($cat_name == $tree[$counter]['name']) {
-      $boxContent .= '<span class="errorText">';
+      $boxContent .= '<span class="selectedCat">';
     }
 
-// display category name
+// highlights the active category name when it is selected
     $boxContent .= $tree[$counter]['name'];
 
                 if ($cat_name == $tree[$counter]['name']) {
@@ -83,7 +97,22 @@ include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
     }
 //         EoF Category Box Enhancement
 
-    $boxContent .= '</a>';
+    $boxContent .= '</a></td>';
+
+/////////////ADD IN PLUS SIGN ////////////////////////
+
+	 if (tep_has_category_subcategories($counter)) {
+      $boxContent .= '<td width="10">' . tep_image(DIR_WS_ICONS . 'plus.gif', '') . '</td>';
+    }
+    else {
+      $boxContent .= '<td width="10">&nbsp;</td>';
+    }
+	
+//////////////////////////////////////////////////////
+
+	$boxContent .= '</tr></table>';
+
+
 
     if (SHOW_COUNTS == 'true') {
       $products_in_category = tep_count_products_in_category($counter);
@@ -92,7 +121,7 @@ include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
       }
     }
 
-    $boxContent .= '<br>';
+//    $boxContent .= '<br>';
 
     if ($tree[$counter]['next_id'] != false) {
       tep_show_category($tree[$counter]['next_id']);
@@ -115,10 +144,7 @@ include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
   $boxContent = '';
   $tree = array();
 
-// categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' order by sort_order, cd.categories_name");
-// BOF SPPC hide categories from groups
-  $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 order by sort_order, cd.categories_name");
-// EOF SPPC hide categories from groups
+  $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' order by sort_order, cd.categories_name");
   while ($categories = tep_db_fetch_array($categories_query))  {
     $tree[$categories['categories_id']] = array('name' => $categories['categories_name'],
                                                 'parent' => $categories['parent_id'],
@@ -144,10 +170,7 @@ include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
     while (list($key, $value) = each($cPath_array)) {
       unset($parent_id);
       unset($first_id);
-//      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$value . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' order by sort_order, cd.categories_name");
-      // BOF SPPC hide categories from groups
-      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$value . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 order by sort_order, cd.categories_name");
-      // EOF SPPC hide categories from groups
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$value . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' order by sort_order, cd.categories_name");
       if (tep_db_num_rows($categories_query)) {
         $new_path .= $value;
         while ($row = tep_db_fetch_array($categories_query)) {
@@ -183,4 +206,6 @@ include(DIR_WS_FUNCTIONS . 'fwr_categories.php');
 include (bts_select('boxes', $box_base_name)); // BTS 1.5
 }
 }
+
+	$boxContent .= '</table>';
 ?><!-- categories_eof //-->

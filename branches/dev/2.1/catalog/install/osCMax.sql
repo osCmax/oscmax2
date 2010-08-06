@@ -2128,6 +2128,8 @@ INSERT INTO configuration VALUES (2652, 'Out of Stock corner banner?', 'CB_OUT_O
 INSERT INTO configuration VALUES (2653, 'Display Corner Banners','PRODUCT_CORNER_BANNER','1','Do you want to display the Corner Banners?<br><br><b>Please note that this must be set to 1 to work properly as it needs to be shown before all other Product Listing items</b>','8','1',NULL,now(),NULL,NULL);
 #Corner Banners End
 
+INSERT INTO configuration VALUES (2654, 'Do you want to use a scroller in Cross Sell module on product info?', 'USE_XSELL_HORIZ_SCROLLER', 'false', 'Would you like to use a scroller on the Cross Sell infobox?', 201, 26, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+
 
 #Open Feature Sets Start
 INSERT INTO configuration VALUES (3000, '<font color=blue>Show Featured Sets on Store Front</font>', 'SHOW_FEATURED_SETS_ON_STORE_FRONT', 'true', 'Would you like to see the Featured Sets displayed on the store front page?', 99, 1, '2005-10-19 02:56:40', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');

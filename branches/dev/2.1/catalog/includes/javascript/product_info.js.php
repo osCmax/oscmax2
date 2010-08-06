@@ -1,15 +1,17 @@
 <script src="http://www.google.com/jsapi"></script>
 <script>
   // Load jQuery
-  google.load("jquery", "1.4.0");
+  google.load("jquery", "1.4.2");
 </script>
 <script type="text/javascript" src="includes/javascript/slimbox2/slimbox2.js"></script>
 <script type="text/javascript" src="includes/javascript/jquery.scrollTo-min.js"></script>
 <script type="text/javascript" src="includes/javascript/jquery.serialScroll-min.js"></script>
 <script type="text/javascript" src="includes/javascript/jqzoom.pack.1.0.1.js"></script>
+<script type="text/javascript" src="includes/javascript/scrollable.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','jqzoom.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','slimbox2.css')); // BTSv1.5 ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','dynamic_mopics.css')); // BTSv1.5 ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','scrollable.css')); // BTSv1.5 ?>">
 <script language="javascript" type="text/javascript"><!--
 	function popupImage(url, imageHeight, imageWidth) {
 		var newImageHeight = (parseInt(imageHeight) + 40);
@@ -138,6 +140,9 @@ $(document).ready(function(){
 	});
 	
 	$('.imagezoomer').jqzoom({ zoomWidth: 330, zoomHeight: 300, xOffset: 10, yOffset: -8, position: "right", title: false, showPreload: true, showEffect: "fadein", hideEffect: "fadeout" });
+	
+	$(".scrollable").scrollable({ easing: "swing", circular: true });
+
 
 });
 </script>

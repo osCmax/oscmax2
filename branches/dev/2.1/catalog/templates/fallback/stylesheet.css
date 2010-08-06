@@ -46,6 +46,7 @@ TD.infoBoxHeading { font-family: Verdana, Arial, sans-serif; font-size: 10px; fo
 .infoBoxNoticeContents { background: #FFE6E6; font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 TD.infoBox, SPAN.infoBox { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 .infoBoxBottom { background-image:url(images/infobox/bottom_center.png); background-repeat:repeat-x; }
+.infoBoxScrolling { background: #ffffff; border-left: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd }
 
 /* Contentboxes */
 .contentBox { background: #ffffff; font-family: Verdana, Arial, sans-serif; font-size: 10px; border-left: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; }

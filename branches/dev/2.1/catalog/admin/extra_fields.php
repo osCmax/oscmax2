@@ -647,9 +647,9 @@
         echo '<tr><td><p class="pageHeading">' . HEADING_NEW . "</p>\n";
       }
       if (!empty($messages)) {
-        echo '<table ' . ($error ? 'class="messageStackError"' : 'class="messageStackWarning"') . ' width="100%">' . "\n";
+        echo '<table width="100%">' . "\n";
         foreach ($messages as $message) {
-          echo '<tr><td>' . $message . "</td></tr>\n";
+          echo '<tr><td ' . ($error ? 'class="messageStackError"' : 'class="messageStackWarning"') . '>' . tep_image(DIR_WS_ICONS . ($error ? 'error.gif' : 'warning.gif')) . $message . "</td></tr>\n";
         }
         echo "</table>\n";
       }

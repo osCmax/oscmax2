@@ -331,11 +331,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE . ' ' . HEADING_TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
-<style>.error {color: black; background-color: red;}</style>
-<style>.warning {color: black; background-color: yellow;}</style>
+<script type="text/javascript" language="javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -359,7 +357,7 @@
           <?php if (($action != 'new') && ($action != 'edit')) {
             $query = tep_db_query("select epf_id from " . TABLE_EPF . " where epf_uses_value_list");
             if (tep_db_num_rows($query) == 0) {
-              echo '<tr class="error"><td colspan=2>' . ERROR_NO_LIST_FIELDS . '</tr></td>';
+              echo '<tr><td colspan="2" class="messageStackError">' . tep_image(DIR_WS_ICONS . 'error.gif') . ERROR_NO_LIST_FIELDS . '</td></tr></table></td></tr></table></td></tr></table>';
               exit;
             }
             $fields = array();
@@ -371,10 +369,10 @@
             }
           ?>
           <tr>
-            <td colspan=2><?php echo TEXT_SELECT_FIELD . '&nbsp;&nbsp;' . tep_draw_form('select_field', FILENAME_EXTRA_VALUES, '', 'get') . tep_draw_pull_down_menu('list_id', $fields, '', 'onchange="this.form.submit()"'); ?></form></td>
+            <td colspan="2" class="main"><?php echo TEXT_SELECT_FIELD . '&nbsp;&nbsp;' . tep_draw_form('select_field', FILENAME_EXTRA_VALUES, '', 'get') . tep_draw_pull_down_menu('list_id', $fields, '', 'onchange="this.form.submit()"'); ?></form></td>
           </tr>
           <tr>
-            <td colspan=2 align="right"><?php echo tep_draw_form('new', FILENAME_EXTRA_VALUES, 'action=new&list_id=' . $list_id) . tep_draw_input_field('new', BUTTON_NEW, 'alt="' . BUTTON_NEW . '"', false, 'submit') . '</form>&nbsp;&nbsp;'; ?></td>
+            <td colspan=2 align="right" class="main"><?php echo tep_draw_form('new', FILENAME_EXTRA_VALUES, 'action=new&list_id=' . $list_id) . tep_draw_input_field('new', BUTTON_NEW, 'alt="' . BUTTON_NEW . '"', false, 'submit') . '</form>&nbsp;&nbsp;'; ?></td>
           </tr>
           <?php } ?>
         </table></td>
@@ -393,16 +391,24 @@
         echo ($parent_id > 0 ? '<br>' . TABLE_HEADING_PARENT . $parent['value_id'] . ' ' . ENTRY_VALUE . $parent['epf_value'] : '') . "</p>\n";
       }
       if (!empty($messages)) {
-        echo '<table ' . ($error ? 'class="error"' : 'class="warning"') . ' width="100%">' . "\n";
+        echo '<table width="100%">' . "\n";
         foreach ($messages as $message) {
-          echo '<tr><td>' . $message . "</td></tr>\n";
+          echo '<tr><td ' . ($error ? 'class="messageStackError"' : 'class="messageStackWarning"') . '>' . $message . "</td></tr>\n";
         }
         echo "</table>\n";
       }
       echo tep_draw_form('value_entry', FILENAME_EXTRA_VALUES, 'action=' . (($action == 'new') ? 'insert' : 'update') . '&vid=' . $vid . '&list_id=' . $list_id . '&parent=' . $parent_id . ($confirmation_needed ? '&confirm=yes' : ''), 'post', 'enctype="multipart/form-data"');
-      echo '<p>' . ENTRY_ORDER . tep_draw_input_field('sort_order', $value['sort_order']) . "</p>\n";
-      echo '<p>' . ENTRY_VALUE . tep_draw_input_field('value', $value['epf_value'], 'size=64 maxlength=64') . "</p>\n";
-      echo '<p>' . ENTRY_IMAGE . tep_draw_file_field('values_image') . '<br>' . $value['value_image'] . "</p>\n";
+	  echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">' . "\n";
+	  echo '  <tr>' . "\n";
+      echo '    <td width="130" class="main">' . ENTRY_ORDER . '</td><td>' . tep_draw_input_field('sort_order', $value['sort_order']) . "</td>\n";
+	  echo '  </tr>' . "\n";
+	  echo '  <tr>' . "\n";
+      echo '    <td class="main">' . ENTRY_VALUE . '</td><td>' . tep_draw_input_field('value', $value['epf_value'], 'size=64 maxlength=64') . "</td>\n";
+      echo '  </tr>' . "\n";
+	  echo '  <tr>' . "\n";
+	  echo '    <td class="main">' . ENTRY_IMAGE . '</td><td>' . tep_draw_file_field('values_image') . '<br>' . $value['value_image'] . "</td>\n";
+	  echo '  </tr>' . "\n";
+	  echo '</table><br>' . "\n";
       if ($field_info['epf_multi_select']) {
         if ($field_info['epf_has_linked_field']) {
           $link_query = tep_db_query("select * from " . TABLE_EPF . " where epf_id = " . (int)$field_info['epf_links_to']);
@@ -524,7 +530,7 @@ foreach ($query as $value) {
 <?php
 }
 ?>
-              <tr><td colspan=7>
+              <tr><td colspan="7" class="main">
               <?php
               echo TEXT_PREVIEW . '<br>';
               if ($field_info['epf_has_linked_field'] && $field_info['epf_multi_select']) {

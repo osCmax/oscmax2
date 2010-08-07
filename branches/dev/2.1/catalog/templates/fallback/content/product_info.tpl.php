@@ -274,6 +274,18 @@
 			//++++ QT Pro: End Changed Code
 			?>
             <!-- Conditional Atrributes Ends -->
+            <?php
+            if (SHOW_ASK_A_QUESTION == 'True') { ?>
+              <tr>
+                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+              </tr>
+              <tr>
+                <td class="productinfo_boxes" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Question about: ' . $product_info['products_name'] . '%0D%0A%0D%0AModel: ' . $product_info['products_model'] . '%0D%0AProduct URL: ' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $product_info['products_id'] .'%0D%0A%0D%0AType your question below:%0D%0A%0D%0A') . '') . '">' . tep_image_button('button_aaq.gif', IMAGE_BUTTON_AAQ) . '</a>'; ?></td>
+              </tr>
+            <?php } //end if ?>
+            <!-- Conditional Ask a Question Starts -->
+            
+            <!-- Conditional Ask a Question Ends -->
           </table>        
         <!-- Right Column Ends -->
         </td>
@@ -302,7 +314,7 @@
                         <tr>
                         <?php // START EASY CALL FOR PRICE v1.4
                           if ($product_info['products_price'] == CALL_FOR_PRICE_VALUE){ ?>
-						    <td class="main" align="right" rowspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Price Inquiry%0D%0A%0D%0AModel: ' . $listing[$x]['products_model'] . '%0D%0AProduct Name: ' . $listing[$x]['products_name'] . '%0D%0AProduct URL: ' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $listing[$x]['products_id'] .'%0D%0A%0D%0A') . '') . '">' . tep_image_submit('button_cfp.gif', IMAGE_BUTTON_CFP); ?></a></td>
+						    <td class="main" align="right" rowspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Price Inquiry%0D%0A%0D%0AModel: ' . $product_info['products_model'] . '%0D%0AProduct Name: ' . $product_info['products_name'] . '%0D%0AProduct URL: ' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $product_info['products_id'] .'%0D%0A%0D%0A') . '') . '">' . tep_image_submit('button_cfp.gif', IMAGE_BUTTON_CFP); ?></a></td>
                         <?php } else { ?>  
                        	  	<td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',+1)" alt="plus 1" class="plusminus"></td>
                           	<td rowspan="2" align="center"><?php echo tep_draw_input_field('cart_quantity', $pf->adjustQty(1), 'size="2" id="product-quantity-{{product.id}}"'); ?></td>

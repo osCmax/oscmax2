@@ -2129,6 +2129,7 @@ INSERT INTO configuration VALUES (2653, 'Display Corner Banners','PRODUCT_CORNER
 #Corner Banners End
 
 INSERT INTO configuration VALUES (2654, 'Do you want to use a scroller in Cross Sell module on product info?', 'USE_XSELL_HORIZ_SCROLLER', 'false', 'Would you like to use a scroller on the Cross Sell infobox?', 201, 26, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2655, 'Show Ask a Question button on Product Info pages?', 'SHOW_ASK_A_QUESTION', 'False', 'Do you want to display a button that links through to your contact form with pre-filled in information about a product the user was viewing?', 8, 21, NULL,now(),NULL,'tep_cfg_select_option(array(''True'', ''False''),');
 
 
 #Open Feature Sets Start

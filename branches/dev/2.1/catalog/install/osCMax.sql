@@ -1776,8 +1776,8 @@ INSERT INTO configuration VALUES (118,'Stock Re-order level','STOCK_REORDER_LEVE
 INSERT INTO configuration VALUES (119,'Store Page Parse Time','STORE_PAGE_PARSE_TIME','false','Store the time it takes to parse a page','10','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (120,'Log Destination','STORE_PAGE_PARSE_TIME_LOG','/var/log/www/tep/page_parse_time.log','Directory and filename of the page parse time log','10','2',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (121,'Log Date Format','STORE_PARSE_DATE_TIME_FORMAT','%d/%m/%Y %H:%M:%S','The date format','10','3',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (122,'Display The Page Parse Time','DISPLAY_PAGE_PARSE_TIME','false','Display the page parse time (store page parse time must be enabled)','10','4',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (123,'Store Database Queries','STORE_DB_TRANSACTIONS','false','Store the database queries in the page parse time log (PHP4 only)','10','5',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (122,'Display The Page Parse Time','DISPLAY_PAGE_PARSE_TIME','false','Display the page parse time (store page parse time must be enabled)','10','5',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (123,'Store Database Queries','STORE_DB_TRANSACTIONS','false','Store the database queries in the page parse time log (PHP4 only)','10','4',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 INSERT INTO configuration VALUES (124,'Use Cache','USE_CACHE','false','Use caching features.<br>CAUTION. This may cause issues and crash your site. Test first!','11','1',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (125,'Cache Directory','DIR_FS_CACHE','cache/','The directory where the cached files are saved','11','2',NULL,now(),NULL,NULL);
@@ -2130,6 +2130,7 @@ INSERT INTO configuration VALUES (2653, 'Display Corner Banners','PRODUCT_CORNER
 
 INSERT INTO configuration VALUES (2654, 'Do you want to use a scroller in Cross Sell module on product info?', 'USE_XSELL_HORIZ_SCROLLER', 'false', 'Would you like to use a scroller on the Cross Sell infobox?', 201, 26, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
 INSERT INTO configuration VALUES (2655, 'Show Ask a Question button on Product Info pages?', 'SHOW_ASK_A_QUESTION', 'False', 'Do you want to display a button that links through to your contact form with pre-filled in information about a product the user was viewing?', 8, 21, NULL,now(),NULL,'tep_cfg_select_option(array(''True'', ''False''),');
+INSERT INTO configuration VALUES (2656, 'Display the queries used and Variables used?','DISPLAY_QUERIES','false','Display the queries and variables used to create a page.  <br><br><b>You must enable Display The Page Parse Time first.</b><br><br>This will be visible on your live store (<b>DO NOT use on live stores</b>)','10','6',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 
 #Open Feature Sets Start

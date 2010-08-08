@@ -18,18 +18,19 @@ $Id: performance.php 3 2006-05-27 04:59:07Z user $
     echo '<div align="center"><span class="smallText">Current Parse Time: <b>' . $parse_time . ' s</b> with <b>' . sizeof($debug['QUERIES']) . ' queries</b></span></div>';
     if (DISPLAY_QUERIES == 'true') {
       echo '<b>QUERY DEBUG:</b> ';
-      print_array($debug);
+      print_r($debug);
       echo '<hr>';
       echo '<b>SESSION:</b> ';
-      print_array($_SESSION);
+      print_r($_SESSION);
       echo '<hr>';
       echo '<b>COOKIE:</b> ';
-      print_array($_COOKIE);
+      print_r($_COOKIE);
+	  echo '<hr>';
       echo '<b>POST:</b> ';
-      print_array($_POST);
+      print_r($_POST);
       echo '<hr>';
       echo '<b>GET:</b> ';
-      print_array($_GET);
+      print_r($_GET);
     } # END if request
   }
   unset($debug);

@@ -94,6 +94,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 if (LEFT_COLUMN_SHOW != 'false') { ?>
     <td width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top">
       <table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
+        <tr>
 <?php
 // Hide Left Column if not to show
 // BOF One Page Checkout custom column code
@@ -144,6 +145,7 @@ if (RIGHT_COLUMN_SHOW != 'false') { ?>
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
               if ($pfile != 'checkout.php') {
 		     ?>
+         <tr>
 		    <td class="rightcol" width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
 		    <!-- right_navigation //-->
 		    <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
@@ -236,7 +238,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 </td></tr>
 </table>
 <!-- Store width controller -->
-</body>
+
    <?php if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exists for this page it will be loaded
       require(bts_select('javascript', $PHP_SELF));
 } else {
@@ -249,8 +251,8 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
   //echo $pfile; //debug code - displays current page name.
   
   if ($pfile == 'index.php') {   
-      echo '<script src="http://www.google.com/jsapi"></script>';
-      echo '<script>' . "\n";
+      echo '<script type="text/javascript" src="http://www.google.com/jsapi"></script>';
+      echo '<script type="text/javascript">' . "\n";
       echo '// Load jQuery' . "\n";
       echo 'google.load("jquery", "1.4.0");' . "\n";
       echo '</script>' . "\n";
@@ -262,9 +264,10 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
   if (DISPLAY_DHTML_MENU == 'CoolMenu') {
     echo '<link rel="stylesheet" type="text/css" href="' . DIR_WS_TEMPLATES . 'coolmenu.css">';
     echo '<!-- coolMenu //-->';
- 	echo '<SCRIPT LANGUAGE="JavaScript1.2" SRC="includes/coolMenu.js"></SCRIPT>';
+ 	echo '<script type="text/javascript" SRC="includes/coolMenu.js"></SCRIPT>';
 	echo '<!-- coolMenu_eof //-->';
  }
  ?>
 <?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
+</body>
 </html>

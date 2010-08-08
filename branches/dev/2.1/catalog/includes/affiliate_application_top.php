@@ -158,7 +158,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   if (!isset($request_type)) $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
 
 // Emulate the breadcrumb class
-  if (!class_exists(breadcrumb)) {
+  if (!class_exists('breadcrumb')) {
     class breadcrumb {
       function add($title, $link = '') {
         global $location;

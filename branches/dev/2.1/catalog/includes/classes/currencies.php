@@ -78,7 +78,7 @@ $Id: currencies.php 3 2006-05-27 04:59:07Z user $
     function display_price($products_price, $products_tax, $quantity = 1) {
       // BOF: MOD - EASY CALL FOR PRICE v1.4
 	  // return $this->format($this->calculate_price($products_price, $products_tax, $quantity));
-	  define ('CALL_FOR_PRICE_VALUE', -1);
+	  if(!defined('CALL_FOR_PRICE_VALUE')) define ('CALL_FOR_PRICE_VALUE', -1);
 	  if ($products_price > CALL_FOR_PRICE_VALUE){
 	    return $this->format($this->calculate_price($products_price, $products_tax, $quantity));
 	  } else {

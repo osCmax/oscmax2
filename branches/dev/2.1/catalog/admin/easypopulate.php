@@ -326,7 +326,7 @@ define ('EP_FROOGLE_PRODUCT_INFO_PATH', HTTP_CATALOG_SERVER . DIR_WS_CATALOG . "
 
 // **** Froogle product image path ****
 // Set this to the path to your images directory
-define ('EP_FROOGLE_IMAGE_PATH', HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES. DYNAMICS_MOPICS_THUMBS_DIR);
+define ('EP_FROOGLE_IMAGE_PATH', HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES. DYNAMIC_MOPICS_THUMBS_DIR);
 
 // **** Froogle - search engine friendly setting
 // if your store has SEARCH ENGINE FRIENDLY URLS set, then turn this to true

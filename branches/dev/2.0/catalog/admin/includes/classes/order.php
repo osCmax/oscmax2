@@ -83,11 +83,12 @@ $Id: order.php 14 2006-07-28 17:42:07Z user $
                              'format_id' => $order['billing_address_format_id']);
 
       $index = 0;
-      $orders_products_query = tep_db_query("select orders_products_id, products_name, products_model, products_price, products_tax, products_quantity, final_price from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . (int)$order_id . "'");
+      $orders_products_query = tep_db_query("select orders_products_id, products_name, products_model, products_code, products_price, products_tax, products_quantity, final_price from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . (int)$order_id . "'");
       while ($orders_products = tep_db_fetch_array($orders_products_query)) {
         $this->products[$index] = array('qty' => $orders_products['products_quantity'],
                                         'name' => $orders_products['products_name'],
                                         'model' => $orders_products['products_model'],
+                               		'code' => $orders_products['products_code'],
                                         'tax' => $orders_products['products_tax'],
                                         'price' => $orders_products['products_price'],
                                         'final_price' => $orders_products['final_price']);

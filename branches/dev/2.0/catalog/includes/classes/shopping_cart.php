@@ -410,10 +410,39 @@ var $shiptotal;
           }
         }
 // EOF Separate Pricing Per Customer
+//BOF Attribute Product Codes
+                $attribute_code_array = array();
+                if (is_array($this->contents[$products_id]['attributes'])) {
+                        $i = 0;
+                foreach ($this->contents[$products_id]['attributes'] as $attributes){
+                        $option = array_keys($this->contents[$products_id]['attributes']);
+                        $value = $this->contents[$products_id]['attributes'];
+                        $attribute_code_query = tep_db_query("select code_suffix, suffix_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$prid . "' and options_id = '" . (int)$option[$i] . "' and options_values_id = '" . (int)$value[$option[$i]] . "' order by suffix_sort_order ASC");
+                  $attribute_code = tep_db_fetch_array($attribute_code_query);
+                  if (tep_not_null($attribute_code['code_suffix'])) {
+                        $attribute_code_array[(int)$attribute_code['suffix_sort_order']] = $attribute_code['code_suffix'];
+                        }
+                                  $i++;
+                }
+
+        $separator = '-';
+	//	if (count($attribute_code_array) > 1) {
+        //  	$separator = '-';
+        //} elseif (count($attribute_code_array) == 1) {
+        // 	$separator = '/';
+        //}
+               
+        $products_code = $products['products_model'] . $separator . implode("-", $attribute_code_array);
+	} else {
+$products_code = $products['products_model'];
+
+}
+// EOF Attribute Product Codes		 
 //        $products_array[] = array('id' => $products_id,
           $products_array[] = array('id' => tep_get_uprid($products_id, $this->contents[$products_id]['attributes']),
                                     'name' => $products['products_name'],
                                     'model' => $products['products_model'],
+				    'code' => $products_code,
                                     'image' => $products['products_image'],
                                     'price' => $products_price,
                                     'quantity' => $this->contents[$products_id]['qty'],

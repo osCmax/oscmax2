@@ -143,9 +143,13 @@ if ($the_customers_fax) {
         }
       }
 
-      echo '        </td>' . "\n" .
-           '        <td class="dataTableContent" valign="top">' . $order->products[$i]['model'] . '</td>' . "\n" .
-           '      </tr>' . "\n";
+      echo '            </td>' . "\n";
+      if(tep_not_null($order->products[$i]['code'])){
+         echo '            <td class="dataTableContent" valign="top">' .  $order->products[$i]['code'] . '</td>' . "\n" ;
+       } else {
+         echo '            <td class="dataTableContent" valign="top">' .  $order->products[$i]['model'] . '</td>' . "\n" ;
+       }
+      echo '      </tr>' . "\n";
     }
 ?>
     </table></td>

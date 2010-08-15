@@ -113,6 +113,7 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
 	                                'id' => $orders_products['products_id'],
                                         'name' => $orders_products['products_name'],
                                         'model' => $orders_products['products_model'],
+					'code' => $orders_products['products_code'], //Attributes Product-Code
                                         'tax' => $orders_products['products_tax'],
                                         'price' => $orders_products['products_price'],
                                         'final_price' => $orders_products['final_price']);
@@ -306,6 +307,7 @@ $Id: order.php 3 2006-05-27 04:59:07Z user $
         $this->products[$index] = array('qty' => $products[$i]['quantity'],
                                         'name' => $products[$i]['name'],
                                         'model' => $products[$i]['model'],
+                                        'code' => $products[$i]['code'],
                                         'tax' => tep_get_tax_rate($products[$i]['tax_class_id'], $tax_address['entry_country_id'], $tax_address['entry_zone_id']),
                                         'tax_description' => tep_get_tax_description($products[$i]['tax_class_id'], $tax_address['entry_country_id'], $tax_address['entry_zone_id']),
                                         'price' => $products[$i]['price'],

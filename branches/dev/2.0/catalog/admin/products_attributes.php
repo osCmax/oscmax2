@@ -672,7 +672,7 @@ function translate_type_to_name($opt_type) {
         </table>
         <form name="attributes" action="<?php echo tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=' . $form_action . '&' . $page_info); ?>" method="post"><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td colspan="7"><?php echo tep_black_line(); ?></td>
+            <td colspan="10"><?php echo tep_black_line(); ?></td>
           </tr>
           <tr class="dataTableHeadingRow">
             <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_ID; ?>&nbsp;</td>
@@ -686,7 +686,7 @@ function translate_type_to_name($opt_type) {
             <td class="dataTableHeadingContent" align="center">&nbsp;<?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
           </tr>
           <tr>
-            <td colspan="7"><?php echo tep_black_line(); ?></td>
+            <td colspan="10"><?php echo tep_black_line(); ?></td>
           </tr>
 <?php
   $next_id = 1;
@@ -738,10 +738,10 @@ function translate_type_to_name($opt_type) {
       } 
 ?>        
             </select>&nbsp;</td>
-            <td align="center" class="smallText">&nbsp;<input type="text" name="code_suffix" value="<?php echo $attributes_values['code_suffix']; ?>" size="6">&nbsp;</td>
-			<td align="center" class="smallText">&nbsp;<input type="text" name="suffix_sort_order" value="<?php echo $attributes_values['suffix_sort_order']; ?>" size="6">&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<input type="text" name="code_suffix" value="<?php echo $attributes_values['code_suffix']; ?>" size="10">&nbsp;</td>
+			<td align="center" class="smallText">&nbsp;<input type="text" name="suffix_sort_order" value="<?php echo $attributes_values['suffix_sort_order']; ?>" size="2">&nbsp;</td>
             <td align="right" class="smallText">&nbsp;<input type="text" name="value_price" value="<?php echo $attributes_values['options_values_price']; ?>" size="6">&nbsp;</td>
-            <td align="center" class="smallText">&nbsp;<input type="text" name="price_prefix" value="<?php echo $attributes_values['price_prefix']; ?>" size="2">&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<input type="text" name="price_prefix" value="<?php echo $attributes_values['price_prefix']; ?>" size="1">&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE); ?>&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info, 'NONSSL') . '">'; ?><?php echo tep_image_button('button_cancel.gif', IMAGE_CANCEL); ?></a>&nbsp;</td>
 <?php
       if (DOWNLOAD_ENABLED == 'true') {
@@ -812,7 +812,7 @@ function translate_type_to_name($opt_type) {
   if ($action != 'update_attribute') {
 ?>
           <tr>
-            <td colspan="7"><?php echo tep_black_line(); ?></td>
+            <td colspan="10"><?php echo tep_black_line(); ?></td>
           </tr>
           <tr class="<?php echo (floor($rows/2) == ($rows/2) ? 'attributes-even' : 'attributes-odd'); ?>">
             <td class="smallText">&nbsp;<?php echo $next_id; ?>&nbsp;</td>
@@ -840,10 +840,10 @@ function translate_type_to_name($opt_type) {
     } 
 ?>
             </select>&nbsp;</td>
-            <td align="center" class="smallText">&nbsp;<input type="text" name="code_suffix" size="6">&nbsp;</td>
-			<td align="center" class="smallText">&nbsp;<input type="text" name="suffix_sort_order" size="6">&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<input type="text" name="code_suffix" size="10">&nbsp;</td>
+			<td align="center" class="smallText">&nbsp;<input type="text" name="suffix_sort_order" size="2">&nbsp;</td>
             <td align="right" class="smallText">&nbsp;<input type="text" name="value_price" size="6">&nbsp;</td>
-            <td align="right" class="smallText">&nbsp;<input type="text" name="price_prefix" size="2" value="+">&nbsp;</td>
+            <td align="right" class="smallText">&nbsp;<input type="text" name="price_prefix" size="1" value="+">&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<?php echo tep_image_submit('button_insert.gif', IMAGE_INSERT); ?>&nbsp;</td>
           </tr>
 <?php
@@ -875,7 +875,7 @@ function translate_type_to_name($opt_type) {
   }
 ?>
           <tr>
-            <td colspan="7"><?php echo tep_black_line(); ?></td>
+            <td colspan="10"><?php echo tep_black_line(); ?></td>
           </tr>
         </table></form></td>
       </tr>

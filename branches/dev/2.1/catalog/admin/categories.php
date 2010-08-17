@@ -1190,7 +1190,8 @@ if ($action == 'new_product') {
                        'products_featured_until' => '',
 // EOF Open Featured Sets
                        'products_status' => '',
-                       'products_tax_class_id' => '',
+// LINE MODED: Default Product Tax Class
+                       'products_tax_class_id' => DEFAULT_PRODUCT_TAX_CLASS,
 // BOF SPPC hide from groups mod
                        'products_hide_from_groups' => '',
 // EOF SPPC hide from groups mod

@@ -1542,8 +1542,9 @@ function updateNet() {
     $i = 0; // for alternate coloring of rows (zebra striping)
     for ($count = 0; $count <= (PRICE_BREAK_NOF_LEVELS - 1); $count++) {
       $bgcolor = ($i++ & 1) ? '#ebebff' : '#ffffff'; // for zebra striping
+	  if ($count > 0) $display = 'none';	  
 ?>
-                      <tr bgcolor="<?php echo $bgcolor; ?>">
+                      <tr bgcolor="<?php echo $bgcolor; ?>" style="display:<?php echo $display; ?>" id="row-<?php echo $count; ?>">
                         <td class="main"><?php echo TEXT_PRODUCTS_PRICE  . " " . ($count + 1); ?></td>
                         <td class="main" align="left"> <?php
                             if(is_array($pInfo->products_price_break[$CustGroupID]) && array_key_exists($count, $pInfo->products_price_break[$CustGroupID])) {
@@ -1560,7 +1561,12 @@ function updateNet() {
                               echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
                               echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;
                               echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
-                            } ?>
+                            } 
+							if ($count < PRICE_BREAK_NOF_LEVELS - 1) {
+							  echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_image(DIR_WS_ICONS . 'plus.png', TEXT_ADD_PL, '', '', 'id="show' . $count . '"');
+							}
+							?>
+                            
                         </td>
                       </tr>
 <?php

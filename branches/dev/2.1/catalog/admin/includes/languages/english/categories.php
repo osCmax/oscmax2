@@ -176,4 +176,5 @@ define('TEXT_MORE_INFO', 'more...');
 
 define('HEADING_PRICE_HELP','Price Help');
 define('TEXT_PRICE_HELP','If you want to display <b>Contact for Price</b> set the price to -1');
+define('TEXT_ADD_PL', 'Add another Price Break');
 ?>

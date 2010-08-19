@@ -166,10 +166,12 @@ global $_POST, $customer_id, $currencies, $cc_id;
 // ccgv coupon restrictions error fix
 //  $err_msg = ERROR_REDEEMED_AMOUNT.ERROR_REDEEMED_AMOUNT_ZERO;
     $err_msg = ERROR_REDEEMED_AMOUNT_ZERO;
+	tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode($err_msg), 'SSL'));
     } else {
       $err_msg = ERROR_REDEEMED_AMOUNT.$coupon_amount_out;
+	  tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_success='.$this->code.'&error=' . urlencode($err_msg), 'SSL'));
     }
-    tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode($err_msg), 'SSL'));
+    
 //**si** 09-11-05 end
 
     // $_SESSION['cc_id'] = $coupon_result['coupon_id']; //Fred commented out, do not use $_SESSION[] due to backward comp. Reference the global var instead.

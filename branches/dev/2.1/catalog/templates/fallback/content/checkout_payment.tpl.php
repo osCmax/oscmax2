@@ -11,7 +11,9 @@
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
 <?php
-  if (isset($_GET['payment_error']) && is_object(${$_GET['payment_error']}) && ($error = ${$_GET['payment_error']}->get_error())) {
+  if ( isset($_GET['payment_error']) && is_object(${$_GET['payment_error']}) && ($error = ${$_GET['payment_error']}->get_error()) || ( isset($_GET['payment_success']) && is_object(${$_GET['payment_success']}) && ($error = ${$_GET['payment_success']}->get_error()) )) {
+	  $class = 'messageStackWarning';
+	  if (isset($_GET['payment_success'])) { $class = 'messageStackSuccess'; }
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -21,17 +23,7 @@
         </table></td>
       </tr>
       <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBoxNotice">
-          <tr class="infoBoxNoticeContents">
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td class="main" width="100%" valign="top"><?php echo tep_output_string_protected($error['error']); ?></td>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
+        <td class="<?php echo $class; ?>"><?php echo tep_output_string_protected($error['error']); ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

@@ -35,7 +35,7 @@
 </tr>
 <?php
     echo "<tr><td><b>". TEXT_VALID_PRODUCTS_ID . "</b></td><td><b>" . TEXT_VALID_PRODUCTS_NAME . "</b></td></tr><tr>";
-    $result = mysql_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '" . $languages_id . "' ORDER BY products_description.products_name");
+    $result = mysql_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '" . $languages_id . "' and products_status=1 ORDER BY products_description.products_name");
     if ($row = mysql_fetch_array($result)) {
         do {
             echo "<td class='infoBoxContents'>&nbsp;".$row["products_id"]."</td>\n";

@@ -266,8 +266,6 @@ define('BOX_TOOLS_BANNER_MANAGER', 'Banner Manager');
 // LINE ADDED: MOD - Batch Print Center
 define('BOX_TOOLS_BATCH_CENTER', 'Batch Print Center');
 define('BOX_TOOLS_CACHE', 'Cache Steuerung');
-define('BOX_TOOLS_DEFINE_LANGUAGE', 'Sprachen definieren');
-define('BOX_TOOLS_FILE_MANAGER', 'Datei-Manager');
 define('BOX_TOOLS_MAIL', 'eMail versenden');
 define('BOX_TOOLS_NEWSLETTER_MANAGER', 'Rundschreiben Manager');
 define('BOX_TOOLS_SERVER_INFO', 'Server Info');

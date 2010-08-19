@@ -211,10 +211,6 @@ define('BOX_TELL_A_FRIEND_TEXT', 'Tell someone you know about this product.');
 // LINE ADDED: MOD - allprods modification
 define('BOX_INFORMATION_ALLPRODS', 'View All Items');
 
-// 2 LINES ADDED: MOD - Recover Carts
-define('BOX_REPORTS_RECOVER_CART_SALES', 'Recover Carts');
-define('BOX_TOOLS_RECOVER_CART', 'Recover Carts');
-
 // checkout procedure text
 define('CHECKOUT_BAR_DELIVERY', 'Delivery Information');
 define('CHECKOUT_BAR_PAYMENT', 'Payment Information');

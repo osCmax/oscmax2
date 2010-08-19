@@ -145,10 +145,6 @@ define('BOX_TELL_A_FRIEND_TEXT', 'Envoyer cet article &agrave; un ami(e).');
 //LINE ADDED - allprods modification
 define('BOX_INFORMATION_ALLPRODS', 'Regardez Tous les Articles');
 
-// 2 LINES ADDED: MOD - Recover Carts
-define('BOX_REPORTS_RECOVER_CART_SALES', 'R&eacute;cup&eacute;rez Les Caddies');
-define('BOX_TOOLS_RECOVER_CART', 'Récupérez Les Caddies');
-
 // checkout procedure text
 define('CHECKOUT_BAR_DELIVERY', 'Information livraison');
 define('CHECKOUT_BAR_PAYMENT', 'Information paiement');

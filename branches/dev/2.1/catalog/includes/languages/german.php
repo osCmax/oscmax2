@@ -141,10 +141,6 @@ define('BOX_TELL_A_FRIEND_TEXT', 'Empfehlen Sie diesen Artikel einfach per eMail
 // LINE ADDED: MOD - allprods modification
 define('BOX_INFORMATION_ALLPRODS', 'View All Items');
 
-// 2 LINES ADDED: MOD - Recover Carts
-define('BOX_REPORTS_RECOVER_CART_SALES', 'Recover Carts');
-define('BOX_TOOLS_RECOVER_CART', 'Recover Carts');
-
 // checkout procedure text
 define('CHECKOUT_BAR_DELIVERY', 'Versandinformationen');
 define('CHECKOUT_BAR_PAYMENT', 'Zahlungsweise');

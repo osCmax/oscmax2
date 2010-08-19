@@ -259,8 +259,6 @@ define('BOX_TOOLS_BANNER_MANAGER', 'Banner Manager');
 define('BOX_TOOLS_BATCH_CENTER', 'Batch Print Center');
 define('BOX_TOOLS_CACHE', 'Cache Control');
 define('BOX_TOOLS_QTPRODOCTOR', 'QTPro Doctor');
-define('BOX_TOOLS_DEFINE_LANGUAGE', 'Define Languages');
-define('BOX_TOOLS_FILE_MANAGER', 'File Manager');
 define('BOX_TOOLS_MAIL', 'Send Email');
 define('BOX_TOOLS_NEWSLETTER_MANAGER', 'Newsletter Manager');
 define('BOX_TOOLS_SERVER_INFO', 'Server Info');

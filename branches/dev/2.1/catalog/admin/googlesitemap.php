@@ -81,7 +81,7 @@
                   <td class="smallText"><table width="100%"  border="0" cellpadding="4" cellspacing="0">
                     <tr>
                       <td align="left" valign="top" class="infoBoxContent"><p><?php echo WHATIS_TEXT_GOOGLE_SITEMAPS; ?></p>
-                        <p><?php echo WHATIS_REGISTER_GOOGLE_SITEMAPS; ?><strong><a href="www.google.com/webmasters/tools/" target="_blank" class="splitPageLink"><?php echo EXEC_GOOGLE_SITEMAPS; ?></a></strong>.</p>
+                        <p><?php echo WHATIS_REGISTER_GOOGLE_SITEMAPS; ?><strong><a href="http://www.google.com/webmasters/tools/" target="_blank" class="splitPageLink"><?php echo EXEC_GOOGLE_SITEMAPS; ?></a></strong>.</p>
                         </td>
                     </tr>
                   </table></td>

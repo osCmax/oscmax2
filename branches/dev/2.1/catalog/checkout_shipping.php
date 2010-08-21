@@ -78,7 +78,8 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $ship
 // a shipping address is not needed
 // LINE CHANGED: MOD - CREDIT CLASS Gift Voucher Contribution
 //  if ($order->content_type == 'virtual') {
-  if (($order->content_type == 'virtual') || ($order->content_type == 'virtual_weight') ) {
+// LINE MODED: PGM: Added zero weight check for virtual products with attributes
+  if (($order->content_type == 'virtual') || ($order->content_type == 'virtual_weight') || $cart->show_weight() == 0 ) {
     if (!tep_session_is_registered('shipping')) tep_session_register('shipping');
     $shipping = false;
     $sendto = false;

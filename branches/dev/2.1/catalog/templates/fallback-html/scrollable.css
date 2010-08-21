@@ -1,0 +1,43 @@
+.scrollable {
+
+	/* required settings */
+	position:relative;
+	overflow:hidden;
+	width: 590px;
+	height:160px;
+	float:left;
+}
+
+.scrollable .items {
+	/* this cannot be too large */
+	width:20000em;
+	position:absolute;
+	clear:both;
+
+}
+
+.items div {
+	float:left;
+	width:590px; /* must match the width of .scrollable */
+}
+
+
+/* prev, next, prevPage and nextPage buttons */
+a.browse {
+	background:url(images/hori_large.png) no-repeat scroll 0 0 transparent;
+	display:block;
+	width:24px;
+	height:56px;
+	float:left;
+	margin:52px 0px; /* Set the 62 to height of scroller - 56 / 2;  */
+	cursor:pointer;
+	font-size:1px;
+	}
+
+a.right{background-position:0 -56px;clear:right;margin-right:0px;}
+a.right:hover{background-position:-24px -56px}
+a.right:active{background-position:-48px -56px}
+
+a.left{margin-left:1px}
+a.left:hover{background-position:-24px 0}
+a.left:active{background-position:-48px 0}

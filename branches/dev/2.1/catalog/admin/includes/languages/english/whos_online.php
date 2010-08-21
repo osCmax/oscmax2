@@ -54,6 +54,7 @@ define('TABLE_HEADING_USER_SESSION', 'Session?');
 define('TEXT_IN_SESSION', 'Yes');
 define('TEXT_NO_SESSION', 'No');
 
+define('TEXT_NUMBER_OF_CUSTOMER', 'Number of customers');
 define('TEXT_OSCID', 'osCsid');
 define('TEXT_PROFILE_DISPLAY', 'Profile display');
 define('TEXT_USER_AGENT', 'User agent');

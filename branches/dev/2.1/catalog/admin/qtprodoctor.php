@@ -58,11 +58,11 @@
 					}
 				break;
 				case 'amputate':
-				 	print '<p class="messageStackWarning">' . tep_image(DIR_WS_ICONS . 'database_warning.png') . '&nbsp;&nbsp;' . qtpro_doctor_amputate_bad_from_product($products_id) . ' database entries were amputated</p>';
+				 	print '<p class="messageStackWarning">' . tep_image(DIR_WS_ICONS . 'database_error.png', '', '') . '&nbsp;&nbsp;' . qtpro_doctor_amputate_bad_from_product($products_id) . ' database entries were amputated</p>';
 					qtpro_update_summary_stock($products_id);
 				break;
 				case 'chuck_trash':
-					print '<p class="messageStackWarning">' . tep_image(DIR_WS_ICONS . 'database_warning.png') . '&nbsp;&nbsp;' . qtpro_chuck_trash() . ' database entries were identified as trash and deleted.</p>';
+					print '<p class="messageStackWarning">' . tep_image(DIR_WS_ICONS . 'database_error.png') . '&nbsp;&nbsp;' . qtpro_chuck_trash() . ' database entries were identified as trash and deleted.</p>';
 				break;
 				case 'update_summary':
 					qtpro_update_summary_stock($products_id);

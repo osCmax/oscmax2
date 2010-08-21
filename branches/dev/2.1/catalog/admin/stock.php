@@ -124,12 +124,7 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
     $product_name=stripslashes($list[products_name]);
   }
   
-  $product_investigation = qtpro_doctor_investigate_product($VARS['product_id']);
-  
-  //PGM sets contents of right hand column arrays
-  $heading = array();
-  $contents = array();
-  
+  $product_investigation = qtpro_doctor_investigate_product($VARS['product_id']); 
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -154,21 +149,14 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
         </table>
       </td>
 <!-- body_text //-->
-      <td>
-        <table border="0" width="100%" cellspacing="0" cellpadding="2">
+      <td valign="top">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
+            <td class="pageHeading"><?php echo PRODUCTS_STOCK . ': ' . $product_name; ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
+          </tr>
             <td width="75%">
-              <table border="0" width="100%" cellspacing="0" cellpadding="2">
-                <tr>
-                  <td>
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td class="pageHeading"><?php echo PRODUCTS_STOCK . ': ' . $product_name; ?></td>
-                        <td class="pageHeading" align="right">&nbsp;</td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
+              <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
                   <td><form action="<?php echo $PHP_SELF;?>" method=get>
                     <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -183,7 +171,7 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
                                   echo "<td class=\"dataTableHeadingContent\" valign=\"middle\">&nbsp;&nbsp;$option_names[$k]</td>";
                                   $title[$title_num]=$k;
                                 }
-                                echo "<td class=\"dataTableHeadingContent\" valign=\"middle\"><span class=smalltext>Quantity</span></td><td width=\"100%\">&nbsp;</td>";
+                                echo "<td class=\"dataTableHeadingContent\" valign=\"middle\"><span class=smalltext>" . TABLE_HEADING_QTY . "</span></td><td width=\"100%\" colspan=\"2\">&nbsp;</td>";
                                 echo "</tr>";
                                 $q=tep_db_query("select * from " . TABLE_PRODUCTS_STOCK . " where products_id=" . $VARS['product_id'] . " order by products_stock_attributes");
                                 while($rec=tep_db_fetch_array($q)) {
@@ -214,7 +202,7 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
                                 }
                               } else {
                                 $i=1;
-                                echo "<td class=dataTableHeadingContent valign=\"middle\">Quantity</td>";
+                                echo "<td class=dataTableHeadingContent valign=\"middle\">" . TABLE_HEADING_QTY . "</td>";
                               }
                               echo "<td class=dataTableHeadingRow valign=\"middle\"><input type=text name=quantity size=4 value=\"" . $db_quantity . "\"><input type=hidden name=product_id value=\"" . $VARS['product_id'] . "\">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow valign=\"middle\">&nbsp;<input type=submit name=action value=" . ($flag?"Add":"Update") . ">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow>&nbsp;</td>";
                             ?>
@@ -232,22 +220,21 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
                         <td class="dataTableHeadingRow">
                           <table width="100%" class="boxText" border="0" cellspacing="3" cellpadding="6"> 
                             <tr valign="top">
-                              <td class="dataTableHeadingContent" width="400" style="font-size: 12;">QTPro Doctor</td>
-                              <td class="dataTableHeadingContent" style="font-size: 12;">Links</td>
+                              <td class="dataTableHeadingContent" width="400" style="font-size: 12;"><?php echo TABLE_HEADING_QTPRO; ?></td>
+                              <td class="dataTableHeadingContent" style="font-size: 12;"><?php echo TABLE_HEADING_LINKS; ?></td>
                             </tr>
                             <tr valign="top">
                               <td class="menuBoxHeading" width="400">
                                 <span style="font-family: Verdana, Arial, sans-serif; font-size: 10px; color: black;">
                                 <?php 
-                                    //$product_investigation = qtpro_doctor_investigate_product($VARS['product_id']); //Defoined above? behövs då ej här
                                     print qtpro_doctor_formulate_product_investigation($product_investigation, 'detailed');
                                 ?>
                                 </span>
                               </td>
                               <td class="menuBoxHeading">
                                 <?php 
-                                echo '<br><ul><li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $VARS['product_id'] . '&action=new_product') . '" class="menuBoxContentLink">Edit this product</a></li>';
-                                echo '<li><a href="' . tep_href_link(FILENAME_STATS_LOW_STOCK_ATTRIB, '', 'NONSSL') . '" class="menuBoxContentLink">Go to the low stock report</a><br></li>';
+                                echo '<br><ul><li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $VARS['product_id'] . '&action=new_product') . '" class="menuBoxContentLink">' . TEXT_EDIT_PRODUCT . '</a></li>';
+                                echo '<li><a href="' . tep_href_link(FILENAME_STATS_LOW_STOCK_ATTRIB, '', 'NONSSL') . '" class="menuBoxContentLink">' .TEXT_GOTO_LOW_STOCK . '</a><br></li>';
             
                                 //class="menuBoxHeading columnLeft
                                 //We shall now generate links back to the product in the admin/categories.php page.
@@ -273,13 +260,13 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
                             
                                     $curr_pos = 0;
                                     foreach($path_array as $neverusedvariable) {
-                                      print '<li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID='.$VARS['product_id'].'&cPath='. $cpath_string_array[$curr_pos] , 'NONSSL') . '" class="menuBoxContentLink">Go to this product in '.$path_array[$curr_pos].'</a></li>';
+                                      print '<li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $VARS['product_id'] . '&cPath=' .  $cpath_string_array[$curr_pos], 'NONSSL') . '" class="menuBoxContentLink">' . TEXT_GOTO_PRODUCT . $path_array[$curr_pos] . '</a></li>';
                                       $curr_pos++;
                                     }
-                                 }else{
-                                    print '<span style="font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #FF1111; font-weight: normal; text-decoration: none;">Warning! This product does not seem to exist in any category. Your customers can\'t find it.</span>';
+                                 } else {
+                                    echo TEXT_LOST_PRODUCT;
+									
                                  }
-                                 
                                 echo '</ul>';
                                 ?>
                               </td>
@@ -293,7 +280,17 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
               </table>
     		</td>
     		<td width="25%" valign="top">
-              <!-- QTPro $heading and $contents to go here -->
+              <?php
+			  //PGM sets contents of right hand column arrays
+			  $heading = array();
+			  $contents = array();
+			  
+			  $heading[] = array('text' => HEADING_DEFAULT_STOCK);
+    		  $contents[] = array('text' => TEXT_DEFAULT_STOCK);
+			  $box = new box;
+              echo $box->infoBox($heading, $contents);
+			  
+ 			  ?>
             </td>
           </tr>
         </table>

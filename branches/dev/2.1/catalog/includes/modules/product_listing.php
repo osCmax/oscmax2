@@ -64,7 +64,39 @@ $list = '<table align="center"><tr><td width="20" align="center"><a href="' . te
 
 $grid = '<table align="center"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('list')). 'list=grid') . '"> ' . tep_image(DIR_WS_ICONS . 'grid.png', 'View as Grid') . '</a></td><td width="80" class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('list')). 'list=grid') . '">View as Grid</a></td></tr></table>';
 
-$page_nav = '<table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox"><tr><td class="smallText" width="33%">' .  $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS) . '</td><td class="smallText" width="33%" align="center">' . $list . '</td><td class="smallText" width="33%" align="right">' . $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))) . '</td></tr>';
+
+// BOF SPPC Hide products and categories from groups
+    if (PRODUCT_LIST_FILTER > 0) {
+      if (isset($_GET['manufacturers_id'])) {
+        $filterlist_sql = "select distinct c.categories_id as id, cd.categories_name as name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where p.products_status = '1' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and p.products_id = p2c.products_id and p2c.categories_id = c.categories_id and p2c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and p.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "' order by cd.categories_name";
+      } else {
+        $filterlist_sql= "select distinct m.manufacturers_id as id, m.manufacturers_name as name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " using(categories_id), " . TABLE_MANUFACTURERS . " m where p.products_status = '1' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and p.manufacturers_id = m.manufacturers_id and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by m.manufacturers_name";
+      }
+// EOF SPPC Hide products and categories from groups
+
+	  $filter = '';
+      $filterlist_query = tep_db_query($filterlist_sql);
+      if (tep_db_num_rows($filterlist_query) > 1) {
+        $filter .= tep_draw_form('filter', FILENAME_DEFAULT, 'get') . TEXT_SHOW . '&nbsp;';
+        if (isset($_GET['manufacturers_id'])) {
+        $filter .= tep_draw_hidden_field('manufacturers_id', $_GET['manufacturers_id']);
+          $options = array(array('id' => '', 'text' => TEXT_ALL_CATEGORIES));
+        } else {
+          $filter .= tep_draw_hidden_field('cPath', $cPath);
+          $options = array(array('id' => '', 'text' => TEXT_ALL_MANUFACTURERS));
+        } // end if
+        $filter .= tep_draw_hidden_field('sort', $_GET['sort']);
+        while ($filterlist = tep_db_fetch_array($filterlist_query)) {
+          $options[] = array('id' => $filterlist['id'], 'text' => $filterlist['name']);
+        } // end while
+        $filter .= tep_draw_pull_down_menu('filter_id', $options, (isset($_GET['filter_id']) ? $_GET['filter_id'] : ''), 'onchange="this.form.submit()"');
+        $filter .= tep_hide_session_id() . '</form>' . "\n";
+      } else {
+		$filter .= $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS);
+	  }
+	} // end PRODUCT FILTER if
+
+$page_nav = '<table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox"><tr><td class="smallText" width="33%">' .  $filter . '</td><td class="smallText" width="33%" align="center">' . $list . '</td><td class="smallText" width="33%" align="right">' . $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))) . '</td></tr>';
 
 $drop = '<tr><td class="smallText">Results/Page: '. tep_draw_form('maxdisplay', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['sort']) ? tep_draw_hidden_field('sort', $_GET['sort']) : '') .  tep_draw_pull_down_menu('max', $max_display, $_GET['max'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td><td align="center">' . $grid . '</td><td class="smallText" align="right">Sort Order: ' . tep_draw_form('sorting', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['max']) ? tep_draw_hidden_field('max', $_GET['max']) : '') . tep_draw_pull_down_menu('sort', $sort_array, $_GET['sort'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>';
 
@@ -108,6 +140,7 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
            <?php } // end if to hide epf ?>
 <!-- end extra product fields -->
 <?php
+  echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   }
 
   $list_box_contents = array();

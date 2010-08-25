@@ -89,6 +89,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 ?> 
   <title><?php echo HEADING_TITLE ?></title>
         	<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 		<?php require('includes/form_check.js.php'); ?>
 		</head>
 <body>

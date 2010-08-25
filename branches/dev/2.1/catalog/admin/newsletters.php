@@ -101,6 +101,7 @@ $Id: newsletters.php 3 2006-05-27 04:59:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <script type="text/javascript" src="includes/general.js"></script>
 <!-- CKeditor -->
 <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
@@ -196,8 +197,8 @@ $Id: newsletters.php 3 2006-05-27 04:59:07Z user $
             <td class="main"><?php if (HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER == 'Enable') {
 	    // BOF: CKeditor
             	 //echo tep_draw_fckeditor('content', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, $nInfo->content) . '</td>';
-            	 echo tep_draw_textarea_field('content', 'soft', '100%', '20', $nInfo->content, 'class="ckeditor"') . '</td>';
-		} else { echo tep_draw_textarea_field('content', 'soft', '100%', '20', $nInfo->content) . '</td>';
+            	 echo tep_draw_textarea_field('content', '100%', '20', $nInfo->content, 'class="ckeditor"') . '</td>';
+		} else { echo tep_draw_textarea_field('content', '100%', '20', $nInfo->content) . '</td>';
              } // EOF: CKeditor
             ?>
 <?php /* EOF: MOD - WYSIWYG HTML Area Box */ ?>

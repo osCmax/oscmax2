@@ -106,6 +106,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 // EOF: WebMakers.com Changed: Header Tag Controller v1.0
 ?>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <!-- CKeditor -->
 <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
 <!-- CKeditor End -->
@@ -191,10 +192,10 @@ function popupImageWindow(url) {
 		  <?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') { ?>
             <td class="main">
             	<?php
-                	echo (tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', '', 'class="ckeditor"')); ?>
+                	echo (tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', '100%', '20', '', 'class="ckeditor"')); ?>
             </td>
            <?php } else { ?>
-            <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', ''); ?>
+            <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', '70', '15', ''); ?>
             </td>
            <?php } ?>
           </tr>
@@ -286,10 +287,10 @@ function popupImageWindow(url) {
 		  <?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') { ?>
             <td class="main">
             	<?php
-					echo (tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', tep_get_author_description($authors['authors_id'], $languages[$i]['id']), 'class="ckeditor"')); ?>
+					echo (tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', '100%', '20', tep_get_author_description($authors['authors_id'], $languages[$i]['id']), 'class="ckeditor"')); ?>
             </td>
           <?php } else { ?>
-            <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', tep_get_author_description($authors['authors_id'], $languages[$i]['id'])); ?>
+            <td class="main" valign="top"><?php echo tep_draw_textarea_field('authors_description[' . $languages[$i]['id'] . ']', '70', '15', tep_get_author_description($authors['authors_id'], $languages[$i]['id'])); ?>
             </td>
            <?php } ?>
           </tr>

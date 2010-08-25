@@ -45,8 +45,8 @@ define('TEXT_INFO_HEADING_EDIT', 'Edit Category / ');
 define('TEXT_INFO_HEADING_NEW', 'New Admin Member ');
 
 define('TEXT_INFO_DEFAULT_INTRO', 'Member group');
-define('TEXT_INFO_DELETE_INTRO', 'Remove <nobr><b>%s</b></nobr> from <nobr>Admin Members?</nobr>');
-define('TEXT_INFO_DELETE_INTRO_NOT', 'You can not delete <nobr>%s group!</nobr>');
+define('TEXT_INFO_DELETE_INTRO', 'Remove <b>%s</b> from Admin Members?');
+define('TEXT_INFO_DELETE_INTRO_NOT', 'You can not delete %s group!');
 define('TEXT_INFO_EDIT_INTRO', 'Set permission level here: ');
 
 define('TEXT_INFO_USERNAME', 'Username: ');
@@ -79,8 +79,8 @@ define('ADMIN_EMAIL_EDIT_TEXT', 'Hi %s,' . "\n\n" . 'Your personal information h
 define('TEXT_INFO_HEADING_DEFAULT_GROUPS', 'Admin Group ');
 define('TEXT_INFO_HEADING_DELETE_GROUPS', 'Delete Group ');
 
-define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>NOTE:</b><li><b>edit:</b> edit group name.</li><li><b>delete:</b> delete group.</li><li><b>define:</b> define group access.</li>');
-define('TEXT_INFO_DELETE_GROUPS_INTRO', 'It\'s also will delete member of this group. Are you sure want to delete <nobr><b>%s</b> group?</nobr>');
+define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>NOTE:</b><ul><li><b>edit:</b> edit group name.</li><li><b>delete:</b> delete group.</li><li><b>define:</b> define group access.</li></ul>');
+define('TEXT_INFO_DELETE_GROUPS_INTRO', 'It\'s also will delete member of this group. Are you sure want to delete <b>%s</b> group?');
 define('TEXT_INFO_DELETE_GROUPS_INTRO_NOT', 'You can not delete this groups!');
 define('TEXT_INFO_GROUPS_INTRO', 'Give an unique group name. Click next to submit.');
 define('TEXT_INFO_EDIT_GROUPS_INTRO', 'Give an unique group name. Click next to submit.');

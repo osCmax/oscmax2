@@ -140,6 +140,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <script type="text/javascript" src="includes/general.js"></script>
 </head>
 <body onLoad="SetFocus();">
@@ -201,7 +202,7 @@
           </tr>
           <tr>
             <td class="main" valign = "top"><?php echo TEXT_AFFILIATE_NEWS_CONTENT; ?></td>
-            <td class="main"><?php echo tep_draw_textarea_field('contents[' . $a_languages_id . ']', 'soft', '70', '15', stripslashes($affiliate_news['content'])); ?>
+            <td class="main"><?php echo tep_draw_textarea_field('contents[' . $a_languages_id . ']', '70', '15', stripslashes($affiliate_news['content'])); ?>
             </td>
         <td class="main" align="right">
           <?php

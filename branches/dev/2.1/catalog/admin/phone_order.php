@@ -55,6 +55,7 @@ require(DIR_WS_INCLUDES . 'header_tags.php');
 <title>Phone Order</title>
 
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 
 </head>
 

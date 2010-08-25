@@ -1,15 +1,10 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
-<link type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css" rel="Stylesheet" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
 
 <script type="text/javascript" src="includes/javascript/hoverIntent.js"></script>
 <script type="text/javascript" src="includes/javascript/superfish.js"></script>
 <script type="text/javascript" src="includes/javascript/supersubs.js"></script>
-<link rel="stylesheet" type="text/css" href="includes/javascript/superfish.css">
-
 <script type="text/javascript" src="includes/javascript/jquery.cluetip.min.js" ></script>
-<link rel="stylesheet" type="text/css" href="includes/javascript/jquery.cluetip.css" >
-
 
 <script type="text/javascript">
 // initialise Superfish & jQuery UI Tabs
@@ -155,11 +150,11 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
                 <li><a href="#searchtabs-3">Orders</a></li>
                 </ul>
 
-                <div id="searchtabs-1" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_CUSTOMERS, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
+                <div id="searchtabs-1" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search_customers', FILENAME_CUSTOMERS, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
 
-                <div id="searchtabs-2" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_CATEGORIES, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
+                <div id="searchtabs-2" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search_products', FILENAME_CATEGORIES, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
 
-                <div id="searchtabs-3" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, '', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
+                <div id="searchtabs-3" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search_orders', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, 'text', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
 
             </div>
 	    </td>

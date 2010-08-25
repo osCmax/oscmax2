@@ -79,6 +79,7 @@ $Id: define_mainpage.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <!-- CKeditor -->
 <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
 <!-- CKeditor End -->
@@ -139,8 +140,8 @@ $Id: define_mainpage.php 14 2006-07-28 17:42:07Z user $
 // Line Changed - MOD: Ajustable Editor Window
               // BOF: CKeditor
 	      //echo tep_draw_fckeditor('file_contents', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
-                echo tep_draw_textarea_field('file_contents', 'soft', '100%', '30', $file_contents, 'class="ckeditor"', (($file_writeable) ? '' : 'readonly'))  . '</td>';
-	      } else { echo tep_draw_textarea_field('file_contents', 'soft', '100%', '30', $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
+                echo tep_draw_textarea_field('file_contents', '100%', '30', $file_contents, 'class="ckeditor"', (($file_writeable) ? '' : 'readonly'))  . '</td>';
+	      } else { echo tep_draw_textarea_field('file_contents', '100%', '30', $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
                } // EOF: CKeditor
                ?>
                </tr>

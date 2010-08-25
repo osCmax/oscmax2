@@ -769,6 +769,7 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 
 <?php
  	// BOF Open Featured Sets
@@ -966,8 +967,8 @@ if ($action == 'new_product') {
                 				<td class="main" valign="top"></td>
                 				<td class="main">
                 				<?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
-							   echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','soft','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id'])),'id = category_description[' . $languages[$i]['id'] . '] class="ckeditor"') . '</td>';
-			                  } else { echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','soft','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
+							   echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id'])),'id = category_description[' . $languages[$i]['id'] . '] class="ckeditor"') . '</td>';
+			                  } else { echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
             				    } // EOF: CKeditor
                 				?>
               				</tr>
@@ -1636,7 +1637,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
             <td><table border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
-                <td class="main"><?php echo tep_draw_textarea_field('products_short[' . $languages[$i]['id'] . ']', 'soft', '70', '4', (isset($products_short[$languages[$i]['id']]) ? $products_short[$languages[$i]['id']] : tep_get_products_short($pInfo->products_id, $languages[$i]['id']))); ?></td>
+                <td class="main"><?php echo tep_draw_textarea_field('products_short[' . $languages[$i]['id'] . ']', '70', '4', (isset($products_short[$languages[$i]['id']]) ? $products_short[$languages[$i]['id']] : tep_get_products_short($pInfo->products_id, $languages[$i]['id']))); ?></td>
               </tr>
             </table></td>
           </tr>
@@ -1657,13 +1658,13 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 /*              <td class="main"><?php echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($products_description[$languages[$i]['id']]) ? $products_description[$languages[$i]['id']] : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))); ?></td> */?>
                 <td class="main"><?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
       // BOF: MOD CKeditor
-      echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '10', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])),'id = products_description[' . $languages[$i]['id'] . '] class="ckeditor"');
+      echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', '70', '10', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])),'id = products_description[' . $languages[$i]['id'] . '] class="ckeditor"');
       //echo tep_draw_fckeditor ('products_description[' . $languages[$i]['id'] . ']', '550', '300', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))) . '</td>';
       // EOF: MOD CKeditor
 
     } else {
 
-      echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'].']','soft','70','15',(isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))) . '</td>';
+      echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'].']','70','15',(isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))) . '</td>';
     }
 // EOF: MOD WYSIWYG Editor ?>
               </tr>
@@ -1803,7 +1804,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         	          }
         	        } else {
         	          if ($e['textarea']) {
-          	            $inp = tep_draw_textarea_field($e['field'] . "[" . $languages[$i]['id'] . "]", 'soft', '70', '5', $currentval, 'id="' . $e['field'] . "_" . $languages[$i]['id'] . '"');
+          	            $inp = tep_draw_textarea_field($e['field'] . "[" . $languages[$i]['id'] . "]", '70', '5', $currentval, 'id="' . $e['field'] . "_" . $languages[$i]['id'] . '"');
         	          } else {
           	            $inp = tep_draw_input_field($e['field'] . "[" . $languages[$i]['id'] . "]", $currentval, "maxlength=" . $e['size'] . " size=" . $e['size']);
         	          }

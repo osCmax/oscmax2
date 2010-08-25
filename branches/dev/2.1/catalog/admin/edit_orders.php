@@ -630,6 +630,7 @@ $Id: edit_orders.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 
   <?php include('order_editor/css.php');
       //because if you haven't got your css, what have you got?
@@ -1528,11 +1529,11 @@ document.onmousemove=positiontip
            '    <td class="smallText" align="left">';
 
       if (ORDER_EDITOR_USE_AJAX == 'true') { 
-        echo tep_draw_textarea_field("update_comments[" . $orders_history['orders_status_history_id'] . "][comments]", "soft", "40", "5", 
+        echo tep_draw_textarea_field("update_comments[" . $orders_history['orders_status_history_id'] . "][comments]", "40", "5", 
               "" .  tep_db_output($orders_history['comments']) . "", "onChange=\"updateCommentsField('update', '" . $orders_history['orders_status_history_id'] . "', 'false', encodeURIComponent(this.value))\"") . '' . "\n" .
             '    </td>' . "\n";
       } else {
-        echo tep_draw_textarea_field("update_comments[" . $orders_history['orders_status_history_id'] . "][comments]", "soft", "40", "5", 
+        echo tep_draw_textarea_field("update_comments[" . $orders_history['orders_status_history_id'] . "][comments]", "40", "5", 
              "" .  tep_db_output($orders_history['comments']) . "") . '' . "\n" .
              '    </td>' . "\n";
       }
@@ -1581,7 +1582,7 @@ document.onmousemove=positiontip
     </td>
     <td class="main" width="10">&nbsp;</td>
     <td class="main">
-    <?php echo tep_draw_textarea_field('comments', 'soft', '40', '5', '', 'id="comments"'); ?>
+    <?php echo tep_draw_textarea_field('comments', '40', '5', '', 'id="comments"'); ?>
     </td>
   </tr>
 

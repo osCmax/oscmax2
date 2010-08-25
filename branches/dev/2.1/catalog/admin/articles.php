@@ -336,6 +336,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 // EOF: WebMakers.com Changed: Header Tag Controller v1.0
 ?>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <!-- CKeditor -->
 <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
 <!-- CKeditor End -->
@@ -435,9 +436,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
             <td><table border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="main" valign="top"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-					    echo (tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>'; 
+					    echo (tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', '100%', '20', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>'; 
                      
-               } else { echo tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
+               } else { echo tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', '70', '15', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
               }
               ?>
              </tr>
@@ -724,7 +725,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
             <table border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="main" valign="top"></td>
-                <td class="main"><?php echo tep_draw_textarea_field('articles_head_desc_tag[' . $languages[$i]['id'] . ']', 'soft', '70', '5', (isset($articles_head_desc_tag[$languages[$i]['id']]) ? $articles_head_desc_tag[$languages[$i]['id']] : tep_get_articles_head_desc_tag($aInfo->articles_id, $languages[$i]['id']))); ?></td>
+                <td class="main"><?php echo tep_draw_textarea_field('articles_head_desc_tag[' . $languages[$i]['id'] . ']', '70', '5', (isset($articles_head_desc_tag[$languages[$i]['id']]) ? $articles_head_desc_tag[$languages[$i]['id']] : tep_get_articles_head_desc_tag($aInfo->articles_id, $languages[$i]['id']))); ?></td>
               </tr>
             </table>
             </td>
@@ -738,7 +739,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
             <table border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="main" valign="top"></td>
-                <td class="main"><?php echo tep_draw_textarea_field('articles_head_keywords_tag[' . $languages[$i]['id'] . ']', 'soft', '70', '5', (isset($articles_head_keywords_tag[$languages[$i]['id']]) ? $articles_head_keywords_tag[$languages[$i]['id']] : tep_get_articles_head_keywords_tag($aInfo->articles_id, $languages[$i]['id']))); ?></td>
+                <td class="main"><?php echo tep_draw_textarea_field('articles_head_keywords_tag[' . $languages[$i]['id'] . ']', '70', '5', (isset($articles_head_keywords_tag[$languages[$i]['id']]) ? $articles_head_keywords_tag[$languages[$i]['id']] : tep_get_articles_head_keywords_tag($aInfo->articles_id, $languages[$i]['id']))); ?></td>
               </tr>
             </table>
             </td>
@@ -753,9 +754,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
                 <tr>
                   <td class="main" valign="top"></td>
                   <td class="main"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-					    echo (tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>';
+					    echo (tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', '100%', '20', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>';
 					 
-               } else { echo tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']))) . '</td>' ;
+               } else { echo tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', '70', '15', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']))) . '</td>' ;
               }
               ?>
 			      </td>

@@ -47,6 +47,7 @@ if ($_GET['delete']) {
   <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET;?>">
   <title><?php echo TITLE; ?></title>
   <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 </head>
 <body>
 
@@ -546,7 +547,7 @@ else	 //we are NOT doing an e-mail to some customers
   $cline = "<tr></tr><td class='dataTableContent' align='right' colspan='8'><hr align=right width=55><b>" . TABLE_GRAND_TOTAL . "</b>" . $totalAll_formated . "</td>
               </tr>";
   echo $cline;
- echo "<tr><td colspan=8><hr size=1 color=000080><b>". PSMSG ."</b><br>". tep_draw_textarea_field('message', 'soft', '80', '5') ."<br>" . tep_draw_selection_field('submit_button', 'submit', TEXT_SEND_EMAIL) . "</td></tr>";
+ echo "<tr><td colspan=8><hr size=1 color=000080><b>". PSMSG ."</b><br>". tep_draw_textarea_field('message', '80', '5') ."<br>" . tep_draw_selection_field('submit_button', 'submit', TEXT_SEND_EMAIL) . "</td></tr>";
 ?>
  </form>
 <?php }

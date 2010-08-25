@@ -266,6 +266,7 @@ $password = $l1.$r1.$l2.$l3.$r2;
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
   <title><?php echo TITLE ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <?php require('includes/form_check.js.php'); ?>
 <script language="javascript" type="text/javascript"><!--
 function getObject(name) { 

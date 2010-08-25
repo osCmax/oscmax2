@@ -73,6 +73,7 @@ $Id: affiliate_contact.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <!-- CKeditor -->
 <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
 <!-- CKeditor End -->
@@ -211,9 +212,9 @@ $Id: affiliate_contact.php 14 2006-07-28 17:42:07Z user $
                 <td><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
 // Line Changed - MOD: CKeditor
                 	//echo (tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, '')) . '</td>';
-			echo (tep_draw_textarea_field('message', 'soft', '70', '15', '' ,'class="ckeditor"')) . '</td>';
+			echo (tep_draw_textarea_field('message', '70', '15', '' ,'class="ckeditor"')) . '</td>';
                 } else {
-                	echo (tep_draw_textarea_field('message', 'soft', '70', '15')) . '</td>';
+                	echo (tep_draw_textarea_field('message', '70', '15')) . '</td>';
                 }
                 	 ?>
               </tr>

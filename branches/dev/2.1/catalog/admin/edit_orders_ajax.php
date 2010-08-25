@@ -615,7 +615,7 @@ if (tep_db_num_rows($orders_history_query)) {
     echo '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .
          '    <td class="smallText" align="left">' . 
   
-  tep_draw_textarea_field("update_comments[" . $orders_history['orders_status_history_id'] . "][comments]", "soft", "40", "5", 
+  tep_draw_textarea_field("update_comments[" . $orders_history['orders_status_history_id'] . "][comments]", "40", "5", 
   "" .	tep_db_output($orders_history['comments']) . "", "onChange=\"updateCommentsField('update', '" . $orders_history['orders_status_history_id'] . "', 'false', encodeURIComponent(this.value))\"") . '' . "\n" .
 		 
 		 '    </td>' . "\n";

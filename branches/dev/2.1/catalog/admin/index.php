@@ -19,6 +19,7 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <script type="text/javascript" src="includes/general.js"></script>	
 </head>
 <body>
@@ -124,7 +125,7 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
 
 </div>
 </td></tr></table>
-
+</table>
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->

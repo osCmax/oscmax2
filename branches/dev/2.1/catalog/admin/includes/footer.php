@@ -15,7 +15,6 @@ $Id: footer.php 3 2006-05-27 04:59:07Z user $
 
   if (strpos($PHP_SELF, "login.php") == 0 && strpos($PHP_SELF, "logoff.php") == 0 && strpos($PHP_SELF, "password_forgotten.php") == 0) {
 ?>
-</table>
 <table border="0" width="100%" cellspacing="0" cellpadding="5">
   <tr bgcolor="#606060">
     <td align="left" class="footer">

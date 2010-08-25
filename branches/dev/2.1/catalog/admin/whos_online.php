@@ -315,6 +315,7 @@ echo '<b>' . TABLE_HEADING_IP_ADDRESS . ':</b> ' . "<a href=http://www.ipinfodb.
 
     <title><?php echo TITLE; ?></title>
     <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
     <script type="text/javascript" language="javascript" src="includes/general.js"></script>
     <script type="text/javascript" language="javascript" src="boxover.js"></SCRIPT>
 	<?php

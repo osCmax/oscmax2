@@ -150,6 +150,7 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <script type="text/javascript" src="includes/general.js"></script>
 </head>
 <body>
@@ -453,7 +454,7 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
                     <td class="smallText">
 						<table width="100%">
 							<tr>
-								<td><?php echo tep_draw_textarea_field('comments', 'soft', '50', '5'); ?></td>
+								<td><?php echo tep_draw_textarea_field('comments', '50', '5'); ?></td>
                                 <td>
                                 	<table>
                                     	<tr>

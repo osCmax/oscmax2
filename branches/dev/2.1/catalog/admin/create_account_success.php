@@ -28,6 +28,7 @@ $Id: create_account_success.php 3 2006-05-27 04:59:07Z user $
   <title><?php echo TITLE ?></title>
 
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 </head>
 <body>
 <!-- header //-->

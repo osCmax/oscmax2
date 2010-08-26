@@ -117,37 +117,38 @@ $Id: affiliate_contact.php 14 2006-07-28 17:42:07Z user $
         break;
     }
 ?>
-          <tr><?php echo tep_draw_form('mail', FILENAME_AFFILIATE_CONTACT, 'action=send_email_to_user'); ?>
-            <td><table border="0" width="100%" cellpadding="0" cellspacing="2">
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_AFFILIATE; ?></b><br><?php echo $mail_sent_to; ?></td>
-              </tr>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_FROM; ?></b><br><?php echo htmlspecialchars(stripslashes($_POST['from'])); ?></td>
-              </tr>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_SUBJECT; ?></b><br><?php echo htmlspecialchars(stripslashes($_POST['subject'])); ?></td>
-              </tr>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_MESSAGE; ?></b><br><?php echo nl2br(htmlspecialchars(stripslashes($_POST['message']))); ?></td>
-              </tr>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td>
+          <tr>
+            <td><?php echo tep_draw_form('mail', FILENAME_AFFILIATE_CONTACT, 'action=send_email_to_user'); ?>
+              <table border="0" width="100%" cellpadding="0" cellspacing="2">
+                <tr>
+                  <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
+                <tr>
+                  <td class="smallText"><b><?php echo TEXT_AFFILIATE; ?></b><br><?php echo $mail_sent_to; ?></td>
+                </tr>
+                <tr>
+                  <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
+                <tr>
+                  <td class="smallText"><b><?php echo TEXT_FROM; ?></b><br><?php echo htmlspecialchars(stripslashes($_POST['from'])); ?></td>
+                </tr>
+                <tr>
+                  <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
+                <tr>
+                  <td class="smallText"><b><?php echo TEXT_SUBJECT; ?></b><br><?php echo htmlspecialchars(stripslashes($_POST['subject'])); ?></td>
+                </tr>
+                <tr>
+                  <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
+                <tr>
+                  <td class="smallText"><b><?php echo TEXT_MESSAGE; ?></b><br><?php echo nl2br(htmlspecialchars(stripslashes($_POST['message']))); ?></td>
+                </tr>
+                <tr>
+                  <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
+                <tr>
+                  <td>
 <?php
 /* Re-Post all POST'ed variables */
     reset($_POST);
@@ -157,23 +158,26 @@ $Id: affiliate_contact.php 14 2006-07-28 17:42:07Z user $
       }
     }
 ?>
-                <table border="0" width="100%" cellpadding="0" cellspacing="2">
-                  <tr>
-                    <td><?php echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="back"'); ?></td>
-                    <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
-                  </tr>
-                </table></td>
-              </tr>
-            </table></td>
-          </form></tr>
+                    <table border="0" width="100%" cellpadding="0" cellspacing="2">
+                      <tr>
+                        <td><?php echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="back"'); ?></td>
+                        <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </form></td>
+          </tr>
 <?php
   } else {
 ?>
-          <tr><?php echo tep_draw_form('mail', FILENAME_AFFILIATE_CONTACT, 'action=preview'); ?>
-            <td><table border="0" cellpadding="0" cellspacing="2">
-              <tr>
-                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
+          <tr>
+            <td><?php echo tep_draw_form('mail', FILENAME_AFFILIATE_CONTACT, 'action=preview'); ?>
+              <table border="0" cellpadding="0" cellspacing="2">
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
 <?php
     $affiliate = array();
     $affiliate[] = array('id' => '', 'text' => TEXT_SELECT_AFFILIATE);
@@ -185,47 +189,47 @@ $Id: affiliate_contact.php 14 2006-07-28 17:42:07Z user $
                            'text' => $affiliate_values['affiliate_lastname'] . ', ' . $affiliate_values['affiliate_firstname'] . ' (' . $affiliate_values['affiliate_email_address'] . ')');
     }
 ?>
-              <tr>
-                <td class="main"><?php echo TEXT_AFFILIATE; ?></td>
-                <td><?php echo tep_draw_pull_down_menu('affiliate_email_address', $affiliate, $_GET['affiliate']);?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="main"><?php echo TEXT_FROM; ?></td>
-                <td><?php echo tep_draw_input_field('from', AFFILIATE_EMAIL_ADDRESS, 'size="60"'); ?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="main"><?php echo TEXT_SUBJECT; ?></td>
-                <td><?php echo tep_draw_input_field('subject', '', 'size="60"'); ?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
-<?php /*old       echo tep_draw_textarea_field('message', 'soft', '60', '15');  */ ?>
-                <td><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
+                <tr>
+                  <td class="main"><?php echo TEXT_AFFILIATE; ?></td>
+                  <td><?php echo tep_draw_pull_down_menu('affiliate_email_address', $affiliate, $_GET['affiliate']);?></td>
+                </tr>
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
+                <tr>
+                  <td class="main"><?php echo TEXT_FROM; ?></td>
+                  <td><?php echo tep_draw_input_field('from', AFFILIATE_EMAIL_ADDRESS, 'size="60"'); ?></td>
+                </tr>
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
+                <tr>
+                  <td class="main"><?php echo TEXT_SUBJECT; ?></td>
+                  <td><?php echo tep_draw_input_field('subject', '', 'size="60"'); ?></td>
+                </tr>
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
+                <tr>
+                  <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
+                  <td><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
 // Line Changed - MOD: CKeditor
                 	//echo (tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, '')) . '</td>';
-			echo (tep_draw_textarea_field('message', '70', '15', '' ,'class="ckeditor"')) . '</td>';
-                } else {
+			      echo (tep_draw_textarea_field('message', '70', '15', '' ,'class="ckeditor"')) . '</td>';
+                  } else {
                 	echo (tep_draw_textarea_field('message', '70', '15')) . '</td>';
-                }
-                	 ?>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td colspan="2" align="right"><?php echo tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
-              </tr>
-            </table></td>
-          </form></tr>
+                  }
+                	  ?>
+                </tr>
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
+                <tr>
+                  <td colspan="2" align="right"><?php echo tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
+                </tr>
+              </table>
+            </form></td>
+          </tr>
 <?php
   }
 ?>

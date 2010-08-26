@@ -106,8 +106,8 @@ function popupWindow(url) {
             </table></td>
           </tr>
           <tr>
-            <td><table width="100%" border="0" cellpadding="4" cellspacing="2" class="dataTableContent">
-              <center>
+            <td><center>
+              <table width="100%" border="0" cellpadding="4" cellspacing="2" class="dataTableContent">
                 <tr>
                   <td width="35%" align="right" class="dataTableContent"><b><?php echo TEXT_AFFILIATE_NAME; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                   <td width="15%" class="dataTableContent"><?php echo $affiliate['affiliate_firstname'] . ' ' . $affiliate['affiliate_lastname']; ?></td>
@@ -149,9 +149,9 @@ function popupWindow(url) {
                 </tr>
                 <tr>
                   <td align="right" class="dataTableContent" colspan="4"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_CLICKS, 'acID=' . $_GET['acID']) . '">' . tep_image_button('button_affiliate_clickthroughs.gif', IMAGE_CLICKTHROUGHS) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_SALES, 'acID=' . $_GET['acID']) . '">' . tep_image_button('button_affiliate_sales.gif', IMAGE_SALES) . '</a>'; ?></td>
-                </tr>
-              </center>
-            </table></td>
+                </tr>              
+              </table>
+            </center></td>
           </tr>
         </table></td>
       </tr>

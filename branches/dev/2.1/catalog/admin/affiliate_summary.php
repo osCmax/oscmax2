@@ -121,8 +121,8 @@ function popupWindow(url) {
             </table></td>
           </tr>
           <tr>
-            <td><table width="100%" border="0" cellpadding="4" cellspacing="2" class="dataTableContent">
-              <center>
+            <td><center>
+              <table width="100%" border="0" cellpadding="4" cellspacing="2" class="dataTableContent">
                 <tr>
                   <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_AFFILIATES; ?>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                   <td width="15%" class="dataTableContent"><?php echo $affiliate_number; ?></td>
@@ -136,21 +136,21 @@ function popupWindow(url) {
                   <td width="15%" class="dataTableContent"><?php echo $affiliate_clickthroughs; ?></td>
                 </tr>
                 <tr>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_TRANSACTIONS; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_TRANSACTIONS_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_TRANSACTIONS; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_TRANSACTIONS_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></span></td>
                   <td width="15%" class="dataTableContent"><?php echo $affiliate_transactions; ?></td>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_CONVERSION_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_CONVERSION_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></span></td>
                   <td width="15%" class="dataTableContent"><?php echo $affiliate_conversions;?></td>
                 </tr>
                 <tr>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_AMOUNT; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_AMOUNT_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_AMOUNT; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_AMOUNT_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></span></td>
                   <td width="15%" class="dataTableContent"><?php echo $currencies->display_price($affiliate_amount, ''); ?></td>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_AVERAGE; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_AVERAGE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_AVERAGE; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_AVERAGE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></span></td>
                   <td width="15%" class="dataTableContent"><?php echo $currencies->display_price($affiliate_average, ''); ?></td>
                 </tr>
                 <tr>
-                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_COMMISSION_RATE; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_COMMISSION_RATE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><?php echo TEXT_COMMISSION_RATE; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_COMMISSION_RATE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></span></td>
                   <td width="15%" class="dataTableContent"><?php echo tep_round(AFFILIATE_PERCENT, 2) . ' %'; ?></td>
-                  <td width="35%" align="right" class="dataTableContent"><b><?php echo TEXT_COMMISSION; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_COMMISSION_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></td>
+                  <td width="35%" align="right" class="dataTableContent"><b><?php echo TEXT_COMMISSION; ?><?php echo TEXT_CONVERSION; ?><?php echo '<span title="' . HEADING_SUMMARY_HELP . '|' . TEXT_COMMISSION_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></span></b></td>
                   <td width="15%" class="dataTableContent"><b><?php echo $currencies->display_price($affiliate_commission, ''); ?></b></td>
                 </tr>
                 <tr>
@@ -165,8 +165,8 @@ function popupWindow(url) {
                 <tr>
                   <td align="right" class="dataTableContent" colspan="4"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS, '') . '">' . tep_image_button('button_affiliate_banners.gif', IMAGE_BANNERS) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_CLICKS, '') . '">' . tep_image_button('button_affiliate_clickthroughs.gif', IMAGE_CLICKTHROUGHS) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_SALES, '') . '">' . tep_image_button('button_affiliate_sales.gif', IMAGE_SALES) . '</a>'; ?></td>
                 </tr>
-              </center>
-            </table></td>
+              </table>
+            </center></td>
           </tr>
         </table></td>
       </tr>

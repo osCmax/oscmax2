@@ -2006,7 +2006,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
                         <?php echo $pInfo->products_description; ?>
         </td>
         <td width="25%">
-                <?php echo '<a href="' . $html_images_dir . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image($html_thumbs . $products_image_name, $product_info['products_name'], PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4" align="right"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
+                <?php echo '<a href="' . $html_images_dir . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image($html_thumbs . $products_image_name, $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="4" vspace="4" align="right"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
         </td>
       </tr>
 <?php
@@ -2685,7 +2685,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
             if (tep_not_null($pInfo->products_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($pInfo->products_last_modified));
             if (date('Y-m-d') < $pInfo->products_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . tep_date_short($pInfo->products_date_available));
 // BOF: MoPics in Admin
-           $contents[] = array('text' => 'Main Image (shown as a thumbnail):<br />' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '<br /><br /><center><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /></center>');
+           $contents[] = array('text' => 'Thumbnail Image:<br /><br /><center><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /></center>');
 // EOF: MoPics in Admin
 
 // BOF: MSRP

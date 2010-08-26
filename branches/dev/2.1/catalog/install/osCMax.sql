@@ -1851,6 +1851,7 @@ INSERT INTO configuration VALUES (589,'Product Info Attribute Display Plugin','P
 
 INSERT INTO configuration VALUES (504,'Big Image Types','DYNAMIC_MOPICS_BIG_IMAGE_TYPES','jpg,gif,jpeg,tiff,png,bmp','The types (extensions) of big images you use,seperated by commas.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (503,'Thumbnail Image Types','DYNAMIC_MOPICS_THUMB_IMAGE_TYPES','jpg,gif,jpeg,tiff,png,bmp','The types (extensions) of extra thumbnails you use,seperated by commas.',45,0,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (498,'Products (mid-size) Directory','DYNAMIC_MOPICS_PRODUCTS_DIR','products/','The directory inside catalog/images where your product images are stored.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (499,'Big Images Directory','DYNAMIC_MOPICS_BIGIMAGES_DIR','images_big/','The directory inside catalog/images where your big images are stored.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (500,'Thumbnail Images Directory','DYNAMIC_MOPICS_THUMBS_DIR','thumbs/','The directory inside catalog/images where you extra image thumbs are stored.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (501,'Main Thumbnail In "Thumbnail Images Directory"','DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR','false','If you store your product\'s main thumbnail in the "Thumbnail Images Directory" set this to true.  If it is in the main image directory (uploaded via osCommerce admin),set it false.',45,0,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
@@ -1955,7 +1956,6 @@ INSERT INTO configuration VALUES (778,'Delete Cache Files?','PAGE_CACHE_DELETE_F
 INSERT INTO configuration VALUES (779,'Config Cache Update File?','PAGE_CACHE_UPDATE_CONFIG_FILES','none','If you have a configuration cache contribution enter the FULL path to the update file.<br><br>Contribution by: <b>Chemo</b>',55,6,NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (1073,'Move tax to total amount','MOVE_TAX_TO_TOTAL_AMOUNT','True','Do you want to move the tax to the total amount? If true PayPal will allways show the total amount including tax. (needs Aggregate i.s.o. Per Item to function)',6,4,NULL,now(),NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), ');
-INSERT INTO configuration VALUES (498,'Purchase Without Account','PWA_ON','true','Allow Customers to purchase without an account',40,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 # Slimbox Admin controls
 INSERT INTO configuration VALUES (1150,'Rotate multiple images','SLIMBOX_LOOP','false','Navigate between the first and last images of a Slimbox popup gallery, when there is more than one image to display.<br>Default is false.',4,30,NULL,now(),NULL,NULL);
@@ -2004,6 +2004,7 @@ INSERT INTO configuration VALUES (1306,'Allow the use of AJAX to update order in
 INSERT INTO configuration VALUES (1307,'Select your credit card payment method','ORDER_EDITOR_CREDIT_CARD','Credit Card','Order Editor will display the credit card fields when this payment method is selected.',70,5,NULL,now(),NULL,'tep_cfg_pull_down_payment_methods(');
 INSERT INTO configuration VALUES (1449,'Purchase without account','PURCHASE_WITHOUT_ACCOUNT','yes','Do you allow customers to purchase without an account?',5,'10',NULL,now(),NULL,'tep_cfg_select_option(array(\'yes\',\'no\'),');
 INSERT INTO configuration VALUES (1450,'Purchase without account shipping address','PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SHIPPING','yes','Do you allow customers without account to create separately shipping address?',5,'11',NULL,now(),NULL,'tep_cfg_select_option(array(\'yes\',\'no\'),');
+INSERT INTO configuration VALUES (1451,'Purchase Without Account','PWA_ON','true','Allow Customers to purchase without an account',40,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (1487, 'Dimensions Support', 'SHIPPING_DIMENSIONS_SUPPORT', 'No', 'Do you use the additional dimensions support (read dimensions.txt in the UPSXML package)?', 7, 6, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''No'', ''Ready-to-ship only'', ''With product dimensions''), ');
 INSERT INTO configuration VALUES (1488, 'Unit Weight', 'SHIPPING_UNIT_WEIGHT', 'LBS', 'By what unit are your packages weighed?', 7, 7, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''LBS'', ''KGS''), ');
 INSERT INTO configuration VALUES (1489, 'Unit Length', 'SHIPPING_UNIT_LENGTH', 'IN', 'By what unit are your packages sized?', 7, 8, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''IN'', ''CM''), ');
@@ -2030,8 +2031,8 @@ INSERT INTO configuration VALUES (1509, 'Lowest Pending sales status', 'RCS_PEND
 INSERT INTO configuration VALUES (1510, 'Report Even Row Style', 'RCS_REPORT_EVEN_STYLE', 'dataTableRow', 'Style for even rows in results report. Typical options are <i>dataTableRow</i> and <i>attributes-even</i>.', 80, 90, NULL, '2009-03-07 22:31:53', '', '');
 INSERT INTO configuration VALUES (1511, 'Report Odd Row Style', 'RCS_REPORT_ODD_STYLE', '', 'Style for odd rows in results report. Typical options are NULL (ie, no entry) and <i>attributes-odd</i>.', 80, 92, NULL, '2009-03-07 22:31:53', '', '');
 
-INSERT INTO configuration VALUES (595, 'Product Image Width', 'PRODUCT_IMAGE_WIDTH', '300', 'The main product image \(thumbnail\) in product information pages.',4,20,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (596, 'Product Image Height', 'PRODUCT_IMAGE_HEIGHT', '', 'The main product image \(thumbnail\) in product information pages. Do NOT specify both!',4,21,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (595, 'Product Image Width', 'PRODUCT_IMAGE_WIDTH', '180', 'The main product image in product information pages.',4,20,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (596, 'Product Image Height', 'PRODUCT_IMAGE_HEIGHT', '', 'The main product image in product information pages. Do NOT specify both!',4,21,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (597, 'Product Popup Image Width', 'POPUP_IMAGE_WIDTH', '800', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,22,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (598, 'Product Popup Image Height', 'POPUP_IMAGE_HEIGHT', '600', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,23,NULL,now(),NULL,NULL);
 

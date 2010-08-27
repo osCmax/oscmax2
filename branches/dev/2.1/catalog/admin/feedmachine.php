@@ -52,7 +52,7 @@ function field_generator($db_field_name) {
 	  $output_field_value = tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $product['products_id'] . $additional_params_string, 'NONSSL', false);
 	  break;
 	case 'IMAGE_URL':
-	  $output_field_value = $product['products_image'] ? HTTP_SERVER . DIR_WS_HTTP_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product['products_image'] : '';
+	  $output_field_value = $product['products_image'] ? HTTP_SERVER . DIR_WS_HTTP_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $product['products_image'] : '';
 	  break;
 	case 'CATEGORY':
 	  $output_field_value = !empty($product['categories_id']) ? $product['categories_name'] : '';

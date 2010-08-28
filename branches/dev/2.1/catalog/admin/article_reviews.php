@@ -72,7 +72,15 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
-
+<script type="text/javascript" src="../includes/javascript/jquery-ui.stars.custom.js"></script>
+<script type="text/javascript" src="../includes/javascript/jquery.ui.stars.min.js"></script>
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+   $("#stars-wrapper").stars({
+     captionEl: $("#stars-cap")
+   });
+});
+</script>
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
@@ -125,7 +133,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
               <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
             </tr>
             <tr>
-              <td class="main"><b><?php echo ENTRY_RATING; ?></b>&nbsp;<?php echo TEXT_BAD; ?>&nbsp;<?php for ($i=1; $i<=5; $i++) echo tep_draw_radio_field('reviews_rating', $i, '', $rInfo->reviews_rating) . '&nbsp;'; echo TEXT_GOOD; ?></td>
+              <td class="main">Rating: <span id="stars-cap"></span><div id="stars-wrapper"><?php echo tep_draw_radio_field('reviews_rating', '1', '', 'title="Poor"') . ' ' . tep_draw_radio_field('reviews_rating', '2', '', 'title="Fair"') . ' ' . tep_draw_radio_field('reviews_rating', '3','','title="Average"') . ' ' . tep_draw_radio_field('reviews_rating', '4','','title="Good"') . ' ' . tep_draw_radio_field('reviews_rating', '5','','title="Excellent"'); ?></div></td>
             </tr>
             <tr>
               <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>

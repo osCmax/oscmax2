@@ -23,6 +23,7 @@ define('TABLE_HEADING_PRODUCTS_NAME', 'Products Name');
 define('TABLE_HEADING_PRODUCTS_QTY', 'Quantity');
 define('TABLE_HEADING_PRODUCTS_PRICE', 'Price Each');
 define('TABLE_HEADING_PRODUCTS_FINAL_PRICE', 'Total Price');
+define('TABLE_HEADING_PRODUCTS_REMOVE_ITEM', 'Remove Item');
 
 define('TABLE_HEADING_PRODUCTS', 'Shopping Cart');
 define('TABLE_HEADING_TAX', 'Tax');
@@ -89,4 +90,20 @@ define('TEXT_PLEASE_SELECT', 'Please Select');
 define('TEXT_PASSWORD_FORGOTTEN', 'Password forgotten? Click here.');
 define('IMAGE_UPDATE_CART', 'Update Cart');
 define('IMAGE_LOGIN', 'Login');
+define('TEXT_PAYMENT_METHOD_UPDATE_ERROR', 'Please try again and if problems persist, please try another payment method.');
+define('TEXT_HAVE_COUPON_CCGV', 'Have A Coupon?');
+define('TEXT_HAVE_COUPON_KGT', 'Have A Coupon?');
+define('TEXT_EXISTING_CUSTOMER_LOGIN', 'Already have an account?');
+define('TEXT_DIFFERENT_SHIPPING', 'Different from billing address?');
+define('TEXT_SHIPPING_NO_ADDRESS', 'Please fill in <b>at least</b> your billing address to get shipping quotes.');
+define('TEXT_CHECKOUT_UPDATE_VIEW_ORDER', 'to update/view your order.');
+define('CHECKOUT_BAR_CONFIRMATION', 'Checkout');
+// Points/Rewards Module V2.1rc2a BOF
+define('TABLE_HEADING_REDEEM_SYSTEM', 'Shopping Rewards Points Redemptions ');
+define('TABLE_HEADING_REFERRAL', 'Referral System');
+define('TEXT_REDEEM_SYSTEM_START', 'You have a credit balance of %s ,would you like to use it to pay for this order?<br />The estimated total of your purchase is: %s .');
+define('TEXT_REDEEM_SYSTEM_SPENDING', 'Tick here to use Maximum Points allowed for this order. (%s points %s)&nbsp;&nbsp;->');
+define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">Total Purchase is greater than the maximum points allowed, you will also need to choose a payment method</span>');
+define('TEXT_REFERRAL_REFERRED', 'If you were referred to us by a friend please enter their email address here. ');
+// Points/Rewards Module V2.1rc2a EOF
 ?>

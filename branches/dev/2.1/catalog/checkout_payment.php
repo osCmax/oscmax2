@@ -16,12 +16,11 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
-/* One Page Checkout - BEGIN */  
+/* One Page Checkout - BEGIN */
   if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
-      tep_redirect(tep_href_link(FILENAME_CHECKOUT,tep_get_all_get_params(array(tep_session_name())), 'SSL'));
-    
+      tep_redirect(tep_href_link(FILENAME_CHECKOUT, $_SERVER['QUERY_STRING'], 'SSL'));
   }
-/* One Page Checkout - END */  
+/* One Page Checkout - END */
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   if (tep_session_is_registered('cot_gv')) tep_session_unregister('cot_gv');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
@@ -133,9 +132,9 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
 
   $content = CONTENT_CHECKOUT_PAYMENT;
-  
+
   $javascript = $content . '.js.php';
-  
+
   include (bts_select('main', $content_template)); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');

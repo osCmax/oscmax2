@@ -72,10 +72,23 @@
          </tr>
 <?php
   if (ACCOUNT_STATE == 'true') {
+      if (tep_not_null($address['entry_zone_id'])){
+          $zones_array = array();
+          $zones_query = tep_db_query("select zone_code from " . TABLE_ZONES . " where zone_country_id = '" . $address['entry_country_id'] . "' order by zone_code");
+          while ($zones_values = tep_db_fetch_array($zones_query)) {
+              $zones_array[] = array('id' => $zones_values['zone_code'], 'text' => $zones_values['zone_code']);
+          }
+          
+          $QzoneName = tep_db_query('select zone_code from ' . TABLE_ZONES . ' where zone_id = "' . $address['entry_zone_id'] . '"');
+          $zoneName = tep_db_fetch_array($QzoneName);
+          $input = tep_draw_pull_down_menu('state', $zones_array, $zoneName['zone_code']);
+      }else{
+          $input = tep_draw_input_field('state', $address['entry_state']);
+      }
 ?>
          <tr>
           <td class="main"><?php echo ENTRY_STATE; ?></td>
-          <td class="main" id="stateCol"><?php echo tep_draw_input_field('state', $address['entry_zone_id']) . '&nbsp;' . (tep_not_null(ENTRY_STATE_TEXT) ? '<span class="inputRequirement">' . ENTRY_STATE_TEXT . '</span>' : ''); ?></td>
+          <td class="main" id="stateCol"><?php echo $input . '&nbsp;' . (tep_not_null(ENTRY_STATE_TEXT) ? '<span class="inputRequirement">' . ENTRY_STATE_TEXT . '</span>': '');?></td>
          </tr>
 <?php
   }

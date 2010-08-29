@@ -16,10 +16,10 @@ $Id: checkout_confirmation.php 3 2006-05-27 04:59:07Z user $
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
-/* One Page Checkout - BEGIN */  
+/* One Page Checkout - BEGIN */
   if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
-      tep_redirect(tep_href_link(FILENAME_CHECKOUT,tep_get_all_get_params(array(tep_session_name())), 'SSL'));
-    
+      tep_redirect(tep_href_link(FILENAME_CHECKOUT, $_SERVER['QUERY_STRING'], 'SSL'));
+
   }
 /* One Page Checkout - END */
 
@@ -57,7 +57,7 @@ $Id: checkout_confirmation.php 3 2006-05-27 04:59:07Z user $
 // load the selected payment module
   require(DIR_WS_CLASSES . 'payment.php');
 // Start - CREDIT CLASS Gift Voucher Contribution
-  if ($credit_covers) $payment='credit_covers'; 
+  if ($credit_covers) $payment='credit_covers';
   require(DIR_WS_CLASSES . 'order_total.php');
 // End - CREDIT CLASS Gift Voucher Contribution
   $payment_modules = new payment($payment);
@@ -72,8 +72,8 @@ $Id: checkout_confirmation.php 3 2006-05-27 04:59:07Z user $
   $order_total_modules->collect_posts();
   $order_total_modules->pre_confirmation_check();
 
-// >>> FOR ERROR gv_redeem_code NULL 
-if (isset($_POST['gv_redeem_code']) && ($_POST['gv_redeem_code'] == null)) {tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));} 
+// >>> FOR ERROR gv_redeem_code NULL
+if (isset($_POST['gv_redeem_code']) && ($_POST['gv_redeem_code'] == null)) {tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));}
 // <<< end for error
 
 //  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {

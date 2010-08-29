@@ -1,42 +1,54 @@
 <?php
+  if (defined('MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING') && MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING == 'true') {
+    $pass = false;
+  
+    switch (MODULE_ORDER_TOTAL_SHIPPING_DESTINATION) {
+      case 'national':
+        if ($order->delivery['country_id'] == STORE_COUNTRY) {
+          $pass = true;
+        }
+        break;
+      case 'international':
+        if ($order->delivery['country_id'] != STORE_COUNTRY) {
+          $pass = true;
+        }
+        break;
+      case 'both':
+        $pass = true;
+        break;
+    }
+    // disable free shipping for Alaska and Hawaii
+    $zone_code = tep_get_zone_code($order->delivery['country']['id'], $order->delivery['zone_id'], '');
+    if(in_array($zone_code, array('AK', 'HI'))) {
+      $pass = false;
+    }
+  
+  
+    $free_shipping = false;
+    if ($pass == true && ($order->info['total'] - $order->info['shipping_cost']) >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) {
+      $free_shipping = true;
+      //include(DIR_WS_LANGUAGES . $language . '/modules/order_total/ot_shipping.php');
+    }
+  } else {
+    $free_shipping = false;
+  }
   $quotes = $shipping_modules->quote();
   if ( !tep_session_is_registered('shipping') || ( tep_session_is_registered('shipping') && ($shipping == false) && (tep_count_shipping_modules() > 1) ) ){
-	  if (tep_session_is_registered('shipping')){
-		  tep_session_unregister('shipping');
-	  }
-	  tep_session_register('shipping');
-	  $shipping = $shipping_modules->cheapest();
-  }
-  
-     if (defined('MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING') && MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING == 'true') {
-      $pass = false;
-
-      switch (MODULE_ORDER_TOTAL_SHIPPING_DESTINATION) {
-        case 'national':
-          if ($order->delivery['country_id'] == STORE_COUNTRY) {
-            $pass = true;
-          }
-          break;
-        case 'international':
-          if ($order->delivery['country_id'] != STORE_COUNTRY) {
-            $pass = true;
-          }
-          break;
-        case 'both':
-          $pass = true;
-          break;
-      }
-
-      $free_shipping = false;
-      if ($pass == true && $order->info['total'] >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) {
-        $free_shipping = true;
-        //include(DIR_WS_LANGUAGES . $language . '/modules/order_total/ot_shipping.php');
-      }
-    } else {
-      $free_shipping = false;
+    if (tep_session_is_registered('shipping')){
+      tep_session_unregister('shipping');
     }
-
-  
+    tep_session_register('shipping');
+    if($free_shipping == false)
+      $shipping = $shipping_modules->cheapest();
+    else
+    {
+      $shipping = array(
+              'id' => 'free_free',
+              'title' => FREE_SHIPPING_TITLE,
+              'cost' => '0'
+              );
+    }
+  }
 ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
@@ -60,26 +72,29 @@
 	}
 
 	if ($free_shipping == true) {
-	$onepage['info']['shipping_method']['cost'] = 0;
+	  $checked = ($shipping['id'] == 'free_free'?true:false);
 ?>
  <tr>
   <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
   <td colspan="2" width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-   <tr>
-	<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-	<td class="main" colspan="3"><b><?php echo FREE_SHIPPING_TITLE; ?></b>&nbsp;<?php echo $quotes[$i]['icon']; ?></td>
-	<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-   </tr>
-   <tr id="defaultSelected" class="moduleRowSelected">
-	<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-	<td class="main" width="100%"><?php echo sprintf(FREE_SHIPPING_DESCRIPTION, $currencies->format(MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER)) . tep_draw_hidden_field('shipping', 'free_free'); ?></td>
-	<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-   </tr>
+    <tr>
+	    <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+	    <td class="main" colspan="3"><b><?php echo FREE_SHIPPING_TITLE; ?></b>&nbsp;<?php echo $quotes[$i]['icon']; ?></td>
+	    <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+    </tr>
+    <tr class="moduleRow shippingRow<?php echo ($checked ? ' moduleRowSelected' : '');?>">
+	    <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+	    <td class="main" width="100%"><?php echo sprintf(FREE_SHIPPING_DESCRIPTION, $currencies->format(MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER)) //. tep_draw_hidden_field('shipping', 'free_free'); ?></td>
+	    <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+      <td><?php echo tep_draw_radio_field('shipping', 'free_free', $checked); ?></td>
+      <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+    </tr>
   </table></td>
   <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
  </tr>
 <?php
-	} else {
+	} 
+	if(sizeof($quotes) >= 1) {
 	  $radio_buttons = 0;
 	  for ($i=0, $n=sizeof($quotes); $i<$n; $i++) {
 ?>

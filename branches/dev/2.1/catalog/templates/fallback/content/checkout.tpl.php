@@ -38,8 +38,7 @@
 	<tr>
 	 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
 	  <tr>
-	   <td class="main"><b><?php echo tep_output_string_protected($error['title']); 
-	   ?></b></td>
+	   <td class="main"><b><?php echo tep_output_string_protected($error['title']); ?></b></td>
 	  </tr>
 	 </table></td>
 	</tr>
@@ -49,13 +48,12 @@
 	   <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
 		<tr>
 		 <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-		 <td class="main" width="100%" valign="top"><?php 
+		 <td class="main" width="100%" valign="top"><?php
 		 if($error['error']!='')
-			 echo tep_output_string_protected($error['error']); 
+  			    echo htmlspecialchars_decode($error['error']);
 			 else
-			 echo "Please try again and if problems persist, please try another payment method.";
-			 
-			 ?></td>
+  			    echo TEXT_PAYMENT_METHOD_UPDATE_ERROR; ?>
+  			</td>
 		 <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
 		</tr>
 	   </table></td>
@@ -91,7 +89,7 @@
 		if (MODULE_ORDER_TOTAL_COUPON_STATUS == 'true'){
 			echo '<table cellpadding="2" cellspacing="0" border="0">
 			 <tr>
-			  <td class="main"><b>Have A Coupon?</b></td>
+			  <td class="main"><b>' . TEXT_HAVE_COUPON_CCGV . '</b></td>
 			 </tr>
 			 <tr>
 			  <td class="main">' . tep_draw_input_field('gv_redeem_code', '') . '</td>
@@ -103,7 +101,7 @@
 		if (MODULE_ORDER_TOTAL_DISCOUNT_COUPON_STATUS == 'true'){
 			echo '<table cellpadding="2" cellspacing="0" border="0">
 			 <tr>
-			  <td class="main"><b>Have A Coupon?</b></td>
+			  <td class="main"><b>' . TEXT_HAVE_COUPON_CCGV . '</b></td>
 			 </tr>
 			 <tr>
 			  <td class="main">' . tep_draw_input_field('coupon', '') . '</td>
@@ -123,8 +121,8 @@
 	</tr>
 	<tr>
 	 <td>
-   
-   
+
+
    <table border="0" width="100%" cellspacing="0" cellpadding="2">
 	  <tr>
 	   <td class="main" width="<?php echo (ONEPAGE_ADDR_LAYOUT == 'vertical' ? '100%' : '50%');?>" valign="top"><?php
@@ -137,7 +135,7 @@
 
 		$billingAddress = '<table border="0" width="100%" cellspacing="0" cellpadding="2">
 		 <tr id="logInRow"' . (isset($_SESSION['customer_id']) ? ' style="display:none"' : '') . '>
-		  <td class="main">Already have an account? <a href="' . fixSeoLink(tep_href_link(FILENAME_LOGIN)) . '" id="loginButton">' . tep_image_button('button_login.gif', IMAGE_LOGIN) . '</a></td>
+		  <td class="main"> ' . TEXT_EXISTING_CUSTOMER_LOGIN .' <a href="' . fixSeoLink(tep_href_link(FILENAME_LOGIN)) . '" id="loginButton">' . tep_image_button('button_login.gif', IMAGE_LOGIN) . '</a></td>
 		 </tr>
 		</table>' . $billingAddress;
 
@@ -152,7 +150,7 @@
 <?php if(ONEPAGE_ADDR_LAYOUT == 'vertical') {?>
     </tr>
 <?php } ?>
-    
+
 <?php
   if ($onepage['shippingEnabled'] === true){
 ?>
@@ -170,7 +168,7 @@
 		if (!tep_session_is_registered('customer_id')){
 			$shippingAddress = '<table border="0" width="100%" cellspacing="0" cellpadding="2">
 			 <tr>
-			  <td class="main">Different from billing address? <input type="checkbox" name="diffShipping" id="diffShipping" value="1"></td>
+			  <td class="main">' . TEXT_DIFFERENT_SHIPPING . ' <input type="checkbox" name="diffShipping" id="diffShipping" value="1"></td>
 			 </tr>
 			</table>' . $shippingAddress;
 		}
@@ -192,39 +190,24 @@
 	</tr>
 	  <tr>
 		<td><?php
-			$header = TABLE_HEADING_PAYMENT_METHOD;
-			
-			/*$paymentMethod1 = '';		
-			ob_start();
-			include(DIR_WS_INCLUDES . 'checkout/payment_method.php');
-			$paymentMethod1 = ob_get_contents();
-			ob_end_clean();		
-		
+		$header = TABLE_HEADING_PAYMENT_METHOD;
 
-	
-			$paymentMethod = '<div id="noPaymentAddress" class="main noAddress" align="center" style="font-size:15px;display:none;">Please fill in your <b>billing address</b> for payment options</div>'.$paymentMethod1;				
-		
-	$paymentMethod = '<div id="paymentMethods" style="display:block;">' . $paymentMethod . '</div>';
-	*/
-	
 		$paymentMethod = '';
-		//if (isset($_SESSION['customer_id'])){
+		if (isset($_SESSION['customer_id'])){
 			ob_start();
 			include(DIR_WS_INCLUDES . 'checkout/payment_method.php');
 			$paymentMethod = ob_get_contents();
 			ob_end_clean();
-		//}
+		}
 
-		//$paymentMethod1 = '<div id="noPaymentAddress" class="main noAddress" align="center" style="font-size:15px;'.  (isset($_SESSION['customer_id']) ? 'display:none;' : '') .'">Please fill in your <b>billing address</b> for payment options</div><div id="paymentMethods">' . $paymentMethod . '</div>';
-		buildInfobox($header, $paymentMethod);			
+		$paymentMethod = '<div id="noPaymentAddress" class="main noAddress" align="center" style="font-size:15px;' . (isset($_SESSION['customer_id']) ? 'display:none;' : '') . '">Please fill in your <b>billing address</b> for payment options</div><div id="paymentMethods"' . (!isset($_SESSION['customer_id']) ? ' style="display:none;"' : '') . '>' . $paymentMethod . '</div>';
+		buildInfobox($header, $paymentMethod);
 	   ?></td>
 	  </tr>
 	  <tr>
 		<td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
 	  </tr>
 <?php
-  
-  
   if ($onepage['shippingEnabled'] === true){
 	  if (tep_count_shipping_modules() > 0) {
 ?>

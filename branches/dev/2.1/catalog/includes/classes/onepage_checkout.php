@@ -27,11 +27,11 @@ class osC_onePageCheckout {
       if (tep_session_is_registered('sendto')){
         tep_session_unregister('sendto');
       }
-      tep_session_register('onepage');
-      tep_session_register('payment');
-      tep_session_register('shipping');
-      tep_session_register('billto');
-      tep_session_register('sendto');
+      if (tep_session_is_registered('customer_shopping_points_spending'))
+      {
+        tep_session_unregister('customer_shopping_points_spending');
+      }
+      
       $onepage = array(
         'info'           => array(
           'payment_method' => '', 'shipping_method' => '', 'comments' => '', 'coupon' => ''
@@ -61,6 +61,11 @@ class osC_onePageCheckout {
       $shipping = false;
       $sendto = 0;
       $billto = 0;
+      tep_session_register('onepage');
+      tep_session_register('payment');
+      tep_session_register('shipping');
+      tep_session_register('billto');
+      tep_session_register('sendto');
     }
 
     if (tep_session_is_registered('customer_id') && is_numeric($customer_id)){
@@ -75,48 +80,14 @@ class osC_onePageCheckout {
 
   function fixZoneName($zone_id,$country,&$state)
   {
-      if ( $zone_id >0 && $country>0 ) {
-        $zone_query = tep_db_query("select distinct zone_name from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "' and zone_id = '" . tep_db_input($zone_id) . "' ");
-        if (tep_db_num_rows($zone_query) == 1) {
-          $zone = tep_db_fetch_array($zone_query);
-          $state = $zone['zone_name'];
-        }
-      }
-  }
-  
-function updatePayment(){
-  global $payment_modules;
-    if($payment_modules){
-      $selection = $payment_modules->selection();
-        $payment='';
-        $payment1='';
-    if(sizeof($selection)>0){
-      for($y=0,$n=sizeof($selection);$y<$n;$y++){
-        if($GLOBALS[$selection[$y]['id']]->enabled){
-          $payment.=$GLOBALS[$selection[$y]['id']]->code.';';           
-        }
-        else{
-          $payment1.=$GLOBALS[$selection[$y]['id']]->code.';';  
-        }       
-      }       
-    }
-    
-  }
-  if(substr($payment, strlen($payment) - 1)==";")
-    $payment = substr($payment,0, strlen($payment) - 1);
-  
-  if(substr($payment1, strlen($payment1) - 1)==";")
-    $payment1 = substr($payment1,0, strlen($payment1) - 1);
-    
-      return '{
-        success: true,
-    payment:"'.$payment.'",
-    payment1:"'.$payment1.'"
-    
-      }';
- }
-
-  
+    	if ( $zone_id >0 && $country>0 ) {
+    		$zone_query = tep_db_query("select distinct zone_name from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "' and zone_id = '" . tep_db_input($zone_id) . "' ");
+    		if (tep_db_num_rows($zone_query) == 1) {
+    			$zone = tep_db_fetch_array($zone_query);
+    			$state = $zone['zone_name'];
+    		}
+    	}
+	}
 
   function loadSessionVars($type = 'checkout'){
     global $order, $onepage, $payment, $shipping, $comments, $coupon;
@@ -141,8 +112,9 @@ function updatePayment(){
       $order->info['shipping_cost'] = $shipping['cost'];
     }
     if (tep_not_null($onepage['info']['comments'])){
-      if (!tep_session_is_registered('comments')) tep_session_register('comments');
+      
       $comments = $onepage['info']['comments'];
+      if (!tep_session_is_registered('comments')) tep_session_register('comments');
     }
 
     //BOF KGT
@@ -151,8 +123,9 @@ function updatePayment(){
       //kgt - discount coupons
       if (tep_not_null($onepage['info']['coupon'])) {
       //this needs to be set before the order object is created, but we must process it after
-        if (!tep_session_is_registered('coupon')) tep_session_register('coupon');
+        
         $order->info['coupon'] = $onepage['info']['coupon'];
+        if (!tep_session_is_registered('coupon')) tep_session_register('coupon');
         //$order->info['applied_discount'] = $onepage['info']['applied_discount'];
         //$order->info['subtotal'] = $onepage['info']['subtotal'];
       }
@@ -169,10 +142,10 @@ function updatePayment(){
     }
 
     if (ACCOUNT_STATE == 'true') {
-      $this->fixZoneName($onepage['customer']['zone_id'],$onepage['customer']['country']['id'],$onepage['customer']['state']);
-      $this->fixZoneName($onepage['billing']['zone_id'],$onepage['billing']['country']['id'],$onepage['billing']['state']);
-      $this->fixZoneName($onepage['delivery']['zone_id'],$onepage['delivery']['country']['id'],$onepage['delivery']['state']);
-    }
+			$this->fixZoneName($onepage['customer']['zone_id'],$onepage['customer']['country']['id'],$onepage['customer']['state']);
+			$this->fixZoneName($onepage['billing']['zone_id'],$onepage['billing']['country']['id'],$onepage['billing']['state']);
+			$this->fixZoneName($onepage['delivery']['zone_id'],$onepage['delivery']['country']['id'],$onepage['delivery']['state']);
+		}
 
     $order->customer = $onepage['customer'];
     $order->billing = $onepage['billing'];
@@ -197,11 +170,24 @@ function updatePayment(){
 
   function fixTaxes(){
     global $cart, $order, $currencies, $onepage, $customer_id, $customer_country_id, $customer_zone_id;
-
-    
-
+    if ($cart->get_content_type() == 'virtual' && is_numeric($onepage['billing']['country_id'])) {
       $taxCountryID = $onepage['billing']['country_id'];
       $taxZoneID = $onepage['billing']['zone_id'];
+    }elseif (is_numeric($onepage['delivery']['country_id'])){
+      $taxCountryID = $onepage['delivery']['country_id'];
+      $taxZoneID = $onepage['delivery']['zone_id'];
+    }elseif (!tep_session_is_registered('customer_id')) {
+      if (DISPLAY_PRICE_WITH_TAX == 'false'){
+        $taxCountryID = 0;
+        $taxZoneID = 0;
+      }else{
+        $taxCountryID = STORE_COUNTRY;
+        $taxZoneID = STORE_ZONE;
+      }
+    }else{
+      $taxCountryID = $customer_country_id;
+      $taxZoneID = $customer_zone_id;
+    }
 
     $products = $cart->get_products();
     if (sizeof($products) > 0){
@@ -235,6 +221,12 @@ function updatePayment(){
 
         }
         $order->info['subtotal'] += $shown_price;
+          /**************
+          $shown_price = tep_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax']) * $order->products[$i]['qty'];
+        $order->info['subtotal'] += $shown_price;
+          **************/
+          //end kgt - discount coupons
+        //EOF KGT
 
 
         $products_tax = $order->products[$i]['tax'];
@@ -276,7 +268,7 @@ function updatePayment(){
     }
   }
 
-  function checkEmailAddress($emailAddress){
+  function checkEmailAddress($emailAddress, $ajax=true){
     $success = 'true';
     $errMsg = '';
 
@@ -291,10 +283,16 @@ function updatePayment(){
         $errMsg = 'The email address provided is invalid.';
       }
     }
-    return '{
-      success: ' . $success . ',
-      errMsg: "' . $errMsg . '"
-    }';
+    if($ajax == true)
+    {
+      return '{
+        success: ' . $success . ',
+        errMsg: "' . $errMsg . '"
+      }';
+    }else
+    {
+      return $success;
+    }
   }
 
   function getAjaxStateField($manualCid = false, $key = 'billing'){
@@ -311,9 +309,8 @@ function updatePayment(){
       if ($name == 'billing_state'){
         $key = 'billing';
       }else{
-      $key = 'delivery';
+        $key = 'delivery';
       }
-      
     }
     $html = '';
     $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "'");
@@ -326,57 +323,30 @@ function updatePayment(){
       $selected = '';
       while ($zones_values = tep_db_fetch_array($zones_query)) {
         if ($selected == ''){
-          if (isset($onepage[$key]['zone_id']) && ($onepage[$key]['zone_id'] == $zones_values['zone_id'])){
+          if (isset($onepage[$key]['zone_id']) && $onepage[$key]['zone_id'] == $zones_values['zone_id']){
             $selected = $zones_values['zone_name'];
-          }elseif (isset($onepage[$key]['state']) && ($onepage[$key]['state'] == $zones_values['zone_name'])){
+          }elseif (isset($onepage[$key]['state']) && $onepage[$key]['state'] == $zones_values['zone_name']){
             $selected = $zones_values['zone_name'];
-          }elseif (isset($_POST['curValue']) && ($_POST['curValue'] == $zones_values['zone_name'])){
+          }elseif (isset($_POST['curValue']) && $_POST['curValue'] == $zones_values['zone_name']){
             $selected = $zones_values['zone_name'];
           }
         }
         $zones_array[] = array('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
       }
-      $html .= tep_draw_pull_down_menu($name, $zones_array, $selected, 'class="required" style="width:80%;float:left;"');
+      $html .= tep_draw_pull_down_menu($name, $zones_array, $selected, 'class="required" style="width:70%;float:left;"');
     } else {
-      $html .= tep_draw_input_field($name, (isset($onepage[$key]['state']) ? $onepage[$key]['state']: ''), 'class="required" style="width:80%;float:left;"');
+      $html .= tep_draw_input_field($name, (isset($onepage[$key]['state']) ? $onepage[$key]['state']: ''), 'class="required" style="width:70%;float:left;"');
     }
     return $html;
   }
 
-
-   function getAjaxStateFieldEdit($manualCid = false, $key = 'billing'){
-    global $onepage;
-  
-      $country = $_POST['cID'];
-      $name = $_POST['fieldName'];
-  $selected = $_POST['selected'];
- 
-    $html = '';
-    $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "'");
-    $check = tep_db_fetch_array($check_query);
-    if ($check['total'] > 0) {
-      $zones_array = array(
-      array('id' => '', 'text' => TEXT_PLEASE_SELECT)
-      );
-      $zones_query = tep_db_query("select zone_id, zone_code, zone_name from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "' order by zone_name");
-      
-      while ($zones_values = tep_db_fetch_array($zones_query)) {
-        if($selected == $zones_values['zone_id'])
-          $selected = $zones_values['zone_name'];
-        $zones_array[] = array('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
-      }
-      $html .= tep_draw_pull_down_menu($name, $zones_array, $selected, 'class="required" style="width:80%;float:left;"');
-    } 
-    return $html;
-  }
-
-  
-
   function updateCartProducts($qtys, $ids){
-    global $cart;
+    global $cart, $customer_shopping_points_spending;
     foreach($qtys as $pID => $qty){
       $cart->update_quantity($pID, $qty, $ids[$pID]);
     }
+    if(tep_session_is_registered('customer_shopping_points_spending'))
+      $this->redeemPoints($customer_shopping_points_spending);
 
     $json = '';
     if (isset($_GET['rType']) && $_GET['rType'] == 'ajax'){
@@ -390,8 +360,11 @@ function updatePayment(){
   }
 
   function removeProductFromCart($productID){
-    global $cart;
+    global $cart, $customer_shopping_points_spending;
     $cart->remove($productID);
+    
+    if(tep_session_is_registered('customer_shopping_points_spending'))
+      $this->redeemPoints($customer_shopping_points_spending);
 
     $json = '';
     if (isset($_GET['rType']) && $_GET['rType'] == 'ajax'){
@@ -429,13 +402,7 @@ function updatePayment(){
 
         $onepage['customer']['email_address'] = $check_customer['customers_email_address'];
 
-        if (!tep_session_is_registered('customer_default_address_id')) tep_session_register('customer_default_address_id');
-        if (!tep_session_is_registered('customer_first_name')) tep_session_register('customer_first_name');
-        if (!tep_session_is_registered('customer_country_id')) tep_session_register('customer_country_id');
-        if (!tep_session_is_registered('customer_zone_id')) tep_session_register('customer_zone_id');
-        if (!tep_session_is_registered('sendto')) tep_session_register('sendto');
-        if (!tep_session_is_registered('billto')) tep_session_register('billto');
-        if (!tep_session_is_registered('customer_id')) tep_session_register('customer_id');
+        
         $customer_default_address_id = $check_customer['customers_default_address_id'];
         $customer_first_name = $check_customer['customers_firstname'];
         $customer_country_id = $check_country['entry_country_id'];
@@ -446,6 +413,13 @@ function updatePayment(){
 
         $this->setDefaultSendTo();
         $this->setDefaultBillTo();
+        if (!tep_session_is_registered('customer_default_address_id')) tep_session_register('customer_default_address_id');
+        if (!tep_session_is_registered('customer_first_name')) tep_session_register('customer_first_name');
+        if (!tep_session_is_registered('customer_country_id')) tep_session_register('customer_country_id');
+        if (!tep_session_is_registered('customer_zone_id')) tep_session_register('customer_zone_id');
+        if (!tep_session_is_registered('sendto')) tep_session_register('sendto');
+        if (!tep_session_is_registered('billto')) tep_session_register('billto');
+        if (!tep_session_is_registered('customer_id')) tep_session_register('customer_id');
 
         tep_db_query("update " . TABLE_CUSTOMERS_INFO . " set customers_info_date_of_last_logon = now(), customers_info_number_of_logons = customers_info_number_of_logons+1 where customers_info_id = '" . (int)$customer_id . "'");
 
@@ -470,24 +444,55 @@ function updatePayment(){
   }
 
   function setPaymentMethod($method){
-    global $payment_modules, $language, $order, $cart, $payment, $onepage;
+    global $payment_modules, $language, $order, $cart, $payment, $onepage, $customer_shopping_points_spending;
     /* Comment IF statement below for oscommerce versions before MS2.2 RC2a */
-/*    if (tep_session_is_registered('payment') && tep_not_null($payment) && $payment != $method){
+    if (tep_session_is_registered('payment') && tep_not_null($payment) && $payment != $method){
       $GLOBALS[$payment]->selection();
     }
-*/
+    
+    if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+      if(tep_session_is_registered('customer_shopping_points_spending'))
+      //if($order->info['subtotal']<=0 || $order->info['total']<=0)
+      if(($order->info['total']) <=0) //if(($order->info['total'] - $order->info['tax'] - $order->info['shipping_cost']) <=0)
+      {
+        $payment = '';
+        $paymentMethod = '';
+        $onepage['info']['payment_method'] = '';
+        $onepage['info']['order_id'] = '';
+        return '{
+          success: true,
+          inputFields: "",
+
+        }';
+      }
+    }
+    
+    $payment = $method;
     if (!tep_session_is_registered('payment')){
       tep_session_register('payment');
     }
-    $payment = $method;
     $onepage['info']['payment_method'] = $method;
 
     $order->info['payment_method'] = $GLOBALS[$payment]->title;
 
     //BOF Tell Paypal to pre-recorded Order again or the new options will not be applied
+    switch($GLOBALS[$payment]->code)
+    {
+      case 'paypal_ipn':
+      case 'paypal_standard':
+      case 'worldpay_junior':
+      break;
+      default:
+      /* Comment line below for oscommerce versions before MS2.2 RC2a */
+        $confirmation = $GLOBALS[$payment]->confirmation();
+
+      /* Uncomment line below for oscommerce versions before MS2.2 RC2a */
+        //$confirmation = $GLOBALS[$payment]->selection();
+      break;
+    }
     //EOF Tell Paypal to pre-recorded Order again or the new options will not be applied
 
-    /*$inputFields = '';
+    $inputFields = '';
     if ($confirmation !== false){
       for ($i=0, $n=sizeof($confirmation['fields']); $i<$n; $i++) {
         $inputFields .= '<tr>' .
@@ -508,17 +513,17 @@ function updatePayment(){
         '<td width="10">' . tep_draw_separator('pixel_trans.gif', '10', '1') . '</td>' .
         '</tr>';
       }
-    }*/ 
-   return '{
+    }
+
+    return '{
       success: true,
-      id:"'.$method.'"
+      inputFields: "' . addslashes($inputFields) . '"
     }';
   }
 
   function setGiftVoucher()
   {
     global $payment, $onepage, $order_total_modules, $credit_covers, $customer_id, $cot_gv, $ot_gv;
-    /* Comment IF statement below for oscommerce versions before MS2.2 RC2a */
 
     if(isset($_POST['cot_gv']) && $_POST['cot_gv']=='on')
     {
@@ -551,33 +556,33 @@ function updatePayment(){
   {
     global $customer_shopping_points_spending, $customer_id;
     if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true') && tep_session_is_registered('customer_id') && $customer_id>0) {
-      if (isset($points) && is_numeric($points) && ($points > 0)) {
-        $customer_shopping_points_spending = false;
-        $customer_shopping_points = tep_get_shopping_points();
+  	  if (isset($points) && is_numeric($points) && ($points > 0)) {
+  		  $customer_shopping_points_spending = false;
+  		  $customer_shopping_points = tep_get_shopping_points();
         $max_points = calculate_max_points($customer_shopping_points);
         if($points > tep_get_shopping_points($customer_id))
-        {
+  		  {
           return '{success: false}';
         }
         if($points > $max_points)
           $points = $max_points;
 
-        $customer_shopping_points_spending = $points;
-        if (!tep_session_is_registered('customer_shopping_points_spending')) tep_session_register('customer_shopping_points_spending');
-        return '{success: true}';
-      }
-    }
-    return '{success: false}';
+			  $customer_shopping_points_spending = $points;
+			  if (!tep_session_is_registered('customer_shopping_points_spending')) tep_session_register('customer_shopping_points_spending');
+			  return '{success: true}';
+  	  }
+  	}
+  	return '{success: false}';
   }
 
   function clearPoints()
   {
     global $customer_shopping_points_spending, $customer_id;
     if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true') && tep_session_is_registered('customer_id') && $customer_id>0) {
-        $customer_shopping_points_spending = 0;
-        if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
-    }
-    return '{success: true}';
+			  $customer_shopping_points_spending = 0;
+			  if (tep_session_is_registered('customer_shopping_points_spending')) tep_session_unregister('customer_shopping_points_spending');
+  	}
+  	return '{success: true}';
   }
 
   function setShippingMethod($method = ''){
@@ -599,6 +604,12 @@ function updatePayment(){
         case 'both':
           $pass = true;
           break;
+      }
+
+      // disable free shipping for Alaska and Hawaii
+      $zone_code = tep_get_zone_code($order->delivery['country']['id'], $order->delivery['zone_id'], '');
+      if(in_array($zone_code, array('AK', 'HI'))) {
+        $pass = false;
       }
 
       $free_shipping = false;
@@ -623,21 +634,16 @@ function updatePayment(){
         list($module, $method) = explode('_', $shipping);
         global $$module;
         if (is_object($$module) || $shipping == 'free_free') {
-          if ($shipping == 'free_free') {
-            $quote[0]['methods'][0]['title'] = FREE_SHIPPING_TITLE;
-            $quote[0]['methods'][0]['cost'] = '0';
-          } else {
-            $quote = $shipping_modules->quote($method, $module);
-          }
+          $quote = $shipping_modules->quote($method, $module);
 
           if (isset($quote['error'])) {
             unset($shipping);
           } else {
-            if (isset($quote[0]['methods'][0]['title']) && isset($quote[0]['methods'][0]['cost'])) {
+            if (isset($quote[0]['methods'][0]['title']) && isset($quote[0]['methods'][0]['cost']) || $shipping == 'free_free') {
               $shipping = array(
               'id' => $shipping,
-              'title' => (($free_shipping == true) ?  $quote[0]['methods'][0]['title'] : $quote[0]['module'] . ' (' . $quote[0]['methods'][0]['title'] . ')'),
-              'cost' => $quote[0]['methods'][0]['cost']
+              'title' => (($shipping == 'free_free') ?  FREE_SHIPPING_TITLE : $quote[0]['module'] . ' (' . $quote[0]['methods'][0]['title'] . ')'),
+              'cost' => (($shipping == 'free_free')?'0':$quote[0]['methods'][0]['cost'])
               );
               $onepage['info']['shipping_method'] = $shipping;
             }
@@ -647,67 +653,59 @@ function updatePayment(){
         }
       }
     }
-
     return '{
         success: true
       }';
   }
 
   function setCheckoutAddress($action){
-    global $order, $onepage, $payment_modules;
-    if ($action == 'setSendTo' && !tep_not_null($_POST['shipping_firstname'])){
+    global $order, $onepage;
+    if ($action == 'setSendTo' && !tep_not_null($_POST['shipping_country'])){
       $prefix = 'billing_';
     }else{
       $prefix = ($action == 'setSendTo' ? 'shipping_' : 'billing_');
     }
-
+    
     if (ACCOUNT_GENDER == 'true') $gender = $_POST[$prefix . 'gender'];
     if (ACCOUNT_COMPANY == 'true') $company = tep_db_prepare_input($_POST[$prefix . 'company']);
     if (ACCOUNT_SUBURB == 'true') $suburb = tep_db_prepare_input($_POST[$prefix . 'suburb']);
-
-
-if (!isset($_POST[$prefix . 'zipcode'])){
-    if(ONEPAGE_AUTO_SHOW_BILLING_SHIPPING == 'True'){
-      $zip_code = tep_db_prepare_input(ONEPAGE_AUTO_SHOW_DEFAULT_ZIP);
+    
+    if (!isset($_POST[$prefix . 'zipcode'])){
+      if(ONEPAGE_AUTO_SHOW_BILLING_SHIPPING == 'True'){
+        $zip_code = tep_db_prepare_input(ONEPAGE_AUTO_SHOW_DEFAULT_ZIP);
+      }
+    }else{
+      $zip_code = tep_db_prepare_input($_POST[$prefix . 'zipcode']);
     }
-  }else{
-  $zip_code = tep_db_prepare_input($_POST[$prefix . 'zipcode']);
-}
-
-  if (!isset($_POST[$prefix . 'country'])){
-    if(ONEPAGE_AUTO_SHOW_BILLING_SHIPPING == 'True'){
-      $country = tep_db_prepare_input(ONEPAGE_AUTO_SHOW_DEFAULT_COUNTRY);
-    }
-  }else{
+    if (!isset($_POST[$prefix . 'country'])){
+      if(ONEPAGE_AUTO_SHOW_BILLING_SHIPPING == 'True'){
+        $country = tep_db_prepare_input(ONEPAGE_AUTO_SHOW_DEFAULT_COUNTRY);
+      }
+    }else{
       $country = tep_db_prepare_input($_POST[$prefix . 'country']);
-  }
+    }
     if (ACCOUNT_STATE == 'true') {
-
       if (isset($_POST[$prefix . 'zone_id'])) {
         $zone_id = tep_db_prepare_input($_POST[$prefix . 'zone_id']);
       } else {
-
-    if (!isset($_POST[$prefix . 'zone_id'])){
-      if(ONEPAGE_AUTO_SHOW_BILLING_SHIPPING == 'True'){
-        if($country == ONEPAGE_AUTO_SHOW_DEFAULT_COUNTRY)
-        $zone_id = tep_db_prepare_input(ONEPAGE_AUTO_SHOW_DEFAULT_STATE);
-      }
-    }else{
+        if (!isset($_POST[$prefix . 'zone_id'])){
+          if(ONEPAGE_AUTO_SHOW_BILLING_SHIPPING == 'True'){
+            if($country == ONEPAGE_AUTO_SHOW_DEFAULT_COUNTRY)
+            $zone_id = tep_db_prepare_input(ONEPAGE_AUTO_SHOW_DEFAULT_STATE);
+          }
+        }else{
           $zone_id = false;
-    }
+        }
       }
-
-if ($prefix == 'shipping_')
-{
-      $state = tep_db_prepare_input($_POST['delivery_state']);
-}
-else
-{
-     $state = tep_db_prepare_input($_POST[$prefix . 'state']);
-}
-
+      if ($prefix == 'shipping_')
+      {
+        $state = tep_db_prepare_input($_POST['delivery_state']);
+      }
+      else
+      {
+        $state = tep_db_prepare_input($_POST[$prefix . 'state']);
+      }
       $zone_name = '';
-
       $zone_id = 0;
       $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "'");
       $check = tep_db_fetch_array($check_query);
@@ -722,19 +720,17 @@ else
       }
     }
 
-    $QcInfo = tep_db_query('select * from ' . TABLE_COUNTRIES . ' where countries_id = "' . (int)$country . '"');
+    $QcInfo = tep_db_query('select * from ' . TABLE_COUNTRIES . ' where countries_id = "' . $country . '"');
     $cInfo = tep_db_fetch_array($QcInfo);
-
     if ($action == 'setBillTo')
-    {
-      $varName = 'billing';
-      if (ACCOUNT_DOB == 'true' && tep_not_null($_POST[$prefix . 'dob'])) $dob = $_POST[$prefix . 'dob'];
-    }
-    else
-    {
-      $varName = 'delivery';
-    }
-
+		{
+			$varName = 'billing';
+			if (ACCOUNT_DOB == 'true' && tep_not_null($_POST[$prefix . 'dob'])) $dob = $_POST[$prefix . 'dob'];
+		}
+		else
+		{
+			$varName = 'delivery';
+		}
     if ($action == 'setBillTo'){
       if (ACCOUNT_DOB == 'true'){
         $dob = tep_db_prepare_input($_POST[$prefix . 'dob']);
@@ -776,48 +772,24 @@ else
       $onepage['customer'] = array_merge($onepage['customer'], $order->billing);
     }
 
-    $onepage[$varName] = array_merge($onepage[$varName], $order->$varName);
-
-  if($payment_modules){
-      $selection = $payment_modules->selection();
-        $payment='';
-        $payment1='';
-    if(sizeof($selection)>1){
-      for($y=0,$n=sizeof($selection);$y<$n;$y++){
-        if($GLOBALS[$selection[$y]['id']]->enabled){
-          $payment.=$GLOBALS[$selection[$y]['id']]->code.';';           
-        }
-        else{
-          $payment1.=$GLOBALS[$selection[$y]['id']]->code.';';  
-        }       
-      }       
-    }
-  }
-  if(substr($payment, strlen($payment) - 1)==";")
-    $payment = substr($payment,0, strlen($payment) - 1);
-  
-  if(substr($payment1, strlen($payment1) - 1)==";")
-    $payment1 = substr($payment1,0, strlen($payment1) - 1);
+    $onepage[$varName] = array_merge($onepage[$varName], $order->{$varName});
     
     return '{
-        success: true,
-    payment:"'.$payment.'",
-    payment1:"'.$payment1.'"
-    
+        success: true
       }';
   }
 
   function setAddress($addressType, $addressID){
-    global $billto, $sendto, $customer_id, $onepage, $payment_modules;
+    global $billto, $sendto, $customer_id, $onepage;
     switch($addressType){
       case 'billing':
-        if (!tep_session_is_registered('billto')) tep_session_register('billto');
         $billto = $addressID;
+        if (!tep_session_is_registered('billto')) tep_session_register('billto');
         $sessVar = 'billing';
         break;
       case 'shipping':
-        if (!tep_session_is_registered('sendto')) tep_session_register('sendto');
         $sendto = $addressID;
+        if (!tep_session_is_registered('sendto')) tep_session_register('sendto');
         $sessVar = 'delivery';
         break;
     }
@@ -838,9 +810,9 @@ else
     ));
 
     if (ACCOUNT_STATE == 'true') {
-      $this->fixZoneName($onepage[$sessVar]['zone_id'],$onepage[$sessVar]['country']['id'],$onepage[$sessVar]['state']);
-  }
-  
+			$this->fixZoneName($onepage[$sessVar]['zone_id'],$onepage[$sessVar]['country']['id'],$onepage[$sessVar]['state']);
+		}
+
     return '{
       success: true
     }';
@@ -863,11 +835,7 @@ else
       } else {
         $zone_id = false;
       }
-
-    
-    
       $state = tep_db_prepare_input($_POST['state']);
-
 
       $zone_id = 0;
       $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "'");
@@ -889,7 +857,7 @@ else
       'entry_street_address' => $street_address,
       'entry_postcode'       => $postcode,
       'entry_city'           => $city,
-      'entry_country_id'     => $country//here might be a problem
+      'entry_country_id'     => $country
     );
 
     if (ACCOUNT_GENDER == 'true') $sql_data_array['entry_gender'] = $gender;
@@ -920,59 +888,94 @@ else
   }
 
   function confirmCheckout(){
-    global $customer_id, $comments, $order, $currencies, $request_type, $languages_id, $currency, $cart_PayPal_Standard_ID, $cart_PayPal_IPN_ID, $shipping, $cartID, $order_total_modules, $onepage, $credit_covers, $payment, $comments;
+		global $customer_id, $comments, $order, $currencies, $request_type, $languages_id, $currency, $cart_PayPal_Standard_ID, $cart_PayPal_IPN_ID, $shipping, $cartID, $order_total_modules, $onepage, $credit_covers, $payment, $comments;
 
-    if (tep_session_is_registered('customer_id')){
-      $onepage['createAccount'] = false;
-    }else{
-      if (tep_not_null($_POST['password'])){
-        $onepage['createAccount'] = true;
-        $onepage['customer']['password'] = $_POST['password'];
-      }elseif (ONEPAGE_ACCOUNT_CREATE == 'create'){
-        $onepage['createAccount'] = true;
-        $onepage['customer']['password'] = tep_create_random_value(ENTRY_PASSWORD_MIN_LENGTH);
-      }
-    }
+		if (tep_session_is_registered('customer_id')){
+			$onepage['createAccount'] = false;
+		}else{
+			if (tep_not_null($_POST['password'])){
+				$onepage['createAccount'] = true;
+				$onepage['customer']['password'] = $_POST['password'];
+			}elseif (ONEPAGE_ACCOUNT_CREATE == 'create'){
+				$onepage['createAccount'] = true;
+				$onepage['customer']['password'] = tep_create_random_value(ENTRY_PASSWORD_MIN_LENGTH);
+			}
+		}
 
-    $paymentMethod = $onepage['info']['payment_method'];
+		$paymentMethod = $onepage['info']['payment_method'];
 
-    $html = '';
-    $infoMsg = 'Please press the continue button to confirm your order.';
-    $formUrl = tep_href_link(FILENAME_CHECKOUT_PROCESS, '', $request_type);
-    if (tep_not_null($GLOBALS[$paymentMethod]->form_action_url)){
-      $formUrl = $GLOBALS[$paymentMethod]->form_action_url;
-      $infoMsg = 'Please press the continue button to proceed to the payment processors page.';
-    }
+		$html = '';
+		$infoMsg = 'Please press the continue button to confirm your order.';
+		$formUrl = tep_href_link(FILENAME_CHECKOUT_PROCESS, '', $request_type);
+		if (tep_not_null($GLOBALS[$paymentMethod]->form_action_url)){
+			$formUrl = $GLOBALS[$paymentMethod]->form_action_url;
+			$infoMsg = 'Please press the continue button to proceed to the payment processors page.';
+		}
 
-    $GLOBALS[$paymentMethod]->pre_confirmation_check();
+		$GLOBALS[$paymentMethod]->pre_confirmation_check();
 
-    $GLOBALS[$paymentMethod]->confirmation();
+		$GLOBALS[$paymentMethod]->confirmation();
 
-    $hiddenFields = $GLOBALS[$paymentMethod]->process_button();
+		$hiddenFields = $GLOBALS[$paymentMethod]->process_button();
 
-    $html .= '<form name="redirectForm" action="' . $formUrl . '" method="POST">
-           <noscript>' .
-    $infoMsg .
-    tep_image_submit('button_continue.gif', IMAGE_CONTINUE) .
-    '</noscript>' .
-    tep_image_submit('button_continue.gif', IMAGE_CONTINUE, 'style="display:none;"') .
-    $hiddenFields .
-    '<script>
-           document.write(\'<div style="width:100%;height:100%;margin-left:auto;margin-top:auto;text-align:center"><!--<img src="' . DIR_WS_HTTP_CATALOG.DIR_WS_IMAGES . 'ajax-loader.gif">--><br>Processing Order, Please Wait...</div>\');
-           redirectForm.submit();
-           </script></form>';
+		$html .= '<form name="redirectForm" action="' . $formUrl . '" method="POST">
+				   <noscript>' .
+		$infoMsg .
+		tep_image_submit('button_continue.gif', IMAGE_CONTINUE) .
+		'</noscript>' .
+		tep_image_submit('button_continue.gif', IMAGE_CONTINUE, 'style="display:none;"') .
+		$hiddenFields .
+		'<script>
+					 document.write(\'<img src="' . DIR_WS_IMAGES . 'ajax-loader.gif"><br>Processing Order, Please Wait...\');
+					 redirectForm.submit();
+				   </script></form>';
 
-    return $html;
-  }
+		return $html;
+	}
+	function checkCartValidity($type = 'php', $redirect = true)
+	{
+		global $cart, $cartID;
+		$invalid = false;
+		if ($cart->count_contents() < 1) {
+		}
+		if (isset($cart->cartID) && tep_session_is_registered('cartID')) {
+			if ($cart->cartID != $cartID) {
+				$invalid = true;
+			}
+		}
+	
+		
+		if($invalid == true)
+		{
+ 			if($redirect == true)
+			{
+				$this->reset();
+				tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+			}
+			else
+			{
+				if($type == 'php')
+					return false;
+				if($type == 'ajax')
+					return '{success:false}';
+			}
+		}
+		if($type == 'php')
+			return true;
+		else
+			return '{success:true}';
+	}
 
   function processCheckout(){
     global $customer_id, $comments, $coupon, $order, $currencies, $request_type, $languages_id, $currency,
     $customer_shopping_points_spending, $customer_referral, $cart_PayPal_Standard_ID, $cart_PayPal_IPN_ID,
     $cart_Worldpay_Junior_ID, $shipping, $cartID, $order_total_modules, $onepage, $credit_covers, $payment,
     $payment_modules;
-    if (!tep_session_is_registered('comments')) tep_session_register('comments');
+		$this->checkCartValidity();
+    
     $comments = tep_db_prepare_input($_POST['comments']);
-    $onepage['info']['comments'] = $_POST['comments'];
+    if (!tep_session_is_registered('comments')) tep_session_register('comments');
+    $onepage['customer']['comments'] = $_POST['comments'];
     //BOF KGT
     if(MODULE_ORDER_TOTAL_DISCOUNT_COUPON_STATUS=='true')
     {
@@ -1001,12 +1004,13 @@ else
     }
     $payment_modules->update_status();
     $paymentMethod = $onepage['info']['payment_method'];
-
+    
+    ##### Points/Rewards Module V2.1rc2a check for error BOF #######
     if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
-      if (isset($_POST['customer_shopping_points_spending']) && is_numeric($_POST['customer_shopping_points_spending']) && ($_POST['customer_shopping_points_spending'] > 0)) {
-        $customer_shopping_points_spending = false;
+  	  if (isset($_POST['customer_shopping_points_spending']) && is_numeric($_POST['customer_shopping_points_spending']) && ($_POST['customer_shopping_points_spending'] > 0)) {
+  		  $customer_shopping_points_spending = false;
         if($_POST['customer_shopping_points_spending']>tep_get_shopping_points($customer_id))
-        {
+  		  {
           $_POST['customer_shopping_points_spending'] = tep_get_shopping_points($customer_id);
         }
         $customer_shopping_points = tep_get_shopping_points();
@@ -1014,37 +1018,37 @@ else
         if($points > $max_points)
           $points = $max_points;
 
-        if (tep_calc_shopping_pvalue($_POST['customer_shopping_points_spending']) < $order->info['total'] && ($paymentMethod == '' || $paymentMethod == 'credit_covers')) {
-          $customer_shopping_points_spending = false;
-          tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(REDEEM_SYSTEM_ERROR_POINTS_NOT), 'SSL'));
-        } else {
-          $customer_shopping_points_spending = $_POST['customer_shopping_points_spending'];
-          if (!tep_session_is_registered('customer_shopping_points_spending')) tep_session_register('customer_shopping_points_spending');
-        }
-      }
+  		  if (tep_calc_shopping_pvalue($_POST['customer_shopping_points_spending']) < $order->info['total'] && ($paymentMethod == '' || $paymentMethod == 'credit_covers')) {
+  			  $customer_shopping_points_spending = false;
+  			  tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(REDEEM_SYSTEM_ERROR_POINTS_NOT), 'SSL'));
+  		  } else {
+  			  $customer_shopping_points_spending = $_POST['customer_shopping_points_spending'];
+  			  if (!tep_session_is_registered('customer_shopping_points_spending')) tep_session_register('customer_shopping_points_spending');
+  		  }
+  	  }
 
-      if (tep_not_null(USE_REFERRAL_SYSTEM)) {
-        if (isset($_POST['customer_referred']) && tep_not_null($_POST['customer_referred'])) {
-          $customer_referral = false;
-          $check_mail = trim($_POST['customer_referred']);
-          if (tep_validate_email($check_mail) == false) {
-            tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(REFERRAL_ERROR_NOT_VALID), 'SSL'));
-          } else {
-            $valid_referral_query = tep_db_query("select customers_id from " . TABLE_CUSTOMERS . " where customers_email_address = '" . $check_mail . "' limit 1");
-            $valid_referral = tep_db_fetch_array($valid_referral_query);
-            if (!tep_db_num_rows($valid_referral_query)) {
-              tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(REFERRAL_ERROR_NOT_FOUND), 'SSL'));
-            }
+  	  if (tep_not_null(USE_REFERRAL_SYSTEM)) {
+  		  if (isset($_POST['customer_referred']) && tep_not_null($_POST['customer_referred'])) {
+  			  $customer_referral = false;
+  			  $check_mail = trim($_POST['customer_referred']);
+  			  if (tep_validate_email($check_mail) == false) {
+  				  tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(REFERRAL_ERROR_NOT_VALID), 'SSL'));
+  			  } else {
+  				  $valid_referral_query = tep_db_query("select customers_id from " . TABLE_CUSTOMERS . " where customers_email_address = '" . $check_mail . "' limit 1");
+  				  $valid_referral = tep_db_fetch_array($valid_referral_query);
+  				  if (!tep_db_num_rows($valid_referral_query)) {
+  					  tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(REFERRAL_ERROR_NOT_FOUND), 'SSL'));
+  				  }
 
-            if ($check_mail == $order->customer['email_address']) {
-              tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(REFERRAL_ERROR_SELF), 'SSL'));
-            } else {
-              $customer_referral = $valid_referral['customers_id'];
-              if (!tep_session_is_registered('customer_referral')) tep_session_register('customer_referral');
-            }
-          }
-        }
-      }
+  				  if ($check_mail == $order->customer['email_address']) {
+  					  tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(REFERRAL_ERROR_SELF), 'SSL'));
+  				  } else {
+  					  $customer_referral = $valid_referral['customers_id'];
+  					  if (!tep_session_is_registered('customer_referral')) tep_session_register('customer_referral');
+  				  }
+  			  }
+  		  }
+  	  }
     }
     ##### Points/Rewards Module V2.1rc2a check for error EOF #######
 
@@ -1057,20 +1061,24 @@ else
       $order_total_modules->pre_confirmation_check();
       // End - CREDIT CLASS Gift Voucher Contribution
     }
+    if(($order->info['total']) <=0) //if(($order->info['total'] - $order->info['tax'] - $order->info['shipping_cost']) <=0)
+      {
+        $payment = '';
+        $paymentMethod = '';
+        $onepage['info']['payment_method'] = '';
+        //$onepage['info']['order_id'] = '';
+      }
 
-    $html = '';
+   $html = '';
+    $hiddenFields = '';
     $infoMsg = 'Please press the continue button to confirm your order.';
     $formUrl = tep_href_link(FILENAME_CHECKOUT_PROCESS, '', $request_type);
-    if (tep_not_null($GLOBALS[$paymentMethod]->form_action_url)){
-      $formUrl = $GLOBALS[$paymentMethod]->form_action_url;
-      $infoMsg = 'Please press the continue button to proceed to the payment processors page.';
-    }
     if ($paymentMethod != '' && $paymentMethod != 'credit_covers'){
+      if (tep_not_null($GLOBALS[$paymentMethod]->form_action_url)){
+        $formUrl = $GLOBALS[$paymentMethod]->form_action_url;
+        $infoMsg = 'Please press the continue button to proceed to the payment processors page.';
+      }
       $GLOBALS[$paymentMethod]->pre_confirmation_check();
-    }
-    $hiddenFields = '';
-    if($paymentMethod != '' && $paymentMethod != 'credit_covers')
-    {
       $GLOBALS[$paymentMethod]->confirmation();
 
       if (tep_session_is_registered('cart_PayPal_IPN_ID')){
@@ -1082,8 +1090,8 @@ else
       }
 
       if (tep_session_is_registered('cart_Worldpay_Junior_ID')){
-        $onepage['info']['order_id'] = substr($cart_Worldpay_Junior_ID, strpos($cart_Worldpay_Junior_ID, '-')+1);;
-      }
+  			$onepage['info']['order_id'] = substr($cart_Worldpay_Junior_ID, strpos($cart_Worldpay_Junior_ID, '-')+1);;
+  		}
 
       $hiddenFields = $GLOBALS[$paymentMethod]->process_button();
       if (!tep_not_null($hiddenFields)){
@@ -1098,7 +1106,7 @@ else
         }
       }
     }
-
+    /*
     $html .= '<form name="redirectForm" action="' . $formUrl . '" method="POST">
            <noscript>' .
     $infoMsg .
@@ -1107,17 +1115,27 @@ else
     tep_image_submit('button_continue.gif', IMAGE_CONTINUE, 'style="display:none;"') .
     $hiddenFields .
     '<script>
-           document.write(\'<div style="width:100%;height:100%;margin-left:auto;margin-top:auto;text-align:center"><!--<img src="' . DIR_WS_HTTP_CATALOG.DIR_WS_IMAGES . 'ajax-loader.gif">--><br>Processing Order, Please Wait...</div>\');
+           document.write(\'<img src="' . DIR_WS_IMAGES . 'ajax-loader.gif"><br>Processing Order, Please Wait...\');
            redirectForm.submit();
            </script></form>';
+    */
+    $html .= '<form name="redirectForm" action="' . $formUrl . '" method="POST">
+           <noscript>' . $infoMsg . tep_image_submit('button_continue.gif',
+		                                             IMAGE_CONTINUE) . '</noscript>' . tep_image_submit('button_continue.gif',
+		                                                                                                IMAGE_CONTINUE,
+		                                                                                                'style="display:none;"') . $hiddenFields . '<script>
+           document.write(\'<div style="width:100%;height:100%;margin-left:auto;margin-top:auto;text-align:center"><img src="' . DIR_WS_HTTP_CATALOG . DIR_WS_IMAGES . 'ajax-loader.gif"><br>Processing Order, Please Wait...</div>\');
+            setTimeout("redirectForm.submit()", 3000);  
+           </script></form>';
+
 
     return $html;
   }
 
   function createCustomerAccount(){
     global $currencies, $customer_id, $onepage, $customer_default_address_id, $customer_first_name, $customer_country_id, $customer_zone_id, $languages_id, $sendto, $billto;
-    if ($onepage['createAccount'] === true){
-
+		$this->checkCartValidity();
+    if ($onepage['createAccount'] === true && $this->checkEmailAddress($onepage['customer']['email_address'])){
 
       $sql_data_array = array(
         'customers_firstname'     => $onepage['billing']['firstname'],
@@ -1133,24 +1151,7 @@ else
       if (ACCOUNT_DOB == 'true') $sql_data_array['customers_dob'] = tep_date_raw($onepage['customer']['dob']);
 
       tep_db_perform(TABLE_CUSTOMERS, $sql_data_array);
-
-      if (!tep_session_is_registered('customer_id')) tep_session_register('customer_id');
-      if (!tep_session_is_registered('customer_default_address_id')) tep_session_register('customer_default_address_id');
-      if (!tep_session_is_registered('customer_first_name')) tep_session_register('customer_first_name');
-      if (!tep_session_is_registered('customer_country_id')) tep_session_register('customer_country_id');
-      if (!tep_session_is_registered('customer_zone_id')) tep_session_register('customer_zone_id');
-      if (!tep_session_is_registered('sendto')) tep_session_register('sendto');
-      if (!tep_session_is_registered('billto')) tep_session_register('billto');
-
       $customer_id = tep_db_insert_id();
-
-      if (!tep_session_is_registered('customer_id')) tep_session_register('customer_id');
-      if (!tep_session_is_registered('customer_default_address_id')) tep_session_register('customer_default_address_id');
-      if (!tep_session_is_registered('customer_first_name')) tep_session_register('customer_first_name');
-      if (!tep_session_is_registered('customer_country_id')) tep_session_register('customer_country_id');
-      if (!tep_session_is_registered('customer_zone_id')) tep_session_register('customer_zone_id');
-      if (!tep_session_is_registered('sendto')) tep_session_register('sendto');
-      if (!tep_session_is_registered('billto')) tep_session_register('billto');
 
       $sql_data_array = array(
         'customers_id'         => $customer_id,
@@ -1210,7 +1211,7 @@ else
           'entry_street_address' => $onepage['delivery']['street_address'],
           'entry_postcode'       => $onepage['delivery']['postcode'],
           'entry_city'           => $onepage['delivery']['city'],
-          'entry_country_id'     => $onepage['delivery']['country']
+          'entry_country_id'     => $onepage['delivery']['country_id']
         );
 
         if (ACCOUNT_GENDER == 'true') $sql_data_array['entry_gender'] = $onepage['delivery']['gender'];
@@ -1221,12 +1222,6 @@ else
           $zone_name = '';
 
           $zone_id = 0;
-
-      
-      $check_query1 = tep_db_query("select * from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$onepage['delivery']['country_id'] . "'");
-          $check1 = tep_db_fetch_array($check_query1);
-      $sql_data_array['entry_country_id'] = $check1['countries_id'];//to recheck here has to work a simple assignments but for some reasons it doesn't.
-
           $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$onepage['delivery']['country_id'] . "'");
           $check = tep_db_fetch_array($check_query);
           $entry_state_has_zones = ($check['total'] > 0);
@@ -1315,6 +1310,26 @@ else
         tep_db_query('update ' . TABLE_ORDERS . ' set customers_id = "' . $customer_id . '" where orders_id = "' . $onepage['info']['order_id'] . '"');
         unset($onepage['info']['order_id']);
       }
+      if (!tep_session_is_registered('customer_id')) tep_session_register('customer_id');
+      if (!tep_session_is_registered('customer_default_address_id')) tep_session_register('customer_default_address_id');
+      if (!tep_session_is_registered('customer_first_name')) tep_session_register('customer_first_name');
+      if (!tep_session_is_registered('customer_country_id')) tep_session_register('customer_country_id');
+      if (!tep_session_is_registered('customer_zone_id')) tep_session_register('customer_zone_id');
+      if (!tep_session_is_registered('sendto')) tep_session_register('sendto');
+			if (!tep_session_is_registered('billto')) tep_session_register('billto');
+
+      
+
+      if (!tep_session_is_registered('customer_default_address_id')) tep_session_register('customer_default_address_id');
+      if (!tep_session_is_registered('customer_first_name')) tep_session_register('customer_first_name');
+      if (!tep_session_is_registered('customer_country_id')) tep_session_register('customer_country_id');
+      if (!tep_session_is_registered('customer_zone_id')) tep_session_register('customer_zone_id');
+      if (!tep_session_is_registered('sendto')) tep_session_register('sendto');
+			if (!tep_session_is_registered('billto')) tep_session_register('billto');
+    }else
+    {
+      $onepage['createAccount'] = false;
+      //tep_redirect(tep_href_link(FILENAME_CHECKOUT,'error='.url_encode('Your email address already exists in our records')));
     }
   }
 
@@ -1361,8 +1376,8 @@ else
 
         if ($error === false){
           global $order_total_modules, $cc_id;
-          if (!tep_session_is_registered('cc_id')) tep_session_register('cc_id');
           $cc_id = $coupon_result['coupon_id'];
+          if (!tep_session_is_registered('cc_id')) tep_session_register('cc_id');
           $order_total_modules->pre_confirmation_check();
 
           return '{
@@ -1473,8 +1488,9 @@ else
     global $sendto, $customer_id, $customer_default_address_id, $shipping;
     // if no shipping destination address was selected, use the customers own address as default
     if (!tep_session_is_registered('sendto')) {
-      tep_session_register('sendto');
+      
       $sendto = $customer_default_address_id;
+      tep_session_register('sendto');
     } else {
       // verify the selected shipping address
       if ((is_array($sendto) && !tep_not_null($sendto)) || is_numeric($sendto)) {
@@ -1494,8 +1510,9 @@ else
     global $billto, $customer_id, $customer_default_address_id, $shipping;
     // if no billing destination address was selected, use the customers own address as default
     if (!tep_session_is_registered('billto')) {
-      tep_session_register('billto');
+      
       $billto = $customer_default_address_id;
+      tep_session_register('billto');
     } else {
       // verify the selected billing address
       if ( (is_array($billto) && !tep_not_null($billto)) || is_numeric($billto) ) {

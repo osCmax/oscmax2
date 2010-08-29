@@ -172,7 +172,7 @@ $Id: checkout_payment_address.php 3 2006-05-27 04:59:07Z user $
 
       $billto = $_POST['address'];
 
-      $check_address_query = tep_db_query("select count(*) as total from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $customer_id . "' and address_book_id = '" . $billto . "'");
+      $check_address_query = tep_db_query("select count(*) as total from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customer_id . "' and address_book_id = '" . (int)$billto . "'");
       $check_address = tep_db_fetch_array($check_address_query);
 
       if ($check_address['total'] == '1') {

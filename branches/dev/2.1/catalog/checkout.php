@@ -24,7 +24,6 @@
 		  tep_redirect(tep_href_link(FILENAME_LOGIN));
 	  }
   }
-  
 
   if (isset($_GET['rType'])){
 	  //header('content-type: text/html; charset=' . CHARSET);
@@ -126,10 +125,6 @@
 		  case 'countrySelect':
 			  echo $onePageCheckout->getAjaxStateField();
 		  break;
- 		  case 'countrySelect_edit':
-			  echo $onePageCheckout->getAjaxStateFieldEdit();
-		  break;
-
 		  case 'processLogin':
 			  echo $onePageCheckout->processAjaxLogin($_POST['email'], $_POST['pass']);
 		  break;
@@ -144,9 +139,6 @@
 		  break;
 		  case 'setGV':
 			  echo $onePageCheckout->setGiftVoucher($_POST['method']);
-		  break;
-		  case 'updatePayment':
-				echo $onePageCheckout->updatePayment();
 			break;
 		  case 'redeemPoints':
 			  echo $onePageCheckout->redeemPoints($_POST['points']);
@@ -184,11 +176,12 @@
 				  include(DIR_WS_INCLUDES . 'checkout/cart.php');
 			  }
 		  break;
+		  case 'updatePoints':
 		  case 'updateShippingMethods':
 			  include(DIR_WS_INCLUDES . 'checkout/shipping_method.php');
 		  break;
 		  case 'updatePaymentMethods':
-			 // include(DIR_WS_INCLUDES . 'checkout/payment_method.php');
+			 include(DIR_WS_INCLUDES . 'checkout/payment_method.php');
 		  break;
 		  case 'getOrderTotals':
 			  if (MODULE_ORDER_TOTAL_INSTALLED){
@@ -214,7 +207,6 @@
 			  $aID = tep_db_prepare_input($_POST['addressID']);
 			  $Qaddress = tep_db_query('select * from ' . TABLE_ADDRESS_BOOK . ' where customers_id = "' . $customer_id . '" and address_book_id = "' . $aID . '"');
 			  $address = tep_db_fetch_array($Qaddress);
-			  
 			  include(DIR_WS_INCLUDES . 'checkout/edit_address.php');
 		  break;
 		  case 'getBillingAddress':
@@ -234,7 +226,6 @@
 	  tep_session_close();
 	  tep_exit();
   }
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT);
 
   $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_CHECKOUT, '', $request_type));
 
@@ -259,7 +250,7 @@
   function fixSeoLink($url){
 	  return str_replace('&amp;', '&', $url);
   }
-  
+
 
 
 

@@ -95,7 +95,7 @@
 		}; ?>
 		pageTracker._trackPageview();
 		
-		<?php include(DIR_WS_MODULES . 'analytics/analytics.php'); ?>
+		<?php include(DIR_WS_MODULES . 'analytics.php'); ?>
 
 	</script>
 

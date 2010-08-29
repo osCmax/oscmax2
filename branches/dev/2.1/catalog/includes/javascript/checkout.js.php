@@ -21,6 +21,7 @@ function CVVPopUpWindowEx(url) {
   var onePage = checkout;
   onePage.initializing = true;
   onePage.ajaxCharset = '<?php echo CHARSET;?>';
+  onePage.storeName = '<?php echo STORE_NAME; ?>';
   onePage.loggedIn = <?php echo (tep_session_is_registered('customer_id') ? 'true' : 'false');?>;
   onePage.autoshow = <?php echo ((ONEPAGE_AUTO_SHOW_BILLING_SHIPPING == 'False') ? 'false' : 'true');?>;
   onePage.stateEnabled = <?php echo (ACCOUNT_STATE == 'true' ? 'true' : 'false');?>;
@@ -118,7 +119,7 @@ $(document).ready(function (){
 	<?php
   }
   ?>
-	
+
 	var loginBoxOpened = false;
 	$('#loginButton').click(function (){
 		if (loginBoxOpened){
@@ -178,8 +179,7 @@ $(document).ready(function (){
 								var updateTotals = true;
 								onePage.updateCartView();
 								onePage.updateFinalProductListing();
-								onePage.updatePaymentMethods(true);
-								onePage.updatePayment();
+								onePage.updatePaymentMethods();
 								if ($(':radio[name="payment"]:checked').size() > 0){
 									onePage.setPaymentMethod($(':radio[name="payment"]:checked'));
 									updateTotals = false;
@@ -216,7 +216,7 @@ $(document).ready(function (){
 								}, 5000);
 							}
 						},
-						errorMsg: 'There was an error logging in, please inform ShedsForLessDirect about this error.'
+						errorMsg: 'There was an error logging in, please inform <?php echo STORE_NAME; ?> about this error.'
 					});
 				});
 			}
@@ -236,17 +236,6 @@ $(document).ready(function (){
 		   // height: 450,
 			minWidth: 550,
 			//minHeight: 500,
-			beforeclose: function(){
-			var $this = $(this);
-					var action = $('input[name="action"]', $this).val();
-					//alert($(':input, :select, :radio, :checkbox', this).serialize());
-					if (action == 'selectAddress'){
-						//$this.dialog('close');
-					}else if (action == 'addNewAddress' || action == 'saveAddress'){						
-						onePage.loadAddressBook($this, addressType);
-						return false;
-					}	
-			},
 			open: function (){
 				onePage.loadAddressBook($(this), addressType);
 			},
@@ -260,9 +249,6 @@ $(document).ready(function (){
 					}else if (action == 'addNewAddress' || action == 'saveAddress'){
 						onePage.loadAddressBook($this, addressType);
 					}
-								//onePage.updatePaymentMethods();
-									//onePage.updatePayment();
-									//onePage.updateOrderTotals();
 				},
 				'<?php echo addslashes(WINDOW_BUTTON_CONTINUE);?>': function (){
 					var $this = $(this);
@@ -279,23 +265,13 @@ $(document).ready(function (){
 								$this.dialog('close');
 								if (addressType == 'shipping'){
 									onePage.updateAddressHTML('shipping');
-									onePage.updateShippingMethods(true);
-									//onePage.loadAddressBook($this, 'shipping');
+									onePage.updateShippingMethods();
+								}else{
+									onePage.updateAddressHTML('billing');
 									onePage.updatePaymentMethods();
-									onePage.updatePayment();
-									onePage.updateOrderTotals();
-								}else{									 
-									onePage.updateAddressHTML('billing');															
-									//onePage.loadAddressBook($this, 'billing');
-	//								onePage.processBillingAddress();
-									onePage.updatePaymentMethods();
-									onePage.updatePayment();
-									onePage.updateOrderTotals();
-
-									
 								}
 							},
-							errorMsg: 'There was an error saving your address, please inform ShedsForLessDirect about this error.'
+							errorMsg: 'There was an error saving your address, please inform <?php echo STORE_NAME; ?> about this error.'
 						});
 					}else if (action == 'addNewAddress'){
 						onePage.queueAjaxRequest({
@@ -307,7 +283,7 @@ $(document).ready(function (){
 							success: function (data){
 								onePage.loadAddressBook($this, addressType);
 							},
-							errorMsg: 'There was an error saving your address, please inform ShedsForLessDirect about this error.'
+							errorMsg: 'There was an error saving your address, please inform <?php echo STORE_NAME; ?> about this error.'
 						});
 					}else if (action == 'saveAddress'){
 						onePage.queueAjaxRequest({
@@ -319,7 +295,7 @@ $(document).ready(function (){
 							success: function (data){
 								onePage.loadAddressBook($this, addressType);
 							},
-							errorMsg: 'There was an error saving your address, please inform ShedsForLessDirect about this error.'
+							errorMsg: 'There was an error saving your address, please inform <?php echo STORE_NAME; ?> about this error.'
 						});
 					}
 				},
@@ -332,9 +308,12 @@ $(document).ready(function (){
 						beforeSendMsg: 'Loading New Address Form',
 						success: function (data){
 							$this.html(data);
-							onePage.addCountryAjaxEdit($('select[name="country"]', $this), 'state', 'stateCol');							
+							if(onePage.stateEnabled == true)
+							{
+								onePage.addCountryAjax($('select[name="country"]', $this), 'state', 'stateCol')
+							}
 						},
-						errorMsg: 'There was an error loading new address form, please inform ShedsForLessDirect about this error.'
+						errorMsg: 'There was an error loading new address form, please inform <?php echo STORE_NAME; ?> about this error.'
 					});
 				},
 				'<?php echo addslashes(WINDOW_BUTTON_EDIT_ADDRESS);?>': function (){
@@ -346,10 +325,8 @@ $(document).ready(function (){
 						beforeSendMsg: 'Loading Edit Address Form',
 						success: function (data){
 							$this.html(data);
-							onePage.addCountryAjaxEdit($('select[name="country"]', $this), 'state', 'stateCol');
-							$('select[name="country"]', $this).trigger('change');
 						},
-						errorMsg: 'There was an error loading edit address form, please inform ShedsForLessDirect about this error.'
+						errorMsg: 'There was an error loading edit address form, please inform <?php echo STORE_NAME; ?> about this error.'
 					});
 				}
 			}
@@ -372,7 +349,7 @@ if (MODULE_ORDER_TOTAL_INSTALLED)
 	$gv_result = tep_db_fetch_array($gv_query);
 
 if ($gv_result['amount']>=$temp){ $coversAll=true;
-
+/*
 ?>
   function clearRadeos(){
 	document.checkout.cot_gv.checked=!document.checkout.cot_gv.checked;
@@ -394,7 +371,12 @@ if ($gv_result['amount']>=$temp){ $coversAll=true;
   function clearRadeos(){
 	document.checkout.cot_gv.checked=!document.checkout.cot_gv.checked;
   }
-<?php }
+<?php
+*/
+  }
 }?>
+function clearRadeos(){
+	 return true;
+  }
 //-->
 </script>

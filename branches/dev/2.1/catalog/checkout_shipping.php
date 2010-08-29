@@ -16,13 +16,13 @@ $Id: checkout_shipping.php 3 2006-05-27 04:59:07Z user $
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
-/* One Page Checkout - BEGIN */  
+/* One Page Checkout - BEGIN */
   if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
-      tep_redirect(tep_href_link(FILENAME_CHECKOUT,tep_get_all_get_params(array(tep_session_name())), 'SSL'));
-    
+      tep_redirect(tep_href_link(FILENAME_CHECKOUT, $_SERVER['QUERY_STRING'], 'SSL'));
+
   }
 /* One Page Checkout - END */
-  
+
   require('includes/classes/http_client.php');
 
 // BOF: MOD - Downloads Controller - Free Shipping
@@ -32,11 +32,11 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 }
 // EOF: MOD - Downloads Controller - Free Shipping
 
-// BOF: MOD - Individual Shipping 
+// BOF: MOD - Individual Shipping
 if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $shiptotal) {
   tep_session_unregister('shipping');
 }
-// EOF: MOD - Individual Shipping 
+// EOF: MOD - Individual Shipping
 
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
@@ -88,7 +88,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $ship
 
   $total_weight = $cart->show_weight();
   $total_count = $cart->count_contents();
-// BOF: MOD - UPSXML 1.3.3 
+// BOF: MOD - UPSXML 1.3.3
   if (defined('SHIPPING_DIMENSIONS_SUPPORT') && SHIPPING_DIMENSIONS_SUPPORT == 'Ready-to-ship only') {
     $dimensions_support = 1;
   } elseif (defined('SHIPPING_DIMENSIONS_SUPPORT') && SHIPPING_DIMENSIONS_SUPPORT == 'With product dimensions') {

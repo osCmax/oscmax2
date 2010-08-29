@@ -200,7 +200,6 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
 // BOF: MOD - Checkout Without Account Modifications
   define('FILENAME_PWA_PWA_LOGIN', 'login_pwa.php');
   define('FILENAME_PWA_ACC_LOGIN', 'login_acc.php');
-  define('FILENAME_CHECKOUT', 'Order_Info.php');
   define('FILENAME_ORDER_INFO', 'Order_Info.php');
   define('FILENAME_ORDER_INFO_PROCESS', 'Order_Info_Process.php');
 // EOF: MOD - Checkout Without Account Modifications

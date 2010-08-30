@@ -313,7 +313,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 ?>
           <tr>
             <td class="main" width="170">&nbsp;<?php echo ENTRY_STATE; ?></td>
-                      <td class="main"><div id="states">
+            <td class="main"><div id="states">
 <?php
     $state = sbs_get_zone_name($country, $zone_id);
     if ($is_read_only) {
@@ -324,35 +324,38 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 				echo ajax_get_zones_html($country,'',false);
 				// -Country-State Selector
     }
-?></td>
-              </tr>
+?>
+            </div></td>
+          </tr>
 <?php
      }
 ?>
-             <tr>
-                <td class="main"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></span></td>
-				<?php // +Country-State Selector ?>
-                <td class="main">
+          <tr>
+            <td class="main"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></span></td>
+			<?php // +Country-State Selector ?>
+            <td class="main">
 <?php
       $account['entry_country_id'] = STORE_COUNTRY;
-	 if ($is_read_only) {       echo tep_get_country_name($account['entry_country_id']);     } 
-elseif 
-($error) {
-       if ($entry_country_error) {
-        
-		 echo sbs_get_country_list('country') . '&nbsp;' . ENTRY_COUNTRY_ERROR;
-       } else {
-         echo tep_get_country_name($country) . tep_draw_hidden_field('country');
-       }
+	  if ($is_read_only) {       
+	    echo tep_get_country_name($account['entry_country_id']);     
+      } elseif ($error) {
+        if ($entry_country_error) {    
+		  echo sbs_get_country_list('country') . '&nbsp;' . ENTRY_COUNTRY_ERROR;
+        } else {
+          echo tep_get_country_name($country) . tep_draw_hidden_field('country');
+        }
      } else {
-	 		echo sbs_get_country_list('country',$country,'onChange="getStates(this.value, \'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); 
-			// -Country-State Selector
+	   echo sbs_get_country_list('country',$country,'onChange="getStates(this.value, \'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); 
+	   // -Country-State Selector
      }
-?></td>
+?>
+            </td>
           </tr>
-        </table></td>
-      </tr>
-    </table></td>
+        </table>
+      </td>
+    </tr>
+  </table>
+</td>
   </tr>
   <tr>
     <td class="formAreaTitle"><br><?php echo CATEGORY_CONTACT; ?></td>

@@ -223,8 +223,8 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
 <?php
   } else {
 ?>
-          <tr><?php echo tep_draw_form('mail', FILENAME_GV_MAIL, 'action=preview'); ?>
-            <td><table border="0" cellpadding="0" cellspacing="2">
+          <tr>
+            <td><?php echo tep_draw_form('mail', FILENAME_GV_MAIL, 'action=preview'); ?><table border="0" cellpadding="0" cellspacing="2">
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
@@ -248,28 +248,28 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
               </tr>
                <tr>
                 <td class="main"><?php echo TEXT_TO; ?></td>
-                <td><?php echo tep_draw_input_field('email_to'); ?><?php echo '&nbsp;&nbsp;' . TEXT_SINGLE_EMAIL; ?></td>
+                <td><?php echo tep_draw_input_field('email_to', '', ' size="50"'); ?><?php echo '&nbsp;&nbsp;' . TEXT_SINGLE_EMAIL; ?></td>
               </tr>
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
              <tr>
                 <td class="main"><?php echo TEXT_FROM; ?></td>
-                <td><?php echo tep_draw_input_field('from', EMAIL_FROM); ?></td>
+                <td><?php echo tep_draw_input_field('from', EMAIL_FROM, ' size="50"'); ?></td>
               </tr>
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
               <tr>
                 <td class="main"><?php echo TEXT_SUBJECT; ?></td>
-                <td><?php echo tep_draw_input_field('subject'); ?></td>
+                <td><?php echo tep_draw_input_field('subject', '', ' size="100"'); ?></td>
               </tr>
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
               <tr>
                 <td valign="top" class="main"><?php echo TEXT_AMOUNT; ?></td>
-                <td><?php echo tep_draw_input_field('amount'); ?></td>
+                <td><?php echo tep_draw_input_field('amount', '', ' size="10"'); ?></td>
               </tr>
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -295,8 +295,8 @@ $Id: gv_mail.php 14 2006-07-28 17:42:07Z user $
                 echo tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); }?>
                 </td>
               </tr>
-            </table></td>
-          </form></tr>
+            </table></form></td>
+          </tr>
 <?php
   }
 ?>

@@ -72,14 +72,16 @@ $Id: countries.php 3 2006-05-27 04:59:07Z user $
 <!-- body_text //-->
     <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right">&nbsp;</td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
+        <td><?php echo tep_draw_form('search_countries', FILENAME_COUNTRIES, '', 'get'); ?>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+              <td class="pageHeading" align="right">&nbsp;</td>
+              <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search_countries'); ?></td>
+            </tr>
+          </table><?php echo tep_hide_session_id(); ?></form>
+        </td>
+      </tr>      <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -90,7 +92,14 @@ $Id: countries.php 3 2006-05-27 04:59:07Z user $
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-  $countries_query_raw = "select countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id from " . TABLE_COUNTRIES . " order by countries_name";
+
+    $search = '';
+    if (isset($_GET['search_countries']) && tep_not_null($_GET['search_countries'])) {
+      $keywords = tep_db_input(tep_db_prepare_input($_GET['search_countries']));
+      $search = " where countries_name like '%" . $keywords . "%' or countries_iso_code_2 like '%" . $keywords . "%' or countries_iso_code_3 like '%" . $keywords . "%' ";
+    }
+
+  $countries_query_raw = "select countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id from " . TABLE_COUNTRIES . " " . $search . " order by countries_name";
   $countries_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $countries_query_raw, $countries_query_numrows);
   $countries_query = tep_db_query($countries_query_raw);
   while ($countries = tep_db_fetch_array($countries_query)) {
@@ -116,10 +125,16 @@ $Id: countries.php 3 2006-05-27 04:59:07Z user $
                 <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText" valign="top"><?php echo $countries_split->display_count($countries_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_COUNTRIES); ?></td>
-                    <td class="smallText" align="right"><?php echo $countries_split->display_links($countries_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
+                    <td class="smallText" align="right"><?php echo $countries_split->display_links($countries_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'cID', 'action'))); ?></td>
                   </tr>
 <?php
-  if (empty($action)) {
+    if (!empty($keywords)) {
+?>
+		          <tr>
+                    <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ZONES) . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
+                  </tr>
+<?php
+	} elseif (empty($action)) {
 ?>
                   <tr>
                     <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . '&amp;action=new') . '">' . tep_image_button('button_new_country.gif', IMAGE_NEW_COUNTRY) . '</a>'; ?></td>
@@ -134,7 +149,13 @@ $Id: countries.php 3 2006-05-27 04:59:07Z user $
   $heading = array();
   $contents = array();
 
+  if ($countries_query_numrows == 0) { $action = 'no_search_results'; }
+
   switch ($action) {
+    case 'no_search_results':
+	  $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NO_COUNTRIES_FOUND . '</b>');
+      $contents[] = array('text' => TEXT_INFO_NO_COUNTRIES_FOUND);
+	  break;
     case 'new':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_COUNTRY . '</b>');
 

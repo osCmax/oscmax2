@@ -507,7 +507,6 @@ function check_form() {
         </table>
        </td>
       </tr>
-      </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
@@ -519,22 +518,25 @@ function check_form() {
   } else {
 ?>
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr><?php echo tep_draw_form('search', 'customers_groups.php', '', 'get'); ?>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right">&nbsp;</td>
-            <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search'); ?></td>
-          </form></tr>
-        </table></td>
+        <td><?php echo tep_draw_form('search', 'customers_groups.php', '', 'get'); ?>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+              <td class="pageHeading" align="right">&nbsp;</td>
+              <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search'); ?></td>
+            </tr>
+          </table>
+        </form></td>
       </tr>
       <tr>
 
           <?php
+          $listing = (isset($_GET['listing']) ? $_GET['listing'] : '');
           switch ($listing) {
-              case "group":
+              case 'group':
               $order = "g.customers_group_name";
               break;
-              case "group-desc":
+              case 'group-desc':
               $order = "g.customers_group_name DESC";
               break;
               default:
@@ -545,7 +547,7 @@ function check_form() {
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                <tr class="dataTableHeadingRow">
-           <td class="dataTableHeadingContent"><a href="<?php echo "$PHP_SELF?listing=group"; ?>"><?php echo tep_image_button('ic_up.gif', ' Sort ' . TABLE_HEADING_NAME . ' --> A-B-C From Top '); ?></a>&nbsp;<a href="<?php echo "$PHP_SELF?listing=group-desc"; ?>"><?php echo tep_image_button('ic_down.gif', ' Sort ' . TABLE_HEADING_NAME . ' --> Z-X-Y From Top '); ?></a><br><?php echo TABLE_HEADING_NAME; ?></td>
+           <td class="dataTableHeadingContent"><a href="<?php echo "$PHP_SELF?listing=group"; ?>"><?php echo tep_image_button('ic_up.gif', TEXT_SORT . TABLE_HEADING_NAME . TEXT_ABC); ?></a>&nbsp;<a href="<?php echo "$PHP_SELF?listing=group-desc"; ?>"><?php echo tep_image_button('ic_down.gif', TEXT_SORT . TABLE_HEADING_NAME . TEXT_ZYX); ?></a><br><?php echo TABLE_HEADING_NAME; ?></td>
                    <td class="dataTableHeadingContent" align="right" valign="bottom"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
                </tr>
 
@@ -556,7 +558,7 @@ function check_form() {
       $search = "where g.customers_group_name like '%" . $keywords . "%'";
     }
 
-    $customers_groups_query_raw = "select g.customers_group_id, g.customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " g  " . $search . " order by $order";
+    $customers_groups_query_raw = "select g.customers_group_id, g.customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " g  " . $search . " order by " . $order;
     $customers_groups_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_groups_query_raw, $customers_groups_query_numrows);
     $customers_groups_query = tep_db_query($customers_groups_query_raw);
 

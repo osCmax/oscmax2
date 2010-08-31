@@ -150,6 +150,14 @@ Complete Recoding From Stephen Walker admin@snjcomputers.com
       <td class="smallText" valign="top"><?php echo $products_split->display_count($products_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></td>
       <td class="smallText" align="right"><?php echo $products_split->display_links($products_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y', 'cID', 'action'))); ?></td>
      </tr>
+<?php
+     if (tep_not_null($_GET['search'])) {
+?>
+     <tr>
+       <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS) . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
+     </tr>
+<?php } ?>
+
     </table>
   </table>
 <?php

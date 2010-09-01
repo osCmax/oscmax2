@@ -344,18 +344,24 @@ foreach ($epf as $e) {
 
   $listing_sql = $select_str . $from_str . $where_str . $order_str;
 
-  // BOF: PGM EDIT TO ALLOW SWITCHING
-if (PRODUCT_LIST_TYPE == 0) { $gridlist = 'list'; } else { $gridlist = 'grid'; }
-		  
-		$thumbnail_view = (isset($_GET['list']) ? $_GET['list'] : $gridlist); 
-		  
-		if ($thumbnail_view == 'list')  {
-        include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
-       } else {
-        include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING_COL);
-      }
-// EOF: PGM EDIT TO ALLOW SWITCHING
-//  require(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
+// BOF: Grid:List Switching
+        // initial set from admin
+        if ( (!isset($_GET['gridlist'])) && (!isset($_SESSION['gridlist'])) ) {
+		  if (PRODUCT_LIST_TYPE == 0) { $gridlist = 'list'; } else { $gridlist = 'grid'; }
+		}
+		
+        // current request
+        if (isset($_GET['gridlist'])) { $gridlist = $_GET['gridlist']; }
+
+        // previous request
+        if (isset($_SESSION['gridlist'])) { $gridlist = $_SESSION['gridlist']; }
+
+        if ($gridlist == 'list') {
+          include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
+        } else {
+          include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING_COL);
+        }
+// EOF: Grid:List Switching
 ?>
         </td>
       </tr>

@@ -99,16 +99,22 @@
       <tr>
         <td>
         <?php
+        // initial set from admin
+        if ( (!isset($_GET['gridlist'])) && (!isset($_SESSION['gridlist'])) ) {
+		  if (PRODUCT_LIST_TYPE == 0) { $gridlist = 'list'; } else { $gridlist = 'grid'; }
+		}
 		
-		if (PRODUCT_LIST_TYPE == 0) { $gridlist = 'list'; } else { $gridlist = 'grid'; }
-		  
-		$thumbnail_view = (isset($_GET['list']) ? $_GET['list'] : $gridlist); 
-		  
-		if ($thumbnail_view == 'list')  {
-        include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
-       } else {
-        include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING_COL);
-       }
+        // current request
+        if (isset($_GET['gridlist'])) { $gridlist = $_GET['gridlist']; }
+
+        // previous request
+        if (isset($_SESSION['gridlist'])) { $gridlist = $_SESSION['gridlist']; }
+
+        if ($gridlist == 'list') {
+          include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
+        } else {
+          include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING_COL);
+        }
         ?>
         </td>
       </tr>

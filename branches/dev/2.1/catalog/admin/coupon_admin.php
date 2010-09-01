@@ -51,7 +51,7 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
       $message .= TEXT_VISIT . "\n\n";
      
       //Let's build a message object using the email class
-      $mimemessage = new email(array('X-Mailer: osCMax Mailer'));
+      $mimemessage = new email(array('X-Mailer: osCmax Mailer'));
       // add the message to the object
 // MaxiDVD Added Line For WYSIWYG HTML Area: BOF (Send TEXT Email when WYSIWYG Disabled)
     if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {

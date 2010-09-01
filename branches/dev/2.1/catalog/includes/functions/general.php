@@ -1144,7 +1144,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     $from_email_name = preg_replace('/[\n|\r].*/', '', $from_email_name);
 
     // Instantiate a new mail object
-    $message = new email(array('X-Mailer: osCMax Mailer'));
+    $message = new email(array('X-Mailer: osCmax Mailer'));
 
     // Build the text version
     $text = strip_tags($email_text);

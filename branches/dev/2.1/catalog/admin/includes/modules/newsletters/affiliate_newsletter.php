@@ -63,7 +63,7 @@
     function send($affiliate_newsletter_id) {
       $mail_query = tep_db_query("select affiliate_firstname, affiliate_lastname, affiliate_email_address from " . TABLE_AFFILIATE . " where affiliate_newsletter = '1'");
 
-      $mimemessage = new email(array('X-Mailer: osCMax Mailer'));
+      $mimemessage = new email(array('X-Mailer: osCmax Mailer'));
       $mimemessage->add_text($this->content);
       $mimemessage->build_message();
       while ($mail = tep_db_fetch_array($mail_query)) {

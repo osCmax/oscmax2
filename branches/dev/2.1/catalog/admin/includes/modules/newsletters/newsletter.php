@@ -59,7 +59,7 @@ $Id: newsletter.php 3 2006-05-27 04:59:07Z user $
     function send($newsletter_id) {
       $mail_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from " . TABLE_CUSTOMERS . " where customers_newsletter = '1'");
 
-      $mimemessage = new email(array('X-Mailer: osCMax Mailer'));
+      $mimemessage = new email(array('X-Mailer: osCmax Mailer'));
 
 // BOF: MOD - WYSIWYG HTML Area (Send TEXT Newsletter v1.7 when WYSIWYG Disabled)
       if (HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER == 'Disable') {

@@ -255,12 +255,12 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
 ?>
 <!-- add Order # // -->
       <tr>
-        <td class="main" width="200"><b>Order # </b></td>
+        <td class="main" width="200"><b><?php echo TEXT_ORDER_ID; ?></b></td>
         <td class="main"><?php echo tep_db_input($oID); ?></td>
       </tr>
 <!-- add date/time // -->
       <tr>
-        <td class="main"><b>Order Date & Time</b></td>
+        <td class="main"><b><?php echo TEXT_ORDER_DATE_TIME; ?></b></td>
         <td class="main"><?php echo tep_datetime_short($order->info['date_purchased']); ?></td>
       </tr>
 <?php

@@ -91,4 +91,7 @@ define('TEXT_ACTIVE', 'Active');
 define('TABLE_HEADING_ORDER_COMMENTS', 'Order Comments');
 define('TABLE_HEADING_NEW_ORDER_COMMENTS', 'Add New Order Comment');
 define('TEXT_ORDER_SUMMARY', 'Order Summary');
+
+define('TEXT_ORDER_ID', 'Order No:');
+define('TEXT_ORDER_DATE_TIME', 'Order Date & Time');
 ?>

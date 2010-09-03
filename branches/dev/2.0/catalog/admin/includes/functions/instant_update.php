@@ -6,11 +6,7 @@
     Released under GPL
 */
   $images_dir = DIR_WS_IMAGES; // default catalog images folder;
-  $exclude_folders = array("banners","default","icons","mail","infobox","js"); // folders to exclude from adding new images
   $root_images_dir = DIR_FS_CATALOG .  $images_dir . DYNAMIC_MOPICS_BIGIMAGES_DIR;
-  $root_thumbs = DIR_FS_CATALOG . $images_dir . DYNAMIC_MOPICS_THUMBS_DIR;
-  $html_images_dir =  DIR_WS_CATALOG .  $images_dir . DYNAMIC_MOPICS_BIGIMAGES_DIR;
-  $html_thumbs =  DIR_WS_CATALOG .  $images_dir . DYNAMIC_MOPICS_THUMBS_DIR;  
   $new_dir = preg_replace('/[^a-zA-Z0-9_.-]/i', '_',$_POST['new_directory']); 
   $dir = (tep_not_null($new_dir) ? $new_dir : $_POST['directory']);
   $cache_dir = 'cache/';  
@@ -52,7 +48,7 @@
                 }
 
                 // set parameters (see "URL Parameters" in phpthumb.readme.txt)
-			$phpThumb->setParameter('config_cache_directory', DIR_FS_CATALOG . $cache_dir); //doesn't work!
+			$phpThumb->setParameter('config_cache_directory', $cache_dir);
                 $phpThumb->setParameter('w', $thumbnail_width);
                 if ($dest_dir = $root_images_dir) { 
                     $phpThumb->setParameter('h', POPUP_IMAGE_HEIGHT);  //specify max height for popup
@@ -90,7 +86,7 @@
                 }
 
                 // set parameters (see "URL Parameters" in phpthumb.readme.txt)
-			$phpThumb->setParameter('config_cache_directory', DIR_FS_CATALOG . $cache_dir); //doesn't work!
+			$phpThumb->setParameter('config_cache_directory', $cache_dir);
                 $phpThumb->setParameter('h', $thumbnail_height);
                 if ($dest_dir = $root_images_dir) { 
                     $phpThumb->setParameter('w', POPUP_IMAGE_WIDTH);  //specify max width for popup

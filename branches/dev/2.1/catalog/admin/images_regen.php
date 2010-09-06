@@ -1,0 +1,786 @@
+<?php require('includes/application_top.php'); ?>
+
+<?php
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
+  $image = (isset($_GET['image']) ? $_GET['image'] : '');
+  
+  $root_images_dir = DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR;
+  $root_products_dir = DIR_FS_CATALOG .  DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR;  
+  $root_thumbs_dir = DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR;
+  
+if (tep_not_null($action)) {
+	switch ($action) {
+	  case 'regenerate_all':
+		listDirectory($root_images_dir);
+	  break;
+	}      
+}    
+
+//Function to convert bytes to proper image sizes
+function format_size($size) {
+      $sizes = array(" Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB");
+      if ($size == 0) { return('n/a'); } else {
+      return (round($size/pow(1024, ($i = floor(log($size, 1024)))), $i > 1 ? 2 : 0) . $sizes[$i]); }
+}
+?>
+
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html <?php echo HTML_PARAMS; ?>>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
+<title><?php echo TITLE; ?></title>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
+<script type="text/javascript" src="includes/general.js"></script>
+</head>
+<body>
+<!-- header //-->
+<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+<!-- header_eof //-->
+
+<!-- body //-->
+<table border="0" width="100%" cellspacing="2" cellpadding="2">
+  <tr>
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+      <!-- left_navigation //-->
+      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+      <!-- left_navigation_eof //-->
+      </table>
+    </td>
+<!-- body_text //-->
+    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+      <tr>
+        <td>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+              <td class="pageHeading" align="right">&nbsp;</td>
+            </tr>
+            <?php if ($action == 'regenerate_all') { ?>
+		    <tr>
+              <td class="messageStackSuccess" colspan="2">All images that could be regenerated from <b><?php echo DYNAMIC_MOPICS_BIGIMAGES_DIR; ?></b> have been regenerated successfully</td>
+			</tr>
+			<?php } ?>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td valign="top" width="75%">
+                <!-- START OF LHS CONTENT -->
+                <!-- START OF BROWSE -->
+                <?php
+	              switch ($action) {
+                    case 'browse':
+					
+					// Regenerate single or multi-images in browse mode
+					$regenerate_html = '';			
+					if ( (tep_not_null($image)) && ($image != '') )  {
+					  $multi_image = explode(',', $image);
+					  $multi_image_count = count($multi_image);
+                        for ($i = 0; $i < $multi_image_count; ++$i) { 
+                   	      $source_bigimage = $root_images_dir . '/' . $multi_image[$i];
+		                  require('includes/functions/image_generator.php');
+						} // end for
+
+					  $regenerate_html = '<table><tr><td class="messageStackSuccess">Images for <b>' . $multi_image['0'] . '</b> successfully regenerated</td></tr></table>';
+                    } // end if
+
+				?>
+                <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                  <tr class="dataTableHeadingRow">
+                    <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCT_ID; ?></td>
+                    <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCT_NAME; ?></td>
+                    <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCT_IMAGE; ?></td>
+                    <td class="dataTableHeadingContent" align="center"><span title="Large Image|This column shows if there is a image file stored in your <b>big image folder</b> for the product's database entry."><?php echo TABLE_HEADING_L; ?></span></td>
+                    <td class="dataTableHeadingContent" align="center"><span title="Medium|This column shows if there is a image file stored in your <b>product image folder</b> for the product's database entry."><?php echo TABLE_HEADING_M; ?></span></td>
+                    <td class="dataTableHeadingContent" align="center"><span title="Small|This column shows if there is a image file stored in your <b>thumbs image folder</b> for the product's database entry."><?php echo TABLE_HEADING_S; ?></span></td>
+                    <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_IMAGE_FILE_SIZE_LG; ?></td>
+                    <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_IMAGE_FILE_SIZE_MD; ?></td>
+                    <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_IMAGE_FILE_SIZE_SM; ?></td>
+                    <td class="dataTableHeadingContent" align="center"><span title="Dynamic Mopics Large Image|This column shows the count of the Dynamic Mopics Large images in the images_big folder."><?php echo TABLE_HEADING_DL; ?></span></td>
+                    <td class="dataTableHeadingContent" align="center"><span title="Dynamic Mopics Medium Image|This column shows the count of the Dynamic Mopics Medium images in the product image folder."><?php echo TABLE_HEADING_DM; ?></span></td>
+                    <td class="dataTableHeadingContent" align="center"><span title="Dynamic Mopics Small Image|This column shows the count of the Dynamic Mopics Small images in the thumbnails image folder."><?php echo TABLE_HEADING_DS; ?></span></td>
+                    <td class="dataTableHeadingContent" align="center">&nbsp;</td>
+                    <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
+                  </tr>
+                    <?php				
+                    $images_query_raw = "select p.products_id, p.products_image, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'";
+                    $images_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $images_query_raw, $images_query_numrows);
+                    $images_query = tep_db_query($images_query_raw);
+                    while ($images = tep_db_fetch_array($images_query)) {
+					
+					if ((!isset($_GET['iID']) || (isset($_GET['iID']) && ($_GET['iID'] == $images['products_id']))) && !isset($iInfo) && (substr($action, 0, 3) != 'new')) {
+                      $iInfo = new objectInfo($images);
+                    }
+					
+					//Get image size for images_big
+					$image_file_size_lg = filesize($root_images_dir . $images['products_image']);
+					$image_file_size_md = filesize($root_products_dir . $images['products_image']);
+					$image_file_size_sm = filesize($root_thumbs_dir . $images['products_image']);		
+					
+					//Check large image exisits			
+					$file_found_lg = 0;
+					$image_sub_dir = '';
+					$slash_pos = strripos($images['products_image'], '/');  // find last / in the image name
+					$image_sub_dir = substr($images['products_image'], 0, $slash_pos); // Add this to the search path
+					  $dir = opendir ($root_images_dir . $image_sub_dir);
+					  while (false !== ($file = readdir($dir))) {
+                        if ( ($file != '.') && ($file != '..') ) {
+						  $pos = strpos($images['products_image'], $file);
+						  if ($pos !== false) {
+                            $file_found_lg++;
+                          } // end if
+					    } // end if
+					  } // end while
+					
+					//Count Mopics for big images			
+					$mopics_count_lg = 0;
+					$image_sub_dir = '';
+					$slash_pos = strripos($images['products_image'], '/');  // find last / in the image name
+					if ($slash_pos > 0) {
+					  $image_sub_dir = substr($images['products_image'], 0, $slash_pos). '/'; // Add this to the search path
+					  $image_file_no_ext = substr($images['products_image'],$slash_pos+1);
+					  $image_file_no_ext = substr_replace($image_file_no_ext,  "", -4); // Strip off the extension
+					} else {
+					$image_file_no_ext = substr_replace($images['products_image'],  "", -4); // Strip off the extension
+					}
+					
+					for ($i=1; $i < 9; ++$i) {
+					  $image_file_mopics = $image_file_no_ext . '_' . $i;
+					  $dir = opendir ($root_images_dir . $image_sub_dir);
+					  while (false !== ($file = readdir($dir))) {
+                        if ( ($file != '.') && ($file != '..') ) {
+						  $pos = strpos($file, $image_file_mopics);
+						  if ($pos !== false) {
+                            $mopics_count_lg++;
+                          } // end if
+					    } // end if
+					  } // end while
+					} // end for
+					
+					//Count Mopics for product images			
+					$mopics_count_md = 0;
+					for ($i=1; $i < 9; ++$i) {
+					  $image_file_mopics = $image_file_no_ext . '_' . $i;
+					  $dir = opendir ($root_products_dir . $image_sub_dir);
+					  while (false !== ($file = readdir($dir))) {
+                        if ( ($file != '.') && ($file != '..') ) {
+						  $pos = strpos($file, $image_file_mopics);
+						  if ($pos !== false) {
+                            $mopics_count_md++;
+                          } // end if
+					    } // end if
+					  } // end while
+					} // end for
+					
+					//Count Mopics for thumbnail images			
+					$mopics_count_sm = 0;
+					for ($i=1; $i < 9; ++$i) {
+					  $image_file_mopics = $image_file_no_ext . '_' . $i;
+					  $dir = opendir ($root_thumbs_dir . $image_sub_dir);
+					  while (false !== ($file = readdir($dir))) {
+                        if ( ($file != '.') && ($file != '..') ) {
+						  $pos = strpos($file, $image_file_mopics);
+						  if ($pos !== false) {
+                            $mopics_count_sm++;
+                          } // end if
+					    } // end if
+					  } // end while
+					} // end for
+					  
+			        if (isset($iInfo) && is_object($iInfo) && ($images['products_id'] == $iInfo->products_id) ) {
+                      echo '<tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_IMAGES_REGEN, 'page=' . $_GET['page'] . '&amp;iID=' . $iInfo->products_id . '&amp;action=browse') . '\'">' . "\n";
+                    } else {
+                      echo '<tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_IMAGES_REGEN, 'page=' . $_GET['page'] . '&amp;iID=' . $images['products_id']) . '&amp;action=browse' . '\'">' . "\n";
+    }
+	                  ?>
+					  <td class="dataTableContent"><?php echo $images['products_id']; ?></td>
+                      <td class="dataTableContent"><?php echo $images['products_name']; ?></td>
+                      <td class="dataTableContent"><?php echo $images['products_image']; ?></td>
+                      <td class="dataTableContent"align="center"><?php if ($image_file_size_lg == 0) { echo tep_image(DIR_WS_ICONS . 'icon_status_red.gif', 'Image Missing', 10, 10); } else { echo tep_image(DIR_WS_ICONS . 'icon_status_green.gif', 'Image Found', 10, 10); } ?></td>
+                      <td class="dataTableContent"align="center"><?php if ($image_file_size_md == 0) { echo tep_image(DIR_WS_ICONS . 'icon_status_red.gif', 'Image Missing', 10, 10); } else { echo tep_image(DIR_WS_ICONS . 'icon_status_green.gif', 'Image Found', 10, 10); } ?></td>
+                      <td class="dataTableContent"align="center"><?php if ($image_file_size_sm == 0) { echo tep_image(DIR_WS_ICONS . 'icon_status_red.gif', 'Image Missing', 10, 10); } else { echo tep_image(DIR_WS_ICONS . 'icon_status_green.gif', 'Image Found', 10, 10); } ?></td>
+                      <td class="dataTableContent" align="center"><?php echo format_size($image_file_size_lg); ?></td>
+                      <td class="dataTableContent" align="center"><?php echo format_size($image_file_size_md); ?></td>  
+                      <td class="dataTableContent" align="center"><?php echo format_size($image_file_size_sm); ?></td>                        
+                      <td class="dataTableContent" align="center"><?php echo $mopics_count_lg; ?></td>
+                      <td class="dataTableContent" align="center"><?php echo $mopics_count_md; ?></td>
+                      <td class="dataTableContent" align="center"><?php echo $mopics_count_sm; ?></td>
+                      <td class="dataTableContent" align="center">
+                        <?php if ( ($mopics_count_lg != $mopics_count_md) || ($mopics_count_lg != $mopics_count_sm) || ($mopics_count_md != $mopics_count_sm) ) { echo tep_image(DIR_WS_ICONS . 'warning.gif', 'Missing dynamic mopics image(s)'); } ?>
+                      </td>
+                      <td class="dataTableContent" align="right"><?php if (isset($iInfo) && is_object($iInfo) && ($images['products_id'] == $iInfo->products_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'page=' . $_GET['page'] . '&amp;iID=' . $images['products_id']) . '&amp;action=browse">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                  </tr>
+				  <?php
+					}
+				  ?>
+                  <tr>
+                    <td colspan="14">
+                      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                        <tr>
+                          <td class="smallText" valign="top"><?php echo $images_split->display_count($images_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_IMAGES); ?></td>
+                          <td class="smallText" align="right"><?php echo $images_split->display_links($images_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'iID'))); ?></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <?php
+				  break;
+				?>
+                <!-- END OF BROWSE -->
+                <!-- START OF MISSING -->
+                <?php
+                    case 'missing':
+				?>
+				<?php
+				$image_columns = array('products_image');
+                $image_count = 0;
+  
+                foreach ($image_columns as $column) {
+                  if ($column_query_string != '') $column_query_string .= ', ';
+                  $column_query_string .= $column;
+                }
+				
+				$image_array = array();
+                $images_query = tep_db_query("SELECT products_id, " . $column_query_string . " FROM " . TABLE_PRODUCTS);
+                while ($row = tep_db_fetch_array($images_query)) {
+                  $image_array[$row['products_id']] = array();
+                  foreach ($image_columns as $column) {
+                    if ($row[$column] != '') {
+                      $image_array[$row['products_id']][] = array('image' => $row[$column], 'column' => $column);
+                      $image_count++;
+                    } // end if
+                  } // end foreach
+                } // end while
+
+				$missing_images_lg = array();
+                foreach ($image_array as $id => $product) {
+                  foreach ($product as $image) {
+                    if (!is_file($root_images_dir . $image['image'])) {
+                      if (!is_array($missing_images_lg[$id])) $missing_images_lg[$id] = array();
+                        $missing_images_lg[$id][] = $image['image'];
+                    } // end if
+                  } // end foreach
+                } // end foreach
+				
+				$missing_images_md = array();
+                foreach ($image_array as $id => $product) {
+                  foreach ($product as $image) {
+                    if (!is_file($root_products_dir . $image['image'])) {
+                      if (!is_array($missing_images_md[$id])) $missing_images_md[$id] = array();
+                        $missing_images_md[$id][] = $image['image'];
+                    } // end if
+                  } // end foreach
+                } // end foreach
+
+				$missing_images_sm = array();
+                foreach ($image_array as $id => $product) {
+                  foreach ($product as $image) {
+                    if (!is_file($root_thumbs_dir . $image['image'])) {
+                      if (!is_array($missing_images_sm[$id])) $missing_images_sm[$id] = array();
+                        $missing_images_sm[$id][] = $image['image'];
+                    } // end if
+                  } // end foreach
+                } // end foreach
+
+				?>
+                <?php 
+				if ( (count($missing_images_lg) > 0) || (count($missing_images_md) > 0) || (count($missing_images_sm) > 0) ) { ?>
+                  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                    <tr class="dataTableHeadingRow">
+                      <td class="dataTableHeadingContent" align="center" width="30"><?php echo TABLE_HEADING_PRODUCT_ID; ?></td>
+                      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCT_NAME; ?></td>
+                      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MISSING_PRODUCT_IMAGE; ?></td>
+                      <td class="dataTableHeadingContent">Image Folder</td>
+                    </tr>
+                  
+                  <?php
+				  // Checking Large Images
+				  if (count($missing_images_lg) > 0) {
+                    foreach ($missing_images_lg as $id => $files) { 
+                    $product_query = tep_db_query("SELECT products_name FROM products_description WHERE products_id = '" . (int)$id . "' AND language_id = '" . ($language_id > 0 ? (int)$language_id : '1') . "'");
+                    $product = tep_db_fetch_array($product_query);
+                  ?>
+                    <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+                      <td class="dataTableContent" align="center" width="30"><?php echo $id; ?></td>
+                      <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $id . '&action=new_product') . '">' . $product['products_name']; ?></a></td>
+                      <td class="dataTableContent">
+                      <?php     
+                      foreach ($files as $f) {
+                        echo $f;
+                      } // end foreach
+                      ?>
+                      </td>
+                      <td class="dataTableContent"><?php echo DYNAMIC_MOPICS_BIGIMAGES_DIR?></td>
+                    </tr>
+                  <?php
+                    } // end foreach
+				  } // end if
+				  ?>
+                  
+                  <?php 
+				  // Checking Medium Images
+				  if (count($missing_images_md) > 0) {
+                    foreach ($missing_images_md as $id => $files) { 
+                    $product_query = tep_db_query("SELECT products_name FROM products_description WHERE products_id = '" . (int)$id . "' AND language_id = '" . ($language_id > 0 ? (int)$language_id : '1') . "'");
+                    $product = tep_db_fetch_array($product_query);
+                  ?>
+                    <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+                      <td class="dataTableContent" align="center" width="30"><?php echo $id; ?></td>
+                      <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $id . '&action=new_product') . '">' . $product['products_name']; ?></a></td>
+                      <td class="dataTableContent">
+                      <?php     
+                      foreach ($files as $f) {
+                        echo $f;
+                      } // end foreach
+                      ?>
+                      </td>
+                      <td class="dataTableContent"><?php echo DYNAMIC_MOPICS_PRODUCTS_DIR?></td>
+                    </tr>
+                  <?php
+                    } // end foreach
+				  } // end if
+				  ?>
+                
+                  <?php 
+				  // Checking Small Images
+				  if (count($missing_images_sm) > 0) {
+                    foreach ($missing_images_sm as $id => $files) { 
+                    $product_query = tep_db_query("SELECT products_name FROM products_description WHERE products_id = '" . (int)$id . "' AND language_id = '" . ($language_id > 0 ? (int)$language_id : '1') . "'");
+                    $product = tep_db_fetch_array($product_query);
+                  ?>
+                    <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+                      <td class="dataTableContent" align="center" width="30"><?php echo $id; ?></td>
+                      <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $id . '&action=new_product') . '">' . $product['products_name']; ?></a></td>
+                      <td class="dataTableContent">
+                      <?php     
+                      foreach ($files as $f) {
+                        echo $f;
+                      } // end foreach
+                      ?>
+                      </td>
+                      <td class="dataTableContent"><?php echo DYNAMIC_MOPICS_THUMBS_DIR?></td>
+                    </tr>
+                  <?php
+                    } // end foreach
+				  } // end if
+				?>
+                </table>
+				
+				<?php } else { // (count($missing_images_lg) > 0) ?>
+                
+                <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                  <tr class="dataTableHeadingRow">
+                    <td class="dataTableHeadingContent">Missing Images</td>
+                  </tr>
+                </table>
+                <table border="0" width="100%" cellspacing="5" cellpadding="2">  
+                  <tr>
+                   <td class="messageStackSuccess">You have <b><?php echo $image_count . ' product image' . ($image_count == 1 ? '' : 's'); ?></b> in your store database and they are all accounted for.</b></td>
+                 </tr>
+                </table>
+                
+				<?php  } // end if (count($missing_images_lg) > 0) ?>
+        
+			    <?php
+				  break;
+			    ?>
+                <!-- END OF MISSING -->
+                <!-- START OF ORPHANS -->
+                <?php
+                   case 'orphans':
+			    ?>
+                <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                  <tr class="dataTableHeadingRow">
+                    <td class="dataTableHeadingContent">Orphan Images</td>
+                    <td class="dataTableHeadingContent">Folder</td>
+                  </tr>
+                <?php
+				//Start by creating an array of any images that are being used in the database
+				$database_image_array = array();
+                $database_images_query = tep_db_query("SELECT products_image FROM " . TABLE_PRODUCTS);
+                while ($database_images = tep_db_fetch_array($database_images_query)) {
+				  $database_image_array[] = $database_images['products_image'];   
+                } // end while
+
+				// Next load all the images_big into an array
+				$server_images_lg = array();
+                $dir = opendir ($root_images_dir);
+                while (false !== ($file = readdir($dir))) {
+                  if ( ($file != '.') && ($file != '..') ) {
+					if (strripos($file, '.') > 0) { // checks it is a file not a dir
+				      $server_images_lg[] = $file;
+					}
+				  }
+				}
+				$count_server_lg_raw = count($server_images_lg);
+								
+				// Next load all the products images into an array
+				$server_images_md = array();
+                $dir = opendir ($root_products_dir);
+                while (false !== ($file = readdir($dir))) {
+                  if ( ($file != '.') && ($file != '..') ) {
+					if (strripos($file, '.') > 0) { // checks it is a file not a dir
+				      $server_images_md[] = $file;
+					}
+				  }
+				}
+				$count_server_md_raw = count($server_images_md);
+				
+				// Next load all the thumbnail images into an array
+				$server_images_sm = array();
+                $dir = opendir ($root_thumbs_dir);
+                while (false !== ($file = readdir($dir))) {
+                  if ( ($file != '.') && ($file != '..') ) {
+					if (strripos($file, '.') > 0) { // checks it is a file not a dir
+					  $server_images_sm[] = $file;
+					}
+				  }
+				}
+				$count_server_sm_raw = count($server_images_sm);
+								
+				//Now remove any large images that have the mopics extension
+                sort($server_images_lg);
+                for ($i = 0; $i < count($server_images_lg); ++$i) { 
+                  for ($j = 0; $j < 9; ++$j) { 
+	                if (strpos(strtolower($server_images_lg[$i]),strtolower('_' . $j))) {
+		              unset($server_images_lg[$i]);
+	                }
+	              }
+                }
+				$count_server_lg = count($server_images_lg);
+				$count_mopics_lg = $count_server_lg_raw - $count_server_lg;
+				
+				//Now remove any medium images that have the mopics extension
+                sort($server_images_md);
+                for ($i = 0; $i < count($server_images_md); ++$i) { 
+                  for ($j = 0; $j < 9; ++$j) { 
+	                if (strpos(strtolower($server_images_md[$i]),strtolower('_' . $j))) {
+		              unset($server_images_md[$i]);
+	                }
+	              }
+                }
+				$count_server_md = count($server_images_md);
+				$count_mopics_md = $count_server_md_raw - $count_server_md;
+				
+				//Now remove any small images that have the mopics extension
+                sort($server_images_sm);
+                for ($i = 0; $i < count($server_images_sm); ++$i) { 
+                  for ($j = 0; $j < 9; ++$j) { 
+	                if (strpos(strtolower($server_images_sm[$i]),strtolower('_' . $j))) {
+		              unset($server_images_sm[$i]);
+	                }
+	              }
+                }
+				$count_server_sm = count($server_images_sm);
+				$count_mopics_sm = $count_server_sm_raw - $count_server_sm;
+								
+				//Now find the large ones that don't match and we should have our orphan images
+				$orphans_lg = array();				
+				$orphans_lg = array_diff($server_images_lg, $database_image_array);
+				$count_orphans_lg = count($orphans_lg);
+												
+                if ($count_orphans_lg > 0) { 
+                  for ($i = 0; $i < $count_server_lg_raw + $count_orphans_lg; ++$i) {
+                    if ($orphans_lg[$i]) {
+					?>	
+                      <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+                        <td class="dataTableContent"><?php echo $orphans_lg[$i]; ?></td>
+                        <td class="dataTableContent"><?php echo DYNAMIC_MOPICS_BIGIMAGES_DIR; ?></td>
+                      </tr>
+                    <?php
+                    } // end if
+				  } // end for
+				} // end if
+                
+                //Now find the medium ones that don't match and we should have our orphan images
+				$orphans_md = array();				
+				$orphans_md = array_diff($server_images_md, $database_image_array);
+				$count_orphans_md = count($orphans_md);
+												
+                if ($count_orphans_md > 0) { 
+                  for ($i = 0; $i < $count_server_md_raw + $count_orphans_md; ++$i) {
+                    if ($orphans_md[$i]) {
+					?>	
+                      <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+                        <td class="dataTableContent"><?php echo $orphans_md[$i]; ?></td>
+                        <td class="dataTableContent"><?php echo DYNAMIC_MOPICS_PRODUCTS_DIR; ?></td>
+                      </tr>
+                    <?php
+                    } // end if
+				  } // end for
+				} // end if 
+                  
+                //Now find the small ones that don't match and we should have our orphan images
+				$orphans_sm = array();				
+				$orphans_sm = array_diff($server_images_sm, $database_image_array);
+				$count_orphans_sm = count($orphans_sm);
+												
+                if ($count_orphans_sm > 0) { 
+                  for ($i = 0; $i < $count_server_sm_raw + $count_orphans_sm; ++$i) {
+                    if ($orphans_sm[$i]) {
+					?>	
+                      <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+                        <td class="dataTableContent"><?php echo $orphans_sm[$i]; ?></td>
+                        <td class="dataTableContent"><?php echo DYNAMIC_MOPICS_THUMBS_DIR; ?></td>
+                      </tr>
+                    <?php
+                    } // end if
+				  } // end for
+				} // end if
+				?>
+                
+                </table>
+                                
+                <?php
+				$total_orphans = $count_orphans_lg + $count_orphans_md + $count_orphans_sm;
+                if ($total_orphans == 0) {
+				?>
+				<table border="0" width="100%" cellspacing="5" cellpadding="2">  
+                  <tr>
+                   <td class="messageStackSuccess"><?php echo 'You have <b>' . ($count_server_lg_raw + $count_server_md_raw + $count_server_sm_raw) . ' images</b> on your server including <b>' . ($count_mopics_lg + $count_mopics_md + $count_mopics_sm) . ' dynamic mopics image' . ($count_mopics_lg + $count_mopics_md + $count_mopics_sm == 1 ? '' : 's') . '</b> (eg. _1, _2, etc.) and they are all accounted for.</b>'; ?></td>
+                 </tr>
+                </table>
+                <?php	
+				}// end if
+                ?>
+				
+                <?php
+				  break;
+				?>
+                <!-- END OF ORPHANS -->
+                <!-- START OF SUMMARY -->
+                <?php
+                    default:
+
+                    //Analyse image directories
+                    $jpg_count_lg = $jpg_count_md = $jpg_count_sm = 0;
+                    $png_count_lg = $png_count_md = $png_count_sm = 0;
+                    $gif_count_lg = $gif_count_md = $gif_count_sm = 0;
+                    $unknown_lg = $unknown_md = $unknown_sm =0;
+					
+					//Large Images
+                    $dir = opendir ($root_images_dir);
+                    while (false !== ($file = readdir($dir))) {
+                      if ( ($file != '.') && ($file != '..') ) { 
+                        if (strpos($file, '.jpg',1)) {
+                          $jpg_count_lg++;
+                        } elseif (strpos($file, '.png',1)) {
+                          $png_count_lg++;
+                        } elseif (strpos($file, '.gif',1)) {
+                          $gif_count_lg++;
+                        } else {
+                          $unknown_lg++;
+                        } // end if
+                      } // end if
+                    } // end while
+
+                    //Medium Images
+                    $dir = opendir ($root_products_dir);
+                    while (false !== ($file = readdir($dir))) {
+                      if ( ($file != '.') && ($file != '..') ) { 
+                        if (strpos($file, '.jpg',1)) {
+                          $jpg_count_md++;
+                        } elseif (strpos($file, '.png',1)) {
+                          $png_count_md++;
+                        } elseif (strpos($file, '.gif',1)) {
+                          $gif_count_md++;
+                        } else {
+                          $unknown_md++;
+                        } // end if
+                      } // end if
+                    } // end while
+
+                    //Small Images
+                    $dir = opendir ($root_thumbs_dir);
+                    while (false !== ($file = readdir($dir))) {
+                      if ( ($file != '.') && ($file != '..') ) { 
+                        if (strpos($file, '.jpg',1)) {
+                          $jpg_count_sm++;
+                        } elseif (strpos($file, '.png',1)) {
+                          $png_count_sm++;
+                        } elseif (strpos($file, '.gif',1)) {
+                          $gif_count_sm++;
+                        } else {
+                          $unknown_sm++;
+                        } // end if
+                      } // end if
+                    } // end while
+
+                ?>
+                <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                  <tr class="dataTableHeadingRow">
+                    <td class="dataTableHeadingContent" width="20%"><b>Image Size</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>Width</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>Height</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>JPG</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>PNG</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>GIF</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>Unknown</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>Total</b></td>
+                  </tr>
+                  <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+                    <td class="dataTableContent"><b>Small Image</b></td><td class="dataTableContent" align="center"><?php echo SMALL_IMAGE_WIDTH; ?></td><td class="dataTableContent" align="center"><?php echo SMALL_IMAGE_HEIGHT; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_sm; ?></td><td class="dataTableContent" align="center"><?php echo $png_count_sm; ?></td><td class="dataTableContent" align="center"><?php echo $gif_count_sm; ?></td><td class="dataTableContent" align="center"><?php echo $unknown_sm; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_sm + $png_count_sm + $gif_count_sm; ?></td>
+                  </tr>
+                  <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+                    <td class="dataTableContent"><b>Medium Image</b></td><td class="dataTableContent" align="center"><?php echo PRODUCT_IMAGE_WIDTH; ?></td><td class="dataTableContent" align="center"><?php echo PRODUCT_IMAGE_HEIGHT; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_md; ?></td><td class="dataTableContent" align="center"><?php echo $png_count_md; ?></td><td class="dataTableContent" align="center"><?php echo $gif_count_md; ?></td><td class="dataTableContent" align="center"><?php echo $unknown_md; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_md + $png_count_md + $gif_count_md; ?></td>
+                  </tr>
+                  <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+                    <td class="dataTableContent"><b>Large Image</b></td><td class="dataTableContent" align="center"><?php echo POPUP_IMAGE_WIDTH; ?></td><td class="dataTableContent" align="center"><?php echo POPUP_IMAGE_HEIGHT; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_lg; ?></td><td class="dataTableContent" align="center"><?php echo $png_count_lg; ?></td><td class="dataTableContent" align="center"><?php echo $gif_count_lg; ?></td><td class="dataTableContent" align="center"><?php echo $unknown_lg; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_lg + $png_count_lg + $gif_count_lg; ?></td>
+                  </tr>
+                  <tr class="dataTableHeadingRow">
+                    <td class="dataTableHeadingContent"><b>Total</b></td><td class="dataTableHeadingContent" align="center">&nbsp;</td><td class="dataTableHeadingContent" align="center">&nbsp;</td><td class="dataTableHeadingContent" align="center"><?php echo $jpg_count_sm + $jpg_count_md + $jpg_count_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $png_count_sm + $png_count_md + $png_count_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $gif_count_sm + $gif_count_md + $gif_count_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $unknown_sm + $unknown_md + $unknown_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $jpg_count_sm + $jpg_count_md + $jpg_count_lg + $png_count_sm + $png_count_md + $png_count_lg + $gif_count_sm + $gif_count_md + $gif_count_lg; ?></td>
+                  </tr>                        
+                </table>
+                <?php
+				    break;
+				?>
+                <!-- END OF SUMMARY -->
+                <!-- END OF LHS CONTENT -->
+                <?php } // end case ?>
+              <td valign="top" width="25%">
+                <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td>
+                    <?php
+                    $heading = array();
+                    $contents = array();
+					
+                    switch ($action) {
+						case 'browse':
+						  $image_string = '';
+						  $missing_big_images = 0;
+							
+						  if (is_object($iInfo)) {  
+                            $image_file_size_sm = filesize($root_thumbs_dir . $iInfo->products_image);
+							$image_file_size_md = filesize($root_products_dir . $iInfo->products_image);
+							$image_file_size_lg = filesize($root_images_dir . $iInfo->products_image);
+							
+							list($width_sm, $height_sm, $type_sm, $attr_sm) = getimagesize($root_thumbs_dir . $iInfo->products_image);
+							list($width_md, $height_md, $type_sm, $attr_md) = getimagesize($root_products_dir . $iInfo->products_image);
+							list($width_lg, $height_lg, $type_sm, $attr_lg) = getimagesize($root_images_dir . $iInfo->products_image);
+							 
+						    $heading[] = array('text' => '<b>' . $iInfo->products_name . '</b>');
+							$contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_summary.gif', IMAGE_SUMMARY) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=browse') . '">' . tep_image_button('button_browse.gif', IMAGE_BROWSE) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=missing') . '">' . tep_image_button('button_missing.gif', IMAGE_MISSING) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=orphans') . '">' . tep_image_button('button_orphans.gif', IMAGE_ORPHANS) . '</a><hr>');
+							$contents[] = array('text' => $regenerate_html);
+							if (file_exists($root_thumbs_dir . $iInfo->products_image)) {
+							  $contents[] = array('text' => '<center>' . tep_image(HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $iInfo->products_image, $iInfo->products_name) . '</center><br>');
+							} else {
+							  $contents[] = array('text' => '<br><center>' . tep_image(HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . 'icons/missing_image.png', 'Missing Image') . '</center><br>');
+							}
+                            $contents[] = array('text' => '<center><table cellpadding="2" cellspacing="2" class="smallText"><tr><td colspan="3"><b>Main Image: </b>' . $iInfo->products_image . '</td></tr><tr><td>&nbsp;</td><td><b>Width</b></td><td><b>Height</b></td><td><b>File Size</b></td></tr><tr><td>Small Image</td><td align="center">' . $width_sm . '</td><td align="center">' . $height_sm . '</td><td align="center">' . format_size($image_file_size_sm) . '</td></tr><tr><td>Product Image</td><td align="center">' . $width_md . '</td><td align="center">' . $height_md . '</td><td align="center">' . format_size($image_file_size_md) . '</td></tr><tr><td>Big Image</td><td align="center">' . $width_lg . '</td><td align="center">' . $height_lg . '</td><td align="center">' . format_size($image_file_size_lg) . '</td></tr></table></center><br>');
+							if (file_exists($root_images_dir . $iInfo->products_image)) { 
+						      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, tep_get_all_get_params(array('image'))) . 'image=' . $mopics_filename . '">' . tep_image_button('button_regenerate.gif', IMAGE_REGENERATE) . '</a><br><hr>');
+							} else {
+							  $contents[] = array('align' => 'center', 'text' => 'You are missing the image file from <b>' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b> without which you can not regenerate your images.<br><hr>');
+							      $missing_big_images++;
+							}
+							
+							$image_string .= $iInfo->products_image;
+							
+							// Check for dynamic mopics versions of the image - if found show them as well
+							$found_mopic = 0;
+							for ($i = 1; $i < 9; ++$i) {
+							  $mopics_filename_no_ext = substr_replace($iInfo->products_image,  "", -4);
+							  $mopics_filename_ext = substr($iInfo->products_image, -4);
+							  $mopics_filename = $mopics_filename_no_ext . '_' . $i . $mopics_filename_ext;	
+							  
+							  
+							  if (file_exists($root_images_dir . $mopics_filename)) {
+								
+								$found_mopic++;							
+								
+							    $image_file_size_sm = filesize($root_thumbs_dir . $mopics_filename);
+							    $image_file_size_md = filesize($root_products_dir . $mopics_filename);
+							    $image_file_size_lg = filesize($root_images_dir . $mopics_filename);
+							
+							    list($width_sm, $height_sm, $type_sm, $attr_sm) = getimagesize($root_thumbs_dir . $mopics_filename);
+							    list($width_md, $height_md, $type_sm, $attr_md) = getimagesize($root_products_dir . $mopics_filename);
+							    list($width_lg, $height_lg, $type_sm, $attr_lg) = getimagesize($root_images_dir . $mopics_filename);
+								
+								if (file_exists($root_thumbs_dir . $mopics_filename)) {
+							      $contents[] = array('text' => '<center>' . tep_image(HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $mopics_filename, $mopics_filename) . '</center><br>');
+							    } else {
+							      $contents[] = array('text' => '<br><center>' . tep_image(HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . 'icons/missing_image.png', 'Missing Image') . '</center><br>');
+							    } // end if file_exists
+                                $contents[] = array('text' => '<center><table cellpadding="2" cellspacing="2" class="smallText"><tr><td colspan="3"><b>Mopics Image: </b>' . $mopics_filename . '</td></tr><tr><td>&nbsp;</td><td><b>Width</b></td><td><b>Height</b></td><td><b>File Size</b></td></tr><tr><td>Small Image</td><td align="center">' . $width_sm . '</td><td align="center">' . $height_sm . '</td><td align="center">' . format_size($image_file_size_sm) . '</td></tr><tr><td>Product Image</td><td align="center">' . $width_md . '</td><td align="center">' . $height_md . '</td><td align="center">' . format_size($image_file_size_md) . '</td></tr><tr><td>Big Image</td><td align="center">' . $width_lg . '</td><td align="center">' . $height_lg . '</td><td align="center">' . format_size($image_file_size_lg) . '</td></tr></table></center><br>');
+								
+								if (file_exists($root_images_dir . $mopics_filename)) { 
+								  $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, tep_get_all_get_params(array('image'))) . 'image=' . $mopics_filename . '">' . tep_image_button('button_regenerate.gif', IMAGE_REGENERATE) . '</a><br><hr>');
+								} else {
+								  $contents[] = array('align' => 'center', 'text' => 'You are missing the image file from <b>' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b> without which you can not regenerate your images.<br><hr>');
+							      $missing_big_images++;
+								}
+								$image_string .= ',' . $mopics_filename;
+								
+							  } // end if file_exists
+							} // end for $i	
+						  } // end if (is_object($iInfo))
+						  if ( ($found_mopic >= 1) && ($missing_big_images == 0) ) {
+						    $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, tep_get_all_get_params(array('image'))) . 'image=' . $image_string . '">' . tep_image_button('button_regenerate_all.gif', IMAGE_REGENERATE_ALL) . '</a><br><br>');
+						  }
+						  break;
+						case 'missing':
+						  $heading[] = array('text' => '<b>Missing Images</b>');
+					      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_summary.gif', IMAGE_SUMMARY) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=browse') . '">' . tep_image_button('button_browse.gif', IMAGE_BROWSE) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=missing') . '">' . tep_image_button('button_missing.gif', IMAGE_MISSING) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=orphans') . '">' . tep_image_button('button_orphans.gif', IMAGE_ORPHANS) . '</a>');
+						  $contents[] = array('text' => '<br>Out of <b>' . $image_count . '</b> products you have <b>' . (count($missing_images_lg) + count($missing_images_md) + count($missing_images_sm)) . '</b> missing image' . ($image_count == 1 ? '' : 's') . '.<br><br>');
+						  break;
+						case 'orphans':
+						  $heading[] = array('text' => '<b>Orphan Images</b>');
+					      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_summary.gif', IMAGE_SUMMARY) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=browse') . '">' . tep_image_button('button_browse.gif', IMAGE_BROWSE) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=missing') . '">' . tep_image_button('button_missing.gif', IMAGE_MISSING) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=orphans') . '">' . tep_image_button('button_orphans.gif', IMAGE_ORPHANS) . '</a><br><br>');
+						  $contents[] = array('text' => '<b>Please note that any files using the numerical (_1, _2, etc.) Dynamic Mopics structure have been excluded from this scan.</b><br><br>');
+						  break;
+						case 'regenerate_confirm':
+						  $heading[] = array('text' => '<b>Regenerate all server images - please confirm!</b>');
+						  $contents[] = array('text' => TEXT_CONFIRM_REGENERATE_ALL);
+						  $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=regenerate_all') . '">' . tep_image_button('button_confirm.gif', IMAGE_CONFIRM) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+						  break;
+						default:
+						  $heading[] = array('text' => '<b>Summary</b>');
+					      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_summary.gif', IMAGE_SUMMARY) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=browse') . '">' . tep_image_button('button_browse.gif', IMAGE_BROWSE) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=missing') . '">' . tep_image_button('button_missing.gif', IMAGE_MISSING) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=orphans') . '">' . tep_image_button('button_orphans.gif', IMAGE_ORPHANS) . '</a>');
+						  $contents[] = array('align' => 'center', 'text' => '<br><br><a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=regenerate_confirm') . '">' . tep_image_button('button_regenerate_everything.gif', IMAGE_REGENERATE_EVERYTHING) . '</a><br><br>');
+						  break;
+					}
+		
+		            $box = new box;
+                    echo $box->infoBox($heading, $contents);
+	                ?>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>        
+    </table></td>  
+<!-- body_text_eof //-->
+  </tr>
+</table>
+<!-- body_eof //-->
+
+<!-- footer //-->
+<?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
+<!-- footer_eof //-->
+<br>
+</body>
+</html>
+
+<?php
+function listDirectory($path) {
+  $handle = @opendir($path);
+  while (false !== ($file = readdir($handle))) {
+  if ($file == '.' || $file == '..') continue;
+	if ( is_dir("$path$file")) {  // Directory
+      $source_bigimage = listDirectory("$path$file");
+    } else {  // File
+      $source_bigimage = "$path/$file";
+    }
+	if ($source_bigimage) {
+    		require('includes/functions/image_generator.php'); 
+	}       	
+  }
+    closedir($handle);
+}
+
+
+
+?>

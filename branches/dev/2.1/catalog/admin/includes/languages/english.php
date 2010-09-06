@@ -267,6 +267,7 @@ define('BOX_TOOLS_PACKAGING', 'Packaging');
 define('BOX_TOOLS_UPS_BOXES_USED', 'UPS boxes used');
 define('BOX_TOOLS_QUICK_LINKS', 'Quick Links');
 define('BOX_TOOLS_SLIDESHOW', 'Slideshow Images');
+define('BOX_TOOLS_REGEN', 'Product Images');
 
 // localizaion box text in includes/boxes/localization.php
 define('BOX_HEADING_LOCALIZATION', 'Localization');
@@ -469,6 +470,7 @@ define('TEXT_DISPLAY_NUMBER_OF_SHIPMENTS', 'Displaying <b>%d</b> to <b>%d</b> (o
 define('TEXT_DISPLAY_NUMBER_OF_QUICK_LINKS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> quick links)');
 define('TEXT_DISPLAY_NUMBER_OF_PM_CONFIGURATION', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> modules)');
 define('TEXT_DISPLAY_NUMBER_OF_SLIDESHOW', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> slides)');
+define('TEXT_DISPLAY_NUMBER_OF_IMAGES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> images)');
 
 //BOF: MOD - Catagories Discriptions
 define('TEXT_EDIT_CATEGORIES_HEADING_TITLE', 'Category Heading Title:');

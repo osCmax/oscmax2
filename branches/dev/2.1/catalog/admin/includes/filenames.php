@@ -189,4 +189,6 @@ define('FILENAME_SLIDESHOW', 'slideshow.php');
 define('FILENAME_EXTRA_FIELDS', 'extra_fields.php');
 define('FILENAME_EXTRA_VALUES', 'extra_values.php');
 //EOF: Extra Product Fields
+
+define('FILENAME_IMAGES_REGEN', 'images_regen.php');
 ?>

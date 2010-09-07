@@ -430,6 +430,13 @@ define('IMAGE_SHOW_PRODUCTS', 'Show Products');
 define('IMAGE_PICK_COLOR', 'Pick Color');
 // EOF Open Featured Sets
 define('IMAGE_SETTINGS', 'Settings');
+define('IMAGE_SUMMARY', 'Summary');
+define('IMAGE_BROWSE', 'Browse');
+define('IMAGE_MISSING', 'Missing');
+define('IMAGE_ORPHANS', 'Orphans');
+define('IMAGE_REGENERATE_ALL', 'Regenerate all images for this product');
+define('IMAGE_REGENERATE_EVERYTHING', 'Regenerate all your images');
+
 
 define('ICON_CROSS', 'False');
 define('ICON_CURRENT_FOLDER', 'Current Folder');

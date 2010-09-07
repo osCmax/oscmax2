@@ -59,7 +59,7 @@ function format_size($size) {
             </tr>
             <?php if ($action == 'regenerate_all') { ?>
 		    <tr>
-              <td class="messageStackSuccess" colspan="2">All images that could be regenerated from <b><?php echo DYNAMIC_MOPICS_BIGIMAGES_DIR; ?></b> have been regenerated successfully</td>
+              <td class="messageStackSuccess" colspan="2"><?php echo TEXT_SUCCESS_1; ?><b><?php echo DYNAMIC_MOPICS_BIGIMAGES_DIR; ?></b><?php echo TEXT_SUCCESS_2; ?></td>
 			</tr>
 			<?php } ?>
           </table>
@@ -86,7 +86,7 @@ function format_size($size) {
 		                  require('includes/functions/image_generator.php');
 						} // end for
 
-					  $regenerate_html = '<table><tr><td class="messageStackSuccess">Images for <b>' . $multi_image['0'] . '</b> successfully regenerated</td></tr></table>';
+					  $regenerate_html = '<table><tr><td class="messageStackSuccess">' . TEXT_IMAGES_FOR . '<b>' . $multi_image['0'] . '</b>' . TEXT_SUC_REGEN . '</td></tr></table>';
                     } // end if
 
 				?>
@@ -296,7 +296,7 @@ function format_size($size) {
                       <td class="dataTableHeadingContent" align="center" width="30"><?php echo TABLE_HEADING_PRODUCT_ID; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCT_NAME; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MISSING_PRODUCT_IMAGE; ?></td>
-                      <td class="dataTableHeadingContent">Image Folder</td>
+                      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_IMAGE_FOLDER; ?></td>
                     </tr>
                   
                   <?php
@@ -376,12 +376,12 @@ function format_size($size) {
                 
                 <table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr class="dataTableHeadingRow">
-                    <td class="dataTableHeadingContent">Missing Images</td>
+                    <td class="dataTableHeadingContent"><?php echo TEXT_MISSING_IMAGES; ?></td>
                   </tr>
                 </table>
                 <table border="0" width="100%" cellspacing="5" cellpadding="2">  
                   <tr>
-                   <td class="messageStackSuccess">You have <b><?php echo $image_count . ' product image' . ($image_count == 1 ? '' : 's'); ?></b> in your store database and they are all accounted for.</b></td>
+                   <td class="messageStackSuccess"><?php echo TEXT_YOU_HAVE; ?><b><?php echo $image_count . ' product image' . ($image_count == 1 ? '' : 's'); ?></b><?php echo TEXT_ACCOUNT_FOR; ?></b></td>
                  </tr>
                 </table>
                 
@@ -397,8 +397,8 @@ function format_size($size) {
 			    ?>
                 <table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr class="dataTableHeadingRow">
-                    <td class="dataTableHeadingContent">Orphan Images</td>
-                    <td class="dataTableHeadingContent">Folder</td>
+                    <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_ORPHAN_IMAGES; ?></td>
+                    <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_FOLDER; ?></td>
                   </tr>
                 <?php
 				//Start by creating an array of any images that are being used in the database
@@ -543,7 +543,7 @@ function format_size($size) {
 				?>
 				<table border="0" width="100%" cellspacing="5" cellpadding="2">  
                   <tr>
-                   <td class="messageStackSuccess"><?php echo 'You have <b>' . ($count_server_lg_raw + $count_server_md_raw + $count_server_sm_raw) . ' images</b> on your server including <b>' . ($count_mopics_lg + $count_mopics_md + $count_mopics_sm) . ' dynamic mopics image' . ($count_mopics_lg + $count_mopics_md + $count_mopics_sm == 1 ? '' : 's') . '</b> (eg. _1, _2, etc.) and they are all accounted for.</b>'; ?></td>
+                   <td class="messageStackSuccess"><?php echo TEXT_YOU_HAVE . '<b>' . ($count_server_lg_raw + $count_server_md_raw + $count_server_sm_raw) . '</b>' . TEXT_IMAGES_ON_SERVER . '<b>' . ($count_mopics_lg + $count_mopics_md + $count_mopics_sm) . TEXT_DYNAMIC . ($count_mopics_lg + $count_mopics_md + $count_mopics_sm == 1 ? '' : 's') . '</b>' . TEXT_ACCOUNTED_FOR . '</b>'; ?></td>
                  </tr>
                 </table>
                 <?php	
@@ -615,19 +615,19 @@ function format_size($size) {
                 ?>
                 <table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr class="dataTableHeadingRow">
-                    <td class="dataTableHeadingContent" width="20%"><b>Image Size</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>Width</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>Height</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>JPG</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>PNG</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>GIF</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>Unknown</b></td><td class="dataTableHeadingContent" width="10%" align="center"><b>Total</b></td>
+                    <td class="dataTableHeadingContent" width="20%"><b><?php echo TABLE_HEADING_IMAGE_SIZE; ?></b></td><td class="dataTableHeadingContent" width="10%" align="center"><b><?php echo TABLE_HEADING_WIDTH; ?></b></td><td class="dataTableHeadingContent" width="10%" align="center"><b><?php echo TABLE_HEADING_HEIGHT; ?></b></td><td class="dataTableHeadingContent" width="10%" align="center"><b><?php echo TABLE_HEADING_JPG; ?></b></td><td class="dataTableHeadingContent" width="10%" align="center"><b><?php echo TABLE_HEADING_PNG; ?></b></td><td class="dataTableHeadingContent" width="10%" align="center"><b><?php echo TABLE_HEADING_GIF; ?></b></td><td class="dataTableHeadingContent" width="10%" align="center"><b><?php echo TABLE_HEADING_UNKNOWN; ?></b></td><td class="dataTableHeadingContent" width="10%" align="center"><b><?php echo TABLE_HEADING_TOTAL; ?></b></td>
                   </tr>
                   <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
-                    <td class="dataTableContent"><b>Small Image</b></td><td class="dataTableContent" align="center"><?php echo SMALL_IMAGE_WIDTH; ?></td><td class="dataTableContent" align="center"><?php echo SMALL_IMAGE_HEIGHT; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_sm; ?></td><td class="dataTableContent" align="center"><?php echo $png_count_sm; ?></td><td class="dataTableContent" align="center"><?php echo $gif_count_sm; ?></td><td class="dataTableContent" align="center"><?php echo $unknown_sm; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_sm + $png_count_sm + $gif_count_sm; ?></td>
+                    <td class="dataTableContent"><b><?php echo TEXT_SMALL_IMAGE; ?></b></td><td class="dataTableContent" align="center"><?php echo SMALL_IMAGE_WIDTH; ?></td><td class="dataTableContent" align="center"><?php echo SMALL_IMAGE_HEIGHT; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_sm; ?></td><td class="dataTableContent" align="center"><?php echo $png_count_sm; ?></td><td class="dataTableContent" align="center"><?php echo $gif_count_sm; ?></td><td class="dataTableContent" align="center"><?php echo $unknown_sm; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_sm + $png_count_sm + $gif_count_sm; ?></td>
                   </tr>
                   <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
-                    <td class="dataTableContent"><b>Medium Image</b></td><td class="dataTableContent" align="center"><?php echo PRODUCT_IMAGE_WIDTH; ?></td><td class="dataTableContent" align="center"><?php echo PRODUCT_IMAGE_HEIGHT; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_md; ?></td><td class="dataTableContent" align="center"><?php echo $png_count_md; ?></td><td class="dataTableContent" align="center"><?php echo $gif_count_md; ?></td><td class="dataTableContent" align="center"><?php echo $unknown_md; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_md + $png_count_md + $gif_count_md; ?></td>
+                    <td class="dataTableContent"><b><?php echo TEXT_MEDIUM_IMAGE; ?></b></td><td class="dataTableContent" align="center"><?php echo PRODUCT_IMAGE_WIDTH; ?></td><td class="dataTableContent" align="center"><?php echo PRODUCT_IMAGE_HEIGHT; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_md; ?></td><td class="dataTableContent" align="center"><?php echo $png_count_md; ?></td><td class="dataTableContent" align="center"><?php echo $gif_count_md; ?></td><td class="dataTableContent" align="center"><?php echo $unknown_md; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_md + $png_count_md + $gif_count_md; ?></td>
                   </tr>
                   <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
-                    <td class="dataTableContent"><b>Large Image</b></td><td class="dataTableContent" align="center"><?php echo POPUP_IMAGE_WIDTH; ?></td><td class="dataTableContent" align="center"><?php echo POPUP_IMAGE_HEIGHT; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_lg; ?></td><td class="dataTableContent" align="center"><?php echo $png_count_lg; ?></td><td class="dataTableContent" align="center"><?php echo $gif_count_lg; ?></td><td class="dataTableContent" align="center"><?php echo $unknown_lg; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_lg + $png_count_lg + $gif_count_lg; ?></td>
+                    <td class="dataTableContent"><b><?php echo TEXT_LARGE_IMAGE; ?></b></td><td class="dataTableContent" align="center"><?php echo POPUP_IMAGE_WIDTH; ?></td><td class="dataTableContent" align="center"><?php echo POPUP_IMAGE_HEIGHT; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_lg; ?></td><td class="dataTableContent" align="center"><?php echo $png_count_lg; ?></td><td class="dataTableContent" align="center"><?php echo $gif_count_lg; ?></td><td class="dataTableContent" align="center"><?php echo $unknown_lg; ?></td><td class="dataTableContent" align="center"><?php echo $jpg_count_lg + $png_count_lg + $gif_count_lg; ?></td>
                   </tr>
                   <tr class="dataTableHeadingRow">
-                    <td class="dataTableHeadingContent"><b>Total</b></td><td class="dataTableHeadingContent" align="center">&nbsp;</td><td class="dataTableHeadingContent" align="center">&nbsp;</td><td class="dataTableHeadingContent" align="center"><?php echo $jpg_count_sm + $jpg_count_md + $jpg_count_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $png_count_sm + $png_count_md + $png_count_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $gif_count_sm + $gif_count_md + $gif_count_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $unknown_sm + $unknown_md + $unknown_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $jpg_count_sm + $jpg_count_md + $jpg_count_lg + $png_count_sm + $png_count_md + $png_count_lg + $gif_count_sm + $gif_count_md + $gif_count_lg; ?></td>
+                    <td class="dataTableHeadingContent"><b><?php echo TABLE_HEADING_TOTAL; ?></b></td><td class="dataTableHeadingContent" align="center">&nbsp;</td><td class="dataTableHeadingContent" align="center">&nbsp;</td><td class="dataTableHeadingContent" align="center"><?php echo $jpg_count_sm + $jpg_count_md + $jpg_count_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $png_count_sm + $png_count_md + $png_count_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $gif_count_sm + $gif_count_md + $gif_count_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $unknown_sm + $unknown_md + $unknown_lg; ?></td><td class="dataTableHeadingContent" align="center"><?php echo $jpg_count_sm + $jpg_count_md + $jpg_count_lg + $png_count_sm + $png_count_md + $png_count_lg + $gif_count_sm + $gif_count_md + $gif_count_lg; ?></td>
                   </tr>                        
                 </table>
                 <?php
@@ -664,13 +664,13 @@ function format_size($size) {
 							if (file_exists($root_thumbs_dir . $iInfo->products_image)) {
 							  $contents[] = array('text' => '<center>' . tep_image(HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $iInfo->products_image, $iInfo->products_name) . '</center><br>');
 							} else {
-							  $contents[] = array('text' => '<br><center>' . tep_image(HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . 'icons/missing_image.png', 'Missing Image') . '</center><br>');
+							  $contents[] = array('text' => '<br><center>' . tep_image(HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . 'icons/missing_image.png', IMAGE_MISSING_IMAGE) . '</center><br>');
 							}
-                            $contents[] = array('text' => '<center><table cellpadding="2" cellspacing="2" class="smallText"><tr><td colspan="3"><b>Main Image: </b>' . $iInfo->products_image . '</td></tr><tr><td>&nbsp;</td><td><b>Width</b></td><td><b>Height</b></td><td><b>File Size</b></td></tr><tr><td>Small Image</td><td align="center">' . $width_sm . '</td><td align="center">' . $height_sm . '</td><td align="center">' . format_size($image_file_size_sm) . '</td></tr><tr><td>Product Image</td><td align="center">' . $width_md . '</td><td align="center">' . $height_md . '</td><td align="center">' . format_size($image_file_size_md) . '</td></tr><tr><td>Big Image</td><td align="center">' . $width_lg . '</td><td align="center">' . $height_lg . '</td><td align="center">' . format_size($image_file_size_lg) . '</td></tr></table></center><br>');
+                            $contents[] = array('text' => '<center><table cellpadding="2" cellspacing="2" class="smallText"><tr><td colspan="3"><b>' . TEXT_MAIN_IMAGE . '</b>' . $iInfo->products_image . '</td></tr><tr><td>&nbsp;</td><td><b>' . TABLE_HEADING_WIDTH . '</b></td><td><b> ' . TABLE_HEADING_HEIGHT . '</b></td><td><b>' . TEXT_FILE_SIZE . '</b></td></tr><tr><td>' . TEXT_SMALL_IMAGE . '</td><td align="center">' . $width_sm . '</td><td align="center">' . $height_sm . '</td><td align="center">' . format_size($image_file_size_sm) . '</td></tr><tr><td>' . TEXT_PRODUCT_IMAGE . '</td><td align="center">' . $width_md . '</td><td align="center">' . $height_md . '</td><td align="center">' . format_size($image_file_size_md) . '</td></tr><tr><td>' . TEXT_LARGE_IMAGE . '</td><td align="center">' . $width_lg . '</td><td align="center">' . $height_lg . '</td><td align="center">' . format_size($image_file_size_lg) . '</td></tr></table></center><br>');
 							if (file_exists($root_images_dir . $iInfo->products_image)) { 
-						      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, tep_get_all_get_params(array('image'))) . 'image=' . $mopics_filename . '">' . tep_image_button('button_regenerate.gif', IMAGE_REGENERATE) . '</a><br><hr>');
+						      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, tep_get_all_get_params(array('image'))) . 'image=' . $iInfo->products_image . '">' . tep_image_button('button_regenerate.gif', IMAGE_REGENERATE) . '</a><br><hr>');
 							} else {
-							  $contents[] = array('align' => 'center', 'text' => 'You are missing the image file from <b>' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b> without which you can not regenerate your images.<br><hr>');
+							  $contents[] = array('align' => 'center', 'text' => TEXT_MISSING_FROM . '<b>' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b>' . TEXT_NO_GENERATE . '<br><hr>');
 							      $missing_big_images++;
 							}
 							
@@ -701,12 +701,12 @@ function format_size($size) {
 							    } else {
 							      $contents[] = array('text' => '<br><center>' . tep_image(HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . 'icons/missing_image.png', 'Missing Image') . '</center><br>');
 							    } // end if file_exists
-                                $contents[] = array('text' => '<center><table cellpadding="2" cellspacing="2" class="smallText"><tr><td colspan="3"><b>Mopics Image: </b>' . $mopics_filename . '</td></tr><tr><td>&nbsp;</td><td><b>Width</b></td><td><b>Height</b></td><td><b>File Size</b></td></tr><tr><td>Small Image</td><td align="center">' . $width_sm . '</td><td align="center">' . $height_sm . '</td><td align="center">' . format_size($image_file_size_sm) . '</td></tr><tr><td>Product Image</td><td align="center">' . $width_md . '</td><td align="center">' . $height_md . '</td><td align="center">' . format_size($image_file_size_md) . '</td></tr><tr><td>Big Image</td><td align="center">' . $width_lg . '</td><td align="center">' . $height_lg . '</td><td align="center">' . format_size($image_file_size_lg) . '</td></tr></table></center><br>');
+                                $contents[] = array('text' => '<center><table cellpadding="2" cellspacing="2" class="smallText"><tr><td colspan="3"><b>' . TEXT_MOPICS_IMAGE . '</b>' . $mopics_filename . '</td></tr><tr><td>&nbsp;</td><td><b>' . TABLE_HEADING_WIDTH . '</b></td><td><b>' . TABLE_HEADING_HEIGHT . '</b></td><td><b>' . TEXT_FILE_SIZE . '</b></td></tr><tr><td>' . TEXT_SMALL_IMAGE . '</td><td align="center">' . $width_sm . '</td><td align="center">' . $height_sm . '</td><td align="center">' . format_size($image_file_size_sm) . '</td></tr><tr><td>' . TEXT_PRODUCT_IMAGE . '</td><td align="center">' . $width_md . '</td><td align="center">' . $height_md . '</td><td align="center">' . format_size($image_file_size_md) . '</td></tr><tr><td>' . TEXT_LARGE_IMAGE . '</td><td align="center">' . $width_lg . '</td><td align="center">' . $height_lg . '</td><td align="center">' . format_size($image_file_size_lg) . '</td></tr></table></center><br>');
 								
 								if (file_exists($root_images_dir . $mopics_filename)) { 
 								  $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, tep_get_all_get_params(array('image'))) . 'image=' . $mopics_filename . '">' . tep_image_button('button_regenerate.gif', IMAGE_REGENERATE) . '</a><br><hr>');
 								} else {
-								  $contents[] = array('align' => 'center', 'text' => 'You are missing the image file from <b>' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b> without which you can not regenerate your images.<br><hr>');
+								  $contents[] = array('align' => 'center', 'text' => TEXT_MISSING_FROM . '<b>' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b>' . TEXT_NO_GENERATE . '<br><hr>');
 							      $missing_big_images++;
 								}
 								$image_string .= ',' . $mopics_filename;
@@ -719,22 +719,22 @@ function format_size($size) {
 						  }
 						  break;
 						case 'missing':
-						  $heading[] = array('text' => '<b>Missing Images</b>');
+						  $heading[] = array('text' => '<b>' . MISSING_IMAGES . '</b>');
 					      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_summary.gif', IMAGE_SUMMARY) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=browse') . '">' . tep_image_button('button_browse.gif', IMAGE_BROWSE) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=missing') . '">' . tep_image_button('button_missing.gif', IMAGE_MISSING) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=orphans') . '">' . tep_image_button('button_orphans.gif', IMAGE_ORPHANS) . '</a>');
-						  $contents[] = array('text' => '<br>Out of <b>' . $image_count . '</b> products you have <b>' . (count($missing_images_lg) + count($missing_images_md) + count($missing_images_sm)) . '</b> missing image' . ($image_count == 1 ? '' : 's') . '.<br><br>');
+						  $contents[] = array('text' => '<br>' . TEXT_OUT_OF . '<b>' . $image_count . '</b>' . TEXT_PRODUCTS_YOU_HAVE . '<b>' . (count($missing_images_lg) + count($missing_images_md) + count($missing_images_sm)) . '</b>' . TEXT_MISSING_IMAGE . ($image_count == 1 ? '' : 's') . '.<br><br>');
 						  break;
 						case 'orphans':
-						  $heading[] = array('text' => '<b>Orphan Images</b>');
+						  $heading[] = array('text' => '<b>' . ORPHAN_IMAGES . '</b>');
 					      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_summary.gif', IMAGE_SUMMARY) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=browse') . '">' . tep_image_button('button_browse.gif', IMAGE_BROWSE) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=missing') . '">' . tep_image_button('button_missing.gif', IMAGE_MISSING) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=orphans') . '">' . tep_image_button('button_orphans.gif', IMAGE_ORPHANS) . '</a><br><br>');
-						  $contents[] = array('text' => '<b>Please note that any files using the numerical (_1, _2, etc.) Dynamic Mopics structure have been excluded from this scan.</b><br><br>');
+						  $contents[] = array('text' => '<b>' . TEXT_NO_MOPICS . '</b><br><br>');
 						  break;
 						case 'regenerate_confirm':
-						  $heading[] = array('text' => '<b>Regenerate all server images - please confirm!</b>');
+						  $heading[] = array('text' => '<b>' . TEXT_REGENERATE_ALL . '</b>');
 						  $contents[] = array('text' => TEXT_CONFIRM_REGENERATE_ALL);
 						  $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=regenerate_all') . '">' . tep_image_button('button_confirm.gif', IMAGE_CONFIRM) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
 						  break;
 						default:
-						  $heading[] = array('text' => '<b>Summary</b>');
+						  $heading[] = array('text' => '<b>' . SUMMARY . '</b>');
 					      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_summary.gif', IMAGE_SUMMARY) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=browse') . '">' . tep_image_button('button_browse.gif', IMAGE_BROWSE) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=missing') . '">' . tep_image_button('button_missing.gif', IMAGE_MISSING) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=orphans') . '">' . tep_image_button('button_orphans.gif', IMAGE_ORPHANS) . '</a>');
 						  $contents[] = array('align' => 'center', 'text' => '<br><br><a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=regenerate_confirm') . '">' . tep_image_button('button_regenerate_everything.gif', IMAGE_REGENERATE_EVERYTHING) . '</a><br><br>');
 						  break;
@@ -780,7 +780,4 @@ function listDirectory($path) {
   }
     closedir($handle);
 }
-
-
-
 ?>

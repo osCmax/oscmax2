@@ -46,7 +46,6 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_AFFILIATE_VALIDPRODUCTS', 'affiliate_validproducts.php');
   define('FILENAME_AFFILIATE_VALIDCATS', 'affiliate_validcats.php');
   define('FILENAME_CATALOG_AFFILIATE_PAYMENT_INFO','affiliate_payment.php');
-  define('FILENAME_CATALOG_PRODUCT_INFO', 'product_info.php');
 
   define('TABLE_AFFILIATE', 'affiliate_affiliate');
   define('TABLE_AFFILIATE_NEWS', 'affiliate_news');
@@ -64,7 +63,8 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_LANGUAGES . 'affiliate_' . $language . '.php');
 
 // If an order is deleted delete the sale too (optional)
-  if ($_GET['action'] == 'deleteconfirm' && basename($HTTP_SERVER_VARS['SCRIPT_FILENAME']) == FILENAME_ORDERS && AFFILIATE_DELETE_ORDERS == 'true') {
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
+  if ($action == 'deleteconfirm' && basename($HTTP_SERVER_VARS['SCRIPT_FILENAME']) == FILENAME_ORDERS && AFFILIATE_DELETE_ORDERS == 'true') {
     $affiliate_oID = tep_db_prepare_input($_GET['oID']);
     tep_db_query("delete from " . TABLE_AFFILIATE_SALES . " where affiliate_orders_id = '" . tep_db_input($affiliate_oID) . "' and affiliate_billing_status != 1");
   }

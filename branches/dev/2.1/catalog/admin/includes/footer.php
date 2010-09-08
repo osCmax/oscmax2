@@ -20,6 +20,15 @@ $Id: footer.php 3 2006-05-27 04:59:07Z user $
     <td align="left" class="footer">
       Copyright &copy; <?php echo date("Y"); ?> <?php echo STORE_NAME; ?>  | Powered by <a href="http://www.oscmax.com" target="_blank" class="footer"><?php echo PROJECT_VERSION; ?></a>    
     </td>
+    <td align="center" class="footer" width="10%">Security: 
+      <?php
+      if (getenv('HTTPS') == 'on') {
+        echo tep_image(DIR_WS_ICONS . 'locked.png', ICON_LOCKED, '', '', '');
+      } else {
+        echo tep_image(DIR_WS_ICONS . 'unlocked.png', ICON_UNLOCKED, '', '', '');
+      }
+      ?>
+    </td>
     <td align="right" class="footer">
       <a href="http://bugtrack.oscmax.com/" target="_blank" class="footer">Report Bugs</a> | <a href="http://www.oscmax.com/forums/" target="_blank" class="footer">Forum</a> | <a href="http://wiki.oscdox.com" target="_blank" class="footer">Wiki Help Documents</a>
     </td>

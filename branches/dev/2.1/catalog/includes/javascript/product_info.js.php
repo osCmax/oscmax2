@@ -142,6 +142,7 @@ $(document).ready(function(){
 	$('.imagezoomer').jqzoom({ zoomWidth: 330, zoomHeight: 300, xOffset: 10, yOffset: -8, position: "right", title: false, showPreload: true, showEffect: "fadein", hideEffect: "fadeout" });
 	
 	$(".scrollable").scrollable({ easing: "swing", circular: true });
+	$(".scrollable_ap").scrollable({ easing: "swing", circular: true });
 
 
 });

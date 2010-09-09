@@ -2133,6 +2133,7 @@ INSERT INTO configuration VALUES (2654, 'Do you want to use a scroller in Cross 
 INSERT INTO configuration VALUES (2655, 'Show Ask a Question button on Product Info pages?', 'SHOW_ASK_A_QUESTION', 'False', 'Do you want to display a button that links through to your contact form with pre-filled in information about a product the user was viewing?', 8, 21, NULL,now(),NULL,'tep_cfg_select_option(array(''True'', ''False''),');
 INSERT INTO configuration VALUES (2656, 'Display the queries used and Variables used?','DISPLAY_QUERIES','false','Display the queries and variables used to create a page.  <br><br><b>You must enable Display The Page Parse Time first.</b><br><br>This will be visible on your live store (<b>DO NOT use on live stores</b>)','10','6',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (2657, 'Default Tax Class', 'DEFAULT_PRODUCT_TAX_CLASS', '1', 'Sets the default tax class used for new products.', 1, 22, 'tep_get_tax_class_title', 'tep_cfg_pull_down_tax_classes(', now());
+INSERT INTO configuration VALUES (2658, 'Do you want to use a scroller in Also Purchased module on product info?', 'USE_AP_HORIZ_SCROLLER', 'false', 'Would you like to use a scroller on the Also Purchased infobox?', 201, 27, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
 
 
 #Open Feature Sets Start

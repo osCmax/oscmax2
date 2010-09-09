@@ -1,4 +1,4 @@
-.scrollable {
+.scrollable, .scrollable_ap {
 
 	/* required settings */
 	position:relative;
@@ -8,7 +8,7 @@
 	float:left;
 }
 
-.scrollable .items {
+.scrollable .items, .scrollable_ap .items_ap {
 	/* this cannot be too large */
 	width:20000em;
 	position:absolute;
@@ -16,14 +16,14 @@
 
 }
 
-.items div {
+.items div, .items_ap div {
 	float:left;
 	width:590px; /* must match the width of .scrollable */
 }
 
 
 /* prev, next, prevPage and nextPage buttons */
-a.browse {
+a.browse, a.browse_ap {
 	background:url(images/hori_large.png) no-repeat scroll 0 0 transparent;
 	display:block;
 	width:24px;
@@ -34,10 +34,10 @@ a.browse {
 	font-size:1px;
 	}
 
-a.right{background-position:0 -56px;clear:right;margin-right:0px;}
-a.right:hover{background-position:-24px -56px}
-a.right:active{background-position:-48px -56px}
+a.right, a.right_ap{background-position:0 -56px;clear:right;margin-right:0px;}
+a.right:hover, a.right_ap:hover{background-position:-24px -56px}
+a.right:active, a.right_ap:active{background-position:-48px -56px}
 
-a.left{margin-left:1px}
-a.left:hover{background-position:-24px 0}
-a.left:active{background-position:-48px 0}
+a.left, a.left_ap{margin-left:1px}
+a.left:hover, a.left_ap:hover{background-position:-24px 0}
+a.left:active, a.left_ap:active{background-position:-48px 0}

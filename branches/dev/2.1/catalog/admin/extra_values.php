@@ -358,7 +358,11 @@
           <?php if (($action != 'new') && ($action != 'edit')) {
             $query = tep_db_query("select epf_id from " . TABLE_EPF . " where epf_uses_value_list");
             if (tep_db_num_rows($query) == 0) {
-              echo '<tr><td colspan="2" class="messageStackError">' . tep_image(DIR_WS_ICONS . 'error.gif') . ERROR_NO_LIST_FIELDS . '</td></tr></table></td></tr></table></td></tr></table>';
+              echo '<tr><td colspan="2" class="messageStackError">' . tep_image(DIR_WS_ICONS . 'error.gif') . ERROR_NO_LIST_FIELDS . ' <a href="' .tep_href_link(FILENAME_EXTRA_FIELDS) . '">' . ERROR_NO_LIST_FIELDS2 . '</a></td></tr></table></td></tr></table></td></tr></table>';
+			  // PGM fix for footer in osCmax
+              require(DIR_WS_INCLUDES . 'footer.php');
+              require(DIR_WS_INCLUDES . 'application_bottom.php');
+
               exit;
             }
             $fields = array();

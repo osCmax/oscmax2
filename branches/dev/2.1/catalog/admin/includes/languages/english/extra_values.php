@@ -26,6 +26,7 @@ define('BUTTON_SUBVALUE', 'Add A Sub-Value To This Value');
 define('BUTTON_NEW', "Add A Value To This Field/Language");
 define('TEXT_SELECT_FIELD', 'Select a Language/ Field from the drop down list');
 define('ERROR_NO_LIST_FIELDS', '&nbsp;&nbsp;There are no Extra Fields defined to use a list of values!');
+define('ERROR_NO_LIST_FIELDS2', 'Please <u>click here</u> to define some');
 define('HEADING_NEW', 'Creating New Value for ');
 define('HEADING_EDIT', 'Editing Existing Value #');
 define('ENTRY_ORDER', 'Sort Order: ');

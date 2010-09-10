@@ -142,7 +142,7 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
   <td width="33%" align="center">
     <table width="236">
       <tr>
-        <td class="smalltext" align="center">
+        <td class="smallText" align="center">
             <div id="searchtabs" class="ui-tabs">
                 <ul>
                 <li><a href="#searchtabs-1">Customers</a></li>

@@ -348,6 +348,7 @@ define('IMAGE_BUTTON_UPDATE_CART', 'Update Cart');
 define('IMAGE_BUTTON_WRITE_REVIEW', 'Write Review');
 define('IMAGE_BUTTON_CFP', 'Contact for price');
 define('IMAGE_BUTTON_AAQ', 'Ask a question about this product');
+define('IMAGE_BUTTON_MORE_INFO', 'More info');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'Delete');
 define('SMALL_IMAGE_BUTTON_EDIT', 'Edit');

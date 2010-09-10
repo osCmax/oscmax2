@@ -44,13 +44,13 @@
     }
 ?>
    <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_heading_title'])) ) { ?>
-              <td align="right"><?php echo tep_image(DIR_WS_IMAGES . $image_folder . $image, $category['categories_heading_title'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+              <td align="right"><?php if ( (file_exists(DIR_WS_IMAGES . $image_folder . $image)) && ($image !='') ) { echo tep_image(DIR_WS_IMAGES . $image_folder . $image, $category['categories_heading_title'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); } ?></td>
             </tr>
         <?php } else { ?>
-              <td align="right"><?php echo tep_image(DIR_WS_IMAGES . $image_folder . $image, HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+              <td align="right"><?php if ( (file_exists(DIR_WS_IMAGES . $image_folder . $image)) && ($image !='') ) { echo tep_image(DIR_WS_IMAGES . $image_folder . $image, HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); } ?></td>
             </tr>
         <?php } ?>
-	  <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_description'])) ) { ?>
+	  <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_description'])) && ($category['categories_description'] != '<br />') ) { ?>
 	        <tr>
               <td align="left" colspan="2" class="category_desc"><?php echo $category['categories_description']; ?></td>
 	        </tr>

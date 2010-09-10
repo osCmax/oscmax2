@@ -89,7 +89,7 @@ TD.pageHeading, DIV.pageHeading { font-family: Verdana, Arial, sans-serif; font-
 TR.subBar { background: #f4f7fd; }
 TD.subBar { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; }
 
-TD.main, P.main { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; }
+TD.main, P.main, TD.category_desc { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; }
 
 TD.smallText, SPAN.smallText, P.smallText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 

@@ -357,9 +357,9 @@
 			  ?>	  
               </td>
               <?php if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) { ?>
-              <td align="center" class="smallText" width="60%"><?php echo sprintf(TEXT_DATE_AVAILABLE, tep_date_long($product_info['products_date_available'])); ?></td>
+              <td align="center" class="smallText" width="60%"><?php echo sprintf(TEXT_DATE_AVAILABLE, tep_date_short($product_info['products_date_available'])); ?></td>
               <?php } else { ?>
-              <td align="center" class="smallText" width="60%"><?php echo sprintf(TEXT_DATE_ADDED, tep_date_long($product_info['products_date_added'])); ?></td>
+              <td align="center" class="smallText" width="60%"><?php echo sprintf(TEXT_DATE_ADDED, tep_date_short($product_info['products_date_added'])); ?></td>
               <?php } ?>
               <td align="right" width="20%">&nbsp;</td>
             </tr>

@@ -62,11 +62,16 @@ window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,m
         $boxContent .= '<span class="infoBoxContents">';
       }
 
-      $boxContent .= $products[$i]['name'] . '</span></a></td></tr>';
+      $boxContent .= $products[$i]['name'] . '</span></a></td>';
 
       if ((tep_session_is_registered('new_products_id_in_cart')) && ($new_products_id_in_cart == $products[$i]['id'])) {
         tep_session_unregister('new_products_id_in_cart');
       }
+	  
+	  $boxContent .= '<td><a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'action=remove_product&products_id='.$products[$i]['id'].'', 'NONSSL').'">' . tep_image(DIR_WS_ICONS . 'basket_delete.png', IMAGE_BUTTON_REMOVE_PRODUCT, 16, 16) . '</a></td>';
+	  
+	  $boxContent .= '</tr>';
+	  
     }
     $boxContent .= '</table>';
   } else {

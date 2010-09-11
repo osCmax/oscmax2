@@ -28,9 +28,10 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
   $corner_bottom_right = 'rounded'; 
   
   $boxContent_attributes = '';
+  $boxLink = '';
   $box_base_name = 'manufacturers'; // for easy unique box template setup (added BTSv1.2)
-
-    $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
+  $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
+	
     if ($number_of_rows <= MAX_DISPLAY_MANUFACTURERS_IN_A_LIST) {
 // Display a list
       $boxContent = '';

@@ -1,7 +1,5 @@
 <?php
-/* 
-  
-  
+/*   
   osCMax Power E-Commerce
   http://oscdox.com
 
@@ -36,17 +34,9 @@ if (!tep_session_is_registered('customer_id')) {
   $corner_bottom_right = 'rounded';
   
   $boxContent_attributes = ' align="center"';
+  $boxLink = '';
   $box_base_name = 'loginbox'; // for easy unique box template setup (added BTSv1.2)
-
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
-//  $boxContent_attributes = ' align="center"';
-  
-//    $boxContent = array();
-//    $boxContent[] = array('text'  => BOX_HEADING_LOGIN_BOX);
-
-//    new infoBoxHeading($boxContent, false, false);
-// WebMakers.com Added: Do not show if on login or create account or PWA screen
-
 ?>
 <!-- loginbox bof //-->
 <?php

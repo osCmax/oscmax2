@@ -20,8 +20,8 @@ $Id: information.php 3 2006-05-27 04:59:07Z user $
   $corner_bottom_right = 'rounded'; 
   
   $boxContent_attributes = '';
+  $boxLink = '';
   $box_base_name = 'information'; // for easy unique box template setup (added BTSv1.2)
-
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 ?>
 <!-- information bof //-->

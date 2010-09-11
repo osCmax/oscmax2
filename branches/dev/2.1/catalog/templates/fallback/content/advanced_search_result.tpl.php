@@ -89,11 +89,11 @@
    } // end elseif ((tep_not_null($pfrom) || (tep_not_null($pfrom)) && .... 
    
    if ($status_tmp_product_prices_table == true) {
-   $select_str = "select distinct " . $select_column_list . ", p.products_quantity, m.manufacturers_id, p.products_quantity, p.products_id, pd.products_name, tmp_pp.products_price, p.products_tax_class_id, if(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price ";
+   $select_str = "select distinct " . $select_column_list . ", p.products_quantity, p.products_featured, m.manufacturers_id, p.products_quantity, p.products_id, pd.products_name, tmp_pp.products_price, p.products_tax_class_id, if(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price ";
    } elseif ($status_tmp_special_prices_table == true) {
-     $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_quantity,p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, if(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, if(s.status, s.specials_new_products_price, p.products_price) as final_price ";	
+     $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_quantity, p.products_featured, p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, if(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, if(s.status, s.specials_new_products_price, p.products_price) as final_price ";	
    } else {
-     $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_quantity, p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, NULL as specials_new_products_price, NULL as final_price ";	
+     $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_quantity, p.products_featured, p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, NULL as specials_new_products_price, NULL as final_price ";	
    }
    // next line original select query
    // $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price ";

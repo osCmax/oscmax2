@@ -1763,7 +1763,7 @@ INSERT INTO configuration VALUES (107,'Display Product Name','PRODUCT_LIST_NAME'
 INSERT INTO configuration VALUES (108,'Display Product Price','PRODUCT_LIST_PRICE','4','Do you want to display the Product Price','8','6',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (109,'Display Product Quantity','PRODUCT_LIST_QUANTITY','0','Do you want to display the Product Quantity?','8','7',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (110,'Display Product Weight','PRODUCT_LIST_WEIGHT','0','Do you want to display the Product Weight?','8','8',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (111,'Display Buy Now column','PRODUCT_LIST_BUY_NOW','5','Do you want to display the Buy Now column?','8','9',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (111,'Display Buy Now column','PRODUCT_LIST_BUY_NOW','5','Do you want to display the Buy Now button?','8','9',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (112,'Display Category/Manufacturer Filter (0=disable; 1=enable)','PRODUCT_LIST_FILTER','1','Do you want to display the Category/Manufacturer Filter?','8','10',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (113,'Location of Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)','PREV_NEXT_BAR_LOCATION','3','Sets the location of the Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)','8','11',NULL,now(),NULL,NULL);
 
@@ -1920,7 +1920,7 @@ INSERT INTO configuration VALUES (526,'Use WYSIWYG CKEditor?','ARTICLE_WYSIWYG_E
 INSERT INTO configuration VALUES (391,'Down For Maintenance Start Time','TEXT_DATE_TIME','2008-05-03 14:23:52','Show when down for maintenance',16,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (700,'Number of Columns for product listings','PRODUCT_LIST_NUM_COLUMNS','3','How many prodcuts per row do you want to display on your product listing page?',8,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (701,'Minimum X-Sell products Listed','MIN_DISPLAY_XSELL','1','How many x-sell products per page',8,20,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (650,'Product Display Type (Default = 0 or Columns = 1)','PRODUCT_LIST_TYPE','1','Do you want to display products one per row or multiple columns per row?',8,10,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (650,'Product Display Type (Default = 0 or Columns = 1)','PRODUCT_LIST_TYPE','1','Do you want to display products one per row or multiple columns per row?',8,11,NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (645,'Tax Class','MODULE_ORDER_TOTAL_LOWORDERFEE_TAX_CLASS','0','Use the following tax class on the low order fee.',6,7,NULL,now(),'tep_get_tax_class_title','tep_cfg_pull_down_tax_classes(');
 INSERT INTO configuration VALUES (644,'Attach Low Order Fee On Orders Made','MODULE_ORDER_TOTAL_LOWORDERFEE_DESTINATION','both','Attach low order fee for orders sent to the set destination.',6,6,NULL,now(),NULL,'tep_cfg_select_option(array(\'national\',\'international\',\'both\'),');
@@ -2134,6 +2134,7 @@ INSERT INTO configuration VALUES (2655, 'Show Ask a Question button on Product I
 INSERT INTO configuration VALUES (2656, 'Display the queries used and Variables used?','DISPLAY_QUERIES','false','Display the queries and variables used to create a page.  <br><br><b>You must enable Display The Page Parse Time first.</b><br><br>This will be visible on your live store (<b>DO NOT use on live stores</b>)','10','6',NULL,now(),NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (2657, 'Default Tax Class', 'DEFAULT_PRODUCT_TAX_CLASS', '1', 'Sets the default tax class used for new products.', 1, 22, 'tep_get_tax_class_title', 'tep_cfg_pull_down_tax_classes(', now());
 INSERT INTO configuration VALUES (2658, 'Do you want to use a scroller in Also Purchased module on product info?', 'USE_AP_HORIZ_SCROLLER', 'false', 'Would you like to use a scroller on the Also Purchased infobox?', 201, 27, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
+INSERT INTO configuration VALUES (2659, 'Show More Info button?', 'SHOW_MORE_INFO', 'True', 'Do you want to display a More Info button next to your Buy Now button that links through to your products to display the full product information?<br><br>Please note that Buy Now button has to be enabled for this to work.', 8, 10, NULL,now(),NULL,'tep_cfg_select_option(array(''True'', ''False''),');
 
 
 #Open Feature Sets Start

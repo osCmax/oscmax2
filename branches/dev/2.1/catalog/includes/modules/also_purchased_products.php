@@ -66,9 +66,13 @@ if ($num_products_ap != 0) { // Check query is not blank
             $ap_price .= '<span class="productSpecialPrice">' . $currencies->display_price($ap['specials_new_products_price'], tep_get_tax_rate($ap['products_tax_class_id'])) . '</span>'; 
           } else { 
             $ap_price =  $currencies->display_price($ap['products_price'], tep_get_tax_rate($ap['products_tax_class_id'])); 
-	      } 
+	      }
+		  
+		  if (SHOW_MORE_INFO == 'True') {
+            $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>';
+		  }
 
-		  $display_code_ap = '<td width="33%" class="smallText"><br><center><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $ap['products_image'], $ap['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . $ap['products_name'] .'</a><br>' . $ap_price . '<br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a><a href="' . tep_href_link( FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id'] .  '&amp;action=buy_now&product_to_buy_id=' . $ap['products_id'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', '' . $ap['products_name'] . '') .'</a></center></td>';
+		  $display_code_ap = '<td width="33%" class="smallText"><br><center><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $ap['products_image'], $ap['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . $ap['products_name'] .'</a><br>' . $ap_price . '<br>' . $more_info . ' <a href="' . tep_href_link( FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id'] .  '&amp;action=buy_now&product_to_buy_id=' . $ap['products_id'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', '' . $ap['products_name'] . '') .'</a></center></td>';
  
 	  if  (($div3rows_ap <> $row) && ($col == 0)) {
 		$output_ap .= '<div><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr valign="middle">' . $display_code_ap;
@@ -146,10 +150,14 @@ if ($num_products_ap != 0) { // Check query is not blank
     	} else { 
 	      $ap_price =  $currencies->display_price($ap['products_price'], tep_get_tax_rate($ap['products_tax_class_id'])); 
 	    } 
+		
+		if (SHOW_MORE_INFO == 'True') {
+          $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>';
+		}
      
 	  $info_box_contents[$row][$col] = array('align' => 'center',
                                              'params' => 'class="smallText" width="33%" valign="top"',
-                                             'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $ap['products_image'], $ap['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . $ap['products_name'] .'</a><br>' . $ap_price . '<br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a><a href="' . tep_href_link( FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id'] .  '&amp;action=buy_now&product_to_buy_id=' . $ap['products_id'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', '' . $ap['products_name'] . '') .'</a>');
+                                             'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $ap['products_image'], $ap['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . $ap['products_name'] .'</a><br>' . $ap_price . '<br>' .$more_info . ' <a href="' . tep_href_link( FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id'] .  '&amp;action=buy_now&product_to_buy_id=' . $ap['products_id'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', '' . $ap['products_name'] . '') .'</a>');
       $col ++;
         if ($col > 2) {
           $col = 0;

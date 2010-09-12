@@ -56,7 +56,7 @@ $y = $pdf->ezText(STORE_NAME_ADDRESS,COMPANY_HEADER_FONT_SIZE);
 $y -= 10; 
 
 // logo image  set to right of the above .. change first number to move sideways    
-$pdf->addJpegFromFile(BATCH_PRINT_INC . 'templates/' . 'invoicelogo.jpg',365,730,85,85); 
+$pdf->addJpegFromFile('../images/' . 'store_logo.jpg',365,730,85,80); 
 
 // extra info boxs to be used by staff
 $pdf->setStrokeColor(0,0,0);
@@ -286,7 +286,7 @@ $pdf->addText($x,$pos,PRODUCT_TOTALS_FONT_SIZE,$order->totals[$i]['text'], $orde
 $pos -= SECTION_DIVIDER;
 
 
-$innum = $orders['orders_prefix'].$orders['orders_id'];
+$innum = $orders['orders_prefix'] . $orders['orders_id'];
 $orders_comments_query = tep_db_query("select comments,date_added from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '$innum' order by date_added");
 if (tep_db_num_rows($orders_comments_query)) {
     while ($orders_comments = tep_db_fetch_array($orders_comments_query)) {

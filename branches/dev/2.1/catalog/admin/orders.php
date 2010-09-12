@@ -15,38 +15,33 @@ $Id: orders.php 14 2006-07-28 17:42:07Z user $
 
 // search query (oid, customer or company)
 $search_query = null;
-if ( isset($_GET['q']) && $_GET['q']!="" ){ // query is set in address
-
-$search_query=$_GET['q'];
-
-if (preg_match("/^\d+$/",$search_query)) { // oid
-
-// show given order
-tep_redirect(tep_href_link(FILENAME_ORDERS, 'oID=' . $search_query .
-'&action=edit'));
-exit;
-
-} else { // name (customer or company)
-
-$q_array = explode(' ', ($search_query));
-$q_customer = '(o.customers_name LIKE \'%' . $q_array[0] . '%\'';
-$q_company = '(o.customers_company LIKE \'%' . $q_array[0] . '%\'';
-// more than one search term
-for ($i = 1 ; $i < sizeof($q_array) ; $i++) {
-$q_customer .= ' OR o.customers_name LIKE \'%' . $q_array[$i] . '%\'';
-$q_company .= ' OR o.customers_company LIKE \'%' . $q_array[$i] . '%\'';
-}
-$q_customer .= ')';
-$q_company .= ')';
-$search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
-
-
-}
-
+if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
+  $search_query = $_GET['q'];
+  if (preg_match("/^\d+$/",$search_query)) { // oid
+    // show given order
+    tep_redirect(tep_href_link(FILENAME_ORDERS, 'oID=' . $search_query));
+    exit;
+  } else { // name (customer or company)
+    $q_array = explode(' ', ($search_query));
+    $q_customer = '(o.customers_name LIKE \'%' . $q_array[0] . '%\'';
+    $q_company = '(o.customers_company LIKE \'%' . $q_array[0] . '%\'';
+    // more than one search term
+    for ($i = 1 ; $i < sizeof($q_array) ; $i++) {
+      $q_customer .= ' OR o.customers_name LIKE \'%' . $q_array[$i] . '%\'';
+      $q_company .= ' OR o.customers_company LIKE \'%' . $q_array[$i] . '%\'';
+    }
+    $q_customer .= ')';
+    $q_company .= ')';
+    $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
+  }
 } // ends if ($search_query = $_GET['q'])
 
 // EOF: Orders search by customer information
 
+  $oID = (isset($_GET['oID']) ? $_GET['oID'] : '');
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
+  $pdf_check = (isset($_GET['pdf_check']) ? $_GET['pdf_check'] : '');
+  
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
@@ -59,8 +54,50 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
     $orders_status_array[$orders_status['orders_status_id']] = $orders_status['orders_status_name'];
   }
 
-  $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
+  if (tep_not_null($pdf_check)) {
+	define('BATCH_PRINT_INC', DIR_WS_MODULES . 'batch_print/');
+    define('BATCH_PDF_DIR', BATCH_PRINT_INC . 'temp_pdf/');
+    define('BATCH_PRINT_FILE', 'batch_print.php');
+    define('BATCH_PDF_FILE', 'batch_orders.pdf');
+
+    require_once (DIR_WS_CLASSES . 'order.php');
+	require (DIR_WS_FUNCTIONS . 'batch_print.php');
+	
+	$orders_query = tep_db_query("select o.orders_id, h.comments, MIN(h.date_added) from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS_HISTORY . " h where o.orders_id = '" . $oID . "' and h.orders_id = o.orders_id");
+	
+	$pageloop = "1";
+    
+	    include(DIR_WS_LANGUAGES . 'english/batch_print.php');
+        require(DIR_WS_MODULES . 'batch_print/class.ezpdf.php');
+		$pdf = new Cezpdf(A4,portrait);
+
+          while ($orders = tep_db_fetch_array($orders_query)) {
+            $order = new order($orders['orders_id']);
+			switch ($pdf_check) {
+              case 'invoice':
+                require(DIR_WS_MODULES . 'batch_print/templates/Invoice.php');
+			  break;
+			  case 'packingslip':
+                require(DIR_WS_MODULES . 'batch_print/templates/Packing-Slip.php');
+			  break;
+			  default:
+			  break;
+			} // end switch
+		  } // end while
+		  
+		$pdf_code = $pdf->output();
+		       
+	    $fname = BATCH_PDF_DIR . BATCH_PDF_FILE;
+        if ($fp = fopen($fname,'w')) {
+          fwrite($fp, $pdf_code);
+          fclose($fp);
+        } // end if
+
+        tep_redirect(tep_href_link(DIR_WS_MODULES . 'batch_print/temp_pdf/batch_orders.pdf', '', 'NONSSL', false));
+
+  } // end if pdf
+	  
   if (tep_not_null($action)) {
     switch ($action) {
       case 'update_order':
@@ -142,7 +179,7 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
   $the_customers_fax= $the_extra['customers_fax'];
 // EOF: MOD - Downloads Controller - Extra order info
 
-  include(DIR_WS_CLASSES . 'order.php');
+//  include(DIR_WS_CLASSES . 'order.php');
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -438,8 +475,8 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
       </tr>
-      <tr><?php echo tep_draw_form('status', FILENAME_ORDERS, tep_get_all_get_params(array('action')) . 'action=update_order'); ?>
-        <td class="main">
+      <tr>
+        <td class="main"><?php echo tep_draw_form('status', FILENAME_ORDERS, tep_get_all_get_params(array('action')) . 'action=update_order'); ?>
 			<table border="0" cellspacing="0" cellpadding="5" width="100%">
             	<tr class="dataTableHeadingRow">
                 	<td class="dataTableHeadingContent" width="150"></td>
@@ -487,8 +524,8 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
                      </td>
                  </tr>
             </table>
-         </td>	
-      </tr></form>
+         </form></td>	
+      </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
@@ -517,21 +554,21 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
-            <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <tr><?php echo tep_draw_form('orders', FILENAME_ORDERS, '', 'get'); ?>
-    <!-- //BOF: Orders Search by customer info 
-    <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('oID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?></td> 
-    //EOF: Orders Search by customer info -->
-    <td class="smallText" align="right"><?php
-    $onfocus=' onfocus="this.value=\'\';"';
-    echo HEADING_TITLE_SEARCH_ALL . ' ' . tep_draw_input_field('q', '', "size=\"32\"$onfocus");
-
-    ?>
-              <?php echo tep_hide_session_id(); ?></form></tr>
-              <tr><?php echo tep_draw_form('status', FILENAME_ORDERS, '', 'get'); ?>
-                <td class="smallText" align="right"><?php echo HEADING_TITLE_STATUS . ' ' . tep_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)), $orders_statuses), '', 'onChange="this.form.submit();"'); ?></td>
-              <?php echo tep_hide_session_id(); ?></form></tr>
-            </table></td>
+            <td align="right">
+              <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td class="smallText" align="right"><?php echo tep_draw_form('orders', FILENAME_ORDERS, '', 'get'); ?>
+				  <?php
+                  $onfocus=' onfocus="this.value=\'\';"';
+                  echo HEADING_TITLE_SEARCH_ALL . ' ' . tep_draw_input_field('q', '', "size=\"32\"$onfocus");
+                  echo tep_hide_session_id(); 
+				  ?>
+                  </form></td>
+                </tr>
+                <tr>
+                  <td class="smallText" align="right"><?php echo tep_draw_form('status', FILENAME_ORDERS, '', 'get'); ?><?php echo HEADING_TITLE_STATUS . ' ' . tep_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)), $orders_statuses), '', 'onChange="this.form.submit();"'); ?><?php echo tep_hide_session_id(); ?></form></td>
+                </tr>
+              </table></td>
           </tr>
         </table></td>
       </tr>
@@ -573,13 +610,13 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
       }
 
       if (isset($oInfo) && is_object($oInfo) && ($orders['orders_id'] == $oInfo->orders_id)) {
-        echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=edit') . '\'">' . "\n";
+        echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&amp;action=edit') . '\'">' . "\n";
       } else {
         echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID')) . 'oID=' . $orders['orders_id']) . '\'">' . "\n";
       }
 ?>
 				<td class="dataTableContent"><?php echo $orders['orders_id']; ?></td>
-                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $orders['orders_id'] . '&action=edit') . '">' . tep_image(DIR_WS_ICONS . 'page_white_text.png', ICON_PREVIEW) . '</a>&nbsp;' . $orders['customers_name']; ?></td>
+                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $orders['orders_id'] . '&amp;action=edit') . '">' . tep_image(DIR_WS_ICONS . 'page_white_text.png', ICON_PREVIEW) . '</a>&nbsp;' . $orders['customers_name']; ?></td>
                 <td class="dataTableContent" align="right"><?php echo strip_tags($orders['order_total']); ?></td>
                 
                 <?php // BOF: Orders quick viewer
@@ -621,7 +658,7 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_ORDER . '</b>');
 
-      $contents = array('form' => tep_draw_form('orders', FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=deleteconfirm'));
+      $contents = array('form' => tep_draw_form('orders', FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&amp;action=deleteconfirm'));
       $contents[] = array('text' => TEXT_INFO_DELETE_INTRO . '<br><br><b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
       $contents[] = array('text' => '<br>' . tep_draw_checkbox_field('restock') . ' ' . TEXT_INFO_RESTOCK_PRODUCT_QUANTITY);
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
@@ -647,27 +684,31 @@ $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
 
 	if ($fedex_tracking) {
 // display the label
-          $contents[] = array('align' => 'center', 'text' => '<a href="fedex_popup.php?num=' . $fedex_tracking . '&oID=' . $oInfo->orders_id . '">' . tep_image_button('button_fedex_label.gif', IMAGE_ORDERS_FEDEX_LABEL) . '</a>');
+          $contents[] = array('align' => 'center', 'text' => '<a href="fedex_popup.php?num=' . $fedex_tracking . '&amp;oID=' . $oInfo->orders_id . '">' . tep_image_button('button_fedex_label.gif', IMAGE_ORDERS_FEDEX_LABEL) . '</a>');
 					
 // track the package (no gateway needs to be specified)
-          $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_TRACK_FEDEX, 'oID=' .$oInfo->orders_id . '&num=' . $fedex_tracking) . '&fedex_gateway=track">' . tep_image_button('button_track.gif', IMAGE_ORDERS_TRACK) . '</a>');
+          $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_TRACK_FEDEX, 'oID=' .$oInfo->orders_id . '&amp;num=' . $fedex_tracking) . '&amp;fedex_gateway=track">' . tep_image_button('button_track.gif', IMAGE_ORDERS_TRACK) . '</a>');
 
 // cancel the request				
 					
-          $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SHIP_FEDEX, 'oID=' .$oInfo->orders_id . '&num=' . $fedex_tracking . '&action=cancel&fedex_gateway=' . $fedex_gateway) . '" onClick="return(window.confirm(\'Cancel shipment of order number ' . $oInfo->orders_id . '?\'));">' . tep_image_button('button_cancel_shipment.gif', IMAGE_ORDERS_CANCEL_SHIPMENT) . '</a>');
+          $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SHIP_FEDEX, 'oID=' .$oInfo->orders_id . '&amp;num=' . $fedex_tracking . '&amp;action=cancel&amp;fedex_gateway=' . $fedex_gateway) . '" onClick="return(window.confirm(\'Cancel shipment of order number ' . $oInfo->orders_id . '?\'));">' . tep_image_button('button_cancel_shipment.gif', IMAGE_ORDERS_CANCEL_SHIPMENT) . '</a>');
         }
 // if no fedex tracking number, AND if the order has not been manually marked "delivered,"
 // display the "ship" button
 
         elseif ((!$fedex_tracking) && (($check_fedex_status['orders_status']) != 3)) {			
-          $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SHIP_FEDEX, 'oID=' .$oInfo->orders_id . '&action=new&status=3') . '">' . tep_image_button('button_ship.gif', IMAGE_ORDERS_SHIP) . '</a>');
+          $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SHIP_FEDEX, 'oID=' .$oInfo->orders_id . '&amp;action=new&amp;status=3') . '">' . tep_image_button('button_ship.gif', IMAGE_ORDERS_SHIP) . '</a>');
         }
 // EOF: MOD - FedEx 
-       $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=edit') . '">' . tep_image_button('button_details.gif', IMAGE_DETAILS) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
-$contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $oInfo->orders_id) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $oInfo->orders_id) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_EDIT, 'oID=' . $oInfo->orders_id) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a>');
-$contents[] = array('text' => '<br>' . TEXT_DATE_ORDER_CREATED . ' ' . tep_date_short($oInfo->date_purchased));
-        if (tep_not_null($oInfo->last_modified)) $contents[] = array('text' => TEXT_DATE_ORDER_LAST_MODIFIED . ' ' . tep_date_short($oInfo->last_modified));
-        $contents[] = array('text' => '<br>' . TEXT_INFO_PAYMENT_METHOD . ' '  . $oInfo->payment_method);
+       $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&amp;action=edit') . '">' . tep_image_button('button_details.gif', IMAGE_DETAILS) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>  <a href="' . tep_href_link(FILENAME_ORDERS_EDIT, 'oID=' . $oInfo->orders_id) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a><br><br>');
+       $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $oInfo->orders_id) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $oInfo->orders_id) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a>');
+	   $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ORDERS, 'pdf_check=invoice&amp;oID=' . $oInfo->orders_id) . '" target="_blank">' . tep_image_button('button_invoice_pdf.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'pdf_check=packingslip&amp;oID=' . $oInfo->orders_id) . '" target="_blank">' . tep_image_button('button_packingslip_pdf.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a>');
+		
+       $contents[] = array('text' => '<br>' . TEXT_DATE_ORDER_CREATED . ' ' . tep_date_short($oInfo->date_purchased));
+       if (tep_not_null($oInfo->last_modified)) $contents[] = array('text' => TEXT_DATE_ORDER_LAST_MODIFIED . ' ' . tep_date_short($oInfo->last_modified));
+         $contents[] = array('text' => '<br>' . TEXT_INFO_PAYMENT_METHOD . ' '  . $oInfo->payment_method);
+		
+		
       }
       break;
   }

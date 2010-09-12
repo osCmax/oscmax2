@@ -100,13 +100,15 @@ $Id: define_privacy.php 14 2006-07-28 17:42:07Z user $
 <!-- body_text //-->
     <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr><?php echo tep_draw_form('lng', FILENAME_DEFINE_PRIVACY, '', 'get'); ?>
-            <td class="pageHeading"><?php echo BOX_CATALOG_DEFINE_PRIVACY; ?></td>
-            <td class="pageHeading" align="right">&nbsp;</td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_pull_down_menu('lngdir', $languages_array, '', 'onChange="this.form.submit();"'); ?></td>
-          </form></tr>
-        </table></td>
+        <td><?php echo tep_draw_form('lng', FILENAME_DEFINE_PRIVACY, '', 'get'); ?>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo BOX_CATALOG_DEFINE_PRIVACY; ?></td>
+              <td class="pageHeading" align="right">&nbsp;</td>
+              <td class="pageHeading" align="right"><?php echo tep_draw_pull_down_menu('lngdir', $languages_array, '', 'onChange="this.form.submit();"'); ?></td>
+            </tr>
+          </table>
+        </form></td>
       </tr>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -130,29 +132,30 @@ $Id: define_privacy.php 14 2006-07-28 17:42:07Z user $
       }
 
 ?>
-          <tr><?php echo tep_draw_form('language', FILENAME_DEFINE_PRIVACY, 'lngdir=' . $_GET['lngdir'] . '&filename=' . $_GET['filename'] . '&action=save'); ?>
-            <td><table border="0" cellspacing="0" cellpadding="2">
-              <tr>
-                <td class="main"><b><?php echo $_GET['filename']; ?></b></td>
-              </tr>
-              <tr>
-                <td class="main"><?php if (HTML_AREA_WYSIWYG_DISABLE_DEFINE == 'Enable') {
-// Line Changed - MOD: Ajustable Editor Window
-              // BOF: CKeditor
-	      //echo tep_draw_fckeditor('file_contents', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
-                echo tep_draw_textarea_field('file_contents', '100%', '30', $file_contents, 'class="ckeditor"', (($file_writeable) ? '' : 'readonly'))  . '</td>';
-	      } else { echo tep_draw_textarea_field('file_contents', '100%', '30', $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
-               } // EOF: CKeditor
-               ?>
-               </tr>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td align="right"><?php if ($file_writeable) { echo tep_image_submit('button_save.gif', IMAGE_SAVE) . '&nbsp;<a href="' . tep_href_link(FILENAME_DEFINE_PRIVACY, 'lngdir=' . $_GET['lngdir']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; } else { echo '<a href="' . tep_href_link(FILENAME_DEFINE_PRIVACY, 'lngdir=' . $_GET['lngdir']) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; } ?></td>
-              </tr>
-            </table></td>
-          </form></tr>
+          <tr>
+            <td><?php echo tep_draw_form('language', FILENAME_DEFINE_PRIVACY, 'lngdir=' . $_GET['lngdir'] . '&amp;filename=' . $_GET['filename'] . '&amp;action=save'); ?>
+              <table border="0" cellspacing="0" cellpadding="2">
+                <tr>
+                  <td class="main"><b><?php echo $_GET['filename']; ?></b></td>
+                </tr>
+                <tr>
+                  <td class="main">
+				  <?php if (HTML_AREA_WYSIWYG_DISABLE_DEFINE == 'Enable') {
+                    echo tep_draw_textarea_field('file_contents', '100', '30', $file_contents, 'class="ckeditor"', (($file_writeable) ? '' : 'readonly'))  . '</td>';
+	              } else { 
+				    echo tep_draw_textarea_field('file_contents', '100', '30', $file_contents, (($file_writeable) ? '' : 'readonly')) . '</td>';
+                  } // EOF: CKeditor
+                  ?>
+                </tr>
+                <tr>
+                  <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
+                <tr>
+                  <td align="right"><?php if ($file_writeable) { echo tep_image_submit('button_save.gif', IMAGE_SAVE) . '&nbsp;<a href="' . tep_href_link(FILENAME_DEFINE_PRIVACY, 'lngdir=' . $_GET['lngdir']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; } else { echo '<a href="' . tep_href_link(FILENAME_DEFINE_PRIVACY, 'lngdir=' . $_GET['lngdir']) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; } ?></td>
+                </tr>
+              </table>
+            </form></td>
+          </tr>
 <?php
     } else {
 ?>
@@ -173,7 +176,7 @@ $Id: define_privacy.php 14 2006-07-28 17:42:07Z user $
           <tr>
             <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td class="smallText"><a href="<?php echo tep_href_link(FILENAME_DEFINE_PRIVACY, 'lngdir=' . $_GET['lngdir'] . '&filename=' . $filename); ?>"><b><?php echo $filename; ?></b></a></td>
+                <td class="smallText"><a href="<?php echo tep_href_link(FILENAME_DEFINE_PRIVACY, 'lngdir=' . $_GET['lngdir'] . '&amp;filename=' . $filename); ?>"><b><?php echo $filename; ?></b></a></td>
 <?php
     $dir = dir(DIR_FS_CATALOG_LANGUAGES . $_GET['lngdir']);
     $left = false;
@@ -181,7 +184,7 @@ $Id: define_privacy.php 14 2006-07-28 17:42:07Z user $
       $file_extension = substr($PHP_SELF, strrpos($PHP_SELF, '.'));
       while ($file = $dir->read()) {
         if (substr($file, strrpos($file, '.')) == $file_extension) {
-          echo '                <td class="smallText"><a href="' . tep_href_link(FILENAME_DEFINE_PRIVACY, 'lngdir=' . $_GET['lngdir'] . '&filename=' . $file) . '">' . $file . '</a></td>' . "\n";
+          echo '                <td class="smallText"><a href="' . tep_href_link(FILENAME_DEFINE_PRIVACY, 'lngdir=' . $_GET['lngdir'] . '&amp;filename=' . $file) . '">' . $file . '</a></td>' . "\n";
           if (!$left) {
             echo '              </tr>' . "\n" .
                  '              <tr>' . "\n";

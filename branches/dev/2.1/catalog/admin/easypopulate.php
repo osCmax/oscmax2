@@ -615,7 +615,7 @@ if ( !empty($_GET['download']) && ($_GET['download'] == 'stream' or $_GET['downl
                 if ($num_of_langs == 1){
                     $row['v_froogle_products_url_' . $lid] = EP_FROOGLE_PRODUCT_INFO_PATH . '?products_id=' . $row['v_products_id'];
                 } else {
-                    $row['v_froogle_products_url_' . $lid] = EP_FROOGLE_PRODUCT_INFO_PATH . '?products_id=' . $row['v_products_id'] . '&language=' . $lid;
+                    $row['v_froogle_products_url_' . $lid] = EP_FROOGLE_PRODUCT_INFO_PATH . '?products_id=' . $row['v_products_id'] . '&amp;language=' . $lid;
                 }
             }
 
@@ -1270,7 +1270,7 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
       <table width="<?php if (EP_SHOW_EP_SETTINGS == true) { echo '95'; } else { echo '75'; } ?>%" cellpadding="5" cellspacing="0" style="border-collapse:collapse;">
         <tr>
           <td width="75%" style="border-style:solid; border-width:thin; border-color:#CCCCCC;"><span style="font-size:10px;background-color:#FFFFCC; width:100%;">&nbsp; &nbsp;Please <a href="backup.php<?php if (defined('SID') && tep_not_null(SID)) { echo '?'.tep_session_name().'='.tep_session_id(); } ?>" style="font-size:10px;background-color:#FFFFCC;text-decoration:underline;">backup your database</a> before performing any Easy Populate operations!&nbsp; &nbsp;</span><br />
-           <form enctype="multipart/form-data" action="easypopulate.php?split=0<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>" method="post"><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
+           <form enctype="multipart/form-data" action="easypopulate.php?split=0<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>" method="post"><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
                 <p style="margin-top: 18px; margin-bottom: 8px;"><b>Upload and Import EP File</b></p>
                 <p style="margin-top: 0px;">
                   <input type="hidden" name="MAX_FILE_SIZE" value="100000000">
@@ -1285,7 +1285,7 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
                 </p>
               </form>
 
-           <form enctype="multipart/form-data" action="easypopulate.php?split=1<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>" method="post"><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
+           <form enctype="multipart/form-data" action="easypopulate.php?split=1<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>" method="post"><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
                 <p style="margin-top: 18px; margin-bottom: 8px;"><b>Upload and Split EP File</b></p>
                 <p style="margin-top: 0px;">
                   <input type="hidden" name="MAX_FILE_SIZE" value="1000000000">
@@ -1334,10 +1334,11 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
              </form>
 
         <p style="margin-top: 24px; margin-bottom: 8px;"><b>Export EP or Froogle Products File</b></p>
-        <p style="margin-top: 0px;"><!-- Download file links -  Add your custom fields here -->
+        <p style="margin-top: 0px;"></p><!-- Download file links -  Add your custom fields here -->
           <table border="0" cellpadding="0" cellspacing="0" style="border: 1px solid #666666; padding: 3px;">
-          <?php echo tep_draw_form('custom', 'easypopulate.php', 'id="custom"' . ((defined('SID') && tep_not_null(SID)) ? '&'.tep_session_name().'='.tep_session_id() : ''), 'get'); ?><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
-          <tr><td class="smallText"><?php 
+            <tr>
+              <td class="smallText"><?php echo tep_draw_form('custom', 'easypopulate.php', 'id="custom"' . ((defined('SID') && tep_not_null(SID)) ? '&amp;'.tep_session_name().'='.tep_session_id() : ''), 'get'); ?><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
+			  <?php 
           
           echo tep_draw_pull_down_menu('download',array( 0 => array( "id" => 'activestream', 'text' => 'Download on-the-fly' ), 1 => array( "id" => 'stream', 'text' => 'Create then Download' ), 2 => array( "id" => 'tempfile', 'text' => 'Create in Temp Dir' )));
           echo '&nbsp;a&nbsp;' . tep_draw_pull_down_menu('dltype',array( 0 => array( "id" => 'full', 'text' => 'Complete' ), 1 => array( "id" => 'custom', 'text' => 'Custom' ), 2 => array( "id" => 'priceqty', 'text' => 'Price/Qty' ), 3 => array( "id" => 'category', 'text' => 'Categories' ), 4 => array( "id" => 'attrib', 'text' => 'Attributes' ), 5 => array( "id" => 'froogle', 'text' => 'Froogle' )),'custom','onChange="return switchForm(this);"');
@@ -1400,26 +1401,26 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
           echo ' ' . tep_draw_pull_down_menu('epcust_status_filter', $status_array) . ' ';
           
           echo tep_draw_input_field('submit', 'Build File', ' style="padding: 0px"', false, 'submit');
-          ?></td></tr>
-          </form>
+          ?></form></td>
+          </tr>
           </table>
-        </p><br /><br />
+        <br /><br />
 
         <font size="-2">Quick Links</font>
         <table width="100%" border="0" cellpadding="3" cellspacing="3"><tr><td width="50%" valign="top" bgcolor="#EEEEEE">
         <p style="margin-top: 8px;"><b>Create then Download Files</b><br />
         <font size="-2">Create entire file in server memory then stream download after completed.</font></p>
         <p><!-- Download file links -  Add your custom fields here -->
-          <a href="easypopulate.php?download=stream&dltype=full<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Complete<?php if (EP_SPPC_SUPPORT == true) { echo ' w/SPPC'; } ?></b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
+          <a href="easypopulate.php?download=stream&amp;dltype=full<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Complete<?php if (EP_SPPC_SUPPORT == true) { echo ' w/SPPC'; } ?></b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
 <?php if (EP_EXTRA_FIELDS_SUPPORT == true) { ?>
-          <a href="easypopulate.php?download=stream&dltype=extra_fields<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Extra Fields</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
+          <a href="easypopulate.php?download=stream&ampp;dltype=extra_fields<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Extra Fields</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
 <?php } ?>
-          <a href="easypopulate.php?download=stream&dltype=priceqty<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Price/Qty<?php if (EP_SPPC_SUPPORT == true) { echo ' w/SPPC'; } ?></b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
-          <a href="easypopulate.php?download=stream&dltype=category<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Category</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
-          <a href="easypopulate.php?download=stream&dltype=froogle<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Froogle</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file</a><br />
+          <a href="easypopulate.php?download=stream&amp;dltype=priceqty<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Price/Qty<?php if (EP_SPPC_SUPPORT == true) { echo ' w/SPPC'; } ?></b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
+          <a href="easypopulate.php?download=stream&amp;dltype=category<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Category</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
+          <a href="easypopulate.php?download=stream&amp;dltype=froogle<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Froogle</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file</a><br />
           <!-- VJ product attributes begin //-->
           <?php if (EP_PRODUCTS_WITH_ATTRIBUTES == true) { ?>
-          <a href="easypopulate.php?download=stream&dltype=attrib<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Attributes</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file</a><br />
+          <a href="easypopulate.php?download=stream&amp;dltype=attrib<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Attributes</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file</a><br />
           <?php } ?>
           <!-- VJ product attributes end //-->
         </p><br />
@@ -1427,13 +1428,13 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
         <p style="margin-top: 8px;"><b>Create Files in Temp Dir</b><br />
         <font size="-2">Create entire file in server memory then save to Temp Dir after completed.</font></p>
         <p>
-          <a href="easypopulate.php?download=tempfile&dltype=full<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Complete</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
-          <a href="easypopulate.php?download=tempfile&dltype=priceqty<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Price/Qty</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
-          <a href="easypopulate.php?download=tempfile&dltype=category<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Category</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
-          <a href="easypopulate.php?download=tempfile&dltype=froogle<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Froogle</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
+          <a href="easypopulate.php?download=tempfile&amp;dltype=full<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Complete</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
+          <a href="easypopulate.php?download=tempfile&amp;dltype=priceqty<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Price/Qty</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
+          <a href="easypopulate.php?download=tempfile&amp;dltype=category<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Category</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
+          <a href="easypopulate.php?download=tempfile&amp;dltype=froogle<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Froogle</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
           <!-- VJ product attributes begin //-->
           <?php if (EP_PRODUCTS_WITH_ATTRIBUTES == true) { ?>
-          <a href="easypopulate.php?download=tempfile&dltype=attrib<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Attributes</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
+          <a href="easypopulate.php?download=tempfile&amp;dltype=attrib<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Attributes</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
           <?php } ?>
           <!-- VJ product attributes end //-->
         </p><br />
@@ -1442,7 +1443,7 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
           </td>
           
           <?php if (EP_SHOW_EP_SETTINGS == true) { ?>
-          <td width="25%" valign="top" style="border-style:solid; border-width:thin; border-color:#CCCCCC;"><p style="margin-top: 8px;"><b>Settings & Info</b></p>
+          <td width="25%" valign="top" style="border-style:solid; border-width:thin; border-color:#CCCCCC;"><p style="margin-top: 8px;"><b>Settings &amp; Info</b></p>
           <table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">
           
              <p>EP vers: <?php echo EP_CURRENT_VERSION; ?><br />

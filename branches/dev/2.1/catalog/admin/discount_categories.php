@@ -191,7 +191,7 @@ function check_form() {
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -250,7 +250,7 @@ function check_form() {
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -308,7 +308,7 @@ function check_form() {
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE_PRODUCTS_TO_DISCOUNT_CATEGORIES; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -425,7 +425,7 @@ function check_form() {
 ?>
 <!-- table products to discount categories -->
       <tr>
-        <td valign="top"><?php echo tep_draw_form('ptodcats', FILENAME_DISCOUNT_CATEGORIES, 'page=' . $split_page . '&row_by_page=' . $row_by_page . '&manufacturer=' . $manufacturer . '&cgID=' . $cgID . '&dcID=' . $dcID . '&action=show_products&cPath=' . $current_category_id . '&do=update', 'post') . "\n"; ?>
+        <td valign="top"><?php echo tep_draw_form('ptodcats', FILENAME_DISCOUNT_CATEGORIES, 'page=' . $split_page . '&amp;row_by_page=' . $row_by_page . '&amp;manufacturer=' . $manufacturer . '&amp;cgID=' . $cgID . '&amp;dcID=' . $dcID . '&amp;action=show_products&amp;cPath=' . $current_category_id . '&amp;do=update', 'post') . "\n"; ?>
         <table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr class="dataTableHeadingRow">
             <td class="dataTableHeadingContent"><a href="<?php echo tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('sort_by','do')) . 'sort_by=pid'); ?>"><?php echo tep_image(DIR_WS_ICONS . 'ic_up.gif', SORT_BY_PRODUCTS_ID_ASC); ?></a>&nbsp;<a href="<?php echo tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('sort_by','do')) . 'sort_by=pid-desc'); ?>"><?php echo tep_image(DIR_WS_ICONS . 'ic_down.gif', SORT_BY_PRODUCTS_ID_DESC); ?></a><br><?php echo TABLE_HEADING_PRODUCTS_ID; ?></td>
@@ -450,7 +450,7 @@ function check_form() {
       }
    echo '</td>' . "\n";
    echo '         <td class="dataTableContent">' . discount_categories_drop_down($get_discount_categories, $products['discount_categories_id'], $products['products_id']) . '</td>' . "\n";
-	 echo '         <td class="dataTableContent" align="right"><a href="javascript:void(0)" onmouseover="window.status=\'' . TEXT_MOUSE_OVER_DISCOUNT_GROUPS_PER_GROUP_POPUP . '\';return true;" onmouseout="window.status=\'\'; return true;" onclick="window.open(\'' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES_GROUPS_PP, 'pID=' . $products['products_id'], 'NONSSL') . '\',\'' . NAME_WINDOW_DISCOUNT_GROUPS_PER_GROUP_POPUP . '\',\'menubar=yes,resizable=yes,scrollbars=yes,status=no,location=no,width=500,height=350\');return false">' . tep_image(DIR_WS_ICONS . 'icon_popup.gif', TEXT_IMAGE_EDIT_GROUP_DISCOUNT_CATEGORIES) . '</a>' . tep_draw_separator('pixel_trans.gif', 16, 16) .'<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products['products_id'] . '&action=new_product') . '">' . tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', TEXT_IMAGE_SWITCH_EDIT) . '</a></td>' . "\n";
+	 echo '         <td class="dataTableContent" align="right"><a href="javascript:void(0)" onmouseover="window.status=\'' . TEXT_MOUSE_OVER_DISCOUNT_GROUPS_PER_GROUP_POPUP . '\';return true;" onmouseout="window.status=\'\'; return true;" onclick="window.open(\'' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES_GROUPS_PP, 'pID=' . $products['products_id'], 'NONSSL') . '\',\'' . NAME_WINDOW_DISCOUNT_GROUPS_PER_GROUP_POPUP . '\',\'menubar=yes,resizable=yes,scrollbars=yes,status=no,location=no,width=500,height=350\');return false">' . tep_image(DIR_WS_ICONS . 'icon_popup.gif', TEXT_IMAGE_EDIT_GROUP_DISCOUNT_CATEGORIES) . '</a>' . tep_draw_separator('pixel_trans.gif', 16, 16) .'<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id'] . '&amp;action=new_product') . '">' . tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', TEXT_IMAGE_SWITCH_EDIT) . '</a></td>' . "\n";
    echo '        </tr>' . "\n";
  } // end while ($products = tep_db_fetch_array($products_query))
 ?>
@@ -491,13 +491,15 @@ function check_form() {
 ?>
 
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr><?php echo tep_draw_form('search', FILENAME_DISCOUNT_CATEGORIES, '', 'get'); ?>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
-            <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search'); ?></td>
-          </form></tr>
-        </table></td>
+        <td><?php echo tep_draw_form('search', FILENAME_DISCOUNT_CATEGORIES, '', 'get'); ?>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+              <td class="pageHeading" align="right">&nbsp;</td>
+              <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search'); ?></td>
+            </tr>
+          </table>
+        </form></td>
       </tr>
       <tr>
 
@@ -545,7 +547,7 @@ function check_form() {
       }
 
       if ( (is_object($cInfo)) && ($discount_categories['discount_categories_id'] == $cInfo->discount_categories_id) ) {
-        echo '          <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'hand\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID', 'action')) . 'dcID=' . $cInfo->discount_categories_id . '&action=edit') . '\'">' . "\n";
+        echo '          <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'hand\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID', 'action')) . 'dcID=' . $cInfo->discount_categories_id . '&amp;action=edit') . '\'">' . "\n";
       } else {
         echo '          <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'hand\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID')) . 'dcID=' . $discount_categories['discount_categories_id']) . '\'">' . "\n";
       }
@@ -573,7 +575,7 @@ function check_form() {
     } else {
 ?>
 			      <tr>
-                    <td align="right" colspan="2" class="smallText"><?php echo '<a href="' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, 'page=' . $_GET['page'] . '&action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
+                    <td align="right" colspan="2" class="smallText"><?php echo '<a href="' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, 'page=' . $_GET['page'] . '&amp;action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
                   </tr>
 <?php
 	}
@@ -588,7 +590,7 @@ function check_form() {
     case 'confirm':
         if ($_GET['dcID'] != '0') {
             $heading[] = array('text' => ''. tep_draw_separator('pixel_trans.gif', '11', '12') .'&nbsp;<br><b>' . TEXT_INFO_HEADING_DELETE_DISCOUNT_CATEGORY . '</b>');
-            $contents = array('form' => tep_draw_form('discount_categories', FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID', 'action')) . 'dcID=' . $cInfo->discount_categories_id . '&action=deleteconfirm'));
+            $contents = array('form' => tep_draw_form('discount_categories', FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID', 'action')) . 'dcID=' . $cInfo->discount_categories_id . '&amp;action=deleteconfirm'));
             $contents[] = array('text' => TEXT_DELETE_INTRO . '<br><br><b>' . $cInfo->discount_categories_name . ' </b>');
         /*    if ($cInfo->number_of_reviews > 0) $contents[] = array('text' => '<br>' . tep_draw_checkbox_field('delete_reviews', 'on', true) . ' ' . sprintf(TEXT_DELETE_REVIEWS, $cInfo->number_of_reviews)); */
             $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID', 'action')) . 'dcID=' . $cInfo->discount_categories_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
@@ -600,8 +602,8 @@ function check_form() {
     default:
       if (is_object($cInfo)) {
         $heading[] = array('text' => ''. tep_draw_separator('pixel_trans.gif', '11', '12') .'&nbsp;<br><b>' . $cInfo->discount_categories_name . '</b>');
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID', 'action')) . 'dcID=' . $cInfo->discount_categories_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID', 'action')) . 'dcID=' . $cInfo->discount_categories_id . '&action=confirm') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID', 'action', 'page')) . 'dcID=' . $cInfo->discount_categories_id . '&action=show_products') . '">' . tep_image_button('button_show_products.gif', IMAGE_SHOW_PRODUCTS) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID', 'action')) . 'dcID=' . $cInfo->discount_categories_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID', 'action')) . 'dcID=' . $cInfo->discount_categories_id . '&amp;action=confirm') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_DISCOUNT_CATEGORIES, tep_get_all_get_params(array('dcID', 'action', 'page')) . 'dcID=' . $cInfo->discount_categories_id . '&amp;action=show_products') . '">' . tep_image_button('button_show_products.gif', IMAGE_SHOW_PRODUCTS) . '</a>');
 
       }
       break;

@@ -95,7 +95,7 @@ CHECKBOX, INPUT, RADIO, SELECT, TEXTAREA, FILE { font-family: Verdana, Arial, sa
 FORM { display: inline; }
 
 /* account */
-.formArea { background-color: #f1f9fe; border-color: #7b9ebd; border-style: solid; border-width: 1px; }
+.formArea { background-color: #ffffff; border-color: #dddddd; border-style: solid; border-width: 1px; }
 .formAreaTitle { font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 12px; font-weight: bold; }
 
 /* attributes */

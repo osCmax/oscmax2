@@ -112,12 +112,21 @@ function getStatesRequest(request, div_element) {
 <!-- body_text //-->
     <td width="75%" valign="top"><form name="account_edit" method="post" <?php echo 'action="' . tep_href_link(FILENAME_CREATE_ACCOUNT_PROCESS, '', 'SSL') . '"'; ?> onSubmit="return check_form();"><input type="hidden" name="action" value="process"><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-          </tr>
-        </table></td>
+        <td>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+            </tr>
+          </table>
+        </td>
       </tr>
+
+      <?php if ( (isset($_GET['account'])) && ($_GET['account'] == 'success') ) { ?>     
+      <tr>
+        <td class="messageStackSuccess"><?php echo TEXT_ACCOUNT_CREATED; ?></td>
+      </tr>
+      <?php } ?>
+
 <?php
   if (sizeof($navigation->snapshot) > 0) {
 ?>
@@ -146,7 +155,7 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
         </td>
       </tr>
       <tr>
-        <td align="right" class="main"><br><?php echo tep_image_submit('button_confirm.gif', IMAGE_BUTTON_CONTINUE); ?></td>
+        <td align="right" class="main"><br><?php echo tep_image_submit('button_create_order.gif', IMAGE_BUTTON_CREATE); ?></td>
       </tr>
     </table></form></td>
 <!-- body_text_eof //-->

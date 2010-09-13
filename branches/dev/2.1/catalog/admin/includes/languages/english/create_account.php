@@ -45,5 +45,6 @@ define('ENTRY_FAX_NUMBER', 'Fax Number:');
 define('ENTRY_FAX_NUMBER_ERROR', '');
 define('ENTRY_FAX_NUMBER_TEXT', '');
 define('ENTRY_NEWSLETTER_TEXT', '');
-
+define('TEXT_ACCOUNT_CREATED', 'The new account has been successfully created. You can now create a <a href="' . FILENAME_CREATE_ORDER . '"> <b><u>manual order</u></b></a><br>Or use this form again to create another new account.');
+define('IMAGE_BUTTON_CREATE', 'Create Account');
 ?>

@@ -331,9 +331,9 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
      }
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></span></td>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></span></td>
 			<?php // +Country-State Selector ?>
-            <td class="main">
+            <td class="main">&nbsp;
 <?php
       $account['entry_country_id'] = STORE_COUNTRY;
 	  if ($is_read_only) {       
@@ -432,7 +432,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
     </table></td>
   </tr>
 
-<?php
+<?php /* 
   if (!$is_read_only) {
 ?>
   <tr>
@@ -468,7 +468,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 ?></td>
           </tr>
 <?php
-    }
+    } 
 ?>
         </table></td>
       </tr>
@@ -479,4 +479,5 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 <?php
   }
 ?>
+*/ ?>
 </table>

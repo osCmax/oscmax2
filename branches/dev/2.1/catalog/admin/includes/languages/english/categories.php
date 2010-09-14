@@ -82,6 +82,7 @@ define('TEXT_PRODUCTS_URL', 'URL:');
 define('TEXT_PRODUCTS_URL_WITHOUT_HTTP', '<small>(without http://)</small>');
 define('TEXT_PRODUCTS_PRICE_NET', 'Price (Net):');
 define('TEXT_PRODUCTS_PRICE_GROSS', 'Price (Gross):');
+define('TEXT_PRODUCTS_MSRP_GROSS', 'MSRP (Gross):');
 define('TEXT_PRODUCTS_WEIGHT', 'Weight:');
 define('TEXT_PRODUCTS_HEIGHT', 'Height:');
 define('TEXT_PRODUCTS_LENGTH', 'Length:');
@@ -175,6 +176,8 @@ define('TEXT_MORE_INFO', 'more...');
 // EOF Open Featured Sets
 
 define('HEADING_PRICE_HELP','Price Help');
-define('TEXT_PRICE_HELP','If you want to display <b>Contact for Price</b> set the price to -1');
+define('TEXT_PRICE_HELP', 'If you want to display <b>Contact for Price</b> set the price to -1');
+define('HEADING_MSRP_HELP', 'Manufacturer Suggested Retail Price');
+define('TEXT_MSRP_HELP', 'If you wish to display a MSRP price on your product information page then please enter it here.');
 define('TEXT_ADD_PL', 'Add another Price Break');
 ?>

@@ -1373,6 +1373,30 @@ function updateNet() {
   document.forms["new_product"].products_price_retail_net.value = document.forms["new_product"].products_price.value;
 /* EOF QPBPP for SPPC - auto-update Retail readonly price field */
 }
+
+function updateMSRPGross() {
+  var taxRate = getTaxRate();
+  var grossValue = document.forms["new_product"].products_msrp.value;
+
+  if (taxRate > 0) {
+    grossValue = grossValue * ((taxRate / 100) + 1);
+  }
+
+  document.forms["new_product"].products_msrp_gross.value = doRound(grossValue, 4);
+}
+
+function updateMSRPNet() {
+  var taxRate = getTaxRate();
+  var netValue = document.forms["new_product"].products_msrp_gross.value;
+
+  if (taxRate > 0) {
+    netValue = netValue / ((taxRate / 100) + 1);
+  }
+
+  document.forms["new_product"].products_msrp.value = doRound(netValue, 4);
+
+}
+
 //--></script>
     <?php echo tep_draw_form('new_product', FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&amp;pID=' . $_GET['pID'] : '') . '&amp;action=new_product_preview', 'post', 'enctype="multipart/form-data"'); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -1446,11 +1470,12 @@ function updateNet() {
           </tr>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_TAX_CLASS; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('products_tax_class_id', $tax_class_array, $pInfo->products_tax_class_id, 'onchange="updateGross()"'); ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('products_tax_class_id', $tax_class_array, $pInfo->products_tax_class_id, 'onchange="updateGross(); updateMSRPGross();"'); ?></td>
           </tr>
           <tr bgcolor="#ebebff">
-            <td class="main"><?php echo TEXT_PRODUCTS_PRICE_MSRP; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_msrp', $pInfo->products_msrp); ?></td>
+            <td class="main"><?php echo TEXT_PRODUCTS_PRICE_MSRP; ?><?php echo '<span title="' . HEADING_MSRP_HELP . '|' . TEXT_MSRP_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png'); ?></span></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_msrp', $pInfo->products_msrp, 'onKeyUp="updateMSRPGross()"') . 
+			tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_MSRP_GROSS . '&nbsp;' . tep_draw_input_field('products_msrp_gross', $pInfo->products_msrp, 'OnKeyUp="updateMSRPNet()"'); ?></td>
           </tr>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET; ?><?php echo '<span title="' . HEADING_PRICE_HELP . '|' . TEXT_PRICE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png'); ?></span></td>
@@ -1577,6 +1602,7 @@ function updateNet() {
 
 <script type="text/javascript"><!--
 updateGross();
+updateMSRPGross();
 //--></script>
 
 <!-- AJAX Attribute Manager  -->

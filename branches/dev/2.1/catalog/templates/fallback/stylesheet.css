@@ -71,6 +71,7 @@ td.productinfo_epf { border: 1px solid #dddddd; text-align: left; font-family: V
 td.productinfo_imagebig { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:3px; }
 td.productinfo_thumbnail  { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; }
 td.productinfo_buttons  { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; }
+td.productinfo_description { border: 1px solid #dddddd; text-align: left; font-family: Verdana, Arial, sans-serif; font-size: 12px; padding:2px; }
 td.prod_attributes { border: 1px solid #dddddd; }
 img.plusminus { cursor: pointer; }
 img.corner_banner { display:inline-block; margin-left:-6px; margin-top:-7px; position:absolute; } 

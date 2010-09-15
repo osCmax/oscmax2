@@ -105,7 +105,7 @@ $Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params()));
 
   $content = CONTENT_PRODUCT_REVIEWS_WRITE;
-  $javascript = $content . '.js';
+  $javascript = $content . '.js.php';
 
   include (bts_select('main', $content_template)); // BTSv1.5
 

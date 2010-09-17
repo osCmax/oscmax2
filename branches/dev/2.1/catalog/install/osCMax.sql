@@ -687,7 +687,7 @@ CREATE TABLE google_orders (
 
 DROP TABLE IF EXISTS information;
 CREATE TABLE information (
-  information_id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  information_id tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   information_group_id int(11) unsigned NOT NULL DEFAULT '0',
   information_title varchar(255) NOT NULL DEFAULT '',
   information_description text NOT NULL,

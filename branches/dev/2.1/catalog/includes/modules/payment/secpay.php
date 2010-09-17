@@ -3,9 +3,9 @@
 $Id: secpay.php 3 2006-05-27 04:59:07Z user $
 
   osCMax Power E-Commerce
-  http://oscdox.com
+  http://oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2010 osCmax
 
   Released under the GNU General Public License
 */
@@ -98,6 +98,26 @@ $Id: secpay.php 3 2006-05-27 04:59:07Z user $
           break;
       }
 
+// Calculate the digest to send to SECPAY
+
+      $digest_string=STORE_NAME . date('Ymdhis') . number_format($order->info['total'] * $currencies->get_value($sec_currency), $currencies->currencies[$sec_currency]['decimal_places'], '.', '') . MODULE_PAYMENT_SECPAY_REMOTE  ;
+      
+      // There is a bug in the digest code, if there are any spaces in the trans id ( usually in the STORE_NAME
+      // SECPay will replace these with an _ and the hash is calculated of that so need to do a search and replace 
+      // in the digest_string for spaces and replace with _
+
+      $space=" ";
+      $replace="_";
+      $digest_string = str_replace($space,$replace,$digest_string) ;
+      
+      $digest=MD5($digest_string) ;
+	
+      // Incase this gets 'fixed' at the SECPay end do a search and replace on the trans_id too
+      
+      $trans_id = STORE_NAME . date('Ymdhis') ;
+      
+      $trans_id = str_replace($space,$replace,$trans_id) ;
+
       $process_button_string = tep_draw_hidden_field('merchant', MODULE_PAYMENT_SECPAY_MERCHANT_ID) .
                                tep_draw_hidden_field('trans_id', STORE_NAME . date('Ymdhis')) .
                                tep_draw_hidden_field('amount', number_format($order->info['total'] * $currencies->get_value($sec_currency), $currencies->currencies[$sec_currency]['decimal_places'], '.', '')) .
@@ -120,25 +140,35 @@ $Id: secpay.php 3 2006-05-27 04:59:07Z user $
                                tep_draw_hidden_field('currency', $sec_currency) .
                                tep_draw_hidden_field('callback', tep_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL', false) . ';' . tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error=' . $this->code, 'SSL', false)) .
                                tep_draw_hidden_field(tep_session_name(), tep_session_id()) .
-                               tep_draw_hidden_field('options', 'test_status=' . $test_status . ',dups=false,cb_post=true,cb_flds=' . tep_session_name());
+                               tep_draw_hidden_field('options', 'test_status=' . $test_status . ',dups=false,cb_flds=' . tep_session_name()) .
+					 tep_draw_hidden_field('digest', $digest ) ;
 
       return $process_button_string;
     }
 
     function before_process() {
-      global $_POST;
+      global $_GET, $_POST;
 
-      if ($_POST['valid'] == 'true') {
-        if ($remote_host = getenv('REMOTE_HOST')) {
-          if ($remote_host != 'secpay.com') {
-            $remote_host = gethostbyaddr($remote_host);
-          }
-          if ($remote_host != 'secpay.com') {
-            tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $_POST[tep_session_name()] . '&payment_error=' . $this->code, 'SSL', false, false));
-          }
-        } else {
-          tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $_POST[tep_session_name()] . '&payment_error=' . $this->code, 'SSL', false, false));
+    if (
+		$_GET['valid'] == 'true' 
+		&& $_GET['code'] == 'A' 
+		&& !empty($_GET['auth_code']) 
+		&& empty($_GET['resp_code']) 
+		&& !empty($_GET['osCsid'])
+	) 
+	{
+        // MUST CONTAIN YOUR DIGEST PASSWORD ESTABLISHED WITH SECPAY
+        // $DIGEST_PASSWORD = "secpay" ;        
+	$DIGEST_PASSWORD = MODULE_PAYMENT_SECPAY_READERS_DIGEST ;
+        list($REQUEST_URI, $CHECK_SUM) = split("hash=", $_SERVER['REQUEST_URI']) ; 
+	
+        if ($HTTP_GET_VARS['hash'] != MD5($REQUEST_URI.$DIGEST_PASSWORD)) {
+           tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $HTTP_GET_VARS[tep_session_name()] . '&payment_error=' . $this->code ."&detail=hash", 'SSL', false, false));
         }
+	}
+
+    else {
+          tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $HTTP_GET_VARS[tep_session_name()] . '&payment_error=' . $this->code, 'SSL', false, false));
       }
     }
 
@@ -149,11 +179,15 @@ $Id: secpay.php 3 2006-05-27 04:59:07Z user $
     function get_error() {
       global $_GET;
 
-      if (isset($_GET['message']) && (strlen($_GET['message']) > 0)) {
-        $error = stripslashes(urldecode($_GET['message']));
-      } else {
-        $error = MODULE_PAYMENT_SECPAY_TEXT_ERROR_MESSAGE;
-      }
+if ($_GET['code'] == "N") {
+$error = "TRANSACTION WAS NOT AUTHORISED. PLEASE TRY ANOTHER CARD.";
+} 
+elseif ($_GET['code'] == "C") {
+$error = "There was a communications problem in contacing the bank, please try again.";
+}
+else {
+$error = MODULE_PAYMENT_SECPAY_TEXT_ERROR_MESSAGE;
+}
 
       return array('title' => MODULE_PAYMENT_SECPAY_TEXT_ERROR,
                    'error' => $error);
@@ -175,6 +209,8 @@ $Id: secpay.php 3 2006-05-27 04:59:07Z user $
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort order of display.', 'MODULE_PAYMENT_SECPAY_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Payment Zone', 'MODULE_PAYMENT_SECPAY_ZONE', '0', 'If a zone is selected, only enable this payment method for that zone.', '6', '2', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, use_function, date_added) values ('Set Order Status', 'MODULE_PAYMENT_SECPAY_ORDER_STATUS_ID', '0', 'Set the status of orders made with this payment module to this value', '6', '0', 'tep_cfg_pull_down_order_statuses(', 'tep_get_order_status_name', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Remote Password', 'MODULE_PAYMENT_SECPAY_REMOTE', 'secpay', 'The Remote Password needs to be created in the PayPoint extranet.', '6', '0', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Digest Key', 'MODULE_PAYMENT_SECPAY_READERS_DIGEST', 'secpay', 'The Digest Key needs to be created in the PayPoint extranet.', '6', '0', now())");
     }
 
     function remove() {
@@ -182,7 +218,7 @@ $Id: secpay.php 3 2006-05-27 04:59:07Z user $
     }
 
     function keys() {
-      return array('MODULE_PAYMENT_SECPAY_STATUS', 'MODULE_PAYMENT_SECPAY_MERCHANT_ID', 'MODULE_PAYMENT_SECPAY_CURRENCY', 'MODULE_PAYMENT_SECPAY_TEST_STATUS', 'MODULE_PAYMENT_SECPAY_ZONE', 'MODULE_PAYMENT_SECPAY_ORDER_STATUS_ID', 'MODULE_PAYMENT_SECPAY_SORT_ORDER');
+      return array('MODULE_PAYMENT_SECPAY_STATUS', 'MODULE_PAYMENT_SECPAY_MERCHANT_ID', 'MODULE_PAYMENT_SECPAY_CURRENCY', 'MODULE_PAYMENT_SECPAY_TEST_STATUS', 'MODULE_PAYMENT_SECPAY_ZONE', 'MODULE_PAYMENT_SECPAY_ORDER_STATUS_ID', 'MODULE_PAYMENT_SECPAY_SORT_ORDER', 'MODULE_PAYMENT_SECPAY_REMOTE', 'MODULE_PAYMENT_SECPAY_READERS_DIGEST');
     }
   }
 ?>

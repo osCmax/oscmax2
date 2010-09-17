@@ -39,6 +39,7 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('CONTENT_INDEX_DEFAULT', 'index_default');
   define('CONTENT_INDEX_NESTED', 'index_nested');
   define('CONTENT_INDEX_PRODUCTS', 'index_products');
+  define('CONTENT_INFORMATION', 'information');
   define('CONTENT_INFO_SHOPPING_CART', 'info_shopping_cart');
   define('CONTENT_LOGIN', 'login');
   define('CONTENT_LOGOFF', 'logoff');
@@ -241,4 +242,7 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('FILENAME_FEATURED_GBOX_PRODUCTS', 'featured_gbox_products.php');
 // EOF: Open Featured Sets
 
+// BOF: Information Pages Unlimited
+  define('FILENAME_INFORMATION', 'information.php');
+// EOF: Information Pages Unlimited
 ?>

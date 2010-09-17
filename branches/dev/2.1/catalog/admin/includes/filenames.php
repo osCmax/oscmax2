@@ -191,4 +191,8 @@ define('FILENAME_EXTRA_VALUES', 'extra_values.php');
 //EOF: Extra Product Fields
 
 define('FILENAME_IMAGES_REGEN', 'images_regen.php');
+
+// BOF: Information Pages Unlimited
+  define('FILENAME_INFORMATION_MANAGER', 'information_manager.php');
+// EOF: Information Pages Unlimited
 ?>

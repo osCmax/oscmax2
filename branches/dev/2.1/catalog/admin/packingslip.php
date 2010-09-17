@@ -36,7 +36,7 @@ $Id: packingslip.php 3 2006-05-27 04:59:07Z user $
     <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td class="pageHeading"><?php echo nl2br(STORE_NAME_ADDRESS); ?></td>
-        <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . 'store_logo.gif', STORE_NAME); ?></td>
+        <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . STORE_LOGO, STORE_NAME); ?></td>
       </tr>
     </table></td>
   </tr>
@@ -144,9 +144,13 @@ if ($the_customers_fax) {
         }
       }
 
-      echo '        </td>' . "\n" .
-           '        <td class="dataTableContent" valign="top">' . $order->products[$i]['model'] . '</td>' . "\n" .
-           '      </tr>' . "\n";
+      echo '            </td>' . "\n";
+      if(tep_not_null($order->products[$i]['code'])){
+         echo '            <td class="dataTableContent" valign="top">' .  $order->products[$i]['code'] . '</td>' . "\n" ;
+       } else {
+         echo '            <td class="dataTableContent" valign="top">' .  $order->products[$i]['model'] . '</td>' . "\n" ;
+       }
+      echo '      </tr>' . "\n";
     }
 ?>
     </table></td>

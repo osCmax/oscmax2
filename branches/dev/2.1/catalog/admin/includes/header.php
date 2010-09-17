@@ -138,7 +138,7 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
 
 <table border="0" width="100%" cellspacing="0" cellpadding="0" bgcolor="#F0F1F1">
 <tr valign="top">
-  <td width="33%" align="left"><a href="http://www.oscmax.com/" target="_blank" class="header"><?php echo tep_image(DIR_WS_IMAGES .'oscmax-logo.png'); ?></a></td>
+  <td width="33%" align="left"><a href="http://www.oscmax.com/" target="_blank" class="header"><?php echo tep_image(DIR_WS_IMAGES . STORE_LOGO); ?></a></td>
   <td width="33%" align="center">
     <table width="236">
       <tr>

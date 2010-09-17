@@ -41,6 +41,11 @@ global $customer_group_id;
     }
   }
 
+ // BOF: Information Pages Unlimited
+  require_once(DIR_WS_FUNCTIONS . 'information.php');
+  tep_information_customer_greeting_define();
+// EOF: Information Pages Unlimited
+
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_DEFAULT);
 
   if ($category_depth == 'nested') {

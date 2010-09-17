@@ -124,4 +124,8 @@ define('TABLE_EPF_LABELS', 'extra_field_labels');
 define('TABLE_EPF_VALUES', 'extra_field_values');
 define('TABLE_EPF_EXCLUDE', 'extra_value_exclude');
 // EOF: Extra Product Fields
+
+// BOF: Information Pages Unlimited
+  define('TABLE_INFORMATION', 'information');
+// EOF: Information Pages Unlimited
 ?>

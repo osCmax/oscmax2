@@ -685,6 +685,30 @@ CREATE TABLE google_orders (
   order_amount decimal(15,4) DEFAULT NULL
 );
 
+DROP TABLE IF EXISTS information;
+CREATE TABLE information (
+  information_id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  information_group_id int(11) unsigned NOT NULL DEFAULT '0',
+  information_title varchar(255) NOT NULL DEFAULT '',
+  information_description text NOT NULL,
+  parent_id int(11) DEFAULT NULL,
+  sort_order tinyint(3) unsigned NOT NULL DEFAULT '0',
+  visible enum('1','0') NOT NULL DEFAULT '1',
+  language_id int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (information_id,language_id)
+);
+
+DROP TABLE IF EXISTS information_group;
+CREATE TABLE information_group (
+  information_group_id INT(11) NOT NULL AUTO_INCREMENT,
+  information_group_title VARCHAR(64) NOT NULL DEFAULT '',
+  information_group_description VARCHAR(255) NOT NULL DEFAULT '',
+  sort_order INT(5) DEFAULT NULL,
+  visible INT(1) DEFAULT '1',
+  locked VARCHAR(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (information_group_id)
+);
+
 DROP TABLE IF EXISTS languages;
 CREATE TABLE languages (
   languages_id int NOT NULL auto_increment,
@@ -1877,6 +1901,8 @@ INSERT INTO configuration VALUES (733,'Printable Catalog-Length of the Descripti
 INSERT INTO configuration VALUES (732,'Printable Catalog-Results Per Page','PRODUCT_LIST_CATALOG_PERPAGE','10','How many products do you want to list per page?',30,3,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (731,'Printable Catalog-Number of Page Breaks Displayed','PRODUCT_LIST_PAGEBREAK_NUMBERS_PERPAGE','10','How page breaks numbers to display?',30,2,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (730,'Printable Catalog-Customer Discount in Catalog','PRODUCT_LIST_CUSTOMER_DISCOUNT','show','Setting to -show- will display the catalog with a customer discount applied if logged in. It will display pricing without discount if not logged in. (only valid if Members Discount Mod is loaded. Default if Mod not present is -hide-)',30,0,NULL,now(),NULL,'tep_cfg_select_option(array(\'show\',\'hide\'),');
+INSERT INTO configuration VALUES (729,'Printable Catalog-Enable/Disable','PRODUCT_LIST_ENABLE','true','Enables display of printable catalog and link in the information box',30,0,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\',\'false\'),');
+
 
 INSERT INTO configuration VALUES (378,'<B>Down for Maintenance: ON/OFF</B>','DOWN_FOR_MAINTENANCE','false','Down for Maintenance <br>(true=on false=off)',16,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (379,'Down for Maintenance: filename','DOWN_FOR_MAINTENANCE_FILENAME','down_for_maintenance.php','Down for Maintenance filename Default=down_for_maintenance.php',16,2,NULL,now(),NULL,'');
@@ -2238,6 +2264,11 @@ INSERT INTO configuration VALUES(3087, 'Move zip/post code input boxes below sta
 INSERT INTO configuration VALUES(3088, 'Dont show shipping and handling address checkbox or ship methods if weight of products = 0', 'ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'false', '', 7575, 100, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES(3089, 'Addresses Layout', 'ONEPAGE_ADDR_LAYOUT', 'vertical', '', 7575, 1000, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''vertical'', ''horizontal''), ');
 #One Page Checkout End
+
+#Store Logo
+INSERT INTO configuration VALUES(3125, 'Store Logo', 'STORE_LOGO', 'oscmax-logo.png', 'Set your store logo image', 1, 2, '2010-09-17 15:26:47', '0000-00-00 00:00:00', NULL, NULL);
+
+
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
@@ -2953,3 +2984,25 @@ INSERT INTO topics_description VALUES (0, 1, 'Miscellaneous Articles', 'Miscella
 INSERT INTO slideshow VALUES (1, 'osCmax - eCommerce to the max', 'http://www.oscmax.com/', 'top', 1, now(), now(), 'example_oscmax1.jpg');
 INSERT INTO slideshow VALUES (2, 'AABox - Pro web hosting', 'http://www.aabox.com/', 'top', 2, now(), now(), 'example_oscmax2.jpg');
 INSERT INTO slideshow VALUES (3, 'ejSolutions', 'http://www.ejsolutions.co.uk/', 'top', 3, now(), now(), 'example_oscmax3.jpg');
+
+#Information Pages
+INSERT INTO information VALUES(8, 1, 'Shipping & Returns', '<p>\r\n	This Page is for your shipping policies. Edit this in your admin panel under Configuration &gt;&gt; Templates &gt;&gt; Information Pages</p>', 0, 3, '1', 1);
+INSERT INTO information VALUES(8, 1, 'Liefer- und Versandkosten', '<p>\r\n	&nbsp;</p>\r\n<div style="font-family: Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">\r\n	<p>\r\n		This Page is for your shipping policies. Edit this in your admin panel under Configuration &gt;&gt; Templates &gt;&gt; Information Pages</p>\r\n</div>', 0, 3, '1', 2);
+INSERT INTO information VALUES(2, 2, 'TEXT_GREETING_PERSONAL', 'Welcome back <span class="greetUser">%s!</span> Would you like to see which <a href="%s"><u>new products</u></a> are available to purchase?', 0, 2, '1', 1);
+INSERT INTO information VALUES(3, 2, 'TEXT_GREETING_PERSONAL_RELOGON', '<small>If you are not %s, please <a href="%s"><u>log yourself in</u></a> with your account information.</small>', 0, 3, '1', 1);
+INSERT INTO information VALUES(4, 2, 'TEXT_GREETING_GUEST', 'Welcome <span class="greetUser">Guest!</span> Would you like to <a href="%s"><u>log yourself in</u></a>? Or would you prefer to <a href="%s"><u>create an account</u></a>?', 0, 4, '1', 1);
+INSERT INTO information VALUES(5, 2, 'TEXT_MAIN', 'This is a default text. Please go to visit the admin and change it.', 0, 5, '1', 1);
+INSERT INTO information VALUES(1, 2, 'HEADING_TITLE', 'What''s New Here?', 0, 1, '1', 1);
+INSERT INTO information VALUES(8, 1, 'Envios/Devoluciones', '<p>\r\n	&nbsp;</p>\r\n<div style="font-family: Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">\r\n	<p>\r\n		This Page is for your shipping policies. Edit this in your admin panel under Configuration &gt;&gt; Templates &gt;&gt; Information Pages</p>\r\n</div>', 0, 3, '1', 3);
+INSERT INTO information VALUES(9, 1, 'Gift Voucher FAQ', '<p>\r\n	<b>Purchasing Gift Vouchers</b></p>\r\n<p>\r\n	Gift Vouchers are purchased just like any other item in our store. You can pay for them using the store&#39;s standard payment method(s). Once purchased the value of the Gift Voucher will be added to your own personal Gift Voucher Account. If you have funds in your Gift Voucher Account, you will notice that the amount now shows in the Shopping Cart box, and also provides a link to a page where you can send the Gift Voucher to someone via email.</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	<b>How to Send Gift Vouchers</b></p>\r\n<p>\r\n	To send a Gift Voucher that you have purchased, you need to go to our Send Gift Voucher Page. You can find the link to this page in the Shopping Cart Box in the right hand column of each page. When you send a Gift Voucher, you need to specify the following:<br />\r\n	<br />\r\n	The name of the person you are sending the Gift Voucher to.<br />\r\n	The email address of the person you are sending the Gift Voucher to.<br />\r\n	The amount you want to send. (Note you don&#39;t have to send the full amount that is in your Gift Voucher Account.)&nbsp;<br />\r\n	A short message which will appear in the email.<br />\r\n	<br />\r\n	Please ensure that you have entered all of the information correctly, although you will be given the opportunity to change this as much as you want before the email is actually sent.</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	<b>Buying with Gift Vouchers</b></p>\r\n<p>\r\n	If you have funds in your Gift Voucher Account, you can use those funds to purchase other items in our store. At the checkout stage, an extra box will appear. Clicking this box will apply those funds in your Gift Voucher Account. Please note, you will still have to select another payment method if there is not enough in your Gift Voucher Account to cover the cost of your purchase. If you have more funds in your Gift Voucher Account than the total cost of your purchase the balance will be left in your Gift Voucher Account for the future.</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	<b>Redeeming Gift Vouchers</b></p>\r\n<p>\r\n	If you receive a Gift Voucher by email it will contain details of who sent you the Gift Voucher, along with possibly a short message from them. The Email will also contain the Gift Voucher Number. It is probably a good idea to print out this email for future reference. You can now redeem the Gift Voucher in two ways:</p>\r\n<ol>\r\n	<li>\r\n		By clicking on the link contained within the email for this express purpose. This will take you to the store&#39;s Redeem Voucher page. you will then be requested to create an account, before the Gift Voucher is validated and placed in your Gift Voucher Account ready for you to spend it on whatever you want.<br />\r\n		&nbsp;</li>\r\n	<li>\r\n		During the checkout process, on the same page that you select a payment method there will be a box to enter a Redeem Code. Enter the code here, and click the redeem button. The code will be validated and added to your Gift Voucher account. You can then use the amount to purchase any item from our store</li>\r\n</ol>', 0, 4, '1', 1);
+INSERT INTO information VALUES(9, 1, 'Gutschein einlösen', '', 0, 4, '1', 2);
+INSERT INTO information VALUES(9, 1, 'Vale de Regalo FAQ', '', 0, 4, '1', 3);
+INSERT INTO information VALUES(10, 1, 'Privacy Notice', '<p>\r\n	Privacy Policy</p>', 0, 5, '1', 1);
+INSERT INTO information VALUES(10, 1, 'Privatsphäre und Datenschutz', '', 0, 5, '1', 2);
+INSERT INTO information VALUES(10, 1, 'Confidencialidad', '', 0, 5, '1', 3);
+INSERT INTO information VALUES(11, 1, 'Conditions of Use', '<p>\r\n	Conditions of Use</p>', 0, 6, '1', 1);
+INSERT INTO information VALUES(11, 1, 'Unsere AGB''s', '<p>\r\n	Unsere AGB&#39;s</p>', 0, 6, '1', 2);
+INSERT INTO information VALUES(11, 1, 'Condiciones de uso', '<p>\r\n	Condiciones de uso</p>', 0, 6, '1', 3);
+
+INSERT INTO information_group VALUES(1, 'Information pages', 'Information pages', 1, 1, '');
+INSERT INTO information_group VALUES(2, 'Welcome message', 'Welcome message', 2, 1, 'information_title, sort_order, parent_id, visible');

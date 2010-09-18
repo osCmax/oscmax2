@@ -601,15 +601,14 @@
     }
   }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
 <head>
-<meta name="robots" content="noindex, nofollow">
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
-<title><?php echo TITLE . ' ' . HEADING_TITLE; ?></title>
+<title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
-<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
 <body>
 <!-- header //-->
@@ -619,21 +618,34 @@
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
-    </table></td>
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+      <!-- left_navigation //-->
+      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+      <!-- left_navigation_eof //-->
+      </table>
+    </td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right">&nbsp;</td>
-          </tr>
-        </table></td>
-      </tr>
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <tr>
+          <td width="100%">
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+                <td class="pageHeading" align="right">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td width="75%">
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td valign="top">
+                  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                    <tr class="dataTableHeadingRow">
+      
       <?php if (($action == 'new') || ($action =='edit')) {
       if ($action == 'edit') {
         $query = tep_db_query("select * from " . TABLE_EPF . " where epf_id = " . (int)$eid);
@@ -643,51 +655,205 @@
         while ($label = tep_db_fetch_array($label_query)) {
           $epf_label[$label['languages_id']] = $label;
         }
-        echo '<tr><td><p class="pageHeading">' . HEADING_EDIT . $eid . "</p>\n";
+        echo '<td class="dataTableHeadingContent">' . HEADING_EDIT . $eid . "</td>\n";
       } else {
-        echo '<tr><td><p class="pageHeading">' . HEADING_NEW . "</p>\n";
+        echo '<td class="dataTableHeadingContent">' . HEADING_NEW . "</td>\n";
       }
-      if (!empty($messages)) {
-        echo '<table width="100%">' . "\n";
+	  ?>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+               
+	  <?php
+	  if (!empty($messages)) {
         foreach ($messages as $message) {
           echo '<tr><td ' . ($error ? 'class="messageStackError"' : 'class="messageStackWarning"') . '>' . tep_image(DIR_WS_ICONS . ($error ? 'error.gif' : 'warning.gif')) . $message . "</td></tr>\n";
         }
-        echo "</table>\n";
       }
-      echo tep_draw_form('field_entry', FILENAME_EXTRA_FIELDS, 'action=' . (($action == 'new') ? 'insert' : 'update') . '&eid=' . $eid . ($confirmation_needed ? '&confirm=yes' : ''), 'post', 'enctype="multipart/form-data"');
-      echo "\n<table>";
-      for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-        echo '<tr border=1><td>' . tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '</td><td class="main">';
-        echo ENTRY_LABEL . tep_draw_input_field('label_' . $languages[$i]['id'], $epf_label[$languages[$i]['id']]['epf_label'], "size=64 maxlength=64") . '<br>';
-        echo ENTRY_ACTIVE . tep_draw_radio_field('langactive_' . $languages[$i]['id'], '1', false, $epf_label[$languages[$i]['id']]['epf_active_for_language']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('langactive_' . $languages[$i]['id'], '0', false, $epf_label[$languages[$i]['id']]['epf_active_for_language']) . '&nbsp;' . TEXT_NO . '</td></tr>';
-      }
-      echo "</table>\n";
-      echo '<p class="main">' . ENTRY_ACTIVATE_NOW . tep_draw_radio_field('status', '1', false, $field['epf_status']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('status', '0', false, $field['epf_status']) . '&nbsp;' . TEXT_NO . "</p>\n";
-      echo '<p class="main">' . ENTRY_SHOW_ADMIN . tep_draw_radio_field('show_admin', '1', false, $field['epf_show_in_admin']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('show_admin', '0', false, $field['epf_show_in_admin']) . '&nbsp;' . TEXT_NO . "</p>\n";
-      echo '<p class="main">' . ENTRY_ORDER . tep_draw_input_field('sort_order', $field['epf_order']) . "</p>\n";
-      echo '<p class="main">' . ENTRY_SEARCH . tep_draw_radio_field('search', '1', false, $field['epf_advanced_search']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('search', '0', false, $field['epf_advanced_search']) . '&nbsp;' . TEXT_NO . "</p>\n";
-      echo '<p class="main">' . ENTRY_LISTING . tep_draw_radio_field('listing', '1', false, $field['epf_show_in_listing']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('listing', '0', false, $field['epf_show_in_listing']) . '&nbsp;' . TEXT_NO . "</p>\n";
-      echo '<p class="main">' . ENTRY_META . tep_draw_radio_field('meta', '1', false, $field['epf_use_as_meta_keyword']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('meta', '0', false, $field['epf_use_as_meta_keyword']) . '&nbsp;' . TEXT_NO . "</p>\n";
-      if (($action == 'new') || (!$field['epf_uses_value_list'] && !$field['epf_textarea'])) echo '<p class="main">' . ENTRY_SIZE . tep_draw_input_field('size', $field['epf_size']) . "</p>\n";
-      if ($action == 'new') {
-        echo '<p class="main">' . ENTRY_TEXT_ENTRY . tep_draw_radio_field('text_entry', '0') . '&nbsp;' . TEXT_SINGLE_LINE . '&nbsp;' . tep_draw_radio_field('text_entry', '1') . '&nbsp;' . TEXT_MULTILINE . TEXT_LIST_IGNORES . '<br />' . TEXT_TEXTAREA_NOTE . "</p>\n";
-        echo '<p class="main">' . ENTRY_VALUE_LIST . tep_draw_radio_field('value_list', '1') . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('value_list', '0') . '&nbsp;' . TEXT_NO . "</p>\n";
-        echo '<p class="main"><b>' . TEXT_APPLIES_LIST_ONLY . "</b></p>\n";
-        echo '<p class="main">' . ENTRY_LIST_TYPE . tep_draw_radio_field('list_type', '0', false, $field['epf_multi_select']) . '&nbsp;' . TEXT_SINGLE_VALUE . '&nbsp;' . tep_draw_radio_field('list_type', '1', false, $field['epf_multi_select']) . '&nbsp;' . TEXT_MULTIPLE_VALUE . "</p>\n";
-      }
-      if (($action == 'new') || ($field['epf_uses_value_list'] && !$field['epf_multi_select'])) {
-        echo '<p class="main">' . ENTRY_CHAIN . tep_draw_radio_field('chain', '1', false, $field['epf_show_parent_chain']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('chain', '0', false, $field['epf_show_parent_chain']) . '&nbsp;' . TEXT_NO . "</p>\n";
-        echo '<p class="main">' . ENTRY_RESTRICT . tep_draw_radio_field('restrict', '1', false, $field['epf_use_to_restrict_listings']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('restrict', '0', false, $field['epf_use_to_restrict_listings']) . '&nbsp;' . TEXT_NO . "</p>\n";
-        echo '<p class="main">' . ENTRY_SEARCH_BOX . tep_draw_radio_field('quicksearch', '1', false, $field['epf_quick_search']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('quicksearch', '0', false, $field['epf_quick_search']) . '&nbsp;' . TEXT_NO . "</p>\n";
-        echo '<p class="main">' . ENTRY_CHECKBOX . tep_draw_radio_field('checkboxes', '0', false, $field['epf_checked_entry']) . '&nbsp;' . TEXT_DROPDOWN . '&nbsp;' . tep_draw_radio_field('checkboxes', '1', false, $field['epf_checked_entry']) . '&nbsp;' . TEXT_RADIO . ($action == 'new' ? '<br>' . TEXT_MS_CHECKBOX_NOTE : '') . "</p>\n";
-      }
-      if (($action == 'new') || ($field['epf_uses_value_list'])) {
-        echo '<p class="main">' . ENTRY_COLUMNS . tep_draw_input_field('columns', $field['epf_num_columns']) . "</p>\n";
-        echo '<p class="main"><table border=0 style="vertical-align:middle"><tr><td class="main">' . ENTRY_DISPLAY_TYPE . tep_draw_radio_field('display_type', '0', false, $field['epf_value_display_type']) . '</td><td class="main"><table border=1><tr><td class="main">' . TEXT_TEXT . '</td></tr><tr><td class="main">' . TEXT_SAMPLE . '</td></tr></table></td><td class="main">&nbsp;' . tep_draw_radio_field('display_type', '1', false, $field['epf_value_display_type']) . '</td><td class="main"><table border=1><tr><td class="main">' . TEXT_IMAGE . '</td></tr><tr><td class="main">' . tep_image(DIR_WS_IMAGES . 'EPF_Example_Image.jpg', TEXT_SAMPLE) . '</td></tr></table></td><td class="main">&nbsp;' . tep_draw_radio_field('display_type', '2', false, $field['epf_value_display_type']) . '</td><td class="main"><table border=1><tr><td class="main">' . TEXT_IMAGE_TEXT . '</td></tr><tr><td class="main"><table><tr><td align=center class="main">' . tep_image(DIR_WS_IMAGES . 'EPF_Example_Image.jpg', TEXT_SAMPLE) . '<br>' . TEXT_SAMPLE . "</td></tr></table></td></tr></table></td></tr></table></p>\n";
-      }
-      echo tep_image_submit('button_save.gif', IMAGE_SAVE) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'eid=' . $eid) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . "</a>\n";
-      ?>
-      </form></td></tr>
+	  ?>
+            </table>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td><?php echo tep_draw_form('field_entry', FILENAME_EXTRA_FIELDS, 'action=' . (($action == 'new') ? 'insert' : 'update') . '&amp;eid=' . $eid . ($confirmation_needed ? '&amp;confirm=yes' : ''), 'post', 'enctype="multipart/form-data"'); ?>
+                  <table border="0" cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                      <td class="main" width="30">&nbsp;</td>
+                      <td class="main" width="600">&nbsp;</td>
+                      <td class="main" width="250">Active?</td>
+                    </tr>
+      
+	  <?php for ($i=0, $n=sizeof($languages); $i<$n; $i++) { ?>	  
+                    <tr valign="top">
+                      <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?></td>
+                      <td class="main"><?php echo ENTRY_LABEL . tep_draw_input_field('label_' . $languages[$i]['id'], $epf_label[$languages[$i]['id']]['epf_label'], "size=64 maxlength=64"); ?></td>
+		              <td class="main"><?php echo tep_draw_radio_field('langactive_' . $languages[$i]['id'], '1', false, $epf_label[$languages[$i]['id']]['epf_active_for_language']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('langactive_' . $languages[$i]['id'], '0', false, $epf_label[$languages[$i]['id']]['epf_active_for_language']) . '&nbsp;' . TEXT_NO; ?></td>
+                    </tr>      
+	  <?php } ?>
+                    <tr valign="top">
+                      <td class="main" colspan="3">&nbsp;</td>
+                    </tr>
+                    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_ACTIVATE_NOW; ?></td>
+                      <td class="main"><?php echo tep_draw_radio_field('status', '1', false, $field['epf_status']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('status', '0', false, $field['epf_status']) . '&nbsp;' . TEXT_NO; ?></td>
+                    </tr>
+			        <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_SHOW_ADMIN; ?></td>
+                      <td class="main"><?php echo tep_draw_radio_field('show_admin', '1', false, $field['epf_show_in_admin']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('show_admin', '0', false, $field['epf_show_in_admin']) . '&nbsp;' . TEXT_NO; ?></td>
+                    </tr>
+				    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_ORDER; ?></td>
+                      <td class="main"><?php echo tep_draw_input_field('sort_order', $field['epf_order']); ?></td>
+                    </tr>
+				    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_SEARCH; ?></td>
+                      <td class="main"><?php echo tep_draw_radio_field('search', '1', false, $field['epf_advanced_search']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('search', '0', false, $field['epf_advanced_search']) . '&nbsp;' . TEXT_NO; ?></td>
+                    </tr>
+		            <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_LISTING; ?></td>
+                      <td class="main"><?php echo tep_draw_radio_field('listing', '1', false, $field['epf_show_in_listing']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('listing', '0', false, $field['epf_show_in_listing']) . '&nbsp;' . TEXT_NO; ?></td>
+                    </tr>
+	     		    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_META; ?></td>
+                      <td class="main"><?php echo tep_draw_radio_field('meta', '1', false, $field['epf_use_as_meta_keyword']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('meta', '0', false, $field['epf_use_as_meta_keyword']) . '&nbsp;' . TEXT_NO; ?></td>
+                    </tr>
+				  <?php
+				  if (($action == 'new') || (!$field['epf_uses_value_list'] && !$field['epf_textarea'])) { ?>
+                    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_SIZE; ?></td>
+                     <td class="main"><?php echo tep_draw_input_field('size', $field['epf_size']); ?></td>
+                    </tr>		
+        		  <?php 
+				  }
+                  
+                  if ($action == 'new') { ?>
+                    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_TEXT_ENTRY; ?></td>
+                      <td class="main"><?php echo tep_draw_radio_field('text_entry', '0') . '&nbsp;' . TEXT_SINGLE_LINE . '&nbsp;' . tep_draw_radio_field('text_entry', '1') . '&nbsp;' . TEXT_MULTILINE . TEXT_LIST_IGNORES . '<br />' . TEXT_TEXTAREA_NOTE; ?></td>
+                    </tr>
+                    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_VALUE_LIST; ?></td>
+                      <td class="main"><?php echo tep_draw_radio_field('value_list', '1', 'true', '', ' id="yestoggle"') . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('value_list', '0', '', '', ' id="notoggle"') . '&nbsp;' . TEXT_NO; ?></td>
+                    </tr>
+                  </table>
+                
+                <!-- BELOW ONLY APPLIES IF LIST TYPE //-->
+                <div id="listofvalues">
+                  <table border="0" cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                      <td class="main" colspan="3"><b><?php echo TEXT_APPLIES_LIST_ONLY; ?></b></td>
+                    </tr>
+                    <tr valign="top">
+                      <td class="main" width="30">&nbsp;</td>
+                      <td class="main" width="600"><?php echo ENTRY_LIST_TYPE; ?></td>
+                      <td class="main" width="250"><?php echo tep_draw_radio_field('list_type', '0', false, $field['epf_multi_select']) . '&nbsp;' . TEXT_SINGLE_VALUE . '&nbsp;' . tep_draw_radio_field('list_type', '1', false, $field['epf_multi_select']) . '&nbsp;' . TEXT_MULTIPLE_VALUE; ?></td>
+                    </tr>
+        
+				  <?php
+                  } // if ($action == 'new')
+				  
+                  if (($action == 'new') || ($field['epf_uses_value_list'] && !$field['epf_multi_select'])) { ?>
+                    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_CHAIN; ?></td>
+                      <td class="main"><?php echo tep_draw_radio_field('chain', '1', false, $field['epf_show_parent_chain']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('chain', '0', false, $field['epf_show_parent_chain']) . '&nbsp;' . TEXT_NO; ?></td>
+                    </tr>
+                    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_RESTRICT; ?></td>
+                      <td class="main"><?php echo tep_draw_radio_field('restrict', '1', false, $field['epf_use_to_restrict_listings']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('restrict', '0', false, $field['epf_use_to_restrict_listings']) . '&nbsp;' . TEXT_NO; ?></td>
+                    </tr>
+                    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_SEARCH_BOX; ?></td>
+                      <td class="main"><?php echo tep_draw_radio_field('quicksearch', '1', false, $field['epf_quick_search']) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('quicksearch', '0', false, $field['epf_quick_search']) . '&nbsp;' . TEXT_NO; ?></td>
+                    </tr>
+                    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_CHECKBOX; ?></td>
+                      <td class="main"><?php echo tep_draw_radio_field('checkboxes', '0', false, $field['epf_checked_entry']) . '&nbsp;' . TEXT_DROPDOWN . '&nbsp;' . tep_draw_radio_field('checkboxes', '1', false, $field['epf_checked_entry']) . '&nbsp;' . TEXT_RADIO . ($action == 'new' ? '<br>' . TEXT_MS_CHECKBOX_NOTE : ''); ?></td>
+                    </tr>
+                  <?php
+                  } // end if (($action == 'new') || ($field['epf_uses_value_list'] && !$field['epf_multi_select']))
+				  
+                  if (($action == 'new') || ($field['epf_uses_value_list'])) { ?>
+                    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td class="main"><?php echo ENTRY_COLUMNS; ?></td>
+                      <td class="main"><?php echo tep_draw_input_field('columns', $field['epf_num_columns']); ?></td>
+                    </tr>
+                    <tr valign="top">
+                      <td class="main">&nbsp;</td>
+                      <td colspan="2">
+                        <table border=0 style="vertical-align:middle">
+                          <tr>
+                            <td class="main"><?php echo ENTRY_DISPLAY_TYPE . tep_draw_radio_field('display_type', '0', false, $field['epf_value_display_type']); ?></td>
+                            <td class="main">
+                              <table border="1">
+                                <tr>
+                                  <td class="main"><?php echo TEXT_TEXT; ?></td>
+                                </tr>
+                                <tr>
+                                  <td class="main"><?php echo TEXT_SAMPLE; ?></td>
+                                </tr>
+                              </table>
+                            </td>
+                            <td class="main"><?php echo tep_draw_radio_field('display_type', '1', false, $field['epf_value_display_type']); ?></td>
+                            <td class="main">
+                              <table border="1">
+                                <tr>
+                                  <td class="main"><?php echo TEXT_IMAGE; ?></td>
+                                </tr>
+                                <tr>
+                                  <td class="main"><?php echo tep_image(DIR_WS_IMAGES . 'EPF_Example_Image.jpg', TEXT_SAMPLE); ?></td>
+						        </tr>
+						      </table>
+					        </td>
+						    <td class="main"><?php echo tep_draw_radio_field('display_type', '2', false, $field['epf_value_display_type']); ?></td>
+                            <td class="main">
+                              <table border="1">
+                                <tr>
+                                  <td class="main"><?php echo TEXT_IMAGE_TEXT; ?></td>
+                                </tr>
+                                <tr>
+                                  <td class="main">
+                                    <table>
+                                      <tr>
+                                        <td align=center class="main"><?php echo tep_image(DIR_WS_IMAGES . 'EPF_Example_Image.jpg', TEXT_SAMPLE) . '<br>' . TEXT_SAMPLE; ?></td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                  </div>
+                  <?php 
+			      } // end if (($action == 'new') || ($field['epf_uses_value_list']))
+                  ?>
+                  <table border="0" width="100%" cellspacing="0" cellpadding="2">  
+	                <tr>
+                      <td colspan="3" align="right"><?php echo tep_image_submit('button_save.gif', IMAGE_SAVE) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'eid=' . $eid) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL); ?></a></td>
+                    </tr>
+                  </table>
+                </form></td>
+              </tr>
+            </table>
+          </td>
+                          
       <?php } elseif ($action == 'link') { // get field to link to
         $error = false;
         $messages = array();
@@ -699,17 +865,20 @@
           $error = true;
           $messages[] = ERROR_NO_FIELD;
         }
+		
         $label_query = tep_db_query("select languages_id, epf_label from " . TABLE_EPF_LABELS . " where (epf_id = " . (int)$eid . ") and epf_active_for_language");
         $eid_active_languages = array();
         while ($label = tep_db_fetch_array($label_query)) {
           $eid_active_languages[] = $label['languages_id'];
           echo tep_image(DIR_WS_CATALOG_LANGUAGES . $lang[$label['languages_id']]['directory'] . '/images/' . $lang[$label['languages_id']]['image'], $lang[$label['languages_id']]['name']) . '&nbsp;' . $label['epf_label'] . '<br>';
         }
+		
         if (empty($eid_active_languages)) {
           $error = true;
           $messages[] = ERROR_NO_FIELD;
         }
-        echo '<p>' . tep_draw_form('link_fields', FILENAME_EXTRA_FIELDS, 'confirm=yes&action=link');
+		
+        echo '<p>' . tep_draw_form('link_fields', FILENAME_EXTRA_FIELDS, 'confirm=yes&amp;action=link');
         echo tep_draw_hidden_field('epf_id', $eid) . '<b>' . TEXT_SELECT_LINK . "</b></p>\n";
         ?>
         <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -719,11 +888,11 @@
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_SELECT; ?></td>
               </tr>
         <?php
-$field_query = tep_db_query("select * from " . TABLE_EPF . ' where epf_uses_value_list and !epf_has_linked_field and epf_multi_select = ' . ($field_info['epf_multi_select'] ? '0' : '1') . " order by epf_order");
-$any_matching_languages = false;
-while ($epf = tep_db_fetch_array($field_query)) {
-  $this_matches_languages = false;
-?>
+        $field_query = tep_db_query("select * from " . TABLE_EPF . ' where epf_uses_value_list and !epf_has_linked_field and epf_multi_select = ' . (        $field_info['epf_multi_select'] ? '0' : '1') . " order by epf_order");
+        $any_matching_languages = false;
+        while ($epf = tep_db_fetch_array($field_query)) {
+          $this_matches_languages = false;
+        ?>
               <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)">
                 <td class="dataTableContent"><?php echo $epf['epf_id']; ?></td>
                 <td class="dataTableContent">
@@ -733,29 +902,29 @@ while ($epf = tep_db_fetch_array($field_query)) {
                     $any_matching_languages = true;
                     $this_matches_languages = true;
                     echo '* ';
-                  }
+                  } // end if 
                   echo tep_image(DIR_WS_CATALOG_LANGUAGES . $lang[$label['languages_id']]['directory'] . '/images/' . $lang[$label['languages_id']]['image'], $lang[$label['languages_id']]['name']) . '&nbsp;' . $label['epf_label'] . '<br>';
-                }
+                } // end while
                 ?>
                 </td>
                 <td class="dataTableContent" align="center">
 <?php
-      if ($this_matches_languages) {
-        echo tep_draw_radio_field('link_to', $epf['epf_id']);
-      } else {
-        echo TEXT_NOT_LINKABLE;
-      }
+                if ($this_matches_languages) {
+                  echo tep_draw_radio_field('link_to', $epf['epf_id']);
+                } else {
+                  echo TEXT_NOT_LINKABLE;
+                } // end if ($this_matches_languages)
 ?>
                 </td>
               </tr>
               
 <?php
-}
+        } // end while
 ?>
 
             </table>
             <table border="1">
-            <tr>
+              <tr>
                 <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
               </tr>
             </table>
@@ -796,20 +965,16 @@ while ($epf = tep_db_fetch_array($field_query)) {
         echo '<p>' . sprintf(TEXT_NUM_LINKED, $used) . "</p>\n";
         if ($double_check == 'no') {
           echo '<p>' . TEXT_SURE_UNLINK . (($used > 0) ? TEXT_LINKS_GONE : '') . "</p>\n";
-          echo '<p>' . tep_draw_form('yes', FILENAME_EXTRA_FIELDS, 'confirm=yes&action=unlink&eid=' . $eid . '&used=' . $used) . tep_draw_input_field('yes', TEXT_YES, 'alt="' . TEXT_YES . '"', false, 'submit') . '</form>&nbsp;&nbsp;';
+          echo '<p>' . tep_draw_form('yes', FILENAME_EXTRA_FIELDS, 'confirm=yes&amp;action=unlink&amp;eid=' . $eid . '&amp;used=' . $used) . tep_draw_input_field('yes', TEXT_YES, 'alt="' . TEXT_YES . '"', false, 'submit') . '</form>&nbsp;&nbsp;';
           echo tep_draw_form('no', FILENAME_EXTRA_FIELDS, 'eid=' . $eid) . tep_draw_input_field('no', TEXT_NO, 'alt="' . TEXT_NO . '"', false, 'submit') . "</form></p>\n";
         } else {
           echo '<p><b>' . TEXT_CONFIRM_UNLINK . "</b></p>\n";
-          echo '<p>' . tep_draw_form('yes', FILENAME_EXTRA_FIELDS, 'confirm=yes&action=unlink&eid=' . $eid) . tep_draw_input_field('yes', TEXT_YES, 'alt="' . TEXT_YES . '"', false, 'submit') . '</form>&nbsp;&nbsp;';
+          echo '<p>' . tep_draw_form('yes', FILENAME_EXTRA_FIELDS, 'confirm=yes&amp;action=unlink&amp;eid=' . $eid) . tep_draw_input_field('yes', TEXT_YES, 'alt="' . TEXT_YES . '"', false, 'submit') . '</form>&nbsp;&nbsp;';
           echo tep_draw_form('no', FILENAME_EXTRA_FIELDS, 'eid=' . $eid) . tep_draw_input_field('no', TEXT_NO, 'alt="' . TEXT_NO . '"', false, 'submit') . "</form></p>\n";
         }
         echo "</td></tr>\n";
       } else { /* display list of fields */?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr class="dataTableHeadingRow">
+      
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_ID; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LABEL; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ORDER; ?></td>
@@ -822,7 +987,7 @@ $selected_labels = array();
 while ($epf = tep_db_fetch_array($field_query)) {
   if ($eid == '') $eid = $epf['epf_id'];
   if ($epf['epf_id'] == $eid) {
-    echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_EXTRA_FIELDS, 'eid=' . $eid . '&action=edit') . '\'">' . "\n";
+    echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_EXTRA_FIELDS, 'eid=' . $eid . '&amp;action=edit') . '\'">' . "\n";
     $selected = $epf;
   } else {
     echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_EXTRA_FIELDS, 'eid=' . $epf['epf_id']) . '\'">' . "\n";
@@ -841,9 +1006,9 @@ while ($epf = tep_db_fetch_array($field_query)) {
                 <td class="dataTableContent" align="center">
 <?php
       if ($epf['epf_status'] == '1') {
-        echo tep_image(DIR_WS_ICONS . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'action=setflag&flag=0&eid=' . $epf['epf_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+        echo tep_image(DIR_WS_ICONS . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'action=setflag&amp;flag=0&amp;eid=' . $epf['epf_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
       } else {
-        echo '<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'action=setflag&flag=1&eid=' . $epf['epf_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+        echo '<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'action=setflag&amp;flag=1&amp;eid=' . $epf['epf_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
       }
 ?>
                 </td>
@@ -856,6 +1021,7 @@ while ($epf = tep_db_fetch_array($field_query)) {
                 <td align="right" colspan="5"><?php echo '<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
               </tr>
             </table></td>
+
 <?php // build information box contents
   $heading = array();
   $contents = array();
@@ -865,17 +1031,17 @@ while ($epf = tep_db_fetch_array($field_query)) {
       $heading[] = array('text' => $lang[$label['languages_id']]['name'] . ': ' . $label['epf_label']);
       if ($label['languages_id'] == $languages_id) $admin_language = $languages_id;
     }
-    $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'eid=' . $eid . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'eid=' . $eid . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+    $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'eid=' . $eid . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'eid=' . $eid . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
     if ($selected['epf_uses_value_list']) {
       $contents[] = array('align' => 'center', 'text' => tep_draw_form('edit_values', FILENAME_EXTRA_VALUES, 'list_id=' . $selected['epf_id'] . '_' . $admin_language) . tep_draw_input_field('edit_values', BUTTON_EDIT_VALUES, 'alt="' . BUTTON_EDIT_VALUES . '"', false, 'submit') . '</form>');
     }
     if ($selected['epf_has_linked_field']) {
-      $contents[] = array('align' => 'center', 'text' => tep_draw_form('unlink', FILENAME_EXTRA_FIELDS, 'eid=' . $eid . '&action=unlink') . tep_draw_input_field('unlink', BUTTON_UNLINK, 'alt="' . BUTTON_UNLINK . '"', false, 'submit') . '</form>');
+      $contents[] = array('align' => 'center', 'text' => tep_draw_form('unlink', FILENAME_EXTRA_FIELDS, 'eid=' . $eid . '&amp;action=unlink') . tep_draw_input_field('unlink', BUTTON_UNLINK, 'alt="' . BUTTON_UNLINK . '"', false, 'submit') . '</form>');
     } elseif ($selected['epf_uses_value_list']) { // check to see if a field link can be made before displaying button
       $query = tep_db_query('select count(epf_id) as total from ' . TABLE_EPF . ' where epf_uses_value_list and !epf_has_linked_field and epf_multi_select = ' . ($selected['epf_multi_select'] ? '0' : '1'));
       $check = tep_db_fetch_array($query);
       if ($check['total'] > 0) {
-        $contents[] = array('align' => 'center', 'text' => tep_draw_form('link', FILENAME_EXTRA_FIELDS, 'eid=' . $eid . '&action=link') . tep_draw_input_field('link', BUTTON_LINK, 'alt="' . BUTTON_LINK . '"', false, 'submit') . '</form>');      
+        $contents[] = array('align' => 'center', 'text' => tep_draw_form('link', FILENAME_EXTRA_FIELDS, 'eid=' . $eid . '&amp;action=link') . tep_draw_input_field('link', BUTTON_LINK, 'alt="' . BUTTON_LINK . '"', false, 'submit') . '</form>');      
       }
     }
     $contents[] = array('text' => TABLE_HEADING_STATUS . ': ' . ($selected['epf_status'] ? TEXT_ENABLED : TEXT_DISABLED));
@@ -930,10 +1096,10 @@ while ($epf = tep_db_fetch_array($field_query)) {
 		
 		if ($double_check == 'no') {
           $contents[] = array('text' => '<b>' . TEXT_ARE_SURE . '</b>' . ($field_info['epf_uses_value_list'] ? TEXT_VALUES_GONE : '') . ($field_info['epf_has_linked_field'] ? TEXT_LINKS_DESTROYED : ''));
-          $contents[] = array('text' => '<center><a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'confirm=yes&action=delete&eid=' . $eid . '&used=' . $used) . '">' . tep_image_button('button_confirm.gif', IMAGE_CONFIRM) . '</a>' . '&nbsp;<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'eid=' . $eid) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a></center>');
+          $contents[] = array('text' => '<center><a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'confirm=yes&amp;action=delete&amp;eid=' . $eid . '&amp;used=' . $used) . '">' . tep_image_button('button_confirm.gif', IMAGE_CONFIRM) . '</a>' . '&nbsp;<a href="' . tep_href_link(FILENAME_EXTRA_FIELDS, 'eid=' . $eid) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a></center>');
         } else {
           $contents[] = array('text' => '<p><b>' . TEXT_CONFIRM_DELETE . ($field_info['epf_uses_value_list'] ? TEXT_VALUES_GONE : '') . ($field_info['epf_has_linked_field'] ? TEXT_LINKS_DESTROYED : '') . "</b></p>");
-          $contents[] = array('text' => '<p>' . tep_draw_form('yes', FILENAME_EXTRA_FIELDS, 'confirm=yes&action=delete&eid=' . $eid) . tep_draw_input_field('yes', TEXT_YES, 'alt="' . TEXT_YES . '"', false, 'submit') . '</form>&nbsp;&nbsp;');
+          $contents[] = array('text' => '<p>' . tep_draw_form('yes', FILENAME_EXTRA_FIELDS, 'confirm=yes&amp;action=delete&amp;eid=' . $eid) . tep_draw_input_field('yes', TEXT_YES, 'alt="' . TEXT_YES . '"', false, 'submit') . '</form>&nbsp;&nbsp;');
           $contents[] = array('text' => tep_draw_form('no', FILENAME_EXTRA_FIELDS, 'eid=' . $eid) . tep_draw_input_field('no', TEXT_NO, 'alt="' . TEXT_NO . '"', false, 'submit') . "</form></p>");
         }
 		
@@ -947,8 +1113,13 @@ while ($epf = tep_db_fetch_array($field_query)) {
             $contents[] = array('text' => tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . sprintf(TEXT_FIELD_DATA, $label['epf_label'], $check['total']));
         }
 		break;
-      } 	  
+      } 
+	  
 // display information box if it exists
+  ?>
+          
+  <?php
+
   if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";
     $box = new box;
@@ -964,11 +1135,13 @@ while ($epf = tep_db_fetch_array($field_query)) {
     echo '            </td>';  
   }
 ?>
-          </tr>
-        </table></td>
-      </tr>
+              </tr>
+            </table>
+          </td>
+        </tr>
       <?php } ?>
-    </table></td>
+      </table>
+    </td>
 <!-- body_text_eof //-->
   </tr>
 </table>

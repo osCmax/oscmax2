@@ -50,7 +50,7 @@ define('ENTRY_COLUMNS', 'Number of columns of values to use for checkbox/radio e
 define('ENTRY_DISPLAY_TYPE', 'Display List Field Values As: ');
 define('TEXT_TEXT', 'Text Only');
 define('TEXT_IMAGE', 'Image Only (with alt text)');
-define('TEXT_IMAGE_TEXT', 'Image & Text');
+define('TEXT_IMAGE_TEXT', 'Image &amp; Text');
 define('TEXT_SAMPLE', 'Example Display');
 define('ERROR_COLS_OUTOFRANGE', '&nbsp;&nbsp;Number Of Columns must be a number between 1 and 255!');
 define('ERROR_OUTOFRANGE', '&nbsp;&nbsp;Maximum size must be a number between 1 and 255!');

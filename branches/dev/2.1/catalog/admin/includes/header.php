@@ -92,6 +92,21 @@
 	$('#show7').click(function(){ $('#row-8').show(); $('#show7').hide(); });
 	$('#show8').click(function(){ $('#row-9').show(); $('#show8').hide(); });
 	$('#show9').click(function(){ $('#row-10').show(); $('#show9').hide(); });
+
+//Code for EPF show/hide list functions
+var toggle = $("input[name='yestoggle']:checked").val();
+if (toggle == 0) {
+  $("#listofvalues").hide();
+}
+
+$("#yestoggle").click(function(){
+	$("#listofvalues").show();						   
+});
+$("#notoggle").click(function(){
+	$("#listofvalues").hide();						   
+});
+
+
 });
 
 </script>

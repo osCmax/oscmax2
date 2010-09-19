@@ -217,7 +217,7 @@
           foreach ($excludes as $val) {
             tep_db_query('insert into ' . TABLE_EPF_EXCLUDE . ' set value_id1 = ' . (int)$vid . ', value_id2 = ' . (int)$val);
           }
-          tep_redirect(tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&list_id=' . $list_id));
+          tep_redirect(tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&amp;list_id=' . $list_id));
         }
         break;
       case 'update': // validate form
@@ -265,7 +265,7 @@
           foreach ($excludes as $val) { // insert new list of exclusions
             tep_db_query('insert into ' . TABLE_EPF_EXCLUDE . ' set value_id1 = ' . (int)$vid . ', value_id2 = ' . (int)$val);
           }
-          tep_redirect(tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&list_id=' . $list_id));
+          tep_redirect(tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&amp;list_id=' . $list_id));
         }
         break;
       case 'delete':
@@ -377,7 +377,7 @@
             <td colspan="2" class="main"><?php echo TEXT_SELECT_FIELD . '&nbsp;&nbsp;' . tep_draw_form('select_field', FILENAME_EXTRA_VALUES, '', 'get') . tep_draw_pull_down_menu('list_id', $fields, '', 'onchange="this.form.submit()"'); ?></form></td>
           </tr>
           <tr>
-            <td colspan=2 align="right" class="main"><?php echo tep_draw_form('new', FILENAME_EXTRA_VALUES, 'action=new&list_id=' . $list_id) . tep_draw_input_field('new', BUTTON_NEW, 'alt="' . BUTTON_NEW . '"', false, 'submit') . '</form>&nbsp;&nbsp;'; ?></td>
+            <td colspan=2 align="right" class="main"><?php echo tep_draw_form('new', FILENAME_EXTRA_VALUES, 'action=new&amp;list_id=' . $list_id) . tep_draw_input_field('new', BUTTON_NEW, 'alt="' . BUTTON_NEW . '"', false, 'submit') . '</form>&nbsp;&nbsp;'; ?></td>
           </tr>
           <?php } ?>
         </table></td>
@@ -402,7 +402,7 @@
         }
         echo "</table>\n";
       }
-      echo tep_draw_form('value_entry', FILENAME_EXTRA_VALUES, 'action=' . (($action == 'new') ? 'insert' : 'update') . '&vid=' . $vid . '&list_id=' . $list_id . '&parent=' . $parent_id . ($confirmation_needed ? '&confirm=yes' : ''), 'post', 'enctype="multipart/form-data"');
+      echo tep_draw_form('value_entry', FILENAME_EXTRA_VALUES, 'action=' . (($action == 'new') ? 'insert' : 'update') . '&amp;vid=' . $vid . '&amp;list_id=' . $list_id . '&amp;parent=' . $parent_id . ($confirmation_needed ? '&amp;confirm=yes' : ''), 'post', 'enctype="multipart/form-data"');
 	  echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">' . "\n";
 	  echo '  <tr>' . "\n";
       echo '    <td width="130" class="main">' . ENTRY_ORDER . '</td><td>' . tep_draw_input_field('sort_order', $value['sort_order']) . "</td>\n";
@@ -456,7 +456,7 @@
         }
         echo "</tr></table></p>\n";
       }
-      echo tep_image_submit('button_save.gif', IMAGE_SAVE) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_EXTRA_VALUES, 'list_id=' . $list_id . "&vid=" . $vid) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . "</a>\n"
+      echo tep_image_submit('button_save.gif', IMAGE_SAVE) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_EXTRA_VALUES, 'list_id=' . $list_id . "&amp;vid=" . $vid) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . "</a>\n"
       ?>
       </form></td></tr>
       <?php } elseif ($action == 'delete') {
@@ -479,12 +479,12 @@
         echo '<p>' . sprintf(TEXT_FIELD_DATA, $lang[$lid]['name'], $current_label, $check['total']) . "</p>\n";
         if ($double_check == 'no') {
           echo '<p>' . TEXT_ARE_SURE . ($children != '' ? TEXT_VALUES_GONE : '') . "</p>\n";
-          echo '<p>' . tep_draw_form('yes', FILENAME_EXTRA_VALUES, 'confirm=yes&action=delete&vid=' . $vid . '&list_id=' . $list_id . '&used=' . ($check['total'] + $links)) . tep_draw_input_field('yes', TEXT_YES, 'alt="' . TEXT_YES . '"', false, 'submit') . '</form>&nbsp;&nbsp;';
-          echo tep_draw_form('no', FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&list_id=' . $list_id) . tep_draw_input_field('no', TEXT_NO, 'alt="' . TEXT_NO . '"', false, 'submit') . "</form></p>\n";
+          echo '<p>' . tep_draw_form('yes', FILENAME_EXTRA_VALUES, 'confirm=yes&amp;action=delete&amp;vid=' . $vid . '&amp;list_id=' . $list_id . '&amp;used=' . ($check['total'] + $links)) . tep_draw_input_field('yes', TEXT_YES, 'alt="' . TEXT_YES . '"', false, 'submit') . '</form>&nbsp;&nbsp;';
+          echo tep_draw_form('no', FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&amp;list_id=' . $list_id) . tep_draw_input_field('no', TEXT_NO, 'alt="' . TEXT_NO . '"', false, 'submit') . "</form></p>\n";
         } else {
           echo '<p><b>' . TEXT_CONFIRM_DELETE . ($children != '' ? TEXT_VALUES_GONE : '') . "</b></p>\n";
-          echo '<p>' . tep_draw_form('yes', FILENAME_EXTRA_VALUES, 'confirm=yes&action=delete&vid=' . $vid . '&list_id=' . $list_id) . tep_draw_input_field('yes', TEXT_YES, 'alt="' . TEXT_YES . '"', false, 'submit') . '</form>&nbsp;&nbsp;';
-          echo tep_draw_form('no', FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&list_id=' . $list_id) . tep_draw_input_field('no', TEXT_NO, 'alt="' . TEXT_NO . '"', false, 'submit') . "</form></p>\n";
+          echo '<p>' . tep_draw_form('yes', FILENAME_EXTRA_VALUES, 'confirm=yes&amp;action=delete&amp;vid=' . $vid . '&amp;list_id=' . $list_id) . tep_draw_input_field('yes', TEXT_YES, 'alt="' . TEXT_YES . '"', false, 'submit') . '</form>&nbsp;&nbsp;';
+          echo tep_draw_form('no', FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&amp;list_id=' . $list_id) . tep_draw_input_field('no', TEXT_NO, 'alt="' . TEXT_NO . '"', false, 'submit') . "</form></p>\n";
         }
         echo "</td></tr>\n";
       } else { /* display list of values */?>
@@ -516,10 +516,10 @@ foreach ($query as $value) {
   }
   if ($vid == '') $vid = $value['value_id'];
   if ($value['value_id'] == $vid) {
-    echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&action=edit&list_id=' . $list_id) . '\'">' . "\n";
+    echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&amp;action=edit&amp;list_id=' . $list_id) . '\'">' . "\n";
     $selected = $value;
   } else {
-    echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $value['value_id'] . '&list_id=' . $list_id) . '\'">' . "\n";
+    echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $value['value_id'] . '&amp;list_id=' . $list_id) . '\'">' . "\n";
   }
 ?>
                 <td class="dataTableContent"><?php echo $value['value_id']; ?></td>
@@ -530,14 +530,14 @@ foreach ($query as $value) {
                 <td class="dataTableContent"><?php echo ($field_info['epf_multi_select'] ? $value['value_depends_on'] : implode(', ', $linked)); ?></td>
                 <?php } ?>
                 <td class="dataTableContent" align="center"><?php echo $value['sort_order']; ?></td>
-                <td class="dataTableContent" align="right"><?php if ($value['value_id'] == $vid) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $value['value_id'] . '&list_id=' . $list_id) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ($value['value_id'] == $vid) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $value['value_id'] . '&amp;list_id=' . $list_id) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
 }
 ?>
               <tr><td colspan="7" class="main">
               <?php
-              echo TEXT_PREVIEW . '<br>';
+			  echo '<br><br>' . TEXT_PREVIEW . '<br>';
               if ($field_info['epf_has_linked_field'] && $field_info['epf_multi_select']) {
                 $vallist = array();
                 foreach ($query as $val) {
@@ -585,7 +585,7 @@ foreach ($query as $value) {
                 }
                 echo '</tr></table>';
               } else {
-                echo tep_draw_pull_down_menu('preview', tep_build_epf_pulldown($eid, $lid));
+				echo tep_draw_pull_down_menu('preview', tep_build_epf_pulldown($eid, $lid));
               }
               ?>
               </td></tr>
@@ -598,9 +598,9 @@ foreach ($query as $value) {
     $heading[] = array('text' => $lang[$lid]['name'] . ': ' . $current_label);
     $heading[] = array('text' => TABLE_HEADING_ID . $selected['value_id']);
     $heading[] = array('text' => ENTRY_VALUE . $selected['epf_value']);
-    $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&action=edit&list_id=' . $list_id) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&action=delete&list_id=' . $list_id) . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+    $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&amp;action=edit&amp;list_id=' . $list_id) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&amp;action=delete&amp;list_id=' . $list_id) . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
     if (!$field_info['epf_multi_select'])
-      $contents[] = array('align' => 'center', 'text' => tep_draw_form('subvalue', FILENAME_EXTRA_VALUES, 'list_id=' . $selected['epf_id'] . '_' . $selected['languages_id'] . '&parent=' . $selected['value_id'] . "&action=new" ) . tep_draw_input_field('subvalues', BUTTON_SUBVALUE, 'alt="' . BUTTON_SUBVALUES . '"', false, 'submit') . '</form>');
+      $contents[] = array('align' => 'center', 'text' => tep_draw_form('subvalue', FILENAME_EXTRA_VALUES, 'list_id=' . $selected['epf_id'] . '_' . $selected['languages_id'] . '&amp;parent=' . $selected['value_id'] . "&amp;action=new" ) . tep_draw_input_field('subvalues', BUTTON_SUBVALUE, 'alt="' . BUTTON_SUBVALUES . '"', false, 'submit') . '</form>');
     $contents[] = array('text' => ENTRY_VALUE . $selected['epf_value']);
     $contents[] = array('text' => TABLE_HEADING_PARENT . ': ' . $selected['parent_id']);
     $contents[] = array('text' => TABLE_HEADING_ORDER . ': ' . $selected['sort_order']);

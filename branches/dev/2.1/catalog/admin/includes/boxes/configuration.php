@@ -55,13 +55,8 @@ $contents = ('<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=1', 'N
 			  '<li><a href="' . tep_href_link('#', 'NONSSL') . '">Slideshow</a><ul>' .
 			     '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=204', 'NONSSL') . '">Slideshow Settings</a></li>' .
 				 tep_admin_jqmenu(FILENAME_SLIDESHOW, BOX_TOOLS_SLIDESHOW, 'TOP') .
-			  '</ul></li>' .	 
-              '<li><a href="' . tep_href_link('#', 'NONSSL') . '">Define Pages</a><ul>' .
-                 tep_admin_jqmenu(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, 'TOP') .
-                 tep_admin_jqmenu(FILENAME_DEFINE_PRIVACY, BOX_CATALOG_DEFINE_PRIVACY, 'TOP') .
-                 tep_admin_jqmenu(FILENAME_DEFINE_CONDITIONS, BOX_CATALOG_DEFINE_CONDITIONS, 'TOP') .
-                 tep_admin_jqmenu(FILENAME_DEFINE_SHIPPING, BOX_CATALOG_DEFINE_SHIPPING, 'TOP') .
-              '</ul></li>' .
+			  '</ul></li>' .
+			     tep_admin_jqmenu(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, 'TOP') .
               '</ul>' .
               
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=65', 'NONSSL') . '">Wish List Settings</a></li>' .

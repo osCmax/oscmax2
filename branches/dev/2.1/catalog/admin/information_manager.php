@@ -192,6 +192,7 @@ switch($_REQUEST['information_action']) {
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
+<script type="text/javascript" src="includes/general.js"></script>
 <!-- CKeditor -->
 <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
 <!-- CKeditor End -->
@@ -204,15 +205,19 @@ switch($_REQUEST['information_action']) {
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
-    </table></td>
-<!-- body_text //-->
-<td valign="top">
-<table width="95%" align="center">
-<tr><td align=right><?php //echo $languages_id; ?></td></tr>
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+      <!-- left_navigation //-->
+      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+      <!-- left_navigation_eof //-->
+      </table>
+    </td>
+    <!-- body_text //-->
+    <td valign="top">
+      <table width="100%">
+        <tr>
+          <td align=right><?php //echo $languages_id; ?></td>
+        </tr>
 <?php
 switch($_REQUEST['information_action']) {
 
@@ -308,9 +313,9 @@ if ($error) {
 	include('information_form.php');
 }
 ?>
-</table>
-</td>
-<!-- body_text_eof //-->
+      </table>
+    </td>
+    <!-- body_text_eof //-->
   </tr>
 </table>
 <!-- footer //-->

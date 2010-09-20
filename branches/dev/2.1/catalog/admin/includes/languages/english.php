@@ -269,7 +269,7 @@ define('BOX_TOOLS_PACKAGING', 'Packaging');
 define('BOX_TOOLS_UPS_BOXES_USED', 'UPS boxes used');
 define('BOX_TOOLS_QUICK_LINKS', 'Quick Links');
 define('BOX_TOOLS_SLIDESHOW', 'Slideshow Images');
-define('BOX_TOOLS_REGEN', 'Product Images');
+define('BOX_TOOLS_REGEN', 'Image Manager');
 
 // localizaion box text in includes/boxes/localization.php
 define('BOX_HEADING_LOCALIZATION', 'Localization');

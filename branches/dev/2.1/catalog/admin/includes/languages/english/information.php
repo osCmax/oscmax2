@@ -12,17 +12,17 @@
   */
 
   define('ACTION_INFORMATION', 'Action');
-  define('ACTIVATION_ID_INFORMATION', 'Activation of information ID=');
+  define('ACTIVATION_ID_INFORMATION', 'Activate');
   define('ADD_INFORMATION', 'Add new information');
   define('ADD_QUEUE_INFORMATION', ' Add information to queue');
   define('ALERT_INFORMATION', 'Empty information system');
   define('ANSWER_INFORMATION', 'Answer');
   define('CONFIRM_INFORMATION', 'Confirm');
-  define('DEACTIVATION_ID_INFORMATION', 'Deactivation of information ID=');
-  define('DELETE_CONFIRMATION_ID_INFORMATION', 'Confirm removal of information ID=');
-  define('DELETE_ID_INFORMATION', 'Delete the information ID=');
-  define('DELETED_ID_INFORMATION', 'Deleted the information ID=');
-  define('EDIT_ID_INFORMATION', 'Edit the information ID=');
+  define('DEACTIVATION_ID_INFORMATION', 'Deactivate');
+  define('DELETE_CONFIRMATION_ID_INFORMATION', 'Confirm removal of ');
+  define('DELETE_ID_INFORMATION', 'Delete: ');
+  define('DELETED_ID_INFORMATION', 'Deleted: ');
+  define('EDIT_ID_INFORMATION', 'Edit: ');
   define('ENTRY_DESCRIPTION', 'Description');
   define('ENTRY_PARENT_PAGE', 'Parent page');
   define('ENTRY_SORT_ORDER', 'Sort order');
@@ -46,7 +46,7 @@
   define('VIEW_INFORMATION', 'Information View');
   define('VISIBLE_INFORMATION', 'Visible');
   define('VISIBLE_INFORMATION_DO', '( To Do visible )');
-  define('UPDATE_ID_INFORMATION', 'Updated information for ID=');
+  define('UPDATE_ID_INFORMATION', 'Updated: ');
   define('WARNING_INFORMATION', 'Warning');
   define('WARNING_PARENT_PAGE', 'If a Parent page is required you will need to add one after creating this entry');
   define('ERROR_ADDING', 'Failed to add information to database.');

@@ -27,7 +27,7 @@
   define('ENTRY_PARENT_PAGE', 'Parent page');
   define('ENTRY_SORT_ORDER', 'Sort order');
   define('ENTRY_STATUS', 'Status');
-  define('ENTRY_TITLE', 'Title');
+  define('ENTRY_TITLE', 'Title: ');
   define('ERROR_20_INFORMATION', 'You have not defined a valid value for option <b>Queue</b>. You can only define a numeric value');
   define('ERROR_80_INFORMATION', 'You did not fill all <b>necessary fields</b>');
   define('ID_INFORMATION', 'ID');

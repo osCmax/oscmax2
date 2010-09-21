@@ -69,6 +69,7 @@
 	$("#languagetabs").tabs();
 	$("#authortabs").tabs();
 	$("#articletabs").tabs();
+	$("#informationtabs").tabs();
 
     $('span[title]').cluetip({splitTitle: '|', arrows: true, dropShadow: false, cluetipClass: 'jtip'});
 

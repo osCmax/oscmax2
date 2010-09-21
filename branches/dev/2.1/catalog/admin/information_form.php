@@ -68,45 +68,43 @@ if(!strstr($info_group['locked'], 'sort_order')) {
 	</tr>
 <?php
 }
-
+?>
+    <tr>
+      <td colspan="2">
+        <div id="informationtabs">
+	      <ul>
+<?php	
 if(!strstr($info_group['locked'], 'information_title')) {
     for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
 ?>
-	<tr>
-		<td class="main"><?php if ($i == 0) echo ENTRY_TITLE;?><br></td>
-		<td><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('information_title[' . $languages[$i]['id'] . ']', (($languages[$i]['id'] == $languages_id) ? stripslashes($edit[information_title]) : tep_get_information_entry($information_id, $languages[$i]['id'], 'information_title')), 'maxlength=255'); ?></td>
-	</tr>
-	<tr>
-		<td colspan="2" height="10"></td>
-	</tr>
+            <li><a href="#informationtabs-<?php echo $i; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?></a></li>
 <?php
-    }
-}
-
-if(!strstr($info_group['locked'], 'information_description')) {
-	for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+    } // end for
 ?>
-	<tr>
-		<td valign="top" class="main" width="100" colspan="2"><?php if ($i == 0) echo ENTRY_DESCRIPTION; ?><p />
-		<table border="0" cellspacing="0" cellpadding="0">
-		<tr>
-			<td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
-			<td class="main" width="100%"><?php
-			if (DESCRIPTION_EDITOR == 'true' ) {
-			 tep_draw_fckeditor('information_description[' . $languages[$i]['id'] . ']','800','500', (($languages[$i]['id'] == $languages_id) ? stripslashes($edit[information_description]) : tep_get_information_entry($information_id, $languages[$i]['id'], 'information_description')));
-			} else {
-				echo tep_draw_textarea_field('information_description[' . $languages[$i]['id'] . ']', '100', '20', (($languages[$i]['id'] == $languages_id) ? stripslashes($edit[information_description]) : tep_get_information_entry($information_id, $languages[$i]['id'], 'information_description')),'id=information_description[' . $languages[$i]['id'] . '] class="ckeditor"');
-			}
-
-		 ?>
-		 </td>
-		</tr>
-		</table>
-	</tr>
+          </ul>
 <?php
-    }
-}
+    for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
 ?>
+	  
+          <div id="informationtabs-<?php echo $j; ?>">
+		    <table width="100%">
+              <tr>
+                <td class="main"><?php echo ENTRY_TITLE . tep_draw_input_field('information_title[' . $languages[$j]['id'] . ']', (($languages[$j]['id'] == $languages_id) ? stripslashes($edit[information_title]) : tep_get_information_entry($information_id, $languages[$j]['id'], 'information_title')), 'size=40 maxlength=255'); ?></td>
+              </tr>
+              <tr>
+                <td class="main" width="100%"><?php echo tep_draw_textarea_field('information_description[' . $languages[$j]['id'] . ']', '100', '20', (($languages[$j]['id'] == $languages_id) ? stripslashes($edit[information_description]) : tep_get_information_entry($information_id, $languages[$j]['id'], 'information_description')),'id=information_description[' . $languages[$j]['id'] . '] class="ckeditor"'); ?></td>
+              </tr>
+            </table>
+          </div>
+<?php           
+	} // end for
+?>
+<?php           	
+} // end if
+?>
+        </div>
+      </td>
+    </tr>
 	<tr>
 		<td colspan="2" align="right"><?php
 				// Decide when to show the buttons (Determine or 'locked' is active)

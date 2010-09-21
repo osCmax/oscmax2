@@ -2,10 +2,10 @@
 /*
 $Id: main_page.php 3 2006-05-27 04:59:07Z user $
 
-  osCMax Power E-Commerce
+  osCmax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2008 osCMax
+  Copyright 2008 osCmax
 
   Released under the GNU General Public License
 */
@@ -16,7 +16,7 @@ $Id: main_page.php 3 2006-05-27 04:59:07Z user $
 
 <head>
 
-<title>osCMax, osCommerce with teeth!</title>
+<title>osCmax, osCommerce with teeth!</title>
 
 <meta name="robots" content="noindex,nofollow">
 
@@ -31,9 +31,9 @@ $Id: main_page.php 3 2006-05-27 04:59:07Z user $
 
 <div id="pageHeader">
   <div>
-    <div style="float: right; padding-top: 40px; padding-right: 15px; color: #000000; font-weight: bold;"><a href="http://www.oscmax.com" target="_blank">osCMax Website</a> &nbsp;|&nbsp; <a href="http://www.osCMax.com/forums" target="_blank">Support</a> &nbsp;|&nbsp; <a href="http://www.osCMax.com/book" target="_blank">Documentation</a></div>
+    <div style="float: right; padding-top: 40px; padding-right: 15px; color: #000000; font-weight: bold;"><a href="http://www.oscmax.com" target="_blank">osCmax Website</a> &nbsp;|&nbsp; <a href="http://www.osCmax.com/forums" target="_blank">Support</a> &nbsp;|&nbsp; <a href="http://www.osCmax.com/book" target="_blank">Documentation</a></div>
 
-    <a href="index.php"><img src="images/oscmax-logo.png" border="0" width="85" height="80" title="osCMax Power E-Commerce <?php echo PROJECT_VERSION; ?>" style="margin: 10px 10px 0px 10px;" /></a>
+    <a href="index.php"><img src="images/oscmax-logo.png" border="0" width="187" height="54" title="osCmax Power E-Commerce <?php echo PROJECT_VERSION; ?>" style="margin: 10px 10px 0px 10px;" /></a>
   </div>
 </div>
 
@@ -50,7 +50,7 @@ $Id: main_page.php 3 2006-05-27 04:59:07Z user $
 </div>
 
 <div id="pageFooter">
-	Copyright &copy; 2000-<?php echo date("Y"); ?> <a href="http://www.osCMax.com" target="_blank">osCMax</a> <br />osCMax provides no warranty and is redistributable under the <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a>
+	Copyright &copy; 2000-<?php echo date("Y"); ?> <a href="http://www.osCmax.com" target="_blank">osCmax</a> <br />osCmax provides no warranty and is redistributable under the <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a>
 </div>
 
 </body>

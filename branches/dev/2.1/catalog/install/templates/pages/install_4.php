@@ -2,10 +2,10 @@
 /*
 $Id: install_4.php 3 2006-05-27 04:59:07Z user $
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax Power E-Commerce
+  http://www.oscmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2009 osCmax
 
   Released under the GNU General Public License
 */
@@ -53,7 +53,7 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
 
   <h1>New Installation</h1>
 
-  <p>This web-based installation routine will correctly setup and configure osCMax Power E-Commerce to run on this server.</p>
+  <p>This web-based installation routine will correctly setup and configure osCmax Power E-Commerce to run on this server.</p>
   <p>Please follow the on-screen instructions that will take you through the database server, web server, and store configuration options. If help is needed at any stage, please consult the documentation or seek help at the community support forums.</p>
 </div>
 
@@ -62,9 +62,9 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
     <h3>Step 4: Finished!</h3>
 
     <div class="infoPaneContents">
-      <p>Congratulations on installing and configuring osCMax Power E-Commerce as your online store solution!</p>
+      <p>Congratulations on installing and configuring osCmax Power E-Commerce as your online store solution!</p>
       <p>We wish you all the best with the success of your online store and welcome you to join and participate in our community.</p>
-      <p align="right">- The osCMax Team</p>
+      <p align="right">- The osCmax Team</p>
     </div>
   </div>
 
@@ -94,10 +94,10 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
 
   $file_contents = '<?php' . "\n" .
                    '/*' . "\n" .
-                   '  osCMax v2.0, Open Source E-Commerce Solutions' . "\n" .
+                   '  osCmax v2.0, Open Source E-Commerce Solutions' . "\n" .
                    '  http://www.osCDox.com' . "\n" .
                    '' . "\n" .
-                   '  Copyright 2006 osCMax2005 osCMax' . "\n" .
+                   '  Copyright 2010 osCmax' . "\n" .
                    '' . "\n" .
                    '  Released under the GNU General Public License' . "\n" .
                    '*/' . "\n" .
@@ -143,10 +143,10 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
 
   $file_contents = '<?php' . "\n" .
                    '/*' . "\n" .
-                   '  osCMax v2.0, Open Source E-Commerce Solutions' . "\n" .
+                   '  osCmax v2.0, Open Source E-Commerce Solutions' . "\n" .
                    '  http://www.osCDox.com' . "\n" .
                    '' . "\n" .
-                   '  Copyright 2008 osCMax, 2008 osCommerce' . "\n" .
+                   '  Copyright 2010 osCmax, 2008 osCommerce' . "\n" .
                    '' . "\n" .
                    '  Released under the GNU General Public License' . "\n" .
                    '*/' . "\n" .

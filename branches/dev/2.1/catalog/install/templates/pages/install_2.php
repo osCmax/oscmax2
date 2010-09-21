@@ -2,10 +2,10 @@
 /*
 $Id: install_2.php 3 2006-05-27 04:59:07Z user $
 
-  osCMax Power E-Commerce
+  osCmax Power E-Commerce
   http://oscdox.com
 
-  Copyright 2008 osCMax
+  Copyright 2008 osCmax
 
   Released under the GNU General Public License
 */
@@ -35,7 +35,7 @@ $Id: install_2.php 3 2006-05-27 04:59:07Z user $
 
   <h1>New Installation</h1>
 
-  <p>This web-based installation routine will correctly setup and configure osCMax Power E-Commerce to run on this server.</p>
+  <p>This web-based installation routine will correctly setup and configure osCmax Power E-Commerce to run on this server.</p>
   <p>Please follow the on-screen instructions that will take you through the database server, web server, and store configuration options. If help is needed at any stage, please consult the documentation or seek help at the community support forums.</p>
 </div>
 

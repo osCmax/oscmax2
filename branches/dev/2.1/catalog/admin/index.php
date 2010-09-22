@@ -40,8 +40,8 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
 <table width="95%" align="center">
 <tr><td>
 
-<div id="tabs">
-    <ul>
+<div id="tabs" class="ui-tabs">
+    <ul class="ui-tabs ui-tabs-nav">
         <li><a href="#tabs-1"><?php echo TEXT_TAB1; ?></a></li>
         <li><a href="#tabs-2"><?php echo TEXT_TAB2; ?></a></li>
         <li><a href="#tabs-3"><?php echo TEXT_TAB3; ?></a></li>
@@ -49,7 +49,7 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
         <li><a href="#tabs-5"><?php echo TEXT_TAB5; ?></a></li>
     </ul>
 
-<div id="tabs-1">
+<div id="tabs-1" class="ui-tabs ui-tabs-container ui-tabs-hide">
   <table border="0" width="95%" align="center">
     <tr valign="top">
       <td width="50%" align="center">
@@ -78,7 +78,7 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
   </table>
 </div>
 
-<div id="tabs-2">
+<div id="tabs-2" class="ui-tabs ui-tabs-container ui-tabs-hide">
 <table width="95%" align="center">
 <tr valign="top">
 <td align="center" width="50%">
@@ -99,7 +99,7 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
 </table>
 </div>
 
-<div id="tabs-3">
+<div id="tabs-3" class="ui-tabs-container ui-tabs-hide">
   <table width="95%" align="center">
     <tr valign="top">
       <td><?php include('includes/modules/dashboard/admin_logging.php'); ?></td>
@@ -107,7 +107,7 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
   </table>
 </div>
 
-<div id="tabs-4">
+<div id="tabs-4" class="ui-tabs-container ui-tabs-hide">
   <table width="95%" align="center">
     <tr valign="top">
       <td><?php include('includes/modules/dashboard/customer_logging.php'); ?></td>
@@ -115,7 +115,7 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
   </table>
 </div>
 
-<div id="tabs-5">
+<div id="tabs-5" class="ui-tabs-container ui-tabs-hide">
   <table width="95%" align="center">
     <tr valign="top">
       <td><?php include('includes/modules/dashboard/http_error.php'); ?></td>

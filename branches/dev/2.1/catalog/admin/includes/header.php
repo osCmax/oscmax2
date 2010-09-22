@@ -160,17 +160,17 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
       <tr>
         <td class="smallText" align="center">
             <div id="searchtabs" class="ui-tabs">
-                <ul>
-                <li><a href="#searchtabs-1">Customers</a></li>
-                <li><a href="#searchtabs-2">Products</a></li>
-                <li><a href="#searchtabs-3">Orders</a></li>
+                <ul class="ui-tabs ui-tabs-nav">
+                  <li><a href="#searchtabs-1">Customers</a></li>
+                  <li><a href="#searchtabs-2">Products</a></li>
+                  <li><a href="#searchtabs-3">Orders</a></li>
                 </ul>
 
-                <div id="searchtabs-1" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search_customers', FILENAME_CUSTOMERS, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
+                <div id="searchtabs-1" class="ui-tabs ui-tabs-container ui-tabs-hide">Search: <?php echo tep_draw_form('search_customers', FILENAME_CUSTOMERS, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
 
-                <div id="searchtabs-2" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search_products', FILENAME_CATEGORIES, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
+                <div id="searchtabs-2" class="ui-tabs ui-tabs-container ui-tabs-hide">Search: <?php echo tep_draw_form('search_products', FILENAME_CATEGORIES, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
 
-                <div id="searchtabs-3" class="ui-tabs-hide">Search: <?php echo tep_draw_form('search_orders', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, 'text', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
+                <div id="searchtabs-3" class="ui-tabs ui-tabs-container ui-tabs-hide">Search: <?php echo tep_draw_form('search_orders', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, 'text', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
 
             </div>
 	    </td>

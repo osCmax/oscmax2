@@ -2934,7 +2934,7 @@ INSERT INTO quick_links VALUES (3, 'Google Web Tools', 'https://www.google.com/w
 INSERT INTO quick_links VALUES (4, 'Pingdom', 'https://pp.pingdom.com/index.php/member/default', '_blank', 4, now(), now(), 'pingdom.png');
 INSERT INTO quick_links VALUES (5, 'Categories', 'categories.php', '_top', 5, now(), now(), 'categories.png');
 INSERT INTO quick_links VALUES (6, 'Cross Sell', 'xsell.php', '_top', 6, now(), now(), 'xsell.png');
-INSERT INTO quick_links VALUES (7, 'Backup', 'backup.png', '_top', 7, now(), now(), 'backup.png');
+INSERT INTO quick_links VALUES (7, 'Backup', 'backup.php', '_top', 7, now(), now(), 'backup.png');
 INSERT INTO quick_links VALUES (8, 'Orders', 'orders.php', '_top', 8, now(), now(), 'orders.png');
 INSERT INTO quick_links VALUES (9, 'Customers', 'customers.php', '_top', 9, now(), now(), 'customers.png');
 INSERT INTO quick_links VALUES (10, 'Newsletters', 'newsletters.php', '_top', 10, now(), now(), 'newsletters.png');

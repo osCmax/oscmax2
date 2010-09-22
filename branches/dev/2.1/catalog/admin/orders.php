@@ -11,6 +11,8 @@ $Id: orders.php 14 2006-07-28 17:42:07Z user $
 */
 
   require('includes/application_top.php');
+  require(DIR_WS_CLASSES . 'order.php');
+  
 // BOF: Orders search by customer information
 
 // search query (oid, customer or company)

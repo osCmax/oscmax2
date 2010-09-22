@@ -11,6 +11,7 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
 */
 
   require('includes/application_top.php');
+  require('includes/functions/image_resize.php');  
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
@@ -52,6 +53,9 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
 
         if($_FILES['manufacturers_image']['name'] != '') {
           if ($manufacturers_image = new upload('manufacturers_image', DIR_FS_CATALOG_IMAGES . MANUFACTURERS_IMAGES_DIR)) {
+          // BOF Image Resize
+            image_resize(DIR_FS_CATALOG_IMAGES . MANUFACTURERS_IMAGES_DIR . $manufacturers_image->filename, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, '80');
+          // EOF Image Resize
             tep_db_query("update " . TABLE_MANUFACTURERS . " set manufacturers_image = '" . $manufacturers_image->filename . "' where manufacturers_id = '" . (int)$manufacturers_id . "'");
           }
         }

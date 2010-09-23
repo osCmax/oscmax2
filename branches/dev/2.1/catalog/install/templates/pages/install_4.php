@@ -41,36 +41,28 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
 
 ?>
 
+<div id="menublock">
+  <ul id="menutabs">
+    <li><a href="index.php" id="first">Start</a></li>
+    <li><a href="install.php?step=1">Database Server</a></li>
+    <li><a href="install.php?step=2">Web Server</a></li>
+    <li><a href="install.php?step=3">Store Settings</a></li>
+    <li><a href="#" id="active">Finished</a></li>
+  </ul>
+</div>
+
 <div class="mainBlock">
-  <div class="stepsBox">
-    <ol>
-      <li>Database Server</li>
-      <li>Web Server</li>
-      <li>Online Store Settings</li>
-      <li style="font-weight: bold;">Finished!</li>
-    </ol>
-  </div>
 
-  <h1>New Installation</h1>
+  <h1>Installation Complete</h1>
 
-  <p>This web-based installation routine will correctly setup and configure osCmax Power E-Commerce to run on this server.</p>
-  <p>Please follow the on-screen instructions that will take you through the database server, web server, and store configuration options. If help is needed at any stage, please consult the documentation or seek help at the community support forums.</p>
+      <p>Congratulations on installing and configuring osCmax Power E-Commerce as your online store solution!</p>
+      <p>We wish you all the best with the success of your online store and welcome you to join and participate in our community.</p>
+      <p align="right"><i><b>- The osCmax Team</b></i></p>
 </div>
 
 <div class="contentBlock">
-  <div class="infoPane">
-    <h3>Step 4: Finished!</h3>
-
-    <div class="infoPaneContents">
-      <p>Congratulations on installing and configuring osCmax Power E-Commerce as your online store solution!</p>
-      <p>We wish you all the best with the success of your online store and welcome you to join and participate in our community.</p>
-      <p align="right">- The osCmax Team</p>
-    </div>
-  </div>
-
   <div class="contentPane">
-    <h2>Finished!</h2>
-
+  
 <?php
   $dir_fs_document_root = $_POST['DIR_FS_DOCUMENT_ROOT'];
   if ((substr($dir_fs_document_root, -1) != '\\') && (substr($dir_fs_document_root, -1) != '/')) {
@@ -194,7 +186,7 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
   fclose($fp);
 ?>
 
-<table width="99%" cellspacing="0" cellpadding="0">
+<table width="100%" cellspacing="0" cellpadding="0">
 	<tr>
 	<?php
 	// BOF: PGM Renaming the Admin Folder
@@ -215,14 +207,12 @@ $Id: install_4.php 3 2006-05-27 04:59:07Z user $
 		<td height="2">&nbsp;</td>
 	</tr>
     <tr>
-		<td colspan="2">You can now select to view your site by clicking on the buttons shown below:</td>
-	</tr>
+        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . 'index.php'; ?>" target="_blank"><img src="images/catalog.png" alt="Catalog" /></a></td>
+        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . $admin_folder . '/index.php'; ?>" target="_blank"><img src="images/admin.png" alt="Administration Tool" /></a></td>
+    </tr>
     <tr>
-		<td height="2">&nbsp;</td>
-	</tr>
-    <tr>
-        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . 'index.php'; ?>" target="_blank"><img src="images/button_catalog.gif" border="0" alt="Catalog" /></a></td>
-        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . $admin_folder . '/index.php'; ?>" target="_blank"><img src="images/button_administration_tool.gif" border="0" alt="Administration Tool" /></a></td>
+        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . 'index.php'; ?>" target="_blank"><img src="images/button_catalog.gif" alt="Catalog" /></a></td>
+        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . $admin_folder . '/index.php'; ?>" target="_blank"><img src="images/button_administration_tool.gif" alt="Administration Tool" /></a></td>
     </tr>
 </table>
 

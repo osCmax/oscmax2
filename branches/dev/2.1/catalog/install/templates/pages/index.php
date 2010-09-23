@@ -16,24 +16,24 @@ $Id: index.php 3 2006-05-27 04:59:07Z user $
   }
 ?>
 
-<div class="mainBlock">
-  <h1>Welcome to osCmax Power E-Commerce <?php echo PROJECT_VERSION; ?></h1>
-
-  <p>osCmax Power E-Commerce allows you to sell products worldwide with your own online store. The administration side manages products, customers, orders, newsletters, specials, and more to successfully build and thrive on the success of your online business.</p>
-  <p>osCmax Power E-Commerce is based on osCommerce Online Merchant 2.2 and is aimed at making deployment of your site faster and easier than ever. osCmax Power E-Commerce is backwards compatible with osCommerce Online Merchant 2.2 and thus you can leverage the largest community for an online shopping cart solution: over 140,000 registered store owners and developers who help one another out and have provided over 4,000 add-ons that extend the features and potential of your online store.</p>
-  <p>osCmax Power E-Commerce and its add-ons are available for free under an Open Source license to help you start selling online sooner without any licensing fees or limitations involved.</p>
+<div id="menublock">
+  <ul id="menutabs">
+    <li><a href="#" id="firstactive">Start</a></li>
+    <li><a href="install.php?step=1">Database Server</a></li>
+    <li><a href="#" class="inactive">Web Server</a></li>
+    <li><a href="#" class="inactive">Store Settings</a></li>
+    <li><a href="#" class="inactive">Finished</a></li>
+  </ul>
 </div>
 
-<div class="contentBlock">
-  <div class="infoPane">
-    <h3>Server Capabilities</h3>
-
-    <div class="infoPaneContents">
-      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+<div class="mainBlock">
+  <div class="stepsBox">
+  
+        <table border="0" width="100%" cellspacing="0" cellpadding="2">
         <tr>
           <td><b>PHP Version</b></td>
           <td align="right"><?php echo PHP_VERSION; ?></td>
-          <td align="right" width="25"><img src="images/<?php echo ((PHP_VERSION >= 4) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16"></td>
+          <td align="right" width="25"><img src="images/<?php echo ((PHP_VERSION >= 4) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
       </table>
 
@@ -45,34 +45,34 @@ $Id: index.php 3 2006-05-27 04:59:07Z user $
 
       <table border="0" width="100%" cellspacing="0" cellpadding="2">
         <tr>
-          <td><b>PHP Settings</td>
+          <td><b>PHP Settings</b></td>
           <td align="right"></td>
           <td align="right" width="25"></td>
         </tr>
         <tr>
           <td>register_globals</td>
           <td align="right"><?php echo (((int)ini_get('register_globals') == 0) ? 'Off' : 'On'); ?></td>
-          <td align="right"><img src="images/<?php echo (($compat_register_globals == true) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16"></td>
+          <td align="right"><img src="images/<?php echo (($compat_register_globals == true) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>magic_quotes</td>
           <td align="right"><?php echo (((int)ini_get('magic_quotes') == 0) ? 'Off' : 'On'); ?></td>
-          <td align="right"><img src="images/<?php echo (((int)ini_get('magic_quotes') == 0) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16"></td>
+          <td align="right"><img src="images/<?php echo (((int)ini_get('magic_quotes') == 0) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>file_uploads</td>
           <td align="right"><?php echo (((int)ini_get('file_uploads') == 0) ? 'Off' : 'On'); ?></td>
-          <td align="right"><img src="images/<?php echo (((int)ini_get('file_uploads') == 1) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16"></td>
+          <td align="right"><img src="images/<?php echo (((int)ini_get('file_uploads') == 1) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>session.auto_start</td>
           <td align="right"><?php echo (((int)ini_get('session.auto_start') == 0) ? 'Off' : 'On'); ?></td>
-          <td align="right"><img src="images/<?php echo (((int)ini_get('session.auto_start') == 0) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16"></td>
+          <td align="right"><img src="images/<?php echo (((int)ini_get('session.auto_start') == 0) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>session.use_trans_sid</td>
           <td align="right"><?php echo (((int)ini_get('session.use_trans_sid') == 0) ? 'Off' : 'On'); ?></td>
-          <td align="right"><img src="images/<?php echo (((int)ini_get('session.use_trans_sid') == 0) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16"></td>
+          <td align="right"><img src="images/<?php echo (((int)ini_get('session.use_trans_sid') == 0) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
       </table>
 
@@ -85,32 +85,38 @@ $Id: index.php 3 2006-05-27 04:59:07Z user $
         </tr>
         <tr>
           <td>MySQL</td>
-          <td align="right"><img src="images/<?php echo (extension_loaded('mysql') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16"></td>
+          <td align="right"><img src="images/<?php echo (extension_loaded('mysql') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>GD</td>
-          <td align="right"><img src="images/<?php echo (extension_loaded('gd') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16"></td>
+          <td align="right"><img src="images/<?php echo (extension_loaded('gd') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>cURL</td>
-          <td align="right"><img src="images/<?php echo (extension_loaded('curl') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16"></td>
+          <td align="right"><img src="images/<?php echo (extension_loaded('curl') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>OpenSSL</td>
-          <td align="right"><img src="images/<?php echo (extension_loaded('openssl') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16"></td>
+          <td align="right"><img src="images/<?php echo (extension_loaded('openssl') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
       </table>
 
 <?php
   }
 ?>
-
-    </div>
+  
   </div>
 
-  <div class="contentPane">
-    <h2>New Installation</h2>
+  <h1>Welcome to osCmax Power E-Commerce <?php echo PROJECT_VERSION; ?></h1>
 
+  <p>osCmax Power E-Commerce allows you to sell products worldwide with your own online store. The administration side manages products, customers, orders, newsletters, specials, and more to successfully build and thrive on the success of your online business.</p>
+  <p>osCmax Power E-Commerce is based on osCommerce Online Merchant 2.2 and is aimed at making deployment of your site faster and easier than ever. osCmax Power E-Commerce is backwards compatible with osCommerce Online Merchant 2.2 and thus you can leverage the largest community for an online shopping cart solution: over 140,000 registered store owners and developers who help one another out and have provided over 4,000 add-ons that extend the features and potential of your online store.</p>
+  <p>osCmax Power E-Commerce and its add-ons are available for free under an Open Source license to help you start selling online sooner without any licensing fees or limitations involved.</p><p>&nbsp;</p><p>&nbsp;</p><br />
+</div>
+
+<div class="contentBlock">
+
+  <div class="contentPane">
 <?php
   $configfile_array = array();
 
@@ -194,11 +200,11 @@ $Id: index.php 3 2006-05-27 04:59:07Z user $
   if ((sizeof($configfile_array) > 0) || (sizeof($warning_array) > 0)) {
 ?>
 
-    <p>Please correct the above errors and retry the installation procedure with the changes in place.</p>
+    <p class="messageStackAlert">Please correct the errors shown to the right and retry the installation procedure with the changes in place.</p>
 
 <?php
     if (sizeof($warning_array) > 0) {
-      echo '    <p><i>Changing webserver configuration parameters may require the webserver service to be restarted before the changes take affect.</i></p>' . "\n";
+      echo '    <p  class="messageStackAlert"><i>Changing webserver configuration parameters may require the webserver service to be restarted before the changes take affect.</i></p>' . "\n";
     }
 ?>
 
@@ -207,9 +213,7 @@ $Id: index.php 3 2006-05-27 04:59:07Z user $
 <?php
   } else {
 ?>
-
-    <p>The webserver environment has been verified to proceed with a successful installation and configuration of your online store.</p>
-    <p>Please continue to start the installation procedure.</p>
+    <p class="messageStackSuccess">The webserver environment has been verified to proceed with a successful installation and configuration of your online store.<br /><br />Please continue to start the installation procedure.</p>
     <p align="right"><a href="install.php"><img src="images/button_continue.gif" border="0" alt="Continue" /></a></p>
 
 <?php

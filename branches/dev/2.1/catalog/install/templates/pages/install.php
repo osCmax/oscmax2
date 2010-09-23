@@ -29,11 +29,11 @@ $Id: install.php 3 2006-05-27 04:59:07Z user $
         result.shift();
 
         if (result[0] == '1') {
-          document.getElementById('mBoxContents').innerHTML = '<p><img src="images/success.gif" align="right" hspace="5" vspace="5" border="0" />Database imported successfully.</p>';
+          document.getElementById('mBoxContents').innerHTML = '<br><img src="images/success.gif" align="right" hspace="5" vspace="5" border="0" />Database imported successfully.<br><br>';
 
           setTimeout("document.getElementById('installForm').submit();", 2000);
         } else {
-          document.getElementById('mBoxContents').innerHTML = '<p><img src="images/failed.gif" align="right" hspace="5" vspace="5" border="0" />There was a problem importing the database. The following error had occured:</p><p><b>%s</b></p><p>Please verify the connection parameters and try again.</p>'.replace('%s', result[1]);
+          document.getElementById('mBoxContents').innerHTML = '<br><img src="images/failed.gif" align="right" hspace="5" vspace="5" border="0" />There was a problem importing the database. The following error had occured:<br><br>%s<br><br>Please verify the connection parameters and try again.'.replace('%s', result[1]);
         }
       }
 
@@ -48,11 +48,11 @@ $Id: install.php 3 2006-05-27 04:59:07Z user $
         result.shift();
 
         if (result[0] == '1') {
-          document.getElementById('mBoxContents').innerHTML = '<p><img src="images/progress.gif" align="right" hspace="5" vspace="5" border="0" />The database structure is now being imported. Please be patient during this procedure.</p>';
+          document.getElementById('mBoxContents').innerHTML = '<br><img src="images/progress.gif" align="right" hspace="5" vspace="5" border="0" />The database structure is now being imported. Please be patient during this procedure.<br><br>';
 
           loadXMLDoc("rpc.php?action=dbImport&server=" + urlEncode(dbServer) + "&username=" + urlEncode(dbUsername) + "&password=" + urlEncode(dbPassword) + "&name=" + urlEncode(dbName), handleHttpResponse_DoImport);
         } else {
-          document.getElementById('mBoxContents').innerHTML = '<p><img src="images/failed.gif" align="right" hspace="5" vspace="5" border="0" />There was a problem connecting to the database server. The following error had occured:</p><p><b>%s</b></p><p>Please verify the connection parameters and try again.</p>'.replace('%s', result[1]);
+          document.getElementById('mBoxContents').innerHTML = '<br><img src="images/failed.gif" align="right" hspace="5" vspace="5" border="0" />There was a problem connecting to the database server. The following error had occured:<br><br>%s<br><br>Please verify the connection parameters and try again.'.replace('%s', result[1]);
           formSubmited = false;
         }
       } else {
@@ -70,7 +70,7 @@ $Id: install.php 3 2006-05-27 04:59:07Z user $
 
     showDiv(document.getElementById('mBox'));
 
-    document.getElementById('mBoxContents').innerHTML = '<p><img src="images/progress.gif" align="right" hspace="5" vspace="5" border="0" />Testing database connection..</p>';
+    document.getElementById('mBoxContents').innerHTML = '<br><br><img src="images/progress.gif" align="right" hspace="5" vspace="5" border="0" />Testing database connection.<br><br>';
 
     dbServer = document.getElementById("DB_SERVER").value;
     dbUsername = document.getElementById("DB_SERVER_USERNAME").value;
@@ -83,42 +83,28 @@ $Id: install.php 3 2006-05-27 04:59:07Z user $
 //-->
 </script>
 
+<div id="menublock">
+  <ul id="menutabs">
+    <li><a href="index.php" id="first">Start</a></li>
+    <li><a href="#" id="active">Database Server</a></li>
+    <li><a href="#">Web Server</a></li>
+    <li><a href="#">Store Settings</a></li>
+    <li><a href="#" id="last">Finished</a></li>
+  </ul>
+</div>
+
 <div class="mainBlock">
-  <div class="stepsBox">
-    <ol>
-      <li style="font-weight: bold;">Database Server</li>
-      <li>Web Server</li>
-      <li>Online Store Settings</li>
-      <li>Finished!</li>
-    </ol>
-  </div>
-
-  <h1>New Installation</h1>
-
-  <p>This web-based installation routine will correctly setup and configure osCmax Power E-Commerce to run on this server.</p>
-  <p>Please follow the on-screen instructions that will take you through the database server, web server, and store configuration options. If help is needed at any stage, please consult the documentation or seek help at the community support forums.</p>
+  <p>The database server stores the content of the online store such as product information, customer information, and the orders that have been made.</p>
+      <p>Please consult your server administrator if your database server parameters are not yet known.</p>
 </div>
 
 <div class="contentBlock">
-  <div class="infoPane">
-    <h3>Step 1: Database Server</h3>
-
-    <div class="infoPaneContents">
-      <p>The database server stores the content of the online store such as product information, customer information, and the orders that have been made.</p>
-      <p>Please consult your server administrator if your database server parameters are not yet known.</p>
-    </div>
-  </div>
-
-  <div id="mBox">
-    <div id="mBoxContents"></div>
-  </div>
 
   <div class="contentPane">
-    <h2>Database Server</h2>
 
-    <form name="install" id="installForm" action="install.php?step=2" method="post" onsubmit="prepareDB(); return false;">
+    <form name="installForm" id="installForm" action="install.php?step=2" method="post" onsubmit="prepareDB(); return false;">
 
-    <table border="0" width="99%" cellspacing="0" cellpadding="5" class="inputForm">
+    <table border="0" width="100%" cellspacing="0" cellpadding="5" class="inputForm">
       <tr>
         <td class="inputField"><?php echo 'Database Server<br />' . osc_draw_input_field('DB_SERVER', null, 'class="text"'); ?></td>
         <td class="inputDescription">The address of the database server in the form of a hostname or IP address.</td>
@@ -137,7 +123,17 @@ $Id: install.php 3 2006-05-27 04:59:07Z user $
       </tr>
     </table>
 
-    <p align="right"><input type="image" src="images/button_continue.gif" border="0" alt="Continue" id="inputButton" />&nbsp;&nbsp;<a href="index.php"><img src="images/button_cancel.gif" border="0" alt="Cancel" /></a></p>
+<div id="mBox">
+    <div id="mBoxContents"></div>
+</div>
+
+<div id="buttons">
+  <table width="100%">
+    <tr>
+      <td align="right"><input type="image" src="images/button_continue.gif" alt="Continue" id="inputButton" /></td>
+    </tr>
+  </table>
+</div>
 
     </form>
   </div>

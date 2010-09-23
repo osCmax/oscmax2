@@ -14,7 +14,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
   require('includes/application_top.php');
 // LINE ADDED: Categories Description 1.5
   require('includes/functions/categories_description.php');
-
+  
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
@@ -257,9 +257,12 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             $categories_image = '';
           } else {
         $categories_image = new upload('categories_image');
-		        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
-
+		        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR); 
         if ($categories_image->parse() && $categories_image->save()) {
+         // BOF Image Resize
+            require_once('includes/functions/image_resize.php');
+            image_resize(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image->filename, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, '80');
+          // EOF Image Resize      
               tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
             }
 // EOF: MOD for Categories Description 1.5
@@ -873,6 +876,7 @@ if ($action == 'new_product') {
     <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
 <!-- left_navigation //-->
 <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+
 <!-- left_navigation_eof //-->
     </table></td>
 <!-- body_text //-->
@@ -1036,6 +1040,10 @@ if ($action == 'new_product') {
         $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
         if ($categories_image->parse() && $categories_image->save()) {
           $categories_image_name = $categories_image->filename;
+          // BOF Image Resize
+            require_once('includes/functions/image_resize.php');
+            image_resize(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image->filename, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, '80');
+          // EOF Image Resize  
         } else {
         $categories_image_name = $_POST['categories_previous_image'];
       }
@@ -2570,6 +2578,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         break;
       case 'edit_category':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT_CATEGORY . '</b>');
+
 
         $contents = array('form' => tep_draw_form('categories', FILENAME_CATEGORIES, 'action=update_category&amp;cPath=' . $cPath, 'post', 'enctype="multipart/form-data"') . tep_draw_hidden_field('categories_id', $cInfo->categories_id));
         $contents[] = array('text' => TEXT_EDIT_INTRO);

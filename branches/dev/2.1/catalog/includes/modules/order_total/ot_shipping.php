@@ -37,12 +37,21 @@ $Id: ot_shipping.php 3 2006-05-27 04:59:07Z user $
           default:
             $pass = false; break;
         }
-
-        if ( ($pass == true) && ( ($order->info['subtotal'] - $order->info['shipping_cost']) >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) ) {
+/* One Page Checkout - BEGIN */
+/*        if ( ($pass == true) && ( ($order->info['subtotal'] - $order->info['shipping_cost']) >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) ) {
           $order->info['shipping_method'] = FREE_SHIPPING_TITLE;
           $order->info['total'] -= $order->info['shipping_cost'];
           $order->info['shipping_cost'] = 0;
         }
+*/
+        if (ONEPAGE_CHECKOUT_ENABLED != 'True'){
+          if ( ($pass == true) && ( ($order->info['subtotal'] - $order->info['shipping_cost']) >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) ) {
+            $order->info['shipping_method'] = FREE_SHIPPING_TITLE;
+            $order->info['total'] -= $order->info['shipping_cost'];
+            $order->info['shipping_cost'] = 0;
+          }
+        }
+/* One Page Checkout - END */
       }
 
       $module = substr($GLOBALS['shipping']['id'], 0, strpos($GLOBALS['shipping']['id'], '_'));

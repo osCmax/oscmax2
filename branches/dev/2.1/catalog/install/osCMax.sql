@@ -1507,7 +1507,13 @@ CREATE TABLE extra_value_exclude (
   primary key (value_id1, value_id2)
 );
 
-
+DROP TABLE IF EXISTS usu_cache;
+CREATE TABLE IF NOT EXISTS usu_cache (
+  `cache_name` varchar(32) NOT NULL,
+  `cache_data` mediumtext NOT NULL,
+  `cache_date` datetime NOT NULL,
+  PRIMARY KEY  (`cache_name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 # data
 

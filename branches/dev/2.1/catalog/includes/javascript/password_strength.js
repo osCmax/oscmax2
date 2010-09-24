@@ -132,4 +132,5 @@ $.fn.password_strength = function(options)
 };
 
 })(jQuery);
+//-->>
 </script>

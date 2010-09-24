@@ -4,9 +4,6 @@
   google.load("jquery", "1.4.0");
 </script>
 
-<?php require('includes/javascript/form_check.js.php'); ?>
-<?php require('includes/javascript/password_strength.js'); ?>
-
 <script type="text/javascript">
 function switchMAT() { 
 	if($("#MAT").attr("checked")) {
@@ -24,6 +21,12 @@ function warnMAT() {
 		$("#MATtd").attr("class", "messageStackWarning");
 }
 
+</script>
+
+<?php require('includes/javascript/form_check.js.php'); ?>
+<?php require('includes/javascript/password_strength.js'); ?>
+
+<script type="text/javascript">
 $(document).ready(function(){
 	$("#password_st").password_strength();
 	$('#enableMAT').hide();

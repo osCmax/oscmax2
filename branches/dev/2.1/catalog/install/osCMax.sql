@@ -955,7 +955,7 @@ CREATE TABLE products (
   products_last_modified datetime default NULL,
   products_date_available datetime default NULL,
   products_featured_until date default NULL,
-  products_weight decimal(5,2) NOT NULL,
+  products_weight decimal(10,4) NOT NULL,
   products_status tinyint(1) NOT NULL,
   products_featured tinyint(1) default '0',
   products_tax_class_id int(11) NOT NULL,

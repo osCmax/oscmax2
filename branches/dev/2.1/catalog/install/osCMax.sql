@@ -2996,7 +2996,7 @@ INSERT INTO slideshow VALUES (2, 'AABox - Pro web hosting', 'http://www.aabox.co
 INSERT INTO slideshow VALUES (3, 'ejSolutions', 'http://www.ejsolutions.co.uk/', 'top', 3, now(), now(), 'example_oscmax3.jpg');
 
 #Information Pages
-INSERT INTO information VALUES(8, 1, 'Shipping & Returns', '<p>\r\n	This Page is for your shipping policies. Edit this in your admin panel under Configuration &gt;&gt; Templates &gt;&gt; Information Pages</p>', 0, 3, '1', 1);
+INSERT INTO information VALUES(8, 1, 'Shipping &amp; Returns', '<p>\r\n	This Page is for your shipping policies. Edit this in your admin panel under Configuration &gt;&gt; Templates &gt;&gt; Information Pages</p>', 0, 3, '1', 1);
 INSERT INTO information VALUES(8, 1, 'Liefer- und Versandkosten', '<p>\r\n	&nbsp;</p>\r\n<div style="font-family: Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">\r\n	<p>\r\n		This Page is for your shipping policies. Edit this in your admin panel under Configuration &gt;&gt; Templates &gt;&gt; Information Pages</p>\r\n</div>', 0, 3, '1', 2);
 INSERT INTO information VALUES(2, 2, 'TEXT_GREETING_PERSONAL', 'Welcome back <span class="greetUser">%s!</span> Would you like to see which <a href="%s"><u>new products</u></a> are available to purchase?', 0, 2, '1', 1);
 INSERT INTO information VALUES(3, 2, 'TEXT_GREETING_PERSONAL_RELOGON', '<small>If you are not %s, please <a href="%s"><u>log yourself in</u></a> with your account information.</small>', 0, 3, '1', 1);

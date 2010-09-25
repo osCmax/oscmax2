@@ -50,60 +50,116 @@
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
-    </table></td>
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+      <!-- left_navigation //-->
+      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+      <!-- left_navigation_eof //-->
+      </table>
+    </td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo TITLE_GOOGLE_SITEMAPS; ?></td>
-            <td class="pageHeading" align="right">&nbsp;</td>
-          </tr>
-        </table>
-          <table width="100%"  border="0" cellpadding="0" cellspacing="0" class="main">
-            <tr>
-              <td width="75%" align="left" valign="top"><p><strong><?php echo OVERVIEW_TITLE_GOOGLE_SITEMAPS; ?></strong></p>
-                <p><?php echo OVERVIEW_GOOGLE_SITEMAPS; ?></p>
-                <p><strong><?php echo INSTRUCTIONS_TITLE_GOOGLE_SITEMAPS; ?></strong></p>
-                <p><strong><font color="#FF0000"><?php echo INSTRUCTIONS_STEP1_GOOGLE_SITEMAPS; ?></font></strong><?php echo INSTRUCTIONS_CLICK_GOOGLE_SITEMAPS; ?><a href="javascript:(void 0)" class="splitPageLink" onClick="window.open('<?php echo $HTTP_SERVER . DIR_WS_CATALOG . $url;?>','google','resizable=0,statusbar=5,width=960,height=310,top=0,left=50,scrollbars=yes')"><strong><?php echo EXEC_GOOGLE_SITEMAPS; ?></strong></a><?php echo INSTRUCTIONS_END1_GOOGLE_SITEMAPS; ?></p>
-                <p><?php echo INSTRUCTIONS_NOTE_GOOGLE_SITEMAPS; ?></p>
-                <p><strong><font color="#FF0000"><?php echo INSTRUCTIONS_STEP2_GOOGLE_SITEMAPS; ?></font></strong><?php echo INSTRUCTIONS_CLICK_GOOGLE_SITEMAPS; ?><a href="javascript:(void 0)"  onClick="window.open('<?php echo $returned_url = GenerateSubmitURL();?>','google','resizable=1,statusbar=5,width=400,height=200,top=0,left=50,scrollbars=yes')" class="splitPageLink"><strong><?php echo EXEC_GOOGLE_SITEMAPS; ?></strong></a><?php echo INSTRUCTIONS_END2_GOOGLE_SITEMAPS; ?></p>
-                <p><?php echo INSTRUCTIONS_COMPLETE_GOOGLE_SITEMAPS; ?></p>
-                <p>&nbsp;</p></td>
-              <td width="25%" align="right" valign="top"><table width="100%"  border="0" cellpadding="0" cellspacing="0">
-                <tr class="infoBoxHeading">
-                  <td align="left" class="smallText"> <strong><?php echo WHATIS_TITLE_GOOGLE_SITEMAPS; ?></strong></td>
-                </tr>
-                <tr>
-                  <td class="smallText"><table width="100%"  border="0" cellpadding="4" cellspacing="0">
-                    <tr>
-                      <td align="left" valign="top" class="infoBoxContent"><p><?php echo WHATIS_TEXT_GOOGLE_SITEMAPS; ?></p>
-                        <p><?php echo WHATIS_REGISTER_GOOGLE_SITEMAPS; ?><strong><a href="http://www.google.com/webmasters/tools/" target="_blank" class="splitPageLink"><?php echo EXEC_GOOGLE_SITEMAPS; ?></a></strong>.</p>
-                        </td>
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="100%">
+            <table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td class="pageHeading"><?php echo TITLE_GOOGLE_SITEMAPS; ?></td>
+                <td class="pageHeading" align="right">&nbsp;</td>
+              </tr>
+            </table>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0" align="center">
+              <tr valign="top">
+                <td width="75%">
+                  <table width="100%" border="0" cellpadding="2" cellspacing="0" class="main">
+                    <tr class="dataTableHeadingRow">
+                      <td class="dataTableHeadingContent"><?php echo OVERVIEW_TITLE_GOOGLE_SITEMAPS; ?></td>
                     </tr>
-                  </table></td>
-                </tr>
-              </table>
-                <p>&nbsp;</p></td>
-            </tr>
-          </table>
+                    <tr>
+                      <td width="75%" align="left" valign="top">
+                        
+                        <p><?php echo OVERVIEW_GOOGLE_SITEMAPS; ?></p>
+                        <?php echo INSTRUCTIONS_STEP1_GOOGLE_SITEMAPS; ?>
+                        <center><a id="regenerate" href="<?php echo $HTTP_SERVER . DIR_WS_CATALOG . $url; ?>" title="Google Sitemaps Generation Report"><?php echo tep_image_button('button_regenerate.gif', IMAGE_REGENERATE); ?></a></center>
+
+                        <div id="ping">
+                        <p><?php echo INSTRUCTIONS_NOTE_GOOGLE_SITEMAPS; ?></p>
+                        <p><?php echo INSTRUCTIONS_STEP2_GOOGLE_SITEMAPS; ?></p>
+                        <center><a id="pinggoogle" href="<?php echo $returned_url = GenerateSubmitURL(); ?>" title="Google Sitemaps Ping"><?php echo tep_image_button('button_ping.gif', IMAGE_PING); ?></a></center>
+                        </div>
+                        
+                        <div id="complete">
+                        <p><?php echo COMPLETE_GOOGLE_SITEMAPS; ?></p>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="25%" align="right" valign="top">
+                  <table width="100%"  border="0" cellpadding="2" cellspacing="0">
+                    <tr class="infoBoxHeading">
+                      <td align="left" class="smallText"> <strong><?php echo WHATIS_TITLE_GOOGLE_SITEMAPS; ?></strong></td>
+                    </tr>
+                    <tr>
+                      <td align="left" valign="top" class="infoBoxContent"><p><?php echo WHATIS_TEXT_GOOGLE_SITEMAPS; ?></p><?php echo WHATIS_REGISTER_GOOGLE_SITEMAPS; ?><br><br><center><a href="http://www.google.com/webmasters/tools/" target="_blank"><?php echo tep_image_button('button_login.gif', IMAGE_LOGIN); ?></a></center><p>&nbsp;</p></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
           </td>
-      </tr>
-      <tr>
-        <td></td>
-          </tr>       
+        </tr>       
 <!-- body_text_eof //-->
-        </table></td>
-      </tr>
-    </table></td>
+      </table>
+    </td>
   </tr>
 </table>
 <!-- body_eof //-->
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#ping').hide();
+	$('#complete').hide();
+	$('#regenerate').each(function() {
+		var $link = $(this);
+		var $dialog = $('<div><\/div>')
+			.load($link.attr('href'))
+			.dialog({
+				autoOpen: false,
+				title: $link.attr('title'),
+				width: 700,
+				height: 400,
+				modal: true,
+				buttons: { "Ok": function() { $(this).dialog("close"); $('#ping').show(); } }
+			});
 
+		$link.click(function() {
+			$dialog.dialog('open');
+            
+			return false;
+		});
+	});
+	
+	$('#pinggoogle').each(function() {
+		var $link = $(this);
+		var $dialog = $('<div><\/div>')
+			.load($link.attr('href'))
+			.dialog({
+				autoOpen: false,
+				title: $link.attr('title'),
+				width: 700,
+				height: 400,
+				modal: true,
+				buttons: { "Ok": function() { $(this).dialog("close"); $('#complete').show(); } }
+			});
+
+		$link.click(function() {
+			$dialog.dialog('open');
+            
+			return false;
+		});
+	});
+});
+</script>
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->

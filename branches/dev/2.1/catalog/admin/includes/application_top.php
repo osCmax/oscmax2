@@ -30,7 +30,7 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
   require('includes/configure.php');
 
 // Define the project version
-  define('PROJECT_VERSION', 'osCMax v2.1');
+  define('PROJECT_VERSION', 'osCmax v2.1');
 
 // some code to solve compatibility issues
   require(DIR_WS_FUNCTIONS . 'compatibility.php');

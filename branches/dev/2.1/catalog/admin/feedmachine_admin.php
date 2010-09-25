@@ -201,7 +201,7 @@ function runFeedmachine() {
               <b>Feed Filename:</b> Filename of the feed that is created from the configuration<br>
               <b>View:</b> Click on icon to view the feed (if it exists)<br>
               <b>Country:</b> This is used to determine the tax set-up of the feed.<br>
-              <b>URL Params:</b> Additional parameters (in the form <i>var1=val1&var2=var2</i>) to add to the links output in the feed. E.g. for Google Analytics: <i>utm_source=[SOURCE]&utm_medium=[MEDIUM]&utm_campaign=[CAMPAIGN]</i><br>
+              <b>URL Params:</b> Additional parameters (in the form <i>var1=val1&amp;var2=var2</i>) to add to the links output in the feed. E.g. for Google Analytics: <i>utm_source=[SOURCE]&amp;utm_medium=[MEDIUM]&amp;utm_campaign=[CAMPAIGN]</i><br>
               <b>Period:</b> How often (in days) to re-upload a feed if there haven't been any changes. This can be set to prevent your feeds from expiring. <i>Applies to Feedmachine Auto only</i><br>
               </td>
             </tr>

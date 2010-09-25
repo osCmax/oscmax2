@@ -12,7 +12,7 @@
 
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_TITLE', 'Cartes de crédit : technologie AIM (Méthode Avancée d\'Intégration), par Authorize.net');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_PUBLIC_TITLE', 'Carte de crédit (transaction sécurisée opérée par Authorize.net)');
-  define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_DESCRIPTION', '<img src="images/icons/icon_popup.gif" border="0">&nbsp;<a href="https://www.authorize.net" target="_blank" style="text-decoration: underline; font-weight: bold;">Visiter le site Web d\'Authorize.net</a>');
+  define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_DESCRIPTION', '<img src="images/icons/icon_popup.gif" border="0" alt="">&nbsp;<a href="https://www.authorize.net" target="_blank" style="text-decoration: underline; font-weight: bold;">Visiter le site Web d\'Authorize.net</a>');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CREDIT_CARD_OWNER', 'Titulaire de la carte de crédit :');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CREDIT_CARD_NUMBER', 'Numéro de carte :');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CREDIT_CARD_EXPIRES', 'Expiration (mm/yy) :');

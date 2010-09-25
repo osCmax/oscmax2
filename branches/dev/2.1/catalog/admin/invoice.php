@@ -34,72 +34,83 @@ $Id: invoice.php 3 2006-05-27 04:59:07Z user $
 <!-- body_text //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
   <tr>
-    <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
-        <td class="pageHeading"><?php echo nl2br(STORE_NAME_ADDRESS); ?></td>
-        <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . STORE_LOGO, STORE_NAME); ?></td>
-      </tr>
-    </table></td>
+    <td>
+      <table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="pageHeading"><?php echo nl2br(STORE_NAME_ADDRESS); ?></td>
+          <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . STORE_LOGO, STORE_NAME); ?></td>
+        </tr>
+      </table>
+    </td>
   </tr>
   <tr>
-    <td><table width="100%" border="0" cellspacing="0" cellpadding="2">
-      <tr>
-        <td colspan="2"><?php echo tep_draw_separator(); ?></td>
-      </tr>
-      <tr>
-        <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="main"><b><?php echo ENTRY_SOLD_TO; ?></b></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo tep_address_format($order->customer['format_id'], $order->billing, 1, '', '<br>'); ?></td>
-          </tr>
-          <tr>
-            <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo $order->customer['telephone']; ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo '<a href="mailto:' . $order->customer['email_address'] . '"><u>' . $order->customer['email_address'] . '</u></a>'; ?></td>
-          </tr>
-        </table></td>
-        <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="main"><b><?php echo ENTRY_SHIP_TO; ?></b></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo tep_address_format($order->delivery['format_id'], $order->delivery, 1, '', '<br>'); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr>
-    <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-  </tr>
-  <tr>
-    <td><table border="0" cellspacing="0" cellpadding="2">
-      <tr>
-        <td class="main"><b><?php echo ENTRY_PAYMENT_METHOD; ?></b></td>
-        <td class="main"><?php echo $order->info['payment_method']; ?></td>
-      </tr>
-    </table></td>
+    <td>
+      <table width="100%" border="0" cellspacing="0" cellpadding="2">
+        <tr>
+          <td colspan="2"><?php echo tep_draw_separator(); ?></td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="2">
+              <tr>
+                <td class="main"><b><?php echo ENTRY_SOLD_TO; ?></b></td>
+              </tr>
+              <tr>
+                <td class="main"><?php echo tep_address_format($order->customer['format_id'], $order->billing, 1, '', '<br>'); ?></td>
+              </tr>
+              <tr>
+                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
+              </tr>
+              <tr>
+                <td class="main"><?php echo $order->customer['telephone']; ?></td>
+              </tr>
+              <tr>
+                <td class="main"><?php echo '<a href="mailto:' . $order->customer['email_address'] . '"><u>' . $order->customer['email_address'] . '</u></a>'; ?></td>
+              </tr>
+            </table>
+          </td>
+          <td valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="2">
+              <tr>
+                <td class="main"><b><?php echo ENTRY_SHIP_TO; ?></b></td>
+              </tr>
+              <tr>
+                <td class="main"><?php echo tep_address_format($order->delivery['format_id'], $order->delivery, 1, '', '<br>'); ?></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
   </tr>
   <tr>
     <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
   </tr>
   <tr>
-    <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr class="dataTableHeadingRow">
-        <td class="dataTableHeadingContent" colspan="2"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
-        <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS_MODEL; ?></td>
-        <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_TAX; ?></td>
-        <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_PRICE_EXCLUDING_TAX; ?></td>
-        <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_PRICE_INCLUDING_TAX; ?></td>
-        <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_TOTAL_EXCLUDING_TAX; ?></td>
-        <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_TOTAL_INCLUDING_TAX; ?></td>
-      </tr>
+    <td>
+      <table border="0" cellspacing="0" cellpadding="2">
+        <tr>
+          <td class="main"><b><?php echo ENTRY_PAYMENT_METHOD; ?></b></td>
+          <td class="main"><?php echo $order->info['payment_method']; ?></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+  </tr>
+  <tr>
+    <td>
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <tr class="dataTableHeadingRow">
+          <td class="dataTableHeadingContent" colspan="2"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
+          <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS_MODEL; ?></td>
+          <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_TAX; ?></td>
+          <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_PRICE_EXCLUDING_TAX; ?></td>
+          <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_PRICE_INCLUDING_TAX; ?></td>
+          <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_TOTAL_EXCLUDING_TAX; ?></td>
+          <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_TOTAL_INCLUDING_TAX; ?></td>
+        </tr>
 <?php
     for ($i = 0, $n = sizeof($order->products); $i < $n; $i++) {
       echo '      <tr class="dataTableRow">' . "\n" .
@@ -128,8 +139,9 @@ $Id: invoice.php 3 2006-05-27 04:59:07Z user $
       echo '      </tr>' . "\n";
     }
 ?>
-      <tr>
-        <td align="right" colspan="8"><table border="0" cellspacing="0" cellpadding="2">
+        <tr>
+          <td align="right" colspan="8">
+            <table border="0" cellspacing="0" cellpadding="2">
 <?php
   for ($i = 0, $n = sizeof($order->totals); $i < $n; $i++) {
     echo '          <tr>' . "\n" .
@@ -138,9 +150,11 @@ $Id: invoice.php 3 2006-05-27 04:59:07Z user $
          '          </tr>' . "\n";
   }
 ?>
-        </table></td>
-      </tr>
-    </table></td>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
   </tr>
 </table>
 <!-- body_text_eof //-->

@@ -12,7 +12,7 @@
 
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_TITLE', 'Authorize.net Credit Card AIM');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_PUBLIC_TITLE', 'Credit Card (Processed by Authorize.net)');
-  define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_DESCRIPTION', '<img src="images/icons/icon_popup.gif" border="0">&nbsp;<a href="https://www.cdgcommerce.com/internet-services.php?R=1017" target="_blank" style="text-decoration: underline; font-weight: bold;">Get an Authorize.net account</a>');
+  define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_DESCRIPTION', '<img src="images/icons/icon_popup.gif" border="0" alt="">&nbsp;<a href="https://www.cdgcommerce.com/internet-services.php?R=1017" target="_blank" style="text-decoration: underline; font-weight: bold;">Get an Authorize.net account</a>');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CREDIT_CARD_OWNER', 'Credit Card Owner:');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CREDIT_CARD_NUMBER', 'Credit Card Number:');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CREDIT_CARD_EXPIRES', 'Credit Card Expiry Date:');

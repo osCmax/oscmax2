@@ -48,7 +48,7 @@ function field_generator($db_field_name) {
 	  if( $cur_feed['currency_code'] != DEFAULT_CURRENCY ) $additional_params[] = 'currency=' . $cur_feed['currency_code'];
 	  if( $cur_feed['language_code'] != DEFAULT_LANGUAGE ) $additional_params[] = 'language=' . $cur_feed['language_code'];
 	  if( !empty($cur_feed['url_parameters']) ) $additional_params[] = $cur_feed['url_parameters'];
-	  $additional_params_string = !empty($additional_params) ? '&' . implode('&', $additional_params) : '';
+	  $additional_params_string = !empty($additional_params) ? '&amp;' . implode('&amp;', $additional_params) : '';
 	  $output_field_value = tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $product['products_id'] . $additional_params_string, 'NONSSL', false);
 	  break;
 	case 'IMAGE_URL':

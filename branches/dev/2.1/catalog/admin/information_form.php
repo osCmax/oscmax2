@@ -11,6 +11,7 @@
   Released under the GNU General Public License
   */
 ?>
+<table>
 <tr>
 	<td class="pageHeading"><?php echo $title ?></td>
 </tr>
@@ -92,7 +93,7 @@ if(!strstr($info_group['locked'], 'information_title')) {
                 <td class="main"><?php echo ENTRY_TITLE . tep_draw_input_field('information_title[' . $languages[$j]['id'] . ']', (($languages[$j]['id'] == $languages_id) ? stripslashes($edit[information_title]) : tep_get_information_entry($information_id, $languages[$j]['id'], 'information_title')), 'size=40 maxlength=255'); ?></td>
               </tr>
               <tr>
-                <td class="main" width="100%"><?php echo tep_draw_textarea_field('information_description[' . $languages[$j]['id'] . ']', '100', '20', (($languages[$j]['id'] == $languages_id) ? stripslashes($edit[information_description]) : tep_get_information_entry($information_id, $languages[$j]['id'], 'information_description')),'id=information_description[' . $languages[$j]['id'] . '] class="ckeditor"'); ?></td>
+                <td class="main" width="100%"><?php echo tep_draw_textarea_field('information_description[' . $languages[$j]['id'] . ']', '100', '20', (($languages[$j]['id'] == $languages_id) ? stripslashes($edit[information_description]) : tep_get_information_entry($information_id, $languages[$j]['id'], 'information_description')),'id="information_description' . $languages[$j]['id'] . '" class="ckeditor"'); ?></td>
               </tr>
             </table>
           </div>
@@ -119,4 +120,5 @@ if(!strstr($info_group['locked'], 'information_title')) {
 
 	</td>
 </tr>
+</table>
 </form>

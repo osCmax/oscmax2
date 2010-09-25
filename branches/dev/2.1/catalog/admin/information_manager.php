@@ -218,6 +218,8 @@ switch($_REQUEST['information_action']) {
         <tr>
           <td align=right><?php //echo $languages_id; ?></td>
         </tr>
+        <tr>
+          <td>
 <?php
 switch($_REQUEST['information_action']) {
 
@@ -228,7 +230,7 @@ case "Added":
 		while (list($key, $val)=each($data)) {$no++; }
 	}
 	$title = ADD_QUEUE_INFORMATION . " #$no";
-	echo tep_draw_form('',FILENAME_INFORMATION_MANAGER, 'information_action=AddSure');
+	echo tep_draw_form('added',FILENAME_INFORMATION_MANAGER, 'information_action=AddSure');
 	echo tep_draw_hidden_field('gID', $gID);
 	include('information_form.php');
 	break;
@@ -239,7 +241,7 @@ case "Added":
 		$data = tep_get_information_list();
 		$button = array("Update");
 		$title = EDIT_ID_INFORMATION . " $information_id";
-		echo tep_draw_form('',FILENAME_INFORMATION_MANAGER, 'information_action=Update');
+		echo tep_draw_form('edit',FILENAME_INFORMATION_MANAGER, 'information_action=Update');
 		echo tep_draw_hidden_field('information_id', $information_id);
 		echo tep_draw_hidden_field('gID', $_GET['gID']);
 		include('information_form.php');
@@ -269,7 +271,7 @@ case "Added":
 		echo '<tr class=dataTableHeadingRow><td align=left class=dataTableHeadingContent>' . ENTRY_TITLE . '</td></tr>';
 		echo '<tr><td class="dataTableContent" bgcolor="#DEE4E8" style="line-height: 18px;">' . $delete['information_title'] . '</td></tr>';
 		echo '<tr><td></td></tr><tr><td align=right>';
-		echo tep_draw_form('',FILENAME_INFORMATION_MANAGER, "information_action=DelSure&information_id=" . $delete['information_id']);
+		echo tep_draw_form('delete',FILENAME_INFORMATION_MANAGER, "information_action=DelSure&amp;information_id=" . $delete['information_id']);
 		echo tep_draw_hidden_field('information_id', $information_id);
 		echo tep_draw_hidden_field('gID', $gID);
 		echo tep_image_submit('button_delete.gif', IMAGE_DELETE);
@@ -308,11 +310,17 @@ if ($error) {
 		while (list($key, $val)=each($data)) {$no++; }
 	}
 	$title = ADD_QUEUE_INFORMATION . " $no";
-	echo tep_draw_form('',FILENAME_INFORMATION_MANAGER, 'information_action=AddSure');
+	echo tep_draw_form('addsure',FILENAME_INFORMATION_MANAGER, 'information_action=AddSure');
 	echo tep_draw_hidden_field('gID', $gID);
 	include('information_form.php');
 }
 ?>
+
+<?php if ($action = '') { ?> 
+          </td>
+        </tr>
+<?php } ?>        
+
       </table>
     </td>
     <!-- body_text_eof //-->

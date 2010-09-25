@@ -14,6 +14,7 @@ define('HEADING_TITLE', 'Languages');
 
 define('TABLE_HEADING_LANGUAGE_NAME', 'Language');
 define('TABLE_HEADING_LANGUAGE_CODE', 'Code');
+define('TABLE_HEADING_SORT_ORDER', 'Sort Order');
 define('TABLE_HEADING_ACTION', 'Action');
 
 define('TEXT_INFO_EDIT_INTRO', 'Please make any necessary changes');

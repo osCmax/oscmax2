@@ -90,23 +90,29 @@ define('customers_email_address', 'string', 'Customer or Newsletter Group');
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
-    </table></td>
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+      <!-- left_navigation //-->
+      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+      <!-- left_navigation_eof //-->
+      </table>
+    </td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right">&nbsp;</td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="100%">
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+                <td class="pageHeading" align="right">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
   if ( ($action == 'preview') && isset($_POST['customers_email_address']) ) {
     switch ($_POST['customers_email_address']) {
@@ -121,37 +127,38 @@ define('customers_email_address', 'string', 'Customer or Newsletter Group');
         break;
     }
 ?>
-          <tr><?php echo tep_draw_form('mail', FILENAME_MAIL, 'action=send_email_to_user'); ?>
-            <td><table border="0" width="100%" cellpadding="0" cellspacing="2">
               <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_CUSTOMER; ?></b><br><?php echo $mail_sent_to; ?></td>
-              </tr>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_FROM; ?></b><br><?php echo htmlspecialchars(stripslashes($_POST['from'])); ?></td>
-              </tr>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_SUBJECT; ?></b><br><?php echo htmlspecialchars(stripslashes($_POST['subject'])); ?></td>
-              </tr>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="smallText"><b><?php echo TEXT_MESSAGE; ?></b><br><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') { echo (stripslashes($_POST['message'])); } else { echo htmlspecialchars(stripslashes($_POST['message'])); } ?></td>
-              </tr>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td>
+                <td><?php echo tep_draw_form('mail', FILENAME_MAIL, 'action=send_email_to_user'); ?>
+                  <table border="0" width="100%" cellpadding="0" cellspacing="2">
+                    <tr>
+                      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                    </tr>
+                    <tr>
+                      <td class="smallText"><b><?php echo TEXT_CUSTOMER; ?></b><br><?php echo $mail_sent_to; ?></td>
+                    </tr>
+                    <tr>
+                      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                    </tr>
+                    <tr>
+                      <td class="smallText"><b><?php echo TEXT_FROM; ?></b><br><?php echo htmlspecialchars(stripslashes($_POST['from'])); ?></td>
+                    </tr>
+                    <tr>
+                      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                    </tr>
+                    <tr>
+                      <td class="smallText"><b><?php echo TEXT_SUBJECT; ?></b><br><?php echo htmlspecialchars(stripslashes($_POST['subject'])); ?></td>
+                    </tr>
+                    <tr>
+                      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                    </tr>
+                    <tr>
+                      <td class="smallText"><b><?php echo TEXT_MESSAGE; ?></b><br><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') { echo (stripslashes($_POST['message'])); } else { echo htmlspecialchars(stripslashes($_POST['message'])); } ?></td>
+                    </tr>
+                    <tr>
+                      <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                    </tr>
+                    <tr>
+                      <td>
 <?php
 /* Re-Post all POST'ed variables */
     reset($_POST);
@@ -161,28 +168,37 @@ define('customers_email_address', 'string', 'Customer or Newsletter Group');
       }
     }
 ?>
-                    <tr>
-                    <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_MAIL) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
+                      </td>
                     </tr>
-                    <td class="smallText">
-                <?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable'){echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="back"');
-                } ?><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {echo(TEXT_EMAIL_BUTTON_HTML);
-                 } else { echo(TEXT_EMAIL_BUTTON_TEXT); } ?>
-                    </td>
-                  </tr>
-                </table></td>
+                    <tr>
+                      <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_MAIL) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
+                    </tr>
+                    <tr>
+                      <td class="smallText">
+                      <?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {
+					    echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="back"');
+                      } ?>
+					  <?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') { 
+					    echo(TEXT_EMAIL_BUTTON_HTML);
+                      } else { 
+					    echo(TEXT_EMAIL_BUTTON_TEXT);
+				 	  } ?>
+                      </td>
+                    </tr>
+                  </table></form>
+                </td>
               </tr>
-            </table></td>
-          </form></tr>
+            
 
 <?php
   } else {
 ?>
-          <tr><?php echo tep_draw_form('mail', FILENAME_MAIL, 'action=preview'); ?>
-            <td><table border="0" cellpadding="0" cellspacing="2">
               <tr>
-                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
+                <td><?php echo tep_draw_form('mail', FILENAME_MAIL, 'action=preview'); ?>
+                  <table border="0" cellpadding="0" cellspacing="2">
+                    <tr>
+                      <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                    </tr>
 <?php
     $customers = array();
     $customers[] = array('id' => '', 'text' => TEXT_SELECT_CUSTOMER);
@@ -194,58 +210,62 @@ define('customers_email_address', 'string', 'Customer or Newsletter Group');
                            'text' => $customers_values['customers_lastname'] . ', ' . $customers_values['customers_firstname'] . ' (' . $customers_values['customers_email_address'] . ')');
     }
 ?>
-              <tr>
-                <td class="main"><?php echo TEXT_CUSTOMER; ?></td>
-                <td><?php echo tep_draw_pull_down_menu('customers_email_address', $customers, (isset($_GET['customer']) ? $_GET['customer'] : ''));?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="main"><?php echo TEXT_FROM; ?></td>
-                <td><?php echo tep_draw_input_field('from', EMAIL_FROM); ?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td class="main"><?php echo TEXT_SUBJECT; ?></td>
-                <td><?php echo tep_draw_input_field('subject'); ?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
-                <td><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
+                    <tr>
+                      <td class="main"><?php echo TEXT_CUSTOMER; ?></td>
+                      <td><?php echo tep_draw_pull_down_menu('customers_email_address', $customers, (isset($_GET['customer']) ? $_GET['customer'] : ''));?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                    </tr>
+                    <tr>
+                      <td class="main"><?php echo TEXT_FROM; ?></td>
+                      <td><?php echo tep_draw_input_field('from', EMAIL_FROM); ?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                    </tr>
+                    <tr>
+                      <td class="main"><?php echo TEXT_SUBJECT; ?></td>
+                      <td><?php echo tep_draw_input_field('subject'); ?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
+                      <td><?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
 // Line Changed - MOD: CKeditor
                 	//echo (tep_draw_fckeditor('message', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, '')) . '</td>';
-			echo (tep_draw_textarea_field('message', '70', '15', '' ,'class="ckeditor"')) . '</td>';
-                } else {
+			        echo (tep_draw_textarea_field('message', '70', '15', '' ,'class="ckeditor"')) . '</td>';
+                    } else {
                 	echo (tep_draw_textarea_field('message', '70', '15')) . '</td>';
-                }
-                ?>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-              <tr>
-                <td colspan="2" align="right">
-                 <?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable'){ echo tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL, 'onClick="validate();return returnVal;"');
-                   } else {
-                echo tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); }?>
+                    }
+                    ?>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" align="right">
+                      <?php if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Enable') {
+				        echo tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL, 'onClick="validate();return returnVal;"');
+                      } else {
+                        echo tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); 
+				      } ?>
+                      </td>
+                    </tr>
+                  </table></form>
                 </td>
-
               </tr>
-            </table></td>
-          </form></tr>
 <?php
   }
 ?>
 <!-- body_text_eof //-->
-        </table></td>
-      </tr>
-    </table></td>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
   </tr>
 </table>
 <!-- body_eof //-->
@@ -255,5 +275,4 @@ define('customers_email_address', 'string', 'Customer or Newsletter Group');
 <br>
 </body>
 </html>
-<?php require(DIR_WS_INCLUDES . 'application_bottom.php');
-?>
+<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

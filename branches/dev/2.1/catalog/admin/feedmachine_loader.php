@@ -65,7 +65,7 @@
                         'currency_code' => DEFAULT_CURRENCY,
                         'countries_iso_2' => $store_country_code,
                         'ftp_upload_period' => '30',
-                        'url_parameters' => ( 'utm_source=' . urlencode($feed_name) . '&utm_medium=product_search&utm_campaign=' . urlencode($feed_name) ));
+                        'url_parameters' => ( 'utm_source=' . urlencode($feed_name) . '&amp;utm_medium=product_search&amp;utm_campaign=' . urlencode($feed_name) ));
           tep_db_perform('feedmachine', $data);
           $fm_installed_configs[ $file ] = $data;
         }

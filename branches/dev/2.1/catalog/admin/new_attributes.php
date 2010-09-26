@@ -34,49 +34,39 @@
 <!-- header_eof //-->
 
 <!-- body //-->
-     <table border="0" width="100%" cellspacing="2" cellpadding="2">
-     <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
-     <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
-    </table></td>
-
+<table border="0" width="100%" cellspacing="2" cellpadding="2">
+  <tr>
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+      <!-- left_navigation //-->
+      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+      <!-- left_navigation_eof //-->
+      </table>
+    </td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
     
 <?php
-function findTitle( $current_product_id, $languageFilter )
-{
+function findTitle( $current_product_id, $languageFilter ) {
   $query = "SELECT * FROM products_description where language_id = '$languageFilter' AND products_id = '$current_product_id'";
-
   $result = mysql_query($query) or die(mysql_error());
-
   $matches = mysql_num_rows($result);
-
   if ($matches) {
-
-  while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
-                                                          	
-        $productName = $line['products_name'];
-        
-  }
-  
+    while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {                                                	
+      $productName = $line['products_name'];  
+    } // end while
   return $productName;
-  
-  } else { return "Something isn't right...."; }
-  
+  } else { 
+  return "Something isn't right...."; 
+  } // end if
+} // end function
+
+function attribRedirect( $cPath ) {
+  return '<script type="text/javascript"> window.location="./configure.php?cPath=' . $cPath . '"; </script>'; 
 }
 
-function attribRedirect( $cPath )
-{
-
- return '<script type="text/javascript"> window.location="./configure.php?cPath=' . $cPath . '"; </script>';
- 
-}
-
-switch( $action )
-{
+switch( $action ) {
   case 'select':
   $pageTitle = 'Edit Attributes -> ' . findTitle( $current_product_id, $languageFilter );
   require('new_attributes_include.php');
@@ -93,12 +83,14 @@ switch( $action )
   require('new_attributes_select.php');
   break;
   
-}
-
+} // end switch
+ 
 ?>
 
-    </table></TD>
-    </TR>
+      </table>
+    </td>
+  </tr>
+</table>
 <!-- body_eof //-->
 
 <!-- footer //-->

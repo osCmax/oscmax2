@@ -1,44 +1,33 @@
 <?php
 // A simple little function to determine if the current value is already selected for the current product.
-function checkAttribute( $current_value_id, $current_product_id, $current_product_option_id )
-{
- global $attribute_value_price, $attribute_value_prefix, $posCheck, $negCheck;
-
- $query = "SELECT * FROM products_attributes where options_values_id = '$current_value_id' AND products_id = '$current_product_id' AND options_id = '$current_product_option_id'";
-
- $result = mysql_query($query) or die(mysql_error());
-
- $isFound = mysql_num_rows($result);
- 
- if ($isFound) {
-
+function checkAttribute( $current_value_id, $current_product_id, $current_product_option_id ) {
+  global $attribute_value_price, $attribute_value_prefix, $posCheck, $negCheck;
+  $query = "SELECT * FROM products_attributes where options_values_id = '$current_value_id' AND products_id = '$current_product_id' AND options_id = '$current_product_option_id'";
+  $result = mysql_query($query) or die(mysql_error());
+  $isFound = mysql_num_rows($result);
+  if ($isFound) {
     while($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
-        
-        $attribute_value_price = $line['options_values_price'];
-        $attribute_value_prefix = $line['price_prefix'];
-        
-        if ($attribute_value_prefix == "+") { $posCheck = " SELECTED";
-                                              $negCheck = "";
+      $attribute_value_price = $line['options_values_price'];
+      $attribute_value_prefix = $line['price_prefix'];
+      if ($attribute_value_prefix == "+") { $posCheck = " selected";
+                                            $negCheck = "";
                                               
-        } else { $posCheck = "";
-                 $negCheck = " SELECTED";
-
-        }
-
-    }
-
+      } else {                              $posCheck = "";
+                                            $negCheck = " selected";
+      } // end if
+    } // end while
     return true; 
-    
+
+
     } else {
     
     $attribute_value_price = ""; 
     $attribute_value_prefix = "";
     $posCheck = "";
     $negCheck = "";
-
-    return false; }
-
-}
+    return false; 
+  } // end if
+} // end function
 
 function rowClass($i){
     $class1 = "attributes-odd";
@@ -128,36 +117,17 @@ function getSortCopyValues( $current_value_id, $current_product_id )
  }
  
 }
-function sortCopyWeightPrefix( $attribute_weight_prefix )
-{
- global $isSelected;
- 
- $availablePrefixes = array( '+', '-' );
- 
- foreach( $availablePrefixes as $prefix ) {
-                                          	
-        if ( $isSelected && $prefix == $attribute_weight_prefix ) {
-                                                                  	
-                $SELECT = " SELECTED";
-                
-        } else { $SELECT = ""; }
-        
-        echo "<OPTION VALUE=\"" . $prefix . "\"" . $SELECT . ">" . $prefix;
-        
-        }
-        
-}
 
+function sortCopyWeightPrefix( $attribute_weight_prefix ) {
+  global $isSelected;
+  $availablePrefixes = array( '+', '-' );
+  foreach( $availablePrefixes as $prefix ) {                                   	
+    if ( $isSelected && $prefix == $attribute_weight_prefix ) {                                                           	
+      $SELECT = " selected";         
+    } else { 
+      $SELECT = "";
+    } // end if
+  echo "<option value=\"" . $prefix . "\"" . $SELECT . ">" . $prefix;   
+  } // end for      
+} // end function
 ?>
-
-
-
-
-
-
-
-
-
-
-
-

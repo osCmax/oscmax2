@@ -68,13 +68,4 @@ if ( $optionTypeTextInstalled == "1" && is_array( $_POST['optionValuesText'] )) 
    
 }
 
-
-
-
-
-
-
-
-
-
 ?>

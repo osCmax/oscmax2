@@ -106,7 +106,7 @@ if ($the_customers_fax) {
       </tr>
 <!-- add date/time // -->
       <tr>
-        <td class="main"><b>Date & Time</b></td>
+        <td class="main"><b>Date &amp; Time</b></td>
         <td class="main"><?php echo tep_datetime_short($order->info['date_purchased']); ?></td>
       </tr>
       <tr>

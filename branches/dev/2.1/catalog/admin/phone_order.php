@@ -11,8 +11,7 @@ Released under the GNU General Public License
 require('includes/application_top.php');
 
 // #### Get Available Customers
-if(isset($_POST['secu']))
-{
+if(isset($_POST['secu'])) {
 	$byfl='where customers_firstname like \''.$_POST['cust2'].'%\' or customers_lastname like \''.$_POST['cust2'].'%\''; 
 }else $byfl='';
 $query = tep_db_query("select customers_id, customers_firstname, customers_lastname, customers_email_address from " . TABLE_CUSTOMERS . " ".$byfl." ORDER BY customers_lastname");
@@ -45,20 +44,11 @@ require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PHONE_ORDER);
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
-<?php
-// BOF: WebMakers.com Changed: Header Tag Controller v1.0
-// Replaced by header_tags.php
-if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
-require(DIR_WS_INCLUDES . 'header_tags.php');
-} else {
-	?>
-<title>Phone Order</title>
-
+<title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
-
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
-
 <body>
 
 <!-- header //-->
@@ -158,8 +148,4 @@ require(DIR_WS_INCLUDES . 'header_tags.php');
 <br>
 </body>
 </html>
-
-<?php 
-	require(DIR_WS_INCLUDES . 'application_bottom.php'); 
-}
-?>
+<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

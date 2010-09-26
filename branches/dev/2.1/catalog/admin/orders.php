@@ -508,7 +508,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
 														}
 													?>
 												</select>
-                                                <?php echo '<span title="' . HEADING_CANNED_COMMENTS_HELP . '|' . TEXT_CANNED_COMMENTS_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', 'Help') ?></span>
+                                                <?php echo '<span title="' . HEADING_CANNED_COMMENTS_HELP . '|' . TEXT_CANNED_COMMENTS_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', 'Help'); ?></span>
 <!-- EOF: Canned Comments -->
                                                                                                      
                                             </td>

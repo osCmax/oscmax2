@@ -43,19 +43,19 @@ $currencies = new currencies();
   <tr>
     <td width="<?php echo BOX_WIDTH; ?>" valign="top">
       <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
+      <!-- left_navigation //-->
+      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+      <!-- left_navigation_eof //-->
       </table>
-        </td>
+    </td>
 <!-- body_text //-->
-        <td width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td class="pageHeading"><?php echo HEADING_TITLE; ?>
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td class="dataTableContent" width="75%" valign="top">
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <tr>
+          <td class="pageHeading"><?php echo HEADING_TITLE; ?>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="dataTableContent" width="75%" valign="top">
 <?php
 $activeid = $_GET['id'];
 
@@ -138,7 +138,7 @@ function getPackages() {
 function DisplayPackages($activeid,$error) {
 ?>
 
-    <table border="0" width="100%" cellspacing="0" cellpadding="2" width="100%">
+    <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr class="dataTableHeadingRow">
         <td class="dataTableHeadingContent"><?php echo HEADING_NAME; ?></td>
         <td class="dataTableHeadingContent" align="left"><?php echo HEADING_DESCRIPTION; ?></td>
@@ -154,7 +154,7 @@ function DisplayPackages($activeid,$error) {
     <?php
     $packages = getPackages();
     if (count($packages) == 0) {
-        echo                         '<tr><td colspan="8">' . NO_PACKAGES_DEFINED . '</td></tr>';
+        echo                         '<tr><td colspan="8">' . NO_PACKAGES_DEFINED;
     }
     if ($error != "") {
         echo '<SPAN class="errorText">'.$error.'</SPAN>';
@@ -190,8 +190,8 @@ function DisplayPackages($activeid,$error) {
     if ($activeid == "") {
         $activeid = $packages[0]['id'];
         }
-    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=showupdatepackageform&id='.$activeid.'') . '">'.tep_image_button('button_edit.gif', IMAGE_EDIT).'</a>&nbsp;' ;	 
-    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=showconfirmdeletepackageform&id='.$activeid.'') . '">'.tep_image_button('button_delete.gif', IMAGE_DELETE).'</a>' ;
+    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=showupdatepackageform&amp;id='.$activeid.'') . '">'.tep_image_button('button_edit.gif', IMAGE_EDIT).'</a>&nbsp;' ;	 
+    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=showconfirmdeletepackageform&amp;id='.$activeid.'') . '">'.tep_image_button('button_delete.gif', IMAGE_DELETE).'</a>' ;
    echo '</td><td class="infoBoxContent" valign="top">'."\n";
 }
 
@@ -317,9 +317,14 @@ function showPackageInfoForm() {
       </tr>
     </table> 
   </td>
-<!-- body_text_eof //--></tr>
+  </tr>
+  </table>
+  </td>
+  
+<!-- body_text_eof //-->
+</tr>
 <!-- body_eof //-->
-
+</table>
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->

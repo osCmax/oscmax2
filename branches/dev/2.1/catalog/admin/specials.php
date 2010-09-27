@@ -29,7 +29,7 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
       case 'setflag':
         tep_set_specials_status($_GET['id'], $_GET['flag']);
 
-        tep_redirect(tep_href_link(FILENAME_SPECIALS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'sID=' . $_GET['id'], 'NONSSL'));
+        tep_redirect(tep_href_link(FILENAME_SPECIALS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&amp;' : '') . 'sID=' . $_GET['id'], 'NONSSL'));
         break;
       case 'insert':
         $products_id = tep_db_prepare_input($_POST['products_id']);
@@ -80,7 +80,7 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
 
         tep_db_query("update " . TABLE_SPECIALS . " set specials_new_products_price = '" . tep_db_input($specials_price) . "', specials_last_modified = now(), expires_date = '" . tep_db_input($expires_date) . "' where specials_id = '" . (int)$specials_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $specials_id));
+        tep_redirect(tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&amp;sID=' . $specials_id));
       break;
       case 'deleteconfirm':
         $specials_id = tep_db_prepare_input($_GET['sID']);
@@ -110,21 +110,26 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
-    </table></td>
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+      <!-- left_navigation //-->
+      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+      <!-- left_navigation_eof //-->
+      </table>
+    </td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right">&nbsp;</td>
-          </tr>
-        </table></td>
-      </tr>
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <tr>
+          <td width="100%">
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+                <td class="pageHeading" align="right">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
 <?php
   if ( ($action == 'new') || ($action == 'edit') ) {
     $form_action = 'insert';
@@ -166,74 +171,82 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
 // EOF: MOD - Separate Pricing Per Customer
     }
 ?>
-      <tr><form name="new_special" <?php echo 'action="' . tep_href_link(FILENAME_SPECIALS, tep_get_all_get_params(array('action', 'info', 'sID')) . 'action=' . $form_action, 'NONSSL') . '"'; ?> method="post"><?php if ($form_action == 'update') echo tep_draw_hidden_field('specials_id', $_GET['sID']); ?>
-        <td>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr><td width="75%" valign="top">
-        <table width="100%" border="0" cellspacing="0" cellpadding="2">
-          <tr class="dataTableHeadingRow">
-            <td class="dataTableHeadingContent" colspan="2">&nbsp;</td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-		  <tr>
-            <td class="main" width="20%"><?php echo TEXT_SPECIALS_PRODUCT; ?>&nbsp;</td>
-            <td class="main"><?php echo (isset($sInfo->products_name)) ? $sInfo->products_name . ' <small>(' . $currencies->format($sInfo->products_price) . ')</small>' : tep_draw_products_pull_down('products_id', 'style="font-size:10px"', $specials_array); echo tep_draw_hidden_field('products_price', (isset($sInfo->products_price) ? $sInfo->products_price : '')); ?></td>
-          </tr>
-<?php php // BOF: MOD - Separate Pricing per Customer ?>
-          <tr>
-            <td class="main"><?php echo TEXT_SPECIALS_GROUPS; ?>&nbsp;</td>
-            <td class="main"><?php if (isset($sInfo->customers_group_id)) {
-            for ($x=0; $x<count($input_groups); $x++) {
-            if ($input_groups[$x]['id'] == $sInfo->customers_group_id) {
-            echo $input_groups[$x]['text'];
-            }
-            } // end for loop
-            } else {
-         echo tep_draw_pull_down_menu('customers_group', $input_groups, (isset($sInfo->customers_group_id)?$sInfo->customers_group_id:'')); 
-         } ?> </td>
-          </tr>
-<?php php // EOF: MOD - Separate Pricing per Customer ?>
-          <tr>
-            <td class="main"><?php echo TEXT_SPECIALS_SPECIAL_PRICE; ?>&nbsp;</td>
-            <td class="main"><?php echo tep_draw_input_field('specials_price', (isset($sInfo->specials_new_products_price) ? $sInfo->specials_new_products_price : '')); ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_SPECIALS_EXPIRES_DATE; ?>&nbsp;</td>
-            <td><?php echo tep_draw_input_field('expires_date', (isset($sInfo->expires_date) ? $sInfo->expires_date : ''), 'id="specials"'); ?></td>
-          </tr>
-      	  <tr>
-            <td class="main"></td>
-            <td class="main" align="right" valign="top"><br><?php echo '<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . (isset($_GET['sID']) ? '&sID=' . $_GET['sID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>&nbsp;&nbsp;' . (($form_action == 'insert') ? tep_image_submit('button_insert.gif', IMAGE_INSERT) : tep_image_submit('button_update.gif', IMAGE_UPDATE)). '&nbsp;&nbsp;'; ?></td>
-          </tr>
-        </table>
-        </td>
-        <td width="25%" valign="top">
-        	<table border="0" width="100%" cellspacing="0" cellpadding="2">
-            	<tr class="infoBoxHeading">
-                	<td>Specials Help</td>
-                </tr>
-                <tr class="infoBoxContent">
-                	<td class="infoBoxContent"><?php echo TEXT_SPECIALS_PRICE_TIP; ?></td>
-                </tr>
+        <tr>
+          <td><form name="new_special" <?php echo 'action="' . tep_href_link(FILENAME_SPECIALS, tep_get_all_get_params(array('action', 'info', 'sID')) . 'action=' . $form_action, 'NONSSL') . '"'; ?> method="post"><?php if ($form_action == 'update') echo tep_draw_hidden_field('specials_id', $_GET['sID']); ?>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="75%" valign="top">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                    <tr class="dataTableHeadingRow">
+                      <td class="dataTableHeadingContent" colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                    </tr>
+		            <tr>
+                      <td class="main" width="20%"><?php echo TEXT_SPECIALS_PRODUCT; ?>&nbsp;</td>
+                      <td class="main"><?php echo (isset($sInfo->products_name)) ? $sInfo->products_name . ' <small>(' . $currencies->format($sInfo->products_price) . ')</small>' : tep_draw_products_pull_down('products_id', 'style="font-size:10px"', $specials_array); echo tep_draw_hidden_field('products_price', (isset($sInfo->products_price) ? $sInfo->products_price : '')); ?></td>
+                    </tr>
+<?php // BOF: MOD - Separate Pricing per Customer ?>
+                    <tr>
+                      <td class="main"><?php echo TEXT_SPECIALS_GROUPS; ?>&nbsp;</td>
+                      <td class="main">
+			    	  <?php 
+					  if (isset($sInfo->customers_group_id)) {
+                        for ($x=0; $x<count($input_groups); $x++) {
+                          if ($input_groups[$x]['id'] == $sInfo->customers_group_id) {
+                            echo $input_groups[$x]['text'];
+                          }
+                        } // end for loop
+                      } else {
+                      echo tep_draw_pull_down_menu('customers_group', $input_groups, (isset($sInfo->customers_group_id)?$sInfo->customers_group_id:'')); 
+                      } ?>
+                      </td>
+                    </tr>
+<?php // EOF: MOD - Separate Pricing per Customer ?>
+                    <tr>
+                      <td class="main"><?php echo TEXT_SPECIALS_SPECIAL_PRICE; ?>&nbsp;</td>
+                      <td class="main"><?php echo tep_draw_input_field('specials_price', (isset($sInfo->specials_new_products_price) ? $sInfo->specials_new_products_price : '')); ?></td>
+                    </tr>
+                    <tr>
+                      <td class="main"><?php echo TEXT_SPECIALS_EXPIRES_DATE; ?>&nbsp;</td>
+                      <td><?php echo tep_draw_input_field('expires_date', (isset($sInfo->expires_date) ? $sInfo->expires_date : ''), 'id="specials"'); ?></td>
+                    </tr>
+                    <tr>
+                      <td class="main"></td>
+                      <td class="main" align="right" valign="top"><br><?php echo '<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . (isset($_GET['sID']) ? '&amp;sID=' . $_GET['sID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>&nbsp;&nbsp;' . (($form_action == 'insert') ? tep_image_submit('button_insert.gif', IMAGE_INSERT) : tep_image_submit('button_update.gif', IMAGE_UPDATE)). '&nbsp;&nbsp;'; ?></td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="25%" valign="top">
+        	      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+              	    <tr class="infoBoxHeading">
+                      <td>Specials Help</td>
+                    </tr>
+                    <tr class="infoBoxContent">
+                  	  <td class="infoBoxContent"><?php echo TEXT_SPECIALS_PRICE_TIP; ?></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
             </table>
-        </td>
-        </tr></table>
-      </form></tr>
+          </form></td>
+        
 <?php
   } else {
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_PRODUCTS_PRICE; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_STATUS; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
-              </tr>
+        <tr>
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td valign="top">
+                  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                    <tr class="dataTableHeadingRow">
+                      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
+                      <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_PRODUCTS_PRICE; ?></td>
+                      <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_STATUS; ?></td>
+                      <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
+                    </tr>
 <?php
 // BOF: MOD - Separate Pricing per Customer
 /*    $specials_query_raw = "select p.products_id, pd.products_name, p.products_price, s.specials_id, s.specials_new_products_price, s.specials_date_added, s.specials_last_modified, s.expires_date, s.date_status_change, s.status from " . TABLE_PRODUCTS . " p, " . TABLE_SPECIALS . " s, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = s.products_id order by pd.products_name"; */
@@ -269,45 +282,48 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
       }
 
       if (isset($sInfo) && is_object($sInfo) && ($specials['specials_id'] == $sInfo->specials_id)) {
-        echo '                  <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $sInfo->specials_id . '&action=edit') . '\'">' . "\n";
+        echo '                  <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&amp;sID=' . $sInfo->specials_id . '&amp;action=edit') . '\'">' . "\n";
       } else {
-        echo '                  <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $specials['specials_id']) . '\'">' . "\n";
+        echo '                  <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&amp;sID=' . $specials['specials_id']) . '\'">' . "\n";
       }
 ?>
-                <td class="dataTableContent"><?php echo $specials['products_name']; ?></td>
+                      <td class="dataTableContent"><?php echo $specials['products_name']; ?></td>
 <?php /* LINE MOD Separate Pricing Per Customer added "$all_groups[$specials['customers_group_id']]" */ ?>
-                <td  class="dataTableContent" align="right"><span class="oldPrice"><?php echo $currencies->format($specials['products_price']); ?></span> <span class="specialPrice"><?php echo $currencies->format($specials['specials_new_products_price'])." (".$all_groups[$specials['customers_group_id']].")"; ?></span></td>
-                <td  class="dataTableContent" align="right">
+                      <td class="dataTableContent" align="right"><span class="oldPrice"><?php echo $currencies->format($specials['products_price']); ?></span> <span class="specialPrice"><?php echo $currencies->format($specials['specials_new_products_price'])." (".$all_groups[$specials['customers_group_id']].")"; ?></span></td>
+                      <td class="dataTableContent" align="right">
 <?php
       if ($specials['status'] == '1') {
-        echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_SPECIALS, 'action=setflag&flag=0&id=' . $specials['specials_id'], 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+        echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_SPECIALS, 'action=setflag&amp;flag=0&amp;id=' . $specials['specials_id'], 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
       } else {
-        echo '<a href="' . tep_href_link(FILENAME_SPECIALS, 'action=setflag&flag=1&id=' . $specials['specials_id'], 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+        echo '<a href="' . tep_href_link(FILENAME_SPECIALS, 'action=setflag&amp;flag=1&amp;id=' . $specials['specials_id'], 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
       }
 ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($sInfo) && is_object($sInfo) && ($specials['specials_id'] == $sInfo->specials_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $specials['specials_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
-      </tr>
+                      <td class="dataTableContent" align="right"><?php if (isset($sInfo) && is_object($sInfo) && ($specials['specials_id'] == $sInfo->specials_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&amp;sID=' . $specials['specials_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                    </tr>
 <?php
     }
 ?>
-              <tr>
-                <td colspan="4"><table border="0" width="100%" cellpadding="0"cellspacing="2">
-                  <tr>
-                    <td class="smallText" valign="top"><?php echo $specials_split->display_count($specials_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_SPECIALS); ?></td>
-                    <td class="smallText" align="right"><?php echo $specials_split->display_links($specials_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
-                  </tr>
+                    <tr>
+                      <td colspan="4">
+                        <table border="0" width="100%" cellpadding="0"cellspacing="2">
+                          <tr>
+                            <td class="smallText" valign="top"><?php echo $specials_split->display_count($specials_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_SPECIALS); ?></td>
+                            <td class="smallText" align="right"><?php echo $specials_split->display_links($specials_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
+                          </tr>
 <?php
   if (empty($action)) {
 ?>
-                  <tr>
-                    <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&action=new') . '">' . tep_image_button('button_new_product.gif', IMAGE_NEW_PRODUCT) . '</a>'; ?></td>
-                  </tr>
+                          <tr>
+                            <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&amp;action=new') . '">' . tep_image_button('button_new_product.gif', IMAGE_NEW_PRODUCT) . '</a>'; ?></td>
+                          </tr>
 <?php
   }
 ?>
-                </table></td>
-              </tr>
-            </table></td>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
 <?php
   $heading = array();
   $contents = array();
@@ -316,16 +332,16 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_SPECIALS . '</b>');
 
-      $contents = array('form' => tep_draw_form('specials', FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $sInfo->specials_id . '&action=deleteconfirm'));
+      $contents = array('form' => tep_draw_form('specials', FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&amp;sID=' . $sInfo->specials_id . '&amp;action=deleteconfirm'));
       $contents[] = array('text' => TEXT_INFO_DELETE_INTRO);
       $contents[] = array('text' => '<br><b>' . $sInfo->products_name . '</b>');
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $sInfo->specials_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&amp;sID=' . $sInfo->specials_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     default:
       if (is_object($sInfo)) {
         $heading[] = array('text' => '<b>' . $sInfo->products_name . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $sInfo->specials_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $sInfo->specials_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&amp;sID=' . $sInfo->specials_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&amp;sID=' . $sInfo->specials_id . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
         $contents[] = array('text' => '<br>' . TEXT_INFO_DATE_ADDED . ' ' . tep_date_short($sInfo->specials_date_added));
         $contents[] = array('text' => '' . TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($sInfo->specials_last_modified));
         $contents[] = array('align' => 'center', 'text' => '<br>' . tep_info_image(DYNAMIC_MOPICS_THUMBS_DIR . $sInfo->products_image, $sInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT));
@@ -366,12 +382,18 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
   }
 }
 ?>
-          </tr>
-        </table></td>
+            </tr>
+          </table>
+          
+<?php if ( ($action != 'new') && ($action != 'edit') ) { ?>
+        </td>
       </tr>
-    </table></td>
+    </table>
+<?php } ?>
+
+  </td>
 <!-- body_text_eof //-->
-  </tr>
+</tr>
 </table>
 <!-- body_eof //-->
 

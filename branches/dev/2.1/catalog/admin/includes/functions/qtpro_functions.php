@@ -173,7 +173,7 @@ return $facts_array;
 }
 
 function qtpro_doctor_formulate_database_investigation(){
-	print "<table><tr><td>&nbsp;</td></tr><tr><td class='main'><b>Active sick products in the database:</b></td></tr></table></p>";
+	print "<table><tr><td>&nbsp;</td></tr><tr><td class='main'><b>Active sick products in the database:</b></td></tr></table>";
 	$count = 0;
 	$prod_query = tep_db_query("SELECT products_id FROM " . TABLE_PRODUCTS . " where products_status = '1'");
 	while($product = tep_db_fetch_array($prod_query)){
@@ -189,7 +189,7 @@ function qtpro_doctor_formulate_database_investigation(){
 }
 
 function qtpro_doctor_formulate_inactive_database_investigation(){
-print "<table><tr><td>&nbsp;</td></tr><tr><td class='main'><b>Inactive sick products in the database:</b></td></tr></table></p>";
+print "<table><tr><td>&nbsp;</td></tr><tr><td class='main'><b>Inactive sick products in the database:</b></td></tr></table>";
 	$count = 0;
 	$prod_query = tep_db_query("SELECT products_id FROM " . TABLE_PRODUCTS . " where products_status <> '1'");
 	while($product = tep_db_fetch_array($prod_query)){

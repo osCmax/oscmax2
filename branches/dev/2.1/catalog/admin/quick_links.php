@@ -38,7 +38,7 @@ $Id: quick_links.php 3 2010-03-31 user pgm
 
         tep_db_query("update " . TABLE_QUICK_LINKS . " set quick_links_id = '" . (int)$quick_links_id . "', quick_links_image = '" . $quick_links_image . "', quick_links_name = '" . $quick_links_name . "', quick_links_link = '" . tep_db_input($quick_links_link) . "', quick_links_target = '" . tep_db_input($quick_links_target) . "', quick_links_sort_order = '" . tep_db_input($quick_links_sort_order) . "', last_modified = now() where quick_links_id = '" . (int)$quick_links_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $quick_links_id));
+        tep_redirect(tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $quick_links_id));
         break;
       case 'deleteconfirm':
         $quick_links_id = tep_db_prepare_input($_GET['tID']);
@@ -104,9 +104,9 @@ $Id: quick_links.php 3 2010-03-31 user pgm
     }
 
     if (isset($trInfo) && is_object($trInfo) && ($links['quick_links_id'] == $trInfo->quick_links_id)) {
-      echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $trInfo->quick_links_id . '&action=edit') . '\'">' . "\n";
+      echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->quick_links_id . '&amp;action=edit') . '\'">' . "\n";
     } else {
-      echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $links['quick_links_id']) . '\'">' . "\n";
+      echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $links['quick_links_id']) . '\'">' . "\n";
     }
 ?>
                 <td class="dataTableContent"><?php echo $links['quick_links_image']; ?></td>
@@ -114,7 +114,7 @@ $Id: quick_links.php 3 2010-03-31 user pgm
                 <td class="dataTableContent"><?php echo $links['quick_links_link']; ?></td>
                 <td class="dataTableContent"><?php echo $links['quick_links_target']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo $links['quick_links_sort_order']; ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($trInfo) && is_object($trInfo) && ($links['quick_links_id'] == $trInfo->quick_links_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $links['quick_links_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if (isset($trInfo) && is_object($trInfo) && ($links['quick_links_id'] == $trInfo->quick_links_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $links['quick_links_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
   }
@@ -129,7 +129,7 @@ $Id: quick_links.php 3 2010-03-31 user pgm
   if (empty($action)) {
 ?>
                   <tr>
-                    <td colspan="6" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_NEW_TAX_RATE) . '</a>'; ?></td>
+                    <td colspan="6" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_NEW_TAX_RATE) . '</a>'; ?></td>
                   </tr>
 <?php
   }
@@ -145,7 +145,7 @@ $Id: quick_links.php 3 2010-03-31 user pgm
     case 'new':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_QUICK_LINKS . '</b>');
 
-      $contents = array('form' => tep_draw_form('links', FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&action=insert'));
+      $contents = array('form' => tep_draw_form('links', FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;action=insert'));
       $contents[] = array('text' => TEXT_QUICK_LINKS_INSERT_INTRO);
       $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_IMAGE . '<br>' . tep_draw_input_field('quick_links_image'));
       $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_NAME . '<br>' . tep_draw_input_field('quick_links_name'));
@@ -157,27 +157,27 @@ $Id: quick_links.php 3 2010-03-31 user pgm
     case 'edit':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_QUICK_LINKS . '</b>');
 
-      $contents = array('form' => tep_draw_form('links', FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $trInfo->quick_links_id  . '&action=save'));
+      $contents = array('form' => tep_draw_form('links', FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->quick_links_id  . '&amp;action=save'));
       $contents[] = array('text' => TEXT_INFO_EDIT_INTRO);
       $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_IMAGE . '<br>' . tep_draw_input_field('quick_links_image', $trInfo->quick_links_image));		
 	  $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_NAME . '<br>' . tep_draw_input_field('quick_links_name', $trInfo->quick_links_name));
       $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_LINK . '<br>' . tep_draw_input_field('quick_links_link', $trInfo->quick_links_link));
       $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_TARGET . '<br>' . tep_draw_input_field('quick_links_target', $trInfo->quick_links_target));
       $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_SORT_ORDER . '<br>' . tep_draw_input_field('quick_links_sort_order', $trInfo->quick_links_sort_order));
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $trInfo->quick_links_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->quick_links_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_QUICK_LINKS . '</b>');
 
-      $contents = array('form' => tep_draw_form('links', FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $trInfo->quick_links_id  . '&action=deleteconfirm'));
+      $contents = array('form' => tep_draw_form('links', FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->quick_links_id  . '&amp;action=deleteconfirm'));
       $contents[] = array('text' => TEXT_QUICK_LINKS_DELETE_INTRO);
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $trInfo->quick_links_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->quick_links_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     default:
       if (is_object($trInfo)) {
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT_QUICK_LINKS . '</b>');
 						
-		$contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $trInfo->quick_links_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $trInfo->quick_links_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+		$contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->quick_links_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->quick_links_id . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
         $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_DATE_ADDED . ' ' . tep_date_short($trInfo->date_added));
         $contents[] = array('text' => '' . TEXT_QUICK_LINKS_LAST_MODIFIED . ' ' . tep_date_short($trInfo->last_modified));
       }

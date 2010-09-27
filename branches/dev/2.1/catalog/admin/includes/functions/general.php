@@ -311,7 +311,7 @@ function tep_selected_file($filename) {
                  $sde=1;
              }
          }
-         $select_string .= '<option value="' . $products['products_id'] . '">' . $products['products_name'] . ' (' . $price_string . ')</option>\n';
+         $select_string .= '<option value="' . $products['products_id'] . '">' . $products['products_name'] . ' (' . $price_string . ')</option>';
 // EOF: MOD - Separate Price Per Customer
       }
     }

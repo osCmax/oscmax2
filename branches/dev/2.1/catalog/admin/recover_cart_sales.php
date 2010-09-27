@@ -27,7 +27,7 @@ if ($_GET['action']=='delete') {
    $reset_query_raw2 = "delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id=" . $_GET[customer_id]; 
    tep_db_query($reset_query_raw2);
 
-   tep_redirect(tep_href_link(FILENAME_RECOVER_CART_SALES, 'delete=1&customer_id='. $_GET['customer_id'] . '&tdate=' . $_GET['tdate'])); 
+   tep_redirect(tep_href_link(FILENAME_RECOVER_CART_SALES, 'delete=1&amp;customer_id='. $_GET['customer_id'] . '&amp;tdate=' . $_GET['tdate'])); 
 } 
 
 if ($_GET['delete']) { 
@@ -190,7 +190,7 @@ if (count($custid) > 0 ) {  ?>
 				 <td class='dataTableContent' align='right' colspan='6' nowrap><b>" . TABLE_CART_TOTAL . "</b>" . $currencies->format($tprice) . "</td>
 			  </tr>
 			  <tr>
-				 <td colspan='6' align='right'><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES, "action=delete&customer_id=" . $cid . "&tdate=" . $tdate . "&sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>
+				 <td colspan='6' align='right'><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES, "action=delete&amp;customer_id=" . $cid . "&amp;tdate=" . $tdate . "&amp;sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>
 			  </tr>\n";
 			 echo $cline;
 			}
@@ -227,7 +227,7 @@ if (count($custid) > 0 ) {  ?>
 
       $cline .= "<tr class='dataTableRow'>
                     <td class='dataTableContent' align='left'   width='15%' nowrap>" . $inrec2['model'] . "</td>
-                    <td class='dataTableContent' align='left'  colspan='2' width='55%'><a href='" . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&read=only&pID=' . $inrec['pid'] . '&origin=' . FILENAME_RECOVER_CART_SALES . '?page=' . $_GET['page'], 'NONSSL') . "'>" . $inrec2['name'] . "</a></td>
+                    <td class='dataTableContent' align='left'  colspan='2' width='55%'><a href='" . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&amp;read=only&amp;pID=' . $inrec['pid'] . '&amp;origin=' . FILENAME_RECOVER_CART_SALES . '?page=' . $_GET['page'], 'NONSSL') . "'>" . $inrec2['name'] . "</a></td>
                     <td class='dataTableContent' align='center' width='10%' nowrap>" . $inrec['qty'] . "</td>
                     <td class='dataTableContent' align='right'  width='10%' nowrap>" . $pprice_formated . "</td>
                     <td class='dataTableContent' align='right'  width='10%' nowrap>" . $tpprice_formated . "</td>
@@ -294,7 +294,7 @@ if (count($custid) > 0 ) {  ?>
 		$cline = "";
 	}
 	echo "<tr><td colspan=8 align='right' class='dataTableContent'><b>" . TABLE_CART_TOTAL . "</b>" . $currencies->format($tprice) . "</td> </tr>";
-	echo "<tr><td colspan=6 align='right'><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES, "action=delete&customer_id=" . $cid . "&tdate=" . $tdate . "&sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>  </tr>\n";
+	echo "<tr><td colspan=6 align='right'><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES, "action=delete&amp;customer_id=" . $cid . "&amp;tdate=" . $tdate . "&amp;sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>  </tr>\n";
 	echo "<tr><td colspan=6 align=center><a href=". $_SERVER['PHP_SELF'] .">" . TEXT_RETURN . "</a></td></tr>";
 }
 else	 //we are NOT doing an e-mail to some customers
@@ -302,25 +302,28 @@ else	 //we are NOT doing an e-mail to some customers
 ?>
         <!-- REPORT TABLE BEGIN //-->
             <tr>
-              <td class="pageHeading" align="left" width="50%" colspan="4"><?php echo HEADING_TITLE; ?></td>
-              <td class="pageHeading" align="right" width="50%" colspan="4">
-                <form method=post action="<?php echo $_SERVER['PHP_SELF'];?>" >
+              <td class="pageHeading" align="left" width="50%"><?php echo HEADING_TITLE; ?></td>
+              <td class="pageHeading" align="right" width="50%">
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" >
                   <table align="right" width="100%">
                     <tr class="dataTableContent" align="right">
-                      <td><?php echo DAYS_FIELD_PREFIX; ?><input type=text size=4 width=4 value="<?php echo $sdate; ?>" name=sdate> - <input type=text size=4 width=4 value="<?php echo $tdate; ?>" name=tdate><?php echo DAYS_FIELD_POSTFIX; ?><input type=submit value="<?php echo DAYS_FIELD_BUTTON; ?>"></td>
+                      <td><?php echo DAYS_FIELD_PREFIX; ?><input type="text" size="4" value="<?php echo $sdate; ?>" name="sdate"> - <input type="text" size="4" value="<?php echo $tdate; ?>" name="tdate"><?php echo DAYS_FIELD_POSTFIX; ?><input type="submit" value="<?php echo DAYS_FIELD_BUTTON; ?>"></td>
                     </tr>
                   </table>
                 </form>
               </td>
             </tr>
-<form method=post action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <tr>
+              <td colspan="2" width="100%"><form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                
             <tr class="dataTableHeadingRow">
               <td class="dataTableHeadingContent" align="left" colspan="2" width="10%" nowrap><?php echo TABLE_HEADING_CONTACT; ?></td>
               <td class="dataTableHeadingContent" align="left" colspan="1" width="15%" nowrap><?php echo TABLE_HEADING_DATE; ?></td>
               <td class="dataTableHeadingContent" align="left" colspan="1" width="30%" nowrap><?php echo TABLE_HEADING_CUSTOMER; ?></td>
               <td class="dataTableHeadingContent" align="left" colspan="2" width="30%" nowrap><?php echo TABLE_HEADING_EMAIL; ?></td>
               <td class="dataTableHeadingContent" align="left" colspan="2" width="15%" nowrap><?php echo TABLE_HEADING_PHONE; ?></td>
-            </tr><tr>&nbsp;<br></tr>
+            </tr>
             <tr class="dataTableHeadingRow">
               <td class="dataTableHeadingContent" align="left"   colspan="2"  width="10%" nowrap>&nbsp; </td>
               <td class="dataTableHeadingContent" align="left"   colspan="1"  width="15%" nowrap><?php echo TABLE_HEADING_MODEL; ?></td>
@@ -370,7 +373,7 @@ else	 //we are NOT doing an e-mail to some customers
                           <td class='dataTableContent' align='right' colspan='8'><b>" . TABLE_CART_TOTAL . "</b>" . $currencies->format($tprice) . "</td>
                         </tr>
                         <tr>
-                          <td colspan='6' align='right'><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES,"action=delete&customer_id=" . $curcus . "&tdate=" . $tdate . "&sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>
+                          <td colspan='6' align='right'><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES,"action=delete&amp;customer_id=" . $curcus . "&amp;tdate=" . $tdate . "&amp;sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>
                         </tr>\n";
       if ($curcus != "" && !$skip)
         echo $cline;
@@ -464,7 +467,7 @@ else	 //we are NOT doing an e-mail to some customers
 				<td class='dataTableContent' align='left' width='9%' nowrap><b>" . $sentInfo . "</b></td>
 				<td class='dataTableContent' align='left' width='15%' nowrap> " . cart_date_short($inrec['bdate']) . "</td>
 				<td class='dataTableContent' align='left' width='30%' nowrap><a href='" . tep_href_link(FILENAME_CUSTOMERS, 'search=' . $inrec['lname'], 'NONSSL') . "'>" . $customer . "</a>".$status."</td>
-				<td class='dataTableContent' align='left' colspan='2' width='30%' nowrap><a href='" . tep_href_link('mail.php', 'selected_box=tools&customer=' . $inrec['email']) . "'>" . $inrec['email'] . "</a></td>
+				<td class='dataTableContent' align='left' colspan='2' width='30%' nowrap><a href='" . tep_href_link('mail.php', 'selected_box=tools&amp;customer=' . $inrec['email']) . "'>" . $inrec['email'] . "</a></td>
 				<td class='dataTableContent' align='left' colspan='2' width='15%' nowrap>" . $inrec['phone'] . "</td>
 				</tr>";
 		}
@@ -534,7 +537,7 @@ else	 //we are NOT doing an e-mail to some customers
 			$cline .= "<tr class='dataTableRow'>
                     <td class='dataTableContent' align='left' vAlign='top' colspan='2' width='12%' nowrap> &nbsp;</td>
                     <td class='dataTableContent' align='left' vAlign='top' width='13%' nowrap>" . $inrec2['model'] . "</td>
-                    <td class='dataTableContent' align='left' vAlign='top' colspan='2' width='55%'><a href='" . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&read=only&pID=' . $inrec['pid'] . '&origin=' . FILENAME_RECOVER_CART_SALES . '?page=' . $_GET['page'], 'NONSSL') . "'><b>" . $inrec2['name'] . "</b></a>
+                    <td class='dataTableContent' align='left' vAlign='top' colspan='2' width='55%'><a href='" . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&amp;read=only&amp;pID=' . $inrec['pid'] . '&amp;origin=' . FILENAME_RECOVER_CART_SALES . '?page=' . $_GET['page'], 'NONSSL') . "'><b>" . $inrec2['name'] . "</b></a>
                     " . $prodAttribs . "
                     </td>
                     <td class='dataTableContent' align='center' vAlign='top' width='5%' nowrap>" . $inrec['qty'] . "</td>
@@ -544,12 +547,14 @@ else	 //we are NOT doing an e-mail to some customers
 	 }
   }
   $totalAll_formated = $currencies->format($totalAll);
-  $cline = "<tr></tr><td class='dataTableContent' align='right' colspan='8'><hr align=right width=55><b>" . TABLE_GRAND_TOTAL . "</b>" . $totalAll_formated . "</td>
+  $cline = "<tr><td class='dataTableContent' align='right' colspan='8'><hr align=right width=120><b>" . TABLE_GRAND_TOTAL . "</b>" . $totalAll_formated . "</td>
               </tr>";
   echo $cline;
- echo "<tr><td colspan=8><hr size=1 color=000080><b>". PSMSG ."</b><br>". tep_draw_textarea_field('message', '80', '5') ."<br>" . tep_draw_selection_field('submit_button', 'submit', TEXT_SEND_EMAIL) . "</td></tr>";
+ echo "<tr><td colspan=\"8\" class=\"main\"><hr><b>". PSMSG ."</b><br>". tep_draw_textarea_field('message', '80', '5') ."<br>" . tep_draw_selection_field('submit_button', 'submit', TEXT_SEND_EMAIL) . "</td></tr>";
 ?>
- </form>
+            </table>
+          </form></td>
+        </tr>
 <?php }
 //
 // end footer of both e-mail and report

@@ -117,14 +117,14 @@
 			?>
 			
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			  <form action="" method="post">
-	            <input type="hidden" name="a" value="premade">
-    	        <input type="hidden" name="p_id" value="<?php echo $_POST[p_id]; ?>">
 			  <tr>
                 <td>
+     			<form action="" method="post">
+	            <input type="hidden" name="a" value="premade">
+    	        <input type="hidden" name="p_id" value="<?php echo $_POST[p_id]; ?>">
 				  <table border="0" cellspacing="3" cellpadding="0">
                     <tr>
-                      <td class="main" width="120px"><b>Premade Replies:</b></td>
+                      <td class="main" width="120"><b>Premade Replies:</b></td>
                       <td><?php echo tep_draw_separator('pixel_trans.gif', '5', '5'); ?></td>
                       <td>
 						<select name="p_id">
@@ -209,9 +209,8 @@
 				<?php
 				} // end if
 				?>
-				  </td>
+				  </form></td>
                 </tr>
-              </form>
             </table>
           </td>
         </tr>

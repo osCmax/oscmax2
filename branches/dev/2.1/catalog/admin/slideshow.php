@@ -38,7 +38,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
 
         tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_id = '" . (int)$slideshow_id . "', slideshow_image = '" . $slideshow_image . "', slideshow_title = '" . $slideshow_title . "', slideshow_link = '" . tep_db_input($slideshow_link) . "', slideshow_target = '" . tep_db_input($slideshow_target) . "', slideshow_sort_order = '" . tep_db_input($slideshow_sort_order) . "', last_modified = now() where slideshow_id = '" . (int)$slideshow_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $slideshow_id));
+        tep_redirect(tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $slideshow_id));
         break;
       case 'deleteconfirm':
         $slideshow_id = tep_db_prepare_input($_GET['tID']);
@@ -104,17 +104,17 @@ $Id: slideshow.php 3 2010-03-31 user pgm
     }
 
     if (isset($trInfo) && is_object($trInfo) && ($links['slideshow_id'] == $trInfo->slideshow_id)) {
-      echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $trInfo->slideshow_id . '&action=edit') . '\'">' . "\n";
+      echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id . '&amp;action=edit') . '\'">' . "\n";
     } else {
-      echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $links['slideshow_id']) . '\'">' . "\n";
+      echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $links['slideshow_id']) . '\'">' . "\n";
     }
 ?>
-                <td class="dataTableContent" width="<?php echo PRODUCT_IMAGE_WIDTH+10; ?>"><?php echo tep_image(' ../' . DIR_WS_IMAGES . 'slideshow/' . $links['slideshow_image'] . '', 'Slide', PRODUCT_IMAGE_WIDTH, ''); ?></td>
+                <td class="dataTableContent" width="<?php echo PRODUCT_IMAGE_WIDTH+10; ?>"><?php echo tep_image(' ../' . DIR_WS_IMAGES . 'slideshow/' . $links['slideshow_image'] . '', 'Slide', '130', '50'); ?></td>
                 <td class="dataTableContent"><?php echo $links['slideshow_title']; ?></td>
                 <td class="dataTableContent"><?php echo $links['slideshow_link']; ?></td>
                 <td class="dataTableContent"><?php echo $links['slideshow_target']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo $links['slideshow_sort_order']; ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($trInfo) && is_object($trInfo) && ($links['slideshow_id'] == $trInfo->slideshow_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $links['slideshow_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if (isset($trInfo) && is_object($trInfo) && ($links['slideshow_id'] == $trInfo->slideshow_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $links['slideshow_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
   }
@@ -129,7 +129,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
   if (empty($action)) {
 ?>
                   <tr>
-                    <td colspan="6" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_NEW_TAX_RATE) . '</a>'; ?></td>
+                    <td colspan="6" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_NEW_TAX_RATE) . '</a>'; ?></td>
                   </tr>
 <?php
   }
@@ -145,7 +145,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
     case 'new':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_SLIDESHOW . '</b>');
 
-      $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&action=insert'));
+      $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;action=insert'));
       $contents[] = array('text' => TEXT_SLIDESHOW_INSERT_INTRO);
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_IMAGE . '<br>' . tep_draw_input_field('slideshow_image'));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TITLE . '<br>' . tep_draw_input_field('slideshow_title'));
@@ -157,27 +157,27 @@ $Id: slideshow.php 3 2010-03-31 user pgm
     case 'edit':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_SLIDESHOW . '</b>');
 
-      $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $trInfo->slideshow_id  . '&action=save'));
+      $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id  . '&amp;action=save'));
       $contents[] = array('text' => TEXT_INFO_EDIT_INTRO);
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_IMAGE . '<br>' . tep_draw_input_field('slideshow_image', $trInfo->slideshow_image));		
 	  $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TITLE . '<br>' . tep_draw_input_field('slideshow_title', $trInfo->slideshow_title));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_LINK . '<br>' . tep_draw_input_field('slideshow_link', $trInfo->slideshow_link));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TARGET . '<br>' . tep_draw_input_field('slideshow_target', $trInfo->slideshow_target));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_SORT_ORDER . '<br>' . tep_draw_input_field('slideshow_sort_order', $trInfo->slideshow_sort_order));
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $trInfo->slideshow_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_SLIDESHOW . '</b>');
 
-      $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $trInfo->slideshow_id  . '&action=deleteconfirm'));
+      $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id  . '&amp;action=deleteconfirm'));
       $contents[] = array('text' => TEXT_SLIDESHOW_DELETE_INTRO);
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $trInfo->slideshow_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     default:
       if (is_object($trInfo)) {
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT_SLIDESHOW . '</b>');
 						
-		$contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $trInfo->slideshow_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $trInfo->slideshow_id . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+		$contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
         $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_DATE_ADDED . ' ' . tep_date_short($trInfo->date_added));
         $contents[] = array('text' => '' . TEXT_SLIDESHOW_LAST_MODIFIED . ' ' . tep_date_short($trInfo->last_modified));
 		$contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=204', 'NONSSL') . '">' . tep_image_button('button_settings.gif', IMAGE_SETTINGS) . '</a><br><br>');

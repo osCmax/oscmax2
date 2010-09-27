@@ -110,9 +110,12 @@ exit;
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <link rel="stylesheet" type="text/css" href="<?php if(!$print) {
 	echo 'includes/stylesheet.css';}
 	else echo 'includes/printer.css'; ?>">
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
 <body>
 <?php
@@ -196,8 +199,8 @@ if (!$print) { ?>
 					echo "<input type='hidden' name='month' value='" . $sel_month . "'><input type='hidden' name='year' value='" . $sel_year . "'>";
 					if ($invert) echo "<input type='hidden' name='invert' value='yes'>";
 				?>
-				</td>
-              </form></tr>
+				</form></td>
+              </tr>
              </table>
 			 </td>
 <?php		}; ?>
@@ -234,23 +237,23 @@ row for buttons to print, save, and help
 				<td align="left" class="smallText">
 				<?php  // back button if monthly detail
 				if ($sel_month<>0)	 {
-				echo "<a href='" . $_SERVER['PHP_SELF'] . "?&selected_box=reports";
-				if (isset($_GET['status'])) echo "&status=" . $status;
-				if (isset($_GET['invert'])) echo "&invert=yes";
+				echo "<a href='" . $_SERVER['PHP_SELF'] . "?&amp;selected_box=reports";
+				if (isset($_GET['status'])) echo "&amp;status=" . $status;
+				if (isset($_GET['invert'])) echo "&amp;invert=yes";
 				echo "' title='" . TEXT_BUTTON_REPORT_BACK_DESC . "'>" . TEXT_BUTTON_REPORT_BACK . "</a>";
 				};
 				?>
 				</td>
 				<td class="smallText"><a href="<?php  
-				echo $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING'] . "&print=yes";
+				echo $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING'] . "&amp;print=yes";
 				?>" target="print" title="<?php echo TEXT_BUTTON_REPORT_PRINT_DESC . "\">" . TEXT_BUTTON_REPORT_PRINT; ?></a>
 				</td>
-				<td class="smallText"><a href='<?php echo $_SERVER['PHP_SELF'] . "?" . ereg_replace('&invert=yes','',$_SERVER['QUERY_STRING']);
-				if (!$invert) echo "&invert=yes";
+				<td class="smallText"><a href='<?php echo $_SERVER['PHP_SELF'] . "?" . ereg_replace('&amp;invert=yes','',$_SERVER['QUERY_STRING']);
+				if (!$invert) echo "&amp;invert=yes";
 				echo "' title= '" . TEXT_BUTTON_REPORT_INVERT_DESC . "'>" . TEXT_BUTTON_REPORT_INVERT; ?></a>
 				</td>
 				<td class="smallText"><a href="#" onClick="window.open('<?php  
-				echo $_SERVER['PHP_SELF'] . "?&help=yes";	?>','help',config='height=400,width=600,scrollbars=1, resizable=1')" title="<?php echo TEXT_BUTTON_REPORT_HELP_DESC . "\">" . TEXT_BUTTON_REPORT_HELP; ?></a>
+				echo $_SERVER['PHP_SELF'] . "?&amp;help=yes";	?>','help',config='height=400,width=600,scrollbars=1, resizable=1')" title="<?php echo TEXT_BUTTON_REPORT_HELP_DESC . "\">" . TEXT_BUTTON_REPORT_HELP; ?></a>
 				</td>
 				</tr></table>
 				</td>
@@ -479,7 +482,7 @@ if ($extra_class) {
 <td class="dataTableContent" align="left">
 <?php  // live link to report monthly detail
 if ($sel_month == 0	&& !$print) {
-	echo "<a href='" . $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING'] . "&month=" . $sales['i_month'] . "&year=" . $sales['row_year'] . "' title='" . TEXT_BUTTON_REPORT_GET_DETAIL . "'>";
+	echo "<a href='" . $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING'] . "&amp;month=" . $sales['i_month'] . "&amp;year=" . $sales['row_year'] . "' title='" . TEXT_BUTTON_REPORT_GET_DETAIL . "'>";
 	}
 mirror_out(substr($sales['row_month'],0,3)); 
 if ($sel_month == 0 && !$print) echo '</a>';
@@ -500,9 +503,9 @@ $last_row_year = $sales['row_year']; // save this row's year to check for annual
 <?php 
 	// make this a link to the detail popup if nonzero
 	if (!$print && ($tax_this_row['tax_coll']>0)) {
-		echo "<a href=\"#\" onClick=\"window.open('" . $_SERVER['PHP_SELF'] . "?&show=ot_tax&year=" . $sales['row_year'] . "&month=" . $sales['i_month'];
-		if ($sel_month<>0) echo "&day=" . $sales['row_day'];
-		if ($status<>'') echo "&status=" . $status;
+		echo "<a href=\"#\" onClick=\"window.open('" . $_SERVER['PHP_SELF'] . "?&amp;show=ot_tax&amp;year=" . $sales['row_year'] . "&amp;month=" . $sales['i_month'];
+		if ($sel_month<>0) echo "&amp;day=" . $sales['row_day'];
+		if ($status<>'') echo "&amp;status=" . $status;
 		echo "','detail',config='height=200,width=400,scrollbars=1, resizable=1')\" title=\"Show detail\">";
 	};
 	mirror_out(number_format($tax_this_row['tax_coll'],2)); 

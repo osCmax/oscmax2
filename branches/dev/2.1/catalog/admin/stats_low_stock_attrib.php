@@ -136,7 +136,7 @@ $Id: stats_low_stock_attrib.php 3 2006-05-27 04:59:07Z user $
                                                        ORDER BY popt.products_options_id");												   
 						 
 ?>
-<td colspan="4"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1.2'); ?></td>
+
 
 			<tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
                <td class="dataTableContent" cellpadding="2"><?php echo '<a href="' . tep_href_link(FILENAME_STOCK, 'product_id=' . $products['products_id']) . '">' . $products['products_name'] .'</a>'; ?>&nbsp;</td>
@@ -221,7 +221,7 @@ $Id: stats_low_stock_attrib.php 3 2006-05-27 04:59:07Z user $
         
 		}
 		  else { ?>
-		   <td colspan="4"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1.2'); ?></td>
+
                 <tr class="<?php echo $trclass; ?>" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
 				
                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_STOCK, 'product_id=' . $products['products_id']) . '">' . $products['products_name'] .'</a>'; ?>&nbsp;</td>

@@ -22,9 +22,9 @@
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
-<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -55,8 +55,8 @@
 
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NUMBER; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php  if (!isset($orderby) or ($orderby == "sold" and $sorted == "ASC"))  $to_sort = "DESC"; else $to_sort = "ASC"; echo '<a href="' . tep_href_link('stats_customers.php', 'orderby=sold&sorted='. $to_sort) . '" class="main"><b># of Orders</b></a>';  ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php  if (!isset($orderby) or ($orderby == "value" and $sorted == "ASC"))  $to_sort = "DESC"; else $to_sort = "ASC"; echo '<a href="' . tep_href_link('stats_customers.php', 'orderby=value&sorted='. $to_sort) . '" class="main"><b>' . TABLE_HEADING_TOTAL_PURCHASED . '</b></a>';  ?></td>
+                <td class="dataTableHeadingContent" align="right"><?php  if (!isset($orderby) or ($orderby == "sold" and $sorted == "ASC"))  $to_sort = "DESC"; else $to_sort = "ASC"; echo '<a href="' . tep_href_link('stats_customers.php', 'orderby=sold&amp;sorted='. $to_sort) . '" class="main"><b># of Orders</b></a>';  ?></td>
+                <td class="dataTableHeadingContent" align="right"><?php  if (!isset($orderby) or ($orderby == "value" and $sorted == "ASC"))  $to_sort = "DESC"; else $to_sort = "ASC"; echo '<a href="' . tep_href_link('stats_customers.php', 'orderby=value&amp;sorted='. $to_sort) . '" class="main"><b>' . TABLE_HEADING_TOTAL_PURCHASED . '</b></a>';  ?></td>
               </tr>
 <?php
   if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * 50 - 50;
@@ -81,7 +81,7 @@
 ?>
               <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="document.location.href='<?php echo tep_href_link(FILENAME_ORDERS, 'cID=' . $customers['customers_id'], 'NONSSL'); ?>'">
                 <td class="dataTableContent"><?php echo $rows; ?>.</td>
-                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS, 'cID=' . $customers['customers_id'] . '&action=edit', 'SSL') . '">' . $customers['customers_firstname'] . ' ' . $customers['customers_lastname'] . '</a>'; ?></td>
+                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS, 'cID=' . $customers['customers_id'] . '&amp;action=edit', 'SSL') . '">' . $customers['customers_firstname'] . ' ' . $customers['customers_lastname'] . '</a>'; ?></td>
                 <td class="dataTableContent" align="right"><?php echo $customers['ordertotal']; ?>&nbsp;</td>
                 <td class="dataTableContent" align="right"><?php echo $currencies->format($customers['ordersum']); ?>&nbsp;</td>
               </tr>
@@ -94,7 +94,7 @@
             <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, '50', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
-                <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, '50', MAX_DISPLAY_PAGE_LINKS, $_GET['page'], "orderby=" . $orderby . "&sorted=" . $sorted); ?>&nbsp;</td>
+                <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, '50', MAX_DISPLAY_PAGE_LINKS, $_GET['page'], "orderby=" . $orderby . "&amp;sorted=" . $sorted); ?>&nbsp;</td>
               </tr>
             </table></td>
           </tr>

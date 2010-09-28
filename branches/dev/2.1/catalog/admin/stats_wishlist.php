@@ -35,32 +35,38 @@
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
-        </table></td>
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+      <!-- left_navigation //-->
+      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+      <!-- left_navigation_eof //-->
+      </table>
+    </td>
 <!-- body_text //-->
-<td width="100%" valign="top">
-<table border="0" width="100%" cellspacing="0" cellpadding="2">
-<tr>
-<td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-<tr>
-<td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-<td class="pageHeading" align="right">&nbsp;</td>
-</tr>
-</table></td>
-</tr>
-<tr>
-<td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-<tr>
-<td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-<tr class="dataTableHeadingRow">
-<td width="50" class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_NUMBER; ?></td>
-<td width="200" class="dataTableHeadingContent"><div align="left"><?php echo TABLE_HEADING_CUSTOMER; ?></td>
-<td width="200" class="dataTableHeadingContent"><div align="left"><?php echo TABLE_HEADING_COMPANY; ?></td>
-<td class="dataTableHeadingContent"><div align="left"><?php echo TABLE_HEADING_WISHLIST; ?></td>
-</tr>
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <tr>
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+                <td class="pageHeading" align="right">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td valign="top">
+                  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                    <tr class="dataTableHeadingRow">
+                      <td width="50" class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_NUMBER; ?></td>
+                      <td width="200" class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_CUSTOMER; ?></td>
+                      <td width="200" class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_COMPANY; ?></td>
+                      <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_WISHLIST; ?></td>
+                    </tr>
 <?php
 if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
 $customers_query_raw = "select a.entry_company, pd.products_name, w.products_id, c.customers_id, c.customers_firstname, c.customers_lastname from " . TABLE_WISHLIST . " w, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_id = a.customers_id and c.customers_default_address_id = a.address_book_id where c.customers_id = w.customers_id and w.products_id = pd.products_id group by c.customers_firstname, c.customers_lastname order by c.customers_lastname desc";
@@ -72,21 +78,17 @@ $customers_query_numrows = tep_db_num_rows($customers_query_numrows);
 
 $rows = 0;
 $customers_query = tep_db_query($customers_query_raw);
-
-while ($customers = tep_db_fetch_array($customers_query)) { 
-
-$rows++;
-
-if (strlen($rows) < 2) {
-$rows = '0' . $rows;
-}
-
+  while ($customers = tep_db_fetch_array($customers_query)) { 
+    $rows++;
+    if (strlen($rows) < 2) {
+      $rows = '0' . $rows;
+    }
 ?>
-<tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="document.location.href='<?php echo tep_href_link(FILENAME_CUSTOMERS, 'selected_box=customers&page=1&cID=' . $customers['customers_id'], 'NONSSL'); ?>'">
-<td class="dataTableContent" valign="top" align="left"><?php echo $rows; ?></td>
-<td class="dataTableContent" valign="top"><?php echo $customers['customers_firstname'] . ' ' . $customers['customers_lastname']; ?></td>
-<td class="dataTableContent" valign="top"><?php echo $customers['entry_company']; ?></td>
-<td class="dataTableContent" valign="top">
+                    <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="document.location.href='<?php echo tep_href_link(FILENAME_CUSTOMERS, 'selected_box=customers&amp;page=1&amp;cID=' . $customers['customers_id'], 'NONSSL'); ?>'">
+                      <td class="dataTableContent" valign="top" align="left"><?php echo $rows; ?></td>
+                      <td class="dataTableContent" valign="top"><?php echo $customers['customers_firstname'] . ' ' . $customers['customers_lastname']; ?></td>
+                      <td class="dataTableContent" valign="top"><?php echo $customers['entry_company']; ?></td>
+                      <td class="dataTableContent" valign="top">
 <?php
 
 $wishlist_query = tep_db_query("select products_id from " . TABLE_WISHLIST . " where customers_id = '" . $customers[customers_id] . "'");
@@ -99,24 +101,29 @@ echo $products['products_name'] . ' - ' . $currencies->format($products['final_p
 
 }
 ?>
-</td>
-</tr>
+                      </td>
+                    </tr>
 <?php
 }
 ?>
-</table></td>
-</tr>
-<tr>
-<td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-<tr>
-<td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                    <tr>
+                      <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
 <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?>&nbsp;</td>
-</tr>
-</table></td>
-</tr>
-</table></td>
-</tr>
-</table></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
 <!-- body_text_eof //-->
   </tr>
 </table>

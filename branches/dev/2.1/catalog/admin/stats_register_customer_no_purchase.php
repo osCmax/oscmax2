@@ -49,18 +49,17 @@
             <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
 		   <tr>
-            <form method="GET" action=" <?php echo basename($_SERVER['PHP_SELF']) . '?date1=' . $date1.'&date2='.$date2; ?>" name="dailyreportform">
             <td class="main" colspan="2">
-                
+                <form method="GET" action="<?php echo basename($_SERVER['PHP_SELF']) . '?date1=' . $date1.'&amp;date2='.$date2; ?>" name="dailyreportform"> 
                 <input type="hidden" name="action" value="dailyreportaction">
                 <?php // <br>cal1 value:<script type="text/javascript">document.write( document.forms.dailyreportform.action);</script><br> ?>
                 <?php echo 'Select Date '; ?>
 				<?php echo tep_draw_input_field('date1', $date1, 'id="nopurchases_start"'); ?>
                  - to -
 		        <?php echo tep_draw_input_field('date2', $date2, 'id="nopurchases_end"'); ?>
-		<input type="submit"></td>
+		<input type="submit">
                 </form>
-				
+		    </td>
           </tr>
 		  
 		  
@@ -119,7 +118,7 @@
             <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
-                <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], "date1={$_GET['date1']}&date2={$_GET['date2']}&sort={$_GET['sort']}"); ?>&nbsp;</td>
+                <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], "date1={$_GET['date1']}&amp;date2={$_GET['date2']}&amp;sort={$_GET['sort']}"); ?>&nbsp;</td>
               </tr>
             </table></td>
           </tr>

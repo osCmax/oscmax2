@@ -156,6 +156,7 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
             <td class="pageHeading"><?php echo PRODUCTS_STOCK . ': ' . $product_name; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
+          <tr>
             <td width="75%">
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
@@ -234,7 +235,7 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
                               </td>
                               <td class="menuBoxHeading">
                                 <?php 
-                                echo '<br><ul><li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $VARS['product_id'] . '&action=new_product') . '" class="menuBoxContentLink">' . TEXT_EDIT_PRODUCT . '</a></li>';
+                                echo '<br><ul><li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $VARS['product_id'] . '&amp;action=new_product') . '" class="menuBoxContentLink">' . TEXT_EDIT_PRODUCT . '</a></li>';
                                 echo '<li><a href="' . tep_href_link(FILENAME_STATS_LOW_STOCK_ATTRIB, '', 'NONSSL') . '" class="menuBoxContentLink">' .TEXT_GOTO_LOW_STOCK . '</a><br></li>';
             
                                 //class="menuBoxHeading columnLeft
@@ -256,17 +257,14 @@ $Id: stock.php 14 2006-07-28 17:42:07Z user $
                                     $cpath_string_array[] = substr($cpath_string_in_progress, 0, -1);
                                   }
                                   
-                                  if (sizeof($raw_path_array)>0) {
-                            
-                            
+                                  if (sizeof($raw_path_array)>0) {  
                                     $curr_pos = 0;
                                     foreach($path_array as $neverusedvariable) {
-                                      print '<li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $VARS['product_id'] . '&cPath=' .  $cpath_string_array[$curr_pos], 'NONSSL') . '" class="menuBoxContentLink">' . TEXT_GOTO_PRODUCT . $path_array[$curr_pos] . '</a></li>';
+                                      print '<li><a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $VARS['product_id'] . '&amp;cPath=' .  $cpath_string_array[$curr_pos], 'NONSSL') . '" class="menuBoxContentLink">' . TEXT_GOTO_PRODUCT . $path_array[$curr_pos] . '</a></li>';
                                       $curr_pos++;
                                     }
                                  } else {
-                                    echo TEXT_LOST_PRODUCT;
-									
+                                    echo '<li>' . TEXT_LOST_PRODUCT . '</li>';				
                                  }
                                 echo '</ul>';
                                 ?>

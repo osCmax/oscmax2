@@ -33,4 +33,6 @@ define('TEXT_QUICK_LINKS_DELETE_INTRO', 'Are you sure you want to delete this qu
 define('TEXT_INFO_HEADING_NEW_QUICK_LINKS', 'New Quick Link');
 define('TEXT_INFO_HEADING_EDIT_QUICK_LINKS', 'Edit Quick Link');
 define('TEXT_INFO_HEADING_DELETE_QUICK_LINKS', 'Delete Quick Link');
+
+define('TEXT_INFO_EDIT_INTRO', 'Enter your new quick link details below:');
 ?>

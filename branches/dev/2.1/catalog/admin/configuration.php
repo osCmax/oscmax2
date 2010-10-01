@@ -29,7 +29,11 @@ $Id: configuration.php 3 2006-05-27 04:59:07Z user $
         $cID = tep_db_prepare_input($_GET['cID']);
 
         tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_input($configuration_value) . "', last_modified = now() where configuration_id = '" . (int)$cID . "'");
-// BOF: MOD - Down for Maintenance
+		
+		//Added by PGM
+        tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $login_username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Config Change: " . (int)$cID . "', '" . date('F j, Y, g:i a') . "')");
+		
+        // BOF: MOD - Down for Maintenance
         // set the WARN_BEFORE_DOWN_FOR_MAINTENANCE to false if DOWN_FOR_MAINTENANCE = true
         if ( (WARN_BEFORE_DOWN_FOR_MAINTENANCE == 'true') && (DOWN_FOR_MAINTENANCE == 'true') ) {
         tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = 'false', last_modified = '" . NOW . "' where configuration_key = 'WARN_BEFORE_DOWN_FOR_MAINTENANCE'"); }

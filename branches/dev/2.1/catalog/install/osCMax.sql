@@ -1914,7 +1914,7 @@ INSERT INTO configuration VALUES (730,'Printable Catalog-Customer Discount in Ca
 INSERT INTO configuration VALUES (729,'Printable Catalog-Enable/Disable','PRODUCT_LIST_ENABLE','true','Enables display of printable catalog and link in the information box',30,0,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\',\'false\'),');
 
 
-INSERT INTO configuration VALUES (378,'<B>Down for Maintenance: ON/OFF</B>','DOWN_FOR_MAINTENANCE','false','Down for Maintenance <br>(true=on false=off)',16,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (378,'Down for Maintenance: ON/OFF','DOWN_FOR_MAINTENANCE','false','Down for Maintenance <br>(true=on false=off)',16,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (379,'Down for Maintenance: filename','DOWN_FOR_MAINTENANCE_FILENAME','down_for_maintenance.php','Down for Maintenance filename Default=down_for_maintenance.php',16,2,NULL,now(),NULL,'');
 INSERT INTO configuration VALUES (380,'Down for Maintenance: Hide Header','DOWN_FOR_MAINTENANCE_HEADER_OFF','true','Down for Maintenance: Hide Header <br>(true=hide false=show)',16,3,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (381,'Down for Maintenance: Hide Column Left','DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF','true','Down for Maintenance: Hide Column Left <br>(true=hide false=show)',16,4,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');

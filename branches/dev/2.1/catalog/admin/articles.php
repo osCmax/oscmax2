@@ -362,7 +362,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       
  <?php
    //----- new_topic / edit_topic  -----
-  if ($_GET['action'] == 'new_topic_ACD' || $_GET['action'] == 'edit_topic_ACD') {
+  if ($action == 'new_topic_ACD' || $action == 'edit_topic_ACD') {
     if ( ($_GET['tID']) && (!$_POST) ) {
       $topics_query = tep_db_query("select t.topics_id, td.topics_name, td.topics_heading_title, td.topics_description, t.parent_id, t.sort_order, t.date_added, t.last_modified from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = '" . $_GET['tID'] . "' and t.topics_id = td.topics_id and td.language_id = '" . $languages_id . "' order by t.sort_order, td.topics_name");
       $topic = tep_db_fetch_array($topics_query);
@@ -484,7 +484,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 
 <?php
   //----- new_topic_preview -----
-  } elseif ($_GET['action'] == 'new_topic_preview') {
+  } elseif ($action == 'new_topic_preview') {
     if ($_POST) {
       $tInfo = new objectInfo($_POST);
       $topics_name = $_POST['topics_name'];

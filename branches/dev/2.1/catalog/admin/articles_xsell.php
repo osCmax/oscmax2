@@ -80,7 +80,9 @@ function ToggleCheckBox($cb) {
               function general_db_conct($query_1) {
                 $result_1 = tep_db_query($query_1);
                 $num_of_rows = tep_db_num_rows($result_1);
-                $a_to_pass = array();
+                $a_to_pass = array(); $b_to_pass = array(); $c_to_pass = array(); $d_to_pass = array(); $e_to_pass = array();
+				$f_to_pass = array(); $g_to_pass = array(); $h_to_pass = array(); $i_to_pass = array(); $j_to_pass = array();
+				$k_to_pass = array(); $l_to_pass = array(); $m_to_pass = array(); $n_to_pass = array(); $o_to_pass = array();
                 for ($i=0;$i<$num_of_rows;++$i) {
                   $fields = mysql_fetch_row($result_1);
                   $a_to_pass[$i]= $fields[$y=0];

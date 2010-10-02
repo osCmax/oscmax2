@@ -11,7 +11,7 @@
 */
 
   require('includes/application_top.php');
-  if (!$_POST['submit']) {
+  if (!isset($_POST['submit'])) {
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -40,7 +40,7 @@
           <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
         </tr>
         <tr>
-          <td><?php echo tep_draw_form(BOX_CUSTOMER_EXPORT, FILENAME_CUSTOMERS_EXPORT, '', 'post'); ?>
+          <td><?php echo tep_draw_form('export', FILENAME_CUSTOMERS_EXPORT, '', 'post'); ?>
             <table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="main"><?php echo TABLE_HEADING_CUSTOMER_EXPORT; ?></td>

@@ -12,6 +12,7 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
   require('includes/application_top.php');
   require(DIR_WS_CLASSES . 'currencies.php');
 
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   $currencies = new currencies();
 
@@ -20,7 +21,7 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
     $_GET['old_action']='';
   }
   
-  if (($_GET['action'] == 'send_email_to_user') && ($_POST['customers_email_address']) && (!$_POST['back_x'])) {
+  if (($action == 'send_email_to_user') && ($_POST['customers_email_address']) && (!$_POST['back_x'])) {
     switch ($_POST['customers_email_address']) {
     case '***':
       $mail_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from " . TABLE_CUSTOMERS);
@@ -67,7 +68,7 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
     tep_redirect(tep_href_link(FILENAME_COUPON_ADMIN, 'mail_sent_to=' . urlencode($mail_sent_to)));
   }
  
-  if ( ($_GET['action'] == 'preview_email') && (!$_POST['customers_email_address']) ) {
+  if ( ($action == 'preview_email') && (!$_POST['customers_email_address']) ) {
     $_GET['action'] = 'email';
     $messageStack->add(ERROR_NO_CUSTOMER_SELECTED, 'error');
   }
@@ -77,7 +78,7 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
   }
 
   $coupon_id = ((isset($_GET['cid'])) ? tep_db_prepare_input($_GET['cid']) : '');
-  switch ($_GET['action']) {
+  switch ($action) {
     case 'setflag':
       if ( ($_GET['flag'] == 'N') || ($_GET['flag'] == 'Y') ) {
         if (isset($_GET['cid'])) {
@@ -206,7 +207,7 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
     </td>
 <!-- body_text //-->
 <?php
-  switch ($_GET['action']) {
+  switch ($action) {
   case 'voucherreport':
 ?>
     <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -681,7 +682,7 @@ $customer = tep_db_fetch_array($customer_query);
     $coupon_status = $coupon['coupon_active'];
   case 'new':
 // molafish: set default if not editing an existing coupon or showing an error
-    if ($_GET['action'] == 'new' && !$_GET['oldaction'] == 'new') {
+    if ($action == 'new' && !$_GET['oldaction'] == 'new') {
       if (!$coupon_uses_user) {
         $coupon_uses_user=1;
       }
@@ -786,7 +787,7 @@ $customer = tep_db_fetch_array($customer_query);
                 <tr>
 <?php
 // molafish: fixed reset to default of dates when editing an existing coupon or showing an error message
-    if ($_GET['action'] == 'new' && !$_POST['coupon_startdate'] && !$_GET['oldaction'] == 'new') {
+    if ($action == 'new' && !$_POST['coupon_startdate'] && !$_GET['oldaction'] == 'new') {
       $coupon_startdate = explode("[-]", date('Y-m-d'));
     } elseif (tep_not_null($_POST['coupon_startdate'])) {
       $coupon_startdate = explode("[-]", $_POST['coupon_startdate']);
@@ -795,7 +796,7 @@ $customer = tep_db_fetch_array($customer_query);
     } else {   // error is being displayed
       $coupon_startdate = explode("[-]", date('Y-m-d', mktime(0, 0, 0, $_POST['coupon_startdate_month'],$_POST['coupon_startdate_day'] ,$_POST['coupon_startdate_year'] )));
     }
-    if ($_GET['action'] == 'new' && !$_POST['coupon_finishdate'] && !$_GET['oldaction'] == 'new') {
+    if ($action == 'new' && !$_POST['coupon_finishdate'] && !$_GET['oldaction'] == 'new') {
       $coupon_finishdate = explode("[-]", date('Y-m-d'));
       $coupon_finishdate[0] = $coupon_finishdate[0] + 1;
     } elseif (tep_not_null($_POST['coupon_finishdate'])) {
@@ -958,7 +959,7 @@ $customer = tep_db_fetch_array($customer_query);
     $heading = array();
     $contents = array();
 
-    switch ($_GET['action']) {
+    switch ($action) {
     case 'release':
       break;
     case 'voucherreport':
@@ -975,7 +976,7 @@ $customer = tep_db_fetch_array($customer_query);
         $amount = $currencies->format($amount);
       }
       $coupon_min_order = $currencies->format($cInfo->coupon_minimum_order);
-      if ($_GET['action'] == 'voucherdelete') {
+      if ($action == 'voucherdelete') {
         $contents[] = array('text'=> TEXT_CONFIRM_DELETE . '</br></br>' .
                 '<a href="'.tep_href_link('coupon_admin.php','action=confirmdelete&amp;status=' . $status . (($_GET['page'] > 1) ? '&amp;page=' . $_GET['page']: '') . '&amp;cid='.$_GET['cid'],'NONSSL').'">'.tep_image_button('button_confirm.gif',IMAGE_CONFIRM).'</a>' .
                 '<a href="'.tep_href_link('coupon_admin.php','cid='.$cInfo->coupon_id,'NONSSL').'">'.tep_image_button('button_cancel.gif',IMAGE_CANCEL).'</a>'

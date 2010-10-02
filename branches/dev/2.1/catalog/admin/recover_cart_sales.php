@@ -14,13 +14,15 @@ $Id: recover_cart_sales.php 14 2006-07-28 17:42:07Z user $
 */
  require('includes/application_top.php');
  require(DIR_WS_CLASSES . 'currencies.php');
+ 
+ $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
  //link_post_variable('custid');	// fix to allow turning off register_globals in php - does not work w/standard osC (requires some other mod!)
 
  $currencies = new currencies();
 
 // Delete Entry Begin
-if ($_GET['action']=='delete') { 
+if ($action == 'delete') { 
    $reset_query_raw = "delete from " . TABLE_CUSTOMERS_BASKET . " where customers_id=" . $_GET[customer_id]; 
    tep_db_query($reset_query_raw); 
 
@@ -30,15 +32,17 @@ if ($_GET['action']=='delete') {
    tep_redirect(tep_href_link(FILENAME_RECOVER_CART_SALES, 'delete=1&amp;customer_id='. $_GET['customer_id'] . '&amp;tdate=' . $_GET['tdate'])); 
 } 
 
-if ($_GET['delete']) { 
+if (isset($_GET['delete'])) { 
    $messageStack->add(MESSAGE_STACK_CUSTOMER_ID . $_GET['customer_id'] . MESSAGE_STACK_DELETE_SUCCESS, 'success'); 
 } 
 
 // Delete Entry End
-	$tdate = $_POST['tdate'];
+    $tdate = '';
+	if (isset($_POST['tdate'])) { $tdate = $_POST['tdate']; }
 	if ($tdate == '') $tdate = RCS_BASE_DAYS;
 	
-	$sdate = $_POST['sdate'];
+	$sdate = '';
+	if (isset($_POST['sdate'])) { $sdate = $_POST['sdate']; }
 	if( $sdate == '' ) $sdate = RCS_SKIP_DAYS;
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -140,7 +144,7 @@ if ($_GET['delete']) {
     <td width="100%" valign="top">
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php // Are we doing an e-mail to some customers?
-if (count($custid) > 0 ) {  ?>
+if ( (isset($custid)) && (count($custid) > 0 ) ) {  ?>
             <tr>
               <td class="pageHeading" align="left" colspan=2 width="50%"><?php echo HEADING_TITLE; ?> </td>
               <td class="pageHeading" align="left" colspan=4 width="50%"><?php echo HEADING_EMAIL_SENT; ?> </td>

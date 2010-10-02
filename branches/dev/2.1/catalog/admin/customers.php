@@ -14,6 +14,7 @@ $Id: customers.php 3 2006-05-27 04:59:07Z user $
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
+  $count_groups_array = array();
   $error = false;
   $processed = false;
 

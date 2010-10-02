@@ -209,7 +209,7 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
   }
 ?>
               <tr>
-                <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText" valign="top"><?php echo $languages_split->display_count($languages_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_LANGUAGES); ?></td>
                     <td class="smallText" align="right"><?php echo $languages_split->display_links($languages_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>

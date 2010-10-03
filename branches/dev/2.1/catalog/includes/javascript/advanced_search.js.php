@@ -12,7 +12,46 @@ function check_form() {
   var pfrom_float;
   var pto_float;
 
-  if ( ((keywords == '') || (keywords.length < 1)) && ((dfrom == '') || (dfrom == '<?php echo DOB_FORMAT_STRING; ?>') || (dfrom.length < 1)) && ((dto == '') || (dto == '<?php echo DOB_FORMAT_STRING; ?>') || (dto.length < 1)) && ((pfrom == '') || (pfrom.length < 1)) && ((pto == '') || (pto.length < 1)) ) {
+  // begin Extra Product Fields
+  var cat = document.advanced_search.categories_id.value;
+  var mfg = document.advanced_search.manufacturers_id.value;
+<?php
+foreach ($epf as $e) {
+  if ($e['multi_select']) {
+    echo "  var noneset" . $e['id'] . " = true;\n";
+    echo "  var chk" . $e['id'] . " = document.getElementsByName('" . $e['field'] . "[]');\n";
+    echo "  for (var i = 0; i < chk" . $e['id'] . ".length; i++) {\n";
+    echo "    if (chk" . $e['id'] . "[i].checked) {\n";
+    echo "      noneset" . $e['id'] . " = false;\n";
+    echo "      break; }\n";
+    echo "  }\n";
+  } elseif ($e['use_checkbox']) {
+    echo "  var chk" . $e['id'] . " = document.getElementById('" . $e['field'] . "_');\n";
+    echo "  var anyvalset" . $e['id'] . " = chk" . $e['id'] . ".checked;\n";
+  } else {
+  	echo '  var epf' . $e['id'] . ' = document.advanced_search.' . $e['field'] . ".value;\n";
+	}
+}
+?>
+// end Extra Product Fields
+
+  if ( ((keywords == '') || (keywords.length < 1)) && ((dfrom == '') || (dfrom == '<?php echo DOB_FORMAT_STRING; ?>') || (dfrom.length < 1)) && ((dto == '') || (dto == '<?php echo DOB_FORMAT_STRING; ?>') || (dto.length < 1)) && ((pfrom == '') || (pfrom.length < 1)) && ((pto == '') || (pto.length < 1))
+  // begin Extra Product Fields
+   && (cat == '') && (mfg == '')
+<?php
+foreach ($epf as $e) {
+  if ($e['multi_select']) {
+    echo " && noneset" . $e['id'];
+  } elseif ($e['use_checkbox']) {
+    echo " && anyvalset" . $e['id'];
+  } else {
+    $fieldid =  'epf' . $e['id'];
+	  echo " && (( $fieldid == '' ) || ($fieldid.length < 1))";
+	}
+}
+?>
+// end Extra Product Fields
+) {
     error_message = error_message + "* <?php echo ERROR_AT_LEAST_ONE_INPUT; ?>\n";
     error_field = document.advanced_search.keywords;
     error_found = true;

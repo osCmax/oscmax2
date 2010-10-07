@@ -14,14 +14,15 @@ echo "Error: Problem opening directory $directory. Error: $php_errormsg";
 exit;
 }
 $file_type_array = array();
+$file_type_array[] = array('id' => $file,'text' => 'Please select ...');
 while ($file = readdir($resc)) {
-$ext = strrchr($file, ".");
-if ($ext == ".php") {
-$filename = str_replace('_', " ",$file);
-$filename = str_replace('-', " ",$filename);
-$filename = str_replace($ext, "",$filename);
-$file_type_array[] = array('id' => $file,'text' => $filename);
-}
+  $ext = strrchr($file, ".");
+  if ($ext == ".php") {
+    $filename = str_replace('_', " ",$file);
+    $filename = str_replace('-', " ",$filename);
+    $filename = str_replace($ext, "",$filename);
+    $file_type_array[] = array('id' => $file,'text' => $filename);
+  }
 }
 ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -67,7 +68,7 @@ $file_type_array[] = array('id' => $file,'text' => $filename);
 			    <td><?php echo tep_draw_selection_field('notify', 'checkbox', true, false); ?></td>
 	      	</tr>
             <tr>
-              	<td align="right" colspan="2"><?php echo tep_image_submit('button_send.gif', IMAGE_SEND_EMAIL); ?></td>
+              	<td align="right" colspan="2"><div id="send_button"><?php echo tep_image_submit('button_send.gif', IMAGE_SEND_EMAIL); ?></div></td>
             </tr>
 		</table>
 		</td>

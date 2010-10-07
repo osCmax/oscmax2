@@ -35,16 +35,16 @@
 	$('#manufacturer_featured_until').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
 
 //Batch Print Center
-	$("#Labels").hide();
-	$("#Invoices").hide();
+	$("#Labels").hide(); $("#Invoices").hide(); $("#send_button").hide();
     $("#file_type").change(function(){
 		var show_options = (this.value);
+        $("#send_button").show();
 		if(show_options == 'Labels.php') {
 			$("#Invoices").hide();
 			$("#Labels").show();
 			$("#No_Options").hide();
 		} else {
-			if (show_options == 'Invoice.php') {
+			if (show_options == 'Invoice.php' || show_options == 'Invoice_s3.php') {
         	$("#Invoices").show();
 			$("#Labels").hide();
 			$("#No_Options").hide();

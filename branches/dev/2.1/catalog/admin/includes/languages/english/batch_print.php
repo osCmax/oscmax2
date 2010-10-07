@@ -6,7 +6,7 @@ define('TEXT_ORDER_NUMBERS_RANGES', 'Order Number (s), either one # or  range, #
 define('HEADING_TITLE', 'Batch Print Center');
 define('TABLE_HEADING_COMMENTS', 'Comments');
 define('TABLE_HEADING_PRODUCTS_MODEL', 'Model');
-define('TABLE_HEADING_PRODUCTS', 'Products');
+define('TABLE_HEADING_PRODUCTS', 'Description');
 define('TABLE_HEADING_TAX', 'Tax');
 define('TABLE_HEADING_TOTAL', 'Total');
 define('TABLE_HEADING_PRICE_EXCLUDING_TAX', 'Price (ex)');
@@ -146,4 +146,5 @@ define('BATCH_PDF_FILE', 'batch_orders.pdf');
 //define('MODEL_COLUMN_SIZE', '37');
 //define('PRICING_COLUMN_SIZES', '67');
 
+define('FOOTER_TEXT', 'Thank you for shopping with us at ' . STORE_NAME);
 ?>

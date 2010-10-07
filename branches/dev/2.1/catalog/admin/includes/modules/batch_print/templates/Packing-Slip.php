@@ -38,7 +38,7 @@ define('PRODUCT_TABLE_ROW_HEIGHT', '11');
 // The column sizes are where the product listing columns start on the
 // PDF page, if you make the TABLE HEADER FONT SIZE any larger you will
 // need to tweak these values to prevent text from clashing together
-define('PRODUCTS_COLUMN_SIZE', '172');
+define('PRODUCTS_COLUMN_SIZE', '450');
 define('PRODUCT_LISTING_BKGD_COLOR',GREY);
 define('MODEL_COLUMN_SIZE', '37');
 define('PRICING_COLUMN_SIZES', '67');
@@ -60,18 +60,13 @@ $y -= 10;
 
 // extra info boxs to be used by staff
 $pdf->setStrokeColor(0,0,0);
-$pdf->setLineStyle(1);
-$pdf->roundedRectangle(300,730,255,85,10,$f=0);
-//$pdf->rectangle(535,748,10,10);
-//$pdf->rectangle(535,769,10,10);
-//$pdf->rectangle(535,790,10,10);
-//$pdf->addText(310,790,GENERAL_FONT_SIZE,'In Stock');
-$pdf->addText(310,769,GENERAL_FONT_SIZE, TEXT_PACKED_BY );
-$pdf->addText(310,748,GENERAL_FONT_SIZE, TEXT_VERIFIED_BY );
-
+$pdf->setLineStyle(0.5);
+$pdf->Rectangle(300,745,250,70);
+$pdf->addText(310,785,GENERAL_FONT_SIZE, TEXT_PACKED_BY );
+$pdf->addText(310,760,GENERAL_FONT_SIZE, TEXT_VERIFIED_BY );
 
 // line between header order number and order date
-$pdf->setLineStyle(1);
+$pdf->setLineStyle(0.5);
 $pdf->line(LEFT_MARGIN,$y,LINE_LENGTH,$y);
 $pdf->ezSetY($y);
 $dup_y = $y;
@@ -84,14 +79,6 @@ if ($_POST['show_order_date']) {
 	$pdf->ezSetY($dup_y);
 	$pdf->ezText("<b>" . TEXT_ORDER_DATE . " </b>" . date(TEXT_ORDER_FORMAT, strtotime($order->info['date_purchased'])) ."\n\n",SUB_HEADING_FONT_SIZE,array('justification'=>'right'));
 	}
-
-
-
-
-//left rounded rectangle around sold to info
-$pdf->setStrokeColor(0,0,0);
-$pdf->setLineStyle(1);
-$pdf->roundedRectangle(28,580,260,120,10,$f=0);
 
 
 // sold to info in left rectangle    
@@ -112,13 +99,6 @@ $pdf->addText($indent,$pos -= GENERAL_LEADING,GENERAL_FONT_SIZE,$order->billing[
 
 $cty_st_zip = $order->billing['city'] . " " . $order->billing['state'] . ", " . $order->billing['postcode'];
 $pdf->addText($indent,$pos -= GENERAL_LEADING,GENERAL_FONT_SIZE,$cty_st_zip);
-
-
-// right rounded rectangle around ship to info
-$pdf->setStrokeColor(0,0,0);
-$pdf->setLineStyle(1);
-$pdf->roundedRectangle(298,580,260,120,10,$f=0);
-
 
 // ship to info in right column
 $pdf->addText(SHIP_TO_COLUMN_START,$y,SUB_HEADING_FONT_SIZE,"<b>" . ENTRY_SHIP_TO . "</b>");

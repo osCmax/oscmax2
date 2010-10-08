@@ -34,7 +34,7 @@ define('TABLE_HEADING_OT_VALUES', 'Value:');
 define('TABLE_HEADING_SHIPPING_QUOTES', 'Shipping Quotes:');
 define('TABLE_HEADING_NO_SHIPPING_QUOTES', 'There are no shipping quotes to display!');
 
-define('TABLE_HEADING_CUSTOMER_NOTIFIED', 'Customer<br>Notified');
+define('TABLE_HEADING_CUSTOMER_NOTIFIED', 'Customer Notified');
 define('TABLE_HEADING_DATE_ADDED', 'Date Added');
 
 define('ENTRY_CUSTOMER', 'Customer');

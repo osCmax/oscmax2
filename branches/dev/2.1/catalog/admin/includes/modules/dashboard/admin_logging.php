@@ -31,7 +31,17 @@
 				<td class="dataTableContent"><?php echo $admin_logging['login_time']; ?></td>
 				<td class="dataTableContent"><?php echo $admin_logging['ip_address']; ?></td>
 				<td class="dataTableContent"><?php echo $admin_logging['user_name']; ?></td>
-				<td class="dataTableContent"><?php echo $admin_logging['type']; ?></td>
+				<?php
+			  $pos = strrpos($admin_logging['type'], "Config Change:");
+              if ($pos === false) { ?>
+                <td class="dataTableContent"><?php echo $admin_logging['type']; ?></td>	
+              <?php } else { 
+			  $config_id = str_replace("Config Change: ", "", $admin_logging['type']);
+			  $cfg_group_query = tep_db_query("select configuration_title, configuration_description, configuration_group_id from " . TABLE_CONFIGURATION . " where configuration_id = '" . (int)$config_id . "'");
+              $cfg_group = tep_db_fetch_array($cfg_group_query);
+			  ?>
+				<td class="dataTableContent"><?php echo '<span title="' . $cfg_group['configuration_title'] . '|' . $cfg_group['configuration_description'] . '">' . $admin_logging['type']; ?></span></td>
+              <?php } ?>
 			</tr>
 
 <?php

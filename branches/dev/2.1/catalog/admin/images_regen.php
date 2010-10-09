@@ -766,18 +766,21 @@ function format_size($size) {
 
 <?php
 function listDirectory($path) {
+  @ini_set('max_execution_time', 3600);
   $handle = @opendir($path);
   while (false !== ($file = readdir($handle))) {
-  if ($file == '.' || $file == '..') continue;
-	if ( is_dir("$path$file")) {  // Directory
-      $source_bigimage = listDirectory("$path$file");
-    } else {  // File
-      $source_bigimage = "$path/$file";
-    }
+    if ($file == '.' || $file == '..' || $file == '.svn') continue;
+	  if ( is_dir("$path$file")) {  // Directory
+        $source_bigimage = listDirectory("$path$file");
+      } else {  // File
+        $source_bigimage = "$path/$file";
+      }  
+	
 	if ($source_bigimage) {
     		require('includes/functions/image_generator.php'); 
-	}       	
-  }
+	}
+	
+  } // end while
     closedir($handle);
 }
 ?>

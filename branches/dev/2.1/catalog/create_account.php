@@ -197,12 +197,11 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 
     if ($error == false) {
 		// PWA BOF 2b
-		if (!isset($_GET['guest']) && !isset($_POST['guest']))
-		{
+		if (!isset($_GET['guest']) && !isset($_POST['guest'])) {
 			$dbPass = tep_encrypt_password($password);
 			$guestaccount = '0';
-		}else{
-			$dbPass = 'null';
+		} else {
+			$dbPass = tep_encrypt_password('guest');
 			$guestaccount = '1';
 		}
 		// PWA EOF 2b

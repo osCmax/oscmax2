@@ -357,12 +357,15 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
    }
 // EOF: MOD - Wishlist 3.5
 
-// Shopping cart actions
-//   if (isset($_GET['action'])) {
-// // redirect the customer to a friendly cookie-must-be-enabled page if cookies are disabled
-//     if ($session_started == false) {
-//       tep_redirect(tep_href_link(FILENAME_COOKIE_USAGE));
-//     }
+// BOF: PWA - Fix to prevent blank order; JimbobobHacker; 30 Sep 2010; Mod: 355
+if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || isset($_POST['products_id']))) {
+  $query = tep_db_query("select customers_id from " . TABLE_CUSTOMERS . " where customers_id = " . (int)$customer_id);
+  if (tep_db_num_rows($query) == 0) {
+    tep_session_unregister('customer_id');
+  }
+}
+// EOF: PWA
+
 // BOF Separate Pricing Per Customer, Hide products and categories from groups
 
   if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {

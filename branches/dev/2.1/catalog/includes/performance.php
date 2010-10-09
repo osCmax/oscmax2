@@ -16,21 +16,23 @@ $Id: performance.php 3 2006-05-27 04:59:07Z user $
     $time_end = explode(' ', microtime());
     $parse_time = number_format(($time_end[1] + $time_end[0] - ($time_start[1] + $time_start[0])), 3);
     echo '<div align="center"><span class="smallText">Current Parse Time: <b>' . $parse_time . ' s</b> with <b>' . sizeof($debug['QUERIES']) . ' queries</b></span></div>';
+	
     if (DISPLAY_QUERIES == 'true') {
-      echo '<b>QUERY DEBUG:</b> ';
+      echo '<p class="main"><b>QUERY DEBUG:</b> ';
       print_r($debug);
-      echo '<hr>';
-      echo '<b>SESSION:</b> ';
+      echo '</p><hr>';
+      echo '<p class="main"><b>SESSION:</b> ';
       print_r($_SESSION);
-      echo '<hr>';
-      echo '<b>COOKIE:</b> ';
+      echo '</p><hr>';
+      echo '<p class="main"><b>COOKIE:</b> ';
       print_r($_COOKIE);
-	  echo '<hr>';
-      echo '<b>POST:</b> ';
+	  echo '</p><hr>';
+      echo '<p class="main"><b>POST:</b> ';
       print_r($_POST);
-      echo '<hr>';
-      echo '<b>GET:</b> ';
+      echo '</p><hr>';
+      echo '<p class="main"><b>GET:</b>';
       print_r($_GET);
+	  echo '</p>';
     } # END if request
   }
   unset($debug);

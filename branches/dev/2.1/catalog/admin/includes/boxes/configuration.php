@@ -41,6 +41,7 @@ $contents = ('<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=1', 'N
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=30', 'NONSSL') . '">Printable Catalog</a></li>' .
               '</ul>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=12', 'NONSSL') . '">Email Options</a></li>' .
+              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=206', 'NONSSL') . '">MailChimp Newsletters</a></li>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=25', 'NONSSL') . '">CK Editor</a></li>' .
               '<li><a href="' . tep_href_link('#', 'NONSSL') . '">Templates</a><ul>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=201', 'NONSSL') . '">Template Setup</a></li>' .

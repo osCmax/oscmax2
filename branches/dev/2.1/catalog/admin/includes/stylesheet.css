@@ -55,6 +55,8 @@ body { background-color: #ffffff; color: #000000; margin: 0px;
 /* EOF: Added: Setup Browser Scroll Bar */
 }
 
+img { border: 0; border-collapse: collapse; }
+
 .headerBar { background-color: #B3BAC5; }
 .headerBarContent { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #ffffff; font-weight: bold; padding: 2px; }
 .columnLeft { background-color: #F0F1F1; border-color: #999999; border-width: 1px; border-style: solid; padding: 2px; }

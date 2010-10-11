@@ -576,6 +576,7 @@ CREATE TABLE customers (
   customers_fax varchar(32),
   customers_password varchar(40) NOT NULL,
   customers_newsletter char(1),
+  customers_newsletter_type varchar(32) NOT NULL default 'html',
   guest_account tinyint(1) NOT NULL default '0',
   customers_login varchar(96) DEFAULT NULL,
   customers_group_name varchar(27) DEFAULT 'Retail' NOT NULL,
@@ -2252,32 +2253,42 @@ INSERT INTO configuration VALUES (3068, 'Categories separator line color', 'CATE
 #Open Featurd Sets End
 
 #One Page Checkout Begin
-INSERT INTO configuration VALUES(3069, 'Enable One Page Checkout', 'ONEPAGE_CHECKOUT_ENABLED', 'True', 'Enable one page checkout?', 7575, 1, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
-INSERT INTO configuration VALUES(3070, 'Default Address Country', 'ONEPAGE_DEFAULT_COUNTRY', '223', 'Default country for new address and for checking out without account', 7575, 2, NULL, '2010-07-03 11:43:38', 'tep_get_country_name', 'tep_cfg_pull_down_country_list(');
-INSERT INTO configuration VALUES(3071, 'Account Creation', 'ONEPAGE_ACCOUNT_CREATE', 'create', '<b>required</b> - Password is required<br><b>optional</b> - Password is optional, no account created if empty<br><b>create</b> - Password is optional, account created with random password', 7575, 3, '2009-08-27 18:27:14', '2009-04-09 16:00:09', NULL, 'tep_cfg_select_option(array(''required'', ''optional'', ''create''),');
-INSERT INTO configuration VALUES(3072, 'Show Custom Right Column', 'ONEPAGE_SHOW_CUSTOM_COLUMN', 'true', 'Show custom right column', 7575, 4, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'',''false''),');
-INSERT INTO configuration VALUES(3073, 'Require Login', 'ONEPAGE_LOGIN_REQUIRED', 'false', 'Require customer to be logged in to proceed through checkout', 7575, 5, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO configuration VALUES(3074, 'Show Oscommerce Columns', 'ONEPAGE_SHOW_OSC_COLUMNS', 'true', 'Show default oscommerce left and right columns', 7575, 6, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'',''false''),');
-INSERT INTO configuration VALUES(3075, 'Custom Colum Box #1 Heading', 'ONEPAGE_BOX_ONE_HEADING', '100% Private Secure SSL Transaction', 'Custom Colum Box #1 Heading', 7575, 15, NULL, '2010-07-03 11:43:38', NULL, NULL);
-INSERT INTO configuration VALUES(3076, 'Custom Colum Box #1 Content', 'ONEPAGE_BOX_ONE_CONTENT', 'Your shopping cart transaction is taking place on an encrypted SSL webpage, meaning it is secure and safe. We respect all of your private information and none of it will be shared with anyone in anyway.', 'Custom Colum Box #1 Content', 7575, 16, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_textarea(');
-INSERT INTO configuration VALUES(3077, 'Custom Colum Box #2 Heading', 'ONEPAGE_BOX_TWO_HEADING', 'Ordering Information', 'Custom Colum Box #2 Heading', 7575, 17, NULL, '2010-07-03 11:43:38', NULL, NULL);
-INSERT INTO configuration VALUES(3078, 'Custom Colum Box #2 Content', 'ONEPAGE_BOX_TWO_CONTENT', '<b>Processing Time</b><br>We will process your order as quickly as possible. Typical processing time for orders shipped ground is 1 – 2 days. For expedited shipping (2 day or overnight) we make every effort to ship the order the same day if ordered before 2pm.<br><br><b>Order Tracking</b><br>After your order is placed, you can login anytime 24/7 to view the status of your order. When your order is shipped, you will receive a shipment notification with a tracking number.', 'Custom Colum Box #2 Content', 7575, 18, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_textarea(');
-INSERT INTO configuration VALUES(3079, 'Send Debug Emails To:', 'ONEPAGE_DEBUG_EMAIL_ADDRESS', 'set.me.to.valid@email.address', 'This will send the debug emails to the specified email address these emails are used for debugging', 7575, 19, NULL, '2010-07-03 11:43:38', NULL, NULL);
-INSERT INTO configuration VALUES(3080, 'Show Address in input Fields', 'ONEPAGE_CHECKOUT_SHOW_ADDRESS_INPUT_FIELDS', 'False', 'Show address for logged in customers in input fields instead of just showing text?', 7575, 20, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
-INSERT INTO configuration VALUES(3081, 'Make loader message popup', 'ONEPAGE_CHECKOUT_LOADER_POPUP', 'True', 'Make loader message popup?', 7575, 21, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
-INSERT INTO configuration VALUES(3082, 'Auto-show billing/shipping modules', 'ONEPAGE_AUTO_SHOW_BILLING_SHIPPING', 'True', 'Auto-show billing/shipping modules?', 7575, 33, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
-INSERT INTO configuration VALUES(3083, 'Auto-show billing/shipping Default Country', 'ONEPAGE_AUTO_SHOW_DEFAULT_COUNTRY', '223', 'Default Country for auto-show billing/shipping address', 7575, 34, NULL, '2010-07-03 11:43:38', 'tep_get_country_name', 'tep_cfg_pull_down_country_list(');
-INSERT INTO configuration VALUES(3084, 'Auto-show billing/shipping Default State', 'ONEPAGE_AUTO_SHOW_DEFAULT_STATE', '12', 'Default State for auto-show billing/shipping address', 7575, 35, NULL, '2010-07-03 11:43:38', 'tep_cfg_get_zone_name', 'tep_cfg_pull_down_zone_list_one_page(');
-INSERT INTO configuration VALUES(3085, 'Auto-show billing/shipping Default zip code', 'ONEPAGE_AUTO_SHOW_DEFAULT_ZIP', '93401', 'Default zip code for auto-show billing/shipping address', 7575, 36, NULL, '2010-07-03 11:43:38', NULL, NULL);
-INSERT INTO configuration VALUES(3086, 'Telephone Required', 'ONEPAGE_TELEPHONE', 'False', 'Telephone will be a required field?', 7575, 37, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
-INSERT INTO configuration VALUES(3087, 'Move zip/post code input boxes below state', 'ONEPAGE_ZIP_BELOW', 'False', 'Move zip/post code input boxes below state?', 7575, 38, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
-INSERT INTO configuration VALUES(3088, 'Dont show shipping and handling address checkbox or ship methods if weight of products = 0', 'ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'false', '', 7575, 100, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO configuration VALUES(3089, 'Addresses Layout', 'ONEPAGE_ADDR_LAYOUT', 'vertical', '', 7575, 1000, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''vertical'', ''horizontal''), ');
+INSERT INTO configuration VALUES (3069, 'Enable One Page Checkout', 'ONEPAGE_CHECKOUT_ENABLED', 'True', 'Enable one page checkout?', 7575, 1, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES (3070, 'Default Address Country', 'ONEPAGE_DEFAULT_COUNTRY', '223', 'Default country for new address and for checking out without account', 7575, 2, NULL, '2010-07-03 11:43:38', 'tep_get_country_name', 'tep_cfg_pull_down_country_list(');
+INSERT INTO configuration VALUES (3071, 'Account Creation', 'ONEPAGE_ACCOUNT_CREATE', 'create', '<b>required</b> - Password is required<br><b>optional</b> - Password is optional, no account created if empty<br><b>create</b> - Password is optional, account created with random password', 7575, 3, '2009-08-27 18:27:14', '2009-04-09 16:00:09', NULL, 'tep_cfg_select_option(array(''required'', ''optional'', ''create''),');
+INSERT INTO configuration VALUES (3072, 'Show Custom Right Column', 'ONEPAGE_SHOW_CUSTOM_COLUMN', 'true', 'Show custom right column', 7575, 4, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'',''false''),');
+INSERT INTO configuration VALUES (3073, 'Require Login', 'ONEPAGE_LOGIN_REQUIRED', 'false', 'Require customer to be logged in to proceed through checkout', 7575, 5, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3074, 'Show Oscommerce Columns', 'ONEPAGE_SHOW_OSC_COLUMNS', 'true', 'Show default oscommerce left and right columns', 7575, 6, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'',''false''),');
+INSERT INTO configuration VALUES (3075, 'Custom Colum Box #1 Heading', 'ONEPAGE_BOX_ONE_HEADING', '100% Private Secure SSL Transaction', 'Custom Colum Box #1 Heading', 7575, 15, NULL, '2010-07-03 11:43:38', NULL, NULL);
+INSERT INTO configuration VALUES (3076, 'Custom Colum Box #1 Content', 'ONEPAGE_BOX_ONE_CONTENT', 'Your shopping cart transaction is taking place on an encrypted SSL webpage, meaning it is secure and safe. We respect all of your private information and none of it will be shared with anyone in anyway.', 'Custom Colum Box #1 Content', 7575, 16, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES (3077, 'Custom Colum Box #2 Heading', 'ONEPAGE_BOX_TWO_HEADING', 'Ordering Information', 'Custom Colum Box #2 Heading', 7575, 17, NULL, '2010-07-03 11:43:38', NULL, NULL);
+INSERT INTO configuration VALUES (3078, 'Custom Colum Box #2 Content', 'ONEPAGE_BOX_TWO_CONTENT', '<b>Processing Time</b><br>We will process your order as quickly as possible. Typical processing time for orders shipped ground is 1 – 2 days. For expedited shipping (2 day or overnight) we make every effort to ship the order the same day if ordered before 2pm.<br><br><b>Order Tracking</b><br>After your order is placed, you can login anytime 24/7 to view the status of your order. When your order is shipped, you will receive a shipment notification with a tracking number.', 'Custom Colum Box #2 Content', 7575, 18, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES (3079, 'Send Debug Emails To:', 'ONEPAGE_DEBUG_EMAIL_ADDRESS', 'set.me.to.valid@email.address', 'This will send the debug emails to the specified email address these emails are used for debugging', 7575, 19, NULL, '2010-07-03 11:43:38', NULL, NULL);
+INSERT INTO configuration VALUES (3080, 'Show Address in input Fields', 'ONEPAGE_CHECKOUT_SHOW_ADDRESS_INPUT_FIELDS', 'False', 'Show address for logged in customers in input fields instead of just showing text?', 7575, 20, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES (3081, 'Make loader message popup', 'ONEPAGE_CHECKOUT_LOADER_POPUP', 'True', 'Make loader message popup?', 7575, 21, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES (3082, 'Auto-show billing/shipping modules', 'ONEPAGE_AUTO_SHOW_BILLING_SHIPPING', 'True', 'Auto-show billing/shipping modules?', 7575, 33, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES (3083, 'Auto-show billing/shipping Default Country', 'ONEPAGE_AUTO_SHOW_DEFAULT_COUNTRY', '223', 'Default Country for auto-show billing/shipping address', 7575, 34, NULL, '2010-07-03 11:43:38', 'tep_get_country_name', 'tep_cfg_pull_down_country_list(');
+INSERT INTO configuration VALUES (3084, 'Auto-show billing/shipping Default State', 'ONEPAGE_AUTO_SHOW_DEFAULT_STATE', '12', 'Default State for auto-show billing/shipping address', 7575, 35, NULL, '2010-07-03 11:43:38', 'tep_cfg_get_zone_name', 'tep_cfg_pull_down_zone_list_one_page(');
+INSERT INTO configuration VALUES (3085, 'Auto-show billing/shipping Default zip code', 'ONEPAGE_AUTO_SHOW_DEFAULT_ZIP', '93401', 'Default zip code for auto-show billing/shipping address', 7575, 36, NULL, '2010-07-03 11:43:38', NULL, NULL);
+INSERT INTO configuration VALUES (3086, 'Telephone Required', 'ONEPAGE_TELEPHONE', 'False', 'Telephone will be a required field?', 7575, 37, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES (3087, 'Move zip/post code input boxes below state', 'ONEPAGE_ZIP_BELOW', 'False', 'Move zip/post code input boxes below state?', 7575, 38, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''False'',''True''),');
+INSERT INTO configuration VALUES (3088, 'Dont show shipping and handling address checkbox or ship methods if weight of products = 0', 'ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'false', '', 7575, 100, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3089, 'Addresses Layout', 'ONEPAGE_ADDR_LAYOUT', 'vertical', '', 7575, 1000, NULL, '2010-07-03 11:43:38', NULL, 'tep_cfg_select_option(array(''vertical'', ''horizontal''), ');
 #One Page Checkout End
 
 #Store Logo
-INSERT INTO configuration VALUES(3125, 'Store Logo', 'STORE_LOGO', 'oscmax-logo.png', 'Set your store logo image', 1, 2, '2010-09-17 15:26:47', '0000-00-00 00:00:00', NULL, NULL);
+INSERT INTO configuration VALUES (3125, 'Store Logo', 'STORE_LOGO', 'oscmax-logo.png', 'Set your store logo image', 1, 2, '2010-09-17 15:26:47', '0000-00-00 00:00:00', NULL, NULL);
 
+#MailChimp
+INSERT INTO configuration VALUES (3250, 'Enable MailChimp Newsletter Infobox', 'MAILCHIMP_ENABLE', 'false', 'Do you want to enable MailChimp to handle your newsletters? <br><br><b>You will need to open a MailChimp account to do this:</b><br><center><a href="http://eepurl.com/bfBdQ"><img alt="Sign up" src="http://www.mailchimp.com/img/badges/banner7.gif"></a></center><br><br>', 206, 1, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
+INSERT INTO configuration VALUES (3251, 'MailChimp API Key', 'MAILCHIMP_API', '', 'Please enter your API key from MailChimp', 206, 2, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (3252, 'MailChimp List ID', 'MAILCHIMP_ID', '', 'Please enter your List ID from MailChimp', 206, 5, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (3253, 'MailChimp List URL', 'MAILCHIMP_URL', '', 'Please enter your form URL from MailChimp', 206, 3, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (3254, 'MailChimp U value', 'MAILCHIMP_U', '', 'Please enter your U value from MailChimp', 206, 4, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (3255, 'MailChimp double opt in?', 'MAILCHIMP_OPT_IN', 'true', 'Do you want your users to have to double opt in to your mailing list', 206, 6, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
+INSERT INTO configuration VALUES (3256, 'Delete customer on unsubscribe?', 'MAILCHIMP_DELETE', 'true', 'Do you want completely delete the member from your list instead of just unsubscribing? Set to true to keep your list smaller.', 206, 7, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
+INSERT INTO configuration VALUES (3257, 'Send goodbye email on unsubscribe?', 'MAILCHIMP_SEND_GOODBYE', 'true', 'Do you want to send the goodbye email to the email address', 206, 8, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
+INSERT INTO configuration VALUES (3258, 'Send unsubscribe notification email?', 'MAILCHIMP_SEND_NOTIFY', 'true', 'Do you want to send the unsubscribe notification email to the address defined in the list email notification settings?', 206, 9, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
 
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
@@ -2321,6 +2332,7 @@ INSERT INTO configuration_group VALUES (202,'Page Modules', 'Page Module Setting
 INSERT INTO configuration_group VALUES (203,'Notifications', 'Notifications', 203, 1);
 INSERT INTO configuration_group VALUES (204,'SlideShow Settings', 'SlideShow Settings', 204, 1);
 INSERT INTO configuration_group VALUES (205,'Corner Banners', 'Corner Banners', 205, 1);
+INSERT INTO configuration_group VALUES (206,'MailChimp Newsletters', 'MailChimp Newsletters', 206, 1);
 
 INSERT INTO configuration_group VALUES (7575, 'One Page Checkout', 'Settings for one page checkout', 16, 1);
 
@@ -2634,6 +2646,8 @@ INSERT INTO theme_configuration VALUES (28,'affiliate','BOX_HEADING_AFFILIATE','
 INSERT INTO theme_configuration VALUES (2,'categories','BOX_HEADING_CATEGORIES','yes','','1','left','1',NULL,NULL,now(),'Categories');
 INSERT INTO theme_configuration VALUES (22,'wishlist','BOX_HEADING_CUSTOMER_WISHLIST','yes','','1','right','3',NULL,NULL,now(),'My Wish List');
 INSERT INTO theme_configuration VALUES (29,'Authors','BOX_HEADING_AUTHORS','yes','','1','right','11',NULL,NULL,now(),'Authors');
+INSERT INTO theme_configuration VALUES (30,'MailChimp Newsletters','BOX_HEADING_MAILCHIMP','yes','Do you want to use MailChimp to collect and manage your newsletters?','1','right','15',NULL,NULL,now(),'MailChimp Newsletters');
+
 
 # USA
 INSERT INTO zones VALUES (1,223,'AL','Alabama');

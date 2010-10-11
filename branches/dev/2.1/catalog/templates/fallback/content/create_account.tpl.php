@@ -227,6 +227,10 @@
                 <td class="main" width="150"><?php echo ENTRY_NEWSLETTER; ?></td>
                 <td class="main"><?php echo tep_draw_checkbox_field('newsletter', '1') . '&nbsp;' . (tep_not_null(ENTRY_NEWSLETTER_TEXT) ? '<span class="inputRequirement">' . ENTRY_NEWSLETTER_TEXT . '</span>': ''); ?></td>
               </tr>
+              <tr>
+                <td class="main"><?php echo ENTRY_NEWSLETTER_TYPE; ?></td>
+                <td class="main"><?php echo tep_draw_radio_field('EMAILTYPE', 'html', true) . '&nbsp;&nbsp;' . MAILCHIMP_HTML . '&nbsp;&nbsp;' . tep_draw_radio_field('EMAILTYPE', 'text', false) . '&nbsp;&nbsp;' . MAILCHIMP_TEXT; ?></td>
+              </tr>
             </table></td>
           </tr>
         </table></td>

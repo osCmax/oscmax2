@@ -208,6 +208,14 @@ define('BOX_INFORMATION_SITEMAP', 'Site Map');
 define('BOX_HEADING_TELL_A_FRIEND', 'Tell A Friend');
 define('BOX_TELL_A_FRIEND_TEXT', 'Tell someone you know about this product.');
 
+//MailChimp
+define('BOX_HEADING_MAILCHIMP', 'Newsletter');
+define('MAILCHIMP_INTRO_TEXT', 'If would you like to subscribe to our newsletter please enter your email address here:');
+define('MAILCHIMP_INTRO_TEXT_SUBSCRIBED', 'You are currently subscribed to our newsletter');
+define('MAILCHIMP_INTRO_TEXT_UNSUBSCRIBED', 'If would you like to subscribe to our newsletter please enter your email address here:');
+define('MAILCHIMP_HTML', 'HTML');
+define('MAILCHIMP_TEXT', 'Text');
+
 // LINE ADDED: MOD - allprods modification
 define('BOX_INFORMATION_ALLPRODS', 'View All Items');
 

@@ -25,7 +25,7 @@ $Id: account_newsletters.php 3 2006-05-27 04:59:07Z user $
 // needs to be included earlier to set the success message in the messageStack
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ACCOUNT_NEWSLETTERS);
 
-  $newsletter_query = tep_db_query("select customers_newsletter from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$customer_id . "'");
+  $newsletter_query = tep_db_query("select customers_newsletter, customers_email_address, customers_newsletter_type from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$customer_id . "'");
   $newsletter = tep_db_fetch_array($newsletter_query);
 
   if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
@@ -39,7 +39,33 @@ $Id: account_newsletters.php 3 2006-05-27 04:59:07Z user $
       $newsletter_general = (($newsletter['customers_newsletter'] == '1') ? '0' : '1');
 
       tep_db_query("update " . TABLE_CUSTOMERS . " set customers_newsletter = '" . (int)$newsletter_general . "' where customers_id = '" . (int)$customer_id . "'");
-    }
+	  
+	  //Mail Chimp
+	  if (MAILCHIMP_ENABLE == true) {
+      require_once DIR_WS_CLASSES . 'MCAPI.class.php';
+      require DIR_WS_FUNCTIONS . 'mailchimp_functions.php';
+
+	  $api = new MCAPI(MAILCHIMP_API);
+	  $list_id = MAILCHIMP_ID;
+	  $email_address = $newsletter['customers_email_address'];
+	  $email_format = $newsletter['customers_newsletter_type'];
+
+	    if ($newsletter['customers_newsletter'] == '1') {
+		  //unsubscribe
+	      $retval = $api->listUnsubscribe($list_id, $email_address);
+	    } else {
+		  //subscribe
+ 	      $merge_vars = array('');
+          if ($email_format == 'TEXT') {
+            $format = 'text'; 
+          } else {
+            $format = 'html'; 
+          }
+          $retval = $api->listSubscribe($list_id, $email_address, $merge_vars, $format);
+		} // end if
+	  } // end if MAILCHIMP_ENABLE
+	  
+    } // end if
 
     $messageStack->add_session('account', SUCCESS_NEWSLETTER_UPDATED, 'success');
 

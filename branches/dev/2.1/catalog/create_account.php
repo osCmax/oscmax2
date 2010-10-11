@@ -64,10 +64,11 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
     $telephone = tep_db_prepare_input($_POST['telephone']);
     $fax = tep_db_prepare_input($_POST['fax']);
     if (isset($_POST['newsletter'])) {
-      $newsletter = tep_db_prepare_input($_POST['newsletter']);
+      $newsletter = tep_db_prepare_input($_POST['newsletter']);	  
     } else {
       $newsletter = false;
     }
+	$email_type = tep_db_prepare_input($_POST['EMAILTYPE']);
     $password = tep_db_prepare_input($_POST['password']);
     $confirmation = tep_db_prepare_input($_POST['confirmation']);
 
@@ -211,6 +212,7 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
                               'customers_telephone' => $telephone,
                               'customers_fax' => $fax,
                               'customers_newsletter' => $newsletter,
+							  'customers_newsletter_type' => $email_type,
                               // PWA BOF 2b
                               'customers_password' => $dbPass,
                               'guest_account' => $guestaccount);
@@ -359,6 +361,12 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 // BOF: MOD - GV_REDEEM_EXPLOIT_FIX (GVREF)
 
       tep_mail($name, $email_address, EMAIL_SUBJECT, $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+
+// Add MailChimp Subscription
+if (MAILCHIMP_ENABLE == true) {
+  require DIR_WS_FUNCTIONS . 'mailchimp_functions.php';
+  mc_add_email($email_address, $email_format);
+} // end if 
 
 // BOF: MOD - Separate Pricing Per Customer: alert shop owner of account created by a company
 // if you would like to have an email when either a company name has been entered in

@@ -2289,6 +2289,8 @@ INSERT INTO configuration VALUES (3255, 'MailChimp double opt in?', 'MAILCHIMP_O
 INSERT INTO configuration VALUES (3256, 'Delete customer on unsubscribe?', 'MAILCHIMP_DELETE', 'true', 'Do you want completely delete the member from your list instead of just unsubscribing? Set to true to keep your list smaller.', 206, 7, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
 INSERT INTO configuration VALUES (3257, 'Send goodbye email on unsubscribe?', 'MAILCHIMP_SEND_GOODBYE', 'true', 'Do you want to send the goodbye email to the email address', 206, 8, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
 INSERT INTO configuration VALUES (3258, 'Send unsubscribe notification email?', 'MAILCHIMP_SEND_NOTIFY', 'true', 'Do you want to send the unsubscribe notification email to the address defined in the list email notification settings?', 206, 9, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
+INSERT INTO configuration VALUES (3259, 'MailChimp last syncronise', 'MAILCHIMP_LAST_SYNC', '', 'When was your local newsletter list last syncronised with MailChimp? Please note that this will be the MailChimp server time once set.  If you wish to reset then set to blank.', 206, 10, now(), now(), NULL, NULL);
+
 
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);

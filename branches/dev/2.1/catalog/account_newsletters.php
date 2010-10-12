@@ -52,7 +52,7 @@ $Id: account_newsletters.php 3 2006-05-27 04:59:07Z user $
 
 	    if ($newsletter['customers_newsletter'] == '1') {
 		  //unsubscribe
-	      $retval = $api->listUnsubscribe($list_id, $email_address);
+	      $retval = $api->listUnsubscribe($list_id, $email_address, MAILCHIMP_DELETE, MAILCHIMP_SEND_GOODBYE, MAILCHIMP_SEND_NOTIFY);
 	    } else {
 		  //subscribe
  	      $merge_vars = array('');
@@ -61,7 +61,7 @@ $Id: account_newsletters.php 3 2006-05-27 04:59:07Z user $
           } else {
             $format = 'html'; 
           }
-          $retval = $api->listSubscribe($list_id, $email_address, $merge_vars, $format);
+          $retval = $api->listSubscribe($list_id, $email_address, $merge_vars, $format, MAILCHIMP_OPT_IN, true);
 		} // end if
 	  } // end if MAILCHIMP_ENABLE
 	  

@@ -20,6 +20,48 @@ $Id: customers.php 3 2006-05-27 04:59:07Z user $
 
   if (tep_not_null($action)) {
     switch ($action) {
+	  case 'mailchimp':
+	    include_once(DIR_WS_CLASSES . "MCAPI.class.php");
+        $api = new MCAPI(MAILCHIMP_API);
+        $list_id = MAILCHIMP_ID; 
+		if (MAILCHIMP_LAST_SYNC == '') {
+		  $last_update = null;
+		} else {
+		  $last_update = MAILCHIMP_LAST_SYNC;
+		}
+		//Check for subscribed customers
+        $retval = $api->listMembers($list_id, 'subscribed', $last_update, 0, 5000 );
+        if ($api->errorCode){
+          echo "Unable to load listMembers()!";
+          echo "\n\tCode=".$api->errorCode;
+          echo "\n\tMsg=".$api->errorMessage."\n";
+          echo "Members returned: ". sizeof($retval). "\n";
+        } else {
+          $sub_list_size = sizeof($retval);
+          foreach($retval as $member) {
+			// Now update local database to reflect mailchimp settings
+			tep_db_query("update " . TABLE_CUSTOMERS . " set customers_newsletter = '1' where customers_email_address = '" . $member['email'] ."'");	
+          }
+        }
+		
+		//Check for unsubscribed customers
+        $retval = $api->listMembers($list_id, 'unsubscribed', $last_update, 0, 5000 );
+        if ($api->errorCode){
+          echo "Unable to load listMembers()!";
+          echo "\n\tCode=".$api->errorCode;
+          echo "\n\tMsg=".$api->errorMessage."\n";
+          echo "Members returned: ". sizeof($retval). "\n";
+        } else {
+          $unsub_list_size = sizeof($retval);
+          foreach($retval as $member) {
+			// Now update local database to reflect mailchimp settings
+			tep_db_query("update " . TABLE_CUSTOMERS . " set customers_newsletter = '0' where customers_email_address = '" . $member['email'] ."'");
+		  }
+        }
+		
+		// Now set MailChimp configuration setting to reflect latest update
+		tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . $member['timestamp'] . "' where configuration_key = 'MAILCHIMP_LAST_SYNC'"); 			
+	   	break;
 // BOF : PGM EDITS CUSTOMER NOTES
 	  case 'deletenotes':
 	  	tep_db_query("DELETE FROM customers_notes WHERE customers_notes_id = ".$_GET["notesid"]." AND customers_id = ".$_GET["cID"]);
@@ -1243,13 +1285,19 @@ function check_form() {
       if (isset($cInfo->number_of_reviews) && ($cInfo->number_of_reviews) > 0) $contents[] = array('text' => '<br>' . tep_draw_checkbox_field('delete_reviews', 'on', true) . ' ' . sprintf(TEXT_DELETE_REVIEWS, $cInfo->number_of_reviews));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
-    default:
+    default:  
       if (isset($cInfo) && is_object($cInfo)) {
 // LINE CHANGED: MOD - Separate Pricing Per Customer: dark grey field with customer name higher
 //      $heading[] = array('text' => '<b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
         $heading[] = array('text' => ''. tep_draw_separator('pixel_trans.gif', '11', '12') .'&nbsp;<br><b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
+		if (isset($sub_list_size) || isset($unsub_list_size)) {
+		$contents[] = array('align' => 'center', 'text' => '<table width="100%"><tr><td class="messageStackSuccess">MailChimp Sync Complete.<br>Subscribed:<b>' . $sub_list_size . '</b>&nbsp;&nbsp;Unsubscribed:<b>' . $unsub_list_size . '</b></td></tr></table>');	
+		}
         $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&amp;action=confirm') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_orders.gif', IMAGE_ORDERS) . '</a> <a href="' . tep_href_link(FILENAME_MAIL, 'selected_box=tools&amp;customer=' . $cInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a>');
 		$contents[] = array('align' => 'center', 'text' => ' <a href="' . tep_href_link(FILENAME_CREATE_ORDER, tep_get_all_get_params(array('cID', 'action', 'page')) . 'Customer_nr=' . $cInfo->customers_id) . '">' . tep_image_button('button_create_order2.gif', IMAGE_ORDERS) . '</a> ');
+		if (MAILCHIMP_ENABLE == true) {
+		$contents[] = array('align' => 'center', 'text' => ' <a href="' . tep_href_link(FILENAME_CUSTOMERS, 'action=mailchimp') . '">' . tep_image_button('button_mc_sync.gif', IMAGE_MC_SYNC) . '</a> ');
+		}
         $contents[] = array('text' => '<br>' . TEXT_DATE_ACCOUNT_CREATED . ' ' . tep_date_short($cInfo->date_account_created));
         $contents[] = array('text' => '<br>' . TEXT_DATE_ACCOUNT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->date_account_last_modified));
         $contents[] = array('text' => '<br>' . TEXT_INFO_DATE_LAST_LOGON . ' '  . tep_date_short($cInfo->date_last_logon));

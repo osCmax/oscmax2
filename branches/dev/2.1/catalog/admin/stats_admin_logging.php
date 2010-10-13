@@ -109,7 +109,7 @@ $Id: stats_customers.php 3 2006-05-27 04:59:07Z user $
 			  $cfg_group_query = tep_db_query("select configuration_title, configuration_description, configuration_group_id from " . TABLE_CONFIGURATION . " where configuration_id = '" . (int)$config_id . "'");
               $cfg_group = tep_db_fetch_array($cfg_group_query);
 			  ?>
-				<td class="dataTableContent"><?php echo '<span title="' . $cfg_group['configuration_title'] . '|' . $cfg_group['configuration_description'] . '">' . $logging['type']; ?></span></td>
+				<td class="dataTableContent"><?php echo '<span title="' . $cfg_group['configuration_title'] . '|' .  strip_tags($cfg_group['configuration_description'], '<p><br><b>') . '">' . $logging['type']; ?></span></td>
               <?php } ?>
               </tr>
 

@@ -202,6 +202,7 @@ if ($help_pages_query['help_page'] != '' ) {
 	<?php echo '<a href="' . tep_href_link(FILENAME_LOGOFF, '', 'SSL') . '" class="header">'; ?>
 	<?php echo tep_image(DIR_WS_ICONS . 'exit.png', 'Logoff'); ?> Logoff &nbsp;</a>
   </td>
+  <td width="1"><?php echo tep_draw_separator('pixel_trans.gif', '1', '84'); ?></td>
 </tr>
 <tr style="background-color:#606060">
   <td colspan="4">

@@ -1306,6 +1306,9 @@ function check_form() {
         $contents[] = array('text' => '<br>' . TEXT_INFO_NUMBER_OF_REVIEWS . ' ' . $cInfo->number_of_reviews);
 
 // BOF : PGM EDITS CUSTOMER NOTES
+
+        $contents[] = array('text' => '<br><p class="main"><b>' . TEXT_COMMENTS .'</b></p>');
+
 $ias_notes_query = tep_db_query("SELECT DISTINCT customers_id, customers_notes_id, customers_notes_message, customers_notes_editor, customers_notes_date FROM customers_notes WHERE customers_id = " . (isset($_GET['cID']) ? $_GET['cID'] : $cInfo->customers_id));
 	if(tep_db_num_rows($ias_notes_query) == 0) { // No Comments Available
 		$contents[] = array('text' => '');
@@ -1320,9 +1323,6 @@ $ias_notes_query = tep_db_query("SELECT DISTINCT customers_id, customers_notes_i
 		while ($ias_notes = tep_db_fetch_array($ias_notes_query)) {
 
         $comment_table_string .= '<table width="100%">';
-		$comment_table_string .= '  <tr>';
-		$comment_table_string .= '    <td><b>' . TEXT_COMMENTS .'</b></td>';
-		$comment_table_string .= '  </tr>';
 		$comment_table_string .= '  <tr>';
 		$comment_table_string .= '    <td>';
 		$comment_table_string .= '      <table width="100%" cellpadding="2" cellspacing="0" border="0" style="background-color:#ffffff">';

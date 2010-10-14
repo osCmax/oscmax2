@@ -35,6 +35,11 @@ $Id: warnings.php 1 2008-09-22 11:11:07Z user $
     }
   }
 
+//Check if Warn before down for maintenance is enabled
+  if ( (WARN_BEFORE_DOWN_FOR_MAINTENANCE == 'true') && (DOWN_FOR_MAINTENANCE == 'false') ) {
+    $messageStack->add('header', TEXT_BEFORE_DOWN_FOR_MAINTENANCE . PERIOD_BEFORE_DOWN_FOR_MAINTENANCE, 'warning');
+  }
+
 // Check for IE6
 if (IE6_CHECK == 'true') {
   $browser = $_SERVER['HTTP_USER_AGENT'];

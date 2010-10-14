@@ -157,12 +157,12 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
 
 // include the language translations
 // BOF: [TiM's osC Solutions] Display english for missing language files
-  if (file_exists(DIR_WS_LANGUAGES . $language . '.php')) {
-    require_once(DIR_WS_LANGUAGES . $language . '.php');
+  if (file_exists(DIR_WS_LANGUAGES . $language . '/core.php')) {
+    require_once(DIR_WS_LANGUAGES . $language . '/core.php');
   } else {
-    if (file_exists(DIR_WS_LANGUAGES . 'english.php')) {
-      $messageStack->add('Missing language file ('. DIR_WS_LANGUAGES . $language . '.php). Using english instead.', 'error');
-      require_once(DIR_WS_LANGUAGES . 'english.php');
+    if (file_exists(DIR_WS_LANGUAGES . $language . '/core.php')) {
+      $messageStack->add('Missing language file (' . DIR_WS_LANGUAGES . $language . '/core.php). Using english instead.', 'error');
+      require_once(DIR_WS_LANGUAGES . $language . '/core.php');
     }
   }
 
@@ -176,6 +176,9 @@ adapted for Hide products and categories from customer groups for SPPC 2008/08/0
     }
   }
 // EOF: [TiM's osC Solutions] Display english for missing language files
+
+// LINE ADDED - CREDIT CLASS Gift Voucher Contribution
+require(DIR_WS_LANGUAGES . $language . '/add_ccgvdc.php');
 
 // calculate category path
   if (isset($_GET['cPath'])) {

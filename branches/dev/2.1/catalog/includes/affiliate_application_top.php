@@ -94,7 +94,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_AFFILIATE_PAYMENT', 'affiliate_payment.php');
 
 // include the language translations
-  require(DIR_WS_LANGUAGES . 'affiliate_' . $language . '.php');
+  require(DIR_WS_LANGUAGES . $language . '/affiliate.php');
 
   $affiliate_clientdate = (date ("Y-m-d H:i:s"));
   $affiliate_clientbrowser = $_SERVER["HTTP_USER_AGENT"];

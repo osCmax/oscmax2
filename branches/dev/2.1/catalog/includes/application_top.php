@@ -295,7 +295,10 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 
 // include the language translations
-  require(DIR_WS_LANGUAGES . $language . '.php');
+  require(DIR_WS_LANGUAGES . $language . '/core.php');
+// LINE ADDED - CREDIT CLASS Gift Voucher Contribution
+  require(DIR_WS_LANGUAGES . $language . '/add_ccgvdc.php');
+
 
 // BOF: MOD
 // ULTIMATE Seo Urls 5 by FWR Media

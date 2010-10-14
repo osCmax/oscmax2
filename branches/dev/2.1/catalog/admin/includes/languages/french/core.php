@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: french.php,v 1.1 2005/05/04 20:09:41 tropic Exp $
+  $Id: core.php,v 1.1 2005/05/04 20:09:41 tropic Exp $
 
   osCMax Power E-Commerce
   http://oscdox.com
@@ -495,9 +495,6 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Attention&nbsp;: Le t&eacute;l&eacute;c
 
 // LINE ADDED - XSell
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Products'); // X-Sell
-
-// LINE ADDED - CREDIT CLASS Gift Voucher Contribution
-require(DIR_WS_LANGUAGES . 'add_ccgvdc_french.php');
 
 // BOF: MOD - Article Manager
 define('BOX_HEADING_ARTICLES', 'Article Manager');

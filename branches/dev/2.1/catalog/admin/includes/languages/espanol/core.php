@@ -1,6 +1,6 @@
 <?php
 /*
-$Id: espanol.php 3 2006-05-27 04:59:07Z user $
+$Id: core.php 3 2006-05-27 04:59:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
@@ -495,9 +495,6 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Warning: Se ha desactivado la subida de
 
 // LINE ADDED - XSell
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Productos cruzados en la venta'); // X-Sell
-
-// LINE ADDED - CREDIT CLASS Gift Voucher Contribution
-require(DIR_WS_LANGUAGES . 'add_ccgvdc_espanol.php');
 
 // BOF: MOD - Article Manager
 define('BOX_HEADING_ARTICLES', 'Article Manager');

@@ -2589,6 +2589,8 @@ INSERT INTO customers_groups VALUES (1,'Wholesale','0','0','','');
 INSERT INTO languages VALUES (1,'English','en','icon.gif','english',1);
 INSERT INTO languages VALUES (2,'Deutsch','de','icon.gif','german',2);
 INSERT INTO languages VALUES (3,'Español','es','icon.gif','espanol',3);
+INSERT INTO languages VALUES (4,'Français','fr','icon.gif','french',3);
+
 
 INSERT INTO orders_status VALUES (1,1,'Pending',1,0);
 INSERT INTO orders_status VALUES (1,2,'Offen',1,0);

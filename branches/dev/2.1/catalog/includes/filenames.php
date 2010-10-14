@@ -245,4 +245,8 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
 // BOF: Information Pages Unlimited
   define('FILENAME_INFORMATION', 'information.php');
 // EOF: Information Pages Unlimited
+
+// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
+define('FILENAME_STATS_CREDITS', 'stats_credits.php');
+// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 ?>

@@ -60,7 +60,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('TABLE_PRODUCTS_XSELL', 'products_xsell'); //X-Sell
 
 // include the language translations
-  require(DIR_WS_LANGUAGES . 'affiliate_' . $language . '.php');
+  require(DIR_WS_LANGUAGES . $language . '/affiliate.php');
 
 // If an order is deleted delete the sale too (optional)
   $action = (isset($_GET['action']) ? $_GET['action'] : '');

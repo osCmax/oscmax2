@@ -1,6 +1,6 @@
 <?php
 /*
-$Id: english.php 3 2006-05-27 04:59:07Z user $
+$Id: core.php 3 2006-05-27 04:59:07Z user $
 
   osCMax Power E-Commerce
   http://oscdox.com
@@ -518,9 +518,6 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Warning: File uploads are disabled in t
 
 // LINE ADDED - XSell
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Products'); // X-Sell
-
-// LINE ADDED - CREDIT CLASS Gift Voucher Contribution
-require(DIR_WS_LANGUAGES . 'add_ccgvdc_english.php');
 
 // BOF: MOD - Article Manager
 define('BOX_HEADING_ARTICLES', 'Article Manager');

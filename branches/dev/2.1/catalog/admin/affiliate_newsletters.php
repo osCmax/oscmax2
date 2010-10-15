@@ -261,7 +261,7 @@
 
     $nInfo = new objectInfo($affiliate_newsletter);
 
-    include(DIR_WS_LANGUAGES . $language . '/modules/newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
+    include(DIR_WS_LANGUAGES . $language . '/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     include(DIR_WS_MODULES . 'newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     $module_name = $nInfo->module;
     $module = new $module_name($nInfo->title, $nInfo->content);
@@ -278,7 +278,7 @@
 
     $nInfo = new objectInfo($affiliate_newsletter);
 
-    include(DIR_WS_LANGUAGES . $language . '/modules/newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
+    include(DIR_WS_LANGUAGES . $language . '/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     include(DIR_WS_MODULES . 'newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     $module_name = $nInfo->module;
     $module = new $module_name($nInfo->title, $nInfo->content);
@@ -295,7 +295,7 @@
 
     $nInfo = new objectInfo($affiliate_newsletter);
 
-    include(DIR_WS_LANGUAGES . $language . '/modules/newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
+    include(DIR_WS_LANGUAGES . $language . '/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     include(DIR_WS_MODULES . 'newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     $module_name = $nInfo->module;
     $module = new $module_name($nInfo->title, $nInfo->content);

@@ -22,7 +22,7 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
 
         reset($this->modules);
         while (list(, $value) = each($this->modules)) {
-          include(DIR_WS_LANGUAGES . $language . '/modules/order_total/' . $value);
+          include(DIR_WS_LANGUAGES . $language . '/' . $value);
           include(DIR_WS_MODULES . 'order_total/' . $value);
 
           $class = substr($value, 0, strrpos($value, '.'));

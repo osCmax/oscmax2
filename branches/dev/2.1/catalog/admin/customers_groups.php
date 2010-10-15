@@ -217,7 +217,7 @@
     for ($i = 0, $n = sizeof($directory_array); $i < $n; $i++) {
     $file = $directory_array[$i];
     if (in_array ($directory_array[$i], $module_active)) {
-      include(DIR_FS_CATALOG_LANGUAGES . $language . '/modules/payment/' . $file);
+      include(DIR_FS_CATALOG_LANGUAGES . $language . '/' . $file);
       include($module_directory . $file);
 
      $class = substr($file, 0, strrpos($file, '.'));
@@ -257,7 +257,7 @@
     for ($i = 0, $n = sizeof($ship_directory_array); $i < $n; $i++) {
     $file = $ship_directory_array[$i];
     if (in_array ($ship_directory_array[$i], $ship_module_active)) {
-      include(DIR_FS_CATALOG_LANGUAGES . $language . '/modules/shipping/' . $file);
+      include(DIR_FS_CATALOG_LANGUAGES . $language . '/' . $file);
       include($ship_module_directory . $file);
 
      $ship_class = substr($file, 0, strrpos($file, '.'));
@@ -401,7 +401,7 @@
     for ($i = 0, $n = sizeof($directory_array); $i < $n; $i++) {
     $file = $directory_array[$i];
     if (in_array ($directory_array[$i], $module_active)) {
-      include(DIR_FS_CATALOG_LANGUAGES . $language . '/modules/payment/' . $file);
+      include(DIR_FS_CATALOG_LANGUAGES . $language . '/' . $file);
       include($module_directory . $file);
 
      $class = substr($file, 0, strrpos($file, '.'));
@@ -445,7 +445,7 @@
     for ($i = 0, $n = sizeof($ship_directory_array); $i < $n; $i++) {
     $file = $ship_directory_array[$i];
     if (in_array ($ship_directory_array[$i], $ship_module_active)) {
-      include(DIR_FS_CATALOG_LANGUAGES . $language . '/modules/shipping/' . $file);
+      include(DIR_FS_CATALOG_LANGUAGES . $language . '/' . $file);
       include($ship_module_directory . $file);
 
      $ship_class = substr($file, 0, strrpos($file, '.'));

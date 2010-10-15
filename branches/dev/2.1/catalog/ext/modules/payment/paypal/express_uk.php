@@ -30,7 +30,7 @@
     tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/modules/payment/paypal_uk_express.php');
+  require(DIR_WS_LANGUAGES . $language . '/paypal_uk_express.php');
   require('includes/modules/payment/paypal_uk_express.php');
 
   $paypal_uk_express = new paypal_uk_express();
@@ -159,7 +159,7 @@
             if ( ($pass == true) && ($order->info['total'] >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) ) {
               $free_shipping = true;
 
-              include(DIR_WS_LANGUAGES . $language . '/modules/order_total/ot_shipping.php');
+              include(DIR_WS_LANGUAGES . $language . '/ot_shipping.php');
             }
           }
 

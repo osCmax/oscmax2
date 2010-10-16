@@ -90,6 +90,21 @@
 	  // End - CREDIT CLASS Gift Voucher Contribution
   }
 
+// BOF: MOD - UPSXML 1.3.3
+  if (defined('SHIPPING_DIMENSIONS_SUPPORT') && SHIPPING_DIMENSIONS_SUPPORT == 'Ready-to-ship only') {
+    $dimensions_support = 1;
+  } elseif (defined('SHIPPING_DIMENSIONS_SUPPORT') && SHIPPING_DIMENSIONS_SUPPORT == 'With product dimensions') {
+    $dimensions_support = 2;
+  } else {
+    $dimensions_support = 0;
+  }
+
+  if ($dimensions_support > 0) {
+    require(DIR_WS_CLASSES . 'packing.php');
+    $packing = new packing;
+  }
+// EOF: MOD - UPSXML 1.3.3
+
 // load all enabled shipping modules
   require(DIR_WS_CLASSES . 'shipping.php');
   $shipping_modules = new shipping;

@@ -423,8 +423,8 @@ for ($x = 0; $x < $no_of_listings; $x++) {
     $list_box_contents = array();
 
     $list_box_contents[0] = array('params' => 'class="productListing-odd"');
-    $list_box_contents[0][] = array('params' => 'class="productListing-data" yyyyyy',
-                                   'text' => TEXT_NO_PRODUCTS);
+    $list_box_contents[0][] = array('params' => 'class="productListing-data"',
+                                    'text' => TEXT_NO_PRODUCTS);
 
     new productListingBox($list_box_contents);
   }

@@ -22,6 +22,12 @@ $Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
 
   require('includes/application_top.php');
 
+  // +Country-State Selector
+  require(DIR_WS_FUNCTIONS . 'ajax.php');
+if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates' && isset($HTTP_POST_VARS['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($HTTP_POST_VARS['country']), true);
+} else {
+  // -Country-State Selector
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_SIGNUP);
 
   if (isset($_POST['action'])) {
@@ -273,4 +279,7 @@ if (!isset($country)){$a_country = DEFAULT_COUNTRY;}
   include (bts_select('main', $content_template)); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
+// +Country-State Selector 
+}
+// -Country-State Selector 
 ?>

@@ -17,6 +17,12 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
+  // +Country-State Selector
+  require(DIR_WS_FUNCTIONS . 'ajax.php');
+if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates' && isset($HTTP_POST_VARS['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($HTTP_POST_VARS['country']), true);
+} else {
+  // -Country-State Selector
 // PWA EOF
   if (isset($_GET['guest']) && $cart->count_contents() < 1) tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
 // PWA BOF
@@ -24,12 +30,8 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CREATE_ACCOUNT);
 
   $process = false;
-// BOF: MOD - Country-State Selector
-  $refresh = false;
-  if (isset($_POST['action']) && (($_POST['action'] == 'process') || ($_POST['action'] == 'refresh'))) {
-    if ($_POST['action'] == 'process')  $process = true;
-  if ($_POST['action'] == 'refresh') $refresh = true;
-// EOF: MOD - Country-State Selector
+  if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
+    $process = true;
 
     if (ACCOUNT_GENDER == 'true') {
       if (isset($_POST['gender'])) {
@@ -72,9 +74,6 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
     $password = tep_db_prepare_input($_POST['password']);
     $confirmation = tep_db_prepare_input($_POST['confirmation']);
 
-// BOF: MOD - Country-State Selector
-    if ($process) {
-// EOF: MOD - Country-State Selector
     $error = false;
 
     if (ACCOUNT_GENDER == 'true') {
@@ -150,21 +149,10 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
     }
 
     if (ACCOUNT_STATE == 'true') {
-      $zone_id = 0;
-      $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "'");
-      $check = tep_db_fetch_array($check_query);
-      $entry_state_has_zones = ($check['total'] > 0);
-      if ($entry_state_has_zones == true) {
-        $zone_query = tep_db_query("select distinct zone_id from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "' and (zone_name like '" . tep_db_input($state) . "%' or zone_code like '%" . tep_db_input($state) . "%')");
-        if (tep_db_num_rows($zone_query) == 1) {
-          $zone = tep_db_fetch_array($zone_query);
-          $zone_id = $zone['zone_id'];
-        } else {
-          $error = true;
+      // +Country-State Selector
+      if ($zone_id == 0) {
+      // -Country-State Selector
 
-          $messageStack->add('create_account', ENTRY_STATE_ERROR_SELECT);
-        }
-      } else {
         if (strlen($state) < ENTRY_STATE_MIN_LENGTH) {
           $error = true;
 
@@ -342,6 +330,9 @@ $Id: create_account.php 3 2006-05-27 04:59:07Z user $
                    "\n\n";
   }
 //    $email_text .= EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;
+ // +Country-State Selector 
+if (!isset($country)){$country = DEFAULT_COUNTRY;}
+// -Country-State Selector
   //---------
   //add these:
       if (tep_session_is_registered('floating_gv_code')) {
@@ -381,7 +372,7 @@ if (MAILCHIMP_ENABLE == true) {
 
       tep_redirect(tep_href_link(FILENAME_CREATE_ACCOUNT_SUCCESS, '', 'SSL'));
     }
- }
+ 
 // BOF: MOD - Country-State Selector 
  }
 if ($_POST['action'] == 'refresh') {$state = '';}
@@ -400,4 +391,7 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
   include (bts_select('main', $content_template)); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
+// +Country-State Selector 
+}
+// -Country-State Selector 
 ?>

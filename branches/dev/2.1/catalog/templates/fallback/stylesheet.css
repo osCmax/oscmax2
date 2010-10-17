@@ -204,3 +204,8 @@ tr.level012 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 tr.level0123 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 span.selectedCat { color: #ff0000; }
 /* EOF: Categories Box Styling */
+/* Small Ajax-throbber image */
+#indicator {
+    float:right;
+    visibility:hidden;
+}

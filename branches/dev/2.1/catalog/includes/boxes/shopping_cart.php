@@ -19,13 +19,6 @@ $Id: shopping_cart.php 3 2006-05-27 04:59:07Z user $
       } else {
 ?>
 <!-- shopping_cart //-->
-
-<script type="text/javascript"><!--
-function couponpopupWindow(url) {
-window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=450,height=280,screenX=150,screenY=150,top=150,left=150')
-}
-//--></script> 
-
 <?php
 
   $boxHeading = '<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . BOX_HEADING_SHOPPING_CART . '</a>';

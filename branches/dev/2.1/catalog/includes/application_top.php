@@ -56,6 +56,10 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
     while ( $base->valid() ) {
       if ( array_key_exists(  $base->current(), $_SERVER ) && !empty(  $_SERVER[$base->current()] ) ) {
         if ( false !== strpos( $_SERVER[$base->current()], '.php' ) ) {
+           // ignore processing if this script is not running in the catalog directory
+           if ( dirname($_SERVER[$base->current()]).'/' != DIR_WS_CATALOG) {
+              return $_SERVER[$base->current()];
+              }
           preg_match( '@[a-z0-9_]+\.php@i', $_SERVER[$base->current()], $matches );
           if ( is_array( $matches ) && ( array_key_exists( 0, $matches ) )
                                     && ( substr( $matches[0], -4, 4 ) == '.php' )

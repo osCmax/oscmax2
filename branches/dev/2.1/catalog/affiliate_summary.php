@@ -69,7 +69,8 @@ $Id: affiliate_summary.php 14 2006-07-28 17:42:07Z user $
   $affiliate_percent = $affiliate['affiliate_commission_percent'];
   if ($affiliate_percent < AFFILIATE_PERCENT) $affiliate_percent = AFFILIATE_PERCENT;
 
-  $content = affiliate_summary; 
+  $content = CONTENT_AFFILIATE_SUMMARY; 
+  $javascript = $content . '.js.php';
 
   include (bts_select('main', $content_template)); // BTSv1.5
 

@@ -188,3 +188,8 @@ if((FEATURED_PRODUCTS_DISPLAY == 'true') && (FEATURED_PRODUCTS_POSITION == '4'))
   </tr>
 </table>
 <!-- Featured_Sets_eof //-->
+<table>
+  <tr>
+    <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+  </tr>
+</table>

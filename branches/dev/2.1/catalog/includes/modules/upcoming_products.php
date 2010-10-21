@@ -46,3 +46,8 @@ $Id: upcoming_products.php 3 2006-05-27 04:59:07Z user $
 <?php
   }
 ?>
+<table>
+  <tr>
+    <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+  </tr>
+</table>

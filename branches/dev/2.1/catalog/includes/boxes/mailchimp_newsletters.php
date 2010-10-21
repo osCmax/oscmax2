@@ -28,7 +28,7 @@ if (!tep_session_is_registered('customer_id')) {
 <!-- mailchimp bof //-->
 <?php
     $boxContent = MAILCHIMP_INTRO_TEXT;
-	$boxContent .= '<br><center><form action="' . MAILCHIMP_URL . '?method="post">';
+	$boxContent .= '<br><center><form action="' . MAILCHIMP_URL . '?method=post">';
 	$boxContent .= tep_draw_input_field('EMAIL', '', 'size="10" maxlength="100" style="width: ' . (BOX_WIDTH-10) . 'px"') . '<br>';
 	$boxContent .= tep_draw_radio_field('EMAILTYPE', 'html', true) . '&nbsp;&nbsp;' . MAILCHIMP_HTML . '&nbsp;&nbsp;' . tep_draw_radio_field('EMAILTYPE', 'text', false) . '&nbsp;&nbsp;' . MAILCHIMP_TEXT;
 	$boxContent .= '<table width="100%"><tr><td align="center">' . tep_image_submit('button_subscribe.gif', IMAGE_BUTTON_SUBSCRIBE) . '</td></tr></table>';

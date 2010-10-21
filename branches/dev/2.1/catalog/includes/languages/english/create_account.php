@@ -18,7 +18,7 @@ define('HEADING_TITLE_PWA', 'Billing & Shipping Information');
 
 define('HEADING_TITLE', 'My Account Information');
 
-define('TEXT_ORIGIN_LOGIN', '<font color="#FF0000"><small><b>NOTE:</b></font></small> If you already have an account with us, please login at the <a href="%s"><u>login page</u></a>.');
+define('TEXT_ORIGIN_LOGIN', '<font color="#FF0000"><small><b>NOTE:</b></small></font> If you already have an account with us, please login at the <a href="%s"><u>login page</u></a>.');
 
 define('EMAIL_SUBJECT', 'Welcome to ' . STORE_NAME);
 define('EMAIL_GREET_MR', 'Dear Mr. %s,' . "\n\n");

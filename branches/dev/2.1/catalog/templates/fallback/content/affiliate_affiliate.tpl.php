@@ -1,4 +1,4 @@
-    <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB; ?>"> 
+    <table border="0" width="100%" cellspacing="0" cellpadding="0"> 
       <tr> 
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0"> 
           <tr> 
@@ -28,18 +28,18 @@
   } 
 ?> 
       <tr> 
-        <td><?php echo tep_draw_form('login', tep_href_link(FILENAME_AFFILIATE, 'action=process', 'SSL')); ?>
-          <table border="0" width="100%" cellspacing="0" cellpadding="2"> 
+        <td><?php echo tep_draw_form('affiliate_login', tep_href_link(FILENAME_AFFILIATE, 'action=process', 'SSL')); ?>
+          <table border="0" width="100%" cellspacing="0" cellpadding="2" style="height:100%"> 
             <tr> 
               <td class="main" width="50%" valign="top"><b><?php echo HEADING_NEW_AFFILIATE; ?></b></td> 
               <td class="main" width="50%" valign="top"><b><?php echo HEADING_RETURNING_AFFILIATE; ?></b></td> 
             </tr> 
             <tr> 
               <td width="50%" height="100%" valign="top">
-                <table border="0" width="100%" height="100%" cellspacing="0" cellpadding="1" class="infoBox"> 
+                <table border="0" width="100%" cellspacing="0" cellpadding="1" class="infoBox" style="height:100%"> 
                   <tr> 
                     <td>
-                      <table border="0" width="100%" height="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"> 
+                      <table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents" style="height:100%"> 
                         <tr> 
                           <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td> 
                         </tr> 
@@ -65,10 +65,10 @@
                 </table>
               </td> 
               <td width="50%" height="100%" valign="top">
-                <table border="0" width="100%" height="100%" cellspacing="0" cellpadding="1" class="infoBox"> 
+                <table border="0" width="100%" cellspacing="0" cellpadding="1" class="infoBox" style="height:100%"> 
                   <tr> 
                     <td>
-                      <table border="0" width="100%" height="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"> 
+                      <table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents" style="height:100%"> 
                         <tr> 
                           <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td> 
                         </tr> 

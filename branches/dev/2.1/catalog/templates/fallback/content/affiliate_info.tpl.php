@@ -1,4 +1,4 @@
-          <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB; ?>"> 
+    <table border="0" width="100%" cellspacing="0" cellpadding="0"> 
       <tr> 
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>

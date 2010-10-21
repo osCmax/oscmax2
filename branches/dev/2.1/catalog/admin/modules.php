@@ -67,7 +67,7 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
             $module->remove();
           }
         }
-        tep_redirect(tep_href_link(FILENAME_MODULES, 'set=' . $set . '&amp;module=' . $class));
+        tep_redirect(tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $class));
         break;
     }
   }

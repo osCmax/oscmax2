@@ -252,7 +252,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 		  // Last Few Remaining Corner Banner
 		  if (CB_LAST_FEW == 'true') { 
 		    if ($listing[$x]['products_quantity'] <= CB_LAST_FEW_NO) {
-	 	      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/last_few.png">';
+	 	      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/last_few.png" alt="">';
             }	
 		  }
 		  // Top Rated Corner Banner
@@ -260,13 +260,13 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 		    $reviews_query = tep_db_query("select reviews_rating from " . TABLE_REVIEWS . " where products_id = '" . $listing[$x]['products_id'] . "'");
               $reviews = tep_db_fetch_array($reviews_query);
                 if ($reviews['reviews_rating'] >= CB_TOP_RATED_NO) {
-                  $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/top_rated.png">';
+                  $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/top_rated.png" alt="">';
                 }
 		  }
 		  // Featured Product Corner Banner
 		  if (CB_FEATURED == 'true') {
 		    if ($listing[$x]['products_featured'] == 1) {
-	 	      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/featured.png">';
+	 	      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/featured.png" alt="">';
             }	
 		  }
 		  // Special Offer Price Corner Banner
@@ -278,20 +278,20 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 			  $discount = ((($fullprice - $saleprice) / $fullprice) * 100);
 			  $rounded_discount = floor($discount / 5) * 5; 
 			    if ($rounded_discount >= CB_SPECIALS_NO) { 
-                  $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/save' . $rounded_discount . '.png">';
+                  $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/save' . $rounded_discount . '.png" alt="">';
 				}
             } 
 		  }
 		  // Call for Price Corner Banner
 		  if (CB_CALL_FOR_PRICE == 'true') {
 		    if ($listing[$x]['products_price'] == CALL_FOR_PRICE_VALUE) {
-		      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/callforprice.png">';
+		      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/callforprice.png" alt="">';
 		    }
 		  }
 		  // Out of Stock Corner Banner
 		  if (CB_OUT_OF_STOCK == 'true') {
 		    if ($listing[$x]['products_quantity'] == 0) {
-		      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/out_of_stock.png">';
+		      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/out_of_stock.png" alt="">';
 		    }
 		  }	
 		  break;
@@ -432,7 +432,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
   if ( ($listing_split->number_of_rows > 0) && ((PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3')) ) {
 ?>
 
-<table border="0" width="100%" cellspacing="0" cellpadding="0" border="0">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
   <tr>
     <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
   </tr>

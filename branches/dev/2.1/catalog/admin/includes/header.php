@@ -82,18 +82,6 @@
 
 	$("#categorytabs").tabs();
 
-/* Show/Hide for QPBPP for SPPC */
-	$('#show0').click(function(){ $('#row-1').show(); $('#show0').hide(); });
-	$('#show1').click(function(){ $('#row-2').show(); $('#show1').hide(); });
-	$('#show2').click(function(){ $('#row-3').show(); $('#show2').hide(); });
-	$('#show3').click(function(){ $('#row-4').show(); $('#show3').hide(); });
-	$('#show4').click(function(){ $('#row-5').show(); $('#show4').hide(); });
-	$('#show5').click(function(){ $('#row-6').show(); $('#show5').hide(); });
-	$('#show6').click(function(){ $('#row-7').show(); $('#show6').hide(); });
-	$('#show7').click(function(){ $('#row-8').show(); $('#show7').hide(); });
-	$('#show8').click(function(){ $('#row-9').show(); $('#show8').hide(); });
-	$('#show9').click(function(){ $('#row-10').show(); $('#show9').hide(); });
-
 //Code for EPF show/hide list functions
 var toggle = $("input[name='yestoggle']:checked").val();
 if (toggle == 0) {

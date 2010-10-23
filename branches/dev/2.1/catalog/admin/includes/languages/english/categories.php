@@ -90,6 +90,12 @@ define('TEXT_PRODUCTS_WIDTH', 'Width:');
 define('TEXT_PRODUCTS_READY_TO_SHIP', 'Ready to ship:<br/>(Fedex)');
 define('TEXT_PRODUCTS_READY_TO_SHIP_SELECTION', 'Product can be shipped in its own container.');
 
+// BOF Separate Pricing Per Customer
+define('TEXT_CUSTOMERS_GROUPS_NOTE', 'Note that if a field is left empty, no price for that customer group will be inserted in the database.<br />
+If a field is filled, but the checkbox is unchecked no price will be inserted either.<br />
+If a price is already inserted in the database, but the checkbox unchecked it will be removed from the database.');
+// EOF Separate Pricing Per Customer
+
 define('EMPTY_CATEGORY', 'Empty Category');
 
 define('TEXT_HOW_TO_COPY', 'Copy Method:');

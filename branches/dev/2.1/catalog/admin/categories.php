@@ -722,6 +722,14 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
               tep_db_perform(TABLE_PRODUCTS_DESCRIPTION, $description);
             }
 
+// BOF: PGM Adds code to copy QPBPP for SPPC
+            $qpbpp_query = tep_db_query("select * from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id = '" . (int)$products_id . "'");
+            while ($qpbpp = tep_db_fetch_array($qpbpp_query)) {
+			  tep_db_query("insert into " . TABLE_PRODUCTS_PRICE_BREAK . " (products_id, products_price, products_qty, customers_group_id) values ('" . (int)$dup_products_id . "', '" . $qpbpp['products_price'] . "', '" . tep_db_input($qpbpp['products_qty']) . "', '" . tep_db_input($qpbpp['customers_group_id']) . "')");	
+			}
+// BOF: PGM Adds code to copy QPBPP for SPPC
+		
+
 //	      tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
 
             tep_db_query("insert into " . TABLE_PRODUCTS_TO_CATEGORIES . " (products_id, categories_id) values ('" . (int)$dup_products_id . "', '" . (int)$categories_id . "')");
@@ -1570,10 +1578,9 @@ function updateMSRPNet() {
 <?php
     $i = 0; // for alternate coloring of rows (zebra striping)
     for ($count = 0; $count <= (PRICE_BREAK_NOF_LEVELS - 1); $count++) {
-      $bgcolor = ($i++ & 1) ? '#ebebff' : '#ffffff'; // for zebra striping
-	  if ($count > 0) $display = 'none';	  
+      $bgcolor = ($i++ & 1) ? '#ebebff' : '#ffffff'; // for zebra striping	  
 ?>
-                      <tr bgcolor="<?php echo $bgcolor; ?>" style="display:<?php echo $display; ?>" id="row-<?php echo $count; ?>">
+                      <tr bgcolor="<?php echo $bgcolor; ?>">
                         <td class="main"><?php echo TEXT_PRODUCTS_PRICE  . " " . ($count + 1); ?></td>
                         <td class="main" align="left"> <?php
                             if(is_array($pInfo->products_price_break[$CustGroupID]) && array_key_exists($count, $pInfo->products_price_break[$CustGroupID])) {
@@ -1591,11 +1598,7 @@ function updateMSRPNet() {
                               echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;
                               echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
                             } 
-							if ($count < PRICE_BREAK_NOF_LEVELS - 1) {
-							  echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_image(DIR_WS_ICONS . 'plus.png', TEXT_ADD_PL, '', '', 'id="show' . $count . '"');
-							}
 							?>
-                            
                         </td>
                       </tr>
 <?php

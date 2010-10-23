@@ -708,14 +708,21 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 
 // Tabs by PGM LINE EDIT
 // LINE MODED: Open Feature Sets: Added "products_short"
-            $description_query = tep_db_query("select language_id, products_name, products_description, products_short, tab1, tab2, tab3, tab4, tab5, tab6, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
+//            $description_query = tep_db_query("select language_id, products_name, products_description, products_short, tab1, tab2, tab3, tab4, tab5, tab6, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
+// LINE MODED: description copy modified to work with Extra Product Fields
+            $description_query = tep_db_query("select * from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
 //          $description_query = tep_db_query("select language_id, products_name, products_description, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
             while ($description = tep_db_fetch_array($description_query)) {
 // Tabs by PGM LINE EDIT
 // LINE MODED: Open Feature Sets: Added "products_short"
-              tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_short, tab1, tab2, tab3, tab4, tab5, tab6, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_short']) . "', '" . tep_db_input($description['tab1']) . "', '" . tep_db_input($description['tab2']) . "', '" . tep_db_input($description['tab3']) . "', '" . tep_db_input($description['tab4']) . "', '" . tep_db_input($description['tab5']) . "', '" . tep_db_input($description['tab6']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
-//	      tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
+//              tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_short, tab1, tab2, tab3, tab4, tab5, tab6, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_short']) . "', '" . tep_db_input($description['tab1']) . "', '" . tep_db_input($description['tab2']) . "', '" . tep_db_input($description['tab3']) . "', '" . tep_db_input($description['tab4']) . "', '" . tep_db_input($description['tab5']) . "', '" . tep_db_input($description['tab6']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
+// LINE MODED: Extra product Fields fix when copying duplicates
+              $description['products_id'] = $dup_products_id;
+              $description['products_viewed'] = 0;
+              tep_db_perform(TABLE_PRODUCTS_DESCRIPTION, $description);
             }
+
+//	      tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
 
             tep_db_query("insert into " . TABLE_PRODUCTS_TO_CATEGORIES . " (products_id, categories_id) values ('" . (int)$dup_products_id . "', '" . (int)$categories_id . "')");
             $products_id = $dup_products_id;

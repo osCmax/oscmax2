@@ -23,18 +23,20 @@ if ($num_products_ap != 0) { // Check query is not blank
 	  $div3rows_ap = $div3_ap - $div3check_ap;
   // PGM END
   
-      if ($total_products_ap <= 3) { ?>
-	    <style>
-	      a.left_ap, a.right_ap { visibility:hidden !important; }
-	    </style>  
-<?php }
-
     if ($num_products_ap >= MIN_DISPLAY_ALSO_PURCHASED) { 
 
       if (USE_AP_HORIZ_SCROLLER == 'true') {
 	?>
     <!-- ap_products //-->
-    
+    <style>
+	.scrollable_ap { width: <?php echo SCROLLER_WIDTH; ?>px; height: <?php echo SCROLLER_HEIGHT; ?>px }
+	.items_ap div { width: <?php echo SCROLLER_WIDTH; ?>px; }
+	a.browse_ap { margin: <?php echo (SCROLLER_HEIGHT - 56)/2; ?>px 0px; /* Set the margin to height of scroller - height of buttons (56) / 2;  */ }
+    <?php if ($total_products_ap <= 3) { ?>
+	      a.left_ap, a.right_ap { visibility:hidden !important; }
+    <?php } ?>
+	</style>
+
     <?php
       $info_box_contents = array();
       $info_box_contents[] = array('align' => 'left', 'text' => '&nbsp;' . TEXT_ALSO_PURCHASED_PRODUCTS);

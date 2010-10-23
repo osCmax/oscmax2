@@ -22,18 +22,21 @@ if ($num_products_xsell != 0) { // Check query is not blank
 	  $div3check_xs = $div3_xs - $div3main_xs;
 	  $div3rows_xs = $div3_xs - $div3check_xs;
   // PGM END	
-
-      if ($total_products_xs <= 3) { ?>
-	    <style>
-	      a.left, a.right { visibility:hidden !important; }
-	    </style>  
-<?php }
-
+  
     if ($num_products_xsell >= MIN_DISPLAY_ALSO_PURCHASED) { 
 
       if (USE_XSELL_HORIZ_SCROLLER == 'true') {
 	?>
     <!-- xsell_products //-->
+    <style>
+	.scrollable { width: <?php echo SCROLLER_WIDTH; ?>px; height: <?php echo SCROLLER_HEIGHT; ?>px }
+	.items div { width: <?php echo SCROLLER_WIDTH; ?>px; }
+	 a.browse { margin: <?php echo (SCROLLER_HEIGHT - 56)/2; ?>px 0px; /* Set the margin to height of scroller - height of buttons 56 / 2;  */ }
+    <?php if ($total_products_xs <= 3) { ?>
+	      a.left, a.right { visibility:hidden !important; }
+    <?php } ?>
+	</style>
+
     
     <?php
       $info_box_contents = array();

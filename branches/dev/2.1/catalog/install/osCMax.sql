@@ -2172,6 +2172,8 @@ INSERT INTO configuration VALUES (2656, 'Display the queries used and Variables 
 INSERT INTO configuration VALUES (2657, 'Default Tax Class', 'DEFAULT_PRODUCT_TAX_CLASS', '1', 'Sets the default tax class used for new products.', '1', '22', now(), now(), 'tep_get_tax_class_title', 'tep_cfg_pull_down_tax_classes(');
 INSERT INTO configuration VALUES (2658, 'Do you want to use a scroller in Also Purchased module on product info?', 'USE_AP_HORIZ_SCROLLER', 'false', 'Would you like to use a scroller on the Also Purchased infobox?', 201, 27, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
 INSERT INTO configuration VALUES (2659, 'Show More Info button?', 'SHOW_MORE_INFO', 'True', 'Do you want to display a More Info button next to your Buy Now button that links through to your products to display the full product information?<br><br>Please note that Buy Now button has to be enabled for this to work.', 8, 10, NULL,now(),NULL,'tep_cfg_select_option(array(''True'', ''False''),');
+INSERT INTO configuration VALUES (2660, 'Scroller Width', 'SCROLLER_WIDTH', '590', 'What width should the horizontal scroller be in pixels?  (Only enter the number)', 201, 28, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2661, 'Scroller Height', 'SCROLLER_HEIGHT', '160', 'What height should the horizontal scroller be in pixels?  (Only enter the number)', 201, 29, now(), now(), NULL, NULL);
 
 
 #Open Feature Sets Start

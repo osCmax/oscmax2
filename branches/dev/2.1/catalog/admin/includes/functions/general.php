@@ -1043,6 +1043,80 @@ function tep_selected_file($filename) {
     return $string;
   }
 
+// USPS Methods 3.0
+// Alias function for Store configuration values in the Administration Tool
+  function tep_cfg_select_multioption($select_array, $key_value, $key = '') {
+    for ($i=0; $i<sizeof($select_array); $i++) {
+      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+      $string .= '<br><input type="checkbox" name="' . $name . '" value="' . $select_array[$i] . '"';
+      $key_values = explode( ", ", $key_value);
+      if ( in_array($select_array[$i], $key_values) ) $string .= ' CHECKED';
+      $string .= '> ' . $select_array[$i];
+    }
+    $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
+    return $string;
+  }
+
+// USPS Methods.  Added by Greg Deeth
+// Alias function for Store configuration values in the Administration Tool.
+// Creates multiple text input boxes in a list.
+// Remember to add blank default values: 1, 2, , , 5, 6, ...
+  function tep_cfg_multiinput_list($select_array, $key_value, $key = '') {
+    $key_values = explode( ", ", $key_value);
+
+    for ($i=0; $i<sizeof($select_array); $i++) {
+      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+      $string .= '<br><input type="text" name="' . $name . '" value="' . $key_values[$i] . '"> ' . $select_array[$i];
+    }
+    $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
+    return $string;
+  }
+
+// USPS Methods.  Added by Greg Deeth
+// Alias function for Store configuration values in the Administration Tool.
+// Creates a text input box on either side of the option, adds <= OPTION <= and makes a list.
+// Remember to add blank default values: 1, 2, , , 5, 6, ...
+  function tep_cfg_multiinput_duallist_oz($select_array, $key_value, $key = '') {
+    $key_values = explode( ", ", $key_value);
+    $string .= '<center>';
+
+    for ($i=0; $i<sizeof($select_array); $i++) {
+        $current_key_value = current($key_values);
+
+      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+      $string .= '<br><input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
+        $string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
+        next($key_values);
+        $current_key_value = current($key_values);
+        $string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
+        next($key_values);
+    }
+    $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
+
+    $string .= '</center>';
+    return $string;
+  }
+  function tep_cfg_multiinput_duallist_lb($select_array, $key_value, $key = '') {
+    $key_values = explode( ", ", $key_value);
+    $string .= '<center>';
+
+    for ($i=0; $i<sizeof($select_array); $i++) {
+        $current_key_value = current($key_values);
+
+      $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+      $string .= '<br><input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
+        $string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
+        next($key_values);
+        $current_key_value = current($key_values);
+        $string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
+        next($key_values);
+    }
+    $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
+
+    $string .= '</center>';
+    return $string;
+  }
+
 ////
 // Retreive server information
   function tep_get_system_information() {

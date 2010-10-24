@@ -12,7 +12,15 @@
 
 <head>
 
-<?php require(DIR_WS_INCLUDES . 'meta_tags.php'); ?>
+<?php require(DIR_WS_INCLUDES . 'meta_tags.php'); 
+
+//Page Name variable - places current php file name into a variable
+  $page =  $_SERVER["SCRIPT_NAME"];
+  $break = Explode('/', $page);
+  $pfile = $break[count($break) - 1];
+  //echo $pfile; //debug code - displays current page name. 
+
+?>
 <title><?php echo META_TAG_TITLE; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <meta name="keywords" content="<?php echo META_TAG_KEYWORDS; ?>">
@@ -29,16 +37,10 @@
 if ( defined('FWR_SUCKERTREE_MENU_ON') && FWR_SUCKERTREE_MENU_ON === 'true' )
 echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet', 'fwr_suckertree_css_menu.css')) . '" />';
 ?>
+ 
 </head>
 <body>
 
- <?php
- if (DISPLAY_DHTML_MENU == 'CoolMenu') {
-    echo '<!-- coolMenu //-->';
- 	require(DIR_WS_INCLUDES . 'coolmenu.php');
-	echo '<!-- coolMenu_eof //-->';
- }
- ?>
 <!-- warnings //-->
 <?php require(DIR_WS_INCLUDES . 'warnings.php'); ?>
 <!-- warning_eof //-->
@@ -216,10 +218,6 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
   if (isset($javascript) && file_exists(DIR_WS_JAVASCRIPT . basename($javascript))) { require(DIR_WS_JAVASCRIPT . basename($javascript)); }
 
   }
-  $page =  $_SERVER["SCRIPT_NAME"];
-  $break = Explode('/', $page);
-  $pfile = $break[count($break) - 1];
-  //echo $pfile; //debug code - displays current page name.
   
   if ($pfile == 'index.php') {
     if (DISPLAY_SLIDESHOW == true) {
@@ -232,13 +230,6 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
         require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
     }
   }
-
-  if (DISPLAY_DHTML_MENU == 'CoolMenu') {
-    echo '<link rel="stylesheet" type="text/css" href="' . DIR_WS_TEMPLATES . 'coolmenu.css">';
-    echo '<!-- coolMenu //-->';
- 	echo '<script type="text/javascript" SRC="includes/coolMenu.js"></SCRIPT>';
-	echo '<!-- coolMenu_eof //-->';
- }
  
  if (GOOGLE_ANALYTICS_STATUS == 'true') { ?>
     <!-- BOF: Google Analytics Code -->

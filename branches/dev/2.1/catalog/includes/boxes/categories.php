@@ -21,12 +21,6 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
      echo tep_cache_categories_box();
    } else {
 
-     if ( DISPLAY_DHTML_MENU == 'Dhtml' ) {
-       include(DIR_WS_BOXES . 'categories_dhtml.php');
-   } elseif (DISPLAY_DHTML_MENU == 'CoolMenu') {
- 	  include(DIR_WS_BOXES . 'coolmenu.php');
-   } else {
-
   $catlevel = 0;
   $boxHeading = BOX_HEADING_CATEGORIES;
   
@@ -203,7 +197,6 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
 
 
 include (bts_select('boxes', $box_base_name)); // BTS 1.5
-}
 }
 
 	$boxContent .= '</table>';

@@ -431,14 +431,6 @@ if (GOOGLE_ANALYTICS_STATUS == 'true') { ?>
     }
   }
 //end{slideshow}
-//begin{coolmenu}
-  if (DISPLAY_DHTML_MENU == 'CoolMenu') {
-    echo '<link rel="stylesheet" type="text/css" href="' . DIR_WS_TEMPLATES . 'coolmenu.css">';
-    echo '<!-- coolMenu //-->';
- 	echo '<script type="text/javascript" SRC="includes/coolMenu.js"></SCRIPT>';
-	echo '<!-- coolMenu_eof //-->';
- }
-//end{coolmenu}
 //begin{sbcustom}
 include(DIR_WS_INCLUDES . 'javascript/sbcustom.php');
 //end{sbcustom}

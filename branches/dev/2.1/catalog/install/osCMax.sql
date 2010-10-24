@@ -1895,7 +1895,6 @@ INSERT INTO configuration VALUES (502,'Extra Image Pattern','DYNAMIC_MOPICS_PATT
 
 INSERT INTO configuration VALUES (458,'Template Switching Allowed','TEMPLATE_SWITCHING_ALLOWED','false','Allow template switching through the url (for easy new template testing).',201,2,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (457,'Default Template Directory','DIR_WS_TEMPLATES_DEFAULT','fallback','Subdirectory (in templates/) where the template files are stored which should be loaded by default.',201,1,NULL,now(),NULL,'tep_cfg_pull_down_templates(');
-INSERT INTO configuration VALUES (231,'Enable Display a Dhtml menu','DISPLAY_DHTML_MENU','Default','Do you want to display a DHTML menu instead of the default text based?',1,19,NULL,now(),NULL,'tep_cfg_select_option(array(\'Default\',\'Dhtml\',\'CoolMenu\'),');
 
 INSERT INTO configuration VALUES (358,'Downloads Controller Update Status Value','DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE','100000','What orders_status resets the Download days and Max Downloads - Default is 4',13,90,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (359,'Downloads Controller Download on hold message','DOWNLOADS_CONTROLLER_ON_HOLD_MSG','<BR><font color="FF0000">NOTE: Downloads are not available until payment has been confirmed</font>','Downloads Controller Download on hold message',13,91,NULL,now(),NULL,NULL);

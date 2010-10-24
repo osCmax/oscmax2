@@ -189,7 +189,7 @@
         <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '10'); ?></td>
         <!-- Central Spacer End -->
         
-        <td valign="top" width="100%">
+        <td valign="top">
         
         <!-- Right Column Starts -->
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -292,6 +292,7 @@
             
             <!-- Conditional Ask a Question Ends -->
           </table>        
+        <?php echo tep_draw_separator('pixel_trans.gif', '325', '1'); ?>
         <!-- Right Column Ends -->
         </td>
       </tr>

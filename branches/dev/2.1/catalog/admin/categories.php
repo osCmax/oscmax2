@@ -800,6 +800,7 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 	<link rel="stylesheet" href="../slimbox2/slimbox2.css" type="text/css" media="screen">
     <script type="text/javascript" src="../slimbox2/jquery.js"></script>
 	<script type="text/javascript" src="../slimbox2/slimbox2.js"></script>
+    <?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
 <!--// SLIMBOX2 -->
 <?php 
 // BOF: Extra Product Fields

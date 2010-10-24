@@ -4,6 +4,7 @@
   google.load("jquery", "1.4.2");
 </script>
 <script type="text/javascript" src="includes/javascript/slimbox2/slimbox2.js"></script>
+<?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
 <script type="text/javascript" src="includes/javascript/jquery.scrollTo-min.js"></script>
 <script type="text/javascript" src="includes/javascript/jquery.serialScroll-min.js"></script>
 <script type="text/javascript" src="includes/javascript/jqzoom.pack.1.0.1.js"></script>

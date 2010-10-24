@@ -4,6 +4,7 @@
   google.load("jquery", "1.4.0");
 </script>
 <script type="text/javascript" src="includes/javascript/slimbox2/slimbox2.js"></script>
+<?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','slimbox2.css')); // BTSv1.5 ?>">
 <script type="text/javascript">
 function popupWindow(url) {

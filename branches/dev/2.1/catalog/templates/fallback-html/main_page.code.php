@@ -64,6 +64,7 @@ if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exist
 <!-- BOF SLIMBOX2 -->
 <script type="text/javascript" src="slimbox2/jquery.js"></script>
 <script type="text/javascript" src="slimbox2/slimbox2.js"></script>
+<?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
 <link rel="stylesheet" href="slimbox2/slimbox2.css" type="text/css" media="screen" />
 <!-- EOF SLIMBOX2 -->
 <?php

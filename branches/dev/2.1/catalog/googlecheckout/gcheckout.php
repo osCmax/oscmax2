@@ -36,7 +36,7 @@
 //error_reporting(E_ALL);
 //require_once('admin/includes/configure.php');
 //require_once('includes/configure.php');
-require_once('includes/languages/'. $language .'/modules/payment/googlecheckout.php');
+require_once('includes/languages/'. $language .'/googlecheckout.php');
 require_once('includes/modules/payment/googlecheckout.php');
 
 // Function which returns the current URL.

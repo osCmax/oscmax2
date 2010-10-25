@@ -77,6 +77,7 @@ function get_response_handler_url() {
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="../googlecheckout/library/configuration/dashboard.css"/>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <script type="text/javascript" src="../googlecheckout/library/configuration/shipping_options.js"/>
 <script language="javascript" src="includes/general.js"></script>
 </head>

@@ -63,17 +63,18 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr class="header">
     <td valign="middle"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . STORE_LOGO, STORE_NAME) . '</a>'; ?></td>
-    <td align="right" valign="bottom">
+    <td class="nav_tabs">
 	<?php if ((tep_session_is_registered('customer_id')) && (!tep_session_is_registered('noaccount'))) { ?>
       <a href="<?php echo tep_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><?php echo tep_image(DIR_WS_ICONS . 'log_off.png', HEADER_TITLE_LOGOFF);?></a>
     <?php } ?>
-	<?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'account.png', HEADER_TITLE_MY_ACCOUNT) . '</a> <a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_ICONS . 'contents.png', HEADER_TITLE_CART_CONTENTS) . '</a> <a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'checkout.png', HEADER_TITLE_CHECKOUT) . '</a> <a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'wishlist.png', HEADER_TITLE_WISHLIST) . '</a>'; ?>&nbsp;&nbsp;</td>
+	<?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US) . '">' . tep_image(DIR_WS_ICONS . 'contact.png', HEADER_TITLE_CART_CONTENTS) . '</a> <a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'account.png', HEADER_TITLE_MY_ACCOUNT) . '</a> <a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_ICONS . 'cart_contents.png', HEADER_TITLE_CART_CONTENTS) . '</a> <a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'wishlist.png', HEADER_TITLE_WISHLIST) . '</a> <a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'checkout.png', HEADER_TITLE_CHECKOUT) . '</a>'; ?>&nbsp;&nbsp;</td>
   </tr>
 </table>
-<table border="0" width="100%" cellspacing="0" cellpadding="1">
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr class="headerNavigation">
-    <td class="headerNavigation">&nbsp;&nbsp;<?php echo $breadcrumb->trail(' &raquo; '); ?></td>
-    <td align="right" class="headerNavigation">&nbsp;</td>
+    <td class="breadcrumb_left" width="5">&nbsp;</td>
+    <td class="breadcrumb">&nbsp;&nbsp;<?php echo $breadcrumb->trail(' &raquo; '); ?></td>
+    <td class="breadcrumb_right" width="5">&nbsp;</td>
   </tr>
 </table>
 <!-- header_eof //-->

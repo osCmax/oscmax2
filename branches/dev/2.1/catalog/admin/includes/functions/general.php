@@ -1316,6 +1316,9 @@ function tep_selected_file($filename) {
     tep_db_query("delete from " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " where orders_id = '" . (int)$order_id . "'");
     tep_db_query("delete from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$order_id . "'");
     tep_db_query("delete from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . (int)$order_id . "'");
+    // *** BEGIN GOOGLE CHECKOUT ***
+    require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/includes/functions/general.php');
+    // *** END GOOGLE CHECKOUT ***
   }
 
 //  function tep_reset_cache_block($cache_block) {

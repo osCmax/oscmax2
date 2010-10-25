@@ -137,8 +137,17 @@
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
+  // *** BEGIN GOOGLE CHECKOUT ***
+  // Skips Google Checkout as a payment option on the payments page since that option
+  // is provided in the checkout page.
   $selection = $payment_modules->selection();
-
+  for ($i = 0, $n = sizeof($selection); $i < $n; $i++) {
+    if ($selection[$i]['id'] == 'googlecheckout') {
+      array_splice($selection, $i, 1);
+      break;   
+    }
+  }
+  // *** END GOOGLE CHECKOUT ***
   if (sizeof($selection) > 1) {
 ?>
               <tr>

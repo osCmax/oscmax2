@@ -12,6 +12,9 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
+  // *** BEGIN GOOGLE CHECKOUT ***
+  require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/modules1.php');
+  // *** END GOOGLE CHECKOUT ***
   $set = (isset($_GET['set']) ? $_GET['set'] : '');
 
   if (tep_not_null($set)) {
@@ -43,6 +46,9 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
   if (tep_not_null($action)) {
     switch ($action) {
       case 'save':
+        // *** BEGIN GOOGLE CHECKOUT ***
+        require(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/modules2.php');
+        // *** END GOOGLE CHECKOUT ***
         while (list($key, $value) = each($_POST['configuration'])) {
 // BOF: LINES ADDED
           if( is_array( $value ) ){

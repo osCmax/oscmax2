@@ -72,7 +72,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 </table>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr class="headerNavigation">
-    <td class="breadcrumb_left" width="5">&nbsp;</td>
+    <td class="breadcrumb_left" width="5"><?php echo tep_draw_separator('pixel_trans.gif', '1', '24'); ?></td>
     <td class="breadcrumb">&nbsp;&nbsp;<?php echo $breadcrumb->trail(' &raquo; '); ?></td>
     <td class="breadcrumb_right" width="5">&nbsp;</td>
   </tr>

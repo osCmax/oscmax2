@@ -25,7 +25,7 @@ FORM { display: inline; }
 /* Header */
 TR.header { background: #ffffff; }
 td.nav_tabs { text-align: right; vertical-align: bottom; font-size: 2px; padding-right: 5px; }
-td.breadcrumb { background-image:url(images/breadcrumb_background.png); background-repeat:repeat-x; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight : bold; height: 22px; border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd; }
+td.breadcrumb { background-image:url(images/breadcrumb_background.png); background-repeat:repeat-x; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight : bold; border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd; }
 td.breadcrumb_left { background-image:url(images/breadcrumb_left.png); }
 td.breadcrumb_right { background-image:url(images/breadcrumb_right.png); }
 TR.headerNavigation { background: #ffffff; }

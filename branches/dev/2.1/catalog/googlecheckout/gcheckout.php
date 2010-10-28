@@ -364,7 +364,7 @@ if(DOWNLOAD_ENABLED != 'true' || $cart->get_content_type() != 'virtual') {
   for ($i = 0, $n = sizeof($directory_array); $i < $n; $i++) {
     $file = $directory_array[$i];
 
-    include_once (DIR_FS_CATALOG .DIR_WS_LANGUAGES . $language . '/modules/shipping/' . $file);
+    include_once (DIR_FS_CATALOG .DIR_WS_LANGUAGES . $language . '/' . $file);
     include_once ($module_directory . $file);
 
     $class = substr($file, 0, strrpos($file, '.'));

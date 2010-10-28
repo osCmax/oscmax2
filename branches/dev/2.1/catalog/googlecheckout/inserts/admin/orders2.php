@@ -26,7 +26,7 @@
  * TODO(eddavisson): Test!
  */
 chdir("./..");
-require_once(DIR_WS_LANGUAGES . $language . '/modules/payment/googlecheckout.php');
+require_once(DIR_WS_LANGUAGES . $language . '/googlecheckout.php');
 require_once(DIR_FS_CATALOG . '/googlecheckout/library/configuration/google_configuration.php');
 require_once(DIR_FS_CATALOG . '/googlecheckout/library/configuration/google_configuration_keys.php');
   

@@ -64,6 +64,8 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('CONTENT_TELL_A_FRIEND', 'tell_a_friend');
   define('CONTENT_UPCOMING_PRODUCTS', 'upcoming_products');
   define('CONTENT_CHECKOUT_PROCESS', 'checkout_process');
+// LINE ADDED: Google Checkout
+  define('CONTENT_GC_RETURN', 'gc_return');
   define('CONTENT_GV_FAQ', 'gv_faq');
   define('CONTENT_GV_REDEEM', 'gv_redeem');
   define('CONTENT_GV_SEND', 'gv_send');
@@ -134,6 +136,8 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('FILENAME_DEFAULT', 'index.php');
   define('FILENAME_DEFAULT_SPECIALS', 'default_specials.php');
   define('FILENAME_DOWNLOAD', CONTENT_DOWNLOAD . '.php');
+// LINE ADDED: Google Checkout
+  define('FILENAME_GC_RETURN', CONTENT_GC_RETURN . '.php');
   define('FILENAME_INFO_SHOPPING_CART', CONTENT_INFO_SHOPPING_CART . '.php');
   define('FILENAME_LOGIN', CONTENT_LOGIN . '.php');
   define('FILENAME_LOGOFF', CONTENT_LOGOFF . '.php');

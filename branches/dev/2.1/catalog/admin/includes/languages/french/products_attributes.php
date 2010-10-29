@@ -34,4 +34,6 @@ define('TEXT_WARNING_OF_DELETE', 'Certains produits utilisent cette option - il 
 define('TEXT_OK_TO_DELETE', 'Cette option n\'est utilis&eacute;e par aucun produit - Il est possible de la supprimer.');
 define('TEXT_OPTION_ID', 'ID option');
 define('TEXT_OPTION_NAME', 'Nom de l\'option');
+define('TABLE_HEADING_OPT_TYPE', 'Type');
+define('TABLE_HEADING_OPT_LENGTH', 'Length');
 ?>

@@ -35,6 +35,8 @@ define('TEXT_OK_TO_DELETE', 'Mit dieser Option sind keine Artikel, sowie Options
 define('TEXT_OPTION_ID', 'Options ID');
 define('TEXT_OPTION_NAME', 'Optionsname');
 
+define('TABLE_HEADING_OPT_TYPE', 'Type');
+define('TABLE_HEADING_OPT_LENGTH', 'Length');
 // START: More Product Weight
 define('TABLE_HEADING_OPT_WEIGHT', 'Gewicht');
 define('TABLE_HEADING_OPT_WEIGHT_PREFIX', '+/-');

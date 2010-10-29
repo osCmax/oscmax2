@@ -8,7 +8,7 @@
         osCMax Power E-Commerce
         http://oscdox.com
 
-      Copyright 2006 osCMax2004, 2005 Ralph Day
+      Copyright 2010 osCMax
       Released under the GNU General Public License
 
       Based on prior works released under the GNU General Public License:
@@ -29,9 +29,8 @@
       QT Pro Product Attributes Display Plugin
 
       pad_base.php - Base Class
-
-      Class Name: pad_base
-
+  
+      Class Name: pad_base_options
       This base class, although functional, is not intended to be installed and used
       directly.  It is extended by other classes to provide different display options
       for product attributes on the product information page (product_info.php).
@@ -87,10 +86,11 @@
     function pad_base($products_id=0) {
       $this->products_id = $products_id;
       if ($this->products_id != 0) {
-        $tax_class_query = tep_db_query('SELECT p.products_tax_class_id, IF(s.status, s.specials_new_products_price, p.products_price) as products_price FROM ' . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id WHERE p.products_id = '" . (int)$products_id . "'");
+        $tax_class_query = tep_db_query('SELECT products_tax_class_id 
+                                         FROM ' . TABLE_PRODUCTS . " 
+                                         WHERE products_id = '" . (int)$products_id . "'");
         $tax_class_array = tep_db_fetch_array($tax_class_query);
         $this->products_tax_class_id = $tax_class_array['products_tax_class_id'];
-        $this->products_original_price = $tax_class_array['products_price'];
       }
       $this->_SetConfigurationProperties('PRODINFO_ATTRIBUTE_');
     }
@@ -121,13 +121,6 @@
 
     Draws the product attributes.  This is the only method other than the constructor that is
     intended to be called by a user of this class.
-
-    Attributes that stock is tracked for are grouped first and drawn with one dropdown list per
-    attribute.  All attributes are drawn even if no stock is available for the attribute and no
-    indication is given that the attribute is out of stock.
-
-    Attributes that stock is not tracked for are then drawn with one dropdown list per
-    attribute.
 
     Parameters:
 
@@ -161,9 +154,10 @@
 
 */
     function _draw_table_start() {
-      $out ='           <table border="0" cellspacing="0" cellpadding="2" width="100%">';
+      $out ='           <table class="options" border="0" cellspacing="0" cellpadding="2">';
+      $out.='            <tbody>';
       $out.='            <tr>';
-      $out.='             <td class="main" colspan="2"><b>' . TEXT_PRODUCT_OPTIONS . '</b></td>';
+      $out.='             <td class="options" colspan="2">' . TEXT_PRODUCT_OPTIONS . '</td>';
       $out.='            </tr>';
       return $out;
     }
@@ -172,9 +166,7 @@
 
     Draws the product attributes that stock is tracked for.
     Intended for class internal use only.
-
-    Attributes that stock is tracked for are drawn with one dropdown list per attribute.
-    All attributes are drawn even if no stock is available for the attribute and no
+    All attributes are drawn even if no stock is available for the attribute and no 
     indication is given that the attribute is out of stock.
 
     Parameters:
@@ -192,7 +184,55 @@
       $attributes = $this->_build_attributes_array(true, false);
       if (sizeof($attributes)>0) {
         foreach ($attributes as $stocked) {
-          $out .= '<tr><td align="right" class="main"><b>' . $stocked['oname'] . ':</b></td><td align="left">' . tep_draw_pull_down_menu('id['.$stocked['oid'].']',array_values($stocked['ovals']),$stocked['default']) . '</td></tr>';
+          switch ($stocked['otype']) {
+			  
+          case 1: //PRODUCTS_OPTIONS_TYPE_TEXT - not applicable to track stock
+            $out .= '<tr class="options"><td align="right" class="options">' . "</td></tr>\n";
+          break;
+		   
+          case 2: //PRODUCTS_OPTIONS_TYPE_TEXTAREA - not applicable to track stock
+            $out .= '<tr class="options"><td align="right" class="options">' . "</td></tr>\n";
+          break;
+		   
+	  case 3: //PRODUCTS_OPTIONS_TYPE_RADIO:
+			$tmp_html = '';
+			$checked = true;
+            foreach ($stocked['ovals'] as $products_options_array) {
+              $tmp_html .= '';
+              $tmp_html .= tep_draw_radio_field('id[' . $stocked['oid'] . ']', $products_options_array['id'], $checked);
+              $checked = false;
+              $tmp_html .= $products_options_array['text'] ;
+              $tmp_html .=$products_options_name['products_options_comment'] ;
+              $tmp_html .= '&nbsp;';
+            }
+            $tmp_html .= '<br/>';
+            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $stocked['oname'] . ':</h4></td><td class="options">' . $tmp_html . '</td></tr>';
+	  break;
+			
+          case 4: //PRODUCTS_OPTIONS_TYPE_CHECKBOX:
+			$tmp_html = '';
+            foreach ($stocked['ovals'] as $products_options_array) {
+              $tmp_html .= '';
+              $tmp_html .= tep_draw_checkbox_field('id[' . $stocked['oid'] . ']', $products_options_array['id']);
+              $tmp_html .= $products_options_array['text'] ;
+              $tmp_html .=$products_options_name['products_options_comment'] ;
+              $tmp_html .= '&nbsp;';
+            }
+            $tmp_html .= '';
+            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $stocked['oname'] . ':</h4></td>
+			<td class="options">' . $tmp_html . '</td></tr>';
+	  break;
+		   
+	  case 5: //PRODUCTS_OPTIONS_TYPE_FILE - not applicable to track stock
+            $out .= '<tr class="options"><td align="right" class="options">' . "</td></tr>\n";
+          break;
+          	  
+          default: //Select
+			$out .= '<tr class="options"><td align="right" class="options">
+				<h4>' . $stocked['oname'] . ':</h4></td><td class="options">' . 
+				tep_draw_pull_down_menu('id['.$stocked['oid'].']',array_values($stocked['ovals']),$stocked['default']) .
+				'</td></tr>';
+		  }
         }
       }
       return $out;
@@ -202,9 +242,7 @@
 
     Draws the product attributes that stock is not tracked for.
     Intended for class internal use only.
-
-    Attributes that stock is not tracked for are drawn with one dropdown list per attribute.
-
+  
     Parameters:
 
       none
@@ -217,9 +255,88 @@
     function _draw_nonstocked_attributes() {
       $out='';
       $nonstocked_attributes = $this->_build_attributes_array(false, true);
-      foreach($nonstocked_attributes as $nonstocked)
-      {
-        $out.='<tr><td align="right" class="main"><b>' . $nonstocked['oname'] . ':</b></td><td align="left">' . tep_draw_pull_down_menu('id['.$nonstocked['oid'] . ']',$nonstocked['ovals'],$nonstocked['default']) . '</td></tr>';
+      foreach($nonstocked_attributes as $nonstocked) {
+        switch ($nonstocked['otype']) {
+			
+          case 1: //PRODUCTS_OPTIONS_TYPE_TEXT:
+              $tmp_html .= '';
+            foreach ($nonstocked['ovals'] as $products_options_array) {
+           $tmp_html = '<input type="text" name ="id[' . $nonstocked['oid'] . ']" size="' . $nonstocked['olength'] .'" maxlength="' . $nonstocked['olength'] . '" value="' . $_SESSION['cart']->contents[$prod_id]['attributes_values'][$products_options_names->fields['products_options_id']]  .'" class="inputbox">  ' . $nonstocked['ocomment'] ;
+//            $tmp_html = 'tep_draw_input_field(' . $nonstocked['oid'] . ' , ' . products_id['attributes_values'][$nonstocked['oid']]->products_model . ')' ;
+//	      $tmp_html .= tep_draw_input_field('id[' . $nonstocked['oid'] . ']', $this->products_id['attributes'][$products_options_name['products_options_id']]);
+	      $tmp_html .='&nbsp;' . $products_options_array['text'];
+              $tmp_html .=$products_options_name['products_options_comment'] ;
+              $tmp_html .= '&nbsp;';
+	    }
+            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $nonstocked['oname'] . ':</h4></td>
+			<td class="options">' . $tmp_html . '</td></tr>';
+	  break;
+		   
+          case 2: //PRODUCTS_OPTIONS_TYPE_TEXTAREA:
+//            $tmp_html = '<textarea wrap="soft" name="id[' . TEXT_PREFIX . $nonstocked['oid'] . ']"  rows=5 value="' . $cart->contents[$_GET['products_id']]['attributes_values'][$nonstocked['oid']] . '" class="inputbox"></textarea>' ;
+//            $out .= '<tr class="options"><td align="right" class="options"> <h4><b>' . $nonstocked['oname'] . ':</h4></td><td class="options">' . $tmp_html . '</td></tr>';
+			$tmp_html = '';
+            foreach ($nonstocked['ovals'] as $products_options_array) {
+              $tmp_html .= '';
+            $tmp_html = '<textarea wrap="soft" name="id[' . $nonstocked['oid'] . ']"  rows=5 value="' . $cart->contents[$_GET['products_id']]['attributes_values'][$nonstocked['oid']] . '" class="inputbox"></textarea>' ;
+            $tmp_html .= $products_options_array['text'] ;
+              $tmp_html .=$products_options_name['products_options_comment'] ;
+              $tmp_html .= '<br/>';
+            }
+            $tmp_html .= '';
+            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $nonstocked['oname'] . ':</h4></td>
+			<td class="options">' . $tmp_html . '</td></tr>';
+	  break;
+		  
+	  case 3: //PRODUCTS_OPTIONS_TYPE_RADIO:
+			$tmp_html = '';
+			$checked = true;
+            foreach ($nonstocked['ovals'] as $products_options_array) {
+              $tmp_html .= '';
+              $tmp_html .= tep_draw_radio_field('id[' . $nonstocked['oid'] . ']', $products_options_array['id'], $checked);
+              $checked = false;
+              $tmp_html .= $products_options_array['text'] ;
+              $tmp_html .=$products_options_name['products_options_comment'] ;
+              $tmp_html .= '&nbsp;';
+            }
+            $tmp_html .= '';
+            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $nonstocked['oname'] . ':</h4></td>
+			<td class="options">' . $tmp_html . '</td></tr>';
+	  break;
+		  
+	  case 4: //PRODUCTS_OPTIONS_TYPE_CHECKBOX:
+
+			$tmp_html = '';
+            foreach ($nonstocked['ovals'] as $products_options_array) {
+              $tmp_html .= '';
+              $tmp_html .= tep_draw_checkbox_field('id[' . $nonstocked['oid'] . ']', $products_options_array['id']);
+              $tmp_html .= $products_options_array['text'] ;
+              $tmp_html .=$products_options_name['products_options_comment'] ;
+              $tmp_html .= '&nbsp;';
+            }
+            $tmp_html .= '';
+            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $nonstocked['oname'] . ':</h4></td>
+			<td class="options">' . $tmp_html . '</td></tr>';
+          break;
+          
+	  case 5: //PRODUCTS_OPTIONS_TYPE_FILE:
+            $number_of_uploads++;
+//		$out .= '<tr class="options"><td align="right" class="options"><h4>' . $nonstocked['oname'] . ':</h4></td>
+//						<td class="options"><input type="file" 
+//						name="id['$nonstocked['oid'].']">' . 
+//						$cart->contents[$_GET['products_id']]['attributes_values'][$nonstocked['oid']] . 
+//						tep_draw_hidden_field($number_of_uploads, $nonstocked['oid']) . 
+//						tep_draw_hidden_field('number_of_uploads' , $number_of_uploads). '</td></tr>';
+  //   tep_draw_hidden_field(TEXT_PREFIX . UPLOAD_PREFIX . $number_of_uploads, $cart->contents[$_GET['products_id']]['attributes_values'][$nonstocked['oid']]). "</td></tr>\n";
+          break;
+          			
+          default: //Select
+            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $nonstocked['oname'] . ':</h4></td>
+						<td class="options">' . 
+						tep_draw_pull_down_menu('id['.$nonstocked['oid'].']',array_values($nonstocked['ovals']),$nonstocked['default']) . 
+						'</td></tr>';
+//         $out.='<tr><td align="right" class=main><b>'.$nonstocked['oname'].":</b></td><td class=main>".tep_draw_pull_down_menu('id['.$nonstocked['oid'].']',$nonstocked['ovals'],$nonstocked['default'])."</td></tr>\n";
+        }
       }
       return $out;
     }
@@ -239,7 +356,10 @@
 
 */
     function _draw_table_end() {
-      return '           </table>';
+      $out = '';
+      $out.='            </tbody>';
+      $out.='            </table>';
+    return $out;   
     }
 /*
     Method: _build_attributes_array
@@ -282,44 +402,42 @@
       elseif ($build_nonstocked) {
         $stocked_where="and popt.products_options_track_stock = '0'";
       }
-
-      $products_options_name_query = tep_db_query("select distinct popt.products_options_id, popt.products_options_name, popt.products_options_track_stock from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$this->products_id . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "' " . $stocked_where . " order by popt.products_options_name");
+      
+      $products_options_name_query = tep_db_query("select distinct popt.products_options_id, popt.products_options_name,popt.products_options_type, popt.products_options_track_stock,popt.products_options_length from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$this->products_id . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "' " . $stocked_where . " order by popt.products_options_name");
       $attributes=array();
 
       while ($products_options_name = tep_db_fetch_array($products_options_name_query)) {
         $products_options_array = array();
-        $products_options_query = tep_db_query("select pov.products_options_values_id, pov.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov where pa.products_id = '" . (int)$this->products_id . "' and pa.options_id = '" . (int)$products_options_name['products_options_id'] . "' and pa.options_values_id = pov.products_options_values_id and pov.language_id = '" . (int)$languages_id . "'" . "order by pov.products_options_values_name");
+        $products_options_query = tep_db_query("select pov.products_options_values_id, pov.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov where pa.products_id = '" . (int)$this->products_id . "' and pa.options_id = '" . (int)$products_options_name['products_options_id'] . "' and pa.options_values_id = pov.products_options_values_id and pov.language_id = '" . (int)$languages_id . "'");
         while ($products_options = tep_db_fetch_array($products_options_query)) {
 
 $products_options_array[] = array('id' => $products_options['products_options_values_id'], 'text' => $products_options['products_options_values_name']);
 
-
-if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
-//Option prices will displayed as a final product price. This can (currently) only be used with a satisfying result if you have only one option per product.
-
-  if ($products_options['price_prefix'] == '-') {// in case price lowers, don't add values, subtract.
-    $show_price = 0.0 + $this->products_original_price - $products_options['options_values_price']; // force float (in case) using the 0.0;
-  } else {
-    $show_price = 0.0 + $this->products_original_price + $products_options['options_values_price']; // force float (in case) using the 0.0;
-  }
-
-  $products_options_array[sizeof($products_options_array)-1]['text'] .= '&nbsp;'.$currencies->display_price( $show_price, tep_get_tax_rate($this->products_tax_class_id)).' ';
-
-}else{ //Display the option prices as differece prices with +/- prefix as usually
   if ($products_options['options_values_price'] != '0') {
     $products_options_array[sizeof($products_options_array)-1]['text'] .= ' (' . $products_options['price_prefix'] . $currencies->display_price($products_options['options_values_price'], tep_get_tax_rate($this->products_tax_class_id)) .')';
   }
-}
-
         }
-        if (isset($cart->contents[$this->products_id]['attributes'][$products_options_name['products_options_id']]))
+        if (isset($cart->contents[$this->products_id]['attributes'][$products_options_name['products_options_id']])) {
           $selected = $cart->contents[$this->products_id]['attributes'][$products_options_name['products_options_id']];
-        else
+                  $attributes[]=array('oid'=>$products_options_name['products_options_id'],
+                            'oname'=>$products_options_name['products_options_name'],
+                            'otype'=>$products_options_name['products_options_type'],
+                            'olength' => $products_options_name['products_options_length'],
+                            'otext'=>$producs_options_name['products_options_value_text'],
+                            'ovals'=>$products_options_array,
+                            'default'=>$selected);
+
+        }  
+        else {
           $selected = 0;
         $attributes[]=array('oid'=>$products_options_name['products_options_id'],
                             'oname'=>$products_options_name['products_options_name'],
-                            'ovals'=>$products_options_array,
+                            'otype'=>$products_options_name['products_options_type'],
+                            'olength' => $products_options_name['products_options_length'],
+                            'otext'=>$producs_options_name['products_options_value_text'],
+                            'ovals'=>$products_options_array,                   
                             'default'=>$selected);
+          }
       }
       return $attributes;
     }
@@ -387,7 +505,8 @@ if(PRODINFO_ATTRIBUTE_ACTUAL_PRICE_PULL_DOWN == 'True'){
           $newisselected = false;
         if (isset($attributes[$oidindex+1])) {
           $this->_build_attributes_combinations($attributes, $showoos, $markoos, $combinations, $selected_combination, $oidindex+1, $newcomb, $newid, $newtext, $newisselected);
-        } else {
+        }
+        else {
           $is_out_of_stock=tep_check_stock(tep_get_prid($this->products_id),1,$newcomb);
 
           if (!$is_out_of_stock | ($showoos == true)) {

@@ -17,7 +17,7 @@ $Id: application_top.php 3 2006-05-27 04:59:07Z user $
 $debug = array();
 
 // set the level of error reporting
-  error_reporting(E_ALL & ~E_NOTICE);
+  error_reporting(E_ALL & ~E_NOTICE & ~'E_DEPRECATED');
 
 // check support for register_globals
   if (function_exists('ini_get') && (ini_get('register_globals') == false) && (PHP_VERSION < 4.3) ) {
@@ -39,7 +39,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 
 // define the project version
-  define('PROJECT_VERSION', 'osCMax v2.1');
+  define('PROJECT_VERSION', 'osCMax v2.5 Beta 1');
 
 // some code to solve compatibility issues
   require(DIR_WS_FUNCTIONS . 'compatibility.php');
@@ -364,6 +364,11 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
    }
 // EOF: MOD - Wishlist 3.5
 
+// BOF: set product attribute types
+  define('PRODUCTS_OPTIONS_TYPE_SELECT', 0);
+  define('PRODUCTS_OPTIONS_TYPE_RADIO', 3);
+  define('PRODUCTS_OPTIONS_TYPE_CHECKBOX', 4);
+// EOF: set product attribute types
 // BOF: PWA - Fix to prevent blank order; JimbobobHacker; 30 Sep 2010; Mod: 355
 if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || isset($_POST['products_id']))) {
   $query = tep_db_query("select customers_id from " . TABLE_CUSTOMERS . " where customers_id = " . (int)$customer_id);

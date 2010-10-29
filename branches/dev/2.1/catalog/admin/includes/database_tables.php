@@ -144,4 +144,9 @@ define('TABLE_EPF_EXCLUDE', 'extra_value_exclude');
   define('TABLE_INFORMATION', 'information');
   define('TABLE_INFORMATION_GROUP', 'information_group');
 // EOF: Information Pages Unlimited
+
+// BOF: Products Option Types
+define('TABLE_PRODUCTS_OPTIONS_TYPES', 'products_options_types');
+define('TABLE_PRODUCTS_OPTIONS_DESCRIPTION', 'products_options_description');
+// EOF: Products Option Types
 ?>

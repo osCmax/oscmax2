@@ -47,16 +47,19 @@ while ($products_attributes_values = tep_db_fetch_array($products_attributes_que
 //$html_ev_out will be displayed at the end of the script if $rowscounter > 0
 $rowscounter = 0;
 $html_ev_out = '<br /><strong>' . STOCK_LIST_IN_PI_TEXT_HEADING . '</strong> 
-<table border="0" cellspacing="0" cellpadding="0"><tr><td class="infoBoxHeading">
-<table class="boxText" border="0" cellspacing="2" cellpadding="6"> <tr>';
+		<table class="stockTable" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+		<td class="stockTableHeading">
+		<table class="stockTableText" border="0" cellspacing="2" cellpadding="6">
+		 <tr>';
 //I have 2 tables because the parent table creates the background and lines in correct collor between the child tables cells. Parent table has only one cell.
 
 // build heading line with option names
 while ($products_options_name = tep_db_fetch_array($products_options_name_query)) {
-	$html_ev_out .= '<td class="infoBoxHeading" align="center">' . $products_options_name['products_options_name'] . '</td>';
+	$html_ev_out .= '<td class="stockTableHeading" align="center">' . $products_options_name['products_options_name'] . '</td>';
 }
-	$html_ev_out .= '<td class="infoBoxHeading" align="center">'. STOCK_LIST_IN_PI_TEXT_PRICE .'</td>';	
-	$html_ev_out .= '<td class="infoBoxHeading" align="center">'. STOCK_LIST_IN_PI_TEXT_STOCK .'</td>';
+	$html_ev_out .= '<td class="stockTableHeading" align="center">'. STOCK_LIST_IN_PI_TEXT_PRICE .'</td>';	
+	$html_ev_out .= '<td class="stockTableHeading" align="center">'. STOCK_LIST_IN_PI_TEXT_STOCK .'</td>';
 	$html_ev_out .= '</tr>';
 
 
@@ -73,14 +76,14 @@ while($products_stock_values=tep_db_fetch_array($products_stock_query)) {
 		$total_price=$products_facts['products_price'];			
 		foreach($attributes as $attribute) {
 			$attr=explode("-",$attribute);
-			$html_ev_out .= '<td class="infoBoxContents" align="center">'.tep_values_name($attr[1]).'</td>';
+			$html_ev_out .= '<td class="stockTableContents" align="center">'.tep_values_name($attr[1]).'</td>';
 			$total_price+=$attributes_price[$attr[0]][$attr[1]];
 		}
 		$total_price=$currencies->display_price($total_price, tep_get_tax_rate($products_facts['products_tax_class_id']));
 		//$total_price=$currencies->format($total_price);
 		
-		$html_ev_out .= '<td class="infoBoxContents" align="center">'.$total_price.'</td>';
-		$html_ev_out .= '<td class="infoBoxContents" align="center">'.$products_stock_values['products_stock_quantity'].'</td>';
+		$html_ev_out .= '<td class="stockTableContents" align="center">'.$total_price.'</td>';
+		$html_ev_out .= '<td class="stockTableContents" align="center">'.$products_stock_values['products_stock_quantity'].'</td>';
 	}
 }
 

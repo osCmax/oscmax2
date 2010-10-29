@@ -1045,6 +1045,22 @@ CREATE TABLE products_options (
   PRIMARY KEY (products_options_id,language_id)
 );
 
+DROP TABLE IF EXISTS products_options_description;
+CREATE TABLE products_options_description (
+    products_options_id int NOT NULL auto_increment,
+    language_id int NOT NULL DEFAULT '1',
+    products_options_name varchar(32) NOT NULL DEFAULT '',
+    products_options_description text NOT NULL DEFAULT '',
+    PRIMARY KEY (products_options_id, language_id)
+);
+
+DROP TABLE IF EXISTS products_options_types;
+CREATE TABLE products_options_types (
+    products_options_types_id int NOT NULL DEFAULT '0',
+    products_options_types_name varchar(32) NULL DEFAULT NULL,
+    language_id int NOT NULL DEFAULT '0',
+    PRIMARY KEY (products_options_types_id, language_id)
+);
 DROP TABLE IF EXISTS products_options_values;
 CREATE TABLE products_options_values (
   products_options_values_id int NOT NULL default '0',
@@ -2071,6 +2087,7 @@ INSERT INTO configuration VALUES (595, 'Product Image Width', 'PRODUCT_IMAGE_WID
 INSERT INTO configuration VALUES (596, 'Product Image Height', 'PRODUCT_IMAGE_HEIGHT', '', 'The main product image in product information pages. Do NOT specify both!',4,21,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (597, 'Product Popup Image Width', 'POPUP_IMAGE_WIDTH', '800', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,22,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (598, 'Product Popup Image Height', 'POPUP_IMAGE_HEIGHT', '600', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,23,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (594,'Display stock information','PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST','false','<b>If true:</b> A table with information about what\'s in stock will be displayed. If the product doesn\'t have any attributes with tracked stock, the table won\'t be displayed.<br /><br /><b>Default is false.</b>',9,6,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 #New v2.1 Entries
 INSERT INTO configuration VALUES (2100, 'Enable Google Analytics', 'GOOGLE_ANALYTICS_STATUS', 'false', 'Enable Google Analytics?', 85, 1, '', now(), '', 'tep_cfg_select_option(array(\'true\', \'false\'),');
@@ -2610,6 +2627,18 @@ INSERT INTO orders_status VALUES (5,2,'Kunden Kommentar (DL)',1,1);
 INSERT INTO orders_status VALUES (5,3,'Comentario del cliente (DL)',1,1);
 
 INSERT INTO products_attributes_download  VALUES (11, 'Dhtml-coolmenu.zip',7,10);
+INSERT INTO products_options_types VALUES (0,'Select',1);
+INSERT INTO products_options_types VALUES (0,'Select',2);
+INSERT INTO products_options_types VALUES (0,'Select',3);
+INSERT INTO products_options_types VALUES (0,'Select',4);
+INSERT INTO products_options_types VALUES (3,'Radio',1);
+INSERT INTO products_options_types VALUES (3,'Radio',2);
+INSERT INTO products_options_types VALUES (3,'Radio',3);
+INSERT INTO products_options_types VALUES (3,'Radio',4);
+INSERT INTO products_options_types VALUES (4,'Checkbox',1);
+INSERT INTO products_options_types VALUES (4,'Checkbox',2);
+INSERT INTO products_options_types VALUES (4,'Checkbox',3);
+INSERT INTO products_options_types VALUES (4,'Checkbox',4);
 
 INSERT INTO products_options VALUES (1,1, 'Version', '0', '0', '32',NULL);
 INSERT INTO products_options VALUES (1,2, 'Version', '0', '0', '32',NULL);

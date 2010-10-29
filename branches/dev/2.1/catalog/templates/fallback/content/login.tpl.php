@@ -135,8 +135,11 @@
               </tr>
             </table></td>
           </tr>
-        </table>
-        </form>
+       </form>
+        </table></td>
+      </tr>
+      <tr>
+        <td>
 <?php
           // *** BEGIN GOOGLE CHECKOUT ***
           if (defined('MODULE_PAYMENT_GOOGLECHECKOUT_STATUS') && MODULE_PAYMENT_GOOGLECHECKOUT_STATUS == 'True') {
@@ -144,6 +147,6 @@
           }
           // *** END GOOGLE CHECKOUT *** 
 ?>
-        </table></td>
+        </td>
       </tr>
     </table>

@@ -24,7 +24,7 @@ $Id: geo_zones.php 3 2006-05-27 04:59:07Z user $
         tep_db_query("insert into " . TABLE_ZONES_TO_GEO_ZONES . " (zone_country_id, zone_id, geo_zone_id, date_added) values ('" . (int)$zone_country_id . "', '" . (int)$zone_id . "', '" . (int)$zID . "', now())");
         $new_subzone_id = tep_db_insert_id();
 
-        tep_redirect(tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&amp;zID=' . $_GET['zID'] . '&amp;action=list&amp;spage=' . $_GET['spage'] . '&amp;sID=' . $new_subzone_id));
+        tep_redirect(tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&zID=' . $_GET['zID'] . '&action=list&spage=' . $_GET['spage'] . '&sID=' . $new_subzone_id));
         break;
       case 'save_sub':
         $sID = tep_db_prepare_input($_GET['sID']);
@@ -34,14 +34,14 @@ $Id: geo_zones.php 3 2006-05-27 04:59:07Z user $
 
         tep_db_query("update " . TABLE_ZONES_TO_GEO_ZONES . " set geo_zone_id = '" . (int)$zID . "', zone_country_id = '" . (int)$zone_country_id . "', zone_id = " . (tep_not_null($zone_id) ? "'" . (int)$zone_id . "'" : 'null') . ", last_modified = now() where association_id = '" . (int)$sID . "'");
 
-        tep_redirect(tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&amp;zID=' . $_GET['zID'] . '&amp;action=list&amp;spage=' . $_GET['spage'] . '&amp;sID=' . $_GET['sID']));
+        tep_redirect(tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&zID=' . $_GET['zID'] . '&action=list&spage=' . $_GET['spage'] . '&sID=' . $_GET['sID']));
         break;
       case 'deleteconfirm_sub':
         $sID = tep_db_prepare_input($_GET['sID']);
 
         tep_db_query("delete from " . TABLE_ZONES_TO_GEO_ZONES . " where association_id = '" . (int)$sID . "'");
 
-        tep_redirect(tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&amp;zID=' . $_GET['zID'] . '&amp;action=list&amp;spage=' . $_GET['spage']));
+        tep_redirect(tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&zID=' . $_GET['zID'] . '&action=list&spage=' . $_GET['spage']));
         break;
     }
   }
@@ -57,7 +57,7 @@ $Id: geo_zones.php 3 2006-05-27 04:59:07Z user $
         tep_db_query("insert into " . TABLE_GEO_ZONES . " (geo_zone_name, geo_zone_description, date_added) values ('" . tep_db_input($geo_zone_name) . "', '" . tep_db_input($geo_zone_description) . "', now())");
         $new_zone_id = tep_db_insert_id();
 
-        tep_redirect(tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&amp;zID=' . $new_zone_id));
+        tep_redirect(tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&zID=' . $new_zone_id));
         break;
       case 'save_zone':
         $zID = tep_db_prepare_input($_GET['zID']);
@@ -66,7 +66,7 @@ $Id: geo_zones.php 3 2006-05-27 04:59:07Z user $
 
         tep_db_query("update " . TABLE_GEO_ZONES . " set geo_zone_name = '" . tep_db_input($geo_zone_name) . "', geo_zone_description = '" . tep_db_input($geo_zone_description) . "', last_modified = now() where geo_zone_id = '" . (int)$zID . "'");
 
-        tep_redirect(tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&amp;zID=' . $_GET['zID']));
+        tep_redirect(tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&zID=' . $_GET['zID']));
         break;
       case 'deleteconfirm_zone':
         $zID = tep_db_prepare_input($_GET['zID']);
@@ -290,16 +290,16 @@ function update_zone(theForm) {
       case 'new_zone':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_ZONE . '</b>');
 
-        $contents = array('form' => tep_draw_form('zones', FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&amp;zID=' . $_GET['zID'] . '&amp;action=insert_zone'));
+        $contents = array('form' => tep_draw_form('zones', FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&zID=' . $_GET['zID'] . '&amp;action=insert_zone'));
         $contents[] = array('text' => TEXT_INFO_NEW_ZONE_INTRO);
         $contents[] = array('text' => '<br>' . TEXT_INFO_ZONE_NAME . '<br>' . tep_draw_input_field('geo_zone_name'));
         $contents[] = array('text' => '<br>' . TEXT_INFO_ZONE_DESCRIPTION . '<br>' . tep_draw_input_field('geo_zone_description'));
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . ' <a href="' . tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&amp;zID=' . $_GET['zID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . ' <a href="' . tep_href_link(FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&zID=' . $_GET['zID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'edit_zone':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT_ZONE . '</b>');
 
-        $contents = array('form' => tep_draw_form('zones', FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&amp;zID=' . $zInfo->geo_zone_id . '&amp;action=save_zone'));
+        $contents = array('form' => tep_draw_form('zones', FILENAME_GEO_ZONES, 'zpage=' . $_GET['zpage'] . '&zID=' . $zInfo->geo_zone_id . '&amp;action=save_zone'));
         $contents[] = array('text' => TEXT_INFO_EDIT_ZONE_INTRO);
         $contents[] = array('text' => '<br>' . TEXT_INFO_ZONE_NAME . '<br>' . tep_draw_input_field('geo_zone_name', $zInfo->geo_zone_name));
         $contents[] = array('text' => '<br>' . TEXT_INFO_ZONE_DESCRIPTION . '<br>' . tep_draw_input_field('geo_zone_description', $zInfo->geo_zone_description));

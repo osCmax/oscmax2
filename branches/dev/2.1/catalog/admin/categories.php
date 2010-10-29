@@ -729,6 +729,13 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 			}
 // BOF: PGM Adds code to copy QPBPP for SPPC
 		
+// BOF: PGM Adds code to copy Attributes
+            $attribute_copy_query = tep_db_query("select * from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$products_id . "'");
+            while ($attribute_copy = tep_db_fetch_array($attribute_copy_query)) {
+			  tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " (products_id, options_id, options_values_id, options_values_price, price_prefix, weight_prefix, options_values_weight) values ('" . (int)$dup_products_id . "', '" . $attribute_copy['options_id'] . "', '" . tep_db_input($attribute_copy['options_values_id']) . "', '" . $attribute_copy['options_values_price'] . "', '" . $attribute_copy['price_prefix'] . "', '" . $attribute_copy['weight_prefix'] . "', '" . tep_db_input($attribute_copy['options_values_weight']) . "')");	
+			}
+// BOF: PGM Adds code to copy Attributes
+		
 
 //	      tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
 

@@ -7,6 +7,7 @@
 <?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
 <script type="text/javascript" src="includes/javascript/jquery.scrollTo-min.js"></script>
 <script type="text/javascript" src="includes/javascript/jquery.serialScroll-min.js"></script>
+<script type="text/javascript" src="includes/javascript/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="includes/javascript/jqzoom.pack.1.0.1.js"></script>
 <script type="text/javascript" src="includes/javascript/scrollable.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','jqzoom.css')); // BTSv1.5 ?>">

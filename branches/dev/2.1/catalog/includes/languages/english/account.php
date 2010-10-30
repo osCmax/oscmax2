@@ -25,6 +25,7 @@ define('MY_ACCOUNT_PASSWORD', '<b>Password</b><br><i>Change my account password<
 define('MY_ORDERS_TITLE', 'My Orders');
 define('MY_ORDERS_VIEW', '<b>Previous Orders</b><br><i>View my previous orders</i>');
 define('MY_WISH_LIST', '<b>Wish List</b><br><i>View my wish list</i>');
+define('MY_ACCOUNT_LOG_OFF', '<b>Log Off</b><br><i>Log out of your account</i>');
 
 define('EMAIL_NOTIFICATIONS_TITLE', 'E-Mail Notifications');
 define('EMAIL_NOTIFICATIONS_NEWSLETTERS', '<b>Newsletters</b><br><i>Manage my newsletter subscriptions</i>');

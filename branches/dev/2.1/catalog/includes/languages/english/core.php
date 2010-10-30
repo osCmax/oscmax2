@@ -441,14 +441,17 @@ define('BOX_LOGINBOX_PASSWORD', 'Password:');
 define('BOX_LOGINBOX_TEXT_NEW', 'Create an Account');
 define('BOX_LOGINBOX_NEW', 'create an account');
 define('BOX_LOGINBOX_FORGOT_PASSWORD', 'Password forgotten');
-define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','My account info');
-define('LOGIN_BOX_ACCOUNT_EDIT','Edit account info.');
-define('LOGIN_BOX_ACCOUNT_HISTORY','Account history');
-define('LOGIN_BOX_ADDRESS_BOOK','My address book');
-define('LOGIN_BOX_PRODUCT_NOTIFICATIONS','Product notifications');
-define('LOGIN_BOX_MY_ACCOUNT','General information');
+define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','My Account Info');
+define('LOGIN_BOX_ACCOUNT_EDIT','Account Information');
+define('LOGIN_BOX_ACCOUNT_HISTORY','Previous Orders');
+define('LOGIN_BOX_ADDRESS_BOOK','Address Book');
+define('LOGIN_BOX_PRODUCT_NOTIFICATIONS','Product Notifications');
+define('LOGIN_BOX_MY_ACCOUNT','My Account');
 define('LOGIN_BOX_LOGOFF','Log off');
 define('LOGIN_BOX_PRODUCTS_NEW','New Products');
+define('LOGIN_BOX_SPECIALS', 'Special Offers');
+define('LOGIN_BOX_WISHLIST', 'Wish List');
+define('LOGIN_BOX_NEWSLETTERS', 'Newsletters');
 // EOF: MOD - Login Box My Account
 
 // BOF: QPBPP for SPPC

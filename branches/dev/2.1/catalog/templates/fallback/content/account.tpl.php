@@ -71,8 +71,8 @@
                     <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'password.png') . '</a>'; ?></td>
                     <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL') . '">' . MY_ACCOUNT_PASSWORD . '</a>'; ?></td>
                     <td width="10">&nbsp;</td>
-                    <td width="40">&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_LOGOFF, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'account_log_off.png') . '</a>'; ?></td>
+                    <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_LOGOFF, '', 'SSL') . '">' . MY_ACCOUNT_LOG_OFF . '</a>'; ?></td>
                     <td width="10">&nbsp;</td>
                   </tr>
                 </table>

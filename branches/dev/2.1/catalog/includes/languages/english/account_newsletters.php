@@ -13,7 +13,7 @@ $Id: account_newsletters.php 3 2006-05-27 04:59:07Z user $
 define('NAVBAR_TITLE_1', 'My Account');
 define('NAVBAR_TITLE_2', 'Newsletter Subscriptions');
 
-define('HEADING_TITLE', 'Newsletter Subscriptions');
+define('HEADING_TITLE', 'My Newsletter Subscriptions');
 
 define('MY_NEWSLETTERS_TITLE', 'My Newsletter Subscriptions');
 define('MY_NEWSLETTERS_GENERAL_NEWSLETTER', 'General Newsletter');

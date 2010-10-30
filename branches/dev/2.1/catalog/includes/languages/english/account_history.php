@@ -11,9 +11,9 @@ $Id: account_history.php 3 2006-05-27 04:59:07Z user $
 */
 
 define('NAVBAR_TITLE_1', 'My Account');
-define('NAVBAR_TITLE_2', 'History');
+define('NAVBAR_TITLE_2', 'Previous Orders');
 
-define('HEADING_TITLE', 'My Order History');
+define('HEADING_TITLE', 'My Previous Orders');
 
 define('TEXT_ORDER_NUMBER', 'Order Number:');
 define('TEXT_ORDER_STATUS', 'Order Status:');

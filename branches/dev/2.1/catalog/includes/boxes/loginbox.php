@@ -97,13 +97,16 @@ include (bts_select('boxes', $box_base_name)); // BTS 1.5
 //  new infoBoxHeading($boxContent, false, false);
 //  $boxContent = array();
 
-  $boxContent = '<a href="' . tep_href_link(FILENAME_PRODUCTS_NEW, '', 'SSL') . '">' . LOGIN_BOX_PRODUCTS_NEW . '</a><br>' .
-                '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . LOGIN_BOX_MY_ACCOUNT . '</a><br>' .
-                '<a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '">' . LOGIN_BOX_ACCOUNT_HISTORY . '</a><br>' .
+  $boxContent = '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . LOGIN_BOX_MY_ACCOUNT . '</a><br>' .
                 '<a href="' . tep_href_link(FILENAME_ACCOUNT_EDIT, '', 'SSL') . '">' . LOGIN_BOX_ACCOUNT_EDIT . '</a><br>' .
-                '<a href="' . tep_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL') . '">' . LOGIN_BOX_ADDRESS_BOOK . '</a><br>' .
+                '<a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '">' . LOGIN_BOX_ACCOUNT_HISTORY . '</a><br>' .
+				'<a href="' . tep_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL') . '">' . LOGIN_BOX_ADDRESS_BOOK . '</a><br>' .
                 '<a href="' . tep_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', 'NONSSL') . '">' . LOGIN_BOX_PRODUCT_NOTIFICATIONS . '</a><br>' .
-                '<a href="' . tep_href_link(FILENAME_LOGOFF, '', 'NONSSL') . '">' . LOGIN_BOX_LOGOFF . '</a>';
+				'<a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . LOGIN_BOX_WISHLIST . '</a><br>' .
+				'<a href="' . tep_href_link(FILENAME_ACCOUNT_NEWSLETTERS, '', 'SSL') . '">' . LOGIN_BOX_NEWSLETTERS . '</a><br><br>' .
+                '<a href="' . tep_href_link(FILENAME_LOGOFF, '', 'NONSSL') . '">' . LOGIN_BOX_LOGOFF . '</a><br><br>' . 
+				'<a href="' . tep_href_link(FILENAME_DEFAULT, 'new_products=1', 'SSL') . '">' . LOGIN_BOX_PRODUCTS_NEW . '</a><br>' .
+				'<a href="' . tep_href_link(FILENAME_DEFAULT, 'show_specials=1', 'SSL') . '">' . LOGIN_BOX_SPECIALS . '</a><br>';
 
  // new infoBox($boxContent);
 

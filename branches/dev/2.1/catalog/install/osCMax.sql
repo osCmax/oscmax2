@@ -2683,7 +2683,7 @@ INSERT INTO theme_configuration VALUES (28,'affiliate','BOX_HEADING_AFFILIATE','
 INSERT INTO theme_configuration VALUES (2,'categories','BOX_HEADING_CATEGORIES','yes','','1','left','1',NULL,NULL,now(),'Categories');
 INSERT INTO theme_configuration VALUES (22,'wishlist','BOX_HEADING_CUSTOMER_WISHLIST','yes','','1','right','3',NULL,NULL,now(),'My Wish List');
 INSERT INTO theme_configuration VALUES (29,'Authors','BOX_HEADING_AUTHORS','yes','','1','right','11',NULL,NULL,now(),'Authors');
-INSERT INTO theme_configuration VALUES (30,'mailchimp_newsletters','BOX_HEADING_MAILCHIMP','yes','Do you want to use MailChimp to collect and manage your newsletters?','1','right','15',NULL,NULL,now(),'MailChimp Newsletters');
+INSERT INTO theme_configuration VALUES (30,'mailchimp_newsletters','BOX_HEADING_MAILCHIMP','no','Do you want to use MailChimp to collect and manage your newsletters?','1','right','15',NULL,NULL,now(),'MailChimp Newsletters');
 
 
 # USA

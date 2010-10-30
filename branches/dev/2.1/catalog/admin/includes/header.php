@@ -169,11 +169,14 @@ $Id: header.php 3 2006-05-27 04:59:07Z user $
 
   <?php
 $current_page = basename($_SERVER['SCRIPT_FILENAME']);
-
+// Adds gID to allow linkage to specific configuration help pages
+if ($current_page == 'configuration.php') {
+  $configuration_id = (isset($_GET['gID']) ? '?gID=' . $_GET['gID'] : '');
+  $current_page .= $configuration_id;
+}
 //Could be extended to language specific help documents
 //$help_pages_query_raw = tep_db_query ("select current_page, help_page, help_page_title, language from " . TABLE_HELP_PAGES . " where current_page = '" . tep_db_input($current_page) . "' and language = '" . (int)$languages[$i]['id'] . "'");
 $help_pages_query_raw = tep_db_query ("select current_page, help_page, help_page_title, language from " . TABLE_HELP_PAGES . " where current_page = '" . tep_db_input($current_page) . "'");
-
 
 $help_pages_query = tep_db_fetch_array($help_pages_query_raw);
 

@@ -4,7 +4,8 @@
 #attributeManager #attributeManagerAll {
 border:1px solid #ccc;
 }
-#attributeManager td,div {
+#attributeManager td,
+#attributeManager div {
 	font-family: Verdana, Arial, sans-serif;
 	font-size:12px;
 }

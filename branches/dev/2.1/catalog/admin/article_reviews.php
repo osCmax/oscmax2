@@ -25,7 +25,7 @@ $Id: article_reviews.php 3 2006-05-27 04:59:07Z user $
         tep_db_query("update " . TABLE_ARTICLE_REVIEWS . " set reviews_rating = '" . tep_db_input($reviews_rating) . "', last_modified = now() where reviews_id = '" . (int)$reviews_id . "'");
         tep_db_query("update " . TABLE_ARTICLE_REVIEWS_DESCRIPTION . " set reviews_text = '" . tep_db_input($reviews_text) . "' where reviews_id = '" . (int)$reviews_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_ARTICLE_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $reviews_id));
+        tep_redirect(tep_href_link(FILENAME_ARTICLE_REVIEWS, 'page=' . $_GET['page'] . '&rID=' . $reviews_id));
         break;
       case 'deleteconfirm':
         $reviews_id = tep_db_prepare_input($_GET['rID']);
@@ -38,12 +38,12 @@ $Id: article_reviews.php 3 2006-05-27 04:59:07Z user $
       case 'approve_review':
         $reviews_id = tep_db_prepare_input($_GET['rID']);
         tep_db_query("update " . TABLE_ARTICLE_REVIEWS . " set approved=1 where reviews_id = " . $reviews_id);
-        tep_redirect(tep_href_link(FILENAME_ARTICLE_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $reviews_id));
+        tep_redirect(tep_href_link(FILENAME_ARTICLE_REVIEWS, 'page=' . $_GET['page'] . '&rID=' . $reviews_id));
         break;
       case 'disapprove_review':
         $reviews_id = tep_db_prepare_input($_GET['rID']);
         tep_db_query("update " . TABLE_ARTICLE_REVIEWS . " set approved=0 where reviews_id = " . $reviews_id);
-        tep_redirect(tep_href_link(FILENAME_ARTICLE_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $reviews_id));
+        tep_redirect(tep_href_link(FILENAME_ARTICLE_REVIEWS, 'page=' . $_GET['page'] . '&rID=' . $reviews_id));
         break;
     }
   }

@@ -38,7 +38,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
 
         tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_id = '" . (int)$slideshow_id . "', slideshow_image = '" . $slideshow_image . "', slideshow_title = '" . $slideshow_title . "', slideshow_link = '" . tep_db_input($slideshow_link) . "', slideshow_target = '" . tep_db_input($slideshow_target) . "', slideshow_sort_order = '" . tep_db_input($slideshow_sort_order) . "', last_modified = now() where slideshow_id = '" . (int)$slideshow_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $slideshow_id));
+        tep_redirect(tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $slideshow_id));
         break;
       case 'deleteconfirm':
         $slideshow_id = tep_db_prepare_input($_GET['tID']);

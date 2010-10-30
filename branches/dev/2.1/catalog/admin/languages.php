@@ -85,7 +85,7 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_input($code) . "' where configuration_key = 'DEFAULT_LANGUAGE'");
         }
 
-        tep_redirect(tep_href_link(FILENAME_LANGUAGES, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&amp;' : '') . 'lID=' . $insert_id));
+        tep_redirect(tep_href_link(FILENAME_LANGUAGES, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'lID=' . $insert_id));
         break;
       case 'save':
         $lID = tep_db_prepare_input($_GET['lID']);
@@ -101,7 +101,7 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_input($code) . "' where configuration_key = 'DEFAULT_LANGUAGE'");
         }
 
-        tep_redirect(tep_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&amp;lID=' . $_GET['lID']));
+        tep_redirect(tep_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $_GET['lID']));
         break;
       case 'deleteconfirm':
         $lID = tep_db_prepare_input($_GET['lID']);

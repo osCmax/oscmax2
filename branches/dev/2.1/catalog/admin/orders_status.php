@@ -51,7 +51,7 @@ $Id: orders_status.php 3 2006-05-27 04:59:07Z user $
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_input($orders_status_id) . "' where configuration_key = 'DEFAULT_ORDERS_STATUS_ID'");
         }
 
-        tep_redirect(tep_href_link(FILENAME_ORDERS_STATUS, 'page=' . $_GET['page'] . '&amp;oID=' . $orders_status_id));
+        tep_redirect(tep_href_link(FILENAME_ORDERS_STATUS, 'page=' . $_GET['page'] . '&oID=' . $orders_status_id));
         break;
       case 'deleteconfirm':
         $oID = tep_db_prepare_input($_GET['oID']);

@@ -63,7 +63,7 @@ $Id: authors.php 3 2006-05-27 04:59:07Z user $
           tep_reset_cache_block('authors');
         }
 
-        tep_redirect(tep_href_link(FILENAME_AUTHORS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&amp;' : '') . 'auID=' . $authors_id));
+        tep_redirect(tep_href_link(FILENAME_AUTHORS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'auID=' . $authors_id));
         break;
       case 'deleteconfirm':
         $authors_id = tep_db_prepare_input($_GET['auID']);

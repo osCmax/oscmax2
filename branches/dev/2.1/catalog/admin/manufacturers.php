@@ -83,7 +83,7 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
           tep_reset_cache_block('manufacturers');
         }
 
-        tep_redirect(tep_href_link(FILENAME_MANUFACTURERS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&amp;' : '') . 'mID=' . $manufacturers_id));
+        tep_redirect(tep_href_link(FILENAME_MANUFACTURERS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'mID=' . $manufacturers_id));
         break;
 				
 // BOF Open Featured Sets		

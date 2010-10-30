@@ -23,7 +23,7 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
             tep_db_query("update " . TABLE_PM_CONFIGURATION . " set pm_active = '" . $_GET['flag'] . "' where pm_id = '" . $_GET['tID'] . "'");
           }
         }
- 	    tep_redirect(tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&amp;tID=' . $_GET['tID']));
+ 	    tep_redirect(tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&tID=' . $_GET['tID']));
       break;
       
 	  case 'insert':
@@ -49,7 +49,7 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
         
         tep_db_query("update " . TABLE_PM_CONFIGURATION . " set pm_id = '" . (int)$pm_id . "', pm_title = '" . $pm_title . "', pm_filename = '" . $pm_filename . "', pm_page = '" . tep_db_input($pm_page) . "', pm_active = '" . tep_db_input($pm_active) . "', pm_sort_order = '" . tep_db_input($pm_sort_order) . "', last_modified = now() where pm_id = '" . (int)$pm_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&amp;tID=' . $pm_id));
+        tep_redirect(tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&tID=' . $pm_id));
         break;
       case 'deleteconfirm':
         $pm_id = tep_db_prepare_input($_GET['tID']);

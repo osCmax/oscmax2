@@ -65,11 +65,11 @@ $Id: customers.php 3 2006-05-27 04:59:07Z user $
 // BOF : PGM EDITS CUSTOMER NOTES
 	  case 'deletenotes':
 	  	tep_db_query("DELETE FROM customers_notes WHERE customers_notes_id = ".$_GET["notesid"]." AND customers_id = ".$_GET["cID"]);
-		tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $_GET["cID"] . '&amp;action=notes'));
+		tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $_GET["cID"] . '&action=notes'));
 	  break;
 	  case 'newnotes':
 	  	tep_db_query("INSERT INTO customers_notes (customers_id, customers_notes_editor, customers_notes_message, customers_notes_date) VALUES (".$_GET["cID"].", '".$_POST["editor"]."', '".$_POST["message"]."', NOW())");
-		tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $_GET["cID"] . '&amp;action=default'));
+		tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $_GET["cID"] . '&action=default'));
 	  break;
 // EOF : PGM EDITS CUSTOMER NOTES
       case 'update':

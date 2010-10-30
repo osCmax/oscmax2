@@ -25,6 +25,7 @@ width: 129px; /*sub menu width*/
 top: 0;
 visibility: hidden;
 border: 1px solid #ccc;
+z-index: 2000;
 }
 
 /* Sub level menu links style */
@@ -37,6 +38,7 @@ background: #f8f8f9;
 padding: 1px 5px;
 /* border: 1px solid #ccc; */
 border-bottom: 0;
+z-index: 2000;
 }
 
 .menudiv ul li a:visited{}

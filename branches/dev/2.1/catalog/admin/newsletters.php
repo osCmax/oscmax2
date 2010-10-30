@@ -22,7 +22,7 @@ $Id: newsletters.php 3 2006-05-27 04:59:07Z user $
 
         tep_db_query("update " . TABLE_NEWSLETTERS . " set locked = '" . $status . "' where newsletters_id = '" . (int)$newsletter_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&amp;nID=' . $_GET['nID']));
+        tep_redirect(tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $_GET['nID']));
         break;
       case 'insert':
       case 'update':
@@ -58,7 +58,7 @@ $Id: newsletters.php 3 2006-05-27 04:59:07Z user $
             tep_db_perform(TABLE_NEWSLETTERS, $sql_data_array, 'update', "newsletters_id = '" . (int)$newsletter_id . "'");
           }
 
-          tep_redirect(tep_href_link(FILENAME_NEWSLETTERS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&amp;' : '') . 'nID=' . $newsletter_id));
+          tep_redirect(tep_href_link(FILENAME_NEWSLETTERS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'nID=' . $newsletter_id));
         } else {
           $action = 'new';
         }
@@ -89,7 +89,7 @@ $Id: newsletters.php 3 2006-05-27 04:59:07Z user $
 
           $messageStack->add_session($error, 'error');
 
-          tep_redirect(tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&amp;nID=' . $_GET['nID']));
+          tep_redirect(tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $_GET['nID']));
         }
         break;
     }

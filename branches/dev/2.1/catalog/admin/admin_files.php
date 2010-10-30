@@ -37,7 +37,7 @@ $Id: admin_files.php 3 2006-05-27 04:59:07Z user $
         tep_db_perform(TABLE_ADMIN_FILES, $sql_data_array);
         $admin_files_id = tep_db_insert_id();
 
-        tep_redirect(tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&amp;fID=' . $admin_files_id));
+        tep_redirect(tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath'] . '&fID=' . $admin_files_id));
         break;
       case 'file_remove':
         $admin_files_id = tep_db_prepare_input($_POST['admin_files_id']);

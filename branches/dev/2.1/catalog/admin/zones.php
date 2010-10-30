@@ -33,7 +33,7 @@ $Id: zones.php 3 2006-05-27 04:59:07Z user $
 
         tep_db_query("update " . TABLE_ZONES . " set zone_country_id = '" . (int)$zone_country_id . "', zone_code = '" . tep_db_input($zone_code) . "', zone_name = '" . tep_db_input($zone_name) . "' where zone_id = '" . (int)$zone_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_ZONES, 'page=' . $_GET['page'] . '&amp;cID=' . $zone_id));
+        tep_redirect(tep_href_link(FILENAME_ZONES, 'page=' . $_GET['page'] . '&cID=' . $zone_id));
         break;
       case 'deleteconfirm':
         $zone_id = tep_db_prepare_input($_GET['cID']);

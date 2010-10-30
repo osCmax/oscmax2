@@ -21,7 +21,7 @@ $Id: configuration.php 3 2006-05-27 04:59:07Z user $
           /* One Page Checkout - BEGIN*/
           if ($_GET['gID'] == 7575){
               tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . $_POST['configuration_value'] . "', last_modified = now() where configuration_id = '" . (int)$_GET['cID'] . "'");
-              tep_redirect(tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $_GET['gID'] . '&amp;cID=' . $_GET['cID']));
+              tep_redirect(tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $_GET['cID']));
           }
           /* One Page Checkout - END*/      
       
@@ -54,7 +54,7 @@ $Id: configuration.php 3 2006-05-27 04:59:07Z user $
 //End of Set time of maintenance start 
 // EOF: MOD - Down for Maintenance
 
-        tep_redirect(tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $_GET['gID'] . '&amp;cID=' . $cID));
+        tep_redirect(tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cID));
         break;
     }
   }

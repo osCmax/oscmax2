@@ -58,7 +58,7 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
 // EOF: LINES ADDED
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . $value . "' where configuration_key = '" . $key . "'");
         }
-        tep_redirect(tep_href_link(FILENAME_MODULES, 'set=' . $set . '&amp;module=' . $_GET['module']));
+        tep_redirect(tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $_GET['module']));
         break;
       case 'install':
       case 'remove':

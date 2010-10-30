@@ -37,7 +37,7 @@ $Id: tax_rates.php 3 2006-05-27 04:59:07Z user $
 
         tep_db_query("update " . TABLE_TAX_RATES . " set tax_rates_id = '" . (int)$tax_rates_id . "', tax_zone_id = '" . (int)$tax_zone_id . "', tax_class_id = '" . (int)$tax_class_id . "', tax_rate = '" . tep_db_input($tax_rate) . "', tax_description = '" . tep_db_input($tax_description) . "', tax_priority = '" . tep_db_input($tax_priority) . "', last_modified = now() where tax_rates_id = '" . (int)$tax_rates_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_TAX_RATES, 'page=' . $_GET['page'] . '&amp;tID=' . $tax_rates_id));
+        tep_redirect(tep_href_link(FILENAME_TAX_RATES, 'page=' . $_GET['page'] . '&tID=' . $tax_rates_id));
         break;
       case 'deleteconfirm':
         $tax_rates_id = tep_db_prepare_input($_GET['tID']);

@@ -28,7 +28,7 @@ $Id: affiliate_banners.php 14 2006-07-28 17:42:07Z user $
           $messageStack->add_session(ERROR_UNKNOWN_STATUS_FLAG, 'error');
         }
 
-        tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&amp;page=' . $_GET['page'] . '&amp;abID=' . $_GET['abID']));
+        tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $_GET['page'] . '&abID=' . $_GET['abID']));
         break;
       case 'insert':
       case 'update':
@@ -105,7 +105,7 @@ $Id: affiliate_banners.php 14 2006-07-28 17:42:07Z user $
             $messageStack->add_session(SUCCESS_BANNER_UPDATED, 'success');
           }
 
-          tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&amp;page=' . $_GET['page'] . '&amp;abID=' . $affiliate_banners_id));
+          tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $_GET['page'] . '&abID=' . $affiliate_banners_id));
         } else {
           $_GET['action'] = 'new';
         }
@@ -133,7 +133,7 @@ $Id: affiliate_banners.php 14 2006-07-28 17:42:07Z user $
 
         $messageStack->add_session(SUCCESS_BANNER_REMOVED, 'success');
 
-        tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&amp;page=' . $_GET['page']));
+        tep_redirect(tep_href_link(FILENAME_AFFILIATE_BANNER_MANAGER, 'selected_box=affiliate&page=' . $_GET['page']));
         break;
     }
   }

@@ -217,7 +217,7 @@
           foreach ($excludes as $val) {
             tep_db_query('insert into ' . TABLE_EPF_EXCLUDE . ' set value_id1 = ' . (int)$vid . ', value_id2 = ' . (int)$val);
           }
-          tep_redirect(tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&amp;list_id=' . $list_id));
+          tep_redirect(tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&list_id=' . $list_id));
         }
         break;
       case 'update': // validate form
@@ -265,7 +265,7 @@
           foreach ($excludes as $val) { // insert new list of exclusions
             tep_db_query('insert into ' . TABLE_EPF_EXCLUDE . ' set value_id1 = ' . (int)$vid . ', value_id2 = ' . (int)$val);
           }
-          tep_redirect(tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&amp;list_id=' . $list_id));
+          tep_redirect(tep_href_link(FILENAME_EXTRA_VALUES, 'vid=' . $vid . '&list_id=' . $list_id));
         }
         break;
       case 'delete':

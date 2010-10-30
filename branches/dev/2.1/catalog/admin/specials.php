@@ -29,7 +29,7 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
       case 'setflag':
         tep_set_specials_status($_GET['id'], $_GET['flag']);
 
-        tep_redirect(tep_href_link(FILENAME_SPECIALS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&amp;' : '') . 'sID=' . $_GET['id'], 'NONSSL'));
+        tep_redirect(tep_href_link(FILENAME_SPECIALS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'sID=' . $_GET['id'], 'NONSSL'));
         break;
       case 'insert':
         $products_id = tep_db_prepare_input($_POST['products_id']);
@@ -80,7 +80,7 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
 
         tep_db_query("update " . TABLE_SPECIALS . " set specials_new_products_price = '" . tep_db_input($specials_price) . "', specials_last_modified = now(), expires_date = '" . tep_db_input($expires_date) . "' where specials_id = '" . (int)$specials_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&amp;sID=' . $specials_id));
+        tep_redirect(tep_href_link(FILENAME_SPECIALS, 'page=' . $_GET['page'] . '&sID=' . $specials_id));
       break;
       case 'deleteconfirm':
         $specials_id = tep_db_prepare_input($_GET['sID']);

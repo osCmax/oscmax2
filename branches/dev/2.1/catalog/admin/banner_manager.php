@@ -27,7 +27,7 @@ $Id: banner_manager.php 3 2006-05-27 04:59:07Z user $
           $messageStack->add_session(ERROR_UNKNOWN_STATUS_FLAG, 'error');
         }
 
-        tep_redirect(tep_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&amp;bID=' . $_GET['bID']));
+        tep_redirect(tep_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $_GET['bID']));
         break;
       case 'insert':
       case 'update':
@@ -101,7 +101,7 @@ $Id: banner_manager.php 3 2006-05-27 04:59:07Z user $
             tep_db_query("update " . TABLE_BANNERS . " set status = '0', date_scheduled = '" . tep_db_input($date_scheduled) . "' where banners_id = '" . (int)$banners_id . "'");
           }
 
-          tep_redirect(tep_href_link(FILENAME_BANNER_MANAGER, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&amp;' : '') . 'bID=' . $banners_id));
+          tep_redirect(tep_href_link(FILENAME_BANNER_MANAGER, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'bID=' . $banners_id));
         } else {
           $action = 'new';
         }

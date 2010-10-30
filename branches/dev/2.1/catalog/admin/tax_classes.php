@@ -31,7 +31,7 @@ $Id: tax_classes.php 3 2006-05-27 04:59:07Z user $
 
         tep_db_query("update " . TABLE_TAX_CLASS . " set tax_class_id = '" . (int)$tax_class_id . "', tax_class_title = '" . tep_db_input($tax_class_title) . "', tax_class_description = '" . tep_db_input($tax_class_description) . "', last_modified = now() where tax_class_id = '" . (int)$tax_class_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_TAX_CLASSES, 'page=' . $_GET['page'] . '&amp;tID=' . $tax_class_id));
+        tep_redirect(tep_href_link(FILENAME_TAX_CLASSES, 'page=' . $_GET['page'] . '&tID=' . $tax_class_id));
         break;
       case 'deleteconfirm':
         $tax_class_id = tep_db_prepare_input($_GET['tID']);

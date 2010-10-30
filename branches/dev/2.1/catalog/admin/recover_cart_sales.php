@@ -29,7 +29,7 @@ if ($action == 'delete') {
    $reset_query_raw2 = "delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id=" . $_GET[customer_id]; 
    tep_db_query($reset_query_raw2);
 
-   tep_redirect(tep_href_link(FILENAME_RECOVER_CART_SALES, 'delete=1&amp;customer_id='. $_GET['customer_id'] . '&amp;tdate=' . $_GET['tdate'])); 
+   tep_redirect(tep_href_link(FILENAME_RECOVER_CART_SALES, 'delete=1&customer_id='. $_GET['customer_id'] . '&tdate=' . $_GET['tdate'])); 
 } 
 
 if (isset($_GET['delete'])) { 

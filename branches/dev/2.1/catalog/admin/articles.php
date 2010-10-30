@@ -27,7 +27,7 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
           }
         }
 
-        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $_GET['tPath'] . '&amp;aID=' . $_GET['aID']));
+        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $_GET['tPath'] . '&aID=' . $_GET['aID']));
         break;
       case 'new_topic':
       case 'edit_topic':
@@ -88,7 +88,7 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
           tep_reset_cache_block('topics');
         }
 
-        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $topics_id));
+        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $topics_id));
         break;
         }
       case 'delete_topic_confirm':
@@ -174,7 +174,7 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
           if (in_array($topics_id, $path)) {
             $messageStack->add_session(ERROR_CANNOT_MOVE_TOPIC_TO_PARENT, 'error');
 
-            tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $topics_id));
+            tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $topics_id));
           } else {
             tep_db_query("update " . TABLE_TOPICS . " set parent_id = '" . (int)$new_parent_id . "', last_modified = now() where topics_id = '" . (int)$topics_id . "'");
 
@@ -182,7 +182,7 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
               tep_reset_cache_block('topics');
             }
 
-            tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $new_parent_id . '&amp;tID=' . $topics_id));
+            tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $new_parent_id . '&tID=' . $topics_id));
           }
         }
 
@@ -199,7 +199,7 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
           tep_reset_cache_block('topics');
         }
 
-        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $new_parent_id . '&amp;aID=' . $articles_id));
+        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $new_parent_id . '&aID=' . $articles_id));
         break;
       case 'insert_article':
       case 'update_article':
@@ -268,7 +268,7 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
             tep_reset_cache_block('topics');
           }
 
-          tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $articles_id));
+          tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $articles_id));
         }
         break;
       case 'copy_to_confirm':
@@ -307,7 +307,7 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
           }
         }
 
-        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $topics_id . '&amp;aID=' . $articles_id));
+        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $topics_id . '&aID=' . $articles_id));
         break;
     }
   }

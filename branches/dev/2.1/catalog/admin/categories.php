@@ -120,7 +120,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
           }
         }
 
-        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&amp;pID=' . $_GET['pID']));
+        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&pID=' . $_GET['pID']));
         break;
 
 // BOF Open Featured Sets
@@ -136,7 +136,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
           }
         }
 
-        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&amp;pID=' . $_GET['pID']));
+        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&pID=' . $_GET['pID']));
         break;
 
       case 'setflag_categories_featured':
@@ -273,7 +273,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             tep_reset_cache_block('also_purchased');
           }
 
-          tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;cID=' . $categories_id));
+          tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $categories_id));
 // BOF: MOD for Categories Description 1.5
         }
 // EOF: MOD for Categories Description 1.5
@@ -370,7 +370,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
           if (in_array($categories_id, $path)) {
             $messageStack->add_session(ERROR_CANNOT_MOVE_CATEGORY_TO_PARENT, 'error');
 
-            tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;cID=' . $categories_id));
+            tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $categories_id));
           } else {
             tep_db_query("update " . TABLE_CATEGORIES . " set parent_id = '" . (int)$new_parent_id . "', last_modified = now() where categories_id = '" . (int)$categories_id . "'");
 
@@ -379,7 +379,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
               tep_reset_cache_block('also_purchased');
             }
 
-            tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $new_parent_id . '&amp;cID=' . $categories_id));
+            tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $new_parent_id . '&cID=' . $categories_id));
           }
         }
 
@@ -397,7 +397,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
           tep_reset_cache_block('also_purchased');
         }
 
-        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $new_parent_id . '&amp;pID=' . $products_id));
+        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $new_parent_id . '&pID=' . $products_id));
         break;
       case 'insert_product':
       case 'update_product':
@@ -763,7 +763,7 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
           }
         }
 
-        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $categories_id . '&amp;pID=' . $products_id));
+        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $categories_id . '&pID=' . $products_id));
         break;
 //      case 'new_product_preview':
 // section moved, instant update

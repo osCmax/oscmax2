@@ -22,7 +22,7 @@ $Id: infobox_configuration.php 3 2006-05-27 04:59:07Z user $
           }
         }
 
-tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=' . $cID));
+tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID));
         break;
       case 'setflagcolumn': //set the status of a box left or right.
        if ( ($_GET['flag'] == 'left') || ($_GET['flag'] == 'right') ) {
@@ -31,7 +31,7 @@ tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=' . $c
           }
         }        
 
-tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=' . $cID));
+tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID));
         break;
       case 'save':
 	    $configuration_title = tep_db_prepare_input($_POST['configuration_title']);
@@ -42,7 +42,7 @@ tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=' . $c
         $cID = tep_db_prepare_input($_GET['cID']);
 
         tep_db_query("update " . TABLE_THEME_CONFIGURATION . " set configuration_title = '" . tep_db_input($configuration_title) . "', configuration_key = '" . tep_db_input($configuration_key) . "', location = '" . tep_db_input($location) . "', configuration_column = '" . tep_db_input($configuration_column) . "', configuration_value = '" . tep_db_input($configuration_value) . "', last_modified = now() where configuration_id = '" . tep_db_input($cID) . "'");
-        tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&amp;cID=' . $cID));
+        tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cID));
         break;
 
  case 'insert':
@@ -54,7 +54,7 @@ tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=' . $c
       $box_heading = tep_db_prepare_input($_POST['box_heading']);
 
       tep_db_query("insert into " . TABLE_THEME_CONFIGURATION . " (configuration_title, configuration_value, configuration_key, configuration_column, location, box_heading) values ('" . tep_db_input($configuration_title) . "', '" . tep_db_input($configuration_value) . "', '" . tep_db_input($configuration_key) . "', '" . tep_db_input($configuration_column) . "', '" . tep_db_input($location) . "', '" . tep_db_input($box_heading) . "')");
-        tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=' . $cID));
+        tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID));
 
         break;
     case 'deleteconfirm':

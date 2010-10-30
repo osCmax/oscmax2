@@ -35,7 +35,7 @@ $Id: countries.php 3 2006-05-27 04:59:07Z user $
 
         tep_db_query("update " . TABLE_COUNTRIES . " set countries_name = '" . tep_db_input($countries_name) . "', countries_iso_code_2 = '" . tep_db_input($countries_iso_code_2) . "', countries_iso_code_3 = '" . tep_db_input($countries_iso_code_3) . "', address_format_id = '" . (int)$address_format_id . "' where countries_id = '" . (int)$countries_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . '&amp;cID=' . $countries_id));
+        tep_redirect(tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . '&cID=' . $countries_id));
         break;
       case 'deleteconfirm':
         $countries_id = tep_db_prepare_input($_GET['cID']);

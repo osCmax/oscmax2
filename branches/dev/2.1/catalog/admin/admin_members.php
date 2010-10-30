@@ -23,7 +23,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
         }
 
         if (in_array($_POST['admin_email_address'], $stored_email)) {
-          tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $_GET['mID'] . '&amp;error=email&amp;action=new_member'));
+          tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&mID=' . $_GET['mID'] . '&error=email&action=new_member'));
         } else {
           function randomize() {
             $salt = "abchefghjkmnpqrstuvwxyz0123456789";
@@ -67,7 +67,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
         }
 
         if (in_array($_POST['admin_email_address'], $stored_email)) {
-          tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . 'mID=' . $_GET['mID'] . '&amp;error=email&amp;action=edit_member'));
+          tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . 'mID=' . $_GET['mID'] . '&error=email&action=edit_member'));
         } else {
           $sql_data_array = array('admin_groups_id' => tep_db_prepare_input($_POST['admin_groups_id']),
                                   'admin_username' => tep_db_prepare_input($_POST['admin_username']),
@@ -80,7 +80,7 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
 
           tep_mail($_POST['admin_username'] . ' ' . $_POST['admin_lastname'], $_POST['admin_email_address'], ADMIN_EMAIL_EDIT_SUBJECT, sprintf(ADMIN_EMAIL_EDIT_TEXT, $_POST['admin_firstname'], HTTP_SERVER . DIR_WS_ADMIN, $_POST['admin_username'], $hiddenPassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
-          tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $admin_id));
+          tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&mID=' . $admin_id));
         }
         break;
 
@@ -126,12 +126,12 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
         $name_replace = preg_replace('/./m', '%', admin_groups_name);
 
         if (($admin_groups_name == '' || NULL) || (strlen($admin_groups_name) <= 5) ) {
-          tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'gID=' . $_GET[gID] . '&amp;gName=false&amp;action=action=edit_group'));
+          tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'gID=' . $_GET[gID] . '&gName=false&action=action=edit_group'));
         } else {
           $check_groups_name_query = tep_db_query("select admin_groups_name as group_name_edit from " . TABLE_ADMIN_GROUPS . " where admin_groups_id <> " . $_GET['gID'] . " and admin_groups_name like '%" . $name_replace . "%'");
           $check_duplicate = tep_db_num_rows($check_groups_name_query);
           if ($check_duplicate > 0){
-            tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'gID=' . $_GET['gID'] . '&amp;gName=used&amp;action=edit_group'));
+            tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'gID=' . $_GET['gID'] . '&gName=used&action=edit_group'));
           } else {
             $admin_groups_id = $_GET['gID'];
             tep_db_query("update " . TABLE_ADMIN_GROUPS . " set admin_groups_name = '" . $admin_groups_name . "' where admin_groups_id = '" . $admin_groups_id . "'");
@@ -145,12 +145,12 @@ $Id: admin_members.php 3 2006-05-27 04:59:07Z user $
         $name_replace = preg_replace('/./m', '%', admin_groups_name);
 
         if (($admin_groups_name == '' || NULL) || (strlen($admin_groups_name) <= 5) ) {
-          tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'gID=' . $_GET[gID] . '&amp;gName=false&amp;action=new_group'));
+          tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'gID=' . $_GET[gID] . '&gName=false&action=new_group'));
         } else {
           $check_groups_name_query = tep_db_query("select admin_groups_name as group_name_new from " . TABLE_ADMIN_GROUPS . " where admin_groups_name like '%" . $name_replace . "%'");
           $check_duplicate = tep_db_num_rows($check_groups_name_query);
           if ($check_duplicate > 0){
-            tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'gID=' . $_GET['gID'] . '&amp;gName=used&amp;action=new_group'));
+            tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'gID=' . $_GET['gID'] . '&gName=used&action=new_group'));
           } else {
             $sql_data_array = array('admin_groups_name' => $admin_groups_name);
             tep_db_perform(TABLE_ADMIN_GROUPS, $sql_data_array);

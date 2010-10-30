@@ -38,7 +38,7 @@ $Id: quick_links.php 3 2010-03-31 user pgm
 
         tep_db_query("update " . TABLE_QUICK_LINKS . " set quick_links_id = '" . (int)$quick_links_id . "', quick_links_image = '" . $quick_links_image . "', quick_links_name = '" . $quick_links_name . "', quick_links_link = '" . tep_db_input($quick_links_link) . "', quick_links_target = '" . tep_db_input($quick_links_target) . "', quick_links_sort_order = '" . tep_db_input($quick_links_sort_order) . "', last_modified = now() where quick_links_id = '" . (int)$quick_links_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $quick_links_id));
+        tep_redirect(tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $quick_links_id));
         break;
       case 'deleteconfirm':
         $quick_links_id = tep_db_prepare_input($_GET['tID']);

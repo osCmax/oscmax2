@@ -28,7 +28,7 @@
 
         tep_db_query("update " . TABLE_AFFILIATE_NEWSLETTERS . " set locked = '" . $status . "' where affiliate_newsletters_id = '" . (int)$affiliate_newsletter_id . "'");
 
-        tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, 'page=' . $_GET['page'] . '&amp;nID=' . $_GET['nID']));
+        tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $_GET['nID']));
         break;
       case 'insert':
       case 'update':
@@ -64,7 +64,7 @@
             tep_db_perform(TABLE_AFFILIATE_NEWSLETTERS, $sql_data_array, 'update', "affiliate_newsletters_id = '" . (int)$affiliate_newsletter_id . "'");
           }
 
-          tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&amp;' : '') . 'nID=' . $affiliate_newsletter_id));
+          tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'nID=' . $affiliate_newsletter_id));
         } else {
           $action = 'new';
         }
@@ -95,7 +95,7 @@
 
           $messageStack->add_session($error, 'error');
 
-          tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, 'page=' . $_GET['page'] . '&amp;nID=' . $_GET['nID']));
+          tep_redirect(tep_href_link(FILENAME_AFFILIATE_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $_GET['nID']));
         }
         break;
     }

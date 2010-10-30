@@ -51,7 +51,7 @@ $Id: currencies.php 3 2006-05-27 04:59:07Z user $
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_input($code) . "' where configuration_key = 'DEFAULT_CURRENCY'");
         }
 
-        tep_redirect(tep_href_link(FILENAME_CURRENCIES, 'page=' . $_GET['page'] . '&amp;cID=' . $currency_id));
+        tep_redirect(tep_href_link(FILENAME_CURRENCIES, 'page=' . $_GET['page'] . '&cID=' . $currency_id));
         break;
       case 'deleteconfirm':
         $currencies_id = tep_db_prepare_input($_GET['cID']);
@@ -93,7 +93,7 @@ $Id: currencies.php 3 2006-05-27 04:59:07Z user $
           }
         }
 
-        tep_redirect(tep_href_link(FILENAME_CURRENCIES, 'page=' . $_GET['page'] . '&amp;cID=' . $_GET['cID']));
+        tep_redirect(tep_href_link(FILENAME_CURRENCIES, 'page=' . $_GET['page'] . '&cID=' . $_GET['cID']));
         break;
       case 'delete':
         $currencies_id = tep_db_prepare_input($_GET['cID']);

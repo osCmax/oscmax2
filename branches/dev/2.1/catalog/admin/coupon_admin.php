@@ -85,7 +85,7 @@ $Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
           tep_set_coupon_status($coupon_id, $_GET['flag']);
         }
       }
-      tep_redirect(tep_href_link(FILENAME_COUPON_ADMIN, '&amp;cid=' . $_GET['cid']));
+      tep_redirect(tep_href_link(FILENAME_COUPON_ADMIN, '&cid=' . $_GET['cid']));
       break;
     case 'confirmdelete':
       $delete_query=tep_db_query("delete from " . TABLE_COUPONS . " where coupon_id='" . (int)$coupon_id . "'");

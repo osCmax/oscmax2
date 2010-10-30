@@ -23,7 +23,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
 
         // Check that password is good
         if (!tep_validate_password($_POST['password_confirmation'], $check_pass['confirm_password'])) {
-          tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'action=check_account&amp;error=password'));
+          tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'action=check_account&error=password'));
         } else {
           //$confirm = 'confirm_account';
           tep_session_register('confirm_account');
@@ -43,7 +43,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
         }
 
         if (in_array($_POST['admin_email_address'], $stored_email)) {
-          tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'action=edit_process&amp;error=email'));
+          tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'action=edit_process&error=email'));
         } else {
           $sql_data_array = array('admin_username' => tep_db_prepare_input($_POST['admin_username']),
                                   'admin_firstname' => tep_db_prepare_input($_POST['admin_firstname']),
@@ -56,7 +56,7 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
 
           tep_mail($_POST['admin_firstname'] . ' ' . $_POST['admin_lastname'], $_POST['admin_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $_POST['admin_firstname'], HTTP_SERVER . DIR_WS_ADMIN, $_POST['admin_username'], $hiddenPassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
-          tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'page=' . $_GET['page'] . '&amp;mID=' . $admin_id));
+          tep_redirect(tep_href_link(FILENAME_ADMIN_ACCOUNT, 'page=' . $_GET['page'] . '&mID=' . $admin_id));
         }
         break;
     }
@@ -202,21 +202,22 @@ $Id: admin_account.php 3 2006-05-27 04:59:07Z user $
       break;
     case 'check_account':
       $heading[] = array('text' => '<b>&nbsp;' . TEXT_INFO_HEADING_CONFIRM_PASSWORD . '</b>');
-      $contents[] = array('text' => '&nbsp;' . TEXT_INFO_INTRO_CONFIRM_PASSWORD . tep_draw_hidden_field('id_info', $myAccount['admin_id']));
       if ($_GET['error']) {
-        $contents[] = array('text' => '&nbsp;' . TEXT_INFO_INTRO_CONFIRM_PASSWORD_ERROR);
+        $contents[] = array('text' => '<table width="100%"><tr><td class="messageStackError">' . tep_image(DIR_WS_ICONS . 'error.gif', ICON_ERROR) . '&nbsp;' . TEXT_INFO_INTRO_CONFIRM_PASSWORD_ERROR . '</td></tr></table>');
       }
+	  $contents[] = array('text' => '&nbsp;' . TEXT_INFO_INTRO_CONFIRM_PASSWORD . tep_draw_hidden_field('id_info', $myAccount['admin_id']));
       $contents[] = array('align' => 'center', 'text' => tep_draw_password_field('password_confirmation'));
       $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ADMIN_ACCOUNT) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a> ' . tep_image_submit('button_confirm.gif', IMAGE_CONFIRM) . '<br>&nbsp;');
       break;
     default:
       $heading[] = array('text' => '<b>&nbsp;' . TEXT_INFO_HEADING_DEFAULT . '</b>');
-      $contents[] = array('text' => TEXT_INFO_INTRO_DEFAULT);
       if ($myAccount['admin_email_address'] == 'admin@localhost') {
         $contents[] = array('text' => sprintf(TEXT_INFO_INTRO_DEFAULT_FIRST, $myAccount['admin_username']) . '<br>&nbsp;');
       } elseif (($myAccount['admin_modified'] == '0000-00-00 00:00:00') || ($myAccount['admin_logdate'] <= 1) ) {
-        $contents[] = array('text' => sprintf(TEXT_INFO_INTRO_DEFAULT_FIRST_TIME, $myAccount['admin_username']) . '<br>&nbsp;');
+        $contents[] = array('text' => '<table width="100%"><tr><td class="messageStackAlert">' . tep_image(DIR_WS_ICONS . 'warning.gif', ICON_WARNING) . '&nbsp;' . sprintf(TEXT_INFO_INTRO_DEFAULT_FIRST_TIME, $myAccount['admin_username']) . '</td></tr></table>');
       }
+	  $contents[] = array('text' => TEXT_INFO_INTRO_DEFAULT);
+      
   }
 
   if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {

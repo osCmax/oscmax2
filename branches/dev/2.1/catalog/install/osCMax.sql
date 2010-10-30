@@ -1,7 +1,7 @@
 # osCMax Power E-Commerce
 # http://oscdox.com
 #
-# Default Database For osCMax v2.0.25
+# Default Database For osCMax v2.5
 # Copyright (c) 2010 osCMax
 #
 # Released under the GNU General Public License
@@ -819,7 +819,8 @@ CREATE TABLE orders_products (
   orders_products_id int NOT NULL auto_increment,
   orders_id int NOT NULL,
   products_id int NOT NULL,
-  products_model varchar(12),
+  products_model varchar(24),
+  products_code varchar(40) NOT NULL,
   products_name varchar(64) NOT NULL,
   products_price decimal(15,4) NOT NULL,
   final_price decimal(15,4) NOT NULL,
@@ -838,6 +839,7 @@ CREATE TABLE orders_products_attributes (
   orders_products_id int NOT NULL,
   products_options varchar(32) NOT NULL,
   products_options_values varchar(32) NOT NULL,
+  code_suffix varchar(16) NOT NULL,
   options_values_price decimal(15,4) NOT NULL,
   price_prefix char(1) NOT NULL,
   PRIMARY KEY (orders_products_attributes_id),
@@ -981,6 +983,8 @@ CREATE TABLE products_attributes (
   products_id int NOT NULL,
   options_id int NOT NULL,
   options_values_id int NOT NULL,
+  code_suffix varchar(16) NOT NULL,
+  suffix_sort_order int(4) NOT NULL DEFAULT '0',
   options_values_price decimal(15,4) NOT NULL,
   price_prefix char(1) NOT NULL,
   PRIMARY KEY (products_attributes_id),

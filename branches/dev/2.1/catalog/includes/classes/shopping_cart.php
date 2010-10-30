@@ -522,6 +522,20 @@ var $shiptotal;
       $products_array = array();
       reset($this->contents);
       while (list($products_id, ) = each($this->contents)) {
+        $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_tax_class_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$products_id . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
+        if ($products = tep_db_fetch_array($products_query)) {
+          $prid = $products['products_id'];
+          $products_price = $products['products_price'];
+          }
+          $specials_price = tep_get_products_special_price($prid);
+          if (tep_not_null($specials_price)) {
+            $products_price = $specials_price;
+          } elseif ($this->cg_id != 0){
+            $customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$prid . "' and customers_group_id =  '" . $this->cg_id . "'");
+          if ($customer_group_price = tep_db_fetch_array($customer_group_price_query)) {
+            $products_price = $customer_group_price['customers_group_price'];
+          }
+        }
 // BOF QPBPP for SPPC
       $pf->loadProduct($products_id, $languages_id); // does query if necessary and adds to 
       // PriceFormatterStore or gets info from it next
@@ -534,11 +548,39 @@ var $shiptotal;
         }
           $products_price = $pf->computePrice($this->contents[$products_id]['qty'], $nof_other_items_in_cart_same_cat);
 // EOF QPBPP for SPPC
+//BOF Attribute Product Codes
+                $attribute_code_array = array();
+                if (is_array($this->contents[$products_id]['attributes'])) {
+                        $i = 0;
+                foreach ($this->contents[$products_id]['attributes'] as $attributes){
+                        $option = array_keys($this->contents[$products_id]['attributes']);
+                        $value = $this->contents[$products_id]['attributes'];
+                        $attribute_code_query = tep_db_query("select code_suffix, suffix_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$prid . "' and options_id = '" . (int)$option[$i] . "' and options_values_id = '" . (int)$value[$option[$i]] . "' order by suffix_sort_order ASC");
+                  $attribute_code = tep_db_fetch_array($attribute_code_query);
+                  if (tep_not_null($attribute_code['code_suffix'])) {
+                        $attribute_code_array[(int)$attribute_code['suffix_sort_order']] = $attribute_code['code_suffix'];
+                        }
+                                  $i++;
+                }
 
+        $separator = '-';
+	//	if (count($attribute_code_array) > 1) {
+        //  	$separator = '-';
+        //} elseif (count($attribute_code_array) == 1) {
+        // 	$separator = '/';
+        //}
+               
+        $products_code = $products['products_model'] . $separator . implode("-", $attribute_code_array);
+	} else {
+$products_code = $products['products_model'];
+
+}
+// EOF Attribute Product Codes		 
 //        $products_array[] = array('id' => $products_id,
           $products_array[] = array('id' => tep_get_uprid($products_id, $this->contents[$products_id]['attributes']),
                                     'name' => $products['products_name'],
                                     'model' => $products['products_model'],
+				    'code' => $products_code,
                                     'image' => $products['products_image'],
 // BOF QPBPP for SPPC
                                     'discount_categories_id' => $this->contents[$products_id]['discount_categories_id'],

@@ -361,10 +361,15 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
           echo '</i></small></nobr>';
         }
       }
-
-      echo '            </td>' . "\n" .
-           '            <td class="dataTableContent" valign="top">' . $order->products[$i]['model'] . '</td>' . "\n" .
-           '            <td class="dataTableContent" align="right" valign="top">' . tep_display_tax_value($order->products[$i]['tax']) . '%</td>' . "\n" .
+  // BOF: Attributes Product Codes - If product code exists, use it, else default to product model.
+      echo '            </td>' . "\n";
+      if(tep_not_null($order->products[$i]['code'])){
+         echo '            <td class="dataTableContent" valign="top">' .  $order->products[$i]['code'] . '</td>' . "\n" ;
+       } else {
+         echo '            <td class="dataTableContent" valign="top">' .  $order->products[$i]['model'] . '</td>' . "\n" ;
+       }
+      echo '            <td class="dataTableContent" align="right" valign="top">' . tep_display_tax_value($order->products[$i]['tax']) . '%</td>' . "\n" .
+  // EOF: Attributes Product Codes
            '            <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->format($order->products[$i]['final_price'], true, $order->info['currency'], $order->info['currency_value']) . '</b></td>' . "\n" .
            '            <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->format(tep_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax'], true), true, $order->info['currency'], $order->info['currency_value']) . '</b></td>' . "\n" .
            '            <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->format($order->products[$i]['final_price'] * $order->products[$i]['qty'], true, $order->info['currency'], $order->info['currency_value']) . '</b></td>' . "\n" .

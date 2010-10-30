@@ -73,6 +73,8 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
         $products_id = tep_db_prepare_input($_POST['products_id']);
         $options_id = tep_db_prepare_input($_POST['options_id']);
         $values_id = tep_db_prepare_input($_POST['values_id']);
+	$code_suffix = tep_db_prepare_input($_POST['code_suffix']); //Attributes Product-Codes
+        $suffix_sort_order = tep_db_prepare_input($_POST['suffix_sort_order']); //Attributes Product-Codes
         $value_price = tep_db_prepare_input($_POST['value_price']);
         $price_prefix = tep_db_prepare_input($_POST['price_prefix']);
 // START: More Product Weight
@@ -80,7 +82,8 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
         $price_prefix = tep_db_prepare_input($_POST['weight_prefix']);
 
         // tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values (null, '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "')");
-        tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values (null, '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . (float)tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "', '" . tep_db_input($value_weight) . "', '" . tep_db_input($weight_prefix) . "')");
+        // Attributes Product Codes added . tep_db_input($code_suffix) . "', '" . tep_db_input($suffix_sort_order) . "', '" to query
+	tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values ('', '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . tep_db_input($code_suffix) . "', '" . tep_db_input($suffix_sort_order) . "', '" . (float)tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "', '" . tep_db_input($value_weight) . "', '" . tep_db_input($weight_prefix) . "')");
         // END: More Product Weight
 
         if (DOWNLOAD_ENABLED == 'true') {
@@ -157,12 +160,15 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
         $products_id = tep_db_prepare_input($_POST['products_id']);
         $options_id = tep_db_prepare_input($_POST['options_id']);
 //        $values_id = tep_db_prepare_input($_POST['values_id']);
+        $code_suffix = tep_db_prepare_input($_POST['code_suffix']); //Attrbutes Product-Codes
+        $suffix_sort_order = tep_db_prepare_input($_POST['suffix_sort_order']);
         $value_price = tep_db_prepare_input($_POST['value_price']);
         $price_prefix = tep_db_prepare_input($_POST['price_prefix']);
         $attribute_id = tep_db_prepare_input($_POST['attribute_id']);
 
         // tep_db_query("update " . TABLE_PRODUCTS_ATTRIBUTES . " set products_id = '" . (int)$products_id . "', options_id = '" . (int)$options_id . "', options_values_id = '" . (int)$values_id . "', options_values_price = '" . (float)tep_db_input($value_price) . "', price_prefix = '" . tep_db_input($price_prefix) . "' where products_attributes_id = '" . (int)$attribute_id . "'");
-        tep_db_query("update " . TABLE_PRODUCTS_ATTRIBUTES . " set products_id = '" . (int)$products_id . "', options_id = '" . (int)$options_id . "', options_values_id = '" . (int)$values_id . "', options_values_price = '" . (float)tep_db_input($value_price) . "', price_prefix = '" . tep_db_input($price_prefix) . "', options_values_weight = '" . tep_db_input($value_weight) . "', weight_prefix = '" . tep_db_input($weight_prefix) . "' where products_attributes_id = '" . (int)$attribute_id . "'");
+        // Attributes Product Codes Added code_suffix = '" . tep_db_input($code_suffix) . "', suffix_sort_order = '" . tep_db_input($suffix_sort_order) . "', to query
+	tep_db_query("update " . TABLE_PRODUCTS_ATTRIBUTES . " set products_id = '" . (int)$products_id . "', options_id = '" . (int)$options_id . "', options_values_id = '" . (int)$values_id . "', code_suffix = '" . tep_db_input($code_suffix) . "', suffix_sort_order = '" . tep_db_input($suffix_sort_order) . "',options_values_price = '" . (float)tep_db_input($value_price) . "', price_prefix = '" . tep_db_input($price_prefix) . "', options_values_weight = '" . tep_db_input($value_weight) . "', weight_prefix = '" . tep_db_input($weight_prefix) . "' where products_attributes_id = '" . (int)$attribute_id . "'");
         // END: More Product Weight
 
         if (DOWNLOAD_ENABLED == 'true') {
@@ -697,7 +703,7 @@ function go_option() {
           <tr>
             <!-- START: More Product Weight -->
             <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
-            <td colspan="9"><?php echo tep_black_line(); ?></td>
+            <td colspan="10"><?php echo tep_black_line(); ?></td>
             <!-- END: More Product Weight -->
           </tr>
           <tr class="dataTableHeadingRow">
@@ -705,6 +711,8 @@ function go_option() {
             <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_PRODUCT; ?>&nbsp;</td>
             <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_OPT_NAME; ?>&nbsp;</td>
             <td class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_OPT_VALUE; ?>&nbsp;</td>
+            <td class="dataTableHeadingContent" align="center">&nbsp;<?php echo TABLE_HEADING_OPT_CODE_SUFFIX; ?>&nbsp;</td> 
+            <td class="dataTableHeadingContent" align="center">&nbsp;<?php echo TABLE_HEADING_OPT_CODE_ORDER; ?>&nbsp;</td>
             <td class="dataTableHeadingContent" align="right">&nbsp;<?php echo TABLE_HEADING_OPT_PRICE; ?>&nbsp;</td>
             <td class="dataTableHeadingContent" align="center">&nbsp;<?php echo TABLE_HEADING_OPT_PRICE_PREFIX; ?>&nbsp;</td>
             <!-- START: More Product Weight -->
@@ -716,7 +724,7 @@ function go_option() {
           <tr>
             <!-- START: More Product Weight -->
             <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
-            <td colspan="9"><?php echo tep_black_line(); ?></td>
+            <td colspan="10"><?php echo tep_black_line(); ?></td>
             <!-- END: More Product Weight -->
           </tr>
 <?php
@@ -769,8 +777,12 @@ function go_option() {
       } 
 ?>        
             </select>&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<input type="text" name="code_suffix" value="<?php echo $attributes_values['code_suffix']; ?>" size="10">&nbsp;</td>
+	    <!-- START: Attribute Product Codes -->
+	    <td align="center" class="smallText">&nbsp;<input type="text" name="suffix_sort_order" value="<?php echo $attributes_values['suffix_sort_order']; ?>" size="2">&nbsp;</td>
             <td align="right" class="smallText">&nbsp;<input type="text" name="value_price" value="<?php echo $attributes_values['options_values_price']; ?>" size="6">&nbsp;</td>
-            <td align="center" class="smallText">&nbsp;<input type="text" name="price_prefix" value="<?php echo $attributes_values['price_prefix']; ?>" size="2">&nbsp;</td>
+            <!-- END: Attribute Product Codes -->
+	    <td align="center" class="smallText">&nbsp;<input type="text" name="price_prefix" value="<?php echo $attributes_values['price_prefix']; ?>" size="1">&nbsp;</td>
             <!-- START: More Product Weight -->
             <td align="right" class="smallText">&nbsp;<input type="text" name="value_weight" value="<?php echo $attributes_values['options_values_weight']; ?>" size="6">&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<input type="text" name="weight_prefix" value="<?php echo $attributes_values['weight_prefix']; ?>" size="2">&nbsp;</td>
@@ -819,7 +831,11 @@ function go_option() {
             <td class="smallText">&nbsp;<b><?php echo $products_name_only; ?></b>&nbsp;</td>
             <td class="smallText">&nbsp;<b><?php echo $options_name; ?></b>&nbsp;</td>
             <td class="smallText">&nbsp;<b><?php echo $values_name; ?></b>&nbsp;</td>
-            <td align="right" class="smallText">&nbsp;<b><?php echo $attributes_values["options_values_price"]; ?></b>&nbsp;</td>
+	    <!-- START: Attribute Product Codes -->
+            <td align="center" class="smallText">&nbsp;<b><?php echo $attributes_values["code_suffix"]; ?></b>&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<b><?php echo $attributes_values["suffix_sort_order"]; ?></b>&nbsp;</td>
+            <!-- END: Attribute Product Codes -->
+	    <td align="right" class="smallText">&nbsp;<b><?php echo $attributes_values["options_values_price"]; ?></b>&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<b><?php echo $attributes_values["price_prefix"]; ?></b>&nbsp;</td>
             <!-- START: More Product Weight -->
             <td align="right" class="smallText">&nbsp;<b><?php echo $attributes_values["options_values_weight"]; ?></b>&nbsp;</td>
@@ -833,6 +849,10 @@ function go_option() {
             <td class="smallText">&nbsp;<?php echo $products_name_only; ?>&nbsp;</td>
             <td class="smallText">&nbsp;<?php echo $options_name; ?>&nbsp;</td>
             <td class="smallText">&nbsp;<?php echo $values_name; ?>&nbsp;</td>
+	    <!-- START: Attribute Product Codes -->
+            <td align="center" class="smallText">&nbsp;<?php echo $attributes_values["code_suffix"]; ?>&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<?php echo $attributes_values["suffix_sort_order"]; ?>&nbsp;</td>
+	    <!-- END: Attribute Product Codes -->
             <td align="right" class="smallText">&nbsp;<?php echo $attributes_values["options_values_price"]; ?>&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<?php echo $attributes_values["price_prefix"]; ?>&nbsp;</td>
             <!-- START: More Product Weight -->
@@ -854,7 +874,7 @@ function go_option() {
           <tr>
             <!-- START: More Product Weight -->
             <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
-            <td colspan="9"><?php echo tep_black_line(); ?></td>
+            <td colspan="10"><?php echo tep_black_line(); ?></td>
             <!-- END: More Product Weight -->
           </tr>
           <tr class="<?php echo (floor($rows/2) == ($rows/2) ? 'attributes-even' : 'attributes-odd'); ?>">
@@ -883,6 +903,10 @@ function go_option() {
     } 
 ?>
             </select>&nbsp;</td>
+	    <!-- START: Attribute Product Codes -->
+            <td align="center" class="smallText">&nbsp;<input type="text" name="code_suffix" size="6">&nbsp;</td>
+	    <td align="center" class="smallText">&nbsp;<input type="text" name="suffix_sort_order" size="6">&nbsp;</td>
+            <!-- END: Attribute Product Codes -->
             <td align="right" class="smallText">&nbsp;<input type="text" name="value_price" size="6">&nbsp;</td>
             <td align="right" class="smallText">&nbsp;<input type="text" name="price_prefix" size="2" value="+">&nbsp;</td>
             <!-- START: More Product Weight -->
@@ -925,7 +949,7 @@ function go_option() {
           <tr>
             <!-- START: More Product Weight -->
             <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
-            <td colspan="9"><?php echo tep_black_line(); ?></td>
+            <td colspan="10"><?php echo tep_black_line(); ?></td>
             <!-- END: More Product Weight -->
           </tr>
         </table></form></td>

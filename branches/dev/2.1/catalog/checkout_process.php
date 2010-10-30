@@ -292,6 +292,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
     $sql_data_array = array('orders_id' => $insert_id,
                             'products_id' => tep_get_prid($order->products[$i]['id']),
                             'products_model' => $order->products[$i]['model'],
+                            'products_code' => $order->products[$i]['code'],
                             'products_name' => $order->products[$i]['name'],
                             'products_price' => $order->products[$i]['price'],
                             'final_price' => $order->products[$i]['final_price'],
@@ -361,7 +362,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
     $total_tax += tep_calculate_tax($total_products_price, $products_tax) * $order->products[$i]['qty'];
     $total_cost += $total_products_price;
 
-    $products_ordered .= $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . ' (' . $order->products[$i]['model'] . ') = ' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . $products_ordered_attributes . "\n";
+    $products_ordered .= $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . ' (' . $order->products[$i]['code'] . ') = ' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . $products_ordered_attributes . "\n";
   }
 
 // LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution

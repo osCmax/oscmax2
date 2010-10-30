@@ -124,7 +124,7 @@ $Id: invoice.php 3 2006-05-27 04:59:07Z user $
           echo '</i></small></nobr>';
         }
       }
-
+  // BOF: Attributes Product Codes
       echo '            </td>' . "\n";
       if(tep_not_null($order->products[$i]['code'])){
          echo '            <td class="dataTableContent" valign="top">' .  $order->products[$i]['code'] . '</td>' . "\n" ;
@@ -132,6 +132,7 @@ $Id: invoice.php 3 2006-05-27 04:59:07Z user $
          echo '            <td class="dataTableContent" valign="top">' .  $order->products[$i]['model'] . '</td>' . "\n" ;
        }
       echo '        <td class="dataTableContent" align="right" valign="top">' . tep_display_tax_value($order->products[$i]['tax']) . '%</td>' . "\n" .
+  // EOF: Attributes Product Codes
            '        <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->format($order->products[$i]['final_price'], true, $order->info['currency'], $order->info['currency_value']) . '</b></td>' . "\n" .
            '        <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->format(tep_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax'], true), true, $order->info['currency'], $order->info['currency_value']) . '</b></td>' . "\n" .
            '        <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->format($order->products[$i]['final_price'] * $order->products[$i]['qty'], true, $order->info['currency'], $order->info['currency_value']) . '</b></td>' . "\n" .

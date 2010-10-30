@@ -20,6 +20,10 @@ define('TABLE_HEADING_OPT_NAME', 'Option Name');
 //LINE ADDED: MOD - QT Pro
 define('TABLE_HEADING_TRACK_STOCK', 'Track Stock?');
 define('TABLE_HEADING_OPT_VALUE', 'Option Value');
+// START: Attributes Product Codes
+define('TABLE_HEADING_OPT_CODE_SUFFIX', 'Code Suffix');
+define('TABLE_HEADING_OPT_CODE_ORDER', 'Suffix Order');
+// END: Attributes Product Codes
 define('TABLE_HEADING_OPT_PRICE', 'Value Price');
 define('TABLE_HEADING_OPT_PRICE_PREFIX', 'Prefix');
 define('TABLE_HEADING_ACTION', 'Action');

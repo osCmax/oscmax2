@@ -262,7 +262,7 @@ class googlecheckout {
 
   function install() {
     global $language;
-    require_once(DIR_FS_CATALOG . 'includes/languages/' . $language . '/modules/payment/googlecheckout.php');
+    require_once(DIR_FS_CATALOG . 'includes/languages/' . $language . '/googlecheckout.php');
     tep_db_query(
         "ALTER TABLE ". TABLE_CONFIGURATION 
         . " CHANGE `configuration_value` `configuration_value` TEXT NOT NULL");

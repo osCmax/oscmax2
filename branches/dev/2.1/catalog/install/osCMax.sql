@@ -2998,27 +2998,27 @@ INSERT INTO quick_links VALUES (10, 'Newsletters', 'newsletters.php', '_top', 10
 INSERT INTO quick_links VALUES (11, 'Goto Catalog', '../index.php', '_blank', 11, now(), now(), 'catalog.png');
 
 #Default Help Pages
-INSERT INTO help_pages VALUES ('index.php', 'http://wiki.oscdox.com/v2.1/oscmax_docs', 'Help Index', 0);
-INSERT INTO help_pages VALUES ('currencies.php', 'http://wiki.oscdox.com/v2.1/currencies', 'Currencies', 0);
-INSERT INTO help_pages VALUES ('countries.php', 'http://wiki.oscdox.com/v2.1/countries', 'Countries', 0);
-INSERT INTO help_pages VALUES ('admin_members.php', 'http://wiki.oscdox.com/v2.1/member_groups', 'Admin Members', 0);
-INSERT INTO help_pages VALUES ('admin_files.php', 'http://wiki.oscdox.com/v2.1/files_access', 'File Access', 0);
-INSERT INTO help_pages VALUES ('categories.php', 'http://wiki.oscdox.com/v2.1/categories_and_products', 'Categories', 0);
-INSERT INTO help_pages VALUES ('products_attributes.php', 'http://wiki.oscdox.com/v2.1/products_attributes', 'Product Attributes', 0);
-INSERT INTO help_pages VALUES ('manufacturers.php', 'http://wiki.oscdox.com/v2.1/manufacturers', 'Manufacturers', 0);
-INSERT INTO help_pages VALUES ('reviews.php', 'http://wiki.oscdox.com/v2.1/reviews', 'Reviews', 0);
-INSERT INTO help_pages VALUES ('easypopulate.php', 'http://wiki.oscdox.com/v2.1/easypopulate', 'Easy Populate', 0);
-INSERT INTO help_pages VALUES ('modules.php', 'http://wiki.oscdox.com/v2.1/modules', 'Modules', 0);
-INSERT INTO help_pages VALUES ('customers.php', 'http://wiki.oscdox.com/v2.1/customer', 'Customers', 0);
-INSERT INTO help_pages VALUES ('customer_groups.php', 'http://wiki.oscdox.com/v2.1/customers_groups', 'Customer Groups', 0);
-INSERT INTO help_pages VALUES ('create_order.php', 'http://wiki.oscdox.com/v2.1/create_order', 'Create Order', 0);
-INSERT INTO help_pages VALUES ('backup.php', 'http://wiki.oscdox.com/v2.1/database_backup', 'Database Backup', 0);
-INSERT INTO help_pages VALUES ('infobox_configuration.php', 'http://wiki.oscdox.com/v2.1/infoboxes', 'Infobox Configuration', 0);
-INSERT INTO help_pages VALUES ('configuration.php?gID=1', 'http://wiki.oscdox.com/v2.1/my_store', 'My Store', 0);
-INSERT INTO help_pages VALUES ('configuration.php?gID=2', 'http://wiki.oscdox.com/v2.1/minimum_values', 'Minimum Values', 0);
-INSERT INTO help_pages VALUES ('configuration.php?gID=3', 'http://wiki.oscdox.com/v2.1/maximum_values', 'Maximum Values', 0);
-INSERT INTO help_pages VALUES ('configuration.php?gID=201', 'http://wiki.oscdox.com/v2.1/template_setup', 'Template Setup', 0);
-INSERT INTO help_pages VALUES ('configuration.php?gID=203', 'http://wiki.oscdox.com/v2.1/notifications', 'Notifications', 0);
+INSERT INTO help_pages VALUES ('index.php', 'http://wiki.oscdox.com/v2.5/oscmax_docs', 'Help Index', 0);
+INSERT INTO help_pages VALUES ('currencies.php', 'http://wiki.oscdox.com/v2.5/currencies', 'Currencies', 0);
+INSERT INTO help_pages VALUES ('countries.php', 'http://wiki.oscdox.com/v2.5/countries', 'Countries', 0);
+INSERT INTO help_pages VALUES ('admin_members.php', 'http://wiki.oscdox.com/v2.5/member_groups', 'Admin Members', 0);
+INSERT INTO help_pages VALUES ('admin_files.php', 'http://wiki.oscdox.com/v2.5/files_access', 'File Access', 0);
+INSERT INTO help_pages VALUES ('categories.php', 'http://wiki.oscdox.com/v2.5/categories_and_products', 'Categories', 0);
+INSERT INTO help_pages VALUES ('products_attributes.php', 'http://wiki.oscdox.com/v2.5/products_attributes', 'Product Attributes', 0);
+INSERT INTO help_pages VALUES ('manufacturers.php', 'http://wiki.oscdox.com/v2.5/manufacturers', 'Manufacturers', 0);
+INSERT INTO help_pages VALUES ('reviews.php', 'http://wiki.oscdox.com/v2.5/reviews', 'Reviews', 0);
+INSERT INTO help_pages VALUES ('easypopulate.php', 'http://wiki.oscdox.com/v2.5/easypopulate', 'Easy Populate', 0);
+INSERT INTO help_pages VALUES ('modules.php', 'http://wiki.oscdox.com/v2.5/modules', 'Modules', 0);
+INSERT INTO help_pages VALUES ('customers.php', 'http://wiki.oscdox.com/v2.5/customer', 'Customers', 0);
+INSERT INTO help_pages VALUES ('customer_groups.php', 'http://wiki.oscdox.com/v2.5/customers_groups', 'Customer Groups', 0);
+INSERT INTO help_pages VALUES ('create_order.php', 'http://wiki.oscdox.com/v2.5/create_order', 'Create Order', 0);
+INSERT INTO help_pages VALUES ('backup.php', 'http://wiki.oscdox.com/v2.5/database_backup', 'Database Backup', 0);
+INSERT INTO help_pages VALUES ('infobox_configuration.php', 'http://wiki.oscdox.com/v2.5/infoboxes', 'Infobox Configuration', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=1', 'http://wiki.oscdox.com/v2.5/my_store', 'My Store', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=2', 'http://wiki.oscdox.com/v2.5/minimum_values', 'Minimum Values', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=3', 'http://wiki.oscdox.com/v2.5/maximum_values', 'Maximum Values', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=201', 'http://wiki.oscdox.com/v2.5/template_setup', 'Template Setup', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=203', 'http://wiki.oscdox.com/v2.5/notifications', 'Notifications', 0);
 
 #Canned Comments
 INSERT INTO orders_premade_comments VALUES (1, 'Thank you for your custom', 'Thank you for your custom.');

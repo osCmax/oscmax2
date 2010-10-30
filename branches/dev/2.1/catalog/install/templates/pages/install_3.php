@@ -70,7 +70,7 @@ $dir_fs_document_root = $HTTP_POST_VARS['DIR_FS_DOCUMENT_ROOT'];
 <?php if (is_writable($dir_fs_document_root) && is_writable($dir_fs_document_root . 'admin')) { ?>
       <tr>
         <td class="inputField"><?php echo 'Admin Folder Name<br />' . osc_draw_input_field('CFG_ADMIN_FOLDER', 'admin', 'class="text"'); ?></td>
-        <td class="inputDescription">The name of folder in which the admin files should be kept.  It is <b>recommended that you change this</b> from the default setting of <b>admin</b> to improve your site's security. If you want to read more about security please <a href="http://wiki.oscdox.com/v2.1/setting_up_security" target="_blank">read the wiki</a>.</td>
+        <td class="inputDescription">The name of folder in which the admin files should be kept.  It is <b>recommended that you change this</b> from the default setting of <b>admin</b> to improve your site's security. If you want to read more about security please <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">read the wiki</a>.</td>
       </tr>
 <?php } else { ?>
       <tr>

@@ -66,7 +66,7 @@
                 <td class="main"><?php echo ENTRY_ENQUIRY; ?></td>
               </tr>
               <tr>
-                <td><?php echo tep_draw_textarea_field('enquiry', 'soft', 50, 15); ?></td>
+                <td><?php echo tep_draw_textarea_field('enquiry', 50, 15); ?></td>
               </tr>
             </table></td>
           </tr>

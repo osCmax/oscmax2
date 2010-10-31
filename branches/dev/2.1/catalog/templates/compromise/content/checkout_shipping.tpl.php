@@ -174,7 +174,7 @@
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td><?php echo tep_draw_textarea_field('comments', 'soft', '60', '5'); ?></td>
+                <td><?php echo tep_draw_textarea_field('comments', '60', '5'); ?></td>
               </tr>
             </table></td>
           </tr>

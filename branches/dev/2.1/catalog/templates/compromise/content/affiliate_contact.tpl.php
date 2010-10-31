@@ -37,7 +37,7 @@
             <td class="main"><?php echo ENTRY_ENQUIRY; ?></td>
           </tr>
           <tr>
-            <td><?php echo tep_draw_textarea_field('enquiry', 'soft', 50, 15, $_POST['enquiry']); ?></td>
+            <td><?php echo tep_draw_textarea_field('enquiry', 50, 15, $_POST['enquiry']); ?></td>
           </tr>
           <tr>
             <td class="main" align="right"><br><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></td>

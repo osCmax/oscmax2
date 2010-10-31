@@ -189,7 +189,7 @@
                  <?php echo tep_draw_form('status', tep_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'action=update_order&' . tep_get_all_get_params(array('action')) , 'SSL')); ?>
                  <table border="0" width="100%" cellspacing="0" cellpadding="0">
                    <tr>
-                     <td><?php echo tep_draw_textarea_field('comments', 'soft', '60', '5'); ?></td>
+                     <td><?php echo tep_draw_textarea_field('comments', '60', '5'); ?></td>
                    </tr>
                    <tr>
                     <td valign="top" align="right"><?php echo tep_image_submit('button_update.gif', IMAGE_BUTTON_UPDATE); ?>

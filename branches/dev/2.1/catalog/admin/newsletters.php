@@ -194,7 +194,7 @@ $Id: newsletters.php 3 2006-05-27 04:59:07Z user $
             <tr>
               <td class="main" valign="top"><?php echo TEXT_NEWSLETTER_CONTENT; ?></td>
 <?php // BOF: MOD - WYSIWYG HTML Area Box
-/*          <td class="main"><?php echo tep_draw_textarea_field('content', 'soft', '100%', '20', $nInfo->content); ?></td> */ ?>
+/*          <td class="main"><?php echo tep_draw_textarea_field('content', '100%', '20', $nInfo->content); ?></td> */ ?>
               <td class="main">
 			  <?php if (HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER == 'Enable') {
 	    // BOF: CKeditor

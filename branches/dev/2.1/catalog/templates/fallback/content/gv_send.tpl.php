@@ -73,7 +73,7 @@
             <td class="main"><?php echo ENTRY_AMOUNT; ?><br><?php echo tep_draw_input_field('amount', $_POST['amount'], '', '', false); if ($error) echo $error_amount; ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo ENTRY_MESSAGE; ?><br><?php echo tep_draw_textarea_field('message', 'soft', 50, 15, stripslashes($_POST['message'])); ?></td>
+            <td class="main"><?php echo ENTRY_MESSAGE; ?><br><?php echo tep_draw_textarea_field('message', 50, 15, stripslashes($_POST['message'])); ?></td>
           </tr>
         </table>
         <table border="0" width="100%" cellspacing="0" cellpadding="2">

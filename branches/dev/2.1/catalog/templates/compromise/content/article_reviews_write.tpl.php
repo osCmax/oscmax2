@@ -38,7 +38,7 @@
                   <tr class="infoBoxContents">
                     <td><table border="0" width="100%" cellspacing="2" cellpadding="2">
                       <tr>
-                        <td class="main"><?php echo tep_draw_textarea_field('review', 'soft', 60, 15); ?></td>
+                        <td class="main"><?php echo tep_draw_textarea_field('review', 60, 15); ?></td>
                       </tr>
                       <tr>
                         <td class="main"><?php echo '<b>' . SUB_TITLE_RATING . '</b> ' . TEXT_BAD . ' ' . tep_draw_radio_field('rating', '1') . ' ' . tep_draw_radio_field('rating', '2') . ' ' . tep_draw_radio_field('rating', '3') . ' ' . tep_draw_radio_field('rating', '4') . ' ' . tep_draw_radio_field('rating', '5') . ' ' . TEXT_GOOD; ?></td>

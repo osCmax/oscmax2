@@ -227,7 +227,7 @@
           <td colspan="2"><?php echo $message_error; ?></td>
         </tr>
         <tr>
-          <td colspan="2" class="main"><?php echo TEXT_MESSAGE .  tep_draw_textarea_field('message', 'soft', 45, 5); ?></td>
+          <td colspan="2" class="main"><?php echo TEXT_MESSAGE .  tep_draw_textarea_field('message', 45, 5); ?></td>
         </tr>
         <tr>
           <td colspan="2" align="right"><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE, 'name="email_prod" value="email_prod"'); ?></td>

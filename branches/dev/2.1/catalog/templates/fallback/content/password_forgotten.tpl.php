@@ -23,9 +23,9 @@
   }
 ?>
       <tr>
-        <td><table border="0" width="100%" height="100%" cellspacing="1" cellpadding="2" class="infoBox">
+        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox" style="height:100%;">
           <tr class="infoBoxContents">
-            <td><table border="0" width="100%" height="100%" cellspacing="0" cellpadding="2">
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2" style="height:100%;">
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>

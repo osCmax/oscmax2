@@ -195,10 +195,10 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
 ////
 // Output a form textarea field
-  function tep_draw_textarea_field($name, $wrap, $width, $height, $text = '', $parameters = '', $reinsert_value = true) {
+  function tep_draw_textarea_field($name, $width, $height, $text = '', $parameters = '', $reinsert_value = true) {
     global $_GET, $_POST;
 
-    $field = '<textarea name="' . tep_output_string($name) . '" wrap="' . tep_output_string($wrap) . '" cols="' . tep_output_string($width) . '" rows="' . tep_output_string($height) . '"';
+    $field = '<textarea name="' . tep_output_string($name) . '" cols="' . tep_output_string($width) . '" rows="' . tep_output_string($height) . '"';
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 

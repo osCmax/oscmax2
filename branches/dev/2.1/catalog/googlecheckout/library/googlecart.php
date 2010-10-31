@@ -1041,8 +1041,8 @@
                 " onsubmit=\"setUrchinInputCode();\"":"") . ">
                 <input type=\"image\" name=\"Checkout\" alt=\"Checkout\"
                 src=\"". $this->server_url."buttons/checkout.gif?merchant_id=" .
-                $this->merchant_id."&w=".$width. "&h=".$height."&style=".
-                $style."&variant=".$this->variant."&loc=".$loc."\"
+                $this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".
+                $style."&amp;variant=".$this->variant."&amp;loc=".$loc."\"
                 height=\"".$height."\" width=\"".$width. "\" />";
 
         if ($this->googleAnalytics_id) {
@@ -1065,8 +1065,8 @@
       } else {
         $data .= "<div><img alt=\"Checkout\" src=\"" .
                 "". $this->server_url."buttons/checkout.gif?merchant_id=" .
-                "".$this->merchant_id."&w=".$width. "&h=".$height."&style=".$style.
-                "&variant=".$this->variant."&loc=".$loc."\" height=\"".$height."\"".
+                "".$this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".$style.
+                "&amp;variant=".$this->variant."&amp;loc=".$loc."\" height=\"".$height."\"".
                 " width=\"".$width. "\" /></div>";
 
       }
@@ -1137,8 +1137,8 @@
                 base64_encode($this->CalcHmacSha1($this->GetXML())). "\">
                 <input type=\"image\" name=\"Checkout\" alt=\"Checkout\"
                 src=\"". $this->server_url."buttons/checkout.gif?merchant_id=" .
-                $this->merchant_id."&w=".$width. "&h=".$height."&style=".
-                $style."&variant=".$this->variant."&loc=".$loc."\"
+                $this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".
+                $style."&amp;variant=".$this->variant."&amp;loc=".$loc."\"
                 height=\"".$height."\" width=\"".$width. "\" />";
 
         if ($this->googleAnalytics_id) {
@@ -1161,8 +1161,8 @@
       } else {
         $data .= "<div><img alt=\"Checkout\" src=\"" .
             "". $this->server_url."buttons/checkout.gif?merchant_id=" .
-            "".$this->merchant_id."&w=".$width. "&h=".$height."&style=".$style.
-            "&variant=".$this->variant."&loc=".$loc."\" height=\"".$height."\"".
+            "".$this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".$style.
+            "&amp;variant=".$this->variant."&amp;loc=".$loc."\" height=\"".$height."\"".
             " width=\"".$width. "\" /></div>";
       }
       if ($showtext) {
@@ -1326,8 +1326,8 @@
         $this->xml2html($XMLdata[$root], '', $data);
         $data .= "<input type=\"image\" name=\"Checkout\" alt=\"Checkout\" " .
                 "src=\"". $this->server_url."buttons/checkout.gif?merchant_id=".
-                $this->merchant_id."&w=".$width. "&h=".$height."&style=".
-                $style."&variant=".$this->variant."&loc=".$loc."\"
+                $this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".
+                $style."&amp;variant=".$this->variant."&amp;loc=".$loc."\"
                 height=\"".$height."\" width=\"".$width. "\" />";
 
         if ($this->googleAnalytics_id) {
@@ -1350,8 +1350,8 @@
       } else {
         $data .= "<div align=\"center\"><img alt=\"Checkout\" src=\"" .
             "". $this->server_url."buttons/checkout.gif?merchant_id=" .
-            "".$this->merchant_id."&w=".$width. "&h=".$height."&style=".$style.
-            "&variant=".$this->variant."&loc=".$loc."\" height=\"".$height."\"".
+            "".$this->merchant_id."&amp;w=".$width. "&amp;h=".$height."&amp;style=".$style.
+            "&amp;variant=".$this->variant."&amp;loc=".$loc."\" height=\"".$height."\"".
             " width=\"".$width. "\" /></div>";
       }
       if ($showtext){

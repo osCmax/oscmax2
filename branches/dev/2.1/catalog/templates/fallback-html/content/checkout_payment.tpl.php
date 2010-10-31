@@ -254,7 +254,7 @@ if ($gv_result['amount']>0){
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td><?php echo tep_draw_textarea_field('comments', 'soft', '60', '5', $comments); ?></td>
+                <td><?php echo tep_draw_textarea_field('comments', '60', '5', $comments); ?></td>
               </tr>
             </table></td>
           </tr>

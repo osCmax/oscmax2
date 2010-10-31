@@ -37,7 +37,7 @@
                   <tr class="infoBoxContents">
                     <td><table border="0" width="100%" cellspacing="2" cellpadding="2">
                       <tr>
-                        <td class="main"><?php echo tep_draw_textarea_field('review', 'soft', 60, 15); ?></td>
+                        <td class="main"><?php echo tep_draw_textarea_field('review', 60, 15); ?></td>
                       </tr>
                       <tr>
                         <td class="smallText" align="right"><?php echo TEXT_NO_HTML; ?></td>

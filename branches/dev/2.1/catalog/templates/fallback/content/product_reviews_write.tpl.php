@@ -81,7 +81,7 @@
         <td class="main"><b><?php echo SUB_TITLE_REVIEW; ?></b></td>
       </tr>
       <tr>
-        <td class="main"><?php echo tep_draw_textarea_field('review', 'soft', 60, 8); ?></td>
+        <td class="main"><?php echo tep_draw_textarea_field('review', 60, 8); ?></td>
       </tr>
       <tr>
         <td>

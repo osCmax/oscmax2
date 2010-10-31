@@ -736,7 +736,7 @@ if ($google_analytics_id != $config->nullValue()) {
 ?>
 <div align="right">
 <?php
-  echo '<div style="width: 180px; text-align: center;"><b>' . MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_OPTION . '</b></div>';
+  echo '<div style="font-family: Arial; font-size: 12px; width: 180px; text-align: center;"><b>' . MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_OPTION . '</b></div>';
 ?>
 </div>
 <div align="right">
@@ -745,10 +745,10 @@ if ($google_analytics_id != $config->nullValue()) {
     ?>
     <?php
       foreach($Gwarnings as $Gwarning) {
-        echo '<div style="font-size:11px; color: red; width: 180px; text-align: center;"> * ' . $Gwarning . '</div>';
+        echo '<div style="font-family: Arial; font-size:11px; color: red; width: 180px; text-align: center;"> * ' . $Gwarning . '</div>';
       }
       if($shipping_config_errors != ''){
-        echo '<div style="font-size:11px; color: red; width: 180px; text-align: center;"><b>' . GOOGLECHECKOUT_STRING_ERR_SHIPPING_CONFIG . '</b><br />';
+        echo '<div style="font-family: Arial; font-size:11px; color: red; width: 180px; text-align: center;"><b>' . GOOGLECHECKOUT_STRING_ERR_SHIPPING_CONFIG . '</b><br />';
         echo $shipping_config_errors;
         echo '</div>';
       }

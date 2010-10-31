@@ -95,7 +95,7 @@
           <tr>
             <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
               <tr class="infoBoxContents">
-                <td><?php echo tep_draw_textarea_field('message', 'soft', 40, 8); ?></td>
+                <td><?php echo tep_draw_textarea_field('message', 40, 8); ?></td>
               </tr>
             </table></td>
           </tr>

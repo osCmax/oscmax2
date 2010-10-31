@@ -50,7 +50,7 @@
 
   for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
     echo '                <tr>' . "\n" .
-         '                  <td width="10%" class="main" align="right" valign="top" width="30">' . $order->products[$i]['qty'] . ' x</td>' . "\n" .
+         '                  <td width="10%" class="main" align="right" valign="top">' . $order->products[$i]['qty'] . ' x</td>' . "\n" .
          '                  <td width="60%" class="main" valign="top">' . $order->products[$i]['name'];
 
    if (STOCK_CHECK == 'true') {
@@ -263,7 +263,7 @@ if ($gv_result['amount']>0){
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td><?php echo tep_draw_textarea_field('comments', 'soft', '60', '5', $comments); ?></td>
+                <td><?php echo tep_draw_textarea_field('comments', '60', '5', $comments); ?></td>
               </tr>
             </table></td>
           </tr>

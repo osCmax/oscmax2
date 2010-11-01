@@ -24,7 +24,6 @@ $contents = ('<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=1', 'N
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=1', 'NONSSL') . '">My Store</a></li>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=2', 'NONSSL') . '">Minimum Values</a></li>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=3', 'NONSSL') . '">Maximum Values</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=40', 'NONSSL') . '">Accounts</a></li>' .
               '</ul>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=4', 'NONSSL') . '">Images</a><ul>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=4', 'NONSSL') . '">Images</a></li>' .

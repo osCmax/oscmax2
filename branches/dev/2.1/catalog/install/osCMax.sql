@@ -2060,7 +2060,6 @@ INSERT INTO configuration VALUES (1306,'Allow the use of AJAX to update order in
 INSERT INTO configuration VALUES (1307,'Select your credit card payment method','ORDER_EDITOR_CREDIT_CARD','Credit Card','Order Editor will display the credit card fields when this payment method is selected.',70,5,NULL,now(),NULL,'tep_cfg_pull_down_payment_methods(');
 INSERT INTO configuration VALUES (1449,'Purchase without account','PURCHASE_WITHOUT_ACCOUNT','yes','Do you allow customers to purchase without an account?',5,'10',NULL,now(),NULL,'tep_cfg_select_option(array(\'yes\',\'no\'),');
 INSERT INTO configuration VALUES (1450,'Purchase without account shipping address','PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SHIPPING','yes','Do you allow customers without account to create separately shipping address?',5,'11',NULL,now(),NULL,'tep_cfg_select_option(array(\'yes\',\'no\'),');
-INSERT INTO configuration VALUES (1451,'Purchase Without Account','PWA_ON','true','Allow Customers to purchase without an account',40,1,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (1487, 'Dimensions Support', 'SHIPPING_DIMENSIONS_SUPPORT', 'No', 'Do you use the additional dimensions support (read dimensions.txt in the UPSXML package)?', 7, 6, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''No'', ''Ready-to-ship only'', ''With product dimensions''), ');
 INSERT INTO configuration VALUES (1488, 'Unit Weight', 'SHIPPING_UNIT_WEIGHT', 'LBS', 'By what unit are your packages weighed?', 7, 7, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''LBS'', ''KGS''), ');
 INSERT INTO configuration VALUES (1489, 'Unit Length', 'SHIPPING_UNIT_LENGTH', 'IN', 'By what unit are your packages sized?', 7, 8, NULL, '2009-03-07 13:49:41', NULL, 'tep_cfg_select_option(array(''IN'', ''CM''), ');
@@ -2335,7 +2334,6 @@ INSERT INTO configuration_group VALUES (16,'Site Maintenance','Site Maintenance 
 INSERT INTO configuration_group VALUES (25,'CK Editor','CK Editor Options',15,1);
 INSERT INTO configuration_group VALUES (30,'Printable Catalog','Options for Printable Catalog',30,1);
 INSERT INTO configuration_group VALUES (35,'Affiliate Program','Options for the Affiliate Program',50,1);
-INSERT INTO configuration_group VALUES (40,'Accounts','Configuration of Account settings',40,1);
 INSERT INTO configuration_group VALUES (45,'Dynamic MoPics','The options which configure Dynamic MoPics.',45,1);
 INSERT INTO configuration_group VALUES (50,'Product Information','Product Information page configuration options',8,1);
 INSERT INTO configuration_group VALUES (55,'Page Cache Settings','Settings for the page cache contribution', 20,1);

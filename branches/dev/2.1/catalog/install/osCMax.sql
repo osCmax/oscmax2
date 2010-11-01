@@ -2194,6 +2194,7 @@ INSERT INTO configuration VALUES (2658, 'Do you want to use a scroller in Also P
 INSERT INTO configuration VALUES (2659, 'Show More Info button?', 'SHOW_MORE_INFO', 'True', 'Do you want to display a More Info button next to your Buy Now button that links through to your products to display the full product information?<br><br>Please note that Buy Now button has to be enabled for this to work.', 8, 10, NULL,now(),NULL,'tep_cfg_select_option(array(''True'', ''False''),');
 INSERT INTO configuration VALUES (2660, 'Scroller Width', 'SCROLLER_WIDTH', '590', 'What width should the horizontal scroller be in pixels?  (Only enter the number)', 201, 28, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2661, 'Scroller Height', 'SCROLLER_HEIGHT', '160', 'What height should the horizontal scroller be in pixels?  (Only enter the number)', 201, 29, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2662, 'Display Short Description','PRODUCT_SHORT_DESCRIPTION','false','Do you want to display the short description in the list results?','8','6',NULL,now(),NULL,'tep_cfg_select_option(array(''true'', ''false''),');
 
 
 #Open Feature Sets Start

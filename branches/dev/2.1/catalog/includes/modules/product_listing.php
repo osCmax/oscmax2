@@ -438,12 +438,17 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
                 }
               }
             }
+			// add short description
+			if (PRODUCT_SHORT_DESCRIPTION == 'true') {
+			  $short = '';
+			  $short .= $listing[$x]['products_short'];
+			}
             // end extra product fields
             $lc_align = '';
             if (isset($_GET['manufacturers_id'])) {
-              $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $_GET['manufacturers_id'] . '&products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] /*begin epf*/ . $extra /*end epf*/ . '</a>';
+              $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $_GET['manufacturers_id'] . '&products_id=' . $listing[$x]['products_id']) . '"><b>' . $listing[$x]['products_name'] . '</b>' . $short /*begin epf*/ . $extra /*end epf*/ . '</a>';
             } else {
-              $lc_text = '&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] /*begin epf*/ . $extra /*end epf*/ . '</a>&nbsp;';
+              $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing[$x]['products_id']) . '"><b>' . $listing[$x]['products_name'] . '</b>' . $short /*begin epf*/ . $extra /*end epf*/ . '</a>&nbsp;';
             }
             break;
           case 'PRODUCT_LIST_MANUFACTURER':

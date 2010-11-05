@@ -504,8 +504,8 @@ if( isset($_SERVER['HTTP_HOST']) ) echo '<pre>';
 echo $report;
 if( isset($_SERVER['HTTP_HOST']) ) echo '</pre>
 
-<script type="text/javascript"><!--
-  opener.location=\'' . tep_href_link('admin/feedmachine_admin.php') . '\';
+<script language="javascript"><!--
+  opener.location.reload(true);
 //--></script>';
 
 tep_exit();

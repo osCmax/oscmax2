@@ -1,8 +1,8 @@
-# osCMax Power E-Commerce
+# osCmax Power E-Commerce
 # http://oscdox.com
 #
-# Default Database For osCMax v2.5
-# Copyright (c) 2010 osCMax
+# Default Database For osCmax v2.5
+# Copyright (c) 2010 osCmax
 #
 # Released under the GNU General Public License
 #
@@ -1859,7 +1859,7 @@ INSERT INTO configuration VALUES (141,'Check IP Address','SESSION_CHECK_IP_ADDRE
 INSERT INTO configuration VALUES (142,'Prevent Spider Sessions','SESSION_BLOCK_SPIDERS','True','Prevent known spiders from starting a session.','15','6',NULL,now(),NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),');
 INSERT INTO configuration VALUES (143,'Recreate Session','SESSION_RECREATE','False','Recreate the session to generate a new session ID when the customer logs on or creates an account (PHP >=4.1 needed).','15','7',NULL,now(),NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),');
 
-# osCMax added
+# osCmax added
 INSERT INTO configuration VALUES (144,'PRODUCT DESCRIPTIONS use WYSIWYG CK Editor?','HTML_AREA_WYSIWYG_DISABLE','Enable','Enable/Disable WYSIWYG box','25','0',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Enable\', \'Disable\'),');
 #INSERT INTO configuration VALUES (145,'Product Description Basic/Advanced Version?','HTML_AREA_WYSIWYG_BASIC_PD','Advanced','Basic Features FASTER<br>Advanced Features SLOWER','25','10',NULL,now(),NULL, 'tep_cfg_select_option(array(\'Basic\', \'Advanced\'),');
 #INSERT INTO configuration VALUES (146,'Product Description Layout Width','HTML_AREA_WYSIWYG_WIDTH','505','How WIDE should the HTMLAREA be in pixels (default: 505)','25','15',NULL,now(),NULL, '');
@@ -2329,7 +2329,7 @@ INSERT INTO configuration_group VALUES (12,'E-Mail Options','General setting for
 INSERT INTO configuration_group VALUES (13,'Download','Downloadable products options',13,1);
 INSERT INTO configuration_group VALUES (14,'GZip Compression','GZip compression options',14,1);
 INSERT INTO configuration_group VALUES (15,'Sessions','Session options',15,1);
-# osCMax added....
+# osCmax added....
 INSERT INTO configuration_group VALUES (16,'Site Maintenance','Site Maintenance Options',16,1);
 INSERT INTO configuration_group VALUES (25,'CK Editor','CK Editor Options',15,1);
 INSERT INTO configuration_group VALUES (30,'Printable Catalog','Options for Printable Catalog',30,1);
@@ -2337,7 +2337,7 @@ INSERT INTO configuration_group VALUES (35,'Affiliate Program','Options for the 
 INSERT INTO configuration_group VALUES (45,'Dynamic MoPics','The options which configure Dynamic MoPics.',45,1);
 INSERT INTO configuration_group VALUES (50,'Product Information','Product Information page configuration options',8,1);
 INSERT INTO configuration_group VALUES (55,'Page Cache Settings','Settings for the page cache contribution', 20,1);
-INSERT INTO configuration_group VALUES (60, 'Seo Urls 5','Options for ULTIMATE Seo Urls 5 by FWR Media', 902, 1);
+INSERT INTO configuration_group VALUES (60,'Seo Urls 5','Options for ULTIMATE Seo Urls 5 by FWR Media', 902, 1);
 INSERT INTO configuration_group VALUES (65,'Wish List Settings','Settings for your Wish List', 25,1);
 INSERT INTO configuration_group VALUES (70,'Order Editor','Configuration options for Order Editor', 903,1);
 INSERT INTO configuration_group VALUES (80,'Recover Cart Sales', 'Recover Cart Sales (RCS) Configuration Values', 55, 1);
@@ -3014,6 +3014,17 @@ INSERT INTO help_pages VALUES ('infobox_configuration.php', 'http://wiki.oscdox.
 INSERT INTO help_pages VALUES ('configuration.php?gID=1', 'http://wiki.oscdox.com/v2.5/my_store', 'My Store', 0);
 INSERT INTO help_pages VALUES ('configuration.php?gID=2', 'http://wiki.oscdox.com/v2.5/minimum_values', 'Minimum Values', 0);
 INSERT INTO help_pages VALUES ('configuration.php?gID=3', 'http://wiki.oscdox.com/v2.5/maximum_values', 'Maximum Values', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=4', 'http://wiki.oscdox.com/v2.5/images', 'Images', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=5', 'http://wiki.oscdox.com/v2.5/customer_details', 'Customer Details', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=7', 'http://wiki.oscdox.com/v2.5/shipping_packing', 'Shipping and Packing', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=8', 'http://wiki.oscdox.com/v2.5/product_listing', 'Product Listing', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=9', 'http://wiki.oscdox.com/v2.5/stock', 'Stock', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=10', 'http://wiki.oscdox.com/v2.5/logging', 'Logging', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=12', 'http://wiki.oscdox.com/v2.5/email_options', 'Email Options', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=13', 'http://wiki.oscdox.com/v2.5/downloads', 'Downloads', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=14', 'http://wiki.oscdox.com/v2.5/gzip_compression', 'GZip Compression', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=15', 'http://wiki.oscdox.com/v2.5/sessions', 'Sessions', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=16', 'http://wiki.oscdox.com/v2.5/site_maintenance', 'Site Maintenance', 0);
 INSERT INTO help_pages VALUES ('configuration.php?gID=201', 'http://wiki.oscdox.com/v2.5/template_setup', 'Template Setup', 0);
 INSERT INTO help_pages VALUES ('configuration.php?gID=203', 'http://wiki.oscdox.com/v2.5/notifications', 'Notifications', 0);
 

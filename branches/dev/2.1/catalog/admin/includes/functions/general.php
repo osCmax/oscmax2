@@ -191,7 +191,7 @@ function tep_selected_file($filename) {
 
     reset($_GET);
     while (list($key, $value) = each($_GET)) {
-      if (($key != tep_session_name()) && ($key != 'error') && (!in_array($key, $exclude_array))) $get_url .= $key . '=' . $value . '&amp;';
+      if (($key != tep_session_name()) && ($key != 'error') && (!in_array($key, $exclude_array))) $get_url .= $key . '=' . $value . '&';
     }
 
     return $get_url;

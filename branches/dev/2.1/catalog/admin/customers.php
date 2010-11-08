@@ -1145,7 +1145,7 @@ function check_form() {
       }
 
       if (isset($cInfo) && is_object($cInfo) && ($customers['customers_id'] == $cInfo->customers_id)) {
-        echo '          <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&amp;action=edit') . '\'">' . "\n";
+        echo '          <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=edit') . '\'">' . "\n";
       } else {
         echo '          <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID')) . 'cID=' . $customers['customers_id']) . '\'">' . "\n";
       }
@@ -1280,7 +1280,7 @@ function check_form() {
 // LINE CHANGED: MOD - Separate Pricing Per Customer: dark grey field with customer name higher
 //    $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_CUSTOMER . '</b>');
       $heading[] = array('text' => ''. tep_draw_separator('pixel_trans.gif', '11', '12') .'&nbsp;<br><b>' . TEXT_INFO_HEADING_DELETE_CUSTOMER . '</b>');
-      $contents = array('form' => tep_draw_form('customers', FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&amp;action=deleteconfirm'));
+      $contents = array('form' => tep_draw_form('customers', FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=deleteconfirm'));
       $contents[] = array('text' => TEXT_DELETE_INTRO . '<br><br><b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
       if (isset($cInfo->number_of_reviews) && ($cInfo->number_of_reviews) > 0) $contents[] = array('text' => '<br>' . tep_draw_checkbox_field('delete_reviews', 'on', true) . ' ' . sprintf(TEXT_DELETE_REVIEWS, $cInfo->number_of_reviews));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
@@ -1293,7 +1293,7 @@ function check_form() {
 		if (isset($sub_list_size) || isset($unsub_list_size)) {
 		$contents[] = array('align' => 'center', 'text' => '<table width="100%"><tr><td class="messageStackSuccess">MailChimp Sync Complete.<br>Subscribed:<b>' . $sub_list_size . '</b>&nbsp;&nbsp;Unsubscribed:<b>' . $unsub_list_size . '</b></td></tr></table>');	
 		}
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&amp;action=confirm') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_orders.gif', IMAGE_ORDERS) . '</a> <a href="' . tep_href_link(FILENAME_MAIL, 'selected_box=tools&amp;customer=' . $cInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=confirm') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_orders.gif', IMAGE_ORDERS) . '</a> <a href="' . tep_href_link(FILENAME_MAIL, 'selected_box=tools&customer=' . $cInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a>');
 		$contents[] = array('align' => 'center', 'text' => ' <a href="' . tep_href_link(FILENAME_CREATE_ORDER, tep_get_all_get_params(array('cID', 'action', 'page')) . 'Customer_nr=' . $cInfo->customers_id) . '">' . tep_image_button('button_create_order2.gif', IMAGE_ORDERS) . '</a> ');
 		if (MAILCHIMP_ENABLE == true) {
 		$contents[] = array('align' => 'center', 'text' => ' <a href="' . tep_href_link(FILENAME_CUSTOMERS, 'action=mailchimp') . '">' . tep_image_button('button_mc_sync.gif', IMAGE_MC_SYNC) . '</a> ');
@@ -1332,7 +1332,7 @@ $ias_notes_query = tep_db_query("SELECT DISTINCT customers_id, customers_notes_i
 		$comment_table_string .= '        <tr>';
 		$comment_table_string .= '          <td class="smallText"><b>' . $ias_notes["customers_notes_editor"] . '</b></td>';
 		$comment_table_string .= '          <td class="smallText" align="center" width="80">' . notedate($ias_notes["customers_notes_date"]) . '</td>';
-		$comment_table_string .= '          <td class="smallText" align="right" width="16"><a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&amp;action=deletenotes&amp;notesid='.$ias_notes["customers_notes_id"]) . '">' . tep_image_button('delete.png', IMAGE_DELETE) . '</a></td>';																																																																													 		$comment_table_string .= '      </tr>';
+		$comment_table_string .= '          <td class="smallText" align="right" width="16"><a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=deletenotes&notesid='.$ias_notes["customers_notes_id"]) . '">' . tep_image_button('delete.png', IMAGE_DELETE) . '</a></td>';																																																																													 		$comment_table_string .= '      </tr>';
 		$comment_table_string .= '    </table>';
 		$comment_table_string .= '  </td>';
 		$comment_table_string .= '</tr>';
@@ -1348,7 +1348,7 @@ $ias_notes_query = tep_db_query("SELECT DISTINCT customers_id, customers_notes_i
 
 		$notes_table_string .= '<table width="100%">';
 		$notes_table_string .= '  <tr>';
-		$notes_table_string .= '    <td><form action="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&amp;action=newnotes') . '" method="post" name="notes">';
+		$notes_table_string .= '    <td><form action="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=newnotes') . '" method="post" name="notes">';
 		$notes_table_string .= '      <table width="100%" cellpadding="0" cellspacing="0" border="0">';
 		$notes_table_string .= '        <tr>';
 		$notes_table_string .= '          <td class="smallText" colspan="3"><b>' . TEXT_ADD_A_COMMENT . '</b></td>';

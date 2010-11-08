@@ -26,4 +26,7 @@ define('WHATIS_TITLE_GOOGLE_SITEMAPS', 'What is Google SiteMaps?');
 define('WHATIS_TEXT_GOOGLE_SITEMAPS', 'Google SiteMaps allows you to upload an XML sitemap of all of your categories and products directly to google.com for faster indexing. ');
 define('WHATIS_REGISTER_GOOGLE_SITEMAPS', 'To register or login to your Google account, click ');
 define('COMPLETE_GOOGLE_SITEMAPS', '<b>Sitemap processing complete.</b>');
+define('IMAGE_REGENERATE', 'Regenerate');
+define('IMAGE_LOGIN', 'Login');
+define('IMAGE_PING', 'Ping');
 ?>

@@ -2,7 +2,7 @@
       <tr>
         <td><table border="0" width="100%" cellspacing="4" cellpadding="2">
           <tr>
-            <td valign="top"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_man_on_board.gif', $HEADING_TITLE); ?></td>
+            <td valign="middle" align="center"><?php echo tep_image(DIR_WS_ICONS . 'complete.png', $HEADING_TITLE); ?></td>
             <td valign="top" class="main"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?><div align="center" class="pageHeading"><?php echo $HEADING_TITLE; ?></div><br><?php echo $TEXT_SUCCESS; ?><br><br>
 <?php
   //PWA BOF

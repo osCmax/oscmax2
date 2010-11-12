@@ -1,5 +1,5 @@
 <!-- START OF PRODUCTS VIEWED -->
-  <table border="0" width="500" cellspacing="0" cellpadding="0" align="center">
+  <table border="0" width="450" cellspacing="0" cellpadding="0" align="center">
     <tr>
       <td class="pageheading"><?php echo DASHBOARD_PRODUCTS_V; ?></td>
     </tr>

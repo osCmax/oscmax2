@@ -82,14 +82,14 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
 <table width="95%" align="center">
 <tr valign="top">
 <td align="center" width="50%">
-  <table border="0" width="500" cellspacing="0" cellpadding="2" align="center">
+  <table border="0" cellspacing="0" cellpadding="2" align="center">
     <tr>
       <td><?php include('includes/modules/dashboard/products_viewed.php'); ?></td>
     </tr>
   </table>
 </td>
 <td align="center" width="50%">
-  <table border="0" width="500" cellspacing="0" cellpadding="2" align="center">
+  <table border="0" cellspacing="0" cellpadding="2" align="center">
     <tr>
       <td><?php include('includes/modules/dashboard/products_purchased.php'); ?></td>
     </tr>

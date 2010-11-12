@@ -1,9 +1,8 @@
     <!-- START OF PRODUCTS PURCHASED -->
-    
-    <table border="0" width="500" cellspacing="0" cellpadding="0" align="center">
-<tr>
-<td class="pageheading"><?php echo DASHBOARD_PRODUCTS_P; ?></td>
-</tr>
+        <table border="0" width="450" cellspacing="0" cellpadding="0" align="center">
+          <tr>
+            <td class="pageheading"><?php echo DASHBOARD_PRODUCTS_P; ?></td>
+          </tr>
           <tr>
             <td valign="top">
             <table border="0" width="100%" cellspacing="0" cellpadding="2">

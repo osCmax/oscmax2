@@ -2,7 +2,7 @@
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td><?php echo tep_image(DIR_WS_IMAGES . 'table_background_man_on_board.gif', HEADING_TITLE); ?></td>
+            <td><?php echo tep_image(DIR_WS_ICONS . 'padlock.png', HEADING_TITLE); ?></td>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td class="pageHeading" align="center"><?php echo HEADING_TITLE; ?></td>

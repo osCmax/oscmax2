@@ -69,7 +69,7 @@ $select_list_of_prdct_ids = "products_id = '".$list_of_prdct_ids[0]."' ";
 // get all customers_group_prices for products with the particular customer_group_id
 // however not necessary for customer_group_id = 0
 if ($customer_group_id != '0') {
-  $pg_query = tep_db_query("select pg.products_id, customers_group_price as price from " . TABLE_PRODUCTS_GROUPS . " pg where (".$select_list_of_prdct_ids.") and pg.customers_group_id = '".$customer_group_id."' and customers_group_price != null");
+  $pg_query = tep_db_query("select pg.products_id, customers_group_price as price from " . TABLE_PRODUCTS_GROUPS . " pg where (".$select_list_of_prdct_ids.") and pg.customers_group_id = '".$customer_group_id."' and pg.customers_group_price != 'null'");
 	while ($pg_array = tep_db_fetch_array($pg_query)) {
 	$new_prices[] = array ('products_id' => $pg_array['products_id'], 'products_price' => $pg_array['price'], 'specials_new_products_price' => '');
 	}

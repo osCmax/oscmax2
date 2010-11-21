@@ -35,14 +35,17 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
     }
 
 // display topic name
+
+    if (tep_has_topic_subtopics($counter)) {
+      $topics_string .= tep_image(DIR_WS_ICONS . 'pointer_blue.gif', '');
+    } else {
+      $topics_string .= tep_image(DIR_WS_ICONS . 'pointer_blue_light.gif', '');
+    }
+	
     $topics_string .= $tree[$counter]['name'];
 
     if (isset($tPath_array) && in_array($counter, $tPath_array)) {
       $topics_string .= '</b>';
-    }
-
-    if (tep_has_topic_subtopics($counter)) {
-      $topics_string .= ' -&gt;';
     }
 
     $topics_string .= '</a>';
@@ -193,7 +196,7 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 
   $boxContent = $new_articles_string . $all_articles_string . $topics_string;
 
-//  new infoBox($info_box_contents);
+// new infoBox($info_box_contents);
 
 include (bts_select('boxes', $box_base_name)); // BTS 1.5
 ?>

@@ -97,7 +97,7 @@
 	      //DISPLAY PRODUCT WAS ADDED TO WISHLIST IF WISHLIST REDIRECT IS ENABLED
       if(tep_session_is_registered('wishlist_id')) { ?>
       <tr>
-        <td class="messageStackSuccess"><?php echo PRODUCT_ADDED_TO_WISHLIST; ?></td>
+        <td colspan="3" class="messageStackSuccess"><?php echo PRODUCT_ADDED_TO_WISHLIST; ?></td>
       </tr>
 	<?php
       tep_session_unregister('wishlist_id');

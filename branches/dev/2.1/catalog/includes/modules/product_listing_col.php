@@ -24,12 +24,12 @@ $max_results = (tep_not_null($_GET['max']) ? $_GET['max'] : MAX_DISPLAY_SEARCH_R
 for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
       switch ($column_list[$i]) {
         case 'PRODUCT_LIST_NAME':
-          $sort_array[] = array('id' => '2a', 'text' => 'Product Name (A-Z)');
-		  $sort_array[] = array('id' => '2d', 'text' => 'Product Name (Z-A)');
+          $sort_array[] = array('id' => $i . 'a', 'text' => 'Product Name (A-Z)');
+		  $sort_array[] = array('id' => $i . 'd', 'text' => 'Product Name (Z-A)');
           break;
         case 'PRODUCT_LIST_PRICE':
-		  $sort_array[] = array('id' => '3a', 'text' => 'Price (Low - High)');
-		  $sort_array[] = array('id' => '3d', 'text' => 'Price (High - Low)');
+		  $sort_array[] = array('id' => $i . 'a', 'text' => 'Price (Low - High)');
+		  $sort_array[] = array('id' => $i . 'd', 'text' => 'Price (High - Low)');
           break;	
       }
     }

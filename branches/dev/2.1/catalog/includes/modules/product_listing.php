@@ -28,12 +28,12 @@ $max_results = (tep_not_null($_GET['max']) ? $_GET['max'] : MAX_DISPLAY_SEARCH_R
 for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
       switch ($column_list[$i]) {
         case 'PRODUCT_LIST_NAME':
-          $sort_array[] = array('id' => '2a', 'text' => 'Product Name (A-Z)');
-		  $sort_array[] = array('id' => '2d', 'text' => 'Product Name (Z-A)');
+          $sort_array[] = array('id' => $i . 'a', 'text' => 'Product Name (A-Z)');
+		  $sort_array[] = array('id' => $i . 'd', 'text' => 'Product Name (Z-A)');
           break;
         case 'PRODUCT_LIST_PRICE':
-		  $sort_array[] = array('id' => '3a', 'text' => 'Price (Low - High)');
-		  $sort_array[] = array('id' => '3d', 'text' => 'Price (High - Low)');
+		  $sort_array[] = array('id' => $i . 'a', 'text' => 'Price (Low - High)');
+		  $sort_array[] = array('id' => $i . 'd', 'text' => 'Price (High - Low)');
           break;	
       }
     }
@@ -206,7 +206,7 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
     }
 
     if ( ($column_list[$col] != 'PRODUCT_LIST_BUY_NOW') && ($column_list[$col] != 'PRODUCT_LIST_IMAGE') ) {
-      $lc_text = tep_create_sort_heading($_GET['sort'], $col+1, $lc_text);
+      $lc_text = tep_create_sort_heading($_GET['sort'], $col, $lc_text);
     }
 
     $list_box_contents[0][] = array('align' => $lc_align,

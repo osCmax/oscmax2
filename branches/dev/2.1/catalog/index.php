@@ -279,11 +279,16 @@ global $customer_group_id;
     $listing_sql .= $restrict_by;
 // EOF: extra product fields
 
+// Add new products limit and order
+	if (isset($_GET['new_products']) && tep_not_null($_GET['new_products'])) { 
+      $new_products_sort = "products_date_added, ";
+	}
+
     if ( (!isset($_GET['sort'])) || (!preg_match('/^[1-8][ad]$/', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
       for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
         if ($column_list[$i] == 'PRODUCT_LIST_NAME') {
           $_GET['sort'] = $i+1 . 'a';
-          $listing_sql .= " order by pd.products_name";
+          $listing_sql .= " order by " . $new_products_sort . "pd.products_name";
           break;
         }
       }
@@ -316,15 +321,15 @@ global $customer_group_id;
       }
     }
 	
-// Add new products limit and order
-	if (isset($_GET['new_products']) && tep_not_null($_GET['new_products'])) { 
-      $listing_sql .= ", products_date_added";
-	}
+
     $content = CONTENT_INDEX_PRODUCTS;
   } else { // default page
     $content = CONTENT_INDEX_DEFAULT;
   }
 
+// Debug main query  
+//  echo '<hr><p class="smallText">' . $listing_sql . '</p><hr>';
+  
   include (bts_select('main', $content_template)); // BTSv1.5
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

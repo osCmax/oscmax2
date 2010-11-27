@@ -16,6 +16,9 @@ define('HEADING_TITLE', 'Créer un compte');
 
 define('TEXT_ORIGIN_LOGIN', '<font color="#000000">Ouvrir un compte sur '.STORE_NAME.' est absolument gratuit !<br><br>Toutes les informations que vous nous donnerez resteront bien évidemment strictement privées et réservées. À aucun moment vos informations ne seront divulguées &agrave; d\'autres parties pour aucune action ou propos commercial. Toutes ces informations ne servent à '.STORE_NAME.' que pour mieux vous suivre et vous servir...<br><br> Vous pourrez à tout moment voir, mettre à jour ou supprimer les informations que vous nous aurez données. Il vous suffira pour cela de vous identifier sur notre site et de cliquer sur le lien "Mon compte" Vous gardez ainsi à tout moment le plein contrôle sur les informations que vous nous avez transmises...</font><br><br>');
 
+define('EMAIL_ACCOUNT_DETAILS', 'Account Details:');
+define('EMAIL_ACCOUNT_USERNAME', 'Username:');
+define('ACCOUNT_PASSWORD', 'Password:');
 define('EMAIL_SUBJECT', 'Bienvenue sur ' . STORE_NAME);
 define('EMAIL_GREET_MR', 'Cher Mr. ' . stripslashes($_POST['lastname']) . ',' . "\n\n");
 define('EMAIL_GREET_MS', 'Chère Ms. ' . stripslashes($_POST['lastname']) . ',' . "\n\n");

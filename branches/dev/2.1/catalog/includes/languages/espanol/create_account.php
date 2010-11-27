@@ -16,6 +16,9 @@ define('HEADING_TITLE', 'Datos de Mi Cuenta');
 
 define('TEXT_ORIGIN_LOGIN', '<font color="#FF0000"><small><b>NOTA:</b></font></small> Si ya ha pasado por este proceso y tiene una cuenta, por favor <a href="%s"><u>entre</u></a> en ella.');
 
+define('EMAIL_ACCOUNT_DETAILS', 'Detalles de la cuenta: ');
+define('EMAIL_ACCOUNT_USERNAME', 'Nombre de usuario: ');
+define('ACCOUNT_PASSWORD', 'Contraseña: ');
 define('EMAIL_SUBJECT', 'Bienvenido a ' . STORE_NAME);
 define('EMAIL_GREET_MR', 'Estimado ' . stripslashes($_POST['lastname']) . ',' . "\n\n");
 define('EMAIL_GREET_MS', 'Estimado ' . stripslashes($_POST['lastname']) . ',' . "\n\n");

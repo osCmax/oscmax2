@@ -59,7 +59,7 @@ class googlecheckout {
     $this->code = 'googlecheckout';
     $this->title = MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_TITLE;
     $this->description = MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_DESCRIPTION;
-    $this->sort_order = 0;
+    $this->sort_order = MODULE_PAYMENT_GOOGLE_SORT_ORDER;;
     $this->mode = MODULE_PAYMENT_GOOGLECHECKOUT_STATUS;
     if (MODULE_PAYMENT_GOOGLECHECKOUT_MODE == 'https://sandbox.google.com/checkout/') {
       $this->merchantid = trim(MODULE_PAYMENT_GOOGLECHECKOUT_MERCHANTID_SNDBOX);
@@ -367,6 +367,7 @@ class googlecheckout {
                                          true)
             . '.',
         $sort_order++);
+    tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort order of display.', 'MODULE_PAYMENT_GOOGLE_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
 
     tep_db_query("create table if not exists ". $this->table_name ." (customers_id int(11), buyer_id bigint(20))");
     tep_db_query("create table if not exists ". $this->table_order ." (orders_id int(11), google_order_number bigint(20), order_amount decimal(15,4))");
@@ -432,6 +433,7 @@ class googlecheckout {
       'MODULE_PAYMENT_GOOGLECHECKOUT_MERCHANTKEY',
       'MODULE_PAYMENT_GOOGLECHECKOUT_MERCHANTID_SNDBOX',
       'MODULE_PAYMENT_GOOGLECHECKOUT_MERCHANTKEY_SNDBOX',
+      'MODULE_PAYMENT_GOOGLE_SORT_ORDER',
       );
   }
 }

@@ -1536,6 +1536,13 @@ CREATE TABLE IF NOT EXISTS usu_cache (
   PRIMARY KEY  (`cache_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS address_format;
+CREATE TABLE IF NOT EXISTS google_configuration (
+  google_configuration_key varchar(255) default NULL,
+  google_configuration_value text
+);
+
+
 # data
 
 # 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany, 6 - UK
@@ -3078,3 +3085,18 @@ INSERT INTO information VALUES(11, 1, 'Condiciones de uso', '<p>\r\n	Condiciones
 
 INSERT INTO information_group VALUES(1, 'Information pages', 'Information pages', 1, 1, '');
 INSERT INTO information_group VALUES(2, 'Welcome message', 'Welcome message', 2, 1, 'information_title, sort_order, parent_id, visible');
+
+INSERT INTO google_configuration VALUES('GOOGLE_ANALYTICS_ID', 'NONE');
+INSERT INTO google_configuration VALUES('US_PO_BOX', 'True');
+INSERT INTO google_configuration VALUES('ENABLE_CARRIER_CALCULATED_SHIPPING', 'True');
+INSERT INTO google_configuration VALUES('CARRIER_CALCULATED_SHIPPING', 'fedexGrounddomestic_types_CCS:10|0|0, fedexHome Deliverydomestic_types_CCS:10|0|0, fedexExpress Saverdomestic_types_CCS:10|0|0, fedex2Daydomestic_types_CCS:10|0|0, fedexStandard Overnightdomestic_types_CCS:10|0|0, fedexPriority Overnightdomestic_types_CCS:10|0|0, fedexFirst Overnightdomestic_types_CCS:10|0|0, upsGrounddomestic_types_CCS:10|0|0, ups3 Day Selectdomestic_types_CCS:10|0|0, ups2nd Day Airdomestic_types_CCS:10|0|0, ups2nd Day Air AMdomestic_types_CCS:10|0|0, upsNext Day Air Saverdomestic_types_CCS:10|0|0, upsNext Day Airdomestic_types_CCS:10|0|0, upsNext Day Air Early AMdomestic_types_CCS:10|0|0, uspsMedia Maildomestic_types_CCS:10|0|0, uspsParcel Postdomestic_types_CCS:10|0|0, uspsExpress Maildomestic_types_CCS:10|0|0, uspsPriority Maildomestic_types_CCS:10|0|0');
+INSERT INTO google_configuration VALUES('ROUNDING_MODE', 'HALF_EVEN');
+INSERT INTO google_configuration VALUES('ROUNDING_RULE', 'PER_LINE');
+INSERT INTO google_configuration VALUES('HTACCESS_AUTH_MODE', 'False');
+INSERT INTO google_configuration VALUES('VIRTUAL_GOODS', 'False');
+INSERT INTO google_configuration VALUES('SANDBOX_MERCHANT_CALLBACK_PROTOCOL', 'https');
+INSERT INTO google_configuration VALUES('CART_EXPIRATION_TIME', 'NONE');
+INSERT INTO google_configuration VALUES('USE_CART_MESSAGING', 'False');
+INSERT INTO google_configuration VALUES('THIRD_PARTY_TRACKING_URL', 'NONE');
+INSERT INTO google_configuration VALUES('RESTRICTED_CATEGORIES', '');
+INSERT INTO google_configuration VALUES('CONTINUE_SHOPPING_URL', 'gc_return.php');

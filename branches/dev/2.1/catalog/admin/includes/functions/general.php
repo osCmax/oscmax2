@@ -1234,8 +1234,8 @@ function tep_selected_file($filename) {
     $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
     if ($duplicate_image['total'] < 2) {
-      if (file_exists(DIR_FS_CATALOG_IMAGES . $product_image['products_image'])) {
-        @unlink(DIR_FS_CATALOG_IMAGES . $product_image['products_image']);
+      if (file_exists(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $category_image['categories_image'])) {
+        @unlink(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $category_image['categories_image']);
       }
     }
 

@@ -1536,7 +1536,7 @@ CREATE TABLE IF NOT EXISTS usu_cache (
   PRIMARY KEY  (`cache_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS address_format;
+DROP TABLE IF EXISTS google_configuration;
 CREATE TABLE IF NOT EXISTS google_configuration (
   google_configuration_key varchar(255) default NULL,
   google_configuration_value text

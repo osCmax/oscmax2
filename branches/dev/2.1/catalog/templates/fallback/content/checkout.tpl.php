@@ -249,6 +249,21 @@
 	  <tr>
 		<td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
 	  </tr>
+      
+<?php if (MATC == 'true') { ?>
+      <tr>
+        <td>
+          <table border="0" width="100%" cellspacing="1" cellpadding="2">
+            <tr>
+              <td id="MATCtd" class="messageStackAlert" align="center"><?php echo tep_draw_checkbox_field('MATC','true', false, 'id="MATC" onClick="javascript:switchMATC()"'); ?><?php echo TERMS_PART_1 . '<a href="' . tep_href_link(FILENAME_CONDITIONS) . '">' . TERMS_PART_2 . '</a>';?>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+	  <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
 	  <tr>
 		<td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
 		  <tr class="infoBoxContents" id="checkoutYesScript" style="display:none;">
@@ -256,11 +271,29 @@
 			  <tr>
 				<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
 				<td class="main" id="checkoutMessage"><?php echo '<b>' . TITLE_CONTINUE_CHECKOUT_PROCEDURE . '</b><br>' . TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?></td>
+                
+				<td class="main" align="right"><span id="enableMATC"><?php if(ONEPAGE_CHECKOUT_LOADER_POPUP == 'False'){ ?><div id="ajaxMessages" style="display:none;"></div><?php } ?><div id="checkoutButtonContainer"><?php echo tep_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONTINUE, 'id="checkoutButton" formUrl="' . tep_href_link(FILENAME_CHECKOUT_PROCESS, '', $request_type) . '"'); ?><input type="hidden" name="formUrl" id="formUrl" value=""></div><div id="paymentHiddenFields" style="display:none;"></div></span>
+                <span id="disableMATC" style="cursor: pointer;"><?php echo tep_image_button('button_MAT.gif', IMAGE_BUTTON_MAT, ' onClick="javascript:warnMATC()"'); ?></span></td>
+				<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+			  </tr>
+			</table></td>
+		  </tr>
+<?php } else { ?>
+      
+	  <tr>
+		<td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+		  <tr class="infoBoxContents" id="checkoutYesScript" style="display:none;">
+			<td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+			  <tr>
+				<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+				<td class="main" id="checkoutMessage"><?php echo '<b>' . TITLE_CONTINUE_CHECKOUT_PROCEDURE . '</b><br>' . TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?></td>
+                
 				<td class="main" align="right"><?php if(ONEPAGE_CHECKOUT_LOADER_POPUP == 'False'){ ?><div id="ajaxMessages" style="display:none;"></div><?php } ?><div id="checkoutButtonContainer"><?php echo tep_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONTINUE, 'id="checkoutButton" formUrl="' . tep_href_link(FILENAME_CHECKOUT_PROCESS, '', $request_type) . '"'); ?><input type="hidden" name="formUrl" id="formUrl" value=""></div><div id="paymentHiddenFields" style="display:none;"></div></td>
 				<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
 			  </tr>
 			</table></td>
 		  </tr>
+<?php } ?>
 
 		  <tr class="infoBoxContents" id="checkoutNoScript">
 			<td><table border="0" width="100%" cellspacing="0" cellpadding="2">

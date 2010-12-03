@@ -106,4 +106,6 @@ define('TEXT_REDEEM_SYSTEM_SPENDING', 'Tick here to use Maximum Points allowed f
 define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">Total Purchase is greater than the maximum points allowed, you will also need to choose a payment method</span>');
 define('TEXT_REFERRAL_REFERRED', 'If you were referred to us by a friend please enter their email address here. ');
 // Points/Rewards Module V2.1rc2a EOF
+define('TERMS_PART_1', 'Please confirm that you have read our ');
+define('TERMS_PART_2', '<b><u>Terms and Conditions</u></b>');
 ?>

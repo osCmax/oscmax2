@@ -926,7 +926,7 @@ class osC_onePageCheckout {
 		tep_image_submit('button_continue.gif', IMAGE_CONTINUE, 'style="display:none;"') .
 		$hiddenFields .
 		'<script>
-					 document.write(\'<img src="' . DIR_WS_IMAGES . 'ajax-loader.gif"><br>Processing Order, Please Wait...\');
+					 document.write(\'<img src="' . DIR_WS_IMAGES . 'ajax_load.gif"><p style="font-family: Verdana,Arial,sans-serif; font-size: 12px;">Processing Order, Please Wait...</p>\');
 					 redirectForm.submit();
 				   </script></form>';
 
@@ -1124,7 +1124,7 @@ class osC_onePageCheckout {
 		                                             IMAGE_CONTINUE) . '</noscript>' . tep_image_submit('button_continue.gif',
 		                                                                                                IMAGE_CONTINUE,
 		                                                                                                'style="display:none;"') . $hiddenFields . '<script>
-           document.write(\'<div style="width:100%;height:100%;margin-left:auto;margin-top:auto;text-align:center"><img src="' . DIR_WS_HTTP_CATALOG . DIR_WS_IMAGES . 'ajax-loader.gif"><br>Processing Order, Please Wait...</div>\');
+           document.write(\'<div style="width:100%;height:100%;margin-left:auto;margin-top:auto;text-align:center"><img src="' . DIR_WS_HTTP_CATALOG . DIR_WS_IMAGES . 'ajax_load.gif"><p style="font-family: Verdana,Arial,sans-serif; font-size: 12px;">Processing Order, Please Wait...</p></div>\');
             setTimeout("redirectForm.submit()", 3000);  
            </script></form>';
 

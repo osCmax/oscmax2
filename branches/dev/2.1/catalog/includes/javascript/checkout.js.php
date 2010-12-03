@@ -101,6 +101,7 @@ function CVVPopUpWindowEx(url) {
 
 $(document).ready(function (){
 	$('#pageContentContainer').show();
+	$('#enableMATC').hide();
 	<?php
   if(ONEPAGE_CHECKOUT_LOADER_POPUP == 'True')
   {
@@ -379,4 +380,23 @@ function clearRadeos(){
 	 return true;
   }
 //-->
+</script>
+
+
+<script type="text/javascript">
+function switchMATC() { 
+	if($("#MATC").attr("checked")) {
+		$("#MATCtd").attr("class", "messageStackSuccess");
+		$('#disableMATC').hide();
+    	$('#enableMATC').show();
+	} else {
+		$("#MATCtd").attr("class", "messageStackAlert");
+		$('#disableMATC').show();
+    	$('#enableMATC').hide();
+	}
+}
+
+function warnMATC() {
+		$("#MATCtd").attr("class", "messageStackWarning");
+}
 </script>

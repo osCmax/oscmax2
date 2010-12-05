@@ -2320,6 +2320,11 @@ INSERT INTO configuration VALUES (3257, 'Send goodbye email on unsubscribe?', 'M
 INSERT INTO configuration VALUES (3258, 'Send unsubscribe notification email?', 'MAILCHIMP_SEND_NOTIFY', 'true', 'Do you want to send the unsubscribe notification email to the address defined in the list email notification settings?', 206, 9, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
 INSERT INTO configuration VALUES (3259, 'MailChimp last syncronise', 'MAILCHIMP_LAST_SYNC', '', 'When was your local newsletter list last syncronised with MailChimp? Please note that this will be the MailChimp server time once set.  If you wish to reset then set to blank.', 206, 10, now(), now(), NULL, NULL);
 
+INSERT INTO configuration VALUES (3300, 'Show store opening hours', 'SHOW_STORE_OPENING_HOURS', 'true', 'Do you want to show your store opening hours?', 207, 1, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
+INSERT INTO configuration VALUES (3301, 'Store opening hours text', 'STORE_OPENING_HOURS_TEXT','Our store is open from 9.30am to 5pm from Monday to Friday','Enter your opening hours.', 207, 2, NULL, now(), NULL, 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES (3302, 'Show email address', 'SHOW_EMAIL_ADDRESS', 'true', 'Do you want to show your email address on the contact us page?', 207, 3, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
+INSERT INTO configuration VALUES (3303, 'Show mailing address', 'SHOW_MAILING_ADDRESS', 'true', 'Do you want to show your mailing address on the contact us page?', 207, 4, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
+
 
 INSERT INTO configuration_group VALUES (1,'My Store','General information about my store',1,1);
 INSERT INTO configuration_group VALUES (2,'Minimum Values','The minimum values for functions / data',2,1);
@@ -2362,6 +2367,7 @@ INSERT INTO configuration_group VALUES (203,'Notifications', 'Notifications', 20
 INSERT INTO configuration_group VALUES (204,'SlideShow Settings', 'SlideShow Settings', 204, 1);
 INSERT INTO configuration_group VALUES (205,'Corner Banners', 'Corner Banners', 205, 1);
 INSERT INTO configuration_group VALUES (206,'MailChimp Newsletters', 'MailChimp Newsletters', 206, 1);
+INSERT INTO configuration_group VALUES (207,'Contact Us Form', 'Contact Us Form', 207, 1);
 
 INSERT INTO configuration_group VALUES (7575, 'One Page Checkout', 'Settings for one page checkout', 16, 1);
 

@@ -59,7 +59,7 @@
       <tr>
         <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
           <tr class="infoBoxContents">
-          	<td colspan="2" class="main"><BR /><?php echo INSTRUCTIONS_TEXT; ?><BR /><BR /></td>
+          	<td colspan="2" class="main"><?php echo INSTRUCTIONS_TEXT; ?><BR /><BR /></td>
           </tr>
           <tr class="infoBoxContents">
             <td width="65%"><table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -106,14 +106,36 @@
 <?php } ?>
             </table></td>
         
-        <td width="35%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <td width="35%" valign="top">
+		  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+		    <?php if (SHOW_STORE_OPENING_HOURS == 'true') { ?>
            	  <tr>
-                <td class="smalltext"><?php echo CONTACT_INFORMATION; ?></td>
+                <td class="smalltext"><?php echo OPENING_HOURS; ?></td>
               </tr>
+			  <tr>
+                <td class="smalltext"><?php echo nl2br(STORE_OPENING_HOURS_TEXT); ?><br><br></td>
+              </tr>
+			<?php } ?>
+			<?php if (SHOW_EMAIL_ADDRESS == 'true') { ?>
+           	  <tr>
+                <td class="smalltext"><?php echo EMAIL_US; ?></td>
+              </tr>
+			  <tr>
+                <td class="smalltext"><?php echo EMAIL_FROM; ?><br><br></td>
+              </tr>
+			<?php } ?>
+			<?php if (SHOW_MAILING_ADDRESS == 'true') { ?>
+			  <tr>
+			    <td class="smalltext"><?php echo WRITE_US; ?></td>
+			  </tr>
+			  <tr>
+			    <td class="smalltext"><?php echo nl2br(STORE_NAME_ADDRESS); ?></td>
+			  </tr>
+			<?php } ?>
 <?php if (RECAPTCHA_ON == 'true') { ?>
 <!-- start modification for reCaptcha -->
               <tr>
-                <td class="smalltext"><b><?php echo ENTRY_SECURITY_CHECK; ?></b></td>
+                <td class="smalltext"><br><b><?php echo ENTRY_SECURITY_CHECK; ?></b></td>
               </tr>
               <tr>
 								<script>

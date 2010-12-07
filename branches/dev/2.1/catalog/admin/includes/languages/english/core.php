@@ -341,7 +341,7 @@ define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', '&nbsp;<span class="errorText">The ema
 define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', '&nbsp;<span class="errorText">This email address already exists!</span>');
 define('ENTRY_COMPANY', 'Company name:');
 define('ENTRY_COMPANY_TEXT', '');
-define('ENTRY_COMPANY_ERROR', '');
+define('ENTRY_COMPANY_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_COMPANY_MIN_LENGTH . ' chars</span>');
 define('ENTRY_STREET_ADDRESS', 'Street Address:');
 define('ENTRY_STREET_ADDRESS_TEXT', '&nbsp;<span class="errorText">*</span>');
 define('ENTRY_STREET_ADDRESS_ERROR', '&nbsp;<span class="errorText">min ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' chars</span>');

@@ -28,4 +28,5 @@ define('EMAIL_CONTACT', 'For help with any of our online services, please email 
 define('EMAIL_WARNING', '<b>Note:</b> This email address was given to us by one of our customers. If you did not signup to be a member, please send a email to ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n");
 define('TEXT_ACCOUNT_PROBLEM', 'There has been a problem completing your form. Please correct the information below.');
 define('IMAGE_BUTTON_CREATE', 'Create Account');
+define('ENTRY_STATE_TEXT', '&nbsp;<span class="errorText">* (Select country first)</span>');
 ?>

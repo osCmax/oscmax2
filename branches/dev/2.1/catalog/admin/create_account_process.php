@@ -189,6 +189,15 @@ $password = $l1.$r1.$l2.$l3.$r2;
     }
   }
 
+  if (ACCOUNT_COMPANY == 'true') {
+    if (strlen($company) < ENTRY_COMPANY_MIN_LENGTH) {
+      $error = true;
+      $entry_company_error = true;
+    } else {
+      $entry_company_error = false;
+    }
+  }
+
   if (strlen($email_address) < ENTRY_EMAIL_ADDRESS_MIN_LENGTH) {
     $error = true;
     $entry_email_address_error = true;

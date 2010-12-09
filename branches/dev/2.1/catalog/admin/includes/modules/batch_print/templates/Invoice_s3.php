@@ -69,8 +69,17 @@ $y = $pdf->ezText("<b>" . TEXT_ORDER_NUMBER . " </b>" . $orders['orders_prefix']
     //Add in the order totals
     $totalsx = 390; 
     $totalsy = 230;
+	
 	for ($j = 0, $n = sizeof($order->totals); $j < $n; $j++) {
-	  $pdf->addText ($totalsx, $totalsy -= PRODUCT_TOTALS_LEADING,PRODUCT_TOTALS_FONT_SIZE,"<b>" . str_replace($vilains , $cools ,$order->totals[$j]['title']) . "</b>");
+		$totaltext = str_replace($vilains , $cools ,$order->totals[$j]['title']);
+		$fullstop = stripos($totaltext, ".");
+		
+		if ($fullstop != '0') {
+		  $totaltext = substr($totaltext, 0, $fullstop);
+		  $totaltext .= ":";
+		} 
+		
+	  $pdf->addText ($totalsx, $totalsy -= PRODUCT_TOTALS_LEADING,PRODUCT_TOTALS_FONT_SIZE,"<b>" . $totaltext . "</b>");
       $pdf->addText(506,$totalsy,PRODUCT_TOTALS_FONT_SIZE,$order->totals[$j]['text'], $order->info['currency_value']);
 	} // end for
 
@@ -334,18 +343,21 @@ $pos -= PRODUCT_TABLE_BOTTOM_MARGIN;
 $pos -= PRODUCT_TABLE_BOTTOM_MARGIN;
 
 //Add in the order totals
-$totalsx = 390; 
-$totalsy = 230;
+    $totalsx = 390; 
+    $totalsy = 230;
 	
-	for ($i = 0, $n = sizeof($order->totals); $i < $n; $i++) {
-	
-$pdf->addText ($totalsx, $totalsy -= PRODUCT_TOTALS_LEADING,PRODUCT_TOTALS_FONT_SIZE,"<b>" . str_replace($vilains , $cools ,$order->totals[$i]['title']) . "</b>");
-
-$pdf->addText($x,$totalsy,PRODUCT_TOTALS_FONT_SIZE,$order->totals[$i]['text'], $order->info['currency_value']);
+	for ($j = 0, $n = sizeof($order->totals); $j < $n; $j++) {
+		$totaltext = str_replace($vilains , $cools ,$order->totals[$j]['title']);
+		$fullstop = stripos($totaltext, ".");
 		
-		} //EOFOR
-
-
+		if ($fullstop != '0') {
+		  $totaltext = substr($totaltext, 0, $fullstop);
+		  $totaltext .= ":";
+		} 
+		
+	  $pdf->addText ($totalsx, $totalsy -= PRODUCT_TOTALS_LEADING,PRODUCT_TOTALS_FONT_SIZE,"<b>" . $totaltext . "</b>");
+      $pdf->addText(506,$totalsy,PRODUCT_TOTALS_FONT_SIZE,$order->totals[$j]['text'], $order->info['currency_value']);
+	} // end for
 }
 
 

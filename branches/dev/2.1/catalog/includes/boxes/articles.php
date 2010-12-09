@@ -198,6 +198,8 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 
 // new infoBox($info_box_contents);
 
-include (bts_select('boxes', $box_base_name)); // BTS 1.5
+if (tep_db_num_rows($topics_query) > 0)  {
+  include (bts_select('boxes', $box_base_name)); // BTS 1.5
+}
 ?>
 <!-- topics_eof //-->

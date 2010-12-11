@@ -37,7 +37,7 @@ var $shiptotal;
 
 // BOF QPBPP for SPPC adjust quantity blocks and min_order_qty for this customer group
 // warnings about this are raised in PriceFormatter
-      $pf = new PriceFormatter ();
+      $pf = new PriceFormatter;
       $pf->loadProduct(tep_get_prid($products_id), $languages_id);
       $qty = $pf->adjustQty($qty);
 // EOF QPBPP for SPPC
@@ -108,9 +108,6 @@ var $shiptotal;
 
     function add_cart($products_id, $qty = '1', $attributes = '', $notify = true) {
       global $new_products_id_in_cart, $customer_id;
-    // BOF Separate Pricing Per Customer
-    $this->cg_id = $this->get_customer_group_id ();
-    // EOF Separate Pricing Per Customer
 
       $products_id_string = tep_get_uprid($products_id, $attributes);
       $products_id = tep_get_prid($products_id_string);
@@ -120,7 +117,7 @@ var $shiptotal;
       }
 
 // BOF QPBPP for SPPC
-    $pf = new PriceFormatter ();
+      $pf = new PriceFormatter;
       $pf->loadProduct($products_id);
       $qty = $pf->adjustQty($qty);
       $discount_category = $pf->get_discount_category();
@@ -304,12 +301,6 @@ var $shiptotal;
 // LINE ADDED: MOD - indvship
       $this->shiptotal = 0;
       if (!is_array($this->contents)) return 0;
-
-   // BOF Separate Pricing Per Customer
-    // global variable (session) $sppc_customer_group_id -> class variable cg_id
-    $this->cg_id = $this->get_customer_group_id ();
-    // EOF Separate Pricing Per Customer
-    // BOF QPBPP for SPPC
         $discount_category_quantity = array(); // calculates no of items per discount category in shopping basket
       foreach ($this->contents as $products_id => $contents_array) {
           if(tep_not_null($contents_array['discount_categories_id'])) {
@@ -321,7 +312,7 @@ var $shiptotal;
           }
       } // end foreach
 
-    $pf = new PriceFormatter ();
+   $pf = new PriceFormatter;
 // EOF QPBPP for SPPC
 // EOF: MOD - Separate Pricing Per Customer
 
@@ -336,17 +327,25 @@ var $shiptotal;
       } else {
           $nof_other_items_in_cart_same_cat = 0;
       }
-      // EOF QPBPP for SPPC
+// EOF QPBPP for SPPC
+
+// BOF: MOD - Separate Pricing Per Customer
+// global variable (session) $sppc_customer_group_id -> class variable cg_id
+        global $sppc_customer_group_id;
+        if(!tep_session_is_registered('sppc_customer_group_id')) {
+          $this->cg_id = '0';
+        } else {
+          $this->cg_id = $sppc_customer_group_id;
+        }
+        // BOF QPBPP for SPPC
 
 
-      // products price
-      // BOF QPBPP for SPPC
 
 // LINE MOFIFIED - Added "products_ship_price"
         //$product_query = tep_db_query("select products_id, products_price, products_ins_price, products_ship_price, products_tax_class_id, products_weight from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
-		$pf->loadProduct($products_id, $languages_id);
+        $pf->loadProduct($products_id, $languages_id);
         //if ($product = tep_db_fetch_array($product_query)) {
-		if ($product = $pfs->getPriceFormatterData($products_id)) {
+        if ($product = $pfs->getPriceFormatterData($products_id)) {
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
           $no_count = 1;
           $gv_query = tep_db_query("select products_model from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
@@ -358,7 +357,7 @@ var $shiptotal;
 
           $prid = $product['products_id'];
           $products_tax = tep_get_tax_rate($product['products_tax_class_id']);
-          $products_price = $pf->computePrice ( $qty, $nof_other_items_in_cart_same_cat );
+          $products_price = $product['products_price'];
           $products_weight = $product['products_weight'];
           $products_length = $product['products_length'];
           $products_width = $product['products_width'];
@@ -394,125 +393,63 @@ var $shiptotal;
           $this->weight += ($qty * $products_weight);
         }
 
-      // attributes price
-      // BOF SPPC attributes mod
-      if (isset ( $this->contents [$products_id] ['attributes'] )) {
-        reset ( $this->contents [$products_id] ['attributes'] );
-        $where = " AND ((";
-        while ( list ($option, $value) = each ( $this->contents [$products_id] ['attributes'] ) ) {
-          $where .= "options_id = '" . (int) $option . "' AND options_values_id = '" . (int) $value . "') OR (";
-        }
-        $where = substr ( $where, 0, - 5 ) . ')';
-
-        $attribute_price_query = tep_db_query ( "SELECT products_attributes_id, options_values_price, price_prefix FROM " . TABLE_PRODUCTS_ATTRIBUTES . " WHERE products_id = '" . (int) $products_id . "'" . $where . "" );
-
-        if (tep_db_num_rows ( $attribute_price_query )) {
-          $list_of_prdcts_attributes_id = '';
-          // empty array $attribute_price
-          $attribute_price = array();
-          while ( $attributes_price_array = tep_db_fetch_array ( $attribute_price_query ) ) {
-            $attribute_price [] = $attributes_price_array;
-            $list_of_prdcts_attributes_id .= $attributes_price_array ['products_attributes_id'] . ",";
-          }
-          if (tep_not_null ( $list_of_prdcts_attributes_id ) && $this->cg_id != '0') {
-            $select_list_of_prdcts_attributes_ids = "(" . substr ( $list_of_prdcts_attributes_id, 0, - 1 ) . ")";
-            $pag_query = tep_db_query ( "select products_attributes_id, options_values_price, price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES_GROUPS . " where products_attributes_id IN " . $select_list_of_prdcts_attributes_ids . " AND customers_group_id = '" . $this->cg_id . "'" );
-            while ( $pag_array = tep_db_fetch_array ( $pag_query ) ) {
-              $cg_attr_prices [] = $pag_array;
-            }
-
-            // substitute options_values_price and prefix for those for the customer group (if available)
-            if ($customer_group_id != '0' && tep_not_null ( $cg_attr_prices )) {
-              for($n = 0; $n < count ( $attribute_price ); $n ++) {
-                for($i = 0; $i < count ( $cg_attr_prices ); $i ++) {
-                  if ($cg_attr_prices [$i] ['products_attributes_id'] == $attribute_price [$n] ['products_attributes_id']) {
-                    $attribute_price [$n] ['price_prefix'] = $cg_attr_prices [$i] ['price_prefix'];
-                    $attribute_price [$n] ['options_values_price'] = $cg_attr_prices [$i] ['options_values_price'];
-                  }
-                } // end for ($i = 0; $i < count($cg_att_prices) ; $i++)
-              }
-            } // end if ($customer_group_id != '0' && (tep_not_null($cg_attr_prices))
-          } // end if (tep_not_null($list_of_prdcts_attributes_id) && $customer_group_id != '0')
-          // now loop through array $attribute_price to add up/substract attribute prices
-
-
-          for($n = 0; $n < count ( $attribute_price ); $n ++) {
-            if ($attribute_price [$n] ['price_prefix'] == '+') {
-              $this->total += $currencies->calculate_price ( $attribute_price [$n] ['options_values_price'], $products_tax, $qty );
+// attributes price
+        if (isset($this->contents[$products_id]['attributes'])) {
+          reset($this->contents[$products_id]['attributes']);
+          while (list($option, $value) = each($this->contents[$products_id]['attributes'])) {
+            // START: More Product Weight
+            // $attribute_price_query = tep_db_query("select options_values_price, price_prefix, options_values_weight from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$prid . "' and options_id = '" . (int)$option . "' and options_values_id = '" . (int)$value . "'");
+            $attribute_price_query = tep_db_query("select options_values_price, price_prefix, options_values_weight, weight_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$prid . "' and options_id = '" . (int)$option . "' and options_values_id = '" . (int)$value . "'");
+            // END: More Product Weight
+            $attribute_price = tep_db_fetch_array($attribute_price_query);
+            if ($attribute_price['price_prefix'] == '+') {
+              $this->total += $currencies->calculate_price($attribute_price['options_values_price'], $products_tax, $qty);
             } else {
-              $this->total -= $currencies->calculate_price ( $attribute_price [$n] ['options_values_price'], $products_tax, $qty );
+              $this->total -= $currencies->calculate_price($attribute_price['options_values_price'], $products_tax, $qty);
             }
-          } // end for ($n = 0 ; $n < count($attribute_price); $n++)
-        } // end if (tep_db_num_rows($attribute_price_query))
-      } // end if (isset($this->contents[$products_id]['attributes']))
-    }
-  }
-
-  // EOF SPPC attributes mod
-  function attributes_price($products_id) {
-    // global variable (session) $sppc_customer_group_id -> class variable cg_id
-    $this->cg_id = $this->get_customer_group_id ();
-
-    if (isset ( $this->contents [$products_id] ['attributes'] )) {
-      reset ( $this->contents [$products_id] ['attributes'] );
-      $where = " AND ((";
-      while ( list ($option, $value) = each ( $this->contents [$products_id] ['attributes'] ) ) {
-        $where .= "options_id = '" . (int) $option . "' AND options_values_id = '" . (int) $value . "') OR (";
-      }
-      $where = substr ( $where, 0, - 5 ) . ')';
-
-      $attribute_price_query = tep_db_query ( "SELECT products_attributes_id, options_values_price, price_prefix FROM " . TABLE_PRODUCTS_ATTRIBUTES . " WHERE products_id = '" . (int) $products_id . "'" . $where . "" );
-
-      if (tep_db_num_rows ( $attribute_price_query )) {
-        $list_of_prdcts_attributes_id = '';
-        while ( $attributes_price_array = tep_db_fetch_array ( $attribute_price_query ) ) {
-          $attribute_price [] = $attributes_price_array;
-          $list_of_prdcts_attributes_id .= $attributes_price_array ['products_attributes_id'] . ",";
+            // START: More Product Weight
+            if ($attribute_price['weight_prefix'] == '+') {
+              $this->weight += $qty * $attribute_price['options_values_weight'];
+            } else {
+              $this->weight -= $qty * $attribute_price['options_values_weight'];
+            }
+            // END: More Product Weight
+          }
         }
-
-        if (tep_not_null ( $list_of_prdcts_attributes_id ) && $this->cg_id != '0') {
-          $select_list_of_prdcts_attributes_ids = "(" . substr ( $list_of_prdcts_attributes_id, 0, - 1 ) . ")";
-          $pag_query = tep_db_query ( "select products_attributes_id, options_values_price, price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES_GROUPS . " where products_attributes_id IN " . $select_list_of_prdcts_attributes_ids . " AND customers_group_id = '" . $this->cg_id . "'" );
-          while ( $pag_array = tep_db_fetch_array ( $pag_query ) ) {
-            $cg_attr_prices [] = $pag_array;
-          }
-
-          // substitute options_values_price and prefix for those for the customer group (if available)
-          if ($customer_group_id != '0' && tep_not_null ( $cg_attr_prices )) {
-            for($n = 0; $n < count ( $attribute_price ); $n ++) {
-              for($i = 0; $i < count ( $cg_attr_prices ); $i ++) {
-                if ($cg_attr_prices [$i] ['products_attributes_id'] == $attribute_price [$n] ['products_attributes_id']) {
-                  $attribute_price [$n] ['price_prefix'] = $cg_attr_prices [$i] ['price_prefix'];
-                  $attribute_price [$n] ['options_values_price'] = $cg_attr_prices [$i] ['options_values_price'];
-                }
-              } // end for ($i = 0; $i < count($cg_att_prices) ; $i++)
-            }
-          } // end if ($customer_group_id != '0' && (tep_not_null($cg_attr_prices))
-        } // end if (tep_not_null($list_of_prdcts_attributes_id) && $customer_group_id != '0')
-        // now loop through array $attribute_price to add up/substract attribute prices
-
-
-        for($n = 0; $n < count ( $attribute_price ); $n ++) {
-          if ($attribute_price [$n] ['price_prefix'] == '+') {
-            $attributes_price += $attribute_price [$n] ['options_values_price'];
-          } else {
-            $attributes_price -= $attribute_price [$n] ['options_values_price'];
-          }
-        } // end for ($n = 0 ; $n < count($attribute_price); $n++)
-        return $attributes_price;
-      } else { // end if (tep_db_num_rows($attribute_price_query))
-        return 0;
       }
-    } else { // end if (isset($this->contents[$products_id]['attributes']))
-      return 0;
     }
-  } // end of function attributes_price, modified for SPPC with attributes
+
+    function attributes_price($products_id) {
+      $attributes_price = 0;
+
+      if (isset($this->contents[$products_id]['attributes'])) {
+        reset($this->contents[$products_id]['attributes']);
+        while (list($option, $value) = each($this->contents[$products_id]['attributes'])) {
+          $attribute_price_query = tep_db_query("select options_values_price, price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$products_id . "' and options_id = '" . (int)$option . "' and options_values_id = '" . (int)$value . "'");
+          $attribute_price = tep_db_fetch_array($attribute_price_query);
+          if ($attribute_price['price_prefix'] == '+') {
+            $attributes_price += $attribute_price['options_values_price'];
+          } else {
+            $attributes_price -= $attribute_price['options_values_price'];
+          }
+        }
+      }
+
+      return $attributes_price;
+    }
 
     function get_products() {
       global $languages_id, $pfs; // PriceFormatterStore added;
-    // BOF Separate Pricing Per Customer
-    $this->cg_id = $this->get_customer_group_id ();
-    // EOF Separate Pricing Per Customer
+// BOF Separate Pricing Per Customer
+// global variable (session) $sppc_customer_group_id -> class variable cg_id
+      global $sppc_customer_group_id;
+
+      if(!tep_session_is_registered('sppc_customer_group_id')) {
+      $this->cg_id = '0';
+      } else {
+        $this->cg_id = $sppc_customer_group_id;
+      }
+// EOF Separate Pricing Per Customer
       if (!is_array($this->contents)) return false;
 
 // BOF QPBPP for SPPC
@@ -527,7 +464,7 @@ var $shiptotal;
           }
       } // end foreach
 
-    $pf = new PriceFormatter ();
+      $pf = new PriceFormatter;
 // EOF QPBPP for SPPC
 
       $products_array = array();
@@ -545,14 +482,42 @@ var $shiptotal;
         }
           $products_price = $pf->computePrice($this->contents[$products_id]['qty'], $nof_other_items_in_cart_same_cat);
 // EOF QPBPP for SPPC
+//BOF Attribute Product Codes
+                $attribute_code_array = array();
+                if (is_array($this->contents[$products_id]['attributes'])) {
+                        $i = 0;
+                foreach ($this->contents[$products_id]['attributes'] as $attributes){
+                        $option = array_keys($this->contents[$products_id]['attributes']);
+                        $value = $this->contents[$products_id]['attributes'];
+                        $attribute_code_query = tep_db_query("select code_suffix, suffix_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$prid . "' and options_id = '" . (int)$option[$i] . "' and options_values_id = '" . (int)$value[$option[$i]] . "' order by suffix_sort_order ASC");
+                  $attribute_code = tep_db_fetch_array($attribute_code_query);
+                  if (tep_not_null($attribute_code['code_suffix'])) {
+                        $attribute_code_array[(int)$attribute_code['suffix_sort_order']] = $attribute_code['code_suffix'];
+                        }
+                                  $i++;
+                }
 
-          $products_array[] = array('id' => $products_id,
+        $separator = '-';
+    //  if (count($attribute_code_array) > 1) {
+        //      $separator = '-';
+        //} elseif (count($attribute_code_array) == 1) {
+        //  $separator = '/';
+        //}
+
+        $products_code = $products['products_model'] . $separator . implode("-", $attribute_code_array);
+    } else {
+$products_code = $products['products_model'];
+
+}
+// EOF Attribute Product Codes
+//        $products_array[] = array('id' => $products_id,
+          $products_array[] = array('id' => tep_get_uprid($products_id, $this->contents[$products_id]['attributes']),
                                     'name' => $products['products_name'],
                                     'model' => $products['products_model'],
-                                    'code' => $products_code,
+                    'code' => $products_code,
                                     'image' => $products['products_image'],
 // BOF QPBPP for SPPC
-				    'discount_categories_id' => $this->contents[$products_id]['discount_categories_id'],
+                    'discount_categories_id' => $this->contents[$products_id]['discount_categories_id'],
 // EOF QPBPP for SPPC
                                     'price' => $products_price,
                                     'quantity' => $this->contents[$products_id]['qty'],
@@ -703,16 +668,6 @@ function get_shiptotal() {
         if (gettype($this->$key)!="user function")
         $this->$key=$kv['value'];
       }
-    }
-
-    // added for Separate Pricing Per Customer, returns customer_group_id
-    function get_customer_group_id() {
-      if (isset ( $_SESSION ['sppc_customer_group_id'] ) && $_SESSION ['sppc_customer_group_id'] != '0') {
-        $_cg_id = $_SESSION ['sppc_customer_group_id'];
-      } else {
-        $_cg_id = 0;
-      }
-      return $_cg_id;
     }
 
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution

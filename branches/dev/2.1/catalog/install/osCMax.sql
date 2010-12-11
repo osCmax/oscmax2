@@ -1954,6 +1954,8 @@ INSERT INTO configuration VALUES (387,'Date and hours for notice before maintena
 INSERT INTO configuration VALUES (388,'Display when webmaster has enabled maintenance','DISPLAY_MAINTENANCE_TIME','true','Display when Webmaster has enabled maintenance <br>(true=on false=off)<br>',16,11,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (389,'Display website maintenance period','DISPLAY_MAINTENANCE_PERIOD','true','Display Website maintenance period <br>(true=on false=off)<br>',16,12,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (390,'Website maintenance period','TEXT_MAINTENANCE_PERIOD_TIME','2h00','Enter Website Maintenance period (hh:mm)',16,13,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (391,'Down For Maintenance Start Time','TEXT_DATE_TIME','2008-05-03 14:23:52','Show when down for maintenance',16,14,NULL,now(),NULL,NULL);
+
 
 INSERT INTO configuration VALUES (456,'Welcome Discount Coupon Code','NEW_SIGNUP_DISCOUNT_COUPON','','Welcome Discount Coupon Code: if you do not want to send a coupon in your create account email leave blank else place the coupon code you wish to use','1',32,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (455,'Welcome Gift Voucher Amount','NEW_SIGNUP_GIFT_VOUCHER_AMOUNT','0','Welcome Gift Voucher Amount: If you do not wish to send a Gift Voucher in your create account email put 0 for no amount else if you do place the amount here i.e. 10.00 or 50.00 no currency signs','1',31,NULL,now(),NULL,NULL);
@@ -1980,7 +1982,6 @@ INSERT INTO configuration VALUES (523,'Maximum Article Abstract Length','MAX_ART
 INSERT INTO configuration VALUES (524,'Display Topic/Author Filter','ARTICLE_LIST_FILTER','true','Do you want to display the Topic/Author Filter?',456,20,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (525,'Location of Prev/Next Navigation Bar','ARTICLE_PREV_NEXT_BAR_LOCATION','bottom','Sets the location of the Previous/Next Navigation Bar<br><br>(top; bottom; both)',456,21,NULL,now(),NULL,'tep_cfg_select_option(array(\'top\',\'bottom\',\'both\'),');
 INSERT INTO configuration VALUES (526,'Use WYSIWYG CKEditor?','ARTICLE_WYSIWYG_ENABLE','Enable','Use WYSIWYG CKEditor in Articles and Topic/Author Descriptions?',456,22,NULL,now(),NULL,'tep_cfg_select_option(array(\'Enable\',\'Disable\'),');
-INSERT INTO configuration VALUES (391,'Down For Maintenance Start Time','TEXT_DATE_TIME','2008-05-03 14:23:52','Show when down for maintenance',16,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (700,'Number of Columns for product listings','PRODUCT_LIST_NUM_COLUMNS','3','How many prodcuts per row do you want to display on your product listing page?',8,14,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (701,'Minimum X-Sell products Listed','MIN_DISPLAY_XSELL','1','How many x-sell products per page',8,20,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (650,'Product Display Type (Default = 0 or Columns = 1)','PRODUCT_LIST_TYPE','1','Do you want to display products one per row or multiple columns per row?',8,11,NULL,now(),NULL,NULL);
@@ -2149,7 +2150,7 @@ INSERT INTO configuration VALUES (2615, 'Check for Javscript enabled?', 'JAVASCR
 INSERT INTO configuration VALUES (2616, 'Check for Internet Explorer 6?', 'IE6_CHECK', 'false', 'Do you want to check if the customer is using IE6 and ask them to upgrade their browser?', 203, 3, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
 
 #Slideshow Settings by PGM
-INSERT INTO configuration VALUES (2617, 'Set Slideshow width', 'SLIDESHOW_WIDTH', '650', 'What width do you want your slideshow? (default: 650)', 204, 1, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2617, 'Set Slideshow width', 'SLIDESHOW_WIDTH', '640', 'What width do you want your slideshow? (default: 640)', 204, 1, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2618, 'Set Slideshow height', 'SLIDESHOW_HEIGHT', '250', 'What height do you want your slideshow? (default: 250)', 204, 2, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2619, 'How do you want the slide to transition?', 'SLIDESHOW_TRANSITION', 'fade', 'What method of transistion do you want to use?', 204, 3, now(), now(), NULL, 'tep_cfg_select_option(array(\'fade\',\'horizontal-slider\',\'vertical-slider\'),'); 
 INSERT INTO configuration VALUES (2620, 'Slide Transition Speed', 'SLIDESHOW_TRANSITION_SPEED', '500', 'How long do you want the slide transistion effect to take in milliseconds? (default: 500)', 204, 4, now(), now(), NULL, NULL);

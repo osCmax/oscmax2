@@ -65,3 +65,20 @@
 #RewriteRule ^(.*)-i-([0-9]+).html$ information.php?info_id=$2&%{QUERY_STRING}
 #</ifModule>
 # EOF: MOD - Ultimate SEO URLs
+
+# BOF: HTTP Error Logging
+# NOTE: if you've installed the catalog in a different directory, change /catalog/ below. Don't leave of the leading /.
+#ErrorDocument 400 /catalog/http_error.php?error_id=400
+#ErrorDocument 401 /catalog/http_error.php?error_id=401
+#ErrorDocument 403 /catalog/http_error.php?error_id=403
+#ErrorDocument 404 /catalog/http_error.php?error_id=404
+#ErrorDocument 405 /catalog/http_error.php?error_id=405
+#ErrorDocument 408 /catalog/http_error.php?error_id=408
+#ErrorDocument 415 /catalog/http_error.php?error_id=415
+#ErrorDocument 500 /catalog/http_error.php?error_id=500
+#ErrorDocument 501 /catalog/http_error.php?error_id=501
+#ErrorDocument 502 /catalog/http_error.php?error_id=502
+#ErrorDocument 503 /catalog/http_error.php?error_id=503
+#ErrorDocument 505 /catalog/http_error.php?error_id=505
+#ErrorDocument 504 /catalog/http_error.php?error_id=504 
+# EOF: HTTP Error Logging

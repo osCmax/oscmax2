@@ -706,6 +706,7 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
 
 // add topic names or the author name to the breadcrumb trail
   if (isset($tPath_array)) {
+	$breadcrumb->add(BOX_HEADING_ARTICLES, tep_href_link(FILENAME_ARTICLES, '', 'NONSSL'));
     for ($i=0, $n=sizeof($tPath_array); $i<$n; $i++) {
       $topics_query = tep_db_query("select topics_name from " . TABLE_TOPICS_DESCRIPTION . " where topics_id = '" . (int)$tPath_array[$i] . "' and language_id = '" . (int)$languages_id . "'");
       if (tep_db_num_rows($topics_query) > 0) {

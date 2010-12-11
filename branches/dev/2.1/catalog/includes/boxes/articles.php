@@ -66,7 +66,7 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 ?>
 <!-- topics //-->
 <?php
-  $boxHeading = BOX_HEADING_ARTICLES;
+  $boxHeading = '<a href="' . tep_href_link(FILENAME_ARTICLES) . '">' . BOX_HEADING_ARTICLES . '</a>';
   
   $corner_top_left = 'rounded';
   $corner_top_right = 'rounded';
@@ -74,7 +74,7 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
   $corner_bottom_right = 'rounded'; 
   
   $boxContent_attributes = '';
-  $boxLink = '';  
+  $boxLink = '<a href="' . tep_href_link(FILENAME_ARTICLES) . '"><img src="' . DIR_WS_TEMPLATES . 'images/infobox/arrow_right.png" border="0" alt="more" title="more"></a>';  
   $box_base_name = 'articles'; // for easy unique box template setup (added BTSv1.2)
 
 //  $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
@@ -171,10 +171,11 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
     $new_articles_string .= $articles_new_count . '<br>';
 
   }
+  
+  $articles_all_query = tep_db_query("select a.articles_id from (" . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_TO_TOPICS . " a2t) left join " . TABLE_TOPICS_DESCRIPTION . " td on (a2t.topics_id = td.topics_id) left join " . TABLE_AUTHORS . " au on (a.authors_id = au.authors_id), " . TABLE_ARTICLES_DESCRIPTION . " ad where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a.articles_status = '1' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "'");
 
   if (DISPLAY_ALL_ARTICLES=='true') {
     if (SHOW_ARTICLE_COUNTS == 'true') {
-      $articles_all_query = tep_db_query("select a.articles_id from (" . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_TO_TOPICS . " a2t) left join " . TABLE_TOPICS_DESCRIPTION . " td on (a2t.topics_id = td.topics_id) left join " . TABLE_AUTHORS . " au on (a.authors_id = au.authors_id), " . TABLE_ARTICLES_DESCRIPTION . " ad where (a.articles_date_available IS NULL or to_days(a.articles_date_available) <= to_days(now())) and a.articles_id = a2t.articles_id and a.articles_status = '1' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and td.language_id = '" . (int)$languages_id . "'");
       $articles_all_count = ' (' . tep_db_num_rows($articles_all_query) . ')';
     } else {
       $articles_all_count = '';
@@ -198,7 +199,7 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 
 // new infoBox($info_box_contents);
 
-if (tep_db_num_rows($topics_query) > 0)  {
+if (tep_db_num_rows($articles_all_query) > 0)  {
   include (bts_select('boxes', $box_base_name)); // BTS 1.5
 }
 ?>

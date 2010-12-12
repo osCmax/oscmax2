@@ -19,7 +19,7 @@ BODY { background: #ffffff; color: #000000; margin: 0px; }
 
 A { color: #000000; text-decoration: none; }
 A:hover { color: #666666; text-decoration: underline; }
-
+P { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; }
 FORM { display: inline; }
 
 /* Header */

@@ -102,6 +102,33 @@ function CVVPopUpWindowEx(url) {
 $(document).ready(function (){
 	$('#pageContentContainer').show();
 	$('#enableMATC').hide();
+	
+	$('#conditions').each(function() {
+		var $link = $(this);
+		var $dialog = $('<div><\/div>')
+			.load($link.attr('href'))
+			.dialog({
+				autoOpen: false,
+				title: $link.attr('title'),
+				width: 700,
+				height: 400,
+				modal: true,
+				buttons: { "Ok": function() { 
+				  $(this).dialog("close"); 
+				  $("#MATC").attr("checked", true); 
+				  $("#MATCtd").attr("class", "messageStackSuccess"); 
+				  $('#disableMATC').hide();	
+				  $('#enableMATC').show();
+				} }
+			});
+
+		$link.click(function() {
+			$dialog.dialog('open');
+            
+			return false;
+		});
+	});
+	
 	<?php
   if(ONEPAGE_CHECKOUT_LOADER_POPUP == 'True')
   {

@@ -718,6 +718,7 @@ CREATE TABLE languages (
   image varchar(64),
   directory varchar(32),
   sort_order int(3),
+  meta_keywords varchar (255),
   PRIMARY KEY (languages_id),
   KEY IDX_LANGUAGES_NAME (name)
 );
@@ -2621,9 +2622,9 @@ INSERT INTO currencies VALUES (3,'UK Pound','GBP','£','','.',',','2','1.0000',no
 INSERT INTO customers_groups VALUES (0,'Retail','1','0','','');
 INSERT INTO customers_groups VALUES (1,'Wholesale','0','0','','');
 
-INSERT INTO languages VALUES (1,'English','en','icon.gif','english',1);
-INSERT INTO languages VALUES (2,'Deutsch','de','icon.gif','german',2);
-INSERT INTO languages VALUES (3,'Español','es','icon.gif','espanol',3);
+INSERT INTO languages VALUES (1,'English','en','icon.gif','english',1,'');
+INSERT INTO languages VALUES (2,'Deutsch','de','icon.gif','german',2,'');
+INSERT INTO languages VALUES (3,'Español','es','icon.gif','espanol',3,'');
 
 INSERT INTO orders_status VALUES (1,1,'Pending',1,0);
 INSERT INTO orders_status VALUES (1,2,'Offen',1,0);

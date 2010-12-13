@@ -22,8 +22,9 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
         $image = tep_db_prepare_input($_POST['image']);
         $directory = tep_db_prepare_input($_POST['directory']);
         $sort_order = (int)tep_db_prepare_input($_POST['sort_order']);
+		$meta_keywords = tep_db_prepare_input($_POST['meta_keywords']);
 
-        tep_db_query("insert into " . TABLE_LANGUAGES . " (name, code, image, directory, sort_order) values ('" . tep_db_input($name) . "', '" . tep_db_input($code) . "', '" . tep_db_input($image) . "', '" . tep_db_input($directory) . "', '" . tep_db_input($sort_order) . "')");
+        tep_db_query("insert into " . TABLE_LANGUAGES . " (name, code, image, directory, sort_order, meta_keywords) values ('" . tep_db_input($name) . "', '" . tep_db_input($code) . "', '" . tep_db_input($image) . "', '" . tep_db_input($directory) . "', '" . tep_db_input($sort_order) . "', '" . tep_db_input($meta_keywords) . "')");
         $insert_id = tep_db_insert_id();
 
 // create additional categories_description records
@@ -94,8 +95,9 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
         $image = tep_db_prepare_input($_POST['image']);
         $directory = tep_db_prepare_input($_POST['directory']);
         $sort_order = (int)tep_db_prepare_input($_POST['sort_order']);
+		$meta_keywords = tep_db_prepare_input($_POST['meta_keywords']);
 
-        tep_db_query("update " . TABLE_LANGUAGES . " set name = '" . tep_db_input($name) . "', code = '" . tep_db_input($code) . "', image = '" . tep_db_input($image) . "', directory = '" . tep_db_input($directory) . "', sort_order = '" . tep_db_input($sort_order) . "' where languages_id = '" . (int)$lID . "'");
+        tep_db_query("update " . TABLE_LANGUAGES . " set name = '" . tep_db_input($name) . "', code = '" . tep_db_input($code) . "', image = '" . tep_db_input($image) . "', directory = '" . tep_db_input($directory) . "', sort_order = '" . tep_db_input($sort_order) . "', meta_keywords = '" . tep_db_input($meta_keywords) . "' where languages_id = '" . (int)$lID . "'");
 
         if ($_POST['default'] == 'on') {
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_input($code) . "' where configuration_key = 'DEFAULT_LANGUAGE'");
@@ -177,10 +179,11 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LANGUAGE_NAME; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LANGUAGE_CODE; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_SORT_ORDER; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_META_KEYWORDS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-  $languages_query_raw = "select languages_id, name, code, image, directory, sort_order from " . TABLE_LANGUAGES . " order by sort_order";
+  $languages_query_raw = "select languages_id, name, code, image, directory, sort_order, meta_keywords from " . TABLE_LANGUAGES . " order by sort_order";
   $languages_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $languages_query_raw, $languages_query_numrows);
   $languages_query = tep_db_query($languages_query_raw);
 
@@ -203,13 +206,14 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
 ?>
                 <td class="dataTableContent"><?php echo $languages['code']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo $languages['sort_order']; ?></td>
+                <td class="dataTableContent" align="center"><?php if ($languages['meta_keywords'] <> '') { echo tep_image(DIR_WS_ICONS . 'icon_status_green.gif', META_SET, 10, 10); } else { echo tep_image(DIR_WS_ICONS . 'icon_status_red.gif', META_UNSET, 10, 10); } ?></td>
                 <td class="dataTableContent" align="right"><?php if (isset($lInfo) && is_object($lInfo) && ($languages['languages_id'] == $lInfo->languages_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&amp;lID=' . $languages['languages_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
   }
 ?>
               <tr>
-                <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText" valign="top"><?php echo $languages_split->display_count($languages_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_LANGUAGES); ?></td>
                     <td class="smallText" align="right"><?php echo $languages_split->display_links($languages_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
@@ -241,6 +245,7 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
       $contents[] = array('text' => '<br>' . TEXT_INFO_LANGUAGE_IMAGE . '<br>' . tep_draw_input_field('image', 'icon.gif'));
       $contents[] = array('text' => '<br>' . TEXT_INFO_LANGUAGE_DIRECTORY . '<br>' . tep_draw_input_field('directory'));
       $contents[] = array('text' => '<br>' . TEXT_INFO_LANGUAGE_SORT_ORDER . '<br>' . tep_draw_input_field('sort_order'));
+	  $contents[] = array('text' => '<br>' . TEXT_INFO_LANGUAGE_META_KEYWORDS . '<span title="' . HEADING_LANGUAGE_META_KEYWORDS_NOTE . '|' . TEXT_INFO_LANGUAGE_META_KEYWORDS_NOTE . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><br>' . tep_draw_input_field('meta_keywords', $lInfo->meta_keywords) . '<br>');
       $contents[] = array('text' => '<br>' . tep_draw_checkbox_field('default') . ' ' . TEXT_SET_DEFAULT);
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . ' <a href="' . tep_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&amp;lID=' . $_GET['lID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
@@ -254,6 +259,7 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
       $contents[] = array('text' => '<br>' . TEXT_INFO_LANGUAGE_IMAGE . '<br>' . tep_draw_input_field('image', $lInfo->image));
       $contents[] = array('text' => '<br>' . TEXT_INFO_LANGUAGE_DIRECTORY . '<br>' . tep_draw_input_field('directory', $lInfo->directory));
       $contents[] = array('text' => '<br>' . TEXT_INFO_LANGUAGE_SORT_ORDER . '<br>' . tep_draw_input_field('sort_order', $lInfo->sort_order));
+	  $contents[] = array('text' => '<br>' . TEXT_INFO_LANGUAGE_META_KEYWORDS . '<span title="' . HEADING_LANGUAGE_META_KEYWORDS_NOTE . '|' . TEXT_INFO_LANGUAGE_META_KEYWORDS_NOTE . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO) . '</span><br>' . tep_draw_input_field('meta_keywords', $lInfo->meta_keywords) . '<br>');	  
       if (DEFAULT_LANGUAGE != $lInfo->code) $contents[] = array('text' => '<br>' . tep_draw_checkbox_field('default') . ' ' . TEXT_SET_DEFAULT);
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . ' <a href="' . tep_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&amp;lID=' . $lInfo->languages_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
@@ -274,6 +280,7 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
         $contents[] = array('text' => '<br>' . tep_image(DIR_WS_CATALOG_LANGUAGES . $lInfo->directory . '/images/' . $lInfo->image, $lInfo->name));
         $contents[] = array('text' => '<br>' . TEXT_INFO_LANGUAGE_DIRECTORY . '<br>' . DIR_WS_CATALOG_LANGUAGES . '<b>' . $lInfo->directory . '</b>');
         $contents[] = array('text' => '<br>' . TEXT_INFO_LANGUAGE_SORT_ORDER . ' ' . $lInfo->sort_order);
+		$contents[] = array('text' => '<br>' . TEXT_INFO_LANGUAGE_META_KEYWORDS . '<br> ' . $lInfo->meta_keywords);
       }
       break;
   }

@@ -14,31 +14,17 @@ define('SECONDARY_SECTION', ' - ');
 // Define Tertiary Section Output
 define('TERTIARY_SECTION', ',  ');
 
-// Optional customization options for each language
-switch ($languages_id) {
-// English language
-  case '1':
-    //Extra keywords that will be outputted on every page
-    $mt_extra_keywords = '';
-  	//Descriptive tagline of your web site
-  	$web_site_tagline = TERTIARY_SECTION . '';
-  	break;
-  // German language
-  case '2':
-    //Extra keywords that will be outputted on every page
-    $mt_extra_keywords = '';
-  	//Descriptive tagline of your web site
-  	$web_site_tagline = TERTIARY_SECTION . '';
-  	break;
-  // Spanish language
-  case '3':
-    //Extra keywords that will be outputted on every page
-    $mt_extra_keywords = '';
-  	//Descriptive tagline of your web site
-  	$web_site_tagline = TERTIARY_SECTION . '';
-  	break;
-  }
-  // Clear web site tagline if not customized
+// Get site wide keyword from the languages table and insert into meta keywords string
+  $mt_extra_query = tep_db_query("select meta_keywords from " . TABLE_LANGUAGES . " where languages_id = '" . (int)$languages_id . "'");
+  $keywords = tep_db_fetch_array($mt_extra_query);
+     $mt_extra_keywords = $keywords['meta_keywords'];
+	 // Check for trailing ,
+	 if (substr($mt_extra_keywords, -1) == ',') { 
+	   $mt_extra_keywords = trim($mt_extra_keywords, ',');
+	 }
+	 $web_site_tagline = TERTIARY_SECTION . '';
+	 
+// Clear web site tagline if not customized
   if ($web_site_tagline == TERTIARY_SECTION) {
     $web_site_tagline = '';
   }

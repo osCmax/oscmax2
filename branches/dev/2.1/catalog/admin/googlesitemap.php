@@ -6,9 +6,21 @@
 
   require('includes/application_top.php');
    
-  	function GenerateSubmitURL(){
+  	function GenerateSubmitURL($search_engine){
 		$url = urlencode(HTTP_SERVER . DIR_WS_CATALOG . 'sitemapindex.xml');
-		return htmlspecialchars(utf8_encode('http://www.google.com/webmasters/sitemaps/ping?sitemap=' . $url));
+	  
+	  switch($search_engine) {
+        case 'google':
+          return htmlspecialchars(utf8_encode('http://www.google.com/webmasters/tools/ping?sitemap=' . $url));
+          break;
+		case 'ask':
+          return htmlspecialchars(utf8_encode('http://submissions.ask.com/ping?sitemap=' . $url));
+          break;
+		case 'bing':
+          return htmlspecialchars(utf8_encode('http://www.bing.com/webmaster/ping.aspx?siteMap=' . $url));
+          break;
+	  }
+	  
 	} # end function
 
 // controllo delle lingue	
@@ -85,7 +97,11 @@
                         <div id="ping">
                         <p><?php echo INSTRUCTIONS_NOTE_GOOGLE_SITEMAPS; ?></p>
                         <p><?php echo INSTRUCTIONS_STEP2_GOOGLE_SITEMAPS; ?></p>
-                        <center><a id="pinggoogle" href="<?php echo $returned_url = GenerateSubmitURL(); ?>" title="Google Sitemaps Ping"><?php echo tep_image_button('button_ping.gif', IMAGE_PING); ?></a></center>
+                        <center>
+                        <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(google); ?>" title="Google Sitemaps Ping"><?php echo tep_image_button('button_google.gif', IMAGE_PING); ?></a>
+                        <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(ask); ?>" title="Ask Sitemaps Ping"><?php echo tep_image_button('button_ask.gif', IMAGE_PING); ?></a>
+                        <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(bing); ?>" title="Bing Sitemaps Ping"><?php echo tep_image_button('button_bing.gif', IMAGE_PING); ?></a>
+                        </center>
                         </div>
                         
                         <div id="complete">
@@ -130,26 +146,6 @@ $(document).ready(function() {
 				height: 400,
 				modal: true,
 				buttons: { "Ok": function() { $(this).dialog("close"); $('#ping').show(); } }
-			});
-
-		$link.click(function() {
-			$dialog.dialog('open');
-            
-			return false;
-		});
-	});
-	
-	$('#pinggoogle').each(function() {
-		var $link = $(this);
-		var $dialog = $('<div><\/div>')
-			.load($link.attr('href'))
-			.dialog({
-				autoOpen: false,
-				title: $link.attr('title'),
-				width: 700,
-				height: 400,
-				modal: true,
-				buttons: { "Ok": function() { $(this).dialog("close"); $('#complete').show(); } }
 			});
 
 		$link.click(function() {

@@ -22,7 +22,7 @@ define('TEXT_ORIGIN_LOGIN', '<font color="#FF0000"><small><b>NOTE:</b></small></
 
 define('EMAIL_ACCOUNT_DETAILS', 'Account Details:');
 define('EMAIL_ACCOUNT_USERNAME', 'Username:');
-define('ACCOUNT_PASSWORD', 'Password:');
+define('EMAIL_ACCOUNT_PASSWORD', 'Password:');
 define('EMAIL_SUBJECT', 'Welcome to ' . STORE_NAME);
 define('EMAIL_GREET_MR', 'Dear Mr. %s,' . "\n\n");
 define('EMAIL_GREET_MS', 'Dear Ms. %s,' . "\n\n");

@@ -299,7 +299,7 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
         $email_text = sprintf(EMAIL_GREET_NONE, $firstname);
       }
 	  // BOF PHONE ORDER
-	  $email_text .= EMAIL_ACCOUNT_DETAILS . EMAIL_ACCOUNT_USERNAME . $email_address . EMAIL_ACCOUNT_PASSWORD  . $password . "\n\n";
+	  $email_text .= EMAIL_ACCOUNT_DETAILS . "\n" . EMAIL_ACCOUNT_USERNAME . $email_address . "\n" . EMAIL_ACCOUNT_PASSWORD  . $password . "\n\n";
 	  // EOF PHONE ORDER
 
       $email_text .= EMAIL_WELCOME . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;

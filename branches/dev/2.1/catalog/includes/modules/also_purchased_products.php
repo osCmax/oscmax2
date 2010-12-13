@@ -23,6 +23,14 @@ if ($num_products_ap != 0) { // Check query is not blank
 	  $div3rows_ap = $div3_ap - $div3check_ap;
   // PGM END
   
+  // BOF Separate Price per Customer
+          if(!tep_session_is_registered('sppc_customer_group_id')) { 
+            $customer_group_id = '0';
+          } else {
+            $customer_group_id = $sppc_customer_group_id;
+          }
+  // EOF Separate Price per Customer
+  
     if ($num_products_ap >= MIN_DISPLAY_ALSO_PURCHASED) { 
 
       if (USE_AP_HORIZ_SCROLLER == 'true') {
@@ -61,13 +69,20 @@ if ($num_products_ap != 0) { // Check query is not blank
       $col = 0;
 
       while ($ap = tep_db_fetch_array($ap_query)) {
- 
+		
         $ap['specials_new_products_price'] = tep_get_products_special_price($ap['products_id']);
 		  if ($ap['specials_new_products_price']) { 
             $ap_price =  '<span style="text-decoration:line-through">' . $currencies->display_price($ap['products_price'], tep_get_tax_rate($ap['products_tax_class_id'])) . '</span>&nbsp;&nbsp;'; 
             $ap_price .= '<span class="productSpecialPrice">' . $currencies->display_price($ap['specials_new_products_price'], tep_get_tax_rate($ap['products_tax_class_id'])) . '</span>'; 
-          } else { 
-            $ap_price =  $currencies->display_price($ap['products_price'], tep_get_tax_rate($ap['products_tax_class_id'])); 
+          } else {
+			// BOF Separate Price per Customer  
+            $customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$ap['products_id']. "' and customers_group_id =  '" . $customer_group_id . "'");
+              if ($customer_group_price = tep_db_fetch_array($customer_group_price_query)) {
+                $ap_price = $currencies->display_price($customer_group_price['customers_group_price'], tep_get_tax_rate($ap['products_tax_class_id']));
+	          } else {  
+            // EOF Separate Price per Customer
+                $ap_price =  $currencies->display_price($ap['products_price'], tep_get_tax_rate($ap['products_tax_class_id'])); 
+			  }
 	      }
 		  
 		  if (SHOW_MORE_INFO == 'True') {
@@ -143,14 +158,21 @@ if ($num_products_ap != 0) { // Check query is not blank
       $col = 0;
       $info_box_contents = array();
       while ($ap = tep_db_fetch_array($ap_query)) {
- 
+		
         $ap['specials_new_products_price'] = tep_get_products_special_price($ap['products_id']); 
 
 		if ($ap['specials_new_products_price']) { 
       	  $ap_price =  '<span style="text-decoration:line-through">' . $currencies->display_price($ap['products_price'], tep_get_tax_rate($ap['products_tax_class_id'])) . '</span><br>'; 
       	  $ap_price .= '<span class="productSpecialPrice">' . $currencies->display_price($ap['specials_new_products_price'], tep_get_tax_rate($ap['products_tax_class_id'])) . '</span>'; 
     	} else { 
-	      $ap_price =  $currencies->display_price($ap['products_price'], tep_get_tax_rate($ap['products_tax_class_id'])); 
+		  // BOF Separate Price per Customer  
+          $customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$ap['products_id']. "' and customers_group_id =  '" . $customer_group_id . "'");
+          if ($customer_group_price = tep_db_fetch_array($customer_group_price_query)) {
+            $ap_price = $currencies->display_price($customer_group_price['customers_group_price'], tep_get_tax_rate($ap['products_tax_class_id']));
+	      } else {  
+          // EOF Separate Price per Customer
+	        $ap_price =  $currencies->display_price($ap['products_price'], tep_get_tax_rate($ap['products_tax_class_id'])); 
+		  }
 	    } 
 		
 		if (SHOW_MORE_INFO == 'True') {

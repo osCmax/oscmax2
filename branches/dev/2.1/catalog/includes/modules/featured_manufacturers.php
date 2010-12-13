@@ -46,14 +46,16 @@ if (sizeof($featured_manufacturers_array) <> '0') {
   $info_box_contents[0]['text'] .= '</tr></table>'."\n"; 
   
   if ((FEATURED_MANUFACTURERS_SET_STYLE == '1') || (FEATURED_MANUFACTURERS_SET_STYLE == '3')) {
-    new tableBox($info_box_contents, true);
+    new contentBox($info_box_contents, true);
   } else {
-    new infoBox($info_box_contents);
+    new contentBox($info_box_contents);
   }
 
   if ((FEATURED_MANUFACTURERS_SET_STYLE == '4') || (FEATURED_MANUFACTURERS_SET_STYLE == '6')) {
     //echo '<img src="images/info_box_' . FEATURED_SET_STYLE_SHADOW . '_shadow.gif" width="100%" height="13" alt="">';
   }
-  
+
+  echo tep_draw_separator('pixel_trans.gif', '100%', '10');
+
 }
 ?>

@@ -34,7 +34,7 @@ if (sizeof($featured_products_array) <> '0') {
   }	
   
   $info_box_contents = array();
-  $info_box_contents[] = array('text' => '<table border="0" width="100%"'.($num_columns==1?' cellspacing="0" cellpadding="0"':' cellspacing="4" cellpadding="2"').'><tr>' );
+  $info_box_contents[] = array('text' => '<table border="0" width="100%"'.($num_columns==1?' cellspacing="0" cellpadding="0"':' cellspacing="0" cellpadding="0"').'><tr>' );
   
   for($i=0,$col=1; $i<sizeof($featured_products_array); $i++,$col++) { 
   
@@ -157,10 +157,6 @@ if (FEATURED_SET_SHOW_BUY_NOW_BUTTONS=='true') {
 
 
 
-
-
-
-
   if ((FEATURED_SET == '3') && (FEATURED_SET_STYLE == '1')) {
     $info_box_contents[0]['text'] .= '<table border="0" width="100%" cellspacing="0" cellpadding="'.FEATURED_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25);
     $info_box_contents[0]['text'] .= '" align="center" valign="top" class="featuredProducts"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_products_array[$i]['id'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_products_array[$i]['image'], $featured_products_array[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '5') . '<br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td><td align="left" valign="top" class="featuredProducts"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_products_array[$i]['id'], 'NONSSL') . '">' . $featured_products_array[$i]['name'] . '</a></div>';
@@ -254,7 +250,7 @@ if (FEATURED_SET_SHOW_BUY_NOW_BUTTONS=='true') {
   
   
   if ((FEATURED_SET_STYLE == '2') || (FEATURED_SET_STYLE == '4') || (FEATURED_SET_STYLE == '5') || (FEATURED_SET_STYLE == '6')) {
-    new infoBox($info_box_contents);
+    new contentBox($info_box_contents);
   } else {
     echo $info_box_contents[0]['text'];
   }
@@ -262,6 +258,8 @@ if (FEATURED_SET_SHOW_BUY_NOW_BUTTONS=='true') {
   if ((FEATURED_SET_STYLE == '4') || (FEATURED_SET_STYLE == '6')) {
     //echo '<img src="images/info_box_' . FEATURED_SET_STYLE_SHADOW . '_shadow.gif" width="100%" height="13" alt="">';
   }
+  
+  echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   
 } // end: if()
 ?>

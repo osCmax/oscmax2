@@ -142,7 +142,7 @@ if ( (OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') && !empty($current_category
 
 
 echo '<!-- Featured_Sets_bof //-->'."\n";
-echo '<table cellpadding="0" cellspacing="0" border="0">' . "\n";
+echo '<table width="100%" cellpadding="0" cellspacing="0" border="0">' . "\n";
 echo '  <tr>' . "\n";
 echo '    <td>' . "\n";
 

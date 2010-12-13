@@ -28,7 +28,7 @@ if (sizeof($featured_categories_array) <> '0') {
   }	
 
   $info_box_contents = array();
-  $info_box_contents[] = array('text' => '<table border="0" width="100%"'.($num_columns==1?' cellspacing="0" cellpadding="0"':' cellspacing="4" cellpadding="2"').'><tr>' );
+  $info_box_contents[] = array('text' => '<table border="0" width="100%"'.($num_columns==1?' cellspacing="0" cellpadding="0"':' cellspacing="0" cellpadding="0"').'><tr>' );
   
   for($i=0,$col=1; $i<sizeof($featured_categories_array); $i++,$col++) { 
   
@@ -236,7 +236,7 @@ if (sizeof($featured_categories_array) <> '0') {
   
   
   if ((FEATURED_CATEGORIES_SET_STYLE == '2') || (FEATURED_CATEGORIES_SET_STYLE == '4') || (FEATURED_CATEGORIES_SET_STYLE == '5') || (FEATURED_CATEGORIES_SET_STYLE == '6')) {
-    new infoBox($info_box_contents);
+    new contentBox($info_box_contents);
   } else {
     echo $info_box_contents[0]['text'];
   }
@@ -244,6 +244,8 @@ if (sizeof($featured_categories_array) <> '0') {
   if ((FEATURED_CATEGORIES_SET_STYLE == '4') || (FEATURED_CATEGORIES_SET_STYLE == '6')) {
     //echo '<img src="images/info_box_' . FEATURED_CATEGORIES_SET_STYLE_SHADOW . '_shadow.gif" width="100%" height="13" alt="">';
   }
+  
+  echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   
 } // end: if()
 ?>

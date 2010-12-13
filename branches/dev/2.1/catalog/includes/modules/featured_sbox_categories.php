@@ -281,7 +281,7 @@ if (sizeof($featured_categories_array) <> '0') {
     $info_box_contents = array();
     $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '6') . 
       '<br><div align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>' .  OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td></tr></table>');
-    new infoBox($info_box_contents);
+    new contentBox($info_box_contents);
     //echo '<img src="images/info_box_' . FEATURED_CATEGORIES_SET_STYLE_SHADOW . '_shadow.gif" width="100%" height="13" alt="">';
   }
 
@@ -307,5 +307,8 @@ if (sizeof($featured_categories_array) <> '0') {
 	$i++;
   }
   echo '</tr></table>'."\n";
+  
+  echo tep_draw_separator('pixel_trans.gif', '100%', '10');
+  
 } // end: if()
 ?>

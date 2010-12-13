@@ -85,7 +85,7 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
 
   if ((FEATURED_MANUFACTURER_SET == '1') && ((FEATURED_MANUFACTURER_SET_STYLE == '2') || (FEATURED_MANUFACTURER_SET_STYLE == '5'))) {
     $info_box_contents = array();
-    $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.MANUFACTURER_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25) . '" align="left" valign="top" class="featuredManufacturerWP"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_manufacturer_products_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . featured_manufacturer_products_array[$i]['pimage'], $featured_manufacturer_products_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td><td align="left" valign="top" class="featuredManufacturerWP"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_manufacturer_products_array[$i]['pid'], 'NONSSL') . '">' . $featured_manufacturer_products_array[$i]['pname'] . '</a></div>');
+    $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="' . MANUFACTURER_CELLPADDING . '"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25) . '" align="left" valign="top" class="featuredManufacturerWP"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_manufacturer_products_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . featured_manufacturer_products_array[$i]['pimage'], $featured_manufacturer_products_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td><td align="left" valign="top" class="featuredManufacturerWP"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_manufacturer_products_array[$i]['pid'], 'NONSSL') . '">' . $featured_manufacturer_products_array[$i]['pname'] . '</a></div>');
     $info_box_contents[0]['text'] .= $current_description; 
 	$info_box_contents[0]['text'] .= '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_manufacturer_products_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td><td align="left" valign="top" class="featuredManufacturerWP">' . tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '5') . '<br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . str_replace('&nbsp;&nbsp;','<br>',$products_price) . '' . $buy_now_link . '</td></tr></table>'."\n";
     new infoBox($info_box_contents);
@@ -216,7 +216,7 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
     $info_box_contents = array();
     $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.MANUFACTURER_CELLPADDING.'"><tr><td align="center" valign="top" class="featuredManufacturerWP"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_manufacturer_products_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_manufacturer_products_array[$i]['pimage'], $featured_manufacturer_products_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '5') . 
       '<br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_manufacturer_products_array[$i]['pid'], 'NONSSL') . '">' . $featured_manufacturer_products_array[$i]['pname'] . '</a><br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . str_replace('&nbsp;&nbsp;','<br>',$products_price) . '' . $buy_now_link . '</td></tr></table>'."\n");
-    new infoBox($info_box_contents);
+    new contentBox($info_box_contents);
     //echo '<img src="images/info_box_' . FEATURED_SET_STYLE_SHADOW . '_shadow.gif" width="100%" height="13" alt="">';
   }
 
@@ -240,5 +240,8 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
 	$i++;
   }
   echo '</tr></table>'."\n";
+  
+  echo tep_draw_separator('pixel_trans.gif', '100%', '10');
+  
 } // end: if()
 ?>

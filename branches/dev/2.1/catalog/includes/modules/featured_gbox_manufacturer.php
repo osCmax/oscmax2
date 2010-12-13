@@ -16,23 +16,22 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
 
   $num_columns = (sizeof($featured_manufacturer_products_array)>(int)FEATURED_MANUFACTURER_COLUMNS?FEATURED_MANUFACTURER_COLUMNS:sizeof($featured_manufacturer_products_array));
 
-  if ((FEATURED_MANUFACTURER_SET_STYLE == '5') || (FEATURED_MANUFACTURER_SET_STYLE == '6')) {
+  //if ((FEATURED_MANUFACTURER_SET_STYLE == '5') || (FEATURED_MANUFACTURER_SET_STYLE == '6')) {
     $info_box_heading = array();
     $info_box_heading[] = array('text' => OPEN_FEATURED_BOX_MANUFACTURER_HEADING);
 
     new infoBoxHeading($info_box_heading,true,true);
-  }
+  //}
 
   $info_box_contents = array();
-  $info_box_contents[] = array('text' => '&nbsp;<br>' );
-
-  $info_box_contents[0]['text'] .= '<table border="0" width="100%" cellspacing="4" cellpadding="2"><tr>';
+  
+  $info_box_contents[0]['text'] .= '<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr>';
   $info_box_contents[0]['text'] .= '<td valign="middle" align="right" width="40%" class="main"><a href="' . tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $featured_manufacturer_products_array[0]['mid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_manufacturer_products_array[0]['mimage'], $featured_manufacturer_products_array[0]['mname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td><td valign="middle" align="left" width="60%" class="main">'.OPEN_FEATURED_BOX_MANUFACTURER_HEADING.'<br><b>'.$featured_manufacturer_products_array[0]['mname'].'</b></td>';
   $info_box_contents[0]['text'] .= '</tr></table>'; 
    
   $info_box_contents[0]['text'] .= '&nbsp;<br>';  
 
-  $info_box_contents[0]['text'] .= '<table border="0" width="100%"'.($num_columns==1?' cellspacing="0" cellpadding="0"':' cellspacing="4" cellpadding="2"').'><tr>';
+  $info_box_contents[0]['text'] .= '<table border="0" width="100%"'.($num_columns==1?' cellspacing="0" cellpadding="0"':' cellspacing="0" cellpadding="0"').'><tr>';
   
   for($i=0,$col=1; $i<sizeof($featured_manufacturer_products_array); $i++,$col++) {
   
@@ -236,7 +235,7 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
   
   
   if ((FEATURED_MANUFACTURER_SET_STYLE == '2') || (FEATURED_MANUFACTURER_SET_STYLE == '4') || (FEATURED_MANUFACTURER_SET_STYLE == '5') || (FEATURED_MANUFACTURER_SET_STYLE == '6')) {
-    new infoBox($info_box_contents);
+    new contentBox($info_box_contents);
   } else {
     echo $info_box_contents[0]['text'];
   }
@@ -244,6 +243,8 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
   if ((FEATURED_MANUFACTURER_SET_STYLE == '4') || (FEATURED_MANUFACTURER_SET_STYLE == '6')) {
     //echo '<img src="images/info_box_' . FEATURED_SET_STYLE_SHADOW . '_shadow.gif" width="100%" height="13" alt="">';
   }
+  
+  echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   
 } // end: if()
 ?>

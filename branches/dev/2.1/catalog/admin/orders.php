@@ -700,8 +700,11 @@ require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/orders3.php');
 // if no fedex tracking number, AND if the order has not been manually marked "delivered,"
 // display the "ship" button
 
-        elseif ((!$fedex_tracking) && (($check_fedex_status['orders_status']) != 3)) {			
-          $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SHIP_FEDEX, 'oID=' .$oInfo->orders_id . '&amp;action=new&amp;status=3') . '">' . tep_image_button('button_ship.gif', IMAGE_ORDERS_SHIP) . '</a>');
+        elseif ((!$fedex_tracking) && (($check_fedex_status['orders_status']) != 3)) {
+		  // Check Fedex Module is installed first
+		  if (MODULE_SHIPPING_FEDEX1_STATUS == 'True') { 
+            $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SHIP_FEDEX, 'oID=' .$oInfo->orders_id . '&amp;action=new&amp;status=3') . '">' . tep_image_button('button_ship.gif', IMAGE_ORDERS_SHIP) . '</a>');
+		  }
         }
 // EOF: MOD - FedEx 
        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&amp;action=edit') . '">' . tep_image_button('button_details.gif', IMAGE_DETAILS) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>  <a href="' . tep_href_link(FILENAME_ORDERS_EDIT, 'oID=' . $oInfo->orders_id) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a><br><br>');

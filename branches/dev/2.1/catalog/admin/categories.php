@@ -1871,10 +1871,12 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
             tep_draw_separator('pixel_trans.gif', '10', '12') . TEXT_PRODUCTS_WIDTH .  '&nbsp;' . tep_draw_input_field('products_width', $pInfo->products_width) .
             tep_draw_separator('pixel_trans.gif', '10', '12') . TEXT_PRODUCTS_HEIGHT .  '&nbsp;' . tep_draw_input_field('products_height', $pInfo->products_height); ?></td>
           </tr>
+          <?php if (MODULE_SHIPPING_FEDEX1_STATUS == 'True') { ?>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_READY_TO_SHIP; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_checkbox_field('products_ready_to_ship', '1', (($product['products_ready_to_ship'] == '1') ? true : false)); ?></td>
           </tr>
+          <?php } ?>
         </table></td>
       </tr>
       <tr>

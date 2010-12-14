@@ -696,14 +696,14 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 // LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
 // LINE MODED: Open Feature Sets: Added "products_featured, products_featured_until"
 // LINE MODED: MSRP: Added "products_msrp,"
-            $product_query = tep_db_query("select products_ship_price, products_quantity, products_model, products_image, products_msrp, products_price, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_tax_class_id, manufacturers_id, products_qty_blocks, products_min_order_qty, products_featured, products_featured_until from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
+            $product_query = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
             $product = tep_db_fetch_array($product_query);
 
 // LINE CHANGED: MS2 update 501112 - Added :(empty($product['products_date_available']) ? "null" : ...{some code}... ") . "
 // LINE MODED: Added "products_ship_price and dimensions for upsxml"
 // LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
 // LINE MODED: Open Feature Sets: Added "products_featured, products_featured_until"
-            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_msrp, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id, products_qty_blocks, products_min_order_qty, products_featured, products_featured_until) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_msrp']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "', '" . (int)$product['products_qty_blocks'] . "', '" . (int)$product['products_min_order_qty'] . "', '" . (int)$product['products_featured'] . "', '" . (int)$product['products_featured_until'] . "')");
+            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_msrp, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id, products_qty_blocks, products_min_order_qty, products_featured, products_featured_until, products_hide_from_groups) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_msrp']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "', '" . (int)$product['products_qty_blocks'] . "', '" . (int)$product['products_min_order_qty'] . "', '" . (int)$product['products_featured'] . "', '" . (int)$product['products_featured_until'] . "', '" . $product['products_hide_from_groups'] . "')");
             $dup_products_id = tep_db_insert_id();
 
 // Tabs by PGM LINE EDIT
@@ -727,14 +727,21 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
             while ($qpbpp = tep_db_fetch_array($qpbpp_query)) {
 			  tep_db_query("insert into " . TABLE_PRODUCTS_PRICE_BREAK . " (products_id, products_price, products_qty, customers_group_id) values ('" . (int)$dup_products_id . "', '" . $qpbpp['products_price'] . "', '" . tep_db_input($qpbpp['products_qty']) . "', '" . tep_db_input($qpbpp['customers_group_id']) . "')");	
 			}
-// BOF: PGM Adds code to copy QPBPP for SPPC
-		
+// EOF: PGM Adds code to copy QPBPP for SPPC
+
+// BOF: PGM Adds code to copy Quantity Blocks and Minimum Order for QPBPP for SPPC
+            $qb_query = tep_db_query("select * from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$products_id . "'");
+            while ($qb = tep_db_fetch_array($qb_query)) {
+			  tep_db_query("insert into " . TABLE_PRODUCTS_GROUPS . " (customers_group_id, customers_group_price, products_id, products_price, products_qty_blocks, products_min_order_qty) values ('" . tep_db_input($qb['customers_group_id']) . "', '" . tep_db_input($qb['customers_group_price']) . "', '" . (int)$dup_products_id . "', '" . $qb['products_price'] . "', '" . tep_db_input($qb['products_qty_blocks']) . "', '" . tep_db_input($qb['products_min_order_qty']) . "')");	
+			}
+// EOF: PGM Adds code to copy Quantity Blocks and Minimum Order for QPBPP for SPPC
+
 // BOF: PGM Adds code to copy Attributes
             $attribute_copy_query = tep_db_query("select * from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$products_id . "'");
             while ($attribute_copy = tep_db_fetch_array($attribute_copy_query)) {
 			  tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " (products_id, options_id, options_values_id, options_values_price, price_prefix, weight_prefix, options_values_weight) values ('" . (int)$dup_products_id . "', '" . $attribute_copy['options_id'] . "', '" . tep_db_input($attribute_copy['options_values_id']) . "', '" . $attribute_copy['options_values_price'] . "', '" . $attribute_copy['price_prefix'] . "', '" . $attribute_copy['weight_prefix'] . "', '" . tep_db_input($attribute_copy['options_values_weight']) . "')");	
 			}
-// BOF: PGM Adds code to copy Attributes
+// EOF: PGM Adds code to copy Attributes
 		
 
 //	      tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
@@ -742,20 +749,7 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
             tep_db_query("insert into " . TABLE_PRODUCTS_TO_CATEGORIES . " (products_id, categories_id) values ('" . (int)$dup_products_id . "', '" . (int)$categories_id . "')");
             $products_id = $dup_products_id;
 
-// BOF Separate Pricing Per Customer originally 2006-04-26 by Infobroker
-      $cg_price_query = tep_db_query("select customers_group_id, customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $products_id . "' order by customers_group_id");
-
-// insert customer group prices in table products_groups when there are any for the copied product
-    if (tep_db_num_rows($cg_price_query) > 0) {
-      while ( $cg_prices = tep_db_fetch_array($cg_price_query)) {
-        tep_db_query("insert into " . TABLE_PRODUCTS_GROUPS . " (customers_group_id, customers_group_price, products_id) values ('" . (int)$cg_prices['customers_group_id'] . "', '" . tep_db_input($cg_prices['customers_group_price']) . "', '" . (int)$dup_products_id . "')");
-      } // end while ( $cg_prices = tep_db_fetch_array($cg_price_query))
-    } // end if (tep_db_num_rows($cg_price_query) > 0)
-
-// EOF Separate Pricing Per Customer originally 2006-04-26 by Infobroker
-
-
-          }
+          } // end elseif ($_POST['copy_as'] == 'duplicate')
 
           if (USE_CACHE == 'true') {
             tep_reset_cache_block('categories');

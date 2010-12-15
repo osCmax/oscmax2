@@ -7,13 +7,25 @@ if (DOWN_FOR_MAINTENANCE == 'true') {
   $maintenance_on_at_time= tep_db_fetch_array($maintenance_on_at_time_raw); 
   define('TEXT_DATE_TIME', $maintenance_on_at_time['last_modified']); 
 } 
+
+  $information_query = tep_db_query("SELECT information_title, information_description FROM " . TABLE_INFORMATION . " WHERE information_id='" . (int)DOWN_FOR_MAINTENANCE_INFO_ID . "' and language_id='" . (int)$languages_id ."'");
+  $information = tep_db_fetch_array($information_query);
+  $title = stripslashes($information['information_title']);
+  $page_description = stripslashes($information['information_description']);
+	
+  // Added as noticed by infopages module
+  if (!preg_match("/([\<])([^\>]{1,})*([\>])/i", $page_description)) {
+	$page_description = str_replace("\r\n", "<br>\r\n", $page_description); 
+  }
+
+  $breadcrumb->add($title, tep_href_link(FILENAME_INFORMATION, 'NONSSL'));
 ?> 
 <!-- body_text //-->
     <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr> 
           <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr> 
-                <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+                <td class="pageHeading"><?php echo $title; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
               </tr>
             </table></td>
@@ -25,7 +37,7 @@ if (DOWN_FOR_MAINTENANCE == 'true') {
           <td><br>
             <table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr> 
-                <td class="main"><?php echo DOWN_FOR_MAINTENANCE_TEXT_INFORMATION; ?></td>
+                <td class="main"><?php echo $page_description; ?></td>
               </tr>
               <?php if (DISPLAY_MAINTENANCE_TIME == 'true') { ?>
               <tr> 

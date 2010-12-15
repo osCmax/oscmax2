@@ -37,7 +37,7 @@
   define('QUEUE_INFORMATION_LIST', 'QueueList: ');
   define('MANAGER_INFORMATION', 'Information Manager');
   define('NO_INFORMATION', 'No');
-  define('PUBLIC_INFORMATION', 'Public');
+  define('PUBLIC_INFORMATION', 'Listed in Infobox');
   define('SORT_BY', 'In information Page this Sort by');
   define('STATUS_ACTIVE', 'Active');
   define('STATUS_INACTIVE', 'Inactive');

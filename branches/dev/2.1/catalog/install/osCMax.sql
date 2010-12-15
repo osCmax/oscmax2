@@ -1620,7 +1620,7 @@ INSERT INTO admin_files VALUES (61,'paypalipn_txn.php',0,59,'1');
 INSERT INTO admin_files VALUES (62,'coupon_restrict.php',0,54,'1');
 INSERT INTO admin_files VALUES (64,'xsell_products.php',0,3,'1');
 INSERT INTO admin_files VALUES (65,'easypopulate.php',0,3,'1');
-INSERT INTO admin_files VALUES (68,'define_mainpage.php',0,3,'1');
+#INSERT INTO admin_files VALUES (68,'define_mainpage.php',0,3,'1');
 INSERT INTO admin_files VALUES (70,'edit_orders.php',0,5,'1');
 INSERT INTO admin_files VALUES (71,'validproducts.php',0,54,'1');
 INSERT INTO admin_files VALUES (72,'validcategories.php',0,54,'1');
@@ -1645,9 +1645,9 @@ INSERT INTO admin_files VALUES (93,'info_boxes.php',1,0,'1');
 INSERT INTO admin_files VALUES (94,'infobox_configuration.php',0,93,'1');
 INSERT INTO admin_files VALUES (95,'popup_infobox_help.php',0,93,'1');
 INSERT INTO admin_files VALUES (98,'customers_groups.php',0,5,'1');
-INSERT INTO admin_files VALUES (99,'define_conditions.php',0,3,'1');
-INSERT INTO admin_files VALUES (100,'define_privacy.php',0,3,'1');
-INSERT INTO admin_files VALUES (101,'define_shipping.php',0,3,'1');
+#INSERT INTO admin_files VALUES (99,'define_conditions.php',0,3,'1');
+#INSERT INTO admin_files VALUES (100,'define_privacy.php',0,3,'1');
+#INSERT INTO admin_files VALUES (101,'define_shipping.php',0,3,'1');
 INSERT INTO admin_files VALUES (102,'xsell.php',0,3,'1');
 INSERT INTO admin_files VALUES (103,'create_account.php',0,5,'1');
 INSERT INTO admin_files VALUES (104,'create_account_process.php',0,5,'1');
@@ -2203,6 +2203,7 @@ INSERT INTO configuration VALUES (2659, 'Show More Info button?', 'SHOW_MORE_INF
 INSERT INTO configuration VALUES (2660, 'Scroller Width', 'SCROLLER_WIDTH', '590', 'What width should the horizontal scroller be in pixels?  (Only enter the number)', 201, 28, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2661, 'Scroller Height', 'SCROLLER_HEIGHT', '160', 'What height should the horizontal scroller be in pixels?  (Only enter the number)', 201, 29, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2662, 'Display Short Description','PRODUCT_SHORT_DESCRIPTION','false','Do you want to display the short description in the list results?','8','6',NULL,now(),NULL,'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2663, 'Main Page Text Information Manager Info Number', 'DEFINE_MAINPAGE_TEXT_INFO_NO', '13', 'What number is the Main Page in the Information Manager? (Default: 13)', 201, 30, now(), now(), NULL, NULL);
 
 
 #Open Feature Sets Start
@@ -2791,10 +2792,12 @@ INSERT INTO information VALUES (10, 1, 'Confidencialidad', '', 0, 5, '1', 3);
 INSERT INTO information VALUES (11, 1, 'Conditions of Use', '<p>\r\n	Conditions of Use</p>', 0, 6, '1', 1);
 INSERT INTO information VALUES (11, 1, 'Unsere AGB''s', '<p>\r\n	Unsere AGB&#39;s</p>', 0, 6, '1', 2);
 INSERT INTO information VALUES (11, 1, 'Condiciones de uso', '<p>\r\n	Condiciones de uso</p>', 0, 6, '1', 3);
-INSERT INTO information VALUES (12, 1, 'Down for maintenance', '<p>The site is currently down for maintenance. Please excuse the dust, and try back later.</p>', 0, 5, '0', 1);
-INSERT INTO information VALUES (12, 1, 'Offen für Wartung', '<p>Die Website ist derzeit für Wartungsarbeiten heruntergefahren. Bitte versuchen Sie es später noch einmal.</p>', 0, 5, '0', 2);
-INSERT INTO information VALUES (12, 1, 'Cerrado por mantenimiento', '<p>El sitio está actualmente cerrado por mantenimiento. Por favor, inténtelo de nuevo más tarde.</p>', 0, 5, '0', 3);
-
+INSERT INTO information VALUES (12, 1, 'Down for maintenance', '<p>The site is currently down for maintenance. Please excuse the dust, and try back later.</p>', 0, 2, '0', 1);
+INSERT INTO information VALUES (12, 1, 'Offen für Wartung', '<p>Die Website ist derzeit für Wartungsarbeiten heruntergefahren. Bitte versuchen Sie es später noch einmal.</p>', 0, 2, '0', 2);
+INSERT INTO information VALUES (12, 1, 'Cerrado por mantenimiento', '<p>El sitio está actualmente cerrado por mantenimiento. Por favor, inténtelo de nuevo más tarde.</p>', 0, 2, '0', 3);
+INSERT INTO information VALUES (13, 1, 'Index Page Text', '<p><font face="arial, helvetica, sans-serif">To modify the content of this page, go to your Admin Panel -> Configuration -> Templates -> Information Manager.</font></p><hr /><p><font face="arial, helvetica, sans-serif">This is osCmax v2.5, the power e-commerce shopping cart system.</font></p><p><font face="Arial">The official <strong><em>osCmax </em></strong>Support Site is <a href="http://www.oscmax.com/"><font color="#800080">http://www.oscmax.com</font></a> . There are very active support forums, the wiki, documentation, downloads, and everything else related to <strong><em>osCmax.</em></strong></font></p>', 0, 1, '0', 1);
+INSERT INTO information VALUES (13, 1, 'Index-Seite Text', '<p><font face="arial, helvetica, sans-serif">So ändern Sie den Inhalt dieser Seite, gehen Sie zu Admin Panel -> Konfiguration -> Templates -> Information Manager.</font></p><hr /><p><font face="arial, helvetica, sans-serif">Dies ist osCmax v2.5, die Macht E-Commerce-Warenkorb-System.</font></p><p><font face="Arial">Die offizielle osCMax Support Site ist http://www.oscmax.com. Es gibt sehr aktive Support-Foren, das Wiki, Dokumentation, Downloads und alles andere im Zusammenhang mit osCMax.</font></p>', 0, 1, '0', 2);
+INSERT INTO information VALUES (13, 1, 'Índice Texto página', '<p><font face="arial, helvetica, sans-serif">Para modificar el contenido de esta página, vaya al Panel de Administración -> Configuración -> Plantillas -> Administrador de información.</font></p><hr /><p><font face="arial, helvetica, sans-serif">Esto es osCmax v2.5, el poder de compras de comercio electrónico sistema del carro.</font></p><p><font face="Arial">El funcionario de Apoyo osCMax es http://www.oscmax.com. Hay foros de soporte muy activo, wiki, documentación, descargas y todo lo relacionado con osCmax.</font></p>', 0, 1, '0', 3);
 
 INSERT INTO information_group VALUES(1, 'Information pages', 'Information pages', 1, 1, '');
 INSERT INTO information_group VALUES(2, 'Welcome message', 'Welcome message', 2, 1, 'information_title, sort_order, parent_id, visible');

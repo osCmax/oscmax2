@@ -37,7 +37,7 @@ if (sizeof($data) > 0) {
         <td nowrap  align="center" class="dataTableContent">
 <?php
 		if ($val['visible'] == 1) {
-			echo tep_image(DIR_WS_ICONS . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;';
+			echo tep_image(DIR_WS_ICONS . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;';
 			echo ( (!strstr($info_group['locked'], 'visible')) ? '<a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, "gID=$gID&amp;information_action=Visible&amp;information_id=$val[information_id]&amp;visible=0") . '">' : null);
 			echo tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', DEACTIVATION_ID_INFORMATION . " $val[information_title]", 10, 10);
 			echo ( (!strstr($info_group['locked'], 'visible')) ? '</a>' : null);
@@ -46,7 +46,7 @@ if (sizeof($data) > 0) {
 			echo ( (!strstr($info_group['locked'], 'visible')) ? '<a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, "gID=$gID&amp;information_action=Visible&amp;information_id=$val[information_id]&amp;visible=1") . '">' : null);
 			echo tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', ACTIVATION_ID_INFORMATION . " $val[information_title]", 10, 10);
 			echo ( (!strstr($info_group['locked'], 'visible')) ? '</a>' : null);
-			echo '&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+			echo '&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
 		}
 ?></td>
 	    <td width="10%" align="center" class="dataTableContent"><?php echo $val['sort_order'];?></td>

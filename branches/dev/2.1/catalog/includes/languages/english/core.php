@@ -150,7 +150,7 @@ define('BOX_HEADING_WHATS_NEW', 'What\'s New?');
 
 // quick_find box text in includes/boxes/quick_find.php
 define('BOX_HEADING_SEARCH', 'Quick Find');
-define('BOX_SEARCH_TEXT', 'Use keywords to find the product you are looking for.');
+define('BOX_SEARCH_TEXT', '');
 define('BOX_SEARCH_ADVANCED_SEARCH', 'Advanced Search');
 
 // specials box text in includes/boxes/specials.php

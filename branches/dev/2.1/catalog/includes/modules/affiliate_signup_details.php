@@ -22,7 +22,7 @@
     <td class="formAreaTitle"><?php echo CATEGORY_PERSONAL; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
 <?php
@@ -145,7 +145,7 @@
     <td class="formAreaTitle"><br><?php echo CATEGORY_COMPANY; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -195,7 +195,7 @@
     <td class="formAreaTitle"><br><?php echo CATEGORY_PAYMENT_DETAILS; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
 <?php
@@ -346,7 +346,7 @@
     <td class="formAreaTitle"><br><?php echo CATEGORY_ADDRESS; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -463,7 +463,7 @@
     <td class="formAreaTitle"><br><?php echo CATEGORY_CONTACT; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -531,7 +531,7 @@
     <td class="formAreaTitle"><br><?php echo CATEGORY_PASSWORD; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -575,7 +575,7 @@
         <td class="main"><b><?php echo CATEGORY_OPTIONS; ?></b></td>
       </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -604,7 +604,7 @@
     <td class="formAreaTitle"><br></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>

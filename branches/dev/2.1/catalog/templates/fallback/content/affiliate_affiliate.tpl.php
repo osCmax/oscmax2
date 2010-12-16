@@ -19,7 +19,7 @@
 ?> 
 
       <tr> 
-        <td class="smallText"><?php echo $info_message; ?></td> 
+        <td class="messageStackError"><?php echo tep_image(DIR_WS_ICONS . 'error.gif', ICON_ERROR) . $info_message; ?></td> 
       </tr> 
       <tr> 
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td> 

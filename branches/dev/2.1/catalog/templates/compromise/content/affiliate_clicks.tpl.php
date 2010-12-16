@@ -81,7 +81,7 @@
                   <td colspan="4"><?php echo tep_draw_separator(); ?></td>
                 </tr>
                  <tr>
-                  <td align="center" class="boxtext" colspan="4"><b><?php echo TEXT_CLICKS; ?><b></td>
+                  <td align="center" class="boxText" colspan="4"><b><?php echo TEXT_CLICKS; ?><b></td>
                 </tr>
                 <tr>
                   <td colspan="4"><?php echo tep_draw_separator(); ?></td>

@@ -20,7 +20,4 @@
 ?>
         </td>
       </tr>
-      <tr>
-        <td align="right" class="main"><br><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></td>
-      </tr>
     </table></form>

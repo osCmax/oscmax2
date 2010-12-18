@@ -17,7 +17,7 @@
 
 		$info_id = intval($_GET['info_id']);
 		$languages_id = intval($_GET['languages_id']);
-		$information_query = tep_db_query("SELECT information_title, information_description FROM " . TABLE_INFORMATION . " WHERE visible='1' AND information_id='" . $info_id . "' and language_id='" . (int)$languages_id . "'");
+		$information_query = tep_db_query("SELECT information_title, information_description FROM " . TABLE_INFORMATION . " WHERE information_id='" . $info_id . "' and language_id='" . (int)$languages_id . "'");
 		$information = tep_db_fetch_array($information_query);
 		$title = stripslashes($information['information_title']);
 		$page_description = stripslashes($information['information_description']);

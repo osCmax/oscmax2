@@ -70,6 +70,7 @@
 	$("#authortabs").tabs();
 	$("#articletabs").tabs();
 	$("#informationtabs").tabs();
+	$("#affiliatetabs").tabs();
 
     $('span[title]').cluetip({splitTitle: '|', arrows: true, dropShadow: false, cluetipClass: 'jtip'});
 

@@ -179,51 +179,70 @@
       </tr>
       <tr><?php echo tep_draw_form('new_affiliate_news', FILENAME_AFFILIATE_NEWS, (isset($_GET['affiliate_news_id']) ? 'affiliate_news_id=' . $_GET['affiliate_news_id'] . '&amp;action=update_affiliate_news' : 'action=insert_affiliate_news' ). (isset($_GET['lngdir']) ? '&amp;lngdir=' . $_GET['lngdir']:''), 'post', 'enctype="multipart/form-data"'); ?>
         <td>
-          <table border="0" cellspacing="0" cellpadding="2">
- <?php
+
+            <!-- // NEW AFFILIATE TAB HEADER LOOP START //-->
+            <div id="affiliatetabs">
+	        <ul>
+		      <?php
+              $languages = tep_get_languages();
+              for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
+              ?>
+        	    <li><a href="#affiliatetabs-<?php echo $j; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$j]['directory'] . '/images/' . $languages[$j]['image'], $languages[$j]['name']); ?></a></li>
+              <?php } ?> 
+	        </ul>
+            <!-- // NEW AFFILIATE TAB HEADER LOOP END //-->
+
+<?php
               $languages = tep_get_languages();
               for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
-               $a_languages_id = $languages[$i]['id'];
-               if ( isset($_GET['affiliate_news_id']) ) { //editing exsiting news item
-      $affiliate_news_query = tep_db_query("select news_id, affiliate_news_contents_id, affiliate_news_headlines as headline, affiliate_news_contents as content, date_added, news_status from " . TABLE_AFFILIATE_NEWS . ", " . TABLE_AFFILIATE_NEWS_CONTENTS . " where news_id = '" . $_GET['affiliate_news_id'] . "' and news_id = affiliate_news_id and affiliate_news_languages_id ='" . $a_languages_id . "'");
-      $affiliate_news = tep_db_fetch_array($affiliate_news_query);
-//      tep_draw_hidden_field('a_languages_check[' . $i . ']', 'set');
-    } else { //adding new news item
-      $affiliate_news = array();
-    }
-    if ($affiliate_news['affiliate_news_contents_id'] == NULL) {
-     echo tep_draw_hidden_field('a_languages_check[' . $a_languages_id . ']', 'not_set' );
-    } else {
-     $a_count_lng_def++;
-    }
-    echo  '<tr><td class="main">' . TEXT_AFFILIATE_NEWS_HEADLINE  . tep_draw_separator('pixel_trans.gif', '24', '15') . '</td>';
-    echo '<td class="main">' . tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . ' ' . tep_draw_input_field('headlines[' . $a_languages_id . ']', $affiliate_news['headline'], '', true) . '</td>'; ?>
-          <td class="main" valign = "top"><?php echo tep_draw_checkbox_field('delete_news[' . $a_languages_id . ']', 1) .  ' ' . TEXT_AFFILIATE_NEWS_CONTENT_DELETE; ?></td>
-          </tr>
-          <tr>
-            <td colspan = 2><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-          <tr>
-            <td class="main" valign = "top"><?php echo TEXT_AFFILIATE_NEWS_CONTENT; ?></td>
-            <td class="main"><?php echo tep_draw_textarea_field('contents[' . $a_languages_id . ']', '70', '15', stripslashes($affiliate_news['content'])); ?></td>
-            <td class="main" align="right">
-            <?php
-            isset($_GET['affiliate_news_id']) ? $cancel_button = '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $_GET['affiliate_news_id']) . (isset($_GET['lngdir']) ? '&amp;lngdir=' . $_GET['lngdir']:'') . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>' : $cancel_button = '';
-            echo (isset($_GET['affiliate_news_id']) ? tep_image_submit('button_update.gif', IMAGE_UPDATE) : tep_image_submit('button_insert.gif', IMAGE_INSERT) )  . $cancel_button ;
-            ?></td>
-          </tr>
-          <tr>
-            <td colspan = 2><?php echo tep_draw_separator('pixel_black.gif', '1', '10') .  tep_black_line() . tep_draw_separator('pixel_black.gif', '1', '10'); ?></td>
-          </tr>
+                $a_languages_id = $languages[$i]['id'];
+                if ( isset($_GET['affiliate_news_id']) ) { //editing exsiting news item
+                  $affiliate_news_query = tep_db_query("select news_id, affiliate_news_contents_id, affiliate_news_headlines as headline, affiliate_news_contents as content, date_added, news_status from " . TABLE_AFFILIATE_NEWS . ", " . TABLE_AFFILIATE_NEWS_CONTENTS . " where news_id = '" . $_GET['affiliate_news_id'] . "' and news_id = affiliate_news_id and affiliate_news_languages_id ='" . $a_languages_id . "'");
+                  $affiliate_news = tep_db_fetch_array($affiliate_news_query);
+                  //      tep_draw_hidden_field('a_languages_check[' . $i . ']', 'set');
+                } else { //adding new news item
+                  $affiliate_news = array();
+                }
+				
+                if ($affiliate_news['affiliate_news_contents_id'] == NULL) {
+                  echo tep_draw_hidden_field('a_languages_check[' . $a_languages_id . ']', 'not_set' );
+                } else {
+                  $a_count_lng_def++;
+                }
+                ?>
+                
+                <div id="affiliatetabs-<?php echo $i; ?>">
+                <table border="0" cellspacing="0" cellpadding="2">
+		        <tr>
+                  <td class="main"><?php echo TEXT_AFFILIATE_NEWS_HEADLINE  . tep_draw_separator('pixel_trans.gif', '24', '15'); ?></td>
+                  <td class="main"><?php echo tep_draw_input_field('headlines[' . $a_languages_id . ']', $affiliate_news['headline'], '', true) . '</td>'; ?>
+                </tr>
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>
+                <tr>
+                  <td class="main" valign = "top"><?php echo TEXT_AFFILIATE_NEWS_CONTENT; ?></td>
+                  <td class="main"><?php echo tep_draw_textarea_field('contents[' . $a_languages_id . ']', '70', '15', stripslashes($affiliate_news['content'])); ?></td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td class="main" valign="top"><?php echo tep_draw_checkbox_field('delete_news[' . $a_languages_id . ']', 1) .  ' ' . TEXT_AFFILIATE_NEWS_CONTENT_DELETE; ?></td>
+                </table>
+                </div>
 <?php
               } //end for-language-loop
-              echo tep_draw_hidden_field('a_count', $a_count_lng_def);
+              
+			  echo tep_draw_hidden_field('a_count', $a_count_lng_def);
 ?>
-        </table>
+          </div>
         </td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+      </tr>
+      <tr>
+        <td class="main" align="right"><?php isset($_GET['affiliate_news_id']) ? $cancel_button = '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_NEWS, 'affiliate_news_id=' . $_GET['affiliate_news_id']) . (isset($_GET['lngdir']) ? '&amp;lngdir=' . $_GET['lngdir']:'') . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>' : $cancel_button = '';
+                  echo (isset($_GET['affiliate_news_id']) ? tep_image_submit('button_update.gif', IMAGE_UPDATE) : tep_image_submit('button_insert.gif', IMAGE_INSERT) )  . $cancel_button ; ?></td>
       </tr>
       </form></tr>
 

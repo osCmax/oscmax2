@@ -58,18 +58,26 @@ $menuid_string = $categories['menuid_string'];
 echo $categories['menuid_js'] . PHP_EOL;
 unset($categories['menuid_string'], $categories['menuid_js']); // Housekeeping
 
-  $info_box_contents = array();
-  $info_box_contents[] = array('text' => BOX_HEADING_CATEGORIES); // Standard infobox heading
+  $boxHeading = BOX_HEADING_CATEGORIES;
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded';
+  
+  $boxContent_attributes = '';
+  $boxLink = '';
+  $box_base_name = 'categories'; // for easy unique box template setup (added BTSv1.2)
+  $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
-  new infoBoxHeading($info_box_contents, true, false);
-ob_start(); // Start output buffering
-displayCategories($categories); // Read categories into buffer
-$info_box_categories = ob_get_contents(); // Pass buffer contents to $info_box_categories
-ob_end_clean(); // Clear the buffer
-  $info_box_contents = array();
-  $info_box_contents[] = array('text' => $info_box_categories);
+  ob_start(); // Start output buffering
+  displayCategories($categories); // Read categories into buffer
+  $info_box_categories = ob_get_contents(); // Pass buffer contents to $info_box_categories
+  ob_end_clean(); // Clear the buffer
+  
+  $boxContent = $info_box_categories;
 
-  new infoBox($info_box_contents);
+  include (bts_select('boxes', $box_base_name)); // BTS 1.5
 ?>
   </td>
 </tr>

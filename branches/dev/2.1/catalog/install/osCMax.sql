@@ -2744,6 +2744,7 @@ INSERT INTO help_pages VALUES ('configuration.php?gID=15', 'http://wiki.oscdox.c
 INSERT INTO help_pages VALUES ('configuration.php?gID=16', 'http://wiki.oscdox.com/v2.5/site_maintenance', 'Site Maintenance', 0);
 INSERT INTO help_pages VALUES ('configuration.php?gID=201', 'http://wiki.oscdox.com/v2.5/template_setup', 'Template Setup', 0);
 INSERT INTO help_pages VALUES ('configuration.php?gID=203', 'http://wiki.oscdox.com/v2.5/notifications', 'Notifications', 0);
+INSERT INTO help_pages VALUES ('configuration.php?gID=206', 'http://wiki.oscdox.com/v2.5/mailchimp_newsletters', 'Mail Chimp', 0);
 
 #Canned Comments
 INSERT INTO orders_premade_comments VALUES (1, 'Thank you for your custom', 'Thank you for your custom.');

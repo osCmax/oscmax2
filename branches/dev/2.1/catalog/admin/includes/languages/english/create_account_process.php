@@ -29,4 +29,5 @@ define('EMAIL_WARNING', '<b>Note:</b> This email address was given to us by one 
 define('TEXT_ACCOUNT_PROBLEM', 'There has been a problem completing your form. Please correct the information below.');
 define('IMAGE_BUTTON_CREATE', 'Create Account');
 define('ENTRY_STATE_TEXT', '&nbsp;<span class="errorText">* (Select country first)</span>');
+define('ENTRY_CUSTOMER_GROUP', 'Customer Group');
 ?>

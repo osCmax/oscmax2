@@ -125,6 +125,8 @@ if (!@$_POST['action']) {
   $telephone = tep_db_prepare_input($_POST['telephone']);
   $fax = tep_db_prepare_input($_POST['fax']);
   $newsletter = tep_db_prepare_input($_POST['newsletter']);
+  $customers_group = tep_db_prepare_input($_POST['customers_group_id']);
+  
   //$password = tep_db_prepare_input($_POST['password']);
   $confirmation = tep_db_prepare_input($_POST['confirmation']);
   $street_address = tep_db_prepare_input($_POST['street_address']);
@@ -420,6 +422,7 @@ function getStatesRequest(request, div_element) {
                            'customers_telephone' => $telephone,
                            'customers_fax' => $fax,
                            'customers_newsletter' => $newsletter,
+						   'customers_group_id' => $customers_group,
                            'customers_password' => tep_encrypt_password($password));
                            //'customers_password' => $password,
                            //'customers_default_address_id' => 1);

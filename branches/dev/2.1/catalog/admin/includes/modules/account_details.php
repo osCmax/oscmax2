@@ -427,6 +427,21 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
   }
 ?></td>
           </tr>
+          <tr>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_CUSTOMER_GROUP; ?></td>
+            <td class="main">&nbsp;
+			
+			<?php 
+			  $existing_customers_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id ");
+			  while ($existing_customers =  tep_db_fetch_array($existing_customers_query)) {
+                $existing_customers_array[] = array("id" => $existing_customers['customers_group_id'], "text" => "&#160;".$existing_customers['customers_group_name']."&#160;");
+			  }
+			 
+			  if ($processed == true) {
+                echo $customers_group . tep_draw_hidden_field('customers_group_id');
+              } else {
+                echo tep_draw_pull_down_menu('customers_group_id', $existing_customers_array, $account['customers_group_id']);
+              } ?></td>
         </table></td>
       </tr>
     </table></td>

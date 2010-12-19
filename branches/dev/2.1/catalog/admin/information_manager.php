@@ -157,7 +157,7 @@ switch($_REQUEST['information_action']) {
 		    }
 		}
 	}
-    tep_redirect(tep_href_link(FILENAME_INFORMATION_MANAGER));
+    tep_redirect(tep_href_link(FILENAME_INFORMATION_MANAGER, 'gID=' . $gID));
 	break;
 
 	case "Update":
@@ -178,7 +178,7 @@ switch($_REQUEST['information_action']) {
                 }
 			}
 		}
-      tep_redirect(tep_href_link(FILENAME_INFORMATION_MANAGER));
+      tep_redirect(tep_href_link(FILENAME_INFORMATION_MANAGER, 'gID=' . $gID));
 	}else{
       $error="80";
     }
@@ -216,9 +216,6 @@ switch($_REQUEST['information_action']) {
     <td valign="top">
       <table width="100%">
         <tr>
-          <td align=right><?php //echo $languages_id; ?></td>
-        </tr>
-        <tr>
           <td>
 <?php
 switch($_REQUEST['information_action']) {
@@ -241,7 +238,7 @@ case "Added":
 		$data = tep_get_information_list();
 		$button = array("Update");
 		$title = EDIT_ID_INFORMATION . " $information_id";
-		echo tep_draw_form('edit',FILENAME_INFORMATION_MANAGER, 'information_action=Update');
+		echo tep_draw_form('edit', FILENAME_INFORMATION_MANAGER, 'information_action=Update');
 		echo tep_draw_hidden_field('information_id', $information_id);
 		echo tep_draw_hidden_field('gID', $_GET['gID']);
 		include('information_form.php');

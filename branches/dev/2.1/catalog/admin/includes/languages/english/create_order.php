@@ -127,4 +127,6 @@ define('ENTRY_ACCOUNT_PASSWORD_TEXT','');
 define('ENTRY_NEWSLETTER_SUBSCRIBE_TEXT','1 = subscribed, or 0 (Zero) = not subscribed.');
 define('CATEGORY_ORDER_DETAILS', 'Choose currency:');
 define('TEXT_CREATE_ORDER', 'Create Order');
+
+define('IMAGE_BUTTON_CONFIRM', 'Confirm');
 ?>

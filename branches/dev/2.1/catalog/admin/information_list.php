@@ -21,7 +21,7 @@
 	    <td align="center" class="dataTableHeadingContent"><?php echo ID_INFORMATION;?></td>
 	    <td align="left" class="dataTableHeadingContent"><?php echo ENTRY_TITLE;?></td>
 	    <td align="left" class="dataTableHeadingContent"><?php echo ENTRY_PARENT_PAGE;?></td>
-	    <td align="center" class="dataTableHeadingContent"><?php echo PUBLIC_INFORMATION;?></td>
+	    <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo PUBLIC_INFORMATION; } else { echo PUBLIC_INFORMATION_2; }?></td>
 	    <td align="center" class="dataTableHeadingContent"><?php echo ENTRY_SORT_ORDER; ?></td>
 	    <td align="center" class="dataTableHeadingContent" colspan=2><?php echo ACTION_INFORMATION;?></td>
       </tr>

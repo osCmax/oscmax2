@@ -75,7 +75,6 @@ if(!strstr($info_group['locked'], 'sort_order')) {
         <div id="informationtabs">
 	      <ul>
 <?php	
-if(!strstr($info_group['locked'], 'information_title')) {
     for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
 ?>
             <li><a href="#informationtabs-<?php echo $i; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?></a></li>
@@ -89,9 +88,12 @@ if(!strstr($info_group['locked'], 'information_title')) {
 	  
           <div id="informationtabs-<?php echo $j; ?>">
 		    <table width="100%">
+              <?php if(!strstr($info_group['locked'], 'information_title')) { ?>
               <tr>
                 <td class="main"><?php echo ENTRY_TITLE . tep_draw_input_field('information_title[' . $languages[$j]['id'] . ']', (($languages[$j]['id'] == $languages_id) ? stripslashes($edit[information_title]) : tep_get_information_entry($information_id, $languages[$j]['id'], 'information_title')), 'size=40 maxlength=255'); ?></td>
               </tr>
+              <?php } // end if ?>
+
               <tr>
                 <td class="main" width="100%"><?php echo tep_draw_textarea_field('information_description[' . $languages[$j]['id'] . ']', '100', '20', (($languages[$j]['id'] == $languages_id) ? stripslashes($edit[information_description]) : tep_get_information_entry($information_id, $languages[$j]['id'], 'information_description')),'id="information_description' . $languages[$j]['id'] . '" class="ckeditor"'); ?></td>
               </tr>
@@ -99,9 +101,6 @@ if(!strstr($info_group['locked'], 'information_title')) {
           </div>
 <?php           
 	} // end for
-?>
-<?php           	
-} // end if
 ?>
         </div>
       </td>
@@ -112,7 +111,7 @@ if(!strstr($info_group['locked'], 'information_title')) {
 				if( (empty($info_group['locked'])) || ($_GET['information_action'] == 'Edit')) {
 					echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
 				}
-				echo '&nbsp;<a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, "gID=$gID", 'NONSSL') . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
+				echo '&nbsp;<a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, "gID=" . $gID, 'NONSSL') . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
 			?></td>
 	</tr>
 </table>

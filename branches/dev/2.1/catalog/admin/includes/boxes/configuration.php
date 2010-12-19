@@ -46,7 +46,8 @@ $contents = ('<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=1', 'N
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=201', 'NONSSL') . '">Template Setup</a></li>' .
               '<li><a href="' . tep_href_link('page_modules_configuration.php?tID=1') . '">Page Modules</a></li>' .
               '<li><a href="' . tep_href_link('infobox_configuration.php?gID=1', 'NONSSL') . '">Infoboxes</a></li>' .
-	          '<li><a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, 'selected_box=information') . '">Information Pages</a></li>' .
+	          '<li><a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, 'gID=1') . '">Information Pages</a></li>' .
+			  '<li><a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, 'gID=2') . '">Welcome Message</a></li>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=99', 'NONSSL') . '">Open Featured Sets</a></li>' .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7575', 'NONSSL') . '">One Page Checkout</a></li>' .
 			  '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=205', 'NONSSL') . '">Corner Banners</a></li>' .

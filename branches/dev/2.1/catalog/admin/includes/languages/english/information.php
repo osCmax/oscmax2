@@ -38,6 +38,7 @@
   define('MANAGER_INFORMATION', 'Information Manager');
   define('NO_INFORMATION', 'No');
   define('PUBLIC_INFORMATION', 'Listed in Infobox');
+  define('PUBLIC_INFORMATION_2', 'Active');
   define('SORT_BY', 'In information Page this Sort by');
   define('STATUS_ACTIVE', 'Active');
   define('STATUS_INACTIVE', 'Inactive');

@@ -32,5 +32,5 @@ define('TEXT_RETURNING_AFFILIATE', 'I am a returning affiliate.');
 
 define('TEXT_AFFILIATE_PASSWORD_FORGOTTEN', 'Password forgotten? Click here.');
 
-define('TEXT_LOGIN_ERROR', ' Error: No match for \'Affiliate ID\' and/or \'Password\'.');
+define('TEXT_LOGIN_ERROR', ' Error: No match for Affiliate Email and/or Password.');
 ?>

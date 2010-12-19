@@ -30,7 +30,7 @@ define('BOX_AFFILIATE_REPORTS', 'Affiliate Reports');
 define('BOX_AFFILIATE_CLICKRATE', 'Clickthrough Report');
 define('BOX_AFFILIATE_PAYMENT', 'Payment Report');
 define('BOX_AFFILIATE_SALES', 'Sales Report');
-define('BOX_AFFILIATE_BANNERS', 'Affiliate Banners / Links');
+define('BOX_AFFILIATE_BANNERS', 'Affiliate Banners/Links');
 define('BOX_AFFILIATE_BANNERS_BANNERS', 'WebSite Banners');
 define('BOX_AFFILIATE_BANNERS_BUILD_CAT', 'Build Category Link');
 define('BOX_AFFILIATE_BANNERS_BUILD', 'Build Product Link');

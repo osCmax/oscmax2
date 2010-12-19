@@ -42,28 +42,6 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_AFFILIATE_NEWS', 'affiliate_news.php');
   define('FILENAME_AFFILIATE_NEWSLETTER', 'affiliate_newsletter.php');
 
-  define('FILENAME_AFFILIATE_HELP_1', 'affiliate_help1.php');
-  define('FILENAME_AFFILIATE_HELP_2', 'affiliate_help2.php');
-  define('FILENAME_AFFILIATE_HELP_3', 'affiliate_help3.php');
-  define('FILENAME_AFFILIATE_HELP_4', 'affiliate_help4.php');
-  define('FILENAME_AFFILIATE_HELP_5', 'affiliate_help5.php');
-  define('FILENAME_AFFILIATE_HELP_6', 'affiliate_help6.php');
-  define('FILENAME_AFFILIATE_HELP_7', 'affiliate_help7.php');
-  define('FILENAME_AFFILIATE_HELP_8', 'affiliate_help8.php');
-  define('FILENAME_AFFILIATE_HELP_9', 'affiliate_help9.php');
-  define('FILENAME_AFFILIATE_HELP_10', 'affiliate_help10.php');
-  define('FILENAME_AFFILIATE_HELP_11', 'affiliate_help11.php');
-  define('FILENAME_AFFILIATE_HELP_12', 'affiliate_help12.php');
-  define('FILENAME_AFFILIATE_HELP_13', 'affiliate_help13.php');
-  define('FILENAME_AFFILIATE_HELP_14', 'affiliate_help14.php');
-  define('FILENAME_AFFILIATE_HELP_15', 'affiliate_help15.php');
-  define('FILENAME_AFFILIATE_HELP_16', 'affiliate_help16.php');
-  define('FILENAME_AFFILIATE_HELP_17', 'affiliate_help17.php');
-  define('FILENAME_AFFILIATE_HELP_18', 'affiliate_help18.php');
-  define('FILENAME_AFFILIATE_HELP_19', 'affiliate_help19.php');
-  define('FILENAME_AFFILIATE_HELP_20', 'affiliate_help20.php');
-  define('FILENAME_AFFILIATE_HELP_21', 'affiliate_help21.php');
-  define('FILENAME_AFFILIATE_HELP_22', 'affiliate_help22.php');
   define('FILENAME_AFFILIATE_BANNERS_CATEGORY', 'affiliate_banners_category.php');
   define('FILENAME_AFFILIATE_BANNERS_BUILD_CAT', 'affiliate_banners_build_cat.php');
   define('FILENAME_AFFILIATE_VALIDCATS', 'affiliate_validcats.php');

@@ -34,6 +34,8 @@ define('TEXT_INFO_HEADING_NEW_SLIDESHOW', 'New Slide Image');
 define('TEXT_INFO_HEADING_EDIT_SLIDESHOW', 'Edit Slide Image');
 define('TEXT_INFO_HEADING_DELETE_SLIDESHOW', 'Delete Slide Image');
 
+define('TEXT_INFO_EDIT_INTRO', 'Please edit slide details below:');
+
 define('HEADING_NO_SLIDESHOW', 'No Slideshow available');
 define('TEXT_NO_SLIDESHOW', 'Please click <b>Insert</b> to create a new slide for your slideshow. <br><br> Please also make sure you have set the slideshow settings <b>before</b> creating your slides to ensure that the images are the correct size for your store layout.');
 ?>

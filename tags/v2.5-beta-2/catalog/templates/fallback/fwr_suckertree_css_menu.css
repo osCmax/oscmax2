@@ -1,0 +1,76 @@
+
+/*Credits: Dynamic Drive CSS Library */
+/*URL: http://www.dynamicdrive.com/style/ */
+.menudiv
+{
+font: 10px Verdana, Arial, sans-serif;
+}
+.menudiv ul{
+margin: 0;
+padding: 0;
+list-style-type: none;
+width: auto; /* Width of Menu Items */
+/* border-bottom: 1px solid #ccc; */
+}
+	
+.menudiv ul li{
+position: relative;
+}
+	
+/*Sub level menu items */
+.menudiv ul li ul{
+position: absolute;
+background: #f8f8f9;
+width: 129px; /*sub menu width*/
+top: 0;
+visibility: hidden;
+border: 1px solid #ccc;
+z-index: 2000;
+}
+
+/* Sub level menu links style */
+.menudiv ul li a{
+display: block;
+overflow: auto; /*force hasLayout in IE7 */
+color: #000;
+text-decoration: none;
+background: #f8f8f9;
+padding: 1px 5px;
+/* border: 1px solid #ccc; */
+border-bottom: 0;
+z-index: 2000;
+}
+
+.menudiv ul li a:visited{}
+
+.menudiv ul li a:hover{
+color: #a00;
+background: #ffffcc;
+}
+
+.menudiv .subfolderstyle{
+background: url(images/fwr_arrow.gif) no-repeat center right;
+}
+
+	
+/* Holly Hack for IE \*/
+* html .menudiv ul li { float: left; height: 1%; }
+* html .menudiv ul li a { height: 1%; }
+/* End */
+
+.sitemap {
+font: 10px Verdana, Arial, sans-serif;
+}
+.sitemap a {
+color: #000;
+}
+.sitemap a:hover {
+color: red;
+background: #ffffcc;
+}
+.sitemap ul {
+list-style-image : url(images/fwr_arrow.gif);
+}
+.sitemap ul li ul {
+list-style-image : url(images/fwr_arrow_red.gif);
+}

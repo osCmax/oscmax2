@@ -11,13 +11,16 @@ $Id: shopping_cart.php 3 2006-05-27 04:59:07Z user $
 */
 
 define('NAVBAR_TITLE', 'Contenido de la Cesta');
+define('NAVBAR_TITLE_BASKET', 'Contenido de la Cesta');
 define('HEADING_TITLE', 'Que hay en mi Cesta?');
+define('HEADING_TITLE_BASKET', 'Que hay en mi Cesta?');
 define('TABLE_HEADING_REMOVE', 'Quitar');
 define('TABLE_HEADING_QUANTITY', 'Cantidad');
 define('TABLE_HEADING_MODEL', 'Modelo');
 define('TABLE_HEADING_PRODUCTS', 'Producto(s)');
 define('TABLE_HEADING_TOTAL', 'Total');
 define('TEXT_CART_EMPTY', 'Tu Cesta de la Compra esta vacia!');
+define('TEXT_CART_EMPTY_BASKET', 'Tu Cesta de la Compra esta vacia!');
 define('SUB_TITLE_SUB_TOTAL', 'Subtotal:');
 define('SUB_TITLE_TOTAL', 'Total:');
 

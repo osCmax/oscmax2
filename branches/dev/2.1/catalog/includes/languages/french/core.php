@@ -98,6 +98,7 @@ define('BOX_REVIEWS_TEXT_OF_5_STARS', '%s sur 5 &Eacute;toiles!');
 
 // shopping_cart box text in includes/boxes/shopping_cart.php
 define('BOX_HEADING_SHOPPING_CART', 'Mon panier');
+define('BOX_HEADING_SHOPPING_BASKET', 'Mon panier');
 define('BOX_SHOPPING_CART_EMPTY', 'Aucun articles');
 
 // BOF: MOD - Wishlist 3.5
@@ -281,7 +282,8 @@ define('IMAGE_BUTTON_DELETE', 'Supprimer');
 define('IMAGE_BUTTON_EDIT_ACCOUNT', '&Eacute;diter Compte');
 define('IMAGE_BUTTON_HISTORY', 'Historique des commandes');
 define('IMAGE_BUTTON_LOGIN', 'Identifiant');
-define('IMAGE_BUTTON_IN_CART', 'Ajouter au panier : ');
+define('IMAGE_BUTTON_IN_CART', 'Ajouter au panier');
+define('IMAGE_BUTTON_IN_BASKET', 'Ajouter au panier');
 define('IMAGE_OUT_OF_STOCK', 'Indisponible');
 define('IMAGE_BUTTON_NOTIFICATIONS', 'Surveillance Produit');
 define('IMAGE_BUTTON_QUICK_FIND', 'Recherche rapide');

@@ -2208,6 +2208,7 @@ INSERT INTO configuration VALUES (2660, 'Scroller Width', 'SCROLLER_WIDTH', '590
 INSERT INTO configuration VALUES (2661, 'Scroller Height', 'SCROLLER_HEIGHT', '160', 'What height should the horizontal scroller be in pixels?  (Only enter the number)', 201, 29, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2662, 'Display Short Description','PRODUCT_SHORT_DESCRIPTION','false','Do you want to display the short description in the list results?','8','6',NULL,now(),NULL,'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (2663, 'Main Page Text Information Manager Info Number', 'DEFINE_MAINPAGE_TEXT_INFO_NO', '13', 'What number is the Main Page in the Information Manager? (Default: 13)', 201, 30, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2664, 'Use Basket or Cart','BASKET_CART','cart','What do you want to call the thing your customers put their products in?',201,30,NULL,now(),NULL,'tep_cfg_select_option(array(''cart'', ''basket''),');
 
 
 #Open Feature Sets Start

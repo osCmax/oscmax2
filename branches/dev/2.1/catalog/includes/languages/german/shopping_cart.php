@@ -11,13 +11,16 @@
 */
 
 define('NAVBAR_TITLE', 'Warenkorb');
+define('NAVBAR_TITLE_BASKET', 'Warenkorb');
 define('HEADING_TITLE', 'Ihr Warenkorb enth&auml;lt :');
+define('HEADING_TITLE_BASKET', 'Ihr Warenkorb enth&auml;lt :');
 define('TABLE_HEADING_REMOVE', 'Entfernen');
 define('TABLE_HEADING_QUANTITY', 'Anzahl');
 define('TABLE_HEADING_MODEL', 'Artikelnr.');
 define('TABLE_HEADING_PRODUCTS', 'Artikel');
 define('TABLE_HEADING_TOTAL', 'Summe');
 define('TEXT_CART_EMPTY', 'Sie haben noch nichts in Ihrem Warenkorb.');
+define('TEXT_CART_EMPTY_BASKET', 'Sie haben noch nichts in Ihrem Warenkorb.');
 define('SUB_TITLE_SUB_TOTAL', 'Zwischensumme:');
 define('SUB_TITLE_TOTAL', 'Summe:');
 

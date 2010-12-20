@@ -327,9 +327,13 @@
                             <?php // START: PGM Edit to switch Add to Cart image if stock = 0
 							  if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
 							    <td class="main" align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_BUTTON_IN_CART); ?></td>
-							<?php } else { ?>
-								<td class="main" align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
-							<?php } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
+						<?php } else { 
+							      if (BASKET_CART == 'cart') { ?>
+                                    <td class="main" align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART); ?></td>
+                            <?php } else { ?>
+								    <td class="main" align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_in_basket.gif', IMAGE_BUTTON_IN_BASKET); ?></td>
+							<?php } 
+							  } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
                         </tr>
                         <tr>
                           <td align="center"><img src="<?php echo DIR_WS_ICONS . 'minus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',-1)" alt="minus 1" class="plusminus"></td>

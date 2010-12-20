@@ -39,7 +39,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 
 // define the project version
-  define('PROJECT_VERSION', 'osCMax v2.5 Beta 1');
+  define('PROJECT_VERSION', 'osCmax v2.5 Beta 2');
 
 // some code to solve compatibility issues
   require(DIR_WS_FUNCTIONS . 'compatibility.php');

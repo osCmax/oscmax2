@@ -24,6 +24,7 @@ function tep_information_show_category($information_group_id = 1) {
 	$information_tree = array();
 	$informationString = '';
 	$parent_child_selected = '';
+	$child_information = array();
 
 	// Retrieve information from db
 	// ID set by module for Information box

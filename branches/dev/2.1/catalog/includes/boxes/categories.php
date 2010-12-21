@@ -21,7 +21,6 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
      echo tep_cache_categories_box();
    } else {
 
-  $catlevel = 0;
   $boxHeading = BOX_HEADING_CATEGORIES;
   
   $corner_top_left = 'rounded';
@@ -38,6 +37,7 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
   function tep_show_category($counter) {
   
     $boxContent = '';
+	$catlevel = '0';
     $boxContent .= '<table border="0" cellpadding="0" cellspacing="0" width="100%">';
 
 // BoF - Contribution Category Box Enhancement 1.1

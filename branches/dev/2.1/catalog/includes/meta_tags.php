@@ -287,10 +287,6 @@ define('TERTIARY_SECTION', ',  ');
       define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE . SECONDARY_SECTION . $mt_products_name . SECONDARY_SECTION . $mt_review['customers_name'] . SECONDARY_SECTION . $mt_review_text . '...' . SECONDARY_SECTION . $mt_reviews_rating);
       define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_products_name . ' ' . $mt_products_price . ' ' . $mt_review['customers_name'] . ' ' . $mt_reviews_rating);
       break;
-    default:
-      define('META_TAG_TITLE', NAVBAR_TITLE . PRIMARY_SECTION . TITLE . $web_site_tagline);
-      define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
-      define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . NAVBAR_TITLE);
   case CONTENT_WISHLIST:
     define('META_TAG_TITLE', HEADING_TITLE . PRIMARY_SECTION . TITLE . $web_site_tagline);
     define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE_1 . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
@@ -306,6 +302,10 @@ define('TERTIARY_SECTION', ',  ');
     define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE_1 . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
     define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . NAVBAR_TITLE_1);
     break;
+  default:
+    define('META_TAG_TITLE', NAVBAR_TITLE . PRIMARY_SECTION . TITLE . $web_site_tagline);
+    define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
+    define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . NAVBAR_TITLE);
 }
 
 // BOF: Remove & Prevent duplicate content with the canonical tag V1.3.2

@@ -63,6 +63,7 @@
 
    // BOF Separate Pricing Per Customer
    $status_tmp_product_prices_table = false;
+   $status_tmp_special_prices_table = false;
    $status_need_to_get_prices = false;
    // find out if sorting by price has been requested
    if ( (isset($_GET['sort'])) && (ereg('[1-8][ad]', $_GET['sort'])) && (substr($_GET['sort'], 0, 1) <= sizeof($column_list)) ){

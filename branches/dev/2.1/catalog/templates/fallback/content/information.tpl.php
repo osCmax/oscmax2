@@ -4,7 +4,7 @@
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo $title; ?></td>
-            <td align="right"><?php echo $articles_menu; ?></td>
+            <td align="right"><?php if (isset($articles_menu)) { echo $articles_menu; } ?></td>
           </tr>
         </table></td>
       </tr>

@@ -29,7 +29,6 @@ if ( ($topic_depth == 'articles') || (isset($_GET['authors_id'])) ) {
   define('TEXT_DATE_ADDED', 'Published:');
   define('TEXT_AUTHOR', 'Author:');
   define('TEXT_TOPIC', 'Topic:');
-  define('TEXT_BY', 'by');
   define('TEXT_READ_MORE', 'Read More...');
   define('TEXT_MORE_INFORMATION', 'For more information, please visit this authors <a href="http://%s" target="_blank">web page</a>.');
 } elseif ($topic_depth == 'top') {

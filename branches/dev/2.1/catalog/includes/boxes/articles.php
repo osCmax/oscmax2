@@ -181,13 +181,13 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
       $articles_all_count = '';
     }
 
-    if ($topic_depth == 'top') {
+    if (isset($topic_depth) == 'top') {
       $all_articles_string = '<b>';
     }
 
     $all_articles_string .= '<a href="' . tep_href_link(FILENAME_ARTICLES, '', 'NONSSL') . '">' . BOX_ALL_ARTICLES . '</a>';
 
-    if ($topic_depth == 'top') {
+    if (isset($topic_depth) == 'top') {
       $all_articles_string .= '</b>';
     }
 

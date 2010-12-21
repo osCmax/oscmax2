@@ -101,6 +101,14 @@ define('BOX_SHOPPING_CART_EMPTY', '0 Produkte');
 //wishlist box text in includes/boxes/wishlist.php 
 define('BOX_HEADING_CUSTOMER_WISHLIST', 'My Wishlist'); 
 define('TEXT_WISHLIST_COUNT', 'Currently %s items are on your Wish List.');
+define('BOX_TEXT_PRICE', 'Preis:');
+define('BOX_TEXT_PRODUCT', 'Product Name');
+define('BOX_TEXT_IMAGE', 'Image');
+define('BOX_TEXT_SELECT', 'Select');
+define('BOX_TEXT_VIEW', 'Anzeigen');
+define('BOX_TEXT_HELP', 'Hilfe');
+define('BOX_WISHLIST_EMPTY', '0 items');
+define('BOX_TEXT_NO_ITEMS', 'Keine Produkte in Ihrer Wunschliste');
 // EOF: MOD - Wishlist 3.5
 
 // order_history box text in includes/boxes/order_history.php
@@ -378,5 +386,8 @@ define('LOGIN_BOX_PRODUCT_NOTIFICATIONS','Produktbenachrich-<br>tigungen');
 define('LOGIN_BOX_MY_ACCOUNT','Persönlichen Daten');
 define('LOGIN_BOX_LOGOFF','Abmeldung');
 define('LOGIN_BOX_PRODUCTS_NEW','New Products');
+define('LOGIN_BOX_SPECIALS', 'Special Offers');
+define('LOGIN_BOX_WISHLIST', 'Wish List');
+define('LOGIN_BOX_NEWSLETTERS', 'Newsletters');
 // EOF: MOD - Login Box My Account
 ?>

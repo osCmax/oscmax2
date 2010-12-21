@@ -13,15 +13,6 @@
 define('NAVBAR_TITLE', ' My Wishlist');
 define('HEADING_TITLE', 'My Wishlist contains:');
 define('HEADING_TITLE2', '\'s Wish List contains:');
-define('BOX_TEXT_PRICE', 'Price');
-define('BOX_TEXT_PRODUCT', 'Product Name');
-define('BOX_TEXT_IMAGE', 'Image');
-define('BOX_TEXT_SELECT', 'Select');
-
-define('BOX_TEXT_VIEW', 'Show');
-define('BOX_TEXT_HELP', 'Help');
-define('BOX_WISHLIST_EMPTY', '0 items');
-define('BOX_TEXT_NO_ITEMS', 'No products are in your Wishlist. <br /><br /><b><a href="' . tep_href_link(FILENAME_WISHLIST_HELP) . '"><u>Click here</u></a> for help on using your Wish List</b>');
 
 define('TEXT_NAME', 'Name: ');
 define('TEXT_EMAIL', 'Email: ');

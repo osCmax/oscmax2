@@ -14,16 +14,6 @@ define('NAVBAR_TITLE_WISHLIST', 'My Wish List');
 define('NAVBAR_TITLE_1', 'Wish List');
 define('HEADING_TITLE', 'My Wish List');
 define('HEADING_TITLE2', '\'s Wish List contains:');
-define('BOX_TEXT_REMOVE', 'Remove');
-define('BOX_TEXT_PRICE', 'Price');
-define('BOX_TEXT_PRODUCT', 'Product Name');
-define('BOX_TEXT_IMAGE', 'Image');
-define('BOX_TEXT_SELECT', 'Select');
-
-define('BOX_TEXT_VIEW', 'Show');
-define('BOX_TEXT_HELP', 'Help');
-define('BOX_WISHLIST_EMPTY', '0 items');
-define('BOX_TEXT_NO_ITEMS', 'There are no products in your Wish List. <br /><br /><b><a href="' . tep_href_link(FILENAME_WISHLIST_HELP) . '"><u>Click here</u></a> for help on using your Wish List</b>');
 
 define('TEXT_NAME', 'Name: ');
 define('TEXT_EMAIL', 'Email: ');

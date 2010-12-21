@@ -13,15 +13,6 @@ $Id: wishlist.php 3 2006-05-27 04:59:07Z user $
 define('NAVBAR_TITLE', 'Wunschliste');
 define('HEADING_TITLE', 'Meine Wunschliste enthält:');
 define('HEADING_TITLE2', '\'s Wunschliste enthält:');
-define('BOX_TEXT_PRICE', 'Preis:');
-define('BOX_TEXT_PRODUCT', 'Product Name');
-define('BOX_TEXT_IMAGE', 'Image');
-define('BOX_TEXT_SELECT', 'Select');
-
-define('BOX_TEXT_VIEW', 'Anzeigen');
-define('BOX_TEXT_HELP', 'Hilfe');
-define('BOX_WISHLIST_EMPTY', '0 items');
-define('BOX_TEXT_NO_ITEMS', 'Keine Produkte in Ihrer Wunschliste');
 define('TEXT_NAME', 'Name: ');
 define('TEXT_EMAIL', 'Email: ');
 define('TEXT_YOUR_NAME', 'Your Name: ');

@@ -11,9 +11,6 @@
 
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 
-
-  require_once(DIR_WS_LANGUAGES . $language . '/' . FILENAME_WISHLIST);
-
 ?>
 <!-- wishlist //-->
 <?php

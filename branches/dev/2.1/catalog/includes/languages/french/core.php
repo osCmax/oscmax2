@@ -105,6 +105,14 @@ define('BOX_SHOPPING_CART_EMPTY', 'Aucun articles');
 //wishlist box text in includes/boxes/wishlist.php 
 define('BOX_HEADING_CUSTOMER_WISHLIST', 'Mes souhaits'); 
 define('TEXT_WISHLIST_COUNT', 'Actuellement, %s produits sur votre liste de souhaits.');
+define('BOX_TEXT_PRICE', 'Price:');
+define('BOX_TEXT_SEND', 'Email your Wishlist to a friend.');
+define('BOX_TEXT_MOVE_TO_CART', 'Move to Cart');
+define('BOX_TEXT_DELETE', 'Delete');
+define('BOX_TEXT_VIEW', 'Show');
+define('BOX_TEXT_HELP', 'Help');
+define('BOX_TEXT_NO_ITEMS', 'No products are in your Wishlist. <br><br><b><a href="wishlist_help.php"><u>Click here</u></a> for help on using your Wishlist</b>');
+define('BOX_TEXT_SELECT_PRODUCT', 'Selected Products');
 // EOF: MOD - Wishlist 3.5
 
 // order_history box text in includes/boxes/order_history.php
@@ -389,6 +397,9 @@ define('LOGIN_BOX_PRODUCT_NOTIFICATIONS','Notifications produit');
 define('LOGIN_BOX_MY_ACCOUNT','Information g&eacute;n&eacute;rale');
 define('LOGIN_BOX_LOGOFF','Se déconnecter');
 define('LOGIN_BOX_PRODUCTS_NEW','Nouveaux produits');
+define('LOGIN_BOX_SPECIALS', 'Special Offers');
+define('LOGIN_BOX_WISHLIST', 'Wish List');
+define('LOGIN_BOX_NEWSLETTERS', 'Newsletters');
 // EOF: WebMakers Added: Login Box My Account
 
 //BOF: Wish List 2.3 box text in includes/boxes/wishlist.php

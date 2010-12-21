@@ -13,10 +13,10 @@ Made for:
 */ 
 ?>
 <?php
-  $configuration_query = tep_db_query("SELECT configuration_key as cfgKey, configuration_value as cfgValue from " . TABLE_CONFIGURATION);
-  while ($configuration = tep_db_fetch_array($configuration_query)) {
-	define($configuration['cfgKey'], $configuration['cfgValue']);
-  }
+//  $configuration_query = tep_db_query("SELECT configuration_key as cfgKey, configuration_value as cfgValue from " . TABLE_CONFIGURATION);
+//  while ($configuration = tep_db_fetch_array($configuration_query)) {
+//	  define($configuration['cfgKey'], $configuration['cfgValue']);
+//  }
 
   if ( ((OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') || (OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES=='true')) && tep_not_null($product_info['products_id']) ) { // products info page
     

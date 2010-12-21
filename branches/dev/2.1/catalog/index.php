@@ -282,6 +282,8 @@ global $customer_group_id;
 // Add new products limit and order
 	if (isset($_GET['new_products']) && tep_not_null($_GET['new_products'])) { 
       $new_products_sort = "products_date_added, ";
+	} else {
+	  $new_products_sort = "";	
 	}
 
     if ( (!isset($_GET['sort'])) || (!preg_match('/^[1-8][ad]$/', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {

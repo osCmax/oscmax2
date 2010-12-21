@@ -122,8 +122,8 @@ function tep_information_customer_greeting() {
 	global $customer_id, $customer_first_name;
 
 	if (tep_session_is_registered('customer_first_name') && tep_session_is_registered('customer_id')) {
-		$greeting_string = sprintf(TEXT_GREETING_PERSONAL, tep_output_string_protected($customer_first_name), tep_href_link(FILENAME_PRODUCTS_NEW));
-	} else {
+		$greeting_string = sprintf(TEXT_GREETING_PERSONAL, tep_output_string_protected($customer_first_name), tep_href_link(FILENAME_DEFAULT, "new_products=1"));
+    } else {
 		$greeting_string = sprintf(TEXT_GREETING_GUEST, tep_href_link(FILENAME_LOGIN, '', 'SSL'), tep_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL'));
 	}
 

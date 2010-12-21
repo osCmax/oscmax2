@@ -26,7 +26,6 @@ define('TEXT_RETURNING_ADMIN', 'Solo Staff!');
 define('ENTRY_EMAIL_ADDRESS', 'Direccion E-Mail:');
 define('ENTRY_PASSWORD', 'Password:');
 define('ENTRY_FIRSTNAME', 'Nombre:');
-define('IMAGE_BUTTON_LOGIN', 'Submit');
 
 define('TEXT_PASSWORD_FORGOTTEN', 'Password olvidada?');
 

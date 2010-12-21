@@ -27,7 +27,6 @@ define('ENTRY_EMAIL_ADDRESS', 'Email Adresse:');
 define('ENTRY_PASSWORD', 'Kennwort:');
 define('ENTRY_FIRSTNAME', 'Vorname:');
 define('ENTRY_LASTNAME', 'Nachname:');
-define('IMAGE_BUTTON_LOGIN', 'Reichen Sie ein');
 
 define('TEXT_PASSWORD_FORGOTTEN', 'Kennwort vergessen?');
 

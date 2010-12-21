@@ -377,7 +377,6 @@ define('BOX_LOGINBOX_PASSWORD', 'Passwort:');
 define('BOX_LOGINBOX_TEXT_NEW', 'Ein neuer Kunde?');
 define('BOX_LOGINBOX_NEW', 'ein Kundenkonto eröffnen');
 define('BOX_LOGINBOX_FORGOT_PASSWORD', '(vergessen)');
-define('IMAGE_BUTTON_LOGIN', 'Anmelden');
 define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','Ihr Konto');
 define('LOGIN_BOX_ACCOUNT_EDIT','Daten ändern');
 define('LOGIN_BOX_ACCOUNT_HISTORY','Getätigten Bestellungen');

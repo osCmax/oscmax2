@@ -25,7 +25,6 @@ define('TEXT_RETURNING_ADMIN', 'Staff only!');
 define('ENTRY_USERNAME', 'Username:');
 define('ENTRY_FIRSTNAME', 'First Name:');
 define('ENTRY_LASTNAME', 'Last Name:');
-define('IMAGE_BUTTON_LOGIN', 'Submit');
 
 define('TEXT_PASSWORD_FORGOTTEN', 'Password forgotten?');
 

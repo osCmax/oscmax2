@@ -289,7 +289,6 @@ define('IMAGE_BUTTON_CONTINUE_SHOPPING', 'Continuer vos achats');
 define('IMAGE_BUTTON_DELETE', 'Supprimer');
 define('IMAGE_BUTTON_EDIT_ACCOUNT', '&Eacute;diter Compte');
 define('IMAGE_BUTTON_HISTORY', 'Historique des commandes');
-define('IMAGE_BUTTON_LOGIN', 'Identifiant');
 define('IMAGE_BUTTON_IN_CART', 'Ajouter au panier');
 define('IMAGE_BUTTON_IN_BASKET', 'Ajouter au panier');
 define('IMAGE_OUT_OF_STOCK', 'Indisponible');

@@ -31,7 +31,6 @@ define('BOX_AFFILIATE_CLICKRATE', '&Uuml;bersicht Klicks');
 define('BOX_AFFILIATE_PAYMENT', 'Provisionszahlungen');
 define('BOX_AFFILIATE_SALES', '&Uuml;bersicht Verk&auml;ufe');
 define('BOX_AFFILIATE_BANNERS', 'Affiliate Banners / Links');
-define('BOX_AFFILIATE_BANNERS', 'Banner');
 define('BOX_AFFILIATE_BANNERS_BUILD_CAT', 'Build Category Link');
 define('BOX_AFFILIATE_BANNERS_BUILD', 'Build Product Link');
 define('BOX_AFFILIATE_BANNERS_PRODUCT', 'Product Banners');

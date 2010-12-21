@@ -27,7 +27,6 @@ define('ENTRY_EMAIL_ADDRESS', 'E-Mail:');
 define('ENTRY_PASSWORD', 'Mot de passe:');
 define('ENTRY_FIRSTNAME', 'Pr&eacute;nom:');
 define('ENTRY_LASTNAME', 'Nom de famille:');
-define('IMAGE_BUTTON_LOGIN', 'Envoyer');
 
 define('TEXT_PASSWORD_FORGOTTEN', 'Mot de passe oubli&eacute;?');
 

@@ -18,7 +18,7 @@ switch (isset($_GET['action'])) {
         <td>
           <table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
-              <td class="pageHeading"><?php if (BASKET_CART == 'cart') { echo HEADING_TITLE; } else { echo HEADING_TITLE_BASKET; } ?></td>
+              <td class="pageHeading"><?php if ('BASKET_CART' == 'cart') { echo HEADING_TITLE; } else { echo HEADING_TITLE_BASKET; } ?></td>
               <td class="pageHeading" align="right">&nbsp;</td>
             </tr>
           </table>

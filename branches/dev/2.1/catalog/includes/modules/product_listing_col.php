@@ -17,7 +17,7 @@ img.corner_banner { display:inline-block; margin-left:-105px; margin-top:-7px; p
 $thumbnail_view = (isset($_GET['list']) ? $_GET['list'] : 'list'); 
 
 if (tep_not_null($_GET['sort'])) $_GET['sort'] = $_GET['sort'];
-$max_results = (tep_not_null($_GET['max']) ? $_GET['max'] : MAX_DISPLAY_SEARCH_RESULTS);
+$max_results = (tep_not_null(isset($_GET['max'])) ? $_GET['max'] : MAX_DISPLAY_SEARCH_RESULTS);
 
 
 // sort order array

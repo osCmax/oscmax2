@@ -21,7 +21,7 @@ img.corner_banner { display:inline-block; margin-left:-7px; margin-top:-7px; pos
 <?php
 
 if (tep_not_null($_GET['sort'])) $_GET['sort'] = $_GET['sort'];
-$max_results = (tep_not_null($_GET['max']) ? $_GET['max'] : MAX_DISPLAY_SEARCH_RESULTS);
+$max_results = (tep_not_null(isset($_GET['max'])) ? $_GET['max'] : MAX_DISPLAY_SEARCH_RESULTS);
 
 
 // sort order array
@@ -105,7 +105,7 @@ $grid = '<table align="center"><tr><td width="20" align="center"><a href="' . te
 
 $page_nav = '<table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox"><tr><td class="smallText" width="33%">' .  $filter . '</td><td class="smallText" width="33%" align="center">' . $list . '</td><td class="smallText" width="33%" align="right">' . $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))) . '</td></tr>';
 
-$drop = '<tr><td class="smallText">Results/Page: '. tep_draw_form('maxdisplay', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['sort']) ? tep_draw_hidden_field('sort', $_GET['sort']) : '') .  tep_draw_pull_down_menu('max', $max_display, $_GET['max'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td><td align="center">' . $grid . '</td><td class="smallText" align="right">Sort Order: ' . tep_draw_form('sorting', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['max']) ? tep_draw_hidden_field('max', $_GET['max']) : '') . tep_draw_pull_down_menu('sort', $sort_array, $_GET['sort'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>';
+$drop = '<tr><td class="smallText">Results/Page: '. tep_draw_form('maxdisplay', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['sort']) ? tep_draw_hidden_field('sort', $_GET['sort']) : '') .  tep_draw_pull_down_menu('max', $max_display, $max_results, 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td><td align="center">' . $grid . '</td><td class="smallText" align="right">Sort Order: ' . tep_draw_form('sorting', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['max']) ? tep_draw_hidden_field('max', $_GET['max']) : '') . tep_draw_pull_down_menu('sort', $sort_array, $_GET['sort'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>';
 
 echo $page_nav;
 echo $drop;
@@ -151,6 +151,9 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   }
 
   $list_box_contents = array();
+  $lc_text = '';
+  $lc_align = '';
+  $short = '';
 
   for ($col=0, $n=sizeof($column_list); $col<$n; $col++) {
     switch ($column_list[$col]) {
@@ -440,7 +443,6 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
             }
 			// add short description
 			if (PRODUCT_SHORT_DESCRIPTION == 'true') {
-			  $short = '';
 			  $short .= $listing[$x]['products_short'];
 			}
             // end extra product fields

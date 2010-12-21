@@ -77,7 +77,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   if (!$_SESSION['affiliate_ref']) {
     tep_session_register('affiliate_ref');
     tep_session_register('affiliate_clickthroughs_id');
-    if (($_GET['ref'] || $_POST['ref'])) {
+    if ((isset($_GET['ref']) || isset($_POST['ref']))) {
       if ($_GET['ref']) $affiliate_ref = $_GET['ref'];
       if ($_POST['ref']) $affiliate_ref = $_POST['ref'];
       if ($_GET['products_id']) $affiliate_products_id = $_GET['products_id'];
@@ -119,7 +119,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
  // Set Cookie if the customer comes back and orders it counts
     setcookie('affiliate_ref', $affiliate_ref, time() + AFFILIATE_COOKIE_LIFETIME);
     }
-    if ($HTTP_COOKIE_VARS['affiliate_ref']) { // Customer comes back and is registered in cookie
+    if (isset($_COOKIE['affiliate_ref'])) { // Customer comes back and is registered in cookie
       $affiliate_ref = $_COOKIE['affiliate_ref'];
     }
   }

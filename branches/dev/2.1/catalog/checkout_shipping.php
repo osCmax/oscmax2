@@ -196,7 +196,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $ship
   $content = CONTENT_CHECKOUT_SHIPPING;
   $javascript = $content . '.js';
 
-  include (bts_select('main'); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
 
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');

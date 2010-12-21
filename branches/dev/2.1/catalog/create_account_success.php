@@ -31,7 +31,7 @@ $Id: create_account_success.php 3 2006-05-27 04:59:07Z user $
 
   $content = CONTENT_CREATE_ACCOUNT_SUCCESS;
 
-  include (bts_select('main'); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
 
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');

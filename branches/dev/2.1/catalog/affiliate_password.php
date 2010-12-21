@@ -66,6 +66,6 @@
   $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_AFFILIATE, '', 'SSL'));
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_AFFILIATE_PASSWORD, '', 'SSL'));
   $content = affiliate_password; 
-  include (bts_select('main'); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
 
    require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

@@ -34,7 +34,7 @@ $Id: affiliate_banners.php 14 2006-07-28 17:42:07Z user $
 
   $content = affiliate_banners; 
 
-  include (bts_select('main'); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
 
 
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 

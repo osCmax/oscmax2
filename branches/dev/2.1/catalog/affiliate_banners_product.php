@@ -29,6 +29,6 @@
 
   $affiliate_banners_values = tep_db_query("select * from " . TABLE_AFFILIATE_BANNERS . " where affiliate_products_id >'0' order by affiliate_banners_title");
   $content = affiliate_banners_product; 
-  include (bts_select('main'); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

@@ -31,7 +31,7 @@ if (BASKET_CART == 'cart') {
 
   $content = CONTENT_SHOPPING_CART;
 
-  include (bts_select('main'); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
 
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');

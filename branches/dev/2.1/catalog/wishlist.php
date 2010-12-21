@@ -235,7 +235,7 @@ if (RECAPTCHA_ON == 'true') {
 
   $content = CONTENT_WISHLIST;
 
-  include (bts_select('main'); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
 
 
 

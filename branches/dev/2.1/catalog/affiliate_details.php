@@ -242,6 +242,7 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_AFFILIATE_DETAILS, '', 'SSL'));
 
   $content = affiliate_details;
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main'); // BTSv1.5
+
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

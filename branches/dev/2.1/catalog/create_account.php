@@ -388,7 +388,8 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
   $content = CONTENT_CREATE_ACCOUNT;
   $javascript = $content . '.js.php';
   
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main'); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 // +Country-State Selector 

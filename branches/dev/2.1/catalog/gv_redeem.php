@@ -64,7 +64,8 @@ tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
 
   $content = CONTENT_GV_REDEEM;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main'); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 
   ?>

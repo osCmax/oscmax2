@@ -21,5 +21,6 @@
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_AFFILIATE_REPORTS));
   $content = affiliate_reports; 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main'); // BTSv1.5
+
    require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

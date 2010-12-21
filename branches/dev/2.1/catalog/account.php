@@ -29,7 +29,8 @@ $Id: account.php 3 2006-05-27 04:59:07Z user $
   $content = CONTENT_ACCOUNT;
   $javascript = $content . '.js';
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main'); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

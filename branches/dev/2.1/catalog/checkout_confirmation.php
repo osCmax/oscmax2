@@ -132,7 +132,8 @@ if (isset($_POST['gv_redeem_code']) && ($_POST['gv_redeem_code'] == null)) {tep_
 
   $content = CONTENT_CHECKOUT_CONFIRMATION;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main'); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

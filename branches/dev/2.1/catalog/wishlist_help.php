@@ -23,7 +23,8 @@
 
   $content = CONTENT_WISHLIST_HELP;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main'); // BTSv1.5
+
 
  require(DIR_WS_INCLUDES . 'application_bottom.php'); 
  

@@ -82,7 +82,8 @@ $Id: product_reviews_info.php 3 2006-05-27 04:59:07Z user $
   $content = CONTENT_PRODUCT_REVIEWS_INFO;
   $javascript = 'popup_window.js';
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main'); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

@@ -44,6 +44,7 @@ if((isset($_GET['public_id'])) && ($_GET['public_id'] == '')) {
   $breadcrumb->add(NAVBAR_TITLE_WISHLIST, tep_href_link(FILENAME_WISHLIST, '', 'SSL'));
   $content = CONTENT_WISHLIST_PUBLIC;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main'); // BTSv1.5
+
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 
 ?>

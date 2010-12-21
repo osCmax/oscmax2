@@ -27,7 +27,8 @@ $Id: gv_faq.php 14 2006-07-28 17:42:07Z user $
 
   $content = CONTENT_GV_FAQ;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main'); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 
   ?>

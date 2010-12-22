@@ -79,11 +79,11 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
         $price_prefix = tep_db_prepare_input($_POST['price_prefix']);
 // START: More Product Weight
         $value_weight = tep_db_prepare_input($_POST['value_weight']);
-        $price_prefix = tep_db_prepare_input($_POST['weight_prefix']);
+        $weight_prefix = tep_db_prepare_input($_POST['weight_prefix']);
 
         // tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values (null, '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "')");
         // Attributes Product Codes added . tep_db_input($code_suffix) . "', '" . tep_db_input($suffix_sort_order) . "', '" to query
-	tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values ('', '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . tep_db_input($code_suffix) . "', '" . tep_db_input($suffix_sort_order) . "', '" . (float)tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "', '" . tep_db_input($value_weight) . "', '" . tep_db_input($weight_prefix) . "')");
+	tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values ('', '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . tep_db_input($code_suffix) . "', '" . tep_db_input($suffix_sort_order) . "', '" . (float)tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "', '" . tep_db_input($weight_prefix) . "', '" . tep_db_input($value_weight) . "')");
         // END: More Product Weight
 
         if (DOWNLOAD_ENABLED == 'true') {
@@ -165,6 +165,9 @@ $Id: products_attributes.php 14 2006-07-28 17:42:07Z user $
         $value_price = tep_db_prepare_input($_POST['value_price']);
         $price_prefix = tep_db_prepare_input($_POST['price_prefix']);
         $attribute_id = tep_db_prepare_input($_POST['attribute_id']);
+		// START: More Product Weight
+        $value_weight = tep_db_prepare_input($_POST['value_weight']);
+        $weight_prefix = tep_db_prepare_input($_POST['weight_prefix']);
 
         // tep_db_query("update " . TABLE_PRODUCTS_ATTRIBUTES . " set products_id = '" . (int)$products_id . "', options_id = '" . (int)$options_id . "', options_values_id = '" . (int)$values_id . "', options_values_price = '" . (float)tep_db_input($value_price) . "', price_prefix = '" . tep_db_input($price_prefix) . "' where products_attributes_id = '" . (int)$attribute_id . "'");
         // Attributes Product Codes Added code_suffix = '" . tep_db_input($code_suffix) . "', suffix_sort_order = '" . tep_db_input($suffix_sort_order) . "', to query
@@ -703,7 +706,7 @@ function go_option() {
           <tr>
             <!-- START: More Product Weight -->
             <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
-            <td colspan="10"><?php echo tep_black_line(); ?></td>
+            <td colspan="11"><?php echo tep_black_line(); ?></td>
             <!-- END: More Product Weight -->
           </tr>
           <tr class="dataTableHeadingRow">
@@ -724,7 +727,7 @@ function go_option() {
           <tr>
             <!-- START: More Product Weight -->
             <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
-            <td colspan="10"><?php echo tep_black_line(); ?></td>
+            <td colspan="11"><?php echo tep_black_line(); ?></td>
             <!-- END: More Product Weight -->
           </tr>
 <?php
@@ -805,7 +808,7 @@ function go_option() {
             <td>&nbsp;</td>
             <!-- START: More Product Weight -->
             <!-- <td colspan="5"> -->
-            <td colspan="7">
+            <td colspan="8">
             <!-- END: More Product Weight -->
               <table>
                 <tr class="<?php echo (!($rows % 2)? 'attributes-even' : 'attributes-odd');?>">
@@ -874,7 +877,7 @@ function go_option() {
           <tr>
             <!-- START: More Product Weight -->
             <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
-            <td colspan="10"><?php echo tep_black_line(); ?></td>
+            <td colspan="11"><?php echo tep_black_line(); ?></td>
             <!-- END: More Product Weight -->
           </tr>
           <tr class="<?php echo (floor($rows/2) == ($rows/2) ? 'attributes-even' : 'attributes-odd'); ?>">
@@ -924,7 +927,7 @@ function go_option() {
             <td>&nbsp;</td>
             <!-- START: More Product Weight -->
             <!-- <td colspan="5"> -->
-            <td colspan="7">
+            <td colspan="9">
             <!-- END: More Product Weight -->
               <table>
                 <tr class="<?php echo (!($rows % 2)? 'attributes-even' : 'attributes-odd');?>">
@@ -949,7 +952,7 @@ function go_option() {
           <tr>
             <!-- START: More Product Weight -->
             <!-- <td colspan="7"><?php echo tep_black_line(); ?></td> -->
-            <td colspan="10"><?php echo tep_black_line(); ?></td>
+            <td colspan="11"><?php echo tep_black_line(); ?></td>
             <!-- END: More Product Weight -->
           </tr>
         </table></form></td>

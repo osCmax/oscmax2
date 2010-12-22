@@ -20,7 +20,7 @@ $Id: shopping_cart.php 3 2006-05-27 04:59:07Z user $
 ?>
 <!-- shopping_cart //-->
 <?php
-if ('BASKET_CART' == 'cart') {
+if (BASKET_CART == 'cart') {
   $boxHeading = '<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . BOX_HEADING_SHOPPING_CART . '</a>';
 } else {
   $boxHeading = '<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . BOX_HEADING_SHOPPING_BASKET . '</a>';	

@@ -23,7 +23,7 @@ $Id: shopping_cart.php 3 2006-05-27 04:59:07Z user $
   }
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_SHOPPING_CART);
 
-if ('BASKET_CART' == 'cart') {
+if (BASKET_CART == 'cart') {
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_SHOPPING_CART));
 } else {
   $breadcrumb->add(NAVBAR_TITLE_BASKET, tep_href_link(FILENAME_SHOPPING_CART));	

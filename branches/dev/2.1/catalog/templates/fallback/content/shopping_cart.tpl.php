@@ -18,7 +18,7 @@ switch (isset($_GET['action'])) {
         <td>
           <table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
-              <td class="pageHeading"><?php if ('BASKET_CART' == 'cart') { echo HEADING_TITLE; } else { echo HEADING_TITLE_BASKET; } ?></td>
+              <td class="pageHeading"><?php if (BASKET_CART == 'cart') { echo HEADING_TITLE; } else { echo HEADING_TITLE_BASKET; } ?></td>
               <td class="pageHeading" align="right">&nbsp;</td>
             </tr>
           </table>
@@ -264,7 +264,7 @@ if( isset($continueButtonId) ) {
   } else {
 ?>
       <tr>
-        <td align="center" class="main"><?php if ('BASKET_CART' == 'cart') { new infoBox(array(array('text' => TEXT_CART_EMPTY)));; } else { new infoBox(array(array('text' => TEXT_CART_EMPTY_BASKET))); } ?></td>
+        <td align="center" class="main"><?php if (BASKET_CART == 'cart') { new infoBox(array(array('text' => TEXT_CART_EMPTY)));; } else { new infoBox(array(array('text' => TEXT_CART_EMPTY_BASKET))); } ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

@@ -22,7 +22,7 @@
                        'PRODUCT_LIST_WEIGHT' => PRODUCT_LIST_WEIGHT,
                        'PRODUCT_LIST_IMAGE' => PRODUCT_LIST_IMAGE,
                        'PRODUCT_LIST_BUY_NOW' => PRODUCT_LIST_BUY_NOW,
-					   'PRODUCT_CORNER_BANNER' => PRODUCT_CORNER_BANNER);
+		       'PRODUCT_CORNER_BANNER' => PRODUCT_CORNER_BANNER);
 
   asort($define_list);
 
@@ -310,7 +310,7 @@ foreach ($epf as $e) {
   if ( (!isset($_GET['sort'])) || (!ereg('[1-8][ad]', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
     for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
       if ($column_list[$i] == 'PRODUCT_LIST_NAME') {
-        $_GET['sort'] = $i+1 . 'a';
+        $_GET['sort'] = $i . 'a';
         $order_str = ' order by pd.products_name';
         break;
       }
@@ -319,7 +319,7 @@ foreach ($epf as $e) {
     $sort_col = substr($_GET['sort'], 0 , 1);
     $sort_order = substr($_GET['sort'], 1);
     $order_str = ' order by ';
-    switch ($column_list[$sort_col-1]) {
+    switch ($column_list[$sort_col]) {
       case 'PRODUCT_LIST_MODEL':
         $order_str .= "p.products_model " . ($sort_order == 'd' ? "desc" : "") . ", pd.products_name";
         break;

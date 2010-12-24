@@ -12,7 +12,7 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 
 define('TEXT_MAIN', '');
 define('TABLE_HEADING_NEW_ARTICLES', 'New Articles in %s');
-
+define('NAVBAR_TITLE_1', 'Articles');
   define('HEADING_TITLE', 'All Articles');
   define('TEXT_ALL_ARTICLES', 'Below is a list of all articles with the most recent ones listed first.');
   define('TEXT_ARTICLES', 'Below is a list of all articles with the most recent ones listed first.');  

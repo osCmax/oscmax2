@@ -85,7 +85,7 @@ $listing_split = new splitPageResults($listing_sql, MAX_ARTICLES_PER_PAGE);
   } else {
 ?>
           <tr>
-            <td class="main"><?php if ($listing_no_article<>'') {
+            <td class="main"><?php if (isset($listing_no_article)<>'') {
                                      echo $listing_no_article;
                                    } elseif ($topic_depth == 'articles') {
                                      echo TEXT_NO_ARTICLES;

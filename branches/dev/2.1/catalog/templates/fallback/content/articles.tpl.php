@@ -180,7 +180,7 @@
                 <td class="main" colspan="2" valign="top"><?php echo $authors_description; ?></td>
               <tr>
                 <?php } ?>
-                <?php if (tep_not_null(isset($authors_url))) { ?>
+                <?php if ( (tep_not_null(isset($authors_url))) && ($authors_url<>'') ) { ?>
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>

@@ -11,15 +11,12 @@
   Translated by Gunt - Contact : webmaster@webdesigner.com.fr
 */
 
-define('TEXT_MAIN', '');
 define('TABLE_HEADING_NEW_PRODUCTS', 'Nouveaux produits pour %s');
 define('TABLE_HEADING_UPCOMING_PRODUCTS', 'Prochains produits');
 define('TABLE_HEADING_DATE_EXPECTED', 'Date pr&eacute;vue');
 // MOD - default specials - line added
 define('TABLE_HEADING_DEFAULT_SPECIALS', 'Sp&eacute;ciaux Pour %s');
 
-if ( ($category_depth == 'products') || (isset($_GET['manufacturers_id'])) ) {
-  define('HEADING_TITLE', '');
   define('TABLE_HEADING_IMAGE', '');
   define('TABLE_HEADING_MODEL', 'Mod&egrave;le');
   define('TABLE_HEADING_PRODUCTS', 'Nom du produit ');
@@ -36,9 +33,4 @@ if ( ($category_depth == 'products') || (isset($_GET['manufacturers_id'])) ) {
   define('TEXT_NOW', '\' maintenant');
   define('TEXT_ALL_CATEGORIES', 'Toutes cat&eacute;gories');
   define('TEXT_ALL_MANUFACTURERS', 'Tous fabricants');
-} elseif ($category_depth == 'top') {
-  define('HEADING_TITLE', 'ACCUEIL');
-} elseif ($category_depth == 'nested') {
-  define('HEADING_TITLE', 'Cat&eacute;gories');
-}
 ?>

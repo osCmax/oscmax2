@@ -110,6 +110,8 @@ $Id: filenames.php 3 2006-05-27 04:59:07Z user $
   define('FILENAME_ARTICLE_REVIEWS_INFO', 'article_reviews_info.php');
   define('FILENAME_ARTICLE_REVIEWS_WRITE', 'article_reviews_write.php');
   define('FILENAME_ARTICLES', 'articles.php');
+  define('FILENAME_ARTICLES_TOP', 'articles_top.php');
+  define('FILENAME_ARTICLES_NESTED', 'articles_nested.php');
   define('FILENAME_ARTICLES_NEW', 'articles_new.php');
   define('FILENAME_ARTICLES_UPCOMING', 'articles_upcoming.php');
   define('FILENAME_ARTICLES_XSELL', 'articles_xsell.php');

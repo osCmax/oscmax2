@@ -7,8 +7,6 @@
 /* bof catdesc for bts1a, replacing "echo HEADING_TITLE;" by "categories_heading_title" */
              if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_heading_title'])) ) {
                  echo $category['categories_heading_title'];
-               } else {
-                 echo HEADING_TITLE;
                }
 /* eof catdesc for bts1a */
              ?>

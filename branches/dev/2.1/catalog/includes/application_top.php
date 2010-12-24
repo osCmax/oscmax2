@@ -300,6 +300,8 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
 // include the language translations
   require(DIR_WS_LANGUAGES . $language . '/core.php');
+// include the language locale
+  require(DIR_WS_LANGUAGES . $language . '/locale/locale.php');
 // LINE ADDED - CREDIT CLASS Gift Voucher Contribution
   require(DIR_WS_LANGUAGES . $language . '/add_ccgvdc.php');
 

@@ -20,9 +20,7 @@
 			     echo TEXT_LATEST_PRODUCTS;
 			   } elseif (isset($_GET['show_specials']) && tep_not_null($_GET['show_specials'])) { 
 			     echo TEXT_SPECIALS;
-			   } else {
-                 echo HEADING_TITLE;
-               }
+			   }
 /* eof catdesc for bts1a */ ?>
               </td>
 <?php	

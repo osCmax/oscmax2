@@ -74,7 +74,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   $affiliate_clientip = $_SERVER["REMOTE_ADDR"];
   $affiliate_clientreferer = $_SERVER["HTTP_REFERER"];
 
-  if (!$_SESSION['affiliate_ref']) {
+  if (!isset($_SESSION['affiliate_ref'])) {
     tep_session_register('affiliate_ref');
     tep_session_register('affiliate_clickthroughs_id');
     if ((isset($_GET['ref']) || isset($_POST['ref']))) {

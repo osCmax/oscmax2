@@ -346,7 +346,7 @@ $remove_array = array( 'currency','language','main_page','page','sort','ref','af
 // remove page specific params, should be in same format as previous, given is manufacturers_id & cPath 
 // have to be removed in product_info.php only
 
-	if (is_array($page_remove_array[$basefile])) $remove_array = array_merge($remove_array, $page_remove_array[$basefile]);
+	if (is_array(isset($page_remove_array[$basefile]))) $remove_array = array_merge($remove_array, $page_remove_array[$basefile]);
 	
 	foreach ( $remove_array as $value ) {
 			$search[] = '/&*' . $value . '[=\/]+[\w%..\+]*\/?/i';

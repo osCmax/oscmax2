@@ -11,6 +11,7 @@ Made for:
   Released under the GNU General Public License 
   
 */
+if (isset($featured_manufacturers_array)) {
 if (sizeof($featured_manufacturers_array) <> '0') {  
 
   if ((FEATURED_MANUFACTURERS_SET_STYLE == '5') || (FEATURED_MANUFACTURERS_SET_STYLE == '6')) {
@@ -58,4 +59,5 @@ if (sizeof($featured_manufacturers_array) <> '0') {
   echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 
 }
+} // end if isset
 ?>

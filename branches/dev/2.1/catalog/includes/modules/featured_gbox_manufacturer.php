@@ -12,6 +12,7 @@ Made for:
   
 */
 
+if (isset($featured_manufacturer_products_array)) {
 if (sizeof($featured_manufacturer_products_array) <> '0') { 
 
   $num_columns = (sizeof($featured_manufacturer_products_array)>(int)FEATURED_MANUFACTURER_COLUMNS?FEATURED_MANUFACTURER_COLUMNS:sizeof($featured_manufacturer_products_array));
@@ -59,8 +60,9 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
     } else {
 	  if (OPEN_FEATURED_LIMIT_DESCRIPTION_BY=='words') {
         $bah = explode(" ", $featured_manufacturer_products_array[$i]['pdescription']); 
+		$word_count = count($bah);
         $current_description = '';
-		for($desc=0 ; $desc<MAX_FEATURED_MANUFACTURER_WORD_DESCRIPTION ; $desc++) 
+		for($desc=0 ; $desc<min(MAX_FEATURED_MANUFACTURER_WORD_DESCRIPTION, $word_count); $desc++) 
         { 
           $current_description .= $bah[$desc]." "; 
         }  
@@ -247,4 +249,5 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
   echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   
 } // end: if()
+}
 ?>

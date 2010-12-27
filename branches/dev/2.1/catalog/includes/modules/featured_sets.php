@@ -18,7 +18,7 @@ Made for:
 //	  define($configuration['cfgKey'], $configuration['cfgValue']);
 //  }
 
-  if ( ((OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') || (OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES=='true')) && tep_not_null($product_info['products_id']) ) { // products info page
+  if ( ((OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') || (OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES=='true')) && tep_not_null(isset($product_info['products_id'])) ) { // products info page
     
 	$the_products_catagory_query = tep_db_query("select products_id, categories_id from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . $product_info['products_id'] . "'" . " order by products_id,categories_id");
     $the_products_catagory = tep_db_fetch_array($the_products_catagory_query);
@@ -43,7 +43,7 @@ Made for:
 
 if ( (OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') && !empty($current_category_id) ) { /// We are in category depth
   $featured_products_query_raw = "SELECT distinct p.products_id, pd.products_name, p.products_image, p.products_tax_class_id, pd.products_description, pd.products_short, s.status as specstat, s.specials_new_products_price, p.products_price from(( " . TABLE_PRODUCTS . " p )left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . TABLE_CATEGORIES . " c )left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' where p.products_id = p2c.products_id and p2c.categories_id = c.categories_id and (".$categories_query_addition.") and p.products_status = '1' and p.products_featured = '1' order by " . FEATURED_PRODUCTS_SORT_ORDER . " " . FEATURED_PRODUCTS_DIRECTION . ' limit ' . MAX_DISPLAY_FEATURED_PRODUCTS;
-} else if ( (OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') && tep_not_null($product_info['products_id']) ) { // products info page
+} else if ( (OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') && tep_not_null(isset($product_info['products_id'])) ) { // products info page
   $featured_products_query_raw = "SELECT distinct p.products_id, pd.products_name, p.products_image, p.products_tax_class_id, pd.products_description, pd.products_short, s.status as specstat, s.specials_new_products_price, p.products_price from(( " . TABLE_PRODUCTS . " p )left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . TABLE_CATEGORIES . " c )left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' where p.products_id = p2c.products_id and p2c.categories_id = c.categories_id and p2c.categories_id = '" . (int)$featured_product_category_id . "' and p.products_status = '1' and p.products_featured = '1' order by " . FEATURED_PRODUCTS_SORT_ORDER . " " . FEATURED_PRODUCTS_DIRECTION . ' limit ' . MAX_DISPLAY_FEATURED_PRODUCTS;
 } else { // default
   $featured_products_query_raw = "SELECT p.products_id, pd.products_name, pd.products_description, pd.products_short, p.products_image, p.products_tax_class_id, s.status as specstat, s.specials_new_products_price, p.products_price from(( " . TABLE_PRODUCTS . " p )left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id )left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' where p.products_status = '1' and p.products_featured = '1' order by " . FEATURED_PRODUCTS_SORT_ORDER . " " . FEATURED_PRODUCTS_DIRECTION . ' limit ' . MAX_DISPLAY_FEATURED_PRODUCTS;
@@ -66,7 +66,7 @@ if ( (OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') && !empty($current_category
 
 // do manufacturer features
 
-  $featured_manufacturers_id = $manufacturers_id; 
+  $featured_manufacturers_id = isset($manufacturers_id); 
   
   if ((!isset($featured_manufacturers_id)) || ($featured_manufacturers_id == '0')) {
     $featured_manufacturers_query_raw = "SELECT m.manufacturers_id, m.manufacturers_name, m.manufacturers_image, m.manufacturers_featured_until, mi.manufacturers_id, mi.languages_id, mi.manufacturers_url from " . TABLE_MANUFACTURERS .
@@ -85,7 +85,7 @@ if ( (OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') && !empty($current_category
 
 // do manufacturer w/ product features
 
-  $featured_manufacturer_products_id = $manufacturers_id; 
+  $featured_manufacturer_products_id = isset($manufacturers_id); 
 
   if ((!isset($featured_manufacturer_products_id)) || ($featured_manufacturer_products_id == '0')) {
     $featured_manufacturer_products_query_raw = "select p.products_id, p.manufacturers_id, p.products_price, p.products_tax_class_id, pd.products_name, pd.products_description, pd.products_short, p.products_image, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price, m.manufacturers_id, m.manufacturers_name, m.manufacturers_image, m.manufacturer_featured_until, mi.manufacturers_id, mi.languages_id, mi.manufacturers_url from (" . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . TABLE_MANUFACTURERS_INFO . " mi) left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id where p.products_status = '1' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = mi.manufacturers_id and mi.languages_id = '" . (int)$languages_id . "' and m.manufacturer_featured = '1' order by " . FEATURED_MANUFACTURER_SORT_ORDER . " " . FEATURED_MANUFACTURER_DIRECTION . ' limit ' . MAX_DISPLAY_FEATURED_MANUFACTURER;
@@ -116,7 +116,7 @@ if ( (OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') && !empty($current_category
     if ( (OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES=='true') && !empty($current_category_id) ) { /// We are in category depth
       $featured_categories_query_raw = "select c.categories_id, c.categories_image, c.parent_id, c.categories_featured_until, cd.categories_name, p.products_id, p.products_price, p.products_tax_class_id, p.products_image, pd.products_name, pd.products_description, pd.products_short, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from(( " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p )left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id, " . TABLE_PRODUCTS_TO_CATEGORIES .
         " p2c )left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id where p.products_status = '1' and c.categories_featured = '1' and cd.language_id = '" . (int)$languages_id . "' and c.categories_id = cd.categories_id and c.categories_id = p2c.categories_id and cd.categories_id = p2c.categories_id and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and (".$categories_query_addition.") and pd.language_id = '" . (int)$languages_id . "' order by " . FEATURED_CATEGORIES_SORT_ORDER . " " . FEATURED_CATEGORIES_DIRECTION . ' limit ' . MAX_DISPLAY_FEATURED_CATEGORIES;
-    } else if ( (OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES=='true') && tep_not_null($product_info['products_id']) ) { // products info page
+    } else if ( (OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES=='true') && tep_not_null(isset($product_info['products_id'])) ) { // products info page
       $featured_categories_query_raw = "select c.categories_id, c.categories_image, c.parent_id, c.categories_featured_until, cd.categories_name, p.products_id, p.products_price, p.products_tax_class_id, p.products_image, pd.products_name, pd.products_description, pd.products_short, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from(( " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p )left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id, " . TABLE_PRODUCTS_TO_CATEGORIES .
         " p2c )left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id where p.products_status = '1' and c.categories_featured = '1' and cd.language_id = '" . (int)$languages_id . "' and c.categories_id = cd.categories_id and c.categories_id = p2c.categories_id and cd.categories_id = p2c.categories_id and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and p2c.categories_id = '" . (int)$featured_product_category_id . "' and pd.language_id = '" . (int)$languages_id . "' order by " . FEATURED_CATEGORIES_SORT_ORDER . " " . FEATURED_CATEGORIES_DIRECTION . ' limit ' . MAX_DISPLAY_FEATURED_CATEGORIES;
     } else { // default

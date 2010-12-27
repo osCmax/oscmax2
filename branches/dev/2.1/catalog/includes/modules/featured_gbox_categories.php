@@ -12,6 +12,7 @@ Made for:
   
 */
 
+if (isset($featured_categories_array)) {
 if (sizeof($featured_categories_array) <> '0') { 
   
   $num_columns = (sizeof($featured_categories_array)>(int)FEATURED_CATEGORIES_COLUMNS?FEATURED_CATEGORIES_COLUMNS:sizeof($featured_categories_array));
@@ -55,9 +56,10 @@ if (sizeof($featured_categories_array) <> '0') {
       $current_description = $featured_categories_array[$i]['pshortdescription']; 
     } else { 
 	  if (OPEN_FEATURED_LIMIT_DESCRIPTION_BY=='words') {
-        $bah = explode(" ", $featured_categories_array[$i]['pdescription']); 
+        $bah = explode(" ", $featured_categories_array[$i]['pdescription']);
+		$word_count = count($bah);
         $current_description = '';
-        for($desc=0 ; $desc<MAX_FEATURED_CATEGORIES_WORD_DESCRIPTION ; $desc++) 
+        for($desc=0 ; $desc<min(MAX_FEATURED_CATEGORIES_WORD_DESCRIPTION, $word_count); $desc++) 
         { 
           $current_description .= $bah[$desc]." "; 
         }  
@@ -248,4 +250,5 @@ if (sizeof($featured_categories_array) <> '0') {
   echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   
 } // end: if()
+}
 ?>

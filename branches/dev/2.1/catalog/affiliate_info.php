@@ -25,7 +25,7 @@ $Id: affiliate_info.php 14 2006-07-28 17:42:07Z user $
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_AFFILIATE_INFO));
 
-  $content = affiliate_info; 
+  $content = CONTENT_AFFILIATE_INFO; 
 
   include (bts_select('main')); // BTSv1.5
 

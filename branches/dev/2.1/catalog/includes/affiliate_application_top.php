@@ -70,9 +70,9 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_LANGUAGES . $language . '/affiliate.php');
 
   $affiliate_clientdate = (date ("Y-m-d H:i:s"));
-  $affiliate_clientbrowser = $_SERVER["HTTP_USER_AGENT"];
-  $affiliate_clientip = $_SERVER["REMOTE_ADDR"];
-  $affiliate_clientreferer = $_SERVER["HTTP_REFERER"];
+  $affiliate_clientbrowser = isset($_SERVER["HTTP_USER_AGENT"]);
+  $affiliate_clientip = isset($_SERVER["REMOTE_ADDR"]);
+  $affiliate_clientreferer = isset($_SERVER["HTTP_REFERER"]);
 
   if (!isset($_SESSION['affiliate_ref'])) {
     tep_session_register('affiliate_ref');

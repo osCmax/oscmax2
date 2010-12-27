@@ -25,6 +25,7 @@ define('HEADER_TITLE_CREATE_ACCOUNT', 'Neues Konto');
 define('HEADER_TITLE_MY_ACCOUNT', 'Ihr Konto');
 define('HEADER_TITLE_CART_CONTENTS', 'Warenkorb');
 define('HEADER_TITLE_CHECKOUT', 'Kasse');
+define('HEADER_TITLE_WISHLIST', 'Wish List');
 define('HEADER_TITLE_TOP', 'Startseite');
 define('HEADER_TITLE_CATALOG', 'Katalog');
 define('HEADER_TITLE_LOGOFF', 'Abmelden');

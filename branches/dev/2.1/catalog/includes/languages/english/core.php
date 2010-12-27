@@ -381,9 +381,9 @@ define('WARNING_ORDER_NOT_UPDATED', 'Warning: Nothing to change. The order was n
 
 // BOF: Open Featured Sets
 define('OPEN_FEATURED_BOX_HEADING', 'Featured');
-define('OPEN_FEATURED_BOX_CATEGORY_HEADING', "Featured Categories");
-define('OPEN_FEATURED_BOX_MANUFACTURERS_HEADING', "Now Featuring");
-define('OPEN_FEATURED_BOX_MANUFACTURER_HEADING', "Now Featuring");
+define('OPEN_FEATURED_BOX_CATEGORY_HEADING', 'Featured Categories');
+define('OPEN_FEATURED_BOX_MANUFACTURERS_HEADING', 'Now Featuring');
+define('OPEN_FEATURED_BOX_MANUFACTURER_HEADING', 'Now Featuring');
 define('OPEN_FEATURED_TABLE_HEADING_PRICE', ''); //Price: 
 define('TEXT_MORE_INFO', 'more...');
 // EOF: Open Featured Sets

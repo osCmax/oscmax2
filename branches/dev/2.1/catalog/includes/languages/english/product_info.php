@@ -66,14 +66,4 @@ define('ALT_NEXT_PRODUCT', 'Next Product');
 define('ALT_FIRST_PRODUCT', 'First Product');
 define('ALT_LAST_PRODUCT', 'Last Product');
 // EOF: previous next product
-
-// BOF: Open Featured Sets
-define('OPEN_FEATURED_BOX_HEADING', 'Featured');
-define('OPEN_FEATURED_BOX_CATEGORY_HEADING', "Featured");
-define('OPEN_FEATURED_BOX_MANUFACTURERS_HEADING', "Now Featuring");
-define('OPEN_FEATURED_BOX_MANUFACTURER_HEADING', "Now Featuring");
-define('OPEN_FEATURED_TABLE_HEADING_PRICE', ''); //Price: 
-define('TEXT_MORE_INFO', 'more...');
-// EOF: Open Featured Sets
-
 ?>

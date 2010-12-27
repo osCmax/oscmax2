@@ -67,19 +67,19 @@
                 <td class="main"><?php echo ENTRY_NAME; ?></td>
               </tr>
               <tr>
-                <td class="main"><?php echo tep_draw_input_field('name', '','value="' . $name .'" size="40" '); ?></td>
+                <td class="main"><?php echo tep_draw_input_field('name', '','value="' . isset($name) .'" size="40" '); ?></td>
               </tr>
               <tr>
                 <td class="main"><?php echo ENTRY_EMAIL; ?></td>
               </tr>
               <tr>
-                <td class="main"><?php echo tep_draw_input_field('email', '','value="' . $email .'" size="40" '); ?></td>
+                <td class="main"><?php echo tep_draw_input_field('email', '','value="' . isset($email) .'" size="40" '); ?></td>
               </tr>
               <tr>
               <td class="main">Reason for Enquiry:
               
               <br>
-					<select name="reason">
+					<select name="reason" class="input-style">
 						<?php echo '<option value="' . REASON_1 . '">' . REASON_1 . '</option>'; ?>
 						<?php echo '<option value="' . REASON_2 . '">' . REASON_2 . '</option>'; ?>
 						<?php echo '<option value="' . REASON_3 . '">' . REASON_3 . '</option>'; ?>

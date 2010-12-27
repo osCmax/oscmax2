@@ -47,7 +47,7 @@ $Id: currencies.php 3 2006-05-27 04:59:07Z user $
 /*  deleted style for CSS layout paulm
     $boxContent .= tep_draw_pull_down_menu('currency', $currencies_array, $currency, 'onChange="this.form.submit();" style="width: 100%"');
 */
-    $boxContent .= tep_draw_pull_down_menu('currency', $currencies_array, $currency, 'onChange="this.form.submit();"');
+    $boxContent .= tep_draw_pull_down_menu('currency', $currencies_array, $currency, 'onChange="this.form.submit();" class="input-style"');
     $boxContent .= $hidden_get_variables;
     $boxContent .= tep_hide_session_id();
     $boxContent .= '</form>';

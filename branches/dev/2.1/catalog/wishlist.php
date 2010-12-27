@@ -85,7 +85,7 @@ if (RECAPTCHA_ON == 'true') {
 *********** PGM ADDS CLEAR WISHLIST AND BUTTTON REMOVE *************
 *******************************************************************/
 
-  switch ($_GET['action']) {
+  switch (isset($_GET['action'])) {
 	case 'remove_product' :    if (isset($_GET['wishlist_id'])) {
 	               	               $wishList->remove($_GET['wishlist_id']);
         	                       }

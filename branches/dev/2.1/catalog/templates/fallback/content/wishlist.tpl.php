@@ -28,7 +28,7 @@
   }
 
 
-  if (is_array($wishList->wishID) && !empty($wishList->wishID)) {
+  if (is_array(isset($wishList->wishID)) && !empty($wishList->wishID)) {
     reset($wishList->wishID);
 
 ?>

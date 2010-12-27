@@ -29,7 +29,7 @@
 
   $boxContent = '';
 
-	if (is_array($wishList->wishID) && !empty($wishList->wishID)) {
+	if (is_array(isset($wishList->wishID)) && !empty($wishList->wishID)) {
 	reset($wishList->wishID);
 
 	if (count($wishList->wishID) < MAX_DISPLAY_WISHLIST_BOX) {

@@ -766,14 +766,14 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 
 // check if the catalog image directory exists
   if (is_dir(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR)) {
-    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR)) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
+    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR)) $messageStack->add(ERROR_CATALOG_BIGIMAGES_DIRECTORY_NOT_WRITEABLE, 'error');
   } else {
-    $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
+    $messageStack->add(ERROR_CATALOG_BIGIMAGES_DIRECTORY_DOES_NOT_EXIST, 'error');
   }
   if (is_dir(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR)) {
-    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR)) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
+    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR)) $messageStack->add(ERROR_CATALOG_THUMBS_DIRECTORY_NOT_WRITEABLE, 'error');
   } else {
-    $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
+    $messageStack->add(ERROR_CATALOG_THUMBS_DIRECTORY_DOES_NOT_EXIST, 'error');
   }
   //++++ QT Pro: Begin Changed code
   if($product_investigation['any_problems']){

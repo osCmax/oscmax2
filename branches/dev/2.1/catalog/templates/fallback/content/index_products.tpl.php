@@ -26,6 +26,7 @@
 <?php	
 // Get the right image for the top-right
     $image = DIR_WS_IMAGES . 'table_background_list.gif';
+	$image_folder = '';
     if (isset($_GET['manufacturers_id'])) {
       $image = tep_db_query("select manufacturers_image from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
       $image = tep_db_fetch_array($image);

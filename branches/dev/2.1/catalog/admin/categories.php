@@ -1586,9 +1586,9 @@ function updateMSRPNet() {
                         <td class="main"><?php echo TEXT_PRODUCTS_PRICE  . " " . ($count + 1); ?></td>
                         <td class="main" align="left"> <?php
                             if(is_array($pInfo->products_price_break[$CustGroupID]) && array_key_exists($count, $pInfo->products_price_break[$CustGroupID])) {
-                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', $pInfo->products_price_break[$CustGroupID][$count], 'size="10"');
-                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;
-                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', $pInfo->products_qty[$CustGroupID][$count], 'size="10"');
+                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', $pInfo->products_qty[$CustGroupID][$count], 'size="10"');
+                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;        
+							  echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', $pInfo->products_price_break[$CustGroupID][$count], 'size="10"');
                               echo tep_draw_hidden_field('products_price_break_id[' . $CustGroupID .'][' . $count . ']', $pInfo->products_price_break_id[$CustGroupID][$count]);
 // only show a delete box for a price break that has been set (needed for when the
 // back button is used after a preview
@@ -1596,9 +1596,9 @@ function updateMSRPNet() {
                                 echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_checkbox_field('products_delete[' . $CustGroupID .'][' . $count . ']', 'y', (isset($pInfo->products_delete[$CustGroupID][$count]) ? 1 : 0)) . TEXT_PRODUCTS_DELETE;
                               }
                             } else {
+							  echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
+					          echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;
                               echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
-                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;
-                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
                             } 
 							?>
                         </td>

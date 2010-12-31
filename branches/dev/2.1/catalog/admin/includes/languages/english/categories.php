@@ -151,8 +151,8 @@ define('LAYOUT_HIDE_FROM', '0');
 // BOF QPBPP for SPPC
 define('TEXT_PRODUCTS_QTY_BLOCKS', 'Quantity Blocks:');
 define('TEXT_PRODUCTS_QTY_BLOCKS_HELP', '(can only order in blocks of X quantity, defaults to 1)');
-define('TEXT_PRODUCTS_PRICE', 'Price level');
-define('TEXT_PRODUCTS_QTY', 'From');
+define('TEXT_PRODUCTS_PRICE', 'Quantity level');
+define('TEXT_PRODUCTS_QTY', 'units at Price');
 define('TEXT_PRODUCTS_DELETE', 'Delete');
 define('TEXT_ENTER_QUANTITY', 'Quantity');
 define('TEXT_PRICE_PER_PIECE', 'Price&nbsp;for&nbsp;each');

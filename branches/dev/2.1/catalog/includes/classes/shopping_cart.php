@@ -357,7 +357,7 @@ var $shiptotal;
 
           $prid = $product['products_id'];
           $products_tax = tep_get_tax_rate($product['products_tax_class_id']);
-          $products_price = $product['products_price'];
+          $products_price = $pf->computePrice($qty, $nof_other_items_in_cart_same_cat);
           $products_weight = $product['products_weight'];
           $products_length = $product['products_length'];
           $products_width = $product['products_width'];
@@ -506,18 +506,18 @@ var $shiptotal;
 
         $products_code = $products['products_model'] . $separator . implode("-", $attribute_code_array);
     } else {
-$products_code = $products['products_model'];
+        $products_code = $products['products_model'];
 
-}
+    }
 // EOF Attribute Product Codes
 //        $products_array[] = array('id' => $products_id,
           $products_array[] = array('id' => tep_get_uprid($products_id, $this->contents[$products_id]['attributes']),
                                     'name' => $products['products_name'],
                                     'model' => $products['products_model'],
-                    'code' => $products_code,
+                                    'code' => $products_code,
                                     'image' => $products['products_image'],
 // BOF QPBPP for SPPC
-                    'discount_categories_id' => $this->contents[$products_id]['discount_categories_id'],
+                                    'discount_categories_id' => $this->contents[$products_id]['discount_categories_id'],
 // EOF QPBPP for SPPC
                                     'price' => $products_price,
                                     'quantity' => $this->contents[$products_id]['qty'],

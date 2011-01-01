@@ -397,11 +397,9 @@ define('TEXT_RESTRICT_TO', 'Restrict <b>%s</b> to: %s and its sub-values (if any
 define('TEXT_CALL_FOR_PRICE', '<a href="' . tep_href_link(FILENAME_CONTACT_US) . '">Contact for Price!</a>');
 
 // BOF: MSRP
-define('TEXT_PRODUCTS_MSRP', '&nbsp;RRP:&nbsp;');
 define('TEXT_PRODUCTS_OUR_PRICE', '&nbsp;Our&nbsp;Price:&nbsp;');
 define('TEXT_PRODUCTS_SALE', '&nbsp;WAS:&nbsp;');
 define('TEXT_PRODUCTS_SAVINGS', '&nbsp;You&nbsp;Save:&nbsp;');
-define('TEXT_PRODUCTS_SAVINGS_RRP', '&nbsp;You&nbsp;Save&nbsp;(Off&nbsp;RRP):&nbsp;');
 define('TEXT_PRODUCTS_PRICENOW', '&nbsp;NOW:&nbsp;');
 define('TEXT_PRODUCTS_USUALPRICE', '&nbsp;Normally:&nbsp;');
 // EOF: MSRP

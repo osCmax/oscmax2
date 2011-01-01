@@ -49,6 +49,11 @@ define('ENTRY_STATE', 'County:');
 define('ENTRY_STATE_ERROR', 'Your County must contain a minimum of ' . ENTRY_STATE_MIN_LENGTH . ' characters.');
 define('ENTRY_STATE_ERROR_SELECT', 'Please select a County from the Counties pull down menu.');
 
+// BOF: MSRP
+define('TEXT_PRODUCTS_MSRP', '&nbsp;RRP:&nbsp;');
+define('TEXT_PRODUCTS_SAVINGS_RRP', '&nbsp;You&nbsp;Save&nbsp;(Off&nbsp;RRP):&nbsp;');
+// EOF: MSRP
+
 ////
 } else { // Use US format for store
 ////
@@ -95,6 +100,11 @@ define('ENTRY_POST_CODE_TEXT', '*');
 define('ENTRY_STATE', 'State/Province:');
 define('ENTRY_STATE_ERROR', 'Your State must contain a minimum of ' . ENTRY_STATE_MIN_LENGTH . ' characters.');
 define('ENTRY_STATE_ERROR_SELECT', 'Please select a state from the States pull down menu.');
+
+// BOF: MSRP
+define('TEXT_PRODUCTS_MSRP', '&nbsp;MSRP:&nbsp;');
+define('TEXT_PRODUCTS_SAVINGS_RRP', '&nbsp;You&nbsp;Save&nbsp;(Off&nbsp;MSRP):&nbsp;');
+// EOF: MSRP
 
 } // End English Type format if
 ////

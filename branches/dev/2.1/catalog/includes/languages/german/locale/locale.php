@@ -26,4 +26,9 @@ function tep_date_raw($date, $reverse = false) {
 
 // if USE_DEFAULT_LANGUAGE_CURRENCY is true, use the following currency, instead of the applications default currency (used when changing language)
 define('LANGUAGE_CURRENCY', 'EUR');
+
+// BOF: MSRP
+define('TEXT_PRODUCTS_MSRP', '&nbsp;UVP:&nbsp;');
+define('TEXT_PRODUCTS_SAVINGS_RRP', '&nbsp;SIE&nbsp;sparen&nbsp;(ab&nbsp;UVP):&nbsp;');
+// EOF: MSRP
 ?>

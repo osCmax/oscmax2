@@ -57,6 +57,17 @@
 
 // Tabs
     $("#searchtabs").tabs();
+	
+	var href = $(location).attr('href');
+	
+	if (href.indexOf("orders.php") != -1) {
+	  $("#searchtabs").tabs("select","searchtabs-3");
+	}
+	
+	if (href.indexOf("categories.php") != -1) {
+	  $("#searchtabs").tabs("select","searchtabs-2");
+	} 
+	
     $("#tabs").tabs();
 
     $("#descriptiontabs0").tabs();

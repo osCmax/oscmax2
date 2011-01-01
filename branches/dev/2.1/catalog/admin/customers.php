@@ -1053,7 +1053,7 @@ function check_form() {
               <tr>
                 <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
                 <td class="pageHeading" align="right">&nbsp;</td>
-                <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search'); ?></td>
+                <td class="smallText" align="right"><?php // echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search'); ?></td>
               </tr>
             </table><?php echo tep_hide_session_id(); ?></form>
           </td>

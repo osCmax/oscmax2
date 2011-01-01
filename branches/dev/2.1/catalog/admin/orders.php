@@ -564,7 +564,7 @@ require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/orders3.php');
                   <td class="smallText" align="right"><?php echo tep_draw_form('orders', FILENAME_ORDERS, '', 'get'); ?>
 				  <?php
                   $onfocus=' onfocus="this.value=\'\';"';
-                  echo HEADING_TITLE_SEARCH_ALL . ' ' . tep_draw_input_field('q', '', "size=\"32\"$onfocus");
+                  // echo HEADING_TITLE_SEARCH_ALL . ' ' . tep_draw_input_field('q', '', "size=\"32\"$onfocus");
                   echo tep_hide_session_id(); 
 				  ?>
                   </form></td>

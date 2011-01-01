@@ -32,7 +32,7 @@ $Id: new_products.php 3 2006-05-27 04:59:07Z user $
   if (($no_of_new_products = tep_db_num_rows($new_products_query)) > 0) {
     // Add heading to infobox	
 	$box_content = array();
-    $box_content[] = array('align' => 'left', 'text' => '<a href="' . tep_href_link(FILENAME_DEFAULT, "new_products=1") . '" class="headerNavigation">' . sprintf(TABLE_HEADING_NEW_PRODUCTS, strftime('%B') . '</a>'));
+    $box_content[] = array('align' => 'left', 'text' => '<a href="' . tep_href_link(FILENAME_DEFAULT, "new_products=1") . '" class="headerNavigation">' . sprintf(TABLE_HEADING_NEW_PRODUCTS, strftime('%B')) . '</a>');
     new infoBoxHeading($box_content, true, true, tep_href_link(FILENAME_DEFAULT, "new_products=1"));
   
 	while ($_new_products = tep_db_fetch_array($new_products_query)) {

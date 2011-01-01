@@ -82,9 +82,9 @@ img.corner_banner { display:inline-block; margin-left:-6px; margin-top:-7px; pos
 
 td.login_boxes { border: 1px solid #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:5px; }
 
-A.pageResults { background:none repeat scroll 0 0 #dddddd; color:#000000; padding:2px 4px; text-decoration:none; }
-A.pageResults:hover { background:none repeat scroll 0 0 #bbbbbb; color:#ffffff; }
-.pageResult { background:none repeat scroll 0 0 #bbbbbb; color:#ffffff; padding:2px 4px; text-decoration:none; }
+A.pageResults { background:none repeat scroll 0 0 #dddddd; color:#000000; padding:2px 4px; text-decoration:none; font-family: Verdana,Arial,sans-serif; font-size: 10px; }
+A.pageResults:hover { background:none repeat scroll 0 0 #bbbbbb; color:#ffffff;  font-family: Verdana,Arial,sans-serif; font-size: 10px; }
+.pageResult { background:none repeat scroll 0 0 #bbbbbb; color:#ffffff; padding:2px 4px; text-decoration:none;  font-family: Verdana,Arial,sans-serif; font-size: 10px; }
 
 TABLE.filterbox { font-family: Verdana, Arial, sans-serif; font-size: 10px; border: 1px solid #dddddd; border-spacing: 1px; background: #ffffff; padding-top:2px; padding-bottom:2px; }
 A.filterbox { font-family: Verdana, Arial, sans-serif; font-size: 10px; }

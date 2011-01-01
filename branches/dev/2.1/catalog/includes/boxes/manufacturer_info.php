@@ -33,7 +33,7 @@ $Id: manufacturer_info.php 3 2006-05-27 04:59:07Z user $
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 	  
       $boxContent = '<table border="0" width="100%" cellspacing="0" cellpadding="0">';
-      if (tep_not_null($manufacturer['manufacturers_image'])) $boxContent .= '<tr><td align="center" class="infoBoxContents" colspan="2">' . tep_image(DIR_WS_IMAGES . MANUFACTURERS_IMAGES_DIR . $manufacturer['manufacturers_image'], $manufacturer['manufacturers_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</td></tr>';
+      if (tep_not_null($manufacturer['manufacturers_image'])) $boxContent .= '<tr><td align="center" class="infoBoxContents" colspan="2"><a href="' . tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $manufacturer['manufacturers_id']) . '">' . tep_image(DIR_WS_IMAGES . MANUFACTURERS_IMAGES_DIR . $manufacturer['manufacturers_image'], $manufacturer['manufacturers_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td></tr>';
       if (tep_not_null($manufacturer['manufacturers_url'])) $boxContent .= '<tr><td valign="top" class="infoBoxContents">-&nbsp;</td><td valign="top" class="infoBoxContents"><a href="' . tep_href_link(FILENAME_REDIRECT, 'action=manufacturer&manufacturers_id=' . $manufacturer['manufacturers_id']) . '" target="_blank">' . sprintf(BOX_MANUFACTURER_INFO_HOMEPAGE, $manufacturer['manufacturers_name']) . '</a></td></tr>';
       $boxContent .= '<tr><td valign="top" class="infoBoxContents">-&nbsp;</td><td valign="top" class="infoBoxContents"><a href="' . tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $manufacturer['manufacturers_id']) . '">' . BOX_MANUFACTURER_INFO_OTHER_PRODUCTS . '</a></td></tr>' .
                                    '</table>';

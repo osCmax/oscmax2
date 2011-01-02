@@ -51,9 +51,11 @@
     $account = tep_db_fetch_array($account_query);
 
     $name = $account['customers_firstname'] . ' ' . $account['customers_lastname'];
-    $email = $account['customers_email_address'];
+    $email = $account['customers_email_address'];	
   	}
 	
+	if (!isset($name)) { $name = ''; }
+	if (!isset($email)) { $email = ''; }
 	
 ?>
       <tr>
@@ -67,13 +69,13 @@
                 <td class="main"><?php echo ENTRY_NAME; ?></td>
               </tr>
               <tr>
-                <td class="main"><?php echo tep_draw_input_field('name', '','value="' . isset($name) .'" size="40" '); ?></td>
+                <td class="main"><?php echo tep_draw_input_field('name', '','value="' . $name .'" size="40" '); ?></td>
               </tr>
               <tr>
                 <td class="main"><?php echo ENTRY_EMAIL; ?></td>
               </tr>
               <tr>
-                <td class="main"><?php echo tep_draw_input_field('email', '','value="' . isset($email) .'" size="40" '); ?></td>
+                <td class="main"><?php echo tep_draw_input_field('email', '','value="' . $email .'" size="40" '); ?></td>
               </tr>
               <tr>
               <td class="main">Reason for Enquiry:

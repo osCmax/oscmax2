@@ -843,6 +843,8 @@ CREATE TABLE orders_products_attributes (
   code_suffix varchar(16) NOT NULL,
   options_values_price decimal(15,4) NOT NULL,
   price_prefix char(1) NOT NULL,
+  weight_prefix char(1) NOT NULL,
+  options_values_weight decimal(6,3) NOT NULL DEFAULT '0.000',
   PRIMARY KEY (orders_products_attributes_id),
   KEY idx_orders_products_att_orders_id (orders_id)
 );

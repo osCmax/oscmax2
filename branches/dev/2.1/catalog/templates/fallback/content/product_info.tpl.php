@@ -59,6 +59,7 @@
 // BOF QPBPP for SPPC
     $pf->loadProduct((int)$_GET['products_id'], (int)$languages_id);
     $products_price = $pf->getPriceString();
+	$hi_product_price = $pf->getHiPrice();
 // EOF QPBPP for SPPC
 
 // BOF: MSRP
@@ -72,8 +73,8 @@
       $msrp_products_price .= '<tr class="PriceListBIG"><td align="right">' . TEXT_PRODUCTS_MSRP  . $currencies->display_price($product_info['products_msrp'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</td></tr>';
 	
 	  if ($new_price == '') { //Product not on special
-	    $msrp_products_price .= '<tr class="pricenowBIG"><td align="right">' . TEXT_PRODUCTS_OUR_PRICE . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</td></tr>';
-		$msrp_products_price .= '<tr class="savingBIG"><td align="right" >' . TEXT_PRODUCTS_SAVINGS_RRP .  $currencies->display_price(($product_info['products_msrp'] -  $product_info['products_price']), tep_get_tax_rate($product_info['products_tax_class_id'])) . '&nbsp;('. number_format(100 - (($product_info['products_price'] / $product_info['products_msrp']) * 100)) . '%)</td></tr>';
+	    $msrp_products_price .= '<tr class="pricenowBIG"><td align="right">' . TEXT_PRODUCTS_OUR_PRICE . $currencies->display_price(tep_add_tax($hi_product_price, tep_get_tax_rate($product_info['products_tax_class_id']))) . '</td></tr>';
+		$msrp_products_price .= '<tr class="savingBIG"><td align="right" >' . TEXT_PRODUCTS_SAVINGS_RRP .  $currencies->display_price(($product_info['products_msrp'] -  $hi_product_price), tep_get_tax_rate($product_info['products_tax_class_id'])) . '&nbsp;('. number_format(100 - (($hi_product_price / $product_info['products_msrp']) * 100)) . '%)</td></tr>';
 	  } else { //Product is on special
 	    $msrp_products_price .= '<tr class="usualpriceBIG"><td align="right">' . TEXT_PRODUCTS_USUALPRICE .   $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</td></tr>';
 	    $msrp_products_price .= '<tr class="pricenowBIG"><td align="right">' . TEXT_PRODUCTS_PRICENOW .  $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</td></tr>';

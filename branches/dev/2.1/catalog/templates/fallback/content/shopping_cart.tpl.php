@@ -1,17 +1,3 @@
-<?php
-// START REMOVE FROM CART BUTTON AND CLEAR CART MOD
-switch (isset($_GET['action'])) {
-	case 'remove_product' :    if (isset($_GET['products_id'])) {
-	               	               $cart->remove($_GET['products_id']);
-        	                       }
-            	                   break;
-								   
-	case 'clear_cart' :     $cart->reset(true);
-                              break;
-}
-// END REMOVE FROM CART BUTTON AND CLEAR CART MOD
-?>
-
     <?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_SHOPPING_CART, 'action=update_product')); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>

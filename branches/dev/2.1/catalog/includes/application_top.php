@@ -567,13 +567,18 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
                               }
                               tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
                               break;
+	  case 'remove_product' : if (isset($_GET['products_id'])) {
+	               	            $cart->remove($_GET['products_id']);
+        	                  }
+            	              break;   
+	  case 'clear_cart' :     $cart->reset(true);
+                             break;
 
 //                            } // end switch $_GET['action']
 //                           } // end if is set $_GET['action']
 // 
 // 
 // // include the who's online functions
-
     } // end switch
 // BOF Separate Pricing Per Customer v4.2.x, Hide products from groups mod
     } else { // $hide_product is true

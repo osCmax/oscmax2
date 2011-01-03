@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: stock.php $
+$Id$
 
-  osCmax Power E-Commerce
-  http://www.osCmax.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2000 - 2010 osCmax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

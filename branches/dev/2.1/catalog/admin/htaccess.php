@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright (C) 2007 Google Inc.
+  Copyright 2000 - 2011 osCmax
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id: htaccess.php 153 2009-01-30 00:16:37Z ed.davisson $
+ * $Id$
  * 
  * .htaccess .htpasswd pair for Google Checkout Basic Authentication on CGI php
  *
@@ -222,7 +222,7 @@ function rand_salt_crypt( $pass )
       <th align="center" colspan="2">Sandbox Account: <input type="checkbox" value="true" name="sb"<?php echo (!isset($_POST['submit']) || isset($_POST['sb']))?' checked':'';?>/></th>
     </tr>
     <tr>
-      <th align="right">Merchant ID: </th>
+      <th align="right">Merchant Id$
       <td><input type="text" value="<?=@$_POST['sb_id'];?>" name="sb_id" size="40"/></td>
     </tr>
     <tr>
@@ -233,7 +233,7 @@ function rand_salt_crypt( $pass )
       <th align="center" colspan="2">Checkout Account: <input type="checkbox" value="true" name="gc"<?php echo (!isset($_POST['submit']) || isset($_POST['gc']))?' checked':'';?>/></th>
     </tr>
     <tr>
-      <th align="right">Merchant ID: </th>
+      <th align="right">Merchant Id$
       <td><input type="text" value="<?=@$_POST['gc_id'];?>" name="gc_id" size="40"/></td>
     </tr>
     <tr>

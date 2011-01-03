@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: gv_mail.php,v 1.5.2.2 2003/04/27 12:36:00 wilt Exp $
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

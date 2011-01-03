@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: secpay.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscmax.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2010 osCmax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

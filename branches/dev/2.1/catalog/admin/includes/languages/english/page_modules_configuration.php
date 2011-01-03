@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: page_module_configuration.php 3 2010-03-31 user pgm
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscmax.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2010 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

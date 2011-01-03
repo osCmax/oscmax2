@@ -1,15 +1,13 @@
 <?php
 /*
-$Id: affiliate_password_forgotten.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  OSC-Affiliate
 
-  Contribution based on:
-  osCMax Power E-Commerce
+  osCmax e-Commerce
 
-  http://oscdox.com
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2002 -2003 osCommerce
+  Copyright 2000 - 2011 osCmax
   Released under the GNU General Public License
 */
 

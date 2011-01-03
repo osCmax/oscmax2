@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright (C) 2008 Google Inc.
+  Copyright 2000 - 2011 osCmax
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -19,10 +19,10 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id: googleitem.php 153 2009-01-30 00:16:37Z ed.davisson $
+ * $Id$
  * 
  * Classes used to represent an item to be used for Google Checkout
- * @version $Id: googleitem.php 153 2009-01-30 00:16:37Z ed.davisson $
+ * @version $Id$
  */
 
  /**

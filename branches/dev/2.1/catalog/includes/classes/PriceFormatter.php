@@ -1,12 +1,12 @@
 <?php
 /*
-  $Id: PriceFormatter.php,v 1.10 2008/08/28 Exp $
+  $Id$
   adapted for QPBPP for SPPC version 2.0 2008/11/08
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

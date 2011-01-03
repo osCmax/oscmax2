@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright (C) 2008 Google Inc.
+  Copyright 2000 - 2011 osCmax
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id: products.php 169 2009-02-17 21:53:06Z ed.davisson $
+ * $Id$
  * 
  * Generates a Google Base RSS feed.
  * 

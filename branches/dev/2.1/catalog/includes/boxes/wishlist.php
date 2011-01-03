@@ -1,12 +1,12 @@
 <?php
 /*
-  $Id: wishlist.php,v 1.0 2005/02/22 Michael Sasek
+  $Id$
 
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 */
 
 // Most of this file is changed or moved to BTS - Basic Template System - format.

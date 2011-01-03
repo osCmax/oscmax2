@@ -5,20 +5,20 @@
       pad_single_dropdown.php
   
       Contribution extension to:
-        osCMax Power E-Commerce
-        http://oscdox.com
+        osCmax e-Commerce
+        http://www.oscmax.com
      
-      Copyright 2006 osCMax2004, 2005 Ralph Day
+      Copyright 2006 osCmax2004, 2005 Ralph Day
       Released under the GNU General Public License
   
       Based on prior works released under the GNU General Public License:
         QT Pro & CPIL prior versions
           Ralph Day, October 2004
           Tom Wojcik aka TomThumb 2004/07/03 based on work by Michael Coffman aka coffman
-          FREEZEHELL - 08/11/2003 freezehell@hotmail.com Copyright 2006 osCMax2003 IBWO
+          FREEZEHELL - 08/11/2003 freezehell@hotmail.com Copyright 2006 osCmax2003 IBWO
           Joseph Shain, January 2003
         osCommerce MS2
-          Copyright 2006 osCMax
+          Copyright 2006 osCmax
       Modifications made:
           11/2004 - Created
           12/2004 - Fix _draw_out_of_stock_message_js to add semicolon to end of js stock array

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: paypal_ipn.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
   Released under the GNU General Public License
 */

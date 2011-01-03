@@ -1,6 +1,6 @@
 <?php
     /*
-    $Id: pm2checkout.php,v 1.19 2003/01/29 19:57:15 hpdl Exp $
+    $Id$
 
     osCommerce, Open Source E-Commerce Solutions
     http://www.oscommerce.com

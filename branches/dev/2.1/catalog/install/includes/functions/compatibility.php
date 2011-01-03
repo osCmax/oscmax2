@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: compatibility.php 1739 2007-12-20 00:52:16Z user $
+  $Id$
 
-  osCMax Power E-Commerce
+  osCmax e-Commerce
   http://www.oscmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

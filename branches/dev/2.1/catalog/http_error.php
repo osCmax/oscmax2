@@ -1,13 +1,11 @@
 <?php
 /*
-  $Id: http_error.php,v 1.5 2004/06/30 20:55:23 chaicka Exp $
+$Id$
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
+  osCmax e-Commerce
   http://www.oscmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

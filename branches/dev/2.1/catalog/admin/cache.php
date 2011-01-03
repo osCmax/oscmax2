@@ -1,12 +1,12 @@
 <?php
 /*
-$Id: cache.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
   adapted for Hide products from customer groups for SPPC (#3059) and Optimize Categories Box (#5173) 2007/06/10
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

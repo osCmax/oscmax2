@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: recover_cart_sales.php 3 2006-05-27 04:59:07Z user $
+$Id$
   Recover Cart Sales v 1.4 GERMAN Language File
 
   Recover Cart Sales contrib: JM Ivler (c)
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
   Released under the GNU General Public License
 

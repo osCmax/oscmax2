@@ -12,7 +12,7 @@
  * @lastdev $Author:: Rob                                              $:  Author of last commit
  * @lastmod $Date:: 2009-11-29 18:02:54 +0000 (Sun, 29 Nov 2009)       $:  Date of last commit
  * @version $Rev:: 109                                                 $:  Revision of last commit
- * @Id $Id:: Usu_Validator.php 109 2009-11-29 18:02:54Z Rob            $:  Full Details   
+ * @Id $Id$
  */
 
   class Usu_Validator {

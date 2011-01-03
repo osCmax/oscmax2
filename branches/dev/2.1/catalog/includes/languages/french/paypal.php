@@ -1,12 +1,12 @@
 <?php
 /*
-  $Id: paypal.php,v 1.1.1.1.2.1 2005/06/12 00:04:29 Michael Sasek Exp $
+  $Id$
   modified by gregbaboolal@yahoo.com 2003/12/31
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -28,8 +28,8 @@
   define('RESPONSE_UNKNOWN', 'Unknown Verfication');
   define('RESPONSE_MSG', "Connection Type\n".EMAIL_SEPARATOR."\ncurl= %s, socket= %s, domain= %s, port= %s \n\nPayPal Response\n".EMAIL_SEPARATOR."\n%s \n\n");
   define('EMAIL_RECEIVER', 'Email and Business ID config');
-  define('EMAIL_RECEIVER_MSG', STORE_NAME."\nPrimary PayPal Email Address: %s\nBusiness ID: %s\n".EMAIL_SEPARATOR."\nPrimary PayPal Email Address: %s\nBusiness ID: %s\n\n");
-  define('EMAIL_RECEIVER_ERROR_MSG', STORE_NAME."\nPrimary PayPal Email Address: %s\nBusiness ID: %s\n".EMAIL_SEPARATOR."\nPrimary PayPal Email Address: %s\nBusiness ID: %s\n\nPayPal Transaction ID: %s\n\n");
+  define('EMAIL_RECEIVER_MSG', STORE_NAME."\nPrimary PayPal Email Address: %s\nBusiness Id$
+  define('EMAIL_RECEIVER_ERROR_MSG', STORE_NAME."\nPrimary PayPal Email Address: %s\nBusiness Id$
   define('TXN_DUPLICATE', 'Duplicate Transaction');
   define('TXN_DUPLICATE_MSG', "A duplicate IPN transaction (%s) has been received.\nPlease check your PayPal Account\n\n");
   define('DEBUG', 'Debug');

@@ -1,11 +1,11 @@
 <?php 
 /*
-  $Id: javascript.php v5.0 08/05/2007 djmonkey1 Exp $
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2007 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */   

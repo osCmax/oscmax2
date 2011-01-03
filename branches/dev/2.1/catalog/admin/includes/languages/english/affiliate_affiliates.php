@@ -1,15 +1,13 @@
 <?php
 /*
-$Id: affiliate_affiliates.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
 
-  Contribution based on:
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -48,7 +46,7 @@ define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER','Account Number:');
 define('ENTRY_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER','ABA/BSB Number (branch number):');
 define('ENTRY_AFFILIATE_PAYMENT_BANK_SWIFT_CODE','SWIFT Code:');
 define('ENTRY_AFFILIATE_COMPANY','Company');
-define('ENTRY_AFFILIATE_COMPANY_TAXID','Tax-ID:');
+define('ENTRY_AFFILIATE_COMPANY_TAXID','Tax-Id$
 define('ENTRY_AFFILIATE_HOMEPAGE','Homepage');
 define('ENTRY_AFFILIATE_COMMISSION','Pay per Sale Payment % Rate');
 

@@ -1,10 +1,10 @@
 <?php
 /*
-$Id: recover_cart_sales.php 3 2006-05-27 04:59:07Z user $
+$Id$
   Recover Cart Sales v2.22 ENGLISH Language File
 
   Recover Cart Sales contribution: JM Ivler (c)
-  Copyright (c) 2003-2005 JM Ivler / Ideas From the Deep / OSCommerce
+  Copyright 2000 - 2011 osCmax
   http://www.oscommerce.com
 
   Released under the GNU General Public License

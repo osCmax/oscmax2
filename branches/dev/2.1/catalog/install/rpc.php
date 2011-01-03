@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: rpc.php 1768 2008-01-07 17:38:40Z user $
+  $Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -54,7 +54,7 @@
         osc_db_connect($db['DB_SERVER'], $db['DB_SERVER_USERNAME'], $db['DB_SERVER_PASSWORD']);
 
         $db_error = false;
-        $sql_file = $dir_fs_www_root . '/osCMax.sql';
+        $sql_file = $dir_fs_www_root . '/osCmax.sql';
 
         osc_set_time_limit(0);
         osc_db_install($db['DB_DATABASE'], $sql_file);

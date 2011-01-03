@@ -1,9 +1,9 @@
 <?php
 /*
-$Id: xsell.php 15 2006-07-28 20:46:15Z user $ 
-osCMax Power E-Commerce 
+$Id$
+osCmax e-Commerce 
 http://oscdox.com 
-Copyright 2006 osCMax2005 osCMax, 2002 osCommerce 
+Copyright 2006 osCmax2005 osCmax, 2002 osCommerce 
 
 Released under the GNU General Public License 
 xsell.php

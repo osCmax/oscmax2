@@ -1,13 +1,13 @@
 <?php
 /* 
-  $Id: featured_sbox_products.php v1.12 03/10/2004 dd/mm/yyyy 10:00:00 surfalot.com Exp $
+  $Id$
   
   Open Featured Sets products listing module
 
 Made for:
   osCommerce, Open Source E-Commerce Solutions 
   http://www.oscommerce.com 
-  Copyright (c) 2004 osCommerce 
+  Copyright 2000 - 2011 osCmax
   Released under the GNU General Public License 
   
 */

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: upsxml.php,v 1.1 2005/05/21 00:33:46 Michael Sasek Exp $
+  $Id$
 
   Written by Torin Walker
   torinwalker@rogers.com
 
-  Copyright(c) 2003 by Torin Walker, All rights reserved.
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

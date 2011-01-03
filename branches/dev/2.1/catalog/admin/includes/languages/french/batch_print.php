@@ -1,7 +1,7 @@
 <?php
 
 /*
-  $Id:Batch_print.php, hpdl Exp $
+  $Id$
 */
 
 define('HEADING_TITLE', 'Batch Order Center');

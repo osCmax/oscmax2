@@ -18,7 +18,7 @@
  
 /**
  * Google Checkout v1.5.0
- * $Id: googleshipping.php 153 2009-01-30 00:16:37Z ed.davisson $
+ * $Id$
  * 
  * Classes used to represent shipping types
  */

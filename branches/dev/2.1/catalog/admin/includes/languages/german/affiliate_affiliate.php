@@ -1,15 +1,13 @@
 <?php
 /*
-  $Id: affiliate_affiliate.php,v 1.7 2003/02/16 12:30:38 harley_vb Exp $
+  $Id$
 
-  OSC-Affiliate
 
-  Contribution based on:
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

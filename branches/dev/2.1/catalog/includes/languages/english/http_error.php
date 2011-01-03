@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: http_error.php,v 1.4 2004/06/30 20:55:17 chaicka Exp $
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2004 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
   //azer 31oct05 Custom HTTP Error Page v1.5 (http://www.oscommerce.com/community/contributions,933)

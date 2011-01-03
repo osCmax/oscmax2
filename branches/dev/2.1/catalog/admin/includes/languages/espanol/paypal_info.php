@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: paypal_info.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -21,14 +21,14 @@ define('TEXT_MAIN', '<style type="text/css">
 -->
 </style>
 <tr><td valign=\'top\' class=\'main\'>
-            <p>osCMax now offers you free signup for a PayPal account. This will allow you to accept direct PayPal payments from customers who prefer not to use a credit card, and will allow you to accept all major credit cards too.</p>
-            <p>Application is free, and best of all, PayPal payment processing is fully integrated into osCMax so that you can begin processing orders immediately.</p>
+            <p>osCmax now offers you free signup for a PayPal account. This will allow you to accept direct PayPal payments from customers who prefer not to use a credit card, and will allow you to accept all major credit cards too.</p>
+            <p>Application is free, and best of all, PayPal payment processing is fully integrated into osCmax so that you can begin processing orders immediately.</p>
 <a href=\'https://www.paypal.com/us/mrb/pal=CDCRNFVMQRHTC\' target=\'blank\'><img src=\'images/apply_now_34.gif\' alt=\'Apply for your free PayPal account now - click here\' width=\'97\' height=\'17\' border=\'0\'></a><br>
 <span class="style7">note: A new window will open when you click the<strong> Apply Now</strong> button. This is the secure Paypal application page. If a new window does not open, allow pop-ups and try again</span></td></tr>
 
 <tr class=main><td><p><br>Once your application has been approved, return to this page and read the Paypal module setup instructions below:
     <ol>
-      <li>In the osCMax admin, go to the <strong>Modules &gt;&gt; Payment</strong> section. You will see a list of payment modules. Click on the module named <strong>Paypal (Credit Card / Debit) </strong></li>
+      <li>In the osCmax admin, go to the <strong>Modules &gt;&gt; Payment</strong> section. You will see a list of payment modules. Click on the module named <strong>Paypal (Credit Card / Debit) </strong></li>
       <li>Click on the install button that appears in the right column. This will open a new box in the right column with many different configuration options and two buttons at the top = Remove and Edit. Click the <strong>Edit</strong> button </li>
       <li>Next, you will need to edit the actual settingd for this module. See Below:
         <ul>

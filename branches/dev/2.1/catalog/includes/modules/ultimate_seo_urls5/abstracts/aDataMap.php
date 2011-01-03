@@ -13,7 +13,7 @@
  * @lastdev $Author:: Rob                                              $:  Author of last commit
  * @lastmod $Date:: 2009-12-06 12:10:34 +0000 (Sun, 06 Dec 2009)       $:  Date of last commit
  * @version $Rev:: 131                                                 $:  Revision of last commit
- * @Id $Id:: aDataMap.php 131 2009-12-06 12:10:34Z Rob                 $:  Full Details   
+ * @Id $Id$
  */
 
 abstract class aDataMap { 

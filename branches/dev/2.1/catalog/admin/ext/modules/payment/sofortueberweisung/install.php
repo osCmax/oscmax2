@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: install.php 1 2008-08-22 $
+  $Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

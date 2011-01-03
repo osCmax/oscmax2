@@ -1,15 +1,13 @@
 <?php
 /*
-$Id: affiliate_summary.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
 
-  Contribution based on:
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -63,7 +61,7 @@ define('TEXT_COMMISSION_HELP', '<b>Provisionsbetrag</b> zeigt Ihre Provisionsein
 define('TEXT_CLOSE_WINDOW', 'Fenster schliessen [x]');
 
 define('TEXT_GREETING','Willkommen ');
-define('TEXT_AFFILIATE_ID', 'Ihre Partner ID: ');
+define('TEXT_AFFILIATE_ID', 'Ihre Partner Id$
 
 define('IMAGE_BANNERS','Partner Banner');
 define('IMAGE_CLICKTHROUGHS','Bericht &uuml;ber Klicks');

@@ -13,7 +13,7 @@
  * @lastdev $Author:: Rob                                              $:  Author of last commit
  * @lastmod $Date:: 2009-05-25 14:45:39 +0100 (Mon, 25 May 2009)       $:  Date of last commit
  * @version $Rev:: 66                                                  $:  Revision of last commit
- * @Id $Id:: Interface_Cache.php 66 2009-05-25 13:45:39Z Rob           $:  Full Details   
+ * @Id $Id$
  */
 
   interface Interface_Cache {

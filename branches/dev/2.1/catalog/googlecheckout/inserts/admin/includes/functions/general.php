@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright (C) 2008 Google Inc.
+  Copyright 2000 - 2011 osCmax
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id: general.php 160 2009-02-17 20:10:40Z ed.davisson $
+ * $Id$
  * 
  * This is our hook into osCommerce's tep_remove_order() function.
  * 

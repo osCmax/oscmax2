@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: french.php 2.0.15 2010-02-05 09:59:07Z ejsolutions.co.uk $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -335,7 +335,7 @@ define('TEXT_CCVAL_ERROR_INVALID_DATE', 'La date d\'expiration entr&eacute;e pou
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'Le num&eacute; entr&eacute;e pour cette carte de cr&eacute;dit n\'est pas valide.<br>Veuillez v&eacute;rifier le num&eacute;ro et r&eacute;essayez.');
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Le code &agrave; 4 chiffres que vous avez entr&eacute; est: %s<br>Si ce code est correcte, nous n\'acceptons pas ce type de carte cr&eacute;dit.<br>S\'il est erron&eacute;, veuillez r&eacute;essayer.');
 
-define('FOOTER_TEXT_BODY', 'All content and Images Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a><br> Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCMax</a><br>Powered by <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
+define('FOOTER_TEXT_BODY', 'All content and Images Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a><br> Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCmax</a><br>Powered by <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
 
 // BOF: MOD - Checkout Without Account
 define('IMAGE_BUTTON_CREATE_ACCOUNT', 'Créer un compte');

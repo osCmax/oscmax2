@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: articles.php, v1.0 2003/12/04 12:00:00 ra Exp $
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -38,7 +38,7 @@ define('TEXT_ARTICLE_DATE_ADDED', 'Cet article a &eacute;t&eacute; ajout&eacute;
 define('TEXT_ARTICLE_DATE_AVAILABLE', 'Cet article sera publi&eacute; le %s.');
 
 define('TEXT_EDIT_INTRO', 'Veuillez faire les changements n&eacute;cessaires');
-define('TEXT_EDIT_TOPICS_ID', 'Rubrique ID:');
+define('TEXT_EDIT_TOPICS_ID', 'Rubrique Id$
 define('TEXT_EDIT_TOPICS_NAME', 'Nom de la rubrique:');
 define('TEXT_EDIT_SORT_ORDER', 'Ordre de tri:');
 

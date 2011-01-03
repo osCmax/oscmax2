@@ -1,14 +1,14 @@
 <?php
 /*
-  $Id: gv_sent.php,v 1.2 2003/02/18 00:15:52 wilt Exp $
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Gift Voucher System v1.0
-  Copyright (c) 2001,2002 Ian C Wilson
+  Copyright 2000 - 2011 osCmax
   http://www.phesis.org
 
   Released under the GNU General Public License

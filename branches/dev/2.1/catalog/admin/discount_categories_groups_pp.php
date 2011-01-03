@@ -1,12 +1,12 @@
 <?php
 /*
-  $Id: admin/discount_categories_groups_pp.php v1.0 2008/08/24 JanZ Exp $
+  $Id$
   popup window for QPBPP for Separate Pricing Per Customer
   
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
   
-  Copyright (c) 2006
+  Copyright 2000 - 2011 osCmax
   
   Released under the GNU General Public License 
 */

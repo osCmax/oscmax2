@@ -1,9 +1,9 @@
 <?php
 /*
-$Id: usps.php 3.0 2008-03-01 04:59:07Z user $
+$Id$
   ++++ Original contribution by Brad Waite and Fritz Clapp ++++
   ++++ incorporating USPS revisions to service names ++++
-  Copyright 2008 osCommerce
+  Copyright 2000 - 2011 osCmax
   Released under the GNU General Public License
 */
 //VERSION: 4.3.0 ALPHA

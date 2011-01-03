@@ -73,8 +73,8 @@ $facts_array['calc_stock'] = 0; //The summary stock calculated by looking at the
 $facts_array['stock_entries_healthy'] = true; //If any row is sick; this = true; else this = false;
 $facts_array['stock_entries_count'] = 0; //The number of rows this product had in the options products_stock database table.
 $facts_array['sick_stock_entries_count'] = 0;//The number of sick rows this product had in the options products_stock database table.
-$facts_array['lacks_id_array'] = array(); //An array with all the id:s of the options that were lacked anywhere in the options products_stock table.
-$facts_array['intruders_id_array'] = array(); //An array with all the id:s of the options that were intruding anywhere in the options products_stock table.
+$facts_array['lacks_id_array'] = array(); //An array with all the Id$
+$facts_array['intruders_id_array'] = array(); //An array with all the Id$
 
 	$facts_array['has_tracked_options'] = qtpro_product_has_tracked_options($products_id);
 	$facts_array['summary_stock'] = qtpro_get_products_summary_stock($products_id);

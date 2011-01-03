@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: order_total.php,v 1.0 200/05/13 00:04:53 djmonkey1 Exp $
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2007 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
   

@@ -3,7 +3,7 @@
   French Chronopost Shipping module version 20081220
   This module has been adapted to fit in the osCommerce 2.2 MS2-051113.
 
-  Copyright © 2008 Philippe BLAIN <pblain@free.fr>.
+  Copyright 2000 - 2011 osCmax
 
   ------------------------------------------------------------------------------
   This program is free software; you can redistribute it and/or modify

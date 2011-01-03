@@ -2,7 +2,7 @@
 /*
     Specify Fixed Product Image Height or Width
     Ridexbuilder - http://ejsolutions.co.uk
-    osCMax 2010
+    osCmax 2010
     Released under GPL
 */
   $images_dir = DIR_WS_IMAGES; // default catalog images folder;

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: ups_boxes_shipped.php,v 1.0 2007/09/09 JanZ Exp $
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2007 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

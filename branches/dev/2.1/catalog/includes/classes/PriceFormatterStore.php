@@ -1,5 +1,5 @@
 <?php
-/* $Id: PriceFormatterStore.php v 1.2 2008/05/03
+/* $Id$
    adapted for QPBPP for SPPC v 2.0 2008/11/08
    
    an object to store the price breaks and products_quantity of a product once queried by the 

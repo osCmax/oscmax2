@@ -1,12 +1,12 @@
 <?php
 /*
-$Id: indvship.php 3 2006-05-27 04:59:07Z user $
+$Id$
   by D. M. Gremlin
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

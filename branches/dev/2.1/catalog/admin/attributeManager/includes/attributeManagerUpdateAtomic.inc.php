@@ -1,13 +1,13 @@
 <?php
 /*
-  $Id: attributeManagerUpdateAtomic.inc.php,v 1.0 21/02/06 Sam West$
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
   Released under the GNU General Public License
   
-  Copyright © 2006 Kangaroo Partners
+  Copyright 2000 - 2011 osCmax
   http://kangaroopartners.com
   osc@kangaroopartners.com
 */

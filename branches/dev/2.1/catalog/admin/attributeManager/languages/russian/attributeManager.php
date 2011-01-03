@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: attributeManager.php,v 1.0 21/02/06 Sam West$
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com

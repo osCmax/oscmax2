@@ -1,10 +1,10 @@
 <?php
 /*
-  $Id: xsell_products.php, v1
+  $Id$
   The Exchange Project - Community Made Shopping!
   http://www.theexchangeproject.org
 
-  Copyright (c) 2000,2001 The Exchange Project
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

@@ -1,12 +1,12 @@
 <?php
 /*
-$Id: application_top.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
   adapted for Separate Pricing Per Customer 4.2.x, Hide products and categories from groups 2008/08/03
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

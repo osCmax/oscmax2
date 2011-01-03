@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: gv_redeem.php,v 1.1.1.1.2.1 2003/04/18 16:56:03 wilt Exp $
+  $Id$
 
-  osCMax Power E-Commerce
-  http://oscmax.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

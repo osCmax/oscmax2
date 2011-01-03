@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright (C) 2008 Google Inc.
+  Copyright 2000 - 2011 osCmax
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id: shipping_method_generator.php 198 2009-02-25 21:01:36Z ed.davisson $
+ * $Id$
  */
 
 // Add the shippers for which to generate methods.

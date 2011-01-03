@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: database_tables.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -111,9 +111,9 @@ $Id: database_tables.php 3 2006-05-27 04:59:07Z user $
   define('TABLE_HTTP_ERROR', 'http_error');
 // EOF: Http Error Logging
 
-// BOF: osCMax Help System - PGM
+// BOF: osCmax Help System - PGM
   define('TABLE_HELP_PAGES', 'help_pages');
-// EOF: osCMax Help System - PGM
+// EOF: osCmax Help System - PGM
 
 // BOF QPBPP for SPPC v4.2 2006/06/22, QPBPP v2.0 2008/09/05
   define('TABLE_PRODUCTS_PRICE_BREAK', 'products_price_break');

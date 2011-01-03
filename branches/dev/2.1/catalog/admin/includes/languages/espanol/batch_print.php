@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id:Batch_print.php, user Exp $
+  $Id$
 */
 define('TEXT_ORDER_NUMBERS_RANGES', 'Order Number (s), either one # or  range, # - #, or #,#,#');
 define('HEADING_TITLE', 'Batch Print Center');

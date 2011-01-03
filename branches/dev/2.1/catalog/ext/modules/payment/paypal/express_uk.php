@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: express_uk.php 1803 2008-01-11 18:16:37Z user $
+  $Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -82,7 +82,7 @@
 
       $post_string = substr($post_string, 0, -1);
 
-      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUEST-ID: ' . md5($cartID . tep_session_id() . rand())));
+      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUEST-Id$
       $response_array = array();
       parse_str($response, $response_array);
 
@@ -283,7 +283,7 @@
 
       $post_string = substr($post_string, 0, -1);
 
-      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUEST-ID: ' . md5($cartID . tep_session_id() . rand())));
+      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUEST-Id$
       $response_array = array();
       parse_str($response, $response_array);
 

@@ -13,7 +13,7 @@
  * @lastdev $Author:: Rob                                              $:  Author of last commit
  * @lastmod $Date:: 2009-12-10 11:07:43 +0000 (Thu, 10 Dec 2009)       $:  Date of last commit
  * @version $Rev:: 133                                                 $:  Revision of last commit
- * @Id $Id:: usu.php 133 2009-12-10 11:07:43Z Rob                      $:  Full Details   
+ * @Id $Id$
  */
 
 /**

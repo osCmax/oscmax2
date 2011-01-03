@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: email.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 
@@ -331,7 +331,7 @@ $Id: email.php 14 2006-07-28 17:42:07Z user $
       if (tep_not_null($this->html_images)) {
         reset($this->html_images);
         while (list(,$value) = each($this->html_images)) {
-          $this->html = str_replace($value['name'], 'cid:' . $value['cid'], $this->html);
+          $this->html = str_replace($value['name'], 'cId$
         }
       }
 

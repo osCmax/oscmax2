@@ -1,10 +1,10 @@
 <?php
 /*
-  $Id: coupon_admin.php,v 1.1.2.5 2003/05/13 23:28:30 wilt Exp $
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
-  Copyright (c) 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

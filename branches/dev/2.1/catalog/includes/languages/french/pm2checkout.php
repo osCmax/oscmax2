@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: pm2checkout.php,v 1.3 2002/11/18 14:45:23 project3000 Exp $
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

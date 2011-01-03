@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: googlesitemap.php admin page,v 2.0 2/03/2006 developer@eurobigstore.com
+  $Id$
   Released under the GNU General Public License
 */
 

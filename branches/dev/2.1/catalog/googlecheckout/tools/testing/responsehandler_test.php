@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright (C) 2008 Google Inc.
+  Copyright 2000 - 2011 osCmax
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -202,7 +202,7 @@ function send_google_req($url, $merid, $merkey, $postargs) {
   <form action="" method="post">
   <table border="1" cellpadding="2" cellspacing="0" align="center" width="90%">
     <tr>
-      <th align="right">Merchant ID: </th>
+      <th align="right">Merchant Id$
       <td><input type="text" value="<?=@$_POST['sb_id'];?>" name="sb_id" size="100"/><a onclick="show_help(0);" onmouseover="this.style.cursor='help'"><big>&nbsp;&nbsp;?&nbsp;&nbsp;</big></a></td>
     </tr>
     <tr>

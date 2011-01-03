@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: premade_comments.php
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com

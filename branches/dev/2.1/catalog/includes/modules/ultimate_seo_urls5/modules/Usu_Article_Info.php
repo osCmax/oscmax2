@@ -13,7 +13,7 @@
  * @lastdev $Author:: Rob                                              $:  Author of last commit
  * @lastmod $Date:: 2009-11-29 13:12:25 +0000 (Sun, 29 Nov 2009)       $:  Date of last commit
  * @version $Rev:: 107                                                 $:  Revision of last commit
- * @Id $Id:: Usu_Article_Info.php 107 2009-11-29 13:12:25Z Rob         $:  Full Details   
+ * @Id $Id$
  */
 
 class Usu_Article_Info extends aDataMap {

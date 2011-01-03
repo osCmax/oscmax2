@@ -5,7 +5,7 @@
   I.T. Web Experts
   http://www.itwebexperts.com
 
-  Copyright (c) 2009 I.T. Web Experts
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

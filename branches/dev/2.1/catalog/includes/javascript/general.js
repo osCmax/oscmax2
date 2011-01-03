@@ -1,5 +1,5 @@
 /*
-$Id: general.js 3 2006-05-27 04:59:07Z user $
+$Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: virementbancaire,v 1.0 2003/04/30
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2002 osCommerce
 
   Released under the GNU General Public License
   Based on Ausbank.php ; adapted/translated in French by Gelong Shenphen

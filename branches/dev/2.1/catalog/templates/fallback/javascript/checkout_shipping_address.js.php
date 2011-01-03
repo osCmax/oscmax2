@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: form_check.js.php 3 2006-05-27 04:59:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 */
@@ -138,12 +138,12 @@ function check_form(form_name) {
 
 <?php
 /*
-  $Id$
+  $Id: ajax.js.php, v1.0 2008/04/04 19:50:14 insaini Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2003 osCommerce
 
   Released under the GNU General Public License
 */

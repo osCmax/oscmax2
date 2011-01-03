@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: whos_online.php,v 1.0 2009/08/15 15:00:00 hpdl Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2007 osCommerce
 
   Released under the GNU General Public License
 */

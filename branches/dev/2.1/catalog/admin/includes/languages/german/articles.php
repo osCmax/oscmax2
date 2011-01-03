@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: articles.php 3 2006-05-27 04:59:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 */
@@ -38,7 +38,7 @@ define('TEXT_ARTICLE_DATE_ADDED', 'This article was added to our site on %s.');
 define('TEXT_ARTICLE_DATE_AVAILABLE', 'This article will is expected on %s.');
 
 define('TEXT_EDIT_INTRO', 'Please make any necessary changes');
-define('TEXT_EDIT_TOPICS_ID', 'Topic Id$
+define('TEXT_EDIT_TOPICS_ID', 'Topic ID:');
 define('TEXT_EDIT_TOPICS_NAME', 'Topic Name:');
 define('TEXT_EDIT_SORT_ORDER', 'Sort Order:');
 

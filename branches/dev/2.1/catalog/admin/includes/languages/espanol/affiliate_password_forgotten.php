@@ -1,13 +1,15 @@
 <?php
 /*
-  $Id$
+  $Id: affiliate_password_forgotten.php,v 1.4 2003/02/14 00:01:46 harley_vb Exp $
 
+  OSC-Affiliate
 
+  Contribution based on:
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2002 - 2003 osCommerce
 
   Released under the GNU General Public License
 */

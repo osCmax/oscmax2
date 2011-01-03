@@ -1,14 +1,14 @@
 <?php
 /*
-$Id$
+$Id: gv_faq.php 14 2006-07-28 17:42:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax
 
   Gift Voucher System v1.0
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax2001, 2002 Ian C Wilson
   http://www.phesis.org
 
   Released under the GNU General Public License

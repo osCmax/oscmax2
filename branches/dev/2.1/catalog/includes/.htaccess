@@ -1,4 +1,4 @@
-#$Id$
+#$Id: .htaccess 14 2006-07-28 17:42:07Z user $
 #
 # This is used with Apache WebServers
 # The following blocks direct HTTP requests in this directory recursively

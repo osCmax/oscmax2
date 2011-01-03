@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: administrator.php 2009-11-14 19:38:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2009 osCMax, 2006 osCMax ,2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
 */
@@ -30,7 +30,7 @@ $Id$
                                    tep_admin_jqmenu('merchant_info.php' , 'Merchant Application', 'TOP') .
                                    tep_admin_jqmenu('paypal_info.php' , 'Paypal Signup', 'TOP') .
 								   '<li><a href="http://www.aabox.com/ssl-certificates" target="_blank">SSL Certificates</a></li>' .
-								   '<li><a href="http://www.aabox.com/oscmax-hosting" target="_blank">osCmax Hosting</a></li>' .
+								   '<li><a href="http://www.aabox.com/oscmax-hosting" target="_blank">osCMax Hosting</a></li>' .
 								   '<li><a href="http://www.aabox.com/domain-names-and-services" target="_blank">Register Domains</a></li>' .
 								   '</ul>');
   print_r($contents);

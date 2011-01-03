@@ -1,6 +1,6 @@
 <?php
 /*
-$Id$
+$Id: down_for_maintenance.php 3 2006-05-27 04:59:07Z user $
 
   Created by: Linda McGrath osCOMMERCE@WebMakers.com
   
@@ -9,10 +9,10 @@ $Id$
 
   down_for_maintenance.php v1.1
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 */

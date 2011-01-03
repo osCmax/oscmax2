@@ -2,7 +2,7 @@
 /*
     Thumbnail Regenerator
     Ridexbuilder - http://ejsolutions.co.uk
-    osCmax 2010
+    osCMax 2010
     Released under GPL
 */
   $cache_dir = 'cache/';

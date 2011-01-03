@@ -1,12 +1,12 @@
 <?php
 /*
-$Id$
+$Id: recover_cart_sales.php 14 2006-07-28 17:42:07Z user $
  Recover Cart Sales Tool v2.23
 
- osCmax e-Commerce
- http://www.oscmax.com
+ osCMax Power E-Commerce
+ http://oscdox.com
 
- Copyright 2006 osCmax2003 JM Ivler / OSCommerce
+ Copyright 2006 osCMax2003 JM Ivler / OSCommerce
 
  Released under the GNU General Public License
 

@@ -5,10 +5,10 @@
           Based on the FAQ script of adgrafics
           Adjusted by Joeri Stegeman (joeri210 at yahoo.com), The Netherlands
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscmax.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2010 osCMax
 
   Released under the GNU General Public License
   */

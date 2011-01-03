@@ -18,7 +18,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id$
+ * $Id: googlemerchantcalculations.php 153 2009-01-30 00:16:37Z ed.davisson $
  * 
  * Used to create the merchant callback results when a
  * merchant-calculated feedback structure is received.

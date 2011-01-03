@@ -1,10 +1,10 @@
 <?php
 /*
 
-$Id$
-osCmax e-Commerce
-http://www.oscmax.com
-Copyright (c) 2005 osCmax, 2002 osCommerce
+$Id: create_order.php,v 1.1.2.1.2.2 2005/09/21 20:57:35 Michael Sasek Exp $
+osCMax Power E-Commerce
+http://oscdox.com
+Copyright (c) 2005 osCMax, 2002 osCommerce
 Released under the GNU General Public License
 */
 

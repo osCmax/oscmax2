@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: edit_orders_add_product.php v5.0.5 08/27/2007 djmonkey1 Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2007 osCommerce
 
   Released under the GNU General Public License
 

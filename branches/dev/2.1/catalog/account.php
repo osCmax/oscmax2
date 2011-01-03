@@ -2,10 +2,10 @@
 /*
 $Id$
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  $Copyright$
 
   Released under the GNU General Public License
 */

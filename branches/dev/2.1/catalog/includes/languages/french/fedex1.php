@@ -3,10 +3,10 @@
 
   Verions 2.04 for OSC 2.2 MS2+
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2002, 2003 Steve Fatula of Fatula Consulting
   compconsultant@yahoo.com
 
   Released under the GNU General Public License

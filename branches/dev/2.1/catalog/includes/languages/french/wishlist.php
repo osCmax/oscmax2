@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: wishlist.php,v 1.2.2.2 2005/08/04 20:53:46 Michael Sasek Exp $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2003 osCommerce
 
   Released under the GNU General Public License
 */

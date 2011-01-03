@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: install_4.php 3 2006-05-27 04:59:07Z user $
 
-  osCmax e-Commerce
+  osCmax Power E-Commerce
   http://www.oscmax.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2009 osCmax
 
   Released under the GNU General Public License
 */
@@ -55,7 +55,7 @@ $Id$
 
   <h1>Installation Complete</h1>
 
-      <p>Congratulations on installing and configuring osCmax e-Commerce as your online store solution!</p>
+      <p>Congratulations on installing and configuring osCmax Power E-Commerce as your online store solution!</p>
       <p>We wish you all the best with the success of your online store and welcome you to join and participate in our community.</p>
       <p align="right"><i><b>- The osCmax Team</b></i></p>
 </div>

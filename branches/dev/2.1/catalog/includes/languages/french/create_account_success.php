@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: create_account_success.php, french, v 1.9 2003/09/12 23:05:57 jpf Exp $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
   Translated by Gunt - Contact : webmaster@webdesigner.com.fr

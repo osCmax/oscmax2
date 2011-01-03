@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: authorizenet.php,v 1.13 2003/01/03 17:25:43 thomasamoulton Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2002 osCommerce
 
   Released under the GNU General Public License
 */

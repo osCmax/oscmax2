@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id$
+  $Id: Initial Citylink Nextday
   http://www.almatcomputers.co.uk
 
   Released under the GNU General Public License

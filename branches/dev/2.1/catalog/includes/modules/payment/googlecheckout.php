@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright 2000 - 2011 osCmax
+  Copyright (C) 2007 Google Inc.
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@ define('GOOGLECHECKOUT_FILES_VERSION', 'v1.5.0');
 
 /**
  * Google Checkout v1.5.0
- * $Id$
+ * $Id: googlecheckout.php 937 2011-01-03 06:47:14Z michael.oscmax@gmail.com $
  * 
  * This class is the actual payment module for Google Checkout.
  * 

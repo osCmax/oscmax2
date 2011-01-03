@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: validcategories.php,v 0.01 2002/08/17 15:38:34 Richard Fielder
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax2002 Richard Fielder
 
   Released under the GNU General Public License
 */

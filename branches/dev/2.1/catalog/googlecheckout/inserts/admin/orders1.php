@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright 2000 - 2011 osCmax
+  Copyright (C) 2008 Google Inc.
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id$
+ * $Id: orders1.php 169 2009-02-17 21:53:06Z ed.davisson $
  * 
  * This method is meant to be included in catalog/admin/orders.php.
  */

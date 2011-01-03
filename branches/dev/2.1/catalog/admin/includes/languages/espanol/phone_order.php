@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: phone_order.php,v 1.0 2006/09/16 20:57:39 GT $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
 */

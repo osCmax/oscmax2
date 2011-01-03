@@ -1,13 +1,13 @@
 <?php
 /*
-  $Id$
+  $Id: whos_online.php,v 3.5 2008/08/21 SteveDallas Exp $
   
   2009 Oct 11 v3.6.6 MarcusDesign
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2003 osCommerce
 
   Released under the GNU General Public License
 */

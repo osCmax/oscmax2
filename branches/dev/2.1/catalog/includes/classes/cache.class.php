@@ -7,7 +7,7 @@
 || #	Date: 31 January 2005
 || # ------------------------------------------------------------------ # ||
 || #################### //-- COPYRIGHT INFO --// ######################## ||
-|| #	Copyright 2006 osCmax2005 Bobby Easland								# ||
+|| #	Copyright 2006 osCMax2005 Bobby Easland								# ||
 || #	Internet moniker: Chemo											# ||	
 || #	Contact: chemo@mesoimpact.com									# ||
 || #	Commercial Site: http://gigabyte-hosting.com/					# ||
@@ -24,9 +24,9 @@
 || #	GNU General Public License for more details.					# ||
 || #																	# ||
 || #	Script is intended to be used with:								# ||
-|| #	osCmax e-Commerce					# ||
+|| #	osCMax Power E-Commerce					# ||
 || #	http://oscdox.com										# ||
-|| #	Copyright 2006 osCmax									# ||
+|| #	Copyright 2006 osCMax									# ||
 || ###################################################################### ||
 \*========================================================================*/
 

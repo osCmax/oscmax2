@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: Usu_General_Functions.php 107 2009-11-29 13:12:25Z Rob $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2008 osCommerce
 
   Released under the GNU General Public License
 */

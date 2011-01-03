@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: slideshow.php 3 2010-03-31 user pgm
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscmax.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2010 osCMax
 
   Released under the GNU General Public License
 */

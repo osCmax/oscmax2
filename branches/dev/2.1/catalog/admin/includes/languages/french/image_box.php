@@ -20,8 +20,8 @@ define('TEXT_IMAGE_BOX', 'Image Box:');
 define('TEXT_DATE_ADDED', 'Date Added:');
 define('TEXT_LAST_MODIFIED', 'Last Modified:');
 define('TEXT_IMAGE_NONEXISTENT', 'IMAGE DOES NOT EXIST');
-define('TEXT_IMAGE_BOX_PRODUCTS_ID','Link to Products Id$
-define('TEXT_IMAGE_BOX_CATEGORIES_ID','Link to Categories Id$
+define('TEXT_IMAGE_BOX_PRODUCTS_ID','Link to Products ID:');
+define('TEXT_IMAGE_BOX_CATEGORIES_ID','Link to Categories ID:');
 
 define('TEXT_NEW_INTRO', 'Please fill out the following information for the new Image Box');
 define('TEXT_EDIT_INTRO', 'Please make any necessary changes');

@@ -1,4 +1,4 @@
-# $Id$
+# $Id: .htaccess 1821 2008-01-15 09:58:55Z hpdl $
 #
 # This is used with Apache WebServers
 # The following blocks direct HTTP requests in this directory recursively

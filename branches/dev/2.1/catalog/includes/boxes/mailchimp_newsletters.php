@@ -1,6 +1,6 @@
 <?php
 /*
-$Id$
+$Id: mailchimp.php $
 
 osCmax e-Commerce
 http://www.osCmax.com

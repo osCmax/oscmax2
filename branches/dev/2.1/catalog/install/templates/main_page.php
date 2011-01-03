@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: main_page.php 3 2006-05-27 04:59:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCmax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2008 osCmax
 
   Released under the GNU General Public License
 */
@@ -29,7 +29,7 @@ $Id$
   <div>
     <div style="float: right; padding-top: 25px; padding-right: 25px; color: #000000; font-size:14px; font-weight: bold;"><a href="http://www.oscmax.com" target="_blank">osCmax Website</a> &nbsp;|&nbsp; <a href="http://www.osCmax.com/forums" target="_blank">Support</a> &nbsp;|&nbsp; <a href="http://shop.oscmax.com/" target="_blank">Documentation</a> &nbsp;|&nbsp; <a href="http://wiki.oscdox.com/" target="_blank">Wiki</a></div>
 
-    <a href="index.php"><img src="images/oscmax-logo.png" border="0" width="187" height="54" alt="osCmax" title="osCmax e-Commerce <?php echo PROJECT_VERSION; ?>" style="margin: 5px 10px 0px 10px;" /></a>
+    <a href="index.php"><img src="images/oscmax-logo.png" border="0" width="187" height="54" alt="osCmax" title="osCmax Power E-Commerce <?php echo PROJECT_VERSION; ?>" style="margin: 5px 10px 0px 10px;" /></a>
   </div>
 </div>
 

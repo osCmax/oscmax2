@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: e-gold.php,v 1 2003/07/23 
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 

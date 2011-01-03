@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: admin_files.php,v 1.1 2005/05/04 20:07:31 tropic Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2002 osCommerce
 
   Released under the GNU General Public License
 */

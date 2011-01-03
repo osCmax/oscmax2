@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id$
+  $Id: googlesitemap.php,v 2.00 2003/03/02 ep Exp $
   
   by Davide Duca, Italy/Bulgaria
 
@@ -10,7 +10,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2003 osCommerce
 
   Released under the GNU General Public License
 */

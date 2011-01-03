@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: catalog.php 2009-11-14 19:38:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2009 osCMax, 2006 osCMax ,2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
 */

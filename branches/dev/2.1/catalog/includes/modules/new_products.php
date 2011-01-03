@@ -1,12 +1,12 @@
 <?php
 /*
-$Id$
+$Id: new_products.php 3 2006-05-27 04:59:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
   adapted for Separate Pricing Per Customer v4.2, Hide products and categories from groups 2008/08/05
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */

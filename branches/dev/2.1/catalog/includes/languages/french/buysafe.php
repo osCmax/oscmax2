@@ -2,7 +2,7 @@
 
 /*
 
-  $Id$
+  $Id: buysafe.php,v 1.1 2007/03/14 23:09:49 hpdl Exp $
 
 
 
@@ -12,7 +12,7 @@
 
 
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2002 osCommerce
 
 
 

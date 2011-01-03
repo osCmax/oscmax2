@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: stats_recover_cart_sales.php,v 1.1.2.1 2005/06/12 00:04:35 Michael Sasek Exp $
   Recover Cart Sales ENGLISH Language File
 
   report_recover_cart_sales contrib: JM Ivler 11/23/03
   (c) Ivler/ osCommerce
-  http://www.oscmax.com
+  http://oscdox.com
 
   Released under the GNU General Public License
 

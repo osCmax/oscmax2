@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: table.php,v 1.1.1.1.2.1 2005/06/12 00:04:39 Michael Sasek Exp $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
   Translated by Gunt - Contact : webmaster@webdesigner.com.fr

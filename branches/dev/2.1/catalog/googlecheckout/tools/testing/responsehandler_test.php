@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright 2000 - 2011 osCmax
+  Copyright (C) 2008 Google Inc.
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id$
+ * $Id: responsehandler_test.php 937 2011-01-03 06:47:14Z michael.oscmax@gmail.com $
  * 
  * Script to emulate a Google Checkout request made to a merchant response handler.
  * 
@@ -202,7 +202,7 @@ function send_google_req($url, $merid, $merkey, $postargs) {
   <form action="" method="post">
   <table border="1" cellpadding="2" cellspacing="0" align="center" width="90%">
     <tr>
-      <th align="right">Merchant Id$
+      <th align="right">Merchant ID: </th>
       <td><input type="text" value="<?=@$_POST['sb_id'];?>" name="sb_id" size="100"/><a onclick="show_help(0);" onmouseover="this.style.cursor='help'"><big>&nbsp;&nbsp;?&nbsp;&nbsp;</big></a></td>
     </tr>
     <tr>

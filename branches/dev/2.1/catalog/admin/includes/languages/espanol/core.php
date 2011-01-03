@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: core.php 3 2006-05-27 04:59:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */
@@ -107,7 +107,7 @@ define('CATEGORY_CONTACT', 'Contact Information');
 define('CATEGORY_OPTIONS', 'Options');
 define('CATEGORY_PASSWORD', 'Password');
 define('CATEGORY_CORRECT', 'If this is the right customer, press the Confirm button below.');
-define('ENTRY_CUSTOMERS_ID', 'Id$
+define('ENTRY_CUSTOMERS_ID', 'ID:');
 define('ENTRY_CUSTOMERS_ID_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
 define('ENTRY_COMPANY', 'Company Name:');
 define('ENTRY_COMPANY_ERROR', '');
@@ -138,7 +138,7 @@ define('ENTRY_SUBURB_TEXT', '');
 define('ENTRY_POST_CODE', 'Post Code:');
 define('ENTRY_POST_CODE_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_POSTCODE_MIN_LENGTH . ' chars</font></small>');
 define('ENTRY_POST_CODE_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_CITY', 'City:'); //Changed for osCmax bug #27
+define('ENTRY_CITY', 'City:'); //Changed for osCMax bug #27
 define('ENTRY_CITY_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_CITY_MIN_LENGTH . ' chars</font></small>');
 define('ENTRY_CITY_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
 define('ENTRY_STATE', 'State/Province:');
@@ -168,11 +168,11 @@ define('PASSWORD_HIDDEN', '--HIDDEN--');
 
 // header text in includes/header.php
 define('HEADER_TITLE_TOP', 'Administraci&oacute;n');
-define('HEADER_TITLE_SUPPORT_SITE', 'osCmax');
+define('HEADER_TITLE_SUPPORT_SITE', 'osCMax');
 define('HEADER_TITLE_ONLINE_CATALOG', 'Cat&aacute;logo');
 define('HEADER_TITLE_ADMINISTRATION', 'Administraci&oacute;n');
 define('HEADER_TITLE_OSCDOX', 'osCDox.com');
-define('HEADER_TITLE_AABOX', 'osCmax');
+define('HEADER_TITLE_AABOX', 'osCMax');
 
 // text for gender
 define('MALE', 'Var&oacute;n');

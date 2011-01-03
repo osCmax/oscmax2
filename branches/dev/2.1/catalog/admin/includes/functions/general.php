@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: general.php 14 2006-07-28 17:42:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 adapted for Separate Pricing Per Customer v4.20 2005/01/29, QPBPP for SPPC v2.0 2008/10/25 and Hide products and categories from customer groups
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 */

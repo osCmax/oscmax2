@@ -17,7 +17,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id$
+ * $Id: shipping_metrics_commandline.php 153 2009-01-30 00:16:37Z ed.davisson $
  * 
  * Tool to test WS response time.
  * 

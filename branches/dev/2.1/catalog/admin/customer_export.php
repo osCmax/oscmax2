@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: customer_export.php,v 1.5 2002/03/08 22:10:08 hpdl Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2002 osCommerce
 
   Released under the GNU General Public License
 */

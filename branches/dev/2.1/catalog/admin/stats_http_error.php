@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: stats_http_error.php 3 2009-11-19 15:09:00 user pgm
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2009 osCMax
 
   Released under the GNU General Public License
 */

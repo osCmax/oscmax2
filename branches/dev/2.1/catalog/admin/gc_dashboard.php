@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright 2000 - 2011 osCmax
+  Copyright (C) 2009 Google Inc.
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id$
+ * $Id: gc_dashboard.php 937 2011-01-03 06:47:14Z michael.oscmax@gmail.com $
  * 
  * Dashboard page for Google Checkout configuration.
  * 

@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id$
+  $Id: easypopulate.php,v 1.1.1.1 2005/01/15 06:43:48 Michael Sasek Exp $
   Released under the GNU General Public License
 
   Borja Bravo Alférez

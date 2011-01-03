@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: contact_us.php 8 2006-06-22 02:48:59Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 */

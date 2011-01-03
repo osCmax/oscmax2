@@ -98,7 +98,7 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 <div id="pageFrame">
 
 <div id="logoFrame">
-  <img id="logo" src="<?php echo (bts_select('images','store_logo.gif')); // BTSv1.5 ?>" alt="osCmax">
+  <img id="logo" src="<?php echo (bts_select('images','store_logo.gif')); // BTSv1.5 ?>" alt="osCMax">
   <div id="imageNav"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_account.gif', HEADER_TITLE_MY_ACCOUNT) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_IMAGES . 'header_cart.gif', HEADER_TITLE_CART_CONTENTS) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_checkout.gif', HEADER_TITLE_CHECKOUT) . '</a>'; ?></div>
 </div>
 

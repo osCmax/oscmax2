@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: cod.php,v 1.28 2003/02/14 05:51:31 hpdl Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2003 osCommerce
 
   Released under the GNU General Public License
 */

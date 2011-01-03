@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id$
+  $Id: wishlist.php,v 3.0  2005/08/24 Dennis Blake
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 

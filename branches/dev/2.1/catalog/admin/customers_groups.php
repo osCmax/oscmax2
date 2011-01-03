@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id$
+  $Id: catalog/admin/customers_groups.php v1.0 2005/02/22
   for Separate Pricing Per Customer
 
   adapted from the file of the same name from TotalB2B
@@ -10,10 +10,10 @@
   Discount_Groups_v1.1, by Enrico Drusiani, 2003/5/22
   setting of allowed payments inspired by b2bsuite_b097 but implemented differently
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax2005 osCommerce
 
   Released under the GNU General Public License
 */

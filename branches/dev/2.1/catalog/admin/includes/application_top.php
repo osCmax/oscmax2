@@ -1,11 +1,12 @@
 <?php
 /*
-$Id$
+$Id: application_top.php 18 2006-08-04 19:02:36Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
+adapted for Hide products and categories from customer groups for SPPC 2008/08/02
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 */

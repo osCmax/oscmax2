@@ -1,6 +1,6 @@
 <?php
 /*
-$Id$
+$Id: xmldocument.php 3 2006-05-27 04:59:07Z user $
     
     Written by Torin Walker
     torinwalker@rogers.com

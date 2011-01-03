@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: image_resize.php $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2010 osCMax & ejsolutions.co.uk
   Original work using phpThumb() by James Heinrich <info@silisoftware.com>
 
   Released under the GNU General Public License

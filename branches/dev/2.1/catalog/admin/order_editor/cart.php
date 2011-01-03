@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: cart.php v5.0 07/19/2007 djmonkey1 Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2007 osCommerce
 
   Released under the GNU General Public License
 */

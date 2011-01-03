@@ -1,17 +1,17 @@
 <?php
 /*
-  $Id$
+  $Id: sofortueberweisung_direct.php 1797 2008-01-11 14:55:19Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
-  Copyright 2000 - 2011 osCmax
+  Copyright 2008 osCMax
+  Copyright (c) 2006 - 2007 Henri Schmidhuber (http://www.in-solution.de)
 
   Released under the GNU General Public License
 */
 
-    define('MODULE_PAYMENT_SOFORTUEBERWEISUNG_DIRECT_TEXT_DESCRIPTION', '<img src="images/icons/icon_popup.gif" border="0" alt="">&nbsp;<a href="https://www.sofortueberweisung.de/cms/index.php?vpartner=21" target="_blank" style="text-decoration: underline; font-weight: bold;">Sofortüberweisung Webseite besuchen</a>&nbsp;<a href="javascript:toggleDivBlock(\'sofortueberweisungInfo\');">(info)</a><span id="sofortueberweisungInfo" style="display: none;"><br><i>Bei Benutzung dieses Links erh&auml;lt osCmax f&uuml;r eine Neukundenvermittlung einen kleinen Bonus.</i></span><br><br>Kontonummer Test Info:<br><br>BLZ#: 88888888');
+    define('MODULE_PAYMENT_SOFORTUEBERWEISUNG_DIRECT_TEXT_DESCRIPTION', '<img src="images/icons/icon_popup.gif" border="0" alt="">&nbsp;<a href="https://www.sofortueberweisung.de/cms/index.php?vpartner=21" target="_blank" style="text-decoration: underline; font-weight: bold;">Sofortüberweisung Webseite besuchen</a>&nbsp;<a href="javascript:toggleDivBlock(\'sofortueberweisungInfo\');">(info)</a><span id="sofortueberweisungInfo" style="display: none;"><br><i>Bei Benutzung dieses Links erh&auml;lt osCMax f&uuml;r eine Neukundenvermittlung einen kleinen Bonus.</i></span><br><br>Kontonummer Test Info:<br><br>BLZ#: 88888888');
 
 
   define('MODULE_PAYMENT_SOFORTUEBERWEISUNG_DIRECT_TEXT_TITLE', 'Sofortüberweisung Direkt');

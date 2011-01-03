@@ -1,11 +1,11 @@
 <?php
 /* 
-$Id$
+$Id: ap_products.php 12 2006-06-22 04:10:28Z user $
 
-osCmax e-Commerce 
+osCMax Power E-Commerce 
 <http://oscdox.com> 
 
-Copyright 2006 osCmax2005 osCmax, 2002 osCommerce 
+Copyright 2006 osCMax2005 osCMax, 2002 osCommerce 
 
 Released under the GNU General Public License 
 */ 

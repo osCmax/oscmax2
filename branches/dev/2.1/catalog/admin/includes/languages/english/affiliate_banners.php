@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: affiliate_banners.php,v 2.0 2002/09/29 SDK
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax2002 -2003 osCommerce
 
   Released under the GNU General Public License
 */

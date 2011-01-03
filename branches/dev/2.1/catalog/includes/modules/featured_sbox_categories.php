@@ -1,13 +1,13 @@
 <?php
 /* 
-  $Id$
+  $Id: featured_categories.php,v 1.01 03/10/2004 dd/mm/yyyyy 21:00:00 surfalot.com Exp $
 
   Open Featured Sets categories listing module
 
 Made for:
   osCommerce, Open Source E-Commerce Solutions 
   http://www.oscommerce.com 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2004 osCommerce 
   Released under the GNU General Public License 
   
 */

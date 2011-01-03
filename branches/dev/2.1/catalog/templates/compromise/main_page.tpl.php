@@ -2,7 +2,7 @@
 /*
   HTML template for the BTS
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2005 Paul Mathôt Haarlem Netherlands
   http://www.panda.nl
 
   Released under the GNU General Public License

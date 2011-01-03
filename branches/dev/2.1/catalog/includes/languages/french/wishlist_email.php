@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: wishlist_email.php,v 1 2003/11/20
 
   OS Commerce - Community Made Shopping!
-  http://www.oscmax.com
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2000,2001 The Exchange Project
 
   Released under the GNU General Public License
 */

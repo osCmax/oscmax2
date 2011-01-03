@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: footer.php 3 2006-05-27 04:59:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 */
@@ -48,7 +48,7 @@ $Id$
   thus can not be removed, or can only be modified
   appropriately.
 
-  For more information please vist osCmax
+  For more information please vist osCMax
   support site:
 
   http://oscmax.com/

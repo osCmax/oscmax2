@@ -1,15 +1,15 @@
 <?php
 /*
-  $Id$
+  $Id: http_client.php,v 1.1 2002/11/01 02:26:03 hpdl Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2002 osCommerce
 
   Released under the GNU General Public License
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2001 Leo West <west_leo@yahoo-REMOVE-.com> Net_HTTP_Client v0.6
 
   Minimal Example:
 

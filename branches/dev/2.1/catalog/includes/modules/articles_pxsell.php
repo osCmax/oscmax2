@@ -1,7 +1,7 @@
 
 <?php
 /* 
-  $Id$
+  $Id: articles_pxsell.php, v1.0 2006/03/11 12:00:00 Rigadin $
 
 osCommerce, Open Source E-Commerce Solutions 
   http://www.oscommerce.com

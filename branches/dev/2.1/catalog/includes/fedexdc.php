@@ -4,8 +4,8 @@ $server = 'test'; // which fedex server to use: test or production
 $request_referer = 'localhost'; // base url for site, e.g.: 'yoursite.com'
 
 /*
-$Id$
-Copyright 2006 osCmax2003 Vermonster LLC
+$Id: fedexdc.php 3 2006-05-27 04:59:07Z user $
+Copyright 2006 osCMax2003 Vermonster LLC
 All rights reserved.
 
 This library is free software; you can redistribute it and/or

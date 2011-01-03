@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: extra_fields.php ver 2.2 by Kevin L. Shelton 2010-06-22
   
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2009 osCommerce
 
   Released under the GNU General Public License
 */

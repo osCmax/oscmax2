@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright 2000 - 2011 osCmax
+  Copyright (C) 2009 Google Inc.
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@ require_once(DIR_FS_CATALOG . 'googlecheckout/library/google_sitemap_builder.php
 
 /**
  * Google Checkout v1.5.0
- * $Id$
+ * $Id: google_cron_hook.php 937 2011-01-03 06:47:14Z michael.oscmax@gmail.com $
  * 
  * We construct and execute a GoogleCronHook every time the merchant
  * visits the "orders" or "modules" page. This allows to simulate

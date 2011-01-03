@@ -1,18 +1,18 @@
 <?php
 /*
-  $Id$
+  $Id: paypal_uk_direct.php 1800 2008-01-11 16:33:02Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */
 
   define('MODULE_PAYMENT_PAYPAL_UK_DIRECT_TEXT_TITLE', 'PayPal Website Payments Pro (UK) Direct Payments');
   define('MODULE_PAYMENT_PAYPAL_UK_DIRECT_TEXT_PUBLIC_TITLE', 'Credit or Debit Card (Processed securely by PayPal)');
-  define('MODULE_PAYMENT_PAYPAL_UK_DIRECT_TEXT_DESCRIPTION', '<b>Note: PayPal requires the PayPal Website Payments Pro (UK) Express Checkout payment module to be enabled if this module is activated.</b><br /><br /><img src="images/icons/icon_popup.gif" border="0" alt="">&nbsp;<a href="https://www.paypal.com/us/mrb/pal=QFHLNU89TLJYA" target="_blank" style="text-decoration: underline; font-weight: bold;">Visit PayPal Website</a>&nbsp;<a href="javascript:toggleDivBlock(\'paypalDirectUKInfo\');">(info)</a><span id="paypalDirectUKInfo" style="display: none;"><br><i>Using the above link to signup at PayPal grants osCmax a small financial bonus for referring a customer.</i></span>');
+  define('MODULE_PAYMENT_PAYPAL_UK_DIRECT_TEXT_DESCRIPTION', '<b>Note: PayPal requires the PayPal Website Payments Pro (UK) Express Checkout payment module to be enabled if this module is activated.</b><br /><br /><img src="images/icons/icon_popup.gif" border="0" alt="">&nbsp;<a href="https://www.paypal.com/us/mrb/pal=QFHLNU89TLJYA" target="_blank" style="text-decoration: underline; font-weight: bold;">Visit PayPal Website</a>&nbsp;<a href="javascript:toggleDivBlock(\'paypalDirectUKInfo\');">(info)</a><span id="paypalDirectUKInfo" style="display: none;"><br><i>Using the above link to signup at PayPal grants osCMax a small financial bonus for referring a customer.</i></span>');
   define('MODULE_PAYMENT_PAYPAL_UK_DIRECT_CARD_OWNER', 'Card Owner:');
   define('MODULE_PAYMENT_PAYPAL_UK_DIRECT_CARD_TYPE', 'Card Type:');
   define('MODULE_PAYMENT_PAYPAL_UK_DIRECT_CARD_NUMBER', 'Card Number:');

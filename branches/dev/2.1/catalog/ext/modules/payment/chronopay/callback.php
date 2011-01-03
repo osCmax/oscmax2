@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: callback.php 1808 2008-01-13 03:56:36Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */

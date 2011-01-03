@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright 2000 - 2011 osCmax
+  Copyright (C) 2007 Google Inc.
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id$
+ * $Id: responsehandler.php 203 2009-02-27 17:58:46Z ed.davisson $
  * 
  * Script invoked for any callback notifications from the Checkout server.
  *

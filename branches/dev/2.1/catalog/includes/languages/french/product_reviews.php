@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: product_reviews.php,v 1.1.1.1.2.1 2005/06/12 00:04:34 Michael Sasek Exp $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2004 osCommerce
 
   Released under the GNU General Public License
 **** ( J.LAURIOL steaknco.com 08/04 ) ****

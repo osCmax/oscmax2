@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: catalog_products_with_images.php V 3.0
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 */

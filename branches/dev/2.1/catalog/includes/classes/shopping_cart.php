@@ -1,12 +1,12 @@
 <?php
 /*
-$Id$
+$Id: shopping_cart.php 14 2006-07-28 17:42:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
   adapted for Separate Pricing Per Customer v4.2 2008/03/07, Hide products and categories from groups 2008/08/03
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax
 
   Released under the GNU General Public License
 */

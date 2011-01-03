@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: article_header_tags.php,v 1.1.2.1 2005/06/12 00:03:45 Michael Sasek Exp $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2003 osCommerce
 
   Released under the GNU General Public License
 */

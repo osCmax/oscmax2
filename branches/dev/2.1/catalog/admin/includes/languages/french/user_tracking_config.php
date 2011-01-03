@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: user_tracking_config.php,v 1.30 2003/03/10 10:20:11 robert Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2002 osCommerce
 
   Released under the GNU General Public License
 */

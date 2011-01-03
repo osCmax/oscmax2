@@ -13,7 +13,7 @@
  * @lastdev $Author:: Rob                                              $:  Author of last commit
  * @lastmod $Date:: 2009-11-29 13:12:25 +0000 (Sun, 29 Nov 2009)       $:  Date of last commit
  * @version $Rev:: 107                                                 $:  Revision of last commit
- * @Id $Id$
+ * @Id $Id:: Usu_Cache_Database.php 107 2009-11-29 13:12:25Z Rob       $:  Full Details   
  */
  
   final class Usu_Cache_Database implements Interface_Cache {

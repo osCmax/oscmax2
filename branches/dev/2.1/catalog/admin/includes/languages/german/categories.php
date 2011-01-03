@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: categories.php 3 2006-05-27 04:59:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
 */
@@ -37,7 +37,7 @@ define('TEXT_PRODUCT_DATE_ADDED', 'Diesen Artikel haben wir am %s in unseren Kat
 define('TEXT_PRODUCT_DATE_AVAILABLE', 'Dieser Artikel ist erh&auml;ltlich ab %s.');
 
 define('TEXT_EDIT_INTRO', 'Bitte f&uuml;hren Sie alle notwendigen &Auml;nderungen durch.');
-define('TEXT_EDIT_CATEGORIES_ID', 'Kategorie Id$
+define('TEXT_EDIT_CATEGORIES_ID', 'Kategorie ID:');
 define('TEXT_EDIT_CATEGORIES_NAME', 'Kategorie Name:');
 define('TEXT_EDIT_CATEGORIES_IMAGE', 'Kategorie Bild:');
 define('TEXT_EDIT_SORT_ORDER', 'Sortierreihenfolge:');

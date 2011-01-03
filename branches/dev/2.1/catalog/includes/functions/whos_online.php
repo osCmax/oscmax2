@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id$
+  $Id: whos_online.php,v 3.5 2008/02/06 SteveDallas Exp $
 
   2008 Feb 06 v3.5 Glen Hoag aka SteveDallas Moved hostname resolution here to reduce admin tool load
 
@@ -9,7 +9,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2003 osCommerce
 
   Released under the GNU General Public License
 */

@@ -1,13 +1,13 @@
 <?php
 /*
-  $Id$
+  $Id: attributeManager.php,v 1.0 21/02/06 Sam West$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
   Released under the GNU General Public License
   
-  Copyright 2000 - 2011 osCmax
+  Copyright © 2006 Kangaroo Partners
   http://kangaroopartners.com
   osc@kangaroopartners.com
 */
@@ -170,7 +170,7 @@ if(!isset($_GET['target']) || 'currentAttributes' == $_GET['target']) {
 					<?php echo tep_draw_pull_down_menu("new_option_value_$optionId",$attributeManager->buildOptionValueDropDown($optionId),$selectedOptionValue,'style="margin:3px 0px 3px 0px;" id="new_option_value_'.$optionId.'"')?>
 					<input type="image" src="attributeManager/images/icon_add.png" value="Add" border="0" onclick="return amAddOptionValueToProduct('<?php echo $optionId?>');" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_ADDS_ATTRIBUTE_TO_OPTION, $optionInfo['name'])); ?>" />
 				
-					<input type="image" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_ADDS_NEW_VALUE_TO_OPTION,$optionInfo['name'])) ?>" border="0" src="attributeManager/images/icon_add_new.png" onclick="return customPrompt('amAddNewOptionValueToProduct','<?php echo addslashes("option_Id$
+					<input type="image" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_ADDS_NEW_VALUE_TO_OPTION,$optionInfo['name'])) ?>" border="0" src="attributeManager/images/icon_add_new.png" onclick="return customPrompt('amAddNewOptionValueToProduct','<?php echo addslashes("option_id:$optionId|option_name:".str_replace('"','&quot;',$optionInfo['name']))?>');" />
 <?php
 if(false){
 ?>
@@ -178,14 +178,14 @@ if(false){
 <?php
 }
 ?>
-					<input type="image" border="0" onClick="return customPrompt('amRemoveOptionFromProduct','<?php echo addslashes("option_Id$
+					<input type="image" border="0" onClick="return customPrompt('amRemoveOptionFromProduct','<?php echo addslashes("option_id:$optionId|option_name:".str_replace('"','&quot;',$optionInfo['name']))?>');" src="attributeManager/images/icon_delete.png" title="<?php echo htmlspecialchars(addslashes(sprintf(AM_AJAX_PRODUCT_REMOVES_OPTION_AND_ITS_VALUES,$optionInfo['name'],$numValues))) ?>" />
 
 			
 					<?php
 					if(AM_USE_SORT_ORDER) {
 					?>	
-					<input type="image" onclick="return amMoveOption('<?php echo 'option_Id$
-					<input type="image" onclick="return amMoveOption('<?php echo 'option_Id$
+					<input type="image" onclick="return amMoveOption('<?php echo 'option_id:'.$optionId ; ?>', 'up');" src="attributeManager/images/icon_up.png" title="Moves option up" /> 
+					<input type="image" onclick="return amMoveOption('<?php echo 'option_id:'.$optionId ; ?>', 'down');" src="attributeManager/images/icon_down.png" title="Moves option down" /> 
 					<?php
 					}
 					?>
@@ -221,13 +221,13 @@ if(false){
 
 						?>
 						
-					<input type="image" border="0" onClick="return customPrompt('amEditDownloadForProduct','<?php echo addslashes('option_Id$
-					<input type="image" border="0" onClick="return customPrompt('amDeleteDownloadForProduct','<?php echo addslashes('option_Id$
+					<input type="image" border="0" onClick="return customPrompt('amEditDownloadForProduct','<?php echo addslashes('option_id:' . $optionId . '|products_attributes_filename:' . $optionValueInfo['products_attributes_filename'] . '|products_attributes_maxdays:'.$optionValueInfo['products_attributes_maxdays']  . '|products_attributes_maxcount:'.$optionValueInfo['products_attributes_maxcount'] .'|option_value_name:'.str_replace('"','&quot;',$optionValueInfo['name'] .'|products_attributes_id:'.$optionValueInfo['products_attributes_id']))?>');" src="attributeManager/images/icon_down_edit.png" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_DOWLNOAD_EDIT,$optionValueInfo['name'],$optionInfo['name'])) ?>" />
+					<input type="image" border="0" onClick="return customPrompt('amDeleteDownloadForProduct','<?php echo addslashes('option_id:' . $optionId . '|option_value_name:'.str_replace('"','&quot;',$optionValueInfo['name']) .'|products_attributes_id:'.$optionValueInfo['products_attributes_id'])?>');" src="attributeManager/images/icon_down_delete.png" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_DOWLNOAD_DELETE,$optionValueInfo['name'],$optionInfo['name'])) ?>" style="margin-right: 30px;" />
 							
 					<?php
 					} else {
 					?>
-					<input type="image" border="0" onClick="return customPrompt('amAddNewDownloadForProduct','<?php echo addslashes('option_Id$
+					<input type="image" border="0" onClick="return customPrompt('amAddNewDownloadForProduct','<?php echo addslashes('option_id:' . $optionId .'|option_value_id:'.$optionValueId . '|option_value_name:'.str_replace('"','&quot;',$optionValueInfo['name']).'|products_attributes_id:'.$optionValueInfo['products_attributes_id'])?>');" src="attributeManager/images/icon_download.png" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_DOWLNOAD_ADD_NEW,$optionValueInfo['name'],$optionInfo['name'])) ?>" style="margin-right: 30px;" />		
 <?php					
 					}	
 
@@ -261,12 +261,12 @@ if(false){
 <?php
 }
 ?>
-					<input type="image" border="0" onClick="return customPrompt('amRemoveOptionValueFromProduct','<?php echo addslashes("option_Id$
+					<input type="image" border="0" onClick="return customPrompt('amRemoveOptionValueFromProduct','<?php echo addslashes("option_id:$optionId|option_value_id:$optionValueId|option_value_name:".str_replace('"','&quot;',$optionValueInfo['name']))?>');" src="attributeManager/images/icon_delete.png" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_PRODUCT_REMOVES_VALUE_FROM_OPTION,$optionValueInfo['name'],$optionInfo['name'])) ?>" />
 					<?php
 					if(AM_USE_SORT_ORDER) {
 					?>	
-						<input type="image" onclick="return amMoveOptionValue('<?php echo 'option_Id$
-						<input type="image" onclick="return amMoveOptionValue('<?php echo 'option_Id$
+						<input type="image" onclick="return amMoveOptionValue('<?php echo 'option_id:'.$optionId.'|option_value_id:'.$optionValueId.'|products_attributes_id:'.$optionValueInfo['products_attributes_id']; ?>', 'up');" src="attributeManager/images/icon_up.png" title="<?php echo AM_AJAX_MOVES_VALUE_UP?>" /> 
+						<input type="image" onclick="return amMoveOptionValue('<?php echo 'option_id:'.$optionId.'|option_value_id:'.$optionValueId.'|products_attributes_id:'.$optionValueInfo['products_attributes_id']; ?>', 'down');" src="attributeManager/images/icon_down.png" title="<?php echo AM_AJAX_MOVES_VALUE_DOWN?>" />  
 					<?php
 					}
 					?>
@@ -477,7 +477,7 @@ if (AM_USE_QT_PRO) {
 				<span style="margin-right:41px;">
 				<?php echo tep_draw_input_field("productStockQuantity_$rec[products_stock_id]", $rec[products_stock_quantity], ' style="margin:3px 0px 3px 0px;" id="productStockQuantity_'.$rec[products_stock_id].'" size="4" onChange="return amUpdateProductStockQuantity(\''.$rec[products_stock_id].'\');"'); ?>
 				</span>
-				<input type="image" border="0" onClick="return customPrompt('amRemoveStockOptionValueFromProduct','<?php echo addslashes("option_Id$
+				<input type="image" border="0" onClick="return customPrompt('amRemoveStockOptionValueFromProduct','<?php echo addslashes("option_id:$rec[products_stock_id]")?>');" src="attributeManager/images/icon_delete.png" title="<?php echo AM_AJAX_DELETES_ATTRIBUTE_FROM_PRODUCT?>" />
 			</td>
 		</tr>
 <?php

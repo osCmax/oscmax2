@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: validations.php $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2010 osCMax
 
   Released under the GNU General Public License
 */

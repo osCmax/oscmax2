@@ -344,7 +344,7 @@ foreach ($epf as $e) {
 
   $listing_sql = $select_str . $from_str . $where_str . $order_str;
 
-// BOF: GrId$
+// BOF: Grid:List Switching
         // initial set from admin
         if ( (!isset($_GET['gridlist'])) && (!isset($_SESSION['gridlist'])) ) {
 		  if (PRODUCT_LIST_TYPE == 0) { $gridlist = 'list'; } else { $gridlist = 'grid'; }
@@ -361,7 +361,7 @@ foreach ($epf as $e) {
         } else {
           include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING_COL);
         }
-// EOF: GrId$
+// EOF: Grid:List Switching
 ?>
         </td>
       </tr>

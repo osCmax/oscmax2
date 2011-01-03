@@ -1,6 +1,6 @@
 <?php
 /*
-$Id$
+$Id: stats_monthly_sales.php 3 2006-05-27 04:59:07Z user $
 
   contributed by Fritz Clapp <fritz@sonnybarger.com>
 
@@ -36,9 +36,9 @@ The assumptions made for this feature may not be appropriate for all stores.
 The taxed column summarizes subtotals for orders in which tax was charged.
 The nontaxed column is the subtotal for the row less the taxed column value.
 
-  osCmax e-Commerce
-  http://www.oscmax.com
-  Copyright 2000 - 2011 osCmax
+  osCMax Power E-Commerce
+  http://oscdox.com
+  Copyright 2006 osCMax2004 osCommerce
   Released under the GNU General Public License
 */
 

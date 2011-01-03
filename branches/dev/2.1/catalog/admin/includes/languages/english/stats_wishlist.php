@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: stats_wishlist.php 2005/11/06
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2002 osCommerce
 
   Released under the GNU General Public License
 */

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: stats_low_stock.php $
 
   The Exchange Project - Community Made Shopping!
   http://www.theexchangeproject.org
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2000,2001 The Exchange Project
 
   Released under the GNU General Public License
 */

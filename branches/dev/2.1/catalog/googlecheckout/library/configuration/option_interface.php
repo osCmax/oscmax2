@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright 2000 - 2011 osCmax
+  Copyright (C) 2009 Google Inc.
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id$
+ * $Id: option_interface.php 937 2011-01-03 06:47:14Z michael.oscmax@gmail.com $
  * 
  * An interface for option classes. Inheritance is a PHP5 option, so we
  * may not want to use it explicitly, but this can still serve as a guide

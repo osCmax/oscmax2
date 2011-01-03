@@ -1,17 +1,17 @@
 <?php
 /*
-$Id$
+$Id: hosting_info.php 3 2006-05-27 04:59:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Purchase osCmax Virtual Hosting');
-define('NAVBAR_TITLE', 'Host your osCmax shop with the trusted leader in osCmax hosting, AABox.com');
+define('HEADING_TITLE', 'Purchase osCMax Virtual Hosting');
+define('NAVBAR_TITLE', 'Host your osCMax shop with the trusted leader in osCMax hosting, AABox.com');
 define('TEXT_MAIN', '<tr class=main width=\'95%\'><td><table class=main width=\'95%\' border=\'0\' align=\'center\' cellpadding=\'3\' cellspacing=\'1\'>
               <tr>
                 <td align=\'left\' width=\'40%\'>&nbsp;</td>
@@ -98,7 +98,7 @@ define('TEXT_MAIN', '<tr class=main width=\'95%\'><td><table class=main width=\'
                 <td align=\'middle\' bgcolor=\'fafafa\' class=\'ok\'><div align=\'center\'><img src=\'images/ok.gif\' alt=\'\' width=\'30\' height=\'13\'></div></td>
               </tr>
               <tr>
-                <td align=\'left\' bgcolor=\'fafafa\'><a href=\'virtual-hosting-oscmax.htm\'>osCmax</a> Installed</td>
+                <td align=\'left\' bgcolor=\'fafafa\'><a href=\'virtual-hosting-oscmax.htm\'>osCMax</a> Installed</td>
                 <td align=\'middle\' bgcolor=\'fafafa\' class=\'ok\'><div align=\'center\'><img src=\'images/ok.gif\' alt=\'\' width=\'30\' height=\'13\'></div></td>
                 <td align=\'middle\' bgcolor=\'fafafa\' class=\'ok\'><div align=\'center\'><img src=\'images/ok.gif\' alt=\'\' width=\'30\' height=\'13\'></div></td>
                 <td align=\'middle\' bgcolor=\'fafafa\' class=\'ok\'><div align=\'center\'><img src=\'images/ok.gif\' alt=\'\' width=\'30\' height=\'13\'></div></td>
@@ -156,8 +156,8 @@ define('TEXT_MAIN', '<tr class=main width=\'95%\'><td><table class=main width=\'
                 <td width=\'20%\' align=\'center\' bgcolor=\'EBF0F4\'><a href=\'https://billing.aabox.com/order/orderwiz.php?v=16&type3_package=109\'><img src=\'images/ords.gif\' alt=\'Order Now!\' width=\'97\' height=\'18\' border=\'0\'></a></td>
               </tr>
 </table>
-            <p>osCmax and AABox.com have teamed up to provide you with the best virtual hosting solutions for your osCmax based web site. AABox.com is the developer of osCmax and supports the entire osCmax community. </p>
-            <p>Because of AABox.com\'s intimate knowledge of osCmax and all its features, you can be assured of the best osCmax support in the industry. AABox also configures their virtual servers for maximum osCmax compatibility and stability. </p>
+            <p>osCMax and AABox.com have teamed up to provide you with the best virtual hosting solutions for your osCMax based web site. AABox.com is the developer of osCMax and supports the entire osCMax community. </p>
+            <p>Because of AABox.com\'s intimate knowledge of osCMax and all its features, you can be assured of the best osCMax support in the industry. AABox also configures their virtual servers for maximum osCMax compatibility and stability. </p>
             <p>If you are developing your site on another host, in a local test environment, or simply wish for a more stable, compatible and friendly solution, AABox will migrate your entire existing site free of charge. AABox will move all files, database and configuration settings to your new account, and will update all path and SSL information for you. It is a completely seamless transition and you will have your site live and moved to AABox within 48 hours of purchase. </p>
             <p><strong>Disk Space<a name=\'vh1\'></a><br>
             </strong>Disk space is measured in megabytes (MB). The Basic plan has 200 megabytes of disk space allocated to it. That means you can store more than 13,000 static web pages or 20,000+ dynamic pages. The Power plan has more than double that capacity, and the e-commerce package has more than four times that capacity. </p>

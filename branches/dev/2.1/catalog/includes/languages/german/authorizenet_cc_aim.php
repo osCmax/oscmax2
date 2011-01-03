@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: authorizenet_cc_aim.php 1794 2008-01-11 13:51:10Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */

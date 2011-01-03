@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: index.php 3 2006-05-27 04:59:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
 
   Released under the GNU General Public License
 */
@@ -24,9 +24,9 @@ define('BOX_ENTRY_LIVE_DISCUSSIONS', 'Live Discussions');
 define('BOX_ENTRY_CVS_REPOSITORY', 'CVS Repository');
 define('BOX_ENTRY_INFORMATION_PORTAL', 'Information Portal');
 define('BOX_ENTRY_OSCDOX', 'osCDox.com');
-define('BOX_ENTRY_TEMPLATE_STORE', 'osCmax Templates');
+define('BOX_ENTRY_TEMPLATE_STORE', 'osCMax Templates');
 
-define('BOX_ENTRY_AABOX', 'osCmax Hosting<br>$12.99/mo');
+define('BOX_ENTRY_AABOX', 'osCMax Hosting<br>$12.99/mo');
 define('BOX_ENTRY_PAYPAL', 'Paypal Account Signup');
 define('BOX_ENTRY_MERCHANT', 'Get A Merchant Account');
 define('BOX_ENTRY_DOMAINS', 'Purchase Domains');

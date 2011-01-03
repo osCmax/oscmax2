@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: chronopay.php 1782 2008-01-10 01:10:52Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: ship_fedex.php 1 2009-01-20 04:59:07Z user $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2008 osCMax
 
   Released under the GNU General Public License
 */

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: articles_xsell.php, v1.0 2003/12/04 12:00:00 ra Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2003 osCommerce
 
   Released under the GNU General Public License
 */

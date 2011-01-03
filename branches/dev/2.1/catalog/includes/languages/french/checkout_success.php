@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: checkout_success.php, french, v 1.12 2003/09/12 23:21:45 jpf Exp $
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCMax Power E-Commerce
+  http://oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2005 osCMax, 2002 osCommerce
   French version Copyrite 2003 - Configure That! Computer Services
 
   Released under the GNU General Public License

@@ -1,6 +1,6 @@
 <?php
 /*
-  Copyright 2000 - 2011 osCmax
+  Copyright (C) 2008 Google Inc.
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id$
+ * $Id: google_base_feed_builder.php 153 2009-01-30 00:16:37Z ed.davisson $
  * 
  * Generates a feed (RSS 2.0) compatible with Google Base for products.
  *
@@ -37,7 +37,7 @@
  *
  * Required:
  *   description: products_description->products_description
- *   Id$
+ *   id: products->products_id
  *   link: products_description->products_url
  *   price: products->products_price
  *   title: products_description->products_name

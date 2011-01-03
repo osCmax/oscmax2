@@ -1,14 +1,14 @@
 <?php
 /*
-  $Id$
+  $Id: gv_queue.php,v 1.2.2.1 2003/04/27 12:36:00 wilt Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2002 - 2003 osCommerce
 
   Gift Voucher System v1.0
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2001,2002 Ian C Wilson
   http://www.phesis.org
 
   Released under the GNU General Public License

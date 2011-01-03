@@ -1,11 +1,11 @@
 <?php
 /*
-$Id$
+$Id: ssl_info.php 3 2006-05-27 04:59:07Z user $
 
-  osCmax
+  osCMax
   http://www.oscdox.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright 2006 osCMax2005 osCMax
 
   Released under the GNU General Public License
 */

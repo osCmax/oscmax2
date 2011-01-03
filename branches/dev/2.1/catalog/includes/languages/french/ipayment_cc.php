@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id$
+  $Id: ipayment_cc.php 1811 2008-01-13 12:25:10Z hpdl $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2008 osCommerce
 
   Released under the GNU General Public License
 */

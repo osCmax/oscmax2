@@ -262,6 +262,9 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
     $cart = new shoppingCart;
   }
 
+// call for price
+  define ('CALL_FOR_PRICE_VALUE', -1);
+
 // include currencies class and create an instance
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();

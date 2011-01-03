@@ -28,7 +28,7 @@
   }
 
 
-  if (is_array(isset($wishList->wishID)) && !empty($wishList->wishID)) {
+  if (is_array($wishList->wishID) && !empty($wishList->wishID)) {
     reset($wishList->wishID);
 
 ?>
@@ -61,7 +61,7 @@
 
 ?>
             <tr class="<?php echo $class; ?>">
-              <td valign="middle" class="productListing-data-list" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=remove_product&wishlist_id=' . $wishlist_id . '', 'NONSSL').'">' . tep_image(DIR_WS_ICONS . 'basket_delete.png', IMAGE_BUTTON_REMOVE_PRODUCT, 16, 16) . '</a></td>'; ?>
+              <td valign="middle" class="productListing-data-list" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=remove_wishlist_product&wishlist_id=' . $wishlist_id . '', 'NONSSL').'">' . tep_image(DIR_WS_ICONS . 'basket_delete.png', IMAGE_BUTTON_REMOVE_PRODUCT, 16, 16) . '</a></td>'; ?>
               <td valign="top" class="productListing-data-list" align="left"><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?></a></td>
               <td valign="top" class="productListing-data-list" align="left"><b><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>"><?php echo $products['products_name']; ?></a></b>
                 <input type="hidden" name="prod_link[]" value="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>" />

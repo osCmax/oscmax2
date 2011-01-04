@@ -208,11 +208,9 @@ tr.level012 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 tr.level0123 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 span.selectedCat { color: #ff0000; }
 /* EOF: Categories Box Styling */
+
 /* Small Ajax-throbber image */
-#indicator {
-    float:right;
-    visibility:hidden;
-}
+#indicator { float:right; visibility:hidden; }
 
 /* Stock table for product_info page */
 .stockTable { margin: 5px 5px 5px 5px; }
@@ -242,4 +240,3 @@ TD.stockTable, SPAN.stockTable { font-family: Verdana, Arial, sans-serif; font-s
 /* stupid IE6 HasLayout hack */
 .cluetip-rounded #cluetip-title, .cluetip-rounded #cluetip-inner { zoom: 1; }
 /* EOF: Cluetip - Tooltip */
-

@@ -28,7 +28,6 @@ define('NAVBAR_TITLE_1', 'Articles');
   define('TEXT_DATE_ADDED', 'Published:');
   define('TEXT_AUTHOR', 'Author:');
   define('TEXT_TOPIC', 'Topic:');
-  define('TEXT_READ_MORE', 'Read More...');
   define('TEXT_MORE_INFORMATION', 'For more information, please visit this authors <a href="http://%s" target="_blank">web page</a>.');
 
 

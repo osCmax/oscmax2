@@ -406,4 +406,5 @@ define('TEXT_PRODUCTS_USUALPRICE', '&nbsp;Normally:&nbsp;');
 
 define('TEXT_LATEST_PRODUCTS', 'Latest Products');
 define('TEXT_SPECIALS', 'Specials');
+define('TEXT_READ_MORE', ' ... read more ... ');
 ?>

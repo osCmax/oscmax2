@@ -88,8 +88,9 @@
 
 // BOF QPBPP for SPPC
   $min_order_qty = $pf->getMinOrderQty();
+  $min_order_text = '';
     if ($min_order_qty > 1) {
-      $products_name .= '<br><span class="smallText">' . MINIMUM_ORDER_TEXT . $min_order_qty . '</span>';
+      $min_order_text .= '<br><span class="smallText">' . MINIMUM_ORDER_TEXT . $min_order_qty . '</span>';
     }
 // EOF QPBPP for SPPC
 ?>
@@ -112,7 +113,7 @@
         <td class="productinfo_header" colspan="3">
           <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
-              <td class="pageHeading" valign="top"><?php echo $product_info['products_name']; ?></td>
+              <td class="pageHeading" valign="top"><?php echo $product_info['products_name'] . $min_order_text; ?></td>
               <td class="pageHeading" align="right" valign="top"><?php echo $products_price; ?></td>  
             </tr>
           </table>

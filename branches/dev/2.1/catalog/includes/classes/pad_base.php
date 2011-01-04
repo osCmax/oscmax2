@@ -157,7 +157,7 @@
       $out ='           <table class="options" border="0" cellspacing="0" cellpadding="2">';
       $out.='            <tbody>';
       $out.='            <tr>';
-      $out.='             <td class="options" colspan="2">' . TEXT_PRODUCT_OPTIONS . '</td>';
+      $out.='             <td class="options" colspan="2" align="left"><b>' . TEXT_PRODUCT_OPTIONS . '</b></td>';
       $out.='            </tr>';
       return $out;
     }
@@ -206,7 +206,7 @@
               $tmp_html .= '&nbsp;';
             }
             $tmp_html .= '<br/>';
-            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $stocked['oname'] . ':</h4></td><td class="options">' . $tmp_html . '</td></tr>';
+            $out .= '<tr class="options"><td align="right" class="options"><b>' . $stocked['oname'] . ':</b></td><td class="options">' . $tmp_html . '</td></tr>';
 	  break;
 			
           case 4: //PRODUCTS_OPTIONS_TYPE_CHECKBOX:
@@ -219,7 +219,7 @@
               $tmp_html .= '&nbsp;';
             }
             $tmp_html .= '';
-            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $stocked['oname'] . ':</h4></td>
+            $out .= '<tr class="options"><td align="right" class="options"><b>' . $stocked['oname'] . ':</b></td>
 			<td class="options">' . $tmp_html . '</td></tr>';
 	  break;
 		   
@@ -229,7 +229,7 @@
           	  
           default: //Select
 			$out .= '<tr class="options"><td align="right" class="options">
-				<h4>' . $stocked['oname'] . ':</h4></td><td class="options">' . 
+				<b>' . $stocked['oname'] . ':</b></td><td class="options">' . 
 				tep_draw_pull_down_menu('id['.$stocked['oid'].']',array_values($stocked['ovals']),$stocked['default']) .
 				'</td></tr>';
 		  }
@@ -268,7 +268,7 @@
               $tmp_html .=$products_options_name['products_options_comment'] ;
               $tmp_html .= '&nbsp;';
 	    }
-            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $nonstocked['oname'] . ':</h4></td>
+            $out .= '<tr class="options"><td align="right" class="options"><b>' . $nonstocked['oname'] . ':</b></td>
 			<td class="options">' . $tmp_html . '</td></tr>';
 	  break;
 		   
@@ -284,7 +284,7 @@
               $tmp_html .= '<br/>';
             }
             $tmp_html .= '';
-            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $nonstocked['oname'] . ':</h4></td>
+            $out .= '<tr class="options"><td align="right" class="options"><b>' . $nonstocked['oname'] . ':</b></td>
 			<td class="options">' . $tmp_html . '</td></tr>';
 	  break;
 		  
@@ -300,7 +300,7 @@
               $tmp_html .= '&nbsp;';
             }
             $tmp_html .= '';
-            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $nonstocked['oname'] . ':</h4></td>
+            $out .= '<tr class="options"><td align="right" class="options"><b>' . $nonstocked['oname'] . ':</b></td>
 			<td class="options">' . $tmp_html . '</td></tr>';
 	  break;
 		  
@@ -310,12 +310,12 @@
             foreach ($nonstocked['ovals'] as $products_options_array) {
               $tmp_html .= '';
               $tmp_html .= tep_draw_checkbox_field('id[' . $nonstocked['oid'] . ']', $products_options_array['id']);
-              $tmp_html .= $products_options_array['text'] ;
-              $tmp_html .=$products_options_name['products_options_comment'] ;
+              $tmp_html .= $products_options_array['text'];
+              $tmp_html .= $products_options_name['products_options_comment'];
               $tmp_html .= '&nbsp;';
             }
             $tmp_html .= '';
-            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $nonstocked['oname'] . ':</h4></td>
+            $out .= '<tr class="options"><td align="right" class="options"><b>' . $nonstocked['oname'] . ':</b></td>
 			<td class="options">' . $tmp_html . '</td></tr>';
           break;
           
@@ -331,7 +331,7 @@
           break;
           			
           default: //Select
-            $out .= '<tr class="options"><td align="right" class="options"><h4>' . $nonstocked['oname'] . ':</h4></td>
+            $out .= '<tr class="options"><td align="right" class="options"><b>' . $nonstocked['oname'] . ':</b></td>
 						<td class="options">' . 
 						tep_draw_pull_down_menu('id['.$nonstocked['oid'].']',array_values($nonstocked['ovals']),$nonstocked['default']) . 
 						'</td></tr>';

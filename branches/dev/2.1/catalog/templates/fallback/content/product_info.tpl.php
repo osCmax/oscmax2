@@ -60,6 +60,7 @@
     $pf->loadProduct((int)$_GET['products_id'], (int)$languages_id);
     $products_price = $pf->getPriceString();
 	$hi_product_price = $pf->getHiPrice();
+	$lo_product_price = $pf->getLowPrice();
 // EOF QPBPP for SPPC
 
 // BOF: MSRP
@@ -325,7 +326,7 @@
                       <table width="200" border="0" cellpadding="0">
                         <tr>
                         <?php // START EASY CALL FOR PRICE v1.4
-                          if ($product_info['products_price'] == CALL_FOR_PRICE_VALUE){ ?>
+                          if ( ($hi_product_price == CALL_FOR_PRICE_VALUE) || ($lo_product_price == CALL_FOR_PRICE_VALUE) ){ ?>
 						    <td class="main" align="right" rowspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Price Inquiry%0D%0A%0D%0AModel: ' . $product_info['products_model'] . '%0D%0AProduct Name: ' . $product_info['products_name'] . '%0D%0AProduct URL: ' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $product_info['products_id'] .'%0D%0A%0D%0A') . '') . '">' . tep_image_submit('button_cfp.gif', IMAGE_BUTTON_CFP); ?></a></td>
                         <?php } else { ?>  
                        	  	<td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-{{product.id}}',+1)" alt="plus 1" class="plusminus"></td>

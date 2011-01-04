@@ -49,7 +49,7 @@ $products_attributes_query = tep_db_query("SELECT pa.options_id, pa.options_valu
 	$html_ev_out .= '  <td>' . tep_draw_separator('pixel_trans.gif', '100%', '10') . '</td>';
 	$html_ev_out .= '</tr>';
 	$html_ev_out .= '<tr>';
-	$html_ev_out .= '  <td class="productinfo_boxes">';
+	$html_ev_out .= '  <td class="productinfo_boxes"><center>';
     $html_ev_out .= '<table class="stockTable" border="0" cellspacing="0" cellpadding="0">';
     $html_ev_out .= '  <tr>';
     $html_ev_out .= '    <td class="stockTableHeading">';
@@ -90,7 +90,7 @@ while($products_stock_values=tep_db_fetch_array($products_stock_query)) {
 }
 
 $html_ev_out .= '</table></td></tr></table>'; // Table is finished!
-$html_ev_out .= '</td></tr>'; // Close fallback table
+$html_ev_out .= '</center></td></tr>'; // Close fallback table
 
 if ($rowscounter > 0) {
 	echo $html_ev_out;

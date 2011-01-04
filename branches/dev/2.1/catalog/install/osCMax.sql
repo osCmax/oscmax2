@@ -2107,7 +2107,7 @@ INSERT INTO configuration VALUES (595, 'Product Image Width', 'PRODUCT_IMAGE_WID
 INSERT INTO configuration VALUES (596, 'Product Image Height', 'PRODUCT_IMAGE_HEIGHT', '', 'The main product image in product information pages. Do NOT specify both!',4,21,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (597, 'Product Popup Image Width', 'POPUP_IMAGE_WIDTH', '800', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,22,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (598, 'Product Popup Image Height', 'POPUP_IMAGE_HEIGHT', '600', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.',4,23,NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (594,'Display stock information','PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST','false','<b>If true:</b> A table with information about what\'s in stock will be displayed. If the product doesn\'t have any attributes with tracked stock, the table won\'t be displayed.<br /><br /><b>Default is false.</b>',9,6,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (594, 'Display stock information', 'PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST', 'true', '<b>If true:</b> A table with information about what\'s in stock will be displayed. If the product doesn\'t have any attributes with tracked stock, the table won\'t be displayed.<br /><br /><b>Default is false.</b>', 9, 6, NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 #New v2.1 Entries
 INSERT INTO configuration VALUES (2100, 'Enable Google Analytics', 'GOOGLE_ANALYTICS_STATUS', 'false', 'Enable Google Analytics?', 85, 1, '', now(), '', 'tep_cfg_select_option(array(\'true\', \'false\'),');

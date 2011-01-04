@@ -275,15 +275,17 @@
 				echo $pad->draw(); ?>
                 </td>
               </tr>
-            <?php } // end if
+            <?php } // end if ?>
 				
-			//Display a table with which attributecombinations is on stock to the customer?
-			if(PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'True'): require(DIR_WS_MODULES . "qtpro_stock_table.php"); endif;
-				
-			//++++ QT Pro: End Changed Code
-			?>
-            <!-- Conditional Atrributes Ends -->
+			<!-- Conditional Stock Table Starts -->
             <?php
+			if (PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST == 'true') { ?>
+              <?php include(DIR_WS_MODULES . "qtpro_stock_table.php"); ?>
+			<?php } ?>
+			<!-- Conditional Stock Table Ends -->
+            	
+            <!-- Conditional Ask a Question Starts -->
+			<?php
             if (SHOW_ASK_A_QUESTION == 'True') { ?>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -291,10 +293,9 @@
               <tr>
                 <td class="productinfo_boxes" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Question about: ' . $product_info['products_name'] . '%0D%0A%0D%0AModel: ' . $product_info['products_model'] . '%0D%0AProduct URL: ' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $product_info['products_id'] .'%0D%0A%0D%0AType your question below:%0D%0A%0D%0A') . '') . '">' . tep_image_button('button_aaq.gif', IMAGE_BUTTON_AAQ) . '</a>'; ?></td>
               </tr>
-            <?php } //end if ?>
-            <!-- Conditional Ask a Question Starts -->
-            
+            <?php } //end if ?>            
             <!-- Conditional Ask a Question Ends -->
+            
           </table>        
         <?php echo tep_draw_separator('pixel_trans.gif', '325', '1'); ?>
         <!-- Right Column Ends -->

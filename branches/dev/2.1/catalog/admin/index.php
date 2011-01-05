@@ -47,6 +47,7 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
         <li><a href="#tabs-3"><?php echo TEXT_TAB3; ?></a></li>
         <li><a href="#tabs-4"><?php echo TEXT_TAB4; ?></a></li>
         <li><a href="#tabs-5"><?php echo TEXT_TAB5; ?></a></li>
+        <li><a href="#tabs-6"><?php echo TEXT_TAB6; ?></a></li>
     </ul>
 
 <div id="tabs-1" class="ui-tabs ui-tabs-container ui-tabs-hide">
@@ -122,6 +123,15 @@ $Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
     </tr>
   </table>
 </div>
+
+<div id="tabs-6" class="ui-tabs-container ui-tabs-hide">
+  <table width="95%" align="center">
+    <tr valign="top">
+      <td><?php include('includes/modules/dashboard/system.php'); ?></td>
+    </tr>
+  </table>
+</div>
+
 
 </div>
 </td></tr></table>

@@ -10,10 +10,10 @@ $Id: stylesheet.css 3 2006-05-27 04:59:07Z user $
 */
 
 /* links */
-a:link { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: normal; text-decoration: none; }
-a:visited { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: normal; text-decoration: none; }
-a:active { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: normal; text-decoration: none; }
-a:hover { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: normal; text-decoration: underline; }
+a:link { font-family: Verdana, Arial, sans-serif; font-size: 11px; color: #000000; font-weight: normal; text-decoration: none; }
+a:visited { font-family: Verdana, Arial, sans-serif; font-size: 11px; color: #000000; font-weight: normal; text-decoration: none; }
+a:active { font-family: Verdana, Arial, sans-serif; font-size: 11px; color: #000000; font-weight: normal; text-decoration: none; }
+a:hover { font-family: Verdana, Arial, sans-serif; font-size: 11px; color: #000000; font-weight: normal; text-decoration: underline; }
 
 a.headerLink:link { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #ffffff; font-weight: bold; text-decoration: none; }
 a.headerLink:visited { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #ffffff; font-weight: bold; text-decoration: none; }

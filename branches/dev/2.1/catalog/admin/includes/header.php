@@ -68,7 +68,9 @@
 	  $("#searchtabs").tabs("select","searchtabs-2");
 	} 
 	
-    $("#tabs").tabs();
+	$("#tabs").tabs();
+    $("#tabs").tabs("select","tabs-6");
+	
 
     $("#descriptiontabs0").tabs();
 	$("#descriptiontabs1").tabs();

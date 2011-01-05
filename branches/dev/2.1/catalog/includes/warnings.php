@@ -49,11 +49,6 @@ if (IE6_CHECK == 'true') {
 	}
 }
 
-// Check for SEO URLs needing PHP 5.2+
-if ( (strnatcmp(phpversion(),'5.2.0') < 0) && (SEO_URLS_ENABLED == 'true') ) { 
-  $messageStack->add('header', WARNING_SEO_PHP_VERSION_LOW, 'warning');
-}
-
 // check session.auto_start is disabled
   if ( (function_exists('ini_get')) && (WARN_SESSION_AUTO_START == 'true') ) {
     if (ini_get('session.auto_start') == '1') {

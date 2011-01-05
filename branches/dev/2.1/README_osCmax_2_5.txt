@@ -1,3 +1,5 @@
+$Id$
+
 osCmax v2.5 (October 2010)
 ==========================
 osCmax v2.5 e-commerce software is a combination and extension of of many of the most popular mods/contributions and osCommerce 2.2 MS2. 

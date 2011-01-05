@@ -222,18 +222,15 @@
               </tr>
               <!-- Product Extra Fields Starts -->
 			  <?php
-                // begin Extra Product Fields		
-				$epf_number = count($epf);
-				if ($epf_number > 0 ) { ?>
-                  <tr>
-				    <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-				  </tr>
-				  <tr>
-              		<td class="productinfo_epf">
-                  <?php
+                // begin Extra Product Fields
                     foreach ($epf as $e) {
                       $mt = ($e['uses_list'] && !$e['multi_select'] ? ($product_info[$e['field']] == 0) : !tep_not_null($product_info[$e['field']]));
 					  if (!$mt) { // only display if information is set for product
+					    echo '<tr>';
+						echo '  <td colspan="3">' . tep_draw_separator('pixel_trans.gif', '100%', '10') . '</td>';
+						echo '</tr>';
+						echo '<tr>';
+              		    echo '  <td class="productinfo_epf">';
                         echo '<b>' . $e['label'] . ': </b>';
                         if ($e['uses_list']) {
                           if ($e['multi_select']) {
@@ -250,13 +247,14 @@
                           echo $product_info[$e['field']];
                         }
                         echo '<br>';
+						echo '  </td>';
+						echo '</tr>';
                       }
-                    } // end Extra Product Fields
-				  } // end if wrapping code
-                ?>
-                </td>
-              </tr>
-            <!-- Product Extra Fields Ends -->
+                    } 
+			    // end Extra Product Field
+              ?>
+              <!-- Product Extra Fields Ends -->
+            
 			<!-- Conditional Atrributes Starts -->              
             <?php
     		$products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$_GET['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");

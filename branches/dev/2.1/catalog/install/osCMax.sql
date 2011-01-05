@@ -653,7 +653,7 @@ DROP TABLE IF EXISTS customers_wishlist;
 CREATE TABLE `customers_wishlist` (
   `products_id` tinytext NOT NULL,
   `customers_id` int(13) NOT NULL default '0'
-) TYPE=MyISAM;
+);
 
 
 DROP TABLE IF EXISTS customers_wishlist_attributes;
@@ -664,7 +664,7 @@ CREATE TABLE `customers_wishlist_attributes` (
   `products_options_id` int(11) NOT NULL default '0',
   `products_options_value_id` int(11) NOT NULL default '0',
   PRIMARY KEY (`customers_wishlist_attributes_id`)
-) TYPE=MyISAM; 
+); 
 
 DROP TABLE IF EXISTS geo_zones;
 CREATE TABLE geo_zones (
@@ -1155,7 +1155,7 @@ CREATE TABLE searchword_swap (
   sws_word varchar(100) NOT NULL,
   sws_replacement varchar(100) NOT NULL,
   PRIMARY KEY  (sws_id)
-) TYPE=MyISAM;
+);
 
 DROP TABLE IF EXISTS search_queries;
 CREATE TABLE search_queries (

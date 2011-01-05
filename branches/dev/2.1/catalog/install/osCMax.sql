@@ -1542,7 +1542,7 @@ CREATE TABLE IF NOT EXISTS usu_cache (
   `cache_data` mediumtext NOT NULL,
   `cache_date` datetime NOT NULL,
   PRIMARY KEY  (`cache_name`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+);
 
 DROP TABLE IF EXISTS google_configuration;
 CREATE TABLE IF NOT EXISTS google_configuration (

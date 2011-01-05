@@ -1,15 +1,16 @@
 <?php
 /*
-  $Id: catalog_products_with_images.php V 3.0
-  by Tom St.Croix <managememt@betterthannature.com> V 3.0
+$Id$
 
   osCmax e-Commerce
   http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
+*/
 
+/*
   notes: added to the catalog/includes/languages/english.php 
   define('IMAGE_BUTTON_UPSORT', 'Sort Asending');
   define('IMAGE_BUTTON_DOWNSORT', 'Sort Desending');

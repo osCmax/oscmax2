@@ -2,10 +2,6 @@
 /*
 $Id$
 
-  OSC-Affiliate
-
-  Contribution based on:
-
   osCmax e-Commerce
   http://www.oscmax.com
 

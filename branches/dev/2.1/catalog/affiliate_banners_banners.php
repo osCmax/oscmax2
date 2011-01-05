@@ -2,10 +2,6 @@
 /*
   $Id: affiliate_banners_banners.php,v 2.00 2003/10/12
 
-  OSC-Affiliate
-
-  Contribution based on:
-
   osCmax e-Commerce
   http://www.oscmax.com
 

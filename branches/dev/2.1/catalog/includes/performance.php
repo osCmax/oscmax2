@@ -1,12 +1,12 @@
 <?php
 /*
-$Id: performance.php 3 2006-05-27 04:59:07Z user $
+$Id$
   orig : performance.php,v 1.5 2004/11/21 00:04:53 Chemo Exp $
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

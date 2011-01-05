@@ -104,8 +104,8 @@ define('DASHBOARD_ALERT_ERRORS_DETECTED_CONFIG', ' system configuration error(s)
 define('DASHBOARD_NO_ERRORS_DETECTED_PERMISSION', 'No errors detected in your Permissions.');
 define('DASHBOARD_ALERT_ERRORS_DETECTED_PERMISSION', ' permissions error(s)');
 
-define('DASHBOARD_PWA_OPC_ERROR', 'Warning: You have set <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, '?gID=7575&cID=3069', 'NONSSL') . '">One Page Checkout</a></u> and <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=5&cID=1449', 'NONSSL') . '">Purchase Without Account</a></u> to be enabled.  Please disable one of these modules.');
-define('DASHBOARD_OPC_EMAIL_ERROR', 'Warning: You have enabled One Page Checkout but not set up the <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, '?gID=7575&cID=3079', 'NONSSL') . '">debug email address yet<a></u>.');
+define('DASHBOARD_PWA_OPC_ERROR', 'Warning: You have set <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7575&cID=3069', 'NONSSL') . '">One Page Checkout</a></u> and <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=5&cID=1449', 'NONSSL') . '">Purchase Without Account</a></u> to be enabled.  Please disable one of these modules.');
+define('DASHBOARD_OPC_EMAIL_ERROR', 'Warning: You have enabled One Page Checkout but not set up the <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7575&cID=3079', 'NONSSL') . '">debug email address yet<a></u>.');
 define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Warning: Installation directory exists at: ' . (DIR_FS_CATALOG . 'install/') . '. Please remove this directory for security reasons.');
 define('WARNING_CONFIG_FILE_WRITEABLE', 'Warning: I am able to write to the configuration file: ' . (DIR_FS_CATALOG) . 'includes/configure.php. This is a potential security risk - please set the right user permissions on this file.');
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Warning: The sessions directory does not exist: ' . tep_session_save_path() . '. Sessions will not work until this directory is created.');

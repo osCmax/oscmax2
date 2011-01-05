@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: affiliate_password.php,v 2.00 2003/10/12
+$Id: affiliate_password.php,v 2.00 2003/10/12
 
   osCmax e-Commerce
   http://www.oscmax.com

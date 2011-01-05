@@ -1,14 +1,13 @@
-
 <?php
-/* 
-  $Id: articles_pxsell.php, v1.0 2006/03/11 12:00:00 Rigadin $
+/*
+$Id$
 
-osCommerce, Open Source E-Commerce Solutions 
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-Copyright (c) 2006 osCommerce 
+  Copyright 2000 - 2011 osCmax
 
-Released under the GNU General Public License
+  Released under the GNU General Public License
 */ 
 
 if ($_GET['products_id']) {

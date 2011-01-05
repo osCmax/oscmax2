@@ -1,17 +1,23 @@
 <?php
 /*
-$Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
+$Id$
+  
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+  
+  Released under the GNU General Public License
+*/  
+
+
+/*
   Dynamic MoPics version 3.000, built for osCommerce MS2
-  Copyright 2006 osCMax2004-2005 Josh Dechant
+  Copyright 2006 Josh Dechant
   Released under the GNU General Public License
 
- Dynamic MoPics: Modded by ejsolutions (E Jonsen) April 2009 oscMax v2.0.2
+ Dynamic MoPics: Modded by ejsolutions (E Jonsen) April 2009
   ---------------------------------------------------
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
-  Released under the GNU General Public License
 */
 if (isset($product_info_values) && is_object($product_info_values)) {
 		$product_info =& $product_info_values;

@@ -1,5 +1,16 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+/*
 ==========================================================
 	Include Google Analystics module for osCommerce
   	Added by  Clement Nicolaescu (http://www.osCoders.biz) 
@@ -9,13 +20,6 @@
   Tomas Hesseling (www.boxershortz.nl) &
   Mathieu Burgerhout (www.seo-for-osc.com)
 ==========================================================	
---------------------------------------------------
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-  Copyright (c) 2003 osCommerce
---------------------------------------------------
-
-  Released under the GNU General Public License
 */
 
 // ############## Google Analytics - start ###############

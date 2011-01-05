@@ -1,6 +1,13 @@
 <?php
 /*
-$Id: product_listing_col.php 14 2006-07-28 17:42:07Z user $
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 ?>
 <!-- PGM fix for Corner Banners in Internet Explorer -->

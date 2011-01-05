@@ -1,15 +1,17 @@
 <?php
 /* 
-  $Id: featured_manufacturers.php,v 1.01 03/10/2004 dd/mm/yyyyy 21:00:00 surfalot.com Exp $
+$Id$
 
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+/*
   Open Featured Sets manufacturers listing module
-
-Made for:
-  osCommerce, Open Source E-Commerce Solutions 
-  http://www.oscommerce.com 
-  Copyright (c) 2004 osCommerce 
-  Released under the GNU General Public License 
-  
 */
 if (isset($featured_manufacturers_array)) {
 if (sizeof($featured_manufacturers_array) <> '0') {  

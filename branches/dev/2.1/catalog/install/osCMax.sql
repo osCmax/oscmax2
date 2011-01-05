@@ -1,10 +1,13 @@
-# osCmax Power E-Commerce
-# http://oscdox.com
+#$Id$
 #
-# Default Database For osCmax v2.5
-# Copyright (c) 2010 osCmax
+# osCmax e-Commerce
+# http://www.oscmax.com
+#
+# Copyright 2000 - 2011 osCmax
 #
 # Released under the GNU General Public License
+#
+# Default Database For osCmax v2.5
 #
 # NOTE: * Please make any modifications to this file by hand!
 #       * DO NOT use a mysqldump created file for new changes!

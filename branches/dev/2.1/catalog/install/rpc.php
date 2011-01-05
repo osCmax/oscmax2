@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: rpc.php 1768 2008-01-07 17:38:40Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

@@ -1,7 +1,13 @@
 <?php
-/*   $Id: Initial CityLink Nextday by Stuart Newton 21 August 2006
-	 Demo: http://www.almatcomputers.co.uk
-	 Rates: 10:11.6,15:14.1,20:16.60,25:19.1,30:21.6,35:24.1,40:26.6,45:29.1,50:31.6,55:34.1,60:36.6,65:39.1,70:41.6,75:44.1,80:46.6,100:56.6,125:69.1,150:81.6,200:106.6
+/* 
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 
   class citylink {

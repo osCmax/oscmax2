@@ -1,18 +1,14 @@
 <?php
 /*
-$Id: usps.php 3.0 2008-03-01 04:59:07Z user $
-  ++++ Original contribution by Brad Waite and Fritz Clapp ++++
-  ++++ incorporating USPS revisions to service names ++++
-  Copyright 2008 osCommerce
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
   Released under the GNU General Public License
 */
-//VERSION: 4.3.0 ALPHA
-//LAST UPDATED: September 8th, 2008 by Greg Deeth
-
-//Modified by Greg Deeth April 30, 2008 to use API v.3.0
-//Modified by Greg Deeth May 12, 2008 for API Change
-//Please refer to http://www.usps.com/webtools/_pdf/Rate-Calculators-v1-2.pdf for more information on RateV3 syntax.
-
 
   class usps {
     var $code, $title, $description, $icon, $enabled, $countries;

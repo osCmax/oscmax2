@@ -1,9 +1,9 @@
 <?php
 /*
-$Id: account_history.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
   osCmax e-Commerce
-   http://www.osCmax.com
+  http://www.osCmax.com
 
   Copyright 2000 - 2011 osCmax
 

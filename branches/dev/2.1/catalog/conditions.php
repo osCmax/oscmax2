@@ -1,6 +1,6 @@
 <?php
   /*
-  osCMax Power E-Commerce
+  osCmax e-Commerce
   http://oscmax.com
 
   Copyright 2010 osCMax

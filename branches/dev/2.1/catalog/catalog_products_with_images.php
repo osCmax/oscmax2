@@ -3,8 +3,8 @@
   $Id: catalog_products_with_images.php V 3.0
   by Tom St.Croix <managememt@betterthannature.com> V 3.0
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
   Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
 

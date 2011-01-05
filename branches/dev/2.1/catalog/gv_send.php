@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: gv_send.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Gift Voucher System v1.0
   Copyright 2006 osCMax2001, 2002 Ian C Wilson

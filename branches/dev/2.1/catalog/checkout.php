@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: checkout_shipping.php 1739 2007-12-20 00:52:16Z hpdl $
+  $Id$
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com

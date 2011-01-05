@@ -5,7 +5,7 @@
           Based on the FAQ script of adgrafics
           Adjusted by Joeri Stegeman (joeri210 at yahoo.com), The Netherlands
 
-  osCMax Power E-Commerce
+  osCmax e-Commerce
   http://oscmax.com
 
   Copyright 2010 osCMax

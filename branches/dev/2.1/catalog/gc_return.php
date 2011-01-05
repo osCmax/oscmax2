@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id: gc_return.php 937 2011-01-03 06:47:14Z michael.oscmax@gmail.com $
+ * $Id$
  * 
  * TODO(eddavisson): This class is illegible. Refactor.
  */

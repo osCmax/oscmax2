@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id$
+$Id$
 
   osCmax e-Commerce
   http://www.oscmax.com

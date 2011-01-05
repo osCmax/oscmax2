@@ -19,7 +19,7 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id$
+ $Id$
  * 
  * TODO(eddavisson): This class is illegible. Refactor.
  */

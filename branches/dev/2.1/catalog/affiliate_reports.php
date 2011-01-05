@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: shipping.php,v 2.00 2003/10/12
+$Id: shipping.php,v 2.00 2003/10/12
 
   osCmax e-Commerce
   http://www.oscmax.com

@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: affiliate_news.php,v 2.00 2003/10/12
+$Id$
 
   osCmax e-Commerce
   http://www.oscmax.com

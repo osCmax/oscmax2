@@ -1,9 +1,6 @@
 <?php
-  /*
-  Module: Information Pages Unlimited
-          File date: 2007/02/17
-          Based on the FAQ script of adgrafics
-          Adjusted by Joeri Stegeman (joeri210 at yahoo.com), The Netherlands
+/*
+$Id$
 
   osCmax e-Commerce
   http://oscmax.com
@@ -11,7 +8,7 @@
   Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  */
+*/
 
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 // For adding in contribution or modification - parts of this file has been moved to: catalog\templates\fallback\contents\<filename>.tpl.php as a default (sub 'fallback' with your current template to see if there is a template specife change).

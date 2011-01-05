@@ -1,5 +1,7 @@
 <?php
-  /*
+/*
+$Id$
+
   osCmax e-Commerce
   http://oscmax.com
 

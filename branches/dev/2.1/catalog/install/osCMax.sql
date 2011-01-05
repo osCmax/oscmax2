@@ -1715,7 +1715,8 @@ INSERT INTO admin_files VALUES (158,'extra_values.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (159,'information_form.php', 0, 2, '1');
 INSERT INTO admin_files VALUES (160,'information_list.php', 0, 2, '1');
 INSERT INTO admin_files VALUES (161,'information_manager.php', 0, 2, '1');
-INSERT INTO admin_files VALUES (162,'images_regen.php',0,9,'1');
+INSERT INTO admin_files VALUES (162,'images_regen.php', 0, 9, '1');
+INSERT INTO admin_files VALUES (163,'gc_dashboard.php', 0, 4, '1');
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');

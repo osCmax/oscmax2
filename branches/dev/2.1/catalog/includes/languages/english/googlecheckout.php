@@ -28,7 +28,7 @@ define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_TITLE', 'GoogleCheckout');
 define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_DESCRIPTION', 'GoogleCheckout');
 define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_OPTION', '- Or use -');
 define('GOOGLECHECKOUT_STRING_WARN_USING_SANDBOX', 'GC is set to use SANDBOX. Order will be processed but NOT charged.');
-define('GOOGLECHECKOUT_STRING_WARN_NO_MERCHANT_ID_KEY', 'Google Checkout Merchant Id or Key has not been setted up');
+define('GOOGLECHECKOUT_STRING_WARN_NO_MERCHANT_ID_KEY', 'Google Checkout Merchant Id or Key has not been set up');
 define('GOOGLECHECKOUT_STRING_WARN_VIRTUAL', 'Some download products in your cart are currently not available via Google Checkout.');
 define('GOOGLECHECKOUT_STRING_WARN_EMPTY_CART', 'The Cart is empty');
 define('GOOGLECHECKOUT_STRING_WARN_OUT_OF_STOCK', 'Some products are Out of Stock');

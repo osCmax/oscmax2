@@ -1,5 +1,15 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/  
+/*
  * SQLimport -- Version 01-Oct-2006
  *
  * Execute SQL statements from a file on a MySQL database.

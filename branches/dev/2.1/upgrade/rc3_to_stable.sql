@@ -1,3 +1,5 @@
+#$Id$
+#
 # osCMax 2.0 Update script for version RC3 to RC4
 #
 # PLEASE PLEASE PLEASE make sure you have backup your database before using this script

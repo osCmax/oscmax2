@@ -1,6 +1,13 @@
 <?php
 /*
-  $Id:Batch_print.php, user Exp $
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 define('TEXT_ORDER_NUMBERS_RANGES', 'Bestellnummer(n), entweder einzelne Nummer # oder von - bis, # - #, oder #,#,#');
 define('HEADING_TITLE', 'Batch Print Center');

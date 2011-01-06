@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: create_account.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  The Exchange Project - Community Made Shopping!
-  http://www.theexchangeproject.org
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2000,2001 The Exchange Project
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

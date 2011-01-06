@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 define('BOX_HEADING_GV_ADMIN', 'Gutscheine');
 define('BOX_GV_ADMIN_QUEUE', 'Gutschein Queue');
 define('BOX_GV_ADMIN_MAIL', 'Gutschein eMail');

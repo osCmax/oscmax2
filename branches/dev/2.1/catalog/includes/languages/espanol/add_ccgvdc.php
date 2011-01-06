@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 define('BOX_INFORMATION_GV', 'Vale de Regalo FAQ');
 define('VOUCHER_BALANCE', 'Saldo de Vale');
 define('BOX_HEADING_GIFT_VOUCHER', 'Cuenta de Vale de Regalo'); 

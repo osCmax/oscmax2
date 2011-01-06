@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: paypal_standard.php 1791 2008-01-11 13:21:23Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: product_listing.php,v 1.15 2002/11/19 01:48:08 dgw_ Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2008 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

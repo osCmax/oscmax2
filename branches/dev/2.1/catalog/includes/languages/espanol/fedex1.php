@@ -1,12 +1,11 @@
 <?php
 /*
-  Verions 2.00 for OSC 2.2 MSS and earlier
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2002, 2003 Steve Fatula of Fatula Consulting
-  compconsultant@yahoo.com
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

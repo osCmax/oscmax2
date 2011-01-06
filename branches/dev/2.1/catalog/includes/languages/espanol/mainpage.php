@@ -1,3 +1,15 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <p><font face="Arial">
 <p><font face="arial, helvetica, sans-serif">Para modificar el contenido de esta página, vaya al panel de administración y haga clic en el enlace <strong>Catálogo</strong>. A continuación, haga clic en el <strong>Definir MainPage</strong> vínculo. Se abrirá un editor WYSIWYG, donde usted puede agregar fácilmente nuevos contenidos.<br />
 ------------------------------------------------------------<br />

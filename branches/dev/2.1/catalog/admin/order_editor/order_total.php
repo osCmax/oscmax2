@@ -1,18 +1,18 @@
 <?php
 /*
-  $Id: order_total.php,v 1.0 200/05/13 00:04:53 djmonkey1 Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2007 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
+*/
+/*
   order_total.php is a clone of the original order_total.php class file from the catalog side
   if you have modified the file catalog/includes/classes/order_total.php in any way
   you will have to modify this file as well in order for your order total modules to behave the same via Order Editor
-  
 */
 
   class order_total {

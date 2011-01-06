@@ -1,6 +1,13 @@
 <?php
 /*
-   for Separate Pricing Per Customer v4 2005/03/03
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 define('HEADING_TITLE', 'Groups');
 define('HEADING_TITLE_SEARCH', 'Search:');

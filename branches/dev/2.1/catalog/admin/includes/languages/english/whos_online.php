@@ -1,18 +1,11 @@
 <?php
 /*
-  $Id: whos_online.php,v 3.5.4 2008/7/8 SteveDallas Exp $
+$Id$
 
-  2008 Jul 08 v3.5.4 Glen Hoag aka SteveDallas Modified TEXT_NUMBER_OF_CUSTOMERS for formatting change
-  2008 Jun 13 v3.5   Glen Hoag aka SteveDallas Moved version number out of language files
-                                               Added string TEXT_ACTIVE_CUSTOMERS
-                                               Added string TEXT_SHOW_BOTS
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  updated version number because of version number jumble and provide installation instructions.
-  corection french by azer
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

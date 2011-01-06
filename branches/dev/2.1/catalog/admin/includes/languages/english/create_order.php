@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: create_order.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
   
@@ -42,7 +42,7 @@ define('CATEGORY_CONTACT', 'Contact Information');
 define('CATEGORY_OPTIONS', 'Options');
 define('CATEGORY_PASSWORD', 'Password');
 define('CATEGORY_CORRECT', 'Please check the details below then press the Confirm button to continue.');
-define('ENTRY_CUSTOMERS_ID', 'Customer ID:');
+define('ENTRY_CUSTOMERS_ID', 'Custom$Id$
 define('ENTRY_CUSTOMERS_ID_TEXT', '&nbsp;');
 define('ENTRY_COMPANY', 'Company Name:');
 define('ENTRY_COMPANY_ERROR', '');
@@ -112,7 +112,7 @@ define('TEXT_SELECT_CUST', '- Select a Customer -');
 define('TEXT_SELECT_CURRENCY', '- Select a Currency -');
 define('TEXT_SELECT_CURRENCY_TITLE', 'Select a Currency');
 define('BUTTON_TEXT_SELECT_CUST', 'Select a customer:'); 
-define('TEXT_OR_BY', 'or select by customer ID:'); 
+define('TEXT_OR_BY', 'or select by custom$Id$
 define('TEXT_STEP_1', 'Choose a customer to prefill the form or enter custom details.');
 define('TEXT_STEP_2', 'Step 2 - Confirm existing customer account details or enter new customer/shipping/billing details.');
 define('BUTTON_SUBMIT', 'Select');

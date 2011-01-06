@@ -1,6 +1,13 @@
 <?php
 /*
-   for Quantity Price Breaks Per Product for SPPC, price break per discount category v1.0 2008/08/23
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
   
 define('HEADING_TITLE', 'Discount categories');

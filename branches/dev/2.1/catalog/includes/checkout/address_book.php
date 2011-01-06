@@ -1,3 +1,15 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <table cellpadding="0" cellspacing="0" border="0" width="93%">
 <?php
 	//if ($addresses_count > 1) {

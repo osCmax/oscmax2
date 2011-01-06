@@ -1,3 +1,15 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
   if (ACCOUNT_GENDER == 'true' && !tep_session_is_registered('customer_id')) {

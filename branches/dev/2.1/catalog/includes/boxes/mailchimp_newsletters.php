@@ -1,13 +1,13 @@
 <?php
 /*
-$Id: mailchimp.php $
+$Id$
 
-osCmax e-Commerce
-http://www.osCmax.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-Copyright 2000 - 2010 osCmax
+  Copyright 2000 - 2010 osCmax
 
-Released under the GNU General Public License
+  Released under the GNU General Public License
 */
 
 if ( (MAILCHIMP_ENABLE == 'true') && (MAILCHIMP_API <> '') && (MAILCHIMP_ID <> '') && (MAILCHIMP_URL <> '') && (MAILCHIMP_U <> '') ) {

@@ -1,16 +1,15 @@
 <?php
 /*
-$Id: best_sellers.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
-  adapted for Separate Pricing Per Customer v4.2.x, Hide products and categories from groups mod 2008/08/04
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
-
+//  adapted for Separate Pricing Per Customer v4.2.x, Hide products and categories from groups mod 2008/08/04
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 //  if (isset($_GET['products_id'])) {
 //  if (isset($current_category_id) && ($current_category_id > 0)) {

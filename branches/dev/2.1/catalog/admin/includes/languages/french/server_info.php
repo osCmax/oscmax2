@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: server_info.php,v 1.1.1.1.2.1 2005/06/12 00:04:23 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

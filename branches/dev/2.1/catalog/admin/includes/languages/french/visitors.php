@@ -1,12 +1,11 @@
 <?php
-/* 
-  $Page ID: visitors.php,v2.2b, Dated: 01 April 2005 [Visitors File] Ian-San $
-  http://www.gowebtools.com
+/*
+$Id$
 
-  The Exchange Project - Community Made Shopping!
-  http://www.theexchangeproject.org
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2000,2001 The Exchange Project
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

@@ -1,10 +1,13 @@
 <?php
 /*
+$Id$
 
-  /includes/languages/english/image_box.php
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Shoppe Enhancement Controller - Copyright (c) 2003 WebMakers.com
-  Linda McGrath - osCommerce@WebMakers.com
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 
 define('HEADING_TITLE', 'Image Box');
@@ -20,8 +23,8 @@ define('TEXT_IMAGE_BOX', 'Image Box:');
 define('TEXT_DATE_ADDED', 'Date Added:');
 define('TEXT_LAST_MODIFIED', 'Last Modified:');
 define('TEXT_IMAGE_NONEXISTENT', 'IMAGE DOES NOT EXIST');
-define('TEXT_IMAGE_BOX_PRODUCTS_ID','Link to Products ID:');
-define('TEXT_IMAGE_BOX_CATEGORIES_ID','Link to Categories ID:');
+define('TEXT_IMAGE_BOX_PRODUCTS_ID','Link to Produc$Id$
+define('TEXT_IMAGE_BOX_CATEGORIES_ID','Link to Categori$Id$
 
 define('TEXT_NEW_INTRO', 'Please fill out the following information for the new Image Box');
 define('TEXT_EDIT_INTRO', 'Please make any necessary changes');

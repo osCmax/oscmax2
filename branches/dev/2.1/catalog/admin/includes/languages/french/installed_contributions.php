@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: installed_contribution.php,v 1.3 2003/04/04 11:10:39 roberthellemans Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
   

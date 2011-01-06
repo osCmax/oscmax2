@@ -1,19 +1,13 @@
 <?php
 /*
-  $Id: installed_contributions_help.php,v 1.3 2003/04/04 11:10:39 roberthellemans Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
-  Version Control & Bookmark MODULE for Contributions 0.1
-by Robert Hellemans
-www.RuddlesMills.com 
-This is a LIVE SHOP, so no TEST accounts etc...
-
 */
 
 define('TITLE','Version Control & Bookmark MODULE for Contributions 0.1.2');

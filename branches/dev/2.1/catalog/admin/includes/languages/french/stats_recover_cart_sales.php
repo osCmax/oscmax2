@@ -1,19 +1,13 @@
 <?php
 /*
-$Id: stats_recover_cart_sales.php 3 2006-05-27 04:59:07Z user $
-  Recover Cart Sales FRENCH Language File
+$Id$
 
-  report_recover_cart_sales contrib: JM Ivler 11/23/03
-  (c) Ivler/ osCommerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
-  Modifed by Aalst (stats_recover_cart_sales.php,v 1.2 .. 1.36)
-  aalst@aalst.com
-
-  Modifed by Lane (stats_recover_cart_sales.php,v 1.4d .. 2.22)
-  lane@ifd.com www.osc-modsquad.com / www.ifd.com
 */
 
 define('HEADING_TITLE', 'Rapport paniers non validés v2.22');

@@ -1,9 +1,11 @@
 <?php
 /*
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+$Id$
 
-  Copyright (c) 2002 osCommerce
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

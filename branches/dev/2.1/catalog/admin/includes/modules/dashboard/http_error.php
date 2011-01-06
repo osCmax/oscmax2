@@ -1,3 +1,15 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <!-- START HTTP ERROR LOGGING -->
 <table border="0" cellspacing="0" cellpadding="0" align="center" width="90%">
 	<tr>

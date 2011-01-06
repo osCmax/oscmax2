@@ -1,16 +1,13 @@
 <?php
 /*
-$Id: account_details.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-   
-  Step-By-Step Manual Order Entry Verion 0.5
-  Customer Entry through Admin
 */
 
   $newsletter_array = array(array('id' => '1',

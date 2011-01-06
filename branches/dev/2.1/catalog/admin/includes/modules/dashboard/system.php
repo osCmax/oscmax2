@@ -1,5 +1,16 @@
 <!-- START SYSTEM TAB -->
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 $system_setup_errors = 0;
 $system_config_errors = 0;
 $system_permission_errors = 0;

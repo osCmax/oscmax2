@@ -12,6 +12,8 @@ $Id$
 
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 
+if ( (!strstr($_SERVER['PHP_SELF'],'checkout.php')) && (ONEPAGE_CHECKOUT_ENABLED == 'True') ) {
+	
 ?>
 
 <?php if (!tep_session_is_registered('customer_id') && ENABLE_PAGE_CACHE == 'true' && class_exists('page_cache') ) {
@@ -111,5 +113,7 @@ include (bts_select('boxes', $box_base_name)); // BTS 1.5
   $boxLink = '';
 
 }
+
+} // end if to check for OPC
 ?>
 <!-- shopping_cart_eof //-->

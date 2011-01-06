@@ -24,9 +24,10 @@ $Id$
   Modified to utilize SSL to bypass Security Alert
 */
 
-if ((!strstr($_SERVER['PHP_SELF'],'login.php')) && (!strstr($_SERVER['PHP_SELF'],'create_account.php')) && (!strstr($_SERVER['PHP_SELF'],'Order_Info.php')) && (!strstr($_SERVER['PHP_SELF'],'Order_Info_Process.php')) && (!tep_session_is_registered('customer_id')))
 
-{
+if ((!strstr($_SERVER['PHP_SELF'],'login.php')) && (!strstr($_SERVER['PHP_SELF'],'create_account.php')) && (!strstr($_SERVER['PHP_SELF'],'Order_Info.php')) && (!strstr($_SERVER['PHP_SELF'],'Order_Info_Process.php')) && (!tep_session_is_registered('customer_id'))) {
+	
+if ( (!strstr($_SERVER['PHP_SELF'],'checkout.php')) && (ONEPAGE_CHECKOUT_ENABLED == 'True') ) {
 
 if (!tep_session_is_registered('customer_id')) {
 		
@@ -68,8 +69,8 @@ if (!tep_session_is_registered('customer_id')) {
   // in here...  Possibly a "You are logged in as :" box or something.
   
 include (bts_select('boxes', $box_base_name)); // BTS 1.5
- }
- 
+ } // end if OPC check
+}
 ?>
 <!-- loginbox_eof //-->
 <?php 

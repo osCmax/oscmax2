@@ -153,7 +153,7 @@ $Id$
 
       $post_string = substr($post_string, 0, -1);
 
-      $response = $this->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUE$Id$
+      $response = $this->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUEST-ID: ' . md5($cartID . tep_session_id() . rand())));
       $response_array = array();
       parse_str($response, $response_array);
 

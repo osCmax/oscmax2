@@ -1,16 +1,13 @@
 <?php
 /*
-$Id: ipn.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax2004 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  Original Authors: Harald Ponce de Leon, Mark Evans 
-  Updates by PandA.nl, Navyhost, Zoeticlight, David, gravyface, AlexStudio, windfjf, Monika in Germany and Terra
-  v2.3 updated by AlexStudio
 */
 
   chdir('../../../../');

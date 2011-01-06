@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: french.php 2.0.15 2010-02-05 09:59:07Z ejsolutions.co.uk $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

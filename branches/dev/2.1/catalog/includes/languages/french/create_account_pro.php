@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: create_account.php,v 1.11 2003/07/05 13:58:31 hpdl Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

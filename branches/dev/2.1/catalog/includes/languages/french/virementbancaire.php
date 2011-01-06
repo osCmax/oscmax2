@@ -1,14 +1,13 @@
 <?php
 /*
-  $Id: virementbancaire,v 1.0 2003/04/30
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  Based on Ausbank.php ; adapted/translated in French by Gelong Shenphen
 */
 
   define('MODULE_PAYMENT_VIREMENT_BANCAIRE_ACCNAM', 'Joe Lagrenouille');

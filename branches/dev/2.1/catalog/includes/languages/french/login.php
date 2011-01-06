@@ -1,14 +1,13 @@
 <?php
 /*
-  $Id: login.php,v 1.2.2.1 2005/06/12 00:04:34 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  Translated by Gunt - Contact : webmaster@webdesigner.com.fr
 */
 
 define('NAVBAR_TITLE', 'Ouverture de session');

@@ -1,9 +1,9 @@
 <?php
 /*
-  $Id: info_shopping_cart.php,v 1.1.1.1.2.1 2005/06/12 00:04:34 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
   Copyright (c) 2005 osCMax, 2002 osCommerce
 

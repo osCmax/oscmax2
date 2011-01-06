@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
   define('NAVBAR_TITLE','Shipment Tracking Information');
   define('HEADING_TITLE','Shipment Tracking Information');
   define('PACKAGE_IN_TRANSIT','This package is currently in transit. Last known status:');

@@ -1,15 +1,13 @@
 <?php
 /*
-  $Id: checkout_success.php, french, v 1.12 2003/09/12 23:21:45 jpf Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2005 osCMax, 2002 osCommerce
-  French version Copyrite 2003 - Configure That! Computer Services
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
 */
 
 define('NAVBAR_TITLE_1', 'Commande');

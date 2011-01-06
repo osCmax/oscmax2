@@ -1,26 +1,14 @@
 <?php
-
 /*
+$Id$
 
-  $Id: buysafe.php,v 1.1 2007/03/14 23:09:49 hpdl Exp $
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-
-
-  osCommerce, Open Source E-Commerce Solutions
-
-  http://www.oscommerce.com
-
-
-
-  Copyright (c) 2002 osCommerce
-
-
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
 */
-
-
 
   define('MODULE_BUYSAFE_BUYSAFE_TITLE', 'buySAFE');
 

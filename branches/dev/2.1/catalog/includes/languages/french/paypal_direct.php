@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: paypal_direct.php 1801 2008-01-11 16:49:20Z hpdl $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2007 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

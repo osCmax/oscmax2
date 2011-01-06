@@ -1,13 +1,11 @@
 <?php
 /*
-  $Id: gv_send.php,v 1.1.2.1 2003/04/18 17:25:44 wilt Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
-
-  French version Copyrite 2003 - Configure That! Computer Services
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

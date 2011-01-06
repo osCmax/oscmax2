@@ -1,15 +1,11 @@
 <?php
 /*
-  $Id: freecharger.php, french, v 1.0 2003/09/12 20:00:00 jpf Exp $
-  WebMakers.com Added: Free Payments and Shipping
-  Written by Linda McGrath osCOMMERCE@WebMakers.com
-  http://www.thewebmakerscorner.com
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2005 osCMax, 2002 osCommerce
-  French version Copyrite 2003 - Configure That! Computer Services
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

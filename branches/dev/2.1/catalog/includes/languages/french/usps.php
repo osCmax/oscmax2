@@ -1,13 +1,11 @@
 <?php
 /*
-  $Id: usps.php,french, v 1.8 2003/09/12 20:15:12 jpf Exp $
-  ++++ modified as USPS Methods 2.7 03/26/04 by Brad Waite and Fritz Clapp ++++
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2005 osCMax, 2002 osCommerce
-  French version Copyrite 2003 - Configure That! Computer Services
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

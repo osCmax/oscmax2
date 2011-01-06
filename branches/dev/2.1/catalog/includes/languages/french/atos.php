@@ -1,5 +1,15 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
   CyberPlus Paiement ATOS/SIPS for Banque Populaire
   (http://www.atos-group.com/sips/)
 
@@ -18,8 +28,6 @@
   new ATOS/SIPS binaries by S. Guiboud-Ribaud <devteam@e-network.fr>.
 
   Copyright (c) 2003-2005, e-network
-
-  Release under the GNU General Public License.
 */
 
   define('MODULE_PAYMENT_ATOS_TEXT_TITLE', 'Carte de Crédit');
@@ -41,7 +49,7 @@
   define('MODULE_PAYMENT_ATOS_ERROR_03', 'Merchand id invalid : contact ATOS support');
   define('MODULE_PAYMENT_ATOS_ERROR_05', 'Transaction cancelled. No detail about security.');
   define('MODULE_PAYMENT_ATOS_ERROR_12', 'Invalid amount');
-  define('MODULE_PAYMENT_ATOS_ERROR_13', 'Invalid transaction, fields invalid: (used of AMEX, without any AMEX contract)');
+  define('MODULE_PAYMENT_ATOS_ERROR_13', 'Invalid transaction, fields in$Id$
   define('MODULE_PAYMENT_ATOS_ERROR_17', 'Cancelled by customer');
   define('MODULE_PAYMENT_ATOS_ERROR_30', 'Format error: contact ATOS hotline for more details');
   define('MODULE_PAYMENT_ATOS_ERROR_63', 'HIGH PROBLEM OF SECURITY: must log out the customer and remove its session id');

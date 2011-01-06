@@ -1,12 +1,11 @@
 <?php
 /*
-  $Id: popup_coupon_help.php,v 1.1.1.1.2.1 2005/06/12 00:04:34 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
-  French version Copyrite 2003 - Configure That! Computer Services
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

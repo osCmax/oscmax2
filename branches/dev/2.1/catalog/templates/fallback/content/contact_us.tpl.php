@@ -25,7 +25,7 @@
   if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
 ?>
       <tr valign="middle">
-        <td class="messagestacksuccess" align="center"><?php echo tep_image(DIR_WS_IMAGES . 'icons/icon_add.png', ''); ?> &nbsp;<?php echo  TEXT_SUCCESS; ?></td>
+        <td class="messageStackSuccess" align="center"><?php echo tep_image(DIR_WS_ICONS . 'success.png', ''); ?> &nbsp;<?php echo TEXT_SUCCESS; ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

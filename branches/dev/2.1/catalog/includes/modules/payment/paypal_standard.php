@@ -1,15 +1,14 @@
 <?php
 /*
-  $Id: paypal_standard.php 1803 2008-01-11 18:16:37Z hpdl $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2008 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
-
   class paypal_standard {
     var $code, $title, $description, $enabled;
 

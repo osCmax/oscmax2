@@ -1,21 +1,14 @@
 <?php
-    /*
-    $Id: pm2checkout.php,v 1.19 2003/01/29 19:57:15 hpdl Exp $
+/*
+$Id$
 
-    osCommerce, Open Source E-Commerce Solutions
-    http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-    Copyright � 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
-    Released under the GNU General Public License
-
-    Updated December 05, 2010 by Craig Christenson (undeadzed)
-
-    Updated April 1 2005 by Alex Seto (me at alexseto.com)
-
-    Updates May 13 2004 by http://www.rayservers.com
-
-    */
+  Released under the GNU General Public License
+*/
 
     class pm2checkout {
         var $code, $title, $description, $enabled;

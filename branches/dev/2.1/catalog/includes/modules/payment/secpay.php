@@ -1,8 +1,8 @@
 <?php
 /*
-$Id: secpay.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
+  osCmax e-Commerce
   http://oscmax.com
 
   Copyright 2010 osCmax

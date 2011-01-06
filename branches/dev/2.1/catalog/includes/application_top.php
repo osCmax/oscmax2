@@ -575,7 +575,14 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
         	                  }
             	              break;   
 	  case 'clear_cart' :     $cart->reset(true);
-                             break;
+                              break;
+	  case 'remove_wishlist_product' :    if (isset($_GET['wishlist_id'])) {
+	               	                      $wishList->remove($_GET['wishlist_id']);
+        	                              }
+            	                          break;
+								   
+	  case 'clear_wishlist' : $wishList->reset(true);
+                              break;
 
 //                            } // end switch $_GET['action']
 //                           } // end if is set $_GET['action']

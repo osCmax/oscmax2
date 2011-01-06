@@ -1,4 +1,14 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
  /**
  *
  * ULTIMATE Seo Urls 5
@@ -10,10 +20,9 @@
  * @copyright Copyright 2008-2009 FWR Media
  * @copyright Portions Copyright 2005 Bobby Easland
  * @author Robert Fisher, FWR Media, http://www.fwrmedia.co.uk 
- * @lastdev $Author:: Rob                                              $:  Author of last commit
- * @lastmod $Date:: 2009-11-29 11:13:08 +0000 (Sun, 29 Nov 2009)       $:  Date of last commit
- * @version $Rev:: 105                                                 $:  Revision of last commit
- * @Id $Id:: Usu_Links2.php 105 2009-11-29 11:13:08Z Rob               $:  Full Details   
+ * @lastdev $Author::                                                  $:  Author of last commit
+ * @lastmod $Date::                                                    $:  Date of last commit
+ * @version $Rev::                                                     $:  Revision of last commit
  */
 
 class Usu_Links2 extends aDataMap {

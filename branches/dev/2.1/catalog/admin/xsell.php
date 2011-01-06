@@ -225,7 +225,7 @@ $Id$
 	 <tr>
 	  <td colspan="6"><table cellpadding="3" cellspacing="0" border="0" width="100%">
 	   <tr class="dataTableHeadingRow">
-	    <td valign="top" align="left" colspan="2"><span class="pageHeading"><?php echo 'Setting cross-sells for: '.$products_name['products_name'].' (Model: '.$products_name['products_model'].') (Produ$Id$
+	    <td valign="top" align="left" colspan="2"><span class="pageHeading"><?php echo 'Setting cross-sells for: '.$products_name['products_name'].' (Model: '.$products_name['products_model'].') (Product ID: '.$_GET['add_related_product_ID'].')';?></span></td>
 	   </tr>
 	   <tr class="dataTableHeadingRow">
 	    <td align="left" style="background-color:#FFFFFF"><?php echo tep_image('../images/'.DYNAMIC_MOPICS_THUMBS_DIR.$products_name['products_image']);?></td>

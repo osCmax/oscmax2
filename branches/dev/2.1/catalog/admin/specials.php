@@ -199,7 +199,7 @@ $Id$
                           }
                         } // end for loop
                       } else {
-                      echo tep_draw_pull_down_menu('customers_group', $input_groups, (isset($sInfo->customers_group_id)?$sInfo->customers_gro$Id$
+                      echo tep_draw_pull_down_menu('customers_group', $input_groups, (isset($sInfo->customers_group_id)?$sInfo->customers_group_id:'')); 
                       } ?>
                       </td>
                     </tr>

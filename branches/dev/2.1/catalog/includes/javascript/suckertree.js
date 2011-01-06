@@ -1,3 +1,14 @@
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 //SuckerTree Vertical Menu 1.1 (Nov 8th, 06)
 //By Dynamic Drive: http://www.dynamicdrive.com/style/
 

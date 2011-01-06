@@ -1,3 +1,16 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
+
 <link rel="stylesheet" type="text/css" href="ext/jQuery/themes/smoothness/ui.all.css">
 <script type="text/javascript" language="javascript" src="ext/jQuery/jQuery.js"></script>
 <script type="text/javascript" language="javascript" src="ext/jQuery/jQuery.ajaxq.js"></script>

@@ -1,15 +1,13 @@
 <?php
 /*
-  $Id: e-gold.php,v 1 2003/07/23 
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
-  e-Gold module Crated by Craig Harrison
 */
 
   define('MODULE_PAYMENT_EGOLD_TEXT_TITLE', 'e-Gold');

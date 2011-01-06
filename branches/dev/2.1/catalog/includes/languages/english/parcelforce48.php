@@ -1,13 +1,11 @@
 <?php
 /*
-osCommerce Language definition for shipping module
+$Id$
 
-Parcelforce 48
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-Version 2.2.1 - 7 January 2010
-
-This version created by Chris Lander from an original contribution
- by Stuart Newton (http://addons.oscommerce.com/info/4473).
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

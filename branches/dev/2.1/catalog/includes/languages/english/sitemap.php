@@ -1,18 +1,17 @@
 <?php
 /*
-  $Id: sitemap.php 1739 2007-12-20 00:52:16Z hpdl $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 /**
- * SeoPopOutMenu contribution - oscommerce
+ * SeoPopOutMenu contribution
  * 
- * oscommerce version compatability - MS-2.2, RC1, RC2, RC2a
  * PHP5, MySQL5 (STRICT TRANS TABLES)
  * Offers a pop out menu system
  * SEO benefits beccause all layer links are in source code as standard html

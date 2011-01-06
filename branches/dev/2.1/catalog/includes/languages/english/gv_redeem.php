@@ -1,12 +1,11 @@
 <?php
 /*
-$Id: gv_redeem.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscmax.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Gift Voucher System v1.0
-  Copyright 2006 osCMax2001,2002 Ian C Wilson
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

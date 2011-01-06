@@ -1,5 +1,15 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
   as published by the Free Software Foundation; either version 2
@@ -17,7 +27,6 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id: shipping_metrics_commandline.php 153 2009-01-30 00:16:37Z ed.davisson $
  * 
  * Tool to test WS response time.
  * 

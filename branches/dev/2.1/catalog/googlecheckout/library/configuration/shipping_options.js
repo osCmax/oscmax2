@@ -1,4 +1,14 @@
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
   Copyright (C) 2008 Google Inc.
 
   This program is free software; you can redistribute it and/or

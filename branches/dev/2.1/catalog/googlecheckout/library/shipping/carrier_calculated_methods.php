@@ -1,5 +1,15 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
   Copyright (C) 2008 Google Inc.
 
   This program is free software; you can redistribute it and/or
@@ -19,7 +29,6 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id: carrier_calculated_methods.php 153 2009-01-30 00:16:37Z ed.davisson $
  * 
  * Carrier Calculated Shipping Methods.
  *

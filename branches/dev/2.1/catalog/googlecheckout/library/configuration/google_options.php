@@ -1,5 +1,15 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
   Copyright (C) 2009 Google Inc.
 
   This program is free software; you can redistribute it and/or
@@ -27,7 +37,6 @@ require_once($configuration_dir . 'google_configuration_keys.php');
 
 /**
  * Google Checkout v1.5.0
- * $Id: google_options.php 937 2011-01-03 06:47:14Z michael.oscmax@gmail.com $
  * 
  * Class that encapsulates the Google Checkout configuration options.
  * 

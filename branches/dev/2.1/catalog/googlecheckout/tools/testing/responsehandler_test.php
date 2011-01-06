@@ -1,25 +1,20 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
   Copyright (C) 2008 Google Inc.
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 /**
  * Google Checkout v1.5.0
- * $Id: responsehandler_test.php 937 2011-01-03 06:47:14Z michael.oscmax@gmail.com $
  * 
  * Script to emulate a Google Checkout request made to a merchant response handler.
  * 
@@ -202,7 +197,7 @@ function send_google_req($url, $merid, $merkey, $postargs) {
   <form action="" method="post">
   <table border="1" cellpadding="2" cellspacing="0" align="center" width="90%">
     <tr>
-      <th align="right">Merchant ID: </th>
+      <th align="right">Mercha$Id$
       <td><input type="text" value="<?=@$_POST['sb_id'];?>" name="sb_id" size="100"/><a onclick="show_help(0);" onmouseover="this.style.cursor='help'"><big>&nbsp;&nbsp;?&nbsp;&nbsp;</big></a></td>
     </tr>
     <tr>

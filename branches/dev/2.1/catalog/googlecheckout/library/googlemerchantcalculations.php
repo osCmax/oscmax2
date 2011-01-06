@@ -1,5 +1,14 @@
 <?php
+/*
+$Id$
 
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
 /*
  * Copyright (C) 2006 Google Inc.
  *
@@ -18,7 +27,6 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id: googlemerchantcalculations.php 153 2009-01-30 00:16:37Z ed.davisson $
  * 
  * Used to create the merchant callback results when a
  * merchant-calculated feedback structure is received.

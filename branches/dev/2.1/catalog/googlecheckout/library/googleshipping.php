@@ -1,5 +1,15 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
  * Copyright (C) 2007 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +28,6 @@
  
 /**
  * Google Checkout v1.5.0
- * $Id: googleshipping.php 153 2009-01-30 00:16:37Z ed.davisson $
  * 
  * Classes used to represent shipping types
  */

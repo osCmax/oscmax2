@@ -1,5 +1,15 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
   Copyright (C) 2008 Google Inc.
 
   This program is free software; you can redistribute it and/or
@@ -19,7 +29,6 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id: googlecart.php 191 2009-02-23 15:31:07Z ed.davisson $
  * 
  * Classes used to build a shopping cart and submit it to Google Checkout
  */

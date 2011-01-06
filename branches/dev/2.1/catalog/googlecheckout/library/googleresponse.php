@@ -1,5 +1,15 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
   Copyright (C) 2008 Google Inc.
 
   This program is free software; you can redistribute it and/or
@@ -19,7 +29,6 @@
 
 /**
  * Google Checkout v1.5.0
- * $Id: googleresponse.php 202 2009-02-27 16:27:33Z ed.davisson $
  * 
  * This class is instantiated everytime any notification or
  * order processing commands are received.

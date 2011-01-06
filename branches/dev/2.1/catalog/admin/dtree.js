@@ -1,3 +1,14 @@
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 /*--------------------------------------------------|
 
 | dTree 2.05 | www.destroydrop.com/javascript/tree/ |

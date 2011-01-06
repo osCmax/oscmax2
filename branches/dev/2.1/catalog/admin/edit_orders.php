@@ -1,16 +1,13 @@
 <?php
 /*
-$Id: edit_orders.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
-  Original file written by Jonathan Hilgeman of SiteCreative.com
-
 */
 
   require('includes/application_top.php');

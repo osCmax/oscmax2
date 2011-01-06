@@ -1,14 +1,13 @@
 <?php
 /*
-$Id: stats_recover_cart_sales.php 14 2006-07-28 17:42:07Z user $
-  Recover Cart Sales Report v2.23
+$Id$
 
-  contrib: JM Ivler 11/20/03
-  (c) Ivler/ osCommerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
 */
 
   require('includes/application_top.php');

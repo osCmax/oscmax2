@@ -1,16 +1,13 @@
 <?php
 /*
-  $Id: catalog/admin/discount_categories.php v1.0 2008/08/24
-  for Quantity Price Breaks Per Product (http://addons.oscommerce.com/info/1242) and
-  Separate Pricing per Customer (http://addons.oscommerce.com/info/716)
-  parts used of Quick Price Updates (http://addons.oscommerce.com/info/122)
-  
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-  
-  Copyright (c) 2007 osCommerce
-  
-  Released under the GNU General Public License 
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 
   require('includes/application_top.php');

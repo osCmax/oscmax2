@@ -1,13 +1,11 @@
 <?php
 /*
-  $Id: validproducts.php,v 0.01 2002/08/17 15:38:34 Richard Fielder
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  
-
-  Copyright 2006 osCMax2002 Richard Fielder
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

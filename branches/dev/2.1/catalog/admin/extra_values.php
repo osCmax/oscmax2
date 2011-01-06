@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: extra_values.php ver 2.02 by Kevin L. Shelton 2010-06-22
+$Id$
   
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2009 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

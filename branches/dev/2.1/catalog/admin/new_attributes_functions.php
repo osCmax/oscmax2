@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 // A simple little function to determine if the current value is already selected for the current product.
 function checkAttribute( $current_value_id, $current_product_id, $current_product_option_id ) {
   global $attribute_value_price, $attribute_value_prefix, $posCheck, $negCheck;

@@ -1,3 +1,14 @@
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 /* --- BoxOver ---
 /* --- v 2.1 17th June 2006
 By Oliver Bryant with help of Matthew Tagg

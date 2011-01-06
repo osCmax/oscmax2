@@ -1,25 +1,19 @@
 <?php
 /*
-  Copyright (C) 2007 Google Inc.
+$Id$
 
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+  Copyright 2000 - 2011 osCmax
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  Released under the GNU General Public License
 */
+/*
+  Copyright (C) 2007 Google Inc.
 
 /**
  * Google Checkout v1.5.0
- * $Id: htaccess.php 153 2009-01-30 00:16:37Z ed.davisson $
  * 
  * .htaccess .htpasswd pair for Google Checkout Basic Authentication on CGI php
  *
@@ -222,7 +216,7 @@ function rand_salt_crypt( $pass )
       <th align="center" colspan="2">Sandbox Account: <input type="checkbox" value="true" name="sb"<?php echo (!isset($_POST['submit']) || isset($_POST['sb']))?' checked':'';?>/></th>
     </tr>
     <tr>
-      <th align="right">Merchant ID: </th>
+      <th align="right">Mercha$Id$
       <td><input type="text" value="<?=@$_POST['sb_id'];?>" name="sb_id" size="40"/></td>
     </tr>
     <tr>
@@ -233,7 +227,7 @@ function rand_salt_crypt( $pass )
       <th align="center" colspan="2">Checkout Account: <input type="checkbox" value="true" name="gc"<?php echo (!isset($_POST['submit']) || isset($_POST['gc']))?' checked':'';?>/></th>
     </tr>
     <tr>
-      <th align="right">Merchant ID: </th>
+      <th align="right">Mercha$Id$
       <td><input type="text" value="<?=@$_POST['gc_id'];?>" name="gc_id" size="40"/></td>
     </tr>
     <tr>

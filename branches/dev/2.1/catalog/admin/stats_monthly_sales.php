@@ -1,44 +1,12 @@
 <?php
 /*
-$Id: stats_monthly_sales.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  contributed by Fritz Clapp <fritz@sonnybarger.com>
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-This report displays a summary of monthly or daily totals:
-	gross income (order totals)
-	subtotals of all orders in the selected period
-	nontaxed sales subtotals
-	taxed sales subtotals
-	tax collected
-	shipping/handling charges
-	low order fees (if present)
-	gift vouchers (or other addl order total component, if present)
+  Copyright 2000 - 2011 osCmax
 
-The data comes from the orders and orders_total tables, therefore this report
-works only for osCommerce snapshots since 2002/04/08 (including MS1 and MS2).
-
-Data is reported as of order purchase date.
-
-If an order status is chosen, the report summarizes orders with that status.
-
-Version 2.0 introduces the capability to "drill down" on any month
-to report the daily summary for that month.  
-
-Report rows are initially shown in newest to oldest, top to bottom, 
-but this order may be inverted by clicking the "Invert" control button.
-
-Version 2.1 adds a popup display that lists the various types (and their
-subtotals) comprising the tax values in the report rows.
-
-**NOTE:
-This Version 2.1.1 has columns that summarize nontaxed and taxed order subtotals.
-The assumptions made for this feature may not be appropriate for all stores.
-The taxed column summarizes subtotals for orders in which tax was charged.
-The nontaxed column is the subtotal for the row less the taxed column value.
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-  Copyright 2006 osCMax2004 osCommerce
   Released under the GNU General Public License
 */
 

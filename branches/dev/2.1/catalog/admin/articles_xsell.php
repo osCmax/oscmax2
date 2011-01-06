@@ -1,18 +1,11 @@
 <?php
 /*
-$Id: articles_xsell.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax
-
-  cross.sale.php created By Isaac Mualem im@imwebdesigning.com
-
-  Modified by Andrew Edmond (osc@aravia.com)
-  Sept 16th, 2002
-
-  Further Modified by Rob Anderson 12 Dec 03
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 // I found the easiest way to do this is just delete the current attributes & start over =)
 MYSQL_QUERY( "DELETE FROM products_attributes WHERE products_id = '$current_product_id'" );
 

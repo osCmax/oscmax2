@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: easypopulate.php,v 2.76i 2009/08/02 22:50:52 surfalot Exp $
+$Id$
 
-  Designed for osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2009 Todd Holforty mtholforty(at)surfalot(dot)com 
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -2978,7 +2978,7 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                 '$v_tax_class_id',
                                 '$v_products_weight',
                                 '$v_products_quantity',
-                                ".(!empty($v_manufacturer_id)?$v_manufacturer_id:'NULL').")
+                                ".(!empty($v_manufacturer_id)?$v_manufactur$Id$
                                 ";
                     $result = tep_db_query($query);
                     
@@ -3050,7 +3050,7 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                 products_date_added=".$v_date_added.", 
                                 products_last_modified='".date("Y-m-d H:i:s")."', 
                                 products_quantity = $v_products_quantity, 
-                                manufacturers_id = ".(!empty($v_manufacturer_id)?$v_manufacturer_id:'NULL').", 
+                                manufacturers_id = ".(!empty($v_manufacturer_id)?$v_manufactur$Id$
                                 products_status = $v_db_status
                               WHERE
                                 (products_id = $v_products_id)

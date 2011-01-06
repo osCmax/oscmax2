@@ -1,15 +1,16 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
       QT Pro Version 4.1
-  
-      stock.php
-  
-      Contribution extension to:
-        osCMax Power E-Commerce
-        http://oscdox.com
-     
-      Copyright 2006 osCMax2004, 2005 Ralph Day
-      Released under the GNU General Public License
   
       Based on prior works released under the GNU General Public License:
         QT Pro prior versions
@@ -18,7 +19,7 @@
           FREEZEHELL - 08/11/2003 freezehell@hotmail.com Copyright 2006 osCMax2003 IBWO
           Joseph Shain, January 2003
         osCommerce MS2
-          Copyright 2006 osCMax
+          Copyright 2000 - 2011 osCmax
           
       Modifications made:
         11/2004 - Add input validation
@@ -34,15 +35,10 @@
       item is selected.  It displays a products attributes stock and allows it to be updated.
 
 *******************************************************************************************
-
-$Id: stock.php 14 2006-07-28 17:42:07Z user $
-
-  Enhancement module for osCMax Power E-Commerce
-  http://oscdox.com
   
   Credit goes to original QTPRO developer.
   Attributes Inventory - FREEZEHELL - 08/11/2003 freezehell@hotmail.com
-  Copyright 2006 osCMax2003 IBWO
+  Copyright 2003 IBWO
 
   Released under the GNU General Public License
 */

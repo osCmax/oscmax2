@@ -1,17 +1,13 @@
 <?php
 /*
-$Id: create_account.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-   
- THIS IS BETA - Use at your own risk!
-  Step-By-Step Manual Order Entry Verion 0.5
-  Customer Entry through Admin
 */
 
   require('includes/application_top.php');

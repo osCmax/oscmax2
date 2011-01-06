@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: specials.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -199,7 +199,7 @@ $Id: specials.php 14 2006-07-28 17:42:07Z user $
                           }
                         } // end for loop
                       } else {
-                      echo tep_draw_pull_down_menu('customers_group', $input_groups, (isset($sInfo->customers_group_id)?$sInfo->customers_group_id:'')); 
+                      echo tep_draw_pull_down_menu('customers_group', $input_groups, (isset($sInfo->customers_group_id)?$sInfo->customers_gro$Id$
                       } ?>
                       </td>
                     </tr>

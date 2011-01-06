@@ -1,5 +1,14 @@
 <?php
+/*
+$Id$
 
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
   require('includes/application_top.php');
 	
 	$oID = $_GET['oID'];

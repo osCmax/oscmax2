@@ -1,11 +1,13 @@
 <?php
 /*
+$Id$
 
-$Id: create_order.php,v 1.1.2.1.2.2 2005/09/21 20:57:35 Michael Sasek Exp $
-osCMax Power E-Commerce
-http://oscdox.com
-Copyright (c) 2005 osCMax, 2002 osCommerce
-Released under the GNU General Public License
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 
 require('includes/application_top.php');

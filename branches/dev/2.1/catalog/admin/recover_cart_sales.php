@@ -1,16 +1,13 @@
 <?php
 /*
-$Id: recover_cart_sales.php 14 2006-07-28 17:42:07Z user $
- Recover Cart Sales Tool v2.23
+$Id$
 
- osCMax Power E-Commerce
- http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
- Copyright 2006 osCMax2003 JM Ivler / OSCommerce
+  Copyright 2000 - 2011 osCmax
 
- Released under the GNU General Public License
-
- Based on an original release of unsold carts by: JM Ivler
+  Released under the GNU General Public License
 */
  require('includes/application_top.php');
  require(DIR_WS_CLASSES . 'currencies.php');

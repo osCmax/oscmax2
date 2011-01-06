@@ -1,12 +1,22 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
       QT Pro Version 4.0
   
       stats_low_stock_attrib.php
   
       Contribution extension to:
-        osCMax Power E-Commerce
-        http://oscdox.com
+        osCmax e-Commerce
+        http://www.oscmax.com
      
       Copyright 2006 osCMax2004 Ralph Day
       Released under the GNU General Public License
@@ -18,7 +28,7 @@
           FREEZEHELL - 08/11/2003 freezehell@hotmail.com Copyright 2006 osCMax2003 IBWO
           Joseph Shain, January 2003
         osCommerce MS2
-          Copyright 2006 osCMax
+          Copyright 2000 - 2011 osCmax
           
       Modifications made:
         11/2004 - Clean up to not replicate for all languages
@@ -36,12 +46,12 @@
       
 *******************************************************************************************
 
-$Id: stats_low_stock_attrib.php 3 2006-05-27 04:59:07Z user $
+$Id$
   (v 1.3 by Tom Wojcik aka TomThumb 2004/07/03)
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

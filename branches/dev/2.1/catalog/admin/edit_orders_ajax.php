@@ -1,18 +1,14 @@
 <?php
-  /*
-  $Id: edit_orders_ajax.php v5.0.5 08/27/2007 djmonkey1 Exp $
+/*
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2007 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
-  For Order Editor support or to post bug reports, feature requests, etc, please visit the Order Editor support thread:
-  http://forums.oscommerce.com/index.php?showtopic=54032
-  
-  */
+*/
   
   require('includes/application_top.php');
   

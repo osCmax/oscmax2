@@ -1,14 +1,11 @@
 <?php
 /*
-  $Id: stats_wishlist.php 2005/11/06
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2002 osCommerce
-
-  Aaron Hiatt aaron@scaredrabbit.com
-  http://www.scaredrabbit.com
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

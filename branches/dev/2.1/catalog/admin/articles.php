@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: articles.php 17 2006-08-04 18:04:08Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

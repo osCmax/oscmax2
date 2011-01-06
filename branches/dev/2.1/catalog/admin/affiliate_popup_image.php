@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_popup_image.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax2001 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

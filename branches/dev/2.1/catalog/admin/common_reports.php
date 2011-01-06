@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
   if ($_GET["date1"] == "" OR $_GET["date2"] == "") {
     if (isset($_SESSION['date1']) && isset($_SESSION['date2'])) {
       $date1 = $_SESSION['date1'];

@@ -1,15 +1,19 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+/*
       QT Pro Version 4.1
   
       pad_single_radioset.php
-  
-      Contribution extension to:
-        osCMax Power E-Commerce
-        http://oscdox.com
-     
-      Copyright 2006 osCMax2004, 2005 Ralph Day
-      Released under the GNU General Public License
   
       Based on prior works released under the GNU General Public License:
         QT Pro & CPIL prior versions
@@ -18,7 +22,7 @@
           FREEZEHELL - 08/11/2003 freezehell@hotmail.com Copyright 2006 osCMax2003 IBWO
           Joseph Shain, January 2003
         osCommerce MS2
-          Copyright 2006 osCMax
+          Copyright 2000 - 2011 osCmax
   
           Modifications made:
           11/2004 - Created

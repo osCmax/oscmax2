@@ -1,8 +1,10 @@
 <?php
 /*
-  $Id: wishlist.php,v 3.0  2005/08/24 Dennis Blake
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+$Id$
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

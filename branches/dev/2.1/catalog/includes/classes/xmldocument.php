@@ -1,15 +1,13 @@
 <?php
 /*
-$Id: xmldocument.php 3 2006-05-27 04:59:07Z user $
-    
-    Written by Torin Walker
-    torinwalker@rogers.com
-    
-    Generic XML Document support for when there is none.
-    
-    Copyright(c) 2003 by Torin Walker, All rights reserved.
-    
-    Released under the GNU General Public License
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 
 define("ELEMENT", 0);

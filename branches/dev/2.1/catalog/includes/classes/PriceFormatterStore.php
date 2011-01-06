@@ -1,19 +1,23 @@
 <?php
-/* $Id: PriceFormatterStore.php v 1.2 2008/05/03
+/* \
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+/*
    adapted for QPBPP for SPPC v 2.0 2008/11/08
    
    an object to store the price breaks and products_quantity of a product once queried by the 
    class PriceFormatter.php to avoid it being queried more than once and tep_get_stock to be executed
    for each product on the page shopping_cart.php
+*/ 
    
-   osCommerce, Open Source E-Commerce Solutions
-   http://www.oscommerce.com
-
-   Copyright (c) 2006 osCommerce
-
-   Released under the GNU General Public License
-*/
-
 class PriceFormatterStore {
   var $priceFormatterData = array();
   

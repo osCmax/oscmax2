@@ -1,17 +1,17 @@
 <?php
 /*
-  $Id: PriceFormatter.php,v 1.10 2008/08/28 Exp $
-  adapted for QPBPP for SPPC version 2.0 2008/11/08
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
 /*
+    adapted for QPBPP for SPPC version 2.0 2008/11/08
     PriceFormatter.php - module to support quantity pricing
 
     Created 2003, Beezle Software based on some code mods by WasaLab Oy (Thanks!)

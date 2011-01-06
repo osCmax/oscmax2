@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: index.php,v 1.1 2003/06/11 17:38:00 hpdl Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

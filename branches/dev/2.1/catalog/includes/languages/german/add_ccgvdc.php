@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 define('BOX_INFORMATION_GV', 'Gutschein einlösen');
 define('VOUCHER_BALANCE', 'Ihr Guthaben');
 define('BOX_HEADING_GIFT_VOUCHER', 'Gutscheine');

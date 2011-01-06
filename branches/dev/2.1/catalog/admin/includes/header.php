@@ -1,3 +1,15 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
 
@@ -122,16 +134,6 @@ document.status.comments.value += newmessage;
 //-->
 </script>
 <?php
-/*
-$Id: header.php 3 2006-05-27 04:59:07Z user $
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
-
-  Released under the GNU General Public License
-*/
 
   if ($messageStack->size > 0) {
     echo $messageStack->output();

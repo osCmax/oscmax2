@@ -1,13 +1,19 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
 
 $server = 'test'; // which fedex server to use: test or production
 $request_referer = 'localhost'; // base url for site, e.g.: 'yoursite.com'
 
 /*
-$Id: fedexdc.php 14 2006-07-28 17:42:07Z user $
-Copyright 2006 osCMax2003 Vermonster LLC
-All rights reserved.
-
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
 License as published by the Free Software Foundation; either
@@ -40,16 +46,6 @@ To submit a transaction to FedEx's Gateway server you must have a valid
 FedEx Account Number and a FedEx Meter Number.  To gain access
 and receive a Meter Number you must send a Subscribe () request to
 FedEx containing your FedEx account number and contact information.
-
-Questions, Comments
-
-Jay Powers
-jay@vermonster.com
-
-Vermonster LLC
-312 Stuart St.
-Boston, MA 02116
-
 */
 
 // check for test or production gateway

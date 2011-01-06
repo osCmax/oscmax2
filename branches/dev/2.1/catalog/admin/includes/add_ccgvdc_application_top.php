@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
   define('FILENAME_GV_QUEUE', 'gv_queue.php');
   define('FILENAME_GV_MAIL', 'gv_mail.php');
   define('FILENAME_GV_SENT', 'gv_sent.php');

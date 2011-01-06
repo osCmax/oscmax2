@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 // /catalog/includes/functions/clean_html_comments.php
 // WebMakers.com Added: Header Tags Generator v2.0
 // WebMakers.com Added: FREE-CALL FOR PRICE-COMING SOON ETC. v3.0

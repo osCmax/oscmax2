@@ -1,9 +1,9 @@
 <?php
 /*
-$Id: compatibility.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
   Copyright 2009 osCMax
 

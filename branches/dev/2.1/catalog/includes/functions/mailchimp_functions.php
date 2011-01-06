@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 function mc_add_email($email_address, $email_format) {
     include_once(DIR_WS_CLASSES . "MCAPI.class.php");
     $api = new MCAPI(MAILCHIMP_API);

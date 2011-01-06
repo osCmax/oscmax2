@@ -1,15 +1,11 @@
 <?php
 /*
-  $Id: whos_online.php,v 3.5 2008/02/06 SteveDallas Exp $
+$Id$
 
-  2008 Feb 06 v3.5 Glen Hoag aka SteveDallas Moved hostname resolution here to reduce admin tool load
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  updated version number because of version number jumble and provide installation instructions.
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

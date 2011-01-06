@@ -1,10 +1,11 @@
 <?php
 /*
-$Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  Dynamic MoPics version 3.000, built for osCommerce MS2
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2004-2005 Josh Dechant
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

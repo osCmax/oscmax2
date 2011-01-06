@@ -1,24 +1,16 @@
 <?php
-  /*
-  Module: Information Pages Unlimited
-          File date: 2007/02/17
-          Based on the FAQ script of adgrafics
-          Adjusted by Joeri Stegeman (joeri210 at yahoo.com), The Netherlands
+/*
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  */
+*/
 
 ////
-/************************************************
-Modified by Robert Fisher aka Thunderace
-23 March 2006
-Information_children mod
-This file now shows highlights and children
-in the same manner as osCommerce
-************************************************/
 function tep_information_show_category($information_group_id = 1) {
 	global $sitemapString, $languages_id;
 	$information_tree = array();

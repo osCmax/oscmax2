@@ -1,14 +1,13 @@
 <?php
 /*
-  $Id: featured_sets.php,v 1.01 03/10/2004 dd/mm/yyyyy 21:00:00 surfalot.com Exp $
+$Id$
 
-  Open Featured Sets functions module
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-Made for:
-  osCommerce, Open Source E-Commerce Solutions 
-  http://www.oscommerce.com 
-  Copyright (c) 2002 osCommerce 
-  Released under the GNU General Public License 
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 
 ////

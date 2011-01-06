@@ -51,6 +51,30 @@
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+      <?php if (ONEPAGE_CHECKOUT_ENABLED == 'True') { ?>
+      <tr>
+		<td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td width="50%" align="right"><?php echo tep_draw_separator('pixel_silver.gif', '1', '5'); ?></td>
+				<td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
+			  </tr>
+			</table></td>
+			<td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
+                <td width="50%" align="left"><?php echo tep_image(DIR_WS_ICONS . 'checkout_bullet.gif'); ?></td>
+			  </tr>
+			</table></td>
+		  </tr>
+		  <tr>
+			<td align="center" width="25%" class="checkoutBarTo"><?php echo CHECKOUT_BAR_CONFIRMATION; ?></td>
+			<td align="center" width="25%" class="checkoutBarCurrent"><?php echo CHECKOUT_BAR_FINISHED; ?></td>
+		  </tr>
+		</table></td>
+	  </tr>
+      <?php } else { ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -77,5 +101,6 @@
           </tr>
         </table></td>
       </tr>
+      <?php } ?>
 <?php if (DOWNLOAD_ENABLED == 'true') include(DIR_WS_MODULES . 'downloads.php'); ?>
     </table></form>

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: core.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -107,7 +107,7 @@ define('CATEGORY_CONTACT', 'Contact Information');
 define('CATEGORY_OPTIONS', 'Options');
 define('CATEGORY_PASSWORD', 'Password');
 define('CATEGORY_CORRECT', 'If this is the right customer, press the Confirm button below.');
-define('ENTRY_CUSTOMERS_ID', 'ID:');
+define('ENTRY_CUSTOMERS_ID'$Id$
 define('ENTRY_CUSTOMERS_ID_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
 define('ENTRY_COMPANY', 'Company Name:');
 define('ENTRY_COMPANY_ERROR', '');

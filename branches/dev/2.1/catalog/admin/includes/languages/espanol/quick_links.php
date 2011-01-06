@@ -2,10 +2,10 @@
 /*
 $Id: quick_links.php 3 2010-03-31 user pgm
 
-  osCMax Power E-Commerce
+  osCmax e-Commerce
   http://oscmax.com
 
-  Copyright 2010 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

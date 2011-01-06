@@ -1,23 +1,13 @@
 <?php
 /*
-$Id: recover_cart_sales.php 3 2006-05-27 04:59:07Z user $
-  Recover Cart Sales v2.22 ENGLISH Language File
+$Id$
 
-  Recover Cart Sales contrib: JM Ivler (c)
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
-  Modifed by Aalst (recover_cart_sales.php,v 1.2 .. 1.36)
-  aalst@aalst.com
-  
-  Modifed by willross (recover_cart_sales.php,v 1.4)
-  reply@qwest.net
-  - don't forget to flush the 'scart' db table every so often
-
-  Modifed by Lane (stats_recover_cart_sales.php,v 1.4d .. 2.22)
-  lane@ifd.com www.osc-modsquad.com / www.ifd.com
 */
 
 define('MESSAGE_STACK_CUSTOMER_ID', 'Carrito de Cliente-ID ');

@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 define('BOX_HEADING_GV_ADMIN', 'Boucher/Cupones');
 define('BOX_GV_ADMIN_QUEUE', 'Cola de Boucher de Regalo');
 define('BOX_GV_ADMIN_MAIL', 'Correo de oucher de Regalo');

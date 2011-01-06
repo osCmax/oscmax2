@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: create_order.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
   
@@ -42,7 +42,7 @@ define('CATEGORY_CONTACT', 'Contact Information');
 define('CATEGORY_OPTIONS', 'Options');
 define('CATEGORY_PASSWORD', 'Password');
 define('CATEGORY_CORRECT', 'If this is the right customer, press the Confirm button below.');
-define('ENTRY_CUSTOMERS_ID', 'ID:');
+define('ENTRY_CUSTOMERS_ID'$Id$
 define('ENTRY_CUSTOMERS_ID_TEXT', '&nbsp;');
 define('ENTRY_COMPANY', 'Company Name:');
 define('ENTRY_COMPANY_ERROR', '');
@@ -107,7 +107,7 @@ define('HEADING_CREATE', 'Confirm client details:');
 define('TEXT_SELECT_CUST', 'Select a client:'); 
 define('TEXT_SELECT_CURRENCY', 'Select currency:');
 define('BUTTON_TEXT_SELECT_CUST', 'Select a client:'); 
-define('TEXT_OR_BY', 'or set client ID:'); 
+define('TEXT_OR_BY', 'or set clie$Id$
 define('TEXT_STEP_1', 'Step 1 - Choose a client and verify the details');
 define('BUTTON_SUBMIT', 'confirm');
 define('ENTRY_CURRENCY','Devise');

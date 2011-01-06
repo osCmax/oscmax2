@@ -1,17 +1,13 @@
 <?php
 /*
-  $Id $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  Incluye La Contribución:
-  Tenga acceso con la cuenta llana (v. 2.2a) para el área del Admin del osCommerce (MS2
-
-  Este archivo puede ser suprimido si inhabilita la contribución antedicha
 */
 
 define('HEADING_TITLE', 'Access Negado');

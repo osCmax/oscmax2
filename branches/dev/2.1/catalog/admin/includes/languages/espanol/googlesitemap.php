@@ -1,16 +1,11 @@
 <?php
 /*
-  $Id: googlesitemap.php,v 2.00 2003/03/02 ep Exp $
+$Id$
   
-  by Davide Duca, Italy/Bulgaria
+  osCmax e-Commerce
+  http://www.oscmax.com
 
- 
-  davide Duca - www.eurobigstore.com
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2006 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

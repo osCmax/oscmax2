@@ -1,7 +1,15 @@
 <?php
 /*
-  $Id:Batch_print.php, user Exp $
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
+
 define('TEXT_ORDER_NUMBERS_RANGES', 'Order Number (s), either one # or  range, # - #, or #,#,#');
 define('HEADING_TITLE', 'Batch Print Center');
 define('TABLE_HEADING_COMMENTS', 'Comments');

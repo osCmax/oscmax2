@@ -1,18 +1,14 @@
 <?php
-  /*
-  Module: Information Pages Unlimited
-          File date: 2007/02/17
-          Based on the FAQ script of adgrafics
-          Adjusted by Joeri Stegeman (joeri210 at yahoo.com), The Netherlands
+/*
+$Id$
 
-	  File Date: 2008/04/23
-	  Translate to Spanish by: Alfredo De Vanna, Yakidoo
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  */
+*/
 
   define('ACTION_INFORMATION', 'Acci&oacute;n');
   define('ACTIVATION_ID_INFORMATION', 'Activaci&oacute;n de ID de Informaci&oacute;n=');

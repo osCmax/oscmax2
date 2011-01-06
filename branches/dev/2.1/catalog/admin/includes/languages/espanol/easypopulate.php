@@ -1,11 +1,13 @@
 <?php
 /*
-$Id: easypopulate.php 3 2006-05-27 04:59:07Z user $
-  Released under the GNU General Public License
+$Id$
 
-  Borja Bravo Alférez
-  Item Consulting, 
-  
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 
 define('EP', 			'Actualización en masa');

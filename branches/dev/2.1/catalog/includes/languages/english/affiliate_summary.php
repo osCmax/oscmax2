@@ -69,7 +69,7 @@ define('HEADING_COMMISSION_HELP', 'Commission Rate Help');
 define('TEXT_COMMISSION_HELP', '<b>Commission Rate:</b> represents the total commission owed to you.');
 
 define('TEXT_GREETING','Welcome ');
-define('TEXT_AFFILIATE_ID', 'Your Affilia$Id$
+define('TEXT_AFFILIATE_ID', 'Your Affiliate ID: ');
 
 define('IMAGE_BANNERS','Banners');
 define('IMAGE_CLICKTHROUGHS','Clickthrough Report');

@@ -1,3 +1,15 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
 <head>
@@ -176,7 +188,7 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
   Frequently Asked Questions entry on the osCommerce
   support site:
 
-  http://oscdox.com/community.php/faq,26/q,50
+  http://www.oscmax.com/community.php/faq,26/q,50
 
   Please leave this comment intact together with the
   following copyright announcement.

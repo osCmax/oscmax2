@@ -1,3 +1,15 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -346,7 +358,7 @@ foreach ($epf as $e) {
 
   $listing_sql = $select_str . $from_str . $where_str . $order_str;
 
-// BOF: Grid:List Switching
+// BOF:$Id$
         // initial set from admin
         if ( (!isset($_GET['gridlist'])) && (!isset($_SESSION['gridlist'])) ) {
 		  if (PRODUCT_LIST_TYPE == 0) { $gridlist = 'list'; } else { $gridlist = 'grid'; }
@@ -363,7 +375,7 @@ foreach ($epf as $e) {
         } else {
           include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING_COL);
         }
-// EOF: Grid:List Switching
+// EOF:$Id$
 ?>
         </td>
       </tr>

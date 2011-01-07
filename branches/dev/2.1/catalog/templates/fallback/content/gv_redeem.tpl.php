@@ -1,3 +1,15 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <table width="100%" border="0" cellspacing="2" cellpadding="1">
   <tr>
     <td><table border="0" width="100%" cellspacing="0" cellpadding="0">

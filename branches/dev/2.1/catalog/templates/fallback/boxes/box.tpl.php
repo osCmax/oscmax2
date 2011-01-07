@@ -1,5 +1,19 @@
-<?php if (!defined ('DIR_FS_CATALOG')) die ("Access denied."); ?>
-<?php /* infobox template  */ ?>
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+
+    if (!defined ('DIR_FS_CATALOG')) die ("Access denied.");
+    /* infobox template  */ 
+?>
           <tr>
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="0">

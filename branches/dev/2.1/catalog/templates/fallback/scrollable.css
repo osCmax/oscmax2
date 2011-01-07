@@ -1,3 +1,13 @@
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
 /* NOTE: Some settings for scrollable are controlled through admin panel */
 .scrollable, .scrollable_ap { position:relative; overflow:hidden; float:left; }
 .scrollable .items, .scrollable_ap .items_ap { width:20000em; position:absolute; clear:both; }

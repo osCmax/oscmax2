@@ -11,7 +11,7 @@ $Id$
 */
 
 define('HEADING_TITLE', 'Affiliate Sales');
-define('HEADING_TITLE_SEARCH', 'Ord$Id$
+define('HEADING_TITLE_SEARCH', 'Order ID:');
 define('HEADING_TITLE_STATUS', 'Status:');
 define('TABLE_HEADING_ONLINE', 'Clickthroughs');
 define('TABLE_HEADING_AFFILIATE', 'Affiliate');

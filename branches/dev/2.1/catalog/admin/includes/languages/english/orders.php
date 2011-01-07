@@ -13,7 +13,7 @@ $Id$
 define('TABLE_HEADING_EDIT_ORDERS', 'To modify the order');
 
 define('HEADING_TITLE', 'Orders');
-define('HEADING_TITLE_SEARCH', 'Ord$Id$
+define('HEADING_TITLE_SEARCH', 'Order ID:');
 define('HEADING_TITLE_STATUS', 'Status:');
 //BOF: Orders search by customers info
 define('HEADING_TITLE_SEARCH_ALL', 'Search (order id, customer or company name):');

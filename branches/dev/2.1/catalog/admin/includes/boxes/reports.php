@@ -13,6 +13,13 @@ $Id$
 <!-- reports //-->
 <?php
   $contents = '';
+  
+  // Hide Fedex shipping manifest unless module is installed
+  $fedex_menu_display = '';
+   
+  if (MODULE_SHIPPING_FEDEX1_STATUS == 'True') {
+    $fedex_menu_display = "tep_admin_jqmenu(FILENAME_SHIPPING_MANIFEST, BOX_SHIPPING_MANIFEST, 'BLANK')";
+  }
 
   $contents = (					   tep_admin_jqmenu(FILENAME_STATS_PRODUCTS_VIEWED, BOX_REPORTS_PRODUCTS_VIEWED, 'TOP') .
                                    tep_admin_jqmenu(FILENAME_STATS_PRODUCTS_PURCHASED, BOX_REPORTS_PRODUCTS_PURCHASED, 'TOP') .
@@ -21,7 +28,7 @@ $Id$
 								   tep_admin_jqmenu(FILENAME_STATS_WISHLIST, BOX_REPORTS_WISHLIST, 'TOP') .
                                    tep_admin_jqmenu(FILENAME_STATS_MONTHLY_SALES, BOX_REPORTS_MONTHLY_SALES, 'TOP') .
                                    tep_admin_jqmenu(FILENAME_STATS_RECOVER_CART_SALES, BOX_REPORTS_RECOVER_CART_SALES, 'TOP') .
-								   tep_admin_jqmenu(FILENAME_SHIPPING_MANIFEST, BOX_SHIPPING_MANIFEST, 'BLANK') .
+								   $fedex_menu_display .
 								   tep_admin_jqmenu(FILENAME_STATS_LOW_STOCK_ATTRIB, BOX_REPORTS_STATS_LOW_STOCK_ATTRIB, 'TOP') .
 								   tep_admin_jqmenu(FILENAME_STATS_CREDITS, BOX_REPORTS_CREDITS, 'TOP') .
 								   tep_admin_jqmenu(FILENAME_STATS_ADMIN_LOGGING, BOX_REPORTS_ADMIN_LOGGING, 'TOP') .

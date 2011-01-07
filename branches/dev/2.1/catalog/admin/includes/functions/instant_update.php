@@ -1,10 +1,15 @@
 <?php
 /*
-    Specify Fixed Product Image Height or Width
-    Ridexbuilder - http://ejsolutions.co.uk
-    osCMax 2010
-    Released under GPL
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
+
   $images_dir = DIR_WS_IMAGES; // default catalog images folder;
   $root_images_dir = DIR_FS_CATALOG .  $images_dir . DYNAMIC_MOPICS_BIGIMAGES_DIR;
   $root_products_dir = DIR_FS_CATALOG .  $images_dir . DYNAMIC_MOPICS_PRODUCTS_DIR;  

@@ -1,10 +1,15 @@
 <?php
 /*
-    Thumbnail Regenerator
-    Ridexbuilder - http://ejsolutions.co.uk
-    osCMax 2010
-    Released under GPL
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
+
   $cache_dir = 'cache/';
   $root_images_dir = DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR;
   $root_products_dir = DIR_FS_CATALOG .  DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR;  

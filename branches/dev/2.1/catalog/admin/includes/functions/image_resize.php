@@ -1,21 +1,13 @@
 <?php
 /*
-$Id: image_resize.php $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2010 osCMax & ejsolutions.co.uk
-  Original work using phpThumb() by James Heinrich <info@silisoftware.com>
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
-  Parameters:
-  Either Width or Height should be specified but not both, for proportional resizing.
-  If Width is set, then Height is ignored
-  Quality is optional - default 75.
-  If Image is specfied with a path, then Input and Ouptut Directory should not be specified.
-
 */
 
 function image_resize($image, $width, $height, $quality, $input_directory, $output_directory){

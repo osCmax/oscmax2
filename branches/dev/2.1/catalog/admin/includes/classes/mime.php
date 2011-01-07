@@ -1,18 +1,13 @@
 <?php
 /*
-$Id: mime.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
-  mime.php - a class to assist in building mime-HTML eMails
-
-  The original class was made by Richard Heyes <richard@phpguru.org>
-  and can be found here: http://www.phpguru.org
-
-  Renamed and Modified by Jan Wildeboer for osCommerce
+  Released under the GNU General Public License
 */
 
   class mime {

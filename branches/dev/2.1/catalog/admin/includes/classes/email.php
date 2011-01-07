@@ -1,20 +1,13 @@
 <?php
 /*
-$Id: email.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
-  mail.php - a class to assist in building mime-HTML eMails
-
-  The original class was made by Richard Heyes <richard@phpguru.org>
-  and can be found here: http://www.phpguru.org
-
-  Renamed and Modified by Jan Wildeboer for osCommerce
 */
 
   class email {
@@ -331,7 +324,7 @@ $Id: email.php 14 2006-07-28 17:42:07Z user $
       if (tep_not_null($this->html_images)) {
         reset($this->html_images);
         while (list(,$value) = each($this->html_images)) {
-          $this->html = str_replace($value['name'], 'cid:' . $value['cid'], $this->html);
+          $this->html = str_replace($value['name'],$Id$
         }
       }
 

@@ -1,15 +1,16 @@
 <?php
 /*
-$Id: phplot.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
-  PHPLOT 4.4.6 Copyright 2006 osCMax1998-2001 Afan Ottenheimer
+*/
+/*
+  PHPLOT 4.4.6 Copyright 1998-2001 Afan Ottenheimer
 */
 
 class PHPlot{

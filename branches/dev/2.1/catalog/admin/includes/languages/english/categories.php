@@ -37,7 +37,7 @@ define('TEXT_PRODUCT_DATE_ADDED', 'This product was added to our catalog on %s.'
 define('TEXT_PRODUCT_DATE_AVAILABLE', 'This product will be in stock on %s.');
 
 define('TEXT_EDIT_INTRO', 'Please make any necessary changes');
-define('TEXT_EDIT_CATEGORIES_ID', 'Catego$Id$
+define('TEXT_EDIT_CATEGORIES_ID', 'Category ID:');
 define('TEXT_EDIT_CATEGORIES_NAME', 'Category Name:');
 define('TEXT_EDIT_CATEGORIES_IMAGE', 'Category Image:');
 define('TEXT_EDIT_SORT_ORDER', 'Sort Order:');

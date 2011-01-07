@@ -324,7 +324,7 @@ $Id$
       if (tep_not_null($this->html_images)) {
         reset($this->html_images);
         while (list(,$value) = each($this->html_images)) {
-          $this->html = str_replace($value['name'],$Id$
+          $this->html = str_replace($value['name'], 'cid:' . $value['cid'], $this->html);
         }
       }
 

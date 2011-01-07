@@ -86,10 +86,10 @@ $Id$
 
   $file_contents = '<?php' . "\n" .
                    '/*' . "\n" .
-                   '  osCmax v2.0, Open Source E-Commerce Solutions' . "\n" .
-                   '  http://www.osCDox.com' . "\n" .
+                   '  osCmax e-Commerce' . "\n" .
+                   '  http://www.oscmax.com' . "\n" .
                    '' . "\n" .
-                   '  Copyright 2010 osCmax' . "\n" .
+                   '  Copyright 2000 - 2011 osCmax' . "\n" .
                    '' . "\n" .
                    '  Released under the GNU General Public License' . "\n" .
                    '*/' . "\n" .
@@ -135,10 +135,10 @@ $Id$
 
   $file_contents = '<?php' . "\n" .
                    '/*' . "\n" .
-                   '  osCmax v2.0, Open Source E-Commerce Solutions' . "\n" .
-                   '  http://www.osCDox.com' . "\n" .
+                   '  osCmax e-Commerce' . "\n" .
+                   '  http://www.oscmax.com' . "\n" .
                    '' . "\n" .
-                   '  Copyright 2010 osCmax, 2008 osCommerce' . "\n" .
+                   '  Copyright 2000 - 2011 osCmax' . "\n" .
                    '' . "\n" .
                    '  Released under the GNU General Public License' . "\n" .
                    '*/' . "\n" .

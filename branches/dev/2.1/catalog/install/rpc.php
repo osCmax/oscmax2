@@ -54,7 +54,7 @@ $Id$
         osc_db_connect($db['DB_SERVER'], $db['DB_SERVER_USERNAME'], $db['DB_SERVER_PASSWORD']);
 
         $db_error = false;
-        $sql_file = $dir_fs_www_root . '/osCMax.sql';
+        $sql_file = $dir_fs_www_root . '/oscmax.sql';
 
         osc_set_time_limit(0);
         osc_db_install($db['DB_DATABASE'], $sql_file);

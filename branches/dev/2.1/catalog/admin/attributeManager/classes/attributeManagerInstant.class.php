@@ -1,15 +1,13 @@
 <?php
 /*
-  $Id: attributeManagerInstant.class.php,v 1.0 21/02/06 Sam West$
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
-  Copyright © 2006 Kangaroo Partners
-  http://kangaroopartners.com
-  osc@kangaroopartners.com
 */
 
 class attributeManagerInstant extends attributeManager {

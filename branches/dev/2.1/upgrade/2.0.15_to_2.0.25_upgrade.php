@@ -58,7 +58,7 @@ header('Pragma: no-cache');                                    # HTTP/1.0
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>osCMax Database Update - v2.0.15 to v2.0.25</title>
+  <title>osCmax Database Update - v2.0.15 to v2.0.25</title>
   <style type="text/css">
     body {
       font-family: Verdana, Arial, sans-serif;
@@ -80,9 +80,9 @@ header('Pragma: no-cache');                                    # HTTP/1.0
 </head>
 <body>
 
-<h2>osCMax 2.0.15 to 2.0.25 Stable<br>Database Upgrade Script</h2>
+<h2>osCmax 2.0.15 to 2.0.25 Stable<br>Database Upgrade Script</h2>
 <p><strong>Before proceeding, please make a backup of your database.</strong><br>Do not run this updater more than once, <br>or you will get duplicate entries in your database</p>
-<p>Specify the correct settings<br />to connect to your database.Only use this updater if you are currently running osCMax v2.0.15 and intend to upgrade to v2.0.25</p>
+<p>Specify the correct settings<br />to connect to your database.Only use this updater if you are currently running osCmax v2.0.15 and intend to upgrade to v2.0.25</p>
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
   <table>
@@ -147,7 +147,7 @@ if (is_param($_POST['hostname'])
                 mysql_check_error();
             }
         }
-        echo "<center><p>You have successfully upgraded your osCMax 2.0.15 database to osCMax 2.0.25 format.</p><br><br><strong>Delete this file from your server now!</strong></center>\n";
+        echo "<center><p>You have successfully upgraded your osCmax 2.0.15 database to osCmax 2.0.25 format.</p><br><br><strong>Delete this file from your server now!</strong></center>\n";
     }
 }
 ?>
@@ -155,7 +155,7 @@ if (is_param($_POST['hostname'])
 
 <p>( <a href="<?php echo $_SERVER['PHP_SELF']; ?>">new</a> )</p>
 
-<p><small>Copyright &copy; 2010 <a href="http://www.oscmax.com/">osCMax</a></small></p>
+<p><small>Copyright &copy; 2010 <a href="http://www.oscmax.com/">osCmax</a></small></p>
 
 </body>
 </html>

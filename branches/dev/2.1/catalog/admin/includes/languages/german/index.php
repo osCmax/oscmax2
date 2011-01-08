@@ -25,7 +25,7 @@ define('BOX_ENTRY_CVS_REPOSITORY', 'CVS Repository');
 define('BOX_ENTRY_INFORMATION_PORTAL', 'Informations Portal');
 define('BOX_ENTRY_OSCDOX', 'osCDox.com');
 
-define('BOX_ENTRY_AABOX', 'osCMax Hosting<br>$12.99/mo');
+define('BOX_ENTRY_AABOX', 'osCmax Hosting<br>$12.99/mo');
 define('BOX_ENTRY_PAYPAL', 'Paypal Account Signup');
 define('BOX_ENTRY_MERCHANT', 'Get A Merchant Account');
 define('BOX_ENTRY_DOMAINS', 'Purchase Domains');

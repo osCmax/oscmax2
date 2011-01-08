@@ -71,7 +71,7 @@ define('HTML_PARAMS','dir="ltr" lang="de"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', 'osCMax v2.1');
+define('TITLE', 'osCmax v2.1');
 
 // BOF: MOD - ORDER EDIT
 // Create account & order
@@ -138,7 +138,7 @@ define('ENTRY_SUBURB_TEXT', '');
 define('ENTRY_POST_CODE', 'Post Code:');
 define('ENTRY_POST_CODE_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_POSTCODE_MIN_LENGTH . ' chars</font></small>');
 define('ENTRY_POST_CODE_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
-define('ENTRY_CITY', 'City:'); //Changed for osCMax bug #27
+define('ENTRY_CITY', 'City:'); //Changed for osCmax bug #27
 define('ENTRY_CITY_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_CITY_MIN_LENGTH . ' chars</font></small>');
 define('ENTRY_CITY_TEXT', '&nbsp;<small><font color="#AABBDD">required</font></small>');
 define('ENTRY_STATE', 'State/Province:');
@@ -172,7 +172,7 @@ define('HEADER_TITLE_SUPPORT_SITE', 'osCDox');
 define('HEADER_TITLE_ONLINE_CATALOG', 'Online Katalog');
 define('HEADER_TITLE_ADMINISTRATION', 'Administration');
 define('HEADER_TITLE_OSCDOX', 'osCDox.com');
-define('HEADER_TITLE_AABOX', 'osCMax');
+define('HEADER_TITLE_AABOX', 'osCmax');
 
 // text for gender
 define('MALE', 'Herr');

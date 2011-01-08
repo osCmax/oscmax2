@@ -113,7 +113,7 @@ hr {display: none;}
     $phpinfo = str_replace('border: 1px', '', $phpinfo);
     preg_match('{<body>(.*)</body>}xsmi', $phpinfo, $regs);
     echo '<table border="1" cellpadding="3" width="600" style="border: 0px; border-color: #000000;">' .
-         '  <tr><td><a href="http://www.oscmax.com"><img border="0" src="images/oscmax-logo.png" alt=" osCMax " /></a><h1 class="p"> ' . PROJECT_VERSION . '</h1></td>' .
+         '  <tr><td><a href="http://www.oscmax.com"><img border="0" src="images/oscmax-logo.png" alt=" osCmax " /></a><h1 class="p"> ' . PROJECT_VERSION . '</h1></td>' .
          '  </tr>' .
          '</table>';
     echo $regs[1];

@@ -48,7 +48,7 @@ $Id$
   thus can not be removed, or can only be modified
   appropriately.
 
-  For more information please vist osCMax
+  For more information please vist osCmax
   support site:
 
   http://oscmax.com/

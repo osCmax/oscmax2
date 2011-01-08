@@ -2,12 +2,10 @@
 /*
 $Id$
 
-  Contribution based on:
-
   osCmax e-Commerce
-  http://www.oscmax.com
+  http://www.osCmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

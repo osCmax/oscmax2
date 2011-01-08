@@ -111,9 +111,9 @@ $Id$
   define('TABLE_HTTP_ERROR', 'http_error');
 // EOF: Http Error Logging
 
-// BOF: osCMax Help System - PGM
+// BOF: osCmax Help System - PGM
   define('TABLE_HELP_PAGES', 'help_pages');
-// EOF: osCMax Help System - PGM
+// EOF: osCmax Help System - PGM
 
 // BOF QPBPP for SPPC v4.2 2006/06/22, QPBPP v2.0 2008/09/05
   define('TABLE_PRODUCTS_PRICE_BREAK', 'products_price_break');

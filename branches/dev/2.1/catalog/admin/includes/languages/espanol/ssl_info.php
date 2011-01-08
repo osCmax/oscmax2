@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'SSL Certificates: Secure E-Commerce in osCMax');
-define('NAVBAR_TITLE', 'Conveniently and securely purchase your SSL certificate from osCMax/AABox.');
+define('HEADING_TITLE', 'SSL Certificates: Secure E-Commerce in osCmax');
+define('NAVBAR_TITLE', 'Conveniently and securely purchase your SSL certificate from osCmax/AABox.');
 define('TEXT_MAIN', '<tr width=\'98%\'><td class=main>
-            <p>osCMax has partnered with AABox.com to secure your osCMax shop with Instant SSL Certificates. <strong>SSL
+            <p>osCmax has partnered with AABox.com to secure your osCmax shop with Instant SSL Certificates. <strong>SSL
               (Secure Sockets Layer) / TLS (Transport Layer Security) </strong>-
               the easily implemented standard protocol for transaction security
               - is an encrypted link between your Server and your Customer\'s browser.
@@ -23,7 +23,7 @@ define('TEXT_MAIN', '<tr width=\'98%\'><td class=main>
               trusted by 99.7% of the current Internet users - making our SSL
               Certificates as trusted as the more expensive Certificates from
               other overpriced providers like Thawte and Verisign.</p>
-            <p>These certificates are easily purchased through this order form and can be quickly implemented into osCMax to ensure secure e-commerce transactions and inspire trust and confidence to your customers.</p>
+            <p>These certificates are easily purchased through this order form and can be quickly implemented into osCmax to ensure secure e-commerce transactions and inspire trust and confidence to your customers.</p>
             <p>You can expect to receive your new SSL certificate within 24 hours of purchase from AABox.com, a trusted industry leader in e-commerce services. </p>
             <table width=\'95%\' border=\'0\' align=\'center\' cellpadding=\'3\' cellspacing=\'1\'>
               <tr>

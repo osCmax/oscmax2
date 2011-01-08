@@ -30,7 +30,7 @@ $Id$
                                    tep_admin_jqmenu('merchant_info.php' , 'Merchant Application', 'TOP') .
                                    tep_admin_jqmenu('paypal_info.php' , 'Paypal Signup', 'TOP') .
 								   '<li><a href="http://www.aabox.com/ssl-certificates" target="_blank">SSL Certificates</a></li>' .
-								   '<li><a href="http://www.aabox.com/oscmax-hosting" target="_blank">osCMax Hosting</a></li>' .
+								   '<li><a href="http://www.aabox.com/oscmax-hosting" target="_blank">osCmax Hosting</a></li>' .
 								   '<li><a href="http://www.aabox.com/domain-names-and-services" target="_blank">Register Domains</a></li>' .
 								   '</ul>');
   print_r($contents);

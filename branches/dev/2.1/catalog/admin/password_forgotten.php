@@ -70,7 +70,7 @@ $Id$
       <tr bgcolor="#000000" valign="middle">
         <td><table border="0" width="600" cellspacing="0" cellpadding="0" style="height:440;">
           <tr bgcolor="#ffffff">
-            <td height="50"><?php echo '<a href="http://www.oscmax.com">' . tep_image(DIR_WS_IMAGES . 'oscmax-logo.png', 'osCMax v2.0', '187', '54') . '</a>'; ?></td>
+            <td height="50"><?php echo '<a href="http://www.oscmax.com">' . tep_image(DIR_WS_IMAGES . 'oscmax-logo.png', 'osCmax v2.0', '187', '54') . '</a>'; ?></td>
             <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.oscmax.com/" target="_blank" class="headerLink">' . HEADER_TITLE_AABOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://shop.oscmax.com" class="headerLink">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://wiki.oscdox.com" class="headerLink">Wiki</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp;</td>
           </tr>
           <tr bgcolor="#E7E7E7">

@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'osCMax Hosting - Coming Soon!');
+define('HEADING_TITLE', 'osCmax Hosting - Coming Soon!');
 define('NAVBAR_TITLE', '');
 define('TEXT_MAIN', '');
 define('TEXT_BACK', 'Back');

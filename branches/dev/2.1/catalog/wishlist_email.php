@@ -3,9 +3,9 @@
 $Id$
 
   osCmax e-Commerce
-  http://www.oscmax.com
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax2003 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

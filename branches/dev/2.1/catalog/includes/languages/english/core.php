@@ -329,7 +329,7 @@ define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first four digits of the number ent
 define('WARNING_JAVASCRIPT_DISABLED', 'Alert: We have detected that you have Javascript disabled. For the best user experience you should re-enable it.  If you require help doing this please <b>click here.</b>');
 define('WARNING_IE6_DETECTED', 'Warning: We have detected that you are using Internet Explorer 6 which is notoriously unstable.  We strongly recommend that you <b>upgrade your browser</b>.  Why not try <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx"><b>IE</b></a>, <a href="http://www.mozilla.com/"><b>Firefox</b></a> or <a href="http://www.google.co.uk/chrome/"><b>Chrome</b></a>');
 
-define('FOOTER_TEXT_BODY', 'All content and Images Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a><br> Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCMax</a><br>Powered by <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
+define('FOOTER_TEXT_BODY', 'All content and Images Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a><br> Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCmax</a><br>Powered by <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
 
 
 // BOF: MOD - Checkout Without Account

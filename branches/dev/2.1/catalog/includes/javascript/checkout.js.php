@@ -218,23 +218,25 @@ $(document).ready(function (){
 								$('#shippingAddress').show();
 
 								var updateTotals = true;
-								onePage.updateCartView();
-								onePage.updateFinalProductListing();
-								onePage.updatePaymentMethods();
-								if ($(':radio[name="payment"]:checked').size() > 0){
-									onePage.setPaymentMethod($(':radio[name="payment"]:checked'));
-									updateTotals = false;
-								}
-								onePage.updateShippingMethods();
-								if ($(':radio[name="shipping"]:checked').size() > 0){
+								// Bug fix 582
+								//onePage.updateCartView();
+								//onePage.updateFinalProductListing();
+								//onePage.updatePaymentMethods();
+								//if ($(':radio[name="payment"]:checked').size() > 0){
+								//	onePage.setPaymentMethod($(':radio[name="payment"]:checked'));
+								//	updateTotals = false;
+								//}
+								//onePage.updateShippingMethods();
+								//if ($(':radio[name="shipping"]:checked').size() > 0){
 									//onePage.setShippingMethod($(':radio[name="shipping"]:checked').val());
-									 onePage.setShippingMethod($(':radio[name="shipping"]:checked'));
-									updateTotals = false;
-								}
+								//	 onePage.setShippingMethod($(':radio[name="shipping"]:checked'));
+								//	updateTotals = false;
+								//}
 
-								if (updateTotals == true){
-									onePage.updateOrderTotals();
-								}
+								//if (updateTotals == true){
+								//	onePage.updateOrderTotals();
+								//}
+								location.reload(); // Bug fix 582 login problem
 
 								$('#loginBox').dialog('destroy');
 							}else{

@@ -224,6 +224,7 @@ if( isset($continueButtonId) ) {
           </table>
         </td>
       </tr>
+    </form>
       <tr>
         <td>
 <?php
@@ -235,6 +236,7 @@ if( isset($continueButtonId) ) {
 ?>         
         </td>
       </tr>
+    <form>  
 <?php
     $initialize_checkout_methods = $payment_modules->checkout_initialization_method();
 

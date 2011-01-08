@@ -96,43 +96,42 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 <!-- body //-->
 <table border="0" width="100%" cellspacing="3" cellpadding="3">
   <tr>
-<?php // Show/Hide Left Column
-if (LEFT_COLUMN_SHOW != 'false') { ?>
-    <td width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top">
-      <table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
-        <tr>
 <?php
 // Hide Left Column if not to show
 // BOF One Page Checkout custom column code
-
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
-              if ($pfile != 'checkout.php') {
-		     ?>
-		    <td class="leftcol" width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
-		    <!-- left_navigation //-->
-		    <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
-		    <!-- left_navigation_eof //-->
+       		if (LEFT_COLUMN_SHOW != 'false' and $pfile != 'checkout.php') { ?>
+       <td width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top">
+					<table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
+                    <tr>   
+		    		<td class="leftcol" width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
+		    		<!-- left_navigation //-->
+		    		<?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
+		    		<!-- left_navigation_eof //-->
 		    </table></td>
-		<?php
-	        } else {  
-	               if (ONEPAGE_SHOW_OSC_COLUMNS == 'true') {  
-			?>
-			    <td class="leftcol" width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
-			    <!-- left_navigation //-->
-			    <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
-			    <!-- left_navigation_eof //-->
-			    </table></td>
+		          </table>
+    	</td>
 			<?php
-                        } 
-	       
-	          }
-     }	
+	        } //End Show/Hide left column
+     // One Page Checkout - Left Column display
+		 if ($pfile == 'checkout.php') {  
+	      if (ONEPAGE_SHOW_OSC_COLUMNS == 'true') {  
+			?>
+			<td width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top">
+					<table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
+        		<tr> 
+			    		<td class="leftcol" width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
+			    			<!-- left_navigation //-->
+			    			<?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
+			    			<!-- left_navigation_eof //-->
+			      </table></td>
+				</table>
+				</td>
+			<?php
+          } 
+	      }
+     	}	
 // EOF One Page Checkout custom column code     	  
-?>
-      </table>
-    </td>
-<?php
-} // end Show/Hide Left Column
 ?>
 <!-- content //-->
     <td width="100%" valign="top">
@@ -142,50 +141,56 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='f
     </td>
 <!-- content_eof //-->
 <?php // Show/Hide Right Column
-if (RIGHT_COLUMN_SHOW != 'false') { ?>
-    <td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top">
-      <table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
-<?php
-// Hide column_left.php if not to show
-// BOF One Page Checkout custom column code
+
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='false') {
-              if ($pfile != 'checkout.php') {
-		     ?>
-         <tr>
-		    <td class="rightcol" width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
-		    <!-- right_navigation //-->
-		    <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
-		    <!-- right_navigation_eof //-->
-		    </table></td>
-		<?php
-	        } else {  
-	               if (ONEPAGE_SHOW_OSC_COLUMNS == 'true') {  
-			?>
-			    <td class="rightcol" width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
-			    <!-- right_navigation //-->
-			    <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
-			    <!-- right_navigation_eof //-->
-			    </table></td>
-			<?php
-                        }  elseif (ONEPAGE_SHOW_CUSTOM_COLUMN == 'true'){
-			    ?>  
-				<td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
-			    <!-- right_navigation //-->
-			       <?php require(DIR_WS_INCLUDES . 'checkout/column_right.php'); ?>
-			    <!-- right_navigation_eof //-->
-				</table></td>
-     
-			<?php
+
+//only show right column if triggered in admin and only show right column if not on the checkout page
+if (RIGHT_COLUMN_SHOW != 'false' and $pfile != 'checkout.php' ) { ?>
+          <td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
+              <tr>
+                <td class="rightcol" width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2" style="margin-top:-10px">
+                    <!-- right_navigation //-->
+                    <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
+                    <!-- right_navigation_eof //-->
+                  </table></td>
+              </tr>
+            </table></td>
+          <?php
+} // end Show/Hide Right Column
+?>
+          <?php   
+//if on the checkout page decide which right column to show if applicable
+if ($pfile == 'checkout.php') { 
+
+   if (ONEPAGE_SHOW_OSC_COLUMNS == 'true') {?>
+          <td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
+              <tr>
+                <td class="rightcol" width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2" style="margin-top:-10px">
+                    <!-- right_navigation //-->
+                    <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
+                    <!-- right_navigation_eof //-->
+                  </table></td>
+              </tr>
+            </table></td>
+          <?php
+            }  elseif (ONEPAGE_SHOW_CUSTOM_COLUMN == 'true'){
+		?>
+          <td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
+              <td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
+                    <!-- right_navigation //-->
+                    <?php require(DIR_WS_INCLUDES . 'checkout/column_right.php'); ?>
+                    <!-- right_navigation_eof //-->
+                  </table></td>
+            </table></td>
+          <?php
 		       }
      
 	        }
+      } else   { ?>
+          <td>&nbsp;</td>
+          <?php
       }
 // EOF One Page Checkout custom column code      		  
-?>  
-      </table>
-    </td>
-<?php
-} // end Show/Hide Right Column
 ?>
   </tr>
 <!-- body_eof //-->

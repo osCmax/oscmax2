@@ -19,6 +19,17 @@ $Id$
       $$link = mysql_connect($server, $username, $password);
     }
 
+  // BOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
+    switch (strtolower(CHARSET)) {
+      case 'utf-8':
+        mysql_query("set character set utf-8", $$link);
+        break;
+      case 'iso-8859-1':
+        mysql_query("set character set latin1", $$link);
+        break;
+    }
+  // EOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
+
     if ($$link) mysql_select_db($database);
 
     return $$link;

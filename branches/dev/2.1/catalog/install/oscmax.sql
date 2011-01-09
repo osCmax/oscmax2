@@ -437,7 +437,7 @@ CREATE TABLE configuration (
   last_modified datetime NULL,
   date_added datetime NOT NULL,
   use_function varchar(255) NULL,
-  set_function varchar(255) NULL,
+  set_function text NULL,
   PRIMARY KEY (configuration_id)
 );
 

@@ -17,4 +17,12 @@ define('MODULE_SHIPPING_USPS_TEXT_INSURED', 'Insured for');
 define('MODULE_SHIPPING_USPS_TEXT_DAY', 'Day');
 define('MODULE_SHIPPING_USPS_TEXT_DAYS', 'Days');
 define('MODULE_SHIPPING_USPS_TEXT_WEEKS', 'Weeks');
+define('MODULE_SHIPPING_USPS_TEXT_ESTIMATED', 'Estimated transit: ');
+define('MODULE_SHIPPING_USPS_TEXT_TOMORROW', 'Estimated transit: ');
+define('MODULE_SHIPPING_USPS_TEXT_EXPRESS', 'Estimated transit: 1-2 days ');
+define('MODULE_SHIPPING_USPS_TEXT_PRIORITY', 'Estimated transit: 2-4 days' );
+define('MODULE_SHIPPING_USPS_TEXT_PARCELPOST', 'Estimated transit: 3-9 days ');
+define('MODULE_SHIPPING_USPS_TEXT_FIRSTCLASS', 'Estimated transit: 2-5 days ');
+define('MODULE_SHIPPING_USPS_TEXT_MEDIA', 'Estimated transit: 3-9 days ');
+define('MODULE_SHIPPING_USPS_TEXT_PRINTEDMATTER', 'Estimated transit: 3-9 days ');
 ?>

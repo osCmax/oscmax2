@@ -831,14 +831,19 @@ var checkout = {
 			this.updateFinalProductListing();
             this.setBillTo();
             this.setSendTo(false);
-			this.updatePaymentMethods(true);
-			this.updateShippingMethods(true);
+      // osCmax Bug fix #556     
+			//this.updatePaymentMethods(true);
+			//this.updateShippingMethods(true);
 			this.updateOrderTotals();
 			
 		}else	if (this.loggedIn == false){
 			$('#shippingAddress').hide();
 			$('#shippingMethods').html('');
-		}
+			//osCmax Bug fix #556
+		}else if (this.loggedIn == true){
+      this.updatePaymentMethods(true);
+      this.updateShippingMethods(true);
+    } // End bug fix
 
 		$('#checkoutNoScript').remove();
 		$('#checkoutYesScript').show();

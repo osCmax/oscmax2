@@ -27,10 +27,6 @@ $Id$
       </tr>
 <?php
   if ($cart->count_contents() > 0) {
-?>
-      <tr>
-        <td class="infoBoxHeading">
-<?php
     $info_box_contents = array();
     $info_box_contents[0][] = array('align' => 'center',
                                     'params' => 'class="productListing-heading"',
@@ -134,7 +130,44 @@ $Id$
                                              'params' => 'class="productListing-data-list" valign="top"',
                                              'text' => '<b>' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</b>');
     }
-
+?>
+<?php
+    if ($any_out_of_stock == 1) { 
+      if (STOCK_ALLOW_CHECKOUT == 'true') {
+?>
+      <tr>
+        <td class="messageStackAlert" align="center"><?php echo OUT_OF_STOCK_CAN_CHECKOUT; ?></td>
+      </tr>
+<?php
+      } else {
+?>
+      <tr>
+        <td class="messageStackWarning" align="center"><?php echo OUT_OF_STOCK_CANT_CHECKOUT; ?></td>
+      </tr>
+<?php
+      } ?>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+<?php }
+	
+// BOF QPBPP for SPPC
+    if ($messageStack->size('cart_notice') > 0) {
+?>
+      <tr>
+        <td style="padding-top: 10px"><?php echo $messageStack->output('cart_notice'); ?></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      
+<?php
+      }
+// EOF QPBPP for SPPC
+?>
+      <tr>
+        <td class="infoBoxHeading">
+<?php
     new productListingBoxList($info_box_contents);
 ?>
         </td>
@@ -145,32 +178,6 @@ $Id$
       <tr>
         <td align="right" class="main"><b><?php echo SUB_TITLE_SUB_TOTAL; ?> <?php echo $currencies->format($cart->show_total()); ?></b></td>
       </tr>
-<?php
-    if ($any_out_of_stock == 1) {
-      if (STOCK_ALLOW_CHECKOUT == 'true') {
-?>
-      <tr>
-        <td class="stockWarning" align="center"><br><?php echo OUT_OF_STOCK_CAN_CHECKOUT; ?></td>
-      </tr>
-<?php
-      } else {
-?>
-      <tr>
-        <td class="stockWarning" align="center"><br><?php echo OUT_OF_STOCK_CANT_CHECKOUT; ?></td>
-      </tr>
-<?php
-      }
-    }
-// BOF QPBPP for SPPC
-    if ($messageStack->size('cart_notice') > 0) {
-?>
-      <tr>
-        <td style="padding-top: 10px"><?php echo $messageStack->output('cart_notice'); ?></td>
-      </tr>
-<?php
-      }
-// EOF QPBPP for SPPC
-?>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>

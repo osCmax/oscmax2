@@ -107,11 +107,11 @@ $Id$
   
   </div>
 
-  <h1>Welcome to Copyright 2000 - 2011 osCmax <?php echo PROJECT_VERSION; ?></h1>
+  <h1>Welcome to osCmax <?php echo PROJECT_VERSION; ?></h1>
 
-  <p>Copyright 2000 - 2011 osCmax allows you to sell products worldwide with your own online store. The administration side manages products, customers, orders, newsletters, specials, and more to successfully build and thrive on the success of your online business.</p>
-  <p>Copyright 2000 - 2011 osCmax is based on osCommerce Online Merchant 2.2 and is aimed at making deployment of your site faster and easier than ever. Copyright 2000 - 2011 osCmax is backwards compatible with osCommerce Online Merchant 2.2 and thus you can leverage the largest community for an online shopping cart solution: over 140,000 registered store owners and developers who help one another out and have provided over 4,000 add-ons that extend the features and potential of your online store.</p>
-  <p>Copyright 2000 - 2011 osCmax and its add-ons are available for free under an Open Source license to help you start selling online sooner without any licensing fees or limitations involved.</p><p>&nbsp;</p><p>&nbsp;</p><br />
+  <p>osCmax allows you to sell products worldwide with your own online store. The administration side manages products, customers, orders, newsletters, specials, and more to successfully build and thrive on the success of your online business.</p>
+  <p>osCmax is based on osCommerce Online Merchant 2.2 and is aimed at making deployment of your site faster and easier than ever. osCmax is backwards compatible with osCommerce Online Merchant 2.2 and thus you can leverage the largest community for an online shopping cart solution: over 140,000 registered store owners and developers who help one another out and have provided over 4,000 add-ons that extend the features and potential of your online store.</p>
+  <p>osCmax and its add-ons are available for free under an Open Source license to help you start selling online sooner without any licensing fees or limitations involved.</p><p>&nbsp;</p><p>&nbsp;</p><br />
 </div>
 
 <div class="contentBlock">

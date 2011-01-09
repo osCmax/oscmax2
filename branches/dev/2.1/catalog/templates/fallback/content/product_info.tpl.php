@@ -127,7 +127,12 @@ $Id$
           <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
               <td class="pageHeading" valign="top"><?php echo $product_info['products_name'] . $min_order_text; ?></td>
-              <td class="pageHeading" align="right" valign="top"><?php echo $products_price; ?></td>  
+              <td class="pageHeading" align="right" valign="top">
+              <?php 
+              if ( ($hi_product_price == CALL_FOR_PRICE_VALUE) || ($lo_product_price == CALL_FOR_PRICE_VALUE) ){
+			    echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Price Inquiry%0D%0A%0D%0AModel: ' . $product_info['products_model'] . '%0D%0AProduct Name: ' . $product_info['products_name'] . '%0D%0AProduct URL: ' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $product_info['products_id'] .'%0D%0A%0D%0A') . '') . '">' . $products_price; ?></a>
+              <?php } else { echo $products_price; } ?>
+              </td>  
             </tr>
           </table>
         </td>

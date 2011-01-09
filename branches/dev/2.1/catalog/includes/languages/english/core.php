@@ -394,7 +394,7 @@ define('TEXT_RESTRICT_TO', 'Restrict <b>%s</b> to: %s and its sub-values (if any
 // EOF: Extra Product Fields
 
 // LINE ADDED: MOD - EASY CALL FOR PRICE v1.4
-define('TEXT_CALL_FOR_PRICE', '<a href="' . tep_href_link(FILENAME_CONTACT_US) . '">Contact for Price!</a>');
+define('TEXT_CALL_FOR_PRICE', 'Contact for Price!');
 
 // BOF: MSRP
 define('TEXT_PRODUCTS_OUR_PRICE', '&nbsp;Our&nbsp;Price:&nbsp;');

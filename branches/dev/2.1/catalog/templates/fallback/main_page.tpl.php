@@ -153,7 +153,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='
 if (RIGHT_COLUMN_SHOW != 'false' and $pfile != 'checkout.php' ) { ?>
           <td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
               <tr>
-                <td class="rightcol" width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2" style="margin-top:-10px">
+                <td class="rightcol" width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
                     <!-- right_navigation //-->
                     <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
                     <!-- right_navigation_eof //-->
@@ -170,7 +170,7 @@ if ($pfile == 'checkout.php') {
    if (ONEPAGE_SHOW_OSC_COLUMNS == 'true') {?>
           <td width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
               <tr>
-                <td class="rightcol" width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2" style="margin-top:-10px">
+                <td class="rightcol" width="<?php echo BOX_WIDTH_RIGHT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_RIGHT; ?>" cellspacing="0" cellpadding="2">
                     <!-- right_navigation //-->
                     <?php require(bts_select('column', 'column_right.php')); // BTSv1.5 ?>
                     <!-- right_navigation_eof //-->

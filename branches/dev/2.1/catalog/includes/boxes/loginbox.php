@@ -27,7 +27,7 @@ $Id$
 
 if ((!strstr($_SERVER['PHP_SELF'],'login.php')) && (!strstr($_SERVER['PHP_SELF'],'create_account.php')) && (!strstr($_SERVER['PHP_SELF'],'Order_Info.php')) && (!strstr($_SERVER['PHP_SELF'],'Order_Info_Process.php')) && (!tep_session_is_registered('customer_id'))) {
 	
-if ( (!strstr($_SERVER['PHP_SELF'],'checkout.php')) && (ONEPAGE_CHECKOUT_ENABLED == 'True') ) {
+if (!strstr($_SERVER['PHP_SELF'],'checkout.php')) {
 
 if (!tep_session_is_registered('customer_id')) {
 		

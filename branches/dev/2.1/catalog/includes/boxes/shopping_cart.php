@@ -12,7 +12,7 @@ $Id$
 
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 
-if ( (!strstr($_SERVER['PHP_SELF'],'checkout.php')) && (ONEPAGE_CHECKOUT_ENABLED == 'True') ) {
+if (!strstr($_SERVER['PHP_SELF'],'checkout.php')) {
 	
 ?>
 

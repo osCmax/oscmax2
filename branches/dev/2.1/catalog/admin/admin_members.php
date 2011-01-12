@@ -123,7 +123,7 @@ $Id$
 
       case 'group_edit':
         $admin_groups_name = ucwords(strtolower(tep_db_prepare_input($_POST['admin_groups_name'])));
-        $name_replace = preg_replace('/./m', '%', admin_groups_name);
+        $name_replace = preg_replace('/ /m', '%', $admin_groups_name);
 
         if (($admin_groups_name == '' || NULL) || (strlen($admin_groups_name) <= 5) ) {
           tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'gID=' . $_GET[gID] . '&gName=false&action=action=edit_group'));
@@ -142,7 +142,7 @@ $Id$
 
       case 'group_new':
         $admin_groups_name = ucwords(strtolower(tep_db_prepare_input($_POST['admin_groups_name'])));
-        $name_replace = preg_replace('/./m', '%', admin_groups_name);
+        $name_replace = preg_replace('/ /m', '%', $admin_groups_name);
 
         if (($admin_groups_name == '' || NULL) || (strlen($admin_groups_name) <= 5) ) {
           tep_redirect(tep_href_link(FILENAME_ADMIN_MEMBERS, 'gID=' . $_GET[gID] . '&gName=false&action=new_group'));

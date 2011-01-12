@@ -19,8 +19,8 @@ $Id$
 
   // +Country-State Selector
   require(DIR_WS_FUNCTIONS . 'ajax.php');
-if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates' && isset($HTTP_POST_VARS['country'])) {
-	ajax_get_zones_html(tep_db_prepare_input($HTTP_POST_VARS['country']), true);
+if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($_POST['country']), true);
 } else {
   // -Country-State Selector
 // PWA EOF

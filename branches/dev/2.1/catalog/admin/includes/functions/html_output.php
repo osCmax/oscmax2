@@ -277,22 +277,6 @@ $Id$
     return $field;
   }
 
-// BOF: MOD - WYSIWYG FCKeditor
-// Output a form textarea field w/ fckeditor
-  function tep_draw_fckeditor($name, $width, $height, $text) {
-
-	$oFCKeditor = new FCKeditor($name);
-	$oFCKeditor -> Width  = $width;
-	$oFCKeditor -> Height = $height;
-	$oFCKeditor -> BasePath	= (DIR_WS_FCKEDITOR);
-	$oFCKeditor -> Value = $text;
-
-    $field = $oFCKeditor->Create($name);
-
-    return $field;
-  }
-// EOF: MOD - WYSIWYG FCKeditor
-
 ////
 // Output a form hidden field
   function tep_draw_hidden_field($name, $value = '', $parameters = '') {
@@ -360,4 +344,47 @@ $Id$
 
     return $field;
   }
+// +Country-State Selector
+// Adapted from functions in catalog/includes/general.php and html_output.php for Country-State Selector
+// Returns an array with countries
+// TABLES: countries
+  function css_get_countries($countries_id = '', $with_iso_codes = false) {
+    $countries_array = array();
+    if (tep_not_null($countries_id)) {
+      if ($with_iso_codes == true) {
+        $countries = tep_db_query("select countries_name, countries_iso_code_2, countries_iso_code_3 from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "' order by countries_name");
+        $countries_values = tep_db_fetch_array($countries);
+        $countries_array = array('countries_name' => $countries_values['countries_name'],
+                                 'countries_iso_code_2' => $countries_values['countries_iso_code_2'],
+                                 'countries_iso_code_3' => $countries_values['countries_iso_code_3']);
+      } else {
+        $countries = tep_db_query("select countries_name from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "'");
+        $countries_values = tep_db_fetch_array($countries);
+        $countries_array = array('countries_name' => $countries_values['countries_name']);
+      }
+    } else {
+      $countries = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . " order by countries_name");
+      while ($countries_values = tep_db_fetch_array($countries)) {
+        $countries_array[] = array('countries_id' => $countries_values['countries_id'],
+                                   'countries_name' => $countries_values['countries_name']);
+      }
+    }
+
+    return $countries_array;
+  }
+
+////
+// Creates a pull-down list of countries
+  function css_get_country_list($name, $selected = '', $parameters = '') {
+    $countries_array = array();
+
+    $countries = css_get_countries();
+
+    for ($i=0, $n=sizeof($countries); $i<$n; $i++) {
+      $countries_array[] = array('id' => $countries[$i]['countries_id'], 'text' => $countries[$i]['countries_name']);
+    }
+
+    return tep_draw_pull_down_menu($name, $countries_array, $selected, $parameters);
+  }
+ // -Country-State Selector
 ?>

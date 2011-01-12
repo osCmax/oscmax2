@@ -138,13 +138,4 @@ function check_form(form_name) {
     return true;
   }
 }
-<?php // BOF: MOD - Country-State Selector ?>
-function refresh_form(form_name) {
-   form_name.action.value = 'refresh';
-   form_name.state.value = '';
-   form_name.submit();
-   return true;
-   }
-<?php // EOF: MOD - Country-State Selector ?>
-   
 //--></script>

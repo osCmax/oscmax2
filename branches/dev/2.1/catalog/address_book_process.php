@@ -17,6 +17,13 @@ $Id$
 
   require('includes/application_top.php');
 
+  // +Country-State Selector
+  require(DIR_WS_FUNCTIONS . 'ajax.php');
+if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($_POST['country']), true);
+} else {
+  // -Country-State Selector
+	
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot();
     tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
@@ -35,12 +42,8 @@ $Id$
 
 // error checking when updating or adding an entry
   $process = false;
-  // +Country-State Selector
-  $refresh = false;
-  if (isset($_POST['action']) && (($_POST['action'] == 'process') || ($_POST['action'] == 'update') ||
-      ($_POST['action'] == 'refresh'))) {
-    if ($_POST['action'] != 'refresh') { $process = true; } else { $refresh = true; }
-  // -Country-State Selector
+  if (isset($_POST['action']) && (($_POST['action'] == 'process') || ($_POST['action'] == 'update'))) {
+    $process = true;
     $error = false;
 
     if (ACCOUNT_GENDER == 'true') $gender = tep_db_prepare_input($_POST['gender']);
@@ -65,10 +68,6 @@ $Id$
       }
       $state = tep_db_prepare_input($_POST['state']);
     }
-// BOF: MOD - Country-State Selector
-    if ($refresh) {$state = '';}
-    if ($process) {
-// EOF: MOD - Country-State Selector
 
     if (ACCOUNT_GENDER == 'true') {
       if ( ($gender != 'm') && ($gender != 'f') ) {
@@ -125,10 +124,7 @@ $Id$
         }
       }
     }
-// BOF: MOD - Country-State Selector
-    }
-    if (!$refresh) {
-// EOF: MOD - Country-State Selector
+
     if ($error == false) {
       $sql_data_array = array('entry_firstname' => $firstname,
                               'entry_lastname' => $lastname,
@@ -219,26 +215,7 @@ $Id$
       tep_redirect(tep_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL'));
     }
   }
-// BOF: MOD - Country-State Selector
-}
 
-   if ($refresh) {
-     // Recreate $entry from post values collected above
-	 $entry = array(
-	   'entry_firstname' => $firstname,
-	   'entry_lastname' => $lastname,
-	   'entry_street_address' => $street_address,
-	   'entry_postcode' => $postcode,
-	   'entry_city' => $city,
-	   'entry_state' => "",
-	   'entry_zone_id' => (int)0,
-	   'entry_country_id' => (int)$country);
-	  if (ACCOUNT_GENDER == 'true') $entry['entry_gender'] = $gender;
-      if (ACCOUNT_COMPANY == 'true') $entry['entry_company'] = $company;
-      if (ACCOUNT_SUBURB == 'true') $entry['entry_suburb'] = $suburb;
-	   }
-	 else
-// EOF: MOD - Country-State Selector
   if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 // BOF: MOD - Separate Pricing Per Customer
     $entry_query = tep_db_query("select entry_gender, entry_company, entry_company_tax_id, entry_firstname, entry_lastname, entry_street_address, entry_suburb, entry_postcode, entry_city, entry_state, entry_zone_id, entry_country_id from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customer_id . "' and address_book_id = '" . (int)$_GET['edit'] . "'");
@@ -299,4 +276,7 @@ $Id$
 
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
+// +Country-State Selector 
+}
+// -Country-State Selector 
 ?>

@@ -13,6 +13,9 @@ $Id$
   require('includes/application_top.php');
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
+  // +Country-State Selector
+  $refresh = (isset($_POST['refresh']) ? $_POST['refresh'] : 'false');
+  // -Country-State Selector
 
   $count_groups_array = array();
   $error = false;
@@ -124,8 +127,14 @@ $Id$
 
         $entry_company = tep_db_prepare_input($_POST['entry_company']);
         $entry_state = tep_db_prepare_input($_POST['entry_state']);
-        if (isset($_POST['entry_zone_id'])) $entry_zone_id = tep_db_prepare_input($_POST['entry_zone_id']);
-
+        // +Country-State Selector
+        if (isset($_POST['entry_zone_id'])) {
+           $entry_zone_id = tep_db_prepare_input($_POST['entry_zone_id']);
+        } else {
+           $entry_zone_id = 0;
+        }
+        if ($refresh != 'true') {
+        // -Country-State Selector
         if (strlen($customers_firstname) < ENTRY_FIRST_NAME_MIN_LENGTH) {
           $error = true;
           $entry_firstname_error = true;
@@ -191,33 +200,6 @@ $Id$
           $entry_country_error = false;
         }
 
-        if (ACCOUNT_STATE == 'true') {
-          if ($entry_country_error == true) {
-            $entry_state_error = true;
-          } else {
-            $zone_id = 0;
-            $entry_state_error = false;
-            $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$entry_country_id . "'");
-            $check_value = tep_db_fetch_array($check_query);
-            $entry_state_has_zones = ($check_value['total'] > 0);
-            if ($entry_state_has_zones == true) {
-              $zone_query = tep_db_query("select zone_id from " . TABLE_ZONES . " where zone_country_id = '" . (int)$entry_country_id . "' and zone_name = '" . tep_db_input($entry_state) . "'");
-              if (tep_db_num_rows($zone_query) == 1) {
-                $zone_values = tep_db_fetch_array($zone_query);
-                $entry_zone_id = $zone_values['zone_id'];
-              } else {
-                $error = true;
-                $entry_state_error = true;
-              }
-            } else {
-              if (strlen($entry_state) < ENTRY_STATE_MIN_LENGTH) {
-                $error = true;
-                $entry_state_error = true;
-              }
-            }
-         }
-      }
-
       if (strlen($customers_telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
         $error = true;
         $entry_telephone_error = true;
@@ -232,9 +214,10 @@ $Id$
       } else {
         $entry_email_address_exists = false;
       }
-
-      if ($error == false) {
-
+// +Country-State Selector	  
+	}  // End if (!$refresh)	
+      if (($error == false) && ($refresh != 'true')) {
+// -Country-State Selector
         $sql_data_array = array('customers_firstname' => $customers_firstname,
                                 'customers_lastname' => $customers_lastname,
                                 'customers_email_address' => $customers_email_address,
@@ -289,7 +272,11 @@ $Id$
         } else if ($error == true) {
           $cInfo = new objectInfo($_POST);
           $processed = true;
+        // +Country-State Selector
+        } else if ($refresh == 'true') {
+          $cInfo = new objectInfo($_POST);
         }
+        // -Country-State Selector
 
         break;
       case 'deleteconfirm':
@@ -383,6 +370,12 @@ $Id$
 <link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <script type="text/javascript" src="includes/general.js"></script>
 <?php
+  // +Country-State Selector
+  if ($refresh == 'true') {
+		$entry_state = '';
+		$cInfo->entry_state = '';
+  }
+  // -Country-State Selector
   if ($action == 'edit' || $action == 'update') {
 ?>
 <script type="text/javascript"><!--
@@ -478,6 +471,13 @@ function check_form() {
     return true;
   }
 }
+//+ Country-State Selector
+function refresh_form(form_name) {
+   form_name.refresh.value = 'true';
+   form_name.submit();
+   return true;
+}
+ //- Country-State Selector
 //--></script>
 <?php
   }
@@ -516,7 +516,12 @@ function check_form() {
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
-              <tr>
+      <tr><?php echo tep_draw_form('customers', FILENAME_CUSTOMERS, tep_get_all_get_params(array('action')) . 'action=update', 'post', 'onSubmit="return check_form();"') . tep_draw_hidden_field('default_address_id', $cInfo->customers_default_address_id); ?>
+         <?php
+          // +Country-State Selector
+         echo tep_draw_hidden_field('refresh','false'); 
+         // -Country-State Selector
+         ?>
                 <td class="formAreaTitle"><?php echo CATEGORY_PERSONAL; ?></td>
               </tr>
               <tr>
@@ -765,26 +770,20 @@ function check_form() {
                 <td class="main" width="150"><?php echo ENTRY_STATE; ?></td>
                 <td class="main">
 <?php
-    $entry_state = tep_get_zone_name($cInfo->entry_country_id, $cInfo->entry_zone_id, $cInfo->entry_state);
-    if ($error == true) {
-      if ($entry_state_error == true) {
-        if ($entry_state_has_zones == true) {
-          $zones_array = array();
-          $zones_query = tep_db_query("select zone_name from " . TABLE_ZONES . " where zone_country_id = '" . tep_db_input($cInfo->entry_country_id) . "' order by zone_name");
-          while ($zones_values = tep_db_fetch_array($zones_query)) {
-            $zones_array[] = array('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
-          }
-          echo tep_draw_pull_down_menu('entry_state', $zones_array) . '&nbsp;' . ENTRY_STATE_ERROR;
-        } else {
-          echo tep_draw_input_field('entry_state', tep_get_zone_name($cInfo->entry_country_id, $cInfo->entry_zone_id, $cInfo->entry_state)) . '&nbsp;' . ENTRY_STATE_ERROR;
-        }
+     // +Country-State Selector
+     $entry_state = tep_get_zone_name($cInfo->entry_country_id, $cInfo->entry_zone_id, $cInfo->entry_state);
+     $zones_array = array();
+     $zones_query = tep_db_query("select zone_name, zone_id from " . TABLE_ZONES . " where zone_country_id = '" . (int)$cInfo->entry_country_id . "' order by zone_name");
+     while ($zones_values = tep_db_fetch_array($zones_query)) {
+        $zones_array[] = array('id' => $zones_values['zone_id'], 'text' => $zones_values['zone_name']);
+     }
+       if (count($zones_array) > 0) {
+         echo tep_draw_pull_down_menu('entry_zone_id', $zones_array, $cInfo->entry_zone_id);
+         echo tep_draw_hidden_field('entry_state', '');
       } else {
-        echo $entry_state . tep_draw_hidden_field('entry_zone_id') . tep_draw_hidden_field('entry_state');
+         echo tep_draw_input_field('entry_state', $entry_state);
       }
-    } else {
-      echo tep_draw_input_field('entry_state', tep_get_zone_name($cInfo->entry_country_id, $cInfo->entry_zone_id, $cInfo->entry_state));
-    }
-
+      // -Country-State Selector
 ?></td>
               </tr>
 <?php
@@ -794,15 +793,9 @@ function check_form() {
                 <td class="main" width="150"><?php echo ENTRY_COUNTRY; ?></td>
                 <td class="main">
 <?php
-  if ($error == true) {
-    if ($entry_country_error == true) {
-      echo tep_draw_pull_down_menu('entry_country_id', tep_get_countries(), $cInfo->entry_country_id) . '&nbsp;' . ENTRY_COUNTRY_ERROR;
-    } else {
-      echo tep_get_country_name($cInfo->entry_country_id) . tep_draw_hidden_field('entry_country_id');
-    }
-  } else {
-    echo tep_draw_pull_down_menu('entry_country_id', tep_get_countries(), $cInfo->entry_country_id);
-  }
+// +Country-State Selector
+echo css_get_country_list('entry_country_id',  $cInfo->entry_country_id,'onChange="return refresh_form(customers);"');
+// -Country-State Selector
 ?></td>
               </tr>
             </table>

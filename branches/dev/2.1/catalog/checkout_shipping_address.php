@@ -18,6 +18,13 @@ $Id$
 
   require('includes/application_top.php');
 
+  // +Country-State Selector
+  require(DIR_WS_FUNCTIONS . 'ajax.php');
+if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($P_POST['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($_POST['country']), true);
+} else {
+  // -Country-State Selector
+	
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot();
@@ -109,27 +116,16 @@ $Id$
       }
 
       if (ACCOUNT_STATE == 'true') {
-        $zone_id = 0;
-        $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "'");
-        $check = tep_db_fetch_array($check_query);
-        $entry_state_has_zones = ($check['total'] > 0);
-        if ($entry_state_has_zones == true) {
-          $zone_query = tep_db_query("select distinct zone_id from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "' and (zone_name like '" . tep_db_input($state) . "%' or zone_code like '%" . tep_db_input($state) . "%')");
-          if (tep_db_num_rows($zone_query) == 1) {
-            $zone = tep_db_fetch_array($zone_query);
-            $zone_id = $zone['zone_id'];
-          } else {
-            $error = true;
-
-            $messageStack->add('checkout_address', ENTRY_STATE_ERROR_SELECT);
-          }
-        } else {
-          if (strlen($state) < ENTRY_STATE_MIN_LENGTH) {
-            $error = true;
-
-            $messageStack->add('checkout_address', ENTRY_STATE_ERROR);
-          }
-        }
+				// +Country-State Selector
+				if ($zone_id == 0) {
+				// -Country-State Selector
+	
+					if (strlen($state) < ENTRY_STATE_MIN_LENGTH) {
+						$error = true;
+	
+						$messageStack->add('checkout_address', ENTRY_STATE_ERROR);
+					}
+				}
       }
 
       if ( (is_numeric($country) == false) || ($country < 1) ) {
@@ -201,28 +197,7 @@ $Id$
       tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
     }
   }
-// BOF: MOD - Country-State Selector
-  if (isset($_POST['action']) && ($_POST['action'] == 'refresh')) {
-      if (ACCOUNT_GENDER == 'true') $gender = tep_db_prepare_input($_POST['gender']);
-      if (ACCOUNT_COMPANY == 'true') $company = tep_db_prepare_input($_POST['company']);
-      $firstname = tep_db_prepare_input($_POST['firstname']);
-      $lastname = tep_db_prepare_input($_POST['lastname']);
-      $street_address = tep_db_prepare_input($_POST['street_address']);
-      if (ACCOUNT_SUBURB == 'true') $suburb = tep_db_prepare_input($_POST['suburb']);
-      $postcode = tep_db_prepare_input($_POST['postcode']);
-      $city = tep_db_prepare_input($_POST['city']);
-      $country = tep_db_prepare_input($_POST['country']);
-      if (ACCOUNT_STATE == 'true') {
-        if (isset($_POST['zone_id'])) {
-          $zone_id = tep_db_prepare_input($_POST['zone_id']);
-        } else {
-          $zone_id = false;
-        }
-        $state = tep_db_prepare_input($_POST['state']);
-      }
 
-  } else
-// EOF: MOD - Country-State Selector
 // if no shipping destination address was selected, use their own address as default
   if (!tep_session_is_registered('sendto')) {
     $sendto = $customer_default_address_id;
@@ -242,4 +217,7 @@ $Id$
 
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
+// +Country-State Selector 
+}
+// -Country-State Selector 
 ?>

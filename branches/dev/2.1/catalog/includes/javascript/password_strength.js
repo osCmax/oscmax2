@@ -1,3 +1,4 @@
+<?php
 /*
 $Id$
 
@@ -8,7 +9,7 @@ $Id$
 
   Released under the GNU General Public License
 */
-
+?>
 <script language="javascript" type="text/javascript"><!--
 /* 
  * Password Strength (0.1.1)

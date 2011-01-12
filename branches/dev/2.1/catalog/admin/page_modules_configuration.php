@@ -170,7 +170,7 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
       $contents[] = array('text' => '<br>' . TEXT_PM_TITLE . '<br>' . tep_draw_input_field('pm_title'));
       $contents[] = array('text' => '<br>' . TEXT_PM_FILENAME . '<br>' . tep_draw_input_field('pm_filename', ''));
 	  $contents[] = array('text' => '<br>' . TEXT_PM_PAGE . '<br>' . tep_draw_input_field('pm_page', 'index'));
-	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_cfg_select_option(array('yes', 'no'), pm_active));
+	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_select_option(array('yes', 'no'), pm_active, $trInfo->pm_active));
       $contents[] = array('text' => '<br>' . TEXT_PM_SORT_ORDER . '<br>' . tep_draw_input_field('pm_sort_order'));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
     break;
@@ -183,7 +183,7 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
       $contents[] = array('text' => '<br>' . TEXT_PM_TITLE . '<br>' . tep_draw_input_field('pm_title', $trInfo->pm_title));		
 	  $contents[] = array('text' => '<br>' . TEXT_PM_FILENAME . '<br>' . tep_draw_input_field('pm_filename', $trInfo->pm_filename));
       $contents[] = array('text' => '<br>' . TEXT_PM_PAGE . '<br>' . tep_draw_input_field('pm_page', $trInfo->pm_page));
-	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_cfg_select_option(array('yes', 'no'), $trInfo->pm_active));
+	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_select_option(array('yes', 'no'), pm_active, $trInfo->pm_active));
       $contents[] = array('text' => '<br>' . TEXT_PM_SORT_ORDER . '<br>' . tep_draw_input_field('pm_sort_order', $trInfo->pm_sort_order));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->pm_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
     break;

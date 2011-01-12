@@ -1042,6 +1042,18 @@ function tep_selected_file($filename) {
 
     return $string;
   }
+  
+  function tep_select_option($select_array, $key_name, $key_value) {
+    reset($select_array);
+    while (list($key, $value) = each($select_array)) {
+      if (is_int($key)) $key = $value;
+      $string .= '<br><input type="radio" name="' . $key_name . '" value="' . $key . '"';
+      if ($key_value == $key) $string .= ' CHECKED';
+      $string .= '> ' . $value;
+    }
+
+    return $string;
+  }
 
 // USPS Methods 3.0
 // Alias function for Store configuration values in the Administration Tool

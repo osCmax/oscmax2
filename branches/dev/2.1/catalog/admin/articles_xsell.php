@@ -248,11 +248,11 @@ function ToggleCheckBox($cb) {
             
                      for ($i=0; $i < $num_of_products; ++$i) {
 			         ?>
-                     <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="javascript:ToggleCheckBox(<?php echo $i; ?>)">
-                       <td class="dataTableContent" align="center"><?php echo $products_id[$i];?></td>
-                       <td class="dataTableContent"><?php echo $products_model[$i];?></td>
-                       <td class="dataTableContent" align="center"><?php echo tep_image('../' . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image[$i], '', SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?></td>
-                       <td class="dataTableContent"><?php echo $products_name[$i];?></td>
+                     <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+                       <td class="dataTableContent" align="center" onClick="javascript:ToggleCheckBox(<?php echo $i; ?>)"><?php echo $products_id[$i];?></td>
+                       <td class="dataTableContent" onClick="javascript:ToggleCheckBox(<?php echo $i; ?>)"><?php echo $products_model[$i];?></td>
+                       <td class="dataTableContent" align="center" onClick="javascript:ToggleCheckBox(<?php echo $i; ?>)"><?php echo tep_image('../' . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image[$i], '', SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?></td>
+                       <td class="dataTableContent" onClick="javascript:ToggleCheckBox(<?php echo $i; ?>)"><?php echo $products_name[$i];?></td>
                        <td class="dataTableContent" align="center"><input 
                        <?php /* this is to see if it is in the DB */
                        if ($xsell_id_pr) {

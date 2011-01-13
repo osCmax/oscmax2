@@ -24,7 +24,7 @@ img.corner_banner { display:inline-block; margin-left:-105px; margin-top:-7px; p
 $thumbnail_view = (isset($_GET['list']) ? $_GET['list'] : 'list'); 
 
 if (tep_not_null($_GET['sort'])) $_GET['sort'] = $_GET['sort'];
-$max_results = (tep_not_null(isset($_GET['max'])) ? $_GET['max'] : MAX_DISPLAY_SEARCH_RESULTS);
+$max_results = (tep_not_null(isset($_GET['max'])) ? $_GET['max'] : MAX_CATALOG_DISPLAY_SEARCH_RESULTS);
 
 
 // sort order array
@@ -43,7 +43,7 @@ for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
 
 // Max Results Array		
 for ($i=1, $n=5; $i<$n; $i++) {		
-		$max_display[] = array('id' => MAX_DISPLAY_SEARCH_RESULTS * $i, 'text' => MAX_DISPLAY_SEARCH_RESULTS * $i); 
+		$max_display[] = array('id' => MAX_CATALOG_DISPLAY_SEARCH_RESULTS * $i, 'text' => MAX_CATALOG_DISPLAY_SEARCH_RESULTS * $i); 
 		}	
 		$max_display[] = array('id' => 1000000, 'text' => 'Show All');
 

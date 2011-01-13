@@ -1767,7 +1767,8 @@ INSERT INTO configuration VALUES (33,'Best Sellers','MIN_DISPLAY_BESTSELLERS','1
 INSERT INTO configuration VALUES (34,'Also Purchased','MIN_DISPLAY_ALSO_PURCHASED','1','Minimum number of products to display in the \'This Customer Also Purchased\' box','2','16',NULL,now(),NULL,NULL);
 
 INSERT INTO configuration VALUES (35,'Address Book Entries','MAX_ADDRESS_BOOK_ENTRIES','5','Maximum address book entries a customer is allowed to have','3','1',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (36,'Search Results','MAX_DISPLAY_SEARCH_RESULTS','20','Amount of products to list','3','2',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (36,'Catalog Search Results','MAX_CATALOG_DISPLAY_SEARCH_RESULTS','20','Amount of products to list in the catalog','3','2',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (193,'Admin Listing Results','MAX_DISPLAY_SEARCH_RESULTS','20','Amount of products or items to list within the admin panel','3','2',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (37,'Page Links','MAX_DISPLAY_PAGE_LINKS','5','Number of \'number\' links use for page-sets','3','3',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (38,'Special Products','MAX_DISPLAY_SPECIAL_PRODUCTS','9','Maximum number of products on special to display','3','4',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (39,'New Products Module','MAX_DISPLAY_NEW_PRODUCTS','9','Maximum number of new products to display in a category','3','5',NULL,now(),NULL,NULL);

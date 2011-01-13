@@ -35,7 +35,7 @@ $Id$
            order by p.affiliate_payment_id DESC
            ";
 
-  $affiliate_payment_split = new splitPageResults($affiliate_payment_raw, MAX_DISPLAY_SEARCH_RESULTS);
+  $affiliate_payment_split = new splitPageResults($affiliate_payment_raw, MAX_CATALOG_DISPLAY_SEARCH_RESULTS);
 
   $content = affiliate_payment; 
 

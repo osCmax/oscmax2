@@ -34,7 +34,7 @@ $Id$
     order by affiliate_date DESC
     ";
 
-  $affiliate_sales_split = new splitPageResults($affiliate_sales_raw, MAX_DISPLAY_SEARCH_RESULTS);
+  $affiliate_sales_split = new splitPageResults($affiliate_sales_raw, MAX_CATALOG_DISPLAY_SEARCH_RESULTS);
 
   $content = affiliate_sales; 
 

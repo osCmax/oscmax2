@@ -32,7 +32,7 @@ $Id$
     left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on (pd.products_id = p.products_id and pd.language_id = '" . $languages_id . "') 
     where a.affiliate_id = '" . $affiliate_id . "'  ORDER BY a.affiliate_clientdate desc
     ";
-  $affiliate_clickthroughs_split = new splitPageResults($affiliate_clickthroughs_raw, MAX_DISPLAY_SEARCH_RESULTS);
+  $affiliate_clickthroughs_split = new splitPageResults($affiliate_clickthroughs_raw, MAX_CATALOG_DISPLAY_SEARCH_RESULTS);
 
   $affiliate_clickthroughs_numrows_raw = "select count(*) as count from " . TABLE_AFFILIATE_CLICKTHROUGHS . " where affiliate_id = '" . $affiliate_id . "'";
   $affiliate_clickthroughs_query = tep_db_query($affiliate_clickthroughs_numrows_raw);

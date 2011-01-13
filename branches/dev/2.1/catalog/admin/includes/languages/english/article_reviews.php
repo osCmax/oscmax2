@@ -50,5 +50,5 @@ define('TEXT_NO', 'No') ;
 
 define('HEADING_NO_ARTICLE_REVIEWS', 'Article Reviews');
 define('TEXT_NO_ARTICLE_REVIEWS', 'There are currently no review of any of your articles.  <br><br>When a customer reviews one you will see it displayed to the left.  You will then need to a approve/reject the article before it is displayed in your store.');
-
+define('TEXT_CUSTOMER_RATING', 'Customer Rating:');
 ?>

@@ -130,10 +130,21 @@ $(document).ready(function(){
               <td class="smallText" align="right"><?php echo ENTRY_REVIEW_TEXT; ?></td>
             </tr>
             <tr>
-              <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+              <td class="main"><?php echo TEXT_CUSTOMER_RATING . '<br>' . tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'icons/stars_' . $rInfo->reviews_rating . '.gif'); ?></td>
             </tr>
             <tr>
-              <td class="main">Rating: <span id="stars-cap"></span><div id="stars-wrapper"><?php echo tep_draw_radio_field('reviews_rating', '1', '', 'title="Poor"') . ' ' . tep_draw_radio_field('reviews_rating', '2', '', 'title="Fair"') . ' ' . tep_draw_radio_field('reviews_rating', '3','','title="Average"') . ' ' . tep_draw_radio_field('reviews_rating', '4','','title="Good"') . ' ' . tep_draw_radio_field('reviews_rating', '5','','title="Excellent"'); ?></div></td>
+              <td class="main">Rating: <span id="stars-cap"></span><div id="stars-wrapper">
+			  <?php 
+			  switch ($rInfo->reviews_rating) {
+				  case '1': $one = 'CHECKED'; break;
+				  case '2': $two = 'CHECKED'; break;
+				  case '3': $three = 'CHECKED'; break;
+				  case '4': $four = 'CHECKED'; break;
+				  case '5': $five = 'CHECKED'; break;
+			  }
+	
+			  echo tep_draw_radio_field('reviews_rating', '1', $one, 'title="Poor"') . ' ' . tep_draw_radio_field('reviews_rating', '2', $two, 'title="Fair"') . ' ' . tep_draw_radio_field('reviews_rating', '3', $three,'title="Average"') . ' ' . tep_draw_radio_field('reviews_rating', '4', $four,'title="Good"') . ' ' . tep_draw_radio_field('reviews_rating', '5', $five,'title="Excellent"'); ?></div>
+              </td>
             </tr>
             <tr>
               <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -247,10 +258,18 @@ $(document).ready(function(){
         echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ARTICLE_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $reviews['reviews_id']) . '\'">' . "\n";
       }
 ?>
-                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $reviews['reviews_id'] . '&amp;action=preview') . '">' . tep_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . tep_get_articles_name($reviews['articles_id']); ?></td>
+                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $reviews['reviews_id'] . '&amp;action=edit') . '">' . tep_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . tep_get_articles_name($reviews['articles_id']); ?></td>
                 <td class="dataTableContent" align="right"><?php echo tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'icons/stars_' . $reviews['reviews_rating'] . '.gif'); ?></td>
                 <td class="dataTableContent" align="right"><?php echo tep_date_short($reviews['date_added']); ?></td>
-                <td class="dataTableContent" align="center"><?php echo $reviews['approved']==1?tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10):tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10); ?></td>
+                <td class="dataTableContent" align="center">
+				<?php 
+				if ($reviews['approved'] == 1) {
+				  echo '<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS, tep_get_all_get_params(array('action', 'info')) . 'action=disapprove_review&amp;rID=' . $reviews['reviews_id'], 'NONSSL') . '">' . tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10);
+				} else {
+				  echo '<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS, tep_get_all_get_params(array('action', 'info')) . 'action=approve_review&amp;rID=' . $reviews['reviews_id'], 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+				} 
+				?>
+                </td>
                 <td class="dataTableContent" align="right"><?php if ( (is_object($rInfo)) && ($reviews['reviews_id'] == $rInfo->reviews_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $reviews['reviews_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php

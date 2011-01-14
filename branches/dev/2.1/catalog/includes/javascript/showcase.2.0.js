@@ -1,3 +1,4 @@
+<?php
 /*
 $Id$
 
@@ -8,7 +9,7 @@ $Id$
 
   Released under the GNU General Public License
 */
-
+?>
 // -----------------------------------------------------------------------
 // Eros Fratini - eros@recoding.it
 // jquery.showcase 2.0.1

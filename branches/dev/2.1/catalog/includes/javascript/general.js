@@ -1,3 +1,4 @@
+<?php
 /*
 $Id$
 
@@ -8,7 +9,7 @@ $Id$
 
   Released under the GNU General Public License
 */
-
+?>
 function SetFocus(TargetFormName) {
   var target = 0;
   if (TargetFormName != "") {

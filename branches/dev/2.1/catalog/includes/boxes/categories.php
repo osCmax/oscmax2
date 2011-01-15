@@ -79,6 +79,13 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
 
 // highlights the active category name when it is selected
     $boxContent .= $tree[$counter]['name'];
+	
+    if (SHOW_COUNTS == 'true') {
+      $products_in_category = tep_count_products_in_category($counter);
+      if ($products_in_category > 0) {
+        $boxContent .= '&nbsp;(' . $products_in_category . ')';
+      }
+    }
 
                 if ($cat_name == $tree[$counter]['name']) {
                         $boxContent .= '</span>';
@@ -104,14 +111,6 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
 
 	$boxContent .= '</tr></table>';
 
-
-
-    if (SHOW_COUNTS == 'true') {
-      $products_in_category = tep_count_products_in_category($counter);
-      if ($products_in_category > 0) {
-        $boxContent .= '&nbsp;(' . $products_in_category . ')';
-      }
-    }
 
 //    $boxContent .= '<br>';
 

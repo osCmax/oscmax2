@@ -271,7 +271,7 @@ if( isset($continueButtonId) ) {
   } else {
 ?>
       <tr>
-        <td align="center" class="main"><?php if (BASKET_CART == 'cart') { new infoBox(array(array('text' => TEXT_CART_EMPTY)));; } else { new infoBox(array(array('text' => TEXT_CART_EMPTY_BASKET))); } ?></td>
+        <td align="center" class="main"><?php if (BASKET_CART == 'cart') { new infoBox(array(array('text' => TEXT_CART_EMPTY))); } else { new infoBox(array(array('text' => TEXT_CART_EMPTY_BASKET))); } ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

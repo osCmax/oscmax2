@@ -80,7 +80,7 @@ define('BOX_TEXT_SELECT', 'Select');
 define('BOX_TEXT_VIEW', 'Show');
 define('BOX_TEXT_HELP', 'Help');
 define('BOX_WISHLIST_EMPTY', '0 items');
-define('BOX_TEXT_NO_ITEMS', 'There are no products in your Wish List. <br /><br /><b><a href="' . tep_href_link(FILENAME_WISHLIST_HELP) . '"><u>Click here</u></a> for help on using your Wish List</b>');
+define('BOX_TEXT_NO_ITEMS', 'There are no products in your Wish List.');
 // EOF: MOD - Wishlist 3.5
 
 // order_history box text in includes/boxes/order_history.php
@@ -276,6 +276,8 @@ define('IMAGE_BUTTON_CFP', 'Contact for price');
 define('IMAGE_BUTTON_AAQ', 'Ask a question about this product');
 define('IMAGE_BUTTON_MORE_INFO', 'More info');
 define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Remove Product');
+define('IMAGE_BUTTON_SEND', 'Send');
+define('IMAGE_BUTTON_WISHLIST_HELP', 'Wish list help');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'Delete');
 define('SMALL_IMAGE_BUTTON_EDIT', 'Edit');

@@ -164,7 +164,7 @@ $Id$
               <table border="0" width="100%" cellspacing="0" cellpadding="2">
                 <tr>
                   <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                  <td align="left" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=clear_wishlist', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_WISHLIST . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_wishlist.gif', 'Clear Wishlist'); ?></a></td>
+                  <td align="left" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=clear_wishlist', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_WISHLIST . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_wishlist.gif', 'Clear Wishlist'); ?></a>&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST_HELP) . '">' . tep_image_button('button_wishlist_help.gif', IMAGE_BUTTON_WISHLIST_HELP) . '</a>'; ?></td>
                   <td align="right" class="main"><?php echo tep_image_submit('button_delete.gif', 'Delete From Wishlist', 'name="delete_prod" value="delete_prod"'); ?>&nbsp;
                   <?php
 				  if (BASKET_CART == 'cart') {
@@ -288,7 +288,7 @@ $Id$
           <td colspan="2" class="main"><?php echo TEXT_MESSAGE .  tep_draw_textarea_field('message', 45, 5); ?></td>
         </tr>
         <tr>
-          <td colspan="2" align="right"><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE, 'name="email_prod" value="email_prod"'); ?></td>
+          <td colspan="2" align="right"><?php echo tep_image_submit('button_send.gif', IMAGE_BUTTON_SEND, 'name="email_prod" value="email_prod"'); ?></td>
         </tr>
       </table>
     </td>
@@ -304,7 +304,24 @@ $Id$
     <tr>
     <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-      <td class="main"><?php echo BOX_TEXT_NO_ITEMS;?></td>
+        <td class="main"><?php new infoBox(array(array('text' => BOX_TEXT_NO_ITEMS))); ?></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td class="productinfo_buttons"><table border="0" width="100%" cellspacing="1" cellpadding="2">
+          <tr>
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+                <td align="left" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST_HELP) . '">' . tep_image_button('button_wishlist_help.gif', IMAGE_BUTTON_WISHLIST_HELP) . '</a>'; ?></td>
+                <td align="right" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>'; ?></td>
+                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
       </tr>
     </table>
     </td>

@@ -84,7 +84,12 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 	<?php if ((tep_session_is_registered('customer_id')) && (!tep_session_is_registered('noaccount'))) { ?>
       <a href="<?php echo tep_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><?php echo tep_image_button('log_off.png', HEADER_TITLE_LOGOFF);?></a>
     <?php } ?>
-	<?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US) . '">' . tep_image_button('contact.png', HEADER_TITLE_CART_CONTENTS) . '</a> <a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image_button('account.png', HEADER_TITLE_MY_ACCOUNT) . '</a> <a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">'; ?><?php if (BASKET_CART =='cart') { echo tep_image_button('cart_contents.png', HEADER_TITLE_CART_CONTENTS); } else {  echo tep_image_button('contents.png', HEADER_TITLE_CART_CONTENTS); } ?> <?php echo '</a> <a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . tep_image_button('wishlist.png', HEADER_TITLE_WISHLIST) . '</a> <a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image_button('checkout.png', HEADER_TITLE_CHECKOUT) . '</a>'; ?>&nbsp;&nbsp;</td>
+	<?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US) . '">' . tep_image_button('contact.png', HEADER_TITLE_CART_CONTENTS) . '</a> <a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image_button('account.png', HEADER_TITLE_MY_ACCOUNT) . '</a> <a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">'; ?><?php if (BASKET_CART =='cart') { echo tep_image_button('cart_contents.png', HEADER_TITLE_CART_CONTENTS); } else {  echo tep_image_button('contents.png', HEADER_TITLE_CART_CONTENTS); } ?> <?php echo '</a> <a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . tep_image_button('wishlist.png', HEADER_TITLE_WISHLIST) . '</a>'; ?>
+    <?php
+	if ($cart->count_contents() > 0) {
+	  echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image_button('checkout.png', HEADER_TITLE_CHECKOUT) . '</a>'; ?>
+    <?php } ?>
+    &nbsp;&nbsp;</td>
   </tr>
 </table>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">

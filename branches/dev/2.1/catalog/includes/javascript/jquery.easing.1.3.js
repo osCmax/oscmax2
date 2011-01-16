@@ -1,4 +1,3 @@
-<?php
 /*
 $Id$
 
@@ -9,7 +8,6 @@ $Id$
 
   Released under the GNU General Public License
 */
-?>
 /*
  * jQuery Easing v1.3 - http://gsgd.co.uk/sandbox/jquery/easing/
  *

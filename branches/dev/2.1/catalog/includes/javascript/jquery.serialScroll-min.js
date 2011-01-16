@@ -1,4 +1,3 @@
-<?php
 /*
 $Id$
 
@@ -9,7 +8,6 @@ $Id$
 
   Released under the GNU General Public License
 */
-?>
 /*
  * jQuery.SerialScroll - Animated scrolling of series
  * Copyright (c) 2007-2009 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com

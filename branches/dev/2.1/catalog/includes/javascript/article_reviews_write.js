@@ -1,4 +1,4 @@
-<?php
+<script type="text/javascript">
 /*
 $Id$
 
@@ -9,7 +9,7 @@ $Id$
 
   Released under the GNU General Public License
 */
-?>
+</script>
 <script src="http://www.google.com/jsapi"></script>
 <script>
   // Load jQuery

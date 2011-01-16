@@ -1,4 +1,3 @@
-<?php
 /*
 $Id$
 
@@ -9,7 +8,7 @@ $Id$
 
   Released under the GNU General Public License
 */
-?>
+
 /*
  * JQZoom Evolution 1.0.1 - Javascript Image magnifier
  *

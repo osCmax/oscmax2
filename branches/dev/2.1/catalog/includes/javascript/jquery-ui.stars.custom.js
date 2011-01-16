@@ -1,4 +1,3 @@
-<?php
 /*
 $Id$
 
@@ -9,7 +8,7 @@ $Id$
 
   Released under the GNU General Public License
 */
-?>
+
 /*!
  * jQuery UI 1.8.2
  *

@@ -20,11 +20,13 @@ function tep_information_show_category($information_group_id = 1) {
 
 	// Retrieve information from db
 	// ID set by module for Information box
-	$information_query = tep_db_query("SELECT information_id, information_title, parent_id FROM " . TABLE_INFORMATION . " WHERE visible='1' and language_id='" . (int)$languages_id ."' and information_group_id = '" . (int)$information_group_id . "' ORDER BY sort_order");
+	$information_query = tep_db_query("SELECT information_id, information_title, information_url, information_target, parent_id FROM " . TABLE_INFORMATION . " WHERE visible='1' and language_id='" . (int)$languages_id ."' and information_group_id = '" . (int)$information_group_id . "' ORDER BY sort_order");
 	while($information = tep_db_fetch_array($information_query)) {
 		$information_tree[$information['information_id']] = array(
 			'info_title' 	=> $information['information_title'],
 			'parent_id' 	=> $information['parent_id'],
+			'info_url'      => $information['information_url'],
+			'info_target'   => $information['information_target'],
 			'info_next_id' 	=> 0
 		);
 		if ($information_tree[$information['information_id']]['parent_id'] != '0') {
@@ -51,9 +53,14 @@ function tep_information_show_category($information_group_id = 1) {
 			if (((isset($_GET['info_id'])) && ($_GET['info_id'] == $element['key'])) || ($parent_child_selected == $element['key'])) {
 				$informationString .= '<a href="' . tep_href_link(FILENAME_INFORMATION, 'info_id=' . $element['key']) . '"><b>' . $information_tree[$element['key']]['info_title'] . '</b></a><br />';
 			} else {
+				if ($information_tree[$element['key']]['info_url'] != '') {
+				//The link has an URL listed
+				$informationString .= '<a href="' . $information_tree[$element['key']]['info_url'] . '" target="' . $information_tree[$element['key']]['info_target'] . '">' . $information_tree[$element['key']]['info_title'] . '</a><br />';	
+				} else {
 				$informationString .= '<a href="' . tep_href_link(FILENAME_INFORMATION, 'info_id=' . $element['key']) . '">' . $information_tree[$element['key']]['info_title'] . '</a><br />';
 				//Sitemap only
 				$sitemapString .= '<li><a href="' . tep_href_link(FILENAME_INFORMATION, 'info_id=' . $element['key']) . '">' . $information_tree[$element['key']]['info_title'] . '</a></li>' . "\n";
+				}
 			}
 
 			//Just for sitemap

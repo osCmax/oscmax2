@@ -74,7 +74,9 @@ function tep_update_information_languages($language_id = 0) {
 						'information_id'			=> tep_db_prepare_input($information['information_id']),
 						'information_group_id' 		=> tep_db_prepare_input($information['information_group_id']),
 						'information_title' 		=> tep_db_prepare_input($information['information_title']),
-						'information_description' 	=> tep_db_prepare_input($information['information_description'])
+						'information_description' 	=> tep_db_prepare_input($information['information_description']),
+						'information_url' 		    => tep_db_prepare_input($information['information_url']),
+						'information_target'    	=> tep_db_prepare_input($information['information_target'])
 					);
 					tep_db_perform(TABLE_INFORMATION, $sql_data_array);
 				}
@@ -129,6 +131,8 @@ switch($_REQUEST['information_action']) {
 	if(isset($_POST['parent_id']))					$sql_data_array['parent_id'] = tep_db_prepare_input($_POST['parent_id']);
 	if(isset($_POST['information_title']))			$sql_data_array['information_title'] = tep_db_prepare_input($_POST['information_title'][$language_id]);
 	if(isset($_POST['information_description']))	$sql_data_array['information_description'] = tep_db_prepare_input($_POST['information_description'][$language_id]);
+	if(isset($_POST['information_url']))			$sql_data_array['information_url'] = tep_db_prepare_input($_POST['information_url']);
+	if(isset($_POST['information_target']))	        $sql_data_array['information_target'] = tep_db_prepare_input($_POST['information_target']);
 
 	tep_db_perform(TABLE_INFORMATION, $sql_data_array);
 
@@ -147,6 +151,8 @@ switch($_REQUEST['information_action']) {
 		if(isset($_POST['parent_id']))					$sql_data_array['parent_id'] = tep_db_prepare_input($_POST['parent_id']);
 		if(isset($_POST['information_title']))			$sql_data_array['information_title'] = tep_db_prepare_input($_POST['information_title'][$language_id]);
 		if(isset($_POST['information_description']))	$sql_data_array['information_description'] = tep_db_prepare_input($_POST['information_description'][$language_id]);
+		if(isset($_POST['information_url']))			$sql_data_array['information_url'] = tep_db_prepare_input($_POST['information_url']);
+	    if(isset($_POST['information_target']))	        $sql_data_array['information_target'] = tep_db_prepare_input($_POST['information_target']);
 
 		if(count($sql_data_array) > 1) {
 			if(tep_db_perform(TABLE_INFORMATION, $sql_data_array)){
@@ -169,7 +175,9 @@ switch($_REQUEST['information_action']) {
 			if(isset($_POST['parent_id']))					$sql_data_array['parent_id'] = tep_db_prepare_input($_POST['parent_id']);
 			if(isset($_POST['information_title']))			$sql_data_array['information_title'] = tep_db_prepare_input($_POST['information_title'][$language_id]);
 			if(isset($_POST['information_description']))	$sql_data_array['information_description'] = tep_db_prepare_input($_POST['information_description'][$language_id]);
-
+            if(isset($_POST['information_url']))			$sql_data_array['information_url'] = tep_db_prepare_input($_POST['information_url']);
+	        if(isset($_POST['information_target']))	        $sql_data_array['information_target'] = tep_db_prepare_input($_POST['information_target']);
+	
 			if(count($sql_data_array) > 0) {
 				$sql_data_array['information_group_id'] = tep_db_prepare_input($gID);
 				if (tep_db_perform(TABLE_INFORMATION, $sql_data_array, 'update', "information_id = '" . (int)$_POST['information_id'] . "' and language_id = '" . (int)$language_id . "'")){

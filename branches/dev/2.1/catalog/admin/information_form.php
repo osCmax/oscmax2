@@ -68,6 +68,30 @@ if(!strstr($info_group['locked'], 'sort_order')) {
 	</tr>
 <?php
 }
+
+if(!strstr($info_group['locked'], 'information_url')) {
+?>
+	<tr>
+		<td class="main"><?php echo ENTRY_URL;?>&nbsp;<?php echo '<span title="' . HEADING_URL_HELP . '|' . TEXT_URL_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', IMAGE_ICON_INFO); ?></span></td>
+		<td><?php if ($edit[information_url]) {$url=$edit[information_url];}; echo tep_draw_input_field('information_url', "$url", 'size=70'); ?></td>
+	</tr>
+	<tr>
+		<td colspn="2" height="10" class="smallText" style="color: #bbbbbb"><?php echo TEXT_INCLUDE_HTTP; ?></td>
+	</tr>
+<?php
+}
+
+if(!strstr($info_group['locked'], 'information_target')) {
+?>
+	<tr>
+		<td class="main"><?php echo ENTRY_TARGET; ?></td>
+		<td class="main"><?php echo tep_draw_radio_field('information_target', '_top', true, $edit['information_target']) . '&nbsp;&nbsp;' . TARGET_TOP . '&nbsp;&nbsp;' . tep_draw_radio_field('information_target', '_blank', false, $edit['information_target']) . '&nbsp;&nbsp;' . TARGET_BLANK; ?></td>
+	</tr>
+	<tr>
+		<td colspan="2" height="10"></td>
+	</tr>
+<?php
+}
 ?>
     <tr>
       <td colspan="2">

@@ -695,6 +695,8 @@ CREATE TABLE information (
   information_group_id int(11) unsigned NOT NULL DEFAULT '0',
   information_title varchar(255) NOT NULL DEFAULT '',
   information_description text NOT NULL,
+  information_url varchar(255) NOT NULL,
+  information_target varchar(255) NOT NULL,
   parent_id int(11) DEFAULT NULL,
   sort_order tinyint(3) unsigned NOT NULL DEFAULT '0',
   visible enum('1','0') NOT NULL DEFAULT '1',

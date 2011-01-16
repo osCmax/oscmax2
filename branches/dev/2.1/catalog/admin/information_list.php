@@ -20,6 +20,7 @@ $Id$
 	    <td align="center" class="dataTableHeadingContent" width="50"><?php echo ID_INFORMATION;?></td>
 	    <td align="left" class="dataTableHeadingContent"><?php echo ENTRY_TITLE;?></td>
 	    <td align="left" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo ENTRY_PARENT_PAGE; } else { echo '&nbsp;'; }?></td>
+        <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo ENTRY_EXTERNAL_URL; } else { echo '&nbsp;'; }?></td>
 	    <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo PUBLIC_INFORMATION; } else { echo '&nbsp;'; }?></td>
 	    <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo ENTRY_SORT_ORDER; } else { echo '&nbsp;'; }?></td>
 	    <td align="center" class="dataTableHeadingContent" colspan=2><?php echo ACTION_INFORMATION;?></td>
@@ -33,6 +34,7 @@ if (sizeof($data) > 0) {
         <td align="center" class="dataTableContent"><?php echo $val['information_id']; ?></td>
         <td width="40%" class="dataTableContent"><?php echo $val['information_title'];?></td>
         <td class="dataTableContent"><?php echo ((!empty($val['parent_id'])) ? $val['parent_id'] : null);?></td>
+        <td align="center" class="dataTableContent"><?php if (!empty($val['information_url'])) { echo tep_image(DIR_WS_ICONS . 'icon_popup.gif', IMAGE_ICON_EXTERNAL_URL, 10, 10); };?></td>
         <td nowrap align="center" class="dataTableContent">
 <?php
         if ($_GET['gID'] == '1') { 

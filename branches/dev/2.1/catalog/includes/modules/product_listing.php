@@ -443,7 +443,7 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
             }
 			// add short description
 			if (PRODUCT_SHORT_DESCRIPTION == 'true') {
-			  $short .= $listing[$x]['products_short'];
+			  $short = $listing[$x]['products_short'];
 			}
             // end extra product fields
             $lc_align = '';

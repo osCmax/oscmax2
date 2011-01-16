@@ -56,4 +56,12 @@ define('ERROR_PRICE_FROM_MUST_BE_NUM', 'Le prix du champ "Prix &agrave; partir d
 define('ERROR_PRICE_TO_MUST_BE_NUM', 'Le prix du champ "Prix jusqu\'&agrave;" ne doit contenir que des chiffres.');
 define('ERROR_PRICE_TO_LESS_THAN_PRICE_FROM', 'Le prix du champ "Prix jusqu\'&agrave;" doit &ecirc;tre sup&eacute;rieure ou &eacute;gale au prix du champ "Prix &agrave; partir de".');
 define('ERROR_INVALID_KEYWORDS', 'Mots-cl&eacute;s invalides.');
+define('TEXT_OPTIONAL','Entrées dans le champs ci-dessous sont facultatives si les critères de recherche est laissée en blanc. Dans ce cas, au moins un champ ci-dessous doit avoir une entrée.');
+
+define('TEXT_FOR_FIELD','Pour ce domaine match');
+
+define('TEXT_MATCH_ANY','TOUTE valeur sélectionnée ou');
+
+define('TEXT_MATCH_ALL','TOUTES les valeurs sélectionnées');
+
 ?>

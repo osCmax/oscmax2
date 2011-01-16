@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program - Category Links');
+define('NAVBAR_TITLE','Partnerprogramm');
+define('HEADING_TITLE','Partnerprogramm - Kategorie Links');
 
-define('TEXT_AFFILIATE_NAME', 'Category Name:');
-define('TEXT_INFORMATION', 'Choose the CATEGORY you want to display on your website from the choices below:');
-define('TEXT_AFFILIATE_INFO', 'Copy the code shown below and paste into your website');
+define('TEXT_AFFILIATE_NAME','Kategorie Name:');
+define('TEXT_INFORMATION','Wählen Sie die gewünschte Kategorie, um auf Ihrer Website aus der unten angegebenen Anzeige:');
+define('TEXT_AFFILIATE_INFO','Kopieren Sie den Code unten gezeigt, und fügen Sie in Ihre Website');
 ?>

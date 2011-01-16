@@ -28,6 +28,8 @@ define('VOUCHER_REDEEMED', 'Vale Redimido');
 define('CART_COUPON', 'Cupon :');
 define('CART_COUPON_INFO', 'más información');
 
-define('MODULE_ORDER_TOTAL_COUPON_TEXT_ERROR', 'Coupon Redemption');
-define('ERROR_REDEEMED_AMOUNT_ZERO', '<BR>***HOWEVER:No reducion available, please see the coupon restrictions***');
+define('MODULE_ORDER_TOTAL_COUPON_TEXT_ERROR','Cupón de la Redención');
+define('ERROR_REDEEMED_AMOUNT_ZERO','<BR> *** SIN EMBARGO: No hay reducción disponibles, por favor, consulte las restricciones cupón ***');
+define('ERROR_NO_ACCOUNT_GV','Usted debe iniciar sesión en su cuenta para canjear un cheque regalo');
+
 ?>

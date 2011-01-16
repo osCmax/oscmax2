@@ -24,7 +24,7 @@ define('TEXT_NEW_AFFILIATE_INTRODUCTION', 'Mit der Einrichtung eines Partner Kon
 define('TEXT_NEW_AFFILIATE_TERMS','Unsere Allgemeinen Gesch&auml;ftsbedingungen zum Partnerprogramm finden Sie <u>hier</u>!');
 
 define('HEADING_RETURNING_AFFILIATE', 'Sie sind bereits Partner und haben ein Passwort');
-define('TEXT_RETURNING_AFFILIATE', 'Nach dem Login k&ouml;nnen Sie sich s&auml;mtliche Informationen zum aktuellen Stand Ihres Partner-Kontos aufrufen.');
+define('TEXT_RETURNING_AFFILIATE','Ich bin bereits Partner.');
 
 define('TEXT_AFFILIATE_PASSWORD_FORGOTTEN', 'Sie haben Ihr Passwort vergessen? Dann klicken Sie <u>hier</u>!');
 

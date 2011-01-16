@@ -10,14 +10,14 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Affiliate Program');
-define('NAVBAR_TITLE_2', 'Newsletter Subscriptions');
+define('NAVBAR_TITLE_1','Programa de afiliados');
+define('NAVBAR_TITLE_2','Boletín de suscripción');
 
-define('HEADING_TITLE', 'Newsletter Subscriptions');
+define('HEADING_TITLE','Boletín de suscripción');
 
-define('MY_NEWSLETTERS_TITLE', 'My Newsletter Subscriptions');
-define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER', 'Affiliate Newsletter');
-define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER_DESCRIPTION', 'Including affiliate news, new products, special offers, and other promotional announcements.');
+define('MY_NEWSLETTERS_TITLE','Mi Suscripciones Boletín');
+define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER','Afiliado Boletín');
+define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER_DESCRIPTION','Incluyendo noticias de afiliados, nuevos productos, ofertas especiales y otros anuncios promocionales.');
 
-define('SUCCESS_NEWSLETTER_UPDATED', 'Your newsletter subscriptions have been successfully updated.');
+define('SUCCESS_NEWSLETTER_UPDATED','Su suscripción al boletín se han actualizado correctamente.');
 ?>

@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'The Affiliate Program');
-define('HEADING_TITLE', 'The Affiliate Program');
+define('NAVBAR_TITLE','El Programa de Afiliados');
+define('HEADING_TITLE','El Programa de Afiliados');
 
-define('TEXT_INFORMATION', 'You were logged out successfully.');
-define('TEXT_INFORMATION_ERROR_1', 'You could not be logged out.');
-define('TEXT_INFORMATION_ERROR_2', 'You were not logged in and can therefore not be logged out.');
+define('TEXT_INFORMATION','Usted se registra a cabo con éxito.');
+define('TEXT_INFORMATION_ERROR_1','Usted no puede ser desconectado.');
+define('TEXT_INFORMATION_ERROR_2','No se registra en lo que no puede ser desconectado.');
 ?>

@@ -10,6 +10,6 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Your Account Details were changed!');
+define('NAVBAR_TITLE','Programa de afiliados');
+define('HEADING_TITLE','Datos de tu cuenta se ha cambiado!');
 ?>

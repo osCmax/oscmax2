@@ -23,10 +23,18 @@ define('TEXT_AFFILIATE_HEADER', 'Alle Klicks von Ihrer Website:');
 define('TEXT_NO_CLICKS', 'Es wurden noch keine Klicks von Ihrer Website aufgezeichnet.');
 define('TEXT_DISPLAY_NUMBER_OF_CLICKS', 'angezeigte Klicks <b>%d</b> bis <b>%d</b> (von <b>%d</b> insgesamt)');
 define('TEXT_CLICKTHROUGH_HELP', ' <font color="#FFFFFF">[?]</font>');
-define('TEXT_CLICKS', 'Click on [?] to see a description of each category.');
-define('HEADING_CLICKTHROUGH_HELP', 'Affiliate Help');
-define('TEXT_DATE_HELP', '<i>Date</i> represents the date of the clickthrough from your site.');
-define('TEXT_CLICKED_PRODUCT_HELP', '<i>Product or Page</i> represents the page or product clicked through to');
-define('TEXT_REFFERED_HELP', '<i>Referrer</i> represents the url that the clickthrough came from.');
-define('TEXT_CLOSE_WINDOW', 'Close Window [x]');
+define('HEADING_CLICKTHROUGH_HELP','Affiliate-Hilfe');
+define('TEXT_DATE_HELP','<i>Datum</i> stellt den Zeitpunkt der Klickrate von Ihrer Website.');
+define('TEXT_CLICKED_PRODUCT_HELP','<i>Produkt-oder Page</i> stellt die Seite oder Produkt geklickt bis');
+define('TEXT_REFFERED_HELP','<i>Referrer</i> URL repräsentiert die, dass die Klickrate kam.');
+define('TEXT_CLICKS_1','Klicken Sie auf die');
+
+define('TEXT_CLICKS_2','eine Beschreibung der einzelnen Kategorien zu sehen.');
+
+define('HEADING_DATE_HELP','Datum Hilfe');
+
+define('HEADING_REFFERED_HELP','Referrer-Hilfe');
+
+define('HEADING_PRODUCT_HELP','Produkt-Hilfe');
+
 ?>

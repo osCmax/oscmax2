@@ -10,23 +10,23 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program - Build a Link');
+define('NAVBAR_TITLE','Partnerprogramm');
+define('HEADING_TITLE','Partnerprogramm - Bauen Sie ein Link');
 
-define('TEXT_AFFILIATE_NAME', 'Banner Name:');
-define('TEXT_INFORMATION', 'Enter the product number of the product you wish to build a link for:');
-define('TEXT_AFFILIATE_INFO', 'Copy the code shown below and paste into your website');
+define('TEXT_AFFILIATE_NAME','Banner Name:');
+define('TEXT_INFORMATION','Geben Sie die Produktnummer des Produktes Sie einen Link für zu bauen:');
+define('TEXT_AFFILIATE_INFO','Kopieren Sie den Code unten gezeigt, und fügen Sie in Ihre Website');
 define('TEXT_AFFILIATE_INDIVIDUAL_BANNER','BUILD-A-LINK');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO','Enter the product number you wish to link to and press the enter&nbsp;');
-define('TEXT_AFFILIATE_VALIDPRODUCTS', 'Click Here:');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_VIEW', 'to view available products.');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_HELP', 'Select the product number from the popup window and enter the number in the Build A Link field.');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO','Geben Sie die Produktnummer Sie auf Link und drücken Sie die Eingabetaste');
+define('TEXT_AFFILIATE_VALIDPRODUCTS','Klicken Sie hier:');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_VIEW','Produkte zur Verfügung zu sehen.');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_HELP','Wählen Sie das Produkt Nummer aus dem Popup-Fenster und geben Sie die Nummer in der Build A Link-Feld.');
 
-define('TEXT_VALID_PRODUCTS_LIST', 'Available Products List');
-define('TEXT_VALID_PRODUCTS_ID', 'Product #');
-define('TEXT_VALID_PRODUCTS_NAME', 'Products Name');
+define('TEXT_VALID_PRODUCTS_LIST','Verfügbare Produkte Liste');
+define('TEXT_VALID_PRODUCTS_ID','Produkt');
+define('TEXT_VALID_PRODUCTS_NAME','Produkt-Name');
 
-define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');
+define('TEXT_CLOSE_WINDOW','<u>Fenster schliessen</u> [x]');
 
 define('IMAGE_BUTTON_BUILD_A_LINK', 'BUILD-A-LINK');
 ?>

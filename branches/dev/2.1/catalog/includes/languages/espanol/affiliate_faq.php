@@ -10,8 +10,8 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program FAQ');
-define('HEADING_TITLE', 'Affiliate Program - Frequently Asked Questions');
+define('NAVBAR_TITLE','Afiliado FAQ del Programa');
+define('HEADING_TITLE','Programa de Afiliados - Preguntas más frecuentes');
 
 define('TEXT_INFORMATION', '' . STORE_NAME . ' has compiled this info so that you may be better informed about our affiliate program.<br>
  If you have any questions please <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT). '">' . BOX_AFFILIATE_CONTACT . '</a> for more information.<br>

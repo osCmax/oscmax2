@@ -55,4 +55,12 @@ define('ERROR_PRICE_FROM_MUST_BE_NUM', '<b>Preis ab</b> muss eine Zahl sein');
 define('ERROR_PRICE_TO_MUST_BE_NUM', '<b>Preis bis</b> muss eine Zahl sein');
 define('ERROR_PRICE_TO_LESS_THAN_PRICE_FROM', '<b>Preis bis</b> muss gr&ouml;&szlig;er oder gleich <b>Preis ab</b> sein.');
 define('ERROR_INVALID_KEYWORDS', 'Suchbegriff unzul&aum&auml;ssig');
+define('TEXT_OPTIONAL','Einträge in der nachfolgenden Felder sind optional, wenn die Suchkriterien leer ist. In diesem Fall mindestens ein Feld unten muss einen Eintrag.');
+
+define('TEXT_FOR_FIELD','Für dieses Feld passen');
+
+define('TEXT_MATCH_ANY','Jeder ausgewählte Wert oder');
+
+define('TEXT_MATCH_ALL','ALLE ausgewählten Werte');
+
 ?>

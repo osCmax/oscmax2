@@ -19,12 +19,12 @@ define('TEXT_AFFILIATE_ID', 'Affiliate E-Mail:');
 define('TEXT_AFFILIATE_PASSWORD', 'Contraseña:');
 
 define('HEADING_NEW_AFFILIATE', 'Nuevo Affiliate');
-define('TEXT_NEW_AFFILIATE', 'I am a new affiliate.');
-define('TEXT_NEW_AFFILIATE_INTRODUCTION', 'By creating an affiliate account at ' . STORE_NAME . ' you will be able to earn valuable extra revenue for by referring your website visitors to us.');
+define('TEXT_NEW_AFFILIATE','Yo soy un afiliado nuevo.');
+define('TEXT_NEW_AFFILIATE_INTRODUCTION','"Al crear una cuenta de afiliado at '. STORE_NAME . "Usted será capaz de obtener ingresos extra por valor de referir a sus visitantes del Web site para nosotros. '');
 define('TEXT_NEW_AFFILIATE_TERMS','Ponga aqui sus condiciones de Affiliate.');
 
 define('HEADING_RETURNING_AFFILIATE', 'Ya Soy Affiliate');
-define('TEXT_RETURNING_AFFILIATE', 'I am a returning affiliate.');
+define('TEXT_RETURNING_AFFILIATE','Yo soy un afiliado de regreso.');
 
 define('TEXT_AFFILIATE_PASSWORD_FORGOTTEN', '¿Ha olvidado su contraseña? Siga este enlace y se la enviamos.');
 

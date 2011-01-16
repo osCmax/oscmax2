@@ -62,4 +62,42 @@ define('ENTRY_AFFILIATE_HOMEPAGE', 'Site internet :');
 define('ENTRY_AFFILIATE_HOMEPAGE_TEXT', '&nbsp;<small><font color="#AABBDD">requis (http://)</font></small>');
 define('ENTRY_AFFILIATE_HOMEPAGE_ERROR', '&nbsp;<small><font style="errorText">requis (http://)</font></small>');
 define('CATEGORY_PAYMENT_DETAILS', 'Moyen(s) de paiement choisi(s) :');
+define('BOX_AFFILIATE_CENTRE','Affilié Centre');
+
+define('BOX_AFFILIATE_BANNER_CENTRE','Liens d'affiliation');
+
+define('BOX_AFFILIATE_REPORT_CENTRE','Rapports d'affiliation');
+
+define('BOX_AFFILIATE_PASSWORD','Changer mot de passe');
+
+define('BOX_AFFILIATE_NEWS','Affilié Nouvelles');
+
+define('BOX_AFFILIATE_NEWSLETTER','Newsletter');
+
+define('BOX_AFFILIATE_REPORTS','Rapports d'affiliation');
+
+define('BOX_AFFILIATE_BANNERS_BANNERS','Bannières de site Web');
+
+define('TEXT_PAYMENT_STATUS','Vente État représente l'état de la vente.');
+
+define('BOX_AFFILIATE_BANNERS_BUILD_CAT','Lien Catégorie Build');
+
+define('BOX_AFFILIATE_BANNERS_BUILD','Product Link Build');
+
+define('BOX_AFFILIATE_BANNERS_PRODUCT','Bannières du produit');
+
+define('BOX_AFFILIATE_BANNERS_CATEGORY','Bannières Catégorie');
+
+define('BOX_AFFILIATE_BANNERS_TEXT','Liens de texte');
+
+define('TEXT_PAYMENT_ID','Affiche le numéro d'identification, des paiements.');
+
+define('TEXT_SALES_PAYMENT_DATE','Indique la date des paiements.');
+
+define('TEXT_SALES_PAYMENT_Ammount','Le bénéfice d'affiliation représente la commission perçue sur la vente');
+
+define('ENTRY_AFFILIATE_NEWSLETTER','Affiliation Newsletter');
+
+define('ENTRY_AFFILIATE_NEWSLETTER_ERROR','nécessaire');
+
 ?>

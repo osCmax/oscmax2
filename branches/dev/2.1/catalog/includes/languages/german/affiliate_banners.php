@@ -10,23 +10,23 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Partner programm');
-define('HEADING_TITLE', 'Partner programm: Banner');
+define('NAVBAR_TITLE', 'Werbepartner');
+define('HEADING_TITLE', 'Werbepartner: Banner');
 
-define('TEXT_INFORMATION', 'W&auml;hlen Sie den Banner oder den Link aus den untenhalb angebotenen M&ouml;glichkeiten, den Sie auf Ihrer Webseite publizieren m&ouml;chten.');
+define('TEXT_INFORMATION', 'W&auml;hlen Sie den Banner oder den Link aus den folgenden M&ouml;glichkeiten, den Sie auf Ihrer Webseite publizieren m&ouml;chten.');
 
-define('TEXT_AFFILIATE_BANNERS','Banner Name:');
-define('TEXT_AFFILIATE_BANNERS_BUILD','Bauen Sie ein Link');
-define('TEXT_AFFILIATE_BANNERS_PRODUCT','Produkt-Links');
-define('TEXT_AFFILIATE_BANNERS_TEXT','Text-Links');
+define('TEXT_AFFILIATE_BANNERS', 'Bannername: ');
+define('TEXT_AFFILIATE_BANNERS_BUILD', 'Erzeuge Link');
+define('TEXT_AFFILIATE_BANNERS_PRODUCT', 'Produktlinks');
+define('TEXT_AFFILIATE_BANNERS_TEXT', 'Textlinks');
 
-define('TEXT_INFORMATION_BANNERS_BANNERS', 'Kopieren Sie den HTML Code und f&uuml;gen Sie diesen in Ihrer Webseite ein.');
-define('TEXT_INFORMATION_BANNERS_BUILD', 'Link für einen Produkt Banner erzeugen');
-define('TEXT_INFORMATION_BANNERS_PRODUCT', 'Recommend specific products to your visitors by linking directly to a particular product.');
-define('TEXT_INFORMATION_BANNERS_TEXT', 'Geben Sie die Produkt-ID (in der URL sichtbar) von dem Produkt ein, das Sie auf Ihrer Webseite anbieten m&ouml;chten und bet&auml;tigen Sie den Button "Build a Link"');
+define('TEXT_INFORMATION_BANNERS_BANNERS', 'Vorgefertigte Banner auf die Startseite dieses Shops anzeigen');
+define('TEXT_INFORMATION_BANNERS_BUILD', 'Banner oder Textlink auf eine Produkt eigener Wahl erzeugen');
+define('TEXT_INFORMATION_BANNERS_PRODUCT', 'Banner und Textlinks auf vom Shopbetreiber empfohlene Produkte anzeigen');
+define('TEXT_INFORMATION_BANNERS_TEXT', 'Textlinks auf vom Shopbetreiber empfohlene Produkte anzeigen');
 
-define('IMAGE_BANNERS','Banners');
-define('IMAGE_PRODUCT','Produkt-Links');
-define('IMAGE_BUILD','Bauen Sie ein Link');
-define('IMAGE_TEXT','Text-Links');
+define('IMAGE_BANNERS','Banner');
+define('IMAGE_PRODUCT','Produktlinks');
+define('IMAGE_BUILD','Erzeuge Link');
+define('IMAGE_TEXT','Textlinks');
 ?>

@@ -29,9 +29,8 @@ define('TABLE_HEADING_COMMENTS', 'F&uuml;gen Sie hier Ihre Anmerkungen zu dieser
 define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Fortsetzung des Bestellvorganges');
 define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'zur Best&auml;tigung Ihrer Bestellung.');
 
-// BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-// product summary text in checkout_payment.php
-define('HEADING_PRODUCTS', 'Products Ordered');
-define('TEXT_EDIT', 'Edit');
-// EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+define('HEADING_PRODUCTS', 'Gekaufte Produkte');
+define('TEXT_EDIT', '&Aunl;ndern');
+define('TERMS_PART_1', 'Bitte best&auml;tigen Sie, da&szlig; Sie unsere ');
+define('TERMS_PART_2', '<b><u>Allgemeinen Gesch&auml;ftsbedingungen</u></b> gelesen und akzeptiert haben.');
 ?>

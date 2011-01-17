@@ -79,7 +79,7 @@ define('ENTRY_AFFILIATE_HOMEPAGE', 'Homepage');
 define('ENTRY_AFFILIATE_HOMEPAGE_TEXT', '&nbsp;required (http://)');
 define('ENTRY_AFFILIATE_HOMEPAGE_ERROR', '&nbsp;<small><font color="#FF0000">required (http://)</font></small>');
 define('ENTRY_AFFILIATE_NEWSLETTER', 'Affiliate Newsletter');
-define('ENTRY_AFFILIATE_NEWSLETTER_TEXT', '');
+define('ENTRY_AFFILIATE_NEWSLETTER_TEXT','');
 define('ENTRY_AFFILIATE_NEWSLETTER_ERROR', '&nbsp;<small><font color="#FF0000">required</font></small>');
 
 define('CATEGORY_PAYMENT_DETAILS', 'You get your money by:');

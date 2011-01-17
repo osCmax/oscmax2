@@ -10,23 +10,23 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE','Partnerprogramm');
-define('HEADING_TITLE','Partnerprogramm - Bauen Sie ein Link KATEGORIE');
+define('NAVBAR_TITLE', 'Werbepartner');
+define('HEADING_TITLE', 'Werbepartner - Erzeuge Kategorielink');
 
-define('TEXT_AFFILIATE_NAME','Banner Name:');
-define('TEXT_INFORMATION','Geben Sie die Nummer der Kategorie des KATEGORIE Sie einen Link für zu bauen:');
-define('TEXT_AFFILIATE_INFO','Kopieren Sie den Code unten gezeigt, und fügen Sie in Ihre Website');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER','BUILD-A-CATEGORY-LINK');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO','Geben Sie die Nummer der Kategorie möchten eine Verknüpfung und drücken Sie die Eingabetaste');
-define('TEXT_AFFILIATE_VALIDPRODUCTS','Klicken Sie hier:');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_VIEW','den verfügbaren Kategorien anzuzeigen.');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_HELP','Wählen Sie die Kategorie Nummer aus dem Popup-Fenster und geben Sie die Nummer in der Kategorie Build Link-Feld.');
+define('TEXT_AFFILIATE_NAME', 'Bannername:');
+define('TEXT_INFORMATION', 'Geben Sie die Nummer der Kategorie ein, auf die Sie verlinken wollen:');
+define('TEXT_AFFILIATE_INFO', 'Kopieren Sie den folgenden Link und f&uuml;gen Sie ihn in Ihre Website ein.');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER','Erzeuge Kategorielink');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO','Geben Sie die Nummer der Kategorie ein, auf die Sie verlinken wollen:&nbsp;');
+define('TEXT_AFFILIATE_VALIDPRODUCTS', 'Hier klicken');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_VIEW', 'f&uuml;r eine Liste aller m&ouml;glichen Kategorien.');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_HELP', 'Geben Sie die Nummer der gew&uuml;nschten Kategorie oben in das Feld ein.');
 
-define('TEXT_VALID_CATEGORIES_LIST','Verfügbare Kategorien Liste');
-define('TEXT_VALID_CATEGORIES_ID','Kategorien');
-define('TEXT_VALID_CATEGORIES_NAME','Kategorien Name');
+define('TEXT_VALID_CATEGORIES_LIST', 'Liste der m&ouml;glichen Kategorien');
+define('TEXT_VALID_CATEGORIES_ID', 'Kategorienummer');
+define('TEXT_VALID_CATEGORIES_NAME', 'Kategoriename');
 
-define('TEXT_CLOSE_WINDOW','<u>Fenster schliessen</u> [x]');
+define('TEXT_CLOSE_WINDOW', '<u>Fenster schlie&szlig;en</u>');
 
-define('IMAGE_BUTTON_BUILD_A_LINK', 'BUILD-A-LINK');
+define('IMAGE_BUTTON_BUILD_A_LINK', 'Erstelle Link');
 ?>

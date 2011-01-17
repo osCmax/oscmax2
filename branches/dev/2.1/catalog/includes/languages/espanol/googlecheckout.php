@@ -21,21 +21,21 @@ $Id$
 
 define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_TITLE', 'GoogleCheckout');
 define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_DESCRIPTION', 'GoogleCheckout');
-define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_OPTION', '- Or use -');
-define('GOOGLECHECKOUT_STRING_WARN_USING_SANDBOX', 'GC is set to use SANDBOX. Order will be processed but NOT charged.');
-define('GOOGLECHECKOUT_STRING_WARN_NO_MERCHANT_ID_KEY', 'Google Checkout Merchant Id or Key has not been setted up');
-define('GOOGLECHECKOUT_STRING_WARN_VIRTUAL', 'Some download products in your cart are currently not available via Google Checkout.');
-define('GOOGLECHECKOUT_STRING_WARN_EMPTY_CART', 'The Cart is empty');
-define('GOOGLECHECKOUT_STRING_WARN_OUT_OF_STOCK', 'Some products are Out of Stock');
-define('GOOGLECHECKOUT_STRING_WARN_MULTIPLE_SHIP_TAX', 'There are multiple shipping options selected and they use different shipping tax tables or some dont use tax tables');
-define('GOOGLECHECKOUT_STRING_WARN_MIX_VERSIONS', 'The Version of the installed module in the Admin UI is %s and the one of the package is %s, Remove/Reinstall the module');
-define('GOOGLECHECKOUT_STRING_WARN_WRONG_SHIPPING_CONFIG', 'DIR_FS_CATALOG and DIR_WS_MODULES may be wrong configured in includes/configure.php file. This dir doens\'t exists: %s');
-define('GOOGLECHECKOUT_STRING_WARN_RESTRICTED_CATEGORY', 'Some items are in GC restricted category.');
+define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_OPTION','- O bien, utilice -');
+define('GOOGLECHECKOUT_STRING_WARN_USING_SANDBOX','GC está configurado para utilizar SandBox. Podrá ser procesada, pero cargada NO.');
+define('GOOGLECHECKOUT_STRING_WARN_NO_MERCHANT_ID_KEY','Google Checkout o Id Mercante clave no ha sido setted');
+define('GOOGLECHECKOUT_STRING_WARN_VIRTUAL','Algunos productos de descarga en su carrito de la actualidad no están disponibles a través de Google Checkout.');
+define('GOOGLECHECKOUT_STRING_WARN_EMPTY_CART','La cesta está vacía');
+define('GOOGLECHECKOUT_STRING_WARN_OUT_OF_STOCK','Algunos productos están en stock');
+define('GOOGLECHECKOUT_STRING_WARN_MULTIPLE_SHIP_TAX','Hay varias opciones de envío seleccionado y que utilizan diferentes tablas de impuestos de envío o algunas tablas no uso de impuestos');
+define('GOOGLECHECKOUT_STRING_WARN_MIX_VERSIONS','La versión del módulo instalado en la interfaz del administrador es %s, y la del paquete es de %s, quitar y reinstalar el módulo');
+define('GOOGLECHECKOUT_STRING_WARN_WRONG_SHIPPING_CONFIG','DIR_FS_CATALOG y DIR_WS_MODULES puede estar mal configurado en el archivo includes / configure.php. Este directorio no existe: %s');
+define('GOOGLECHECKOUT_STRING_WARN_RESTRICTED_CATEGORY','ALGUNOS artculos estn en la categora GC restringido.');
 
 // This string will be added after the product name and description in the yellow box in the GC confirmation page for all Digital Goods.
-define('GOOGLECHECKOUT_STRING_EXTRA_DIGITAL_CONTENT', 'Allow 2-5 minutes to get all the transaction processed.');
+define('GOOGLECHECKOUT_STRING_EXTRA_DIGITAL_CONTENT','De 2-5 minutos para obtener toda la transacción procesada.');
   
-define('GOOGLECHECKOUT_STRING_ERR_SHIPPING_CONFIG', ' Error: Shipping Methods not configured ');
+define('GOOGLECHECKOUT_STRING_ERR_SHIPPING_CONFIG','Error: Métodos de envío no está configurado');
     
 define ('GOOGLECHECKOUT_FLAT_RATE_SHIPPING', 'Flat Rate Per Order');
 define ('GOOGLECHECKOUT_ITEM_RATE_SHIPPING', 'Flat Rate Per Item');
@@ -49,28 +49,28 @@ define ('GOOGLECHECKOUT_ERR_REGULAR_CHECKOUT', 'Google Checkout Can not be used 
 define ('GOOGLECHECKOUT_ERR_DUPLICATED_ORDER', 'Duplicated NewOrderNotification #%s Cart order #%s');
   
 // Google Request Success messages
-define('GOOGLECHECKOUT_SUCCESS_SEND_CHARGE_ORDER', 'Sent Google Charge Order Command');
-define('GOOGLECHECKOUT_SUCCESS_SEND_PROCESS_ORDER', 'Sent Google Process Order Command');
-define('GOOGLECHECKOUT_SUCCESS_SEND_DELIVER_ORDER', 'Sent Google Deliver Order Command');
-define('GOOGLECHECKOUT_SUCCESS_SEND_ARCHIVE_ORDER', 'Sent Google Archive Order Command');
-define('GOOGLECHECKOUT_SUCCESS_SEND_REFUND_ORDER', 'Sent Google Full Refund Order Command');
-define('GOOGLECHECKOUT_SUCCESS_SEND_CANCEL_ORDER', 'Sent Google Cancel Order Command');
-define('GOOGLECHECKOUT_SUCCESS_SEND_MESSAGE_ORDER', 'Sent Google Message to the Buyer');
-define('GOOGLECHECKOUT_SUCCESS_SEND_NEW_USER_CREDENTIALS', 'Sent New Buyer Credentials to the Buyer');
+define('GOOGLECHECKOUT_SUCCESS_SEND_CHARGE_ORDER','Enviado carga Google Comando Orden');
+define('GOOGLECHECKOUT_SUCCESS_SEND_PROCESS_ORDER','Enviado el Proceso de Google Comando Orden');
+define('GOOGLECHECKOUT_SUCCESS_SEND_DELIVER_ORDER','Enviado Google Entregar Comando Orden');
+define('GOOGLECHECKOUT_SUCCESS_SEND_ARCHIVE_ORDER','Enviado el Archivo de Google Comando Orden');
+define('GOOGLECHECKOUT_SUCCESS_SEND_REFUND_ORDER','Enviado Google reembolso completo de comandos Orden');
+define('GOOGLECHECKOUT_SUCCESS_SEND_CANCEL_ORDER','Enviado Google Cancelar Comando Orden');
+define('GOOGLECHECKOUT_SUCCESS_SEND_MESSAGE_ORDER','Envió de mensajes de Google para el Comprador');
+define('GOOGLECHECKOUT_SUCCESS_SEND_NEW_USER_CREDENTIALS','Enviado de Verificación de Poderes nuevo comprador para el comprador');
   
-define('GOOGLECHECKOUT_SUCCESS_SEND_MERCHANT_ORDER_NUMBER', 'Sent Merchant Order Number');
-define('GOOGLECHECKOUT_SUCCESS_SEND_ADMIN_COPY_EMAIL', 'Sent Status Change Message to Admin email');
+define('GOOGLECHECKOUT_SUCCESS_SEND_MERCHANT_ORDER_NUMBER','Mercantes enviados Número de pedido');
+define('GOOGLECHECKOUT_SUCCESS_SEND_ADMIN_COPY_EMAIL','Enviado el mensaje de cambio de estado de administración de correo electrónico');
 
 // Google Request warning Messages
-define('GOOGLECHECKOUT_WARNING_CHUNK_MESSAGE', 'Google Message was longer than %s, it was chunked when sent to the buyer.');
-define('GOOGLECHECKOUT_WARNING_SYSTEM_EMAIL_SENT', 'A regular email was sent to the buyer with the full message');
+define('GOOGLECHECKOUT_WARNING_CHUNK_MESSAGE','Mensajes de Google fue mayor que el %s, fue fragmentada cuando se envía al comprador.');
+define('GOOGLECHECKOUT_WARNING_SYSTEM_EMAIL_SENT','Un correo ordinario fue enviado al comprador con el mensaje completo');
 
 // Google Request Error Messages
 define('GOOGLECHECKOUT_ERR_SEND_CHARGE_ORDER', 'Error sending Google Charge Order, see error logs');
 define('GOOGLECHECKOUT_ERR_SEND_PROCESS_ORDER', 'Error sending Google Process Order, see error logs');
 define('GOOGLECHECKOUT_ERR_SEND_DELIVER_ORDER', 'Error sending Google Deliver Order, see error logs');
 define('GOOGLECHECKOUT_ERR_SEND_ARCHIVE_ORDER', 'Error sending Google Archive Order, see error logs');
-define('GOOGLECHECKOUT_ERR_SEND_REFUND_ORDER', 'Error sending Google Refund Order, see error logs');
+define('GOOGLECHECKOUT_ERR_SEND_REFUND_ORDER','Error sending Google Refund Order, see error logs');
 define('GOOGLECHECKOUT_ERR_SEND_CANCEL_ORDER', 'Error sending Google Cancel Order, see error logs');
 define('GOOGLECHECKOUT_ERR_SEND_MESSAGE_ORDER', 'Error sending Google Message, see error logs');
 define('GOOGLECHECKOUT_ERR_SEND_NEW_USER_CREDENTIALS', 'Error sending New Buyer Credentials, see error logs');
@@ -94,18 +94,18 @@ define('GOOGLECHECKOUT_STATE_NEW_ORDER_BUYER_USER', 'NEW Buyer\'s User: ');
 define('GOOGLECHECKOUT_STATE_NEW_ORDER_BUYER_PASS', 'Buyer\'s Password: ');
 
 // States
-define('GOOGLECHECKOUT_STATE_STRING_TIME', 'Time: ');
-define('GOOGLECHECKOUT_STATE_STRING_NEW_STATE', 'New State: ');
+define('GOOGLECHECKOUT_STATE_STRING_TIME','Fecha y hora:');
+define('GOOGLECHECKOUT_STATE_STRING_NEW_STATE','Nuevo Estado:');
 
-define('GOOGLECHECKOUT_STATE_STRING_ORDER_READY_CHARGE', 'Order ready to be charged!');
-define('GOOGLECHECKOUT_STATE_STRING_PAYMENT_DECLINED', 'Payment was declined!');
-define('GOOGLECHECKOUT_STATE_STRING_ORDER_CANCELED', 'Order was canceled.');
-define('GOOGLECHECKOUT_STATE_STRING_ORDER_CANCELED_REASON', 'Reason: ');
-define('GOOGLECHECKOUT_STATE_STRING_ORDER_CANCELED_BY_GOOG', 'Order was canceled by Google.');
-define('GOOGLECHECKOUT_STATE_STRING_ORDER_DELIVERED', 'Order was Shipped.');
+define('GOOGLECHECKOUT_STATE_STRING_ORDER_READY_CHARGE','listos para ser asignados!');
+define('GOOGLECHECKOUT_STATE_STRING_PAYMENT_DECLINED','El pago se ha rechazado!');
+define('GOOGLECHECKOUT_STATE_STRING_ORDER_CANCELED','Orden fue cancelada.');
+define('GOOGLECHECKOUT_STATE_STRING_ORDER_CANCELED_REASON','Razón:');
+define('GOOGLECHECKOUT_STATE_STRING_ORDER_CANCELED_BY_GOOG','Orden fue cancelado por Google.');
+define('GOOGLECHECKOUT_STATE_STRING_ORDER_DELIVERED','Pedido fue enviado.');
 
-define('GOOGLECHECKOUT_STATE_STRING_TRACKING', 'Shipping Tracking Data: ');
-define('GOOGLECHECKOUT_STATE_STRING_TRACKING_CARRIER', 'Carrier: ');
+define('GOOGLECHECKOUT_STATE_STRING_TRACKING','Envío de datos de seguimiento:');
+define('GOOGLECHECKOUT_STATE_STRING_TRACKING_CARRIER','Transportista:');
 define('GOOGLECHECKOUT_STATE_STRING_TRACKING_NUMBER', 'Tracking Number: ');
 
 define('GOOGLECHECKOUT_STATE_STRING_LATEST_CHARGE', 'Latest charge amount: ');

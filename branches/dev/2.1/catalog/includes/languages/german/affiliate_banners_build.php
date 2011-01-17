@@ -10,23 +10,23 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE','Partnerprogramm');
-define('HEADING_TITLE','Partnerprogramm - Bauen Sie ein Link');
+define('NAVBAR_TITLE', 'Werbepartner');
+define('HEADING_TITLE', 'Werbepartner - Erzeuge Produktlink');
 
-define('TEXT_AFFILIATE_NAME','Banner Name:');
-define('TEXT_INFORMATION','Geben Sie die Produktnummer des Produktes Sie einen Link für zu bauen:');
-define('TEXT_AFFILIATE_INFO','Kopieren Sie den Code unten gezeigt, und fügen Sie in Ihre Website');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER','BUILD-A-LINK');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO','Geben Sie die Produktnummer Sie auf Link und drücken Sie die Eingabetaste');
-define('TEXT_AFFILIATE_VALIDPRODUCTS','Klicken Sie hier:');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_VIEW','Produkte zur Verfügung zu sehen.');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_HELP','Wählen Sie das Produkt Nummer aus dem Popup-Fenster und geben Sie die Nummer in der Build A Link-Feld.');
+define('TEXT_AFFILIATE_NAME', 'Bannername:');
+define('TEXT_INFORMATION', 'Geben Sie die Nummer des Produktes ein, auf das Sie verlinken wollen:');
+define('TEXT_AFFILIATE_INFO', 'Kopieren Sie den folgenden Link und f&uuml;gen Sie ihn in Ihre Website ein.');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER','Erzeuge Produktlink');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO','Geben Sie die Nummer des Produktes ein, auf das Sie verlinken wollen&nbsp;');
+define('TEXT_AFFILIATE_VALIDPRODUCTS', 'Hier klicken');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_VIEW', 'f&uuml;r eine Liste aller m&ouml;glichen Produkte.');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_HELP', 'Geben Sie die Nummer des gew&uuml;nschten Produktes oben in das Feld ein.');
 
-define('TEXT_VALID_PRODUCTS_LIST','Verfügbare Produkte Liste');
-define('TEXT_VALID_PRODUCTS_ID','Produkt');
-define('TEXT_VALID_PRODUCTS_NAME','Produkt-Name');
+define('TEXT_VALID_PRODUCTS_LIST', 'Liste der m&ouml;glichen Produkte');
+define('TEXT_VALID_PRODUCTS_ID', 'Produktnummer');
+define('TEXT_VALID_PRODUCTS_NAME', 'Produktname');
 
-define('TEXT_CLOSE_WINDOW','<u>Fenster schliessen</u> [x]');
+define('TEXT_CLOSE_WINDOW', '<u>Fenster schlie&szlig;en</u>');
 
-define('IMAGE_BUTTON_BUILD_A_LINK', 'BUILD-A-LINK');
+define('IMAGE_BUTTON_BUILD_A_LINK', 'Link erstellen');
 ?>

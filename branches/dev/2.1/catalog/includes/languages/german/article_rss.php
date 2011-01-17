@@ -9,7 +9,7 @@ $Id$
 
   Released under the GNU General Public License
 */
-define('NEWS_TITLE', 'Articles RSS Feed');
+define('NEWS_TITLE', 'Artikel RSS Feed');
 define('NEWS_DESCRIPTION', 'RSS News Feed');
 
 ?>

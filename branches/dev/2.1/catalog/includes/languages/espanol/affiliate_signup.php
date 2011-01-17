@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program - Sign Up');
+define('NAVBAR_TITLE','Programa de afiliados');
+define('HEADING_TITLE','Programa de Afiliados - Regístrate');
 
-define('MAIL_AFFILIATE_SUBJECT', 'Welcome to ' . STORE_NAME . ' Affiliate Program');
+define('MAIL_AFFILIATE_SUBJECT',''Bienvenido a ' . STORE_NAME . ' Programa de afiliados'');
 define('MAIL_GREET_NONE', 'Dear' . "\n\n");//em001
 define('MAIL_AFFILIATE_HEADER', 'Thank you for joining <b>' . STORE_NAME . '</b> Affiliate Program' . "\n\n" .'Your Account Information:
 **********************************************'."\n\n");
@@ -22,4 +22,6 @@ define('MAIL_AFFILIATE_USERNAME', 'Your Affiliate Username is:'  . "Your Affilia
 define('MAIL_AFFILIATE_PASSWORD', 'Your Password is:'  . "Your Password is:");
 define('MAIL_AFFILIATE_LINK', 'Link to your account:' ."Link to your account:");
 define('MAIL_AFFILIATE_FOOTER', 'Have fun earning referral fees!'."\n\n".'Your <b>' . STORE_NAME . '</b> Affiliate Team' . "\n" . 'affiliate@mycigsdirect.com');
+define('IMAGE_BUTTON_MAT','Por favor, acepte los términos');
+
 ?>

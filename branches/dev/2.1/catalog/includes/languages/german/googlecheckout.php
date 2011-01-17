@@ -21,14 +21,14 @@ $Id$
 
 define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_TITLE', 'GoogleCheckout');
 define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_DESCRIPTION', 'GoogleCheckout');
-define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_OPTION', '- Or use -');
-define('GOOGLECHECKOUT_STRING_WARN_USING_SANDBOX', 'GC is set to use SANDBOX. Order will be processed but NOT charged.');
-define('GOOGLECHECKOUT_STRING_WARN_NO_MERCHANT_ID_KEY', 'Google Checkout Merchant Id or Key has not been setted up');
-define('GOOGLECHECKOUT_STRING_WARN_VIRTUAL', 'Some download products in your cart are currently not available via Google Checkout.');
-define('GOOGLECHECKOUT_STRING_WARN_EMPTY_CART', 'The Cart is empty');
-define('GOOGLECHECKOUT_STRING_WARN_OUT_OF_STOCK', 'Some products are Out of Stock');
-define('GOOGLECHECKOUT_STRING_WARN_MULTIPLE_SHIP_TAX', 'There are multiple shipping options selected and they use different shipping tax tables or some dont use tax tables');
-define('GOOGLECHECKOUT_STRING_WARN_MIX_VERSIONS', 'The Version of the installed module in the Admin UI is %s and the one of the package is %s, Remove/Reinstall the module');
+define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_OPTION','- Oder nutzen -');
+define('GOOGLECHECKOUT_STRING_WARN_USING_SANDBOX','GC ist auf SANDBOX verwenden. Bestellung wird bearbeitet, aber nicht erhoben.');
+define('GOOGLECHECKOUT_STRING_WARN_NO_MERCHANT_ID_KEY','Google Checkout-Händler-ID oder Key wurde nicht setted bis');
+define('GOOGLECHECKOUT_STRING_WARN_VIRTUAL','Einige Download-Produkte in Ihrem Warenkorb sind zur Zeit nicht über Google Checkout zur Verfügung.');
+define('GOOGLECHECKOUT_STRING_WARN_EMPTY_CART','Der Warenkorb ist leer');
+define('GOOGLECHECKOUT_STRING_WARN_OUT_OF_STOCK','Einige Produkte sind ausverkauft');
+define('GOOGLECHECKOUT_STRING_WARN_MULTIPLE_SHIP_TAX','Es gibt mehrere Versandoptionen ausgewählt und sie verwenden unterschiedliche Versandkosten Steuertabellen oder einige dont Verwendung Steuertabellen');
+define('GOOGLECHECKOUT_STRING_WARN_MIX_VERSIONS','Die Version des installierten Modul im Admin-UI ist %s und die des Pakets ist %s, Entfernen / Neuinstallation des Moduls');
 define('GOOGLECHECKOUT_STRING_WARN_WRONG_SHIPPING_CONFIG', 'DIR_FS_CATALOG and DIR_WS_MODULES may be wrong configured in includes/configure.php file. This dir doens\'t exists: %s');
 define('GOOGLECHECKOUT_STRING_WARN_RESTRICTED_CATEGORY', 'Some items are in GC restricted category.');
 

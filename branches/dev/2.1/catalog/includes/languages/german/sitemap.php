@@ -24,4 +24,6 @@ define('PAGE_ADVANCED_SEARCH', 'Advanced Search');
 define('PAGE_PRODUCTS_NEW', 'New Products');
 define('PAGE_SPECIALS', 'Specials');
 define('PAGE_REVIEWS', 'Reviews');
+define('TEXT_SITEMAP_UNAVAILABLE','Die Sitemap ist derzeit nicht verfügbar <br />');
+
 ?>

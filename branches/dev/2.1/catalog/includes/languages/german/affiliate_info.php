@@ -10,9 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Partnerprogramm');
-define('HEADING_TITLE', 'Partnerprogramm');
+define('NAVBAR_TITLE', 'Werbepartner');
+define('HEADING_TITLE', 'Werbepartner');
 
-define('HEADING_AFFILIATE_PROGRAM_TITLE', 'Das ' . STORE_NAME . ' Partnerprogramm');
-define('TEXT_INFORMATION', 'F&uuml;gen Sie hier Ihre Informationen zum Partnerprogramm ein.');
+define('HEADING_AFFILIATE_PROGRAM_TITLE', 'Das ' . STORE_NAME . ' Werbepartnerprogramm');
+define('TEXT_INFORMATION', 'F&uuml;gen Sie hier Ihre Informationen zum Werbepartnerprogramm ein.');
 ?>

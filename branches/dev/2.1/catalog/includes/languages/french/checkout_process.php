@@ -25,4 +25,6 @@ define('EMAIL_TEXT_PAYMENT_METHOD', 'M&eacute;thode de paiement');
 
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
 define('TEXT_EMAIL_VIA', 'via');
+define('EMAIL_WARNING',''ATTENTION: Cet e-mail nous a été donné par quelqu\'un qui a visité notre boutique en ligne. Si cela n\'a pas été fait par vous s\'il vous plaît écrivez-nous à ' . STORE_OWNER_EMAIL_ADDRESS . 'Merci de magasiner avec nous et ont une belle journée.'');
+
 ?>

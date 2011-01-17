@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Partnerprogramm FAQ');
-define('HEADING_TITLE', 'Partnerprogramm - H&auml;ufig gestellte Fragen');
+define('NAVBAR_TITLE', 'Werbepartner FAQ');
+define('HEADING_TITLE', 'Werbepartner - H&auml;ufig gestellte Fragen');
 
-define('TEXT_INFORMATION', '' . STORE_NAME . ' hat diese FAQ geschrieben, um Ihnen die h&auml;ufigsten Fragen zu unserem Partnerprogramm schnell beantworten zu k&ouml;nnen.<br>
+define('TEXT_INFORMATION', '' . STORE_NAME . ' hat diese FAQ zusammengestellt, um Ihnen die h&auml;ufigsten Fragen zu unserem Werbepartnerprogramm schnell beantworten zu k&ouml;nnen.<br>
  Falls Sie weitere Fragen haben <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT). '"> <u>kontaktieren</u></a> Sie uns bitte f&uuml;r weitere Informationen.<br>
 <ul>
 <li><a href="' . tep_href_link('affiliate_faq.php') . '#1">Frage 1?</a>

@@ -10,8 +10,8 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE','Partnerprogramm Kontodetails');
-define('NAVBAR_TITLE_1', 'Partnerprogramm');
-define('NAVBAR_TITLE_2', 'Daten &auml;ndern');
-define('HEADING_TITLE', 'Partnerkonto Daten &auml;ndern');
+define('NAVBAR_TITLE', 'Werbepartner Kontoinformation');
+define('NAVBAR_TITLE_1', 'Werbepartner');
+define('NAVBAR_TITLE_2', 'Profil &auml;ndern');
+define('HEADING_TITLE', 'Werbepartner - Profil bearbeiten');
 ?>

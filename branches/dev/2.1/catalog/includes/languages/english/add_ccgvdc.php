@@ -30,7 +30,5 @@ define('CART_COUPON', 'Coupon :');
 define('CART_COUPON_INFO', 'more info');
 
 define('MODULE_ORDER_TOTAL_COUPON_TEXT_ERROR', 'Coupon Redemption');
-// ccgv coupon restrictions error fix
-// define('ERROR_REDEEMED_AMOUNT_ZERO','<BR>***HOWEVER: No reduction available, please see the coupon restrictions***');
 define('ERROR_NO_ACCOUNT_GV', 'You must sign in to your account to redeem a Gift Certificate');
 ?>

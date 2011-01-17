@@ -24,4 +24,6 @@ define('PAGE_ADVANCED_SEARCH', 'Recherche avancée');
 define('PAGE_PRODUCTS_NEW', 'Nouveaux produits');
 define('PAGE_SPECIALS', 'A ne pas manquer');
 define('PAGE_REVIEWS', 'Critiques');
+define('TEXT_SITEMAP_UNAVAILABLE','Le plan du site est actuellement indisponible <br />');
+
 ?>

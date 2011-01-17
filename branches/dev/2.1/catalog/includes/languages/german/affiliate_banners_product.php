@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE','Partnerprogramm');
-define('HEADING_TITLE','Partnerprogramm - Produkt-Links');
+define('NAVBAR_TITLE', 'Werbepartner');
+define('HEADING_TITLE', 'Werbepartner - Produktlinks');
 
-define('TEXT_AFFILIATE_NAME','Produkt-Name:');
-define('TEXT_INFORMATION','Wählen Sie das gewünschte Produkt auf Ihrer Website aus der unten angegebenen Anzeige:');
-define('TEXT_AFFILIATE_INFO','Kopieren Sie den Code unten gezeigt, und fügen Sie in Ihre Website');
+define('TEXT_AFFILIATE_NAME', 'Produktname:');
+define('TEXT_INFORMATION', 'Die nachstehenden, vom Shopbetreiber erstellten Banner verlinken auf ein Produkt dieses Onlineshops.');
+define('TEXT_AFFILIATE_INFO', 'Kopieren Sie den nachfolgenden Code und f&uuml;gen Sie ihn in Ihre Website ein.');
 ?>

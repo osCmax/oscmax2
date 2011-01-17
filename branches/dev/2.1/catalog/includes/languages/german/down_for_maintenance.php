@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Down for Maintenance');
-define('HEADING_TITLE', 'Down for Maintenance ...');
-define('DOWN_FOR_MAINTENANCE_TEXT_INFORMATION', 'The site is currently down for maintenance. Please excuse the dust, and try back later.');
-define('TEXT_MAINTENANCE_ON_AT_TIME', 'The Admin / Webmaster has enabled maintenance at : ');
-define('TEXT_MAINTENANCE_PERIOD', 'Maintenance period : ');
-define('DOWN_FOR_MAINTENANCE_STATUS_TEXT', 'To verify the site status ... Click here:');
+define('NAVBAR_TITLE', 'Wartungsarbeiten');
+define('HEADING_TITLE', 'Wartungsarbeiten...');
+define('DOWN_FOR_MAINTENANCE_TEXT_INFORMATION', 'Der Onlineshop ist wegen gerade stattfindender Wartungsarbeiten leider nicht erreichbar. Bitte entschuldigen Sie die Unannehmlichkeiten und versuchen es sp&auml;ter noch einmal.');
+define('TEXT_MAINTENANCE_ON_AT_TIME', 'Der Wartungsmodus ist aktiv seit: ');
+define('TEXT_MAINTENANCE_PERIOD', 'Wartungsdauer: ');
+define('DOWN_FOR_MAINTENANCE_STATUS_TEXT', 'Zum Aktualisieren dieser Seite klicken Sie hier:');
 ?>

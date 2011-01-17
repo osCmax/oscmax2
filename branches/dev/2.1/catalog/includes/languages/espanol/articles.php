@@ -49,4 +49,6 @@ if ( ($topic_depth == 'articles') || (isset($_GET['authors_id'])) ) {
   define('HEADING_TITLE', 'Noticias');
 }
 
+define('NAVBAR_TITLE_1','Artículos');
+
 ?>

@@ -425,4 +425,6 @@ define('TEXT_PRODUCTS_USUALPRICE', '&nbsp;Prix&nbsp;conseillé:&nbsp;');
 
 define('TEXT_LATEST_PRODUCTS', 'Latest Products');
 define('TEXT_SPECIALS', 'Specials');
+define('BOX_TEXT_REMOVE','Supprimer');
+
 ?>

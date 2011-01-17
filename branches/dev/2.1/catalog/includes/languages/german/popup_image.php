@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', '%s Images');
+define('HEADING_TITLE', '%s Bilder');
 
-define('TEXT_CLOSE_WINDOW', 'Close Window <u>[x]</u>');
+define('TEXT_CLOSE_WINDOW', 'Fenster schlie&szlig;en <u>[x]</u>');
 ?>

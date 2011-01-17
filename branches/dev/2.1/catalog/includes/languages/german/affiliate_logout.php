@@ -10,8 +10,8 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Partnerprogramm');
-define('HEADING_TITLE', 'Partnerprogramm abmelden');
+define('NAVBAR_TITLE', 'Werbepartner');
+define('HEADING_TITLE', 'Aus dem Werbepartnerbereich abmelden');
 
 define('TEXT_INFORMATION', 'Sie wurden abgemeldet.');
 define('TEXT_INFORMATION_ERROR_1', 'Sie konnten nicht abgemeldet werden!');

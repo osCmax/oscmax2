@@ -26,7 +26,6 @@ define('TEXT_NO_SALES', 'No sales have been recorded yet.');
 define('TEXT_DISPLAY_NUMBER_OF_SALES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> sales)');
 
 define('TEXT_AFFILIATE_HEADER', 'Sales from your website:');
-define('TEXT_SALES_HELP', ' <font color="#FFFFFF">[?]</font>');
 define('TEXT_SALES', 'Click on [?] to see a description of each category.');
 define('HEADING_SALES_HELP', 'Affiliate Help');
 

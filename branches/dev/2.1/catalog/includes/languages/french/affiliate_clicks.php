@@ -40,6 +40,6 @@ define('TEXT_CLICKED_PRODUCT_HELP','<i>Produit ou page</i> représente la page ou
 
 define('TEXT_DATE_HELP','<i>Date</i> représentant la date de l'clics à partir de votre site.');
 
-define('TEXT_REFFERED_HELP','<i>Référence</i> représente l'url que les clics provenaient.');
+define('TEXT_REFFERED_HELP','<i>Référence</i> représente l\'url que les clics provenaient.');
 
 ?>

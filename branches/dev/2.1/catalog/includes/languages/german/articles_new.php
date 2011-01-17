@@ -10,15 +10,15 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'New Articles');
-define('HEADING_TITLE', 'New Articles');
+define('NAVBAR_TITLE', 'Neue Artikel');
+define('HEADING_TITLE', 'Neue Artikel');
 
-define('TEXT_NEW_ARTICLES', 'The following articles were added in the last %s days.');
+define('TEXT_NEW_ARTICLES', 'In den letzten %s Tagen wurden die folgenden Artikel hinzugef&uuml;gt.');
 define('TEXT_ARTICLES', sprintf(TEXT_NEW_ARTICLES, NEW_ARTICLES_DAYS_DISPLAY));
-define('TEXT_NO_NEW_ARTICLES', 'No new articles have been added in the last %s days.');
-define('TEXT_DATE_ADDED', 'Published:');
-define('TEXT_AUTHOR', 'Author:');
-define('TEXT_TOPIC', 'Topic:');
-define('TEXT_BY', 'by');
-define('TEXT_READ_MORE', 'Read More');
+define('TEXT_NO_NEW_ARTICLES', 'In den letzten %s Tagen wurden keine neuen Artikel hinzugef&uuml;gt.');
+define('TEXT_DATE_ADDED', 'Ver&ouml;ffentlicht:');
+define('TEXT_AUTHOR', 'Autor:');
+define('TEXT_TOPIC', 'Thema:');
+define('TEXT_BY', 'von');
+define('TEXT_READ_MORE', 'Weiter lesen');
 ?>

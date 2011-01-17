@@ -10,13 +10,13 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Partnerprogramm');
-define('HEADING_TITLE', 'Partnerprogramm - Kontaktformular');
+define('NAVBAR_TITLE', 'Werbepartner');
+define('HEADING_TITLE', 'Werbepartner - Kontaktformular');
 
 define('TEXT_SUCCESS', 'Ihre Nachricht wurde erfolgreich an uns gesendet.');
 
-define('EMAIL_SUBJECT', 'Partnerprogramm');
-define('ENTRY_NAME', 'Vor- und Nachname:');
-define('ENTRY_EMAIL', 'eMail-Adresse:');
+define('EMAIL_SUBJECT', 'Werbepartner');
+define('ENTRY_NAME', 'Ihr Vor- und Nachname:');
+define('ENTRY_EMAIL', 'Ihre eMail-Adresse:');
 define('ENTRY_ENQUIRY', 'Ihre Nachricht:');
 ?>

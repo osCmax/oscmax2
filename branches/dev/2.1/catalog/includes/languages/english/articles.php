@@ -31,4 +31,16 @@ define('NAVBAR_TITLE_1', 'Articles');
   define('TEXT_MORE_INFORMATION', 'For more information, please visit this authors <a href="http://%s" target="_blank">web page</a>.');
 
 
+define('TEXT_BY','by');
+
+define('TEXT_READ_MORE','Read More...');
+
+define('TEXT_ALL_ARTICLES','Below is a list of all articles with the most recent ones listed first.');
+
+define('TEXT_CURRENT_ARTICLES','Current Articles');
+
+define('TEXT_UPCOMING_ARTICLES','Upcoming Articles');
+
+define('TEXT_DATE_EXPECTED','Expected:');
+
 ?>

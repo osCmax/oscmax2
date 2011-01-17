@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE','Partnerprogramm');
-define('HEADING_TITLE','Partnerprogramm - Kategorie Links');
+define('NAVBAR_TITLE', 'Werbepartner');
+define('HEADING_TITLE', 'Werbepartner - Kategorielinks');
 
-define('TEXT_AFFILIATE_NAME','Kategorie Name:');
-define('TEXT_INFORMATION','Wählen Sie die gewünschte Kategorie, um auf Ihrer Website aus der unten angegebenen Anzeige:');
-define('TEXT_AFFILIATE_INFO','Kopieren Sie den Code unten gezeigt, und fügen Sie in Ihre Website');
+define('TEXT_AFFILIATE_NAME', 'Kategoriename:');
+define('TEXT_INFORMATION', 'Die nachstehenden, vom Shopbetreiber erstellten Banner verlinken auf eine Kategorie dieses Onlineshops.');
+define('TEXT_AFFILIATE_INFO', 'Kopieren Sie den nachfolgenden Code und f&uuml;gen Sie ihn in Ihre Website ein.');
 ?>

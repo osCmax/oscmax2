@@ -23,4 +23,12 @@ $Id$
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ERROR_INVALID_EXP_DATE', 'La date d\'expiration est invalide. Merci d\'essayer de nouveau.');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ERROR_EXPIRED', 'La carte de crédit n\'est plus valide. Veuillez utiliser une autre carte de crédit ou changer de méthode de paiement.');
   define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ERROR_CVC', 'Le cryptogramme saisi est invalide. Merci d\'essayer de nouveau (il s\'agit des 3 derniers chiffres situés au dos de la carte).');
+define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_AMEX','American Express');
+
+define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_DISCOVER','Discover');
+
+define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_MASTERCARD','Mastercard');
+
+define('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_VISA','Visa');
+
 ?>

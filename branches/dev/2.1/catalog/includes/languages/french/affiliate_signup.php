@@ -27,4 +27,8 @@ define('MAIL_AFFILIATE_USERNAME', 'Votre nom d\'affilié est :' . "\n");
 define('MAIL_AFFILIATE_PASSWORD', 'Votre mot de passe est :' . "\n\n");
 define('MAIL_AFFILIATE_LINK', 'Lien afin d\'acceder à votre compte :');
 define('MAIL_AFFILIATE_FOOTER', 'En espérant que vous gagnerez beaucoup !'."\n\n".'L\'équipe d\'affiliation');
+define('MAIL_GREET_NONE',''Cher' . "\n\n"');
+
+define('IMAGE_BUTTON_MAT','S'il vous plaît Accepter les conditions');
+
 ?>

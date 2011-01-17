@@ -10,14 +10,14 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1','Partnerprogramm');
-define('NAVBAR_TITLE_2','Passwort ändern');
+define('NAVBAR_TITLE_1', 'Werbepartner');
+define('NAVBAR_TITLE_2', 'Passwort &auml;ndern');
 
-define('HEADING_TITLE','Mein Passwort');
+define('HEADING_TITLE', 'Mein Passwort');
 
-define('MY_PASSWORD_TITLE','Mein Passwort');
+define('MY_PASSWORD_TITLE', 'Mein Passwort');
 
-define('SUCCESS_PASSWORD_UPDATED','Ihr Passwort wurde erfolgreich aktualisiert.');
-define('ERROR_CURRENT_PASSWORD_NOT_MATCHING','Ihr aktuelles Passwort stimmt nicht mit dem Kennwort in unseren Unterlagen. Bitte versuchen Sie es erneut.');
+define('SUCCESS_PASSWORD_UPDATED', 'Ihr Passwort wurde ge&auml;ndert.');
+define('ERROR_CURRENT_PASSWORD_NOT_MATCHING', 'Ihr Passwort ist ung&uuml;ltig. Bitte geben Sie das korrekte Passwort ein.');
 
 ?>

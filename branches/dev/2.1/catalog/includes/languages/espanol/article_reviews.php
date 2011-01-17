@@ -18,4 +18,6 @@ define('TEXT_OF_5_STARS', '%s de 5 estrellas');
 define('TEXT_REVIEW_VIEWS', 'N&uacute;mero de veces que se ha leido: ');
 define('TEXT_READ_REVIEW', 'Leer comentario...');
 
+define('TEXT_ARTICLE_REVIEW_SUBMITTED','Gracias por enviarnos tu opinión de este artículo. Se publicará una vez que ha sido aprobado.');
+
 ?>

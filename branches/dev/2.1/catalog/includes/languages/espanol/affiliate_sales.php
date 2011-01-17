@@ -10,30 +10,38 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program: Sales');
+define('NAVBAR_TITLE','Programa de afiliados');
+define('HEADING_TITLE','Programa de Afiliados: Ventas');
 
-define('TABLE_HEADING_DATE', 'Date');
-define('TABLE_HEADING_SALES', 'Affiliate Earnings (excl.)');
-define('TABLE_HEADING_VALUE', 'Sale Value (excl.)');
-define('TABLE_HEADING_PERCENTAGE','Commission Rate');
-define('TABLE_HEADING_STATUS', 'Sale Status');
+define('TABLE_HEADING_DATE','Fecha');
+define('TABLE_HEADING_SALES','Las ganancias de afiliados (exclusivo)');
+define('TABLE_HEADING_VALUE','Valor de Venta (exclusivo)');
+define('TABLE_HEADING_PERCENTAGE','Comisión de Tarifas');
+define('TABLE_HEADING_STATUS','Venta Estado');
 
-define('TEXT_DELETED_ORDER_BY_ADMIN', 'Deleted (Admin)');
-define('TEXT_INFORMATION_SALES_TOTAL', 'Your current earnings amount (excl.) to:');
-define('TEXT_INFORMATION_SALES_TOTAL2', '<br>Only delivered sales are counted!');
-define('TEXT_NO_SALES', 'No sales have been recorded yet.');
-define('TEXT_DISPLAY_NUMBER_OF_SALES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> sales)');
+define('TEXT_DELETED_ORDER_BY_ADMIN','Suprimido (Admin)');
+define('TEXT_INFORMATION_SALES_TOTAL','Sus ingresos cantidad actual (exclusivo) a:');
+define('TEXT_INFORMATION_SALES_TOTAL2','<br> Únicamente las ventas entregadas se cuentan!');
+define('TEXT_NO_SALES','Prohibida la venta se han registrado todavía.');
+define('TEXT_DISPLAY_NUMBER_OF_SALES','Mostrando <b>%d</b> a <b>%d</b> (<b>%d</b> de las ventas )');
 
-define('TEXT_AFFILIATE_HEADER', 'Sales from your website:');
-define('TEXT_SALES_HELP', ' <font color="#FFFFFF">[?]</font>');
-define('TEXT_SALES', 'Click on [?] to see a description of each category.');
-define('HEADING_SALES_HELP', 'Affiliate Help');
-define('TEXT_DATE_HELP', '<i>Date</i> represents the date of the sale.');
-define('TEXT_TIME_HELP', '<i>Time</i> represents the time of the sale.');
-define('TEXT_SALE_VALUE_HELP', '<i>Sale Value</i> represents the value of the sale.');
-define('TEXT_COMMISSION_RATE_HELP', '<i>Commission Rate</i> represents the commission rate paid on the sale.');
-define('TEXT_COMMISSION_VALUE_HELP', '<i>Affiliate Earnings</i> represents the commission due on the sale.');
-define('TEXT_STATUS_HELP', '<i>Sale Status</i> represents the status the sale.');
-define('TEXT_CLOSE_WINDOW', 'Close Window [x]');
+define('TEXT_AFFILIATE_HEADER','Las ventas de su sitio web:');
+define('TEXT_SALES','Haga clic en [?] Para ver una descripción de cada categoría.');
+define('HEADING_SALES_HELP','Ayuda para Afiliados');
+define('TEXT_DATE_HELP','<i>Fecha en que se</i> representa la fecha de la venta.');
+define('TEXT_TIME_HELP','<i>Tiempo</i> representa el tiempo de la venta.');
+define('TEXT_SALE_VALUE_HELP','<i>Valor de venta</i> representa el valor de la venta.');
+define('TEXT_COMMISSION_RATE_HELP','<i>Comisión de Tarifas</i> representa la tasa de comisión pagada por la venta.');
+define('TEXT_COMMISSION_VALUE_HELP','<i>Las ganancias de afiliados</i> representa la comisión por la venta.');
+define('TEXT_STATUS_HELP','<i>Venta Estado</i> representa el estado de la venta.');
+define('HEADING_DATE_HELP','Fecha de Ayuda');
+
+define('HEADING_SALE_VALUE_HELP','Valor de Venta Ayuda');
+
+define('HEADING_COMMISSION_RATE_HELP','Comisión de Ayuda Tarifa');
+
+define('HEADING_COMMISSION_VALUE_HELP','Las ganancias de afiliados Ayuda');
+
+define('HEADING_STATUS_HELP','Venta Estado Ayuda');
+
 ?>

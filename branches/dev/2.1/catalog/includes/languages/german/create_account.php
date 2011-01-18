@@ -42,4 +42,6 @@ define('TERMS_PART_1', 'Bitte best&auml;tigen Sie, da&szlig; Sie unsere AGB gele
 define('TERMS_PART_2', '<b><u>Allgemeine Gesch&auml;ftsbedingungen anzeigen</u></b>');
 
 define('ENTRY_NEWSLETTER_TYPE', 'E-Mail Format:');
+define('EMAIL_ACCOUNT_PASSWORD','Passwort:');
+
 ?>

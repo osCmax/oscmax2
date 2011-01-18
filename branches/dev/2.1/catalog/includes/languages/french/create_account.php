@@ -18,7 +18,7 @@ define('TEXT_ORIGIN_LOGIN', '<font color="#000000">Ouvrir un compte sur '.STORE_
 
 define('EMAIL_ACCOUNT_DETAILS', 'Account Details:');
 define('EMAIL_ACCOUNT_USERNAME', 'Username:');
-define('ACCOUNT_PASSWORD', 'Password:');
+define('ACCOUNT_PASSWORD','Mot de passe:');
 define('EMAIL_SUBJECT', 'Bienvenue sur ' . STORE_NAME);
 define('EMAIL_GREET_MR', 'Cher Mr. ' . stripslashes($_POST['lastname']) . ',' . "\n\n");
 define('EMAIL_GREET_MS', 'Chère Ms. ' . stripslashes($_POST['lastname']) . ',' . "\n\n");
@@ -35,4 +35,16 @@ define('EMAIL_COUPON_INCENTIVE_HEADER', "\n\n" .'Félicitations, pour votre premi
                                         ' Ci-dessous les détails du Coupon de Remise créé juste pour vous.' . "\n");
 define('EMAIL_COUPON_REDEEM', 'Utiliser le coupon %s au moment de votre commande');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+define('NAVBAR_TITLE_PWA','Entrez facturation');
+
+define('HEADING_TITLE_PWA','Facturation');
+
+define('EMAIL_ACCOUNT_PASSWORD','Mot de passe:');
+
+define('TERMS_PART_1','S\'il vous plaît confirmer que vous avez lu notre');
+
+define('TERMS_PART_2','<u><b>Termes et Conditions</b></u>');
+
+define('ENTRY_NEWSLETTER_TYPE','Format du mail:');
+
 ?>

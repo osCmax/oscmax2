@@ -43,4 +43,6 @@ define('TERMS_PART_1', 'Please confirm that you have read our ');
 define('TERMS_PART_2', '<b><u>Terms and Conditions</u></b>');
 
 define('ENTRY_NEWSLETTER_TYPE', 'Email Format:');
+define('ACCOUNT_PASSWORD','Password:');
+
 ?>

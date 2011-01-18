@@ -11,5 +11,5 @@ $Id$
 */
 
 define('MODULE_SHIPPING_FEDEX1_TEXT_TITLE', 'Federal Express');
-define('MODULE_SHIPPING_FEDEX1_TEXT_DESCRIPTION', 'Federal Express<br><br>You will need to have registered an account with FEDEX to use this module. Please see the README.TXT file for other requirements.');
+define('MODULE_SHIPPING_FEDEX1_TEXT_DESCRIPTION','Federal Express <br><br> Sie müssen registriert ein Konto mit FEDEX haben, um dieses Modul verwenden. Bitte beachten Sie die readme.txt-Datei für andere Anforderungen.');
 ?>

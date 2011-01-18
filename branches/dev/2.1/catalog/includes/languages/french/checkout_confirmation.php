@@ -11,15 +11,15 @@ $Id$
 */
 
 define('NAVBAR_TITLE_1', 'Commande');
-define('NAVBAR_TITLE_2', 'Confirmation');
+define('NAVBAR_TITLE_2','Confirmation');
 
 define('HEADING_TITLE', 'Confirmation commande');
 
 define('HEADING_DELIVERY_ADDRESS', 'Adresse de livraison');
 define('HEADING_SHIPPING_METHOD', 'M&eacute;thode d\'exp&eacute;dition');
 define('HEADING_PRODUCTS', 'Produits');
-define('HEADING_TAX', 'Taxes');
-define('HEADING_TOTAL', 'Total');
+define('HEADING_TAX','Impôts');
+define('HEADING_TOTAL','Total');
 define('HEADING_BILLING_INFORMATION', 'Information de facturation');
 define('HEADING_BILLING_ADDRESS', 'Adresse de facturation');
 define('HEADING_PAYMENT_METHOD', 'M&eacute;thode de paiement');

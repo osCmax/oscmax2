@@ -37,4 +37,16 @@ define('EMAIL_COUPON_INCENTIVE_HEADER', 'Congratulation, to make your first visi
 define('EMAIL_COUPON_REDEEM', 'To use the coupon enter the redeem code which is %s during checkout, ' . "\n" .
                                'after making a purchase');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+define('NAVBAR_TITLE_PWA','Introduzca facturación');
+
+define('HEADING_TITLE_PWA','Facturación');
+
+define('EMAIL_ACCOUNT_PASSWORD','Contraseña:');
+
+define('TERMS_PART_1','Por favor, confirme que ha leído nuestra');
+
+define('TERMS_PART_2','<u><b>Términos y Condiciones</b></u>');
+
+define('ENTRY_NEWSLETTER_TYPE','Formato de correo electrónico:');
+
 ?>

@@ -20,7 +20,7 @@ if ($_GET['gID']) {
 
 define('TEXT_COUNT_GROUPS', 'Groups: ');
 
-define('TABLE_HEADING_USERNAME', 'Nom d'utilisateur');
+define('TABLE_HEADING_USERNAME', 'Nom d\'utilisateur');
 define('TABLE_HEADING_NAME', 'Nom');
 define('TABLE_HEADING_EMAIL', 'Email');
 define('TABLE_HEADING_PASSWORD', 'Mot de passe');
@@ -49,7 +49,7 @@ define('TEXT_INFO_DELETE_INTRO', 'Supprimer <nobr><b>%s</b></nobr> de la catégor
 define('TEXT_INFO_DELETE_INTRO_NOT', 'Vous ne pouvez pas supprimer le <nobr>groupe %s!</nobr>');
 define('TEXT_INFO_EDIT_INTRO', 'Indiquer ici le niveau d\'autorisation: ');
 
-define('TEXT_INFO_USERNAME', 'Nom d'utilisateur: ');
+define('TEXT_INFO_USERNAME', 'Nom d\'utilisateur: ');
 define('TEXT_INFO_FULLNAME', 'Nom complet: ');
 define('TEXT_INFO_FIRSTNAME', 'Pr&eacute;nom: ');
 define('TEXT_INFO_LASTNAME', 'Nom: ');
@@ -63,7 +63,7 @@ define('TEXT_INFO_LOGNUM', 'Num&eacute;ro Log: ');
 define('TEXT_INFO_GROUP', 'Groupe: ');
 define('TEXT_INFO_ERROR', '<font color="red">Votre Email est d&eacute;j&agrave; utilis&eacute;! Veuillez recommencer.</font>');
 
-define('JS_ALERT_USERNAME', '- Obligatoire: Nom d'utilisateur \n');
+define('JS_ALERT_USERNAME', '- Obligatoire: Nom d\'utilisateur \n');
 define('JS_ALERT_FIRSTNAME', '- Obligatoire: Pr&eacute;nom \n');
 define('JS_ALERT_LASTNAME', '- Obligatoire: Nom \n');
 define('JS_ALERT_EMAIL', '- Obligatoire: Email \n');

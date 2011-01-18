@@ -15,7 +15,7 @@ define('HEADING_TITLE', 'Compte Administrateur');
 define('TABLE_HEADING_ACCOUNT', 'Mon Compte');
 
 define('TEXT_INFO_FULLNAME', '<b>Nom complet: </b>');
-define('TEXT_INFO_USERNAME', '<b>Nom d'utilisateur: </b>');
+define('TEXT_INFO_USERNAME', '<b>Nom d\'utilisateur: </b>');
 define('TEXT_INFO_FIRSTNAME', '<b>Pr&eacute;om: </b>');
 define('TEXT_INFO_LASTNAME', '<b>Nom: </b>');
 define('TEXT_INFO_EMAIL', '<b>Email: </b>');
@@ -38,12 +38,12 @@ define('TEXT_INFO_INTRO_DEFAULT_FIRST_TIME', '<br><b>ATTENTION:</b><br>Bonjour <
 define('TEXT_INFO_INTRO_DEFAULT_FIRST', '<br><b>ATTENTION:</b><br>Bonjour <b>%s</b>, nous vous recommandons de cahnger votre email (<font color="red">admin@localhost</font>) et votre mot de passe!');
 define('TEXT_INFO_INTRO_EDIT_PROCESS', 'Tous les champs sont obligatoires. Cliquez Sauver.');
 
-define('JS_ALERT_USERNAME',         '- Obligatoire: Nom d'utilisateur \n');
+define('JS_ALERT_USERNAME',         '- Obligatoire: Nom d\'utilisateur \n');
 define('JS_ALERT_FIRSTNAME',        '- Obligatoire: Pr&eacutenom \n');
 define('JS_ALERT_LASTNAME',         '- Obligatoire: Nom \n');
 define('JS_ALERT_EMAIL',            '- Obligatoire: Email \n');
 define('JS_ALERT_PASSWORD',         '- Obligatoire: Mot de passe \n');
-define('JS_ALERT_USERNAME_LENGTH',  '- Taille pr&eacute;nom d'utilisateur insuffisante ');
+define('JS_ALERT_USERNAME_LENGTH',  '- Taille pr&eacute;nom d\'utilisateur insuffisante ');
 define('JS_ALERT_FIRSTNAME_LENGTH', '- Taille pr&eacute;nom insuffisante ');
 define('JS_ALERT_LASTNAME_LENGTH',  '- Taille nom insuffisante ');
 define('JS_ALERT_PASSWORD_LENGTH',  '- Taille mot de passe insuffisante ');

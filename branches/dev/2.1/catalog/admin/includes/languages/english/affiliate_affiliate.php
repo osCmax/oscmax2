@@ -11,7 +11,7 @@ $Id$
 */
 
 define('NAVBAR_TITLE', 'Affiliate registration');
-define('HEADING_TITLE', 'Please register or enter your us$Id$
+define('HEADING_TITLE', 'Please register or enter your user ID:');
 define('HEADING_TITLE_ERROR', 'Registration error');
 
 define('TEXT_AFFILIATE_LOGOFF', 'Log off');

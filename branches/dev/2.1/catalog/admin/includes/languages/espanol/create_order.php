@@ -42,7 +42,7 @@ define('CATEGORY_CONTACT', 'Contact Information');
 define('CATEGORY_OPTIONS', 'Options');
 define('CATEGORY_PASSWORD', 'Password');
 define('CATEGORY_CORRECT', 'If this is the right customer, press the Confirm button below.');
-define('ENTRY_CUSTOMERS_ID'$Id$
+define('ENTRY_CUSTOMERS_ID', 'ID:');
 define('ENTRY_CUSTOMERS_ID_TEXT', '&nbsp;');
 define('ENTRY_COMPANY', 'Company Name:');
 define('ENTRY_COMPANY_ERROR', '');
@@ -107,7 +107,7 @@ define('HEADING_CREATE', 'Confirm client details:');
 define('TEXT_SELECT_CUST', 'Select a client:'); 
 define('TEXT_SELECT_CURRENCY', 'Select currency:');
 define('BUTTON_TEXT_SELECT_CUST', 'Select a client:'); 
-define('TEXT_OR_BY', 'or set clie$Id$
+define('TEXT_OR_BY', 'or set client ID:');
 define('TEXT_STEP_1', 'Step 1 - Choose a client and verify the details');
 define('BUTTON_SUBMIT', 'confirm');
 define('ENTRY_CURRENCY','Devise');

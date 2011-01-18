@@ -38,7 +38,7 @@ define('TEXT_ARTICLE_DATE_ADDED', 'This article was added to our site on %s.');
 define('TEXT_ARTICLE_DATE_AVAILABLE', 'This article will is expected on %s.');
 
 define('TEXT_EDIT_INTRO', 'Please make any necessary changes');
-define('TEXT_EDIT_TOPICS_ID', 'Top$Id$
+define('TEXT_EDIT_TOPICS_ID', 'Topic ID:');
 define('TEXT_EDIT_TOPICS_NAME', 'Topic Name:');
 define('TEXT_EDIT_SORT_ORDER', 'Sort Order:');
 

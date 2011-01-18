@@ -10,7 +10,7 @@ $Id: affiliate_password.php 982 2011-01-06 02:53:12Z michael.oscmax@gmail.com $
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1','Programme d/'affiliation');
+define('NAVBAR_TITLE_1','Programme d\'affiliation');
 define('NAVBAR_TITLE_2','Changer mot de passe');
 
 define('HEADING_TITLE','Mon mot de passe');

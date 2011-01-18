@@ -17,7 +17,7 @@ define('HEADING_TITLE','Abonnements Newsletter');
 
 define('MY_NEWSLETTERS_TITLE','Mes abonnements Newsletter');
 define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER','Affiliation Newsletter');
-define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER_DESCRIPTION','Y compris les nouvelles d'affiliation, de nouveaux produits, offres spéciales, et d'autres annonces promotionnelles.');
+define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER_DESCRIPTION','Y compris les nouvelles d\'affiliation, de nouveaux produits, offres spéciales, et d\'autres annonces promotionnelles.');
 
 define('SUCCESS_NEWSLETTER_UPDATED','Votre abonnement à un bulletin ont été mis à jour.');
 ?>

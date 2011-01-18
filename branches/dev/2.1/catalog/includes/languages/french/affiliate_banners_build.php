@@ -14,7 +14,7 @@ define('NAVBAR_TITLE','Programme d\'affiliation');
 define('HEADING_TITLE','Programme d\'affiliation - Faire un lien');
 
 define('TEXT_AFFILIATE_NAME','Nom de la bannière:');
-define('TEXT_INFORMATION','Entrez le numéro d'identification du produit que vous souhaitez créer un lien pour:');
+define('TEXT_INFORMATION','Entrez le numéro d\'identification du produit que vous souhaitez créer un lien pour:');
 define('TEXT_AFFILIATE_INFO','Copiez le code ci-dessous et collez-le dans votre site web');
 define('TEXT_AFFILIATE_INDIVIDUAL_BANNER','BUILD-A-LINK');
 define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO','Entrez le numéro de produit que vous souhaitez faire un lien vers et appuyez sur Entrée');

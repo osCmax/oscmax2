@@ -36,9 +36,9 @@ define('HEADING_REFFERED_HELP','Référence Aide');
 
 define('HEADING_PRODUCT_HELP','Aide sur le produit');
 
-define('TEXT_CLICKED_PRODUCT_HELP','<i>Produit ou page</i> représente la page ou d'un produit cliqué sur');
+define('TEXT_CLICKED_PRODUCT_HELP','<i>Produit ou page</i> représente la page ou d\'un produit cliqué sur');
 
-define('TEXT_DATE_HELP','<i>Date</i> représentant la date de l'clics à partir de votre site.');
+define('TEXT_DATE_HELP','<i>Date</i> représentant la date de l\'clics à partir de votre site.');
 
 define('TEXT_REFFERED_HELP','<i>Référence</i> représente l\'url que les clics provenaient.');
 

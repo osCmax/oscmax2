@@ -50,7 +50,7 @@ define('TEXT_AFFILIATE_BANNER_CENTRE','Affilié Bannières');
 
 define('TEXT_AFFILIATE_REPORT_CENTRE','Rapports d\'affiliation');
 
-define('TEXT_AFFILIATE_INFO','Information d'\affiliation');
+define('TEXT_AFFILIATE_INFO','Information d\'affiliation');
 
 define('TEXT_AFFILIATE_SUMMARY','Affiliation Sommaire');
 
@@ -60,7 +60,7 @@ define('TEXT_AFFILIATE_NEWS','Affilié Nouvelles');
 
 define('TEXT_AFFILIATE_NEWSLETTER','Newsletter');
 
-define('TEXT_AFFILIATE_ACCOUNT','Modifier le compte d'affiliation');
+define('TEXT_AFFILIATE_ACCOUNT','Modifier le compte d\'affiliation');
 
 define('TEXT_AFFILIATE_REPORTS','Rapports d\'affiliation');
 
@@ -70,7 +70,7 @@ define('TEXT_AFFILIATE_PAYMENT','Rapport de paiement');
 
 define('TEXT_AFFILIATE_SALES','Rapport des ventes');
 
-define('TEXT_AFFILIATE_BANNERS','Bannières d'\affiliation');
+define('TEXT_AFFILIATE_BANNERS','Bannières d\'affiliation');
 
 define('TEXT_AFFILIATE_BANNERS_BANNERS','Bannière Liens');
 

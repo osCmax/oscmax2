@@ -129,7 +129,12 @@ $(document).ready(function(){
 
 	$("#slideshow ul li img").hover(
     	function(){
-        var folderSwitch = $(this).attr("src").replace("thumbs", "images_big");
+		var image_switch = $(this).attr("src").indexOf("images_big");
+		if (image_switch = -1) {
+          var folderSwitch = $(this).attr("src").replace("thumbs", "products");
+		} else {
+		  var folderSwitch = $(this).attr("src").replace("thumbs", "images_big");	
+		}
 		$(".productinfo_imagebig img").attr("src", folderSwitch);
 	});
 	

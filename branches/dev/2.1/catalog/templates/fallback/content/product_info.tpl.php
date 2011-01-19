@@ -149,23 +149,31 @@ $Id$
                 <!-- Image Big Starts -->
               	<td class="productinfo_imagebig" width="<?php echo PRODUCT_IMAGE_WIDTH; ?>">
                 <?php
-	            $image_lg = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);
-    	        if ($lg_image_ext = mopics_file_exists($image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
+				//Set imagezoomer on/off switches image size from big to products
+				if (IMAGEZOOMER == 'true') {
+				  $imagezoom = ' class="imagezoomer"';
+				  $image_show = DYNAMIC_MOPICS_BIGIMAGES_DIR; 
+				} else {
+				  $imagezoom = '';
+				  $image_show = DYNAMIC_MOPICS_PRODUCTS_DIR;
+				}
+				$image_lg = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);	
+	            if ($lg_image_ext = mopics_file_exists($image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
         	        $image_size = @getimagesize($image_lg . '.' . $lg_image_ext);
 
             		//BOF SLIMBOX
             		$lightlarge = $image_lg . "." . $lg_image_ext;
 					?>               
 					<script type="text/javascript"><!--
-                    document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" class="imagezoomer" target="_blank" id="image_big" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="0" vspace="0"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '<\/a>'; ?>');
+                    document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank"' . $imagezoom . ' id="image_big" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . $image_show . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="0" vspace="0"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '<\/a>'; ?>');
     //-->
                     </script>
                     <noscript>
-                    <?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="0" vspace="0"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
+                    <?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="0" vspace="0"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
                     </noscript>
                     <?php
             	} else {
-          			echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT);
+          			echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT);
             	}
 				?>
                 </td>

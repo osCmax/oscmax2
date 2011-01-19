@@ -1925,6 +1925,7 @@ INSERT INTO configuration VALUES (589,'Product Info Attribute Display Plugin','P
 
 INSERT INTO configuration VALUES (504,'Big Image Types','DYNAMIC_MOPICS_BIG_IMAGE_TYPES','jpg,gif,jpeg,tiff,png,bmp','The types (extensions) of big images you use,seperated by commas.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (503,'Thumbnail Image Types','DYNAMIC_MOPICS_THUMB_IMAGE_TYPES','jpg,gif,jpeg,tiff,png,bmp','The types (extensions) of extra thumbnails you use,seperated by commas.',45,0,NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (497,'Image Zoomer on product info page','IMAGEZOOMER','true','Do you want to use the javscript image zoomer on your product pages?',45,30,NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (498,'Products (mid-size) Directory','DYNAMIC_MOPICS_PRODUCTS_DIR','products/','The directory inside catalog/images where your product images are stored.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (499,'Big Images Directory','DYNAMIC_MOPICS_BIGIMAGES_DIR','images_big/','The directory inside catalog/images where your big images are stored.',45,0,NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (500,'Thumbnail Images Directory','DYNAMIC_MOPICS_THUMBS_DIR','thumbs/','The directory inside catalog/images where you extra image thumbs are stored.',45,0,NULL,now(),NULL,NULL);

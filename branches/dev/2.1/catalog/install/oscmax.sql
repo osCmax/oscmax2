@@ -2782,6 +2782,8 @@ INSERT INTO pm_configuration VALUES (11, 'Define Mainpage', '', 'index_define_ma
 INSERT INTO pm_configuration VALUES (12, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'index', 6, now(), now());
 INSERT INTO pm_configuration VALUES (13, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'product_info', 3, now(), now());
 INSERT INTO pm_configuration VALUES (14, 'Slideshow', '', 'slideshow.php', 'yes', 'index', 1, now(), now());
+INSERT INTO pm_configuration VALUES (15, 'New Products', '', 'new_products.php', 'yes', 'nested', 1, now(), now());
+
 
 #Fix for Articles to display if they are not in a topic
 INSERT INTO topics VALUES (0, NULL, 0, 0, now(), NULL);

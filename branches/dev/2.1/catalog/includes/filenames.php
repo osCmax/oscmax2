@@ -233,6 +233,7 @@ $Id$
 
 // BOF: Page Module Controller
   define('FILENAME_INDEX_PAGE_MODULES', 'index_page_modules.php');
+  define('FILENAME_NESTED_PAGE_MODULES', 'nested_page_modules.php');
   define('FILENAME_PI_PAGE_MODULES', 'pi_page_modules.php');
   define('FILENAME_COMMON_PAGE_MODULES', 'common_page_modules.php');
 // EOF: Page Module Controller  

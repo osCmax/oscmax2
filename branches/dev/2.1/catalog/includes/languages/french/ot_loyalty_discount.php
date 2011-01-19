@@ -10,15 +10,15 @@ $Id$
   Released under the GNU General Public License
 */
 
-  define('MODULE_LOYALTY_DISCOUNT_TITLE', 'Customer Loyalty Discount');
-  define('MODULE_LOYALTY_DISCOUNT_DESCRIPTION', 'Customer Loyalty Discount');
-  define('SHIPPING_NOT_INCLUDED', ' [Shipping not included]');
-  define('TAX_NOT_INCLUDED', ' [Tax not included]');
-  define('MODULE_LOYALTY_DISCOUNT_SPENT', 'You have spent ');
-  define('MODULE_LOYALTY_DISCOUNT_LAST', ' in the last ');
-  define('MODULE_LOYALTY_DISCOUNT_WITHUS', ' with us ');
-  define('MODULE_LOYALTY_DISCOUNT_QUALIFY', ' so qualify for a discount of ');
-  define('MODULE_LOYALTY_DISCOUNT_YEAR', 'year');
-  define('MODULE_LOYALTY_DISCOUNT_MONTH', 'month');
+  define('MODULE_LOYALTY_DISCOUNT_TITLE','Remise de fidélisation des clients');
+  define('MODULE_LOYALTY_DISCOUNT_DESCRIPTION','Remise de fidélisation des clients');
+  define('SHIPPING_NOT_INCLUDED','[Transport non inclus]');
+  define('TAX_NOT_INCLUDED','[Taxe de séjour non inclus]');
+  define('MODULE_LOYALTY_DISCOUNT_SPENT','Vous avez passé');
+  define('MODULE_LOYALTY_DISCOUNT_LAST','dans le dernier');
+  define('MODULE_LOYALTY_DISCOUNT_WITHUS','avec nous');
+  define('MODULE_LOYALTY_DISCOUNT_QUALIFY','alors admissible à un rabais de');
+  define('MODULE_LOYALTY_DISCOUNT_YEAR','année');
+  define('MODULE_LOYALTY_DISCOUNT_MONTH','mois');
   define('MODULE_LOYALTY_DISCOUNT_QUARTER', 'quarter');
 ?>

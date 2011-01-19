@@ -10,22 +10,22 @@ $Id$
   Released under the GNU General Public License
 */
 
-  define('MODULE_ORDER_TOTAL_COUPON_TITLE', 'Discount Coupons');
-  define('MODULE_ORDER_TOTAL_COUPON_HEADER', 'Gift Vouchers/Discount Coupons');
-  define('MODULE_ORDER_TOTAL_COUPON_DESCRIPTION', 'Discount Coupon');
-  define('SHIPPING_NOT_INCLUDED', ' [Shipping not included]');
-  define('TAX_NOT_INCLUDED', ' [Tax not included]');
+  define('MODULE_ORDER_TOTAL_COUPON_TITLE','Cupones descuento');
+  define('MODULE_ORDER_TOTAL_COUPON_HEADER','Vales de regalo / Cupones de descuento');
+  define('MODULE_ORDER_TOTAL_COUPON_DESCRIPTION','Billete al descuento');
+  define('SHIPPING_NOT_INCLUDED','[Envío no incluidos]');
+  define('TAX_NOT_INCLUDED','[Impuestos no incluidos]');
   define('MODULE_ORDER_TOTAL_COUPON_USER_PROMPT', '');
   define('ERROR_NO_INVALID_REDEEM_COUPON', 'Invalid Coupon Code');
-  define('ERROR_REDEEMED_AMOUNT_ZERO', 'a valid coupon number. HOWEVER: No reduction will be applied, please see the coupon restrictions that was sent within your offer email**');
-  define('ERROR_INVALID_STARTDATE_COUPON', 'This coupon is not available yet');
-  define('ERROR_INVALID_FINISDATE_COUPON', 'This coupon has expired');
-  define('ERROR_INVALID_USES_COUPON', 'This coupon could only be used ');  
-  define('TIMES', ' times.');
-  define('ERROR_INVALID_USES_USER_COUPON', 'You have used the coupon the maximum number of times allowed per customer.'); 
-  define('REDEEMED_COUPON', 'a coupon worth ');  
-  define('REDEEMED_MIN_ORDER', 'on orders over ');  
-  define('REDEEMED_RESTRICTIONS', ' [Product-Category restrictions apply]');  
-  define('TEXT_ENTER_COUPON_CODE', 'Enter Redeem Code&nbsp;&nbsp;');
-  define('MODULE_ORDER_TOTAL_COUPON_TEXT_ERROR', 'Redeemed Coupon');
+  define('ERROR_REDEEMED_AMOUNT_ZERO','un número de cupón válido. SIN EMBARGO: No hay reducción se aplicará, por favor, consulte las restricciones cupón que se envió dentro de su oferta de correo electrónico **');
+  define('ERROR_INVALID_STARTDATE_COUPON','Este cupón no está aún disponible');
+  define('ERROR_INVALID_FINISDATE_COUPON','Este cupón ha caducado');
+  define('ERROR_INVALID_USES_COUPON','Este cupón sólo podía utilizarse');  
+  define('TIMES','veces.');
+  define('ERROR_INVALID_USES_USER_COUPON','Ha utilizado el cupón el número máximo de veces permitidas por cliente.'); 
+  define('REDEEMED_COUPON','un vale de descuento');  
+  define('REDEEMED_MIN_ORDER','para pedidos superiores a');  
+  define('REDEEMED_RESTRICTIONS','[Restricciones del producto-Categoría correspondan]');  
+  define('TEXT_ENTER_COUPON_CODE','Introduzca Canjear Código');
+  define('MODULE_ORDER_TOTAL_COUPON_TEXT_ERROR','Redimida de descuento');
 ?>

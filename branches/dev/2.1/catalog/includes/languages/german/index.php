@@ -32,4 +32,6 @@ define('TABLE_HEADING_DEFAULT_SPECIALS', 'Specials For %s');
   define('TEXT_NOW', '\' bestellen!');
   define('TEXT_ALL_CATEGORIES', 'Alle Kategorien');
   define('TEXT_ALL_MANUFACTURERS', 'Alle Hersteller');
+define('TABLE_HEADING_DEFAULT_ARTICLES','Artikel');
+
 ?>

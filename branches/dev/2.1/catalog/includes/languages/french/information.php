@@ -10,6 +10,8 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('INFORMATION_PAGE404_TITLE', 'Page not found');
-define('INFORMATION_PAGE404_DESCRIPTION', 'The requested information page was not found on this server.');
+define('INFORMATION_PAGE404_TITLE','Page introuvable');
+define('INFORMATION_PAGE404_DESCRIPTION','La page d\'information demandée n\'a pas été trouvée sur ce serveur.');
+define('NAVBAR_TITLE','$title');
+
 ?>

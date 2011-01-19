@@ -18,7 +18,7 @@ define('ENTRY_NAME','Beneficiario Nombre:');
 define('ENTRY_EMAIL','Destinatario E-Mail:');
 define('ENTRY_MESSAGE','Mensaje para el destinatario:');
 define('ENTRY_AMOUNT','Cantidad de Vale de Regalo:');
-define('ERROR_ENTRY_AMOUNT_CHECK','');
+define('ERROR_ENTRY_AMOUNT_CHECK','Cantidad no es válido');
 define('ERROR_ENTRY_EMAIL_ADDRESS_CHECK', '&nbsp;&nbsp;<span class="errorText">Invalid Email Address</span>');
 define('MAIN_MESSAGE', 'You have decided to post a gift voucher worth %s to %s who\'s email address is %s<br><br>The text accompanying the email will read<br><br>Dear %s<br><br>
                         You have been sent a Gift Voucher worth %s by %s');

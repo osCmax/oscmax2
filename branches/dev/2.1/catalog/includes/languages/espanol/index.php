@@ -32,4 +32,6 @@ define('TABLE_HEADING_DEFAULT_SPECIALS', 'Especiales para %s');
   define('TEXT_NOW', '\' Ahora');
   define('TEXT_ALL_CATEGORIES', 'Todas las Categorias');
   define('TEXT_ALL_MANUFACTURERS', 'Todas las Manofacturas');
+define('TABLE_HEADING_DEFAULT_ARTICLES','Artículos');
+
 ?>

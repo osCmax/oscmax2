@@ -12,5 +12,5 @@ $Id$
 
 define('MODULE_SHIPPING_ITEM_TEXT_TITLE', 'Versandkosten pro St&uuml;ck');
 define('MODULE_SHIPPING_ITEM_TEXT_DESCRIPTION', 'Versandkosten pro St&uuml;ck');
-define('MODULE_SHIPPING_ITEM_TEXT_WAY', '');
+define('MODULE_SHIPPING_ITEM_TEXT_WAY','Best Way');
 ?>

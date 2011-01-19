@@ -15,7 +15,7 @@ $Id$
   define('MODULE_ORDER_TOTAL_GV_DESCRIPTION', 'Gift Vouchers');
   define('SHIPPING_NOT_INCLUDED', ' [Shipping not included]');
   define('TAX_NOT_INCLUDED', ' [Tax not included]');
-  define('MODULE_ORDER_TOTAL_GV_USER_PROMPT', ' <b>to be used from Gift Vouchers</td><td align=right>');
+  define('MODULE_ORDER_TOTAL_GV_USER_PROMPT','<b>para ser utilizado de vales de regalo</b> </td><td align=right>');
   define('TEXT_ENTER_GV_CODE', 'Enter Redeem Code  ');
   define('TEXT_GV_CODE_INPUT_DEFAULT', '');
   define('MODULE_ORDER_TOTAL_GV_TEXT_ERROR', 'Gift Voucher/Discount coupon');

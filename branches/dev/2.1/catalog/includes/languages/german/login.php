@@ -26,13 +26,15 @@ define('TEXT_LOGIN_ERROR', 'Fehler: Keine &Uuml;bereinstimmung der eingebenen eM
 define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>Achtung:</b></font> Ihre Besuchereingaben werden automatisch mit Ihrem Kundenkonto verbunden. <a href="javascript:session_win();">[Mehr Information]</a>');
 
 // BOF: MOD - Checkout Without Account v0.70 changes
-define('PWA_FAIL_ACCOUNT_EXISTS', 'An account already exists for the email address <i>{EMAIL_ADDRESS}</i>.  You must login here with the password for that account before proceeding to checkout.');
-define('HEADING_CHECKOUT', '<font size="2">Proceed Directly to Checkout</font>');
-define('TEXT_CHECKOUT_INTRODUCTION', 'Proceed to Checkout without creating an account. By choosing this option none of your user information will be kept in our records, and you will not be able to review your order status, nor keep track of your previous orders.');
-define('PROCEED_TO_CHECKOUT', 'Proceed to Checkout without Registering');
+define('PWA_FAIL_ACCOUNT_EXISTS','Ein Konto existiert bereits für die E-Mail-Adresse <i>{EMAIL_ADDRESS}.</i> Sie müssen sich hier anmelden mit dem Passwort für dieses Konto, bevor Sie fortfahren zur Kasse.');
+define('HEADING_CHECKOUT','<font size="2">Kasse gehen Sie direkt zu</font>');
+define('TEXT_CHECKOUT_INTRODUCTION','Gehen Sie zur Prüfung ohne Erstellen eines Kontos. Durch die Wahl dieser Option keine Ihrer Benutzerdaten werden in unseren Unterlagen aufbewahrt werden, und Sie werden nicht in der Lage sein den Status Ihrer Bestellung zu überprüfen, noch den Überblick über Ihre bisherigen Bestellungen.');
+define('PROCEED_TO_CHECKOUT','Gehen Sie zur Prüfung ohne Anmeldung');
 // EOF: MOD - Checkout Without Account changes
 
 // LINE ADDED: MOD - Separate Pricing Per Customer
 // define the email address that can change customer_group_id on login
 define('SPPC_TOGGLE_LOGIN_PASSWORD', 'root@localhost');
+define('TEXT_GUEST_INTRODUCTION','<b>Wollen Sie direkt zur Kasse?</b> <br><br> Möchten Sie überprüfen, ohne ein Kundenkonto? Bitte beachten Sie, dass alle unsere Dienste werden nicht verfügbar sein, um Kunden, die nicht wollen, um ein Konto zu erstellen. Sie können auch nicht den Status Ihrer Bestellung, und jedes Mal, wenn Sie bei uns einkaufen, müssen Sie erneut eingeben alle Ihre Daten. <br><br> Erstellen eines Kontos ist kostenlos. Wenn Sie dennoch weiter zur Kasse bitte auf den Button "Kasse" zu Ihrer Rechten.');
+
 ?>

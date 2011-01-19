@@ -1,3 +1,15 @@
+<?php
+/*
+$Id: checkout.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <!-- body_text //-->
 <noscript>
  <p>Please follow the instructions for your web browser:<br /><br />Internet Explorer</p>
@@ -38,8 +50,7 @@
 	<tr>
 	 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
 	  <tr>
-	   <td class="main"><b><?php echo tep_output_string_protected($error['title']); 
-	   ?></b></td>
+	   <td class="main"><b><?php echo tep_output_string_protected($error['title']); ?></b></td>
 	  </tr>
 	 </table></td>
 	</tr>
@@ -49,13 +60,12 @@
 	   <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
 		<tr>
 		 <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-		 <td class="main" width="100%" valign="top"><?php 
+		 <td class="main" width="100%" valign="top"><?php
 		 if($error['error']!='')
-			 echo tep_output_string_protected($error['error']); 
+  			    echo htmlspecialchars_decode($error['error']);
 			 else
-			 echo "Please try again and if problems persist, please try another payment method.";
-			 
-			 ?></td>
+  			    echo TEXT_PAYMENT_METHOD_UPDATE_ERROR; ?>
+  			</td>
 		 <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
 		</tr>
 	   </table></td>
@@ -91,7 +101,7 @@
 		if (MODULE_ORDER_TOTAL_COUPON_STATUS == 'true'){
 			echo '<table cellpadding="2" cellspacing="0" border="0">
 			 <tr>
-			  <td class="main"><b>Have A Coupon?</b></td>
+			  <td class="main"><b>' . TEXT_HAVE_COUPON_CCGV . '</b></td>
 			 </tr>
 			 <tr>
 			  <td class="main">' . tep_draw_input_field('gv_redeem_code', '') . '</td>
@@ -103,7 +113,7 @@
 		if (MODULE_ORDER_TOTAL_DISCOUNT_COUPON_STATUS == 'true'){
 			echo '<table cellpadding="2" cellspacing="0" border="0">
 			 <tr>
-			  <td class="main"><b>Have A Coupon?</b></td>
+			  <td class="main"><b>' . TEXT_HAVE_COUPON_CCGV . '</b></td>
 			 </tr>
 			 <tr>
 			  <td class="main">' . tep_draw_input_field('coupon', '') . '</td>
@@ -123,8 +133,8 @@
 	</tr>
 	<tr>
 	 <td>
-   
-   
+
+
    <table border="0" width="100%" cellspacing="0" cellpadding="2">
 	  <tr>
 	   <td class="main" width="<?php echo (ONEPAGE_ADDR_LAYOUT == 'vertical' ? '100%' : '50%');?>" valign="top"><?php
@@ -137,7 +147,7 @@
 
 		$billingAddress = '<table border="0" width="100%" cellspacing="0" cellpadding="2">
 		 <tr id="logInRow"' . (isset($_SESSION['customer_id']) ? ' style="display:none"' : '') . '>
-		  <td class="main">Already have an account? <a href="' . fixSeoLink(tep_href_link(FILENAME_LOGIN)) . '" id="loginButton">' . tep_image_button('button_login.gif', IMAGE_LOGIN) . '</a></td>
+		  <td class="main"> ' . TEXT_EXISTING_CUSTOMER_LOGIN .' <a href="' . fixSeoLink(tep_href_link(FILENAME_LOGIN)) . '" id="loginButton">' . tep_image_button('button_login.gif', IMAGE_LOGIN) . '</a></td>
 		 </tr>
 		</table>' . $billingAddress;
 
@@ -152,7 +162,7 @@
 <?php if(ONEPAGE_ADDR_LAYOUT == 'vertical') {?>
     </tr>
 <?php } ?>
-    
+
 <?php
   if ($onepage['shippingEnabled'] === true){
 ?>
@@ -170,7 +180,7 @@
 		if (!tep_session_is_registered('customer_id')){
 			$shippingAddress = '<table border="0" width="100%" cellspacing="0" cellpadding="2">
 			 <tr>
-			  <td class="main">Different from billing address? <input type="checkbox" name="diffShipping" id="diffShipping" value="1"></td>
+			  <td class="main">' . TEXT_DIFFERENT_SHIPPING . ' <input type="checkbox" name="diffShipping" id="diffShipping" value="1"></td>
 			 </tr>
 			</table>' . $shippingAddress;
 		}
@@ -192,39 +202,24 @@
 	</tr>
 	  <tr>
 		<td><?php
-			$header = TABLE_HEADING_PAYMENT_METHOD;
-			
-			/*$paymentMethod1 = '';		
-			ob_start();
-			include(DIR_WS_INCLUDES . 'checkout/payment_method.php');
-			$paymentMethod1 = ob_get_contents();
-			ob_end_clean();		
-		
+		$header = TABLE_HEADING_PAYMENT_METHOD;
 
-	
-			$paymentMethod = '<div id="noPaymentAddress" class="main noAddress" align="center" style="font-size:15px;display:none;">Please fill in your <b>billing address</b> for payment options</div>'.$paymentMethod1;				
-		
-	$paymentMethod = '<div id="paymentMethods" style="display:block;">' . $paymentMethod . '</div>';
-	*/
-	
 		$paymentMethod = '';
-		//if (isset($_SESSION['customer_id'])){
+		if (isset($_SESSION['customer_id'])){
 			ob_start();
 			include(DIR_WS_INCLUDES . 'checkout/payment_method.php');
 			$paymentMethod = ob_get_contents();
 			ob_end_clean();
-		//}
+		}
 
-		//$paymentMethod1 = '<div id="noPaymentAddress" class="main noAddress" align="center" style="font-size:15px;'.  (isset($_SESSION['customer_id']) ? 'display:none;' : '') .'">Please fill in your <b>billing address</b> for payment options</div><div id="paymentMethods">' . $paymentMethod . '</div>';
-		buildInfobox($header, $paymentMethod);			
+		$paymentMethod = '<div id="noPaymentAddress" class="main noAddress" align="center" style="font-size:15px;' . (isset($_SESSION['customer_id']) ? 'display:none;' : '') . '">Please fill in your <b>billing address</b> for payment options</div><div id="paymentMethods"' . (!isset($_SESSION['customer_id']) ? ' style="display:none;"' : '') . '>' . $paymentMethod . '</div>';
+		buildInfobox($header, $paymentMethod);
 	   ?></td>
 	  </tr>
 	  <tr>
 		<td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
 	  </tr>
 <?php
-  
-  
   if ($onepage['shippingEnabled'] === true){
 	  if (tep_count_shipping_modules() > 0) {
 ?>
@@ -266,6 +261,21 @@
 	  <tr>
 		<td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
 	  </tr>
+      
+<?php if (MATC == 'true') { ?>
+      <tr>
+        <td>
+          <table border="0" width="100%" cellspacing="1" cellpadding="2">
+            <tr>
+              <td id="MATCtd" class="messageStackAlert" align="center"><?php echo tep_draw_checkbox_field('MATC','true', false, 'id="MATC" onClick="javascript:switchMATC()"'); ?><?php echo TERMS_PART_1; ?><a id="conditions" href="<?php echo $HTTP_SERVER . DIR_WS_CATALOG . 'conditions.php?info_id=11&languages_id=' . (isset($languages_id) ? $languages_id : '1'); ?>" title="<?php echo TERMS_PART_2; ?>"><?php echo TERMS_PART_2; ?></a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+	  <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
 	  <tr>
 		<td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
 		  <tr class="infoBoxContents" id="checkoutYesScript" style="display:none;">
@@ -273,11 +283,29 @@
 			  <tr>
 				<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
 				<td class="main" id="checkoutMessage"><?php echo '<b>' . TITLE_CONTINUE_CHECKOUT_PROCEDURE . '</b><br>' . TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?></td>
+                
+				<td class="main" align="right"><span id="enableMATC"><?php if(ONEPAGE_CHECKOUT_LOADER_POPUP == 'False'){ ?><div id="ajaxMessages" style="display:none;"></div><?php } ?><div id="checkoutButtonContainer"><?php echo tep_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONTINUE, 'id="checkoutButton" formUrl="' . tep_href_link(FILENAME_CHECKOUT_PROCESS, '', $request_type) . '"'); ?><input type="hidden" name="formUrl" id="formUrl" value=""></div><div id="paymentHiddenFields" style="display:none;"></div></span>
+                <span id="disableMATC" style="cursor: pointer;"><?php echo tep_image_button('button_MAT.gif', IMAGE_BUTTON_MAT, ' onClick="javascript:warnMATC()"'); ?></span></td>
+				<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+			  </tr>
+			</table></td>
+		  </tr>
+<?php } else { ?>
+      
+	  <tr>
+		<td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+		  <tr class="infoBoxContents" id="checkoutYesScript" style="display:none;">
+			<td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+			  <tr>
+				<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+				<td class="main" id="checkoutMessage"><?php echo '<b>' . TITLE_CONTINUE_CHECKOUT_PROCEDURE . '</b><br>' . TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?></td>
+                
 				<td class="main" align="right"><?php if(ONEPAGE_CHECKOUT_LOADER_POPUP == 'False'){ ?><div id="ajaxMessages" style="display:none;"></div><?php } ?><div id="checkoutButtonContainer"><?php echo tep_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONTINUE, 'id="checkoutButton" formUrl="' . tep_href_link(FILENAME_CHECKOUT_PROCESS, '', $request_type) . '"'); ?><input type="hidden" name="formUrl" id="formUrl" value=""></div><div id="paymentHiddenFields" style="display:none;"></div></td>
 				<td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
 			  </tr>
 			</table></td>
 		  </tr>
+<?php } ?>
 
 		  <tr class="infoBoxContents" id="checkoutNoScript">
 			<td><table border="0" width="100%" cellspacing="0" cellpadding="2">

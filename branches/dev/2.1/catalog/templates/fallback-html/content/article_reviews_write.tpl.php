@@ -1,4 +1,16 @@
-  	 <?php echo tep_draw_form('article_reviews_write', tep_href_link(FILENAME_ARTICLE_REVIEWS_WRITE, 'action=process&articles_id=' . $_GET['articles_id']), 'post', 'onSubmit="return checkForm();"'); ?> 
+<?php
+/*
+$Id: article_reviews_write.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+  echo tep_draw_form('article_reviews_write', tep_href_link(FILENAME_ARTICLE_REVIEWS_WRITE, 'action=process&articles_id=' . $_GET['articles_id']), 'post', 'onSubmit="return checkForm();"'); ?> 
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">

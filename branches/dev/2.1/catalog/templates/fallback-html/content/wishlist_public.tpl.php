@@ -1,3 +1,15 @@
+<?php
+/*
+$Id: wishlist_public.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <!-- body_text //-->
     <?php echo tep_draw_form('wishlist_form', tep_href_link(FILENAME_WISHLIST_PUBLIC)); ?>
 	  <table border="0" width="100%" cellspacing="0" cellpadding="0">

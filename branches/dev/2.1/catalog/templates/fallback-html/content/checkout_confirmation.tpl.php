@@ -1,4 +1,15 @@
-    <?php
+<?php
+/*
+$Id: checkout_confirmation.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
   	  	  	if (isset($$payment->form_action_url)) {
   	  	  	$form_action_url = $$payment->form_action_url;
   	  	  	  } else {

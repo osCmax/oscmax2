@@ -1,3 +1,15 @@
+<?php
+/*
+$Id: advanced_search_result.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -21,7 +33,8 @@
                        'PRODUCT_LIST_QUANTITY' => PRODUCT_LIST_QUANTITY,
                        'PRODUCT_LIST_WEIGHT' => PRODUCT_LIST_WEIGHT,
                        'PRODUCT_LIST_IMAGE' => PRODUCT_LIST_IMAGE,
-                       'PRODUCT_LIST_BUY_NOW' => PRODUCT_LIST_BUY_NOW);
+                       'PRODUCT_LIST_BUY_NOW' => PRODUCT_LIST_BUY_NOW,
+		       'PRODUCT_CORNER_BANNER' => PRODUCT_CORNER_BANNER);
 
   asort($define_list);
 
@@ -62,6 +75,7 @@
 
    // BOF Separate Pricing Per Customer
    $status_tmp_product_prices_table = false;
+   $status_tmp_special_prices_table = false;
    $status_need_to_get_prices = false;
    // find out if sorting by price has been requested
    if ( (isset($_GET['sort'])) && (ereg('[1-8][ad]', $_GET['sort'])) && (substr($_GET['sort'], 0, 1) <= sizeof($column_list)) ){
@@ -88,11 +102,11 @@
    } // end elseif ((tep_not_null($pfrom) || (tep_not_null($pfrom)) && .... 
    
    if ($status_tmp_product_prices_table == true) {
-   $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_id, pd.products_name, tmp_pp.products_price, p.products_tax_class_id, if(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price ";
+   $select_str = "select distinct " . $select_column_list . " p.products_quantity, p.products_featured, m.manufacturers_id, p.products_quantity, p.products_id, pd.products_name, tmp_pp.products_price, p.products_tax_class_id, if(tmp_pp.status, tmp_pp.specials_new_products_price, NULL) as specials_new_products_price, IF(tmp_pp.status, tmp_pp.specials_new_products_price, tmp_pp.products_price) as final_price ";
    } elseif ($status_tmp_special_prices_table == true) {
-     $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, if(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, if(s.status, s.specials_new_products_price, p.products_price) as final_price ";	
+     $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_quantity, p.products_featured, p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, if(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, if(s.status, s.specials_new_products_price, p.products_price) as final_price ";	
    } else {
-     $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, NULL as specials_new_products_price, NULL as final_price ";	
+     $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_quantity, p.products_featured, p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, NULL as specials_new_products_price, NULL as final_price ";	
    }
    // next line original select query
    // $select_str = "select distinct " . $select_column_list . " m.manufacturers_id, p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price ";
@@ -308,7 +322,7 @@ foreach ($epf as $e) {
   if ( (!isset($_GET['sort'])) || (!ereg('[1-8][ad]', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
     for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
       if ($column_list[$i] == 'PRODUCT_LIST_NAME') {
-        $_GET['sort'] = $i+1 . 'a';
+        $_GET['sort'] = $i . 'a';
         $order_str = ' order by pd.products_name';
         break;
       }
@@ -317,7 +331,7 @@ foreach ($epf as $e) {
     $sort_col = substr($_GET['sort'], 0 , 1);
     $sort_order = substr($_GET['sort'], 1);
     $order_str = ' order by ';
-    switch ($column_list[$sort_col-1]) {
+    switch ($column_list[$sort_col]) {
       case 'PRODUCT_LIST_MODEL':
         $order_str .= "p.products_model " . ($sort_order == 'd' ? "desc" : "") . ", pd.products_name";
         break;
@@ -344,7 +358,7 @@ foreach ($epf as $e) {
 
   $listing_sql = $select_str . $from_str . $where_str . $order_str;
 
-// BOF: Grid:List Switching
+// BOF:$Id: advanced_search_result.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
         // initial set from admin
         if ( (!isset($_GET['gridlist'])) && (!isset($_SESSION['gridlist'])) ) {
 		  if (PRODUCT_LIST_TYPE == 0) { $gridlist = 'list'; } else { $gridlist = 'grid'; }
@@ -361,7 +375,7 @@ foreach ($epf as $e) {
         } else {
           include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING_COL);
         }
-// EOF: Grid:List Switching
+// EOF:$Id: advanced_search_result.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
 ?>
         </td>
       </tr>

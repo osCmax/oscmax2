@@ -1,4 +1,16 @@
-    <?php echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onsubmit="return check_form();"'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+<?php
+/*
+$Id: checkout_payment.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+      echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onsubmit="return check_form();"'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -50,7 +62,7 @@
 
   for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
     echo '                <tr>' . "\n" .
-         '                  <td width="10%" class="main" align="right" valign="top" width="30">' . $order->products[$i]['qty'] . ' x</td>' . "\n" .
+         '                  <td width="10%" class="main" align="right" valign="top">' . $order->products[$i]['qty'] . ' x</td>' . "\n" .
          '                  <td width="60%" class="main" valign="top">' . $order->products[$i]['name'];
 
    if (STOCK_CHECK == 'true') {
@@ -137,8 +149,17 @@
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
+  // *** BEGIN GOOGLE CHECKOUT ***
+  // Skips Google Checkout as a payment option on the payments page since that option
+  // is provided in the checkout page.
   $selection = $payment_modules->selection();
-
+  for ($i = 0, $n = sizeof($selection); $i < $n; $i++) {
+    if ($selection[$i]['id'] == 'googlecheckout') {
+      array_splice($selection, $i, 1);
+      break;   
+    }
+  }
+  // *** END GOOGLE CHECKOUT ***
   if (sizeof($selection) > 1) {
 ?>
               <tr>
@@ -270,7 +291,7 @@ if ($gv_result['amount']>0){
         <td>
           <table border="0" width="100%" cellspacing="1" cellpadding="2">
             <tr>
-              <td id="MATCtd" class="messageStackAlert" align="center"><?php echo tep_draw_checkbox_field('MATC','true', false, 'id="MATC" onClick="javascript:switchMATC()"'); ?><?php echo TERMS_PART_1 . '<a href="' . tep_href_link(FILENAME_CONDITIONS) . '">' . TERMS_PART_2 . '</a>';?>
+              <td id="MATCtd" class="messageStackAlert" align="center"><?php echo tep_draw_checkbox_field('MATC','true', false, 'id="MATC" onClick="javascript:switchMATC()"'); ?><?php echo TERMS_PART_1; ?><a id="conditions" href="<?php echo $HTTP_SERVER . DIR_WS_CATALOG . 'conditions.php?info_id=11&languages_id=' . (isset($languages_id) ? $languages_id : '1'); ?>" title="<?php echo TERMS_PART_2; ?>"><?php echo TERMS_PART_2; ?></a>
               </td>
             </tr>
           </table>

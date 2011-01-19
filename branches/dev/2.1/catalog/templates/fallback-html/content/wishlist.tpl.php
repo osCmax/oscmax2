@@ -1,3 +1,15 @@
+<?php
+/*
+$Id: wishlist.tpl.php 1057 2011-01-15 18:40:10Z cottonbarn $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <!-- body_text //-->
 <?php echo tep_draw_form('wishlist_form', tep_href_link(FILENAME_WISHLIST)); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -61,9 +73,9 @@
 
 ?>
             <tr class="<?php echo $class; ?>">
-              <td valign="middle" class="productListing-data-list" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=remove_product&wishlist_id=' . $wishlist_id . '', 'NONSSL').'">' . tep_image(DIR_WS_ICONS . 'basket_delete.png', IMAGE_BUTTON_REMOVE_PRODUCT, 16, 16) . '</a></td>'; ?>
+              <td valign="middle" class="productListing-data-list" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=remove_wishlist_product&wishlist_id=' . $wishlist_id . '', 'NONSSL').'">' . tep_image(DIR_WS_ICONS . 'basket_delete.png', IMAGE_BUTTON_REMOVE_PRODUCT, 16, 16) . '</a></td>'; ?>
               <td valign="top" class="productListing-data-list" align="left"><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?></a></td>
-              <td valign="top" class="productListing-data-list" align="left" class="main"><b><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>"><?php echo $products['products_name']; ?></a></b>
+              <td valign="top" class="productListing-data-list" align="left"><b><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>"><?php echo $products['products_name']; ?></a></b>
                 <input type="hidden" name="prod_link[]" value="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id, 'NONSSL'); ?>" />
                 <input type="hidden" name="prod_name[]" value="<?php echo $products['products_name']; ?>" />
 <?php
@@ -152,8 +164,14 @@
               <table border="0" width="100%" cellspacing="0" cellpadding="2">
                 <tr>
                   <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                  <td align="left" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=clear_wishlist', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_WISHLIST . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_wishlist.gif', 'Clear Wishlist'); ?></td>
-                  <td align="right" class="main"><?php echo tep_image_submit('button_delete.gif', 'Delete From Wishlist', 'name="delete_prod" value="delete_prod"') . " " . tep_image_submit('button_in_cart.gif', 'Add to Cart', 'name="add_prod" value="add_prod"'); ?></td>
+                  <td align="left" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=clear_wishlist', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_WISHLIST . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_wishlist.gif', 'Clear Wishlist'); ?></a>&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST_HELP) . '">' . tep_image_button('button_wishlist_help.gif', IMAGE_BUTTON_WISHLIST_HELP) . '</a>'; ?></td>
+                  <td align="right" class="main"><?php echo tep_image_submit('button_delete.gif', 'Delete From Wishlist', 'name="delete_prod" value="delete_prod"'); ?>&nbsp;
+                  <?php
+				  if (BASKET_CART == 'cart') {
+				    echo tep_image_submit('button_in_cart.gif', 'Add to Cart', 'name="add_prod" value="add_prod"');
+				  } else {
+					echo tep_image_submit('button_in_basket.gif', 'Add to Basket', 'name="add_prod" value="add_prod"');  
+				  } ?></td>
                   <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                 </tr>
               </table>
@@ -182,7 +200,7 @@
       </tr>
     <tr>
       <td align="center">
-        <table border="0" width="400px" cellspacing="0" cellpadding="2">
+        <table border="0" width="400" cellspacing="0" cellpadding="2">
           <tr>
             <td class="main" colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
@@ -240,7 +258,7 @@
   </tr>
   <tr>
     <td align="center">
-      <table border="0" width="400px" cellspacing="0" cellpadding="2">
+      <table border="0" width="400" cellspacing="0" cellpadding="2">
 <?php
   }
 ?>
@@ -270,7 +288,7 @@
           <td colspan="2" class="main"><?php echo TEXT_MESSAGE .  tep_draw_textarea_field('message', 45, 5); ?></td>
         </tr>
         <tr>
-          <td colspan="2" align="right"><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE, 'name="email_prod" value="email_prod"'); ?></td>
+          <td colspan="2" align="right"><?php echo tep_image_submit('button_send.gif', IMAGE_BUTTON_SEND, 'name="email_prod" value="email_prod"'); ?></td>
         </tr>
       </table>
     </td>
@@ -286,7 +304,24 @@
     <tr>
     <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-      <td class="main"><?php echo BOX_TEXT_NO_ITEMS;?></td>
+        <td class="main"><?php new infoBox(array(array('text' => BOX_TEXT_NO_ITEMS))); ?></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td class="productinfo_buttons"><table border="0" width="100%" cellspacing="1" cellpadding="2">
+          <tr>
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+                <td align="left" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST_HELP) . '">' . tep_image_button('button_wishlist_help.gif', IMAGE_BUTTON_WISHLIST_HELP) . '</a>'; ?></td>
+                <td align="right" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>'; ?></td>
+                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
       </tr>
     </table>
     </td>

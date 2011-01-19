@@ -1,3 +1,15 @@
+<?php
+/*
+$Id: affiliate_reports.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <!-- body_text //-->
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
@@ -38,7 +50,7 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
-                <td width="60"><img src="images/affiliate_clicks.gif" border="0" alt="" width="60" height="60"></td>
+                <td width="60"><img src="images/icons/affiliate_clicks.png" border="0" alt=""></td>
                 <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
@@ -68,7 +80,7 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
-                <td width="60"><img src="images/affiliate_sales.gif" border="0" alt="" width="60" height="60"></td>
+                <td width="60"><img src="images/icons/affiliate_sales.png" border="0" alt=""></td>
                 <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
@@ -98,7 +110,7 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
-                <td width="60"><img src="images/affiliate_payment.gif" border="0" alt="" width="60" height="60"></td>
+                <td width="60"><img src="images/icons/affiliate_payment.png" border="0" alt=""></td>
                 <td width="10"><img src="images/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>

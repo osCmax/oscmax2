@@ -1,3 +1,15 @@
+<?php
+/*
+$Id: Order_Info.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <!-- body_text //-->
 
     <form name="account_edit" method="post" <?php echo 'action="' .

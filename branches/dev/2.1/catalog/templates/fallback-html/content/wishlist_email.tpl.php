@@ -1,3 +1,15 @@
+<?php
+/*
+$Id: wishlist_email.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <!-- body_text //-->
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>

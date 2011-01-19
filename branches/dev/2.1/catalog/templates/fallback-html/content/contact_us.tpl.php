@@ -1,4 +1,15 @@
-    <?php echo tep_draw_form('contact_us', tep_href_link(FILENAME_CONTACT_US, 'action=send')); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+<?php
+/*
+$Id: contact_us.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+      echo tep_draw_form('contact_us', tep_href_link(FILENAME_CONTACT_US, 'action=send')); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -25,7 +36,7 @@
   if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
 ?>
       <tr valign="middle">
-        <td class="messagestacksuccess" align="center"><?php echo tep_image(DIR_WS_IMAGES . 'icons/icon_add.png', ''); ?> &nbsp;<?php echo  TEXT_SUCCESS; ?></td>
+        <td class="messageStackSuccess" align="center"><?php echo tep_image(DIR_WS_ICONS . 'success.png', ''); ?> &nbsp;<?php echo TEXT_SUCCESS; ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -51,15 +62,17 @@
     $account = tep_db_fetch_array($account_query);
 
     $name = $account['customers_firstname'] . ' ' . $account['customers_lastname'];
-    $email = $account['customers_email_address'];
+    $email = $account['customers_email_address'];	
   	}
 	
+	if (!isset($name)) { $name = ''; }
+	if (!isset($email)) { $email = ''; }
 	
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
           <tr class="infoBoxContents">
-          	<td colspan="2" class="main"><BR /><?php echo INSTRUCTIONS_TEXT; ?><BR /><BR /></td>
+          	<td colspan="2" class="main"><?php echo INSTRUCTIONS_TEXT; ?><BR /><BR /></td>
           </tr>
           <tr class="infoBoxContents">
             <td width="65%"><table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -79,7 +92,7 @@
               <td class="main">Reason for Enquiry:
               
               <br>
-					<select name="reason">
+					<select name="reason" class="input-style">
 						<?php echo '<option value="' . REASON_1 . '">' . REASON_1 . '</option>'; ?>
 						<?php echo '<option value="' . REASON_2 . '">' . REASON_2 . '</option>'; ?>
 						<?php echo '<option value="' . REASON_3 . '">' . REASON_3 . '</option>'; ?>
@@ -106,14 +119,36 @@
 <?php } ?>
             </table></td>
         
-        <td width="35%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <td width="35%" valign="top">
+		  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+		    <?php if (SHOW_STORE_OPENING_HOURS == 'true') { ?>
            	  <tr>
-                <td class="smalltext"><?php echo CONTACT_INFORMATION; ?></td>
+                <td class="smalltext"><?php echo OPENING_HOURS; ?></td>
               </tr>
+			  <tr>
+                <td class="smalltext"><?php echo nl2br(STORE_OPENING_HOURS_TEXT); ?><br><br></td>
+              </tr>
+			<?php } ?>
+			<?php if (SHOW_EMAIL_ADDRESS == 'true') { ?>
+           	  <tr>
+                <td class="smalltext"><?php echo EMAIL_US; ?></td>
+              </tr>
+			  <tr>
+                <td class="smalltext"><?php echo EMAIL_FROM; ?><br><br></td>
+              </tr>
+			<?php } ?>
+			<?php if (SHOW_MAILING_ADDRESS == 'true') { ?>
+			  <tr>
+			    <td class="smalltext"><?php echo WRITE_US; ?></td>
+			  </tr>
+			  <tr>
+			    <td class="smalltext"><?php echo nl2br(STORE_NAME_ADDRESS); ?></td>
+			  </tr>
+			<?php } ?>
 <?php if (RECAPTCHA_ON == 'true') { ?>
 <!-- start modification for reCaptcha -->
               <tr>
-                <td class="smalltext"><b><?php echo ENTRY_SECURITY_CHECK; ?></b></td>
+                <td class="smalltext"><br><b><?php echo ENTRY_SECURITY_CHECK; ?></b></td>
               </tr>
               <tr>
 								<script>

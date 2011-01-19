@@ -1,12 +1,15 @@
 <?php
 /*
-  HTML template for the BTS
+$Id$
 
-  Copyright (c) 2005 Paul Mathôt Haarlem Netherlands
-  http://www.panda.nl
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
+
 
 require(DIR_WS_INCLUDES . 'meta_tags.php');
 //require(DIR_WS_INCLUDES . 'counter.php');

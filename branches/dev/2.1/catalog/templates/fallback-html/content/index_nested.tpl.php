@@ -1,3 +1,15 @@
+<?php
+/*
+$Id: index_nested.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -7,8 +19,6 @@
 /* bof catdesc for bts1a, replacing "echo HEADING_TITLE;" by "categories_heading_title" */
              if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_heading_title'])) ) {
                  echo $category['categories_heading_title'];
-               } else {
-                 echo HEADING_TITLE;
                }
 /* eof catdesc for bts1a */
              ?>

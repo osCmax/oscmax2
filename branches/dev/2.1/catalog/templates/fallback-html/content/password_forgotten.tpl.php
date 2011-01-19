@@ -1,4 +1,16 @@
-    <?php echo tep_draw_form('password_forgotten', tep_href_link(FILENAME_PASSWORD_FORGOTTEN, 'action=process', 'SSL')); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+<?php
+/*
+$Id: password_forgotten.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+      echo tep_draw_form('password_forgotten', tep_href_link(FILENAME_PASSWORD_FORGOTTEN, 'action=process', 'SSL')); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -23,9 +35,9 @@
   }
 ?>
       <tr>
-        <td><table border="0" width="100%" height="100%" cellspacing="1" cellpadding="2" class="infoBox">
+        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox" style="height:100%;">
           <tr class="infoBoxContents">
-            <td><table border="0" width="100%" height="100%" cellspacing="0" cellpadding="2">
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2" style="height:100%;">
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>

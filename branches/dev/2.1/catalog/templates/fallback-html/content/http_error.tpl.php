@@ -1,4 +1,15 @@
 <?php
+/*
+$Id: http_error.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_HTTP_ERROR);
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ADVANCED_SEARCH);
 

@@ -1,3 +1,15 @@
+<?php
+/*
+$Id: articles.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <table border="0" width="100%" cellspacing="3" cellpadding="3">
   <tr>
     <!-- body_text //-->
@@ -172,7 +184,7 @@
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>
               <?php } ?>
-              <?php if (tep_not_null($authors_description)) { ?>
+              <?php if (tep_not_null(isset($authors_description))) { ?>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>
@@ -180,7 +192,7 @@
                 <td class="main" colspan="2" valign="top"><?php echo $authors_description; ?></td>
               <tr>
                 <?php } ?>
-                <?php if (tep_not_null($authors_url)) { ?>
+                <?php if ( (tep_not_null(isset($authors_url))) && ($authors_url<>'') ) { ?>
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
@@ -248,20 +260,6 @@
       <tr>
         </table></td>
         </tr>
-        <?php
-  if (($articles_all_split->number_of_rows > 0) && ((ARTICLE_PREV_NEXT_BAR_LOCATION == 'bottom') || (ARTICLE_PREV_NEXT_BAR_LOCATION == 'both'))) {
-?>
-        <tr>
-          <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td class="smallText"><?php echo $articles_all_split->display_count(TEXT_DISPLAY_NUMBER_OF_ARTICLES); ?></td>
-                <td align="right" class="smallText"><?php echo TEXT_RESULT_PAGE . ' ' . $articles_all_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></td>
-              </tr>
-            </table></td>
-        </tr>
-        <?php
-  }
-?>
       </table></td>
     <?php } ?>
     <!-- body_text_eof //-->

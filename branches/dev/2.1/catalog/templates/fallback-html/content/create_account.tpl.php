@@ -1,4 +1,15 @@
+<?php
+/*
+$Id: create_account.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
 
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
     <!-- PWA BOF -->
     <?php echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, (isset($_GET['guest'])? 'guest=guest':''), 'SSL'), 'post', 'onSubmit="return check_form(create_account);"') . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
     <!-- PWA EOF -->
@@ -155,31 +166,21 @@
 ?>
               <tr>
                 <td class="main" width="150"><?php echo ENTRY_STATE; ?></td>
-                <td class="main">
+                      <td class="main"><div id="states">
 <?php
-// BOF: MOD - Country-State Selector
-        $zones_array = array();
-         $zones_query = tep_db_query("select zone_name from " . TABLE_ZONES . " where zone_country_id = " . (int)$country . " order by zone_name");
-        while ($zones_values = tep_db_fetch_array($zones_query)) {
-          $zones_array[] = array('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
-        }
-		if (count($zones_array) > 0) {
-          echo tep_draw_pull_down_menu('state', $zones_array);
-		} else {
-		  echo tep_draw_input_field('state');
-		}
-// EOF: MOD - Country-State Selector
-    if (tep_not_null(ENTRY_STATE_TEXT)) echo '&nbsp;<span class="inputRequirement">' . ENTRY_STATE_TEXT . '</span>';
-?>
-                </td>
+				// +Country-State Selector
+				echo ajax_get_zones_html($country,'',false);
+				// -Country-State Selector
+				?>
+                        </div></td>
               </tr>
 <?php
   }
 ?>
               <tr>
-                <td class="main" width="150"><?php echo ENTRY_COUNTRY; ?></td>
+                <td class="main" width="150"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
 				<?php // +Country-State Selector ?>
-                <td class="main"><?php echo tep_get_country_list('country',$country,'onChange="return refresh_form(create_account);"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
+                <td class="main"><?php echo tep_get_country_list('country',$country,'onChange="getStates(this.value, \'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
 				<?php // -Country-State Selector ?>
               </tr>
             </table></td>
@@ -226,6 +227,10 @@
               <tr>
                 <td class="main" width="150"><?php echo ENTRY_NEWSLETTER; ?></td>
                 <td class="main"><?php echo tep_draw_checkbox_field('newsletter', '1') . '&nbsp;' . (tep_not_null(ENTRY_NEWSLETTER_TEXT) ? '<span class="inputRequirement">' . ENTRY_NEWSLETTER_TEXT . '</span>': ''); ?></td>
+              </tr>
+              <tr>
+                <td class="main"><?php echo ENTRY_NEWSLETTER_TYPE; ?></td>
+                <td class="main"><?php echo tep_draw_radio_field('EMAILTYPE', 'html', true) . '&nbsp;&nbsp;' . MAILCHIMP_HTML . '&nbsp;&nbsp;' . tep_draw_radio_field('EMAILTYPE', 'text', false) . '&nbsp;&nbsp;' . MAILCHIMP_TEXT; ?></td>
               </tr>
             </table></td>
           </tr>
@@ -274,7 +279,8 @@
         <td>
           <table border="0" width="100%" cellspacing="1" cellpadding="2">
             <tr>
-              <td id="MATtd" class="messageStackAlert" align="center"><?php echo tep_draw_checkbox_field('MAT','true', false, 'id="MAT" onClick="javascript:switchMAT()"'); ?><?php echo TERMS_PART_1 . '<a href="' . tep_href_link(FILENAME_CONDITIONS) . '">' . TERMS_PART_2 . '</a>';?>
+              <td id="MATtd" class="messageStackAlert" align="center"><?php echo tep_draw_checkbox_field('MAT','true', false, 'id="MAT" onClick="javascript:switchMAT()"'); ?><?php echo TERMS_PART_1; ?> 
+              <a id="conditions" href="<?php echo $HTTP_SERVER . DIR_WS_CATALOG . 'conditions.php?info_id=11&amp;languages_id=' . (isset($languages_id) ? $languages_id : '1'); ?>" title="<?php echo TERMS_PART_2; ?>"><?php echo TERMS_PART_2; ?></a>
               </td>
             </tr>
           </table>

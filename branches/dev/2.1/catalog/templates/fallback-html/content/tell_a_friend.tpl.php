@@ -1,4 +1,15 @@
-    <?php
+<?php
+/*
+$Id: tell_a_friend.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
       // Modify form processing depending on whether product or article
       if ($valid_product) {
         echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&products_id=' . $_GET['products_id']));

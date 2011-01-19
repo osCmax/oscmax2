@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 //begin{htmlparams}
   echo HTML_PARAMS;
   // BOF Separate Pricing Per Customer
@@ -112,7 +123,7 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
        
 //begin{mainlogo}
   // show logo      
-  echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . 'store_logo.gif', STORE_NAME) . '</a>'; 
+  echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . STORE_LOGO, STORE_NAME) . '</a>'; 
 //end{mainlogo}
         
 //begin{myaccounticon}
@@ -132,10 +143,15 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 //end{wishlisticon}
 
 //begin{navicongroup}
-  echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'account.png', HEADER_TITLE_MY_ACCOUNT) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_ICONS . 'contents.png', HEADER_TITLE_CART_CONTENTS) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'checkout.png', HEADER_TITLE_CHECKOUT) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'wishlist.png', HEADER_TITLE_WISHLIST) . '</a>';
+  if ((tep_session_is_registered('customer_id')) && (!tep_session_is_registered('noaccount'))) { ?>
+      <a href="<?php echo tep_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><?php echo tep_image_button('log_off.png', HEADER_TITLE_LOGOFF);?></a>
+    <?php }
+    echo '<a href="' . tep_href_link(FILENAME_CONTACT_US) . '">' . tep_image_button('contact.png', HEADER_TITLE_CART_CONTENTS) . '</a> <a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image_button('account.png', HEADER_TITLE_MY_ACCOUNT) . '</a> <a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">'; ?><?php if (BASKET_CART =='cart') { echo tep_image_button('cart_contents.png', HEADER_TITLE_CART_CONTENTS); } else {  echo tep_image_button('contents.png', HEADER_TITLE_CART_CONTENTS); } ?> <?php echo '</a> <a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . tep_image_button('wishlist.png', HEADER_TITLE_WISHLIST) . '</a>';
 //end{navicongroup}        
 
-
+//begin{pixelseparator}
+ echo tep_draw_separator('pixel_trans.gif', '1', '24');
+//end{pixelseparator}
 
 
 //begin{breadcrumbs}
@@ -443,4 +459,21 @@ include(DIR_WS_INCLUDES . 'javascript/sbcustom.php');
 </script>
 <?php   
 //end{jquery}
+//begin{utf8support}
+
+  if (strtolower(CHARSET) == 'utf-8') {
+  
+  // Store captured output buffer as variable
+    $buffer = ob_get_contents();
+  
+  // Clean up some RAM
+    ob_end_clean();
+    
+   // Encode buffer to unicode characters
+    $buffer = utf8_encode($buffer);
+
+   // Out put the buffer
+    echo $buffer;
+  }
+//end{utf8support}
 ?>

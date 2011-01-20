@@ -316,7 +316,11 @@ $Id$
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                 <td align="left" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST_HELP) . '">' . tep_image_button('button_wishlist_help.gif', IMAGE_BUTTON_WISHLIST_HELP) . '</a>'; ?></td>
+                <?php if ((tep_session_is_registered('customer_id')) && (!tep_session_is_registered('noaccount'))) { ?>
+                <td align="right" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>'; ?></td>
+                <?php } else { ?>
                 <td align="right" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>'; ?></td>
+                <?php } ?>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
             </table></td>

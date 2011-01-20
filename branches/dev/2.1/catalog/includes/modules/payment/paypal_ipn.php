@@ -446,7 +446,7 @@ $Id$
         $parameters['redirect_cmd'] = '_xclick';
         $parameters['item_name'] = STORE_NAME;
 		///CCGV extras by Alexander Dimelow - better to calculate separate otherwise the shipping Free vaucher/code never will work
-		 $shipping = number_format($order_total['ot_shipping'] * $currencies->get_value($my_currency), $currencies->get_decimal_places($my_currency));
+		 $shipping['cost'] = number_format($order_total['ot_shipping'] * $currencies->get_value($my_currency), $currencies->get_decimal_places($my_currency));
         // BOF shipping & handling fix by AlexStudio
         if(MOVE_TAX_TO_TOTAL_AMOUNT == 'True') {
 			///CCGV extras by Alexander Dimelow

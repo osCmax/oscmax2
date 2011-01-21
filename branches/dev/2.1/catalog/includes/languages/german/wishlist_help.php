@@ -50,4 +50,6 @@ Sorry. Currently ' . BOX_HEADING_CUSTOMER_WISHLIST . ' is only accessible when y
 <!-- EoF Modification by: Talon177 & Rob Woodgate-->
 <br>
 <br>');
+define('NAVBAR_TITLE_1','Wishlist F.A.Q.');
+
 ?>

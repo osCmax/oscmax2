@@ -12,7 +12,7 @@ $Id$
 
 define('MODULE_SHIPPING_TABLE_TEXT_TITLE', 'Tabellarische Versandkosten');
 define('MODULE_SHIPPING_TABLE_TEXT_DESCRIPTION', 'Tabellarische Versandkosten');
-define('MODULE_SHIPPING_TABLE_TEXT_WAY', '');
+define('MODULE_SHIPPING_TABLE_TEXT_WAY','Best Way');
 define('MODULE_SHIPPING_TABLE_TEXT_WEIGHT', 'Gewicht');
 define('MODULE_SHIPPING_TABLE_TEXT_AMOUNT', 'Menge');
 ?>

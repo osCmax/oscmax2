@@ -25,4 +25,10 @@ define('OUT_OF_STOCK_CANT_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOC
 define('OUT_OF_STOCK_CAN_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' markierten Produkte, sind leider nicht in der von Ihnen gew&uuml;nschten Menge lagernd.<br>Sie k&ouml;nnen die Bestellung dennoch ausf&uuml;hren, es wird jedoch zu einer Wartezeit kommen.');
 define('TEXT_ALTERNATIVE_CHECKOUT_METHODS', '- ODER -');
 define('CLEAR_CART', 'Sind Sie sicher, daß Sie Ihren gesamten Warenkorb leeren möchten?');
+define('NAVBAR_TITLE_BASKET','Inhalt des Warenkorbs');
+
+define('HEADING_TITLE_BASKET','Inhalt des Warenkorbs');
+
+define('TEXT_CART_EMPTY_BASKET','Ihr Warenkorb ist leer!');
+
 ?>

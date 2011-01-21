@@ -13,7 +13,7 @@ $Id$
 define('NAVBAR_TITLE', 'My Wishlist F.A.Q.');
 define('HEADING_TITLE', 'My Wishlist F.A.Q.');
 
-define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');
+define('TEXT_CLOSE_WINDOW','<u>Fermer la fenêtre</u> [x]');
 
 define('TEXT_INFORMATION', '<b>What is ' . BOX_HEADING_CUSTOMER_WISHLIST . '?</b><br>' .
 // BoF Modification by: Rob Woodgate 
@@ -52,4 +52,6 @@ Sorry. Currently ' . BOX_HEADING_CUSTOMER_WISHLIST . ' is only accessible when y
 <!-- EoF Modification by: Talon177 & Rob Woodgate-->
 <br>
 <br>');
+define('NAVBAR_TITLE_1','Wishlist F.A.Q.');
+
 ?>

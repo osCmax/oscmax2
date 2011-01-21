@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-  define('TEXT_BUY', 'Buy 1 \'');
-  define('TEXT_NOW', '\' now');
+  define('TEXT_BUY','1 x \'');
+  define('TEXT_NOW','\' Jetzt');
 
 ?>

@@ -10,18 +10,18 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('GOOGLE_SITEMAPS_PRODUCT_SUCCESS', 'Generated Google Product Sitemap Successfully');
-define('GOOGLE_SITEMAPS_PRODUCT_ERROR', 'ERROR: Google Product Sitemap Generation FAILED!');
-define('GOOGLE_SITEMAPS_CATEGORY_SUCCESS', 'Generated Google Category Sitemap Successfully');
-define('GOOGLE_SITEMAPS_CATEGORY_ERROR', 'ERROR: Google Category Sitemap Generation FAILED!');
-define('GOOGLE_SITEMAPS_INDEX_SUCCESS', 'Generated Google Sitemap Index Successfully');
-define('GOOGLE_SITEMAPS_INDEX_ERROR', 'ERROR: Google Sitemap Index Generation FAILED!');
-define('GOOGLE_SITEMAPS_CONGRATULATION', 'CONGRATULATIONS! All files generated successfully.');
-define('GOOGLE_SITEMAPS_ALREADY_SUBMITTED', 'If you have not already submitted the sitemap index to Google click the link below.');
-define('GOOGLE_SITEMAPS_HIGHLY_RECCOMMEND', 'Before you do I HIGHLY recommend that you view the XML files to make sure the data is correct.');
-define('GOOGLE_SITEMAPS_CONVENIENCE', 'For your convenience here is the CRON command for your site:');
-define('GOOGLE_SITEMAPS_HERE_INDEX', 'Here is your sitemap index: ');
-define('GOOGLE_SITEMAPS_HERE_PRODUCT', 'Here is your product sitemap: ');
-define('GOOGLE_SITEMAPS_HERE_CATEGORY', 'Here is your category sitemap: ');
+define('GOOGLE_SITEMAPS_PRODUCT_SUCCESS','De creación del sitio del producto Google con éxito');
+define('GOOGLE_SITEMAPS_PRODUCT_ERROR','ERROR: Generación Google Sitemap PRODUCTO NO!');
+define('GOOGLE_SITEMAPS_CATEGORY_SUCCESS','De creación del sitio Categoría Google con éxito');
+define('GOOGLE_SITEMAPS_CATEGORY_ERROR','ERROR: Generación Google Sitemap Categoría ERROR!');
+define('GOOGLE_SITEMAPS_INDEX_SUCCESS','Índice de creación del sitio Google con éxito');
+define('GOOGLE_SITEMAPS_INDEX_ERROR','ERROR: Índice de Generación Google Sitemap ERROR!');
+define('GOOGLE_SITEMAPS_CONGRATULATION','FELICIDADES! Todos los archivos generados con éxito.');
+define('GOOGLE_SITEMAPS_ALREADY_SUBMITTED','Si aún no lo ha presentado el índice del sitio de Google, haga clic en el enlace de abajo.');
+define('GOOGLE_SITEMAPS_HIGHLY_RECCOMMEND','Antes de hacerlo le recomiendo que vea los archivos XML para asegurarse de que los datos son correctos.');
+define('GOOGLE_SITEMAPS_CONVENIENCE','Para su comodidad, aquí está el comando cron para su sitio:');
+define('GOOGLE_SITEMAPS_HERE_INDEX','Aquí está el índice del sitio:');
+define('GOOGLE_SITEMAPS_HERE_PRODUCT','Aquí está su mapa del producto:');
+define('GOOGLE_SITEMAPS_HERE_CATEGORY','Aquí está su mapa categoría:');
 
 ?>

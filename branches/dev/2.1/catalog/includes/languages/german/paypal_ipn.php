@@ -21,7 +21,7 @@ $Id$
   // Maximum of 60 characters!  
   define('CONFIRMATION_BUTTON_TEXT', 'Complete your Order Confirmation');
   
-define('EMAIL_PAYPAL_PENDING_NOTICE', 'Your payment is currently pending. We will send you a copy of your order once the payment has cleared.');
+define('EMAIL_PAYPAL_PENDING_NOTICE','Ihre Zahlung ist derzeit anhängig. Wir senden Ihnen eine Kopie Ihrer Bestellung, sobald der Zahlungseingang versendet.');
   
 define('EMAIL_TEXT_SUBJECT', 'Bestellung');
 define('EMAIL_TEXT_ORDER_NUMBER', 'Bestellnummer:');

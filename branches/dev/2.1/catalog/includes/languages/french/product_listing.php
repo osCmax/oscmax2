@@ -11,8 +11,8 @@ $Id$
 */
 
 // BOF qpbpp
-define('TEXT_PRICE_BREAKS', 'From');
-define('TEXT_ON_SALE', 'On sale');
+define('TEXT_PRICE_BREAKS','De');
+define('TEXT_ON_SALE','Disponibles à la vente');
 // EOF qpbpp
 
 ?>

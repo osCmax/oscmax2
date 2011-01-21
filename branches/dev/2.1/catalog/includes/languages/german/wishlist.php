@@ -9,20 +9,10 @@ $Id$
 
   Released under the GNU General Public License
 */
-define('NAVBAR_TITLE_WISHLIST', 'My Wish List');
-define('NAVBAR_TITLE_1', 'Wish List');
+define('NAVBAR_TITLE_WISHLIST','Meine Wunschliste');
+define('NAVBAR_TITLE_1','Wunschzettel');
 define('HEADING_TITLE', 'Meine Wunschliste enth&auml;lt:');
 define('HEADING_TITLE2', '\'s Wunschliste enth&auml;lt:');
-define('BOX_TEXT_REMOVE', 'Remove');
-define('BOX_TEXT_PRICE', 'Preis:');
-define('BOX_TEXT_PRODUCT', 'Produktbezeichnung');
-define('BOX_TEXT_IMAGE', 'Bold');
-define('BOX_TEXT_SELECT', 'Ausw&auml;hlen');
-
-define('BOX_TEXT_VIEW', 'Anzeigen');
-define('BOX_TEXT_HELP', 'Hilfe');
-define('BOX_WISHLIST_EMPTY', 'Keine Produkte');
-define('BOX_TEXT_NO_ITEMS', 'Keine Produkte in Ihrer Wunschliste');
 define('TEXT_NAME', 'Name: ');
 define('TEXT_EMAIL', 'E-Mail: ');
 define('TEXT_YOUR_NAME', 'Ihr Name: ');

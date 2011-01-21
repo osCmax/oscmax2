@@ -19,9 +19,9 @@ $Id$
 
   // Sets the text for the "continue" button on the PayPal Payment Complete Page
   // Maximum of 60 characters!  
-  define('CONFIRMATION_BUTTON_TEXT', 'Complete your Order Confirmation');
+  define('CONFIRMATION_BUTTON_TEXT','Complete su Confirmación del Pedido');
   
-  define('EMAIL_PAYPAL_PENDING_NOTICE', 'Your payment is currently pending. We will send you a copy of your order once the payment has cleared.');
+  define('EMAIL_PAYPAL_PENDING_NOTICE','Su pago está pendiente. Nosotros le enviaremos una copia de su solicitud una vez que el pago haya sido aprobado.');
   
   define('EMAIL_TEXT_SUBJECT', 'Procesar Pedido');
   define('EMAIL_TEXT_ORDER_NUMBER', 'Número de Pedido:');

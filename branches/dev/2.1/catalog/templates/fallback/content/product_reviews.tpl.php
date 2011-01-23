@@ -21,10 +21,24 @@ $Id$
             </tr>
           </table>
         </td>
-      </tr>
-      
+      </tr>      
 <?php
-      $reviews_query_raw = "select r.reviews_id, left(rd.reviews_text, 100) as reviews_text, r.reviews_rating, r.date_added, r.customers_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd where r.products_id = '" . (int)$product_info['products_id'] . "' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' order by r.reviews_id desc";
+
+// Adds message after review submission 
+    $message = (isset($_GET['message']) ? $_GET['message'] : '');
+	if ($message == 'display') {
+?>
+     <tr>
+       <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+     </tr>
+     <tr>
+       <td class="messageStackSuccess"><?php echo tep_image(DIR_WS_ICONS . 'success.png', ICON_SUCCESS) . ' ' . TEXT_ARTICLE_REVIEW_SUBMITTED; ?></td>
+     </tr>
+
+<?php
+	}
+
+      $reviews_query_raw = "select r.reviews_id, left(rd.reviews_text, 100) as reviews_text, r.reviews_rating, r.date_added, r.customers_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd where r.products_id = '" . (int)$product_info['products_id'] . "' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and r.approved ='1' order by r.reviews_id desc";
       $reviews_split = new splitPageResults($reviews_query_raw, MAX_DISPLAY_NEW_REVIEWS);
 
   if ($reviews_split->number_of_rows > 0) {
@@ -103,13 +117,13 @@ $Id$
 
       <tr>
         <td colspan="3" class="productinfo_buttons">
-          <table border="0" width="100%" cellspacing="1" cellpadding="2">
+          <table border="0" width="100%" cellspacing="0" cellpadding="2">
             <tr>
               <td>
                 <table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                    <td class="main" align="left"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params()) . '">' . tep_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>'; ?></td>
+                    <td class="main" align="left"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('message'))) . '">' . tep_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>'; ?></td>
                 	<!-- Wish List 3.5 Start -->
                 	<td align="center"><?php echo tep_image_submit('button_wishlist.gif', 'Add to Wishlist', 'name="wishlist" value="wishlist"'); ?></td>
  	                <!-- Wish List 3.5 End   -->

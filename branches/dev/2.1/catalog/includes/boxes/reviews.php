@@ -12,7 +12,7 @@ $Id$
 
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 
-  if (isset($_GET['products_id'])) {
+  if ( (isset($_GET['products_id'])) && (PRODUCT_REVIEWS_ENABLE == 'True') ) {
   	
 ?>
 <!-- reviews //-->
@@ -41,7 +41,7 @@ $Id$
      $customer_group_id = '0';
    }
 
-  $random_select = "select r.reviews_id, r.reviews_rating, p.products_id, p.products_image, pd.products_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.products_id = r.products_id and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'";
+  $random_select = "select r.reviews_id, r.reviews_rating, p.products_id, p.products_image, pd.products_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_status = '1' and p.products_id = r.products_id and r.approved = '1' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'";
   if (isset($_GET['products_id'])) {
     $random_select .= " and p.products_id = '" . (int)$_GET['products_id'] . "'";
   }

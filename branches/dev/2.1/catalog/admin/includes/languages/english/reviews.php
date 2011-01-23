@@ -15,6 +15,7 @@ define('HEADING_TITLE', 'Reviews');
 define('TABLE_HEADING_PRODUCTS', 'Products');
 define('TABLE_HEADING_RATING', 'Rating');
 define('TABLE_HEADING_DATE_ADDED', 'Date Added');
+define('TABLE_HEADING_STATUS', 'Approved');
 define('TABLE_HEADING_ACTION', 'Action');
 
 define('ENTRY_PRODUCT', 'Product:');
@@ -42,5 +43,13 @@ define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Delete Review');
 
 define('HEADING_NO_REVIEWS', '<b>No reveiws have been written</b>');
 define('TEXT_NO_REVIEWS', 'There are currently no reviews written about the products in your store.  Once a customer writes one you will see it here.');
+
+define('TEXT_CUSTOMER_RATING', 'Customer Rating:');
+define('TEXT_APPROVED', 'Approved');
+define('TEXT_APPROVE', 'Approve');
+define('TEXT_DISAPPROVE', 'Disapprove');
+define('TEXT_YES', 'Yes');
+define('TEXT_NO', 'No');
+
 
 ?>

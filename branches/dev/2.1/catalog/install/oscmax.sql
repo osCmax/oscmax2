@@ -1124,6 +1124,7 @@ CREATE TABLE reviews (
   customers_id int,
   customers_name varchar(64) NOT NULL,
   reviews_rating int(1),
+  approved TINYINT(3) UNSIGNED DEFAULT '0',
   date_added datetime,
   last_modified datetime,
   reviews_read int(5) NOT NULL default '0',
@@ -2221,7 +2222,7 @@ INSERT INTO configuration VALUES (2661, 'Scroller Height', 'SCROLLER_HEIGHT', '1
 INSERT INTO configuration VALUES (2662, 'Display Short Description','PRODUCT_SHORT_DESCRIPTION','false','Do you want to display the short description in the list results?','8','6',NULL,now(),NULL,'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (2663, 'Main Page Text Information Manager Info Number', 'DEFINE_MAINPAGE_TEXT_INFO_NO', '13', 'What number is the Main Page in the Information Manager? (Default: 13)', 201, 30, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2664, 'Use Basket or Cart','BASKET_CART','cart','What do you want to call the thing your customers put their products in?',201,30,NULL,now(),NULL,'tep_cfg_select_option(array(''cart'', ''basket''),');
-
+INSERT INTO configuration VALUES (2665, 'Enable customer product reviews?', 'PRODUCT_REVIEWS_ENABLE', 'True', 'Do you want to allow customers to write product reviews?', 8, 22, NULL,now(),NULL,'tep_cfg_select_option(array(''True'', ''False''),');
 
 #Open Feature Sets Start
 INSERT INTO configuration VALUES (3000, '<font color=blue>Show Featured Sets on Store Front</font>', 'SHOW_FEATURED_SETS_ON_STORE_FRONT', 'true', 'Would you like to see the Featured Sets displayed on the store front page?', 99, 1, '2005-10-19 02:56:40', '2004-01-01 03:30:00', NULL, 'tep_cfg_select_option(array(''true'', ''false''),');

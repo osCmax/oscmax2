@@ -40,12 +40,15 @@ define('TEXT_OF_5_STARS', '%s of 5 Stars!');
 define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excellent</b></font></small>');
 define('TEXT_BAD', '<small><font color="#ff0000"><b>Poor</b></font></small>');
 define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Delete Review');
-/* <Mav was here!> */
+
 define('TEXT_APPROVED', 'Approved') ;
 define('TEXT_APPROVE', 'Approve') ;
 define('TEXT_DISAPPROVE', 'Disapprove') ;
 define('TEXT_YES', 'Yes') ;
 define('TEXT_NO', 'No') ;
-/* </Mav was here!> */
+
+define('TEXT_CUSTOMER_RATING','Kundenbewertung:');
+
+define('TEXT_NO_ARTICLE_REVIEWS','Derzeit gibt es keine Überprüfung aller Ihrer Artikel. <br><br> Wenn ein Kunde eine Bewertungen sehen Sie es gefunden auf der linken Seite. Sie müssen dann zu einer billigen oder ablehnen, bevor sie den Artikel in Ihrem Shop angezeigt wird.');
 
 ?>

@@ -24,8 +24,8 @@ define('TABLE_HEADING_CATEGORY_ID', 'Cat ID');
 define('TEXT_BANNERS_LINKED_CATEGORY','Category ID');
 define('TEXT_BANNERS_LINKED_CATEGORY_NOTE','If you want to link the Banner to a specific CATEGORY enter its CATEGORY ID here. If you want to link to the default page enter "0"');
 define('TEXT_AFFILIATE_VALIDCATS', 'Click Here:');
-define('TEXT_AFFILIATE_CATEGORY_BANNER_VIEW', 'to view available CATEGORIES.');
-define('TEXT_AFFILIATE_CATEGORY_BANNER_HELP', 'Select the category number from the popup window and enter the number in the Category ID field.');
+define('TEXT_AFFILIATE_CATEGORY_BANNER_VIEW','para ver las categorías disponibles.');
+define('TEXT_AFFILIATE_CATEGORY_BANNER_HELP','Seleccione el número de categoría de la ventana emergente e introduzca el número en el campo Id. de categoría.');
 
 define('TEXT_BANNERS_TITLE', 'Titulo:');
 define('TEXT_BANNERS_GROUP', 'Grupo:');

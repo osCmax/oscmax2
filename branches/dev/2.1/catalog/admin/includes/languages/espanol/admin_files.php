@@ -13,7 +13,7 @@ $Id$
 define('HEADING_TITLE', 'Menu de Administyración "Boxes"');
 
 define('TABLE_HEADING_ACTION', 'Actión');
-define('TABLE_HEADING_BOXES', 'Boxes');
+define('TABLE_HEADING_BOXES','Cajas');
 define('TABLE_HEADING_FILENAME', 'Nombre File');
 define('TABLE_HEADING_GROUPS', 'Grupos');
 define('TABLE_HEADING_STATUS', 'Estado');
@@ -22,7 +22,7 @@ define('TEXT_COUNT_BOXES', 'Boxes: ');
 define('TEXT_COUNT_FILES', 'File(s): ');
 
 //categories access
-define('TEXT_INFO_HEADING_DEFAULT_BOXES', 'Boxes: ');
+define('TEXT_INFO_HEADING_DEFAULT_BOXES','Cajas:');
 
 define('TEXT_INFO_DEFAULT_BOXES_INTRO', 'Simplemente haga click sobre el boton verde para instalar el box, rojo para deinstalar.<br><br><b>NOTA:</b> Si deinstallas el box, los files incluidos seran borrados!');
 define('TEXT_INFO_DEFAULT_BOXES_INSTALLED', ' instalado');
@@ -34,7 +34,7 @@ define('STATUS_BOX_REMOVE', 'Remover');
 define('STATUS_BOX_INSTALL', 'Instalar');
 
 //files access
-define('TEXT_INFO_HEADING_DEFAULT_FILE', 'File: ');
+define('TEXT_INFO_HEADING_DEFAULT_FILE','Archivo:');
 define('TEXT_INFO_HEADING_DELETE_FILE', 'Confirmacion Remover');
 define('TEXT_INFO_HEADING_NEW_FILE', 'Insertar Files');
 

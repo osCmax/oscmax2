@@ -12,9 +12,6 @@ $Id$
 
 define('HEADING_TITLE', 'Provisionsabrechnung');
 
-define('TEXT_AFFILIATE', 'Partner');
-define('TEXT_AFFILIATE_PAYMENT', 'Provisionszahlung');
-define('TEXT_AFFILIATE_BILLED', 'Abrechnungsdatum');
 define('TABLE_HEADING_ORDER_ID', 'Bestell-Nr.');
 define('TABLE_HEADING_ORDER_DATE', 'Datum');
 define('TABLE_HEADING_ORDER_VALUE', 'Netto Bestellwert');
@@ -25,4 +22,6 @@ define('TEXT_SUB_TOTAL', 'Zwischensumme');
 define('TEXT_TAX', 'MwSt.');
 define('TEXT_TOTAL', 'Summe');
 define('ENTRY_PERCENT', '%');
+define('TABLE_HEADING_TOTAL','Insgesamt');
+
 ?>

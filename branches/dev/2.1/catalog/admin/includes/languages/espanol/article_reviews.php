@@ -40,12 +40,15 @@ define('TEXT_OF_5_STARS', '%s de 5 estrellas!');
 define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excelente</b></font></small>');
 define('TEXT_BAD', '<small><font color="#ff0000"><b>Pobre</b></font></small>');
 define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Borrar comentario');
-/* <Mav was here!> */
+
 define('TEXT_APPROVED', 'Aprobado') ;
 define('TEXT_APPROVE', 'Aprobar') ;
 define('TEXT_DISAPPROVE', 'Desaprobar') ;
 define('TEXT_YES', 'S&iacute;') ;
 define('TEXT_NO', 'No') ;
-/* </Mav was here!> */
+
+define('TEXT_CUSTOMER_RATING','Valoración del cliente:');
+
+define('TEXT_NO_ARTICLE_REVIEWS','Actualmente no hay revisión de cualquiera de sus artículos. <br><br> Cuando un cliente comentarios que usted verá que aparece a la izquierda. A continuación, tendrá a un aprobar o rechazar el artículo antes de que se muestra en su tienda.');
 
 ?>

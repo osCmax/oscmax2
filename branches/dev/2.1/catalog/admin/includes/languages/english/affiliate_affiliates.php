@@ -52,4 +52,6 @@ define('CATEGORY_COMMISSION','Individual Commission');
 define('CATEGORY_PAYMENT_DETAILS','You get your money by:');
 
 define('PLEASE_SELECT', 'Select');
+define('TYPE_BELOW','Type below');
+
 ?>

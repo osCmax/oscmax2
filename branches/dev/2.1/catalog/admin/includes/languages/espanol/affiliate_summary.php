@@ -24,7 +24,6 @@ define('TEXT_PAYPERSALE_RATE', 'Default Pay Per Sale Rate: ');
 define('TEXT_CLICKTHROUGH_RATE', 'Default Clickthrough Rate: ');
 define('TEXT_COMMISSION', 'Total Affiliate Commission : ');
 define('TEXT_SUMMARY_HELP', '[?]');
-define('TEXT_SUMMARY', 'Click on [?] to see a description of each category.');
 define('HEADING_SUMMARY_HELP', 'Affiliate Help');
 define('TEXT_IMPRESSIONS_HELP', '<i>Total Banner Impressions</i> displays the total number of times a banner or link has been displayed in the given time period.');
 define('TEXT_VISITS_HELP', '<i>Total Affiliate Visits</i> represents the total number of click-throughs by visitors from your website.');
@@ -41,4 +40,8 @@ define('TEXT_CLOSE_WINDOW', 'Close Window [x]');
 define('IMAGE_BANNERS','Banners');
 define('IMAGE_CLICKTHROUGHS','Clickthrough Report');
 define('IMAGE_SALES','Sales Report');
+define('TEXT_SUMMARY_1','Haga clic en');
+
+define('TEXT_SUMMARY_2','para ver una descripción de cada categoría.');
+
 ?>

@@ -24,7 +24,6 @@ define('TEXT_PAYPERSALE_RATE', 'Taux de Commissionnement par vente effectuée: ')
 define('TEXT_CLICKTHROUGH_RATE', 'Taux de clic par défaut: ');
 define('TEXT_COMMISSION', 'Commission totale affiliés: ');
 define('TEXT_SUMMARY_HELP', '[?]');
-define('TEXT_SUMMARY', 'Cliquez sur [?] pour avoir une aide pour chaque catégorie.');
 define('HEADING_SUMMARY_HELP', 'Aide pour les affiliés');
 define('TEXT_IMPRESSIONS_HELP', '<i>Impressions Totals de Bannières</i> affiche le nombre total de fois où une bannière (ou un lien) a été affiché dans la période donnée.');
 define('TEXT_VISITS_HELP', '<i>Visites Totals d\'affiliés</i> représente le nombre total de clics par visiteurs à partir de votre site.');
@@ -41,4 +40,8 @@ define('TEXT_CLOSE_WINDOW', 'Fermer cette fenêtre [x]');
 define('IMAGE_BANNERS','Bannières');
 define('IMAGE_CLICKTHROUGHS','Rapport de "Taux de clics"');
 define('IMAGE_SALES','Rapport des ventes.');
+define('TEXT_SUMMARY_1','Cliquez sur');
+
+define('TEXT_SUMMARY_2','pour voir une description de chaque catégorie.');
+
 ?>

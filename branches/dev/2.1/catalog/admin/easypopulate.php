@@ -297,8 +297,8 @@ $custom_fields = array();
 // may need to incorporate custom code to correctly import your data.
 //
 
-$custom_fields[TABLE_PRODUCTS] = array(); // this line is used if you have no custom fields to import/export
-$custom_fields[TABLE_PRODUCTS_DESCRIPTION] = array(); // this line is used if you have no custom fields to import/export
+$custom_fields[TABLE_PRODUCTS] = array('products_msrp' => 'msrp'); // this line is used if you have no custom fields to import/export
+$custom_fields[TABLE_PRODUCTS_DESCRIPTION] = array('tab1' => 'tab1', 'tab1' => 'tab1', 'tab2' => 'tab2', 'tab3' => 'tab3', 'tab4' => 'tab4', 'tab5' => 'tab5', 'tab6' => 'tab6'); // this line is used if you have no custom fields to import/export
 
 //
 // FINAL NOTE: this currently only works with the "products" & "products_description" table.

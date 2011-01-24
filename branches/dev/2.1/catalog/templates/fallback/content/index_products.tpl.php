@@ -21,59 +21,64 @@ $Id$
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
       </tr>
+
+      <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && ( (tep_not_null($category['categories_heading_title'])) || (isset($_GET['manufacturers_id'])) || (isset($_GET['new_products'])) || (isset($_GET['show_specials'])) ) ) { ?>
       <tr>
         <td class="productinfo_header">
           <table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
               <td class="pageHeading">
-<?php
-/* bof catdesc for bts1a, replacing "echo HEADING_TITLE;" by "categories_heading_title" */
-             if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_heading_title'])) ) {
-                 echo $category['categories_heading_title'];
-               } elseif (isset($_GET['new_products']) && tep_not_null($_GET['new_products'])) { 
-			     echo TEXT_LATEST_PRODUCTS;
-			   } elseif (isset($_GET['show_specials']) && tep_not_null($_GET['show_specials'])) { 
-			     echo TEXT_SPECIALS;
-			   }
-/* eof catdesc for bts1a */ ?>
-              </td>
+              
 <?php	
 // Get the right image for the top-right
     $image = DIR_WS_IMAGES . 'table_background_list.gif';
 	$image_folder = '';
     if (isset($_GET['manufacturers_id'])) {
-      $image = tep_db_query("select manufacturers_image from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
-      $image = tep_db_fetch_array($image);
-      $image = $image['manufacturers_image'];
+      $manufacturer_query = tep_db_query("select manufacturers_image, manufacturers_name from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
+	  while ($manufacturer = tep_db_fetch_array($manufacturer_query)) {
+        $image = $manufacturer['manufacturers_image'];
+	    $name = $manufacturer['manufacturers_name'];
+	  }
 	  $image_folder = MANUFACTURERS_IMAGES_DIR;
     } elseif ($current_category_id) {
-//      $image = tep_db_query("select categories_image from " . TABLE_CATEGORIES . " where categories_id = '" . (int)$current_category_id . "'");
-// BOF SPPC Hide products and categories from groups
       $image = tep_db_query("select categories_image from " . TABLE_CATEGORIES . " where categories_id = '" . (int)$current_category_id . "' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
-// EOF SPPC Hide products and categories from groups
       $image = tep_db_fetch_array($image);
       $image = $image['categories_image'];
 	  $image_folder = CATEGORY_IMAGES_DIR;
     }
-?>
-   <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_heading_title'])) ) { ?>
-              <td align="right"><?php if ( (file_exists(DIR_WS_IMAGES . $image_folder . $image)) && ($image !='') ) { echo tep_image(DIR_WS_IMAGES . $image_folder . $image, $category['categories_heading_title'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); } ?></td>
-            </tr>
-        <?php } else { ?>
-              <td align="right"><?php if ( (file_exists(DIR_WS_IMAGES . $image_folder . $image)) && ($image !='') ) { echo tep_image(DIR_WS_IMAGES . $image_folder . $image, HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); } ?></td>
-            </tr>
-        <?php } ?>
-	  <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_description'])) && ($category['categories_description'] != '<br />') ) { ?>
-	        <tr>
-              <td align="left" colspan="2" class="category_desc"><?php echo $category['categories_description']; ?></td>
-	        </tr>
-	  <?php } ?>
+	
+/* bof catdesc for bts1a, replacing "echo HEADING_TITLE;" by "categories_heading_title" */
+             if (tep_not_null($category['categories_heading_title'])) {
+                 echo $category['categories_heading_title'];
+               } elseif (isset($_GET['new_products']) && tep_not_null($_GET['new_products'])) { 
+			     echo TEXT_LATEST_PRODUCTS;
+			   } elseif (isset($_GET['show_specials']) && tep_not_null($_GET['show_specials'])) { 
+			     echo TEXT_SPECIALS;
+			   } elseif (isset($_GET['manufacturers_id'])) { 
+			     echo $name;
+			   }
+/* eof catdesc for bts1a */ ?>
+
+   <?php if (tep_not_null($category['categories_heading_title'])) {
+           if ( (file_exists(DIR_WS_IMAGES . $image_folder . $image)) && ($image !='') ) {
+		     echo tep_image(DIR_WS_IMAGES . $image_folder . $image, $category['categories_heading_title'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT, 'style="float:right; margin:5px"');
+		   }
+         } else { 
+		   if ( (file_exists(DIR_WS_IMAGES . $image_folder . $image)) && ($image !='') )  { 
+		     echo tep_image(DIR_WS_IMAGES . $image_folder . $image, HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT, 'style="float:right; margin:5px;"');
+		   }
+         }
+		 if ( (tep_not_null($category['categories_description'])) && ($category['categories_description'] != '<br />') ) {
+	        echo $category['categories_description']; 
+         }
+         ?>
           </table>
         </td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+          <?php } // end if (ALLOW_CATEGORY_DESCRIPTIONS == 'true') ?>
       <tr>
         <td>
         <?php

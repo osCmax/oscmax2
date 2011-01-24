@@ -12,31 +12,42 @@ $Id$
 ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-                        <td class="pageHeading">
-             <?php
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+      
+      <?php if (ALLOW_CATEGORY_DESCRIPTIONS == 'true') { ?>
+      <tr>
+        <td class="productinfo_header">
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading">
+              <?php
 /* bof catdesc for bts1a, replacing "echo HEADING_TITLE;" by "categories_heading_title" */
-             if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_heading_title'])) ) {
+              if (tep_not_null($category['categories_heading_title'])) {
                  echo $category['categories_heading_title'];
-               }
-/* eof catdesc for bts1a */
-             ?>
-            </td>
-            <td class="pageHeading" align="right">&nbsp;</td>
-          </tr>
-	  <!-- bof catdesc for bts1a, adding "categories_description" -->
-          <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_description'])) ) { ?>
-          <tr>
-            <td align="left" colspan="2" class="category_desc"><?php echo $category['categories_description']; ?></td>
-          </tr>
-          <?php } ?>
-<!-- eof catdesc -->
-        </table></td>
+              }
+			  $image = tep_db_query("select categories_image from " . TABLE_CATEGORIES . " where categories_id = '" . (int)$current_category_id . "' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
+              $image = tep_db_fetch_array($image);
+              $image = $image['categories_image'];
+	          $image_folder = CATEGORY_IMAGES_DIR;
+			  
+			  if ( (file_exists(DIR_WS_IMAGES . $image_folder . $image)) && ($image !='') ) {
+		        echo tep_image(DIR_WS_IMAGES . $image_folder . $image, $category['categories_heading_title'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT, 'style="float:right; margin:5px;"');
+		      }
+			  
+			  if (tep_not_null($category['categories_description'])) {
+		        echo $category['categories_description'];
+              }
+			  ?>
+              </td>
+            </tr>
+          </table>
+        </td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+      <?php } // end if (ALLOW_CATEGORY_DESCRIPTIONS == 'true') ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>

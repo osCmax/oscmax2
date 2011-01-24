@@ -69,7 +69,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
     require_once (DIR_WS_CLASSES . 'order.php');
 	require (DIR_WS_FUNCTIONS . 'batch_print.php');
 	
-	$orders_query = tep_db_query("select o.orders_id, h.comments, MIN(h.date_added) from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS_HISTORY . " h where o.orders_id = '" . $oID . "' and h.orders_id = o.orders_id");
+	$orders_query = tep_db_query("select o.orders_id, h.comments, MIN(h.date_added) from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS_HISTORY . " h where o.orders_id = '" . $oID . "' and h.orders_id = o.orders_id GROUP BY h.date_added");
 	
 	$pageloop = "1";
     

@@ -10,6 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 ?>
+
+<?php // Set conditional load of showcase
+  $LoadSlideshowJS=true;
+?>
 <!-- slideshow module starts -->
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
@@ -19,4 +23,3 @@ $Id$
       </tr>
     </table>
 <!-- slideshow module ends -->
-    

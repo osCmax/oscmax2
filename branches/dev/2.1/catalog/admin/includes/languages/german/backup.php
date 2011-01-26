@@ -46,4 +46,8 @@ define('SUCCESS_LAST_RESTORE_CLEARED', 'Erfolg: Das letzte Wiederherstellungdatu
 define('SUCCESS_DATABASE_SAVED', 'Erfolg: Die Datenbank wurde gesichert.');
 define('SUCCESS_DATABASE_RESTORED', 'Erfolg: Die Datenbank wurde wiederhergestellt.');
 define('SUCCESS_BACKUP_DELETED', 'Erfolg: Die Sicherungsdatei wurde gel&ouml;scht.');
+define('HEADING_NO_BACKUP','<b>Keine Sicherung vorhanden</b>');
+
+define('TEXT_NO_BACKUP','Bitte stellen Sie sicher, dass Sie ein Backup Ihres Shops aus. Klicken Sie auf die <b>Backup-Taste,</b> um eines zu erstellen.');
+
 ?>

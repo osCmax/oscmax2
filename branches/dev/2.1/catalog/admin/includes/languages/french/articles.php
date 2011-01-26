@@ -90,4 +90,12 @@ define('ERROR_CANNOT_LINK_TO_SAME_TOPIC', 'Erreur: impossible de cr&eacute;er un
 define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Erreur: le r&eacute;pertoire image de la boutique est verrouill&eacute; en &eacute;criture: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Erreur: le r&eacute;pertoire image de la boutique est inexistant: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CANNOT_MOVE_TOPIC_TO_PARENT', 'Erreur: Une rubrique ne peut &ecirc;tre d&eacute;plac&eacute; dans une sous-rubrique.');
+define('TEXT_ARTICLES_SHOW_ON_INDEX','Voir cet article sur votre page d\'accueil?');
+
+define('DO_SHOW_ON_INDEX','Oui');
+
+define('DO_NOT_SHOW_ON_INDEX','Non');
+
+define('IMAGE_SHOW_ON_INDEX','Cet article est indiqué sur votre page d\'accueil.');
+
 ?>

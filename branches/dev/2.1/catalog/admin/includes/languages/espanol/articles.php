@@ -91,4 +91,12 @@ define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Error: El directorio de i
 define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Error: El directorio de im&aacute;genes no existe: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CANNOT_MOVE_TOPIC_TO_PARENT', 'Error: Una secci&oacute;n no puede moverse a una subsecci&oacute;n.');
 
+define('TEXT_ARTICLES_SHOW_ON_INDEX','Mostrar este artículo en su página de inicio?');
+
+define('DO_SHOW_ON_INDEX','Si');
+
+define('IMAGE_SHOW_ON_INDEX','En este artículo se muestra en su página de inicio.');
+
+define('DO_NOT_SHOW_ON_INDEX','No');
+
 ?>

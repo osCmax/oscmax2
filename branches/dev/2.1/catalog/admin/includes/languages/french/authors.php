@@ -41,4 +41,8 @@ define('TEXT_DELETE_WARNING_ARTICLES', '<b>ATTENTION:</b> Il y a  %s articles li
 define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Erreur: Repertoire verrouill&eacute; en écriture. Veuillez donner les bonnes permissions(CHMOD-777) sur: %s');
 define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Erreur: R&eacute;pertoire inexistant: %s');
 
+define('HEADING_NO_AUTHORS','Aucun des auteurs');
+
+define('TEXT_NO_AUTHORS','Vous avez actuellement aucune installation auteurs pour votre magasin. <br><br> S'il vous plaît Cliquez sur <b>Insérer</b> pour en créer un.');
+
 ?>

@@ -41,4 +41,8 @@ define('TEXT_DELETE_WARNING_ARTICLES', '<b>WARNING:</b> ¡Hay %s noticias vincula
 define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Error: No es posible escribir en este directorio. Por favor corrige los permisos de acceso de: %s');
 define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Error: El directorio no existe: %s');
 
+define('HEADING_NO_AUTHORS','No hay autores');
+
+define('TEXT_NO_AUTHORS','En estos momentos no tienen la configuración autores para su tienda. <br><br> Por favor, haga clic en <b>Insertar</b> para crear una.');
+
 ?>

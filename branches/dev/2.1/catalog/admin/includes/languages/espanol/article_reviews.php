@@ -47,7 +47,7 @@ define('TEXT_DISAPPROVE', 'Desaprobar') ;
 define('TEXT_YES', 'S&iacute;') ;
 define('TEXT_NO', 'No') ;
 
-define('TEXT_CUSTOMER_RATING','Valoración del cliente:');
+define('TEXT_CUSTOMER_RATING','Customer Rating:');
 
 define('TEXT_NO_ARTICLE_REVIEWS','Actualmente no hay revisión de cualquiera de sus artículos. <br><br> Cuando un cliente comentarios que usted verá que aparece a la izquierda. A continuación, tendrá a un aprobar o rechazar el artículo antes de que se muestra en su tienda.');
 

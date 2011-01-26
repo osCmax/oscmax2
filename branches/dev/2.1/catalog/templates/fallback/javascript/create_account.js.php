@@ -41,6 +41,12 @@ $(document).ready(function(){
 	$("#password_st").password_strength();
 	$('#enableMAT').hide();
 	
+	if($("#MAT").attr("checked")) {
+		$("#MATtd").attr("class", "messageStackSuccess");
+		$('#disableMAT').hide();
+    	$('#enableMAT').show();
+	}
+	
     $('#conditions').each(function() {
 		var $link = $(this);
 		var $dialog = $('<div><\/div>')

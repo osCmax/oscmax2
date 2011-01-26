@@ -54,8 +54,8 @@ define('PRODUCT_LISTING_BKGD_COLOR', '1,1,1');
 define('MODEL_COLUMN_SIZE', '87');
 define('PRICING_COLUMN_SIZES', '67');
 
-$vilains = array("&#224;", "&#225;",  "&#226;", "&#227;", "&#228;", "&#229;", "&#230;", "&#231;", "&#232;", "&#233;", "&#234;", "&#235;", "&#236;", "&#237;", "&#238;", "&#239;", "&#240;", "&#241;", "&#242;", "&#243;", "&#244;", "&#245;", "&#246;", "&#247;", "&#248;", "&#249;", "&#250;", "&#251;", "&#252;", "&#253;", "&#254;", "&#255;", "&#223;","&#39;", "&nbsp;", "&agrave;", "&aacute;", "&atilde;","&auml;", "&Arond;", "&egrave;", "&aelig;", "&ecirc;", "&euml;", "&igrave;", "&iacute;", "&Iacute;", "&icirc;", "&iuml;", "&ograve;", "&oacute;", "&ocirc;", "&otilde;", "&ouml;", "&oslash;", "&ugrave;", "&uacute;", "&ucirc;", "&uuml;", "&ntilde;", "&ccedil;", "&yacute;", "&lt;","&gt;", "&amp;");
-$cools = array('à','á','â','ã','ä','å','æ','ç','è','é','ê','ë','ì','í','î','ï','ð','ñ','ò','ó','ô','õ','ö','÷','ø','ù','ú','û','ü','ý','þ','ÿ','ß','\'', ' ','à','á','ã','ä','å','è','æ','ê','ë','ì','í','î','Î','ï','ò','ó','ô','õ','ö','ø','ù','ú','û','ü','ñ','ç','ý','<','>','&');
+$vilains = array("&#224;", "&#225;",  "&#226;", "&#227;", "&#228;", "&#229;", "&#230;", "&#231;", "&#232;", "&#233;", "&#234;", "&#235;", "&#236;", "&#237;", "&#238;", "&#239;", "&#240;", "&#241;", "&#242;", "&#243;", "&#244;", "&#245;", "&#246;", "&#247;", "&#248;", "&#249;", "&#250;", "&#251;", "&#252;", "&#253;", "&#254;", "&#255;", "&#223;","&#39;", "&nbsp;", "&agrave;", "&aacute;", "&atilde;","&auml;", "&Arond;", "&egrave;", "&aelig;", "&ecirc;", "&euml;", "&igrave;", "&iacute;", "&Iacute;", "&icirc;", "&iuml;", "&ograve;", "&oacute;", "&ocirc;", "&otilde;", "&ouml;", "&oslash;", "&ugrave;", "&uacute;", "&ucirc;", "&uuml;", "&ntilde;", "&ccedil;", "&yacute;", "&lt;","&gt;", "&amp;", "&eacute;");
+$cools = array('à','á','â','ã','ä','å','æ','ç','è','é','ê','ë','ì','í','î','ï','ð','ñ','ò','ó','ô','õ','ö','÷','ø','ù','ú','û','ü','ý','þ','ÿ','ß','\'', ' ','à','á','ã','ä','å','è','æ','ê','ë','ì','í','î','Î','ï','ò','ó','ô','õ','ö','ø','ù','ú','û','ü','ñ','ç','ý','<','>','&','é');
 
 $currencies = new currencies();
 //$pdf->setPreferences(array("HideToolbar" => 'false', "HideWindowUI" => 'false'));
@@ -74,7 +74,7 @@ if(stristr(STORE_LOGO, '.png') === FALSE) {
 $pdf->setStrokeColor(0,0,0);
 $pdf->setLineStyle(0.5);
 $pdf->Rectangle(390,793,175,20);
-$y = $pdf->ezText("<b>" . TEXT_ORDER_NUMBER . " </b>" . $orders['orders_prefix'] . $orders['orders_id'] ."\n\n",SUB_HEADING_FONT_SIZE, array('aleft'=>'400'));
+$y = $pdf->ezText("<b>" . str_replace($vilains , $cools , TEXT_ORDER_NUMBER) . " </b>" . $orders['orders_prefix'] . $orders['orders_id'] ."\n\n",SUB_HEADING_FONT_SIZE, array('aleft'=>'400'));
 
 
     //Add in the order totals
@@ -143,17 +143,17 @@ $pdf->addText($indent,$pos -= GENERAL_LEADING,GENERAL_FONT_SIZE,$order->billing[
   $dup_y = 620;
   $pdf->ezSetY($dup_y);
 
-  $dup_y = $pdf->ezText("<b>" . ENTRY_PAYMENT_METHOD . "</b> " . str_replace($vilains , $cools, $order->info['payment_method']),GENERAL_FONT_SIZE, array('justification'=>'right'));
+  $dup_y = $pdf->ezText("<b>" . str_replace($vilains , $cools,  ENTRY_PAYMENT_METHOD) . "</b> " . str_replace($vilains , $cools, $order->info['payment_method']),GENERAL_FONT_SIZE, array('justification'=>'right'));
 
 // order date
-  $pdf->ezText("<b>" . TEXT_ORDER_DATE . " </b>" . date(TEXT_ORDER_FORMAT, strtotime($order->info['date_purchased'])) ."\n\n",SUB_HEADING_FONT_SIZE,array('justification'=>'right'));
+  $pdf->ezText("<b>" . str_replace($vilains , $cools,  TEXT_ORDER_DATE) . " </b>" . date(TEXT_ORDER_FORMAT, strtotime($order->info['date_purchased'])) ."\n\n",SUB_HEADING_FONT_SIZE,array('justification'=>'right'));
 
 
 // divider between email and payment method 
  $pos -= SECTION_DIVIDER;
  $pdf->ezSetY($pos);
  
-//Add Shipping Address in s3 box
+// Add Shipping Address in s3 box
 $labelx = 90;
 $labely = 180;
 
@@ -192,8 +192,8 @@ $pdf->ezSetY(90);
 $pdf->ezText($orders['orders_id'], 6, array('left'=>'220'));
 
 //Add footer text
-$pdf->ezSetY(45);
-$pdf->ezText(FOOTER_TEXT,9, array('justification'=>'center'));
+$pdf->ezSetY(50);
+$pdf->ezText(str_replace($vilains, $cools, FOOTER_TEXT),9, array('justification'=>'center'));
 
 //Add some lines to make things look a bit neater!
 //Add Footer Line

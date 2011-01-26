@@ -264,9 +264,9 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 		  }
 		  // Top Rated Corner Banner
 		  if (CB_TOP_RATED == 'true') {
-		    $reviews_query = tep_db_query("select reviews_rating from " . TABLE_REVIEWS . " where products_id = '" . $listing[$x]['products_id'] . "'");
+		    $reviews_query = tep_db_query("select avg(reviews_rating) as reviews_average from " . TABLE_REVIEWS . " where approved = '1' and products_id = '" . $listing[$x]['products_id'] . "' GROUP BY products_id");
               $reviews = tep_db_fetch_array($reviews_query);
-                if ($reviews['reviews_rating'] >= CB_TOP_RATED_NO) {
+                if ($reviews['reviews_average'] >= CB_TOP_RATED_NO) {
                   $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . '/corner_banners/top_rated.png" alt="">';
                 }
 		  }

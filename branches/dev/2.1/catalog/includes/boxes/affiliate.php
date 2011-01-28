@@ -46,7 +46,7 @@ $Id$
         '<a href="' . tep_href_link(FILENAME_AFFILIATE_FAQ, '', 'SSL') . '">' . BOX_AFFILIATE_FAQ . '</a><br>' .
         '<a href="' . tep_href_link(FILENAME_AFFILIATE_LOGOUT). '">' . BOX_AFFILIATE_LOGOUT . '</a>' ; 
   } else { 
-    $boxContent = '<a href="' . tep_href_link(FILENAME_AFFILIATE_INFO). '">' . BOX_AFFILIATE_INFO . '</a><br>' . 
+    $boxContent = '<a href="' . tep_href_link(FILENAME_INFORMATION, 'info_id=' . DEFINE_AFFILIATE_INFO_INFO_NO) . '">' . BOX_AFFILIATE_INFO . '</a><br>' . 
         '<a href="' . tep_href_link(FILENAME_AFFILIATE, '', 'SSL') . '">' . BOX_AFFILIATE_LOGIN . '</a>'; 
   } 
 

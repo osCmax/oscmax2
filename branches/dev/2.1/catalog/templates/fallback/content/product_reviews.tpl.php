@@ -93,7 +93,9 @@ $Id$
           			echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
             	}
 	
-	} // end if
+	} else {
+	  echo tep_image(DIR_WS_ICONS . 'default_lg.png', TEXT_MISSING_IMAGE, PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT);
+	}
 ?>
               </td>
               <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '10'); ?></td>

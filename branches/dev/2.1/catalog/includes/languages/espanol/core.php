@@ -405,4 +405,6 @@ define('TEXT_LATEST_PRODUCTS', 'Latest Products');
 define('TEXT_SPECIALS', 'Specials');
 define('BOX_TEXT_REMOVE','Quitar');
 
+define('TEXT_MISSING_IMAGE','Lo sentimos, la imagen del producto no está disponible');
+
 ?>

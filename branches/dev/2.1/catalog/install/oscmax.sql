@@ -1791,14 +1791,15 @@ INSERT INTO configuration VALUES (52,'Customer Order History Box','MAX_DISPLAY_P
 INSERT INTO configuration VALUES (53,'Order History','MAX_DISPLAY_ORDER_HISTORY','10','Maximum number of orders to display in the order history page','3','18',NULL,now(),NULL,NULL);
 INSERT INTO configuration VALUES (54,'Product Quantities In Shopping Cart','MAX_QTY_IN_CART','99','Maximum number of product quantities that can be added to the shopping cart (0 for no limit)','3','19',NULL,now(),NULL,NULL);
 
-INSERT INTO configuration VALUES (55,'Small Image Width','SMALL_IMAGE_WIDTH','120','The pixel width of small images','4','1',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (56,'Small Image Height','SMALL_IMAGE_HEIGHT','','The pixel height of small images','4','2',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (57,'Heading Image Width','HEADING_IMAGE_WIDTH','100','The pixel width of heading images','4','3',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (58,'Heading Image Height','HEADING_IMAGE_HEIGHT','','The pixel height of heading images','4','4',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (59,'Subcategory Image Width','SUBCATEGORY_IMAGE_WIDTH','100','The pixel width of subcategory images','4','5',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (60,'Subcategory Image Height','SUBCATEGORY_IMAGE_HEIGHT','57','The pixel height of subcategory images','4','6',NULL,now(),NULL,NULL);
-INSERT INTO configuration VALUES (61,'Calculate Image Size','CONFIG_CALCULATE_IMAGE_SIZE','true','Calculate the size of images?','4','7',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (62,'Image Required','IMAGE_REQUIRED','true','Enable to display broken images. Good for development.','4','8',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (55,'Small Image Width','SMALL_IMAGE_WIDTH','120','The pixel width of small images','4','2',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (56,'Small Image Height','SMALL_IMAGE_HEIGHT','','The pixel height of small images','4','3',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (57,'Heading Image Width','HEADING_IMAGE_WIDTH','100','The pixel width of heading images','4','4',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (58,'Heading Image Height','HEADING_IMAGE_HEIGHT','','The pixel height of heading images','4','5',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (59,'Subcategory Image Width','SUBCATEGORY_IMAGE_WIDTH','100','The pixel width of subcategory images','4','6',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (60,'Subcategory Image Height','SUBCATEGORY_IMAGE_HEIGHT','57','The pixel height of subcategory images','4','7',NULL,now(),NULL,NULL);
+INSERT INTO configuration VALUES (61,'Calculate Image Size','CONFIG_CALCULATE_IMAGE_SIZE','true','Calculate the size of images?','4','8',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (62,'Category Image Required?','CATEGORY_IMAGE_REQUIRED','true','Enable to display broken category images. Good for development.','4','1',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (2103,'Replace missing product images with default image?','PRODUCT_IMAGE_REPLACE','true','Do you want to replace any missing thumbnail images in your store with a default image?','4','1',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 
 INSERT INTO configuration VALUES (63,'Gender','ACCOUNT_GENDER','false','Display gender in the customers account','5','1',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (64,'Date of Birth','ACCOUNT_DOB','false','Display date of birth in the customers account','5','2',NULL,now(),NULL,'tep_cfg_select_option(array(\'true\', \'false\'),');

@@ -420,4 +420,6 @@ define('TEXT_LATEST_PRODUCTS', 'Neueste Produkte');
 define('TEXT_SPECIALS', 'Sonderangebote');
 define('BOX_TEXT_REMOVE','Entfernen');
 
+define('TEXT_MISSING_IMAGE','Leider ist der Produkt Bild derzeit nicht verfügbar');
+
 ?>

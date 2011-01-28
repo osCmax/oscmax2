@@ -173,7 +173,11 @@ $Id$
                     </noscript>
                     <?php
             	} else {
-          			echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT);
+          			if (mopics_file_exists(DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $product_info['products_image'])) {
+					  echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $product_info['products_image'], stripslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT);
+					} else {
+					  echo tep_image(DIR_WS_ICONS . 'default_lg.png', TEXT_MISSING_IMAGE, PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT);
+					}
             	}
 				?>
                 </td>
@@ -342,7 +346,13 @@ $Id$
                     <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
 					<?php
                     if (PRODUCT_REVIEWS_ENABLE == 'True') {
-					  echo '<td class="main" align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params()) . '">' . tep_image_button('button_reviews.gif', IMAGE_BUTTON_REVIEWS) . '</a></td>'; 
+                      $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " where approved = '1' and products_id = '" . (int)$_GET['products_id'] . "'");
+                      $reviews = tep_db_fetch_array($reviews_query);
+					  if ($reviews['count'] > 0) {
+					    echo '<td class="main" align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params()) . '">' . tep_image_button('button_reviews.gif', IMAGE_BUTTON_REVIEWS) . '</a></td>'; 
+					  } else {
+						echo '<td class="main" align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS_WRITE, tep_get_all_get_params()) . '">' . tep_image_button('button_write_review.gif', IMAGE_BUTTON_WRITE_REVIEW) . '</a></td>';
+					  }
 					} ?>
                 	<!-- Wish List 3.5 Start -->
                 	<td align="left"><?php echo tep_image_submit('button_wishlist.gif', 'Add to Wishlist', 'name="wishlist" value="wishlist"'); ?></td>
@@ -393,8 +403,6 @@ $Id$
               <td class="smallText" align="left" width="20%">
               <?php
 			  if (PRODUCT_REVIEWS_ENABLE == 'True') {
-                $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " where approved = '1' and products_id = '" . (int)$_GET['products_id'] . "'");
-                $reviews = tep_db_fetch_array($reviews_query);
                   if ($reviews['count'] > 0) {
                     echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count'];
                   }

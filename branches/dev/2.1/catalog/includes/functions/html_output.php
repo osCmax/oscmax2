@@ -25,10 +25,16 @@ $Id$
 ////
 // The HTML image wrapper function
   function tep_image($src, $alt = '', $width = '', $height = '', $parameters = '') {
-    if ( (empty($src) || ($src == DIR_WS_IMAGES)) && (IMAGE_REQUIRED == 'false') ) {
+    if ( (empty($src) || ($src == DIR_WS_IMAGES . 'categories/')) && (CATEGORY_IMAGE_REQUIRED == 'false') ) {
       return false;
     }
-
+	
+	// Adds missing image functionality 
+	if ( ($src == DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR) && (PRODUCT_IMAGE_REPLACE == 'true') ) {
+	  $src = DIR_WS_ICONS . 'default.png';
+	  $alt = TEXT_MISSING_IMAGE;	
+	}
+	
 // alt is added to the img tag even if it is null to prevent browsers from outputting
 // the image filename as default
     $image = '<img src="' . tep_output_string($src) . '" class="img" alt="' . tep_output_string($alt) . '"';
@@ -49,8 +55,6 @@ $Id$
           $width = $image_size[0];
           $height = $image_size[1];
         }
-      } elseif (IMAGE_REQUIRED == 'false') {
-        return false;
       }
     }
 

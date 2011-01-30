@@ -14,6 +14,10 @@ $Id$
   require('includes/functions/image_resize.php');  
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
+  
+  $manufacturers_query_raw = "select manufacturers_id, manufacturers_name, manufacturers_image, date_added, last_modified, manufacturers_featured, manufacturers_featured_until, manufacturer_featured, manufacturer_featured_until from " . TABLE_MANUFACTURERS . " order by manufacturers_name";
+  $manufacturers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $manufacturers_query_raw, $manufacturers_query_numrows);
+  $manufacturers_query = tep_db_query($manufacturers_query_raw);
 
   if (tep_not_null($action)) {
     switch ($action) {
@@ -63,9 +67,12 @@ $Id$
         $languages = tep_get_languages();
         for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
           $manufacturers_url_array = $_POST['manufacturers_url'];
+          $manufacturers_description_array = $HTTP_POST_VARS['manufacturers_description'];
           $language_id = $languages[$i]['id'];
 
           $sql_data_array = array('manufacturers_url' => tep_db_prepare_input($manufacturers_url_array[$language_id]));
+          $sql_data_array2 = array('manufacturers_description' => tep_db_prepare_input($manufacturers_description_array[$language_id]));
+		  $sql_data_array = array_merge($sql_data_array2, $sql_data_array);
 
           if ($action == 'insert') {
             $insert_sql_data = array('manufacturers_id' => $manufacturers_id,
@@ -154,6 +161,9 @@ $Id$
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
+<!-- CKeditor -->
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
+<!-- CKeditor End -->
 <script type="text/javascript" src="includes/general.js"></script>
 </head>
 <body onLoad="SetFocus();">
@@ -191,7 +201,195 @@ $Id$
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+            <td valign="top">
+            
+<?php
+  switch ($action) {
+    case 'new':
+	  echo tep_draw_form('manufacturers', FILENAME_MANUFACTURERS, 'action=insert', 'post', 'enctype="multipart/form-data"');
+	  ?>
+      <table width="100%">
+        <tr>
+          <td class="main" colspan="2"><?php echo '<b>' . TEXT_HEADING_NEW_MANUFACTURER . '</b>'; ?></td>
+        </tr>
+        <tr>
+          <td class="main" colspan="2"><b><?php echo TEXT_NEW_INTRO; ?></b></td>
+        </tr>
+        <tr>
+          <td class="main"><?php echo TEXT_MANUFACTURERS_NAME; ?></td>
+          <td><?php echo tep_draw_input_field('manufacturers_name'); ?></td>
+        </tr>
+        <tr>
+          <td class="main"><?php echo TEXT_MANUFACTURERS_IMAGE; ?></td>
+          <td><?php echo tep_draw_file_field('manufacturers_image'); ?></td>
+        </tr>
+        <tr>
+          <td class="main"><br><?php echo TEXT_MANUFACTURERS_FEATURED; ?><?php echo '&nbsp;<span title="' . MANUFACTURERS_FEATURED_HELP . '|' . MANUFACTURERS_FEATURED_HELP_TEXT . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></span></td>
+          <td class="main"><br><?php echo tep_draw_radio_field('manufacturers_featured', '1', $in_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_YES . '&nbsp;' . tep_draw_radio_field('manufacturers_featured', '0', $out_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_NO; ?></td>
+        </tr>
+        <tr>
+          <td class="main"><?php echo TEXT_MANUFACTURERS_FEATURED_DATE; ?></td>
+          <td class="main"><?php echo '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturers_featured_until', (isset($mInfo->manufacturers_featured_until) ? $mInfo->manufacturers_featured_until : ''), 'id="manufacturers_featured_until"'); ?></td>
+        </tr>
+        <tr>
+          <td class="main"><br><?php echo TEXT_MANUFACTURER_FEATURED; ?><?php echo '&nbsp;<span title="' . MANUFACTURER_FEATURED_HELP . '|' . MANUFACTURER_FEATURED_HELP_TEXT . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></span></td>
+          <td class="main"><br><?php echo tep_draw_radio_field('manufacturer_featured', '1', $in_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_YES . '&nbsp;' . tep_draw_radio_field('manufacturer_featured', '0', $out_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_NO; ?></td>
+        </tr>
+        <tr>
+          <td class="main"><?php echo TEXT_MANUFACTURER_FEATURED_DATE; ?></td>
+          <td class="main"><?php echo '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturer_featured_until', (isset($mInfo->manufacturer_featured_until) ? $mInfo->manufacturer_featured_until : ''), 'id="manufacturer_featured_until"'); ?></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          <!-- // NEW MANUFACTURER TAB HEADER LOOP START //-->
+          <div id="manufacturertabs">
+	      <ul>
+          <?php
+          $languages = tep_get_languages();
+          for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
+            ?>
+            <li><a href="#manufacturertabs-<?php echo $j; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$j]['directory'] . '/images/' . $languages[$j]['image'], $languages[$j]['name']); ?></a></li>
+          <?php } ?> 
+	      </ul>
+          <!-- // NEW MANUFACTURER TAB HEADER LOOP END //-->
+      
+	      <?php
+          $manufacturer_inputs_string = '';
+          $languages = tep_get_languages();
+          for ($i=0, $n=sizeof($languages); $i<$n; $i++) { 
+	      ?>
+            <div id="manufacturertabs-<?php echo $i; ?>">
+            <table width="90%">
+              <tr>
+                <td class="main"><?php echo TEXT_MANUFACTURERS_URL;?></td>
+                <td class="main"><?php echo tep_draw_input_field('manufacturers_url[' . $languages[$i]['id'] . ']', '', ' size="50"'); ?></td>
+              </tr>
+              <tr>
+                <td class="main" colspan="2"><?php echo TEXT_MANUFACTURERS_DESCRIPTION; ?><br><?php echo (tep_draw_textarea_field('manufacturers_description[' . $languages[$i]['id'] . ']', '50', '20', '', 'class="ckeditor"')); ?></td>
+              </tr>
+            </table>
+            </div>
+          <?php } ?>
+	      </div>
+          </td>
+        </tr>
+        <tr>
+          <td align="right"><?php echo tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&amp;mID=' . $_GET['mID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+        </tr>
+      </table>
+    <?php
+	break;
+	
+	case 'edit':
+	  while ($manufacturers = tep_db_fetch_array($manufacturers_query)) {
+        if ((!isset($_GET['mID']) || (isset($_GET['mID']) && ($_GET['mID'] == $manufacturers['manufacturers_id']))) && !isset($mInfo) && (substr($action, 0, 3) != 'new')) {
+          $manufacturer_products_query = tep_db_query("select count(*) as products_count from " . TABLE_PRODUCTS . " where manufacturers_id = '" . (int)$manufacturers['manufacturers_id'] . "'");
+          $manufacturer_products = tep_db_fetch_array($manufacturer_products_query);
+
+          $mInfo_array = array_merge($manufacturers, $manufacturer_products);
+          $mInfo = new objectInfo($mInfo_array);
+        }
+	  }
+	  
+	 if ($mInfo->manufacturers_featured == 1) { $in_fms_status = true; } else { $out_fms_status = true; }
+	 if ($mInfo->manufacturer_featured == 1) { $in_fm_status = true; } else { $out_fm_status = true; } 
+	  
+	  ?> 
+      <table width="100%">
+        <tr>
+          <td class="main" colspan="2"><?php echo tep_draw_form('manufacturers', FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&amp;mID=' . $mInfo->manufacturers_id . '&amp;action=save', 'post', 'enctype="multipart/form-data"') . '<b>' . TEXT_HEADING_EDIT_MANUFACTURER . '</b>'; ?></td>
+        </tr>
+        <tr>
+          <td>
+            <table width="100%" border="0">
+              <tr>
+                <td width="75%">
+                  <table width="100%">
+                    <tr>
+                      <td class="main" colspan="2"><b><?php echo TEXT_EDIT_INTRO; ?></b></td>
+                    </tr>
+                    <tr>
+                      <td class="main"><?php echo TEXT_MANUFACTURERS_NAME; ?></td>
+                      <td><?php echo tep_draw_input_field('manufacturers_name', $mInfo->manufacturers_name); ?></td>
+                    </tr>
+                    <tr>
+                      <td class="main"><?php echo TEXT_MANUFACTURERS_IMAGE; ?></td>
+                      <td class="main"><?php echo tep_draw_file_field('manufacturers_image') . '<br>' . $mInfo->manufacturers_image; ?></td>
+                    </tr>
+                    <tr>
+                      <td class="main"><br><?php echo TEXT_MANUFACTURERS_FEATURED; ?><?php echo '&nbsp;<span title="' . MANUFACTURERS_FEATURED_HELP . '|' . MANUFACTURERS_FEATURED_HELP_TEXT . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></span></td>
+                      <td class="main"><br><?php echo tep_draw_radio_field('manufacturers_featured', '1', $in_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_YES . '&nbsp;' . tep_draw_radio_field('manufacturers_featured', '0', $out_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_NO; ?></td>
+                    </tr>
+                    <tr>
+                      <td class="main"><?php echo TEXT_MANUFACTURERS_FEATURED_DATE; ?></td>
+                      <td class="main"><?php echo '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturers_featured_until', (isset($mInfo->manufacturers_featured_until) ? $mInfo->manufacturers_featured_until : ''), 'id="manufacturers"'); ?></td>
+                    </tr>
+                    <tr>
+                      <td class="main"><br><?php echo TEXT_MANUFACTURER_FEATURED; ?><?php echo '&nbsp;<span title="' . MANUFACTURER_FEATURED_HELP . '|' . MANUFACTURER_FEATURED_HELP_TEXT . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></span></td>
+                      <td class="main"><br><?php echo tep_draw_radio_field('manufacturer_featured', '1', $in_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_YES . '&nbsp;' . tep_draw_radio_field('manufacturer_featured', '0', $out_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_NO; ?></td>
+                    </tr>
+                    <tr>
+                      <td class="main"><?php echo TEXT_MANUFACTURER_FEATURED_DATE; ?></td>
+                      <td class="main"><?php echo '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturer_featured_until', (isset($mInfo->manufacturer_featured_until) ? $mInfo->manufacturer_featured_until : ''), 'id="manufacturer"'); ?></td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="25%" align="center" class="main">
+				<?php
+				if ($mInfo->manufacturers_image != '') {
+				  echo tep_info_image(MANUFACTURERS_IMAGES_DIR . $mInfo->manufacturers_image, $mInfo->manufacturers_name) . '<br><br>' . $mInfo->manufacturers_image;
+				}
+				?>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          <!-- // NEW MANUFACTURER TAB HEADER LOOP START //-->
+          <div id="manufacturertabs">
+	      <ul>
+          <?php
+          $languages = tep_get_languages();
+          for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
+            ?>
+            <li><a href="#manufacturertabs-<?php echo $j; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$j]['directory'] . '/images/' . $languages[$j]['image'], $languages[$j]['name']); ?></a></li>
+          <?php } ?> 
+	      </ul>
+          <!-- // NEW MANUFACTURER TAB HEADER LOOP END //-->
+      
+	      <?php
+          $manufacturer_inputs_string = '';
+          $languages = tep_get_languages();
+          for ($i=0, $n=sizeof($languages); $i<$n; $i++) { 
+	      ?>
+            <div id="manufacturertabs-<?php echo $i; ?>">
+            <table width="90%">
+              <tr>
+                <td class="main"><?php echo TEXT_MANUFACTURERS_URL;?></td>
+                <td class="main"><?php echo tep_draw_input_field('manufacturers_url[' . $languages[$i]['id'] . ']', tep_get_manufacturer_url($mInfo->manufacturers_id, $languages[$i]['id']), ' size="50"'); ?></td>
+              </tr>
+              <tr>
+                <td class="main" colspan="2"><?php echo TEXT_MANUFACTURERS_DESCRIPTION; ?><br><?php echo tep_draw_textarea_field('manufacturers_description[' . $languages[$i]['id'] . ']', 50, 20, tep_get_manufacturer_description($mInfo->manufacturers_id, $languages[$i]['id']), 'class="ckeditor"'); ?></td>
+              </tr>
+            </table>
+            </div>
+          <?php } ?>
+	      </div>
+          </td>
+        </tr>
+        <tr>
+          <td align="right"><?php echo tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&amp;mID=' . $_GET['mID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+        </tr>
+      </table>
+      <?php
+	break;
+	
+	case 'delete':
+    default:
+	?>      
+            <table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MANUFACTURERS; ?></td>
                 <?php
@@ -205,11 +403,6 @@ $Id$
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-  // BOF Open Featured Sets
-  $manufacturers_query_raw = "select manufacturers_id, manufacturers_name, manufacturers_image, date_added, last_modified, manufacturers_featured, manufacturers_featured_until, manufacturer_featured, manufacturer_featured_until from " . TABLE_MANUFACTURERS . " order by manufacturers_name";
- 	// EOF Open Featured Sets
-  $manufacturers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $manufacturers_query_raw, $manufacturers_query_numrows);
-  $manufacturers_query = tep_db_query($manufacturers_query_raw);
   while ($manufacturers = tep_db_fetch_array($manufacturers_query)) {
     if ((!isset($_GET['mID']) || (isset($_GET['mID']) && ($_GET['mID'] == $manufacturers['manufacturers_id']))) && !isset($mInfo) && (substr($action, 0, 3) != 'new')) {
       $manufacturer_products_query = tep_db_query("select count(*) as products_count from " . TABLE_PRODUCTS . " where manufacturers_id = '" . (int)$manufacturers['manufacturers_id'] . "'");
@@ -218,7 +411,7 @@ $Id$
       $mInfo_array = array_merge($manufacturers, $manufacturer_products);
       $mInfo = new objectInfo($mInfo_array);
     }
-
+	
     if (isset($mInfo) && is_object($mInfo) && ($manufacturers['manufacturers_id'] == $mInfo->manufacturers_id)) {
       echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&amp;mID=' . $manufacturers['manufacturers_id'] . '&amp;action=edit') . '\'">' . "\n";
     } else {
@@ -267,6 +460,7 @@ $Id$
                 
                 <td class="dataTableContent" align="right"><?php if (isset($mInfo) && is_object($mInfo) && ($manufacturers['manufacturers_id'] == $mInfo->manufacturers_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&amp;mID=' . $manufacturers['manufacturers_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
+              
 <?php
   }
 ?>
@@ -277,7 +471,7 @@ $Id$
                     <td class="smallText" align="right"><?php echo $manufacturers_split->display_links($manufacturers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
                   </tr>
                 </table></td>
-              </tr>
+              </tr>        
 <?php
   if (empty($action)) {
 ?>
@@ -287,60 +481,22 @@ $Id$
 <?php
   }
 ?>
-            </table></td>
+            </table>
+            
+      <?php 
+	  break;
+  } // end case
+  ?>
+            
+            
+          </td>
 <?php
   $heading = array();
   $contents = array();
 
   switch ($action) {
-    case 'new':
-      $heading[] = array('text' => '<b>' . TEXT_HEADING_NEW_MANUFACTURER . '</b>');
-
-      $contents = array('form' => tep_draw_form('manufacturers', FILENAME_MANUFACTURERS, 'action=insert', 'post', 'enctype="multipart/form-data"'));
-      $contents[] = array('text' => TEXT_NEW_INTRO);
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_NAME . '<br>' . tep_draw_input_field('manufacturers_name'));
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_IMAGE . '<br>' . tep_draw_file_field('manufacturers_image'));
-
-// BOF Open Featured Sets
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED . '<br>' . tep_draw_radio_field('manufacturers_featured', '1', $in_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_YES . '&nbsp;' . tep_draw_radio_field('manufacturers_featured', '0', $out_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_NO);
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturers_featured_until', (isset($mInfo->manufacturers_featured_until) ? $mInfo->manufacturers_featured_until : ''), 'id="manufacturers_featured_until"'));
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED . '<br>' . tep_draw_radio_field('manufacturer_featured', '1', $in_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_YES . '&nbsp;' . tep_draw_radio_field('manufacturer_featured', '0', $out_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_NO);
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturer_featured_until', (isset($mInfo->manufacturer_featured_until) ? $mInfo->manufacturer_featured_until : ''), 'id="manufacturer_featured_until"'));
-// EOF Open Featured Sets
-
-      $manufacturer_inputs_string = '';
-      $languages = tep_get_languages();
-      for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-        $manufacturer_inputs_string .= '<br>' . tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('manufacturers_url[' . $languages[$i]['id'] . ']');
-      }
-
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_URL . $manufacturer_inputs_string);
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&amp;mID=' . $_GET['mID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
-      break;
-    case 'edit':
-      $heading[] = array('text' => '<b>' . TEXT_HEADING_EDIT_MANUFACTURER . '</b>');
-
-      $contents = array('form' => tep_draw_form('manufacturers', FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&amp;mID=' . $mInfo->manufacturers_id . '&amp;action=save', 'post', 'enctype="multipart/form-data"'));
-      $contents[] = array('text' => TEXT_EDIT_INTRO);
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_NAME . '<br>' . tep_draw_input_field('manufacturers_name', $mInfo->manufacturers_name));
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_IMAGE . '<br>' . tep_draw_file_field('manufacturers_image') . '<br>' . $mInfo->manufacturers_image);
-
-// BOF Open Featured Sets
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED . '<br>' . tep_draw_radio_field('manufacturers_featured', '1', $in_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_YES . '&nbsp;' . tep_draw_radio_field('manufacturers_featured', '0', $out_fms_status) . '&nbsp;' . TEXT_MANUFACTURERS_NO);
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturers_featured_until', (isset($mInfo->manufacturers_featured_until) ? $mInfo->manufacturers_featured_until : ''), 'id="manufacturers"'));
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED . '<br>' . tep_draw_radio_field('manufacturer_featured', '1', $in_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_YES . '&nbsp;' . tep_draw_radio_field('manufacturer_featured', '0', $out_fm_status) . '&nbsp;' . TEXT_MANUFACTURER_NO);
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURER_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . tep_draw_input_field('manufacturer_featured_until', (isset($mInfo->manufacturer_featured_until) ? $mInfo->manufacturer_featured_until : ''), 'id="manufacturer"'));
-// EOF Open Featured Sets
-
-      $manufacturer_inputs_string = '';
-      $languages = tep_get_languages();
-      for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-        $manufacturer_inputs_string .= '<br>' . tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('manufacturers_url[' . $languages[$i]['id'] . ']', tep_get_manufacturer_url($mInfo->manufacturers_id, $languages[$i]['id']));
-      }
-
-      $contents[] = array('text' => '<br>' . TEXT_MANUFACTURERS_URL . $manufacturer_inputs_string);
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_MANUFACTURERS, 'page=' . $_GET['page'] . '&amp;mID=' . $mInfo->manufacturers_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
-      break;
+	case 'edit':
+	  break;
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_HEADING_DELETE_MANUFACTURER . '</b>');
 
@@ -364,7 +520,7 @@ $Id$
         $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($mInfo->date_added));
         if (tep_not_null($mInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($mInfo->last_modified));
 //        $contents[] = array('text' => '<br>' . tep_info_image($mInfo->manufacturers_image, $mInfo->manufacturers_name));
-        $contents[] = array('text' => '<br>' . tep_info_image(MANUFACTURERS_IMAGES_DIR . $mInfo->manufacturers_image, $mInfo->manufacturers_name));
+        if ($mInfo->manufacturers_image != '') $contents[] = array('align' => 'center', 'text' => '<br>' . tep_info_image(MANUFACTURERS_IMAGES_DIR . $mInfo->manufacturers_image, $mInfo->manufacturers_name));
   	    $contents[] = array('text' => '<br>' . TEXT_PRODUCTS . ' ' . $mInfo->products_count);
       }
       break;

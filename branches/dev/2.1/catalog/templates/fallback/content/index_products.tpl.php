@@ -34,10 +34,11 @@ $Id$
     $image = DIR_WS_IMAGES . 'table_background_list.gif';
 	$image_folder = '';
     if (isset($_GET['manufacturers_id'])) {
-      $manufacturer_query = tep_db_query("select manufacturers_image, manufacturers_name from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
+      $manufacturer_query = tep_db_query("select m.manufacturers_image, m.manufacturers_name, mi.manufacturers_description from " . TABLE_MANUFACTURERS . " m, " . TABLE_MANUFACTURERS_INFO . " mi where m.manufacturers_id = mi.manufacturers_id and mi.languages_id = '" . (int)$languages_id . "' and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
 	  while ($manufacturer = tep_db_fetch_array($manufacturer_query)) {
         $image = $manufacturer['manufacturers_image'];
 	    $name = $manufacturer['manufacturers_name'];
+		$description = $manufacturer['manufacturers_description'];
 	  }
 	  $image_folder = MANUFACTURERS_IMAGES_DIR;
     } elseif ($current_category_id) {
@@ -71,6 +72,10 @@ $Id$
 		 if ( (tep_not_null($category['categories_description'])) && ($category['categories_description'] != '<br />') ) {
 	        echo $category['categories_description']; 
          }
+		 // Add manufacturer description
+		 if ( (tep_not_null($description)) && ($description != '<br />') ) {
+		   echo $description;
+		 }
          ?>
           </table>
         </td>

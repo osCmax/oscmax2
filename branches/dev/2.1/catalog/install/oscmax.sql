@@ -748,6 +748,7 @@ CREATE TABLE manufacturers_info (
   manufacturers_id int NOT NULL,
   languages_id int NOT NULL,
   manufacturers_url varchar(255) NOT NULL,
+  manufacturers_description text NULL,
   url_clicked int(5) NOT NULL default '0',
   date_last_click datetime NULL,
   PRIMARY KEY (manufacturers_id, languages_id)

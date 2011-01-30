@@ -39,4 +39,34 @@ define('TEXT_DELETE_WARNING_PRODUCTS', '<b>ATTENTION:</b> Il reste %s produits l
 
 define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Erreur: Impossible d\'&eacute;crire dans le r&eacute;pertoire. Merci de modifier les droits d\'acc&egrave;s sur: %s');
 define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Erreur: Le r&eacute;pertoire n\'existe pas: %s');
+define('TABLE_HEADING_MANUFACTURER_FEATURED','Fabricant de produits');
+
+define('TABLE_HEADING_MANUFACTURERS_FEATURED','Fabricants recommandés');
+
+define('TEXT_MANUFACTURER_FEATURED','Fabricant en vedette');
+
+define('TEXT_MANUFACTURER_YES','Oui');
+
+define('TEXT_MANUFACTURER_NO','Non');
+
+define('TEXT_MANUFACTURER_FEATURED_DATE','Jusqu\'à date vedette');
+
+define('TEXT_MANUFACTURERS_FEATURED','Fabricants recommandés');
+
+define('TEXT_MANUFACTURERS_YES','Oui');
+
+define('TEXT_MANUFACTURERS_NO','Non');
+
+define('TEXT_MANUFACTURERS_FEATURED_DATE','Jusqu\'à date vedette');
+
+define('TEXT_MANUFACTURERS_DESCRIPTION','Description:');
+
+define('MANUFACTURERS_FEATURED_HELP','Fabricants recommandés');
+
+define('MANUFACTURERS_FEATURED_HELP_TEXT','Ce paramètre va ajouter ce fabricant à un groupe d\'autres produits manufacturés sur la page index de votre magasin');
+
+define('MANUFACTURER_FEATURED_HELP','Fabricant en vedette');
+
+define('MANUFACTURER_FEATURED_HELP_TEXT','Ce paramètre va créer une nouvelle infobox sur la page d\'index contenant ce fabricant et certains des produits en magasin faites par ce fabricant.');
+
 ?>

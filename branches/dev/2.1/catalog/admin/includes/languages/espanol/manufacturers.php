@@ -39,4 +39,34 @@ define('TEXT_DELETE_WARNING_PRODUCTS', '<b>ADVERTENCIA:</b> Todavia hay producto
 
 define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Error: No puedo escribir en este directorio. Asigner permisos de escritura en: %s');
 define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Error: No existe el directorio: %s');
+define('TABLE_HEADING_MANUFACTURER_FEATURED','Fabricante de Productos');
+
+define('TABLE_HEADING_MANUFACTURERS_FEATURED','Destacados fabricantes');
+
+define('TEXT_MANUFACTURER_FEATURED','Destacados del fabricante');
+
+define('TEXT_MANUFACTURER_YES','Si');
+
+define('TEXT_MANUFACTURER_NO','No');
+
+define('TEXT_MANUFACTURER_FEATURED_DATE','Destacados Hasta Fecha');
+
+define('TEXT_MANUFACTURERS_FEATURED','Destacados fabricantes');
+
+define('TEXT_MANUFACTURERS_YES','Si');
+
+define('TEXT_MANUFACTURERS_NO','No');
+
+define('TEXT_MANUFACTURERS_FEATURED_DATE','Destacados Hasta Fecha');
+
+define('TEXT_MANUFACTURERS_DESCRIPTION','Descripción:');
+
+define('MANUFACTURERS_FEATURED_HELP','Destacados fabricantes');
+
+define('MANUFACTURERS_FEATURED_HELP_TEXT','Este valor se sumará este fabricante a un grupo de otros productos manufacturados en la página de índice de su tienda');
+
+define('MANUFACTURER_FEATURED_HELP','Destacados del fabricante');
+
+define('MANUFACTURER_FEATURED_HELP_TEXT','Esta opción creará una nueva caja de información en la página de índice que contiene este fabricante y algunos de los productos en su tienda realizados por este fabricante.');
+
 ?>

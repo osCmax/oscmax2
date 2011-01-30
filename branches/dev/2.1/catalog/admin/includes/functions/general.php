@@ -711,6 +711,13 @@ function tep_selected_file($filename) {
 
     return $manufacturer['manufacturers_url'];
   }
+  
+  function tep_get_manufacturer_description($manufacturer_id, $language_id) {
+    $manufacturer_query = tep_db_query("select manufacturers_description from " . TABLE_MANUFACTURERS_INFO . " where manufacturers_id = '" . (int)$manufacturer_id . "' and languages_id = '" . (int)$language_id . "'");
+    $manufacturer = tep_db_fetch_array($manufacturer_query);
+
+    return $manufacturer['manufacturers_description'];
+  }
 
 ////
 // Wrapper for class_exists() function

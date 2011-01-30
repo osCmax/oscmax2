@@ -29,7 +29,7 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
   $info_box_contents = array();
   
   $info_box_contents[0]['text'] .= '<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr>';
-  $info_box_contents[0]['text'] .= '<td valign="middle" align="right" width="40%" class="main"><a href="' . tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $featured_manufacturer_products_array[0]['mid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_manufacturer_products_array[0]['mimage'], $featured_manufacturer_products_array[0]['mname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td><td valign="middle" align="left" width="60%" class="main">'.OPEN_FEATURED_BOX_MANUFACTURER_HEADING.'<br><b>'.$featured_manufacturer_products_array[0]['mname'].'</b></td>';
+  $info_box_contents[0]['text'] .= '<td valign="middle" align="right" width="40%" class="main"><a href="' . tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $featured_manufacturer_products_array[0]['mid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . MANUFACTURERS_IMAGES_DIR . $featured_manufacturer_products_array[0]['mimage'], $featured_manufacturer_products_array[0]['mname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td><td valign="middle" align="left" width="60%" class="main">'.OPEN_FEATURED_BOX_MANUFACTURER_HEADING.'<br><b>'.$featured_manufacturer_products_array[0]['mname'].'</b></td>';
   $info_box_contents[0]['text'] .= '</tr></table>'; 
    
   $info_box_contents[0]['text'] .= '&nbsp;<br>';  

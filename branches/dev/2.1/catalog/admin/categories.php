@@ -791,17 +791,11 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 
 <script type="text/javascript" src="includes/general.js"></script>
 <!-- CKeditor -->
-<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'; ?>"></script>
 <!-- CKeditor End -->
 <!-- AJAX Attribute Manager  -->
 <?php require_once( 'attributeManager/includes/attributeManagerHeader.inc.php' )?>
 <!-- AJAX Attribute Manager  end -->
-<!--// SLIMBOX2 -->
-	<link rel="stylesheet" href="../slimbox2/slimbox2.css" type="text/css" media="screen">
-    <script type="text/javascript" src="../slimbox2/jquery.js"></script>
-	<script type="text/javascript" src="../slimbox2/slimbox2.js"></script>
-    <?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
-<!--// SLIMBOX2 -->
 <?php 
 // BOF: Extra Product Fields
 if ($action == 'new_product') {
@@ -884,6 +878,13 @@ if ($action == 'new_product') {
 <body onLoad="goOnLoad();">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+
+<!--// SLIMBOX2 -->
+	<link rel="stylesheet" href="<?php echo DIR_WS_INCLUDES . 'javascript/slimbox2.css'; ?>" type="text/css" media="screen">
+    <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/slimbox2.js'; ?>"></script>
+    <?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
+<!--// SLIMBOX2 -->
+
 <!-- header_eof //-->
 
 <!-- body //-->
@@ -1891,6 +1892,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
     </table></form>
 <?php
   } elseif ($action == 'new_product_preview') {
+	  
     if (tep_not_null($_POST)) {
       $pInfo = new objectInfo($_POST);
       $products_name = $_POST['products_name'];
@@ -1966,8 +1968,26 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 
     echo tep_draw_form($form_action, FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&amp;pID=' . $_GET['pID'] : '') . '&amp;action=' . $form_action, 'post', 'enctype="multipart/form-data"');
 
+?>
+  <table>
+    <tr>
+      <td>
+	  <!-- // PREVIEW TAB HEADER LOOP START //-->
+      <div id="previewtabs">
+	    <ul>
+	    <?php
+        $languages = tep_get_languages();
+        for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
+        ?>
+          <li><a href="#previewtabs-<?php echo $j; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$j]['directory'] . '/images/' . $languages[$j]['image'], $languages[$j]['name']); ?></a></li>
+        <?php } ?> 
+	    </ul>
+      <!-- // PREVIEW TAB HEADER LOOP END //-->
+
+    <?php
     $languages = tep_get_languages();
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+    for ($i=0, $n=sizeof($languages); $i<$n; $i++) { // Language loop starts
+	
       if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
         $pInfo->products_name = tep_get_products_name($pInfo->products_id, $languages[$i]['id']);
 // BOF Open Featured Sets
@@ -2000,12 +2020,14 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         $pInfo->products_url = tep_db_prepare_input($products_url[$languages[$i]['id']]);
       }
 ?>
+    <div id="previewtabs-<?php echo $i; ?>">
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $pInfo->products_name; ?></td>
-            <td class="pageHeading" align="right"><?php
+        <td>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $pInfo->products_name; ?></td>
+              <td class="pageHeading" align="right"><?php
 // BOF QPBPP for SPPC
             $pf->loadProduct((int)$_GET['pID'], $pInfo->products_price, $pInfo->products_tax_class_id, (int)$pInfo->products_qty_blocks[0], $price_breaks_array, (int)$pInfo->products_min_order_qty[0]);
             echo $pf->getPriceString();
@@ -2029,20 +2051,23 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
                 {$pricing .= '<tr><td>' . TEXT_PRODUCTS_SAVINGS . '</td><td align=right>' . $currencies->format($pInfo->products_price -  $new_price) . '</td><td class="SavingsPercent">&nbsp;('. number_format(100 - (($new_price / $pInfo->products_price) * 100)) . '%)</td></tr>';}}
             $pricing .= '</table>';
             ?>
-            <td align="right" valign="top" width="10%"><?php echo $pricing; ?></td>
+              <td align="right" valign="top" width="10%"><?php echo $pricing; ?></td>
 <?php //EOF: MSRP ?>
-          </tr>
-        </table></td>
+            </tr>
+          </table>
+        </td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main" valign="top" width="70%">
-                        <?php echo $pInfo->products_description; ?>
-        </td>
-        <td width="25%">
-                <?php echo '<a href="' . $html_images_dir . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image($html_thumbs . $products_image_name, $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="4" vspace="4" align="right"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
+        <td>
+          <table width="100%">
+            <tr>
+              <td class="main" valign="top" width="75%"><?php echo $pInfo->products_description; ?></td>
+              <td width="25%" align="center"><?php echo '<a href="' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image_name, $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?></td>
+            </tr>
+          </table>
         </td>
       </tr>
 <?php
@@ -2120,21 +2145,18 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 <?php
  	// BOF Open Featured Sets
 ?>
+
 	  <tr>
-        <td><br><br></td>
-      </tr>
-	  <tr>
-        <td>
-		<b><?php echo TABLE_HEADING_FEATURED_PREVIEW; ?></b><br>
-		<table border="1" width="450" cellspacing="0" cellpadding="16">
-		<tr>
-			<td>
-				<table border="0" width="100%" cellspacing="0" cellpadding="2">
-				<tr>
-					<td width="<?php echo SMALL_IMAGE_WIDTH + 10; ?>" rowspan="4" align="right" valign="top" class="main"><?php echo tep_image( ((!empty($_SERVER['HTTPS'])) ? HTTPS_CATALOG_SERVER : HTTP_CATALOG_SERVER).DIR_WS_CATALOG_IMAGES . $products_image_name, $pInfo->products_name, 0, 0, 'align="right" hspace="5" vspace="5"'); ?></td>
+        <td class="main"><b><?php echo TABLE_HEADING_FEATURED_PREVIEW; ?></b><br>
+		  <table border="1" width="450" cellspacing="0" cellpadding="16">
+		    <tr>
+		  	  <td>
+		        <table border="0" width="100%" cellspacing="0" cellpadding="2"> 
+				  <tr>
+					<td width="<?php echo SMALL_IMAGE_WIDTH + 10; ?>" rowspan="4" align="right" valign="top" class="main"><?php echo tep_image(DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image_name, $pInfo->products_name, 0, 0, 'align="right" hspace="5" vspace="5"'); ?></td>
 					<td width="80%" valign="top" class="main"><div align="left"><?php echo '<b><u>' . $pInfo->products_name . '</u></b>'; ?></div></td>
-				</tr>
-				<tr>
+				  </tr>
+				  <tr>
 					<td valign="top" class="smalltext"><?php
 					  if ($pInfo->products_short != '') {
 						  echo $pInfo->products_short;
@@ -2148,26 +2170,32 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 					  }
 					?>
 					</td>
-				</tr>
-				<tr>
+				  </tr>
+				  <tr>
 					<td valign="top" class="main">&nbsp;</td>
-				</tr>
-				<tr>
+				  </tr>
+				  <tr>
 					<td align="left" valign="top" class="smalltext"><?php echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo '<img src='.HTTP_CATALOG_SERVER.DIR_WS_CATALOG_LANGUAGES.'english/images/buttons/button_buy_now.gif>';?></td>
-				</tr>
+				  </tr>
 				</table>
-			</td>
-		</tr>
-		</table>
-
+			  </td>
+		    </tr>
+		  </table>
 	    </td>
       </tr>
-	  <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '20'); ?></td>
-      </tr>
+    </table>
+    </div>
+
 <?php
  	// EOF Open Featured Sets
-    }
+	    } // end language loop - next line closes the tabs div
+?>
+      </div>
+    </td>
+  </tr>
+</table>
+<?php
+
 
     if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
       if (isset($_GET['origin'])) {
@@ -2185,13 +2213,13 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
       }
 ?>
       <tr>
-        <td align="right"><?php echo '<a href="' . tep_href_link($back_url, $back_url_params, 'NONSSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
+        <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link($back_url, $back_url_params, 'NONSSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
       </tr>
 <?php
     } else {
 ?>
       <tr>
-        <td align="right" class="smallText">
+        <td align="right" class="smallText" colspan="2">
 <?php
 /* Re-Post all POST'ed variables */
       reset($_POST);

@@ -97,6 +97,8 @@ $Id$
 	$("#articletabs").tabs();
 	$("#informationtabs").tabs();
 	$("#affiliatetabs").tabs();
+    $("#manufacturertabs").tabs();
+	$("#previewtabs").tabs();
 
     $('span[title]').cluetip({splitTitle: '|', arrows: true, dropShadow: false, cluetipClass: 'jtip'});
 

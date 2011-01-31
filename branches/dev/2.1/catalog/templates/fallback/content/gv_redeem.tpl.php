@@ -27,7 +27,7 @@ $Id$
         <tr> 
           <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr> 
-                <td class="main"><?php echo TEXT_INFORMATION; ?></td>
+                <td class="main"><?php echo TEXT_INFORMATION . '<a href="' . tep_href_link(FILENAME_INFORMATION, 'info_id=9', 'NONSSL') . '">' . GV_FAQ . '.</a>';?></td>
               </tr>
               <?php
 // if we get here then either the url gv_no was not set or it was invalid

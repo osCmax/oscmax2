@@ -18,5 +18,5 @@ $Id$
   require('includes/functions/database.php');
   require('includes/functions/html_output.php');
   
-  define('PROJECT_VERSION', 'v2.5 Beta 2');
+  define('PROJECT_VERSION', 'v2.5 Beta 3');
 ?>

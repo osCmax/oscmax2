@@ -61,7 +61,7 @@ $get_vars = '';
 $_SESSION['gridlist'] = 'list';
 
 $listing_split = new splitPageResults($listing_sql, $max_results, 'p.products_id');
-  if ( ($listing_split->number_of_rows > 0) && ( (PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3') ) ) {
+  if ( (PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3') ) {
 
 $list = '<table align="center"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '"> ' . tep_image(DIR_WS_ICONS . 'list.png', 'View as List') . '</a></td><td width="80" class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '">View as List</a></td></tr></table>';
 
@@ -103,7 +103,13 @@ $grid = '<table align="center"><tr><td width="20" align="center"><a href="' . te
 	  }
 	} // end PRODUCT FILTER if
 
-$page_nav = '<table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox"><tr><td class="smallText" width="33%">' .  $filter . '</td><td class="smallText" width="33%" align="center">' . $list . '</td><td class="smallText" width="33%" align="right">' . $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))) . '</td></tr>';
+if ($listing_split->number_of_rows > 0) {
+  $page_count = $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y')));
+} else {
+  $page_count = '';
+}
+
+$page_nav = '<table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox"><tr><td class="smallText" width="33%">' .  $filter . '</td><td class="smallText" width="33%" align="center">' . $list . '</td><td class="smallText" width="33%" align="right">' . $page_count . '</td></tr>';
 
 $drop = '<tr><td class="smallText">Results/Page: '. tep_draw_form('maxdisplay', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['sort']) ? tep_draw_hidden_field('sort', $_GET['sort']) : '') .  tep_draw_pull_down_menu('max', $max_display, $max_results, 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td><td align="center">' . $grid . '</td><td class="smallText" align="right">Sort Order: ' . tep_draw_form('sorting', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['max']) ? tep_draw_hidden_field('max', $_GET['max']) : '') . tep_draw_pull_down_menu('sort', $sort_array, $_GET['sort'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>';
 
@@ -116,16 +122,18 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 <!-- begin extra product fields -->
 		<?php
             $epf_list = array();
-			$epf_number = count($epf);
+			foreach ($epf as $e) {
+              if ($e['restrict']) $epf_list[] = $e['field'];
+            }
+			
+			print_r($epf_list);
+			
+			$epf_number = count($epf_list);
 			if ($epf_number > 0) { // hide epf if blank ?>
         	  <table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox">
           		<tr>
             	  <td class="main" align="right" colspan="2">
 					<?php
-					  $epf_list = array();
-					  foreach ($epf as $e) {
-						if ($e['restrict']) $epf_list[] = $e['field'];
-					  }
 					  echo tep_draw_form('epf_restrict', FILENAME_DEFAULT, 'get');
 					  if (is_array($_GET) && (sizeof($_GET) > 0)) {
 						reset($_GET);
@@ -144,10 +152,12 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
                   </td>
           		</tr>
         	  </table>
-           <?php } // end if to hide epf ?>
+           <?php
+           echo tep_draw_separator('pixel_trans.gif', '100%', '10');
+		   } // end if to hide epf ?>
 <!-- end extra product fields -->
 <?php
-  echo tep_draw_separator('pixel_trans.gif', '100%', '10');
+  
   }
 
   $list_box_contents = array();

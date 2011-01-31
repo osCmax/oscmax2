@@ -15,7 +15,7 @@ $Id$
   define('MODULE_ORDER_TOTAL_GV_DESCRIPTION', 'Ch&egrave;que cadeau');
   define('SHIPPING_NOT_INCLUDED', ' [Livraison non incluse]');
   define('TAX_NOT_INCLUDED', ' [Taxe non incluse]');
-  define('MODULE_ORDER_TOTAL_GV_USER_PROMPT', 'Cochez pour utiliser votre solde disponnible en ch&egrave;que cadeau ->&nbsp;</td><td align=right>');
+  define('MODULE_ORDER_TOTAL_GV_USER_PROMPT', '<b>Cochez pour utiliser votre solde disponnible en ch&egrave;que cadeau</b>');
   define('TEXT_ENTER_GV_CODE', 'Entrez le code &agrave; utiliser&nbsp;&nbsp;');
   define('MODULE_ORDER_TOTAL_GV_TEXT_ERROR', 'Coupon de réduction / Chèques Cadeaux');
 ?>

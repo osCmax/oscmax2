@@ -29,7 +29,7 @@ $Id$
       $this->show_redeem_box = MODULE_ORDER_TOTAL_GV_REDEEM_BOX;
       $this->credit_class = true;
 //      $this->checkbox = $this->user_prompt . '<input type="checkbox" onClick="submitFunction()" name="' . 'c' . $this->code . '">';
-	$this->checkbox = $this->user_prompt . '<input type="checkbox" onClick="clearRadeos()" name="' . 'c' . $this->code . '">';
+	$this->checkbox = $this->user_prompt . '</td><td align=right><input type="checkbox" onClick="clearRadeos()" name="' . 'c' . $this->code . '">';
  // #################### End Added CGV JONYO ######################
       $this->output = array();
     }

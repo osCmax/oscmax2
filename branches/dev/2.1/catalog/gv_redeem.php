@@ -24,7 +24,7 @@ $Id$
 // if the customer is not logged on, redirect them to the login page
 if (!tep_session_is_registered('customer_id')) {
 $navigation->set_snapshot();
-tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+tep_redirect(tep_href_link(FILENAME_LOGIN, 'gv_message=1', 'SSL'));
 }
 // check for a voucher number in the url
   if (isset($_GET['gv_no'])) {

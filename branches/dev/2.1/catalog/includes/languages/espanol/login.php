@@ -37,4 +37,6 @@ define('PROCEED_TO_CHECKOUT', 'Avance para Comprobar sin Registrar');
 define('SPPC_TOGGLE_LOGIN_PASSWORD', 'root@localhost');
 define('TEXT_GUEST_INTRODUCTION','<b>¿Quieres ir directamente al proceso de pago?</b> <br><br> ¿Te gustaría ver a cabo sin la creación de una cuenta de cliente? Tenga en cuenta que todos nuestros servicios no estarán disponibles para los clientes que no desean crear una cuenta. Además, usted no puede ver el estado de su pedido, y cada vez que usted compra con nosotros usted tendrá que volver a introducir todos sus datos. <br><br> Creación de una cuenta es gratis. Si usted todavía desea seguir a la caja por favor haga clic en el botón de pago y envío de la derecha.');
 
+define('TEXT_GV_LOGIN_NEEDED', 'Tienes que estar logueado para canjear su bono. Por favor, cree una nueva cuenta o ingresa abajo');
+
 ?>

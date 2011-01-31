@@ -37,4 +37,7 @@ define('PROCEED_TO_CHECKOUT', 'Procédez à la commande sans enregistrement.');
 define('SPPC_TOGGLE_LOGIN_PASSWORD','root@localhost');
 // EOF Separate Pricing Per Customer
 define('TEXT_GUEST_INTRODUCTION','<b>Voulez-vous d\'aller directement à la procédure de paiement?</b> <br><br> Souhaitez-vous commander sans créer un compte client? S\'il vous plaît noter que l\'ensemble de nos services ne seront pas disponibles pour les clients qui ne souhaitent pas créer un compte. En outre, vous ne pouvez pas afficher l\'état de votre commande, et chaque fois que vous magasinez avec nous, vous devrez entrer de nouveau toutes vos données. <br><br> Création d\'un compte est gratuite. Si vous souhaitez encore passer à la caisse s\'il vous plaît cliquer sur le bouton de commande sur votre droite.');
+
+define('TEXT_GV_LOGIN_NEEDED', 'Vous devez être connecté pour échanger votre bon. S\'il vous plaît créer un nouveau compte ou se connecter ci-dessous');
+
 ?>

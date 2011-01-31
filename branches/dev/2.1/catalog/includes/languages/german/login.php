@@ -37,4 +37,6 @@ define('PROCEED_TO_CHECKOUT','Gehen Sie zur Prüfung ohne Anmeldung');
 define('SPPC_TOGGLE_LOGIN_PASSWORD', 'root@localhost');
 define('TEXT_GUEST_INTRODUCTION','<b>Wollen Sie direkt zur Kasse?</b> <br><br> Möchten Sie überprüfen, ohne ein Kundenkonto? Bitte beachten Sie, dass alle unsere Dienste werden nicht verfügbar sein, um Kunden, die nicht wollen, um ein Konto zu erstellen. Sie können auch nicht den Status Ihrer Bestellung, und jedes Mal, wenn Sie bei uns einkaufen, müssen Sie erneut eingeben alle Ihre Daten. <br><br> Erstellen eines Kontos ist kostenlos. Wenn Sie dennoch weiter zur Kasse bitte auf den Button "Kasse" zu Ihrer Rechten.');
 
+define('TEXT_GV_LOGIN_NEEDED', 'Sie müssen angemeldet sein, um Ihren Gutschein einzulösen. Bitte erstellen Sie ein neues Konto oder einloggen');
+
 ?>

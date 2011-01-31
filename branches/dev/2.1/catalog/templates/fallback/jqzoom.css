@@ -56,7 +56,7 @@ div.jqZoomTitle
    background-color: white;
    padding: 8px;
 	text-align:center;
-   background-image: url(../images/zoomloader.gif);
+   background-image: url(images/loading.gif);
    background-repeat: no-repeat;
    background-position: 43px 30px;
 	width:90px;

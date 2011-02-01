@@ -21,6 +21,7 @@ $Id$
 								   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=10', 'NONSSL') . '">Logging</a></li>' .
 								   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=11', 'NONSSL') . '">Cache</a></li>' .
 								   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=55', 'NONSSL') . '">Page Cache Settings</a></li>' .
+								   tep_admin_jqmenu(FILENAME_CACHE, BOX_TOOLS_CACHE, 'TOP') .
  								   '</ul>' .
 								   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=15', 'NONSSL') . '">Sessions</a></li>' .
 								   '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=16', 'NONSSL') . '">Site Maintenance</a></li>' .

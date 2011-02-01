@@ -1008,16 +1008,6 @@ if ($action == 'new_product') {
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <?php // BOF SPPC hide products and categories from groups
-        	  echo '<td class="main"> ' . TEXT_HIDE_CATEGORIES_FROM_GROUPS . '</td><td>';
-         		for ($i = 0; $i < count($customers_groups); $i++) {
-            		echo tep_draw_checkbox_field('hide_cat[' . $customers_groups[$i]['id'] . ']',  $customers_groups[$i]['id'] , (in_array($customers_groups[$i]['id'], $hide_cat_from_groups_array)) ? 1: 0) . '&#160;&#160;' . $customers_groups[$i]['text'];
-          		}
-		  	  echo '</td>';
-
-				  // EOF SPPC hide products and categories from groups ?>
-          </tr>
-          <tr>
             <td class="main"><?php echo TEXT_EDIT_CATEGORIES_IMAGE; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_file_field('categories_image') . '<br>' . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $cInfo->categories_image . tep_draw_hidden_field('categories_previous_image', $cInfo->categories_image); ?></td>
           </tr>
@@ -1752,7 +1742,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 						}
 						closedir($handle);
 						sort($dir_array);
-						} else { die("<center><br><br><b> " . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_1 . " (" . $root_images_dir . ") " . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_2 . "</b></center><br><br>");}
+						} else { die("<table><tr><td class=\"messageStackError\">" . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_1 . " (" . $root_images_dir . ") " . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_2 . "</td></tr></table>");}
  					 $drop_array[0] = array('id' => '', 'text' => TEXT_PRODUCTS_IMAGE_ROOT_DIRECTORY);
 
 					 foreach($dir_array as $img_dir) {

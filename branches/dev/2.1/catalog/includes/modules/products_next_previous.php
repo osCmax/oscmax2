@@ -12,7 +12,7 @@ $Id$
 
 // calculate the previous and next
   if (isset($_GET['manufacturers_id'])) { 
-    $products_ids = tep_db_query("select p.products_id from " . TABLE_PRODUCTS . " p where p.products_status = '1' and p.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
+    $products_ids = tep_db_query("select p.products_id from " . TABLE_PRODUCTS . " p where p.products_status = '1' and find_in_set('" . $customer_group_id . "', p.products_hide_from_groups) = '0' and p.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
     $category_name_query = tep_db_query("select manufacturers_name from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
     $category_name_row = tep_db_fetch_array($category_name_query);
     $prev_next_in = $category_name_row['manufacturers_name'];
@@ -23,7 +23,7 @@ $Id$
       $cPath_row = tep_db_fetch_array($cPath_query);
       $current_category_id = $cPath_row['categories_id'];
     }
-	$products_ids = tep_db_query("select p.products_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_status = '1' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "'");
+	$products_ids = tep_db_query("select p.products_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_status = '1' and find_in_set('" . $customer_group_id . "', p.products_hide_from_groups) = '0' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "'");
     $category_name_query = tep_db_query("select categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . (int)$current_category_id . "' and language_id = '" . (int)$languages_id . "'");
     $category_name_row = tep_db_fetch_array($category_name_query);
     $prev_next_in = ' <a href="' . tep_href_link(FILENAME_DEFAULT, tep_get_path($current_category_id = '')) . '">' . $category_name_row['categories_name'] . '</a>';

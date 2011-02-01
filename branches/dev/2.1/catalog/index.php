@@ -263,9 +263,8 @@ global $customer_group_id;
     } // 1
 	
 // BOF SPPC Hide products and categories from groups
- $listing_sql .= " and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 ";
- $listing_sql .= " and find_in_set('" . $customer_group_id . "', c.categories_hide_from_groups) = 0 ";
- // EOF SPPC Hide products and categories from groups
+    $listing_sql .= " and find_in_set('" . $customer_group_id . "', p.products_hide_from_groups) = 0 ";
+// EOF SPPC Hide products and categories from groups
 
 // BOF: extra product fields
     $restrict_by = '';

@@ -16,7 +16,7 @@ $Id$
 
 //  if ($random_product = tep_random_select("select products_id, products_image, products_tax_class_id, products_price from " . TABLE_PRODUCTS . " where products_status = '1' order by products_date_added desc limit " . MAX_RANDOM_SELECT_NEW)) {
  // BOF Hide products and categories from groups
-  if ($random_product = tep_random_select("select p.products_id, products_image, products_tax_class_id, products_price from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_TO_CATEGORIES .  " using(products_id) left join " . TABLE_CATEGORIES . " using(categories_id) where products_status = '1' and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 order by products_date_added desc limit " . MAX_RANDOM_SELECT_NEW)) {
+  if ($random_product = tep_random_select("select p.products_id, p.products_image, p.products_tax_class_id, p.products_price from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_TO_CATEGORIES .  " using(products_id) left join " . TABLE_CATEGORIES . " using(categories_id) where products_status = '1' and find_in_set('".$customer_group_id."', p.products_hide_from_groups) = '0' order by products_date_added desc limit " . MAX_RANDOM_SELECT_NEW)) {
  // EOF Hide products and categories from groups
 
 

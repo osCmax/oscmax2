@@ -110,7 +110,7 @@ define('ERROR_CATALOG_THUMBS_DIRECTORY_DOES_NOT_EXIST', 'Error: Catalog images d
 define('ERROR_CANNOT_MOVE_CATEGORY_TO_PARENT', 'Error: Category cannot be moved into child category.');
 
 //Select Product Image Directory & Instant Update For Products
-define('TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_1', 'ERROR ERROR - The provided \'images\' directory ');
+define('TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_1', 'Error: - The provided \'images\' directory ');
 define('TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_2', ' does not exist on the server!!.');
 define('TEXT_PRODUCTS_IMAGE_DIRECTORY', 'Image Directory:');
 define('TEXT_PRODUCTS_IMAGE_ROOT_DIRECTORY', 'Images Directory');

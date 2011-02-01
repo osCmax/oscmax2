@@ -45,8 +45,7 @@ $Id$
   if (isset($_GET['products_id'])) {
     $random_select .= " and p.products_id = '" . (int)$_GET['products_id'] . "'";
   }
-    $random_select .= " and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 ";
-    $random_select .= " and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 ";
+    $random_select .= " and find_in_set('" . $customer_group_id . "', p.products_hide_from_groups) = '0' ";
  // EOF Hide products and categories from groups
 
   $random_select .= " order by r.reviews_id desc limit " . MAX_RANDOM_SELECT_REVIEWS;

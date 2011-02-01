@@ -126,8 +126,6 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
               if ($e['restrict']) $epf_list[] = $e['field'];
             }
 			
-			print_r($epf_list);
-			
 			$epf_number = count($epf_list);
 			if ($epf_number > 0) { // hide epf if blank ?>
         	  <table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox">

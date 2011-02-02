@@ -163,7 +163,7 @@ if ($num_products_xsell != 0) { // Check query is not blank
         $xsell['specials_new_products_price'] = tep_get_products_special_price($xsell['products_id']); 
 
 		if ($xsell['specials_new_products_price']) { 
-      	  $xsell_price =  '<span style="text-decoration:line-through">' . $currencies->display_price($xsell['products_price'], tep_get_tax_rate($xsell['products_tax_class_id'])) . '</span><br>'; 
+      	  $xsell_price =  '<span style="text-decoration:line-through">' . $currencies->display_price($xsell['products_price'], tep_get_tax_rate($xsell['products_tax_class_id'])) . '</span>&nbsp;&nbsp;'; 
       	  $xsell_price .= '<span class="productSpecialPrice">' . $currencies->display_price($xsell['specials_new_products_price'], tep_get_tax_rate($xsell['products_tax_class_id'])) . '</span>'; 
     	} else {  
 	      // BOF Separate Price per Customer  

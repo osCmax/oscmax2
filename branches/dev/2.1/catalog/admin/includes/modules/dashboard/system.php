@@ -114,6 +114,12 @@ $system_permission_warnings = 0;
   <?php
   if ( (file_exists(dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/includes/configure.php')) && (is_writeable(dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/includes/configure.php')) ) { $system_permission_errors++; ?>
   <tr>
+	<td class="messageStackError"><?php echo tep_image(DIR_WS_ICONS . 'error.gif') . ' ' . WARNING_ADMIN_CONFIG_FILE_WRITEABLE; ?></td>
+  </tr>
+  <?php } ?>
+   <?php
+  if ( (file_exists(DIR_FS_CATALOG . 'includes/configure.php')) && (is_writeable(DIR_FS_CATALOG . 'includes/configure.php')) ) { $system_permission_errors++; ?>
+  <tr>
 	<td class="messageStackError"><?php echo tep_image(DIR_WS_ICONS . 'error.gif') . ' ' . WARNING_CONFIG_FILE_WRITEABLE; ?></td>
   </tr>
   <?php } ?>

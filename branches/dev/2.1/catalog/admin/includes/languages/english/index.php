@@ -113,6 +113,8 @@ define('DASHBOARD_PWA_OPC_ERROR', 'Warning: You have set <u><a href="' . tep_hre
 define('DASHBOARD_OPC_EMAIL_ERROR', 'Warning: You have enabled One Page Checkout but not set up the <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7575&cID=3079', 'NONSSL') . '">debug email address yet<a></u>.');
 define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Error: Installation directory exists at: ' . (DIR_FS_CATALOG . 'install/') . '. Please remove this directory for security reasons.');
 define('WARNING_CONFIG_FILE_WRITEABLE', 'Error: I am able to write to the configuration file: ' . (DIR_FS_CATALOG) . 'includes/configure.php. This is a potential security risk - please set the right user permissions on this file.');
+define('WARNING_ADMIN_CONFIG_FILE_WRITEABLE', 'Error: I am able to write to the configuration file: ' . (DIR_FS_ADMIN) . 'includes/configure.php. This is a potential security risk - please set the right user permissions on this file.');
+
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Error: The sessions directory does not exist: ' . tep_session_save_path() . '. Sessions will not work until this directory is created.');
 define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Warning: I am not able to write to the sessions directory: ' . tep_session_save_path() . '. Sessions will not work until the right user permissions are set.');
 define('WARNING_SEO_PHP_VERSION_LOW', 'Error: Your webserver is running ' . PHP_VERSION . ' which is not sufficient for running SEO URLs. Please disable this module until you have upgraded your version of PHP.');

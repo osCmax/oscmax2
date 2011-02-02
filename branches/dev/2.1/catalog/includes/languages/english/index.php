@@ -29,6 +29,7 @@ define('TABLE_HEADING_DEFAULT_ARTICLES', 'Articles');
   define('TEXT_NO_PRODUCTS2', 'There is no product available from this manufacturer.');
   define('TEXT_NUMBER_OF_PRODUCTS', 'Number of Products: ');
   define('TEXT_SHOW', 'Filter:');
+  define('TEXT_PAGE', 'Page: ');
   define('TEXT_BUY', 'Buy 1 \'');
   define('TEXT_NOW', '\' now');
   define('TEXT_ALL_CATEGORIES', 'All Categories');

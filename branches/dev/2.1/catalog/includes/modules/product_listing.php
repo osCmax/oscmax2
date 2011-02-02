@@ -104,7 +104,7 @@ $grid = '<table align="center"><tr><td width="20" align="center"><a href="' . te
 	} // end PRODUCT FILTER if
 
 if ($listing_split->number_of_rows > 0) {
-  $page_count = $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y')));
+  $page_count = TEXT_PAGE . $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y')));
 } else {
   $page_count = '';
 }
@@ -530,7 +530,7 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 <table class="filterbox" width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="smallText"><?php echo $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></td>
-    <td class="smallText" align="right"><?php echo $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></td>
+    <td class="smallText" align="right"><?php echo $page_count; ?></td>
   </tr>
 </table>
 <?php

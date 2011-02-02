@@ -28,10 +28,11 @@ define('TABLE_HEADING_DEFAULT_SPECIALS', 'Especiales para %s');
   define('TEXT_NO_PRODUCTS2', 'No hay productos para listar en esta categoría.');
   define('TEXT_NUMBER_OF_PRODUCTS', 'Número de Productos: ');
   define('TEXT_SHOW', '<b>Mostrar:</b>');
+  define('TEXT_PAGE', 'Página: ');
   define('TEXT_BUY', 'Comprar 1 \'');
   define('TEXT_NOW', '\' Ahora');
   define('TEXT_ALL_CATEGORIES', 'Todas las Categorias');
   define('TEXT_ALL_MANUFACTURERS', 'Todas las Manofacturas');
-define('TABLE_HEADING_DEFAULT_ARTICLES','Artículos');
+  define('TABLE_HEADING_DEFAULT_ARTICLES','Artículos');
 
 ?>

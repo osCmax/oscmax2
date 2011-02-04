@@ -53,7 +53,7 @@ $Id$
 // BOF: LINES ADDED
           if( is_array( $value ) ){
           $value = implode( ", ", $value);
-            $value = preg_replace('/--none--/', '', $value);
+            $value = preg_replace('/, --none--/', '', $value);
 		    }
 // EOF: LINES ADDED
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . $value . "' where configuration_key = '" . $key . "'");

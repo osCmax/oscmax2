@@ -23,6 +23,8 @@ if (tep_not_null($action)) {
 	switch ($action) {
 	  case 'regenerate_all':
 		listDirectory($root_images_dir);
+	  case 'regenerate_missing':		 
+		$regen_image_set_count  = listDirectory_onlymissing($root_images_dir);
 	  break;
 	}      
 }    
@@ -71,6 +73,11 @@ function format_size($size) {
             <?php if ($action == 'regenerate_all') { ?>
 		    <tr>
               <td class="messageStackSuccess" colspan="2"><?php echo TEXT_SUCCESS_1; ?><b><?php echo DYNAMIC_MOPICS_BIGIMAGES_DIR; ?></b><?php echo TEXT_SUCCESS_2; ?></td>
+			</tr>
+			<?php } ?>
+            <?php if ($action == 'regenerate_missing') { ?>
+		    <tr>
+              <td class="messageStackSuccess" colspan="2"><?php echo TEXT_SUCCESS_1; ?><b><?php echo DYNAMIC_MOPICS_BIGIMAGES_DIR; ?></b><?php echo TEXT_SUCCESS_2; ?><br><?php echo TEXT_SUCESS_TOTAL . $regen_image_set_count; ?></td>
 			</tr>
 			<?php } ?>
           </table>
@@ -744,9 +751,15 @@ function format_size($size) {
 						  $contents[] = array('text' => TEXT_CONFIRM_REGENERATE_ALL);
 						  $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=regenerate_all') . '">' . tep_image_button('button_confirm.gif', IMAGE_CONFIRM) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
 						  break;
+						case 'regenerate_confirm_only_missing':
+						  $heading[] = array('text' => '<b>' . TEXT_REGENERATE_MISSING . '</b>');
+						  $contents[] = array('text' => TEXT_CONFIRM_REGENERATE_MISSING);
+						  $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=regenerate_missing') . '">' . tep_image_button('button_confirm.gif', IMAGE_CONFIRM) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+						  break;
 						default:
 						  $heading[] = array('text' => '<b>' . SUMMARY . '</b>');
 					      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_summary.gif', IMAGE_SUMMARY) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=browse') . '">' . tep_image_button('button_browse.gif', IMAGE_BROWSE) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=missing') . '">' . tep_image_button('button_missing.gif', IMAGE_MISSING) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=orphans') . '">' . tep_image_button('button_orphans.gif', IMAGE_ORPHANS) . '</a>');
+						  $contents[] = array('align' => 'center', 'text' => '<br><br><a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=regenerate_confirm_only_missing') . '">' . tep_image_button('button_regenerate_missing.gif', IMAGE_REGENERATE_MISSING) . '</a>');
 						  $contents[] = array('align' => 'center', 'text' => '<br><br><a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=regenerate_confirm') . '">' . tep_image_button('button_regenerate_everything.gif', IMAGE_REGENERATE_EVERYTHING) . '</a><br><br>');
 						  break;
 					}
@@ -793,5 +806,50 @@ function listDirectory($path) {
 	
   } // end while
     closedir($handle);
+}
+
+function listDirectory_onlymissing($path) {
+  $handle = @opendir($path);
+  $file_exists_count = '';
+  $regen_image_set_count = '0'; 
+
+  while (false !== ($file = readdir($handle))) {
+    if ($file == '.' || $file == '..' || $file == '.svn') continue;
+	  if ( is_dir("$path$file")) {  // Directory
+        $source_bigimage = listDirectory("$path$file");
+      } else {  // File
+        $source_bigimage = "$path/$file";
+      }  
+
+	if ($source_bigimage) {
+	  $slash_pos = strripos($source_bigimage, '/');  // find last / in the image name
+	  $image_name_only = substr($source_bigimage, $slash_pos ); // Add this to the search path
+	  $filename_products = DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $image_name_only ;
+	  $filename_thumbs = DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_name_only ;
+	  $file_does_not_exist_count = ''; //reset count
+
+	  //check if product verions of picture exists
+	  if (file_exists($filename_products)) {
+    	// no nothing
+	  } else {
+   		$file_does_not_exist_count++;
+	  }
+
+	  //check if thumb verions of picture exists
+	  if (file_exists($filename_thumbs)) {
+    	// no nothing
+	  } else {
+   		$file_does_not_exist_count++;
+	  }
+
+	  if ($file_does_not_exist_count != 0) { //indicates a missing file so regen image set
+	    $regen_image_set_count++;
+		//regenerate thumbs/products/images_big picture set with the file name of '$source_bigimage'
+		require('includes/functions/image_generator.php'); 
+	  }
+	}
+  } // end while
+  closedir($handle);	
+  return $regen_image_set_count;
 }
 ?>

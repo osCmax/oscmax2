@@ -77,4 +77,10 @@ define('TEXT_INFO_COMPLETED', '<br>Completed<br>');
 define('TEXT_CONFIRM_REGENERATE_ALL', 'You have selected to regenerate all of your server images.  <br><br><b>Note:</b> All current images stored in <b>images/' . DYNAMIC_MOPICS_PRODUCTS_DIR . '</b> and <b>images/' . DYNAMIC_MOPICS_THUMBS_DIR . '</b> will be overwritten if a corresponding image exists in the <b>images/' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b> folder. <br><br>Please also note that this process may use a large proportion of your server processing power and as such should be <b>only</b> run at quiet period on your store.');
 
 define('IMAGE_MISSING_IMAGE', 'Missing Thumbnail Image');
+
+define('IMAGE_REGENERATE_MISSING','Regenerate Missing');
+define('TEXT_SUCESS_TOTAL', 'Total image sets regenerated = ');
+define('TEXT_REGENERATE_MISSING', 'Regenerate missing server images - please confirm!');
+define('TEXT_CONFIRM_REGENERATE_MISSING', 'You have selected to regenerate all missing server images.  <br><br><b>Note:</b> All current images stored in <b>images/' . DYNAMIC_MOPICS_PRODUCTS_DIR . '</b> and <b>images/' . DYNAMIC_MOPICS_THUMBS_DIR . '</b> will be overwritten if a corresponding image exists in the <b>images/' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b> folder. <br><br>Please also note that this process may use a large proportion of your server processing power and as such should be <b>only</b> run at quiet period on your store.');
+
 ?>

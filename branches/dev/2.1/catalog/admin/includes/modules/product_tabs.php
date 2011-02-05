@@ -49,36 +49,68 @@ $Id$
 	</ul>
 
 	<div id="descriptiontabs<?php echo $i ?>-0">
-        <?php echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', '70', '10', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])),'id = products_description[' . $languages[$i]['id'] . '] class="ckeditor"'); ?>   
+      <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
+        echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', '70', '10', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])),'id = products_description[' . $languages[$i]['id'] . '] class="ckeditor"');
+	  } else {
+		echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', '70', '10', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])));
+	  }?>   
 	</div>
 
 	<div id="descriptiontabs<?php echo $i ?>-10">
-        <?php echo tep_draw_textarea_field('products_short[' . $languages[$i]['id'] . ']', '70', '10', (isset($products_short[$languages[$i]['id']]) ? stripslashes($products_short[$languages[$i]['id']]) : tep_get_products_short($pInfo->products_id, $languages[$i]['id'])),'id = products_short[' . $languages[$i]['id'] . '] class="ckeditor"'); ?>   
+      <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
+        echo tep_draw_textarea_field('products_short[' . $languages[$i]['id'] . ']', '70', '10', (isset($products_short[$languages[$i]['id']]) ? stripslashes($products_short[$languages[$i]['id']]) : tep_get_products_short($pInfo->products_id, $languages[$i]['id'])),'id = products_short[' . $languages[$i]['id'] . '] class="ckeditor"');  
+      } else {
+        echo tep_draw_textarea_field('products_short[' . $languages[$i]['id'] . ']', '70', '10', (isset($products_short[$languages[$i]['id']]) ? stripslashes($products_short[$languages[$i]['id']]) : tep_get_products_short($pInfo->products_id, $languages[$i]['id'])));
+	  } ?>
 	</div>
 
 	<div id="descriptiontabs<?php echo $i ?>-1">
-         <?php echo tep_draw_textarea_field('tab1[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab1[$languages[$i]['id']]) ? stripslashes($tab1[$languages[$i]['id']]) : tep_get_tab1($pInfo->products_id, $languages[$i]['id'])),'id = tab1[' . $languages[$i]['id'] . '] class="ckeditor"'); ?>
+      <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
+         echo tep_draw_textarea_field('tab1[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab1[$languages[$i]['id']]) ? stripslashes($tab1[$languages[$i]['id']]) : tep_get_tab1($pInfo->products_id, $languages[$i]['id'])),'id = tab1[' . $languages[$i]['id'] . '] class="ckeditor"');
+	  } else {
+		 echo tep_draw_textarea_field('tab1[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab1[$languages[$i]['id']]) ? stripslashes($tab1[$languages[$i]['id']]) : tep_get_tab1($pInfo->products_id, $languages[$i]['id'])));  
+	  } ?>
 	</div>
 
 	<div id="descriptiontabs<?php echo $i ?>-2">
-         <?php echo tep_draw_textarea_field('tab2[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab2[$languages[$i]['id']]) ? stripslashes($tab2[$languages[$i]['id']]) : tep_get_tab2($pInfo->products_id, $languages[$i]['id'])),'id = tab2[' . $languages[$i]['id'] . '] class="ckeditor"'); ?>
+      <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
+         echo tep_draw_textarea_field('tab2[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab2[$languages[$i]['id']]) ? stripslashes($tab2[$languages[$i]['id']]) : tep_get_tab2($pInfo->products_id, $languages[$i]['id'])),'id = tab2[' . $languages[$i]['id'] . '] class="ckeditor"');
+	  } else {
+		 echo tep_draw_textarea_field('tab2[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab2[$languages[$i]['id']]) ? stripslashes($tab2[$languages[$i]['id']]) : tep_get_tab2($pInfo->products_id, $languages[$i]['id']))); 
+	  } ?>
 	</div>
 
 	<div id="descriptiontabs<?php echo $i ?>-3">
-         <?php echo tep_draw_textarea_field('tab3[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab3[$languages[$i]['id']]) ? stripslashes($tab3[$languages[$i]['id']]) : tep_get_tab3($pInfo->products_id, $languages[$i]['id'])),'id = tab3[' . $languages[$i]['id'] . '] class="ckeditor"'); ?>
+      <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
+         echo tep_draw_textarea_field('tab3[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab3[$languages[$i]['id']]) ? stripslashes($tab3[$languages[$i]['id']]) : tep_get_tab3($pInfo->products_id, $languages[$i]['id'])),'id = tab3[' . $languages[$i]['id'] . '] class="ckeditor"');
+	  } else {
+		echo tep_draw_textarea_field('tab3[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab3[$languages[$i]['id']]) ? stripslashes($tab3[$languages[$i]['id']]) : tep_get_tab3($pInfo->products_id, $languages[$i]['id'])));  
+	  } ?>
 	</div>
 
 	<div id="descriptiontabs<?php echo $i ?>-4">
-         <?php echo tep_draw_textarea_field('tab4[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab4[$languages[$i]['id']]) ? stripslashes($tab4[$languages[$i]['id']]) : tep_get_tab4($pInfo->products_id, $languages[$i]['id'])),'id = tab4[' . $languages[$i]['id'] . '] class="ckeditor"'); ?>
+      <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
+        echo tep_draw_textarea_field('tab4[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab4[$languages[$i]['id']]) ? stripslashes($tab4[$languages[$i]['id']]) : tep_get_tab4($pInfo->products_id, $languages[$i]['id'])),'id = tab4[' . $languages[$i]['id'] . '] class="ckeditor"');
+	  } else {
+		echo tep_draw_textarea_field('tab4[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab4[$languages[$i]['id']]) ? stripslashes($tab4[$languages[$i]['id']]) : tep_get_tab4($pInfo->products_id, $languages[$i]['id'])));  
+	  } ?>
 	</div>
 
 	<div id="descriptiontabs<?php echo $i ?>-5">
-          <?php echo tep_draw_textarea_field('tab5[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab5[$languages[$i]['id']]) ? stripslashes($tab5[$languages[$i]['id']]) : tep_get_tab5($pInfo->products_id, $languages[$i]['id'])),'id = tab5[' . $languages[$i]['id'] . '] class="ckeditor"'); ?>    
+      <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
+        echo tep_draw_textarea_field('tab5[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab5[$languages[$i]['id']]) ? stripslashes($tab5[$languages[$i]['id']]) : tep_get_tab5($pInfo->products_id, $languages[$i]['id'])),'id = tab5[' . $languages[$i]['id'] . '] class="ckeditor"');
+	  } else {
+		echo tep_draw_textarea_field('tab5[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab5[$languages[$i]['id']]) ? stripslashes($tab5[$languages[$i]['id']]) : tep_get_tab5($pInfo->products_id, $languages[$i]['id'])));  
+	  } ?>  
 	</div>
 
 	<div id="descriptiontabs<?php echo $i ?>-6">
-          <?php echo tep_draw_textarea_field('tab6[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab6[$languages[$i]['id']]) ? stripslashes($tab6[$languages[$i]['id']]) : tep_get_tab6($pInfo->products_id, $languages[$i]['id'])),'id = tab6[' . $languages[$i]['id'] . '] class="ckeditor"'); ?>    
-	</div>
+      <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
+        echo tep_draw_textarea_field('tab6[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab6[$languages[$i]['id']]) ? stripslashes($tab6[$languages[$i]['id']]) : tep_get_tab6($pInfo->products_id, $languages[$i]['id'])),'id = tab6[' . $languages[$i]['id'] . '] class="ckeditor"');
+	  } else {
+		echo tep_draw_textarea_field('tab6[' . $languages[$i]['id'] . ']', '70', '10', (isset($tab6[$languages[$i]['id']]) ? stripslashes($tab6[$languages[$i]['id']]) : tep_get_tab6($pInfo->products_id, $languages[$i]['id'])));  
+	  } ?>  
+    </div>
 
 </div><!-- END descriptiontabs DIV -->
 </div>

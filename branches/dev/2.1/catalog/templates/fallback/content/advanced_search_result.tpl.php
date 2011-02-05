@@ -217,7 +217,7 @@ foreach ($epf as $e) {
   if ($e['search']) { // only process advanced searchable fields
     $value = '';
     if (isset($_GET[$e['field']]) && !empty($_GET[$e['field']]))
-      $value = $_GET[$e['field']]; // get value passed from advanced_search.php
+      $value = tep_db_prepare_input($_GET[$e['field']]); // get value passed from advanced_search.php
     if ($e['uses_list'] && ($value != '')) {
       if ($e['multi_select']) {
         if (is_array($value)) {

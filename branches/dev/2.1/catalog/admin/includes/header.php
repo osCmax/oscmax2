@@ -11,7 +11,7 @@ $Id$
 */
 ?>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
 
 <script type="text/javascript" src="includes/javascript/hoverIntent.js"></script>
 <script type="text/javascript" src="includes/javascript/superfish.js"></script>
@@ -112,19 +112,43 @@ $Id$
 	$("#categorytabs").tabs();
 
 //Code for EPF show/hide list functions
-var toggle = $("input[name='yestoggle']:checked").val();
-if (toggle == 0) {
-  $("#listofvalues").hide();
-}
 
-$("#yestoggle").click(function(){
-	$("#listofvalues").show();						   
-});
-$("#notoggle").click(function(){
-	$("#listofvalues").hide();						   
-});
+   // All categories show/hide
+   all_cats = $('input[name=all_cats]:radio').val();
+   if (all_cats === 1) {
+     $("#all_cats_row").hide(); 
+   }
 
+    $('input[name=all_cats]:radio').change(function() {
+        $("#all_cats_row").toggle();                                                 
+    });
 
+   // List of Values show/hide   
+   value_list = $('input[name=value_list]:radio').val();
+   if (value_list === 0) {   
+     $("#value_list").hide();
+   }
+   
+    $('input[name=value_list]:radio').change(function() {
+        $("#value_list").toggle();                                                 
+    });
+	
+	// Single Value Lists show/hide   
+   list_type = $('input[name=list_type]:radio').val();
+   if (list_type === 1) {   
+     $("#single_value1").hide();
+	 $("#single_value2").hide();
+	 $("#single_value3").hide();
+	 $("#single_value4").hide();
+   }
+   
+    $('input[name=list_type]:radio').change(function() {
+        $("#single_value1").toggle(); 
+		$("#single_value2").toggle();
+		$("#single_value3").toggle();
+		$("#single_value4").toggle();                                                
+    });   
+   
 });
 
 </script>

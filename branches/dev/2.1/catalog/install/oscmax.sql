@@ -1505,6 +1505,8 @@ CREATE TABLE extra_product_fields (
   epf_links_to int unsigned not null default 0,
   epf_textarea tinyint(1) not null default 0,
   epf_show_in_admin tinyint(1) not null default 1,
+  epf_all_categories tinyint(1) not null default 1,
+  epf_category_ids text,
   PRIMARY KEY (epf_id),
   KEY IDX_ORDER (epf_order)
 );

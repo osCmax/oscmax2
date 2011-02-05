@@ -51,7 +51,7 @@ $Id$
         } else {
       		$epf_empty = false;
       		if (!$e['uses_list']) 
-        		$epf_values[] = $_GET[$e['field']];
+        		$epf_values[] = tep_db_prepare_input($_GET[$e['field']]);
         }
       }
   }
@@ -96,7 +96,7 @@ $Id$
     }
 
     if (isset($_GET['keywords'])) {
-      $keywords = $_GET['keywords'];
+      $keywords = tep_db_prepare_input($_GET['keywords']);
     }
 
     $date_check_error = false;

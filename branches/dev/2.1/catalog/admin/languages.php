@@ -39,6 +39,12 @@ $Id$
           tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_url) values ('" . (int)$products['products_id'] . "', '" . (int)$insert_id . "', '" . tep_db_input($products['products_name']) . "', '" . tep_db_input($products['products_description']) . "', '" . tep_db_input($products['products_url']) . "')");
         }
 
+// create additional Extra Product Field Label records
+        $epf_query = tep_db_query("select epf_id from " . TABLE_EPF);
+        while ($epf = tep_db_fetch_array($epf_query)) {
+          tep_db_query("insert into " . TABLE_EPF_LABELS . " (epf_id, languages_id, epf_label, epf_active_for_language) values ('" . (int)$epf['epf_id'] . "', '" . (int)$insert_id . "', null, 0)");
+        }
+
 // create additional products_options records
         $products_options_query = tep_db_query("select products_options_id, products_options_name from " . TABLE_PRODUCTS_OPTIONS . " where language_id = '" . (int)$languages_id . "'");
         while ($products_options = tep_db_fetch_array($products_options_query)) {
@@ -121,6 +127,18 @@ $Id$
         tep_db_query("delete from " . TABLE_MANUFACTURERS_INFO . " where languages_id = '" . (int)$lID . "'");
         tep_db_query("delete from " . TABLE_ORDERS_STATUS . " where language_id = '" . (int)$lID . "'");
         tep_db_query("delete from " . TABLE_LANGUAGES . " where languages_id = '" . (int)$lID . "'");
+
+        // begin Extra Product Fields
+        tep_db_query("delete from " . TABLE_EPF_LABELS . " where languages_id = '" . (int)$lID . "'");
+        $query = tep_db_query('select value_id from ' . TABLE_EPF_VALUES . ' where languages_id = ' . (int)$lID);
+        $values = array();
+        while ($v = tep_db_fetch_array($query)) { // find any values associated with the language being deleted
+          $values[] = $v['value_id'];
+        }
+        $v = implode(',', $values);
+        if (!empty($values)) tep_db_query('delete from ' . TABLE_EPF_EXCLUDE . ' where (value_id1 in (' . $v . ')) or (value_id2 in (' . $v . '))'); // remove values being deleted from exclude table
+        tep_db_query("delete from " . TABLE_EPF_VALUES . " where languages_id = '" . (int)$lID . "'");
+        // end Extra Product Fields
 
         tep_redirect(tep_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page']));
         break;

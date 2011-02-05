@@ -140,6 +140,20 @@ global $customer_group_id;
     }
 
 // BOF: Extra Product Fields
+    function get_category_children($parent_id) {
+      $cat_list = array($parent_id);
+      $query = tep_db_query('select categories_id from ' . TABLE_CATEGORIES . ' where parent_id = ' . (int)$parent_id);
+      while ($cat = tep_db_fetch_array($query)) {
+        $children = get_category_children($cat['categories_id']);
+        $cat_list = array_merge($cat_list, $children);
+      }
+      return $cat_list;
+    }
+    if (isset($HTTP_GET_VARS['manufacturers_id']) && isset($HTTP_GET_VARS['filter_id']) && tep_not_null($HTTP_GET_VARS['filter_id'])) {
+      $current_cat = $HTTP_GET_VARS['filter_id'];
+    } else {
+      $current_cat = $current_category_id;
+    }
     $epf_query = tep_db_query("select * from " . TABLE_EPF . " e join " . TABLE_EPF_LABELS . " l where e.epf_status and (e.epf_show_in_listing or e.epf_use_to_restrict_listings) and (e.epf_id = l.epf_id) and (l.languages_id = " . (int)$languages_id . ") and l.epf_active_for_language order by e.epf_order");
     $epf = array();
     while ($e = tep_db_fetch_array($epf_query)) {
@@ -152,11 +166,23 @@ global $customer_group_id;
         }
       }
       $field .= $e['epf_id'];
+      if ($e['epf_all_categories'] || ($current_cat == 0)) {
+        $hidden_field = false;
+      } else {
+        $hidden_field = true;
+        $base_categories = explode('|', $e['epf_category_ids']);
+        $all_epf_categories = array();
+        foreach ($base_categories as $cat) {
+          $children = get_category_children($cat);
+          $all_epf_categories = array_merge($all_epf_categories, $children);
+        }
+        if (in_array($current_cat, $all_epf_categories)) $hidden_field = false;
+      }
       $epf[] = array('id' => $e['epf_id'],
                      'label' => $e['epf_label'],
                      'uses_list' => $e['epf_uses_value_list'],
                      'show_chain' => $e['epf_show_parent_chain'],
-                     'restrict' => $e['epf_use_to_restrict_listings'],
+                     'restrict' => ($hidden_field ? false : $e['epf_use_to_restrict_listings']),
                      'listing' => $e['epf_show_in_listing'],
                      'multi_select' => $e['epf_multi_select'],
                      'field' => $field);

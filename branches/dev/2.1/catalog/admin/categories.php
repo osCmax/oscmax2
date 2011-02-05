@@ -49,6 +49,23 @@ $Id$
       return $value_id;
     }
   }
+  function get_category_children($parent_id) {
+    $cat_list = array($parent_id);
+    $query = tep_db_query('select categories_id from ' . TABLE_CATEGORIES . ' where parent_id = ' . (int)$parent_id);
+    while ($cat = tep_db_fetch_array($query)) {
+      $children = get_category_children($cat['categories_id']);
+      $cat_list = array_merge($cat_list, $children);
+    }
+    return $cat_list;
+  }
+  // get categories for current product
+  $product_categories = array($HTTP_GET_VARS['cPath']);
+  if (($action == 'new_product') && isset($HTTP_GET_VARS['pID'])) {
+    $query = tep_db_query('select categories_id from ' . TABLE_PRODUCTS_TO_CATEGORIES . ' where products_id = ' . (int)$HTTP_GET_VARS['pID']);
+    while ($cat = tep_db_fetch_array($query)) {
+      $product_categories[] = $cat['categories_id'];
+    }    
+  }
   $epf_query = tep_db_query("select * from " . TABLE_EPF . " e join " . TABLE_EPF_LABELS . " l where (e.epf_status or e.epf_show_in_admin) and (e.epf_id = l.epf_id) order by e.epf_order");
   $epf = array();
   $xfields = array();
@@ -76,6 +93,20 @@ $Id$
         }
       }
     }
+    if ($e['epf_all_categories']) {
+      $hidden_field = false;
+    } else {
+      $hidden_field = true;
+      $base_categories = explode('|', $e['epf_category_ids']);
+      $all_epf_categories = array();
+      foreach ($base_categories as $cat) {
+        $children = get_category_children($cat);
+        $all_epf_categories = array_merge($all_epf_categories, $children);
+      }
+      foreach ($all_epf_categories as $cat) {
+        if (in_array($cat, $product_categories)) $hidden_field = false;
+      }
+    }
     $epf[] = array('id' => $e['epf_id'],
                    'label' => $e['epf_label'],
                    'uses_list' => $e['epf_uses_value_list'],
@@ -91,7 +122,8 @@ $Id$
                    'language_active' => $e['epf_active_for_language'],
                    'values' => $values,
                    'textarea' => $e['epf_textarea'],
-                   'field' => $field);
+                   'field' => $field,
+                   'hidden' => $hidden_field);
     if (!in_array( $field, $xfields))
       $xfields[] = $field; // build list of distinct fields    
   }
@@ -1835,9 +1867,9 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         	          }
         	        }
 ?>
-          <tr bgcolor="#ebebff">
+          <tr bgcolor="#ebebff" <?php if ($e['hidden']) echo 'style="display: none"'; ?>>
             <td class="main"><?php echo $e['label']; ?>:</td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $inp; ?></td>
+            <td class="main"><?php echo tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $inp; ?></td>
           </tr>
 <?php
                 }

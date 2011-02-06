@@ -78,11 +78,16 @@ $Id$
 	  for ($x = 0; $x < $no_of_new_products; $x++) { 
 	    for ($i = 0; $i < count($new_s_prices); $i++) {
 		  if( $new_products[$x]['products_id'] == $new_s_prices[$i]['products_id'] ) {
-			$new_products[$x]['products_price'] = $new_s_prices[$i]['specials_new_products_price'];
+			$special_old_price[$x] = '<span style="text-decoration:line-through">' . $currencies->display_price($new_products[$x]['products_price'], tep_get_tax_rate($new_products[$x]['products_tax_class_id'])) . '</span>&nbsp;<span class="productSpecialPrice">';
+			$new_products[$x]['products_price'] = '' . $new_s_prices[$i]['specials_new_products_price'];
+			$closer[$x] = '</span>';
 		  } // end if 
 	    } // end for
 	  } // end for
 	} // // end if(!empty($new_s_prices)
+	
+	
+	// $special_old_price = tep_get_products_special_price($featured_categories['products_id']);
 
     $row = 0;
     $col = 0;
@@ -100,7 +105,7 @@ $Id$
 
       $box_content[$row][$col] = array('align' => 'center',
                                        'params' => 'class="smallText" width="33%" valign="top"',
-                                       'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products[$x]['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $new_products[$x]['products_image'], $new_products[$x]['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products[$x]['products_id']) . '">' . $new_products[$x]['products_name'] . '</a><br>' . $currencies->display_price($new_products[$x]['products_price'], tep_get_tax_rate($new_products[$x]['products_tax_class_id'])) . '<br>' . $more_info . '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'pName')) . 'action=buy_now&products_id=' . $new_products[$x]['products_id']) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>');
+                                       'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products[$x]['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $new_products[$x]['products_image'], $new_products[$x]['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products[$x]['products_id']) . '">' . $new_products[$x]['products_name'] . '</a><br>' . $special_old_price[$x] . '&nbsp;' . $currencies->display_price($new_products[$x]['products_price'], tep_get_tax_rate($new_products[$x]['products_tax_class_id'])) . $closer[$x] . '<br>' . $more_info . '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'pName')) . 'action=buy_now&products_id=' . $new_products[$x]['products_id']) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>');
 
       $col ++;
       if ($col > 2) {

@@ -52,7 +52,7 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
   
     $special_price = tep_get_products_special_price($featured_manufacturer_products_array[$i]['pid']);
     if ($special_price) {
-      $products_price = '<s>' .  $currencies->display_price($featured_manufacturer_products_array[$i]['pprice'], tep_get_tax_rate($featured_manufacturer_products_array[$i]['ptax_class_id'])) . '</s>&nbsp;&nbsp;<span class="productSpecialPrice">' . $currencies->display_price($special_price, tep_get_tax_rate($featured_manufacturer_products_array[$i]['ptax_class_id'])) . '</span>'; 
+      $products_price = '<s>' .  $currencies->display_price($featured_manufacturer_products_array[$i]['pprice'], tep_get_tax_rate($featured_manufacturer_products_array[$i]['ptax_class_id'])) . '</s>&nbsp; <span class="productSpecialPrice">' . $currencies->display_price($special_price, tep_get_tax_rate($featured_manufacturer_products_array[$i]['ptax_class_id'])) . '</span>'; 
     } else { 
       $products_price = $currencies->display_price($featured_manufacturer_products_array[$i]['pprice'], tep_get_tax_rate($featured_manufacturer_products_array[$i]['ptax_class_id'])); 
     } 

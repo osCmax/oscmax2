@@ -52,7 +52,10 @@ if ( (OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') && !empty($current_category
 }
 
   $featured_products_query = tep_db_query($featured_products_query_raw); 
-  while ($featured_products = tep_db_fetch_array($featured_products_query)) { 
+  while ($featured_products = tep_db_fetch_array($featured_products_query)) {
+	
+	// Set special price only for specific groups  
+	$featured_products['specials_new_products_price'] = tep_get_products_special_price($featured_products['products_id']);
 
     $featured_products_array[] = array('id' => $featured_products['products_id'], 
 		'name' => $featured_products['products_name'], 
@@ -94,7 +97,10 @@ if ( (OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') && !empty($current_category
 
 
     $featured_manufacturer_products_query = tep_db_query($featured_manufacturer_products_query_raw); 
-    while ($featured_manufacturer_products = tep_db_fetch_array($featured_manufacturer_products_query)) { 
+    while ($featured_manufacturer_products = tep_db_fetch_array($featured_manufacturer_products_query)) {
+		
+	  // Set special price only for specific groups  
+	  $featured_manufacturer_products['specials_new_products_price'] = tep_get_products_special_price($featured_manufacturer_products['products_id']);	 
 
       $featured_manufacturer_products_array[] = array('pid' => $featured_manufacturer_products['products_id'], 
 		'pname' => $featured_manufacturer_products['products_name'], 
@@ -128,6 +134,9 @@ if ( (OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES=='true') && !empty($current_category
 
     $featured_categories_query = tep_db_query($featured_categories_query_raw); 
     while ($featured_categories = tep_db_fetch_array($featured_categories_query)) { 
+	
+	  // Set special price only for specific groups  
+	  $featured_categories['specials_new_products_price'] = tep_get_products_special_price($featured_categories['products_id']);	
 
       $featured_categories_array[] = array('cid' => $featured_categories['categories_id'], 
 		'cname' => $featured_categories['categories_name'],

@@ -10,8 +10,8 @@ $Id$
   Released under the GNU General Public License
 */
 ?>
-<script src="http://www.google.com/jsapi"></script>
-<script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
   // Load jQuery
   google.load("jquery", "1.4.2");
 </script>
@@ -22,10 +22,6 @@ $Id$
 <script type="text/javascript" src="includes/javascript/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="includes/javascript/jqzoom.pack.1.0.1.js"></script>
 <script type="text/javascript" src="includes/javascript/scrollable.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','jqzoom.css')); // BTSv1.5 ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','slimbox2.css')); // BTSv1.5 ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','dynamic_mopics.css')); // BTSv1.5 ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','scrollable.css')); // BTSv1.5 ?>">
 <script language="javascript" type="text/javascript"><!--
 	function popupImage(url, imageHeight, imageWidth) {
 		var newImageHeight = (parseInt(imageHeight) + 40);
@@ -93,11 +89,11 @@ jQuery.fn.semantictabs = function(passedArgsObj) {
   		var container = jQuery(this);
         container.find(args.panel).hide();
   		container.find(args.panel + args.active).show();
-  		container.prepend("<ul class=\"tabs semtabs\"></ul>");
+  		container.prepend("<ul class=\"tabs semtabs\"><\/ul>");
   		container.find(args.panel).each( function() {
   		  var title = jQuery(this).find(args.head).text();
   		  this.title = title;
-  			container.find("ul.tabs").append("<li><a href=\"javascript:void(0);\">"+title+"</a></li>");
+  			container.find("ul.tabs").append("<li><a href=\"javascript:void(0);\">"+title+"<\/a><\/li>");
   		});
   		container.find("ul li" + args.active).addClass("active");
   		// Tab click behavior

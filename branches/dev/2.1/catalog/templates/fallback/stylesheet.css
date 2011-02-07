@@ -236,7 +236,85 @@ TD.stockTable, SPAN.stockTable { font-family: Verdana, Arial, sans-serif; font-s
 .clue-left-jtip .cluetip-arrows { background-image: url(images/arrowright.gif); left: 100%; margin-right: -11px; }
 .clue-top-jtip .cluetip-arrows { background-image: url(images/arrowdown.gif); top: 100%; left: 50%; margin-left: -11px; height: 11px; width: 22px; }  
 .clue-bottom-jtip .cluetip-arrows { background-image: url(images/arrowup.gif); top: -11px; left: 50%; margin-left: -11px; height: 11px; width: 22px; }
-
 /* stupid IE6 HasLayout hack */
 .cluetip-rounded #cluetip-title, .cluetip-rounded #cluetip-inner { zoom: 1; }
 /* EOF: Cluetip - Tooltip */
+
+/* BOF: Scrollable - product_info thumbnail scroller */
+/* NOTE: Some settings for scrollable are controlled through admin panel */
+.scrollable, .scrollable_ap { position:relative; overflow:hidden; float:left; }
+.scrollable .items, .scrollable_ap .items_ap { width:20000em; position:absolute; clear:both; }
+.items div, .items_ap div { float:left; width:590px; }
+
+/* prev, next, prevPage and nextPage buttons */
+a.browse, a.browse_ap { background:url(images/hori_large.png) no-repeat scroll 0 0 transparent;	display:block; width:24px; height:56px; float:left; cursor:pointer; font-size:1px; }
+a.right, a.right_ap { background-position:0 -56px;clear:right;margin-right:0px; }
+a.right:hover, a.right_ap:hover { background-position:-24px -56px }
+a.right:active, a.right_ap:active { background-position:-48px -56px }
+a.left, a.left_ap { margin-left:1px }
+a.left:hover, a.left_ap:hover { background-position:-24px 0 }
+a.left:active, a.left_ap:active { background-position:-48px 0 }
+/* EOF: Scrollable - product_info thumbnail scroller */
+
+/* BOF: jqzoom - product_info image zoomer */
+div.jqZoomTitle { z-index:5000; text-align:center; font-size:11px; font-family:Tahoma; height:16px; padding-top:2px; position:absolute; top: 0px; left: 0px; width: 100%; color: #FFF; background: #999; }
+.jqZoomPup { overflow:hidden; background-color: #FFF; -moz-opacity:0.6; opacity: 0.6; filter: alpha(opacity = 60); z-index:10; border-color:#c4c4c4; border-style: solid; cursor:crosshair; }
+.jqZoomPup img { border: 0px; }
+.preload{ -moz-opacity:0.8; opacity: 0.8; filter: alpha(opacity = 80); color: #333; font-size: 12px; font-family: Tahoma; text-decoration: none; border: 1px solid #CCC; background-color: white; padding: 8px; text-align:center; background-image: url(images/loading.gif); background-repeat: no-repeat; background-position: 43px 30px; width:90px; * width:100px; height:43px; *height:55px; z-index:10; position:absolute; top:3px; left:3px; }
+.jqZoomWindow { border: 1px solid #ddd; background-color: #FFF; }
+/* EOF: jqzoom - product_info image zoomer */
+
+/* BOF: fwr_suckertree_css_menu - index category infobox */
+.menudiv { font: 10px Verdana, Arial, sans-serif; }
+.menudiv ul{ margin: 0; padding: 0; list-style-type: none; width: auto; /* Width of Menu Items */ /* border-bottom: 1px solid #ccc; */ }	
+.menudiv ul li{ position: relative; }
+/*Sub level menu items */
+.menudiv ul li ul{ position: absolute; background: #f8f8f9; width: 129px; /*sub menu width*/ top: 0; visibility: hidden; border: 1px solid #ccc; z-index: 2000; }
+/* Sub level menu links style */
+.menudiv ul li a{ display: block; overflow: auto; /*force hasLayout in IE7 */ color: #000; text-decoration: none; background: #f8f8f9; padding: 1px 5px; /* border: 1px solid #ccc; */ border-bottom: 0; z-index: 2000; }
+.menudiv ul li a:visited{}
+.menudiv ul li a:hover{ color: #a00; background: #ffffcc; }
+.menudiv .subfolderstyle{ background: url(images/fwr_arrow.gif) no-repeat center right; }
+/* Holly Hack for IE \*/
+* html .menudiv ul li { float: left; height: 1%; }
+* html .menudiv ul li a { height: 1%; }
+.sitemap { font: 10px Verdana, Arial, sans-serif; }
+.sitemap a { color: #000; }
+.sitemap a:hover { color: red; background: #ffffcc; }
+.sitemap ul { list-style-image : url(images/fwr_arrow.gif); }
+.sitemap ul li ul { list-style-image : url(images/fwr_arrow_red.gif); }
+/* EOF: fwr_suckertree_css_menu - index category infobox */
+
+/* BOF: SLIMBOX */
+#lbOverlay { position: fixed; z-index: 9999;left: 0; top: 0; width: 100%; height: 100%; background-color: #000; cursor: pointer; }
+#lbCenter, #lbBottomContainer { position: absolute; z-index: 9999; overflow: hidden; background-color: #fff; }
+.lbLoading { background: #fff url(images/loading.gif) no-repeat center; }
+#lbImage { position: absolute; left: 0; top: 0; border: 10px solid #fff; background-repeat: no-repeat; }
+#lbPrevLink, #lbNextLink { display: block; position: absolute; top: 0; width: 50%; outline: none; }
+#lbPrevLink { left: 0; }
+#lbPrevLink:hover { background: transparent url(images/prevlabel.gif) no-repeat 0 15%; }
+#lbNextLink { right: 0; }
+#lbNextLink:hover { background: transparent url(images/nextlabel.gif) no-repeat 100% 15%; }
+#lbBottom { font-family: Verdana, Arial, Geneva, Helvetica, sans-serif; font-size: 10px; color: #666; line-height: 14px; text-align: left; border: 10px solid #fff; border-top-style: none; }
+#lbCloseLink { display: block; float: right; width: 66px; height: 18px; background: transparent url(images/closelabel.gif) no-repeat center; margin: 5px 0; outline: none; }
+#lbCaption, #lbNumber { margin-right: 71px; }
+#lbCaption { font-weight: bold; }
+/* EOF: SLIMBOX */
+
+/* BOF: Dynamic Mopics */
+BODY.popupImage { background: #FFFFFF; color: #000000; text-align: center; padding: 0;margin-bottom: 20px; }
+.screenshotsBlock { align: center; width: 100%; border: 1px solid #bbc3d3; background: #f8f8f9; text-align: center; padding: 0; margin: 0; }
+.screenshotsHeaderText { font-family: Verdana, Arial, sans-serif; font-size: 10px; background-image:  url('images/box_header.jpg'); background-repeat: repeat-x; background-position: top center; color: white; font-weight: bold; margin-left: 10px; }
+.screenshotsHeader { width: 100%; font-family: Verdana, Arial, sans-serif; font-size: 10px; background-image:  url('images/box_header.jpg'); background-repeat: repeat-x; background-position: top center; color: white; }
+#screenshotsHeader { font-family: Verdana, Arial, sans-serif; font-size: 10px; background-image:  url('images/box_header.jpg'); background-repeat: repeat-x;background-position: top center; color: white; font-weight: bold; }
+#screenshotsHeaderText { font-family: Verdana, Arial, sans-serif; font-size: 10px; background-image:  url('images/box_header.jpg'); background-repeat: repeat-x;
+background-position: top center; color: white; font-weight: bold; margin-left: 10px; }
+ /* for Firefox 3 */
+.screenshots { display: -moz-inline-box; vertical-align: top;  display: inline-block; text-align: center; padding: 5px 0 5px 0; margin-left: auto ; margin-right: auto ; }
+* html .screenshots { display: inline; padding: 5px 0 5px 5px; } 
+.screenshots IMG { vertical-align: top; display: inline; border: 3px double #bbc3d3; }
+.screenshots a:hover { text-decoration: none; }
+.clearScreenshots { clear: both; height: 1px; width: 100px; }
+.clearScreenshots hr { display: none; }
+.noScreenshots { text-align: center; padding: 15px 0 15px 0; margin: 0; }
+/* EOF: Dynamic Mopics */

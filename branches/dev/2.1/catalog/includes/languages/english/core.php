@@ -414,4 +414,5 @@ define('TEXT_SPECIALS', 'Specials');
 define('TEXT_READ_MORE', ' ... read more ... ');
 
 define('TEXT_MISSING_IMAGE', 'Sorry, product image is currently not available');
+define('TEXT_PAGE', 'Page: ');
 ?>

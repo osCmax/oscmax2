@@ -17,9 +17,9 @@ $Id$
   // Hide Fedex shipping manifest unless module is installed
   $fedex_menu_display = '';
    
-  if (MODULE_SHIPPING_FEDEX1_STATUS == 'True') {
-    $fedex_menu_display = "tep_admin_jqmenu(FILENAME_SHIPPING_MANIFEST, BOX_SHIPPING_MANIFEST, 'BLANK')";
-  }
+    if (MODULE_SHIPPING_FEDEX1_STATUS == 'True') {
+      $fedex_menu_display = tep_admin_jqmenu(FILENAME_SHIPPING_MANIFEST, BOX_SHIPPING_MANIFEST, 'BLANK');
+    }
 
   $contents = (					   tep_admin_jqmenu(FILENAME_STATS_PRODUCTS_VIEWED, BOX_REPORTS_PRODUCTS_VIEWED, 'TOP') .
                                    tep_admin_jqmenu(FILENAME_STATS_PRODUCTS_PURCHASED, BOX_REPORTS_PRODUCTS_PURCHASED, 'TOP') .

@@ -200,7 +200,7 @@ $Id$
               </tr>
               <tr>
                 <td class="main" colspan="2" valign="top"><?php echo $authors_description; ?></td>
-              <tr>
+              </tr>
                 <?php } ?>
                 <?php if ( (tep_not_null(isset($authors_url))) && ($authors_url<>'') ) { ?>
               <tr>
@@ -208,7 +208,7 @@ $Id$
               </tr>
               <tr>
                 <td class="main" colspan="2" valign="top"><?php echo sprintf(TEXT_MORE_INFORMATION, $authors_url); ?></td>
-              <tr>
+              </tr>
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>

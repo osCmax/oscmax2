@@ -14,22 +14,24 @@ $Id$
   <tr>
     <!-- body_text //-->
     <?php
-  if ($topic_depth == 'nested') {
+    if ($topic_depth == 'nested') {
     $topic_query = tep_db_query("select td.topics_name, td.topics_heading_title, td.topics_description from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = '" . (int)$current_topic_id . "' and td.topics_id = '" . (int)$current_topic_id . "' and td.language_id = '" . (int)$languages_id . "'");
     $topic = tep_db_fetch_array($topic_query);
-?>
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    ?>
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
-          <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td valign="top" class="pageHeading">
                   <?php
 /* bof catdesc for bts1a, replacing "echo HEADING_TITLE;" by "topics_heading_title" */
-             if ( tep_not_null($topic['topics_heading_title']) ) {
-                 echo $topic['topics_heading_title'];
-               } else {
-                 echo HEADING_TITLE;
-               }
+                if ( tep_not_null($topic['topics_heading_title']) ) {
+                  echo $topic['topics_heading_title'];
+                } else {
+                  echo HEADING_TITLE;
+                }
 /* eof catdesc for bts1a */ ?>
                 </td>
                 <td valign="top" class="pageHeading" align="right">&nbsp;</td>
@@ -45,17 +47,20 @@ $Id$
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>
               <?php } ?>
-            </table></td>
+            </table>
+          </td>
         </tr>
         <tr>
           <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
         </tr>
         <tr>
-          <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <td>
+                  <table border="0" width="100%" cellspacing="0" cellpadding="2">
                     <tr>
-                      <?php
+                    <?php
     if (isset($tPath) && strpos('_', $tPath)) {
 // check to see if there are deeper topics within the current topic
       $topic_links = array_reverse($tPath_array);
@@ -76,9 +81,10 @@ $Id$
 // needed for the new articles module shown below
     $new_articles_topic_id = $current_topic_id;
 ?>
+                    </tr>
+                  </table>
+                </td>
               </tr>
-            </table></td>
-          </tr>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>
@@ -87,11 +93,13 @@ $Id$
                   <?php /*include(DIR_WS_MODULES . FILENAME_NEW_ARTICLES); */ ?>
                 </td>
               </tr>
-            </table></td>
+            </table>
+          </td>
         </tr>
-      </table></td>
+      </table>
+    </td>
     <?php
-  } elseif ($topic_depth == 'articles' || isset($_GET['authors_id'])) {
+    } elseif ($topic_depth == 'articles' || isset($_GET['authors_id'])) {
 
 /* bof catdesc for bts1a */
 // Get the topic name and description from the database
@@ -119,18 +127,20 @@ $Id$
       }
     }
 ?>
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td valign="top" align="left" class="pageHeading">
-                  <?php
-           /* bof catdesc for bts1a, replacing "echo HEADING_TITLE;" by "topics_heading_title" */
-               if ( tep_not_null($topic['topics_heading_title']) ) {
-                 echo $topic['topics_heading_title'];
-               } else {
-                 echo HEADING_TITLE;
-               }
+                <?php
+                /* bof catdesc for bts1a, replacing "echo HEADING_TITLE;" by "topics_heading_title" */
+                if ( tep_not_null($topic['topics_heading_title']) ) {
+                  echo $topic['topics_heading_title'];
+                } else {
+                  echo HEADING_TITLE;
+                }
 
              if (isset($_GET['authors_id'])) {
                $author_query = tep_db_query("select au.authors_name, aui.authors_description, aui.authors_url from " . TABLE_AUTHORS . " au, " . TABLE_AUTHORS_INFO . " aui where au.authors_id = '" . (int)$_GET['authors_id'] . "' and au.authors_id = aui.authors_id and aui.languages_id = '" . (int)$languages_id . "'");
@@ -203,24 +213,29 @@ $Id$
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
               <?php } ?>
-            </table></td>
+            </table>
+          </td>
         </tr>
         <tr>
           <td>
             <?php include(DIR_WS_MODULES . FILENAME_ARTICLE_LISTING); ?>
           </td>
         </tr>
-      </table></td>
+      </table>
+    </td>
     <?php
   } else { // default page
 ?>
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
-          <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
               </tr>
-            </table></td>
+            </table>
+          </td>
         </tr>
         <tr>
           <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -247,20 +262,21 @@ $Id$
   //$articles_all_split = new splitPageResults($articles_all_query_raw, MAX_ARTICLES_PER_PAGE);
 
 ?>
-      <tr>
-        <td><?php include(DIR_WS_MODULES . FILENAME_ARTICLE_LISTING); ?></td>
-      </tr>
-	  
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-          </tr>
-		  
-      <tr>
-        </table></td>
+        <tr>
+          <td><?php include(DIR_WS_MODULES . FILENAME_ARTICLE_LISTING); ?></td>
         </tr>
-      </table></td>
+	  
+        <tr>
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+              </tr>
+		    </table>
+          </td>
+        </tr>
+      </table>
+    </td>
     <?php } ?>
     <!-- body_text_eof //-->
   </tr>

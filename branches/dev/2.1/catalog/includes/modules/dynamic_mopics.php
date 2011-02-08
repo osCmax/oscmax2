@@ -35,8 +35,9 @@ if (isset($product_info_values) && is_object($product_info_values)) {
 	// Are there any extra thumbnails for this product?
 	if (mopics_file_exists(str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN))) {
 	?>
+  <table>
 	<tr>
-      	<td class="productinfo_thumbnail">
+      <td class="productinfo_thumbnail">
         <div class="screen2">
         <table width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
@@ -119,7 +120,7 @@ if (isset($product_info_values) && is_object($product_info_values)) {
         </div>
         </td>
       </tr>		
-
+    </table>
 <?php	
 	} else {
 		// No extra images found for this product

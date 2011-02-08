@@ -400,9 +400,9 @@ class PriceFormatter {
     if (true == $this->hasSpecialPrice) {
         $lc_text = '&nbsp;<big><s>'
         . $currencies->display_price($this->thePrice, tep_get_tax_rate($this->taxClass))
-        . '</s>&nbsp;&nbsp;<br><span class="productSpecialPrice">' . TEXT_ON_SALE . ' '
+        . '</s>&nbsp;<br><span class="productSpecialPrice">' . TEXT_ON_SALE . ' '
         . $currencies->display_price($this->specialPrice, tep_get_tax_rate($this->taxClass))
-        . '</big></span>&nbsp;<br><br><br>';
+        . '</span></big>&nbsp;<br><br><br>';
     } elseif (true == $this->hasQuantityPrice) {
       $lc_text = '&nbsp;<big>' . TEXT_PRICE_BREAKS . ' '
       . $currencies->display_price($this->lowPrice, tep_get_tax_rate($this->taxClass))

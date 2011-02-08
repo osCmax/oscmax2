@@ -385,7 +385,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 			  $more_info = '';
 			}
 		   if ($listing[$x]['products_price'] == CALL_FOR_PRICE_VALUE){ //fix for call for price
-			  $lc_text = $more_info . ' <a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Price Inquiry%0D%0A%0D%0AModel: ' . $listing[$x]['products_model'] . '%0D%0AProduct Name: ' . $listing[$x]['products_name'] . '%0D%0AProduct URL: ' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $listing[$x]['products_id'] .'%0D%0A%0D%0A') . '') . '">' . tep_image_submit('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
+			  $lc_text = $more_info . ' <a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Price%20Enquiry%0D%0A%0D%0AModel:%20' . str_replace(' ', '%20', $listing[$x]['products_model']) . '%0D%0AProduct%20Name:%20' . str_replace(' ', '%20', $listing[$x]['products_name']) . '%0D%0AProduct%20URL:%20' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . str_replace(' ', '%20', $listing[$x]['products_id']) .'%0D%0A%0D%0A') . '') . '">' . tep_image_submit('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
 			} else {
               $lc_text = $more_info . ' <a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'pName')) . 'action=buy_now&products_id=' . $listing[$x]['products_id']) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a> ';
 			}

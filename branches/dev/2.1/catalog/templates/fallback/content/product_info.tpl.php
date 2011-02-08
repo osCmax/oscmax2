@@ -94,7 +94,7 @@ $Id$
 	    $msrp_products_price .= '<tr class="savingBIG"><td align="right" >' . TEXT_PRODUCTS_SAVINGS_RRP .  $currencies->display_price(($product_info['products_msrp'] -  $new_price), tep_get_tax_rate($product_info['products_tax_class_id'])) . '&nbsp;('. number_format(100 - (($new_price / $product_info['products_msrp']) * 100)) . '%)</td></tr>';
 	  }
 	//Close table and add spacer
-    $msrp_products_price .= '</table><tr><td>' . tep_draw_separator('pixel_trans.gif', '100%', '10') . '</td></tr>';
+    $msrp_products_price .= '</table><table><tr><td>' . tep_draw_separator('pixel_trans.gif', '100%', '10') . '</td></tr></table>';
 	} // end if MSRP if less than price
   } // end if MSRP is blank
 // EOF: MSRP

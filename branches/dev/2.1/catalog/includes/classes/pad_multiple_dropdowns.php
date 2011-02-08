@@ -120,7 +120,7 @@ $Id$
       $out.="<tr><td>&nbsp</td><td><span id=\"oosmsg\" class=errorBox></span>\n";
   
       if (($this->out_of_stock_msgline == 'True' | $this->no_add_out_of_stock == 'True')) {
-        $out.="<SCRIPT LANGUAGE=\"JavaScript\"><!--\n";
+        $out.="<script type=\"text/javascript\" language=\"JavaScript\"><!--\n";
         $combinations = array();
         $selected_combination = 0;
         $this->_build_attributes_combinations($attributes, false, 'None', $combinations, $selected_combination);
@@ -170,7 +170,7 @@ $Id$
           $out.="  }\n";
           $out.="  document.cart_quantity.onsubmit=chksel;\n";
         }
-        $out.="//--></SCRIPT>\n";
+        $out.="//--></script>\n";
       }
       $out.="</td></tr>\n";
       

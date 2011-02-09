@@ -244,7 +244,7 @@ TD.stockTable, SPAN.stockTable { font-family: Verdana, Arial, sans-serif; font-s
 /* NOTE: Some settings for scrollable are controlled through admin panel */
 .scrollable, .scrollable_ap { position:relative; overflow:hidden; float:left; }
 .scrollable .items, .scrollable_ap .items_ap { width:20000em; position:absolute; clear:both; }
-.items div, .items_ap div { float:left; width:590px; }
+.items div, .items_ap div { float:left; width:607px; }
 
 /* prev, next, prevPage and nextPage buttons */
 a.browse, a.browse_ap { background:url(images/hori_large.png) no-repeat scroll 0 0 transparent;	display:block; width:24px; height:56px; float:left; cursor:pointer; font-size:1px; }

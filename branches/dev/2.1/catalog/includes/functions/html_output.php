@@ -341,7 +341,7 @@ $ignore_array = array( 'account', 'address', 'checkout', 'login', 'password', 'l
 // we need to fail here as we have no REQUEST_URI and return no canonical link html
 	return false;
 	}	
-$remove_array = array( 'currency','language','main_page','page','sort','ref','affiliate_banner_id','max','list','pto','pfrom');	
+$remove_array = array( 'currency','language','main_page','page','sort','ref','affiliate_banner_id','max','pto','pfrom','gridlist');	
 // Add to this array any additional params you need to remove in the same format as the existing
 
 	$page_remove_array = array(FILENAME_PRODUCT_INFO => array('manufacturers_id', 'cPath'),

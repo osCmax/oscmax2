@@ -36,7 +36,7 @@ if ($num_products_ap != 0) { // Check query is not blank
       if (USE_AP_HORIZ_SCROLLER == 'true') {
 	?>
     <!-- ap_products //-->
-    <style>
+    <style type="text/css">
 	.scrollable_ap { width: <?php echo SCROLLER_WIDTH; ?>px; height: <?php echo SCROLLER_HEIGHT; ?>px }
 	.items_ap div { width: <?php echo SCROLLER_WIDTH; ?>px; }
 	a.browse_ap { margin: <?php echo (SCROLLER_HEIGHT - 56)/2; ?>px 0px; /* Set the margin to height of scroller - height of buttons (56) / 2;  */ }

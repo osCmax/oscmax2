@@ -36,7 +36,7 @@ if ($num_products_xsell != 0) { // Check query is not blank
       if (USE_XSELL_HORIZ_SCROLLER == 'true') {
 	?>
     <!-- xsell_products //-->
-    <style>
+    <style type="text/css">
 	.scrollable { width: <?php echo SCROLLER_WIDTH; ?>px; height: <?php echo SCROLLER_HEIGHT; ?>px }
 	.items div { width: <?php echo SCROLLER_WIDTH; ?>px; }
 	 a.browse { margin: <?php echo (SCROLLER_HEIGHT - 56)/2; ?>px 0px; /* Set the margin to height of scroller - height of buttons 56 / 2;  */ }

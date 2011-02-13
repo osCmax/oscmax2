@@ -30,7 +30,7 @@ $Id$
     }
 	
 	// Adds missing image functionality 
-	if ( ($src == DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR) && (PRODUCT_IMAGE_REPLACE == 'true') ) {
+	if ( ( (!file_exists($src)) || ($src == DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR) ) && (PRODUCT_IMAGE_REPLACE == 'true') ) {
 	  $src = DIR_WS_ICONS . 'default.png';
 	  $alt = TEXT_MISSING_IMAGE;	
 	}

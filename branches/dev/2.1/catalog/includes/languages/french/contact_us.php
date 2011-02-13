@@ -36,6 +36,8 @@ define('PHONE_US','<b>Téléphonez-nous:</b>');
 
 define('WRITE_US','<b>Écrivez-nous:</b>');
 
+define('ENTRY_REASON', 'Motif de la question:');
+
 define('REASON_1','Ventes');
 
 define('REASON_2','Support');

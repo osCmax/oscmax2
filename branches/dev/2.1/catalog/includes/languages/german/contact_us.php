@@ -28,6 +28,7 @@ define('OPENING_HOURS', '<b>Unsere &Ouml;ffnungszeiten:</b>');
 define('EMAIL_US', '<b>Unsere email-Adresse: </b>');
 define('PHONE_US', '<b>Unsere Telefonnummer:</b>');
 define('WRITE_US', '<b>Unsere Firmenadresse:</b>');
+define('ENTRY_REASON', 'Grund für die Anfrage:');
 define('REASON_1', 'Verkauf');
 define('REASON_2', 'Produktunterst&uuml;tzung');
 define('REASON_3', 'Versand');

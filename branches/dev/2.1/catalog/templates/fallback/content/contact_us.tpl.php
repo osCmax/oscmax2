@@ -89,7 +89,7 @@ $Id$
                 <td class="main"><?php echo tep_draw_input_field('email', '','value="' . $email .'" size="40" '); ?></td>
               </tr>
               <tr>
-              <td class="main">Reason for Enquiry:
+              <td class="main"><?php echo ENTRY_REASON; ?>
               
               <br>
 					<select name="reason" class="input-style">

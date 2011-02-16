@@ -13,7 +13,7 @@ $Id$
 define('HEADING_TITLE', 'Gutschein versenden');
 define('NAVBAR_TITLE', 'Gutschein versende');
 define('EMAIL_SUBJECT', 'Nachricht von ' . STORE_NAME);
-define('HEADING_TEXT','<br>Bitte füllen Sie hier Ihre persönlichen Angaben zum Gutschein aus, falls Sie FRagen bezüglich der Gutscheinfunktion haben, helfen wir Ihnen unter <a href="' . tep_href_link(FILENAME_GV_FAQ,'','NONSSL').'">'.GV_FAQ.'.</a> gerne weiter.<br>');
+define('HEADING_TEXT','FRagen und Antworten zu Gutscheinen finden Sie unter ');
 define('ENTRY_NAME', 'NAme des Empfängers:');
 define('ENTRY_EMAIL', 'E-Mail Adresse des Empfängers:');
 define('ENTRY_MESSAGE', 'Ihre Nachricht an den Empfänger:');

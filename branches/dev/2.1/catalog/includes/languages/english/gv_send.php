@@ -13,7 +13,7 @@ $Id$
 define('HEADING_TITLE', 'Send Gift Certificate');
 define('NAVBAR_TITLE', 'Send Gift Certificate');
 define('EMAIL_SUBJECT', 'Enquiry from ' . STORE_NAME);
-define('HEADING_TEXT','<br>Please enter below the details of the Gift Certificate you wish to send. For more information, please see our <a href="' . tep_href_link(FILENAME_GV_FAQ,'','NONSSL').'">'.GV_FAQ.'.</a><br>');
+define('HEADING_TEXT','<br>Please enter below the details of the Gift Certificate you wish to send. For more information, please see our ');
 define('ENTRY_NAME', 'Recipient\'s Name:');
 define('ENTRY_EMAIL', 'Recipient\'s E-Mail Address:');
 define('ENTRY_MESSAGE', 'Message to Recipients:');

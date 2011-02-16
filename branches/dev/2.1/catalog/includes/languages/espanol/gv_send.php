@@ -13,7 +13,7 @@ $Id$
 define('HEADING_TITLE','Enviar vale de regalo');
 define('NAVBAR_TITLE','Enviar vale de regalo');
 define('EMAIL_SUBJECT', 'Enquiry from ' . STORE_NAME);
-define('HEADING_TEXT','<br>Por favor, introduzca los detalles de este vale de regalo que desea enviar a continuación. Para obtener más información, consulte nuestra <a href="' . tep_href_link(FILENAME_GV_FAQ,'','NONSSL').'"> '. GV_FAQ .'.</a><br>');
+define('HEADING_TEXT','<br>Por favor, introduzca los detalles de este vale de regalo que desea enviar a continuación. Para obtener más información, consulte nuestra ');
 define('ENTRY_NAME','Beneficiario Nombre:');
 define('ENTRY_EMAIL','Destinatario E-Mail:');
 define('ENTRY_MESSAGE','Mensaje para el destinatario:');

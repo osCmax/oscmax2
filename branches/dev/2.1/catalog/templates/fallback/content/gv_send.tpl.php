@@ -71,7 +71,7 @@ $Id$
   } elseif ($_GET['action']=='' || $error) {
 ?>
       <tr>
-        <td class="main"><?php echo HEADING_TEXT; ?></td>
+        <td class="main"><?php echo HEADING_TEXT . '<a href="' . tep_href_link(FILENAME_INFORMATION, 'info_id=9', 'NONSSL') . '">' . GV_FAQ . '.</a>'; ?><br /><br /></td>
       </tr>
       <tr>
         <td><form action="<?php echo tep_href_link(FILENAME_GV_SEND, 'action=send', 'NONSSL'); ?>" method="post"><table border="0" width="100%" cellspacing="0" cellpadding="2">

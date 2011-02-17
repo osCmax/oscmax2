@@ -276,6 +276,13 @@ define('IMAGE_BUTTON_TELL_A_FRIEND', 'Envoyer &agrave; un ami');
 define('IMAGE_BUTTON_UPDATE', 'Mise &agrave; jour');
 define('IMAGE_BUTTON_UPDATE_CART', 'Mise &agrave; jour du panier');
 define('IMAGE_BUTTON_WRITE_REVIEW', '&Eacute;crire un commentaire : ');
+define('IMAGE_BUTTON_CFP', 'Contact for price');
+define('IMAGE_BUTTON_AAQ', 'Ask a question about this product');
+define('IMAGE_BUTTON_MORE_INFO', 'More info');
+define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Remove Product');
+define('IMAGE_BUTTON_SEND', 'Send');
+define('IMAGE_BUTTON_WISHLIST_HELP', 'Wish list help');
+define('IMAGE_BUTTON_WISHLIST', 'Wish List');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'Supprimer');
 define('SMALL_IMAGE_BUTTON_EDIT', '&Eacute;diter');

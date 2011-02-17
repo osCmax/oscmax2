@@ -355,7 +355,7 @@ $Id$
 					  }
 					} ?>
                 	<!-- Wish List 3.5 Start -->
-                	<td align="left"><?php echo tep_image_submit('button_wishlist.gif', 'Add to Wishlist', 'name="wishlist" value="wishlist"'); ?></td>
+                	<td align="left"><?php echo tep_image_submit('button_wishlist.gif', IMAGE_BUTTON_WISHLIST, 'name="wishlist" value="wishlist"'); ?></td>
  	                <!-- Wish List 3.5 End   -->
        	            <!-- ADDED PLUS AND MINUS BUTTONS PGM -->
                     <td class="main" align="right" width="250">

@@ -278,6 +278,7 @@ define('IMAGE_BUTTON_MORE_INFO', 'More info');
 define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Remove Product');
 define('IMAGE_BUTTON_SEND', 'Send');
 define('IMAGE_BUTTON_WISHLIST_HELP', 'Wish list help');
+define('IMAGE_BUTTON_WISHLIST', 'Wish List');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'Delete');
 define('SMALL_IMAGE_BUTTON_EDIT', 'Edit');

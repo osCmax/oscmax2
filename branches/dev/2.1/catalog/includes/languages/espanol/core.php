@@ -271,6 +271,13 @@ define('IMAGE_BUTTON_TELL_A_FRIEND', 'D&iacute;selo a un Amigo');
 define('IMAGE_BUTTON_UPDATE', 'Actualizar');
 define('IMAGE_BUTTON_UPDATE_CART', 'Actualizar Cesta');
 define('IMAGE_BUTTON_WRITE_REVIEW', 'Escribir Comentario');
+define('IMAGE_BUTTON_CFP', 'Contact for price');
+define('IMAGE_BUTTON_AAQ', 'Ask a question about this product');
+define('IMAGE_BUTTON_MORE_INFO', 'More info');
+define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Remove Product');
+define('IMAGE_BUTTON_SEND', 'Send');
+define('IMAGE_BUTTON_WISHLIST_HELP', 'Wish list help');
+define('IMAGE_BUTTON_WISHLIST', 'Wish List');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'Eliminar');
 define('SMALL_IMAGE_BUTTON_EDIT', 'Modificar');

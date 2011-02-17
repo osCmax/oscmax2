@@ -111,7 +111,7 @@ $Id: product_reviews.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com 
                     <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                     <td class="main" align="left"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params()) . '">' . tep_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>'; ?></td>
                 	<!-- Wish List 3.5 Start -->
-                	<td align="center"><?php echo tep_image_submit('button_wishlist.gif', 'Add to Wishlist', 'name="wishlist" value="wishlist"'); ?></td>
+                	<td align="center"><?php echo tep_image_submit('button_wishlist.gif', IMAGE_BUTTON_WISHLIST, 'name="wishlist" value="wishlist"'); ?></td>
  	                <!-- Wish List 3.5 End   -->
        	            <!-- ADDED PLUS AND MINUS BUTTONS PGM -->
                     <td class="main" align="right" width="250">

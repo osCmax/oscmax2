@@ -306,7 +306,7 @@ global $customer_group_id;
 
 // Add new products limit and order
 	if (isset($_GET['new_products']) && tep_not_null($_GET['new_products'])) { 
-      $new_products_sort = "products_date_added, ";
+      $new_products_sort = "products_date_added desc, ";
 	} else {
 	  $new_products_sort = "";	
 	}

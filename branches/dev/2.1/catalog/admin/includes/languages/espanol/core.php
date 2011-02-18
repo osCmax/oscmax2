@@ -280,6 +280,12 @@ define('BOX_LOCALIZATION_CURRENCIES', 'Monedas');
 define('BOX_LOCALIZATION_LANGUAGES', 'Idiomas');
 define('BOX_LOCALIZATION_ORDERS_STATUS', 'Estado Pedidos');
 
+// affiliates box text in includes/boxes/affiliate.php
+define('BOX_HEADING_AFFILIATES', 'Afillados');
+
+// vouchers box text in includes/boxes/gv_admin.php
+define('BOX_HEADING_VOUCHERS', 'Cupon');
+
 // ADDED 2 LINE- recover cart box text
 define('BOX_REPORTS_RECOVER_CART_SALES', 'Recover Carts');
 define('BOX_TOOLS_RECOVER_CART', 'Recover Carts');

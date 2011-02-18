@@ -18,7 +18,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('administrator.php') == true) { ?>
     <li>
-      <a href="#">Administrator</a>
+      <a href="#"><?php echo BOX_HEADING_ADMINISTRATOR; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'administrator.php'); ?>
         </ul>
@@ -29,7 +29,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('configuration.php') == true) { ?>
     <li>
-      <a href="#">Configuration</a>
+      <a href="#"><?php echo BOX_HEADING_CONFIGURATION; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'configuration.php'); ?>
         </ul>
@@ -40,7 +40,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('catalog.php') == true) { ?>
     <li>
-      <a href="#">Catalog</a>
+      <a href="#"><?php echo BOX_HEADING_CATALOG; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'catalog.php'); ?>
         </ul>
@@ -51,7 +51,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('modules.php') == true) { ?>
     <li>
-      <a href="#">Modules</a>
+      <a href="#"><?php echo BOX_HEADING_MODULES; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'modules.php'); ?>
         </ul>
@@ -62,7 +62,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('customers.php') == true) { ?>
     <li>
-      <a href="#">Customers</a>
+      <a href="#"><?php echo BOX_HEADING_CUSTOMERS; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'customers.php'); ?>
         </ul>
@@ -73,7 +73,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('taxes.php') == true) { ?>
     <li>
-      <a href="#">Locations / Taxes</a>
+      <a href="#"><?php echo BOX_HEADING_LOCATION_AND_TAXES; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'taxes.php'); ?>
         </ul>
@@ -84,7 +84,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('localization.php') == true) { ?>
     <li>
-      <a href="#">Localization</a>
+      <a href="#"><?php echo BOX_HEADING_LOCALIZATION; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'localization.php'); ?>
         </ul>
@@ -95,7 +95,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('reports.php') == true) { ?>
     <li>
-      <a href="#">Reports</a>
+      <a href="#"><?php echo BOX_HEADING_REPORTS; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'reports.php'); ?>
         </ul>
@@ -107,7 +107,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('tools.php') == true) { ?>
     <li>
-      <a href="#">Tools</a>
+      <a href="#"><?php echo BOX_HEADING_TOOLS; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'tools.php'); ?>
         </ul>
@@ -118,7 +118,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('affiliate.php') == true) { ?>
     <li>
-      <a href="#">Affiliates</a>
+      <a href="#"><?php echo BOX_HEADING_AFFILIATES; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'affiliate.php'); ?>
         </ul>
@@ -129,7 +129,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('gv_admin.php') == true) { ?>
     <li>
-      <a href="#">Vouchers</a>
+      <a href="#"><?php echo BOX_HEADING_VOUCHERS; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'gv_admin.php'); ?>
         </ul>
@@ -140,7 +140,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('articles.php') == true) { ?>
     <li>
-      <a href="#">Articles</a>
+      <a href="#"><?php echo BOX_HEADING_ARTICLES; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'articles.php'); ?>
         </ul>

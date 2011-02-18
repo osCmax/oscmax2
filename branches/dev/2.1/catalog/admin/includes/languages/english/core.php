@@ -149,7 +149,6 @@ define('BOX_MANUAL_ORDER_CREATE_ORDER', 'Create Order');
 define('PULL_DOWN_DEFAULT', 'Please Select');
 define('TYPE_BELOW', 'Type Below');
 
-
 // header text in includes/header.php
 define('HEADER_TITLE_TOP', 'Admin');
 define('HEADER_TITLE_SUPPORT_SITE', 'osCmax Forums');
@@ -277,6 +276,12 @@ define('BOX_LOCALIZATION_CURRENCIES', 'Currencies');
 define('BOX_LOCALIZATION_LANGUAGES', 'Languages');
 define('BOX_LOCALIZATION_ORDERS_STATUS', 'Orders Status');
 define('BOX_PREMADE', 'Premade Comments');
+
+// affiliates box text in includes/boxes/affiliate.php
+define('BOX_HEADING_AFFILIATES', 'Affiliates');
+
+// vouchers box text in includes/boxes/gv_admin.php
+define('BOX_HEADING_VOUCHERS', 'Vouchers');
 
 // ADDED 2 LINE- recover cart box text
 define('BOX_REPORTS_RECOVER_CART_SALES', 'Recovered Sales Results');
@@ -520,7 +525,7 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Warning: File uploads are disabled in t
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Products'); // X-Sell
 
 // BOF: MOD - Article Manager
-define('BOX_HEADING_ARTICLES', 'Article Manager');
+define('BOX_HEADING_ARTICLES', 'Articles');
 define('BOX_TOPICS_ARTICLES', 'Topics/Articles');
 define('BOX_ARTICLES_CONFIG', 'Configuration');
 define('BOX_ARTICLES_AUTHORS', 'Authors');

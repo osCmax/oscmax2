@@ -274,12 +274,17 @@ define('BOX_TOOLS_PACKAGING', 'Verpackung');
 define('BOX_TOOLS_UPS_BOXES_USED', 'UPS felder benutzt');
 define('BOX_TOOLS_QUICK_LINKS', 'Schnell Links');
 
-
 // localizaion box text in includes/boxes/localization.php
 define('BOX_HEADING_LOCALIZATION', 'Sprachen/W&auml;hrungen');
 define('BOX_LOCALIZATION_CURRENCIES', 'W&auml;hrungen');
 define('BOX_LOCALIZATION_LANGUAGES', 'Sprachen');
 define('BOX_LOCALIZATION_ORDERS_STATUS', 'Bestellstatus');
+
+// affiliates box text in includes/boxes/affiliate.php
+define('BOX_HEADING_AFFILIATES', 'Partner');
+
+// vouchers box text in includes/boxes/gv_admin.php
+define('BOX_HEADING_VOUCHERS', 'Gutschein');
 
 // ADDED 2 LINE- recover cart box text
 define('BOX_REPORTS_RECOVER_CART_SALES', 'Recover Carts');

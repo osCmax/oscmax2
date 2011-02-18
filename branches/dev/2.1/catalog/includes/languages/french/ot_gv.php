@@ -17,5 +17,6 @@ $Id$
   define('TAX_NOT_INCLUDED', ' [Taxe non incluse]');
   define('MODULE_ORDER_TOTAL_GV_USER_PROMPT', '<b>Cochez pour utiliser votre solde disponnible en ch&egrave;que cadeau</b>');
   define('TEXT_ENTER_GV_CODE', 'Entrez le code &agrave; utiliser&nbsp;&nbsp;');
+  define('TEXT_GV_CODE_INPUT_DEFAULT', '');
   define('MODULE_ORDER_TOTAL_GV_TEXT_ERROR', 'Coupon de réduction / Chèques Cadeaux');
 ?>

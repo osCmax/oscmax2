@@ -17,5 +17,6 @@ $Id$
   define('TAX_NOT_INCLUDED','[Impuestos no incluidos]');
   define('MODULE_ORDER_TOTAL_GV_USER_PROMPT','<b>Marque el uso de regalos Vales de saldo de la cuenta</b>');
   define('TEXT_ENTER_GV_CODE','Introduzca Canjear Código');
+  define('TEXT_GV_CODE_INPUT_DEFAULT', '');
   define('MODULE_ORDER_TOTAL_GV_TEXT_ERROR','Vale de Regalo / cupón de descuento');
 ?>

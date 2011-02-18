@@ -174,7 +174,7 @@ $Id$
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.9.custom.css">
 <script type="text/javascript" src="includes/general.js"></script>
 <?php require('includes/account_check.js.php'); ?>
 </head>
@@ -380,7 +380,7 @@ $Id$
   }
 ?>
               <tr>
-                <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <td colspan="6"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText" valign="top"><?php echo $db_admin_split->display_count($db_admin_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_MEMBERS); ?><br><?php echo $db_admin_split->display_links($db_admin_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
                     <td class="smallText" valign="top" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'gID=groups') . '">' . tep_image_button('button_admin_groups.gif', IMAGE_GROUPS) . '</a>'; echo ' <a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $mInfo->admin_id . '&amp;action=new_member') . '">' . tep_image_button('button_admin_member.gif', IMAGE_NEW_MEMBER) . '</a>'; ?>&nbsp;</td>
@@ -402,7 +402,7 @@ $Id$
 
       $contents = array('form' => tep_draw_form('newmember', FILENAME_ADMIN_MEMBERS, 'action=member_new&amp;page=' . $page . '&amp;mID=' . $_GET['mID'], 'post', 'enctype="multipart/form-data"'));
       if ($_GET['error']) {
-        $contents[] = array('text' => TEXT_INFO_ERROR);
+        $contents[] = array('text' => '<table width="100%"><tr><td class="messageStackAlert">' . tep_image(DIR_WS_ICONS . 'warning.gif', ICON_WARNING) . '&nbsp;' . TEXT_INFO_ERROR . '</td></tr></table>');
       }
       $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_USERNAME . '<br>&nbsp;' . tep_draw_input_field('admin_username'));
       $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_FIRSTNAME . '<br>&nbsp;' . tep_draw_input_field('admin_firstname'));
@@ -529,7 +529,7 @@ $Id$
     default:
       if (is_object($mInfo)) {
         $heading[] = array('text' => '<b>&nbsp;' . TEXT_INFO_HEADING_DEFAULT . '</b>');
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $mInfo->admin_id . '&amp;action=edit_member') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $mInfo->admin_id . '&amp;action=del_member') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a><br>&nbsp;');
+        $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_EDIT, 'document', tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $mInfo->admin_id . '&amp;action=edit_member'), 'primary') . tep_draw_button(IMAGE_DELETE, 'trash', tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $mInfo->admin_id . '&amp;action=del_member'), 'primary'));
         $contents[] = array('text' => '&nbsp;<b>' . TEXT_INFO_USERNAME . '</b><br>&nbsp;' . $mInfo->admin_username);
         $contents[] = array('text' => '&nbsp;<b>' . TEXT_INFO_FULLNAME . '</b><br>&nbsp;' . $mInfo->admin_firstname . ' ' . $mInfo->admin_lastname);
         $contents[] = array('text' => '&nbsp;<b>' . TEXT_INFO_EMAIL . '</b><br>&nbsp;' . $mInfo->admin_email_address);

@@ -61,7 +61,7 @@ define('TEXT_INFO_MODIFIED', 'Account Modified: ');
 define('TEXT_INFO_LOGDATE', 'Last Access: ');
 define('TEXT_INFO_LOGNUM', 'Log Number: ');
 define('TEXT_INFO_GROUP', 'Group Level: ');
-define('TEXT_INFO_ERROR', '<font color="red">Email address has already been used! Please try again.</font>');
+define('TEXT_INFO_ERROR', 'Email address has already been used.<br>Please try again.');
 
 define('JS_ALERT_USERNAME', '- Required: Username \n');
 define('JS_ALERT_FIRSTNAME', '- Required: Firstname \n');

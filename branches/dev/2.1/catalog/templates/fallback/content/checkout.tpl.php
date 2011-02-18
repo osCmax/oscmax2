@@ -58,7 +58,7 @@ $Id$
 	<tr>
 	 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
 	  <tr>
-	   <td class="main"><b><?php echo tep_output_string_protected($error['title']); ?></b></td>
+	   <td class="main"><b><?php echo $error['title']; ?></b></td>
 	  </tr>
 	 </table></td>
 	</tr>

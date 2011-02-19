@@ -24,7 +24,7 @@ $Id$
   $corner_bottom_right = 'rounded'; 
   
   $boxContent_attributes = '';
-  $boxLink = '<a href="' . tep_href_link(FILENAME_WISHLIST) . '"><img src="' . DIR_WS_TEMPLATES . 'images/infobox/arrow_right.png" border="0" alt="more" title="more"></a>';  
+  $boxLink = '<a href="' . tep_href_link(FILENAME_WISHLIST) . '"><img src="' . DIR_WS_TEMPLATES . 'images/infobox/arrow_right.png" border="0" alt="' . ICON_ARROW_RIGHT . '" title="' . ICON_ARROW_RIGHT . '"></a>';  
   $box_base_name = 'wishlist'; // for easy unique box template setup (added BTSv1.2)
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 

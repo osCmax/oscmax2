@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('MODULE_SHIPPING_ITEM_TEXT_TITLE', 'Versandkosten pro St&uuml;ck');
-define('MODULE_SHIPPING_ITEM_TEXT_DESCRIPTION', 'Versandkosten pro St&uuml;ck');
+define('MODULE_SHIPPING_ITEM_TEXT_TITLE', 'Pro Stück');
+define('MODULE_SHIPPING_ITEM_TEXT_DESCRIPTION', 'Pro Stück');
 define('MODULE_SHIPPING_ITEM_TEXT_WAY','Best Way');
 ?>

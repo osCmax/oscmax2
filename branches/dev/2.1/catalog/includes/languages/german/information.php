@@ -10,10 +10,6 @@ $Id$
   Released under the GNU General Public License
 */
 
-/*
-  Module: Information Pages Unlimited
-*/
-
 define('NAVBAR_TITLE','$title');
 define('INFORMATION_PAGE404_TITLE','Seite nicht gefunden');
 

@@ -15,31 +15,29 @@ $Id$
 
 /**
  * Google Checkout v1.5.0
- * 
- * Currently just a copy of the English messages.
  */
 
 define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_TITLE', 'GoogleCheckout');
 define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_DESCRIPTION', 'GoogleCheckout');
 define('MODULE_PAYMENT_GOOGLECHECKOUT_TEXT_OPTION','- Oder nutzen -');
-define('GOOGLECHECKOUT_STRING_WARN_USING_SANDBOX','GC ist auf SANDBOX verwenden. Bestellung wird bearbeitet, aber nicht erhoben.');
-define('GOOGLECHECKOUT_STRING_WARN_NO_MERCHANT_ID_KEY','Google Checkout-Händler-ID oder Key wurde nicht setted bis');
-define('GOOGLECHECKOUT_STRING_WARN_VIRTUAL','Einige Download-Produkte in Ihrem Warenkorb sind zur Zeit nicht über Google Checkout zur Verfügung.');
+define('GOOGLECHECKOUT_STRING_WARN_USING_SANDBOX','GC verwendet derzeit SANDBOX. Die Bestellung wird übermittelt. jedoch NICHT in Rechnung gestellt.');
+define('GOOGLECHECKOUT_STRING_WARN_NO_MERCHANT_ID_KEY','Google Checkout Merchant-ID oder Key wurde nicht hinterlegt');
+define('GOOGLECHECKOUT_STRING_WARN_VIRTUAL','Einige Download-Produkte in Ihrem Warenkorb können derzeit nicht über Google Checkout abgewickelt werden.');
 define('GOOGLECHECKOUT_STRING_WARN_EMPTY_CART','Der Warenkorb ist leer');
 define('GOOGLECHECKOUT_STRING_WARN_OUT_OF_STOCK','Einige Produkte sind ausverkauft');
-define('GOOGLECHECKOUT_STRING_WARN_MULTIPLE_SHIP_TAX','Es gibt mehrere Versandoptionen ausgewählt und sie verwenden unterschiedliche Versandkosten Steuertabellen oder einige dont Verwendung Steuertabellen');
-define('GOOGLECHECKOUT_STRING_WARN_MIX_VERSIONS','Die Version des installierten Modul im Admin-UI ist %s und die des Pakets ist %s, Entfernen / Neuinstallation des Moduls');
-define('GOOGLECHECKOUT_STRING_WARN_WRONG_SHIPPING_CONFIG', 'DIR_FS_CATALOG and DIR_WS_MODULES may be wrong configured in includes/configure.php file. This dir doens\'t exists: %s');
+define('GOOGLECHECKOUT_STRING_WARN_MULTIPLE_SHIP_TAX','Es sind mehrere Versandoptionen ausgewählt und sie verwenden unterschiedliche Versandkosten-Steuertabellen oder einige verwenden keine Steuertabellen');
+define('GOOGLECHECKOUT_STRING_WARN_MIX_VERSIONS','Die Version des installierten Moduls im Admin-UI ist %s und die des Pakets ist %s, Entfernen oder installieren Sie das Modul neu');
+define('GOOGLECHECKOUT_STRING_WARN_WRONG_SHIPPING_CONFIG', 'DIR_FS_CATALOG und DIR_WS_MODULES könnten in includes/configure.php file falsch konfiguriert sein. Dieses Verzeichnis existiert nicht: %s');
 define('GOOGLECHECKOUT_STRING_WARN_RESTRICTED_CATEGORY', 'Some items are in GC restricted category.');
 
 // This string will be added after the product name and description in the yellow box in the GC confirmation page for all Digital Goods.
-define('GOOGLECHECKOUT_STRING_EXTRA_DIGITAL_CONTENT', 'Allow 2-5 minutes to get all the transaction processed.');
+define('GOOGLECHECKOUT_STRING_EXTRA_DIGITAL_CONTENT', 'Die Durchführung der Transaktion kann 2 bis 5 Minuten dauern.');
   
 define('GOOGLECHECKOUT_STRING_ERR_SHIPPING_CONFIG', ' Error: Shipping Methods not configured ');
     
-define ('GOOGLECHECKOUT_FLAT_RATE_SHIPPING', 'Flat Rate Per Order');
-define ('GOOGLECHECKOUT_ITEM_RATE_SHIPPING', 'Flat Rate Per Item');
-define ('GOOGLECHECKOUT_TABLE_RATE_SHIPPING', 'Vary by Weight/Price');
+define ('GOOGLECHECKOUT_FLAT_RATE_SHIPPING', 'Flat Rate je Order');
+define ('GOOGLECHECKOUT_ITEM_RATE_SHIPPING', 'Flat Rate je Produkt');
+define ('GOOGLECHECKOUT_TABLE_RATE_SHIPPING', 'Gewichts/Preisabhängig');
 
 define ('GOOGLECHECKOUT_TABLE_NO_MERCHANT_CALCULATION', 'No merchant calculation shipping selected');
 define ('GOOGLECHECKOUT_MERCHANT_CALCULATION_NOT_CONFIGURED', ' not configured!<br />');

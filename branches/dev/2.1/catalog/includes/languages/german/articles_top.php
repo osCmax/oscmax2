@@ -11,19 +11,17 @@ $Id$
 */
 
 define('TEXT_MAIN', '');
-define('TABLE_HEADING_NEW_ARTICLES', 'New Articles in %s');
-
-  define('HEADING_TITLE', 'All Articles');
-  define('TEXT_ALL_ARTICLES', 'Below is a list of all articles with the most recent ones listed first.');
-  define('TEXT_ARTICLES', 'Below is a list of all articles with the most recent ones listed first.');  
-  define('TEXT_CURRENT_ARTICLES', 'Current Articles');
-  define('TEXT_UPCOMING_ARTICLES', 'Upcoming Articles');
-  define('TEXT_NO_ARTICLES', 'There are currently no articles listed.');
-  define('TEXT_DATE_ADDED', 'Published:');
-  define('TEXT_DATE_EXPECTED', 'Expected:');
-  define('TEXT_AUTHOR', 'Author:');
-  define('TEXT_TOPIC', 'Topic:');
-  define('TEXT_BY', 'by');
-  define('TEXT_READ_MORE', 'Read More...');
-
+define('TABLE_HEADING_NEW_ARTICLES', 'Neue Artikel in %s');
+  define('NAVBAR_TITLE_1', 'Artikel');
+  define('HEADING_TITLE', 'Alle Artikel');
+  define('TEXT_ALL_ARTICLES', 'Die folgende Gesamtübersicht listet die neuesten Artikel zuerst.');
+  define('TEXT_ARTICLES', 'Die folgende Gesamtübersicht listet die neuesten Artikel zuerst.');  
+  define('TEXT_CURRENT_ARTICLES', 'Aktuelle Artikel');
+  define('TEXT_UPCOMING_ARTICLES', 'Kommende Artikel');
+  define('TEXT_NO_ARTICLES', 'Derzeit existieren keine Artikel.');
+  define('TEXT_DATE_ADDED', 'Veröffentlicht:');
+  define('TEXT_DATE_EXPECTED', 'Veröffentlichungstermin:');
+  define('TEXT_AUTHOR', 'Autor:');
+  define('TEXT_TOPIC', 'Thema:');
+  define('TEXT_READ_MORE', 'Lesen Sie mehr...');
 ?>

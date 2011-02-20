@@ -12,5 +12,5 @@ $Id$
 
 define('HEADING_TITLE', '%s Bilder');
 
-define('TEXT_CLOSE_WINDOW', 'Fenster schlie&szlig;en <u>[x]</u>');
+define('TEXT_CLOSE_WINDOW', 'Fenster schlieﬂen <u>[x]</u>');
 ?>

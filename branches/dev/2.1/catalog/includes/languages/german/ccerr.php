@@ -11,6 +11,6 @@ $Id$
 */
 
   define('MODULE_PAYMENT_CCERR_TEXT_TITLE', 'Credit Class Fehler');
-  define('MODULE_PAYMENT_CCERR_TEXT_DESCRIPTION', 'Credit Class Fehler, ben&ouml;tigt von Gutschein');  
+  define('MODULE_PAYMENT_CCERR_TEXT_DESCRIPTION', 'Credit Class Fehler, benötigt von Gutschein');  
   define('MODULE_PAYMENT_CCERR_TEXT_ERROR', 'Fehler in der Zahlungsauswahl');
 ?>

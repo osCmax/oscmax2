@@ -16,14 +16,12 @@ $Id$
   http://www.itwebexperts.com
 
   Copyright (c) 2009 I.T. Web Experts
-
-  Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Einkauf abschlie&szlig;en');
-define('NAVBAR_TITLE_1', 'Einkauf abschlie&szlig;en');
+define('NAVBAR_TITLE', 'Einkauf abschlie√üen');
+define('NAVBAR_TITLE_1', 'Einkauf abschlie√üen');
 
-define('HEADING_TITLE', 'Einkauf abschlie&szlig;en');
+define('HEADING_TITLE', 'Einkauf abschlie√üen');
 
 define('TABLE_HEADING_SHIPPING_ADDRESS', 'Lieferadresse');
 define('TABLE_HEADING_BILLING_ADDRESS', 'Rechnungsadresse');
@@ -36,13 +34,13 @@ define('TABLE_HEADING_PRODUCTS_FINAL_PRICE', 'Gesamtpreis');
 define('TABLE_HEADING_PRODUCTS_REMOVE_ITEM', 'Produkt entfernen');
 
 define('TABLE_HEADING_PRODUCTS', 'Warenkorb');
-define('TABLE_HEADING_TAX', 'Steuer');
+define('TABLE_HEADING_TAX', 'USt.');
 define('TABLE_HEADING_TOTAL', 'Gesamt');
 
 define('ENTRY_TELEPHONE', 'Telefon: ');
 
-define('TEXT_CHOOSE_SHIPPING_DESTINATION', 'Bitte &auml;hlen Sie in Ihrem Adressbuch eine Lieferanschrift aus.');
-define('TEXT_SELECTED_BILLING_DESTINATION', 'Bitte w&auml;hlen Sie in Ihrem Adressbuch eine Rechnungsanschrift aus.');
+define('TEXT_CHOOSE_SHIPPING_DESTINATION', 'Bitte w‰hlen Sie eine Lieferanschrift aus Ihrem Adressbuch aus.');
+define('TEXT_SELECTED_BILLING_DESTINATION', 'Bitte w‰hlen Sie eine Rechnungsanschrift aus Ihrem Adressbuch aus.');
 
 define('TITLE_SHIPPING_ADDRESS', 'Lieferadresse:');
 define('TITLE_BILLING_ADDRESS', 'Rechnungsadresse:');
@@ -50,73 +48,72 @@ define('TITLE_BILLING_ADDRESS', 'Rechnungsadresse:');
 define('TABLE_HEADING_SHIPPING_METHOD', 'Versandart');
 define('TABLE_HEADING_PAYMENT_METHOD', 'Zahlungsart');
 
-define('TEXT_CHOOSE_SHIPPING_METHOD', 'Bitte w&auml;hlen Sie die gew&uuml;nschte Versandart f&uuml;r diese Bestellung aus.');
-define('TEXT_SELECT_PAYMENT_METHOD', 'Bitte w&auml;hlen Sie die gew&uuml;nschte Zahlungsart f&uuml;r diese Bestellung aus.');
+define('TEXT_CHOOSE_SHIPPING_METHOD', 'Bitte w‰hlen Sie die gew¸nschte Versandart f¸r diese Bestellung aus.');
+define('TEXT_SELECT_PAYMENT_METHOD', 'Bitte w‰hlen Sie die gew¸nschte Zahlungsart f¸r diese Bestellung aus.');
 
-define('TITLE_PLEASE_SELECT', 'Bitte w&auml;hlen Sie');
+define('TITLE_PLEASE_SELECT', 'Bitte w‰hlen Sie');
 
-define('TEXT_ENTER_SHIPPING_INFORMATION', 'Derzeit steht nur die folgende Versandart zur Verf&uuml;gung.');
-define('TEXT_ENTER_PAYMENT_INFORMATION', 'Derzeit steht nur die folgende Zahlungsart zur Verf&uuml;gung.');
+define('TEXT_ENTER_SHIPPING_INFORMATION', 'Derzeit steht nur die folgende Versandart zur Verf¸gung.');
+define('TEXT_ENTER_PAYMENT_INFORMATION', 'Derzeit steht nur die folgende Zahlungsart zur Verf¸gung.');
 
-define('TABLE_HEADING_COMMENTS', 'F&uuml;gen Sie Ihrer Bestellung eine Anmerkung hinzu');
+define('TABLE_HEADING_COMMENTS', 'Sie k√∂nnen Ihrer Bestellung eine Anmerkung hinzuf¸gen');
 
-define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Einkauf abschlie&szlig;en');
-define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'Ihre Bestellung wird &uuml;bermittelt.');
+define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Setzen Sie den Vorgang fort');
+define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'um Ihre Bestellung abzuschlie√üen.');
 
-define('TEXT_EDIT', '&Auml;ndern');
+define('TEXT_EDIT', 'Bearbeiten');
 
-define('TEXT_SELECTED_SHIPPING_DESTINATION', 'Dies ist die derzeit ausgew&auml;hlte Lieferadresse.');
+define('TEXT_SELECTED_SHIPPING_DESTINATION', 'Dies ist die derzeit ausgew‰hlte Lieferadresse.');
 define('TABLE_HEADING_NEW_ADDRESS', 'Neue Adresse');
-define('TABLE_HEADING_EDIT_ADDRESS', 'Adresse &auml;ndern');
-define('TEXT_CREATE_NEW_SHIPPING_ADDRESS', 'Bitte benutzen Sie das nachstehende Formular, um eine neue Lieferadresse anzugeben.');
-define('TABLE_HEADING_ADDRESS_BOOK_ENTRIES', 'Adressbucheintr&auml;ge');
+define('TABLE_HEADING_EDIT_ADDRESS', 'Adresse bearbeiten');
+define('TEXT_CREATE_NEW_SHIPPING_ADDRESS', 'Bitte benutzen Sie das nachstehende Formular, um eine neue Lieferadresse zu erstellen.');
+define('TABLE_HEADING_ADDRESS_BOOK_ENTRIES', 'Adressbucheintr‰ge');
 
 define('EMAIL_SUBJECT', 'Wilkommen bei ' . STORE_NAME);
 define('EMAIL_GREET_MR', 'Sehr geehrter Herr %s,' . "\n\n");
 define('EMAIL_GREET_MS', 'Sehr geehrte Frau %s,' . "\n\n");
-define('EMAIL_GREET_NONE', 'Sehr geehrte(r) %s' . "\n\n");
-define('EMAIL_WELCOME', 'Wir begr√º√üen Sie im Onlineshop von <b>' . STORE_NAME . '</b>.' . "\n\n");
-define('EMAIL_TEXT', 'Sie k√∂nnen nun die <b>erweiterten Funktionen</b> nutzen, die unser Shop f√ºr Sie bereit h√§lt, wie etwa:' . "\n\n" . '<li><b>Pers√∂nlicher Warenkorb</b> - Der aktuelle Inhalt Ihres Warenkorbes wird beim Abmelden gespeichert und steht Ihnen bei der n√§chsten Anmeldung wieder zur Verf√ºgung.' . "\n" . '<li><b>Adressbuch</b> - Speichern Sie unterschiedliche Lieferanschriften f√ºr k√ºnftige Bestellungen in Ihrem pers√∂nlichen Adressbuch ab.' . "\n" . '<li><b>Fr√ºhere Bestellungen</b> - Sie erhalten eine √úbersicht aller von Ihnen get√§tigten Bestellungen.' . "\n" . '<li><b>Produktbewertungen</b> - Verfassen Sie einen Erfahrungsbericht zu unseren Produkten und ver√∂ffentlichen Sie ihn online.' . "\n\n");
-define('EMAIL_CONTACT', 'F&uuml;r Fragen zu unserem Onlineshop wenden Sie sich bitte an, please email the store-owner: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n\n");
+define('EMAIL_GREET_NONE', 'Hallo %s' . "\n\n");
+define('EMAIL_WELCOME', 'Wilkommen im Onlineshop von <b>' . STORE_NAME . '</b>.' . "\n\n");
+define('EMAIL_TEXT', 'Sie k√∂nnen nun die <b>erweiterten Funktionen</b> nutzen, die unser Shop f¸r Sie bereit h‰lt, wie etwa:' . "\n\n" . '<li><b>Pers√∂nlicher Warenkorb</b> - Der aktuelle Inhalt Ihres Warenkorbes wird beim Abmelden gespeichert und steht Ihnen bei der n‰chsten Anmeldung wieder zur Verf¸gung.' . "\n" . '<li><b>Adressbuch</b> - Speichern Sie unterschiedliche Lieferanschriften f¸r k¸nftige Bestellungen in Ihrem pers√∂nlichen Adressbuch ab.' . "\n" . '<li><b>Fr¸here Bestellungen</b> - Sie erhalten eine √úbersicht aller von Ihnen get‰tigten Bestellungen.' . "\n" . '<li><b>Produktbewertungen</b> - Verfassen Sie einen Erfahrungsbericht zu unseren Produkten und ver√∂ffentlichen Sie ihn online.' . "\n\n");
+define('EMAIL_CONTACT', 'Bei Fragen zu unserem Onlineshop wenden Sie sich bitte an: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n\n");
 define('EMAIL_WARNING', '<b>Hinweis:</b> Diese email-Adresse wird von einem Kundenkonto in unserem Onlineshop verwendet. Falls Sie sich nicht als Kunde in unserem Onlineshop angemeldtet haben, senden Sie bitte eine email an ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n");
 
 // Start - CREDIT CLASS Gift Voucher Contribution
-define('EMAIL_GV_INCENTIVE_HEADER', "\n\n" .'Als Wilkommensgeschenk f&ur Neukunden haben wir Ihnen einen Gutschein im Wert von %s &uuml;bersandt');
-define('EMAIL_GV_REDEEM', 'Der Gutscheincode lautet %s und kann entweder bei Ihrem n√§chsten Einkauf eingel√∂st werden,');
+define('EMAIL_GV_INCENTIVE_HEADER', "\n\n" .'Als Wilkommensgeschenk f&ur Neukunden haben wir Ihnen einen Gutschein im Wert von %s ¸bersandt');
+define('EMAIL_GV_REDEEM', 'Der Gutscheincode lautet %s und kann entweder bei Ihrem n‰chsten Einkauf eingel√∂st werden,');
 define('EMAIL_GV_LINK', 'oder wenn Sie diesem Link folgen ');
-define('EMAIL_COUPON_INCENTIVE_HEADER', 'Herzlichen Gl√ºckwunsch! Um Ihren ersten Einkauf in unserem Onlineshop noch lohnender f√ºr Sie zu machen, √ºbersenden wir Ihnen einen Gutschein.' . "\n" . ' Nachstehend finden Sie die Details Ihres pers&ouml;hnlichen Gutscheins' . "\n");
-define('EMAIL_COUPON_REDEEM', 'Um den Gutschein einzul&ouml;sen, geben Sie den angegebenen Code %s beim Abschlie√üen Ihrer Bestellung in das entsprechende Feld ein');
+define('EMAIL_COUPON_INCENTIVE_HEADER', 'Herzlichen Gl¸ckwunsch! Um Ihren ersten Einkauf in unserem Onlineshop noch lohnender f¸r Sie zu machen, ¸bersenden wir Ihnen einen Gutschein.' . "\n" . ' Nachstehend finden Sie die Details Ihres pers√∂nlichen Gutscheins' . "\n");
+
+define('EMAIL_COUPON_REDEEM', 'Um den Gutschein einzul√∂sen, geben Sie den angegebenen Code %s beim Abschlie√üen Ihrer Bestellung in das entsprechende Feld ein');
 // End - CREDIT CLASS Gift Voucher Contribution
 
-define('TEXT_AGREE_TO_TERMS', 'Ich stimme den allgemeinen Gesch√§ftsbedingungen zu');
+define('TEXT_AGREE_TO_TERMS', 'Ich stimme den Allgemeinen Gesch‰ftsbedingungen zu');
 
-// BEGIN - The german Umlauts must not be masked, because they would not be shown propperly in the Address change Popup Windows! Tested with osCmax 2.5 beta 2
 define('WINDOW_BUTTON_CANCEL', 'Abbrechen');
 define('WINDOW_BUTTON_CONTINUE', '√úbernehmen');
 define('WINDOW_BUTTON_NEW_ADDRESS', 'Neue Adresse');
-define('WINDOW_BUTTON_EDIT_ADDRESS', 'Adresse √§ndern');
-// END - The german Umlauts...
+define('WINDOW_BUTTON_EDIT_ADDRESS', 'Adresse bearbeiten');
 
-define('TEXT_PLEASE_SELECT', 'Bitte w&auml;hlen Sie');
+define('TEXT_PLEASE_SELECT', 'Bitte w‰hlen Sie');
 define('TEXT_PASSWORD_FORGOTTEN', 'Password vergessen? Hier klicken.');
 define('IMAGE_UPDATE_CART', 'Warenkorb aktualisieren');
 define('IMAGE_LOGIN', 'Anmelden');
-define('TEXT_PAYMENT_METHOD_UPDATE_ERROR', 'Bitte versuchen Sie es noch einmal. Falls das Problem weiterhin besteht, w&auml;hlen Sie bitte eine andere Zahlungsart.');
-define('TEXT_HAVE_COUPON_CCGV', 'M&ouml;chten Sie einen Gutschein einl√∂sen?');
-define('TEXT_HAVE_COUPON_KGT', 'M&ouml;chten Sie einen Gutschein einl√∂sen?');
+define('TEXT_PAYMENT_METHOD_UPDATE_ERROR', 'Bitte versuchen Sie es noch einmal. Falls das Problem weiterhin besteht, w‰hlen Sie bitte eine andere Zahlungsart.');
+define('TEXT_HAVE_COUPON_CCGV', 'M√∂chten Sie einen Gutschein einl√∂sen?');
+define('TEXT_HAVE_COUPON_KGT', 'M√∂chten Sie einen Gutschein einl√∂sen?');
 define('TEXT_EXISTING_CUSTOMER_LOGIN', 'Haben Sie schon ein Kundenkonto erstellt?');
 define('TEXT_DIFFERENT_SHIPPING', 'Abweichend von der Rechnungsadresse?');
 define('TEXT_SHIPPING_NO_ADDRESS', 'Bitte geben Sie <b>zumindest</b> Ihre Rechnungsanschrift an, um die Frachtkosten berechnen zu lassen.');
 define('TEXT_CHECKOUT_UPDATE_VIEW_ORDER', 'aktualisieren/anzeigen der Bestellung.');
-define('CHECKOUT_BAR_CONFIRMATION', 'Bestellung abschliessen');
+define('CHECKOUT_BAR_CONFIRMATION', 'Bestellung abschlie√üen');
 // Points/Rewards Module V2.1rc2a BOF
-define('TABLE_HEADING_REDEEM_SYSTEM', 'Treuepunkte einl&ouml;sen ');
-define('TABLE_HEADING_REFERRAL', 'Treuepunkte &uuml;bertragen');
-define('TEXT_REDEEM_SYSTEM_START', 'Sie haben ein Guthaben &uuml;ber %s . M&ouml;chten Sie es f&uuml;r diese Bestellung verwenden?<br />Die voraussichtliche Gesamtsumme Ihrer Bestellung betr&auml;gt: %s .');
-define('TEXT_REDEEM_SYSTEM_SPENDING', 'Setzen Sie hier einen Haken, wenn Sie die h&ouml;chstm&ouml;gliche Punktezahl einl&ouml;sen m&ouml;chten, die bei diesem Einkauf m&ouml;glich ist. (%s points %s)&nbsp;&nbsp;->');
-define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">Die Gesamtsumme ist h&ouml;her als die zul&auml;ssige Treuepunktanzahl, daher m&uuml;ssen Sie auch eine Zahlungsart ausw&auml;hlen</span>');
+define('TABLE_HEADING_REDEEM_SYSTEM', 'Treuepunkte einl√∂sen ');
+define('TABLE_HEADING_REFERRAL', 'Treuepunkte ¸bertragen');
+define('TEXT_REDEEM_SYSTEM_START', 'Sie haben ein Guthaben von %s . M√∂chten Sie es f¸r diese Bestellung verwenden?<br />Die voraussichtliche Gesamtsumme Ihrer Bestellung betr‰gt: %s .');
+define('TEXT_REDEEM_SYSTEM_SPENDING', 'Setzen Sie hier einen Haken, wenn Sie die h√∂chstm√∂gliche Punktezahl einl√∂sen m√∂chten, die bei diesem Einkauf m√∂glich ist. (%s Punktes %s)&nbsp;&nbsp;->');
+define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">Die Gesamtsumme ist h√∂her, als die h√∂chstzul‰ssige Treuepunktanzahl, daher m¸ssen Sie auch eine Zahlungsart ausw‰hlen</span>');
 define('TEXT_REFERRAL_REFERRED', 'Wenn Sie von einem Bekannten an un weiterempfohlen wurden, geben Sie bitte dessen email-Adresse an. ');
 // Points/Rewards Module V2.1rc2a EOF
-define('TERMS_PART_1', 'Bitte best&auml;tigen Sie, da&szlig; Sie unsere AGB gelesen und akzeptiert haben.');
-define('TERMS_PART_2', '<br/><b><u>Allgemeine Gesch&auml;ftsbedingungen anzeigen</u></b>');
+define('TERMS_PART_1', 'Bitte best‰tigen Sie, dass Sie unsere AGB gelesen und akzeptiert haben:');
+define('TERMS_PART_2', '<br/><b><u>Allgemeine Gesch‰ftsbedingungen</u></b>');
 ?>

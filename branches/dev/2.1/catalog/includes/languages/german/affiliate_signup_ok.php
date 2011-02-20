@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Werbepartner');
-define('HEADING_TITLE', 'Werbepartnerkonto erfolgreich erstellt!');
-define('TEXT_ACCOUNT_CREATED', 'Vielen Dank! Ihr neues Werbepartnerkonto wurde erfolgreich erstellt. Eine Best&auml;tigung &uuml;ber Ihr neues Konto wird Ihnen per eMail zugesendet. Falls Sie dieses eMail nicht innerhalb einer Stunde erhalten, <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">kontaktieren Sie uns</a> bitte.<br><br>Wenn Sie Fragen haben, <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">kontaktieren Sie uns</a> bitte.');
+define('NAVBAR_TITLE', 'Affiliate Anmeldung');
+define('HEADING_TITLE', 'Herzlichen Glückwunsch');
+define('TEXT_ACCOUNT_CREATED', 'Herzlichen Glückwunsch! Ihr neues Affiliatekonto wurde erfolgreich erstellt. Eine Bestätigung über Ihr neues Konto wird Ihnen per E-Mail zugesendet. Falls Sie dieses E-Mail nicht innerhalb einer Stunde erhalten, <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">kontaktieren Sie uns</a> bitte.<br><br>Wenn Sie Fragen haben, <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">kontaktieren Sie uns</a> bitte.');
 ?>

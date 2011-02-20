@@ -12,5 +12,5 @@ $Id$
 
 define('MODULE_SHIPPING_FLAT_TEXT_TITLE', 'Pauschale Versandkosten');
 define('MODULE_SHIPPING_FLAT_TEXT_DESCRIPTION', 'Pauschale Versandkosten');
-define('MODULE_SHIPPING_FLAT_TEXT_WAY','Best Way');
+define('MODULE_SHIPPING_FLAT_TEXT_WAY','Bester Weg');
 ?>

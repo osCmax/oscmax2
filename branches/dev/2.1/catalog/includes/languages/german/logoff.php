@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Abmeldung');
-define('NAVBAR_TITLE', 'Abmeldung');
-define('TEXT_MAIN', 'Sie wurden soeben sicher abgemeldet, so dass niemand mehr Ihre Daten einsehen kann.<br><br>Ihr Warenkorb wurde zwischengespeichert und steht Ihnen nach der n&auml;chsten Anmeldung wieder zur Verf&uuml;gung.');
+define('HEADING_TITLE', 'Abmelden');
+define('NAVBAR_TITLE', 'Abmelden');
+define('TEXT_MAIN', 'Sie wurden soeben sicher abgemeldet, so dass niemand mehr Ihre Daten einsehen kann.<br><br>Ihr Warenkorb wurde gespeichert und steht Ihnen nach der nächsten Anmeldung wieder zur Verfügung.');
 ?>

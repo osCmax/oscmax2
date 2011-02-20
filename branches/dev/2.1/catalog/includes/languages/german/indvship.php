@@ -1,7 +1,6 @@
 <?php
 /*
 $Id$
-  by Farrukh
 
   osCmax e-Commerce
   http://www.oscmax.com

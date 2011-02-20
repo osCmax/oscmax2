@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Werbepartner');
-define('HEADING_TITLE', 'Werbepartner -	Berichte');
+define('NAVBAR_TITLE', 'Affiliateprogramm');
+define('HEADING_TITLE', 'Affiliateprogramm:	Berichte');
 
-define('TEXT_INFORMATION', 'Informieren Sie sich &uuml;ber Ihre Klickstatistik und Ihre Provision.');
+define('TEXT_INFORMATION', 'Informieren Sie sich über Ihre Klickstatistik und Ihre Provision.');
 
 define('TEXT_AFFILIATE_CLICKS', 'Klickbericht');
 define('TEXT_AFFILIATE_SALES', 'Umsatzbericht');

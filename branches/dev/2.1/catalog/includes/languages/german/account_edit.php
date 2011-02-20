@@ -11,11 +11,11 @@ $Id$
 */
 
 define('NAVBAR_TITLE_1', 'Ihr Konto');
-define('NAVBAR_TITLE_2', 'Ihre pers&ouml;nliche Daten &auml;ndern');
+define('NAVBAR_TITLE_2', 'Konto bearbeiten');
 
-define('HEADING_TITLE', 'Ihre pers&ouml;nliche Daten &auml;ndern');
+define('HEADING_TITLE', 'Mein Konto');
 
-define('MY_ACCOUNT_TITLE', 'Ihr Konto');
+define('MY_ACCOUNT_TITLE', 'Mein Konto');
 
-define('SUCCESS_ACCOUNT_UPDATED', 'Ihre Daten wurden erfolgreich aktualisiert!');
+define('SUCCESS_ACCOUNT_UPDATED', 'Ihr Konto wurde erfolgreich aktualisiert!');
 ?>

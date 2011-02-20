@@ -12,9 +12,9 @@ $Id: citylink.php 982 2011-01-06 02:53:12Z michael.oscmax@gmail.com $
 
 define('MODULE_SHIPPING_CITYLINK_TEXT_TITLE', 'Initial Citylink');
 define('MODULE_SHIPPING_CITYLINK_TEXT_DESCRIPTION', 'Initial Citylink');
-define('MODULE_SHIPPING_CITYLINK_TEXT_WAY','Liefergewicht');
-define('MODULE_SHIPPING_CITYLINK_TEXT_UNITS', 'Kg\'s');
-define('MODULE_SHIPPING_CITYLINK_DELIVERY_TIMES','(Z vor 3pm, Schiffe NextDay)'); 
-define('MODULE_SHIPPING_CITYLINK_INVALID_ZONE','Leider ist diese Versandart für deutsche Kunden einen Wagen Gewicht von bis zu 20.00kg');
-define('MODULE_SHIPPING_CITYLINK_UNDEFINED_RATE','Die Versandkosten können nicht zu diesem Zeitpunkt (20.00kg Warenkorb Gewicht / 500 Limit bestimmt überschritten)');
+define('MODULE_SHIPPING_CITYLINK_TEXT_WAY','Versandgewicht');
+define('MODULE_SHIPPING_CITYLINK_TEXT_UNITS', 'kg');
+define('MODULE_SHIPPING_CITYLINK_DELIVERY_TIMES','(Bestellungen for 15 Uhr werden am nächsten Tag versandt)'); 
+define('MODULE_SHIPPING_CITYLINK_INVALID_ZONE','Diese Versandart steht nur Kunden in Großbritanien bis zu einem Versandgewicht von 20.000 kg zur Verfügung');
+define('MODULE_SHIPPING_CITYLINK_UNDEFINED_RATE','Die Versandkosten können derzeit nicht angegeben werden, da das 20.000 kg / 500 GBP Limit überschritten wurde');
 ?>

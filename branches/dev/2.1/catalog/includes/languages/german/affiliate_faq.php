@@ -10,11 +10,11 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Werbepartner FAQ');
-define('HEADING_TITLE', 'Werbepartner - H&auml;ufig gestellte Fragen');
+define('NAVBAR_TITLE', 'Affiliateprogramm FAQ');
+define('HEADING_TITLE', 'Affiliateprogramm - Häufig gestellte Fragen');
 
-define('TEXT_INFORMATION', '' . STORE_NAME . ' hat diese FAQ zusammengestellt, um Ihnen die h&auml;ufigsten Fragen zu unserem Werbepartnerprogramm schnell beantworten zu k&ouml;nnen.<br>
- Falls Sie weitere Fragen haben <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT). '"> <u>kontaktieren</u></a> Sie uns bitte f&uuml;r weitere Informationen.<br>
+define('TEXT_INFORMATION', '' . STORE_NAME . ' hat diese FAQ zusammengestellt, um die häufigsten Fragen zu unserem Affiliateprogramm schnell beantworten zu können.<br>
+ Falls Sie weitere Fragen haben <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT). '"> <u>kontaktieren</u></a> Sie uns bitte für weitere Informationen.<br>
 <ul>
 <li><a href="' . tep_href_link('affiliate_faq.php') . '#1">Frage 1?</a>
 <li><a href="' . tep_href_link('affiliate_faq.php') . '#2">Frage 2?</a>
@@ -31,7 +31,7 @@ define('TEXT_INFORMATION', '' . STORE_NAME . ' hat diese FAQ zusammengestellt, u
 </ul>
 <hr width ="90%">
 <br>
-<font color="#000000" size="3"><b><u>H&auml;ufig gestellte Fragen</u></b></font>
+<font color="#000000" size="3"><b><u>Häufig gestellte Fragen</u></b></font>
 <p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Frage: 1?</font><a name="1"></a><br>
 Antwort</p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>

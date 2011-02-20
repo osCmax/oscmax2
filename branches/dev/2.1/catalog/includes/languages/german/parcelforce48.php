@@ -16,7 +16,7 @@ define('MODULE_SHIPPING_PARCELFORCE48_TEXT_WAY','Liefergewicht');
 define('MODULE_SHIPPING_PARCELFORCE48_TEXT_ITEM','Paket von');
 define('MODULE_SHIPPING_PARCELFORCE48_TEXT_ITEMS','Pakete von');
 define('MODULE_SHIPPING_PARCELFORCE48_TEXT_UNITS', 'Kg\'s');
-define('MODULE_SHIPPING_PARCELFORCE48_INVALID_ZONE','Leider ist diese Versandart nur für deutsche Kunden');
+define('MODULE_SHIPPING_PARCELFORCE48_INVALID_ZONE','Leider ist diese Versandart nur für britische Kunden');
 define('MODULE_SHIPPING_PARCELFORCE48_UNDEFINED_RATE','Die Versandkosten können zu diesem Zeitpunkt nicht ermittelt werden');
 define('MODULE_SHIPPING_PARCELFORCE48_DELIVERY_NO_INSURANCE','Unversichert');
 define('MODULE_SHIPPING_PARCELFORCE48_DELIVERY_INSURANCE','Versicherte bis £');

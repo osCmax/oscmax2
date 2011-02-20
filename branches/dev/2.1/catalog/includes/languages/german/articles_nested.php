@@ -11,8 +11,7 @@ $Id$
 */
 
 define('TEXT_MAIN', '');
+define('NAVBAR_TITLE_1','Artikel');
 define('TABLE_HEADING_NEW_ARTICLES','Neue Artikel in %s');
 define('HEADING_TITLE','Artikel');
-define('NAVBAR_TITLE_1','Artikel');
-
 ?>

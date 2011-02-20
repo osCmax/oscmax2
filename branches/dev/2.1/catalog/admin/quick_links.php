@@ -23,8 +23,9 @@ $Id: quick_links.php 3 2010-03-31 user pgm
         $quick_links_link = tep_db_prepare_input($_POST['quick_links_link']);
         $quick_links_target = tep_db_prepare_input($_POST['quick_links_target']);
         $quick_links_sort_order = tep_db_prepare_input($_POST['quick_links_sort_order']);
+		$quick_links_cg = tep_db_prepare_input($_POST['quick_links_cg']);
 
-        tep_db_query("insert into " . TABLE_QUICK_LINKS . " (quick_links_id, quick_links_image, quick_links_name, quick_links_link, quick_links_target, quick_links_sort_order, date_added) values ('" . (int)$quick_links_id . "', '" . $quick_links_image . "', '" . $quick_links_name . "', '" . tep_db_input($quick_links_link) . "', '" . tep_db_input($quick_links_target) . "', '" . tep_db_input($quick_links_sort_order) . "', now())");
+        tep_db_query("insert into " . TABLE_QUICK_LINKS . " (quick_links_id, quick_links_image, quick_links_name, quick_links_link, quick_links_target, quick_links_sort_order, quick_links_cg, date_added) values ('" . (int)$quick_links_id . "', '" . $quick_links_image . "', '" . $quick_links_name . "', '" . tep_db_input($quick_links_link) . "', '" . tep_db_input($quick_links_target) . "', '" . tep_db_input($quick_links_sort_order) . "', '" . tep_db_input($quick_links_cg) . "', now())");
 
         tep_redirect(tep_href_link(FILENAME_QUICK_LINKS));
         break;
@@ -35,8 +36,9 @@ $Id: quick_links.php 3 2010-03-31 user pgm
         $quick_links_link = tep_db_prepare_input($_POST['quick_links_link']);
         $quick_links_target = tep_db_prepare_input($_POST['quick_links_target']);
         $quick_links_sort_order = tep_db_prepare_input($_POST['quick_links_sort_order']);
+		$quick_links_cg = tep_db_prepare_input($_POST['quick_links_cg']);
 
-        tep_db_query("update " . TABLE_QUICK_LINKS . " set quick_links_id = '" . (int)$quick_links_id . "', quick_links_image = '" . $quick_links_image . "', quick_links_name = '" . $quick_links_name . "', quick_links_link = '" . tep_db_input($quick_links_link) . "', quick_links_target = '" . tep_db_input($quick_links_target) . "', quick_links_sort_order = '" . tep_db_input($quick_links_sort_order) . "', last_modified = now() where quick_links_id = '" . (int)$quick_links_id . "'");
+        tep_db_query("update " . TABLE_QUICK_LINKS . " set quick_links_id = '" . (int)$quick_links_id . "', quick_links_image = '" . $quick_links_image . "', quick_links_name = '" . $quick_links_name . "', quick_links_link = '" . tep_db_input($quick_links_link) . "', quick_links_target = '" . tep_db_input($quick_links_target) . "', quick_links_sort_order = '" . tep_db_input($quick_links_sort_order) . "', quick_links_cg = '" . tep_db_input($quick_links_cg) . "', last_modified = now() where quick_links_id = '" . (int)$quick_links_id . "'");
 
         tep_redirect(tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&tID=' . $quick_links_id));
         break;
@@ -92,10 +94,11 @@ $Id: quick_links.php 3 2010-03-31 user pgm
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_QUICK_LINKS_LINK; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_QUICK_LINKS_TARGET; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_QUICK_LINKS_SORT_ORDER; ?>&nbsp;</td>
+                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_QUICK_LINKS_CG; ?>&nbsp;</td>
                 <td class="dataTableHeadingContent" align="right">&nbsp;</td>
               </tr>
 <?php
-  $quick_links_query_raw = "select quick_links_id, quick_links_image, quick_links_name, quick_links_sort_order, quick_links_link, quick_links_target, date_added, last_modified from " . TABLE_QUICK_LINKS . " order by quick_links_sort_order";
+  $quick_links_query_raw = "select quick_links_id, quick_links_image, quick_links_name, quick_links_sort_order, quick_links_link, quick_links_target, quick_links_cg, date_added, last_modified from " . TABLE_QUICK_LINKS . " order by quick_links_sort_order";
   $quick_links_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $quick_links_query_raw, $quick_links_query_numrows);
   $quick_links_query = tep_db_query($quick_links_query_raw);
   while ($links = tep_db_fetch_array($quick_links_query)) {
@@ -114,6 +117,7 @@ $Id: quick_links.php 3 2010-03-31 user pgm
                 <td class="dataTableContent"><?php echo $links['quick_links_link']; ?></td>
                 <td class="dataTableContent"><?php echo $links['quick_links_target']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo $links['quick_links_sort_order']; ?></td>
+                <td class="dataTableContent" align="center"><?php echo $links['quick_links_cg']; ?></td>
                 <td class="dataTableContent" align="right"><?php if (isset($trInfo) && is_object($trInfo) && ($links['quick_links_id'] == $trInfo->quick_links_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $links['quick_links_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
@@ -152,6 +156,13 @@ $Id: quick_links.php 3 2010-03-31 user pgm
 	  $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_LINK . '<br>' . tep_draw_input_field('quick_links_link'));
       $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_TARGET . '<br>' . tep_draw_input_field('quick_links_target'));
       $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_SORT_ORDER . '<br>' . tep_draw_input_field('quick_links_sort_order'));
+      $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_CG . '<br>' . tep_draw_input_field('quick_links_cg'));
+	  
+	  $admin_group_query = tep_db_query("select admin_groups_id, admin_groups_name from " . TABLE_ADMIN_GROUPS . " order by admin_groups_id");
+      while ($admin_groups = tep_db_fetch_array($admin_group_query)) {
+	  $contents[] = array('text' => $admin_groups['admin_groups_id'] . ' = ' . $admin_groups['admin_groups_name']);  
+	  }
+	  
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'edit':
@@ -164,6 +175,13 @@ $Id: quick_links.php 3 2010-03-31 user pgm
       $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_LINK . '<br>' . tep_draw_input_field('quick_links_link', $trInfo->quick_links_link));
       $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_TARGET . '<br>' . tep_draw_input_field('quick_links_target', $trInfo->quick_links_target));
       $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_SORT_ORDER . '<br>' . tep_draw_input_field('quick_links_sort_order', $trInfo->quick_links_sort_order));
+	  $contents[] = array('text' => '<br>' . TEXT_QUICK_LINKS_CG . '<br>' . tep_draw_input_field('quick_links_cg', $trInfo->quick_links_cg));
+	  
+	  $admin_group_query = tep_db_query("select admin_groups_id, admin_groups_name from " . TABLE_ADMIN_GROUPS . " order by admin_groups_id");
+      while ($admin_groups = tep_db_fetch_array($admin_group_query)) {
+	  $contents[] = array('text' => $admin_groups['admin_groups_id'] . ' = ' . $admin_groups['admin_groups_name']);  
+	  }
+	  
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_QUICK_LINKS, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->quick_links_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'delete':

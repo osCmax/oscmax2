@@ -1389,6 +1389,7 @@ CREATE TABLE IF NOT EXISTS quick_links (
   quick_links_link varchar(255) NOT NULL,
   quick_links_target varchar(255) NOT NULL,
   quick_links_sort_order int(11) NOT NULL,
+  quick_links_cg varchar(64) NOT NULL,
   date_added datetime NOT NULL,
   last_modified datetime DEFAULT NULL,
   quick_links_image varchar(255) NOT NULL,
@@ -1604,8 +1605,8 @@ INSERT INTO admin_files VALUES (32,'stats_customers.php',0,8,'1');
 INSERT INTO admin_files VALUES (33,'backup.php',0,9,'1');
 INSERT INTO admin_files VALUES (34,'banner_manager.php',0,9,'1');
 INSERT INTO admin_files VALUES (35,'cache.php',0,9,'1');
-INSERT INTO admin_files VALUES (36,'define_language.php',0,9,'1');
-INSERT INTO admin_files VALUES (37,'file_manager.php',0,9,'1');
+#INSERT INTO admin_files VALUES (36,'define_language.php',0,9,'1');
+#INSERT INTO admin_files VALUES (37,'file_manager.php',0,9,'1');
 INSERT INTO admin_files VALUES (38,'mail.php',0,9,'1');
 INSERT INTO admin_files VALUES (39,'newsletters.php',0,9,'1');
 INSERT INTO admin_files VALUES (40,'server_info.php',0,9,'1');
@@ -1628,8 +1629,8 @@ INSERT INTO admin_files VALUES (56,'gv_queue.php',0,54,'1');
 INSERT INTO admin_files VALUES (57,'gv_mail.php',0,54,'1');
 INSERT INTO admin_files VALUES (58,'gv_sent.php',0,54,'1');
 INSERT INTO admin_files VALUES (59,'paypalipn.php',1,0,'1');
-INSERT INTO admin_files VALUES (60,'paypalipn_tests.php',0,59,'1');
-INSERT INTO admin_files VALUES (61,'paypalipn_txn.php',0,59,'1');
+#INSERT INTO admin_files VALUES (60,'paypalipn_tests.php',0,59,'1');
+#INSERT INTO admin_files VALUES (61,'paypalipn_txn.php',0,59,'1');
 INSERT INTO admin_files VALUES (62,'coupon_restrict.php',0,54,'1');
 INSERT INTO admin_files VALUES (64,'xsell_products.php',0,3,'1');
 INSERT INTO admin_files VALUES (65,'easypopulate.php',0,3,'1');
@@ -1703,7 +1704,7 @@ INSERT INTO admin_files VALUES (140,'googlesitemap.php', 0, 2, '1');
 INSERT INTO admin_files VALUES (141,'common_reports.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (142,'stats_http_error.php', 0, 8, '1');
 INSERT INTO admin_files VALUES (143,'stats_register_customer_no_purchase.php', 0, 8, '1');
-INSERT INTO admin_files VALUES (144,'quick_links.php', 0, 9, '1');
+INSERT INTO admin_files VALUES (144,'quick_links.php', 0, 1, '1');
 INSERT INTO admin_files VALUES (145,'feedmachine.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (146,'feedmachine_admin.php', 0, 3, '1');
 INSERT INTO admin_files VALUES (147,'feedmachine_auto.php', 0, 3, '1');
@@ -2722,17 +2723,17 @@ INSERT INTO theme_configuration VALUES (29,'Authors','BOX_HEADING_AUTHORS','yes'
 INSERT INTO theme_configuration VALUES (30,'mailchimp_newsletters','BOX_HEADING_MAILCHIMP','no','Do you want to use MailChimp to collect and manage your newsletters?','1','right','15',NULL,NULL,now(),'MailChimp Newsletters');
 
 #Default Quick Links
-INSERT INTO quick_links VALUES (1, 'Home', 'index.php', '_top', 1, now(), now(), 'dashboard.png');
-INSERT INTO quick_links VALUES (2, 'Google Analytics', 'https://www.google.com/analytics/reporting/', '_blank', 2, now(), now(), 'analytics.png');
-INSERT INTO quick_links VALUES (3, 'Google Web Tools', 'https://www.google.com/webmasters/tools/dashboard', '_blank', 3, now(), now(), 'webtools.png');
-INSERT INTO quick_links VALUES (4, 'Pingdom', 'https://pp.pingdom.com/index.php/member/default', '_blank', 4, now(), now(), 'pingdom.png');
-INSERT INTO quick_links VALUES (5, 'Categories', 'categories.php', '_top', 5, now(), now(), 'categories.png');
-INSERT INTO quick_links VALUES (6, 'Cross Sell', 'xsell.php', '_top', 6, now(), now(), 'xsell.png');
-INSERT INTO quick_links VALUES (7, 'Backup', 'backup.php', '_top', 7, now(), now(), 'backup.png');
-INSERT INTO quick_links VALUES (8, 'Orders', 'orders.php', '_top', 8, now(), now(), 'orders.png');
-INSERT INTO quick_links VALUES (9, 'Customers', 'customers.php', '_top', 9, now(), now(), 'customers.png');
-INSERT INTO quick_links VALUES (10, 'Newsletters', 'newsletters.php', '_top', 10, now(), now(), 'newsletters.png');
-INSERT INTO quick_links VALUES (11, 'Goto Catalog', '../index.php', '_blank', 11, now(), now(), 'catalog.png');
+INSERT INTO quick_links VALUES (1, 'Home', 'index.php', '_top', 1, '1,2', now(), now(), 'dashboard.png');
+INSERT INTO quick_links VALUES (2, 'Google Analytics', 'https://www.google.com/analytics/reporting/', '_blank', 2, '1,2', now(), now(), 'analytics.png');
+INSERT INTO quick_links VALUES (3, 'Google Web Tools', 'https://www.google.com/webmasters/tools/dashboard', '_blank', 3, '1,2', now(), now(), 'webtools.png');
+INSERT INTO quick_links VALUES (4, 'Pingdom', 'https://pp.pingdom.com/index.php/member/default', '_blank', 4, '1,2', now(), now(), 'pingdom.png');
+INSERT INTO quick_links VALUES (5, 'Categories', 'categories.php', '_top', 5, '1,2', now(), now(), 'categories.png');
+INSERT INTO quick_links VALUES (6, 'Cross Sell', 'xsell.php', '_top', 6, '1,2', now(), now(), 'xsell.png');
+INSERT INTO quick_links VALUES (7, 'Backup', 'backup.php', '_top', 7, '1,2', now(), now(), 'backup.png');
+INSERT INTO quick_links VALUES (8, 'Orders', 'orders.php', '_top', 8, '1,2', now(), now(), 'orders.png');
+INSERT INTO quick_links VALUES (9, 'Customers', 'customers.php', '_top', 9, '1,2', now(), now(), 'customers.png');
+INSERT INTO quick_links VALUES (10, 'Newsletters', 'newsletters.php', '_top', 10, '1,2', now(), now(), 'newsletters.png');
+INSERT INTO quick_links VALUES (11, 'Goto Catalog', '../index.php', '_blank', 11, '1,2', now(), now(), 'catalog.png');
 
 #Default Help Pages
 INSERT INTO help_pages VALUES ('index.php', 'http://wiki.oscdox.com/v2.5/oscmax_docs', 'Help Index', 0);

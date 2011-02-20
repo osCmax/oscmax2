@@ -18,6 +18,7 @@ define('TABLE_HEADING_QUICK_LINKS_NAME', 'Nombre del enlace');
 define('TABLE_HEADING_QUICK_LINKS_LINK', 'Enlace');
 define('TABLE_HEADING_QUICK_LINKS_TARGET', 'Meta');
 define('TABLE_HEADING_QUICK_LINKS_SORT_ORDER', 'Sort Order');
+define('TABLE_HEADING_QUICK_LINKS_CG', 'Groups');
 
 define('TEXT_QUICK_LINKS_INSERT_INTRO', 'Please insert a new quick link:');
 define('TEXT_QUICK_LINKS_NAME', 'Link Name'); 
@@ -25,6 +26,7 @@ define('TEXT_QUICK_LINKS_IMAGE', 'Link Icon');
 define('TEXT_QUICK_LINKS_LINK', 'Link Details');
 define('TEXT_QUICK_LINKS_TARGET', 'Target');
 define('TEXT_QUICK_LINKS_SORT_ORDER', 'Sort Order');
+define('TEXT_QUICK_LINKS_CG', 'Visible to customer groups: (Seperate with ,)');
 
 define('TEXT_QUICK_LINKS_DATE_ADDED', 'Added: ');
 define('TEXT_QUICK_LINKS_LAST_MODIFIED', 'Modified: ');

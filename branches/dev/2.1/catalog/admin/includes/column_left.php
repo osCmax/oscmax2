@@ -9,7 +9,7 @@ $Id$
 
   Released under the GNU General Public License
 */
-  $column_left_query_raw = "select quick_links_id, quick_links_image, quick_links_name, quick_links_sort_order, quick_links_link, quick_links_target, date_added, last_modified from " . TABLE_QUICK_LINKS . " order by quick_links_sort_order";
+  $column_left_query_raw = "select quick_links_image, quick_links_name, quick_links_sort_order, quick_links_link, quick_links_target, quick_links_cg from " . TABLE_QUICK_LINKS . " where FIND_IN_SET( '" . $login_groups_id . "', quick_links_cg) order by quick_links_sort_order";
   $column_left_query = tep_db_query($column_left_query_raw);
   while ($column_left = tep_db_fetch_array($column_left_query)) {
 ?>

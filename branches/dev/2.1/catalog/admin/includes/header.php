@@ -187,7 +187,7 @@ document.status.comments.value += newmessage;
 <tr valign="top">
   <td width="33%" align="left"><a href="http://www.oscmax.com/" target="_blank" class="header"><?php echo tep_image(DIR_WS_IMAGES . STORE_LOGO); ?></a></td>
   <td width="33%" align="center">
-    <table width="236">
+    <table width="250">
       <tr>
         <td class="smallText" align="center">
             <div id="searchtabs" class="ui-tabs">

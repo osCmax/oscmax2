@@ -409,7 +409,6 @@ $Id$
       $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_LASTNAME . '<br>&nbsp;' . tep_draw_input_field('admin_lastname'));
       $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_EMAIL . '<br>&nbsp;' . tep_draw_input_field('admin_email_address'));
 
-      $groups_array = array(array('id' => '0', 'text' => TEXT_NONE));
       $groups_query = tep_db_query("select admin_groups_id, admin_groups_name from " . TABLE_ADMIN_GROUPS);
       while ($groups = tep_db_fetch_array($groups_query)) {
         $groups_array[] = array('id' => $groups['admin_groups_id'],
@@ -435,7 +434,6 @@ $Id$
       if ($mInfo->admin_id == 1) {
         $contents[] = array('text' => tep_draw_hidden_field('admin_groups_id', $mInfo->admin_groups_id));
       } else {
-        $groups_array = array(array('id' => '0', 'text' => TEXT_NONE));
         $groups_query = tep_db_query("select admin_groups_id, admin_groups_name from " . TABLE_ADMIN_GROUPS);
         while ($groups = tep_db_fetch_array($groups_query)) {
           $groups_array[] = array('id' => $groups['admin_groups_id'],
@@ -454,7 +452,6 @@ $Id$
         $contents = array('form' => tep_draw_form('edit', FILENAME_ADMIN_MEMBERS, 'action=member_delete&amp;page=' . $page . '&amp;mID=' . $admin['admin_id'], 'post', 'enctype="multipart/form-data"'));
         $contents[] = array('text' => tep_draw_hidden_field('admin_id', $mInfo->admin_id));
         $contents[] = array('align' => 'center', 'text' =>  sprintf(TEXT_INFO_DELETE_INTRO, $mInfo->admin_username));
-        $contents[] = array('align' => 'center', 'text' =>  sprintf(TEXT_INFO_DELETE_INTRO, $mInfo->admin_firstname . ' ' . $mInfo->admin_lastname));
         $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $_GET['mID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       }
       break;

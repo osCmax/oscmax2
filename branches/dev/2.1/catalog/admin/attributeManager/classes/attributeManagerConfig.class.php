@@ -60,7 +60,7 @@ class attributeManagerConfig {
 		$this->add('AM_TABLE_ATTRIBUTES_TO_TEMPLATES','am_attributes_to_templates');
 		
 		
-		$this->add('AM_USE_SORT_ORDER' , false);
+		$this->add('AM_USE_SORT_ORDER', true);
 
         /**
          * QT Pro plugin
@@ -76,8 +76,8 @@ class attributeManagerConfig {
 		/**
 		 * Sort order tables
 		 */
-		$this->add('AM_FIELD_OPTION_SORT_ORDER','products_options_sort_order'); // Sort column on Products_options table
-		$this->add('AM_FIELD_OPTION_VALUE_SORT_ORDER','products_options_sort_order'); // Sort column on product_attributes table
+		$this->add('AM_FIELD_OPTION_SORT_ORDER', 'products_options_sort_order'); // Sort column on Products_options table
+		$this->add('AM_FIELD_OPTION_VALUE_SORT_ORDER', 'products_options_sort_order'); // Sort column on product_attributes table
 	
 		
 		/**

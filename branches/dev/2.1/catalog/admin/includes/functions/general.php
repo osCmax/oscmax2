@@ -2149,4 +2149,15 @@ function tep_cfg_pull_down_templates() {
   }
 // EOF: Extra Product Fields
 
+// BOF: Attribute Sort with Clone Tool
+
+  function tep_attribute_sort($attributes_id) {
+    global $languages_id;
+    $attributes_sort = tep_db_query("select products_options_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_attributes_id = '" . (int)$attributes_id . "'");
+    $attributes_sort_values = tep_db_fetch_array($attributes_sort);
+
+    return $attributes_sort_values['products_options_sort_order'];
+  }
+// EOF: Attribute Sort with Clone Tool
+
 ?>

@@ -45,4 +45,9 @@ define('TABLE_HEADING_OPT_LENGTH', 'Length');
 define('TABLE_HEADING_OPT_WEIGHT', 'Option Weight');
 define('TABLE_HEADING_OPT_WEIGHT_PREFIX', 'Prefix');
 // END: More Product Weight
+
+define('TABLE_HEADING_OPT_SORT_ORDER', 'Sort Order');
+define('TABLE_TEXT_FROM', 'From: ');
+define('TABLE_TEXT_TO', 'To: ');
+define('HEADING_TITLE_CLONE', 'Clone Product Attributes');
 ?>

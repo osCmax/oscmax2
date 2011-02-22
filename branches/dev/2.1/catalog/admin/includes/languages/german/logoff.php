@@ -10,8 +10,8 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Maschinenbordbuch Weg');
-define('NAVBAR_TITLE', 'Maschinenbordbuch Weg');
-define('TEXT_MAIN', 'Sie sind vom Leitung Bereich geloggt worden-weg. Es ist jetzt sicher, den Computer zu lassen. Klicken zurück zu Maschinenbordbuchrückseite innen.');
-define('TEXT_RELOGIN', 'Maschinenbordbuch innen');
+define('HEADING_TITLE', 'Abmelden');
+define('NAVBAR_TITLE', 'Abmelden');
+define('TEXT_MAIN', 'Sie haben sich aus dem <b>Adminbereich</b> abgemeldet. Sie können Ihren Computer nun verlassen. Klicken Sie auf Zurück, um sich neu anzumelden.');
+define('TEXT_RELOGIN', 'Wieder anmelden');
 ?>

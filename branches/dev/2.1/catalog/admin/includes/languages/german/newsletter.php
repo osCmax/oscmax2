@@ -10,5 +10,5 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('TEXT_COUNT_CUSTOMERS', 'Anzahl der Kunden, welche das Rundschreiben erhalten: %s');
+define('TEXT_COUNT_CUSTOMERS', 'Anzahl der Kunden, die den Newsletter erhalten: %s');
 ?>

@@ -12,5 +12,5 @@ $Id$
 
 
 
-define('TEXT_COUNT_AFFILIATES', 'Affiliates receiving newsletter: %s');
+define('TEXT_COUNT_AFFILIATES', 'Newsletter-Empfänger: %s');
 ?>

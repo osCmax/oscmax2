@@ -10,14 +10,14 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('MESSAGE_STACK_CUSTOMER_ID', 'Cart for Customer-ID ');
-define('MESSAGE_STACK_DELETE_SUCCESS', ' deleted successfully');
+define('MESSAGE_STACK_CUSTOMER_ID', 'Warenkorb von Kunden-ID ');
+define('MESSAGE_STACK_DELETE_SUCCESS', ' erfolgreich gelöscht');
 define('HEADING_TITLE', 'Recover Cart Sales v2.22');
 define('HEADING_EMAIL_SENT', 'E-mail Sende-Report');
-define('EMAIL_TEXT_LOGIN', 'Login to your account here:');
+define('EMAIL_TEXT_LOGIN', 'Melden Sie sich hier an:');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
 define('EMAIL_TEXT_SUBJECT', 'Anfrage von '.  STORE_NAME );
-define('EMAIL_TEXT_SALUTATION', 'Dear ' );
+define('EMAIL_TEXT_SALUTATION', 'Sehr geehrte(r) ' );
 define('EMAIL_TEXT_NEWCUST_INTRO', "\n\n" . 'Vielen Dank für Ihren Besuch bei ' . STORE_NAME .
                                    ' und Ihr uns entgegengebrachtes Vertrauen.  ');
 define('EMAIL_TEXT_CURCUST_INTRO', "\n\n" . 'Vielen Dank für Ihren erneuten Besuch bei ' .
@@ -34,15 +34,16 @@ define('EMAIL_TEXT_BODY_FOOTER', 'Wir sind immer bemüht unseren Service ' .
                                  "\n\n" . 'Nochmals, vielen Dank für Ihre Zeit und Ihre Hilfe ' .
                                  'den Onlineshop von ' . STORE_NAME . ' zu verbessern.' . "\n\n" .
                                  'Mit freundlichen Grüßen' . "\n". 'Ihr Team von ');
-define('DAYS_FIELD_PREFIX', 'Zeige letzen ');
+
+define('DAYS_FIELD_PREFIX', 'Zeige die letzten ');
 define('DAYS_FIELD_POSTFIX', ' Tage ');
 define('DAYS_FIELD_BUTTON', 'Anzeigen');
 define('TABLE_HEADING_DATE', 'Datum');
-define('TABLE_HEADING_CONTACT', 'kontaktieren?');
-define('TABLE_HEADING_CUSTOMER', 'Kunden Name');
+define('TABLE_HEADING_CONTACT', 'kontaktiert?');
+define('TABLE_HEADING_CUSTOMER', 'Kundenname');
 define('TABLE_HEADING_EMAIL', 'E-Mail');
 define('TABLE_HEADING_PHONE', 'Telefon');
-define('TABLE_HEADING_MODEL', 'Artikel');
+define('TABLE_HEADING_MODEL', 'Art-Nr');
 define('TABLE_HEADING_DESCRIPTION', 'Beschreibung');
 define('TABLE_HEADING_QUANTY', 'Menge');
 define('TABLE_HEADING_PRICE', 'Preis');

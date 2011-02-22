@@ -10,39 +10,39 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Verk&auml;ufe & Steuerreport');
+define('HEADING_TITLE', 'Verkäufe & Steuerreport');
 define('HEADING_TITLE_STATUS','Bestellstatus');
 define('HEADING_TITLE_REPORTED','Berichtet');
 //Added line
 define('TEXT_DETAIL','Detail');
-define('TEXT_ALL_ORDERS', 'alles Bestellungen');
-define('TEXT_NOTHING_FOUND', 'kein Einkommen f&uuml;r diese Vorw&auml;hler');
+define('TEXT_ALL_ORDERS', 'Alle Bestellungen');
+define('TEXT_NOTHING_FOUND', 'Kein Umsatz für diese Auswahl');
 //Added 2 lines
-define('TEXT_BUTTON_REPORT_BACK','Zur&uuml;ck');
-define('TEXT_BUTTON_REPORT_INVERT','Invert');
-define('TEXT_BUTTON_REPORT_PRINT','Print');
-define('TEXT_BUTTON_REPORT_SAVE','Save CSV');
-define('TEXT_BUTTON_REPORT_HELP','Help');
+define('TEXT_BUTTON_REPORT_BACK','Zurück');
+define('TEXT_BUTTON_REPORT_INVERT','Umkehren');
+define('TEXT_BUTTON_REPORT_PRINT','Drucken');
+define('TEXT_BUTTON_REPORT_SAVE','CSV speichern');
+define('TEXT_BUTTON_REPORT_HELP','Hilfe');
 //Added 2 lines
-define('TEXT_BUTTON_REPORT_BACK_DESC', 'Return to summary by months');
-define('TEXT_BUTTON_REPORT_INVERT_DESC', 'Invert rows top to bottom');
-define('TEXT_BUTTON_REPORT_PRINT_DESC', 'Show report in printer friendly window');
-define('TEXT_BUTTON_REPORT_HELP_DESC', 'About this report and how to use its features');
+define('TEXT_BUTTON_REPORT_BACK_DESC', 'Zur Monatsübersicht zurückkehren');
+define('TEXT_BUTTON_REPORT_INVERT_DESC', 'Zeilen von Oben nach Unten umkehren');
+define('TEXT_BUTTON_REPORT_PRINT_DESC', 'Report im druckerfreundlichen Fenster anzeigen');
+define('TEXT_BUTTON_REPORT_HELP_DESC', 'Über diesen Report und wie man ihn benutzt');
 //Added line
-define('TEXT_BUTTON_REPORT_GET_DETAIL', 'Click to report daily summary for this month');
+define('TEXT_BUTTON_REPORT_GET_DETAIL', 'Klicken für eine Tageszusammenfassung dieses Monats');
 define('TEXT_REPORT_DATE_FORMAT', 'j M Y -   g:i a'); // date format string
 //  as specified in php manual here: http://www.php.net/manual/en/function.date.php
 define('TABLE_HEADING_YEAR','Jahr');
 define('TABLE_HEADING_MONTH', 'Monat');
 define('TABLE_HEADING_DAY', 'Tag');
-define('TABLE_HEADING_INCOME', 'Gross<br> Income');
-define('TABLE_HEADING_SALES', 'Product<br> sales');
-define('TABLE_HEADING_NONTAXED', 'Nontaxed<br> sales');
-define('TABLE_HEADING_TAXED', 'Taxed<br> sales');
-define('TABLE_HEADING_TAX_COLL', 'Taxes<br> collected');
-define('TABLE_HEADING_SHIPHNDL', 'Shipping<br> & Handling');
-define('TABLE_HEADING_LOWORDER', 'Low Order<br> Fees');
-define('TABLE_HEADING_OTHER', 'Gift<br> Vouchers');  // could be any other extra class value
+define('TABLE_HEADING_INCOME', 'Brutto<br> Umsatz');
+define('TABLE_HEADING_SALES', 'Produkt<br> Verkäufe');
+define('TABLE_HEADING_NONTAXED', 'Steuerfreie<br> Verkäufe');
+define('TABLE_HEADING_TAXED', 'Steuerbare<br> Verkäufe');
+define('TABLE_HEADING_TAX_COLL', 'Eingehobene<br> Steuern');
+define('TABLE_HEADING_SHIPHNDL', 'Versand<br> & Manipulation');
+define('TABLE_HEADING_LOWORDER', 'Mindermengen<br> Zuschlag');
+define('TABLE_HEADING_OTHER', 'Geschenks<br> Gutscheine');  // could be any other extra class value
 define('TABLE_FOOTER_YTD','YTD');
 define('TABLE_FOOTER_YEAR','JAHR');
 //Added define
@@ -75,7 +75,7 @@ The summary of daily activity within any month may be displayed by clicking on t
 <b>What the columns represent (headers explained)</b>
 <p class="smallText" align="justify">
 On the left, the month and year of the row are stated.  The other columns are, left to right:
-<ul><li class="smallText"><b>Gross Income</b> - the total of all orders  
+<ul><li class="smallText"><b>Gross Income</b> - thetotal of all orders  
 <li class="smallText"><b>Order Subtotal</b> - the total sales of products purchased in the month
 <br>Then, the product sales are broken into two categories:
 <li class="smallText"><b>Nontaxed sales</b> - the subtotal of sales which were not taxed, and 

@@ -113,7 +113,7 @@ define('DASHBOARD_PWA_OPC_ERROR', 'Warnung: Sie haben <u><a href="' . tep_href_l
 define('DASHBOARD_OPC_EMAIL_ERROR', 'Warnung: Sie haben One Page Checkout aktiviert, aber keine <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7575&cID=3079', 'NONSSL') . '">Debug E-Mail-Adresse<a></u> hinterlegt.');
 define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Fehler: Das Installationsverzeichnis befindet sich in: ' . (DIR_FS_CATALOG . 'install/') . '. Bitte entfernen Sie das Verzeichnis aus Sicherheitsgründen.');
 define('WARNING_CONFIG_FILE_WRITEABLE', 'Fehler: Die Konfigurationsdatei: ' . (DIR_FS_CATALOG) . 'includes/configure.php ist beschreibbar. Dies ist ein potenzielles Sicherheitsrisiko - bitte ändern Sie die entsprechenden Berechtigungen dieser Datei.');
-define('WARNING_ADMIN_CONFIG_FILE_WRITEABLE', 'Fehler: Die Konfigurationsdatei: ' . (DIR_FS_ADMIN) . 'includes/configure.php. ist beschreibbar. Dies ist ein potenzielles Sicherheitsrisiko - bitte ändern Sie die entsprechenden Berechtigungen dieser Datei.');
+define('WARNING_ADMIN_CONFIG_FILE_WRITEABLE', 'Fehler: Die Konfigurationsdatei: ' . (DIR_FS_ADMIN) . 'includes/configure.php ist beschreibbar. Dies ist ein potenzielles Sicherheitsrisiko - bitte ändern Sie die entsprechenden Berechtigungen dieser Datei.');
 
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Fehler: Das Sessions Verzeichnis existiert nicht: ' . tep_session_save_path() . '. Sessions funktionieren nicht, solange dieses Verzeichnis fehlt.');
 define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Warnung: Das Sessions Verzeichnis ist nicht beschreibbar: ' . tep_session_save_path() . '. Sessions funktionieren nicht, solange das Verzeichnis schreibgeschützt ist.');

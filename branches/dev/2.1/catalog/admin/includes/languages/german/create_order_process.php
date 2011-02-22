@@ -9,6 +9,12 @@ $Id$
 
   Released under the GNU General Public License
 */
-
-define('HEADING_CREATE', 'Check Customer Details');
+define('HEADING_SELECT', 'Kunden auswählen');
+define('HEADING_CREATE', 'Kundendetails bearbeiten');
+define('DEFAULT_PAYMENT_METHOD', "Zahlbar bei Abholung. Wir akzeptieren Barzahlung, Bankomat, Visa und Mastercard.");
+define('TEXT_SUBTOTAL', "Zwischensumme :");
+define('TEXT_DISCOUNT', "Rabatt :");
+define('TEXT_DELIVERY', "Versand :");
+define('TEXT_TAX', "USt.:");
+define('TEXT_TOTAL', "Gesamt :");
 ?>

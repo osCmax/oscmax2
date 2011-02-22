@@ -9,9 +9,8 @@ $Id $
 
   Released under the GNU General Public License
 */
-
 define('HEADING_TITLE', 'Zugang verweigert!');
-define('NAVBAR_TITLE', 'Sie haben für diesen Bereich keine Befugnis!');
-define('TEXT_MAIN', '&nbsp;Bei Pronlemen treten Sie bitte mit Ihrem <b>Admin</b> in Verbindung!<br>&nbsp;');
-define('TEXT_BACK', 'Rückseite');
+define('NAVBAR_TITLE', 'Sie haben für diesen Bereich keine Berechtigung!');
+define('TEXT_MAIN', '&nbsp;Kontaktieren Sie Ihren <b>Administrator</b>, um Ihre Berechtigungen anpassen zulassen!<br>&nbsp;<br>&nbsp;Wenn Sie mehr Informationen zu diesem Thema erhalten möchten, <a href="http://wiki.oscdox.com/v2.1/files_access" target="_blank" style="color:#0000ff">lesen Sie diesen Wiki Artikel.</a><br><br>');
+define('TEXT_BACK', 'Zurück');
 ?>

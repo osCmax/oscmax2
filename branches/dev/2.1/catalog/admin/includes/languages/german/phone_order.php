@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Telefon Auftrag');
-define('SELECT_CUSTOMER', 'Wählen Sie Kunde');
+define('HEADING_TITLE', 'Telefonische Bestellung');
+define('SELECT_CUSTOMER', 'Kunden auswählen');
 define('SEARCH', 'Suche');
 define('SUBMIT', 'Übermitteln');
-define('CREATE_NEW', 'Oder erstellen Sie neue Kunden :');
+define('CREATE_NEW', 'Oder erstellen Sie einen neue Kunden :');
 define('NEW_CUSTOMER', 'Neuer Kunde');
 ?>

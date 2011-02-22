@@ -10,45 +10,45 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Article Reviews');
+define('HEADING_TITLE', 'Artikelbewertungen');
 
-define('TABLE_HEADING_ARTICLES', 'Articles');
-define('TABLE_HEADING_RATING', 'Rating');
-define('TABLE_HEADING_DATE_ADDED', 'Date Added');
-define('TABLE_HEADING_ACTION', 'Action');
+define('TABLE_HEADING_ARTICLES', 'Artikel');
+define('TABLE_HEADING_RATING', 'Bewertung');
+define('TABLE_HEADING_DATE_ADDED', 'Hinzugefügt am');
+define('TABLE_HEADING_ACTION', 'Aktion');
 
-define('ENTRY_ARTICLE', 'Article:');
-define('ENTRY_FROM', 'From:');
-define('ENTRY_DATE', 'Date:');
-define('ENTRY_REVIEW', 'Review:');
-define('ENTRY_REVIEW_TEXT', '<small><font color="#ff0000"><b>NOTE:</b></font></small>&nbsp;HTML is not translated!&nbsp;');
-define('ENTRY_RATING', 'Rating:');
+define('ENTRY_ARTICLE', 'Artikel:');
+define('ENTRY_FROM', 'Von:');
+define('ENTRY_DATE', 'Datei,:');
+define('ENTRY_REVIEW', 'Bewertung:');
+define('ENTRY_REVIEW_TEXT', '<small><font color="#ff0000"><b>HINWEIS:</b></font></small>&nbsp;HTML wird nicht unterstützt!&nbsp;');
+define('ENTRY_RATING', 'Bewertung:');
 
-define('TEXT_INFO_DELETE_REVIEW_INTRO', 'Are you sure you want to delete this review?');
+define('TEXT_INFO_DELETE_REVIEW_INTRO', 'Sind Sie sicher, dass Sie diese Bewertung löschen möchten?');
 
-define('TEXT_INFO_DATE_ADDED', 'Date Added:');
-define('TEXT_INFO_LAST_MODIFIED', 'Last Modified:');
-define('TEXT_INFO_REVIEW_AUTHOR', 'Reviewer:');
-define('TEXT_INFO_REVIEW_RATING', 'Rating:');
-define('TEXT_INFO_REVIEW_READ', 'Read:');
-define('TEXT_INFO_REVIEW_SIZE', 'Size:');
-define('TEXT_INFO_ARTICLES_AVERAGE_RATING', 'Average Rating:');
+define('TEXT_INFO_DATE_ADDED', 'Hinzugefügt am:');
+define('TEXT_INFO_LAST_MODIFIED', 'Zuletzt geändert am:');
+define('TEXT_INFO_REVIEW_AUTHOR', 'Bewertet von:');
+define('TEXT_INFO_REVIEW_RATING', 'Bewertung:');
+define('TEXT_INFO_REVIEW_READ', 'Lesen:');
+define('TEXT_INFO_REVIEW_SIZE', 'Größe:');
+define('TEXT_INFO_ARTICLES_AVERAGE_RATING', 'Durchschnittliche Bewertung:');
 
 define('TEXT_IMAGE_NONEXISTENT', 'IMAGE DOES NOT EXIST');
 
-define('TEXT_OF_5_STARS', '%s of 5 Stars!');
-define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excellent</b></font></small>');
-define('TEXT_BAD', '<small><font color="#ff0000"><b>Poor</b></font></small>');
-define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Delete Review');
+define('TEXT_OF_5_STARS', '%s von 5 Sternen!');
+define('TEXT_GOOD', '<small><font color="#ff0000"><b>Sehr gut</b></font></small>');
+define('TEXT_BAD', '<small><font color="#ff0000"><b>Sehr schlecht</b></font></small>');
+define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Bewertung löschen');
+/* <Mav was here!> */
+define('TEXT_APPROVED', 'Freigegeben') ;
+define('TEXT_APPROVE', 'Freigeben') ;
+define('TEXT_DISAPPROVE', 'Nicht freigeben') ;
+define('TEXT_YES', 'Ja') ;
+define('TEXT_NO', 'Nein') ;
+/* </Mav was here!> */
 
-define('TEXT_APPROVED', 'Approved') ;
-define('TEXT_APPROVE', 'Approve') ;
-define('TEXT_DISAPPROVE', 'Disapprove') ;
-define('TEXT_YES', 'Yes') ;
-define('TEXT_NO', 'No') ;
-
+define('HEADING_NO_ARTICLE_REVIEWS', 'Artikelbewertungen');
+define('TEXT_NO_ARTICLE_REVIEWS', 'Es existieren derzeit keine Bewertungen zu einem Ihrer Artikel.  <br><br>Wenn ein Kunde eine Bewertung erstellt, wird sie links angezeigt. Sie müssen die Bewertung dann freigeben, damit sie in Ihrem Shop angezeigt wird.');
 define('TEXT_CUSTOMER_RATING','Kundenbewertung:');
-
-define('TEXT_NO_ARTICLE_REVIEWS','Derzeit gibt es keine Überprüfung aller Ihrer Artikel. <br><br> Wenn ein Kunde eine Bewertungen sehen Sie es gefunden auf der linken Seite. Sie müssen dann zu einer billigen oder ablehnen, bevor sie den Artikel in Ihrem Shop angezeigt wird.');
-
 ?>

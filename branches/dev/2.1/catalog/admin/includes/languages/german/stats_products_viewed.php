@@ -10,9 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'meist besuchte Artikel');
+define('HEADING_TITLE', 'Meistbesuchte Artikel');
 
 define('TABLE_HEADING_NUMBER', 'Nr.');
-define('TABLE_HEADING_PRODUCTS', 'Artikel');
-define('TABLE_HEADING_VIEWED', 'Besucher');
+define('TABLE_HEADING_PRODUCTS', 'Produkte');
+define('TABLE_HEADING_VIEWED', 'Besucht');
 ?>

@@ -23,9 +23,10 @@ $Id$
   
   
 */
-define('HEADING_TITLE', 'Low Stock Report');
+define('HEADING_TITLE', 'Niedriger Lagerstand Report');
 
-define('TABLE_HEADING_PRODUCTS', 'Products');
-define('TABLE_HEADING_QUANTITY', 'Quantity');
-define('TABLE_HEADING_PRICE', 'Price');
+define('TABLE_HEADING_PRODUCTS', 'Produkte');
+define('TABLE_HEADING_MODEL', 'Art-Nr');
+define('TABLE_HEADING_QUANTITY', 'Menge');
+define('TABLE_HEADING_PRICE', 'Preis');
 ?>

@@ -22,5 +22,5 @@ define('TEXT_MAIN', '<table width="80%" border="0" cellspacing="0" cellpadding="
         <a href="https://www.cdgcommerce.com/internet-services.php?R=1017">Click here to find out more...</a></p></td>
   </tr>
 </table>');
-define('TEXT_BACK', 'back');
+define('TEXT_BACK', 'Zurück');
 ?>

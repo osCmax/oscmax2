@@ -10,31 +10,31 @@ $Id$
   Released under the GNU General Public License
 */
 
-if ($_GET['origin'] == FILENAME_CHECKOUT_PAYMENT) {
-  define('NAVBAR_TITLE', 'Anmelden');
-  define('HEADING_TITLE', 'Melden Sie sich an');
-  define('TEXT_STEP_BY_STEP', 'We\'ll walk you through the process, step by step.');
-} else {
-  define('NAVBAR_TITLE', 'Zeichen Innen');
-  define('HEADING_TITLE', 'Willkommen. Bitte Zeichen Innen');
-  define('TEXT_STEP_BY_STEP', ''); // should be empty
-}
+define('TEXT_CREATE_FIRST_ADMINISTRATOR', 'Es existiert kein Administrator in der Datenbank. Bitte vervollständigen Sie die nachstehenden Angaben, um den ersten Adrministrator zu erstellen. Eine manuelle Anmeldung nach diesem Schritt ist dennoch nötig.');
 
-define('HEADING_RETURNING_ADMIN', 'Sicherer Zugang');
-define('HEADING_PASSWORD_FORGOTTEN', 'Kennwort Vergessen:');
-define('TEXT_RETURNING_ADMIN', 'Nur Personal!');
-define('ENTRY_EMAIL_ADDRESS', 'Email Adresse:');
-define('ENTRY_PASSWORD', 'Kennwort:');
+define('ERROR_INVALID_ADMINISTRATOR', 'Fehler: Ungültiger Anmeldeversuch des Administrators.');
+
+define('BUTTON_LOGIN', 'Anmeldung');
+define('BUTTON_CREATE_ADMINISTRATOR', 'Administrator erstellen');
+define('NAVBAR_TITLE', 'Anmeldung');
+define('HEADING_TITLE', 'Admin Anmeldung');
+define('TEXT_STEP_BY_STEP', ''); // sollte leer sein
+define('HEADING_RETURNING_ADMIN', 'Anmeldung:');
+define('HEADING_PASSWORD_FORGOTTEN', 'Passwort vergessen:');
+define('TEXT_RETURNING_ADMIN', 'Nur für Mitarbeiter!');
+define('ENTRY_USERNAME', 'Benutzername:');
 define('ENTRY_FIRSTNAME', 'Vorname:');
 define('ENTRY_LASTNAME', 'Nachname:');
 
-define('TEXT_PASSWORD_FORGOTTEN', 'Kennwort vergessen?');
+define('TEXT_PASSWORD_FORGOTTEN', 'Passwort vergessen?');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>Achtung:</b></font> Falscher Username oder Kennwort!');
-define('TEXT_FORGOTTEN_ERROR', '<font color="#ff0000"><b>Achtung:</b></font> Vorname und Kennwort passen nicht zusammen!');
-define('TEXT_FORGOTTEN_FAIL', 'Sie haben drei mal versucht, sich einzuloggen, bitte treten Sie mit dem Admin in Verbindung, um sich ein neues Passwort geben zu lassen.<br>&nbsp;<br>&nbsp;');
-define('TEXT_FORGOTTEN_SUCCESS', 'Ein neues Kennwort ist zu Ihrer E-mail Adresse geschickt worden. Überprüfen Sie bitte Ihre E-mail und klicken Sie die "rückseitige" Taste an, um innen zu unterzeichnen.<br>&nbsp;<br>&nbsp;');
+define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>FEHLER:</b></font> Benutzername oder Passwort falsch!');
+define('TEXT_FORGOTTEN_ERROR', '<font color="#ff0000"><b>FEHLER:</b></font> Vorname und Passwort stimmen nicht überein!');
+define('TEXT_FORGOTTEN_FAIL', 'Sie mehr als dreimal versucht, sich anzumelden. Bitte fragen Sie Ihren Web Administrator aus Sicherheitsgründen nach einem neuen Passwort.<br>&nbsp;<br>&nbsp;');
+define('TEXT_FORGOTTEN_SUCCESS', 'Das neue Passwort wurde an Ihre E-Mail-Adresse versendet. Bitte prüfen Sie Ihre E-Mails und klicken Sie auf Zurück, um sich anzumelden.<br>&nbsp;<br>&nbsp;');
 
-define('ADMIN_EMAIL_SUBJECT', 'Neues Kennwort');
-define('ADMIN_EMAIL_TEXT', 'Hallo %s,' . "\n\n" . 'Sie können die Administration mit dem folgenden Kennwort zugänglich machen. Ändern Sie bitte aus Sicherheitsgründen sofort Ihr Kennwort!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Kennwort: %s' . "\n\n" . 'Danke!' . "\n" . '%s' . "\n\n" . 'Dieses ist eine automatisierte Nachricht, bitte antworten Sie nicht!');
+define('ADMIN_EMAIL_SUBJECT', 'Neues Passwort');
+define('ADMIN_EMAIL_TEXT', 'Hallo %s,' . "\n\n" . 'Sie können sich mit dem folgenden Passwort in den Adminbereich anmelden. Danach sollten Sie aus Sicherheitsgründen umgehend Ihr Passwort ändern!' . "\n\n" . 'Website : %s' . "\n" . 'Benutzername: %s' . "\n" . 'Passwort: %s' . "\n\n" . 'Danke!' . "\n" . '%s' . "\n\n" . 'Diese Nachricht wurde automatisch versendet. Bitte antworten Sie nicht darauf!');
+
+define('IMAGE_BUTTON_LOGIN', 'Anmelden');
 ?>

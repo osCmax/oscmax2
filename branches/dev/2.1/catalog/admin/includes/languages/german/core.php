@@ -22,7 +22,7 @@ define('BOX_HEADING_MY_ACCOUNT', 'Mein Konto');
 define('BOX_HEADING_ADMINISTRATOR', 'Administrator');
 define('BOX_ADMINISTRATOR_MEMBERS', 'Verwaltungsgruppen');
 define('BOX_ADMINISTRATOR_MEMBER', 'Mitglieder');
-define('BOX_ADMINISTRATOR_BOXES', 'Boxmenü-Verwaltung');
+define('BOX_ADMINISTRATOR_BOXES', 'Boxmenü');
 
 // images
 define('IMAGE_FILE_PERMISSION', 'Dateiberechtigungen');
@@ -122,7 +122,7 @@ define('MALE', 'Herr');
 define('FEMALE', 'Frau');
 
 // configuration box text in includes/boxes/configuration.php
-define('BOX_HEADING_CONFIGURATION', 'Einstellung');
+define('BOX_HEADING_CONFIGURATION', 'Einstellungen');
 define('BOX_CONFIGURATION_MYSTORE', 'Mein Shop');
 define('BOX_CONFIGURATION_LOGGING', 'Logging');
 define('BOX_CONFIGURATION_CACHE', 'Cache');
@@ -165,7 +165,7 @@ define('BOX_CATALOG_CATEGORIES_PRODUCTS', 'Kategorien/Produkte');
 // BOF QPBPP for SPPC
 define('BOX_CATALOG_CATEGORIES_DISCOUNT_CATEGORIES', 'Rabattkategorien');
 // EOF QPBPP for SPPC
-define('BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES', 'Produktattributes');
+define('BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES', 'Produktattribute');
 define('BOX_CATALOG_MANUFACTURERS', 'Hersteller');
 define('BOX_CATALOG_REVIEWS', 'Bewertungen');
 define('BOX_CATALOG_SPECIALS', 'Sonderangebote');
@@ -470,7 +470,7 @@ define('TEXT_CACHE_CATEGORIES', 'Kategorien Box');
 define('TEXT_CACHE_MANUFACTURERS', 'Hersteller Box');
 define('TEXT_CACHE_ALSO_PURCHASED', 'Auch gekauft Modul');
 
-define('TEXT_NONE', '--nichts--');
+define('TEXT_NONE', 'Keine Angabe');
 define('TEXT_TOP', 'Top');
 
 define('ERROR_DESTINATION_DOES_NOT_EXIST', 'Fehler: Ziel existiert nicht.');

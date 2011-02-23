@@ -1465,7 +1465,7 @@ function updateMSRPNet() {
             <td class="main"><?php echo TEXT_PRODUCTS_STATUS; ?></td>
             <td class="main" colspan="2">
             <?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE .
-            tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_DATE_AVAILABLE . '&nbsp;<small>(YYYY-MM-DD)</small>&nbsp;' .  tep_draw_input_field('products_date_available', $pInfo->products_date_available, 'id="product_available"'); ?>
+            tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_DATE_AVAILABLE . '&nbsp;<small>' . TEXT_YYYY_MM_DD . '</small>&nbsp;' .  tep_draw_input_field('products_date_available', $pInfo->products_date_available, 'id="product_available"'); ?>
             </td>
           </tr>
 <?php
@@ -1476,7 +1476,7 @@ function updateMSRPNet() {
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_FEATURED; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_featured', '1', $in_f_status) . '&nbsp;' . TEXT_PRODUCT_YES . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . tep_draw_radio_field('products_featured', '0', $out_f_status) . '&nbsp;' . TEXT_PRODUCT_NO . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Featured Until: '; ?><small>(YYYY-MM-DD)</small>&nbsp; <?php echo tep_draw_input_field('products_featured_until', $pInfo->products_featured_until, 'id="products_featured_until"'); ?> </td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_featured', '1', $in_f_status) . '&nbsp;' . TEXT_PRODUCT_YES . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . tep_draw_radio_field('products_featured', '0', $out_f_status) . '&nbsp;' . TEXT_PRODUCT_NO . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . TEXT_FEATURED_UNTIL; ?><small><?php echo TEXT_YYYY_MM_DD; ?></small>&nbsp; <?php echo tep_draw_input_field('products_featured_until', $pInfo->products_featured_until, 'id="products_featured_until"'); ?> </td>
           </tr>
 <?php
 // EOF Open Featured Sets
@@ -1883,7 +1883,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
           </tr>
 <?php // EOF: MOD - indvship ?>
           <tr bgcolor="#ebebff">
-            <td class="main"><?php echo 'Indv. Shipping Price:'; ?></td>
+            <td class="main"><?php echo TEXT_SHIPPING_PRICE; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_ship_price', $pInfo->products_ship_price); ?></td>
           </tr>
 <?php // EOF: MOD - indvship ?>

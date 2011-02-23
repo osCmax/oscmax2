@@ -218,11 +218,11 @@ $Id$
 
           if ($action == 'insert_article') {
             // If expected article then articles_date _added becomes articles_date_available
-            if (isset($_POST['articles_date_available']) && tep_not_null($_POST['articles_date_available'])) {
-              $insert_sql_data = array('articles_date_added' => tep_db_prepare_input($_POST['articles_date_available']));
-            } else {
+            //if (isset($_POST['articles_date_available']) && tep_not_null($_POST['articles_date_available'])) {
+            //  $insert_sql_data = array('articles_date_added' => tep_db_prepare_input($_POST['articles_date_available']));
+            //} else {
               $insert_sql_data = array('articles_date_added' => 'now()');
-            }
+            //}
             $sql_data_array = array_merge($sql_data_array, $insert_sql_data);
 
             tep_db_perform(TABLE_ARTICLES, $sql_data_array);
@@ -232,9 +232,9 @@ $Id$
           } elseif ($action == 'update_article') {
             $update_sql_data = array('articles_last_modified' => 'now()');
             // If expected article then articles_date _added becomes articles_date_available
-            if (isset($_POST['articles_date_available']) && tep_not_null($_POST['articles_date_available'])) {
-              $update_sql_data = array('articles_date_added' => tep_db_prepare_input($_POST['articles_date_available']));
-            }
+            //if (isset($_POST['articles_date_available']) && tep_not_null($_POST['articles_date_available'])) {
+            //  $update_sql_data = array('articles_date_added' => tep_db_prepare_input($_POST['articles_date_available']));
+            //}
 
             $sql_data_array = array_merge($sql_data_array, $update_sql_data);
 
@@ -669,8 +669,8 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo TEXT_ARTICLES_DATE_AVAILABLE; ?><br><small>(YYYY-MM-DD)</small></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;'; ?><?php echo tep_draw_input_field('articles_date_available', (isset($sInfo->articles_date_available) ? $sInfo->articles_date_available : ''), 'id="articles"'); ?></td>
+            <td class="main"><?php echo TEXT_ARTICLES_DATE_AVAILABLE; ?><br><small><?php echo TEXT_YYYY_MM_DD; ?></small></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;'; ?><?php echo tep_draw_input_field('articles_date_available', (isset($aInfo->articles_date_available) ? $aInfo->articles_date_available : ''), 'id="articles"'); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -1062,6 +1062,8 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <?php
 	  if ($articles['articles_index_status'] == '1') {
         echo tep_image(DIR_WS_ICONS .  'warning.gif', IMAGE_SHOW_ON_INDEX, 10, 10) . '&nbsp;&nbsp;';
+	  } else {
+		echo tep_draw_separator('pixel_trans.gif', '10', '10') . '&nbsp;&nbsp;';
 	  }
 	  
 	  if ($articles['articles_status'] == '1') {

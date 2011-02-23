@@ -178,7 +178,7 @@ define('BOX_CONFIGURATION_PRODUCT_LISTING', 'Product Listing');
 define('BOX_CONFIGURATION_PRODUCT_INFO', 'Product Information');
 define('BOX_CONFIGURATION_EMAIL', 'Email');
 define('BOX_CONFIGURATION_DOWNLOAD', 'Download');
-define('BOX_CONFIGURATION_GZIP', 'GZip');
+define('BOX_CONFIGURATION_GZIP', 'GZip Compression');
 define('BOX_CONFIGURATION_SESSIONS', 'Sessions');
 define('BOX_CONFIGURATION_STOCK', 'Stock');
 define('BOX_CONFIGURATION_WYSIWYG', 'CK Editor');
@@ -192,6 +192,8 @@ define('BOX_CONFIGURATION_WISHLIST', 'Wishlist Settings');
 define('BOX_CONFIGURATION_EDITOR', 'Order Editor');
 define('BOX_CONFIGURATION_SEO_VALIDATION', 'SEO URL Validation');
 // EOF: Added for super-friendly admin menu:
+
+define('TEXT_LOGGING_CACHE', 'Logging / Cache');
 
 // modules box text in includes/boxes/modules.php
 define('BOX_HEADING_MODULES', 'Modules');
@@ -213,12 +215,6 @@ define('BOX_CATALOG_PRODUCTS_EXPECTED', 'Products Expected');
 // 2 LINES ADDED - EasyPopulate and Attrib Manager
 define('BOX_CATALOG_EASYPOPULATE', 'EasyPopulate');
 define('BOX_CATALOG_ATTRIBUTE_MANAGER', 'Attribute Manager');
-// BOF: Added INFO Pages
-define('BOX_CATALOG_DEFINE_MAINPAGE', 'Define MainPage');
-define('BOX_CATALOG_DEFINE_CONDITIONS', 'Conditions Page');
-define('BOX_CATALOG_DEFINE_PRIVACY', 'Privacy Page');
-define('BOX_CATALOG_DEFINE_SHIPPING', 'Shipping Page');
-// EOF: Added INFO Pages
 
 // customers box text in includes/boxes/customers.php
 define('BOX_HEADING_CUSTOMERS', 'Customers');
@@ -581,4 +577,6 @@ define('TEXT_PRODUCTS_SALE', '&nbsp;Sale&nbsp;Price:&nbsp;');
 define('TEXT_PRODUCTS_SAVINGS', '&nbsp;You&nbsp;Save:&nbsp;');
 define('TEXT_PRODUCTS_PRICE_MSRP', 'Products MSRP:');
 // EOF: MSRP
+
+define('TEXT_YYYY_MM_DD', '(YYYY-MM-DD)');
 ?>

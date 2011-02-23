@@ -189,6 +189,5 @@ define('HEADING_MSRP_HELP', 'Manufacturer Suggested Retail Price');
 define('TEXT_MSRP_HELP', 'If you wish to display a MSRP price on your product information page then please enter it here.');
 define('TEXT_ADD_PL', 'Add another Price Break');
 define('TEXT_FEATURED_UNTIL', 'Featured Until: ');
-define('TEXT_YYYY_MM_DD', '(YYYY-MM-DD)');
 define('TEXT_SHIPPING_PRICE', 'Indv. Shipping Price: ');
 ?>

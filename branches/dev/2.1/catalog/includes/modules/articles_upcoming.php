@@ -52,7 +52,7 @@ $Id$
       }
 ?>
           <tr>
-            <td class="smalltext" style="padding-left:15px"><?php echo TEXT_DATE_EXPECTED . ' ' . tep_date_long($articles_expected['date_expected']); ?></td>
+            <td class="smallText" style="padding-left:15px"><?php echo TEXT_DATE_EXPECTED . ' ' . tep_date_long($articles_expected['date_expected']); ?></td>
           </tr>
 <?php
       if (DISPLAY_ABSTRACT_ARTICLE_LISTING == 'true' || DISPLAY_DATE_ADDED_ARTICLE_LISTING) {

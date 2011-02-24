@@ -132,9 +132,9 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 // include cache functions if enabled
   if (USE_CACHE == 'true') include(DIR_WS_FUNCTIONS . 'cache.php');
 
-// BOF: MOD - Wishlist 3.5  
+// BOF: MOD - Wishlist 3.5
 // include wishlist class
-   require(DIR_WS_CLASSES . 'wishlist.php');  
+   require(DIR_WS_CLASSES . 'wishlist.php');
 // EOF: MOD - Wishlist 3.5
 
 // include shopping cart class
@@ -268,7 +268,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 // include currencies class and create an instance
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
-  
+
 // BOF QPBPP for SPPC
   // include the price formatter classes for the price breaks contribution
   require(DIR_WS_CLASSES . 'PriceFormatter.php');
@@ -350,22 +350,22 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
 
 // BOF: MOD - Wishlist 3.5
 // wishlist data
- if(!tep_session_is_registered('wishList')) { 
-        tep_session_register('wishList'); 
-        $wishList = new wishlist; 
-     } 
-     
- //Wishlist actions (must be before shopping cart actions) 
-   if(isset($_POST['wishlist_x'])) { 
+  if (!tep_session_is_registered('wishList') || !is_object($wishList)) {
+        tep_session_register('wishList');
+        $wishList = new wishlist;
+     }
+
+ //Wishlist actions (must be before shopping cart actions)
+   if(isset($_POST['wishlist_x'])) {
       if(isset($_POST['products_id'])) {
           if(isset($_POST['id'])) {
-              $attributes_id = $_POST['id']; 
-              tep_session_register('attributes_id'); 
-           } 
-           $wishlist_id = $_POST['products_id']; 
-           tep_session_register('wishlist_id'); 
-      } 
-      tep_redirect(tep_href_link(FILENAME_WISHLIST)); 
+              $attributes_id = $_POST['id'];
+              tep_session_register('attributes_id');
+           }
+           $wishlist_id = $_POST['products_id'];
+           tep_session_register('wishlist_id');
+      }
+      tep_redirect(tep_href_link(FILENAME_WISHLIST));
    }
 // EOF: MOD - Wishlist 3.5
 
@@ -390,7 +390,7 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
   } else {
     $customer_group_id = '0';
   }
-  
+
 
 // Shopping cart actions
   if (isset($_GET['action'])) {
@@ -399,8 +399,8 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
       tep_redirect(tep_href_link(FILENAME_COOKIE_USAGE));
     }
       $hide_product = false;
-   /* the shopping_cart page and some others sends an array 'products_id' or 'notify'. 
-      That is dealt with separately. For the following code two new functions (tep_get_hide_status  
+   /* the shopping_cart page and some others sends an array 'products_id' or 'notify'.
+      That is dealt with separately. For the following code two new functions (tep_get_hide_status
       and tep_get_hide_status_single) should have been added to /includes/functions/general.php */
       if (isset($_POST['products_id']) && !is_array($_POST['products_id'])) {
          $pid_for_hide = (int)$_POST['products_id'];
@@ -418,13 +418,13 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
      } else {
          $hide_product = false;
      } // end if/else (tep_not_null($pid_for_hide))
-  
+
       $temp_post_get_array = array();
       $hide_status_products = array();
       if (is_array($_POST['products_id']) && tep_not_null($_POST['products_id']) && tep_not_null($_POST['products_id'][0])) {
          $temp_post_get_array = $_POST['products_id'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
-      } 
+      }
       if (is_array($_GET['products_id']) && tep_not_null($_GET['products_id']) && tep_not_null($_GET['products_id'][0])) {
          $temp_post_get_array = $_GET['products_id'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
@@ -432,7 +432,7 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
       if (is_array($_POST['notify']) && tep_not_null($_POST['notify']) && tep_not_null($_POST['notify'][0])) {
          $temp_post_get_array = $_POST['notify'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
-      } 
+      }
       if (is_array($_GET['notify']) && tep_not_null($_GET['notify']) && tep_not_null($_GET['notify'][0])) {
       $temp_post_get_array = $_GET['notify'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
@@ -573,21 +573,22 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
 	  case 'remove_product' : if (isset($_GET['products_id'])) {
 	               	            $cart->remove($_GET['products_id']);
         	                  }
-            	              break;   
+                            tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+            	              break;
 	  case 'clear_cart' :     $cart->reset(true);
                               break;
 	  case 'remove_wishlist_product' :    if (isset($_GET['wishlist_id'])) {
 	               	                      $wishList->remove($_GET['wishlist_id']);
         	                              }
             	                          break;
-								   
+
 	  case 'clear_wishlist' : $wishList->reset(true);
                               break;
 
 //                            } // end switch $_GET['action']
 //                           } // end if is set $_GET['action']
-// 
-// 
+//
+//
 // // include the who's online functions
     } // end switch
 // BOF Separate Pricing Per Customer v4.2.x, Hide products from groups mod
@@ -667,7 +668,7 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
 // add category names or the manufacturer name to the breadcrumb trail
 // BOF SPPC Hide products and categories from groups
   if (isset($cPath_array)) {
-    for ($i=0, $n=sizeof($cPath_array); $i<$n; $i++) {   
+    for ($i=0, $n=sizeof($cPath_array); $i<$n; $i++) {
       $categories_query = tep_db_query("select categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " cd left join " . TABLE_CATEGORIES . " c using(categories_id) where cd.categories_id = '" . (int)$cPath_array[$i] . "' and language_id = '" . (int)$languages_id . "' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
 // EOF SPPC Hide products and categories from groups
 
@@ -789,7 +790,7 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
     require(DIR_WS_BOXES . 'shopping_cart.php');
     $cart_cache = ob_get_clean();
 // End the output buffer for cart and save as $cart_cache string
-  
+
 // Loop through the $cache_pages array and start caching if found
     foreach ($cache_pages as $index => $page){
       if ( strpos($_SERVER['PHP_SELF'], $page) ){

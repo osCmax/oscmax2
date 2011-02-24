@@ -20,6 +20,7 @@ $Id$
                	<td class="dataTableHeadingContent"><?php echo DASHBOARD_TIME; ?></td>
                	<td class="dataTableHeadingContent"><?php echo DASHBOARD_IP; ?></td>
                	<td class="dataTableHeadingContent"><?php echo DASHBOARD_USER; ?></td>
+                <td></td>
                	<td class="dataTableHeadingContent"><?php echo DASHBOARD_EVENT; ?></td>
         	</tr>
 <?php
@@ -46,12 +47,14 @@ $Id$
 				<?php
 			  $pos = strrpos($admin_logging['type'], "Config Change:");
               if ($pos === false) { ?>
+                <td></td>
                 <td class="dataTableContent"><?php echo $admin_logging['type']; ?></td>	
               <?php } else { 
 			  $config_id = str_replace("Config Change: ", "", $admin_logging['type']);
 			  $cfg_group_query = tep_db_query("select configuration_title, configuration_description, configuration_group_id from " . TABLE_CONFIGURATION . " where configuration_id = '" . (int)$config_id . "'");
               $cfg_group = tep_db_fetch_array($cfg_group_query);
 			  ?>
+                <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $cfg_group['configuration_group_id']) . '&cID=' . (int)$config_id . '">' . tep_image(DIR_WS_ICONS . 'page_white_edit.png', ''); ?></a></td>
 				<td class="dataTableContent"><?php echo '<span title="' . $cfg_group['configuration_title'] . '|' . strip_tags($cfg_group['configuration_description'], '<p><br><b>') . '">' . $admin_logging['type']; ?></span></td>
               <?php } ?>
 			</tr>

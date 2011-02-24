@@ -92,7 +92,7 @@ $Id$
         <td class="main"><?php echo '<b>' . SUB_TITLE_FROM . '</b> ' . tep_output_string_protected($customer['customers_firstname'] . ' ' . $customer['customers_lastname']); ?></td>
       </tr>
       <tr>
-        <td class="main"><b><?php echo SUB_TITLE_REVIEW; ?></b></td>
+        <td class="main"><b><?php echo TEXT_RATING; ?></b></td>
       </tr>
       <tr>
         <td class="main"><?php echo tep_draw_textarea_field('review', 60, 8); ?></td>
@@ -101,7 +101,7 @@ $Id$
         <td>
           <table width="100%" border="0" cellspacing="0" cellpadding="2">
             <tr valign="top">
-              <td class="main">Rating: <span id="stars-cap"></span><div id="stars-wrapper1"><?php echo tep_draw_radio_field('rating', '1', '', 'title="Poor"') . ' ' . tep_draw_radio_field('rating', '2', '', 'title="Fair"') . ' ' . tep_draw_radio_field('rating', '3','','title="Average"') . ' ' . tep_draw_radio_field('rating', '4','','title="Good"') . ' ' . tep_draw_radio_field('rating', '5','','title="Excellent"'); ?></div></td>
+              <td class="main">Rating: <span id="stars-cap"></span><div id="stars-wrapper1"><?php echo tep_draw_radio_field('rating', '1', '', 'title="' . TEXT_POOR . '"') . ' ' . tep_draw_radio_field('rating', '2', '', 'title="' . TEXT_FAIR . '"') . ' ' . tep_draw_radio_field('rating', '3','','title="' . TEXT_AVERAGE . '"') . ' ' . tep_draw_radio_field('rating', '4','','title="' . TEXT_GOOD . '"') . ' ' . tep_draw_radio_field('rating', '5','','title="' . TEXT_EXCELLENT . '"'); ?></div></td>
               <td class="smallText" align="right"><?php echo TEXT_NO_HTML; ?></td>
             </tr>
           </table>

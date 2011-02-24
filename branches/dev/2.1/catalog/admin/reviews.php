@@ -136,7 +136,7 @@ $(document).ready(function(){
               <td class="main"><?php echo TEXT_CUSTOMER_RATING . '<br>' . tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'icons/stars_' . $rInfo->reviews_rating . '.gif'); ?></td>
             </tr>
             <tr>
-              <td class="main">Rating: <span id="stars-cap"></span><div id="stars-wrapper">
+              <td class="main"><?php echo TEXT_RATING; ?><span id="stars-cap"></span><div id="stars-wrapper">
 			  <?php 
 			  switch ($rInfo->reviews_rating) {
 				  case '1': $one = 'CHECKED'; break;
@@ -146,7 +146,7 @@ $(document).ready(function(){
 				  case '5': $five = 'CHECKED'; break;
 			  }
 	
-			  echo tep_draw_radio_field('reviews_rating', '1', $one, 'title="Poor"') . ' ' . tep_draw_radio_field('reviews_rating', '2', $two, 'title="Fair"') . ' ' . tep_draw_radio_field('reviews_rating', '3', $three,'title="Average"') . ' ' . tep_draw_radio_field('reviews_rating', '4', $four,'title="Good"') . ' ' . tep_draw_radio_field('reviews_rating', '5', $five,'title="Excellent"'); ?></div>
+			  echo tep_draw_radio_field('reviews_rating', '1', $one, 'title="' . TEXT_POOR .'"') . ' ' . tep_draw_radio_field('reviews_rating', '2', $two, 'title="' . TEXT_FAIR . '"') . ' ' . tep_draw_radio_field('reviews_rating', '3', $three,'title="' . TEXT_AVERAGE . '"') . ' ' . tep_draw_radio_field('reviews_rating', '4', $four,'title="' . TEXT_GOOD . '"') . ' ' . tep_draw_radio_field('reviews_rating', '5', $five,'title="' . TEXT_EXCELLENT . '"'); ?></div>
               </td>
             </tr>
             <tr>

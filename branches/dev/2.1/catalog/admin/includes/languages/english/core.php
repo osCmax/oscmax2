@@ -579,4 +579,11 @@ define('TEXT_PRODUCTS_PRICE_MSRP', 'Products MSRP:');
 // EOF: MSRP
 
 define('TEXT_YYYY_MM_DD', '(YYYY-MM-DD)');
+
+define('TEXT_RATING', 'Rating: ');
+define('TEXT_POOR', 'Poor');
+define('TEXT_FAIR', 'Fair');
+define('TEXT_AVERAGE', 'Average');
+define('TEXT_GOOD', 'Good');
+define('TEXT_EXCELLENT', 'Excellent');
 ?>

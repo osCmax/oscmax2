@@ -18,7 +18,4 @@ define('SUB_TITLE_REVIEW', 'Your Review:');
 define('SUB_TITLE_RATING', 'Rating:');
 
 define('TEXT_APPROVAL_WARNING', 'Note: Your review will not appear until it has been approved.');
-define('TEXT_BAD', '<small><font color="#ff0000"><b>Poor</b></font></small>');
-define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excellent</b></font></small>');
-
 ?>

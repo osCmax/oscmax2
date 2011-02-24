@@ -416,4 +416,13 @@ define('TEXT_READ_MORE', ' ... read more ... ');
 
 define('TEXT_MISSING_IMAGE', 'Sorry, product image is currently not available');
 define('TEXT_PAGE', 'Page: ');
+
+define('TEXT_RATING', 'Rating: ');
+define('TEXT_POOR', 'Poor');
+define('TEXT_FAIR', 'Fair');
+define('TEXT_AVERAGE', 'Average');
+define('TEXT_GOOD', 'Good');
+define('TEXT_EXCELLENT', 'Excellent');
+
+
 ?>

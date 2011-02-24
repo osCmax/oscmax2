@@ -53,7 +53,7 @@ $Id$
                         <td class="main"><?php echo tep_draw_textarea_field('review', 60, 15); ?></td>
                       </tr>
                       <tr>
-                        <td class="main">Rating: <span id="stars-cap"></span><div id="stars-wrapper1"><?php echo tep_draw_radio_field('rating', '1', '', 'title="Poor"') . ' ' . tep_draw_radio_field('rating', '2', '', 'title="Fair"') . ' ' . tep_draw_radio_field('rating', '3','','title="Average"') . ' ' . tep_draw_radio_field('rating', '4','','title="Good"') . ' ' . tep_draw_radio_field('rating', '5','','title="Excellent"'); ?></div></td>
+                        <td class="main"><?php echo TEXT_RATING; ?> <span id="stars-cap"></span><div id="stars-wrapper1"><?php echo tep_draw_radio_field('rating', '1', '', 'title="' . TEXT_POOR . '"') . ' ' . tep_draw_radio_field('rating', '2', '', 'title="' . TEXT_FAIR . '"') . ' ' . tep_draw_radio_field('rating', '3','','title="' . TEXT_AVERAGE . '"') . ' ' . tep_draw_radio_field('rating', '4','','title="' . TEXT_GOOD . '"') . ' ' . tep_draw_radio_field('rating', '5','','title="' . TEXT_EXCELLENT . '"'); ?></div></td>
                       </tr>
                     </table></td>
                   </tr>

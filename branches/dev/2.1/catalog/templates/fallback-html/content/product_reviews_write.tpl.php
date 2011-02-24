@@ -99,7 +99,7 @@ $Id: product_reviews_write.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmai
         <td>
           <table width="100%" border="0" cellspacing="0" cellpadding="2">
             <tr valign="top">
-              <td class="main">Rating: <span id="stars-cap"></span><div id="stars-wrapper1"><?php echo tep_draw_radio_field('rating', '1', '', 'title="Poor"') . ' ' . tep_draw_radio_field('rating', '2', '', 'title="Fair"') . ' ' . tep_draw_radio_field('rating', '3','','title="Average"') . ' ' . tep_draw_radio_field('rating', '4','','title="Good"') . ' ' . tep_draw_radio_field('rating', '5','','title="Excellent"'); ?></div></td>
+              <td class="main"><?php echo TEXT_RATING; ?><span id="stars-cap"></span><div id="stars-wrapper1"><?php echo tep_draw_radio_field('rating', '1', '', 'title="' . TEXT_POOR . '"') . ' ' . tep_draw_radio_field('rating', '2', '', 'title="' . TEXT_FAIR . '"') . ' ' . tep_draw_radio_field('rating', '3','','title="' . TEXT_AVERAGE . '"') . ' ' . tep_draw_radio_field('rating', '4','','title="' . TEXT_GOOD . '"') . ' ' . tep_draw_radio_field('rating', '5','','title="' . TEXT_EXCELLENT . '"'); ?></div></td>
               <td class="smallText" align="right"><?php echo TEXT_NO_HTML; ?></td>
             </tr>
           </table>

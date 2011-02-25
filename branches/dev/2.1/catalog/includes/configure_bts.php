@@ -175,8 +175,8 @@ function bts_template_switch() {
     // 'Input Validated' only allow alfanumeric characters and underscores in template name
     define('DIR_WS_TEMPLATES', DIR_WS_TEMPLATES_BASE . $tplDir . '/' );
   } else {
-    if($bts_debug === TRUE) echo strip_tags($tplDir) . '<br>';
-    exit('Illegal template directory!');
+    if ($bts_debug === TRUE) { $illegal_directory = '<b>' . strip_tags($tplDir) . '</b> '; }
+    exit('<table width="100%" style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color: #ffe6e6; border:solid 1px #ff8e90; padding:5px;"><tr><td align="center">Your template directory ' . $illegal_directory . 'can not be found.  Please login to your admin panel and go to the <b>Default Template Directory</b> under <b>Templates</b> in the <b>Configuration</b> menu.</td></tr></table>');
   }
 
   return $tplDir;

@@ -46,6 +46,8 @@ $Id$
 	$('#manufacturers').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
 	$('#manufacturer').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
 	$('#reviews').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
+	$('#coupon_start_date').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
+    $('#coupon_expire_date').datepicker({inline: true, dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, numberOfMonths: 1});
 
 //Batch Print Center
 	$("#Labels").hide(); $("#Invoices").hide(); $("#send_button").hide();
@@ -99,6 +101,7 @@ $Id$
 	$("#affiliatetabs").tabs();
     $("#manufacturertabs").tabs();
 	$("#previewtabs").tabs();
+	$("#coupontabs").tabs();
 
     $('span[title]').cluetip({splitTitle: '|', arrows: true, dropShadow: false, cluetipClass: 'jtip'});
 

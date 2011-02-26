@@ -91,4 +91,7 @@ define('COUPON_BUTTON_VOUCHER_REPORT', 'Voucher Report');
 define('COUPON_BUTTON_PREVIEW', 'Preview Coupon');
 define('COUPON_STATUS', 'Status');
 define('COUPON_STATUS_HELP', 'Set to ' . IMAGE_ICON_STATUS_RED . ' to disable customers\' ability to use the coupon.');
+
+define('COUPON_BUTTON_BACK', 'Back');
+define('COUPON_BUTTON_CONFIRM', 'Confirm');
 ?>

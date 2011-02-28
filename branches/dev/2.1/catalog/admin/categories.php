@@ -2197,7 +2197,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 					<td valign="top" class="main">&nbsp;</td>
 				  </tr>
 				  <tr>
-					<td align="left" valign="top" class="smallText"><?php echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo '<img src='.HTTP_CATALOG_SERVER.DIR_WS_CATALOG_LANGUAGES.'english/images/buttons/button_buy_now.gif>';?></td>
+					<td align="left" valign="top" class="smallText"><?php echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo '<img src=' . HTTP_CATALOG_SERVER . DIR_WS_CATALOG_LANGUAGES . $language . '/images/buttons/button_buy_now.gif>';?></td>
 				  </tr>
 				</table>
 			  </td>
@@ -2771,7 +2771,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
             if (tep_not_null($pInfo->products_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($pInfo->products_last_modified));
             if (date('Y-m-d') < $pInfo->products_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . tep_date_short($pInfo->products_date_available));
 // BOF: MoPics in Admin
-           $contents[] = array('text' => 'Thumbnail Image:<br /><br /><center><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /></center>');
+           $contents[] = array('text' => TEXT_THUMBNAIL_IMAGE . '<br /><br /><center><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /></center>');
 // EOF: MoPics in Admin
 
 // BOF: MSRP

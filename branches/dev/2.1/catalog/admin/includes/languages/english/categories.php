@@ -190,4 +190,6 @@ define('TEXT_MSRP_HELP', 'If you wish to display a MSRP price on your product in
 define('TEXT_ADD_PL', 'Add another Price Break');
 define('TEXT_FEATURED_UNTIL', 'Featured Until: ');
 define('TEXT_SHIPPING_PRICE', 'Indv. Shipping Price: ');
+
+define('TEXT_THUMBNAIL_IMAGE', 'Thumbnail Image:');
 ?>

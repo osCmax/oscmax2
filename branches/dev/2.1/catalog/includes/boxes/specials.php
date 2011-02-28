@@ -36,7 +36,7 @@ $Id$
 ?>
 <!-- specials //-->
 <?php
-  $boxHeading = '<a href="' . tep_href_link(FILENAME_SPECIALS) . '">' . BOX_HEADING_SPECIALS . '</a>';
+  $boxHeading = '<a href="' . tep_href_link(FILENAME_DEFAULT, "show_specials=1") . '">' . BOX_HEADING_SPECIALS . '</a>';
   $corner_top_left = 'rounded';
   $corner_top_right = 'rounded';
   $corner_bottom_left = 'rounded';

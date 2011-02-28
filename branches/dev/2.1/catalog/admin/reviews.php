@@ -165,7 +165,7 @@ $(document).ready(function(){
     } else {
       $rID = tep_db_prepare_input($_GET['rID']);
 
-      $reviews_query = tep_db_query("select r.reviews_id, r.articles_id, r.customers_name, r.date_added, r.last_modified, r.reviews_read, rd.reviews_text, r.reviews_rating from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd where r.reviews_id = '" . (int)$rID . "' and r.reviews_id = rd.reviews_id");
+      $reviews_query = tep_db_query("select r.reviews_id, r.products_id, r.customers_name, r.date_added, r.last_modified, r.reviews_read, rd.reviews_text, r.reviews_rating from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd where r.reviews_id = '" . (int)$rID . "' and r.reviews_id = rd.reviews_id");
       $reviews = tep_db_fetch_array($reviews_query);
 
       $articles_name_query = tep_db_query("select articles_name from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$reviews['articles_id'] . "' and language_id = '" . (int)$languages_id . "'");
@@ -331,8 +331,8 @@ $(document).ready(function(){
 
       echo '            </td>' . "\n";
     } else {
-	$heading[] = array('text' => HEADING_NO_ARTICLE_REVIEWS);
-    $contents[] = array('text' => TEXT_NO_ARTICLE_REVIEWS);  
+	$heading[] = array('text' => HEADING_NO_REVIEWS);
+    $contents[] = array('text' => TEXT_NO_REVIEWS);  
 	  
 	echo '            <td width="25%" valign="top">';
 	$box = new box;

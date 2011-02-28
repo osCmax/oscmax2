@@ -346,7 +346,7 @@ $Id$
                     <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
 					<?php
                     if (PRODUCT_REVIEWS_ENABLE == 'True') {
-                      $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd where approved = '1' and r.products_id = '" . (int)$_GET['products_id'] . "' and rd.languages_id = '" . (int)$languages_id . "'");
+                      $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd where r.approved = '1' and r.products_id = '" . (int)$_GET['products_id'] . "' and rd.languages_id = '" . (int)$languages_id . "' and r.reviews_id = rd.reviews_id");
                       $reviews = tep_db_fetch_array($reviews_query);
 					  if ($reviews['count'] > 0) {
 					    echo '<td class="main" align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params()) . '">' . tep_image_button('button_reviews.gif', IMAGE_BUTTON_REVIEWS) . '</a></td>'; 

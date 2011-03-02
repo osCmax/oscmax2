@@ -297,7 +297,7 @@ $custom_fields = array();
 // may need to incorporate custom code to correctly import your data.
 //
 
-$custom_fields[TABLE_PRODUCTS] = array('products_msrp' => 'msrp'); // this line is used if you have no custom fields to import/export
+$custom_fields[TABLE_PRODUCTS] = array('products_msrp' => 'msrp', 'products_hide_from_groups' => 'hide from groups', 'products_qty_blocks' => 'qty blocks', 'products_min_order_qty' => 'min order qty'); // this line is used if you have no custom fields to import/export
 $custom_fields[TABLE_PRODUCTS_DESCRIPTION] = array('tab1' => 'tab1', 'tab1' => 'tab1', 'tab2' => 'tab2', 'tab3' => 'tab3', 'tab4' => 'tab4', 'tab5' => 'tab5', 'tab6' => 'tab6'); // this line is used if you have no custom fields to import/export
 
 //
@@ -356,7 +356,7 @@ define ('EP_HTC_SUPPORT', false);  // default is false
 define ('EP_SPPC_SUPPORT', true);  // default is false
 
 // X-Sell 2.6 Support
-define ('EP_XSELL_SUPPORT', false);  // default is false
+define ('EP_XSELL_SUPPORT', true);  // default is false
 
 // Additional Images v2.1.1
 define ('EP_ADDITIONAL_IMAGES', false);  // default is false
@@ -1395,7 +1395,38 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
 
       <table width="<?php if (EP_SHOW_EP_SETTINGS == true) { echo '95'; } else { echo '75'; } ?>%" cellpadding="5" cellspacing="0" style="border-collapse:collapse;">
         <tr>
-          <td width="75%" style="border-style:solid; border-width:thin; border-color:#CCCCCC;"><span style="font-size:10px;background-color:#FFFFCC; width:100%;">&nbsp; &nbsp;Please <a href="backup.php<?php if (defined('SID') && tep_not_null(SID)) { echo '?'.tep_session_name().'='.tep_session_id(); } ?>" style="font-size:10px;background-color:#FFFFCC;text-decoration:underline;">backup your database</a> before performing any Easy Populate operations!&nbsp; &nbsp;</span><br />
+          <td width="75%" style="border-style:solid; border-width:thin; border-color:#CCCCCC;">
+          
+            <table width="100%">
+              <tr>
+                <td class="messageStackAlert">Please <a href="backup.php<?php if (defined('SID') && tep_not_null(SID)) { echo '?'.tep_session_name().'='.tep_session_id(); } ?>" style="text-decoration:underline;">backup your database</a> before performing any Easy Populate operations.</td>
+              </tr>
+            </table>
+            <?php
+			  $model_query_raw = "select products_id from " . TABLE_PRODUCTS . " where products_model = '' or products_model is null";
+              $model_query = tep_db_query($model_query_raw);
+			  $blank_total = tep_db_num_rows($model_query);
+			  $count = 0;
+              if ($blank_total > 0) { ?>
+			    <table width="100%">
+                  <tr>
+                    <td class="messageStackWarning">The following products are missing their Model and as such will not work with EasyPopulate:<br>
+                    <?php
+                    while ($blank_models = tep_db_fetch_array($model_query)) {
+					  $count++;
+			          echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $blank_models['products_id'] . '&action=new_product') . '">' . $blank_models['products_id'] . '</a>';
+					  if ($count <> $blank_total) {
+					    echo ', ';
+					  } else {
+						echo '.';
+					  }
+			        }
+				    ?>
+				    </td>
+                  </tr>
+                </table>
+              <?php } ?>
+
            <form enctype="multipart/form-data" action="easypopulate.php?split=0<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>" method="post"><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
                 <p style="margin-top: 18px; margin-bottom: 8px;"><b>Upload and Import EP File</b></p>
                 <p style="margin-top: 0px;">
@@ -1638,6 +1669,7 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
              SPPC: <?php echo (EP_SPPC_SUPPORT?'true':'false'); ?><br />
              Extra Fields: <?php echo (EP_EXTRA_FIELDS_SUPPORT?'true':'false'); ?><br />
              PDF Upload: <?php echo (EP_PDF_UPLOAD_SUPPORT?'true':'false'); ?><br />
+             Cross Sell: <?php echo (EP_XSELL_SUPPORT?'true':'false'); ?><br />
              <br />
              <div style="padding: 10px; background-color: #ffffCC">Please see the manual in this contribution's package for help in changing these settings.</div>
 

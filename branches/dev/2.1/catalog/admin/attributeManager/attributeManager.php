@@ -223,12 +223,12 @@ if(false){
 						?>
 						
 					<input type="image" border="0" onClick="return customPrompt('amEditDownloadForProduct','<?php echo addslashes('option_id:' . $optionId . '|products_attributes_filename:' . $optionValueInfo['products_attributes_filename'] . '|products_attributes_maxdays:'.$optionValueInfo['products_attributes_maxdays']  . '|products_attributes_maxcount:'.$optionValueInfo['products_attributes_maxcount'] .'|option_value_name:'.str_replace('"','&quot;',$optionValueInfo['name'] .'|products_attributes_id:'.$optionValueInfo['products_attributes_id']))?>');" src="attributeManager/images/icon_down_edit.png" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_DOWLNOAD_EDIT,$optionValueInfo['name'],$optionInfo['name'])) ?>" />
-					<input type="image" border="0" onClick="return customPrompt('amDeleteDownloadForProduct','<?php echo addslashes('option_id:' . $optionId . '|option_value_name:'.str_replace('"','&quot;',$optionValueInfo['name']) .'|products_attributes_id:'.$optionValueInfo['products_attributes_id'])?>');" src="attributeManager/images/icon_down_delete.png" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_DOWLNOAD_DELETE,$optionValueInfo['name'],$optionInfo['name'])) ?>" style="margin-right: 30px;" />
+					<input type="image" border="0" onClick="return customPrompt('amDeleteDownloadForProduct','<?php echo addslashes('option_id:' . $optionId . '|option_value_name:'.str_replace('"','&quot;',$optionValueInfo['name']) .'|products_attributes_id:'.$optionValueInfo['products_attributes_id'])?>');" src="attributeManager/images/icon_down_delete.png" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_DOWLNOAD_DELETE,$optionValueInfo['name'],$optionInfo['name'])) ?>" style="margin-right: 10px;" />
 							
 					<?php
 					} else {
 					?>
-					<input type="image" border="0" onClick="return customPrompt('amAddNewDownloadForProduct','<?php echo addslashes('option_id:' . $optionId .'|option_value_id:'.$optionValueId . '|option_value_name:'.str_replace('"','&quot;',$optionValueInfo['name']).'|products_attributes_id:'.$optionValueInfo['products_attributes_id'])?>');" src="attributeManager/images/icon_download.png" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_DOWLNOAD_ADD_NEW,$optionValueInfo['name'],$optionInfo['name'])) ?>" style="margin-right: 30px;" />		
+					<input type="image" border="0" onClick="return customPrompt('amAddNewDownloadForProduct','<?php echo addslashes('option_id:' . $optionId .'|option_value_id:'.$optionValueId . '|option_value_name:'.str_replace('"','&quot;',$optionValueInfo['name']).'|products_attributes_id:'.$optionValueInfo['products_attributes_id'])?>');" src="attributeManager/images/icon_download.png" title="<?php echo htmlspecialchars(sprintf(AM_AJAX_DOWLNOAD_ADD_NEW,$optionValueInfo['name'],$optionInfo['name'])) ?>" style="margin-right: 10px;" />		
 <?php					
 					}	
 
@@ -239,12 +239,12 @@ if(false){
 ?>	
 
 					<span style="margin-right:41px;">
-					<?php echo drawDropDownPrefix('id="prefix_'.$optionValueId.'" style="margin:3px 0px 3px 0px;" onChange="return amUpdate(\''.$optionId.'\',\''.$optionValueId.'\',\'prefix\');"',$optionValueInfo['prefix']);?><?php echo tep_draw_input_field("price_$optionValueId",$optionValueInfo['price'],' style="margin:3px 0px 3px 0px;" id="price_'.$optionValueId.'" size="7" onfocus="amF(this)" onblur="amB(this)" onChange="return amUpdate(\''.$optionId.'\',\''.$optionValueId.'\',\'price\');"'); ?>
+					<?php echo '&nbsp;' . AM_AJAX_PREFIX . '&nbsp;' . drawDropDownPrefix('id="prefix_'.$optionValueId.'" style="margin:3px 0px 3px 0px;" onChange="return amUpdate(\''.$optionId.'\',\''.$optionValueId.'\',\'prefix\');"',$optionValueInfo['prefix']);?><?php echo '&nbsp;' . AM_AJAX_PRICE . '&nbsp;' . tep_draw_input_field("price_$optionValueId",$optionValueInfo['price'],' style="margin:3px 0px 3px 0px;" id="price_'.$optionValueId.'" size="7" onfocus="amF(this)" onblur="amB(this)" onChange="return amUpdate(\''.$optionId.'\',\''.$optionValueId.'\',\'price\');"'); ?>
 <?php
 // More Product Weight added by RusNN 
   if (AM_USE_MPW) { 
-    echo drawDropDownWeightPrefix('id="weight_prefix_'.$optionValueId.'" style="margin:3px 0px 3px 0px;" onChange="return amUpdate(\''.$optionId.'\',\''.$optionValueId.'\',\'weight_prefix\');"',$optionValueInfo['weight_prefix']);
-    echo tep_draw_input_field("weight_$optionValueId",$optionValueInfo['weight'],' style="margin:3px 0px 3px 0px;" id="weight_'.$optionValueId.'" size="7" onfocus="amF(this)" onblur="amB(this)" onChange="return amUpdate(\''.$optionId.'\',\''.$optionValueId.'\',\'weight\');"');
+    echo '&nbsp;' . AM_AJAX_WEIGHT_PREFIX . '&nbsp;' . drawDropDownWeightPrefix('id="weight_prefix_'.$optionValueId.'" style="margin:3px 0px 3px 0px;" onChange="return amUpdate(\''.$optionId.'\',\''.$optionValueId.'\',\'weight_prefix\');"',$optionValueInfo['weight_prefix']);
+    echo '&nbsp;' . AM_AJAX_WEIGHT . '&nbsp;' . tep_draw_input_field("weight_$optionValueId",$optionValueInfo['weight'],' style="margin:3px 0px 3px 0px;" id="weight_'.$optionValueId.'" size="7" onfocus="amF(this)" onblur="amB(this)" onChange="return amUpdate(\''.$optionId.'\',\''.$optionValueId.'\',\'weight\');"');
   }
 ?>
 					<?php

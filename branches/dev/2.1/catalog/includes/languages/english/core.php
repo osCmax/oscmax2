@@ -166,13 +166,11 @@ define('CATEGORY_OPTIONS', 'Options');
 define('CATEGORY_PASSWORD', 'Your Password');
 
 define('ENTRY_COMPANY', 'Company Name:');
-define('ENTRY_COMPANY_ERROR', '');
-define('ENTRY_COMPANY_TEXT', '');
-// BOF: MOD - Separate Pricing Per Customer
+define('ENTRY_COMPANY_ERROR', 'Please enter your company name');
+define('ENTRY_COMPANY_TEXT', '*');
 define('ENTRY_COMPANY_TAX_ID', 'Company\'s tax id number:');
-define('ENTRY_COMPANY_TAX_ID_ERROR', '');
-define('ENTRY_COMPANY_TAX_ID_TEXT', '');
-// EOF: MOD - Separate Pricing Per Customer
+define('ENTRY_COMPANY_TAX_ID_ERROR', 'Please enter your company tax id');
+define('ENTRY_COMPANY_TAX_ID_TEXT', '*');
 define('ENTRY_GENDER', 'Gender:');
 define('ENTRY_GENDER_ERROR', 'Please select your Gender.');
 define('ENTRY_GENDER_TEXT', '*');
@@ -183,6 +181,7 @@ define('ENTRY_LAST_NAME', 'Last Name:');
 define('ENTRY_LAST_NAME_ERROR', 'Your Last Name must contain a minimum of ' . ENTRY_LAST_NAME_MIN_LENGTH . ' characters.');
 define('ENTRY_LAST_NAME_TEXT', '*');
 define('ENTRY_DATE_OF_BIRTH', 'Date of Birth:');
+// if you are looking for the DOB error message and * - look in locale.php
 define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
 define('ENTRY_EMAIL_ADDRESS_ERROR', 'Your E-Mail Address must contain a minimum of ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' characters.');
 define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'Your E-Mail Address does not appear to be valid - please make any necessary corrections.');
@@ -202,7 +201,7 @@ define('ENTRY_TELEPHONE_NUMBER', 'Telephone Number:');
 define('ENTRY_TELEPHONE_NUMBER_ERROR', 'Your Telephone Number must contain a minimum of ' . ENTRY_TELEPHONE_MIN_LENGTH . ' characters.');
 define('ENTRY_TELEPHONE_NUMBER_TEXT', '*');
 define('ENTRY_FAX_NUMBER', 'Fax Number:');
-define('ENTRY_FAX_NUMBER_ERROR', '');
+define('ENTRY_FAX_NUMBER_ERROR', 'Please enter your fax number');
 define('ENTRY_FAX_NUMBER_TEXT', '');
 define('ENTRY_NEWSLETTER', 'Newsletter:');
 define('ENTRY_NEWSLETTER_TEXT', '');

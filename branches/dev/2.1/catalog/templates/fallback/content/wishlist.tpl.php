@@ -217,7 +217,7 @@ $Id$
 <?php if (RECAPTCHA_ON == 'true') { ?>
 <!-- start modification for reCaptcha -->
               <tr>
-                <td class="smalltext" colspan="2"><b><?php echo WISHLIST_SECURITY_CHECK; ?></b></td>
+                <td class="smallText" colspan="2"><b><?php echo WISHLIST_SECURITY_CHECK; ?></b></td>
               </tr>
               <tr>
 								<script>

@@ -44,7 +44,7 @@ $Id: shopping_cart.php 3 2006-05-27 04:59:07Z user $
         $boxContent .= '<span class="infoBoxContents">';
       }
 
-      $boxContent .= $products[$i]['name'] . '</td><td class="smalltext" width="50px" align="right">' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</span></a></td><td width="8px">&nbsp;</td></tr>';
+      $boxContent .= $products[$i]['name'] . '</td><td class="smallText" width="50px" align="right">' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</span></a></td><td width="8px">&nbsp;</td></tr>';
 
       if ((tep_session_is_registered('new_products_id_in_cart')) && ($new_products_id_in_cart == $products[$i]['id'])) {
         tep_session_unregister('new_products_id_in_cart');
@@ -56,8 +56,8 @@ $Id: shopping_cart.php 3 2006-05-27 04:59:07Z user $
 
   if ($cart->count_contents() > 0) {
     $boxContent .= tep_draw_separator();
-    $boxContent .= '<tr><td>&nbsp;</td><td class="smalltext">&nbsp;</td>
-<td class="smalltext"><b>TOTAL</b></td><td class="smalltext" align="right"><b>' . $currencies->format($cart->show_total()) . '</b></td>
+    $boxContent .= '<tr><td>&nbsp;</td><td class="smallText">&nbsp;</td>
+<td class="smalltext"><b>TOTAL</b></td><td class="smallText" align="right"><b>' . $currencies->format($cart->show_total()) . '</b></td>
 <td>&nbsp;</td></tr>';
 
 $boxContent .= '<tr><td bgcolor="#ffffff" >&nbsp;</td><td align="right" colspan="3" bgcolor="#bbbbbb"><a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '') . '">' . tep_image(DIR_WS_TEMPLATES . 'images/checkout.png', '','','','name="checkout2"') . '</a></td><td bgcolor="#ffffff" >&nbsp;</td></tr> ';

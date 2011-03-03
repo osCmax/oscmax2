@@ -217,7 +217,7 @@ $Id: wishlist.tpl.php 1057 2011-01-15 18:40:10Z cottonbarn $
 <?php if (RECAPTCHA_ON == 'true') { ?>
 <!-- start modification for reCaptcha -->
               <tr>
-                <td class="smalltext" colspan="2"><b><?php echo WISHLIST_SECURITY_CHECK; ?></b></td>
+                <td class="smallText" colspan="2"><b><?php echo WISHLIST_SECURITY_CHECK; ?></b></td>
               </tr>
               <tr>
 								<script>

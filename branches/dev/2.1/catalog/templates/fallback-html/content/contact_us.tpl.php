@@ -113,7 +113,7 @@ $Id: contact_us.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
 <?php if (RECAPTCHA_ON == 'true') { ?>
 <!-- start modification for reCaptcha -->
 			  <tr>
-                <td class="smalltext"><?php echo SECURITY_PROMPT; ?></td>
+                <td class="smallText"><?php echo SECURITY_PROMPT; ?></td>
               </tr>
 <!-- end modification for reCaptcha -->
 <?php } ?>
@@ -123,32 +123,32 @@ $Id: contact_us.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
 		  <table border="0" width="100%" cellspacing="0" cellpadding="2">
 		    <?php if (SHOW_STORE_OPENING_HOURS == 'true') { ?>
            	  <tr>
-                <td class="smalltext"><?php echo OPENING_HOURS; ?></td>
+                <td class="smallText"><?php echo OPENING_HOURS; ?></td>
               </tr>
 			  <tr>
-                <td class="smalltext"><?php echo nl2br(STORE_OPENING_HOURS_TEXT); ?><br><br></td>
+                <td class="smallText"><?php echo nl2br(STORE_OPENING_HOURS_TEXT); ?><br><br></td>
               </tr>
 			<?php } ?>
 			<?php if (SHOW_EMAIL_ADDRESS == 'true') { ?>
            	  <tr>
-                <td class="smalltext"><?php echo EMAIL_US; ?></td>
+                <td class="smallText"><?php echo EMAIL_US; ?></td>
               </tr>
 			  <tr>
-                <td class="smalltext"><?php echo EMAIL_FROM; ?><br><br></td>
+                <td class="smallText"><?php echo EMAIL_FROM; ?><br><br></td>
               </tr>
 			<?php } ?>
 			<?php if (SHOW_MAILING_ADDRESS == 'true') { ?>
 			  <tr>
-			    <td class="smalltext"><?php echo WRITE_US; ?></td>
+			    <td class="smallText"><?php echo WRITE_US; ?></td>
 			  </tr>
 			  <tr>
-			    <td class="smalltext"><?php echo nl2br(STORE_NAME_ADDRESS); ?></td>
+			    <td class="smallText"><?php echo nl2br(STORE_NAME_ADDRESS); ?></td>
 			  </tr>
 			<?php } ?>
 <?php if (RECAPTCHA_ON == 'true') { ?>
 <!-- start modification for reCaptcha -->
               <tr>
-                <td class="smalltext"><br><b><?php echo ENTRY_SECURITY_CHECK; ?></b></td>
+                <td class="smallText"><br><b><?php echo ENTRY_SECURITY_CHECK; ?></b></td>
               </tr>
               <tr>
 								<script>

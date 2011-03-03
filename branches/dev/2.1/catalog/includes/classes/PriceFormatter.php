@@ -448,7 +448,7 @@ class PriceFormatter {
        $i++;
 		 } // end for ($z = 0; $z < $no_of_price_breaks; $z++)
 		 $dropdown = tep_draw_pull_down_menu('price_breaks', $dropdown_price_breaks, '0', 'style="font-weight: normal"');
-     $dropdown .= '&nbsp;<span class="smalltext">' . PB_FROM . '</span>&nbsp;' . $currencies->display_price($this->lowPrice, tep_get_tax_rate($this->taxClass)) . "\n";
+     $dropdown .= '&nbsp;<span class="smallText">' . PB_FROM . '</span>&nbsp;' . $currencies->display_price($this->lowPrice, tep_get_tax_rate($this->taxClass)) . "\n";
 
      return $dropdown;
   }

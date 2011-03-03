@@ -85,15 +85,15 @@ if (BASKET_CART == 'cart') {
     $gv_result = tep_db_fetch_array($gv_query);
     if ($gv_result['amount'] > 0 ) {
       $boxContent .= tep_draw_separator();
-      $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smalltext">' . VOUCHER_BALANCE . '</td><td class="smalltext" align="right" valign="bottom">' . $currencies->format($gv_result['amount']) . '</td></tr></table>';
-      $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smalltext"><a href="'. tep_href_link(FILENAME_GV_SEND) . '">' . BOX_SEND_TO_FRIEND . '</a></td></tr></table>';
+      $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smallText">' . VOUCHER_BALANCE . '</td><td class="smallText" align="right" valign="bottom">' . $currencies->format($gv_result['amount']) . '</td></tr></table>';
+      $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smallText"><a href="'. tep_href_link(FILENAME_GV_SEND) . '">' . BOX_SEND_TO_FRIEND . '</a></td></tr></table>';
     }
   }
   if (tep_session_is_registered('gv_id')) {
     $gv_query = tep_db_query("select coupon_amount from " . TABLE_COUPONS . " where coupon_id = '" . $gv_id . "'");
     $coupon = tep_db_fetch_array($gv_query);
     $boxContent .= tep_draw_separator();
-    $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smalltext">' . VOUCHER_REDEEMED . '</td><td class="smalltext" align="right" valign="bottom">' . $currencies->format($coupon['coupon_amount']) . '</td></tr></table>';
+    $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smallText">' . VOUCHER_REDEEMED . '</td><td class="smallText" align="right" valign="bottom">' . $currencies->format($coupon['coupon_amount']) . '</td></tr></table>';
 
   }
   if (tep_session_is_registered('cc_id') && $cc_id) {
@@ -103,7 +103,7 @@ if (BASKET_CART == 'cart') {
  $coupon_desc = tep_db_fetch_array($coupon_desc_query);
  $text_coupon_help = sprintf("%s",$coupon_desc['coupon_name']);
     $boxContent .= tep_draw_separator();
-    $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smalltext">' . CART_COUPON . '</td><td class="smalltext" align="right" valign="bottom">' . '<a href="javascript:couponpopupWindow(\'' . tep_href_link(FILENAME_POPUP_COUPON_HELP, 'cID=' . $cc_id) . '\')">' . CART_COUPON_INFO . '</a>' . '</td></tr></table>';
+    $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smallText">' . CART_COUPON . '</td><td class="smallText" align="right" valign="bottom">' . '<a href="javascript:couponpopupWindow(\'' . tep_href_link(FILENAME_POPUP_COUPON_HELP, 'cID=' . $cc_id) . '\')">' . CART_COUPON_INFO . '</a>' . '</td></tr></table>';
 
   }
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution

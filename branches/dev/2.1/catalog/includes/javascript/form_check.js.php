@@ -111,6 +111,18 @@ function check_form(form_name) {
 <?php if (ACCOUNT_DOB == 'true') echo '  check_input("dob", ' . ENTRY_DOB_MIN_LENGTH . ', "' . ENTRY_DATE_OF_BIRTH_ERROR . '");' . "\n"; ?>
 
   check_input("email_address", <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_EMAIL_ADDRESS_ERROR; ?>");
+  
+<?php 
+  if (ACCOUNT_COMPANY == 'true') {
+    if (tep_not_null(ENTRY_COMPANY_TEXT)) { ?>
+	  check_input("company", <?php echo ENTRY_COMPANY_MIN_LENGTH; ?>, "<?php echo ENTRY_COMPANY_ERROR; ?>");
+	<?php
+	}
+
+  }
+?>
+
+
   check_input("street_address", <?php echo ENTRY_STREET_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_STREET_ADDRESS_ERROR; ?>");
   check_input("postcode", <?php echo ENTRY_POSTCODE_MIN_LENGTH; ?>, "<?php echo ENTRY_POST_CODE_ERROR; ?>");
   check_input("city", <?php echo ENTRY_CITY_MIN_LENGTH; ?>, "<?php echo ENTRY_CITY_ERROR; ?>");

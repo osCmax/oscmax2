@@ -142,7 +142,7 @@ jQuery(document).ready(function() {
 			   	  <?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_TEMPLATES . 'images/yourstorelogo.jpg', 'Your Store') . '</a>'; ?>
                </td><!-- LOGO END -->
                
-               <td class="smalltext"><!-- SEARCH BOX START -->
+               <td class="smallText"><!-- SEARCH BOX START -->
                 <form name="quick_find" action="advanced_search_result.php" method="get">
                   <input type="text" class="inputField" name="keywords" maxlength="30" value="Search..." onFocus="clearDefault(this)">
                   <input type="hidden" name="search_in_description" value="1">

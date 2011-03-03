@@ -55,14 +55,14 @@ $Id$
 
 
   // CHECK DATE ENTERED, GRAB ALL ORDERS FROM THAT DATE, AND CREATE PDF FOR ORDERS
-          if (!isset($_POST['startdate'])) { message_handler(); }
-          if ((strlen($_POST['startdate']) != 10) || verify_start_date($_POST['startdate'])) { message_handler('ERROR_BAD_DATE'); }
+          if (!isset($_POST['startdate']) || $_POST['startdate'] != '' || empty($_POST['startdate'])) { $_POST['startdate'] = '2000-01-01'; }
+          if ((strlen($_POST['startdate']) != 10) || verify_start_date($_POST['startdate'])) { message_handler('ERROR_BAD_START_DATE'); }
           if (!is_writeable(BATCH_PDF_DIR)) { message_handler('SET_PERMISSIONS'); }
           $time0   = time();
           $startdate = tep_db_prepare_input($_POST['startdate']);
 
-          if (!isset($_POST['enddate'])) { message_handler(); }
-          if ((strlen($_POST['enddate']) != 10) || verify_end_date($_POST['enddate'])) { message_handler('ERROR_BAD_DATE'); }
+          if (!isset($_POST['enddate']) || $_POST['enddate'] != '' || empty($_POST['enddate'])) { $_POST['enddate'] = date("Y-m-d"); }
+          if ((strlen($_POST['enddate']) != 10) || verify_end_date($_POST['enddate'])) { message_handler('ERROR_BAD_END_DATE'); }
           if (!is_writeable(BATCH_PDF_DIR)) { message_handler('SET_PERMISSIONS'); }
           $time0   = time();
           $enddate = tep_db_prepare_input($_POST['enddate']);
@@ -88,7 +88,7 @@ $Id$
         if ($invoicenumbers != '') {
           $orders_query = tep_db_query("select o.orders_id,h.comments,MIN(h.date_added) from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS_HISTORY . " h where o.orders_id in (" . tep_db_input($invoicenumbers) . ") and h.orders_id = o.orders_id" . $pull_w_status . $get_customer_comments . ' group by o.orders_id');
         } else {  
-          $orders_query = tep_db_query("select o.orders_id,h.comments,MIN(h.date_added) from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS_HISTORY . " h where o.date_purchased between '" . tep_db_input($startdate) . "' and '" . tep_db_input($enddate) . " 23:59:59'  and h.orders_id = o.orders_id" . $pull_w_status . $get_customer_comments . ' group by o.orders_id');
+          $orders_query = tep_db_query("select o.orders_id,h.comments,MIN(h.date_added) from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS_HISTORY . " h where o.date_purchased between '" . tep_db_input($startdate) . "' and '" . tep_db_input($enddate) . " 23:59:59'  and h.orders_id = o.orders_id" . $pull_w_status . $get_customer_comments . ' group by o.orders_id limit 500');
         }
  
  

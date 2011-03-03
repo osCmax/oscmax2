@@ -86,7 +86,8 @@ define('DARK_GREY', '0.7,0.7,0.7');
 
 // Error and Messages
 $error['ERROR_INVALID_INPUT'] = 'Internal Error: Unrecognized or invalid script input.';
-$error['ERROR_BAD_DATE'] =  'Invalid date, Please enter a valid date in Year-Month-Day (0000-00-00) format.';
+$error['ERROR_BAD_START_DATE'] =  'Invalid start date, Please enter a valid date in Year-Month-Day (0000-00-00) format.';
+$error['ERROR_BAD_END_DATE'] =  'Invalid end date, Please enter a valid date in Year-Month-Day (0000-00-00) format.';
 $error['ERROR_BAD_INVOICENUMBERS'] =  'Invalid Invoice numbers, Please enter a valid format. (eg. 2577,2580-2585,2588)';
 $error['NO_ORDERS'] =  'There were no orders selected for export, try changing your order options.';
 $error['SET_PERMISSIONS'] = 'Can\'t write to directory!  Please set the permissions of your temp_pdf folder to CHMOD 0777';

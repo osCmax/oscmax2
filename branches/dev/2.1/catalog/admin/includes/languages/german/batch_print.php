@@ -86,7 +86,8 @@ define('DARK_GREY', '0.7,0.7,0.7');
 
 // Error and Messages
 $error['ERROR_INVALID_INPUT'] = 'Fehler: Nicht erkannte oder ungültige Eingabe.';
-$error['ERROR_BAD_DATE'] =  'Fehler: Ungültiges Datum! Bitte geben Sie das Datum im Format JJJJ-MM-DD ein!';
+$error['ERROR_BAD_START_DATE'] =  'Fehler: Ungültiges Datum! Bitte geben Sie das Datum im Format JJJJ-MM-DD ein!';
+$error['ERROR_BAD_END_DATE'] =  'Fehler: Ungültiges Datum! Bitte geben Sie das Datum im Format JJJJ-MM-DD ein!';
 $error['ERROR_BAD_INVOICENUMBERS'] =  'Fehler: Ungültige Rechnungsnummer! Bitte geben Sie eine gültige Nummer ein. (z.B. 2577,2580-2585,2588)';
 $error['NO_ORDERS'] =  'Fehler: Es wurden keine Bestellungen für den Export ausgewählt, bitte passen Sie ihre Optionen an.';
 $error['SET_PERMISSIONS'] = 'Fehler: Das Verzeichnis ist schreibgeschützt!  Bitte setzen Sie die Zugriffsrechte für Ihr temp_pdf Verzeichnis auf CHMOD 0777';

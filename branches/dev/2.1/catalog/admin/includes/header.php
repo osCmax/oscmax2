@@ -211,7 +211,7 @@ document.status.comments.value += newmessage;
 	  </tr>
     </table>
   </td>
-  <td width="33%" class="smalltext" align="right">
+  <td width="33%" class="smallText" align="right">
 
   <?php
 $current_page = basename($_SERVER['SCRIPT_FILENAME']);

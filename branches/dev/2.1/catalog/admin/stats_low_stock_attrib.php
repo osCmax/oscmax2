@@ -163,7 +163,7 @@ $Id$
 <?php
           // build headng line with option names
           while ($products_options_name = tep_db_fetch_array($products_options_name_query)) {
-            echo "                    <td class=\"smalltext\">&nbsp;<u>" . $products_options_name['products_options_name'] . "</u></td>\n";
+            echo "                    <td class=\"smallText\">&nbsp;<u>" . $products_options_name['products_options_name'] . "</u></td>\n";
           }
 ?>
                   </tr>
@@ -182,11 +182,11 @@ $Id$
           // now display the attribute value names, table the html for quantity & price to get everything
           // to line up right
 		  $model_html_table="                <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"2\">\n";
-          $model_html_table.="                  <tr class=\"dataTableRowSelected\"><td class=\"smalltext\" colspan=\"" . sizeof($products_options_array) . "\">&nbsp;</td></tr>\n";
+          $model_html_table.="                  <tr class=\"dataTableRowSelected\"><td class=\"smallText\" colspan=\"" . sizeof($products_options_array) . "\">&nbsp;</td></tr>\n";
           $quantity_html_table="               <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"2\">\n";
-          $quantity_html_table.="                  <tr class=\"dataTableRowSelected\"><td class=\"smalltext\" colspan=\"" . sizeof($products_options_array) . "\">&nbsp;</td></tr>\n";
+          $quantity_html_table.="                  <tr class=\"dataTableRowSelected\"><td class=\"smallText\" colspan=\"" . sizeof($products_options_array) . "\">&nbsp;</td></tr>\n";
           $price_html_table="                <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"2\">\n";
-          $price_html_table.="                  <tr class=\"dataTableRowSelected\"><td class=\"smalltext\" colspan=\"" . sizeof($products_options_array) . "\">&nbsp;</td></tr>\n";
+          $price_html_table.="                  <tr class=\"dataTableRowSelected\"><td class=\"smallText\" colspan=\"" . sizeof($products_options_array) . "\">&nbsp;</td></tr>\n";
           while($products_stock_values=tep_db_fetch_array($products_stock_query)) {
             $attributes=explode(",",$products_stock_values['products_stock_attributes']);
             echo "                  <tr class=\"dataTableRowSelected\">\n"; 
@@ -224,9 +224,9 @@ $Id$
 		  $model_html_table.="                </table>\n";
           $quantity_html_table.="                </table>\n";
           $price_html_table.="                </table>\n";
-          echo "              <td class=smalltext>" . $model_html_table . "</td>\n";
-          echo "              <td class=smalltext>" . $quantity_html_table . "</td>\n";
-		  echo "              <td class=smalltext>" . $price_html_table . "</td>\n";
+          echo "              <td class=smallText>" . $model_html_table . "</td>\n";
+          echo "              <td class=smallText>" . $quantity_html_table . "</td>\n";
+		  echo "              <td class=smallText>" . $price_html_table . "</td>\n";
           echo "            </tr>\n";
         
 		}

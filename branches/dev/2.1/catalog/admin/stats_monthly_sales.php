@@ -304,7 +304,7 @@ $sales_query_raw .=  " order by o.date_purchased ";
 if ($invert) $sales_query_raw .= "asc"; else $sales_query_raw .= "desc";
 $sales_query = tep_db_query($sales_query_raw);
 $num_rows = tep_db_num_rows($sales_query);
-if ($num_rows==0) echo '<tr><td class="smalltext">' . TEXT_NOTHING_FOUND . '</td></tr>';
+if ($num_rows==0) echo '<tr><td class="smallText">' . TEXT_NOTHING_FOUND . '</td></tr>';
 $rows=0;
 //
 // loop here for each row reported

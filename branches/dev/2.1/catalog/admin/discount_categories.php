@@ -312,11 +312,11 @@ function check_form() {
       <tr>
         <td><table width="100%" cellspacing="0" cellpadding="0" border="0">
         <tr class="formArea" align="center" style="margin-top: 6px; margin-bottom: 6px;">
-          <td class="smalltext" style="padding-left: 2px; padding-right: 2px; padding-top: 6px; padding-bottom: 6px; border-left: 1px solid #7b9ebd; border-top: 1px solid #7b9ebd"><?php echo TABLE_HEADING_CUSTOMERS_GROUPS; ?></td>
-          <td class="smalltext" style="border-top: 1px solid #7b9ebd"><?php echo TEXT_MAXI_ROW_BY_PAGE; ?></td>
-          <td class="smalltext" style="border-top: 1px solid #7b9ebd"><?php echo DISPLAY_CATEGORIES; ?></td>
-          <td class="smalltext" style="border-top: 1px solid #7b9ebd"><?php echo DISPLAY_MANUFACTURERS; ?></td>
-          <td class="smalltext" style="border-top: 1px solid #7b9ebd; border-right: 1px solid #7b9ebd"><?php echo DISPLAY_DISCOUNT_CATEGORIES; ?></td>         
+          <td class="smallText" style="padding-left: 2px; padding-right: 2px; padding-top: 6px; padding-bottom: 6px; border-left: 1px solid #7b9ebd; border-top: 1px solid #7b9ebd"><?php echo TABLE_HEADING_CUSTOMERS_GROUPS; ?></td>
+          <td class="smallText" style="border-top: 1px solid #7b9ebd"><?php echo TEXT_MAXI_ROW_BY_PAGE; ?></td>
+          <td class="smallText" style="border-top: 1px solid #7b9ebd"><?php echo DISPLAY_CATEGORIES; ?></td>
+          <td class="smallText" style="border-top: 1px solid #7b9ebd"><?php echo DISPLAY_MANUFACTURERS; ?></td>
+          <td class="smallText" style="border-top: 1px solid #7b9ebd; border-right: 1px solid #7b9ebd"><?php echo DISPLAY_DISCOUNT_CATEGORIES; ?></td>         
         </tr>
 <tr class="formArea" align="center">
   <td class="smallText" style="border-left: 1px solid #7b9ebd"><?php echo tep_draw_form('customer_group', FILENAME_DISCOUNT_CATEGORIES, '', 'get'); 

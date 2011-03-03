@@ -169,7 +169,7 @@ $Id$
                                   echo "<td class=\"dataTableHeadingContent\" valign=\"middle\">&nbsp;&nbsp;$option_names[$k]</td>";
                                   $title[$title_num]=$k;
                                 }
-                                echo "<td class=\"dataTableHeadingContent\" valign=\"middle\"><span class=smalltext>" . TABLE_HEADING_QTY . "</span></td><td width=\"100%\" colspan=\"2\">&nbsp;</td>";
+                                echo "<td class=\"dataTableHeadingContent\" valign=\"middle\"><span class=smallText>" . TABLE_HEADING_QTY . "</span></td><td width=\"100%\" colspan=\"2\">&nbsp;</td>";
                                 echo "</tr>";
                                 $q=tep_db_query("select * from " . TABLE_PRODUCTS_STOCK . " where products_id=" . $VARS['product_id'] . " order by products_stock_attributes");
                                 while($rec=tep_db_fetch_array($q)) {
@@ -177,7 +177,7 @@ $Id$
                                   echo "<tr>";
                                   foreach($val_array as $val) {
                                     if (preg_match("/^(\d+)-(\d+)$/",$val,$m1)) {
-                                      echo "<td class=smalltext>&nbsp;&nbsp;&nbsp;".tep_values_name($m1[2])."</td>";
+                                      echo "<td class=smallText>&nbsp;&nbsp;&nbsp;".tep_values_name($m1[2])."</td>";
                                     } else {
                                       echo "<td>&nbsp;</td>";
                                     }
@@ -185,7 +185,7 @@ $Id$
                                   for($i=0;$i<sizeof($options)-sizeof($val_array);$i++) {
                                     echo "<td>&nbsp;</td>";
                                   }
-                                  echo "<td class=smalltext>&nbsp;&nbsp;&nbsp;&nbsp;$rec[products_stock_quantity]</td><td>&nbsp;</td></tr>";
+                                  echo "<td class=smallText>&nbsp;&nbsp;&nbsp;&nbsp;$rec[products_stock_quantity]</td><td>&nbsp;</td></tr>";
                                 }
                                 echo "<tr>";
                                 reset($options);

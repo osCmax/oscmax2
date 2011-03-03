@@ -103,7 +103,7 @@ if (DISPLAY_DATE_ADDED_ARTICLE_LISTING == 'true') {
       </tr>
 <?php
   if (ENABLE_ARTICLE_REVIEWS == 'true') {
-    $reviews_query = tep_db_query("SELECT COUNT(*) as count from " . TABLE_ARTICLE_REVIEWS . " where articles_id = '" . (int)$_GET['articles_id'] . "' and approved = '1'");
+    $reviews_query = tep_db_query("SELECT COUNT(*) as count from " . TABLE_ARTICLE_REVIEWS . " ar, " . TABLE_ARTICLE_REVIEWS_DESCRIPTION . " ard where ar.articles_id = '" . (int)$_GET['articles_id'] . "' and ar.approved = '1' and ard.reviews_id = ar.reviews_id and ard.languages_id = '" . (int)$languages_id . "'");
     $reviews = tep_db_fetch_array($reviews_query);
 ?>
       <tr>

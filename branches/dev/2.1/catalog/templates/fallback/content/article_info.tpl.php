@@ -106,15 +106,17 @@ if (DISPLAY_DATE_ADDED_ARTICLE_LISTING == 'true') {
             </tr>
 <?php
   if (ENABLE_ARTICLE_REVIEWS == 'true') {
-    $reviews_query = tep_db_query("SELECT COUNT(*) as count from " . TABLE_ARTICLE_REVIEWS . " where articles_id = '" . (int)$_GET['articles_id'] . "' and approved = '1'");
+    $reviews_query = tep_db_query("SELECT COUNT(*) as count from " . TABLE_ARTICLE_REVIEWS . " ar, " . TABLE_ARTICLE_REVIEWS_DESCRIPTION . " ard where ar.articles_id = '" . (int)$_GET['articles_id'] . "' and ar.approved = '1' and ard.reviews_id = ar.reviews_id and ard.languages_id = '" . (int)$languages_id . "'");
     $reviews = tep_db_fetch_array($reviews_query);
 ?>
-            <tr>
-              <td class="main"><?php echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count']; ?></td>
-            </tr>
+            
 <?php
     if ($reviews['count'] <= 0) {
 ?>
+              
+            <tr>
+              <td class="main"><?php echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count']; ?></td>
+            </tr>
             <tr>
               <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
             </tr>
@@ -124,6 +126,9 @@ if (DISPLAY_DATE_ADDED_ARTICLE_LISTING == 'true') {
 <?php
     } else {
 ?>
+            <tr>
+              <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS, tep_get_all_get_params()) . '">';?><?php echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count']; ?></a></td>
+            </tr>
             <tr>
               <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
             </tr>

@@ -381,7 +381,7 @@ $Id: product_info.tpl.php 1042 2011-01-09 21:41:32Z cottonbarn $
             <tr>
               <td class="smallText" align="left" width="20%">
               <?php
-                $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " where products_id = '" . (int)$_GET['products_id'] . "'");
+                $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd where r.approved = '1' and r.products_id = '" . (int)$_GET['products_id'] . "' and rd.languages_id = '" . (int)$languages_id . "' and r.reviews_id = rd.reviews_id");
                 $reviews = tep_db_fetch_array($reviews_query);
                   if ($reviews['count'] > 0) {
                     echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count'];

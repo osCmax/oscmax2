@@ -9,6 +9,7 @@ $Id$
 
   Released under the GNU General Public License
 */
+
   include(DIR_WS_CLASSES . 'phplot.php');
   $stats = array();
   $banner_stats_query = tep_db_query("select dayofmonth(banners_history_date) as name, banners_shown as value, banners_clicked as dvalue from " . TABLE_BANNERS_HISTORY . " where banners_id = '" . $banner_id . "' and to_days(now()) - to_days(banners_history_date) < " . $days . " order by banners_history_date");
@@ -29,7 +30,7 @@ $Id$
   $graph->SetLabelScalePosition(1);
   $graph->SetMarginsPixels(15,15,15,30);
   $graph->SetTitleFontSize('4');
-  $graph->SetTitle('TEXT_BANNERS_LAST_3_DAYS');
+  $graph->SetTitle(TEXT_BANNERS_LAST_3_DAYS);
   $graph->SetDataValues($stats);
   $graph->SetDataColors(array('blue','red'),array('blue', 'red'));
   $graph->DrawGraph();

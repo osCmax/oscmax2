@@ -19,6 +19,5 @@ define('TEXT_NO_NEW_ARTICLES', 'In den letzten %s Tagen wurden keine neuen Artik
 define('TEXT_DATE_ADDED', 'Veröffentlicht:');
 define('TEXT_AUTHOR', 'Autor:');
 define('TEXT_TOPIC', 'Thema:');
-define('TEXT_BY', 'von');
 define('TEXT_READ_MORE', 'Lesen Sie mehr');
 ?>

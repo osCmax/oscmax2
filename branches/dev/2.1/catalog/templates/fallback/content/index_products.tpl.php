@@ -66,14 +66,14 @@ $Id$
 		   }
          } else { 
 		   if ( (file_exists(DIR_WS_IMAGES . $image_folder . $image)) && ($image !='') )  { 
-		     echo tep_image(DIR_WS_IMAGES . $image_folder . $image, HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT, 'style="float:right; margin:5px;"');
+		     echo tep_image(DIR_WS_IMAGES . $image_folder . $image, '', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT, 'style="float:right; margin:5px;"');
 		   }
          }
 		 if ( (tep_not_null($category['categories_description'])) && ($category['categories_description'] != '<br />') ) {
 	        echo $category['categories_description']; 
          }
 		 // Add manufacturer description
-		 if ( (tep_not_null($description)) && ($description != '<br />') ) {
+		 if ( (isset($description)) && (tep_not_null($description)) && ($description != '<br />') ) {
 		   echo $description;
 		 }
          ?>

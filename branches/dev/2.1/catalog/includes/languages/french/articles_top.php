@@ -23,7 +23,6 @@ define('TABLE_HEADING_NEW_ARTICLES', 'New Articles in %s');
   define('TEXT_DATE_EXPECTED', 'Expected:');
   define('TEXT_AUTHOR', 'Author:');
   define('TEXT_TOPIC', 'Topic:');
-  define('TEXT_BY', 'by');
   define('TEXT_READ_MORE', 'Read More...');
 
 ?>

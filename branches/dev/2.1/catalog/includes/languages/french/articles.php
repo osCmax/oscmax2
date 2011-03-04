@@ -16,7 +16,6 @@ define('TABLE_HEADING_NEW_ARTICLES','Nouveaux articles dans %s');
 if ( ($topic_depth == 'articles') || (isset($_GET['authors_id'])) ) {
   define('HEADING_TITLE', $topics['topics_name']);
   define('TABLE_HEADING_ARTICLES', 'Articles');
-  define('TABLE_HEADING_AUTHOR','Auteur');
   define('TEXT_NO_ARTICLES', 'There are currently no articles in this topic.');
   define('TEXT_NO_ARTICLES2','Il ya actuellement aucun article disponible auprès de cet auteur.');
   define('TEXT_NUMBER_OF_ARTICLES','Nombre d\'articles:');
@@ -29,7 +28,6 @@ if ( ($topic_depth == 'articles') || (isset($_GET['authors_id'])) ) {
   define('TEXT_DATE_ADDED','Publié le:');
   define('TEXT_AUTHOR','Auteur:');
   define('TEXT_TOPIC','Sujet:');
-  define('TEXT_BY','par');
   define('TEXT_READ_MORE','Lire la suite ...');
   define('TEXT_MORE_INFORMATION', 'For more information, please visit this authors <a href="http://%s" target="_blank">web page</a>.');
 } elseif ($topic_depth == 'top') {
@@ -42,7 +40,6 @@ if ( ($topic_depth == 'articles') || (isset($_GET['authors_id'])) ) {
   define('TEXT_DATE_EXPECTED','Attendus:');
   define('TEXT_AUTHOR', 'Author:');
   define('TEXT_TOPIC', 'Topic:');
-  define('TEXT_BY', 'by');
   define('TEXT_READ_MORE', 'Read More...');
 } elseif ($topic_depth == 'nested') {
   define('HEADING_TITLE', 'Articles');

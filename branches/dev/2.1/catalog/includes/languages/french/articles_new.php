@@ -18,7 +18,6 @@ define('TEXT_NO_NEW_ARTICLES','Aucun nouveau commentaire n\'a été ajouté dans le
 define('TEXT_DATE_ADDED','Publié le:');
 define('TEXT_AUTHOR','Auteur:');
 define('TEXT_TOPIC','Sujet:');
-define('TEXT_BY','par');
 define('TEXT_READ_MORE','Lire la suite');
 define('TEXT_ARTICLES','sprintf(TEXT_NEW_ARTICLES, NEW_ARTICLES_DAYS_DISPLAY)');
 ?>

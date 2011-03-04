@@ -76,6 +76,8 @@ $pg_query = tep_db_query("select products_id, customers_group_price from " . TAB
 		
 		if (SHOW_MORE_INFO == 'True') {
           $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $specials[$x]['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a> ';
+		} else {
+		  $more_info = '';
 		}
 		
           $info_box_contents[$row][$col] = array ('align' => 'center',

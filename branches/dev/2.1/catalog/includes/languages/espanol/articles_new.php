@@ -19,6 +19,5 @@ define('TEXT_NO_NEW_ARTICLES', 'No hay noticias añadidas en los &uacute;ltimos %
 define('TEXT_DATE_ADDED', 'Publicado:');
 define('TEXT_AUTHOR', 'Autor:');
 define('TEXT_TOPIC', 'Secci&oacute;n:');
-define('TEXT_BY', 'por');
 define('TEXT_READ_MORE', 'Leer m&aacute;s');
 ?>

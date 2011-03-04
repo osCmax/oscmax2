@@ -81,6 +81,9 @@ $Id$
 			$special_old_price[$x] = '<span style="text-decoration:line-through">' . $currencies->display_price($new_products[$x]['products_price'], tep_get_tax_rate($new_products[$x]['products_tax_class_id'])) . '</span>&nbsp;<span class="productSpecialPrice">';
 			$new_products[$x]['products_price'] = '' . $new_s_prices[$i]['specials_new_products_price'];
 			$closer[$x] = '</span>';
+		  } else {
+			$special_old_price[$x] = '';
+			$closer[$x] = '';  
 		  } // end if 
 	    } // end for
 	  } // end for
@@ -98,8 +101,10 @@ $Id$
     for ($x = 0; $x < $no_of_new_products; $x++) {
 	
 	  if (SHOW_MORE_INFO == 'True') {
-          $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products[$x]['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a> ';
-	  }	
+        $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products[$x]['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a> ';
+	  }	else {
+		$more_info = '';
+	  }
 		
       $new_products[$x]['products_name'] = tep_get_products_name($new_products[$x]['products_id']);
 

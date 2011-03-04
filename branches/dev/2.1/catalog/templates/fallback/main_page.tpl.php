@@ -248,7 +248,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
   }
 
   if ($pfile == 'index.php') {
-	if ($LoadSlideshowJS == true) {
+	if (isset($LoadSlideshowJS) && $LoadSlideshowJS == true) {
       if (DISPLAY_SLIDESHOW == true) {
         echo '<script type="text/javascript" src="http://www.google.com/jsapi"></script>';
         echo '<script type="text/javascript">' . "\n";

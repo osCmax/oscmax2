@@ -164,8 +164,8 @@ function bts_template_switch() {
     $tplDir = basename($_GET['tplDir']);
     tep_session_register('tplDir');
   } else {
-	if ((tep_session_is_registered('tplDir'))&&(TEMPLATE_SWITCHING_ALLOWED == 'true') && is_dir(DIR_WS_TEMPLATES_BASE . basename($_SESSION[tplDir]))){
-	  $tplDir = basename($_SESSION[tplDir]);
+	if ((tep_session_is_registered('tplDir')) && (TEMPLATE_SWITCHING_ALLOWED == 'true') && is_dir(DIR_WS_TEMPLATES_BASE . basename($_SESSION['tplDir']))){
+	  $tplDir = basename($_SESSION['tplDir']);
     }else{
       $tplDir = DIR_WS_TEMPLATES_DEFAULT;
     }

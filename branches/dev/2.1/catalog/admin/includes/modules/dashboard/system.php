@@ -155,11 +155,15 @@ $system_permission_warnings = 0;
   
   <!-- Start image directory checks -->
   <?php
+  
+  $image_types_big = strtoupper(DYNAMIC_MOPICS_BIG_IMAGE_TYPES) . ',' . strtolower(DYNAMIC_MOPICS_BIG_IMAGE_TYPES);
+  $image_types_thumbs = strtoupper(DYNAMIC_MOPICS_THUMB_IMAGE_TYPES) . ',' . strtolower(DYNAMIC_MOPICS_THUMB_IMAGE_TYPES);
+
   $all_files = array();
   $image_files = array();
   $extra_files = array();
   $all_files = glob(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . '*.*');
-  $image_files = glob(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . '*.{' . DYNAMIC_MOPICS_BIG_IMAGE_TYPES . '}', GLOB_BRACE);
+  $image_files = glob(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . '*.{' . $image_types_big . '}', GLOB_BRACE);
   $extra_files = array_diff($all_files, $image_files);
   if (count($extra_files) > 0) { $system_permission_warnings++; ?>
   <tr>
@@ -172,7 +176,7 @@ $system_permission_warnings = 0;
   $image_files = array();
   $extra_files = array();
   $all_files = glob(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . '*.*');
-  $image_files = glob(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . '*.{' . DYNAMIC_MOPICS_BIG_IMAGE_TYPES . '}', GLOB_BRACE);
+  $image_files = glob(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . '*.{' . $image_types_big . '}', GLOB_BRACE);
   $extra_files = array_diff($all_files, $image_files);
   if (count($extra_files) > 0) { $system_permission_warnings++; ?>
   <tr>
@@ -185,7 +189,7 @@ $system_permission_warnings = 0;
   $image_files = array();
   $extra_files = array();
   $all_files = glob(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . '*.*');
-  $image_files = glob(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . '*.{' . DYNAMIC_MOPICS_THUMB_IMAGE_TYPES . '}', GLOB_BRACE);
+  $image_files = glob(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . '*.{' . $image_types_thumbs . '}', GLOB_BRACE);
   $extra_files = array_diff($all_files, $image_files);
   if (count($extra_files) > 0) { $system_permission_warnings++; ?>
   <tr>

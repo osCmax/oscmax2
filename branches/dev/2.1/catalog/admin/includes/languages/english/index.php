@@ -121,7 +121,7 @@ define('WARNING_SEO_PHP_VERSION_LOW', 'Error: Your webserver is running ' . PHP_
 define('WARNING_SESSION_AUTO_START', 'Warning: session.auto_start is enabled - please disable this php feature in php.ini and restart the web server.');
 define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Warning: The downloadable products directory does not exist: ' . dirname(DIR_FS_CATALOG) . '/download. Downloadable products will not work until this directory is valid.');
 define('WARNING_ADMIN_NOT_RENAMED', 'Warning: You have not renamed your admin folder.  This is a potential security risk <u><a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">please read the wiki to find out how to do this</a></u>.');
-define('WARNING_PHP_FILES_IN_BIGIMAGES', 'Warning: You have PHP files in the ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_BIGIMAGES_DIR . ' image folder.  This maybe an indication of malicious software on your server.');
-define('WARNING_PHP_FILES_IN_PRODUCTS', 'Warning: You have PHP files in the ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_PRODUCTS_DIR . ' image folder.  This maybe an indication of malicious software on your server.');
-define('WARNING_PHP_FILES_IN_THUMBS', 'Warning: You have PHP files in the ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_THUMBS_DIR . ' image folder.  This maybe an indication of malicious software on your server.');
+define('WARNING_PHP_FILES_IN_BIGIMAGES', 'Warning: You have files in ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_BIGIMAGES_DIR . ' which are <b>not</b> images.  This maybe an indication of malicious software on your server.');
+define('WARNING_PHP_FILES_IN_PRODUCTS', 'Warning: You have files in ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_PRODUCTS_DIR . ' which are <b>not</b> images.  This maybe an indication of malicious software on your server.');
+define('WARNING_PHP_FILES_IN_THUMBS', 'Warning: You have files in ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_THUMBS_DIR . ' which are <b>not</b> images.  This maybe an indication of malicious software on your server.');
 ?>

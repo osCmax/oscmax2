@@ -78,7 +78,13 @@ $Id$
 
 <p class="main" align="center"><?php echo MODULE_PAYMENT_WORLDPAY_JUNIOR_TEXT_SUCCESSFUL_TRANSACTION; ?></p>
 
-<p align="center"><input type="button" value="<?php echo sprintf(MODULE_PAYMENT_WORLDPAY_JUNIOR_TEXT_CONTINUE_BUTTON, addslashes(STORE_NAME)); ?>" onclick="document.location.href='<?php echo tep_href_link(FILENAME_CHECKOUT_PROCESS, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['hash'], 'SSL', false); ?>';"></p>
+<meta http-equiv="refresh" content="0; url=<?php echo tep_href_link(FILENAME_CHECKOUT_PROCESS, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['hash'], 'SSL', false); ?>">
+
+<form action="<?php echo tep_href_link(FILENAME_CHECKOUT_PROCESS, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['M_hash'], 'SSL', false); ?>" method="post">
+	<div align="center">
+	  <input name="submit" type="submit" value="<?php echo sprintf(MODULE_PAYMENT_WORLDPAY_JUNIOR_TEXT_CONTINUE_BUTTON, addslashes(STORE_NAME)); ?>" />
+    </div>
+</form>
 
 <p>&nbsp;</p>
 
@@ -87,6 +93,41 @@ $Id$
           }
         }
       }
-    }
+    }else{
+		include('includes/languages/' . basename($_POST['M_lang']) . '/modules/payment/worldpay_junior.php');
+	  ?>
+      	<style>
+.pageHeading {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #9a9a9a;
+}
+
+.main {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+}
+</style>
+
+<p align="center" class="pageHeading"><?php echo STORE_NAME; ?></p>
+
+<p class="main" align="center"><?php echo MODULE_PAYMENT_WORLDPAY_JUNIOR_TEXT_UNSUCCESSFUL_TRANSACTION;?></p>
+
+<meta http-equiv="refresh" content="0; url=<?php echo tep_href_link(FILENAME_CHECKOUT_PROCESS, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['hash'], 'SSL', false); ?>">
+
+<form action="<?php echo tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['M_hash'], 'SSL', false); ?>" method="post">
+	<div align="center">
+	  <input name="submit" type="submit" value="<?php echo sprintf(MODULE_PAYMENT_WORLDPAY_JUNIOR_TEXT_CONTINUE_BUTTON, addslashes(STORE_NAME)); ?>" />
+    </div>
+</form>
+<p align="center">&nbsp;</p>
+
+<div align="center">
+  <WPDISPLAY ITEM=banner>
+  </div>
+  	<?php
+	}
   }
 ?>

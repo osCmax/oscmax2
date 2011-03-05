@@ -16,6 +16,12 @@ $Id$
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
+  // +Country-State Selector
+  require(DIR_WS_FUNCTIONS . 'ajax.php');
+if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($_POST['country']), true);
+} else {
+  // -Country-State Selector
   $details == 'true';
   if (!tep_session_is_registered('affiliate_id')) {
     $navigation->set_snapshot();
@@ -229,6 +235,9 @@ $Id$
       tep_redirect(tep_href_link(FILENAME_AFFILIATE_DETAILS_OK, '', 'SSL'));
     }
   }
+ // +Country-State Selector 
+if (!isset($country)){$country = DEFAULT_COUNTRY;}
+// -Country-State Selector
 // BOF: MOD - Country-State Selector
  }
 if ($_POST['action'] == 'refresh') {$state = '';}
@@ -241,4 +250,7 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
   include (bts_select('main')); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
+// +Country-State Selector 
+}
+// -Country-State Selector 
 ?>

@@ -21,6 +21,9 @@ $Id$
     <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
+<!-- // +Country-State Selector -->
+		<div id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'indicator.gif'); ?></div>			
+<!-- // -Country-State Selector -->
 <?php
   if (ACCOUNT_GENDER == 'true') {
     $male = ($affiliate['affiliate_gender'] == 'm') ? true : false;
@@ -423,10 +426,27 @@ $Id$
 ?>
             </td>
           </tr>
+	  <?php
+  if (ACCOUNT_STATE == 'true') {
+?>
+          <tr>
+            <td class="main">&nbsp;<?php echo ENTRY_STATE; ?></td>
+            <td class="main">&nbsp;
+<div id="states">
+				<?php
+				// +Country-State Selector
+				echo ajax_get_zones_html($entry['entry_country_id'],($entry['entry_zone_id'] == 0 ? $entry['entry_state'] : $entry['entry_zone_id']), false);
+				// -Country-State Selector
+				?>
+				</div></td>
+          </tr>
+<?php
+  }
+?>
           <tr>
             <td class="main">&nbsp;<?php echo ENTRY_COUNTRY; ?></td>
-            <td class="main">&nbsp;
-<?php
+	    <td class="main">
+	    <?php
   if ($is_read_only == true) {
     echo tep_get_country_name($affiliate['affiliate_country_id']);
   } elseif ($error == true) {
@@ -436,50 +456,13 @@ $Id$
       echo tep_get_country_name($a_country) . tep_draw_hidden_field('a_country');
     }
   } else {
-    echo tep_get_country_list('a_country', $affiliate['affiliate_country_id']) . '&nbsp;<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>';
+    // +Country-State Selector
+    echo tep_get_country_list('country', $entry['entry_country_id'],'onChange="getStates(this.value,\'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': '');
+   // -Country-State Selector
   }
 ?>
-            </td>
-          </tr>
-<?php
-  if (ACCOUNT_STATE == 'true') {
-?>
-          <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_STATE; ?></td>
-            <td class="main">&nbsp;
-<?php
-    $state = tep_get_zone_name($a_country, $a_zone_id, $a_state);
-    if ($is_read_only == true) {
-      echo tep_get_zone_name($affiliate['affiliate_country_id'], $affiliate['affiliate_zone_id'], $affiliate['affiliate_state']);
-    } elseif ($error == true) {
-      if ($entry_state_error == true) {
-        if ($entry_state_has_zones == true) {
-          $zones_array = array();
-          $zones_query = tep_db_query("select zone_name from " . TABLE_ZONES . " where zone_country_id = '" . tep_db_input($a_country) . "' order by zone_name");
-          while ($zones_values = tep_db_fetch_array($zones_query)) {
-            $zones_array[] = array('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
-          }
-          echo tep_draw_pull_down_menu('a_state', $zones_array) . '&nbsp;' . ENTRY_STATE_ERROR;
-        } else {
-          echo tep_draw_input_field('a_state') . '&nbsp;' . ENTRY_STATE_ERROR;
-        }
-      } else {
-        echo $state . tep_draw_hidden_field('a_zone_id') . tep_draw_hidden_field('a_state');
-      }
-    } else {
-      echo tep_draw_input_field('a_state', tep_get_zone_name($affiliate['affiliate_country_id'], $affiliate['affiliate_zone_id'], $affiliate['affiliate_state'])) . '&nbsp;<span class="inputRequirement">' . ENTRY_STATE_TEXT . '</span>';
-    }
-?>
-            </td>
-          </tr>
-<?php
-  }
-?>
-          <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_COUNTRY; ?></td>
-<?php // BOF: MOD - Country-State Selector ?>
-            <td class="main">&nbsp;&nbsp;<?php echo tep_get_country_list('country',$a_country,'onChange="return refresh_form(affiliate_details);"') . '&nbsp;<br>' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
-<?php // EOF: MOD - Country-State Selector ?>
+
+
           </tr>
         </table></td>
       </tr>

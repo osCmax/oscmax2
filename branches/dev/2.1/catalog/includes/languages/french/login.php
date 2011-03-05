@@ -23,7 +23,7 @@ define('TEXT_RETURNING_CUSTOMER', 'J\'ai d&eacute;j&agrave; command&eacute;.');
 define('TEXT_PASSWORD_FORGOTTEN', 'Vous avez oubli&eacute; votre mot de passe? Cliquez ici.');
 
 define('TEXT_LOGIN_ERROR', 'Erreur: aucun r&eacute;sultat &agrave; cette adresse &eacute;lectronique et/ou mot de passe.');
-define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>REMARQUE:</b></font> Le contenu de votre &quot;panier visiteurs&quot; sera ajout&eacute; &agrave; celui de votre &quot;panier membres&quot; d&egrave;s que vous aurez ouvert une session. <a href="javascript:session_win();">[Plus d\'info]</a>');
+define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>REMARQUE:</b></font> Le contenu de votre &quot;panier visiteurs&quot; sera ajout&eacute; &agrave; celui de votre &quot;panier membres&quot; d&egrave;s que vous aurez ouvert une session.');
 
 //BOF - Checkout Without Account v0.70 changes
 define('PWA_FAIL_ACCOUNT_EXISTS', 'Un compte existe déjà pour cette adresse e-mail <i>{EMAIL_ADDRESS}</i>.  Vous devez vous identifier avant de procéder à la commande.');

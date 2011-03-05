@@ -23,7 +23,7 @@ define('TEXT_RETURNING_CUSTOMER', 'He comprado otras veces.');
 define('TEXT_PASSWORD_FORGOTTEN', '¿Ha olvidado su contraseña? Siga este enlace y se la enviamos.');
 
 define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> El \'E-Mail\' y/o \'Contraseña\' no figuran en nuestros datos.');
-define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>NOTA:</b></font> El contenido de su &quot;Cesta de Visitante&quot; será añadido a su &quot;Cesta de Asociado&quot; una vez que haya entrado. <a href="javascript:session_win();">[Más información]</a>');
+define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>NOTA:</b></font> El contenido de su &quot;Cesta de Visitante&quot; será añadido a su &quot;Cesta de Asociado&quot; una vez que haya entrado.');
 
 // BOF: MOD - Checkout Without Account v0.70 changes
 define('PWA_FAIL_ACCOUNT_EXISTS', 'Una cuenta ya existe para la dirección correo electrónico <i>{EMAIL_ADDRESS}</i>.  Usted debe la entrada aquí con la contraseña para esa cuenta antes avanzar para comprobar.');

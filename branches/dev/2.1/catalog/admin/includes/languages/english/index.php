@@ -124,4 +124,5 @@ define('WARNING_ADMIN_NOT_RENAMED', 'Warning: You have not renamed your admin fo
 define('WARNING_PHP_FILES_IN_BIGIMAGES', 'Warning: You have files in ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_BIGIMAGES_DIR . ' which are <b>not</b> images.  This maybe an indication of malicious software on your server.');
 define('WARNING_PHP_FILES_IN_PRODUCTS', 'Warning: You have files in ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_PRODUCTS_DIR . ' which are <b>not</b> images.  This maybe an indication of malicious software on your server.');
 define('WARNING_PHP_FILES_IN_THUMBS', 'Warning: You have files in ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_THUMBS_DIR . ' which are <b>not</b> images.  This maybe an indication of malicious software on your server.');
+define('DASHBOARD_AFFILIATE_EMAIL_ERROR', 'The Affiliate Infobox is active in your store but you have not changed the default email address.  Please either <u><a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=28', 'NONSSL') . '">disable this module</a></u> or <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=35&amp;cID=1204&amp;action=edit', 'NONSSL') . '"> update the email address</a></u>.');
 ?>

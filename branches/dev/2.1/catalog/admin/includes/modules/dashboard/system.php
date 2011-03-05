@@ -51,6 +51,20 @@ $system_permission_warnings = 0;
   <?php } ?>
   <!-- End check for OPC email -->
   
+  <!-- Start check for Affiliate email -->
+  <?php
+  $configuration_query = tep_db_query("select configuration_value from " . TABLE_THEME_CONFIGURATION . " where configuration_title = 'affiliate'");
+  while ($configuration = tep_db_fetch_array($configuration_query)) {
+    $affiliate_status = $configuration['configuration_value']; 
+  }
+
+  if ( (AFFILIATE_EMAIL_ADDRESS == '<affiliate@localhost.com>') && ($affiliate_status == 'yes') ) { $system_config_warnings++; ?>
+  <tr>
+	<td class="messageStackError"><?php echo tep_image(DIR_WS_ICONS . 'warning.gif') . ' ' . DASHBOARD_AFFILIATE_EMAIL_ERROR; ?></td>
+  </tr>
+  <?php } ?>
+  <!-- End check for Affiliate email -->
+  
   <!-- Start display of final message for system_config_errors -->
   <?php
   if ( ($system_config_errors == 0) && ($system_config_warnings == 0) ) { ?>

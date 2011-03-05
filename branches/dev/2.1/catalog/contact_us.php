@@ -27,6 +27,9 @@ if (RECAPTCHA_ON == 'true') {
 }
 // end modification for reCaptcha
 
+// Adds functionality to have affiliate emails
+  $source = $_GET['source'];
+
     $error = false;
   if (isset($_GET['action']) && ($_GET['action'] == 'send')) {
     $name = tep_db_prepare_input($_POST['name']);
@@ -90,7 +93,11 @@ if (RECAPTCHA_ON == 'true') {
 // end modification for reCaptcha
 
     if ($error == false) {
-      tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, EMAIL_SUBJECT, $enquiry, $name, $email_address);
+	  if ($source == 'affiliate') {
+		tep_mail(STORE_OWNER, AFFILIATE_EMAIL_ADDRESS, EMAIL_SUBJECT, $enquiry, $name, $email_address);
+	  } else {
+        tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, EMAIL_SUBJECT, $enquiry, $name, $email_address);
+	  }
       tep_redirect(tep_href_link(FILENAME_CONTACT_US, 'action=success'));
 // EOF: Remove blank emails
     }

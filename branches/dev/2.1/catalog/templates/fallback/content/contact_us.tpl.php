@@ -57,6 +57,14 @@ $Id$
 <?php
   } else {
 	  
+	if ( (tep_session_is_registered('affiliate_id')) && ($source == 'affiliate') ) { 
+	$account_query = tep_db_query("select affiliate_firstname, affiliate_lastname, affiliate_email_address from " . TABLE_AFFILIATE . " where affiliate_id = '" . (int)$affiliate_id . "'");
+    $account = tep_db_fetch_array($account_query);
+
+    $name = $account['affiliate_firstname'] . ' ' . $account['affiliate_lastname'];
+    $email = $account['affiliate_email_address'];	
+  	}
+	  
 	if (tep_session_is_registered('customer_id')) {
     $account_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$customer_id . "'");
     $account = tep_db_fetch_array($account_query);
@@ -72,7 +80,7 @@ $Id$
       <tr>
         <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
           <tr class="infoBoxContents">
-          	<td colspan="2" class="main"><?php echo INSTRUCTIONS_TEXT; ?><BR /><BR /></td>
+          	<td colspan="2" class="main"><?php echo INSTRUCTIONS_TEXT .$source; ?><BR /><BR /></td>
           </tr>
           <tr class="infoBoxContents">
             <td width="65%"><table border="0" width="100%" cellspacing="0" cellpadding="2">

@@ -166,13 +166,11 @@ define('CATEGORY_OPTIONS', 'Optionen');
 define('CATEGORY_PASSWORD', 'Ihr Passwort');
 
 define('ENTRY_COMPANY', 'Firmenname:');
-define('ENTRY_COMPANY_ERROR', '');
-define('ENTRY_COMPANY_TEXT', '');
-// BOF: MOD - Separate Pricing Per Customer
+define('ENTRY_COMPANY_ERROR', 'Bitte geben Sie Ihren Firmennamen an.');
+define('ENTRY_COMPANY_TEXT', '*');
 define('ENTRY_COMPANY_TAX_ID', 'UID Nummer:');
 define('ENTRY_COMPANY_TAX_ID_ERROR', '');
 define('ENTRY_COMPANY_TAX_ID_TEXT', '');
-// EOF: MOD - Separate Pricing Per Customer
 define('ENTRY_GENDER', 'Geschlecht:');
 define('ENTRY_GENDER_ERROR', 'Bitte wählen Sie Ihr Geschlecht.');
 define('ENTRY_GENDER_TEXT', '*');
@@ -183,6 +181,7 @@ define('ENTRY_LAST_NAME', 'Nachname:');
 define('ENTRY_LAST_NAME_ERROR', 'Der Nachname muss mindestens ' . ENTRY_LAST_NAME_MIN_LENGTH . ' Zeichen enthalten.');
 define('ENTRY_LAST_NAME_TEXT', '*');
 define('ENTRY_DATE_OF_BIRTH', 'Geburtsdatum:');
+// if you are looking for the DOB error message and * - look in locale.php
 define('ENTRY_EMAIL_ADDRESS', 'E-Mail-Adresse:');
 define('ENTRY_EMAIL_ADDRESS_ERROR', 'Die E-Mail-Adresse muss mindestens ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' Zeichen enthalten.');
 define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'Die E-Mail-Adresse scheint nicht gültig zu sein - bitte korrigieren.');
@@ -202,7 +201,7 @@ define('ENTRY_TELEPHONE_NUMBER', 'Telefonnummer:');
 define('ENTRY_TELEPHONE_NUMBER_ERROR', 'Die Telefonnummer muss mindestens ' . ENTRY_TELEPHONE_MIN_LENGTH . ' Zeichen enthalten.');
 define('ENTRY_TELEPHONE_NUMBER_TEXT', '*');
 define('ENTRY_FAX_NUMBER', 'Telefaxnummer:');
-define('ENTRY_FAX_NUMBER_ERROR', '');
+define('ENTRY_FAX_NUMBER_ERROR', 'Bitte geben Sie Ihre Faxnummer an');
 define('ENTRY_FAX_NUMBER_TEXT', '');
 define('ENTRY_NEWSLETTER', 'Newsletter:');
 define('ENTRY_NEWSLETTER_TEXT', '');
@@ -278,6 +277,7 @@ define('IMAGE_BUTTON_MORE_INFO', 'Weitere Informationen');
 define('IMAGE_BUTTON_REMOVE_PRODUCT', 'Artikel entfernen');
 define('IMAGE_BUTTON_SEND', 'Senden');
 define('IMAGE_BUTTON_WISHLIST_HELP', 'Hilfe Wunschliste');
+define('IMAGE_BUTTON_WISHLIST', 'Wunschliste');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'Löschen');
 define('SMALL_IMAGE_BUTTON_EDIT', 'Bearbeiten');
@@ -315,9 +315,6 @@ define('TEXT_NO_NEW_PRODUCTS', 'Zur Zeit gibt es keine Produkte.');
 define('TEXT_UNKNOWN_TAX_RATE', 'Unbekannter Steuersatz');
 
 define('TEXT_REQUIRED', '<span class="errorText">Pflichtfeld</span>');
-// +Country-State Selector
-define ('DEFAULT_COUNTRY', '81');
-// -Country-State Selector
 
 define('ERROR_TEP_MAIL', '<font face="Verdana, Arial" size="2" color="#ff0000"><b><small>TEP Fehler:</small> Die E-Mail kann nicht über den angegebenen SMTP-Server verschickt werden. Bitte kontrollieren Sie die Einstellungen in der php.ini Datei und führen Sie notwendige Korrekturen durch!</b></font>');
 define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Warnung: Das Installationverzeichnis ist noch vorhanden auf: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/install. Bitte löschen Sie das Verzeichnis aus Sicherheitsgründen!');
@@ -413,6 +410,15 @@ define('TEXT_LATEST_PRODUCTS', 'Neueste Produkte');
 define('TEXT_SPECIALS', 'Sonderangebote');
 define('TEXT_READ_MORE','Lesen Sie mehr...');
 
-define('TEXT_MISSING_IMAGE','Leider ist derzeit keine Produktabbildung verfügbar');
+define('TEXT_MISSING_IMAGE','Leider ist derzeit keine Produktbild verfügbar');
 define('TEXT_PAGE', 'Seite: ');
+
+define('TEXT_RATING', 'Benotung: ');
+define('TEXT_POOR', 'Nicht zufriedenstellend');
+define('TEXT_FAIR', 'Ausreichend');
+define('TEXT_AVERAGE', 'Durchschnittlich');
+define('TEXT_GOOD', 'Gut');
+define('TEXT_EXCELLENT', 'Ausgezeichnet');
+
+
 ?>

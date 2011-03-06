@@ -26,12 +26,12 @@ define('TEXT_RETURNING_CUSTOMER', 'Ich bin bereits Kunde.');
 define('TEXT_PASSWORD_FORGOTTEN', 'Passwort vergessen? Hier klicken.');
 
 define('TEXT_LOGIN_ERROR', 'Fehler: Die E-Mail-Adresse und/oder das Passwort sind nicht korrekt.');
-define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>Hinweis:</b></font> Ihre &quot;Besucherwarenkorb&quot; wird automatisch mit Ihrem &quot;Kundenwarenkorb&quot; verbunden.');
+define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>Hinweis:</b></font> Der Inhalt Ihres Warenkorbes bleibt erhalten, wenn Sie sich anmelden.');
 
 // LINE ADDED: MOD - Separate Pricing Per Customer
 // define the email address that can change customer_group_id on login
 define('SPPC_TOGGLE_LOGIN_PASSWORD', 'root@localhost');
-define('PWA_FAIL_ACCOUNT_EXISTS','Ein Konto existiert bereits für die E-Mail-Adresse {EMAIL_ADDRESS}. Sie müssen sich hier anmelden mit dem Passwort für dieses Konto, bevor Sie Ihren Einkauf abschließen können.');
+define('PWA_FAIL_ACCOUNT_EXISTS','Es existiert bereits ein Konto für die E-Mail-Adresse {EMAIL_ADDRESS}. Sie müssen sich hier anmelden mit dem Passwort für dieses Konto, bevor Sie Ihren Einkauf abschließen können.');
 
 define('HEADING_CHECKOUT','<font size="2">Gehen Sie direkt zur Kasse</font>');
 

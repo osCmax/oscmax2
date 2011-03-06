@@ -45,6 +45,7 @@ define('TEXT_DISPLAY_NUMBER_OF_MEMBERS', '<b>%d</b> bis <b>%d</b> (von <b>%d</b>
 
 ////
 
+
 setlocale(LC_TIME, 'de_DE.ISO_8859-1');
 define('DATE_FORMAT_SHORT', '%d.%m.%Y');  // this is used for strftime()
 define('DATE_FORMAT_LONG', '%A, %d %B %Y'); // this is used for strftime()
@@ -83,9 +84,6 @@ define('ENTRY_STATE', 'Bundesland:');
 define('ENTRY_STATE_TEXT', '');
 define('ENTRY_STATE_ERROR', '&nbsp;<span class="errorText">notwendig</span>');
 
-
-////
-
 // Global entries for the <html> tag
 define('HTML_PARAMS','dir="ltr" lang="de"');
 
@@ -107,7 +105,6 @@ define('BOX_MANUAL_ORDER_CREATE_ORDER', 'Bestellung erstellen');
 // pull down default text
 define('PULL_DOWN_DEFAULT', 'Bitte ausw&azml;hlen');
 define('TYPE_BELOW', 'Nachstehend eingeben');
-
 
 // header text in includes/header.php
 define('HEADER_TITLE_TOP', 'Admin');
@@ -153,6 +150,8 @@ define('BOX_CONFIGURATION_EDITOR', 'Bestellungseditor');
 define('BOX_CONFIGURATION_SEO_VALIDATION', 'SEO URL Überprüfung');
 // EOF: Added for super-friendly admin menu:
 
+define('TEXT_LOGGING_CACHE', 'Logging / Cache');
+
 // modules box text in includes/boxes/modules.php
 define('BOX_HEADING_MODULES', 'Module');
 define('BOX_MODULES_PAYMENT', 'Zahlungsart');
@@ -173,12 +172,6 @@ define('BOX_CATALOG_PRODUCTS_EXPECTED', 'Künftige Produkte');
 // 2 LINES ADDED - EasyPopulate and Attrib Manager
 define('BOX_CATALOG_EASYPOPULATE', 'EasyPopulate');
 define('BOX_CATALOG_ATTRIBUTE_MANAGER', 'Attributmanager');
-// BOF: Added INFO Pages
-define('BOX_CATALOG_DEFINE_MAINPAGE', 'Startseite ändern');
-define('BOX_CATALOG_DEFINE_CONDITIONS', 'AGB ändern');
-define('BOX_CATALOG_DEFINE_PRIVACY', 'Datenschutz ändern');
-define('BOX_CATALOG_DEFINE_SHIPPING', 'Liefer- und Versandkosten ändern');
-// EOF: Added INFO Pages
 
 // customers box text in includes/boxes/customers.php
 define('BOX_HEADING_CUSTOMERS', 'Kunden');
@@ -529,7 +522,7 @@ define('BOX_CATALOG_FEEDMACHINE', 'Feedmachine');
 // EOF: Feed Machine
 
 // BOF: Extra Product Fields
-define('TEXT_NOT_APPLY', 'kein');
+define('TEXT_NOT_APPLY', 'Nicht ausgewählt');
 define('BOX_CATALOG_PRODUCTS_EXTRA_FIELDS', 'Produkt-Extrafelder');
 define('BOX_CATALOG_PRODUCTS_EXTRA_VALUES', 'Produkt-Extrafeld-Werte');
 // EOF: Extra Product Fields
@@ -541,4 +534,13 @@ define('TEXT_PRODUCTS_SALE', '&nbsp;Aktionspreis:&nbsp;');
 define('TEXT_PRODUCTS_SAVINGS', '&nbsp;Ihre&nbsp;Ersparnis:&nbsp;');
 define('TEXT_PRODUCTS_PRICE_MSRP', 'UVP:');
 // EOF: MSRP
+
+define('TEXT_YYYY_MM_DD', '(JJJJ-MM-TT)');
+
+define('TEXT_RATING', 'Benotung: ');
+define('TEXT_POOR', 'Nicht zufriedenstellend');
+define('TEXT_FAIR', 'Ausreichend');
+define('TEXT_AVERAGE', 'Durchschnittlich');
+define('TEXT_GOOD', 'Gut');
+define('TEXT_EXCELLENT', 'Ausgezeichnet');
 ?>

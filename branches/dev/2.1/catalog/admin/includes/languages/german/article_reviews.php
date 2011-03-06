@@ -37,8 +37,6 @@ define('TEXT_INFO_ARTICLES_AVERAGE_RATING', 'Durchschnittliche Bewertung:');
 define('TEXT_IMAGE_NONEXISTENT', 'IMAGE DOES NOT EXIST');
 
 define('TEXT_OF_5_STARS', '%s von 5 Sternen!');
-define('TEXT_GOOD', '<small><font color="#ff0000"><b>Sehr gut</b></font></small>');
-define('TEXT_BAD', '<small><font color="#ff0000"><b>Sehr schlecht</b></font></small>');
 define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Bewertung löschen');
 /* <Mav was here!> */
 define('TEXT_APPROVED', 'Freigegeben') ;

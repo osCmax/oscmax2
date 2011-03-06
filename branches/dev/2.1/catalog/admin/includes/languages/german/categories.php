@@ -188,4 +188,8 @@ define('TEXT_PRICE_HELP', 'Wenn Sie <b>Preis auf Anfrage!</b> anzeigen lassen mö
 define('HEADING_MSRP_HELP', 'Unverbindlich Verkaufspreis des Herstellers');
 define('TEXT_MSRP_HELP', 'Wenn Sie den UVP in Ihrem Onlineshop auf der Produktinformationsseite anzeigen lassen möchten, geben Sie ihn hier ein.');
 define('TEXT_ADD_PL', 'Einen weiteren Preissprung hinzufügen');
+define('TEXT_FEATURED_UNTIL', 'Empfohlen bis: ');
+define('TEXT_SHIPPING_PRICE', 'Indv. Versandkosten: ');
+
+define('TEXT_THUMBNAIL_IMAGE', 'Vorschaubild:');
 ?>

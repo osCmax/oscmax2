@@ -68,7 +68,6 @@ define('SHIP_FROM_COUNTRY', '');  //eg. 'United Kingdom'
 define('WEBSITE', 'www.Your site.com');
 define('TEXT_RETURNS', 'Wir hoffen, dass Sie es nicht brauchen werden, haben aber für den Fall der Fälle ein Rücksende-Label beigepackt. Bitte beachten Sie unsere Hinweise unter www.Your site.com/shipping.php');
 define('TEXT_TO', 'An:');
-
 // Change this to a general comment that you would like
 define('BATCH_COMMENTS','Automatische Benachrichtung zu Ihrer Bestellung.');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
@@ -86,8 +85,8 @@ define('DARK_GREY', '0.7,0.7,0.7');
 
 // Error and Messages
 $error['ERROR_INVALID_INPUT'] = 'Fehler: Nicht erkannte oder ungültige Eingabe.';
-$error['ERROR_BAD_START_DATE'] =  'Fehler: Ungültiges Datum! Bitte geben Sie das Datum im Format JJJJ-MM-DD ein!';
-$error['ERROR_BAD_END_DATE'] =  'Fehler: Ungültiges Datum! Bitte geben Sie das Datum im Format JJJJ-MM-DD ein!';
+$error['ERROR_BAD_START_DATE'] =  'Fehler: Ungültiges Datum! Bitte geben Sie das Datum im Format JJJJ-MM-TT ein!';
+$error['ERROR_BAD_END_DATE'] =  'Fehler: Ungültiges Datum! Bitte geben Sie das Datum im Format JJJJ-MM-TT ein!';
 $error['ERROR_BAD_INVOICENUMBERS'] =  'Fehler: Ungültige Rechnungsnummer! Bitte geben Sie eine gültige Nummer ein. (z.B. 2577,2580-2585,2588)';
 $error['NO_ORDERS'] =  'Fehler: Es wurden keine Bestellungen für den Export ausgewählt, bitte passen Sie ihre Optionen an.';
 $error['SET_PERMISSIONS'] = 'Fehler: Das Verzeichnis ist schreibgeschützt!  Bitte setzen Sie die Zugriffsrechte für Ihr temp_pdf Verzeichnis auf CHMOD 0777';
@@ -155,5 +154,5 @@ define('BATCH_PDF_FILE', 'batch_orders.pdf');
 //define('MODEL_COLUMN_SIZE', '37');
 //define('PRICING_COLUMN_SIZES', '67');
 
-define('FOOTER_TEXT', 'Vielen Dank für Ihren Einkauf bei ' . STORE_NAME);
+define('FOOTER_TEXT', 'Vielen Dank, dass Sie bei ' . STORE_NAME . ' eingekauft haben.');
 ?>

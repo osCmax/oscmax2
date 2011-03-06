@@ -23,5 +23,4 @@ define('TABLE_HEADING_NEW_ARTICLES', 'Neue Artikel in %s');
   define('TEXT_DATE_EXPECTED', 'Veröffentlichungstermin:');
   define('TEXT_AUTHOR', 'Autor:');
   define('TEXT_TOPIC', 'Thema:');
-  define('TEXT_READ_MORE', 'Lesen Sie mehr...');
 ?>

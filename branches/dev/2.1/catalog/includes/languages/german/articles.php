@@ -27,11 +27,9 @@ $Id$
   define('TEXT_DATE_ADDED', 'Veröffentlicht:');
   define('TEXT_AUTHOR', 'Autor:');
   define('TEXT_TOPIC', 'Thema:');
-  define('TEXT_READ_MORE', 'Weiter lesen...');
-  define('TEXT_READ_MORE','Lesen Sie mehr...');
+  define('TEXT_MORE_INFORMATION', 'Für weitere Informationen besuchen Sie bitte die <a href="http://%s" target="_blank">Webseite</a> dieses Autors.');
   define('TEXT_ALL_ARTICLES', 'Die nachstehende Liste zeigt alle Artikel, beginnend mit den aktuellsten.');
   define('TEXT_CURRENT_ARTICLES', 'Aktuelle Artikel');
   define('TEXT_UPCOMING_ARTICLES', 'Noch unveröffentlichte Artikel');
   define('TEXT_DATE_EXPECTED', 'Voraussichtlich:');
-
 ?>

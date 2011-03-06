@@ -91,4 +91,7 @@ define('COUPON_BUTTON_VOUCHER_REPORT', 'Gutschein Bericht');
 define('COUPON_BUTTON_PREVIEW', 'Gutscheinvorschau');
 define('COUPON_STATUS', 'Status');
 define('COUPON_STATUS_HELP', 'Ändern Sie den Status auf ' . IMAGE_ICON_STATUS_RED . ', um den Gutscheines zu sperren.');
+
+define('COUPON_BUTTON_BACK', 'Zurück');
+define('COUPON_BUTTON_CONFIRM', 'Bestätigen');
 ?>

@@ -218,20 +218,6 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
     </td>
   </tr>
 </table>
-
-<?php
-  if ($banner = tep_banner_exists('dynamic', '468x50')) {
-?>
-<br>
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    <td align="center"><?php echo tep_display_banner('static', $banner); ?></td>
-  </tr>
-
-</table>
-<?php
-  }
-?>
 <!-- footer_eof //-->
 <?php
 }

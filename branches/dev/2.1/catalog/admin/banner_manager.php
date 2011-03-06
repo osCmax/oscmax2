@@ -241,8 +241,13 @@ function popupImageWindow(url) {
 
     $groups_array = array();
     $groups_query = tep_db_query("select distinct banners_group from " . TABLE_BANNERS . " order by banners_group");
-    while ($groups = tep_db_fetch_array($groups_query)) {
-      $groups_array[] = array('id' => $groups['banners_group'], 'text' => $groups['banners_group']);
+	$groups_array[0] = array('id' => 'all', 'text' => 'all');
+	$groups_array[1] = array('id' => 'index', 'text' => 'index');
+	$groups_array[2] = array('id' => 'product', 'text' => 'product');
+	while ($groups = tep_db_fetch_array($groups_query)) {
+	  if ($groups['banners_group'] != 'all' && $groups['banners_group'] != 'index' && $groups['banners_group'] != 'product') {
+        $groups_array[] = array('id' => $groups['banners_group'], 'text' => $groups['banners_group']);
+	  }
     }
 ?>
     <tr>
@@ -263,25 +268,25 @@ function popupImageWindow(url) {
                 </tr>
                 <tr>
                   <td class="main"><?php echo TEXT_BANNERS_URL; ?></td>
-                  <td class="main"><?php echo tep_draw_input_field('banners_url', $bInfo->banners_url); ?></td>
+                  <td class="main"><?php echo tep_draw_input_field('banners_url', $bInfo->banners_url, ' size="60"'); ?></td>
                 </tr>
                 <tr>
                   <td class="main" valign="top"><?php echo TEXT_BANNERS_GROUP; ?></td>
-                  <td class="main"><?php echo tep_draw_pull_down_menu('banners_group', $groups_array, $bInfo->banners_group) . TEXT_BANNERS_NEW_GROUP . '<br>' . tep_draw_input_field('new_banners_group', '', '', ((sizeof($groups_array) > 0) ? false : true)); ?></td>
+                  <td class="main"><?php echo tep_draw_pull_down_menu('banners_group', $groups_array, $bInfo->banners_group) . TEXT_BANNERS_NEW_GROUP . '&nbsp;&nbsp;' . tep_draw_input_field('new_banners_group', '', '', ((sizeof($groups_array) > 0) ? false : true)); ?></td>
                 </tr>
                 <tr>
                   <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
                 </tr>
                 <tr>
                   <td class="main" valign="top"><?php echo TEXT_BANNERS_IMAGE; ?></td>
-                  <td class="main"><?php echo tep_draw_file_field('banners_image') . ' ' . TEXT_BANNERS_IMAGE_LOCAL . '<br>' . DIR_FS_CATALOG_IMAGES . tep_draw_input_field('banners_image_local', (isset($bInfo->banners_image) ? $bInfo->banners_image : '')); ?></td>
+                  <td class="main"><?php echo tep_draw_file_field('banners_image') . ' ' . TEXT_BANNERS_IMAGE_LOCAL . '<br>' . DIR_FS_CATALOG_IMAGES . 'banners/' . tep_draw_input_field('banners_image_local', (isset($bInfo->banners_image) ? $bInfo->banners_image : '')); ?></td>
                 </tr>
                 <tr>
                   <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
                 </tr>
                 <tr>
                   <td class="main"><?php echo TEXT_BANNERS_IMAGE_TARGET; ?></td>
-                  <td class="main"><?php echo DIR_FS_CATALOG_IMAGES . tep_draw_input_field('banners_image_target'); ?></td>
+                  <td class="main"><?php echo DIR_FS_CATALOG_IMAGES . 'banners/' . tep_draw_input_field('banners_image_target'); ?></td>
                 </tr>
                 <tr>
                   <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -294,14 +299,14 @@ function popupImageWindow(url) {
                   <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
                 </tr>
                 <tr>
-                  <td class="main"><?php echo TEXT_BANNERS_SCHEDULED_AT; ?><br><small>(yyyy-mm-dd)</small></td>
+                  <td class="main"><?php echo TEXT_BANNERS_SCHEDULED_AT; ?><br><small><?php echo TEXT_YYYY_MM_DD; ?></small></td>
                   <td valign="top" class="main"><?php echo tep_draw_input_field('date_scheduled', (isset($bInfo->date_scheduled) ? $bInfo->date_scheduled : ''), 'id="banners_scheduled"'); ?></td>
                 </tr>
                 <tr>
                   <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
                 </tr>
                 <tr>
-                  <td valign="top" class="main"><?php echo TEXT_BANNERS_EXPIRES_ON; ?><br><small>(yyyy-mm-yy)</small></td>
+                  <td valign="top" class="main"><?php echo TEXT_BANNERS_EXPIRES_ON; ?><br><small><?php echo TEXT_YYYY_MM_DD; ?></small></td>
                   <td class="main"><?php echo tep_draw_input_field('expires_date', (isset($bInfo->expires_date) ? $bInfo->expires_date : ''), 'id="banners_expires"'); ?><?php echo TEXT_BANNERS_OR_AT . '<br>' . tep_draw_input_field('expires_impressions', $bInfo->expires_impressions, 'maxlength="7" size="7"') . ' ' . TEXT_BANNERS_IMPRESSIONS; ?></td>
                 </tr>
                 <tr>
@@ -316,7 +321,7 @@ function popupImageWindow(url) {
                   <td><b><?php echo TEXT_BANNERS_HELP; ?></b></td>
                 </tr>
                 <tr class="infoBoxContent">
-                  <td class="infoBoxContent"><?php echo TEXT_BANNERS_BANNER_NOTE . '<br>' . TEXT_BANNERS_INSERT_NOTE . '<br>' . TEXT_BANNERS_EXPIRCY_NOTE . '<br>' . TEXT_BANNERS_SCHEDULE_NOTE; ?></td>
+                  <td class="infoBoxContent"><?php echo TEXT_BANNERS_BANNER_NOTE . '<br>' . TEXT_BANNERS_GROUP_NOTE . '<br>' . TEXT_BANNERS_INSERT_NOTE . '<br>' . TEXT_BANNERS_EXPIRCY_NOTE . '<br>' . TEXT_BANNERS_SCHEDULE_NOTE; ?></td>
                 </tr>
               </table>
             </td>

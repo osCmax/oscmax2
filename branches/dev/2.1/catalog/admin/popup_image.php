@@ -26,7 +26,7 @@ $Id$
         if ($banner['banners_html_text']) {
           $image_source = $banner['banners_html_text'];
         } elseif ($banner['banners_image']) {
-          $image_source = tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $banner['banners_image'], $page_title);
+          $image_source = tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'banners/' . $banner['banners_image'], $page_title);
         }
         break;
     }
@@ -41,12 +41,12 @@ var i=0;
 
 function resize() {
   if (navigator.appName == 'Netscape') i = 40;
-  window.resizeTo(document.images[0].width + 30, document.images[0].height + 60 - i);
+  window.resizeTo(document.images[0].width + 50, document.images[0].height + 100 - i);
 }
 //--></script>
 </head>
 
-<body onload="resize();">
+<body onLoad="resize();">
 
 <?php echo $image_source; ?>
 

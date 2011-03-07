@@ -163,37 +163,63 @@ define('FEMALE', 'Female');
 
 // configuration box text in includes/boxes/configuration.php
 define('BOX_HEADING_CONFIGURATION', 'Configuration');
+define('BOX_CONFIGURATION_GENERAL_SETTINGS', 'General Settings');
 define('BOX_CONFIGURATION_MYSTORE', 'My Store');
 define('BOX_CONFIGURATION_LOGGING', 'Logging');
 define('BOX_CONFIGURATION_CACHE', 'Cache');
 
 // BOF: Added for super-friendly admin menu:
-define('BOX_CONFIGURATION_MIN_VALUES', 'Min Values');
-define('BOX_CONFIGURATION_MAX_VALUES', 'Max Values');
+define('BOX_CONFIGURATION_MIN_VALUES', 'Minimum Values');
+define('BOX_CONFIGURATION_MAX_VALUES', 'Maximum Values');
 define('BOX_CONFIGURATION_IMAGES', 'Images');
 define('BOX_CONFIGURATION_CUSTOMER_DETAILS', 'Customer Details');
-define('BOX_CONFIGURATION_SHIPPING', 'Shipping');
+define('BOX_CONFIGURATION_SHIPPING', 'Shipping / Packaging');
 define('BOX_CONFIGURATION_PAGE_CACHE', 'Page Cache Settings');
+define('BOX_CONFIGURATION_PRODUCT_SETTINGS', 'Product Settings');
 define('BOX_CONFIGURATION_PRODUCT_LISTING', 'Product Listing');
 define('BOX_CONFIGURATION_PRODUCT_INFO', 'Product Information');
-define('BOX_CONFIGURATION_EMAIL', 'Email');
-define('BOX_CONFIGURATION_DOWNLOAD', 'Download');
+define('BOX_CONFIGURATION_PRODUCT_PRICE_BREAKS', 'Product Price Breaks');
+define('BOX_CONFIGURATION_EMAIL', 'Email Options');
+define('BOX_CONFIGURATION_DOWNLOAD', 'Downloads');
 define('BOX_CONFIGURATION_GZIP', 'GZip Compression');
 define('BOX_CONFIGURATION_SESSIONS', 'Sessions');
 define('BOX_CONFIGURATION_STOCK', 'Stock');
+define('BOX_CONFIGURATION_MC', 'MailChimp Newsletters');
 define('BOX_CONFIGURATION_WYSIWYG', 'CK Editor');
+define('BOX_CONFIGURATION_TEMPLATES', 'Templates');
+define('BOX_CONFIGURATION_TEMPLATE_SETUP', 'Template Setup');
+define('BOX_CONFIGURATION_PAGE_MODULES', 'Page Modules');
+define('BOX_CONFIGURATION_INFO_PAGES', 'Information Pages');
+define('BOX_CONFIGURATION_WELCOME', 'Welcome Message');
+define('BOX_CONFIGURATION_OFS', 'Open Featured Sets');
 define('BOX_CONFIGURATION_AFFILIATE', 'Affiliate Program');
 define('BOX_CONFIGURATION_ACCOUNTS', 'Accounts');
 define('BOX_CONFIGURATION_MAINTENANCE', 'Site Maintenance');
 define('BOX_CONFIGURATION_MOPICS', 'Dynamic MoPics');
 define('BOX_CONFIGURATION_PRINT', 'Printable Catalog');
 define('BOX_CONFIGURATION_SEO', 'SEO URLs');
-define('BOX_CONFIGURATION_WISHLIST', 'Wishlist Settings');
+define('BOX_CONFIGURATION_SEO_URLS', 'SEO URLs');
+define('BOX_CONFIGURATION_SEO_POPOUT', 'SEO Pop Out Menu');
+define('BOX_CONFIGURATION_WISHLIST', 'Wish List Settings');
 define('BOX_CONFIGURATION_EDITOR', 'Order Editor');
 define('BOX_CONFIGURATION_SEO_VALIDATION', 'SEO URL Validation');
 // EOF: Added for super-friendly admin menu:
 
-define('TEXT_LOGGING_CACHE', 'Logging / Cache');
+define('BOX_CONFIGURATION_LOGGING_CACHE', 'Logging / Cache');
+define('BOX_CONFIGURATION_USEFUL', 'Useful Links');
+define('BOX_CONFIGURATION_OPC', 'One Page Checkout');
+define('BOX_CONFIGURATION_CORNER_BANNERS', 'Corner Banners');
+define('BOX_CONFIGURATION_CONTACT', 'Contact Us Form');
+define('BOX_CONFIGURATION_RECAPTCHA', 'reCaptcha Form');
+define('BOX_CONFIGURATION_NOTIFICATIONS', 'Notifications');
+define('BOX_CONFIGURATION_SLIDESHOW', 'Slideshow');
+define('BOX_CONFIGURATION_SLIDESHOW_SETTINGS', 'Slideshow Settings');
+
+define('BOX_CONFIGURATION_GOOGLE', 'Google');
+define('BOX_CONFIGURATION_GOOGLE_ANALYTICS', 'Google Analytics');
+define('BOX_CONFIGURATION_GOOGLE_SITEMAP', 'Google SiteMaps');
+define('BOX_CONFIGURATION_GOOGLE_MAPS', 'Google Maps');
+
 
 // modules box text in includes/boxes/modules.php
 define('BOX_HEADING_MODULES', 'Modules');
@@ -287,7 +313,7 @@ define('BOX_TOOLS_RECOVER_CART', 'Recover Cart Sales');
 define('BOX_REPORTS_MONTHLY_SALES', 'Monthly Sales/Tax');
 
 // LINE ADDED - InfoBox Admin in includes/boxes/info_boxes.php
-define('BOX_HEADING_BOXES', 'Infobox Admin');
+define('BOX_HEADING_BOXES', 'Infoboxes');
 
 // javascript messages
 define('JS_ERROR', 'Errors have occured during the process of your form!\nPlease make the following corrections:\n\n');
@@ -523,7 +549,7 @@ define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Products'); // X-Sell
 // BOF: MOD - Article Manager
 define('BOX_HEADING_ARTICLES', 'Articles');
 define('BOX_TOPICS_ARTICLES', 'Topics/Articles');
-define('BOX_ARTICLES_CONFIG', 'Configuration');
+define('BOX_ARTICLES_CONFIG', 'Article Configuration');
 define('BOX_ARTICLES_AUTHORS', 'Authors');
 define('BOX_ARTICLES_REVIEWS', 'Reviews');
 define('BOX_ARTICLES_XSELL', 'Cross-Sell Articles');
@@ -555,10 +581,6 @@ define('BOX_REPORTS_STATS_REGISTER_CUSTOMER_NO_PURCHASE', 'No purchases report')
 // BOF: Quicker Product Edit
 define('IMAGE_ICON_EDIT', 'Quick Edit');
 // EOF: Quicker Product Edit
-
-// BOF: Google SiteMap
-define('BOX_GOOGLE_SITEMAP', 'Google SiteMaps');
-// EOF: Google SiteMap
 
 // BOF: Feed Machine
 define('BOX_CATALOG_FEEDMACHINE', 'Feedmachine');

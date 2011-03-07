@@ -98,15 +98,15 @@ $Id$
                         
                         <p><?php echo OVERVIEW_GOOGLE_SITEMAPS; ?></p>
                         <?php echo INSTRUCTIONS_STEP1_GOOGLE_SITEMAPS; ?>
-                        <center><a id="regenerate" href="<?php echo $HTTP_SERVER . DIR_WS_CATALOG . $url; ?>" title="Google Sitemaps Generation Report"><?php echo tep_image_button('button_regenerate.gif', IMAGE_REGENERATE); ?></a></center>
+                        <center><a id="regenerate" href="<?php echo $HTTP_SERVER . DIR_WS_CATALOG . $url; ?>" title="<?php echo TEXT_SITEMAP_REPORT; ?>"><?php echo tep_image_button('button_regenerate.gif', IMAGE_REGENERATE); ?></a></center>
 
                         <div id="ping">
                         <p><?php echo INSTRUCTIONS_NOTE_GOOGLE_SITEMAPS; ?></p>
                         <p><?php echo INSTRUCTIONS_STEP2_GOOGLE_SITEMAPS; ?></p>
                         <center>
-                        <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(google); ?>" title="Google Sitemaps Ping"><?php echo tep_image_button('button_google.gif', IMAGE_PING); ?></a>
-                        <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(ask); ?>" title="Ask Sitemaps Ping"><?php echo tep_image_button('button_ask.gif', IMAGE_PING); ?></a>
-                        <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(bing); ?>" title="Bing Sitemaps Ping"><?php echo tep_image_button('button_bing.gif', IMAGE_PING); ?></a>
+                        <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(google); ?>" title="<?php echo TEXT_GOOGLE_PING; ?>"><?php echo tep_image_button('button_google.gif', IMAGE_PING); ?></a>
+                        <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(ask); ?>" title="<?php echo TEXT_ASK_PING; ?>"><?php echo tep_image_button('button_ask.gif', IMAGE_PING); ?></a>
+                        <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(bing); ?>" title="<?php echo TEXT_BING_PING; ?>"><?php echo tep_image_button('button_bing.gif', IMAGE_PING); ?></a>
                         </center>
                         </div>
                         

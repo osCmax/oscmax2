@@ -24,4 +24,8 @@ define('COMPLETE_GOOGLE_SITEMAPS', '<b>Sitemap processing complete.</b>');
 define('IMAGE_REGENERATE', 'Regenerate');
 define('IMAGE_LOGIN', 'Login');
 define('IMAGE_PING', 'Ping');
+define('TEXT_SITEMAP_REPORT', 'Google Sitemaps Generation Report');
+define('TEXT_GOOGLE_PING', 'Google Sitemaps Ping');
+define('TEXT_ASK_PING', 'Ask Sitemaps Ping');
+define('TEXT_BING_PING', 'Bing Sitemaps Ping');
 ?>

@@ -139,6 +139,9 @@ $Id$
  */
 
     function add_text($text = '') {
+      // BOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
+      if (strtolower(CHARSET) != 'utf-8') $text = utf8_encode($text);
+      // EOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
       $this->text = tep_convert_linefeeds(array("\r\n", "\n", "\r"), $this->lf, $text);
     }
 
@@ -149,6 +152,10 @@ $Id$
  */
 
     function add_html($html, $text = NULL, $images_dir = NULL) {
+	  // BOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
+      if (strtolower(CHARSET) != 'utf-8') $html = utf8_encode($html);
+      if (strtolower(CHARSET) != 'utf-8') $text = utf8_encode($text);
+      // EOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
       $this->html = tep_convert_linefeeds(array("\r\n", "\n", "\r"), '<br>', $html);
       $this->html_text = tep_convert_linefeeds(array("\r\n", "\n", "\r"), $this->lf, $text);
 

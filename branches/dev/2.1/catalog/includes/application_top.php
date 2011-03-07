@@ -303,6 +303,18 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
 // include the language translations
   require(DIR_WS_LANGUAGES . $language . '/core.php');
+  
+// BOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
+  switch (strtolower(CHARSET)) {
+    case 'utf-8':
+      tep_db_query("SET character set utf8");
+      break;
+    case 'iso-8859-1':
+      tep_db_query("SET character set latin1");
+      break;
+  }
+// EOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
+
 // include the language locale
   require(DIR_WS_LANGUAGES . $language . '/locale/locale.php');
 // LINE ADDED - CREDIT CLASS Gift Voucher Contribution

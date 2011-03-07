@@ -11,10 +11,7 @@ $Id$
 */
 
   require('includes/application_top.php');
-// BOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
-// Start redirecting output to the output buffer
-  if (strtolower(CHARSET) == 'utf-8') ob_start();
-// EOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
+
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -145,21 +142,3 @@ $Id$
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
 </body>
 </html>
-<?php
-// BOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
-  if (strtolower(CHARSET) == 'utf-8') {
-  
-  // Store captured output buffer as variable
-    $buffer = ob_get_contents();
-  
-  // Clean up some RAM
-    ob_end_clean();
-    
-   // Encode buffer to unicode characters
-    $buffer = utf8_encode($buffer);
-
-   // Out put the buffer
-    echo $buffer;
-  }
-// EOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
-?>

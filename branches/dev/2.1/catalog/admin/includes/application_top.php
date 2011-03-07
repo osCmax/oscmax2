@@ -176,6 +176,17 @@ $Id$
   }
 // EOF: [TiM's osC Solutions] Display english for missing language files
 
+// BOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
+  switch (strtolower(CHARSET)) {
+    case 'utf-8':
+      tep_db_query("SET character set utf8");
+      break;
+    case 'iso-8859-1':
+      tep_db_query("SET character set latin1");
+      break;
+  }
+// EOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
+
 // LINE ADDED - CREDIT CLASS Gift Voucher Contribution
 require(DIR_WS_LANGUAGES . $language . '/add_ccgvdc.php');
 

@@ -43,12 +43,12 @@ $Id$
     <td width="100%" valign="top">
       <table width="100%" border="0" cellspacing="0" cellpadding="2">
         <tr>
-          <td class="pageHeading" width="75%">Premade Order Comments</td>
+          <td class="pageHeading" width="75%"><?php echo HEADING_TITLE; ?></td>
           <td width="25%">&nbsp;</td>
         </tr>
         <tr class="dataTableHeadingRow">
           <td class="dataTableHeadingContent">&nbsp;</td>
-          <td class="infoBoxHeading">Premade Order Comments</td>
+          <td class="infoBoxHeading"><?php echo HEADING_TITLE; ?></td>
         </tr>
         <tr>
           <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
@@ -56,19 +56,20 @@ $Id$
           <?php
             if ($_POST[submit]) {
 		  ?>
-			  You have saved your change to your Premade comment.
+            <table width="100%"><tr><td class="messageStackSuccess"><?php echo TEXT_SAVED_COMMENT; ?></td></tr></table>
           <?php	
 			} elseif ($_POST[delete]) {
 		  ?>
-			  You have deleted a Premade comment.
+            <table width="100%"><tr><td class="messageStackWarning"><?php echo TEXT_DELETED_COMMENT; ?></td></tr></table>
+			  
           <?php	
-			} elseif ($_POST[add]) {
+			} elseif ( ($_POST[add]) && ($err != "") ) {
 		  ?>
-			  You have added a new Premade comment.
+            <table width="100%"><tr><td class="messageStackSuccess"><?php echo TEXT_ADDED_COMMENT; ?></td></tr></table>
           <?php	
 			} else {
 		  ?>
-              Please either <b>Select</b> an existing Premade Comment from the drop down list or <b>Add new</b> comment.
+              <?php echo TEXT_INSTRUCTIONS_DEFAULT; ?>
 		  <?php
 		    } // end if
 		  ?>
@@ -82,13 +83,13 @@ $Id$
 				$err = "";
 				
 				if (!$_POST[title]) {
-					$err .= "The required field <b>Title</b> is missing.<br>";
+					$err .= ERROR_TITLE;
 				}
 				if (!$_POST[text]) {
-				    $err .= "The required field <b>Text</b> is missing.<br>";
+				    $err .= ERROR_TEXT;
 				}
 				if ($namecheck[title] and ($_POST[title] !== $_POST[old_title])) {
-					$err .= "Category already exists.<br>";
+					$err .= ERROR_COMMENT;
 				}
 				if (!$err) {
 					$query_sql = "UPDATE orders_premade_comments SET title='$_POST[title]', text='$_POST[text]' WHERE id=$_POST[p_id]";
@@ -103,10 +104,10 @@ $Id$
 			elseif ($_POST[add]) {
 				$err = "";
 				if (!$_POST[title]) {
-					$err .= "The required field <b>Title</b> is missing.<br>";
+					$err .= ERROR_TITLE;
 				}
 				if (!$_POST[text]) {
-				    $err .= "The required field <b>Text</b> is missing.<br>";
+				    $err .= ERROR_TEXT;
 				}
 				if (!$err) {
 					mysql_query("INSERT INTO orders_premade_comments (title, text) VALUES ('$_POST[title]', '$_POST[text]')");
@@ -126,7 +127,7 @@ $Id$
     	        <input type="hidden" name="p_id" value="<?php echo $_POST[p_id]; ?>">
 				  <table border="0" cellspacing="3" cellpadding="0">
                     <tr>
-                      <td class="main" width="120"><b>Premade Replies:</b></td>
+                      <td class="main" width="120"><b><?php echo TEXT_PREMADE_REPLIES; ?></b></td>
                       <td><?php echo tep_draw_separator('pixel_trans.gif', '5', '5'); ?></td>
                       <td>
 						<select name="p_id">
@@ -143,9 +144,9 @@ $Id$
                         </select>
                       </td>
                       <td><?php echo tep_draw_separator('pixel_trans.gif', '5', '5'); ?></td>
-                      <td><input type="submit" name="select" value="Select" class="inputsubmit"></td>
+                      <td><input type="submit" name="select" value="<?php echo BUTTON_SELECT; ?>" class="inputsubmit"></td>
                       <td><?php echo tep_draw_separator('pixel_trans.gif', '5', '5'); ?></td>
-                      <td><input type="submit" name="submit_new" value="Add New" class="inputsubmit"></td>
+                      <td><input type="submit" name="submit_new" value="<?php echo BUTTON_ADD_NEW; ?>" class="inputsubmit"></td>
                     </tr>
                     <tr>
                       <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '10'); ?></td>
@@ -172,39 +173,39 @@ $Id$
                   $premade = mysql_fetch_array(mysql_query("SELECT * FROM orders_premade_comments WHERE id='".$_POST['p_id']."'"));
                 ?> 
                 	<tr>
-                      <td class="main" colspan="2"><b>Edit Premade Comment:</b></td>
+                      <td class="main" colspan="2"><b><?php echo TEXT_EDIT_COMMENT; ?></b></td>
                     </tr>
                      <input type="hidden" name="old_title" value="<?php echo $premade[title]; ?>">
 				    <tr>
-                      <td class="main" width="120"><b>Title:</b></td>
+                      <td class="main" width="120"><b><?php echo TEXT_TITLE; ?></b></td>
                       <td class="mainTableAlt"><input type="text" name="title" value="<?php echo $premade[title]; ?>" size="60"></td>
                     </tr>
 				    <tr>
-                      <td class="main" valign="top"><b>Text:</b></td>
+                      <td class="main" valign="top"><b><?php echo TEXT_TEXT; ?></b></td>
                       <td class="mainTableAlt"><textarea name="text" cols="58" rows="10"><?php echo $premade[text]; ?></textarea></td>
                     </tr>
                     <tr>
-                      <td colspan="2" align="right"><input class="inputsubmit" type="submit" name="delete" value="Delete">
+                      <td colspan="2" align="right"><input class="inputsubmit" type="submit" name="delete" value="<?php echo BUTTON_DELETE; ?>">
                       	  <?php echo tep_draw_separator('pixel_trans.gif', '5', '5'); ?>
-				  		  <input class="inputsubmit" type="submit" name="submit" value="Save Changes"></td>
+				  		  <input class="inputsubmit" type="submit" name="submit" value="<?php echo BUTTON_SAVE_CHANGES; ?>"></td>
                     </tr>
 				  </table>
 				<?php
 				} elseif ($_POST[submit_new] or $_POST[submit] or $_POST[add] or $_POST[delete]) { // Create New
 				?>
                     <tr>
-                      <td class="main" colspan="2"><b>Create New Premade Comment:</b></td>
+                      <td class="main" colspan="2"><b><?php echo TEXT_CREATE_COMMENT; ?></b></td>
                     </tr>
                     <tr>
-                      <td class="main" width="120"><b>Title:</b></td>
+                      <td class="main" width="120"><b><?php echo TEXT_TITLE; ?></b></td>
                       <td class="mainTableAlt"><input type="text" name="title" size="60"></td>
                     </tr>
 					<tr>
-                      <td class="main" valign="top"><b>Text:</b></td>
+                      <td class="main" valign="top"><b><?php echo TEXT_TEXT; ?></b></td>
                       <td class="mainTableAlt"><textarea name="text" cols="58" rows="10"></textarea></td>
                     </tr>
                     <tr>
-                      <td colspan="2" align="right"><input class="inputsubmit" type="submit" name="add" value="Create Reply"></td>
+                      <td colspan="2" align="right"><input class="inputsubmit" type="submit" name="add" value="<?php echo BUTTON_CREATE_REPLY; ?>"></td>
                     </tr>
 				  </table>
 				  

@@ -94,4 +94,7 @@ define('TEXT_ORDER_SUMMARY', 'Order Summary');
 
 define('TEXT_ORDER_ID', 'Order No:');
 define('TEXT_ORDER_DATE_TIME', 'Order Date &amp; Time');
+
+define('OPTION_SELECT_COMMENT', 'Select a comment ...');
+define('OPTION_NAME_OF_CUSTOMER', 'Customer name');
 ?>

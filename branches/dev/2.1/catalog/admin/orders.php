@@ -497,7 +497,8 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
                                         	<td valign="top">
 <!-- BOF: Canned Comments -->
 												<select name="responses" onChange="setMessage()">
-													<option value="">Select a comment..</option>
+													<option value=""><?php echo OPTION_SELECT_COMMENT; ?></option>
+                                                    <option value="<?php echo $order->customer['name']; ?>"><?php echo OPTION_NAME_OF_CUSTOMER; ?></option>
 													<?php
 														$get_premades_query = tep_db_query("select * from " . TABLE_ORDERS_PREMADE_COMMENTS . " order by id");
 														while($result = mysql_fetch_array($get_premades_query)) {

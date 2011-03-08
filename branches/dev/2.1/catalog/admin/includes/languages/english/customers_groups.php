@@ -39,4 +39,8 @@ define('ERROR_CUSTOMERS_GROUP_NAME', 'Please enter a Group Name');
 define('TEXT_SORT', 'Sort ');
 define('TEXT_ABC', ' --> A-B-C From Top');
 define('TEXT_ZYX', ' --> Z-Y-X From Top');
+
+define('TEXT_MAXIMUM_LENGTH', '&#160;&#160;Maximum length: 32 characters');
+define('TEXT_GROUP_SHOW_TEXT_1', '&#160;&#160;This Setting only works when <b>Display Prices with Tax</b>');
+define('TEXT_GROUP_SHOW_TEXT_2', 'is set to true in the Configuration for your store and Tax Exempt (below) to <b>No</b>.');
 ?>

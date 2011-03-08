@@ -173,15 +173,15 @@ $Id$
         <td class="formArea"><table border="0" cellspacing="2" cellpadding="2">
           <tr>
             <td class="main"><?php echo ENTRY_GROUPS_NAME; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('customers_group_name', $cInfo->customers_group_name, 'maxlength="32"', false); ?> &#160;&#160;Maximum length: 32 characters</td>
+            <td class="main"><?php echo tep_draw_input_field('customers_group_name', $cInfo->customers_group_name, 'maxlength="32"', false); ?><?php echo TEXT_MAXIMUM_LENGTH; ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo ENTRY_GROUP_SHOW_TAX; ?></td>
-            <td class="main"><?php echo tep_draw_pull_down_menu('customers_group_show_tax', $cg_show_tax_array, (($cInfo->customers_group_show_tax == '1') ? '1' : '0')); ?> &#160;&#160;This Setting only works when 'Display Prices with Tax'</td>
+            <td class="main"><?php echo tep_draw_pull_down_menu('customers_group_show_tax', $cg_show_tax_array, (($cInfo->customers_group_show_tax == '1') ? '1' : '0')); ?> <?php echo TEXT_GROUP_SHOW_TEXT_1; ?></td>
           </tr>
           <tr>
             <td class="main">&#160;</td>
-            <td class="main" style="line-height: 2">is set to true in the Configuration for your store and Tax Exempt (below) to 'No'. </td>
+            <td class="main" style="line-height: 2"><?php echo TEXT_GROUP_SHOW_TEXT_2; ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo ENTRY_GROUP_TAX_EXEMPT; ?></td>
@@ -228,7 +228,7 @@ $Id$
  } // end for ($i = 0, $n = sizeof($directory_array); $i < $n; $i++)
 ?>
        <tr>
-           <td class="main" style="padding-left: 30px; padding-right: 10px; padding-top: 10px;"><?php echo ENTRY_PAYMENT_SET_EXPLAIN ?></td>
+           <td class="main" style="padding-left: 30px; padding-right: 10px; padding-top: 10px;"><?php echo ENTRY_PAYMENT_SET_EXPLAIN; ?></td>
            </tr>
         </table></td>
       </tr>
@@ -330,11 +330,11 @@ $Id$
             <tr>
               <td class="main"><?php echo ENTRY_GROUP_SHOW_TAX; ?></td>
               <td class="main"><?php
-              echo tep_draw_pull_down_menu('customers_group_show_tax', $cg_show_tax_array, '1'); ?>  This Setting only works when 'Display Prices with Tax'</td>
+              echo tep_draw_pull_down_menu('customers_group_show_tax', $cg_show_tax_array, '1'); ?><?php echo TEXT_GROUP_SHOW_TEXT_1; ?></td>
             </tr>
             <tr>
               <td class="main">&#160;</td>
-              <td class="main" style="line-height: 2"> is set to true in the Configuration for your store and Tax Exempt (below) to 'No'.</td>
+              <td class="main" style="line-height: 2"><?php echo TEXT_GROUP_SHOW_TEXT_2; ?></td>
             </tr>
             <tr>
               <td class="main"><?php echo ENTRY_GROUP_TAX_EXEMPT; ?></td>

@@ -46,4 +46,8 @@ $Id$
 	define('NEW_PACKAGE', 'Create new package');
 	define('NO_PACKAGES_DEFINED', "No packages have been defined.");
 	define('UPDATE_PACKAGE', 'Update package');
+	
+	define('IMAGE_NEW_PACKAGE', 'New Package');
+	define('IMAGE_SAVE_AS_NEW', 'Save these values as a new package.');
+	define('IMAGE_UPDATE_PACKAGE', 'Update the package with these values.');
 ?>

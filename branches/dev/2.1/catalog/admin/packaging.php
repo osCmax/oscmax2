@@ -176,7 +176,7 @@ function DisplayPackages($activeid,$error) {
         }
     }
     echo '</td></tr></table><br>'."\n";
-    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=shownewpackageform') .  '">'.tep_image_button('button_new_package.gif', 'New Package').'</a>&nbsp;';
+    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=shownewpackageform') .  '">'.tep_image_button('button_new_package.gif', IMAGE_NEW_PACKAGE).'</a>&nbsp;';
     if ($activeid == "") {
         $activeid = $packages[0]['id'];
         }
@@ -209,7 +209,7 @@ function showNewPackageForm() {
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_EMPTY_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_EMPTY_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("empty_weight").'</td></tr>'."\n";
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_MAX_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_MAX_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("max_weight").'</td></tr>'."\n";
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_COST.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_COST_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("cost", $cost).'</td></tr>';
-    echo '<tr><td colspan="2">'. tep_image_submit('button_update.gif', 'Save these values as a new package.') ;
+    echo '<tr><td colspan="2">'. tep_image_submit('button_update.gif', IMAGE_SAVE_AS_NEW) ;
     echo '&nbsp;&nbsp;<a href="' . tep_href_link( FILENAME_PACKAGING ) . '">'.tep_image_button('button_cancel.gif', IMAGE_CANCEL) .'</A>' ;	 
     echo "</td></tr></table>" ;
     echo ("</form>");
@@ -239,7 +239,7 @@ function showUpdatePackageForm() {
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_EMPTY_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_EMPTY_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("empty_weight", $activepackage['empty_weight']).'</td></tr>'."\n";
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_MAX_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_MAX_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("max_weight", $activepackage['max_weight']).'</td></tr>'."\n";
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_COST.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_COST_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("cost", $activepackage['cost']).'</td></tr>';
-    echo '<tr><td colspan="2">'. tep_image_submit('button_update.gif', 'Update the package with these values.') ;
+    echo '<tr><td colspan="2">'. tep_image_submit('button_update.gif', IMAGE_UPDATE_PACKAGE) ;
     echo '&nbsp;&nbsp;<a href="' . tep_href_link( FILENAME_PACKAGING,'id='.$activepackage['id'] ) . '">'.tep_image_button('button_cancel.gif', IMAGE_CANCEL) .'</a>'."\n";	 
     echo "</td></tr></table>\n" ;
     echo ("</form>\n");

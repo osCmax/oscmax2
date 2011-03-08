@@ -231,7 +231,7 @@ if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
 
         $contents[] = array('text' => '<br>' . TEXT_INFO_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
         if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
-        $contents[] = array('text' => '<br>There are currently <br>'. $count_left . ' boxes in the left column and <br>'. $count_right . ' boxes in the right column');
+        $contents[] = array('text' => '<br>' . COUNT_1 . '<br>'. $count_left . COUNT_2 . '<br>' . $count_right . COUNT_3);
       }
     break;
   }

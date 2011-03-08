@@ -56,4 +56,8 @@ define('TEXT_INFOBOX_HELP_ACTIVE', 'Select <b>yes</b> or <b>no</b>. <br><br><b>y
 
 define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');
 
+define('COUNT_1', 'There are currently: ');
+define('COUNT_2', ' boxes in the left column and ');
+define('COUNT_3', ' boxes in the right column.');
+
 ?>

@@ -250,7 +250,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
 // BOF: MOD - Downloads Controller - Extra order info
 ?>
               <tr>
-                <td class="main"><b><?php echo 'FAX #:'; ?></b></td>
+                <td class="main"><b><?php echo ENTRY_FAX_NUMBER; ?></b></td>
                 <td class="main"><?php echo $the_customers_fax; ?></td>
               </tr>
 <?php

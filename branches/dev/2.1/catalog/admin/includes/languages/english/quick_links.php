@@ -20,7 +20,7 @@ define('TABLE_HEADING_QUICK_LINKS_TARGET', 'Target');
 define('TABLE_HEADING_QUICK_LINKS_SORT_ORDER', 'Sort Order');
 define('TABLE_HEADING_QUICK_LINKS_CG', 'Groups');
 
-define('TEXT_QUICK_LINKS_INSERT_INTRO', 'Please insert a new quick link:');
+define('TEXT_QUICK_LINKS_INSERT_INTRO', 'Please insert details of new quick link:');
 define('TEXT_QUICK_LINKS_NAME', 'Link Name'); 
 define('TEXT_QUICK_LINKS_IMAGE', 'Link Icon');
 define('TEXT_QUICK_LINKS_LINK', 'Link Details');
@@ -36,5 +36,5 @@ define('TEXT_INFO_HEADING_NEW_QUICK_LINKS', 'New Quick Link');
 define('TEXT_INFO_HEADING_EDIT_QUICK_LINKS', 'Edit Quick Link');
 define('TEXT_INFO_HEADING_DELETE_QUICK_LINKS', 'Delete Quick Link');
 
-define('TEXT_INFO_EDIT_INTRO', 'Enter your new quick link details below:');
+define('TEXT_INFO_EDIT_INTRO', 'Edit your quick link details below:');
 ?>

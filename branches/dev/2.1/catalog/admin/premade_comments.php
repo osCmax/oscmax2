@@ -11,6 +11,7 @@ $Id$
 */
 
   require('includes/application_top.php');
+  $err = "";
 
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -54,16 +55,16 @@ $Id$
           <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
           <td rowspan="4" class="infoBoxContent" valign="top">
           <?php
-            if ($_POST[submit]) {
+            if ( (isset($_POST['submit'])) && ($_POST['submit']) ) {
 		  ?>
             <table width="100%"><tr><td class="messageStackSuccess"><?php echo TEXT_SAVED_COMMENT; ?></td></tr></table>
           <?php	
-			} elseif ($_POST[delete]) {
+			} elseif ( (isset($_POST['delete'])) && ($_POST['delete']) )  {
 		  ?>
             <table width="100%"><tr><td class="messageStackWarning"><?php echo TEXT_DELETED_COMMENT; ?></td></tr></table>
 			  
           <?php	
-			} elseif ( ($_POST[add]) && ($err != "") ) {
+			} elseif ( (isset($_POST['add'])) && ($_POST['add']) && ($err != "") ) {
 		  ?>
             <table width="100%"><tr><td class="messageStackSuccess"><?php echo TEXT_ADDED_COMMENT; ?></td></tr></table>
           <?php	
@@ -78,44 +79,44 @@ $Id$
         <tr>
           <td>
           <?php
-          if ($_POST[submit]) {
-				$namecheck = mysql_fetch_array(mysql_query("SELECT * FROM orders_premade_comments WHERE title='$_POST[title]'"));
+          if ( (isset($_POST['submit'])) && ($_POST['submit']) ) {
+				$namecheck = mysql_fetch_array(mysql_query("SELECT * FROM " . TABLE_ORDERS_PREMADE_COMMENTS . " WHERE title = '" . $_POST['title'] . "'"));
 				$err = "";
 				
-				if (!$_POST[title]) {
+				if (!$_POST['title']) {
 					$err .= ERROR_TITLE;
 				}
-				if (!$_POST[text]) {
+				if (!$_POST['text']) {
 				    $err .= ERROR_TEXT;
 				}
-				if ($namecheck[title] and ($_POST[title] !== $_POST[old_title])) {
+				if ($namecheck['title'] && ($_POST['title'] !== $_POST['old_title'])) {
 					$err .= ERROR_COMMENT;
 				}
 				if (!$err) {
-					$query_sql = "UPDATE orders_premade_comments SET title='$_POST[title]', text='$_POST[text]' WHERE id=$_POST[p_id]";
-					mysql_query($query_sql);
+					tep_db_query("UPDATE " . TABLE_ORDERS_PREMADE_COMMENTS . " SET title = '" . $_POST['title'] . "', text = '" . $_POST['text'] . "' WHERE id = '" . $_POST['p_id'] . "'");
 				}
-				$inc = "premade";
 			}
-			elseif ($_POST[delete]) {
-				mysql_query("DELETE FROM orders_premade_comments WHERE id=$_POST[p_id]");
-			
+			elseif ( (isset($_POST['delete'])) && ($_POST['delete']) ) {
+				tep_db_query("DELETE FROM " . TABLE_ORDERS_PREMADE_COMMENTS . " WHERE id = '" . $_POST['p_id'] . "'");
 			}
-			elseif ($_POST[add]) {
+			elseif ( (isset($_POST['add'])) && ($_POST['add']) ) {
+				
+				$namecheck = mysql_fetch_array(mysql_query("SELECT * FROM " . TABLE_ORDERS_PREMADE_COMMENTS . " WHERE title = '" . $_POST['title'] . "'"));
+				
 				$err = "";
-				if (!$_POST[title]) {
+				if (!$_POST['title']) {
 					$err .= ERROR_TITLE;
 				}
-				if (!$_POST[text]) {
+				if (!$_POST['text']) {
 				    $err .= ERROR_TEXT;
 				}
-				if (!$err) {
-					mysql_query("INSERT INTO orders_premade_comments (title, text) VALUES ('$_POST[title]', '$_POST[text]')");
+				if ( (!empty($namecheck)) && (!$err) )  {
+					$err .= ERROR_COMMENT_FIX;
+					tep_db_query("INSERT INTO " . TABLE_ORDERS_PREMADE_COMMENTS . " (title, text) VALUES ('" . $_POST['title'] . TEXT_DUPLICATE . "', '" . $_POST['text'] . "')");
 				}
-				$inc = "premade";
-			}
-			else {
-				$inc = "premade";
+				if (!$err) {
+					tep_db_query("INSERT INTO " . TABLE_ORDERS_PREMADE_COMMENTS . " (title, text) VALUES ('" . $_POST['title'] . "', '" . $_POST['text'] . "')");
+				}
 			}
 			?>
 			
@@ -124,20 +125,19 @@ $Id$
                 <td>
      			<form action="" method="post">
 	            <input type="hidden" name="a" value="premade">
-    	        <input type="hidden" name="p_id" value="<?php echo $_POST[p_id]; ?>">
+    	        <input type="hidden" name="p_id" value="<?php echo $_POST['p_id']; ?>">
 				  <table border="0" cellspacing="3" cellpadding="0">
                     <tr>
-                      <td class="main" width="120"><b><?php echo TEXT_PREMADE_REPLIES; ?></b></td>
-                      <td><?php echo tep_draw_separator('pixel_trans.gif', '5', '5'); ?></td>
+                      <td class="main" width="200"><b><?php echo TEXT_PREMADE_REPLIES; ?></b></td>
                       <td>
 						<select name="p_id">
 
 						<?php
-                        $premades = mysql_query("SELECT * FROM orders_premade_comments order by title");
-                          while ($premade = mysql_fetch_array($premades)) {
+                        $premades = mysql_query("SELECT * FROM " . TABLE_ORDERS_PREMADE_COMMENTS . " order by title");
+                          while ($premade = tep_db_fetch_array($premades)) {
                               $selected = ($premade[id] == $p_id) ? " SELECTED": "";
                         ?>
-                          <option value="<?php echo $premade[id]; ?>"<?php echo $selected; ?>><?php echo $premade[title]; ?></option>
+                          <option value="<?php echo $premade['id']; ?>"<?php echo $selected; ?>><?php echo $premade['title']; ?></option>
 						<?php
 						  } // end while
 						?>
@@ -168,21 +168,24 @@ $Id$
                   <table border="0" cellspacing="3" cellpadding="0" class="TableMsg">
 				    
 				<?php
-                if (!$_POST[p_id]) { $_POST[submit_new] = true; }
-                if ($_POST[select]) {
-                  $premade = mysql_fetch_array(mysql_query("SELECT * FROM orders_premade_comments WHERE id='".$_POST['p_id']."'"));
+                if ( (isset($_POST['p_id'])) && (!$_POST['p_id']) ) { $_POST['submit_new'] = true; }
+                if ( (isset($_POST['select'])) && ($_POST['select']) ) {
+					
+			      $premade_query = tep_db_query("SELECT * FROM " . TABLE_ORDERS_PREMADE_COMMENTS . " where id = " . $_POST['p_id']);
+                  $premade = tep_db_fetch_array($premade_query);
+					
                 ?> 
                 	<tr>
                       <td class="main" colspan="2"><b><?php echo TEXT_EDIT_COMMENT; ?></b></td>
                     </tr>
-                     <input type="hidden" name="old_title" value="<?php echo $premade[title]; ?>">
+                     <input type="hidden" name="old_title" value="<?php echo $premade['title']; ?>">
 				    <tr>
-                      <td class="main" width="120"><b><?php echo TEXT_TITLE; ?></b></td>
-                      <td class="mainTableAlt"><input type="text" name="title" value="<?php echo $premade[title]; ?>" size="60"></td>
+                      <td class="main" width="200" align="right"><b><?php echo TEXT_TITLE; ?></b></td>
+                      <td class="mainTableAlt"><input type="text" name="title" value="<?php echo $premade['title']; ?>" size="60"></td>
                     </tr>
 				    <tr>
-                      <td class="main" valign="top"><b><?php echo TEXT_TEXT; ?></b></td>
-                      <td class="mainTableAlt"><textarea name="text" cols="58" rows="10"><?php echo $premade[text]; ?></textarea></td>
+                      <td class="main" valign="top" align="right"><b><?php echo TEXT_TEXT; ?></b></td>
+                      <td class="mainTableAlt"><textarea name="text" cols="58" rows="10"><?php echo $premade['text']; ?></textarea></td>
                     </tr>
                     <tr>
                       <td colspan="2" align="right"><input class="inputsubmit" type="submit" name="delete" value="<?php echo BUTTON_DELETE; ?>">
@@ -191,17 +194,17 @@ $Id$
                     </tr>
 				  </table>
 				<?php
-				} elseif ($_POST[submit_new] or $_POST[submit] or $_POST[add] or $_POST[delete]) { // Create New
+				} else { // Create New
 				?>
                     <tr>
                       <td class="main" colspan="2"><b><?php echo TEXT_CREATE_COMMENT; ?></b></td>
                     </tr>
                     <tr>
-                      <td class="main" width="120"><b><?php echo TEXT_TITLE; ?></b></td>
+                      <td class="main" width="200" align="right"><b><?php echo TEXT_TITLE; ?></b></td>
                       <td class="mainTableAlt"><input type="text" name="title" size="60"></td>
                     </tr>
 					<tr>
-                      <td class="main" valign="top"><b><?php echo TEXT_TEXT; ?></b></td>
+                      <td class="main" valign="top" align="right"><b><?php echo TEXT_TEXT; ?></b></td>
                       <td class="mainTableAlt"><textarea name="text" cols="58" rows="10"></textarea></td>
                     </tr>
                     <tr>

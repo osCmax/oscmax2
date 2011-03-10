@@ -76,19 +76,19 @@ $Id$
           <tr bgcolor="#E7E7E7">
             <td colspan="2" align="center" valign="middle">
                 <?php echo tep_draw_form('login', FILENAME_PASSWORD_FORGOTTEN, 'action=process'); ?>
-                            <table width="280" border="0" cellspacing="0" cellpadding="2">
+                            <table width="320" border="0" cellspacing="0" cellpadding="2">
                               <tr>
                                 <td class="login_heading" valign="top">&nbsp;<b><?php echo HEADING_PASSWORD_FORGOTTEN; ?></b></td>
                               </tr>
                               <tr>
                                 <td width="100%" valign="top" align="center" style="height:100%">
-                                <table border="0" width="100%" cellspacing="0" cellpadding="1" bgcolor="#666666" style="height:100%;">
+                                <table border="0" width="100%" cellspacing="0" cellpadding="1" bgcolor="#666666" style="height:100%; width:100%;">
                                   <tr><td><table border="0" width="100%" cellspacing="3" cellpadding="2" bgcolor="#F3F3F3" style="height:100%;">
 
 <?php
-  if ($_GET['login'] == 'success') {
+  if (isset($_GET['login']) && ($_GET['login'] == 'success') ) {
     $success_message = TEXT_FORGOTTEN_SUCCESS;
-  } elseif ($_GET['login'] == 'fail') {
+  } elseif (isset($_GET['login']) && ($_GET['login'] == 'fail') ) {
     $info_message = TEXT_FORGOTTEN_ERROR;
   }
   if (tep_session_is_registered('password_forgotten')) {
@@ -125,11 +125,11 @@ $Id$
     }
 ?>                                    
                                     <tr>
-                                      <td class="login"><?php echo ENTRY_USERNAME; ?></td>
+                                      <td class="login" align="right"><?php echo ENTRY_USERNAME; ?></td>
                                       <td class="login"><?php echo tep_draw_input_field('username'); ?></td>
                                     </tr>
                                     <tr>
-                                      <td class="login"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
+                                      <td class="login" align="right"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
                                       <td class="login"><?php echo tep_draw_input_field('email_address'); ?></td>
                                     </tr>
                                     <tr>

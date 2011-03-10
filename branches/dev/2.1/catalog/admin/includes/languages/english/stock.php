@@ -24,4 +24,7 @@ define('TEXT_LOST_PRODUCT', '<span style="font-family: Verdana, Arial, sans-seri
 
 define('HEADING_DEFAULT_STOCK', 'Product Stock Level');
 define('TEXT_DEFAULT_STOCK','Please select your product attributes from the drop down menus and then click on <b>Add</b> to create that combination.<br><br>QTPro will automatically set your overall stock level for this product to the combined total of the tracked attributes.<br><br>Please check the panel titled <b>QTPro Doctor</b> to check your current products stock setup.  If you notice a warning then please read to solutions section shown underneath.  If an automatic fix is possible this will be shown at the bottom of the box.');
+
+define('TEXT_UPDATE', 'Update');
+define('TEXT_ADD', 'Add');
 ?>

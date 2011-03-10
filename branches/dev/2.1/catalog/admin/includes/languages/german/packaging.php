@@ -46,4 +46,8 @@ $Id$
 	define('NEW_PACKAGE', 'Neues Packstück erstellen');
 	define('NO_PACKAGES_DEFINED', 'Es wurden keine Packstücke definiert.');
 	define('UPDATE_PACKAGE', 'Packstück aktualisieren');
+
+	define('IMAGE_NEW_PACKAGE', 'Neues Packstück');
+	define('IMAGE_SAVE_AS_NEW', 'Werte für ein neues Packstück speichern.');
+	define('IMAGE_UPDATE_PACKAGE', 'Packstück mit diesen Werten aktualisieren.');
 ?>

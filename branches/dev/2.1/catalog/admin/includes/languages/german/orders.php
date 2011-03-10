@@ -76,7 +76,7 @@ define('EMAIL_TEXT_ORDER_NUMBER', 'Bestell-Nr.:');
 define('EMAIL_TEXT_INVOICE_URL', 'Ihre Bestellung können Sie unter folgender Adresse einsehen:');
 define('EMAIL_TEXT_DATE_ORDERED', 'Bestelldatum:');
 define('EMAIL_TEXT_STATUS_UPDATE', 'Der Status Ihrer Bestellung wurde geändert.' . "\n\n" . 'Neuer Status: %s' . "\n\n" . 'Bei Fragen zu Ihrer Bestellung antworten Sie bitte auf diese eMail.' . "\n\n" . 'Mit freundlichen Grüßen' . "\n");
-define('EMAIL_TEXT_COMMENTS_UPDATE', 'Anmerkungen und Kommentare zu Ihrer Bestellung:' . "\n\n%s\n\n");
+define('EMAIL_TEXT_COMMENTS_UPDATE', 'Kommentare zu Ihrer Bestellung:' . "\n\n%s\n\n");
 
 define('ERROR_ORDER_DOES_NOT_EXIST', 'Fehler: Diese Bestellung existiert nicht!.');
 define('SUCCESS_ORDER_UPDATED', 'Hinweis: Die Bestellung wurde erfolgreich aktualisiert.');
@@ -94,4 +94,7 @@ define('TEXT_ORDER_SUMMARY', 'Bestellungszusammenfassung');
 
 define('TEXT_ORDER_ID', 'Bestell-Nr.:');
 define('TEXT_ORDER_DATE_TIME', 'Bestellt am');
+
+define('OPTION_SELECT_COMMENT', 'Kommentar auswählen...');
+define('OPTION_NAME_OF_CUSTOMER', 'Kundenname');
 ?>

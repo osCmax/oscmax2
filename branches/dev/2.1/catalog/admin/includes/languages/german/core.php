@@ -84,6 +84,49 @@ define('ENTRY_STATE', 'Bundesland:');
 define('ENTRY_STATE_TEXT', '');
 define('ENTRY_STATE_ERROR', '&nbsp;<span class="errorText">notwendig</span>');
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Global entries for the <html> tag
 define('HTML_PARAMS','dir="ltr" lang="de"');
 
@@ -120,6 +163,7 @@ define('FEMALE', 'Frau');
 
 // configuration box text in includes/boxes/configuration.php
 define('BOX_HEADING_CONFIGURATION', 'Einstellungen');
+define('BOX_CONFIGURATION_GENERAL_SETTINGS', 'Grundeinstellungen');
 define('BOX_CONFIGURATION_MYSTORE', 'Mein Shop');
 define('BOX_CONFIGURATION_LOGGING', 'Logging');
 define('BOX_CONFIGURATION_CACHE', 'Cache');
@@ -131,26 +175,51 @@ define('BOX_CONFIGURATION_IMAGES', 'Bilder');
 define('BOX_CONFIGURATION_CUSTOMER_DETAILS', 'Kundendaten');
 define('BOX_CONFIGURATION_SHIPPING', 'Versandart');
 define('BOX_CONFIGURATION_PAGE_CACHE', 'Page Cache Einstellungen');
+
 define('BOX_CONFIGURATION_PRODUCT_LISTING', 'Produktlisting');
 define('BOX_CONFIGURATION_PRODUCT_INFO', 'Produktinformation');
+
 define('BOX_CONFIGURATION_EMAIL', 'E-Mail');
 define('BOX_CONFIGURATION_DOWNLOAD', 'Download');
 define('BOX_CONFIGURATION_GZIP', 'GZip');
 define('BOX_CONFIGURATION_SESSIONS', 'Sessions');
 define('BOX_CONFIGURATION_STOCK', 'Lager');
+define('BOX_CONFIGURATION_MC', 'MailChimp Newsletter');
 define('BOX_CONFIGURATION_WYSIWYG', 'CK Editor');
+define('BOX_CONFIGURATION_TEMPLATES', 'Templates');
+define('BOX_CONFIGURATION_TEMPLATE_SETUP', 'Templateeinstellungen');
+define('BOX_CONFIGURATION_PAGE_MODULES', 'Seitenmodules');
+define('BOX_CONFIGURATION_INFO_PAGES', 'Informationsseiten');
+define('BOX_CONFIGURATION_WELCOME', 'Wilkommensnachricht');
+define('BOX_CONFIGURATION_OFS', 'Empfehlungen');
 define('BOX_CONFIGURATION_AFFILIATE', 'Affiliate');
 define('BOX_CONFIGURATION_ACCOUNTS', 'Konten');
 define('BOX_CONFIGURATION_MAINTENANCE', 'Seitenwartung');
 define('BOX_CONFIGURATION_MOPICS', 'Dynamic MoPics');
 define('BOX_CONFIGURATION_PRINT', 'Druckbarer Katalog');
 define('BOX_CONFIGURATION_SEO', 'SEO URLs');
+define('BOX_CONFIGURATION_SEO_URLS', 'SEO URLs');
+define('BOX_CONFIGURATION_SEO_POPOUT', 'SEO Pop Out Menü');
 define('BOX_CONFIGURATION_WISHLIST', 'Wunschlisteneinstellungen');
 define('BOX_CONFIGURATION_EDITOR', 'Bestellungseditor');
 define('BOX_CONFIGURATION_SEO_VALIDATION', 'SEO URL Überprüfung');
 // EOF: Added for super-friendly admin menu:
 
 define('TEXT_LOGGING_CACHE', 'Logging / Cache');
+define('BOX_CONFIGURATION_USEFUL', 'Nützliche Links');
+define('BOX_CONFIGURATION_OPC', 'One Page Checkout');
+define('BOX_CONFIGURATION_CORNER_BANNERS', 'Eckbanner');
+define('BOX_CONFIGURATION_CONTACT', 'Kontaktformular');
+define('BOX_CONFIGURATION_RECAPTCHA', 'reCaptcha Formular');
+define('BOX_CONFIGURATION_NOTIFICATIONS', 'Benachrichtigungen');
+define('BOX_CONFIGURATION_SLIDESHOW', 'Diashow');
+define('BOX_CONFIGURATION_SLIDESHOW_SETTINGS', 'Diashoweinstellungen');
+
+define('BOX_CONFIGURATION_GOOGLE', 'Google');
+define('BOX_CONFIGURATION_GOOGLE_ANALYTICS', 'Google Analytics');
+define('BOX_CONFIGURATION_GOOGLE_SITEMAP', 'Google SiteMaps');
+define('BOX_CONFIGURATION_GOOGLE_MAPS', 'Google Maps');
+
 
 // modules box text in includes/boxes/modules.php
 define('BOX_HEADING_MODULES', 'Module');
@@ -244,7 +313,7 @@ define('BOX_TOOLS_RECOVER_CART', 'Warenkorb wiederherstellen');
 define('BOX_REPORTS_MONTHLY_SALES', 'Monatlicher Umsatz/Steuer');
 
 // LINE ADDED - InfoBox Admin in includes/boxes/info_boxes.php
-define('BOX_HEADING_BOXES', 'Infobox Admin');
+define('BOX_HEADING_BOXES', 'Infoboxen');
 
 // javascript messages
 define('JS_ERROR', 'Während der Verarbeitung des Formulares sind Fehler aufgetreten!\nBitte korrigieren Sie Folgendes:\n\n');
@@ -478,9 +547,9 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Warnung: Dateiuploads sind in der php.i
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Produkte'); // X-Sell
 
 // BOF: MOD - Article Manager
-define('BOX_HEADING_ARTICLES', 'Artikel Manager');
+define('BOX_HEADING_ARTICLES', 'Artikel');
 define('BOX_TOPICS_ARTICLES', 'Themen/Artikel');
-define('BOX_ARTICLES_CONFIG', 'Einstellungen');
+define('BOX_ARTICLES_CONFIG', 'Artikeleinstellungen');
 define('BOX_ARTICLES_AUTHORS', 'Autoren');
 define('BOX_ARTICLES_REVIEWS', 'Bewertungen');
 define('BOX_ARTICLES_XSELL', 'Cross-Sell Artikel');
@@ -512,10 +581,6 @@ define('BOX_REPORTS_STATS_REGISTER_CUSTOMER_NO_PURCHASE', 'Kunden ohne Umsatz');
 // BOF: Quicker Product Edit
 define('IMAGE_ICON_EDIT', 'Schnelländerung');
 // EOF: Quicker Product Edit
-
-// BOF: Google SiteMap
-define('BOX_GOOGLE_SITEMAP', 'Google SiteMaps');
-// EOF: Google SiteMap
 
 // BOF: Feed Machine
 define('BOX_CATALOG_FEEDMACHINE', 'Feedmachine');

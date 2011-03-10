@@ -56,4 +56,8 @@ define('TEXT_INFOBOX_HELP_ACTIVE', 'W‰hlen Sie <b>yes</b>(Ja) oder <b>no</b>(Nei
 
 define('TEXT_CLOSE_WINDOW', '<u>Fenster schlieﬂen</u> [x]');
 
+define('COUNT_1', 'Es befinden sich derzeit: ');
+define('COUNT_2', ' Boxen in der linken Spalte und ');
+define('COUNT_3', ' Boxes in der rechten Spalte.');
+
 ?>

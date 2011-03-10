@@ -79,7 +79,7 @@ define('TEXT_PRODUCTS_QUANTITY', 'Anzahl:');
 define('TEXT_PRODUCTS_MODEL', 'Artikelnummer:');
 define('TEXT_PRODUCTS_IMAGE', 'Produktbild:');
 define('TEXT_PRODUCTS_URL', 'Herstellerlink:');
-define('TEXT_PRODUCTS_URL_WITHOUT_HTTP', '<small>(ohne vorangestelltes http://)</small>');
+define('TEXT_PRODUCTS_URL_WITHOUT_HTTP', '<small>(ohne http://)</small>');
 define('TEXT_PRODUCTS_PRICE_NET', 'Preis (Netto):');
 define('TEXT_PRODUCTS_PRICE_GROSS', 'Preis (Brutto):');
 define('TEXT_PRODUCTS_MSRP_GROSS', 'UVP (Brutto):');
@@ -121,7 +121,7 @@ define('TEXT_PRODUCTS_WITHOUT_PREVIEW', ' ohne Vorschau ');
 define('TEXT_PRODUCTS_MOPICS', 'Extrabild:');
 define('TEXT_MOPICS_WARNING', 'Wählen Sie einen Bilderordner VOR dem Hinaufladen');
 
-define('TEXT_SHIPPING_DIMENSIONS', 'Versandabmessung');
+define('TEXT_SHIPPING_DIMENSIONS', 'Packmaß');
 
 define('TEXT_SPPC_HELP', '<hr />Gruppenpreis:<br />Hinweis: Wenn Sie ein Feld leer lassen, wird kein Preis für diese Kundegruppe in die Datenbank eingefügt.<br />
 Wenn ein Preis eingetragen, aber die Auswahlbox nicht angehakt ist, wird ebenfalls kein Preis eingefügt.<br />
@@ -155,13 +155,13 @@ define('TEXT_PRODUCTS_PRICE', 'Preisstaffel');
 define('TEXT_PRODUCTS_QTY', 'Stück zum Einzelpreis von');
 define('TEXT_PRODUCTS_DELETE', 'Löschen');
 define('TEXT_ENTER_QUANTITY', 'Menge');
-define('TEXT_PRICE_PER_PIECE', 'Preis per Stück');
+define('TEXT_PRICE_PER_PIECE', 'Preis pro Stück');
 define('TEXT_SAVINGS', 'Ihre Ersparnis');
 define('TEXT_DISCOUNT_CATEGORY', 'Rabattkategorie:');
 define('ERROR_UPDATE_INSERT_DISCOUNT_CATEGORY', 'Es ist beim Andern oder Anlegen der Tabelle discount_categories ein Fehler aufgetreten');
 define('ERROR_ALL_CUSTOMER_GROUPS_DELETED', 'Alle Kundengruppen wurden gelöscht. Bitte legen Sie zumindest retail in der Tabekke customers_groups an (siehe sppc_v421_install.sql)');
 define('TEXT_PRODUCTS_MIN_ORDER_QTY', 'Mindestbestellmenge:');
-define('TEXT_PRODUCTS_MIN_ORDER_QTY_HELP', '(standardmäßig 1,  Wertangabe nicht notwendig)');
+define('TEXT_PRODUCTS_MIN_ORDER_QTY_HELP', '(standardmäßig 1,  Wertangabe nicht verpflichtend)');
 define('TEXT_PRICE_BREAK_INFO', '<acronym title="wie Preis(Menge)">Preissprung</acronym>: ');
 define('PB_DROPDOWN_BEFORE', '');
 define('PB_DROPDOWN_BETWEEN', ' bei ');
@@ -172,12 +172,12 @@ define('PB_FROM', 'ab');
 // BOF Open Featured Sets
 define('TEXT_PRODUCTS_SHORT', 'Kurzbeschreibung des Produktes:');
 define('TABLE_HEADING_FEATURED', 'Empfohlen');
-define('TABLE_HEADING_FEATURED_PREVIEW', 'Angebote Vorschau');
-define('TEXT_CATEGORIES_FEATURED', 'Angebote Kategorie');
+define('TABLE_HEADING_FEATURED_PREVIEW', 'Empfehlungen Vorschau');
+define('TEXT_CATEGORIES_FEATURED', 'Empfohlene Kategorie');
 define('TEXT_CATEGORIES_YES', 'Ja');
 define('TEXT_CATEGORIES_NO', 'Nein');
-define('TEXT_CATEGORIES_FEATURED_DATE', 'Angebot bis Datum ');
-define('TEXT_PRODUCTS_FEATURED', 'Angebote Produkte:');
+define('TEXT_CATEGORIES_FEATURED_DATE', 'Empfohlen bis Datum ');
+define('TEXT_PRODUCTS_FEATURED', 'Empfohlene Produkte:');
 define('TEXT_PRODUCT_NO', 'Nein');
 define('TEXT_PRODUCT_YES', 'Ja');
 define('TEXT_MORE_INFO', 'mehr...');
@@ -189,7 +189,7 @@ define('HEADING_MSRP_HELP', 'Unverbindlich Verkaufspreis des Herstellers');
 define('TEXT_MSRP_HELP', 'Wenn Sie den UVP in Ihrem Onlineshop auf der Produktinformationsseite anzeigen lassen möchten, geben Sie ihn hier ein.');
 define('TEXT_ADD_PL', 'Einen weiteren Preissprung hinzufügen');
 define('TEXT_FEATURED_UNTIL', 'Empfohlen bis: ');
-define('TEXT_SHIPPING_PRICE', 'Indv. Versandkosten: ');
+define('TEXT_SHIPPING_PRICE', 'Indiv. Versandkosten: ');
 
 define('TEXT_THUMBNAIL_IMAGE', 'Vorschaubild:');
 ?>

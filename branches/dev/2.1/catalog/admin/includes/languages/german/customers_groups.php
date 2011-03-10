@@ -39,4 +39,8 @@ define('ERROR_CUSTOMERS_GROUP_NAME', 'Gruppennamen eingeben');
 define('TEXT_SORT', 'Sortieren ');
 define('TEXT_ABC', ' --> A-B-C Aufsteigend');
 define('TEXT_ZYX', ' --> Z-Y-X Absteigend');
+
+define('TEXT_MAXIMUM_LENGTH', '&#160;&#160;Höchstlänge: 32 Zeichen');
+define('TEXT_GROUP_SHOW_TEXT_1', '&#160;&#160;Diese Einstellung funktioniert nur, wenn <b>Display Prices with Tax</b>');
+define('TEXT_GROUP_SHOW_TEXT_2', 'in den Shopeinstellungen auf true und Tax Exempt (unten) auf <b>No</b> eingestellt sind.');
 ?>

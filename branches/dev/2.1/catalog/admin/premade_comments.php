@@ -64,7 +64,7 @@ $Id$
             <table width="100%"><tr><td class="messageStackWarning"><?php echo TEXT_DELETED_COMMENT; ?></td></tr></table>
 			  
           <?php	
-			} elseif ( (isset($_POST['add'])) && ($_POST['add']) && ($err != "") ) {
+			} elseif ( (isset($_POST['add'])) && ($_POST['add']) && ($err == "") ) {
 		  ?>
             <table width="100%"><tr><td class="messageStackSuccess"><?php echo TEXT_ADDED_COMMENT; ?></td></tr></table>
           <?php	
@@ -134,12 +134,16 @@ $Id$
 
 						<?php
                         $premades = mysql_query("SELECT * FROM " . TABLE_ORDERS_PREMADE_COMMENTS . " order by title");
-                          while ($premade = tep_db_fetch_array($premades)) {
-                              $selected = ($premade[id] == $p_id) ? " SELECTED": "";
+                        while ($premade = tep_db_fetch_array($premades)) {
+						  if ($premade['id'] == $_POST['p_id']) {
+						    $selected = ' SELECTED'; 
+						  } else {
+							$selected = '';
+						  }
                         ?>
                           <option value="<?php echo $premade['id']; ?>"<?php echo $selected; ?>><?php echo $premade['title']; ?></option>
 						<?php
-						  } // end while
+						} // end while
 						?>
                         </select>
                       </td>

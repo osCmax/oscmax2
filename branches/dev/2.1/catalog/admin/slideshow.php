@@ -87,7 +87,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent"  width="<?php echo PRODUCT_IMAGE_WIDTH+10; ?>"><?php echo TABLE_HEADING_SLIDESHOW_IMAGE; ?></td>
+                <td class="dataTableHeadingContent"  width="140"><?php echo TABLE_HEADING_SLIDESHOW_IMAGE; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_SLIDESHOW_TITLE; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_SLIDESHOW_LINK; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_SLIDESHOW_TARGET; ?></td>
@@ -109,7 +109,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
       echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $links['slideshow_id']) . '\'">' . "\n";
     }
 ?>
-                <td class="dataTableContent" width="<?php echo PRODUCT_IMAGE_WIDTH+10; ?>"><?php echo tep_image(' ../' . DIR_WS_IMAGES . 'slideshow/' . $links['slideshow_image'] . '', 'Slide', '130', '50'); ?></td>
+                <td class="dataTableContent" width="140"><?php echo tep_image(' ../' . DIR_WS_IMAGES . 'slideshow/' . $links['slideshow_image'] . '', 'Slide', '130', '50'); ?></td>
                 <td class="dataTableContent"><?php echo $links['slideshow_title']; ?></td>
                 <td class="dataTableContent"><?php echo $links['slideshow_link']; ?></td>
                 <td class="dataTableContent"><?php echo $links['slideshow_target']; ?></td>
@@ -155,7 +155,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'edit':
-      $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_SLIDESHOW . '</b>');
+      $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT_SLIDESHOW . '</b>');
 
       $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id  . '&amp;action=save'));
       $contents[] = array('text' => TEXT_INFO_EDIT_INTRO);
@@ -167,7 +167,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'delete':
-      $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_SLIDESHOW . '</b>');
+      $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_SLIDESHOW . '</b>');
 
       $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id  . '&amp;action=deleteconfirm'));
       $contents[] = array('text' => TEXT_SLIDESHOW_DELETE_INTRO);
@@ -175,7 +175,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
       break;
     default:
       if (is_object($trInfo)) {
-        $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT_SLIDESHOW . '</b>');
+        $heading[] = array('text' => '<b>' . HEADING_TITLE . '</b>');
 						
 		$contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
         $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_DATE_ADDED . ' ' . tep_date_short($trInfo->date_added));

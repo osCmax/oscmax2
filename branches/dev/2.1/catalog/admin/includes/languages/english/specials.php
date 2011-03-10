@@ -39,4 +39,7 @@ define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to delete the special pr
 define('HEADING_NO_SPECIALS', '<b>No Special Offers Set</b>');
 define('TEXT_NO_SPECIALS', 'Please click <b>New Product</b> to create a new Special Offer for your store.');
 
+define('TEXT_SPECIALS_HELP', 'Specials Help');
+define('TEXT_NEVER', 'Never');
+define('TEXT_CURRENTLY_ACTIVE', 'Currently Active');
 ?>

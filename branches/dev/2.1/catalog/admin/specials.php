@@ -221,7 +221,7 @@ $Id$
                 <td width="25%" valign="top">
         	      <table border="0" width="100%" cellspacing="0" cellpadding="2">
               	    <tr class="infoBoxHeading">
-                      <td>Specials Help</td>
+                      <td><?php echo TEXT_SPECIALS_HELP; ?></td>
                     </tr>
                     <tr class="infoBoxContent">
                   	  <td class="infoBoxContent"><?php echo TEXT_SPECIALS_PRICE_TIP; ?></td>
@@ -350,13 +350,13 @@ $Id$
         $contents[] = array('text' => '' . TEXT_INFO_PERCENTAGE . ' ' . number_format(100 - (($sInfo->specials_new_products_price / $sInfo->products_price) * 100)) . '%');
 
 		if ($sInfo->expires_date < 1) {
-			$contents[] = array('text' => '<br>' . TEXT_INFO_EXPIRES_DATE . ' <b>Never</b>');
+			$contents[] = array('text' => '<br>' . TEXT_INFO_EXPIRES_DATE . ' <b>' . TEXT_NEVER . '</b>');
 		} else {
 			$contents[] = array('text' => '<br>' . TEXT_INFO_EXPIRES_DATE . ' <b>' . tep_date_short($sInfo->expires_date) . '</b>');
 		}
         		
 		if (is_null($sInfo->date_status_change)) {
-			$contents[] = array('text' => '<br>' . TEXT_INFO_STATUS_CHANGE . ' <b>Currently Active</b>');
+			$contents[] = array('text' => '<br>' . TEXT_INFO_STATUS_CHANGE . ' <b>' . TEXT_CURRENTLY_ACTIVE . '</b>');
 		} else {
 			$contents[] = array('text' => '<br>' . TEXT_INFO_STATUS_CHANGE . ' <b>' . tep_date_short($sInfo->date_status_change) . '</b>');
 		}	

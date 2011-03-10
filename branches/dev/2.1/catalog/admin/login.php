@@ -90,13 +90,13 @@ $Id$
           <tr bgcolor="#E7E7E7">
             <td colspan="2" align="center" valign="middle">
                           <?php echo tep_draw_form('login', FILENAME_LOGIN, 'action=process'); ?>
-                            <table width="280" border="0" cellspacing="0" cellpadding="2">
+                            <table width="320" border="0" cellspacing="0" cellpadding="2">
                               <tr>
                                 <td class="login_heading" valign="top">&nbsp;<b><?php echo HEADING_RETURNING_ADMIN; ?></b></td>
                               </tr>
                               <tr>
                                 <td height="100%" valign="top" align="center">
-                                <table border="0" cellspacing="0" cellpadding="1" bgcolor="#666666" style="height:100%">
+                                <table border="0" cellspacing="0" cellpadding="1" bgcolor="#666666" style="height:100%; width:100%;">
                                   <tr><td>
                                     <table border="0" width="100%" cellspacing="3" cellpadding="2" bgcolor="#F3F3F3" style="height:100%">
 <?php
@@ -119,15 +119,15 @@ $Id$
   }
 ?>
                             <tr>
-                              <td class="login"><?php echo ENTRY_USERNAME; ?></td>
+                              <td class="login" align="right"><?php echo ENTRY_USERNAME; ?></td>
                               <td class="login"><?php echo tep_draw_input_field('username'); ?></td>
                             </tr>
                             <tr>
-                              <td class="login"><?php echo ENTRY_PASSWORD; ?></td>
+                              <td class="login" align="right"><?php echo ENTRY_PASSWORD; ?></td>
                               <td class="login"><?php echo tep_draw_password_field('password'); ?></td>
                             </tr>
                             <tr>
-                              <td colspan="2" align="right" valign="top"><?php echo tep_image_submit('button_confirm.gif', IMAGE_BUTTON_LOGIN); ?></td>
+                              <td colspan="2" align="right" valign="top"><?php echo tep_image_submit('button_confirm.gif', IMAGE_BUTTON_LOGIN); ?>&nbsp;</td>
                             </tr>
                           </table>
                         </td></tr>

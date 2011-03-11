@@ -33,7 +33,7 @@ $Id$
           <tr>
             <td class="infoBoxHeading" width="25%"><?php echo TABLE_HEADING_PAYMENT_ID; ?><?php echo '<span title="' . HEADING_PAYMENT_ID_HELP . '|' . TEXT_PAYMENT_ID_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></span></td>
             <td class="infoBoxHeading" width="25%" align="center"><?php echo TABLE_HEADING_DATE; ?><?php echo '<span title="' . HEADING_DATE_HELP . '|' . TEXT_DATE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></span></td>
-            <td class="infoBoxHeading" width="25%" align="right"><?php echo TABLE_HEADING_PAYMENT; ?><?php echo '<span title="' . HEADING_PAYMENT_ID_HELP . '|' . TEXT_PAYMENT_ID_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></td>
+            <td class="infoBoxHeading" width="25%" align="right"><?php echo TABLE_HEADING_PAYMENT; ?><?php echo '<span title="' . HEADING_PAYMENT_HELP . '|' . TEXT_PAYMENT_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></td>
             <td class="infoBoxHeading" width="25%" align="right"><?php echo TABLE_HEADING_STATUS; ?><?php echo '<span title="' . HEADING_STATUS_HELP . '|' . TEXT_STATUS_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></td>
           </tr>
          </table>

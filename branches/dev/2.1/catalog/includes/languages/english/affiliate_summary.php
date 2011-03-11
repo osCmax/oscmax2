@@ -44,7 +44,7 @@ define('TEXT_PAYPERSALE_RATE', 'Pay Per Sale Rate: ');
 define('TEXT_CLICKTHROUGH_RATE', 'Clickthrough Rate: ');
 define('TEXT_COMMISSION', 'Commission: ');
 define('HEADING_SUMMARY_HELP', 'Affiliate Help');
-define('TEXT_CLICKS_1', 'Click on the');
+define('TEXT_CLICKS_1', 'Hover over');
 define('TEXT_CLICKS_2', ' to see a description of each category.');
 
 define('HEADING_IMPRESSIONS_HELP', 'Impressions Help');

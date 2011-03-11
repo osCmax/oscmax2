@@ -52,22 +52,17 @@ return $ndate;
 ?>
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-<?php
-		if ($menu_dhtml == false ) {     // add for dhtml_menu
-			echo '<td width="' . BOX_WIDTH . '" valign="top">';
-			echo '<table border="0" width="' . BOX_WIDTH . '" cellspacing="1" cellpadding="1" class="columnLeft">';
-			echo '<!-- left_navigation //-->';
-			require(DIR_WS_INCLUDES . 'column_left.php');
-			echo '<!-- left_navigation_eof //-->';
-			echo '</table>';
-			echo '</td>';
-		} else {
-		}
-?>
+	<td width="' . BOX_WIDTH . '" valign="top">
+	  <table border="0" width="' . BOX_WIDTH . '" cellspacing="1" cellpadding="1" class="columnLeft">
+	    <!-- left_navigation //-->
+	    <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+	    <!-- left_navigation_eof //-->
+	  </table>';
+	</td>
 <!-- body_text //-->
-    <td width="100%" valign="top">
+    <td width="100%" valign="top" class="main">
+    <?php echo TEXT_WORKING; ?>
         <table border="0" width="100%" cellspacing="0" cellpadding="0">
-Working...
           <tr>
           	<td colspan="6">
 <!-- new header -->
@@ -171,8 +166,9 @@ Working...
 		  <td class="main" align="right"><b><?php echo $currencies->format(tep_round($total_recovered, 2)) ?></b></font></td>
 		  <td class="main">&nbsp;</td>
 		</tr>
-Done!
+    <?php echo TEXT_DONE; ?>
     </table>
+
 <!-- body_text_eof //-->
 	</td>
  </tr>

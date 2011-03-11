@@ -41,9 +41,13 @@ global $$link, $debug;
     if (defined('STORE_DB_TRANSACTIONS') && (STORE_DB_TRANSACTIONS == 'true')) {
       error_log('QUERY ' . $query . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
     }
-
+	$start_time = microtime( true ); 
     $result = mysql_query($query, $$link) or tep_db_error($query, mysql_errno(), mysql_error());
-
+    
+	if ( class_exists( 'KissER' ) ) {
+      KissER::q( round( ( microtime( true ) - $start_time ), 4 ), $query );
+    } 
+	
     if (defined('STORE_DB_TRANSACTIONS') && (STORE_DB_TRANSACTIONS == 'true')) {
        $result_error = mysql_error();
        error_log('RESULT ' . $result . ' ' . $result_error . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);

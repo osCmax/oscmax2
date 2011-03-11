@@ -582,7 +582,7 @@ require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/orders3.php');
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent">#</td>
+                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_ORDER_NUM; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ORDER_TOTAL; ?></td>
                 <td></td>
@@ -703,7 +703,7 @@ require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/orders3.php');
 
         elseif ((!$fedex_tracking) && (($check_fedex_status['orders_status']) != 3)) {
 		  // Check Fedex Module is installed first
-		  if (MODULE_SHIPPING_FEDEX1_STATUS == 'True') { 
+		  if ( (defined('MODULE_SHIPPING_FEDEX1_STATUS')) && (MODULE_SHIPPING_FEDEX1_STATUS == 'True') ) {
             $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_SHIP_FEDEX, 'oID=' .$oInfo->orders_id . '&amp;action=new&amp;status=3') . '">' . tep_image_button('button_ship.gif', IMAGE_ORDERS_SHIP) . '</a>');
 		  }
         }

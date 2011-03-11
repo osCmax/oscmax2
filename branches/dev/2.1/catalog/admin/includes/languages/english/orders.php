@@ -18,6 +18,7 @@ define('HEADING_TITLE_STATUS', 'Status:');
 //BOF: Orders search by customers info
 define('HEADING_TITLE_SEARCH_ALL', 'Search (order id, customer or company name):');
 //EOF: Orders search by customers info
+define('TABLE_HEADING_ORDER_NUM', '#');
 define('TABLE_HEADING_COMMENTS', 'Comments');
 define('TABLE_HEADING_NEW_COMMENTS', 'Add New Comment');
 define('TABLE_HEADING_CUSTOMERS', 'Customers');

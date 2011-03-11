@@ -55,7 +55,7 @@ $Id$
 
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NUMBER; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php  if (!isset($orderby) or ($orderby == "sold" and $sorted == "ASC"))  $to_sort = "DESC"; else $to_sort = "ASC"; echo '<a href="' . tep_href_link('stats_customers.php', 'orderby=sold&amp;sorted='. $to_sort) . '" class="main"><b># of Orders</b></a>';  ?></td>
+                <td class="dataTableHeadingContent" align="right"><?php if (!isset($orderby) or ($orderby == "sold" and $sorted == "ASC"))  $to_sort = "DESC"; else $to_sort = "ASC"; echo '<a href="' . tep_href_link('stats_customers.php', 'orderby=sold&amp;sorted='. $to_sort) . '" class="main"><b>' . TEXT_NUM_ORDERS . '</b></a>';  ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php  if (!isset($orderby) or ($orderby == "value" and $sorted == "ASC"))  $to_sort = "DESC"; else $to_sort = "ASC"; echo '<a href="' . tep_href_link('stats_customers.php', 'orderby=value&amp;sorted='. $to_sort) . '" class="main"><b>' . TABLE_HEADING_TOTAL_PURCHASED . '</b></a>';  ?></td>
               </tr>
 <?php

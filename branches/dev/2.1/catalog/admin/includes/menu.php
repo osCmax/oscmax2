@@ -151,7 +151,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('sitemonitor.php') == true) { ?>
     <li>
-      <a href="#">Security</a>
+      <a href="#"><?php echo BOX_HEADING_SECURITY; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'sitemonitor.php'); ?>
         </ul>

@@ -608,4 +608,6 @@ define('TEXT_FAIR', 'Fair');
 define('TEXT_AVERAGE', 'Average');
 define('TEXT_GOOD', 'Good');
 define('TEXT_EXCELLENT', 'Excellent');
+
+define('BOX_HEADING_SECURITY', 'Security');
 ?>

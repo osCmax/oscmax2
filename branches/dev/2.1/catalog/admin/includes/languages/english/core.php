@@ -610,4 +610,7 @@ define('TEXT_GOOD', 'Good');
 define('TEXT_EXCELLENT', 'Excellent');
 
 define('BOX_HEADING_SECURITY', 'Security');
+define('TEXT_PRODUCTS', 'Products');
+define('TEXT_SEARCH', 'Search: ');
+define('TEXT_WELCOME', ' Welcome, ')
 ?>

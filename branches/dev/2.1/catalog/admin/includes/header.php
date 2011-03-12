@@ -195,16 +195,16 @@ document.status.comments.value += newmessage;
         <td class="smallText" align="center">
             <div id="searchtabs" class="ui-tabs">
                 <ul class="ui-tabs ui-tabs-nav">
-                  <li><a href="#searchtabs-1">Customers</a></li>
-                  <li><a href="#searchtabs-2">Products</a></li>
-                  <li><a href="#searchtabs-3">Orders</a></li>
+                  <li><a href="#searchtabs-1"><?php echo BOX_HEADING_CUSTOMERS; ?></a></li>
+                  <li><a href="#searchtabs-2"><?php echo TEXT_PRODUCTS; ?></a></li>
+                  <li><a href="#searchtabs-3"><?php echo BOX_CUSTOMERS_ORDERS; ?></a></li>
                 </ul>
 
-                <div id="searchtabs-1" class="ui-tabs ui-tabs-container ui-tabs-hide">Search: <?php echo tep_draw_form('search_customers', FILENAME_CUSTOMERS, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
+                <div id="searchtabs-1" class="ui-tabs ui-tabs-container ui-tabs-hide"><?php echo TEXT_SEARCH; ?><?php echo tep_draw_form('search_customers', FILENAME_CUSTOMERS, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
 
-                <div id="searchtabs-2" class="ui-tabs ui-tabs-container ui-tabs-hide">Search: <?php echo tep_draw_form('search_products', FILENAME_CATEGORIES, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
+                <div id="searchtabs-2" class="ui-tabs ui-tabs-container ui-tabs-hide"><?php echo TEXT_SEARCH; ?><?php echo tep_draw_form('search_products', FILENAME_CATEGORIES, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
 
-                <div id="searchtabs-3" class="ui-tabs ui-tabs-container ui-tabs-hide">Search: <?php echo tep_draw_form('search_orders', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, 'text', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
+                <div id="searchtabs-3" class="ui-tabs ui-tabs-container ui-tabs-hide"><?php echo TEXT_SEARCH; ?><?php echo tep_draw_form('search_orders', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, 'text', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
 
             </div>
 	    </td>
@@ -235,9 +235,9 @@ if ($help_pages_query['help_page'] != '' ) {
   	<?php echo tep_hide_session_id(); ?></form>
 
 	<?php echo '<a href="' . tep_href_link(FILENAME_ADMIN_ACCOUNT, '', 'SSL') . '" class="header">'; ?>
-	<?php echo tep_image(DIR_WS_ICONS . 'book_key.png', 'Manage Account'); ?> Welcome, <?php echo $myLogin['admin_username']; ?>.</a>
+	<?php echo tep_image(DIR_WS_ICONS . 'book_key.png', 'Manage Account'); ?><?php echo TEXT_WELCOME; ?><?php echo $myLogin['admin_username']; ?>.</a>
 	<?php echo '<a href="' . tep_href_link(FILENAME_LOGOFF, '', 'SSL') . '" class="header">'; ?>
-	<?php echo tep_image(DIR_WS_ICONS . 'exit.png', 'Logoff'); ?> Logoff &nbsp;</a>
+	<?php echo tep_image(DIR_WS_ICONS . 'exit.png', 'Logoff'); ?>&nbsp;<?php echo HEADER_TITLE_LOGOFF; ?>&nbsp;&nbsp;</a>
   </td>
   <td width="1"><?php echo tep_draw_separator('pixel_trans.gif', '1', '84'); ?></td>
 </tr>

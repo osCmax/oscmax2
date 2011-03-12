@@ -101,8 +101,8 @@ function ToggleCheckBox($cb) {
               // we have no instructions, so just dump a full list of products and their status for cross selling 
 
               if (! isset($_GET['add_related_article_ID']) ) {
-		        $heading[] = array('text' => '<b>Cross Sell Articles</b>');
-		        $contents[] = array('text' => 'Please select an article that you wish to cross sell your products from by click on a row.<br><br>  If you want change the sort order that these products are shown in please click the <b>sort</b> link in the right hand column.');
+		        $heading[] = array('text' => '<b>' . TEXT_CROSS_SELL_ARTICLES . '</b>');
+		        $contents[] = array('text' => TEXT_ARTICLE_SELECT);
 				
 		
               $query = "select a.articles_id, ad.articles_name, ad.articles_description, ad.articles_url from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where ad.articles_id = a.articles_id and ad.language_id = '" . (int)$languages_id . "' order by ad.articles_name";
@@ -137,11 +137,11 @@ function ToggleCheckBox($cb) {
                         }
                     else
                         echo "<td class=\"dataTableContent\">--</td>\n";
-                    echo '<td class="dataTableContent"  valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES_XSELL, 'add_related_article_ID=' . $articles_id[$i], 'NONSSL') . '">Add/Remove</a></td>';
+                    echo '<td class="dataTableContent"  valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES_XSELL, 'add_related_article_ID=' . $articles_id[$i], 'NONSSL') . '">' . TEXT_ADD_REMOVE . '</a></td>';
                                     
                     if (count($Related_items)>1)
                     {
-                      echo '<td class="dataTableContent" valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES_XSELL, 'sort=1&amp;add_related_article_ID=' . $articles_id[$i], 'NONSSL') . '">Sort</a>&nbsp;</td>';
+                      echo '<td class="dataTableContent" valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES_XSELL, 'sort=1&amp;add_related_article_ID=' . $articles_id[$i], 'NONSSL') . '">' . TEXT_SORT_ORDER . '</a>&nbsp;</td>';
                     } else {
                         echo "<td class=\"dataTableContent\" valign=top align=center>--</td>";
                         }
@@ -174,8 +174,8 @@ function ToggleCheckBox($cb) {
                   } 
               } // enf if  
 	  
-	  		  $heading[] = array('text' => '<b>Cross Sell Articles: Database Updated</b>');
-			  $contents[] = array('text' => 'Your changes have been saved to the database please either go back to the main page or click the link to sort the order in which the cross sell products are listed.');
+	  		  $heading[] = array('text' => '<b>' . TEXT_DBASE_UPDATED . '</b>');
+			  $contents[] = array('text' => TEXT_CHANGES_SAVED);
 			  ?>
       		  <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#999999">
       		    <tr class="dataTableHeadingRow">
@@ -203,8 +203,8 @@ function ToggleCheckBox($cb) {
              } // end function
 
              if (isset($_GET['add_related_article_ID']) && ! $_POST && ! isset($_GET['sort'])) {   
-		       $heading[] = array('text' => '<b>Cross Sell Articles</b>');
-		       $contents[] = array('text' => 'Please select the category of the product you wish to cross sell.');
+		       $heading[] = array('text' => '<b>' . TEXT_CROSS_SELL_ARTICLES . '</b>');
+		       $contents[] = array('text' => TEXT_SELECT_A_CATEGORY);
 	         ?>
 	         <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#999999">
                <tr class="dataTableHeadingRow">
@@ -224,7 +224,7 @@ function ToggleCheckBox($cb) {
 	
 		     <?php
              if (isset($_GET['cPath'])) {
-		       $contents[] = array('text' => 'Then select the product you wish to add by checking the tick boxes.');
+		       $contents[] = array('text' => TEXT_SELECT_PRODUCT);
              ?>
              <table border="0" cellpadding="0" cellspacing="0" width="100%">
                <tr>
@@ -378,7 +378,7 @@ function ToggleCheckBox($cb) {
 		    $box = new box;
 			echo $box->infoBox($heading, $contents);
 		  } else {
-		    $heading[] = array('text' => '<b>Cross Sell Articles</b>');
+		    $heading[] = array('text' => '<b>' . TEXT_CROSS_SELL_ARTICLES . '</b>');
 			$contents[] = array('text' => '<br><br><br>');
 			$box = new box;
 			echo $box->infoBox($heading, $contents);

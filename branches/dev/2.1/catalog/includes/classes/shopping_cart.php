@@ -446,7 +446,7 @@ var $shiptotal;
       global $sppc_customer_group_id;
 
       if(!tep_session_is_registered('sppc_customer_group_id')) {
-      $this->cg_id = '0';
+        $this->cg_id = '0';
       } else {
         $this->cg_id = $sppc_customer_group_id;
       }
@@ -483,20 +483,20 @@ var $shiptotal;
         }
           $products_price = $pf->computePrice($this->contents[$products_id]['qty'], $nof_other_items_in_cart_same_cat);
 // EOF QPBPP for SPPC
-//BOF Attribute Product Codes
+// BOF Attribute Product Codes
                 $attribute_code_array = array();
                 if (is_array($this->contents[$products_id]['attributes'])) {
-                        $i = 0;
-                foreach ($this->contents[$products_id]['attributes'] as $attributes){
-                        $option = array_keys($this->contents[$products_id]['attributes']);
-                        $value = $this->contents[$products_id]['attributes'];
-                        $attribute_code_query = tep_db_query("select code_suffix, suffix_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$prid . "' and options_id = '" . (int)$option[$i] . "' and options_values_id = '" . (int)$value[$option[$i]] . "' order by suffix_sort_order ASC");
-                  $attribute_code = tep_db_fetch_array($attribute_code_query);
-                  if (tep_not_null($attribute_code['code_suffix'])) {
-                        $attribute_code_array[(int)$attribute_code['suffix_sort_order']] = $attribute_code['code_suffix'];
-                        }
-                                  $i++;
-                }
+                  $i = 0;
+                  foreach ($this->contents[$products_id]['attributes'] as $attributes) {
+                    $option = array_keys($this->contents[$products_id]['attributes']);
+                    $value = $this->contents[$products_id]['attributes'];
+                    $attribute_code_query = tep_db_query("select code_suffix, suffix_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$products_id . "' and options_id = '" . (int)$option[$i] . "' and options_values_id = '" . (int)$value[$option[$i]] . "' order by suffix_sort_order ASC");
+                    $attribute_code = tep_db_fetch_array($attribute_code_query);
+                    if (tep_not_null($attribute_code['code_suffix'])) {
+                      $attribute_code_array[(int)$attribute_code['suffix_sort_order']] = $attribute_code['code_suffix'];
+                    } // end if
+                    $i++;
+                  } // end foreach
 
         $separator = '-';
     //  if (count($attribute_code_array) > 1) {
@@ -505,11 +505,10 @@ var $shiptotal;
         //  $separator = '/';
         //}
 
-        $products_code = $products['products_model'] . $separator . implode("-", $attribute_code_array);
-    } else {
-        $products_code = $products['products_model'];
-
-    }
+                  $products_code = $products['products_model'] . $separator . implode("-", $attribute_code_array);
+                } else {
+                  $products_code = $products['products_model'];
+                }
 // EOF Attribute Product Codes
 //        $products_array[] = array('id' => $products_id,
           $products_array[] = array('id' => tep_get_uprid($products_id, $this->contents[$products_id]['attributes']),

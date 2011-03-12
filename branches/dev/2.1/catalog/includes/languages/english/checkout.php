@@ -116,4 +116,29 @@ define('TEXT_REFERRAL_REFERRED', 'If you were referred to us by a friend please 
 // Points/Rewards Module V2.1rc2a EOF
 define('TERMS_PART_1', 'Please confirm that you have read our ');
 define('TERMS_PART_2', '<b><u>Terms and Conditions</u></b>');
+
+define('TEXT_NO_JAVASCRIPT', 'We have detected that you have JavaScript disabled.');
+define('TEXT_ENABLE_JAVSCRIPT_INSTRUCTIONS', '<p style="font-family: Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold">Please follow the instructions for your web browser in order to complete your order:<br /><br />Internet Explorer</p>
+ <ol style="font-family: Arial, Helvetica, sans-serif; font-size:12px;">
+  <li>On the&nbsp;<strong>Tools</strong>&nbsp;menu, click&nbsp;<strong>Internet Options</strong>, and then click the&nbsp;<strong>Security</strong>&nbsp;tab.</li>
+  <li>Click the&nbsp;<strong>Internet</strong>&nbsp;zone.</li>
+  <li>If you do not have to customize your Internet security settings, click&nbsp;<strong>Default Level</strong>. Then do step 4<blockquote>If you have to customize your Internet security settings, follow these steps:<br />
+	a. Click&nbsp;<strong>Custom Level</strong>.<br />
+	b. In the&nbsp;<strong>Security Settings &ndash; Internet Zone</strong>&nbsp;dialog box, click&nbsp;<strong>Enable</strong>&nbsp;for&nbsp;<strong>Active Scripting</strong>&nbsp;in the&nbsp;<strong>Scripting</strong>section.</blockquote></li>
+  <li>Click the&nbsp;<strong>Back</strong>&nbsp;button to return to the previous page, and then click the&nbsp;<strong>Refresh</strong>&nbsp;button to run scripts.</li>
+ </ol>
+ <p style="font-family: Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold"><br />Firefox</p>
+ <ol style="font-family: Arial, Helvetica, sans-serif; font-size:12px;">
+  <li>On the&nbsp;<strong>Tools</strong>&nbsp;menu, click&nbsp;<strong>Options</strong>.</li>
+  <li>On the&nbsp;<strong>Content</strong>&nbsp;tab, click to select the&nbsp;<strong>Enable JavaScript</strong>&nbsp;check box.</li>
+  <li>Click the&nbsp;<strong>Go back one page</strong>&nbsp;button to return to the previous page, and then click the&nbsp;<strong>Reload current page</strong>&nbsp;button to run scripts.</li>
+ </ol>
+ <p style="font-family: Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold"><br />Safari</p>
+ <ol style="font-family: Arial, Helvetica, sans-serif; font-size:12px;">
+  <li>Click the <strong>Safari</strong> menu.</li>
+  <li>Select <strong>Preferences</strong>.</li>
+  <li>Click the <strong>Security</strong> tab.</li>
+  <li>Select the <stong>Enable JavaScript</stong> checkbox.</li>
+ </ol>
+ <p>&nbsp;</p>');
 ?>

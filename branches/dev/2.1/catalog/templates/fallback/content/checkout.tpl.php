@@ -12,30 +12,8 @@ $Id$
 ?>
 <!-- body_text //-->
 <noscript>
- <table width="100%"><tr><td class="messageStackError">We have detected that you have JavaScript disabled.</td></tr></table>
- <p style="font-family: Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold">Please follow the instructions for your web browser in order to complete your order:<br /><br />Internet Explorer</p>
- <ol style="font-family: Arial, Helvetica, sans-serif; font-size:12px;">
-  <li>On the&nbsp;<strong>Tools</strong>&nbsp;menu, click&nbsp;<strong>Internet Options</strong>, and then click the&nbsp;<strong>Security</strong>&nbsp;tab.</li>
-  <li>Click the&nbsp;<strong>Internet</strong>&nbsp;zone.</li>
-  <li>If you do not have to customize your Internet security settings, click&nbsp;<strong>Default Level</strong>. Then do step 4<blockquote>If you have to customize your Internet security settings, follow these steps:<br />
-	a. Click&nbsp;<strong>Custom Level</strong>.<br />
-	b. In the&nbsp;<strong>Security Settings &ndash; Internet Zone</strong>&nbsp;dialog box, click&nbsp;<strong>Enable</strong>&nbsp;for&nbsp;<strong>Active Scripting</strong>&nbsp;in the&nbsp;<strong>Scripting</strong>section.</blockquote></li>
-  <li>Click the&nbsp;<strong>Back</strong>&nbsp;button to return to the previous page, and then click the&nbsp;<strong>Refresh</strong>&nbsp;button to run scripts.</li>
- </ol>
- <p style="font-family: Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold"><br />Firefox</p>
- <ol style="font-family: Arial, Helvetica, sans-serif; font-size:12px;">
-  <li>On the&nbsp;<strong>Tools</strong>&nbsp;menu, click&nbsp;<strong>Options</strong>.</li>
-  <li>On the&nbsp;<strong>Content</strong>&nbsp;tab, click to select the&nbsp;<strong>Enable JavaScript</strong>&nbsp;check box.</li>
-  <li>Click the&nbsp;<strong>Go back one page</strong>&nbsp;button to return to the previous page, and then click the&nbsp;<strong>Reload current page</strong>&nbsp;button to run scripts.</li>
- </ol>
- <p style="font-family: Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold"><br />Safari</p>
- <ol style="font-family: Arial, Helvetica, sans-serif; font-size:12px;">
-  <li>Click the <strong>Safari</strong> menu.</li>
-  <li>Select <strong>Preferences</strong>.</li>
-  <li>Click the <strong>Security</strong> tab.</li>
-  <li>Select the 'Enable JavaScript' checkbox.</li>
- </ol>
- <p>&nbsp;</p>
+ <table width="100%"><tr><td class="messageStackError"><?php echo TEXT_NO_JAVASCRIPT; ?></td></tr></table>
+ <?php echo TEXT_ENABLE_JAVSCRIPT_INSTRUCTIONS; ?>
 </noscript>
 <div id="pageContentContainer" style="display:none;">
    <?php echo tep_draw_form('checkout', tep_href_link(FILENAME_CHECKOUT, '', $request_type)) . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -372,8 +350,8 @@ $Id$
   <td colspan="2" align="right"><?php echo tep_image_button('button_login.gif', IMAGE_BUTTON_LOGIN, 'id="loginWindowSubmit"');?></td>
  </tr>
 </table></div>
-<div id="addressBook" title="Address Book" style="display:none"></div>
-<div id="newAddress" title="New Address" style="display:none"></div>
+<div id="addressBook" title="Address Book test" style="display:none"></div>
+<div id="newAddress" title="New Address test" style="display:none"></div>
 <?php
 if(ONEPAGE_CHECKOUT_LOADER_POPUP == 'True')
 {?>

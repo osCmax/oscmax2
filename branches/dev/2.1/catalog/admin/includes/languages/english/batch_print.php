@@ -10,6 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 define('TEXT_ORDER_NUMBERS_RANGES', 'Order Number (s), either one # or  range, # - #, or #,#,#');
+define('TEXT_DIR_ERROR', ' Error: Problem opening directory ');
+define('TEXT_BPC_OPTIONS', 'Batch Print Center Options');
+define('TEXT_BPC_NO_OPTIONS', 'There are no options available for your selected option.');
 define('HEADING_TITLE', 'Batch Print Center');
 define('TABLE_HEADING_COMMENTS', 'Comments');
 define('TABLE_HEADING_PRODUCTS_MODEL', 'Model');
@@ -91,6 +94,11 @@ $error['ERROR_BAD_INVOICENUMBERS'] =  'Error: Invalid Invoice numbers, Please en
 $error['NO_ORDERS'] =  'Error: There were no orders selected for export, try changing your order options.';
 $error['SET_PERMISSIONS'] = 'Error: Can\'t write to directory!  Please set the permissions of your temp_pdf folder to CHMOD 0755';
 $error['FAILED_TO_OPEN'] = 'Error: Could not open file for writing, make sure correct permissions are set';
+
+define('SUCCESS_1', 'Success: PDF of ');
+define('SUCCESS_2', ' record(s) was created successfully. Please ');
+define('SUCCESS_3', 'click here');
+define('SUCCESS_4', ' to open the file.');
 
 // PDF FONT SIZES
 define('COMPANY_HEADER_FONT_SIZE','14');

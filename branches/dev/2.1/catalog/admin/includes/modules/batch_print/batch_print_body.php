@@ -12,7 +12,7 @@ $Id$
 
 $order_statuses = array();
 $orders_status_query = tep_db_query("select orders_status_id, orders_status_name from " . TABLE_ORDERS_STATUS . " where language_id = '" . $languages_id . "'");
-$orders_statuses[] = array('id' => 0, 'text' => 'None');
+$orders_statuses[] = array('id' => 0, 'text' => TEXT_NONE);
 while ($orders_status = tep_db_fetch_array($orders_status_query)) {
 $orders_statuses[] = array('id' => $orders_status['orders_status_id'],'text' => $orders_status['orders_status_name']);
 }
@@ -21,11 +21,11 @@ $orders_statuses[] = array('id' => $orders_status['orders_status_id'],'text' => 
 $directory = BATCH_PRINT_INC . 'templates';
 $resc = opendir($directory);
 if (!$resc) {
-echo "Error: Problem opening directory $directory. Error: $php_errormsg";
+echo '<table width="100%"><tr><td class="messageStackError">' . tep_image(DIR_WS_ICONS . 'error.gif', ICON_ERROR) . '&nbsp;' . TEXT_DIR_ERROR . '<b>' . $directory . '</b></td></tr></table>';
 exit;
 }
 $file_type_array = array();
-$file_type_array[] = array('id' => $file,'text' => 'Please select ...');
+$file_type_array[] = array('id' => $file,'text' => PULL_DOWN_DEFAULT);
 while ($file = readdir($resc)) {
   $ext = strrchr($file, ".");
   if ($ext == ".php") {
@@ -87,7 +87,7 @@ while ($file = readdir($resc)) {
 			<div id="Labels">
             <table border="0" cellspacing="0" cellpadding="2" width="100%">
                	<tr class="infoBoxHeading">
-                	<td class="infoBoxHeading" colspan="2">Batch Print Center Options</td>
+                	<td class="infoBoxHeading" colspan="2"><?php echo TEXT_BPC_OPTIONS; ?></td>
                 </tr>               
                 <tr>
                     <td class="infoBoxContent" colspan="2"><?php echo TEXT_PRINTING_LABELS_BILLING_DELIVERY; ?></td>
@@ -106,7 +106,7 @@ while ($file = readdir($resc)) {
             <div id="Invoices">
             <table border="0" cellspacing="0" cellpadding="2" width="100%">
                 <tr class="infoBoxHeading">
-                	<td class="infoBoxHeading" colspan="2">Batch Print Center Options</td>
+                	<td class="infoBoxHeading" colspan="2"><?php echo TEXT_BPC_OPTIONS; ?></td>
                 </tr>
                 <tr>
                     <td class="infoBoxContent"><?php echo TEXT_SHOW_ORDER; ?></td>
@@ -133,10 +133,10 @@ while ($file = readdir($resc)) {
             <div id="No_Options">
             <table border="0" cellspacing="0" cellpadding="2" width="100%">
                 <tr class="infoBoxHeading">
-                	<td class="infoBoxHeading" colspan="2">Batch Print Center Options</td>
+                	<td class="infoBoxHeading" colspan="2"><?php echo TEXT_BPC_OPTIONS; ?></td>
                 </tr>
                 <tr>
-                    <td class="infoBoxContent">There are no options available for your selected option.</td>
+                    <td class="infoBoxContent"><?php echo TEXT_BPC_NO_OPTIONS; ?></td>
                     <td class="infoBoxContent"></td>
                 </tr>
             </table>

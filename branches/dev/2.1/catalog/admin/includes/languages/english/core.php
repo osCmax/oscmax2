@@ -532,7 +532,7 @@ define('TEXT_CACHE_CATEGORIES', 'Categories Box');
 define('TEXT_CACHE_MANUFACTURERS', 'Manufacturers Box');
 define('TEXT_CACHE_ALSO_PURCHASED', 'Also Purchased Module');
 
-define('TEXT_NONE', '--none--');
+define('TEXT_NONE', 'None');
 define('TEXT_TOP', 'Top');
 
 define('ERROR_DESTINATION_DOES_NOT_EXIST', 'Error: Destination does not exist.');

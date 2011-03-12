@@ -143,8 +143,7 @@ $Id$
           fclose($fp);
         } else { message_handler('FAILED_TO_OPEN'); }
         // changed below to cause pdf to open in a new window 
-        $message =  'Success: PDF of ' . $num . ' record(s) was created successfully. Please 
-        <a href="'.$fname.'" target="_blank"><b>click here</b></a> to open the file.';
+        $message =  SUCCESS_1 . $num . SUCCESS_2 . '<a href="' . $fname . '" target="_blank"><b>' . SUCCESS_3 . '</b></a>' . SUCCESS_4;
 
       case 0:
 

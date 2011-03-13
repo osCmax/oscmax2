@@ -19,7 +19,7 @@ $Id$
   case 'reset_customer_log':
 	  tep_db_query("delete from " . TABLE_CUSTOMER_LOG);
 	  tep_db_query("optimize table " . TABLE_CUSTOMER_LOG);
-	  $messageStack->add_session('Customer Log data reset (Log start number continues from previous record).  Customer Log table has been optimized.', 'success');
+	  $messageStack->add_session(TEXT_TABLE_OPTIMISED, 'success');
 	  tep_redirect(tep_href_link(FILENAME_STATS_CUST_LOGGING));
   break;
   }
@@ -96,10 +96,29 @@ $Id$
   
 ?>
 				<td class="dataTableContent"><?php echo $logging['login_number']; ?></td>
-				<td class="dataTableContent"><?php echo $logging['login_time']; ?></td>
+				<td class="dataTableContent"><?php echo tep_datetime_short($logging['login_time']); ?></td>
 				<td class="dataTableContent"><?php echo $logging['ip_address']; ?></td>
 				<td class="dataTableContent"><?php echo $logging['user_name']; ?></td>
-				<td class="dataTableContent"><?php echo $logging['type']; ?></td>
+				<td class="dataTableContent">
+                <?php
+				switch($logging['type']) {
+		          case 'Wrong Password':
+                    echo TEXT_WRONG_PASSWORD;
+                  break;
+				  
+		          case 'Wrong Username':
+                    echo TEXT_WRONG_USERNAME;
+                  break;
+				  
+		          case 'Logged In':
+                    echo TEXT_LOGGED_IN;
+                  break;
+				  
+		          case 'Logged Out':
+                    echo TEXT_LOGGED_OUT;
+                  break;
+				} // end switch
+				?>
 			  </tr>
 
 <?php

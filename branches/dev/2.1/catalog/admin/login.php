@@ -21,7 +21,7 @@ $Id$
     if (!tep_db_num_rows($check_admin_query)) {
 
 //Added by PGM
-    tep_db_query("insert into " . TABLE_ADMIN_LOG . " values (NULL, '" . $username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', '" . date('F j, Y, g:i a') . "')");
+    tep_db_query("insert into " . TABLE_ADMIN_LOG . " values (NULL, '" . $username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', now())");
 
       $_GET['login'] = 'fail';
     } else {
@@ -30,7 +30,7 @@ $Id$
       if (!tep_validate_password($password, $check_admin['login_password'])) {
 
 //Added by PGM
-    tep_db_query("insert into " . TABLE_ADMIN_LOG . " values (NULL, '" . $username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', '" . date('F j, Y, g:i a') . "')");
+    tep_db_query("insert into " . TABLE_ADMIN_LOG . " values (NULL, '" . $username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', now())");
 
         $_GET['login'] = 'fail';
       } else {
@@ -53,7 +53,7 @@ $Id$
         tep_db_query("update " . TABLE_ADMIN . " set admin_logdate = now(), admin_lognum = admin_lognum+1 where admin_id = '" . $login_id . "'");
 
 //Added by PGM
-    tep_db_query("insert into " . TABLE_ADMIN_LOG . " values (NULL, '" . $login_username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', '" . date('F j, Y, g:i a') . "')");
+    tep_db_query("insert into " . TABLE_ADMIN_LOG . " values (NULL, '" . $login_username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', now())");
 
 // There is no more default ADMIN - so don't need to check for DEFAULT user
 //      if (($login_lognum == 0) || !($login_logdate) || ($login_email_address == 'admin@localhost') || ($login_modified == '0000-00-00 00:00:00')) {

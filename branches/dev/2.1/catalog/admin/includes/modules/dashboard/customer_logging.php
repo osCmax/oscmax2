@@ -40,10 +40,30 @@ $Id$
   
 ?>
 				<td class="dataTableContent"><?php echo $cust_logging['login_number']; ?></td>
-				<td class="dataTableContent"><?php echo $cust_logging['login_time']; ?></td>
+				<td class="dataTableContent"><?php echo tep_datetime_short($cust_logging['login_time']); ?></td>
 				<td class="dataTableContent"><?php echo $cust_logging['ip_address']; ?></td>
 				<td class="dataTableContent"><?php echo $cust_logging['user_name']; ?></td>
-				<td class="dataTableContent"><?php echo $cust_logging['type']; ?></td>
+				<td class="dataTableContent">
+                <?php
+				switch($cust_logging['type']) {
+		          case 'Wrong Password':
+                    echo TEXT_WRONG_PASSWORD;
+                  break;
+				  
+		          case 'Wrong Username':
+                    echo TEXT_WRONG_USERNAME;
+                  break;
+				  
+		          case 'Logged In':
+                    echo TEXT_LOGGED_IN;
+                  break;
+				  
+		          case 'Logged Out':
+                    echo TEXT_LOGGED_OUT;
+                  break;
+				} // end switch
+				?>
+                </td>
 			</tr>
 
 <?php

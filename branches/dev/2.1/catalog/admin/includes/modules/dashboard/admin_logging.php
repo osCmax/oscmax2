@@ -41,22 +41,40 @@ $Id$
   
 ?>
 				<td class="dataTableContent"><?php echo $admin_logging['login_number']; ?></td>
-				<td class="dataTableContent"><?php echo $admin_logging['login_time']; ?></td>
+				<td class="dataTableContent"><?php echo tep_datetime_short($admin_logging['login_time']); ?></td>
 				<td class="dataTableContent"><?php echo $admin_logging['ip_address']; ?></td>
 				<td class="dataTableContent"><?php echo $admin_logging['user_name']; ?></td>
+                <?php
+				switch($admin_logging['type']) {
+		          case 'Wrong Password':
+                    echo '<td></td><td class="dataTableContent">' . TEXT_WRONG_PASSWORD . '</td>';
+                  break;
+				  
+		          case 'Wrong Username':
+                    echo '<td></td><td class="dataTableContent">' . TEXT_WRONG_USERNAME . '</td>';
+                  break;
+				  
+		          case 'Logged In':
+                    echo '<td></td><td class="dataTableContent">' . TEXT_LOGGED_IN . '</td>';
+                  break;
+				  
+		          case 'Logged Out':
+                    echo '<td></td><td class="dataTableContent">' . TEXT_LOGGED_OUT . '</td>';
+                  break;
+				} // end switch
+				?>
 				<?php
-			  $pos = strrpos($admin_logging['type'], "Config Change:");
-              if ($pos === false) { ?>
-                <td></td>
-                <td class="dataTableContent"><?php echo $admin_logging['type']; ?></td>	
-              <?php } else { 
-			  $config_id = str_replace("Config Change: ", "", $admin_logging['type']);
-			  $cfg_group_query = tep_db_query("select configuration_title, configuration_description, configuration_group_id from " . TABLE_CONFIGURATION . " where configuration_id = '" . (int)$config_id . "'");
-              $cfg_group = tep_db_fetch_array($cfg_group_query);
-			  ?>
-                <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $cfg_group['configuration_group_id']) . '&amp;cID=' . (int)$config_id . '">' . tep_image(DIR_WS_ICONS . 'page_white_edit.png', ''); ?></a></td>
-				<td class="dataTableContent"><?php echo '<span title="' . $cfg_group['configuration_title'] . '|' . strip_tags($cfg_group['configuration_description'], '<p><br><b>') . '">' . $admin_logging['type']; ?></span></td>
-              <?php } ?>
+			    $pos = strrpos($admin_logging['type'], "Config Change:");
+                if ($pos !== false) { 
+			      $config_id = str_replace("Config Change: ", "", $admin_logging['type']);
+			      $cfg_group_query = tep_db_query("select configuration_title, configuration_description, configuration_group_id from " . TABLE_CONFIGURATION . " where configuration_id = '" . (int)$config_id . "'");
+                  $cfg_group = tep_db_fetch_array($cfg_group_query);
+			      ?>
+                  <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $cfg_group['configuration_group_id']) . '&amp;cID=' . (int)$config_id . '">' . tep_image(DIR_WS_ICONS . 'page_white_edit.png', ''); ?></a></td>
+				  <td class="dataTableContent"><?php echo '<span title="' . $cfg_group['configuration_title'] . '|' . strip_tags($cfg_group['configuration_description'], '<p><br><b>') . '">' . TEXT_CONFIG_CHANGE . $config_id; ?></span></td>
+                <?php 
+				} // end if
+			    ?>
 			</tr>
 
 <?php

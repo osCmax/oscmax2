@@ -612,5 +612,11 @@ define('TEXT_EXCELLENT', 'Excellent');
 define('BOX_HEADING_SECURITY', 'Security');
 define('TEXT_PRODUCTS', 'Products');
 define('TEXT_SEARCH', 'Search: ');
-define('TEXT_WELCOME', ' Welcome, ')
+define('TEXT_WELCOME', ' Welcome, ');
+
+define('TEXT_WRONG_PASSWORD', 'Wrong Password');
+define('TEXT_WRONG_USERNAME', 'Wrong Username');
+define('TEXT_LOGGED_IN', 'Logged In');
+define('TEXT_LOGGED_OUT', 'Logged Out');
+define('TEXT_CONFIG_CHANGE', 'Config Change: ');
 ?>

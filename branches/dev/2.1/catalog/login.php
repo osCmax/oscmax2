@@ -42,7 +42,7 @@ $Id$
     if (!tep_db_num_rows($check_customer_query)) {
       	$error = true;
 	  	//Added by PGM
-		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', '" . date('F j, Y, g:i a') . "')");
+		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', now())");
 
     } else {
       $check_customer = tep_db_fetch_array($check_customer_query);
@@ -56,14 +56,13 @@ $Id$
 	  
         $error = true;
 		//Added by PGM
-		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', '" . date('F j, Y, g:i a') . "')");
+		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', now())");
 
       } else {
         if (SESSION_RECREATE == 'True' && !isset($_POST['action'])) {
-
-		//echo "sdsd";
+			
 		//Added by PGM
-		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', '" . date('F j, Y, g:i a') . "')");
+		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', now())");
 
 
 		if(isset($_POST['phoneorder']) && ($_POST['phoneorder'] == 'order')){

@@ -19,4 +19,5 @@ define('TABLE_HEADING_USER', 'User ID');
 define('TABLE_HEADING_EVENT', 'Event Type');
 
 define('TEXT_DISPLAY_NUMBER_OF_LOGS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> logs)');
+define('TEXT_CUSTOMER_TABLE_OPTIMISED', 'Customer Log data reset (Log start number continues from previous record).  Customer Log table has been optimized.');
 ?>

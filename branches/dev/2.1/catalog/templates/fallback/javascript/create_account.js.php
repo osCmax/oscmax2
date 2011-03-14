@@ -181,13 +181,13 @@ function check_form(form_name) {
   }
   
   if (tep_not_null(ENTRY_LAST_NAME_TEXT)) { ?>
-    check_input("firstname", <?php echo ENTRY_LAST_NAME_MIN_LENGTH; ?>, "<?php echo ENTRY_LAST_NAME_ERROR; ?>");
+    check_input("lastname", <?php echo ENTRY_LAST_NAME_MIN_LENGTH; ?>, "<?php echo ENTRY_LAST_NAME_ERROR; ?>");
   <?php
   }
   
   if (ACCOUNT_DOB == 'true') {
     if (tep_not_null(ENTRY_DATE_OF_BIRTH_TEXT)) { ?>
-	  check_input("firstname", <?php echo ENTRY_DOB_MIN_LENGTH; ?>, "<?php echo ENTRY_DATE_OF_BIRTH_ERROR; ?>");
+	  check_input("dob", <?php echo ENTRY_DOB_MIN_LENGTH; ?>, "<?php echo ENTRY_DATE_OF_BIRTH_ERROR; ?>");
 	<?php
 	}
   }
@@ -203,7 +203,7 @@ function check_form(form_name) {
 	<?php
 	}
 	if (tep_not_null(ENTRY_COMPANY_TAX_ID_TEXT)) { ?>
-	  check_input("company", <?php echo ENTRY_COMPANY_MIN_LENGTH; ?>, "<?php echo ENTRY_COMPANY_TAX_ID_ERROR; ?>");
+	  check_input("company_tax_id", <?php echo ENTRY_COMPANY_MIN_LENGTH; ?>, "<?php echo ENTRY_COMPANY_TAX_ID_ERROR; ?>");
 	<?php
 	}	
   }
@@ -241,7 +241,7 @@ function check_form(form_name) {
   }
   
   if (tep_not_null(ENTRY_FAX_NUMBER_TEXT)) { ?>
-    check_input("telephone", <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>, "<?php echo ENTRY_FAX_NUMBER_ERROR; ?>");
+    check_input("fax", <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>, "<?php echo ENTRY_FAX_NUMBER_ERROR; ?>");
   <?php
   }
 ?>

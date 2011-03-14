@@ -21,4 +21,5 @@ define('TABLE_HEADING_REFERER', 'Referer');
 define('TABLE_HEADING_ERROR_TYPE', 'Error Type');
 
 define('TEXT_DISPLAY_NUMBER_OF_ERRORS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> errors)');
+define('TEXT_HTTP_LOG_OPTIMISED', 'Http Error Log data reset (Log start number continues from previous record).  Http Error Log table has been optimized.');
 ?>

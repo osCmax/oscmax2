@@ -45,7 +45,7 @@ $Id$
 ?>
 			<tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)">
         		<td class="dataTableContent"><?php echo $http_error['error_number']; ?></td>
-       		 	<td class="dataTableContent"><?php echo $http_error['error_timestamp']; ?></td>
+       		 	<td class="dataTableContent"><?php echo tep_datetime_short($http_error['error_timestamp']); ?></td>
         		<td class="dataTableContent"><?php echo $http_error['error_ip']; ?></td>
                 <td class="dataTableContent"><?php echo $http_error['error_url']; ?></td>
                 <td class="dataTableContent"><?php echo $http_error['error_browser']; ?></td>

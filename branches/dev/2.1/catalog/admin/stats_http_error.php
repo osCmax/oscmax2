@@ -19,7 +19,7 @@ $Id$
   case 'reset_http_error':
 	  tep_db_query("delete from " . TABLE_HTTP_ERROR);
 	  tep_db_query("optimize table " . TABLE_HTTP_ERROR);
-	  $messageStack->add_session('Http Error Log data reset (Log start number continues from previous record).  Http Error Log table has been optimized.', 'success');
+	  $messageStack->add_session(TEXT_HTTP_LOG_OPTIMISED, 'success');
 	  tep_redirect(tep_href_link(FILENAME_STATS_HTTP_ERROR));
   break;
   }
@@ -91,7 +91,7 @@ $Id$
 ?>
               <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
                 <td class="dataTableContent"><?php echo $http_error['error_number']; ?></td>
-                <td class="dataTableContent"><?php echo $http_error['error_timestamp']; ?></td>
+                <td class="dataTableContent"><?php echo tep_datetime_short($http_error['error_timestamp']); ?></td>
                 <td class="dataTableContent"><?php echo $http_error['error_ip']; ?></td>
                 <td class="dataTableContent"><?php echo $http_error['error_url']; ?></td>
                 <td class="dataTableContent"><?php echo $http_error['error_browser']; ?></td>

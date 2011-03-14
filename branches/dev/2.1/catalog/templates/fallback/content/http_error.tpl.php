@@ -39,7 +39,7 @@ $Id$
 
 // PGM Edit to store in dbase
 
-tep_db_query("insert into " . TABLE_HTTP_ERROR . " values ('', '" . $_GET['error_id'] . "', '" .  HTTP_SERVER . $_SERVER['REQUEST_URI'] . "', '" . $_SERVER['REMOTE_ADDR'] . "', '" . $_SERVER['HTTP_USER_AGENT'] . "', '" . $_SERVER['$HTTP_REFERER'] . "', '" . date('F j, Y, g:i a') . "')");
+tep_db_query("insert into " . TABLE_HTTP_ERROR . " values ('', '" . $_GET['error_id'] . "', '" .  HTTP_SERVER . $_SERVER['REQUEST_URI'] . "', '" . $_SERVER['REMOTE_ADDR'] . "', '" . $_SERVER['HTTP_USER_AGENT'] . "', '" . $_SERVER['$HTTP_REFERER'] . "', now())");
 
 ?>
 

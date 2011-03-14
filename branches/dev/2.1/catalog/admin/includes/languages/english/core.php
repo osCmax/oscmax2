@@ -619,4 +619,14 @@ define('TEXT_WRONG_USERNAME', 'Wrong Username');
 define('TEXT_LOGGED_IN', 'Logged In');
 define('TEXT_LOGGED_OUT', 'Logged Out');
 define('TEXT_CONFIG_CHANGE', 'Config Change: ');
+
+// Footer defines
+define('TEXT_POWERED_BY', 'Powered by ');
+define('TEXT_SECURITY', 'Security: ');
+define('TEXT_REPORT_BUGS', 'Report Bugs');
+define('TEXT_FORUM', 'Forum');
+define('TEXT_WIKI', 'Wiki Help Documents');
+define('TEXT_COPYRIGHT', 'Copyright');
+
+
 ?>

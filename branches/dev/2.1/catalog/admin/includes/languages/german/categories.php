@@ -150,7 +150,7 @@ define('LAYOUT_HIDE_FROM', '0');
 
 // BOF QPBPP for SPPC
 define('TEXT_PRODUCTS_QTY_BLOCKS', 'Verpackungseinheit:');
-define('TEXT_PRODUCTS_QTY_BLOCKS_HELP', '(kann nur als Vielfaches von X bestellt werden, standardmäßig 1)');
+define('TEXT_PRODUCTS_QTY_BLOCKS_HELP', '(kann nur als Vielfaches der Verpackungseinheit bestellt werden, standardmäßig 1)');
 define('TEXT_PRODUCTS_PRICE', 'Preisstaffel');
 define('TEXT_PRODUCTS_QTY', 'Stück zum Einzelpreis von');
 define('TEXT_PRODUCTS_DELETE', 'Löschen');
@@ -161,7 +161,7 @@ define('TEXT_DISCOUNT_CATEGORY', 'Rabattkategorie:');
 define('ERROR_UPDATE_INSERT_DISCOUNT_CATEGORY', 'Es ist beim Andern oder Anlegen der Tabelle discount_categories ein Fehler aufgetreten');
 define('ERROR_ALL_CUSTOMER_GROUPS_DELETED', 'Alle Kundengruppen wurden gelöscht. Bitte legen Sie zumindest retail in der Tabekke customers_groups an (siehe sppc_v421_install.sql)');
 define('TEXT_PRODUCTS_MIN_ORDER_QTY', 'Mindestbestellmenge:');
-define('TEXT_PRODUCTS_MIN_ORDER_QTY_HELP', '(standardmäßig 1,  Wertangabe nicht verpflichtend)');
+define('TEXT_PRODUCTS_MIN_ORDER_QTY_HELP', '(standardmäßig 1,  Angabe nicht verpflichtend)');
 define('TEXT_PRICE_BREAK_INFO', '<acronym title="wie Preis(Menge)">Preissprung</acronym>: ');
 define('PB_DROPDOWN_BEFORE', '');
 define('PB_DROPDOWN_BETWEEN', ' bei ');
@@ -177,7 +177,7 @@ define('TEXT_CATEGORIES_FEATURED', 'Empfohlene Kategorie');
 define('TEXT_CATEGORIES_YES', 'Ja');
 define('TEXT_CATEGORIES_NO', 'Nein');
 define('TEXT_CATEGORIES_FEATURED_DATE', 'Empfohlen bis Datum ');
-define('TEXT_PRODUCTS_FEATURED', 'Empfohlene Produkte:');
+define('TEXT_PRODUCTS_FEATURED', 'Empfohlenes Produkt:');
 define('TEXT_PRODUCT_NO', 'Nein');
 define('TEXT_PRODUCT_YES', 'Ja');
 define('TEXT_MORE_INFO', 'mehr...');

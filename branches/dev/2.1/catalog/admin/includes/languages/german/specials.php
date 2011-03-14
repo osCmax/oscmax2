@@ -39,4 +39,7 @@ define('TEXT_INFO_DELETE_INTRO', 'Sind Sie sicher, dass Sie das Sonderangebot lö
 define('HEADING_NO_SPECIALS', '<b>Keine Sonderangebote verfügbar</b>');
 define('TEXT_NO_SPECIALS', 'KlickenSie auf <b>Neue Produkte</b>, um ein neues Sonderangebot zu erstellen.');
 
+define('TEXT_SPECIALS_HELP', 'Hilfe zu Sonderangeboten');
+define('TEXT_NEVER', 'Niemals');
+define('TEXT_CURRENTLY_ACTIVE', 'Derzeit aktiv');
 ?>

@@ -10,6 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 define('TEXT_ORDER_NUMBERS_RANGES', 'Bestellnummer(n), entweder einzelne Nummer # oder von - bis, # - #, oder #,#,#');
+define('TEXT_DIR_ERROR', ' Fehler: Es ist ein Problem aufgetreten beim Öffnen des Verzeichnisses ');
+define('TEXT_BPC_OPTIONS', 'Batch Print Center Optionen');
+define('TEXT_BPC_NO_OPTIONS', 'Für Ihre ausgewählte Option sind keine Optionen verfügbar.');
 define('HEADING_TITLE', 'Seriendruck Center');
 define('TABLE_HEADING_COMMENTS', 'Kommentare');
 define('TABLE_HEADING_PRODUCTS_MODEL', 'Artikelnummer');
@@ -91,6 +94,11 @@ $error['ERROR_BAD_INVOICENUMBERS'] =  'Fehler: Ungültige Rechnungsnummer! Bitte 
 $error['NO_ORDERS'] =  'Fehler: Es wurden keine Bestellungen für den Export ausgewählt, bitte passen Sie ihre Optionen an.';
 $error['SET_PERMISSIONS'] = 'Fehler: Das Verzeichnis ist schreibgeschützt!  Bitte setzen Sie die Zugriffsrechte für Ihr temp_pdf Verzeichnis auf CHMOD 0777';
 $error['FAILED_TO_OPEN'] = 'Fehler: Die Datei kann nicht zum Schreiben geöffnet werden! Bitte überprüfen Sie die Zugriffsberechtigungen.';
+
+define('SUCCESS_1', 'Erfolg: PDF mit ');
+define('SUCCESS_2', ' Einträgen wurde erfolgreich erstellt. Bitte ');
+define('SUCCESS_3', 'klicken Sie hier');
+define('SUCCESS_4', ', umd die Datei zu öffnen.');
 
 // PDF FONT SIZES
 define('COMPANY_HEADER_FONT_SIZE','14');

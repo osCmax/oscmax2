@@ -38,13 +38,13 @@ define('AM_AJAX_PROMPT_REMOVE_OPTION_AND_ALL_VALUES', 'Sind Sie sicher, dass Sie
 define('AM_AJAX_PROMPT_REMOVE_OPTION', 'Sind Sie sicher, dass Sie %s von diesem Produkt löschen möchten?');
 define('AM_AJAX_PROMPT_STOCK_COMBINATION', 'Sind Sie sicher, dass Sie diese Lager-Kombination von diesem Produkt löschen möchten?');
 
-define('AM_AJAX_PROMPT_LOAD_TEMPLATE', 'Sind Sie sicher, dass Sie das %s Template laden möchten? <br />Dadurch werden alle bestehenden Optionen ersetzt. Dies kann nicht rückgängig gemacht werden.');
-define('AM_AJAX_NEW_TEMPLATE_NAME_HEADER', 'Bitte geben Sie einen Namen für das neue Template eingeben. Oder...');
+define('AM_AJAX_PROMPT_LOAD_TEMPLATE', 'Sind Sie sicher, dass Sie die %s Volage laden möchten? <br />Dadurch werden alle bestehenden Optionen ersetzt. Dies kann nicht rückgängig gemacht werden.');
+define('AM_AJAX_NEW_TEMPLATE_NAME_HEADER', 'Bitte geben Sie einen Namen für die neue Vorlage eingeben. Oder...');
 define('AM_AJAX_NEW_NAME', 'Neuer Name:');
 define('AM_AJAX_CHOOSE_EXISTING_TEMPLATE_TO_OVERWRITE', ' ...<br /> ... einen Existierenden zum überschreiben auswählen');
 define('AM_AJAX_CHOOSE_EXISTING_TEMPLATE_TITLE', 'Existiert:'); 
-define('AM_AJAX_RENAME_TEMPLATE_ENTER_NEW_NAME', 'Bitte einen neuen Namen für das Template %s eingeben');
-define('AM_AJAX_PROMPT_DELETE_TEMPLATE', 'Sind Sie sicher, dass Sie das Template %s löschen möchten?<br>Dies kann nicht rückgängig gemacht werden!');
+define('AM_AJAX_RENAME_TEMPLATE_ENTER_NEW_NAME', 'Bitte einen neuen Namen für die Vorlagee %s eingeben');
+define('AM_AJAX_PROMPT_DELETE_TEMPLATE', 'Sind Sie sicher, dass Sie die Vorlage %s löschen möchten?<br>Dies kann nicht rückgängig gemacht werden!');
 
 //attributeManager.php
 
@@ -52,8 +52,8 @@ define('AM_AJAX_ADDS_ATTRIBUTE_TO_OPTION', 'Fügt das links ausgewählte Attribut 
 define('AM_AJAX_ADDS_NEW_VALUE_TO_OPTION', 'Fügt einen neuen Wert zu der Option %s hinzu');
 define('AM_AJAX_PRODUCT_REMOVES_OPTION_AND_ITS_VALUES', 'Löscht, die Option %1$s und die %2$d Optionswert(e) die nachfolgen, von diesem Produkt');
 define('AM_AJAX_CHANGES', 'Ändern'); 
-define('AM_AJAX_LOADS_SELECTED_TEMPLATE', 'Lädt die ausgewählte Vorlage');
-define('AM_AJAX_SAVES_ATTRIBUTES_AS_A_NEW_TEMPLATE', 'Sichert die aktuellen Attribut als eine neue Vorlage');
+define('AM_AJAX_LOADS_SELECTED_TEMPLATE', 'Ausgewählte Vorlageladen');
+define('AM_AJAX_SAVES_ATTRIBUTES_AS_A_NEW_TEMPLATE', 'Aktuelle Attribute als neue Vorlage sichern');
 define('AM_AJAX_RENAMES_THE_SELECTED_TEMPLATE', 'Benennt die ausgewählte Vorlage um');
 define('AM_AJAX_DELETES_THE_SELECTED_TEMPLATE', 'Löscht die ausgewählte Vorlage');
 define('AM_AJAX_NAME', 'Name');
@@ -73,7 +73,7 @@ define('AM_AJAX_ADDS_NEW_OPTION_VALUE', 'Fügt einen neuen Optionswert zur Liste 
 define('AM_AJAX_ADDS_ATTRIBUTE_TO_PRODUCT', 'Fügt das Attribut zum aktuellen Produkt hinzu');
 define('AM_AJAX_DELETES_ATTRIBUTE_FROM_PRODUCT', 'Löscht Attribut oder Attributkombination aus diesem Produkt');
 define('AM_AJAX_QUANTITY', 'Anzahl');
-define('AM_AJAX_PRODUCT_REMOVE_ATTRIBUTE_COMBINATION_AND_STOCK', 'Löscht diese Attribut kombination und löst Lagerbestände von diesem Produkt auf');
+define('AM_AJAX_PRODUCT_REMOVE_ATTRIBUTE_COMBINATION_AND_STOCK', 'Löscht diese Attribut kombination und löst Lagerbestände dieses Produktes auf');
 define('AM_AJAX_UPDATE_OR_INSERT_ATTRIBUTE_COMBINATIONBY_QUANTITY', 'Aktualisiert oder fügt die Attributkombination mit den angegebenen Eigenschaften hinzu');
 
 

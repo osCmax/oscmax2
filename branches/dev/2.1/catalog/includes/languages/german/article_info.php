@@ -18,7 +18,7 @@ define('TEXT_DATE_AVAILABLE', '<font color="#FF0000">Dieser Artikel wird veröffe
 define('TEXT_CURRENT_REVIEWS', 'Aktuelle Bewertungen:');
 define('BOX_TEXT_TELL_A_FRIEND', 'Weiterempfehlen'); 
 define('TEXT_TELL_A_FRIEND', 'Artikel weiterempfehlen:');
-define('TEXT_XSELL_ARTICLES', 'Artikel, die mit diesem Artikel in Verbindung stehen:');
+define('TEXT_XSELL_ARTICLES', 'Produkte, die mit diesem Artikel in Verbindung stehen:');
 define('HEADING_TITLE', 'Artikel');
 
 ?>

@@ -193,7 +193,7 @@ define('ENTRY_STREET_ADDRESS_TEXT', '*');
 define('ENTRY_CITY', 'Ort:');
 define('ENTRY_CITY_ERROR', 'Der Ort muss mindestens ' . ENTRY_CITY_MIN_LENGTH . ' Zeichen enthalten.');
 define('ENTRY_CITY_TEXT', '*');
-define('ENTRY_STATE_TEXT', '* (Wählen Sie zuerst ein Bundesland)');
+define('ENTRY_STATE_TEXT', '* (Wählen Sie zuerst ein Land)');
 define('ENTRY_COUNTRY', 'Land:');
 define('ENTRY_COUNTRY_ERROR', 'Bitte wählen Sie ein Land aus der Liste.');
 define('ENTRY_COUNTRY_TEXT', '* (Die Seite wird nach einer Änderung aktualisiert)');
@@ -223,7 +223,7 @@ define('ENTRY_PASSWORD_NEW_ERROR', 'Das neue Passwort muss mindestens ' . ENTRY_
 define('ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING', 'Beide eingegebenen Passwörter müssen identisch sein.');
 define('PASSWORD_HIDDEN', '*************');
 
-define('FORM_REQUIRED_INFORMATION', '* Pflichteingabe');
+define('FORM_REQUIRED_INFORMATION', '* Pflichtangabe');
 
 // constants for use in tep_prev_next_display function
 define('TEXT_RESULT_PAGE', 'Seiten:');

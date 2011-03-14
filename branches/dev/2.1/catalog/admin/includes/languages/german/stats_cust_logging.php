@@ -19,4 +19,5 @@ define('TABLE_HEADING_USER', 'Benutzer ID');
 define('TABLE_HEADING_EVENT', 'Ereignistyp');
 
 define('TEXT_DISPLAY_NUMBER_OF_LOGS', '<b>%d</b> bis <b>%d</b> (von <b>%d</b> Logs)');
+define('TEXT_ADMIN_LOG_OPTIMISED', 'Kunden Log zurücksetzen (Die Zeilennummer wird nicht zurückgesetzt.). Die Kunden Log Tabelle wurde optimiert.');
 ?>

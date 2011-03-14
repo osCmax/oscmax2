@@ -11,8 +11,8 @@ $Id$
 */
 
 define('HEADING_TITLE', 'Kunden mit den höchsten Umsätzen');
-
 define('TABLE_HEADING_NUMBER', 'Nr.');
 define('TABLE_HEADING_CUSTOMERS', 'Kunde');
 define('TABLE_HEADING_TOTAL_PURCHASED', 'Gesamtsumme');
+define('TEXT_NUM_ORDERS', 'Anzahl der Bestellungen');
 ?>

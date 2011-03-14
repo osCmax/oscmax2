@@ -46,6 +46,48 @@ define('TEXT_DISPLAY_NUMBER_OF_MEMBERS', '<b>%d</b> bis <b>%d</b> (von <b>%d</b>
 ////
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 setlocale(LC_TIME, 'de_DE.ISO_8859-1');
 define('DATE_FORMAT_SHORT', '%d.%m.%Y');  // this is used for strftime()
 define('DATE_FORMAT_LONG', '%A, %d %B %Y'); // this is used for strftime()
@@ -68,61 +110,19 @@ function tep_date_raw($date, $reverse = false) {
 // text for date of birth example
 define('DOB_FORMAT_STRING', 'tt.mm.jjjj');
 
-define('JS_STATE', '* Das \'Bundesland\' mu&szlig; ausgew‰hlt werden.\n');
-define('JS_DOB', '* Das \'Geburtsdatum\' mu&szlig; dieses Format haben: tt.mm.jjjj.\n');
-define('JS_ZONE', '* Das \'Bundesland\' mu&szlig; aus der Liste dieses Landes ausgew‰hlt werden.');
+define('JS_STATE', '* Das \'Bundesland\' muﬂ ausgew‰hlt werden.\n');
+define('JS_DOB', '* Das \'Geburtsdatum\' muﬂ dieses Format haben: tt.mm.jjjj.\n');
+define('JS_ZONE', '* Das \'Bundesland\' muﬂ aus der Liste dieses Landes ausgew‰hlt werden.');
 define('JS_POST_CODE', '* Die \'Postleitzahl\' mu&szlig; mindestens ' . ENTRY_POSTCODE_MIN_LENGTH . ' Stellen aufweisen.\n');
 
 define('ENTRY_SUBURB', 'Adresszeile 2:');
 define('ENTRY_SUBURB_ERROR', '');
 define('ENTRY_POST_CODE', 'Postleitzahl:');
-define('ENTRY_POST_CODE_TEXT', '&nbsp;<span class="errorText">*</span>');
 define('ENTRY_POST_CODE_ERROR', '&nbsp;<span class="errorText">mindestens ' . ENTRY_POSTCODE_MIN_LENGTH . ' Zeichen</span>');
 define('ENTRY_DATE_OF_BIRTH_ERROR', '&nbsp;<span class="errorText">(zB 21.05.1970)</span>');
 define('ENTRY_DATE_OF_BIRTH_TEXT', '&nbsp;<span class="errorText">*</span>&nbsp;(zB 21.05.1970)');
 define('ENTRY_STATE', 'Bundesland:');
-define('ENTRY_STATE_TEXT', '');
 define('ENTRY_STATE_ERROR', '&nbsp;<span class="errorText">notwendig</span>');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -175,13 +175,13 @@ define('BOX_CONFIGURATION_IMAGES', 'Bilder');
 define('BOX_CONFIGURATION_CUSTOMER_DETAILS', 'Kundendaten');
 define('BOX_CONFIGURATION_SHIPPING', 'Versandart');
 define('BOX_CONFIGURATION_PAGE_CACHE', 'Page Cache Einstellungen');
-
-define('BOX_CONFIGURATION_PRODUCT_LISTING', 'Produktlisting');
+define('BOX_CONFIGURATION_PRODUCT_SETTINGS', 'Produkteinstellungen');
+define('BOX_CONFIGURATION_PRODUCT_LISTING', 'Produktliste');
 define('BOX_CONFIGURATION_PRODUCT_INFO', 'Produktinformation');
-
-define('BOX_CONFIGURATION_EMAIL', 'E-Mail');
+define('BOX_CONFIGURATION_PRODUCT_PRICE_BREAKS', 'Produkt Staffelpreise');
+define('BOX_CONFIGURATION_EMAIL', 'E-Mail Optionen');
 define('BOX_CONFIGURATION_DOWNLOAD', 'Download');
-define('BOX_CONFIGURATION_GZIP', 'GZip');
+define('BOX_CONFIGURATION_GZIP', 'GZip Kompression');
 define('BOX_CONFIGURATION_SESSIONS', 'Sessions');
 define('BOX_CONFIGURATION_STOCK', 'Lager');
 define('BOX_CONFIGURATION_MC', 'MailChimp Newsletter');
@@ -205,7 +205,7 @@ define('BOX_CONFIGURATION_EDITOR', 'Bestellungseditor');
 define('BOX_CONFIGURATION_SEO_VALIDATION', 'SEO URL ‹berpr¸fung');
 // EOF: Added for super-friendly admin menu:
 
-define('TEXT_LOGGING_CACHE', 'Logging / Cache');
+define('BOX_CONFIGURATION_LOGGING_CACHE', 'Logging / Cache');
 define('BOX_CONFIGURATION_USEFUL', 'N¸tzliche Links');
 define('BOX_CONFIGURATION_OPC', 'One Page Checkout');
 define('BOX_CONFIGURATION_CORNER_BANNERS', 'Eckbanner');
@@ -608,4 +608,15 @@ define('TEXT_FAIR', 'Ausreichend');
 define('TEXT_AVERAGE', 'Durchschnittlich');
 define('TEXT_GOOD', 'Gut');
 define('TEXT_EXCELLENT', 'Ausgezeichnet');
+
+define('BOX_HEADING_SECURITY', 'Sicherheit');
+define('TEXT_PRODUCTS', 'Produkte');
+define('TEXT_SEARCH', 'Suchen: ');
+define('TEXT_WELCOME', ' Willkommen, ');
+
+define('TEXT_WRONG_PASSWORD', 'Falsches Passwort');
+define('TEXT_WRONG_USERNAME', 'Falscher Benutzername');
+define('TEXT_LOGGED_IN', 'Angemeldet');
+define('TEXT_LOGGED_OUT', 'Abgemeldet');
+define('TEXT_CONFIG_CHANGE', 'Einstellungs‰nderung: ');
 ?>

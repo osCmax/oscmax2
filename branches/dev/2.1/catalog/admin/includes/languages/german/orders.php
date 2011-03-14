@@ -16,8 +16,9 @@ define('HEADING_TITLE', 'Bestellungen');
 define('HEADING_TITLE_SEARCH', 'Bestell-Nr.:');
 define('HEADING_TITLE_STATUS', 'Status:');
 //BOF: Orders search by customers info
-define('HEADING_TITLE_SEARCH_ALL', 'Suche (Bestellnummer, Kunde oder Firmenname):');
+define('HEADING_TITLE_SEARCH_ALL', 'Suchen nach Bestellnummer, Kunden- oder Firmennamen:');
 //EOF: Orders search by customers info
+define('TABLE_HEADING_ORDER_NUM', 'Nr.');
 define('TABLE_HEADING_COMMENTS', 'Kommentare');
 define('TABLE_HEADING_NEW_COMMENTS', 'Kommentar hinzufügen');
 define('TABLE_HEADING_CUSTOMERS', 'Kunden');

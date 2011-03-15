@@ -43,7 +43,8 @@ $Id$
       </tr>
       <?php if ($message <>'') {
 		  	$message_type = substr($message,0,3);
-				if ($message_type == 'Suc') { ?>
+			$message_check = substr(SUCCESS_1,0,3);
+				if ($message_type == $message_check) { ?>
                   <tr>
                     <td class="messageStackSuccess"><?php echo $message; ?></td>
                   </tr>

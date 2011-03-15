@@ -19,7 +19,7 @@ $Id$
   case 'reset_customer_log':
 	  tep_db_query("delete from " . TABLE_CUSTOMER_LOG);
 	  tep_db_query("optimize table " . TABLE_CUSTOMER_LOG);
-	  $messageStack->add_session(TEXT_TABLE_OPTIMISED, 'success');
+	  $messageStack->add_session(TEXT_CUSTOMER_TABLE_OPTIMISED, 'success');
 	  tep_redirect(tep_href_link(FILENAME_STATS_CUST_LOGGING));
   break;
   }

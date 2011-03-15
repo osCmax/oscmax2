@@ -208,7 +208,7 @@ function ToggleCheckBox($cb) {
 	         ?>
 	         <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#999999">
                <tr class="dataTableHeadingRow">
-                 <td class="dataTableHeadingContent" width="100%">Please select a category</td>
+                 <td class="dataTableHeadingContent" width="100%"><?php echo SELECT_CATEGORY; ?></td>
 	           </tr>
                <tr class="dataTableRow">
                  <td class="dataTableContent">
@@ -231,11 +231,11 @@ function ToggleCheckBox($cb) {
                  <td><form action="<?php tep_href_link(FILENAME_ARTICLES_XSELL, '', 'NONSSL'); ?>" method="post">
                    <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#999999">
                      <tr class="dataTableHeadingRow">
-                       <td class="dataTableHeadingContent" width="50" align="center">ID</td>
-                       <td class="dataTableHeadingContent" width="50">Model</td>
+                       <td class="dataTableHeadingContent" width="50" align="center"><?php echo TEXT_ID; ?></td>
+                       <td class="dataTableHeadingContent" width="50"><?php echo TEXT_MODEL; ?></td>
                        <td class="dataTableHeadingContent" width="<?php echo SMALL_IMAGE_WIDTH; ?>">Image</td>
                        <td class="dataTableHeadingContent"><?php echo HEADING_PRODUCT_NAME; ?></td>
-                       <td class="dataTableHeadingContent" width="50">Select</td>
+                       <td class="dataTableHeadingContent" width="50"><?php echo TEXT_SELECT; ?></td>
                      </tr>
                      <?php
                      $query = "select p.products_id, p.products_image, p.products_model, pd.products_name, pd.products_description, pd.products_url from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p2c.categories_id='".tep_db_input((int)$_GET['cPath'])."' and pd.products_id = p.products_id and p2c.products_id=p.products_id and pd.language_id = '" . (int)$languages_id . "' order by pd.products_name ";

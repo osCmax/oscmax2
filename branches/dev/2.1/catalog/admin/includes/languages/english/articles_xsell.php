@@ -34,4 +34,8 @@ define('TEXT_DBASE_UPDATED', 'Cross Sell Articles: Database Updated');
 define('TEXT_CHANGES_SAVED', 'Your changes have been saved to the database please either go back to the main page or click the link to sort the order in which the cross sell products are listed.');
 define('TEXT_SELECT_A_CATEGORY', 'Please select the category of the product you wish to cross sell.');
 define('TEXT_SELECT_PRODUCT', 'Then select the product you wish to add by checking the tick boxes.');
+
+define('TEXT_ID', 'ID');
+define('TEXT_MODEL', 'Model');
+define('TEXT_SELECT', 'Select');
 ?>

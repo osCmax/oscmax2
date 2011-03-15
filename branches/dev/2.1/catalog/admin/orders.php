@@ -69,7 +69,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
     require_once (DIR_WS_CLASSES . 'order.php');
 	require (DIR_WS_FUNCTIONS . 'batch_print.php');
 	
-	$orders_query = tep_db_query("select o.orders_id, h.comments, MIN(h.date_added) from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_STATUS_HISTORY . " h where o.orders_id = '" . $oID . "' and h.orders_id = o.orders_id GROUP BY h.date_added");
+	$orders_query = tep_db_query("select o.orders_id from " . TABLE_ORDERS . " o where o.orders_id = '" . $oID . "'");
 	
 	$pageloop = "1";
     
@@ -117,7 +117,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
 // BOF: MOD - Downloads Controller
 // always update date and time on order_status
 // original        if ( ($check_status['orders_status'] != $status) || tep_not_null($comments)) {
-                   if ( ($check_status['orders_status'] != $status) || $comments != '' || ($status ==DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE) ) {
+                   if ( ($check_status['orders_status'] != $status) || $comments != '' || ($status == DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE) ) {
           tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . tep_db_input($status) . "', last_modified = now() where orders_id = '" . (int)$oID . "'");
         $check_status_query2 = tep_db_query("select customers_name, customers_email_address, orders_status, date_purchased from " . TABLE_ORDERS . " where orders_id = '" . (int)$oID . "'");
         $check_status2 = tep_db_fetch_array($check_status_query2);

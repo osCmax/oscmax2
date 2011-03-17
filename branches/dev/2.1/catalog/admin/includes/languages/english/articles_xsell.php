@@ -38,4 +38,5 @@ define('TEXT_SELECT_PRODUCT', 'Then select the product you wish to add by checki
 define('TEXT_ID', 'ID');
 define('TEXT_MODEL', 'Model');
 define('TEXT_SELECT', 'Select');
+define('TEXT_IMAGE', 'Image');
 ?>

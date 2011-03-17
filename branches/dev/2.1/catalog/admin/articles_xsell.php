@@ -111,7 +111,7 @@ function ToggleCheckBox($cb) {
                 
               <table border="0" cellspacing="0" cellpadding="3" width="100%">
                 <tr class="dataTableHeadingRow"> 
-                  <td class="dataTableHeadingContent" align="center" nowrap>ID</td>
+                  <td class="dataTableHeadingContent" align="center" nowrap><?php echo TEXT_ID; ?></td>
                   <td class="dataTableHeadingContent"><?php echo HEADING_ARTICLE_NAME; ?></td>
                   <td class="dataTableHeadingContent" nowrap><?php echo HEADING_CROSS_ASSOCIATION; ?></td>
                   <td class="dataTableHeadingContent" colspan="3" align="center" nowrap><?php echo HEADING_CROSS_SELL_ACTIONS; ?></td>
@@ -233,7 +233,7 @@ function ToggleCheckBox($cb) {
                      <tr class="dataTableHeadingRow">
                        <td class="dataTableHeadingContent" width="50" align="center"><?php echo TEXT_ID; ?></td>
                        <td class="dataTableHeadingContent" width="50"><?php echo TEXT_MODEL; ?></td>
-                       <td class="dataTableHeadingContent" width="<?php echo SMALL_IMAGE_WIDTH; ?>">Image</td>
+                       <td class="dataTableHeadingContent" width="<?php echo SMALL_IMAGE_WIDTH; ?>"><?php echo TEXT_IMAGE; ?></td>
                        <td class="dataTableHeadingContent"><?php echo HEADING_PRODUCT_NAME; ?></td>
                        <td class="dataTableHeadingContent" width="50"><?php echo TEXT_SELECT; ?></td>
                      </tr>

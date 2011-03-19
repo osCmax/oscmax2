@@ -417,6 +417,7 @@ define('TEXT_READ_MORE', ' ... read more ... ');
 define('TEXT_MISSING_IMAGE', 'Sorry, product image is currently not available');
 define('TEXT_PAGE', 'Page: ');
 
+// Review Ratings
 define('TEXT_RATING', 'Rating: ');
 define('TEXT_POOR', 'Poor');
 define('TEXT_FAIR', 'Fair');
@@ -424,5 +425,10 @@ define('TEXT_AVERAGE', 'Average');
 define('TEXT_GOOD', 'Good');
 define('TEXT_EXCELLENT', 'Excellent');
 
-
+// Password Text
+define('PW_TOO_WEAK', 'Too Weak');
+define('PW_WEAK', 'Weak password');
+define('PW_NORMAL', 'Normal strength');
+define('PW_STRONG', 'Strong password');
+define('PW_VERY_STRONG', 'Very strong password');
 ?>

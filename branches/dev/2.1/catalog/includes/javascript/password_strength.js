@@ -102,11 +102,11 @@ $.fn.password_strength = function(options)
 		'container' : null,
 		'minLength' : 6,
 		'texts' : {
-			1 : 'Too weak',
-			2 : 'Weak password',
-			3 : 'Normal strength',
-			4 : 'Strong password',
-			5 : 'Very strong password'
+			1 : '<?php echo PW_TOO_WEAK; ?>',
+			2 : '<?php echo PW_WEAK; ?>',
+			3 : '<?php echo PW_NORMAL; ?>',
+			4 : '<?php echo PW_STRONG; ?>',
+			5 : '<?php echo PW_VERY_STRONG; ?>'
 		}
 	}, options);
 	

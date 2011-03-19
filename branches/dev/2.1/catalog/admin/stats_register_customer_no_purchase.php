@@ -45,19 +45,18 @@ $Id$
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo "Customer with no purchases from " . $date1 . " to ".$date2; ?></td>
+            <td class="pageHeading"><?php echo HEADING_TITLE . $date1 . HEADING_TITLE_TO . $date2; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
 		   <tr>
             <td class="main" colspan="2">
                 <form method="GET" action="<?php echo basename($_SERVER['PHP_SELF']) . '?date1=' . $date1.'&amp;date2='.$date2; ?>" name="dailyreportform"> 
                 <input type="hidden" name="action" value="dailyreportaction">
-                <?php // <br>cal1 value:<script type="text/javascript">document.write( document.forms.dailyreportform.action);</script><br> ?>
-                <?php echo 'Select Date '; ?>
+                <?php echo TEXT_SELECT_DATE; ?>
 				<?php echo tep_draw_input_field('date1', $date1, 'id="nopurchases_start"'); ?>
-                 - to -
+                <?php echo HEADING_TITLE_TO; ?>
 		        <?php echo tep_draw_input_field('date2', $date2, 'id="nopurchases_end"'); ?>
-		<input type="submit">
+		        <input type="submit">
                 </form>
 		    </td>
           </tr>
@@ -70,16 +69,16 @@ $Id$
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent"><?php echo 'No'; ?></td>
-                <td class="dataTableHeadingContent"><?php echo Customers; ?></td>
+                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NUMBER; ?></td>
+                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMER; ?></td>
 				
 				
                 <td class="dataTableHeadingContent" align="center">
-				 <?php echo 'Purchases'; ?>&nbsp;
+				 <?php echo TABLE_HEADING_PURCHASES; ?>&nbsp;
 				</td>
 								
 				 <td class="dataTableHeadingContent" align="right">
-				 <?php echo 'Join date'; ?>&nbsp;
+				 <?php echo TABLE_HEADING_JOIN_DATE; ?>&nbsp;
 				 </td>
               </tr>
 <?php
@@ -87,7 +86,7 @@ $Id$
   if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
 //  $customers_query_raw = "select c.customers_firstname, c.customers_lastname, count(o.orders_id) as ordersum from " . TABLE_CUSTOMERS . " c, " . TABLE_ORDERS . " o where c.customers_id = o.customers_id group by c.customers_firstname, c.customers_lastname order by ordersum DESC";  
   //$customers_query_raw = "select c.customers_firstname, c.customers_lastname, sum(op.products_quantity * op.final_price) as ordersum ,count(o.orders_id) as ordercnt  from " . TABLE_CUSTOMERS . " c, " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where c.customers_id = o.customers_id and o.orders_id = op.orders_id group by c.customers_firstname, c.customers_lastname order by $ORDER_BY";
-  $customers_query_raw ="select distinct(c.customers_id) from customers c , customers_info ci where c.customers_id=ci.customers_info_id  and c.customers_id not in ( select distinct(`customers_id`) from `orders`) and DATE(ci.customers_info_date_account_created)>=DATE(\"$date1%\") and DATE(ci.customers_info_date_account_created)<=DATE(\"$date2%\")";
+  $customers_query_raw ="select distinct (c.customers_id) from customers c, customers_info ci where c.customers_id = ci.customers_info_id and c.customers_id not in ( select distinct(`customers_id`) from `orders`) and DATE(ci.customers_info_date_account_created)>=DATE(\"$date1%\") and DATE(ci.customers_info_date_account_created)<=DATE(\"$date2%\")";
   
   $customers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_query_raw, $customers_query_numrows);
 
@@ -102,7 +101,7 @@ $Id$
     }
 ?>
               
-              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="document.location.href='<?php echo tep_href_link(FILENAME_CUSTOMERS, 'search='. $customers['customers_id'], 'NONSSL'); ?>'">
+              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="document.location.href='<?php echo tep_href_link(FILENAME_CUSTOMERS, 'search='. tep_customers_lname($customers['customers_id']), 'NONSSL'); ?>'">
 
                 <td class="dataTableContent"><?php echo $rows; ?>.</td>
                 <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS, 'search=' . tep_customers_lname($customers['customers_id']), 'NONSSL') . '">' . tep_customers_name($customers['customers_id']) . '</a>'; ?></td>

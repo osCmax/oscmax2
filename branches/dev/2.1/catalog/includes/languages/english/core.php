@@ -146,6 +146,8 @@ define('CHECKOUT_BAR_FINISHED', 'Finished!');
 
 // pull down default text
 define('PULL_DOWN_DEFAULT', 'Please Select');
+define('PULL_DOWN_DEFAULT_DOTS', 'Please Select ... ');
+define('PULL_DOWN_NA', 'N/A');
 define('TYPE_BELOW', 'Type Below');
 
 // javascript messages

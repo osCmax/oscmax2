@@ -21,4 +21,5 @@ define('TABLE_HEADING_REFERER', 'Verweis');
 define('TABLE_HEADING_ERROR_TYPE', 'Fehlertyp');
 
 define('TEXT_DISPLAY_NUMBER_OF_ERRORS', '<b>%d</b> bis <b>%d</b> (von <b>%d</b> Fehlern)');
+define('TEXT_HTTP_LOG_OPTIMISED', 'Http Fehler Log zurücksetzen (Die Zeilennummer wird nicht zurückgesetzt). Die Kunden Log Tabelle wurde optimiert.');
 ?>

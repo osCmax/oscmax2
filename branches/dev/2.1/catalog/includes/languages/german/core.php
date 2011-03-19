@@ -23,7 +23,9 @@ define('TITLE', STORE_NAME);
 // header text in includes/header.php
 define('HEADER_TITLE_CREATE_ACCOUNT', 'Konto erstellen');
 define('HEADER_TITLE_MY_ACCOUNT', 'Mein Konto');
+define('HEADER_TITLE_CONTACT_US', 'Kontaktieren Sie uns');
 define('HEADER_TITLE_CART_CONTENTS', 'Warenkorb');
+define('HEADER_TITLE_BASKET_CONTENTS', 'Warenkorb');
 define('HEADER_TITLE_CHECKOUT', 'Kasse');
 define('HEADER_TITLE_WISHLIST', 'Wunschliste');
 define('HEADER_TITLE_TOP', 'Nach oben');
@@ -144,7 +146,9 @@ define('CHECKOUT_BAR_FINISHED', 'Einkauf abeschlossen!');
 
 // pull down default text
 define('PULL_DOWN_DEFAULT', 'Bitte wählen Sie');
-define('TYPE_BELOW', 'bitte nachstehend eingeben');
+define('PULL_DOWN_DEFAULT_DOTS', 'Bitte auswählen... ');
+define('PULL_DOWN_NA', 'Keine Angabe');
+define('TYPE_BELOW', 'Nachstehend eingeben');
 
 // javascript messages
 define('JS_ERROR', 'Notwendige Angaben fehlen! Bitte vervollständigen Sie die folgenden Angaben:');

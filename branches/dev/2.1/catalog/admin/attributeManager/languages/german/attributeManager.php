@@ -52,7 +52,7 @@ define('AM_AJAX_ADDS_ATTRIBUTE_TO_OPTION', 'Fügt das links ausgewählte Attribut 
 define('AM_AJAX_ADDS_NEW_VALUE_TO_OPTION', 'Fügt einen neuen Wert zu der Option %s hinzu');
 define('AM_AJAX_PRODUCT_REMOVES_OPTION_AND_ITS_VALUES', 'Löscht, die Option %1$s und die %2$d Optionswert(e) die nachfolgen, von diesem Produkt');
 define('AM_AJAX_CHANGES', 'Ändern'); 
-define('AM_AJAX_LOADS_SELECTED_TEMPLATE', 'Ausgewählte Vorlageladen');
+define('AM_AJAX_LOADS_SELECTED_TEMPLATE', 'Ausgewählte Vorlage laden');
 define('AM_AJAX_SAVES_ATTRIBUTES_AS_A_NEW_TEMPLATE', 'Aktuelle Attribute als neue Vorlage sichern');
 define('AM_AJAX_RENAMES_THE_SELECTED_TEMPLATE', 'Benennt die ausgewählte Vorlage um');
 define('AM_AJAX_DELETES_THE_SELECTED_TEMPLATE', 'Löscht die ausgewählte Vorlage');
@@ -94,7 +94,7 @@ define('AM_AJAX_DOWLNOAD_DELETE', 'Download-Option löschen');
 define('AM_AJAX_HEADER_DOWLNOAD_ADD_NEW', 'Download-Option hinzufügen für \"%s\"');
 define('AM_AJAX_HEADER_DOWLNOAD_EDIT', 'Download-Option für \"%s\" bearbeiten');
 define('AM_AJAX_HEADER_DOWLNOAD_DELETE', 'Download-Option für \"%s\" löschen');
-define('AM_AJAX_FIRST_SAVE', 'Das Produkt muss gespeichert sein, bevor Optionen hinzugefügt werden können');
+define('AM_AJAX_FIRST_SAVE', 'Das Produkt muss gespeichert werden, bevor Optionen hinzugefügt werden können');
 
 //----------------------------
 // EOF Change: download attributes for AM

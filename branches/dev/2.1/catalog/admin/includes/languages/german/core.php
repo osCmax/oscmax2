@@ -146,7 +146,9 @@ define('BOX_MANUAL_ORDER_CREATE_ACCOUNT', 'Konto erstellen');
 define('BOX_MANUAL_ORDER_CREATE_ORDER', 'Bestellung erstellen');
 
 // pull down default text
-define('PULL_DOWN_DEFAULT', 'Bitte ausw&azml;hlen');
+define('PULL_DOWN_DEFAULT', 'Bitte auswählen');
+define('PULL_DOWN_DEFAULT_DOTS', 'Bitte auswählen... ');
+define('PULL_DOWN_NA', 'Keine Angabe');
 define('TYPE_BELOW', 'Nachstehend eingeben');
 
 // header text in includes/header.php
@@ -619,4 +621,14 @@ define('TEXT_WRONG_USERNAME', 'Falscher Benutzername');
 define('TEXT_LOGGED_IN', 'Angemeldet');
 define('TEXT_LOGGED_OUT', 'Abgemeldet');
 define('TEXT_CONFIG_CHANGE', 'Einstellungsänderung: ');
+
+// Footer defines
+define('TEXT_POWERED_BY', 'Powered by ');
+define('TEXT_SECURITY', 'Sicherheit: ');
+define('TEXT_REPORT_BUGS', 'Fehler melden');
+define('TEXT_FORUM', 'Forum');
+define('TEXT_WIKI', 'Wiki Hilfe');
+define('TEXT_COPYRIGHT', 'Copyright');
+
+
 ?>

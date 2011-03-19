@@ -34,4 +34,9 @@ define('TEXT_DBASE_UPDATED', 'Cross-Sell Artikel: Die Datenbank wurde aktualisie
 define('TEXT_CHANGES_SAVED', 'Ihre Änderungen wurden gespeichert. Sie können entweder zurückgehen, oder die Sortierreihenfolge ändern.');
 define('TEXT_SELECT_A_CATEGORY', 'Bitte wählen Sie die Kategorie, in der sich das Produkt befindet, das Sie anknüpfen möchten.');
 define('TEXT_SELECT_PRODUCT', 'Setzen Sie danach bei jenen Produkten einen Haken, die Sie anknüpfen möchten.');
+
+define('TEXT_ID', 'ID');
+define('TEXT_MODEL', 'Art-Nr');
+define('TEXT_SELECT', 'Auswählen');
+define('TEXT_IMAGE', 'Bild');
 ?>

@@ -75,6 +75,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $ship
     if (!tep_session_is_registered('shipping')) tep_session_register('shipping');
     $shipping = false;
     $sendto = false;
+//---PayPal WPP Modification START ---//
+	tep_paypal_wpp_checkout_shipping_redirect($show_payment_page, $ec_enabled);
+//---PayPal WPP Modification END ---//
     tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
   }
 
@@ -157,7 +160,10 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $ship
                                 'title' => (($free_shipping == true) ?  $quote[0]['methods'][0]['title'] : $quote[0]['module'] . ' (' . $quote[0]['methods'][0]['title'] . ')'),
                                 'cost' => $quote[0]['methods'][0]['cost']);
 
-              tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
+//---PayPal WPP Modification START ---//
+	      tep_paypal_wpp_checkout_shipping_redirect($show_payment_page, $ec_enabled);
+              //tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
+//---PayPal WPP Modification END ---//
             }
           }
         } else {
@@ -167,7 +173,10 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $ship
     } else {
       $shipping = false;
 
-      tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
+//---PayPal WPP Modification START ---//
+     tep_paypal_wpp_checkout_shipping_redirect($show_payment_page, $ec_enabled);
+      //tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
+//---PayPal WPP Modification END ---//
     }
   }
 

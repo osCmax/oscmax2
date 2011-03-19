@@ -184,7 +184,11 @@ if( isset($continueButtonId) ) {
           </tr>
         </table></td>
       </tr>
-<?php
+<?php 
+  //---PayPal WPP Modification START ---//
+    tep_paypal_wpp_ep_button(FILENAME_SHOPPING_CART);
+  //---PayPal WPP Modification END ---// 
+
     $initialize_checkout_methods = $payment_modules->checkout_initialization_method();
 
     if (!empty($initialize_checkout_methods)) {

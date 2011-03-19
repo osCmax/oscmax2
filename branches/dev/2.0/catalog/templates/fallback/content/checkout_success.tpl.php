@@ -71,5 +71,9 @@
           </tr>
         </table></td>
       </tr>
-<?php if (DOWNLOAD_ENABLED == 'true') include(DIR_WS_MODULES . 'downloads.php'); ?>
+<?php if (DOWNLOAD_ENABLED == 'true') include(DIR_WS_MODULES . 'downloads.php');
+//---PayPal WPP Modification START ---//
+  tep_paypal_wpp_checkout_completed($ec_enabled);
+//---PayPal WPP Modification END ---// 
+?>
     </table></form>

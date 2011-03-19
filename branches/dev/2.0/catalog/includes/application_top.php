@@ -679,15 +679,20 @@ if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILE
   define('WARN_SESSION_DIRECTORY_NOT_WRITEABLE', 'true');
   define('WARN_SESSION_AUTO_START', 'true');
   define('WARN_DOWNLOAD_DIRECTORY_NOT_READABLE', 'true');
-// LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
-  require(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
 
-// LINE ADDED: MOD - BTS
-  require(DIR_WS_INCLUDES . 'configure_bts.php');
 // BOF: MOD - NEW OSC tax class
   require('includes/classes/tax.php');
   $osC_Tax = new osC_Tax;
 // EOF: MOD - NEW OSC tax class
+
+// LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
+  require(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
+  //---PayPal WPP Modification START ---//
+  include(DIR_WS_INCLUDES . 'paypal_wpp/paypal_wpp_include.php');
+  //---PayPal WPP Modification END ---//
+// LINE ADDED: MOD - BTS
+  require(DIR_WS_INCLUDES . 'configure_bts.php');
+
 
 // BOF: MOD - Page cache contribution - by Chemo
 // Define the pages to be cached in the $cache_pages array

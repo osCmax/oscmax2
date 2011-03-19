@@ -163,4 +163,21 @@ define('BATCH_PDF_FILE', 'batch_orders.pdf');
 //define('PRICING_COLUMN_SIZES', '67');
 
 define('FOOTER_TEXT', 'Thank you for shopping with us at ' . STORE_NAME);
+
+// Filename defines to allow multilanguage use
+define('TEXT_MISSING_FILENAME', 'Missing language define for');
+define('TEXT_CHRISTMAS_CARD', 'Christmas Card');
+define('TEXT_GRID', 'Grid');
+define('TEXT_INTEGRATED_PACKING', 'Integrated Packing');
+define('TEXT_INTEGRATED_PACKING2', 'Integrated Packing 2');
+define('TEXT_INVOICE', 'Invoice');
+define('TEXT_INVOICE_S3', 'Invoice (uses S3 printed invoice paper)');
+define('TEXT_LABELS', 'Labels');
+define('TEXT_LABELWRITER', 'Labelwriter');
+define('TEXT_LETTERHEAD', 'Letterhead');
+define('TEXT_NULL', 'Null');
+define('TEXT_ORDER_STATUS_CHANGE_ONLY', 'Order Status change only');
+define('TEXT_PACKING_SLIP_AND_INVOICE', 'Packing Slip and Invoice');
+define('TEXT_PACKING_SLIP', 'Packing Slip');
+
 ?>

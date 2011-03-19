@@ -24,15 +24,23 @@ if (!$resc) {
 echo '<table width="100%"><tr><td class="messageStackError">' . tep_image(DIR_WS_ICONS . 'error.gif', ICON_ERROR) . '&nbsp;' . TEXT_DIR_ERROR . '<b>' . $directory . '</b></td></tr></table>';
 exit;
 }
+
 $file_type_array = array();
-$file_type_array[] = array('id' => $file,'text' => PULL_DOWN_DEFAULT);
+$file_type_array[] = array('id' => $file, 'text' => PULL_DOWN_DEFAULT_DOTS);
 while ($file = readdir($resc)) {
   $ext = strrchr($file, ".");
   if ($ext == ".php") {
-    $filename = str_replace('_', " ",$file);
-    $filename = str_replace('-', " ",$filename);
-    $filename = str_replace($ext, "",$filename);
-    $file_type_array[] = array('id' => $file,'text' => $filename);
+    $filename = str_replace(' ', "_", $file);
+    $filename = str_replace('-', "_", $filename);
+    $filename = str_replace($ext, "", $filename);
+	
+	if (constant('TEXT_' . strtoupper($filename)) != null) {
+	  $filename_string = constant('TEXT_' . strtoupper($filename));
+	} else {
+	  $filename_string = TEXT_MISSING_FILENAME . ' TEXT_' . strtoupper($filename);
+	}
+
+    $file_type_array[] = array('id' => $file, 'text' => $filename_string);
   }
 }
 ?>

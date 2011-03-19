@@ -94,7 +94,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 <!-- header //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr class="header">
-    <td valign="middle"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(bts_select('images','store_logo.gif'), STORE_NAME) . '</a>'; ?></td>
+    <td valign="middle"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(bts_select('images','oscmax-logo.png'), STORE_NAME) . '</a>'; ?></td>
     <td align="right" valign="bottom">
     <?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(bts_select('images','header_account.gif'), HEADER_TITLE_MY_ACCOUNT) . '</a>&nbsp;&nbsp;
     <a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(bts_select('images','header_cart.gif'), HEADER_TITLE_CART_CONTENTS) . '</a>&nbsp;&nbsp;

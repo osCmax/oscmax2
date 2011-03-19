@@ -33,7 +33,7 @@ $Id: main_page.php 3 2006-05-27 04:59:07Z user $
   <div>
     <div style="float: right; padding-top: 40px; padding-right: 15px; color: #000000; font-weight: bold;"><a href="http://www.oscmax.com" target="_blank">osCMax Website</a> &nbsp;|&nbsp; <a href="http://www.osCMax.com/forums" target="_blank">Support</a> &nbsp;|&nbsp; <a href="http://www.osCMax.com/book" target="_blank">Documentation</a></div>
 
-    <a href="index.php"><img src="images/oscmax-logo.png" border="0" width="85" height="80" title="osCMax Power E-Commerce <?php echo PROJECT_VERSION; ?>" style="margin: 10px 10px 0px 10px;" /></a>
+    <a href="index.php"><img src="images/oscmax-logo.png" border="0" width="187" height="54" title="osCMax Power E-Commerce <?php echo PROJECT_VERSION; ?>" style="margin: 10px 10px 0px 10px;" /></a>
   </div>
 </div>
 

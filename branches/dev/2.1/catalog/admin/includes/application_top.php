@@ -245,6 +245,10 @@ require(DIR_WS_LANGUAGES . $language . '/add_ccgvdc.php');
   if (basename($_SERVER['SCRIPT_FILENAME']) != FILENAME_LOGIN && basename($_SERVER['SCRIPT_FILENAME']) != FILENAME_PASSWORD_FORGOTTEN && basename($_SERVER['SCRIPT_FILENAME']) != FILENAME_FORBIDDEN) {
     tep_admin_check_login();
   }
+  
+  if (substr_count($_SERVER['SCRIPT_FILENAME'],'.php') > 1) {
+    tep_admin_check_login(); 
+  }
 // EOF: MOD - Admin w/access levels
 
 // LINE ADDED: MOD - OSC-AFFILIATE

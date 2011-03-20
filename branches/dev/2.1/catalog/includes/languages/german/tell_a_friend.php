@@ -34,6 +34,6 @@ define('TEXT_EMAIL_SIGNATURE', 'Mit freundlichen Grüßen,' . "\n\n" . '%s');
 
 define('ERROR_TO_NAME', 'Fehler: Der Name des Empfängers fehlt.');
 define('ERROR_TO_ADDRESS', 'Fehler: Die Empfänger-E-Mail-Adresse muss gültig sein.');
-define('ERROR_FROM_NAME', 'Fehler: Ihr Name fehlt.);
+define('ERROR_FROM_NAME', 'Fehler: Ihr Name fehlt.');
 define('ERROR_FROM_ADDRESS', 'Fehler: Die Ihre E-Mail-Adresse muss gültig sein.');
 ?>

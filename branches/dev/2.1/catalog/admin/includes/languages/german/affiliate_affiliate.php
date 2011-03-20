@@ -28,5 +28,5 @@ define('TEXT_RETURNING_AFFILIATE', 'Nach dem Login können Sie sich sämtliche Inf
 
 define('TEXT_AFFILIATE_PASSWORD_FORGOTTEN', 'Sie haben Ihr Passwort vergessen? Dann klicken Sie <u>hier</u>!');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>FEHLER:</b></font> ID oder Passwort falsch!'.');
+define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>FEHLER:</b></font> ID oder Passwort falsch!');
 ?>

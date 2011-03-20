@@ -36,7 +36,7 @@ define('HEADING_COMMENT', 'Kommentar');
 define('TEXT_NO_COMMENTS_AVAILABLE', 'Kein Kommentar vorhanden.');
 
 define('TABLE_HEADING_DOWNLOAD_DATE', 'Link verfällt am:');
-define('TABLE_HEADING_DOWNLOAD_COUNT', verbleibende Downloads');
+define('TABLE_HEADING_DOWNLOAD_COUNT', 'verbleibende Downloads');
 define('HEADING_DOWNLOAD', 'Artikel herunterladen:');
 
 // Customer Comments contrib

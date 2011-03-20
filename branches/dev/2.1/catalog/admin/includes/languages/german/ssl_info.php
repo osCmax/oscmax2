@@ -12,6 +12,6 @@ $Id$
 
 define('HEADING_TITLE', 'SSL Certificates: Secure E-Commerce in osCmax');
 define('NAVBAR_TITLE', 'Conveniently and securely purchase your SSL certificate from osCmax/AABox.');
-define('TEXT_MAIN', ''>
+define('TEXT_MAIN', '');
 define('TEXT_BACK', 'Zurück');
 ?>

@@ -43,6 +43,6 @@ define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Erreur: R&eacute;pertoire inexistant: 
 
 define('HEADING_NO_AUTHORS','Aucun des auteurs');
 
-define('TEXT_NO_AUTHORS','Vous avez actuellement aucune installation auteurs pour votre magasin. <br><br> S'il vous plaît Cliquez sur <b>Insérer</b> pour en créer un.');
+define('TEXT_NO_AUTHORS','Vous avez actuellement aucune installation auteurs pour votre magasin. <br><br> S\'il vous plaît Cliquez sur <b>Insérer</b> pour en créer un.');
 
 ?>

@@ -131,7 +131,12 @@
             }
 ?>
                     <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                    <td class="main" width="75%"><?php echo $quotes[$i]['methods'][$j]['title']; ?></td>
+                    
+        <?php
+        $search = array(' regimark', ' tradmrk');
+        $replace = array('<sup>&reg;</sup>', '<sup>&trade;</sup>');
+          ?> 
+                    <td class="main" width="75%"><?php echo str_replace($search, $replace, $quotes[$i]['methods'][$j]['title']); ?></td>
 <?php
             if ( ($n > 1) || ($n2 > 1) ) {
 ?>

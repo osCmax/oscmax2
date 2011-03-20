@@ -181,6 +181,11 @@ $Id$
                 </table>
               </td>
             </tr>
+<?php 
+  //---PayPal WPP Modification START ---//
+    tep_paypal_wpp_ep_button(FILENAME_SHOPPING_CART);
+  //---PayPal WPP Modification END ---// 
+?>
           </table>
         </td>
       </tr>

@@ -113,5 +113,9 @@ $Id$
         </table></td>
       </tr>
       <?php } ?>
-<?php if (DOWNLOAD_ENABLED == 'true') include(DIR_WS_MODULES . 'downloads.php'); ?>
+<?php if (DOWNLOAD_ENABLED == 'true') include(DIR_WS_MODULES . 'downloads.php');
+  //---PayPal WPP Modification START ---//
+    tep_paypal_wpp_ep_button(FILENAME_SHOPPING_CART);
+  //---PayPal WPP Modification END ---// 
+?>
     </table></form>

@@ -31,6 +31,10 @@ $Id$
         $this->cc_type = 'JCB';
       } elseif (preg_match('/^5610[0-9]{12}$/', $this->cc_number)) { 
         $this->cc_type = 'Australian BankCard';
+      //---PayPal WPP Modification START ---//
+      } elseif (ereg('^(49|56|63|67)[0-9]{14}([0-9]{2,3})?$', $this->cc_number)) {
+        $this->cc_type = 'Maestro/Solo';
+      //---PayPal WPP Modification END ---//
       } else {
         return -1;
       }

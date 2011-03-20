@@ -117,7 +117,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
       $check_email_query = tep_db_query("select count(*) as total from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "' and guest_account != '1'");
       // PWA EOF 2b
       $check_email = tep_db_fetch_array($check_email_query);
-      if ($check_email['total'] > 0) {
+ //---PayPal WPP Modification START ---//     
+      //if ($check_email['total'] > 0) {
+      if ($check_email['total'] > 0 && tep_paypal_wpp_create_account_check($email_address)) {
+//---PayPal WPP Modification END ---//
            $error = true;
 
            $messageStack->add('create_account', ENTRY_EMAIL_ADDRESS_ERROR_EXISTS);

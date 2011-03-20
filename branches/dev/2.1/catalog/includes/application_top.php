@@ -4,12 +4,13 @@ $Id$
 
   osCmax e-Commerce
   http://www.oscmax.com
-  adapted for Separate Pricing Per Customer 4.2.x, Hide products and categories from groups 2008/08/03
 
   Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
+
+//  Adapted for Separate Pricing Per Customer 4.2.x, Hide products and categories from groups 2008/08/03
 
 // start the timer for the page parse time log
   define('PAGE_PARSE_START_TIME', microtime());
@@ -784,17 +785,20 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
   define('WARN_SESSION_DIRECTORY_NOT_WRITEABLE', 'true');
   define('WARN_SESSION_AUTO_START', 'true');
   define('WARN_DOWNLOAD_DIRECTORY_NOT_READABLE', 'true');
-// LINE ADDED: MOD - OSC-AFFILIATE
-  require(DIR_WS_INCLUDES . 'affiliate_application_top.php');
-// LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
-  require(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
 
-// LINE ADDED: MOD - BTS
-  require(DIR_WS_INCLUDES . 'configure_bts.php');
 // BOF: MOD - NEW OSC tax class
   require('includes/classes/tax.php');
   $osC_Tax = new osC_Tax;
 // EOF: MOD - NEW OSC tax class
+
+// LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
+  require(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
+  //---PayPal WPP Modification START ---//
+  include(DIR_WS_INCLUDES . 'paypal_wpp/paypal_wpp_include.php');
+  //---PayPal WPP Modification END ---//
+// LINE ADDED: MOD - BTS
+  require(DIR_WS_INCLUDES . 'configure_bts.php');
+
 
 // BOF: MOD - Page cache contribution - by Chemo
 // Define the pages to be cached in the $cache_pages array

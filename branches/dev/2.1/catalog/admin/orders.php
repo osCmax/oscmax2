@@ -11,6 +11,9 @@ $Id$
 */
 
   require('includes/application_top.php');
+//---PayPal WPP Modification START ---//
+  //Since the admin's configure.php file is STILL missing defines
+  include(DIR_FS_CATALOG . DIR_WS_INCLUDES . 'configure.php');
   require(DIR_WS_CLASSES . 'order.php');
   
   // *** BEGIN GOOGLE CHECKOUT ***
@@ -49,6 +52,10 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
   
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
+  
+  include(DIR_WS_INCLUDES . 'paypal_wpp/paypal_wpp_include.php');
+  $paypal_wpp = new paypal_wpp_admin;
+//---PayPal WPP Modification END ---//
 
   $orders_statuses = array();
   $orders_status_array = array();
@@ -172,8 +179,9 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
   $the_extra= tep_db_fetch_array($the_extra_query);
   $the_customers_fax= $the_extra['customers_fax'];
 // EOF: MOD - Downloads Controller - Extra order info
-
-//  include(DIR_WS_CLASSES . 'order.php');
+  //---PayPal WPP Modification START ---//
+  //include(DIR_WS_CLASSES . 'order.php');
+  //---PayPal WPP Modification END ---//
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -183,6 +191,11 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <script type="text/javascript" src="includes/general.js"></script>
+<?php 
+  //---PayPal WPP Modification START ---//
+  $paypal_wpp->add_javascript();
+  //---PayPal WPP Modification END ---//
+?>
 </head>
 <body>
 <!-- header //-->
@@ -396,7 +409,11 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
+<?php 
+  //---PayPal WPP Modification START ---//
+  $paypal_wpp->display_buttons($oID);
+  //---PayPal WPP Modification END ---//
+?>
 
 <?php
 	  $ias_notes_query = tep_db_query("SELECT DISTINCT customers_id, customers_notes_id, customers_notes_message, customers_notes_editor, customers_notes_date FROM customers_notes WHERE customers_id = " . $the_customers_id);
@@ -410,6 +427,9 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
             <td class="dataTableHeadingContent" width="150" align="center"><?php echo TABLE_HEADING_AUTHOR; ?></td>
             <td class="dataTableHeadingContent" width="180"><?php echo TABLE_HEADING_STATUS; ?></td>
             <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMER_COMMENTS; ?></td>
+      <?php //---PayPal WPP Modification START ---// ?>
+            <td class="smallText" align="center"><b><?php echo TABLE_HEADING_TRANSACTION_INFO; ?></b></td>
+      <?php //---PayPal WPP Modification END ---// ?>
           </tr>
  <?php
  		function notedate($fdate) {
@@ -434,6 +454,9 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
         	<td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       	</tr>
 <?php
+//---PayPal WPP Modification START ---//
+    $orders_history_query = tep_db_query("select orders_status_history_id, orders_status_id, date_added, customer_notified, comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . tep_db_input($oID) . "' order by date_added");
+//---PayPal WPP Modification END ---//
 	} // end if
 ?>
       <tr>
@@ -458,6 +481,9 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
         }
         echo '            <td class="smallText">' . $orders_status_array[$orders_history['orders_status_id']] . '</td>' . "\n" .
              '            <td class="smallText">' . nl2br(tep_db_output($orders_history['comments'])) . '&nbsp;</td>' . "\n" .
+//---PayPal WPP Modification START ---//
+             '            <td class="smallText">' . $paypal_wpp->get_transaction_info($orders_history['orders_status_history_id']) . '</td>' . "\n" .
+//---PayPal WPP Modification END ---//
              '          </tr>' . "\n";
       }
     } else {

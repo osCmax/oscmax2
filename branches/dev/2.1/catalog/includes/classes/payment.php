@@ -274,5 +274,22 @@ $Id$
         }
       }
     }
+    //---PayPal WPP Modification START ---//
+    function ec_step1() {
+      if (is_array($this->modules)) {
+        if (is_object($GLOBALS[$this->selected_module]) && ($GLOBALS[$this->selected_module]->enabled) ) {
+          return $GLOBALS[$this->selected_module]->ec_step1();
+        }
+      }
+    }
+
+    function ec_step2() {
+      if (is_array($this->modules)) {
+        if (is_object($GLOBALS[$this->selected_module]) && ($GLOBALS[$this->selected_module]->enabled) ) {
+          return $GLOBALS[$this->selected_module]->ec_step2();
+        }
+      }
+    }
+    //---PayPal WPP Modification END---//
   }
 ?>

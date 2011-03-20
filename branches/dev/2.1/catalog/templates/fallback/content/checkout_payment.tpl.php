@@ -22,6 +22,11 @@ $Id$
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+<?php 
+//---PayPal WPP Modification START ---//
+  tep_paypal_wpp_checkout_payment_error_display();
+//---PayPal WPP Modification END ---// 
+?>
 <?php
   if ( isset($_GET['payment_error']) && is_object(${$_GET['payment_error']}) && ($error = ${$_GET['payment_error']}->get_error()) || ( isset($_GET['payment_success']) && is_object(${$_GET['payment_success']}) && ($error = ${$_GET['payment_success']}->get_error()) )) {
 	  $class = 'messageStackWarning';
@@ -101,6 +106,9 @@ $Id$
       </tr>
 <?php // #################### THIS MOD WAS OPTIONAL! ###################### ?>
 <?php // End - CREDIT CLASS Gift Voucher Contribution ?>
+<?php //---PayPal WPP Modification START ---//-- ?>
+<?php if (!$ec_enabled || isset($_GET['ec_cancel']) || (!tep_session_is_registered('paypal_ec_payer_id') && !tep_session_is_registered('paypal_ec_payer_info'))) { ?>
+<?php //---PayPal WPP Modification END ---//-- ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
@@ -260,6 +268,13 @@ if ($gv_result['amount']>0){
           </tr>
         </table></td>
       </tr>
+<?php 
+//---PayPal WPP Modification START ---//
+  } else {
+    tep_paypal_wpp_switch_checkout_method(FILENAME_CHECKOUT_PAYMENT);
+  }
+//---PayPal WPP Modification END ---//
+?>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>

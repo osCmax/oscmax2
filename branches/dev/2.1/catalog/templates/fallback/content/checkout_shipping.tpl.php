@@ -19,6 +19,11 @@ $Id$
           </tr>
         </table></td>
       </tr>
+<?php 
+//---PayPal WPP Modification START ---//
+  tep_paypal_wpp_checkout_shipping_error_display($ec_checkout);
+//---PayPal WPP Modification END ---//
+?>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
@@ -222,7 +227,11 @@ $Id$
                 <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
               </tr>
             </table></td>
+<?php //---PayPal WPP Modification START ---//-- ?>
+<?php if ($show_payment_page || !$ec_enabled) { ?>
             <td width="25%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
+<?php } ?>
+<?php //---PayPal WPP Modification END ---//-- ?>
             <td width="25%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
             <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
@@ -233,7 +242,15 @@ $Id$
           </tr>
           <tr>
             <td align="center" width="25%" class="checkoutBarCurrent"><?php echo CHECKOUT_BAR_DELIVERY; ?></td>
+<?php 
+  //---PayPal WPP Modification START ---//
+  if ($show_payment_page || !$ec_enabled) { 
+?>
             <td align="center" width="25%" class="checkoutBarTo"><?php echo CHECKOUT_BAR_PAYMENT; ?></td>
+<?php	
+  }
+//---PayPal WPP Modification END ---//
+?>
             <td align="center" width="25%" class="checkoutBarTo"><?php echo CHECKOUT_BAR_CONFIRMATION; ?></td>
             <td align="center" width="25%" class="checkoutBarTo"><?php echo CHECKOUT_BAR_FINISHED; ?></td>
           </tr>

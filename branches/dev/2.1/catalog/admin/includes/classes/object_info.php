@@ -16,7 +16,12 @@ $Id$
     function objectInfo($object_array) {
       reset($object_array);
       while (list($key, $value) = each($object_array)) {
-        $this->$key = tep_db_prepare_input($value);
+		// Check if value is defined
+		if (constant($value) != null) {
+          $this->$key = constant($value);
+		} else {
+		  $this->$key = tep_db_prepare_input($value);
+		}
       }
     }
   }

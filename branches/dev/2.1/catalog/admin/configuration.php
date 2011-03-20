@@ -141,7 +141,14 @@ $Id$
       echo '                  <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $_GET['gID'] . '&amp;cID=' . $configuration['configuration_id']) . '\'">' . "\n";
     }
 ?>
-                <td class="dataTableContent"><?php echo $configuration['configuration_title']; ?></td>
+                <td class="dataTableContent">
+                <?php 
+				if (constant($configuration['configuration_title'])) {
+				  echo constant($configuration['configuration_title']);
+				} else {
+				  echo $configuration['configuration_title'];
+				} ?>
+				</td>
                 <td class="dataTableContent"><?php echo htmlspecialchars($cfgValue); ?></td>
                 <td class="dataTableContent" align="right"><?php if ( (isset($cInfo) && is_object($cInfo)) && ($configuration['configuration_id'] == $cInfo->configuration_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $_GET['gID'] . '&amp;cID=' . $configuration['configuration_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>

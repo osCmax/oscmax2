@@ -28,12 +28,12 @@ $max_results = (tep_not_null(isset($_GET['max'])) ? $_GET['max'] : MAX_CATALOG_D
 for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
       switch ($column_list[$i]) {
         case 'PRODUCT_LIST_NAME':
-          $sort_array[] = array('id' => $i . 'a', 'text' => 'Product Name (A-Z)');
-		  $sort_array[] = array('id' => $i . 'd', 'text' => 'Product Name (Z-A)');
+          $sort_array[] = array('id' => $i . 'a', 'text' => TEXT_PRODUCT_NAME_AZ);
+		  $sort_array[] = array('id' => $i . 'd', 'text' => TEXT_PRODUCT_NAME_ZA);
           break;
         case 'PRODUCT_LIST_PRICE':
-		  $sort_array[] = array('id' => $i . 'a', 'text' => 'Price (Low - High)');
-		  $sort_array[] = array('id' => $i . 'd', 'text' => 'Price (High - Low)');
+		  $sort_array[] = array('id' => $i . 'a', 'text' => TEXT_PRICE_LOW_HIGH);
+		  $sort_array[] = array('id' => $i . 'd', 'text' => TEXT_PRICE_HIGH_LOW);
           break;	
       }
     }
@@ -42,7 +42,7 @@ for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
 for ($i=1, $n=5; $i<$n; $i++) {		
 		$max_display[] = array('id' => MAX_CATALOG_DISPLAY_SEARCH_RESULTS * $i, 'text' => MAX_CATALOG_DISPLAY_SEARCH_RESULTS * $i); 
 		}	
-		$max_display[] = array('id' => 1000000, 'text' => 'Show All');
+		$max_display[] = array('id' => 1000000, 'text' => TEXT_SHOW_ALL);
 
 // store GET vars		
 $get_vars = '';
@@ -63,9 +63,9 @@ $_SESSION['gridlist'] = 'list';
 $listing_split = new splitPageResults($listing_sql, $max_results, 'p.products_id');
   if ( (PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3') ) {
 
-$list = '<table align="center"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '"> ' . tep_image(DIR_WS_ICONS . 'list.png', 'View as List') . '</a></td><td width="80" class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '">View as List</a></td></tr></table>';
+$list = '<table align="center"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '"> ' . tep_image(DIR_WS_ICONS . 'list.png', 'View as List') . '</a></td><td width="80" class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '">' . TEXT_VIEW_AS_LIST . '</a></td></tr></table>';
 
-$grid = '<table align="center"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '"> ' . tep_image(DIR_WS_ICONS . 'grid.png', 'View as Grid') . '</a></td><td width="80" class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '">View as Grid</a></td></tr></table>';
+$grid = '<table align="center"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '"> ' . tep_image(DIR_WS_ICONS . 'grid.png', 'View as Grid') . '</a></td><td width="80" class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '">' . TEXT_VIEW_AS_GRID . '</a></td></tr></table>';
 
 
 // BOF SPPC Hide products and categories from groups
@@ -111,7 +111,7 @@ if ($listing_split->number_of_rows > 0) {
 
 $page_nav = '<table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox"><tr><td class="smallText" width="40%">' .  $filter . '</td><td class="smallText" width="20%" align="center">' . $list . '</td><td class="smallText" width="40%" align="right">' . $page_count . '</td></tr>';
 
-$drop = '<tr><td class="smallText">Results/Page: '. tep_draw_form('maxdisplay', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['sort']) ? tep_draw_hidden_field('sort', $_GET['sort']) : '') .  tep_draw_pull_down_menu('max', $max_display, $max_results, 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td><td align="center">' . $grid . '</td><td class="smallText" align="right">Sort Order: ' . tep_draw_form('sorting', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['max']) ? tep_draw_hidden_field('max', $_GET['max']) : '') . tep_draw_pull_down_menu('sort', $sort_array, $_GET['sort'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>';
+$drop = '<tr><td class="smallText">' . TEXT_RESULTS_PAGE . tep_draw_form('maxdisplay', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['sort']) ? tep_draw_hidden_field('sort', $_GET['sort']) : '') .  tep_draw_pull_down_menu('max', $max_display, $max_results, 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td><td align="center">' . $grid . '</td><td class="smallText" align="right">' . TEXT_SORT_ORDER . tep_draw_form('sorting', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['max']) ? tep_draw_hidden_field('max', $_GET['max']) : '') . tep_draw_pull_down_menu('sort', $sort_array, $_GET['sort'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>';
 
 echo $page_nav;
 echo $drop;

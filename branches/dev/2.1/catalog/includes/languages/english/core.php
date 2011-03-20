@@ -431,4 +431,16 @@ define('PW_WEAK', 'Weak password');
 define('PW_NORMAL', 'Normal strength');
 define('PW_STRONG', 'Strong password');
 define('PW_VERY_STRONG', 'Very strong password');
+
+// Product listing
+define('TEXT_PRODUCT_NAME_AZ', 'Product Name (A-Z)');
+define('TEXT_PRODUCT_NAME_ZA', 'Product Name (Z-A)');
+define('TEXT_PRICE_LOW_HIGH', 'Price (Low - High)');
+define('TEXT_PRICE_HIGH_LOW', 'Price (High - Low)');
+define('TEXT_SHOW_ALL', 'Show All');
+define('TEXT_VIEW_AS_LIST', 'View as List');
+define('TEXT_VIEW_AS_GRID', 'View as Grid');
+define('TEXT_RESULTS_PAGE', 'Results/Page: ');
+define('TEXT_SORT_ORDER', 'Sort Order: ');
+
 ?>

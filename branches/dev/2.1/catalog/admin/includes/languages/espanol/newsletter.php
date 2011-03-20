@@ -10,5 +10,5 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('TEXT_COUNT_CUSTOMERS', 'Clientes que recibir&aacute;n el bolet&iacute;n: %s');
+define('TEXT_COUNT_CUSTOMERS', 'Clientes suscritos al boletín: %s');
 ?>

@@ -10,14 +10,14 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Configuraci&oacute;n de noticias');
+define('HEADING_TITLE', 'Configuración de noticias');
 
-define('TABLE_HEADING_CONFIGURATION_TITLE', 'T&iacute;tulo');
+define('TABLE_HEADING_CONFIGURATION_TITLE', 'Título');
 define('TABLE_HEADING_CONFIGURATION_VALUE', 'Valor');
-define('TABLE_HEADING_ACTION', 'Acci&oacute;n');
+define('TABLE_HEADING_ACTION', 'Acción');
 
 define('TEXT_INFO_EDIT_INTRO', 'Por favor haz los cambios necesarios');
-define('TEXT_INFO_DATE_ADDED', 'Fecha de publicaci&oacute;n:');
-define('TEXT_INFO_LAST_MODIFIED', '&Uacute;ltima modificaci&oacute;n:');
+define('TEXT_INFO_DATE_ADDED', 'Fecha de publicación:');
+define('TEXT_INFO_LAST_MODIFIED', 'Última modificación:');
 
 ?>

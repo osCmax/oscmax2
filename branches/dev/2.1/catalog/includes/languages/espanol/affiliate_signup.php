@@ -11,16 +11,16 @@ $Id$
 */
 
 define('NAVBAR_TITLE','Programa de afiliados');
-define('HEADING_TITLE','Programa de Afiliados - Regístrate');
+define('HEADING_TITLE','Programa de afiliados - Registrarse');
 
-define('MAIL_AFFILIATE_SUBJECT', 'Bienvenido a ' . STORE_NAME . ' Programa de afiliados');
-define('MAIL_GREET_NONE', 'Dear' . "\n\n");
-define('MAIL_AFFILIATE_HEADER', 'Thank you for joining <b>' . STORE_NAME . '</b> Affiliate Program' . "\n\n" .'Your Account Information:
+define('MAIL_AFFILIATE_SUBJECT', 'Bienvenido al Programa de afiliados de ' . STORE_NAME);
+define('MAIL_GREET_NONE', 'Estimado' . "\n\n");
+define('MAIL_AFFILIATE_HEADER', 'Gracias por unirse al Programa de afiliados de <b>' . STORE_NAME . '</b>' . "\n\n" .'La información de su cuenta:
 **********************************************'."\n\n");
-define('MAIL_AFFILIATE_ID', 'Your Affiliate ID is:'  . "");
-define('MAIL_AFFILIATE_USERNAME', 'Your Affiliate Username is:'  . "Your Affiliate ID is:");
-define('MAIL_AFFILIATE_PASSWORD', 'Your Password is:'  . "Your Password is:");
-define('MAIL_AFFILIATE_LINK', 'Link to your account:' ."Link to your account:");
-define('MAIL_AFFILIATE_FOOTER', 'Have fun earning referral fees!'."\n\n".'Your <b>' . STORE_NAME . '</b> Affiliate Team' . "\n" . 'affiliate@mycigsdirect.com');
-define('IMAGE_BUTTON_MAT','Por favor, acepte los términos');
+define('MAIL_AFFILIATE_ID', 'Su ID de afiliado es: %s' . "\n");
+define('MAIL_AFFILIATE_USERNAME', 'Su nombre de usuario es: %s' . "\n");
+define('MAIL_AFFILIATE_PASSWORD', 'Su contraseña es: %s' . "\n");
+define('MAIL_AFFILIATE_LINK', 'Enlace a su cuenta: %s');
+define('MAIL_AFFILIATE_FOOTER', '¿Diviértase ganando comisiones por referencias!'."\n\n".'Su equipo del Programa de afiliados de <b>' . STORE_NAME . '</b>' . "\n" . AFFILIATE_EMAIL_ADDRESS);
+define('IMAGE_BUTTON_MAT', 'Por favor, acepte los Términos y Condiciones');
 ?>

@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Affiliate Program');
-define('NAVBAR_TITLE_2', 'Change Data');
-define('HEADING_TITLE', 'Change Affiliate Account');
+define('NAVBAR_TITLE_1', 'Programa de afiliados Program');
+define('NAVBAR_TITLE_2', 'Modificar datos');
+define('HEADING_TITLE', 'Modificar cuenta de afiliado');
 ?>

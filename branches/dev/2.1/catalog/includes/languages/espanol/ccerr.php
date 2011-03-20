@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-  define('MODULE_PAYMENT_CCERR_TEXT_TITLE', 'Credit Class Error');
-  define('MODULE_PAYMENT_CCERR_TEXT_DESCRIPTION', 'Credit Class Error, needed with Gift Voucher');  
-  define('MODULE_PAYMENT_CCERR_TEXT_ERROR', 'Payment selection error');
+  define('MODULE_PAYMENT_CCERR_TEXT_TITLE', 'Error clase de crédito');
+  define('MODULE_PAYMENT_CCERR_TEXT_DESCRIPTION', 'Error clase de crédito, se necesita con cheque regalo');  
+  define('MODULE_PAYMENT_CCERR_TEXT_ERROR', 'Error selección de pago');
 ?>

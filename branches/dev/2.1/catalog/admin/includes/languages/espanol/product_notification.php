@@ -10,11 +10,11 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('TEXT_COUNT_CUSTOMERS', 'Clientes que recibir&aacute; el bolet&iacute;n: %s');
+define('TEXT_COUNT_CUSTOMERS', 'Clientes suscritos al boletín: %s');
 define('TEXT_PRODUCTS', 'Productos');
-define('TEXT_SELECTED_PRODUCTS', 'Productos Seleccionados');
+define('TEXT_SELECTED_PRODUCTS', 'Productos seleccionados');
 
-define('JS_PLEASE_SELECT_PRODUCTS', 'Seleccione algunos productos.');
+define('JS_PLEASE_SELECT_PRODUCTS', 'Por favor selecciona algunos productos.');
 
 define('BUTTON_GLOBAL', 'Global');
 define('BUTTON_SELECT', '>>>');

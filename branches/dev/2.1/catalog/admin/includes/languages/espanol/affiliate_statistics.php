@@ -10,33 +10,31 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Affiliate Statistics');
-define('TEXT_SUMMARY_TITLE', 'Affiliate Statistics');
-define('TEXT_IMPRESSIONS', 'Total Banner Impressions: ');
-define('TEXT_VISITS', 'Total Affiliate Visits: ');
-define('TEXT_TRANSACTIONS', 'Total Affiliate Transactions: ');
-define('TEXT_AFFILIATE_NAME', 'Name of Affiliate: ');
-define('TEXT_AFFILIATE_JOINDATE', 'Date Affiliate Joined: ');
-define('TEXT_CONVERSION', 'Conversion: ');
-define('TEXT_AMOUNT', 'Total Affiliate Sales: ');
-define('TEXT_AVERAGE', 'Average Affiliate Payout/Sale: ');
-define('TEXT_COMMISSION_RATE', 'Commission Rate: ');
-define('TEXT_PAYPERSALE_RATE', 'Pay Per Sale Rate: ');
-define('TEXT_CLICKTHROUGH_RATE', 'Clickthrough Rate: ');
-define('TEXT_COMMISSION', 'Total Affiliate Commission : ');
-define('TEXT_SUMMARY_HELP', '[?]');
-define('TEXT_SUMMARY', 'Click on [?] to see a description of each category.');
-define('HEADING_SUMMARY_HELP', 'Affiliate Help');
-define('TEXT_IMPRESSIONS_HELP', '<i>Impressions</i> displays the total number of times a banner or link has been displayed in the given time period.');
-define('TEXT_VISITS_HELP', '<i>Visits</i> represents the total number of click-throughs by visitors from your website.');
-define('TEXT_TRANSACTIONS_HELP', '<i>Transactions</i> represents the total number successful transactions accredited to you');
-define('TEXT_CONVERSION_HELP', '<i>Conversions</i> represents the percentage of visitors (click-throughs) completing a transaction.');
-define('TEXT_AMOUNT_HELP', '<i>Amount</i> represents the total sales value accredited to you.');
-define('TEXT_AVERAGE_HELP', '<i>Average</i> represents the average sales value accredited to you.');
-define('TEXT_COMMISSION_RATE_HELP', '<i>Commission Rate</i>  represents the rate you are paid for sales in a percentage format.');
-define('TEXT_CLICKTHROUGH_RATE_HELP', '<i>Clickthrough Rate</i>  represents the rate you are paid for clickthroughs on a per click basis');
-define('TEXT_PAY_PER_SALE_RATE_HELP', '<i>Pay Per Sale Rate</i>  represents the rate you are paid for sales on a sale by sale basis.');
-define('TEXT_COMMISSION_HELP', '<i>Commission</i>  represents the total commission owed to you');
-define('TEXT_CLOSE_WINDOW', 'Close Window [x]');
-
+define('HEADING_TITLE', 'Estadísticas de afiliados');
+define('TEXT_SUMMARY_TITLE', 'Estadísticas de afiliados');
+define('TEXT_IMPRESSIONS', 'Impresiones totales de banner: ');
+define('TEXT_VISITS', 'Visitas totales del afiliado: ');
+define('TEXT_TRANSACTIONS', 'Transacciones totales del afiliado: ');
+define('TEXT_AFFILIATE_NAME', 'Nombre del afiliado: ');
+define('TEXT_AFFILIATE_JOINDATE', 'Fecha de afiliación: ');
+define('TEXT_CONVERSION', 'Conversiones: ');
+define('TEXT_AMOUNT', 'Ventas totales del afiliado: ');
+define('TEXT_AFFILIATE_AVERAGE', 'Promedio de comisión/venta del afiliado: ');
+define('TEXT_COMMISSION_RATE', 'Porcentaje de comisión: ');
+define('TEXT_PAYPERSALE_RATE', 'Porcentaje de pago por venta: ');
+define('TEXT_CLICKTHROUGH_RATE', 'Porcentaje de clics: ');
+define('TEXT_COMMISSION', 'Comisión total del afiliado: ');
+define('TEXT_SUMMARY_1', 'Sitúa el ratón sobre ');
+define('TEXT_SUMMARY_2', ' para ver una descripción de cada categoría.');
+define('HEADING_SUMMARY_HELP', 'Ayuda de afiliado');
+define('TEXT_IMPRESSIONS_HELP', '<i>Impresiones</i> dice el número total de veces que se ha mostrado un banner o enlace en el período de tiempo especificado.');
+define('TEXT_VISITS_HELP', '<i>Visitas</i> representa el número total de clics hechos por los visitantes desde el sitio web del afiliado.');
+define('TEXT_TRANSACTIONS_HELP', '<i>Transacciones</i> representa el número total de transacciones gracias al afiliado');
+define('TEXT_CONVERSION_HELP', '<i>Conversiones</i> representa el porcentaje de vistantes (clics) que completan una transacción.');
+define('TEXT_AMOUNT_HELP', '<i>Ventas</i> representa las ventas totales acreditadas a este afiliado.');
+define('TEXT_AVERAGE_HELP', '<i>Promedio de ventas</i> representa el promedio de las ventas acreditadas a este afiliado.');
+define('TEXT_COMMISSION_RATE_HELP', '<i>Porcentaje de comisión</i> representa el porcentaje que se paga por las ventas.');
+define('TEXT_CLICKTHROUGH_RATE_HELP', '<i>Porcentaje de clics</i> representa el porcentaje que se le paga por clics en su página (por clic).');
+define('TEXT_PAY_PER_SALE_RATE_HELP', '<i>Porcentaje de pago por venta</i> representa el porcentaje que se le paga por ventas (por cada venta).');
+define('TEXT_COMMISSION_HELP', '<i>Comisión</i> representa la comisión total ganada por este afiliado.');
 ?>

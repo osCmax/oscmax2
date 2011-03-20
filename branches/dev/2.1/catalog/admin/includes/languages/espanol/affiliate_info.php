@@ -10,11 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliates');
-define('HEADING_TITLE', 'Affiliates');
+define('NAVBAR_TITLE', 'Afiliados');
+define('HEADING_TITLE', 'Afiliados');
 
-define('HEADING_AFFILIATE_PROGRAM_TITLE', 'The ' . STORE_NAME . ' Affiliate Program');
-define('TEXT_INFORMATION', 'Insert your Affiliate Information here.');
-define('TEXT_MAIN','Affiliates');
-
+define('TEXT_MAIN','Afiliados');
+define('HEADING_AFFILIATE_PROGRAM_TITLE', 'El Porgrama de afiliados de  ' . STORE_NAME);
+define('TEXT_INFORMATION', 'Introuce aquí la información de afiliados.');
 ?>

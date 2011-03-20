@@ -10,10 +10,10 @@ $Id: create_account_success.php 1011 2011-01-06 23:38:01Z michael.oscmax@gmail.c
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Create an Account');
-define('NAVBAR_TITLE_2', 'Success');
-define('HEADING_TITLE', 'Customer\'s Account Has Been Created!');
-define('TEXT_ACCOUNT_CREATED', 'Congratulations! The new account has been successfully created! You can now take a <a href="' . "create_order.php" . '"> manual order</a>. <p><p>
+define('NAVBAR_TITLE_1', 'Crear una cuenta');
+define('NAVBAR_TITLE_2', 'Correcto');
+define('HEADING_TITLE', 'Se ha creado la cuenta de cliente');
+define('TEXT_ACCOUNT_CREATED', '¡Enhorabuena! La nueva cuenta se ha creado correctamente. Ahora puedes generar un <a href="' . "create_order.php" . '"> pedido manual</a>. <p><p>
 
-Or press the BACK button to go to the Admin Index Page....');
+O pulsa el botón de Volver para ir a la página inicial de Administración...');
 ?>

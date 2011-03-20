@@ -11,93 +11,93 @@ $Id$
 */
 
 if ($_GET['gID']) {
-  define('HEADING_TITLE', 'Grupos de Admin');
+  define('HEADING_TITLE', 'Grupos de administración');
 } elseif ($_GET['gPath']) {
-  define('HEADING_TITLE', 'Definicion Grupos');
+  define('HEADING_TITLE', 'Definir permisos de grupos');
 } else {
-  define('HEADING_TITLE', 'Miembros de Admin');
+  define('HEADING_TITLE', 'Miembros de administración');
 }
 
 define('TEXT_COUNT_GROUPS', 'Grupos: ');
 
 define('TABLE_HEADING_USERNAME', 'Nombre de usuario');
 define('TABLE_HEADING_NAME', 'Nombre completo');
-define('TABLE_HEADING_EMAIL', 'Email');
-define('TABLE_HEADING_PASSWORD', 'Password');
-define('TABLE_HEADING_CONFIRM', 'Confirma Password');
-define('TABLE_HEADING_GROUPS', 'Nivel Grupos');
-define('TABLE_HEADING_CREATED', 'Cuenta Creada');
-define('TABLE_HEADING_MODIFIED', 'Cuenta Creada');
-define('TABLE_HEADING_LOGDATE', 'Ultimo Acceso');
-define('TABLE_HEADING_LOGNUM', 'LogNum');
-define('TABLE_HEADING_LOG_NUM', 'Log Numero');
-define('TABLE_HEADING_ACTION', 'Actión');
+define('TABLE_HEADING_EMAIL', 'Dirección e-mail');
+define('TABLE_HEADING_PASSWORD', 'Contraseña');
+define('TABLE_HEADING_CONFIRM', 'Confirmar contraseña');
+define('TABLE_HEADING_GROUPS', 'Grupo');
+define('TABLE_HEADING_CREATED', 'Cuenta creada');
+define('TABLE_HEADING_MODIFIED', 'Cuenta modificada');
+define('TABLE_HEADING_LOGDATE', 'Último Acceso');
+define('TABLE_HEADING_LOGNUM', 'Nº ses.');
+define('TABLE_HEADING_LOG_NUM', 'Número sesión');
+define('TABLE_HEADING_ACTION', 'Acción');
 
-define('TABLE_HEADING_GROUPS_NAME', 'Nombre Grupos');
-define('TABLE_HEADING_GROUPS_DEFINE', 'Selecció Boxes y Files');
+define('TABLE_HEADING_GROUPS_NAME', 'Nombre del grupo');
+define('TABLE_HEADING_GROUPS_DEFINE', 'Selección de menús y ficheros');
 define('TABLE_HEADING_GROUPS_GROUP', 'Nivel');
-define('TABLE_HEADING_GROUPS_CATEGORIES', 'Permisos Categorias');
+define('TABLE_HEADING_GROUPS_CATEGORIES', 'Permisos de categorías');
 
 
-define('TEXT_INFO_HEADING_DEFAULT', 'Miembros de Admin ');
-define('TEXT_INFO_HEADING_DELETE', 'Cancelar Permiso ');
-define('TEXT_INFO_HEADING_EDIT', 'Cambia Categoria / ');
-define('TEXT_INFO_HEADING_NEW', 'Nuevo Miembro Admin ');
+define('TEXT_INFO_HEADING_DEFAULT', 'Miembro de administración ');
+define('TEXT_INFO_HEADING_DELETE', 'Eliminar miembro ');
+define('TEXT_INFO_HEADING_EDIT', 'Editar categoría / ');
+define('TEXT_INFO_HEADING_NEW', 'Nuevo miembro de administración ');
 
-define('TEXT_INFO_DEFAULT_INTRO', 'grupo Miembro');
-define('TEXT_INFO_DELETE_INTRO', 'Remover <nobr><b>%s</b></nobr> desde <nobr>Miembros de Admin?</nobr>');
-define('TEXT_INFO_DELETE_INTRO_NOT', 'No puedes eliminar el <nobr>grupo %s!</nobr>');
-define('TEXT_INFO_EDIT_INTRO', 'Configura nivel de permiso aqui: ');
+define('TEXT_INFO_DEFAULT_INTRO', 'Grupo de miembro');
+define('TEXT_INFO_DELETE_INTRO', '¿Quitar a <b>%s</b> de Miembros de administración?');
+define('TEXT_INFO_DELETE_INTRO_NOT', '¡No puedes eliminar el grupo %s!');
+define('TEXT_INFO_EDIT_INTRO', 'Configura nivel de permisos aquí: ');
 
 define('TEXT_INFO_USERNAME', 'Nombre de usuario: ');
 define('TEXT_INFO_FULLNAME', 'Nombre completo: ');
 define('TEXT_INFO_FIRSTNAME', 'Nombre: ');
-define('TEXT_INFO_LASTNAME', 'Apellido: ');
-define('TEXT_INFO_EMAIL', 'Email: ');
-define('TEXT_INFO_PASSWORD', 'Password: ');
-define('TEXT_INFO_CONFIRM', 'Confirma Password: ');
-define('TEXT_INFO_CREATED', 'Cuenta Creada: ');
-define('TEXT_INFO_MODIFIED', 'Cuenta Modificada: ');
-define('TEXT_INFO_LOGDATE', 'Ultimo Acceso: ');
-define('TEXT_INFO_LOGNUM', 'Log Numero: ');
-define('TEXT_INFO_GROUP', 'Nivel Grupo: ');
-define('TEXT_INFO_ERROR', '<font color="red">Direccion Email ya utilizado!</font>');
+define('TEXT_INFO_LASTNAME', 'Apellidos: ');
+define('TEXT_INFO_EMAIL', 'Dirección e-mail: ');
+define('TEXT_INFO_PASSWORD', 'Contraseña: ');
+define('TEXT_INFO_CONFIRM', 'Confirmar contrseña: ');
+define('TEXT_INFO_CREATED', 'Cuenta creada: ');
+define('TEXT_INFO_MODIFIED', 'Cuenta modificada: ');
+define('TEXT_INFO_LOGDATE', 'Ultimo acceso: ');
+define('TEXT_INFO_LOGNUM', 'Número de registro: ');
+define('TEXT_INFO_GROUP', 'Grupo: ');
+define('TEXT_INFO_ERROR', 'Esa dirección de e-mail ya está siendo utilizada.<br>Por favor inténtalo de nuevo.');
 
 define('JS_ALERT_USERNAME', '- Obligatorio: Nombre de usuario \n');
 define('JS_ALERT_FIRSTNAME', '- Obligatorio: Nombre \n');
-define('JS_ALERT_LASTNAME', '- Obligatorio: Apellido \n');
-define('JS_ALERT_EMAIL', '- Obligatorio: Dirección Email \n');
-define('JS_ALERT_EMAIL_FORMAT', '- Formado Email invalido! \n');
-define('JS_ALERT_EMAIL_USED', '- Direccion Email ya utilizado! \n');
-define('JS_ALERT_LEVEL', '- Obligatorio: Miembro Grupo \n');
+define('JS_ALERT_LASTNAME', '- Obligatorio: Apellidos \n');
+define('JS_ALERT_EMAIL', '- Obligatorio: Dirección e-mail \n');
+define('JS_ALERT_EMAIL_FORMAT', '- ¡El formato de la dirección e-mail no es válido! \n');
+define('JS_ALERT_EMAIL_USED', '- ¡Dirección e-mail ya está siendo utilizada! \n');
+define('JS_ALERT_LEVEL', '- Obligatorio: Grupo \n');
 
-define('ADMIN_EMAIL_SUBJECT', 'Nuevo  Miembro Admin');
-define('ADMIN_EMAIL_TEXT', 'Hola %s,' . "\n\n" . 'Puedes entrar en el Panel de administracion con la siguiente password. Apenas entrado, cambia tu password!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Gracias!' . "\n" . '%s' . "\n\n" . 'Esto es un mail automatico, entonces no respondes!');
-define('ADMIN_EMAIL_EDIT_SUBJECT', 'Edita Profilo Miembro Admin');
-define('ADMIN_EMAIL_EDIT_TEXT', 'Hola %s,' . "\n\n" . 'Tus datos personales han sido modificados por el administrador.' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Gracias!' . "\n" . '%s' . "\n\n" . 'Esto es un mail automatico, entonces no respondes!');
+define('ADMIN_EMAIL_SUBJECT', 'Nuevo miembro de administración');
+define('ADMIN_EMAIL_TEXT', 'Hola %s,' . "\n\n" . 'Puedes acceder al Panel de administración con la siguiente contraseña. Una vez que hayas entrado, ¡cambia tu contraseña!' . "\n\n" . 'Sitio web : %s' . "\n" . 'Nombre de usuario: %s' . "\n" . 'Contraseña: %s' . "\n\n" . '¡Gracias!' . "\n" . '%s' . "\n\n" . 'Esto es un mensaje automatizado, por favor no contestes.');
+define('ADMIN_EMAIL_EDIT_SUBJECT', 'Perfil de miembro de administración modificado');
+define('ADMIN_EMAIL_EDIT_TEXT', 'Hola %s,' . "\n\n" . 'Tus datos personales han sido modificados por un administrador.' . "\n\n" . 'Sitio web : %s' . "\n" . 'Nombre de usuario: %s' . "\n" . 'Contraseña: %s' . "\n\n" . '¡Gracias!' . "\n" . '%s' . "\n\n" . 'Esto es un mensaje automatizado, por favor no contestes.');
 
-define('TEXT_INFO_HEADING_DEFAULT_GROUPS', 'Grupo Admin ');
-define('TEXT_INFO_HEADING_DELETE_GROUPS', 'Eliminar Grupo ');
+define('TEXT_INFO_HEADING_DEFAULT_GROUPS', 'Grupo de administración ');
+define('TEXT_INFO_HEADING_DELETE_GROUPS', 'Eliminar grupo ');
 
-define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>NOTA:</b><li><b>edita:</b> edita nombre grupo.</li><li><b>eliminar:</b> elimina grupo.</li><li><b>definir:</b> para definir acceso grupo.</li>');
-define('TEXT_INFO_DELETE_GROUPS_INTRO', 'Esto elimina tambien los miembros del grupo. Quieres eliminar el <nobr>grupo <b>%s</b>?</nobr>');
-define('TEXT_INFO_DELETE_GROUPS_INTRO_NOT', 'No puedes eliminar estos grupos!');
-define('TEXT_INFO_GROUPS_INTRO', 'Elijes un nombre de grupo univoco. Click <b>sigue</b> para enviar.');
-define('TEXT_INFO_EDIT_GROUPS_INTRO', 'Elijes un nombre de grupo univoco. Click <b>sigue</b> para enviar.');
+define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>NOTA:</b><li><b>editar:</b> para modificar el nombre del grupo.</li><li><b>eliminar:</b> para eliminar el grupo.</li><li><b>definir:</b> para definir permisos del grupo.</li>');
+define('TEXT_INFO_DELETE_GROUPS_INTRO', 'Esto eliminará también los miembros del grupo. ¿Quieres eliminar el grupo <b>%s</b>?');
+define('TEXT_INFO_DELETE_GROUPS_INTRO_NOT', '¡No puedes eliminar este grupo!');
+define('TEXT_INFO_GROUPS_INTRO', 'Elige un nombre de grupo único. Pulsa <b>Guardar</b> para crearlo.');
+define('TEXT_INFO_EDIT_GROUPS_INTRO', 'Elige un nombre de grupo único. Pulsa <b>Guardar</b> para modificarlo.');
 
-define('TEXT_INFO_HEADING_EDIT_GROUP', 'Grupo Admin');
-define('TEXT_INFO_HEADING_GROUPS', 'Nuevo Grupo');
-define('TEXT_INFO_GROUPS_NAME', ' <b>Nombre Grupo:</b><br>Elijes un nombre de grupo univoco. Pues, click <b>sigue</b> para enviar.<br>');
-define('TEXT_INFO_GROUPS_NAME_FALSE', '<font color="red"><b>ERROR:</b> El nombre de grupo tienes que ser mas largo que 5 caracteros!</font>');
-define('TEXT_INFO_GROUPS_NAME_USED', '<font color="red"><b>ERROR:</b> Nombre Grupo ya utilizado!</font>');
-define('TEXT_INFO_GROUPS_LEVEL', 'Nivel Grupo: ');
-define('TEXT_INFO_GROUPS_BOXES', '<b>Permiso  Boxes:</b><br>Das acceso al box seleccionado.');
+define('TEXT_INFO_HEADING_EDIT_GROUP', 'Grupo de administración');
+define('TEXT_INFO_HEADING_GROUPS', 'Nuevo grupo');
+define('TEXT_INFO_GROUPS_NAME', ' <b>Nombre de grupo:</b><br>Elige un nombre de grupo único. Pulsa <b>Guardar</b> para crearlo.<br>');
+define('TEXT_INFO_GROUPS_NAME_FALSE', '<font color="red"><b>ERROR:</b> ¡El nombre de grupo tiene que tener al menos 5 caracteres!</font>');
+define('TEXT_INFO_GROUPS_NAME_USED', '<font color="red"><b>ERROR:</b> ¡El nombre de grupo ya está siendo utilizado!</font>');
+define('TEXT_INFO_GROUPS_LEVEL', 'Nivel grupo: ');
+define('TEXT_INFO_GROUPS_BOXES', '<b>Permiso de menús:</b><br>Se da acceso a los menús seleccionados.');
 define('TEXT_INFO_GROUPS_BOXES_INCLUDE', 'Incluye file guardados en: ');
 
-define('TEXT_INFO_HEADING_DEFINE', 'Definir Grupo');
+define('TEXT_INFO_HEADING_DEFINE', 'Definir permisos de grupo');
 if ($_GET['gPath'] == 1) {
-  define('TEXT_INFO_DEFINE_INTRO', '<b>%s :</b><br>No puedes cambiar los Permisos a los File por este grupo.<br><br>');
+  define('TEXT_INFO_DEFINE_INTRO', '<b>%s :</b><br>No puedes cambiar los permisos para este grupo.<br><br>');
 } else {
-  define('TEXT_INFO_DEFINE_INTRO', '<b>%s :</b><br>Cambia permiso a este grupo seleccionando o deseleccionando los boxes y los files. Click <b>grabar</b> para guardar cambios.<br><br>');
+  define('TEXT_INFO_DEFINE_INTRO', '<b>%s :</b><br>Cambia los permisos para este grupo seleccionando o deseleccionando los menús y los ficheros. Pulsa <b>Guardar</b> para guardar los cambios.<br><br>');
 }
 ?>

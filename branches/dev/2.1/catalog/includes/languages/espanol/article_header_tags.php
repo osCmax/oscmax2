@@ -24,8 +24,8 @@ $Id$
    // The HEAD_TITLE_TAG_ALL is included BEFORE the specific one for the page
    // The HEAD_DESC_TAG_ALL is included AFTER the specific one for the page
    // The HEAD_KEY_TAG_ALL is included AFTER the specific one for the page
-   define('HEAD_TITLE_TAG_ALL','Site Name');
-   define('HEAD_DESC_TAG_ALL','This is a description for the entire site.');
+   define('HEAD_TITLE_TAG_ALL','Nombre del sitio');
+   define('HEAD_DESC_TAG_ALL','Esta es una descripción para el sitio entero.');
    define('HEAD_KEY_TAG_ALL','keyword1, keyword2, keyword3');
 
 /* End of Indented Section */

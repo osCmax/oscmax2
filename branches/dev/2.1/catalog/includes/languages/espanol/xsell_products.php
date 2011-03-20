@@ -11,6 +11,6 @@ $Id$
 */
 
   define('TEXT_BUY', 'Comprar 1 \'');
-  define('TEXT_NOW', '\' Ahora');
+  define('TEXT_NOW', '\' ahora');
 
 ?>

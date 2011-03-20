@@ -10,33 +10,35 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Entrar');
-define('HEADING_TITLE', 'Dejame Entrar!');
+// PWA BOF
+define('TEXT_GUEST_INTRODUCTION','<b>¿Quiere ir directamente a realizar el pedido?</b> <br><br> ¿Le gustaría realizar su pedido sin crear una cuenta de cliente? Tenga en cuenta que todos nuestros servicios no estarán disponibles para los clientes que no desean crear una cuenta. Además, no podrá ver el estado de su pedido, y cada vez que compre con nosotros tendrá que volver a introducir todos sus datos. <br><br> Crear una cuenta es gratuito. Si todavía desea pasar a realizar un pedido por favor pulse el botón de \'Realizar pedido\'.');
+// PWA BOF
+define('NAVBAR_TITLE', 'Inicio de sesión');
+define('HEADING_TITLE', 'Bienvenido, por favor regístrese o inicie su sesión');
 
-define('HEADING_NEW_CUSTOMER', 'Nuevo Cliente');
+define('HEADING_NEW_CUSTOMER', 'Nuevo cliente');
 define('TEXT_NEW_CUSTOMER', 'Soy un nuevo cliente.');
-define('TEXT_NEW_CUSTOMER_INTRODUCTION', 'Al crear una cuenta en ' . STORE_NAME . ' podrá realizar sus compras rápidamente, revisar el estado de sus pedidos y consultar sus operaciones anteriores.');
+define('TEXT_NEW_CUSTOMER_INTRODUCTION', 'Al crear una cuenta en ' . STORE_NAME . ' podrá realizar sus compras rápidamente, revisar el estado de sus pedidos y llevar un seguimiento de sus pedidos anteriores.');
 
-define('HEADING_RETURNING_CUSTOMER', 'Ya Soy Cliente');
+define('HEADING_RETURNING_CUSTOMER', 'Ya soy cliente');
 define('TEXT_RETURNING_CUSTOMER', 'He comprado otras veces.');
 
 define('TEXT_PASSWORD_FORGOTTEN', '¿Ha olvidado su contraseña? Siga este enlace y se la enviamos.');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> El \'E-Mail\' y/o \'Contraseña\' no figuran en nuestros datos.');
-define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>NOTA:</b></font> El contenido de su &quot;Cesta de Visitante&quot; será añadido a su &quot;Cesta de Asociado&quot; una vez que haya entrado.');
-
-// BOF: MOD - Checkout Without Account v0.70 changes
-define('PWA_FAIL_ACCOUNT_EXISTS', 'Una cuenta ya existe para la dirección correo electrónico <i>{EMAIL_ADDRESS}</i>.  Usted debe la entrada aquí con la contraseña para esa cuenta antes avanzar para comprobar.');
-define('HEADING_CHECKOUT', '<font size="2">Avance para Comprobar Directamente</font>');
-define('TEXT_CHECKOUT_INTRODUCTION', 'Avance para Comprobar sin crear una cuenta. Escogiendo esta opción ninguna de su información de usuario se mantendrá en nuestros registros, y en usted no será capaz de revisar su posición de la orden, ni seguir sus órdenes previas.');
-define('PROCEED_TO_CHECKOUT', 'Avance para Comprobar sin Registrar');
-// EOF: MOD - Checkout Without Account changes
+define('TEXT_LOGIN_ERROR', 'Error: \'E-mail\' y/o \'Contraseña\' no coinciden con nuestros datos.');
+define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>NOTA:</b></font> Cuando inicie su sesión los contenidos de su carrito parmanecerán en el carrito.');
 
 // LINE ADDED: MOD - Separate Pricing Per Customer
 // define the email address that can change customer_group_id on login
 define('SPPC_TOGGLE_LOGIN_PASSWORD', 'root@localhost');
-define('TEXT_GUEST_INTRODUCTION','<b>¿Quieres ir directamente al proceso de pago?</b> <br><br> ¿Te gustaría ver a cabo sin la creación de una cuenta de cliente? Tenga en cuenta que todos nuestros servicios no estarán disponibles para los clientes que no desean crear una cuenta. Además, usted no puede ver el estado de su pedido, y cada vez que usted compra con nosotros usted tendrá que volver a introducir todos sus datos. <br><br> Creación de una cuenta es gratis. Si usted todavía desea seguir a la caja por favor haga clic en el botón de pago y envío de la derecha.');
+define('PWA_FAIL_ACCOUNT_EXISTS','Ya existe una cuenta con esta dirección de e-mail {EMAIL_ADDRESS}. Debe iniciar sesión con la contraseña de esa cuenta antes de pasar a realizar el pedido.');
 
-define('TEXT_GV_LOGIN_NEEDED', 'Tienes que estar logueado para canjear su bono. Por favor, cree una nueva cuenta o ingresa abajo');
+define('HEADING_CHECKOUT','<font size="2">Pasar directamente a realizar el pedido</font>');
+
+define('TEXT_CHECKOUT_INTRODUCTION','Pasar a realizar el pedido sin crear una cuenta. Al elegir esta opción no guardaremos ninguna información suya en nuestros registros, pero no podrá revisar el estado de sus pedidos ni llevar un seguimiento de sus pedidos anteriores.');
+
+define('PROCEED_TO_CHECKOUT','Pasar a realizar el pedido sin registrarse');
+
+define('TEXT_GV_LOGIN_NEEDED', 'Necesita haber iniciado sesión para canjear su cheque. Por favor cree una nueva cuenta o inicie su sesión debajo.');
 
 ?>

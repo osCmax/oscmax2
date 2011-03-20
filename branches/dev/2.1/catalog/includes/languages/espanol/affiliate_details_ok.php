@@ -11,5 +11,5 @@ $Id$
 */
 
 define('NAVBAR_TITLE','Programa de afiliados');
-define('HEADING_TITLE','Datos de tu cuenta se ha cambiado!');
+define('HEADING_TITLE','Datos de cuenta cambiados');
 ?>

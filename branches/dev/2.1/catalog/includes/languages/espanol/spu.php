@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('MODULE_SHIPPING_SPU_TEXT_TITLE','Recoger en tienda');
-define('MODULE_SHIPPING_SPU_TEXT_DESCRIPTION','Selección en almacén durante las horas regulares de trabajo.');
-define('MODULE_SHIPPING_SPU_TEXT_WAY','No hay gastos de envío agregó. Recogida durante las horas regulares de trabajo.');
+define('MODULE_SHIPPING_SPU_TEXT_TITLE','Recoger en tienda. Lunes a viernes 09:00 - 18:00');
+define('MODULE_SHIPPING_SPU_TEXT_DESCRIPTION','Recoger en tienda.');
+define('MODULE_SHIPPING_SPU_TEXT_WAY','Por favor recoja su pedido en nuestra tienda.');
 ?>

@@ -11,7 +11,7 @@ $Id$
 */
 
   define('MODULE_PAYMENT_SECPAY_TEXT_TITLE', 'SECPay');
-  define('MODULE_PAYMENT_SECPAY_TEXT_DESCRIPTION', 'Tarjeta de Cr&eacute;dito para Pruebas:<br><br>Numero: 4444333322221111<br>Caducidad Cualquiera');
-  define('MODULE_PAYMENT_SECPAY_TEXT_ERROR', 'Error de Tarjeta de Cr&eacute;dito!');
-  define('MODULE_PAYMENT_SECPAY_TEXT_ERROR_MESSAGE', 'Ha ocurrido un error procesando su tarjeta de cr&eacute;dito. Por favor, intentelo de nuevo.');
+  define('MODULE_PAYMENT_SECPAY_TEXT_DESCRIPTION', 'Tarjeta de crédito para pruebas:<br><br>Número: 4111111111111111<br>Caducidad: cualquiera');
+  define('MODULE_PAYMENT_SECPAY_TEXT_ERROR', '¡Error con tarjeta de crédito!');
+  define('MODULE_PAYMENT_SECPAY_TEXT_ERROR_MESSAGE', 'Se ha producido un error al procesar su tarjeta de crédito. Por favor, inténtelo de nuevo.');
 ?>

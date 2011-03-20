@@ -10,9 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Total de Pedidos por Cliente');
-
-define('TABLE_HEADING_NUMBER', 'N&uacute;mero');
-define('TABLE_HEADING_CUSTOMERS', 'Clientes');
-define('TABLE_HEADING_TOTAL_PURCHASED', 'Total Pedido');
+define('HEADING_TITLE', 'Mejores clientes por total de pedidos');
+define('TABLE_HEADING_NUMBER', 'Nº');
+define('TABLE_HEADING_CUSTOMERS', 'Cliente');
+define('TABLE_HEADING_TOTAL_PURCHASED', 'Total comprado');
+define('TEXT_NUM_ORDERS', 'nº de pedidos');
 ?>

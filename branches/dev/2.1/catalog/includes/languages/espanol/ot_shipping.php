@@ -10,9 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 
-  define('MODULE_ORDER_TOTAL_SHIPPING_TITLE', 'Gastos de Env&iacute;o');
-  define('MODULE_ORDER_TOTAL_SHIPPING_DESCRIPTION', 'Gastos de Env&iacute;o del Pedido');
+  define('MODULE_ORDER_TOTAL_SHIPPING_TITLE', 'Envío');
+  define('MODULE_ORDER_TOTAL_SHIPPING_DESCRIPTION', 'Gastos de envío del pedido');
 
-  define('FREE_SHIPPING_TITLE', 'Env&iacute;o Gratuito');
-  define('FREE_SHIPPING_DESCRIPTION', 'Env&iacute;o gratuito para pedidos sobre %s');
+  define('FREE_SHIPPING_TITLE', 'Envío gratuito');
+  define('FREE_SHIPPING_DESCRIPTION', 'Envío gratuito para pedidos superiores a %s');
 ?>

@@ -10,9 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('MODULE_SHIPPING_TABLE_TEXT_TITLE', 'Tabla de Tarifas');
-define('MODULE_SHIPPING_TABLE_TEXT_DESCRIPTION', 'Tabla de Tarifas');
-define('MODULE_SHIPPING_TABLE_TEXT_WAY','La mejor manera');
+define('MODULE_SHIPPING_TABLE_TEXT_TITLE', 'Tarifa por tramos');
+define('MODULE_SHIPPING_TABLE_TEXT_DESCRIPTION', 'Tarifa por tramos');
+define('MODULE_SHIPPING_TABLE_TEXT_WAY','Los gastos dependen de los productos a enviar');
 define('MODULE_SHIPPING_TABLE_TEXT_WEIGHT', 'Peso');
-define('MODULE_SHIPPING_TABLE_TEXT_AMOUNT','Total');
+define('MODULE_SHIPPING_TABLE_TEXT_AMOUNT','Importe');
 ?>

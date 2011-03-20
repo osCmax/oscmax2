@@ -10,20 +10,22 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('EMAIL_TEXT_SUBJECT', 'Procesar Pedido');
-define('EMAIL_TEXT_ORDER_NUMBER', 'Número de Pedido:');
-define('EMAIL_TEXT_INVOICE_URL', 'Pedido Detallado:');
-define('EMAIL_TEXT_DATE_ORDERED', 'Fecha del Pedido:');
+// PWA BOF
+define('EMAIL_WARNING', 'ATENCIóN: Esta dirección de email nos fue suministrada por alguien que visitó nuestra tienda online. Si no fue usted, por favor envíenos un correo electrónico a ' . STORE_OWNER_EMAIL_ADDRESS . 'Gracias por hacer compras con nosotros.');
+// PWA EOF
+define('EMAIL_TEXT_SUBJECT', 'Pedido');
+define('EMAIL_TEXT_ORDER_NUMBER', 'Número de pedido:');
+define('EMAIL_TEXT_INVOICE_URL', 'Detalles del pedido:');
+define('EMAIL_TEXT_DATE_ORDERED', 'Fecha del pedido:');
 define('EMAIL_TEXT_PRODUCTS', 'Productos');
 define('EMAIL_TEXT_SUBTOTAL', 'Subtotal:');
 define('EMAIL_TEXT_TAX', 'Impuestos:      ');
-define('EMAIL_TEXT_SHIPPING', 'Gastos de Envío: ');
+define('EMAIL_TEXT_SHIPPING', 'Gastos de envío: ');
 define('EMAIL_TEXT_TOTAL', 'Total:    ');
-define('EMAIL_TEXT_DELIVERY_ADDRESS', 'Direcciön de Entrega');
-define('EMAIL_TEXT_BILLING_ADDRESS', 'Dirección de Facturación');
-define('EMAIL_TEXT_PAYMENT_METHOD', 'Forma de Pago');
+define('EMAIL_TEXT_DELIVERY_ADDRESS', 'Dirección de entrega');
+define('EMAIL_TEXT_BILLING_ADDRESS', 'Dirección de facturación');
+define('EMAIL_TEXT_PAYMENT_METHOD', 'Forma de pago');
 
-define('EMAIL_SEPARATOR', '------------------------------------------------------');
+define('EMAIL_SEPARATOR', '----------------------------------------------------------------------------------------------------------------');
 define('TEXT_EMAIL_VIA', 'por');
-define('EMAIL_WARNING', 'ATENCIÓN: Esta dirección de correo electrónico fue dada a nosotros por una persona que visitó nuestra tienda en línea. Si esto no se hizo por usted por favor, envíenos un correo electrónico a ' . STORE_OWNER_EMAIL_ADDRESS . 'Gracias por hacer compras con nosotros y tenga un gran día.');
 ?>

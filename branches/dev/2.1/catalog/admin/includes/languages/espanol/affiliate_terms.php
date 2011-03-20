@@ -10,9 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliates Terms of use');
-define('HEADING_TITLE', 'Affiliates Terms of use');
+define('NAVBAR_TITLE', 'Térmiso y Condiciones para afiliados');
+define('HEADING_TITLE', 'Térmiso y Condiciones para afiliados');
 
-define('HEADING_AFFILIATE_PROGRAM_TITLE', 'The ' . STORE_NAME . ' Affiliates Terms of use');
-define('TEXT_INFORMATION', 'Enter your terms of use here.');
+define('HEADING_AFFILIATE_PROGRAM_TITLE', 'Los Términos y Condiciones de ' . STORE_NAME);
+define('TEXT_INFORMATION', 'Introduzca aquí los Términos y Condiciones de uso.');
 ?>

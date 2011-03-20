@@ -10,23 +10,23 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate registration');
-define('HEADING_TITLE', 'Please register or enter your user ID:');
-define('HEADING_TITLE_ERROR', 'Registration error');
+define('NAVBAR_TITLE', 'Registro de afiliado');
+define('HEADING_TITLE', 'Por favor regístrese o introduzcadu ID de usuario:');
+define('HEADING_TITLE_ERROR', 'Error de registro');
 
-define('TEXT_AFFILIATE_LOGOFF', 'Log off');
-define('TEXT_AFFILIATE_ID', 'Your e-mail address:');
-define('TEXT_AFFILIATE_PASSWORD', 'Your password:');
+define('TEXT_AFFILIATE_LOGOFF', 'Cerrar sesión');
+define('TEXT_AFFILIATE_ID', 'Su dirección de e-mail:');
+define('TEXT_AFFILIATE_PASSWORD', 'Su contraseña:');
 
-define('HEADING_NEW_AFFILIATE', 'You\'re a new partner');
-define('TEXT_NEW_AFFILIATE', 'I\'m a new partner');
-define('TEXT_NEW_AFFILIATE_INTRODUCTION', 'By creating a partner account at ' . STORE_NAME . ' you can increase your income as a webmaster of a well frequented web site by leading your visitors to our web site and getting your share of their purcheses.');
-define('TEXT_NEW_AFFILIATE_TERMS','You can find our terms of use for the affiliate program <u>here</u>!');
+define('HEADING_NEW_AFFILIATE', 'Nuevo afiliado');
+define('TEXT_NEW_AFFILIATE', 'Soy un nuevo afiliado');
+define('TEXT_NEW_AFFILIATE_INTRODUCTION', 'Al crear una cuenta de afiliado en '. STORE_NAME . ' será capaz de obtener ingresos extra como webmaster de un sitio web con visitas si dirige sus visitantes a nuestra página web y obtiene su cuota de sus compras.');
+define('TEXT_NEW_AFFILIATE_TERMS','Puede encontrar nuestros Términos y Condiciones del Programa de afiliados <u>aquí</u>.');
 
-define('HEADING_RETURNING_AFFILIATE', 'You\'re already an affiliate and have a password');
-define('TEXT_RETURNING_AFFILIATE', 'After log in you can view the actual informations of your affiliate account.');
+define('HEADING_RETURNING_AFFILIATE', 'Ya es afiliado y dispone de contraseña');
+define('TEXT_RETURNING_AFFILIATE', 'Después del inicio de sesión puede ver los datos actuales de su cuenta de afiliado.');
 
-define('TEXT_AFFILIATE_PASSWORD_FORGOTTEN', 'Password forgotten? Click <u>here</u>!');
+define('TEXT_AFFILIATE_PASSWORD_FORGOTTEN', '¿Ha olvidado su contraseña? ¡Pulse <u>aquí</u>!');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> ID/password mismatch!');
+define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> ID y/o contraseña no son correctos!');
 ?>

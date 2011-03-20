@@ -12,11 +12,11 @@ $Id: rmfirst.php 982 2011-01-06 02:53:12Z michael.oscmax@gmail.com $
 
 define('MODULE_SHIPPING_RMFIRST_TEXT_TITLE', 'Royal Mail 1st Class Standard');
 define('MODULE_SHIPPING_RMFIRST_TEXT_DESCRIPTION', 'Royal Mail First Class');
-define('MODULE_SHIPPING_RMFIRST_TEXT_WAY', 'Delivery Weight');
-define('MODULE_SHIPPING_RMFIRST_TEXT_ITEM', 'package of');
-define('MODULE_SHIPPING_RMFIRST_TEXT_ITEMS', 'packages of');
+define('MODULE_SHIPPING_RMFIRST_TEXT_WAY', 'Peso de la entrega');
+define('MODULE_SHIPPING_RMFIRST_TEXT_ITEM', 'paquete de');
+define('MODULE_SHIPPING_RMFIRST_TEXT_ITEMS', 'paquetes de');
 define('MODULE_SHIPPING_RMFIRST_TEXT_UNITS', 'Kg\'s');
-define('MODULE_SHIPPING_RMFIRST_INVALID_ZONE', 'Sorry, this shipping method is only available for UK customers');
-define('MODULE_SHIPPING_RMFIRST_UNDEFINED_RATE', 'The shipping rate cannot be determined at this time');
-define('MODULE_SHIPPING_RMFIRST_DELIVERY_SHIPPING_TIME', 'Ships normally within 1 to 3 days');
+define('MODULE_SHIPPING_RMFIRST_INVALID_ZONE', 'Lo sentimos, esta forma de envío sólo está disponible para clientes del Reino Unido');
+define('MODULE_SHIPPING_RMFIRST_UNDEFINED_RATE', 'Los gastos de envío no se pueden determinar en este momento');
+define('MODULE_SHIPPING_RMFIRST_DELIVERY_SHIPPING_TIME', 'se envía normalmente entre 1 y 3 días');
 ?>

@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE','El Programa de Afiliados');
-define('HEADING_TITLE','El Programa de Afiliados');
+define('NAVBAR_TITLE','Programa de Afiliados');
+define('HEADING_TITLE','Programa de Afiliados');
 
-define('TEXT_INFORMATION','Usted se registra a cabo con éxito.');
-define('TEXT_INFORMATION_ERROR_1','Usted no puede ser desconectado.');
-define('TEXT_INFORMATION_ERROR_2','No se registra en lo que no puede ser desconectado.');
+define('TEXT_INFORMATION','Cerró la sesión con éxito.');
+define('TEXT_INFORMATION_ERROR_1','No se ha podido cerrar la sesión.');
+define('TEXT_INFORMATION_ERROR_2','No pudo iniciar la sesión y por lo tanto no puede cerrarla.');
 ?>

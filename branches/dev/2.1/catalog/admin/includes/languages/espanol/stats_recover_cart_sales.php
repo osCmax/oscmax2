@@ -11,17 +11,19 @@ $Id$
 */
 
 define('HEADING_TITLE', 'Recover Cart Sales Report v2.22');
-define('DAYS_FIELD_PREFIX', 'Show for last ');
-define('DAYS_FIELD_POSTFIX', ' days ');
-define('DAYS_FIELD_BUTTON', 'Go');
-define('TABLE_HEADING_SCART_ID', 'SCart ID');
-define('TABLE_HEADING_SCART_DATE', 'Date Added');
-define('TABLE_HEADING_CUSTOMER', 'Customer Name');
-define('TABLE_HEADING_ORDER_DATE', 'Order Date');
-define('TABLE_HEADING_ORDER_STATUS', 'Status');
-define('TABLE_HEADING_ORDER_AMOUNT', 'Amount');
-define('TOTAL_RECORDS', 'Examined Records:');
-define('TOTAL_SALES', 'Recovered Sales:');
-define('TOTAL_SALES_EXPLANATION', ' (Possible sales from customers who abandoned carts & were notified via RCS)');
-define('TOTAL_RECOVERED', 'Total Recovered:');
+define('DAYS_FIELD_PREFIX', 'Mostrar últimos ');
+define('DAYS_FIELD_POSTFIX', ' días ');
+define('DAYS_FIELD_BUTTON', 'Ir');
+define('TABLE_HEADING_SCART_ID', 'ID SCart');
+define('TABLE_HEADING_SCART_DATE', 'Fecha añadido');
+define('TABLE_HEADING_CUSTOMER', 'Nombre cliente');
+define('TABLE_HEADING_ORDER_DATE', 'Fecha pedido');
+define('TABLE_HEADING_ORDER_STATUS', 'Estado');
+define('TABLE_HEADING_ORDER_AMOUNT', 'Importe');
+define('TOTAL_RECORDS', 'Registros examinados:');
+define('TOTAL_SALES', 'Ventas recuperadas:');
+define('TOTAL_SALES_EXPLANATION', ' (Ventas potenciales de clientes que abandonaron carritos y fueron notificados vía "Recuperación de carritos")');
+define('TOTAL_RECOVERED', 'Total recuperado:');
+define('TEXT_WORKING', 'Procesando ... ');
+define('TEXT_DONE', '¡Terminado!');
 ?>

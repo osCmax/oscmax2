@@ -10,24 +10,24 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Affiliate News / Announcements');
+define('HEADING_TITLE', 'Noticias / Anuncios de afiliados');
 
-define('TABLE_HEADING_AFFILIATE_NEWS_HEADLINE', 'Headline');
-define('TABLE_HEADING_AFFILIATE_NEWS_ACTION', 'Action');
-define('TABLE_HEADING_AFFILIATE_NEWS_STATUS', 'Status');
+define('TABLE_HEADING_AFFILIATE_NEWS_HEADLINE', 'Titular');
+define('TABLE_HEADING_AFFILIATE_NEWS_ACTION', 'Acción');
+define('TABLE_HEADING_AFFILIATE_NEWS_STATUS', 'Estado');
 
-define('TEXT_NEWS_ITEMS', 'News Items:');
-define('TEXT_INFO_HEADING_DELETE_ITEM', 'Delete Item');
-define('TEXT_DELETE_ITEM_INTRO', 'Are you sure you want to permanently delete this item?');
+define('TEXT_NEWS_ITEMS', 'Artículos de noticias:');
+define('TEXT_INFO_HEADING_DELETE_ITEM', 'Eliminar artículo');
+define('TEXT_DELETE_ITEM_INTRO', '¿Seguro que quieres eliminar permanentemente este artículo?');
 
-define('TEXT_AFFILIATE_NEWS_HEADLINE', 'Headline');
-define('TEXT_AFFILIATE_NEWS_CONTENT', 'Content');
+define('TEXT_AFFILIATE_NEWS_HEADLINE', 'Titular');
+define('TEXT_AFFILIATE_NEWS_CONTENT', 'Contenido');
 
-define('IMAGE_NEW_NEWS_ITEM', 'New news item');
+define('IMAGE_NEW_NEWS_ITEM', 'Nuevo artículo de noticias');
 
 // npe admin begin #add
-define('TEXT_AFFILIATE_NEWS_CONTENT_DELETE', 'Delete displayed news in this language!');
-define('EMPTY_CATEGORY', 'Empty news');
-define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'There are no news which can be displayed to your affiliate partners.');
+define('TEXT_AFFILIATE_NEWS_CONTENT_DELETE', 'Eliminar noticias mostradas en este idioma');
+define('EMPTY_CATEGORY', 'No hay noticias');
+define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'No hay noticias para mostrar a tus afiliados.');
 // npe admin begin #add
 ?>

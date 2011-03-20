@@ -11,9 +11,9 @@ $Id$
 */
 
 define('NAVBAR_TITLE','Programa de afiliados');
-define('HEADING_TITLE','Programa de Afiliados - Enlaces del producto');
+define('HEADING_TITLE','Programa de afiliados - Enlaces de producto');
 
-define('TEXT_AFFILIATE_NAME','Nombre del producto:');
+define('TEXT_AFFILIATE_NAME','Nombre del enlace:');
 define('TEXT_INFORMATION','Elija el producto que desea mostrar en su sitio web de las siguientes opciones:');
-define('TEXT_AFFILIATE_INFO','Copia el código que se muestra a continuación y pegarlo en su página web');
+define('TEXT_AFFILIATE_INFO','Copie el código que se muestra a continuación y péguelo en su página web');
 ?>

@@ -12,7 +12,9 @@ $Id$
 
 define('NAVBAR_TITLE', 'Comentarios');
 
-define('TEXT_CLICK_TO_ENLARGE', 'Haga Click para agrandar');
+define('TEXT_CLICK_TO_ENLARGE', 'Pulse aquí para ampliar');
 
-define('TEXT_OF_5_STARS', '%s de 5 Estrellas!');
+define('TEXT_OF_5_STARS', '%s de 5 estrellas');
+
+define('TEXT_ARTICLE_REVIEW_SUBMITTED','Gracias por enviarnos su comentario sobre este producto. Se publicará una vez que haya sido aprobado.');
 ?>

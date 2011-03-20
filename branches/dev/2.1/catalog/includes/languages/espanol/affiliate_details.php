@@ -10,10 +10,8 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE','El Programa de Afiliados');
-define('NAVBAR_TITLE', 'The Affiliate Program');
-define('NAVBAR_TITLE_2', 'Editar Affiliate Cuenta');
-define('HEADING_TITLE','El Programa de Afiliados - datos de tu cuenta <br> <small>Puedes editar cualquier información a continuación:</small>');
-define('NAVBAR_TITLE_1','El Programa de Afiliados');
-
+define('NAVBAR_TITLE','Datos de la cuenta del Programa de afiliados');
+define('NAVBAR_TITLE_1', 'Programa de afiliados');
+define('NAVBAR_TITLE_2', 'Editar cuenta de afiliado');
+define('HEADING_TITLE','Programa de Afiliados - datos de cuenta <br> <small>Puede editar cualquier información a continuación:</small>');
 ?>

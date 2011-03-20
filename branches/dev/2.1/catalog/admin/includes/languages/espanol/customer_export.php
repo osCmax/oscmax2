@@ -11,23 +11,23 @@ $Id: customer_export.php 1011 2011-01-06 23:38:01Z michael.oscmax@gmail.com $
 */
 
 define('HEADING_TITLE', 'Customer Export v1.5');
-define('TABLE_HEADING_CUSTOMER_EXPORT', 'Export and Save Customer Data onto your Local Machine. All customer records will be compiled into one text file.');
+define('TABLE_HEADING_CUSTOMER_EXPORT', 'Exportar y guardar datos de clientes en tu equipo. Todos los registros de clientes se almacenarán en un único fichero de texto.');
 
-define('TITLE_ID', 'cID');
-define('TITLE_FIRSTNAME', 'Firstname');
-define('TITLE_LASTNAME', 'Lastname');
+define('TITLE_ID', 'ID');
+define('TITLE_FIRSTNAME', 'Nombre');
+define('TITLE_LASTNAME', 'Apellidos');
 define('TITLE_EMAIL', 'E-mail');
-define('TITLE_GENDER', 'Genre');
-define('TITLE_DOB', 'DOB');
-define('TITLE_COMPANY', 'Company');
-define('TITLE_STREET_ADDRESS', 'Street Address');
-define('TITLE_POSTCODE', 'Zip');
-define('TITLE_CITY', 'City');
-define('TITLE_STATE', 'State');
-define('TITLE_SUBURB', 'Suburb');
-define('TITLE_COUNTRY', 'Country');
-define('TITLE_PHONE', 'Phone');
+define('TITLE_GENDER', 'Sexo');
+define('TITLE_DOB', 'Fecha nac.');
+define('TITLE_COMPANY', 'Empresa');
+define('TITLE_STREET_ADDRESS', 'Dirección');
+define('TITLE_POSTCODE', 'C.P.');
+define('TITLE_CITY', 'Población');
+define('TITLE_STATE', 'Provincia');
+define('TITLE_SUBURB', 'Dirección 2');
+define('TITLE_COUNTRY', 'País');
+define('TITLE_PHONE', 'Teléfono');
 define('TITLE_FAX', 'Fax');
 
-define('TEXT_SEPARATOR', 'Separator:');
+define('TEXT_SEPARATOR', 'Separador:');
 ?>

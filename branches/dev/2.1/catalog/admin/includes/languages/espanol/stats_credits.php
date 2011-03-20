@@ -10,9 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Aktuelles Kundenguthaben');
+define('HEADING_TITLE', 'Informe de créditos de cliente');
 
-define('TABLE_HEADING_NUMBER', 'Nr.');
-define('TABLE_HEADING_CUSTOMERS', 'Customer');
-define('TABLE_HEADING_TOTAL_PURCHASED', 'Credit');
+define('TABLE_HEADING_NUMBER', 'Nº');
+define('TABLE_HEADING_CUSTOMERS', 'Cliente');
+define('TABLE_HEADING_TOTAL_PURCHASED', 'Crédito');
 ?>

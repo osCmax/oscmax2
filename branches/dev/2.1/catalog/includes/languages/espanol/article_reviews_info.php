@@ -16,6 +16,6 @@ define('SUB_TITLE_ARTICLE', 'Noticia:');
 define('SUB_TITLE_FROM', 'De:');
 define('SUB_TITLE_DATE', 'Fecha:');
 define('SUB_TITLE_REVIEW', 'Comentario:');
-define('SUB_TITLE_RATING', 'Puntuaci&oacute;n:');
+define('SUB_TITLE_RATING', 'Valoración:');
 define('TEXT_OF_5_STARS', '%s de 5 estrellas');
 ?>

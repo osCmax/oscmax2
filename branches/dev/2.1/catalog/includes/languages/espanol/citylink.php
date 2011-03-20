@@ -12,9 +12,9 @@ $Id: citylink.php 982 2011-01-06 02:53:12Z michael.oscmax@gmail.com $
 
 define('MODULE_SHIPPING_CITYLINK_TEXT_TITLE', 'Initial Citylink');
 define('MODULE_SHIPPING_CITYLINK_TEXT_DESCRIPTION', 'Initial Citylink');
-define('MODULE_SHIPPING_CITYLINK_TEXT_WAY','Entrega de peso');
+define('MODULE_SHIPPING_CITYLINK_TEXT_WAY','Peso del envío');
 define('MODULE_SHIPPING_CITYLINK_TEXT_UNITS', 'Kg\'s');
-define('MODULE_SHIPPING_CITYLINK_DELIVERY_TIMES','(Ordenados antes de las 3pm, buques nextday)'); 
-define('MODULE_SHIPPING_CITYLINK_INVALID_ZONE','Lo sentimos, este método de envío está disponible para clientes del Reino Unido hasta un peso carrito de 20.00Kg');
-define('MODULE_SHIPPING_CITYLINK_UNDEFINED_RATE','La tarifa de envío no se puede determinar en este momento (peso en la cesta 20.00Kg / 500 ha superado el límite)');
+define('MODULE_SHIPPING_CITYLINK_DELIVERY_TIMES','(Si se realiza el pedido antes de las 3 p.m., se entrega al día siguiente)'); 
+define('MODULE_SHIPPING_CITYLINK_INVALID_ZONE','Lo sentimos, este método de envío está disponible para clientes del Reino Unido hasta un peso de 20 Kg');
+define('MODULE_SHIPPING_CITYLINK_UNDEFINED_RATE','Los gastos de envío no se pueden determinar en este momento (20 Kg de peso/ superado el límite de 500£)');
 ?>

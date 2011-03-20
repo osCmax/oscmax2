@@ -10,6 +10,6 @@ $Id$
   Released under the GNU General Public License
 */
 
-  define('MODULE_PAYMENT_COD_TEXT_TITLE', 'Contra Reembolso');
-  define('MODULE_PAYMENT_COD_TEXT_DESCRIPTION', 'Contra Reembolso');
+  define('MODULE_PAYMENT_COD_TEXT_TITLE', 'Contra reembolso');
+  define('MODULE_PAYMENT_COD_TEXT_DESCRIPTION', 'Contra reembolso');
 ?>

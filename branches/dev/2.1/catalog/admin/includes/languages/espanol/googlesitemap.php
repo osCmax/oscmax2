@@ -10,22 +10,22 @@ $Id$
   Released under the GNU General Public License
 */
   
-define('BOX_GOOGLE_SITEMAP', 'Google SiteMaps');
-define('TITLE_GOOGLE_SITEMAPS', 'Google XML Sitemap Admin ');
-define('OVERVIEW_TITLE_GOOGLE_SITEMAPS', 'OVERVIEW:');
-define('OVERVIEW_GOOGLE_SITEMAPS', 'This module automatically generates several XML Google compliant site maps for your oscommerce store: a main site map, one for categories, and one for your products.');
-define('INSTRUCTIONS_STEP1_GOOGLE_SITEMAPS', 'STEP 1:');
-define('INSTRUCTIONS_NOTE_GOOGLE_SITEMAPS', 'NOTE: Please ensure that you or your web developer has registered with Google SiteMaps, and submitted your initial site map before proceeding to step 2. ');
-define('INSTRUCTIONS_STEP2_GOOGLE_SITEMAPS', 'STEP 2:');
-define('WHATIS_TITLE_GOOGLE_SITEMAPS', 'What is Google SiteMaps?');
-define('WHATIS_TEXT_GOOGLE_SITEMAPS', 'Google SiteMaps allows you to upload an XML sitemap of all of your categories and products directly to google.com for faster indexing. ');
-define('WHATIS_REGISTER_GOOGLE_SITEMAPS', 'To register or login to your Google account, click ');
-define('COMPLETE_GOOGLE_SITEMAPS','<b>Sitemap processing complete.</b>');
-
-define('IMAGE_REGENERATE','Regenerate');
-
-define('IMAGE_LOGIN','Login');
-
-define('IMAGE_PING','Ping');
-
+define('BOX_GOOGLE_SITEMAP', 'Google Sitemaps');
+define('TITLE_GOOGLE_SITEMAPS', 'Administrador de Google XML Sitemap ');
+define('OVERVIEW_TITLE_GOOGLE_SITEMAPS', 'RESUMEN:');
+define('OVERVIEW_GOOGLE_SITEMAPS', 'Este módulo genera automáticamente varios mapas XML del sitio compatibles con Google para tu tienda osCmax: un mapa principal, uno para las categorías y otro para los productos.');
+define('INSTRUCTIONS_STEP1_GOOGLE_SITEMAPS', '<b>PASO 1:</b> Por favor regenera tus mapas del sitio: ');
+define('INSTRUCTIONS_NOTE_GOOGLE_SITEMAPS', '<i>NOTA: Por favor asegúrate de que tú o tu desarrollador web os habéis registrado con Google Sitemaps, y enviado el mapa inicial antes de pasar al paso 2. Encontrarás un enlace a Google Webmaster Tools en la columna de la derecha.</i>');
+define('INSTRUCTIONS_STEP2_GOOGLE_SITEMAPS', '<b>PASO 2:</b> Haz PING a los servidores para notificarles de la actualización de tu mapa XML del sitio: ');
+define('WHATIS_TITLE_GOOGLE_SITEMAPS', '¿Qué es Google Sitemaps?');
+define('WHATIS_TEXT_GOOGLE_SITEMAPS', 'Google Sitemaps te permite subir directamente a Google un mapa XML de todas las categorías y productos para una indexación más rápida. ');
+define('WHATIS_REGISTER_GOOGLE_SITEMAPS', 'Para registrarte o iniciar sesión en tu cuenta de Google, pulsa ');
+define('COMPLETE_GOOGLE_SITEMAPS', '<b>Completado el procesamiento del mapa del sitio.</b>');
+define('IMAGE_REGENERATE', 'Regenerar');
+define('IMAGE_LOGIN', 'Iniciar sesión');
+define('IMAGE_PING', 'Ping');
+define('TEXT_SITEMAP_REPORT', 'Generación informe de Google Sitemaps');
+define('TEXT_GOOGLE_PING', 'Ping Google Sitemaps');
+define('TEXT_ASK_PING', 'Ping Ask Sitemaps');
+define('TEXT_BING_PING', 'Ping Bing Sitemaps');
 ?>

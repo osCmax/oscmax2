@@ -11,5 +11,5 @@ $Id$
 */
 
   define('MODULE_ORDER_TOTAL_SUBTOTAL_TITLE', 'Subtotal');
-  define('MODULE_ORDER_TOTAL_SUBTOTAL_DESCRIPTION', 'Subtotal del Pedido');
+  define('MODULE_ORDER_TOTAL_SUBTOTAL_DESCRIPTION', 'Subtotal del pedido');
 ?>

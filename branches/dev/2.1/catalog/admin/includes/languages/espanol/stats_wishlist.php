@@ -10,13 +10,13 @@ $Id: stats_wishlist.php 1011 2011-01-06 23:38:01Z michael.oscmax@gmail.com $
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Customer Wishlists');
+define('HEADING_TITLE', 'Favoritos de clientes');
 
-define('TABLE_HEADING_NUMBER', 'No.');
-define('TABLE_HEADING_PRODUCT_NAME', 'Product Name');
-define('TABLE_HEADING_PRODUCT_MODEL', 'Model Number');
-define('TABLE_HEADING_PRODUCT_PRICE', 'Price');
-define('TABLE_HEADING_COMPANY', 'Company');
-define('TABLE_HEADING_CUSTOMER', 'Customer');
-define('TABLE_HEADING_WISHLIST', 'Products In Wish List');
+define('TABLE_HEADING_NUMBER', 'Nº');
+define('TABLE_HEADING_PRODUCT_NAME', 'Nombre producto');
+define('TABLE_HEADING_PRODUCT_MODEL', 'Referencia');
+define('TABLE_HEADING_PRODUCT_PRICE', 'Precio');
+define('TABLE_HEADING_COMPANY', 'Empresa');
+define('TABLE_HEADING_CUSTOMER', 'Cliente');
+define('TABLE_HEADING_WISHLIST', 'Productos en favoritos');
 ?>

@@ -10,13 +10,13 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('BOX_HEADING_GV_ADMIN', 'Boucher/Cupones');
-define('BOX_GV_ADMIN_QUEUE', 'Cola de Boucher de Regalo');
-define('BOX_GV_ADMIN_MAIL', 'Correo de oucher de Regalo');
-define('BOX_GV_ADMIN_SENT', 'Enviar Boucher de Regalo');
-define('BOX_COUPON_ADMIN','Cupon Admin');
+define('BOX_HEADING_GV_ADMIN', 'Cheques regalo/vales descuento');
+define('BOX_GV_ADMIN_QUEUE', 'Cola de cheques regalo');
+define('BOX_GV_ADMIN_MAIL', 'Enviar cheques regalo');
+define('BOX_GV_ADMIN_SENT', 'Cheques regalo enviados');
+define('BOX_COUPON_ADMIN','Administración de vales');
 
-define('IMAGE_RELEASE', 'Redeem Boucher de Regalo');
+define('IMAGE_RELEASE', 'Canjear cheque regalo');
 
 define('_JANUARY', 'Enero');
 define('_FEBRUARY', 'Febrero');
@@ -29,17 +29,17 @@ define('_AUGUST', 'Agosto');
 define('_SEPTEMBER', 'Septiembre');
 define('_OCTOBER', 'Octubre');
 define('_NOVEMBER', 'Noviembre');
-define('_DECEMBER', 'Deciembre');
+define('_DECEMBER', 'Diciembre');
 
-define('TEXT_DISPLAY_NUMBER_OF_GIFT_VOUCHERS', 'Mostrando <b>%d</b> de <b>%d</b> (de <b>%d</b> Bouchers regalados)');
-define('TEXT_DISPLAY_NUMBER_OF_COUPONS', 'Mostrando <b>%d</b> de <b>%d</b> (de <b>%d</b> Cupones)');
+define('TEXT_DISPLAY_NUMBER_OF_GIFT_VOUCHERS', 'Mostrando del <b>%d</b> al <b>%d</b> (de <b>%d</b> cheques regalo)');
+define('TEXT_DISPLAY_NUMBER_OF_COUPONS', 'Mostrando del <b>%d</b> al <b>%d</b> (de <b>%d</b> vales descuento)');
 
-define('TEXT_VALID_PRODUCTS_LIST', 'Lista de Productos');
-define('TEXT_VALID_PRODUCTS_ID', 'ID del Producto');
-define('TEXT_VALID_PRODUCTS_NAME', 'Nombre del Producto');
-define('TEXT_VALID_PRODUCTS_MODEL', 'Modelo del Producto');
+define('TEXT_VALID_PRODUCTS_LIST', 'Lista de productos');
+define('TEXT_VALID_PRODUCTS_ID', 'ID producto');
+define('TEXT_VALID_PRODUCTS_NAME', 'Nombre producto');
+define('TEXT_VALID_PRODUCTS_MODEL', 'Referencia producto');
 
-define('TEXT_VALID_CATEGORIES_LIST', 'Lista de Categorías');
-define('TEXT_VALID_CATEGORIES_ID', 'ID de Categorías');
-define('TEXT_VALID_CATEGORIES_NAME', 'Nombre de las Categorías');
+define('TEXT_VALID_CATEGORIES_LIST', 'Lista de categorías');
+define('TEXT_VALID_CATEGORIES_ID', 'ID categoría');
+define('TEXT_VALID_CATEGORIES_NAME', 'Nombre categoría');
 ?>

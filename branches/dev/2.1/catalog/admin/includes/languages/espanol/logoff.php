@@ -10,8 +10,8 @@
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Log Off');
-define('NAVBAR_TITLE', 'Log Off');
-define('TEXT_MAIN', 'Has salido desde el area <b>Admin</b>. Ahora puedes dejar tranquilo el ordenador. Puedes hacer click sobre Volver para otro login.');
-define('TEXT_RELOGIN', 're-login');
+define('HEADING_TITLE', 'Cerrar sesión');
+define('NAVBAR_TITLE', 'Cerrar sesión');
+define('TEXT_MAIN', 'Has cerrado la sesión en el área de <b>Administración</b>. Ahora es seguro dejar el ordenador. Pulsa el botón Volver para iniciar otra sesión.');
+define('TEXT_RELOGIN', 'Volver a iniciar sesión');
 ?>

@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Signup');
-define('HEADING_TITLE', 'Congratulations!');
-define('TEXT_ACCOUNT_CREATED', 'Congratulations! Your new Affiliate account application has been submitted! You will shortly receive an email containing important information regarding your Affiliate Account, including you affiliate login details. If you have not received it within the hour, please <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">contact us</a>.<br><br>If you have <small><b>ANY</b></small> questions about the affiliate program, please <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">contact us</a>.');
+define('NAVBAR_TITLE', 'Registro de afiliado');
+define('HEADING_TITLE', '¡Enhorabuena!');
+define('TEXT_ACCOUNT_CREATED', '¡Enhorabuena! Su petición para una cuenta de nuevo afiliado ha sido enviada. En breve recibirá un email conteniendo información importante acerca de su cuenta de afiliado, incluyendo detalles sobre el inicio de sesión de afiliado. Si no recibiera este email en una hora, por favor <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">contacte con nosotros</a>.<br><br>Si tiene <small><b>CUALQUIER</b></small> duda o pregunta sobre el Progrma de afiliados, por favor <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">contacte con nosotros</a>.');
 ?>

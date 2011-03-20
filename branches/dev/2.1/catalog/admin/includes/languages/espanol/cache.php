@@ -10,15 +10,15 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Control de Cach&eacute;');
+define('HEADING_TITLE', 'Control de caché');
 
-define('TABLE_HEADING_CACHE', 'Paneles');
-define('TABLE_HEADING_DATE_CREATED', 'Fecha de Creaci&oacute;n');
-define('TABLE_HEADING_ACTION', 'Acci&oacute;n');
+define('TABLE_HEADING_CACHE', 'Bloques de caché');
+define('TABLE_HEADING_DATE_CREATED', 'Fecha de creación');
+define('TABLE_HEADING_ACTION', 'Acción');
 
-define('TEXT_FILE_DOES_NOT_EXIST', 'No existe fichero');
-define('TEXT_CACHE_DIRECTORY', 'Directorio para la Cach&eacute;: ');
+define('TEXT_FILE_DOES_NOT_EXIST', 'El fichero no existe');
+define('TEXT_CACHE_DIRECTORY', 'Directorio para la caché: ');
 
-define('ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST', 'Error: No existe el directorio para la cach&eacute;. Especifique un directorio valido en Configuraci&oacute;n->Cach&eacute;.');
-define('ERROR_CACHE_DIRECTORY_NOT_WRITEABLE', 'Error: No hay permiso de escritura en el directorio para la caché.');
+define('ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST', 'Error: No existe el directorio para la caché. Especifique un directorio valido en Configuración->Caché.');
+define('ERROR_CACHE_DIRECTORY_NOT_WRITEABLE', 'Error: No se puede escribir en el directorio para la caché.');
 ?>

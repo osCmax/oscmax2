@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('MODULE_SHIPPING_FREESHIPPER_TEXT_TITLE','ENVÍO GRATIS!');
-define('MODULE_SHIPPING_FREESHIPPER_TEXT_DESCRIPTION','ENVÍO GRATIS');
-define('MODULE_SHIPPING_FREESHIPPER_TEXT_WAY','Sólo Envío Gratis');
+define('MODULE_SHIPPING_FREESHIPPER_TEXT_TITLE','¡Gastos de envío gratis!');
+define('MODULE_SHIPPING_FREESHIPPER_TEXT_DESCRIPTION','¡Gastos de envío gratis');
+define('MODULE_SHIPPING_FREESHIPPER_TEXT_WAY','Sólo gastos de envío gratis');
 ?>

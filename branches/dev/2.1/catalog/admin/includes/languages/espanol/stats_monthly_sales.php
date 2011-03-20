@@ -10,99 +10,99 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Monthly Sales/Tax Summary');
-define('HEADING_TITLE_STATUS','Status');
-define('HEADING_TITLE_REPORTED','Reported');
+define('HEADING_TITLE', 'Resumen Ventas/Impuestos mensuales');
+define('HEADING_TITLE_STATUS','Estado');
+define('HEADING_TITLE_REPORTED','Generado');
 //Added line
-define('TEXT_DETAIL','Detail');
-define('TEXT_ALL_ORDERS', 'All orders');
-define('TEXT_NOTHING_FOUND', 'No income for this date/status selection');
+define('TEXT_DETAIL','Detalles');
+define('TEXT_ALL_ORDERS', 'Todos los pedidos');
+define('TEXT_NOTHING_FOUND', 'No hay ingresos para esta selección de fecha/estado');
 //Added 2 lines
-define('TEXT_BUTTON_REPORT_BACK','Back');
-define('TEXT_BUTTON_REPORT_INVERT','Invert');
-define('TEXT_BUTTON_REPORT_PRINT','Print');
-define('TEXT_BUTTON_REPORT_SAVE','Save CSV');
-define('TEXT_BUTTON_REPORT_HELP','Help');
+define('TEXT_BUTTON_REPORT_BACK','Volver');
+define('TEXT_BUTTON_REPORT_INVERT','Invertir');
+define('TEXT_BUTTON_REPORT_PRINT','Imprimir');
+define('TEXT_BUTTON_REPORT_SAVE','Guardar CSV');
+define('TEXT_BUTTON_REPORT_HELP','Ayuda');
 //Added 2 lines
-define('TEXT_BUTTON_REPORT_BACK_DESC', 'Return to summary by months');
-define('TEXT_BUTTON_REPORT_INVERT_DESC', 'Invert rows top to bottom');
-define('TEXT_BUTTON_REPORT_PRINT_DESC', 'Show report in printer friendly window');
-define('TEXT_BUTTON_REPORT_HELP_DESC', 'About this report and how to use its features');
+define('TEXT_BUTTON_REPORT_BACK_DESC', 'Volver al resumen por meses');
+define('TEXT_BUTTON_REPORT_INVERT_DESC', 'Invertir filas de arriba a abajo');
+define('TEXT_BUTTON_REPORT_PRINT_DESC', 'Mostrar informe en una ventana para imprimir');
+define('TEXT_BUTTON_REPORT_HELP_DESC', 'Acerca de este informe y cómo utilizar sus características');
 //Added line
-define('TEXT_BUTTON_REPORT_GET_DETAIL', 'Click to report daily summary for this month');
+define('TEXT_BUTTON_REPORT_GET_DETAIL', 'Pulsa para obtener un resumen diario para de este mes');
 define('TEXT_REPORT_DATE_FORMAT', 'j M Y -   g:i a'); // date format string
 //  as specified in php manual here: http://www.php.net/manual/en/function.date.php
-define('TABLE_HEADING_YEAR','Year');
-define('TABLE_HEADING_MONTH', 'Month');
-define('TABLE_HEADING_DAY', 'Day');
-define('TABLE_HEADING_INCOME', 'Gross<br> Income');
-define('TABLE_HEADING_SALES', 'Product<br> sales');
-define('TABLE_HEADING_NONTAXED', 'Exempt<br> sales');
-define('TABLE_HEADING_TAXED', 'Taxable<br> sales');
-define('TABLE_HEADING_TAX_COLL', 'Taxes<br> collected');
-define('TABLE_HEADING_SHIPHNDL', 'Shipping<br> & Handling');
-define('TABLE_HEADING_LOWORDER', 'Low Order<br> Fees');
-define('TABLE_HEADING_OTHER', 'Gift<br> Vouchers');  // could be any other extra class value
+define('TABLE_HEADING_YEAR','Año');
+define('TABLE_HEADING_MONTH', 'Mes');
+define('TABLE_HEADING_DAY', 'Día');
+define('TABLE_HEADING_INCOME', 'Ingresos<br> brutos');
+define('TABLE_HEADING_SALES', 'Ventas<br> productos');
+define('TABLE_HEADING_NONTAXED', 'Ventas libres <br> de impuestos');
+define('TABLE_HEADING_TAXED', 'Ventas sujetas<br> a impuestos');
+define('TABLE_HEADING_TAX_COLL', 'Impuestos<br> cobrados');
+define('TABLE_HEADING_SHIPHNDL', 'Envío y<br> manipulación');
+define('TABLE_HEADING_LOWORDER', 'Cargos por<br> pedido mínimo');
+define('TABLE_HEADING_OTHER', 'Cheques<br> regalo');  // could be any other extra class value
 define('TABLE_FOOTER_YTD','YTD');
-define('TABLE_FOOTER_YEAR','YEAR');
+define('TABLE_FOOTER_YEAR','AÑO');
 //Added define
 define('TEXT_HELP', '<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
-<title>Monthly Sales/Tax Report</title>
+<title>Informe Ventas/Impuestos mensuales</title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 </head>
-<BODY>
+<body>
 <center>
 <table width="95%"><tr><td>
 <p class="main" align="center">
-<b>How to view and use the store income summary report</b>
+<b>Cómo visualizar y utilizar el informe resumen de ingresos</b>
 <p class="main" align="justify">
-<b>Reporting store activity by month</b>
+<b>Presentar la actividad mensual</b>
 <p class="smallText" align="justify">
-When initially selected from the Reports menu, this report displays a financial summary of all orders in the store database, by month.  Each month of the store\'s history is summarized in a row, showing the store income and its components, and listing the amounts of taxes, shipping and handling charges, low order fees and gift vouchers. (If the store does not have low order fees or gift vouchers enabled, these columns are omitted from the report.)  Activity is reported as of the date of purchase.
+Cuando se selecciona inicialmente desde el menú de Informes, este informe muestra un resumen financiero de todos los pedidos almacenados en la base de datos, por meses. Cada mes del historial de la tienda se resume en una fila, mostrando los ingresos de la tienda y sus componentes, y listando los importes de impuestos, cargos por envío y manipulación, cargos por pedido mínimo y cheques regalo (si no se tienen habilitados los cargos por pedido mínimo o los cheques regalo, estas columnas no se muestran). La actividad se genera en la fecha de la compra.
 <p class="smallText" align="justify">
-The top row is the current month, and the rows under it summarize each month of the store\'s order history.  Beneath the rows of each calendar year is a footer line, summarizing that year\'s totals in each column of the report. 
+En la fila superior está el mes actual, y las filas debajo de esa resumen cada mes del historial de pedidos. Bajo las filas de cada año de calendario hay una línea, resumiendo los totales de ese año en cada columna del informe. 
 <p class="smallText" align="justify">
-To invert the order of the rows, click the "Invert" button.
+Para invertir el orden de las columnas, pulsa en el botón de "Invertir".
 <p class="main" align="justify">
-<b>Reporting monthly summary by days</b>
+<b>Presentar el resumen mensual por días</b>
 <p class="smallText" align="justify">
-The summary of daily activity within any month may be displayed by clicking on the month\'s name, at the left of the row.  To return from the daily summary to the monthly summary, click the "Back" button in the daily display.
+El resumen de la actividad diaria dentro de cualquier mes puede ser mostrada al pulsar sobre el nombre del mes, a la izquierda de la fila. Para volver del resumen diario al resumen mensual, pulsa el botón "Volver" en la visualización diaria.
 <p class="main" align="justify">
-<b>What the columns represent (headers explained)</b>
+<b>Qué representan las columnas (explicación de las cabeceras)</b>
 <p class="smallText" align="justify">
-On the left, the month and year of the row are stated.  The other columns are, left to right:
-<ul><li class="smallText"><b>Gross Income</b> - the total of all orders  
-<li class="smallText"><b>Order Subtotal</b> - the total sales of products purchased in the month
-<br>Then, the product sales are broken into two categories:
-<li class="smallText"><b>Nontaxed sales</b> - the subtotal of sales which were not taxed, and 
-<li class="smallText"><b>Taxed sales</b> - the subtotal of sales which were taxed
-<li class="smallText"><b>Taxes collected</b> - the amount collected from customers for taxes
-<li class="smallText"><b>Shipping & handling</b> - the total shipping and handling charges collected  
-<li class="smallText"><b>Low order fees</b> and <b>Gift Vouchers</b> - if the store has low order fees enabled, and/or gift vouchers, the totals of these are shown in separate columns
+A la izquierda se presentan el mes y el año de la fila. El resto de columnas son, de izquierda a derecha:
+<ul><li class="smallText"><b>Ingresos brutos</b> - el total de todos los pedido  
+<li class="smallText"><b>Ventas productos</b> - las ventas totales de los productos comprados por los clientes durante el mes
+<br>Entonces, las ventas de productos se dividen en dos categorías:
+<li class="smallText"><b>Ventas libres de impuestos</b> - el subtotal de las ventas a las que no se les aplicaron impuestos, y 
+<li class="smallText"><b>Ventas sujetas a impuestos</b> - el subtotal de las ventas a las que sí se les aplicaron impuestos
+<li class="smallText"><b>Impuestos cobrados</b> - el importe cobrada a los clientes en concepto de impuestos
+<li class="smallText"><b>Envío y manipulación</b> - el total de cargos cobrados en concepto de envío y manipulación  
+<li class="smallText"><b>Cargos por pedido mínimo</b> y <b>Cheques regalo</b> - si están habilitados los cargos por pedido mínimo y/o los cheques regalo, se muestran estos totales en columnas separadas
 </ul>
 <p class="main" align="justify">
-<b>Selecting report summary by status</b>
+<b>Seleccionar informe resumen por estado</b>
 <p class="smallText" align="justify">
-To show the monthly or daily summary information for just one Order Status, select the status in the drop-down box at the upper right of the report screen.  Depending on the store\'s setup for these values, there may be a status for "Pending" or "Shipped" for instance.  Change this status and the report will be recalculated and displayed. 
+Para mostrar la información del resumen mensual o diario para un sólo estado de pedido, selecciona el estado correspondiente en la lista desplegable en la parte de arriba a la derecha de la pantalla del informe. Dependiendo de la configuración de la tienda para esos valores, puede haber estados para "Pendiente" o "Entregado" por ejemplo. Si cambias este estado el informe será recalculado y mostrado en pantalla de nuevo. 
 <p class="main" align="justify">
-<b>Showing detail of taxes</b>
+<b>Mostrar los detalles de los impuestos</b>
 <p class="smallText" align="justify">
-The amount of tax in any row of the report is a link to a popup window, which shows the name of the tax classes charged and their individual amounts.
+El importe de los impuestos en cualquier fila del informe es un enlace a una ventana emergente, que muestra el nombre de los tipos de impuestos aplicados y los importes individuales.
 <p class="main" align="justify">
-<b>Printing the report</b>
+<b>Imprimir el informe the report</b>
 <p class="smallText" align="justify">
-To view the report in a printer-friendly window, click on the "Print" button, then use your browser\'s print command in the File menu.  The store name and headers are added to show what orders were selected, and when the report was generated. 
+Para presentar el informe en una ventana formateado para luego imprimirlo, pulsa en el botón de "Imprimir", después utiliza el comando Imprimir de tu navegador en el menú Fichero. El nombre de la tienda y las cabeceras se añaden para mostrar qué pedidos se seleccionaron, y la fecha y hora de generación del informe. 
 <p class="main" align="justify">
-<b>Saving report values to a file</b>
+<b>Guardar los valores del informe en un fichero</b>
 <p class="smallText" align="justify">
-To save the values of the report to a local file, click on the Save CSV button at the bottom of the report.  The report values will be sent to your browser in a text file, and you will be prompted with a Save File dialog box to choose where to save the file.  The contents of the file are in Comma Separated Value (CSV) format, with a line for each row of the report beginning with the header line, and each value in the row is separated by commas. This file can be conveniently and accurately imported to common spreadsheet financial and statistical tools, such as Excel and QuattroPro. The file is provided to your browser with a suggested file name consisting of the report name, status selected, and date/time. <br><br>
+Para almacenar los valores del informe a un fichero en tu equipo, pulsa en el botón "Guardar CSV" en la parte inferior del informe. Los valores del informe se enviarán a tu navegador como un fichero de texto, y se te presentará una menú de diálogo de Guardar archivo para que elijas dónde quieres almacenar el fichero. Los conenidos del fichero están en formato Comma Separated Value (CSV) - Valores Separados por Comas, con una línea por cada fila del informe empezando por la línea de cabeceras, y cada valor de la fila está separado por comas. Este fichero puede ser importado con precisión y a conveniencia por herramientas estadísticas y financieras comunes, tales como Excel y QuattroPro. El fichero es proporcionado al navegador con un nombre que consiste en el nombre del informe, el estado seleccionado, y la fecha y hora. <br><br>
 <p class="smallText">v 2.1.1
 </td></tr>
 </table>
-</BODY>
-</HTML>');
+</body>
+</html>');
 ?>

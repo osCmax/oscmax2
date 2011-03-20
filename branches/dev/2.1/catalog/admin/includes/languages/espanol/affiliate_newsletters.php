@@ -10,30 +10,30 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Affiliate Newsletter Manager');
+define('HEADING_TITLE', 'Administrador de boletín de noticias de afiliados');
 
-define('TABLE_HEADING_NEWSLETTERS', 'Newsletters');
-define('TABLE_HEADING_SIZE', 'Size');
-define('TABLE_HEADING_MODULE', 'Module');
-define('TABLE_HEADING_SENT', 'Sent');
-define('TABLE_HEADING_STATUS', 'Status');
-define('TABLE_HEADING_ACTION', 'Action');
+define('TABLE_HEADING_NEWSLETTERS', 'Boletines de noticias');
+define('TABLE_HEADING_SIZE', 'Tamaño');
+define('TABLE_HEADING_MODULE', 'Módulo');
+define('TABLE_HEADING_SENT', 'Enviado');
+define('TABLE_HEADING_STATUS', 'Estado');
+define('TABLE_HEADING_ACTION', 'Acción');
 
-define('TEXT_NEWSLETTER_MODULE', 'Module:');
-define('TEXT_NEWSLETTER_TITLE', 'Newsletter Title:');
-define('TEXT_NEWSLETTER_CONTENT', 'Content:');
+define('TEXT_NEWSLETTER_MODULE', 'Módulo:');
+define('TEXT_NEWSLETTER_TITLE', 'Título del boletin de noticias:');
+define('TEXT_NEWSLETTER_CONTENT', 'Contenido:');
 
-define('TEXT_NEWSLETTER_DATE_ADDED', 'Date Added:');
-define('TEXT_NEWSLETTER_DATE_SENT', 'Date Sent:');
+define('TEXT_NEWSLETTER_DATE_ADDED', 'Fecha de creación:');
+define('TEXT_NEWSLETTER_DATE_SENT', 'Fecha de envío:');
 
-define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to delete this newsletter?');
+define('TEXT_INFO_DELETE_INTRO', '¿Seguro que quieres eliminar este boletin de noticias?');
 
-define('TEXT_PLEASE_WAIT', 'Please wait .. sending emails ..<br><br>Please do not interrupt this process!');
-define('TEXT_FINISHED_SENDING_EMAILS', 'Finished sending e-mails!');
+define('TEXT_PLEASE_WAIT', 'Espera por favor .. enviando e-mails ..<br><br>¡Por favor no interrumpas este proceso!');
+define('TEXT_FINISHED_SENDING_EMAILS', 'Se acabó el envío de e-mails!');
 
-define('ERROR_NEWSLETTER_TITLE', 'Error: Newsletter title required');
-define('ERROR_NEWSLETTER_MODULE', 'Error: Newsletter module required');
-define('ERROR_REMOVE_UNLOCKED_NEWSLETTER', 'Error: Please lock the newsletter before deleting it.');
-define('ERROR_EDIT_UNLOCKED_NEWSLETTER', 'Error: Please lock the newsletter before editing it.');
-define('ERROR_SEND_UNLOCKED_NEWSLETTER', 'Error: Please lock the newsletter before sending it.');
+define('ERROR_NEWSLETTER_TITLE', 'Error: El título del boletín de noticias es obligatorio');
+define('ERROR_NEWSLETTER_MODULE', 'Error: El módulo del boletin de noticias es obligatorio');
+define('ERROR_REMOVE_UNLOCKED_NEWSLETTER', 'Error: Por favor bloquea el boletin de noticias antes de eliminarlo.');
+define('ERROR_EDIT_UNLOCKED_NEWSLETTER', 'Error: Por favor bloquea el boletin de noticias antes de editarlo.');
+define('ERROR_SEND_UNLOCKED_NEWSLETTER', 'Error: Por favor bloquea el boletin de noticias antes de enviarlo.');
 ?>

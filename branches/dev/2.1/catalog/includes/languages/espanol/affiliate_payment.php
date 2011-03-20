@@ -11,31 +11,28 @@ $Id$
 */
 
 define('NAVBAR_TITLE','Programa de afiliados');
-define('HEADING_TITLE','Programa de Afiliados: Pago');
+define('HEADING_TITLE','Programa de afiliados: Pagos');
 
 define('TEXT_AFFILIATE_HEADER','Sus pagos:');
 
-define('TABLE_HEADING_DATE','Fecha de Pago');
-define('TABLE_HEADING_PAYMENT','Las ganancias de afiliados');
-define('TABLE_HEADING_STATUS','Comprobar el estado del');
-define('TABLE_HEADING_PAYMENT_ID','Payment-ID');
-define('TEXT_DISPLAY_NUMBER_OF_PAYMENTS','Mostrando <b>%d</b> a <b>%d</b> (<b>%d</b> de los pagos)');
-define('TEXT_INFORMATION_PAYMENT_TOTAL','Sus ingresos cantidad actual a:');
-define('TEXT_NO_PAYMENTS','Ningún pago se ha registrado todavía.');
-define('TEXT_PAYMENT_HELP','<i>Las ganancias de afiliados</i> representa el valor de las prestaciones abonadas a los afiliados.');
-define('HEADING_PAYMENT_HELP','Ayuda para Afiliados');
-define('TEXT_DATE_HELP','<i>Fecha en que se</i> representa la fecha del pago realizado a los afiliados.');
-define('TEXT_PAYMENT_ID_HELP','<i>Pago-ID</i> representa el número de pagos asociados al pago.');
-define('TEXT_PAYMENT_HELP', '<i>Affiliate Earnings</i> represents the value of payment made to the affiliate.');
-define('TEXT_STATUS_HELP','<i>Estado del pago</i> representa el estado de los pagos realizados al afiliado');
+define('TABLE_HEADING_DATE','Fecha de pago');
+define('TABLE_HEADING_PAYMENT','Ganancias de afiliado');
+define('TABLE_HEADING_STATUS','Estado del pago');
+define('TABLE_HEADING_PAYMENT_ID','Nº de pago');
+define('TEXT_DISPLAY_NUMBER_OF_PAYMENTS','Mostrando <b>%d</b> a <b>%d</b> (de <b>%d</b> pagos)');
+define('TEXT_INFORMATION_PAYMENT_TOTAL','Sus ganancias actuales ascienden a:');
+define('TEXT_NO_PAYMENTS','No se ha registrado ningún pago todavía.');
+
 define('TEXT_CLICKS_1','Haga clic en el');
+define('TEXT_CLICKS_2',' para ver una descripción de cada categoría.');
 
-define('TEXT_CLICKS_2','para ver una descripción de cada categoría.');
-
-define('HEADING_DATE_HELP','Fecha de Ayuda');
-
-define('HEADING_PAYMENT_ID_HELP','Pago Ayuda Nombre');
-
-define('HEADING_STATUS_HELP','Comprobar el estado del Ayuda');
-
+define('HEADING_PAYMENT_HELP','Ayuda para afiliados');
+define('HEADING_DATE_HELP','Ayuda de fecha');
+define('TEXT_DATE_HELP','<i>Fecha</i> representa la fecha del pago realizado al afiliado.');
+define('HEADING_PAYMENT_ID_HELP','Ayuda de nº de pago');
+define('TEXT_PAYMENT_ID_HELP','<i>Nº de pago</i> representa el número de pago asociado al pago.');
+define('HEADING_PAYMENT_HELP', 'Ayuda de ganancias de afiliado');
+define('TEXT_PAYMENT_HELP','<i>Ganancias de afiliado</i> representa el valor del pago abonado al afiliado.');
+define('HEADING_STATUS_HELP','Ayuda de estado del pago');
+define('TEXT_STATUS_HELP','<i>Estado del pago</i> representa el estado del pago realizado al afiliado');
 ?>

@@ -10,17 +10,17 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Affiliate Clickthroughs');
+define('HEADING_TITLE', 'Clics de afiliados');
 
-define('TABLE_HEADING_ONLINE', 'Clickthroughs');
-define('TABLE_HEADING_AFFILIATE_USERNAME', 'Affiliate');
-define('TABLE_HEADING_IPADDRESS', 'IP Address');
-define('TABLE_HEADING_ENTRY_TIME', 'Time');
-define('TABLE_HEADING_BROWSER', 'Browser');
-define('TABLE_HEADING_ENTRY_DATE', 'Date');
-define('TABLE_HEADING_CLICKED_PRODUCT','Clicked Product');
-define('TABLE_HEADING_REFERRAL_URL', 'Refering URL');
+define('TABLE_HEADING_ONLINE', 'Clics');
+define('TABLE_HEADING_AFFILIATE_USERNAME', 'Afiliado');
+define('TABLE_HEADING_IPADDRESS', 'Dirección IP');
+define('TABLE_HEADING_ENTRY_TIME', 'Hora');
+define('TABLE_HEADING_BROWSER', 'Navegador');
+define('TABLE_HEADING_ENTRY_DATE', 'Fecha');
+define('TABLE_HEADING_CLICKED_PRODUCT','Producto pulsado');
+define('TABLE_HEADING_REFERRAL_URL', 'URL de origen');
 
-define('TEXT_NO_CLICKS', 'No Clickthroughs have been recorded');
-define('TEXT_DISPLAY_NUMBER_OF_CLICKS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> clickthroughs)');
+define('TEXT_NO_CLICKS', 'No se han registrado clics');
+define('TEXT_DISPLAY_NUMBER_OF_CLICKS', 'Mostrando del <b>%d</b> al <b>%d</b> (de <b>%d</b> clics)');
 ?>

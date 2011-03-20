@@ -11,6 +11,6 @@ $Id$
 */
 
 define('NAVBAR_TITLE', 'Comentarios');
-define('HEADING_TITLE', 'Lea lo que estan diciendo los demas');
-define('TEXT_OF_5_STARS', '%s de 5 Estrellas!');
+define('HEADING_TITLE', 'Lea lo que estan diciendo los demás');
+define('TEXT_OF_5_STARS', '%s de 5 estrellas');
 ?>

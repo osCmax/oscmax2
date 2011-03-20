@@ -10,13 +10,13 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Mi Cuenta');
-define('NAVBAR_TITLE_2', 'Modificar Contrase&ntilde;a');
+define('NAVBAR_TITLE_1', 'Mi cuenta');
+define('NAVBAR_TITLE_2', 'Modificar contraseña');
 
-define('HEADING_TITLE', 'Mi Contrase&ntilde;a');
+define('HEADING_TITLE', 'Mi contraseña');
 
-define('MY_PASSWORD_TITLE', 'Mi Contrase&ntilde;a');
+define('MY_PASSWORD_TITLE', 'Mi contraseña');
 
-define('SUCCESS_PASSWORD_UPDATED', 'Se ha actualizado su contrase&ntilde;a correctamente.');
-define('ERROR_CURRENT_PASSWORD_NOT_MATCHING', 'Su contrase&ntilde;a actual no coincide. Por favor int&eacute;ntelo de nuevo.');
+define('SUCCESS_PASSWORD_UPDATED', 'Se ha actualizado su contraseña correctamente.');
+define('ERROR_CURRENT_PASSWORD_NOT_MATCHING', 'Su contraseña actual no coincide. Por favor inténtelo de nuevo.');
 ?>

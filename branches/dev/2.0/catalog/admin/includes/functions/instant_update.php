@@ -8,6 +8,10 @@
   $images_dir = DIR_WS_IMAGES; // default catalog images folder;
   $root_images_dir = DIR_FS_CATALOG .  $images_dir . DYNAMIC_MOPICS_BIGIMAGES_DIR;
   $root_thumbs = DIR_FS_CATALOG .  $images_dir . DYNAMIC_MOPICS_THUMBS_DIR;
+/* used in Admin during product update */
+  $html_images_dir =  DIR_WS_CATALOG .  $images_dir . DYNAMIC_MOPICS_BIGIMAGES_DIR;
+  $html_thumbs =  DIR_WS_CATALOG .  $images_dir . DYNAMIC_MOPICS_THUMBS_DIR; 
+/* ------ */
   $new_dir = preg_replace('/[^a-zA-Z0-9_.-]/i', '_',$_POST['new_directory']); 
   $dir = (tep_not_null($new_dir) ? $new_dir : $_POST['directory']);
   $cache_dir = 'cache/';  

@@ -791,6 +791,8 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
   $osC_Tax = new osC_Tax;
 // EOF: MOD - NEW OSC tax class
 
+// LINE ADDED: MOD - OSC-AFFILIATE
+  require(DIR_WS_INCLUDES . 'affiliate_application_top.php');
 // LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
   require(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
   //---PayPal WPP Modification START ---//

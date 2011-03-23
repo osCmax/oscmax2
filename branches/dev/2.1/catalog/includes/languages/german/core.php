@@ -417,6 +417,7 @@ define('TEXT_READ_MORE','Lesen Sie mehr...');
 define('TEXT_MISSING_IMAGE','Leider ist derzeit keine Produktbild verfügbar');
 define('TEXT_PAGE', 'Seite: ');
 
+// Review Ratings
 define('TEXT_RATING', 'Benotung: ');
 define('TEXT_POOR', 'Nicht zufriedenstellend');
 define('TEXT_FAIR', 'Ausreichend');
@@ -424,5 +425,22 @@ define('TEXT_AVERAGE', 'Durchschnittlich');
 define('TEXT_GOOD', 'Gut');
 define('TEXT_EXCELLENT', 'Ausgezeichnet');
 
+// Password Text
+define('PW_TOO_WEAK', 'Zu unsicher');
+define('PW_WEAK', 'Unsicheres Passwort');
+define('PW_NORMAL', 'Durchschnittlich sicher');
+define('PW_STRONG', 'Sicheres Passwort');
+define('PW_VERY_STRONG', 'Sehr sicheres Passwort');
+
+// Product listing
+define('TEXT_PRODUCT_NAME_AZ', 'Produktname (A-Z)');
+define('TEXT_PRODUCT_NAME_ZA', 'Produktname (Z-A)');
+define('TEXT_PRICE_LOW_HIGH', 'Preis (Niedrig - Hoch)');
+define('TEXT_PRICE_HIGH_LOW', 'Preis (Hoch - Niedrig)');
+define('TEXT_SHOW_ALL', 'Alles anzeigen');
+define('TEXT_VIEW_AS_LIST', 'Listenansicht');
+define('TEXT_VIEW_AS_GRID', 'Gitteransicht');
+define('TEXT_RESULTS_PAGE', 'Ergebnisse/Seite: ');
+define('TEXT_SORT_ORDER', 'Sortierung: ');
 
 ?>

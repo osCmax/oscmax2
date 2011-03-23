@@ -60,7 +60,7 @@ define('TEXT_SHOW_OREDERS_COMMENTS','Bestellungen ohne Kommentar anzeigen?<br>(B
 define('TEXT_NOTIFY_CUSTOMER','Den Kunden per E-Mail benachrichtigen?<br>(Der Kunde wird per eMail mit den Kommentaren in der batch print language-Datei benachrichtigt.)');
 define('TEXT_BANK','Bank: ');
 define('TEXT_POST','Post: ');
-define('TEXT_SALES','Sales: ');
+define('TEXT_SALES','Umsätze: ');
 define('TEXT_PACKED_BY','Gepackt von:  ______________________');
 define('TEXT_VERIFIED_BY','Geprüft von:  ______________________');
 define('TEXT_DEAR','Sehr geehrte(r) ');
@@ -68,7 +68,7 @@ define('TEXT_THX_CHRISMAS','Vielen Dank für Ihre Unterstützung -----');
 define('TEXT_RETURNS_LABEL', 'Rücksende-Etikett Bestellung: ');
 define('TEXT_SHIPPING_LABEL', 'Versand-Etikett Bestellung: ');
 define('SHIP_FROM_COUNTRY', '');  //eg. 'United Kingdom'
-define('WEBSITE', 'www.Your site.com');
+define('WEBSITE', 'www.Ihre Seite.com');
 define('TEXT_RETURNS', 'Wir hoffen, dass Sie es nicht brauchen werden, haben aber für den Fall der Fälle ein Rücksende-Label beigepackt. Bitte beachten Sie unsere Hinweise unter www.Your site.com/shipping.php');
 define('TEXT_TO', 'An:');
 // Change this to a general comment that you would like
@@ -163,4 +163,21 @@ define('BATCH_PDF_FILE', 'batch_orders.pdf');
 //define('PRICING_COLUMN_SIZES', '67');
 
 define('FOOTER_TEXT', 'Vielen Dank, dass Sie bei ' . STORE_NAME . ' eingekauft haben.');
+
+// Filename defines to allow multilanguage use
+define('TEXT_MISSING_FILENAME', 'Fehlende Sprachdefinition für');
+define('TEXT_CHRISTMAS_CARD', 'Weihnachtskarte');
+define('TEXT_GRID', 'Gitter');
+define('TEXT_INTEGRATED_PACKING', 'Integrierte Verpackung');
+define('TEXT_INTEGRATED_PACKING2', 'Integrierte Verpackung 2');
+define('TEXT_INVOICE', 'Rechnung');
+define('TEXT_INVOICE_S3', 'Rechnung (verwendet S3 bedrucktes Rechnungsformular)');
+define('TEXT_LABELS', 'Etiketten');
+define('TEXT_LABELWRITER', 'Etikettendrucker');
+define('TEXT_LETTERHEAD', 'Briefkopf');
+define('TEXT_NULL', 'Null');
+define('TEXT_ORDER_STATUS_CHANGE_ONLY', 'Nur Status der Bestellung ändern');
+define('TEXT_PACKING_SLIP_AND_INVOICE', 'Packliste und Rechnung');
+define('TEXT_PACKING_SLIP', 'Packliste');
+
 ?>

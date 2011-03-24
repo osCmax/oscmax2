@@ -22,7 +22,7 @@ $Id$
   
   require(DIR_WS_INCLUDES . 'paypal_wpp/languages/' . $language . '/' . FILENAME_PAYPAL_WPP);
   
-  if (MODULE_PAYMENT_PAYPAL_DP_STATUS == 'True' && MODULE_PAYMENT_PAYPAL_EC_ENABLED == 'Yes' && $cart->count_contents() > 0) {
+  if (defined('MODULE_PAYMENT_PAYPAL_DP_STATUS') && MODULE_PAYMENT_PAYPAL_DP_STATUS == 'True' && MODULE_PAYMENT_PAYPAL_EC_ENABLED == 'Yes' && $cart->count_contents() > 0) {
     $ec_enabled = true;
   } else {
     $ec_enabled = false;
@@ -229,9 +229,11 @@ $Id$
     return true;
   }
   
-  if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $_GET &= $HTTP_GET_VARS;
+  //if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $_GET &= $HTTP_GET_VARS;
   
-  switch($_GET['action']) {
+  $action = (isset($_GET['action']) ? $_GET['action'] : ''); 
+  
+  switch($action) {
     case 'express_checkout':
       require_once(DIR_WS_CLASSES . 'payment.php');
 

@@ -747,7 +747,7 @@ define('CD_FWR_MENU_RESET', 'Choose true to rebuild the categories menu');
 
 // Configuration ID: 87 - reCaptcha 
 define('CT_RECAPTCHA_ON', 'Enable reCaptcha Form = true/false');
-define('CD_RECAPTCHA_ON', 'Set to true to enable protection. You must get a reCaptcha key from their <a href=\"http://recaptcha.net/\" target=\"_blank\">website (www.recaptcha.net)</a> and enter the Public and Private Keys before enabling this functionality.');
+define('CD_RECAPTCHA_ON', 'Set to true to enable protection. You must get a reCaptcha key from their <a href="http://www.google.com/recaptcha" target="_blank">website (www.google.com/recaptcha)</a> and enter the Public and Private Keys before enabling this functionality.');
 define('CT_RECAPTCHA_PUBLIC_KEY', 'Public Key');
 define('CD_RECAPTCHA_PUBLIC_KEY', 'Enter your reCaptcha Public Key');
 define('CT_RECAPTCHA_PRIVATE_KEY', 'Private Key');
@@ -759,7 +759,7 @@ define('CD_PRICE_BREAK_NOF_LEVELS', 'Configures the number of price break levels
 define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Number of price breaks for dropdown');
 define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Set the number of price breaks at which you want to show a dropdown plus "from Low Price" instead of a table');
 
-// Configuration ID: 88 - Google Maps
+// Configuration ID: 89 - Google Maps
 define('CT_GOOGLE_MAPS_KEY', 'Google Maps Key');
 define('CD_GOOGLE_MAPS_KEY', 'Put your Google Maps API Key here.<br><br>You can get one at http://code.google.com/apis/maps/signup.html');
 
@@ -871,6 +871,8 @@ define('CT_MANUFACTURER_CELLPADDING', 'Manufacturer with products cellpadding');
 define('CD_MANUFACTURER_CELLPADDING', 'Sets the cellpadding for the manufacturer.<br>');
 define('CT_MANUFACTURER_VLINE_IMAGE_HEIGHT', 'Manufacturer with products separator vertical line height');
 define('CD_MANUFACTURER_VLINE_IMAGE_HEIGHT', 'Sets the height of the vertical line divider');
+define('CT_MANUFACTURER_LINE_THICKNESS', 'Manufacturer with products separator thickness');
+define('CD_MANUFACTURER_LINE_THICKNESS', 'Sets the thickness of the separator line. Only shows in Set Style #3.');
 define('CT_MANUFACTURER_LINE_COLOR', 'Manufacturer with products separator line color');
 define('CD_MANUFACTURER_LINE_COLOR', 'Sets the color of the lines.<br><br>Enter a six digit hex number or click Pick Color to select one from a pallet.<br>');
 
@@ -1007,23 +1009,23 @@ define('CD_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 'What color would you like the fo
 
 // Configuration ID: 205 - Corner Banners
 define('CT_CB_LAST_FEW', 'Last Few Remaining corner banner?');
-define('CD_CB_LAST_FEW', 'Would you like to display the Last Few Remaining corner banner?<br><center><img src="../images/corner_banners/last_few.png" alt="Last Few"></center>');
+define('CD_CB_LAST_FEW', 'Would you like to display the Last Few Remaining corner banner?<br><center><img src="../images/corner_banners/english/last_few.png" alt="Last Few"></center>');
 define('CT_CB_LAST_FEW_NO', 'Last Few Remaining display level?');
 define('CD_CB_LAST_FEW_NO', 'At what level of remaining stock do you want to display the Last Few Remaining corner banner?');
 define('CT_CB_TOP_RATED', 'Top Rated corner banner?');
-define('CD_CB_TOP_RATED', 'Would you like to display the Top Rated corner banner?<br><center><img src="../images/corner_banners/top_rated.png" alt="Top Rated"></center>');
+define('CD_CB_TOP_RATED', 'Would you like to display the Top Rated corner banner?<br><center><img src="../images/corner_banners/english/top_rated.png" alt="Top Rated"></center>');
 define('CT_CB_TOP_RATED_NO', 'Top Rated display level?');
 define('CD_CB_TOP_RATED_NO', 'At what level of rating do you want to display the Top Rated corner banner?');
 define('CT_CB_FEATURED', 'Featured Product corner banner?');
-define('CD_CB_FEATURED', 'Would you like to display the Featured Product corner banner?<br><center><img src="../images/corner_banners/featured.png" alt="Featured"></center>');
+define('CD_CB_FEATURED', 'Would you like to display the Featured Product corner banner?<br><center><img src="../images/corner_banners/english/featured.png" alt="Featured"></center>');
 define('CT_CB_SPECIALS', 'Special Offer corner banner?');
-define('CD_CB_SPECIALS', 'Would you like to display the Special Offer corner banner?<br><center><img src="../images/corner_banners/save50.png" alt="Special Offers"></center>');
+define('CD_CB_SPECIALS', 'Would you like to display the Special Offer corner banner?<br><center><img src="../images/corner_banners/english/save50.png" alt="Special Offers"></center>');
 define('CT_CB_SPECIALS_NO', 'Special Offer display level?');
 define('CD_CB_SPECIALS_NO', 'At what level of discount do you want to start displaying the Special Offer corner banner?<br><br>Please note that the Special Offer banners are rounded down to the <b>nearest 5%</b>.');
 define('CT_CB_CALL_FOR_PRICE', 'Ask for Price corner banner?');
-define('CD_CB_CALL_FOR_PRICE', 'Would you like to display the Ask for Price corner banner?<br><center><img src="../images/corner_banners/callforprice.png" alt="Ask for Price"></center>');
+define('CD_CB_CALL_FOR_PRICE', 'Would you like to display the Ask for Price corner banner?<br><center><img src="../images/corner_banners/english/callforprice.png" alt="Ask for Price"></center>');
 define('CT_CB_OUT_OF_STOCK', 'Out of Stock corner banner?');
-define('CD_CB_OUT_OF_STOCK', 'Would you like to display the Out of Stock corner banner?<br><center><img src="../images/corner_banners/out_of_stock.png" alt="Out of Stock"></center>');
+define('CD_CB_OUT_OF_STOCK', 'Would you like to display the Out of Stock corner banner?<br><center><img src="../images/corner_banners/english/out_of_stock.png" alt="Out of Stock"></center>');
 
 // Configuration ID: 206 - MailChimp Newsletters
 define('CT_MAILCHIMP_ENABLE', 'Enable MailChimp Newsletter Infobox');
@@ -1142,9 +1144,9 @@ define('CT_ONEPAGE_TELEPHONE', 'Telephone Required');
 define('CD_ONEPAGE_TELEPHONE', 'Telephone will be a required field?');
 define('CT_ONEPAGE_ZIP_BELOW', 'Move zip/post code input boxes below state');
 define('CD_ONEPAGE_ZIP_BELOW', 'Move zip/post code input boxes below state?');
-define('CT_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'Dont show shipping and handling address checkbox or ship methods if weight of products = 0');
-define('CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', '');
+define('CT_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'Don\'t show shipping and handling address checkbox or ship methods if weight of products = 0');
+define('CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'If the product weight = 0 then the system will assume that the products is virtual ie. downloadable.  As such the shipping address box does not need to be displayed.');
 define('CT_ONEPAGE_ADDR_LAYOUT', 'Addresses Layout');
-define('CD_ONEPAGE_ADDR_LAYOUT', '');
+define('CD_ONEPAGE_ADDR_LAYOUT', 'You can have the address boxes on One Page Checkout display either vertically (one on top of the other) or horizontally (side by side)');
 
 ?>

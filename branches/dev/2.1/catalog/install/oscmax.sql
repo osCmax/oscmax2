@@ -1744,7 +1744,7 @@ INSERT INTO configuration VALUES (1, 'CT_STORE_NAME', 'STORE_NAME', 'Store Name'
 INSERT INTO configuration VALUES (3125, 'CT_STORE_LOGO', 'STORE_LOGO', 'oscmax-logo.png', 'CD_STORE_LOGO', '1', '2', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (2, 'CT_STORE_OWNER', 'STORE_OWNER', 'Owners Name', 'CD_STORE_OWNER', '1', '3', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (3, 'CT_STORE_OWNER_EMAIL_ADDRESS', 'STORE_OWNER_EMAIL_ADDRESS', 'your@email.com', 'CD_STORE_OWNER_EMAIL_ADDRESS', '1', '4', NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (4, 'CT_EMAIL_FROM', 'EMAIL_FROM', 'Your Mail <admin@yourshop.com>', 'CD_EMAIL_FROM', '1', '5', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (4, 'CT_EMAIL_FROM', 'EMAIL_FROM', 'admin@yourshop.com', 'CD_EMAIL_FROM', '1', '5', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (5, 'CT_STORE_COUNTRY', 'STORE_COUNTRY', '223', 'CD_STORE_COUNTRY', '1', '6', NULL, now(), 'tep_get_country_name', 'tep_cfg_pull_down_country_list(');
 INSERT INTO configuration VALUES (6, 'CT_STORE_ZONE', 'STORE_ZONE', '4', 'CD_STORE_ZONE', '1', '7', NULL, now(), 'tep_cfg_get_zone_name', 'tep_cfg_pull_down_zone_list(');
 INSERT INTO configuration VALUES (7, 'CT_EXPECTED_PRODUCTS_SORT', 'EXPECTED_PRODUCTS_SORT', 'desc', 'CD_EXPECTED_PRODUCTS_SORT', '1', '8', NULL, now(), NULL, 'tep_cfg_select_option(array(''asc'', ''desc''), ');

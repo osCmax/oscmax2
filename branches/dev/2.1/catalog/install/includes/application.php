@@ -18,5 +18,18 @@ $Id$
   require('includes/functions/database.php');
   require('includes/functions/html_output.php');
   
+// Adds language defines to installer
+  if (isset($_POST['language'])) {
+        $language_selected = ($_POST['language']);
+  }
+  
+  if (file_exists('includes/languages/' . $language_selected . '/core.php')) {
+    require_once('includes/languages/' . $language_selected . '/core.php');
+  } else {
+    if (file_exists('includes/languages/english/core.php')) {
+      require_once('includes/languages/english/core.php');
+    }
+  }
+  
   define('PROJECT_VERSION', 'v2.5 Beta 3');
 ?>

@@ -24,7 +24,7 @@ h1 { font-size: 20px; margin-top: 0px; }
 h2 { font-size: 16px; margin-top: 0px; border-bottom: 1px solid #e0e0e0; }
 h3 { font-size: 12px; margin-top: 0px; }
 .infoPane h3 { background: #6da96d; color: #ffffff; padding: 5px 10px 5px 10px; }
-.stepsBox { float: right; background: #f0f6fc; border: 1px #ffffff solid; padding: 10px 15px 10px 0px; margin-right: -5px; }
+.stepsBox { float: right; background: #f0f6fc; border: 1px #ffffff solid; padding: 10px 15px 10px 10px; margin-right: -5px; margin-left: 15px; }
 .stepsBox ol { margin-top: 0px; margin-bottom: 0px; }
 #mBox { display: inline-block; float: left; clear: both; margin-top: 10px; visibility: hidden; display: none; }
 #mBoxContents { width: 948px; font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#FFFF99; border:solid 1px #FFCC00; padding:5px; }

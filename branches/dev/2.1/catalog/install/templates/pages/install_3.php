@@ -10,6 +10,13 @@ $Id$
   Released under the GNU General Public License
 */
 
+  // Check language pack for installer
+  if (isset($_POST['language'])) {
+    $language_selected = ($_POST['language']);
+  } else {
+	$language_selected = 'english';
+  }
+
 $dir_fs_document_root = $HTTP_POST_VARS['DIR_FS_DOCUMENT_ROOT'];
   if ((substr($dir_fs_document_root, -1) != '\\') && (substr($dir_fs_document_root, -1) != '/')) {
     if (strrpos($dir_fs_document_root, '\\') !== false) {
@@ -23,17 +30,16 @@ $dir_fs_document_root = $HTTP_POST_VARS['DIR_FS_DOCUMENT_ROOT'];
 
 <div id="menublock">
   <ul id="menutabs">
-    <li><a href="index.php" id="first">Start</a></li>
-    <li><a href="install.php?step=1">Database Server</a></li>
-    <li><a href="install.php?step=2">Web Server</a></li>
-    <li><a href="#" id="active">Store Settings</a></li>
-    <li><a href="#" id="last">Finished</a></li>
+    <li><a href="index.php" id="first"><?php echo TAB_START; ?></a></li>
+    <li><a href="install.php?step=1"><?php echo TAB_DATABASE_SERVER; ?></a></li>
+    <li><a href="install.php?step=2"><?php echo TAB_WEB_SERVER; ?></a></li>
+    <li><a href="#" id="active"><?php echo TAB_STORE_SETTINGS; ?></a></li>
+    <li><a href="#" id="last"><?php echo TAB_FINISHED; ?></a></li>
   </ul>
 </div>
 
 <div class="mainBlock">
-      <p>Here you can define the name of your online store and the contact information for the store owner.</p>
-      <p>The administrator username and password are used to log into the protected administration tool section.</p>
+  <?php echo TEXT_STORE_SETUP; ?>
 </div>
 
 <div class="contentBlock">
@@ -43,39 +49,39 @@ $dir_fs_document_root = $HTTP_POST_VARS['DIR_FS_DOCUMENT_ROOT'];
 
     <table border="0" width="100%" cellspacing="0" cellpadding="5" class="inputForm">
       <tr>
-        <td class="inputField"><?php echo 'Store Name<br />' . osc_draw_input_field('CFG_STORE_NAME', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The name of the online store that is presented to the public.</td>
+        <td class="inputField"><?php echo TEXT_STORE_NAME . '<br />' . osc_draw_input_field('CFG_STORE_NAME', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_STORE_NAME_DESC; ?></td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Store Owner First Name<br />' . osc_draw_input_field('CFG_STORE_OWNER_FIRSTNAME', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The first name of the store owner that is presented to the public.</td>
+        <td class="inputField"><?php echo TEXT_FIRST_NAME . '<br />' . osc_draw_input_field('CFG_STORE_OWNER_FIRSTNAME', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_FIRST_NAME_DESC; ?></td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Store Owner Last Name<br />' . osc_draw_input_field('CFG_STORE_OWNER_LASTNAME', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The last name of the store owner that is presented to the public.</td>
+        <td class="inputField"><?php echo TEXT_LAST_NAME . '<br />' . osc_draw_input_field('CFG_STORE_OWNER_LASTNAME', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_LAST_NAME_DESC; ?></td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Store Owner E-Mail Address<br />' . osc_draw_input_field('CFG_STORE_OWNER_EMAIL_ADDRESS', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The e-mail address of the store owner that is presented to the public.</td>
+        <td class="inputField"><?php echo TEXT_EMAIL . '<br />' . osc_draw_input_field('CFG_STORE_OWNER_EMAIL_ADDRESS', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_EMAIL_DESC; ?></td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Administrator Username<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_USERNAME', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The administrator username to use for the administration tool.</td>
+        <td class="inputField"><?php echo TEXT_USERNAME . '<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_USERNAME', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_USERNAME_DESC; ?></td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Administrator Password<br />' . osc_draw_password_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The password to use for the administrator account.</td>
+        <td class="inputField"><?php echo TEXT_PASSWORD . '<br />' . osc_draw_password_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_PASSWORD_DESC; ?></td>
       </tr>
 
 <?php if (is_writable($dir_fs_document_root) && is_writable($dir_fs_document_root . 'admin')) { ?>
       <tr>
-        <td class="inputField"><?php echo 'Admin Folder Name<br />' . osc_draw_input_field('CFG_ADMIN_FOLDER', 'admin', 'class="text"'); ?></td>
-        <td class="inputDescription">The name of folder in which the admin files should be kept.  It is <b>recommended that you change this</b> from the default setting of <b>admin</b> to improve your site's security. If you want to read more about security please <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">read the wiki</a>.</td>
+        <td class="inputField"><?php echo TEXT_ADMIN_FOLDER_NAME . '<br />' . osc_draw_input_field('CFG_ADMIN_FOLDER', 'admin', 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_CHANGE_ADMIN_FOLDER; ?></td>
       </tr>
 <?php } else { ?>
       <tr>
-        <td class="inputField"><?php echo 'Admin Folder Name<br /><img src="images/failed.gif" align="left" hspace="5" vspace="5" border="0">';?></td>
-        <td class="inputDescription">We have been unable to obtain sufficient file permissions to allow you to change the name of your <b>admin/</b> folder.  You should rename this folder to improve your store security.  For instructions on how to manually do this once you have corrected your server settings please <a href="http://wiki.oscdox.com/v2.1/setting_up_security" target="_blank">read the wiki</a>.</td>
+        <td class="inputField"><?php echo TEXT_ADMIN_FOLDER_NAME . '<br /><img src="images/failed.gif" align="left" hspace="5" vspace="5" border="0">';?></td>
+        <td class="inputDescription"><?php echo TEXT_ADMIN_NO_PERMISSION; ?></td>
       </tr>
 <?php } ?>
     </table>
@@ -83,7 +89,7 @@ $dir_fs_document_root = $HTTP_POST_VARS['DIR_FS_DOCUMENT_ROOT'];
 <div id="buttons">
   <table width="100%">
     <tr>
-      <td align="right"><input type="image" src="images/button_continue.gif" alt="Continue" id="inputButton" /></td>
+      <td align="right"><input type="image" src="includes/languages/<?php echo $language_selected; ?>/images/buttons/button_continue.gif" alt="<?php echo IMAGE_CONTINUE; ?>" id="inputButton" /></td>
     </tr>
   </table>
 </div>

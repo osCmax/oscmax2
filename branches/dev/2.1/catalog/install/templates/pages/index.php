@@ -9,6 +9,14 @@ $Id$
 
   Released under the GNU General Public License
 */
+
+  // Check language pack for installer
+  if (isset($_POST['language'])) {
+    $language_selected = ($_POST['language']);
+  } else {
+	$language_selected = 'english';
+  }
+
   $compat_register_globals = true;
 
   if (function_exists('ini_get') && (PHP_VERSION < 4.3) && ((int)ini_get('register_globals') == 0)) {
@@ -18,22 +26,22 @@ $Id$
 
 <div id="menublock">
   <ul id="menutabs">
-    <li><a href="#" id="firstactive">Start</a></li>
-    <li><a href="install.php?step=1">Database Server</a></li>
-    <li><a href="#" class="inactive">Web Server</a></li>
-    <li><a href="#" class="inactive">Store Settings</a></li>
-    <li><a href="#" class="inactive">Finished</a></li>
+    <li><a href="#" id="firstactive"><?php echo TAB_START; ?></a></li>
+    <li><a href="install.php?step=1"><?php echo TAB_DATABASE_SERVER; ?></a></li>
+    <li><a href="#" class="inactive"><?php echo TAB_WEB_SERVER; ?></a></li>
+    <li><a href="#" class="inactive"><?php echo TAB_STORE_SETTINGS; ?></a></li>
+    <li><a href="#" class="inactive"><?php echo TAB_FINISHED; ?></a></li>
   </ul>
 </div>
 
 <div class="mainBlock">
   <div class="stepsBox">
   
-        <table border="0" width="100%" cellspacing="0" cellpadding="2">
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
         <tr>
-          <td><b>PHP Version</b></td>
+          <td><b><?php echo TEXT_PHP_VERSION; ?></b></td>
           <td align="right"><?php echo PHP_VERSION; ?></td>
-          <td align="right" width="25"><img src="images/<?php echo ((PHP_VERSION >= 4) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
+          <td align="right" width="25"><img src="images/<?php echo ((PHP_VERSION >= 4) ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
       </table>
 
@@ -45,34 +53,34 @@ $Id$
 
       <table border="0" width="100%" cellspacing="0" cellpadding="2">
         <tr>
-          <td><b>PHP Settings</b></td>
+          <td><b><?php echo TEXT_PHP_SETTINGS; ?></b></td>
           <td align="right"></td>
           <td align="right" width="25"></td>
         </tr>
         <tr>
           <td>register_globals</td>
-          <td align="right"><?php echo (((int)ini_get('register_globals') == 0) ? 'Off' : 'On'); ?></td>
-          <td align="right"><img src="images/<?php echo (($compat_register_globals == true) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
+          <td align="right"><?php echo (((int)ini_get('register_globals') == 0) ? TEXT_OFF : TEXT_ON); ?></td>
+          <td align="right"><img src="images/<?php echo (($compat_register_globals == true) ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>magic_quotes</td>
-          <td align="right"><?php echo (((int)ini_get('magic_quotes') == 0) ? 'Off' : 'On'); ?></td>
-          <td align="right"><img src="images/<?php echo (((int)ini_get('magic_quotes') == 0) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
+          <td align="right"><?php echo (((int)ini_get('magic_quotes') == 0) ? TEXT_OFF : TEXT_ON); ?></td>
+          <td align="right"><img src="images/<?php echo (((int)ini_get('magic_quotes') == 0) ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>file_uploads</td>
-          <td align="right"><?php echo (((int)ini_get('file_uploads') == 0) ? 'Off' : 'On'); ?></td>
-          <td align="right"><img src="images/<?php echo (((int)ini_get('file_uploads') == 1) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
+          <td align="right"><?php echo (((int)ini_get('file_uploads') == 0) ? TEXT_OFF : TEXT_ON); ?></td>
+          <td align="right"><img src="images/<?php echo (((int)ini_get('file_uploads') == 1) ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>session.auto_start</td>
-          <td align="right"><?php echo (((int)ini_get('session.auto_start') == 0) ? 'Off' : 'On'); ?></td>
-          <td align="right"><img src="images/<?php echo (((int)ini_get('session.auto_start') == 0) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
+          <td align="right"><?php echo (((int)ini_get('session.auto_start') == 0) ? TEXT_OFF : TEXT_ON); ?></td>
+          <td align="right"><img src="images/<?php echo (((int)ini_get('session.auto_start') == 0) ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>session.use_trans_sid</td>
-          <td align="right"><?php echo (((int)ini_get('session.use_trans_sid') == 0) ? 'Off' : 'On'); ?></td>
-          <td align="right"><img src="images/<?php echo (((int)ini_get('session.use_trans_sid') == 0) ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
+          <td align="right"><?php echo (((int)ini_get('session.use_trans_sid') == 0) ? TEXT_OFF : TEXT_ON); ?></td>
+          <td align="right"><img src="images/<?php echo (((int)ini_get('session.use_trans_sid') == 0) ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
       </table>
 
@@ -80,24 +88,24 @@ $Id$
 
       <table border="0" width="100%" cellspacing="0" cellpadding="2">
         <tr>
-          <td><b>PHP Extensions</b></td>
+          <td><b><?php echo TEXT_PHP_EXTENSIONS; ?></b></td>
           <td align="right" width="25"></td>
         </tr>
         <tr>
           <td>MySQL</td>
-          <td align="right"><img src="images/<?php echo (extension_loaded('mysql') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
+          <td align="right"><img src="images/<?php echo (extension_loaded('mysql') ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>GD</td>
-          <td align="right"><img src="images/<?php echo (extension_loaded('gd') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
+          <td align="right"><img src="images/<?php echo (extension_loaded('gd') ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>cURL</td>
-          <td align="right"><img src="images/<?php echo (extension_loaded('curl') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
+          <td align="right"><img src="images/<?php echo (extension_loaded('curl') ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
         <tr>
           <td>OpenSSL</td>
-          <td align="right"><img src="images/<?php echo (extension_loaded('openssl') ? 'tick.gif' : 'cross.gif'); ?>" border="0" width="16" height="16" alt=""></td>
+          <td align="right"><img src="images/<?php echo (extension_loaded('openssl') ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
       </table>
 
@@ -107,11 +115,9 @@ $Id$
   
   </div>
 
-  <h1>Welcome to osCmax <?php echo PROJECT_VERSION; ?></h1>
+  <h1><?php echo TEXT_WELCOME_TO_OSCMAX . PROJECT_VERSION; ?></h1>
 
-  <p>osCmax allows you to sell products worldwide with your own online store. The administration side manages products, customers, orders, newsletters, specials, and more to successfully build and thrive on the success of your online business.</p>
-  <p>osCmax is based on osCommerce Online Merchant 2.2 and is aimed at making deployment of your site faster and easier than ever. osCmax is backwards compatible with osCommerce Online Merchant 2.2 and thus you can leverage the largest community for an online shopping cart solution: over 140,000 registered store owners and developers who help one another out and have provided over 4,000 add-ons that extend the features and potential of your online store.</p>
-  <p>osCmax and its add-ons are available for free under an Open Source license to help you start selling online sooner without any licensing fees or limitations involved.</p><p>&nbsp;</p><p>&nbsp;</p><br />
+  <?php echo TEXT_INDEX_MAIN_BLOCK; ?>
 </div>
 
 <div class="contentBlock">
@@ -140,7 +146,7 @@ $Id$
 
   if (function_exists('ini_get')) {
     if ($compat_register_globals == false) {
-      $warning_array['register_globals'] = 'Compatibility with register_globals is supported from PHP 4.3+. This setting <u>must be enabled</u> due to an older PHP version being used.';
+      $warning_array['register_globals'] = TEXT_REGISTER_GLOBALS_ERROR;
     }
   }
 
@@ -170,13 +176,9 @@ $Id$
     }
 
     if (sizeof($configfile_array) > 0) {
-?>
 
-      <p>The webserver is not able to save the installation parameters to its configuration files.</p>
-      <p>The following files need to have their file permissions set to world-writeable (chmod 777):</p>
-      <p>
+	echo TEXT_PERMISSIONS_ERROR;
 
-<?php
       for ($i=0, $n=sizeof($configfile_array); $i<$n; $i++) {
         echo $configfile_array[$i];
 
@@ -198,23 +200,39 @@ $Id$
   }
 
   if ((sizeof($configfile_array) > 0) || (sizeof($warning_array) > 0)) {
-?>
+	  
+  echo TEXT_CORRECT_ERROR;
 
-    <p class="messageStackAlert">Please correct the errors shown to the right and retry the installation procedure with the changes in place.</p>
-
-<?php
     if (sizeof($warning_array) > 0) {
-      echo '    <p  class="messageStackAlert"><i>Changing webserver configuration parameters may require the webserver service to be restarted before the changes take affect.</i></p>' . "\n";
+      echo TEXT_RESTART_WEB_SERVER_ERROR;
     }
 ?>
-
-    <p align="right"><a href="index.php"><img src="images/button_retry.gif" border="0" alt="Retry" /></a></p>
+<table width="100%">
+  <tr>
+    <td align="right">
+    <form name="installForm2" id="installForm2" action="index.php" method="post">
+      <input type="hidden" name="language" value="<?php echo $language_selected; ?>">
+      <input type="image" src="includes/languages/<?php echo $language_selected; ?>/images/buttons/button_retry.gif" alt="<?php echo IMAGE_RETRY; ?>" id="inputButton" />
+    </form>
+    </td>
+  </tr>
+</table>
 
 <?php
-  } else {
+
+  } else {  
+  echo '<p class="messageStackSuccess">' . TEXT_SERVER_SUCCESS . '</p>';
 ?>
-    <p class="messageStackSuccess">The webserver environment has been verified to proceed with a successful installation and configuration of your online store.<br /><br />Please continue to start the installation procedure.</p>
-    <p align="right"><a href="install.php"><img src="images/button_continue.gif" border="0" alt="Continue" /></a></p>
+<table width="100%">
+  <tr>
+    <td align="right">
+    <form name="installForm2" id="installForm2" action="install.php" method="post">
+      <input type="hidden" name="language" value="<?php echo $language_selected; ?>">
+      <input type="image" src="includes/languages/<?php echo $language_selected; ?>/images/buttons/button_continue.gif" alt="<?php echo IMAGE_CONTINUE; ?>" id="inputButton" />
+    </form>
+    </td>
+  </tr>
+</table>
 
 <?php
   }

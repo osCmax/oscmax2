@@ -10,6 +10,13 @@ $Id$
   Released under the GNU General Public License
 */
 
+  // Check language pack for installer
+  if (isset($_POST['language'])) {
+    $language_selected = ($_POST['language']);
+  } else {
+	$language_selected = 'english';
+  }
+
   require('../includes/database_tables.php');
 
   osc_db_connect(trim($_POST['DB_SERVER']), trim($_POST['DB_SERVER_USERNAME']), trim($_POST['DB_SERVER_PASSWORD']));
@@ -40,24 +47,18 @@ $Id$
 // EOF: PGM Renaming the Admin Folder
 
 ?>
-
 <div id="menublock">
   <ul id="menutabs">
-    <li><a href="index.php" id="first">Start</a></li>
-    <li><a href="install.php?step=1">Database Server</a></li>
-    <li><a href="install.php?step=2">Web Server</a></li>
-    <li><a href="install.php?step=3">Store Settings</a></li>
-    <li><a href="#" id="active">Finished</a></li>
+    <li><a href="index.php" id="first"><?php echo TAB_START; ?></a></li>
+    <li><a href="install.php?step=1"><?php echo TAB_DATABASE_SERVER; ?></a></li>
+    <li><a href="install.php?step=2"><?php echo TAB_WEB_SERVER; ?></a></li>
+    <li><a href="install.php?step=3"><?php echo TAB_STORE_SETTINGS; ?></a></li>
+    <li><a href="#" id="active"><?php echo TAB_FINISHED; ?></a></li>
   </ul>
 </div>
 
 <div class="mainBlock">
-
-  <h1>Installation Complete</h1>
-
-      <p>Congratulations on installing and configuring osCmax as your online store solution!</p>
-      <p>We wish you all the best with the success of your online store and welcome you to join and participate in our community.</p>
-      <p align="right"><i><b>- The osCmax team</b></i></p>
+  <?php echo TEXT_FINISHED; ?>
 </div>
 
 <div class="contentBlock">
@@ -191,9 +192,9 @@ $Id$
 	<?php
 	// BOF: PGM Renaming the Admin Folder
 	if ($admin_folder_renamed == 'true') {
-		echo '<td class="messageStackSuccess" colspan="2">Congratulations! Your admin folder has been renamed to ' . $admin_folder . '.<br><br>If you would like to read more information about further security measures you can take a look at the <a href="http://wiki.oscdox.com/setting_up_security" target="_blank">Wiki documentation.</a>';
+		echo '<td class="messageStackSuccess" colspan="2">' . TEXT_ADMIN_RENAMED_1 . $admin_folder . TEXT_ADMIN_RENAMED_2;
 	} else {
-	  	echo '<td class="messageStackAlert" colspan="2">You have not renamed your <b>admin</b> folder!  We highly recommend that you do this on live stores to increase security.  <br><br>Please read the <a href="http://wiki.oscdox.com/setting_up_security" target="_blank">Wiki documentation for more information about securing your site properly.</a>';
+	  	echo '<td class="messageStackAlert" colspan="2">' . TEXT_ADMIN_NOT_RENAMED;
   	}
 	// EOF: PGM Renaming the Admin Folder
 	?>
@@ -201,18 +202,18 @@ $Id$
 		<td height="2">&nbsp;</td>
 	</tr>
 	<tr>
-		<td class="messageStackSuccess" colspan="2">The installation and configuration was successful!</td>
+		<td class="messageStackSuccess" colspan="2"><?php echo TEXT_INSTALLATION_SUCCESSFUL; ?></td>
 	</tr>
     <tr>
 		<td height="2">&nbsp;</td>
 	</tr>
     <tr>
-        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . 'index.php'; ?>" target="_blank"><img src="images/catalog.png" alt="Catalog" /></a></td>
-        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . $admin_folder . '/index.php'; ?>" target="_blank"><img src="images/admin.png" alt="Administration Tool" /></a></td>
+        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . 'index.php'; ?>" target="_blank"><img src="images/catalog.png" alt="<?php echo IMAGE_CATALOG; ?>" /></a></td>
+        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . $admin_folder . '/index.php?language=' . substr($language_selected, 0, 2); ?>" target="_blank"><img src="images/admin.png" alt="<?php echo IMAGE_ADMIN; ?>" /></a></td>
     </tr>
     <tr>
-        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . 'index.php'; ?>" target="_blank"><img src="images/button_catalog.gif" alt="Catalog" /></a></td>
-        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . $admin_folder . '/index.php'; ?>" target="_blank"><img src="images/button_administration_tool.gif" alt="Administration Tool" /></a></td>
+        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . 'index.php'; ?>" target="_blank"><img src="includes/languages/<?php echo $language_selected; ?>/images/buttons/button_catalog.gif" alt="<?php echo IMAGE_CATALOG; ?>" /></a></td>
+        <td align="center" width="50%"><a href="<?php echo $http_server . $http_catalog . $admin_folder . '/index.php'; ?>" target="_blank"><img src="includes/languages/<?php echo $language_selected; ?>/images/buttons/button_administration_tool.gif" alt="<?php echo IMAGE_ADMIN; ?>" /></a></td>
     </tr>
 </table>
 

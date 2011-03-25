@@ -141,4 +141,6 @@ define('TEXT_ENABLE_JAVSCRIPT_INSTRUCTIONS', '<p style="font-family: Arial, Helv
   <li>Select the <stong>Enable JavaScript</stong> checkbox.</li>
  </ol>
  <p>&nbsp;</p>');
+ 
+ define('TEXT_CHECKOUT_CREATE_ACCOUNT', 'If you would like to create an account please enter a password below: ');
 ?>

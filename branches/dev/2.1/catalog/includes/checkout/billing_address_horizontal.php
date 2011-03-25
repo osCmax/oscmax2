@@ -151,7 +151,7 @@ if(ONEPAGE_ZIP_BELOW == 'True'){
   <td colspan="2"><table cellpadding="0" cellspacing="0" border="0" width="">
 <?php if (ONEPAGE_ACCOUNT_CREATE != 'required'){ ?>
    <tr>
-	    <td colspan="2" class="main"><br>If you would like to create an account please enter a password below</td>
+	    <td colspan="2" class="main"><br><?php echo TEXT_CHECKOUT_CREATE_ACCOUNT; ?></td>
    </tr>
 <?php } ?>
    <tr>

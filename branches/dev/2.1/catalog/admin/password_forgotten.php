@@ -62,7 +62,7 @@ $Id$
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
+<body onLoad="document.login.username.focus()">
 
 <table border="0" width="600" cellspacing="0" cellpadding="0" align="center" style="height:100%;">
   <tr valign="middle">

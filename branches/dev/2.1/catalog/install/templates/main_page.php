@@ -13,8 +13,10 @@ $Id$
 <?php
 
   // Check language pack for installer
-  if (isset($_POST['language'])) {
-    $language_selected = ($_POST['language']);
+  if (isset($_GET['language'])) {
+    $language_selected = ($_GET['language']);
+  } elseif (isset($_POST['language'])) {
+	$language_selected = ($_POST['language']);  
   } else {
 	$language_selected = 'english';
   }
@@ -85,7 +87,7 @@ if ($handle = opendir("$full_path")) {
 <table width="100%"> 
   <tr>
     <td width="20%">&nbsp;</td>
-    <td width="60%" align="center">Copyright &copy; 2000-<?php echo date("Y"); ?> <a href="http://www.osCmax.com" target="_blank">osCmax</a> <br />osCmax provides no warranty and is redistributable under the <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a></td>
+    <td width="60%" align="center">Copyright &copy; 2000-<?php echo date("Y"); ?> <a href="http://www.osCmax.com" target="_blank">osCmax</a> <br /><?php echo TEXT_FOOTER_DISCLAIMER; ?></td>
     <td width="20%" align="right"><a href="http://users.skynet.be/mgueury/mozilla/"><img src="http://users.skynet.be/mgueury/mozilla/serial_16.gif" alt="Validated by HTML Validator" height="16" width="39"/></a></td>
   </tr>
 </table>

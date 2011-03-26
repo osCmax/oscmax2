@@ -14,6 +14,7 @@ define('TEXT_OSCMAX_WEBSITE', 'osCmax Website');
 define('TEXT_FORUM', 'Support');
 define('TEXT_DOCUMENTATION', 'Documentation');
 define('TEXT_WIKI', 'Wiki');
+define('TEXT_FOOTER_DISCLAIMER', 'osCmax provides no warranty and is redistributable under the <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a>');
 
 define('TAB_START', 'Start');
 define('TAB_DATABASE_SERVER', 'Database Server');

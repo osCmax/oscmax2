@@ -19,6 +19,9 @@ $Id$
   require('includes/functions/html_output.php');
   
 // Adds language defines to installer
+  if (isset($_GET['language'])) {
+        $language_selected = ($_GET['language']);
+  }
   if (isset($_POST['language'])) {
         $language_selected = ($_POST['language']);
   }

@@ -11,8 +11,10 @@ $Id$
 */
 
   // Check language pack for installer
-  if (isset($_POST['language'])) {
-    $language_selected = ($_POST['language']);
+  if (isset($_GET['language'])) {
+    $language_selected = ($_GET['language']);
+  } elseif (isset($_POST['language'])) {
+	$language_selected = ($_POST['language']);  
   } else {
 	$language_selected = 'english';
   }
@@ -34,7 +36,7 @@ $Id$
 <div id="menublock">
   <ul id="menutabs">
     <li><a href="index.php" id="first"><?php echo TAB_START; ?></a></li>
-    <li><a href="install.php?step=1"><?php echo TAB_DATABASE_SERVER; ?></a></li>
+    <li><a href="install.php?step=1&language=<?php echo $language_selected; ?>"><?php echo TAB_DATABASE_SERVER; ?></a></li>
     <li><a href="#" id="active"><?php echo TAB_WEB_SERVER; ?></a></li>
     <li><a href="#"><?php echo TAB_STORE_SETTINGS; ?></a></li>
     <li><a href="#" id="last"><?php echo TAB_FINISHED; ?></a></li>

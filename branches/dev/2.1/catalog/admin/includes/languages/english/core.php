@@ -460,6 +460,8 @@ define('IMAGE_UNLOCK', 'Unlock');
 define('IMAGE_UPDATE', 'Update');
 define('IMAGE_UPDATE_CURRENCIES', 'Update Exchange Rate');
 define('IMAGE_UPLOAD', 'Upload');
+define('IMAGE_PREV_ORDER', 'Previous Order');
+define('IMAGE_NEXT_ORDER', 'Next Order');
 // BOF QPBPP for SPPC
 define('IMAGE_SHOW_PRODUCTS', 'Show Products');
 // EOF QPBPP for SPPC

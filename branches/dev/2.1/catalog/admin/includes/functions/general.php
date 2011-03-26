@@ -2150,7 +2150,6 @@ function tep_cfg_pull_down_templates() {
 // EOF: Extra Product Fields
 
 // BOF: Attribute Sort with Clone Tool
-
   function tep_attribute_sort($attributes_id) {
     global $languages_id;
     $attributes_sort = tep_db_query("select products_options_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_attributes_id = '" . (int)$attributes_id . "'");
@@ -2160,4 +2159,27 @@ function tep_cfg_pull_down_templates() {
   }
 // EOF: Attribute Sort with Clone Tool
 
+// BOF: BEGIN NEXT AND PREVIOUS ORDERS DISPLAY IN ADMIN   
+  function get_order_id($orderid,$mode='next') {
+    if ($mode=='prev') 
+      $op = '<';
+    elseif ($mode=='next')
+      $op = '>';
+
+    if ($op == '<' or $op == '>')
+      $nextprev_resource = tep_db_query("select orders_id from " . TABLE_ORDERS . " where orders_id $op '" . (int)$orderid . "' order by orders_id");
+
+    if($mode == 'prev') {
+      while($nextprev_values = tep_db_fetch_array($nextprev_resource)) {
+        $nextprev_value = $nextprev_values;
+      }
+    } else if($mode == 'next')
+     $nextprev_value = tep_db_fetch_array($nextprev_resource);
+
+    if(!empty($nextprev_value['orders_id']))
+      return $nextprev_value['orders_id'];
+    else
+      return false;
+  }
+// EOF: BEGIN NEXT AND PREVIOUS ORDERS DISPLAY IN ADMIN 
 ?>

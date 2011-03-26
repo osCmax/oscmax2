@@ -63,9 +63,9 @@ $_SESSION['gridlist'] = 'list';
 $listing_split = new splitPageResults($listing_sql, $max_results, 'p.products_id');
   if ( (PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3') ) {
 
-$list = '<table align="center"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '"> ' . tep_image(DIR_WS_ICONS . 'list.png', 'View as List') . '</a></td><td width="80" class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '">' . TEXT_VIEW_AS_LIST . '</a></td></tr></table>';
+$list = '<table align="left"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '"> ' . tep_image(DIR_WS_ICONS . 'list.png', 'View as List') . '</a></td><td class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '">' . TEXT_VIEW_AS_LIST . '</a></td></tr></table>';
 
-$grid = '<table align="center"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '"> ' . tep_image(DIR_WS_ICONS . 'grid.png', 'View as Grid') . '</a></td><td width="80" class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '">' . TEXT_VIEW_AS_GRID . '</a></td></tr></table>';
+$grid = '<table align="left"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '"> ' . tep_image(DIR_WS_ICONS . 'grid.png', 'View as Grid') . '</a></td><td class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '">' . TEXT_VIEW_AS_GRID . '</a></td></tr></table>';
 
 
 // BOF SPPC Hide products and categories from groups
@@ -109,12 +109,15 @@ if ($listing_split->number_of_rows > 0) {
   $page_count = '';
 }
 
-$page_nav = '<table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox"><tr><td class="smallText" width="40%">' .  $filter . '</td><td class="smallText" width="20%" align="center">' . $list . '</td><td class="smallText" width="40%" align="right">' . $page_count . '</td></tr>';
+$filterbox_left = '<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr><td class="smallText">' . $filter . '</td></tr><tr><td class="smallText">' . TEXT_RESULTS_PAGE . tep_draw_form('maxdisplay', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['sort']) ? tep_draw_hidden_field('sort', $_GET['sort']) : '') .  tep_draw_pull_down_menu('max', $max_display, $max_results, 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>';
 
-$drop = '<tr><td class="smallText">' . TEXT_RESULTS_PAGE . tep_draw_form('maxdisplay', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['sort']) ? tep_draw_hidden_field('sort', $_GET['sort']) : '') .  tep_draw_pull_down_menu('max', $max_display, $max_results, 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td><td align="center">' . $grid . '</td><td class="smallText" align="right">' . TEXT_SORT_ORDER . tep_draw_form('sorting', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['max']) ? tep_draw_hidden_field('max', $_GET['max']) : '') . tep_draw_pull_down_menu('sort', $sort_array, $_GET['sort'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>';
+$filterbox_center = '<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr><td align="center"><table><tr><td class="smallText">' . $list . '</td></tr><tr><td>' . $grid . '</td></tr></table></td></tr></table>';
 
-echo $page_nav;
-echo $drop;
+$filterbox_right = '<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr><td class="smallText" align="right">' . $page_count . '</td></tr><tr><td class="smallText" align="right">' . TEXT_SORT_ORDER . tep_draw_form('sorting', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['max']) ? tep_draw_hidden_field('max', $_GET['max']) : '') . tep_draw_pull_down_menu('sort', $sort_array, $_GET['sort'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>'; 
+
+$filterbox = '<table border="0" width="100%" cellspacing="0" cellpadding="0" class="filterbox"><tr><td class="smallText" >' .  $filterbox_left . '</td><td class="smallText" width="24%" align="center">' . $filterbox_center . '</td><td class="smallText" width="38%" align="right">' . $filterbox_right . '</td></tr></table>';
+
+echo $filterbox;
 echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 
 ?>

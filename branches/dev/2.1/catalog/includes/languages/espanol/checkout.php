@@ -141,4 +141,6 @@ define('TEXT_ENABLE_JAVSCRIPT_INSTRUCTIONS', '<p style="font-family: Arial, Helv
   <li>Selecciona la casilla <stong>Activar JavaScript</stong>.</li>
  </ol>
  <p>&nbsp;</p>');
+ 
+ define('TEXT_CHECKOUT_CREATE_ACCOUNT', 'Si desea crear una cuenta, por favor introduzca una contraseña a continuación: ');
 ?>

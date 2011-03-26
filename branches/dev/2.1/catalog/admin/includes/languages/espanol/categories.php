@@ -170,7 +170,7 @@ define('PB_FROM', 'desde');
 // EOF QPBPP for SPPC
 
 // BOF Open Featured Sets
-define('TEXT_PRODUCTS_SHORT', 'Descripción corta del producto:');
+define('TEXT_PRODUCTS_SHORT', 'Descripción breve del producto:');
 define('TABLE_HEADING_FEATURED', 'Destacado');
 define('TABLE_HEADING_FEATURED_PREVIEW', 'Vista previa');
 define('TEXT_CATEGORIES_FEATURED', 'Categoría destacada');

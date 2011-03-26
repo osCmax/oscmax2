@@ -10,13 +10,13 @@ $Id$
   Released under the GNU General Public License
 */
 
-  define('PAGE_TITLE', 'CVV2 Information');
-  define('PAGE_HEADER', 'What is the CVV2 number?');
-  define('CVV2_INTRO', 'A CVV2 number is a special security feature of your credit card.');
-  define('VISA_IMG_ALT', 'CVV2 number printed on the back of Visa cards');
-  define('VISA_USERS', 'MasterCard / Visa / Discover Customers');
-  define('VISA_CVV2_INSTRUCTIONS', 'Flip your card over and look at the signature box. You should see either the 16-digit credit card number or the last four digits of the card number followed by a special 3-digit code. This 3-digit code is your CVV2 number.');
-  define('AMEX_IMG_ALT', 'American Express Security Code');
-  define('AMEX_USERS', 'American Express Customers');
-  define('AMEX_CVV2_INSTRUCTIONS', 'Look for the 4-digit code printed on the front of your card just above and to the right of your main credit card number. This 4-digit code is your CVV2 number.');
+  define('PAGE_TITLE', 'Información CVV2');
+  define('PAGE_HEADER', '¿Qué es el código CVV2?');
+  define('CVV2_INTRO', 'El código CVV2 es una medida de seguridad especial de su tarjeta de crédito.');
+  define('VISA_IMG_ALT', 'Código CVV2 impreso en la parte trasera de las tarjetas Visa');
+  define('VISA_USERS', 'Clientes de MasterCard / Visa / Discover');
+  define('VISA_CVV2_INSTRUCTIONS', 'Déle la vuelta a su tarjeta y mire en la franja de la firma. Debería ver el número de tarjeta de 16 dígitos o los últimos cuatro dígitos del número de tarjeta seguidos por un código especial de 3 dígitos. Este código de 3 dígitos es su código CVV2.');
+  define('AMEX_IMG_ALT', 'Código de seguridad de American Express');
+  define('AMEX_USERS', 'Clientes de American Express');
+  define('AMEX_CVV2_INSTRUCTIONS', 'Busque el código de 4 dígitos impreso en la parte frontal de su tarjeta justo encima y a la derecha de su número de tarjeta. Este código de 4 dígitos es su código CVV2.');
 ?>

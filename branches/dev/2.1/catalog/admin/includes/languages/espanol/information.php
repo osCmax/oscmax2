@@ -57,6 +57,6 @@ $Id$
   define('HEADING_URL_HELP', 'Enlace a página web externa');
   define('TEXT_URL_HELP', 'Si se  introduce en este campo una URL entonces el enlace de la página de información abrirá directamente esa URL usando el parámetro Objetivo a continuación. Cualquier cosa que se introduzca en la Descripción NO se mostrará. Sólo se puede tener una cosa o la otra. Deja en blanco este campo para que la página de información se comporte de manera estándar.');
   define('ENTRY_EXTERNAL_URL','URL externa');
-  define('IMAGE_ICON_EXTERNAL_URL', 'Esta página de información es un enlace a una web externa.');
+  define('IMAGE_ICON_EXTERNAL_URL', 'Esta página de información es un enlace a una web externa');
   define('TEXT_INCLUDE_HTTP', '<i>Incluir http://</i>');
 ?>

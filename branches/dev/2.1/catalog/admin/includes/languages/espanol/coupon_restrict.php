@@ -65,7 +65,7 @@ define('COUPON_AMOUNT_HELP', 'El importe de descuento del vale, ya sea un valor 
 define('COUPON_CODE_HELP', 'Puedes introducir aquí tu propio código, o dejarlo en blanco para asignarle uno generado automáticamente.');
 define('COUPON_STARTDATE_HELP', 'La fecha a partir de la cual el vale será válido');
 define('COUPON_FINISHDATE_HELP', 'La fecha en la que caduca el vale');
-define('COUPON_FREE_SHIP_HELP', 'El vale otorga gastos de envío gratuitos en un pedido. Nota: esto anula el valor \'Importe del vale\' pero respeta el valor de pedido mínimo');
+define('COUPON_FREE_SHIP_HELP', 'El vale concede gastos de envío gratuitos en un pedido. Nota: esto anula el valor \'Importe del vale\' pero respeta el valor de pedido mínimo');
 define('COUPON_DESC_HELP', 'Una descripción del vale para el cliente');
 define('COUPON_MIN_ORDER_HELP', 'El importe mínimo de un pedido para que se pueda usar el vale');
 define('COUPON_USES_COUPON_HELP', 'El máximo número de veces que un vale puede ser usado, déjalo en blanco si quieres que no haya límite.');

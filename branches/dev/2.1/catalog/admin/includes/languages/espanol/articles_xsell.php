@@ -38,4 +38,5 @@ define('TEXT_SELECT_PRODUCT', 'Después selecciona el producto que quieres añadir
 define('TEXT_ID', 'Id');
 define('TEXT_MODEL', 'Referencia');
 define('TEXT_SELECT', 'Seleccionar');
+define('TEXT_IMAGE', 'Imagen');
 ?>

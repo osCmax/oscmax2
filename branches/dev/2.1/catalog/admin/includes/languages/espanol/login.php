@@ -28,7 +28,7 @@ define('ENTRY_LASTNAME', 'Apellidos:');
 
 define('TEXT_PASSWORD_FORGOTTEN', '¿Has olvidado la contraseña?');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> ¡Nombre de usuario o contraseña equivocados!');
+define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> Nombre de usuario o contraseña equivocados');
 define('TEXT_FORGOTTEN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> ¡El nombre y la contraseña no coinciden!');
 define('TEXT_FORGOTTEN_FAIL', 'Se han realizado más de 3 intentos. Por razones de seguridad ponte en contacto con tu administrador web para obtener una nueva contraseña.<br>&nbsp;<br>&nbsp;');
 define('TEXT_FORGOTTEN_SUCCESS', 'Se ha enviado tu nueva contraseña a tu correo electrónico. Comprueba tu e-mail y pulsa Volver para iniciar sesión.<br>&nbsp;<br>&nbsp;');

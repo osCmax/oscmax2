@@ -25,7 +25,7 @@ define('DATE_TIME_FORMAT', DATE_FORMAT_SHORT . ' %H:%M:%S');
 
 ////
 // Return date in raw format
-// $date should be in format mm/dd/yyyy
+// $date should be in format dd/mm/yyyy
 // raw date is in format YYYYMMDD, or DDMMYYYY
 function tep_date_raw($date, $reverse = false) {
   if ($reverse) {
@@ -35,11 +35,16 @@ function tep_date_raw($date, $reverse = false) {
   }
 }
 
+date_default_timezone_set('Europe/Madrid');
+
 // if USE_DEFAULT_LANGUAGE_CURRENCY is true, use the following currency, instead of the applications default currency (used when changing language)
 define('LANGUAGE_CURRENCY', 'EUR');
 
+// LINE ADDED: Country-State Selector
+define ('DEFAULT_COUNTRY', '195');
+
 // BOF: MSRP
-define('TEXT_PRODUCTS_MSRP', '&nbsp;PVP:&nbsp;');
-define('TEXT_PRODUCTS_SAVINGS_RRP', '&nbsp;Guarda&nbsp;de&nbsp;(PVP):&nbsp;');
+define('TEXT_PRODUCTS_MSRP', '&nbsp;PVR:&nbsp;');
+define('TEXT_PRODUCTS_SAVINGS_RRP', '&nbsp;Ahorro&nbsp;de&nbsp;(sobre&nbsp;el&nbsp;PVR):&nbsp;');
 // EOF: MSRP
 ?>

@@ -149,6 +149,8 @@ define('CHECKOUT_BAR_FINISHED', '¡Finalizado!');
 
 // pull down default text
 define('PULL_DOWN_DEFAULT', 'Seleccione');
+define('PULL_DOWN_DEFAULT_DOTS', 'Selecciona por favor...');
+define('PULL_DOWN_NA', 'N/D');
 define('TYPE_BELOW', 'Escriba a continuación');
 
 // javascript messages
@@ -311,7 +313,7 @@ define('IMAGE_BUTTON_DOWNSORT', 'Orden descendente');
 // EOF: MOD - CATALOG_PRODUCTS_WITH_IMAGES_mod
 
 //2 LINES ADDED: MOD - Down For Maintenance
-define('TEXT_BEFORE_DOWN_FOR_MAINTENANCE', 'NOTA: Este sitio web estará cerrado por mantenimiento en: ');
+define('TEXT_BEFORE_DOWN_FOR_MAINTENANCE', 'NOTA: Este sitio web estará cerrado por mantenimiento el: ');
 define('TEXT_ADMIN_DOWN_FOR_MAINTENANCE', 'NOTA: El sitio web está actualmente cerrado por mantenimiento');
 
 define('TEXT_SORT_PRODUCTS', 'Ordenar productos ');
@@ -428,6 +430,7 @@ define('TEXT_READ_MORE', ' ... leer más ... ');
 define('TEXT_MISSING_IMAGE','Lo sentimos, la imagen del producto no está disponible');
 define('TEXT_PAGE', 'Página: ');
 
+// Review Ratings
 define('TEXT_RATING', 'Valoración: ');
 define('TEXT_POOR', 'Regular');
 define('TEXT_FAIR', 'Aceptable');
@@ -435,6 +438,22 @@ define('TEXT_AVERAGE', 'Bueno');
 define('TEXT_GOOD', 'Muy bueno');
 define('TEXT_EXCELLENT', 'Excelente');
 
+// Password Text
+define('PW_TOO_WEAK', 'Muy débil');
+define('PW_WEAK', 'Contraseña débil');
+define('PW_NORMAL', 'Fortaleza normal');
+define('PW_STRONG', 'Contraseña fuerte');
+define('PW_VERY_STRONG', 'Contraseña muy fuerte');
 
+// Product listing
+define('TEXT_PRODUCT_NAME_AZ', 'Nombre producto (A-Z)');
+define('TEXT_PRODUCT_NAME_ZA', 'Nombre producto (Z-A)');
+define('TEXT_PRICE_LOW_HIGH', 'Precio (Menor - Mayor)');
+define('TEXT_PRICE_HIGH_LOW', 'Precio (Mayor - Menor)');
+define('TEXT_SHOW_ALL', 'Mostrar todos');
+define('TEXT_VIEW_AS_LIST', 'Mostrar como lista');
+define('TEXT_VIEW_AS_GRID', 'Mostrar en cuadrícula');
+define('TEXT_RESULTS_PAGE', 'Resultados/página: ');
+define('TEXT_SORT_ORDER', 'Orden: ');
 
 ?>

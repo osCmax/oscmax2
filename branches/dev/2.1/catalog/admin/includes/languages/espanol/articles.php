@@ -71,7 +71,7 @@ define('TEXT_EDIT_TOPICS_HEADING_TITLE', 'Título de cabecera de la sección:');
 define('TEXT_EDIT_TOPICS_DESCRIPTION', 'Descripción de la sección:');
 
 define('TEXT_ARTICLES_STATUS', 'Estado de la noticia:');
-define('TEXT_ARTICLES_DATE_AVAILABLE', 'Fecha en que se mostrará:');
+define('TEXT_ARTICLES_DATE_AVAILABLE', 'Fecha en que se publicará:');
 define('TEXT_ARTICLE_AVAILABLE', 'Publicada');
 define('TEXT_ARTICLE_NOT_AVAILABLE', 'Borrador');
 define('TEXT_ARTICLES_AUTHOR', 'Autor:');

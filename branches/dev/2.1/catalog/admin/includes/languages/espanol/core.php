@@ -81,6 +81,8 @@ define('BOX_MANUAL_ORDER_CREATE_ORDER', 'Generar pedido');
 
 // pull down default text
 define('PULL_DOWN_DEFAULT', 'Selecciona por favor');
+define('PULL_DOWN_DEFAULT_DOTS', 'Selecciona por favor...');
+define('PULL_DOWN_NA', 'N/D');
 define('TYPE_BELOW', 'Escriba a continuación');
 
 // header text in includes/header.php

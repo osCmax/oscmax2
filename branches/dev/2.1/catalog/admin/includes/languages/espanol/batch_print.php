@@ -163,4 +163,21 @@ define('BATCH_PDF_FILE', 'batch_orders.pdf');
 //define('PRICING_COLUMN_SIZES', '67');
 
 define('FOOTER_TEXT', 'Gracias por comprar con nosotros en ' . STORE_NAME);
+
+// Filename defines to allow multilanguage use
+define('TEXT_MISSING_FILENAME', 'No hay definición para');
+define('TEXT_CHRISTMAS_CARD', 'Tarjeta navidad');
+define('TEXT_GRID', 'Cuadrícula');
+define('TEXT_INTEGRATED_PACKING', 'Paquete integrado');
+define('TEXT_INTEGRATED_PACKING2', 'Paquete integrado 2');
+define('TEXT_INVOICE', 'Factura');
+define('TEXT_INVOICE_S3', 'Factura (usa papel de factura impresa S3)');
+define('TEXT_LABELS', 'Etiquetas');
+define('TEXT_LABELWRITER', 'Etiquetadora');
+define('TEXT_LETTERHEAD', 'Membrete');
+define('TEXT_NULL', 'Nulo');
+define('TEXT_ORDER_STATUS_CHANGE_ONLY', 'Cambio estado pedido solamente');
+define('TEXT_PACKING_SLIP_AND_INVOICE', 'Albarán y factura');
+define('TEXT_PACKING_SLIP', 'Albarán');
+
 ?>

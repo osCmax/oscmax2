@@ -15,7 +15,6 @@ $Id$
   define('FILENAME_PAYPAL_WPP', 'paypal_wpp.php');
   define('FILENAME_PAYPAL_WPP_3DS', 'paypal_wpp_3ds.php');
   define('FILENAME_CVV2INFO', 'cvv2info.php');
-  define('FILENAME_EXPRESS_CHECKOUT_IMG', 'https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif');
   
   /* Database Table */
   define('TABLE_ORDERS_STATUS_HISTORY_TRANSACTIONS', 'orders_status_history_transactions');

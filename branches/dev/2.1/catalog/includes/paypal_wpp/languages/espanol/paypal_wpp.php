@@ -11,6 +11,8 @@ $Id$
 */
 // Copyright 2008 Brian Burton
 
+  define('FILENAME_EXPRESS_CHECKOUT_IMG', 'https://www.paypal.com/es_ES/i/btn/btn_xpressCheckout.gif');
+
   define('TEXT_PAYPALWPP_EC_HEADER', 'Pago rápido y seguro con PayPal');
   define('TEXT_PAYPALWPP_EC_BUTTON_TEXT', 'Ahorre tiempo. Pague con seguridad. Pague sin compartir sus datos financieros.');
   

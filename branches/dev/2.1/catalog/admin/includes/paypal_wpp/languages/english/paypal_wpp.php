@@ -11,7 +11,7 @@ $Id$
 */
 // Copyright 2008 Brian Burton
 
-  include(DIR_FS_CATALOG . DIR_WS_LANGUAGES . $language . '/modules/payment/paypal_wpp.php');
+  include(DIR_FS_CATALOG_LANGUAGES . $language . '/paypal_wpp.php');
   define('TABLE_HEADING_TRANSACTION_INFO', 'Transaction Details');
   define('WPP_ERROR_NO_TRANS_ID', 'A valid transaction ID was not found.');
   define('WPP_ERROR_BAD_CURRENCY', 'A valid currency was not entered.');

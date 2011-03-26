@@ -334,6 +334,7 @@ $Id$
         } // end while
 		  $opt_x++;
 	  } // end while
+	  
 ?>
 	                  <table border="0" cellspacing="0" cellpadding="0">
 <?php
@@ -355,13 +356,15 @@ $Id$
 	} // end if ($products_attributes['total'] > 0)
 ?>
 		            </td>
+<?php } // end if (PRODUCT_LIST_CATALOG_OPTIONS == 'show') ?>
+
 
 <?php if (PRODUCT_LIST_CATALOG_DATE == 'show') { ?>
                     <td class="productListing-data-list" align="center"><div align=left><?php
-									if (PRODUCT_LIST_CATALOG_DATE_SHOW == 'show') echo tep_date_short($products['products_date_added']); ?>&nbsp;</div></td>
+									if (PRODUCT_LIST_CATALOG_DATE_SHOW == 'show') { 
+									  echo tep_date_short($products['products_date_added']); 
+									} ?>&nbsp;</div></td>
 <?php } ?>
-
-<?php } // end while ?>
 
 <?php if (PRODUCT_LIST_CATALOG_MANUFACTURERS == 'show') { ?>
                     <td class="productListing-data-list" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '">' . $products['manufacturers_name'] . '</a>'; ?>&nbsp;</div></td>

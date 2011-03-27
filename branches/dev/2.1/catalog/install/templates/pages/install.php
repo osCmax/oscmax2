@@ -118,12 +118,12 @@ $Id$
         <td class="inputDescription"><?php echo TEXT_DATABASE_SERVER_DESC; ?></td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo TEXT_USERNAME . '<br />' . osc_draw_input_field('DB_SERVER_USERNAME', null, 'class="text"'); ?></td>
-        <td class="inputDescription"><?php echo TEXT_USERNAME_DESC; ?></td>
+        <td class="inputField"><?php echo TEXT_DATABASE_USERNAME . '<br />' . osc_draw_input_field('DB_SERVER_USERNAME', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_DATABASE_USERNAME_DESC; ?></td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo TEXT_USERNAME . '<br />' . osc_draw_password_field('DB_SERVER_PASSWORD', 'class="text"'); ?></td>
-        <td class="inputDescription"><?php echo TEXT_PASSWORD_DESC; ?></td>
+        <td class="inputField"><?php echo TEXT_DATABASE_PASSWORD . '<br />' . osc_draw_password_field('DB_SERVER_PASSWORD', 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_DATABASE_PASSWORD_DESC; ?></td>
       </tr>
       <tr>
         <td class="inputField"><?php echo TEXT_DATABASE_NAME . '<br />' . osc_draw_input_field('DB_DATABASE', null, 'class="text"'); ?></td>

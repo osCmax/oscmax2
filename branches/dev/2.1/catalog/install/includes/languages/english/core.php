@@ -50,10 +50,10 @@ define('TEXT_SERVER_SUCCESS', 'The webserver environment has been verified to pr
 define('TEXT_DATABASE_SERVER_BLOCK', '<p>The database server stores the content of the online store such as product information, customer information, and the orders that have been made.</p><p>Please consult your server administrator if your database server parameters are not yet known.</p>');
 define('TEXT_DATABASE_SERVER', 'Database Server');
 define('TEXT_DATABASE_SERVER_DESC', 'The address of the database server in the form of a hostname or IP address.');
-define('TEXT_USERNAME', 'Username');
-define('TEXT_USERNAME_DESC', 'The username used to connect to the database server.');
-define('TEXT_PASSWORD', 'Password');
-define('TEXT_PASSWORD_DESC', 'The password that is used together with the username to connect to the database server.');
+define('TEXT_DATABASE_USERNAME', 'Username');
+define('TEXT_DATABASE_USERNAME_DESC', 'The username used to connect to the database server.');
+define('TEXT_DATABASE_PASSWORD', 'Password');
+define('TEXT_DATABASE_PASSWORD_DESC', 'The password that is used together with the username to connect to the database server.');
 define('TEXT_DATABASE_NAME', 'Database Name');
 define('TEXT_DATABASE_NAME_DESC', 'The name of the database to hold the data in.');
 define('TEXT_DATABASE_SUCCESS', 'Database imported successfully.');

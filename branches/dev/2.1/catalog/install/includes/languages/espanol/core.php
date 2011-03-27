@@ -50,10 +50,10 @@ define('TEXT_SERVER_SUCCESS', 'Se ha verificado el entorno del servidor web para
 define('TEXT_DATABASE_SERVER_BLOCK', '<p>El servidor de base de datos almacena el contenido de la tienda online, como por ejemplo la información de productos, clientes y pedidos que se hayan hecho.</p><p>Por favor consulta con tu administrador del servidor si todavía no se conocen los parámetros del servidor de la base de datos.</p>');
 define('TEXT_DATABASE_SERVER', 'Servidor de base de datos');
 define('TEXT_DATABASE_SERVER_DESC', 'Dirección del servidor de base de datos en la forma de un nombre de host o una dirección IP.');
-define('TEXT_USERNAME', 'Nombre de usuario');
-define('TEXT_USERNAME_DESC', 'Nombre de usuario utilizado para conectarse al servidor de base de datos.');
-define('TEXT_PASSWORD', 'Contraseña');
-define('TEXT_PASSWORD_DESC', 'Contraseña utilizada junto con nombre de usuario para conectarse al servidor de base de datos.');
+define('TEXT_DATABASE_USERNAME', 'Nombre de usuario');
+define('TEXT_DATABASE_USERNAME_DESC', 'Nombre de usuario utilizado para conectarse al servidor de base de datos.');
+define('TEXT_DATABASE_PASSWORD', 'Contraseña');
+define('TEXT_DATABASE_PASSWORD_DESC', 'Contraseña utilizada junto con nombre de usuario para conectarse al servidor de base de datos.');
 define('TEXT_DATABASE_NAME', 'Nombre de la base de datos Name');
 define('TEXT_DATABASE_NAME_DESC', 'Nombre de la base de datos para almacenar la información.');
 define('TEXT_DATABASE_SUCCESS', 'Bas de datos importada correctamente.');

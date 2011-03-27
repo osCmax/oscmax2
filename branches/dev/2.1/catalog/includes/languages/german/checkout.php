@@ -141,4 +141,6 @@ define('TEXT_ENABLE_JAVSCRIPT_INSTRUCTIONS', '<p style="font-family: Arial, Helv
   <li>Haken Sie&nbsp;<strong>JavaScript aktivieren</strong>&nbsp;an.</li>
  </ol>
  <p>&nbsp;</p>');
+ 
+ define('TEXT_CHECKOUT_CREATE_ACCOUNT', 'Wenn Sie eine Konto anlegen möchten, geben Sie bitte nachstehend ein Passwort an: ');
 ?>

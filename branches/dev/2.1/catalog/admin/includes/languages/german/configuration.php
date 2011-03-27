@@ -25,9 +25,9 @@ define('CD_STORE_NAME', 'Der Name meines Shops ');
 define('CT_STORE_LOGO', 'Shoplogo');
 define('CD_STORE_LOGO', 'Wählen Sie Ihr Shoplogo');
 define('CT_STORE_OWNER', 'Shopinhaber');
-define('CD_STORE_OWNER', 'Der Name des Shopinhabers');
+define('CD_STORE_OWNER', 'Der Name des Shopibetreibers');
 define('CT_STORE_OWNER_EMAIL_ADDRESS', 'E-Mail-Adresse');
-define('CD_STORE_OWNER_EMAIL_ADDRESS', 'Die E-Mail-Adresse des Shopinhabers');
+define('CD_STORE_OWNER_EMAIL_ADDRESS', 'Die E-Mail-Adresse des Shopbetreibers');
 define('CT_EMAIL_FROM', 'E-Mail-Absender');
 define('CD_EMAIL_FROM', 'Die Absenderadresse in den versendeten E-Mails');
 define('CT_STORE_COUNTRY', 'Land');
@@ -42,10 +42,10 @@ define('CT_USE_DEFAULT_LANGUAGE_CURRENCY', 'Switch To Default Language Currency'
 define('CD_USE_DEFAULT_LANGUAGE_CURRENCY', 'Automatically switch to the language\'s currency when it is changed');
 define('CT_ENGLISH_SWITCH', 'Britisches oder US Englisch');
 define('CD_ENGLISH_SWITCH', 'Diese Einstellung wirkt sich nur bei Verwendung der englischen Sprache aus. (Datumsformat, Adressen, Format Geburtsdatum, usw.)');
-define('CT_SEND_EXTRA_ORDER_EMAILS_TO', 'Sende Bestell-E-Mails zusätzlich an');
-define('CD_SEND_EXTRA_ORDER_EMAILS_TO', 'Send extra order emails to the following email addresses, in this format: Name 1 &lt;email@address1&gt;, Name 2 &lt;email@address2&gt;');
-define('CT_DISPLAY_CART', 'Display Cart After Adding Product');
-define('CD_DISPLAY_CART', 'Display the shopping cart after adding a product (or return back to their origin)');
+define('CT_SEND_EXTRA_ORDER_EMAILS_TO', 'Zusätzliche E-Mails senden an');
+define('CD_SEND_EXTRA_ORDER_EMAILS_TO', 'Zusätzliche E-Mails senden in diesem Format: Name 1 &lt;email@adresse1&gt;, Name 2 &lt;email@adresse2&gt;');
+define('CT_DISPLAY_CART', 'Warenkorb anzeigen, nachdem Produkt hinzugefügt wurde');
+define('CD_DISPLAY_CART', 'Warenkorb anzeigen, nachdem ein Produkt hinzugefügt wurde (oder zum Ausgangspunkt zurückkkehren)');
 define('CT_ALLOW_GUEST_TO_TELL_A_FRIEND', 'Allow Guest To Tell A Friend');
 define('CD_ALLOW_GUEST_TO_TELL_A_FRIEND', 'Allow guests to tell a friend about a product');
 define('CT_ADVANCED_SEARCH_DEFAULT_OPERATOR', 'Default Search Operator');
@@ -56,48 +56,48 @@ define('CT_SHOW_COUNTS', 'Show Category Counts');
 define('CD_SHOW_COUNTS', 'Count recursively how many products are in each category');
 define('CT_TAX_DECIMAL_PLACES', 'Tax Decimal Places');
 define('CD_TAX_DECIMAL_PLACES', 'Pad the tax value this amount of decimal places');
-define('CT_DISPLAY_PRICE_WITH_TAX', 'Display Prices with Tax');
-define('CD_DISPLAY_PRICE_WITH_TAX', 'Display prices with tax included (true) or add the tax at the end (false)');
-define('CT_DEFAULT_PRODUCT_TAX_CLASS', 'Default Tax Class');
-define('CD_DEFAULT_PRODUCT_TAX_CLASS', 'Sets the default tax class used for new products.');
+define('CT_DISPLAY_PRICE_WITH_TAX', 'Preise inkl. Steuer anzeigen');
+define('CD_DISPLAY_PRICE_WITH_TAX', 'Preise inkl. Steuer anzeigen (true) oder Steuer erst beim Kaufabschluß anzeigen (false)');
+define('CT_DEFAULT_PRODUCT_TAX_CLASS', 'Standardsteuerklasse');
+define('CD_DEFAULT_PRODUCT_TAX_CLASS', 'Standardsteuerklasse bei neuen Produkten.');
 define('CT_NEW_SIGNUP_DISCOUNT_COUPON', 'Welcome Discount Coupon Code');
 define('CD_NEW_SIGNUP_DISCOUNT_COUPON', 'Welcome Discount Coupon Code: if you do not want to send a coupon in your create account email leave blank else place the coupon code you wish to use');
 define('CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Welcome Gift Voucher Amount');
 define('CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Welcome Gift Voucher Amount: If you do not wish to send a Gift Voucher in your create account email put 0 for no amount else if you do place the amount here i.e. 10.00 or 50.00 no currency signs');
 
 // Configuration ID: 2 - Minimumm Values
-define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'First Name');
-define('CD_ENTRY_FIRST_NAME_MIN_LENGTH', 'Minimum length of first name');
-define('CT_ENTRY_LAST_NAME_MIN_LENGTH', 'Last Name');
-define('CD_ENTRY_LAST_NAME_MIN_LENGTH', 'Minimum length of last name');
-define('CT_ENTRY_DOB_MIN_LENGTH', 'Date of Birth');
-define('CD_ENTRY_DOB_MIN_LENGTH', 'Minimum length of date of birth');
-define('CT_ENTRY_EMAIL_ADDRESS_MIN_LENGTH', 'E-Mail Address');
-define('CD_ENTRY_EMAIL_ADDRESS_MIN_LENGTH', 'Minimum length of e-mail address');
-define('CT_ENTRY_STREET_ADDRESS_MIN_LENGTH', 'Street Address');
-define('CD_ENTRY_STREET_ADDRESS_MIN_LENGTH', 'Minimum length of street address');
-define('CT_ENTRY_COMPANY_MIN_LENGTH', 'Company');
-define('CD_ENTRY_COMPANY_MIN_LENGTH', 'Minimum length of company name');
-define('CT_ENTRY_POSTCODE_MIN_LENGTH', 'Post Code');
-define('CD_ENTRY_POSTCODE_MIN_LENGTH', 'Minimum length of post code');
-define('CT_ENTRY_CITY_MIN_LENGTH', 'City');
-define('CD_ENTRY_CITY_MIN_LENGTH', 'Minimum length of city');
-define('CT_ENTRY_STATE_MIN_LENGTH', 'State');
-define('CD_ENTRY_STATE_MIN_LENGTH', 'Minimum length of state');
-define('CT_ENTRY_TELEPHONE_MIN_LENGTH', 'Telephone Number');
-define('CD_ENTRY_TELEPHONE_MIN_LENGTH', 'Minimum length of telephone number');
+define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Vorname');
+define('CD_ENTRY_FIRST_NAME_MIN_LENGTH', 'Mindeslänge des Vorname');
+define('CT_ENTRY_LAST_NAME_MIN_LENGTH', 'Nachname');
+define('CD_ENTRY_LAST_NAME_MIN_LENGTH', 'Mindestlänge des Nachname');
+define('CT_ENTRY_DOB_MIN_LENGTH', 'Geburtsdatum');
+define('CD_ENTRY_DOB_MIN_LENGTH', 'Mindestlänge des Geburtsdatum');
+define('CT_ENTRY_EMAIL_ADDRESS_MIN_LENGTH', 'E-Mail-Adresse');
+define('CD_ENTRY_EMAIL_ADDRESS_MIN_LENGTH', 'Mindestlänge der E-Mail-Adresse');
+define('CT_ENTRY_STREET_ADDRESS_MIN_LENGTH', 'Straße');
+define('CD_ENTRY_STREET_ADDRESS_MIN_LENGTH', 'Mindestlänge der Straße');
+define('CT_ENTRY_COMPANY_MIN_LENGTH', 'Firma');
+define('CD_ENTRY_COMPANY_MIN_LENGTH', 'Mindestlänge Firma');
+define('CT_ENTRY_POSTCODE_MIN_LENGTH', 'Postleitzahl');
+define('CD_ENTRY_POSTCODE_MIN_LENGTH', 'Mindestlänge der Postleitzahl');
+define('CT_ENTRY_CITY_MIN_LENGTH', 'Ort');
+define('CD_ENTRY_CITY_MIN_LENGTH', 'Mindestlänge Ort');
+define('CT_ENTRY_STATE_MIN_LENGTH', 'Bundesland');
+define('CD_ENTRY_STATE_MIN_LENGTH', 'Mindestlänge des Bundesland');
+define('CT_ENTRY_TELEPHONE_MIN_LENGTH', 'Telefonnummer');
+define('CD_ENTRY_TELEPHONE_MIN_LENGTH', 'Mindestlänge der Telefonnummer');
 define('CT_ENTRY_PASSWORD_MIN_LENGTH', 'Password');
-define('CD_ENTRY_PASSWORD_MIN_LENGTH', 'Minimum length of password');
-define('CT_CC_OWNER_MIN_LENGTH', 'Credit Card Owner Name');
-define('CD_CC_OWNER_MIN_LENGTH', 'Credit Card Owner Name');
-define('CT_CC_NUMBER_MIN_LENGTH', 'Credit Card Number');
-define('CD_CC_NUMBER_MIN_LENGTH', 'Minimum length of credit card number');
-define('CT_REVIEW_TEXT_MIN_LENGTH', 'Review Text');
-define('CD_REVIEW_TEXT_MIN_LENGTH', 'Minimum length of review text');
-define('CT_MIN_DISPLAY_BESTSELLERS', 'Best Sellers');
-define('CD_MIN_DISPLAY_BESTSELLERS', 'Minimum number of best sellers to display');
-define('CT_MIN_DISPLAY_ALSO_PURCHASED', 'Also Purchased');
-define('CD_MIN_DISPLAY_ALSO_PURCHASED', 'Minimum number of products to display in the \'This Customer Also Purchased\' box');
+define('CD_ENTRY_PASSWORD_MIN_LENGTH', 'Mindestlänge des Passwortes');
+define('CT_CC_OWNER_MIN_LENGTH', 'Kreditkartenbesitzer');
+define('CD_CC_OWNER_MIN_LENGTH', 'Kreditkartenbesitzer');
+define('CT_CC_NUMBER_MIN_LENGTH', 'Kreditkartennummer');
+define('CD_CC_NUMBER_MIN_LENGTH', 'Mindestlänge der Kreditkartennummer');
+define('CT_REVIEW_TEXT_MIN_LENGTH', 'Bewertungstext');
+define('CD_REVIEW_TEXT_MIN_LENGTH', 'Mindestlänge des Bewertungstextes');
+define('CT_MIN_DISPLAY_BESTSELLERS', 'Bestseller');
+define('CD_MIN_DISPLAY_BESTSELLERS', 'Mindestanzahl der angezeigten Bestseller');
+define('CT_MIN_DISPLAY_ALSO_PURCHASED', 'Kauften Auch');
+define('CD_MIN_DISPLAY_ALSO_PURCHASED', 'Mindestanzahl der Produkte, die in der \'Kunden kauften auch\' Box');
 
 // Configuration ID: 3 - Maximum Values
 define('CT_MAX_ADDRESS_BOOK_ENTRIES', 'Address Book Entries');
@@ -361,9 +361,9 @@ define('CD_MIN_DISPLAY_XSELL', 'How many x-sell products per page');
 define('CT_PRODUCT_LIST_TYPE', 'Product Display Type (Default = 0 or Columns = 1)');
 define('CD_PRODUCT_LIST_TYPE', 'Do you want to display products one per row or multiple columns per row?');
 define('CT_USE_PRODUCT_DESCRIPTION_TABS', 'Use Tabs to display extra product information?');
-define('CD_USE_PRODUCT_DESCRIPTION_TABS', 'Use tabs for product info?');
+define('CD_USE_PRODUCT_DESCRIPTION_TABS', 'Do you want to use tabs to display the product information?');
 define('CT_BREADCRUMB_SHOW_PRODUCT_MODEL', 'Show the product model in the breadcrumb?');
-define('CD_BREADCRUMB_SHOW_PRODUCT_MODEL', 'Use tabs for product info?');
+define('CD_BREADCRUMB_SHOW_PRODUCT_MODEL', 'Do you want to display the product model reference in the breadcrumb?');
 define('CT_SHOW_ASK_A_QUESTION', 'Show Ask a Question button on Product Info pages?');
 define('CD_SHOW_ASK_A_QUESTION', 'Do you want to display a button that links through to your contact form with pre-filled in information about a product the user was viewing?');
 define('CT_SHOW_MORE_INFO', 'Show More Info button?');
@@ -747,7 +747,7 @@ define('CD_FWR_MENU_RESET', 'Choose true to rebuild the categories menu');
 
 // Configuration ID: 87 - reCaptcha 
 define('CT_RECAPTCHA_ON', 'Enable reCaptcha Form = true/false');
-define('CD_RECAPTCHA_ON', 'Set to true to enable protection. You must get a reCaptcha key from their <a href=\"http://recaptcha.net/\" target=\"_blank\">website (www.recaptcha.net)</a> and enter the Public and Private Keys before enabling this functionality.');
+define('CD_RECAPTCHA_ON', 'Set to true to enable protection. You must get a reCaptcha key from their <a href="http://www.google.com/recaptcha" target="_blank">website (www.google.com/recaptcha)</a> and enter the Public and Private Keys before enabling this functionality.');
 define('CT_RECAPTCHA_PUBLIC_KEY', 'Public Key');
 define('CD_RECAPTCHA_PUBLIC_KEY', 'Enter your reCaptcha Public Key');
 define('CT_RECAPTCHA_PRIVATE_KEY', 'Private Key');
@@ -759,7 +759,7 @@ define('CD_PRICE_BREAK_NOF_LEVELS', 'Configures the number of price break levels
 define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Number of price breaks for dropdown');
 define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Set the number of price breaks at which you want to show a dropdown plus "from Low Price" instead of a table');
 
-// Configuration ID: 88 - Google Maps
+// Configuration ID: 89 - Google Maps
 define('CT_GOOGLE_MAPS_KEY', 'Google Maps Key');
 define('CD_GOOGLE_MAPS_KEY', 'Put your Google Maps API Key here.<br><br>You can get one at http://code.google.com/apis/maps/signup.html');
 
@@ -871,6 +871,8 @@ define('CT_MANUFACTURER_CELLPADDING', 'Manufacturer with products cellpadding');
 define('CD_MANUFACTURER_CELLPADDING', 'Sets the cellpadding for the manufacturer.<br>');
 define('CT_MANUFACTURER_VLINE_IMAGE_HEIGHT', 'Manufacturer with products separator vertical line height');
 define('CD_MANUFACTURER_VLINE_IMAGE_HEIGHT', 'Sets the height of the vertical line divider');
+define('CT_MANUFACTURER_LINE_THICKNESS', 'Manufacturer with products separator thickness');
+define('CD_MANUFACTURER_LINE_THICKNESS', 'Sets the thickness of the separator line. Only shows in Set Style #3.');
 define('CT_MANUFACTURER_LINE_COLOR', 'Manufacturer with products separator line color');
 define('CD_MANUFACTURER_LINE_COLOR', 'Sets the color of the lines.<br><br>Enter a six digit hex number or click Pick Color to select one from a pallet.<br>');
 
@@ -1007,23 +1009,23 @@ define('CD_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 'What color would you like the fo
 
 // Configuration ID: 205 - Corner Banners
 define('CT_CB_LAST_FEW', 'Last Few Remaining corner banner?');
-define('CD_CB_LAST_FEW', 'Would you like to display the Last Few Remaining corner banner?<br><center><img src="../images/corner_banners/last_few.png" alt="Last Few"></center>');
+define('CD_CB_LAST_FEW', 'Would you like to display the Last Few Remaining corner banner?<br><center><img src="../images/corner_banners/german/last_few.png" alt="Last Few"></center>');
 define('CT_CB_LAST_FEW_NO', 'Last Few Remaining display level?');
 define('CD_CB_LAST_FEW_NO', 'At what level of remaining stock do you want to display the Last Few Remaining corner banner?');
 define('CT_CB_TOP_RATED', 'Top Rated corner banner?');
-define('CD_CB_TOP_RATED', 'Would you like to display the Top Rated corner banner?<br><center><img src="../images/corner_banners/top_rated.png" alt="Top Rated"></center>');
+define('CD_CB_TOP_RATED', 'Would you like to display the Top Rated corner banner?<br><center><img src="../images/corner_banners/german/top_rated.png" alt="Top Rated"></center>');
 define('CT_CB_TOP_RATED_NO', 'Top Rated display level?');
 define('CD_CB_TOP_RATED_NO', 'At what level of rating do you want to display the Top Rated corner banner?');
 define('CT_CB_FEATURED', 'Featured Product corner banner?');
-define('CD_CB_FEATURED', 'Would you like to display the Featured Product corner banner?<br><center><img src="../images/corner_banners/featured.png" alt="Featured"></center>');
+define('CD_CB_FEATURED', 'Would you like to display the Featured Product corner banner?<br><center><img src="../images/corner_banners/german/featured.png" alt="Featured"></center>');
 define('CT_CB_SPECIALS', 'Special Offer corner banner?');
-define('CD_CB_SPECIALS', 'Would you like to display the Special Offer corner banner?<br><center><img src="../images/corner_banners/save50.png" alt="Special Offers"></center>');
+define('CD_CB_SPECIALS', 'Would you like to display the Special Offer corner banner?<br><center><img src="../images/corner_banners/german/save50.png" alt="Special Offers"></center>');
 define('CT_CB_SPECIALS_NO', 'Special Offer display level?');
 define('CD_CB_SPECIALS_NO', 'At what level of discount do you want to start displaying the Special Offer corner banner?<br><br>Please note that the Special Offer banners are rounded down to the <b>nearest 5%</b>.');
 define('CT_CB_CALL_FOR_PRICE', 'Ask for Price corner banner?');
-define('CD_CB_CALL_FOR_PRICE', 'Would you like to display the Ask for Price corner banner?<br><center><img src="../images/corner_banners/callforprice.png" alt="Ask for Price"></center>');
+define('CD_CB_CALL_FOR_PRICE', 'Would you like to display the Ask for Price corner banner?<br><center><img src="../images/corner_banners/german/callforprice.png" alt="Ask for Price"></center>');
 define('CT_CB_OUT_OF_STOCK', 'Out of Stock corner banner?');
-define('CD_CB_OUT_OF_STOCK', 'Would you like to display the Out of Stock corner banner?<br><center><img src="../images/corner_banners/out_of_stock.png" alt="Out of Stock"></center>');
+define('CD_CB_OUT_OF_STOCK', 'Would you like to display the Out of Stock corner banner?<br><center><img src="../images/corner_banners/german/out_of_stock.png" alt="Out of Stock"></center>');
 
 // Configuration ID: 206 - MailChimp Newsletters
 define('CT_MAILCHIMP_ENABLE', 'Enable MailChimp Newsletter Infobox');
@@ -1142,9 +1144,9 @@ define('CT_ONEPAGE_TELEPHONE', 'Telephone Required');
 define('CD_ONEPAGE_TELEPHONE', 'Telephone will be a required field?');
 define('CT_ONEPAGE_ZIP_BELOW', 'Move zip/post code input boxes below state');
 define('CD_ONEPAGE_ZIP_BELOW', 'Move zip/post code input boxes below state?');
-define('CT_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'Dont show shipping and handling address checkbox or ship methods if weight of products = 0');
-define('CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', '');
+define('CT_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'Don\'t show shipping and handling address checkbox or ship methods if weight of products = 0');
+define('CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'If the product weight = 0 then the system will assume that the products is virtual ie. downloadable.  As such the shipping address box does not need to be displayed.');
 define('CT_ONEPAGE_ADDR_LAYOUT', 'Addresses Layout');
-define('CD_ONEPAGE_ADDR_LAYOUT', '');
+define('CD_ONEPAGE_ADDR_LAYOUT', 'You can have the address boxes on One Page Checkout display either vertically (one on top of the other) or horizontally (side by side)');
 
 ?>

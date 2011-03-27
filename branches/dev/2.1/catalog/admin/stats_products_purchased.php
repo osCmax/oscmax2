@@ -12,15 +12,66 @@ $Id$
 
   require('includes/application_top.php');
   
+  require(DIR_WS_CLASSES . 'currencies.php');
+  $currencies = new currencies();
+  
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
   
   switch($action) {
 // reset the admin log
-  case 'reset_products_ordered':
+    case 'reset_products_ordered':
 	  tep_db_query("update " . TABLE_PRODUCTS . " set products_ordered= '0'");
 	  $messageStack->add_session('Best Products Purchased sucessfully reset to zero.', 'success');
 	  tep_redirect(tep_href_link(FILENAME_STATS_PRODUCTS_PURCHASED));
-  break;
+      break;
+  }
+    
+  if ($_GET['month'] == '') {
+    $month = 0;
+    $year = 0;
+  } else {
+    $month = $_GET['month'];
+    $year = $_GET['year'];
+  }
+  
+  if(tep_not_null($_GET['gross']))
+  	$gross = $_GET['gross'];
+
+  $months = array();
+  $months[] = array('id' => 0, 'text' => TEXT_SELECT_MONTH);
+  $months[] = array('id' => 1, 'text' => TEXT_JANUARY);
+  $months[] = array('id' => 2, 'text' => TEXT_FEBRUARY);
+  $months[] = array('id' => 3, 'text' => TEXT_MARCH);
+  $months[] = array('id' => 4, 'text' => TEXT_APRIL);
+  $months[] = array('id' => 5, 'text' => TEXT_MAY);
+  $months[] = array('id' => 6, 'text' => TEXT_JUNE);
+  $months[] = array('id' => 7, 'text' => TEXT_JULY);
+  $months[] = array('id' => 8, 'text' => TEXT_AUGUST);
+  $months[] = array('id' => 9, 'text' => TEXT_SEPTEMBER);
+  $months[] = array('id' => 10, 'text' => TEXT_OCTOBER);
+  $months[] = array('id' => 11, 'text' => TEXT_NOVEMBER);
+  $months[] = array('id' => 12, 'text' => TEXT_DECEMBER);
+
+  $years = array();
+  $current_year = date("Y");
+  $years[] = array('id' => 0, 'text' => TEXT_SELECT_YEAR);
+  for ($i = 0; $i <= 10; $i++) {
+	$years[] = array('id' => $current_year, 'text' => $current_year);
+	$current_year--;
+	$i++;
+  }
+  
+  $status = (int)$_GET['status'];
+
+  $statuses_query = tep_db_query("select * from orders_status where language_id = '" . (int)$languages_id . "' order by orders_status_id");
+  $statuses = array();
+  $statuses[] = array('id' => 0, 'text' => TEXT_ORDERS_STATUS);
+  while ($st = tep_db_fetch_array($statuses_query)) {
+     $statuses[] = array('id' => $st['orders_status_id'], 'text' => $st['orders_status_name']);
+  }
+
+  if (isset($_GET['keywords']) && $_GET['keywords'] != '') {
+  	$keywords = trim($_GET['keywords']);
   }
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -46,60 +97,145 @@ $Id$
 <!-- left_navigation_eof //-->
         </table></td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right">&nbsp;</td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NUMBER; ?></td>
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
-                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_PURCHASED; ?>&nbsp;</td>
+    <td width="100%" valign="top">
+    <?php echo tep_draw_form('date_range', FILENAME_STATS_PRODUCTS_PURCHASED, '', 'get'); ?><?php echo tep_hide_session_id(); ?>
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <tr>
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+                <td class="smallText" align="right">
+                <?php 
+			      echo ENTRY_STATUS . '&nbsp;' . tep_draw_pull_down_menu('status', $statuses, $status, 'onchange=\'this.form.submit();\'') . '&nbsp;';
+	              echo ENTRY_MONTH . '&nbsp;' . tep_draw_pull_down_menu('month', $months, $month, 'onchange=\'this.form.submit();\'') . '&nbsp;';
+			      echo ENTRY_YEAR . '&nbsp;' . tep_draw_pull_down_menu('year', $years, $year, 'onchange=\'this.form.submit();\'') . '&nbsp;';
+			     ?>
+                </td>
               </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+	      <td>
+		    <table border="0" align="right" cellspacing="0" cellpadding="2">
+		      <tr>
+			    <td class="smallText" valign="top">
 <?php
-  if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
-  $products_query_raw = "select p.products_id, p.products_ordered, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where pd.products_id = p.products_id and pd.language_id = '" . $languages_id. "' and p.products_ordered > 0 group by pd.products_id order by p.products_ordered DESC, pd.products_name";
-  $products_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $products_query_raw, $products_query_numrows);
-
+	$manufacturers_query = tep_db_query("select manufacturers_id, manufacturers_name from " . TABLE_MANUFACTURERS . " order by manufacturers_name");
+     $manufacturers_array = array();
+	 $manufacturers_array[] = array('id' => '0', 'text' => TEXT_SELECT_MANUFACTURER);
+      while ($manufacturers = tep_db_fetch_array($manufacturers_query)) {
+        $manufacturers_name = $manufacturers['manufacturers_name'];
+        $manufacturers_array[] = array('id' => $manufacturers['manufacturers_id'],
+                                       'text' => $manufacturers_name);
+	}    
+	
+	echo ENTRY_KEYWORDS . '&nbsp;&nbsp;' . tep_draw_input_field('keywords', $keywords, 'size="20"') . '</td><td>';
+	echo '&nbsp;' . '<a href="javascript:document.forms[\'date_range\'].submit();">' . tep_image_button('button_search.gif', IMAGE_SEARCH) . '</a>&nbsp;';
+	echo '<a href="' . tep_href_link(FILENAME_STATS_PRODUCTS_PURCHASED) . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>';
+    
+    $totalgross = 0;
+	$totalquantity = 0;
+?>
+                </td>
+	  	      </tr>
+		    </table>
+          </td>
+	    </tr>
+        <tr>
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td valign="top">
+                  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                    <tr class="dataTableHeadingRow">
+                      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NUMBER; ?></td>
+                      <td class="dataTableHeadingContent"><?php echo tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, (isset($_GET['manufacturers_id']) ? $_GET['manufacturers_id'] : ''), 'onChange="this.form.submit();" size="1"') . '&nbsp;'; ?></td>
+                      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
+                      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MODEL; ?></td>
+                      <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_PURCHASED; ?></td>
+                      <td class="dataTableHeadingContent" align="right"><?php echo tep_draw_checkbox_field('gross', $gross, '', '', ' onClick="document.forms[\'date_range\'].submit();"') . TABLE_HEADING_GROSS; ?></td>
+                    </tr>
+                
+<?php
+	// generate query string
+	$products_query_raw = "select op.products_id, manufacturers_name, op.products_model, op.products_name, sum(op.products_quantity) as quantitysum, sum(op.products_price*op.products_quantity)as gross FROM " . TABLE_ORDERS . " as o, " . TABLE_ORDERS_PRODUCTS . " AS op, " . TABLE_MANUFACTURERS . " as m, " . TABLE_PRODUCTS . " as p WHERE ";
+	
+	if($month > 0)
+		$products_query_raw .= " month(o.date_purchased) = " . $month . " and ";
+	
+	if($year > 0)
+		$products_query_raw .= " year(o.date_purchased) = " . $year . " and ";
+	
+	if($status > 0)
+		$products_query_raw .= "o.orders_status = " . $status . " and ";
+		
+	$products_query_raw .= " o.orders_id = op.orders_id and op.products_id = p.products_id and p.manufacturers_id = m.manufacturers_id ";
+	
+	if (isset($_GET['manufacturers_id']) && $_GET['manufacturers_id'] > 0) {
+		$products_query_raw .= " and p.manufacturers_id = " . $_GET['manufacturers_id'] . " ";
+	}
+	
+	$products_query_raw .=(isset($keywords) ? " AND (op.products_name LIKE '%" . $keywords . "%' OR op.products_model LIKE '%" . $keywords . "%' OR manufacturers_name LIKE '%" . $keywords . "%' OR manufacturers_name LIKE '%" . $keywords . "%') " : '') . " GROUP BY op.products_id ORDER BY ";
+	
+	if ($gross == 'on') {
+		$products_query_raw .= " gross DESC, ";
+	} 
+	$products_query_raw .= " quantitysum DESC";
+	
+	if (isset($_GET['manufacturers_id']) && $_GET['manufacturers_id'] > 0) {
+		$products_query_raw .= " , op.products_model ";
+	}
+	// end of generate query string
+		
+  if ($debug) echo $products_query_raw;
+	
   $rows = 0;
   $products_query = tep_db_query($products_query_raw);
+  
   while ($products = tep_db_fetch_array($products_query)) {
-    $rows++;
+    $rows ++;
+    
+    $totalgross = $totalgross + $products['gross']; 
+    $totalquantity = $totalquantity + $products['quantitysum'];
 
     if (strlen($rows) < 2) {
-      $rows = '0' . $rows;
+     $rows = '0' . $rows;
     }
 ?>
-              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="document.location.href='<?php echo tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&amp;read=only&amp;pID=' . $products['products_id'] . '&amp;origin=' . FILENAME_STATS_PRODUCTS_PURCHASED . '?page=' . $_GET['page'], 'NONSSL'); ?>'">
-                <td class="dataTableContent"><?php echo $rows; ?>.</td>
-                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&amp;read=only&amp;pID=' . $products['products_id'] . '&amp;origin=' . FILENAME_STATS_PRODUCTS_PURCHASED . '?page=' . $_GET['page'], 'NONSSL') . '">' . $products['products_name'] . '</a>'; ?></td>
-                <td class="dataTableContent" align="center"><?php echo $products['products_ordered']; ?>&nbsp;</td>
-              </tr>
+                    <tr bgcolor="<?php echo ((++$cnt)%2 == 0) ? '#E0E0E0' : '#FFFFFF' ?>" id="defaultSelected" class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
+                      <td class="dataTableContent">&nbsp;<?php echo $rows; ?>.</td>
+			          <td class="dataTableContent"><?php echo $products['manufacturers_name']; ?>
+                      <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&read=only&pID=' . $products['products_id']) . '">' . $products['products_name'] . '</a>'; ?></td>
+                      <td class="dataTableContent"><?php echo $products['products_model']; ?>
+                      <td class="dataTableContent" align="center"><?php echo $products['quantitysum']; ?>&nbsp;</td>
+                      <td class="dataTableContent" align="right"><?php echo sprintf('%01.2f', $products['gross']); ?>&nbsp;</td>
+                    </tr>
 <?php
-  }
+   }
 ?>
-            </table></td>
-          </tr>
-          <tr>
-            <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td class="smallText" align="left" width="45%"><?php echo $products_split->display_count($products_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></td>
-                <td class="smallText" align="center" width="10%"><?php echo '<a href="' . tep_href_link(FILENAME_STATS_PRODUCTS_PURCHASED, 'action=reset_products_ordered') . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
-				<td class="smallText" align="right" width="45%"><?php echo $products_split->display_links($products_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?>&nbsp;</td>
+                  <?php if ($totalquantity > 0) { ?>
+                    <tr class="dataTableHeadingRow">
+			          <td class="dataTableContent"></td>
+			          <td class="dataTableContent"></td>
+			          <td class="dataTableContent"></td>
+			          <td class="dataTableContent"></td>
+			          <td class="dataTableContent" align="center"><b><?php echo $totalquantity; ?></b>&nbsp;</td>
+			          <td class="dataTableContent" align="right"><b><?php echo TEXT_TOTAL . '&nbsp;' ?><?php echo $currencies->display_price($totalgross,'',1); ?></b>&nbsp;</td>
+		 	        </tr> 
+                  <?php } ?>
+                  </table>
+                </td>
               </tr>
-            </table></td>
-          </tr>
-        </table></td>
-      </tr>
-    </table></td>
+            </table>
+          </td>
+        </tr>
+      </table>
+      </form>
+    </td>
+  </tr>
+</table></td>
 <!-- body_text_eof //-->
   </tr>
 </table>

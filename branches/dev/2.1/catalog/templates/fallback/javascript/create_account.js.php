@@ -33,7 +33,7 @@ function warnMAT() {
 
 </script>
 
-<?php require('includes/javascript/form_check.js.php'); ?>
+
 <?php require('includes/javascript/password_strength.js'); ?>
 
 <script type="text/javascript">
@@ -258,6 +258,15 @@ function check_form(form_name) {
   }
 }
 //--></script>
+
+<?php /* BOF: Country-State Selector */ ?>
+function refresh_form(form_name) {
+   form_name.action.value = 'refresh';
+   form_name.state.value = '';
+   form_name.submit();
+   return true;
+   }
+<?php /* EOF: Country-State Selector */ ?>
 
 <script language="javascript" type="text/javascript"><!--
 function getObject(name) { 

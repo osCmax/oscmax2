@@ -227,7 +227,7 @@ $help_pages_query_raw = tep_db_query ("select current_page, help_page, help_page
 $help_pages_query = tep_db_fetch_array($help_pages_query_raw);
 
 if ($help_pages_query['help_page'] != '' ) {
-	echo '<a href="' . $help_pages_query['help_page'] . '" title="' . $help_pages_query['help_page_title'] . '" target="_blank">' . tep_image(DIR_WS_IMAGES . 'icons/help.png', 'Help') . '</a>';
+	echo '<a href="' . $help_pages_query['help_page'] . '" title="' . $help_pages_query['help_page_title'] . '" target="_blank">' . tep_image(DIR_WS_IMAGES . 'icons/help.png', IMAGE_HELP) . '</a>';
 }
 ?>
   	<?php echo tep_draw_form('languages', 'index.php', '', 'get'); ?>
@@ -235,9 +235,9 @@ if ($help_pages_query['help_page'] != '' ) {
   	<?php echo tep_hide_session_id(); ?></form>
 
 	<?php echo '<a href="' . tep_href_link(FILENAME_ADMIN_ACCOUNT, '', 'SSL') . '" class="header">'; ?>
-	<?php echo tep_image(DIR_WS_ICONS . 'book_key.png', 'Manage Account'); ?><?php echo TEXT_WELCOME; ?><?php echo $myLogin['admin_username']; ?>.</a>
+	<?php echo tep_image(DIR_WS_ICONS . 'book_key.png', IMAGE_MANAGE_ACCOUNT); ?><?php echo TEXT_WELCOME; ?><?php echo $myLogin['admin_username']; ?>.</a>
 	<?php echo '<a href="' . tep_href_link(FILENAME_LOGOFF, '', 'SSL') . '" class="header">'; ?>
-	<?php echo tep_image(DIR_WS_ICONS . 'exit.png', 'Logoff'); ?>&nbsp;<?php echo HEADER_TITLE_LOGOFF; ?>&nbsp;&nbsp;</a>
+	<?php echo tep_image(DIR_WS_ICONS . 'exit.png', IMAGE_LOGOFF); ?>&nbsp;<?php echo HEADER_TITLE_LOGOFF; ?>&nbsp;&nbsp;</a>
   </td>
   <td width="1"><?php echo tep_draw_separator('pixel_trans.gif', '1', '84'); ?></td>
 </tr>

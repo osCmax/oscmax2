@@ -476,6 +476,9 @@ define('IMAGE_ORPHANS', 'Orphans');
 define('IMAGE_REGENERATE_ALL', 'Regenerate all images for this product');
 define('IMAGE_REGENERATE_EVERYTHING', 'Regenerate all your images');
 define('IMAGE_MC_SYNC', 'Sync with MailChimp');
+define('IMAGE_HELP', 'Help');
+define('IMAGE_LOGOFF', 'Logoff');
+define('IMAGE_MANAGE_ACCOUNT', 'Manage Account');
 
 define('ICON_CROSS', 'False');
 define('ICON_CURRENT_FOLDER', 'Current Folder');

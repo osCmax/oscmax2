@@ -115,7 +115,7 @@ $filterbox_center = '<table border="0" width="100%" cellspacing="0" cellpadding=
 
 $filterbox_right = '<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr><td class="smallText" align="right">' . $page_count . '</td></tr><tr><td class="smallText" align="right">' . TEXT_SORT_ORDER . tep_draw_form('sorting', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['max']) ? tep_draw_hidden_field('max', $_GET['max']) : '') . tep_draw_pull_down_menu('sort', $sort_array, $_GET['sort'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>'; 
 
-$filterbox = '<table border="0" width="100%" cellspacing="0" cellpadding="0" class="filterbox"><tr><td class="smallText" >' .  $filterbox_left . '</td><td class="smallText" width="24%" align="center">' . $filterbox_center . '</td><td class="smallText" width="38%" align="right">' . $filterbox_right . '</td></tr></table>';
+$filterbox = '<table border="0" width="100%" cellspacing="0" cellpadding="0" class="filterbox"><tr><td class="smallText" width="37%">' .  $filterbox_left . '</td><td class="smallText" width="26%" align="center">' . $filterbox_center . '</td><td class="smallText" width="37%" align="right">' . $filterbox_right . '</td></tr></table>';
 
 echo $filterbox;
 echo tep_draw_separator('pixel_trans.gif', '100%', '10');

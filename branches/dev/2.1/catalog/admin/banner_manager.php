@@ -307,7 +307,7 @@ function popupImageWindow(url) {
                 </tr>
                 <tr>
                   <td valign="top" class="main"><?php echo TEXT_BANNERS_EXPIRES_ON; ?><br><small><?php echo TEXT_YYYY_MM_DD; ?></small></td>
-                  <td class="main"><?php echo tep_draw_input_field('expires_date', (isset($bInfo->expires_date) ? $bInfo->expires_date : ''), 'id="banners_expires"'); ?><?php echo TEXT_BANNERS_OR_AT . '<br>' . tep_draw_input_field('expires_impressions', $bInfo->expires_impressions, 'maxlength="7" size="7"') . ' ' . TEXT_BANNERS_IMPRESSIONS; ?></td>
+                  <td class="main"><?php echo tep_draw_input_field('expires_date', (isset($bInfo->expires_date) ? $bInfo->expires_date : ''), 'id="banners_expires"'); ?><?php echo TEXT_BANNERS_OR_AT . tep_draw_input_field('expires_impressions', $bInfo->expires_impressions, 'maxlength="7" size="7"') . ' ' . TEXT_BANNERS_IMPRESSIONS; ?></td>
                 </tr>
                 <tr>
                   <td class="main"></td>

@@ -25,22 +25,25 @@ $Id$
 $search_query = null;
 if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
   $search_query = $_GET['q'];
-  if (preg_match("/^\d+$/",$search_query)) { // oid
+  if ( (preg_match("/^\d+$/",$search_query)) && (strpos($search_query, " ") !== true) ) { // oid
     // show given order
-    tep_redirect(tep_href_link(FILENAME_ORDERS, 'oID=' . $search_query));
+    tep_redirect(tep_href_link(FILENAME_ORDERS, 'oID=' . $search_query . '&action=edit'));
     exit;
   } else { // name (customer or company)
     $q_array = explode(' ', ($search_query));
     $q_customer = '(o.customers_name LIKE \'%' . $q_array[0] . '%\'';
     $q_company = '(o.customers_company LIKE \'%' . $q_array[0] . '%\'';
+	$q_orderno = '(o.orders_id LIKE \'%' . $q_array[0] . '%\'';
     // more than one search term
     for ($i = 1 ; $i < sizeof($q_array) ; $i++) {
       $q_customer .= ' OR o.customers_name LIKE \'%' . $q_array[$i] . '%\'';
       $q_company .= ' OR o.customers_company LIKE \'%' . $q_array[$i] . '%\'';
+	  $q_orderno .= ' OR o.orders_id LIKE \'%' . $q_array[$i] . '%\'';
     }
     $q_customer .= ')';
     $q_company .= ')';
-    $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ')';
+	$q_orderno .= ')';
+    $search_query = ' AND (' . $q_customer . ' OR ' . $q_company . ' OR ' . $q_orderno . ')';
   }
 } // ends if ($search_query = $_GET['q'])
 

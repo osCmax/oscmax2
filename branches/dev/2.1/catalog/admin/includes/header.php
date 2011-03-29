@@ -204,7 +204,7 @@ document.status.comments.value += newmessage;
 
                 <div id="searchtabs-2" class="ui-tabs ui-tabs-container ui-tabs-hide"><?php echo TEXT_SEARCH; ?><?php echo tep_draw_form('search_products', FILENAME_CATEGORIES, '', 'get') . tep_draw_input_field('search') . tep_hide_session_id(); ?></form></div>
 
-                <div id="searchtabs-3" class="ui-tabs ui-tabs-container ui-tabs-hide"><?php echo TEXT_SEARCH; ?><?php echo tep_draw_form('search_orders', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, 'text', false) . tep_draw_input_field('action', 'edit', '', false, 'hidden', false); ?></form></div>
+                <div id="searchtabs-3" class="ui-tabs ui-tabs-container ui-tabs-hide"><?php echo TEXT_SEARCH; ?><?php echo tep_draw_form('search_orders', FILENAME_ORDERS, '', 'get') . tep_draw_input_field('q', '', $orderparams, false, 'text', false); ?></form></div>
 
             </div>
 	    </td>

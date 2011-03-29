@@ -257,7 +257,6 @@ function check_form(form_name) {
     return true;
   }
 }
-//--></script>
 
 <?php /* BOF: Country-State Selector */ ?>
 function refresh_form(form_name) {
@@ -267,7 +266,7 @@ function refresh_form(form_name) {
    return true;
    }
 <?php /* EOF: Country-State Selector */ ?>
-
+//--></script>
 <script language="javascript" type="text/javascript"><!--
 function getObject(name) { 
    var ns4 = (document.layers) ? true : false; 

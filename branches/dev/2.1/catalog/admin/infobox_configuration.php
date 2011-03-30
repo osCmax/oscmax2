@@ -226,9 +226,7 @@ if ($cfgcol != 'left') { $count_right++; } else { $count_left++; }
       if (is_object($cInfo)) {
         $heading[] = array('text' => '<b>' . $cInfo->configuration_title . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&amp;cID=' . $cInfo->configuration_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&amp;cID=' . $cInfo->configuration_id . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a><br><br><a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&amp;action=new') . '">' . tep_image_button('button_new_infobox.gif', IMAGE_NEW_INFOBOX) . '</a> ');
-        $contents[] = array('text' => '<br>' . $cInfo->configuration_description);
-
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&amp;cID=' . $cInfo->configuration_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&amp;cID=' . $cInfo->configuration_id . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a><br><br><a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=' . $_GET['gID'] . '&amp;action=new') . '">' . tep_image_button('button_new_infobox.gif', IMAGE_NEW_INFOBOX) . '</a> ');	
         $contents[] = array('text' => '<br>' . TEXT_INFO_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
         if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
         $contents[] = array('text' => '<br>' . COUNT_1 . '<br>'. $count_left . COUNT_2 . '<br>' . $count_right . COUNT_3);

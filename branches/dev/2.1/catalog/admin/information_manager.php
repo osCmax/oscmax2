@@ -298,7 +298,11 @@ case "Added":
 
   default:
 	$data = tep_get_information_list();
-	$title = MANAGER_INFORMATION . " <FONT SIZE='-1'>/ " . $info_group['information_group_title'] . "</FONT>";
+	if ($gID == 1) {
+	  $title = BOX_CONFIGURATION_INFO_PAGES;
+	} else {
+      $title = BOX_CONFIGURATION_WELCOME;
+	}
 	include('information_list.php');
 	flush();
 	tep_update_information_languages();

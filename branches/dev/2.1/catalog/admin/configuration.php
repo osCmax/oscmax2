@@ -94,7 +94,15 @@ $Id$
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo $cfg_group['configuration_group_title']; ?></td>
+            <td class="pageHeading">
+			  <?php 
+				if (constant($cfg_group['configuration_group_title'])) {
+				  echo constant($cfg_group['configuration_group_title']);
+				} else {
+				  echo $cfg_group['configuration_group_title'];
+				}
+		      ?>
+			</td>
             <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>

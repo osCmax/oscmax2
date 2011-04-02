@@ -105,7 +105,11 @@ $Id$
 ////
 // Output a separator either through whitespace, or with an image
   function tep_draw_separator($image = 'pixel_black.gif', $width = '100%', $height = '1') {
-    return tep_image(DIR_WS_IMAGES . $image, '', $width, $height);
+    if(is_file(DIR_WS_TEMPLATES . '/images/icons/' . $image)) {
+	  return tep_image(DIR_WS_TEMPLATES . '/images/icons/' . $image, '', $width, $height);	
+	} else {
+      return tep_image(DIR_WS_IMAGES . 'icons/' . $image, '', $width, $height);
+	}
   }
 
 ////

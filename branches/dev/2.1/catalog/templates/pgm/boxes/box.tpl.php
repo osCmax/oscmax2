@@ -16,13 +16,13 @@
                     <td>
                     	<table border="0" width="100%" cellspacing="0" cellpadding="3" class="infoBoxContents">
                           <tr>
-                            <td><img src="images/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
+                            <td><img src="images/icons/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
                           </tr>
                           <tr>
                             <td class="boxText"<?php echo $boxContent_attributes; ?>><?php echo $boxContent; ?></td>
                           </tr>
                           <tr>
-                            <td><img src="images/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
+                            <td><img src="images/icons/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
                           </tr>
                         </table>
                      </td>
@@ -37,7 +37,7 @@
               </table>
  			  <table width="100%" cellspacing="0" cellpadding="0">
                   <tr>
-                  	<td><img src="images/pixel_trans.gif" border="0" alt="" width="100%" height="5"></td>
+                  	<td><img src="images/icons/pixel_trans.gif" border="0" alt="" width="100%" height="5"></td>
                   </tr>
               </table>
  

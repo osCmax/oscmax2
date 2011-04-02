@@ -46,6 +46,7 @@ $Id$
   define('FILENAME_SERVER_INFO', 'server_info.php');
   define('FILENAME_SHIPPING_MODULES', 'shipping_modules.php');
   define('FILENAME_SPECIALS', 'specials.php');
+  define('FILENAME_SPECIALS_BY_CAT', 'specialsbycategory.php');
   define('FILENAME_STATS_CUSTOMERS', 'stats_customers.php');
   define('FILENAME_STATS_PRODUCTS_PURCHASED', 'stats_products_purchased.php');
   define('FILENAME_STATS_PRODUCTS_VIEWED', 'stats_products_viewed.php');

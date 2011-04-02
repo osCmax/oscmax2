@@ -19,6 +19,7 @@ $Id$
                                    tep_admin_jqmenu(FILENAME_MANUFACTURERS, BOX_CATALOG_MANUFACTURERS, 'TOP') .
                                    tep_admin_jqmenu(FILENAME_REVIEWS, BOX_CATALOG_REVIEWS, 'TOP') .
                                    tep_admin_jqmenu(FILENAME_SPECIALS, BOX_CATALOG_SPECIALS, 'TOP') .
+                                   tep_admin_jqmenu(FILENAME_SPECIALS_BY_CAT, BOX_CATALOG_SPECIALS_BY_CAT, 'TOP') .
                                    tep_admin_jqmenu(FILENAME_XSELL_PRODUCTS, BOX_CATALOG_XSELL_PRODUCTS, 'TOP') .
                                    tep_admin_jqmenu(FILENAME_EASYPOPULATE, BOX_CATALOG_EASYPOPULATE, 'TOP') .
 								   tep_admin_jqmenu(FILENAME_FEEDMACHINE, BOX_CATALOG_FEEDMACHINE, 'TOP') .

@@ -239,6 +239,7 @@ define('BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES', 'Products Attributes');
 define('BOX_CATALOG_MANUFACTURERS', 'Manufacturers');
 define('BOX_CATALOG_REVIEWS', 'Reviews');
 define('BOX_CATALOG_SPECIALS', 'Specials');
+define('BOX_CATALOG_SPECIALS_BY_CAT', 'Specials by category');
 define('BOX_CATALOG_PRODUCTS_EXPECTED', 'Products Expected');
 // 2 LINES ADDED - EasyPopulate and Attrib Manager
 define('BOX_CATALOG_EASYPOPULATE', 'EasyPopulate');

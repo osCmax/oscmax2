@@ -36,7 +36,7 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><img src="images/icons/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
-                <td width="60"><img src="images/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
+                <td width="60"><img src="<?php echo DIR_WS_TEMPLATES; ?>images/icons/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
                 <td width="10"><img src="images/icons/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
@@ -66,7 +66,7 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><img src="images/icons/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
-                <td width="60"><img src="images/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
+                <td width="60"><img src="<?php echo DIR_WS_TEMPLATES; ?>images/icons/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
                 <td width="10"><img src="images/icons/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
@@ -96,7 +96,7 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><img src="images/icons/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
-                <td width="60"><img src="images/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
+                <td width="60"><img src="<?php echo DIR_WS_TEMPLATES; ?>images/icons/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
                 <td width="10"><img src="images/icons/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
@@ -126,7 +126,7 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><img src="images/icons/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
-                <td width="60"><img src="images/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
+                <td width="60"><img src="<?php echo DIR_WS_TEMPLATES; ?>images/icons/affiliate_links.gif" border="0" alt="" width="60" height="60"></td>
                 <td width="10"><img src="images/icons/pixel_trans.gif" border="0" alt="" width="10" height="1"></td>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>

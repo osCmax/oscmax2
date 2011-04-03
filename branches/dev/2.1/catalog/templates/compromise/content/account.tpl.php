@@ -86,7 +86,7 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td width="60"><?php echo tep_image(DIR_WS_IMAGES . 'account_personal.gif'); ?></td>
+                <td width="60"><?php echo tep_image(DIR_WS_TEMPLATES . 'images/icons/account_personal.gif'); ?></td>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
@@ -121,7 +121,7 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td width="60"><?php echo tep_image(DIR_WS_IMAGES . 'account_orders.gif'); ?></td>
+                <td width="60"><?php echo tep_image(DIR_WS_TEMPLATES . 'images/icons/account_orders.gif'); ?></td>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
@@ -150,7 +150,7 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td width="60"><?php echo tep_image(DIR_WS_IMAGES . 'account_notifications.gif'); ?></td>
+                <td width="60"><?php echo tep_image(DIR_WS_TEMPLATES . 'images/icons/account_notifications.gif'); ?></td>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>

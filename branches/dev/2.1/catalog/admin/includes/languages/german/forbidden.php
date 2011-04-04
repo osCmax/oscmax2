@@ -11,6 +11,6 @@ $Id $
 */
 define('HEADING_TITLE', 'Zugang verweigert!');
 define('NAVBAR_TITLE', 'Sie haben für diesen Bereich keine Berechtigung!');
-define('TEXT_MAIN', '&nbsp;Kontaktieren Sie Ihren <b>Administrator</b>, um Ihre Berechtigungen anpassen zulassen!<br>&nbsp;<br>&nbsp;Wenn Sie mehr Informationen zu diesem Thema erhalten möchten, <a href="http://wiki.oscdox.com/v2.1/files_access" target="_blank" style="color:#0000ff">lesen Sie diesen Wiki Artikel.</a><br><br>');
+define('TEXT_MAIN', '&nbsp;Kontaktieren Sie Ihren <b>Administrator</b>, um Ihre Berechtigungen anpassen zulassen!<br>&nbsp;<br>&nbsp;Wenn Sie mehr Informationen zu diesem Thema erhalten möchten, <a href="http://wiki.oscdox.com/v2.5/files_access" target="_blank" style="color:#0000ff">lesen Sie diesen Wiki Artikel.</a><br><br>');
 define('TEXT_BACK', 'Zurück');
 ?>

@@ -779,7 +779,7 @@ $Id$
       }
       
       //Make sure the token is in the correct format
-      if (!preg_match("([C-E]{2})-([A-Z0-9]{17})", $_SESSION['paypal_ec_token'])) {
+      if (!preg_match("/([C-E]{2})-([A-Z0-9]{17})/", $_SESSION['paypal_ec_token'])) {
         $this->away_with_you(MODULE_PAYMENT_PAYPAL_DP_INVALID_RESPONSE, true);
       }
       
@@ -848,7 +848,7 @@ $Id$
         
         $address_groups = array('ship');
         
-        if (isset($billing_address)) {
+        if (is_array($billing_address) &! empty($billing_address)) {
           $bill_name = explode(" ", $billing_address['Name'], 2);
           
           $_SESSION['paypal_ec_payer_info'] = array_merge($_SESSION['paypal_ec_payer_info'], array(

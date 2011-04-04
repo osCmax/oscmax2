@@ -70,17 +70,39 @@ $Id$
 <!-- body_text //-->
     <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td valign="bottom"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="smallText" align="right">
-            	<?php // PGM adds Search functionality to xSell
-				echo tep_draw_form('search', FILENAME_XSELL_PRODUCTS, '', 'get'). tep_draw_hidden_field('add_related_product_ID', $add_related_product_ID);
-				echo TEXT_SEARCH_XSELL . ' ' . tep_draw_input_field('search');
-				echo '</form>';
+            <td class="smallText" align="right" valign="bottom">
+            	<?php
+				// PGM adds category filter - hide when editing xsells.
+				if (!isset($_GET['add_related_product_ID'])) {
+				  echo tep_draw_form('category_', FILENAME_XSELL_PRODUCTS, '', 'get');
+                  echo TEXT_FILTER_XSELL . tep_draw_pull_down_menu('category', tep_get_category_tree(), '', 'onChange="this.form.submit();"');
+                  echo tep_hide_session_id() . '</form>';
+				}
+				// PGM adds Search functionality to xSell
+				if (!isset($_GET['sort'])) {
+				  echo tep_draw_form('search', FILENAME_XSELL_PRODUCTS, '', 'get') . tep_draw_hidden_field('add_related_product_ID', $add_related_product_ID);
+				  echo '&nbsp;&nbsp;' . TEXT_SEARCH_XSELL . ' ' . tep_draw_input_field('search');
+				  echo '</form>';
+				}
 				
-				if (isset($_GET['search'])) { $search_string = " and ((pd.products_name like '%" . tep_db_prepare_input($_GET['search']) . "%') or (p.products_model like '%" . tep_db_prepare_input($_GET['search']) . "%'))"; 
-				} else { $search_string = ""; }
+                if ( (tep_not_null($_GET['search'])) || (tep_not_null($_GET['add_related_product_ID'])) || (tep_not_null($_GET['sort'])) || (tep_not_null($_GET['category'])) ) {
+                  echo '&nbsp;&nbsp;<td align="right" width="10"><a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS) . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a></td>';
+                }
+				
+				if ( (isset($_GET['category'])) && ($_GET['category'] != 0) ) {
+				  $category_filter =  " and p2c.categories_id = '" . (int)$_GET['category'] . "'";
+				} else {
+				  $category_filter = "";
+				}
+				
+				if (isset($_GET['search'])) { 
+				  $search_string = " and ((pd.products_name like '%" . tep_db_prepare_input($_GET['search']) . "%') or (p.products_model like '%" . tep_db_prepare_input($_GET['search']) . "%'))"; 
+				} else { 
+				  $search_string = "";
+				}
 				?>
             </td>
           </tr>
@@ -101,7 +123,7 @@ $Id$
     <td class="dataTableHeadingContent" colspan="2" nowrap align="center"><?php echo TABLE_HEADING_UPDATE_SELLS;?></td>
    </tr>
 <?php 
-    $products_query_raw = 'select p.products_id, p.products_model, pd.products_name, p.products_id from '.TABLE_PRODUCTS.' p, '.TABLE_PRODUCTS_DESCRIPTION.' pd where p.products_id = pd.products_id ' . $search_string . ' and pd.language_id = "'.(int)$languages_id.'" order by p.products_id asc';
+    $products_query_raw = 'select p.products_id, p.products_model, pd.products_name, p.products_id from ' . TABLE_PRODUCTS . ' p, ' . TABLE_PRODUCTS_DESCRIPTION . ' pd, ' . TABLE_PRODUCTS_TO_CATEGORIES . ' p2c where p.products_id = pd.products_id ' . $search_string . ' and pd.language_id = "'.(int)$languages_id.'" and p.products_id = p2c.products_id ' . $category_filter . ' order by p.products_id asc';	
     $products_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $products_query_raw, $products_query_numrows);
     $products_query = tep_db_query($products_query_raw);
     while ($products = tep_db_fetch_array($products_query)) {
@@ -149,19 +171,11 @@ $Id$
       <td class="smallText" valign="top"><?php echo $products_split->display_count($products_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></td>
       <td class="smallText" align="right"><?php echo $products_split->display_links($products_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y', 'cID', 'action'))); ?></td>
      </tr>
-<?php
-     if (tep_not_null($_GET['search'])) {
-?>
-     <tr>
-       <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_XSELL_PRODUCTS) . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
-     </tr>
-<?php } ?>
-
     </table>
   </table>
 <?php
-}elseif($_GET['add_related_product_ID'] != '' && $_GET['sort'] == ''){
-	$products_name_query = tep_db_query('select pd.products_name, p.products_model, p.products_image from '.TABLE_PRODUCTS.' p, '.TABLE_PRODUCTS_DESCRIPTION.' pd where p.products_id = "'.$_GET['add_related_product_ID'].'" and p.products_id = pd.products_id and pd.language_id ="'.(int)$languages_id.'"');
+} elseif ($_GET['add_related_product_ID'] != '' && $_GET['sort'] == '') {
+	$products_name_query = tep_db_query('select pd.products_name, p.products_model, p.products_image from '.TABLE_PRODUCTS.' p, '.TABLE_PRODUCTS_DESCRIPTION.' pd where p.products_id = "' . $_GET['add_related_product_ID'] . '" and p.products_id = pd.products_id and pd.language_id ="'.(int)$languages_id.'"');
 	$products_name = tep_db_fetch_array($products_name_query);
 ?>
   <table border="0" cellspacing="0" cellpadding="0" bgcolor="#999999" align="center" width="100%">

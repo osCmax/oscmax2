@@ -253,8 +253,12 @@ $Id$
     $radio_buttons++;
   }
 // Start - CREDIT CLASS Gift Voucher Contribution
-if (tep_session_is_registered('customer_id')) {
-if ($gv_result['amount']>0){
+  if(MODULE_ORDER_TOTAL_COUPON_STATUS == 'true')
+  if (tep_session_is_registered('customer_id')) {
+	  $gv_query = tep_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id = '" . $customer_id . "'");
+  	$gv_result = tep_db_fetch_array($gv_query);
+
+    if ($gv_result['amount']>0){
   echo '              <tr><td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td><td colspan=2>' . "\n" .
        '              <table border="0" cellpadding="2" cellspacing="0" width="100%"><tr class="moduleRow" onmouseover="rowOverEffect(this)" onclick="clearRadeos()" onmouseout="rowOutEffect(this)" >' . "\n" .
        '              <td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td><td class="main">' . $gv_result['text'];

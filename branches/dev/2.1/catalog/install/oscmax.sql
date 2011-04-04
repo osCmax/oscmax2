@@ -1674,6 +1674,7 @@ INSERT INTO admin_files VALUES(126, 'affiliate_validcats.php', 'FILE_AFFILIATE',
 INSERT INTO admin_files VALUES(127, 'affiliate_validproducts.php', 'FILE_AFFILIATE', 0, 43, '1,2', 99);
 INSERT INTO admin_files VALUES(128, 'edit_orders_add_product.php', 'FILE_ORDER', 0, 5, '1,2', 99);
 INSERT INTO admin_files VALUES(129, 'edit_orders_ajax.php', 'FILE_ORDER', 0, 5, '1,2', 99);
+INSERT INTO admin_files VALUES(130, 'attributeManager.php', 'FILE_ATTRIBUTE', 0, 3, '1,2', 99);
 INSERT INTO admin_files VALUES(131, 'phone_order.php', 'BOX_PHONE_ORDER', 0, 5, '1,2', 4);
 INSERT INTO admin_files VALUES(132, 'stats_admin_logging.php', 'BOX_REPORTS_ADMIN_LOGGING', 0, 8, '1,2', 11);
 INSERT INTO admin_files VALUES(133, 'stats_cust_logging.php', 'BOX_REPORTS_CUST_LOGGING', 0, 8, '1,2', 12);

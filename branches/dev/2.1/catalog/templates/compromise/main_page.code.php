@@ -9,8 +9,9 @@ $Id$
 
   Released under the GNU General Public License
 */
+
 //begin{htmlparams}
-  echo HTML_PARAMS;       
+  echo HTML_PARAMS;
   // BOF Separate Pricing Per Customer
     if(!tep_session_is_registered('sppc_customer_group_id')) {
     $customer_group_id = '0';
@@ -110,11 +111,6 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 //begin{storealign}
  echo STORE_ALIGN;
 //end{storealign}
-
-
-
-
-
 	  
 //begin{common}
  // include content
@@ -123,6 +119,22 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 
 ////////// Template Icons/Logos //////////
        
+//begin{cataloglogo}
+  // show logo      
+  echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . 'store_logo.gif', STORE_NAME) . '</a>'; 
+//end{cataloglogo}
+        
+//begin{myaccountlogo}
+  echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_account.gif', HEADER_TITLE_MY_ACCOUNT) . '</a>';      
+//end{myaccountlogo}
+        
+//begin{cartlogo}
+  echo '<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_IMAGES . 'header_cart.gif', HEADER_TITLE_CART_CONTENTS) . '</a>';      
+//end{cartlogo}
+        
+//begin{checkoutlogo}
+  echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_checkout.gif', HEADER_TITLE_CHECKOUT) . '</a>';      
+//end{checkoutlogo}
 //begin{mainlogo}
   // show logo      
   echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . STORE_LOGO, STORE_NAME) . '</a>'; 
@@ -130,7 +142,7 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
         
 //begin{myaccounticon}
   echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'account.png', HEADER_TITLE_MY_ACCOUNT) . '</a>';      
-//end{myaccountlogo}
+//end{myaccounticon}
         
 //begin{carticon}
   echo '<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_ICONS . 'contents.png', HEADER_TITLE_CART_CONTENTS) . '</a>';      
@@ -154,13 +166,9 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 //begin{pixelseparator}
  echo tep_draw_separator('pixel_trans.gif', '1', '24');
 //end{pixelseparator}
-
-
 //begin{breadcrumbs}
   echo $breadcrumb->trail(' &raquo; '); 
 //end{breadcrumbs}
-
-
 ////////// Template header links ////////// 
 
 //begin{logoff}
@@ -176,6 +184,7 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 //begin{myaccount}
   if (!tep_session_is_registered('noaccount')) // DDB - PWA - 040622 - no display of account for PWA customers
 	{ ?>
+	
       	<a href="<?php echo tep_href_link(FILENAME_ACCOUNT, 'my_account_f=1', 'SSL'); ?>" class="headerNavigation"><?php echo HEADER_TITLE_MY_ACCOUNT; ?>						
 	</a>
   <?php }
@@ -191,7 +200,7 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
   ?>
 <a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>" class="headerNavigation"><?php echo HEADER_TITLE_CHECKOUT; ?></a>        
   <?php
-//end{checkout}
+//end{checkout}           
 
 //begin{wishlist}
 ?>
@@ -292,9 +301,11 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false') {
 <!-- footer //-->
 echo FOOTER_TEXT_BODY;
+
 <!-- footer_eof //-->
        
 //end{footer}
+            
 //
 //begin{banner}
 if ($banner = tep_banner_exists('dynamic', '468x50')) {

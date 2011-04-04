@@ -14,9 +14,9 @@ $Id$
 <?php
 $contents = '';
 
-    $contents = (				   '<li><a href="' . tep_href_link(FILENAME_MODULES, 'set=payment', 'NONSSL') . '">' . BOX_MODULES_PAYMENT . '</a></li>' .
-                                   '<li><a href="' . tep_href_link(FILENAME_MODULES, 'set=shipping', 'NONSSL') . '">' . BOX_MODULES_SHIPPING . '</a></li>' .
-                                   '<li><a href="' . tep_href_link(FILENAME_MODULES, 'set=ordertotal', 'NONSSL') . '">' . BOX_MODULES_ORDER_TOTAL . '</a></li>');
+    $contents = (				   tep_admin_jqmenu(FILENAME_MODULES_PAYMENT, BOX_MODULES_PAYMENT, 'TOP') .
+	                               tep_admin_jqmenu(FILENAME_MODULES_SHIPPING, BOX_MODULES_SHIPPING, 'TOP') .
+	                               tep_admin_jqmenu(FILENAME_MODULES_ORDER_TOTAL, BOX_MODULES_ORDER_TOTAL, 'TOP'));
   print_r($contents);
 ?>
 <!-- modules_eof //-->

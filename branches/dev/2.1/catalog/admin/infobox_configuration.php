@@ -117,6 +117,7 @@ tep_redirect(tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&cID=' . $cID))
 <?php
 $count_left=0;
 $count_right=0;
+if (!isset($_GET['gID'])) { $_GET['gID'] = 1; }
   $configuration_query = tep_db_query("select configuration_id, configuration_title, configuration_value, configuration_column, location from " . TABLE_THEME_CONFIGURATION . " where configuration_group_id = '" . $_GET['gID'] . "' order by configuration_column ");
   while ($configuration = tep_db_fetch_array($configuration_query)) {
 

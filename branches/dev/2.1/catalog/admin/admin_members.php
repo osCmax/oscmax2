@@ -222,9 +222,9 @@ $Id$
                 <td colspan=2 class="dataTableHeadingContent">&nbsp;<?php echo TABLE_HEADING_GROUPS_DEFINE; ?></td>
               </tr>
 <?php
-  $db_boxes_query = tep_db_query("select admin_files_id as admin_boxes_id, admin_files_name as admin_boxes_name, admin_groups_id as boxes_group_id from " . TABLE_ADMIN_FILES . " where admin_files_is_boxes = '1' order by admin_files_name");
+  $db_boxes_query = tep_db_query("select admin_files_id as admin_boxes_id, admin_files_name as admin_boxes_name, admin_groups_id as boxes_group_id, admin_display_name as boxes_display_name, admin_sort_order from " . TABLE_ADMIN_FILES . " where admin_files_is_boxes = '1' order by admin_sort_order");
   while ($group_boxes = tep_db_fetch_array($db_boxes_query)) {
-    $group_boxes_files_query = tep_db_query("select admin_files_id, admin_files_name, admin_groups_id from " . TABLE_ADMIN_FILES . " where admin_files_is_boxes = '0' and admin_files_to_boxes = '" . $group_boxes['admin_boxes_id'] . "' order by admin_files_name");
+    $group_boxes_files_query = tep_db_query("select admin_files_id, admin_files_name, admin_groups_id, admin_display_name from " . TABLE_ADMIN_FILES . " where admin_files_is_boxes = '0' and admin_files_to_boxes = '" . $group_boxes['admin_boxes_id'] . "' order by admin_sort_order");
 
     $selectedGroups = $group_boxes['boxes_group_id'];
     $groupsArray = explode(",", $selectedGroups);
@@ -247,7 +247,15 @@ $Id$
 ?>
               <tr class="dataTableRowBoxes">
                 <td class="dataTableContent" width="23"><?php echo tep_draw_checkbox_field('groups_to_boxes[]', $group_boxes['admin_boxes_id'], $checked, '', 'id="groups_' . $group_boxes['admin_boxes_id'] . '" onClick="checkGroups(this)"'); ?></td>
-                <td class="dataTableContent"><b><?php echo ucwords(substr_replace ($group_boxes['admin_boxes_name'], '', -4)) . ' ' . tep_draw_hidden_field('checked_' . $group_boxes['admin_boxes_id'], $checkedBox) . tep_draw_hidden_field('unchecked_' . $group_boxes['admin_boxes_id'], $uncheckedBox); ?></b></td>
+                <td class="dataTableContent"><b>
+				<?php 
+				if (constant($group_boxes['boxes_display_name'])) {
+				  echo constant($group_boxes['boxes_display_name']);
+				} else {
+				  echo ucwords(substr_replace ($group_boxes['admin_boxes_name'], '', -4));
+				}
+				?>
+				<?php echo ' ' . tep_draw_hidden_field('checked_' . $group_boxes['admin_boxes_id'], $checkedBox) . tep_draw_hidden_field('unchecked_' . $group_boxes['admin_boxes_id'], $uncheckedBox); ?></b></td>
               </tr>
               <tr class="dataTableRow">
                 <td class="dataTableContent">&nbsp;</td>
@@ -278,7 +286,13 @@ $Id$
 
                     <tr>
                       <td width="20"><?php echo tep_draw_checkbox_field('groups_to_boxes[]', $group_boxes_files['admin_files_id'], $checked, '', 'id="subgroups_' . $group_boxes['admin_boxes_id'] . '" onClick="checkSub(this)"'); ?></td>
-                      <td class="dataTableContent"><?php echo $group_boxes_files['admin_files_name'] . ' ' . tep_draw_hidden_field('checked_' . $group_boxes_files['admin_files_id'], $checkedBox) . tep_draw_hidden_field('unchecked_' . $group_boxes_files['admin_files_id'], $uncheckedBox);?></td>
+                      <td class="dataTableContent">
+                      <?php 
+				      if (constant($group_boxes_files['admin_display_name'])) {
+				        echo '<b>' . constant($group_boxes_files['admin_display_name']) . '</b>, ';
+				      }
+				      ?>
+					  <?php echo $group_boxes_files['admin_files_name'] . ' ' . tep_draw_hidden_field('checked_' . $group_boxes_files['admin_files_id'], $checkedBox) . tep_draw_hidden_field('unchecked_' . $group_boxes_files['admin_files_id'], $uncheckedBox);?></td>
                     </tr>
 <?php
      }

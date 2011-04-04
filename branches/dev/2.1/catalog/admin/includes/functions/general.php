@@ -60,13 +60,17 @@ function tep_admin_files_boxes($filename, $sub_box_name, $target_window) {
 
 ////
 //Return Superfish code for menu items that can be accessed by user - PGM
-function tep_admin_jqmenu($filename, $sub_box_name, $target_window) {
+function tep_admin_jqmenu($filename, $sub_box_name, $target_window, $submenu = '') {
   global $login_groups_id;
   $menu_items = '';
 
   $dbquery = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where FIND_IN_SET( '" . $login_groups_id . "', admin_groups_id) and admin_files_is_boxes = '0' and admin_files_name = '" . $filename . "'");
   if (tep_db_num_rows($dbquery)) {
-    $menu_items = '<li><a href="' . tep_href_link($filename) . '" target="_' . strtolower($target_window) . '">' . $sub_box_name . '</a></li>';
+	if ($submenu == 'submenu') {
+      $menu_items = '<li><a href="' . tep_href_link($filename) . '" target="_' . strtolower($target_window) . '">' . $sub_box_name . '</a>';
+	} else {
+	  $menu_items = '<li><a href="' . tep_href_link($filename) . '" target="_' . strtolower($target_window) . '">' . $sub_box_name . '</a></li>';
+	}
   }
   return $menu_items;
 }

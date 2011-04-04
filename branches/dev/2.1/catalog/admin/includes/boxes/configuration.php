@@ -20,58 +20,57 @@ $contents = '';
 //      $contents .= '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $configuration_groups['cgID'], 'NONSSL') . '">' . $configuration_groups['cgTitle'] . '</a></li>';
 //    }
 
-$contents = ('<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=1', 'NONSSL') . '">' . BOX_CONFIGURATION_GENERAL_SETTINGS . '</a><ul>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=1', 'NONSSL') . '">' . BOX_CONFIGURATION_MYSTORE . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=2', 'NONSSL') . '">' . BOX_CONFIGURATION_MIN_VALUES . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=3', 'NONSSL') . '">' . BOX_CONFIGURATION_MAX_VALUES . '</a></li>' .
+$contents = ( tep_admin_jqmenu(FILENAME_CONFIGURATION_GENERAL_SETTINGS, BOX_CONFIGURATION_GENERAL_SETTINGS, 'TOP', 'submenu') . '<ul>' .
+                tep_admin_jqmenu(FILENAME_CONFIGURATION_GENERAL_SETTINGS, BOX_CONFIGURATION_MYSTORE, 'TOP') .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_MIN_VALUES, BOX_CONFIGURATION_MIN_VALUES, 'TOP') .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_MAX_VALUES, BOX_CONFIGURATION_MAX_VALUES, 'TOP') .
               '</ul>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=4', 'NONSSL') . '">' . BOX_CONFIGURATION_IMAGES . '</a><ul>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=4', 'NONSSL') . '">' . BOX_CONFIGURATION_IMAGES . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=45', 'NONSSL') . '">' . BOX_CONFIGURATION_MOPICS . '</a></li>' .
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_IMAGES, BOX_CONFIGURATION_IMAGES, 'TOP', 'submenu') . '<ul>' .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_IMAGES, BOX_CONFIGURATION_IMAGES, 'TOP') .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_MOPICS, BOX_CONFIGURATION_MOPICS, 'TOP') .
               '</ul>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=5', 'NONSSL') . '">' . BOX_CONFIGURATION_CUSTOMER_DETAILS . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7', 'NONSSL') . '">' . BOX_CONFIGURATION_SHIPPING . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=8', 'NONSSL') . '">' . BOX_CONFIGURATION_PRODUCT_SETTINGS . '</a><ul>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=8', 'NONSSL') . '">' . BOX_CONFIGURATION_PRODUCT_LISTING . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=50', 'NONSSL') . '">' . BOX_CONFIGURATION_PRODUCT_INFO . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=88', 'NONSSL') . '">' . BOX_CONFIGURATION_PRODUCT_PRICE_BREAKS . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=9', 'NONSSL') . '">' . BOX_CONFIGURATION_STOCK . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=13', 'NONSSL') . '">' . BOX_CONFIGURATION_DOWNLOAD . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=30', 'NONSSL') . '">' . BOX_CONFIGURATION_PRINT . '</a></li>' .
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_CUSTOMER_DETAILS, BOX_CONFIGURATION_CUSTOMER_DETAILS, 'TOP') .
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_SHIPPING, BOX_CONFIGURATION_SHIPPING, 'TOP') .
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_PRODUCT_LISTING, BOX_CONFIGURATION_PRODUCT_SETTINGS, 'TOP', 'submenu') . '<ul>' .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_PRODUCT_LISTING, BOX_CONFIGURATION_PRODUCT_LISTING, 'TOP') .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_PRODUCT_INFO, BOX_CONFIGURATION_PRODUCT_INFO, 'TOP') .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_PRODUCT_PRICE_BREAKS, BOX_CONFIGURATION_PRODUCT_PRICE_BREAKS, 'TOP') .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_STOCK, BOX_CONFIGURATION_STOCK, 'TOP') .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_DOWNLOAD, BOX_CONFIGURATION_DOWNLOAD, 'TOP') .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_PRINT, BOX_CONFIGURATION_PRINT, 'TOP') .
               '</ul>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=12', 'NONSSL') . '">' . BOX_CONFIGURATION_EMAIL . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=206', 'NONSSL') . '">' . BOX_CONFIGURATION_MC . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=25', 'NONSSL') . '">' . BOX_CONFIGURATION_WYSIWYG . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=201', 'NONSSL') . '">' . BOX_CONFIGURATION_TEMPLATES . '</a><ul>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=201', 'NONSSL') . '">' . BOX_CONFIGURATION_TEMPLATE_SETUP . '</a></li>' .
-              '<li><a href="' . tep_href_link('page_modules_configuration.php?tID=1') . '">' . BOX_CONFIGURATION_PAGE_MODULES .'</a></li>' .
-              '<li><a href="' . tep_href_link('infobox_configuration.php?gID=1', 'NONSSL') . '">' . BOX_HEADING_BOXES . '</a></li>' .
-	          '<li><a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, 'gID=1') . '">' . BOX_CONFIGURATION_INFO_PAGES . '</a></li>' .
-			  '<li><a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, 'gID=2') . '">' . BOX_CONFIGURATION_WELCOME . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=99', 'NONSSL') . '">' . BOX_CONFIGURATION_OFS . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7575', 'NONSSL') . '">' . BOX_CONFIGURATION_OPC . '</a></li>' .
-			  '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=205', 'NONSSL') . '">' . BOX_CONFIGURATION_CORNER_BANNERS . '</a></li>' .
-		      '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=207', 'NONSSL') . '">' . BOX_CONFIGURATION_CONTACT . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=87', 'NONSSL') . '">' . BOX_CONFIGURATION_RECAPTCHA . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=203', 'NONSSL') . '">' . BOX_CONFIGURATION_NOTIFICATIONS . '</a></li>' .
-			  '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=204', 'NONSSL')  . '">' . BOX_CONFIGURATION_SLIDESHOW . '</a><ul>' .
-			     '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=204', 'NONSSL') . '">' . BOX_CONFIGURATION_SLIDESHOW_SETTINGS . '</a></li>' .
-				 tep_admin_jqmenu(FILENAME_SLIDESHOW, BOX_TOOLS_SLIDESHOW, 'TOP') .
-			  '</ul></li>' .
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_EMAIL, BOX_CONFIGURATION_EMAIL, 'TOP') .
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_MC, BOX_CONFIGURATION_MC, 'TOP') .
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_WYSIWYG, BOX_CONFIGURATION_WYSIWYG, 'TOP') .
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_TEMPLATES, BOX_CONFIGURATION_TEMPLATES, 'TOP', 'submenu') . '<ul>' .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_TEMPLATES, BOX_CONFIGURATION_TEMPLATE_SETUP, 'TOP') . 
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_PAGE_MODULES, BOX_CONFIGURATION_PAGE_MODULES, 'TOP') .
+				tep_admin_jqmenu(FILENAME_HEADING_BOXES, BOX_HEADING_BOXES, 'TOP') .
+				tep_admin_jqmenu(FILENAME_CONFIGURATION_INFO_PAGES, BOX_CONFIGURATION_INFO_PAGES, 'TOP') .
+				tep_admin_jqmenu(FILENAME_CONFIGURATION_WELCOME, BOX_CONFIGURATION_WELCOME, 'TOP') .
+				tep_admin_jqmenu(FILENAME_CONFIGURATION_OFS, BOX_CONFIGURATION_OFS, 'TOP') .
+				tep_admin_jqmenu(FILENAME_CONFIGURATION_OPC, BOX_CONFIGURATION_OPC, 'TOP') .
+				tep_admin_jqmenu(FILENAME_CONFIGURATION_SLIDESHOW, BOX_CONFIGURATION_SLIDESHOW, 'TOP', 'submenu') . '<ul>' .
+				  tep_admin_jqmenu(FILENAME_CONFIGURATION_SLIDESHOW, BOX_CONFIGURATION_SLIDESHOW_SETTINGS, 'TOP') .
+				  tep_admin_jqmenu(FILENAME_SLIDESHOW, BOX_TOOLS_SLIDESHOW, 'TOP') .
+			    '</ul></li>' .
+				tep_admin_jqmenu(FILENAME_CONFIGURATION_CORNER_BANNERS, BOX_CONFIGURATION_CORNER_BANNERS, 'TOP') .
+				tep_admin_jqmenu(FILENAME_CONFIGURATION_CONTACT, BOX_CONFIGURATION_CONTACT, 'TOP') .
+				tep_admin_jqmenu(FILENAME_CONFIGURATION_RECAPTCHA, BOX_CONFIGURATION_RECAPTCHA, 'TOP') .
+				tep_admin_jqmenu(FILENAME_CONFIGURATION_NOTIFICATIONS, BOX_CONFIGURATION_NOTIFICATIONS, 'TOP') . 
+              '</ul>' . 
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_WISHLIST, BOX_CONFIGURATION_WISHLIST, 'TOP') . 
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_AFFILIATE, BOX_CONFIGURATION_AFFILIATE, 'TOP') .
+			  tep_admin_jqmenu(FILENAME_TOOLS_RECOVER_CART, BOX_TOOLS_RECOVER_CART, 'TOP') .  		  
+			  tep_admin_jqmenu(FILENAME_ARTICLES_CONFIG, BOX_ARTICLES_CONFIG, 'TOP') . 
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_SEO_URLS, BOX_CONFIGURATION_SEO, 'TOP', 'submenu') . '<ul>' .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_SEO_URLS, BOX_CONFIGURATION_SEO, 'TOP') .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_SEO_POPOUT, BOX_CONFIGURATION_SEO_POPOUT, 'TOP') .
               '</ul>' .
-              
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=65', 'NONSSL') . '">' . BOX_CONFIGURATION_WISHLIST . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=35', 'NONSSL') . '">' . BOX_CONFIGURATION_AFFILIATE . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=80', 'NONSSL') . '">' . BOX_TOOLS_RECOVER_CART . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=456', 'NONSSL') . '">' . BOX_ARTICLES_CONFIG . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=60', 'NONSSL') . '">' . BOX_CONFIGURATION_SEO . '</a><ul>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=60', 'NONSSL') . '">' . BOX_CONFIGURATION_SEO_URLS . '</a></li>' .
-			  '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=86', 'NONSSL') . '">' . BOX_CONFIGURATION_SEO_POPOUT . '</a></li>' .
-              '</ul>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=70', 'NONSSL') . '">' . BOX_CONFIGURATION_EDITOR . '</a></li>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=85', 'NONSSL') . '">' . BOX_CONFIGURATION_GOOGLE . '</a><ul>' .
-              '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=85', 'NONSSL') . '">' . BOX_CONFIGURATION_GOOGLE_ANALYTICS . '</a></li>' . 
-			  tep_admin_jqmenu(FILENAME_GOOGLE_SITEMAP, BOX_CONFIGURATION_GOOGLE_SITEMAP, 'TOP') .
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_EDITOR, BOX_CONFIGURATION_EDITOR, 'TOP') . 
+			  tep_admin_jqmenu(FILENAME_CONFIGURATION_GOOGLE_ANALYTICS, BOX_CONFIGURATION_GOOGLE, 'TOP', 'submenu') . '<ul>' .
+			    tep_admin_jqmenu(FILENAME_CONFIGURATION_GOOGLE_ANALYTICS, BOX_CONFIGURATION_GOOGLE_ANALYTICS, 'TOP') . 
+ 			    tep_admin_jqmenu(FILENAME_GOOGLE_SITEMAP, BOX_CONFIGURATION_GOOGLE_SITEMAP, 'TOP') .
               '<li><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=89', 'NONSSL') . '">' . BOX_CONFIGURATION_GOOGLE_MAPS . '</a></li>' .
             '</ul>');
 

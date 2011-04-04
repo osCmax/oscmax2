@@ -22,6 +22,9 @@ $Id$
 //end{htmlparams}
 
 //begin{headertags}
+// BOF: Remove & Prevent duplicate content with the canonical tag V1.3.2
+CanonicalLink( $xhtml = false, 'SSL' ); 
+// EOF: Remove & Prevent duplicate content with the canonical tag V1.3.2
   ?>
 <title><?php echo META_TAG_TITLE; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>" />
@@ -405,7 +408,7 @@ if ($banner = tep_banner_exists('dynamic', '468x50')) {
 
 //begin{year}
       echo date('Y');
-//	  
+//end{year}	  
 
 //begin{googleanalytics}
 if (GOOGLE_ANALYTICS_STATUS == 'true') { ?>	

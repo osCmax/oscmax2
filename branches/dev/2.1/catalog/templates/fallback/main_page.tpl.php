@@ -32,6 +32,9 @@ $Id$
   $pfile = $break[count($break) - 1];
   //echo $pfile; //debug code - displays current page name. 
 
+// BOF: Remove & Prevent duplicate content with the canonical tag V1.3.2
+CanonicalLink( $xhtml = false, 'SSL' ); 
+// EOF: Remove & Prevent duplicate content with the canonical tag V1.3.2
 ?>
 <title><?php echo META_TAG_TITLE; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">

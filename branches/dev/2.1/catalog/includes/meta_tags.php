@@ -307,9 +307,4 @@ define('TERTIARY_SECTION', ',  ');
     define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
     define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . NAVBAR_TITLE);
 }
-
-// BOF: Remove & Prevent duplicate content with the canonical tag V1.3.2
-CanonicalLink( $xhtml = false, 'SSL' ); 
-// EOF: Remove & Prevent duplicate content with the canonical tag V1.3.2
-
 ?>

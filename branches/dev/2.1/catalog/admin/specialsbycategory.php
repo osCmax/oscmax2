@@ -45,7 +45,7 @@ $Id:$
         <!-- Actual code for Specials Admin starts here -->
 <?php
   //Fetch all variables
-   if (isset($_POST['categories'])) {
+  if (isset($_POST['categories'])) {
 	  $categories = (int)$_POST['categories'];
   } elseif (isset($_GET['categories'])) {
 	 $categories = (int)$_GET['categories'];
@@ -63,7 +63,7 @@ $Id:$
 	  $manufacturer = '0';
   }
  
-  if ($manufacturer) {
+  if ($manufacturer != '0')  {
   	$man_filter = " and manufacturers_id = '". $manufacturer ."' ";
   } else {
     $man_filter = ' ';
@@ -100,7 +100,7 @@ $Id:$
       $inputspecialprice = (isset($m['inputspecialprice']) ? $m['inputspecialprice'] : TEXT_NONE);
 	  
       if (substr($inputspecialprice, -1) == '%') {
-        $productprice = (isset($m['productprice']) ? (float)$_POST['productprice'] : '');
+        $productprice = (isset($m['productprice']) ? (float)$m['productprice'] : '');
         $specialprice = ($productprice - (($inputspecialprice / 100) * $productprice));
       } elseif (substr($inputspecialprice, -1) == 'i') {
         $taxrate = (isset($m['taxrate']) ? (float)$m['taxrate'] : '1');
@@ -124,17 +124,9 @@ $Id:$
 	  
 	} // end foreach($_POST['master'] as $m) 
   } // end if ($_POST['submit'])
-    
-	// Build form string to remove manufacturer if set to 0 ie. none
-	$form_string = '';
-	$form_string .= $current_page . '?categories=' . $categories;
-	if ($manufacturer != 0) {
-	  $form_string .= '&amp;manufacturer=' . $manufacturer;	
-	}
-	
 ?>
         <tr class="dataTableHeadingRow">
-          <td valign="top"><form action="<?php echo $form_string; ?>" method="POST">  
+          <td valign="top"><form action="<?php echo $current_page; ?>" method="POST">  
             <table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent" align="left">
@@ -147,7 +139,7 @@ $Id:$
 
   echo TEXT_SELECT_CAT .': &nbsp;'. tep_draw_pull_down_menu('categories', tep_get_category_tree(), $categories) . '&nbsp;' . TEXT_SELECT_CUST_GROUP.': &nbsp;'. tep_draw_pull_down_menu('customers_groups', $input_groups, (isset($customers_group) ? $customers_group:'')) . '&nbsp;';
   
-  $manufacturers_array = array(array('id' => '', 'text' => TEXT_NONE));
+  $manufacturers_array = array(array('id' => '0', 'text' => TEXT_NONE));
   $manufacturers_query = tep_db_query("select manufacturers_id, manufacturers_name from " . TABLE_MANUFACTURERS . " order by manufacturers_name");
   while ($manufacturers = tep_db_fetch_array($manufacturers_query)) {
     $manufacturers_array[] = array('id' => $manufacturers['manufacturers_id'],
@@ -325,7 +317,7 @@ $Id:$
         $tax_rate = tep_get_tax_rate($row[$x]['products_tax_class_id']);
         ?>
         
-              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)">
+              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
                 <td class="dataTableContent"><?php echo $row[$x]['products_name']; ?></td>
                 <td class="dataTableContent"><?php echo $row[$x]['products_price']; ?></td>
                 <td class="dataTableContent"><input name="master[<?php echo $base; ?>][inputspecialprice]" type="text" value="<?php echo $specialprice; ?>" size="10"></td>

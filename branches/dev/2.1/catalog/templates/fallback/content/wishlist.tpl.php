@@ -164,13 +164,13 @@ $Id$
               <table border="0" width="100%" cellspacing="0" cellpadding="2">
                 <tr>
                   <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                  <td align="left" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=clear_wishlist', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_WISHLIST . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_wishlist.gif', 'Clear Wishlist'); ?></a>&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST_HELP) . '">' . tep_image_button('button_wishlist_help.gif', IMAGE_BUTTON_WISHLIST_HELP) . '</a>'; ?></td>
-                  <td align="right" class="main"><?php echo tep_image_submit('button_delete.gif', 'Delete From Wishlist', 'name="delete_prod" value="delete_prod"'); ?>&nbsp;
+                  <td align="left" class="main"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, 'action=clear_wishlist', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_WISHLIST . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_wishlist.gif', IMAGE_CLEAR_WISHLIST); ?></a>&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST_HELP) . '">' . tep_image_button('button_wishlist_help.gif', IMAGE_BUTTON_WISHLIST_HELP) . '</a>'; ?></td>
+                  <td align="right" class="main"><?php echo tep_image_submit('button_delete.gif', IMAGE_DELETE_WISHLIST, 'name="delete_prod" value="delete_prod"'); ?>&nbsp;
                   <?php
 				  if (BASKET_CART == 'cart') {
-				    echo tep_image_submit('button_in_cart.gif', 'Add to Cart', 'name="add_prod" value="add_prod"');
+				    echo tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART, 'name="add_prod" value="add_prod"');
 				  } else {
-					echo tep_image_submit('button_in_basket.gif', 'Add to Basket', 'name="add_prod" value="add_prod"');  
+					echo tep_image_submit('button_in_basket.gif', IMAGE_BUTTON_IN_BASKET, 'name="add_prod" value="add_prod"');  
 				  } ?></td>
                   <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                 </tr>

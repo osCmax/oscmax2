@@ -49,4 +49,7 @@ define('ERROR_MESSAGE', 'Please include a brief message.');
 define('WISHLIST_SECURITY_CHECK', 'Please complete this security question: ');
 define('WISHLIST_SECURITY_CHECK_ERROR', 'The Security Check code wasn\'t typed correctly. Try again.');
 define('CLEAR_WISHLIST', 'Are you sure you want to clear your entire wishlist?');
+
+define('IMAGE_CLEAR_WISHLIST', 'Clear Wishlist');
+define('IMAGE_DELETE_WISHLIST', 'Delete From Wishlist');
 ?>

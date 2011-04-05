@@ -40,5 +40,6 @@ define('TEXT_CROSS_SELL_ADD', 'Añadir');
 define('TEXT_CROSS_SELL_REMOVE', 'Quitar');
 define('TEXT_CROSS_SELL_SORT', 'Ordenar');
 define('TEXT_CROSS_SELL_ORDER', 'Orden - 1=Arriba');
-define('TEXT_SEARCH_XSELL', 'Buscar :');
+define('TEXT_SEARCH_XSELL', 'Buscar: ');
+define('TEXT_FILTER_XSELL', 'Filtrar: ');
 ?>

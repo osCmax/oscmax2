@@ -348,7 +348,7 @@ define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Los primeros cuatro digitos de su tarje
 define('WARNING_JAVASCRIPT_DISABLED', 'Alerta: Se ha detectado que tiene Javascript desactivado. Para conseguir una mejor experiencia debería activarlo. Si necesita ayuda con esto por favor <b>pulse aquí.</b>');
 define('WARNING_IE6_DETECTED', 'Advertencia: Se ha detectado que está usando Internet Explorer 6, cuya tecnología es obsoleta. Le recomendamos fervientemente que <b>actualice su navegador</b>. Pruebe con los navegadores más populares como <a href="http://www.microsoft.com/spain/windows/internet-explorer/default.aspx"><b>Internet Explorer</b></a>, <a href="http://www.mozilla-europe.org/es/firefox/"><b>Firefox</b></a> ó <a href="http://www.google.com/chrome?hl=es"><b>Chrome</b></a>');
 
-define('FOOTER_TEXT_BODY', 'Todo el contenido e imágenes Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a><br> Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCmax</a><br>Powered by <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
+define('FOOTER_TEXT_BODY', 'Todo el contenido e imágenes Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a><br> Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCmax</a><br>Desarrollado con <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
 
 
 // BOF: MOD - Checkout Without Account

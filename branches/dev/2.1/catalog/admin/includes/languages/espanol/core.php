@@ -20,9 +20,35 @@ define('BOX_HEADING_MY_ACCOUNT', 'Mi cuenta');
 
 // configuration box text in includes/boxes/administrator.php
 define('BOX_HEADING_ADMINISTRATOR', 'Administrador');
-define('BOX_ADMINISTRATOR_MEMBERS', 'Grupos de miembros');
+define('BOX_ADMINISTRATOR_MEMBERS', 'Miembros administración');
 define('BOX_ADMINISTRATOR_MEMBER', 'Miembros');
 define('BOX_ADMINISTRATOR_BOXES', 'Acceso a archivos');
+define('BOX_ADMIN_GROUPS', 'Grupos administración');
+define('BOX_MERCHANT_INFO', 'Aplicación Merchant');
+define('BOX_PAYPAL_INFO', 'Registro Paypal');
+
+// Filename defines for Admin Group Permissions - when file permission needed but not menu item.
+define('FILE_GC_DASHBOARD', '</b>Panel Google Checkout<b>');
+define('FILE_COUPON_RESTRICT', '</b>Restringir vales<b>');
+define('FILE_VALID_PRODUCTS', '</b>Productos válidos<b>');
+define('FILE_VALID_CATEGORIES', '</b>Categorías válidas<b>');
+define('FILE_LIST_PRODUCTS', '</b>Listar productos<b>');
+define('FILE_LIST_CATEGORIES', '</b>Listar categorías<b>');
+define('FILE_TREE_VIEW', '</b>Vista de árbol<b>');
+define('FILE_BANNER_STATISTICS', '</b>Fichero de estadísticas de banners<b>');
+define('FILE_STOCK', '</b>Fichero de existencias de productos<b>');
+define('FILE_NEW_ATTRIBUTES_CONFIG', '</b>Variables de configuración de atributos<b>'); 
+define('FILE_COMMON_REPORTS', '</b>Fichero de informes<b>');
+define('FILE_FEDEX', '</b>Fichero de Fedex<b>');
+define('FILE_AFFILIATE', '</b>Fichero de afiliados<b>');
+define('FILE_FEEDMACHINE', '</b>Fichero de Feedmachine<b>');
+define('FILE_EASYPOPULATE', '</b>Fichero de Easypopulate<b>');
+define('FILE_ATTRIBUTE', '</b>Fichero de atributos<b>');
+define('FILE_DISCOUNT_CATEGORIES', '</b>Fichero de categorías de descuento<b>');
+define('FILE_CREATE_ACCOUNT', '</b>Fichero de crear cuenta<b>');
+define('FILE_ORDER', '</b>Fichero de pedido<b>');
+define('FILE_PAYPAL', '</b>Fichero de PayPal<b>');
+define('FILE_INFORMATION', '</b>Fichero de páginas de información<b>');
 
 // images
 define('IMAGE_FILE_PERMISSION', 'Permisos de archivos');
@@ -176,6 +202,7 @@ define('BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES', 'Atributos de productos');
 define('BOX_CATALOG_MANUFACTURERS', 'Fabricantes');
 define('BOX_CATALOG_REVIEWS', 'Comentarios');
 define('BOX_CATALOG_SPECIALS', 'Ofertas');
+define('BOX_CATALOG_SPECIALS_BY_CAT', 'Ofertas por categoría');
 define('BOX_CATALOG_PRODUCTS_EXPECTED', 'Disponibles próximamente');
 // 2 LINES ADDED - EasyPopulate and Attrib Manager
 define('BOX_CATALOG_EASYPOPULATE', 'EasyPopulate');
@@ -413,6 +440,8 @@ define('IMAGE_UNLOCK', 'Desbloquear');
 define('IMAGE_UPDATE', 'Actualizar');
 define('IMAGE_UPDATE_CURRENCIES', 'Actualizar cambio monetario');
 define('IMAGE_UPLOAD', 'Subir');
+define('IMAGE_PREV_ORDER', 'Pedido anterior');
+define('IMAGE_NEXT_ORDER', 'Pedido siguiente');
 // BOF QPBPP for SPPC
 define('IMAGE_SHOW_PRODUCTS', 'Mostrar productos');
 // EOF QPBPP for SPPC
@@ -427,6 +456,9 @@ define('IMAGE_ORPHANS', 'Huérfanas');
 define('IMAGE_REGENERATE_ALL', 'Regenerar todas las imágenes de este producto');
 define('IMAGE_REGENERATE_EVERYTHING', 'Regenerar todas las imágenes');
 define('IMAGE_MC_SYNC', 'Sincronizar con MailChimp');
+define('IMAGE_HELP', 'Ayuda');
+define('IMAGE_LOGOFF', 'Cerrar sesión');
+define('IMAGE_MANAGE_ACCOUNT', 'Gestionar cuenta');
 
 define('ICON_CROSS', 'Falso');
 define('ICON_CURRENT_FOLDER', 'Carpeta actual');
@@ -576,7 +608,7 @@ define('TEXT_LOGGED_OUT', 'Cierre de sesión');
 define('TEXT_CONFIG_CHANGE', 'Cambio configuración: ');
 
 // Footer defines
-define('TEXT_POWERED_BY', 'Realizado con ');
+define('TEXT_POWERED_BY', 'Desarrollado con ');
 define('TEXT_SECURITY', 'Seguridad: ');
 define('TEXT_REPORT_BUGS', 'Informar acerca de errores');
 define('TEXT_FORUM', 'Foros');

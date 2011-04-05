@@ -28,4 +28,7 @@ define('OUT_OF_STOCK_CANT_CHECKOUT', 'Products marked with ' . STOCK_MARK_PRODUC
 define('OUT_OF_STOCK_CAN_CHECKOUT', 'Products marked with ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' don\'t exist in desired quantity in our stock. You can buy them anyway and check the quantity we have in stock for immediate delivery in the checkout process.');
 define('TEXT_ALTERNATIVE_CHECKOUT_METHODS', '- OR -');
 define('CLEAR_CART', 'Are you sure you want to clear your entire cart?');
+
+define('IMAGE_CLEAR_CART', 'Clear Cart');
+define('IMAGE_CLEAR_BASKET', 'Clear Basket');
 ?>

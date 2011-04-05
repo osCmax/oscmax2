@@ -192,9 +192,9 @@ $Id$
                     <td class="main" align="left">
 					<?php 
 					if (BASKET_CART =='cart') { 
-					  echo '<a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'action=clear_cart', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_CART . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_cart.gif', 'Clear Cart'); 
+					  echo '<a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'action=clear_cart', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_CART . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_cart.gif', IMAGE_CLEAR_CART); 
 					} else {
-					  echo '<a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'action=clear_cart', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_CART . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_basket.gif', 'Clear Basket');	
+					  echo '<a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'action=clear_cart', 'SSL') . '" onClick="var x=confirm(\'' . CLEAR_CART . '\'); if (x==false) { return false; }">' . tep_image_button('button_clear_basket.gif', IMAGE_CLEAR_BASKET);	
 					}
 					?>
                     </a></td>

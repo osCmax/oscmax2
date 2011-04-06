@@ -1,0 +1,20 @@
+<?php
+/*
+$Id: affiliate_signup_ok.php 14 2006-07-28 17:42:07Z user $
+
+  OSC-Affiliate
+
+  Contribution based on:
+
+  osCMax Power E-Commerce
+  http://oscdox.com
+
+  Copyright 2006 osCMax
+
+  Released under the GNU General Public License
+*/
+
+define('NAVBAR_TITLE', 'Affiliate Signup');
+define('HEADING_TITLE', 'Congratulations!');
+define('TEXT_ACCOUNT_CREATED', 'Congratulations! Your new Affiliate account application has been submitted! You will shortly receive an email containing important information regarding your Affiliate Account, including you affiliate login details. If you have not received it within the hour, please <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">contact us</a>.<br><br>If you have <small><b>ANY</b></small> questions about the affiliate program, please <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">contact us</a>.');
+?>

@@ -1,0 +1,84 @@
+/* ----------------- coolMenu ----------------- */
+
+.clCMEvent{
+	position:absolute;
+	width:99%; height:99%;
+	clip:rect(0,100%,100%,0);
+	left:0; 
+	top:0;
+	visibility:visible
+}
+
+
+.clCMAbs{
+	position:absolute;
+	visibility:hidden;
+	left:0;
+	top:0;
+}
+
+.clBar{
+	position:absolute;
+	width:10;
+	height:10;
+	background-color:#ffffff;
+	layer-background-color:#ffffff;
+	visibility:hidden;
+}
+
+.clLevel0,.clLevel0over{
+	position:absolute;
+	padding:1px;
+	font-family:Verdana,arial,helvetica;
+	font-size:10px;
+}
+
+.clLevel0{
+	background-color:#ffffff;
+	layer-background-color:#ffffff;
+	color:#000000;
+}
+
+.clLevel0over{
+	background-color:#bbc3d3;
+	layer-background-color:#bbc3d3;
+	color:#ffffff;
+	cursor:pointer;
+	cursor:hand;
+}
+
+.clLevel0border{
+	position:absolute;
+	visibility:hidden;
+	background-color:#c0c0c0;
+	layer-background-color:white;
+}
+
+.clLevel1, .clLevel1over{
+	position:absolute;
+	padding:2px;
+	font-family:Verdana,arial,helvetica;
+	font-size:10px;
+}
+
+.clLevel1{
+	background-color:#ffffff;
+	layer-background-color:#ffffff;
+	color:#000000;
+}
+
+.clLevel1over{
+	background-color:#bbc3d3;
+	layer-background-color:#bbc3d3;
+	color:#ffffff;
+	cursor:pointer;
+	cursor:hand;
+}
+
+.clLevel1border{
+	position:absolute;
+	visibility:hidden;
+	background-color:#c0c0c0;
+	layer-background-color:white;
+}
+/* ----------------- coolMenu_eof ----------------- */

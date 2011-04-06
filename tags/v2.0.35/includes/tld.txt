@@ -1,0 +1,61 @@
+$Id: tld.txt 3 2006-05-27 04:59:07Z user $
+#
+# osCommerce, Open Source E-Commerce Solutions
+# http://www.oscommerce.com
+#
+# Copyright 2006 osCMax
+#
+# Released under the GNU General Public License
+#
+# Original 7 TLDs
+com     # all are eligible to register
+edu     # degree-granting educational institutions of higher education
+gov     # United States Government
+int     # organizations established by international treaties
+mil     # United States Military
+net     # all are eligible to register
+org     # noncommercial community, all are eligible to register
+
+# Recent additions
+aero    # members of the air-transport industry
+biz     # businesses
+coop    # cooperative associations
+info    # all are eligible to register
+museum  # museums
+name    # individuals
+pro     # credentialed professionals
+mobi    # mobile phone sites (wap)
+uk      # United Kingdom TLDs
+us      # United States TLD
+tv      # used by sites with connections to Television.  Actually top-level domain for Tu Valu
+asia    # used by sites trading in Asia
+in      # used by sites trading in India
+eu      # used by sites trading within the European Union
+me      # used by personal websites
+tw      # Taiwan
+nu      # ????
+nl      # Netherlands
+de      # Germany
+fr      # France
+at      # Austria
+ac      # ???
+am      # ???
+ms      # ???
+it      # Italy
+be      # Belgium
+bz      # Brazil
+ca      # Canada
+cc      # ???
+cn      # China
+sh      # ???
+tc      # ???
+tm      # Trademark
+fm      # ???
+gs      # ???
+io      # ???
+ie      # Ireland
+jp      # Japan
+vg      # ???
+la      # ???
+ws      # ???
+se      # Sweden

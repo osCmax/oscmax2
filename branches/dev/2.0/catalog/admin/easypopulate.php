@@ -11,7 +11,7 @@
 */
 
 // Current EP Version
-define ('EP_CURRENT_VERSION', '2.76i-MS2');
+define ('EP_CURRENT_VERSION', '2.76i-osCmax');
 
 require('includes/application_top.php');
 require_once('includes/database_tables.php');
@@ -354,7 +354,13 @@ define ('EP_HTC_SUPPORT', false);  // default is false
 
 // Separate Pricing Per Customer (SPPC) v4.1.x
 define ('EP_SPPC_SUPPORT', true);  // default is false
-
+    // BOF: Extended Customer Groups - ejsolutions.co.uk
+// define ('EP_CUSTOMER_GROUPS_MAX', 4); // default is 4
+        $ep_customer_groups_query = tep_db_query("select count(*) as total from " . TABLE_CUSTOMERS_GROUPS);
+        $ep_customer_groups = tep_db_fetch_array($ep_customer_groups_query);
+define ('EP_CUSTOMER_GROUPS_MAX', $ep_customer_groups['total']);
+    // EOF: Extended Customer Groups - ejsolutions.co.uk
+    
 // X-Sell 2.6 Support
 define ('EP_XSELL_SUPPORT', false);  // default is false
 
@@ -1777,32 +1783,24 @@ function ep_create_filelayout($dltype, $attribute_options_array, $languages, $cu
     }
     
     if (EP_SPPC_SUPPORT == true) { 
+    // BOF: Extended customer Groups - ejsolutions.co.uk
       if (!empty($_GET['epcust_specials_price'])) { 
-      $ep_additional_layout_pricing .= '$filelayout[\'v_customer_price_1\'] = $iii++;
-                                        $filelayout[\'v_customer_specials_price_1\'] = $iii++;
-                                        $filelayout[\'v_customer_group_id_1\'] = $iii++;
-                                        $filelayout[\'v_customer_price_2\'] = $iii++;
-                                        $filelayout[\'v_customer_specials_price_2\'] = $iii++;
-                                        $filelayout[\'v_customer_group_id_2\'] = $iii++;
-                                        $filelayout[\'v_customer_price_3\'] = $iii++;
-                                        $filelayout[\'v_customer_specials_price_3\'] = $iii++;
-                                        $filelayout[\'v_customer_group_id_3\'] = $iii++;
-                                        $filelayout[\'v_customer_price_4\'] = $iii++;
-                                        $filelayout[\'v_customer_specials_price_4\'] = $iii++;
-                                        $filelayout[\'v_customer_group_id_4\'] = $iii++;
+	  for ($i=1;$i<=EP_CUSTOMER_GROUPS_MAX-1;$i++) {      
+      $ep_additional_layout_pricing .= '$filelayout[\'v_customer_price_'.$i.'\'] = $iii++;
+                                        $filelayout[\'v_customer_specials_price_'.$i.'\'] = $iii++;
+                                        $filelayout[\'v_customer_group_id_'.$i.'\'] = $iii++;
                                         ';
+           }
       } else {
-      $ep_additional_layout_pricing .= '$filelayout[\'v_customer_price_1\'] = $iii++;
-                                        $filelayout[\'v_customer_group_id_1\'] = $iii++;
-                                        $filelayout[\'v_customer_price_2\'] = $iii++;
-                                        $filelayout[\'v_customer_group_id_2\'] = $iii++;
-                                        $filelayout[\'v_customer_price_3\'] = $iii++;
-                                        $filelayout[\'v_customer_group_id_3\'] = $iii++;
-                                        $filelayout[\'v_customer_price_4\'] = $iii++;
-                                        $filelayout[\'v_customer_group_id_4\'] = $iii++;
+	  for ($i=1;$i<=EP_CUSTOMER_GROUPS_MAX-1;$i++) {       
+      $ep_additional_layout_pricing .= '$filelayout[\'v_customer_price_'.$i.'\'] = $iii++;
+                                        $filelayout[\'v_customer_group_id_'.$i.'\'] = $iii++;
                                         ';
+	  }
       }
+     // EOF: Extended customer Groups - ejsolutions.co.uk
     }
+    
     if (EP_HTC_SUPPORT == true) {
       $ep_additional_layout_product_description .= '$filelayout[\'v_products_head_title_tag_\'.$lang[\'id\']]    = $iii++;
                                                     $filelayout[\'v_products_head_desc_tag_\'.$lang[\'id\']]     = $iii++;
@@ -3268,54 +3266,25 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                     products_id = ' . $v_products_id
                                 );
                     // and insert the new record
-                    if ($v_customer_price_1 != ''){
-                        $result = tep_db_query('
+                    // BOF: Extended customer Groups - ejsolutions.co.uk
+	  	    for ($i=1;$i<=EP_CUSTOMER_GROUPS_MAX-1;$i++) {      
+			$customer_price_var = 'v_customer_price_'.$i;
+			$customer_group_id_var = 'v_customer_group_id_'.$i;
+                    	if ($$customer_price_var != ''){
+                         $result = tep_db_query('
                                     INSERT INTO
                                         '.TABLE_PRODUCTS_GROUPS.'
                                     VALUES
                                     (
-                                        ' . $v_customer_group_id_1 . ',
-                                        ' . $v_customer_price_1 . ',
-                                        ' . $v_products_id . '
+                                        ' . $$customer_group_id_var . ',
+                                        ' . $$customer_price_var . ',
+                                        ' . $v_products_id . ' ,
+                                        ' . $v_products_price . '
                                         )'
-                                    );
+                          );
+                    	}
                     }
-                    if ($v_customer_price_2 != ''){
-                        $result = tep_db_query('
-                                    INSERT INTO
-                                        '.TABLE_PRODUCTS_GROUPS.'
-                                    VALUES
-                                    (
-                                        ' . $v_customer_group_id_2 . ',
-                                        ' . $v_customer_price_2 . ',
-                                        ' . $v_products_id . '
-                                        )'
-                                    );
-                    }
-                    if ($v_customer_price_3 != ''){
-                        $result = tep_db_query('
-                                    INSERT INTO
-                                        '.TABLE_PRODUCTS_GROUPS.'
-                                    VALUES
-                                    (
-                                        ' . $v_customer_group_id_3 . ',
-                                        ' . $v_customer_price_3 . ',
-                                        ' . $v_products_id . '
-                                        )'
-                                    );
-                    }
-                    if ($v_customer_price_4 != ''){
-                        $result = tep_db_query('
-                                    INSERT INTO
-                                        '.TABLE_PRODUCTS_GROUPS.'
-                                    VALUES
-                                    (
-                                        ' . $v_customer_group_id_4 . ',
-                                        ' . $v_customer_price_4 . ',
-                                        ' . $v_products_id . '
-                                        )'
-                                    );
-                    }
+                    // EOF: Extended customer Groups - ejsolutions.co.uk
 
                     if (isset($v_customer_specials_price_1)) {
                     $result = tep_db_query('select * from '.TABLE_SPECIALS.' WHERE products_id = ' . $v_products_id . ' and customers_group_id = 1' );

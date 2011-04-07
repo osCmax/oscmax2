@@ -251,7 +251,7 @@ $Id:$
        
         <tr>
           <td valign="top"> 
-          <form action="<?php echo $form_string . '&amp;message=submitted'; ?>" method="POST">
+          <form action="<?php echo $current_page . '?categories=' . $categories . '&amp;manufacturer=' . $manufacturer . '&amp;message=submitted'; ?>" method="POST">
             <table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent" valign="bottom"><?php echo TABLE_HEADING_PRODUCTS; ?></td>

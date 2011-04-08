@@ -11,6 +11,7 @@ $Id$
 */
 
   require('includes/application_top.php');
+  include('includes/languages/' . $language . '/configuration.php');
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
   
@@ -126,9 +127,22 @@ $Id$
 			      $config_id = str_replace("Config Change: ", "", $logging['type']);
 			      $cfg_group_query = tep_db_query("select configuration_title, configuration_description, configuration_group_id from " . TABLE_CONFIGURATION . " where configuration_id = '" . (int)$config_id . "'");
                   $cfg_group = tep_db_fetch_array($cfg_group_query);
+				  
+				  if (constant($cfg_group['configuration_title'])) {
+				    $title = constant($cfg_group['configuration_title']);
+				  } else {
+				    $title = $cfg_group['configuration_title'];
+				  }
+				  
+				  if (constant($cfg_group['configuration_description'])) {
+				    $description = constant($cfg_group['configuration_description']);
+				  } else {
+				    $description = $cfg_group['configuration_description'];
+				  }
+				  
 			      ?>
                   <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $cfg_group['configuration_group_id']) . '&amp;cID=' . (int)$config_id . '">' . tep_image(DIR_WS_ICONS . 'page_white_edit.png', ''); ?></a></td>
-				  <td class="dataTableContent"><?php echo '<span title="' . $cfg_group['configuration_title'] . '|' . strip_tags($cfg_group['configuration_description'], '<p><br><b>') . '">' . TEXT_CONFIG_CHANGE . $config_id; ?></span></td>
+				  <td class="dataTableContent"><?php echo '<span title="' . $title . '|' . strip_tags($description, '<p><br><b>') . '">' . TEXT_CONFIG_CHANGE . $config_id; ?></span></td>
                 <?php 
 				} // end if
 			    ?>

@@ -11,6 +11,7 @@ $Id$
 */
 
   require('includes/application_top.php');
+  include('includes/languages/' . $language . '/configuration.php');
 
   // *** BEGIN GOOGLE CHECKOUT ***
   require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/modules1.php');
@@ -220,7 +221,7 @@ $Id$
       $keys = '';
       reset($mInfo->keys);
       while (list($key, $value) = each($mInfo->keys)) {
-        $keys .= '<b>' . $value['title'] . '</b><br>' . $value['description'] . '<br>';
+        $keys .= '<b>' . constant($value['title']) . '</b><br>' . constant($value['description']) . '<br>';
 
         if ($value['set_function']) {
           eval('$keys .= ' . $value['set_function'] . "'" . $value['value'] . "', '" . $key . "');");
@@ -244,7 +245,7 @@ $Id$
         $keys = '';
         reset($mInfo->keys);
         while (list(, $value) = each($mInfo->keys)) {
-          $keys .= '<b>' . $value['title'] . '</b><br>';
+          $keys .= '<b>' . constant($value['title']) . '</b><br>';
           if ($value['use_function']) {
             $use_function = $value['use_function'];
             if (preg_match('/->/', $use_function)) {

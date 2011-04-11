@@ -28,4 +28,7 @@ define('OUT_OF_STOCK_CANT_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOC
 define('OUT_OF_STOCK_CAN_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' markierten Produkte, sind leider nicht in ausreichender Menge lagernd.<br>Sie kÃ¶nnen die Bestellung dennoch durchführen und die verfügbare Menge für eine prompte Lieferung bei Bestellungsabschluss anpassen.');
 define('TEXT_ALTERNATIVE_CHECKOUT_METHODS', '- ODER -');
 define('CLEAR_CART', 'Sind Sie sicher, dass Sie Ihren gesamten Warenkorb leeren mÃ¶chten?');
+
+define('IMAGE_CLEAR_CART', 'Warenkorb leeren');
+define('IMAGE_CLEAR_BASKET', 'Warenkorb leeren');
 ?>

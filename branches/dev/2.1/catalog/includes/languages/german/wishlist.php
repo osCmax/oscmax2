@@ -49,4 +49,7 @@ define('ERROR_MESSAGE', 'Bitte verfassen Sie eine kurze Nachricht.');
 define('WISHLIST_SECURITY_CHECK', 'Bitte vervollständingen Sie die Sicherheitsabfrage: ');
 define('WISHLIST_SECURITY_CHECK_ERROR', 'Die Sicherheitsabfrage wurde nicht korrekt beantwortet. Bitte versuchen Sie es noch einmal.');
 define('CLEAR_WISHLIST', 'Möchten Sie wirklich Ihre gesamte Wunschliste leeren?');
+
+define('IMAGE_CLEAR_WISHLIST', 'Wunschliste leeren');
+define('IMAGE_DELETE_WISHLIST', 'Von der Wunschliste löschen');
 ?>

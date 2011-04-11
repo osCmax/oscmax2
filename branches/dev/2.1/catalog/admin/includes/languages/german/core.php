@@ -20,9 +20,35 @@ define('BOX_HEADING_MY_ACCOUNT', 'Mein Konto');
 
 // configuration box text in includes/boxes/administrator.php
 define('BOX_HEADING_ADMINISTRATOR', 'Administrator');
-define('BOX_ADMINISTRATOR_MEMBERS', 'Verwaltungsgruppen');
+define('BOX_ADMINISTRATOR_MEMBERS', 'Verwaltungsmitglieder');
 define('BOX_ADMINISTRATOR_MEMBER', 'Mitglieder');
 define('BOX_ADMINISTRATOR_BOXES', 'Boxmenü');
+define('BOX_ADMIN_GROUPS', 'Verwaltungsgruppen');
+define('BOX_MERCHANT_INFO', 'Merchant Application');
+define('BOX_PAYPAL_INFO', 'Paypal Anmeldung');
+
+// Filename defines for Admin Group Permissions - when file permission needed but not menu item.
+define('FILE_GC_DASHBOARD', '</b>Google Checkout Dashboard<b>');
+define('FILE_COUPON_RESTRICT', '</b>Kouponbeschränkung<b>');
+define('FILE_VALID_PRODUCTS', '</b>Gültige Produkte<b>');
+define('FILE_VALID_CATEGORIES', '</b>Gültige Kategorien<b>');
+define('FILE_LIST_PRODUCTS', '</b>Produkte auflisten<b>');
+define('FILE_LIST_CATEGORIES', '</b>Katekorien auflisten<b>');
+define('FILE_TREE_VIEW', '</b>Baumdarstellung<b>');
+define('FILE_BANNER_STATISTICS', '</b>Bannerstatistikdatei<b>');
+define('FILE_STOCK', '</b>Lagerstandsdatei<b>');
+define('FILE_NEW_ATTRIBUTES_CONFIG', '</b>Attributkonfigurationsvariablen<b>'); 
+define('FILE_COMMON_REPORTS', '</b>Berichtedatei<b>');
+define('FILE_FEDEX', '</b>Fedexdatei<b>');
+define('FILE_AFFILIATE', '</b>Affiliatedatei<b>');
+define('FILE_FEEDMACHINE', '</b>Feedmachinedatei<b>');
+define('FILE_EASYPOPULATE', '</b>Easypopulatedatei<b>');
+define('FILE_ATTRIBUTE', '</b>Attributedatei<b>');
+define('FILE_DISCOUNT_CATEGORIES', '</b>Rabattierte-Kategorien-Datei<b>');
+define('FILE_CREATE_ACCOUNT', '</b>Konto-erstellen-Datei<b>');
+define('FILE_ORDER', '</b>Bestellungsdatei<b>');
+define('FILE_PAYPAL', '</b>PayPaldatei<b>');
+define('FILE_INFORMATION', '</b>Informationsseitendatei<b>');
 
 // images
 define('IMAGE_FILE_PERMISSION', 'Dateiberechtigungen');
@@ -239,6 +265,7 @@ define('BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES', 'Produktattribute');
 define('BOX_CATALOG_MANUFACTURERS', 'Hersteller');
 define('BOX_CATALOG_REVIEWS', 'Bewertungen');
 define('BOX_CATALOG_SPECIALS', 'Sonderangebote');
+define('BOX_CATALOG_SPECIALS_BY_CAT', 'Sonderangebote nach Kategorie');
 define('BOX_CATALOG_PRODUCTS_EXPECTED', 'Künftige Produkte');
 // 2 LINES ADDED - EasyPopulate and Attrib Manager
 define('BOX_CATALOG_EASYPOPULATE', 'EasyPopulate');
@@ -476,6 +503,9 @@ define('IMAGE_ORPHANS', 'Verwaist');
 define('IMAGE_REGENERATE_ALL', 'Alle Bilder zu diesem Produkt regenerieren');
 define('IMAGE_REGENERATE_EVERYTHING', 'Alle Bilder regenerieren');
 define('IMAGE_MC_SYNC', 'Mit MailChimp synchronisieren');
+define('IMAGE_HELP', 'Hilfe');
+define('IMAGE_LOGOFF', 'Abmelden');
+define('IMAGE_MANAGE_ACCOUNT', 'Konto verwalten');
 
 define('ICON_CROSS', 'Falsch');
 define('ICON_CURRENT_FOLDER', 'Aktueller Ordner');

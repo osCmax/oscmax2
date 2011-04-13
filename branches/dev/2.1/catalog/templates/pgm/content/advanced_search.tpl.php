@@ -34,7 +34,7 @@
           <tr>
             <td><table border="0" width="100%" cellspacing="0" cellpadding="3" class="infoBoxContents">
               <tr>
-                <td><img src="images/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
+                <td><img src="images/icons/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
               </tr>
               <tr>
                 <td class="boxText"><?php echo tep_draw_input_field('keywords', '', 'style="width: 100%"'); ?></td>
@@ -43,7 +43,7 @@
                 <td align="right" class="boxText"><?php echo tep_draw_checkbox_field('search_in_description', '1') . ' ' . TEXT_SEARCH_IN_DESCRIPTION; ?></td>
               </tr>
               <tr>
-                <td><img src="images/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
+                <td><img src="images/icons/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
               </tr>
             </table></td>
           </tr>

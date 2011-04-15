@@ -11,7 +11,7 @@ $Id$
 */
 ?>
 <!-- PGM fix for Corner Banners in Internet Explorer -->
-<!--[if IE]>
+<!--[if lte IE 8]>
 <style>
 img.corner_banner { display:inline-block; margin-left:-7px; margin-top:-7px; position:absolute; } 
 </style>

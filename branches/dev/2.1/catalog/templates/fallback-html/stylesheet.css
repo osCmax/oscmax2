@@ -182,7 +182,7 @@ TD.featuredProducts A:hover, TD.featuredCategories A:hover, TD.featuredManufactu
 .saving { font-family: Arial, Verdana,  sans-serif; color: #ff0000; font-size: 12px; font-weight: bold;  }
 .pricenow { font-family: Arial, Verdana,  sans-serif; color: #000000; font-size: 14px; font-weight: bold;  }
 .SavingsPercent  { color: red; font-size: 10px; font-weight: bold }
-.oldPrice { font-family: Arial, Verdana,  sans-serif; text-decoration: line-thorough; color: #ff0000; font-size: 12px; font-weight: bold}
+.oldPrice { font-family: Arial, Verdana,  sans-serif; text-decoration: line-through; color: #ff0000; font-size: 12px; font-weight: bold}
 .oldPriceBIG { font-family: Arial, Verdana,  sans-serif; text-decoration: none; color: #ff0000; font-size: 12px; font-weight: bold}
 .PriceListBIG  { font-family: Arial, Verdana,  sans-serif; color: #006600; font-size: 12px; font-weight: bold; }
 .pricenowBIG { font-family: Arial, Verdana,  sans-serif; color: #000000; font-size: 18px; font-weight: bold;  }

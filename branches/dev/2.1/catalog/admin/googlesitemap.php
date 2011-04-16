@@ -105,13 +105,9 @@ $Id$
                         <p><?php echo INSTRUCTIONS_STEP2_GOOGLE_SITEMAPS; ?></p>
                         <center>
                         <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(google); ?>" title="<?php echo TEXT_GOOGLE_PING; ?>"><?php echo tep_image_button('button_google.gif', IMAGE_PING); ?></a>
-                        <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(ask); ?>" title="<?php echo TEXT_ASK_PING; ?>"><?php echo tep_image_button('button_ask.gif', IMAGE_PING); ?></a>
+                        <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(ask); ?>" title="<?php echo TEXT_ASK_PING; ?>"><?php echo tep_image_button('button_ask_jeeves.gif', IMAGE_PING); ?></a>
                         <a target="_blank" href="<?php echo $returned_url = GenerateSubmitURL(bing); ?>" title="<?php echo TEXT_BING_PING; ?>"><?php echo tep_image_button('button_bing.gif', IMAGE_PING); ?></a>
                         </center>
-                        </div>
-                        
-                        <div id="complete">
-                        <p><?php echo COMPLETE_GOOGLE_SITEMAPS; ?></p>
                         </div>
                       </td>
                     </tr>
@@ -151,7 +147,7 @@ $(document).ready(function() {
 				width: 700,
 				height: 400,
 				modal: true,
-				buttons: { "Ok": function() { $(this).dialog("close"); $('#ping').show(); } }
+				buttons: { "Ok": {  text: '<?php echo TEXT_CONTINUE; ?>', click: function() { $(this).dialog("close"); $('#ping').show(); } } }
 			});
 
 		$link.click(function() {

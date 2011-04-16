@@ -150,17 +150,18 @@ require_once('sitemap.class.php');
 
 $google = new GoogleSitemap(DB_SERVER, DB_SERVER_USERNAME, DB_DATABASE, DB_SERVER_PASSWORD);
 $submit = true;
-echo '<pre>';
+
+echo '<p class="main">';
 
 if ($google->GenerateProductSitemap()){
 
-	echo GOOGLE_SITEMAPS_PRODUCT_SUCCESS . "\n\n";
+	echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK) . '&nbsp;' . GOOGLE_SITEMAPS_PRODUCT_SUCCESS . "<br><br>";
 
 } else {
 
 	$submit = false;
 
-	echo GOOGLE_SITEMAPS_PRODUCT_ERROR . "\n\n";
+	echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS) . '&nbsp;' . GOOGLE_SITEMAPS_PRODUCT_ERROR . "<br><br>";
 
 }
 
@@ -168,50 +169,46 @@ if ($google->GenerateProductSitemap()){
 
 if ($google->GenerateCategorySitemap()){
 
-	echo GOOGLE_SITEMAPS_CATEGORY_SUCCESS . "\n\n";
+	echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK) . '&nbsp;' . GOOGLE_SITEMAPS_CATEGORY_SUCCESS . "<br><br>";
 
 } else {
 
 	$submit = false;
 
-	echo GOOGLE_SITEMAPS_CATEGORY_ERROR . "\n\n";
+	echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS) . '&nbsp;' . GOOGLE_SITEMAPS_CATEGORY_ERROR . "<br><br>";
 
 }
 
 
 
 if ($google->GenerateSitemapIndex()){
-	echo GOOGLE_SITEMAPS_INDEX_SUCCESS . "\n\n";
+	echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK) . '&nbsp;' . '&nbsp;' . GOOGLE_SITEMAPS_INDEX_SUCCESS . "<br><br>";
 
 } else {
 
 	$submit = false;
 
-	echo GOOGLE_SITEMAPS_INDEX_ERROR . "\n\n";
+	echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS) . '&nbsp;' . GOOGLE_SITEMAPS_INDEX_ERROR . "<br><br>";
 
 }
 
 
 
-if ($submit){
+if ($submit) {
 
-	echo GOOGLE_SITEMAPS_CONGRATULATION . "\n\n";
+	echo '<b>' . GOOGLE_SITEMAPS_CONGRATULATION . "</b><br><br>";
 
-	echo GOOGLE_SITEMAPS_ALREADY_SUBMITTED . "\n";
+	echo GOOGLE_SITEMAPS_HIGHLY_RECCOMMEND . "<br><br>";
 
-	echo GOOGLE_SITEMAPS_HIGHLY_RECCOMMEND . "\n\n";
+	echo GOOGLE_SITEMAPS_HERE_INDEX . '<a href="' . $google->base_url . 'sitemapindex.xml" target="_blank">' .  $google->base_url . 'sitemapindex.xml' . "</a><br>";
 
-	echo $google->GenerateSubmitURL() . "\n\n";
+	echo GOOGLE_SITEMAPS_HERE_PRODUCT . '<a href="' . $google->base_url . 'sitemapproducts.xml" target="_blank">' . $google->base_url . 'sitemapproducts.xml' . "</a><br>";
 
-	echo GOOGLE_SITEMAPS_CONVENIENCE . "\n";
+	echo GOOGLE_SITEMAPS_HERE_CATEGORY . '<a href="' . $google->base_url . 'sitemapcategories.xml" target="_blank">' . $google->base_url . 'sitemapcategories.xml' . "</a><br><br><br>";
 
-	echo 'php ' . dirname($_SERVER['SCRIPT_FILENAME']) . '/sitemaps.index.php' . "\n\n";
+	echo GOOGLE_SITEMAPS_CONVENIENCE . "<br>";
 
-	echo GOOGLE_SITEMAPS_HERE_INDEX . $google->base_url . 'sitemapindex.xml' . "\n";
-
-	echo GOOGLE_SITEMAPS_HERE_PRODUCT . $google->base_url . 'sitemapproducts.xml' . "\n";
-
-	echo GOOGLE_SITEMAPS_HERE_CATEGORY . $google->base_url . 'sitemapcategories.xml' . "\n";
+	echo 'php ' . dirname($_SERVER['SCRIPT_FILENAME']) . '/sitemaps.index.php' . "<br><br>";
 
 } else {
 
@@ -219,9 +216,7 @@ if ($submit){
 
 }
 
-
-
-echo '</pre>';
+echo '</p>';
 
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -232,4 +227,4 @@ echo '</pre>';
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body bgcolor="#FFFFFF">

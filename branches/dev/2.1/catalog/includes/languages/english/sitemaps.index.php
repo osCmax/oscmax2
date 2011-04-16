@@ -10,18 +10,17 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('GOOGLE_SITEMAPS_PRODUCT_SUCCESS', 'Generated Google Product Sitemap Successfully');
-define('GOOGLE_SITEMAPS_PRODUCT_ERROR', 'ERROR: Google Product Sitemap Generation FAILED!');
-define('GOOGLE_SITEMAPS_CATEGORY_SUCCESS', 'Generated Google Category Sitemap Successfully');
-define('GOOGLE_SITEMAPS_CATEGORY_ERROR', 'ERROR: Google Category Sitemap Generation FAILED!');
-define('GOOGLE_SITEMAPS_INDEX_SUCCESS', 'Generated Google Sitemap Index Successfully');
-define('GOOGLE_SITEMAPS_INDEX_ERROR', 'ERROR: Google Sitemap Index Generation FAILED!');
+define('GOOGLE_SITEMAPS_PRODUCT_SUCCESS', 'Generated Product Sitemap Successfully');
+define('GOOGLE_SITEMAPS_PRODUCT_ERROR', 'ERROR: Product Sitemap Generation FAILED!');
+define('GOOGLE_SITEMAPS_CATEGORY_SUCCESS', 'Generated Category Sitemap Successfully');
+define('GOOGLE_SITEMAPS_CATEGORY_ERROR', 'ERROR: Category Sitemap Generation FAILED!');
+define('GOOGLE_SITEMAPS_INDEX_SUCCESS', 'Generated Sitemap Index Successfully');
+define('GOOGLE_SITEMAPS_INDEX_ERROR', 'ERROR: Sitemap Index Generation FAILED!');
 define('GOOGLE_SITEMAPS_CONGRATULATION', 'CONGRATULATIONS! All files generated successfully.');
-define('GOOGLE_SITEMAPS_ALREADY_SUBMITTED', 'If you have not already submitted the sitemap index to Google click the link below.');
-define('GOOGLE_SITEMAPS_HIGHLY_RECCOMMEND', 'Before you do I HIGHLY recommend that you view the XML files to make sure the data is correct.');
+define('GOOGLE_SITEMAPS_HIGHLY_RECCOMMEND', 'Before you submit your sitemap it is HIGHLY recommended check that the XML data is correct.');
 define('GOOGLE_SITEMAPS_CONVENIENCE', 'For your convenience here is the CRON command for your site:');
-define('GOOGLE_SITEMAPS_HERE_INDEX', 'Here is your sitemap index: ');
-define('GOOGLE_SITEMAPS_HERE_PRODUCT', 'Here is your product sitemap: ');
-define('GOOGLE_SITEMAPS_HERE_CATEGORY', 'Here is your category sitemap: ');
+define('GOOGLE_SITEMAPS_HERE_INDEX', '<b>Sitemap index: </b>');
+define('GOOGLE_SITEMAPS_HERE_PRODUCT', '<b>Product sitemap: </b>');
+define('GOOGLE_SITEMAPS_HERE_CATEGORY', '<b>Category sitemap: </b>');
 
 ?>

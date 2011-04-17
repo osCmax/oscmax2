@@ -347,14 +347,7 @@ $Id$
             <td class="pageHeading" align="right">&nbsp;</td>
             <td class="pageHeading"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, 'pID=' . $pInfo->affiliate_payment_id. '&amp;action=start_billing' ) . '">' . tep_image_button('button_affiliate_billing.gif', IMAGE_AFFILIATE_BILLING) . '</a>'; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
-            <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="smallText" align="right"><?php echo tep_draw_form('orders', FILENAME_AFFILIATE_PAYMENT, '', 'get'); ?><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('sID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?></form></td>
-              </tr>
-              <tr>
-                <td class="smallText" align="right"><?php echo tep_draw_form('status', FILENAME_AFFILIATE_PAYMENT, '', 'get'); ?><?php echo HEADING_TITLE_STATUS . ' ' . tep_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_PAYMENTS)), $payments_statuses), '', 'onChange="this.form.submit();"'); ?></form></td>
-              </tr>
-            </table></td>
+            <td class="smallText" align="right"><?php echo tep_draw_form('status', FILENAME_AFFILIATE_PAYMENT, '', 'get'); ?><?php echo HEADING_TITLE_STATUS . ' ' . tep_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_PAYMENTS)), $payments_statuses), '', 'onChange="this.form.submit();"'); ?></form>&nbsp;&nbsp;<?php echo tep_draw_form('orders', FILENAME_AFFILIATE_PAYMENT, '', 'get'); ?><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('sID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?></form></td>
           </tr>
         </table></td>
       </tr>

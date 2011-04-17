@@ -76,29 +76,36 @@ $pdf->setLineStyle(0.5);
 $pdf->Rectangle(390,793,175,20);
 $y = $pdf->ezText("<b>" . str_replace($vilains , $cools , TEXT_ORDER_NUMBER) . " </b>" . $orders['orders_prefix'] . $orders['orders_id'] ."\n\n",SUB_HEADING_FONT_SIZE, array('aleft'=>'400'));
 
-
-    //Add in the order totals
-    $totalsx = 390; 
-    $totalsy = 230;
-	
-	for ($j = 0, $n = sizeof($order->totals); $j < $n; $j++) {
-		$totaltext = str_replace($vilains , $cools ,$order->totals[$j]['title']);
-		$fullstop = stripos($totaltext, ".");
-		
-		if ($fullstop != '0') {
-		  $totaltext = substr($totaltext, 0, $fullstop);
-		  $totaltext .= ":";
-		} 
-		
-	  $pdf->addText ($totalsx, $totalsy -= PRODUCT_TOTALS_LEADING,PRODUCT_TOTALS_FONT_SIZE,"<b>" . $totaltext . "</b>");
-      $pdf->addText(506,$totalsy,PRODUCT_TOTALS_FONT_SIZE,$order->totals[$j]['text'], $order->info['currency_value']);
-	} // end for
-
 // company name and details pulled from the my store address and phone number
 // in admin configuration mystore 
 $y += 10; 
 $y = $pdf->ezText(STORE_NAME_ADDRESS,COMPANY_HEADER_FONT_SIZE,array('aleft'=>'400'));
 $y -= 10; 
+
+    // Add in the order titles	
+	$totalsy = 230;
+	$pdf->ezSetY($totalsy);
+	for ($j = 0, $n = sizeof($order->totals); $j < $n; $j++) {
+		$totaltext = str_replace($vilains , $cools ,$order->totals[$j]['title']);
+		$fullstop = stripos($totaltext, ".");
+		
+		// Cuts shipping title at first '.' and replaces with :
+		if ($fullstop != '0') {
+		  $totaltext = substr($totaltext, 0, $fullstop);
+		  $totaltext .= ":";
+		} 
+		
+	  $pdf->ezText("<b>" . $totaltext . "</b>", PRODUCT_TOTALS_FONT_SIZE, array('justification' => 'right', 'right' => 80));
+
+	} // end for
+	
+	//Add in the order totals
+	$totalsy = 230;
+	$pdf->ezSetY($totalsy);
+	for ($j = 0, $n = sizeof($order->totals); $j < $n; $j++) {
+	  $pdf->ezText($order->totals[$j]['text'], PRODUCT_TOTALS_FONT_SIZE, array('justification' => 'right', 'right' => 10));	
+	}
+
 
 $pdf->ezSetY($y);
 
@@ -353,22 +360,29 @@ $pos -= PRODUCT_TABLE_BOTTOM_MARGIN;
 
 $pos -= PRODUCT_TABLE_BOTTOM_MARGIN;
 
-//Add in the order totals
-    $totalsx = 390; 
-    $totalsy = 230;
-	
+// Add in the order titles (again incase order runs to two pages)
+	$totalsy = 230;
+	$pdf->ezSetY($totalsy);
 	for ($j = 0, $n = sizeof($order->totals); $j < $n; $j++) {
 		$totaltext = str_replace($vilains , $cools ,$order->totals[$j]['title']);
 		$fullstop = stripos($totaltext, ".");
 		
+		// Cuts shipping title at first '.' and replaces with :
 		if ($fullstop != '0') {
 		  $totaltext = substr($totaltext, 0, $fullstop);
 		  $totaltext .= ":";
 		} 
 		
-	  $pdf->addText ($totalsx, $totalsy -= PRODUCT_TOTALS_LEADING,PRODUCT_TOTALS_FONT_SIZE,"<b>" . $totaltext . "</b>");
-      $pdf->addText(506,$totalsy,PRODUCT_TOTALS_FONT_SIZE,$order->totals[$j]['text'], $order->info['currency_value']);
+	  $pdf->ezText("<b>" . $totaltext . "</b>", PRODUCT_TOTALS_FONT_SIZE, array('justification' => 'right', 'right' => 80));
+
 	} // end for
+	
+	//Add in the order totals
+	$totalsy = 230;
+	$pdf->ezSetY($totalsy);
+	for ($j = 0, $n = sizeof($order->totals); $j < $n; $j++) {
+	  $pdf->ezText($order->totals[$j]['text'], PRODUCT_TOTALS_FONT_SIZE, array('justification' => 'right', 'right' => 10));	
+	}
 }
 
 

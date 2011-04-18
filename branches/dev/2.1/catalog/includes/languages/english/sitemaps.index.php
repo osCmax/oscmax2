@@ -22,5 +22,7 @@ define('GOOGLE_SITEMAPS_CONVENIENCE', 'For your convenience here is the CRON com
 define('GOOGLE_SITEMAPS_HERE_INDEX', '<b>Sitemap index: </b>');
 define('GOOGLE_SITEMAPS_HERE_PRODUCT', '<b>Product sitemap: </b>');
 define('GOOGLE_SITEMAPS_HERE_CATEGORY', '<b>Category sitemap: </b>');
+define('ICON_TICK', '');
+define('ICON_CROSS', '');
 
 ?>

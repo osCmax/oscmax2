@@ -53,37 +53,37 @@ $Id$
                 <table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td width="10">&nbsp;</td>
-                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_EDIT, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'account_info.png') . '</a>'; ?></td>
+                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_EDIT, '', 'SSL') . '">' . tep_image(bts_select('icons', 'account_info.png')) . '</a>'; ?></td>
                     <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_EDIT, '', 'SSL') . '">' . MY_ACCOUNT_INFORMATION . '</a>'; ?></td>
                     <td width="10">&nbsp;</td>
-                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'notifications.png') . '</a>'; ?></td>
+                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', 'SSL') . '">' . tep_image(bts_select('icons', 'notifications.png')) . '</a>'; ?></td>
                     <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', 'SSL') . '">' . EMAIL_NOTIFICATIONS_PRODUCTS . '</a>'; ?></td>
                     <td width="10">&nbsp;</td>
                   </tr>
                   <tr>
                     <td width="10">&nbsp;</td>
-                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'orders.png') . '</a>'; ?></td>
+                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '">' . tep_image(bts_select('icons', 'orders.png')) . '</a>'; ?></td>
                     <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '">' . MY_ORDERS_VIEW . '</a>'; ?></td>
                     <td width="10">&nbsp;</td>
-                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'wish_list.png') . '</a>'; ?></td>
+                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . tep_image(bts_select('icons', 'wish_list.png')) . '</a>'; ?></td>
                     <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . MY_WISH_LIST . '</a>'; ?></td>
                     <td width="10">&nbsp;</td>
                   </tr>
                   <tr>
                     <td width="10">&nbsp;</td>
-                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'address.png') . '</a>'; ?></td>
+                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL') . '">' . tep_image(bts_select('icons', 'address.png')) . '</a>'; ?></td>
                     <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL') . '">' . MY_ACCOUNT_ADDRESS_BOOK . '</a>'; ?></td>
                     <td width="10">&nbsp;</td>
-                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_NEWSLETTERS, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'newsletters.png') . '</a>'; ?></td>
+                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_NEWSLETTERS, '', 'SSL') . '">' . tep_image(bts_select('icons', 'newsletters.png')) . '</a>'; ?></td>
                     <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_NEWSLETTERS, '', 'SSL') . '">' . EMAIL_NOTIFICATIONS_NEWSLETTERS . '</a>'; ?></td>
                     <td width="10">&nbsp;</td>
                   </tr>
                   <tr>
                     <td width="10">&nbsp;</td>
-                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'password.png') . '</a>'; ?></td>
+                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL') . '">' . tep_image(bts_select('icons', 'password.png')) . '</a>'; ?></td>
                     <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL') . '">' . MY_ACCOUNT_PASSWORD . '</a>'; ?></td>
                     <td width="10">&nbsp;</td>
-                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_LOGOFF, '', 'SSL') . '">' . tep_image(DIR_WS_ICONS . 'account_log_off.png') . '</a>'; ?></td>
+                    <td width="40"><?php echo '<a href="' . tep_href_link(FILENAME_LOGOFF, '', 'SSL') . '">' . tep_image(bts_select('icons', 'account_log_off.png')) . '</a>'; ?></td>
                     <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_LOGOFF, '', 'SSL') . '">' . MY_ACCOUNT_LOG_OFF . '</a>'; ?></td>
                     <td width="10">&nbsp;</td>
                   </tr>

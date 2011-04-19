@@ -133,14 +133,24 @@ function bts_select($template_type, $filename = '') {
       }
     break;
 
-     case 'images':
+    case 'images':
      // added for loading images directly from your templates directory (w.o. the tep_image() function)
        if (is_file(DIR_WS_TEMPLATES . 'images/' . $filename)) {
-	       $path = DIR_WS_TEMPLATES .'images/' . $filename;
+	       $path = DIR_WS_TEMPLATES . 'images/' . $filename;
        } else {
 	       $path = DIR_WS_TEMPLATES_FALLBACK . 'images/' . $filename;
        }
     break;
+
+    case 'icons':
+     // added for loading images directly from your templates directory (w.o. the tep_image() function)
+       if (is_file(DIR_WS_TEMPLATES . 'images/icons/' . $filename)) {
+	       $path = DIR_WS_TEMPLATES . 'images/icons/' . $filename;
+       } else {
+	       $path = DIR_WS_TEMPLATES_FALLBACK . 'images/icons/' . $filename;
+       }
+    break;
+
 
     case 'common':
     if (is_file(DIR_WS_TEMPLATES_BASE . $filename)) {

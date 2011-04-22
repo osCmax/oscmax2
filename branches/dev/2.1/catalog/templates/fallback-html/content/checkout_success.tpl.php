@@ -20,7 +20,7 @@ $Id: checkout_success.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com
   if (!tep_session_is_registered('customer_is_guest')){
   //PWA EOF
 /* One Page Checkout - BEGIN */
-  if (tep_session_is_registered('customers_id')){
+  if (tep_session_is_registered('customer_id')){
 /* One Page Checkout - END */
   if ($global['global_product_notifications'] != '1') {
     echo TEXT_NOTIFY_PRODUCTS . '<br><p class="productsNotifications">';

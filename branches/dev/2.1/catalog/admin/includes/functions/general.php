@@ -1033,6 +1033,7 @@ function tep_selected_file($filename) {
       $string .= '<br><input type="radio" name="' . $name . '" value="' . $select_array[$i] . '"';
 
       if ($key_value == $select_array[$i]) $string .= ' CHECKED';
+	  if ($key_value == 1 && $select_array[$i] == 'true') $string .= ' CHECKED';
 
       $string .= '> ' . $select_array[$i];
     }

@@ -908,8 +908,8 @@ $Id$
       $size = sizeof($format_string_array);
       for ($i=0; $i<$size; $i++) {
         if ($format_string_array[$i] == 'mm' || $format_string_array[$i] == 'mmm') $month = $date_to_check_array[$i];
-        if ($format_string_array[$i] == 'dd') $day = $date_to_check_array[$i];
-        if ( ($format_string_array[$i] == 'yyyy') || ($format_string_array[$i] == 'aaaa') ) $year = $date_to_check_array[$i];
+        if ($format_string_array[$i] == 'dd' || $format_string_array[$i] == 'tt') $day = $date_to_check_array[$i];
+        if ($format_string_array[$i] == 'yyyy' || $format_string_array[$i] == 'aaaa' || $format_string_array[$i] == 'jjjj') $year = $date_to_check_array[$i];
       }
     } else {
       if (strlen($format_string) == 8 || strlen($format_string) == 9) {

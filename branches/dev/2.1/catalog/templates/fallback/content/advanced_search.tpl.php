@@ -79,7 +79,7 @@ $Id$
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td></td>
+                <td width="120"></td>
                 <td class="fieldKey"><?php echo TEXT_OPTIONAL; ?></td>
               </tr>
               <tr>
@@ -165,11 +165,11 @@ $Id$
               </tr>
               <tr>
                 <td class="fieldKey"><?php echo ENTRY_DATE_FROM; ?></td>
-                <td class="fieldValue"><?php echo tep_draw_input_field('dfrom', DOB_FORMAT_STRING, 'onFocus="RemoveFormatString(this, \'' . DOB_FORMAT_STRING . '\')"'); ?></td>
+                <td class="fieldValue"><?php echo tep_draw_input_field('dfrom', '') . '&nbsp;(' . DOB_FORMAT_STRING . ')'; ?></td>
               </tr>
               <tr>
                 <td class="fieldKey"><?php echo ENTRY_DATE_TO; ?></td>
-                <td class="fieldValue"><?php echo tep_draw_input_field('dto', DOB_FORMAT_STRING, 'onFocus="RemoveFormatString(this, \'' . DOB_FORMAT_STRING . '\')"'); ?></td>
+                <td class="fieldValue"><?php echo tep_draw_input_field('dto','') . '&nbsp;(' . DOB_FORMAT_STRING . ')'; ?></td>
               </tr>
             </table></td>
           </tr>

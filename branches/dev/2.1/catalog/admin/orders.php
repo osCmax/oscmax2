@@ -83,7 +83,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
 	
 	$pageloop = "1";
     
-	    include(DIR_WS_LANGUAGES . 'english/batch_print.php');
+	    include(DIR_WS_LANGUAGES . $language . '/batch_print.php');
         require(DIR_WS_MODULES . 'batch_print/class.ezpdf.php');
 		$pdf = new Cezpdf(A4,portrait);
 

@@ -11,11 +11,10 @@ $Id$
 */
 // WTL - this goes in admin
 require('includes/application_top.php');
-// Include current language file, if not exists, fall use English (Why is this not a standard procedure in OsCommerce?)
+// Include current language file, if file does not exist then use English
 if(file_exists(DIR_WS_LANGUAGES . $language . '/' . "information.php")) {
 	include(DIR_WS_LANGUAGES . $language . '/' . "information.php");
-}
-else {
+} else {
 	include(DIR_WS_LANGUAGES . 'english/' . "information.php");
 }
 $languages = tep_get_languages();
@@ -181,7 +180,7 @@ switch($_REQUEST['information_action']) {
 			if(count($sql_data_array) > 0) {
 				$sql_data_array['information_group_id'] = tep_db_prepare_input($gID);
 				if (tep_db_perform(TABLE_INFORMATION, $sql_data_array, 'update', "information_id = '" . (int)$_POST['information_id'] . "' and language_id = '" . (int)$language_id . "'")){
-                  $messageStack->add_session('Updated Successfully', 'success');
+                  $messageStack->add_session(TEXT_UPDATE_SUCCESS, 'success');
                 }
 			}
 		}

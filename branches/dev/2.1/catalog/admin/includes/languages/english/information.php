@@ -59,4 +59,5 @@ $Id$
   define('ENTRY_EXTERNAL_URL','External URL');
   define('IMAGE_ICON_EXTERNAL_URL', 'This information page is linked to an external site.');
   define('TEXT_INCLUDE_HTTP', '<i>Include http://</i>');
+  define('TEXT_UPDATE_SUCCESS', 'Updated Successfully');
 ?>

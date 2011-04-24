@@ -140,14 +140,14 @@ $pdf->addText($indent,$pos -= GENERAL_LEADING,GENERAL_FONT_SIZE,$order->billing[
 }
 
 // phone and email statments - $pos reset to fix height
-  $pos = 620;
+  $pos = 610;
   $pdf->ezSetY($pos);
 
     $pos = $pdf->ezText("<b>" . ENTRY_PHONE . "</b> " . $order->customer['telephone'],GENERAL_FONT_SIZE);
     $pos = $pdf->ezText("<b>" . ENTRY_EMAIL . "</b> " .$order->customer['email_address'],GENERAL_FONT_SIZE);
   
 // payment method  
-  $dup_y = 620;
+  $dup_y = 610;
   $pdf->ezSetY($dup_y);
 
   $dup_y = $pdf->ezText("<b>" . str_replace($vilains , $cools,  ENTRY_PAYMENT_METHOD) . "</b> " . str_replace($vilains , $cools, $order->info['payment_method']),GENERAL_FONT_SIZE, array('justification'=>'right'));

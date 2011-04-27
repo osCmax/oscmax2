@@ -107,6 +107,7 @@ $Id$
     }
 // EOF QPBPP for SPPC
 ?>
+   <noscript><style>.panel h4 { display:inline }</style></noscript> 
    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<?php // BOF: Mod - Wishlist
 	      //DISPLAY PRODUCT WAS ADDED TO WISHLIST IF WISHLIST REDIRECT IS ENABLED

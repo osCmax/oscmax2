@@ -57,7 +57,15 @@ $Id$
                 </tr>
                 <tr>
                   <td width="30%" align="right" class="boxText"><?php echo TEXT_AMOUNT; ?><?php echo '<span title="' . HEADING_AMOUNT_HELP . '|' . TEXT_AMOUNT_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></td>
-                  <td width="20%" class="boxText"><?php echo $currencies->display_price($affiliate_amount, ''); ?></td>
+                  <td width="20%" class="boxText">
+				  <?php 
+				  if ($affiliate_amount != 0) {
+				    echo $currencies->display_price($affiliate_amount, ''); 
+				  } else {
+					echo '0';  
+				  }
+				  ?>
+                  </td>
                   <td width="30%" align="right" class="boxText"><?php echo TEXT_AVERAGE; ?><?php echo '<span title="' . HEADING_AVERAGE_HELP . '|' . TEXT_AVERAGE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></td>
                   <td width="20%" class="boxText"><?php echo $currencies->display_price($affiliate_average, ''); ?></td>
                 </tr>
@@ -65,7 +73,15 @@ $Id$
                   <td width="30%" align="right" class="boxText"><?php echo TEXT_COMMISSION_RATE; ?><?php echo '<span title="' . HEADING_COMMISSION_RATE_HELP . '|' . TEXT_COMMISSION_RATE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></td>
                   <td width="20%" class="boxText"><?php echo tep_round($affiliate_percent, 2). '%'; ?></td>
                   <td width="30%" align="right" class="boxText"><?php echo TEXT_COMMISSION; ?><?php echo '<span title="' . HEADING_COMMISSION_HELP . '|' . TEXT_COMMISSION_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></td>
-                  <td width="20%" class="boxText"><?php echo $currencies->display_price($affiliate_commission, ''); ?></td>
+                  <td width="20%" class="boxText">
+				  <?php 
+				  if ($affiliate_commission != 0) {
+				    echo $currencies->display_price($affiliate_commission, ''); 
+				  } else {
+					echo '0';  
+				  }
+				  ?>
+                  </td>
                 </tr>
                 <tr>
                   <td colspan="4"><?php echo tep_draw_separator(); ?></td>

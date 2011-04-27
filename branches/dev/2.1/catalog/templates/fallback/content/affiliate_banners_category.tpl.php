@@ -28,7 +28,7 @@ $Id$
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
-        <td><table width="100%" align="center" border="0" cellpadding="0" cellspacing="0"><td>
+        <td><table width="100%" align="center" border="0" cellpadding="0" cellspacing="0"><tr><td>
 <?php
   if (tep_db_num_rows($affiliate_banners_values)) {
 
@@ -40,9 +40,9 @@ $Id$
       switch (AFFILIATE_KIND_OF_BANNERS) {
         case 1: // Link to Categories
           if ($prod_id > 0) {
-            $link = '<a href="' . HTTPS_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&cPath=' . $prod_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTPS_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_categories['categories_name'] . '"></a>';
-            $link1 = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&cPath=' . $prod_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_categories['categories_name'] . '"></a>';
-            $link2 = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&cPath=' . $prod_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank">' . $affiliate_categories['categories_name'] . '</a>';
+            $link = '<a href="' . HTTPS_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&amp;cPath=' . $prod_id . '&amp;affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTPS_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_categories['categories_name'] . '"></a>';
+            $link1 = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&amp;cPath=' . $prod_id . '&amp;affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_categories['categories_name'] . '"></a>';
+            $link2 = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&amp;cPath=' . $prod_id . '&amp;affiliate_banner_id=' . $ban_id . '" target="_blank">' . $affiliate_categories['categories_name'] . '</a>';
 			}
           break;
         case 2: // Link to Categories
@@ -58,13 +58,13 @@ $Id$
 ?>
         <table width="95%" align="center" border="0" cellpadding="4" cellspacing="0" class="infoBoxContents">
           <tr>
-            <td class="infoBoxHeading" align="center"><?php echo TEXT_AFFILIATE_NAME; ?>&nbsp;<?php echo $affiliate_banners['affiliate_banners_title']; ?></td>
+            <td class="infoBoxHeading"><?php echo TEXT_AFFILIATE_NAME . $affiliate_banners['affiliate_banners_title']; ?></td>
           </tr>
           <tr> 
             <td class="smallText" align="center"><?php echo $link; ?></td> 
           </tr> 
           <tr> 
-            <td class="smallText" align="center"><?php echo TEXT_AFFILIATE_INFO; ?></td> 
+            <td class="smallText"><?php echo TEXT_AFFILIATE_INFO; ?></td> 
           </tr> 
           <tr> 
             <td class="smallText" align="center"> 
@@ -74,11 +74,14 @@ $Id$
           <tr> 
             <td>&nbsp;<td> 
           </tr> 
+          <tr>
+            <td class="infoBoxHeading"><?php echo TEXT_AFFILIATE_NAME . $affiliate_banners['affiliate_banners_title']; ?></td>
+          </tr>
           <tr> 
-            <td class="smallText" align="center"><b>Text Version:</b> <?php echo $link2; ?></td> 
+            <td class="smallText" align="center"><b><?php echo TEXT_AFFILIATE_TEXT_VERSION; ?></b> <?php echo $link2; ?></td> 
           </tr> 
           <tr> 
-            <td class="smallText" align="center"><?php echo TEXT_AFFILIATE_INFO; ?></td> 
+            <td class="smallText"><?php echo TEXT_AFFILIATE_INFO; ?></td> 
           </tr> 
           <tr> 
             <td class="smallText" align="center"> 

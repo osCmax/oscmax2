@@ -89,7 +89,11 @@ $Id$
 <?php
   }
 ?>
+            <?php if ($sum_of_earnings != 0) { ?>
             <td class="main" colspan="5"><br><?php echo TEXT_INFORMATION_SALES_TOTAL . ' ' .  $currencies->display_price($sum_of_earnings,'') . TEXT_INFORMATION_SALES_TOTAL2; ?></td>
+            <?php } else { ?>
+            <td class="main" colspan="5"><br><?php echo TEXT_INFORMATION_SALES_TOTAL . ' ' .  TEXT_NO_SALES; ?></td>
+            <?php } ?>
           </tr>
         </table></td>
       </tr>

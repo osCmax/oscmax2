@@ -32,17 +32,19 @@ define('BOX_AFFILIATE_BANNERS_BUILD_CAT', 'Build Category Link');
 define('BOX_AFFILIATE_BANNERS_BUILD', 'Build Product Link');
 define('BOX_AFFILIATE_BANNERS_PRODUCT', 'Product Banners');
 define('BOX_AFFILIATE_BANNERS_CATEGORY', 'Category Banners');
-define('BOX_AFFILIATE_BANNERS_TEXT', 'Text Links');
-//Translation for the missing help files by Hobbes ~*~ Begin
+define('BOX_AFFILIATE_BANNERS_TEXT', 'Text Only Links');
+define('BOX_AFFILIATE_BUILD_YOUR_OWN', 'Build your own links');
 define('TEXT_PAYMENT_ID', 'Shows the ID Number, of payments.');
 define('TEXT_SALES_PAYMENT_DATE', 'Shows the date, of payments.');
 define('TEXT_SALES_PAYMENT_Ammount', 'Affiliate Earnings represents the commission due on the sale');
 define('TEXT_PAYMENT_STATUS', 'Sale Status represents the status the sale.');
-//Translation for the missing help files by Hobbes ~*~ End
 define('BOX_AFFILIATE_CONTACT', 'Contact Us');
 define('BOX_AFFILIATE_FAQ', 'Affiliate Program FAQ');
-define('BOX_AFFILIATE_LOGIN', 'Affiliate Log In');
-define('BOX_AFFILIATE_LOGOUT', 'Affiliate Log Out');
+define('BOX_AFFILIATE_LOGIN', 'Affiliate Login');
+define('BOX_AFFILIATE_LOGOUT', 'Affiliate Log off');
+define('BOX_AFFILIATE_YOUR_ACCOUNT', 'Affiliate Account');
+define('TEXT_AFFILIATE_CONTACT_TEXT', 'Affiliate%20Enquiry%0D%0A%0D%0AMessage:%20');
+define('TEXT_AFFILIATE_TEXT_VERSION', 'Text Version: ');
 
 define('ENTRY_AFFILIATE_PAYMENT_DETAILS', 'Payable to:');
 define('ENTRY_AFFILIATE_ACCEPT_AGB', 'Check here to indicate that you have read and agree to the ');

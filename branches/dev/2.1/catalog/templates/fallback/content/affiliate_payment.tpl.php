@@ -87,7 +87,15 @@ $Id$
   $affiliate_payment = tep_db_fetch_array($affiliate_payment_values);
 ?>
           <tr>
-            <td class="main" colspan="4"><br><?php echo TEXT_INFORMATION_PAYMENT_TOTAL . ' ' . $currencies->display_price($affiliate_payment['total'], ''); ?></td>
+            <td class="main" colspan="4"><br>
+			<?php 
+			if ($affiliate_payment['total'] != 0) {
+			  echo TEXT_INFORMATION_PAYMENT_TOTAL . ' ' . $currencies->display_price($affiliate_payment['total'], '');
+			} else {
+			  echo TEXT_INFORMATION_PAYMENT_TOTAL . ' ' . TEXT_NO_PAYMENTS;
+			}
+			?>
+            </td>
           </tr>
         </table></td>
       </tr>

@@ -45,16 +45,15 @@ $Id$
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
 <?php
-  if (tep_not_null($_POST['individual_banner_id']) || tep_not_null($_GET['individual_banner_id'])) {
-
-    if (tep_not_null($_POST['individual_banner_id'])) $individual_banner_id = $_POST['individual_banner_id'];
+if (tep_not_null($_POST['individual_banner_id']) || tep_not_null($_GET['individual_banner_id'])) {
+  if (tep_not_null($_POST['individual_banner_id'])) $individual_banner_id = $_POST['individual_banner_id'];
     if ($_GET['individual_banner_id']) $individual_banner_id = $_GET['individual_banner_id'];
     $affiliate_pbanners_values = tep_db_query("select c.categories_image, cd.categories_name from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . $individual_banner_id . "' and cd.categories_id = '" . $individual_banner_id . "' and cd.language_id = '" . $languages_id . "'");
-    if ($affiliate_pbanners = tep_db_fetch_array($affiliate_pbanners_values)) {
+      if ($affiliate_pbanners = tep_db_fetch_array($affiliate_pbanners_values)) {
       switch (AFFILIATE_KIND_OF_BANNERS) {
         case 1:
-   			$link = '<a href="' . HTTPS_SERVER . DIR_WS_HTTP_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id . '&cPath=' . $individual_banner_id . '&affiliate_banner_id=1" target="_blank"><img src="' . HTTPS_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_pbanners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_pbanners['categories_name'] . '"></a>';
-   			$link1 = '<a href="' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id . '&cPath=' . $individual_banner_id . '&affiliate_banner_id=1" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_pbanners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_pbanners['categories_name'] . '"></a>';
+   			$link = '<a href="' . HTTPS_SERVER . DIR_WS_HTTP_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id . '&cPath=' . $individual_banner_id . '&affiliate_banner_id=1" target="_blank"><img src="' . HTTPS_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . CATEGORY_IMAGES_DIR .  $affiliate_pbanners['categories_image'] . '" border="0" alt="' . $affiliate_pbanners['categories_name'] . '"></a>';
+   			$link1 = '<a href="' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id . '&cPath=' . $individual_banner_id . '&affiliate_banner_id=1" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . CATEGORY_IMAGES_DIR . $affiliate_pbanners['categories_image'] . '" border="0" alt="' . $affiliate_pbanners['categories_name'] . '"></a>';
    			$link2 = '<a href="' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id . '&cPath=' . $individual_banner_id . '&affiliate_banner_id=1" target="_blank">' . $affiliate_pbanners['categories_name'] . '</a>'; 
    		break; 
   		case 2: 
@@ -68,14 +67,15 @@ $Id$
 ?>
       <tr>
         <td><table width="100%" align="center" border="0" cellpadding="4" cellspacing="0" class="infoBoxContents">
+          <?php if ($affiliate_pbanners['categories_image'] != '') { // only show if image name stored in dbase ?>
           <tr>
-            <td class="infoBoxHeading" align="center"><?php echo TEXT_AFFILIATE_NAME; ?>&nbsp;<?php echo $affiliate_pbanners['categories_name']; ?></td>
+            <td class="infoBoxHeading"><?php echo TEXT_AFFILIATE_NAME; ?>&nbsp;<?php echo $affiliate_pbanners['categories_name']; ?></td>
           </tr>
           <tr>
             <td class="smallText" align="center"><?php echo $link; ?></td> 
           </tr> 
           <tr> 
-            <td class="smallText" align="center"><?php echo TEXT_AFFILIATE_INFO; ?></td> 
+            <td class="smallText"><?php echo TEXT_AFFILIATE_INFO; ?></td> 
           </tr> 
           <tr> 
             <td class="smallText" align="center"> 
@@ -83,13 +83,17 @@ $Id$
             </td> 
           </tr> 
           <tr> 
-            <td><td> 
+            <td>&nbsp;<td> 
+          </tr> 
+          <?php } ?>
+          <tr>
+            <td class="infoBoxHeading"><?php echo TEXT_AFFILIATE_NAME; ?>&nbsp;<?php echo $affiliate_pbanners['categories_name']; ?></td>
+          </tr>
+          <tr> 
+            <td class="smallText" align="center"><b><?php echo TEXT_AFFILIATE_TEXT_VERSION; ?></b> <?php echo $link2; ?></td> 
           </tr> 
           <tr> 
-            <td class="smallText" align="center"><b>Text Version:</b> <?php echo $link2; ?></td> 
-          </tr> 
-          <tr> 
-            <td class="smallText" align="center"><?php echo TEXT_AFFILIATE_INFO; ?></td> 
+            <td class="smallText"><?php echo TEXT_AFFILIATE_INFO; ?></td> 
           </tr> 
           <tr> 
             <td class="smallText" align="center"> 

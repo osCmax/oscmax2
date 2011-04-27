@@ -28,18 +28,19 @@ $Id$
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
-        <td><table width="100%" align="center" border="0" cellpadding="0" cellspacing="0"><td>
+        <td><table width="100%" align="center" border="0" cellpadding="0" cellspacing="0"><tr><td>
 <?php
   if (tep_db_num_rows($affiliate_banners_values)) {
 
     while ($affiliate_banners = tep_db_fetch_array($affiliate_banners_values)) {
       $prod_id = $affiliate_banners['affiliate_products_id'];
+	  $cat_id = $affiliate_banners['affiliate_category_id'];
       $ban_id = $affiliate_banners['affiliate_banners_id'];
       switch (AFFILIATE_KIND_OF_BANNERS) {
         case 1: // Link to Products
           if ($prod_id < 1) {
-            $link = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_banners['affiliate_banners_title'] . '"></a>';
-            $link1 = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_banners['affiliate_banners_title'] . '"></a>';
+            $link = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id . '&amp;affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_banners['affiliate_banners_title'] . '"></a>';
+            $link1 = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id . '&amp;affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_banners['affiliate_banners_title'] . '"></a>';
 			}
           break;
         case 2: // Link to Products
@@ -50,18 +51,18 @@ $Id$
           break;
       }
 
-          if ($prod_id < 1) {
+          if ($prod_id < 1 & $cat_id < 1) { 
 ?>
       <tr>
         <td><table width="95%" align="center" border="0" cellpadding="4" cellspacing="0" class="infoBoxContents">
           <tr>
-            <td class="infoBoxHeading" align="center"><?php echo TEXT_AFFILIATE_NAME; ?>&nbsp;<?php echo $affiliate_banners['affiliate_banners_title']; ?></td>
+            <td class="infoBoxHeading"><?php echo TEXT_AFFILIATE_NAME; ?>&nbsp;<?php echo $affiliate_banners['affiliate_banners_title']; ?></td>
           </tr>
           <tr>
             <td class="smallText" align="center"><br><?php echo $link; ?></td>
           </tr>
           <tr>
-            <td class="smallText" align="center"><?php echo TEXT_AFFILIATE_INFO; ?></td>
+            <td class="smallText"><?php echo TEXT_AFFILIATE_INFO; ?></td>
           </tr>
           <tr>
             <td class="smallText" align="center">

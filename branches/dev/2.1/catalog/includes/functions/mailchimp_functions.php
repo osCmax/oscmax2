@@ -26,9 +26,7 @@ function mc_add_email($email_address, $email_format) {
         echo "Unable to load listSubscribe()!\n"; 
         echo   "\tCode=".$api->errorCode."\n";
         echo   "\tMsg=".$api->errorMessage."\n";
-    } else {
-        echo "Returned: ".$retval."\n";
-	}
+    }
 }
  
 function mc_remove_email($email_address) {

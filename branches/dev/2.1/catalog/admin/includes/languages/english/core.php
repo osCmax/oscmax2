@@ -506,6 +506,7 @@ define('IMAGE_MC_SYNC', 'Sync with MailChimp');
 define('IMAGE_HELP', 'Help');
 define('IMAGE_LOGOFF', 'Logoff');
 define('IMAGE_MANAGE_ACCOUNT', 'Manage Account');
+define('IMAGE_BUTTON_UNSUBSCRIBE', 'Unsubscribe');
 
 define('ICON_CROSS', 'False');
 define('ICON_CURRENT_FOLDER', 'Current Folder');

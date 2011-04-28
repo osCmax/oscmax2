@@ -31,7 +31,7 @@ $Id$
   $corner_bottom_right = 'rounded';
 
   $boxContent_attributes = ' align="center"';
-  $boxLink = '<a href="' . tep_href_link(FILENAME_DEFAULT, "new_products=1") . '"><img src="' . DIR_WS_TEMPLATES . 'images/infobox/arrow_right.png" border="0" alt="' . ICON_ARROW_RIGHT . '" title="' . ICON_ARROW_RIGHT . '"></a>';
+  $boxLink = '<a href="' . tep_href_link(FILENAME_DEFAULT, "new_products=1") . '">' . tep_image(bts_select('images', 'infobox/arrow_right.png'), ICON_ARROW_RIGHT);
   $box_base_name = 'whats_new'; // for easy unique box template setup (added BTSv1.2)
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 

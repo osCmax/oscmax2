@@ -18,10 +18,10 @@ $Id$
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td class="infoBoxHeading"><img src="<?php echo DIR_WS_TEMPLATES;?>images/infobox/<?php switch ($corner_top_left) { case 'square': echo 'top_spacer.png'; break; case 'rounded': echo 'top_left.png'; break;} ?>" border="0" alt=""></td>
+                  <td class="infoBoxHeading"><?php if ($corner_top_left == 'rounded') { $corner = 'top_left.png'; } else { $corner = 'top_spacer.png'; } ?><?php echo tep_image(bts_select('images', 'infobox/' . $corner)); ?></td>
                   <td class="infoBoxHeading" width="100%" ><?php echo $boxHeading; ?></td>
                   <td class="infoBoxHeading"><?php if (isset($boxLink)) echo $boxLink; ?></td>
-                  <td class="infoBoxHeading"><img src="<?php echo DIR_WS_TEMPLATES;?>images/infobox/<?php switch ($corner_top_right) { case 'square': echo 'top_spacer.png';    break; case 'rounded': echo 'top_right.png'; break;} ?>" border="0" alt=""></td>
+                  <td class="infoBoxHeading"><?php if ($corner_top_right == 'rounded') { $corner = 'top_right.png'; } else { $corner = 'top_spacer.png'; } ?><?php echo tep_image(bts_select('images', 'infobox/' . $corner)); ?></td>
                 </tr>
               </table>
               <table border="0" width="100%" cellspacing="0" cellpadding="0" class="infoBoxColumn">
@@ -43,9 +43,9 @@ $Id$
               </table>
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td><img src="<?php echo DIR_WS_TEMPLATES;?>images/infobox/<?php switch ($corner_bottom_left) { case 'square': echo 'bottom_left_sq.png'; break; case 'rounded': echo 'bottom_left.png'; break;} ?>" border="0" alt=""></td>
+                  <td><?php if ($corner_bottom_left == 'rounded') { $corner = 'bottom_left.png'; } else { $corner = 'bottom_left_sq.png'; } ?><?php echo tep_image(bts_select('images', 'infobox/' . $corner)); ?></td>
                   <td width="100%" height="5" class="infoBoxBottom"></td>
-                  <td><img src="<?php echo DIR_WS_TEMPLATES;?>images/infobox/<?php switch ($corner_bottom_right) { case 'square': echo 'bottom_right_sq.png';   break; case 'rounded': echo 'bottom_right.png'; break;} ?>" border="0" alt=""></td>
+                  <td><?php if ($corner_bottom_left == 'rounded') { $corner = 'bottom_right.png'; } else { $corner = 'bottom_right_sq.png'; } ?><?php echo tep_image(bts_select('images', 'infobox/' . $corner)); ?></td>
                 </tr>
               </table>
             </td>

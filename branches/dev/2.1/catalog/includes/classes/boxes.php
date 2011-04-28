@@ -102,19 +102,19 @@ $Id$
       $this->table_cellpadding = '0';
 
       if ($left_corner == true) {
-        $left_corner = tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_left.png');
+        $left_corner = tep_image(bts_select('images', 'infobox/top_left.png'));
       } else {
-        $left_corner = tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_spacer.png');
+        $left_corner = tep_image(bts_select('images', 'infobox/top_spacer.png'));
       }
       if ($right_arrow == true) {
-        $right_arrow = '<a href="' . $right_arrow . '">' . tep_image(DIR_WS_TEMPLATES . 'images/infobox/arrow_right.png', ICON_ARROW_RIGHT) . '</a>';
+        $right_arrow = '<a href="' . $right_arrow . '">' . tep_image(bts_select('images', 'infobox/arrow_right.png'), ICON_ARROW_RIGHT) . '</a>';
       } else {
         $right_arrow = '';
       }
       if ($right_corner == true) {
-        $right_corner = tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_right.png');
+        $right_corner = tep_image(bts_select('images', 'infobox/top_right.png'));
       } else {
-        $right_corner = tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_spacer.png');
+        $right_corner = tep_image(bts_select('images', 'infobox/top_spacer.png'));
       }
 
       $info_box_contents = array();

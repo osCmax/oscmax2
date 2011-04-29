@@ -217,6 +217,7 @@ span.selectedCat { color: #ff0000; }
 .stockTable { margin: 5px 5px 5px 5px; }
 .stockTableText { font-family: Verdana, Arial, sans-serif; font-size: 10px; border: 0px; }
 .stockTableContents { font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight: normal; background: #ffffff; color: #000000; }
+.stockTableContentsZero { font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight: normal; background: #ffffff; color: #999999; }
 TD.stockTableHeading { font-family: Verdana, Arial, sans-serif; font-size: 11px; font-weight: bold; background: #dddddd;; color: #000000; }
 TD.stockTable, SPAN.stockTable { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 /* Stock table for product_info page */

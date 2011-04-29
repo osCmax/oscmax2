@@ -80,24 +80,28 @@ $products_attributes_query = tep_db_query("SELECT pa.options_id, pa.options_valu
 
 // now create the rows! Each row will display the quantity for one combination of attributes.
 while($products_stock_values=tep_db_fetch_array($products_stock_query)) {
-	$html_ev_out .= '        <tr>';
-	if ($products_stock_values['products_stock_quantity'] > 0) {
-		// We only want to display rows for combinations we have on stock...
-		// For example the quantity can be 0 or even negative if oversold.
+	if ($products_stock_values['products_stock_quantity'] >= 0) { 
+	// Hide attribute row if stock level is negative - if you want to hide 0 values as well then remove the = from the line above.
+	  if ($products_stock_values['products_stock_quantity'] == 0) {
+	    $stockTableStyle = 'stockTableContentsZero';
+	  } else {
+		$stockTableStyle = 'stockTableContents';  
+	  }
+	  $html_ev_out .= '        <tr class="' . $stockTableStyle . '">';
 		$rowscounter += 1; 
 		$attributes = explode(",", $products_stock_values['products_stock_attributes']); 
 		$total_price = $products_facts['products_price'];			
 		foreach ($attributes as $attribute) {
 			$attr = explode("-", $attribute);
-			$html_ev_out .= '          <td class="stockTableContents" align="center">' . tep_values_name($attr[1]) . '</td>';
+			$html_ev_out .= '          <td class="' . $stockTableStyle . '" align="center">' . tep_values_name($attr[1]) . '</td>';
 			$total_price += $attributes_price[$attr[0]][$attr[1]];
 		}
 		$total_price = $currencies->display_price($total_price, tep_get_tax_rate($products_facts['products_tax_class_id']));
 		
-		$html_ev_out .= '          <td class="stockTableContents" align="center">' . $total_price . '</td>';
-		$html_ev_out .= '          <td class="stockTableContents" align="center">' . $products_stock_values['products_stock_quantity'] . '</td>';
+		$html_ev_out .= '          <td class="' . $stockTableStyle . '" align="center">' . $total_price . '</td>';
+		$html_ev_out .= '          <td class="' . $stockTableStyle . '" align="center">' . $products_stock_values['products_stock_quantity'] . '</td>';
+	  $html_ev_out .= '        </tr>';
 	}
-	$html_ev_out .= '        </tr>';
 }
 
 $html_ev_out .= '</table></td></tr></table>'; // Table is finished!

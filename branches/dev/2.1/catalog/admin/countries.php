@@ -26,12 +26,30 @@ $Id$
 
   if (tep_not_null($action)) {
     switch ($action) {
+		
+	  case 'setflag': 
+        if (($_GET['flag'] == '0') || ($_GET['flag'] == '1')) {
+          if ($_GET['cID']) {
+            tep_db_query("update " . TABLE_COUNTRIES . " set active = '" . $_GET['flag'] . "' where countries_id = '" . $_GET['cID'] . "'");
+          }
+        }
+ 	    tep_redirect(tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . $search_form_string2 . '&cID=' . $_GET['cID']));
+        break;
+	  case 'setallflags':
+	    if (($_GET['flags'] == '0') || ($_GET['flags'] == '1')) {
+	      $setallflags_query_raw = "select countries_id from " . TABLE_COUNTRIES . " order by countries_id";
+		  $setallflags_query = tep_db_query($setallflags_query_raw);
+          while ($setallflags = tep_db_fetch_array($setallflags_query)) {
+		    tep_db_query("update " . TABLE_COUNTRIES . " set active = '" . $_GET['flags'] . "' where countries_id = '" . $setallflags['countries_id'] . "'");
+		  }
+		}
+	    break;
       case 'insert':
         $countries_name = tep_db_prepare_input($_POST['countries_name']);
         $countries_iso_code_2 = tep_db_prepare_input($_POST['countries_iso_code_2']);
         $countries_iso_code_3 = tep_db_prepare_input($_POST['countries_iso_code_3']);
         $address_format_id = tep_db_prepare_input($_POST['address_format_id']);
-
+        $active = tep_db_prepare_input($_POST['active']);
         tep_db_query("insert into " . TABLE_COUNTRIES . " (countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id) values ('" . tep_db_input($countries_name) . "', '" . tep_db_input($countries_iso_code_2) . "', '" . tep_db_input($countries_iso_code_3) . "', '" . (int)$address_format_id . "')");
 
         tep_redirect(tep_href_link(FILENAME_COUNTRIES));
@@ -42,16 +60,13 @@ $Id$
         $countries_iso_code_2 = tep_db_prepare_input($_POST['countries_iso_code_2']);
         $countries_iso_code_3 = tep_db_prepare_input($_POST['countries_iso_code_3']);
         $address_format_id = tep_db_prepare_input($_POST['address_format_id']);
-
-        tep_db_query("update " . TABLE_COUNTRIES . " set countries_name = '" . tep_db_input($countries_name) . "', countries_iso_code_2 = '" . tep_db_input($countries_iso_code_2) . "', countries_iso_code_3 = '" . tep_db_input($countries_iso_code_3) . "', address_format_id = '" . (int)$address_format_id . "' where countries_id = '" . (int)$countries_id . "'");
-
-        tep_redirect(tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . '&cID=' . $countries_id . $search_form_string2));
+        $active = tep_db_prepare_input($_POST['active']);
+        tep_db_query("update " . TABLE_COUNTRIES . " set countries_name = '" . tep_db_input($countries_name) . "', countries_iso_code_2 = '" . tep_db_input($countries_iso_code_2) . "', countries_iso_code_3 = '" . tep_db_input($countries_iso_code_3) . "', address_format_id = '" . (int)$address_format_id . "', active = '" . (int)$active . "' where countries_id = '" . (int)$countries_id . "'");
+ 		tep_redirect(tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . '&cID=' . $countries_id));
         break;
       case 'deleteconfirm':
         $countries_id = tep_db_prepare_input($_GET['cID']);
-
         tep_db_query("delete from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "'");
-
         tep_redirect(tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . $search_form_string2));
         break;
     }
@@ -99,11 +114,13 @@ $Id$
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_COUNTRY_NAME; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_COUNTRY_CODES . ' (2)'; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_COUNTRY_CODES . ' (3)'; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_ADDRESS_FORMAT; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_ACTIVE; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
 
-  $countries_query_raw = "select countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id from " . TABLE_COUNTRIES . " " . $search . " order by countries_name";
+  $countries_query_raw = "select countries_id, countries_name, countries_iso_code_2, countries_iso_code_3, address_format_id, active from " . TABLE_COUNTRIES . " " . $search . " order by countries_name";
   $countries_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $countries_query_raw, $countries_query_numrows);
   $countries_query = tep_db_query($countries_query_raw);
   while ($countries = tep_db_fetch_array($countries_query)) {
@@ -120,13 +137,24 @@ $Id$
                 <td class="dataTableContent"><?php echo $countries['countries_name']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo $countries['countries_iso_code_2']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo $countries['countries_iso_code_3']; ?></td>
+				<td class="dataTableContent" align="center"><?php echo $countries['address_format_id']; ?></td>
+				<td class="dataTableContent" align="center">
+					<?php
+                          if ($countries['active'] == 1) {
+                            echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_COUNTRIES, 'action=setflag&amp;flag=0&amp;page=' . $_GET['page'] . $search_form_string2 . '&amp;cID=' . $countries['countries_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+                          } else {
+                            echo '<a href="' . tep_href_link(FILENAME_COUNTRIES, 'action=setflag&amp;flag=1&amp;page=' . $_GET['page'] . $search_form_string2 . '&amp;cID=' . $countries['countries_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+                          }
+                    ?>
+				</td> 
                 <td class="dataTableContent" align="right"><?php if (isset($cInfo) && is_object($cInfo) && ($countries['countries_id'] == $cInfo->countries_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . '&amp;cID=' . $countries['countries_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+								<!--  EOF: Admin Ajax Country/State Selector -->
               </tr>
 <?php
   }
 ?>
               <tr>
-                <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <td colspan="6"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText" valign="top"><?php echo $countries_split->display_count($countries_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_COUNTRIES); ?></td>
                     <td class="smallText" align="right"><?php echo $countries_split->display_links($countries_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'cID', 'action'))); ?></td>
@@ -160,6 +188,11 @@ $Id$
 	  $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NO_COUNTRIES_FOUND . '</b>');
       $contents[] = array('text' => TEXT_INFO_NO_COUNTRIES_FOUND);
 	  break;
+	case 'confirm_setallflags':
+	  $heading[] = array('text' => '<b>' . TEXT_CONFIRM_SETALLFLAGS . '</b>');
+      $contents[] = array('text' => TEXT_CONFIRM_SETALLFLAGS_TEXT);
+	  $contents[] = array('align' => 'center', 'text' => '<br><br><a href="' . tep_href_link(FILENAME_COUNTRIES, 'action=setallflags&amp;flags=1') . '">' . tep_image_button('button_activate_all.gif', IMAGE_ACTIVATE_ALL) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_COUNTRIES, 'action=setallflags&amp;flags=0') . '">' . tep_image_button('button_deactivate_all.gif', IMAGE_DEACTIVATE_ALL) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . '&cID=' . $cInfo->countries_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+	  break;
     case 'new':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_COUNTRY . '</b>');
 
@@ -169,6 +202,9 @@ $Id$
       $contents[] = array('text' => '<br>' . TEXT_INFO_COUNTRY_CODE_2 . '<br>' . tep_draw_input_field('countries_iso_code_2'));
       $contents[] = array('text' => '<br>' . TEXT_INFO_COUNTRY_CODE_3 . '<br>' . tep_draw_input_field('countries_iso_code_3'));
       $contents[] = array('text' => '<br>' . TEXT_INFO_ADDRESS_FORMAT . '<br>' . tep_draw_pull_down_menu('address_format_id', tep_get_address_formats()));
+      $active_value = array('0','1');
+      $contents[] = array('text' => '<br>' . TEXT_INFO_ACTIVE . '<br>' . tep_draw_pull_down_menu('active',$active_value));
+
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'edit':
@@ -179,8 +215,10 @@ $Id$
       $contents[] = array('text' => '<br>' . TEXT_INFO_COUNTRY_NAME . '<br>' . tep_draw_input_field('countries_name', $cInfo->countries_name));
       $contents[] = array('text' => '<br>' . TEXT_INFO_COUNTRY_CODE_2 . '<br>' . tep_draw_input_field('countries_iso_code_2', $cInfo->countries_iso_code_2));
       $contents[] = array('text' => '<br>' . TEXT_INFO_COUNTRY_CODE_3 . '<br>' . tep_draw_input_field('countries_iso_code_3', $cInfo->countries_iso_code_3));
-      $contents[] = array('text' => '<br>' . TEXT_INFO_ADDRESS_FORMAT . '<br>' . tep_draw_pull_down_menu('address_format_id', tep_get_address_formats(), $cInfo->address_format_id));
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . $search_form_string . '&amp;cID=' . $cInfo->countries_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('text' => '<br>' . TEXT_INFO_ADDRESS_FORMAT . '<br>' . tep_draw_pull_down_menu('address_format_id', tep_get_address_formats(), $cInfo->address_format_id));	  
+      $active_value = array('0','1');
+      $contents[] = array('text' => '<br>' . TEXT_INFO_ACTIVE . '<br>' . tep_draw_pull_down_menu('active', $active_value, $cInfo->active));
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . '&cID=' . $cInfo->countries_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_COUNTRY . '</b>');
@@ -195,10 +233,12 @@ $Id$
         $heading[] = array('text' => '<b>' . $cInfo->countries_name . '</b>');
 
         $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . '&amp;cID=' . $cInfo->countries_id . '&amp;action=edit' . $search_form_string) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_COUNTRIES, 'page=' . $_GET['page'] . '&amp;cID=' . $cInfo->countries_id . '&amp;action=delete' . $search_form_string) . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
-        $contents[] = array('text' => '<br>' . TEXT_INFO_COUNTRY_NAME . '<br>' . $cInfo->countries_name);
+        $contents[] = array('text' => '<br>' . TEXT_INFO_COUNTRY_NAME . ' ' . $cInfo->countries_name);
         $contents[] = array('text' => '<br>' . TEXT_INFO_COUNTRY_CODE_2 . ' ' . $cInfo->countries_iso_code_2);
         $contents[] = array('text' => '<br>' . TEXT_INFO_COUNTRY_CODE_3 . ' ' . $cInfo->countries_iso_code_3);
         $contents[] = array('text' => '<br>' . TEXT_INFO_ADDRESS_FORMAT . ' ' . $cInfo->address_format_id);
+        $contents[] = array('text' => '<br>' . TEXT_INFO_ACTIVE . ' ' . $cInfo->active);
+		$contents[] = array('align' => 'center', 'text' => '<br><br><a href="' . tep_href_link(FILENAME_COUNTRIES, 'action=confirm_setallflags') . '">' . tep_image_button('button_bulk_set_status.gif', IMAGE_BULK_SET_STATUS) . '</a>');
       }
       break;
   }

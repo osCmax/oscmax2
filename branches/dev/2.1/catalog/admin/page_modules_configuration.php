@@ -126,9 +126,9 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
                 <td class="dataTableContent" align="center">
 					<?php
                           if ($links['pm_active'] == 'yes') {
-                            echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&amp;flag=no&amp;page=1&amp;tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+                            echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&amp;flag=no&amp;page=' . $_GET['page'] . '&amp;tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
                           } else {
-                            echo '<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&amp;flag=yes&amp;page=1&amp;tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+                            echo '<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&amp;flag=yes&amp;page=' . $_GET['page'] . '&amp;tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
                           }
                     ?>
 				</td>              

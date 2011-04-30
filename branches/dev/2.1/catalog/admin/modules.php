@@ -245,7 +245,11 @@ $Id$
         $keys = '';
         reset($mInfo->keys);
         while (list(, $value) = each($mInfo->keys)) {
-          $keys .= '<b>' . constant($value['title']) . '</b><br>';
+		  if (constant($value['title'])) {
+			$keys .= '<b>' . constant($value['title']) . '</b><br>';
+		  } else {
+			$keys .= '<b>' . $value['title'] . '</b><br>';
+		  }
           if ($value['use_function']) {
             $use_function = $value['use_function'];
             if (preg_match('/->/', $use_function)) {

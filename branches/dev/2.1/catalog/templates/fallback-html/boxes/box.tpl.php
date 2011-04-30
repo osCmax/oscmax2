@@ -29,13 +29,13 @@ $Id: box.tpl.php 1026 2011-01-07 18:18:43Z michael.oscmax@gmail.com $
                   <td>
                     <table border="0" width="100%" cellspacing="0" cellpadding="3">
                       <tr>
-                        <td><img src="images/icons/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
+                        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '1'); ?></td>
                       </tr>
                       <tr>
                         <td class="boxText"<?php if (isset($boxContent_attributes)) echo $boxContent_attributes; ?>><?php echo $boxContent; ?></td>
                       </tr>
                       <tr>
-                        <td><img src="images/icons/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
+                        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '1'); ?></td>
                       </tr>
                     </table>
                   </td>

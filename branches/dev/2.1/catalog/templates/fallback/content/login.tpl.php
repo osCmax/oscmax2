@@ -38,6 +38,19 @@ $Id$
 ?>
 
 <?php
+  if (isset($_GET['review_message'])) {
+?>      
+      <tr>
+        <td class="messageStackAlert"><?php echo tep_image(DIR_WS_ICONS . 'warning.gif', ICON_WARNING) . '&nbsp;' . TEXT_REVIEW_LOGIN_NEEDED; ?></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+<?php
+  }
+?>
+
+<?php
   if ($messageStack->size('login') > 0) {
 ?>
       <tr>

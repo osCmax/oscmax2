@@ -40,5 +40,6 @@ define('TEXT_CHECKOUT_INTRODUCTION','Proceed to Checkout without creating an acc
 define('PROCEED_TO_CHECKOUT','Proceed to Checkout without Registering');
 
 define('TEXT_GV_LOGIN_NEEDED', 'You need to be logged in to redeem your voucher.  Please create a new account or login below.');
+define('TEXT_REVIEW_LOGIN_NEEDED', 'You need to be logged in to write a review.  Please create a new account or login below.');
 
 ?>

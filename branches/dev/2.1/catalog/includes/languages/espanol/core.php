@@ -26,7 +26,7 @@ define('HEADER_TITLE_MY_ACCOUNT', 'Mi cuenta');
 define('HEADER_TITLE_CONTACT_US', 'Contacto');
 define('HEADER_TITLE_CART_CONTENTS', 'Ver carrito');
 define('HEADER_TITLE_BASKET_CONTENTS', 'Ver cesta');
-define('HEADER_TITLE_CHECKOUT', 'Realizar pedido');
+define('HEADER_TITLE_CHECKOUT', 'Realizar');
 define('HEADER_TITLE_WISHLIST', 'Favoritos');
 define('HEADER_TITLE_TOP', 'Inicio');
 define('HEADER_TITLE_CATALOG', 'Catálogo');

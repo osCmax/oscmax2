@@ -24,8 +24,8 @@ define('TITLE', STORE_NAME);
 define('HEADER_TITLE_CREATE_ACCOUNT', 'Create an Account');
 define('HEADER_TITLE_MY_ACCOUNT', 'My Account');
 define('HEADER_TITLE_CONTACT_US', 'Contact Us');
-define('HEADER_TITLE_CART_CONTENTS', 'Cart Contents');
-define('HEADER_TITLE_BASKET_CONTENTS', 'Basket Contents');
+define('HEADER_TITLE_CART_CONTENTS', 'Cart');
+define('HEADER_TITLE_BASKET_CONTENTS', 'Basket');
 define('HEADER_TITLE_CHECKOUT', 'Checkout');
 define('HEADER_TITLE_WISHLIST', 'Wish List');
 define('HEADER_TITLE_TOP', 'Top');
@@ -288,6 +288,7 @@ define('SMALL_IMAGE_BUTTON_EDIT', 'Edit');
 define('SMALL_IMAGE_BUTTON_VIEW', 'View');
 
 define('ICON_ARROW_RIGHT', 'more');
+define('ICON_CLEAR_HISTORY', 'Clear History');
 define('ICON_CART', 'In Cart');
 define('ICON_ERROR', 'Error');
 define('ICON_SUCCESS', 'Success');
@@ -442,5 +443,8 @@ define('TEXT_VIEW_AS_LIST', 'View as List');
 define('TEXT_VIEW_AS_GRID', 'View as Grid');
 define('TEXT_RESULTS_PAGE', 'Results/Page: ');
 define('TEXT_SORT_ORDER', 'Sort Order: ');
+
+// Recent History
+define('TEXT_LAST_VISITED_PRODUCTS', 'Your viewed products');
 
 ?>

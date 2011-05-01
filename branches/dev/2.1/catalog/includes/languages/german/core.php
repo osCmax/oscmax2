@@ -23,7 +23,7 @@ define('TITLE', STORE_NAME);
 // header text in includes/header.php
 define('HEADER_TITLE_CREATE_ACCOUNT', 'Konto erstellen');
 define('HEADER_TITLE_MY_ACCOUNT', 'Mein Konto');
-define('HEADER_TITLE_CONTACT_US', 'Kontaktieren Sie uns');
+define('HEADER_TITLE_CONTACT_US', 'Kontakt');
 define('HEADER_TITLE_CART_CONTENTS', 'Warenkorb');
 define('HEADER_TITLE_BASKET_CONTENTS', 'Warenkorb');
 define('HEADER_TITLE_CHECKOUT', 'Kasse');

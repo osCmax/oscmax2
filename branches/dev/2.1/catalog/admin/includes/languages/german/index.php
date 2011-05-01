@@ -89,13 +89,13 @@ define('DASHBOARD_PRODUCTS_P_PURCHASED', 'Gekauft');
 
 define('DASHBOARD_HTTP_URL', 'URL');
 define('DASHBOARD_HTTP_BROWSER', 'Browser');
-define('DASHBOARD_HTTP_REFER', 'Verweis');
+define('DASHBOARD_HTTP_REFER', 'Referer');
 define('DASHBOARD_HTTP_ERROR', 'Fehlertyp');
 
 
 define('DASHBOARD_SYSTEM_CONFIG', 'Systemkonfiguration');
 define('DASHBOARD_SYSTEM_SETUP', 'Systemeinrichtung');
-define('DASHBOARD_PERMISSIONS', 'Berechtigungen &amp; Sicherheit'); 
+define('DASHBOARD_PERMISSIONS', 'Berechtigungen & Sicherheit'); 
 
 define('DASHBOARD_NO_ERRORS_DETECTED_CONFIG', 'Keine Fehler in Ihrer Systemkonfiguration gefunden.');
 define('DASHBOARD_ALERT_ERRORS_DETECTED_CONFIG', ' Systemkonfigurationsfehler;');
@@ -109,7 +109,7 @@ define('DASHBOARD_NO_ERRORS_DETECTED_PERMISSION', 'Kein Fehler in Ihren Berechti
 define('DASHBOARD_ALERT_ERRORS_DETECTED_PERMISSION', ' Berechtigungsfehler; ');
 define('DASHBOARD_ALERT_WARNINGS_DETECTED_PERMISSION', ' Berechtigungswarnung(en); ');
 
-define('DASHBOARD_PWA_OPC_ERROR', 'Warnung: Sie haben <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7575&cID=3069', 'NONSSL') . '">One Page Checkout</a></u> und <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=5&cID=1449', 'NONSSL') . '">Purchase Without Account</a></u> aktiviert.  Bitte deaktivieren Sie eines dieser Module.');
+define('DASHBOARD_PWA_OPC_ERROR', 'Fehler: Sie haben <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7575&cID=3069', 'NONSSL') . '">One Page Checkout</a></u> und <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=5&cID=1449', 'NONSSL') . '">Purchase Without Account</a></u> aktiviert.  Bitte deaktivieren Sie eines dieser Module.');
 define('DASHBOARD_OPC_EMAIL_ERROR', 'Warnung: Sie haben One Page Checkout aktiviert, aber keine <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=7575&cID=3079', 'NONSSL') . '">Debug E-Mail-Adresse<a></u> hinterlegt.');
 define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Fehler: Das Installationsverzeichnis befindet sich in: ' . (DIR_FS_CATALOG . 'install/') . '. Bitte entfernen Sie das Verzeichnis aus Sicherheitsgründen.');
 define('WARNING_CONFIG_FILE_WRITEABLE', 'Fehler: Die Konfigurationsdatei: ' . (DIR_FS_CATALOG) . 'includes/configure.php ist beschreibbar. Dies ist ein potenzielles Sicherheitsrisiko - bitte ändern Sie die entsprechenden Berechtigungen dieser Datei.');
@@ -124,5 +124,5 @@ define('WARNING_ADMIN_NOT_RENAMED', 'Warnung: Das admin-Verzeichnis wurde nicht 
 define('WARNING_PHP_FILES_IN_BIGIMAGES', 'Warnung: Es befinden sich Dateien in ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_BIGIMAGES_DIR . ', die keine Bilder sind. Dies könnte auf eine Infizierung Ihres Servers durch bösartige Software hindeuten.');
 define('WARNING_PHP_FILES_IN_PRODUCTS', 'Warnung: Es befinden sich Dateien in ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_PRODUCTS_DIR . ', die keine Bilder sind. Dies könnte auf eine Infizierung Ihres Servers durch bösartige Software hindeuten.');
 define('WARNING_PHP_FILES_IN_THUMBS', 'Warnung: Es befinden sich Dateien in ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_THUMBS_DIR . ', die keine Bilder sind. Dies könnte auf eine Infizierung Ihres Servers durch bösartige Software hindeuten.');
-define('DASHBOARD_AFFILIATE_EMAIL_ERROR', 'Die Affiliate Infobox ist in Ihrem Shop aktiviert, aber Sie haben die Standard-E-Mail-Adresse nicht geändert. Bitte <u><a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=28', 'NONSSL') . '">deaktivieren Sie dieses Modul</a></u>, oder <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=35&amp;cID=1204&amp;action=edit', 'NONSSL') . '"> ändern Sie die E-Mail-Adresse</a></u>.');
+define('DASHBOARD_AFFILIATE_EMAIL_ERROR', 'Warnung: Die Affiliate Infobox ist in Ihrem Shop aktiviert, aber Sie haben die Standard-E-Mail-Adresse nicht geändert. Bitte <u><a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=28', 'NONSSL') . '">deaktivieren Sie dieses Modul</a></u>, oder <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=35&amp;cID=1204&amp;action=edit', 'NONSSL') . '"> ändern Sie die E-Mail-Adresse</a></u>.');
 ?>

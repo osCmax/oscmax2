@@ -10,8 +10,8 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('CROSS_SELL_SUCCESS', 'Cross Sell Produkt #'.$_GET['add_related_product_ID']) . ' erfolgreich aktualisiert.');
-define('SORT_CROSS_SELL_SUCCESS', 'Cross-Sell Produkt #'.$_GET['add_related_product_ID']) . ' erfolgreich aktualisiert.');
+define('CROSS_SELL_SUCCESS', 'Cross Sell Produkt #' . $_GET['add_related_product_ID'] . ' erfolgreich aktualisiert.');
+define('SORT_CROSS_SELL_SUCCESS', 'Cross-Sell Produkt #' . $_GET['add_related_product_ID'] . ' erfolgreich aktualisiert.');
 define('HEADING_TITLE', 'Cross Sell (X-Sell) Verwaltung');
 define('TABLE_HEADING_PRODUCT_ID', 'Produkt Id');
 define('TABLE_HEADING_PRODUCT_MODEL', 'Art-Nr');

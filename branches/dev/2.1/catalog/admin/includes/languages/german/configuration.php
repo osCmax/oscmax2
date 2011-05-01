@@ -187,9 +187,9 @@ define('CD_PRODUCT_IMAGE_WIDTH', 'Die Breite der Produktbilder in der Produktans
 define('CT_PRODUCT_IMAGE_HEIGHT', 'Produktbild Höhe');
 define('CD_PRODUCT_IMAGE_HEIGHT', 'Die Breite der Produktbilder in der Produktansicht in Pixel. Legen Sie keinesfalls beide Werte fest!');
 define('CT_POPUP_IMAGE_WIDTH', 'Popup-Produktbildbreite');
-define('CD_POPUP_IMAGE_WIDTH', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.');
+define('CD_POPUP_IMAGE_WIDTH', 'Begrenzt die Popup-Produktbildbreite während Produktaktualisierungen. MUSS definiert werden.');
 define('CT_POPUP_IMAGE_HEIGHT', 'Popup-Produktbildhöhe');
-define('CD_POPUP_IMAGE_HEIGHT', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.');
+define('CD_POPUP_IMAGE_HEIGHT', 'Begrenzt die Popup-Produktbildhöhe während Produktaktualisierungen. MUSS definiert werden.');
 
 // Configuration ID: 5 - Customer Details
 define('CT_ACCOUNT_GENDER', 'Geschlecht');
@@ -206,12 +206,12 @@ define('CT_PURCHASE_WITHOUT_ACCOUNT', 'Einkauf ohne Kundenkonto');
 define('CD_PURCHASE_WITHOUT_ACCOUNT', 'Erlauben Sie Ihren Besuchern, Einkäufe ohne Kundenkonto zu tätigen?');
 define('CT_PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SHIPPING', 'Einkauf ohne Kundenkonto Lieferadresse');
 define('CD_PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SHIPPING', 'Erlauben Sie Ihren Kunden bei Einkäufen ohne Kundenkonto, eine abweichende Lieferadresse zu erstellen?');
-define('CT_CUSTOMER_COMMENTS_NOTIFY', 'Send Email Notification when customer writes order comment?');
-define('CD_CUSTOMER_COMMENTS_NOTIFY', 'Send email notification when customer adds comments to their order?');
-define('CT_CUSTOMER_COMMENTS_NEW_STATUS', 'Set Order Status: when customers writes order comment');
-define('CD_CUSTOMER_COMMENTS_NEW_STATUS', 'Set the order status that is changed to when the customer makes a comment');
-define('CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Set Order Status: (allows downloads) when customer writes order comment');
-define('CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Set the order status that is changed to when the customer makes a comment');
+define('CT_CUSTOMER_COMMENTS_NOTIFY', 'E-Mail-Benachrichtigung senden, wenn Kunde einen Bestellkommentar schreibt?');
+define('CD_CUSTOMER_COMMENTS_NOTIFY', 'E-Mail-Benachrichtigung senden, wenn Kunde einen Bestellkommentar schreibt?');
+define('CT_CUSTOMER_COMMENTS_NEW_STATUS', 'Bestellstatus setzen: Wenn Kunde einen Bestellkommentar schreibt');
+define('CD_CUSTOMER_COMMENTS_NEW_STATUS', 'Der Bestellstatus wird auf den definierten Status gesetzt, wenn ein Kunde einen Bestellkommentar schreibt.');
+define('CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Bestellstatus setzen: (Download erlaubt) Wenn Kunde einen Bestellkommentar schreibt');
+define('CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Der Bestellstatus wird auf den definierten Status gesetzt, wenn ein Kunde einen Bestellkommentar schreibt');
 
 // Configuration ID: 6 - Module Options - Hidden from Admin Panel
 define('CT_MODULE_PAYMENT_INSTALLED', 'Installierte Module');
@@ -460,36 +460,36 @@ define('CT_SESSION_RECREATE', 'Recreate Session');
 define('CD_SESSION_RECREATE', 'Recreate the session to generate a new session ID when the customer logs on or creates an account (PHP >=4.1 needed).');
 
 // Configuration ID: 16 - Site Maintenance
-define('CT_DOWN_FOR_MAINTENANCE', 'Down for Maintenance: ON/OFF');
-define('CD_DOWN_FOR_MAINTENANCE', 'Down for Maintenance <br>(true=on false=off)');
-define('CT_DOWN_FOR_MAINTENANCE_FILENAME', 'Down for Maintenance: filename');
-define('CD_DOWN_FOR_MAINTENANCE_FILENAME', 'Down for Maintenance filename Default=down_for_maintenance.php');
-define('CT_DOWN_FOR_MAINTENANCE_HEADER_OFF', 'Down for Maintenance: Hide Header');
-define('CD_DOWN_FOR_MAINTENANCE_HEADER_OFF', 'Down for Maintenance: Hide Header <br>(true=hide false=show)');
-define('CT_DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF', 'Down for Maintenance: Hide Column Left');
-define('CD_DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF', 'Down for Maintenance: Hide Column Left <br>(true=hide false=show)');
-define('CT_DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF', 'Down for Maintenance: Hide Column Right');
-define('CD_DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF', 'Down for Maintenance: Hide Column Right <br>(true=hide false=show)r');
-define('CT_DOWN_FOR_MAINTENANCE_FOOTER_OFF', 'Down for Maintenance: Hide Footer');
-define('CD_DOWN_FOR_MAINTENANCE_FOOTER_OFF', 'Down for Maintenance: Hide Footer <br>(true=hide false=show)');
-define('CT_DOWN_FOR_MAINTENANCE_PRICES_OFF', 'Down for Maintenance: Hide Prices');
-define('CD_DOWN_FOR_MAINTENANCE_PRICES_OFF', 'Down for Maintenance: Hide Prices <br>(true=hide false=show)');
-define('CT_EXCLUDE_ADMIN_IP_FOR_MAINTENANCE', 'Down For Maintenance (exclude this IP-Address)');
-define('CD_EXCLUDE_ADMIN_IP_FOR_MAINTENANCE', 'This IP Address is able to access the website while it is Down For Maintenance (like webmaster)');
-define('CT_WARN_BEFORE_DOWN_FOR_MAINTENANCE', 'NOTIFY PUBLIC Before going Down for Maintenance: ON/OFF');
-define('CD_WARN_BEFORE_DOWN_FOR_MAINTENANCE', 'Give a WARNING some time before you put your website Down for Maintenance<br>(true=on false=off)<br>If you set the \'Down For Maintenance: ON/OFF\' to true this will automatically be updated to false');
-define('CT_PERIOD_BEFORE_DOWN_FOR_MAINTENANCE', 'Date and hours for notice before maintenance');
-define('CD_PERIOD_BEFORE_DOWN_FOR_MAINTENANCE', 'Date and hours for notice before maintenance website; Enter date and hours for maintenance website');
-define('CT_DISPLAY_MAINTENANCE_TIME', 'Display when webmaster has enabled maintenance');
-define('CD_DISPLAY_MAINTENANCE_TIME', 'Display when Webmaster has enabled maintenance <br>(true=on false=off)<br>');
-define('CT_DISPLAY_MAINTENANCE_PERIOD', 'Display website maintenance period');
-define('CD_DISPLAY_MAINTENANCE_PERIOD', 'Display website maintenance period');
-define('CT_TEXT_MAINTENANCE_PERIOD_TIME', 'Website maintenance period');
-define('CD_TEXT_MAINTENANCE_PERIOD_TIME', 'Enter Website Maintenance period (hh:mm)');
-define('CT_TEXT_DATE_TIME', 'Down For Maintenance Start Time');
-define('CD_TEXT_DATE_TIME', 'Show when down for maintenance');
-define('CT_DOWN_FOR_MAINTENANCE_INFO_ID', 'Down For Maintenance Information Manager Code');
-define('CD_DOWN_FOR_MAINTENANCE_INFO_ID', 'Enter the code from Information Manager which relates to the Down for Maintenance text. (default=12)');
+define('CT_DOWN_FOR_MAINTENANCE', 'Wartungsmodus: EIN/AUS');
+define('CD_DOWN_FOR_MAINTENANCE', 'Wartungsmpdus <br>(true=Ein false=Aus)');
+define('CT_DOWN_FOR_MAINTENANCE_FILENAME', 'Wartungsmodus: Dateiname');
+define('CD_DOWN_FOR_MAINTENANCE_FILENAME', 'Wartungsmodus Standarddatei = down_for_maintenance.php');
+define('CT_DOWN_FOR_MAINTENANCE_HEADER_OFF', 'Wartungsmodus: Header verstecken');
+define('CD_DOWN_FOR_MAINTENANCE_HEADER_OFF', 'Wartungsmodus: Header verstecken <br>(true=verstecken false=anzeigen)');
+define('CT_DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF', 'Wartungsmodus: Linke Spalte verstecken');
+define('CD_DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF', 'Wartungsmodus: Linke Spalte verstecken <br>(true=verstecken false=anzeigen)');
+define('CT_DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF', 'Wartungsmodus: Rechte Spalte verstecken');
+define('CD_DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF', 'Wartungsmodus: Rechte Spalte verstecken <br>(true=verstecken false=anzeigen)');
+define('CT_DOWN_FOR_MAINTENANCE_FOOTER_OFF', 'Wartungsmodus: Footer verstecken');
+define('CD_DOWN_FOR_MAINTENANCE_FOOTER_OFF', 'Wartungsmodus: Footer verstecken<br>(true=verstecken false=anzeigen)');
+define('CT_DOWN_FOR_MAINTENANCE_PRICES_OFF', 'Wartungsmodus: Preise verstecken');
+define('CD_DOWN_FOR_MAINTENANCE_PRICES_OFF', 'Wartungsmodus: Preise verstecken<br>(true=verstecken false=anzeigen)');
+define('CT_EXCLUDE_ADMIN_IP_FOR_MAINTENANCE', 'Wartungsmodus (diese IP-Adresse ausschließen)');
+define('CD_EXCLUDE_ADMIN_IP_FOR_MAINTENANCE', 'Diese IP-Addresse kann auf die Website trotz Wartungsmodus zugreifen (wie zB der Webmaster)');
+define('CT_WARN_BEFORE_DOWN_FOR_MAINTENANCE', 'Wartung öffentlich ankündigen: ON/OFF');
+define('CD_WARN_BEFORE_DOWN_FOR_MAINTENANCE', 'Zeigt Ihren Besuchern eine WARNUNG an, bevor der Wartungsmodus aktiviert wird.<br>(true=Ja false=Nein)<br>Wenn Sie den Wartungsmodus aktivieren, wird diese Einstellung automatisch auf false gesetzt.');
+define('CT_PERIOD_BEFORE_DOWN_FOR_MAINTENANCE', 'Datum und Dauer der Wartung');
+define('CD_PERIOD_BEFORE_DOWN_FOR_MAINTENANCE', 'Datum und Dauer der Wartung. Wird für die Ankündigung einer Wartung verwendet.');
+define('CT_DISPLAY_MAINTENANCE_TIME', 'Bai aktivem wenn Wartungsmodus aktiv ist');
+define('CD_DISPLAY_MAINTENANCE_TIME', 'Bei aktivem Wartungsmodus aktiv ist<br>(true=Ja false=Nein)<br>');
+define('CT_DISPLAY_MAINTENANCE_PERIOD', 'Wartungsdauer anzeigen');
+define('CD_DISPLAY_MAINTENANCE_PERIOD', 'Wartungsdauer anzeigen');
+define('CT_TEXT_MAINTENANCE_PERIOD_TIME', 'Wartungsdauer');
+define('CD_TEXT_MAINTENANCE_PERIOD_TIME', 'Wartungsdauer angeben (hh:mm)');
+define('CT_TEXT_DATE_TIME', 'Wartungsbeginn');
+define('CD_TEXT_DATE_TIME', 'Wartungsbeginn während der Wartung anzeigen');
+define('CT_DOWN_FOR_MAINTENANCE_INFO_ID', 'Wartungsmodus Information Manager Code');
+define('CD_DOWN_FOR_MAINTENANCE_INFO_ID', 'Code aus dem Information Manager angeben, der auf den Wartungsmodus text verweist. (Standard=12)');
 
 // Configuration ID: 25 - CKEditor
 define('CT_HTML_AREA_WYSIWYG_DISABLE', 'PRODUCT DESCRIPTIONS use WYSIWYG CK Editor?');

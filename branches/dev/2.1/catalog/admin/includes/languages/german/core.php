@@ -222,7 +222,7 @@ define('BOX_CONFIGURATION_WELCOME', 'Wilkommensnachricht');
 define('BOX_CONFIGURATION_OFS', 'Empfehlungen');
 define('BOX_CONFIGURATION_AFFILIATE', 'Affiliate');
 define('BOX_CONFIGURATION_ACCOUNTS', 'Konten');
-define('BOX_CONFIGURATION_MAINTENANCE', 'Seitenwartung');
+define('BOX_CONFIGURATION_MAINTENANCE', 'Wartungsmodus');
 define('BOX_CONFIGURATION_MOPICS', 'Dynamic MoPics');
 define('BOX_CONFIGURATION_PRINT', 'Druckbarer Katalog');
 define('BOX_CONFIGURATION_SEO', 'SEO URLs');
@@ -506,6 +506,7 @@ define('IMAGE_MC_SYNC', 'Mit MailChimp synchronisieren');
 define('IMAGE_HELP', 'Hilfe');
 define('IMAGE_LOGOFF', 'Abmelden');
 define('IMAGE_MANAGE_ACCOUNT', 'Konto verwalten');
+define('IMAGE_BUTTON_UNSUBSCRIBE', 'Abmelden');
 
 define('ICON_CROSS', 'Falsch');
 define('ICON_CURRENT_FOLDER', 'Aktueller Ordner');

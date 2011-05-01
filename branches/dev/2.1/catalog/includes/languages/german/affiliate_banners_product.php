@@ -13,7 +13,7 @@ $Id$
 define('NAVBAR_TITLE', 'Affiliateprogramm');
 define('HEADING_TITLE', 'Affiliateprogramm - Produktlinks');
 
-define('TEXT_AFFILIATE_NAME', 'Produktname:');
+define('TEXT_AFFILIATE_NAME', 'Produktbanner:');
 define('TEXT_INFORMATION', 'Wählen Sie jenes Produkt aus den nachstehenden Möglichkeiten, auf welche Sie verlinken möchten.');
 define('TEXT_AFFILIATE_INFO', 'Kopieren Sie den folgenden Code und fügen Sie ihn in Ihre Website ein.');
 ?>

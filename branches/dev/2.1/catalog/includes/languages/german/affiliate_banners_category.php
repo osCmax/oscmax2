@@ -13,7 +13,7 @@ $Id$
 define('NAVBAR_TITLE', 'Affiliateprogramm');
 define('HEADING_TITLE', 'Affiliateprogramm - Kategorielinks');
 
-define('TEXT_AFFILIATE_NAME', 'Kategoriename:');
+define('TEXT_AFFILIATE_NAME', 'Kategoriebanner:');
 define('TEXT_INFORMATION', 'Wählen Sie jene Kategorie aus den nachstehenden Möglichkeiten, auf welche Sie verlinken möchten.');
 define('TEXT_AFFILIATE_INFO', 'Kopieren Sie den folgenden Code und fügen Sie ihn in Ihre Website ein.');
 ?>

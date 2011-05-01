@@ -27,10 +27,12 @@ $Id$
   $counter_startdate_formatted = strftime(DATE_FORMAT_LONG, mktime(0, 0, 0, substr($counter_startdate, 4, 2), substr($counter_startdate, -2), substr($counter_startdate, 0, 4)));
 ?>
 
-<table border="0" width="100%" cellspacing="0" cellpadding="1">
-  <tr class="footer">
-    <td class="footer">&nbsp;&nbsp;<?php echo strftime(DATE_FORMAT_LONG); ?>&nbsp;&nbsp;</td>
-    <td align="right" class="footer">&nbsp;&nbsp;<?php echo $counter_now . ' ' . FOOTER_TEXT_REQUESTS_SINCE . ' ' . $counter_startdate_formatted; ?>&nbsp;&nbsp;</td>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr class="headerNavigation">
+    <td class="breadcrumb_left" width="5"><?php echo tep_draw_separator('pixel_trans.gif', '1', '24'); ?></td>
+    <td class="breadcrumb" align="left">&nbsp;&nbsp;<?php echo strftime(DATE_FORMAT_LONG); ?></td>
+    <td class="breadcrumb" align="right"><?php echo $counter_now . ' ' . FOOTER_TEXT_REQUESTS_SINCE . ' ' . $counter_startdate_formatted; ?>&nbsp;&nbsp;</td>
+    <td class="breadcrumb_right" width="5">&nbsp;</td>
   </tr>
 </table>
 <table>

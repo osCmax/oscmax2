@@ -221,8 +221,17 @@ $Id$
       $keys = '';
       reset($mInfo->keys);
       while (list($key, $value) = each($mInfo->keys)) {
-        $keys .= '<b>' . constant($value['title']) . '</b><br>' . constant($value['description']) . '<br>';
-
+		if (constant($value['title'])) {
+			$keys .= '<b>' . constant($value['title']) . '</b><br>';
+		} else {
+			$keys .= '<b>' . $value['title'] . '</b><br>';
+		}
+		if (constant($value['description'])) {
+			$keys .= '<b>' . constant($value['description']) . '</b><br>';
+		} else {
+			$keys .= '<b>' . $value['description'] . '</b><br>';
+		}
+	
         if ($value['set_function']) {
           eval('$keys .= ' . $value['set_function'] . "'" . $value['value'] . "', '" . $key . "');");
         } else {

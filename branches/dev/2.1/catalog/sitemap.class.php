@@ -816,8 +816,9 @@ class GoogleSitemap{
 				$top = max($top, $result['products_ordered']);
 
 				//$location = $this->hrefLink('product' . $result['pID'] . FILENAME_PRODUCT_INFO, 'source=google', 'NONSSL', false);
-				$location = $this->hrefLink(FILENAME_PRODUCT_INFO, 'products_id=' . $result['pID'], 'NONSSL', false);
-
+				//$location = $this->hrefLink(FILENAME_PRODUCT_INFO, 'products_id=' . $result['pID'], 'NONSSL', false);
+                $location = tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $result['pID'], 'NONSSL', false);  
+				
 				$lastmod = $this->NotNull($result['last_mod']) ? $result['last_mod'] : $result['date_added'];
 
 				$changefreq = GOOGLE_SITEMAP_PROD_CHANGE_FREQ;
@@ -908,7 +909,8 @@ class GoogleSitemap{
 			while( $result = $this->DB->FetchArray($categories_query) ){
 
 				//$location = $this->hrefLink('category' . $this->GetFullcPath($result['cID']) . FILENAME_DEFAULT, 'source=google', 'NONSSL', false);
-				$location = $this->hrefLink(FILENAME_DEFAULT, 'cPath=' . $this->GetFullcPath($result['cID']), 'NONSSL', false);
+				//$location = $this->hrefLink(FILENAME_DEFAULT, 'cPath=' . $this->GetFullcPath($result['cID']), 'NONSSL', false);
+				$location = tep_href_link(FILENAME_DEFAULT, 'cPath=' . $this->GetFullcPath($result['cID']), 'NONSSL', false); 
 
 				$lastmod = $this->NotNull($result['last_mod']) ? $result['last_mod'] : $result['date_added'];
 

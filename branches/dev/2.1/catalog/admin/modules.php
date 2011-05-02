@@ -227,9 +227,9 @@ $Id$
 			$keys .= '<b>' . $value['title'] . '</b><br>';
 		}
 		if (constant($value['description'])) {
-			$keys .= '<b>' . constant($value['description']) . '</b><br>';
+			$keys .= constant($value['description']) . '<br>';
 		} else {
-			$keys .= '<b>' . $value['description'] . '</b><br>';
+			$keys .= $value['description'] . '<br>';
 		}
 	
         if ($value['set_function']) {

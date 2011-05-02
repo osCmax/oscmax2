@@ -18,12 +18,14 @@ define('ENTRY_KEYWORDS', 'Keywords:');
 define('ENTRY_STATUS', 'Status:');
 define('ENTRY_MANUFACTURER', 'Manufacturer:');
 define('ENTRY_TOTAL', 'Total Products:');
+define('ENTRY_DISPLAY', 'Limit:');
 
 define('TEXT_ORDERS_STATUS', 'All Orders');
 define('TEXT_SELECT_MANUFACTURER', 'All Manufacturers');
 define('TEXT_SELECT_YEAR', 'All Years');
 define('TEXT_SELECT_MONTH', 'All Months');
 define('TEXT_TOTAL', 'Total: ');
+define('TEXT_SHOW_ALL', 'Show All');
 
 define('TEXT_JANUARY', 'January');
 define('TEXT_FEBRUARY', 'February');
@@ -44,4 +46,6 @@ define('TABLE_HEADING_PRODUCTS', 'Product Name');
 define('TABLE_HEADING_PURCHASED', 'Purchased');
 define('TABLE_HEADING_GROSS', 'Gross');
 define('TABLE_HEADING_MANUFACTURERS', 'Manufacturer');
+define('TABLE_HEADING_CUSTOMERS', '(No.) Customers [Orders]');
+
 ?>

@@ -130,6 +130,40 @@ $Id$
       $this->tableBox($info_box_contents, true);
     }
   }
+  
+  class recentHistoryBoxHeading extends tableBox {
+    function recentHistoryBoxHeading($contents, $left_corner = false, $right_corner = false, $right_arrow = false) {
+	  $this->table_cellpadding = '0';
+		
+	  if ($left_corner == true) {
+        $left_corner = tep_image(bts_select('images', 'infobox/top_left.png'));
+      } else {
+        $left_corner = tep_image(bts_select('images', 'infobox/top_spacer.png'));
+      }
+      if ($right_arrow == true) {
+        $right_arrow = '<a href="' . $right_arrow . '">' . tep_image(bts_select('images', 'infobox/clear.png'), ICON_CLEAR_HISTORY) . '</a>';
+      } else {
+        $right_arrow = '';
+      }
+      if ($right_corner == true) {
+        $right_corner = tep_image(bts_select('images', 'infobox/top_right.png'));
+      } else {
+        $right_corner = tep_image(bts_select('images', 'infobox/top_spacer.png'));
+      }
+	  
+	  $info_box_contents = array();
+      $info_box_contents[] = array(array('params' => 'class="infoBoxHeading"',
+                                         'text' => $left_corner),
+                                   array('params' => 'width="100%" class="infoBoxHeading"',
+                                         'text' => $contents[0]['text']),
+                                   array('params' => 'class="infoBoxHeading"',
+                                         'text' => $right_arrow),
+                                   array('params' => 'class="infoBoxHeading" nowrap',
+                                         'text' => $right_corner));
+
+      $this->tableBox($info_box_contents, true);
+	}  
+  }
 
   class contentBox extends tableBox {
     function contentBox($contents) {

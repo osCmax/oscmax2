@@ -110,7 +110,7 @@ $y -= 10;
 $pdf->ezSetY($y);
 
 // sold to address 
-$pos = $y;
+$pos = 720;
 $indent = LEFT_MARGIN + TEXT_BLOCK_INDENT;
 
 $pdf->addText($indent,$pos -= GENERAL_LEADING,GENERAL_FONT_SIZE,$order->billing['name']);

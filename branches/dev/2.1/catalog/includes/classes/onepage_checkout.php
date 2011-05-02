@@ -42,7 +42,7 @@ class osC_onePageCheckout {
       {
         tep_session_unregister('customer_shopping_points_spending');
       }
-      
+
       $onepage = array(
         'info'           => array(
           'payment_method' => '', 'shipping_method' => '', 'comments' => '', 'coupon' => ''
@@ -123,7 +123,7 @@ class osC_onePageCheckout {
       $order->info['shipping_cost'] = $shipping['cost'];
     }
     if (tep_not_null($onepage['info']['comments'])){
-      
+
       $comments = $onepage['info']['comments'];
       if (!tep_session_is_registered('comments')) tep_session_register('comments');
     }
@@ -134,7 +134,7 @@ class osC_onePageCheckout {
       //kgt - discount coupons
       if (tep_not_null($onepage['info']['coupon'])) {
       //this needs to be set before the order object is created, but we must process it after
-        
+
         $order->info['coupon'] = $onepage['info']['coupon'];
         if (!tep_session_is_registered('coupon')) tep_session_register('coupon');
         //$order->info['applied_discount'] = $onepage['info']['applied_discount'];
@@ -354,6 +354,14 @@ class osC_onePageCheckout {
   function updateCartProducts($qtys, $ids){
     global $cart, $customer_shopping_points_spending;
     foreach($qtys as $pID => $qty){
+    // Added conditionals for cart JW
+      if (!is_numeric($pID) || !is_numeric($qty) ) {
+        return false;
+      }
+      if ($qty <= 0) {
+        $cart->remove($pID);
+      }
+    // END JW added
       $cart->update_quantity($pID, $qty, $ids[$pID]);
     }
     if(tep_session_is_registered('customer_shopping_points_spending'))
@@ -373,7 +381,7 @@ class osC_onePageCheckout {
   function removeProductFromCart($productID){
     global $cart, $customer_shopping_points_spending;
     $cart->remove($productID);
-    
+
     if(tep_session_is_registered('customer_shopping_points_spending'))
       $this->redeemPoints($customer_shopping_points_spending);
 
@@ -413,7 +421,7 @@ class osC_onePageCheckout {
 
         $onepage['customer']['email_address'] = $check_customer['customers_email_address'];
 
-        
+
         $customer_default_address_id = $check_customer['customers_default_address_id'];
         $customer_first_name = $check_customer['customers_firstname'];
         $customer_country_id = $check_country['entry_country_id'];
@@ -460,7 +468,7 @@ class osC_onePageCheckout {
     if (tep_session_is_registered('payment') && tep_not_null($payment) && $payment != $method){
       $GLOBALS[$payment]->selection();
     }
-    
+
     if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
       if(tep_session_is_registered('customer_shopping_points_spending'))
       //if($order->info['subtotal']<=0 || $order->info['total']<=0)
@@ -477,7 +485,7 @@ class osC_onePageCheckout {
         }';
       }
     }
-    
+
     $payment = $method;
     if (!tep_session_is_registered('payment')){
       tep_session_register('payment');
@@ -676,11 +684,11 @@ class osC_onePageCheckout {
     }else{
       $prefix = ($action == 'setSendTo' ? 'shipping_' : 'billing_');
     }
-    
+
     if (ACCOUNT_GENDER == 'true') $gender = $_POST[$prefix . 'gender'];
     if (ACCOUNT_COMPANY == 'true') $company = tep_db_prepare_input($_POST[$prefix . 'company']);
     if (ACCOUNT_SUBURB == 'true') $suburb = tep_db_prepare_input($_POST[$prefix . 'suburb']);
-    
+
     if (!isset($_POST[$prefix . 'zipcode'])){
       if(ONEPAGE_AUTO_SHOW_BILLING_SHIPPING == 'True'){
         $zip_code = tep_db_prepare_input(ONEPAGE_AUTO_SHOW_DEFAULT_ZIP);
@@ -784,7 +792,7 @@ class osC_onePageCheckout {
     }
 
     $onepage[$varName] = array_merge($onepage[$varName], $order->{$varName});
-    
+
     return '{
         success: true
       }';
@@ -954,8 +962,8 @@ class osC_onePageCheckout {
 				$invalid = true;
 			}
 		}
-	
-		
+
+
 		if($invalid == true)
 		{
  			if($redirect == true)
@@ -983,7 +991,7 @@ class osC_onePageCheckout {
     $cart_Worldpay_Junior_ID, $shipping, $cartID, $order_total_modules, $onepage, $credit_covers, $payment,
     $payment_modules;
 		$this->checkCartValidity();
-    
+
     $comments = tep_db_prepare_input($_POST['comments']);
     if (!tep_session_is_registered('comments')) tep_session_register('comments');
     $onepage['customer']['comments'] = $_POST['comments'];
@@ -1015,7 +1023,7 @@ class osC_onePageCheckout {
     }
     $payment_modules->update_status();
     $paymentMethod = $onepage['info']['payment_method'];
-    
+
     ##### Points/Rewards Module V2.1rc2a check for error BOF #######
     if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
   	  if (isset($_POST['customer_shopping_points_spending']) && is_numeric($_POST['customer_shopping_points_spending']) && ($_POST['customer_shopping_points_spending'] > 0)) {
@@ -1136,7 +1144,7 @@ class osC_onePageCheckout {
 		                                                                                                IMAGE_CONTINUE,
 		                                                                                                'style="display:none;"') . $hiddenFields . '<script>
            document.write(\'<div style="width:100%;height:100%;margin-left:auto;margin-top:auto;text-align:center"><img src="' . DIR_WS_HTTP_CATALOG . DIR_WS_IMAGES . 'ajax_load.gif"><p style="font-family: Verdana,Arial,sans-serif; font-size: 12px;">Processing Order, Please Wait...</p></div>\');
-            setTimeout("redirectForm.submit()", 3000);  
+            setTimeout("redirectForm.submit()", 3000);
            </script></form>';
 
 
@@ -1329,7 +1337,7 @@ class osC_onePageCheckout {
       if (!tep_session_is_registered('sendto')) tep_session_register('sendto');
 			if (!tep_session_is_registered('billto')) tep_session_register('billto');
 
-      
+
 
       if (!tep_session_is_registered('customer_default_address_id')) tep_session_register('customer_default_address_id');
       if (!tep_session_is_registered('customer_first_name')) tep_session_register('customer_first_name');
@@ -1499,7 +1507,7 @@ class osC_onePageCheckout {
     global $sendto, $customer_id, $customer_default_address_id, $shipping;
     // if no shipping destination address was selected, use the customers own address as default
     if (!tep_session_is_registered('sendto')) {
-      
+
       $sendto = $customer_default_address_id;
       tep_session_register('sendto');
     } else {
@@ -1521,7 +1529,7 @@ class osC_onePageCheckout {
     global $billto, $customer_id, $customer_default_address_id, $shipping;
     // if no billing destination address was selected, use the customers own address as default
     if (!tep_session_is_registered('billto')) {
-      
+
       $billto = $customer_default_address_id;
       tep_session_register('billto');
     } else {

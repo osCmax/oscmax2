@@ -921,9 +921,9 @@ define('CD_BOX_WIDTH_RIGHT', 'What width would you like your right column to be 
 define('CT_LEFT_COLUMN_SHOW', 'Show/Hide left column');
 define('CD_LEFT_COLUMN_SHOW', 'Would you like to show the left column in your template?');
 define('CT_RIGHT_COLUMN_SHOW', 'Show/Hide right column');
-define('CD_RIGHT_COLUMN_SHOW', 'Would you like to show the left column in your template?');
+define('CD_RIGHT_COLUMN_SHOW', 'Would you like to show the right column in your template?');
 define('CT_TEMPLATE_SWITCHING_ALLOWED', 'Template Switching Allowed');
-define('CD_TEMPLATE_SWITCHING_ALLOWED', 'Allow template switching through the url (for easy new template testing).');
+define('CD_TEMPLATE_SWITCHING_ALLOWED', 'Allow template switching through the url (for easy new template testing).  <br><br>Simply switch template by appending <b>?tplDir=compromise</b> to your catalog index page.');
 define('CT_DIR_WS_TEMPLATES_DEFAULT', 'Default Template Directory');
 define('CD_DIR_WS_TEMPLATES_DEFAULT', 'Subdirectory (in templates/) where the template files are stored which should be loaded by default.');
 define('CT_TEMPLATE_SWITCHING_MENU', 'Template Switching Menu Display');

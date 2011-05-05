@@ -507,6 +507,9 @@ define('IMAGE_HELP', 'Help');
 define('IMAGE_LOGOFF', 'Logoff');
 define('IMAGE_MANAGE_ACCOUNT', 'Manage Account');
 define('IMAGE_BUTTON_UNSUBSCRIBE', 'Unsubscribe');
+define('IMAGE_BULK_SET_STATUS', 'Bulk Set Status');
+define('IMAGE_ACTIVATE_ALL', 'Activate All');
+define('IMAGE_DEACTIVATE_ALL', 'Deactivate All');
 
 define('ICON_CROSS', 'False');
 define('ICON_CURRENT_FOLDER', 'Current Folder');

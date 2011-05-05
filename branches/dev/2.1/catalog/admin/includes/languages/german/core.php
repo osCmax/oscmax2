@@ -70,50 +70,6 @@ define('TEXT_DISPLAY_NUMBER_OF_MEMBERS', '<b>%d</b> bis <b>%d</b> (von <b>%d</b>
 // this may not work under win32 environments..
 
 ////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 setlocale(LC_TIME, 'de_DE.ISO_8859-1');
 define('DATE_FORMAT_SHORT', '%d.%m.%Y');  // this is used for strftime()
 define('DATE_FORMAT_LONG', '%A, %d %B %Y'); // this is used for strftime()
@@ -507,6 +463,10 @@ define('IMAGE_HELP', 'Hilfe');
 define('IMAGE_LOGOFF', 'Abmelden');
 define('IMAGE_MANAGE_ACCOUNT', 'Konto verwalten');
 define('IMAGE_BUTTON_UNSUBSCRIBE', 'Abmelden');
+define('IMAGE_BULK_SET_STATUS', 'Alle ändern');
+define('IMAGE_ACTIVATE_ALL', 'Alle aktivieren');
+define('IMAGE_DEACTIVATE_ALL', 'Alle deaktivieren');
+
 
 define('ICON_CROSS', 'Falsch');
 define('ICON_CURRENT_FOLDER', 'Aktueller Ordner');

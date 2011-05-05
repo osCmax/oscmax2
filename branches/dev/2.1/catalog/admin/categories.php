@@ -983,38 +983,48 @@ if ($action == 'new_product') {
   			</ul>
 
             <?php for ($i=0; $i<sizeof($languages); $i++) { ?>
-                <div id="categorytabs-<?php echo $i ?>">
-                <table width="100%">
-                	<tr>
-            			<td class="main"><?php echo TEXT_EDIT_CATEGORIES_NAME; ?></td>
-            			<td class="main"><?php echo tep_draw_input_field('categories_name[' . $languages[$i]['id'] . ']', (($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : tep_get_category_name($cInfo->categories_id, $languages[$i]['id']))); ?></td>
-          			</tr>
-					<tr>
-            			<td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          			</tr>
-                    <tr>
-            			<td class="main"><?php echo TEXT_EDIT_CATEGORIES_HEADING_TITLE; ?></td>
-            			<td class="main"><?php echo tep_draw_input_field('categories_heading_title[' . $languages[$i]['id'] . ']', (($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : tep_get_category_heading_title($cInfo->categories_id, $languages[$i]['id']))); ?></td>
-          			</tr>
-                    <tr>
-            			<td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          			</tr>
-                    <tr>
-            			<td class="main" valign="top"><?php echo TEXT_EDIT_CATEGORIES_DESCRIPTION; ?></td>
-            			<td><table border="0" cellspacing="0" cellpadding="0">
-              				<tr>
-                				<td class="main" valign="top"></td>
-                				<td class="main">
-                				<?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
-							   echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id'])),'id="category_description' . $languages[$i]['id'] . '" class="ckeditor"') . '</td>';
-			                  } else { echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
-            				    } // EOF: CKeditor
-                				?>
-              				</tr>
-             			</table></td>
-          			</tr>
-                    </table>
-                	</div>
+            
+            <div id="categorytabs-<?php echo $i ?>">
+              <table width="100%">
+                <tr>
+            	  <td class="main"><?php echo TEXT_EDIT_CATEGORIES_NAME; ?></td>
+            	  <td class="main"><?php echo tep_draw_input_field('categories_name[' . $languages[$i]['id'] . ']', (($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : tep_get_category_name($cInfo->categories_id, $languages[$i]['id']))); ?></td>
+          		</tr>
+				<tr>
+            	  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          		</tr>
+                <tr>
+            	  <td class="main"><?php echo TEXT_EDIT_CATEGORIES_HEADING_TITLE; ?></td>
+            	  <td class="main"><?php echo tep_draw_input_field('categories_heading_title[' . $languages[$i]['id'] . ']', (($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : tep_get_category_heading_title($cInfo->categories_id, $languages[$i]['id']))); ?></td>
+          		</tr>
+                <tr>
+            	  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          		</tr>
+                <tr>
+            	  <td class="main" valign="top"><?php echo TEXT_EDIT_CATEGORIES_DESCRIPTION; ?></td>
+            	  <td></td>
+          		</tr>
+                <tr>
+                  <td colspan="2" valign="top" class="main">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="2" valign="top" class="main">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              		  <tr>
+                	    <td valign="top" class="main">
+                		<?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
+						  echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id'])),'id="category_description' . $languages[$i]['id'] . '" class="ckeditor"') . '</td>';
+			            } else { 
+						  echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
+            			} // EOF: CKeditor
+                		?>
+                        </td>
+               		  </tr>
+             		</table>
+                  </td>
+                </tr>
+              </table>
+            </div>       
             <?php } ?>
             </div>
             </td>

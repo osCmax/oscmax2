@@ -307,7 +307,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 		  }
 		  // Out of Stock Corner Banner
 		  if (CB_OUT_OF_STOCK == 'true') {
-		    if ($listing[$x]['products_quantity'] == 0) {
+		    if ($listing[$x]['products_quantity'] < 1) {
 		      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . 'corner_banners/' . $language . '/out_of_stock.png" alt="">';
 		    }
 		  }	

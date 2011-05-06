@@ -25,12 +25,12 @@ $Id$
 ////
 // The HTML image wrapper function
   function tep_image($src, $alt = '', $width = '', $height = '', $parameters = '') {
-    if ( (empty($src) || ($src == DIR_WS_IMAGES . 'categories/')) && (CATEGORY_IMAGE_REQUIRED == 'false') ) {
+    if ( (empty($src) || ($src == DIR_WS_IMAGES . CATEGORY_IMAGES_DIR)) && (CATEGORY_IMAGE_REQUIRED == 'false') ) {
       return false;
     }
 	
 	// Adds missing image functionality 
-	if ( ( (!file_exists($src)) || ($src == DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR) ) && (PRODUCT_IMAGE_REPLACE == 'true') ) {
+	if ( ( (!file_exists($src)) || ($src == DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR) || ($src == DIR_WS_IMAGES . CATEGORY_IMAGES_DIR) ) && (PRODUCT_IMAGE_REPLACE == 'true') ) {
 	  $src = DIR_WS_ICONS . 'default.png';
 	  $alt = TEXT_MISSING_IMAGE;	
 	}

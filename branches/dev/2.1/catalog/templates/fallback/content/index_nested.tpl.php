@@ -28,12 +28,8 @@ $Id$
               }
 			  $image = tep_db_query("select categories_image from " . TABLE_CATEGORIES . " where categories_id = '" . (int)$current_category_id . "' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
               $image = tep_db_fetch_array($image);
-              $image = $image['categories_image'];
-	          $image_folder = CATEGORY_IMAGES_DIR;
 			  
-			  if ( (file_exists(DIR_WS_IMAGES . $image_folder . $image)) && ($image !='') ) {
-		        echo tep_image(DIR_WS_IMAGES . $image_folder . $image, $category['categories_heading_title'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT, 'style="float:right; margin:5px;"');
-		      }
+			  echo tep_image(DIR_WS_IMAGES . CATEGORY_IMAGES_DIR . $image['categories_image'], $category['categories_heading_title'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT, 'style="float:right; margin:5px;"');
 			  
 			  if (tep_not_null($category['categories_description'])) {
 		        echo $category['categories_description'];

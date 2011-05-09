@@ -412,6 +412,8 @@ function format_size($size) {
                 <!-- START OF ORPHANS -->
                 <?php
                    case 'orphans':
+				   case 'delete_orphans_confirm':
+				   case 'delete_orphans':
 			    ?>
                 <table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr class="dataTableHeadingRow">
@@ -566,8 +568,24 @@ function format_size($size) {
                 </table>
                 <?php	
 				}// end if
+                
+                // Delete orphans
+                if ($action == 'delete_orphans') {
+				  $images_removed = 0;
+	                foreach ($orphans_lg as $large_orphan) {
+					  unlink(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $large_orphan);
+					  $images_removed++;
+					}
+					foreach ($orphans_md as $medium_orphan) {
+					  unlink(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $medium_orphan);
+					  $images_removed++;
+				    }
+					foreach ($orphans_sm as $small_orphan) {
+					  unlink(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $small_orphan);
+					  $images_removed++;
+				    }
+				} // end if ($action == 'delete_orphans')
                 ?>
-				
                 <?php
 				  break;
 				?>
@@ -742,9 +760,21 @@ function format_size($size) {
 						  $contents[] = array('text' => '<br>' . TEXT_OUT_OF . '<b>' . $image_count . '</b>' . TEXT_PRODUCTS_YOU_HAVE . '<b>' . (count($missing_images_lg) + count($missing_images_md) + count($missing_images_sm)) . '</b>' . TEXT_MISSING_IMAGE . ($image_count == 1 ? '' : 's') . '.<br><br>');
 						  break;
 						case 'orphans':
+						case 'delete_orphans':
 						  $heading[] = array('text' => '<b>' . ORPHAN_IMAGES . '</b>');
+						  if ($images_removed != 0) {
+                            $contents[] = array('text' => '<table width="100%"><tr><td class="messageStackSuccess">' . tep_image(DIR_WS_ICONS . 'success.gif', ICON_SUCCESS) . '&nbsp;' . $images_removed . '&nbsp;' . TEXT_ORPHAN_REMOVED . '</td></tr></table>');
+                          }
 					      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_summary.gif', IMAGE_SUMMARY) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=browse') . '">' . tep_image_button('button_browse.gif', IMAGE_BROWSE) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=missing') . '">' . tep_image_button('button_missing.gif', IMAGE_MISSING) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=orphans') . '">' . tep_image_button('button_orphans.gif', IMAGE_ORPHANS) . '</a><br><br>');
 						  $contents[] = array('text' => '<b>' . TEXT_NO_MOPICS . '</b><br><br>');
+						  if ($total_orphans > 0) {
+						    $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=delete_orphans_confirm') . '">' . tep_image_button('button_empty.gif', IMAGE_DELETE) . '</a><br><br>');
+						  }
+						  break;
+						case 'delete_orphans_confirm':
+						  $heading[] = array('text' => '<b>' . TEXT_DELETE_ORPHANS . '</b>');
+						  $contents[] = array('text' => TEXT_CONFIRM_DELETE_ORPHANS);
+						  $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'action=delete_orphans') . '">' . tep_image_button('button_confirm.gif', IMAGE_CONFIRM) . '</a> <a href="' . tep_href_link(FILENAME_IMAGES_REGEN) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
 						  break;
 						case 'regenerate_confirm':
 						  $heading[] = array('text' => '<b>' . TEXT_REGENERATE_ALL . '</b>');

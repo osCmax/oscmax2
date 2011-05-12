@@ -372,6 +372,8 @@ define('CT_PRODUCT_REVIEWS_ENABLE', 'Enable customer product reviews?');
 define('CD_PRODUCT_REVIEWS_ENABLE', 'Do you want to allow customers to write product reviews?');
 define('CT_PRODUCT_SHORT_DESCRIPTION', 'Display Short Description');
 define('CD_PRODUCT_SHORT_DESCRIPTION', 'Do you want to display the short description in the list results?');
+define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Attribute Price Display Method');
+define('CD_ATTRIBUTE_PRICE_DISPLAY', 'Do you want to display your attribute prices as seperate values (eg. +$2.00) or as a combined total of the product price and the attribute price? (eg. $25.00)');
 
 // Configuration ID: 9 - Stock
 define('CT_STOCK_CHECK', 'Check stock level');

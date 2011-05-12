@@ -13,6 +13,7 @@ $Id$
   /*Copied from admin functions*/
   function tep_values_name($values_id) {
     global $languages_id;
+	global $hi_product_price;
 
     $values = tep_db_query("select products_options_values_name from " . TABLE_PRODUCTS_OPTIONS_VALUES . " where products_options_values_id = '" . (int)$values_id . "' and language_id = '" . (int)$languages_id . "'");
     $values_values = tep_db_fetch_array($values);
@@ -90,7 +91,8 @@ while($products_stock_values=tep_db_fetch_array($products_stock_query)) {
 	  $html_ev_out .= '        <tr class="' . $stockTableStyle . '">';
 		$rowscounter += 1; 
 		$attributes = explode(",", $products_stock_values['products_stock_attributes']); 
-		$total_price = $products_facts['products_price'];			
+		//$total_price = $products_facts['products_price'];	
+		$total_price = $hi_product_price;		
 		foreach ($attributes as $attribute) {
 			$attr = explode("-", $attribute);
 			$html_ev_out .= '          <td class="' . $stockTableStyle . '" align="center">' . tep_values_name($attr[1]) . '</td>';

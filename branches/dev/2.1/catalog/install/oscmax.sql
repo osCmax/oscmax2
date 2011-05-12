@@ -1952,6 +1952,8 @@ INSERT INTO configuration VALUES (2655, 'CT_SHOW_ASK_A_QUESTION', 'SHOW_ASK_A_QU
 INSERT INTO configuration VALUES (2659, 'CT_SHOW_MORE_INFO', 'SHOW_MORE_INFO', 'True', 'CD_SHOW_MORE_INFO', 8, 10, NULL, now(), NULL, 'tep_cfg_select_option(array(''True'', ''False''),');
 INSERT INTO configuration VALUES (2665, 'CT_PRODUCT_REVIEWS_ENABLE', 'PRODUCT_REVIEWS_ENABLE', 'True', 'CD_PRODUCT_REVIEWS_ENABLE', 8, 22, NULL, now(), NULL, 'tep_cfg_select_option(array(''True'', ''False''),');
 INSERT INTO configuration VALUES (2662, 'CT_PRODUCT_SHORT_DESCRIPTION', 'PRODUCT_SHORT_DESCRIPTION', 'false', 'CD_PRODUCT_SHORT_DESCRIPTION', '8', '6', NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2667, 'CT_ATTRIBUTE_PRICE_DISPLAY', 'ATTRIBUTE_PRICE_DISPLAY', 'false', 'CD_ATTRIBUTE_PRICE_DISPLAY', '8', '23', NULL, now(), NULL, 'tep_cfg_select_option(array(''separate'', ''combined''),');
+
 
 # Configuration ID: 9 - Stock
 INSERT INTO configuration VALUES (114, 'CT_STOCK_CHECK', 'STOCK_CHECK', 'true', 'CD_STOCK_CHECK', '9', '1', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');

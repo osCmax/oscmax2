@@ -51,6 +51,7 @@ define('TEXT_ENTER_QUANTITY', 'Quantity');
 define('TEXT_PRICE_PER_PIECE', 'Price&nbsp;for&nbsp;each');
 define('TEXT_SAVINGS', 'Your savings');
 define('MINIMUM_ORDER_TEXT', 'Minimum order: ');
+define('MINIMUM_QTY_TEXT', 'Minimum order blocks: ');
 define('PB_DROPDOWN_BEFORE', '');
 define('PB_DROPDOWN_BETWEEN', ' at ');
 define('PB_DROPDOWN_AFTER', ' each');

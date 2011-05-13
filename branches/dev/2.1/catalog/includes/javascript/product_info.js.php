@@ -164,8 +164,8 @@ $(document).ready(function(){
 </script>
 <script type="text/javascript"> 
 // Plus/Minus Code
-function TextBox_AddToIntValue(targetId,addToValue)
+function TextBox_AddToIntValue(targetId,addToValue,minOrder)
 {var input=document.getElementById(targetId);var textInt=parseInt(input.value);if(isNaN(textInt))
 {textInt=0;}
-input.value=textInt+addToValue;if(input.value<=1){input.value=1;}}
+input.value=textInt+addToValue;if(input.value<=minOrder){input.value=minOrder;}}
 </script>

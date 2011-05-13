@@ -100,11 +100,15 @@ $Id$
 // EOF: MSRP
 
 // BOF QPBPP for SPPC
-  $min_order_qty = $pf->getMinOrderQty();
   $min_order_text = '';
-    if ($min_order_qty > 1) {
-      $min_order_text .= '<br><span class="smallText">' . MINIMUM_ORDER_TEXT . $min_order_qty . '</span>';
-    }
+  $min_order_qty = $pf->getMinOrderQty();
+  if ($min_order_qty > 1) {
+    $min_order_text .= '<br><span class="smallText">' . MINIMUM_ORDER_TEXT . $min_order_qty . '</span>&nbsp;';
+  }
+  $qtyBlocks = $pf->getQtyBlocks();
+  if ($qtyBlocks > 1) {
+    $min_order_text .= '<span class="smallText">' . MINIMUM_QTY_TEXT . $qtyBlocks . '</span>';
+  }
 // EOF QPBPP for SPPC
 ?>
    <noscript><style>.panel h4 { display:inline }</style></noscript> 
@@ -366,7 +370,7 @@ $Id$
                           if ( ($hi_product_price == CALL_FOR_PRICE_VALUE) || ($lo_product_price == CALL_FOR_PRICE_VALUE) ){ ?>
 						    <td class="main" align="right" rowspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Price%20Enquiry%0D%0A%0D%0AModel:%20' . str_replace(' ', '%20', $product_info['products_model']) . '%0D%0AProduct%20Name:%20' . str_replace(' ', '%20', $product_info['products_name']) . '%0D%0AProduct%20URL:%20' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . str_replace(' ', '%20', $product_info['products_id']) .'%0D%0A%0D%0A') . '') . '">' . tep_image_submit('button_cfp.gif', IMAGE_BUTTON_CFP); ?></a></td>
                         <?php } else { ?>  
-                       	  	<td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-product.id',+1)" alt="plus 1" class="plusminus"></td>
+                       	  	<td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-product.id', +<?php echo $qtyBlocks; ?>, <?php echo $min_order_qty; ?>)" alt="<?php echo $qtyBlocks; ?>" class="plusminus"></td>
                           	<td rowspan="2" align="center"><?php echo tep_draw_input_field('cart_quantity', $pf->adjustQty(1), 'size="2" id="product-quantity-product.id" '); ?></td>
                             <?php // START: PGM Edit to switch Add to Cart image if stock = 0
 							  if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
@@ -380,7 +384,7 @@ $Id$
 							  } // END: PGM Edit to switch Add to Cart image if stock = 0 ?>
                         </tr>
                         <tr>
-                          <td align="center"><img src="<?php echo DIR_WS_ICONS . 'minus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-product.id',-1)" alt="minus 1" class="plusminus"></td>
+                          <td align="center"><img src="<?php echo DIR_WS_ICONS . 'minus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-product.id',-<?php echo $qtyBlocks; ?>, <?php echo $min_order_qty; ?>)" alt="<?php echo $qtyBlocks; ?>" class="plusminus"></td>
                         <?php } // END: EASY CALL FOR PRICE v1.4 ?>
                         </tr>
                       </table>

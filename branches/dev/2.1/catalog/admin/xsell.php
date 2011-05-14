@@ -120,7 +120,7 @@ $Id$
 				
 				
                   // PGM adds category filter
-                  echo tep_draw_form('category_', FILENAME_XSELL_PRODUCTS, '', 'get');
+                  echo tep_draw_form('category', FILENAME_XSELL_PRODUCTS, '', 'get');
                   echo '&nbsp;&nbsp;' . TEXT_CATEGORY_XSELL . tep_draw_pull_down_menu('category', tep_get_category_tree(), '', 'onChange="this.form.submit();"');
                   echo tep_hide_session_id() . '</form>';
                                 
@@ -398,17 +398,20 @@ $Id$
 				// Search
 			    echo tep_draw_form('search_new_xsell', FILENAME_XSELL_PRODUCTS, '', 'get'). tep_draw_hidden_field('action', 'new_xsell');
 				echo TEXT_SEARCH_IN_RESULTS . ' ' . tep_draw_input_field('search_new_xsell');
+				echo tep_draw_hidden_field('action');
+				echo tep_draw_hidden_field('search');
+				echo tep_draw_hidden_field('category');
 				echo '</form>';
-                ?>            
+                ?>
                 </td>
               </tr>
               
 						<?php
 				        if (isset($_GET['search_new_xsell'])) { // A Sub-Search is used
 						  $search = tep_db_prepare_input($_GET['search_new_xsell']);
-						  $products_query_raw = "select p.products_id, p.products_model, p.products_image, pd.products_name, p.products_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and ((pd.products_name like '%" . tep_db_prepare_input($search) . "%') or (p.products_model like '%" . tep_db_prepare_input($search) . "%')) " . $list_string . " order by p.products_model";
+						  $products_query_raw = "select distinct p.products_id, p.products_model, p.products_image, pd.products_name, p.products_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and p.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and ((pd.products_name like '%" . tep_db_prepare_input($search) . "%') or (p.products_model like '%" . tep_db_prepare_input($search) . "%')) " . $search_string . $category_filter . $list_string . " order by p.products_model";
 						} else {
-						  $products_query_raw = "select p.products_id, p.products_model, p.products_image, pd.products_name, p.products_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' " . $list_string . " order by p.products_model";
+                          $products_query_raw = 'select distinct p.products_id, p.products_model, pd.products_name, p.products_id, p.products_image from ' . TABLE_PRODUCTS . ' p, ' . TABLE_PRODUCTS_DESCRIPTION . ' pd, ' . TABLE_PRODUCTS_TO_CATEGORIES . ' p2c where p.products_id = pd.products_id ' . $search_string . ' and pd.language_id = "'.(int)$languages_id.'" and p.products_id = p2c.products_id ' . $category_filter . $list_string . ' group by p.products_id order by p.products_id asc';
 				        }
 				        $products_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $products_query_raw, $products_query_numrows);
 				        ?>
@@ -462,7 +465,7 @@ $Id$
                 <td class="dataTableHeadingContent" colspan="7" nowrap align="right">
 			    <?php 
 				// Search
-				echo tep_draw_form('search_edit_xsell', FILENAME_XSELL_PRODUCTS, '', 'get'). tep_draw_hidden_field('action', 'edit_xsell');
+				echo tep_draw_form('search_edit_xsell', FILENAME_XSELL_PRODUCTS, '', 'get') . tep_draw_hidden_field('action', 'edit_xsell');
 				echo TEXT_SEARCH_IN_RESULTS . ' ' . tep_draw_input_field('search_edit_xsell');
 				echo '</form>';
                 ?>            

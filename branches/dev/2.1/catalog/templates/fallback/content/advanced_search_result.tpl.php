@@ -12,7 +12,10 @@ $Id$
 ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+      <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE_2; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
@@ -34,7 +37,8 @@ $Id$
                        'PRODUCT_LIST_WEIGHT' => PRODUCT_LIST_WEIGHT,
                        'PRODUCT_LIST_IMAGE' => PRODUCT_LIST_IMAGE,
                        'PRODUCT_LIST_BUY_NOW' => PRODUCT_LIST_BUY_NOW,
-		       'PRODUCT_CORNER_BANNER' => PRODUCT_CORNER_BANNER);
+		               'PRODUCT_CORNER_BANNER' => PRODUCT_CORNER_BANNER,
+			           'PRODUCT_LIST_BESTSELLER' => PRODUCT_LIST_BESTSELLER);
 
   asort($define_list);
 
@@ -69,6 +73,9 @@ $Id$
         break;
       case 'PRODUCT_LIST_WEIGHT':
         $select_column_list .= 'p.products_weight, ';
+        break;
+	  case 'PRODUCT_LIST_BESTSELLER':
+        $select_column_list .= 'p.products_ordered, ';
         break;
     }
   }
@@ -352,6 +359,9 @@ foreach ($epf as $e) {
         break;
       case 'PRODUCT_LIST_PRICE':
         $order_str .= "final_price " . ($sort_order == 'd' ? "desc" : "") . ", pd.products_name";
+        break;
+	  case 'PRODUCT_LIST_BESTSELLER':
+        $order_str .= " products_ordered " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
         break;
     }
   }

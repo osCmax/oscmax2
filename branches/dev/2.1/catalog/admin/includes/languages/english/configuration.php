@@ -374,6 +374,9 @@ define('CT_PRODUCT_SHORT_DESCRIPTION', 'Display Short Description');
 define('CD_PRODUCT_SHORT_DESCRIPTION', 'Do you want to display the short description in the list results?');
 define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Attribute Price Display Method');
 define('CD_ATTRIBUTE_PRICE_DISPLAY', 'Do you want to display your attribute prices as seperate values (eg. +$2.00) or as a combined total of the product price and the attribute price? (eg. $25.00)');
+define('CT_PRODUCT_LIST_BESTSELLER', 'Display Popularity in filter box');
+define('CD_PRODUCT_LIST_BESTSELLER', 'Would you like to allow ');
+
 
 // Configuration ID: 9 - Stock
 define('CT_STOCK_CHECK', 'Check stock level');

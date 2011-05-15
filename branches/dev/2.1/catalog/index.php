@@ -71,7 +71,8 @@ global $customer_group_id;
                          'PRODUCT_LIST_WEIGHT' => PRODUCT_LIST_WEIGHT,
                          'PRODUCT_LIST_IMAGE' => PRODUCT_LIST_IMAGE,
                          'PRODUCT_LIST_BUY_NOW' => PRODUCT_LIST_BUY_NOW,
-						 'PRODUCT_CORNER_BANNER' => PRODUCT_CORNER_BANNER);
+						 'PRODUCT_CORNER_BANNER' => PRODUCT_CORNER_BANNER,
+						 'PRODUCT_LIST_BESTSELLER' => PRODUCT_LIST_BESTSELLER);
 
     asort($define_list);
 
@@ -135,6 +136,9 @@ global $customer_group_id;
           break;
         case 'PRODUCT_LIST_WEIGHT':
           $select_column_list .= 'p.products_weight, ';
+          break;
+		case 'PRODUCT_LIST_BESTSELLER':
+          $select_column_list .= 'p.products_ordered, ';
           break;
       }
     }
@@ -344,6 +348,9 @@ global $customer_group_id;
           break;
         case 'PRODUCT_LIST_PRICE':
           $listing_sql .= " order by final_price " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
+          break;
+		case 'PRODUCT_LIST_BESTSELLER':
+          $listing_sql .= " order by products_ordered " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
           break;
       }
     }

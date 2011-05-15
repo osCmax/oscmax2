@@ -23,7 +23,6 @@ img.corner_banner { display:inline-block; margin-left:-105px; margin-top:-7px; p
 if (tep_not_null($_GET['sort'])) $_GET['sort'] = $_GET['sort'];
 $max_results = (tep_not_null(isset($_GET['max'])) ? $_GET['max'] : MAX_CATALOG_DISPLAY_SEARCH_RESULTS);
 
-
 // sort order array
 for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
       switch ($column_list[$i]) {
@@ -34,6 +33,9 @@ for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
         case 'PRODUCT_LIST_PRICE':
 		  $sort_array[] = array('id' => $i . 'a', 'text' => TEXT_PRICE_LOW_HIGH);
 		  $sort_array[] = array('id' => $i . 'd', 'text' => TEXT_PRICE_HIGH_LOW);
+          break;
+		case 'PRODUCT_LIST_BESTSELLER':
+		  $sort_array[] = array('id' => $i . 'd', 'text' => TEXT_PRICE_BESTSELLER);
           break;	
       }
     }
@@ -112,7 +114,7 @@ $filterbox_left = '<table border="0" width="100%" cellspacing="0" cellpadding="2
 
 $filterbox_center = '<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr><td align="center"><table><tr><td class="smallText">' . $list . '</td></tr><tr><td>' . $grid . '</td></tr></table></td></tr></table>';
 
-$filterbox_right = '<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr><td class="smallText" align="right">' . $page_count . '</td></tr><tr><td class="smallText" align="right">' . TEXT_SORT_ORDER . tep_draw_form('sorting', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['max']) ? tep_draw_hidden_field('max', $_GET['max']) : '') . tep_draw_pull_down_menu('sort', $sort_array, $_GET['sort'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>'; 
+$filterbox_right = '<table border="0" width="100%" cellspacing="2" cellpadding="2"><tr><td class="smallText" align="right">' . $page_count . '</td></tr><tr><td class="smallText" align="right">' . TEXT_SORT_ORDER . tep_draw_form('sorting', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['max']) ? tep_draw_hidden_field('max', $_GET['max']) : '') . tep_draw_pull_down_menu('sort', $sort_array, $_GET['sort'], 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>'; 
 
 $filterbox = '<table border="0" width="100%" cellspacing="0" cellpadding="0" class="filterbox"><tr><td class="smallText" width="37%">' .  $filterbox_left . '</td><td class="smallText" width="26%" align="center">' . $filterbox_center . '</td><td class="smallText" width="37%" align="right">' . $filterbox_right . '</td></tr></table>';
 
@@ -319,6 +321,9 @@ for ($x = 0; $x < $no_of_listings; $x++) {
         $lc_align = '';
 
         switch ($column_list[$col]) {
+		  case 'PRODUCT_LIST_BESTSELLER':
+		  $lc_text = '';
+		  break;
 		  case 'PRODUCT_CORNER_BANNER':
 		  $lc_text = '';
 		  

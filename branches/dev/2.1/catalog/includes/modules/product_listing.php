@@ -67,7 +67,6 @@ $list = '<table align="left"><tr><td width="20" align="center"><a href="' . tep_
 
 $grid = '<table align="left"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '"> ' . tep_image(DIR_WS_ICONS . 'grid.png', 'View as Grid') . '</a></td><td class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '">' . TEXT_VIEW_AS_GRID . '</a></td></tr></table>';
 
-
 // BOF SPPC Hide products and categories from groups
   $page =  $_SERVER["SCRIPT_NAME"];
   $break = Explode('/', $page);
@@ -83,7 +82,7 @@ $grid = '<table align="left"><tr><td width="20" align="center"><a href="' . tep_
 
 	  $filter = '';
       $filterlist_query = tep_db_query($filterlist_sql);
-      if ( (tep_db_num_rows($filterlist_query) > 1)  && ($pfile != 'advanced_search_result.php') ) {
+      if ( (tep_db_num_rows($filterlist_query) > 1) && ($pfile != 'advanced_search_result.php') ) {
         $filter .= tep_draw_form('filter', FILENAME_DEFAULT, 'get') . TEXT_SHOW . '&nbsp;';
         if (isset($_GET['manufacturers_id'])) {
         $filter .= tep_draw_hidden_field('manufacturers_id', $_GET['manufacturers_id']);
@@ -123,42 +122,42 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 ?>
 <!-- PGM SORT ORDER, NUMBER DISPLAY, GRID SWITCH -->
 <!-- begin extra product fields -->
-		<?php
+		
+            <?php
             $epf_list = array();
 			foreach ($epf as $e) {
               if ($e['restrict']) $epf_list[] = $e['field'];
             }
-			
 			$epf_number = count($epf_list);
 			if ($epf_number > 0) { // hide epf if blank ?>
         	  <table border="0" width="100%" cellspacing="0" cellpadding="2" class="filterbox">
           		<tr>
             	  <td class="main" align="right" colspan="2">
 					<?php
-					  echo tep_draw_form('epf_restrict', FILENAME_DEFAULT, 'get');
-					  if (is_array($_GET) && (sizeof($_GET) > 0)) {
-						reset($_GET);
-						while (list($key, $value) = each($_GET)) {
-						  if ( (strlen($value) > 0) && ($key != tep_session_name()) && (!in_array($key, $epf_list)) ) {
-							echo tep_draw_hidden_field($key, $value);
-						  }
-						}
-					  }
-					  foreach ($epf as $e) {
-						if ($e['restrict']) {
-						  echo sprintf(TEXT_RESTRICT_TO, $e['label'], tep_draw_pull_down_menu($e['field'], tep_build_epf_pulldown($e['id'], $languages_id, array(array('id' => '', 'text' => TEXT_ANY_VALUE))),'', 'onchange="this.form.submit()"')) . '<br>';
-						}
-					  }
-					 ?>
-                  </td>
+                      echo tep_draw_form('epf_restrict', FILENAME_DEFAULT, 'get');
+                      if (is_array($_GET) && (sizeof($_GET) > 0)) {
+                        reset($_GET);
+                        while (list($key, $value) = each($_GET)) {
+                          if ( (strlen($value) > 0) && ($key != tep_session_name()) && (!in_array($key, $epf_list)) ) {
+                            echo tep_draw_hidden_field($key, $value);
+                          }
+                        }
+                      }
+                      foreach ($epf as $e) {
+                        if ($e['restrict']) {
+                          echo sprintf(TEXT_RESTRICT_TO, $e['label'], tep_draw_pull_down_menu($e['field'], tep_build_epf_pulldown($e['id'], $languages_id, array(array('id' => '', 'text' => TEXT_ANY_VALUE))),'', 'onchange="this.form.submit()"')) . '<br>';
+                        }
+                      }
+                      ?>
+                      </form>
+            	  </td>
           		</tr>
         	  </table>
-           <?php
+           <?php 
            echo tep_draw_separator('pixel_trans.gif', '100%', '10');
-		   } // end if to hide epf ?>
+           } // end if to hide epf ?>
 <!-- end extra product fields -->
 <?php
-  
   }
 
   $list_box_contents = array();
@@ -232,35 +231,36 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   if ($listing_split->number_of_rows > 0) {
     $rows = 0;
     $listing_query = tep_db_query($listing_split->sql_query);
-// BOF: MOD - Separate Pricing per Customer
+// BOF: Separate Pricing per Customer
     $no_of_listings = tep_db_num_rows($listing_query);
 // global variable (session) $sppc_customer_group_id -> local variable customer_group_id
 
-  if(!tep_session_is_registered('sppc_customer_group_id')) {
-  $customer_group_id = '0';
+  if (!tep_session_is_registered('sppc_customer_group_id')) {
+    $customer_group_id = '0';
   } else {
-   $customer_group_id = $sppc_customer_group_id;
+    $customer_group_id = $sppc_customer_group_id;
   }
+
   while ($_listing = tep_db_fetch_array($listing_query)) {
 // BOF QPBPP for SPPC
-     $_listing['discount_categories_id'] = NULL;
-     $listing[] = $_listing;
-     $list_of_prdct_ids[] = $_listing['products_id'];
-    }
-    $list_of_prdct_ids = array_unique($list_of_prdct_ids);
+    $_listing['discount_categories_id'] = NULL;
+    $listing[] = $_listing;
+    $list_of_prdct_ids[] = $_listing['products_id'];
+  }
+  $list_of_prdct_ids = array_unique($list_of_prdct_ids);
 // EOF QPBPP for SPPC
 // next part is a debug feature, when uncommented it will print the info that this module receives
- /*
-   echo '<pre>';
-   print_r($listing);
-   echo '</pre>';
- */
-  $select_list_of_prdct_ids = "products_id = '".$list_of_prdct_ids[0]."' ";
-  if ($no_of_listings > 1) {
-    for ($n = 1 ; $n < count($list_of_prdct_ids) ; $n++) {
-      $select_list_of_prdct_ids .= "or products_id = '".$list_of_prdct_ids[$n]."' ";
-    }
+/*
+  echo '<pre>';
+  print_r($listing);
+  echo '</pre>';
+*/
+ $select_list_of_prdct_ids = "products_id = '".$list_of_prdct_ids[0]."' ";
+ if ($no_of_listings > 1) {
+  for ($n = 1; $n < count($list_of_prdct_ids); $n++) {
+  $select_list_of_prdct_ids .= "or products_id = '".$list_of_prdct_ids[$n]."' ";
   }
+}
 
 // get all product prices for products with the particular customer_group_id
 // however not necessary for customer_group_id = 0
@@ -274,10 +274,11 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
     }
     for ($x = 0; $x < $no_of_listings; $x++) {
 // replace products prices with those from customers_group table
-      if(!empty($new_prices)) {
+      if (!empty($new_prices)) {
         for ($i = 0; $i < count($new_prices); $i++) {
-          if( $listing[$x]['products_id'] == $new_prices[$i]['products_id'] ) {
+          if ($listing[$x]['products_id'] == $new_prices[$i]['products_id']) {
             $listing[$x]['products_price'] = $new_prices[$i]['products_price'];
+            $listing[$x]['specials_new_products_price'] = $new_prices[$i]['specials_new_products_price'];
             $listing[$x]['final_price'] = $new_prices[$i]['final_price'];
           }
         }
@@ -288,24 +289,22 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   } // end if ($customer_group_id != '0')
 
 // an extra query is needed for all the specials
-
-  $specials_query = tep_db_query("select products_id, specials_new_products_price from " . TABLE_SPECIALS . " where (".$select_list_of_prdct_ids.") and status = '1' and customers_group_id = '" .$customer_group_id. "'");
-  while ($specials_array = tep_db_fetch_array($specials_query)) {
+$specials_query = tep_db_query("select products_id, specials_new_products_price from " . TABLE_SPECIALS . " where (".$select_list_of_prdct_ids.") and status = '1' and customers_group_id = '" .$customer_group_id. "'");
+while ($specials_array = tep_db_fetch_array($specials_query)) {
   $new_s_prices[] = array ('products_id' => $specials_array['products_id'], 'products_price' => '', 'specials_new_products_price' => $specials_array['specials_new_products_price'] , 'final_price' => $specials_array['specials_new_products_price']);
-  }
+}
 
 // add the correct specials_new_products_price and replace final_price
-  for ($x = 0; $x < $no_of_listings; $x++) {
-
-        if(!empty($new_s_prices)) {
-      for ($i = 0; $i < count($new_s_prices); $i++) {
-     if( $listing[$x]['products_id'] == $new_s_prices[$i]['products_id'] ) {
-       $listing[$x]['specials_new_products_price'] = $new_s_prices[$i]['specials_new_products_price'];
-       $listing[$x]['final_price'] = $new_s_prices[$i]['final_price'];
-     }
-         }
-     } // end if(!empty($new_s_prices)
-  } // end for ($x = 0; $x < $no_of_listings; $x++)
+for ($x = 0; $x < $no_of_listings; $x++) {
+  if (!empty($new_s_prices)) {
+    for ($i = 0; $i < count($new_s_prices); $i++) {
+      if ($listing[$x]['products_id'] == $new_s_prices[$i]['products_id']) {
+         $listing[$x]['specials_new_products_price'] = $new_s_prices[$i]['specials_new_products_price'];
+         $listing[$x]['final_price'] = $new_s_prices[$i]['final_price'];
+      }
+    }
+  } // end if(!empty($new_s_prices)
+} // end for ($x = 0; $x < $no_of_listings; $x++)
 
 // BOF QPBPP for SPPC
     $price_breaks_query = tep_db_query("select products_id, products_price, products_qty from  " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id in (" . implode(',', $list_of_prdct_ids) . ") and customers_group_id = '" . $customer_group_id . "' order by products_id, products_qty");
@@ -372,7 +371,6 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
       for ($col=0, $n=sizeof($column_list); $col<$n; $col++) {
         $lc_align = '';
 
-// BOF: MOD - Separate Pricing per Customer - Added on may lines [$x]
         switch ($column_list[$col]) {
 		  case 'PRODUCT_CORNER_BANNER':
 		  $lc_text = '&nbsp;';
@@ -423,7 +421,7 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 		    }
 		  }	
 		  break;
-		  case 'PRODUCT_LIST_MODEL':
+          case 'PRODUCT_LIST_MODEL':
             $lc_align = '';
             $lc_text = '&nbsp;' . $listing[$x]['products_model'] . '&nbsp;';
             break;
@@ -518,18 +516,19 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 
     $list_box_contents[0] = array('params' => 'class="productListing-odd"');
     $list_box_contents[0][] = array('params' => 'class="productListing-data"',
-                                   'text' => TEXT_NO_PRODUCTS);
+                                    'text' => TEXT_NO_PRODUCTS);
 
     new productListingBox($list_box_contents);
   }
 
-  if ( ($listing_split->number_of_rows > 0) && ((PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3')) ) {
+if ( ($listing_split->number_of_rows > 0) && ((PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3')) ) {
 ?>
 <table width="100%" cellspacing="0" cellpadding="0" border="0">
   <tr>
-  	<td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+    <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
   </tr>
 </table>
+
 <table class="filterbox" width="100%" cellpadding="2" cellspacing="0" border="0">
   <tr>
     <td class="smallText"><?php echo $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></td>
@@ -537,5 +536,5 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   </tr>
 </table>
 <?php
-  }
+}
 ?>

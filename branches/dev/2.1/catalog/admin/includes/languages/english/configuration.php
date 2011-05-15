@@ -760,6 +760,8 @@ define('CT_PRICE_BREAK_NOF_LEVELS', 'Maximum number of price break levels');
 define('CD_PRICE_BREAK_NOF_LEVELS', 'Configures the number of price break levels that can be entered on admin side. Levels that are left empty will not be shown to the customer');
 define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Number of price breaks for dropdown');
 define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Set the number of price breaks at which you want to show a dropdown plus "from Low Price" instead of a table');
+define('CT_PRICE_BREAK_PRICE', 'Quantity price break display');
+define('CD_PRICE_BREAK_PRICE', 'Set the price you would like to display when the product has quantity price breaks. (High = highest price, Low = lowest price, Off = removes From and displays high price)');
 
 // Configuration ID: 89 - Google Maps
 define('CT_GOOGLE_MAPS_KEY', 'Google Maps Key');

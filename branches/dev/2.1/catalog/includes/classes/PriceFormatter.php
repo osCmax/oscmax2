@@ -403,10 +403,16 @@ class PriceFormatter {
         . '</s>&nbsp;<span class="productSpecialPrice">' . TEXT_ON_SALE
         . $currencies->display_price($this->specialPrice, tep_get_tax_rate($this->taxClass))
         . '</span></big>&nbsp;';
-    } elseif (true == $this->hasQuantityPrice) {
-      $lc_text = '&nbsp;<big>' . TEXT_PRICE_BREAKS
-      . $currencies->display_price($this->lowPrice, tep_get_tax_rate($this->taxClass))
-      . '&nbsp;</big>';
+    } elseif ( (true == $this->hasQuantityPrice) && (PRICE_BREAK_PRICE != 'off') ) {
+      if (PRICE_BREAK_PRICE == 'high') {
+	    $lc_text = '&nbsp;<big>' . TEXT_PRICE_BREAKS
+        . $currencies->display_price($this->hiPrice, tep_get_tax_rate($this->taxClass))
+        . '&nbsp;</big>';
+	  } else {
+	    $lc_text = '&nbsp;<big>' . TEXT_PRICE_BREAKS
+        . $currencies->display_price($this->lowPrice, tep_get_tax_rate($this->taxClass))
+        . '&nbsp;</big>';
+	  }
     } else {
         $lc_text = '&nbsp;<big>'
         . $currencies->display_price($this->thePrice, tep_get_tax_rate($this->taxClass))

@@ -2169,6 +2169,7 @@ INSERT INTO configuration VALUES (2507, 'CT_RECAPTCHA_PRIVATE_KEY', 'RECAPTCHA_P
 # Configuration ID: 88 - Price Breaks
 INSERT INTO configuration VALUES (2509, 'CT_PRICE_BREAK_NOF_LEVELS', 'PRICE_BREAK_NOF_LEVELS', '10', 'CD_PRICE_BREAK_NOF_LEVELS', 88, 1, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2510, 'CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'NOF_PRICE_BREAKS_FOR_DROPDOWN', '5', 'CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 88, 2, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2999, 'CT_PRICE_BREAK_PRICE', 'PRICE_BREAK_PRICE', 'off', 'CD_PRICE_BREAK_PRICE', 88, 3, now(), now(), NULL, 'tep_cfg_select_option(array(\'high\',\'low\',\'off\'),');
 
 # Configuration ID: 89 - Google Maps
 INSERT INTO configuration VALUES ('77', 'CT_GOOGLE_MAPS_KEY', 'GOOGLE_MAPS_KEY', 'YOURKEY', 'CD_GOOGLE_MAPS_KEY', '89', '25', NULL, now(), NULL, 'tep_cfg_textarea(');

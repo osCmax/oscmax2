@@ -102,12 +102,15 @@ $Id$
 // BOF QPBPP for SPPC
   $min_order_text = '';
   $min_order_qty = $pf->getMinOrderQty();
-  if ($min_order_qty > 1) {
-    $min_order_text .= '<br><span class="smallText">' . MINIMUM_ORDER_TEXT . $min_order_qty . '</span>&nbsp;';
-  }
   $qtyBlocks = $pf->getQtyBlocks();
-  if ($qtyBlocks > 1) {
-    $min_order_text .= '<span class="smallText">' . MINIMUM_QTY_TEXT . $qtyBlocks . '</span>';
+  if ( ($min_order_qty > 1) || ($qtyBlocks > 1) ) {
+    $min_order_text .= '<br>';
+    if ($min_order_qty > 1) {
+      $min_order_text .= '<span class="smallText">' . MINIMUM_ORDER_TEXT . $min_order_qty . '</span>&nbsp;';
+    }  
+    if ($qtyBlocks > 1) {
+      $min_order_text .= '<span class="smallText">' . MINIMUM_QTY_TEXT . $qtyBlocks . '</span>';
+    }
   }
 // EOF QPBPP for SPPC
 ?>

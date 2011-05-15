@@ -103,6 +103,9 @@ $Id$
   $min_order_text = '';
   $min_order_qty = $pf->getMinOrderQty();
   $qtyBlocks = $pf->getQtyBlocks();
+  // If vars are not set then set them to 1 to allow plus/minus to work.
+  if ($min_order_qty == 0) { $min_order_qty = 1; }
+  if ($qtyBlocks == 0) { $qtyBlocks = 1; }
   if ( ($min_order_qty > 1) || ($qtyBlocks > 1) ) {
     $min_order_text .= '<br>';
     if ($min_order_qty > 1) {

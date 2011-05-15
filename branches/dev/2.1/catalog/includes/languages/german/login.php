@@ -31,14 +31,15 @@ define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>Hinweis:</b></font> Der I
 // LINE ADDED: MOD - Separate Pricing Per Customer
 // define the email address that can change customer_group_id on login
 define('SPPC_TOGGLE_LOGIN_PASSWORD', 'root@localhost');
-define('PWA_FAIL_ACCOUNT_EXISTS','Es existiert bereits ein Konto für die E-Mail-Adresse {EMAIL_ADDRESS}. Sie müssen sich hier anmelden mit dem Passwort für dieses Konto, bevor Sie Ihren Einkauf abschließen können.');
+define('PWA_FAIL_ACCOUNT_EXISTS','Es existiert bereits ein Konto für die E-Mail-Adresse {EMAIL_ADDRESS}. Sie müssen sich mit dem Passwort für dieses Konto anmelden, bevor Sie Ihren Einkauf abschließen können.');
 
 define('HEADING_CHECKOUT','<font size="2">Gehen Sie direkt zur Kasse</font>');
 
-define('TEXT_CHECKOUT_INTRODUCTION','Gehen Sie zur Kasse, ohne ein Kundenkonto zu erstellen. Bei dieser Option werden keine Ihrer Benutzerdaten zur weiteren Verwendung gespeichertwerden in unseren Unterlagen aufbewahrt werden. Sie können den Status Ihrer Bestellung nicht verfolgen und bei einem künftigen Einkauf müssen Sie alle Angaben erneut machen.');
+define('TEXT_CHECKOUT_INTRODUCTION','Bestellung ohne Konto abschließen. In diesem Fall werden keine Ihrer Benutzerdaten zur weiteren Verwendung gespeichert. Sie können jedoch den Status Ihrer Bestellung nicht verfolgen und müssen bei einem künftigen Einkauf alle Angaben erneut tätigen.');
 
-define('PROCEED_TO_CHECKOUT','Gehen Sie zur Kasse, ohne ein Kundenkonto zu erstellen');
+define('PROCEED_TO_CHECKOUT','Bestellung ohne Konto abschließen');
 
-define('TEXT_GV_LOGIN_NEEDED', 'Sie müssen angemeldet sein, um Ihren Gutschein einlösen zu können. Bitte erstellen Sie ein neues Konto oder melden Sie sich an.');
+define('TEXT_GV_LOGIN_NEEDED', 'Sie müssen angemeldet sein, um Ihren Gutschein einlösen zu können. Bitte erstellen Sie ein neues Konto oder melden Sie sich an Ihr bestehendes Konto an.');
+define('TEXT_REVIEW_LOGIN_NEEDED', 'Sie müssen angemeldet sein, um eine Bewertung erstellen zu können. Bitte erstellen Sie ein neues Konto oder melden Sie sich an Ihr bestehendes Konto an.');
 
 ?>

@@ -372,6 +372,8 @@ define('CT_PRODUCT_REVIEWS_ENABLE', 'Produktbewertungen durch Kunden erlauben?')
 define('CD_PRODUCT_REVIEWS_ENABLE', 'Möchten Sie Kunden erlauben, Produktbewertungen zu verfassen?');
 define('CT_PRODUCT_SHORT_DESCRIPTION', 'Kurzbeschreibung anzeigen');
 define('CD_PRODUCT_SHORT_DESCRIPTION', 'Möchten Sie die Kurzbeschreibung in der Produktliste anzeigen?');
+define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Attributpreis Anzeigemethode');
+define('CD_ATTRIBUTE_PRICE_DISPLAY', 'Möchten Sie die Attributpreise als tatsächlichen Attributpreis (zB. +2,00 €) oder als Summe aus Produktpreis und Attributpreis (zB. 25,00 €) anzeigen?');
 
 // Configuration ID: 9 - Stock
 define('CT_STOCK_CHECK', 'Lagerstand prüfen');
@@ -758,6 +760,8 @@ define('CT_PRICE_BREAK_NOF_LEVELS', 'Maximum number of price break levels');
 define('CD_PRICE_BREAK_NOF_LEVELS', 'Configures the number of price break levels that can be entered on admin side. Levels that are left empty will not be shown to the customer');
 define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Number of price breaks for dropdown');
 define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Set the number of price breaks at which you want to show a dropdown plus "from Low Price" instead of a table');
+define('CT_PRICE_BREAK_PRICE', 'Quantity price break display');
+define('CD_PRICE_BREAK_PRICE', 'Set the price you would like to display when the product has quantity price breaks. (High = highest price, Low = lowest price, Off = removes From and displays high price)');
 
 // Configuration ID: 89 - Google Maps
 define('CT_GOOGLE_MAPS_KEY', 'Google Maps Key');
@@ -921,9 +925,9 @@ define('CD_BOX_WIDTH_RIGHT', 'What width would you like your right column to be 
 define('CT_LEFT_COLUMN_SHOW', 'Show/Hide left column');
 define('CD_LEFT_COLUMN_SHOW', 'Would you like to show the left column in your template?');
 define('CT_RIGHT_COLUMN_SHOW', 'Show/Hide right column');
-define('CD_RIGHT_COLUMN_SHOW', 'Would you like to show the left column in your template?');
+define('CD_RIGHT_COLUMN_SHOW', 'Would you like to show the right column in your template?');
 define('CT_TEMPLATE_SWITCHING_ALLOWED', 'Template Switching Allowed');
-define('CD_TEMPLATE_SWITCHING_ALLOWED', 'Allow template switching through the url (for easy new template testing).');
+define('CD_TEMPLATE_SWITCHING_ALLOWED', 'Allow template switching through the url (for easy new template testing).  <br><br>Simply switch template by appending <b>?tplDir=compromise</b> to your catalog index page.');
 define('CT_DIR_WS_TEMPLATES_DEFAULT', 'Default Template Directory');
 define('CD_DIR_WS_TEMPLATES_DEFAULT', 'Subdirectory (in templates/) where the template files are stored which should be loaded by default.');
 define('CT_TEMPLATE_SWITCHING_MENU', 'Template Switching Menu Display');

@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Meistverkaufte Artikel');
+define('HEADING_TITLE', 'Umsatzbericht Produkte');
 
 define('ENTRY_YEAR', 'Jahr:');
 define('ENTRY_MONTH', 'Monat:');
@@ -18,12 +18,14 @@ define('ENTRY_KEYWORDS', 'Keywords:');
 define('ENTRY_STATUS', 'Status:');
 define('ENTRY_MANUFACTURER', 'Hersteller:');
 define('ENTRY_TOTAL', 'Alle Produkte:');
+define('ENTRY_DISPLAY', 'Einschränkung:');
 
 define('TEXT_ORDERS_STATUS', 'Alle Bestellungen');
 define('TEXT_SELECT_MANUFACTURER', 'Alle Hersteller');
 define('TEXT_SELECT_YEAR', 'Alle Jahre');
 define('TEXT_SELECT_MONTH', 'All Monate');
 define('TEXT_TOTAL', 'Gesamt: ');
+define('TEXT_SHOW_ALL', 'Alles anzeigen');
 
 define('TEXT_JANUARY', 'Januar');
 define('TEXT_FEBRUARY', 'Februar');
@@ -44,4 +46,6 @@ define('TABLE_HEADING_PRODUCTS', 'Produktname');
 define('TABLE_HEADING_PURCHASED', 'Umsätze');
 define('TABLE_HEADING_GROSS', 'Brutto');
 define('TABLE_HEADING_MANUFACTURERS', 'Hersteller');
+define('TABLE_HEADING_CUSTOMERS', '(Nr.) Kunden [Bestellungen]');
+
 ?>

@@ -288,6 +288,7 @@ define('SMALL_IMAGE_BUTTON_EDIT', 'Bearbeiten');
 define('SMALL_IMAGE_BUTTON_VIEW', 'Ansehen');
 
 define('ICON_ARROW_RIGHT', 'mehr');
+define('ICON_CLEAR_HISTORY', 'Historie löschen');
 define('ICON_CART', 'In den Warenkorb');
 define('ICON_ERROR', 'Fehler');
 define('ICON_SUCCESS', 'Erfolg');
@@ -442,5 +443,8 @@ define('TEXT_VIEW_AS_LIST', 'Listenansicht');
 define('TEXT_VIEW_AS_GRID', 'Gitteransicht');
 define('TEXT_RESULTS_PAGE', 'Ergebnisse/Seite: ');
 define('TEXT_SORT_ORDER', 'Sortierung: ');
+
+// Recent History
+define('TEXT_LAST_VISITED_PRODUCTS', 'Angesehene Produkte');
 
 ?>

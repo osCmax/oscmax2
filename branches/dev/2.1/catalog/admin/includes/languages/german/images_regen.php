@@ -74,7 +74,17 @@ define('TEXT_INFO_WARNING', '<b>Warnung:</b> Dieser Vorgang ist NICHT der beste 
 define('TEXT_INFO_PROCESSING', '<br>Verarbeitung<br>');
 define('TEXT_INFO_COMPLETED', '<br>Abgeschlossen<br>');
 
-define('TEXT_CONFIRM_REGENERATE_ALL', 'Sie möchten alle Ihre Serverbilder regenerieren.  <br><br><b>Note:</b> Alle derzeit in <b>images/' . DYNAMIC_MOPICS_PRODUCTS_DIR . '</b> und <b>images/' . DYNAMIC_MOPICS_THUMBS_DIR . '</b> gespeicherten Bilder werden überschrieben, wenn ein passendes Bild im <b>images/' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b> Verzeichnis existiert. <br><br>Bitte beachten Sie, dass dieser Vorgang einen großen Teil der Rechenkapazität Ihres Servers benötigt und daher <b>nur</b> während einem ruhigen Zeitraum durchgeführt werden sollte.');
+define('TEXT_CONFIRM_REGENERATE_ALL', 'Sie möchten alle Ihre Serverbilder regenerieren.  <br><br><b>Note:</b> Alle derzeit in <b>images/' . DYNAMIC_MOPICS_PRODUCTS_DIR . '</b> und <b>images/' . DYNAMIC_MOPICS_THUMBS_DIR . '</b> gespeicherten Bilder werden überschrieben, wenn ein passendes Bild im <b>images/' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b> Verzeichnis existiert. <br><br>Bitte beachten Sie, dass dieser Vorgang einen großen Teil der Rechenkapazität Ihres Servers benötigt und daher <b>nur</b> während eines ruhigen Zeitraumes durchgeführt werden sollte.');
 
 define('IMAGE_MISSING_IMAGE', 'Fehlendes Thumbnailbild');
+
+define('IMAGE_REGENERATE_MISSING','Fehlende regenerieren');
+define('TEXT_SUCESS_TOTAL', 'Insgesamt regenerierte Bildersets = ');
+define('TEXT_REGENERATE_MISSING', 'Fehlende Serverbilder regenerieren - bitte bestätigen!');
+define('TEXT_CONFIRM_REGENERATE_MISSING', 'Möchten Sie wirklich alle fehlenden Serverbilder regenerieren?  <br><br><b>Hinweis:</b> Alle Bilder, die derzeit in <b>images/' . DYNAMIC_MOPICS_PRODUCTS_DIR . '</b> und <b>images/' . DYNAMIC_MOPICS_THUMBS_DIR . '</b> gespeichert sind, werden überschrieben werden, falls ein passendes Bild in <b>images/' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b> existiert. <br><br>Bitte beachten Sie, dass dieser Vorgang einen großen Teil der Rechenkapazität Ihres Servers benötigt und daher <b>nur</b> während eines ruhigen Zeitraumes durchgeführt werden sollte.');
+
+define('TEXT_DELETE_ORPHANS', 'Verwaiste Bilder löschen');
+define('TEXT_CONFIRM_DELETE_ORPHANS', 'Möchten Sie wirklich alle verwaisten Bilder löschen?<br><br>  Dieser Vorgang <b>kann nicht rückgängig gemacht werden</b> und Sie sollten daher <i>unbedingt</i> eine <b>Sicherung Ihrer Daten</b> anlegen, bevor Sie diese Funktion nutzen.');
+define('TEXT_ORPHAN_REMOVED', 'verwaiste Bilder entfernt.');
+
 ?>

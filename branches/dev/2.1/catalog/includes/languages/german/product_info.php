@@ -51,6 +51,7 @@ define('TEXT_ENTER_QUANTITY', 'Menge');
 define('TEXT_PRICE_PER_PIECE', 'Einzelpreis');
 define('TEXT_SAVINGS', 'Sie sparen');
 define('MINIMUM_ORDER_TEXT', 'Mindestbestellung: ');
+define('MINIMUM_QTY_TEXT', 'Mindestbestellmenge: ');
 define('PB_DROPDOWN_BEFORE', '');
 define('PB_DROPDOWN_BETWEEN', ' zu ');
 define('PB_DROPDOWN_AFTER', ' per Stück');

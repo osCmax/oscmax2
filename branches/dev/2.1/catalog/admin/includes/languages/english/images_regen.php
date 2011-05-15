@@ -84,7 +84,7 @@ define('TEXT_REGENERATE_MISSING', 'Regenerate missing server images - please con
 define('TEXT_CONFIRM_REGENERATE_MISSING', 'You have selected to regenerate all missing server images.  <br><br><b>Note:</b> All current images stored in <b>images/' . DYNAMIC_MOPICS_PRODUCTS_DIR . '</b> and <b>images/' . DYNAMIC_MOPICS_THUMBS_DIR . '</b> will be overwritten if a corresponding image exists in the <b>images/' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b> folder. <br><br>Please also note that this process may use a large proportion of your server processing power and as such should be <b>only</b> run at quiet period on your store.');
 
 define('TEXT_DELETE_ORPHANS', 'Delete Orphan Images');
-define('TEXT_CONFIRM_DELETE_ORPHANS', 'Please confirm that you wish to delete all your orphan images.<br><br>  This action <b>can not be undone</b> and it is <i>strongly recommended</i> that you <b>back up your data</b> prior to using this function</b>.');
+define('TEXT_CONFIRM_DELETE_ORPHANS', 'Please confirm that you wish to delete all your orphan images.<br><br>  This action <b>can not be undone</b> and it is <i>strongly recommended</i> that you <b>back up your data</b> prior to using this function.');
 define('TEXT_ORPHAN_REMOVED', 'orphan(s) image removed.');
 
 ?>

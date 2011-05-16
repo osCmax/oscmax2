@@ -325,7 +325,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 		  $lc_text = '';
 		  break;
 		  case 'PRODUCT_CORNER_BANNER':
-		  $lc_text = '';
+		  $lc_text = '&nbsp;';
 		  
 		  // Last Few Remaining Corner Banner
 		  if (CB_LAST_FEW == 'true') { 
@@ -372,6 +372,18 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 		      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . 'corner_banners/' . $language . '/out_of_stock.png" alt="">';
 		    }
 		  }	
+		  
+		  // Add product link to corner banner
+		  if (isset($_GET['manufacturers_id'])) {
+              $lc_inc_link = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $_GET['manufacturers_id'] . '&products_id=' . $listing[$x]['products_id']) . '">';
+          } else {
+              $lc_inc_link = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing[$x]['products_id']) . '">';
+          }
+		  // but we only want the link if there is a corner banner
+		  if ($lc_text != '&nbsp;') {
+		    $lc_inc_link .= $lc_text . '</a>';
+		    $lc_text = $lc_inc_link;
+		  }
 		  break;
           case 'PRODUCT_LIST_MODEL':
             $lc_align = '';

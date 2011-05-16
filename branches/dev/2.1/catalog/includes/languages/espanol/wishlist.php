@@ -49,4 +49,7 @@ define('ERROR_MESSAGE','Por favor, incluya un mensaje breve.');
 define('WISHLIST_SECURITY_CHECK','Por favor complete esta comprobación de seguridad:');
 define('WISHLIST_SECURITY_CHECK_ERROR','No ha escrito correctamente el código de comprobación de seguridad. Inténtelo de nuevo.');
 define('CLEAR_WISHLIST','¿Está seguro que desea quitar todos los favoritos de la lista?');
+
+define('IMAGE_CLEAR_WISHLIST', 'Quitar todos');
+define('IMAGE_DELETE_WISHLIST', 'Eliminar de favoritos');
 ?>

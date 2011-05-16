@@ -28,4 +28,7 @@ define('OUT_OF_STOCK_CANT_CHECKOUT', 'Los productos marcados con ' . STOCK_MARK_
 define('OUT_OF_STOCK_CAN_CHECKOUT', 'Los productos marcados con ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' no están disponibles en cantidad deseada. De todas formas, puede añadir los que hay disponibles y comprobar la cantidad disponible para su envío inmediato durante la realización del pedido.');
 define('TEXT_ALTERNATIVE_CHECKOUT_METHODS', '- O -');
 define('CLEAR_CART','¿Está seguro de querer vaciar por completo su carrito?');
+
+define('IMAGE_CLEAR_CART', 'Vaciar carrito');
+define('IMAGE_CLEAR_BASKET', 'Vaciar cesta');
 ?>

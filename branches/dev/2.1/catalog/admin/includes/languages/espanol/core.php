@@ -459,10 +459,10 @@ define('IMAGE_MC_SYNC', 'Sincronizar con MailChimp');
 define('IMAGE_HELP', 'Ayuda');
 define('IMAGE_LOGOFF', 'Cerrar sesión');
 define('IMAGE_MANAGE_ACCOUNT', 'Gestionar cuenta');
+define('IMAGE_BUTTON_UNSUBSCRIBE', 'Cancelar suscripción');
 define('IMAGE_BULK_SET_STATUS', 'Configurar todos');
 define('IMAGE_ACTIVATE_ALL', 'Activar todos');
 define('IMAGE_DEACTIVATE_ALL', 'Desactivar todos');
-
 
 define('ICON_CROSS', 'Falso');
 define('ICON_CURRENT_FOLDER', 'Carpeta actual');

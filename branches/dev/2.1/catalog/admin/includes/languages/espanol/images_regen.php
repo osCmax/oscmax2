@@ -70,7 +70,7 @@ define('TEXT_REGENERATE_ALL', 'Regenerar todas las imágenes en el servidor - ¡co
 define('TEXT_INFO_DESCRIPTION', 'Esto regenerará las imágenes de producto y miniaturas a partir de imágenes que ya existan y estén guardadas en el directorio "images_big".
 		¡Se sobreescribirán las imágenes de producto y miniaturas que ya existan!<br />');
 define('TEXT_INFO_WARNING', '<b>Advertencia:</b> Esta herramienta NO es la mejor manera de volver a tener estas imágenes y es muy posible que se aumente de forma considerable la carga del servidor.<br />
-		Es recomedable en lugar de esto proceses por lotes imágenes en tu máquina local.<br />');
+		Es recomedable que en lugar de esto proceses por lotes imágenes en tu máquina local.<br />');
 define('TEXT_INFO_PROCESSING', '<br>Procesando<br>');
 define('TEXT_INFO_COMPLETED', '<br>Completado<br>');
 
@@ -82,5 +82,9 @@ define('IMAGE_REGENERATE_MISSING','Regenerar perdidas');
 define('TEXT_SUCESS_TOTAL', 'Total de conjuntos de imágenes regenerados = ');
 define('TEXT_REGENERATE_MISSING', 'Regenerar imágenes perdidas - ¡confirmar por favor!');
 define('TEXT_CONFIRM_REGENERATE_MISSING', 'Has seleccionado regenerar todas las imágenes perdidas del servidor.  <br><br><b>Nota:</b> Se sobreescribirán todas las imágenes actualmente almacenadas en <b>images/' . DYNAMIC_MOPICS_PRODUCTS_DIR . '</b> y en <b>images/' . DYNAMIC_MOPICS_THUMBS_DIR . '</b> si existe una imagen que le corresponda en la carpeta <b>images/' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b>. <br><br>Por favor, téngase también en cuenta que este proceso puede acaparar una gran proporción de la capacidad de proceso del servidor y como tal <b>sólo</b> debería ejecutarse en períodos tranquilos en la tienda.');
+
+define('TEXT_DELETE_ORPHANS', 'Borrar imágenes huérfanas');
+define('TEXT_CONFIRM_DELETE_ORPHANS', 'Por favor, confirma que quieres eliminar todas las imágenes huérfanas.<br><br>  Esta acción <b>no se puede deshacer</b> y se <i>recomienda encarecidamente</i> que <b>hagas una copia de seguridad de tus datos</b> antes de usar esta función.');
+define('TEXT_ORPHAN_REMOVED', 'imágen(es) huérfana(s) eliminada(s).');
 
 ?>

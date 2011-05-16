@@ -35,7 +35,7 @@ define('IMAGE_ADMIN', 'Panel Administración');
 define('IMAGE_CATALOG', 'Catálogo');
 
 // Start Page
-define('TEXT_WELCOME_TO_OSCMAX', 'Bienvendio a osCmax ');
+define('TEXT_WELCOME_TO_OSCMAX', 'Bienvenido a osCmax ');
 define('TEXT_INDEX_MAIN_BLOCK', '<p>osCmax te permite vender productos en todo el mundo con tu propia tienda online. La parte de administración gestiona los productos, clientes, pedidos, boletines, ofertas y mucho más para construir y prosperar con éxito en tu negocio online.</p>
   <p>osCmax está basado en osCommerce Online Merchant 2.2 y su objetivo es hacer más rápida y sencilla que nunca la implementación de tu sitio web. osCmax es compatible hacia atrás con osCommerce Online Merchant 2.2 y por lo tanto puedes aprovechar que tenga la comunidad más grande de una solución de tienda online con carrito de la compra: más de 140.000 propietarios de tiendas registrados que se ayudan unos a otros y que han proporcionado más de 4.000 complementos que extienden las funciones, características y el potencial de tu tienda online.</p>
   <p>osCmax y sus complementos están disponibles de forma gratuita y libre bajo una licencia Open Source para ayudarte a vender online lo antes posible sin ninguna cuota por licencia o cualquier otra limitación involucrada.</p><p>&nbsp;</p><p>&nbsp;</p><br />');
@@ -54,7 +54,7 @@ define('TEXT_DATABASE_USERNAME', 'Nombre de usuario');
 define('TEXT_DATABASE_USERNAME_DESC', 'Nombre de usuario utilizado para conectarse al servidor de base de datos.');
 define('TEXT_DATABASE_PASSWORD', 'Contraseña');
 define('TEXT_DATABASE_PASSWORD_DESC', 'Contraseña utilizada junto con nombre de usuario para conectarse al servidor de base de datos.');
-define('TEXT_DATABASE_NAME', 'Nombre de la base de datos Name');
+define('TEXT_DATABASE_NAME', 'Nombre de la base de datos');
 define('TEXT_DATABASE_NAME_DESC', 'Nombre de la base de datos para almacenar la información.');
 define('TEXT_DATABASE_SUCCESS', 'Bas de datos importada correctamente.');
 define('TEXT_DATABASE_IMPORTING', 'En estos momentos se está importando la estructura de la base de datos. Por favor ten un poco de paciencia mientras dura este proceso.');
@@ -85,7 +85,7 @@ define('TEXT_PASSWORD', 'Contraseña del administrador');
 define('TEXT_PASSWORD_DESC', 'La contraseña para utilizar con la cuenta de administrador.');
 define('TEXT_ADMIN_FOLDER_NAME', 'Nombre de la carpeta de administración');
 define('TEXT_CHANGE_ADMIN_FOLDER', 'El nombre donde se mantienen los ficheros de administración. Se <b>recomienda que lo cambies</b> en lugar de usar por defecto <b>admin</b> para mejorar la seguridad del sitio web. Si quieres leer más acerca de la seguridad, por favor <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">consulta el wiki</a>.');
-define('TEXT_ADMIN_NO_PERMISSION', 'No se ha podido obtener el permiso de fichero adecuado para permitirte cambiar el nombre de la carpeta <b>admin/</b>.  DEberías cambiar el nombre de esta carpeta para mejorar la seguridad de la tienda. Para obtener instrucciones acerca de cómo cambiar esto manualmente una vez que hayas corregido los parámetros del servidor, por favor <a href="http://wiki.oscdox.com/v2.1/setting_up_security" target="_blank">consulta el wiki</a>.');
+define('TEXT_ADMIN_NO_PERMISSION', 'No se ha podido obtener el permiso de fichero adecuado para permitirte cambiar el nombre de la carpeta <b>admin/</b>.  Deberías cambiar el nombre de esta carpeta para mejorar la seguridad de la tienda. Para obtener instrucciones acerca de cómo cambiar esto manualmente una vez que hayas corregido los parámetros del servidor, por favor <a href="http://wiki.oscdox.com/v2.1/setting_up_security" target="_blank">consulta el wiki</a>.');
 
 // Finished
 define('TEXT_FINISHED', '<h1>Instalación completada</h1><p>¡Enhorabuena por instalar y configurar osCmax como tu solución de tienda online!</p><p>Te deseamos todo lo mejor para el éxito de tu tienda online y te damos la bienvenida para que te unas y participes en nuestra comunidad.</p><p align="right"><i><b>- El equipo de osCmax</b></i></p>');

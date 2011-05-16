@@ -32,17 +32,19 @@ define('BOX_AFFILIATE_BANNERS_BUILD_CAT','Crear enlace de categoría');
 define('BOX_AFFILIATE_BANNERS_BUILD','Crear enlace de producto');
 define('BOX_AFFILIATE_BANNERS_PRODUCT','Banners de producto');
 define('BOX_AFFILIATE_BANNERS_CATEGORY','Banners de categoría');
-define('BOX_AFFILIATE_BANNERS_TEXT','Enlaces de texto');
-//Translation for the missing help files by Hobbes ~*~ Begin
+define('BOX_AFFILIATE_BANNERS_TEXT','Enlaces sólo de texto');
+define('BOX_AFFILIATE_BUILD_YOUR_OWN', 'Cree sus propios enlaces');
 define('TEXT_PAYMENT_ID','Muestra el número de identificación, de los pagos.');
 define('TEXT_SALES_PAYMENT_DATE','Muestra la fecha, de los pagos.');
 define('TEXT_SALES_PAYMENT_Ammount','Las ganancias de afiliado representan la comisión por la venta');
 define('TEXT_PAYMENT_STATUS','Estado de la venta representa el estado de la venta.');
-//Translation for the missing help files by Hobbes ~*~ End
 define('BOX_AFFILIATE_CONTACT', 'Contáctenos');
 define('BOX_AFFILIATE_FAQ', 'FAQ del programa de afiliados');
 define('BOX_AFFILIATE_LOGIN', 'Iniciar sesión de afiliado');
 define('BOX_AFFILIATE_LOGOUT', 'Cerrar sesión de afiliado');
+define('BOX_AFFILIATE_YOUR_ACCOUNT', 'Cuenta de afiliado');
+define('TEXT_AFFILIATE_CONTACT_TEXT', 'Consulta%20de%20afiliado%0D%0A%0D%0AMensaje:%20');
+define('TEXT_AFFILIATE_TEXT_VERSION', 'Versión texto: ');
 
 define('ENTRY_AFFILIATE_PAYMENT_DETAILS', 'Pagadero a:');
 define('ENTRY_AFFILIATE_ACCEPT_AGB', 'Marque aquí para confirmar que ha leído y está de acuerdo con los <a target="_new" href="' . tep_href_link(FILENAME_AFFILIATE_TERMS, '', 'SSL') . '">Términos y Condiciones del Programa de afiliados</a>.');

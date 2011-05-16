@@ -51,6 +51,7 @@ define('TEXT_ENTER_QUANTITY','Cantidad');
 define('TEXT_PRICE_PER_PIECE','Precio/ud.');
 define('TEXT_SAVINGS','Ahorro');
 define('MINIMUM_ORDER_TEXT','Pedido mínimo:');
+define('MINIMUM_QTY_TEXT', 'Pedido en lotes de: ');
 define('PB_DROPDOWN_BEFORE','');
 define('PB_DROPDOWN_BETWEEN',' a ');
 define('PB_DROPDOWN_AFTER',' cada uno');

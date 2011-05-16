@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE','Programa de afiliados');
-define('HEADING_TITLE','Programa de Afiliados - Banners');
+define('NAVBAR_TITLE', 'Programa de afiliados');
+define('HEADING_TITLE', 'Programa de Afiliados - Enlaces a página de inicio');
 
-define('TEXT_AFFILIATE_NAME','Nombre del banner:');
-define('TEXT_INFORMATION','Elija el banner que desea mostrar en su sitio web de las siguientes opciones:');
-define('TEXT_AFFILIATE_INFO','Copie el código que se muestra a continuación y péguelo en su página web');
+define('TEXT_AFFILIATE_NAME', 'Nombre del banner: ');
+define('TEXT_INFORMATION', 'Este tipo de banner enlazará directamente a nuestra página de inicio en lugar de a una categoría o producto específico. Elija el banner que desea mostrar en su sitio web de las siguientes opciones:');
+define('TEXT_AFFILIATE_INFO', 'Copie el código que se muestra a continuación y péguelo en su página web: ');
 ?>

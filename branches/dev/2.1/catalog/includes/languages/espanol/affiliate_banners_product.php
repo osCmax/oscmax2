@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE','Programa de afiliados');
-define('HEADING_TITLE','Programa de afiliados - Enlaces de producto');
+define('NAVBAR_TITLE', 'Programa de afiliados');
+define('HEADING_TITLE', 'Programa de afiliados - Enlaces de producto');
 
-define('TEXT_AFFILIATE_NAME','Nombre del enlace:');
-define('TEXT_INFORMATION','Elija el producto que desea mostrar en su sitio web de las siguientes opciones:');
-define('TEXT_AFFILIATE_INFO','Copie el código que se muestra a continuación y péguelo en su página web');
+define('TEXT_AFFILIATE_NAME', 'Banner de producto: ');
+define('TEXT_INFORMATION', 'Elija el producto que desea mostrar en su sitio web de las siguientes opciones:');
+define('TEXT_AFFILIATE_INFO', 'Copie el código que se muestra a continuación y péguelo en su página web');
 ?>

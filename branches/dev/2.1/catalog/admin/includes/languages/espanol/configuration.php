@@ -31,7 +31,7 @@ define('CD_STORE_OWNER_EMAIL_ADDRESS', 'La dirección e-mail del propietario de m
 define('CT_EMAIL_FROM', 'E-mail De');
 define('CD_EMAIL_FROM', 'La dirección e-mail utilizada en los e-mails enviados');
 define('CT_STORE_COUNTRY', 'País');
-define('CD_STORE_COUNTRY', 'El páis donde está localizada mi tienda <br><br><b>Nota: Por favor recuerda actualizar la zona de la tienda.</b>');
+define('CD_STORE_COUNTRY', 'El país donde está localizada mi tienda <br><br><b>Nota: Por favor recuerda actualizar la zona de la tienda.</b>');
 define('CT_STORE_ZONE', 'Zona/provincia');
 define('CD_STORE_ZONE', 'La zona donde está localizada mi tienda');
 define('CT_EXPECTED_PRODUCTS_SORT', 'Orden de Próximamente');
@@ -372,6 +372,11 @@ define('CT_PRODUCT_REVIEWS_ENABLE', '¿Permitir comentarios de producto?');
 define('CD_PRODUCT_REVIEWS_ENABLE', '¿Quieres permitir a los usuarios escribir comentarios sobere los productos?');
 define('CT_PRODUCT_SHORT_DESCRIPTION', 'Mostrar descripción breve');
 define('CD_PRODUCT_SHORT_DESCRIPTION', '¿Quieres mostrar la descripción breve en la lista de resultados?');
+define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Forma de mostrar precios de atributos');
+define('CD_ATTRIBUTE_PRICE_DISPLAY', '¿Quieres que se muestren los precios de los atributos como valores separados (p.ej. +2.00€) o como el total del precio del producto más el precio del atributo? (p.ej. 25.00€)');
+define('CT_PRODUCT_LIST_BESTSELLER', 'Filtrar por popularidad');
+define('CD_PRODUCT_LIST_BESTSELLER', '¿Quieres permitir ');
+
 
 // Configuration ID: 9 - Stock
 define('CT_STOCK_CHECK', 'Comprobar nivel existencias');
@@ -661,7 +666,7 @@ define('CD_SEO_URLS_CACHE_RESET', 'Esto reinicializará la información de caché p
 define('CT_SEO_URLS_OUPUT_PERFORMANCE', 'Activar informe depuración errores true/false');
 define('CD_SEO_URLS_OUPUT_PERFORMANCE', '<span style="color: red;">Los informes de depuración de errores <b>NO</b> se deberían poner a ON en un sitio web en funcionamiento</span><br>Está pensado para informar de rendimiento y consultas.');
 define('CT_SEO_URLS_CACHE_SYSTEM', 'Seleccionar sistema de caché');
-define('CD_SEO_URLS_CACHE_SYSTEM', '<b>FileSystem:</b><br>Cero consultas después de la carga de la caché.<br><b>Database:</b><br>Una consulta después de la carga de la caché<br><b>Memcached:</b><br>Rquiere memcached en apache y php.ini.');
+define('CD_SEO_URLS_CACHE_SYSTEM', '<b>FileSystem:</b><br>Cero consultas después de la carga de la caché.<br><b>Database:</b><br>Una consulta después de la carga de la caché<br><b>Memcached:</b><br>Requiere memcached en apache y php.ini.');
 
 // Configuration ID: 65 - Wish List Settings
 define('CT_MAX_DISPLAY_WISHLIST_PRODUCTS', 'Máximo de favoritos');
@@ -758,6 +763,8 @@ define('CT_PRICE_BREAK_NOF_LEVELS', 'Máximo número de niveles de precios por vol
 define('CD_PRICE_BREAK_NOF_LEVELS', 'Configura el número de niveles de precios por volumen que se pueden introducir en la parte de administración. Los niveles que se dejan en blanco no se mostrarán a los clientes');
 define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Número de precios por volumen para desplegable');
 define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Configura el número de precios por volumen a partir del cual se mostrará un desplegable y "desde" en lugar de una tabla');
+define('CT_PRICE_BREAK_PRICE', 'Forma de mostrar precio por volumen');
+define('CD_PRICE_BREAK_PRICE', 'Configura el precio que quieres que se muestre en el catálogo cuando el producto tiene precios varios niveles de precios por volumen. (High = precio más alto, Low = precio más bajo, Off = quita el Desde y muestra el precio más alto)');
 
 // Configuration ID: 89 - Google Maps
 define('CT_GOOGLE_MAPS_KEY', 'Clave de Google Maps');
@@ -917,13 +924,13 @@ define('CD_STORE_ALIGN', '¿Cómo quieres alinear la tienda? <br />center = centra
 define('CT_BOX_WIDTH_LEFT', 'Configurar anchura predeterminada columna izquierda para plantilla');
 define('CD_BOX_WIDTH_LEFT', '¿Qué anchura tendrá la columna izquierda en píxeles? Por favor ten en cuenta que no todas las plantillas usan esta funcionalidad.');
 define('CT_BOX_WIDTH_RIGHT', 'Configurar anchura predeterminada columna derecha para plantilla');
-define('CD_BOX_WIDTH_RIGHT', 'Qué anchura tendrá la columna derecha en píxeles? Por favor ten en cuenta que no todas las plantillas usan esta funcionalidad.');
+define('CD_BOX_WIDTH_RIGHT', '¿Qué anchura tendrá la columna derecha en píxeles? Por favor ten en cuenta que no todas las plantillas usan esta funcionalidad.');
 define('CT_LEFT_COLUMN_SHOW', 'Mostrar/ocultar columna izquierda');
 define('CD_LEFT_COLUMN_SHOW', '¿Quieres que se muestre la columna izquierda en tu plantilla?');
 define('CT_RIGHT_COLUMN_SHOW', 'Mostrar/ocultar columna derecha');
-define('CD_RIGHT_COLUMN_SHOW', 'Quieres que se muestre la columna derecha en tu plantilla?');
+define('CD_RIGHT_COLUMN_SHOW', '¿Quieres que se muestre la columna derecha en tu plantilla?');
 define('CT_TEMPLATE_SWITCHING_ALLOWED', 'Permitir cambiar plantillas');
-define('CD_TEMPLATE_SWITCHING_ALLOWED', 'Permite el cambio de plantillas mediante la URL (para facilitar las pruebas de plantillas).');
+define('CD_TEMPLATE_SWITCHING_ALLOWED', 'Permite el cambio de plantillas mediante la URL (para facilitar las pruebas de plantillas). <br><br>Cambias de plantilla simplemente añadiendo <b>?tplDir=compromise</b> a la página index del catalog.');
 define('CT_DIR_WS_TEMPLATES_DEFAULT', 'Directorio plantilla por defecto');
 define('CD_DIR_WS_TEMPLATES_DEFAULT', 'Subdirectorio (en templates/) donde se almacenan los ficheros de plantilla que deberían ser cargados por defecto.');
 define('CT_TEMPLATE_SWITCHING_MENU', 'Mostrar menú cambio plantillas');

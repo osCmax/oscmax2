@@ -45,7 +45,7 @@ $Id$
   define('SORT_BY', 'En la página de información se ordena por');
   define('STATUS_ACTIVE', 'Activo');
   define('STATUS_INACTIVE', 'Inactivo');
-  define('SUCCED_INFORMATION', ' Correcto');
+  define('SUCCED_INFORMATION', ' correcto');
   define('TITLE', 'Sistema de información');
   define('VIEW_INFORMATION', 'Visualización de información');
   define('VISIBLE_INFORMATION', 'Visible');
@@ -59,4 +59,5 @@ $Id$
   define('ENTRY_EXTERNAL_URL','URL externa');
   define('IMAGE_ICON_EXTERNAL_URL', 'Esta página de información es un enlace a una web externa');
   define('TEXT_INCLUDE_HTTP', '<i>Incluir http://</i>');
+  define('TEXT_UPDATE_SUCCESS', 'Actualizado correctamente');
 ?>

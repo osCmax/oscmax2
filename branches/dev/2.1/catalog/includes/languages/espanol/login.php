@@ -40,5 +40,7 @@ define('TEXT_CHECKOUT_INTRODUCTION','Pasar a realizar el pedido sin crear una cu
 define('PROCEED_TO_CHECKOUT','Pasar a realizar el pedido sin registrarse');
 
 define('TEXT_GV_LOGIN_NEEDED', 'Necesita haber iniciado sesión para canjear su cheque. Por favor cree una nueva cuenta o inicie su sesión debajo.');
+define('TEXT_REVIEW_LOGIN_NEEDED', 'Es necesario haber iniciado sesión para escribir comentarios. Por favor regístrese o inicie sesión a continuación.');
+
 
 ?>

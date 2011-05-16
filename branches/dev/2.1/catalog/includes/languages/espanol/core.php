@@ -26,7 +26,7 @@ define('HEADER_TITLE_MY_ACCOUNT', 'Mi cuenta');
 define('HEADER_TITLE_CONTACT_US', 'Contacto');
 define('HEADER_TITLE_CART_CONTENTS', 'Ver carrito');
 define('HEADER_TITLE_BASKET_CONTENTS', 'Ver cesta');
-define('HEADER_TITLE_CHECKOUT', 'Realizar');
+define('HEADER_TITLE_CHECKOUT', 'Realizar pedido');
 define('HEADER_TITLE_WISHLIST', 'Favoritos');
 define('HEADER_TITLE_TOP', 'Inicio');
 define('HEADER_TITLE_CATALOG', 'Catálogo');
@@ -301,6 +301,7 @@ define('SMALL_IMAGE_BUTTON_EDIT', 'Modificar');
 define('SMALL_IMAGE_BUTTON_VIEW', 'Ver');
 
 define('ICON_ARROW_RIGHT', 'más');
+define('ICON_CLEAR_HISTORY', 'Borrar historial');
 define('ICON_CART', 'En carrito');
 define('ICON_ERROR', 'Error');
 define('ICON_SUCCESS', 'Correcto');
@@ -455,5 +456,8 @@ define('TEXT_VIEW_AS_LIST', 'Mostrar como lista');
 define('TEXT_VIEW_AS_GRID', 'Mostrar en cuadrícula');
 define('TEXT_RESULTS_PAGE', 'Resultados/página: ');
 define('TEXT_SORT_ORDER', 'Orden: ');
+
+// Recent History
+define('TEXT_LAST_VISITED_PRODUCTS', 'Productos vistos');
 
 ?>

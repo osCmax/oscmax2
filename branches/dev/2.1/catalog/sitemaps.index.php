@@ -155,13 +155,13 @@ echo '<p class="main">';
 
 if ($google->GenerateProductSitemap()){
 
-	echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK) . '&nbsp;' . GOOGLE_SITEMAPS_PRODUCT_SUCCESS . "<br><br>";
+	echo GOOGLE_SITEMAPS_PRODUCT_SUCCESS . "<br><br>";
 
 } else {
 
 	$submit = false;
 
-	echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS) . '&nbsp;' . GOOGLE_SITEMAPS_PRODUCT_ERROR . "<br><br>";
+	echo GOOGLE_SITEMAPS_PRODUCT_ERROR . "<br><br>";
 
 }
 
@@ -169,26 +169,26 @@ if ($google->GenerateProductSitemap()){
 
 if ($google->GenerateCategorySitemap()){
 
-	echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK) . '&nbsp;' . GOOGLE_SITEMAPS_CATEGORY_SUCCESS . "<br><br>";
+	echo GOOGLE_SITEMAPS_CATEGORY_SUCCESS . "<br><br>";
 
 } else {
 
 	$submit = false;
 
-	echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS) . '&nbsp;' . GOOGLE_SITEMAPS_CATEGORY_ERROR . "<br><br>";
+	echo GOOGLE_SITEMAPS_CATEGORY_ERROR . "<br><br>";
 
 }
 
 
 
 if ($google->GenerateSitemapIndex()){
-	echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK) . '&nbsp;' . '&nbsp;' . GOOGLE_SITEMAPS_INDEX_SUCCESS . "<br><br>";
+	echo GOOGLE_SITEMAPS_INDEX_SUCCESS . "<br><br>";
 
 } else {
 
 	$submit = false;
 
-	echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS) . '&nbsp;' . GOOGLE_SITEMAPS_INDEX_ERROR . "<br><br>";
+	echo GOOGLE_SITEMAPS_INDEX_ERROR . "<br><br>";
 
 }
 

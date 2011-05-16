@@ -85,8 +85,6 @@ function updateIps($ips){
 	curl_setopt($ch, CURLOPT_URL, $URL);
 	$d = curl_exec($ch);
 	curl_close($ch);
-
-	
  
 	//Use backup server if cannot make a connection
 	if (!$d){
@@ -100,7 +98,7 @@ function updateIps($ips){
 		$backup = curl_exec($ch);
 		curl_close($ch);
 		
-		$answer = new SimpleXMLElement($backup);
+		if ($backup) $answer = new SimpleXMLElement($backup);
 		if (!$backup) return false; // Failed to open connection
 	}else{
 		$answer = new SimpleXMLElement($d);

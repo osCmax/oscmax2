@@ -14,6 +14,7 @@ $Id$
   $root_images_dir = DIR_FS_CATALOG .  $images_dir . DYNAMIC_MOPICS_BIGIMAGES_DIR;
   $root_products_dir = DIR_FS_CATALOG .  $images_dir . DYNAMIC_MOPICS_PRODUCTS_DIR;  
   $root_thumbs_dir = DIR_FS_CATALOG . $images_dir . DYNAMIC_MOPICS_THUMBS_DIR;
+  $exclude_folders = array("banners","default","icons","mail","infobox","js");
   $new_dir = preg_replace('/[^a-zA-Z0-9_.-]/i', '_',$_POST['new_directory']); 
   $dir = (tep_not_null($new_dir) ? $new_dir : $_POST['directory']);
   $cache_dir = 'cache/';  

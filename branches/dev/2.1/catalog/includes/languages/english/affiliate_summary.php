@@ -38,13 +38,13 @@ define('TEXT_VISITS', 'Visits: ');
 define('TEXT_TRANSACTIONS', 'Transactions: ');
 define('TEXT_CONVERSION', 'Conversion: ');
 define('TEXT_AMOUNT', 'Sales Amount: ');
-define('TEXT_AVERAGE', 'Sales Average: ');
+define('TEXT_SALES_AVERAGE', 'Sales Average: ');
 define('TEXT_COMMISSION_RATE', 'Commission Rate: ');
 define('TEXT_PAYPERSALE_RATE', 'Pay Per Sale Rate: ');
 define('TEXT_CLICKTHROUGH_RATE', 'Clickthrough Rate: ');
 define('TEXT_COMMISSION', 'Commission: ');
 define('HEADING_SUMMARY_HELP', 'Affiliate Help');
-define('TEXT_CLICKS_1', 'Hover over');
+define('TEXT_CLICKS_1', 'Hover over ');
 define('TEXT_CLICKS_2', ' to see a description of each category.');
 
 define('HEADING_IMPRESSIONS_HELP', 'Impressions Help');

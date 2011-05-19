@@ -66,7 +66,7 @@ $Id$
 				  }
 				  ?>
                   </td>
-                  <td width="30%" align="right" class="boxText"><?php echo TEXT_AVERAGE; ?><?php echo '<span title="' . HEADING_AVERAGE_HELP . '|' . TEXT_AVERAGE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></td>
+                  <td width="30%" align="right" class="boxText"><?php echo TEXT_SALES_AVERAGE; ?><?php echo '<span title="' . HEADING_AVERAGE_HELP . '|' . TEXT_AVERAGE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></td>
                   <td width="20%" class="boxText"><?php echo $currencies->display_price($affiliate_average, ''); ?></td>
                 </tr>
                 <tr>
@@ -93,7 +93,7 @@ $Id$
                   <td colspan="4"><?php echo tep_draw_separator(); ?></td>
                 </tr>
                 <tr>
-                  <td align="right" colspan="4"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS, '') . '">' . tep_image_button('button_affiliate_banners.gif', IMAGE_BANNERS) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_CLICKS, '') . '">' . tep_image_button('button_affiliate_clickthroughs.gif', IMAGE_CLICKTHROUGHS) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_SALES, '','SSL') . '">' . tep_image_button('button_affiliate_sales.gif', IMAGE_SALES) . '</a>'; ?></td>
+                  <td align="right" colspan="4"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_CLICKS, '') . '">' . tep_image_button('button_affiliate_clickthroughs.gif', IMAGE_CLICKTHROUGHS) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_SALES, '','SSL') . '">' . tep_image_button('button_affiliate_sales.gif', IMAGE_SALES) . '</a>'; ?></td>
                 </tr>
               </center>
             </table></td>

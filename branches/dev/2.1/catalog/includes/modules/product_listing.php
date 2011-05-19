@@ -173,6 +173,9 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 	  case 'PRODUCT_LIST_BESTSELLER':
 		$lc_text = '';
 		break;
+	  case 'PRODUCT_CORNER_BANNER':
+		$lc_text = '';
+		break;
       case 'PRODUCT_LIST_MODEL':
         $lc_text = TABLE_HEADING_MODEL;
         $lc_align = '';
@@ -224,14 +227,16 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
         break;
     }
 
-    if ( ($column_list[$col] != 'PRODUCT_LIST_BUY_NOW') && ($column_list[$col] != 'PRODUCT_LIST_IMAGE') && ($column_list[$col] != 'PRODUCT_LIST_BESTSELLER')) {
+    if ( ($column_list[$col] != 'PRODUCT_LIST_BUY_NOW') && ($column_list[$col] != 'PRODUCT_LIST_IMAGE') && ($column_list[$col] != 'PRODUCT_LIST_BESTSELLER') && ($column_list[$col] != 'PRODUCT_CORNER_BANNER')) {
       $lc_text = tep_create_sort_heading($_GET['sort'], $col, $lc_text);
     }
 
+    if ($column_list[$col] != 'PRODUCT_CORNER_BANNER') { // extra if to remove header for corner banners
     $list_box_contents[0][] = array('align' => $lc_align,
 	                                'params' => 'class="productListing-heading" style="cellpadding: 3px"',
 //                                    'params' => $lc_class,
                                     'text' => '&nbsp;' . $lc_text . '&nbsp;');
+	}
   }
 
   if ($listing_split->number_of_rows > 0) {
@@ -378,9 +383,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
         $lc_align = '';
 
         switch ($column_list[$col]) {
-		  case 'PRODUCT_LIST_BESTSELLER':
-		  $lc_text = '';
-		  break;
+	
 		  case 'PRODUCT_CORNER_BANNER':
 		  $lc_text = '&nbsp;';
 		  
@@ -441,6 +444,9 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 		    $lc_inc_link .= $lc_text . '</a>';
 		    $lc_text = $lc_inc_link;
 		  }
+		  break;
+		  case 'PRODUCT_LIST_BESTSELLER':
+		  $lc_text = '';
 		  break;
           case 'PRODUCT_LIST_MODEL':
             $lc_align = '';
@@ -517,7 +523,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
           case 'PRODUCT_LIST_BUY_NOW':
             $lc_align = 'center';
 			if ($listing[$x]['products_price'] == CALL_FOR_PRICE_VALUE){ //fix for call for price
-			  $lc_text = '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Price%20Enquiry%0D%0A%0D%0AModel:%20' . str_replace(' ', '%20', $listing[$x]['products_model']) . '%0D%0AProduct%20Name:%20' . str_replace(' ', '%20', $listing[$x]['products_name']) . '%0D%0AProduct%20URL:%20' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . str_replace(' ', '%20', $listing[$x]['products_id']) .'%0D%0A%0D%0A') . '') . '">' . tep_image_submit('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
+			  $lc_text = '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $listing[$x]['products_model']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $listing[$x]['products_name']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $listing[$x]['products_id'] . '%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
 			} else {
               $lc_text = '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $listing[$x]['products_id']) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>&nbsp;';
 			}

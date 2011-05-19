@@ -80,7 +80,7 @@ $Id$
       <tr>
         <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
           <tr class="infoBoxContents">
-          	<td colspan="2" class="main"><?php echo INSTRUCTIONS_TEXT .$source; ?><BR /><BR /></td>
+          	<td colspan="2" class="main"><?php echo INSTRUCTIONS_TEXT; ?><BR /><BR /></td>
           </tr>
           <tr class="infoBoxContents">
             <td width="65%"><table border="0" width="100%" cellspacing="0" cellpadding="2">

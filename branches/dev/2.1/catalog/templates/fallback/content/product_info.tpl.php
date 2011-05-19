@@ -141,7 +141,7 @@ $Id$
               <td class="pageHeading" align="right" valign="top">
               <?php 
               if ( ($hi_product_price == CALL_FOR_PRICE_VALUE) || ($lo_product_price == CALL_FOR_PRICE_VALUE) ){
-				echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Price%20Enquiry%0D%0A%0D%0AModel:%20' . str_replace(' ', '%20', $product_info['products_model']) . '%0D%0AProduct%20Name:%20' . str_replace(' ', '%20', $product_info['products_name']) . '%0D%0AProduct%20URL:%20' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . str_replace(' ', '%20', $product_info['products_id']) .'%0D%0A%0D%0A') . '') . '">' . $products_price; ?></a>
+				echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $product_info['products_model']) . '%0D%0A' .  TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $product_info['products_name']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' .  $product_info['products_id'] .'%0D%0A%0D%0A') . '">' . $products_price; ?></a>
               <?php } else { echo $products_price; } ?>
               </td>  
             </tr>
@@ -331,7 +331,7 @@ $Id$
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>
               <tr>
-                <td class="productinfo_boxes" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Question%20about:%20' . str_replace(' ', '%20', $product_info['products_name']) . '%0D%0A%0D%0AModel:%20' . str_replace(' ', '%20', $product_info['products_model']) . '%0D%0AProduct%20URL:%20' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . str_replace(' ', '%20', $product_info['products_id']) .'%0D%0A%0D%0AType%20your%20question%20below:%0D%0A%0D%0A') . '') . '">' . tep_image_button('button_aaq.gif', IMAGE_BUTTON_AAQ) . '</a>'; ?></td>
+                <td class="productinfo_boxes" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_ABOUT . str_replace(' ', '%20', $product_info['products_name']) . '%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $product_info['products_model']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $product_info['products_id'] .'%0D%0A%0D%0A' . TEXT_QUESTION_TYPE . '%0D%0A%0D%0A') . '">' . tep_image_button('button_aaq.gif', IMAGE_BUTTON_AAQ) . '</a>'; ?></td>
               </tr>
             <?php } //end if ?>            
             <!-- Conditional Ask a Question Ends -->
@@ -374,7 +374,7 @@ $Id$
                         <tr>
                         <?php // START EASY CALL FOR PRICE v1.4
                           if ( ($hi_product_price == CALL_FOR_PRICE_VALUE) || ($lo_product_price == CALL_FOR_PRICE_VALUE) ){ ?>
-						    <td class="main" align="right" rowspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=Price%20Enquiry%0D%0A%0D%0AModel:%20' . str_replace(' ', '%20', $product_info['products_model']) . '%0D%0AProduct%20Name:%20' . str_replace(' ', '%20', $product_info['products_name']) . '%0D%0AProduct%20URL:%20' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . str_replace(' ', '%20', $product_info['products_id']) .'%0D%0A%0D%0A') . '') . '">' . tep_image_submit('button_cfp.gif', IMAGE_BUTTON_CFP); ?></a></td>
+						    <td class="main" align="right" rowspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $product_info['products_model']) . '%0D%0A' .  TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $product_info['products_name']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' .  $product_info['products_id'] .'%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP); ?></a></td>
                         <?php } else { ?>  
                        	  	<td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-product.id', +<?php echo $qtyBlocks; ?>, <?php echo $min_order_qty; ?>)" alt="<?php echo $qtyBlocks; ?>" class="plusminus"></td>
                           	<td rowspan="2" align="center"><?php echo tep_draw_input_field('cart_quantity', $pf->adjustQty(1), 'size="2" id="product-quantity-product.id" '); ?></td>

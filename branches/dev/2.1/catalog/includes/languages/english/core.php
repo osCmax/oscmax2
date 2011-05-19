@@ -447,4 +447,13 @@ define('TEXT_SORT_ORDER', 'Sort Order: ');
 // Recent History
 define('TEXT_LAST_VISITED_PRODUCTS', 'Your viewed products');
 
+// Question links to contact form - %20 = space - needed to maintain W3C compliance in URLs
+define('TEXT_QUESTION_ABOUT', 'Question%20about:%20');
+define('TEXT_QUESTION_MODEL', 'Model:');
+define('TEXT_QUESTION_PRODUCT_ID', 'Product%20ID:');
+define('TEXT_QUESTION_TYPE', 'Type%20your%20question%20below:');
+define('TEXT_QUESTION_PRICE_ENQUIRY', 'Price%20Enquiry');
+define('TEXT_QUESTION_PRODUCT_NAME', 'Product%20Name:');
+
+
 ?>

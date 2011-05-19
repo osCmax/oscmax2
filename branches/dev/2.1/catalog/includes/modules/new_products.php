@@ -108,10 +108,20 @@ $Id$
 		
       $new_products[$x]['products_name'] = tep_get_products_name($new_products[$x]['products_id']);
 
+    if ($new_products[$x]['products_price'] == CALL_FOR_PRICE_VALUE) {
+		
+      $box_content[$row][$col] = array('align' => 'center',
+                                       'params' => 'class="smallText" width="33%" valign="top"',
+                                       'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products[$x]['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $new_products[$x]['products_image'], $new_products[$x]['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products[$x]['products_id']) . '">' . $new_products[$x]['products_name'] . '</a><br>' . $special_old_price[$x] . '&nbsp;' . $currencies->display_price($new_products[$x]['products_price'], tep_get_tax_rate($new_products[$x]['products_tax_class_id'])) . $closer[$x] . '<br>' . $more_info . '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $new_products[$x]['products_model']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $new_products[$x]['products_name']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $new_products[$x]['products_id'] . '%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>');
+									   
+    } else {
+		
       $box_content[$row][$col] = array('align' => 'center',
                                        'params' => 'class="smallText" width="33%" valign="top"',
                                        'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products[$x]['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $new_products[$x]['products_image'], $new_products[$x]['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products[$x]['products_id']) . '">' . $new_products[$x]['products_name'] . '</a><br>' . $special_old_price[$x] . '&nbsp;' . $currencies->display_price($new_products[$x]['products_price'], tep_get_tax_rate($new_products[$x]['products_tax_class_id'])) . $closer[$x] . '<br>' . $more_info . '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'pName')) . 'action=buy_now&products_id=' . $new_products[$x]['products_id']) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>');
-
+									   
+    } // end if ($listing[$x]['products_price'] == CALL_FOR_PRICE_VALUE)
+	
       $col ++;
       if ($col > 2) {
         $col = 0;

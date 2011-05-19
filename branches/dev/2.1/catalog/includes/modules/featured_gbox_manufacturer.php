@@ -83,7 +83,11 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
 
     if (FEATURED_SET_SHOW_BUY_NOW_BUTTONS=='true') {
       //original buy now button
-      $buy_now_link = '<a href="' . tep_href_link(FILENAME_DEFAULT, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $featured_manufacturer_products_array[$i]['pid'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>';
+	  if ($featured_manufacturer_products_array[$i]['pprice'] == CALL_FOR_PRICE_VALUE) {
+        $buy_now_link = '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $featured_manufacturer_products_array[$i]['pmodel']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $featured_manufacturer_products_array[$i]['pname']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $featured_manufacturer_products_array[$i]['pid'] . '%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
+	  } else {
+		$buy_now_link = '<a href="' . tep_href_link(FILENAME_DEFAULT, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $featured_manufacturer_products_array[$i]['pid'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>';
+	  }
       //sid killer buy now button: http://www.oscommerce.com/community/contributions,952
       //$buy_now_link = '<br><form name="buy_now" method="post" action="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now', 'NONSSL') . '"><input type="hidden" name="products_id" value="' . $featured_manufacturer_products_array[$i]['pid'] . '">' . tep_image_submit('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</form>';
     } else {

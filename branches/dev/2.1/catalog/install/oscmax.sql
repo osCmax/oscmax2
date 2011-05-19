@@ -1770,7 +1770,7 @@ INSERT INTO affiliate_payment_status VALUES (1,3,'Pagado');
 
 # Configuration ID: 1 - My Store
 INSERT INTO configuration VALUES (1, 'CT_STORE_NAME', 'STORE_NAME', 'Store Name', 'CD_STORE_NAME', '1', '1', NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (3125, 'CT_STORE_LOGO', 'STORE_LOGO', 'oscmax-logo.png', 'CD_STORE_LOGO', '1', '2', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (3125, 'CT_STORE_LOGO', 'STORE_LOGO', 'logo.png', 'CD_STORE_LOGO', '1', '2', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (2, 'CT_STORE_OWNER', 'STORE_OWNER', 'Owners Name', 'CD_STORE_OWNER', '1', '3', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (3, 'CT_STORE_OWNER_EMAIL_ADDRESS', 'STORE_OWNER_EMAIL_ADDRESS', 'your@email.com', 'CD_STORE_OWNER_EMAIL_ADDRESS', '1', '4', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (4, 'CT_EMAIL_FROM', 'EMAIL_FROM', 'admin@yourshop.com', 'CD_EMAIL_FROM', '1', '5', NULL, now(), NULL, NULL);

@@ -77,7 +77,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 <!-- header //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr class="header">
-    <td valign="middle"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . STORE_LOGO, STORE_NAME) . '</a>'; ?></td>
+    <td valign="middle"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_TEMPLATES . 'images/' . STORE_LOGO, STORE_NAME) . '</a>'; ?></td>
     <td align="right" valign="bottom">
       <table border="0" cellspacing="0" cellpadding="0">
         <tr>

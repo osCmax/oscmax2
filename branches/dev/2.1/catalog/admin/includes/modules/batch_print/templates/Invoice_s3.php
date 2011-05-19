@@ -63,11 +63,11 @@ $pdf->selectFont(BATCH_PDF_DIR . 'Helvetica.afm');
 $pdf->setFontFamily(BATCH_PDF_DIR . 'Helvetica.afm');
 
 // logo image
-list($w, $h) = getimagesize(DIR_WS_IMAGES . STORE_LOGO);
+list($w, $h) = getimagesize(HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'templates/' . DIR_WS_TEMPLATES_DEFAULT . '/images/' . STORE_LOGO);
 if(stristr(STORE_LOGO, '.png') === FALSE) {
-  $pdf->addJpegFromFile(DIR_WS_IMAGES . STORE_LOGO,30,730,$w,$h); 
+  $pdf->addJpegFromFile(HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'templates/' . DIR_WS_TEMPLATES_DEFAULT . '/images/' . STORE_LOGO,30,730,$w,$h); 
 } else {
-  $pdf->addPngFromFile(DIR_WS_IMAGES . STORE_LOGO,30,730,$w,$h); 	
+  $pdf->addPngFromFile(HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'templates/' . DIR_WS_TEMPLATES_DEFAULT . '/images/' . STORE_LOGO,30,730,$w,$h); 	
 }
 
 // invoice number and box

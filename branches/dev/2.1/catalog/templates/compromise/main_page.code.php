@@ -121,7 +121,7 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
        
 //begin{cataloglogo}
   // show logo      
-  echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . 'store_logo.gif', STORE_NAME) . '</a>'; 
+  echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_TEMPLATES . 'images/' . STORE_LOGO, STORE_NAME) . '</a>'; 
 //end{cataloglogo}
         
 //begin{myaccountlogo}
@@ -137,7 +137,7 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 //end{checkoutlogo}
 //begin{mainlogo}
   // show logo      
-  echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . STORE_LOGO, STORE_NAME) . '</a>'; 
+  echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_TEMPLATES . 'images/' . STORE_LOGO, STORE_NAME). '</a>'; 
 //end{mainlogo}
         
 //begin{myaccounticon}

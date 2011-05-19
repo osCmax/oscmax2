@@ -23,7 +23,7 @@ define('TEXT_INFO_LAST_MODIFIED', 'Last Modified:');
 define('CT_STORE_NAME', 'Store Name');
 define('CD_STORE_NAME', 'The name of my store ');
 define('CT_STORE_LOGO', 'Store Logo');
-define('CD_STORE_LOGO', 'Set your store logo image');
+define('CD_STORE_LOGO', 'Set your store logo image. <br><br>You <b>must</b> use either a <b>jpg</b> or <b>png</b> image type. <br><br> It is normally best to leave this setting alone and simply overwrite the image in the images/ folder of your template.');
 define('CT_STORE_OWNER', 'Store Owner');
 define('CD_STORE_OWNER', 'The name of my store owner');
 define('CT_STORE_OWNER_EMAIL_ADDRESS', 'E-Mail Address');

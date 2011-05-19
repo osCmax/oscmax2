@@ -126,7 +126,7 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
        
 //begin{mainlogo}
   // show logo      
-  echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . STORE_LOGO, STORE_NAME) . '</a>'; 
+  echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_TEMPLATES . 'images/' . STORE_LOGO, STORE_NAME) . '</a>'; 
 //end{mainlogo}
         
 //begin{myaccounticon}

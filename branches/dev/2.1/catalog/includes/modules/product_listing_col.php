@@ -471,6 +471,8 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 
       }
       $lc_text = implode('<br>', $product_contents);
+	  // Remove first <br> to prevent corner banners from adding extra line.
+	  $lc_text = substr($lc_text, 4);
       $list_box_contents[$row][$column] = array('align' => 'center',
                                                 'params' => 'class="productListing-data"',
                                                 'text'  => $lc_text);

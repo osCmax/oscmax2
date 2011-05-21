@@ -125,15 +125,15 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 //end{cataloglogo}
         
 //begin{myaccountlogo}
-  echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_account.gif', HEADER_TITLE_MY_ACCOUNT) . '</a>';      
+  echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_TEMPLATES . 'images/' . 'header_account.gif', HEADER_TITLE_MY_ACCOUNT) . '</a>';      
 //end{myaccountlogo}
         
 //begin{cartlogo}
-  echo '<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_IMAGES . 'header_cart.gif', HEADER_TITLE_CART_CONTENTS) . '</a>';      
+  echo '<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_TEMPLATES . 'images/' . 'header_cart.gif', HEADER_TITLE_CART_CONTENTS) . '</a>';      
 //end{cartlogo}
         
 //begin{checkoutlogo}
-  echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_checkout.gif', HEADER_TITLE_CHECKOUT) . '</a>';      
+  echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image(DIR_WS_TEMPLATES . 'images/' . 'header_checkout.gif', HEADER_TITLE_CHECKOUT) . '</a>';      
 //end{checkoutlogo}
 //begin{mainlogo}
   // show logo      

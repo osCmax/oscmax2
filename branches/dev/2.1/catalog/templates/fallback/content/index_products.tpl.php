@@ -31,7 +31,7 @@ $Id$
               
 <?php	
 // Get the right image for the top-right
-    $image = DIR_WS_IMAGES . 'table_background_list.gif';
+    $image = '';
 	$image_folder = '';
     if (isset($_GET['manufacturers_id'])) {
       $manufacturer_query = tep_db_query("select m.manufacturers_image, m.manufacturers_name, mi.manufacturers_description from " . TABLE_MANUFACTURERS . " m, " . TABLE_MANUFACTURERS_INFO . " mi where m.manufacturers_id = mi.manufacturers_id and mi.languages_id = '" . (int)$languages_id . "' and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");

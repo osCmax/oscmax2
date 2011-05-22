@@ -79,10 +79,7 @@ $Id$
   <body>
     <table border="0" width="100%">
       <tr>
-        <td colspan="3">
-          <img src="images/pixel_trans.gif" border="0" alt=""
-          width="1" height="100">
-        </td>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '1', '100'); ?></td>
       </tr>
       <tr>
         <td align="center">

@@ -178,7 +178,7 @@ $Id$
   }
 ?>
               <tr>
-                <td class="main" width="150"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
+                <td class="main" width="150"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></span></td>
 				<?php // +Country-State Selector ?>
                 <td class="main"><?php echo tep_get_country_list('country',$country,'onChange="getStates(this.value, \'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
 				<?php // -Country-State Selector ?>

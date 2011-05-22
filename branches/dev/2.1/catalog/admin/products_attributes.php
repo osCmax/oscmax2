@@ -311,7 +311,7 @@ function go_option() {
 ?>
               <tr>
                 <td class="pageHeading">&nbsp;<?php echo $options_values['products_options_name']; ?>&nbsp;</td>
-                <td>&nbsp;<?php echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '53'); ?>&nbsp;</td>
+                <td>&nbsp;<?php echo tep_draw_separator('pixel_trans.gif', '1', '53'); ?>&nbsp;</td>
               </tr>
               <tr>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="2">

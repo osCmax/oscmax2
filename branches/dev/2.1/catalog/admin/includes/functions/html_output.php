@@ -102,13 +102,13 @@ $Id$
 ////
 // Draw a 1 pixel black line
   function tep_black_line() {
-    return tep_image(DIR_WS_IMAGES . 'pixel_black.gif', '', '100%', '1');
+    return tep_image(DIR_WS_ICONS . 'pixel_black.gif', '', '100%', '1');
   }
 
 ////
 // Output a separator either through whitespace, or with an image
   function tep_draw_separator($image = 'pixel_black.gif', $width = '100%', $height = '1') {
-    return tep_image(DIR_WS_IMAGES . $image, '', $width, $height);
+    return tep_image(DIR_WS_ICONS . $image, '', $width, $height);
   }
 
 ////

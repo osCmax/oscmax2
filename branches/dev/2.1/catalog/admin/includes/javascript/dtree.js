@@ -86,9 +86,9 @@ function dTree(objName) {
 
 		root				: 'images/treeview/base.gif',
 
-		folder			: 'images/treeview/folder.gif',
+		folder			    : 'images/treeview/folder.gif',
 
-		folderOpen	: 'images/treeview/folderopen.gif',
+		folderOpen	        : 'images/treeview/folderopen.gif',
 
 		node				: 'images/treeview/page.gif',
 

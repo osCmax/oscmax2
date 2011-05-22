@@ -18,8 +18,8 @@ $Id$
 <head>
 	<title>Catalog Tree</title>
 
-	<link rel="StyleSheet" href="dtree.css" type="text/css" />
-	<script type="text/javascript" src="dtree.js"></script>
+	<link rel="StyleSheet" href="includes/javascript/dtree.css" type="text/css" />
+	<script type="text/javascript" src="includes/javascript/dtree.js"></script>
 
 </head>
 

@@ -11,6 +11,7 @@ $Id$
 */
 
 define('HEADING_TITLE', 'Phone Order');
+define('FILTER_CUSTOMER', 'Filter Customer List');
 define('SELECT_CUSTOMER', 'Select Customer');
 define('SEARCH', 'Search');
 define('SUBMIT', 'Submit');

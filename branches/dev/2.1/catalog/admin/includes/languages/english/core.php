@@ -657,6 +657,8 @@ define('TEXT_WRONG_USERNAME', 'Wrong Username');
 define('TEXT_LOGGED_IN', 'Logged In');
 define('TEXT_LOGGED_OUT', 'Logged Out');
 define('TEXT_CONFIG_CHANGE', 'Config Change: ');
+define('TEXT_ADMIN_AS_CUSTOMER', 'Admin as Customer');
+define('TEXT_ADMIN_HACK_ATTEMPT', 'Hack Attempt');
 
 // Footer defines
 define('TEXT_POWERED_BY', 'Powered by ');

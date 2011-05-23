@@ -39,7 +39,7 @@ $Id$
         }
 
         $login_id = $check_admin['login_id'];
-      $login_groups_id = $check_admin['login_groups_id'];
+        $login_groups_id = $check_admin['login_groups_id'];
         $login_username = $check_admin['login_username'];
         $login_logdate = $check_admin['login_logdate'];
         $login_lognum = $check_admin['login_lognum'];

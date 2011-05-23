@@ -40,36 +40,50 @@ $Id$
 //  $check_customer_query = tep_db_query("select customers_id, customers_firstname, customers_password, customers_email_address, customers_default_address_id from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "'");
     $check_customer_query = tep_db_query("select customers_id, customers_firstname, customers_group_id, customers_password, customers_email_address, customers_default_address_id , guest_account from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "' and guest_account='0'");
     if (!tep_db_num_rows($check_customer_query)) {
-      	$error = true;
-	  	//Added by PGM
-		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', now())");
-
+	  // Email address not in database
+      $error = true;
+	  //Added by PGM
+	  tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', now())");
     } else {
+	  // Email in database now lets check the password
       $check_customer = tep_db_fetch_array($check_customer_query);
-// Check that password is good
+      // Check that password is good
       // BOF PHONE ORDER
-
-	  //if (!tep_validate_password($password, $check_customer['customers_password'])) {
-
-	  if (!tep_validate_password($password, $check_customer['customers_password']) && !isset($_POST['action'])) {
-
+	  $checked = '';
+      // If $_POST(['action']) is set then lets check where they have come from
+	  if (isset($_POST['action'])) {
+        $referrer = $_SERVER['HTTP_REFERER'];
+	    // We should have the admin folder name in the $_POST vars
+	    if (strpos($referrer, $_POST['admin']) !== false) {
+	      $checked = 'pass';
+	    } else {
+	      $checked = 'fail';
+	    }
+	  }
 	  
+	  //if (!tep_validate_password($password, $check_customer['customers_password'])) {
+	  if (!tep_validate_password($password, $check_customer['customers_password']) && !isset($_POST['action'])) {
+	  // Password does not match and customer did not come from admin 
         $error = true;
-		//Added by PGM
 		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', now())");
-
+	  } elseif (isset($_POST['action']) && $checked == 'fail') {
+	  // Password does not match and customer looks like they came from admin but admin dir does not match - potential hack attempt
+	    $error = true;
+		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Hack Attempt', now())");
       } else {
-        if (SESSION_RECREATE == 'True' && !isset($_POST['action'])) {
-			
-		//Added by PGM
-		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', now())");
-
-
-		if(isset($_POST['phoneorder']) && ($_POST['phoneorder'] == 'order')){
-          	tep_session_recreate();
+	  // Password matched or phone order via admin passed
+        //if (SESSION_RECREATE == 'True' && !isset($_POST['action'])) {
+		if ($checked == 'pass') {
+          tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Admin as Customer', now())");
+		} else {
+		  tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', now())");  
 		}
+		// Create session
+		tep_session_recreate();
+
+		
 	// EOF PHONE ORDER	
-        }
+        //}
 // BOF: MOD - Separate Pricing Per Customer: choice for logging in under any customer_group_id
 // note that tax rates depend on your registered address!
         if ($_GET['skip'] != 'true' && $_POST['email_address'] == SPPC_TOGGLE_LOGIN_PASSWORD ) {

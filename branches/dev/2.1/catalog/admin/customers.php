@@ -1216,7 +1216,13 @@ echo css_get_country_list('entry_country_id',  $cInfo->entry_country_id,'onChang
                       <td align="right" colspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS) . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
                     </tr>
 <?php
-    }
+    } else {
+?>
+                    <tr>
+                      <td align="right" colspan="2" class="smallText"><?php echo '<a href="' . tep_href_link(FILENAME_CREATE_ACCOUNT) . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
+                    </tr>
+<?php	
+	}
 ?>
                   </table>
                 </td>
@@ -1287,7 +1293,16 @@ echo css_get_country_list('entry_country_id',  $cInfo->entry_country_id,'onChang
 		$contents[] = array('align' => 'center', 'text' => '<table width="100%"><tr><td class="messageStackSuccess">MailChimp Sync Complete.<br>Subscribed:<b>' . $sub_list_size . '</b>&nbsp;&nbsp;Unsubscribed:<b>' . $unsub_list_size . '</b></td></tr></table>');	
 		}
         $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=confirm') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'cID=' . $cInfo->customers_id) . '">' . tep_image_button('button_orders.gif', IMAGE_ORDERS) . '</a> <a href="' . tep_href_link(FILENAME_MAIL, 'selected_box=tools&customer=' . $cInfo->customers_email_address) . '">' . tep_image_button('button_email.gif', IMAGE_EMAIL) . '</a>');
-		$contents[] = array('align' => 'center', 'text' => ' <a href="' . tep_href_link(FILENAME_CREATE_ORDER, tep_get_all_get_params(array('cID', 'action', 'page')) . 'Customer_nr=' . $cInfo->customers_id) . '">' . tep_image_button('button_create_order2.gif', IMAGE_ORDERS) . '</a> ');
+		
+// Adds phone order functionality		
+		if (ENABLE_SSL_CATALOG == 'true') {
+		  $po_string = '<form action="' . HTTPS_CATALOG_SERVER . DIR_WS_CATALOG . 'login.php" method="POST" target="_blank">';
+		} else {
+		  $po_string = '<form action="' . HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'login.php" method="POST" target="_blank">';
+		}
+		$po_string .= '<input type="hidden" name="email_address" value="' . $cInfo->customers_email_address . '"><input type="hidden" name="action" value="process"><input type="hidden" name="phoneorder" value="order"><input type="hidden" name="admin" value="' . str_replace(DIR_FS_CATALOG, "", DIR_FS_ADMIN) . '">' . tep_image_submit('button_login.gif', IMAGE_BUTTON_LOGIN_AS) . '</form>';
+		
+		$contents[] = array('align' => 'center', 'text' => ' <a href="' . tep_href_link(FILENAME_CREATE_ORDER, tep_get_all_get_params(array('cID', 'action', 'page')) . 'Customer_nr=' . $cInfo->customers_id) . '">' . tep_image_button('button_create_order2.gif', IMAGE_ORDERS) . '</a> ' . $po_string);
 		if (MAILCHIMP_ENABLE == true) {
 		$contents[] = array('align' => 'center', 'text' => ' <a href="' . tep_href_link(FILENAME_CUSTOMERS, 'action=mailchimp') . '">' . tep_image_button('button_mc_sync.gif', IMAGE_MC_SYNC) . '</a> ');
 		}

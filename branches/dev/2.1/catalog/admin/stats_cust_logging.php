@@ -117,6 +117,14 @@ $Id$
 		          case 'Logged Out':
                     echo TEXT_LOGGED_OUT;
                   break;
+				  
+				  case 'Admin as Customer':
+				    echo TEXT_ADMIN_AS_CUSTOMER;
+				  break;
+				  
+				  case 'Hack Attempt':
+				    echo TEXT_ADMIN_HACK_ATTEMPT;
+				  break;
 				} // end switch
 				?>
 			  </tr>

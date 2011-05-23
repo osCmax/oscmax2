@@ -475,12 +475,12 @@ $Id$
   } else {
 ?>
       <tr>
-        <td><?php echo tep_draw_form('search', 'customers_groups.php', '', 'get'); ?>
+        <td><?php echo tep_draw_form('search_cg', 'customers_groups.php', '', 'get'); ?>
           <table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
               <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
               <td class="pageHeading" align="right">&nbsp;</td>
-              <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search'); ?></td>
+              <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search_cg'); ?></td>
             </tr>
           </table>
         </form></td>
@@ -509,9 +509,9 @@ $Id$
                </tr>
 
 <?php
-    $search = '';
-    if ( ($_GET['search']) && (tep_not_null($_GET['search'])) ) {
-      $keywords = tep_db_input(tep_db_prepare_input($_GET['search']));
+    $search_cg = '';
+    if ( ($_GET['search_cg']) && (tep_not_null($_GET['search_cg'])) ) {
+      $keywords = tep_db_input(tep_db_prepare_input($_GET['search_cg']));
       $search = "where g.customers_group_name like '%" . $keywords . "%'";
     }
 
@@ -546,16 +546,16 @@ $Id$
                     <td class="smallText" align="right"><?php echo $customers_groups_split->display_links($customers_groups_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
                   </tr>
 <?php
-    if (tep_not_null($_GET['search'])) {
+    if (tep_not_null($_GET['search_cg'])) {
 ?>
                   <tr>
-                    <td align="right" colspan="2"><?php echo '<a href="' . tep_href_link('customers_groups.php') . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
+                    <td align="right" colspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS_GROUPS) . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
                   </tr>
 <?php
     } else {
 ?>
                   <tr>
-                    <td align="right" colspan="2" class="smallText"><?php echo '<a href="' . tep_href_link('customers_groups.php', 'page=' . $_GET['page'] . '&amp;action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
+                    <td align="right" colspan="2" class="smallText"><?php echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS_GROUPS, 'page=' . $_GET['page'] . '&amp;action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
                   </tr>
 <?php
     }

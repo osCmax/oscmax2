@@ -50,7 +50,7 @@ CanonicalLink( $xhtml = false, 'SSL' );
 <?php  } 
 
 if ( defined('FWR_SUCKERTREE_MENU_ON') && FWR_SUCKERTREE_MENU_ON === 'true' )
-echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet', 'fwr_suckertree_css_menu.css')) . '" />';
+echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet', 'fwr_suckertree_css_menu.css')) . '">';
 ?>
  
 </head>
@@ -96,9 +96,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 	if ($cart->count_contents() > 0) {
 	  echo '<td class="tab"><a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . HEADER_TITLE_CHECKOUT . '</a></td>'; ?>
     <?php } ?>
-    &nbsp;&nbsp;
-          </td>
-          <td>&nbsp;</td>
+          <td>&nbsp;&nbsp;</td>
         </tr>
       </table>
     </td>

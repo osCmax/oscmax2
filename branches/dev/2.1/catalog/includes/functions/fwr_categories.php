@@ -79,6 +79,3 @@ unset($categories['menuid_string'], $categories['menuid_js']); // Housekeeping
 
   include (bts_select('boxes', $box_base_name)); // BTS 1.5
 ?>
-  </td>
-</tr>
-<!-- categories_eof //-->

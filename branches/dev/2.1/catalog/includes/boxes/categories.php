@@ -195,7 +195,9 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
 
 
 include (bts_select('boxes', $box_base_name)); // BTS 1.5
-}
+
 
 	$boxContent .= '</table>';
-?><!-- categories_eof //-->
+}
+?>
+<!-- categories_eof //-->

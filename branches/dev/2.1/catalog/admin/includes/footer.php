@@ -64,7 +64,7 @@ $Id$
     </td>
   </tr>
   <tr>
-    <td><?php echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '5'); ?></td>
+    <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
   </tr>
 </table>
 

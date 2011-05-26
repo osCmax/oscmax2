@@ -21,16 +21,13 @@ $Id$
     <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
-<!-- // +Country-State Selector -->
-		<div id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'indicator.gif'); ?></div>			
-<!-- // -Country-State Selector -->
 <?php
   if (ACCOUNT_GENDER == 'true') {
     $male = ($affiliate['affiliate_gender'] == 'm') ? true : false;
     $female = ($affiliate['affiliate_gender'] == 'f') ? true : false;
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_GENDER; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_GENDER; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -52,7 +49,7 @@ $Id$
   }
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_FIRST_NAME; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_FIRST_NAME; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only == true) {
@@ -70,7 +67,7 @@ $Id$
             </td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_LAST_NAME; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_LAST_NAME; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only == true) {
@@ -91,7 +88,7 @@ $Id$
   if (ACCOUNT_DOB == 'true') {
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_DATE_OF_BIRTH; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_DATE_OF_BIRTH; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -112,7 +109,7 @@ $Id$
   }
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_EMAIL_ADDRESS; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_EMAIL_ADDRESS; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only == true) {
@@ -148,7 +145,7 @@ $Id$
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_AFFILIATE_COMPANY; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_AFFILIATE_COMPANY; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -166,7 +163,7 @@ $Id$
             </td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_AFFILIATE_COMPANY_TAXID; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_AFFILIATE_COMPANY_TAXID; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -201,7 +198,7 @@ $Id$
   if (AFFILIATE_USE_CHECK == 'true') {
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_CHECK; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_CHECK; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -223,7 +220,7 @@ $Id$
   if (AFFILIATE_USE_PAYPAL == 'true') {
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_PAYPAL; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_PAYPAL; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -245,7 +242,7 @@ $Id$
   if (AFFILIATE_USE_BANK == 'true') {
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_BANK_NAME; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_BANK_NAME; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -263,7 +260,7 @@ $Id$
             </td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -281,7 +278,7 @@ $Id$
             </td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_BANK_SWIFT_CODE; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_BANK_SWIFT_CODE; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -299,7 +296,7 @@ $Id$
             </td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NAME; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NAME; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -317,7 +314,7 @@ $Id$
             </td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -349,7 +346,7 @@ $Id$
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_STREET_ADDRESS; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_STREET_ADDRESS; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only == true) {
@@ -370,7 +367,7 @@ $Id$
   if (ACCOUNT_SUBURB == 'true') {
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_SUBURB; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_SUBURB; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($is_read_only == true) {
@@ -391,7 +388,7 @@ $Id$
   }
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_POST_CODE; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_POST_CODE; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only == true) {
@@ -409,7 +406,7 @@ $Id$
             </td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_CITY; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_CITY; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only == true) {
@@ -430,7 +427,7 @@ $Id$
   if (ACCOUNT_STATE == 'true') {
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_STATE; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_STATE; ?></td>
             <td class="main">&nbsp;
 <div id="states">
 				<?php
@@ -444,7 +441,7 @@ $Id$
   }
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_COUNTRY; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_COUNTRY; ?><div id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></div></td>
 	    <td class="main">
 	    <?php
   if ($is_read_only == true) {
@@ -476,7 +473,7 @@ $Id$
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only == true) {
@@ -494,7 +491,7 @@ $Id$
             </td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_FAX_NUMBER; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_FAX_NUMBER; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only == true) {
@@ -512,7 +509,7 @@ $Id$
             </td>
           </tr>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_AFFILIATE_HOMEPAGE; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_AFFILIATE_HOMEPAGE; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only == true) {
@@ -544,7 +541,7 @@ $Id$
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_PASSWORD; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_PASSWORD; ?></td>
             <td class="main">&nbsp;
 <?php
     if ($error == true) {
@@ -563,7 +560,7 @@ $Id$
     if ( ($error == false) || ($entry_password_error == true) ) {
 ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_PASSWORD_CONFIRMATION; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_PASSWORD_CONFIRMATION; ?></td>
             <td class="main">&nbsp;
 <?php
       echo tep_draw_password_field('a_confirmation') . '&nbsp;<span class="inputRequirement">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>';

@@ -13,9 +13,6 @@ $Id$
   if (!isset($process)) $process = false;
 ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
-<!-- // +Country-State Selector -->
-<div id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'indicator.gif'); ?></div>
-<!-- // +Country-State Selector -->
 <?php
   if (ACCOUNT_GENDER == 'true') {
     if (isset($gender)) {
@@ -92,7 +89,7 @@ $Id$
   }
 ?>
   <tr>
-    <td class="main"><?php echo ENTRY_COUNTRY; ?></td>
+    <td class="main"><?php echo ENTRY_COUNTRY; ?><div id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></div></td>
 				<?php // +Country-State Selector ?>
     <td class="main"><?php echo tep_get_country_list('country',$country,'onChange="getStates(this.value,\'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
 				<?php // -Country-State Selector ?>

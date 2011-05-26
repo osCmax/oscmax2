@@ -35,18 +35,18 @@ $Id$
     while ($affiliate_banners = tep_db_fetch_array($affiliate_banners_values)) {
       $affiliate_categories_query = tep_db_query("select categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . $affiliate_banners['affiliate_category_id'] . "' and language_id = '" . $languages_id . "'");
       $affiliate_categories = tep_db_fetch_array($affiliate_categories_query);
-      $prod_id = $affiliate_banners['affiliate_category_id'];
+      $cat_id = $affiliate_banners['affiliate_category_id'];
       $ban_id = $affiliate_banners['affiliate_banners_id'];
       switch (AFFILIATE_KIND_OF_BANNERS) {
         case 1: // Link to Categories
-          if ($prod_id > 0) {
-            $link = '<a href="' . HTTPS_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&amp;cPath=' . $prod_id . '&amp;affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTPS_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_categories['categories_name'] . '"></a>';
-            $link1 = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&amp;cPath=' . $prod_id . '&amp;affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_categories['categories_name'] . '"></a>';
+          if ($cat_id > 0) {
+            $link = '<a href="' . HTTPS_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&amp;cPath=' . $prod_id . '&amp;affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTPS_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . 'banners/' . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_categories['categories_name'] . '"></a>';
+            $link1 = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&amp;cPath=' . $prod_id . '&amp;affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . 'banners/' . $affiliate_banners['affiliate_banners_image'] . '" border="0" alt="' . $affiliate_categories['categories_name'] . '"></a>';
             $link2 = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&amp;cPath=' . $prod_id . '&amp;affiliate_banner_id=' . $ban_id . '" target="_blank">' . $affiliate_categories['categories_name'] . '</a>';
 			}
           break;
         case 2: // Link to Categories
-          if ($prod_id > 0) {
+          if ($cat_id > 0) {
             $link = '<a href="' . HTTPS_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&cPath=' . $prod_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTPS_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_SHOW_BANNER . '?ref=' . $affiliate_id . '&affiliate_banner_id=' . $ban_id . '" border="0" alt="' . $affiliate_categories['categories_name'] . '"></a>';
             $link1 = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&cPath=' . $prod_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank"><img src="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE_SHOW_BANNER . '?ref=' . $affiliate_id . '&affiliate_banner_id=' . $ban_id . '" border="0" alt="' . $affiliate_categories['categories_name'] . '"></a>';
             $link2 = '<a href="' . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_CATEGORIES_INFO . '?ref=' . $affiliate_id . '&cPath=' . $prod_id . '&affiliate_banner_id=' . $ban_id . '" target="_blank">' . $affiliate_categories['categories_name'] . '</a>';
@@ -54,9 +54,9 @@ $Id$
           break;
       }
 
-          if ($prod_id > 0) {
+          if ($cat_id > 0) {
 ?>
-        <table width="95%" align="center" border="0" cellpadding="4" cellspacing="0" class="infoBoxContents">
+        <table width="100%" align="center" border="0" cellpadding="4" cellspacing="0" class="infoBoxContents">
           <tr>
             <td class="infoBoxHeading"><?php echo TEXT_AFFILIATE_NAME . $affiliate_banners['affiliate_banners_title']; ?></td>
           </tr>

@@ -53,8 +53,8 @@ $Id$
         }
 */
         if ( ($affiliate_banners_image) && ($affiliate_banners_image != 'none') && (is_uploaded_file($affiliate_banners_image)) ) {
-          if (!is_writeable(DIR_FS_CATALOG_IMAGES . $affiliate_banners_image_target)) {
-            if (is_dir(DIR_FS_CATALOG_IMAGES . $affiliate_banners_image_target)) {
+          if (!is_writeable(DIR_FS_CATALOG_IMAGES . 'banners/' . $affiliate_banners_image_target)) {
+            if (is_dir(DIR_FS_CATALOG_IMAGES . 'banners/' . $affiliate_banners_image_target)) {
               $messageStack->add(ERROR_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
             } else {
               $messageStack->add(ERROR_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
@@ -63,14 +63,26 @@ $Id$
           }
         }
 
-        if (!$affiliate_banner_error) {
-          if (empty($affiliate_html_text)) {
-            if ( ($affiliate_banners_image) && ($affiliate_banners_image != 'none') && (is_uploaded_file($affiliate_banners_image)) ) {
-              $image_location = DIR_FS_CATALOG_IMAGES . $affiliate_banners_image_target . $affiliate_banners_image_name;
-              copy($affiliate_banners_image, $image_location);
+
+        if (empty($affiliate_html_text)) {
+          if (empty($affiliate_banners_image_local)) {
+            $affiliate_banners_image = new upload('affiliate_banners_image');
+            $affiliate_banners_image->set_destination(DIR_FS_CATALOG_IMAGES . 'banners/' . $affiliate_banners_image_target);
+            if ( ($affiliate_banners_image->parse() == false) || ($affiliate_banners_image->save() == false) ) {
+              $affiliate_banner_error = true;
             }
-            $db_image_location = (!empty($affiliate_banners_image_local)) ? $affiliate_banners_image_local : $affiliate_banners_image_target . $affiliate_banners_image_name;
           }
+        }
+
+        if ($affiliate_banner_error == false) {
+            //if (empty($affiliate_html_text)) {
+            //if ( ($affiliate_banners_image) && ($affiliate_banners_image != 'none') && (is_uploaded_file($affiliate_banners_image)) ) {
+            //  $image_location = DIR_FS_CATALOG_IMAGES . 'banners/' . $affiliate_banners_image_target . $affiliate_banners_image_name;
+            //  copy($affiliate_banners_image, $image_location);
+            //}
+			
+            $db_image_location = (!empty($affiliate_banners_image_local)) ? $affiliate_banners_image_local : $affiliate_banners_image_target . $affiliate_banners_image->filename;
+          //}
 
           if (!$affiliate_products_id) $affiliate_products_id="0";
 // Added Category Banners
@@ -113,9 +125,9 @@ $Id$
         if ($delete_image == 'on') {
           $affiliate_banner_query = tep_db_query("select affiliate_banners_image from " . TABLE_AFFILIATE_BANNERS . " where affiliate_banners_id = '" . tep_db_input($affiliate_banners_id) . "'");
           $affiliate_banner = tep_db_fetch_array($affiliate_banner_query);
-          if (is_file(DIR_FS_CATALOG_IMAGES . $affiliate_banner['affiliate_banners_image'])) {
-            if (is_writeable(DIR_FS_CATALOG_IMAGES . $affiliate_banner['affiliate_banners_image'])) {
-              unlink(DIR_FS_CATALOG_IMAGES . $affiliate_banner['affiliate_banners_image']);
+          if (is_file(DIR_FS_CATALOG_IMAGES . 'banners/' . $affiliate_banner['affiliate_banners_image'])) {
+            if (is_writeable(DIR_FS_CATALOG_IMAGES . 'banners/' . $affiliate_banner['affiliate_banners_image'])) {
+              unlink(DIR_FS_CATALOG_IMAGES . 'banners/' . $affiliate_banner['affiliate_banners_image']);
             } else {
               $messageStack->add_session(ERROR_IMAGE_IS_NOT_WRITEABLE, 'error');
             }
@@ -259,14 +271,14 @@ function popupWindow(url) {
 ?>
             <tr>
               <td class="main" valign="top"><?php echo TEXT_BANNERS_IMAGE; ?></td>
-              <td class="main"><?php echo tep_draw_file_field('affiliate_banners_image') . ' ' . TEXT_BANNERS_IMAGE_LOCAL . '<br>' . DIR_FS_CATALOG_IMAGES . tep_draw_input_field('affiliate_banners_image_local', $abInfo->affiliate_banners_image); ?></td>
+              <td class="main"><?php echo tep_draw_file_field('affiliate_banners_image') . ' ' . TEXT_BANNERS_IMAGE_LOCAL . '<br>' . DIR_FS_CATALOG_IMAGES . 'banners/' . tep_draw_input_field('affiliate_banners_image_local', $abInfo->affiliate_banners_image); ?></td>
             </tr>
             <tr>
               <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
             </tr>
             <tr>
               <td class="main"><?php echo TEXT_BANNERS_IMAGE_TARGET; ?></td>
-              <td class="main"><?php echo DIR_FS_CATALOG_IMAGES . tep_draw_input_field('affiliate_banners_image_target'); ?></td>
+              <td class="main"><?php echo DIR_FS_CATALOG_IMAGES . 'banners/' . tep_draw_input_field('affiliate_banners_image_target'); ?></td>
             </tr>
             <tr>
               <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>

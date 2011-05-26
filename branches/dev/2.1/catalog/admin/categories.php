@@ -2207,7 +2207,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 					<td valign="top" class="main">&nbsp;</td>
 				  </tr>
 				  <tr>
-					<td align="left" valign="top" class="smallText"><?php echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo '<img src=' . HTTP_CATALOG_SERVER . DIR_WS_CATALOG_LANGUAGES . $language . '/images/buttons/button_buy_now.gif>';?></td>
+					<td align="left" valign="top" class="smallText"><?php echo tep_draw_separator('pixel_trans.gif', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo '<img src=' . HTTP_CATALOG_SERVER . DIR_WS_CATALOG_LANGUAGES . $language . '/images/buttons/button_buy_now.gif>';?></td>
 				  </tr>
 				</table>
 			  </td>
@@ -2442,7 +2442,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
      if (tep_not_null($hide_cat_from_groups_array) && tep_not_null($hide_cat_from_groups_array[0])) {
         echo tep_image(DIR_WS_ICONS . 'tick_black.gif', $category_hidden_from_string, 20, 16);
       } else {
-        echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', $category_hidden_from_string, 20, 16);
+        echo tep_draw_separator('pixel_trans.gif', '20', '16');
      }
    } else {
 // default layout: icons for all groups
@@ -2450,7 +2450,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         if (in_array($customers_groups[$i]['id'], $hide_cat_from_groups_array)) {
           echo tep_image(DIR_WS_ICONS . 'icon_tick.gif', $customers_groups[$i]['text'], 11, 11) . '&nbsp;&nbsp;';
         } else {
-          echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', 11, 11) . '&nbsp;&nbsp;';
+          echo tep_draw_separator('pixel_trans.gif', '11', '11') . '&nbsp;&nbsp;';
         }
       }
    }
@@ -2544,7 +2544,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
    if (tep_not_null($hide_prods_from_groups_array)) {
         echo tep_image(DIR_WS_ICONS . 'tick_black.gif', $product_hidden_from_string, 20, 16);
      } else {
-        echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', $product_hidden_from_string, 20, 16);
+        echo tep_draw_separator('pixel_trans.gif', '20', '16');
      }
    } else {
 // default layout: icons for all groups
@@ -2552,7 +2552,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
         if (in_array($customers_groups[$i]['id'], $hide_prods_from_groups_array)) {
           echo tep_image(DIR_WS_ICONS . 'icon_tick.gif', $customers_groups[$i]['text'], 11, 11) . '&nbsp;&nbsp;';
         } else {
-          echo tep_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', 11, 11) . '&nbsp;&nbsp;';
+          echo tep_draw_separator('pixel_trans.gif', '11', '11') . '&nbsp;&nbsp;';
         }
       }
    } // end if/else (LAYOUT_HIDE_FROM == '1')

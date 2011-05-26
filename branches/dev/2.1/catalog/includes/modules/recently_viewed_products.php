@@ -35,7 +35,6 @@ if ($last_product_views != "") {
 			$visited_output .= '<td align="center" class="main">';
 			$last_visited_thumb = tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $item_image, $item_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
 			$visited_output .= '<a href="http://' . $item_url . '">' . $last_visited_thumb . '</a><br>' . $item_name;
-			$visited_output .= "</td>";
 			$output_count++;
 		}
 	}

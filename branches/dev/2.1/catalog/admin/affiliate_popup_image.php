@@ -26,7 +26,7 @@ $Id$
         if ($banner['affiliate_banners_html_text']) {
           $image_source = $banner['affiliate_banners_html_text'];
         } elseif ($banner['affiliate_banners_image']) {
-          $image_source = tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $banner['affiliate_banners_image'], $page_title);
+          $image_source = tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'banners/' . $banner['affiliate_banners_image'], $page_title);
         }
         break;
     }
@@ -37,16 +37,14 @@ $Id$
 <head>
 <title><?php echo $page_title; ?></title>
 <script type="text/javascript"><!--
-var i=0;
 
 function resize() {
-  if (navigator.appName == 'Netscape') i = 40;
-  window.resizeTo(document.images[0].width + 30, document.images[0].height + 60 - i);
+  window.resizeTo(document.images[0].width + 30, document.images[0].height + 90);
 }
 //--></script>
 </head>
 
-<body onload="resize();">
+<body onLoad="resize();">
 
 <?php echo $image_source; ?>
 

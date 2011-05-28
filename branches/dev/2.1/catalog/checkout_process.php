@@ -419,7 +419,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 		  $billToFormatted . "\n";
 		  /* One Page Checkout - End */
   if (is_object($$payment)) {
-    $email_order .= EMAIL_TEXT_PAYMENT_METHOD . "\n" . 
+    $email_order .= "\n" . EMAIL_TEXT_PAYMENT_METHOD . "\n" . 
                     EMAIL_SEPARATOR . "\n";
     $payment_class = $$payment;
     $email_order .= $order->info['payment_method'] . "\n\n";

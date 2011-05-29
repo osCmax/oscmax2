@@ -589,6 +589,8 @@ CREATE TABLE customers (
   customers_group_ra enum('0','1') NOT NULL default '0',
   customers_payment_allowed varchar(255) NOT NULL,
   customers_shipment_allowed varchar(255) NOT NULL,
+  customers_paypal_payerid varchar(20) DEFAULT NULL,
+  customers_paypal_ec tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (customers_id),
   UNIQUE KEY idx_customers_login (customers_login),
   KEY purchased_without_account (purchased_without_account),

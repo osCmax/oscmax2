@@ -201,14 +201,18 @@ $Id$
     }
 ?>
                     <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                    <td class="main" colspan="3"><b><?php echo $selection[$i]['module']; ?></b></td>
+                    <td class="main" colspan="3"><b><label for="radio<?php echo $radio_buttons; ?>"><?php echo $selection[$i]['module']; ?></label></b></td>
                     <td class="main" align="right">
 <?php
     if (sizeof($selection) > 1) {
-      echo tep_draw_radio_field('payment', $selection[$i]['id'], ($selection[$i]['id'] == $payment));
+// multiple choices, first one ($i is 0) is preselected
+      echo tep_draw_radio_field('payment', $selection[$i]['id'], $i==0, ' id="radio' . $radio_buttons . '"');
     } else {
-      echo tep_draw_hidden_field('payment', $selection[$i]['id']);
+// only one choice: show the radio button, but preselected and don't let the user change it
+//    echo tep_draw_hidden_field('payment', $selection[$i]['id']);
+      echo tep_draw_radio_field('payment', $selection[$i]['id'], true, 'readonly="readonly"');
     }
+
 ?>
                     </td>
                     <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>

@@ -2278,7 +2278,6 @@ INSERT INTO configuration VALUES (2615, 'CT_JAVASCRIPT_CHECK', 'JAVASCRIPT_CHECK
 INSERT INTO configuration VALUES (2616, 'CT_IE6_CHECK', 'IE6_CHECK', 'false', 'CD_IE6_CHECK', 203, 3, now(), now(), '', 'tep_cfg_select_option(array(''true'', ''false''), ');
 
 # Configuration ID: 204 - SlideShow Settings
-INSERT INTO configuration VALUES (2641, 'CT_DISPLAY_SLIDESHOW', 'DISPLAY_SLIDESHOW', 'true', 'CD_DISPLAY_SLIDESHOW', 204, 0, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
 INSERT INTO configuration VALUES (2617, 'CT_SLIDESHOW_WIDTH', 'SLIDESHOW_WIDTH', '640', 'CD_SLIDESHOW_WIDTH', 204, 1, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2618, 'CT_SLIDESHOW_HEIGHT', 'SLIDESHOW_HEIGHT', '250', 'CD_SLIDESHOW_HEIGHT', 204, 2, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2619, 'CT_SLIDESHOW_TRANSITION', 'SLIDESHOW_TRANSITION', 'fade', 'CD_SLIDESHOW_TRANSITION', 204, 3, now(), now(), NULL, 'tep_cfg_select_option(array(\'fade\',\'horizontal-slider\',\'vertical-slider\'),');

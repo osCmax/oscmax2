@@ -28,7 +28,8 @@ define('TEXT_SLIDESHOW_SORT_ORDER', 'Sort Order');
 
 define('TEXT_SLIDESHOW_DATE_ADDED', 'Added: ');
 define('TEXT_SLIDESHOW_LAST_MODIFIED', 'Modified: ');
-define('TEXT_SLIDESHOW_DELETE_INTRO', 'Are you sure you want to delete this Slide Image? ');
+define('TEXT_SLIDESHOW_DELETE_INTRO', 'Are you sure you want to delete this Slide? ');
+define('TEXT_DELETE_IMAGE', 'Delete slide image?');
 
 define('TEXT_INFO_HEADING_NEW_SLIDESHOW', 'New Slide Image');
 define('TEXT_INFO_HEADING_EDIT_SLIDESHOW', 'Edit Slide Image');

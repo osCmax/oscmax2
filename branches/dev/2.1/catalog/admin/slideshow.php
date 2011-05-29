@@ -11,37 +11,60 @@ $Id: slideshow.php 3 2010-03-31 user pgm
 */
 
   require('includes/application_top.php');
+  require('includes/functions/image_resize.php'); 
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   if (tep_not_null($action)) {
     switch ($action) {
       case 'insert':
-        $slideshow_id = tep_db_prepare_input($_POST['slideshow_id']);
-		$slideshow_image = tep_db_prepare_input($_POST['slideshow_image']);
         $slideshow_title = tep_db_prepare_input($_POST['slideshow_title']);
         $slideshow_link = tep_db_prepare_input($_POST['slideshow_link']);
         $slideshow_target = tep_db_prepare_input($_POST['slideshow_target']);
         $slideshow_sort_order = tep_db_prepare_input($_POST['slideshow_sort_order']);
 
-        tep_db_query("insert into " . TABLE_SLIDESHOW . " (slideshow_id, slideshow_image, slideshow_title, slideshow_link, slideshow_target, slideshow_sort_order, date_added) values ('" . (int)$slideshow_id . "', '" . $slideshow_image . "', '" . $slideshow_title . "', '" . tep_db_input($slideshow_link) . "', '" . tep_db_input($slideshow_target) . "', '" . tep_db_input($slideshow_sort_order) . "', now())");
+        tep_db_query("insert into " . TABLE_SLIDESHOW . " (slideshow_id, slideshow_title, slideshow_link, slideshow_target, slideshow_sort_order, date_added) values ('', '" . $slideshow_title . "', '" . tep_db_input($slideshow_link) . "', '" . tep_db_input($slideshow_target) . "', '" . tep_db_input($slideshow_sort_order) . "', now())");
+		
+		$slideshow_id = tep_db_insert_id();
+		
+		if($_FILES['slideshow_image']['name'] != '') {
+          if ($slideshow_image = new upload('slideshow_image', DIR_FS_CATALOG_IMAGES . 'slideshow/')) {
+            image_resize(DIR_FS_CATALOG_IMAGES . 'slideshow/' . $slideshow_image->filename, SLIDESHOW_WIDTH, SLIDESHOW_HEIGHT, '100');
+            tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_image = '" . $slideshow_image->filename . "' where slideshow_id = '" . (int)$slideshow_id . "'");
+          }
+        }
 
         tep_redirect(tep_href_link(FILENAME_SLIDESHOW));
         break;
       case 'save':
         $slideshow_id = tep_db_prepare_input($_GET['tID']);
-		$slideshow_image = tep_db_prepare_input($_POST['slideshow_image']);
         $slideshow_title = tep_db_prepare_input($_POST['slideshow_title']);
         $slideshow_link = tep_db_prepare_input($_POST['slideshow_link']);
         $slideshow_target = tep_db_prepare_input($_POST['slideshow_target']);
         $slideshow_sort_order = tep_db_prepare_input($_POST['slideshow_sort_order']);
 
-        tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_id = '" . (int)$slideshow_id . "', slideshow_image = '" . $slideshow_image . "', slideshow_title = '" . $slideshow_title . "', slideshow_link = '" . tep_db_input($slideshow_link) . "', slideshow_target = '" . tep_db_input($slideshow_target) . "', slideshow_sort_order = '" . tep_db_input($slideshow_sort_order) . "', last_modified = now() where slideshow_id = '" . (int)$slideshow_id . "'");
+        tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_id = '" . (int)$slideshow_id . "', slideshow_title = '" . $slideshow_title . "', slideshow_link = '" . tep_db_input($slideshow_link) . "', slideshow_target = '" . tep_db_input($slideshow_target) . "', slideshow_sort_order = '" . tep_db_input($slideshow_sort_order) . "', last_modified = now() where slideshow_id = '" . (int)$slideshow_id . "'");
+		
+		if($_FILES['slideshow_image']['name'] != '') {
+          if ($slideshow_image = new upload('slideshow_image', DIR_FS_CATALOG_IMAGES . 'slideshow/')) {
+            image_resize(DIR_FS_CATALOG_IMAGES . 'slideshow/' . $slideshow_image->filename, SLIDESHOW_WIDTH, SLIDESHOW_HEIGHT, '100');
+            tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_image = '" . $slideshow_image->filename . "' where slideshow_id = '" . (int)$slideshow_id . "'");
+          }
+        }
 
         tep_redirect(tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $slideshow_id));
         break;
       case 'deleteconfirm':
         $slideshow_id = tep_db_prepare_input($_GET['tID']);
+
+        if (isset($_POST['delete_image']) && ($_POST['delete_image'] == 'on')) {
+          $slide_query = tep_db_query("select slideshow_image from " . TABLE_SLIDESHOW . " where slideshow_id = '" . (int)$slideshow_id . "'");
+          $slide = tep_db_fetch_array($slide_query);
+
+          $image_location = DIR_FS_CATALOG_IMAGES . 'slideshow/' . $slide['slideshow_image'];
+
+          if (file_exists($image_location)) @unlink($image_location);
+        }
 
         tep_db_query("delete from " . TABLE_SLIDESHOW . " where slideshow_id = '" . (int)$slideshow_id . "'");
 
@@ -145,11 +168,11 @@ $Id: slideshow.php 3 2010-03-31 user pgm
     case 'new':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_SLIDESHOW . '</b>');
 
-      $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;action=insert'));
+      $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;action=insert', 'POST', ' enctype="multipart/form-data"'));
       $contents[] = array('text' => TEXT_SLIDESHOW_INSERT_INTRO);
-      $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_IMAGE . '<br>' . tep_draw_input_field('slideshow_image'));
-      $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TITLE . '<br>' . tep_draw_input_field('slideshow_title'));
-	  $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_LINK . '<br>' . tep_draw_input_field('slideshow_link'));
+      $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_IMAGE . '<br>' . tep_draw_file_field('slideshow_image'));
+      $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TITLE . '<br>' . tep_draw_input_field('slideshow_title', '', ' size=32'));
+	  $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_LINK . '<br>' . tep_draw_input_field('slideshow_link', '', ' size=32'));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TARGET . '<br>' . tep_draw_input_field('slideshow_target'));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_SORT_ORDER . '<br>' . tep_draw_input_field('slideshow_sort_order'));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
@@ -157,20 +180,20 @@ $Id: slideshow.php 3 2010-03-31 user pgm
     case 'edit':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT_SLIDESHOW . '</b>');
 
-      $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id  . '&amp;action=save'));
+      $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id  . '&amp;action=save', 'POST', ' enctype="multipart/form-data"'));
       $contents[] = array('text' => TEXT_INFO_EDIT_INTRO);
-      $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_IMAGE . '<br>' . tep_draw_input_field('slideshow_image', $trInfo->slideshow_image));		
-	  $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TITLE . '<br>' . tep_draw_input_field('slideshow_title', $trInfo->slideshow_title));
-      $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_LINK . '<br>' . tep_draw_input_field('slideshow_link', $trInfo->slideshow_link));
+      $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_IMAGE . '<br>' . tep_draw_file_field('slideshow_image') . '<br>' . $trInfo->slideshow_image);		
+	  $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TITLE . '<br>' . tep_draw_input_field('slideshow_title', $trInfo->slideshow_title, ' size=32'));
+      $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_LINK . '<br>' . tep_draw_input_field('slideshow_link', $trInfo->slideshow_link, ' size=32'));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TARGET . '<br>' . tep_draw_input_field('slideshow_target', $trInfo->slideshow_target));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_SORT_ORDER . '<br>' . tep_draw_input_field('slideshow_sort_order', $trInfo->slideshow_sort_order));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_SLIDESHOW . '</b>');
-
       $contents = array('form' => tep_draw_form('links', FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id  . '&amp;action=deleteconfirm'));
-      $contents[] = array('text' => TEXT_SLIDESHOW_DELETE_INTRO);
+	  $contents[] = array('text' => TEXT_SLIDESHOW_DELETE_INTRO);
+	  $contents[] = array('text' => '<br>' . tep_draw_checkbox_field('delete_image', '', true) . ' ' . TEXT_DELETE_IMAGE);
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     default:

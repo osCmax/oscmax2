@@ -41,7 +41,7 @@ if (PRODUCT_LIST_ENABLE == 'true') {
 /* BOF - MOD: CREDIT CLASS Gift Voucher Contribution
    $boxContent .= '<a href="' . tep_href_link(FILENAME_GV_FAQ, '', 'NONSSL') . '"> ' . BOX_INFORMATION_GV . '</a><br>' . //ICW ORDER TOTAL CREDIT CLASS/GV
 EOF - MOD: CREDIT CLASS Gift Voucher Contribution */
-if (FWR_SUCKERTREE_MENU_ON == 'true') {   
+if (FWR_SUCKERTREE_MENU_ON == 'true' && SHOW_SITEMAP == 'true') {   
    $boxContent .= '<a href="' . tep_href_link(FILENAME_SITEMAP) . '">' . BOX_INFORMATION_SITEMAP . '</a>';
 }
 

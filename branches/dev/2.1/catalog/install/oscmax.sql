@@ -2163,6 +2163,8 @@ INSERT INTO configuration VALUES (2501, 'CT_FWR_SUCKERTREE_MENU_ON', 'FWR_SUCKER
 INSERT INTO configuration VALUES (2502, 'CT_FWR_MENU_ORDER_BY', 'FWR_MENU_ORDER_BY', 'c.categories_id', 'CD_FWR_MENU_ORDER_BY', 86, 2, now(), now(), NULL, 'tep_cfg_select_option(array(''c.categories_id'', ''c.sort_order''),');
 INSERT INTO configuration VALUES (2503, 'CT_FWR_MENU_CACHE_PATH', 'FWR_MENU_CACHE_PATH', 'DIR_FS_CACHE', 'CD_FWR_MENU_CACHE_PATH', 86, 3, now(), now(), NULL, 'tep_cfg_select_option(array(''DIR_FS_CACHE'', ''false''),');
 INSERT INTO configuration VALUES (2504, 'CT_FWR_MENU_RESET', 'FWR_MENU_RESET', 'false', 'CD_FWR_MENU_RESET', 86, 4, now(), now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (1999, 'CT_SHOW_SITEMAP', 'SHOW_SITEMAP', 'true', 'CD_SHOW_SITEMAP', 86, 5, now(), now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+
 
 # Configuration ID: 87 - reCaptcha
 INSERT INTO configuration VALUES (2505, 'CT_RECAPTCHA_ON', 'RECAPTCHA_ON', 'false', 'CD_RECAPTCHA_ON', 87, 1, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');

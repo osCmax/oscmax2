@@ -749,6 +749,9 @@ define('CT_FWR_MENU_CACHE_PATH', 'Cache path: True uses standard osc DIR_FS_CACH
 define('CD_FWR_MENU_CACHE_PATH', 'Choose true to use the standard cache path as set in configuration<br />False will attempt to write to shop root.');
 define('CT_FWR_MENU_RESET', 'Reset the categories menu.');
 define('CD_FWR_MENU_RESET', 'Choose true to rebuild the categories menu');
+define('CT_SHOW_SITEMAP', 'Display Sitemap in Information infobox?');
+define('CD_SHOW_SITEMAP', 'Do you want to allow the customer to view a sitemap of your site? (link is created in the information infobox)');
+
 
 // Configuration ID: 87 - reCaptcha 
 define('CT_RECAPTCHA_ON', 'Enable reCaptcha Form = true/false');

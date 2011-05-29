@@ -285,7 +285,7 @@ define('BOX_LOCALIZATION_ORDERS_STATUS', 'Bestellstatus');
 define('BOX_PREMADE', 'Vorgefertigte Kommentare');
 
 // affiliates box text in includes/boxes/affiliate.php
-define('BOX_HEADING_AFFILIATES', 'Affiliates');
+define('BOX_MENU_AFFILIATES', 'Affiliates');
 
 // vouchers box text in includes/boxes/gv_admin.php
 define('BOX_HEADING_VOUCHERS', 'Gutscheine');
@@ -542,7 +542,7 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Warnung: Dateiuploads sind in der php.i
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Produkte'); // X-Sell
 
 // BOF: MOD - Article Manager
-define('BOX_HEADING_ARTICLES', 'Artikel');
+define('BOX_MENU_ARTICLES', 'Artikel');
 define('BOX_TOPICS_ARTICLES', 'Themen/Artikel');
 define('BOX_ARTICLES_CONFIG', 'Artikeleinstellungen');
 define('BOX_ARTICLES_AUTHORS', 'Autoren');

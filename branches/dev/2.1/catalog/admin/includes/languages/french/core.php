@@ -497,7 +497,7 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Attention&nbsp;: Le t&eacute;l&eacute;c
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Cross Sell Products'); // X-Sell
 
 // BOF: MOD - Article Manager
-define('BOX_HEADING_ARTICLES', 'Article Manager');
+define('BOX_MENU_ARTICLES', 'Article Manager');
 define('BOX_TOPICS_ARTICLES', 'Topics/Articles');
 define('BOX_ARTICLES_CONFIG', 'Configuration');
 define('BOX_ARTICLES_AUTHORS', 'Authors');

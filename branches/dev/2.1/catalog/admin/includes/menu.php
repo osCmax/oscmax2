@@ -118,7 +118,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('affiliate.php') == true) { ?>
     <li>
-      <a href="#"><?php echo BOX_HEADING_AFFILIATES; ?></a>
+      <a href="#"><?php echo BOX_MENU_AFFILIATES; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'affiliate.php'); ?>
         </ul>
@@ -140,7 +140,7 @@ $Id$
 <?php
   if (tep_admin_check_boxes('articles.php') == true) { ?>
     <li>
-      <a href="#"><?php echo BOX_HEADING_ARTICLES; ?></a>
+      <a href="#"><?php echo BOX_MENU_ARTICLES; ?></a>
         <ul>
            <?php require(DIR_WS_BOXES . 'articles.php'); ?>
         </ul>

@@ -11,7 +11,7 @@ $Id$
 */
 
 // reports box text in includes/boxes/affiliate.php
-define('BOX_HEADING_AFFILIATE','Affiliés');
+//define('BOX_HEADING_AFFILIATE','Affiliés');
 define('BOX_AFFILIATE_SUMMARY','Sommaire');
 define('BOX_AFFILIATE','Affiliés');
 define('BOX_AFFILIATE_PAYMENT','Paiement');

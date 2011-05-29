@@ -266,7 +266,7 @@ define('BOX_LOCALIZATION_ORDERS_STATUS', 'Estados de pedidos');
 define('BOX_PREMADE', 'Comentarios predefinidos');
 
 // affiliates box text in includes/boxes/affiliate.php
-define('BOX_HEADING_AFFILIATES', 'Afiliados');
+define('BOX_MENU_AFFILIATES', 'Afiliados');
 
 // vouchers box text in includes/boxes/gv_admin.php
 define('BOX_HEADING_VOUCHERS', 'Vales/cheques');
@@ -538,7 +538,7 @@ define('WARNING_FILE_UPLOADS_DISABLED', 'Advertencia: Se ha desactivado la subid
 define('BOX_CATALOG_XSELL_PRODUCTS', 'Productos relacionados'); // X-Sell
 
 // BOF: MOD - Article Manager
-define('BOX_HEADING_ARTICLES', 'Noticias');
+define('BOX_MENU_ARTICLES', 'Noticias');
 define('BOX_TOPICS_ARTICLES', 'Secciones/Noticias');
 define('BOX_ARTICLES_CONFIG', 'Configuración noticias');
 define('BOX_ARTICLES_AUTHORS', 'Autores');

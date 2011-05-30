@@ -105,6 +105,7 @@ include (bts_select('boxes', $box_base_name)); // BTS 1.5
                 '<a href="' . tep_href_link(FILENAME_ACCOUNT_EDIT, '', 'SSL') . '">' . LOGIN_BOX_ACCOUNT_EDIT . '</a><br>' .
                 '<a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '">' . LOGIN_BOX_ACCOUNT_HISTORY . '</a><br>' .
 				'<a href="' . tep_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL') . '">' . LOGIN_BOX_ADDRESS_BOOK . '</a><br>' .
+				'<a href="' . tep_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL') . '">' . LOGIN_BOX_PASSWORD . '</a><br>' .
                 '<a href="' . tep_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', 'NONSSL') . '">' . LOGIN_BOX_PRODUCT_NOTIFICATIONS . '</a><br>' .
 				'<a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . LOGIN_BOX_WISHLIST . '</a><br>' .
 				'<a href="' . tep_href_link(FILENAME_ACCOUNT_NEWSLETTERS, '', 'SSL') . '">' . LOGIN_BOX_NEWSLETTERS . '</a><br><br>' .

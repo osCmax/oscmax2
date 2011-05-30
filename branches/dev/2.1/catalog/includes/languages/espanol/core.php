@@ -380,6 +380,7 @@ define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','Mi cuenta');
 define('LOGIN_BOX_ACCOUNT_EDIT','Modificar datos');
 define('LOGIN_BOX_ACCOUNT_HISTORY','Historial de pedidos');
 define('LOGIN_BOX_ADDRESS_BOOK','Agenda de direcciones');
+define('LOGIN_BOX_PASSWORD', 'Mi contraseña');
 define('LOGIN_BOX_PRODUCT_NOTIFICATIONS','Avisos de productos');
 define('LOGIN_BOX_MY_ACCOUNT','Datos de mi cuenta');
 define('LOGIN_BOX_LOGOFF','Cerrar sesión');

@@ -373,6 +373,7 @@ define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','Information compte');
 define('LOGIN_BOX_ACCOUNT_EDIT','Éditer information compte.');
 define('LOGIN_BOX_ACCOUNT_HISTORY','Historique compte');
 define('LOGIN_BOX_ADDRESS_BOOK','Mon carnet d\'adresse');
+define('LOGIN_BOX_PASSWORD', 'Mot de passe');
 define('LOGIN_BOX_PRODUCT_NOTIFICATIONS','Notifications produit');
 define('LOGIN_BOX_MY_ACCOUNT','Information g&eacute;n&eacute;rale');
 define('LOGIN_BOX_LOGOFF','Se déconnecter');

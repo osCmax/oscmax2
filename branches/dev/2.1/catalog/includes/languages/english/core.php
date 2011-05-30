@@ -367,6 +367,7 @@ define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','My Account Info');
 define('LOGIN_BOX_ACCOUNT_EDIT','Account Information');
 define('LOGIN_BOX_ACCOUNT_HISTORY','Previous Orders');
 define('LOGIN_BOX_ADDRESS_BOOK','Address Book');
+define('LOGIN_BOX_PASSWORD', 'My Password');
 define('LOGIN_BOX_PRODUCT_NOTIFICATIONS','Product Notifications');
 define('LOGIN_BOX_MY_ACCOUNT','My Account');
 define('LOGIN_BOX_LOGOFF','Log off');
@@ -443,6 +444,7 @@ define('TEXT_VIEW_AS_LIST', 'View as List');
 define('TEXT_VIEW_AS_GRID', 'View as Grid');
 define('TEXT_RESULTS_PAGE', 'Results/Page: ');
 define('TEXT_SORT_ORDER', 'Sort Order: ');
+define('TEXT_PRICE_BESTSELLER', 'Bestsellers');
 
 // Recent History
 define('TEXT_LAST_VISITED_PRODUCTS', 'Your viewed products');

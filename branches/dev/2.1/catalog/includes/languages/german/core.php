@@ -367,6 +367,7 @@ define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','Mein Konto');
 define('LOGIN_BOX_ACCOUNT_EDIT','Kontodaten');
 define('LOGIN_BOX_ACCOUNT_HISTORY','Getätigten Bestellungen');
 define('LOGIN_BOX_ADDRESS_BOOK','Adressbuch');
+define('LOGIN_BOX_PASSWORD', 'Mein Passwort');
 define('LOGIN_BOX_PRODUCT_NOTIFICATIONS','Produktbenachrichtigungen');
 define('LOGIN_BOX_MY_ACCOUNT','Mein Konto');
 define('LOGIN_BOX_LOGOFF','Abmelden');

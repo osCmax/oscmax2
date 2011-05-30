@@ -274,7 +274,7 @@ div.jqZoomTitle { z-index:5000; text-align:center; font-size:11px; font-family:T
 /*Sub level menu items */
 .menudiv ul li ul{ position: absolute; background: #f8f8f9; width: 129px; /*sub menu width*/ top: 0; visibility: hidden; border: 1px solid #ccc; z-index: 2000; }
 /* Sub level menu links style */
-.menudiv ul li a{ display: block; overflow: auto; /*force hasLayout in IE7 */ color: #000; text-decoration: none; background: #f8f8f9; padding: 1px 5px; /* border: 1px solid #ccc; */ border-bottom: 0; z-index: 2000; }
+.menudiv ul li a{ display: block; overflow: auto; /*force hasLayout in IE7 */ color: #000; text-decoration: none; background: #ffffff; padding: 1px 5px; /* border: 1px solid #ccc; */ border-bottom: 0; z-index: 2000; }
 .menudiv ul li a:visited{}
 .menudiv ul li a:hover{ color: #a00; background: #ffffcc; }
 .menudiv .subfolderstyle{ background: url(images/fwr_arrow.gif) no-repeat center right; }

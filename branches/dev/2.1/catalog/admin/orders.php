@@ -447,6 +447,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
             <td class="smallText" align="center"><?php echo $ias_notes["customers_notes_editor"]; ?></td>
             <td class="smallText"><?php echo TEXT_ACTIVE; ?></td>
             <td class="smallText"><?php echo $ias_notes["customers_notes_message"]; ?></td>
+            <td class="smallText"></td>
           </tr>  		
 <?php		
 		} // end while

@@ -590,7 +590,7 @@ define('CD_AFFILIATE_DELETE_AFFILIATE_BANNER_HISTORY', 'To keep affiliate banner
 define('CT_AFFILIATE_KIND_OF_BANNERS', 'Type of banner tracking');
 define('CD_AFFILIATE_KIND_OF_BANNERS', 'Do you want to track banner impressions. (1=No; 2=True)');
 define('CT_AFFILIATE_SHOW_BANNERS_DEBUG', 'Debug Banners');
-define('CD_AFFILIATE_SHOW_BANNERS_DEBUG', 'Debug for affiliate_show_banner.php; If you have difficulties geting banners set to true and try to load the banner in a new Browser window');
+define('CD_AFFILIATE_SHOW_BANNERS_DEBUG', 'Debug for affiliate_show_banner.php. <br><br>If you have difficulties geting banners set to <b>true</b> and then take the image URL from the affiliate page and paste it into a new browser window.<br><br>  eg. http://www.yourstore.com/catalog/affiliate_show_banner.php?ref=1&affiliate_pbanner_id=5');
 define('CT_AFFILIATE_SHOW_BANNERS_DEFAULT_PIC', 'Absolute path to default banner image');
 define('CD_AFFILIATE_SHOW_BANNERS_DEFAULT_PIC', 'Full path to default banner which is display incase no other banner can be found');
 

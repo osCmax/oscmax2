@@ -14,6 +14,7 @@ $Id: product_listing.php 1158 2011-02-18 22:14:25Z cottonbarn $
 
 // Lets set the number of history items to display
 $display_count = 4;
+$visited_output = '';
 
 $action = (isset($_GET['action']) ? $_GET['action'] : '');
 if ($action == 'clear_history') {

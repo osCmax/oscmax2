@@ -18,10 +18,10 @@ $Id$
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td class="infoBoxHeading"><?php if ($corner_top_left == 'rounded') { $corner = 'top_left.png'; } else { $corner = 'top_spacer.png'; } ?><?php echo tep_image(bts_select('images', 'infobox/' . $corner)); ?></td>
-                  <td class="infoBoxHeading" width="100%" ><?php echo $boxHeading; ?></td>
+                  <td><?php if ($corner_top_left == 'rounded') { $corner = 'top_left.png'; } else { $corner = 'top_spacer.png'; } ?><?php echo tep_image(bts_select('images', 'infobox/' . $corner)); ?></td>
+                  <td class="infoBoxHeading" width="100%" >&nbsp;<?php echo $boxHeading; ?></td>
                   <td class="infoBoxHeading"><?php if (isset($boxLink)) echo $boxLink; ?></td>
-                  <td class="infoBoxHeading"><?php if ($corner_top_right == 'rounded') { $corner = 'top_right.png'; } else { $corner = 'top_spacer.png'; } ?><?php echo tep_image(bts_select('images', 'infobox/' . $corner)); ?></td>
+                  <td><?php if ($corner_top_right == 'rounded') { $corner = 'top_right.png'; } else { $corner = 'top_spacer.png'; } ?><?php echo tep_image(bts_select('images', 'infobox/' . $corner)); ?></td>
                 </tr>
               </table>
               <table border="0" width="100%" cellspacing="0" cellpadding="0" class="infoBoxColumn">

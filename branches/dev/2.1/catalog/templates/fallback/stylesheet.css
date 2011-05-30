@@ -27,8 +27,8 @@ TR.header { background: #ffffff; }
 td.tab { vertical-align:bottom; font-family: Verdana, Arial, sans-serif; background-image:url(images/tab.png); font-size: 11px; line-height:2; width:76px; text-align:	center; background-repeat:no-repeat; }
 td.tab a { display: block; width: 100%; text-decoration:none; }
 td.breadcrumb { background-image:url(images/breadcrumb_background.png); background-repeat:repeat-x; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight : bold; border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd; }
-td.breadcrumb_left { background-image:url(images/breadcrumb_left.png); }
-td.breadcrumb_right { background-image:url(images/breadcrumb_right.png); }
+td.breadcrumb_left { background-image:url(images/breadcrumb_left.png); background-color: #ffffff;}
+td.breadcrumb_right { background-image:url(images/breadcrumb_right.png); background-color: #ffffff;}
 TR.headerNavigation { background: #ffffff; }
 TD.headerNavigation { font-family: Verdana, Arial, sans-serif; font-size: 10px; background: #ffffff; color: #000000; font-weight : bold; height:24px; border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd;}
 A.headerNavigation { color: #000000; }

@@ -10,22 +10,12 @@ $Id$
   Released under the GNU General Public License
 */
 ?>
-<table width="100%" border="0" cellspacing="2" cellpadding="1">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
   <td>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr> 
-        <td width="100%">
-          <table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tr> 
-              <td class="pageHeading" valign="top"><?php //echo HEADING_TITLE ; ?></td>
-              <td align="right"></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr> 
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
       </tr>
       <tr>  
         <td>
@@ -54,7 +44,7 @@ $Id$
     $articles_author = $article_info['authors_name'];
 ?>
             <tr>
-              <td>
+              <td class="productinfo_header">
                 <table border="0" width="100%" cellspacing="0" cellpadding="0">
                   <tr>
                     <td class="pageHeading" valign="bottom"><?php echo $articles_name; ?></td>
@@ -71,7 +61,7 @@ $Id$
               <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
             </tr>
             <tr>
-              <td class="main"><?php echo stripslashes($article_info['articles_description']); ?></td>
+              <td class="content_text"><?php echo stripslashes($article_info['articles_description']); ?></td>
             </tr>
 <?php
     if (tep_not_null($article_info['articles_url'])) {

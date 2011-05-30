@@ -13,7 +13,10 @@ $Id$
     echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_SHOPPING_CART, 'action=update_product')); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header" colspan="3">
           <table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
               <td class="pageHeading"><?php if (BASKET_CART == 'cart') { echo HEADING_TITLE; } else { echo HEADING_TITLE_BASKET; } ?></td>

@@ -11,7 +11,10 @@ $Id$
 */
       if (!isset($_GET['delete'])) echo tep_draw_form('addressbook', tep_href_link(FILENAME_ADDRESS_BOOK_PROCESS, (isset($_GET['edit']) ? 'edit=' . $_GET['edit'] : ''), 'SSL'), 'post', 'onSubmit="return check_form(addressbook);"'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php if (isset($_GET['edit'])) { echo HEADING_TITLE_MODIFY_ENTRY; } elseif (isset($_GET['delete'])) { echo HEADING_TITLE_DELETE_ENTRY; } else { echo HEADING_TITLE_ADD_ENTRY; } ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>

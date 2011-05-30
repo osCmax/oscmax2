@@ -13,6 +13,9 @@ $Id$
     echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+      <tr>
         <td class="productinfo_header">
           <table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>

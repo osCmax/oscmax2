@@ -12,7 +12,10 @@ $Id$
 ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
           </tr>
@@ -41,7 +44,7 @@ $Id$
             </table></td>
           </tr> 
           <tr>
-            <td><table width="100%" border="0" cellpadding="4" cellspacing="2">
+            <td><table width="100%" border="0" cellpadding="4" cellspacing="2" class="contentBox">
               <center>
                 <tr>
                   <td width="30%" align="right" class="boxText"><?php echo TEXT_IMPRESSIONS; ?><?php echo '<span title="' . HEADING_IMPRESSIONS_HELP . '|' . TEXT_IMPRESSIONS_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></span></td>

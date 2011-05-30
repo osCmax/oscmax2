@@ -11,7 +11,10 @@ $Id$
 */
       echo tep_draw_form('account_notifications', tep_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', 'SSL')) . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>

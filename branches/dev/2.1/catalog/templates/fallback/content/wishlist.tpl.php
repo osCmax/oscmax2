@@ -14,7 +14,10 @@ $Id$
 <?php echo tep_draw_form('wishlist_form', tep_href_link(FILENAME_WISHLIST)); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header">
           <table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
               <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
@@ -188,7 +191,12 @@ $Id$
   if(!tep_session_is_registered('customer_id')) {
 
 ?>
-  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+  <table>
+    <tr>
+      <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+    </tr>
+  </table>
+  <table border="0" width="100%" cellspacing="0" cellpadding="2"  class="content_text">
     <tr>
       <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
     </tr>
@@ -246,7 +254,12 @@ $Id$
   } else {
 
 ?>
-  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+  <table>
+    <tr>
+      <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+    </tr>
+  </table>
+  <table border="0" width="100%" cellspacing="0" cellpadding="2"  class="content_text">
     <tr>
       <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
     </tr>

@@ -13,18 +13,23 @@ $Id$
 <!-- body_text //-->
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo $title; ?></td>
-            <td align="right"><?php if (isset($articles_menu)) { echo $articles_menu; } ?></td>
-          </tr>
-        </table></td>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header" colspan="3">
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo $title; ?></td>
+              <td align="right"><?php if (isset($articles_menu)) { echo $articles_menu; } ?></td>
+            </tr>
+          </table>
+        </td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main"><br/><?php echo $page_description; ?></td>
+        <td class="content_text"><?php echo $page_description; ?></td>
 			</tr>
             <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

@@ -11,7 +11,10 @@ $Id$
 */
       echo tep_draw_form('order', tep_href_link(FILENAME_CHECKOUT_SUCCESS, 'action=update', 'SSL')); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="4" cellpadding="2">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="4" cellpadding="2">
           <tr>
             <td valign="middle" align="center"><?php echo tep_image(DIR_WS_ICONS . 'complete.png', $HEADING_TITLE); ?></td>
             <td valign="top" class="main"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?><div align="center" class="pageHeading"><?php echo $HEADING_TITLE; ?></div><br><?php echo $TEXT_SUCCESS; ?><br><br>

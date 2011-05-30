@@ -12,6 +12,7 @@ $Id$
 ?>
 <table border="0" width="100%" cellspacing="3" cellpadding="3">
   <tr>
+  
     <!-- body_text //-->
     <?php
     if ($topic_depth == 'nested') {
@@ -21,7 +22,7 @@ $Id$
     <td width="100%" valign="top">
       <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
-          <td>
+          <td class="productinfo_header">
             <table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td valign="top" class="pageHeading">
@@ -130,7 +131,7 @@ $Id$
     <td width="100%" valign="top">
       <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
-          <td>
+          <td class="productinfo_header">
             <table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td valign="top" align="left" class="pageHeading">
@@ -217,7 +218,10 @@ $Id$
           </td>
         </tr>
         <tr>
-          <td>
+          <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+        </tr>
+        <tr>
+          <td class="content_text">
             <?php include(DIR_WS_MODULES . FILENAME_ARTICLE_LISTING); ?>
           </td>
         </tr>
@@ -229,7 +233,7 @@ $Id$
     <td width="100%" valign="top">
       <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
-          <td>
+          <td class="productinfo_header">
             <table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
@@ -240,6 +244,8 @@ $Id$
         <tr>
           <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
         </tr>
+      </table>
+      <table border="0" width="100%" cellspacing="0" cellpadding="0" class="content_text">
         <tr>
           <td>
             <?php include(DIR_WS_MODULES . FILENAME_ARTICLES_UPCOMING); ?>

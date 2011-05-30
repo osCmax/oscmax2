@@ -13,8 +13,11 @@ $Id$
 <table width="100%" border="0" cellspacing="2" cellpadding="1">
   <tr>
     <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-        <tr> 
-          <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr> 
                 <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
                 <td align="right">&nbsp;</td>
@@ -27,7 +30,7 @@ $Id$
         <tr> 
           <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr> 
-                <td class="main"><?php echo TEXT_INFORMATION . '<a href="' . tep_href_link(FILENAME_INFORMATION, 'info_id=9', 'NONSSL') . '">' . GV_FAQ . '.</a>';?></td>
+                <td class="content_text"><?php echo TEXT_INFORMATION . '<a href="' . tep_href_link(FILENAME_INFORMATION, 'info_id=9', 'NONSSL') . '">' . GV_FAQ . '.</a>';?></td>
               </tr>
               <?php
 // if we get here then either the url gv_no was not set or it was invalid

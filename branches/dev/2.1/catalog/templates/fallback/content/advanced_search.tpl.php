@@ -11,7 +11,10 @@ $Id$
 */
        echo tep_draw_form('advanced_search', tep_href_link(FILENAME_ADVANCED_SEARCH_RESULT, '', 'NONSSL', false), 'get', 'onSubmit="return check_form(this);"') . tep_hide_session_id(); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE_1; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
@@ -37,7 +40,7 @@ $Id$
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td height="14" class="infoBoxHeading"><img src="images/infobox/corner_left.gif" border="0" alt="" width="11" height="14"></td>
-            <td width="100%" height="14" class="infoBoxHeading"><?php echo HEADING_SEARCH_CRITERIA; ?></td>
+            <td width="100%" height="14" class="infoBoxHeading">&nbsp;<?php echo HEADING_SEARCH_CRITERIA; ?></td>
             <td height="14" class="infoBoxHeading" nowrap><img src="images/infobox/corner_right.gif" border="0" alt="" width="11" height="14"></td>
           </tr>
         </table>

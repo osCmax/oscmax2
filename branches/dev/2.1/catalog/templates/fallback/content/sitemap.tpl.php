@@ -10,11 +10,21 @@ $Id$
   Released under the GNU General Public License
 */
 ?>
-        <table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-          </tr>
-        </table>
+    <table border="0" width="100%" cellspacing="0" cellpadding="0">
+      <tr>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header" colspan="3">
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    
         <table width="100%" cellspacing="5" cellpadding="5">
           <tr valign="top">
 <?php

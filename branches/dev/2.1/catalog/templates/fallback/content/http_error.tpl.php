@@ -46,7 +46,10 @@ tep_db_query("insert into " . TABLE_HTTP_ERROR . " values ('', '" . $_GET['error
 <!-- body_text //-->
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo sprintf(HEADING_TITLE, $_GET['error_id']); ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
@@ -70,7 +73,7 @@ tep_db_query("insert into " . TABLE_HTTP_ERROR . " values ('', '" . $_GET['error
  <?php //this is where I added the advanced Search
   echo tep_draw_form('advanced_search', tep_href_link(FILENAME_ADVANCED_SEARCH_RESULT, '', 'NONSSL', false), 'get', 'onSubmit="return check_form(this);"') . tep_hide_session_id(); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE_1; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>

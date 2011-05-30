@@ -12,7 +12,10 @@ $Id$
 ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td valign="middle" align="center"><?php echo tep_image(DIR_WS_ICONS . 'complete.png', HEADING_TITLE); ?></td>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">

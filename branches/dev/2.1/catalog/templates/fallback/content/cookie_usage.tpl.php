@@ -12,7 +12,10 @@ $Id$
 ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
@@ -23,7 +26,7 @@ $Id$
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main"><table border="0" width="40%" cellspacing="0" cellpadding="0" align="right">
+        <td class="content_text"><table border="0" width="40%" cellspacing="0" cellpadding="0" align="right">
           <tr>
             <td><?php new infoBoxHeading(array(array('text' => BOX_INFORMATION_HEADING))); ?></td>
           </tr>

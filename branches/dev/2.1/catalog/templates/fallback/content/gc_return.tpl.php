@@ -11,10 +11,15 @@ $Id$
 */
 ?>
 <!-- body_text //-->
+    <table width="100%" cellspacing="0" cellpadding="1" border="0">
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+    </table>
     <?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
-    <table class="productListing" width="100%" cellspacing="0" cellpadding="1" border="0">
+    <table class="content_text" width="100%" cellspacing="0" cellpadding="1" border="0">
       <tr valign="top">
-        <td valign="top" align="center">Thank you for buying with</td>
+        <td valign="top" align="center"><?php echo HEADING_TITLE; ?></td>
       </tr>
       <tr valign="top">
         <td valign="top" align="center"><img src="http://checkout.google.com/seller/images/google_checkout.gif" /></td>

@@ -12,7 +12,10 @@ $Id$
 ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+      <tr>
+        <td class="content_text"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td><?php echo tep_image(DIR_WS_ICONS . 'padlock.png', HEADING_TITLE); ?></td>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">

@@ -13,7 +13,10 @@ $Id$
 <!-- body_text //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td>
+    <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+  </tr>
+  <tr>
+    <td class="productinfo_header">
       <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
           <td class="pageHeading"><?php echo HEADING_TITLE; ?><?php if (PRODUCT_LIST_CATALOG_CURRENCY == 'show') { require(DIR_WS_BOXES . 'currencies.php'); } ?></td>

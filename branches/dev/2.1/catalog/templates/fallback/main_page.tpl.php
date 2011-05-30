@@ -245,7 +245,6 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 
   if ($pfile == 'index.php') {
 	if (isset($LoadSlideshowJS) && $LoadSlideshowJS == true) {
-      if (DISPLAY_SLIDESHOW == true) {
         echo '<script type="text/javascript" src="http://www.google.com/jsapi"></script>';
         echo '<script type="text/javascript">' . "\n";
         echo '// Load jQuery' . "\n";
@@ -253,7 +252,6 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
         echo '</script>' . "\n"; 
         echo '<script type="text/javascript" src="' . DIR_WS_JAVASCRIPT . 'showcase.2.0.js"></script>';
         require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
-	  }
     }
   }
  

@@ -1798,8 +1798,74 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
           </tr>
 <!-- eof image directory -->
           <tr>
-            <td class="main" bgcolor="#DDDDDD"><?php echo TEXT_PRODUCTS_IMAGE; ?></td>
-            <td class="main" bgcolor="#DDDDDD"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_file_field('products_image') . '&nbsp;' . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $pInfo->products_image . tep_draw_hidden_field('products_previous_image', $pInfo->products_image); ?></td>
+            <td class="main" bgcolor="#DDDDDD" colspan="2">
+              <table border="0" cellpadding="2" cellspacing="0" width="100%">
+                <tr>
+                  <td class="main" width="152"></td>
+                  <td class="main"><?php echo '&nbsp;' . TEXT_UPLOAD_IMAGES . '<span title="' . TEXT_UPLOAD_IMAGES . '|' . TEXT_MOPICS_CONTENT . '">' . tep_image(DIR_WS_ICONS . 'help.png', ''); ?></span></td>
+                  <td class="main"><?php echo '&nbsp;' . TEXT_CURRENT_IMAGES; ?></td>
+                  <td class="main" align="center"><?php echo '&nbsp;' . TEXT_DELETE_IMAGES; ?></td>
+                  <td width="200"></td>
+                </tr>
+                <tr>
+                  <td class="main"><?php echo TEXT_PRODUCTS_IMAGE; ?></td>
+                  <td class="main"><?php echo '&nbsp;' . tep_draw_file_field('products_image') . tep_draw_separator('pixel_trans.gif', '24', '15'); ?></td>
+                  <td class="main"><?php echo '&nbsp;' . $pInfo->products_image . tep_draw_hidden_field('products_previous_image', $pInfo->products_image) . tep_draw_separator('pixel_trans.gif', '24', '15'); ?></td>
+                  <td class="main" align="center"><?php echo tep_draw_checkbox_field('delete_image0'); ?></td>
+                  <td></td>
+                </tr>
+                <?php 
+		        // Get the base image name
+                $main_image = $pInfo->products_image;
+                $ext = substr(strrchr($main_image, '.'), 0);
+                $base_image = str_replace($ext, "", $main_image);
+          
+		        for ($img = 1; $img <= NO_OF_DYNAMIC_MOPICS; $img++) { 
+				  $next = $img;
+				  $next++;
+                  if ( !file_exists(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $base_image . '_' . $img . $ext) && file_exists(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $base_image . '_' . $next . $ext) ) {
+			        echo '<tr class="messageStackError">';
+				  } else {
+				    echo '<tr bgcolor="#eeeeee">';
+				  }
+				?>
+                  <td class="main"><?php echo TEXT_EXTRA_IMAGE . ' (' . $img . ')'; ?></td>
+                  <td class="main"><?php echo '&nbsp;' . tep_draw_file_field('products_image_' . $img); ?></td>
+                  <td class="main">
+                  <?php 
+			      if (file_exists(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $base_image . '_' . $img . $ext)) {
+			        echo '&nbsp;' . $base_image . '_' . $img . $ext;
+			      } ?></td>
+                  <td class="main" align="center">
+                  <?php
+                  if (file_exists(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $base_image . '_' . $img . $ext)) {
+			        echo tep_draw_checkbox_field('delete_image' . $img);
+			      } ?>
+                  </td>
+                  <?php
+                  if ( !file_exists(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $base_image . '_' . $img . $ext) && file_exists(DIR_FS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $base_image . '_' . $next . $ext) ) { ?>
+                  <td valign="top">
+                    <table>
+                      <tr class="messageStackError">
+                        <td><?php echo '<span title="' . TEXT_MOPICS_ERROR . '|' . TEXT_MOPICS_ERROR_HELP . '">' . tep_image(DIR_WS_ICONS . 'exclamation.png'); ?></span></td>
+                        <td><?php echo TEXT_MOPICS_ERROR; ?></td>
+                      </tr>
+                    </table>
+                  </td>
+                  <?php
+				  } else {
+				  ?>
+                  <td></td>
+                  <?php
+				  }
+				  ?>
+                  </td>
+                </tr>
+                <?php  
+				} // end for ($img = 1; $img <= 5; $img++)
+				?>
+              </table>
+            </td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>

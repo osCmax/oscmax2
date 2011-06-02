@@ -615,6 +615,8 @@ define('CT_DYNAMIC_MOPICS_PATTERN', 'Extra Image Pattern');
 define('CD_DYNAMIC_MOPICS_PATTERN', 'Your custom defined pattern for extra images. imagebase is the base of the main thumbnail. Place the counting method between brackets {}. Current counting methods can be 1; a; or A. See readme for more information.');
 define('CT_MANUFACTURERS_IMAGES_DIR', 'Manufacturers Images Directory');
 define('CD_MANUFACTURERS_IMAGES_DIR', 'The directory inside catalog/images where your manufacturers images are stored.');
+define('CT_NO_OF_DYNAMIC_MOPICS', 'Number of dynamic mopics images');
+define('CD_NO_OF_DYNAMIC_MOPICS', 'What is the maximum number of dynamic mopic images you want to add to your products.');
 
 // Configuration ID: 50 - Product Information
 define('CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Prevent Adding Out of Stock to Cart');

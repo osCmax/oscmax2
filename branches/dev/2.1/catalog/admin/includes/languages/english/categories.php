@@ -121,6 +121,15 @@ define('TEXT_PRODUCTS_WITHOUT_PREVIEW', ' without preview ');
 define('TEXT_PRODUCTS_MOPICS', 'Extra Image:');
 define('TEXT_MOPICS_WARNING', 'Select Image Directory above PRIOR to uploading');
 
+//Multi image upload 
+define('TEXT_MOPICS_CONTENT', 'Dynamic Mopics requires that all of the image types are the same. Ie. Use all jpg or png.  You can <b>not</b> mix the image types.');
+define('TEXT_UPLOAD_IMAGES', '<b>Upload Image</b>');
+define('TEXT_CURRENT_IMAGES', '<b>Current Image</b>');
+define('TEXT_DELETE_IMAGES', '<b>Delete?</b>');
+define('TEXT_EXTRA_IMAGE', 'Extra Image');
+define('TEXT_MOPICS_ERROR', 'Image sequence error');
+define('TEXT_MOPICS_ERROR_HELP', 'Dynamic Mopics must be in sequence - you can not have gaps in the run.  If you have a gap (eg. _1 -> _3) then the system will stop displaying your images at the first gap.');
+
 define('TEXT_SHIPPING_DIMENSIONS', 'Shipping Dimensions');
 
 define('TEXT_SPPC_HELP', '<hr />Group Pricing:<br />If a field is left empty, no price for that customer group will be inserted in the database.<br />

@@ -58,43 +58,44 @@ $Id$
 	
 // now lets upload the images	   
 	  if ($_FILES['products_image' . $mopics_ext]['name'] != '') {
-        if ($products_image = new upload('products_image' . $mopics_ext, $root_images_dir)) {
+        if ($products_image = new upload('products_image' . $mopics_ext, $root_images_dir . ($dir ? $dir .'/' : ''))) {
 		  if ($img != 0) { // we are dealing with dynamic mopics images
 		    // rename the images to be in the _1, _2, _3 etc. image structure
-			rename($root_images_dir . $products_image->filename, $root_images_dir . $base_image . '_' . $img . $ext);
+			rename($root_images_dir . ($dir ? $dir .'/' : '') . $products_image->filename, $root_images_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext);
 			// now lets copy them to the products and thumbs directories
-		    copy($root_images_dir . $base_image . '_' . $img . $ext, $root_products_dir . $base_image . '_' . $img . $ext);
-	        copy($root_images_dir . $base_image . '_' . $img . $ext, $root_thumbs_dir . $base_image . '_' . $img . $ext);
+		    copy($root_images_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, $root_products_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext);
+	        copy($root_images_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, $root_thumbs_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext);
 	        // now lets resize them all to the correct dimensions
-			image_resize($root_images_dir . $base_image . '_' . $img . $ext, POPUP_IMAGE_WIDTH, POPUP_IMAGE_HEIGHT, '100');
-            image_resize($root_products_dir . $base_image . '_' . $img . $ext, PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, '100');
-			image_resize($root_thumbs_dir . $base_image . '_' . $img . $ext, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, '100');		
+			image_resize($root_images_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, POPUP_IMAGE_WIDTH, POPUP_IMAGE_HEIGHT, '100');
+            image_resize($root_products_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, '100');
+			image_resize($root_thumbs_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, '100');		
 		  } else {
+			// set the image path in the database to include the $dir path if needed
+			$products_image_name =  ($dir ? $dir . '/' : '') . $products_image->filename;
 		    // we just need to copy the base image to the products and thumbs directories
-			copy($root_images_dir . $products_image->filename, $root_products_dir . $products_image->filename);
-	        copy($root_images_dir . $products_image->filename, $root_thumbs_dir . $products_image->filename);
+			copy($root_images_dir . ($dir ? $dir .'/' : '') . $products_image->filename, $root_products_dir . ($dir ? $dir .'/' : '') . $products_image->filename);
+	        copy($root_images_dir . ($dir ? $dir .'/' : '') . $products_image->filename, $root_thumbs_dir . ($dir ? $dir .'/' : '') . $products_image->filename);
 			// and then resize them
-			image_resize($root_images_dir . $products_image->filename, POPUP_IMAGE_WIDTH, POPUP_IMAGE_HEIGHT, '100');
-            image_resize($root_products_dir . $products_image->filename, PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, '100');
-			image_resize($root_thumbs_dir . $products_image->filename, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, '100');
+			image_resize($root_images_dir . ($dir ? $dir .'/' : '') . $products_image->filename, POPUP_IMAGE_WIDTH, POPUP_IMAGE_HEIGHT, '100');
+            image_resize($root_products_dir . ($dir ? $dir .'/' : '') . $products_image->filename, PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, '100');
+			image_resize($root_thumbs_dir . ($dir ? $dir .'/' : '') . $products_image->filename, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, '100');
 		  }
 	    }
 	  }
     
-	  // Finally lets check if the user has selected to delete this images
+	  // Finally lets check if the user has selected to delete this image
       if ($_POST['delete_image' . $img] == 'on') {
-		  unlink($root_images_dir . $base_image . $mopics_ext . $ext);
-		  unlink($root_products_dir . $base_image . $mopics_ext . $ext);
-		  unlink($root_thumbs_dir . $base_image . $mopics_ext . $ext);
+		// Now remove the actual images
+		unlink($root_images_dir . ($dir ? $dir .'/' : '') . $base_image . $mopics_ext . $ext);
+		unlink($root_products_dir . ($dir ? $dir .'/' : '') . $base_image . $mopics_ext . $ext);
+		unlink($root_thumbs_dir . ($dir ? $dir .'/' : '') . $base_image . $mopics_ext . $ext);
 	  }
 
 	} // end for ($img = 0; $img <= 5; $img++)
 	
-
-
 // Check if we want to skip the preview page					
 	if ($_POST['instant_update'] == 'on') { 
-	  $_POST['products_image'] = stripslashes($main_image);
+	  $_POST['products_image'] = stripslashes($products_image_name);
         $action = (isset($_GET['pID']) ? 'update_product' : 'insert_product');  
 	}
 }

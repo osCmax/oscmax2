@@ -355,7 +355,7 @@ class osC_onePageCheckout {
     global $cart, $customer_shopping_points_spending;
     foreach($qtys as $pID => $qty){
     // Added conditionals for cart JW
-      if (!is_numeric($pID) || !is_numeric($qty) ) {
+      if (!is_numeric($qty) ) {
         return false;
       }
       if ($qty <= 0) {

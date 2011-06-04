@@ -11,6 +11,7 @@ $Id$
 */
 
 define('NAVBAR_TITLE_WISHLIST', 'My Wish List');
+define('NAVBAR_TITLE', 'Wish List');
 define('NAVBAR_TITLE_1', 'Wish List');
 define('HEADING_TITLE', 'My Wish List');
 define('HEADING_TITLE2', '\'s Wish List contains:');

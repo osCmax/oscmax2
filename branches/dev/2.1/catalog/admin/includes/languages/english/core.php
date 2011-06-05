@@ -225,6 +225,7 @@ define('BOX_CONFIGURATION_ACCOUNTS', 'Accounts');
 define('BOX_CONFIGURATION_MAINTENANCE', 'Site Maintenance');
 define('BOX_CONFIGURATION_MOPICS', 'Dynamic MoPics');
 define('BOX_CONFIGURATION_PRINT', 'Printable Catalog');
+define('BOX_CONFIGURATION_ARTICLES', 'Article Configuration');
 define('BOX_CONFIGURATION_SEO', 'SEO URLs');
 define('BOX_CONFIGURATION_SEO_URLS', 'SEO URLs');
 define('BOX_CONFIGURATION_SEO_POPOUT', 'SEO Pop Out Menu');

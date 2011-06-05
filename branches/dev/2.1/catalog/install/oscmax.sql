@@ -2425,7 +2425,7 @@ INSERT INTO configuration_group VALUES (204, 'BOX_CONFIGURATION_SLIDESHOW_SETTIN
 INSERT INTO configuration_group VALUES (205, 'BOX_CONFIGURATION_CORNER_BANNERS', 'Corner Banners', 205, 1);
 INSERT INTO configuration_group VALUES (206, 'BOX_CONFIGURATION_MC', 'MailChimp Newsletters', 206, 1);
 INSERT INTO configuration_group VALUES (207, 'BOX_CONFIGURATION_CONTACT', 'Contact Us Form', 207, 1);
-INSERT INTO configuration_group VALUES (456, 'BOX_HEADING_ARTICLES', 'Settings for Aerticles', 456, 1);
+INSERT INTO configuration_group VALUES (456, 'BOX_CONFIGURATION_ARTICLES', 'Settings for Articles', 456, 1);
 INSERT INTO configuration_group VALUES (7575, 'BOX_CONFIGURATION_OPC', 'Settings for one page checkout', 16, 1);
 
 INSERT INTO `countries` VALUES(1, 'Afghanistan', 'AF', 'AFG', 1, 1);

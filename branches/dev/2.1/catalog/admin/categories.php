@@ -277,26 +277,25 @@ $Id$
                 tep_db_perform(TABLE_CATEGORIES_DESCRIPTION, $sql_data_array, 'update', "categories_id = '" . (int)$categories_id . "' and language_id = '" . (int)$languages[$i]['id'] . "'");
               }
             }
-
+			
 // BOF: MOD for Categories Description 1.5
 //OLD-    if ($categories_image = new upload('categories_image', DIR_FS_CATALOG_IMAGES)) {
 //          tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . //tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
-//Added the following to replacce above code
-          if (ALLOW_CATEGORY_DESCRIPTIONS == 'true') {
-            tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . $_POST['categories_image'] . "' where categories_id = '" .  tep_db_input($categories_id) . "'");
-            $categories_image = '';
-          } else {
-        $categories_image = new upload('categories_image');
-		        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR); 
-        if ($categories_image->parse() && $categories_image->save()) {
-         // BOF Image Resize
-            require_once('includes/functions/image_resize.php');
-            image_resize(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image->filename, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, '80');
-          // EOF Image Resize      
-              tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
-            }
-// EOF: MOD for Categories Description 1.5
-          }
+
+// copy image only if modified
+ 	        $categories_image = new upload('categories_image');
+ 	        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
+ 	        if ($categories_image->parse() && $categories_image->save()) {
+ 	          $categories_image_name = $categories_image->filename;
+ 	          // BOF Image Resize
+ 	            require_once('includes/functions/image_resize.php');
+ 	            image_resize(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image->filename, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT, '80');
+ 	          // EOF Image Resize
+ 	        } else { 
+ 	          $categories_image_name = $_POST['categories_previous_image'];
+ 	        }
+			
+			tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . $categories_image_name . "' where categories_id = '" .  tep_db_input($categories_id) . "'");
 
           if (USE_CACHE == 'true') {
             tep_reset_cache_block('categories');
@@ -2639,7 +2638,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
             if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
 //            $contents[] = array('text' => '<br>' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
-            $contents[] = array('text' => '<br>' . tep_info_image(CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
+            $contents[] = array('align' => 'center', 'text' => '<br>' . tep_info_image(CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
             $contents[] = array('text' => '<br>' . TEXT_SUBCATEGORIES . ' ' . $cInfo->childs_count . '<br>' . TEXT_PRODUCTS . ' ' . $cInfo->products_count);
 // BOF SPPC hide products and categories from groups
        $category_hidden_from_string = '';

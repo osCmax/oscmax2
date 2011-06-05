@@ -40,7 +40,7 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
     $boxContent .= '<table border="0" cellpadding="0" cellspacing="0" width="100%">';
 
 // BoF - Contribution Category Box Enhancement 1.1
-    global $tree, $boxContent, $cPath_array, $cat_name;
+    global $tree, $boxContent, $cPath_array, $cat_name, $customer_group_id;
 
     $cPath_new = 'cPath=' . $tree[$counter]['path'];
 
@@ -101,7 +101,7 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
 /////////////ADD IN PLUS SIGN ////////////////////////
 
 	 if (tep_has_category_subcategories($counter)) {
-      $boxContent .= '<td width="10">' . tep_image(DIR_WS_ICONS . 'plus.gif', '') . '</td>';
+      $boxContent .= '<td width="10"><a class="' . $catlevel . 'level" href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_ICONS . 'plus.gif', '') . '</a></td>';
     }
     else {
       $boxContent .= '<td width="10">&nbsp;</td>';
@@ -135,7 +135,7 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
   $boxContent = '';
   $tree = array();
 
-  $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' order by sort_order, cd.categories_name");
+  $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 order by sort_order, cd.categories_name");
   while ($categories = tep_db_fetch_array($categories_query))  {
     $tree[$categories['categories_id']] = array('name' => $categories['categories_name'],
                                                 'parent' => $categories['parent_id'],
@@ -161,7 +161,7 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
     while (list($key, $value) = each($cPath_array)) {
       unset($parent_id);
       unset($first_id);
-      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$value . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' order by sort_order, cd.categories_name");
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$value . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 order by sort_order, cd.categories_name");
       if (tep_db_num_rows($categories_query)) {
         $new_path .= $value;
         while ($row = tep_db_fetch_array($categories_query)) {

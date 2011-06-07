@@ -77,7 +77,7 @@ $Id$
 ?>
       <tr>
         <td>
-				<table border="0" width="100%" cellspacing="0" cellpadding="3" class="productListing">
+				<table border="0" width="100%" cellspacing="0" cellpadding="3" class="productListing-list">
 				  <tr>
 						<td class="productListing-heading"><?php echo BOX_TEXT_IMAGE; ?></td>
 						<td class="productListing-heading"><?php echo BOX_TEXT_PRODUCT; ?></td>
@@ -92,8 +92,8 @@ $Id$
 	$i = 0;
     while ($wishlist = tep_db_fetch_array($wishlist_query)) {
 	$wishlist_id = tep_get_prid($wishlist['products_id']);
-
-    $products_query = tep_db_query("select pd.products_id, pd.products_name, pd.products_description, p.products_image, p.products_price, p.products_tax_class_id, p.products_status, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from (" . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd) left join " . TABLE_SPECIALS . " s on (p.products_id = s.products_id) where pd.products_id = '" . $wishlist_id . "' and p.products_id = pd.products_id and pd.language_id = '" . $languages_id . "' order by products_name");
+    
+	$products_query = tep_db_query("select pd.products_id, pd.products_name, pd.products_description, p.products_image,  p.products_status, p.products_price, p.products_tax_class_id, IF(s.status = '1' and s.customers_group_id = '" . $customer_group_id . "', s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from (" . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd) left join " . TABLE_SPECIALS . " s on (p.products_id = s.products_id) where pd.products_id = '" . $wishlist_id . "' and p.products_id = pd.products_id and pd.language_id = '" . $languages_id . "' order by products_name");
 	$products = tep_db_fetch_array($products_query);
 
       if (($i/2) == floor($i/2)) {
@@ -104,8 +104,8 @@ $Id$
 
 ?>
 				  <tr class="<?php echo $class; ?>">
-					<td valign="top" class="productListing-data" align="left"><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist['products_id'], 'NONSSL'); ?>"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?></a></td>
-					<td valign="top" class="productListing-data" align="left" class="main"><b><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist['products_id'], 'NONSSL'); ?>"><?php echo $products['products_name']; ?></a></b>
+					<td valign="top" class="productListing-data-list" align="left"><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist['products_id'], 'NONSSL'); ?>"><?php echo tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT); ?></a></td>
+					<td valign="top" class="productListing-data-list" align="left" class="main"><b><a href="<?php echo tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist['products_id'], 'NONSSL'); ?>"><?php echo $products['products_name']; ?></a></b>
 <?php
 
 /*******************************************************************
@@ -162,8 +162,8 @@ $Id$
 		$i++;
 ?>
 					</td>
-					<td valign="top" class="productListing-data"><?php echo $products_price; ?></td>
-					<td valign="top" class="productListing-data" align="center">
+					<td valign="top" class="productListing-data-list"><?php echo $products_price; ?></td>
+					<td valign="top" class="productListing-data-list" align="center">
 <?php 
 
 /*******************************************************************

@@ -2181,11 +2181,6 @@ INSERT INTO configuration VALUES (2999, 'CT_PRICE_BREAK_PRICE', 'PRICE_BREAK_PRI
 INSERT INTO configuration VALUES ('77', 'CT_GOOGLE_MAPS_KEY', 'GOOGLE_MAPS_KEY', 'YOURKEY', 'CD_GOOGLE_MAPS_KEY', '89', '25', NULL, now(), NULL, 'tep_cfg_textarea(');
 
 # Configuration ID: 99 - Open Featured Sets
-INSERT INTO configuration VALUES (3000, 'CT_SHOW_FEATURED_SETS_ON_STORE_FRONT', 'SHOW_FEATURED_SETS_ON_STORE_FRONT', 'true', 'CD_SHOW_FEATURED_SETS_ON_STORE_FRONT', 99, 1, now(), now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO configuration VALUES (3001, 'CT_SHOW_FEATURED_SETS_ON_CATEGORIES', 'SHOW_FEATURED_SETS_ON_CATEGORIES', 'true', 'CD_SHOW_FEATURED_SETS_ON_CATEGORIES', 99, 2, now(), now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO configuration VALUES (3002, 'CT_SHOW_FEATURED_SETS_ON_PRODUCT_LISTS', 'SHOW_FEATURED_SETS_ON_PRODUCT_LISTS', 'true', 'CD_SHOW_FEATURED_SETS_ON_PRODUCT_LISTS', 99, 3, now(), now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO configuration VALUES (3003, 'CT_SHOW_FEATURED_SETS_ON_PRODUCTS', 'SHOW_FEATURED_SETS_ON_PRODUCTS', 'true', 'CD_SHOW_FEATURED_SETS_ON_PRODUCTS', 99, 4, now(), now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-
 INSERT INTO configuration VALUES (3004, 'CT_OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES', 'OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES', 'true', 'CD_OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES', 99, 5, now(), now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (3005, 'CT_OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES', 'OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES', 'true', 'CD_OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES', 99, 6, now(), now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 
@@ -2202,7 +2197,6 @@ INSERT INTO configuration VALUES (3014, 'CT_DAYS_UNTIL_FEATURED_PRODUCTS', 'DAYS
 INSERT INTO configuration VALUES (3015, 'CT_FEATURED_SET', 'FEATURED_SET', '4', 'CD_FEATURED_SET', 99, 17, now(), now(), NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4''),');
 INSERT INTO configuration VALUES (3016, 'CT_FEATURED_SET_STYLE', 'FEATURED_SET_STYLE', '6', 'CD_FEATURED_SET_STYLE', 99, 18, now(), now(), NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4'', ''5'', ''6''),');
 INSERT INTO configuration VALUES (3017, 'CT_FEATURED_PRODUCTS_GROUPING', 'FEATURED_PRODUCTS_GROUPING', 'gbox', 'CD_FEATURED_PRODUCTS_GROUPING', 99, 19, now(), now(), NULL, 'tep_cfg_select_featured(array(''gbox'', ''sbox''),');
-INSERT INTO configuration VALUES (3018, 'CT_FEATURED_SET_STYLE_SHADOW', 'FEATURED_SET_STYLE_SHADOW', 'right', 'CD_FEATURED_SET_STYLE_SHADOW', 99, 20, now(), now(), NULL, 'tep_cfg_select_option(array(''right'', ''left''),');
 INSERT INTO configuration VALUES (3019, 'CT_FEATURED_PRODUCTS_SORT_ORDER', 'FEATURED_PRODUCTS_SORT_ORDER', 'rand()', 'CD_FEATURED_PRODUCTS_SORT_ORDER', 99, 21, now(), now(), NULL, 'tep_cfg_select_option(array(''p.products_id'', ''pd.products_name'', ''p.products_price'', ''rand()''),');
 INSERT INTO configuration VALUES (3020, 'CT_FEATURED_PRODUCTS_DIRECTION', 'FEATURED_PRODUCTS_DIRECTION', 'DESC', 'CD_FEATURED_PRODUCTS_DIRECTION', 99, 22, now(), now(), NULL, 'tep_cfg_select_option(array(''ASC'', ''DESC''),');
 INSERT INTO configuration VALUES (3021, 'CT_FEATURED_CELLPADDING', 'FEATURED_CELLPADDING', '0', 'CD_FEATURED_CELLPADDING', 99, 23, now(), now(), NULL, NULL);
@@ -2232,7 +2226,6 @@ INSERT INTO configuration VALUES (3042, 'CT_DAYS_UNTIL_FEATURED_MANUFACTURER', '
 INSERT INTO configuration VALUES (3043, 'CT_FEATURED_MANUFACTURER_SET', 'FEATURED_MANUFACTURER_SET', '4', 'CD_FEATURED_MANUFACTURER_SET', 99, 57, now(), now(), NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4''),');
 INSERT INTO configuration VALUES (3044, 'CT_FEATURED_MANUFACTURER_SET_STYLE', 'FEATURED_MANUFACTURER_SET_STYLE', '4', 'CD_FEATURED_MANUFACTURER_SET_STYLE', 99, 58, now(), now(), NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4'', ''5'', ''6''),');
 INSERT INTO configuration VALUES (3045, 'CT_FEATURED_MANUFACTURER_GROUPING', 'FEATURED_MANUFACTURER_GROUPING', 'gbox', 'CD_FEATURED_MANUFACTURER_GROUPING', 99, 59, now(), now(), NULL, 'tep_cfg_select_featured(array(''gbox'', ''sbox''),');
-INSERT INTO configuration VALUES (3046, 'CT_FEATURED_MANUFACTURER_SET_STYLE_SHADOW', 'FEATURED_MANUFACTURER_SET_STYLE_SHADOW', 'right', 'CD_FEATURED_MANUFACTURER_SET_STYLE_SHADOW', 99, 60, now(), now(), NULL, 'tep_cfg_select_option(array(''right'', ''left''),');
 INSERT INTO configuration VALUES (3047, 'CT_FEATURED_MANUFACTURER_SORT_ORDER', 'FEATURED_MANUFACTURER_SORT_ORDER', 'rand()', 'CD_FEATURED_MANUFACTURER_SORT_ORDER', 99, 61, now(), now(), NULL, 'tep_cfg_select_option(array(''m.manufacturers_id'', ''m.manufacturers_name'', ''p.products_id'', ''pd.products_name'', ''p.products_price'', ''rand()''),');
 INSERT INTO configuration VALUES (3048, 'CT_FEATURED_MANUFACTURER_DIRECTION', 'FEATURED_MANUFACTURER_DIRECTION', 'DESC', 'CD_FEATURED_MANUFACTURER_DIRECTION', 99, 62, now(), now(), NULL, 'tep_cfg_select_option(array(''ASC'', ''DESC''),');
 INSERT INTO configuration VALUES (3049, 'CT_MANUFACTURER_CELLPADDING', 'MANUFACTURER_CELLPADDING', '0', 'CD_MANUFACTURER_CELLPADDING', 99, 63, now(), now(), NULL, NULL);
@@ -2249,7 +2242,6 @@ INSERT INTO configuration VALUES (3058, 'CT_DAYS_UNTIL_FEATURED_CATEGORIES', 'DA
 INSERT INTO configuration VALUES (3059, 'CT_FEATURED_CATEGORIES_SET', 'FEATURED_CATEGORIES_SET', '4', 'CD_FEATURED_CATEGORIES_SET', 99, 77, now(), now(), NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4''),');
 INSERT INTO configuration VALUES (3060, 'CT_FEATURED_CATEGORIES_SET_STYLE', 'FEATURED_CATEGORIES_SET_STYLE', '6', 'CD_FEATURED_CATEGORIES_SET_STYLE', 99, 78, now(), now(), NULL, 'tep_cfg_select_featured(array(''1'', ''2'', ''3'', ''4'', ''5'', ''6''),');
 INSERT INTO configuration VALUES (3061, 'CT_FEATURED_CATEGORIES_GROUPING', 'FEATURED_CATEGORIES_GROUPING', 'gbox', 'CD_FEATURED_CATEGORIES_GROUPING', 99, 79, now(), now(), NULL, 'tep_cfg_select_featured(array(''gbox'', ''sbox''),');
-INSERT INTO configuration VALUES (3062, 'CT_FEATURED_CATEGORIES_SET_STYLE_SHADOW', 'FEATURED_CATEGORIES_SET_STYLE_SHADOW', 'right', 'CD_FEATURED_CATEGORIES_SET_STYLE_SHADOW', 99, 80, now(), now(), NULL, 'tep_cfg_select_option(array(''right'', ''left''),');
 INSERT INTO configuration VALUES (3063, 'CT_FEATURED_CATEGORIES_SORT_ORDER', 'FEATURED_CATEGORIES_SORT_ORDER', 'rand()', 'CD_FEATURED_CATEGORIES_SORT_ORDER', 99, 81, now(), now(), NULL, 'tep_cfg_select_option(array(''c.categories_id'', ''cd.categories_name'', ''m.manufacturers_id'', ''p.products_id'', ''pd.products_name'', ''p.products_price'', ''rand()''),');
 INSERT INTO configuration VALUES (3064, 'CT_FEATURED_CATEGORIES_DIRECTION', 'FEATURED_CATEGORIES_DIRECTION', 'DESC', 'CD_FEATURED_CATEGORIES_DIRECTION', 99, 82, now(), now(), NULL, 'tep_cfg_select_option(array(''ASC'', ''DESC''),');
 INSERT INTO configuration VALUES (3065, 'CT_CATEGORIES_CELLPADDING', 'CATEGORIES_CELLPADDING', '0', 'CD_CATEGORIES_CELLPADDING', 99, 83, now(), now(), NULL, NULL);

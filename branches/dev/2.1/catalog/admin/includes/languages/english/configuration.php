@@ -374,8 +374,8 @@ define('CT_PRODUCT_SHORT_DESCRIPTION', 'Display Short Description');
 define('CD_PRODUCT_SHORT_DESCRIPTION', 'Do you want to display the short description in the list results?');
 define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Attribute Price Display Method');
 define('CD_ATTRIBUTE_PRICE_DISPLAY', 'Do you want to display your attribute prices as seperate values (eg. +$2.00) or as a combined total of the product price and the attribute price? (eg. $25.00)');
-define('CT_PRODUCT_LIST_BESTSELLER', 'Display Popularity in filter box');
-define('CD_PRODUCT_LIST_BESTSELLER', 'Would you like to allow ');
+define('CT_PRODUCT_LIST_BESTSELLER', 'Display Bestsellers in filter box');
+define('CD_PRODUCT_LIST_BESTSELLER', 'Would you like to allow Bestsellers to be a sort option');
 
 
 // Configuration ID: 9 - Stock
@@ -776,15 +776,6 @@ define('CT_GOOGLE_MAPS_KEY', 'Google Maps Key');
 define('CD_GOOGLE_MAPS_KEY', 'Put your Google Maps API Key here.<br><br>You can get one at http://code.google.com/apis/maps/signup.html');
 
 // Configuration ID: 99 - Open Feature Sets
-define('CT_SHOW_FEATURED_SETS_ON_STORE_FRONT', '<font color=blue>Show Featured Sets on Store Front</font>');
-define('CD_SHOW_FEATURED_SETS_ON_STORE_FRONT', 'Would you like to see the Featured Sets displayed on the store front page?');
-define('CT_SHOW_FEATURED_SETS_ON_CATEGORIES', '<font color=blue>Show Featured Sets on Categories</font>');
-define('CD_SHOW_FEATURED_SETS_ON_CATEGORIES', 'Would you like to see the Featured Sets displayed on the categories page?');
-define('CT_SHOW_FEATURED_SETS_ON_PRODUCT_LISTS', '<font color=blue>Show Featured Sets on Product Lists</font>');
-define('CD_SHOW_FEATURED_SETS_ON_PRODUCT_LISTS', 'Would you like to see the Featured Sets displayed on the product list pages? This option best fits sites with multi-column type product list pages.');
-define('CT_SHOW_FEATURED_SETS_ON_PRODUCTS', '<font color=blue>Show Featured Sets on Product Info</font>');
-define('CD_SHOW_FEATURED_SETS_ON_PRODUCTS', 'Would you like to see the Featured Sets Products displayed on the products info page?');
-
 define('CT_OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES', '<font color=green>Limit Product Features Focus</font>');
 define('CD_OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES', 'Would you like to limit showing Featured Products to only showing the featured products that are within the currently displayed category?');
 define('CT_OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES', '<font color=green>Limit Category Features Focus</font>');
@@ -815,8 +806,6 @@ define('CT_FEATURED_SET_STYLE', 'Choose a featured products set style');
 define('CD_FEATURED_SET_STYLE', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed<br>5= boxed w/box header<br>6= shadowboxed w/box header');
 define('CT_FEATURED_PRODUCTS_GROUPING', 'Choose a box grouping method');
 define('CD_FEATURED_PRODUCTS_GROUPING', 'gbox= grouped in one box<br>sbox= each product in separate box');
-define('CT_FEATURED_SET_STYLE_SHADOW', 'Set the direction of the shadow');
-define('CD_FEATURED_SET_STYLE_SHADOW', 'right or left');
 define('CT_FEATURED_PRODUCTS_SORT_ORDER', 'Set the sort order for the feature products.');
 define('CD_FEATURED_PRODUCTS_SORT_ORDER', '<br><b>product id <br>product name <br>product price <br>random.</b><br>');
 define('CT_FEATURED_PRODUCTS_DIRECTION', 'Set the sort order for products by ascending or descending');
@@ -873,8 +862,6 @@ define('CT_FEATURED_MANUFACTURER_SET_STYLE', 'Choose a featured manufacturer wit
 define('CD_FEATURED_MANUFACTURER_SET_STYLE', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed<br>5= boxed w/box header<br>6= shadowboxed w/box header');
 define('CT_FEATURED_MANUFACTURER_GROUPING', 'Choose a box grouping method for manufacturer with products');
 define('CD_FEATURED_MANUFACTURER_GROUPING', 'gbox= grouped in one box<br>sbox= each product in separate box');
-define('CT_FEATURED_MANUFACTURER_SET_STYLE_SHADOW', 'Set the direction of the shadow');
-define('CD_FEATURED_MANUFACTURER_SET_STYLE_SHADOW', 'right or left');
 define('CT_FEATURED_MANUFACTURER_SORT_ORDER', 'Set the sort order for the feature manufacturer with products.');
 define('CD_FEATURED_MANUFACTURER_SORT_ORDER', '<br><b>manufacturers id <br>manufacturers name <br>product id <br>product name <br>product price <br>random.</b><br>');
 define('CT_FEATURED_MANUFACTURER_DIRECTION', 'Set the manufacturer sort order by ascending or descending');
@@ -906,8 +893,6 @@ define('CT_FEATURED_CATEGORIES_SET_STYLE', 'Choose a featured categories set sty
 define('CD_FEATURED_CATEGORIES_SET_STYLE', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed<br>5= boxed w/box header<br>6= shadowboxed w/box header');
 define('CT_FEATURED_CATEGORIES_GROUPING', 'Choose a box grouping method for categories');
 define('CD_FEATURED_CATEGORIES_GROUPING', 'gbox= grouped in one box<br>sbox= each product in separate box');
-define('CT_FEATURED_CATEGORIES_SET_STYLE_SHADOW', 'Set the direction of the shadow');
-define('CD_FEATURED_CATEGORIES_SET_STYLE_SHADOW', 'right or left');
 define('CT_FEATURED_CATEGORIES_SORT_ORDER', 'Set the sort order for the feature categories.');
 define('CD_FEATURED_CATEGORIES_SORT_ORDER', '<br><b>categories id <br>categories name <br>manufacturers id <br>product id <br>product name <br>product price <br>random.</b><br>');
 define('CT_FEATURED_CATEGORIES_DIRECTION', 'Set the categories sort order by ascending or descending');

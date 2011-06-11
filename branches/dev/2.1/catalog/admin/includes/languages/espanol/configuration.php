@@ -771,15 +771,6 @@ define('CT_GOOGLE_MAPS_KEY', 'Clave de Google Maps');
 define('CD_GOOGLE_MAPS_KEY', 'Introduce aquí tu clave API de Google Maps.<br><br>Puedes obtener una en http://code.google.com/intl/es-ES/apis/maps/signup.html');
 
 // Configuration ID: 99 - Open Feature Sets
-define('CT_SHOW_FEATURED_SETS_ON_STORE_FRONT', '<font color=blue>Mostrar conjuntos destacados en página inicio</font>');
-define('CD_SHOW_FEATURED_SETS_ON_STORE_FRONT', '¿Quieres que se muestren los conjuntos destacados en la página de inicio de la tienda?');
-define('CT_SHOW_FEATURED_SETS_ON_CATEGORIES', '<font color=blue>Mostrar conjuntos destacados en categorías</font>');
-define('CD_SHOW_FEATURED_SETS_ON_CATEGORIES', '¿Quieres que se muestren los conjuntos destacados en las páginas de categorías?');
-define('CT_SHOW_FEATURED_SETS_ON_PRODUCT_LISTS', '<font color=blue>Mostrar conjuntos destacados en listados de productos</font>');
-define('CD_SHOW_FEATURED_SETS_ON_PRODUCT_LISTS', '¿Quieres que se muestren los conjuntos destacados en las páginas de listado de productos? Esta opción encaja mejor en sitios con páginas de listado de productos con varias columnas.');
-define('CT_SHOW_FEATURED_SETS_ON_PRODUCTS', '<font color=blue>Mostrar conjuntos destacados en información de producto</font>');
-define('CD_SHOW_FEATURED_SETS_ON_PRODUCTS', '¿Quieres que se muestren los conjuntos destacados en las páginas de información de productos?');
-
 define('CT_OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES', '<font color=green>Limitar enfoque productos destacados</font>');
 define('CD_OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES', '¿Quieres limitar dónde se muestran los productos destacados a sólo mostrar aquellos que están dentro de la categoría mostrada en ese momento?');
 define('CT_OPEN_FEATURED_LIMIT_CATEGORIES_FEATURES', '<font color=green>Limitar enfoque categorías destacadas</font>');
@@ -810,8 +801,6 @@ define('CT_FEATURED_SET_STYLE', 'Selecciona un estilo para conjunto productos de
 define('CD_FEATURED_SET_STYLE', '1= simple<br>2= caja<br>3= separados por líneas<br>4= caja sombreada<br>5= caja con cabecera<br>6= caja sombreada con cabecera');
 define('CT_FEATURED_PRODUCTS_GROUPING', 'Selecciona un método para agrupar');
 define('CD_FEATURED_PRODUCTS_GROUPING', 'gbox= agrupados en una caja<br>sbox= cada producto en una caja separada');
-define('CT_FEATURED_SET_STYLE_SHADOW', 'Establecer la dirección de la sombra');
-define('CD_FEATURED_SET_STYLE_SHADOW', 'derecha (right) o izquierda (left)');
 define('CT_FEATURED_PRODUCTS_SORT_ORDER', 'Establecer el orden para los productos destacados.');
 define('CD_FEATURED_PRODUCTS_SORT_ORDER', '<br><b>id productos (products_id) <br>nombre productos (products_name) <br>precio productos (products_price) <br>aleatorio (rand()) </b><br>');
 define('CT_FEATURED_PRODUCTS_DIRECTION', 'Ordenar los productos en orden ascendente o descendente');
@@ -868,8 +857,6 @@ define('CT_FEATURED_MANUFACTURER_SET_STYLE', 'Selecciona un estilo para conjunto
 define('CD_FEATURED_MANUFACTURER_SET_STYLE', '1= simple<br>2= caja<br>3= separados por líneas<br>4= caja sombreada<br>5= caja con cabecera<br>6= caja sombreada con cabecera');
 define('CT_FEATURED_MANUFACTURER_GROUPING', 'Selecciona un método de agrupar para fabricante con productos');
 define('CD_FEATURED_MANUFACTURER_GROUPING', 'gbox= agrupados en una caja<br>sbox= cada producto en una caja separada');
-define('CT_FEATURED_MANUFACTURER_SET_STYLE_SHADOW', 'Establecer la dirección de la sombra');
-define('CD_FEATURED_MANUFACTURER_SET_STYLE_SHADOW', 'derecha (right) o izquierda (left)');
 define('CT_FEATURED_MANUFACTURER_SORT_ORDER', 'Establecer el orden para el fabricante destacado con productos.');
 define('CD_FEATURED_MANUFACTURER_SORT_ORDER', '<br><b>id fabricantes (manufacturers_id) <br>nombre fabricantes (manufacturers_name) <br>id productos (products_id <br>nombre productos (product_name) <br>precio productos (product_price) <br>aleatorio (random())</b><br>');
 define('CT_FEATURED_MANUFACTURER_DIRECTION', 'Ordenar los fabricantes en orden ascendente o descendente');
@@ -901,8 +888,6 @@ define('CT_FEATURED_CATEGORIES_SET_STYLE', 'Selecciona un estilo para conjunto c
 define('CD_FEATURED_CATEGORIES_SET_STYLE', '1= simple<br>2= caja<br>3= separados por líneas<br>4= caja sombreada<br>5= caja con cabecera<br>6= caja sombreada con cabecera');
 define('CT_FEATURED_CATEGORIES_GROUPING', 'Selecciona un método para agrupar categorías');
 define('CD_FEATURED_CATEGORIES_GROUPING', 'gbox= agrupados en una caja<br>sbox= cada producto en una caja separada');
-define('CT_FEATURED_CATEGORIES_SET_STYLE_SHADOW', 'Establecer la dirección de la sombra');
-define('CD_FEATURED_CATEGORIES_SET_STYLE_SHADOW', 'derecha (right) o izquierda (left)');
 define('CT_FEATURED_CATEGORIES_SORT_ORDER', 'Establecer el orden para las categorías destacadas.');
 define('CD_FEATURED_CATEGORIES_SORT_ORDER', '<br><b>id categorías (categories_id) <br>nombre categorías (categories_name) <br>id fabricantes (manufacturers_id) <br>id productos (products_id) <br>nombre productos (products_name) <br>precio productos (products_price) <br>aleatorio (random())</b><br>');
 define('CT_FEATURED_CATEGORIES_DIRECTION', 'Ordenar las categorías en orden ascendente o descendente');

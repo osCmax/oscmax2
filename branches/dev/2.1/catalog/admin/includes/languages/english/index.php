@@ -117,6 +117,7 @@ define('WARNING_ADMIN_CONFIG_FILE_WRITEABLE', 'Error: I am able to write to the 
 
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Error: The sessions directory does not exist: ' . tep_session_save_path() . '. Sessions will not work until this directory is created.');
 define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Warning: I am not able to write to the sessions directory: ' . tep_session_save_path() . '. Sessions will not work until the right user permissions are set.');
+define('WARNING_GLOBALS_ENABLED', 'Error: You have got Register Globals on. For security and functionality reasons osCmax requires that you turn them off.');
 define('WARNING_SEO_PHP_VERSION_LOW', 'Error: Your webserver is running ' . PHP_VERSION . ' which is not sufficient for running SEO URLs. Please disable this module until you have upgraded your version of PHP.');
 define('WARNING_SESSION_AUTO_START', 'Warning: session.auto_start is enabled - please disable this php feature in php.ini and restart the web server.');
 define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Warning: The downloadable products directory does not exist: ' . dirname(DIR_FS_CATALOG) . '/download. Downloadable products will not work until this directory is valid.');

@@ -157,6 +157,15 @@ $system_permission_warnings = 0;
   ?>
   <!-- End check for session folder -->
 
+  <!-- Start php globals check -->
+  <?php
+  if ( ((int)ini_get('register_globals') == 1) ) { $system_permission_warnings++; ?>
+  <tr>
+	<td class="messageStackError"><?php echo tep_image(DIR_WS_ICONS . 'error.gif') . ' ' . WARNING_GLOBALS_ENABLED; ?></td>
+  </tr>
+  <?php } ?>
+  <!-- End  php globals check -->
+
   <!-- Start admin directory -->
   <?php
   $admin_check = trim(str_replace(DIR_WS_CATALOG, '', DIR_WS_ADMIN), '/');

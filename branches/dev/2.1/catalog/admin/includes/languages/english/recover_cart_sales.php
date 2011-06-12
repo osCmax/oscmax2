@@ -10,9 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('MESSAGE_STACK_CUSTOMER_ID', 'Cart for Customer-ID ');
+define('MESSAGE_STACK_CUSTOMER_ID', 'Cart for Customer ');
 define('MESSAGE_STACK_DELETE_SUCCESS', ' deleted successfully');
-define('HEADING_TITLE', 'Recover Cart Sales v2.22');
+define('HEADING_TITLE', 'Recover Cart Sales');
 define('HEADING_EMAIL_SENT', 'E-mail Sent Report');
 define('EMAIL_TEXT_LOGIN', 'Login to your account here:');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
@@ -55,7 +55,7 @@ define('TABLE_HEADING_CONTACT', 'CONTACTED');
 define('TABLE_HEADING_CUSTOMER', 'CUSTOMER NAME');
 define('TABLE_HEADING_EMAIL', 'E-MAIL');
 define('TABLE_HEADING_PHONE', 'PHONE');
-define('TABLE_HEADING_MODEL', 'ITEM');
+define('TABLE_HEADING_MODEL', 'MODEL');
 define('TABLE_HEADING_DESCRIPTION', 'DESCRIPTION');
 define('TABLE_HEADING_QUANTY', 'QTY');
 define('TABLE_HEADING_PRICE', 'PRICE');
@@ -66,5 +66,6 @@ define('TEXT_CURRENT_CUSTOMER', 'CUSTOMER');
 define('TEXT_SEND_EMAIL', 'Send E-mail');
 define('TEXT_RETURN', '[Click Here To Return]');
 define('TEXT_NOT_CONTACTED', 'Uncontacted');
-define('PSMSG', 'Additional PS Message: ');
+define('PSMSG', 'Additional Message (Added at end of email): ');
+define('TEXT_NO_CARTS_FOUND', 'No abandoned carts found for the date range specified.');
 ?>

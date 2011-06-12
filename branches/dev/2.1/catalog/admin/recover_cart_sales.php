@@ -14,7 +14,7 @@ $Id$
  
  $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
- //link_post_variable('custid');	// fix to allow turning off register_globals in php - does not work w/standard osC (requires some other mod!)
+ link_post_variable('custid');	// fix to allow turning off register_globals in php
 
  $currencies = new currencies();
 
@@ -26,7 +26,7 @@ if ($action == 'delete') {
    $reset_query_raw2 = "delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id=" . $_GET[customer_id]; 
    tep_db_query($reset_query_raw2);
 
-   tep_redirect(tep_href_link(FILENAME_RECOVER_CART_SALES, 'delete=1&customer_id='. $_GET['customer_id'] . '&tdate=' . $_GET['tdate'])); 
+   tep_redirect(tep_href_link(FILENAME_RECOVER_CART_SALES, 'delete=1&customer_id='. $_GET['customer_id'] . '&tdate=' . $_GET['tdate'] . '&sdate=' . $_GET['sdate'])); 
 } 
 
 if (isset($_GET['delete'])) { 
@@ -36,11 +36,13 @@ if (isset($_GET['delete'])) {
 // Delete Entry End
     $tdate = '';
 	if (isset($_POST['tdate'])) { $tdate = $_POST['tdate']; }
+	if (isset($_GET['tdate'])) { $tdate = $_GET['tdate']; }
 	if ($tdate == '') $tdate = RCS_BASE_DAYS;
 	
 	$sdate = '';
 	if (isset($_POST['sdate'])) { $sdate = $_POST['sdate']; }
-	if( $sdate == '' ) $sdate = RCS_SKIP_DAYS;
+	if (isset($_GET['sdate'])) { $sdate = $_GET['sdate']; }
+	if ($sdate == '') $sdate = RCS_SKIP_DAYS;
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -60,8 +62,7 @@ if (isset($_GET['delete'])) {
 
 <!-- body //-->
  <?php
-  function seadate($day)
-  {
+  function seadate($day) {
     $rawtime = strtotime("-".$day." days");
     $ndate = date("Ymd", $rawtime);
     return $ndate;
@@ -83,46 +84,35 @@ if (isset($_GET['delete'])) {
 
 	// This will return a list of customers with sessions. Handles either the mysql or file case
 	// Returns an empty array if the check sessions flag is not true (empty array means same SQL statement can be used)
-	function _GetCustomerSessions()
-	{
-		$cust_ses_ids = array();
+	function _GetCustomerSessions() {
+	  $cust_ses_ids = array();
 		
-		if( RCS_CHECK_SESSIONS == 'true' )
-		{
-			if (STORE_SESSIONS == 'mysql')
-			{
-				// --- DB RECORDS --- 
-				$sesquery = tep_db_query("select value from " . TABLE_SESSIONS . " where 1");
-				while ($ses = tep_db_fetch_array($sesquery))
-				{
-					if ( ereg( "customer_id[^\"]*\"([0-9]*)\"", $ses['value'], $custval ) )
-						$cust_ses_ids[] = $custval[1];
+	  if (RCS_CHECK_SESSIONS == 'true') {
+	    if (STORE_SESSIONS == 'mysql') {
+		  // --- DB RECORDS --- 
+		  $sesquery = tep_db_query("select value from " . TABLE_SESSIONS . " where 1");
+		  while ($ses = tep_db_fetch_array($sesquery)) {
+		    if ( ereg( "customer_id[^\"]*\"([0-9]*)\"", $ses['value'], $custval ) )
+			  $cust_ses_ids[] = $custval[1];
+		  }
+		} else {	
+		// --- FILES --- 
+          if ($handle = opendir( tep_session_save_path() ) ) {
+            while (false !== ($file = readdir( $handle )) ) {
+			  if ($file != "." && $file != "..") {
+			    $file = tep_session_save_path() . '/' . $file;	// create full path to file!
+			    if( $fp = fopen( $file, 'r' ) ) {
+				  $val = fread( $fp, filesize( $file ) );
+				  fclose( $fp );
+				  if ( ereg( "customer_id[^\"]*\"([0-9]*)\"", $val, $custval ) ) $cust_ses_ids[] = $custval[1];
 				}
+			  }
 			}
-			else	// --- FILES ---
-			{
-				if( $handle = opendir( tep_session_save_path() ) )
-				{
-					while (false !== ($file = readdir( $handle )) )
-					{
-						if ($file != "." && $file != "..")
-						{
-							$file = tep_session_save_path() . '/' . $file;	// create full path to file!
-							if( $fp = fopen( $file, 'r' ) )
-							{
-								$val = fread( $fp, filesize( $file ) );
-								fclose( $fp );
-	
-								if ( ereg( "customer_id[^\"]*\"([0-9]*)\"", $val, $custval ) )
-									$cust_ses_ids[] = $custval[1];
-							}
-						}
-					}
-					closedir( $handle );
-				}
-			}
-		}
-		return $cust_ses_ids;
+			closedir( $handle );
+          } // end ($handle = opendir( tep_session_save_path() ) )
+		} // end if (STORE_SESSIONS == 'mysql')
+	  } // end if (RCS_CHECK_SESSIONS == 'true')
+	  return $cust_ses_ids;
 	}
 ?>
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
@@ -130,21 +120,21 @@ if (isset($_GET['delete'])) {
     <td width="<?php echo BOX_WIDTH; ?>" valign="top">
       <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
 
-<!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
+      <!-- left_navigation //-->
+      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+      <!-- left_navigation_eof //-->
 
-      </table></td>
+      </table>
+    </td>
 
 <!-- body_text //-->
 
     <td width="100%" valign="top">
-    <table border="0" width="100%" cellspacing="0" cellpadding="2">
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php // Are we doing an e-mail to some customers?
-if ( (isset($custid)) && (count($custid) > 0 ) ) {  ?>
+  if ( (isset($custid)) && (count($custid) > 0 ) ) {  ?>
             <tr>
-              <td class="pageHeading" align="left" colspan=2 width="50%"><?php echo HEADING_TITLE; ?> </td>
-              <td class="pageHeading" align="left" colspan=4 width="50%"><?php echo HEADING_EMAIL_SENT; ?> </td>
+              <td class="pageHeading" align="left" colspan=6 width="50%"><?php echo HEADING_EMAIL_SENT; ?> </td>
             </tr>
             <tr class="dataTableHeadingRow">
               <td class="dataTableHeadingContent" align="left" colspan="1" width="15%" nowrap><?php echo TABLE_HEADING_CUSTOMER; ?></td>
@@ -153,7 +143,7 @@ if ( (isset($custid)) && (count($custid) > 0 ) ) {  ?>
               <td class="dataTableHeadingContent" align="left" colspan="1" width="10%" nowrap>&nbsp;</td>
               <td class="dataTableHeadingContent" align="left" colspan="1" width="10%" nowrap>&nbsp;</td>
               <td class="dataTableHeadingContent" align="left" colspan="1" width="10%" nowrap>&nbsp;</td>
-            </tr><tr>&nbsp;<br></tr>
+            </tr>
             <tr class="dataTableHeadingRow">
               <td class="dataTableHeadingContent" align="left"   colspan="1"  width="15%" nowrap><?php echo TABLE_HEADING_MODEL; ?></td>
               <td class="dataTableHeadingContent" align="left"   colspan="2"  width="55%" nowrap><?php echo TABLE_HEADING_DESCRIPTION; ?></td>
@@ -162,9 +152,8 @@ if ( (isset($custid)) && (count($custid) > 0 ) ) {  ?>
               <td class="dataTableHeadingContent" align="right"  colspan="1"  width="10%" nowrap><?php echo TABLE_HEADING_TOTAL; ?></td>
             </tr>
 <?php
-	foreach ($custid as $cid)
-	{
-	unset($email);
+	foreach ($custid as $cid) {
+	  unset($email);
 	
 	  $query1 = tep_db_query("select cb.products_id pid,
                                     cb.customers_basket_quantity qty,
@@ -179,9 +168,8 @@ if ( (isset($custid)) && (count($custid) > 0 ) ) {  ?>
                           order by  cb.customers_basket_date_added desc ");
 
 	  $knt = mysql_num_rows($query1);
-	  for ($i = 0; $i < $knt; $i++)
-	  {
-		 $inrec = tep_db_fetch_array($query1);
+	  for ($i = 0; $i < $knt; $i++) {
+	    $inrec = tep_db_fetch_array($query1);
 
 		// set new cline and curcus
 		 if ($lastcid != $cid) {
@@ -189,9 +177,6 @@ if ( (isset($custid)) && (count($custid) > 0 ) ) {  ?>
 			  $cline .= "
 			  <tr>
 				 <td class='dataTableContent' align='right' colspan='6' nowrap><b>" . TABLE_CART_TOTAL . "</b>" . $currencies->format($tprice) . "</td>
-			  </tr>
-			  <tr>
-				 <td colspan='6' align='right'><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES, "action=delete&amp;customer_id=" . $cid . "&amp;tdate=" . $tdate . "&amp;sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>
 			  </tr>\n";
 			 echo $cline;
 			}
@@ -202,55 +187,54 @@ if ( (isset($custid)) && (count($custid) > 0 ) ) {  ?>
 
 		// get the shopping cart
 		$query2 = tep_db_query("select   p.products_price price,
-												p.products_tax_class_id taxclass,
-												p.products_model model,
-                                    pd.products_name name
-                            from    " . TABLE_PRODUCTS . " p,
-                                    " . TABLE_PRODUCTS_DESCRIPTION . " pd,
-                                    " . TABLE_LANGUAGES . " l
-                            where   p.products_id = '" . $inrec['pid'] . "' and
-                                    pd.products_id = p.products_id and
-                                    pd.language_id = " . (int)$languages_id );
+										 p.products_tax_class_id taxclass,
+										 p.products_model model,
+                                         pd.products_name name
+                                 from    " . TABLE_PRODUCTS . " p,
+                                         " . TABLE_PRODUCTS_DESCRIPTION . " pd,
+                                         " . TABLE_LANGUAGES . " l
+                                 where   p.products_id = '" . $inrec['pid'] . "' and
+                                         pd.products_id = p.products_id and
+                                         pd.language_id = " . (int)$languages_id );
 
 		$inrec2 = tep_db_fetch_array($query2);
 		$sprice = tep_get_products_special_price( $inrec['pid'] );
 		if( $sprice < 1 )
-			$sprice = $inrec2['price'];
-		// Some users may want to include taxes in the pricing, allow that. NOTE HOWEVER that we don't have a good way to get individual tax rates based on customer location yet!
-			if( RCS_INCLUDE_TAX_IN_PRICES  == 'true' )
-				$sprice += ($sprice * tep_get_tax_rate( $inrec2['taxclass'] ) / 100);
+		  $sprice = $inrec2['price'];
+		  // Some users may want to include taxes in the pricing, allow that. NOTE HOWEVER that we don't have a good way to get individual tax rates based on customer location yet!
+	        if( RCS_INCLUDE_TAX_IN_PRICES  == 'true' )
+			  $sprice += ($sprice * tep_get_tax_rate( $inrec2['taxclass'] ) / 100);
 			else if( RCS_USE_FIXED_TAX_IN_PRICES  == 'true' && RCS_FIXED_TAX_RATE > 0 )
-				$sprice += ($sprice * RCS_FIXED_TAX_RATE / 100);
+			  $sprice += ($sprice * RCS_FIXED_TAX_RATE / 100);
 
-		$tprice = $tprice + ($inrec['qty'] * $sprice);
-      $pprice_formated  = $currencies->format($sprice);
-      $tpprice_formated = $currencies->format(($inrec['qty'] * $sprice));
+		  $tprice = $tprice + ($inrec['qty'] * $sprice);
+          $pprice_formated  = $currencies->format($sprice);
+          $tpprice_formated = $currencies->format(($inrec['qty'] * $sprice));
 
-      $cline .= "<tr class='dataTableRow'>
-                    <td class='dataTableContent' align='left'   width='15%' nowrap>" . $inrec2['model'] . "</td>
-                    <td class='dataTableContent' align='left'  colspan='2' width='55%'><a href='" . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&amp;read=only&amp;pID=' . $inrec['pid'] . '&amp;origin=' . FILENAME_RECOVER_CART_SALES . '?page=' . $_GET['page'], 'NONSSL') . "'>" . $inrec2['name'] . "</a></td>
-                    <td class='dataTableContent' align='center' width='10%' nowrap>" . $inrec['qty'] . "</td>
-                    <td class='dataTableContent' align='right'  width='10%' nowrap>" . $pprice_formated . "</td>
-                    <td class='dataTableContent' align='right'  width='10%' nowrap>" . $tpprice_formated . "</td>
-                 </tr>";
+          $cline .= "<tr class='dataTableRow'>
+                       <td class='dataTableContent' align='left'   width='15%' nowrap>" . $inrec2['model'] . "</td>
+                       <td class='dataTableContent' align='left'  colspan='2' width='55%'><a href='" . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&amp;read=only&amp;pID=' . $inrec['pid'] . '&amp;origin=' . FILENAME_RECOVER_CART_SALES . '?page=' . $_GET['page'], 'NONSSL') . "'>" . $inrec2['name'] . "</a></td>
+                       <td class='dataTableContent' align='center' width='10%' nowrap>" . $inrec['qty'] . "</td>
+                       <td class='dataTableContent' align='right'  width='10%' nowrap>" . $pprice_formated . "</td>
+                       <td class='dataTableContent' align='right'  width='10%' nowrap>" . $tpprice_formated . "</td>
+                     </tr>";
 
-		$mline .= $inrec['qty'] . ' x ' . $inrec2['name'] . "\n";
+		  $mline .= $inrec['qty'] . ' x ' . $inrec2['name'] . "\n";
 	
-		if( EMAIL_USE_HTML == 'true' )
-			$mline .= '   <blockquote><a href="' . tep_catalog_href_link(FILENAME_CATALOG_PRODUCT_INFO, 'products_id='. $inrec['pid']) . '">' . tep_catalog_href_link(FILENAME_CATALOG_PRODUCT_INFO, 'products_id='. $inrec['pid']) . "</a></blockquote>\n\n";
-		else
-			$mline .= '   (' . tep_catalog_href_link(FILENAME_CATALOG_PRODUCT_INFO, 'products_id='. $inrec['pid']).")\n\n";
-	  }
+		  if (EMAIL_USE_HTML == 'true')
+		    $mline .= '   <blockquote><a href="' . tep_catalog_href_link(FILENAME_CATALOG_PRODUCT_INFO, 'products_id='. $inrec['pid']) . '">' . tep_catalog_href_link(FILENAME_CATALOG_PRODUCT_INFO, 'products_id='. $inrec['pid']) . "</a></blockquote>\n\n";
+		  else
+		    $mline .= '   (' . tep_catalog_href_link(FILENAME_CATALOG_PRODUCT_INFO, 'products_id='. $inrec['pid']).")\n\n";
+	   }
 
 	  $cline .= "</td></tr>";
 
-		// E-mail Processing - Requires EMAIL_* defines in the
-		// includes/languages/english/recover_cart_sales.php file
+		// E-mail Processing - Requires EMAIL_* defines in includes/languages/english/recover_cart_sales.php file
 		$cquery = tep_db_query("select * from orders where customers_id = '".$cid."'" );
 		$email = EMAIL_TEXT_LOGIN;
 
 		if( EMAIL_USE_HTML == 'true' )
-			$email .= '  <a HREF="' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL') . '">' . tep_catalog_href_link(FILENAME_CATALOG_LOGIN, '', 'SSL')  . '</a>';
+			$email .= '  <a href="' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL') . '">' . tep_catalog_href_link(FILENAME_CATALOG_LOGIN, '', 'SSL')  . '</a>';
 		else
 			$email .= '  (' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL') . ')';
 
@@ -295,11 +279,10 @@ if ( (isset($custid)) && (count($custid) > 0 ) ) {  ?>
 		$cline = "";
 	}
 	echo "<tr><td colspan=8 align='right' class='dataTableContent'><b>" . TABLE_CART_TOTAL . "</b>" . $currencies->format($tprice) . "</td> </tr>";
-	echo "<tr><td colspan=6 align='right'><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES, "action=delete&amp;customer_id=" . $cid . "&amp;tdate=" . $tdate . "&amp;sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>  </tr>\n";
-	echo "<tr><td colspan=6 align=center><a href=". $_SERVER['PHP_SELF'] .">" . TEXT_RETURN . "</a></td></tr>";
-}
-else	 //we are NOT doing an e-mail to some customers
-{
+	//echo "<tr><td colspan=6 align='right'><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES, "action=delete&amp;customer_id=" . $cid . "&amp;tdate=" . $tdate . "&amp;sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>  </tr>\n";
+	echo "<tr><td colspan=6 align=right><a href=". $_SERVER['PHP_SELF'] .">" . tep_image_button('button_back.gif', IMAGE_BACK) . "</a></td></tr>";
+
+} else {	 //we are NOT doing an e-mail to some customers
 ?>
         <!-- REPORT TABLE BEGIN //-->
             <tr>
@@ -315,7 +298,7 @@ else	 //we are NOT doing an e-mail to some customers
               </td>
             </tr>
             <tr>
-              <td colspan="2" width="100%"><form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+              <td colspan="2" width="100%"><form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" >
                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 
             <tr class="dataTableHeadingRow">
@@ -360,21 +343,16 @@ else	 //we are NOT doing an e-mail to some customers
  $skip = false;
 
  $knt = mysql_num_rows($query1);
- for ($i = 0; $i <= $knt; $i++)
- {
+ for ($i = 0; $i <= $knt; $i++) {
    $inrec = tep_db_fetch_array($query1);
 
 	// If this is a new customer, create the appropriate HTML
-    if ($curcus != $inrec['cid'])
-    {
+    if ($curcus != $inrec['cid']) {
       // output line
       $totalAll += $tprice;
       $cline .= "       </td>
                         <tr>
-                          <td class='dataTableContent' align='right' colspan='8'><b>" . TABLE_CART_TOTAL . "</b>" . $currencies->format($tprice) . "</td>
-                        </tr>
-                        <tr>
-                          <td colspan='6' align='right'><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES,"action=delete&amp;customer_id=" . $curcus . "&amp;tdate=" . $tdate . "&amp;sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>
+                          <td class='dataTableContent' align='right' colspan='8' style='border-bottom: 1px solid #000000;'><b>" . TABLE_CART_TOTAL . "</b>" . $currencies->format($tprice) . "</td>
                         </tr>\n";
       if ($curcus != "" && !$skip)
         echo $cline;
@@ -382,8 +360,7 @@ else	 //we are NOT doing an e-mail to some customers
       // set new cline and curcus
       $curcus = $inrec['cid'];
 
-      if ($curcus != "")
-		{
+      if ($curcus != "") {
 			$tprice = 0;
 	
 			// change the color on those we have contacted add customer tag to customers
@@ -464,12 +441,13 @@ else	 //we are NOT doing an e-mail to some customers
 			
 			$cline = "
 				<tr bgcolor=" . $fcolor . ">
-				<td class='dataTableContent' align='center' width='1%'>" . tep_draw_checkbox_field('custid[]', $curcus, RCS_AUTO_CHECK == 'true' ? $checked : 0) . "</td>
-				<td class='dataTableContent' align='left' width='9%' nowrap><b>" . $sentInfo . "</b></td>
-				<td class='dataTableContent' align='left' width='15%' nowrap> " . cart_date_short($inrec['bdate']) . "</td>
-				<td class='dataTableContent' align='left' width='30%' nowrap><a href='" . tep_href_link(FILENAME_CUSTOMERS, 'search=' . $inrec['lname'], 'NONSSL') . "'>" . $customer . "</a>".$status."</td>
-				<td class='dataTableContent' align='left' colspan='2' width='30%' nowrap><a href='" . tep_href_link('mail.php', 'selected_box=tools&amp;customer=' . $inrec['email']) . "'>" . $inrec['email'] . "</a></td>
-				<td class='dataTableContent' align='left' colspan='2' width='15%' nowrap>" . $inrec['phone'] . "</td>
+				  <td class='dataTableContent' align='center' width='1%'>" . tep_draw_checkbox_field('custid[]', $curcus, RCS_AUTO_CHECK == 'true' ? $checked : 0) . "</td>
+				  <td class='dataTableContent' align='left' width='9%' nowrap><b>" . $sentInfo . "</b></td>
+				  <td class='dataTableContent' align='left' width='15%' nowrap> " . cart_date_short($inrec['bdate']) . "</td>
+				  <td class='dataTableContent' align='left' width='30%' nowrap><a href='" . tep_href_link(FILENAME_CUSTOMERS, 'search=' . $inrec['lname'], 'NONSSL') . "'>" . $customer . "</a>".$status."</td>
+				  <td class='dataTableContent' align='left' colspan='2' width='30%' nowrap><a href='" . tep_href_link('mail.php', 'selected_box=tools&amp;customer=' . $inrec['email']) . "'>" . $inrec['email'] . "</a></td>
+				  <td class='dataTableContent' align='left' colspan='1' width='15%' nowrap>" . $inrec['phone'] . "</td>
+				  <td><a href=" . tep_href_link(FILENAME_RECOVER_CART_SALES,"action=delete&amp;customer_id=" . $curcus . "&amp;tdate=" . $tdate . "&amp;sdate=" . $sdate) . ">" . tep_image_button('button_delete.gif', IMAGE_DELETE) . "</a></td>
 				</tr>";
 		}
     }
@@ -546,12 +524,18 @@ else	 //we are NOT doing an e-mail to some customers
                     <td class='dataTableContent' align='right'  vAlign='top' width='10%' nowrap>" . $tpprice_formated . "</td>
                  </tr>";
 	 }
-  }
-  $totalAll_formated = $currencies->format($totalAll);
-  $cline = "<tr><td class='dataTableContent' align='right' colspan='8'><hr align=right width=120><b>" . TABLE_GRAND_TOTAL . "</b>" . $totalAll_formated . "</td>
+  } // end for ($i = 0; $i <= $knt; $i++)
+
+  
+  if ($knt == 0) { // There are no records to display
+    echo '<tr><td class="messageStackAlert" align="center" colspan="8">' . TEXT_NO_CARTS_FOUND . '</td></tr>';
+  } else { // display the footer
+    $totalAll_formated = $currencies->format($totalAll);
+    $cline = "<tr class='dataTableHeadingRow'><td class='dataTableHeadingContent' align='right' colspan='8' style='border-bottom: 1px solid #000000'><b>" . TABLE_GRAND_TOTAL . "</b>" . $totalAll_formated . "</td>
               </tr>";
-  echo $cline;
- echo "<tr><td colspan=\"8\" class=\"main\"><hr><b>". PSMSG ."</b><br>". tep_draw_textarea_field('message', '80', '5') ."<br>" . tep_draw_selection_field('submit_button', 'submit', TEXT_SEND_EMAIL) . "</td></tr>";
+    echo $cline;
+    echo "<tr><td colspan=\"8\" class=\"main\"><br><b>". PSMSG ."</b><br>". tep_draw_textarea_field('message', '80', '5') ."</td></tr><tr><td colspan=\"8\" align=\"right\">" . tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL) . "</td></tr>";
+  } // end if ($knt == 0)
 ?>
             </table>
           </form></td>

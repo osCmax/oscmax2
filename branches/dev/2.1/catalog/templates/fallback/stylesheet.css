@@ -109,6 +109,7 @@ TD.subBar { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #00
 TD.main, P.main, TD.category_desc, P.category_desc { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; }
 
 TD.smallText, SPAN.smallText, P.smallText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+TD.couponText, TD.couponText a { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #999999; }
 
 TD.accountCategory { font-family: Verdana, Arial, sans-serif; font-size: 13px; color: #aabbdd; }
 

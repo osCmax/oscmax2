@@ -103,7 +103,7 @@ if (BASKET_CART == 'cart') {
  $coupon_desc = tep_db_fetch_array($coupon_desc_query);
  $text_coupon_help = sprintf("%s",$coupon_desc['coupon_name']);
     $boxContent .= tep_draw_separator();
-    $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="smallText">' . CART_COUPON . '</td><td class="smallText" align="right" valign="bottom">' . '<a href="javascript:couponpopupWindow(\'' . tep_href_link(FILENAME_POPUP_COUPON_HELP, 'cID=' . $cc_id) . '\')">' . CART_COUPON_INFO . '</a>' . '</td></tr></table>';
+    $boxContent .= '<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td class="couponText"><a href="javascript:couponpopupWindow(\'' . tep_href_link(FILENAME_POPUP_COUPON_HELP, 'cID=' . $cc_id) . '\')">' . CART_COUPON . '</a></td><td class="couponText" align="right" valign="bottom">' . '<a href="javascript:couponpopupWindow(\'' . tep_href_link(FILENAME_POPUP_COUPON_HELP, 'cID=' . $cc_id) . '\')">' . $coupon['coupon_code'] . '</a>' . '</td></tr></table>';
 
   }
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution

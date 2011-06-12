@@ -244,13 +244,13 @@ ul.sf-menu li li li.sfHover ul {
 
 /*** arrows **/
 .sf-menu a.sf-with-ul {
-	padding-right: 	2.25em;
+	padding-right: 	2em;
 	min-width:		1px; /* trigger IE7 hasLayout so spans position accurately */
 }
 .sf-sub-indicator {
 	position:		absolute;
 	display:		block;
-	right:			.75em;
+	right:			0.6em;
 	top:			1.05em; /* IE6 only */
 	width:			10px;
 	height:			10px;

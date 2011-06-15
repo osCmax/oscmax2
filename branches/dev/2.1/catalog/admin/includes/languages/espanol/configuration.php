@@ -437,8 +437,6 @@ define('CT_DOWNLOAD_MAX_COUNT', 'Máximo número de descargas');
 define('CD_DOWNLOAD_MAX_COUNT', 'Establece el número máximo de descargas. 0 significa que no se autoriza la descarga.');
 define('CT_DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE', 'Valor estado actualización controlador descargas');
 define('CD_DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE', 'Qué estado de pedido restablece los días de descarga y el máximo nº de descargas - Por defecto es 4');
-define('CT_DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'Mensaje espera descarga activada');
-define('CD_DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'Mensaje de espera de descarga activada para controlador de descargas');
 define('CT_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Valor estado pedido controlador descargas');
 define('CD_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Valor de estado de pedido para controlador descargas - Por defecto = 2');
 

@@ -457,5 +457,5 @@ define('TEXT_QUESTION_TYPE', 'Type%20your%20question%20below:');
 define('TEXT_QUESTION_PRICE_ENQUIRY', 'Price%20Enquiry');
 define('TEXT_QUESTION_PRODUCT_NAME', 'Product%20Name:');
 
-
+define('DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'NOTE: Downloads are not available until payment has been confirmed.');
 ?>

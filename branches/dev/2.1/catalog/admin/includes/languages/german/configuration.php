@@ -604,8 +604,6 @@ define('CT_DYNAMIC_MOPICS_BIGIMAGES_DIR', 'Big Images Directory');
 define('CD_DYNAMIC_MOPICS_BIGIMAGES_DIR', 'The directory inside catalog/images where your big images are stored.');
 define('CT_DYNAMIC_MOPICS_THUMBS_DIR', 'Thumbnail Images Directory');
 define('CD_DYNAMIC_MOPICS_THUMBS_DIR', 'The directory inside catalog/images where you extra image thumbs are stored.');
-define('CT_DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR', 'Main Thumbnail In "Thumbnail Images Directory"');
-define('CD_DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR', 'If you store your product\'s main thumbnail in the "Thumbnail Images Directory" set this to true. If it is in the main image directory (uploaded via osCommerce admin) set it false.');
 define('CT_CATEGORY_IMAGES_DIR', 'Category Images Directory');
 define('CD_CATEGORY_IMAGES_DIR', 'The directory inside catalog/images where your category images are stored.');
 define('CT_DYNAMIC_MOPICS_PATTERN', 'Extra Image Pattern');

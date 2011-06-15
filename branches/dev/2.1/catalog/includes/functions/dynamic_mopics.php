@@ -36,6 +36,6 @@ $Id$
 	}
 	
 	function mopics_get_imagebase($image, $pre_append = '') {
-		return $pre_append . substr($image, ((DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR == 'true') ? strlen(DYNAMIC_MOPICS_THUMBS_DIR) : 0), ((DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR == 'true') ? (strrpos($image, '.') - strlen(DYNAMIC_MOPICS_THUMBS_DIR)) : strrpos($image, '.')) );
+		return $pre_append . substr($image, 0, strrpos($image, '.') );
 	}
 ?>

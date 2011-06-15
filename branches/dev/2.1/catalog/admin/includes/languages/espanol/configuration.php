@@ -607,8 +607,6 @@ define('CT_DYNAMIC_MOPICS_BIGIMAGES_DIR', 'Directorio imágenes grandes');
 define('CD_DYNAMIC_MOPICS_BIGIMAGES_DIR', 'El directorio dentro de catalog/images donde se almacenan las imágenes grandes.');
 define('CT_DYNAMIC_MOPICS_THUMBS_DIR', 'Directorio imágenes miniatura');
 define('CD_DYNAMIC_MOPICS_THUMBS_DIR', 'El directorio dentro de catalog/images donde se almacenan las imágenes en miniatura adicionales.');
-define('CT_DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR', 'Miniatura principal en "Directorio imágenes miniatura"');
-define('CD_DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR', 'Si se almacena la miniatura principal del producto en el "Directorio imágenes miniatura" poner esto a true. Si está en en el directorio principal de imágenes (subido en el administrador de osCmax) poner a false.');
 define('CT_CATEGORY_IMAGES_DIR', 'Directorio imágenes categorías');
 define('CD_CATEGORY_IMAGES_DIR', 'El directorio dentro de catalog/images donde se almacenan las imágenes de categorías.');
 define('CT_DYNAMIC_MOPICS_PATTERN', 'Patrón imagen adicional');

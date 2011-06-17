@@ -118,7 +118,7 @@ $Id$
 
    // All categories show/hide
    all_cats = $('input[name=all_cats]:radio').val();
-   if (all_cats === 1) {
+   if (all_cats !== 1) {
      $("#all_cats_row").hide(); 
    }
 

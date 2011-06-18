@@ -159,7 +159,7 @@ $system_permission_warnings = 0;
 
   <!-- Start php globals check -->
   <?php
-  if ( ((int)ini_get('register_globals') == 1) ) { $system_permission_warnings++; ?>
+  if ( ((int)ini_get('register_globals') == 1) ) { $system_permission_errors++; ?>
   <tr>
 	<td class="messageStackError"><?php echo tep_image(DIR_WS_ICONS . 'error.gif') . ' ' . WARNING_GLOBALS_ENABLED; ?></td>
   </tr>

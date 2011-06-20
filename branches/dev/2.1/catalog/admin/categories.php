@@ -483,7 +483,12 @@ $Id$
 		//++++ QT Pro: End Added code
 
           if (isset($_POST['products_image']) && tep_not_null($_POST['products_image']) && ($_POST['products_image'] != 'none')) {
-            $sql_data_array['products_image'] = tep_db_prepare_input($_POST['products_image']);
+			// Added to allow deletion of existing database entry when using admin/includes/functions/instant_update.php
+			if (($_POST['products_image']) == '**delete**') {
+			  $sql_data_array['products_image'] = '';	
+			} else {
+              $sql_data_array['products_image'] = tep_db_prepare_input($_POST['products_image']);
+			}
           }
 
           if ($action == 'insert_product') {

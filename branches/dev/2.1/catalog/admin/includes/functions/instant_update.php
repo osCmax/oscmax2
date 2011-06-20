@@ -85,6 +85,10 @@ $Id$
     
 	  // Finally lets check if the user has selected to delete this image
       if ($_POST['delete_image' . $img] == 'on') {
+		if ($img == 0) {
+		// If main image being deleted then set the database image name to **delete** so it can be removed later in categories.php
+		$products_image_name = '**delete**';
+		}
 		// Now remove the actual images
 		unlink($root_images_dir . ($dir ? $dir .'/' : '') . $base_image . $mopics_ext . $ext);
 		unlink($root_products_dir . ($dir ? $dir .'/' : '') . $base_image . $mopics_ext . $ext);

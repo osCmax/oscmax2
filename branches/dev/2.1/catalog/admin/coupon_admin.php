@@ -90,19 +90,38 @@ $Id$
       $delete_query=tep_db_query("delete from " . TABLE_COUPONS . " where coupon_id='" . (int)$coupon_id . "'");
       break;
     case 'update':
-      // get all HTTP_POST_VARS and validate
+	  $update_errors = 0;
+	
+      // get all $_POST and validate
       $_POST['coupon_code'] = trim($_POST['coupon_code']);
         $languages = tep_get_languages();
         for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
           $language_id = $languages[$i]['id'];
-          if ($_POST['coupon_name'][$language_id]) $_POST['coupon_name'][$language_id] = trim($_POST['coupon_name'][$language_id]);
+		  $language_name = $languages[$i]['name'];
+          if ($_POST['coupon_name'][$language_id]) {
+		    $_POST['coupon_name'][$language_id] = trim($_POST['coupon_name'][$language_id]);
+		  } else { // No coupon name entered
+		    $update_errors = 1;
+			$messageStack->add(ERROR_MISSING_COUPON_NAME . '<b>' . $language_name . '</b>', 'error');
+		  }
           if ($_POST['coupon_desc'][$language_id]) $_POST['coupon_desc'][$language_id] = trim($_POST['coupon_desc'][$language_id]);
         }
       $_POST['coupon_amount'] = trim($_POST['coupon_amount']);
-      $update_errors = 0;
+
+	  // Check the coupon has a value or freeshipping
       if ((!tep_not_null($_POST['coupon_amount'])) && (!tep_not_null($_POST['coupon_free_ship']))) {
         $update_errors = 1;
         $messageStack->add(ERROR_NO_COUPON_AMOUNT, 'error');
+      }
+	  // Check startdate not blank
+	  if ($_POST['coupon_startdate'] == '') {
+        $update_errors = 1;
+        $messageStack->add(ERROR_MISSING_START_DATE, 'error');
+      }
+	  // Check finishdate not blank
+	  if ($_POST['coupon_finishdate'] == '') {
+        $update_errors = 1;
+        $messageStack->add(ERROR_MISSING_FINISH_DATE, 'error');
       }
       $coupon_code = ((tep_not_null($_POST['coupon_code'])) ? $_POST['coupon_code'] : create_coupon_code());
 
@@ -736,10 +755,10 @@ $customer = tep_db_fetch_array($customer_query);
                       <table width="90%">
                         <tr>
                           <td class="main"><?php echo COUPON_NAME;?></td>
-                          <td class="main"><?php echo tep_draw_input_field('coupon_name[' . $languages[$i]['id'] . ']', $coupon_name[$language_id], ' size="50"'); ?></td>
+                          <td class="main"><?php echo tep_draw_input_field('coupon_name[' . $languages[$i]['id'] . ']', (isset($coupon_name[$language_id]) ? $coupon_name[$language_id] : $_POST['coupon_name'][$language_id]), ' size="50"') . TEXT_ENTRY_REQUIRED; ?></td>
                         </tr>
                         <tr>
-                          <td class="main" colspan="2"><?php echo COUPON_DESC; ?><br><?php echo (tep_draw_textarea_field('coupon_desc[' . $languages[$i]['id'] . ']', '50', '20', $coupon_desc[$language_id], 'class="ckeditor"')); ?></td>
+                          <td class="main" colspan="2"><?php echo COUPON_DESC; ?><br><?php echo (tep_draw_textarea_field('coupon_desc[' . $languages[$i]['id'] . ']', '50', '20', (isset($coupon_desc[$language_id]) ? $coupon_desc[$language_id] : $_POST['coupon_desc'][$language_id]), 'class="ckeditor"')); ?></td>
                         </tr>
                       </table>
                     </div>
@@ -751,16 +770,21 @@ $customer = tep_db_fetch_array($customer_query);
   
                 <tr>
                   <td align="left" class="main"><?php echo COUPON_AMOUNT; ?></td>
-                  <td align="left"><?php echo tep_draw_input_field('coupon_amount', $coupon_amount); ?></td>
+                  <td align="left"><?php echo tep_draw_input_field('coupon_amount', $coupon_amount) . TEXT_ENTRY_REQUIRED; ?></td>
                   <td align="left" class="main"><?php echo COUPON_AMOUNT_HELP; ?></td>
                 </tr>
                 <tr>
+                  <td align="left" class="main"><?php echo COUPON_FREE_SHIP; ?></td>
+                  <td align="left"><?php echo tep_draw_checkbox_field('coupon_free_ship', $coupon_free_ship); ?></td>
+                  <td align="left" class="main"><?php echo COUPON_FREE_SHIP_HELP; ?></td>
+                </tr>
+                <tr>
                   <td align="left" class="main"><?php echo COUPON_STARTDATE; ?></td>
-                  <td align="left"><?php echo tep_draw_input_field('coupon_startdate', (isset($coupon['coupon_start_date']) ? $coupon['coupon_start_date'] : ''), 'id="coupon_start_date"'); ?></td>
+                  <td align="left"><?php echo tep_draw_input_field('coupon_startdate', (isset($coupon['coupon_start_date']) ? $coupon['coupon_start_date'] : date("Y-m-d")), 'id="coupon_start_date"') . TEXT_ENTRY_REQUIRED; ?></td>
                 </tr>
                 <tr>
                   <td align="left" class="main"><?php echo COUPON_FINISHDATE; ?></td>
-                  <td align="left"><?php echo tep_draw_input_field('coupon_finishdate', (isset($coupon['coupon_expire_date']) ? $coupon['coupon_expire_date'] : ''), 'id="coupon_expire_date"'); ?></td>
+                  <td align="left"><?php echo tep_draw_input_field('coupon_finishdate', (isset($coupon['coupon_expire_date']) ? $coupon['coupon_expire_date'] : date("Y-m-d")), 'id="coupon_expire_date"') . TEXT_ENTRY_REQUIRED; ?></td>
                   <td align="left" class="main"><?php echo COUPON_FINISHDATE_HELP; ?></td>
                 </tr>
                 <tr>
@@ -770,11 +794,6 @@ $customer = tep_db_fetch_array($customer_query);
                   <td align="left" class="main"><?php echo COUPON_MIN_ORDER; ?></td>
                   <td align="left"><?php echo tep_draw_input_field('coupon_min_order', $coupon_min_order); ?></td>
                   <td align="left" class="main"><?php echo COUPON_MIN_ORDER_HELP; ?></td>
-                </tr>
-                <tr>
-                  <td align="left" class="main"><?php echo COUPON_FREE_SHIP; ?></td>
-                  <td align="left"><?php echo tep_draw_checkbox_field('coupon_free_ship', $coupon_free_ship); ?></td>
-                  <td align="left" class="main"><?php echo COUPON_FREE_SHIP_HELP; ?></td>
                 </tr>
                 <tr>
                   <td align="left" class="main"><?php echo COUPON_CODE; ?></td>

@@ -1920,6 +1920,8 @@ INSERT INTO configuration VALUES (633, 'CT_MODULE_LOYALTY_DISCOUNT_INC_SHIPPING'
 INSERT INTO configuration VALUES (632, 'CT_MODULE_LOYALTY_DISCOUNT_SORT_ORDER', 'MODULE_LOYALTY_DISCOUNT_SORT_ORDER', '4', 'CD_MODULE_LOYALTY_DISCOUNT_SORT_ORDER', 6, 2, NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (631, 'CT_MODULE_LOYALTY_DISCOUNT_STATUS', 'MODULE_LOYALTY_DISCOUNT_STATUS', 'false', 'CD_MODULE_LOYALTY_DISCOUNT_STATUS', 6, 1, NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (1073, 'CT_MOVE_TAX_TO_TOTAL_AMOUNT', 'MOVE_TAX_TO_TOTAL_AMOUNT', 'True', 'CD_MOVE_TAX_TO_TOTAL_AMOUNT', 6, 4, NULL, now(), NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), ');
+INSERT INTO configuration VALUES (646, 'CT_INDEX_TAB', 'INDEX_TAB', '6', 'CD_INDEX_TAB', 6, 100, NULL, now(), NULL, NULL);
+
 
 # Configuration ID: 7 - Shipping/Packaging
 INSERT INTO configuration VALUES (99, 'CT_SHIPPING_ORIGIN_COUNTRY', 'SHIPPING_ORIGIN_COUNTRY', '223', 'CD_SHIPPING_ORIGIN_COUNTRY', '7', '1', NULL, now(), 'tep_get_country_name', 'tep_cfg_pull_down_country_list(');

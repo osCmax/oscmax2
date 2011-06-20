@@ -11,7 +11,7 @@ $Id$
 */
 ?>
 <!-- START STATS LOGGING -->
-<table border="0" cellspacing="0" cellpadding="0" align="center" width="90%">
+<table border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
 	<tr>
     	<td valign="top">
         <table border="0" cellspacing="0" cellpadding="2" align="center" width="100%">

@@ -11,6 +11,11 @@ $Id$
 */
 
   require('includes/application_top.php');
+  
+  if (isset($_GET['setasdefault'])) {
+    tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . $_GET['setasdefault'] . "' where configuration_key = 'INDEX_TAB'");
+    tep_redirect(tep_href_link(FILENAME_DEFAULT));
+  }
 
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -77,27 +82,45 @@ $Id$
       </td>
     </tr>
   </table>
+  <table width="100%">
+    <tr valign="top" align="right">
+      <?php if (INDEX_TAB == '1') { ?>
+      <td class="setasdefault"><?php echo SET_DEFAULT; ?></td><td width="20"><?php echo tep_image(DIR_WS_ICONS . 'star_on.png'); ?></td>
+      <?php } else { ?>
+      <td class="setasdefault"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=1') . '">' . SET_DEFAULT . '</a>'; ?></td><td width="20"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=1') . '">' . tep_image(DIR_WS_ICONS . 'star_off.png') . '</a>'; ?></td>
+      <?php } ?>
+    </tr> 
+  </table>
 </div>
 
 <div id="tabs-2" class="ui-tabs ui-tabs-container ui-tabs-hide">
-<table width="95%" align="center">
-<tr valign="top">
-<td align="center" width="50%">
-  <table border="0" cellspacing="0" cellpadding="2" align="center">
-    <tr>
-      <td><?php include('includes/modules/dashboard/products_viewed.php'); ?></td>
+  <table width="95%" align="center">
+    <tr valign="top">
+      <td align="center" width="50%">
+        <table border="0" cellspacing="0" cellpadding="2" align="center">
+          <tr>
+            <td><?php include('includes/modules/dashboard/products_viewed.php'); ?></td>
+          </tr>
+        </table>
+      </td>
+      <td align="center" width="50%">
+        <table border="0" cellspacing="0" cellpadding="2" align="center">
+          <tr>
+            <td><?php include('includes/modules/dashboard/products_purchased.php'); ?></td>
+          </tr>
+        </table>
+      </td>
     </tr>
   </table>
-</td>
-<td align="center" width="50%">
-  <table border="0" cellspacing="0" cellpadding="2" align="center">
-    <tr>
-      <td><?php include('includes/modules/dashboard/products_purchased.php'); ?></td>
-    </tr>
+  <table width="100%">
+    <tr valign="top" align="right">
+      <?php if (INDEX_TAB == '2') { ?>
+      <td class="setasdefault"><?php echo SET_DEFAULT; ?></td><td width="20"><?php echo tep_image(DIR_WS_ICONS . 'star_on.png'); ?></td>
+      <?php } else { ?>
+      <td class="setasdefault"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=2') . '">' . SET_DEFAULT . '</a>'; ?></td><td width="20"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=2') . '">' . tep_image(DIR_WS_ICONS . 'star_off.png') . '</a>'; ?></td>
+      <?php } ?>
+    </tr> 
   </table>
-</td>
-</tr>
-</table>
 </div>
 
 <div id="tabs-3" class="ui-tabs-container ui-tabs-hide">
@@ -105,6 +128,15 @@ $Id$
     <tr valign="top">
       <td><?php include('includes/modules/dashboard/admin_logging.php'); ?></td>
     </tr>
+  </table>
+  <table width="100%">
+    <tr valign="top" align="right">
+      <?php if (INDEX_TAB == '3') { ?>
+      <td class="setasdefault"><?php echo SET_DEFAULT; ?></td><td width="20"><?php echo tep_image(DIR_WS_ICONS . 'star_on.png'); ?></td>
+      <?php } else { ?>
+      <td class="setasdefault"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=3') . '">' . SET_DEFAULT . '</a>'; ?></td><td width="20"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=3') . '">' . tep_image(DIR_WS_ICONS . 'star_off.png') . '</a>'; ?></td>
+      <?php } ?>
+    </tr> 
   </table>
 </div>
 
@@ -114,6 +146,15 @@ $Id$
       <td><?php include('includes/modules/dashboard/customer_logging.php'); ?></td>
     </tr>
   </table>
+  <table width="100%">
+    <tr valign="top" align="right">
+      <?php if (INDEX_TAB == '4') { ?>
+      <td class="setasdefault"><?php echo SET_DEFAULT; ?></td><td width="20"><?php echo tep_image(DIR_WS_ICONS . 'star_on.png'); ?></td>
+      <?php } else { ?>
+      <td class="setasdefault"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=4') . '">' . SET_DEFAULT . '</a>'; ?></td><td width="20"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=4') . '">' . tep_image(DIR_WS_ICONS . 'star_off.png') . '</a>'; ?></td>
+      <?php } ?>
+    </tr> 
+  </table>
 </div>
 
 <div id="tabs-5" class="ui-tabs-container ui-tabs-hide">
@@ -122,6 +163,15 @@ $Id$
       <td><?php include('includes/modules/dashboard/http_error.php'); ?></td>
     </tr>
   </table>
+  <table width="100%">
+    <tr valign="top" align="right">
+      <?php if (INDEX_TAB == '5') { ?>
+      <td class="setasdefault"><?php echo SET_DEFAULT; ?></td><td width="20"><?php echo tep_image(DIR_WS_ICONS . 'star_on.png'); ?></td>
+      <?php } else { ?>
+      <td class="setasdefault"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=5') . '">' . SET_DEFAULT . '</a>'; ?></td><td width="20"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=5') . '">' . tep_image(DIR_WS_ICONS . 'star_off.png') . '</a>'; ?></td>
+      <?php } ?>
+    </tr> 
+  </table>
 </div>
 
 <div id="tabs-6" class="ui-tabs-container ui-tabs-hide">
@@ -129,6 +179,15 @@ $Id$
     <tr valign="top">
       <td><?php include('includes/modules/dashboard/system.php'); ?></td>
     </tr>
+  </table>
+  <table width="100%">
+    <tr valign="top" align="right">
+      <?php if (INDEX_TAB == '6') { ?>
+      <td class="setasdefault"><?php echo SET_DEFAULT; ?></td><td width="20"><?php echo tep_image(DIR_WS_ICONS . 'star_on.png'); ?></td>
+      <?php } else { ?>
+      <td class="setasdefault"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=6') . '">' . SET_DEFAULT . '</a>'; ?></td><td width="20"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'setasdefault=6') . '">' . tep_image(DIR_WS_ICONS . 'star_off.png') . '</a>'; ?></td>
+      <?php } ?>
+    </tr> 
   </table>
 </div>
 

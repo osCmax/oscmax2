@@ -118,7 +118,10 @@ FORM { display: inline; }
 .OutofStockAttrib { font-family: Verdana, Arial, sans-serif; font-size: 10px;  background-color: #FFCACB; color: #000000; }
 
 /*Header*/
-a.header { font-family: Verdana, Arial, sans-serif; font-size: 12px; color: #606060; text-decoration: none;}
+a.header { font-family: Verdana, Arial, sans-serif; font-size: 12px; color: #606060; text-decoration: none; }
+
+/*Set as Default*/
+td.setasdefault { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #999999; vertical-align:bottom; }
 
 /*Footer*/
 .footer { font-family: Verdana, Arial, sans-serif; font-size: 10px;  background-color: #606060; color: #FFFFFF; }

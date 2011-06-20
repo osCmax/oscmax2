@@ -84,7 +84,7 @@ $Id$
 	} 
 	
 	$("#tabs").tabs();
-    $("#tabs").tabs("select","tabs-6");
+    $("#tabs").tabs("select","tabs-<?php echo INDEX_TAB; ?>");
 	
 
     $("#descriptiontabs0").tabs();

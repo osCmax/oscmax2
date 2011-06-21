@@ -15,7 +15,7 @@ $Id$
 ?>
 <!-- search //-->
 <?php
-  $boxHeading = BOX_HEADING_SEARCH;
+  $boxHeading = '<a href="' . tep_href_link(FILENAME_ADVANCED_SEARCH) . '">' . BOX_HEADING_SEARCH . '</a>';
   
   $corner_top_left = 'rounded';
   $corner_top_right = 'rounded';

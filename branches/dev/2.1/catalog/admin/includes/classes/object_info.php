@@ -17,7 +17,7 @@ $Id$
       reset($object_array);
       while (list($key, $value) = each($object_array)) {
 		// Check if value is defined
-		if (constant($value) != null) {
+		if ((defined($value)) && (constant($value) != null)) {
           $this->$key = constant($value);
 		} else {
 		  $this->$key = tep_db_prepare_input($value);

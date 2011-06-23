@@ -41,7 +41,7 @@ $Id$
           </tr>
         </table></td>
       </tr>
-      <?php if ($message <>'') {
+      <?php if ((isset($message)) &&($message <> '')) {
 		  	$message_type = substr($message,0,3);
 			$message_check = substr(SUCCESS_1,0,3);
 				if ($message_type == $message_check) { ?>

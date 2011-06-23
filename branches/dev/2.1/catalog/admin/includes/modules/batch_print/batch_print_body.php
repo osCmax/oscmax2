@@ -26,7 +26,7 @@ exit;
 }
 
 $file_type_array = array();
-$file_type_array[] = array('id' => $file, 'text' => PULL_DOWN_DEFAULT_DOTS);
+$file_type_array[] = array('id' => '', 'text' => PULL_DOWN_DEFAULT_DOTS);
 while ($file = readdir($resc)) {
   $ext = strrchr($file, ".");
   if ($ext == ".php") {

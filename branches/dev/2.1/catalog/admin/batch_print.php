@@ -15,7 +15,7 @@ $Id$
   require(DIR_WS_FUNCTIONS . 'batch_print.php');
   
   $pageloop = "0";
-  if ($_GET['mkey']) {
+  if (isset($_GET['mkey'])) {
 
     $key = $_GET['mkey']; 
     $message = $error[$key]; 

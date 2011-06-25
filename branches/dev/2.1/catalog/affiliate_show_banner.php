@@ -121,7 +121,7 @@ if (isset($_POST['affiliate_pbanner_id'])) $prod_banner_id = $_POST['affiliate_p
     }
   }
 
-  if ($prod_banner_id) {
+  if (isset($_GET['affiliate_pbanner_id']) || isset($_POST['affiliate_pbanner_id']) ) {
     $banner_id = 1; // Banner ID for these Banners is one
     $sql = "select products_image from " . TABLE_PRODUCTS . " where products_id = '" . $prod_banner_id  . "' and products_status = 1";
     $banner_values = tep_db_query($sql);

@@ -49,7 +49,6 @@ define('TEXT_REDEMPTIONS_CUSTOMER', 'Dieser Kunde');
 define('TEXT_NO_FREE_SHIPPING', 'Kein Gratisversand');
 
 define('NOTICE_EMAIL_SENT_TO', 'Hinweis: E-Mail gesendet an: %s');
-define('ERROR_NO_CUSTOMER_SELECTED', 'Fehler: Sie haben keinen Kunden ausgewählt.');
 define('COUPON_NAME', 'Gutscheinbezeichnung');
 //define('COUPON_VALUE', 'Coupon Value');
 define('COUPON_AMOUNT', 'Gutscheinwert');
@@ -69,7 +68,6 @@ define('DATE_MODIFIED', 'Bearbeitet am');
 define('TEXT_HEADING_NEW_COUPON', 'Neuen Aktionsgutschein erstellen');
 define('TEXT_NEW_INTRO', 'Bitte vervollständigen Sie die Angaben zum neuen Aktionsgutschein.<br>');
 
-
 define('COUPON_NAME_HELP', 'Kurzbezeichnung des Gutscheines');
 define('COUPON_AMOUNT_HELP', 'Wert des Gutscheins, entweder als Fixbetrag oder als Prozentsatz mit einem abschließenden %-Zeichen.');
 define('COUPON_CODE_HELP', 'Sie können Ihren eigenen Code angeben, oder das Feld freilassen, damit ein Code automatisch generiert wird.');
@@ -82,8 +80,6 @@ define('COUPON_USES_COUPON_HELP', 'Eine Angabe, wie oft der Gutschein maximal ve
 define('COUPON_USES_USER_HELP', 'Eine Angabe, wie oft der Gutschein von einem einzelnen Kunden maximal verwendet werden kann. Lassen Sie das Feld leer, wenn Sie eine unbegrenzte Verwendung wünschen.');
 define('COUPON_PRODUCTS_HELP', 'Eine kommaseparierte Liste von Produkt IDs, für die dieser Gutschein gilt. Lassen Sie das Feld leer, wenn Sie den Gutschein nicht auf bestimmte Produkte beschränken möchten.');
 define('COUPON_CATEGORIES_HELP', 'Eine kommaseparierte Liste von cpaths, für die dieser Gutschein gilt. Lassen Sie das Feld leer, wenn Sie den Gutschein nicht auf bestimmte Kategorien beschränken möchten.');
-define('ERROR_NO_COUPON_AMOUNT', 'Fehler: Sie haben keinen Gutscheinwert angegeben. Wählen Sie entweder einen Wert oder Gratisversand.');
-define('ERROR_COUPON_EXISTS', 'Fehler: Der Gutscheincode wird bereits von einem anderen Gutschein verwendet.');
 define('COUPON_BUTTON_EMAIL_VOUCHER', 'Gutschein versenden');
 define('COUPON_BUTTON_EDIT_VOUCHER', 'Gutschein bearbeiten');
 define('COUPON_BUTTON_DELETE_VOUCHER', 'Gutschein löschen');
@@ -91,7 +87,16 @@ define('COUPON_BUTTON_VOUCHER_REPORT', 'Gutschein Bericht');
 define('COUPON_BUTTON_PREVIEW', 'Gutscheinvorschau');
 define('COUPON_STATUS', 'Status');
 define('COUPON_STATUS_HELP', 'Ändern Sie den Status auf ' . IMAGE_ICON_STATUS_RED . ', um den Gutscheines zu sperren.');
-
 define('COUPON_BUTTON_BACK', 'Zurück');
 define('COUPON_BUTTON_CONFIRM', 'Bestätigen');
+
+define('TEXT_ENTRY_REQUIRED', '&nbsp;<span style="color: #ff0000;">*</span>');
+
+define('ERROR_NO_CUSTOMER_SELECTED', 'Fehler: Es wurde kein Kunde ausgewählt.');
+define('ERROR_NO_COUPON_AMOUNT', 'Fehler: Es wurde kein Gutscheinwert eingegeben. Geben Sie entweder einen Gutscheinwert ein oder wählen Sie Frachtkostenfrei.');
+define('ERROR_COUPON_EXISTS', 'Fehler: Es existiert bereits ein Gutschein mit diesem Code.');
+define('ERROR_MISSING_COUPON_NAME', 'Fehler: You have not entered a coupon name in language ');
+define('ERROR_MISSING_START_DATE', 'Fehler: Sie müssen ein <b>Startdatum</b> für Ihren Gutschein eingeben.');
+define('ERROR_MISSING_FINISH_DATE', 'Fehler: Sie müssen ein <b>Ablaufdatum</b> für Ihren Gutschein eingeben.');
+
 ?>

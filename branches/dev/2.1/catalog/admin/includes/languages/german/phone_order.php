@@ -11,8 +11,9 @@ $Id$
 */
 
 define('HEADING_TITLE', 'Telefonische Bestellung');
+define('FILTER_CUSTOMER', 'Kundenliste filtern');
 define('SELECT_CUSTOMER', 'Kunden auswählen');
-define('SEARCH', 'Suche');
+define('SEARCH', 'Suchen');
 define('SUBMIT', 'Übermitteln');
 define('CREATE_NEW', 'Oder erstellen Sie einen neue Kunden :');
 define('NEW_CUSTOMER', 'Neuer Kunde');

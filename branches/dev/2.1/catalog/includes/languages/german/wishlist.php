@@ -11,6 +11,7 @@ $Id$
 */
 
 define('NAVBAR_TITLE_WISHLIST','Meine Wunschliste');
+define('NAVBAR_TITLE', 'Wunschliste');
 define('NAVBAR_TITLE_1','Wunschliste');
 define('HEADING_TITLE', 'Meine Wunschliste enthält:');
 define('HEADING_TITLE2', 's Wunschliste enthält:');
@@ -29,7 +30,7 @@ define('WISHLIST_EMAIL_SUBJECT', 'hat Ihnen eine Wunschliste bei ' . STORE_NAME 
 define('WISHLIST_SENT', 'Ihre Wunschliste wurde versendet.');
 define('WISHLIST_EMAIL_LINK', '
 
-$from_name\'s öffentliche Wunschliste ist hier zu finden:
+$from_name\'s öffentliche Wunschliste befindet sich hier:
 $link
 
 Vielen Dank,

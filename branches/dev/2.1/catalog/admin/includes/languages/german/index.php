@@ -117,6 +117,7 @@ define('WARNING_ADMIN_CONFIG_FILE_WRITEABLE', 'Fehler: Die Konfigurationsdatei: 
 
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Fehler: Das Sessions Verzeichnis existiert nicht: ' . tep_session_save_path() . '. Sessions funktionieren nicht, solange dieses Verzeichnis fehlt.');
 define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Warnung: Das Sessions Verzeichnis ist nicht beschreibbar: ' . tep_session_save_path() . '. Sessions funktionieren nicht, solange das Verzeichnis schreibgeschützt ist.');
+define('WARNING_GLOBALS_ENABLED', 'Fehler: Sie haben Register Globals auf On. Aus Sicherheits- und Funktionalitätsgründen verlangt osCmax die Deaktivierung.');
 define('WARNING_SEO_PHP_VERSION_LOW', 'Fehler: Auf Ihrem Webserver läuft ' . PHP_VERSION . ', was nicht ausreichend zum Betrieb der SEO URLs ist. Bitte deaktivieren Sie dieses Modul, bis Sie PHP aktualisiert haben.');
 define('WARNING_SESSION_AUTO_START', 'Warnung: session.auto_start ist aktiviert - bitte deaktivieren Sie diese PHP Funktion in der php.ini und starten Sie den Webserver neu.');
 define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Warnung: Das Verzeichnis der herunterladbaren Produkte existiert nicht: ' . dirname(DIR_FS_CATALOG) . '/download. Die herunterladbaren Produkte werden nicht funktionieren, solange kein gültiges Verzeichnis existiert.');
@@ -125,4 +126,6 @@ define('WARNING_PHP_FILES_IN_BIGIMAGES', 'Warnung: Es befinden sich Dateien in '
 define('WARNING_PHP_FILES_IN_PRODUCTS', 'Warnung: Es befinden sich Dateien in ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_PRODUCTS_DIR . ', die keine Bilder sind. Dies könnte auf eine Infizierung Ihres Servers durch bösartige Software hindeuten.');
 define('WARNING_PHP_FILES_IN_THUMBS', 'Warnung: Es befinden sich Dateien in ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_THUMBS_DIR . ', die keine Bilder sind. Dies könnte auf eine Infizierung Ihres Servers durch bösartige Software hindeuten.');
 define('DASHBOARD_AFFILIATE_EMAIL_ERROR', 'Warnung: Die Affiliate Infobox ist in Ihrem Shop aktiviert, aber Sie haben die Standard-E-Mail-Adresse nicht geändert. Bitte <u><a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=28', 'NONSSL') . '">deaktivieren Sie dieses Modul</a></u>, oder <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=35&amp;cID=1204&amp;action=edit', 'NONSSL') . '"> ändern Sie die E-Mail-Adresse</a></u>.');
+
+define('SET_DEFAULT', 'Standardmäßiger Tab:');
 ?>

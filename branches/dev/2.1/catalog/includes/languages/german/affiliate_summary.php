@@ -38,13 +38,13 @@ define('TEXT_VISITS', 'Besucher: ');
 define('TEXT_TRANSACTIONS', 'Verkäufe: ');
 define('TEXT_CONVERSION', 'Verkäufe/Klicks: ');
 define('TEXT_AMOUNT', 'Gesamtumsatz: ');
-define('TEXT_AVERAGE', 'Umsatz/Verkäufe: ');
+define('TEXT_SALES_AVERAGE', 'Durchschnittlicher Umsatz: ');
 define('TEXT_COMMISSION_RATE', 'Provisonrate: ');
 define('TEXT_PAYPERSALE_RATE', 'Provision pro Verkauf: ');
 define('TEXT_CLICKTHROUGH_RATE', 'Klickrate: ');
 define('TEXT_COMMISSION', 'Provisionsbetrag: ');
 define('HEADING_SUMMARY_HELP', 'Affiliate Hilfe');
-define('TEXT_CLICKS_1','Klicken Sie auf');
+define('TEXT_CLICKS_1','Klicken Sie auf ');
 define('TEXT_CLICKS_2','um eine Beschreibung der einzelnen Kategorien zu sehen.');
 
 define('HEADING_IMPRESSIONS_HELP', 'Bannerschaltungen Hilfe');

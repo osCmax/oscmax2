@@ -29,6 +29,7 @@ define('TEXT_SLIDESHOW_SORT_ORDER', 'Sortierung');
 define('TEXT_SLIDESHOW_DATE_ADDED', 'Hinzugefügt am: ');
 define('TEXT_SLIDESHOW_LAST_MODIFIED', 'Geändert am: ');
 define('TEXT_SLIDESHOW_DELETE_INTRO', 'Sind Sie sicher, dass Sie dieses Slidebild löschen möchten? ');
+define('TEXT_DELETE_IMAGE', 'Slidebild löschen?');
 
 define('TEXT_INFO_HEADING_NEW_SLIDESHOW', 'Neues Slidebild');
 define('TEXT_INFO_HEADING_EDIT_SLIDESHOW', 'Slidebild bearbeiten');

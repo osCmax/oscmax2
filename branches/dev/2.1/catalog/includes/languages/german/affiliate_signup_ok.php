@@ -12,5 +12,5 @@ $Id$
 
 define('NAVBAR_TITLE', 'Affiliate Anmeldung');
 define('HEADING_TITLE', 'Herzlichen Glückwunsch');
-define('TEXT_ACCOUNT_CREATED', 'Herzlichen Glückwunsch! Ihr neues Affiliatekonto wurde erfolgreich erstellt. Eine Bestätigung über Ihr neues Konto wird Ihnen per E-Mail zugesendet. Falls Sie dieses E-Mail nicht innerhalb einer Stunde erhalten, <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">kontaktieren Sie uns</a> bitte.<br><br>Wenn Sie Fragen haben, <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT) . '">kontaktieren Sie uns</a> bitte.');
+define('TEXT_ACCOUNT_CREATED', 'Herzlichen Glückwunsch! Ihre Anmeldung zu Ihrem neuen Affiliate-Konto wurde versendet! Sie werden in Kürze eine E-Mail mit wichtigen Informationen zu Ihrem Affiliate-Konto erhalten, die unter Anderem Ihre Anmeldeinfornationen enthält. Falls Sie diese E-Mail nicht innerhalb einer Stunde erhalten, <a href="' . tep_href_link(FILENAME_CONTACT_US, 'source=affiliate&amp;enquiry=' . TEXT_AFFILIATE_CONTACT_TEXT) . '">kontaktieren Sie uns</a>.<br><br>Wenn Sie <small><b>IRGENDEINE</b></small> Frage zum Affiliateprogramm haben, <a href="' . tep_href_link(FILENAME_CONTACT_US, 'source=affiliate&amp;enquiry=' . TEXT_AFFILIATE_CONTACT_TEXT) . '">kontaktieren Sie uns</a>.');
 ?>

@@ -36,8 +36,8 @@ define('IMAGE_CATALOG', 'Catalog');
 
 // Start Page
 define('TEXT_WELCOME_TO_OSCMAX', 'Willkommen bei osCmax ');
-define('TEXT_INDEX_MAIN_BLOCK', '<p>Mit osCmax können Sie weltweit Produkte über Ihren eigenen Online-Shop vertreibe. Verwalten Sie Produkte, Kunden, Bestellungen, Newsletter, Sonderangebote und mehr, um Ihren Onlineshop zum Erfolg zu führen.</p>
-  <p>osCmax basiert auf osCommerce Online Merchant 2.2 und gestaltet die Entwicklung Ihrer Site schneller und einfacher als jemals zuvor. osCmax ist mit osCommerce Online Merchant 2.2 abwärtskompatibel. Sie profitieren damit von der größten Community einer Shoplösung: Über 140,000 registrierte Shop-Betreiber und Entwickler geben Hilfestellung und haben über 4.000 Erweiterungen entwickelt, die die Funktionalität und das Potential Ihres Shops erweitern.</p>
+define('TEXT_INDEX_MAIN_BLOCK', '<p>Mit osCmax können Sie weltweit Produkte über Ihren eigenen Online-Shop vertreiben. Verwalten Sie Produkte, Kunden, Bestellungen, Newsletter, Sonderangebote und mehr, um Ihren Onlineshop zum Erfolg zu führen.</p>
+  <p>osCmax basiert auf osCommerce Online Merchant 2.2 und macht die Entwicklung Ihrer Site schneller und einfacher als jemals zuvor. osCmax ist mit osCommerce Online Merchant 2.2 abwärtskompatibel. Somit profitieren Sie von der größten Community einer Shoplösung: Über 140,000 registrierte Shop-Betreiber und Entwickler geben Hilfestellung und haben über 4.000 Erweiterungen entwickelt, die die Funktionalität und das Potential Ihres Shops erweitern.</p>
   <p>osCmax und seine Erweiterunge sind kostenlos unter Verwendung einer Open-Source-Lizenz verfügbar, damit Sie schneller und ohne Einschränkungen oder Lizenzgebühren online verkaufen können.</p><p>&nbsp;</p><p>&nbsp;</p><br />');
 define('TEXT_REGISTER_GLOBALS_ERROR', 'Die Kompatibilität mit register_globals wird seit PHP 4.3+ unterstützt. Diese Einstellung <u>muss aktiviert werden</u>, da eine ältere PHP Version verwendet wird.');
 define('TEXT_PERMISSIONS_ERROR', '<p>Der Webserver kann die Installationsparameter nicht in seine Konfigurationsdateien speichern.</p><p>Bei den folgenden Dateien müssen die Zugriffsberechtigungen auf world-writeable (chmod 777) gesetzt werden:</p><p></p>');
@@ -55,7 +55,7 @@ define('TEXT_DATABASE_USERNAME_DESC', 'Der Benutzername wird zur Verbindungsaufn
 define('TEXT_DATABASE_PASSWORD', 'Passwort');
 define('TEXT_DATABASE_PASSWORD_DESC', 'Das Passwort wird zur Verbindungsaufnahme mit dem Datenbankserver benötigt.');
 define('TEXT_DATABASE_NAME', 'Datenbankname');
-define('TEXT_DATABASE_NAME_DESC', 'Diese Datenbank wird die Shopdaten aufnehmen.');
+define('TEXT_DATABASE_NAME_DESC', 'Diese Datenbank wird die Shopdaten speichern.');
 define('TEXT_DATABASE_SUCCESS', 'Datenbank erfolgreich importiert.');
 define('TEXT_DATABASE_IMPORTING', 'Die Datenbankstruktur wird jetzt importiert. Bitte haben Sie Geduld während dieses Vorganges.');
 define('TEXT_DATABASE_PROBLEM', 'Beim Datenbankimport ist ein Fehler aufgetreten:<br><br>%s<br><br>Bitte überprüfen Sie die Verbindungsparameter und versuchen Sie es erneut.');

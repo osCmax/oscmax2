@@ -110,7 +110,8 @@ define('ERROR_CATALOG_THUMBS_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Bildverzeic
 define('ERROR_CANNOT_MOVE_CATEGORY_TO_PARENT', 'Fehler: Die Kategorie kann nicht in ihre eigene Unterkategorie verschoben werden.');
 
 //Select Product Image Directory & Instant Update For Products
-define('TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_1', 'Fehler: - Der angegebene Bilderordner ');
+define('TEXT_IMAGE_TITLE', 'Bilder Upload &amp Verwaltung');
+define('TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_1', 'Fehler: - Der angegebene \'images\' Bilderordner ');
 define('TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_2', ' existiert nicht auf dem Server!.');
 define('TEXT_PRODUCTS_IMAGE_DIRECTORY', 'Bilderordner:');
 define('TEXT_PRODUCTS_IMAGE_ROOT_DIRECTORY', 'Bilderordner');
@@ -120,6 +121,15 @@ define('TEXT_PRODUCTS_INSERT_PRODUCT', 'Einfügen');
 define('TEXT_PRODUCTS_WITHOUT_PREVIEW', ' ohne Vorschau ');
 define('TEXT_PRODUCTS_MOPICS', 'Extrabild:');
 define('TEXT_MOPICS_WARNING', 'Wählen Sie einen Bilderordner VOR dem Hinaufladen');
+
+//Multi image upload 
+define('TEXT_MOPICS_CONTENT', 'Dynamic Mopics benötigt alle Bilder im selben Format, zB jpg oder png. Sie können Bildformate<b>nicht</b> mischen.');
+define('TEXT_UPLOAD_IMAGES', '<b>Bild hochladen</b>');
+define('TEXT_CURRENT_IMAGES', '<b>Aktuelles Bild</b>');
+define('TEXT_DELETE_IMAGES', '<b>Löschen?</b>');
+define('TEXT_EXTRA_IMAGE', 'Zusätzliches Bild');
+define('TEXT_MOPICS_ERROR', 'Bildfolgefehler');
+define('TEXT_MOPICS_ERROR_HELP', 'Dynamic Mopics müssen fortlaufend benannt sein und es dürfen keine Bilder fehlen. Wenn ein Bild fehlt (zB _1 -> _3), dann werden die Bilder nach der ersten Lücke nicht mehr angezeigt.');
 
 define('TEXT_SHIPPING_DIMENSIONS', 'Packmaß');
 

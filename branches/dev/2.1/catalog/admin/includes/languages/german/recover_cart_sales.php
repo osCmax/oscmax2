@@ -10,9 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('MESSAGE_STACK_CUSTOMER_ID', 'Warenkorb von Kunden-ID ');
+define('MESSAGE_STACK_CUSTOMER_ID', 'Warenkorb des Kunden ');
 define('MESSAGE_STACK_DELETE_SUCCESS', ' erfolgreich gelöscht');
-define('HEADING_TITLE', 'Recover Cart Sales v2.22');
+define('HEADING_TITLE', 'Recover Cart Sales');
 define('HEADING_EMAIL_SENT', 'E-mail Sende-Report');
 define('EMAIL_TEXT_LOGIN', 'Melden Sie sich hier an:');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
@@ -22,8 +22,8 @@ define('EMAIL_TEXT_NEWCUST_INTRO', "\n\n" . 'Vielen Dank für Ihren Besuch bei ' 
                                    ' und Ihr uns entgegengebrachtes Vertrauen.  ');
 define('EMAIL_TEXT_CURCUST_INTRO', "\n\n" . 'Vielen Dank für Ihren erneuten Besuch bei ' .
                                    STORE_NAME . ' und Ihr wiederholtes uns entgegengebrachtes Vertrauen.  ');
-define('EMAIL_TEXT_BODY_HEADER', 'Wir haben gesehen, daß Sie bei Ihrem Besuch in unserem Onlineshop den Warenkorb mit folgenden ' .
-                                 'Artikeln gefüllt haben aber den Einkauf nicht vollständig durchgeführt haben. ' .
+define('EMAIL_TEXT_BODY_HEADER', 'Uns ist aufgefallen, daß Sie bei Ihrem Besuch in unserem Onlineshop den Warenkorb mit folgenden ' .
+                                 'Artikeln gefüllt, jedoch Ihren Einkauf nicht vollständig abgeschlossen haben. ' .
                                  "\n\n" . 'Inhalt Ihres Warenkorbes:' . "\n\n");
 define('EMAIL_TEXT_BODY_FOOTER', 'Wir sind immer bemüht unseren Service ' .
                                  'im Interesse unserer Kunden zu verbessern. Aus diesem Grund interessiert es uns natürlich, was die ' .
@@ -54,5 +54,6 @@ define('TEXT_CURRENT_CUSTOMER', 'Kunde');
 define('TEXT_SEND_EMAIL', 'Sende E-mail');
 define('TEXT_RETURN', '[Klick hier um zurückzugehen]');
 define('TEXT_NOT_CONTACTED', 'Nicht kontaktiert');
-define('PSMSG', 'Zusätzliche Nachricht (PS) am Ende der Mail: ');
+define('PSMSG', 'Zusätzliche Nachricht am Ende der E-Mail: ');
+define('TEXT_NO_CARTS_FOUND', 'Es wurden keine verworfenen Warenkörbe im ausgewählten Zeitraum gefunden.');
 ?>

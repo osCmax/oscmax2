@@ -13,7 +13,7 @@ $Id$
 define('HEADING_COUPON_HELP', 'Hilfe Gutschein');
 define('TEXT_CLOSE_WINDOW', 'Fenster schliessen [x]');
 define('TEXT_COUPON_HELP_HEADER', 'Ihr Gutschein wurde erfolgreich eingelöst.');
-define('TEXT_COUPON_HELP_NAME', '<br><br>Gutscheinname : %s');
+define('TEXT_COUPON_HELP_NAME', 'Gutscheinname : %s');
 define('TEXT_COUPON_HELP_FIXED', '<br><br>Der Gutscheinwert beträgt %s ');
 define('TEXT_COUPON_HELP_MINORDER', '<br><br>Der Mindestbestellwert beträgt %s ');
 define('TEXT_COUPON_HELP_FREESHIP', '<br><br>Mit diesem Gutschein ist Ihre Bestellung versandkostenfrei');

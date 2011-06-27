@@ -181,6 +181,7 @@ define('BOX_CONFIGURATION_ACCOUNTS', 'Konten');
 define('BOX_CONFIGURATION_MAINTENANCE', 'Wartungsmodus');
 define('BOX_CONFIGURATION_MOPICS', 'Dynamic MoPics');
 define('BOX_CONFIGURATION_PRINT', 'Druckbarer Katalog');
+define('BOX_CONFIGURATION_ARTICLES', 'Artikelkonfiguration');
 define('BOX_CONFIGURATION_SEO', 'SEO URLs');
 define('BOX_CONFIGURATION_SEO_URLS', 'SEO URLs');
 define('BOX_CONFIGURATION_SEO_POPOUT', 'SEO Pop Out Menü');
@@ -256,19 +257,19 @@ define('BOX_REPORTS_STATS_LOW_STOCK_ATTRIB', 'Lagerstand');
 //++++ QT Pro: End Changed Code
 define('BOX_REPORTS_ADMIN_LOGGING', 'Admin Log');
 define('BOX_REPORTS_CUST_LOGGING', 'Kunden Log');
-define('BOX_REPORTS_HTTP_ERROR', 'Http Error Log');
+define('BOX_REPORTS_HTTP_ERROR', 'Http Fehler Log');
 define('BOX_REPORTS_WISHLIST', 'Wunschlisten');
 
 // tools text in includes/boxes/tools.php
-define('BOX_HEADING_TOOLS', 'Werkzeuge');
+define('BOX_HEADING_TOOLS', 'Hilfsprogramme');
 define('BOX_TOOLS_BACKUP', 'Datenbanksicherung');
-define('BOX_TOOLS_BANNER_MANAGER', 'Banner Manager');
+define('BOX_TOOLS_BANNER_MANAGER', 'Bannerverwaltung');
 // LINE ADDED: MOD - Batch Print Center
 define('BOX_TOOLS_BATCH_CENTER', 'Seriendruck Center');
 define('BOX_TOOLS_CACHE', 'Cache Kontrolle');
 define('BOX_TOOLS_QTPRODOCTOR', 'QTPro Doctor');
 define('BOX_TOOLS_MAIL', 'E-Mail senden');
-define('BOX_TOOLS_NEWSLETTER_MANAGER', 'Newsletter Manager');
+define('BOX_TOOLS_NEWSLETTER_MANAGER', 'Newsletterverwaltung');
 define('BOX_TOOLS_SERVER_INFO', 'Server Info');
 define('BOX_TOOLS_WHOS_ONLINE', 'Wer ist online');
 define('BOX_TOOLS_PACKAGING', 'Packstücke');
@@ -366,7 +367,7 @@ define('ENTRY_COUNTRY_ERROR', '');
 define('ENTRY_TELEPHONE_NUMBER', 'Telefonnummer:');
 define('ENTRY_TELEPHONE_NUMBER_TEXT', '&nbsp;<span class="errorText">*</span>');
 define('ENTRY_TELEPHONE_NUMBER_ERROR', '&nbsp;<span class="errorText">mindestens ' . ENTRY_TELEPHONE_MIN_LENGTH . ' Zeichen</span>');
-define('ENTRY_FAX_NUMBER', 'Fax Number:');
+define('ENTRY_FAX_NUMBER', 'Faxnummer:');
 define('ENTRY_FAX_NUMBER_ERROR', '');
 define('ENTRY_NEWSLETTER', 'Newsletter:');
 define('ENTRY_NEWSLETTER_YES', 'Abonniert');
@@ -466,7 +467,6 @@ define('IMAGE_BUTTON_UNSUBSCRIBE', 'Abmelden');
 define('IMAGE_BULK_SET_STATUS', 'Alle ändern');
 define('IMAGE_ACTIVATE_ALL', 'Alle aktivieren');
 define('IMAGE_DEACTIVATE_ALL', 'Alle deaktivieren');
-
 
 define('ICON_CROSS', 'Falsch');
 define('ICON_CURRENT_FOLDER', 'Aktueller Ordner');
@@ -614,6 +614,8 @@ define('TEXT_WRONG_USERNAME', 'Falscher Benutzername');
 define('TEXT_LOGGED_IN', 'Angemeldet');
 define('TEXT_LOGGED_OUT', 'Abgemeldet');
 define('TEXT_CONFIG_CHANGE', 'Einstellungsänderung: ');
+define('TEXT_ADMIN_AS_CUSTOMER', 'Admin als Kunde');
+define('TEXT_ADMIN_HACK_ATTEMPT', 'Hackerangriff');
 
 // Footer defines
 define('TEXT_POWERED_BY', 'Powered by ');

@@ -374,6 +374,9 @@ define('CT_PRODUCT_SHORT_DESCRIPTION', 'Kurzbeschreibung anzeigen');
 define('CD_PRODUCT_SHORT_DESCRIPTION', 'Möchten Sie die Kurzbeschreibung in der Produktliste anzeigen?');
 define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Attributpreis Anzeigemethode');
 define('CD_ATTRIBUTE_PRICE_DISPLAY', 'Möchten Sie die Attributpreise als tatsächlichen Attributpreis (zB. +2,00 €) oder als Summe aus Produktpreis und Attributpreis (zB. 25,00 €) anzeigen?');
+define('CT_PRODUCT_LIST_BESTSELLER', 'Bestseller in Filterbox anzeigen');
+define('CD_PRODUCT_LIST_BESTSELLER', 'Möchten Sie Bestseller als Sortieroption anbieten?');
+
 
 // Configuration ID: 9 - Stock
 define('CT_STOCK_CHECK', 'Lagerstand prüfen');
@@ -585,7 +588,7 @@ define('CD_AFFILIATE_DELETE_AFFILIATE_BANNER_HISTORY', 'To keep affiliate banner
 define('CT_AFFILIATE_KIND_OF_BANNERS', 'Type of banner tracking');
 define('CD_AFFILIATE_KIND_OF_BANNERS', 'Do you want to track banner impressions. (1=No; 2=True)');
 define('CT_AFFILIATE_SHOW_BANNERS_DEBUG', 'Debug Banners');
-define('CD_AFFILIATE_SHOW_BANNERS_DEBUG', 'Debug for affiliate_show_banner.php; If you have difficulties geting banners set to true and try to load the banner in a new Browser window');
+define('CD_AFFILIATE_SHOW_BANNERS_DEBUG', 'Debug for affiliate_show_banner.php. <br><br>If you have difficulties geting banners set to <b>true</b> and then take the image URL from the affiliate page and paste it into a new browser window.<br><br>  eg. http://www.yourstore.com/catalog/affiliate_show_banner.php?ref=1&affiliate_pbanner_id=5');
 define('CT_AFFILIATE_SHOW_BANNERS_DEFAULT_PIC', 'Absolute path to default banner image');
 define('CD_AFFILIATE_SHOW_BANNERS_DEFAULT_PIC', 'Full path to default banner which is display incase no other banner can be found');
 
@@ -608,6 +611,8 @@ define('CT_DYNAMIC_MOPICS_PATTERN', 'Extra Image Pattern');
 define('CD_DYNAMIC_MOPICS_PATTERN', 'Your custom defined pattern for extra images. imagebase is the base of the main thumbnail. Place the counting method between brackets {}. Current counting methods can be 1; a; or A. See readme for more information.');
 define('CT_MANUFACTURERS_IMAGES_DIR', 'Manufacturers Images Directory');
 define('CD_MANUFACTURERS_IMAGES_DIR', 'The directory inside catalog/images where your manufacturers images are stored.');
+define('CT_NO_OF_DYNAMIC_MOPICS', 'Number of dynamic mopics images');
+define('CD_NO_OF_DYNAMIC_MOPICS', 'What is the maximum number of dynamic mopic images you want to add to your products.');
 
 // Configuration ID: 50 - Product Information
 define('CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Prevent Adding Out of Stock to Cart');
@@ -742,6 +747,9 @@ define('CT_FWR_MENU_CACHE_PATH', 'Cache path: True uses standard osc DIR_FS_CACH
 define('CD_FWR_MENU_CACHE_PATH', 'Choose true to use the standard cache path as set in configuration<br />False will attempt to write to shop root.');
 define('CT_FWR_MENU_RESET', 'Reset the categories menu.');
 define('CD_FWR_MENU_RESET', 'Choose true to rebuild the categories menu');
+define('CT_SHOW_SITEMAP', 'Display Sitemap in Information infobox?');
+define('CD_SHOW_SITEMAP', 'Do you want to allow the customer to view a sitemap of your site? (link is created in the information infobox)');
+
 
 // Configuration ID: 87 - reCaptcha 
 define('CT_RECAPTCHA_ON', 'Enable reCaptcha Form = true/false');

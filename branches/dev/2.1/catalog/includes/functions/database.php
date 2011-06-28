@@ -177,16 +177,19 @@ global $$link, $debug;
     $last_update_table_specials = "2000-01-01 12:00:00";
     $table_srp_exists = false;
     while ($list_tables = tep_db_fetch_array($result)) {
-    if ($list_tables['Name'] == TABLE_SPECIALS_RETAIL_PRICES) {
-      $table_srp_exists = true;
-      $last_update_table_srp = $list_tables['Update_time'];
-    }
-    if ($list_tables['Name'] == TABLE_SPECIALS) {
-      $last_update_table_specials = $list_tables['Update_time'];
-    }
-  } // end while
+      if ($list_tables['Name'] == TABLE_SPECIALS_RETAIL_PRICES) {
+        $table_srp_exists = true;
+        $last_update_table_srp = $list_tables['Update_time'];
+      }
+      if ($list_tables['Name'] == TABLE_SPECIALS) {
+        $last_update_table_specials = $list_tables['Update_time'];
+      }
+    } // end while
+	
+  // Check to force update in case the above are NULL
+  if(empty($last_update_table_srp) || empty($last_update_table_specials)) $force_update = 'true';
 
-  if(!$table_srp_exists || ($last_update_table_specials > $last_update_table_srp)) {
+  if(!$table_srp_exists || ($last_update_table_specials > $last_update_table_srp) || $force_update == 'true') {
     if ($table_srp_exists) { 
       $query1 = "truncate " . TABLE_SPECIALS_RETAIL_PRICES . "";
         if (tep_db_query($query1)) {

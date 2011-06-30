@@ -1,11 +1,14 @@
 <?php
 /*
-$Id$
+  UPDATED 07-05-2011
+  Updated RBS WorldPay form URL
+	
+  $Id$
 
-  osCmax e-Commerce
-  http://www.oscmax.com
+  osCommerce, Open Source E-Commerce Solutions
+  http://www.oscommerce.com
 
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2008 osCommerce
 
   Released under the GNU General Public License
 */
@@ -32,7 +35,7 @@ $Id$
 
       if (is_object($order)) $this->update_status();
 
-      $this->form_action_url = 'https://select.worldpay.com/wcc/purchase';
+      $this->form_action_url = 'https://secure.wp3.rbsworldpay.com/wcc/purchase';
     }
 
 // class methods
@@ -322,7 +325,7 @@ $Id$
         if ($check['orders_status'] == MODULE_PAYMENT_WORLDPAY_JUNIOR_PREPARE_ORDER_STATUS_ID) {
           $hash_result = false;
 
-          if (isset($_GET['hash']) && !empty($_GET['hash']) && ($_GET['hash'] == md5(tep_session_name() . $customer_id . $order_id . $language . number_format($order->info['total'], 2) . MODULE_PAYMENT_WORLDPAY_JUNIOR_MD5_PASSWORD))) {
+          if (isset($HTTP_GET_VARS['hash']) && !empty($HTTP_GET_VARS['hash']) && ($HTTP_GET_VARS['hash'] == md5(tep_session_name() . $customer_id . $order_id . $language . number_format($order->info['total'], 2) . MODULE_PAYMENT_WORLDPAY_JUNIOR_MD5_PASSWORD))) {
             $hash_result = true;
           }
 
@@ -538,10 +541,10 @@ $Id$
         $status_id = $check['orders_status_id'];
       }
 
-      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable WorldPay Select Junior', 'MODULE_PAYMENT_WORLDPAY_JUNIOR_STATUS', 'False', 'Do you want to accept WorldPay Select Junior payments?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable WorldPay Business Gateway', 'MODULE_PAYMENT_WORLDPAY_JUNIOR_STATUS', 'False', 'Do you want to accept WorldPay Business Gateway payments?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Installation ID', 'MODULE_PAYMENT_WORLDPAY_JUNIOR_INSTALLATION_ID', '', 'Your WorldPay Installation ID', '6', '0', now())");
-      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Callback Password', 'MODULE_PAYMENT_WORLDPAY_JUNIOR_CALLBACK_PASSWORD', '', 'A password that is sent back in the callback response (specified in the WorldPay Customer Management System)', '6', '0', now())");
-      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('MD5 Password', 'MODULE_PAYMENT_WORLDPAY_JUNIOR_MD5_PASSWORD', '', 'The MD5 secret encryption password used to validate transaction responses with (specified in the WorldPay Customer Management System)', '6', '0', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Payment Response password', 'MODULE_PAYMENT_WORLDPAY_JUNIOR_CALLBACK_PASSWORD', '', 'A password that is sent back in the callback response (specified in the WorldPay Customer Management System)', '6', '0', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('MD5 secret for transactions Password', 'MODULE_PAYMENT_WORLDPAY_JUNIOR_MD5_PASSWORD', '', 'The MD5 secret encryption password used to validate transaction responses with (specified in the WorldPay Customer Management System)', '6', '0', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Transaction Method', 'MODULE_PAYMENT_WORLDPAY_JUNIOR_TRANSACTION_METHOD', 'Capture', 'The processing method to use for each transaction', '6', '0', 'tep_cfg_select_option(array(\'Pre-Authorization\', \'Capture\'), ', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Test Mode', 'MODULE_PAYMENT_WORLDPAY_JUNIOR_TESTMODE', 'True', 'Process transactions in test mode?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort order of display.', 'MODULE_PAYMENT_WORLDPAY_JUNIOR_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");

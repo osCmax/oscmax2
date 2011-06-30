@@ -1,14 +1,51 @@
 <?php
 /*
-$Id$
+  UPDATED 17-05-2011
+  Added Debugging Support Via Email
+  Included Meta Refresh Redirect thanks to user g_p
+  Removed whitespace added by user g_p causing PHP Header/Session Errors
+  Removed unknown post variables added by user g_p ($_POST['hash'] should be $_POST['M_hash'])
+  Updated Documentation
+  	
+  UPDATED 04-12-2009
+  Deprecated $HTTP_POST_VARS replaced with $_POST to enable callback on all platforms/php versions.
+  Javascript dependancy for page redirection replaced with form action otherwise Worldpay removes javascript and leaves
+  visitors stranded.
+  
+  Updated By Pete Batin (petebuzzin in Oscommerce forums)
+  Original Contribution by Harald Ponce de Leon
+  
+  No gaurantees are expressed in anyway, always backup and test before production usage
+  
+  $Id$
+	
+  osCommerce, Open Source E-Commerce Solutions
+  http://www.oscommerce.com
 
-  osCmax e-Commerce
-  http://www.oscmax.com
-
-  Copyright 2000 - 2011 osCmax
+  Copyright (c) 2008 osCommerce
 
   Released under the GNU General Public License
 */
+
+// Define your debug email address
+$RBSPostEmail = ''; // e.g $RBSPostEmail = 'youremail@yourdomain.com';
+
+$RBSDebugActive = false; //Change to false to disable debug emails.
+
+// Build Email
+$message = "RBS WorldPay Post Values\n".'\n';
+foreach($_POST as $name => $value) {
+        $message .= "$name : $value
+        ";
+}
+// In case any of our lines are larger than 70 characters, we should use wordwrap()
+$message = wordwrap($message, 70);
+
+if($RBSDebugActive){
+        // Send Email
+        mail($RBSPostEmail, 'RBS WorldPay Post Values', $message);
+}
+        
 
   if (isset($_POST['M_sid']) && !empty($_POST['M_sid'])) {
     chdir('../../../../');
@@ -30,7 +67,7 @@ $Id$
       }
 
       if ($pass == true) {
-        include('includes/languages/' . basename($_POST['M_lang']) . '/worldpay_junior.php');
+        include('includes/languages/' . basename($_POST['M_lang']) . '/modules/payment/worldpay_junior.php');
 
         $order_query = tep_db_query("select orders_status, currency, currency_value from " . TABLE_ORDERS . " where orders_id = '" . (int)$_POST['cartId'] . "' and customers_id = '" . (int)$_POST['M_cid'] . "'");
         if (tep_db_num_rows($order_query) > 0) {
@@ -59,6 +96,7 @@ $Id$
               tep_db_perform(TABLE_ORDERS_STATUS_HISTORY, $sql_data_array);
             }
 ?>
+<meta http-equiv="refresh" content="5;url=<?php echo tep_href_link(FILENAME_CHECKOUT_PROCESS, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['M_hash'], 'SSL', false); ?>" />
 <style>
 .pageHeading {
   font-family: Verdana, Arial, sans-serif;
@@ -78,8 +116,6 @@ $Id$
 
 <p class="main" align="center"><?php echo MODULE_PAYMENT_WORLDPAY_JUNIOR_TEXT_SUCCESSFUL_TRANSACTION; ?></p>
 
-<meta http-equiv="refresh" content="0; url=<?php echo tep_href_link(FILENAME_CHECKOUT_PROCESS, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['hash'], 'SSL', false); ?>">
-
 <form action="<?php echo tep_href_link(FILENAME_CHECKOUT_PROCESS, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['M_hash'], 'SSL', false); ?>" method="post">
 	<div align="center">
 	  <input name="submit" type="submit" value="<?php echo sprintf(MODULE_PAYMENT_WORLDPAY_JUNIOR_TEXT_CONTINUE_BUTTON, addslashes(STORE_NAME)); ?>" />
@@ -96,7 +132,8 @@ $Id$
     }else{
 		include('includes/languages/' . basename($_POST['M_lang']) . '/modules/payment/worldpay_junior.php');
 	  ?>
-      	<style>
+<meta http-equiv="refresh" content="5;url=<?php echo tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['M_hash'], 'SSL', false); ?>" />
+<style>
 .pageHeading {
   font-family: Verdana, Arial, sans-serif;
   font-size: 20px;
@@ -115,7 +152,6 @@ $Id$
 
 <p class="main" align="center"><?php echo MODULE_PAYMENT_WORLDPAY_JUNIOR_TEXT_UNSUCCESSFUL_TRANSACTION;?></p>
 
-<meta http-equiv="refresh" content="0; url=<?php echo tep_href_link(FILENAME_CHECKOUT_PROCESS, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['hash'], 'SSL', false); ?>">
 
 <form action="<?php echo tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['M_hash'], 'SSL', false); ?>" method="post">
 	<div align="center">

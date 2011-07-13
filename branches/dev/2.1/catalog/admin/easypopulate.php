@@ -3310,7 +3310,10 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                     (
                                         ' . $v_customer_group_id_1 . ',
                                         ' . $v_customer_price_1 . ',
-                                        ' . $v_products_id . '
+                                        ' . $v_products_id . ',
+					' . $v_products_price . ',
+					' . $v_products_qty_blocks . ',
+					' . $v_products_min_order_qty . '
                                         )'
                                     );
                     }
@@ -3322,7 +3325,10 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                     (
                                         ' . $v_customer_group_id_2 . ',
                                         ' . $v_customer_price_2 . ',
-                                        ' . $v_products_id . '
+                                        ' . $v_products_id . ',
+					' . $v_products_price . ',
+					' . $v_products_qty_blocks . ',
+					' . $v_products_min_order_qty . '
                                         )'
                                     );
                     }
@@ -3334,7 +3340,10 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                     (
                                         ' . $v_customer_group_id_3 . ',
                                         ' . $v_customer_price_3 . ',
-                                        ' . $v_products_id . '
+                                        ' . $v_products_id . ',
+					' . $v_products_price . ',
+					' . $v_products_qty_blocks . ',
+					' . $v_products_min_order_qty . '
                                         )'
                                     );
                     }
@@ -3346,7 +3355,10 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                     (
                                         ' . $v_customer_group_id_4 . ',
                                         ' . $v_customer_price_4 . ',
-                                        ' . $v_products_id . '
+                                        ' . $v_products_id . ',
+					' . $v_products_price . ',
+					' . $v_products_qty_blocks . ',
+					' . $v_products_min_order_qty . '
                                         )'
                                     );
                     }

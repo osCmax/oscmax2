@@ -130,8 +130,8 @@ define('CT_MAX_RANDOM_SELECT_SPECIALS', 'Selection of Products on Special');
 define('CD_MAX_RANDOM_SELECT_SPECIALS', 'How many records to select from to choose one random product special to display');
 define('CT_MAX_DISPLAY_CATEGORIES_PER_ROW', 'Categories To List Per Row');
 define('CD_MAX_DISPLAY_CATEGORIES_PER_ROW', 'Anzahl der gelisteten Kategorien per Zeile');
-define('CT_MAX_DISPLAY_PRODUCTS_NEW', 'New Products Listing');
-define('CD_MAX_DISPLAY_PRODUCTS_NEW', 'Maximum number of new products to display in new products page');
+define('CT_MAX_DISPLAY_PRODUCTS_NEW', 'Auflistung Neue Produkte');
+define('CD_MAX_DISPLAY_PRODUCTS_NEW', 'Maximal angezeigte Anzahl der Neuen Produkte auf der Seite \'Neue Produkte\'');
 define('CT_MAX_DISPLAY_BESTSELLERS', 'Bestseller');
 define('CD_MAX_DISPLAY_BESTSELLERS', 'Maximum number of best sellers to display');
 define('CT_MAX_DISPLAY_ALSO_PURCHASED', 'Kauften auch');
@@ -140,8 +140,8 @@ define('CT_MAX_DISPLAY_PRODUCTS_IN_ORDER_HISTORY_BOX', 'Customer Order History B
 define('CD_MAX_DISPLAY_PRODUCTS_IN_ORDER_HISTORY_BOX', 'Maximum number of products to display in the customer order history box');
 define('CT_MAX_DISPLAY_ORDER_HISTORY', 'Bestellhistorie');
 define('CD_MAX_DISPLAY_ORDER_HISTORY', 'Höchstmenge der angezeigten Bestellungen in der Bestellhistorie');
-define('CT_MAX_QTY_IN_CART', 'Produktmengen im WarenkorbProduct Quantities In Shopping Cart');
-define('CD_MAX_QTY_IN_CART', 'Höchstmögliche Produktmenge, die dem Warenkorb hinzugefügt werden kann (0 für keine Beschränkung)');
+define('CT_MAX_QTY_IN_CART', 'Produktanzahl im Warenkorb');
+define('CD_MAX_QTY_IN_CART', 'Höchstmögliche Produktanzahl, die dem Warenkorb hinzugefügt werden kann (0 für keine Beschränkung)');
 
 // Configuration ID: 4 - Images
 define('CT_SMALL_IMAGE_WIDTH', 'Kleines Bild Breite');
@@ -441,10 +441,10 @@ define('CT_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Downloads Controller Order Stat
 define('CD_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Downloads Controller Order Status Value - Default=2');
 
 // Configuration ID: 14 - GZip Compression
-define('CT_GZIP_COMPRESSION', 'Enable GZip Compression');
-define('CD_GZIP_COMPRESSION', 'Enable HTTP GZip compression.');
-define('CT_GZIP_LEVEL', 'Compression Level');
-define('CD_GZIP_LEVEL', 'Use this compression level 0-9 (0 = minimum - 9 = maximum).');
+define('CT_GZIP_COMPRESSION', 'GZip Kompression aktivieren');
+define('CD_GZIP_COMPRESSION', 'HTTP GZip compression aktivieren');
+define('CT_GZIP_LEVEL', 'Kompressionsstärke');
+define('CD_GZIP_LEVEL', 'Geben Sie die Kompressionsstärke an: 0-9 (0 = Minimum - 9 = Maximum).');
 
 // Configuration ID: 15 - Sessions
 define('CT_SESSION_WRITE_DIRECTORY', 'Session Directory');
@@ -593,26 +593,26 @@ define('CT_AFFILIATE_SHOW_BANNERS_DEFAULT_PIC', 'Absolute path to default banner
 define('CD_AFFILIATE_SHOW_BANNERS_DEFAULT_PIC', 'Full path to default banner which is display incase no other banner can be found');
 
 // Configuration ID: 45 - Dynamic Mopics
-define('CT_DYNAMIC_MOPICS_BIG_IMAGE_TYPES', 'Big Image Types');
-define('CD_DYNAMIC_MOPICS_BIG_IMAGE_TYPES', 'The types (extensions) of big images you use seperated by commas.');
-define('CT_DYNAMIC_MOPICS_THUMB_IMAGE_TYPES', 'Thumbnail Image Types');
-define('CD_DYNAMIC_MOPICS_THUMB_IMAGE_TYPES', 'The types (extensions) of extra thumbnails you use seperated by commas.');
-define('CT_IMAGEZOOMER', 'Image Zoomer on product info page');
-define('CD_IMAGEZOOMER', 'Do you want to use the javscript image zoomer on your product pages?');
-define('CT_DYNAMIC_MOPICS_PRODUCTS_DIR', 'Products (mid-size) Directory');
-define('CD_DYNAMIC_MOPICS_PRODUCTS_DIR', 'The directory inside catalog/images where your product images are stored.');
-define('CT_DYNAMIC_MOPICS_BIGIMAGES_DIR', 'Big Images Directory');
-define('CD_DYNAMIC_MOPICS_BIGIMAGES_DIR', 'The directory inside catalog/images where your big images are stored.');
-define('CT_DYNAMIC_MOPICS_THUMBS_DIR', 'Thumbnail Images Directory');
-define('CD_DYNAMIC_MOPICS_THUMBS_DIR', 'The directory inside catalog/images where you extra image thumbs are stored.');
-define('CT_CATEGORY_IMAGES_DIR', 'Category Images Directory');
-define('CD_CATEGORY_IMAGES_DIR', 'The directory inside catalog/images where your category images are stored.');
-define('CT_DYNAMIC_MOPICS_PATTERN', 'Extra Image Pattern');
-define('CD_DYNAMIC_MOPICS_PATTERN', 'Your custom defined pattern for extra images. imagebase is the base of the main thumbnail. Place the counting method between brackets {}. Current counting methods can be 1; a; or A. See readme for more information.');
-define('CT_MANUFACTURERS_IMAGES_DIR', 'Manufacturers Images Directory');
-define('CD_MANUFACTURERS_IMAGES_DIR', 'The directory inside catalog/images where your manufacturers images are stored.');
-define('CT_NO_OF_DYNAMIC_MOPICS', 'Number of dynamic mopics images');
-define('CD_NO_OF_DYNAMIC_MOPICS', 'What is the maximum number of dynamic mopic images you want to add to your products.');
+define('CT_DYNAMIC_MOPICS_BIG_IMAGE_TYPES', 'Dateiformate der großen Bilder');
+define('CD_DYNAMIC_MOPICS_BIG_IMAGE_TYPES', 'Die akzeptierten Bildformate (Dateinamenserweiterung) der großen Bilder, getrennt durch Beistriche.');
+define('CT_DYNAMIC_MOPICS_THUMB_IMAGE_TYPES', 'Dateiformate der Vorschaubilder');
+define('CD_DYNAMIC_MOPICS_THUMB_IMAGE_TYPES', 'Die akzeptierten Bildformate (Dateinamenserweiterungen) der Vorschaubilder, getrennt durch Beistriche.');
+define('CT_IMAGEZOOMER', 'Zoomfunktion auf der Produktinformationsseite');
+define('CD_IMAGEZOOMER', 'Möchten Sie die Javascript-Zoomfunktion auf der Produktinformationsseite verwenden?');
+define('CT_DYNAMIC_MOPICS_PRODUCTS_DIR', 'Bildverzeichnis Mittelgroße Bilder');
+define('CD_DYNAMIC_MOPICS_PRODUCTS_DIR', 'Das Verzeichnis in catalog/images, in das Ihre mittelgroßen Produktbilder gespeichert werden sollen.');
+define('CT_DYNAMIC_MOPICS_BIGIMAGES_DIR', 'Bildverzeichnis Große Bilder');
+define('CD_DYNAMIC_MOPICS_BIGIMAGES_DIR', 'Das Verzeichnis in catalog/images, in das Ihre großen Produktbilder gespeichert werden sollen.');
+define('CT_DYNAMIC_MOPICS_THUMBS_DIR', 'Bildverzeichnis Vorschaubilder');
+define('CD_DYNAMIC_MOPICS_THUMBS_DIR', 'Das Verzeichnis in catalog/images, in das Ihre Vorschaubilder gespeichert werden sollen.');
+define('CT_CATEGORY_IMAGES_DIR', 'Bildverzeichnis Kategoriebilder');
+define('CD_CATEGORY_IMAGES_DIR', 'Das Verzeichnis in catalog/images, in das Ihre Kategoriebilder gespeichert werden sollen.');
+define('CT_DYNAMIC_MOPICS_PATTERN', 'Dateinamen der Extrabilder');
+define('CD_DYNAMIC_MOPICS_PATTERN', 'Sie können die Dateinamen der Extrabilder selber festlegen. imagebase entspricht dem Dateinamen des Hauptbildes. Setzen Sie die Zählmethode zwischen geschwungene Klammern {}. Derzeit kann von  1, a, oder A hochgezählt werden. Beispiel: Der vordefinierte Dateiname für das erste zusätzliche Bild würde standardmäßig ORIGINALBILDNAME_1 lauten.');
+define('CT_MANUFACTURERS_IMAGES_DIR', 'Bildverzeichnis Hersteller');
+define('CD_MANUFACTURERS_IMAGES_DIR', 'Das Verzeichnis in catalog/images, in das Ihre Herstellerbilder gespeichert werden sollen.');
+define('CT_NO_OF_DYNAMIC_MOPICS', 'Höchstanzahl von Dynamic Mopics');
+define('CD_NO_OF_DYNAMIC_MOPICS', 'Höchstanzahl der zusätzlich angezeigten Dynamic Mopic Bilder je Produkt.');
 
 // Configuration ID: 50 - Product Information
 define('CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Prevent Adding Out of Stock to Cart');

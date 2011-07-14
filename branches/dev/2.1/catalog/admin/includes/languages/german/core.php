@@ -172,7 +172,7 @@ define('BOX_CONFIGURATION_MC', 'MailChimp Newsletter');
 define('BOX_CONFIGURATION_WYSIWYG', 'CK Editor');
 define('BOX_CONFIGURATION_TEMPLATES', 'Templates');
 define('BOX_CONFIGURATION_TEMPLATE_SETUP', 'Templateeinstellungen');
-define('BOX_CONFIGURATION_PAGE_MODULES', 'Seitenmodules');
+define('BOX_CONFIGURATION_PAGE_MODULES', 'Seitenmodule');
 define('BOX_CONFIGURATION_INFO_PAGES', 'Informationsseiten');
 define('BOX_CONFIGURATION_WELCOME', 'Wilkommensnachricht');
 define('BOX_CONFIGURATION_OFS', 'Empfehlungen');

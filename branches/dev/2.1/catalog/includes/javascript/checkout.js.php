@@ -212,13 +212,14 @@ $(document).ready(function (){
 								$('#newAccountEmail').remove();
 								$('#diffShipping').parent().parent().parent().remove();
 
-								onePage.updateAddressHTML('billing');
-								onePage.updateAddressHTML('shipping');
-
+								// BOF: Bug Fix #582
+								//onePage.updateAddressHTML('billing');
+								//onePage.updateAddressHTML('shipping');
+								// EOF: Bug fix #582
 								$('#shippingAddress').show();
 
 								var updateTotals = true;
-								// Bug fix 582
+								// BOF: Bug fix 582
 								//onePage.updateCartView();
 								//onePage.updateFinalProductListing();
 								//onePage.updatePaymentMethods();
@@ -236,7 +237,8 @@ $(document).ready(function (){
 								//if (updateTotals == true){
 								//	onePage.updateOrderTotals();
 								//}
-								location.reload(); // Bug fix 582 login problem
+								location.reload();
+								// EOF: Bug fix 582
 
 								$('#loginBox').dialog('destroy');
 							}else{

@@ -69,7 +69,7 @@ class osC_onePageCheckout {
         'shippingEnabled' => true
       );
       $payment = false;
-      $shipping = false;
+      $shipping = true;
       $sendto = 0;
       $billto = 0;
       tep_session_register('onepage');

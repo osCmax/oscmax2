@@ -265,6 +265,7 @@ $Id$
   function fixSeoLink($url){
 	  return str_replace('&amp;', '&', $url);
   }
+  if( ($total_weight == 0) && (ONEPAGE_CHECKOUT_HIDE_SHIPPING == 'true') ) { $onepage['shippingEnabled'] = false; }
 
 
 

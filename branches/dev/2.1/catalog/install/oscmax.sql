@@ -2373,7 +2373,7 @@ INSERT INTO configuration VALUES (3084, 'CT_ONEPAGE_AUTO_SHOW_DEFAULT_STATE', 'O
 INSERT INTO configuration VALUES (3085, 'CT_ONEPAGE_AUTO_SHOW_DEFAULT_ZIP', 'ONEPAGE_AUTO_SHOW_DEFAULT_ZIP', '93401', 'CD_ONEPAGE_AUTO_SHOW_DEFAULT_ZIP', 7575, 36, NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (3086, 'CT_ONEPAGE_TELEPHONE', 'ONEPAGE_TELEPHONE', 'False', 'CD_ONEPAGE_TELEPHONE', 7575, 37, NULL, now(), NULL, 'tep_cfg_select_option(array(''False'',''True''),');
 INSERT INTO configuration VALUES (3087, 'CT_ONEPAGE_ZIP_BELOW', 'ONEPAGE_ZIP_BELOW', 'False', 'CD_ONEPAGE_ZIP_BELOW', 7575, 38, NULL, now(), NULL, 'tep_cfg_select_option(array(''False'',''True''),');
-INSERT INTO configuration VALUES (3088, 'CT_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'false', 'CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 7575, 100, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (3088, 'CT_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'true', 'CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 7575, 100, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (3089, 'CT_ONEPAGE_ADDR_LAYOUT', 'ONEPAGE_ADDR_LAYOUT', 'vertical', 'CD_ONEPAGE_ADDR_LAYOUT', 7575, 1000, NULL, now(), NULL, 'tep_cfg_select_option(array(''vertical'', ''horizontal''), ');
 
 

@@ -32,7 +32,15 @@ if (sizeof($data) > 0) {
 
       echo '<tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_INFORMATION_MANAGER, "gID=$gID&amp;information_action=Edit&amp;information_id=$val[information_id]", 'NONSSL') . '\'">'; ?>
         <td align="center" class="dataTableContent"><?php echo $val['information_id']; ?></td>
-        <td width="40%" class="dataTableContent"><?php echo $val['information_title'];?></td>
+        <td width="40%" class="dataTableContent">
+		  <?php
+		  if ((defined($val['information_title'])) && constant($val['information_title'])) {
+				  echo constant($val['information_title']);
+				} else {
+				  echo $val['information_title'];
+				}
+		  ?>
+        </td>
         <td class="dataTableContent"><?php echo ((!empty($val['parent_id'])) ? $val['parent_id'] : null);?></td>
         <td align="center" class="dataTableContent"><?php if (!empty($val['information_url'])) { echo tep_image(DIR_WS_ICONS . 'icon_popup.gif', IMAGE_ICON_EXTERNAL_URL, 10, 10); };?></td>
         <td nowrap align="center" class="dataTableContent">

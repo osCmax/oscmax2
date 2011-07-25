@@ -116,8 +116,8 @@ function error_message($error) {
 		default:return $error;
 	}
 }
-
-switch($_REQUEST['information_action']) {
+$information_action = (isset($_REQUEST['information_action']) ? $_REQUEST['information_action'] : '');
+switch($information_action) {
 
 	case "AddSure":
 	$language_id = $languages[0]['id']; // First insert the 1st known language
@@ -224,7 +224,8 @@ switch($_REQUEST['information_action']) {
         <tr>
           <td>
 <?php
-switch($_REQUEST['information_action']) {
+$information_action = (isset($_REQUEST['information_action']) ? $_REQUEST['information_action'] : '');
+switch($information_action) {
 
 case "Added":
 	$data = tep_get_information_list();
@@ -307,9 +308,8 @@ case "Added":
 	tep_update_information_languages();
 } // END SWITCH
 
-
-if ($error) {
-	$content=error_message($error);
+if ((isset($error)) && ($error)) {
+	$content = error_message($error);
 	echo $content;
 	$data = tep_get_information_list();
 	$no = 1;

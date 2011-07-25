@@ -435,10 +435,12 @@ define('CT_DOWNLOAD_MAX_DAYS', 'Expiry delay (days)');
 define('CD_DOWNLOAD_MAX_DAYS', 'Set number of days before the download link expires. 0 means no limit.');
 define('CT_DOWNLOAD_MAX_COUNT', 'Maximum number of downloads');
 define('CD_DOWNLOAD_MAX_COUNT', 'Set the maximum number of downloads. 0 means no download authorized.');
-define('CT_DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE', 'Downloads Controller Update Status Value');
+define('CT_DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE', 'Downloads Controller - Update Status Value');
 define('CD_DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE', 'What orders_status resets the Download days and Max Downloads - Default is 4');
-define('CT_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Downloads Controller Order Status Value');
-define('CD_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Downloads Controller Order Status Value - Default=2');
+define('CT_DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'Downloads Controller - On Hold Message');
+define('CD_DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'What message do you want to display to your customers when they order downloadable products?');
+define('CT_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Downloads Controller - Order Status Value');
+define('CD_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Downloads Controller - Order Status Value - Default=2');
 
 // Configuration ID: 14 - GZip Compression
 define('CT_GZIP_COMPRESSION', 'Enable GZip Compression');

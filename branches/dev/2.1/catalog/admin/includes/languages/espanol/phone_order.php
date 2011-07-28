@@ -11,6 +11,7 @@ $Id$
 */
 
 define('HEADING_TITLE', 'Pedido telefónico');
+define('FILTER_CUSTOMER', 'Filtrar lista de clientes');
 define('SELECT_CUSTOMER', 'Seleccionar cliente');
 define('SEARCH', 'Buscar');
 define('SUBMIT', 'Enviar');

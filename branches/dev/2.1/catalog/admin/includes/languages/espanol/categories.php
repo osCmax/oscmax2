@@ -110,6 +110,7 @@ define('ERROR_CATALOG_THUMBS_DIRECTORY_DOES_NOT_EXIST', 'Error: No existe el dir
 define('ERROR_CANNOT_MOVE_CATEGORY_TO_PARENT', 'Error: No se puede mover una categoría dentro de una subcategoría suya.');
 
 //Select Product Image Directory & Instant Update For Products
+define('TEXT_IMAGE_TITLE', 'Control y subida de imágenes');
 define('TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_1', 'Error: - ¡El directorio indicado de \'imágenes\' ');
 define('TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_2', ' no existe en el servidor!.');
 define('TEXT_PRODUCTS_IMAGE_DIRECTORY', 'Directorio de imágenes:');
@@ -120,6 +121,15 @@ define('TEXT_PRODUCTS_INSERT_PRODUCT', 'Insertar');
 define('TEXT_PRODUCTS_WITHOUT_PREVIEW', ' sin vista previa ');
 define('TEXT_PRODUCTS_MOPICS', 'Imágen adicional:');
 define('TEXT_MOPICS_WARNING', 'Selecciona el directorio de imágenes ANTES de subirlas');
+
+//Multi image upload
+define('TEXT_MOPICS_CONTENT', 'Las mopics dinámicas requieren que todas las imágenes sean del mismo formato. Es decir, todas deben ser jpg o png. <b>No</b> se pueden mezclar imágenes de distintos tipos.');
+define('TEXT_UPLOAD_IMAGES', '<b>Subir imagen</b>');
+define('TEXT_CURRENT_IMAGES', '<b>Imagen actual</b>');
+define('TEXT_DELETE_IMAGES', '<b>¿Eliminar?</b>');
+define('TEXT_EXTRA_IMAGE', 'Imagen extra');
+define('TEXT_MOPICS_ERROR', 'Error secuencia imagen');
+define('TEXT_MOPICS_ERROR_HELP', 'Las mopics dinámicas deben seguir una secuencia - no se pueden tener huecos en la serie. Si existe un hueco (p.ej. _1 -> _3) entonces el sistema dejará de mostrar las imágenes en el primer hueco.');
 
 define('TEXT_SHIPPING_DIMENSIONS', 'Dimensiones del envío');
 

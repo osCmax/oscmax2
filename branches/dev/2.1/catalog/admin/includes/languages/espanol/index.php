@@ -117,6 +117,7 @@ define('WARNING_ADMIN_CONFIG_FILE_WRITEABLE', 'Error: se puede escribir en el fi
 
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Error: El directorio de sesiones no existe: ' . tep_session_save_path() . '. Las sesiones no funcionarán hasta que se haya creado este directorio.');
 define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Advertencia: No se puede escribir en el directorio de sesiones: ' . tep_session_save_path() . '. Las sesiones no funcionarán hasta que se hayan establecido los permisos de usuario adecuados.');
+define('WARNING_GLOBALS_ENABLED', 'Error: Register Globals está activado. Por motivos de seguridad y funcionalidad, osCmax requiere que esté desactivado.');
 define('WARNING_SEO_PHP_VERSION_LOW', 'Error: El servidor web está ejecutando ' . PHP_VERSION . ' la cual no es suficiente para ejecutar SEO URLs. Por favor deshabilita este módulo hasta que se haya actualizado la versión de PHP.');
 define('WARNING_SESSION_AUTO_START', 'Advertencia: Está habilitado session.auto_start - por favor deshabilita este parámetro de PHP php.ini y reinicia el servidor web.');
 define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Advertencia: El directorio de productos descargables no existe: ' . dirname(DIR_FS_CATALOG) . '/download. Los productos descargables no funcionarán hasta que este directorio sea válido.');
@@ -125,4 +126,6 @@ define('WARNING_PHP_FILES_IN_BIGIMAGES', 'Advertencia: Hay ficheros en ' . DIR_F
 define('WARNING_PHP_FILES_IN_PRODUCTS', 'Advertencia: Hay ficheros en ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_PRODUCTS_DIR . ' que <b>no</b> son imágenes.  Esto puede ser una indicación de que en tu servidor hay software malicioso.');
 define('WARNING_PHP_FILES_IN_THUMBS', 'Advertencia: Hay ficheros en ' . DIR_FS_CATALOG . DYNAMIC_MOPICS_THUMBS_DIR . ' que <b>no</b> son imágenes.  Esto puede ser una indicación de que en tu servidor hay software malicioso.');
 define('DASHBOARD_AFFILIATE_EMAIL_ERROR', 'Advertencia: Infobox de afiliados está activa en la tienda pero no se ha cambiado la dirección e-mail predeterminada. Por favor <u><a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=28', 'NONSSL') . '">deshabilita el módulo</a></u> o <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=35&amp;cID=1204&amp;action=edit', 'NONSSL') . '"> actualiza la dirección e-mail</a></u>.');
+
+define('SET_DEFAULT', 'Configurar como pestaña determinada:');
 ?>

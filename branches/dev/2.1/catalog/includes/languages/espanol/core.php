@@ -457,8 +457,18 @@ define('TEXT_VIEW_AS_LIST', 'Mostrar como lista');
 define('TEXT_VIEW_AS_GRID', 'Mostrar en cuadrícula');
 define('TEXT_RESULTS_PAGE', 'Resultados/página: ');
 define('TEXT_SORT_ORDER', 'Orden: ');
+define('TEXT_PRICE_BESTSELLER', 'Más vendidos');
 
 // Recent History
 define('TEXT_LAST_VISITED_PRODUCTS', 'Productos vistos');
 
+// Question links to contact form - %20 = space - needed to maintain W3C compliance in URLs
+define('TEXT_QUESTION_ABOUT', 'Consulta%20sobre:%20');
+define('TEXT_QUESTION_MODEL', 'Referencia:');
+define('TEXT_QUESTION_PRODUCT_ID', 'ID%20del%20producto:');
+define('TEXT_QUESTION_TYPE', 'Escriba%20su%20consulta:');
+define('TEXT_QUESTION_PRICE_ENQUIRY', 'Consulta%20de%20precio'); 
+define('TEXT_QUESTION_PRODUCT_NAME', 'Nombre%20del%20producto:');
+
+define('DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'NOTA: Las descargas no están disponibles hasta que no se ha confirmado el pago.');
 ?>

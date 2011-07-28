@@ -38,7 +38,7 @@ define('TEXT_VISITS','Visitas:');
 define('TEXT_TRANSACTIONS','Transacciones:');
 define('TEXT_CONVERSION','Conversión:');
 define('TEXT_AMOUNT','Importe de ventas:');
-define('TEXT_AVERAGE','Promedio de ventas:');
+define('TEXT_SALES_AVERAGE','Promedio de ventas:');
 define('TEXT_COMMISSION_RATE','Porcentaje de comisión:');
 define('TEXT_PAYPERSALE_RATE','Porcentaje de pago por venta:');
 define('TEXT_CLICKTHROUGH_RATE','Porcentaje de clics:');

@@ -23,7 +23,7 @@ define('TEXT_INFO_LAST_MODIFIED', 'Última modificación:');
 define('CT_STORE_NAME', 'Nombre de tienda');
 define('CD_STORE_NAME', 'El nombre de mi tienda ');
 define('CT_STORE_LOGO', 'Logo tienda');
-define('CD_STORE_LOGO', 'Configura la imagen logo de tu tienda');
+define('CD_STORE_LOGO', 'Configura la imagen del logo de la tienda. <br><br>Se <b>debe</b> utilizar un tipo de imagen <b>jpg</b> o <b>png</b>. <br><br> Normalmente es mejor dejar este parámetro como está y simplemente sobreescribir la imagen en la carpeta images/ de la plantilla.');
 define('CT_STORE_OWNER', 'Propietario de la tienda');
 define('CD_STORE_OWNER', 'El nombre del propietario de mi tienda');
 define('CT_STORE_OWNER_EMAIL_ADDRESS', 'Dirección e-mail');
@@ -374,8 +374,8 @@ define('CT_PRODUCT_SHORT_DESCRIPTION', 'Mostrar descripción breve');
 define('CD_PRODUCT_SHORT_DESCRIPTION', '¿Quieres mostrar la descripción breve en la lista de resultados?');
 define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Forma de mostrar precios de atributos');
 define('CD_ATTRIBUTE_PRICE_DISPLAY', '¿Quieres que se muestren los precios de los atributos como valores separados (p.ej. +2.00€) o como el total del precio del producto más el precio del atributo? (p.ej. 25.00€)');
-define('CT_PRODUCT_LIST_BESTSELLER', 'Filtrar por popularidad');
-define('CD_PRODUCT_LIST_BESTSELLER', '¿Quieres permitir ');
+define('CT_PRODUCT_LIST_BESTSELLER', 'Ordenar según los más vendidos');
+define('CD_PRODUCT_LIST_BESTSELLER', '¿Quieres permitir que se puedan ordenar los productos según los más vendidos?');
 
 
 // Configuration ID: 9 - Stock
@@ -435,10 +435,12 @@ define('CT_DOWNLOAD_MAX_DAYS', 'Período de validez (días)');
 define('CD_DOWNLOAD_MAX_DAYS', 'Establece el número de días antes de que expire el enlace de descarga. 0 significa sin límite.');
 define('CT_DOWNLOAD_MAX_COUNT', 'Máximo número de descargas');
 define('CD_DOWNLOAD_MAX_COUNT', 'Establece el número máximo de descargas. 0 significa que no se autoriza la descarga.');
-define('CT_DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE', 'Valor estado actualización controlador descargas');
+define('CT_DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE', 'Controlador descargas - Valor de estado para actualización');
 define('CD_DOWNLOADS_ORDERS_STATUS_UPDATED_VALUE', 'Qué estado de pedido restablece los días de descarga y el máximo nº de descargas - Por defecto es 4');
-define('CT_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Valor estado pedido controlador descargas');
-define('CD_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Valor de estado de pedido para controlador descargas - Por defecto = 2');
+define('CT_DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'Controlador descargas - Mensaje En espera');
+define('CD_DOWNLOADS_CONTROLLER_ON_HOLD_MSG', '¿Quñé mensaje quieres que se muestre al cliente uando hace un pedido de productos descargables?');
+define('CT_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Controlador descargas - Valor estado pedido');
+define('CD_DOWNLOADS_CONTROLLER_ORDERS_STATUS', 'Controlador descargas - Valor estado pedido - Por defecto = 2');
 
 // Configuration ID: 14 - GZip Compression
 define('CT_GZIP_COMPRESSION', 'Habilitar compresión GZip');
@@ -588,7 +590,7 @@ define('CD_AFFILIATE_DELETE_AFFILIATE_BANNER_HISTORY', 'Para mantener pequeño la
 define('CT_AFFILIATE_KIND_OF_BANNERS', 'Tipo de seguimiento de banner');
 define('CD_AFFILIATE_KIND_OF_BANNERS', '¿Quieres hacer seguimiento de las impresiones de banners. (1 = No, 2 = Sí)');
 define('CT_AFFILIATE_SHOW_BANNERS_DEBUG', 'Depuración errores banners');
-define('CD_AFFILIATE_SHOW_BANNERS_DEBUG', 'Depurar errores para affiliate_show_banner.php. Si tienes algun problema consiguiendo banners configura este parámetro a true e intenta cargar el banner en una nueva ventana del navegador');
+define('CD_AFFILIATE_SHOW_BANNERS_DEBUG', 'Depurar errores para affiliate_show_banner.php. <br><br>Si tienes algun problema consiguiendo banners configura este parámetro a <b>true</b> y copia la URL de la imagen de la página de afiliado y pégala en una nueva ventana o pestaña del navegador.<br><br>  p.ej.: http://www.tutienda.com/catalog/affiliate_show_banner.php?ref=1&affiliate_pbanner_id=5');
 define('CT_AFFILIATE_SHOW_BANNERS_DEFAULT_PIC', 'Ruta absoluta a imagen de banner predefinida');
 define('CD_AFFILIATE_SHOW_BANNERS_DEFAULT_PIC', 'Ruta completa hasta el banner predefinido que se muestra en caso de no encontrarse otro banner');
 
@@ -611,6 +613,8 @@ define('CT_DYNAMIC_MOPICS_PATTERN', 'Patrón imagen adicional');
 define('CD_DYNAMIC_MOPICS_PATTERN', 'El patrón definido de forma personalizada para imágenes adicionales. imagebase es la base de la miniatura principal. Coloca el método para contar entre llaves {}. Los métodos para contar actuales pueden ser 1, a, A. Consulta el readme para obtener más información.');
 define('CT_MANUFACTURERS_IMAGES_DIR', 'Directorio imágenes fabricantes');
 define('CD_MANUFACTURERS_IMAGES_DIR', 'El directorio dentro de catalog/images donde se almacenan las imágenes de fabricantes.');
+define('CT_NO_OF_DYNAMIC_MOPICS', 'Número de imágenes mopics dinámicas');
+define('CD_NO_OF_DYNAMIC_MOPICS', 'Número máximo de imágenes mopics dinámicas que se pueden añadir a los productos.');
 
 // Configuration ID: 50 - Product Information
 define('CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Impedir añadir productos agotados a carrito');
@@ -720,7 +724,7 @@ define('CD_RCS_SKIP_MATCHED_CARTS', 'Establecer a <b>true</b> para ignorar los c
 define('CT_RCS_AUTO_CHECK', 'Seleccionar automáticamente carritos "seguros" para enviar e-mail');
 define('CD_RCS_AUTO_CHECK', 'Configura a <b>true</b> para que se seleccionen para enviarles un e-mail las entradas que es muy probable que sean seguras (es decir, clientes no existentes y que no se les haya enviado previamente un e-mail).<br><br>Configurándolo a <b>false</b> se dejarán todas las entradas sin selecionar (se deben seleccionar manualmente las entradas a las que se les quiere enviar el e-mail)');
 define('CT_RCS_CARTS_MATCH_ALL_DATES', 'Pedidos correspondientes desde cualquier fecha');
-define('CD_RCS_CARTS_MATCH_ALL_DATES', 'Si es <b>true</b> entonces cualquier pedido que se encuentre con un artículo coincidente será considerado un pedido correspondiente.<br><br>Si es <b>false</b> sólo se consideran los pedidos hechos depués de que el carrito se haya abandonado.');
+define('CD_RCS_CARTS_MATCH_ALL_DATES', 'Si es <b>true</b> entonces cualquier pedido que se encuentre con un artículo coincidente será considerado un pedido correspondiente.<br><br>Si es <b>false</b> sólo se consideran los pedidos hechos después de que el carrito se haya abandonado.');
 define('CT_RCS_PENDING_SALE_STATUS', 'Estado venta más bajo pendiente');
 define('CD_RCS_PENDING_SALE_STATUS', 'El valor más alto que un pedido puede tener y todavía ser considerado pendiente. Cualquier valor más alto que este será considerado por el sistema como una venta completada.<br><br>Consulta la documentación para tener más detalles.');
 define('CT_RCS_REPORT_EVEN_STYLE', 'Estilo fila par del informe');
@@ -745,6 +749,8 @@ define('CT_FWR_MENU_CACHE_PATH', 'Ruta caché: True usa estándar osc DIR_FS_CACHE
 define('CD_FWR_MENU_CACHE_PATH', 'Poner a true para usar la ruta de caché estándar como esté establecido en la configuración<br />False intentará escribir en el directorio raíz de la tienda.');
 define('CT_FWR_MENU_RESET', 'Reinicializar menú categorías.');
 define('CD_FWR_MENU_RESET', 'Poner a true para reconstruir el menú de categorías');
+define('CT_SHOW_SITEMAP', '¿Mostrar mapa web en infobox de Información?');
+define('CD_SHOW_SITEMAP', '¿Quieres que el cliente pueda ver un mapa web del sitio? (el enlace se crea en el infobox de información)');
 
 // Configuration ID: 87 - reCaptcha 
 define('CT_RECAPTCHA_ON', 'Habilitar formulario reCaptcha = true/false');
@@ -1099,7 +1105,7 @@ define('CD_ONEPAGE_CHECKOUT_ENABLED', '¿Habilitar pedido en una página?');
 define('CT_ONEPAGE_DEFAULT_COUNTRY', 'País dirección por defecto');
 define('CD_ONEPAGE_DEFAULT_COUNTRY', 'País por defecto para nuevas direcciones y para realizar el pedido sin cuenta');
 define('CT_ONEPAGE_ACCOUNT_CREATE', 'Creación cuenta');
-define('CD_ONEPAGE_ACCOUNT_CREATE', '<b>requerida</b> - la contraseña es requerida<br><b>opcional</b> - la contraseña es opcional, no se crea la cuenta si se deja vacía<br><b>crear</b> - la contraseña es opcional, se crea la cuenta con una contraseña aleatoria');
+define('CD_ONEPAGE_ACCOUNT_CREATE', '<b>required</b> - la contraseña es requerida<br><b>optional</b> - la contraseña es opcional, no se crea la cuenta si se deja vacía<br><b>create</b> - la contraseña es opcional, se crea la cuenta con una contraseña aleatoria');
 define('CT_ONEPAGE_SHOW_CUSTOM_COLUMN', 'Mostrar columna derecha personalizada');
 define('CD_ONEPAGE_SHOW_CUSTOM_COLUMN', 'Mostrar columna derecha personalizada');
 define('CT_ONEPAGE_LOGIN_REQUIRED', 'Inicio de sesión necesario');

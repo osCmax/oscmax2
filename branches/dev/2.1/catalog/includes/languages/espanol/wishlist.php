@@ -11,6 +11,7 @@ $Id$
 */
 
 define('NAVBAR_TITLE_WISHLIST','Mis favoritos');
+define('NAVBAR_TITLE','Favoritos');
 define('NAVBAR_TITLE_1','Favoritos');
 define('HEADING_TITLE','Mis favoritos:');
 define('HEADING_TITLE2', ' tiene como favoritos:');

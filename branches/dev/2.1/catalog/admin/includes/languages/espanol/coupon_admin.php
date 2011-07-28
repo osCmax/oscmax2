@@ -49,7 +49,6 @@ define('TEXT_REDEMPTIONS_CUSTOMER', 'Para este cliente');
 define('TEXT_NO_FREE_SHIPPING', 'No se aplican gastos de envío gratuitos');
 
 define('NOTICE_EMAIL_SENT_TO', 'Nota: E-mail enviado a: %s');
-define('ERROR_NO_CUSTOMER_SELECTED', 'Error: No se ha seleccionado ningún cliente.');
 define('COUPON_NAME', 'Nombre del vale');
 //define('COUPON_VALUE', 'Coupon Value');
 define('COUPON_AMOUNT', 'Importe del vale');
@@ -69,21 +68,18 @@ define('DATE_MODIFIED', 'Fecha modificación');
 define('TEXT_HEADING_NEW_COUPON', 'Crear nuevo vale');
 define('TEXT_NEW_INTRO', 'Por favor rellena la siguiente información para el nuevo vale.<br>');
 
-
 define('COUPON_NAME_HELP', 'Un nombre corto para el vale');
 define('COUPON_AMOUNT_HELP', 'El importe de descuento del vale, ya sea un valor fijo o añadiendo % al final para representar un porcentaje de descuento.');
 define('COUPON_CODE_HELP', 'Puedes introducir aquí tu propio código, o dejarlo en blanco para asignarle uno generado automáticamente.');
 define('COUPON_STARTDATE_HELP', 'La fecha a partir de la cual el vale será válido');
 define('COUPON_FINISHDATE_HELP', 'La fecha en la que caduca el vale');
-define('COUPON_FREE_SHIP_HELP', 'El vale concede gastos de envío gratuitos en un pedido. Nota: esto anula el valor \'Importe del vale\' pero respeta el valor de pedido mínimo');
+define('COUPON_FREE_SHIP_HELP', 'El vale concede gastos de envío gratuitos en un pedido. <br><b>Nota:</b> esto anula el valor \'Importe del vale\' pero respeta el valor de pedido mínimo');
 define('COUPON_DESC_HELP', 'Una descripción del vale para el cliente');
 define('COUPON_MIN_ORDER_HELP', 'El importe mínimo de un pedido para que se pueda usar el vale');
 define('COUPON_USES_COUPON_HELP', 'El máximo número de veces que un vale puede ser usado, déjalo en blanco si quieres que no haya límite.');
 define('COUPON_USES_USER_HELP', 'Número de veces que un usuario puede utilizar el vlae, déjalo en blanco si quieres que no haya límite.');
 define('COUPON_PRODUCTS_HELP', 'Una lista separada por comas de ids de producto(product_ids) con los que se puede usar este vale. Déjalo en blanco si quieres que se pueda utilizar para todos los productos.');
 define('COUPON_CATEGORIES_HELP', 'Una lista separada por comas de las categorías(cpaths) en las que se puede usar este vale, Déjalo en blanco si quieres que se pueda utilizar en todas las categorías.');
-define('ERROR_NO_COUPON_AMOUNT', 'Error: No se ha introducido ningún importe del vale. Introduce una o selecciona gastos de envío gratuitos.');
-define('ERROR_COUPON_EXISTS', 'Error: Ya esxite un vale con ese código.');
 define('COUPON_BUTTON_EMAIL_VOUCHER', 'Enviar vale por E-mail');
 define('COUPON_BUTTON_EDIT_VOUCHER', 'Editar vale');
 define('COUPON_BUTTON_DELETE_VOUCHER', 'Eliminar vale');
@@ -91,7 +87,16 @@ define('COUPON_BUTTON_VOUCHER_REPORT', 'Infome de vales');
 define('COUPON_BUTTON_PREVIEW', 'Vista previa de vale');
 define('COUPON_STATUS', 'Estado');
 define('COUPON_STATUS_HELP', 'Configura ' . IMAGE_ICON_STATUS_RED . ' para que los clientes no puedan usar el vale.');
-
 define('COUPON_BUTTON_BACK', 'Volver');
 define('COUPON_BUTTON_CONFIRM', 'Confirmar');
+
+define('TEXT_ENTRY_REQUIRED', '&nbsp;<span style="color: #ff0000;">*</span>');
+
+define('ERROR_NO_CUSTOMER_SELECTED', 'Error: No se ha seleccionado ningún cliente.');
+define('ERROR_NO_COUPON_AMOUNT', 'Error: No se ha introducido ningún importe del vale. Introduce una o selecciona gastos de envío gratuitos.');
+define('ERROR_COUPON_EXISTS', 'Error: Ya existe un vale con ese código.');
+define('ERROR_MISSING_COUPON_NAME', 'Error: No se ha introducido un nombre de vale en idioma ');
+define('ERROR_MISSING_START_DATE', 'Error: Se debe especificar una <b>Fecha de inicio</b> para el vale');
+define('ERROR_MISSING_FINISH_DATE', 'Error: Se debe especificar una <b>Fecha de finalización</b> para el vale');
+
 ?>

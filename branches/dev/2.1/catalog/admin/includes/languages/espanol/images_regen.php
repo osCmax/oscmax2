@@ -43,7 +43,7 @@ define('TABLE_HEADING_ACTION', 'Acción');
 
 define('TEXT_MISSING_IMAGES', 'Imágenes perdidas');
 define('TEXT_YOU_HAVE', 'Tienes ');
-define('TEXT_ACCOUNT_FOR', ' en la base dedatos de la tienda y todas están justificadas.');
+define('TEXT_ACCOUNT_FOR', ' en la base de datos de la tienda y todas están justificadas.');
 define('TEXT_SUCCESS_1', 'Todas las imágenes que se podían regenerar desde ');
 define('TEXT_SUCCESS_2', '  han sido correctamente regeneradas');
 define('TEXT_IMAGES_ON_SERVER', ' imágenes en el servidor incluyendo ');
@@ -64,7 +64,7 @@ define('TEXT_NO_GENERATE', ' sin el cual no se pueden regenerar las imágenes.');
 define('TEXT_MOPICS_IMAGE', 'Imagen mopics: ');
 define('TEXT_OUT_OF', 'De ');
 define('TEXT_PRODUCTS_YOU_HAVE', ' producto(s) hay ');
-define('TEXT_MISSING_IMAGE', ' imágenes perdidas');
+define('TEXT_MISSING_IMAGE', ' imágenes perdida');
 define('TEXT_NO_MOPICS', 'Por favor téngase en cuenta que han sido excluidos de este repaso los ficheros que utilicen la estructura numérica de mopics dinámicas (_1, _2, etc.).');
 define('TEXT_REGENERATE_ALL', 'Regenerar todas las imágenes en el servidor - ¡confirmar por favor!');
 define('TEXT_INFO_DESCRIPTION', 'Esto regenerará las imágenes de producto y miniaturas a partir de imágenes que ya existan y estén guardadas en el directorio "images_big".

@@ -162,6 +162,7 @@ define('BOX_CONFIGURATION_ACCOUNTS', 'Cuentas');
 define('BOX_CONFIGURATION_MAINTENANCE', 'Mantenimiento sitio');
 define('BOX_CONFIGURATION_MOPICS', 'MoPics dinámicas');
 define('BOX_CONFIGURATION_PRINT', 'Catálogo imprimible');
+define('BOX_CONFIGURATION_ARTICLES', 'Configuración noticias');
 define('BOX_CONFIGURATION_SEO', 'URLs SEO');
 define('BOX_CONFIGURATION_SEO_URLS', 'URLs SEO');
 define('BOX_CONFIGURATION_SEO_POPOUT', 'Menú pop out SEO');
@@ -610,6 +611,8 @@ define('TEXT_WRONG_USERNAME', 'Nombre de usuario erróneo');
 define('TEXT_LOGGED_IN', 'Inicio de sesión');
 define('TEXT_LOGGED_OUT', 'Cierre de sesión');
 define('TEXT_CONFIG_CHANGE', 'Cambio configuración: ');
+define('TEXT_ADMIN_AS_CUSTOMER', 'Administrador como cliente');
+define('TEXT_ADMIN_HACK_ATTEMPT', 'Intento de hackeo');
 
 // Footer defines
 define('TEXT_POWERED_BY', 'Desarrollado con ');

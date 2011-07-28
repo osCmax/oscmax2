@@ -13,7 +13,7 @@ $Id$
 define('HEADING_COUPON_HELP','Ayuda de vales descuento');
 define('TEXT_CLOSE_WINDOW','Cerrar ventana [x]');
 define('TEXT_COUPON_HELP_HEADER','Enhorabuena, ha canjeado un vale descuento.');
-define('TEXT_COUPON_HELP_NAME','<br><br>Nombre del vale : %s');
+define('TEXT_COUPON_HELP_NAME','Nombre del vale : %s');
 define('TEXT_COUPON_HELP_FIXED','<br><br>El vale aplica un descuento de %s a su pedido');
 define('TEXT_COUPON_HELP_MINORDER','<br><br>Es necesario un pedido mínimo de %s para usar el vale');
 define('TEXT_COUPON_HELP_FREESHIP','<br><br>Este vale proporciona gastos de envío gratis al pedido');

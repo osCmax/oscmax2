@@ -28,7 +28,8 @@ define('TEXT_SLIDESHOW_SORT_ORDER', 'Orden');
 
 define('TEXT_SLIDESHOW_DATE_ADDED', 'Añadido: ');
 define('TEXT_SLIDESHOW_LAST_MODIFIED', 'Modificado: ');
-define('TEXT_SLIDESHOW_DELETE_INTRO', '¿Seguro que quieres eliminar esta imagen diapositiva? ');
+define('TEXT_SLIDESHOW_DELETE_INTRO', '¿Seguro que quieres eliminar esta diapositiva? ');
+define('TEXT_DELETE_IMAGE', '¿Borrar imagen de diapositiva?');
 
 define('TEXT_INFO_HEADING_NEW_SLIDESHOW', 'Nuenva imagen diapositiva');
 define('TEXT_INFO_HEADING_EDIT_SLIDESHOW', 'Editar imagen diapositiva');

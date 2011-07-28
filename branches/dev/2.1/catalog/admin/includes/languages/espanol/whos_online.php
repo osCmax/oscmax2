@@ -30,7 +30,7 @@ define('TABLE_HEADING_LAST_PAGE_URL', 'Última URL');
 define('TABLE_HEADING_ACTION', 'Acción');
 define('TABLE_HEADING_SHOPPING_CART', 'Carrito de la compra');
 define('TEXT_SHOPPING_CART_SUBTOTAL', 'Subtotal');
-define('TEXT_NUMBER_OF_CUSTOMERS', 'Visitantes conectados (Considerados inactivos después de 5 minutos. Quitados depués de 15 minutos.');
+define('TEXT_NUMBER_OF_CUSTOMERS', 'Visitantes conectados (Considerados inactivos después de 5 minutos. Quitados después de 15 minutos.');
 define('TABLE_HEADING_HTTP_REFERER', '¿Origen?');
 define('TEXT_HTTP_REFERER_URL', 'URL origen HTTP');
 define('TEXT_HTTP_REFERER_FOUND', 'Sí');

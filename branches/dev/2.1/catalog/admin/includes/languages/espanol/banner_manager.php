@@ -27,7 +27,7 @@ define('TEXT_BANNERS_IMAGE_LOCAL', ', o introduce un fichero local del servidor 
 define('TEXT_BANNERS_IMAGE_TARGET', 'Destino de la imagen (grabar en):');
 define('TEXT_BANNERS_HTML_TEXT', 'Texto HTML:');
 define('TEXT_BANNERS_EXPIRES_ON', 'Caduca el:');
-define('TEXT_BANNERS_OR_AT', ' , o depués de ');
+define('TEXT_BANNERS_OR_AT', ' , o después de ');
 define('TEXT_BANNERS_IMPRESSIONS', 'impresiones/visualizaciones.');
 define('TEXT_BANNERS_SCHEDULED_AT', 'Programado para el:');
 define('TEXT_BANNERS_BANNER_NOTE', '<b>Notas sobre el banner:</b><ul><li>Utiliza imagen o texto HTML para el banner - no ambos.</li><li>El texto HTML tiene prioridad sobre una imagen</li><li>Para enlazar a un sitio web externo asegúrate de incluir <b>http://</b></li></ul>');

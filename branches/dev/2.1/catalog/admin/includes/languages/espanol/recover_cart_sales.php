@@ -10,9 +10,9 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('MESSAGE_STACK_CUSTOMER_ID', 'Carrito de cliente ID ');
+define('MESSAGE_STACK_CUSTOMER_ID', 'Carrito de cliente ');
 define('MESSAGE_STACK_DELETE_SUCCESS', ' borrado correctamente');
-define('HEADING_TITLE', 'Recover Cart Sales v2.22');
+define('HEADING_TITLE', 'Recover Cart Sales');
 define('HEADING_EMAIL_SENT', 'Informe e-mail enviado');
 define('EMAIL_TEXT_LOGIN', 'Inicie sesión aquí:');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
@@ -43,7 +43,7 @@ define('EMAIL_TEXT_BODY_FOOTER',
 	'Por favor acepte nuestras disculpas si ya completó su compra, ' .
 	'intentamos no enviar estos mensajes en esos casos, pero a veces es ' .
 	'complicado para nosotros dependiendo de circunstancias particulares.'."\n\n".
-	'De nuevo, graicas por su tiempo y consideración por ayudarnos a ' .
+	'De nuevo, gracias por su tiempo y consideración por ayudarnos a ' .
 	'mejorar el sitio web ' . STORE_NAME .  ".\n\nAtentamente,\n\n"
 	);
 
@@ -55,7 +55,7 @@ define('TABLE_HEADING_CONTACT', 'CONTACTADO');
 define('TABLE_HEADING_CUSTOMER', 'NOMBRE CLIENTE');
 define('TABLE_HEADING_EMAIL', 'E-MAIL');
 define('TABLE_HEADING_PHONE', 'TELÉFONO');
-define('TABLE_HEADING_MODEL', 'ARTÍCULO');
+define('TABLE_HEADING_MODEL', 'REFERENCIA');
 define('TABLE_HEADING_DESCRIPTION', 'DESCRIPCIÓN');
 define('TABLE_HEADING_QUANTY', 'CANT.');
 define('TABLE_HEADING_PRICE', 'PRECIO');
@@ -66,5 +66,6 @@ define('TEXT_CURRENT_CUSTOMER', 'CLIENTE');
 define('TEXT_SEND_EMAIL', 'Enviar e-mail');
 define('TEXT_RETURN', '[Pulsa aquí para volver]');
 define('TEXT_NOT_CONTACTED', 'No avisado');
-define('PSMSG', 'Mensaje de P.D. adicional: ');
+define('PSMSG', 'Mensaje adicional (añadido al final del email): ');
+define('TEXT_NO_CARTS_FOUND', 'No se han encontrado carritos abandonados en el rango de fechas especificadas.');
 ?>

@@ -10,7 +10,7 @@ $Id: page_modules_configuration.php 1011 2011-01-06 23:38:01Z michael.oscmax@gma
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Page Modules Display, Update and Create');
+define('HEADING_TITLE', 'Seitenmodule anzeigen, aktualisieren und erstellen');
 
 define('TABLE_HEADING_PM_TITLE', 'Modultitel');
 define('TABLE_HEADING_PM_FILENAME', 'Moduldateiname');

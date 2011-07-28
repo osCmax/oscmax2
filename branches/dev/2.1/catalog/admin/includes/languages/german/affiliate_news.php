@@ -10,24 +10,24 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Affiliate News / Ankündigungen');
+define('NAVBAR_TITLE', 'Affiliateprogramm');
+define('HEADING_TITLE', 'Affiliateprogramm - News');
 
-define('TABLE_HEADING_AFFILIATE_NEWS_HEADLINE', 'Titel');
-define('TABLE_HEADING_AFFILIATE_NEWS_ACTION', 'Aktion');
-define('TABLE_HEADING_AFFILIATE_NEWS_STATUS', 'Status');
+define('TABLE_HEADING_AFFILIATE_NEWS', 'Affiliate - News');
 
-define('TEXT_NEWS_ITEMS', 'News-Einträge:');
-define('TEXT_INFO_HEADING_DELETE_ITEM', 'Eintrag löschen');
-define('TEXT_DELETE_ITEM_INTRO', 'Sind Sie sicher, dass Sie diesen Eintrag endgültig löschen möchten?');
+define('TEXT_AFFILIATE_NAME', 'Bannername:');
+define('TEXT_INFORMATION', 'Lesen Sie die Nachrichten zum Affiliateprogramm');
+define('TEXT_AFFILIATE_INFO', 'Kopieren Sie den folgenden Code und fügen Sie ihn in Ihre Website ein');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER', 'Link erstellen');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO', 'Geben Sie die Nummer des Produktes ein, auf das Sie verlinken wollen:');
 
-define('TEXT_AFFILIATE_NEWS_HEADLINE', 'Titel');
-define('TEXT_AFFILIATE_NEWS_CONTENT', 'Inhalt');
+define('IMAGE_BUTTON_BUILD_A_LINK','Link auf Produktbanner erstellen');
 
-define('IMAGE_NEW_NEWS_ITEM', 'Neuer News-Eintrag');
-
+//add on \admin\includes\english\affiliate_news.php
 // npe admin begin #add
-define('TEXT_AFFILIATE_NEWS_CONTENT_DELETE', 'Die angezeigten News in dieser Sprache löschen!');
-define('EMPTY_CATEGORY', 'Empty news');
-define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Es existieren keine News, die Ihren Affiliatepartnern angezeigt werden können.');
+define('TEXT_AFFILIATE_NEWS_CONTENT_DELETE', 'Gelesene Nachrichten in dieser Sprache löschen!');
+define('EMPTY_CATEGORY', 'Keine Nachrichten vorhanden');
+define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Es existieren keine Nachrichten, die Ihren Affiliates angezeigt werden können.');
 // npe admin begin #add
+
 ?>

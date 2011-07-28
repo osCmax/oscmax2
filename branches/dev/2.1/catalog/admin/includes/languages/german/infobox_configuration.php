@@ -11,7 +11,7 @@ $Id$
 */
 
 
-define('HEADER_TITLE', 'Infobox Anzeige,Aktualisierung und Erstellung');
+define('HEADER_TITLE', 'Infoboxen anzeigen, aktualisieren und erstellen');
 define('TABLE_HEADING_CONFIGURATION_TITLE', 'Titel');
 define('TABLE_HEADING_CONFIGURATION_VALUE', 'Dateiname');
 define('TABLE_HEADING_STATUS', 'Status');
@@ -56,7 +56,7 @@ define('TEXT_INFOBOX_HELP_ACTIVE', 'W‰hlen Sie <b>yes</b>(Ja) oder <b>no</b>(Nei
 
 define('TEXT_CLOSE_WINDOW', '<u>Fenster schlieﬂen</u> [x]');
 
-define('COUNT_1', 'Es befinden sich derzeit: ');
+define('COUNT_1', 'Es befinden sich derzeit ');
 define('COUNT_2', ' Boxen in der linken Spalte und ');
 define('COUNT_3', ' Boxes in der rechten Spalte.');
 

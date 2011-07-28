@@ -46,7 +46,7 @@ $Id$
   define('STATUS_ACTIVE', 'Aktiv');
   define('STATUS_INACTIVE', 'Inaktiv');
   define('SUCCED_INFORMATION', 'Erfolgreich');
-  define('TITLE', 'Informationssystem');
+//  define('TITLE', 'Informationssystem');
   define('VIEW_INFORMATION', 'Informationsansicht');
   define('VISIBLE_INFORMATION', 'Sichtbar machen');
   define('VISIBLE_INFORMATION_DO', '( Sichtbar )');
@@ -60,4 +60,7 @@ $Id$
   define('IMAGE_ICON_EXTERNAL_URL', 'Diese Informationsseite verlinkt auf eine externe Seite.');
   define('TEXT_INCLUDE_HTTP', '<i>Mit http://</i>');
   define('TEXT_UPDATE_SUCCESS', 'Erfolgreich aktualisiert');
+  define('TEXT_GREETING_PERSONAL', 'Begrüßung bekannter Benutzer');
+  define('TEXT_GREETING_PERSONAL_RELOGON', 'Fragen, ob der richtige Benutzer angemeldet ist');
+  define('TEXT_GREETING_GUEST', 'Begrüßung unbekannter Benutzer');
 ?>

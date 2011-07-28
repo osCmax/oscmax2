@@ -14,9 +14,9 @@ $Id$
   echo HTML_PARAMS;
   // BOF Separate Pricing Per Customer
     if(!tep_session_is_registered('sppc_customer_group_id')) {
-    $customer_group_id = '0';
+      $customer_group_id = '0';
     } else {
-     $customer_group_id = $sppc_customer_group_id;
+      $customer_group_id = $sppc_customer_group_id;
     }
   // EOF Separate Pricing Per Customer       
 //end{htmlparams}
@@ -43,7 +43,7 @@ CanonicalLink( $xhtml = false, 'SSL' );
 
 //begin{javascript}
 if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exists for this page it will be loaded
-      require(bts_select('javascript', $PHP_SELF));
+  require(bts_select('javascript', $PHP_SELF));
 } else {
   if (isset($javascript) && file_exists(DIR_WS_JAVASCRIPT . basename($javascript))) { require(DIR_WS_JAVASCRIPT . basename($javascript)); }
 }
@@ -86,7 +86,7 @@ if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exist
 
 //begin{suckertree}
 if ( defined('FWR_SUCKERTREE_MENU_ON') && FWR_SUCKERTREE_MENU_ON === 'true' )
-echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet', 'fwr_suckertree_css_menu.css')) . '" />';
+  echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet', 'fwr_suckertree_css_menu.css')) . '" />';
 //end{suckertree}
 
 //begin{warnings}
@@ -158,9 +158,16 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 
 //begin{navicongroup}
   if ((tep_session_is_registered('customer_id')) && (!tep_session_is_registered('noaccount'))) { ?>
-      <a href="<?php echo tep_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><?php echo tep_image_button('log_off.png', HEADER_TITLE_LOGOFF);?></a>
-    <?php }
-    echo '<a href="' . tep_href_link(FILENAME_CONTACT_US) . '">' . tep_image_button('contact.png', HEADER_TITLE_CART_CONTENTS) . '</a> <a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image_button('account.png', HEADER_TITLE_MY_ACCOUNT) . '</a> <a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">'; ?><?php if (BASKET_CART =='cart') { echo tep_image_button('cart_contents.png', HEADER_TITLE_CART_CONTENTS); } else {  echo tep_image_button('contents.png', HEADER_TITLE_CART_CONTENTS); } ?> <?php echo '</a> <a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . tep_image_button('wishlist.png', HEADER_TITLE_WISHLIST) . '</a>';
+    <a href="<?php echo tep_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><?php echo tep_image_button('log_off.png', HEADER_TITLE_LOGOFF);?></a>
+    <?php 
+  }
+  echo '<a href="' . tep_href_link(FILENAME_CONTACT_US) . '">' . tep_image_button('contact.png', HEADER_TITLE_CART_CONTENTS) . '</a> <a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image_button('account.png', HEADER_TITLE_MY_ACCOUNT) . '</a> <a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">';
+  if (BASKET_CART =='cart') {
+    echo tep_image_button('cart_contents.png', HEADER_TITLE_CART_CONTENTS); 
+  } else {
+	echo tep_image_button('contents.png', HEADER_TITLE_CART_CONTENTS);
+  }
+  echo '</a> <a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . tep_image_button('wishlist.png', HEADER_TITLE_WISHLIST) . '</a>';
 //end{navicongroup}        
 
 //begin{pixelseparator}
@@ -172,8 +179,8 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 ////////// Template header links ////////// 
 
 //begin{logoff}
-      if ((tep_session_is_registered('customer_id')) && (!tep_session_is_registered('noaccount'))) // DDB - PWA - 040622 - no display of logoff for PWA customers
-	 { ?>
+      if ((tep_session_is_registered('customer_id')) && (!tep_session_is_registered('noaccount'))) // DDB - PWA - 040622 - no display of logoff for PWA customers 
+	  { ?>
       &nbsp;|&nbsp; 
       <a href="<?php echo tep_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>" class="headerNavigation"><?php echo HEADER_TITLE_LOGOFF; ?>
       </a>&nbsp;|&nbsp;
@@ -184,28 +191,26 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 //begin{myaccount}
   if (!tep_session_is_registered('noaccount')) // DDB - PWA - 040622 - no display of account for PWA customers
 	{ ?>
-	
-      	<a href="<?php echo tep_href_link(FILENAME_ACCOUNT, 'my_account_f=1', 'SSL'); ?>" class="headerNavigation"><?php echo HEADER_TITLE_MY_ACCOUNT; ?>						
-	</a>
+	<a href="<?php echo tep_href_link(FILENAME_ACCOUNT, 'my_account_f=1', 'SSL'); ?>" class="headerNavigation"><?php echo HEADER_TITLE_MY_ACCOUNT; ?></a>
   <?php }
 //end{myaccount}
           
 //begin{cartcontents}
   ?>
-<a href="<?php echo tep_href_link(FILENAME_SHOPPING_CART); ?>" class="headerNavigation"><?php echo HEADER_TITLE_CART_CONTENTS; ?></a>
+    <a href="<?php echo tep_href_link(FILENAME_SHOPPING_CART); ?>" class="headerNavigation"><?php echo HEADER_TITLE_CART_CONTENTS; ?></a>
   <?php
 //end{cartcontents}       
                
 //begin{checkout}
   ?>
-<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>" class="headerNavigation"><?php echo HEADER_TITLE_CHECKOUT; ?></a>        
+    <a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>" class="headerNavigation"><?php echo HEADER_TITLE_CHECKOUT; ?></a>        
   <?php
 //end{checkout}           
 
 //begin{wishlist}
-?>
-<a href="<?php echo tep_href_link(FILENAME_WISHLIST, '', 'SSL'); ?>" class="headerNavigation"><?php echo BOX_HEADING_CUSTOMER_WISHLIST; ?></a>
-<?php
+  ?>
+    <a href="<?php echo tep_href_link(FILENAME_WISHLIST, '', 'SSL'); ?>" class="headerNavigation"><?php echo BOX_HEADING_CUSTOMER_WISHLIST; ?></a>
+  <?php
 //end{wishlist}           
 
 //begin{content}
@@ -299,11 +304,10 @@ if(bts_select('common', 'common_top.php')) include (bts_select('common', 'common
 //begin{footer}
 // BOF Added: Down for Maintenance Hide footer.php if not to show
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false') {
-<!-- footer //-->
-echo FOOTER_TEXT_BODY;
-
-<!-- footer_eof //-->
-       
+  echo '<!-- footer //-->';
+  echo FOOTER_TEXT_BODY;
+  echo '<!-- footer_eof //-->';
+}
 //end{footer}
             
 //
@@ -370,7 +374,7 @@ if (GOOGLE_ANALYTICS_STATUS == 'true') { ?>
   }
 //end{slideshow}
 //begin{sbcustom}
-include(DIR_WS_INCLUDES . 'javascript/sbcustom.php');
+  include(DIR_WS_INCLUDES . 'javascript/sbcustom.php');
 //end{sbcustom}
 //begin{jquery}
 ?>

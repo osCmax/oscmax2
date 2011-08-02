@@ -23,7 +23,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
         $slideshow_target = tep_db_prepare_input($_POST['slideshow_target']);
         $slideshow_sort_order = tep_db_prepare_input($_POST['slideshow_sort_order']);
 
-        tep_db_query("insert into " . TABLE_SLIDESHOW . " (slideshow_id, slideshow_title, slideshow_link, slideshow_target, slideshow_sort_order, date_added) values ('', '" . $slideshow_title . "', '" . tep_db_input($slideshow_link) . "', '" . tep_db_input($slideshow_target) . "', '" . tep_db_input($slideshow_sort_order) . "', now())");
+        tep_db_query("insert into " . TABLE_SLIDESHOW . " (slideshow_id, slideshow_title, slideshow_link, slideshow_target, slideshow_sort_order, date_added) values ('', '" . addslashes($slideshow_title) . "', '" . tep_db_input($slideshow_link) . "', '" . tep_db_input($slideshow_target) . "', '" . tep_db_input($slideshow_sort_order) . "', now())");
 		
 		$slideshow_id = tep_db_insert_id();
 		
@@ -43,7 +43,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
         $slideshow_target = tep_db_prepare_input($_POST['slideshow_target']);
         $slideshow_sort_order = tep_db_prepare_input($_POST['slideshow_sort_order']);
 
-        tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_id = '" . (int)$slideshow_id . "', slideshow_title = '" . $slideshow_title . "', slideshow_link = '" . tep_db_input($slideshow_link) . "', slideshow_target = '" . tep_db_input($slideshow_target) . "', slideshow_sort_order = '" . tep_db_input($slideshow_sort_order) . "', last_modified = now() where slideshow_id = '" . (int)$slideshow_id . "'");
+        tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_id = '" . (int)$slideshow_id . "', slideshow_title = '" . addslashes($slideshow_title) . "', slideshow_link = '" . tep_db_input($slideshow_link) . "', slideshow_target = '" . tep_db_input($slideshow_target) . "', slideshow_sort_order = '" . tep_db_input($slideshow_sort_order) . "', last_modified = now() where slideshow_id = '" . (int)$slideshow_id . "'");
 		
 		if($_FILES['slideshow_image']['name'] != '') {
           if ($slideshow_image = new upload('slideshow_image', DIR_FS_CATALOG_IMAGES . 'slideshow/')) {

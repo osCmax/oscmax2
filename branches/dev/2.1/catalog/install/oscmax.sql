@@ -2130,6 +2130,8 @@ INSERT INTO configuration VALUES (1304, 'CT_ORDER_EDITOR_PAYMENT_DROPDOWN', 'ORD
 INSERT INTO configuration VALUES (1305, 'CT_ORDER_EDITOR_USE_SPPC', 'ORDER_EDITOR_USE_SPPC', 'true', 'CD_ORDER_EDITOR_USE_SPPC', 70, 3, NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (1306, 'CT_ORDER_EDITOR_USE_AJAX', 'ORDER_EDITOR_USE_AJAX', 'true', 'CD_ORDER_EDITOR_USE_AJAX', 70, 4, NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (1307, 'CT_ORDER_EDITOR_CREDIT_CARD', 'ORDER_EDITOR_CREDIT_CARD', 'Credit Card', 'CD_ORDER_EDITOR_CREDIT_CARD', 70, 5, NULL, now(), NULL, 'tep_cfg_pull_down_payment_methods(');
+INSERT INTO configuration VALUES (1308, 'CT_ORDER_EDITOR_DEFAULT_PAYMENT_METHOD', 'ORDER_EDITOR_DEFAULT_PAYMENT_METHOD', 'Please Select...', 'CD_ORDER_EDITOR_CREDIT_CARD', 70, 6, NULL, now(), NULL, 'tep_cfg_pull_down_payment_methods(');
+
 
 # Configuration ID: 80 - Recover Cart Sales
 INSERT INTO configuration VALUES (1491, 'CT_RCS_BASE_DAYS', 'RCS_BASE_DAYS', '30', 'CD_RCS_BASE_DAYS', 80, 10, NULL, now(), '', '');

@@ -36,7 +36,7 @@ $Id$
   $country = tep_db_prepare_input($_POST['country']);
   $format_id = tep_get_address_format_id($address['country_id']);
   $size = "1";
-  $payment_method = DEFAULT_PAYMENT_METHOD;
+  $payment_method = ORDER_EDITOR_DEFAULT_PAYMENT_METHOD;
   $new_value = "1";
   $error = false; // reset error flag
   $temp_amount = "0";

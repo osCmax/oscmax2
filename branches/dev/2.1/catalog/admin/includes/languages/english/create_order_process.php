@@ -11,7 +11,6 @@ $Id$
 */
 define('HEADING_SELECT', 'Select Customer');
 define('HEADING_CREATE', 'Check / Enter Customer Details');
-define('DEFAULT_PAYMENT_METHOD', "Payment on Local Pickup. We accept cash, Interac, Visa and Master Card.");
 define('TEXT_SUBTOTAL', "Subtotal :");
 define('TEXT_DISCOUNT', "Discount :");
 define('TEXT_DELIVERY', "Delivery :");

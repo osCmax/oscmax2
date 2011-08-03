@@ -687,6 +687,8 @@ define('CT_ORDER_EDITOR_USE_AJAX', 'Allow the use of AJAX to update order inform
 define('CD_ORDER_EDITOR_USE_AJAX', 'This must be set to false if using a browser on which JavaScript is disabled or not available.');
 define('CT_ORDER_EDITOR_CREDIT_CARD', 'Select your credit card payment method');
 define('CD_ORDER_EDITOR_CREDIT_CARD', 'Order Editor will display the credit card fields when this payment method is selected.');
+define('CT_ORDER_EDITOR_DEFAULT_PAYMENT_METHOD', 'Select your default payment method');
+define('CD_ORDER_EDITOR_DEFAULT_PAYMENT_METHOD', 'Order Editor will display the selected payment method by default in the order editor.');
 
 // Configuration ID: 80 - Recover Cart Sales
 define('CT_RCS_BASE_DAYS', 'Look back days');

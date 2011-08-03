@@ -79,27 +79,26 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
   <tr class="header">
     <td valign="middle"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_TEMPLATES . 'images/' . STORE_LOGO, STORE_NAME) . '</a>'; ?></td>
     <td align="right" valign="bottom">
-      <table border="0" cellspacing="0" cellpadding="0">
-        <tr>
-	<?php if ((tep_session_is_registered('customer_id')) && (!tep_session_is_registered('noaccount'))) { ?>
-          <td class="tab">
-            <a href="<?php echo tep_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><?php echo HEADER_TITLE_LOGOFF; ?></a>
-          </td>
-    <?php } ?>
-	<?php echo '<td class="tab"><a href="' . tep_href_link(FILENAME_CONTACT_US) . '">' . HEADER_TITLE_CONTACT_US . '</a></td>' . 
-	           '<td class="tab"><a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . HEADER_TITLE_MY_ACCOUNT . '</a></td>' .
-			   '<td class="tab"><a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">'; ?>
-	<?php if (BASKET_CART =='cart') {
-		  echo HEADER_TITLE_CART_CONTENTS; } else {  echo HEADER_TITLE_BASKET_CONTENTS; } ?>
-	<?php echo '</a></td><td class="tab"><a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . HEADER_TITLE_WISHLIST . '</a></td>'; ?>
-    <?php
-	if ($cart->count_contents() > 0) {
-	  echo '<td class="tab"><a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . HEADER_TITLE_CHECKOUT . '</a></td>'; ?>
-    <?php } ?>
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-      </table>
+    
+    <div id="header">
+      <ul>
+        <?php if ((tep_session_is_registered('customer_id')) && (!tep_session_is_registered('noaccount'))) { ?>
+        <li><a href="<?php echo tep_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>"><?php echo HEADER_TITLE_LOGOFF; ?></a></li>
+        <?php } ?>
+        <?php echo '<li><a href="' . tep_href_link(FILENAME_CONTACT_US) . '">' . HEADER_TITLE_CONTACT_US . '</a></li>' . 
+	               '<li><a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . HEADER_TITLE_MY_ACCOUNT . '</a></li>' .
+			       '<li><a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">';
+        if (BASKET_CART =='cart') {
+		      echo HEADER_TITLE_CART_CONTENTS; } else {  echo HEADER_TITLE_BASKET_CONTENTS; } ?>
+	    <?php echo '</a></li><li><a href="' . tep_href_link(FILENAME_WISHLIST, '', 'SSL') . '">' . HEADER_TITLE_WISHLIST . '</a></li>'; ?>
+        <?php
+	    if ($cart->count_contents() > 0) {
+	          echo '<li><a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . HEADER_TITLE_CHECKOUT . '</a></li>'; ?>
+        <?php } ?>
+      </ul>
+    </div>
     </td>
+    <td>&nbsp;</td>
   </tr>
 </table>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">

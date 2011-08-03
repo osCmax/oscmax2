@@ -24,8 +24,6 @@ FORM { display: inline; }
 
 /* Header */
 TR.header { background: #ffffff; }
-td.tab { vertical-align:bottom; font-family: Verdana, Arial, sans-serif; background-image:url(images/tab.png); font-size: 11px; line-height:2; width:76px; text-align:	center; background-repeat:no-repeat; }
-td.tab a { display: block; width: 100%; text-decoration:none; }
 td.breadcrumb { background-image:url(images/breadcrumb_background.png); background-repeat:repeat-x; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight : bold; border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd; }
 td.breadcrumb_left { background-image:url(images/breadcrumb_left.png); background-color: #ffffff;}
 td.breadcrumb_right { background-image:url(images/breadcrumb_right.png); background-color: #ffffff;}
@@ -333,3 +331,52 @@ background-position: top center; color: white; font-weight: bold; margin-left: 1
 .clearScreenshots hr { display: none; }
 .noScreenshots { text-align: center; padding: 15px 0 15px 0; margin: 0; }
 /* EOF: Dynamic Mopics */
+
+/* BOF: Index Page Tabs - Dadionline */
+#header {
+	float:left;
+	width:100%;
+	font-size:93%;
+	line-height:normal;
+}
+
+#header ul {
+    margin:0;  /* We do not want a margin */
+    padding:0;  /* There is no padding and we do not want to display this as a bullet pointed list */
+    list-style:none;  /* We do not want to display this as a bullet pointed list */
+}
+
+#header li {
+	float:right;  /* Float all items left */
+	background-image: url(images/tab_right.gif);  /* background image for the tab */
+	background-repeat: no-repeat;  /* we do not want the background image to repeat */
+	background-position: right top;  /* position the background image at the top left of the Tab */
+	height: 23px;  /* give the LI item an height of 40 pixels */
+	line-height: 23px;  /* give the LI item a line-height of 40 pixels. Line-Height ensures that the text appears in the centre (vertically) */
+	margin-top: 0;  /* We do not want a top margin */
+	margin-bottom: 0;  /* We do not want a bottom margin */
+	margin-left: 0;  /* We do not want a left margin */
+	padding: 0;  /* We do not want any padding */
+	margin-right: 2px;  /* Add a 2 pixel margin to the right of each LI (Tab). Adds a 2 pixel gap between each tab */
+}
+
+#header a {
+	font-family: Verdana,Arial,sans-serif;
+    font-size: 11px;
+	display:block;  /* Display the "A" link as a block */
+	color: #000;  /* Colour the "A" link white */
+	text-decoration: none;  /* Turns off the underline fucntion fo the link */
+	background-image: url(images/tab_left.gif);  /* Background image for the "A" Link (adds left image) */
+	background-repeat: no-repeat;  /* Do not repeat the background image */
+	background-position: left top;  /* Position the background image at the top left of the Tab */
+	padding-right: 10px;  /* Add 10 pixels of padding to the right of the "A" clickable link */
+	padding-left: 10px;  /* Add 10 pixels of padding to the left of the "A" clickable link */
+}
+
+#header a:hover {
+	display:block;  /* Display the "A" link as a block */
+	color: #666;  /* Colour the "A" link black */
+	text-decoration: none;  /* Turns on the underline function of the link */
+
+}
+/* EOF: Index Page Tabs - Dadionline */

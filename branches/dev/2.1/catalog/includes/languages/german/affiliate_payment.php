@@ -31,7 +31,7 @@ define('HEADING_DATE_HELP', 'Datum Hilfe');
 define('TEXT_DATE_HELP', '<i>Datum</i> zeigt an, wann die Zahlung an den Affiliate erfolgt ist.');
 define('HEADING_PAYMENT_ID_HELP', 'Zahlungs-ID Hilfe');
 define('TEXT_PAYMENT_ID_HELP', '<i>Zahlungs-ID</i> ist die Vorgangsnummer der Zahlung.');
-define('HEADING_PAYMENT_HELP', 'Werbepartner-Umsatz Help');
+define('HEADING_PAYMENT_HELP', 'Werbepartner-Umsatz Hilfe');
 define('TEXT_PAYMENT_HELP', '<i>Werbepartner-Umsatz</i> ist die Summe der an den Affiliate ausgezahlten Provisionen.');
 define('HEADING_STATUS_HELP', 'Zahlungsstatus Hilfe');
 define('TEXT_STATUS_HELP', '<i>Zahlungsstatus</i> ist der Status der Zahlungen an den Werbepartner');

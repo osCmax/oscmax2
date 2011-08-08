@@ -97,6 +97,7 @@ tep_db_query("insert into " . TABLE_HTTP_ERROR . " values ('', '" . $_GET['error
 ?>
       <tr>
         <td>
+        
 <?php
   $info_box_contents = array();
   $info_box_contents[] = array('text' => HEADING_SEARCH_CRITERIA);
@@ -104,7 +105,7 @@ tep_db_query("insert into " . TABLE_HTTP_ERROR . " values ('', '" . $_GET['error
   new infoBoxHeading($info_box_contents, true, true);
 
   $info_box_contents = array();
-  $info_box_contents[] = array('text' => tep_draw_input_field('keywords', '', 'style="width: 100%"'));
+  $info_box_contents[] = array('align' => 'center', 'text' => tep_draw_input_field('keywords', '', 'style="width: 80%"'));
   $info_box_contents[] = array('align' => 'right', 'text' => tep_draw_checkbox_field('search_in_description', '1') . ' ' . TEXT_SEARCH_IN_DESCRIPTION);
 
   new infoBox($info_box_contents);

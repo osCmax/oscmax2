@@ -39,9 +39,9 @@ $Id$
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td height="14" class="infoBoxHeading"><img src="images/infobox/corner_left.gif" border="0" alt="" width="11" height="14"></td>
+            <td height="14"><?php echo tep_image(bts_select('images', 'infobox/top_left.png')); ?></td>
             <td width="100%" height="14" class="infoBoxHeading">&nbsp;<?php echo HEADING_SEARCH_CRITERIA; ?></td>
-            <td height="14" class="infoBoxHeading" nowrap><img src="images/infobox/corner_right.gif" border="0" alt="" width="11" height="14"></td>
+            <td height="14" nowrap><?php echo tep_image(bts_select('images', 'infobox/top_right.png')); ?></td>
           </tr>
         </table>
         <table border="0" width="100%" cellspacing="0" cellpadding="1" class="infoBox">

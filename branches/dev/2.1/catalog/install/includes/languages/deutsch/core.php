@@ -90,7 +90,7 @@ define('TEXT_ADMIN_NO_PERMISSION', 'Sie besitzen keine ausreichende Berechtigung
 // Finished
 define('TEXT_FINISHED', '<h1>Installation abgeschlossen</h1><p>Herzlichen Glückwunsch zur erfolgreichen Einrichtung Ihres Onlineshops!</p><p>Wir wünschen Ihnen viel Erfolg mit Ihrem Onlineshop und laden Sie ein, Teil unserer Community zu werden.</p><p align="right"><i><b>- Ihr osCmax Team</b></i></p>');
 define('TEXT_ADMIN_RENAMED_1', 'Herzlichen Glückwunsch! Ihr admin Verzeichnis wurde erfolgreich umbenannt zu ');
-define('TEXT_ADMIN_RENAMED_2', '.<br><br>Falls Sie mehr über zusätzliche Sicherheitsmaßnahmen erfahren möchten, lesen Sie bitte die Informationen im <a href="http://wiki.oscdox.com/setting_up_security" target="_blank">Wiki</a>.');
-define('TEXT_ADMIN_NOT_RENAMED', 'Sie haben das <b>admin</b>-Verzeichnis nicht umbenannt! Bei öffentlich zugänglichen Shops wird dies aus Sicherheitsgründen jedoch dringend empfohlen. <br><br>Bitte lesen Sie die <a href="http://wiki.oscdox.com/setting_up_security" target="_blank">Wiki-Dokumentation zur Absicherung Ihres Onlineshops.</a>');
+define('TEXT_ADMIN_RENAMED_2', '.<br><br>Falls Sie mehr über zusätzliche Sicherheitsmaßnahmen erfahren möchten, lesen Sie bitte die Informationen im <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">Wiki</a>.');
+define('TEXT_ADMIN_NOT_RENAMED', 'Sie haben das <b>admin</b>-Verzeichnis nicht umbenannt! Bei öffentlich zugänglichen Shops wird dies aus Sicherheitsgründen jedoch dringend empfohlen. <br><br>Bitte lesen Sie die <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">Wiki-Dokumentation zur Absicherung Ihres Onlineshops.</a>');
 define('TEXT_INSTALLATION_SUCCESSFUL', 'Die Installation und Einrichtung war erfolgreich!');
 ?>

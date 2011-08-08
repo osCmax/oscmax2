@@ -42,9 +42,14 @@ $Id$
   
 // BOF: PGM Renaming the Admin Folder
   $admin_folder = trim($_POST['CFG_ADMIN_FOLDER']);
-  if ($admin_folder != 'admin') {
-  	rename ('../admin', '../' . $admin_folder);
-	$admin_folder_renamed = 'true';
+    if ( ($admin_folder != 'admin') && ($admin_folder != '') ) {
+	  rename ('../admin', '../' . $admin_folder);
+      $admin_folder_renamed = 'true';
+    }
+  
+  // Added in case admin name not changed or insufficient permissions 	
+  if ($admin_folder == '') {
+    $admin_folder = 'admin';
   }
 // EOF: PGM Renaming the Admin Folder
 

@@ -90,7 +90,7 @@ define('TEXT_ADMIN_NO_PERMISSION', 'We have been unable to obtain sufficient fil
 // Finished
 define('TEXT_FINISHED', '<h1>Installation Complete</h1><p>Congratulations on installing and configuring osCmax as your online store solution!</p><p>We wish you all the best with the success of your online store and welcome you to join and participate in our community.</p><p align="right"><i><b>- The osCmax team</b></i></p>');
 define('TEXT_ADMIN_RENAMED_1', 'Congratulations! Your admin folder has been renamed to ');
-define('TEXT_ADMIN_RENAMED_2', '.<br><br>If you would like to read more information about further security measures you can take a look at the <a href="http://wiki.oscdox.com/setting_up_security" target="_blank">Wiki documentation.</a>');
-define('TEXT_ADMIN_NOT_RENAMED', 'You have not renamed your <b>admin</b> folder!  We highly recommend that you do this on live stores to increase security.  <br><br>Please read the <a href="http://wiki.oscdox.com/setting_up_security" target="_blank">Wiki documentation for more information about securing your site properly.</a>');
+define('TEXT_ADMIN_RENAMED_2', '.<br><br>If you would like to read more information about further security measures you can take a look at the <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">Wiki documentation.</a>');
+define('TEXT_ADMIN_NOT_RENAMED', 'You have not renamed your <b>admin</b> folder!  We highly recommend that you do this on live stores to increase security.  <br><br>Please read the <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">Wiki documentation for more information about securing your site properly.</a>');
 define('TEXT_INSTALLATION_SUCCESSFUL', 'The installation and configuration was successful!');
 ?>

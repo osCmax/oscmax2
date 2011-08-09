@@ -670,6 +670,12 @@ CREATE TABLE `customers_wishlist_attributes` (
   PRIMARY KEY (`customers_wishlist_attributes_id`)
 ); 
 
+DROP TABLE IF EXISTS db_version;
+CREATE TABLE db_version (
+  database_version varchar(128) DEFAULT NULL
+);
+
+
 DROP TABLE IF EXISTS geo_zones;
 CREATE TABLE geo_zones (
   geo_zone_id int NOT NULL auto_increment,
@@ -2670,6 +2676,10 @@ INSERT INTO currencies VALUES (3,'UK Pound','GBP','£','','.',',','2','1.0000',no
 
 INSERT INTO customers_groups VALUES (0,'Retail','1','0','','');
 INSERT INTO customers_groups VALUES (1,'Wholesale','0','0','','');
+
+
+INSERT INTO db_version VALUES ('v2.5_RC2');
+
 
 INSERT INTO languages VALUES (1,'English','en','icon.gif','english',1,'');
 INSERT INTO languages VALUES (2,'Deutsch','de','icon.gif','german',2,'');

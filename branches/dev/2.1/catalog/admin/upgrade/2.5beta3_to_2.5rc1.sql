@@ -7,7 +7,7 @@ osCmax Upgrade v2.5 Beta 3 to v2.5 RC1
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE TABLE `db_version` (
+CREATE TABLE IF NOT EXISTS `db_version` (
   `database_version` varchar(128) DEFAULT NULL
 ) ;
 

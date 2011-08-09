@@ -47,6 +47,7 @@ function mysql_check_error() {
         show_error(sprintf('MySQL #%d: %s', mysql_errno(), mysql_error()));
     }
 }
+
   require('includes/application_top.php');
   //require('../includes/configure.php');
   //require('../includes/database_tables.php');
@@ -60,7 +61,7 @@ header('Pragma: no-cache');                                    # HTTP/1.0
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <meta http-equiv="Content-Type"
-	content="text/html; charset=<?php echo CHARSET; ?>">
+	content="text/html; charset=<?php echo 'CHARSET'; ?>">
 <title>osCmax Database Update - v2.5 RC2</title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <link rel="stylesheet" type="text/css"
@@ -98,15 +99,15 @@ table {
   if (!$connect) {
      die('Could not connect: ' . mysql_error());
     }
-    echo 'connection success';
-    mysql_select_db(DB_DATABASE) or die(mysql_error());
-    $result = mysql_query("SELECT * FROM db_version");
+    //echo 'connection success';
+    //mysql_select_db(DB_DATABASE) or die(mysql_error());
+    //$result = mysql_query("SELECT * FROM db_version");
     //or die(mysql_error());
-    while ($row = mysql_fetch_array($result)) {
+    //while ($row = mysql_fetch_array($result)) {
 
-    $version = $row['database_version'];
+    //$version = $row['database_version'];
     
-    }
+    //}
     
 
     
@@ -124,34 +125,62 @@ table {
 		</table>
 		</td>
 		<!-- body_text //-->
-		<td width="75%" valign="top">
+		<td width="100%" valign="top">
 		<table border="0" width="100%" cellspacing="0" cellpadding="2">
 			<tr>
 				<td>
-				<h2>osCmax v2.5 RC2<br>
-				Database Upgrade Script</h2>
+				<h3>osCmax Upgrade System</h3>
+<?php
+    @mysql_select_db(DB_DATABASE);
+    
+    $result = @mysql_query("SELECT * FROM db_version");
+    if (!$result) { echo '<p>No version table detected. This will be created for you.</p>'; }
+    $version='';
+    while ($row = @mysql_fetch_array($result)) {
 
-				<p><strong>Before proceeding, please make a backup of
-				your database.</strong>
+    $version = $row['database_version'];
+    }
+   
+  
+    mysql_close($connect);
+	if ($version == 'v2.5_RC2') { 
+	  if (PROJECT_VERSION == 'osCmax_v2.5_RC2') { 
+					?>
+				<center>
+				<p>You have successfully upgraded your osCmax installation to
+				<?php echo $version; ?></p>
+				<br>
+				</center>
+				<?php 
+				 } else {
+				 ?>
+				<strong>Complete your upgrade by uploading the  <?php echo $version; ?> files now. </strong></center> 
+				<?php
+				 }
+	  } else { ?>
+
+				
 				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-				<table>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
 					<tr>
 						<?php
           
               if ($version == 'v2.5_RC1') { ?>
-						<td>Your current osCmax version is <?php echo $version; ?></td>
+						<td>Your current osCmax version is <strong><?php echo $version; ?></strong></td>
 						<input type="hidden" name="version" value="2">
 						<?php } elseif (!$version) { ?>
-						<td>Verify that your minimum osCmax version is v2.5 Beta 3. <?php echo $version; ?></td>
+						<td> Manually verify that your minimum osCmax version is v2.5 Beta 3.<br>You can check this by visiting your admin panel login screen. <br> In the copyright notice at the bottom, the current version will be displayed.</td>
 						<input type="hidden" name="version" value="1">
 
 						<?php  }  ?>
 					</tr>
 					<?php
+				
        $db_params = array(
        	 array( 'hostname' => DB_SERVER, 'username' => DB_SERVER_USERNAME, 'password' => DB_SERVER_PASSWORD, 'database' => DB_DATABASE));
 	 //array( 'hostname', 'username', 'password', 'database')) ;
-    for ($row = 0; $row < 4; $row++)      
+	 
+    for ($row = 0; $row < 1; $row++)      
        {
        foreach ($db_params[$row] as $param => $value) { ?>
 					<tr>
@@ -161,22 +190,30 @@ table {
 					<?php }
      } ?>
 					<tr>
-						<td>Check to display sql output:</td>
-						<td><input type="checkbox" name="contents" value="1" /></td>
+						<td><br>Check to display sql output: <input type="checkbox" name="contents" value="1" /><br></td>
 					</tr>
+					<tr>
+					    <td>
+					    <br><strong>Before proceeding, please make a backup of
+				your database.<br><br></strong>
+					    </td>
+					</tr>    
 				</table>
+				
 				<button type="submit">Upgrade</button>
 				</form>
 
 				<div class="feedback"><?php
-if (is_param($_POST['hostname'])
+ }
+ 				
+if (is_param(isset($_POST['hostname']))
         and is_param($_POST['username'])        
         and is_param($_POST['database'])
         ) {
 	if (is_param($_POST['version']==1)) {
-       $file = '2.5beta3_to_2.5rc1.sql';
+       $file = 'upgrade/2.5beta3_to_2.5rc1.sql';
 	} elseif (is_param($_POST['version']==2)) {
- 	$file = '2.5rc1_to_2.5rc2.sql';
+ 	$file = 'upgrade/2.5rc1_to_2.5rc2.sql';
 	}	
     if (! file_exists($file)) {
         show_error(sprintf('File "%s" does not exist.', $file));
@@ -216,32 +253,12 @@ if (is_param($_POST['hostname'])
                 mysql_query($cmd);
                 mysql_check_error();
             }
+	    
         }
-	
+     	
     }
 }
 
-    mysql_select_db(DB_DATABASE) or die(mysql_error());
-    $result = mysql_query("SELECT * FROM db_version");
-    //or die(mysql_error());
-    while ($row = mysql_fetch_array($result)) {
-
-    $version = $row['database_version'];
-    
-    }
-	if ($version == 'v2.5_RC2') { ?>
-				<center>
-				<p>You have successfully upgraded your osCmax database to osCmax
-				<?php echo $version; ?></p>
-				<br>
-				<br>
-				<strong>Delete this file from your server now!</strong></center>
-				<?php
-	} elseif ($version == 'v2.5_RC1') { ?>
-				<center>You have completed step one. Please <a
-					href="<?php $_SERVER['PHP_SELF']; ?>">Continue</a></center>
-				<?php
-	}
 
 ?></div>
 

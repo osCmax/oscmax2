@@ -1,7 +1,7 @@
 /*
-osCmax Upgrade v2.5 Beta 3 to v2.5 RC1
-*********************************************************************
-*/
+/*osCmax Upgrade v2.5 Beta 3 to v2.5 RC1
+/*********************************************************************
+/*
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
@@ -103,7 +103,7 @@ SET AUTOCOMMIT = 0;
 
 /* SYNC TABLE : `configuration` */
 
-	/*Start of batch : 1 */
+/*Start of batch : 1 */
 INSERT INTO `configuration` (`configuration_id`,`configuration_title`,`configuration_key`,`configuration_value`,`configuration_description`,`configuration_group_id`,`sort_order`,`last_modified`,`use_function`,`set_function`) VALUES ('459', 'CT_TEMPLATE_SWITCHING_MENU', 'TEMPLATE_SWITCHING_MENU', 'false', 'CD_TEMPLATE_SWITCHING_MENU', '201', '4', now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 UPDATE `configuration` SET `configuration_id`='2', `configuration_title`='CT_STORE_OWNER', `configuration_key`='STORE_OWNER', `configuration_description`='CD_STORE_OWNER', `configuration_group_id`='1', `sort_order`='3', `last_modified`=now(), `use_function`=NULL, `set_function`=NULL  WHERE (`configuration_id` = 2) ;
 UPDATE `configuration` SET `configuration_id`='3', `configuration_title`='CT_STORE_OWNER_EMAIL_ADDRESS', `configuration_key`='STORE_OWNER_EMAIL_ADDRESS', `configuration_description`='CD_STORE_OWNER_EMAIL_ADDRESS', `configuration_group_id`='1', `sort_order`='4', `last_modified`=now(), `use_function`=NULL, `set_function`=NULL  WHERE (`configuration_id` = 3) ;
@@ -626,10 +626,10 @@ UPDATE `configuration` SET `configuration_id`='3300', `configuration_title`='CT_
 UPDATE `configuration` SET `configuration_id`='3301', `configuration_title`='CT_STORE_OPENING_HOURS_TEXT', `configuration_key`='STORE_OPENING_HOURS_TEXT', `configuration_description`='CD_STORE_OPENING_HOURS_TEXT', `configuration_group_id`='207', `sort_order`='2', `last_modified`=now(), `use_function`=NULL, `set_function`='tep_cfg_textarea('  WHERE (`configuration_id` = 3301) ;
 UPDATE `configuration` SET `configuration_id`='3302', `configuration_title`='CT_SHOW_EMAIL_ADDRESS', `configuration_key`='SHOW_EMAIL_ADDRESS', `configuration_description`='CD_SHOW_EMAIL_ADDRESS', `configuration_group_id`='207', `sort_order`='3', `last_modified`= now(), `use_function`=NULL, `set_function`='tep_cfg_select_option(array(\'false\',\'true\'),'  WHERE (`configuration_id` = 3302) ;
 UPDATE `configuration` SET `configuration_id`='3303', `configuration_title`='CT_SHOW_MAILING_ADDRESS', `configuration_key`='SHOW_MAILING_ADDRESS', `configuration_description`='CD_SHOW_MAILING_ADDRESS', `configuration_group_id`='207', `sort_order`='4', `last_modified`= now(), `use_function`=NULL, `set_function`='tep_cfg_select_option(array(\'false\',\'true\'),'  WHERE (`configuration_id` = 3303) ;
-	/*End   of batch : 1 */
+/*End   of batch : 1 */
 /* SYNC TABLE : `configuration_group` */
 
-	/*Start of batch : 1 */
+/*Start of batch : 1 */
 DELETE FROM `configuration_group`  WHERE (`configuration_group_id` = 202) ;
 INSERT INTO `configuration_group` VALUES ('456', 'BOX_HEADING_ARTICLES', 'Settings for Articles', '456', '1');
 UPDATE `configuration_group` SET `configuration_group_id`='4', `configuration_group_title`='BOX_CONFIGURATION_IMAGES', `configuration_group_description`='Image parameters', `sort_order`='4', `visible`='1'  WHERE (`configuration_group_id` = 4) ;
@@ -670,7 +670,7 @@ UPDATE `configuration_group` SET `configuration_group_id`='205', `configuration_
 UPDATE `configuration_group` SET `configuration_group_id`='206', `configuration_group_title`='BOX_CONFIGURATION_MC', `configuration_group_description`='MailChimp Newsletters', `sort_order`='206', `visible`='1'  WHERE (`configuration_group_id` = 206) ;
 UPDATE `configuration_group` SET `configuration_group_id`='207', `configuration_group_title`='BOX_CONFIGURATION_CONTACT', `configuration_group_description`='Contact Us Form', `sort_order`='207', `visible`='1'  WHERE (`configuration_group_id` = 207) ;
 UPDATE `configuration_group` SET `configuration_group_id`='7575', `configuration_group_title`='BOX_CONFIGURATION_OPC', `configuration_group_description`='Settings for one page checkout', `sort_order`='16', `visible`='1'  WHERE (`configuration_group_id` = 7575) ;
-	/*End   of batch : 1 */
+/*End   of batch : 1 */
 /* SYNC TABLE : `counter` */
 
 /* SYNC TABLE : `counter_history` */
@@ -771,13 +771,13 @@ insert  into `db_version`(`database_version`) values ('v2.5_RC1');
 
 /* SYNC TABLE : `pm_configuration` */
 
-	/*Start of batch : 1 */
+/*Start of batch : 1 */
 INSERT INTO `pm_configuration` (`pm_id`,`pm_title`,`pm_description`,`pm_filename`,`pm_active`,`pm_page`,`pm_sort_order`,`last_modified`) VALUES ('18', 'Banner', '', 'banner_product.php', 'yes', 'product_info', '5', now());
 INSERT INTO `pm_configuration` (`pm_id`,`pm_title`,`pm_description`,`pm_filename`,`pm_active`,`pm_page`,`pm_sort_order`,`last_modified`) VALUES ('16', 'Banner', '', 'banner_index.php', 'yes', 'index', '9', now());
 INSERT INTO `pm_configuration` (`pm_id`,`pm_title`,`pm_description`,`pm_filename`,`pm_active`,`pm_page`,`pm_sort_order`,`last_modified`) VALUES ('17', 'Banner', '', 'banner_all.php', 'yes', 'all', '2', now());
 UPDATE `pm_configuration` SET `pm_id`='7', `pm_title`='Counter', `pm_description`='', `pm_filename`='counter.php', `pm_page`='all', `pm_sort_order`='1', `last_modified`= now()  WHERE (`pm_id` = 7) ;
 UPDATE `pm_configuration` SET `pm_id`='9', `pm_title`='Articles', `pm_description`='', `pm_filename`='index_articles.php', `pm_page`='index', `pm_sort_order`='8', `last_modified`= now()  WHERE (`pm_id` = 9) ;
-	/*End   of batch : 1 */
+/*End   of batch : 1 */
 /* SYNC TABLE : `products` */
 
 /* SYNC TABLE : `products_attributes` */
@@ -852,10 +852,10 @@ UPDATE `pm_configuration` SET `pm_id`='9', `pm_title`='Articles', `pm_descriptio
 
 /* SYNC TABLE : `zones` */
 
-	/*Start of batch : 1 */
+/*Start of batch : 1 */
 UPDATE `zones` SET `zone_id`='221', `zone_country_id`='14', `zone_code`='OOS', `zone_name`='Oberösterreich'  WHERE (`zone_id` = 221) ;
 UPDATE `zones` SET `zone_id`='220', `zone_country_id`='14', `zone_code`='NOS', `zone_name`='Niederösterreich'  WHERE (`zone_id` = 220) ;
-	/*End   of batch : 1 */
+/*End   of batch : 1 */
 /* SYNC TABLE : `zones_to_geo_zones` */
 
 

@@ -9,53 +9,10 @@ $Id$
 
   Released under the GNU General Public License
 */  
-/*
- * SQLimport -- Version 01-Oct-2006
- *
- * Execute SQL statements from a file on a MySQL database.
- *
- * You can use this script to import your database structure
- * and data without the use of a complex tool like phpMyAdmin.
- *
- * Copyright (c) 2003-2006 Jochen Kupperschmidt
- * Released under the terms of the GNU General Public License
- *   _                               _
- *  | |_ ___ _____ ___ _ _ _ ___ ___| |_
- *  |   | . |     | ._| | | | . |  _| . /
- *  |_|_|___|_|_|_|___|_____|___|_| |_|_\
- *    http://homework.nwsnet.de/
- *
- * History:
- *   - 20-Mar-2003: initial release
- *   - 01-Oct-2006: use of XHTML/CSS, superglobals and code cleanup
- */
-
- 
-# Check if variable is a non-empty, non-whitespace string.
-function is_param($var) {
-    $var = trim($var);
-    return is_string($var) and ($var != '');
-}
-
-function show_error($msg) {
-    printf("<p><strong>Error: $msg</strong></p>\n");
-}
-
-# Check for MySQL errors.
-function mysql_check_error() {
-    if (mysql_errno() != 0) {
-        show_error(sprintf('MySQL #%d: %s', mysql_errno(), mysql_error()));
-    }
-}
 
   require('includes/application_top.php');
-  //require('../includes/configure.php');
-  //require('../includes/database_tables.php');
-# ---------------------------------------------------------------- #
+$_REQUEST['contents']='';
 
-# Prevent this page from being cached.
-header('Cache-Control: no-store, no-cache, must-revalidate');  # HTTP/1.1
-header('Pragma: no-cache');                                    # HTTP/1.0
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -87,11 +44,15 @@ table {
 	text-align: left;
 }
 </style>
+
 </head>
 <body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
+
+     
+   
 <?php  
     if (!defined('DB_SERVER') || !defined('DB_SERVER_USERNAME') || !defined('DB_SERVER_PASSWORD') || !defined('DB_DATABASE')) die('Can not find database definitions.');
 
@@ -99,15 +60,7 @@ table {
   if (!$connect) {
      die('Could not connect: ' . mysql_error());
     }
-    //echo 'connection success';
-    //mysql_select_db(DB_DATABASE) or die(mysql_error());
-    //$result = mysql_query("SELECT * FROM db_version");
-    //or die(mysql_error());
-    //while ($row = mysql_fetch_array($result)) {
 
-    //$version = $row['database_version'];
-    
-    //}
     
 
     
@@ -142,7 +95,7 @@ table {
     }
    
   
-    mysql_close($connect);
+    //mysql_close($connect);
 	if ($version == 'v2.5_RC2') { 
 	  if (PROJECT_VERSION == 'osCmax_v2.5_RC2') { 
 					?>
@@ -167,28 +120,13 @@ table {
           
               if ($version == 'v2.5_RC1') { ?>
 						<td>Your current osCmax version is <strong><?php echo $version; ?></strong></td>
-						<input type="hidden" name="version" value="2">
+						
 						<?php } elseif (!$version) { ?>
 						<td> Manually verify that your minimum osCmax version is v2.5 Beta 3.<br>You can check this by visiting your admin panel login screen. <br> In the copyright notice at the bottom, the current version will be displayed.</td>
-						<input type="hidden" name="version" value="1">
+						
 
 						<?php  }  ?>
 					</tr>
-					<?php
-				
-       $db_params = array(
-       	 array( 'hostname' => DB_SERVER, 'username' => DB_SERVER_USERNAME, 'password' => DB_SERVER_PASSWORD, 'database' => DB_DATABASE));
-	 //array( 'hostname', 'username', 'password', 'database')) ;
-	 
-    for ($row = 0; $row < 1; $row++)      
-       {
-       foreach ($db_params[$row] as $param => $value) { ?>
-					<tr>
-						<input type="hidden" name="<?php echo $param; ?>"
-							value="<?php echo $value; ?>">
-					</tr>
-					<?php }
-     } ?>
 					<tr>
 						<td><br>Check to display sql output: <input type="checkbox" name="contents" value="1" /><br></td>
 					</tr>
@@ -200,63 +138,52 @@ table {
 					</tr>    
 				</table>
 				
-				<button type="submit">Upgrade</button>
+				<button id="Button" type="submit" name="upgrade" value="upgrade">Upgrade</button>
 				</form>
 
 				<div class="feedback"><?php
  }
+
+
  				
-if (is_param(isset($_POST['hostname']))
-        and is_param($_POST['username'])        
-        and is_param($_POST['database'])
-        ) {
-	if (is_param($_POST['version']==1)) {
-       $file = 'upgrade/2.5beta3_to_2.5rc1.sql';
-	} elseif (is_param($_POST['version']==2)) {
- 	$file = 'upgrade/2.5rc1_to_2.5rc2.sql';
+
+	if (!$version) {
+	$file = fopen('upgrade/2.5beta3_to_2.5rc1.sql', 'r');
+	} elseif ($version == 'v2.5_RC1') {
+ 	$file = fopen('upgrade/2.5rc1_to_2.5rc2.sql', 'r');
 	}	
-    if (! file_exists($file)) {
-        show_error(sprintf('File "%s" does not exist.', $file));
-    } else if (! is_file($file)) {
-        show_error(sprintf('File "%s" is not a regular file.', $file));
-    } else if (! is_readable($file)) {
-        show_error(sprintf('File "%s" is not readable.', $file));
-    } else {
-        $contents = file($file);
+if (!empty($_REQUEST['upgrade']))
 
-        # Display file contents if activated.
-        if (1 == $_POST['contents']) {
-            printf("<pre>\n%s</pre>\n", implode('', $contents));
-        }
-
-        # Remove blank lines and comments.
-        $sql = '';
-        foreach ($contents as $line) {
-            $line = trim($line);
-            # Sort out empty or comment lines.
-            if (($line == '') or ($line{0} == '#') or (substr($line, 0, 2) == '--')) {
-                continue;
-            }
-            $sql .= $line . ' ';
-        }
-
+         {
+	
         # Connect to database.
-        @mysql_connect($_POST['hostname'], $_POST['username'], $_POST['password']);
-        mysql_check_error();
-        @mysql_select_db($_POST['database']);
-        mysql_check_error();
+        //@mysql_connect($_POST['hostname'], $_POST['username'], $_POST['password']);
+        //mysql_check_error();
+        mysql_select_db(DB_DATABASE);
+        //mysql_check_error();
+	print '<pre>';
+	print mysql_error();
+	$temp = '';
+	$count = 0;
+	while($line = fgets($file)) {
+	  if ((substr($line, 0, 2) != '--') && (substr($line, 0, 2) != '/*') && strlen($line) > 1) {
+	    $last = trim(substr($line, -2, 1));
+	    $temp .= trim(substr($line, 0, -1));
+	    if ($last == ';') {
+	      mysql_query($temp);
+	      $count++;
+	      if ($_POST['contents'] ==1) {
+	      print $temp . '<br>';
+	      }
+	      $temp = '';
+	    }
+	  }
+	}
+	print mysql_error();
+	print "Total {$count} queries done\n<br>";
+	print '</pre>';
 
-        # Execute SQL statements.
-        foreach (explode(';', $sql) as $cmd) {
-            $cmd = trim($cmd);
-            if ($cmd != '') {
-                mysql_query($cmd);
-                mysql_check_error();
-            }
-	    
-        }
-     	
-    }
+
 }
 
 

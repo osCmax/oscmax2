@@ -34,6 +34,7 @@ if (RECAPTCHA_ON == 'true') {
   if (isset($_GET['action']) && ($_GET['action'] == 'send')) {
     $name = tep_db_prepare_input($_POST['name']);
     $email_address = tep_db_prepare_input($_POST['email']);
+	$reason = tep_db_prepare_input($_POST['reason']);
     $enquiry = tep_db_prepare_input($_POST['enquiry']);
 
 // start modification for reCaptcha
@@ -64,6 +65,7 @@ $_POST['name'] = str_replace("Content-Type:","",$_POST['name']);
   if (isset($_GET['action']) && ($_GET['action'] == 'send')) {
     $name = tep_db_prepare_input($_POST['name']);
     $email_address = tep_db_prepare_input($_POST['email']);
+	$reason = tep_db_prepare_input($_POST['reason']);
     $enquiry = tep_db_prepare_input($_POST['enquiry']);
   }
 
@@ -94,9 +96,9 @@ if (RECAPTCHA_ON == 'true') {
 
     if ($error == false) {
 	  if ($source == 'affiliate') {
-		tep_mail(STORE_OWNER, AFFILIATE_EMAIL_ADDRESS, EMAIL_SUBJECT, $enquiry, $name, $email_address);
+		tep_mail(STORE_OWNER, AFFILIATE_EMAIL_ADDRESS, $reason . ': ' . EMAIL_SUBJECT, $enquiry, $name, $email_address);
 	  } else {
-        tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, EMAIL_SUBJECT, $enquiry, $name, $email_address);
+        tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, $reason . ': ' . EMAIL_SUBJECT, $enquiry, $name, $email_address);
 	  }
       tep_redirect(tep_href_link(FILENAME_CONTACT_US, 'action=success'));
 // EOF: Remove blank emails

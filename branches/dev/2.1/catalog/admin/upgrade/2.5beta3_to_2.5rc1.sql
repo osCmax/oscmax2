@@ -1,7 +1,6 @@
 /*
-/*osCmax Upgrade v2.5 Beta 3 to v2.5 RC1
-/*********************************************************************
-/*
+/* osCmax Upgrade v2.5 Beta 3 to v2.5 RC1 */
+/*********************************************************************/
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
@@ -41,70 +40,210 @@ ALTER TABLE `quick_links`
 
 /* SYNC DB : beta3 to RC1 */ 
 SET AUTOCOMMIT = 0;
-/* SYNC TABLE : `address_book` */
-
-/* SYNC TABLE : `address_format` */
-
-/* SYNC TABLE : `admin` */
 
 /* SYNC TABLE : `admin_files` */
 
-/* SYNC TABLE : `admin_groups` */
-
-/* SYNC TABLE : `admin_log` */
-
-/* SYNC TABLE : `affiliate_affiliate` */
-
-/* SYNC TABLE : `affiliate_banners` */
-
-/* SYNC TABLE : `affiliate_banners_history` */
-
-/* SYNC TABLE : `affiliate_clickthroughs` */
-
-/* SYNC TABLE : `affiliate_news` */
-
-/* SYNC TABLE : `affiliate_news_contents` */
-
-/* SYNC TABLE : `affiliate_newsletters` */
-
-/* SYNC TABLE : `affiliate_payment` */
-
-/* SYNC TABLE : `affiliate_payment_status` */
-
-/* SYNC TABLE : `affiliate_payment_status_history` */
-
-/* SYNC TABLE : `affiliate_sales` */
-
-/* SYNC TABLE : `article_reviews` */
-
-/* SYNC TABLE : `article_reviews_description` */
-
-/* SYNC TABLE : `articles` */
-
-/* SYNC TABLE : `articles_description` */
-
-/* SYNC TABLE : `articles_to_topics` */
-
-/* SYNC TABLE : `articles_xsell` */
-
-/* SYNC TABLE : `authors` */
-
-/* SYNC TABLE : `authors_info` */
-
-/* SYNC TABLE : `banners` */
-
-/* SYNC TABLE : `banners_history` */
-
-/* SYNC TABLE : `cache` */
-
-/* SYNC TABLE : `categories` */
-
-/* SYNC TABLE : `categories_description` */
-
-/* SYNC TABLE : `configuration` */
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 84) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 93) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 61) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 60) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 59) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 94) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 95) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 120) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 121) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 122) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 123) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 12) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 37) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 36) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 64) ;
+DELETE FROM `admin_files`  WHERE (`admin_files_id` = 19) ;
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('information_manager.php?gID=2', 'BOX_CONFIGURATION_WELCOME', '0', '2', '1', '22');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('information_manager.php?gID=1', 'BOX_CONFIGURATION_INFO_PAGES', '0', '2', '1', '21');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=99', 'BOX_CONFIGURATION_OFS', '0', '2', '1', '23');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('infobox_configuration.php', 'BOX_HEADING_BOXES', '0', '2', '1', '20');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=201', 'BOX_CONFIGURATION_TEMPLATE_SETUP', '0', '2', '1', '19');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=25', 'BOX_CONFIGURATION_WYSIWYG', '0', '2', '1', '18');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=206', 'BOX_CONFIGURATION_MC', '0', '2', '1', '17');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=12', 'BOX_CONFIGURATION_EMAIL', '0', '2', '1', '17');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=30', 'BOX_CONFIGURATION_PRINT', '0', '2', '1', '16');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=13', 'BOX_CONFIGURATION_DOWNLOAD', '0', '2', '1', '15');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=9', 'BOX_CONFIGURATION_STOCK', '0', '2', '1', '14');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=88', 'BOX_CONFIGURATION_PRODUCT_PRICE_BREAKS', '0', '2', '1', '13');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=50', 'BOX_CONFIGURATION_PRODUCT_INFO', '0', '2', '1', '12');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=8', 'BOX_CONFIGURATION_PRODUCT_LISTING', '0', '2', '1', '10');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=7', 'BOX_CONFIGURATION_SHIPPING', '0', '2', '1', '9');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=7575', 'BOX_CONFIGURATION_OPC', '0', '2', '1', '24');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=45', 'BOX_CONFIGURATION_MOPICS', '0', '2', '1', '7');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=4', 'BOX_CONFIGURATION_IMAGES', '0', '2', '1', '5');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=3', 'BOX_CONFIGURATION_MAX_VALUES', '0', '2', '1', '3');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=204', 'BOX_CONFIGURATION_SLIDESHOW', '0', '2', '1', '25');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=205', 'BOX_CONFIGURATION_CORNER_BANNERS', '0', '2', '1', '26');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=2', 'BOX_CONFIGURATION_MIN_VALUES', '0', '2', '1', '2');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=1', 'BOX_CONFIGURATION_MYSTORE', '0', '2', '1', '1');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('modules.php?set=ordertotal', 'BOX_MODULES_ORDER_TOTAL', '0', '4', '1', '3');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('modules.php?set=shipping', 'BOX_MODULES_SHIPPING', '0', '4', '1', '2');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('modules.php?set=payment', 'BOX_MODULES_PAYMENT', '0', '4', '1', '1');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('merchant_info.php', 'BOX_MERCHANT_INFO', '0', '1', '1', '13');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=16', 'BOX_CONFIGURATION_MAINTENANCE', '0', '1', '1', '10');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=15', 'BOX_CONFIGURATION_SESSIONS', '0', '1', '1', '9');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=55', 'BOX_CONFIGURATION_PAGE_CACHE', '0', '1', '1', '8');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=11', 'BOX_CONFIGURATION_CACHE', '0', '1', '1', '7');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=10', 'BOX_CONFIGURATION_LOGGING_CACHE', '0', '1', '1', '6');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('admin_members.php?gID=groups', 'BOX_ADMIN_GROUPS', '0', '1', '1', '2');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=14', 'BOX_CONFIGURATION_GZIP', '0', '1', '1', '4');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('specialsbycategory.php', 'BOX_CATALOG_SPECIALS_BY_CAT', '0', '3', '1,2', '7');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=207', 'BOX_CONFIGURATION_CONTACT', '0', '2', '1', '26');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=87', 'BOX_CONFIGURATION_RECAPTCHA', '0', '2', '1', '27');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=203', 'BOX_CONFIGURATION_NOTIFICATIONS', '0', '2', '1', '28');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=65', 'BOX_CONFIGURATION_WISHLIST', '0', '2', '1', '28');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=85', 'BOX_CONFIGURATION_GOOGLE_ANALYTICS', '0', '2', '1', '36');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=35', 'BOX_CONFIGURATION_AFFILIATE', '0', '2', '1', '29');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=80', 'BOX_TOOLS_RECOVER_CART', '0', '2', '1', '30');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=456', 'BOX_ARTICLES_CONFIG', '0', '2', '1', '32');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=60', 'BOX_CONFIGURATION_SEO_URLS', '0', '2', '1', '33');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=86', 'BOX_CONFIGURATION_SEO_POPOUT', '0', '2', '1', '34');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=70', 'BOX_CONFIGURATION_EDITOR', '0', '2', '1', '35');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=5', 'BOX_CONFIGURATION_CUSTOMER_DETAILS', '0', '2', '1', '8');
+INSERT INTO `admin_files` (`admin_files_name`, `admin_display_name`, `admin_files_is_boxes`, `admin_files_to_boxes`, `admin_groups_id`, `admin_sort_order`) VALUES  ('configuration.php?gID=89', 'BOX_CONFIGURATION_GOOGLE_MAPS', '0', '2', '1', '37');
+UPDATE `admin_files` SET `admin_files_id`='70', `admin_files_name`='edit_orders.php', `admin_display_name`='FILE_ORDER', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 70) ;
+UPDATE `admin_files` SET `admin_files_id`='71', `admin_files_name`='validproducts.php', `admin_display_name`='FILE_VALID_PRODUCTS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='54', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 71) ;
+UPDATE `admin_files` SET `admin_files_id`='72', `admin_files_name`='validcategories.php', `admin_display_name`='FILE_VALID_CATEGORIES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='54', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 72) ;
+UPDATE `admin_files` SET `admin_files_id`='73', `admin_files_name`='listcategories.php', `admin_display_name`='FILE_LIST_CATEGORIES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='54', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 73) ;
+UPDATE `admin_files` SET `admin_files_id`='74', `admin_files_name`='listproducts.php', `admin_display_name`='FILE_LIST_PRODUCTS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='54', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 74) ;
+UPDATE `admin_files` SET `admin_files_id`='75', `admin_files_name`='new_attributes.php', `admin_display_name`='BOX_CATALOG_ATTRIBUTE_MANAGER', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='11'  WHERE (`admin_files_id` = 75) ;
+UPDATE `admin_files` SET `admin_files_id`='78', `admin_files_name`='paypal_ipn.php', `admin_display_name`='FILE_PAYPAL', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 78) ;
+UPDATE `admin_files` SET `admin_files_id`='80', `admin_files_name`='paypal_ipn_order.php', `admin_display_name`='FILE_PAYPAL', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 80) ;
+UPDATE `admin_files` SET `admin_files_id`='81', `admin_files_name`='articles.php', `admin_display_name`='BOX_HEADING_ARTICLES', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1,2', `admin_sort_order`='12'  WHERE (`admin_files_id` = 81) ;
+UPDATE `admin_files` SET `admin_files_id`='82', `admin_files_name`='article_reviews.php', `admin_display_name`='BOX_ARTICLES_REVIEWS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='81', `admin_groups_id`='1,2', `admin_sort_order`='3'  WHERE (`admin_files_id` = 82) ;
+UPDATE `admin_files` SET `admin_files_id`='83', `admin_files_name`='articles.php', `admin_display_name`='BOX_TOPICS_ARTICLES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='81', `admin_groups_id`='1,2', `admin_sort_order`='2'  WHERE (`admin_files_id` = 83) ;
+UPDATE `admin_files` SET `admin_files_id`='65', `admin_files_name`='easypopulate.php', `admin_display_name`='BOX_CATALOG_EASYPOPULATE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='9'  WHERE (`admin_files_id` = 65) ;
+UPDATE `admin_files` SET `admin_files_id`='85', `admin_files_name`='articles_xsell.php', `admin_display_name`='BOX_ARTICLES_XSELL', `admin_files_is_boxes`='0', `admin_files_to_boxes`='81', `admin_groups_id`='1,2', `admin_sort_order`='4'  WHERE (`admin_files_id` = 85) ;
+UPDATE `admin_files` SET `admin_files_id`='86', `admin_files_name`='authors.php', `admin_display_name`='BOX_ARTICLES_AUTHORS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='81', `admin_groups_id`='1,2', `admin_sort_order`='1'  WHERE (`admin_files_id` = 86) ;
+UPDATE `admin_files` SET `admin_files_id`='87', `admin_files_name`='recover_cart_sales.php', `admin_display_name`='BOX_TOOLS_RECOVER_CART', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='2'  WHERE (`admin_files_id` = 87) ;
+UPDATE `admin_files` SET `admin_files_id`='88', `admin_files_name`='stats_recover_cart_sales.php', `admin_display_name`='BOX_REPORTS_RECOVER_CART_SALES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='7'  WHERE (`admin_files_id` = 88) ;
+UPDATE `admin_files` SET `admin_files_id`='89', `admin_files_name`='stats_monthly_sales.php', `admin_display_name`='BOX_REPORTS_MONTHLY_SALES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='6'  WHERE (`admin_files_id` = 89) ;
+UPDATE `admin_files` SET `admin_files_id`='90', `admin_files_name`='batch_print.php', `admin_display_name`='BOX_TOOLS_BATCH_CENTER', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='4'  WHERE (`admin_files_id` = 90) ;
+UPDATE `admin_files` SET `admin_files_id`='91', `admin_files_name`='stock.php', `admin_display_name`='FILE_STOCK', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 91) ;
+UPDATE `admin_files` SET `admin_files_id`='92', `admin_files_name`='stats_low_stock_attrib.php', `admin_display_name`='BOX_REPORTS_STATS_LOW_STOCK_ATTRIB', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='9'  WHERE (`admin_files_id` = 92) ;
+UPDATE `admin_files` SET `admin_files_id`='62', `admin_files_name`='coupon_restrict.php', `admin_display_name`='FILE_COUPON_RESTRICT', `admin_files_is_boxes`='0', `admin_files_to_boxes`='54', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 62) ;
+UPDATE `admin_files` SET `admin_files_id`='58', `admin_files_name`='gv_sent.php', `admin_display_name`='BOX_GV_ADMIN_SENT', `admin_files_is_boxes`='0', `admin_files_to_boxes`='54', `admin_groups_id`='1,2', `admin_sort_order`='4'  WHERE (`admin_files_id` = 58) ;
+UPDATE `admin_files` SET `admin_files_id`='57', `admin_files_name`='gv_mail.php', `admin_display_name`='BOX_GV_ADMIN_MAIL', `admin_files_is_boxes`='0', `admin_files_to_boxes`='54', `admin_groups_id`='1,2', `admin_sort_order`='3'  WHERE (`admin_files_id` = 57) ;
+UPDATE `admin_files` SET `admin_files_id`='98', `admin_files_name`='customers_groups.php', `admin_display_name`='BOX_CUSTOMERS_GROUPS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='2'  WHERE (`admin_files_id` = 98) ;
+UPDATE `admin_files` SET `admin_files_id`='102', `admin_files_name`='xsell.php', `admin_display_name`='BOX_CATALOG_XSELL_PRODUCTS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='8'  WHERE (`admin_files_id` = 102) ;
+UPDATE `admin_files` SET `admin_files_id`='103', `admin_files_name`='create_account.php', `admin_display_name`='BOX_MANUAL_ORDER_CREATE_ACCOUNT', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='3'  WHERE (`admin_files_id` = 103) ;
+UPDATE `admin_files` SET `admin_files_id`='104', `admin_files_name`='create_account_process.php', `admin_display_name`='FILE_CREATE_ACCOUNT', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 104) ;
+UPDATE `admin_files` SET `admin_files_id`='105', `admin_files_name`='create_account_success.php', `admin_display_name`='FILE_CREATE_ACCOUNT', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 105) ;
+UPDATE `admin_files` SET `admin_files_id`='106', `admin_files_name`='create_order.php', `admin_display_name`='BOX_MANUAL_ORDER_CREATE_ORDER', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='5'  WHERE (`admin_files_id` = 106) ;
+UPDATE `admin_files` SET `admin_files_id`='107', `admin_files_name`='create_order_process.php', `admin_display_name`='FILE_ORDER', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 107) ;
+UPDATE `admin_files` SET `admin_files_id`='108', `admin_files_name`='easypopulate_functions.php', `admin_display_name`='FILE_EASYPOPULATE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 108) ;
+UPDATE `admin_files` SET `admin_files_id`='109', `admin_files_name`='new_attributes_change.php', `admin_display_name`='FILE_ATTRIBUTE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 109) ;
+UPDATE `admin_files` SET `admin_files_id`='110', `admin_files_name`='new_attributes_config.php', `admin_display_name`='FILE_NEW_ATTRIBUTES_CONFIG', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 110) ;
+UPDATE `admin_files` SET `admin_files_id`='111', `admin_files_name`='new_attributes_functions.php', `admin_display_name`='FILE_ATTRIBUTE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 111) ;
+UPDATE `admin_files` SET `admin_files_id`='56', `admin_files_name`='gv_queue.php', `admin_display_name`='BOX_GV_ADMIN_QUEUE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='54', `admin_groups_id`='1,2', `admin_sort_order`='2'  WHERE (`admin_files_id` = 56) ;
+UPDATE `admin_files` SET `admin_files_id`='113', `admin_files_name`='new_attributes_select.php', `admin_display_name`='FILE_ATTRIBUTE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 113) ;
+UPDATE `admin_files` SET `admin_files_id`='114', `admin_files_name`='ship_fedex.php', `admin_display_name`='FILE_FEDEX', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 114) ;
+UPDATE `admin_files` SET `admin_files_id`='115', `admin_files_name`='fedex_popup.php', `admin_display_name`='FILE_FEDEX', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 115) ;
+UPDATE `admin_files` SET `admin_files_id`='116', `admin_files_name`='shipping_manifest.php', `admin_display_name`='BOX_SHIPPING_MANIFEST', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='8'  WHERE (`admin_files_id` = 116) ;
+UPDATE `admin_files` SET `admin_files_id`='117', `admin_files_name`='track_fedex.php', `admin_display_name`='FILE_FEDEX', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 117) ;
+UPDATE `admin_files` SET `admin_files_id`='118', `admin_files_name`='paypal_info.php', `admin_display_name`='BOX_PAYPAL_INFO', `admin_files_is_boxes`='0', `admin_files_to_boxes`='1', `admin_groups_id`='1', `admin_sort_order`='15'  WHERE (`admin_files_id` = 118) ;
+UPDATE `admin_files` SET `admin_files_id`='119', `admin_files_name`='affiliate_info.php', `admin_display_name`='BOX_HEADING_AFFILIATES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='1', `admin_groups_id`='1', `admin_sort_order`='11'  WHERE (`admin_files_id` = 119) ;
+UPDATE `admin_files` SET `admin_files_id`='55', `admin_files_name`='coupon_admin.php', `admin_display_name`='BOX_COUPON_ADMIN', `admin_files_is_boxes`='0', `admin_files_to_boxes`='54', `admin_groups_id`='1,2', `admin_sort_order`='1'  WHERE (`admin_files_id` = 55) ;
+UPDATE `admin_files` SET `admin_files_id`='54', `admin_files_name`='gv_admin.php', `admin_display_name`='BOX_HEADING_VOUCHERS', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1,2', `admin_sort_order`='11'  WHERE (`admin_files_id` = 54) ;
+UPDATE `admin_files` SET `admin_files_id`='53', `admin_files_name`='affiliate_summary.php', `admin_display_name`='BOX_AFFILIATE_SUMMARY', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='1'  WHERE (`admin_files_id` = 53) ;
+UPDATE `admin_files` SET `admin_files_id`='52', `admin_files_name`='affiliate_statistics.php', `admin_display_name`='FILE_AFFILIATE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 52) ;
+UPDATE `admin_files` SET `admin_files_id`='124', `admin_files_name`='affiliate_news.php', `admin_display_name`='BOX_AFFILIATE_NEWS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='7'  WHERE (`admin_files_id` = 124) ;
+UPDATE `admin_files` SET `admin_files_id`='125', `admin_files_name`='affiliate_newsletters.php', `admin_display_name`='BOX_AFFILIATE_NEWSLETTER_MANAGER', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='8'  WHERE (`admin_files_id` = 125) ;
+UPDATE `admin_files` SET `admin_files_id`='126', `admin_files_name`='affiliate_validcats.php', `admin_display_name`='FILE_AFFILIATE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 126) ;
+UPDATE `admin_files` SET `admin_files_id`='127', `admin_files_name`='affiliate_validproducts.php', `admin_display_name`='FILE_AFFILIATE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 127) ;
+UPDATE `admin_files` SET `admin_files_id`='128', `admin_files_name`='edit_orders_add_product.php', `admin_display_name`='FILE_ORDER', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 128) ;
+UPDATE `admin_files` SET `admin_files_id`='129', `admin_files_name`='edit_orders_ajax.php', `admin_display_name`='FILE_ORDER', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 129) ;
+UPDATE `admin_files` SET `admin_files_id`='130', `admin_files_name`='attributeManager.php', `admin_display_name`='FILE_ATTRIBUTE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 130) ;
+UPDATE `admin_files` SET `admin_files_id`='131', `admin_files_name`='phone_order.php', `admin_display_name`='BOX_PHONE_ORDER', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='4'  WHERE (`admin_files_id` = 131) ;
+UPDATE `admin_files` SET `admin_files_id`='132', `admin_files_name`='stats_admin_logging.php', `admin_display_name`='BOX_REPORTS_ADMIN_LOGGING', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='11'  WHERE (`admin_files_id` = 132) ;
+UPDATE `admin_files` SET `admin_files_id`='133', `admin_files_name`='stats_cust_logging.php', `admin_display_name`='BOX_REPORTS_CUST_LOGGING', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='12'  WHERE (`admin_files_id` = 133) ;
+UPDATE `admin_files` SET `admin_files_id`='134', `admin_files_name`='customer_export.php', `admin_display_name`='BOX_CUSTOMERS_EXPORT', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='7'  WHERE (`admin_files_id` = 134) ;
+UPDATE `admin_files` SET `admin_files_id`='135', `admin_files_name`='packaging.php', `admin_display_name`='BOX_TOOLS_PACKAGING', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='7'  WHERE (`admin_files_id` = 135) ;
+UPDATE `admin_files` SET `admin_files_id`='136', `admin_files_name`='ups_boxes_used.php', `admin_display_name`='BOX_TOOLS_UPS_BOXES_USED', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='8'  WHERE (`admin_files_id` = 136) ;
+UPDATE `admin_files` SET `admin_files_id`='137', `admin_files_name`='stats_credits.php', `admin_display_name`='BOX_REPORTS_CREDITS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='10'  WHERE (`admin_files_id` = 137) ;
+UPDATE `admin_files` SET `admin_files_id`='138', `admin_files_name`='treeview.php', `admin_display_name`='FILE_TREE_VIEW', `admin_files_is_boxes`='0', `admin_files_to_boxes`='54', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 138) ;
+UPDATE `admin_files` SET `admin_files_id`='139', `admin_files_name`='qtprodoctor.php', `admin_display_name`='BOX_TOOLS_QTPRODOCTOR', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='9'  WHERE (`admin_files_id` = 139) ;
+UPDATE `admin_files` SET `admin_files_id`='140', `admin_files_name`='googlesitemap.php', `admin_display_name`='BOX_CONFIGURATION_GOOGLE_SITEMAP', `admin_files_is_boxes`='0', `admin_files_to_boxes`='2', `admin_groups_id`='1', `admin_sort_order`='42'  WHERE (`admin_files_id` = 140) ;
+UPDATE `admin_files` SET `admin_files_id`='141', `admin_files_name`='common_reports.php', `admin_display_name`='FILE_COMMON_REPORTS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 141) ;
+UPDATE `admin_files` SET `admin_files_id`='142', `admin_files_name`='stats_http_error.php', `admin_display_name`='BOX_REPORTS_HTTP_ERROR', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='13'  WHERE (`admin_files_id` = 142) ;
+UPDATE `admin_files` SET `admin_files_id`='143', `admin_files_name`='stats_register_customer_no_purchase.php', `admin_display_name`='BOX_REPORTS_STATS_REGISTER_CUSTOMER_NO_PURCHASE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='4'  WHERE (`admin_files_id` = 143) ;
+UPDATE `admin_files` SET `admin_files_id`='144', `admin_files_name`='quick_links.php', `admin_display_name`='BOX_TOOLS_QUICK_LINKS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='1', `admin_groups_id`='1', `admin_sort_order`='12'  WHERE (`admin_files_id` = 144) ;
+UPDATE `admin_files` SET `admin_files_id`='145', `admin_files_name`='feedmachine.php', `admin_display_name`='BOX_CATALOG_FEEDMACHINE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='10'  WHERE (`admin_files_id` = 145) ;
+UPDATE `admin_files` SET `admin_files_id`='146', `admin_files_name`='feedmachine_admin.php', `admin_display_name`='FILE_FEEDMACHINE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 146) ;
+UPDATE `admin_files` SET `admin_files_id`='147', `admin_files_name`='feedmachine_auto.php', `admin_display_name`='FILE_FEEDMACHINE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 147) ;
+UPDATE `admin_files` SET `admin_files_id`='148', `admin_files_name`='feedmachine_config.php', `admin_display_name`='FILE_FEEDMACHINE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 148) ;
+UPDATE `admin_files` SET `admin_files_id`='149', `admin_files_name`='feedmachine_loader.php', `admin_display_name`='FILE_FEEDMACHINE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 149) ;
+UPDATE `admin_files` SET `admin_files_id`='150', `admin_files_name`='feedmachine_loadingbay.php', `admin_display_name`='FILE_FEEDMACHINE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 150) ;
+UPDATE `admin_files` SET `admin_files_id`='151', `admin_files_name`='discount_categories.php', `admin_display_name`='BOX_CATALOG_CATEGORIES_DISCOUNT_CATEGORIES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='3'  WHERE (`admin_files_id` = 151) ;
+UPDATE `admin_files` SET `admin_files_id`='152', `admin_files_name`='discount_categories_groups_pp.php', `admin_display_name`='FILE_DISCOUNT_CATEGORIES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 152) ;
+UPDATE `admin_files` SET `admin_files_id`='153', `admin_files_name`='premade_comments.php', `admin_display_name`='BOX_PREMADE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='7', `admin_groups_id`='1,2', `admin_sort_order`='4'  WHERE (`admin_files_id` = 153) ;
+UPDATE `admin_files` SET `admin_files_id`='154', `admin_files_name`='page_modules_configuration.php', `admin_display_name`='BOX_CONFIGURATION_PAGE_MODULES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='2', `admin_groups_id`='1', `admin_sort_order`='21'  WHERE (`admin_files_id` = 154) ;
+UPDATE `admin_files` SET `admin_files_id`='155', `admin_files_name`='stats_wishlist.php', `admin_display_name`='BOX_REPORTS_WISHLIST', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='5'  WHERE (`admin_files_id` = 155) ;
+UPDATE `admin_files` SET `admin_files_id`='156', `admin_files_name`='slideshow.php', `admin_display_name`='BOX_TOOLS_SLIDESHOW', `admin_files_is_boxes`='0', `admin_files_to_boxes`='2', `admin_groups_id`='1', `admin_sort_order`='31'  WHERE (`admin_files_id` = 156) ;
+UPDATE `admin_files` SET `admin_files_id`='157', `admin_files_name`='extra_fields.php', `admin_display_name`='BOX_CATALOG_PRODUCTS_EXTRA_FIELDS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='13'  WHERE (`admin_files_id` = 157) ;
+UPDATE `admin_files` SET `admin_files_id`='158', `admin_files_name`='extra_values.php', `admin_display_name`='BOX_CATALOG_PRODUCTS_EXTRA_VALUES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='14'  WHERE (`admin_files_id` = 158) ;
+UPDATE `admin_files` SET `admin_files_id`='159', `admin_files_name`='information_form.php', `admin_display_name`='FILE_INFORMATION', `admin_files_is_boxes`='0', `admin_files_to_boxes`='2', `admin_groups_id`='1', `admin_sort_order`='99'  WHERE (`admin_files_id` = 159) ;
+UPDATE `admin_files` SET `admin_files_id`='160', `admin_files_name`='information_list.php', `admin_display_name`='FILE_INFORMATION', `admin_files_is_boxes`='0', `admin_files_to_boxes`='2', `admin_groups_id`='1', `admin_sort_order`='99'  WHERE (`admin_files_id` = 160) ;
+UPDATE `admin_files` SET `admin_files_id`='161', `admin_files_name`='information_manager.php', `admin_display_name`='FILE_INFORMATION', `admin_files_is_boxes`='0', `admin_files_to_boxes`='2', `admin_groups_id`='1', `admin_sort_order`='99'  WHERE (`admin_files_id` = 161) ;
+UPDATE `admin_files` SET `admin_files_id`='162', `admin_files_name`='images_regen.php', `admin_display_name`='BOX_TOOLS_REGEN', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='10'  WHERE (`admin_files_id` = 162) ;
+UPDATE `admin_files` SET `admin_files_id`='163', `admin_files_name`='gc_dashboard.php', `admin_display_name`='FILE_GC_DASHBOARD', `admin_files_is_boxes`='0', `admin_files_to_boxes`='4', `admin_groups_id`='1', `admin_sort_order`='99'  WHERE (`admin_files_id` = 163) ;
+UPDATE `admin_files` SET `admin_files_id`='51', `admin_files_name`='affiliate_sales.php', `admin_display_name`='BOX_AFFILIATE_SALES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='4'  WHERE (`admin_files_id` = 51) ;
+UPDATE `admin_files` SET `admin_files_id`='50', `admin_files_name`='affiliate_popup_image.php', `admin_display_name`='FILE_AFFILIATE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 50) ;
+UPDATE `admin_files` SET `admin_files_id`='49', `admin_files_name`='affiliate_payment.php', `admin_display_name`='BOX_AFFILIATE_PAYMENT', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='3'  WHERE (`admin_files_id` = 49) ;
+UPDATE `admin_files` SET `admin_files_id`='48', `admin_files_name`='affiliate_invoice.php', `admin_display_name`='FILE_AFFILIATE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 48) ;
+UPDATE `admin_files` SET `admin_files_id`='47', `admin_files_name`='affiliate_contact.php', `admin_display_name`='BOX_AFFILIATE_CONTACT', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='9'  WHERE (`admin_files_id` = 47) ;
+UPDATE `admin_files` SET `admin_files_id`='46', `admin_files_name`='affiliate_banners.php', `admin_display_name`='BOX_AFFILIATE_BANNERS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='6'  WHERE (`admin_files_id` = 46) ;
+UPDATE `admin_files` SET `admin_files_id`='45', `admin_files_name`='affiliate_clicks.php', `admin_display_name`='BOX_AFFILIATE_CLICKS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='4'  WHERE (`admin_files_id` = 45) ;
+UPDATE `admin_files` SET `admin_files_id`='44', `admin_files_name`='affiliate_affiliates.php', `admin_display_name`='BOX_AFFILIATE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='43', `admin_groups_id`='1,2', `admin_sort_order`='2'  WHERE (`admin_files_id` = 44) ;
+UPDATE `admin_files` SET `admin_files_id`='43', `admin_files_name`='affiliate.php', `admin_display_name`='BOX_HEADING_AFFILIATES', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1,2', `admin_sort_order`='10'  WHERE (`admin_files_id` = 43) ;
+UPDATE `admin_files` SET `admin_files_id`='42', `admin_files_name`='banner_statistics.php', `admin_display_name`='FILE_BANNER_STATISTICS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 42) ;
+UPDATE `admin_files` SET `admin_files_id`='41', `admin_files_name`='whos_online.php', `admin_display_name`='BOX_TOOLS_WHOS_ONLINE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='12'  WHERE (`admin_files_id` = 41) ;
+UPDATE `admin_files` SET `admin_files_id`='40', `admin_files_name`='server_info.php', `admin_display_name`='BOX_TOOLS_SERVER_INFO', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1', `admin_sort_order`='11'  WHERE (`admin_files_id` = 40) ;
+UPDATE `admin_files` SET `admin_files_id`='39', `admin_files_name`='newsletters.php', `admin_display_name`='BOX_TOOLS_NEWSLETTER_MANAGER', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='6'  WHERE (`admin_files_id` = 39) ;
+UPDATE `admin_files` SET `admin_files_id`='38', `admin_files_name`='mail.php', `admin_display_name`='BOX_TOOLS_MAIL', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='5'  WHERE (`admin_files_id` = 38) ;
+UPDATE `admin_files` SET `admin_files_id`='35', `admin_files_name`='cache.php', `admin_display_name`='BOX_TOOLS_CACHE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='1', `admin_groups_id`='1', `admin_sort_order`='9'  WHERE (`admin_files_id` = 35) ;
+UPDATE `admin_files` SET `admin_files_id`='34', `admin_files_name`='banner_manager.php', `admin_display_name`='BOX_TOOLS_BANNER_MANAGER', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='3'  WHERE (`admin_files_id` = 34) ;
+UPDATE `admin_files` SET `admin_files_id`='33', `admin_files_name`='backup.php', `admin_display_name`='BOX_TOOLS_BACKUP', `admin_files_is_boxes`='0', `admin_files_to_boxes`='9', `admin_groups_id`='1,2', `admin_sort_order`='1'  WHERE (`admin_files_id` = 33) ;
+UPDATE `admin_files` SET `admin_files_id`='32', `admin_files_name`='stats_customers.php', `admin_display_name`='BOX_REPORTS_ORDERS_TOTAL', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='3'  WHERE (`admin_files_id` = 32) ;
+UPDATE `admin_files` SET `admin_files_id`='31', `admin_files_name`='stats_products_purchased.php', `admin_display_name`='BOX_REPORTS_PRODUCTS_PURCHASED', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='2'  WHERE (`admin_files_id` = 31) ;
+UPDATE `admin_files` SET `admin_files_id`='30', `admin_files_name`='stats_products_viewed.php', `admin_display_name`='BOX_REPORTS_PRODUCTS_VIEWED', `admin_files_is_boxes`='0', `admin_files_to_boxes`='8', `admin_groups_id`='1,2', `admin_sort_order`='1'  WHERE (`admin_files_id` = 30) ;
+UPDATE `admin_files` SET `admin_files_id`='29', `admin_files_name`='orders_status.php', `admin_display_name`='BOX_LOCALIZATION_ORDERS_STATUS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='7', `admin_groups_id`='1,2', `admin_sort_order`='3'  WHERE (`admin_files_id` = 29) ;
+UPDATE `admin_files` SET `admin_files_id`='28', `admin_files_name`='languages.php', `admin_display_name`='BOX_LOCALIZATION_LANGUAGES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='7', `admin_groups_id`='1', `admin_sort_order`='2'  WHERE (`admin_files_id` = 28) ;
+UPDATE `admin_files` SET `admin_files_id`='27', `admin_files_name`='currencies.php', `admin_display_name`='BOX_LOCALIZATION_CURRENCIES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='7', `admin_groups_id`='1,2', `admin_sort_order`='1'  WHERE (`admin_files_id` = 27) ;
+UPDATE `admin_files` SET `admin_files_id`='26', `admin_files_name`='tax_rates.php', `admin_display_name`='BOX_TAXES_TAX_RATES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='6', `admin_groups_id`='1', `admin_sort_order`='5'  WHERE (`admin_files_id` = 26) ;
+UPDATE `admin_files` SET `admin_files_id`='25', `admin_files_name`='tax_classes.php', `admin_display_name`='BOX_TAXES_TAX_CLASSES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='6', `admin_groups_id`='1', `admin_sort_order`='4'  WHERE (`admin_files_id` = 25) ;
+UPDATE `admin_files` SET `admin_files_id`='24', `admin_files_name`='geo_zones.php', `admin_display_name`='BOX_TAXES_GEO_ZONES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='6', `admin_groups_id`='1', `admin_sort_order`='3'  WHERE (`admin_files_id` = 24) ;
+UPDATE `admin_files` SET `admin_files_id`='23', `admin_files_name`='zones.php', `admin_display_name`='BOX_TAXES_ZONES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='6', `admin_groups_id`='1', `admin_sort_order`='2'  WHERE (`admin_files_id` = 23) ;
+UPDATE `admin_files` SET `admin_files_id`='22', `admin_files_name`='countries.php', `admin_display_name`='BOX_TAXES_COUNTRIES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='6', `admin_groups_id`='1', `admin_sort_order`='1'  WHERE (`admin_files_id` = 22) ;
+UPDATE `admin_files` SET `admin_files_id`='21', `admin_files_name`='orders.php', `admin_display_name`='BOX_CUSTOMERS_ORDERS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='6'  WHERE (`admin_files_id` = 21) ;
+UPDATE `admin_files` SET `admin_files_id`='20', `admin_files_name`='customers.php', `admin_display_name`='BOX_CUSTOMERS_CUSTOMERS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='5', `admin_groups_id`='1,2', `admin_sort_order`='1'  WHERE (`admin_files_id` = 20) ;
+UPDATE `admin_files` SET `admin_files_id`='18', `admin_files_name`='products_expected.php', `admin_display_name`='BOX_CATALOG_PRODUCTS_EXPECTED', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='12'  WHERE (`admin_files_id` = 18) ;
+UPDATE `admin_files` SET `admin_files_id`='17', `admin_files_name`='specials.php', `admin_display_name`='BOX_CATALOG_SPECIALS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='6'  WHERE (`admin_files_id` = 17) ;
+UPDATE `admin_files` SET `admin_files_id`='16', `admin_files_name`='reviews.php', `admin_display_name`='BOX_CATALOG_REVIEWS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='5'  WHERE (`admin_files_id` = 16) ;
+UPDATE `admin_files` SET `admin_files_id`='15', `admin_files_name`='manufacturers.php', `admin_display_name`='BOX_CATALOG_MANUFACTURERS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='4'  WHERE (`admin_files_id` = 15) ;
+UPDATE `admin_files` SET `admin_files_id`='14', `admin_files_name`='products_attributes.php', `admin_display_name`='BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='2'  WHERE (`admin_files_id` = 14) ;
+UPDATE `admin_files` SET `admin_files_id`='13', `admin_files_name`='categories.php', `admin_display_name`='BOX_CATALOG_CATEGORIES_PRODUCTS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='1'  WHERE (`admin_files_id` = 13) ;
+UPDATE `admin_files` SET `admin_files_id`='11', `admin_files_name`='admin_files.php', `admin_display_name`='BOX_ADMINISTRATOR_BOXES', `admin_files_is_boxes`='0', `admin_files_to_boxes`='1', `admin_groups_id`='1', `admin_sort_order`='3'  WHERE (`admin_files_id` = 11) ;
+UPDATE `admin_files` SET `admin_files_id`='10', `admin_files_name`='admin_members.php', `admin_display_name`='BOX_ADMINISTRATOR_MEMBERS', `admin_files_is_boxes`='0', `admin_files_to_boxes`='1', `admin_groups_id`='1', `admin_sort_order`='1'  WHERE (`admin_files_id` = 10) ;
+UPDATE `admin_files` SET `admin_files_id`='9', `admin_files_name`='tools.php', `admin_display_name`='BOX_HEADING_TOOLS', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1,2', `admin_sort_order`='9'  WHERE (`admin_files_id` = 9) ;
+UPDATE `admin_files` SET `admin_files_id`='8', `admin_files_name`='reports.php', `admin_display_name`='BOX_HEADING_REPORTS', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1,2', `admin_sort_order`='8'  WHERE (`admin_files_id` = 8) ;
+UPDATE `admin_files` SET `admin_files_id`='7', `admin_files_name`='localization.php', `admin_display_name`='BOX_HEADING_LOCALIZATION', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1,2', `admin_sort_order`='7'  WHERE (`admin_files_id` = 7) ;
+UPDATE `admin_files` SET `admin_files_id`='6', `admin_files_name`='taxes.php', `admin_display_name`='BOX_HEADING_LOCATION_AND_TAXES', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1', `admin_sort_order`='6'  WHERE (`admin_files_id` = 6) ;
+UPDATE `admin_files` SET `admin_files_id`='5', `admin_files_name`='customers.php', `admin_display_name`='BOX_HEADING_CUSTOMERS', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1,2', `admin_sort_order`='5'  WHERE (`admin_files_id` = 5) ;
+UPDATE `admin_files` SET `admin_files_id`='4', `admin_files_name`='modules.php', `admin_display_name`='BOX_HEADING_MODULES', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1', `admin_sort_order`='4'  WHERE (`admin_files_id` = 4) ;
+UPDATE `admin_files` SET `admin_files_id`='3', `admin_files_name`='catalog.php', `admin_display_name`='BOX_HEADING_CATALOG', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1,2', `admin_sort_order`='3'  WHERE (`admin_files_id` = 3) ;
+UPDATE `admin_files` SET `admin_files_id`='2', `admin_files_name`='configuration.php', `admin_display_name`='BOX_HEADING_CONFIGURATION', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1', `admin_sort_order`='2'  WHERE (`admin_files_id` = 2) ;
+UPDATE `admin_files` SET `admin_files_id`='112', `admin_files_name`='new_attributes_include.php', `admin_display_name`='FILE_ATTRIBUTE', `admin_files_is_boxes`='0', `admin_files_to_boxes`='3', `admin_groups_id`='1,2', `admin_sort_order`='99'  WHERE (`admin_files_id` = 112) ;
+UPDATE `admin_files` SET `admin_files_id`='1', `admin_files_name`='administrator.php', `admin_display_name`='BOX_HEADING_ADMINISTRATOR', `admin_files_is_boxes`='1', `admin_files_to_boxes`='0', `admin_groups_id`='1', `admin_sort_order`='1'  WHERE (`admin_files_id` = 1) ;
 
 /*Start of batch : 1 */
-INSERT INTO `configuration` (`configuration_id`,`configuration_title`,`configuration_key`,`configuration_value`,`configuration_description`,`configuration_group_id`,`sort_order`,`last_modified`,`use_function`,`set_function`) VALUES ('459', 'CT_TEMPLATE_SWITCHING_MENU', 'TEMPLATE_SWITCHING_MENU', 'false', 'CD_TEMPLATE_SWITCHING_MENU', '201', '4', now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO `configuration` (`configuration_title`,`configuration_key`,`configuration_value`,`configuration_description`,`configuration_group_id`,`sort_order`,`last_modified`,`use_function`,`set_function`) VALUES ('CT_TEMPLATE_SWITCHING_MENU', 'TEMPLATE_SWITCHING_MENU', 'false', 'CD_TEMPLATE_SWITCHING_MENU', '201', '4', now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 UPDATE `configuration` SET `configuration_id`='2', `configuration_title`='CT_STORE_OWNER', `configuration_key`='STORE_OWNER', `configuration_description`='CD_STORE_OWNER', `configuration_group_id`='1', `sort_order`='3', `last_modified`=now(), `use_function`=NULL, `set_function`=NULL  WHERE (`configuration_id` = 2) ;
 UPDATE `configuration` SET `configuration_id`='3', `configuration_title`='CT_STORE_OWNER_EMAIL_ADDRESS', `configuration_key`='STORE_OWNER_EMAIL_ADDRESS', `configuration_description`='CD_STORE_OWNER_EMAIL_ADDRESS', `configuration_group_id`='1', `sort_order`='4', `last_modified`=now(), `use_function`=NULL, `set_function`=NULL  WHERE (`configuration_id` = 3) ;
 UPDATE `configuration` SET `configuration_id`='4', `configuration_title`='CT_EMAIL_FROM', `configuration_key`='EMAIL_FROM', `configuration_description`='CD_EMAIL_FROM', `configuration_group_id`='1', `sort_order`='5', `last_modified`=now(), `use_function`=NULL, `set_function`=NULL  WHERE (`configuration_id` = 4) ;
@@ -671,185 +810,32 @@ UPDATE `configuration_group` SET `configuration_group_id`='206', `configuration_
 UPDATE `configuration_group` SET `configuration_group_id`='207', `configuration_group_title`='BOX_CONFIGURATION_CONTACT', `configuration_group_description`='Contact Us Form', `sort_order`='207', `visible`='1'  WHERE (`configuration_group_id` = 207) ;
 UPDATE `configuration_group` SET `configuration_group_id`='7575', `configuration_group_title`='BOX_CONFIGURATION_OPC', `configuration_group_description`='Settings for one page checkout', `sort_order`='16', `visible`='1'  WHERE (`configuration_group_id` = 7575) ;
 /*End   of batch : 1 */
-/* SYNC TABLE : `counter` */
-
-/* SYNC TABLE : `counter_history` */
-
-/* SYNC TABLE : `countries` */
-
-/* SYNC TABLE : `coupon_email_track` */
-
-/* SYNC TABLE : `coupon_gv_customer` */
-
-/* SYNC TABLE : `coupon_gv_queue` */
-
-/* SYNC TABLE : `coupon_redeem_track` */
-
-/* SYNC TABLE : `coupons` */
-
-/* SYNC TABLE : `coupons_description` */
-
-/* SYNC TABLE : `currencies` */
-
-/* SYNC TABLE : `customer_log` */
-
-/* SYNC TABLE : `customers` */
-
-/* SYNC TABLE : `customers_basket` */
-
-/* SYNC TABLE : `customers_basket_attributes` */
-
-/* SYNC TABLE : `customers_groups` */
-
-/* SYNC TABLE : `customers_info` */
-
-/* SYNC TABLE : `customers_notes` */
-
-/* SYNC TABLE : `customers_wishlist` */
-
-/* SYNC TABLE : `customers_wishlist_attributes` */
-
 /* SYNC TABLE : `db_version` */
 
 insert  into `db_version`(`database_version`) values ('v2.5_RC1');
 
-/* SYNC TABLE : `discount_categories` */
-
-/* SYNC TABLE : `extra_field_labels` */
-
-/* SYNC TABLE : `extra_field_values` */
-
-/* SYNC TABLE : `extra_product_fields` */
-
-/* SYNC TABLE : `extra_value_exclude` */
-
-/* SYNC TABLE : `feedmachine` */
-
-/* SYNC TABLE : `geo_zones` */
-
-/* SYNC TABLE : `google_checkout` */
-
-/* SYNC TABLE : `google_configuration` */
-
-/* SYNC TABLE : `google_orders` */
-
-/* SYNC TABLE : `help_pages` */
-
-/* SYNC TABLE : `http_error` */
-
-/* SYNC TABLE : `information` */
-
-/* SYNC TABLE : `information_group` */
-
-/* SYNC TABLE : `languages` */
-
-/* SYNC TABLE : `manufacturers` */
-
-/* SYNC TABLE : `manufacturers_info` */
-
-/* SYNC TABLE : `newsletters` */
-
-/* SYNC TABLE : `orders` */
-
-/* SYNC TABLE : `orders_premade_comments` */
-
-/* SYNC TABLE : `orders_products` */
-
-/* SYNC TABLE : `orders_products_attributes` */
-
-/* SYNC TABLE : `orders_products_download` */
-
-/* SYNC TABLE : `orders_status` */
-
-/* SYNC TABLE : `orders_status_history` */
-
-/* SYNC TABLE : `orders_total` */
-
-/* SYNC TABLE : `packaging` */
-
-/* SYNC TABLE : `paypal_ipn` */
-
 /* SYNC TABLE : `pm_configuration` */
 
 /*Start of batch : 1 */
-INSERT INTO `pm_configuration` (`pm_id`,`pm_title`,`pm_description`,`pm_filename`,`pm_active`,`pm_page`,`pm_sort_order`,`last_modified`) VALUES ('18', 'Banner', '', 'banner_product.php', 'yes', 'product_info', '5', now());
-INSERT INTO `pm_configuration` (`pm_id`,`pm_title`,`pm_description`,`pm_filename`,`pm_active`,`pm_page`,`pm_sort_order`,`last_modified`) VALUES ('16', 'Banner', '', 'banner_index.php', 'yes', 'index', '9', now());
-INSERT INTO `pm_configuration` (`pm_id`,`pm_title`,`pm_description`,`pm_filename`,`pm_active`,`pm_page`,`pm_sort_order`,`last_modified`) VALUES ('17', 'Banner', '', 'banner_all.php', 'yes', 'all', '2', now());
+INSERT INTO `pm_configuration` (`pm_title`,`pm_description`,`pm_filename`,`pm_active`,`pm_page`,`pm_sort_order`) VALUES ('Banner', '', 'banner_product.php', 'no', 'product_info', '5');
+INSERT INTO `pm_configuration` (`pm_title`,`pm_description`,`pm_filename`,`pm_active`,`pm_page`,`pm_sort_order`) VALUES ('Banner', '', 'banner_index.php', 'no', 'index', '9');
+INSERT INTO `pm_configuration` (`pm_title`,`pm_description`,`pm_filename`,`pm_active`,`pm_page`,`pm_sort_order`) VALUES ('Banner', '', 'banner_all.php', 'no', 'all', '2');
 UPDATE `pm_configuration` SET `pm_id`='7', `pm_title`='Counter', `pm_description`='', `pm_filename`='counter.php', `pm_page`='all', `pm_sort_order`='1', `last_modified`= now()  WHERE (`pm_id` = 7) ;
 UPDATE `pm_configuration` SET `pm_id`='9', `pm_title`='Articles', `pm_description`='', `pm_filename`='index_articles.php', `pm_page`='index', `pm_sort_order`='8', `last_modified`= now()  WHERE (`pm_id` = 9) ;
 /*End   of batch : 1 */
-/* SYNC TABLE : `products` */
-
-/* SYNC TABLE : `products_attributes` */
-
-/* SYNC TABLE : `products_attributes_download` */
-
-/* SYNC TABLE : `products_description` */
-
-/* SYNC TABLE : `products_groups` */
-
-/* SYNC TABLE : `products_notifications` */
-
-/* SYNC TABLE : `products_options` */
-
-/* SYNC TABLE : `products_options_description` */
-
-/* SYNC TABLE : `products_options_types` */
-
-/* SYNC TABLE : `products_options_values` */
-
-/* SYNC TABLE : `products_options_values_to_products_options` */
-
-/* SYNC TABLE : `products_price_break` */
-
-/* SYNC TABLE : `products_stock` */
-
-/* SYNC TABLE : `products_to_categories` */
-
-/* SYNC TABLE : `products_to_discount_categories` */
-
-/* SYNC TABLE : `products_xsell` */
-
 /* SYNC TABLE : `quick_links` */
 
-/* SYNC TABLE : `reviews` */
-
-/* SYNC TABLE : `reviews_description` */
-
-/* SYNC TABLE : `scart` */
-
-/* SYNC TABLE : `search_queries` */
-
-/* SYNC TABLE : `search_queries_sorted` */
-
-/* SYNC TABLE : `searchword_swap` */
-
-/* SYNC TABLE : `sessions` */
-
-/* SYNC TABLE : `shipping_manifest` */
-
-/* SYNC TABLE : `slideshow` */
-
-/* SYNC TABLE : `specials` */
-
-/* SYNC TABLE : `specials_retail_prices` */
-
-/* SYNC TABLE : `tax_class` */
-
-/* SYNC TABLE : `tax_rates` */
-
-/* SYNC TABLE : `theme_configuration` */
-
-/* SYNC TABLE : `topics` */
-
-/* SYNC TABLE : `topics_description` */
-
-/* SYNC TABLE : `ups_boxes_used` */
-
-/* SYNC TABLE : `usu_cache` */
-
-/* SYNC TABLE : `whos_online` */
-
+UPDATE `quick_links` SET `quick_links_id`='1', `quick_links_cg`='1,2' WHERE (`quick_links_id` = 1) ;
+UPDATE `quick_links` SET `quick_links_id`='2', `quick_links_cg`='1,2' WHERE (`quick_links_id` = 2) ;
+UPDATE `quick_links` SET `quick_links_id`='3', `quick_links_cg`='1,2' WHERE (`quick_links_id` = 3) ;
+UPDATE `quick_links` SET `quick_links_id`='4', `quick_links_cg`='1,2' WHERE (`quick_links_id` = 4) ;
+UPDATE `quick_links` SET `quick_links_id`='5', `quick_links_cg`='1,2' WHERE (`quick_links_id` = 5) ;
+UPDATE `quick_links` SET `quick_links_id`='6', `quick_links_cg`='1,2' WHERE (`quick_links_id` = 6) ;
+UPDATE `quick_links` SET `quick_links_id`='7', `quick_links_cg`='1,2' WHERE (`quick_links_id` = 7) ;
+UPDATE `quick_links` SET `quick_links_id`='8', `quick_links_cg`='1,2' WHERE (`quick_links_id` = 8) ;
+UPDATE `quick_links` SET `quick_links_id`='9', `quick_links_cg`='1,2' WHERE (`quick_links_id` = 9) ;
+UPDATE `quick_links` SET `quick_links_id`='10', `quick_links_cg`='1,2' WHERE (`quick_links_id` = 10) ;
+UPDATE `quick_links` SET `quick_links_id`='11', `quick_links_cg`='1,2' WHERE (`quick_links_id` = 11) ;
 /* SYNC TABLE : `zones` */
 
 /*Start of batch : 1 */

@@ -97,17 +97,17 @@ table {
   
     //mysql_close($connect);
 	if ($version == 'v2.5_RC2') { 
-	  if (PROJECT_VERSION == 'osCmax_v2.5_RC2') { 
+	  if (PROJECT_VERSION == 'osCmax v2.5 RC2') { 
 					?>
 				<center>
-				<p>You have successfully upgraded your osCmax installation to
-				<?php echo $version; ?></p>
+				<p>You are currently running osCmax <?php echo $version; ?></p>
 				<br>
+				<p>Your installation is fully up to date. No upgrades are available.</p>
 				</center>
 				<?php 
 				 } else {
 				 ?>
-				<strong>Complete your upgrade by uploading the  <?php echo $version; ?> files now. </strong></center> 
+				<strong>Your database has been upgraded. Please complete your upgrade by uploading the osCmax <?php echo $version; ?> files now. </strong></center> 
 				<?php
 				 }
 	  } else { ?>

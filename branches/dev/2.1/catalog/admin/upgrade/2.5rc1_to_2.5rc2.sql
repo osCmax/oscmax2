@@ -6,6 +6,9 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+CREATE TABLE IF NOT EXISTS `db_version` (
+  `database_version` varchar(128) DEFAULT NULL
+) ;
 /* Alter table in target */
 ALTER TABLE `customers` 
 	ADD COLUMN `customers_paypal_payerid` varchar(20) NULL after `customers_shipment_allowed`, 
@@ -106,7 +109,7 @@ UPDATE `configuration_group` SET `configuration_group_id`='456', `configuration_
 /*End   of batch : 1 */
 /* SYNC TABLE : `db_version` */
 
-UPDATE `db_version` SET `database_version`='v2.5_RC2';
+REPLACE INTO `db_version` SET `database_version`='v2.5_RC2';
 
 /* SYNC TABLE : `pm_configuration` */
 

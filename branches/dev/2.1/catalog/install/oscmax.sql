@@ -1763,6 +1763,7 @@ INSERT INTO admin_files VALUES(210, 'configuration.php?gID=86', 'BOX_CONFIGURATI
 INSERT INTO admin_files VALUES(211, 'configuration.php?gID=70', 'BOX_CONFIGURATION_EDITOR', 0, 2, '1', 35);
 INSERT INTO admin_files VALUES(212, 'configuration.php?gID=85', 'BOX_CONFIGURATION_GOOGLE_ANALYTICS', 0, 2, '1', 36);
 INSERT INTO admin_files VALUES(213, 'configuration.php?gID=89', 'BOX_CONFIGURATION_GOOGLE_MAPS', 0, 2, '1', 37);
+INSERT INTO admin_files VALUES(214, 'upgrade.php', 'BOX_ADMINISTRATOR_UPGRADE', 0, 1, '1', 20);
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
@@ -1872,7 +1873,7 @@ INSERT INTO configuration VALUES (64, 'CT_ACCOUNT_DOB', 'ACCOUNT_DOB', 'false', 
 INSERT INTO configuration VALUES (65, 'CT_ACCOUNT_COMPANY', 'ACCOUNT_COMPANY', 'false', 'CD_ACCOUNT_COMPANY', '5', '3', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (66, 'CT_ACCOUNT_SUBURB', 'ACCOUNT_SUBURB', 'false', 'CD_ACCOUNT_SUBURB', '5', '4', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (67, 'CT_ACCOUNT_STATE', 'ACCOUNT_STATE', 'true', 'CD_ACCOUNT_STATE', '5', '5', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (1449, 'CT_PURCHASE_WITHOUT_ACCOUNT', 'PURCHASE_WITHOUT_ACCOUNT', 'yes', 'CD_PURCHASE_WITHOUT_ACCOUNT', 5, '10', NULL, now(), NULL, 'tep_cfg_select_option(array(\'yes\',\'no\'),');
+INSERT INTO configuration VALUES (1449, 'CT_PURCHASE_WITHOUT_ACCOUNT', 'PURCHASE_WITHOUT_ACCOUNT', 'no', 'CD_PURCHASE_WITHOUT_ACCOUNT', 5, '10', NULL, now(), NULL, 'tep_cfg_select_option(array(\'yes\',\'no\'),');
 INSERT INTO configuration VALUES (1450, 'CT_PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SHIPPING', 'PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SHIPPING', 'yes', 'CD_PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SHIPPING', 5, '11', NULL, now(), NULL, 'tep_cfg_select_option(array(\'yes\',\'no\'),');
 INSERT INTO configuration VALUES (2511, 'CT_CUSTOMER_COMMENTS_NOTIFY', 'CUSTOMER_COMMENTS_NOTIFY', 'false', 'CD_CUSTOMER_COMMENTS_NOTIFY', 5, '50', NULL , now(), NULL , 'tep_cfg_select_option(array(''true'', ''false''),' );
 INSERT INTO configuration VALUES (2512, 'CT_CUSTOMER_COMMENTS_NEW_STATUS', 'CUSTOMER_COMMENTS_NEW_STATUS', '4', 'CD_CUSTOMER_COMMENTS_NEW_STATUS', 5, '51', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
@@ -2750,7 +2751,7 @@ INSERT INTO theme_configuration VALUES (15,'tell a friend','BOX_HEADING_TELL_A_F
 INSERT INTO theme_configuration VALUES (16,'what\'s new','BOX_HEADING_WHATS_NEW','yes','Display What\'s New? box?','1','left','4','16',NULL,now(),'What\'s New');
 INSERT INTO theme_configuration VALUES (26,'articles','BOX_HEADING_ARTICLES','yes','','1','right','10',NULL,NULL,now(),'Articles');
 INSERT INTO theme_configuration VALUES (25,'loginbox','BOX_HEADING_LOGIN_BOX','yes','','1','right','2',NULL,NULL,now(),'Sign In');
-INSERT INTO theme_configuration VALUES (28,'affiliate','BOX_HEADING_AFFILIATE','yes','','1','left','3',NULL,NULL,now(),'Affiliates');
+INSERT INTO theme_configuration VALUES (28,'affiliate','BOX_HEADING_AFFILIATE','no','','1','left','3',NULL,NULL,now(),'Affiliates');
 INSERT INTO theme_configuration VALUES (2,'categories','BOX_HEADING_CATEGORIES','yes','','1','left','1',NULL,NULL,now(),'Categories');
 INSERT INTO theme_configuration VALUES (22,'wishlist','BOX_HEADING_CUSTOMER_WISHLIST','yes','','1','right','3',NULL,NULL,now(),'My Wish List');
 INSERT INTO theme_configuration VALUES (29,'Authors','BOX_HEADING_AUTHORS','yes','','1','right','11',NULL,NULL,now(),'Authors');

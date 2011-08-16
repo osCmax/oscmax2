@@ -17,6 +17,7 @@ $Id$
   $contents = (                    tep_admin_jqmenu(FILENAME_ADMIN_MEMBERS, BOX_ADMINISTRATOR_MEMBERS, 'TOP') .
 								   tep_admin_jqmenu(FILENAME_ADMIN_GROUPS, BOX_ADMIN_GROUPS, 'TOP') .
                                    tep_admin_jqmenu(FILENAME_ADMIN_FILES, BOX_ADMINISTRATOR_BOXES, 'TOP') .
+				   tep_admin_jqmenu(FILENAME_UPGRADE, BOX_ADMINISTRATOR_UPGRADE, 'TOP', '') .
 								   tep_admin_jqmenu(FILENAME_CONFIGURATION_GZIP, BOX_CONFIGURATION_GZIP, 'TOP') .
 								   tep_admin_jqmenu(FILENAME_CONFIGURATION_LOGGING_CACHE, BOX_CONFIGURATION_LOGGING_CACHE, 'TOP', 'submenu') . '<ul>' .
 								     tep_admin_jqmenu(FILENAME_CONFIGURATION_LOGGING_CACHE, BOX_CONFIGURATION_LOGGING, 'TOP') .

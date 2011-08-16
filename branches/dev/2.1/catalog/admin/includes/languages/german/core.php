@@ -23,6 +23,7 @@ define('BOX_HEADING_ADMINISTRATOR', 'Administrator');
 define('BOX_ADMINISTRATOR_MEMBERS', 'Verwaltungsmitglieder');
 define('BOX_ADMINISTRATOR_MEMBER', 'Mitglieder');
 define('BOX_ADMINISTRATOR_BOXES', 'Boxmenü');
+define('BOX_ADMINISTRATOR_UPGRADE', 'Upgrade System');
 define('BOX_ADMIN_GROUPS', 'Verwaltungsgruppen');
 define('BOX_MERCHANT_INFO', 'Merchant Application');
 define('BOX_PAYPAL_INFO', 'Paypal Anmeldung');

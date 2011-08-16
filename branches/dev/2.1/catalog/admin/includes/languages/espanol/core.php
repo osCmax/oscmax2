@@ -23,6 +23,7 @@ define('BOX_HEADING_ADMINISTRATOR', 'Administrador');
 define('BOX_ADMINISTRATOR_MEMBERS', 'Miembros administración');
 define('BOX_ADMINISTRATOR_MEMBER', 'Miembros');
 define('BOX_ADMINISTRATOR_BOXES', 'Acceso a archivos');
+define('BOX_ADMINISTRATOR_UPGRADE', 'Upgrade System');
 define('BOX_ADMIN_GROUPS', 'Grupos administración');
 define('BOX_MERCHANT_INFO', 'Aplicación Merchant');
 define('BOX_PAYPAL_INFO', 'Registro Paypal');

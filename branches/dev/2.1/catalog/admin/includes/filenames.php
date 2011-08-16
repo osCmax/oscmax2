@@ -206,6 +206,7 @@ define('FILENAME_CONFIGURATION_MAINTENANCE', FILENAME_CONFIGURATION . '?gID=16')
 define('FILENAME_AFFILIATE_INFO', 'affiliate_info.php');
 define('FILENAME_MERCHANT_INFO', 'merchant_info.php');
 define('FILENAME_PAYPAL_INFO', 'paypal_info.php');
+define('FILENAME_UPGRADE', 'upgrade.php');
 
 // Modules
 define('FILENAME_MODULES_PAYMENT', FILENAME_MODULES . '?set=payment');

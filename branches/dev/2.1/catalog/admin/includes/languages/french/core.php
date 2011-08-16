@@ -23,6 +23,7 @@ define('BOX_HEADING_ADMINISTRATOR', 'Administrator');
 define('BOX_ADMINISTRATOR_MEMBERS', 'Member Groups');
 define('BOX_ADMINISTRATOR_MEMBER', 'Members');
 define('BOX_ADMINISTRATOR_BOXES', 'File Access');
+define('BOX_ADMINISTRATOR_UPGRADE', 'Upgrade System');
 
 // images
 define('IMAGE_FILE_PERMISSION', 'File Permissions');

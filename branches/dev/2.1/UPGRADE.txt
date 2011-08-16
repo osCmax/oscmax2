@@ -1,0 +1,45 @@
+$Id: $
+
+Steps to upgrade osCmax
+=======================
+****************************************************************************************************
+*** Note: this only applies to upgrading osCmax v2.5 Beta3 or osCmax v2.5 RC1 to osCmax v2.5 RC2 ***
+****************************************************************************************************
+
+1. First, make a backup of both your database and current osCmax files. Should there be any problems, you will be thankful that you took this precaution to roll back your changes.
+
+2. Download the upgrade only package from osCmax.com and extract the zip file to your computer.
+
+3. Upload the new files to your osCmax site. If you have customized any files in your live site excluding your custom template, make sure you do a file-by-file comparison of changes so that your customizations are retianed.
+
+4. Go to your admin panel and login. In the "Adminstrator" menu, click "Upgrade System."
+
+5. You will see information regarding your current version and an Upgrade button. 
+
+6. Click the upgrade button. If no errors are printed to the screen, your first upgrade step was completed successfully.
+
+7. Click your Browser's refresh button to reload the upgrade page (DO NOT CLICK THE UPGRADE BUTTON AGAIN!). The upgrade information will change when you refresh the page. 
+
+8. If it is indicated that no further upgrades are needed, you have finished the upgrade process.
+
+9. If it is indcated that you need to run the upgrade script again, click the Upgrade button again. If no errors are printed out to the screen, the database upgrade step was successful.
+
+10. Click your Browser's refresh button to reload the upgrade page (DO NOT CLICK THE UPGRADE BUTTON AGAIN!). The upgrade information will change when you refresh the page. The screen should now display that you are fully upgraded. You have completed the upgrade process.
+
+
+TROUBLESHOOTING
+===============
+
+1. If you get errors from the upgrade script, chances are you have made changes to the database and will need to manually upgrade your database. Your best option at this point is to visit the forums and post to the Bugs/Problems board. Make sure you include all the errors that are printed to the screen and any custom changes you have made to the database.
+
+osCmax v2.5 Bugs/Problems forum:
+http://www.oscmax.com/forums/bugs-problems/
+
+===========================
+2. If you cannot get your admin panel to load properly to get to the upgrade script after uploading the new version files, don't panic! You can access the upgrade script directly after logging in to your admin by using this url:
+http://yourdomain.com/your/admin/upgrade.php
+
+Be sure to substitute your actual domain and actual path in the example url above. Typically all you will need to do in your browser URL bar is replace the file name in the url with upgrade.php.
+
+
+

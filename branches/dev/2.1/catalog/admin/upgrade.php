@@ -143,7 +143,7 @@ table {
     		}
     	}
 			
-   if ($version == 'v2.5 RC1') {
+   if ($version == 'v2.5_RC1') {
    		//if (PROJECT_VERSION == 'osCmax v2.5 RC1' || PROJECT_VERSION == 'osCmax v2.5 RC2') {
    			$file = fopen('upgrade/2.5rc1_to_2.5rc2.sql', 'r');
    		?>

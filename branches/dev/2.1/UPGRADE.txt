@@ -1,4 +1,4 @@
-$Id: $
+$Id$
 
 Steps to upgrade osCmax
 =======================
@@ -12,7 +12,7 @@ Steps to upgrade osCmax
 
 3. Upload the new files to your osCmax site. If you have customized any files in your live site excluding your custom template, make sure you do a file-by-file comparison of changes so that your customizations are retianed.
 
-4. Go to your admin panel and login. In the "Adminstrator" menu, click "Upgrade System."
+4. Go to your admin panel and login. In the "Adminstrator" menu, click "Upgrade System." If you don't see this option, read Troubleshooting step 3.
 
 5. You will see information regarding your current version and an Upgrade button. 
 
@@ -41,5 +41,9 @@ http://yourdomain.com/your/admin/upgrade.php
 
 Be sure to substitute your actual domain and actual path in the example url above. Typically all you will need to do in your browser URL bar is replace the file name in the url with upgrade.php.
 
+===========================
+3. If you cannot see "Upgrade System" as a menu option in the Administrators menu, go to Administrator >> File Accesss >> Administrator >> Store Files >> upgrade.php
+
+Once you have done that, reload your admin home page and select the administrators menu again. You should now see the "Upgrade System" option.
 
 

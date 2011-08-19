@@ -12,6 +12,8 @@ Steps to upgrade osCmax
 
 3. Upload the new files to your osCmax site. If you have customized any files in your live site excluding your custom template, make sure you do a file-by-file comparison of changes so that your customizations are retianed.
 
+   *** If you have renamed your admin directory, make sure you rename the admin directory before you upload it, so that the new files are uploaded to the correct place on the server. ***
+
 4. Go to your admin panel and login. In the "Adminstrator" menu, click "Upgrade System." If you don't see this option, read Troubleshooting step 3.
 
 5. You will see information regarding your current version and an Upgrade button. 

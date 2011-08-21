@@ -14,7 +14,7 @@ define('TEXT_OSCMAX_WEBSITE', 'osCmax Website');
 define('TEXT_FORUM', 'Support');
 define('TEXT_DOCUMENTATION', 'Dokumentation');
 define('TEXT_WIKI', 'Wiki');
-define('TEXT_FOOTER_DISCLAIMER', 'Die Verwendung von osCmax erfolgt ohne Gewähr und steht unter der <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a>.');
+define('TEXT_FOOTER_DISCLAIMER', 'Die Verwendung von osCmax erfolgt ohne Gewähr und unterliegt der <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a>.');
 
 define('TAB_START', 'Start');
 define('TAB_DATABASE_SERVER', 'Datenbankserver');
@@ -25,8 +25,8 @@ define('TAB_FINISHED', 'Fertig');
 define('TEXT_PHP_VERSION', 'PHP Version');
 define('TEXT_PHP_SETTINGS', 'PHP Einstellungen');
 define('TEXT_PHP_EXTENSIONS', 'PHP Erweiterungen');
-define('TEXT_ON', 'An');
-define('TEXT_OFF', 'Aus');
+define('TEXT_ON', 'On');
+define('TEXT_OFF', 'Off');
 
 define('IMAGE_CONTINUE', 'Fortsetzen');
 define('IMAGE_CANCEL', 'Abbrechen');
@@ -38,7 +38,7 @@ define('IMAGE_CATALOG', 'Catalog');
 define('TEXT_WELCOME_TO_OSCMAX', 'Willkommen bei osCmax ');
 define('TEXT_INDEX_MAIN_BLOCK', '<p>Mit osCmax können Sie weltweit Produkte über Ihren eigenen Online-Shop vertreiben. Verwalten Sie Produkte, Kunden, Bestellungen, Newsletter, Sonderangebote und mehr, um Ihren Onlineshop zum Erfolg zu führen.</p>
   <p>osCmax basiert auf osCommerce Online Merchant 2.2 und macht die Entwicklung Ihrer Site schneller und einfacher als jemals zuvor. osCmax ist mit osCommerce Online Merchant 2.2 abwärtskompatibel. Somit profitieren Sie von der größten Community einer Shoplösung: Über 140,000 registrierte Shop-Betreiber und Entwickler geben Hilfestellung und haben über 4.000 Erweiterungen entwickelt, die die Funktionalität und das Potential Ihres Shops erweitern.</p>
-  <p>osCmax und seine Erweiterunge sind kostenlos unter Verwendung einer Open-Source-Lizenz verfügbar, damit Sie schneller und ohne Einschränkungen oder Lizenzgebühren online verkaufen können.</p><p>&nbsp;</p><p>&nbsp;</p><br />');
+  <p>osCmax und seine Erweiterungen sind kostenlos unter Verwendung einer Open-Source-Lizenz verfügbar, damit Sie schneller und ohne Einschränkungen oder Lizenzgebühren online verkaufen können.</p><p>&nbsp;</p><p>&nbsp;</p><br />');
 define('TEXT_REGISTER_GLOBALS_ERROR', 'Die Kompatibilität mit register_globals wird seit PHP 4.3+ unterstützt. Diese Einstellung <u>muss aktiviert werden</u>, da eine ältere PHP Version verwendet wird.');
 define('TEXT_PERMISSIONS_ERROR', '<p>Der Webserver kann die Installationsparameter nicht in seine Konfigurationsdateien speichern.</p><p>Bei den folgenden Dateien müssen die Zugriffsberechtigungen auf world-writeable (chmod 777) gesetzt werden:</p><p></p>');
 define('TEXT_CORRECT_ERROR', '<p class="messageStackAlert">Bitte beheben Sie die rechts aufgelisteten Fehler und wiederholen Sie die Installation.</p>

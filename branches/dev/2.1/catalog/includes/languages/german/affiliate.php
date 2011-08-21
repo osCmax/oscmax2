@@ -80,7 +80,7 @@ define('ENTRY_AFFILIATE_COMPANY_TAXID_ERROR', '&nbsp;<small><font color="#FF0000
 define('ENTRY_AFFILIATE_HOMEPAGE', 'Homepage');
 define('ENTRY_AFFILIATE_HOMEPAGE_TEXT', '&nbsp;<small><font color="#000000"> (http://)</font></small>');
 define('ENTRY_AFFILIATE_HOMEPAGE_ERROR', '&nbsp;<small><font color="#FF0000">Pflichtfeld (http://)</font></small>');
-define('ENTRY_AFFILIATE_NEWSLETTER', 'Werbepartner Newsletter');
+define('ENTRY_AFFILIATE_NEWSLETTER', 'Affiliate Newsletter');
 define('ENTRY_AFFILIATE_NEWSLETTER_TEXT', '');
 define('ENTRY_AFFILIATE_NEWSLETTER_ERROR', '&nbsp;<small><font color="#FF0000">Pflichtfeld</font></small>');
 

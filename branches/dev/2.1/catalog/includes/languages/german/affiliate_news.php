@@ -27,7 +27,7 @@ define('IMAGE_BUTTON_BUILD_A_LINK','Link auf Produktbanner erstellen');
 // npe admin begin #add
 define('TEXT_AFFILIATE_NEWS_CONTENT_DELETE', 'Gelesene Nachrichten in dieser Sprache löschen!');
 define('EMPTY_CATEGORY', 'Keine Nachrichten vorhanden');
-define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Es existieren keine Nachrichten, die Ihren Werbepartnern angezeigt werden können.');
+define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Es existieren keine Nachrichten, die Ihren Affiliates angezeigt werden können.');
 // npe admin begin #add
 
 ?>

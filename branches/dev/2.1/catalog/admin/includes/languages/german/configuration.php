@@ -21,7 +21,7 @@ define('TEXT_INFO_LAST_MODIFIED', 'Zuletzt geändert am:');
 // Defines for multilingual configuration settings
 // Configuration ID: 1 - My Store
 define('CT_STORE_NAME', 'Shopname');
-define('CD_STORE_NAME', 'Der Name meines Shops ');
+define('CD_STORE_NAME', 'Der Name Ihres Shops ');
 define('CT_STORE_LOGO', 'Shoplogo');
 define('CD_STORE_LOGO', 'Wählen Sie Ihr Shoplogo');
 define('CT_STORE_OWNER', 'Shopbetreiber');
@@ -136,8 +136,8 @@ define('CT_MAX_DISPLAY_BESTSELLERS', 'Bestseller');
 define('CD_MAX_DISPLAY_BESTSELLERS', 'Maximum number of best sellers to display');
 define('CT_MAX_DISPLAY_ALSO_PURCHASED', 'Kauften auch');
 define('CD_MAX_DISPLAY_ALSO_PURCHASED', 'Maximale Anzahl der Produkte, die in der \'Dieser Kunde kaufte auch\' Box.');
-define('CT_MAX_DISPLAY_PRODUCTS_IN_ORDER_HISTORY_BOX', 'Customer Order History Box');
-define('CD_MAX_DISPLAY_PRODUCTS_IN_ORDER_HISTORY_BOX', 'Maximum number of products to display in the customer order history box');
+define('CT_MAX_DISPLAY_PRODUCTS_IN_ORDER_HISTORY_BOX', 'Kundenbestellhistorie Box');
+define('CD_MAX_DISPLAY_PRODUCTS_IN_ORDER_HISTORY_BOX', 'Höchstanzahl der in der Kundenbestellhistorie angezeigten Produkte');
 define('CT_MAX_DISPLAY_ORDER_HISTORY', 'Bestellhistorie');
 define('CD_MAX_DISPLAY_ORDER_HISTORY', 'Höchstmenge der angezeigten Bestellungen in der Bestellhistorie');
 define('CT_MAX_QTY_IN_CART', 'Produktanzahl im Warenkorb');
@@ -310,8 +310,8 @@ define('CT_MOVE_TAX_TO_TOTAL_AMOUNT', 'Move tax to total amount');
 define('CD_MOVE_TAX_TO_TOTAL_AMOUNT', 'Do you want to move the tax to the total amount? If true PayPal will always show the total amount including tax. (needs Aggregate i.s.o. Per Item to function)');
 
 // Configuration ID: 7 - Shipping/Packaging
-define('CT_SHIPPING_ORIGIN_COUNTRY', 'Herkunftsland');
-define('CD_SHIPPING_ORIGIN_COUNTRY', 'Wählen Sie das Herkunftsland, dass für die Berechnung der Versandkosten herangezogen werden soll.');
+define('CT_SHIPPING_ORIGIN_COUNTRY', 'Ursprungsland');
+define('CD_SHIPPING_ORIGIN_COUNTRY', 'Wählen Sie das Ursprungsland, dass für die Berechnung der Versandkosten herangezogen werden soll.');
 define('CT_SHIPPING_ORIGIN_ZIP', 'Postleitzahl');
 define('CD_SHIPPING_ORIGIN_ZIP', 'Geben Sie die Postleitzahl an, die für die Berechnung der Versandkosten herangezogen werden soll.');
 define('CT_SHIPPING_MAX_WEIGHT', 'Maximales Packstückgewicht');
@@ -497,14 +497,14 @@ define('CT_DOWN_FOR_MAINTENANCE_INFO_ID', 'Wartungsmodus Information Manager Cod
 define('CD_DOWN_FOR_MAINTENANCE_INFO_ID', 'Code aus dem Information Manager angeben, der auf den Wartungsmodus text verweist. (Standard=12)');
 
 // Configuration ID: 25 - CKEditor
-define('CT_HTML_AREA_WYSIWYG_DISABLE', 'PRODUCT DESCRIPTIONS use WYSIWYG CK Editor?');
-define('CD_HTML_AREA_WYSIWYG_DISABLE', 'Enable/Disable WYSIWYG box');
-define('CT_HTML_AREA_WYSIWYG_DISABLE_EMAIL', 'CUSTOMER EMAILS use WYSIWYG CK Editor?');
-define('CD_HTML_AREA_WYSIWYG_DISABLE_EMAIL', 'Use WYSIWYG Area in Email Customers');
-define('CT_HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER', 'NEWSLETTER EMAILS use WYSIWYG CK Editor?');
-define('CD_HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER', 'Use WYSIWYG Area in Email Newsletter');
-define('CT_HTML_AREA_WYSIWYG_DISABLE_DEFINE', 'DEFINE MAINPAGE use WYSIWYG CK Editor?');
-define('CD_HTML_AREA_WYSIWYG_DISABLE_DEFINE', 'Use WYSIWYG Area in Define Mainpage');
+define('CT_HTML_AREA_WYSIWYG_DISABLE', 'PRODUCT DESCRIPTIONS verwendet WYSIWYG CK Editor?');
+define('CD_HTML_AREA_WYSIWYG_DISABLE', 'WYSIWYG Box aktivieren/deaktivieren');
+define('CT_HTML_AREA_WYSIWYG_DISABLE_EMAIL', 'CUSTOMER EMAILS verwendet WYSIWYG CK Editor?');
+define('CD_HTML_AREA_WYSIWYG_DISABLE_EMAIL', 'WYSIWYG Bereich bei Kunden-E-Mails verwenden');
+define('CT_HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER', 'NEWSLETTER EMAILS verwendet WYSIWYG CK Editor?');
+define('CD_HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER', 'WYSIWYG Bereich bei Newsletter-E-Mails verwenden');
+define('CT_HTML_AREA_WYSIWYG_DISABLE_DEFINE', 'DEFINE MAINPAGE verwendet WYSIWYG CK Editor?');
+define('CD_HTML_AREA_WYSIWYG_DISABLE_DEFINE', 'WYSIWYG Bereich bei den Begrüßungstexten verwenden');
 
 // Configuration ID: 30 - Printable Catalog
 define('CT_PRODUCT_LIST_CATALOG_CATEGORIES', 'Printable Catalog-Categories column');
@@ -617,16 +617,16 @@ define('CT_NO_OF_DYNAMIC_MOPICS', 'Höchstanzahl von Dynamic Mopics');
 define('CD_NO_OF_DYNAMIC_MOPICS', 'Höchstanzahl der zusätzlich angezeigten Dynamic Mopic Bilder je Produkt.');
 
 // Configuration ID: 50 - Product Information
-define('CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Prevent Adding Out of Stock to Cart');
-define('CD_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Prevents adding an out of stock attribute combination to the cart.');
-define('CT_PRODINFO_ATTRIBUTE_OUT_OF_STOCK_MSGLINE', 'Display Out of Stock Message Line');
-define('CD_PRODINFO_ATTRIBUTE_OUT_OF_STOCK_MSGLINE', 'Controls the display of a message line indicating an out of stock attributes is selected.');
-define('CT_PRODINFO_ATTRIBUTE_MARK_OUT_OF_STOCK', 'Mark Out of Stock Attributes');
-define('CD_PRODINFO_ATTRIBUTE_MARK_OUT_OF_STOCK', 'Controls how out of stock attributes are marked as out of stock.');
-define('CT_PRODINFO_ATTRIBUTE_SHOW_OUT_OF_STOCK', 'Show Out of Stock Attributes');
-define('CD_PRODINFO_ATTRIBUTE_SHOW_OUT_OF_STOCK', 'Controls the display of out of stock attributes.');
+define('CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Ausverkaufte Produkte nicht in den Warenkorb');
+define('CD_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Ausverkaufte Attributkombinationen können nicht in den Warenkorb gelegt werden.');
+define('CT_PRODINFO_ATTRIBUTE_OUT_OF_STOCK_MSGLINE', 'Hinweis auf Ausverkauft anzeigen');
+define('CD_PRODINFO_ATTRIBUTE_OUT_OF_STOCK_MSGLINE', 'Hinweis anzeigen, wenn eine ausverkaufte Attributkombination ausgewählt wird.');
+define('CT_PRODINFO_ATTRIBUTE_MARK_OUT_OF_STOCK', 'Ausverkaufte Attribute markieren');
+define('CD_PRODINFO_ATTRIBUTE_MARK_OUT_OF_STOCK', 'Wie bzw. wo sollen ausverkaufte Attribute als ausverkauft markiert werden.');
+define('CT_PRODINFO_ATTRIBUTE_SHOW_OUT_OF_STOCK', 'Ausverkaufte Attribute anzeigen');
+define('CD_PRODINFO_ATTRIBUTE_SHOW_OUT_OF_STOCK', 'Möchten Sie ausverkaufte Attribute anzeigen?');
 define('CT_PRODINFO_ATTRIBUTE_PLUGIN', 'Product Info Attribute Display Plugin');
-define('CD_PRODINFO_ATTRIBUTE_PLUGIN', 'The plugin used for displaying attributes on the product information page.');
+define('CD_PRODINFO_ATTRIBUTE_PLUGIN', 'Das Plugin zeigt Attribute auf der Produktinformationsseite an.');
 
 // Configuration ID: 55 - Page Cache Settings
 define('CT_ENABLE_PAGE_CACHE', 'Enable Page Cache');
@@ -687,6 +687,8 @@ define('CT_ORDER_EDITOR_USE_AJAX', 'Allow the use of AJAX to update order inform
 define('CD_ORDER_EDITOR_USE_AJAX', 'This must be set to false if using a browser on which JavaScript is disabled or not available.');
 define('CT_ORDER_EDITOR_CREDIT_CARD', 'Select your credit card payment method');
 define('CD_ORDER_EDITOR_CREDIT_CARD', 'Order Editor will display the credit card fields when this payment method is selected.');
+define('CT_ORDER_EDITOR_DEFAULT_PAYMENT_METHOD', 'Select your default payment method');
+define('CD_ORDER_EDITOR_DEFAULT_PAYMENT_METHOD', 'Order Editor will display the selected payment method by default in the order editor.');
 
 // Configuration ID: 80 - Recover Cart Sales
 define('CT_RCS_BASE_DAYS', 'Look back days');
@@ -786,30 +788,30 @@ define('CD_FEATURED_SET_SHOW_BUY_NOW_BUTTONS', 'Would you like to show Buy Now B
 define('CT_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', '<font color=green>Limit Descriptions by Words or Chars</font>');
 define('CD_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', 'Would you like to limit the description size by number of words or by number of characters?');
 
-define('CT_FEATURED_PRODUCTS_DISPLAY', '<b>Display featured products</b>');
-define('CD_FEATURED_PRODUCTS_DISPLAY', 'Show featured products?');
-define('CT_FEATURED_PRODUCTS_POSITION', 'Layout position of featured products section');
-define('CD_FEATURED_PRODUCTS_POSITION', '1= Top<br>2= Top Middle<br>3= Bottom Middle<br>4= Bottom.<br>');
-define('CT_MAX_DISPLAY_FEATURED_PRODUCTS', 'Featured products maximum');
-define('CD_MAX_DISPLAY_FEATURED_PRODUCTS', 'How many featured products show?');
-define('CT_FEATURED_PRODUCTS_COLUMNS', 'Columns in featured products layout');
-define('CD_FEATURED_PRODUCTS_COLUMNS', 'How many columns do you want to use in your layout?');
-define('CT_MAX_FEATURED_WORD_DESCRIPTION', 'Words per short description when it\'s not written');
-define('CD_MAX_FEATURED_WORD_DESCRIPTION', 'When you don\'t enter short description truncate description up to how many words?');
+define('CT_FEATURED_PRODUCTS_DISPLAY', '<b>Empfohlene Produkte anzeigen</b>');
+define('CD_FEATURED_PRODUCTS_DISPLAY', 'Empfohlene Produkte anzeigen?');
+define('CT_FEATURED_PRODUCTS_POSITION', 'Layoutpositionierung des der empfohlenen Produkte');
+define('CD_FEATURED_PRODUCTS_POSITION', '1= Oben<br>2= Oben mittig<br>3= Unten mittig<br>4= Unten.<br>');
+define('CT_MAX_DISPLAY_FEATURED_PRODUCTS', 'Höchstanzahl empfohlener Produkte');
+define('CD_MAX_DISPLAY_FEATURED_PRODUCTS', 'Wie viele empfohlene Produkte sollen höchstens angezeigt werden?');
+define('CT_FEATURED_PRODUCTS_COLUMNS', 'Spalten im Layout');
+define('CD_FEATURED_PRODUCTS_COLUMNS', 'In wie viele Spalten möchten Sie das Layout aufteilen?');
+define('CT_MAX_FEATURED_WORD_DESCRIPTION', 'Wörter bei fehlender Kurzbeschreibung');
+define('CD_MAX_FEATURED_WORD_DESCRIPTION', 'Nach wie vielen Wörtern soll die Hauptbeschreibung abgeschnitten werden, wenn eine Kurzbeschreibung fehlt?');
 define('CT_DAYS_UNTIL_FEATURED_PRODUCTS', 'Featured products period');
 define('CD_DAYS_UNTIL_FEATURED_PRODUCTS', 'How many days do you want to add to the current date when you click on the green light.');
 define('CT_FEATURED_SET', 'Choose a featured products set layout');
 define('CD_FEATURED_SET', '1= side by side<br>2= over under<br>3= image; price over under; description side<br>4= image; price over under');
 define('CT_FEATURED_SET_STYLE', 'Choose a featured products set style');
 define('CD_FEATURED_SET_STYLE', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed<br>5= boxed w/box header<br>6= shadowboxed w/box header');
-define('CT_FEATURED_PRODUCTS_GROUPING', 'Choose a box grouping method');
-define('CD_FEATURED_PRODUCTS_GROUPING', 'gbox= grouped in one box<br>sbox= each product in separate box');
-define('CT_FEATURED_PRODUCTS_SORT_ORDER', 'Set the sort order for the feature products.');
-define('CD_FEATURED_PRODUCTS_SORT_ORDER', '<br><b>product id <br>product name <br>product price <br>random.</b><br>');
-define('CT_FEATURED_PRODUCTS_DIRECTION', 'Set the sort order for products by ascending or descending');
-define('CD_FEATURED_PRODUCTS_DIRECTION', 'ASC=ascending or DESC=descending');
-define('CT_FEATURED_CELLPADDING', 'Products cellpadding');
-define('CD_FEATURED_CELLPADDING', 'Sets the cellpadding for the Products.<br>');
+define('CT_FEATURED_PRODUCTS_GROUPING', 'Boxgruppierungsmethode');
+define('CD_FEATURED_PRODUCTS_GROUPING', 'gbox= zusammengefasst in einer Box<br>sbox= Jedes Produkt in einer separaten Box');
+define('CT_FEATURED_PRODUCTS_SORT_ORDER', 'Sortierweise');
+define('CD_FEATURED_PRODUCTS_SORT_ORDER', '<br><b>Produkt ID <br>Produktname <br>Produktpreis <br>Zufällig.</b><br>');
+define('CT_FEATURED_PRODUCTS_DIRECTION', 'Sortierreihenfolge');
+define('CD_FEATURED_PRODUCTS_DIRECTION', 'ASC=aufsteigend oder DESC=absteigend');
+define('CT_FEATURED_CELLPADDING', 'Produkt cellpadding');
+define('CD_FEATURED_CELLPADDING', 'Setzt das cellpadding der Produkte.<br>');
 define('CT_FEATURED_VLINE_IMAGE_HEIGHT', 'Products separator vertical line height');
 define('CD_FEATURED_VLINE_IMAGE_HEIGHT', 'Sets the height of the vertical line divider');
 define('CT_FEATURED_LINE_THICKNESS', 'Products separator thickness');
@@ -941,14 +943,14 @@ define('CT_SCROLLER_HEIGHT', 'Scroller Height');
 define('CD_SCROLLER_HEIGHT', 'What height should the horizontal scroller be in pixels? (Only enter the number)');
 
 // Configuration ID: 203 - Notifications
-define('CT_MAT', 'Terms and Conditions on create account');
-define('CD_MAT', 'Force the customer to accept terms and conditions before being able to create an account?');
-define('CT_MATC', 'Terms and Conditions on payment page');
-define('CD_MATC', 'Force the customer to accept terms and conditions before being able to checkout?');
-define('CT_JAVASCRIPT_CHECK', 'Check for Javscript enabled?');
-define('CD_JAVASCRIPT_CHECK', 'Do you want to check if the customer has got javascript enabled and if they do not display a warning at the top of the store pages?');
-define('CT_IE6_CHECK', 'Check for Internet Explorer 6?');
-define('CD_IE6_CHECK', 'Do you want to check if the customer is using IE6 and ask them to upgrade their browser?');
+define('CT_MAT', 'AGB bei Kontoerstellung');
+define('CD_MAT', 'Muß der Kunde die AGB akzeptieren, bevor er ein Konto erstellen kann?');
+define('CT_MATC', 'AGB beim Bezahlvorgang');
+define('CD_MATC', 'Muß der Kunde die AGB akzeptieren, bevor er die Bestellung abschließen kann?');
+define('CT_JAVASCRIPT_CHECK', 'Aktives Javscript prüfen?');
+define('CD_JAVASCRIPT_CHECK', 'Möchten Sie überprüfen, ob der Kunde Javascript aktiviert hat? Bei inaktivem Javascript erscheint am oberen Seitenrand eine Warnung.');
+define('CT_IE6_CHECK', 'Internet Explorer 6 prüfen?');
+define('CD_IE6_CHECK', 'Möchten Sie überprüfen, ob der Kunde IE6 verwendet und ihm ein Update seines Browsers vorschlagen?');
 
 // Configuration ID: 204 - SlideShow Settings Corner Banners
 define('CT_DISPLAY_SLIDESHOW', 'Enable Slideshow?');
@@ -1003,24 +1005,24 @@ define('CT_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 'Active Thumbnail font color');
 define('CD_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 'What color would you like the font of the active thumbnail to be?');
 
 // Configuration ID: 205 - Corner Banners
-define('CT_CB_LAST_FEW', 'Last Few Remaining corner banner?');
-define('CD_CB_LAST_FEW', 'Would you like to display the Last Few Remaining corner banner?<br><center><img src="../images/corner_banners/german/last_few.png" alt="Last Few"></center>');
-define('CT_CB_LAST_FEW_NO', 'Last Few Remaining display level?');
-define('CD_CB_LAST_FEW_NO', 'At what level of remaining stock do you want to display the Last Few Remaining corner banner?');
-define('CT_CB_TOP_RATED', 'Top Rated corner banner?');
-define('CD_CB_TOP_RATED', 'Would you like to display the Top Rated corner banner?<br><center><img src="../images/corner_banners/german/top_rated.png" alt="Top Rated"></center>');
-define('CT_CB_TOP_RATED_NO', 'Top Rated display level?');
-define('CD_CB_TOP_RATED_NO', 'At what level of rating do you want to display the Top Rated corner banner?');
-define('CT_CB_FEATURED', 'Featured Product corner banner?');
-define('CD_CB_FEATURED', 'Would you like to display the Featured Product corner banner?<br><center><img src="../images/corner_banners/german/featured.png" alt="Featured"></center>');
-define('CT_CB_SPECIALS', 'Special Offer corner banner?');
-define('CD_CB_SPECIALS', 'Would you like to display the Special Offer corner banner?<br><center><img src="../images/corner_banners/german/save50.png" alt="Special Offers"></center>');
-define('CT_CB_SPECIALS_NO', 'Special Offer display level?');
-define('CD_CB_SPECIALS_NO', 'At what level of discount do you want to start displaying the Special Offer corner banner?<br><br>Please note that the Special Offer banners are rounded down to the <b>nearest 5%</b>.');
-define('CT_CB_CALL_FOR_PRICE', 'Ask for Price corner banner?');
-define('CD_CB_CALL_FOR_PRICE', 'Would you like to display the Ask for Price corner banner?<br><center><img src="../images/corner_banners/german/callforprice.png" alt="Ask for Price"></center>');
-define('CT_CB_OUT_OF_STOCK', 'Out of Stock corner banner?');
-define('CD_CB_OUT_OF_STOCK', 'Would you like to display the Out of Stock corner banner?<br><center><img src="../images/corner_banners/german/out_of_stock.png" alt="Out of Stock"></center>');
+define('CT_CB_LAST_FEW', 'Restposten-Eckbanner?');
+define('CD_CB_LAST_FEW', 'Möchten Sie den Restposten-Eckbanner anzeigen?<br><center><img src="../images/corner_banners/german/last_few.png" alt="Restposten"></center>');
+define('CT_CB_LAST_FEW_NO', 'Restposten ab Lagerstand?');
+define('CD_CB_LAST_FEW_NO', 'Ab welchem Lagerstand soll der Restposten-Eckbanner angezeigt werden?');
+define('CT_CB_TOP_RATED', 'Topwertung-Eckbanner?');
+define('CD_CB_TOP_RATED', 'Möchten Sie den Topwertung-Eckbanner anzeigen?<br><center><img src="../images/corner_banners/german/top_rated.png" alt="Topwertung"></center>');
+define('CT_CB_TOP_RATED_NO', 'Topwertung ab...?');
+define('CD_CB_TOP_RATED_NO', 'Ab welcher durchschnittlichen Bewertung soll der Topwertung-Eckbanner angezeigt werden?');
+define('CT_CB_FEATURED', 'Empfehlung-Eckbanner?');
+define('CD_CB_FEATURED', 'Möchten Sie den Empfehlung-Eckbanner anzeigen?<br><center><img src="../images/corner_banners/german/featured.png" alt="Empfehlung"></center>');
+define('CT_CB_SPECIALS', 'Sonderangebot-Eckbanner?');
+define('CD_CB_SPECIALS', 'Möchten Sie die Sonderangebot-Eckbanner anzeigen?<br><center><img src="../images/corner_banners/german/save50.png" alt="Sonderangebote"></center>');
+define('CT_CB_SPECIALS_NO', 'Sonderangebot ab...?');
+define('CD_CB_SPECIALS_NO', 'Ab welchem Preisnachlass sollen die Sonderangebot-Eckbanner angezeigt werden?<br><br>Bitte beachten Sie, dass die der Bannerwert auf die <b>nächsten 5%</b> abgerundet werden.');
+define('CT_CB_CALL_FOR_PRICE', 'Preis-auf-Anfrage-Eckbanner?');
+define('CD_CB_CALL_FOR_PRICE', 'Möchten Sie den Preis-auf-Anfrage-Eckbanner anzeigen?<br><center><img src="../images/corner_banners/german/callforprice.png" alt="Preis auf Anfrage"></center>');
+define('CT_CB_OUT_OF_STOCK', 'Ausverkauft-Eckbanner?');
+define('CD_CB_OUT_OF_STOCK', 'Möchten Sie den Ausverkauft-Eckbanner anzeigen?<br><center><img src="../images/corner_banners/german/out_of_stock.png" alt="Ausverkauft"></center>');
 
 // Configuration ID: 206 - MailChimp Newsletters
 define('CT_MAILCHIMP_ENABLE', 'Enable MailChimp Newsletter Infobox');
@@ -1045,14 +1047,14 @@ define('CT_MAILCHIMP_LAST_SYNC', 'MailChimp last syncronise');
 define('CD_MAILCHIMP_LAST_SYNC', 'When was your local newsletter list last syncronised with MailChimp? Please note that this will be the MailChimp server time once set. If you wish to reset then set to blank.');
 
 // Configuration ID: 207 - Contact Us Form
-define('CT_SHOW_STORE_OPENING_HOURS', 'Show store opening hours');
-define('CD_SHOW_STORE_OPENING_HOURS', 'Do you want to show your store opening hours?');
-define('CT_STORE_OPENING_HOURS_TEXT', 'Store opening hours text');
-define('CD_STORE_OPENING_HOURS_TEXT', 'Enter your opening hours.');
-define('CT_SHOW_EMAIL_ADDRESS', 'Show email address');
-define('CD_SHOW_EMAIL_ADDRESS', 'Do you want to show your email address on the contact us page?');
-define('CT_SHOW_MAILING_ADDRESS', 'Show mailing address');
-define('CD_SHOW_MAILING_ADDRESS', 'Do you want to show your mailing address on the contact us page?');
+define('CT_SHOW_STORE_OPENING_HOURS', 'Geschäftszeiten anzeigen');
+define('CD_SHOW_STORE_OPENING_HOURS', 'Möchten Sie Ihre Geschäftszeiten anzeigen?');
+define('CT_STORE_OPENING_HOURS_TEXT', 'Geschäftszeiten-Text');
+define('CD_STORE_OPENING_HOURS_TEXT', 'Geben Sie Ihre Geschäftszeiten ein.');
+define('CT_SHOW_EMAIL_ADDRESS', 'E-Mail-Adresse anzeigen');
+define('CD_SHOW_EMAIL_ADDRESS', 'Möchten Sie Ihre E-Mail-Adresse auf der Kontaktseite anzeigen?');
+define('CT_SHOW_MAILING_ADDRESS', 'Postanschrift anzeigen');
+define('CD_SHOW_MAILING_ADDRESS', 'Möchten Sie Ihre Postanschrift auf der Kontaktseite anzeigen?');
 
 // Configuration ID: 456 - Articles
 define('CT_DISPLAY_NEW_ARTICLES', 'Display New Articles Link');

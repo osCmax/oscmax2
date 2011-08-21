@@ -18,7 +18,7 @@ define('TABLE_HEADING_ID', 'ID');
 define('TABLE_HEADING_PRODUCT', 'Artikelname');
 define('TABLE_HEADING_OPT_NAME', 'Optionsname');
 //LINE ADDED: MOD - QT Pro
-define('TABLE_HEADING_TRACK_STOCK', 'Lagerstand verfolgen?');
+define('TABLE_HEADING_TRACK_STOCK', 'Lagerstand prüfen?');
 define('TABLE_HEADING_OPT_VALUE', 'Optionswert');
 // START: Attributes Product Codes
 define('TABLE_HEADING_OPT_CODE_SUFFIX', 'Art-Nr Suffix');

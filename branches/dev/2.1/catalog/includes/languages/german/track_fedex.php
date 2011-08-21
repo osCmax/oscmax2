@@ -12,14 +12,14 @@ $Id$
 
   define('NAVBAR_TITLE','Sendungsverfolgung');
   define('HEADING_TITLE','Sendungsverfolgung');
-  define('PACKAGE_IN_TRANSIT','Dieses Paket ist derzeit auf der Durchreise. Letzter bekannter Stand:');
-  define('PACKAGE_NOT_IN_SYSTEM','Ihr Paket ist nicht im Tracking-System an. Bitte versuchen Sie es später.');
-  define('PACKAGE_DELIVERED_ON','Dieses Paket wurde am ausgeliefert');
-  define('PACKAGE_SIGNED_BY','Unterzeichnet durch');
-  define('DELIVERED_FRONTDOOR','Paket vor der Haustür hat, benötigt keine Unterschrift.');
-  define('DELIVERED_SIDEDOOR','Paket links Seitentür, keine Unterschrift.');
-  define('DELIVERED_GARAGE','Paket links in Garage, keine Unterschrift.');
-  define('DELIVERED_BACKDOOR','Paket bei Hintertür links, keine Unterschrift.');
-  define('PACKAGE_DESTINATION','Verpackung Ziel:');
-  define('PACKAGE_STATUS','Package Delivery Status:');
+  define('PACKAGE_IN_TRANSIT','Diese Sendung befindet sich derzeit im Transit. Letzter bekannter Status: ');
+  define('PACKAGE_NOT_IN_SYSTEM','Diese Sendung existiert noch nicht im Tracking-System an. Bitte versuchen Sie es später erneut.');
+  define('PACKAGE_DELIVERED_ON','Diese Sendung wurde zugestellt am ');
+  define('PACKAGE_SIGNED_BY','Unterzeichnet von ');
+  define('DELIVERED_FRONTDOOR','Sendung ohne Unterschrift an der Vordertür abgelegt.');
+  define('DELIVERED_SIDEDOOR','Sendung ohne Unterschrift an der Seitentür abgelegt.');
+  define('DELIVERED_GARAGE','Sendung ohne Unterschrift in der Garage abgelegt.');
+  define('DELIVERED_BACKDOOR','Sendung ohne Unterschrift an der Hintertür abgelegt.');
+  define('PACKAGE_DESTINATION','Sendungsziel:');
+  define('PACKAGE_STATUS','Sendungsstatus:');
 ?>

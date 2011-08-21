@@ -28,7 +28,7 @@ define('HEADER_TITLE_CART_CONTENTS', 'Warenkorb');
 define('HEADER_TITLE_BASKET_CONTENTS', 'Warenkorb');
 define('HEADER_TITLE_CHECKOUT', 'Kasse');
 define('HEADER_TITLE_WISHLIST', 'Wunschliste');
-define('HEADER_TITLE_TOP', 'Nach oben');
+define('HEADER_TITLE_TOP', 'Home');
 define('HEADER_TITLE_CATALOG', 'Katalog');
 define('HEADER_TITLE_LOGOFF', 'Abmelden');
 define('HEADER_TITLE_LOGIN', 'Anmelden');
@@ -115,7 +115,7 @@ define('BOX_INFORMATION_CONDITIONS', 'AGB');
 define('BOX_INFORMATION_SHIPPING', 'Versandkosten');
 define('BOX_INFORMATION_CONTACT', 'Kontakt');
 // LINE ADDED: SITE MAP
-define('BOX_INFORMATION_SITEMAP', 'Site Map');
+define('BOX_INFORMATION_SITEMAP', 'Sitemap');
 
 // tell a friend box text in includes/boxes/tell_a_friend.php
 define('BOX_HEADING_TELL_A_FRIEND', 'Weiterempfehlen');

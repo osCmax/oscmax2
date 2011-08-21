@@ -76,7 +76,7 @@ if (basename($_SERVER['SCRIPT_NAME']) == "product_info.php") {
 if ($last_product_views != "") {
       $info_box_contents = array();
       $info_box_contents[] = array('align' => 'left', 'text' => '&nbsp;' . TEXT_LAST_VISITED_PRODUCTS);
-      new recentHistoryBoxHeading($info_box_contents, 'true', 'true', tep_href_link($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], tep_get_all_get_params(array('action')) . 'action=clear_history'));
+      new recentHistoryBoxHeading($info_box_contents, 'true', 'true', tep_href_link($_SERVER['SCRIPT_NAME'], tep_get_all_get_params(array('action')) . 'action=clear_history'));
 	  
 	  $info_box_contents = array();
       $info_box_contents[] = array('align' => 'left', 'text' => $visited_output);

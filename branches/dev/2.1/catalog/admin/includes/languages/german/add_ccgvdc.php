@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('BOX_HEADING_GV_ADMIN', 'Gutscheine');
-define('BOX_GV_ADMIN_QUEUE', 'Geschenkgutschein Schlange');
-define('BOX_GV_ADMIN_MAIL', 'Geschenkgutschein E-Mail');
-define('BOX_GV_ADMIN_SENT', 'Geschenkgutscheine versandt');
+define('BOX_HEADING_GV_ADMIN', 'Geschenkgutscheine/Aktionsgutscheine');
+define('BOX_GV_ADMIN_QUEUE', 'Geschenkgutschein-Warteschlange');
+define('BOX_GV_ADMIN_MAIL', 'Geschenkgutschein versenden');
+define('BOX_GV_ADMIN_SENT', 'Versendete Geschenkgutscheine');
 define('BOX_COUPON_ADMIN','Aktionsgutscheinverwaltung');
 
 define('IMAGE_RELEASE', 'Gutschein einlösen');

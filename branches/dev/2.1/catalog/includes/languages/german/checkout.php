@@ -82,9 +82,9 @@ define('EMAIL_WARNING', '<b>Hinweis:</b> Diese email-Adresse wird von einem Kund
 define('EMAIL_GV_INCENTIVE_HEADER', "\n\n" .'Als Wilkommensgeschenk für Neukunden haben wir Ihnen einen Gutschein im Wert von %s übersandt');
 define('EMAIL_GV_REDEEM', 'Der Gutscheincode lautet %s und kann entweder bei Ihrem nächsten Einkauf eingelöst werden,');
 define('EMAIL_GV_LINK', 'oder wenn Sie diesem Link folgen ');
-define('EMAIL_COUPON_INCENTIVE_HEADER', 'Herzlichen Glückwunsch! Um Ihren ersten Einkauf in unserem Onlineshop noch lohnender für Sie zu machen, übersenden wir Ihnen einen Gutschein.' . "\n" . ' Nachstehend finden Sie die Details Ihres persönlichen Gutscheins' . "\n");
+define('EMAIL_COUPON_INCENTIVE_HEADER', 'Herzlichen Glückwunsch! Um Ihren ersten Einkauf in unserem Onlineshop noch lohnender für Sie zu machen, übersenden wir Ihnen einen Aktionsgutschein.' . "\n" . ' Nachstehend finden Sie die Details Ihres persönlichen Gutscheins' . "\n");
 
-define('EMAIL_COUPON_REDEEM', 'Um den Gutschein einzulösen, geben Sie den angegebenen Code %s beim Abschließen Ihrer Bestellung in das entsprechende Feld ein');
+define('EMAIL_COUPON_REDEEM', 'Um den Aktionsgutschein einzulösen, geben Sie den angegebenen Code %s beim Abschließen Ihrer Bestellung in das entsprechende Feld ein');
 // End - CREDIT CLASS Gift Voucher Contribution
 
 define('TEXT_AGREE_TO_TERMS', 'Ich stimme den Allgemeinen Geschäftsbedingungen zu');
@@ -99,8 +99,8 @@ define('TEXT_PASSWORD_FORGOTTEN', 'Password vergessen? Hier klicken.');
 define('IMAGE_UPDATE_CART', 'Warenkorb aktualisieren');
 define('IMAGE_LOGIN', 'Anmelden');
 define('TEXT_PAYMENT_METHOD_UPDATE_ERROR', 'Bitte versuchen Sie es noch einmal. Falls das Problem weiterhin besteht, wählen Sie bitte eine andere Zahlungsart.');
-define('TEXT_HAVE_COUPON_CCGV', 'Möchten Sie einen Gutschein einlösen?');
-define('TEXT_HAVE_COUPON_KGT', 'Möchten Sie einen Gutschein einlösen?');
+define('TEXT_HAVE_COUPON_CCGV', 'Möchten Sie einen Aktionsgutschein einlösen?');
+define('TEXT_HAVE_COUPON_KGT', 'Möchten Sie einen Aktionsgutschein einlösen?');
 define('TEXT_EXISTING_CUSTOMER_LOGIN', 'Haben Sie schon ein Kundenkonto erstellt?');
 define('TEXT_DIFFERENT_SHIPPING', 'Abweichend von der Rechnungsadresse?');
 define('TEXT_SHIPPING_NO_ADDRESS', 'Bitte geben Sie <b>zumindest</b> Ihre Rechnungsanschrift an, um die Frachtkosten berechnen zu lassen.');

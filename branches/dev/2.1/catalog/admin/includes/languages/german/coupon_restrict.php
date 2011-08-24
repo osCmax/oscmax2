@@ -66,10 +66,10 @@ define('COUPON_CODE_HELP', 'Sie können Ihren eigenen Code angeben, oder das Feld
 define('COUPON_STARTDATE_HELP', 'Datum, ab wann der Gutschein gültig wird');
 define('COUPON_FINISHDATE_HELP', 'Datum, ab wann der Gutschein verfällt');
 define('COUPON_FREE_SHIP_HELP', 'Der Gutschein gewährt den Gratisversand bei jeder Bestellung. Hinweis: Damit wird Gutscheinwert ignoriert, nicht jedoch der Mindestbestellwert.');
-define('COUPON_DESC_HELP', 'Eine Beschreibung des Gutscheines für den Kunden');
-define('COUPON_MIN_ORDER_HELP', 'Eine Mindestbestellmenge, unter der der Gutschein nicht verwendet werden kann');
-define('COUPON_USES_COUPON_HELP', 'Eine Angabe, wie oft der Gutschein maximal verwendet werden kann. Lassen Sie das Feld leer, wenn Sie eine unbegrenzte Verwendung wünschen.');
-define('COUPON_USES_USER_HELP', 'Eine Angabe, wie oft der Gutschein von einem einzelnen Kunden maximal verwendet werden kann. Lassen Sie das Feld leer, wenn Sie eine unbegrenzte Verwendung wünschen.');
-define('COUPON_PRODUCTS_HELP', 'Eine kommaseparierte Liste von Produkt IDs, für die dieser Gutschein gilt. Lassen Sie das Feld leer, wenn Sie den Gutschein nicht auf bestimmte Produkte beschränken möchten.');
-define('COUPON_CATEGORIES_HELP', 'Eine kommaseparierte Liste von cpaths, für die dieser Gutschein gilt. Lassen Sie das Feld leer, wenn Sie den Gutschein nicht auf bestimmte Kategorien beschränken möchten.');
+define('COUPON_DESC_HELP', 'Die Beschreibung des Gutscheines für den Kunden');
+define('COUPON_MIN_ORDER_HELP', 'Die Mindestbestellmenge, unter der der Gutschein nicht verwendet werden kann');
+define('COUPON_USES_COUPON_HELP', 'Legen Sie fest, wie oft der Gutschein maximal verwendet werden kann. Lassen Sie das Feld leer, wenn Sie eine unbegrenzte Verwendung erlauben.');
+define('COUPON_USES_USER_HELP', 'Legen Sie fest, wie oft der Gutschein von einem einzelnen Kunden maximal verwendet werden kann. Lassen Sie das Feld leer, wenn Sie eine unbegrenzte Verwendung erlauben.');
+define('COUPON_PRODUCTS_HELP', 'Eine kommaseparierte Liste von Produkt IDs, für die dieser Gutschein gilt. Lassen Sie das Feld leer, wenn Sie den Gutschein nicht einschränken möchten.');
+define('COUPON_CATEGORIES_HELP', 'Eine kommaseparierte Liste von cpaths, für die dieser Gutschein gilt. Lassen Sie das Feld leer, wenn Sie den Gutschein nicht einschränken möchten.');
 ?>

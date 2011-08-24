@@ -30,7 +30,7 @@ define('BOX_PAYPAL_INFO', 'Paypal Anmeldung');
 
 // Filename defines for Admin Group Permissions - when file permission needed but not menu item.
 define('FILE_GC_DASHBOARD', '</b>Google Checkout Dashboard<b>');
-define('FILE_COUPON_RESTRICT', '</b>Kouponbeschränkung<b>');
+define('FILE_COUPON_RESTRICT', '</b>Aktionsgutscheineinschränkung<b>');
 define('FILE_VALID_PRODUCTS', '</b>Gültige Produkte<b>');
 define('FILE_VALID_CATEGORIES', '</b>Gültige Kategorien<b>');
 define('FILE_LIST_PRODUCTS', '</b>Produkte auflisten<b>');

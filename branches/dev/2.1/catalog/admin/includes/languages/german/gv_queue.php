@@ -32,10 +32,10 @@ define('TEXT_REDEEM_COUPON_SUBJECT', 'Geschenkgutschein kaufen');
 define('TEXT_PAYMENT_CHECK', 'Wenn Sie sicher sind, dass der Geschenkgutschein bezahlt worden ist, klicken Sie auf Einlösen, um den Gutschein zur Verwendung durch den Kunden freizugeben.');
 define('TEXT_PAYMENT_CHECK_CONFIRM', 'Sind Sie sicher, dass Sie diesen Geschenkgutschein freigeben möchten?');
 define('TEXT_RELEASED_ALREADY', 'Dieser Gutschein wurde bereits freigegeben.  <br><br><b>Released: </b>');
-define('TEXT_GV_STATUS', 'Pending');
+define('TEXT_GV_STATUS', 'Nicht freigegeben');
 
 define('HEADING_TITLE_STATUS', 'Status:');
 define('TEXT_GV_REDEEMED', 'Eingelöst');
-define('TEXT_GV_PENDING', 'Nicht eingelöst');
+define('TEXT_GV_PENDING', 'Nicht freigegeben');
 define('TEXT_GV_ALL', 'Gutscheine anzeigen');
 ?>

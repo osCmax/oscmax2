@@ -32,10 +32,10 @@ define('EMAIL_TEXT', 'Sie können jetzt alle Funktionen des <b>Online-Shops</b> n
 define('EMAIL_CONTACT', 'Falls Sie Fragen zum Onlineshop haben, wenden Sie sich bitte an den Shopbetreiber: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n\n");
 define('EMAIL_WARNING', '<b>Hinweis:</b> Diese E-Mail-Adresse wurde uns von einem Kunden bekannt gegeben. Falls Sie sich nicht angemeldet haben, senden Sie bitte eine eMail an ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n");
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-define('EMAIL_GV_INCENTIVE_HEADER', "\n\n" . 'Als Wilkommensgeschenk für Neukunden haben wir einen Gutschein im Wert von %s an Sie gesendet');
+define('EMAIL_GV_INCENTIVE_HEADER', "\n\n" . 'Als Wilkommensgeschenk für Neukunden haben wir einen Geschenkgutschein im Wert von %s an Sie gesendet');
 define('EMAIL_GV_REDEEM', 'Der Gutscheincode lautet %s und kann entweder bei Ihrem nächsten Einkauf eingelöst werden,');
 define('EMAIL_GV_LINK', 'oder wenn Sie diesem Link folgen ');
-define('EMAIL_COUPON_INCENTIVE_HEADER', 'Herzlichen Glückwunsch! Um Ihren ersten Einkauf in unserem Onlineshop noch lohnender für Sie zu machen, übersenden wir Ihnen einen Gutschein.' . "\n" . ' Nachstehend finden Sie die Details Ihres pers&ouml;hnlichen Gutscheins' . "\n\n");
+define('EMAIL_COUPON_INCENTIVE_HEADER', 'Herzlichen Glückwunsch! Um Ihren ersten Einkauf in unserem Onlineshop noch lohnender für Sie zu machen, übersenden wir Ihnen einen Aktionsgutschein.' . "\n" . ' Nachstehend finden Sie die Details Ihres pers&ouml;nlichen Gutscheins' . "\n\n");
 
 define('EMAIL_COUPON_REDEEM', 'Geben Sie einfach Ihren persönlichen Code   %s während des Bezahlvorganges ' . "\n" . 'ein');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution

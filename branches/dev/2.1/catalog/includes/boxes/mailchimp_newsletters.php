@@ -69,12 +69,8 @@ if ((!strstr($_SERVER['PHP_SELF'],'login.php')) && (!strstr($_SERVER['PHP_SELF']
 		$boxContent = MAILCHIMP_INTRO_TEXT_SUBSCRIBED;
 		$boxContent .= '<table width="100%"><tr><td align="center"><a href="' . tep_href_link(FILENAME_ACCOUNT_NEWSLETTERS, '') . '">' . tep_image_button('button_unsubscribe.gif', IMAGE_BUTTON_UNSUBSCRIBE) . '</a></td></tr></table>';
 	} else {
-		$boxContent = MAILCHIMP_INTRO_TEXT_UNSUBSCRIBED;
-		$boxContent .= '<br>' . tep_draw_form('mailchimp', tep_href_link(MAILCHIMP_URL, 'action=post'));
-	    $boxContent .= BOX_LOGINBOX_EMAIL . '<br>' . tep_draw_input_field('EMAIL', '', 'size="10" maxlength="100" style="width: ' . (BOX_WIDTH-10) . 'px"') . '<br>';
-	    $boxContent .= tep_draw_radio_field('EMAILTYPE', 'html', true) . '&nbsp;&nbsp;' . MAILCHIMP_HTML . '&nbsp;&nbsp;' . tep_draw_radio_field('EMAILTYPE', 'text', false) . '&nbsp;&nbsp;' . MAILCHIMP_TEXT;
-	    $boxContent .= '<table width="100%"><tr><td align="center">' . tep_image_submit('button_subscribe.gif', IMAGE_BUTTON_SUBSCRIBE) . '</td></tr></table>';
-	    $boxContent .= '</form>';
+		$boxContent = MAILCHIMP_EXISTING_USER_UNSUBSCRIBED;
+		$boxContent .= '<table width="100%"><tr><td align="center"><a href="' . tep_href_link(FILENAME_ACCOUNT_NEWSLETTERS, '') . '">' . tep_image_button('button_subscribe.gif', IMAGE_BUTTON_SUBSCRIBE) . '</a></td></tr></table>';
 	} // end if
 
     include (bts_select('boxes', $box_base_name)); // BTS 1.5

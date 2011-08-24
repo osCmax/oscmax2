@@ -126,6 +126,7 @@ define('BOX_HEADING_MAILCHIMP', 'Newsletter');
 define('MAILCHIMP_INTRO_TEXT', 'If would you like to subscribe to our newsletter please enter your email address here:');
 define('MAILCHIMP_INTRO_TEXT_SUBSCRIBED', 'You are currently subscribed to our newsletter');
 define('MAILCHIMP_INTRO_TEXT_UNSUBSCRIBED', 'If would you like to subscribe to our newsletter please enter your email address here:');
+define('MAILCHIMP_EXISTING_USER_UNSUBSCRIBED', 'You are currently <strong>not</strong> subscribed to our newsletter');
 define('MAILCHIMP_HTML', 'HTML');
 define('MAILCHIMP_TEXT', 'Text');
 define('MAILCHIMP_MISSING_INTRO', 'Unfortunately, you have not entered all the required information in your MailChimp setup. <br><br><b>Missing Settings:</b>');
@@ -134,6 +135,8 @@ define('MAILCHIMP_MISSING_API', 'API Key');
 define('MAILCHIMP_MISSING_ID', 'List ID');
 define('MAILCHIMP_MISSING_URL', 'List URL');
 define('MAILCHIMP_MISSING_U', 'U value');
+define('IMAGE_BUTTON_UNSUBSCRIBE', 'Unsubscribe');
+define('IMAGE_BUTTON_SUBSCRIBE', 'Subscribe');
 
 // LINE ADDED: MOD - allprods modification
 define('BOX_INFORMATION_ALLPRODS', 'View All Items');

@@ -380,7 +380,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
               $lc_inc_link = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing[$x]['products_id']) . '">';
           }
 		  // but we only want the link if there is a corner banner
-		  if ($lc_text != '&nbsp;') {
+		  if ($lc_text !== '&nbsp;') {
 		    $lc_inc_link .= $lc_text . '</a>';
 		    $lc_text = $lc_inc_link;
 		  }
@@ -462,6 +462,8 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 			}
 		   if ($listing[$x]['products_price'] == CALL_FOR_PRICE_VALUE){ //fix for call for price
 			  $lc_text = $more_info . ' <a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $listing[$x]['products_model']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $listing[$x]['products_name']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $listing[$x]['products_id'] . '%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
+			} elseif ($listing[$x]['products_quantity'] < 1 && STOCK_IMAGE_SWITCH == 'true') {
+			  $lc_text = tep_image_submit('button_out_of_stock.gif', IMAGE_OUT_OF_STOCK);
 			} else {
               $lc_text = $more_info . ' <a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'pName')) . 'action=buy_now&products_id=' . $listing[$x]['products_id']) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a> ';
 			}
@@ -471,9 +473,8 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 
       }
       $lc_text = implode('<br>', $product_contents);
-	  // Remove first <br> to prevent corner banners from adding extra line.
-	  $lc_text = substr($lc_text, 4);
-      $list_box_contents[$row][$column] = array('align' => 'center',
+	  
+	  $list_box_contents[$row][$column] = array('align' => 'center',
                                                 'params' => 'class="productListing-data"',
                                                 'text'  => $lc_text);
 	  

@@ -354,10 +354,12 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
   $navigation->add_current_page();
 
-// BOF: MOD - Down for Maintenance except for admin ip
-if (EXCLUDE_ADMIN_IP_FOR_MAINTENANCE != getenv('REMOTE_ADDR')){
+// BOF: MOD - Down for Maintenance except for list of admin ip
+$ips = explode(",", EXCLUDE_ADMIN_IP_FOR_MAINTENANCE);
+if (!in_array(getenv('REMOTE_ADDR'), $ips)) {
+  //if (EXCLUDE_ADMIN_IP_FOR_MAINTENANCE != getenv('REMOTE_ADDR')){
   if (DOWN_FOR_MAINTENANCE=='true' and !strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILENAME)) { tep_redirect(tep_href_link(DOWN_FOR_MAINTENANCE_FILENAME)); }
-  }
+}
 // do not let people get to down for maintenance page if not turned on
 if (DOWN_FOR_MAINTENANCE=='false' and strstr($PHP_SELF,DOWN_FOR_MAINTENANCE_FILENAME)) {
     tep_redirect(tep_href_link(FILENAME_DEFAULT));

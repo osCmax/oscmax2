@@ -353,7 +353,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 			  //Find out discount and round to nearest 5
 			  $fullprice = $listing[$x]['products_price'];
 			  $saleprice = $listing[$x]['specials_new_products_price'];
-			  $discount = ((($fullprice - $saleprice) / $fullprice) * 100);
+			  $discount = (((($fullprice * 100) - ($saleprice * 100)) / ($fullprice * 100)) * 100);
 			  $rounded_discount = floor($discount / 5) * 5; 
 			    if ($rounded_discount >= CB_SPECIALS_NO) { 
                   $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . 'corner_banners/' . $language . '/save' . $rounded_discount . '.png" alt="">';

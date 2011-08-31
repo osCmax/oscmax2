@@ -474,6 +474,9 @@ for ($x = 0; $x < $no_of_listings; $x++) {
       }
       $lc_text = implode('<br>', $product_contents);
 	  
+	  // Hack to remove <br> from front of string in case it starts with a line break.
+	  if (substr($lc_text, 0, 4) == '<br>') { $lc_text = substr($lc_text, 4); }
+	  
 	  $list_box_contents[$row][$column] = array('align' => 'center',
                                                 'params' => 'class="productListing-data"',
                                                 'text'  => $lc_text);

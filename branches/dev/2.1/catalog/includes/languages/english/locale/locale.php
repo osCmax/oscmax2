@@ -66,6 +66,58 @@ define('TEXT_PRODUCTS_SAVINGS_RRP', '&nbsp;You&nbsp;Save&nbsp;(Off&nbsp;RRP):&nb
 // EOF: MSRP
 
 ////
+} elseif (ENGLISH_SWITCH == 'AUS') { // Use AUS format for store 
+////
+
+@setlocale(LC_TIME, 'en_AU.ISO_8859-1'); 
+
+define('DATE_FORMAT_SHORT', '%d/%m/%Y'); // this is used for strftime()
+define('DATE_FORMAT_LONG', '%A %d %B, %Y'); // this is used for strftime()
+define('DATE_FORMAT', 'd/m/Y'); // this is used for date()
+define('DATE_TIME_FORMAT', DATE_FORMAT_SHORT . ' %H:%M:%S');
+
+////
+// Return date in raw format
+// $date should be in format dd/mm/yyyy
+// raw date is in format YYYYMMDD, or DDMMYYYY
+function tep_date_raw($date, $reverse = false) {
+  if ($reverse) {
+    return substr($date, 0, 2) . substr($date, 3, 2) . substr($date, 6, 4);
+  } else {
+    return substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
+  }
+}
+
+date_default_timezone_set('Australia/Sydney');
+
+// if USE_DEFAULT_LANGUAGE_CURRENCY is true, use the following currency, instead of the applications default currency (used when changing language)
+define('LANGUAGE_CURRENCY', 'AUD');
+
+// LINE ADDED: Country-State Selector
+define ('DEFAULT_COUNTRY', '13');
+
+// text for date of birth example
+define('DOB_FORMAT_STRING', 'dd/mm/yyyy');
+define('ENTRY_DATE_OF_BIRTH_ERROR', 'Your Date of Birth must be in this format: DD/MM/YYYY (eg 21/05/1970)');
+define('ENTRY_DATE_OF_BIRTH_TEXT', '* (eg. 21/05/1970)');
+
+// text for addresses
+define('ENTRY_SUBURB', 'Address Line 2:');
+define('ENTRY_SUBURB_ERROR', '');
+define('ENTRY_SUBURB_TEXT', '');
+define('ENTRY_POST_CODE', 'Post Code:');
+define('ENTRY_POST_CODE_ERROR', 'Your Post Code must contain a minimum of ' . ENTRY_POSTCODE_MIN_LENGTH . ' characters.');
+define('ENTRY_POST_CODE_TEXT', '*');
+define('ENTRY_STATE', 'State:');
+define('ENTRY_STATE_ERROR', 'Your State must contain a minimum of ' . ENTRY_STATE_MIN_LENGTH . ' characters.');
+define('ENTRY_STATE_ERROR_SELECT', 'Please select a State from the States pull down menu.');
+
+// BOF: MSRP
+define('TEXT_PRODUCTS_MSRP', ' RRP: ');
+define('TEXT_PRODUCTS_SAVINGS_RRP', ' You Save (Off RRP): ');
+// EOF: MSRP
+
+////
 } else { // Use US format for store
 ////
 

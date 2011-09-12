@@ -1788,7 +1788,7 @@ INSERT INTO configuration VALUES (6, 'CT_STORE_ZONE', 'STORE_ZONE', '4', 'CD_STO
 INSERT INTO configuration VALUES (7, 'CT_EXPECTED_PRODUCTS_SORT', 'EXPECTED_PRODUCTS_SORT', 'desc', 'CD_EXPECTED_PRODUCTS_SORT', '1', '8', NULL, now(), NULL, 'tep_cfg_select_option(array(''asc'', ''desc''), ');
 INSERT INTO configuration VALUES (8, 'CT_EXPECTED_PRODUCTS_FIELD', 'EXPECTED_PRODUCTS_FIELD', 'date_expected', 'CD_EXPECTED_PRODUCTS_FIELD', '1', '9', NULL, now(), NULL, 'tep_cfg_select_option(array(''products_name'', ''date_expected''), ');
 INSERT INTO configuration VALUES (9, 'CT_USE_DEFAULT_LANGUAGE_CURRENCY', 'USE_DEFAULT_LANGUAGE_CURRENCY', 'false', 'CD_USE_DEFAULT_LANGUAGE_CURRENCY', '1', '10', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
-INSERT INTO configuration VALUES (2643, 'CT_ENGLISH_SWITCH', 'ENGLISH_SWITCH', 'US', 'CD_ENGLISH_SWITCH', '1', '11', NULL ,now() , NULL, 'tep_cfg_select_option(array(\'US\', \'UK\'), ');
+INSERT INTO configuration VALUES (2643, 'CT_ENGLISH_SWITCH', 'ENGLISH_SWITCH', 'US', 'CD_ENGLISH_SWITCH', '1', '11', NULL ,now() , NULL, 'tep_cfg_select_option(array(\'US\', \'AUS\', \'UK\'), ');
 INSERT INTO configuration VALUES (10, 'CT_SEND_EXTRA_ORDER_EMAILS_TO', 'SEND_EXTRA_ORDER_EMAILS_TO', '', 'CD_SEND_EXTRA_ORDER_EMAILS_TO', '1', '12', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (12, 'CT_DISPLAY_CART', 'DISPLAY_CART', 'true', 'CD_DISPLAY_CART', '1', '14', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 INSERT INTO configuration VALUES (13, 'CT_ALLOW_GUEST_TO_TELL_A_FRIEND', 'ALLOW_GUEST_TO_TELL_A_FRIEND', 'false', 'CD_ALLOW_GUEST_TO_TELL_A_FRIEND', '1', '15', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');

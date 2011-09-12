@@ -467,7 +467,11 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
       $goto = basename($PHP_SELF);
       if ($_GET['action'] == 'buy_now') {
 // LINE MOD: Ultimate SEO URLs v2.1 removed 'pName'
-        $parameters = array('action', 'pid', 'products_id');
+        if (isset($_GET['product_to_buy_id'])) {
+          $parameters = array('action', 'pid', 'products_to_but_id');
+		} else {
+          $parameters = array('action', 'pid', 'products_id');
+		}
       } else {
         $parameters = array('action', 'pid');
       }
@@ -517,8 +521,14 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
         tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
         break;
 // performed by the 'buy now' button in product listings and review page
-      case 'buy_now' :        if (isset($_GET['products_id'])) {
-
+      case 'buy_now' :       
+	      if (isset($_GET['product_to_buy_id'])) {
+            if (tep_has_product_attributes($_GET['product_to_buy_id'])) {
+              tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['product_to_buy_id']));
+            } else {
+              $cart->add_cart($_GET['product_to_buy_id'], $cart->get_quantity($_GET['product_to_buy_id'])+1);
+            }
+		  } elseif (isset($_GET['products_id'])) {
             if (tep_has_product_attributes($_GET['products_id'])) {
               tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id']));
             } else {

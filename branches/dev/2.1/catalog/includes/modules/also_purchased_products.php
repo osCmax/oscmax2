@@ -162,7 +162,7 @@ if ($num_products_ap != 0) { // Check query is not blank
         $ap['specials_new_products_price'] = tep_get_products_special_price($ap['products_id']); 
 
 		if ($ap['specials_new_products_price']) { 
-      	  $ap_price =  '<span style="text-decoration:line-through">' . $currencies->display_price($ap['products_price'], tep_get_tax_rate($ap['products_tax_class_id'])) . '</span>'; 
+      	  $ap_price =  '<span style="text-decoration:line-through">' . $currencies->display_price($ap['products_price'], tep_get_tax_rate($ap['products_tax_class_id'])) . '</span>&nbsp;&nbsp;'; 
       	  $ap_price .= '<span class="productSpecialPrice">' . $currencies->display_price($ap['specials_new_products_price'], tep_get_tax_rate($ap['products_tax_class_id'])) . '</span>'; 
     	} else { 
 		  // BOF Separate Price per Customer  

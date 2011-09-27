@@ -43,7 +43,7 @@ $Id$
 	  // Email address not in database
       $error = true;
 	  //Added by PGM
-	  tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', now())");
+	  tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', now())");
     } else {
 	  // Email in database now lets check the password
       $check_customer = tep_db_fetch_array($check_customer_query);
@@ -65,18 +65,18 @@ $Id$
 	  if (!tep_validate_password($password, $check_customer['customers_password']) && !isset($_POST['action'])) {
 	  // Password does not match and customer did not come from admin 
         $error = true;
-		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', now())");
+		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', now())");
 	  } elseif (isset($_POST['action']) && $checked == 'fail') {
 	  // Password does not match and customer looks like they came from admin but admin dir does not match - potential hack attempt
 	    $error = true;
-		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Hack Attempt', now())");
+		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Hack Attempt', now())");
       } else {
 	  // Password matched or phone order via admin passed
         //if (SESSION_RECREATE == 'True' && !isset($_POST['action'])) {
 		if ($checked == 'pass') {
-          tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Admin as Customer', now())");
+          tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Admin as Customer', now())");
 		} else {
-		  tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . $email_address . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', now())");  
+		  tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', now())");  
 		}
 		// Create session
 		tep_session_recreate();

@@ -217,7 +217,7 @@ define('BOX_MODULES_ORDER_TOTAL', 'Endsumme');
 define('BOX_HEADING_CATALOG', 'Katalog');
 define('BOX_CATALOG_CATEGORIES_PRODUCTS', 'Kategorien/Produkte');
 // BOF QPBPP for SPPC
-define('BOX_CATALOG_CATEGORIES_DISCOUNT_CATEGORIES', 'Rabattkategorien');
+define('BOX_CATALOG_CATEGORIES_DISCOUNT_CATEGORIES', 'Rabattgruppen');
 // EOF QPBPP for SPPC
 define('BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES', 'Produktattribute');
 define('BOX_CATALOG_MANUFACTURERS', 'Hersteller');

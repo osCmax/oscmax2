@@ -25,7 +25,7 @@ define('TEXT_HEADING_DELETE_MANUFACTURER', 'Hersteller löschen');
 
 define('TEXT_MANUFACTURERS', 'Hersteller:');
 // BOF Open Featured Sets
-define('TEXT_MANUFACTURER_FEATURED', 'Empfohlener Hersteller');
+define('TEXT_MANUFACTURER_FEATURED', 'Empfohlener Hersteller mit Produkten');
 define('TEXT_MANUFACTURER_YES', 'Ja');
 define('TEXT_MANUFACTURER_NO', 'Nein');
 define('TEXT_MANUFACTURER_FEATURED_DATE', 'Empfohlen bis ');
@@ -43,44 +43,21 @@ define('TEXT_NEW_INTRO', 'Geben Sie den neuen Hersteller mit allen relevanten Da
 define('TEXT_EDIT_INTRO', 'Führen Sie die gewünschten Änderungen durch.');
 
 define('TEXT_MANUFACTURERS_NAME', 'Herstellername:');
-define('TEXT_MANUFACTURERS_IMAGE', 'Herstellerbild:');
+define('TEXT_MANUFACTURERS_IMAGE', 'Herstellerlogo:');
 define('TEXT_MANUFACTURERS_URL', 'Hersteller URL:');
+define('TEXT_MANUFACTURERS_DESCRIPTION','Beschreibung:');
 
 define('TEXT_DELETE_INTRO', 'Sind Sie sicher, dass Sie diesen Hersteller löschen möchten?');
-define('TEXT_DELETE_IMAGE', 'Herstellerbild löschen?');
+define('TEXT_DELETE_IMAGE', 'Herstellerlogo löschen?');
 define('TEXT_DELETE_PRODUCTS', 'Alle Artikel dieses Herstellers löschen? (inkl. Bewertungen, Angebote und Neuerscheinungen)');
 define('TEXT_DELETE_WARNING_PRODUCTS', '<b>WARNUNG:</b> Es existieren noch %s Artikel, welche mit diesem Hersteller verknüpft sind!');
 
 define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Fehler: Das Verzeichnis %s ist schreibgeschützt. Bitte korrigieren Sie die Zugriffsrechte zu diesem Verzeichnis!');
 define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Verzeichnis %s existiert nicht!');
-define('TABLE_HEADING_MANUFACTURER_FEATURED','Hersteller mit Produkten');
-
-define('TABLE_HEADING_MANUFACTURERS_FEATURED','Ausgewählte Hersteller');
-
-define('TEXT_MANUFACTURER_FEATURED','Ausgewählte Hersteller');
-
-define('TEXT_MANUFACTURER_YES','Ja');
-
-define('TEXT_MANUFACTURER_NO','Nein');
-
-define('TEXT_MANUFACTURER_FEATURED_DATE','Featured Bis Datum');
-
-define('TEXT_MANUFACTURERS_FEATURED','Ausgewählte Hersteller');
-
-define('TEXT_MANUFACTURERS_YES','Ja');
-
-define('TEXT_MANUFACTURERS_NO','Nein');
-
-define('TEXT_MANUFACTURERS_FEATURED_DATE','Featured Bis Datum');
-
-define('TEXT_MANUFACTURERS_DESCRIPTION','Beschreibung:');
 
 define('MANUFACTURERS_FEATURED_HELP','Ausgewählte Hersteller');
-
-define('MANUFACTURERS_FEATURED_HELP_TEXT','Diese Einstellung wird dieses Herstellers zu einer Gruppe hinzuzufügen anderer Hersteller auf die Index-Seite Ihres Shops');
-
-define('MANUFACTURER_FEATURED_HELP','Ausgewählte Hersteller');
-
-define('MANUFACTURER_FEATURED_HELP_TEXT','Diese Einstellung wird eine neue Infobox auf der Index-Seite mit diesem Hersteller und einige der Produkte in Ihrem Geschäft dieses Herstellers.');
+define('MANUFACTURERS_FEATURED_HELP_TEXT','Diese Einstellung fügt den Herstellers zu einer Gruppe von Herstellern auf der Indexseite Ihres Shops hinzu.');
+define('MANUFACTURER_FEATURED_HELP','Ausgewählter Hersteller');
+define('MANUFACTURER_FEATURED_HELP_TEXT','Diese Einstellung erzeugt eine Infobox auf der Indexseite Ihres Shops, die diesen Hersteller und einige seiner Produkte enthält.');
 
 ?>

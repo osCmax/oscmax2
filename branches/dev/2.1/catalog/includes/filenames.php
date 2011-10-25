@@ -45,6 +45,7 @@ $Id$
   define('CONTENT_LOGOFF', 'logoff');
   define('CONTENT_NEW_PRODUCTS', 'new_products');
   define('CONTENT_PASSWORD_FORGOTTEN', 'password_forgotten');
+  define('CONTENT_PASSWORD_FORGOTTEN_AFFILIATE', 'password_forgotten_affiliate');
   define('CONTENT_POPUP_IMAGE', 'popup_image');
   define('CONTENT_POPUP_SEARCH_HELP', 'popup_search_help');
   define('CONTENT_PRIVACY', 'privacy');
@@ -145,6 +146,7 @@ $Id$
   define('FILENAME_LOGOFF', CONTENT_LOGOFF . '.php');
   define('FILENAME_NEW_PRODUCTS', CONTENT_NEW_PRODUCTS . '.php');
   define('FILENAME_PASSWORD_FORGOTTEN', CONTENT_PASSWORD_FORGOTTEN . '.php');
+  define('FILENAME_PASSWORD_FORGOTTEN_AFFILIATE', CONTENT_PASSWORD_FORGOTTEN_AFFILIATE . '.php');
   define('FILENAME_POPUP_CVS_HELP', 'popup_cvs_help.php');
   define('FILENAME_POPUP_IMAGE', CONTENT_POPUP_IMAGE . '.php');
   define('FILENAME_POPUP_INFOBOX_HELP', 'popup_infobox_help.php');

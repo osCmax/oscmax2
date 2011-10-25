@@ -105,7 +105,7 @@ $Id$
                           <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td> 
                         </tr> 
                         <tr> 
-                          <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td> 
+                          <td class="main" colspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_PASSWORD_FORGOTTEN_AFFILIATE, '', 'SSL') . '">' .TEXT_AFFILIATE_PASSWORD_FORGOTTEN . '</a>'; ?>
                         </tr>
                         <tr> 
                           <td colspan="2" align="right" valign="top"><?php echo tep_image_submit('button_login.gif', IMAGE_BUTTON_LOGIN); ?></td> 

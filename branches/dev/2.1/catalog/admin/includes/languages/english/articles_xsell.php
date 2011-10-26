@@ -28,7 +28,7 @@ define('TEXT_LINK_SORT_PRODUCTS', '<a href="%s">Click here</a> to sort the produ
 
 define('TEXT_CROSS_SELL_ARTICLES', 'Cross Sell Articles');
 define('TEXT_ARTICLE_SELECT', 'Please select an article that you wish to cross sell your products from by click on a row.<br><br>  If you want change the sort order that these products are shown in please click the <b>sort</b> link in the right hand column.');
-define('TEXT_ADD_REMOVE', 'Add/Remove');
+define('TEXT_ADD_REMOVE', 'Add');
 define('TEXT_SORT_ORDER', 'Sort');
 define('TEXT_DBASE_UPDATED', 'Cross Sell Articles: Database Updated');
 define('TEXT_CHANGES_SAVED', 'Your changes have been saved to the database please either go back to the main page or click the link to sort the order in which the cross sell products are listed.');

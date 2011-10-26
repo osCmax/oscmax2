@@ -11,6 +11,11 @@ $Id$
 */
 
   require('includes/application_top.php');
+  
+  if (isset($_GET['delete_prod']) && isset($_GET['article'])) {
+    tep_db_query("DELETE FROM " . TABLE_ARTICLES_XSELL . " WHERE articles_id = '" . (int)$_GET['article'] . "' and xsell_id = " . $_GET['delete_prod']);
+	tep_redirect(tep_href_link(FILENAME_ARTICLES_XSELL));
+  }
 
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -111,7 +116,7 @@ function ToggleCheckBox($cb) {
                 
               <table border="0" cellspacing="0" cellpadding="3" width="100%">
                 <tr class="dataTableHeadingRow"> 
-                  <td class="dataTableHeadingContent" align="center" nowrap><?php echo TEXT_ID; ?></td>
+                  <td class="dataTableHeadingContent" nowrap><?php echo TEXT_ID; ?></td>
                   <td class="dataTableHeadingContent"><?php echo HEADING_ARTICLE_NAME; ?></td>
                   <td class="dataTableHeadingContent" nowrap><?php echo HEADING_CROSS_ASSOCIATION; ?></td>
                   <td class="dataTableHeadingContent" colspan="3" align="center" nowrap><?php echo HEADING_CROSS_SELL_ACTIONS; ?></td>
@@ -120,31 +125,31 @@ function ToggleCheckBox($cb) {
                $num_of_articles = sizeof($articles_id);
                 for ($i=0; $i < $num_of_articles; $i++)
                     {
-                    /* now we will query the DB for existing related items */
-                    $query = "select pd.products_name, ax.xsell_id from " . TABLE_ARTICLES_XSELL . " ax, " . TABLE_PRODUCTS_DESCRIPTION . " pd where pd.products_id = ax.xsell_id and ax.articles_id ='".$articles_id[$i]."' and pd.language_id = '" . (int)$languages_id . "' order by ax.sort_order";
-                    list ($Related_items, $xsell_ids) = general_db_conct($query);
-
+                    
 					echo '<tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ARTICLES_XSELL, 'add_related_article_ID=' . $articles_id[$i], 'NONSSL') . '\'">' . " ";
 
                     echo "<td class=\"dataTableContent\" valign=\"top\">&nbsp;".$articles_id[$i]."&nbsp;</td>\n";
                     echo "<td class=\"dataTableContent\" valign=\"top\">&nbsp;".$articles_name[$i]."&nbsp;</td>\n";
-                    if ($Related_items)
-                    {
-                      echo "<td  class=\"dataTableContent\"><ol>";
-                      foreach ($Related_items as $display)
-                        echo '<li>'. $display .'&nbsp;';
-                        echo"</ol></td>\n";
-                        }
-                    else
-                        echo "<td class=\"dataTableContent\">--</td>\n";
-                    echo '<td class="dataTableContent"  valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES_XSELL, 'add_related_article_ID=' . $articles_id[$i], 'NONSSL') . '">' . TEXT_ADD_REMOVE . '</a></td>';
+					
+					echo "<td class=\"dataTableContent\" valign=\"top\">";
+					
+					/* now we will query the DB for existing related items */
+                    $query = "select pd.products_name, ax.xsell_id from " . TABLE_ARTICLES_XSELL . " ax, " . TABLE_PRODUCTS_DESCRIPTION . " pd where pd.products_id = ax.xsell_id and ax.articles_id ='".$articles_id[$i]."' and pd.language_id = '" . (int)$languages_id . "' order by ax.sort_order";
+					
+                    echo "<table width=\"100%\">";
+					$linked_xsell_query = tep_db_query($query);
+                      while ($linked_xsell = tep_db_fetch_array($linked_xsell_query)) {
+						
+						echo '<tr><td class="dataTableContent" valign="middle">' . $linked_xsell['products_name'] . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES_XSELL, 'delete_prod=' . $linked_xsell['xsell_id'], 'NONSSL') . '&amp;article=' . $articles_id[$i] . '">' . tep_image(DIR_WS_ICONS . 'delete.png', IMAGE_DELETE) . '</td></tr>';
+						  
+					  }
+					echo "</table>";
+					echo "</td>";
+                    echo '<td class="dataTableContent" align="center" valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES_XSELL, 'add_related_article_ID=' . $articles_id[$i], 'NONSSL') . '">' . TEXT_ADD_REMOVE . '</a></td>';
                                     
-                    if (count($Related_items)>1)
-                    {
-                      echo '<td class="dataTableContent" valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES_XSELL, 'sort=1&amp;add_related_article_ID=' . $articles_id[$i], 'NONSSL') . '">' . TEXT_SORT_ORDER . '</a>&nbsp;</td>';
-                    } else {
-                        echo "<td class=\"dataTableContent\" valign=top align=center>--</td>";
-                        }
+                   
+                    echo '<td class="dataTableContent" align="center" valign="top">&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES_XSELL, 'sort=1&amp;add_related_article_ID=' . $articles_id[$i], 'NONSSL') . '">' . TEXT_SORT_ORDER . '</a>&nbsp;</td>';
+                    
                     echo "</tr>\n";
                     unset($Related_items);
                     }
@@ -162,9 +167,11 @@ function ToggleCheckBox($cb) {
                   }
                 $ids = substr($ids, 0, -3);
                 $ids .= ' ) ';
-                $query ="DELETE FROM " . TABLE_ARTICLES_XSELL . " WHERE articles_id = '".(int)$_POST['add_related_article_ID']."' and " . $ids;
-                if (!tep_db_query($query))
-                  exit(TEXT_NO_DELETE);
+				if (count($_POST['xsell_id']) > 0) {
+                  $query ="DELETE FROM " . TABLE_ARTICLES_XSELL . " WHERE articles_id = '".(int)$_POST['add_related_article_ID']."' and " . $ids;
+                  if (!tep_db_query($query))
+                    exit(TEXT_NO_DELETE);
+				}
               } else if (isset($_POST['xsell_id'])) {
                 $id = $_GET['add_related_article_ID'];
                 foreach ($_POST['xsell_id'] as $temp) {
@@ -172,14 +179,18 @@ function ToggleCheckBox($cb) {
                   if (!tep_db_query($query))
                     exit(TEXT_NO_INSERT);
                   } 
-              } // enf if  
+              } // end if  
 	  
 	  		  $heading[] = array('text' => '<b>' . TEXT_DBASE_UPDATED . '</b>');
 			  $contents[] = array('text' => TEXT_CHANGES_SAVED);
+			  
+	
+			  
 			  ?>
+              
       		  <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#999999">
       		    <tr class="dataTableHeadingRow">
-        		  <td class="dataTableHeadingContent" width="100%"><?php echo TEXT_DATABASE_UPDATED; ?></td>
+        		  <td class="dataTableHeadingContent" width="100%">&nbsp;</td>
 	  			</tr>
                 <tr bgcolor="#FFFFFF">
                   <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -231,7 +242,7 @@ function ToggleCheckBox($cb) {
                  <td><form action="<?php tep_href_link(FILENAME_ARTICLES_XSELL, '', 'NONSSL'); ?>" method="post">
                    <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#999999">
                      <tr class="dataTableHeadingRow">
-                       <td class="dataTableHeadingContent" width="50" align="center"><?php echo TEXT_ID; ?></td>
+                       <td class="dataTableHeadingContent" width="50"><?php echo TEXT_ID; ?></td>
                        <td class="dataTableHeadingContent" width="50"><?php echo TEXT_MODEL; ?></td>
                        <td class="dataTableHeadingContent" width="<?php echo SMALL_IMAGE_WIDTH; ?>"><?php echo TEXT_IMAGE; ?></td>
                        <td class="dataTableHeadingContent"><?php echo HEADING_PRODUCT_NAME; ?></td>
@@ -258,7 +269,7 @@ function ToggleCheckBox($cb) {
                        if ($xsell_id_pr) {
                          foreach ($xsell_id_pr as $compare_checked) {
                            if ($products_id[$i]===$compare_checked) {
-                             echo "checked"; 
+                             echo "checked "; 
                              $run_update=true;
                            } // end if 
                          } // end for 
@@ -297,8 +308,8 @@ function ToggleCheckBox($cb) {
              <?php 
 		     } // end if (isset($_GET['cPath']))
           }
+		  
           // sort routines
-        
           if (isset($_GET['sort']) && $_GET['sort'] == 1) {
             // first lets take care of the DB update.
             $run_once=0;
@@ -311,24 +322,10 @@ function ToggleCheckBox($cb) {
                     exit(TEXT_NO_UPDATE);
                   else
                   if ($run_once==0) { 
-				  ?>
-                    <table border="0" cellpadding="2" cellspacing="0" width="100%" bgcolor="#999999">
-                      <tr class="dataTableHeadingRow">
-                        <td class="dataTableHeadingContent"><?php echo TEXT_DATABASE_UPDATED; ?></td>
-                      </tr>
-                    </table>
-                    <table>
-                      <tr>
-                        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-                      </tr>
-                      <tr>
-                        <td class="main"><?php echo sprintf(TEXT_LINK_MAIN_PAGE, tep_href_link(FILENAME_ARTICLES_XSELL, '', 'NONSSL')); ?></td>
-                      </tr>
-                      <tr>
-                        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-                      </tr>
-                    </table>
-                    <?php
+				  
+				  $heading[] = array('text' => '<b>' . TEXT_DBASE_UPDATED . '</b>');
+			      $contents[] = array('text' => '<table width="100%"><tr><td class="messageStackSuccess">' . TEXT_DATABASE_UPDATED . '</td></tr></table><br>' . TEXT_CHANGES_SAVED . '<br><br><center><a href="' . tep_href_link(FILENAME_ARTICLES_XSELL) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a></center><br><br>');
+				  
                      $run_once++;
                   } // end if ($run_once==0)
             } // end of foreach.
@@ -337,9 +334,10 @@ function ToggleCheckBox($cb) {
             <form method="post" action="<?php tep_href_link(FILENAME_ARTICLES_XSELL, 'sort=1&amp;add_related_article_ID=' . $_POST['add_related_article_ID'], 'NONSSL'); ?>">
             <table cellpadding="2" cellspacing="0" bgcolor="#CCCCCC" border="0" width="100%">
               <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent" align="center">ID</td>
+                <td class="dataTableHeadingContent">ID</td>
                 <td class="dataTableHeadingContent"><?php echo HEADING_PRODUCT_NAME; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo HEADING_PRODUCT_ORDER; ?></td>
+                <td class="dataTableHeadingContent" align="center">Delete</td>
               </tr>
               <?php
               $query = "select * from " . TABLE_ARTICLES_XSELL . " where articles_id = '".(int)$_GET['add_related_article_ID']."'";
@@ -349,7 +347,7 @@ function ToggleCheckBox($cb) {
                 $query = "select p.products_id, pd.products_name, pd.products_description, pd.products_url from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = ".$xsell_id_pr[$i]."";
                 list ($products_id, $products_name, $products_description, $products_url) = general_db_conct($query);
                 ?>
-              <tr class="dataTableContentRow" bgcolor="#FFFFFF">
+              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
                 <td class="dataTableContent" align="center"><?php echo $products_id[0]; ?></td>
                 <td class="dataTableContent"><?php echo $products_name[0]; ?></td>
                 <td class="dataTableContent" align="center"><select name="<?php echo $products_id[0]; ?>">
@@ -361,12 +359,15 @@ function ToggleCheckBox($cb) {
                   }
                 ?>
                 </select></td>
+                <td class="dataTableContent" align="center"><?php echo $products_id[0]; ?></td>
               </tr>
               <?php
               } // the end of foreach
               ?>
-              <tr>
-                <td bgcolor="#CCCCCC" colspan="3" align="right"><?php echo tep_image_submit('button_save.gif', IMAGE_SAVE) . '&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES_XSELL) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>&nbsp;'; ?></td>
+              <tr class="dataTableRow">
+                <td colspan="2">&nbsp;</td>
+                <td class="dataTableContent" align="center"><?php echo tep_image_submit('button_save.gif', IMAGE_SAVE) . '&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES_XSELL) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>&nbsp;'; ?></td>
+                <td>&nbsp;</td>
               </tr>
             </table>
             </form>

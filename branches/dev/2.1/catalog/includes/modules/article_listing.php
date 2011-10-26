@@ -48,7 +48,7 @@ $listing_split = new splitPageResults($listing_sql, MAX_ARTICLES_PER_PAGE);
     while ($articles_listing = tep_db_fetch_array($articles_listing_query)) {
 ?>
         <tr>
-          <td valign="top" class="main" width="75%" class="content_text">
+          <td valign="top" class="main" width="75%">
 <?php  // osc-help.net: added class=main to the link.
   echo '<a class="main" href="' . tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $articles_listing['articles_id']) . '"><b>' . $articles_listing['articles_name'] . '</b></a> ';
   if (DISPLAY_AUTHOR_ARTICLE_LISTING == 'true' && tep_not_null($articles_listing['authors_name'])) {

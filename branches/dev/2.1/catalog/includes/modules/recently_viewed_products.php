@@ -22,7 +22,7 @@ if ($action == 'clear_history') {
 }
 
 // Build history string
-$last_product_views = $_SESSION['last_product_views'];
+$last_product_views = (isset($_SESSION['last_product_views']) ? $_SESSION['last_product_views'] : '');
 if ($last_product_views != "") {
   $visited_array = explode('|', $_SESSION['last_product_views']);
   $output_count = 1;	
@@ -50,7 +50,7 @@ if (basename($_SERVER['SCRIPT_NAME']) == "product_info.php") {
 	$new_array_item = $product_info['products_image'] . '^' . $product_info['products_name']. '^' . $current_product_path;
 
 // and add it to the $_SESSION variable
-  $last_product_views = $_SESSION['last_product_views'];
+  $last_product_views = (isset($_SESSION['last_product_views']) ? $_SESSION['last_product_views'] : '');
   if ($last_product_views == "") {
 	$_SESSION['last_product_views'] = trim($new_array_item);
   } else {

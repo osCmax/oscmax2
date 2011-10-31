@@ -78,7 +78,7 @@ td.productinfo_buttons  { border: 1px solid #dddddd; text-align: center; font-fa
 td.productinfo_description { border: 1px solid #dddddd; text-align: left; font-family: Verdana, Arial, sans-serif; font-size: 12px; padding:2px; background-color: #ffffff; }
 td.prod_attributes { border: 1px solid #dddddd; }
 img.plusminus { cursor: pointer; }
-img.corner_banner { display:inline-block; margin-left:-6px; margin-top:-7px; position:absolute; } 
+img.corner_banner { display:block; margin-left:-6px; margin-top:-7px; position:absolute; } 
 
 /* Nested Index */
 td.categoryListing-data{ width:33%; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: black; }

@@ -28,7 +28,7 @@ define('HEADER_TITLE_CART_CONTENTS', 'Warenkorb');
 define('HEADER_TITLE_BASKET_CONTENTS', 'Warenkorb');
 define('HEADER_TITLE_CHECKOUT', 'Kasse');
 define('HEADER_TITLE_WISHLIST', 'Wunschliste');
-define('HEADER_TITLE_TOP', 'Nach oben');
+define('HEADER_TITLE_TOP', 'Home');
 define('HEADER_TITLE_CATALOG', 'Katalog');
 define('HEADER_TITLE_LOGOFF', 'Abmelden');
 define('HEADER_TITLE_LOGIN', 'Anmelden');
@@ -115,7 +115,7 @@ define('BOX_INFORMATION_CONDITIONS', 'AGB');
 define('BOX_INFORMATION_SHIPPING', 'Versandkosten');
 define('BOX_INFORMATION_CONTACT', 'Kontakt');
 // LINE ADDED: SITE MAP
-define('BOX_INFORMATION_SITEMAP', 'Site Map');
+define('BOX_INFORMATION_SITEMAP', 'Sitemap');
 
 // tell a friend box text in includes/boxes/tell_a_friend.php
 define('BOX_HEADING_TELL_A_FRIEND', 'Weiterempfehlen');
@@ -367,6 +367,7 @@ define('BOX_HEADING_LOGIN_BOX_MY_ACCOUNT','Mein Konto');
 define('LOGIN_BOX_ACCOUNT_EDIT','Kontodaten');
 define('LOGIN_BOX_ACCOUNT_HISTORY','Getätigten Bestellungen');
 define('LOGIN_BOX_ADDRESS_BOOK','Adressbuch');
+define('LOGIN_BOX_PASSWORD', 'Mein Passwort');
 define('LOGIN_BOX_PRODUCT_NOTIFICATIONS','Produktbenachrichtigungen');
 define('LOGIN_BOX_MY_ACCOUNT','Mein Konto');
 define('LOGIN_BOX_LOGOFF','Abmelden');
@@ -443,8 +444,18 @@ define('TEXT_VIEW_AS_LIST', 'Listenansicht');
 define('TEXT_VIEW_AS_GRID', 'Gitteransicht');
 define('TEXT_RESULTS_PAGE', 'Ergebnisse/Seite: ');
 define('TEXT_SORT_ORDER', 'Sortierung: ');
+define('TEXT_PRICE_BESTSELLER', 'Bestseller');
 
 // Recent History
 define('TEXT_LAST_VISITED_PRODUCTS', 'Angesehene Produkte');
 
+// Question links to contact form - %20 = space - needed to maintain W3C compliance in URLs
+define('TEXT_QUESTION_ABOUT', 'Anfrage%20zu:%20');
+define('TEXT_QUESTION_MODEL', 'Art-Nr:');
+define('TEXT_QUESTION_PRODUCT_ID', 'Produkt%20ID:');
+define('TEXT_QUESTION_TYPE', 'Stellen%20%20Sie%20nachfolgend%20Ihre%20Frage:');
+define('TEXT_QUESTION_PRICE_ENQUIRY', 'Preisanfrage');
+define('TEXT_QUESTION_PRODUCT_NAME', 'Produktbezeichnung:');
+
+define('DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'HINWEIS: Downloads sind vor Bestätigung des Zahlungseinganges nicht verfügbar.');
 ?>

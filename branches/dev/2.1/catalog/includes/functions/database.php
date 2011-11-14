@@ -187,7 +187,7 @@ global $$link, $debug;
     } // end while
 	
   // Check to force update in case the above are NULL
-  if(empty($last_update_table_srp) || empty($last_update_table_specials)) $force_update = 'true';
+  if(empty($last_update_table_srp) || empty($last_update_table_specials)) { $force_update = 'true'; } else { $force_update = 'false'; }
 
   if(!$table_srp_exists || ($last_update_table_specials > $last_update_table_srp) || $force_update == 'true') {
     if ($table_srp_exists) { 

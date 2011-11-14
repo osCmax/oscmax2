@@ -68,6 +68,7 @@ if ($num_products_xsell != 0) { // Check query is not blank
       <?php
       $row = 0;
       $col = 0;
+	  $output = '';
 
       while ($xsell = tep_db_fetch_array($xsell_query)) {
  

@@ -115,8 +115,9 @@ global $customer_group_id;
    } // end if ($status_need_to_get_prices == true && $customer_group_id != '0')
 // EOF: MOD - Separate Pricing Per Customer
 
-    $select_column_list = '';
+    $select_column_list = 'p.products_model, pd.products_name, m.manufacturers_name, p.products_quantity, p.products_image, p.products_weight, p.products_ordered, ';
 
+/*
     for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
       switch ($column_list[$i]) {
         case 'PRODUCT_LIST_MODEL':
@@ -142,6 +143,7 @@ global $customer_group_id;
           break;
       }
     }
+*/
 
 // BOF: Extra Product Fields
     function get_category_children($parent_id) {

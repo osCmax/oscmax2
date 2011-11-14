@@ -378,7 +378,8 @@ if (MAILCHIMP_ENABLE == 'true') {
  
 // BOF: MOD - Country-State Selector 
  }
-if ($_POST['action'] == 'refresh') {$state = '';}
+ 
+if (isset($_POST['action']) && $_POST['action'] == 'refresh') { $state = ''; }
 if (!isset($country)){$country = DEFAULT_COUNTRY;}
 // EOF: MOD - Country-State Selector 
  // PWA BOF

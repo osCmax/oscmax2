@@ -831,7 +831,7 @@ if (tep_db_num_rows($orders_history_query)) {
 		                if ($order->delivery['suburb']) {
 		                  $email_order .= $order->delivery['suburb'] . "\n";
 	                    }
-		$email_order .= $order->customer['city'] . "\n";
+		$email_order .= $order->delivery['city'] . "\n";
 		                if ($order->delivery['state']) {
 		                  $email_order .= $order->delivery['state'] . "\n";
 	                    }
@@ -849,7 +849,7 @@ if (tep_db_num_rows($orders_history_query)) {
 		                if ($order->billing['suburb']) {
 		                  $email_order .= $order->billing['suburb'] . "\n";
 	                    }
-		$email_order .= $order->customer['city'] . "\n";
+		$email_order .= $order->billing['city'] . "\n";
 		                if ($order->billing['state']) {
 		                  $email_order .= $order->billing['state'] . "\n";
 	                    }

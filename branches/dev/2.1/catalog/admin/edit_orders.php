@@ -514,11 +514,11 @@ $Id$
     if ($order->delivery['suburb']) {
       $email_order .= $order->delivery['suburb'] . "\n";
     }
-    $email_order .= $order->customer['city'] . "\n";
+    $email_order .= $order->delivery['city'] . "\n";
     if ($order->delivery['state']) {
       $email_order .= $order->delivery['state'] . "\n";
     }
-    $email_order .= $order->customer['postcode'] . "\n" .
+    $email_order .= $order->delivery['postcode'] . "\n" .
                     $order->delivery['country'] . "\n";
     }
 
@@ -532,11 +532,11 @@ $Id$
     if ($order->billing['suburb']) {
       $email_order .= $order->billing['suburb'] . "\n";
                       }
-    $email_order .= $order->customer['city'] . "\n";
+    $email_order .= $order->billing['city'] . "\n";
     if ($order->billing['state']) {
       $email_order .= $order->billing['state'] . "\n";
     }
-    $email_order .= $order->customer['postcode'] . "\n" .
+    $email_order .= $order->billing['postcode'] . "\n" .
                     $order->billing['country'] . "\n\n";
 
     $email_order .= EMAIL_TEXT_PAYMENT_METHOD . "\n" . 

@@ -28,7 +28,7 @@ if (RECAPTCHA_ON == 'true') {
 // end modification for reCaptcha
 
 // Adds functionality to have affiliate emails
-  $source = $_GET['source'];
+  $source = (isset($_GET['source']) ? $_GET['source'] : '');
 
     $error = false;
   if (isset($_GET['action']) && ($_GET['action'] == 'send')) {

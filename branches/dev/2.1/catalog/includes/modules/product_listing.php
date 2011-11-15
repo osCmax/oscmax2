@@ -162,6 +162,9 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 <!-- end extra product fields -->
 <?php
   }
+  
+  // Display search term alternative
+  echo $pw_string;
 
   $list_box_contents = array();
   $lc_text = '';

@@ -1764,6 +1764,7 @@ INSERT INTO admin_files VALUES(211, 'configuration.php?gID=70', 'BOX_CONFIGURATI
 INSERT INTO admin_files VALUES(212, 'configuration.php?gID=85', 'BOX_CONFIGURATION_GOOGLE_ANALYTICS', 0, 2, '1', 36);
 INSERT INTO admin_files VALUES(213, 'configuration.php?gID=89', 'BOX_CONFIGURATION_GOOGLE_MAPS', 0, 2, '1', 37);
 INSERT INTO admin_files VALUES(214, 'upgrade.php', 'BOX_ADMINISTRATOR_UPGRADE', 0, 1, '1', 20);
+INSERT INTO admin_files VALUES(215, 'stats_keywords.php', 'BOX_REPORTS_KEYWORDS', 0, 8, '1', 10);
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');

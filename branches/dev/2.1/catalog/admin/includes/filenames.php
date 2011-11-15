@@ -125,6 +125,7 @@ $Id$
 // EOF: MOD - QT Pro
   define('FILENAME_STATS_ADMIN_LOGGING', 'stats_admin_logging.php');
   define('FILENAME_STATS_CUST_LOGGING', 'stats_cust_logging.php');
+  define('FILENAME_KEYWORDS', 'stats_keywords.php');
 
 // LINE ADDED: Special Price per Customer 4.0
   define('FILENAME_CUSTOMERS_GROUPS', 'customers_groups.php');
@@ -250,6 +251,5 @@ define('FILENAME_CONFIGURATION_SEO_POPOUT', FILENAME_CONFIGURATION . '?gID=86');
 define('FILENAME_CONFIGURATION_EDITOR', FILENAME_CONFIGURATION . '?gID=70');
 define('FILENAME_CONFIGURATION_GOOGLE_ANALYTICS', FILENAME_CONFIGURATION . '?gID=85');
 define('FILENAME_CONFIGURATION_GOOGLE_MAPS', FILENAME_CONFIGURATION . '?gID=89');
-
 
 ?>

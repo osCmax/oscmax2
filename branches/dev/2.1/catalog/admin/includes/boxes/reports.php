@@ -32,7 +32,8 @@ $Id$
 								   tep_admin_jqmenu(FILENAME_STATS_CREDITS, BOX_REPORTS_CREDITS, 'TOP') .
 								   tep_admin_jqmenu(FILENAME_STATS_ADMIN_LOGGING, BOX_REPORTS_ADMIN_LOGGING, 'TOP') .
 								   tep_admin_jqmenu(FILENAME_STATS_CUST_LOGGING, BOX_REPORTS_CUST_LOGGING, 'TOP') .
-								   tep_admin_jqmenu(FILENAME_STATS_HTTP_ERROR, BOX_REPORTS_HTTP_ERROR, 'TOP'));
+								   tep_admin_jqmenu(FILENAME_STATS_HTTP_ERROR, BOX_REPORTS_HTTP_ERROR, 'TOP') . 
+								   tep_admin_jqmenu(FILENAME_KEYWORDS, BOX_REPORTS_KEYWORDS, 'TOP'));
   print_r($contents);
 ?>
 <!-- reports_eof //-->

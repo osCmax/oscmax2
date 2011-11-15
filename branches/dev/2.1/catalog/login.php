@@ -86,7 +86,7 @@ $Id$
         //}
 // BOF: MOD - Separate Pricing Per Customer: choice for logging in under any customer_group_id
 // note that tax rates depend on your registered address!
-        if ($_GET['skip'] != 'true' && $_POST['email_address'] == SPPC_TOGGLE_LOGIN_PASSWORD ) {
+        if (isset($_GET['skip']) && $_GET['skip'] != 'true' && $_POST['email_address'] == SPPC_TOGGLE_LOGIN_PASSWORD ) {
           $existing_customers_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id ");
           echo '<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">';
           print ("\n<html ");
@@ -122,7 +122,7 @@ $Id$
         $customer_default_address_id = $check_customer['customers_default_address_id'];
         $customer_first_name = $check_customer['customers_firstname'];
 // BOF: MOD - Separate Pricing per Customer
-        if ($_GET['skip'] == 'true' && $_POST['email_address'] == SPPC_TOGGLE_LOGIN_PASSWORD && isset($_POST['new_customers_group_id']))  {
+        if (isset($_GET['skip']) && $_GET['skip'] == 'true' && $_POST['email_address'] == SPPC_TOGGLE_LOGIN_PASSWORD && isset($_POST['new_customers_group_id']))  {
           $sppc_customer_group_id = $_POST['new_customers_group_id'] ;
           $check_customer_group_tax = tep_db_query("select customers_group_show_tax, customers_group_tax_exempt from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id = '" .(int)$_POST['new_customers_group_id'] . "'");
         } else {

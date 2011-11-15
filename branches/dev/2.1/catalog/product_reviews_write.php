@@ -47,7 +47,7 @@ $Id$
   $customer = tep_db_fetch_array($customer_query);
 
   if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
-    $rating = tep_db_prepare_input($_POST['rating']);
+    $rating = tep_db_prepare_input(isset($_POST['rating']) ? $_POST['rating'] : '');
     $review = tep_db_prepare_input($_POST['review']);
 
     $error = false;

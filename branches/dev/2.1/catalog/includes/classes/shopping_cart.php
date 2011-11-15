@@ -70,6 +70,14 @@ var $shiptotal;
       $this->reset(false);
 // LINE MODED: QPBPP for SPPC v4.2$
 // BOF QPBPP for SPPC
+
+      global $sppc_customer_group_id;
+        if (tep_session_is_registered('sppc_customer_group_id')) {
+          $this->cg_id = $sppc_customer_group_id;
+        } else {
+          $this->cg_id = '0';
+        }
+
       $products_query = tep_db_query("select cb.products_id, ptdc.discount_categories_id, customers_basket_quantity from " . TABLE_CUSTOMERS_BASKET . " cb left join (select products_id, discount_categories_id from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " where customers_group_id = '" . $this->cg_id . "') as ptdc on cb.products_id = ptdc.products_id where customers_id = '" . (int)$customer_id . "'");
       while ($products = tep_db_fetch_array($products_query)) {
         $this->contents[$products['products_id']] = array('qty' => $products['customers_basket_quantity'], 'discount_categories_id' => $products['discount_categories_id']);
@@ -333,10 +341,10 @@ var $shiptotal;
 // BOF: MOD - Separate Pricing Per Customer
 // global variable (session) $sppc_customer_group_id -> class variable cg_id
         global $sppc_customer_group_id;
-        if(!tep_session_is_registered('sppc_customer_group_id')) {
-          $this->cg_id = '0';
-        } else {
+        if (tep_session_is_registered('sppc_customer_group_id')) {
           $this->cg_id = $sppc_customer_group_id;
+        } else {
+          $this->cg_id = '0';
         }
         // BOF QPBPP for SPPC
 
@@ -359,13 +367,13 @@ var $shiptotal;
           $prid = $product['products_id'];
           $products_tax = tep_get_tax_rate($product['products_tax_class_id']);
           $products_price = $pf->computePrice($qty, $nof_other_items_in_cart_same_cat);
-          $products_weight = $product['products_weight'];
-          $products_length = $product['products_length'];
-          $products_width = $product['products_width'];
-          $products_height = $product['products_height'];
-          $products_ready_to_ship = $product['products_ready_to_ship'];
+          $products_weight = (isset($product['products_weight']) ? $product['products_weight'] : '');
+          $products_length = (isset($product['products_length']) ? $product['products_length'] : '');
+          $products_width = (isset($product['products_width']) ? $product['products_width'] : '');
+          $products_height = (isset($product['products_height']) ? $product['products_height'] : '');
+          $products_ready_to_ship = (isset($product['products_ready_to_ship']) ? $product['products_ready_to_ship'] : '');
 //LINE ADDED - mod indvship
-          $products_ship_price = $product['products_ship_price'];
+          $products_ship_price = (isset($product['products_ship_price']) ? $product['products_ship_price'] : '');
 
 // BOF: MOD - Separate Price per Customer Mod - EDIT FOR QPBPP FOR SPPC V4.2
 //          $specials_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$prid . "' and status = '1'");
@@ -485,7 +493,7 @@ var $shiptotal;
 // EOF QPBPP for SPPC
 // BOF Attribute Product Codes
                 $attribute_code_array = array();
-                if (is_array($this->contents[$products_id]['attributes'])) {
+                if (isset($this->contents[$products_id]['attributes']) && is_array($this->contents[$products_id]['attributes'])) {
                   $i = 0;
                   foreach ($this->contents[$products_id]['attributes'] as $attributes) {
                     $option = array_keys($this->contents[$products_id]['attributes']);
@@ -511,23 +519,23 @@ var $shiptotal;
                 }
 // EOF Attribute Product Codes
 //        $products_array[] = array('id' => $products_id,
-          $products_array[] = array('id' => tep_get_uprid($products_id, $this->contents[$products_id]['attributes']),
-                                    'name' => $products['products_name'],
-                                    'model' => $products['products_model'],
+          $products_array[] = array('id' => tep_get_uprid($products_id, (isset($this->contents[$products_id]['attributes']) ? $this->contents[$products_id]['attributes'] : '')),
+                                    'name' => (isset($products['products_name']) ? $products['products_name'] : ''),
+                                    'model' => (isset($products['products_model']) ? $products['products_model'] : ''),
                                     'code' => $products_code,
-                                    'image' => $products['products_image'],
+                                    'image' => (isset($products['products_image']) ? $products['products_image'] : ''),
 // BOF QPBPP for SPPC
                                     'discount_categories_id' => $this->contents[$products_id]['discount_categories_id'],
 // EOF QPBPP for SPPC
                                     'price' => $products_price,
                                     'quantity' => $this->contents[$products_id]['qty'],
-                                    'weight' => $products['products_weight'],
-                                    'length' => $products['products_length'],
-                                    'width' => $products['products_width'],
-                                    'height' => $products['products_height'],
-                                    'ready_to_ship' => $products['products_ready_to_ship'],
+                                    'weight' => (isset($products['products_weight']) ? $products['products_weight'] : ''),
+                                    'length' => (isset($products['products_length']) ? $products['products_length'] : ''),
+                                    'width' => (isset($products['products_width']) ? $products['products_width'] : ''),
+                                    'height' => (isset($products['products_height']) ? $products['products_height'] : ''),
+                                    'ready_to_ship' => (isset($products['products_ready_to_ship']) ? $products['products_ready_to_ship'] : ''),
                                     'final_price' => ($products_price + $this->attributes_price($products_id)),
-                                    'tax_class_id' => $products['products_tax_class_id'],
+                                    'tax_class_id' => (isset($products['products_tax_class_id']) ? $products['products_tax_class_id'] : ''),
                                     'attributes' => (isset($this->contents[$products_id]['attributes']) ? $this->contents[$products_id]['attributes'] : ''));
         }
       }

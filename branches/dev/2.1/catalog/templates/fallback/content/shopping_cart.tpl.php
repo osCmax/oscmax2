@@ -158,7 +158,7 @@ $Id$
     if ($messageStack->size('cart_notice') > 0) {
 ?>
       <tr>
-        <td style="padding-top: 10px"><?php echo $messageStack->output('cart_notice'); ?></td>
+        <td><?php echo $messageStack->output('cart_notice'); ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

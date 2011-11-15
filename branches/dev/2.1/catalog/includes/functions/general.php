@@ -131,21 +131,21 @@ $Id$
   function tep_get_products_stock($products_id, $attributes=array()) {
     global $languages_id;
     $products_id = tep_get_prid($products_id);
-    if (sizeof($attributes)>0) {
+    if (sizeof($attributes) > 0) {
       $all_nonstocked = true;
       $attr_list='';
       $options_list=implode(",",array_keys($attributes));
       $track_stock_query=tep_db_query("select products_options_id, products_options_track_stock from " . TABLE_PRODUCTS_OPTIONS . " where products_options_id in ($options_list) and language_id= '" . (int)$languages_id . "' order by products_options_id");
-      while($track_stock_array=tep_db_fetch_array($track_stock_query)) {
+      while($track_stock_array = tep_db_fetch_array($track_stock_query)) {
         if ($track_stock_array['products_options_track_stock']) {
-          $attr_list.=$track_stock_array['products_options_id'] . '-' . $attributes[$track_stock_array['products_options_id']] . ',';
-          $all_nonstocked=false;
+          $attr_list .= $track_stock_array['products_options_id'] . '-' . $attributes[$track_stock_array['products_options_id']] . ',';
+          $all_nonstocked = false;
         }
       }
       $attr_list=substr($attr_list,0,strlen($attr_list)-1);
     }
 
-    if ((sizeof($attributes)==0) | ($all_nonstocked)) {
+    if ((sizeof($attributes) == 0) || (isset($all_nonstocked) && ($all_nonstocked))) {
       $stock_query = tep_db_query("select products_quantity as quantity from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
     } else {
       $stock_query=tep_db_query("select products_stock_quantity as quantity from " . TABLE_PRODUCTS_STOCK . " where products_id='". (int)$products_id . "' and products_stock_attributes='$attr_list'");

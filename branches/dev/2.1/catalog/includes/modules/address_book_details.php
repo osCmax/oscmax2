@@ -44,12 +44,12 @@ $Id$
   }
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_FIRST_NAME; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('firstname', $entry['entry_firstname']) . '&nbsp;' . (tep_not_null(ENTRY_FIRST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_FIRST_NAME_TEXT . '</span>': ''); ?></td>
+            <td class="main" width="100"><?php echo ENTRY_FIRST_NAME; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('firstname', isset($entry['entry_firstname']) ? $entry['entry_firstname'] : '') . '&nbsp;' . (tep_not_null(ENTRY_FIRST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_FIRST_NAME_TEXT . '</span>': ''); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo ENTRY_LAST_NAME; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('lastname', $entry['entry_lastname']) . '&nbsp;' . (tep_not_null(ENTRY_LAST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_LAST_NAME_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('lastname', isset($entry['entry_lastname']) ? $entry['entry_lastname'] : '') . '&nbsp;' . (tep_not_null(ENTRY_LAST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_LAST_NAME_TEXT . '</span>': ''); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -59,7 +59,7 @@ $Id$
 ?>
           <tr>
             <td class="main"><?php echo ENTRY_COMPANY; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('company', $entry['entry_company']) . '&nbsp;' . (tep_not_null(ENTRY_COMPANY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COMPANY_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('company', isset($entry['entry_company']) ? $entry['entry_company'] : '') . '&nbsp;' . (tep_not_null(ENTRY_COMPANY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COMPANY_TEXT . '</span>': ''); ?></td>
           </tr>
 <?php // BOF: MOD - Separate Pricing Per Customer
    if (tep_not_null($entry['entry_company_tax_id'])) {
@@ -86,25 +86,25 @@ $Id$
 ?>
           <tr>
             <td class="main"><?php echo ENTRY_STREET_ADDRESS; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('street_address', $entry['entry_street_address']) . '&nbsp;' . (tep_not_null(ENTRY_STREET_ADDRESS_TEXT) ? '<span class="inputRequirement">' . ENTRY_STREET_ADDRESS_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('street_address', isset($entry['entry_street_address']) ? $entry['entry_street_address'] : '') . '&nbsp;' . (tep_not_null(ENTRY_STREET_ADDRESS_TEXT) ? '<span class="inputRequirement">' . ENTRY_STREET_ADDRESS_TEXT . '</span>': ''); ?></td>
           </tr>
 <?php
   if (ACCOUNT_SUBURB == 'true') {
 ?>
           <tr>
             <td class="main"><?php echo ENTRY_SUBURB; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('suburb', $entry['entry_suburb']) . '&nbsp;' . (tep_not_null(ENTRY_SUBURB_TEXT) ? '<span class="inputRequirement">' . ENTRY_SUBURB_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('suburb', isset($entry['entry_suburb']) ? $entry['entry_suburb'] : '') . '&nbsp;' . (tep_not_null(ENTRY_SUBURB_TEXT) ? '<span class="inputRequirement">' . ENTRY_SUBURB_TEXT . '</span>': ''); ?></td>
           </tr>
 <?php
   }
 ?>
           <tr>
             <td class="main"><?php echo ENTRY_POST_CODE; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('postcode', $entry['entry_postcode']) . '&nbsp;' . (tep_not_null(ENTRY_POST_CODE_TEXT) ? '<span class="inputRequirement">' . ENTRY_POST_CODE_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('postcode', isset($entry['entry_postcode']) ? $entry['entry_postcode'] : '') . '&nbsp;' . (tep_not_null(ENTRY_POST_CODE_TEXT) ? '<span class="inputRequirement">' . ENTRY_POST_CODE_TEXT . '</span>': ''); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo ENTRY_CITY; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('city', $entry['entry_city']) . '&nbsp;' . (tep_not_null(ENTRY_CITY_TEXT) ? '<span class="inputRequirement">' . ENTRY_CITY_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('city', isset($entry['entry_city']) ? $entry['entry_city'] : '') . '&nbsp;' . (tep_not_null(ENTRY_CITY_TEXT) ? '<span class="inputRequirement">' . ENTRY_CITY_TEXT . '</span>': ''); ?></td>
           </tr>
 <?php
   if (ACCOUNT_STATE == 'true') {
@@ -112,13 +112,14 @@ $Id$
           <tr>
             <td class="main"><?php echo ENTRY_STATE; ?></td>
             <td class="main">
-<div id="states">
+                <div id="states">
 				<?php
 				// +Country-State Selector
-				echo ajax_get_zones_html($entry['entry_country_id'],($entry['entry_zone_id'] == 0 ? $entry['entry_state'] : $entry['entry_zone_id']), false);
+				echo ajax_get_zones_html($entry['entry_country_id'], ((isset($entry['entry_zone_id']) && $entry['entry_zone_id'] != 0) ? $entry['entry_zone_id'] : 0), false);
 				// -Country-State Selector
 				?>
-				</div></td>
+				</div>
+            </td>
           </tr>
 <?php
   }

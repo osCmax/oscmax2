@@ -435,24 +435,24 @@ $products_options_array[] = array('id' => $products_options['products_options_va
         } // end while
         if (isset($cart->contents[$this->products_id]['attributes'][$products_options_name['products_options_id']])) {
           $selected = $cart->contents[$this->products_id]['attributes'][$products_options_name['products_options_id']];
-                  $attributes[]=array('oid'=>$products_options_name['products_options_id'],
-                            'oname'=>$products_options_name['products_options_name'],
-                            'otype'=>$products_options_name['products_options_type'],
+                  $attributes[]=array('oid' => $products_options_name['products_options_id'],
+                            'oname' => $products_options_name['products_options_name'],
+                            'otype' => $products_options_name['products_options_type'],
                             'olength' => $products_options_name['products_options_length'],
-                            'otext'=>$producs_options_name['products_options_value_text'],
-                            'ovals'=>$products_options_array,
-                            'default'=>$selected);
+                            'otext' => (isset($producs_options_name['products_options_value_text']) ? $producs_options_name['products_options_value_text'] : ''),
+                            'ovals' => $products_options_array,
+                            'default' => $selected);
 
         }  
         else {
           $selected = 0;
-        $attributes[]=array('oid'=>$products_options_name['products_options_id'],
-                            'oname'=>$products_options_name['products_options_name'],
-                            'otype'=>$products_options_name['products_options_type'],
+        $attributes[]=array('oid' => $products_options_name['products_options_id'],
+                            'oname' => $products_options_name['products_options_name'],
+                            'otype' => $products_options_name['products_options_type'],
                             'olength' => $products_options_name['products_options_length'],
-                            'otext'=>$producs_options_name['products_options_value_text'],
-                            'ovals'=>$products_options_array,                   
-                            'default'=>$selected);
+                            'otext' => (isset($producs_options_name['products_options_value_text']) ? $producs_options_name['products_options_value_text'] : ''),
+                            'ovals' => $products_options_array,                   
+                            'default' => $selected);
           }
       }
       return $attributes;

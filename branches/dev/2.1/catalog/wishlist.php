@@ -33,8 +33,8 @@ if (RECAPTCHA_ON == 'true') {
     // was there a reCAPTCHA response?
     $resp = recaptcha_check_answer ($privatekey,
     $_SERVER["REMOTE_ADDR"],
-    $_POST["recaptcha_challenge_field"],
-    $_POST["recaptcha_response_field"]);
+    (isset($_POST["recaptcha_challenge_field"]) ? $_POST["recaptcha_challenge_field"] : ''),
+    (isset($_POST["recaptcha_response_field"]) ? $_POST["recaptcha_response_field"] : ''));
 	
     // end modification for reCaptcha
 }
@@ -45,7 +45,7 @@ if (RECAPTCHA_ON == 'true') {
 *******************************************************************/
 
   if(tep_session_is_registered('wishlist_id')) {
-	$wishList->add_wishlist($wishlist_id, $attributes_id);
+	$wishList->add_wishlist($wishlist_id, (isset($attributes_id) ? $attributes_id : ''));
 
 	if(WISHLIST_REDIRECT == 'Yes') {
 		tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $wishlist_id));
@@ -85,12 +85,12 @@ if (RECAPTCHA_ON == 'true') {
 ************* EMAIL THE WISHLIST TO MULTIPLE FRIENDS ***************
 *******************************************************************/
 
+  $errors = false;
+  $guest_errors = "";
+  $email_errors = "";
+  $message_error = "";
+  
   if (isset($_POST['email_prod_x'])) {
-
-		$errors = false;
-		$guest_errors = "";
-		$email_errors = "";
-		$message_error = "";
 
 		if(strlen($_POST['message']) < '1') {
 			$error = true;

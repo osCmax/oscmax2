@@ -30,7 +30,7 @@ $Id$
 
   $boxContent = '';
 
-	if (is_array($wishList->wishID) && !empty($wishList->wishID)) {
+	if (isset($wishList->wishID) && is_array($wishList->wishID) && !empty($wishList->wishID)) {
 	reset($wishList->wishID);
 
 	if (count($wishList->wishID) < MAX_DISPLAY_WISHLIST_BOX) {

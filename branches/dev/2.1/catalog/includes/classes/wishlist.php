@@ -23,7 +23,7 @@ $Id$
 		if (!tep_session_is_registered('customer_id')) return false;
 
 	// merge current wishlist items in database
-		if (is_array($this->wishID)) {
+		if (isset($this->wishID) && is_array($this->wishID)) {
         	reset($this->wishID);
 
 			while (list($wishlist_id, ) = each($this->wishID)) {

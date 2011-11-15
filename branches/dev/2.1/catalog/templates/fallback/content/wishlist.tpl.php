@@ -43,7 +43,7 @@ $Id$
   }
 
 
-  if (is_array($wishList->wishID) && !empty($wishList->wishID)) {
+  if (isset($wishList->wishID) && is_array($wishList->wishID) && !empty($wishList->wishID)) {
     reset($wishList->wishID);
 
 ?>
@@ -216,11 +216,11 @@ $Id$
               </tr>
               <tr>
                 <td class="main"><?php echo TEXT_YOUR_NAME; ?></td>
-                <td class="main"><?php echo tep_draw_input_field('your_name', $your_name); ?></td>
+                <td class="main"><?php echo tep_draw_input_field('your_name', (isset($your_name) ? $your_name : '')); ?></td>
               </tr>
               <tr>
                 <td class="main"><?php echo TEXT_YOUR_EMAIL; ?></td>
-                <td class="main"><?php echo tep_draw_input_field('your_email', $your_email); ?></td>
+                <td class="main"><?php echo tep_draw_input_field('your_email', (isset($your_email) ? $your_email : '')); ?></td>
               </tr>
 <?php if (RECAPTCHA_ON == 'true') { ?>
 <!-- start modification for reCaptcha -->
@@ -284,8 +284,8 @@ $Id$
   while($email_counter < DISPLAY_WISHLIST_EMAILS) {
 ?>
         <tr>
-          <td class="main"><?php echo TEXT_NAME; ?>&nbsp;&nbsp;<?php echo tep_draw_input_field('friend[]', $friend[$email_counter]); ?></td>
-          <td class="main"><?php echo TEXT_EMAIL; ?>&nbsp;&nbsp;<?php echo tep_draw_input_field('email[]', $email[$email_counter]); ?></td>
+          <td class="main"><?php echo TEXT_NAME; ?>&nbsp;&nbsp;<?php echo tep_draw_input_field('friend[]', (isset($friend[$email_counter]) ? $friend[$email_counter] : '')); ?></td>
+          <td class="main"><?php echo TEXT_EMAIL; ?>&nbsp;&nbsp;<?php echo tep_draw_input_field('email[]', (isset($email[$email_counter]) ? $email[$email_counter] : '')); ?></td>
         </tr>
 <?php
   $email_counter++;

@@ -119,10 +119,11 @@ $Id$
                                         'final_price' => $orders_products['final_price']);
 
 // BOF: MOD - Separate Pricing Per Customer
-        if(!tep_session_is_registered('sppc_customer_group_id')) { 
-          $customer_group_id = '0';
-        } else {
+        global $sppc_customer_group_id;
+        if(tep_session_is_registered('sppc_customer_group_id')) { 
           $customer_group_id = $sppc_customer_group_id;
+        } else {
+          $customer_group_id = '0';
         }
 
         if ($customer_group_id != '0'){	

@@ -74,16 +74,18 @@ $Id$
 	} // end while
 
     // replace products_price with the correct specials_new_products_price
-    if(!empty($new_s_prices)) {
-	  for ($x = 0; $x < $no_of_new_products; $x++) { 
+	for ($x = 0; $x < $no_of_new_products; $x++) {
+	  $special_old_price[$x] = '';
+	  $closer[$x] = '';	
+	}
+	
+	if(!empty($new_s_prices)) {
+	  for ($x = 0; $x < $no_of_new_products; $x++) {
 	    for ($i = 0; $i < count($new_s_prices); $i++) {
 		  if( $new_products[$x]['products_id'] == $new_s_prices[$i]['products_id'] ) {
 			$special_old_price[$x] = '<span style="text-decoration:line-through">' . $currencies->display_price($new_products[$x]['products_price'], tep_get_tax_rate($new_products[$x]['products_tax_class_id'])) . '</span>&nbsp;<span class="productSpecialPrice">';
 			$new_products[$x]['products_price'] = '' . $new_s_prices[$i]['specials_new_products_price'];
 			$closer[$x] = '</span>';
-		  } else {
-			$special_old_price[$x] = '';
-			$closer[$x] = '';  
 		  } // end if 
 	    } // end for
 	  } // end for

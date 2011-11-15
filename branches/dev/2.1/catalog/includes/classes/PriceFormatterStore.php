@@ -124,13 +124,15 @@ class PriceFormatterStore {
 // finally add all the data
            $this->addPriceFormatterData($product_info[$x]['products_id'], $product_info[$x]);
           } // end for ($x = 0; $x < $no_of_listings; $x++)
-
         $price_breaks_query = tep_db_query("select products_id, products_price, products_qty from  " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id in (" . $product_id_list . ") and customers_group_id = '" . $this->cg_id . "' order by products_id, products_qty");
+		
         while ($price_break = tep_db_fetch_array($price_breaks_query)) {
           $price_breaks_array[$price_break['products_id']][] = array('products_price' => $price_break['products_price'], 'products_qty' => $price_break['products_qty']);
         }
-        $no_of_pricebreaks = count($price_breaks_array);
-        if ($no_of_pricebreaks > 0) {
+		
+        $no_of_pricebreaks = (isset($price_break_array) ? count($price_breaks_array) : 0);
+        
+		if ($no_of_pricebreaks > 0) {
           foreach ($this->priceFormatterData as $products_id => $price_break_array) {
             foreach ($price_breaks_array as $pb_products_id => $pb_price_break) {
               if ($pb_products_id == $products_id) {

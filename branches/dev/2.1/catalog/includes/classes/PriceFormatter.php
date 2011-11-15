@@ -117,20 +117,20 @@ class PriceFormatter {
     } else { // data from product listing
       //Compose cachable structure
       $price_formatter_data = array(
-        'products_name' => $listing['products_name'],
-        'products_model' => $listing['products_model'],
-        'products_image' => $listing['products_image'],
-        'products_id' =>  $listing['products_id'],
-        'manufacturers_id' =>  $listing['manufacturers_id'],
-        'products_price' => $listing['products_price'],
-        'specials_new_products_price' => $listing['specials_new_products_price'],
-        'products_tax_class_id' => $listing['products_tax_class_id'],
-        'discount_categories_id' => $listing['discount_categories_id'],
-        'products_weight' => $listing['products_weight'],
-        'products_quantity' => $listing['products_quantity'],
+        'products_name' => (isset($listing['products_name']) ? $listing['products_name'] : ''),
+        'products_model' => (isset($listing['products_model']) ? $listing['products_model'] : ''),
+        'products_image' => (isset($listing['products_image']) ? $listing['products_image'] : ''),
+        'products_id' => (isset($listing['products_id']) ? $listing['products_id'] : ''),
+        'manufacturers_id' => (isset($listing['manufacturers_id']) ? $listing['manufacturers_id'] : ''),
+        'products_price' => (isset($listing['products_price']) ? $listing['products_price'] : ''),
+        'specials_new_products_price' => (isset($listing['specials_new_products_price']) ? $listing['specials_new_products_price'] : ''),
+        'products_tax_class_id' => (isset($listing['products_tax_class_id']) ? $listing['products_tax_class_id'] : ''),
+        'discount_categories_id' => (isset($listing['discount_categories_id']) ? $listing['discount_categories_id'] : ''),
+        'products_weight' => (isset($listing['products_weight']) ? $listing['products_weight'] : ''),
+        'products_quantity' => (isset($listing['products_quantity']) ? $listing['products_quantity'] : ''),
         'price_breaks' => $price_breaks_from_listing,
-        'qtyBlocks' => $listing['qtyBlocks'],
-        'products_min_order_qty' => $listing['products_min_order_qty']);
+        'qtyBlocks' => (isset($listing['qtyBlocks']) ? $listing['qtyBlocks'] : ''),
+        'products_min_order_qty' => (isset($listing['products_min_order_qty']) ? $listing['products_min_order_qty'] : ''));
       //Add to cache
       $pfs->addPriceFormatterData($product_id, $price_formatter_data);
     }

@@ -428,30 +428,31 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
          $pid_for_hide = (int)$_GET['pid'];
       } elseif (isset($_GET['notify']) && !is_array($_GET['notify'])) {
          $pid_for_hide = (int)$_GET['notify'];
-         } elseif (isset($_POST['notify']) && !is_array($_POST['notify'])) {
-            $pid_for_hide = (int)$_POST['notify'];
-         }
-     if (tep_not_null($pid_for_hide)) {
+      } elseif (isset($_POST['notify']) && !is_array($_POST['notify'])) {
+         $pid_for_hide = (int)$_POST['notify'];
+      }
+	  
+      if (isset($pid_for_hide) && tep_not_null($pid_for_hide)) {
          $hide_product = tep_get_hide_status_single($customer_group_id, $pid_for_hide);
-     } else {
+      } else {
          $hide_product = false;
-     } // end if/else (tep_not_null($pid_for_hide))
+      } // end if/else (tep_not_null($pid_for_hide))
 
       $temp_post_get_array = array();
       $hide_status_products = array();
-      if (is_array($_POST['products_id']) && tep_not_null($_POST['products_id']) && tep_not_null($_POST['products_id'][0])) {
+      if (isset($_POST['products_id']) && is_array($_POST['products_id']) && tep_not_null($_POST['products_id']) && tep_not_null($_POST['products_id'][0])) {
          $temp_post_get_array = $_POST['products_id'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
       }
-      if (is_array($_GET['products_id']) && tep_not_null($_GET['products_id']) && tep_not_null($_GET['products_id'][0])) {
+      if (isset($_GET['products_id']) && is_array($_GET['products_id']) && tep_not_null($_GET['products_id']) && tep_not_null($_GET['products_id'][0])) {
          $temp_post_get_array = $_GET['products_id'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
       }
-      if (is_array($_POST['notify']) && tep_not_null($_POST['notify']) && tep_not_null($_POST['notify'][0])) {
+      if (isset($_POST['notify']) && is_array($_POST['notify']) && tep_not_null($_POST['notify']) && tep_not_null($_POST['notify'][0])) {
          $temp_post_get_array = $_POST['notify'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
       }
-      if (is_array($_GET['notify']) && tep_not_null($_GET['notify']) && tep_not_null($_GET['notify'][0])) {
+      if (isset($_GET['notify']) && is_array($_GET['notify']) && tep_not_null($_GET['notify']) && tep_not_null($_GET['notify'][0])) {
       $temp_post_get_array = $_GET['notify'];
          $hide_status_products = tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array);
      }
@@ -479,10 +480,10 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
     switch ($_GET['action']) {
       // customer wants to update the product quantity in their shopping cart
       case 'update_product' : for ($i=0, $n=sizeof($_POST['products_id']); $i<$n; $i++) {
-        if (in_array($_POST['products_id'][$i], (is_array($_POST['cart_delete']) ? $_POST['cart_delete'] : array()))) {
+        if (in_array($_POST['products_id'][$i], (isset($_POST['cart_delete']) && is_array($_POST['cart_delete']) ? $_POST['cart_delete'] : array()))) {
           $cart->remove($_POST['products_id'][$i]);
           } else {
-            $attributes = ($_POST['id'][$_POST['products_id'][$i]]) ? $_POST['id'][$_POST['products_id'][$i]] : '';
+            $attributes = (isset($_POST['id']) && $_POST['id'][$_POST['products_id'][$i]]) ? $_POST['id'][$_POST['products_id'][$i]] : '';
 //          $cart->add_cart($_POST['products_id'][$i], $_POST['cart_quantity'][$i], $attributes, false);
 // BOF SPPC, Hide products and categories from groups
                                   foreach($hide_status_products as $key => $subarray) {

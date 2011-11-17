@@ -248,8 +248,9 @@ $Id$
   $search_enhancements_keywords = $_GET['keywords'];
   $search_enhancements_keywords = strip_tags($search_enhancements_keywords);
   $search_enhancements_keywords = addslashes($search_enhancements_keywords);  
-	 
-  if ($search_enhancements_keywords != $last_search_insert) {             
+
+  // added nocount check to prevent searches called from admin from adding to search totals.	 
+  if ($search_enhancements_keywords != $last_search_insert && !isset($_GET['nocount'])) {             
 	tep_db_query("insert into " . TABLE_SEARCH_QUERIES . " (search_text) values ('" .  $search_enhancements_keywords . "')");
 	$last_search_insert = $search_enhancements_keywords;
   }

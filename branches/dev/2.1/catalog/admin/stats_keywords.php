@@ -41,6 +41,7 @@
   
   if ($_GET['action'] == 'Delete') {
 	tep_db_query("delete from search_queries_sorted");
+	header('location: ' . tep_href_link('stats_keywords.php', '')); 
   } // delete db					
 
   if ($_GET['update'] == BUTTON_UPDATE_WORD_LIST) {
@@ -179,15 +180,25 @@ $pw_words = tep_db_query($pw_word_sql);
   </tr>
 <?php
 
-
-
-$sql_q = tep_db_query($pw_sql);
-    while ($sql_q_result = tep_db_fetch_array($sql_q)) { ?>
-  <tr class="dataTableRow"  onmouseover="this.className='dataTableRowOver'" onMouseOut="this.className='dataTableRow'" >
-    <td class="dataTableContent"><a target="_blank" href="<?php echo tep_catalog_href_link( 'advanced_search_result_notally.php', 'keywords=' . urlencode($sql_q_result['search_text']). '&search_in_description=1' ); ?>"><?php echo $sql_q_result['search_text']; ?></a></td>  
-    <td class="dataTableContent" align="center"><?php echo $sql_q_result['search_count']; ?></td>
-  </tr>
-<?php    } // while 
+  $result_count = 0;
+  $sql_q = tep_db_query($pw_sql);
+    while ($sql_q_result = tep_db_fetch_array($sql_q)) {
+	  $result_count++;	
+	  ?>
+      <tr class="dataTableRow"  onmouseover="this.className='dataTableRowOver'" onMouseOut="this.className='dataTableRow'" >
+        <td class="dataTableContent"><a target="_blank" href="<?php echo tep_catalog_href_link( 'advanced_search_result.php', 'keywords=' . urlencode($sql_q_result['search_text']). '&amp;search_in_description=1&amp;nocount=1' ); ?>"><?php echo $sql_q_result['search_text']; ?></a></td>  
+        <td class="dataTableContent" align="center"><?php echo $sql_q_result['search_count']; ?></td>
+      </tr>
+<?php
+    } // while 
+    
+	// lets check if there is no data
+	if ($result_count == 0) { ?>
+	  <tr>
+	    <td class="messageStackAlert" colspan="2"><?php echo TEXT_NO_RESULTS; ?></td>
+      </tr>
+	<?php
+    }
 ?>
     </td></tr></table>
     	

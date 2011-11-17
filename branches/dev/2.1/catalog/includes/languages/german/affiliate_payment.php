@@ -26,7 +26,6 @@ define('TEXT_NO_PAYMENTS', 'Bis jetzt wurden noch keine Provisionszahlungen verz
 define('TEXT_CLICKS_1', 'Klicken Sie auf');
 define('TEXT_CLICKS_2', ' um eine Beschreibung jeder Kategorie zu sehen.');
 
-define('HEADING_PAYMENT_HELP', 'Affiliate Hilfe');
 define('HEADING_DATE_HELP', 'Datum Hilfe');
 define('TEXT_DATE_HELP', '<i>Datum</i> zeigt an, wann die Zahlung an den Affiliate erfolgt ist.');
 define('HEADING_PAYMENT_ID_HELP', 'Zahlungs-ID Hilfe');

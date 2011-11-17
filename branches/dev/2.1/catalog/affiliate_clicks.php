@@ -39,7 +39,7 @@ $Id$
   $affiliate_clickthroughs_numrows = tep_db_fetch_array($affiliate_clickthroughs_query);
   $affiliate_clickthroughs_numrows =$affiliate_clickthroughs_numrows['count'];
 
-  $content = affiliate_clicks;
+  $content = 'affiliate_clicks';
    
   include (bts_select('main')); // BTSv1.5
 

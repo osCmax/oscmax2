@@ -22,7 +22,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
 	ajax_get_zones_html(tep_db_prepare_input($_POST['country']), true);
 } else {
   // -Country-State Selector
-  $details == 'true';
+  $details = 'true';
   if (!tep_session_is_registered('affiliate_id')) {
     $navigation->set_snapshot();
     tep_redirect(tep_href_link(FILENAME_AFFILIATE, '', 'SSL'));
@@ -240,13 +240,13 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
 // -Country-State Selector
 // BOF: MOD - Country-State Selector
  }
-if ($_POST['action'] == 'refresh') {$state = '';}
-if (!isset($country)){$country = DEFAULT_COUNTRY;}
+if (isset($_POST['action']) && $_POST['action'] == 'refresh') { $state = ''; }
+if (!isset($country)) { $country = DEFAULT_COUNTRY; }
 // EOF: MOD - Country-State Selector
   $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_AFFILIATE_DETAILS, '', 'SSL'));
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_AFFILIATE_DETAILS, '', 'SSL'));
 
-  $content = affiliate_details;
+  $content = 'affiliate_details';
   include (bts_select('main')); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');

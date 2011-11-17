@@ -22,7 +22,7 @@ $Id$
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_AFFILIATE_BANNERS_TEXT));
 
   $affiliate_banners_values = tep_db_query("select * from " . TABLE_AFFILIATE_BANNERS . " order by affiliate_banners_title");
-  $content = affiliate_banners_text; 
+  $content = 'affiliate_banners_text'; 
   include (bts_select('main')); // BTSv1.5
 
   require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

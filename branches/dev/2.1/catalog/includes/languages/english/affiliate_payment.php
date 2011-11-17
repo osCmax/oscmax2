@@ -26,7 +26,6 @@ define('TEXT_NO_PAYMENTS', 'No payments have been recorded yet.');
 define('TEXT_CLICKS_1', 'Click on the');
 define('TEXT_CLICKS_2', ' to see a description of each category.');
 
-define('HEADING_PAYMENT_HELP', 'Affiliate Help');
 define('HEADING_DATE_HELP', 'Date Help');
 define('TEXT_DATE_HELP', '<i>Date</i> represents the date of the payment made to the affiliate.');
 define('HEADING_PAYMENT_ID_HELP', 'Payment ID Help');

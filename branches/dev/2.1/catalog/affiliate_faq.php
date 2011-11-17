@@ -26,7 +26,7 @@ $Id$
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_AFFILIATE_FAQ));
 
-  $content = affiliate_faq; 
+  $content = 'affiliate_faq'; 
 
   include (bts_select('main')); // BTSv1.5
 

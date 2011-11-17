@@ -37,7 +37,7 @@ $Id$
 
   $affiliate_payment_split = new splitPageResults($affiliate_payment_raw, MAX_CATALOG_DISPLAY_SEARCH_RESULTS);
 
-  $content = affiliate_payment; 
+  $content = 'affiliate_payment'; 
 
   include (bts_select('main')); // BTSv1.5
 

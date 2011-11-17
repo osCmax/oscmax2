@@ -33,7 +33,7 @@ $Id$
       <tr>
         <td><table width="100%" align="center" border="0" cellpadding="4" cellspacing="0"><td>
           <tr>
-            <td class="infoBoxHeading" align="center"><?php echo TEXT_AFFILIATE_INDIVIDUAL_BANNER . ' ' . $affiliate_banners['affiliate_banners_title']; ?></td>
+            <td class="infoBoxHeading" align="center"><?php echo TEXT_AFFILIATE_INDIVIDUAL_BANNER . ' ' . (isset($affiliate_banners['affiliate_banners_title']) ? $affiliate_banners['affiliate_banners_title'] : ''); ?></td>
           </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -48,7 +48,7 @@ $Id$
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
 <?php
-if (tep_not_null($_POST['individual_banner_id']) || tep_not_null($_GET['individual_banner_id'])) {
+if (isset($_POST['individual_banner_id']) && tep_not_null($_POST['individual_banner_id']) || isset($_GET['individual_banner_id']) && tep_not_null($_GET['individual_banner_id'])) {
   if (tep_not_null($_POST['individual_banner_id'])) $individual_banner_id = $_POST['individual_banner_id'];
     if ($_GET['individual_banner_id']) $individual_banner_id = $_GET['individual_banner_id'];
     $affiliate_pbanners_values = tep_db_query("select c.categories_image, cd.categories_name from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . $individual_banner_id . "' and cd.categories_id = '" . $individual_banner_id . "' and cd.language_id = '" . $languages_id . "'");

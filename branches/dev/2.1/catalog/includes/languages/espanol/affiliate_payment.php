@@ -26,7 +26,6 @@ define('TEXT_NO_PAYMENTS','No se ha registrado ningún pago todavía.');
 define('TEXT_CLICKS_1','Haga clic en el');
 define('TEXT_CLICKS_2',' para ver una descripción de cada categoría.');
 
-define('HEADING_PAYMENT_HELP','Ayuda para afiliados');
 define('HEADING_DATE_HELP','Ayuda de fecha');
 define('TEXT_DATE_HELP','<i>Fecha</i> representa la fecha del pago realizado al afiliado.');
 define('HEADING_PAYMENT_ID_HELP','Ayuda de nº de pago');

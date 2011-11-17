@@ -21,7 +21,7 @@ $Id$
 								   tep_admin_jqmenu(FILENAME_CONFIGURATION_GZIP, BOX_CONFIGURATION_GZIP, 'TOP') .
 								   tep_admin_jqmenu(FILENAME_CONFIGURATION_LOGGING_CACHE, BOX_CONFIGURATION_LOGGING_CACHE, 'TOP', 'submenu') . '<ul>' .
 								     tep_admin_jqmenu(FILENAME_CONFIGURATION_LOGGING_CACHE, BOX_CONFIGURATION_LOGGING, 'TOP') .
-									 tep_admin_jqmenu(FILENAME_CONFIGURATION_CACHE, BOX_CONFIGURATION_CACHE, 'TOP') .
+									 tep_admin_jqmenu(FILENAME_CONFIGURATION_CACHER, BOX_CONFIGURATION_CACHE, 'TOP') .
 									 tep_admin_jqmenu(FILENAME_CONFIGURATION_PAGE_CACHE, BOX_CONFIGURATION_PAGE_CACHE, 'TOP') .
 								     tep_admin_jqmenu(FILENAME_CACHE, BOX_TOOLS_CACHE, 'TOP', '') .
  								   '</ul>' .

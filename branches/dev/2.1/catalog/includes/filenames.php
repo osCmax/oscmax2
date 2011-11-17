@@ -258,4 +258,8 @@ $Id$
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
 define('FILENAME_STATS_CREDITS', 'stats_credits.php');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+
+// Configuration Cache modification start
+define('FILENAME_CONFIGURATION_CACHE', 'cache/cachefile.inc.php') ; 
+// Configuration Cache modification end
 ?>

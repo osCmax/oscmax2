@@ -64,10 +64,15 @@ $Id$
   tep_db_connect() or die('Unable to connect to database server!');
 
 // set application wide parameters
-  $configuration_query = tep_db_query('select distinct configuration_key as cfgKey, configuration_value as cfgValue from ' . TABLE_CONFIGURATION);
-  while ($configuration = tep_db_fetch_array($configuration_query)) {
-    define($configuration['cfgKey'], $configuration['cfgValue']);
-  }
+//  $configuration_query = tep_db_query('select distinct configuration_key as cfgKey, configuration_value as cfgValue from ' . TABLE_CONFIGURATION);
+//  while ($configuration = tep_db_fetch_array($configuration_query)) {
+//    define($configuration['cfgKey'], $configuration['cfgValue']);
+//  }
+
+// set application wide parameters
+// Configuration Cache modification start
+  require ('includes/configuration_cache_read.php');
+// Configuration Cache modification end
 
 // define our general functions used application-wide
   require(DIR_WS_FUNCTIONS . 'general.php');

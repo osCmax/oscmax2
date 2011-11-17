@@ -54,6 +54,10 @@ $Id$
 //End of Set time of maintenance start 
 // EOF: MOD - Down for Maintenance
 
+// Configuration Cache modification start
+        require ('includes/configuration_cache.php');
+// Configuration Cache modification end
+
         tep_redirect(tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cID));
         break;
     }

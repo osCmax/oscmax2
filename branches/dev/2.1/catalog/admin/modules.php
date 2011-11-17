@@ -59,6 +59,11 @@ $Id$
 // EOF: LINES ADDED
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . $value . "' where configuration_key = '" . $key . "'");
         }
+		
+		// Configuration Cache modification start
+        require ('includes/configuration_cache.php');
+        // Configuration Cache modification end
+		
         tep_redirect(tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $_GET['module']));
         break;
       case 'install':
@@ -203,9 +208,15 @@ $Id$
     $check = tep_db_fetch_array($check_query);
     if ($check['configuration_value'] != implode(';', $installed_modules)) {
       tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . implode(';', $installed_modules) . "', last_modified = now() where configuration_key = '" . $module_key . "'");
+	  // Configuration Cache modification start
+      require ('includes/configuration_cache.php');
+      // Configuration Cache modification end
     }
   } else {
     tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Installed Modules', '" . $module_key . "', '" . implode(';', $installed_modules) . "', 'This is automatically updated. No need to edit.', '6', '0', now())");
+	// Configuration Cache modification start
+    require ('includes/configuration_cache.php');
+    // Configuration Cache modification end
   }
 ?>
               <tr>

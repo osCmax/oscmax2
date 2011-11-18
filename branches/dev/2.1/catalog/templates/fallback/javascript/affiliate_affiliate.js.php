@@ -14,11 +14,13 @@ $Id$
 <script type="text/javascript" language="javascript" src="ext/jQuery/jQuery.js"></script>
 <script type="text/javascript" language="javascript" src="ext/jQuery/jQuery.ui.js"></script>
 
+<script type="text/javascript" language="javascript" src="<?php echo DIR_WS_TEMPLATES; ?>javascript/jqprint.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#conditions').each(function() {
 		var $link = $(this);
-		var $dialog = $('<div><\/div>')
+		var $dialog = $('<div id="terms"><\/div>')
 			.load($link.attr('href'))
 			.dialog({
 				autoOpen: false,
@@ -26,9 +28,10 @@ $(document).ready(function(){
 				width: 700,
 				height: 400,
 				modal: true,
-				buttons: { "Ok": function() { 
-				  $(this).dialog("close"); 
-				} }
+				buttons: { 
+				"Ok": function() { $(this).dialog("close"); },
+				"Print": function() { $("#terms").jqprint(); }
+				}
 			});
 
 		$link.click(function() {

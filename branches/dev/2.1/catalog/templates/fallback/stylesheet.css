@@ -150,6 +150,7 @@ SPAN.errorText { font-family: Verdana, Arial, sans-serif; color: #ff0000; }
 
 /* TAB CODE FOR PRODUCT.INFO.TPL.PHP PAGE by PGM*/
 /*semantic tabs*/
+#tab1, #tab2, #tab3, #tab4, #tab5, #tab6 { display:none; }
 .panel { border: 1px solid #dddddd; padding: 5px; font-family: Verdana, Arial, sans-serif; font-size: 12px; background-color: #ffffff; }
 .panel h4 { display:none; }
 ul.semtabs { font-family: Verdana, Arial, sans-serif; font-size: 12px; margin:0; clear:both; height:25px; padding-left: 0px; border-left: 1px solid #dddddd; list-style:none !important; }

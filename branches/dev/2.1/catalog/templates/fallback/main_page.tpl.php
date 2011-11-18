@@ -51,8 +51,13 @@ CanonicalLink( $xhtml = false, 'SSL' );
 
 if ( defined('FWR_SUCKERTREE_MENU_ON') && FWR_SUCKERTREE_MENU_ON === 'true' )
 echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet', 'fwr_suckertree_css_menu.css')) . '">';
+
+// Below is a work around to allow conditional css when javascript is disabled for product tabs.
 ?>
- 
+<script type="text/javascript">document.write("<!"+"--");</script>
+<style type="text/css">#tab1, #tab2, #tab3, #tab4, #tab5, #tab6 { display:inline; } .panel h4 { display:inline }</style>
+<script type="text/javascript">document.write("--"+">");</script>
+
 </head>
 <body>
 

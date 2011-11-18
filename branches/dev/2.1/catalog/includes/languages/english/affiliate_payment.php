@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
+define('NAVBAR_TITLE', 'Payment Report');
 define('HEADING_TITLE', 'Affiliate Program: Payment');
 
 define('TEXT_AFFILIATE_HEADER', 'Your Payments:');

@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
+define('NAVBAR_TITLE', 'Clickthrough Report');
 define('HEADING_TITLE', 'Affiliate Program: Clickthroughs');
 
 define('TABLE_HEADING_DATE', 'Date');

@@ -243,7 +243,7 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
 if (isset($_POST['action']) && $_POST['action'] == 'refresh') { $state = ''; }
 if (!isset($country)) { $country = DEFAULT_COUNTRY; }
 // EOF: MOD - Country-State Selector
-  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_AFFILIATE_DETAILS, '', 'SSL'));
+
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_AFFILIATE_DETAILS, '', 'SSL'));
 
   $content = 'affiliate_details';

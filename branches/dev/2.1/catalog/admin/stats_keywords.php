@@ -39,7 +39,7 @@
    header('location: ' . tep_href_link('stats_keywords.php', 'action=' . BUTTON_VIEW_WORD_LIST . ''));    	  	
   }  
   
-  if ($_GET['action'] == 'Delete') {
+  if ($_GET['action'] == BUTTON_DELETE) {
 	tep_db_query("delete from search_queries_sorted");
 	header('location: ' . tep_href_link('stats_keywords.php', '')); 
   } // delete db					
@@ -226,7 +226,7 @@ $pw_words = tep_db_query($pw_word_sql);
     $contents[] = array('align' => 'center', 'text'  => '<input type="submit" name="update" value="' . BUTTON_UPDATE_WORD_LIST . '">');
     $contents[] = array('text'  =>  tep_draw_separator());
     $contents[] = array('text'  => '<br>' . SIDEBAR_INFO_2);
-    $contents[] = array('align' => 'center', 'text'  => '<input type="submit" value="' . BUTTON_DELETE . '" name="action">');
+    $contents[] = array('align' => 'center', 'text'  => '<input type="submit" name="action" value="' . BUTTON_DELETE . '">');
     $contents[] = array('text'  =>  tep_draw_separator());
     $contents[] = array('text'  => SIDEBAR_INFO_3);
     $contents[] = array('align' => 'center', 'text'  => '<input type="submit" name="action" value="' . BUTTON_VIEW_WORD_LIST . '">');

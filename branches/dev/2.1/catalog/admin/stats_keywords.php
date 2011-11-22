@@ -164,19 +164,19 @@ $pw_words = tep_db_query($pw_word_sql);
     <?php } //end 'if' switch for view word list
     
     if ($_GET['sortorder'] == 'Sort By Name') {
-	  $name_icon = tep_image_button('ic_down.gif', 'Sort');
+	  $name_icon = tep_image_button('ic_down.gif', BUTTON_SORT_NAME);
 	  $number_icon = '';
 	} else {
 	  $name_icon = '';
-	  $number_icon = tep_image_button('ic_down.gif', 'Sort');
+	  $number_icon = tep_image_button('ic_down.gif', BUTTON_SORT_TOTAL);
 	}
     
     if(!isset($_GET['action']) && $_GET['action'] != BUTTON_VIEW_WORD_LIST){
     	?>
     	<table border="0" cellpadding="2" cellspacing="0" width="100%">
   <tr class="dataTableHeadingRow">
-    <td class="dataTableHeadingContent"><a href="<?php echo tep_href_link(FILENAME_KEYWORDS, 'sortorder=Sort+By+Name'); ?>"><b><?php echo KEYWORD_TITLE . '&nbsp;' . $name_icon; ?></b></a></td>
-    <td class="dataTableHeadingContent" width="100" align="center"><a href="<?php echo tep_href_link(FILENAME_KEYWORDS, 'sortorder=Sort+By+Totals'); ?>"><b><?php echo KEYWORD_TITLE2 . '&nbsp;' . $number_icon; ?></b></a></td>
+    <td class="dataTableHeadingContent"><a href="<?php echo tep_href_link(FILENAME_KEYWORDS, 'sortorder=' . BUTTON_SORT_NAME); ?>"><b><?php echo KEYWORD_TITLE . '&nbsp;' . $name_icon; ?></b></a></td>
+    <td class="dataTableHeadingContent" width="100" align="center"><a href="<?php echo tep_href_link(FILENAME_KEYWORDS, 'sortorder=' . BUTTON_SORT_TOTAL); ?>"><b><?php echo KEYWORD_TITLE2 . '&nbsp;' . $number_icon; ?></b></a></td>
   </tr>
 <?php
 

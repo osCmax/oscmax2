@@ -24,6 +24,7 @@ $Id$
   if (function_exists('ini_get') && (PHP_VERSION < 4.3) && ((int)ini_get('register_globals') == 0)) {
     $compat_register_globals = false;
   }
+
 ?>
 
 <div id="menublock">
@@ -43,7 +44,7 @@ $Id$
         <tr>
           <td><b><?php echo TEXT_PHP_VERSION; ?></b></td>
           <td align="right"><?php echo PHP_VERSION; ?></td>
-          <td align="right" width="25"><img src="images/<?php echo ((PHP_VERSION >= 4) ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
+          <td align="right" width="25"><img src="images/<?php echo ((strnatcmp(phpversion(),'5.2.0') >= 0) ? 'tick.png' : 'cross.png'); ?>" border="0" width="16" height="16" alt=""></td>
         </tr>
       </table>
 
@@ -201,9 +202,9 @@ $Id$
 <?php
   }
 
-  if ((sizeof($configfile_array) > 0) || (sizeof($warning_array) > 0)) {
+  if ((sizeof($configfile_array) > 0) || (sizeof($warning_array) > 0) || (strnatcmp(phpversion(),'5.2.0') <= 0) ) {
 	  
-  echo TEXT_CORRECT_ERROR;
+    echo TEXT_CORRECT_ERROR;
 
     if (sizeof($warning_array) > 0) {
       echo TEXT_RESTART_WEB_SERVER_ERROR;

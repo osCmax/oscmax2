@@ -50,10 +50,10 @@ define('TEXT_BANNERS_BANNER_CLICKS', 'Clics');
 define('TEXT_INFO_DELETE_INTRO', '¿Estás seguro que quieres eliminar este banner?');
 define('TEXT_INFO_DELETE_IMAGE', 'Borrar imagen');
 
-define('SUCCESS_BANNER_INSERTED', 'Corecto: Se ha añadido el banner.');
-define('SUCCESS_BANNER_UPDATED', 'Corecto: Se ha actualizado el banner.');
-define('SUCCESS_BANNER_REMOVED', 'Corecto: Se ha eliminado el banner.');
-define('SUCCESS_BANNER_STATUS_UPDATED', 'Corecto: El estado del banner se ha actualizado.');
+define('SUCCESS_BANNER_INSERTED', 'Correcto: Se ha añadido el banner.');
+define('SUCCESS_BANNER_UPDATED', 'Correcto: Se ha actualizado el banner.');
+define('SUCCESS_BANNER_REMOVED', 'Correcto: Se ha eliminado el banner.');
+define('SUCCESS_BANNER_STATUS_UPDATED', 'Correcto: El estado del banner se ha actualizado.');
 
 define('ERROR_BANNER_TITLE_REQUIRED', 'Error: El título del banner es obligatorio.');
 define('ERROR_BANNER_GROUP_REQUIRED', 'Error: El grupo del banner es obligatorio.');

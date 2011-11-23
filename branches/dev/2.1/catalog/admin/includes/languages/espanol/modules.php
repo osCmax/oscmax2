@@ -12,7 +12,7 @@ $Id$
 
 define('HEADING_TITLE_MODULES_PAYMENT', 'Módulos de pago');
 define('HEADING_TITLE_MODULES_SHIPPING', 'Módulos de envio');
-define('HEADING_TITLE_MODULES_ORDER_TOTAL', 'Módules de totalización');
+define('HEADING_TITLE_MODULES_ORDER_TOTAL', 'Módulos de totalización');
 
 define('TABLE_HEADING_MODULES', 'Módulos');
 define('TABLE_HEADING_SORT_ORDER', 'Orden');

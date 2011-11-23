@@ -10,8 +10,8 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE','Programa de afiliados');
-define('HEADING_TITLE','Programa de afiliados: Informe de clics');
+define('NAVBAR_TITLE','Informe de clics');
+define('HEADING_TITLE','Programa de afiliados: Clics');
 
 define('TABLE_HEADING_DATE','Fecha');
 define('TABLE_HEADING_REFFERED','Origen');

@@ -129,6 +129,7 @@ define('BOX_HEADING_MAILCHIMP', 'Boletín');
 define('MAILCHIMP_INTRO_TEXT', 'Si desea suscribirse a nuestro boletín, por favor introduzca aquí su email:');
 define('MAILCHIMP_INTRO_TEXT_SUBSCRIBED', 'Actualmente se encuentra suscrito a nuestro boletín');
 define('MAILCHIMP_INTRO_TEXT_UNSUBSCRIBED', 'Si desea suscribirse a nuestro boletín, por favor introduzca aquí su email:');
+define('MAILCHIMP_EXISTING_USER_UNSUBSCRIBED', 'Actualmente <strong>no</strong> se encuentra suscrito a nuestro boletín');
 define('MAILCHIMP_HTML', 'HTML');
 define('MAILCHIMP_TEXT', 'Texto');
 define('MAILCHIMP_MISSING_INTRO', 'La información en la configuración de Mailchimp no está completa. <br><br><b>Faltan los parámetros:</b>');
@@ -137,6 +138,8 @@ define('MAILCHIMP_MISSING_API', 'API Key');
 define('MAILCHIMP_MISSING_ID', 'List ID');
 define('MAILCHIMP_MISSING_URL', 'List URL');
 define('MAILCHIMP_MISSING_U', 'U value');
+define('IMAGE_BUTTON_UNSUBSCRIBE', 'Cancelar suscripción');
+define('IMAGE_BUTTON_SUBSCRIBE', 'Suscribirse');
 
 // LINE ADDED: MOD - allprods modification
 define('BOX_INFORMATION_ALLPRODS', 'Vea todos los productos');
@@ -471,4 +474,6 @@ define('TEXT_QUESTION_PRICE_ENQUIRY', 'Consulta%20de%20precio');
 define('TEXT_QUESTION_PRODUCT_NAME', 'Nombre%20del%20producto:');
 
 define('DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'NOTA: Las descargas no están disponibles hasta que no se ha confirmado el pago.');
+
+define('TEXT_REPLACEMENT_SUGGESTION', 'Quiso decir: ');
 ?>

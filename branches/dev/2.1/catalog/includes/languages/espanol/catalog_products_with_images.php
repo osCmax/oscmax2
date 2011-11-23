@@ -21,7 +21,7 @@ define('TABLE_HEADING_PRODUCTS', 'Nombre');
 define('TABLE_HEADING_DESCRIPTION', 'Descripción');
 define('TABLE_HEADING_OPTIONS','Opciones');
 define('TABLE_HEADING_CATEGORIES', 'Categoría');
-define('TABLE_HEADING_MODEL', 'Modelo');
+define('TABLE_HEADING_MODEL', 'Ref.');
 define('TABLE_HEADING_UPC', 'UPC');
 define('TABLE_HEADING_QUANTITY', 'Cantidad');
 define('TABLE_HEADING_WEIGHT', 'Peso');

@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE','Programa de afiliados');
+define('NAVBAR_TITLE','Informe de ventas');
 define('HEADING_TITLE','Programa de afiliados: Ventas');
 
 define('TABLE_HEADING_DATE','Fecha');

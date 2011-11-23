@@ -28,7 +28,7 @@ define('TEXT_LINK_SORT_PRODUCTS', '<a href="%s">Pulsa aquí</a> para ordenar los 
 
 define('TEXT_CROSS_SELL_ARTICLES', 'Relacionar productos con noticias');
 define('TEXT_ARTICLE_SELECT', 'Por favor selecciona una noticia a la que le quieras relacionar productos pulsando en una fila.<br><br>  Si quieres cambiar el orden en que se muestran los productos, por favor pulsa el enlace <b>Ordenar</b> en la columna a la derecha.');
-define('TEXT_ADD_REMOVE', 'Añadir/Quitar');
+define('TEXT_ADD_REMOVE', 'Añadir');
 define('TEXT_SORT_ORDER', 'Ordenar');
 define('TEXT_DBASE_UPDATED', 'Relacionar productos con noticias: Base de datos actualizada');
 define('TEXT_CHANGES_SAVED', 'Se han guardado los acambios en la base de datos, por favor vuelve a la página principal o pulsa el enlace para establecer el orden en que se listan los productos relacionados.');

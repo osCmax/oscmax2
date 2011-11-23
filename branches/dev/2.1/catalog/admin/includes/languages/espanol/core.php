@@ -23,7 +23,7 @@ define('BOX_HEADING_ADMINISTRATOR', 'Administrador');
 define('BOX_ADMINISTRATOR_MEMBERS', 'Miembros administración');
 define('BOX_ADMINISTRATOR_MEMBER', 'Miembros');
 define('BOX_ADMINISTRATOR_BOXES', 'Acceso a archivos');
-define('BOX_ADMINISTRATOR_UPGRADE', 'Upgrade System');
+define('BOX_ADMINISTRATOR_UPGRADE', 'Actualizar sistema');
 define('BOX_ADMIN_GROUPS', 'Grupos administración');
 define('BOX_MERCHANT_INFO', 'Aplicación Merchant');
 define('BOX_PAYPAL_INFO', 'Registro Paypal');
@@ -259,6 +259,7 @@ define('BOX_TOOLS_UPS_BOXES_USED', 'Cajas UPS usadas');
 define('BOX_TOOLS_QUICK_LINKS', 'Enlaces rápidos');
 define('BOX_TOOLS_SLIDESHOW', 'Imágenes presentación');
 define('BOX_TOOLS_REGEN', 'Administrador imágenes');
+define('BOX_REPORTS_KEYWORDS', 'Palabras clave de búsquedas');
 
 // localizaion box text in includes/boxes/localization.php
 define('BOX_HEADING_LOCALIZATION', 'Localización');

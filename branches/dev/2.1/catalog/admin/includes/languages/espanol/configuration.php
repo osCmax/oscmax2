@@ -687,6 +687,8 @@ define('CT_ORDER_EDITOR_USE_AJAX', '¿Permitir usar AJAX para actualizar los dato
 define('CD_ORDER_EDITOR_USE_AJAX', 'Esto se debe configurar como false si se está utilizando un navegador en el cual está deshabilitado JavaScript o no está disponible.');
 define('CT_ORDER_EDITOR_CREDIT_CARD', 'Selecciona la forma de pago de tarjeta de crédito');
 define('CD_ORDER_EDITOR_CREDIT_CARD', 'El editor de pedidos mostrará los campos de datos de tarjeta de crédito cuando esta forma de pago esté seleccionada.');
+define('CT_ORDER_EDITOR_DEFAULT_PAYMENT_METHOD', 'Selecciona la forma de pago predeterminada');
+define('CD_ORDER_EDITOR_DEFAULT_PAYMENT_METHOD', 'El editor de pedidos mostrará la forma de pago predeterminada.');
 
 // Configuration ID: 80 - Recover Cart Sales
 define('CT_RCS_BASE_DAYS', 'Días pasados considerados');

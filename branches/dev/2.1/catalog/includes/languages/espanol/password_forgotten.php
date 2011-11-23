@@ -11,7 +11,7 @@ $Id$
 */
 
 define('NAVBAR_TITLE_1', 'Iniciar sesión');
-define('NAVBAR_TITLE_2', 'Constraseña olvidada');
+define('NAVBAR_TITLE_2', 'Contraseña olvidada');
 
 define('HEADING_TITLE', 'He olvidado mi contraseña');
 

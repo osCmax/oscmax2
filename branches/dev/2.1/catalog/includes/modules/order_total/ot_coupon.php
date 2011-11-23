@@ -168,7 +168,7 @@ global $_POST, $customer_id, $currencies, $cc_id;
     $err_msg = ERROR_REDEEMED_AMOUNT_ZERO;
 	tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode($err_msg), 'SSL'));
     } else {
-      $err_msg = ERROR_REDEEMED_AMOUNT.$coupon_amount_out;
+      $err_msg = ERROR_REDEEMED_AMOUNT . urlencode($coupon_amount_out);
 	  tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_success='.$this->code.'&error=' . urlencode($err_msg), 'SSL'));
     }
     

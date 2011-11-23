@@ -163,7 +163,7 @@ $pw_words = tep_db_query($pw_word_sql);
 </table></form>
     <?php } //end 'if' switch for view word list
     
-    if ($_GET['sortorder'] == 'Sort By Name') {
+    if ($_GET['sortorder'] == BUTTON_SORT_NAME) {
 	  $name_icon = tep_image_button('ic_down.gif', BUTTON_SORT_NAME);
 	  $number_icon = '';
 	} else {

@@ -87,9 +87,9 @@ class PriceFormatterStore {
                for ($i = 0; $i < $no_of_new_prices ; $i++) {
                  if ($product_info[$x]['products_id'] == $new_prices[$i]['products_id'] ) {
 // customer group price can be NULL so use retail if empty
-                   if ((int)$new_prices[$i]['products_price'] > 0 ) {
+                   if ($new_prices[$i]['products_price'] > 0) {
                      $product_info[$x]['products_price'] = $new_prices[$i]['products_price'];
-                    }
+                   }
 // qty blocks already re-set to 1 above
                    if ((int)$new_prices[$i]['qtyBlocks'] > 1 ) {
                      $product_info[$x]['qtyBlocks'] = $new_prices[$i]['qtyBlocks'];

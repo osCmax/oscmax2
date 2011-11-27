@@ -169,7 +169,7 @@ $Id$
             <td valign="top">
               <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
-  $statuses_query = tep_db_query("select os.orders_status_name, osh.date_added, osh.comments from " . TABLE_ORDERS_STATUS . " os, " . TABLE_ORDERS_STATUS_HISTORY . " osh where osh.orders_id = '" . (int)$_GET['order_id'] . "' and osh.orders_status_id = os.orders_status_id and os.language_id = '" . (int)$languages_id . "' and os.public_flag = '1' order by osh.date_added");
+  $statuses_query = tep_db_query("select os.orders_status_name, osh.date_added, osh.comments from " . TABLE_ORDERS_STATUS . " os, " . TABLE_ORDERS_STATUS_HISTORY . " osh where osh.orders_id = '" . (int)$_GET['order_id'] . "' and osh.orders_status_id = os.orders_status_id and os.language_id = '" . (int)$languages_id . "' and os.public_flag = '1' and osh.customer_notified = '1' order by osh.date_added");
   while ($statuses = tep_db_fetch_array($statuses_query)) {
     echo '              <tr class="infoBoxContents">' . "\n" .
          '                <td class="main" valign="top" width="10%">' . tep_date_short($statuses['date_added']) . '</td>' . "\n" .

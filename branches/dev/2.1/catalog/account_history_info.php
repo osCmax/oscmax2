@@ -44,7 +44,7 @@ $Id$
           		tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . CUSTOMER_COMMENTS_NEW_STATUS_DL . "', last_modified = now() where orders_id = '" . (int)$oID . "'");
 
 // update the order comments in the database
-          		tep_db_query("insert into " . TABLE_ORDERS_STATUS_HISTORY . " (orders_id, orders_status_id, date_added, customer_notified, comments) values ('" . (int)$oID . "', '" . CUSTOMER_COMMENTS_NEW_STATUS_DL . "', now(), '" . tep_db_input($customer_notified) . "', '" . tep_db_input($comments)  . "')");
+          		tep_db_query("insert into " . TABLE_ORDERS_STATUS_HISTORY . " (orders_id, orders_status_id, date_added, customer_notified, comments) values ('" . (int)$oID . "', '" . CUSTOMER_COMMENTS_NEW_STATUS_DL . "', now(), '1', '" . tep_db_input($comments)  . "')");
 
           		$order_updated = true;
         	} else {
@@ -52,7 +52,7 @@ $Id$
           		tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . CUSTOMER_COMMENTS_NEW_STATUS . "', last_modified = now() where orders_id = '" . (int)$oID . "'");
 
 // update the order comments in the database
-          		tep_db_query("insert into " . TABLE_ORDERS_STATUS_HISTORY . " (orders_id, orders_status_id, date_added, customer_notified, comments) values ('" . (int)$oID . "', '" . CUSTOMER_COMMENTS_NEW_STATUS . "', now(), '" . tep_db_input($customer_notified) . "', '" . tep_db_input($comments)  . "')");
+          		tep_db_query("insert into " . TABLE_ORDERS_STATUS_HISTORY . " (orders_id, orders_status_id, date_added, customer_notified, comments) values ('" . (int)$oID . "', '" . CUSTOMER_COMMENTS_NEW_STATUS . "', now(), '1', '" . tep_db_input($comments)  . "')");
 
           		$order_updated = true;
 			}

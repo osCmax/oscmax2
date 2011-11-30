@@ -778,7 +778,7 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
 
 // add the articles name to the breadcrumb trail
   if (isset($_GET['articles_id'])) {
-    $article_query = tep_db_query("select articles_name from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$_GET['articles_id'] . "'");
+    $article_query = tep_db_query("select articles_name from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$_GET['articles_id'] . "' and language_id = '" . (int)$languages_id . "'");
     if (tep_db_num_rows($article_query)) {
       $article = tep_db_fetch_array($article_query);
       if (isset($_GET['authors_id'])) {

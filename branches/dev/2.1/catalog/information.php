@@ -17,16 +17,14 @@ $Id$
 
   require('includes/application_top.php');
   
-
-
+  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_INFORMATION);
+  
 	// Added for information pages
-	if(!isset($_GET['info_id']) || !tep_not_null($_GET['info_id']) || !is_numeric($_GET['info_id']) ) 
-	{
-		$title = 'Sorry. Page Not Found.';
-		$breadcrumb->add($INFO_TITLE, tep_href_link(FILENAME_INFORMATION, 'info_id=' . $_GET['info_id'], 'NONSSL'));
-	} 
-	else 
-	{
+	if (!isset($_GET['info_id']) || !tep_not_null($_GET['info_id']) || !is_numeric($_GET['info_id']) ) {
+		$title = INFORMATION_PAGE404_TITLE;
+		$page_description = INFORMATION_PAGE404_DESCRIPTION;
+		$breadcrumb->add($title);
+	} else {
 		$info_id = intval($_GET['info_id']);
 		$information_query = tep_db_query("SELECT information_title, information_description FROM " . TABLE_INFORMATION . " WHERE visible='1' AND information_id='" . $info_id . "' and language_id='" . (int)$languages_id ."'");
 		$information = tep_db_fetch_array($information_query);
@@ -34,18 +32,14 @@ $Id$
 		$page_description = stripslashes($information['information_description']);
 	
 		// Added as noticed by infopages module
-		if (!preg_match("/([\<])([^\>]{1,})*([\>])/i", $page_description)) 
-		{
+		if (!preg_match("/([\<])([^\>]{1,})*([\>])/i", $page_description)) {
 		  	$page_description = str_replace("\r\n", "<br>\r\n", $page_description); 
 		}
+		
 	  	$breadcrumb->add($title, tep_href_link(FILENAME_INFORMATION, 'info_id=' . $_GET['info_id'], 'NONSSL'));
 	}
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_INFORMATION);
-
-  //$breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_INFORMATION));
 
   $content = CONTENT_INFORMATION;
- // $content_template = TEMPLATENAME_SHIPPING;
 
   include (bts_select('main')); // BTSv1.5
 

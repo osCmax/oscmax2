@@ -126,6 +126,7 @@ define('BOX_HEADING_MAILCHIMP', 'Newsletter');
 define('MAILCHIMP_INTRO_TEXT', 'Wenn Sie unseren Newsletter abonnieren möchten, geben Sie bitte Ihre E-Mail-Adresse an:');
 define('MAILCHIMP_INTRO_TEXT_SUBSCRIBED', 'Sie haben unseren Newsletter derzeit abonniert');
 define('MAILCHIMP_INTRO_TEXT_UNSUBSCRIBED', 'Wenn Sie unseren Newsletter abonnieren möchten, geben Sie bitte Ihre E-Mail-Adresse an:');
+define('MAILCHIMP_EXISTING_USER_UNSUBSCRIBED', 'Sie haben unseren Newsletter derzeit <strong>nicht</strong> abonniert');
 define('MAILCHIMP_HTML', 'HTML');
 define('MAILCHIMP_TEXT', 'Text');
 define('MAILCHIMP_MISSING_INTRO', 'Die Angaben in Ihren Mailchimp Einstellungen sind nicht vollständig. <br><br><b>Folgende Angaben fehlen:</b>');
@@ -134,6 +135,8 @@ define('MAILCHIMP_MISSING_API', 'API Key');
 define('MAILCHIMP_MISSING_ID', 'List ID');
 define('MAILCHIMP_MISSING_URL', 'List URL');
 define('MAILCHIMP_MISSING_U', 'U value');
+define('IMAGE_BUTTON_UNSUBSCRIBE', 'Abmelden');
+define('IMAGE_BUTTON_SUBSCRIBE', 'Abonnieren');
 
 // LINE ADDED: MOD - allprods modification
 define('BOX_INFORMATION_ALLPRODS', 'Alle Produkte anzeigen');
@@ -458,4 +461,6 @@ define('TEXT_QUESTION_PRICE_ENQUIRY', 'Preisanfrage');
 define('TEXT_QUESTION_PRODUCT_NAME', 'Produktbezeichnung:');
 
 define('DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'HINWEIS: Downloads sind vor Bestätigung des Zahlungseinganges nicht verfügbar.');
+
+define('TEXT_REPLACEMENT_SUGGESTION', 'Meinten Sie: ');
 ?>

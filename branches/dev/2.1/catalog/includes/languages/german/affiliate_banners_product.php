@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliateprogramm');
+define('NAVBAR_TITLE', 'Produktbanner');
 define('HEADING_TITLE', 'Affiliateprogramm - Produktlinks');
 
 define('TEXT_AFFILIATE_NAME', 'Produktbanner:');

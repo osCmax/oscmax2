@@ -71,6 +71,8 @@ define('TEXT_DISPLAY_NUMBER_OF_MEMBERS', '<b>%d</b> bis <b>%d</b> (von <b>%d</b>
 // this may not work under win32 environments..
 
 ////
+
+
 setlocale(LC_TIME, 'de_DE.ISO_8859-1');
 define('DATE_FORMAT_SHORT', '%d.%m.%Y');  // this is used for strftime()
 define('DATE_FORMAT_LONG', '%A, %d %B %Y'); // this is used for strftime()
@@ -101,11 +103,53 @@ define('JS_POST_CODE', '* Die \'Postleitzahl\' mu&szlig; mindestens ' . ENTRY_PO
 define('ENTRY_SUBURB', 'Adresszeile 2:');
 define('ENTRY_SUBURB_ERROR', '');
 define('ENTRY_POST_CODE', 'Postleitzahl:');
+define('ENTRY_POST_CODE_TEXT', '&nbsp;<span class="errorText">*</span>');
 define('ENTRY_POST_CODE_ERROR', '&nbsp;<span class="errorText">mindestens ' . ENTRY_POSTCODE_MIN_LENGTH . ' Zeichen</span>');
 define('ENTRY_DATE_OF_BIRTH_ERROR', '&nbsp;<span class="errorText">(zB 21.05.1970)</span>');
 define('ENTRY_DATE_OF_BIRTH_TEXT', '&nbsp;<span class="errorText">*</span>&nbsp;(zB 21.05.1970)');
 define('ENTRY_STATE', 'Bundesland:');
+define('ENTRY_STATE_TEXT', '');
 define('ENTRY_STATE_ERROR', '&nbsp;<span class="errorText">notwendig</span>');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -278,8 +322,9 @@ define('BOX_TOOLS_UPS_BOXES_USED', 'UPS Sendungen');
 define('BOX_TOOLS_QUICK_LINKS', 'Schnelllinks');
 define('BOX_TOOLS_SLIDESHOW', 'Diashow Bilder');
 define('BOX_TOOLS_REGEN', 'Bildermanager');
+define('BOX_REPORTS_KEYWORDS', 'Suchbegriffe');
 
-// localizaion box text in includes/boxes/localization.php
+// localization box text in includes/boxes/localization.php
 define('BOX_HEADING_LOCALIZATION', 'Lokalisierung');
 define('BOX_LOCALIZATION_CURRENCIES', 'Währungen');
 define('BOX_LOCALIZATION_LANGUAGES', 'Sprachen');

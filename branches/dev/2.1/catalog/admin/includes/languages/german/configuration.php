@@ -259,7 +259,7 @@ define('CD_MODULE_ORDER_TOTAL_COUPON_INC_TAX', 'Steuer in der Berechnung berücks
 define('CT_MODULE_ORDER_TOTAL_COUPON_CALC_TAX', 'Steuer neu berechnen');
 define('CD_MODULE_ORDER_TOTAL_COUPON_CALC_TAX', 'Steuer neu berechnen');
 define('CT_MODULE_ORDER_TOTAL_COUPON_TAX_CLASS', 'Steuerklasse');
-define('CD_MODULE_ORDER_TOTAL_COUPON_TAX_CLASS', 'Use the following tax class when treating Discount Coupon as Credit Note.');
+define('CD_MODULE_ORDER_TOTAL_COUPON_TAX_CLASS', 'Diese Steuerklasse benutzen, wenn ein Koupon gutgeschrieben wird.');
 define('CT_MODULE_ORDER_TOTAL_GV_STATUS', 'Display Total');
 define('CD_MODULE_ORDER_TOTAL_GV_STATUS', 'Do you want to display the Gift Voucher value?');
 define('CT_MODULE_ORDER_TOTAL_GV_SORT_ORDER', 'Sort Order');
@@ -421,13 +421,13 @@ define('CT_EMAIL_LINEFEED', 'E-Mail Linefeeds');
 define('CD_EMAIL_LINEFEED', 'Defines the character sequence used to separate mail headers.');
 define('CT_EMAIL_USE_HTML', 'Benutze MIME HTML beim Versenden von E-Mails');
 define('CD_EMAIL_USE_HTML', 'E-Mails im HTML Format versenden');
-define('CT_ENTRY_EMAIL_ADDRESS_CHECK', 'Verify E-Mail Addresses Through DNS');
-define('CD_ENTRY_EMAIL_ADDRESS_CHECK', 'Verify e-mail address through a DNS server');
+define('CT_ENTRY_EMAIL_ADDRESS_CHECK', 'E-Mail-Adressen durch DNS überprüfen');
+define('CD_ENTRY_EMAIL_ADDRESS_CHECK', 'E-Mail-Adressen durch einen DNS-Server überprüfen');
 define('CT_SEND_EMAILS', 'E-Mails versenden');
 define('CD_SEND_EMAILS', 'E-Mails versenden');
 
 // Configuration ID: 13 - Download
-define('CT_DOWNLOAD_ENABLED', 'Enable download');
+define('CT_DOWNLOAD_ENABLED', 'Download aktivieren');
 define('CD_DOWNLOAD_ENABLED', 'Enable the products download functions.');
 define('CT_DOWNLOAD_BY_REDIRECT', 'Download by redirect');
 define('CD_DOWNLOAD_BY_REDIRECT', 'Use browser redirection for download. Disable on non-Unix systems.');
@@ -449,20 +449,20 @@ define('CT_GZIP_LEVEL', 'Kompressionsstärke');
 define('CD_GZIP_LEVEL', 'Geben Sie die Kompressionsstärke an: 0-9 (0 = Minimum - 9 = Maximum).');
 
 // Configuration ID: 15 - Sessions
-define('CT_SESSION_WRITE_DIRECTORY', 'Session Directory');
-define('CD_SESSION_WRITE_DIRECTORY', 'If sessions are file based store them in this directory.');
-define('CT_SESSION_FORCE_COOKIE_USE', 'Force Cookie Use');
-define('CD_SESSION_FORCE_COOKIE_USE', 'Force the use of sessions when cookies are only enabled.');
-define('CT_SESSION_CHECK_SSL_SESSION_ID', 'Check SSL Session ID');
-define('CD_SESSION_CHECK_SSL_SESSION_ID', 'Validate the SSL_SESSION_ID on every secure HTTPS page request.');
-define('CT_SESSION_CHECK_USER_AGENT', 'Check User Agent');
-define('CD_SESSION_CHECK_USER_AGENT', 'Validate the clients browser user agent on every page request.');
-define('CT_SESSION_CHECK_IP_ADDRESS', 'Check IP Address');
-define('CD_SESSION_CHECK_IP_ADDRESS', 'Validate the clients IP address on every page request.');
-define('CT_SESSION_BLOCK_SPIDERS', 'Prevent Spider Sessions');
-define('CD_SESSION_BLOCK_SPIDERS', 'Prevent known spiders from starting a session.');
-define('CT_SESSION_RECREATE', 'Recreate Session');
-define('CD_SESSION_RECREATE', 'Recreate the session to generate a new session ID when the customer logs on or creates an account (PHP >=4.1 needed).');
+define('CT_SESSION_WRITE_DIRECTORY', 'Session Verzeichnis');
+define('CD_SESSION_WRITE_DIRECTORY', 'Dateibasierte Sitzungen in diesem Verzeichnis speichern.');
+define('CT_SESSION_FORCE_COOKIE_USE', 'Benutzung von Cookies erzwingen');
+define('CD_SESSION_FORCE_COOKIE_USE', 'Die Benutzung von Sessions erzwingen, wenn Cookies aktiviert sind.');
+define('CT_SESSION_CHECK_SSL_SESSION_ID', 'SSL Session ID überprüfen');
+define('CD_SESSION_CHECK_SSL_SESSION_ID', 'Die SSL_SESSION_ID bei jeder HTTPS Seitenanforderung überprüfen.');
+define('CT_SESSION_CHECK_USER_AGENT', 'User Agent überprüfen');
+define('CD_SESSION_CHECK_USER_AGENT', 'Den User Agent des Kunden bei jeder Seitenanforderung überprüfen.');
+define('CT_SESSION_CHECK_IP_ADDRESS', 'IP Addresse überprüfen');
+define('CD_SESSION_CHECK_IP_ADDRESS', 'Die IP-Adresse des Kunden bei jeder Seitenanforderung überprüfen.');
+define('CT_SESSION_BLOCK_SPIDERS', 'Spider Sessions vermeiden');
+define('CD_SESSION_BLOCK_SPIDERS', 'Bekannte Spider vom starten einer Session abhalten.');
+define('CT_SESSION_RECREATE', 'Session wiederherstellen');
+define('CD_SESSION_RECREATE', 'Session wiederherstellen, um eine neue Session ID zu generieren, wenn sich der Kunde anmeldet oder ein Konto erstellt (PHP >=4.1 benötigt).');
 
 // Configuration ID: 16 - Site Maintenance
 define('CT_DOWN_FOR_MAINTENANCE', 'Wartungsmodus: EIN/AUS');
@@ -735,10 +735,10 @@ define('CT_RCS_REPORT_ODD_STYLE', 'Report Odd Row Style');
 define('CD_RCS_REPORT_ODD_STYLE', 'Style for odd rows in results report. Typical options are NULL (ie. no entry) and <i>attributes-odd</i>.');
 
 // Configuration ID: 85 - Google Analytics
-define('CT_GOOGLE_ANALYTICS_STATUS', 'Enable Google Analytics');
-define('CD_GOOGLE_ANALYTICS_STATUS', 'Enable Google Analytics?');
+define('CT_GOOGLE_ANALYTICS_STATUS', 'Google Analytics aktivieren');
+define('CD_GOOGLE_ANALYTICS_STATUS', 'Google Analytics aktivieren?');
 define('CT_GOOGLE_UA_CODE', 'Google Analytics UA Tracking Code');
-define('CD_GOOGLE_UA_CODE', 'Put in your Google Analytics Tracking Code');
+define('CD_GOOGLE_UA_CODE', 'Fügen Sie Ihren Google Analytics Tracking Code ein');
 define('CT_GOOGLE_SUBDOMAIN', 'Google Analytics Sub-Domain Setting');
 define('CD_GOOGLE_SUBDOMAIN', 'If your store is part of a subdomain eg. onlinestore.yourdomain.com put in your the domain name eg. <font color=red>.</font>yourdomain.com - if not type leave the default <font color=red>none</font>');
 

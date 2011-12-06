@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Affiliate-Zahlungen');
+define('HEADING_TITLE', 'Zahlungsbericht');
 define('HEADING_TITLE_SEARCH', 'Suchen:');
 define('HEADING_TITLE_STATUS','Status:');
 

@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliateprogramm');
+define('NAVBAR_TITLE', 'Kategorielink erstellen');
 define('HEADING_TITLE', 'Affiliateprogramm - Kategorielink erstellen');
 
 define('TEXT_AFFILIATE_NAME', 'Bannername:');

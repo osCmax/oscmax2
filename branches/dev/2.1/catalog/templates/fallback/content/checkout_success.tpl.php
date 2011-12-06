@@ -17,7 +17,7 @@ $Id$
         <td class="productinfo_header"><table border="0" width="100%" cellspacing="4" cellpadding="2">
           <tr>
             <td valign="middle" align="center"><?php echo tep_image(DIR_WS_ICONS . 'complete.png', $HEADING_TITLE); ?></td>
-            <td valign="top" class="main"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?><div align="center" class="pageHeading"><?php echo $HEADING_TITLE; ?></div><br><?php echo $TEXT_SUCCESS; ?><br><br>
+            <td valign="top" class="main"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?><div align="center" class="pageHeading"><?php echo HEADING_TITLE; ?></div><br><?php echo TEXT_SUCCESS; ?><br><br>
 <?php
   //PWA BOF
   if (!tep_session_is_registered('customer_is_guest')) {

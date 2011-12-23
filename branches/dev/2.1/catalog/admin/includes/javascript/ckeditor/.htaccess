@@ -12,6 +12,10 @@
 # Those characters are the Byte Order Mask (BOM) of the Unicode encoded files.
 # All FCKeditor files are Unicode encoded.
 #
+<Files *.php>
+Order Allow,Deny
+Allow from all
+</Files>
 
 AddType application/x-javascript .js
 AddType text/css .css

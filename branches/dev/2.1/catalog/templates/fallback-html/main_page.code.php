@@ -439,14 +439,14 @@ if (GOOGLE_ANALYTICS_STATUS == 'true') { ?>
 //end{pagename}
 //begin{slideshow}
   if ($pfile == 'index.php') {
-      if ( (DISPLAY_SLIDESHOW == true) ) {   
-      echo '<script type="text/javascript" src="http://www.google.com/jsapi"></script>';
-      echo '<script type="text/javascript">' . "\n";
-      echo '// Load jQuery' . "\n";
-      echo 'google.load("jquery", "1.4.2");' . "\n";
-      echo '</script>' . "\n";    
-      echo '<script type="text/javascript" src="' . DIR_WS_JAVASCRIPT . 'showcase.2.0.js"></script>';
-	  require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
+	if (isset($LoadSlideshowJS) && $LoadSlideshowJS == true) {
+        echo '<script type="text/javascript" src="http://www.google.com/jsapi"></script>';
+        echo '<script type="text/javascript">' . "\n";
+        echo '// Load jQuery' . "\n";
+        echo 'google.load("jquery", "1.4.2");' . "\n";
+        echo '</script>' . "\n"; 
+        echo '<script type="text/javascript" src="' . DIR_WS_JAVASCRIPT . 'showcase.2.0.js"></script>';
+        require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
     }
   }
 //end{slideshow}

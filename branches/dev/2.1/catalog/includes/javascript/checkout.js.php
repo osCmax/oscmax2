@@ -34,7 +34,7 @@ function CVVPopUpWindowEx(url) {
   var onePage = checkout;
   onePage.initializing = true;
   onePage.ajaxCharset = '<?php echo CHARSET;?>';
-  onePage.storeName = '<?php echo STORE_NAME; ?>';
+  onePage.storeName = '<?php echo htmlspecialchars(STORE_NAME,ENT_QUOTES); ?>';
   onePage.loggedIn = <?php echo (tep_session_is_registered('customer_id') ? 'true' : 'false');?>;
   onePage.autoshow = <?php echo ((ONEPAGE_AUTO_SHOW_BILLING_SHIPPING == 'False') ? 'false' : 'true');?>;
   onePage.stateEnabled = <?php echo (ACCOUNT_STATE == 'true' ? 'true' : 'false');?>;
@@ -261,7 +261,7 @@ $(document).ready(function (){
 								}, 5000);
 							}
 						},
-						errorMsg: 'There was an error logging in, please inform <?php echo STORE_NAME; ?> about this error.'
+						errorMsg: 'There was an error logging in, please inform <?php echo htmlspecialchars(STORE_NAME,ENT_QUOTES); ?> about this error.'
 					});
 				});
 			}
@@ -316,7 +316,7 @@ $(document).ready(function (){
 									onePage.updatePaymentMethods();
 								}
 							},
-							errorMsg: 'There was an error saving your address, please inform <?php echo STORE_NAME; ?> about this error.'
+							errorMsg: 'There was an error saving your address, please inform <?php echo htmlspecialchars(STORE_NAME,ENT_QUOTES); ?> about this error.'
 						});
 					}else if (action == 'addNewAddress'){
 						onePage.queueAjaxRequest({
@@ -328,7 +328,7 @@ $(document).ready(function (){
 							success: function (data){
 								onePage.loadAddressBook($this, addressType);
 							},
-							errorMsg: 'There was an error saving your address, please inform <?php echo STORE_NAME; ?> about this error.'
+							errorMsg: 'There was an error saving your address, please inform <?php echo htmlspecialchars(STORE_NAME,ENT_QUOTES); ?> about this error.'
 						});
 					}else if (action == 'saveAddress'){
 						onePage.queueAjaxRequest({
@@ -340,7 +340,7 @@ $(document).ready(function (){
 							success: function (data){
 								onePage.loadAddressBook($this, addressType);
 							},
-							errorMsg: 'There was an error saving your address, please inform <?php echo STORE_NAME; ?> about this error.'
+							errorMsg: 'There was an error saving your address, please inform <?php echo htmlspecialchars(STORE_NAME,ENT_QUOTES); ?> about this error.'
 						});
 					}
 				},
@@ -358,7 +358,7 @@ $(document).ready(function (){
 								onePage.addCountryAjax($('select[name="country"]', $this), 'state', 'stateCol')
 							}
 						},
-						errorMsg: 'There was an error loading new address form, please inform <?php echo STORE_NAME; ?> about this error.'
+						errorMsg: 'There was an error loading new address form, please inform <?php echo htmlspecialchars(STORE_NAME,ENT_QUOTES); ?> about this error.'
 					});
 				},
 				'<?php echo addslashes(WINDOW_BUTTON_EDIT_ADDRESS);?>': function (){
@@ -371,7 +371,7 @@ $(document).ready(function (){
 						success: function (data){
 							$this.html(data);
 						},
-						errorMsg: 'There was an error loading edit address form, please inform <?php echo STORE_NAME; ?> about this error.'
+						errorMsg: 'There was an error loading edit address form, please inform <?php echo htmlspecialchars(STORE_NAME,ENT_QUOTES); ?> about this error.'
 					});
 				}
 			}

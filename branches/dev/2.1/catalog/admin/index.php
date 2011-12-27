@@ -14,6 +14,9 @@ $Id$
   
   if (isset($_GET['setasdefault'])) {
     tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . $_GET['setasdefault'] . "' where configuration_key = 'INDEX_TAB'");
+	// Configuration Cache modification start
+    require ('includes/configuration_cache.php');
+    // Configuration Cache modification end
     tep_redirect(tep_href_link(FILENAME_DEFAULT));
   }
 

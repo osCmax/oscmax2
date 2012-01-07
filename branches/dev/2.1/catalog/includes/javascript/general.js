@@ -1,4 +1,3 @@
-<script language="javascript" type="text/javascript">
 /*
 $Id$
 
@@ -9,7 +8,6 @@ $Id$
 
   Released under the GNU General Public License
 */
-</script>
 function SetFocus(TargetFormName) {
   var target = 0;
   if (TargetFormName != "") {

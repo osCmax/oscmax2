@@ -139,13 +139,16 @@ function loadSerializedFile($cachepath, $languages_id, $filename) {
  * @param can be user defined $order_by
  * @return Returns the SQL result
  */
+// Bug Fix #964 - added categories_hide_from_groups section to query. 
 function categoriesFullScan($order_by, $languages_id){
+global $customer_group_id;
   $sql = "
 SELECT c.categories_id, c.parent_id, c.sort_order, cDescr.categories_name
 FROM " . TABLE_CATEGORIES . " AS c
 INNER JOIN " . TABLE_CATEGORIES_DESCRIPTION . " AS cDescr
 WHERE c.categories_id = cDescr.categories_id
-AND cDescr.language_id = '" . (int)$languages_id . "'
+AND (cDescr.language_id = '" . (int)$languages_id . "' 
+AND find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0)
 ORDER BY c.parent_id, $order_by, cDescr.categories_name
 DESC";
 

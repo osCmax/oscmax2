@@ -484,7 +484,8 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 
 <?php
   //----- new_topic_preview -----
-  } elseif ($action == 'new_topic_preview') {
+  // } elseif ($action == 'new_topic_preview') {
+  } elseif ($_GET['action'] == 'new_topic_preview') {
     if ($_POST) {
       $tInfo = new objectInfo($_POST);
       $topics_name = $_POST['topics_name'];
@@ -498,6 +499,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
     }
 
     $form_action = ($_GET['tID']) ? 'update_topic' : 'insert_topic';
+    echo tep_draw_form($form_action, FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $_GET['tID'] . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
 
     $languages = tep_get_languages();
     for ($i=0; $i<sizeof($languages); $i++) {
@@ -577,7 +579,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $_GET['tID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
 ?></td>
             </tr>
-            
+     </form>       
             
             
 <?php

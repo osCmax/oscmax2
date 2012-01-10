@@ -625,7 +625,7 @@ define('CT_PRODINFO_ATTRIBUTE_MARK_OUT_OF_STOCK', 'Ausverkaufte Attribute markie
 define('CD_PRODINFO_ATTRIBUTE_MARK_OUT_OF_STOCK', 'Wie bzw. wo sollen ausverkaufte Attribute als ausverkauft markiert werden.');
 define('CT_PRODINFO_ATTRIBUTE_SHOW_OUT_OF_STOCK', 'Ausverkaufte Attribute anzeigen');
 define('CD_PRODINFO_ATTRIBUTE_SHOW_OUT_OF_STOCK', 'Möchten Sie ausverkaufte Attribute anzeigen?');
-define('CT_PRODINFO_ATTRIBUTE_PLUGIN', 'Product Info Attribute Display Plugin');
+define('CT_PRODINFO_ATTRIBUTE_PLUGIN', 'Produkt Info Attribut Display Plugin');
 define('CD_PRODINFO_ATTRIBUTE_PLUGIN', 'Das Plugin zeigt Attribute auf der Produktinformationsseite an.');
 
 // Configuration ID: 55 - Page Cache Settings
@@ -643,10 +643,10 @@ define('CT_PAGE_CACHE_UPDATE_CONFIG_FILES', 'Config Cache Update File?');
 define('CD_PAGE_CACHE_UPDATE_CONFIG_FILES', 'If you have a configuration cache contribution enter the FULL path to the update file.<br><br>Contribution by: <b>Chemo</b>');
 
 // Configuration ID: 60 - SEO URLs 5
-define('CT_SEO_URLS_ENABLED', 'Enable SEO URLs 5?');
-define('CD_SEO_URLS_ENABLED', 'Turn Seo Urls 5 on');
-define('CT_SEO_URLS_ADD_CPATH_TO_PRODUCT_URLS', 'Add cPath to product URLs?');
-define('CD_SEO_URLS_ADD_CPATH_TO_PRODUCT_URLS', 'This setting will append the cPath to the end of product URLs (i.e. - some-product-p-1.html?cPath=xx).');
+define('CT_SEO_URLS_ENABLED', 'SEO URLs 5 aktivieren?');
+define('CD_SEO_URLS_ENABLED', 'Seo Urls 5 aktivieren');
+define('CT_SEO_URLS_ADD_CPATH_TO_PRODUCT_URLS', 'cPath zu den Produkt URLs hinzufügen?');
+define('CD_SEO_URLS_ADD_CPATH_TO_PRODUCT_URLS', 'Diese Einstellung fügt am Ende der Produkt-URLs den cPath hinzu (zB - irgendein-produkt-p-1.html?cPath=xx).');
 define('CT_SEO_URLS_ADD_CAT_PARENT', 'Add category parent to beginning of URLs?');
 define('CD_SEO_URLS_ADD_CAT_PARENT', 'This setting will add the category parent name to the beginning of the category URLs (i.e. - parent-category-c-1.html).');
 define('CT_SEO_URLS_FILTER_SHORT_WORDS', 'Filter Short Words');
@@ -739,41 +739,41 @@ define('CT_GOOGLE_ANALYTICS_STATUS', 'Google Analytics aktivieren');
 define('CD_GOOGLE_ANALYTICS_STATUS', 'Google Analytics aktivieren?');
 define('CT_GOOGLE_UA_CODE', 'Google Analytics UA Tracking Code');
 define('CD_GOOGLE_UA_CODE', 'Fügen Sie Ihren Google Analytics Tracking Code ein');
-define('CT_GOOGLE_SUBDOMAIN', 'Google Analytics Sub-Domain Setting');
-define('CD_GOOGLE_SUBDOMAIN', 'If your store is part of a subdomain eg. onlinestore.yourdomain.com put in your the domain name eg. <font color=red>.</font>yourdomain.com - if not type leave the default <font color=red>none</font>');
+define('CT_GOOGLE_SUBDOMAIN', 'Google Analytics Sub-Domänen Einstellung');
+define('CD_GOOGLE_SUBDOMAIN', 'Falls Ihr Shop über eine Subdomäne (zB shop.meinedomaene.com) erreichbar ist, geben Sie hier Ihren Domänennamen an (zB <font color=red>.</font>meinedomaene.com). Anderenfalls behalten Sie die Standardeinstellung <font color=red>none</font>.');
 
 // Configuration ID: 86 - SEO Pop Out Multilayer Menu
-define('CT_FWR_SUCKERTREE_MENU_ON', 'Enable FWR Menu = true/false');
-define('CD_FWR_SUCKERTREE_MENU_ON', 'True to use the FWR menu. False to use standard');
-define('CT_FWR_MENU_ORDER_BY', 'Choose sort params = categories_id or sort_order');
-define('CD_FWR_MENU_ORDER_BY', 'Choose categories_id or sort_order preferences');
-define('CT_FWR_MENU_CACHE_PATH', 'Cache path: True uses standard osc DIR_FS_CACHE.<br />False will try to write to catalog root.');
-define('CD_FWR_MENU_CACHE_PATH', 'Choose true to use the standard cache path as set in configuration<br />False will attempt to write to shop root.');
-define('CT_FWR_MENU_RESET', 'Reset the categories menu.');
-define('CD_FWR_MENU_RESET', 'Choose true to rebuild the categories menu');
-define('CT_SHOW_SITEMAP', 'Display Sitemap in Information infobox?');
-define('CD_SHOW_SITEMAP', 'Do you want to allow the customer to view a sitemap of your site? (link is created in the information infobox)');
+define('CT_FWR_SUCKERTREE_MENU_ON', 'FWR Menü aktivieren = true/false');
+define('CD_FWR_SUCKERTREE_MENU_ON', 'FWR Menü = true. Standardmenü = false');
+define('CT_FWR_MENU_ORDER_BY', 'Sortieren nach = categories_id oder sort_order');
+define('CD_FWR_MENU_ORDER_BY', 'Nach categories_id oder sort_order preferences sortieren');
+define('CT_FWR_MENU_CACHE_PATH', 'Cache Pfad: Die Einstellung true benutzt das standardmäßige DIR_FS_CACHE.<br />Die Einstellung false versucht, in das Wurzelvereichnis des Kataloges zu schreiben.');
+define('CD_FWR_MENU_CACHE_PATH', 'Wählen Sie true, um in das konfigurierte Verzeichnis zu schreiben.<br />Wählen Sie false, um in das Wurzelverzeichnis des Shops zu schreiben.');
+define('CT_FWR_MENU_RESET', 'Kategoriemenü neu erzeugen');
+define('CD_FWR_MENU_RESET', 'Wählen Sie true, um das Kategoriemenü neu zu erzeugen.');
+define('CT_SHOW_SITEMAP', 'Sitemap in der Information Infobox anzeigen?');
+define('CD_SHOW_SITEMAP', 'Möchten Sie Ihrem Kunden eine Sitemap Ihres Shops zur Verfügung stellen? (Ein Link wird in der Information Infobox erstellt.)');
 
 
 // Configuration ID: 87 - reCaptcha 
-define('CT_RECAPTCHA_ON', 'Enable reCaptcha Form = true/false');
-define('CD_RECAPTCHA_ON', 'Set to true to enable protection. You must get a reCaptcha key from their <a href="http://www.google.com/recaptcha" target="_blank">website (www.google.com/recaptcha)</a> and enter the Public and Private Keys before enabling this functionality.');
-define('CT_RECAPTCHA_PUBLIC_KEY', 'Public Key');
-define('CD_RECAPTCHA_PUBLIC_KEY', 'Enter your reCaptcha Public Key');
-define('CT_RECAPTCHA_PRIVATE_KEY', 'Private Key');
-define('CD_RECAPTCHA_PRIVATE_KEY', 'Enter your reCaptcha Private Key');
+define('CT_RECAPTCHA_ON', 'reCaptcha Formular aktivieren = true/false');
+define('CD_RECAPTCHA_ON', 'Wählen Sie true, um den Schutz zu aktivieren. Sie erhalten <a href="http://www.google.com/recaptcha" target="_blank">hier (www.google.com/recaptcha)</a> Ihre reCaptcha Schlüssel und tragen Sie den öffentlichen und private Schlüssel ein, bevor Sie diese Funktion aktivieren.');
+define('CT_RECAPTCHA_PUBLIC_KEY', 'Öffentlicher Schlüssel');
+define('CD_RECAPTCHA_PUBLIC_KEY', 'Geben Sie Ihren öffentlichen reCaptcha Schlüssel ein.');
+define('CT_RECAPTCHA_PRIVATE_KEY', 'Privater Schlüssel');
+define('CD_RECAPTCHA_PRIVATE_KEY', 'Geben Sie Ihren privaten reCaptcha Schlüssel ein.');
 
 // Configuration ID: 88 - Price Breaks 
 define('CT_PRICE_BREAK_NOF_LEVELS', 'Höchstanzahl der möglichen Staffelpreisstufen');
-define('CD_PRICE_BREAK_NOF_LEVELS', 'Die höchstmögliche Anzahl der möglichen Staffelpreisstufen. Felder, die leer bleiben, werden nicht im Shop angezeigt.');
-define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Number of price breaks for dropdown');
-define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Set the number of price breaks at which you want to show a dropdown plus "from Low Price" instead of a table');
-define('CT_PRICE_BREAK_PRICE', 'Quantity price break display');
-define('CD_PRICE_BREAK_PRICE', 'Set the price you would like to display when the product has quantity price breaks. (High = highest price, Low = lowest price, Off = removes From and displays high price)');
+define('CD_PRICE_BREAK_NOF_LEVELS', 'Die höchstmögliche Anzahl der Preisstaffeln. Leere Felder werden nicht im Shop angezeigt.');
+define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Staffelpreisanzahl für Dropdown');
+define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Geben Sie der Anzahl der Preisstaffeln an, ab der ein Dropdown-Menü anstatt einer Tabelle angezeigt werden soll.');
+define('CT_PRICE_BREAK_PRICE', 'Anzeigeart der Staffelpreise');
+define('CD_PRICE_BREAK_PRICE', 'Wie möchten Sie den Preis von Produkten mit Staffelpreisen anzeigen (High = Höchster Preis, Low = Niedrigster Preis, Off = zeigt kein "Ab" vor dem Preis an und listet den höchsten Preis.)?');
 
 // Configuration ID: 89 - Google Maps
-define('CT_GOOGLE_MAPS_KEY', 'Google Maps Key');
-define('CD_GOOGLE_MAPS_KEY', 'Put your Google Maps API Key here.<br><br>You can get one at http://code.google.com/apis/maps/signup.html');
+define('CT_GOOGLE_MAPS_KEY', 'Google Maps Schlüssel');
+define('CD_GOOGLE_MAPS_KEY', 'Fügen Sie Ihren Google Maps API Schlüssel an.<br><br>Diesen erhalten Sie unter http://code.google.com/apis/maps/signup.html');
 
 // Configuration ID: 99 - Open Feature Sets
 define('CT_OPEN_FEATURED_LIMIT_PRODUCTS_FEATURES', '<font color=green>Limit Product Features Focus</font>');

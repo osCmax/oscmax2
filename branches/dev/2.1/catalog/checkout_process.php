@@ -277,7 +277,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
                         SET products_quantity = products_quantity - '" . $actual_stock_bought . "' 
                         WHERE products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
 // EOF: MOD - QT Pro
-          if ( ($stock_left < 1) && (STOCK_ALLOW_CHECKOUT == 'false') ) {
+          if ( ($stock_left < 1) && (STOCK_SET_INACTIVE == 'true') ) {
             tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0' where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
         }
       }

@@ -393,6 +393,8 @@ define('CT_PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST', 'Mostrar datos de existencias
 define('CD_PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST', '<b>Si es true:</b> Se mostrará una tabla con datos sobre las existencias. Si el producto no tiene atributos con seguimiento de existencias esta tabla no se mostrará.<br /><br /><b>Por defecto es false.</b>');
 define('CT_STOCK_IMAGE_SWITCH', '¿Cambiar imagen Añadir a carrito?');
 define('CD_STOCK_IMAGE_SWITCH', '¿Te gustaría que se cambiara la imagen de Añadir a carrito en la página de información del producto por otra que indique la no disponiblidad del producto?');
+define('CT_STOCK_SET_INACTIVE', 'Deactivate Out of Stock Products During Checkout');
+define('CD_STOCK_SET_INACTIVE', 'Automatically set products to Inactive when inventory levels drop below 1 during checkout.');
 
 // Configuration ID: 10 - Logging
 define('CT_STORE_PAGE_PARSE_TIME', 'Almacenar tiempo de análisis de página');

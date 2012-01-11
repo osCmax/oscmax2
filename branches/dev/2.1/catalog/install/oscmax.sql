@@ -1975,7 +1975,10 @@ INSERT INTO configuration VALUES (116, 'CT_STOCK_ALLOW_CHECKOUT', 'STOCK_ALLOW_C
 INSERT INTO configuration VALUES (117, 'CT_STOCK_MARK_PRODUCT_OUT_OF_STOCK', 'STOCK_MARK_PRODUCT_OUT_OF_STOCK', '***', 'CD_STOCK_MARK_PRODUCT_OUT_OF_STOCK', '9', '4', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (118, 'CT_STOCK_REORDER_LEVEL', 'STOCK_REORDER_LEVEL', '5', 'CD_STOCK_REORDER_LEVEL', '9', '5', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (594, 'CT_PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST', 'PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST', 'true', 'CD_PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST', 9, 6, NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (2508, 'CT_STOCK_IMAGE_SWITCH', 'STOCK_IMAGE_SWITCH', 'true', 'CD_STOCK_IMAGE_SWITCH', '9', '6', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (2508, 'CT_STOCK_IMAGE_SWITCH', 'STOCK_IMAGE_SWITCH', 'true', 'CD_STOCK_IMAGE_SWITCH', '9', '7', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (593, 'CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'True', 'CD_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', '9', '8', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (2525, 'CT_STOCK_SET_INACTIVE', 'STOCK_SET_INACTIVE', 'false', 'CD_STOCK_SET_INACTIVE', '9', '9', NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+
 
 # Configuration ID: 10 - Logging
 INSERT INTO configuration VALUES (119, 'CT_STORE_PAGE_PARSE_TIME', 'STORE_PAGE_PARSE_TIME', 'false', 'CD_STORE_PAGE_PARSE_TIME', '10', '1', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
@@ -2099,7 +2102,6 @@ INSERT INTO configuration VALUES (2523, 'CT_MANUFACTURERS_IMAGES_DIR', 'MANUFACT
 INSERT INTO configuration VALUES (2524, 'CT_NO_OF_DYNAMIC_MOPICS', 'NO_OF_DYNAMIC_MOPICS', '5', 'CD_NO_OF_DYNAMIC_MOPICS', 45, 50, NULL, now(), NULL, NULL);
 
 # Configuration ID: 50 - Product Information
-INSERT INTO configuration VALUES (593, 'CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'True', 'CD_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 50, 40, NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (592, 'CT_PRODINFO_ATTRIBUTE_OUT_OF_STOCK_MSGLINE', 'PRODINFO_ATTRIBUTE_OUT_OF_STOCK_MSGLINE', 'False', 'CD_PRODINFO_ATTRIBUTE_OUT_OF_STOCK_MSGLINE', 50, 30, NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (591, 'CT_PRODINFO_ATTRIBUTE_MARK_OUT_OF_STOCK', 'PRODINFO_ATTRIBUTE_MARK_OUT_OF_STOCK', 'Right', 'CD_PRODINFO_ATTRIBUTE_MARK_OUT_OF_STOCK', 50, 20, NULL, now(), NULL, 'tep_cfg_select_option(array(\'None\',\'Right\',\'Left\'),');
 INSERT INTO configuration VALUES (590, 'CT_PRODINFO_ATTRIBUTE_SHOW_OUT_OF_STOCK', 'PRODINFO_ATTRIBUTE_SHOW_OUT_OF_STOCK', 'True', 'CD_PRODINFO_ATTRIBUTE_SHOW_OUT_OF_STOCK', 50, '10', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');

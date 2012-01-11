@@ -393,6 +393,9 @@ define('CT_PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST', 'Lagerstand anzeigen');
 define('CD_PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST', '<b>Wenn true:</b> Eine Tabelle mit dem Lagerstand wird angezeigt. Wenn ein Produkt keine Attribute mit Lagerstandsbuchung besitzt, wird die Tabelle nicht angezeigt.<br /><br /><b>Standard ist false.</b>');
 define('CT_STOCK_IMAGE_SWITCH', 'Switch Add to Cart Image?');
 define('CD_STOCK_IMAGE_SWITCH', 'Would you like to switch the Add to Cart image on the product info page?');
+define('CT_STOCK_SET_INACTIVE', 'Deactivate Out of Stock Products During Checkout');
+define('CD_STOCK_SET_INACTIVE', 'Automatically set products to Inactive when inventory levels drop below 1 during checkout.');
+
 
 // Configuration ID: 10 - Logging
 define('CT_STORE_PAGE_PARSE_TIME', 'Store Page Parse Time');

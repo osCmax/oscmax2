@@ -43,7 +43,7 @@ $Id$
                 <td align="right">
 				  <?php 
 				  if ($info_id == DEFINE_AFFILIATE_INFO_INFO_NO) {
-				    echo '<a href="' . tep_href_link(FILENAME_AFFILIATE) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>';
+				    echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_SUMMARY) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>';
 				  } else {
 				    echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>'; 
 				  }

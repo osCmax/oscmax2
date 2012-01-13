@@ -910,7 +910,7 @@ if ($action == 'new_product') {
 } // EOF: Extra Product Fields
 ?>
 </head>
-<body onLoad="goOnLoad();">
+<body onLoad="document.search_products.search.focus(); goOnLoad();">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 

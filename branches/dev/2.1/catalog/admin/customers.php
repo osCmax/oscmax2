@@ -483,7 +483,7 @@ function refresh_form(form_name) {
   }
 ?>
 </head>
-<body onLoad="SetFocus();">
+<body onLoad="document.search_customers.search.focus(); SetFocus();">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->

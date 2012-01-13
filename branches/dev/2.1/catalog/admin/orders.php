@@ -200,7 +200,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
   //---PayPal WPP Modification END ---//
 ?>
 </head>
-<body>
+<body onload="document.search_orders.q.focus()">
 <!-- header //-->
 <?php
   require(DIR_WS_INCLUDES . 'header.php');

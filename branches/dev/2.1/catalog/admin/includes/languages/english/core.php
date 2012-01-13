@@ -29,27 +29,27 @@ define('BOX_MERCHANT_INFO', 'Merchant Application');
 define('BOX_PAYPAL_INFO', 'Paypal Signup');
 
 // Filename defines for Admin Group Permissions - when file permission needed but not menu item.
-define('FILE_GC_DASHBOARD', '</b>Google Checkout Dashboard<b>');
-define('FILE_COUPON_RESTRICT', '</b>Coupon Restrict<b>');
-define('FILE_VALID_PRODUCTS', '</b>Valid Products<b>');
-define('FILE_VALID_CATEGORIES', '</b>Valid Categories<b>');
-define('FILE_LIST_PRODUCTS', '</b>List Products<b>');
-define('FILE_LIST_CATEGORIES', '</b>List Categories<b>');
-define('FILE_TREE_VIEW', '</b>Treeview<b>');
-define('FILE_BANNER_STATISTICS', '</b>Banner Statistics File<b>');
-define('FILE_STOCK', '</b>Product Stock File<b>');
-define('FILE_NEW_ATTRIBUTES_CONFIG', '</b>Attributes Config Variables<b>'); 
-define('FILE_COMMON_REPORTS', '</b>Reports File<b>');
-define('FILE_FEDEX', '</b>Fedex File<b>');
-define('FILE_AFFILIATE', '</b>Affiliate File<b>');
-define('FILE_FEEDMACHINE', '</b>Feedmachine File<b>');
-define('FILE_EASYPOPULATE', '</b>Easypopulate File<b>');
-define('FILE_ATTRIBUTE', '</b>Attributes File<b>');
-define('FILE_DISCOUNT_CATEGORIES', '</b>Discount Categories File<b>');
-define('FILE_CREATE_ACCOUNT', '</b>Create Account File<b>');
-define('FILE_ORDER', '</b>Order File<b>');
-define('FILE_PAYPAL', '</b>PayPal File<b>');
-define('FILE_INFORMATION', '</b>Information Pages File<b>');
+define('FILE_GC_DASHBOARD', '<b>Google Checkout Dashboard</b>');
+define('FILE_COUPON_RESTRICT', '<b>Coupon Restrict</b>');
+define('FILE_VALID_PRODUCTS', '<b>Valid Products</b>');
+define('FILE_VALID_CATEGORIES', '<b>Valid Categories</b>');
+define('FILE_LIST_PRODUCTS', '<b>List Products</b>');
+define('FILE_LIST_CATEGORIES', '<b>List Categories</b>');
+define('FILE_TREE_VIEW', '<b>Treeview</b>');
+define('FILE_BANNER_STATISTICS', '<b>Banner Statistics File</b>');
+define('FILE_STOCK', '<b>Product Stock File</b>');
+define('FILE_NEW_ATTRIBUTES_CONFIG', '<b>Attributes Config Variables</b>'); 
+define('FILE_COMMON_REPORTS', '<b>Reports File</b>');
+define('FILE_FEDEX', '<b>Fedex File</b>');
+define('FILE_AFFILIATE', '<b>Affiliate File</b>');
+define('FILE_FEEDMACHINE', '<b>Feedmachine File</b>');
+define('FILE_EASYPOPULATE', '</b>Easypopulate File</b>');
+define('FILE_ATTRIBUTE', '<b>Attributes File</b>');
+define('FILE_DISCOUNT_CATEGORIES', '<b>Discount Categories File</b>');
+define('FILE_CREATE_ACCOUNT', '<b>Create Account File</b>');
+define('FILE_ORDER', '<b>Order File</b>');
+define('FILE_PAYPAL', '<b>PayPal File</b>');
+define('FILE_INFORMATION', '<b>Information Pages File</b>');
 
 // images
 define('IMAGE_FILE_PERMISSION', 'File Permissions');

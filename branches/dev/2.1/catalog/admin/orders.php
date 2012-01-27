@@ -17,7 +17,9 @@ $Id$
   require(DIR_WS_CLASSES . 'order.php');
   
   // *** BEGIN GOOGLE CHECKOUT ***
+  if (defined('MODULE_PAYMENT_GOOGLECHECKOUT_STATUS') && MODULE_PAYMENT_GOOGLECHECKOUT_STATUS == 'True') {
   require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/orders1.php');
+  }
   // *** END GOOGLE CHECKOUT ***
 // BOF: Orders search by customer information
 
@@ -137,7 +139,9 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
 // EOF: MOD - Downloads Controller
 
           // *** BEGIN GOOGLE CHECKOUT ***
+          if (defined('MODULE_PAYMENT_GOOGLECHECKOUT_STATUS') && MODULE_PAYMENT_GOOGLECHECKOUT_STATUS == 'True') {
           require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/orders2.php');
+          }
           // *** END GOOGLE CHECKOUT ***
           tep_db_query("insert into " . TABLE_ORDERS_STATUS_HISTORY . " (orders_id, orders_status_id, date_added, customer_notified, comments) values ('" . (int)$oID . "', '" . tep_db_input($status) . "', now(), '" . tep_db_input($customer_notified) . "', '" . tep_db_input($comments)  . "')");
 
@@ -578,7 +582,9 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
 // EOF: MOD - PayPal IPN ?>
 <!-- *** BEGIN GOOGLE CHECKOUT *** -->
 <?php 
+if (defined('MODULE_PAYMENT_GOOGLECHECKOUT_STATUS') && MODULE_PAYMENT_GOOGLECHECKOUT_STATUS == 'True') { 
 require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/orders3.php');
+}
 ?>
 <!-- *** END GOOGLE CHECKOUT *** -->
       </tr>

@@ -14,7 +14,9 @@ $Id$
   include('includes/languages/' . $language . '/configuration.php');
 
   // *** BEGIN GOOGLE CHECKOUT ***
+  if (defined('MODULE_PAYMENT_GOOGLECHECKOUT_STATUS') && MODULE_PAYMENT_GOOGLECHECKOUT_STATUS == 'True') {
   require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/modules1.php');
+  }
   // *** END GOOGLE CHECKOUT ***
   $set = (isset($_GET['set']) ? $_GET['set'] : '');
 
@@ -48,7 +50,9 @@ $Id$
     switch ($action) {
       case 'save':
         // *** BEGIN GOOGLE CHECKOUT ***
+        if (defined('MODULE_PAYMENT_GOOGLECHECKOUT_STATUS') && MODULE_PAYMENT_GOOGLECHECKOUT_STATUS == 'True') {
         require(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/modules2.php');
+        }
         // *** END GOOGLE CHECKOUT ***
         while (list($key, $value) = each($_POST['configuration'])) {
 // BOF: LINES ADDED

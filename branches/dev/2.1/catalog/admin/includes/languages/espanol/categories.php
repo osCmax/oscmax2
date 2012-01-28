@@ -16,6 +16,7 @@ define('HEADING_TITLE_GOTO', 'Ir a:');
 
 define('TABLE_HEADING_ID', 'ID');
 define('TABLE_HEADING_CATEGORIES_PRODUCTS', 'Categorías / Productos');
+define('TABLE_HEADING_MODEL_NUMBER', 'Referencia');
 define('TABLE_HEADING_ACTION', 'Acción');
 define('TABLE_HEADING_STATUS', 'Estado');
 

@@ -54,9 +54,8 @@ echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet',
 
 // Below is a work around to allow conditional css when javascript is disabled for product tabs.
 ?>
-<script type="text/javascript">document.write("<!"+"--");</script>
-<style type="text/css">#tab1, #tab2, #tab3, #tab4, #tab5, #tab6 { display:inline; } .panel h4 { display:inline }</style>
-<script type="text/javascript">document.write("--"+">");</script>
+<link id="noscriptStyle" rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','no_javascript.css')); ?>">
+<script type="text/javascript">document.getElementById('noscriptStyle').parentNode.removeChild(document.getElementById('noscriptStyle'));</script>
 
 </head>
 <body>

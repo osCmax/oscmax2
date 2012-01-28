@@ -234,7 +234,7 @@ if (isset($_GET['delete'])) {
 		$email = EMAIL_TEXT_LOGIN;
 
 		if( EMAIL_USE_HTML == 'true' )
-			$email .= '  <a href="' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL') . '">' . tep_catalog_href_link(FILENAME_CATALOG_LOGIN, '', 'SSL')  . '</a>';
+			$email .= '  <a href="' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL') . '">' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL')  . '</a>';
 		else
 			$email .= '  (' . tep_catalog_href_link(FILENAME_LOGIN, '', 'SSL') . ')';
 

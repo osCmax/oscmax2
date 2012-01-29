@@ -1778,12 +1778,12 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php // EOF: MOD - indvship ?>
+<?php     if (MODULE_SHIPPING_INDVSHIP_STATUS == 'True') { // BOF: MOD - indvship ?>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_SHIPPING_PRICE; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_ship_price', $pInfo->products_ship_price); ?></td>
-          </tr>
-<?php // EOF: MOD - indvship ?>
+          </tr>  
+<?php     } // EOF: MOD - indvship ?>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_SHIPPING_DIMENSIONS; ?></td>
             <td class="main" colspan="2">

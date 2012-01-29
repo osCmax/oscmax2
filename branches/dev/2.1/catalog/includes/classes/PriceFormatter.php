@@ -50,7 +50,7 @@ class PriceFormatter {
   if (!isset($price_formatter_data)) {
     if ($listing == NULL) {
       //Collect required data
-       $sql = "select pd.products_name, p.products_model, p.products_image, p.products_id," .
+       $sql = "select pd.products_name, p.products_model, p.products_image, p.products_id, p.products_ship_price, " .
    " p.manufacturers_id, p.products_price, p.products_weight, p.products_quantity," .
    " p.products_qty_blocks as qtyBlocks, p.products_min_order_qty, p.products_tax_class_id," .
    " NULL as specials_new_products_price," .
@@ -110,7 +110,8 @@ class PriceFormatter {
         'products_quantity' => $product_info['products_quantity'],
         'price_breaks' => $price_breaks_array,
         'qtyBlocks' => $product_info['qtyBlocks'],
-        'products_min_order_qty' => $product_info['products_min_order_qty']);
+        'products_min_order_qty' => $product_info['products_min_order_qty'],
+		'products_ship_price' => $product_info['products_ship_price']);
 
       //Add to cache
       $pfs->addPriceFormatterData($product_id, $price_formatter_data);
@@ -130,7 +131,8 @@ class PriceFormatter {
         'products_quantity' => (isset($listing['products_quantity']) ? $listing['products_quantity'] : ''),
         'price_breaks' => $price_breaks_from_listing,
         'qtyBlocks' => (isset($listing['qtyBlocks']) ? $listing['qtyBlocks'] : ''),
-        'products_min_order_qty' => (isset($listing['products_min_order_qty']) ? $listing['products_min_order_qty'] : ''));
+        'products_min_order_qty' => (isset($listing['products_min_order_qty']) ? $listing['products_min_order_qty'] : ''),
+		'products_ship_price' => (isset($listing['products_ship_price']) ? $listing['products_ship_price'] : ''));
       //Add to cache
       $pfs->addPriceFormatterData($product_id, $price_formatter_data);
     }

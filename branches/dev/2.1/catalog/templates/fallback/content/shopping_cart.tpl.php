@@ -169,7 +169,7 @@ $Id$
 // EOF QPBPP for SPPC
 ?>
       <tr>
-        <td class="infoBoxHeading">
+        <td class="productListing-heading">
 <?php
     new productListingBoxList($info_box_contents);
 ?>

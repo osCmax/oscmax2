@@ -117,7 +117,7 @@ $Id$
     function _draw_out_of_stock_message_js($attributes) {
       $out='';
       
-      $out.="<tr><td>&nbsp</td><td><span id=\"oosmsg\" class=errorBox></span>\n";
+      $out.="<tr><td>&nbsp;</td><td><span id=\"oosmsg\" class=errorBox></span>\n";
   
       if (($this->out_of_stock_msgline == 'True' | $this->no_add_out_of_stock == 'True')) {
         $out.="<script type=\"text/javascript\" language=\"JavaScript\"><!--\n";

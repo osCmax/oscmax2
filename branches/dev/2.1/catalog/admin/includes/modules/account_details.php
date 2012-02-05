@@ -310,7 +310,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 ?>
           <tr>
             <td class="main" width="170">&nbsp;<?php echo ENTRY_STATE; ?></td>
-            <td class="main"><div id="states">
+            <td class="main"><div id="states">&nbsp;
 <?php
     $state = sbs_get_zone_name($country, $zone_id);
     if ($is_read_only) {

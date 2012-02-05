@@ -35,11 +35,12 @@
   <xsl:template match="/">
     <html>     
       <head>  
-        <title>Google Sitemap File</title>
-        <link href="http://www.google.com/webmasters/sitemaps/docs/sitemaps.css" type="text/css" rel="stylesheet"/>
-		<style type="text/css">
+        <title>Sitemap File</title>
+        <style type="text/css">
 		  <![CDATA[
 			<!--
+			body { 
+			    font-family:Arial, Helvetica, sans-serif; }
 			h1 { 
 				font-weight:bold;
 				font-size:1.5em;
@@ -53,8 +54,7 @@
 				color:#707070;
 				margin-top:1px; }
 			
-			#gssTitle {
-			  background: url(http://www.baccoubonneville.com/gss.jpg) no-repeat;   	
+			#gssTitle {	
 			  line-height: 70px;
 			  text-indent: 70px; }
 			
@@ -64,14 +64,12 @@
 			
 			.sortup {
 				background-position: right center;
-				background-image: url(http://www.google.com/webmasters/sitemaps/images/sortup.gif);
 				background-repeat: no-repeat;
 				font-style:italic;
 				white-space:pre; }
 				
 			.sortdown {
 				background-position: right center;
-				background-image: url(http://www.google.com/webmasters/sitemaps/images/sortdown.gif);
 				background-repeat: no-repeat;
 				font-style:italic;
 				white-space:pre; }
@@ -86,7 +84,6 @@
 			-->
 		  ]]>
 		</style>
-        <link href="gss.css" type="text/css" rel="stylesheet"/>
         <script type="text/javascript">
 		  <![CDATA[
 			var selectedColor = "blue";

@@ -95,4 +95,10 @@ define('ERROR_CANNOT_LINK_TO_SAME_CATEGORY', 'Erreur: Impossible de lier des pro
 define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Erreur: Impossible d\'&eacute;crire dans le r&eacute;pertoire images: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Erreur: Le r&eacute;pertoire d\'images n\'existe pas: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CANNOT_MOVE_CATEGORY_TO_PARENT', 'Erreur: La cat&eacute;gorie ne peut pas &ecirc;tre d&eacute;plac&eacute;e dans la sous-cat&eacute;gorie.');
+
+// BOF indvship 4.5
+define('TEXT_PRODUCTS_ZIPCODE', 'Shipping zip code: ');
+define('TEXT_INDIV_SHIPPING_PRICE', 'Shipping price: ');
+define('TEXT_INDIV_ADDITIONAL_PRICE', 'Each additional price: ');
+// EOF indvship 4.5
 ?>

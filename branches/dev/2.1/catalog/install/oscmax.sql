@@ -983,7 +983,6 @@ CREATE TABLE products (
   products_tax_class_id int(11) NOT NULL,
   manufacturers_id int(11) default NULL,
   products_ordered int(11) NOT NULL default '0',
-  products_ship_price decimal(15,4) NOT NULL default '0.0000',
   products_length decimal(6,2) NOT NULL default '12.00',
   products_width decimal(6,2) NOT NULL default '12.00',
   products_height decimal(6,2) NOT NULL default '12.00',
@@ -1102,6 +1101,15 @@ CREATE TABLE products_options_values_to_products_options (
   products_options_id int NOT NULL,
   products_options_values_id int NOT NULL,
   PRIMARY KEY (products_options_values_to_products_options_id)
+);
+
+DROP TABLE IF EXISTS products_shipping;
+CREATE TABLE products_shipping (
+products_id int(11) NOT NULL default '0',
+products_ship_methods_id int(11) default NULL,
+products_ship_zip varchar(32) default NULL,
+products_ship_price varchar(10) default NULL,
+products_ship_price_two varchar(10) default NULL
 );
 
 DROP TABLE IF EXISTS products_stock;
@@ -2406,6 +2414,9 @@ INSERT INTO configuration VALUES (3087, 'CT_ONEPAGE_ZIP_BELOW', 'ONEPAGE_ZIP_BEL
 INSERT INTO configuration VALUES (3088, 'CT_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'true', 'CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 7575, 100, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (3089, 'CT_ONEPAGE_ADDR_LAYOUT', 'ONEPAGE_ADDR_LAYOUT', 'vertical', 'CD_ONEPAGE_ADDR_LAYOUT', 7575, 1000, NULL, now(), NULL, 'tep_cfg_select_option(array(''vertical'', ''horizontal''), ');
 
+#Individual Shipping 4.5 Default values
+INSERT INTO configuration VALUES ('', 'Indiv Ship Home Country', 'INDIVIDUAL_SHIP_HOME_COUNTRY', '223', 'Individual ship home country ID (other countries will have extra freight)', 7, NULL, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES ('', 'Indiv Ship Outside Home Increase', 'INDIVIDUAL_SHIP_INCREASE', '3', 'Individual ship x increase for shipping outside home country. For example: If you set your item ship price to $50 and this value to 3 and ship outside your home country they will pay $150, and if this value was 2, they would pay $100.', 7, NULL, now(), now(), NULL, NULL);
 
 INSERT INTO configuration_group VALUES (1, 'BOX_CONFIGURATION_MYSTORE', 'General information about my store', 1, 1);
 INSERT INTO configuration_group VALUES (2, 'BOX_CONFIGURATION_MIN_VALUES', 'The minimum values for functions / data', 2, 1);

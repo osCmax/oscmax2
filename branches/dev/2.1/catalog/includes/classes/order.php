@@ -153,7 +153,8 @@ $Id$
     }
 
     function cart() {
-      global $_POST, $customer_id, $sendto, $billto, $cart, $languages_id, $currency, $currencies, $shipping, $payment, $comments, $customer_default_address_id;
+// ADDED $shipping_modules - indvship 4.5
+      global $_POST, $customer_id, $sendto, $billto, $cart, $languages_id, $currency, $currencies, $shipping, $payment, $shipping_modules, $comments, $customer_default_address_id;
 
       $this->content_type = $cart->get_content_type();
 
@@ -231,6 +232,19 @@ $Id$
         $tax_address = array('entry_country_id' => $shipping_address['entry_country_id'],
                              'entry_zone_id' => $shipping_address['entry_zone_id']);
       }
+//BOF indvship 4.5
+      if($shipping['id']==indvship_indvship){
+        $shipping_cost = $shipping['cost'];
+        $shipping_title = $shipping['title'];
+      } else {
+        $shipping_cost = $shipping['cost'] + $shipping['invcost'];
+        if ($shipping['invcost'] > 0) {
+          $shipping_title = $shipping['title']. ' Plus Flat Rate Shipping';
+        } else {
+          $shipping_title = $shipping['title'];
+        }
+      }
+// EOF indvship 4.5
 
       $this->info = array('order_status' => DEFAULT_ORDERS_STATUS_ID,
                           'currency' => $currency,
@@ -240,8 +254,12 @@ $Id$
                           'cc_owner' => '',
                           'cc_number' => '',
                           'cc_expires' => '',
-                          'shipping_method' => $shipping['title'],
-                          'shipping_cost' => $shipping['cost'],
+// BOF indvship 4.5
+                          //'shipping_method' => $shipping['title'],
+                          //'shipping_cost' => $shipping['cost'],
+                          'shipping_method' => $shipping_title,
+                          'shipping_cost' => $shipping_cost, 
+// EOF indvship 4.5
 /* One Page Checkout - BEGIN */  
   // tax total fix start
                           'shipping_tax' => $shipping['shipping_tax_total'],

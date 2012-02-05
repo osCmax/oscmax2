@@ -54,6 +54,8 @@ $Id$
   define('TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD', 'products_attributes_download');
   define('TABLE_PRODUCTS_DESCRIPTION', 'products_description');
   define('TABLE_PRODUCTS_NOTIFICATIONS', 'products_notifications');
+  // LINE ADDED: MOD - indvship 4.5
+  define('TABLE_PRODUCTS_SHIPPING', 'products_shipping');
   define('TABLE_PRODUCTS_OPTIONS', 'products_options');
   define('TABLE_PRODUCTS_OPTIONS_VALUES', 'products_options_values');
   define('TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS', 'products_options_values_to_products_options');

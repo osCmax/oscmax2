@@ -87,14 +87,14 @@ $Id$
   if (ACCOUNT_STATE == 'true') {
       if (tep_not_null($address['entry_zone_id'])){
           $zones_array = array();
-          $zones_query = tep_db_query("select zone_code from " . TABLE_ZONES . " where zone_country_id = '" . $address['entry_country_id'] . "' order by zone_code");
+          $zones_query = tep_db_query("select zone_name from " . TABLE_ZONES . " where zone_country_id = '" . $address['entry_country_id'] . "' order by zone_name");
           while ($zones_values = tep_db_fetch_array($zones_query)) {
-              $zones_array[] = array('id' => $zones_values['zone_code'], 'text' => $zones_values['zone_code']);
+              $zones_array[] = array('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
           }
           
-          $QzoneName = tep_db_query('select zone_code from ' . TABLE_ZONES . ' where zone_id = "' . $address['entry_zone_id'] . '"');
+          $QzoneName = tep_db_query('select zone_name from ' . TABLE_ZONES . ' where zone_id = "' . $address['entry_zone_id'] . '"');
           $zoneName = tep_db_fetch_array($QzoneName);
-          $input = tep_draw_pull_down_menu('state', $zones_array, $zoneName['zone_code']);
+          $input = tep_draw_pull_down_menu('state', $zones_array, $zoneName['zone_name']);
       }else{
           $input = tep_draw_input_field('state', $address['entry_state']);
       }

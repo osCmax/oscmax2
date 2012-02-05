@@ -200,7 +200,12 @@ define('HEADING_MSRP_HELP', 'Unverbindlich Verkaufspreis des Herstellers');
 define('TEXT_MSRP_HELP', 'Wenn Sie den UVP in Ihrem Onlineshop auf der Produktinformationsseite anzeigen lassen möchten, geben Sie ihn hier ein.');
 define('TEXT_ADD_PL', 'Einen weiteren Preissprung hinzufügen');
 define('TEXT_FEATURED_UNTIL', 'Empfohlen bis: ');
-define('TEXT_SHIPPING_PRICE', 'Indiv. Versandkosten: ');
 
 define('TEXT_THUMBNAIL_IMAGE', 'Vorschaubild:');
+
+// BOF indvship 4.5
+define('TEXT_PRODUCTS_ZIPCODE', 'Shipping zip code: ');
+define('TEXT_INDIV_SHIPPING_PRICE', 'Indiv. Versandkosten: ');
+define('TEXT_INDIV_ADDITIONAL_PRICE', 'Each additional price: ');
+// EOF indvship 4.5
 ?>

@@ -13,4 +13,5 @@ $Id$
 define('MODULE_SHIPPING_INDVSHIP_TEXT_TITLE','Individuelle Versandkosten');
 define('MODULE_SHIPPING_INDVSHIP_TEXT_DESCRIPTION','Verpackung und Versand');
 define('MODULE_SHIPPING_INDVSHIP_TEXT_WAY','Versandkostenpauschale');
+define('MODULE_SHIPPING_INDVSHIP_FREE_WAY', 'Free Shipping');
 ?>

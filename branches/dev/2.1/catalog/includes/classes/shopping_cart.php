@@ -14,9 +14,9 @@ $Id$
 
   class shoppingCart {
     var $contents, $total, $weight, $cartID, $content_type;
+    // LINE ADDED indvship 4.5
+    var $shiptotal;
 
-// LINE ADDED: MOD - indvship
-var $shiptotal;
 
     function shoppingCart() {
       $this->reset();
@@ -101,9 +101,9 @@ var $shiptotal;
       $this->contents = array();
       $this->total = 0;
       $this->weight = 0;
+	  // LINE ADDED indvship 4.5
+	  $this->shiptotal = '';
 
-//LINE ADDED: MOD - indvship
-      $this->shiptotal = 0;
       $this->content_type = false;
 
       if (tep_session_is_registered('customer_id') && ($reset_database == true)) {
@@ -307,8 +307,7 @@ var $shiptotal;
       $this->total = 0;
       $this->weight = 0;
 
-// LINE ADDED: MOD - indvship
-      $this->shiptotal = 0;
+
       if (!is_array($this->contents)) return 0;
         $discount_category_quantity = array(); // calculates no of items per discount category in shopping basket
       foreach ($this->contents as $products_id => $contents_array) {
@@ -350,8 +349,7 @@ var $shiptotal;
 
 
 
-// LINE MOFIFIED - Added "products_ship_price"
-        //$product_query = tep_db_query("select products_id, products_price, products_ins_price, products_ship_price, products_tax_class_id, products_weight from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
+        //$product_query = tep_db_query("select products_id, products_price, products_ins_price, products_tax_class_id, products_weight from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
         $pf->loadProduct($products_id, $languages_id);
         //if ($product = tep_db_fetch_array($product_query)) {
         if ($product = $pfs->getPriceFormatterData($products_id)) {
@@ -372,8 +370,6 @@ var $shiptotal;
           $products_width = (isset($product['products_width']) ? $product['products_width'] : '');
           $products_height = (isset($product['products_height']) ? $product['products_height'] : '');
           $products_ready_to_ship = (isset($product['products_ready_to_ship']) ? $product['products_ready_to_ship'] : '');
-//LINE ADDED - mod indvship
-          $products_ship_price = (isset($product['products_ship_price']) ? $product['products_ship_price'] : '');
 
 // BOF: MOD - Separate Price per Customer Mod - EDIT FOR QPBPP FOR SPPC V4.2
 //          $specials_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$prid . "' and status = '1'");
@@ -390,6 +386,8 @@ var $shiptotal;
               $products_price = $customer_group_price['customers_group_price'];
             }
           }*/
+	  
+	  
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
           $this->total_virtual += tep_add_tax($products_price, $products_tax) * $qty * $no_count;// ICW CREDIT CLASS;
 
@@ -397,8 +395,6 @@ var $shiptotal;
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
           $this->total += $currencies->calculate_price($products_price, $products_tax, $qty);
-// LINE ADDED: MOD - indvship
-          $this->shiptotal += ($products_ship_price * $qty);
           $this->weight += ($qty * $products_weight);
         }
 
@@ -518,6 +514,10 @@ var $shiptotal;
                   $products_code = $products['products_model'];
                 }
 // EOF Attribute Product Codes
+		  // BOF indvship 4.5
+		  $products_shipping_query = tep_db_query("select products_ship_price, products_ship_price_two, products_ship_zip, products_ship_methods_id from " . TABLE_PRODUCTS_SHIPPING . " where products_id = '" . $products['products_id'] . "'");
+		  $products_shipping = tep_db_fetch_array($products_shipping_query);
+		  // EOF indvship 4.5
 //        $products_array[] = array('id' => $products_id,
           $products_array[] = array('id' => tep_get_uprid($products_id, (isset($this->contents[$products_id]['attributes']) ? $this->contents[$products_id]['attributes'] : '')),
                                     'name' => (isset($products['products_name']) ? $products['products_name'] : ''),
@@ -536,6 +536,11 @@ var $shiptotal;
                                     'ready_to_ship' => (isset($products['products_ready_to_ship']) ? $products['products_ready_to_ship'] : ''),
                                     'final_price' => ($products_price + $this->attributes_price($products_id)),
                                     'tax_class_id' => (isset($products['products_tax_class_id']) ? $products['products_tax_class_id'] : ''),
+									// BOF indvship 4.5
+									'products_ship_price' => $products_shipping['products_ship_price'],
+									'products_ship_price_two' => $products_shipping['products_ship_price_two'],
+									'products_ship_zip' => $products_shipping['products_ship_zip'],
+									// EOF indvship 4.5
                                     'attributes' => (isset($this->contents[$products_id]['attributes']) ? $this->contents[$products_id]['attributes'] : ''));
         }
       }
@@ -582,6 +587,8 @@ function get_shiptotal() {
     }
 
     function get_content_type() {
+	  // LINE ADDED indvship 4.5
+	  global $shipping_modules;
       $this->content_type = false;
 
       if ( (DOWNLOAD_ENABLED == 'true') && ($this->count_contents() > 0) ) {

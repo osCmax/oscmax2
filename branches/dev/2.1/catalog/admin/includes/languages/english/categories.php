@@ -200,7 +200,12 @@ define('HEADING_MSRP_HELP', 'Manufacturer Suggested Retail Price');
 define('TEXT_MSRP_HELP', 'If you wish to display a MSRP price on your product information page then please enter it here.');
 define('TEXT_ADD_PL', 'Add another Price Break');
 define('TEXT_FEATURED_UNTIL', 'Featured Until: ');
-define('TEXT_SHIPPING_PRICE', 'Indv. Shipping Price: ');
 
 define('TEXT_THUMBNAIL_IMAGE', 'Thumbnail Image:');
+
+// BOF indvship 4.5
+define('TEXT_PRODUCTS_ZIPCODE', 'Shipping zip code: ');
+define('TEXT_INDIV_SHIPPING_PRICE', 'Shipping price for this item: ');
+define('TEXT_INDIV_ADDITIONAL_PRICE', 'Shipping price for each additional: ');
+// EOF indvship 4.5
 ?>

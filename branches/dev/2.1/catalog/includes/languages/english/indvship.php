@@ -10,7 +10,8 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('MODULE_SHIPPING_INDVSHIP_TEXT_TITLE', 'Individual Shipping');
+define('MODULE_SHIPPING_INDVSHIP_TEXT_TITLE', 'Individual Shipping - Zone 1');
 define('MODULE_SHIPPING_INDVSHIP_TEXT_DESCRIPTION', 'Shipping and Handling');
-define('MODULE_SHIPPING_INDVSHIP_TEXT_WAY', 'Flat Shipping Rate');
+define('MODULE_SHIPPING_INDVSHIP_TEXT_WAY', 'Shipping Total');
+define('MODULE_SHIPPING_INDVSHIP_FREE_WAY', 'Free Shipping');
 ?>

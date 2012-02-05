@@ -200,7 +200,12 @@ define('HEADING_MSRP_HELP', 'Precio de venta recomendado por el fabricante (PVR)
 define('TEXT_MSRP_HELP', 'Si quieres que se muestre un PVR en la información del producto introdúcelo aquí.');
 define('TEXT_ADD_PL', 'Añadir otra cantidad de precio por volumen');
 define('TEXT_FEATURED_UNTIL', 'Destacado hasta: ');
-define('TEXT_SHIPPING_PRICE', 'Gastos de envío individuales: ');
 
 define('TEXT_THUMBNAIL_IMAGE', 'Imagen en miniatura:');
+
+// BOF indvship 4.5
+define('TEXT_PRODUCTS_ZIPCODE', 'Codigo postal origen: ');
+define('TEXT_INDIV_SHIPPING_PRICE', 'Coste envio individual: ');
+define('TEXT_INDIV_ADDITIONAL_PRICE', 'Coste producto adicional: ');
+// EOF indvship 4.5
 ?>

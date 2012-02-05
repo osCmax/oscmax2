@@ -101,6 +101,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 // include the database functions
   require(DIR_WS_FUNCTIONS . 'database.php');
 
+
 // make a connection to the database... now
   tep_db_connect() or die('Unable to connect to database server!');
 

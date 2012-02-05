@@ -44,7 +44,7 @@ class PriceFormatterStore {
             unset($product_id_list);
             $product_id_list = implode(",", $product_id_list_array);
 // now do one query for all products in the shopping basket
-   $sql = "select pd.products_name, p.products_model, p.products_image, p.products_id, p.products_ship_price, " .
+   $sql = "select pd.products_name, p.products_model, p.products_image, p.products_id," .
    " p.manufacturers_id, p.products_price, p.products_weight, p.products_quantity," .
    " p.products_qty_blocks as qtyBlocks, p.products_min_order_qty, p.products_tax_class_id," .
    " NULL as specials_new_products_price," .

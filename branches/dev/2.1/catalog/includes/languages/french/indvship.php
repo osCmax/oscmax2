@@ -13,4 +13,5 @@ $Id$
 define('MODULE_SHIPPING_INDVSHIP_TEXT_TITLE','Livraison individuelle');
 define('MODULE_SHIPPING_INDVSHIP_TEXT_DESCRIPTION','Expédition et de manutention');
 define('MODULE_SHIPPING_INDVSHIP_TEXT_WAY','Taux d\'expédition plat');
+define('MODULE_SHIPPING_INDVSHIP_FREE_WAY', 'Free Shipping');
 ?>

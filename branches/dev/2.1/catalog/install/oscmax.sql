@@ -2010,7 +2010,7 @@ INSERT INTO configuration VALUES (139, 'CT_SESSION_CHECK_SSL_SESSION_ID', 'SESSI
 INSERT INTO configuration VALUES (140, 'CT_SESSION_CHECK_USER_AGENT', 'SESSION_CHECK_USER_AGENT', 'False', 'CD_SESSION_CHECK_USER_AGENT', '15', '4', NULL, now(), NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),');
 INSERT INTO configuration VALUES (141, 'CT_SESSION_CHECK_IP_ADDRESS', 'SESSION_CHECK_IP_ADDRESS', 'False', 'CD_SESSION_CHECK_IP_ADDRESS', '15', '5', NULL, now(), NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),');
 INSERT INTO configuration VALUES (142, 'CT_SESSION_BLOCK_SPIDERS', 'SESSION_BLOCK_SPIDERS', 'True', 'CD_SESSION_BLOCK_SPIDERS', '15', '6', NULL, now(), NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),');
-INSERT INTO configuration VALUES (143, 'CT_SESSION_RECREATE', 'SESSION_RECREATE', 'False', 'CD_SESSION_RECREATE', '15', '7', NULL, now(), NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),');
+INSERT INTO configuration VALUES (143, 'CT_SESSION_RECREATE', 'SESSION_RECREATE', 'True', 'CD_SESSION_RECREATE', '15', '7', NULL, now(), NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),');
 
 # Configuration ID: 16 -  Site Maintenance
 INSERT INTO configuration VALUES (378, 'CT_DOWN_FOR_MAINTENANCE', 'DOWN_FOR_MAINTENANCE', 'false', 'CD_DOWN_FOR_MAINTENANCE', 16, 1, NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');

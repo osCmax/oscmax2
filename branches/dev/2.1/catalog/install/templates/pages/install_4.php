@@ -72,6 +72,9 @@ $Id$
   <div class="contentPane">
   
 <?php
+// LINE ADDED: document root variable for file manager constant DIR_FS_HOST_ROOT
+$docroot = realpath((getenv('DOCUMENT_ROOT') && preg_match('^'.preg_quote(realpath(getenv('DOCUMENT_ROOT'))).'^', realpath(__FILE__))) ? getenv('DOCUMENT_ROOT') : str_replace(dirname(@$_SERVER['PHP_SELF']), '', str_replace(DIRECTORY_SEPARATOR, '/', dirname(__FILE__))));
+
   $dir_fs_document_root = $_POST['DIR_FS_DOCUMENT_ROOT'];
   if ((substr($dir_fs_document_root, -1) != '\\') && (substr($dir_fs_document_root, -1) != '/')) {
     if (strrpos($dir_fs_document_root, '\\') !== false) {
@@ -158,6 +161,7 @@ $Id$
                    '  define(\'HTTP_CATALOG_SERVER\', \'' . $http_server . '\');' . "\n" .
                    '  define(\'HTTPS_CATALOG_SERVER\', \'' . $http_server . '\');' . "\n" .
                    '  define(\'ENABLE_SSL_CATALOG\', \'false\');' . "\n" .
+                   '  define(\'DIR_FS_HOST_ROOT\', \'' . $docroot . '\');' . "\n" .
                    '  define(\'DIR_FS_DOCUMENT_ROOT\', \'' . $dir_fs_document_root . '\');' . "\n" .
                    '  define(\'DIR_WS_ADMIN\', \'' . $http_catalog . $admin_folder . '/\');' . "\n" .
                    '  define(\'DIR_FS_ADMIN\', \'' . $dir_fs_document_root . $admin_folder . '/\');' . "\n" .
@@ -177,8 +181,6 @@ $Id$
                    '  define(\'DIR_FS_CATALOG_IMAGES\', DIR_FS_CATALOG . \'images/\');' . "\n" .
                    '  define(\'DIR_FS_CATALOG_MODULES\', DIR_FS_CATALOG . \'includes/modules/\');' . "\n" .
                    '  define(\'DIR_FS_BACKUP\', DIR_FS_ADMIN . \'backups/\');' . "\n" .
-                   '  define(\'DIR_FCKEDITOR\', DIR_FS_CATALOG . \'FCKeditor/\');' . "\n" .
-                   '  define(\'DIR_WS_FCKEDITOR\', DIR_WS_CATALOG . \'FCKeditor/\');' . "\n" .
                    '' . "\n" .
                    '// define our database connection' . "\n" .
                    '  define(\'DB_SERVER\', \'' . trim($_POST['DB_SERVER']) . '\');' . "\n" .

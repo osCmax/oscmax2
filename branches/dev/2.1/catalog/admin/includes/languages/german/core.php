@@ -225,6 +225,8 @@ define('BOX_CONFIGURATION_AFFILIATE', 'Affiliate');
 define('BOX_CONFIGURATION_ACCOUNTS', 'Konten');
 define('BOX_CONFIGURATION_MAINTENANCE', 'Wartungsmodus');
 define('BOX_CONFIGURATION_MOPICS', 'Dynamic MoPics');
+define('BOX_CONFIGURATION_SLIMBOX', 'Slimbox');
+define('BOX_CONFIGURATION_CLOUDZOOM', 'CloudZoom');
 define('BOX_CONFIGURATION_PRINT', 'Druckbarer Katalog');
 define('BOX_CONFIGURATION_ARTICLES', 'Artikelkonfiguration');
 define('BOX_CONFIGURATION_SEO', 'SEO URLs');

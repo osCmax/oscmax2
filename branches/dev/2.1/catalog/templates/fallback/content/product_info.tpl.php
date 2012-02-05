@@ -158,29 +158,19 @@ $Id$
               <tr>
                 <!-- Image Big Starts -->
               	<td class="productinfo_imagebig" width="<?php echo PRODUCT_IMAGE_WIDTH; ?>">
-                <?php
-				//Set imagezoomer on/off switches image size from big to products
-				if (IMAGEZOOMER == 'true') {
-				  $imagezoom = ' class="imagezoomer"';
-				  $image_show = DYNAMIC_MOPICS_BIGIMAGES_DIR; 
-				} else {
-				  $imagezoom = '';
-				  $image_show = DYNAMIC_MOPICS_PRODUCTS_DIR;
-				}
+                <?php			
 				$image_lg = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);	
 	            if ($lg_image_ext = mopics_file_exists($image_lg, DYNAMIC_MOPICS_BIG_IMAGE_TYPES)) {
         	        $image_size = @getimagesize($image_lg . '.' . $lg_image_ext);
 
             		//BOF SLIMBOX
             		$lightlarge = $image_lg . "." . $lg_image_ext;
-					?>               
-					<script type="text/javascript"><!--
-                    document.write('<?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank"' . $imagezoom . ' id="image_big" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . $image_show . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="0" vspace="0"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '<\/a>'; ?>');
-    //-->
-                    </script>
-                    <noscript>
-                    <?php echo '<a href="' . tep_href_link($lightlarge) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $product_info['products_image'], addslashes($product_info['products_name']), PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="0" vspace="0"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
-                    </noscript>
+					// Build Cloud Zoom rel to pass admin settings into a href
+					$cloud_zoom_params = 'zoomWidth: \'' . CLOUDZOOM_WIDTH .  '\', zoomHeight: \'' . CLOUDZOOM_HEIGHT . '\', position: \'' . CLOUDZOOM_POSITION . '\', adjustX: ' . CLOUDZOOM_ADJUSTX . ', adjustY: ' . CLOUDZOOM_ADJUSTY . ', tint: ' . CLOUDZOOM_TINT . ', tintOpacity: ' . CLOUDZOOM_TINTOPACITY . ', lensOpacity: ' . CLOUDZOOM_LENSOPACITY . ', softFocus: ' . CLOUDZOOM_SOFTFOCUS . ', smoothMove: ' . CLOUDZOOM_SMOOTHMOVE . ', showTitle: ' . CLOUDZOOM_SHOWTITLE . ', titleOpacity: ' . CLOUDZOOM_TITLEOPACITY;
+					?>         
+                    <a href='<?php echo DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $product_info['products_image']; ?>' class = 'cloud-zoom' id='zoom1' rel="<?php echo $cloud_zoom_params; ?>">
+                    <img src="<?php echo DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $product_info['products_image']; ?>" alt='' title="<?php echo addslashes($product_info['products_name']); ?>" />
+                    </a>
                     <?php
             	} else {
           			if (mopics_file_exists(DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $product_info['products_image'])) {
@@ -198,16 +188,14 @@ $Id$
       		  </tr>
               <tr>
                 <!-- Thumbnails Starts -->
-              	<td width="300">
-                <center>
+              	<td width="<?php echo PRODUCT_IMAGE_WIDTH; ?>" align="center">
 					<?php
         			//// BEGIN:  Added for Dynamic MoPics v3.000
- 					if (is_file(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image']) && DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'] != "pixel_trans.gif"){
+ 					if (is_file(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image']) && DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'] != "pixel_trans.gif") {
                      	include(DIR_WS_MODULES . 'dynamic_mopics.php');
        				}
         			//// END:  Added for Dynamic MoPics v3.000
 					?>
-				</center>
                 </td>
                 <!-- Thumbnails Ends -->
               </tr>

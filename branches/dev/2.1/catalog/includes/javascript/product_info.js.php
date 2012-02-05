@@ -17,10 +17,10 @@ $Id$
 </script>
 <script type="text/javascript" src="includes/javascript/slimbox2/slimbox2.js"></script>
 <?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
+<?php include(DIR_WS_INCLUDES . 'javascript/cloud-zoom.1.0.2.js.php'); ?>
 <script type="text/javascript" src="includes/javascript/jquery.scrollTo-min.js"></script>
 <script type="text/javascript" src="includes/javascript/jquery.serialScroll-min.js"></script>
 <script type="text/javascript" src="includes/javascript/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="includes/javascript/jqzoom.pack.1.0.1.js"></script>
 <script type="text/javascript" src="includes/javascript/scrollable.min.js"></script>
 <script language="javascript" type="text/javascript"><!--
 	function popupImage(url, imageHeight, imageWidth) {
@@ -37,6 +37,25 @@ $Id$
 			imageWindow.focus();
 		}
 	}
+	
+	/*Code for Cloud Zoom -> Slimbox integration */
+	function openimg() {
+        /* Now need to find which image in the string the link one is */
+		var image_array = "<?php echo $sb_image_string; ?>".split(",");
+		var image_clicked = $("#zoom1").attr("href");
+		
+		var index, value, result;
+		result = 0;
+        
+		for (index = 0; index < image_array.length; ++index) {
+          value = image_array[index];
+		  if (value.indexOf(image_clicked) == true) {
+            result = index;
+            break;
+          }
+        }		
+		jQuery.slimbox(<?php echo $sb_string; ?>, result);
+	 } 
 //--></script>
 <script language="javascript" type="text/javascript">
 <!--// TABS -->
@@ -123,23 +142,6 @@ $(document).ready(function(){
   		active:':first'            //-- Which panel to activate by default
 	});
 
-	$("#slideshow ul li img").hover(
-    	function(){
-		var image_switch = $(this).attr("src").indexOf("images_big");
-		if (image_switch = -1) {
-          var folderSwitch = $(this).attr("src").replace("thumbs", "products");
-		} else {
-		  var folderSwitch = $(this).attr("src").replace("thumbs", "images_big");	
-		}
-		$(".productinfo_imagebig img").attr("src", folderSwitch);
-	});
-	
-	$("#slideshow ul li a").hover(
-    	function(){
-		var imageSwitch = $(this).attr("href");	
-		$(".productinfo_imagebig a").attr("href", imageSwitch);
-	});
-
 	$('#slideshow').serialScroll({
 		items:'li',
 		prev:'img.prev',
@@ -153,8 +155,6 @@ $(document).ready(function(){
 		cycle:true, //don't pull back once you reach the end
 		jump: false //click on the images to scroll to them
 	});
-	
-	$('.imagezoomer').jqzoom({ zoomWidth: 330, zoomHeight: 300, xOffset: 10, yOffset: -8, position: "right", title: false, showPreload: true, showEffect: "fadein", hideEffect: "fadeout" });
 	
 	$(".scrollable").scrollable({ easing: "swing", circular: true });
 	$(".scrollable_ap").scrollable({ easing: "swing", circular: true });

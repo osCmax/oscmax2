@@ -162,6 +162,8 @@ define('BOX_CONFIGURATION_AFFILIATE', 'Programa de afiliados');
 define('BOX_CONFIGURATION_ACCOUNTS', 'Cuentas');
 define('BOX_CONFIGURATION_MAINTENANCE', 'Mantenimiento sitio');
 define('BOX_CONFIGURATION_MOPICS', 'MoPics dinámicas');
+define('BOX_CONFIGURATION_SLIMBOX', 'Slimbox');
+define('BOX_CONFIGURATION_CLOUDZOOM', 'CloudZoom');
 define('BOX_CONFIGURATION_PRINT', 'Catálogo imprimible');
 define('BOX_CONFIGURATION_ARTICLES', 'Configuración noticias');
 define('BOX_CONFIGURATION_SEO', 'URLs SEO');

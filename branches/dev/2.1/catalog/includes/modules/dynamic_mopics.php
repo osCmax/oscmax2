@@ -24,6 +24,8 @@ if (isset($product_info_values) && is_object($product_info_values)) {
 	}
 	// Set the thumbnail basename; replaces "imagebase" in the user's pattern
 	$image_base = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR);
+	// Set the product image's basename; replaces "imagebase" in the user's pattern
+	$image_base_prod = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR);
 	// Set the large image's basename; replaces "imagebase" in the user's pattern
 	$image_base_lg = mopics_get_imagebase($product_info['products_image'], DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR);
 	// Get the counting method for the user's pattern (1,2,3; a,b,c; A,B,C; etc)
@@ -35,7 +37,7 @@ if (isset($product_info_values) && is_object($product_info_values)) {
 	// Are there any extra thumbnails for this product?
 	if (mopics_file_exists(str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN))) {
 	?>
-  <table>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<tr>
       <td class="productinfo_thumbnail">
         <div class="screen2">
@@ -47,17 +49,23 @@ if (isset($product_info_values) && is_object($product_info_values)) {
             <td>           
 			  <div id="slideshow">
            		<ul>
-	
-<!-- If there are extra pictures we need to add the big image thumbnail to display as well otherwise you can not switch back! -->
-	<li>            
-      <?php 
-	  $image_ext = mopics_file_exists(str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN));
-	  $image_fix = $image_base_lg . '.' . $image_ext;
-	  echo '<a href="' . tep_href_link($image_fix) . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' .  tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image'], $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>';?>
-	</li>
+                
+                <!-- If there are extra pictures we need to add the big image thumbnail to display as well otherwise you can not switch back! -->
+	            <li>            
+                  <a href='<?php echo $lightlarge; ?>' id='cz0' class='cloud-zoom-gallery' title='Thumbnail 1' rel="useZoom: 'zoom1', smallImage: '<?php echo DIR_WS_IMAGES . DYNAMIC_MOPICS_PRODUCTS_DIR . $product_info['products_image']; ?>' ">
+                  <img src="<?php echo DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $product_info['products_image']; ?>" alt = "Thumbnail 1"/>
+                  </a>
+	            </li>
     	
 <?php	
 	$row = 0;
+	// Need to build a string like jQuery.slimbox([["cat.jpg", "Nice cat"], ["dog.jpg"]], 0);
+	$sb_string = '[';
+	// Need another string built to find index of image clicked
+	$sb_image_string = '';
+	// Now add the first image shown as it will always be there
+	$sb_string .= '["' . $lightlarge . '", "' . $product_info['products_name'] . '"],'; 
+	$sb_image_string .= $lightlarge;
 	// Loop until all of this product's thumbnails have been found and displayed
 		while ($image_ext = mopics_file_exists(str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN))) {
 			$row++;
@@ -65,39 +73,29 @@ if (isset($product_info_values) && is_object($product_info_values)) {
 			$image = str_replace($search, $replace, DYNAMIC_MOPICS_PATTERN) . '.' . $image_ext;
 			// Parse this thumbnail through tep_image for clients with javascript disabled
 			$extraImageImage = tep_image($image, stripslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+			// Set product image replacement for the str_replace pattern search/replace
+			$replace_prod = array($image_base_prod, $i);
 			// Set large image replacement for the str_replace pattern search/replace
 			$replace_lg = array($image_base_lg, $i);
 			// Only link to the popup if a larger image exists
 			if ($lg_image_ext = mopics_file_exists(str_replace($search, $replace_lg, DYNAMIC_MOPICS_PATTERN))) {
+				// Set the product image for this loop
+				$image_prod = str_replace($search, $replace_prod, DYNAMIC_MOPICS_PATTERN) . '.' . $lg_image_ext;
 				// Set the large image for this loop
 				$image_lg = str_replace($search, $replace_lg, DYNAMIC_MOPICS_PATTERN) . '.' . $lg_image_ext;
 				// Get the large image's size
 				$image_size = @getimagesize(DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $image_lg);
-				// Set large image's URL for clients with javascript disabled
-				$extraImageURL = tep_href_link($image_lg);
-				// Parse this thumbnail through tep_image for clients with javascript enabled
-				$extraImagePopupImage = tep_image($image, addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
-				// Set the large image's popup width
-				$extraImagePopupWidth = ((int)$image_size[0] + 5);
-				// Set the large image's popup height
-				$extraImagePopupHeight = ((int)$image_size[1] + 20);
-				// Set the large image's popup URL text
-				$extraImageURLText = TEXT_CLICK_TO_ENLARGE;
-				// Set the large image's popup URL
-				$extraImagePopupURL = tep_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $product_info['products_id'] . '&pic=' . $i . '&type=' . $lg_image_ext);
 ?>
 				<li>             
-                  <!-- LIGHTBOX/SLIMBOX -->
-                  <script type="text/javascript"><!--
-                  document.write('<?php echo '<a href="' . tep_href_link($image_lg) . '" target="_blank" rel="lightbox[group]" title="'.addslashes($product_info['products_name']).'" >' . $extraImagePopupImage; ?></a>');
-                  //--></script>
-                  <!-- EOF LIGHTBOX/SLIMBOX -->
-
-                  <noscript>
-                    <a href="<?php echo $extraImageURL; ?>" target="_blank"><?php echo $extraImageImage; ?></a>
-                  </noscript>
+                  <a href='<?php echo $image_lg; ?>' id='cz<?php echo $row;?>' class='cloud-zoom-gallery' title='<?php echo $product_info['products_name']; ?>' rel="useZoom: 'zoom1', smallImage: '<?php echo $image_prod; ?>' ">
+                  <img src="<?php echo $image; ?>" alt = "<?php echo $product_info['products_name']; ?>">
+                  </a>
 				</li>
 <?php
+                // Now lets generate an image string for Slimbox to open
+				$sb_string .= '["' . $image_lg . '", "' . $product_info['products_name'] . '"],';
+				$sb_image_string .= ', ' . $image_lg;
+				
 			} else {
 				// No larger image found; Only display the thumbnail without a "click to enlarge" link
 				echo '<li>' . $extraImageImage . '</li>';
@@ -107,8 +105,12 @@ if (isset($product_info_values) && is_object($product_info_values)) {
 			// Update the replace for the str_replace pattern search/replace for next image in the sequence
 			$replace = array($image_base, $i);
 		}
+		// Finish looping through mopics - need to close Slimbox string builer
+		$sb_string = substr($sb_string, 0, -1);
+		$sb_string .= ']';
+		
 		// All thumbnails have been found and displayed; clear all of the CSS floats
-?>
+?>  
 		        </ul>
               </div>
 			</td>
@@ -123,7 +125,8 @@ if (isset($product_info_values) && is_object($product_info_values)) {
     </table>
 <?php	
 	} else {
-		// No extra images found for this product
-		// echo '<p class="noScreenshots"><span class="smallText">' . TEXT_NO_MOPICS . '</span></p>';      
-    }
+		// No extra images found for this product we need to let Cloud Zoom open the single image on click
+		$sb_string = '[["' . $lightlarge . '", "' . $product_info['products_name'] . '"]]'; 
+		$sb_image_string = $lightlarge;
+	}
 ?>			

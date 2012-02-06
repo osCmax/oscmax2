@@ -46,7 +46,13 @@ $dir_fs_document_root = $HTTP_POST_VARS['DIR_FS_DOCUMENT_ROOT'];
 
 <div class="contentBlock">
   <div class="contentPane">
-
+<?php if (!is_writable($dir_fs_document_root . 'includes/') || !is_writable($dir_fs_document_root . 'admin/includes/')) { ?>
+   <table border="0" width="100%" cellspacing="0" cellpadding="5" class="inputForm">
+      <tr>
+        <td class="inputField"><?php echo TEXT_NO_CONFIG_PERMISSIONS . '<br /><img src="images/failed.gif" align="left" hspace="5" vspace="5" border="0">'; ?></td>
+        <td class="inputDescription"><?php echo TEXT_NO_CONFIG_PERMISSIONS_DESC . '<br /><strong>' . $dir_fs_document_root . 'includes' . '<br />' .  $dir_fs_document_root . 'admin/includes</strong><br /><br />'; ?></td>
+      </tr>
+<?php } else { ?> 
     <form name="installForm" id="installForm" action="install.php?step=4" method="post">
 
     <table border="0" width="100%" cellspacing="0" cellpadding="5" class="inputForm">
@@ -112,5 +118,6 @@ $dir_fs_document_root = $HTTP_POST_VARS['DIR_FS_DOCUMENT_ROOT'];
 ?>
 
     </form>
+<?php } ?>    
   </div>
 </div>

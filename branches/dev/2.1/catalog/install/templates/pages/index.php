@@ -128,13 +128,30 @@ $Id$
   <div class="contentPane">
 <?php
   $configfile_array = array();
-
+// If mod_php show an error message if configure.php files exist and are not writable.
+if (function_exists('apache_get_modules')) {
+/*  if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php') && !is_writeable(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php')) {
+    echo '<img src="images/failed.gif" align="left" hspace="5" vspace="5" border="0">';
+  }
+  if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php') && !is_writeable(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php')) {
+    echo '<img src="images/failed.gif" align="left" hspace="5" vspace="5" border="0">';
+  }
+*/
   if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php') && !is_writeable(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php')) {
-    @chmod(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php', 0777);
+    $configfile_array[] = osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php';
+  }
+  if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php') && !is_writeable(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php')) {
+    $configfile_array[] = osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php';
+  }
+} else {
+  //echo (osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php');
+  // If suphp, chmod existing configure.php files to be writable.
+  if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php') && !is_writeable(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php')) {
+    @chmod(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php', 0755);
   }
 
   if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php') && !is_writeable(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php')) {
-    @chmod(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php', 0777);
+    @chmod(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php', 0755);
   }
 
   if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php') && !is_writeable(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php')) {
@@ -144,7 +161,7 @@ $Id$
   if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php') && !is_writeable(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php')) {
     $configfile_array[] = osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php';
   }
-
+}
   $warning_array = array();
 
   if (function_exists('ini_get')) {

@@ -41,7 +41,7 @@ define('TEXT_INDEX_MAIN_BLOCK', '<p>osCmax allows you to sell products worldwide
   <p>osCmax and its add-ons are available for free under an Open Source license to help you start selling online sooner without any licensing fees or limitations involved.</p><p>&nbsp;</p><p>&nbsp;</p><br />');
 define('TEXT_REGISTER_GLOBALS_ERROR', 'Compatibility with register_globals is supported from PHP 4.3+. This setting <u>must be enabled</u> due to an older PHP version being used.');
 define('TEXT_PERMISSIONS_ERROR', '<p>The webserver is not able to save the installation parameters to its configuration files.</p><p>The following files need to have their file permissions set to world-writeable (chmod 777):</p><p></p>');
-define('TEXT_CORRECT_ERROR', '<p class="messageStackAlert">Please correct the errors shown to the right and retry the installation procedure with the changes in place.</p>
+define('TEXT_CORRECT_ERROR', '<p class="messageStackAlert">Please correct the errors shown above and retry the installation procedure with the changes in place.</p>
 ');
 define('TEXT_RESTART_WEB_SERVER_ERROR', '<p class="messageStackAlert"><i>Changing webserver configuration parameters may require the webserver service to be restarted before the changes take affect.</i>');
 define('TEXT_SERVER_SUCCESS', 'The webserver environment has been verified to proceed with a successful installation and configuration of your online store.<br /><br />Please continue to start the installation procedure.');
@@ -85,7 +85,10 @@ define('TEXT_PASSWORD', 'Administrator Password');
 define('TEXT_PASSWORD_DESC', 'The password to use for the administrator account.');
 define('TEXT_ADMIN_FOLDER_NAME', 'Admin Folder Name');
 define('TEXT_CHANGE_ADMIN_FOLDER', 'The name of folder in which the admin files should be kept.  It is <b>recommended that you change this</b> from the default setting of <b>admin</b> to improve your site\'s security. If you want to read more about security please <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">read the wiki</a>.');
-define('TEXT_ADMIN_NO_PERMISSION', 'We have been unable to obtain sufficient file permissions to allow you to change the name of your <b>admin/</b> folder.  You should rename this folder to improve your store security.  For instructions on how to manually do this once you have corrected your server settings please <a href="http://wiki.oscdox.com/v2.1/setting_up_security" target="_blank">read the wiki</a>.');
+define('TEXT_ADMIN_NO_PERMISSION', 'We have been unable to obtain sufficient file permissions to allow you to change the name of your <b>admin/</b> folder. <br><br>For instructions on how to resolve this issue, please <a href="http://wiki.oscdox.com/v2.5/installation_troubleshooting" target="_blank">See this help page</a>. <br><br>You should rename this folder to improve your store security.  For instructions on how to manually do this once you have corrected your server settings please <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">read the wiki</a>.');
+define('TEXT_NO_CONFIG_PERMISSIONS', 'The installer cannot create your configure.php files. <br/> Permissions are incorrect on several directories!');
+define('TEXT_NO_CONFIG_PERMISSIONS_DESC', ' You will need to change permissions to 755 or 777 on the following directories. <br />Once you have done this, reload this page and you will be able to continue the installation. If you still see this error after changing permissions and reloading this page, see the documentation for in depth <a href="http://wiki.oscdox.com/v2.5/installation_troubleshooting" target="_blank">Troubleshooting</a>. <br><br>Change permissions to 755 or 777 (hint, try 755 first. If it doesn\'t work, try 777) on the following directories:<br><br>');
+
 
 // Finished
 define('TEXT_FINISHED', '<h1>Installation Complete</h1><p>Congratulations on installing and configuring osCmax as your online store solution!</p><p>We wish you all the best with the success of your online store and welcome you to join and participate in our community.</p><p align="right"><i><b>- The osCmax team</b></i></p>');

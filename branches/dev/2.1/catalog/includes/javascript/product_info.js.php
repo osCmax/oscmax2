@@ -16,7 +16,6 @@ $Id$
   google.load("jquery", "1.4.2");
 </script>
 <script type="text/javascript" src="includes/javascript/slimbox2/slimbox2.js"></script>
-<?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
 <?php include(DIR_WS_INCLUDES . 'javascript/cloud-zoom.1.0.2.js.php'); ?>
 <script type="text/javascript" src="includes/javascript/jquery.scrollTo-min.js"></script>
 <script type="text/javascript" src="includes/javascript/jquery.serialScroll-min.js"></script>
@@ -54,7 +53,7 @@ $Id$
             break;
           }
         }		
-		jQuery.slimbox(<?php echo $sb_string; ?>, result);
+		jQuery.slimbox(<?php echo $sb_string; ?>, result, { loop: <?php echo SLIMBOX_LOOP ;?>, initialWidth: <?php echo SLIMBOX_WIDTH ;?>, initialHeight: <?php echo SLIMBOX_HEIGHT ;?>, overlayOpacity: <?php echo SLIMBOX_OPACITY ;?>, overlayFadeDuration: <?php echo SLIMBOX_FADE ;?>, imageFadeDuration: <?php echo SLIMBOX_IMAGE ;?>, resizeDuration: <?php echo SLIMBOX_RESIZE ;?>, counterText: <?php echo (stripslashes(SLIMBOX_COUNTER)) ;?>, captionAnimationDuration: <?php echo SLIMBOX_CAPTION ;?>,  resizeEasing: <?php echo (stripslashes(SLIMBOX_EASING)) ;?> });
 	 } 
 //--></script>
 <script language="javascript" type="text/javascript">

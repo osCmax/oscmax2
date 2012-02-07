@@ -374,7 +374,7 @@ background-position: top center; color: white; font-weight: bold; margin-left: 1
 }
 /* EOF: Index Page Tabs - Dadionline */
 
-/* BOF: Cloud Zoom /*
+/* BOF: Cloud Zoom */
 /* This is the moving lens square underneath the mouse pointer. */
 .cloud-zoom-lens {
 	border: 4px solid #888;
@@ -410,4 +410,4 @@ background-position: top center; color: white; font-weight: bold; margin-left: 1
 	padding:3px;
 	border:1px solid #000;
 }
-/* EOF: Cloud Zoom /*
+/* EOF: Cloud Zoom */

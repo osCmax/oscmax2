@@ -1007,7 +1007,7 @@ CREATE TABLE products_attributes (
   price_prefix char(1) NOT NULL,
   weight_prefix char(1) NOT NULL,
   options_values_weight decimal(6,3) NOT NULL DEFAULT '0.000',
-  products_options_sort_order INT UNSIGNED NOT NULL DEFAULT '0',
+  products_attributes_sort_order INT UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (products_attributes_id),
   KEY idx_products_attributes_products_id (products_id)
 );

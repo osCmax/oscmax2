@@ -29,7 +29,6 @@ class attributeManagerConfig {
 	
 	function attributeManagerConfig() {
 		
-		
 		/**
 		 * Default admin interface language id
 		 */
@@ -45,13 +44,11 @@ class attributeManagerConfig {
 		 */
 		$this->add('AM_ATOMIC_PRODUCT_UPDATES', false);
 		
-		
 		/**
 		 * Use attribute templates?
 		 * 
 		 */
 		$this->add('AM_USE_TEMPLATES',true);
-		
 		
 		/**
 		 * Template Table names
@@ -59,14 +56,13 @@ class attributeManagerConfig {
 		$this->add('AM_TABLE_TEMPLATES','am_templates');
 		$this->add('AM_TABLE_ATTRIBUTES_TO_TEMPLATES','am_attributes_to_templates');
 		
-		
 		$this->add('AM_USE_SORT_ORDER', true);
 
         /**
          * QT Pro plugin
          */
 		$this->add('AM_USE_QT_PRO', true);
-        $this->add('AM_DELETE_ZERO_STOCK', true); // if true, deletes options combinations with zero quantity from stock
+        	$this->add('AM_DELETE_ZERO_STOCK', true); // if true, deletes options combinations with zero quantity from stock
 		
         /**
          * Use More Product Weight plugin? (http://addons.oscommerce.com/info/2706) (added by RusNN)
@@ -77,9 +73,8 @@ class attributeManagerConfig {
 		 * Sort order tables
 		 */
 		$this->add('AM_FIELD_OPTION_SORT_ORDER', 'products_options_sort_order'); // Sort column on Products_options table
-		$this->add('AM_FIELD_OPTION_VALUE_SORT_ORDER', 'products_options_sort_order'); // Sort column on product_attributes table
+		$this->add('AM_FIELD_OPTION_VALUE_SORT_ORDER', 'products_attributes_sort_order'); // Sort column on product_attributes table
 	
-		
 		/**
 		 * How do sort the drop down lists in the admin - purly asthetic
 		 * options

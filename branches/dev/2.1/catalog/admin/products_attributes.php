@@ -30,9 +30,9 @@ $Id$
 		$clone_product_id_from = $HTTP_POST_VARS['clone_products_id_from'];
 		$clone_product_id_to = $HTTP_POST_VARS['clone_products_id_to'];
 		tep_db_query("delete from ".TABLE_PRODUCTS_ATTRIBUTES." WHERE products_id='".$clone_product_id_to."'");
-		$attributes = tep_db_query("select products_id, options_id, options_values_id, options_values_price, price_prefix, products_options_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES ." where products_id='".$clone_product_id_from."'");
+		$attributes = tep_db_query("select products_id, options_id, options_values_id, options_values_price, price_prefix, products_attributes_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES ." where products_id='".$clone_product_id_from."'");
 		while($attributes_values = tep_db_fetch_array($attributes)) {
-          tep_db_query("INSERT INTO " . TABLE_PRODUCTS_ATTRIBUTES . " ( products_id, options_id, options_values_id, options_values_price, price_prefix, products_options_sort_order) VALUES (".$clone_product_id_to.", ".$attributes_values['options_id'].", ".$attributes_values['options_values_id'].", ".$attributes_values['options_values_price'].", '".$attributes_values['price_prefix']."' , ".$attributes_values['products_options_sort_order'].")");
+          tep_db_query("INSERT INTO " . TABLE_PRODUCTS_ATTRIBUTES . " ( products_id, options_id, options_values_id, options_values_price, price_prefix, products_attributes_sort_order) VALUES (".$clone_product_id_to.", ".$attributes_values['options_id'].", ".$attributes_values['options_values_id'].", ".$attributes_values['options_values_price'].", '".$attributes_values['price_prefix']."' , ".$attributes_values['products_attributes_sort_order'].")");
 		}	
         tep_redirect(tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info));
         break;
@@ -96,13 +96,13 @@ $Id$
         $weight_prefix = tep_db_prepare_input($_POST['weight_prefix']);
 // EOF: More Product Weight
 // BOF: Attribute Sort with Clone Tool
-        $products_options_sort_order = tep_db_prepare_input($_POST['products_options_sort_order']);
+        $products_attributes_sort_order = tep_db_prepare_input($_POST['products_attributes_sort_order']);
 // EOF: Attribute Sort with Clone Tool
 
         // tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values (null, '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "')");
         // Attributes Product Codes added . tep_db_input($code_suffix) . "', '" . tep_db_input($suffix_sort_order) . "', '" to query
 		// Attribute sort order added: tep_db_input($products_options_sort_order)
-	tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values ('', '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . tep_db_input($code_suffix) . "', '" . tep_db_input($suffix_sort_order) . "', '" . (float)tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "', '" . tep_db_input($weight_prefix) . "', '" . tep_db_input($value_weight) . "', '" . tep_db_input($products_options_sort_order) . "')");
+	tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " values ('', '" . (int)$products_id . "', '" . (int)$options_id . "', '" . (int)$values_id . "', '" . tep_db_input($code_suffix) . "', '" . tep_db_input($suffix_sort_order) . "', '" . (float)tep_db_input($value_price) . "', '" . tep_db_input($price_prefix) . "', '" . tep_db_input($weight_prefix) . "', '" . tep_db_input($value_weight) . "', '" . tep_db_input($products_attributes_sort_order) . "')");
         // END: More Product Weight
 
         if (DOWNLOAD_ENABLED == 'true') {
@@ -189,12 +189,12 @@ $Id$
         $weight_prefix = tep_db_prepare_input($_POST['weight_prefix']);
 // EOF: More Product Weight
 // BOE: Attribute Sort with Clone Tool
-        $products_options_sort_order = tep_db_prepare_input($_POST['products_options_sort_order']);
+        $products_attributes_sort_order = tep_db_prepare_input($_POST['products_attributes_sort_order']);
 // EOE: Attribute Sort with Clone Tool
 
         // tep_db_query("update " . TABLE_PRODUCTS_ATTRIBUTES . " set products_id = '" . (int)$products_id . "', options_id = '" . (int)$options_id . "', options_values_id = '" . (int)$values_id . "', options_values_price = '" . (float)tep_db_input($value_price) . "', price_prefix = '" . tep_db_input($price_prefix) . "' where products_attributes_id = '" . (int)$attribute_id . "'");
         // Attributes Product Codes Added code_suffix = '" . tep_db_input($code_suffix) . "', suffix_sort_order = '" . tep_db_input($suffix_sort_order) . "', to query
-	tep_db_query("update " . TABLE_PRODUCTS_ATTRIBUTES . " set products_id = '" . (int)$products_id . "', options_id = '" . (int)$options_id . "', options_values_id = '" . (int)$values_id . "', code_suffix = '" . tep_db_input($code_suffix) . "', suffix_sort_order = '" . tep_db_input($suffix_sort_order) . "',options_values_price = '" . (float)tep_db_input($value_price) . "', price_prefix = '" . tep_db_input($price_prefix) . "', options_values_weight = '" . tep_db_input($value_weight) . "', weight_prefix = '" . tep_db_input($weight_prefix) . "', products_options_sort_order = '" . tep_db_input($products_options_sort_order) . "' where products_attributes_id = '" . (int)$attribute_id . "'");
+	tep_db_query("update " . TABLE_PRODUCTS_ATTRIBUTES . " set products_id = '" . (int)$products_id . "', options_id = '" . (int)$options_id . "', options_values_id = '" . (int)$values_id . "', code_suffix = '" . tep_db_input($code_suffix) . "', suffix_sort_order = '" . tep_db_input($suffix_sort_order) . "',options_values_price = '" . (float)tep_db_input($value_price) . "', price_prefix = '" . tep_db_input($price_prefix) . "', options_values_weight = '" . tep_db_input($value_weight) . "', weight_prefix = '" . tep_db_input($weight_prefix) . "', products_attributes_sort_order = '" . tep_db_input($products_attributes_sort_order) . "' where products_attributes_id = '" . (int)$attribute_id . "'");
         // END: More Product Weight
 
         if (DOWNLOAD_ENABLED == 'true') {
@@ -807,7 +807,7 @@ function go_option() {
       } 
 ?>        
             </select>&nbsp;</td>
-            <td align="center" class="smallText">&nbsp;<input type="text" name="products_options_sort_order" value="<?php echo $products_options_sort_order; ?>" size="3">&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<input type="text" name="products_attributes_sort_order" value="<?php echo $products_attributes_sort_order; ?>" size="3">&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<input type="text" name="code_suffix" value="<?php echo $attributes_values['code_suffix']; ?>" size="10">&nbsp;</td>
 	    <!-- START: Attribute Product Codes -->
 	    <td align="center" class="smallText">&nbsp;<input type="text" name="suffix_sort_order" value="<?php echo $attributes_values['suffix_sort_order']; ?>" size="2">&nbsp;</td>
@@ -862,7 +862,7 @@ function go_option() {
             <td class="smallText">&nbsp;<b><?php echo $products_name_only; ?></b>&nbsp;</td>
             <td class="smallText">&nbsp;<b><?php echo $options_name; ?></b>&nbsp;</td>
             <td class="smallText">&nbsp;<b><?php echo $values_name; ?></b>&nbsp;</td>
-            <td align="center" class="smallText">&nbsp;<b><?php echo $products_options_sort_order; ?></b>&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<b><?php echo $products_attributes_sort_order; ?></b>&nbsp;</td>
 	    <!-- START: Attribute Product Codes -->
             <td align="center" class="smallText">&nbsp;<b><?php echo $attributes_values["code_suffix"]; ?></b>&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<b><?php echo $attributes_values["suffix_sort_order"]; ?></b>&nbsp;</td>
@@ -881,7 +881,7 @@ function go_option() {
             <td class="smallText">&nbsp;<?php echo $products_name_only; ?>&nbsp;</td>
             <td class="smallText">&nbsp;<?php echo $options_name; ?>&nbsp;</td>
             <td class="smallText">&nbsp;<?php echo $values_name; ?>&nbsp;</td>
-            <td align="center" class="smallText">&nbsp;<?php echo $products_options_sort_order; ?>&nbsp;</td>
+            <td align="center" class="smallText">&nbsp;<?php echo $products_attributes_sort_order; ?>&nbsp;</td>
 	    <!-- START: Attribute Product Codes -->
             <td align="center" class="smallText">&nbsp;<?php echo $attributes_values["code_suffix"]; ?>&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<?php echo $attributes_values["suffix_sort_order"]; ?>&nbsp;</td>
@@ -989,7 +989,7 @@ function go_option() {
         </table></form></td>
       </tr>
       
-      <!-- BOE: Attribute Sort with Clone Tool //-->
+      <!-- BOF: Attribute Sort with Clone Tool //-->
       <tr>
         <td>
      	<?php echo '<form name="clone" action="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=clone_attributes', 'NONSSL') . '" method="post">'; ?>
@@ -1022,7 +1022,7 @@ function go_option() {
           </table>
         </form></td>
       </tr>	
-<!-- EOE: Attribute Sort with Clone Tool //-->
+<!-- EOF: Attribute Sort with Clone Tool //-->
 
     </table></td>
 <!-- products_attributes_eof //-->

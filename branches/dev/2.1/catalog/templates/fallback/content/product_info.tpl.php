@@ -243,22 +243,23 @@ $Id$
                     } else {
                       include(DIR_WS_MODULES . 'product_tabs.php'); }
                     // EOF: Tabs by PGM
-						// start indvship
-						$extra_shipping_query = tep_db_query("select products_ship_price, products_ship_price_two from " . TABLE_PRODUCTS_SHIPPING . " where products_id = '" . (int)$products_id . "'");
-						if (tep_db_num_rows($extra_shipping_query)) {
-							$extra_shipping = tep_db_fetch_array($extra_shipping_query);
-							if($extra_shipping['products_ship_price'] == '0.00'){
-								echo '<i>(Free Shipping for this Item)</i>';
-							} else {
-								echo '<i>(This item requires additional shipping of $' . $extra_shipping['products_ship_price'];
-								if (($extra_shipping['products_ship_price_two']) > 0) {
-									echo ' for the first item, and $' . $extra_shipping['products_ship_price_two'] . ' for each additional item + regular shipping costs.)</i>';
-								} else {
-									echo ' + regular shipping costs.)</i>';
-								}
-							}
+					
+					// start indvship
+					$extra_shipping_query = tep_db_query("select products_ship_price, products_ship_price_two from " . TABLE_PRODUCTS_SHIPPING . " where products_id = '" . (int)$products_id . "'");
+					if (tep_db_num_rows($extra_shipping_query)) {
+					  $extra_shipping = tep_db_fetch_array($extra_shipping_query);
+					  if($extra_shipping['products_ship_price'] == '0.00'){
+						echo TEXT_FREE_SHIPPING;
+					  } else {
+						echo TEXT_ADDITIONAL_SHIPPING . $extra_shipping['products_ship_price'];
+						if (($extra_shipping['products_ship_price_two']) > 0) {
+						  echo TEXT_ADDITIONAL_SHIPPING_2 . $extra_shipping['products_ship_price_two'] . TEXT_ADDITIONAL_SHIPPING_3;
+						} else {
+						  echo TEXT_ADDITIONAL_SHIPPING_4;
 						}
-						// end indvship		    
+					  }
+					}
+					// end indvship		    
                 ?>
                 </td>
                 <!-- Description Ends -->

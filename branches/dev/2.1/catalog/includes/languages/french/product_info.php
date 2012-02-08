@@ -81,4 +81,12 @@ define('ALT_FIRST_PRODUCT','Premier produit');
 
 define('ALT_LAST_PRODUCT','Dernière produit');
 
+// start indvship
+define('TEXT_FREE_SHIPPING', '<i>(Free Shipping for this Item)</i>');
+define('TEXT_ADDITIONAL_SHIPPING', '<i>(This item requires additional shipping of $');
+define('TEXT_ADDITIONAL_SHIPPING_2', ' for the first item, and $');
+define('TEXT_ADDITIONAL_SHIPPING_3', ' for each additional item + regular shipping costs.)</i>');
+define('TEXT_ADDITIONAL_SHIPPING_4', ' + regular shipping costs.)</i>');
+// end indvship
+
 ?>

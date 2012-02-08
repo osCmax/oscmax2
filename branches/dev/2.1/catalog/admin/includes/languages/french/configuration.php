@@ -308,6 +308,10 @@ define('CT_SHIPPING_UNIT_LENGTH', 'Unit Length');
 define('CD_SHIPPING_UNIT_LENGTH', 'By what unit are your packages sized?');
 define('CT_SHIPPING_STORE_BOXES_USED', 'Store result of packing routines');
 define('CD_SHIPPING_STORE_BOXES_USED', 'Do you want to store the results of the packing routines in the database? See file store_ups_boxes_used.txt in UPSXML package for details and modifications needed.');
+define('CT_INDIVIDUAL_SHIP_HOME_COUNTRY', 'Indiv Ship Home Country');
+define('CD_INDIVIDUAL_SHIP_HOME_COUNTRY', 'Individual ship home country ID (other countries will have extra freight');
+define('CT_INDIVIDUAL_SHIP_INCREASE', 'Indiv Ship Outside Home Increase');
+define('CD_INDIVIDUAL_SHIP_INCREASE', 'Individual ship x increase for shipping outside home country. For example: If you set your item ship price to $50 and this value to 3 and ship outside your home country they will pay $150, and if this value was 2, they would pay $100.');
 
 // Configuration ID: 8 - Product Listing
 define('CT_PRODUCT_LIST_IMAGE', 'Display Product Image');

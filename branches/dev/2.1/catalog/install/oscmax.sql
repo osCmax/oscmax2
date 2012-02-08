@@ -1941,6 +1941,8 @@ INSERT INTO configuration VALUES (1487, 'CT_SHIPPING_DIMENSIONS_SUPPORT', 'SHIPP
 INSERT INTO configuration VALUES (1488, 'CT_SHIPPING_UNIT_WEIGHT', 'SHIPPING_UNIT_WEIGHT', 'LBS', 'CD_SHIPPING_UNIT_WEIGHT', 7, 7, NULL, now(), NULL, 'tep_cfg_select_option(array(''LBS'', ''KGS''), ');
 INSERT INTO configuration VALUES (1489, 'CT_SHIPPING_UNIT_LENGTH', 'SHIPPING_UNIT_LENGTH', 'IN', 'CD_SHIPPING_UNIT_LENGTH', 7, 8, NULL, now(), NULL, 'tep_cfg_select_option(array(''IN'', ''CM''), ');
 INSERT INTO configuration VALUES (1490, 'CT_SHIPPING_STORE_BOXES_USED', 'SHIPPING_STORE_BOXES_USED', 'false', 'CD_SHIPPING_STORE_BOXES_USED', 7, 9, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''), ');
+INSERT INTO configuration VALUES (3525, 'CT_INDIVIDUAL_SHIP_HOME_COUNTRY', 'INDIVIDUAL_SHIP_HOME_COUNTRY', '223', 'CD_INDIVIDUAL_SHIP_HOME_COUNTRY', 7, NULL, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (3526, 'CT_INDIVIDUAL_SHIP_INCREASE', 'INDIVIDUAL_SHIP_INCREASE', '3', 'CD_INDIVIDUAL_SHIP_INCREASE', 7, NULL, now(), now(), NULL, NULL);
 
 # Configuration ID: 8 - Product Listing
 INSERT INTO configuration VALUES (104, 'CT_PRODUCT_LIST_IMAGE', 'PRODUCT_LIST_IMAGE', '2', 'CD_PRODUCT_LIST_IMAGE', '8', '2', NULL, now(), NULL, NULL);
@@ -2413,10 +2415,6 @@ INSERT INTO configuration VALUES (3086, 'CT_ONEPAGE_TELEPHONE', 'ONEPAGE_TELEPHO
 INSERT INTO configuration VALUES (3087, 'CT_ONEPAGE_ZIP_BELOW', 'ONEPAGE_ZIP_BELOW', 'False', 'CD_ONEPAGE_ZIP_BELOW', 7575, 38, NULL, now(), NULL, 'tep_cfg_select_option(array(''False'',''True''),');
 INSERT INTO configuration VALUES (3088, 'CT_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'true', 'CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 7575, 100, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (3089, 'CT_ONEPAGE_ADDR_LAYOUT', 'ONEPAGE_ADDR_LAYOUT', 'vertical', 'CD_ONEPAGE_ADDR_LAYOUT', 7575, 1000, NULL, now(), NULL, 'tep_cfg_select_option(array(''vertical'', ''horizontal''), ');
-
-#Individual Shipping 4.5 Default values
-INSERT INTO configuration VALUES ('', 'Indiv Ship Home Country', 'INDIVIDUAL_SHIP_HOME_COUNTRY', '223', 'Individual ship home country ID (other countries will have extra freight)', 7, NULL, now(), now(), NULL, NULL);
-INSERT INTO configuration VALUES ('', 'Indiv Ship Outside Home Increase', 'INDIVIDUAL_SHIP_INCREASE', '3', 'Individual ship x increase for shipping outside home country. For example: If you set your item ship price to $50 and this value to 3 and ship outside your home country they will pay $150, and if this value was 2, they would pay $100.', 7, NULL, now(), now(), NULL, NULL);
 
 INSERT INTO configuration_group VALUES (1, 'BOX_CONFIGURATION_MYSTORE', 'General information about my store', 1, 1);
 INSERT INTO configuration_group VALUES (2, 'BOX_CONFIGURATION_MIN_VALUES', 'The minimum values for functions / data', 2, 1);

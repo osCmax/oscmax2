@@ -247,7 +247,7 @@ if ((file_exists(tep_session_save_path() . '/sess_' . $session_id)) && (filesize
     // whois url hardcoded        :  
   /*  echo '<b>' . TABLE_HEADING_IP_ADDRESS . ':</b> ' . "<a href='http://www.dnsstuff.com/tools/whois.ch?ip=$whos_online[ip_address]' target='_new'>" . $whos_online['ip_address'] . "</a>"; */
 
-echo '<b>' . TABLE_HEADING_IP_ADDRESS . ':</b> ' . "<a href=http://www.ipinfodb.com/ip_locator.php?ip=$whos_online[ip_address]' target='_new'>" . $whos_online['ip_address'] . "</a>";
+echo '<b>' . TABLE_HEADING_IP_ADDRESS . ':</b> ' . "<a href=http://www.ipinfodb.com/ip_location_api.php?ip=$whos_online[ip_address]' target='_new'>" . $whos_online['ip_address'] . "</a>";
 
 
     // whois url with variable added in admin    :     echo '<b>' . TABLE_HEADING_IP_ADDRESS . ':</b> ' . "<a href='" . AZER_WHOSONLINE_WHOIS_URL . $whos_online['ip_address'] . "' target='_new'>" . $whos_online['ip_address'] . "</a>";
@@ -668,7 +668,7 @@ echo '<b>' . TABLE_HEADING_IP_ADDRESS . ':</b> ' . "<a href=http://www.ipinfodb.
 											} elseif ( $hostname == 'unknown' ) {
 												echo '<font color="' . $fg_color . '">' . $hostname . '</font>' . "\n";
 											} else {
-												echo '<a href="http://www.ipinfodb.com/ip_locator.php?ip=' . $whos_online['ip_address'] . '" target="_blank">';
+												echo '<a href="http://www.ipinfodb.com/ip_location_api.php?ip=' . $whos_online['ip_address'] . '" target="_blank">';
 												echo '<font color="' . $fg_color . '">' . $hostname . '</font></a>' . "\n";
 											}
 											?>

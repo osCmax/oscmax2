@@ -29,27 +29,27 @@ define('BOX_MERCHANT_INFO', 'Merchant Application');
 define('BOX_PAYPAL_INFO', 'Paypal Anmeldung');
 
 // Filename defines for Admin Group Permissions - when file permission needed but not menu item.
-define('FILE_GC_DASHBOARD', '</b>Google Checkout Dashboard<b>');
-define('FILE_COUPON_RESTRICT', '</b>Aktionsgutscheineinschränkung<b>');
-define('FILE_VALID_PRODUCTS', '</b>Gültige Produkte<b>');
-define('FILE_VALID_CATEGORIES', '</b>Gültige Kategorien<b>');
-define('FILE_LIST_PRODUCTS', '</b>Produkte auflisten<b>');
-define('FILE_LIST_CATEGORIES', '</b>Katekorien auflisten<b>');
-define('FILE_TREE_VIEW', '</b>Baumdarstellung<b>');
-define('FILE_BANNER_STATISTICS', '</b>Bannerstatistikdatei<b>');
-define('FILE_STOCK', '</b>Lagerstandsdatei<b>');
-define('FILE_NEW_ATTRIBUTES_CONFIG', '</b>Attributkonfigurationsvariablen<b>'); 
-define('FILE_COMMON_REPORTS', '</b>Berichtedatei<b>');
-define('FILE_FEDEX', '</b>Fedexdatei<b>');
-define('FILE_AFFILIATE', '</b>Affiliatedatei<b>');
-define('FILE_FEEDMACHINE', '</b>Feedmachinedatei<b>');
-define('FILE_EASYPOPULATE', '</b>Easypopulatedatei<b>');
-define('FILE_ATTRIBUTE', '</b>Attributedatei<b>');
-define('FILE_DISCOUNT_CATEGORIES', '</b>Rabattierte-Kategorien-Datei<b>');
-define('FILE_CREATE_ACCOUNT', '</b>Konto-erstellen-Datei<b>');
-define('FILE_ORDER', '</b>Bestellungsdatei<b>');
-define('FILE_PAYPAL', '</b>PayPaldatei<b>');
-define('FILE_INFORMATION', '</b>Informationsseitendatei<b>');
+define('FILE_GC_DASHBOARD', '<b>Google Checkout Dashboard</b>');
+define('FILE_COUPON_RESTRICT', '<b>Aktionsgutscheineinschränkung</b>');
+define('FILE_VALID_PRODUCTS', '<b>Gültige Produkte</b>');
+define('FILE_VALID_CATEGORIES', '<b>Gültige Kategorien</b>');
+define('FILE_LIST_PRODUCTS', '<b>Produkte auflisten</b>');
+define('FILE_LIST_CATEGORIES', '<b>Katekorien auflisten</b>');
+define('FILE_TREE_VIEW', '<b>Baumdarstellung</b>');
+define('FILE_BANNER_STATISTICS', '<b>Bannerstatistikdatei</b>');
+define('FILE_STOCK', '<b>Lagerstandsdatei</b>');
+define('FILE_NEW_ATTRIBUTES_CONFIG', '<b>Attributkonfigurationsvariablen</b>'); 
+define('FILE_COMMON_REPORTS', '<b>Berichtedatei</b>');
+define('FILE_FEDEX', '<b>Fedexdatei</b>');
+define('FILE_AFFILIATE', '<b>Affiliatedatei</b>');
+define('FILE_FEEDMACHINE', '<b>Feedmachinedatei</b>');
+define('FILE_EASYPOPULATE', '<b>Easypopulatedatei</b>');
+define('FILE_ATTRIBUTE', '<b>Attributedatei</b>');
+define('FILE_DISCOUNT_CATEGORIES', '<b>Rabattierte-Kategorien-Datei</b>');
+define('FILE_CREATE_ACCOUNT', '<b>Konto-erstellen-Datei</b>');
+define('FILE_ORDER', '<b>Bestellungsdatei</b>');
+define('FILE_PAYPAL', '<b>PayPaldatei</b>');
+define('FILE_INFORMATION', '<b>Informationsseitendatei</b>');
 
 // images
 define('IMAGE_FILE_PERMISSION', 'Dateiberechtigungen');
@@ -170,7 +170,7 @@ define('TITLE', PROJECT_VERSION);
 // Create account & order
 define('BOX_HEADING_MANUAL_ORDER', 'Manuelle Bestellungen');
 define('BOX_MANUAL_ORDER_CREATE_ACCOUNT', 'Konto erstellen');
-define('BOX_MANUAL_ORDER_CREATE_ORDER', 'Bestellung erstellen');
+define('BOX_MANUAL_ORDER_CREATE_ORDER', 'Bestellung erfassen');
 
 // pull down default text
 define('PULL_DOWN_DEFAULT', 'Bitte auswählen');
@@ -220,7 +220,7 @@ define('BOX_CONFIGURATION_TEMPLATE_SETUP', 'Templateeinstellungen');
 define('BOX_CONFIGURATION_PAGE_MODULES', 'Seitenmodule');
 define('BOX_CONFIGURATION_INFO_PAGES', 'Informationsseiten');
 define('BOX_CONFIGURATION_WELCOME', 'Begrüßungstexte');
-define('BOX_CONFIGURATION_OFS', 'Empfehlungen');
+define('BOX_CONFIGURATION_OFS', 'Empfohlene Produkte');
 define('BOX_CONFIGURATION_AFFILIATE', 'Affiliate');
 define('BOX_CONFIGURATION_ACCOUNTS', 'Konten');
 define('BOX_CONFIGURATION_MAINTENANCE', 'Wartungsmodus');
@@ -426,7 +426,7 @@ define('ENTRY_PASSWORD_CONFIRMATION', 'Passwort bestätigen:');
 define('ENTRY_PASSWORD_CONFIRMATION_TEXT', '&nbsp;<span class="errorText">*</span>');
 define('ENTRY_PASSWORD_ERROR', '&nbsp;<small><font color="#FF0000">mindestens ' . ENTRY_PASSWORD_MIN_LENGTH . ' Zeichen</font></small>');
 define('ENTRY_PASSWORD_TEXT', '&nbsp;<span class="errorText">*</span>');
-define('PASSWORD_HIDDEN', '--VERSTECKT--');
+define('PASSWORD_HIDDEN', '--UNSICHTBAR--');
 // EOF: MOD - ORDER EDIT
 
 

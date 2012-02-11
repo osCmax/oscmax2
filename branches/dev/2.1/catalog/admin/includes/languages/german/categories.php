@@ -10,17 +10,17 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Kategorien / Artikel');
+define('HEADING_TITLE', 'Kategorien / Produkte');
 define('HEADING_TITLE_SEARCH', 'Suche: ');
 define('HEADING_TITLE_GOTO', 'Gehe zu:');
 
 define('TABLE_HEADING_ID', 'ID');
-define('TABLE_HEADING_CATEGORIES_PRODUCTS', 'Kategorien / Artikel');
+define('TABLE_HEADING_CATEGORIES_PRODUCTS', 'Kategorien / Produkte');
 define('TABLE_HEADING_MODEL_NUMBER', 'Artikelnummer');
 define('TABLE_HEADING_ACTION', 'Aktion');
 define('TABLE_HEADING_STATUS', 'Status');
 
-define('TEXT_NEW_PRODUCT', 'Artikel hinzufügen/bearbeiten in &quot;%s&quot;');
+define('TEXT_NEW_PRODUCT', 'Produkte hinzufügen/bearbeiten in &quot;%s&quot;');
 define('TEXT_CATEGORIES', 'Kategorien:');
 define('TEXT_SUBCATEGORIES', 'Unterkategorien:');
 define('TEXT_PRODUCTS', 'Produkte:');
@@ -48,17 +48,17 @@ define('TEXT_INFO_CURRENT_CATEGORIES', 'aktuelle Kategorien:');
 
 define('TEXT_INFO_HEADING_NEW_CATEGORY', 'Neue Kategorie');
 define('TEXT_INFO_HEADING_EDIT_CATEGORY', 'Kategorie bearbeiten');
-define('TEXT_INFO_HEADING_DELETE_CATEGORY', 'Kategorie l&ouml;schen');
+define('TEXT_INFO_HEADING_DELETE_CATEGORY', 'Kategorie löschen');
 define('TEXT_INFO_HEADING_MOVE_CATEGORY', 'Kategorie verschieben');
-define('TEXT_INFO_HEADING_DELETE_PRODUCT', 'Artikel löschen');
-define('TEXT_INFO_HEADING_MOVE_PRODUCT', 'Artikel verschieben');
+define('TEXT_INFO_HEADING_DELETE_PRODUCT', 'Produkt löschen');
+define('TEXT_INFO_HEADING_MOVE_PRODUCT', 'Produkt verschieben');
 define('TEXT_INFO_HEADING_COPY_TO', 'Kopieren nach');
 
 define('TEXT_DELETE_CATEGORY_INTRO', 'Sind Sie sicher, dass Sie diese Kategorie löschen möchten?');
-define('TEXT_DELETE_PRODUCT_INTRO', 'Sind Sie sicher, dass Sie diesen Artikel löschen möchten?');
+define('TEXT_DELETE_PRODUCT_INTRO', 'Sind Sie sicher, dass Sie dieses Produkt löschen möchten?');
 
 define('TEXT_DELETE_WARNING_CHILDS', '<b>WARNUNG:</b> Es existieren noch %s (Unter-)Kategorien, die mit dieser Kategorie verbunden sind!');
-define('TEXT_DELETE_WARNING_PRODUCTS', '<b>WARNUNG:</b> Es existieren noch %s Artikel, die mit dieser Kategorie verbunden sind!');
+define('TEXT_DELETE_WARNING_PRODUCTS', '<b>WARNUNG:</b> Es existieren noch %s Produkt(e), die mit dieser Kategorie verbunden sind!');
 
 define('TEXT_MOVE_PRODUCTS_INTRO', 'Bitte wählen Sie die Kategorie, in die Sie <b>%s</b> verschieben möchten');
 define('TEXT_MOVE_CATEGORIES_INTRO', 'Bitte wählen Sie die Kategorie, in die Sie <b>%s</b> verschieben möchten');
@@ -70,7 +70,7 @@ define('TEXT_CATEGORIES_IMAGE', 'Kategoriebild:');
 define('TEXT_SORT_ORDER', 'Sortierung:');
 
 define('TEXT_PRODUCTS_STATUS', 'Status:');
-define('TEXT_PRODUCTS_DATE_AVAILABLE', 'Erscheinungsdatum:');
+define('TEXT_PRODUCTS_DATE_AVAILABLE', 'Lagernd ab:');
 define('TEXT_PRODUCT_AVAILABLE', 'Lagernd');
 define('TEXT_PRODUCT_NOT_AVAILABLE', 'Nicht Lagernd');
 define('TEXT_PRODUCTS_MANUFACTURER', 'Hersteller:');
@@ -89,7 +89,7 @@ define('TEXT_PRODUCTS_HEIGHT', 'Höhe:');
 define('TEXT_PRODUCTS_LENGTH', 'Länge:');
 define('TEXT_PRODUCTS_WIDTH', 'Breite:');
 define('TEXT_PRODUCTS_READY_TO_SHIP', 'Versandbereit:<br/>(Fedex)');
-define('TEXT_PRODUCTS_READY_TO_SHIP_SELECTION', 'Das Produkt kann in der eigenen Verpackung versandt werden.');
+define('TEXT_PRODUCTS_READY_TO_SHIP_SELECTION', 'Das Produkt kann in der eigenen Verpackung versendet werden.');
 
 // BOF Separate Pricing Per Customer
 define('TEXT_CUSTOMERS_GROUPS_NOTE', 'Hinweis: Wenn Sie ein Feld leer lassen, wird kein Preis für diese Kundegruppe in die Datenbank eingefügt.<br />
@@ -152,7 +152,7 @@ define('TAB6', 'Tab 6');
 define('TEXT_HIDE_PRODUCTS_FROM_GROUP', 'Produkt in diesen Gruppen verstecken:');
 define('TEXT_HIDDEN_FROM_GROUPS', 'Versteckt in diesen Gruppen: ');
 define('TEXT_GROUPS_NONE', 'keine');
-define('TEXT_HIDE_CATEGORIES_FROM_GROUPS', 'Kategorien in diesen Gruppen verstecken:');
+define('TEXT_HIDE_CATEGORIES_FROM_GROUPS', 'Kategorie in diesen Gruppen verstecken:');
 define('TABLE_HEADING_HIDE_CATEGORIES', 'Versteckt');
 // 0: Icons for all groups for which the category or product is hidden, mouse-over the icons to see what group
 // 1: Only one icon and only if the category or product is hidden for a group, mouse-over the icon to what groups
@@ -200,6 +200,7 @@ define('HEADING_MSRP_HELP', 'Unverbindlich Verkaufspreis des Herstellers');
 define('TEXT_MSRP_HELP', 'Wenn Sie den UVP in Ihrem Onlineshop auf der Produktinformationsseite anzeigen lassen möchten, geben Sie ihn hier ein.');
 define('TEXT_ADD_PL', 'Einen weiteren Preissprung hinzufügen');
 define('TEXT_FEATURED_UNTIL', 'Empfohlen bis: ');
+define('TEXT_SHIPPING_PRICE', 'Indiv. Versandkosten: ');
 
 define('TEXT_THUMBNAIL_IMAGE', 'Vorschaubild:');
 

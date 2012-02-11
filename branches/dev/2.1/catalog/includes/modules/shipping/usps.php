@@ -9,7 +9,7 @@ $Id$
 
   Released under the GNU General Public License
 */
-
+//USPS Mod version 5.2.2
 /////////////////////////////////////////
 ////////// Sets up USPS Class ///////////
 /////////////////////////////////////////
@@ -62,32 +62,32 @@ class usps
 		$this->intl_handling = explode( ", ", MODULE_SHIPPING_USPS_INTL_HANDLING);
 		$this->sig_conf_thresh = MODULE_SHIPPING_USPS_SIG_THRESH;
 		$this->types = array(
-			'First-Class Mail' => 'First-Class Mail',
-			'Media Mail' => 'Media Mail',
-			'Parcel Post' => 'Parcel Post',
-			'Priority Mail' => 'Priority Mail',
-			'Priority Mail Flat Rate Envelope' => 'Priority Mail Flat Rate Envelope',
-			'Priority Mail Small Flat Rate Box' => 'Priority Mail Small Flat Rate Box',
-			'Priority Mail Medium Flat Rate Box' => 'Priority Mail Medium Flat Rate Box',
-			'Priority Mail Large Flat Rate Box' => 'Priority Mail Large Flat Rate Box',
-			'Express Mail' => 'Express Mail',
-			'Express Mail Flat Rate Envelope' => 'Express Mail Flat Rate Envelope'
+			'First-Class Mail regimark' => 'First-Class Mail regimark',
+			'Media Mail regimark' => 'Media Mail regimark',
+			'Parcel Post regimark' => 'Parcel Post regimark',
+			'Priority Mail regimark' => 'Priority Mail regimark',
+			'Priority Mail regimark Flat Rate Envelope' => 'Priority Mail regimark Flat Rate Envelope',
+			'Priority Mail regimark Small Flat Rate Box' => 'Priority Mail regimark Small Flat Rate Box',
+			'Priority Mail regimark Medium Flat Rate Box' => 'Priority Mail regimark Medium Flat Rate Box',
+			'Priority Mail regimark Large Flat Rate Box' => 'Priority Mail regimark Large Flat Rate Box',
+			'Express Mail regimark' => 'Express Mail regimark',
+			'Express Mail regimark Flat Rate Envelope' => 'Express Mail regimark Flat Rate Envelope'
 			);
 		$this->intl_types = array(
-			'Global Express' => 'Global Express Guaranteed (GXG)**',
-			'Global Express Non-Doc Rect' => 'Global Express Guaranteed Non-Document Rectangular',
-			'Global Express Non-Doc Non-Rect' => 'Global Express Guaranteed Non-Document Non-Rectangular',
-			'USPS GXG Envelopes' => 'USPS GXG Envelopes**',
-			'Express Mail Int' => 'Express Mail International',
-			'Express Mail Int Flat Rate Env' => 'Express Mail International Flat Rate Envelope',
-			'Priority Mail International' => 'Priority Mail International',
-			'Priority Mail Int Flat Rate Lrg Box' => 'Priority Mail International Large Flat Rate Box',
-			'Priority Mail Int Flat Rate Med Box' => 'Priority Mail International Medium Flat Rate Box',
-			'Priority Mail Int Flat Rate Small Box' => 'Priority Mail International Small Flat Rate Box**',
-			'Priority Mail Int Flat Rate Env' => 'Priority Mail International Flat Rate Envelope**',
-			'First-Class Mail Int Lrg Env' => 'First-Class Mail International Large Envelope**',
-			'First-Class Mail Int Package' => 'First-Class Mail International Package**',
-			'First-Class Mail Int Letter' => 'First-Class Mail International Letter**'
+			'Global Express' => 'Global Express Guaranteed regimark (GXG)**',
+			'Global Express Non-Doc Rect' => 'Global Express Guaranteed regimark Non-Document Rectangular',
+			'Global Express Non-Doc Non-Rect' => 'Global Express Guaranteed regimark Non-Document Non-Rectangular',
+			'USPS GXG Envelopes' => 'USPS GXG tradmrk Envelopes**',
+			'Express Mail Int' => 'Express Mail regimark International',
+			'Express Mail Int Flat Rate Env' => 'Express Mail regimark International Flat Rate Envelope',
+			'Priority Mail International' => 'Priority Mail regimark International',
+			'Priority Mail Int Flat Rate Lrg Box' => 'Priority Mail regimark International Large Flat Rate Box',
+			'Priority Mail Int Flat Rate Med Box' => 'Priority Mail regimark International Medium Flat Rate Box',
+			'Priority Mail Int Flat Rate Small Box' => 'Priority Mail regimark International Small Flat Rate Box**',
+			'Priority Mail Int Flat Rate Env' => 'Priority Mail regimark International Flat Rate Envelope**',
+			'First-Class Mail Int Lrg Env' => 'First-Class Mail regimark International Large Envelope**',
+			'First-Class Mail Int Package' => 'First-Class Mail regimark International Parcel**',
+			'First-Class Mail Int Letter' => 'First-Class Mail regimark International Letter**'
 			);
 		}
 
@@ -344,7 +344,7 @@ class usps
 	$shipping_ounces = tep_round_up((16 * ($shipping_weight - floor($shipping_weight))), 2);
 	$this->_setWeight($shipping_pounds, $shipping_ounces, $shipping_weight);
 	if (in_array('Display weight', explode(', ', MODULE_SHIPPING_USPS_OPTIONS))) {
-	$shiptitle = '<br>' . $shipping_pounds . ' lbs, ' . $shipping_ounces . ' oz';
+	$shiptitle = $shipping_pounds . ' lbs, ' . $shipping_ounces . ' oz';
 	} else {
 	$shiptitle = '';
 	}
@@ -402,7 +402,7 @@ class usps
 
 	function install()
 		{
-		tep_db_query("ALTER TABLE `configuration` CHANGE `set_function` `set_function` VARCHAR( 1020 )");
+		tep_db_query("ALTER TABLE `configuration` CHANGE `configuration_value` `configuration_value` TEXT NOT NULL, CHANGE `set_function` `set_function` TEXT NULL DEFAULT NULL");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable USPS Shipping', 'MODULE_SHIPPING_USPS_STATUS', 'True', 'Do you want to offer USPS shipping?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enter the USPS User ID', 'MODULE_SHIPPING_USPS_USERID', 'NONE', 'Enter the USPS USERID assigned to you. <u>You must contact USPS to have them switch you to the Production server.</u>  Otherwise this module will not work!', '6', '3', 'tep_cfg_multiinput_list(array(\'\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_SHIPPING_USPS_SORT_ORDER', '0', 'Sort order of display.', '6', '0', now())");
@@ -410,19 +410,19 @@ class usps
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Shipping Zone', 'MODULE_SHIPPING_USPS_ZONE', '0', 'If a zone is selected, only enable this shipping method for that zone.', '6', '0', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Display Options', 'MODULE_SHIPPING_USPS_OPTIONS', 'Display weight, Display transit time, Display insurance', 'Select display options', '6', '0', 'tep_cfg_select_multioption(array(\'Display weight\', \'Display transit time\', \'Display insurance\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Processing Time', 'MODULE_SHIPPING_USPS_PROCESSING', '1', 'Days to Process Order', '6', '0', now())");
-		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Domestic Shipping Methods', 'MODULE_SHIPPING_USPS_DMSTC_TYPES', 'First-Class Mail, Media Mail, Parcel Post, Priority Mail, Priority Mail Flat Rate Envelope, Priority Mail Small Flat Rate Box, Priority Mail Medium Flat Rate Box, Priority Mail Large Flat Rate Box, Express Mail, Express Mail Flat Rate Envelope', 'Select the domestic services to be offered:', '6', '4', 'tep_cfg_select_multioption(array(\'First-Class Mail\', \'Media Mail\', \'Parcel Post\', \'Priority Mail\', \'Priority Mail Flat Rate Envelope\', \'Priority Mail Small Flat Rate Box\', \'Priority Mail Medium Flat Rate Box\', \'Priority Mail Large Flat Rate Box\', \'Express Mail\', \'Express Mail Flat Rate Envelope\'), ', now())");
+		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Domestic Shipping Methods', 'MODULE_SHIPPING_USPS_DMSTC_TYPES', 'First-Class Mail regimark, Media Mail regimark, Parcel Post regimark, Priority Mail regimark, Priority Mail regimark Flat Rate Envelope, Priority Mail regimark Small Flat Rate Box, Priority Mail regimark Medium Flat Rate Box, Priority Mail regimark Large Flat Rate Box, Express Mail regimark, Express Mail regimark Flat Rate Envelope', 'Select the domestic services to be offered:', '6', '4', 'tep_cfg_select_multioption(array(\'First-Class Mail regimark\', \'Media Mail regimark\', \'Parcel Post regimark\', \'Priority Mail regimark\', \'Priority Mail regimark Flat Rate Envelope\', \'Priority Mail regimark Small Flat Rate Box\', \'Priority Mail regimark Medium Flat Rate Box\', \'Priority Mail regimark Large Flat Rate Box\', \'Express Mail regimark\', \'Express Mail regimark Flat Rate Envelope\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Domestic Rates', 'MODULE_SHIPPING_USPS_DMSTC_RATE', 'Retail', 'Charge retail pricing or internet pricing?', '6', '0', 'tep_cfg_select_option(array(\'Retail\', \'Internet\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Domestic Delivery Confirmation', 'MODULE_SHIPPING_USPS_DMST_DEL_CONF', 'True', 'Automatically charge Delivery Confirmation for first class and parcel ($0.19)?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Domestic Signature Confirmation', 'MODULE_SHIPPING_USPS_DMST_SIG_CONF', 'True', 'Automatically charge Signature Confirmation when available ($1.95)?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Signature Confirmation Threshold', 'MODULE_SHIPPING_USPS_SIG_THRESH', '100', 'Order total required before Signature Confirmation is triggered?', '6', '0', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Domestic Insurance Options', 'MODULE_SHIPPING_USPS_DMSTC_INSURANCE_OPTION', 'False', 'Force USPS Calculated Domestic Insurance?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
-		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Domestic Handling Fees', 'MODULE_SHIPPING_USPS_DMSTC_HANDLING', '0, 0, 0, 0, 0, 0, 0, 0, 0, 0', 'Add a different handling fee for each shipping type.', '6', '0', 'tep_cfg_multiinput_list(array(\'First-Class\', \'Media\', \'Parcel\', \'Priority\', \'Priority Flat Env\', \'Priority Sm Flat Box\', \'Priority Med Flat Box\', \'Priority Lg Flat Box\', \'Express\', \'Express Flat Env\'), ', now())");
+		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Domestic Flat Handling Fees', 'MODULE_SHIPPING_USPS_DMSTC_HANDLING', '0, 0, 0, 0, 0, 0, 0, 0, 0, 0', 'Add a different handling fee for each shipping type.', '6', '0', 'tep_cfg_multiinput_list(array(\'First-Class\', \'Media\', \'Parcel\', \'Priority\', \'Priority Flat Env\', \'Priority Sm Flat Box\', \'Priority Med Flat Box\', \'Priority Lg Flat Box\', \'Express\', \'Express Flat Env\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Domestic First-Class Threshold', 'MODULE_SHIPPING_USPS_DMSTC_FIRSTCLASS_THRESHOLD', '0, 3.5, 3.5, 10, 10, 13', '<u>Maximums:</u><br>Letters 3.5oz<br>Large envelopes and parcels 13oz', '6', '0', 'tep_cfg_multiinput_duallist_oz(array(\'Letter\', \'Lg Env\', \'Package\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Domestic Other Mail Threshold', 'MODULE_SHIPPING_USPS_DMSTC_OTHER_THRESHOLD', '0, 3, 0, 3, 3, 11, 11, 15, 0, 70, 0, 3, 0, 70, 0, 70, 0, 70', '<u>Maximums:</u><br>70 lb', '6', '0', 'tep_cfg_multiinput_duallist_lb(array(\'Flat Rate Envelope\', \'Sm Flat Rate Box\', \'Md Flat Rate Box\', \'Lg Flat Rate Box\', \'Standard Priority\', \'Express FltRt Env\', \'Express Standard\', \'Parcel Pst\', \'Media Mail\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Int\'l Shipping Methods', 'MODULE_SHIPPING_USPS_INTL_TYPES', 'Global Express, Global Express Non-Doc Rect, Global Express Non-Doc Non-Rect, USPS GXG Envelopes, Express Mail Int, Express Mail Int Flat Rate Env, Priority Mail International, Priority Mail Int Flat Rate Env, Priority Mail Int Flat Rate Small Box, Priority Mail Int Flat Rate Med Box, Priority Mail Int Flat Rate Lrg Box, First-Class Mail Int Lrg Env, First-Class Mail Int Package, First-Class Mail Int Letter', 'Select the international services to be offered:', '6', '0', 'tep_cfg_select_multioption(array(\'Global Express\', \'Global Express Non-Doc Rect\', \'Global Express Non-Doc Non-Rect\', \'USPS GXG Envelopes\', \'Express Mail Int\', \'Express Mail Int Flat Rate Env\', \'Priority Mail International\', \'Priority Mail Int Flat Rate Env\', \'Priority Mail Int Flat Rate Small Box\', \'Priority Mail Int Flat Rate Med Box\', \'Priority Mail Int Flat Rate Lrg Box\', \'First-Class Mail Int Lrg Env\', \'First-Class Mail Int Package\', \'First-Class Mail Int Letter\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Int\'l Rates', 'MODULE_SHIPPING_USPS_INTL_RATE', 'Retail', 'Charge retail pricing or internet pricing?', '6', '0', 'tep_cfg_select_option(array(\'Retail\', \'Internet\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Int\'l Insurance Options', 'MODULE_SHIPPING_USPS_INTL_INSURANCE_OPTION', 'False', 'Force USPS Calculated International Insurance?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
-		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Int\'l Handling Fees', 'MODULE_SHIPPING_USPS_INTL_HANDLING', '0', 'Add a flat fee international shipping.', '6', '0', 'tep_cfg_multiinput_list(array(\'\'), ', now())");
+		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Int\'l Flat Handling Fees', 'MODULE_SHIPPING_USPS_INTL_HANDLING', '0', 'Add a flat fee international shipping.', '6', '0', 'tep_cfg_multiinput_list(array(\'\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Int\'l Package Sizes', 'MODULE_SHIPPING_USPS_INTL_SIZE', '1, 1, 1, 0', 'Standard package dimensions required by USPS for international rates', '6', '0', 'tep_cfg_multiinput_list(array(\'Width\', \'Length\', \'Height\', \'Girth\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Non USPS Insurance - Domestic and international', 'MODULE_SHIPPING_USPS_INSURE', 'False', 'Would you like to charge insurance for packages independent of USPS, i.e, merchant provided, Stamps.com, Endicia?  If used in conjunction with USPS calculated insurance, the higher of the two will apply.', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, date_added) values ('Non USPS Insurance', 'MODULE_SHIPPING_USPS_INS1', '1.75', 'Totals $.01-$50.00', '6', '0', 'currencies->format', now())");
@@ -431,11 +431,10 @@ class usps
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, date_added) values ('Non USPS Insurance', 'MODULE_SHIPPING_USPS_INS4', '4.70', 'Totals $200.01-$300', '6', '0', 'currencies->format', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, date_added) values ('Non USPS Insurance', 'MODULE_SHIPPING_USPS_INS5', '1.00', 'For every $100 over $300 (add)', '6', '0', 'currencies->format', now())");
 		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Insure Tax?', 'MODULE_SHIPPING_USPS_INSURE_TAX', 'False', 'Would you like to insure sales tax paid by the customer?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
-		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Insure Shipping Cost?', 'MODULE_SHIPPING_USPS_INSURE_SHIPPING', 'False', 'Would you like insure the shipping cost paid by the customer?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
 		}
 	
 	function keys() {
-	return array('MODULE_SHIPPING_USPS_STATUS', 'MODULE_SHIPPING_USPS_USERID', 'MODULE_SHIPPING_USPS_SORT_ORDER', 'MODULE_SHIPPING_USPS_TAX_CLASS', 'MODULE_SHIPPING_USPS_ZONE', 'MODULE_SHIPPING_USPS_OPTIONS', 'MODULE_SHIPPING_USPS_PROCESSING', 'MODULE_SHIPPING_USPS_DMSTC_TYPES', 'MODULE_SHIPPING_USPS_DMSTC_RATE', 'MODULE_SHIPPING_USPS_DMST_DEL_CONF', 'MODULE_SHIPPING_USPS_DMST_SIG_CONF', 'MODULE_SHIPPING_USPS_SIG_THRESH', 'MODULE_SHIPPING_USPS_DMSTC_INSURANCE_OPTION', 'MODULE_SHIPPING_USPS_DMSTC_HANDLING', 'MODULE_SHIPPING_USPS_DMSTC_FIRSTCLASS_THRESHOLD', 'MODULE_SHIPPING_USPS_DMSTC_OTHER_THRESHOLD', 'MODULE_SHIPPING_USPS_INTL_TYPES', 'MODULE_SHIPPING_USPS_INTL_RATE', 'MODULE_SHIPPING_USPS_INTL_INSURANCE_OPTION', 'MODULE_SHIPPING_USPS_INTL_HANDLING', 'MODULE_SHIPPING_USPS_INTL_SIZE', 'MODULE_SHIPPING_USPS_INSURE', 'MODULE_SHIPPING_USPS_INS1', 'MODULE_SHIPPING_USPS_INS2', 'MODULE_SHIPPING_USPS_INS3','MODULE_SHIPPING_USPS_INS4', 'MODULE_SHIPPING_USPS_INS5', 'MODULE_SHIPPING_USPS_INSURE_TAX', 'MODULE_SHIPPING_USPS_INSURE_SHIPPING');
+	return array('MODULE_SHIPPING_USPS_STATUS', 'MODULE_SHIPPING_USPS_USERID', 'MODULE_SHIPPING_USPS_SORT_ORDER', 'MODULE_SHIPPING_USPS_TAX_CLASS', 'MODULE_SHIPPING_USPS_ZONE', 'MODULE_SHIPPING_USPS_OPTIONS', 'MODULE_SHIPPING_USPS_PROCESSING', 'MODULE_SHIPPING_USPS_DMSTC_TYPES', 'MODULE_SHIPPING_USPS_DMSTC_RATE', 'MODULE_SHIPPING_USPS_DMST_DEL_CONF', 'MODULE_SHIPPING_USPS_DMST_SIG_CONF', 'MODULE_SHIPPING_USPS_SIG_THRESH', 'MODULE_SHIPPING_USPS_DMSTC_INSURANCE_OPTION', 'MODULE_SHIPPING_USPS_DMSTC_HANDLING', 'MODULE_SHIPPING_USPS_DMSTC_FIRSTCLASS_THRESHOLD', 'MODULE_SHIPPING_USPS_DMSTC_OTHER_THRESHOLD', 'MODULE_SHIPPING_USPS_INTL_TYPES', 'MODULE_SHIPPING_USPS_INTL_RATE', 'MODULE_SHIPPING_USPS_INTL_INSURANCE_OPTION', 'MODULE_SHIPPING_USPS_INTL_HANDLING', 'MODULE_SHIPPING_USPS_INTL_SIZE', 'MODULE_SHIPPING_USPS_INSURE', 'MODULE_SHIPPING_USPS_INS1', 'MODULE_SHIPPING_USPS_INS2', 'MODULE_SHIPPING_USPS_INS3','MODULE_SHIPPING_USPS_INS4', 'MODULE_SHIPPING_USPS_INS5', 'MODULE_SHIPPING_USPS_INSURE_TAX');
 	}
 	
 	/////////////////////////////////////////
@@ -484,9 +483,7 @@ class usps
 	function _getQuote()
 	{
 	global $order, $transittime, $dispinsure;
-	if (MODULE_SHIPPING_USPS_INSURE_TAX == 'True' && MODULE_SHIPPING_USPS_INSURE_SHIPPING == 'True') {$insurable = $order->info['total'];}
-	elseif (MODULE_SHIPPING_USPS_INSURE_TAX) {$insurable = $order->info['subtotal'] + $order->info['tax'];}
-	elseif (MODULE_SHIPPING_USPS_INSURE_SHIPPING == 'True') {$insurable = $order->info['total'] - $order->info['tax'];}
+	if (MODULE_SHIPPING_USPS_INSURE_TAX) {$insurable = $order->info['subtotal'] + $order->info['tax'];}
 	else {$insurable = $order->info['subtotal'];}
 	$transit = (in_array('Display transit time', explode(', ', MODULE_SHIPPING_USPS_OPTIONS)));
 	$dispinsurance = (in_array('Display insurance', explode(', ', MODULE_SHIPPING_USPS_OPTIONS)));
@@ -521,23 +518,24 @@ class usps
 				/////////////////////////////////////////
 				
 				$FMT = explode(", ", MODULE_SHIPPING_USPS_DMSTC_FIRSTCLASS_THRESHOLD);
-				if ($key == 'First-Class Mail'){
+				if ($key == 'First-Class Mail regimark'){
 				$transid = $key;
+				$key = 'First-Class Mail';
 				if($this->pounds == 0) {
 				if($FMT[0] < $this->ounces && $this->ounces <= $FMT[1]) {
-				$transid = 'First-Class Mail Letter';
+				$transid = 'First-Class Mail regimark Letter';
 				$this->FirstClassMailType = 'LETTER';
 				$this->machinable = 'TRUE';
 				$this->size = 'REGULAR';
 				$this->container = 'VARIABLE';
 				} else if($FMT[2] < $this->ounces && $this->ounces <= $FMT[3]) {
-				$transid = 'First-Class Mail Large Envelope';
+				$transid = 'First-Class Mail regimark Large Envelope';
 				$this->FirstClassMailType = 'FLAT';
 				$this->machinable = 'TRUE';
 				$this->size = 'REGULAR';
 				$this->container = 'VARIABLE';
 				} else if($FMT[4] < $this->ounces && $this->ounces <= $FMT[5]) {
-				$transid = 'First-Class Mail Package';
+				$transid = 'First-Class Mail regimark Parcel';
 				$this->FirstClassMailType = 'PARCEL';
 				$this->machinable = 'TRUE';
 				$this->size = 'REGULAR';
@@ -549,7 +547,7 @@ class usps
 				}
 
 				$OMT = explode(", ", MODULE_SHIPPING_USPS_DMSTC_OTHER_THRESHOLD);
-				if ($key == 'Priority Mail'){
+				if ($key == 'Priority Mail regimark'){
 				$transid = $key;
 				if ($OMT[8] < $this->weight && $this->weight <= $OMT[9]) {
 				$key = 'Priority Commercial';
@@ -560,7 +558,7 @@ class usps
 				}
 				}
 
-				if ($key == 'Priority Mail Flat Rate Envelope'){
+				if ($key == 'Priority Mail regimark Flat Rate Envelope'){
 				$transid = $key;
 				if ($OMT[0] < $this->weight && $this->weight <= $OMT[1]) {
 				$key = 'Priority Commercial';
@@ -570,7 +568,7 @@ class usps
 				$key = 'none';
 				}
 				}
-				if ($key == 'Priority Mail Small Flat Rate Box'){
+				if ($key == 'Priority Mail regimark Small Flat Rate Box'){
 				$transid = $key;
 				if ($OMT[2] < $this->weight && $this->weight <= $OMT[3]) {
 				$key = 'Priority Commercial';
@@ -580,7 +578,7 @@ class usps
 				$key = 'none';
 				}
 				}
-				if ($key == 'Priority Mail Medium Flat Rate Box'){
+				if ($key == 'Priority Mail regimark Medium Flat Rate Box'){
 				$transid = $key;
 				if ($OMT[4] < $this->weight && $this->weight <= $OMT[5]) {
 				$key = 'Priority Commercial';
@@ -590,7 +588,7 @@ class usps
 				$key = 'none';
 				}
 				}
-				if ($key == 'Priority Mail Large Flat Rate Box'){
+				if ($key == 'Priority Mail regimark Large Flat Rate Box'){
 				$transid = $key;
 				if ($OMT[6] < $this->weight && $this->weight <= $OMT[7]) {
 				$key = 'Priority Commercial';
@@ -600,7 +598,7 @@ class usps
 				$key = 'none';
 				}
 				}
-				if ($key == 'Express Mail'){
+				if ($key == 'Express Mail regimark'){
 				$transid = $key;
 				if ($OMT[12] < $this->weight && $this->weight <= $OMT[13]) {
 				$this->container = '';
@@ -610,7 +608,7 @@ class usps
 				$key = 'none';
 				}
 				}
-				if ($key == 'Express Mail Flat Rate Envelope'){
+				if ($key == 'Express Mail regimark Flat Rate Envelope'){
 				$transid = $key;
 				if ($OMT[10] < $this->weight && $this->weight <= $OMT[11]) {
 				$key = 'Express Commercial';
@@ -620,8 +618,9 @@ class usps
 				$key = 'none';
 				}
 				}
-				if ($key == 'Parcel Post'){
+				if ($key == 'Parcel Post regimark'){
 				$transid = $key;
+				$key = 'Parcel Post';
 				if ($OMT[14] < $this->weight && $this->weight <= $OMT[15]){
 				$this->machinable = 'TRUE';
 				$this->size = 'REGULAR';
@@ -630,8 +629,9 @@ class usps
 				}
 				}
 				
-				if ($key == 'Media Mail'){
+				if ($key == 'Media Mail regimark'){
 				$transid = $key;
+				$key = 'Media Mail';
 				if ($OMT[16] < $this->weight && $this->weight <= $OMT[17]){
 				$this->size = 'REGULAR';
 				} else {
@@ -654,11 +654,8 @@ class usps
 						'<Container>' . $this->container . '</Container>' .
 						'<Size>' . $this->size . '</Size>' .
 						'<Value>' . $insurable . '</Value>' .
-						'<Machinable>' . $this->machinable . '</Machinable>';
-			$DP= explode(", ", MODULE_SHIPPING_USPS_PROCESSING);
-			$shipdate =  date("d-M-Y", strtotime("+$DP[0] days"));
-			$request .= 
-						'<ShipDate>' . $shipdate . '</ShipDate>' .
+						'<Machinable>' . $this->machinable . '</Machinable>' .
+						'<ShipDate>' . date('d-M-Y') . '</ShipDate>' .
 						'</Package>';
  
 				/////////////////////////////////////////
@@ -721,7 +718,7 @@ class usps
 					'<Pounds>' . $this->pounds . '</Pounds>' .
 					'<Ounces>' . $this->ounces . '</Ounces>' .
 					'<Machinable>True</Machinable>' .
-					'<MailType>Package</MailType>' .
+					'<MailType>All</MailType>' .
 					'<GXG>' .
 						'<POBoxFlag>N</POBoxFlag>' .
 						'<GiftFlag>N</GiftFlag>' .
@@ -777,8 +774,9 @@ class usps
 		} else {
 		return false;
 		}
-		$body = str_replace('&amp;lt;sup&amp;gt;&amp;amp;reg;&amp;lt;/sup&amp;gt;', '', $body);
-		$body = str_replace('&amp;lt;sup&amp;gt;&amp;amp;trade;&amp;lt;/sup&amp;gt;', '', $body);
+		$body = htmlspecialchars_decode($body);
+		$body = preg_replace('/\&lt;sup\&gt;\&amp;reg;\&lt;\/sup\&gt;/', ' regimark', $body);
+		$body = preg_replace('/\&lt;sup\&gt;\&amp;trade;\&lt;\/sup\&gt;/', ' tradmrk', $body);
 
 		/////////////////////////////////////////
 		/////END USPS HTTP COMMUNICATION ////////
@@ -822,8 +820,6 @@ class usps
 			{
 				$service = ereg('<MailService>(.*)</MailService>', $response[$i], $regs);
 				$service = $regs[1];
-				$service = str_replace('&amp;lt;sup&amp;gt;&amp;amp;reg;&amp;lt;/sup&amp;gt;','',$service);
-				$service = str_replace('&amp;lt;sup&amp;gt;&amp;amp;trade;&amp;lt;/sup&amp;gt;','',$service);
 				if ((MODULE_SHIPPING_USPS_DMSTC_RATE == 'Internet') && preg_match('/CommercialRate/', $response[$i]))
 					{	$postage = ereg('<CommercialRate>(.*)</CommercialRate>', $response[$i], $regs);
 						$postage = $regs[1];}
@@ -848,164 +844,234 @@ class usps
 					{$postage = $postage + $uinsurance;}	                
 				elseif (MODULE_SHIPPING_USPS_DMSTC_INSURANCE_OPTION == 'True' && $insurance > 0)
 					{$postage = $postage + $insurance;}
-				if ((MODULE_SHIPPING_USPS_DMST_DEL_CONF == 'True') && (preg_match('/<\/ServiceName><Available>true<\/Available><AvailableOnline>true<\/AvailableOnline><Price>0.80<\/Price><PriceOnline>/', $response[$i])))
-					{	$del_conf = ereg('</ServiceName><Available>true</Available><AvailableOnline>true</AvailableOnline><Price>0.80</Price><PriceOnline>(.*)</PriceOnline>', $response[$i], $regs);
-						$del_conf = $regs[1];
-						$postage = $postage + $del_conf;
+				if ((MODULE_SHIPPING_USPS_DMST_DEL_CONF == 'True') && (preg_match('/Delivery Confirmation tradmrk<\/ServiceName><Available>true<\/Available>/', $response[$i])))
+				{
+					if (MODULE_SHIPPING_USPS_DMSTC_RATE == 'Retail')
+					{	$del_conf = preg_match('/Delivery Confirmation tradmrk<\/ServiceName><Available>true<\/Available><AvailableOnline>true<\/AvailableOnline><Price>(.*)<\/Price>/', $response[$i], $regs);}
+					elseif (MODULE_SHIPPING_USPS_DMSTC_RATE == 'Internet')
+					{
+						if (preg_match('/Delivery Confirmation tradmrk<\/ServiceName><Available>true<\/Available><AvailableOnline>true<\/AvailableOnline><Price>0.70<\/Price>/', $response[$i]))
+						{$del_conf = preg_match('/Delivery Confirmation tradmrk<\/ServiceName><Available>true<\/Available><AvailableOnline>true<\/AvailableOnline><Price>0.70<\/Price><PriceOnline>(.*)<\/PriceOnline>/', $response[$i], $regs);}
+						elseif (preg_match('/Delivery Confirmation tradmrk<\/ServiceName><Available>true<\/Available><AvailableOnline>true<\/AvailableOnline><Price>0.80<\/Price>/', $response[$i]))
+						{$del_conf = preg_match('/Delivery Confirmation tradmrk<\/ServiceName><Available>true<\/Available><AvailableOnline>true<\/AvailableOnline><Price>0.80<\/Price><PriceOnline>(.*)<\/PriceOnline>/', $response[$i], $regs);}
 					}
-				if ((MODULE_SHIPPING_USPS_DMST_SIG_CONF == 'True') && ($this->sig_conf_thresh <= $order->info['subtotal'])&& (preg_match('/<\/ServiceName><Available>true<\/Available><AvailableOnline>true<\/AvailableOnline><Price>2.35<\/Price><PriceOnline>/', $response[$i])))
-					{	$sig_conf = ereg('</ServiceName><Available>true</Available><AvailableOnline>true</AvailableOnline><Price>2.35</Price><PriceOnline>(.*)</PriceOnline>', $response[$i], $regs);
-						$sig_conf = $regs[1];
-						$postage = $postage + $sig_conf;
-					}
+					$del_conf = $regs[1];
+					$postage = $postage + $del_conf;
+				}
+				if ((MODULE_SHIPPING_USPS_DMST_SIG_CONF == 'True') && ($this->sig_conf_thresh <= $order->info['subtotal']) && (preg_match('/Signature Confirmation tradmrk<\/ServiceName><Available>true<\/Available>/', $response[$i])))
+				{
+					if (MODULE_SHIPPING_USPS_DMSTC_RATE == 'Retail')
+					{$sig_conf = preg_match('/Signature Confirmation tradmrk<\/ServiceName><Available>true<\/Available><AvailableOnline>true<\/AvailableOnline><Price>(.*)<\/Price>/', $response[$i], $regs);}
+					elseif (MODULE_SHIPPING_USPS_DMSTC_RATE == 'Internet')
+					{$sig_conf = preg_match('/Signature Confirmation tradmrk<\/ServiceName><Available>true<\/Available><AvailableOnline>true<\/AvailableOnline><Price>2.35<\/Price><PriceOnline>(.*)<\/PriceOnline>/', $response[$i], $regs);}
+					$sig_conf = $regs[1];
+					$postage = $postage + $sig_conf;
+				}
 			switch ($service) 
 			{
 
-				case 'First-Class Mail':
+				case 'First-Class Mail regimark':
 					$time = ereg('<Days>(.*)</Days>', $transresp[$service], $tregs);
 					$time = $tregs[1];
-					if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
-					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
-					if ($time == '1') {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAY;
-					} else {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+					if ($time == 'Military Mail') {$time = $time;}
+					else {if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
+						  else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
+					 	  if ($time == '1') {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAY;
+						  } else {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+						  }
 					}
+					$message = ereg('<Message>(.*)</Message>', $transresp[$service], $mess);
+					$message = $mess[1];
+					if ($message != '') {$time .= ' - ' . $message;}
 					$postage = $postage + $this->dmstc_handling[0];
 					break;
-				case 'First-Class Mail Letter':
+				case 'First-Class Mail regimark Letter':
 					$time = ereg('<Days>(.*)</Days>', $transresp[$service], $tregs);
 					$time = $tregs[1];
-					if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
-					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
-					if ($time == '1') {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAY;
-					} else {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+					if ($time == 'Military Mail') {$time = $time;}
+					else {if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
+						  else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
+					 	  if ($time == '1') {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAY;
+						  } else {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+						  }
 					}
+					$message = ereg('<Message>(.*)</Message>', $transresp[$service], $mess);
+					$message = $mess[1];
+					if ($message != '') {$time .= ' - ' . $message;}
 					$postage = $postage + $this->dmstc_handling[0];
 					break;
-				case 'First-Class Mail Large Envelope':
+				case 'First-Class Mail regimark Large Envelope':
 					$time = ereg('<Days>(.*)</Days>', $transresp[$service], $tregs);
 					$time = $tregs[1];
-					if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
-					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
-					if ($time == '1') {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAY;
-					} else {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+					if ($time == 'Military Mail') {$time = $time;}
+					else {if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
+						  else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
+					 	  if ($time == '1') {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAY;
+						  } else {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+						  }
 					}
+					$message = ereg('<Message>(.*)</Message>', $transresp[$service], $mess);
+					$message = $mess[1];
+					if ($message != '') {$time .= ' - ' . $message;}
 					$postage = $postage + $this->dmstc_handling[0];
 					break;
-				case 'First-Class Mail Package':
+				case 'First-Class Mail regimark Parcel':
 					$time = ereg('<Days>(.*)</Days>', $transresp[$service], $tregs);
 					$time = $tregs[1];
-						if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
-					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
-					if ($time == '1') {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAY;
-					} else {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+					if ($time == 'Military Mail') {$time = $time;}
+					else {if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
+						  else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
+					 	  if ($time == '1') {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAY;
+						  } else {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+						  }
 					}
+					$message = ereg('<Message>(.*)</Message>', $transresp[$service], $mess);
+					$message = $mess[1];
+					if ($message != '') {$time .= ' - ' . $message;}
 					$postage = $postage + $this->dmstc_handling[0];
 					break;
-				case 'Media Mail':
+				case 'Media Mail regimark':
 					$time = ereg('<Days>(.*)</Days>', $transresp[$service], $tregs);
 					$time = $tregs[1];
-					if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
-					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
-					if ($time == '1') {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAY;
-					} else {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+					if ($time == 'Military Mail') {$time = $time;}
+					else {if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
+						  else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
+					 	  if ($time == '1') {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAY;
+						  } else {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+						  }
 					}
+					$message = ereg('<Message>(.*)</Message>', $transresp[$service], $mess);
+					$message = $mess[1];
+					if ($message != '') {$time .= ' - ' . $message;}
 					$postage = $postage + $this->dmstc_handling[1];
 					break;
-				case 'Parcel Post':
+				case 'Parcel Post regimark':
 					$time = ereg('<Days>(.*)</Days>', $transresp[$service], $tregs);
 					$time = $tregs[1];
-					if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
-					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
-					if ($time == '1') {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAY;
-					} else {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+					if ($time == 'Military Mail') {$time = $time;}
+					else {if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
+						  else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
+					 	  if ($time == '1') {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAY;
+						  } else {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+						  }
 					}
+					$message = ereg('<Message>(.*)</Message>', $transresp[$service], $mess);
+					$message = $mess[1];
+					if ($message != '') {$time .= ' - ' . $message;}
 					$postage = $postage + $this->dmstc_handling[2];
 					break;
-				case 'Priority Mail':
+				case 'Priority Mail regimark':
 					$time = ereg('<Days>(.*)</Days>', $transresp[$service], $tregs);
 					$time = $tregs[1];
-					if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
-					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
-					if ($time == '1') {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAY;
-					} else {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+					if ($time == 'Military Mail') {$time = $time;}
+					else {if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
+						  else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
+					 	  if ($time == '1') {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAY;
+						  } else {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+						  }
 					}
+					$message = ereg('<Message>(.*)</Message>', $transresp[$service], $mess);
+					$message = $mess[1];
+					if ($message != '') {$time .= ' - ' . $message;}
 					$postage = $postage + $this->dmstc_handling[3];
 					break;
-				case 'Priority Mail Flat Rate Envelope':
+				case 'Priority Mail regimark Flat Rate Envelope':
 					$time = ereg('<Days>(.*)</Days>', $transresp[$service], $tregs);
 					$time = $tregs[1];
-					if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
-					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
-					if ($time == '1') {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAY;
-					} else {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+					if ($time == 'Military Mail') {$time = $time;}
+					else {if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
+						  else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
+					 	  if ($time == '1') {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAY;
+						  } else {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+						  }
 					}
+					$message = ereg('<Message>(.*)</Message>', $transresp[$service], $mess);
+					$message = $mess[1];
+					if ($message != '') {$time .= ' - ' . $message;}
 					$postage = $postage + $this->dmstc_handling[4];
 					break;
-				case 'Priority Mail Small Flat Rate Box':
+				case 'Priority Mail regimark Small Flat Rate Box':
 					$time = ereg('<Days>(.*)</Days>', $transresp[$service], $tregs);
 					$time = $tregs[1];
-					if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
-					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
-					if ($time == '1') {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAY;
-					} else {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+					if ($time == 'Military Mail') {$time = $time;}
+					else {if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
+						  else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
+					 	  if ($time == '1') {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAY;
+						  } else {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+						  }
 					}
+					$message = ereg('<Message>(.*)</Message>', $transresp[$service], $mess);
+					$message = $mess[1];
+					if ($message != '') {$time .= ' - ' . $message;}
 					$postage = $postage + $this->dmstc_handling[5];
 					break;
-				case 'Priority Mail Medium Flat Rate Box':
+				case 'Priority Mail regimark Medium Flat Rate Box':
 					$time = ereg('<Days>(.*)</Days>', $transresp[$service], $tregs);
 					$time = $tregs[1];
-					if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
-					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
-					if ($time == '1') {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAY;
-					} else {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+					if ($time == 'Military Mail') {$time = $time;}
+					else {if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
+						  else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
+					 	  if ($time == '1') {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAY;
+						  } else {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+						  }
 					}
+					$message = ereg('<Message>(.*)</Message>', $transresp[$service], $mess);
+					$message = $mess[1];
+					if ($message != '') {$time .= ' - ' . $message;}
 					$postage = $postage + $this->dmstc_handling[6];
 					break;
-				case 'Priority Mail Large Flat Rate Box':
+				case 'Priority Mail regimark Large Flat Rate Box':
 					$time = ereg('<Days>(.*)</Days>', $transresp[$service], $tregs);
 					$time = $tregs[1];
-					if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
-					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
-					if ($time == '1') {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAY;
-					} else {
-					$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+					if ($time == 'Military Mail') {$time = $time;}
+					else {if ($this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($time + $this->processing);}
+						  else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
+					 	  if ($time == '1') {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAY;
+						  } else {
+						  $time .= MODULE_SHIPPING_USPS_TEXT_DAYS;
+						  }
 					}
+					$message = ereg('<Message>(.*)</Message>', $transresp[$service], $mess);
+					$message = $mess[1];
+					if ($message != '') {$time .= ' - ' . $message;}
 					$postage = $postage + $this->dmstc_handling[7];
 					break;
-				case 'Express Mail':
+				case 'Express Mail regimark':
 					$time = ereg('<CommitmentDate>(.*)</CommitmentDate>', $response[$i], $regs);
 					$time = $regs[1];
 					if ($time == 'Overnight to many areas' && $this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($this->processing + 1) . MODULE_SHIPPING_USPS_TEXT_DAYS;;}
+					elseif ($time == 'Overnight to many areas') {$time = '---' . $time;}
 					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
 					if ($time == '1') {$time .= MODULE_SHIPPING_USPS_TEXT_DAY;}
 					elseif ($time > '2' && $time <= '9') {$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;}
 					$postage = $postage + $this->dmstc_handling[8];
 					break;
-				case 'Express Mail Flat Rate Envelope':
+				case 'Express Mail regimark Flat Rate Envelope':
 					$time = ereg('<CommitmentDate>(.*)</CommitmentDate>', $response[$i], $regs);
 					$time = $regs[1];
 					if ($time == 'Overnight to many areas' && $this->processing > 0) {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . ($this->processing + 1) . MODULE_SHIPPING_USPS_TEXT_DAYS;;}
+					elseif ($time == 'Overnight to many areas') {$time = '---' . $time;}
 					else {$time = MODULE_SHIPPING_USPS_TEXT_ESTIMATED . $time;}
 					if ($time == '1') {$time .= MODULE_SHIPPING_USPS_TEXT_DAY;}
 					elseif ($time > '2' && $time <= '9') {$time .= MODULE_SHIPPING_USPS_TEXT_DAYS;}
@@ -1061,8 +1127,6 @@ class usps
 			if (strpos($services[$i], '<Postage>')) {
 			$service = ereg('<SvcDescription>(.*)</SvcDescription>', $services[$i], $regs);
 			$service = $regs[1];
-			$service = str_replace('&amp;lt;sup&amp;gt;&amp;amp;reg;&amp;lt;/sup&amp;gt;','',$service);
-			$service = str_replace('&amp;lt;sup&amp;gt;&amp;amp;trade;&amp;lt;/sup&amp;gt;','',$service);
 			$CMP = ereg('<CommercialPostage>(.*)</CommercialPostage>', $services[$i], $regs);
 			$CMP = $regs[1];
 			if ($CMP == 0)
@@ -1127,7 +1191,6 @@ class usps
 			}
 			}
 			}
-			print_r($handling_cost);
 			asort($rates_sorter);
 			$sorted_rates = array();
 			foreach (array_keys($rates_sorter) as $key){

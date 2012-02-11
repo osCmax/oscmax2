@@ -351,7 +351,8 @@ global $customer_id, $order, $cc_id, $cart;
 							$tod_amount = $order->info['tax_groups'][$tax_desc] * $od_amount/100;
 						}
 						$order->info['tax_groups'][$tax_desc] -= $tod_amount;
-						$order->info['total'] -= $tod_amount; //  need to modify total ...OLD
+						// Bug Fix #977
+						//$order->info['total'] -= $tod_amount; //  need to modify total ...OLD
 						$order->info['tax'] -= $tod_amount; //Fred - added
 					} else {
 						for ($p=0; $p<sizeof($valid_array); $p++) {
@@ -361,7 +362,8 @@ global $customer_id, $order, $cc_id, $cart;
 								//Fred $tod_amount[$tax_desc] += ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio; //OLD
 								$tod_amount = ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio; // calc total tax Fred - added
 								$order->info['tax_groups'][$tax_desc] -= ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio;
-								$order->info['total'] -= ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio; // adjust total
+								// Bug Fix #977
+								//$order->info['total'] -= ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio; // adjust total
 								$order->info['tax'] -= ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio; // adjust tax -- Fred - added
 							}
 						}
@@ -390,7 +392,8 @@ global $customer_id, $order, $cc_id, $cart;
 							}
 						}
 					}
-					$order->info['total'] -= $tod_amount; //OLD
+					// Bug Fix #977
+					//$order->info['total'] -= $tod_amount; //OLD
 					$order->info['tax'] -= $tod_amount; //Fred - added
 			}
 			if ($get_result['coupon_type'] =='P') {
@@ -412,7 +415,8 @@ global $customer_id, $order, $cc_id, $cart;
 						}
 					}
 				}
-				$order->info['total'] -= $tod_amount; // have to modify total also
+				// // Bug Fix #977
+				//$order->info['total'] -= $tod_amount; // have to modify total also
 				$order->info['tax'] -= $tod_amount;
 			}
 		}

@@ -264,8 +264,9 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 </table>
 <!-- Store width controller -->
 
-   <?php if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exists for this page it will be loaded
-      require(bts_select('javascript', $PHP_SELF));
+<?php 
+if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exists for this page it will be loaded
+  require(bts_select('javascript', $PHP_SELF));
 } else {
   if (isset($javascript) && file_exists(DIR_WS_JAVASCRIPT . basename($javascript))) { require(DIR_WS_JAVASCRIPT . basename($javascript)); }
 
@@ -282,7 +283,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
         require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
     }
   }
- 
+?>
 
 <script type="text/javascript"><!--
 function couponpopupWindow(url) {

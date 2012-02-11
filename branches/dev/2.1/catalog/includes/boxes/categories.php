@@ -50,7 +50,7 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
       $catlevel .= $i;
     }	
 
-	$boxContent .=' class="level' . $catlevel . '"><td width="' . BOX_WIDTH_LEFT . '" class="boxText">';
+	$boxContent .=' class="level' . $catlevel . '"><td width="' . $box_width . '" class="boxText">';
 
 	for ($i=0; $i<$tree[$counter]['level']; $i++) {
       $boxContent .= "&nbsp;&nbsp;";

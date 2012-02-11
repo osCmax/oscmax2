@@ -95,12 +95,8 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 // include the list of project database tables
   require(DIR_WS_INCLUDES . 'database_tables.php');
 
-// customization for the design layout
-  define('BOX_WIDTH', 125); // how wide the boxes should be in pixels (default: 125)
-
 // include the database functions
   require(DIR_WS_FUNCTIONS . 'database.php');
-
 
 // make a connection to the database... now
   tep_db_connect() or die('Unable to connect to database server!');

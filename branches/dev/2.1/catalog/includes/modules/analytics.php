@@ -33,7 +33,7 @@ $Id$
 
 // Set value for  "affiliation"
 
-	$analytics_affiliation = '';
+	$analytics_affiliation = STORE_NAME;
 
 
 // Get info for "city", "state", "country"
@@ -63,7 +63,7 @@ $shipping_flag = 'true';
 
 // Prepare the Analytics "Transaction line" string
 
-	$transaction_string = '"' . $order_id . '"," ' . $analytics_affiliation . '","' . $analytics_total . '","' . $analytics_tax . '","' . $analytics_shipping . '","' . $orders['customers_city'] . '","' . $orders['customers_state'] . '","' . $orders['customers_country'] . '"';
+	$transaction_string = '\'' . $order_id . '\',\'' . $analytics_affiliation . '\',\'' . $analytics_total . '\',\'' . $analytics_tax . '\',\'' . $analytics_shipping . '\',\'' . $orders['customers_city'] . '\',\'' . $orders['customers_state'] . '\',\'' . $orders['customers_country'] . '\'';
 
 // Get products info for Analytics "Item lines"
 
@@ -73,21 +73,19 @@ $shipping_flag = 'true';
 		$category_query = tep_db_query("select p2c.categories_id, cd.categories_name from " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where p2c.products_id = '" . $items['products_id'] . "' AND cd.categories_id = p2c.categories_id AND cd.language_id = '" . (int)$languages_id . "'");
 		$category = tep_db_fetch_array($category_query);
 		
-	  $item_string .=  "pageTracker._addItem(\n\"" . $order_id . "\",\"" . $items['products_id'] . "\",\"" . $items['products_name'] . "\",\"" . $category['categories_name'] . "\",\"" . number_format(tep_add_tax($items['final_price'], $items['products_tax']), 2) . "\",\"" . $items['products_quantity'] . "\");\n";
+	  $item_string .=  '_gaq.push([\'_addItem\',\'' . $order_id . '\',\'' . $items['products_id'] . '\',\'' . $items['products_name'] . '\',\'' . $category['categories_name'] . '\',\'' . number_format(tep_add_tax($items['final_price'], $items['products_tax']), 2) . '\',\'' . $items['products_quantity'] . '\']);';
     }
 
 // ############## Google Analytics - end ###############
 
 ?>
 
-pageTracker._addTrans(
-	<?php echo $transaction_string; ?>
+	_gaq.push(['_addTrans',<?php echo $transaction_string; ?>]);
 
-);
 
 <?php echo $item_string; ?>
 
 
-pageTracker._trackTrans();
+	_gaq.push(['_trackTrans']);
 
 

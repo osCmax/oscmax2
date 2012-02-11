@@ -13,7 +13,7 @@ function SetFocus() {
   if (document.forms.length > 0) {
     isNotAdminLanguage:
     for (f=0; f<document.forms.length; f++) {
-      if (document.forms[f].name != "adminlanguage") {
+      if ( (document.forms[f].name != "languages") && (document.forms[f].name != "search_customers") && (document.forms[f].name != "search_products") && (document.forms[f].name != "search_orders") ) {
         var field = document.forms[f];
         for (i=0; i<field.length; i++) {
           if ( (field.elements[i].type != "image") &&
@@ -23,8 +23,7 @@ function SetFocus() {
 
             document.forms[f].elements[i].focus();
 
-            if ( (field.elements[i].type == "text") ||
-                 (field.elements[i].type == "password") )
+            if ( (field.elements[i].type == "text") || (field.elements[i].type == "password") )
               document.forms[f].elements[i].select();
 
             break isNotAdminLanguage;

@@ -31,7 +31,7 @@ define('TEXT_OFF', 'Off');
 define('IMAGE_CONTINUE', 'Fortsetzen');
 define('IMAGE_CANCEL', 'Abbrechen');
 define('IMGAE_RETRY', 'Wiederholen');
-define('IMAGE_ADMIN', 'Administration Tool');
+define('IMAGE_ADMIN', 'Verwaltungswerkzeug');
 define('IMAGE_CATALOG', 'Catalog');
 
 // Start Page
@@ -86,8 +86,8 @@ define('TEXT_PASSWORD_DESC', 'Das Passwort für das Administrator-Konto.');
 define('TEXT_ADMIN_FOLDER_NAME', 'Verzeichnisname des Administrations-Bereiches');
 define('TEXT_CHANGE_ADMIN_FOLDER', 'In diesem Verzeichnis befindet sich der Administrations-Bereich. Aus Sicherheitsgründen sollte der <b>Verzeichnisname unbedingt geändert werden</b>, da der Standardname <b>admin</b> unsicher ist. Weitere Informationen zum Thema Sicherheit finden Sie im <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">Wiki</a>.');
 define('TEXT_ADMIN_NO_PERMISSION', 'Sie besitzen keine ausreichende Berechtigung, um das <b>admin/</b> Verzeichnis umzubenennen. Sie sollten das Verzeichnis umbenennen, um die Sicherheit Ihres Onlineshops zu verbessern. Passen Sie Ihre Servereinstellungen an und folgen Sie <a href="http://wiki.oscdox.com/v2.1/setting_up_security" target="_blank">dieser Anleitung</a> zur manuellen Umbenennung.');
-define('TEXT_NO_CONFIG_PERMISSIONS', 'The installer cannot create your configure.php files. <br/> Permissions are incorrect on several directories!');
-define('TEXT_NO_CONFIG_PERMISSIONS_DESC', ' You will need to change permissions to 755 or 777 on the following directories. <br />Once you have done this, reload this page and you will be able to continue the installation. If you still see this error after changing permissions and reloading this page, see the documentation for in depth <a href="http://wiki.oscdox.com/v2.5/installation_troubleshooting" target="_blank">Troubleshooting</a>. <br><br>Change permissions to 755 or 777 (hint, try 755 first. If it doesn\'t work, try 777) on the following directories:<br><br>');
+define('TEXT_NO_CONFIG_PERMISSIONS', 'Der Installer kann Ihre configure.php Dateien nicht erstellen. <br/> Die Zugriffsrechte sind inkorrekt bei mehreren Verzeichnissen!');
+define('TEXT_NO_CONFIG_PERMISSIONS_DESC', ' Sie müssen die Zugriffsrechte auf 755 or 777 bei den folgenden Verzeichnissen ändern. <br />Sobald dies geschehen ist, laden Sie diese Seite neu und Sie können die Installation fortsetzen. Falls Sie dennoch weiterhin diesen Fehler sehen, lesen Sie  die Dokumentation <a href="http://wiki.oscdox.com/v2.5/installation_troubleshooting" target="_blank">Troubleshooting</a>. <br><br>Ändern Sie die Zugriffsrechte auf 755 oder 777 (Tip: Versuchen Sie zuerst 755. Falls das nicht funktioniert, versuchen Sie 777.) bei den folgenden Verzeichnissen:<br><br>');
 
 
 // Finished

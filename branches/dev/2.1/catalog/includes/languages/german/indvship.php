@@ -10,8 +10,8 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('MODULE_SHIPPING_INDVSHIP_TEXT_TITLE','Individuelle Versandkosten');
+define('MODULE_SHIPPING_INDVSHIP_TEXT_TITLE','Individuelle Versandkosten - Zone 1');
 define('MODULE_SHIPPING_INDVSHIP_TEXT_DESCRIPTION','Verpackung und Versand');
-define('MODULE_SHIPPING_INDVSHIP_TEXT_WAY','Versandkostenpauschale');
-define('MODULE_SHIPPING_INDVSHIP_FREE_WAY', 'Free Shipping');
+define('MODULE_SHIPPING_INDVSHIP_TEXT_WAY','Versandkosten gesamt');
+define('MODULE_SHIPPING_INDVSHIP_FREE_WAY', 'Gratisversand');
 ?>

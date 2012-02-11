@@ -336,20 +336,28 @@ if ($banner = tep_banner_exists('dynamic', '468x50')) {
 //begin{googleanalytics}
 if (GOOGLE_ANALYTICS_STATUS == 'true') { ?>	
 <!-- BOF: Google Analytics Code -->
-	<script type="text/javascript">
-		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-    
-	<script type="text/javascript">
-		var pageTracker = _gat._getTracker("<?php echo (GOOGLE_UA_CODE); ?>");
-		pageTracker._initData();
-		<?php if (GOOGLE_SUBDOMAIN != 'none') {
-		echo 'pageTracker._setDomainName("'  . GOOGLE_SUBDOMAIN .'");';
-		} ?>
-		
-		pageTracker._trackPageview();
-	</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '<?php echo (GOOGLE_UA_CODE); ?>']);
+  _gaq.push(['_trackPageview']);
+  
+<?php
+if (GOOGLE_SUBDOMAIN != 'none') {
+     echo '_gaq.push([\'_setDomainName\', \'' . GOOGLE_SUBDOMAIN . '\']);';
+}
+if ($pfile == 'checkout_success.php') {
+        include(DIR_WS_MODULES . 'analytics.php');
+}
+?>
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 <!-- EOF: Google Analytics Code -->
 <?php }
 //end{googleanalytics}

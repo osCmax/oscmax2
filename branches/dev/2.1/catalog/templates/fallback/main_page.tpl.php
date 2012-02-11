@@ -57,6 +57,31 @@ echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet',
 <link id="noscriptStyle" rel="stylesheet" type="text/css" href="<?php echo (bts_select('stylesheet','no_javascript.css')); ?>">
 <script type="text/javascript">document.getElementById('noscriptStyle').parentNode.removeChild(document.getElementById('noscriptStyle'));</script>
 
+<?php if (GOOGLE_ANALYTICS_STATUS == 'true') { ?>
+<!-- BOF: Google Analytics Code -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '<?php echo (GOOGLE_UA_CODE); ?>']);
+  _gaq.push(['_trackPageview']);
+<?php
+if (GOOGLE_SUBDOMAIN != 'none') {
+echo '_gaq.push([\'_setDomainName\', \'' . GOOGLE_SUBDOMAIN . '\']);';
+}
+if ($pfile == 'checkout_success.php') {
+include(DIR_WS_MODULES . 'analytics.php');
+}
+?>
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!-- EOF: Google Analytics Code -->
+<?php } ?>
 </head>
 <body>
 
@@ -258,28 +283,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
     }
   }
  
- if (GOOGLE_ANALYTICS_STATUS == 'true') { ?>
-    <!-- BOF: Google Analytics Code -->
-	<script type="text/javascript">
-		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-    
-	<script type="text/javascript">
-	var pageTracker = _gat._getTracker("<?php echo GOOGLE_UA_CODE; ?>");
-	pageTracker._initData();
-    <?php
-    if (GOOGLE_SUBDOMAIN != 'none') {
-	  echo 'pageTracker._setDomainName("' . GOOGLE_SUBDOMAIN . '"); ';
-	}
-	if ($pfile == 'checkout_success.php') {
-		include(DIR_WS_MODULES . 'analytics.php');
-	}
-	?>
-	pageTracker._trackPageview();
-	</script>
-    <!-- EOF: Google Analytics Code -->';
-<?php } ?>
+
 <script type="text/javascript"><!--
 function couponpopupWindow(url) {
 window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=450,height=280,screenX=150,screenY=150,top=150,left=150')

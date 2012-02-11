@@ -373,11 +373,11 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='
 //begin{footer}
 // BOF Added: Down for Maintenance Hide footer.php if not to show
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false') {
-<!-- footer //-->
+  echo '<!-- footer //-->';
 echo FOOTER_TEXT_BODY;
 {banner}
-<!-- footer_eof //-->
-       
+  echo '<!-- footer_eof //-->';
+}
 //end{footer}
             
 //

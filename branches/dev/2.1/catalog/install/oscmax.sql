@@ -1775,6 +1775,10 @@ INSERT INTO admin_files VALUES(214, 'upgrade.php', 'BOX_ADMINISTRATOR_UPGRADE', 
 INSERT INTO admin_files VALUES(215, 'stats_keywords.php', 'BOX_REPORTS_KEYWORDS', 0, 8, '1', 10);
 INSERT INTO admin_files VALUES(216, 'configuration.php?gID=46', 'BOX_CONFIGURATION_SLIMBOX', 0, 2, '1', 7);
 INSERT INTO admin_files VALUES(217, 'configuration.php?gID=47', 'BOX_CONFIGURATION_CLOUDZOOM', 0, 2, '1', 7);
+INSERT INTO admin_files VALUES(218, 'paypal_wpp_capture.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
+INSERT INTO admin_files VALUES(219, 'paypal_wpp_charge.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
+INSERT INTO admin_files VALUES(220, 'paypal_wpp_include.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
+INSERT INTO admin_files VALUES(221, 'paypal_wpp_refund.php', 'FILE_PAYPAL', 0, 5, '1,2', 99)
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');

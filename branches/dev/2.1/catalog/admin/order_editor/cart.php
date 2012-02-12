@@ -98,7 +98,7 @@ var $shiptotal;
         $qty = $this->contents[$products_id]['qty'];
 
 // products price
-        $product_query = tep_db_query("select products_id, products_price, products_ship_price, products_tax_class_id, products_weight from " . TABLE_PRODUCTS . " where products_id='" . tep_get_prid($products_id) . "'");
+        $product_query = tep_db_query("select products_id, products_price, products_tax_class_id, products_weight from " . TABLE_PRODUCTS . " where products_id='" . tep_get_prid($products_id) . "'");
         if ($product = tep_db_fetch_array($product_query)) {
           $prid = $product['products_id'];
           $products_tax = tep_get_tax_rate($product['products_tax_class_id']);

@@ -232,19 +232,8 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
             <td class="pageHeading"><?php echo HEADING_TITLE . (($order->customer['is_dummy_account'])? ' <b>no account!</b>':''); ?></td>
             <!-- PWA EOF -->
             <td class="pageHeading" align="right">&nbsp;</td>
-<?php
-// BOF: MOD - PayPal IPN
-    if ($order->info['payment_method'] == 'paypal'  && isset($_GET['refer']) && $_GET['refer'] == 'ipn') {
-?>
-           <td class="pageHeading" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_PAYPAL_IPN, tep_get_all_get_params(array('action','oID','refer'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
-<?php
-    } else {
-?>
+
             <td class="pageHeading" align="right"><?php if( $nextid = get_order_id($oID,'prev')) { echo '<a href="' .tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $nextid . '&action=edit') . '">' . tep_image(DIR_WS_ICONS . 'prev.gif', IMAGE_PREV_ORDER) . '</a>&nbsp;'; } ?><?php if( $previd = get_order_id($oID)) echo '<a href="' .tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $previd . '&action=edit') . '">' . tep_image(DIR_WS_ICONS . 'next.gif', IMAGE_NEXT_ORDER) . '</a>&nbsp;'; ?><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS_EDIT, 'oID=' . $_GET['oID']) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'pdf_check=invoice&amp;oID=' . $_GET['oID']) . '" target="_blank">' . tep_image_button('button_invoice_pdf.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'pdf_check=packingslip&amp;oID=' . $_GET['oID']) . '" target="_blank">' . tep_image_button('button_packingslip_pdf.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('action'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a> '; ?></td>
-<?php
-    }//else not paypal
-// EOF: MOD - PayPal IPN
-?>
           </tr>
         </table></td>
       </tr>
@@ -316,18 +305,12 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
       </tr>
 <?php
 // EOF: MOD - Downloads Controller - Extra order info
-// BOF: MOD - PayPal IPN
-  if (strtolower($order->info['payment_method']) == 'paypal') {
-    include 'paypal_ipn_order.php';
-  } else {
-// EOF: MOD - PayPal IPN
 ?>
           <tr>
             <td class="main"><b><?php echo ENTRY_PAYMENT_METHOD; ?></b></td>
             <td class="main"><?php echo $order->info['payment_method']; ?></td>
           </tr>
 <?php
-  }//else not paypal
     if (tep_not_null($order->info['cc_type']) || tep_not_null($order->info['cc_owner']) || tep_not_null($order->info['cc_number'])) {
 ?>
           <tr>
@@ -568,18 +551,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
             <td colspan="3"><?php echo tep_draw_separator(); ?></td>
       </tr>
       <tr>
-<?php /* BOF: MOD - PayPal IPN */ ?>
-<?php
-    if ($order->info['payment_method'] == 'paypal'  && isset($_GET['refer']) && $_GET['refer'] == 'ipn'){
-?>
-           <td colspan="2" align="right"><?php if( $nextid = get_order_id($oID,'prev')) { echo '<a href="' .tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $nextid . '&action=edit') . '">' . tep_image(DIR_WS_ICONS . 'prev.gif', IMAGE_PREV_ORDER) . '</a>&nbsp;'; } ?><?php if( $previd = get_order_id($oID)) echo '<a href="' .tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $previd . '&action=edit') . '">' . tep_image(DIR_WS_ICONS . 'next.gif', IMAGE_NEXT_ORDER) . '</a>&nbsp;'; ?><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'pdf_check=invoice&amp;oID=' . $_GET['oID']) . '" target="_blank">' . tep_image_button('button_invoice_pdf.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'pdf_check=packingslip&amp;oID=' . $_GET['oID']) . '" target="_blank">' . tep_image_button('button_packingslip_pdf.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_PAYPAL_IPN, tep_get_all_get_params(array('action','oID','refer'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
-<?php
-    } else {
-?>
        <td colspan="2" align="right"><?php if( $nextid = get_order_id($oID,'prev')) { echo '<a href="' .tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $nextid . '&action=edit') . '">' . tep_image(DIR_WS_ICONS . 'prev.gif', IMAGE_PREV_ORDER) . '</a>&nbsp;'; } ?><?php if( $previd = get_order_id($oID)) echo '<a href="' .tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $previd . '&action=edit') . '">' . tep_image(DIR_WS_ICONS . 'next.gif', IMAGE_NEXT_ORDER) . '</a>&nbsp;'; ?><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS_EDIT, 'oID=' . $_GET['oID']) . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $_GET['oID']) . '" TARGET="_blank">' . tep_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'pdf_check=invoice&amp;oID=' . $_GET['oID']) . '" target="_blank">' . tep_image_button('button_invoice_pdf.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, 'pdf_check=packingslip&amp;oID=' . $_GET['oID']) . '" target="_blank">' . tep_image_button('button_packingslip_pdf.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('action'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a> '; ?></td>
-<?php
-    }//else not paypal
-// EOF: MOD - PayPal IPN ?>
 <!-- *** BEGIN GOOGLE CHECKOUT *** -->
 <?php 
 if (defined('MODULE_PAYMENT_GOOGLECHECKOUT_STATUS') && MODULE_PAYMENT_GOOGLECHECKOUT_STATUS == 'True') { 

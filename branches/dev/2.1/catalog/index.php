@@ -96,7 +96,7 @@ global $customer_group_id;
    $status_need_to_get_prices = false;
 
    // find out if sorting by price has been requested
-   if ( (isset($_GET['sort'])) && (preg_match('/[1-8][ad]/', $_GET['sort'])) && (substr($_GET['sort'], 0, 1) <= sizeof($column_list)) && $customer_group_id != '0' ){
+   if ( (isset($_GET['sort'])) && (preg_match('/[0-8][ad]/', $_GET['sort'])) && (substr($_GET['sort'], 0, 1) <= sizeof($column_list)) && $customer_group_id != '0' ){
     $_sort_col = substr($_GET['sort'], 0 , 1);
     if ($column_list[$_sort_col-1] == 'PRODUCT_LIST_PRICE') {
       $status_need_to_get_prices = true;
@@ -329,7 +329,7 @@ global $customer_group_id;
 	  $new_products_sort = "";	
 	}
 
-    if ( (!isset($_GET['sort'])) || (!preg_match('/^[1-8][ad]$/', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
+    if ( (!isset($_GET['sort'])) || (!preg_match('/^[0-8][ad]$/', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
       for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
         if ($column_list[$i] == 'PRODUCT_LIST_NAME') {
           $_GET['sort'] = $i . 'a';
@@ -343,28 +343,28 @@ global $customer_group_id;
 
       switch ($column_list[$sort_col]) {
         case 'PRODUCT_LIST_MODEL':
-          $listing_sql .= " order by p.products_model " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by p.products_model" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
         case 'PRODUCT_LIST_NAME':
-          $listing_sql .= " order by pd.products_name " . ($sort_order == 'd' ? 'desc' : '');
+          $listing_sql .= " order by pd.products_name" . ($sort_order == 'd' ? ' desc' : '');
           break;
         case 'PRODUCT_LIST_MANUFACTURER':
-          $listing_sql .= " order by m.manufacturers_name " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by m.manufacturers_name" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
         case 'PRODUCT_LIST_QUANTITY':
-          $listing_sql .= " order by p.products_quantity " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by p.products_quantity" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
         case 'PRODUCT_LIST_IMAGE':
           $listing_sql .= " order by pd.products_name";
           break;
         case 'PRODUCT_LIST_WEIGHT':
-          $listing_sql .= " order by p.products_weight " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by p.products_weight" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
         case 'PRODUCT_LIST_PRICE':
-          $listing_sql .= " order by final_price " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by final_price" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
 		case 'PRODUCT_LIST_BESTSELLER':
-          $listing_sql .= " order by products_ordered " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by products_ordered" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
       }
     }

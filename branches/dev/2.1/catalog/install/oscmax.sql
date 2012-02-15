@@ -1778,7 +1778,7 @@ INSERT INTO admin_files VALUES(217, 'configuration.php?gID=47', 'BOX_CONFIGURATI
 INSERT INTO admin_files VALUES(218, 'paypal_wpp_capture.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
 INSERT INTO admin_files VALUES(219, 'paypal_wpp_charge.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
 INSERT INTO admin_files VALUES(220, 'paypal_wpp_include.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
-INSERT INTO admin_files VALUES(221, 'paypal_wpp_refund.php', 'FILE_PAYPAL', 0, 5, '1,2', 99)
+INSERT INTO admin_files VALUES(221, 'paypal_wpp_refund.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');

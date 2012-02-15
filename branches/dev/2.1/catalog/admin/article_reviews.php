@@ -237,10 +237,10 @@ $(document).ready(function(){
     $reviews_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $reviews_query_raw, $reviews_query_numrows);
     $reviews_query = tep_db_query($reviews_query_raw);
     while ($reviews = tep_db_fetch_array($reviews_query)) {
-      if ((!isset($_GET['rID']) || (isset($_GET['rID']) && ($_GET['rID'] == $reviews['reviews_id']))) && !isset($rInfo)) {
-        $reviews_text_query = tep_db_query("select r.reviews_read, r.customers_name, rd.reviews_text, length(rd.reviews_text) as reviews_text_size from " . TABLE_ARTICLE_REVIEWS . " r, " . TABLE_ARTICLE_REVIEWS_DESCRIPTION . " rd where r.reviews_id = '" . (int)$reviews['reviews_id'] . "' and r.reviews_id = rd.reviews_id");
-        $reviews_text = tep_db_fetch_array($reviews_text_query);
-
+      $reviews_text_query = tep_db_query("select r.reviews_read, r.customers_name, rd.reviews_text, length(rd.reviews_text) as reviews_text_size from " . TABLE_ARTICLE_REVIEWS . " r, " . TABLE_ARTICLE_REVIEWS_DESCRIPTION . " rd where r.reviews_id = '" . (int)$reviews['reviews_id'] . "' and r.reviews_id = rd.reviews_id");
+      $reviews_text = tep_db_fetch_array($reviews_text_query);
+		
+	  if ((!isset($_GET['rID']) || (isset($_GET['rID']) && ($_GET['rID'] == $reviews['reviews_id']))) && !isset($rInfo)) {
         $articles_name_query = tep_db_query("select articles_name from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$reviews['articles_id'] . "' and language_id = '" . (int)$languages_id . "'");
         $articles_name = tep_db_fetch_array($articles_name_query);
 
@@ -258,7 +258,7 @@ $(document).ready(function(){
         echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ARTICLE_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $reviews['reviews_id']) . '\'">' . "\n";
       }
 ?>
-                <td class="dataTableContent"><?php echo '<span title="' . $rInfo->customers_name . '|' . $rInfo->reviews_text . '">' . tep_image(DIR_WS_ICONS . 'page_white_text.png', ICON_PREVIEW) . '&nbsp;' . tep_get_articles_name($reviews['articles_id']); ?></span></td>
+                <td class="dataTableContent"><?php echo '<span title="' . $rInfo->customers_name . '|' . $reviews_text['reviews_text'] . '">' . tep_image(DIR_WS_ICONS . 'page_white_text.png', ICON_PREVIEW) . '</span>&nbsp;' . tep_get_articles_name($reviews['articles_id']); ?></td>
                 <td class="dataTableContent" align="center"><?php echo tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'icons/stars_' . $reviews['reviews_rating'] . '.gif'); ?></td>
                 <td class="dataTableContent" align="center"><?php echo tep_date_short($reviews['date_added']); ?></td>
                 <td class="dataTableContent" align="center"><?php echo $reviews['approved']==1? '<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS, tep_get_all_get_params(array('action', 'info')) . 'action=disapprove_review&rID=' . $reviews['reviews_id'], 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS, tep_get_all_get_params(array('action', 'info')) . 'action=disapprove_review&rID=' . $reviews['reviews_id'], 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED, 10, 10) . '</a>':'<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS, tep_get_all_get_params(array('action', 'info')) . 'action=approve_review&rID=' . $reviews['reviews_id'], 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLE_REVIEWS, tep_get_all_get_params(array('action', 'info')) . 'action=approve_review&rID=' . $reviews['reviews_id'], 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10) . '</a>' ?></td>

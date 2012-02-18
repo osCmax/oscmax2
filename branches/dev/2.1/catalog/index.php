@@ -62,7 +62,9 @@ global $customer_group_id;
     $content = CONTENT_INDEX_NESTED;
 
   } elseif ( ($category_depth == 'products') || (isset($_GET['manufacturers_id'])) || (isset($_GET['show_specials'])) || (isset($_GET['new_products'])) ) {
-// create column list
+	$category_depth = 'products'; // display products
+    
+	// create column list
     $define_list = array('PRODUCT_LIST_MODEL' => PRODUCT_LIST_MODEL,
                          'PRODUCT_LIST_NAME' => PRODUCT_LIST_NAME,
                          'PRODUCT_LIST_MANUFACTURER' => PRODUCT_LIST_MANUFACTURER,

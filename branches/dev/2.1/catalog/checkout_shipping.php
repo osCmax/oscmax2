@@ -160,10 +160,10 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
             if ( (isset($quote[0]['methods'][0]['title'])) && (isset($quote[0]['methods'][0]['cost'])) ) {
               $shipping = array('id' => $shipping,
                                 'title' => (($free_shipping == true) ?  $quote[0]['methods'][0]['title'] : $quote[0]['module'] . ' (' . $quote[0]['methods'][0]['title'] . ')'),
-				// start indvship 4.5
-                                //'cost' => $quote[0]['methods'][0]['cost']);
-                                'cost' => $quote[0]['methods'][0]['cost'],
-                                'invcost' => $shipping_modules->get_shiptotal());
+																// start indvship 4.5
+                                'cost' => $quote[0]['methods'][0]['cost']);
+                                //'cost' => $quote[0]['methods'][0]['cost'],
+                                //'invcost' => $shipping_modules->get_shiptotal());
                                 // end indvship 4.5
 
 //---PayPal WPP Modification START ---//

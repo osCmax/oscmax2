@@ -96,6 +96,7 @@ table {
    
   
     //mysql_close($connect);
+    
    if (!$version) {
    		if (PROJECT_VERSION == 'osCmax v2.5 RC1' || PROJECT_VERSION == 'osCmax v2.5 RC2') {
    			$file = fopen('upgrade/2.5rc1_to_2.5rc2.sql', 'r');
@@ -138,15 +139,16 @@ table {
 				</form>
     			<?php
     		} else { ?>
-    			<td>Your current osCmax version, <strong><?php echo $version; ?>, is not compatible with automated upgrades. You cannot use this script to upgrade your database.</strong></td>
+    			<td>Your current osCmax version, <strong><?php echo $version; ?>, is not compatible with automated upgrades. You cannot use this automated system to upgrade your database.</strong></td>
     		<?php 
     		}
-    	}
-			
-   if ($version == 'v2.5_RC1') {
-   		//if (PROJECT_VERSION == 'osCmax v2.5 RC1' || PROJECT_VERSION == 'osCmax v2.5 RC2') {
-   			$file = fopen('upgrade/2.5rc1_to_2.5rc2.sql', 'r');
-   		?>
+  } else {
+
+    switch($version) {
+    	
+    	case 'v2.5_RC1':
+    	  $file = fopen('upgrade/2.5rc1_to_2.5rc2.sql', 'r');
+   		  ?>
    			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 				<table border="0" width="100%" cellspacing="0" cellpadding="0">
 					<tr>
@@ -163,11 +165,33 @@ table {
 				</table>
 				<button id="Button" type="submit" name="upgrade" value="upgrade">Upgrade</button>
 				</form>
-    			<?php
-    		}
-    
-	if ($version == 'v2.5_RC2') { 
-	  if (PROJECT_VERSION !== 'osCmax v2.5 RC2') { 
+			 <?php
+			break;
+			
+			case 'v2.5_RC2':
+			     $file = fopen('upgrade/2.5rc2_to_2.5.0_Stable.sql', 'r');
+			     ?>
+   			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+    				<td>Your current osCmax file set version is <strong><?php echo PROJECT_VERSION; ?></strong><br>To upgrade your database to osCmax v2.5.0 Stable, click the Upgrade button.</td>
+    			</tr>
+					<tr>
+						<td><br>Check to display sql output: <input type="checkbox" name="contents" value="1" /><br></td>
+					</tr>
+					<tr>
+					    <td>
+					    <br><strong>Before proceeding, please make a backup of your database.<br><br></strong>
+					    </td>
+					</tr>    
+				</table>
+				<button id="Button" type="submit" name="upgrade" value="upgrade">Upgrade</button>
+				</form>
+				<?php
+				break;
+				
+				case 'v2.5.0':
+					  if (PROJECT_VERSION !== 'osCmax v2.5.0') { 
 					?>
 				<table border="0" width="100%" cellspacing="0" cellpadding="0">
 					<tr>
@@ -187,9 +211,11 @@ table {
 					</tr>
 				</table>
 				<?php
-				 }
-				}
-	  		?>
+			}
+			break;
+		}
+	}
+?>
 				<div class="feedback">
 				<?php
 //	if (!$version) {

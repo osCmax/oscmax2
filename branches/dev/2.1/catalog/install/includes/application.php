@@ -34,5 +34,5 @@ $Id$
     }
   }
   
-  define('PROJECT_VERSION', 'v2.5 RC2');
+  define('PROJECT_VERSION', 'v2.5.0');
 ?>

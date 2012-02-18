@@ -115,7 +115,7 @@ define('CD_MAX_DISPLAY_NEW_PRODUCTS', 'Máximo número de productos nuevos a mostr
 define('CT_MAX_DISPLAY_UPCOMING_PRODUCTS', 'Productos próximamente disponibles');
 define('CD_MAX_DISPLAY_UPCOMING_PRODUCTS', 'Máximo número de productos próximamente disonibles a mostrar');
 define('CT_MAX_DISPLAY_MANUFACTURERS_IN_A_LIST', 'Lista de fabricantes');
-define('CD_MAX_DISPLAY_MANUFACTURERS_IN_A_LIST', 'Utilizado en la sección de fabricantes; cuando el número de fabricantes es mayor que eset número se muestra una lista desplegable en lugar de la lista predeterminada');
+define('CD_MAX_DISPLAY_MANUFACTURERS_IN_A_LIST', 'Utilizado en la sección de fabricantes; cuando el número de fabricantes es mayor que este número se muestra una lista desplegable en lugar de la lista predeterminada');
 define('CT_MAX_MANUFACTURERS_LIST', 'Tamaño selección de fabricantes');
 define('CD_MAX_MANUFACTURERS_LIST', 'Utilizado en la sección de fabricantes; cuando este valor es \'1\' se usará la clásica lista desplegable para la sección de fabricantes. Con otro valor se mostrará una lista con el número especificado de filas.');
 define('CT_MAX_DISPLAY_MANUFACTURER_NAME_LEN', 'Longitud nombre fabricantes');
@@ -308,10 +308,10 @@ define('CT_SHIPPING_UNIT_LENGTH', 'Unidad de longitud');
 define('CD_SHIPPING_UNIT_LENGTH', '¿En qué unidad se mide el tamaño de los paquetes?');
 define('CT_SHIPPING_STORE_BOXES_USED', 'Almacenar resultado de rutinas de empaquetado');
 define('CD_SHIPPING_STORE_BOXES_USED', '¿Quieres almacenar los resultados de las rutinas de empaquetado en la base de datos? Consulta el fichero store_ups_boxes_used.txt enel paquete UPSXML para ver los detalles y las modificaciones necesarias.');
-define('CT_INDIVIDUAL_SHIP_HOME_COUNTRY', 'Indiv Ship Home Country');
-define('CD_INDIVIDUAL_SHIP_HOME_COUNTRY', 'Individual ship home country ID (other countries will have extra freight');
-define('CT_INDIVIDUAL_SHIP_INCREASE', 'Indiv Ship Outside Home Increase');
-define('CD_INDIVIDUAL_SHIP_INCREASE', 'Individual ship x increase for shipping outside home country. For example: If you set your item ship price to $50 and this value to 3 and ship outside your home country they will pay $150, and if this value was 2, they would pay $100.');
+define('CT_INDIVIDUAL_SHIP_HOME_COUNTRY', 'País de origen para gastos de envío individuales');
+define('CD_INDIVIDUAL_SHIP_HOME_COUNTRY', 'ID del país de origen para gastos de envío individuales (otros países tendrán un cargo extra)');
+define('CT_INDIVIDUAL_SHIP_INCREASE', 'Múltiplo de gastos de envío al extranjero');
+define('CD_INDIVIDUAL_SHIP_INCREASE', 'Múltiplo para incrementar los gastos de envío individuales para envíos fuera del país de origen. Por ejemplo: si se configuran los gastos de envío individuales para un artículo a 50€ y este valor a 3, y se hace un envío a otro país que no es el de origen, se deberán pagar 150€. Y si este valor fuera 2, se pagarán 100€.');
 
 // Configuration ID: 8 - Product Listing
 define('CT_PRODUCT_LIST_IMAGE', 'Mostrar imagen producto');
@@ -347,7 +347,7 @@ define('CD_PRODUCT_LIST_TYPE', '¿Quieres mostrar los productos uno por fila o mú
 define('CT_USE_PRODUCT_DESCRIPTION_TABS', 'Usar pestañas para mostrar información adicional del producto');
 define('CD_USE_PRODUCT_DESCRIPTION_TABS', '¿Quieres usar pestañas para imostrar la información del producto?');
 define('CT_BREADCRUMB_SHOW_PRODUCT_MODEL', 'Mostrar referencia del producto en la ruta');
-define('CD_BREADCRUMB_SHOW_PRODUCT_MODEL', '¿Quieres mostrar la referencia del prodcuto en la barra de la ruta?');
+define('CD_BREADCRUMB_SHOW_PRODUCT_MODEL', '¿Quieres mostrar la referencia del producto en la barra de la ruta?');
 define('CT_SHOW_ASK_A_QUESTION', 'Mostrar botón Pregúntenos en páginas de información de productos?');
 define('CD_SHOW_ASK_A_QUESTION', '¿Quieres mostrar un botón que enlaza a tu formulario de contacto y lo rellena con los datos de un producto que el usuario estaba viendo?');
 define('CT_SHOW_MORE_INFO', 'Mostrar botón Ver?');
@@ -377,8 +377,8 @@ define('CT_PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST', 'Mostrar datos de existencias
 define('CD_PRODINFO_ATTRIBUTE_DISPLAY_STOCK_LIST', '<b>Si es true:</b> Se mostrará una tabla con datos sobre las existencias. Si el producto no tiene atributos con seguimiento de existencias esta tabla no se mostrará.<br /><br /><b>Por defecto es false.</b>');
 define('CT_STOCK_IMAGE_SWITCH', '¿Cambiar imagen Añadir a carrito?');
 define('CD_STOCK_IMAGE_SWITCH', '¿Te gustaría que se cambiara la imagen de Añadir a carrito en la página de información del producto por otra que indique la no disponiblidad del producto?');
-define('CT_STOCK_SET_INACTIVE', 'Deactivate Out of Stock Products During Checkout');
-define('CD_STOCK_SET_INACTIVE', 'Automatically set products to Inactive when inventory levels drop below 1 during checkout.');
+define('CT_STOCK_SET_INACTIVE', 'Desactivar productos agotados al realizar compras');
+define('CD_STOCK_SET_INACTIVE', 'Los productos cuyo nivel de existencias bajen de 1 cuando se realice una compra se configuran automáticamente como inactivos.');
 
 // Configuration ID: 10 - Logging
 define('CT_STORE_PAGE_PARSE_TIME', 'Almacenar tiempo de análisis de página');
@@ -625,30 +625,30 @@ define('CT_SLIMBOX_COUNTER', 'Texto contador');
 define('CD_SLIMBOX_COUNTER', 'Personaliza el texto que aparece cuando se muestran varias imágenes.<br>la {x} representa la imagen actual y la {y} el número total de imágenes.<br>Poner a false - sin comillas o \"\" para dehabilitarlo.<br>Por defecto es \"Image {x} of {y}\".');
 
 // Configuration ID: 47 - CloudZoom
-define('CT_CLOUDZOOM_WIDTH', 'Image Zoomer Width');
-define('CD_CLOUDZOOM_WIDTH', 'The width of the zoom window in pixels. If <b>auto</b> is specified, the width will be the same as the small image.');
-define('CT_CLOUDZOOM_HEIGHT', 'Image Zoomer Height');
-define('CD_CLOUDZOOM_HEIGHT', 'The width of the zoom window in pixels. If <b>auto</b> is specified, the width will be the same as the small image.');
-define('CT_CLOUDZOOM_POSITION', 'Image Zoomer Position');
-define('CD_CLOUDZOOM_POSITION', 'Specifies the position of the zoom window relative to the small image. Allowable values are <b>left, right, top, bottom, inside</b> or you can specifiy the id of an html element to place the zoom window in e.g. position: <b>element1 right</b>');
-define('CT_CLOUDZOOM_ADJUSTX', 'X Axis Adjustment');
-define('CD_CLOUDZOOM_ADJUSTX', 'Allows you to fine tune the x-position of the zoom window in pixels.');
-define('CT_CLOUDZOOM_ADJUSTY', 'Y Axis Adjustment');
-define('CD_CLOUDZOOM_ADJUSTY', 'Allows you to fine tune the y-position of the zoom window in pixels.');
-define('CT_CLOUDZOOM_TINT', 'Image Zoomer Tint');
-define('CD_CLOUDZOOM_TINT', 'Specifies a tint colour which will cover the small image. Colours should be specified in hex format, e.g. #aa00aa. Does not work with softFocus.');
-define('CT_CLOUDZOOM_TINTOPACITY', 'Image Zoomer Tint Opacity');
-define('CD_CLOUDZOOM_TINTOPACITY', 'Opacity of the tint, where 0 is fully transparent, and 1 is fully opaque.');
-define('CT_CLOUDZOOM_LENSOPACITY', 'Image Zoomer Lens Opacity');
-define('CD_CLOUDZOOM_LENSOPACITY', 'Opacity of the lens mouse pointer, where 0 is fully transparent, and 1 is fully opaque. In tint and soft-focus modes, it will always be transparent.');
-define('CT_CLOUDZOOM_SOFTFOCUS', 'Image Zoomer Soft Focus');
-define('CD_CLOUDZOOM_SOFTFOCUS', 'Applies a subtle blur effect to the small image. Set to true or false. Does not work with tint.');
-define('CT_CLOUDZOOM_SMOOTHMOVE', 'Image Zoomer Smoother Moving');
-define('CD_CLOUDZOOM_SMOOTHMOVE', 'Amount of smoothness/drift of the zoom image as it moves. The higher the number, the smoother/more drifty the movement will be. 1 = no smoothing.');
-define('CT_CLOUDZOOM_SHOWTITLE', 'Image Zoomer Show Titles');
-define('CD_CLOUDZOOM_SHOWTITLE', 'Show the title tag of the image.');
-define('CT_CLOUDZOOM_TITLEOPACITY', 'Image Zoomer Title Opacity');
-define('CD_CLOUDZOOM_TITLEOPACITY', 'Specifies the opacity of the title if displayed, where 0 is fully transparent, and 1 is fully opaque.	');
+define('CT_CLOUDZOOM_WIDTH', 'Anchura del zoomer de imagen');
+define('CD_CLOUDZOOM_WIDTH', 'La anchura de la ventana de zoom en píxeles. Si se espcifica <b>auto</b>, la anchura será la misma de la imagen pequeña.');
+define('CT_CLOUDZOOM_HEIGHT', 'Altura del zoomer de imagen');
+define('CD_CLOUDZOOM_HEIGHT', 'La altura de la ventana de zoom en píxeles. Si se espcifica <b>auto</b>, la altura será la misma de la imagen pequeña.');
+define('CT_CLOUDZOOM_POSITION', 'Posición del zoomer de imagen');
+define('CD_CLOUDZOOM_POSITION', 'Especifica la posición de la ventana de zoom en relación a la imagen pequeña. Los valores permitidos son <b>left, right, top, bottom, inside</b> o puedes especificar el id de un elemento html donde situar la ventana de zoom, p.ej.: <b>element1 right</b>');
+define('CT_CLOUDZOOM_ADJUSTX', 'Ajuste en eje X');
+define('CD_CLOUDZOOM_ADJUSTX', 'Permite ajustar con precisión la posición x de la ventana de zoom en píxeles.');
+define('CT_CLOUDZOOM_ADJUSTY', 'Ajuste en eje Y');
+define('CD_CLOUDZOOM_ADJUSTY', 'Permite ajustar con precisión la posición y de la ventana de zoom en píxeles.');
+define('CT_CLOUDZOOM_TINT', 'Tinte del zoomer de imagen');
+define('CD_CLOUDZOOM_TINT', 'Especifica un color de tinte que cubrirá la imagen pequeña. Los colores se deben especificar en formato hexadecimal, p.ej. #aa00aa. No funciona con softFocus.');
+define('CT_CLOUDZOOM_TINTOPACITY', 'Opcidad del tinte del zoomer de imagen');
+define('CD_CLOUDZOOM_TINTOPACITY', 'Opacidad del tinte, donde 0 es totalmente transparente y 1 es totalmente opaco.');
+define('CT_CLOUDZOOM_LENSOPACITY', 'Opacidad de lente del zoomer de imagen');
+define('CD_CLOUDZOOM_LENSOPACITY', 'Opacidad de la lente del puntero del ratón, donde 0 es totalmente transparente, y 1 es totalmente opaco. En los modos tinta y soft-focus, será siempre transparente.');
+define('CT_CLOUDZOOM_SOFTFOCUS', 'Soft Focus del zoomer de imagen');
+define('CD_CLOUDZOOM_SOFTFOCUS', 'Aplica un sutil efecto de difuminado a la imagen pequeña. Se configura como true o false. No funciona con tinta.');
+define('CT_CLOUDZOOM_SMOOTHMOVE', 'Movimiento suavizado del zoomer de imagen');
+define('CD_CLOUDZOOM_SMOOTHMOVE', 'Cantidad de suavidad/fluidez de la imagen zoom mientras se mueve. Cuanto más alto sea el número, más suavizado/fluído será el movimiento. 1 = sin suavizado.');
+define('CT_CLOUDZOOM_SHOWTITLE', 'Mostrar títulos en el zoomer de imagen');
+define('CD_CLOUDZOOM_SHOWTITLE', 'Mostrar la etiqueta del título de la imagen.');
+define('CT_CLOUDZOOM_TITLEOPACITY', 'Opacidad del título en el zoomer de imagen');
+define('CD_CLOUDZOOM_TITLEOPACITY', 'Especifica la opacidad del título si se muestra, donde 0 es totalmente transparente, y 1 es totalmente opaco.	');
 
 // Configuration ID: 50 - Product Information
 define('CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Impedir añadir productos agotados a carrito');
@@ -1107,9 +1107,9 @@ define('CD_ENABLE_ARTICLE_REVIEWS', '¿Habilitar comentarios de noticias para usu
 define('CT_ENABLE_TELL_A_FRIEND_ARTICLE', 'Habilitar contar a un amigo una noticia');
 define('CD_ENABLE_TELL_A_FRIEND_ARTICLE', '¿Habilitar la opción contar a un amigo en la página de la noticia?');
 define('CT_MIN_DISPLAY_ARTICLES_XSELL', 'Mínimo número de productos relacionados con la noticia');
-define('CD_MIN_DISPLAY_ARTICLES_XSELL', 'Mínimo número de productos que se muestran en el listado de prodcutos relacionados de la noticia.');
+define('CD_MIN_DISPLAY_ARTICLES_XSELL', 'Mínimo número de productos que se muestran en el listado de productos relacionados de la noticia.');
 define('CT_MAX_DISPLAY_ARTICLES_XSELL', 'Máximo número de productos relacionados con la noticia');
-define('CD_MAX_DISPLAY_ARTICLES_XSELL', 'Máximo número de productos que se pueden mostrar en el listado de prodcutos relacionados de la noticia.');
+define('CD_MAX_DISPLAY_ARTICLES_XSELL', 'Máximo número de productos que se pueden mostrar en el listado de productos relacionados de la noticia.');
 define('CT_SHOW_ARTICLE_COUNTS', 'Mostrar número de noticias');
 define('CD_SHOW_ARTICLE_COUNTS', 'Contar recursivamente cuántas noticias hay en cada sección');
 define('CT_MAX_DISPLAY_AUTHOR_NAME_LEN', 'Máximo longitud de nombre del autor');
@@ -1177,6 +1177,6 @@ define('CD_ONEPAGE_ZIP_BELOW', '¿Mover el campo de entrada de datos del código p
 define('CT_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'No mostrar secciones de selección de direcciones de envío y manipulación o formas de envío si peso de productos = 0');
 define('CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'Si el peso del producto = 0 entonces el sistema asumirá que el producto es virtual, o sea descargable. Como tal no es necesario que se muestre la sección de dirección de envío.');
 define('CT_ONEPAGE_ADDR_LAYOUT', 'Disposición de direcciones');
-define('CD_ONEPAGE_ADDR_LAYOUT', 'Las secciones de direcciones en el Pedido en una página se pueden mostrar oragnizadas en forma vertical (una encima de la otra) u horizontal (una al lado de la otra)');
+define('CD_ONEPAGE_ADDR_LAYOUT', 'Las secciones de direcciones en el Pedido en una página se pueden mostrar organizadas en forma vertical (una encima de la otra) u horizontal (una al lado de la otra)');
 
 ?>

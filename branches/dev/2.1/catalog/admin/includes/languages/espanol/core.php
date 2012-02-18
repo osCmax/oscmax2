@@ -29,27 +29,27 @@ define('BOX_MERCHANT_INFO', 'Aplicación Merchant');
 define('BOX_PAYPAL_INFO', 'Registro Paypal');
 
 // Filename defines for Admin Group Permissions - when file permission needed but not menu item.
-define('FILE_GC_DASHBOARD', '</b>Panel Google Checkout<b>');
-define('FILE_COUPON_RESTRICT', '</b>Restringir vales<b>');
-define('FILE_VALID_PRODUCTS', '</b>Productos válidos<b>');
-define('FILE_VALID_CATEGORIES', '</b>Categorías válidas<b>');
-define('FILE_LIST_PRODUCTS', '</b>Listar productos<b>');
-define('FILE_LIST_CATEGORIES', '</b>Listar categorías<b>');
-define('FILE_TREE_VIEW', '</b>Vista de árbol<b>');
-define('FILE_BANNER_STATISTICS', '</b>Fichero de estadísticas de banners<b>');
-define('FILE_STOCK', '</b>Fichero de existencias de productos<b>');
-define('FILE_NEW_ATTRIBUTES_CONFIG', '</b>Variables de configuración de atributos<b>'); 
-define('FILE_COMMON_REPORTS', '</b>Fichero de informes<b>');
-define('FILE_FEDEX', '</b>Fichero de Fedex<b>');
-define('FILE_AFFILIATE', '</b>Fichero de afiliados<b>');
-define('FILE_FEEDMACHINE', '</b>Fichero de Feedmachine<b>');
-define('FILE_EASYPOPULATE', '</b>Fichero de Easypopulate<b>');
-define('FILE_ATTRIBUTE', '</b>Fichero de atributos<b>');
-define('FILE_DISCOUNT_CATEGORIES', '</b>Fichero de categorías de descuento<b>');
-define('FILE_CREATE_ACCOUNT', '</b>Fichero de crear cuenta<b>');
-define('FILE_ORDER', '</b>Fichero de pedido<b>');
-define('FILE_PAYPAL', '</b>Fichero de PayPal<b>');
-define('FILE_INFORMATION', '</b>Fichero de páginas de información<b>');
+define('FILE_GC_DASHBOARD', '<b>Panel Google Checkout</b>');
+define('FILE_COUPON_RESTRICT', '<b>Restringir vales</b>');
+define('FILE_VALID_PRODUCTS', '<b>Productos válidos</b>');
+define('FILE_VALID_CATEGORIES', '<b>Categorías válidas</b>');
+define('FILE_LIST_PRODUCTS', '<b>Listar productos</b>');
+define('FILE_LIST_CATEGORIES', '<b>Listar categorías</b>');
+define('FILE_TREE_VIEW', '<b>Vista de árbol</b>');
+define('FILE_BANNER_STATISTICS', '<b>Fichero de estadísticas de banners</b>');
+define('FILE_STOCK', '<b>Fichero de existencias de productos</b>');
+define('FILE_NEW_ATTRIBUTES_CONFIG', '<b>Variables de configuración de atributos</b>'); 
+define('FILE_COMMON_REPORTS', '<b>Fichero de informes</b>');
+define('FILE_FEDEX', '<b>Fichero de Fedex</b>');
+define('FILE_AFFILIATE', '<b>Fichero de afiliados</b>');
+define('FILE_FEEDMACHINE', '<b>Fichero de Feedmachine</b>');
+define('FILE_EASYPOPULATE', '<b>Fichero de Easypopulate</b>');
+define('FILE_ATTRIBUTE', '<b>Fichero de atributos</b>');
+define('FILE_DISCOUNT_CATEGORIES', '<b>Fichero de categorías de descuento</b>');
+define('FILE_CREATE_ACCOUNT', '<b>Fichero de crear cuenta</b>');
+define('FILE_ORDER', '<b>Fichero de pedido</b>');
+define('FILE_PAYPAL', '<b>Fichero de PayPal</b>');
+define('FILE_INFORMATION', '<b>Fichero de páginas de información</b>');
 
 // images
 define('IMAGE_FILE_PERMISSION', 'Permisos de archivos');

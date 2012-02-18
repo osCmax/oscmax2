@@ -69,10 +69,10 @@ define('ALT_LAST_PRODUCT','Último producto');
 // EOF: previous next product
 
 // start indvship
-define('TEXT_FREE_SHIPPING', '<i>(Free Shipping for this Item)</i>');
-define('TEXT_ADDITIONAL_SHIPPING', '<i>(This item requires additional shipping of $');
-define('TEXT_ADDITIONAL_SHIPPING_2', ' for the first item, and $');
-define('TEXT_ADDITIONAL_SHIPPING_3', ' for each additional item + regular shipping costs.)</i>');
-define('TEXT_ADDITIONAL_SHIPPING_4', ' + regular shipping costs.)</i>');
+define('TEXT_FREE_SHIPPING', '<i>(Envío gratuito para este artículo)</i>');
+define('TEXT_ADDITIONAL_SHIPPING', '<i>(Este artículo conlleva unos gastos de envío adicionales de ');
+define('TEXT_ADDITIONAL_SHIPPING_2', '€ por el primer artículo, y ');
+define('TEXT_ADDITIONAL_SHIPPING_3', '€ por cada artículo adicional además de los gastos de envío normales.)</i>');
+define('TEXT_ADDITIONAL_SHIPPING_4', '€ además de los gastos de envío normales.)</i>');
 // end indvship
 ?>

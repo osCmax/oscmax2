@@ -39,7 +39,7 @@ $Id$
   define('EMAIL_SEPARATOR', '------------------------------------------------------');
   define('TEXT_EMAIL_VIA', 'por');
   
-  define('PAYPAL_ADDRESS', 'Customer PayPal address');  
+  define('PAYPAL_ADDRESS', 'Dirección del cliente Paypal');  
 
 /* If you want to include a message with the order email, enter text here: */
 /* Use \n for line breaks */

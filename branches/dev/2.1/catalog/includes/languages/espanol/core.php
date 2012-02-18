@@ -159,10 +159,10 @@ define('TYPE_BELOW', 'Escriba a continuación');
 // javascript messages
 define('JS_ERROR', 'Se han producido errores al procesar su formulario. Por favor, realice las siguientes correciones:');
 
-define('JS_REVIEW_TEXT', '* Su \'Comentario\' debe tener al menos ' . REVIEW_TEXT_MIN_LENGTH . ' letras.\n');
-define('JS_REVIEW_RATING', '* Debe valorar el producto sobre el que opina.\n');
+define('JS_REVIEW_TEXT', '* Su \'Comentario\' debe tener al menos ' . REVIEW_TEXT_MIN_LENGTH . ' letras.');
+define('JS_REVIEW_RATING', '* Debe valorar el producto sobre el que opina.');
 
-define('JS_ERROR_NO_PAYMENT_MODULE_SELECTED', '* Por favor seleccione una forma de pago para su pedido.\n');
+define('JS_ERROR_NO_PAYMENT_MODULE_SELECTED', '* Por favor seleccione una forma de pago para su pedido.');
 
 define('JS_ERROR_SUBMITTED', 'Ya se ha enviado el formulario. Pulse Aceptar y espere a que termine el proceso.');
 

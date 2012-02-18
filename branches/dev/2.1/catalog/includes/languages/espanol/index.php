@@ -28,7 +28,7 @@ define('TABLE_HEADING_DEFAULT_ARTICLES','Noticias');
   define('TEXT_NO_PRODUCTS', 'No hay productos que mostrar en esta categoría.');
   define('TEXT_NO_PRODUCTS2', 'No hay productos disponibles de este fabricante.');
   define('TEXT_NUMBER_OF_PRODUCTS', 'Número de productos: ');
-  define('TEXT_SHOW', '<b>Mostrar:</b>');
+  define('TEXT_SHOW', 'Mostrar:');
   define('TEXT_BUY', 'Comprar 1 \'');
   define('TEXT_NOW', '\' ahora');
   define('TEXT_ALL_CATEGORIES', 'Todas las categorías');

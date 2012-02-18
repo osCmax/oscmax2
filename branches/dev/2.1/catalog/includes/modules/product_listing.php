@@ -291,6 +291,14 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
       $cur_row = sizeof($list_box_contents) - 1;
 
       for ($col=0, $n=sizeof($column_list); $col<$n; $col++) {
+		  
+		// Load product using PriceFormatter class
+		$price_breaks_from_listing = array();
+        if (isset($price_breaks_array[$listing[$x]['products_id']])) {
+          $price_breaks_from_listing = $price_breaks_array[$listing[$x]['products_id']];
+        }
+        $pf->loadProduct($listing[$x]['products_id'], $languages_id, NULL, $price_breaks_from_listing); 
+		
         $lc_align = '';
 
         switch ($column_list[$col]) {
@@ -320,11 +328,11 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 		  }
 		  // Special Offer Price Corner Banner
 		  if (CB_SPECIALS == 'true') {
-		    if (tep_not_null($listing[$x]['specials_new_products_price'])) {			 
+		    if ($pf->hasSpecialPrice() == true) {			 
 			  //Find out discount and round to nearest 5
-			  $fullprice = $listing[$x]['products_price'];
-			  $saleprice = $listing[$x]['specials_new_products_price'];
-			  $discount = ((($fullprice - $saleprice) / $fullprice) * 100);
+			  $fullprice = $pf->getPrice();
+			  $saleprice = $pf->specialPrice(); 
+			  $discount = (((($fullprice * 100) - ($saleprice * 100)) / ($fullprice * 100)) * 100);
 			  $rounded_discount = floor($discount / 5) * 5; 
 			    if ($rounded_discount >= CB_SPECIALS_NO) { 
                   $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . 'corner_banners/' . $language . '/save' . $rounded_discount . '.png" alt="">';
@@ -333,7 +341,7 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 		  }
 		  // Call for Price Corner Banner
 		  if (CB_CALL_FOR_PRICE == 'true') {
-		    if ($listing[$x]['products_price'] == CALL_FOR_PRICE_VALUE) {
+		    if ($pf->getPrice() == CALL_FOR_PRICE_VALUE) {
 		      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . 'corner_banners/' . $language . '/callforprice.png" alt="">';
 		    }
 		  }
@@ -407,11 +415,6 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
           case 'PRODUCT_LIST_PRICE':
             $lc_align = 'right';
 // BOF QPBPP for SPPC
-            $price_breaks_from_listing = array();
-            if (isset($price_breaks_array[$listing[$x]['products_id']])) {
-              $price_breaks_from_listing = $price_breaks_array[$listing[$x]['products_id']];
-            }
-            $pf->loadProduct($listing[$x]['products_id'], $languages_id, NULL, $price_breaks_from_listing);
             $lc_text = $pf->getPriceStringShort();
 // EOF QPBPP for SPPC
             break;
@@ -433,7 +436,7 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
             break;
           case 'PRODUCT_LIST_BUY_NOW':
             $lc_align = 'center';
-			if ($listing[$x]['products_price'] == CALL_FOR_PRICE_VALUE){ //fix for call for price
+			if ($pf->getPrice() == CALL_FOR_PRICE_VALUE){ //fix for call for price
 			  $lc_text = '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $listing[$x]['products_model']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $listing[$x]['products_name']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $listing[$x]['products_id'] . '%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
 			} elseif ($listing[$x]['products_quantity'] < 1 && STOCK_IMAGE_SWITCH == 'true') {
 			  $lc_text = tep_image_submit('button_out_of_stock.gif', IMAGE_OUT_OF_STOCK);

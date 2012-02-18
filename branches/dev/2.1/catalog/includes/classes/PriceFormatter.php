@@ -271,6 +271,10 @@ class PriceFormatter {
   function hasQuantityPrice() {
     return $this->hasQuantityPrice;
   }
+  
+  function specialPrice() {
+    return $this->specialPrice;
+  }
 
   function getDiscountSaving($original_price, $discount_price) {
     $difference = $original_price - $discount_price;

@@ -1,0 +1,18 @@
+/*
+$Id: no_js.css 1629 2012-01-28 23:45:14Z cottonbarn $
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2012 osCmax
+
+  Released under the GNU General Public License
+*/
+
+/* THIS DOCUMENT IS ONLY LOADED WHEN JAVASCRIPT IS DISABLED */
+
+/* Tab fix on product_info page when js disabled */
+#mytabset { border: 1px solid #dddddd; }
+#tab1, #tab2, #tab3, #tab4, #tab5, #tab6 { display:inline; }
+.panel { border:hidden; padding: 5px; font-family: Verdana, Arial, sans-serif; font-size: 12px; background-color: #ffffff; } 
+.panel h4 { display:inline }

@@ -19,7 +19,7 @@ $_REQUEST['contents']='';
 <head>
 <meta http-equiv="Content-Type"
 	content="text/html; charset=<?php echo 'CHARSET'; ?>">
-<title>osCmax Database Update - v2.5 RC2</title>
+<title>Database Upgrade System</title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <link rel="stylesheet" type="text/css"
 	href="includes/javascript/jquery-ui-1.8.2.custom.css">

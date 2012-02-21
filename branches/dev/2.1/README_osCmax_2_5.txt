@@ -1,8 +1,8 @@
 $Id$
 
-osCmax v2.5 (October 2010)
+osCmax v2.5.0 (Feb 2012)
 ==========================
-osCmax v2.5 e-commerce software is a combination and extension of of many of the most popular mods/contributions and osCommerce 2.2 MS2. 
+osCmax v2.5.0 e-commerce software is a combination and extension of of many of the most popular mods/contributions and osCommerce 2.2 MS2. 
 The credit for the actual mods goes solely to the original authors of those mods and the many people who update them. 
 
 If you find any repeatable bugs or problems, please report them here:

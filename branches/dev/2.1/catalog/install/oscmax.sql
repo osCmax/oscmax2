@@ -2873,8 +2873,9 @@ INSERT INTO topics_description VALUES (0, 1, 'Miscellaneous Articles', 'Miscella
 
 #Example Slideshow Slides
 INSERT INTO slideshow VALUES (1, 'osCmax - eCommerce to the max', 'http://www.oscmax.com/', '_top', 1, now(), now(), 'example_oscmax1.jpg');
-INSERT INTO slideshow VALUES (2, 'AABox - Pro web hosting', 'http://www.aabox.com/', '_top', 2, now(), now(), 'example_oscmax2.jpg');
-INSERT INTO slideshow VALUES (3, 'ejSolutions', 'http://www.ejsolutions.co.uk/', '_top', 3, now(), now(), 'example_oscmax3.jpg');
+INSERT INTO slideshow VALUES (2, 'osCmax v2.5 User Manual', 'http://shop.oscmax.com/oscmax-v250-user-manual-p-3.html', '_top', 2, now(), now(), 'oscmax_2.5_manual.jpg');
+INSERT INTO slideshow VALUES (3, 'AABox - Pro web hosting', 'http://www.aabox.com/', '_top', 2, now(), now(), 'example_oscmax2.jpg');
+INSERT INTO slideshow VALUES (4, 'ejSolutions', 'http://www.ejsolutions.co.uk/', '_top', 3, now(), now(), 'example_oscmax3.jpg');
 
 #Information Pages
 INSERT INTO information VALUES (1, 2, 'TEXT_GREETING_PERSONAL', 'Welcome back <span class="greetUser">%s!</span> Would you like to see which <a href="%s"><u>new products</u></a> are available to purchase?', '', '_top', 0, 1, '1', 1);

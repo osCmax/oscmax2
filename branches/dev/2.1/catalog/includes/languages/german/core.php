@@ -463,4 +463,9 @@ define('TEXT_QUESTION_PRODUCT_NAME', 'Produktbezeichnung:');
 define('DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'HINWEIS: Downloads sind vor Bestätigung des Zahlungseinganges nicht verfügbar.');
 
 define('TEXT_REPLACEMENT_SUGGESTION', 'Meinten Sie: ');
+
+// BOF qpbpp
+define('TEXT_PRICE_BREAKS', 'Ab');
+define('TEXT_ON_SALE', '');
+// EOF qpbpp
 ?>

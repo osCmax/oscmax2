@@ -1,44 +1,12 @@
 <?php
 /*
-$Id: stats_monthly_sales.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  contributed by Fritz Clapp <fritz@sonnybarger.com>
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-This report displays a summary of monthly or daily totals:
-	gross income (order totals)
-	subtotals of all orders in the selected period
-	nontaxed sales subtotals
-	taxed sales subtotals
-	tax collected
-	shipping/handling charges
-	low order fees (if present)
-	gift vouchers (or other addl order total component, if present)
+  Copyright 2000 - 2011 osCmax
 
-The data comes from the orders and orders_total tables, therefore this report
-works only for osCommerce snapshots since 2002/04/08 (including MS1 and MS2).
-
-Data is reported as of order purchase date.
-
-If an order status is chosen, the report summarizes orders with that status.
-
-Version 2.0 introduces the capability to "drill down" on any month
-to report the daily summary for that month.  
-
-Report rows are initially shown in newest to oldest, top to bottom, 
-but this order may be inverted by clicking the "Invert" control button.
-
-Version 2.1 adds a popup display that lists the various types (and their
-subtotals) comprising the tax values in the report rows.
-
-**NOTE:
-This Version 2.1.1 has columns that summarize nontaxed and taxed order subtotals.
-The assumptions made for this feature may not be appropriate for all stores.
-The taxed column summarizes subtotals for orders in which tax was charged.
-The nontaxed column is the subtotal for the row less the taxed column value.
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-  Copyright 2006 osCMax2004 osCommerce
   Released under the GNU General Public License
 */
 
@@ -55,12 +23,12 @@ if (isset($_GET['help'])){
 //
 // entry for bouncing csv string back as file
 if (isset($_POST['csv'])) {
-if ($HTTP_POST_VARS['saveas']) {  // rebound posted csv as save file
-		$savename= $HTTP_POST_VARS['saveas'] . ".csv";
+if ($_POST['saveas']) {  // rebound posted csv as save file
+		$savename= $_POST['saveas'] . ".csv";
 		}
 		else $savename='unknown.csv';
 $csv_string = '';
-if ($HTTP_POST_VARS['csv']) $csv_string=$HTTP_POST_VARS['csv'];
+if ($_POST['csv']) $csv_string=$_POST['csv'];
   if (strlen($csv_string)>0){
   header("Expires: Mon, 26 Nov 1962 00:00:00 GMT");
   header("Last-Modified: " . gmdate('D,d M Y H:i:s') . ' GMT');
@@ -76,14 +44,14 @@ exit;
 //
 // entry for popup display of tax detail
 // show=ot_tax 
-if (isset($HTTP_GET_VARS['show'])) {
-	$ot_type = tep_db_prepare_input($HTTP_GET_VARS['show']);
-	$sel_month = tep_db_prepare_input($HTTP_GET_VARS['month']);
-	$sel_year = tep_db_prepare_input($HTTP_GET_VARS['year']);
+if (isset($_GET['show'])) {
+	$ot_type = tep_db_prepare_input($_GET['show']);
+	$sel_month = tep_db_prepare_input($_GET['month']);
+	$sel_year = tep_db_prepare_input($_GET['year']);
 	$sel_day = 0;
-	if (isset($HTTP_GET_VARS['day'])) $sel_day = tep_db_prepare_input($HTTP_GET_VARS['day']);
+	if (isset($_GET['day'])) $sel_day = tep_db_prepare_input($_GET['day']);
 	$status = '';
-	if ($HTTP_GET_VARS['status']) $status = tep_db_prepare_input($HTTP_GET_VARS['status']);
+	if ($_GET['status']) $status = tep_db_prepare_input($_GET['status']);
 	// construct query for selected detail
 	$detail_query_raw = "select sum(round(ot.value,2)) amount, ot.title description from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where ";
 	if ($status<>'') $detail_query_raw .= "o.orders_status ='" . $status . "' and ";
@@ -110,16 +78,19 @@ exit;
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <link rel="stylesheet" type="text/css" href="<?php if(!$print) {
 	echo 'includes/stylesheet.css';}
 	else echo 'includes/printer.css'; ?>">
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <?php
 // set printer-friendly toggle
-(tep_db_prepare_input($HTTP_GET_VARS['print']=='yes')) ? $print=true : $print=false;
+(tep_db_prepare_input($_GET['print']=='yes')) ? $print=true : $print=false;
 // set inversion toggle
-(tep_db_prepare_input($HTTP_GET_VARS['invert']=='yes')) ? $invert=true : $invert=false;
+(tep_db_prepare_input($_GET['invert']=='yes')) ? $invert=true : $invert=false;
 ?>
 <!-- header //-->
 <?php if(!$print) require(DIR_WS_INCLUDES . 'header.php'); ?>
@@ -154,9 +125,9 @@ exit;
 <?php 
 // detect whether this is monthly detail request
 $sel_month = 0;
-	if ($HTTP_GET_VARS['month']&& $HTTP_GET_VARS['year']) {
-	$sel_month = tep_db_prepare_input($HTTP_GET_VARS['month']);
-	$sel_year = tep_db_prepare_input($HTTP_GET_VARS['year']);
+	if ($_GET['month']&& $_GET['year']) {
+	$sel_month = tep_db_prepare_input($_GET['month']);
+	$sel_year = tep_db_prepare_input($_GET['year']);
 	};
 // get list of orders_status names for dropdown selection
   $orders_statuses = array();
@@ -169,8 +140,8 @@ $sel_month = 0;
 	  };
 // name of status selection
 $orders_status_text = TEXT_ALL_ORDERS;
-if ($HTTP_GET_VARS['status']) {
-  $status = tep_db_prepare_input($HTTP_GET_VARS['status']);
+if ($_GET['status']) {
+  $status = tep_db_prepare_input($_GET['status']);
   $orders_status_query = tep_db_query("select orders_status_name from " . TABLE_ORDERS_STATUS . " where language_id = '" . $languages_id . "' and orders_status_id =" . $status);
   while ($orders_status = tep_db_fetch_array($orders_status_query)) {
 	  $orders_status_text = $orders_status['orders_status_name'];}
@@ -196,8 +167,8 @@ if (!$print) { ?>
 					echo "<input type='hidden' name='month' value='" . $sel_month . "'><input type='hidden' name='year' value='" . $sel_year . "'>";
 					if ($invert) echo "<input type='hidden' name='invert' value='yes'>";
 				?>
-				</td>
-              </form></tr>
+				</form></td>
+              </tr>
              </table>
 			 </td>
 <?php		}; ?>
@@ -234,23 +205,23 @@ row for buttons to print, save, and help
 				<td align="left" class="smallText">
 				<?php  // back button if monthly detail
 				if ($sel_month<>0)	 {
-				echo "<a href='" . $_SERVER['PHP_SELF'] . "?&selected_box=reports";
-				if (isset($HTTP_GET_VARS['status'])) echo "&status=" . $status;
-				if (isset($HTTP_GET_VARS['invert'])) echo "&invert=yes";
+				echo "<a href='" . $_SERVER['PHP_SELF'] . "?&amp;selected_box=reports";
+				if (isset($_GET['status'])) echo "&amp;status=" . $status;
+				if (isset($_GET['invert'])) echo "&amp;invert=yes";
 				echo "' title='" . TEXT_BUTTON_REPORT_BACK_DESC . "'>" . TEXT_BUTTON_REPORT_BACK . "</a>";
 				};
 				?>
 				</td>
 				<td class="smallText"><a href="<?php  
-				echo $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING'] . "&print=yes";
+				echo $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING'] . "&amp;print=yes";
 				?>" target="print" title="<?php echo TEXT_BUTTON_REPORT_PRINT_DESC . "\">" . TEXT_BUTTON_REPORT_PRINT; ?></a>
 				</td>
-				<td class="smallText"><a href='<?php echo $_SERVER['PHP_SELF'] . "?" . ereg_replace('&invert=yes','',$_SERVER['QUERY_STRING']);
-				if (!$invert) echo "&invert=yes";
+				<td class="smallText"><a href='<?php echo $_SERVER['PHP_SELF'] . "?" . ereg_replace('&amp;invert=yes','',$_SERVER['QUERY_STRING']);
+				if (!$invert) echo "&amp;invert=yes";
 				echo "' title= '" . TEXT_BUTTON_REPORT_INVERT_DESC . "'>" . TEXT_BUTTON_REPORT_INVERT; ?></a>
 				</td>
 				<td class="smallText"><a href="#" onClick="window.open('<?php  
-				echo $_SERVER['PHP_SELF'] . "?&help=yes";	?>','help',config='height=400,width=600,scrollbars=1, resizable=1')" title="<?php echo TEXT_BUTTON_REPORT_HELP_DESC . "\">" . TEXT_BUTTON_REPORT_HELP; ?></a>
+				echo $_SERVER['PHP_SELF'] . "?&amp;help=yes";	?>','help',config='height=400,width=600,scrollbars=1, resizable=1')" title="<?php echo TEXT_BUTTON_REPORT_HELP_DESC . "\">" . TEXT_BUTTON_REPORT_HELP; ?></a>
 				</td>
 				</tr></table>
 				</td>
@@ -321,8 +292,8 @@ $csv_accum .= "\n";
 // order totals, the driving force 
 $status = '';
 $sales_query_raw = "select sum(round(ot.value,2)) gross_sales, monthname(o.date_purchased) row_month, year(o.date_purchased) row_year, month(o.date_purchased) i_month, dayofmonth(o.date_purchased) row_day  from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where ";
-if ($HTTP_GET_VARS['status']) {
-  $status = tep_db_prepare_input($HTTP_GET_VARS['status']);
+if ($_GET['status']) {
+  $status = tep_db_prepare_input($_GET['status']);
   $sales_query_raw .= "o.orders_status =" . $status . " and ";
 	};
 $sales_query_raw .= "ot.class = " . $class_val_total;
@@ -333,7 +304,7 @@ $sales_query_raw .=  " order by o.date_purchased ";
 if ($invert) $sales_query_raw .= "asc"; else $sales_query_raw .= "desc";
 $sales_query = tep_db_query($sales_query_raw);
 $num_rows = tep_db_num_rows($sales_query);
-if ($num_rows==0) echo '<tr><td class="smalltext">' . TEXT_NOTHING_FOUND . '</td></tr>';
+if ($num_rows==0) echo '<tr><td class="smallText">' . TEXT_NOTHING_FOUND . '</td></tr>';
 $rows=0;
 //
 // loop here for each row reported
@@ -479,7 +450,7 @@ if ($extra_class) {
 <td class="dataTableContent" align="left">
 <?php  // live link to report monthly detail
 if ($sel_month == 0	&& !$print) {
-	echo "<a href='" . $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING'] . "&month=" . $sales['i_month'] . "&year=" . $sales['row_year'] . "' title='" . TEXT_BUTTON_REPORT_GET_DETAIL . "'>";
+	echo "<a href='" . $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING'] . "&amp;month=" . $sales['i_month'] . "&amp;year=" . $sales['row_year'] . "' title='" . TEXT_BUTTON_REPORT_GET_DETAIL . "'>";
 	}
 mirror_out(substr($sales['row_month'],0,3)); 
 if ($sel_month == 0 && !$print) echo '</a>';
@@ -500,9 +471,9 @@ $last_row_year = $sales['row_year']; // save this row's year to check for annual
 <?php 
 	// make this a link to the detail popup if nonzero
 	if (!$print && ($tax_this_row['tax_coll']>0)) {
-		echo "<a href=\"#\" onClick=\"window.open('" . $_SERVER['PHP_SELF'] . "?&show=ot_tax&year=" . $sales['row_year'] . "&month=" . $sales['i_month'];
-		if ($sel_month<>0) echo "&day=" . $sales['row_day'];
-		if ($status<>'') echo "&status=" . $status;
+		echo "<a href=\"#\" onClick=\"window.open('" . $_SERVER['PHP_SELF'] . "?&amp;show=ot_tax&amp;year=" . $sales['row_year'] . "&amp;month=" . $sales['i_month'];
+		if ($sel_month<>0) echo "&amp;day=" . $sales['row_day'];
+		if ($status<>'') echo "&amp;status=" . $status;
 		echo "','detail',config='height=200,width=400,scrollbars=1, resizable=1')\" title=\"Show detail\">";
 	};
 	mirror_out(number_format($tax_this_row['tax_coll'],2)); 

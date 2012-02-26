@@ -1,9 +1,24 @@
-    <?php echo tep_draw_form('password_forgotten', tep_href_link(FILENAME_PASSWORD_FORGOTTEN, 'action=process', 'SSL')); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+      echo tep_draw_form('password_forgotten', tep_href_link(FILENAME_PASSWORD_FORGOTTEN, 'action=process', 'SSL')); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_password_forgotten.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -23,9 +38,9 @@
   }
 ?>
       <tr>
-        <td><table border="0" width="100%" height="100%" cellspacing="1" cellpadding="2" class="infoBox">
+        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox" style="height:100%;">
           <tr class="infoBoxContents">
-            <td><table border="0" width="100%" height="100%" cellspacing="0" cellpadding="2">
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2" style="height:100%;">
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>
@@ -36,7 +51,7 @@
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>
               <tr>
-                <td class="main"><?php echo '<b>' . ENTRY_EMAIL_ADDRESS . '</b> ' . tep_draw_input_field('email_address'); ?></td>
+                <td class="main" align="center"><?php echo '<b>' . ENTRY_EMAIL_ADDRESS . '</b> ' . tep_draw_input_field('email_address'); ?></td>
               </tr>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: order.php v5.0 07/19/2007 djmonkey1 Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -99,7 +99,7 @@
 
 	  
       $index = 0;
-      $orders_products_query = tep_db_query("select op.orders_products_id, op.products_id, op.products_name, op.products_model, op.products_price, op.products_tax, op.products_quantity, op.final_price, p.products_tax_class_id, p.products_weight, p.products_id from " . TABLE_ORDERS_PRODUCTS . " op INNER JOIN " . TABLE_PRODUCTS . " p on op.products_id = p.products_id where orders_id = '" . (int)$order_id . "' order by op.orders_products_id");
+      $orders_products_query = tep_db_query("select op.orders_products_id, op.products_id, op.products_name, op.products_model, op.products_code, op.products_price, op.products_tax, op.products_quantity, op.final_price, p.products_tax_class_id, p.products_weight, p.products_id from " . TABLE_ORDERS_PRODUCTS . " op INNER JOIN " . TABLE_PRODUCTS . " p on op.products_id = p.products_id where orders_id = '" . (int)$order_id . "' order by op.orders_products_id");
 
       while ($orders_products = tep_db_fetch_array($orders_products_query)) {
         $orders_products_tax_query = tep_db_query("select products_tax_class_id from " .TABLE_PRODUCTS . " where products_id = " . $orders_products['products_id'] . "");
@@ -108,6 +108,7 @@
         'qty' => $orders_products['products_quantity'],
         'name' => $orders_products['products_name'],
         'model' => $orders_products['products_model'],
+	'code' => $orders_products['products_code'],
         'tax' => $orders_products['products_tax'],
         'tax_description' => tep_get_tax_description($orders_products_tax['products_tax_class_id'], $this->delivery["country_id"], $this->delivery["zone_id"]),
         'price' => $orders_products['products_price'],

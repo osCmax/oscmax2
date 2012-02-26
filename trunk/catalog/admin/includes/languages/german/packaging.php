@@ -1,38 +1,53 @@
 <?php
-	define('CONFIRM_DELETE', 'Are you sure you want to remove this package?');
-	define('DELETE_PACKAGE', 'Delete package');
-	define('CREATE_NEW_PACKAGE', 'Create new package');
-	define('HEADING_ACTION', 'Action');
-	define('HEADING_ID', 'Package ID');
-	define('HEADING_NAME', 'Name');
-	define('HEADING_NAME_TEXT', 'Enter a name, such as a carton part number to uniquely identify this packaging part');
-	define('HEADING_DESCRIPTION', 'Description');
-	define('HEADING_DESCRIPTION_TEXT', 'A description of the package (e.g. Medium box with velcro strip, 36" UPS Tube, Cardboard Widget Holder, etc.)');
-	define('HEADING_LENGTH', 'Length');
-	define('HEADING_LENGTH_TEXT', 'Enter the package length in the system\'s unit of measurement.');
-	define('HEADING_WIDTH', 'Width');
-	define('HEADING_WIDTH_TEXT', 'Enter the package width in the system\'s unit of measurement.');
-	define('HEADING_HEIGHT', 'Height');
-	define('HEADING_HEIGHT_TEXT', 'Enter the package height in the system\'s unit of measurement.');
-	define('HEADING_EMPTY_WEIGHT', 'Empty Weight');
-	define('HEADING_EMPTY_WEIGHT_TEXT', 'The empty weight of the package, including packing material, tape, metal bands, etc.');
-	define('HEADING_MAX_WEIGHT', 'Maximum Weight');
-	define('HEADING_MAX_WEIGHT_TEXT', 'This package\'s maximum weight capacity in your system\'s unit of weight. Leave blank to disable maximum weight restriction.');
-	define('HEADING_COST', 'Cost');
-	define('HEADING_COST_TEXT', 'The relative cost or preference to use this package. Lower numbered packages will be used before higher numbered packages (e.g. Given two containers of the same dimensions, use a cardboard container before one of metal.)');
-	define('HEADING_DELETE', 'delete');
-	define('HEADING_TITLE', 'Packaging');
-	define('HEADING_INFO', 'Package Details');
-	define('ICON_INFO', 'Info');
-	define('INFO_CHANGE_PASSWORD', 'Change password');
-	define('INFO_USERNAME', 'Username:');
-	define('MIN_LENGTH_NOT_MET', 'The package length must be set to a nonzero positive real number.');
-	define('MIN_WIDTH_NOT_MET', 'The package width must be set to a nonzero positive real number.');
-	define('MIN_HEIGHT_NOT_MET', 'The package height must be set to a nonzero positive real number.');
-	define('MIN_EMPTY_WEIGHT_NOT_MET', 'The empty package weight must be set to zero or a positive real number.');
-	define('MIN_MAX_WEIGHT_NOT_MET', 'The maximum package weight must be set to zero (disabled) or a positive real number.');
+/*
+$Id$
 
-	define('NEW_PACKAGE', 'Create new package');
-	define('NO_PACKAGES_DEFINED', "No packages have been defined.");
-	define('UPDATE_PACKAGE', 'Update package');
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+	define('CONFIRM_DELETE', 'Sind Sie sicher, dass Sie dieses Packstück löschen möchten?');
+	define('DELETE_PACKAGE', 'Packstück löschen');
+	define('CREATE_NEW_PACKAGE', 'Neues Packstück erstellen');
+	define('HEADING_ACTION', 'Aktion');
+	define('HEADING_ID', 'Packstück ID');
+	define('HEADING_NAME', 'Name');
+	define('HEADING_NAME_TEXT', 'Geben Sie einen Namen an, wie zB eine Kartonnummer, um das Packstück eindeudig zu identifizieren');
+	define('HEADING_DESCRIPTION', 'Beschreibung');
+	define('HEADING_DESCRIPTION_TEXT', 'Eine Beschreibung des Packstückes (zB Mittlere Schachtel mit Klettverschluß, 36 Zoll UPS Rohr, usw.)');
+	define('HEADING_LENGTH', 'Länge');
+	define('HEADING_LENGTH_TEXT', 'Packstücklänge in der Standardlängenmaßeinheit eingeben.');
+	define('HEADING_WIDTH', 'Breite');
+	define('HEADING_WIDTH_TEXT', 'Packstückbreite in der Standardlängenmaßeinheit eingeben.');
+	define('HEADING_HEIGHT', 'Höhe');
+	define('HEADING_HEIGHT_TEXT', 'Packstückhöhe in der Standardlängenmaßeinheit eingeben.');
+	define('HEADING_EMPTY_WEIGHT', 'Leergewicht');
+	define('HEADING_EMPTY_WEIGHT_TEXT', 'Das Leergewicht des Packstückes, einschließlich Verpackungsmaterial, Klebeband, Metallgurte, usw.');
+	define('HEADING_MAX_WEIGHT', 'Höchstgewicht');
+	define('HEADING_MAX_WEIGHT_TEXT', 'Das Maximalgewicht des Packstückes in der Standardgewichtseinheit. Keine Gewichtsbeschränkung bei leerem Feld.');
+	define('HEADING_COST', 'Kosten');
+	define('HEADING_COST_TEXT', 'The relative cost or preference to use this package. Lower numbered packages will be used before higher numbered packages (e.g. Given two containers of the same dimensions, use a cardboard container before one of metal.)');
+	define('HEADING_DELETE', 'löschen');
+	define('HEADING_TITLE', 'Packstück');
+	define('HEADING_INFO', 'Packstückdetails');
+	define('ICON_INFO', 'Info');
+	define('INFO_CHANGE_PASSWORD', 'Passwort ändern');
+	define('INFO_USERNAME', 'Benutzername:');
+	define('MIN_LENGTH_NOT_MET', 'Die Packstücklänge muß eine positive reele Zahl größer Null sein.');
+	define('MIN_WIDTH_NOT_MET', 'Die Packstückbreite muß eine positive reele Zahl größer Null sein.');
+	define('MIN_HEIGHT_NOT_MET', 'Die Packstückhöhe muß eine positive reele Zahl größer Null sein.');
+	define('MIN_EMPTY_WEIGHT_NOT_MET', 'Die Leergewicht des Packstückes muß eine positive reele Zahl oder Null sein.');
+	define('MIN_MAX_WEIGHT_NOT_MET', 'Das Maximalgewicht des Packstückgewicht muß eine positive reele Zahl oder Null (keine Gewichtsbeschränkung) sein.');
+
+	define('NEW_PACKAGE', 'Neues Packstück erstellen');
+	define('NO_PACKAGES_DEFINED', 'Es wurden keine Packstücke definiert.');
+	define('UPDATE_PACKAGE', 'Packstück aktualisieren');
+
+	define('IMAGE_NEW_PACKAGE', 'Neues Packstück');
+	define('IMAGE_SAVE_AS_NEW', 'Werte für ein neues Packstück speichern.');
+	define('IMAGE_UPDATE_PACKAGE', 'Packstück mit diesen Werten aktualisieren.');
 ?>

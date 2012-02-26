@@ -1,14 +1,13 @@
 <?php
 /*
-  $Id $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  Translated by Gunt - Contact : webmaster@webdesigner.com.fr
 */
 
 define('HEADING_TITLE', 'Fermer la session');

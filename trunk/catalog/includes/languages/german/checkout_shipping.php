@@ -1,31 +1,31 @@
 <?php
 /*
-$Id: checkout_shipping.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Kasse');
-define('NAVBAR_TITLE_2', 'Versandinformationen');
+define('NAVBAR_TITLE_1', 'Einkauf abschließen');
+define('NAVBAR_TITLE_2', 'Versandart');
 
-define('HEADING_TITLE', 'Versandinformationen');
+define('HEADING_TITLE', 'Versandangaben');
 
 define('TABLE_HEADING_SHIPPING_ADDRESS', 'Versandadresse');
-define('TEXT_CHOOSE_SHIPPING_DESTINATION', 'Bitte w&auml;hlen Sie aus Ihrem Adressbuch die gew&uuml;nschte Versandadresse f&uuml;r Ihre Bestellung aus.');
+define('TEXT_CHOOSE_SHIPPING_DESTINATION', 'Bitte wählen Sie die gewünschte Versandadresse aus Ihrem Adressbuch.');
 define('TITLE_SHIPPING_ADDRESS', 'Versandadresse:');
 
 define('TABLE_HEADING_SHIPPING_METHOD', 'Versandart');
-define('TEXT_CHOOSE_SHIPPING_METHOD', 'Bitte w&auml;hlen Sie die gew&uuml;nschte Versandart f&uuml;r Ihre Bestellung aus.');
-define('TITLE_PLEASE_SELECT', 'Bitte w&auml;hlen Sie');
-define('TEXT_ENTER_SHIPPING_INFORMATION', 'Zur Zeit bieten wir Ihnen nur eine Versandart an.');
+define('TEXT_CHOOSE_SHIPPING_METHOD', 'Bitte wählen Sie die gewünschte Versandart für Ihre Bestellung aus.');
+define('TITLE_PLEASE_SELECT', 'Bitte wählen Sie');
+define('TEXT_ENTER_SHIPPING_INFORMATION', 'Diese Zahlungsweise ist derzeit als einzige verfügbar.');
 
-define('TABLE_HEADING_COMMENTS', 'F&uuml;gen Sie hier Ihre Anmerkungen zu dieser Bestellung ein');
+define('TABLE_HEADING_COMMENTS', 'Fügen Sie hier Ihre Anmerkungen zu dieser Bestellung ein');
 
-define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Fortsetzung des Bestellvorganges');
-define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'zur Auswahl der gew&uuml;nschten Zahlungsweise.');
+define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Bestellvorgang fortsetzen');
+define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'mit der Auswahl der Zahlungsweise.');
 ?>

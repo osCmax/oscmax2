@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: newsletter.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -24,7 +24,7 @@ $Id: newsletter.php 3 2006-05-27 04:59:07Z user $
     }
 
     function confirm() {
-      global $HTTP_GET_VARS;
+      global $_GET;
 
       $mail_query = tep_db_query("select count(*) as count from " . TABLE_CUSTOMERS . " where customers_newsletter = '1'");
       $mail = tep_db_fetch_array($mail_query);
@@ -49,7 +49,7 @@ $Id: newsletter.php 3 2006-05-27 04:59:07Z user $
                         '    <td>' . tep_draw_separator('pixel_trans.gif', '1', '10') . '</td>' . "\n" .
                         '  </tr>' . "\n" .
                         '  <tr>' . "\n" .
-                        '    <td align="right"><a href="' . tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $HTTP_GET_VARS['page'] . '&nID=' . $HTTP_GET_VARS['nID'] . '&action=confirm_send') . '">' . tep_image_button('button_send.gif', IMAGE_SEND) . '</a> <a href="' . tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $HTTP_GET_VARS['page'] . '&nID=' . $HTTP_GET_VARS['nID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a></td>' . "\n" .
+                        '    <td align="right"><a href="' . tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $_GET['nID'] . '&action=confirm_send') . '">' . tep_image_button('button_send.gif', IMAGE_SEND) . '</a> <a href="' . tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $_GET['nID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a></td>' . "\n" .
                         '  </tr>' . "\n" .
                         '</table>';
 
@@ -59,7 +59,7 @@ $Id: newsletter.php 3 2006-05-27 04:59:07Z user $
     function send($newsletter_id) {
       $mail_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from " . TABLE_CUSTOMERS . " where customers_newsletter = '1'");
 
-      $mimemessage = new email(array('X-Mailer: osCommerce bulk mailer'));
+      $mimemessage = new email(array('X-Mailer: osCmax Mailer'));
 
 // BOF: MOD - WYSIWYG HTML Area (Send TEXT Newsletter v1.7 when WYSIWYG Disabled)
       if (HTML_AREA_WYSIWYG_DISABLE_NEWSLETTER == 'Disable') {

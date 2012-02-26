@@ -1,11 +1,15 @@
 <?php
 /*
-  $Id: attributeManager.php,v 1.0 21/02/06 Sam West$
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
+*/
+/*
   
   English translation to AJAX-AttributeManager-V2.7
   
@@ -62,12 +66,16 @@ define('AM_AJAX_OPTION', 'Option:');
 define('AM_AJAX_VALUE', 'Value:');
 define('AM_AJAX_PREFIX', 'Prefix:');
 define('AM_AJAX_PRICE', 'Price:');
+define('AM_AJAX_WEIGHT_PREFIX', 'Wgt.Prefix:');
+define('AM_AJAX_WEIGHT', 'Weight:');
 define('AM_AJAX_SORT', 'Sort:');
 define('AM_AJAX_ADDS_NEW_OPTION_VALUE', 'Adds a new option value to the list');
 define('AM_AJAX_ADDS_ATTRIBUTE_TO_PRODUCT', 'Adds the attribute to the current product');
-define('AM_AJAX_QUANTITY', 'Quantity');
+define('AM_AJAX_DELETES_ATTRIBUTE_FROM_PRODUCT', 'Deletes attribute or attribute combination from the current product');
+define('AM_AJAX_QUANTITY', 'Quantity:');
 define('AM_AJAX_PRODUCT_REMOVE_ATTRIBUTE_COMBINATION_AND_STOCK', 'Removes this attribute combination and stock from this product');
 define('AM_AJAX_UPDATE_OR_INSERT_ATTRIBUTE_COMBINATIONBY_QUANTITY', 'Update or Insert the attribute combination with the given quantity');
+define('AM_AJAX_UPDATE_PRODUCT_QUANTITY', 'Set the given quantity to the current product');
 
 //attributeManager.class.php
 define('AM_AJAX_TEMPLATES', '-- Templates --');

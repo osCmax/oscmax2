@@ -1,31 +1,31 @@
 <?php
 /*
-$Id: checkout_payment_address.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Realizar Pedido');
-define('NAVBAR_TITLE_2', 'Cambiar Direcci&oacute;n de Facturaci&oacute;n');
+define('NAVBAR_TITLE_1', 'Realizar pedido');
+define('NAVBAR_TITLE_2', 'Cambiar dirección de facturación');
 
-define('HEADING_TITLE', 'Forma de Pago');
+define('HEADING_TITLE', 'Forma de pago');
 
-define('TABLE_HEADING_PAYMENT_ADDRESS', 'Direcci&oacute;n de Facturaci&oacute;n');
-define('TEXT_SELECTED_PAYMENT_DESTINATION', 'Esta es la direcci&oacute;n de facturaci&oacute;n seleccionada, donde se enviar&aacute; la factura.');
-define('TITLE_PAYMENT_ADDRESS', 'Direcci&oacute;n de Facturaci&oacute;n:');
+define('TABLE_HEADING_PAYMENT_ADDRESS', 'Dirección de facturación');
+define('TEXT_SELECTED_PAYMENT_DESTINATION', 'Esta es la dirección de facturación seleccionada, donde se enviará la factura.');
+define('TITLE_PAYMENT_ADDRESS', 'Dirección de facturación:');
 
-define('TABLE_HEADING_ADDRESS_BOOK_ENTRIES', 'Libreta de Direcciones');
-define('TEXT_SELECT_OTHER_PAYMENT_DESTINATION', 'Seleccione la direcci&oacute;n para el env&iacute;o de la factura de este pedido si quiere que sea enviada a un sitio diferente.');
+define('TABLE_HEADING_ADDRESS_BOOK_ENTRIES', 'Agenda de direcciones');
+define('TEXT_SELECT_OTHER_PAYMENT_DESTINATION', 'Por favor seleccione la dirección de facturación de este pedido.');
 define('TITLE_PLEASE_SELECT', 'Seleccione');
 
-define('TABLE_HEADING_NEW_PAYMENT_ADDRESS', 'Nueva Direcci&oacute;n de Facturaci&oacute;n');
-define('TEXT_CREATE_NEW_PAYMENT_ADDRESS', 'Use el formulario siguiente para crear una nueva direcci&oacute;n en su libreta y usarla como direcci&oacute;n de facturaci&oacute;n en este pedido.');
+define('TABLE_HEADING_NEW_PAYMENT_ADDRESS', 'Nueva Dirección de Facturación');
+define('TEXT_CREATE_NEW_PAYMENT_ADDRESS', 'Rellene el siguiente formulario para añadir una nueva dirección en su agenda y usarla como dirección de facturación de este pedido.');
 
-define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continuar con el Proceso de Compra');
-define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'para seleccionar el m&eacute;todo de pago.');
+define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continuar con el proceso de compra');
+define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'para seleccionar la forma de pago.');
 ?>

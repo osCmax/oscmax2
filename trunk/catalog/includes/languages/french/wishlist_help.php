@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: wishlist_help.php,v 1 2002/11/09
+$Id$
 
-  The Exchange Project - Community Made Shopping!
-  http://www.theexchangeproject.org
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2000,2001 The Exchange Project
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -13,7 +13,7 @@
 define('NAVBAR_TITLE', 'My Wishlist F.A.Q.');
 define('HEADING_TITLE', 'My Wishlist F.A.Q.');
 
-define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');
+define('TEXT_CLOSE_WINDOW','<u>Fermer la fenêtre</u> [x]');
 
 define('TEXT_INFORMATION', '<b>What is ' . BOX_HEADING_CUSTOMER_WISHLIST . '?</b><br>' .
 // BoF Modification by: Rob Woodgate 
@@ -52,4 +52,6 @@ Sorry. Currently ' . BOX_HEADING_CUSTOMER_WISHLIST . ' is only accessible when y
 <!-- EoF Modification by: Talon177 & Rob Woodgate-->
 <br>
 <br>');
+define('NAVBAR_TITLE_1','Wishlist F.A.Q.');
+
 ?>

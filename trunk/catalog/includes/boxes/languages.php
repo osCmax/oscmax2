@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: languages.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -17,9 +17,14 @@ $Id: languages.php 3 2006-05-27 04:59:07Z user $
 <!-- languages //-->
 <?php
   $boxHeading = BOX_HEADING_LANGUAGES;
-  $corner_left = 'square';
-  $corner_right = 'square';
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+    
   $boxContent_attributes = ' align="center"';
+  $boxLink = '';
   $box_base_name = 'languages'; // for easy unique box template setup (added BTSv1.2)
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 

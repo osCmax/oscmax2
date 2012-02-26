@@ -1,23 +1,25 @@
 <?php
 /*
-  $Id: authorizenet_cc_aim.php 1803 2008-01-11 18:16:37Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
   class authorizenet_cc_aim {
     var $code, $title, $description, $enabled;
+    var $accepted_cc, $card_types, $allowed_types;
 
-// class constructor
+//class constructor
     function authorizenet_cc_aim() {
       global $order;
 
       $this->signature = 'authorizenet|authorizenet_cc_aim|1.0|2.2';
+      $this->api_version = '3.1';
 
       $this->code = 'authorizenet_cc_aim';
       $this->title = MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_TITLE;
@@ -25,6 +27,22 @@
       $this->description = MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_DESCRIPTION;
       $this->sort_order = MODULE_PAYMENT_AUTHORIZENET_CC_AIM_SORT_ORDER;
       $this->enabled = ((MODULE_PAYMENT_AUTHORIZENET_CC_AIM_STATUS == 'True') ? true : false);
+//MOD for credit card selection
+      $this->accepted_cc = MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ACCEPTED_CC;
+
+//MOD array for credit card selection
+      $this->card_types = array('Visa' => MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_VISA,
+                                'Mastercard' => MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_MASTERCARD,
+                                'Amex' => MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_AMEX,
+                                'Discover' => MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TEXT_DISCOVER);
+
+      $this->allowed_types = array();
+
+// Credit card list
+      $cc_array = explode(', ', MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ACCEPTED_CC);
+      while (list($key, $value) = each($cc_array)) {
+        $this->allowed_types[$value] = $this->card_types[$value];
+      }
 
       if ((int)MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ORDER_STATUS_ID > 0) {
         $this->order_status = MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ORDER_STATUS_ID;
@@ -34,6 +52,17 @@
     }
 
 // class methods
+
+//MOD concatenate to get CC images
+    function get_cc_images() {
+      $cc_images = '';
+      reset($this->allowed_types);
+      while (list($key, $value) = each($this->allowed_types)) {
+        $cc_images .= tep_image(DIR_WS_ICONS . $key . '.gif', $value);
+      }
+      return $cc_images;
+    }
+
     function update_status() {
       global $order;
 
@@ -62,7 +91,7 @@
 
     function selection() {
       return array('id' => $this->code,
-                   'module' => $this->public_title);
+                   'module' => $this->public_title . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $this->get_cc_images());
     }
 
     function pre_confirmation_check() {
@@ -81,7 +110,8 @@
         $expires_year[] = array('id' => strftime('%y',mktime(0,0,0,1,1,$i)), 'text' => strftime('%Y',mktime(0,0,0,1,1,$i)));
       }
 
-      $confirmation = array('fields' => array(array('title' => MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CREDIT_CARD_OWNER,
+      $confirmation = array('fields' => array(array('title' => $this->get_cc_images()),
+                                              array('title' => MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CREDIT_CARD_OWNER,
                                                     'field' => tep_draw_input_field('cc_owner', $order->billing['firstname'] . ' ' . $order->billing['lastname'])),
                                               array('title' => MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CREDIT_CARD_NUMBER,
                                                     'field' => tep_draw_input_field('cc_number_nh-dns')),
@@ -98,8 +128,15 @@
     }
 
     function before_process() {
-      global $HTTP_POST_VARS, $customer_id, $order, $sendto, $currency;
+      global $_POST, $customer_id, $order, $sendto, $currency;
 
+// A.NET INVOICE NUMBER FIX
+// find the next order_id to pass as x_Invoice_Num
+        $next_inv = '';
+        $inv_id = tep_db_query("select orders_id from " . TABLE_ORDERS . " order by orders_id DESC limit 1");
+        $last_inv = tep_db_fetch_array($inv_id);
+        $next_inv = $last_inv['orders_id']+1;
+// END A.NET INVOICE NUMBER FIX
       $params = array('x_login' => substr(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_LOGIN_ID, 0, 20),
                       'x_tran_key' => substr(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_KEY, 0, 16),
                       'x_version' => '3.1',
@@ -119,14 +156,16 @@
                       'x_cust_id' => substr($customer_id, 0, 20),
                       'x_customer_ip' => tep_get_ip_address(),
                       'x_email' => substr($order->customer['email_address'], 0, 255),
+// ADD Invoice_Num next line
+                      'x_Invoice_Num' => $next_inv,
                       'x_description' => substr(STORE_NAME, 0, 255),
                       'x_amount' => substr($this->format_raw($order->info['total']), 0, 15),
                       'x_currency_code' => substr($currency, 0, 3),
                       'x_method' => 'CC',
                       'x_type' => ((MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_METHOD == 'Capture') ? 'AUTH_CAPTURE' : 'AUTH_ONLY'),
-                      'x_card_num' => substr($HTTP_POST_VARS['cc_number_nh-dns'], 0, 22),
-                      'x_exp_date' => $HTTP_POST_VARS['cc_expires_month'] . $HTTP_POST_VARS['cc_expires_year'],
-                      'x_card_code' => substr($HTTP_POST_VARS['cc_cvc_nh-dns'], 0, 4));
+                      'x_card_num' => substr($_POST['cc_number_nh-dns'], 0, 22),
+                      'x_exp_date' => $_POST['cc_expires_month'] . $_POST['cc_expires_year'],
+                      'x_card_code' => substr($_POST['cc_cvc_nh-dns'], 0, 4));
 
       if (is_numeric($sendto) && ($sendto > 0)) {
         $params['x_ship_to_first_name'] = substr($order->delivery['firstname'], 0, 50);
@@ -235,11 +274,11 @@
     }
 
     function get_error() {
-      global $HTTP_GET_VARS;
+      global $_GET;
 
       $error_message = MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ERROR_GENERAL;
 
-      switch ($HTTP_GET_VARS['error']) {
+      switch ($_GET['error']) {
         case 'invalid_expiration_date':
           $error_message = MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ERROR_INVALID_EXP_DATE;
           break;
@@ -287,6 +326,7 @@
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Payment Zone', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ZONE', '0', 'If a zone is selected, only enable this payment method for that zone.', '6', '2', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, use_function, date_added) values ('Set Order Status', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ORDER_STATUS_ID', '0', 'Set the status of orders made with this payment module to this value', '6', '0', 'tep_cfg_pull_down_order_statuses(', 'tep_get_order_status_name', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('cURL Program Location', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CURL', '/usr/bin/curl', 'The location to the cURL program application.', '6', '0' , now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Accepted Credit Cards', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ACCEPTED_CC', 'Visa, Mastercard', 'The credit cards you currently accept', '6', '0', '_selectOptions(array(\'Visa\', \'Mastercard\', \'Amex\',\'Discover\'), ', now())");
     }
 
     function remove() {
@@ -294,7 +334,7 @@
     }
 
     function keys() {
-      return array('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_STATUS', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_LOGIN_ID', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_KEY', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_MD5_HASH', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_SERVER', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_MODE', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_METHOD', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ZONE', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ORDER_STATUS_ID', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_SORT_ORDER', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CURL');
+      return array('MODULE_PAYMENT_AUTHORIZENET_CC_AIM_STATUS', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_LOGIN_ID', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_KEY', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_MD5_HASH', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_SERVER', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_MODE', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_METHOD', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ZONE', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ORDER_STATUS_ID', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_SORT_ORDER', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_CURL', 'MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ACCEPTED_CC');
     }
 
     function _hmac($key, $data) {
@@ -340,6 +380,7 @@
         $curl = curl_init($server['scheme'] . '://' . $server['host'] . $server['path'] . (isset($server['query']) ? '?' . $server['query'] : ''));
         curl_setopt($curl, CURLOPT_PORT, $server['port']);
         curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_SSLVERSION, 3);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
@@ -372,5 +413,16 @@
 
       return number_format(tep_round($number * $currency_value, $currencies->currencies[$currency_code]['decimal_places']), $currencies->currencies[$currency_code]['decimal_places'], '.', '');
     }
+  }
+  //MOD Credit Card Checkbox Implementation
+   function _selectOptions($select_array, $key_value, $key = '') {
+    for ($i=0; $i<(sizeof($select_array)); $i++) {
+        $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+        $string .= '<br><input type="checkbox" name="' . $name . '" value="' . $select_array[$i] . '"';
+        $key_values = explode(", ", $key_value);
+        if (in_array($select_array[$i], $key_values)) $string .= ' checked="checked"';
+        $string .= '> ' . $select_array[$i];
+    }
+    return $string;
   }
 ?>

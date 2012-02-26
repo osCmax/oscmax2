@@ -1,16 +1,16 @@
 <?php
 /*
-  $Id: popup_image.php,v 1.1.2.1 2005/06/12 00:04:34 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', '%s Images');
+define('HEADING_TITLE','%s Images');
 
-define('TEXT_CLOSE_WINDOW', 'Close Window <u>[x]</u>');
+define('TEXT_CLOSE_WINDOW','Fermer la fenêtre <u>[x]</u>');
 ?>

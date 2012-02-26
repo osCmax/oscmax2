@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: login.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -25,28 +25,68 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_LOGIN);
 
   $error = false;
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
-    $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
-    $password = tep_db_prepare_input($HTTP_POST_VARS['password']);
+  // BOF PHONE ORDER
+
+  //if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
+
+  if ((isset($_GET['action']) && ($_GET['action'] == 'process')) || ((isset($_POST['action']) && ($_POST['action'] == 'process')))) {
+
+  // EOF PHONE ORDER
+    $email_address = tep_db_prepare_input($_POST['email_address']);
+    $password = tep_db_prepare_input($_POST['password']);
 
 // Check if email exists
 // LINE CHANGED: MOD - Separate Pricing per Customer
 //  $check_customer_query = tep_db_query("select customers_id, customers_firstname, customers_password, customers_email_address, customers_default_address_id from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "'");
     $check_customer_query = tep_db_query("select customers_id, customers_firstname, customers_group_id, customers_password, customers_email_address, customers_default_address_id , guest_account from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "' and guest_account='0'");
     if (!tep_db_num_rows($check_customer_query)) {
+	  // Email address not in database
       $error = true;
+	  //Added by PGM
+	  tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', now())");
     } else {
+	  // Email in database now lets check the password
       $check_customer = tep_db_fetch_array($check_customer_query);
-// Check that password is good
-      if (!tep_validate_password($password, $check_customer['customers_password'])) {
+      // Check that password is good
+      // BOF PHONE ORDER
+	  $checked = '';
+      // If $_POST(['action']) is set then lets check where they have come from
+	  if (isset($_POST['action'])) {
+        $referrer = $_SERVER['HTTP_REFERER'];
+	    // We should have the admin folder name in the $_POST vars
+	    if (strpos($referrer, $_POST['admin']) !== false) {
+	      $checked = 'pass';
+	    } else {
+	      $checked = 'fail';
+	    }
+	  }
+	  
+	  //if (!tep_validate_password($password, $check_customer['customers_password'])) {
+	  if (!tep_validate_password($password, $check_customer['customers_password']) && !isset($_POST['action'])) {
+	  // Password does not match and customer did not come from admin 
         $error = true;
+		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', now())");
+	  } elseif (isset($_POST['action']) && $checked == 'fail') {
+	  // Password does not match and customer looks like they came from admin but admin dir does not match - potential hack attempt
+	    $error = true;
+		tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Hack Attempt', now())");
       } else {
-        if (SESSION_RECREATE == 'True') {
-          tep_session_recreate();
-        }
+	  // Password matched or phone order via admin passed
+        //if (SESSION_RECREATE == 'True' && !isset($_POST['action'])) {
+		if ($checked == 'pass') {
+          tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Admin as Customer', now())");
+		} else {
+		  tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', now())");  
+		}
+		// Create session
+		tep_session_recreate();
+
+		
+	// EOF PHONE ORDER	
+        //}
 // BOF: MOD - Separate Pricing Per Customer: choice for logging in under any customer_group_id
 // note that tax rates depend on your registered address!
-        if ($_GET['skip'] != 'true' && $_POST['email_address'] == SPPC_TOGGLE_LOGIN_PASSWORD ) {
+        if (isset($_GET['skip']) && $_GET['skip'] != 'true' && $_POST['email_address'] == SPPC_TOGGLE_LOGIN_PASSWORD ) {
           $existing_customers_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id ");
           echo '<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">';
           print ("\n<html ");
@@ -57,7 +97,7 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
           echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG;
           print ("\">\n<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\">\n");
           echo '<body bgcolor="#ffffff" style="margin:0">';
-          print ("\n<table border=\"0\" width=\"100%\" height=\"100%\">\n<tr>\n<td style=\"vertical-align: middle\" align=\"middle\">\n");
+          print ("\n<table border=\"0\" width=\"100%\">\n<tr>\n<td style=\"vertical-align: middle\" align=\"middle\">\n");
           echo tep_draw_form('login', tep_href_link(FILENAME_LOGIN, 'action=process&skip=true', 'SSL'));
           print ("\n<table border=\"0\" bgcolor=\"#f1f9fe\" cellspacing=\"10\" style=\"border: 1px solid #7b9ebd;\">\n<tr>\n<td class=\"main\">\n");
           $index = 0;
@@ -82,7 +122,7 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
         $customer_default_address_id = $check_customer['customers_default_address_id'];
         $customer_first_name = $check_customer['customers_firstname'];
 // BOF: MOD - Separate Pricing per Customer
-        if ($_GET['skip'] == 'true' && $_POST['email_address'] == SPPC_TOGGLE_LOGIN_PASSWORD && isset($_POST['new_customers_group_id']))  {
+        if (isset($_GET['skip']) && $_GET['skip'] == 'true' && $_POST['email_address'] == SPPC_TOGGLE_LOGIN_PASSWORD && isset($_POST['new_customers_group_id']))  {
           $sppc_customer_group_id = $_POST['new_customers_group_id'] ;
           $check_customer_group_tax = tep_db_query("select customers_group_show_tax, customers_group_tax_exempt from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id = '" .(int)$_POST['new_customers_group_id'] . "'");
         } else {
@@ -92,6 +132,13 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
         $customer_group_tax = tep_db_fetch_array($check_customer_group_tax);
         $sppc_customer_group_show_tax = (int)$customer_group_tax['customers_group_show_tax'];
         $sppc_customer_group_tax_exempt = (int)$customer_group_tax['customers_group_tax_exempt'];
+
+// PriceFormatterStore is already instantiated with the retail customer group id
+    if ($sppc_customer_group_id != 0) {
+      unset($pfs);
+      $pfs = new PriceFormatterStore;
+    }
+
 // EOF: MOD - Separate Pricing per Customer
         $customer_country_id = $check_country['entry_country_id'];
         $customer_zone_id = $check_country['entry_zone_id'];
@@ -154,7 +201,8 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   $content = CONTENT_LOGIN;
   $javascript = $content . '.js';
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

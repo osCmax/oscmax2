@@ -1,34 +1,22 @@
 <?php
 /*
-$Id: modules.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 ?>
-<!-- modules //-->
-          <tr>
-            <td>
+<!-- modules -->
 <?php
-  $heading = array();
-  $contents = array();
+$contents = '';
 
-  $heading[] = array('text'  => BOX_HEADING_MODULES,
-                     'link'  => tep_href_link(FILENAME_MODULES, 'set=payment&selected_box=modules'));
-
-  if ($selected_box == 'modules') {
-    $contents[] = array('text'  => '<a href="' . tep_href_link(FILENAME_MODULES, 'set=payment', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_MODULES_PAYMENT . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_MODULES, 'set=shipping', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_MODULES_SHIPPING . '</a><br>' .
-                                   '<a href="' . tep_href_link(FILENAME_MODULES, 'set=ordertotal', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_MODULES_ORDER_TOTAL . '</a>');
-  }
-
-  $box = new box;
-  echo $box->menuBox($heading, $contents);
+    $contents = (				   tep_admin_jqmenu(FILENAME_MODULES_PAYMENT, BOX_MODULES_PAYMENT, 'TOP') .
+	                               tep_admin_jqmenu(FILENAME_MODULES_SHIPPING, BOX_MODULES_SHIPPING, 'TOP') .
+	                               tep_admin_jqmenu(FILENAME_MODULES_ORDER_TOTAL, BOX_MODULES_ORDER_TOTAL, 'TOP'));
+  print_r($contents);
 ?>
-            </td>
-          </tr>
 <!-- modules_eof //-->

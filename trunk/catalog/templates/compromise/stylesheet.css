@@ -1,8 +1,20 @@
 /*
-Design by Free CSS Templates
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
+Original Design by Free CSS Templates
+Adapted for osCmax by michael_s
 http://www.freecsstemplates.org
 Released for free under a Creative Commons Attribution 2.5 License
 */
+img { border: 0; border-collapse: collapse; }
 
 body {
 	margin: 0px;
@@ -190,19 +202,19 @@ a:hover {
 #page {
 	width: 900px;
 	margin: 0 auto;
-	padding-top: 20px;
+	padding-top: 5px;
 }
 
 /* Content */
 
 #content {
 	float: right;
-	width: 610px;
-	padding: 20px 20px 0 0;
+	width: 680px;
+	padding: 0 0 0 0;
 }
 
 .post {
-	margin-left: 20px;
+	margin-left: 0;
 	padding-bottom: 30px;
 }
 
@@ -226,7 +238,7 @@ a:hover {
 	background: #E0E0E0;
 	border-left: 4px double #F57601;
 	border-right: 4px double #F57601;
-	padding: 3px 10px 3px 10px;
+	padding: 3px 5px 3px 10px;
 	text-align: left;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
@@ -236,7 +248,7 @@ a:hover {
 }
 
 .post .entry {
-	padding: 10px 20px 20px 20px;
+	padding: 0px 5px 5px 20px;
 	text-align: justify;
 }
 
@@ -245,7 +257,7 @@ a:hover {
 #sidebar {
 	float: left;
 	width: 210px;
-	padding: 25px 10px 0 20px;
+	padding: 5px 0 0 10px;
 }
 
 #sidebar ul {
@@ -381,3 +393,130 @@ TD.pageHeading, DIV.pageHeading {
 	border-bottom-width: 1px;
 	border-bottom-color: #BCBCBC;
 }
+.errorBox { font-family : Verdana, Arial, sans-serif; font-size : 10px; background: #ffb3b5; font-weight: bold; }
+.stockWarning { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #cc0033; }
+.productsNotifications { background: #f2fff7; }
+/* Product Info*/
+.productListing-heading { font-family: Verdana, Arial, sans-serif; font-size: 10px; background: #bbbbbb; color: #FFFFFF; font-weight: bold; padding-top: 3px; }
+a.productListing-heading { text-decoration:none; }
+TABLE.productListing-list { border-left: 1px; border-right: 1px; border-style: solid; border-color: #dddddd; }
+TABLE.productinfo_msrp { border: 1px; border-style: solid; border-color: #dddddd; border-spacing: 1px; }
+TD.productListing-data{ width:33%; border: 1px; border-style: solid; border-color: #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: black; }
+td.productListing-data-spacer { width:10px; max-width:10px; border-collapse:collapse; border-style:none; }
+td.productListing-data-blank { min-width:10px; border-style:none; }
+td.productListing-data-list { font-family: Verdana, Arial, sans-serif; font-size: 10px; border-bottom: 1px solid #dddddd; } 
+td.productinfo_header { border: 1px solid #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; padding-left:5px; }
+td.productinfo_boxes { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 11px; padding:3px; }
+td.productinfo_epf { border: 1px solid #dddddd; text-align: left; font-family: Verdana, Arial, sans-serif; font-size: 11px; padding:5px; }
+td.productinfo_imagebig { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:3px; }
+td.productinfo_thumbnail  { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; }
+td.productinfo_buttons  { border: 1px solid #dddddd; text-align: center; font-family: Verdana, Arial, sans-serif; font-size: 9px; padding:2px; }
+td.productinfo_description { border: 1px solid #dddddd; text-align: left; font-family: Verdana, Arial, sans-serif; font-size: 12px; padding:2px; }
+td.prod_attributes { border: 1px solid #dddddd; }
+img.plusminus { cursor: pointer; }
+img.corner_banner { display:block; margin-left:-6px; margin-top:-7px; position:absolute; } 
+/* BOF: PGM Restyled Message Boxes */
+.messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color: #ffe6e6; border:solid 1px #ff8e90; padding:5px; }
+.messageStackSuccess { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#CCFFCC; border:solid 1px #006600; padding:5px; }
+.messageStackAlert{ font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#FFFF99; border:solid 1px #FFCC00; padding:5px; }
+/* EOF: PGM Restyled Message Boxes */
+
+/* input requirement */
+.inputRequirement { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #ff0000; }
+
+/* TAB CODE FOR PRODUCT.INFO.TPL.PHP PAGE by PGM*/
+/*semantic tabs*/
+.panel { border: 1px solid #dddddd; padding: 5px; font-family: Verdana, Arial, sans-serif; font-size: 12px; }
+ul.semtabs { font-family: Verdana, Arial, sans-serif; font-size: 12px; margin:0; clear:both; height:25px; padding-left: 0px; border-left: 1px solid #dddddd; list-style:none !important; }
+ul.semtabs li { float:left; height:25px; display:block; margin:0 !important; background-image:none; }
+ul.semtabs li a { /*  height:15px;*/ line-height:15px; display:block; padding: 5px 10px; border-right: 1px solid #dddddd; border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd; text-decoration:none; font-weight:bold; background-color:#f8f8f9; }
+ul.semtabs li.active a { background-color: #ffffff; border-bottom: 1px solid #ffffff; color: #000000; }
+/*end semantic tabs*/
+
+/* Password Strength */
+.password_strength { padding: 0 5px; display: inline-block;	}
+.password_strength_1 { background-color: #fcb6b1; }
+.password_strength_2 { background-color: #fccab1; }
+.password_strength_3 { background-color: #fcfbb1; }
+.password_strength_4 { background-color: #dafcb1; }
+.password_strength_5 { background-color: #bcfcb1; }
+
+/* Articles on home page */
+td.articleTextBox { border-left: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 10px; padding-left: 10px; padding-right: 10px;}
+
+/* BOF: Open Featured Products */
+TD.featuredProducts, TD.featuredCategories, TD.featuredManufacturers, TD.featuredManufacturerWP { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; }
+TD.featuredProducts A, TD.featuredCategories A, TD.featuredManufacturers A, TD.featuredManufacturerWP A { color: #000000; text-decoration: none; }
+TD.featuredProducts A:hover, TD.featuredCategories A:hover, TD.featuredManufacturers A:hover, TD.featuredManufacturerWP A:hover { color: #AABBDD;
+  text-decoration: underline; }
+/* EOF: Open Featured Products */
+
+/* BOF: Slideshow on product_info */
+#slideshow ul, #slideshow li { padding:0; margin:0; list-style:none; }
+.next, .prev{ cursor:pointer; }
+#screen2{ position:relative; width:280px; margin:0px; }
+
+#slideshow{ overflow:hidden; width:280px; }
+  #slideshow ul{ width:3900px; padding-left:0px; }
+	#slideshow li{ float:left; margin:0 0px; cursor:pointer; }
+
+.clear{ clear:both; width:0; height:0; }
+/* EOF: Slideshow on product_info */
+/* BOF: MSRP */
+.PriceList  { font-family: Arial, Verdana,  sans-serif; color: #006600; font-size: 12px; font-weight: bold; }
+.saving { font-family: Arial, Verdana,  sans-serif; color: #ff0000; font-size: 12px; font-weight: bold;  }
+.pricenow { font-family: Arial, Verdana,  sans-serif; color: #000000; font-size: 14px; font-weight: bold;  }
+.SavingsPercent  { color: red; font-size: 10px; font-weight: bold }
+.oldPrice { font-family: Arial, Verdana,  sans-serif; text-decoration: line-thorough; color: #ff0000; font-size: 12px; font-weight: bold}
+.oldPriceBIG { font-family: Arial, Verdana,  sans-serif; text-decoration: none; color: #ff0000; font-size: 12px; font-weight: bold}
+.PriceListBIG  { font-family: Arial, Verdana,  sans-serif; color: #006600; font-size: 12px; font-weight: bold; }
+.pricenowBIG { font-family: Arial, Verdana,  sans-serif; color: #000000; font-size: 18px; font-weight: bold;  }
+.savingBIG { font-family: Arial, Verdana,  sans-serif; color: #ff0000; font-size: 12px; font-weight: bold;  }
+.usualpriceBIG { font-family: Arial, Verdana,  sans-serif; color: #000000; font-size: 12px; font-weight: bold; }
+/* EOF: MSRP */
+/* BOF: Stars */
+.ui-stars-star, .ui-stars-cancel { float: left; display: block; overflow: hidden; text-indent: -999em; cursor: pointer; }
+.ui-stars-star a, .ui-stars-cancel a { width: 16px; height: 15px; display: block; background: url(../../images/icons/jquery.ui.stars.gif) no-repeat 0 0; }
+.ui-stars-star a { background-position: 0 -32px; }
+.ui-stars-star-on a { background-position: 0 -48px; }
+.ui-stars-star-hover a { background-position: 0 -64px; }
+.ui-stars-cancel-hover a { background-position: 0 -16px; }
+.ui-stars-star-disabled, .ui-stars-star-disabled a, .ui-stars-cancel-disabled a { cursor: default !important; }
+/* EOF: Stars */
+/* BOF: Categories Box Styling */
+tr.level { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+tr.level0 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+tr.level01 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+tr.level012 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+tr.level0123 { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+span.selectedCat { color: #ff0000; }
+/* EOF: Categories Box Styling */
+/* Small Ajax-throbber image */
+#indicator { float:right; visibility:hidden; }
+/* Stock table for product_info page */
+.stockTable { margin: 5px 5px 5px 5px; }
+.stockTableText { font-family: Verdana, Arial, sans-serif; font-size: 10px; border: 0px; }
+.stockTableContents { font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight: normal; background: #ffffff; color: #000000; }
+TD.stockTableHeading { font-family: Verdana, Arial, sans-serif; font-size: 11px; font-weight: bold; background: #dddddd;; color: #000000; }
+TD.stockTable, SPAN.stockTable { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+/* Stock table for product_info page */
+/* BOF: Cluetip - Tooltip */
+#cluetip-close img { border: 0; }
+#cluetip-title { overflow: hidden; }
+#cluetip-title #cluetip-close { float: right; position: relative; }
+#cluetip-waitimage { width: 43px; height: 11px; position: absolute; background-image: url(../images/icons/ajax-loader.gif); }
+.cluetip-arrows { display: none; position: absolute; top: 0; left: -11px; height: 22px; width: 11px; background-repeat: no-repeat; background-position: 0 0; }
+#cluetip-extra { display: none; }
+.cluetip-jtip { background-color: transparent; font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+.cluetip-jtip #cluetip-outer { border: 2px solid #ccc; position: relative; background-color: #fff; }
+.cluetip-jtip h3#cluetip-title { margin: 0 0 5px; padding: 2px 5px; font-size: 12px; font-weight: bold; background-color: #ccc; color: #333; }
+.cluetip-jtip #cluetip-inner { padding: 0 5px 5px; display: inline-block; }
+.cluetip-jtip div#cluetip-close { text-align: right; margin: 0 5px 5px; color: #900; }
+.clue-right-jtip .cluetip-arrows { background-image: url(images/arrowleft.gif); }
+.clue-left-jtip .cluetip-arrows { background-image: url(images/arrowright.gif); left: 100%; margin-right: -11px; }
+.clue-top-jtip .cluetip-arrows { background-image: url(images/arrowdown.gif); top: 100%; left: 50%; margin-left: -11px; height: 11px; width: 22px; }  
+.clue-bottom-jtip .cluetip-arrows { background-image: url(images/arrowup.gif); top: -11px; left: 50%; margin-left: -11px; height: 11px; width: 22px; }
+
+/* stupid IE6 HasLayout hack */
+.cluetip-rounded #cluetip-title, .cluetip-rounded #cluetip-inner { zoom: 1; }
+/* EOF: Cluetip - Tooltip */

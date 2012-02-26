@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: shipping.php v5.0 07/19/2007 djmonkey1 Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -48,7 +48,7 @@
         }
 
         for ($i=0, $n=sizeof($include_modules); $i<$n; $i++) {
-          include(DIR_FS_CATALOG_LANGUAGES . $language . '/modules/shipping/' . $include_modules[$i]['file']);
+          include(DIR_FS_CATALOG_LANGUAGES . $language . '/' . $include_modules[$i]['file']);
           include(DIR_FS_CATALOG_MODULES . 'shipping/' . $include_modules[$i]['file']);
 
           $GLOBALS[$include_modules[$i]['class']] = new $include_modules[$i]['class'];

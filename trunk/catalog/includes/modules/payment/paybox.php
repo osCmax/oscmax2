@@ -1,11 +1,11 @@
 <?php
 /*
-  Contribution by Emmanuel Alliel <manu@maboutique.biz>
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -93,18 +93,18 @@
     }
 
     function before_process() {
-      global $HTTP_POST_VARS;
+      global $_POST;
 
-      if ($HTTP_POST_VARS['valid'] == 'true') {
+      if ($_POST['valid'] == 'true') {
         if ($remote_host = getenv('REMOTE_HOST')) {
           if ($remote_host != 'paybox.com') {
             $remote_host = gethostbyaddr($remote_host);
           }
           if ($remote_host != 'paybox.com') {
-            tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $HTTP_POST_VARS[tep_session_name()] . '&payment_error=' . $this->code, 'SSL', false, false));
+            tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $_POST[tep_session_name()] . '&payment_error=' . $this->code, 'SSL', false, false));
           }
         } else {
-          tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $HTTP_POST_VARS[tep_session_name()] . '&payment_error=' . $this->code, 'SSL', false, false));
+          tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $_POST[tep_session_name()] . '&payment_error=' . $this->code, 'SSL', false, false));
         }
       }
     }
@@ -114,10 +114,10 @@
     }
 
     function get_error() {
-      global $HTTP_GET_VARS;
+      global $_GET;
 
-      if (isset($HTTP_GET_VARS['message']) && (strlen($HTTP_GET_VARS['message']) > 0)) {
-        $error = stripslashes(urldecode($HTTP_GET_VARS['message']));
+      if (isset($_GET['message']) && (strlen($_GET['message']) > 0)) {
+        $error = stripslashes(urldecode($_GET['message']));
       } else {
         $error = MODULE_PAYMENT_PAYBOX_TEXT_ERROR_MESSAGE;
       }

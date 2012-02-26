@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: address_book.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -30,7 +30,8 @@ $Id: address_book.php 3 2006-05-27 04:59:07Z user $
   $content = CONTENT_ADDRESS_BOOK;
   $javascript = $content . '.js.php';
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

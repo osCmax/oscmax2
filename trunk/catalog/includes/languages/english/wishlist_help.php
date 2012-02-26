@@ -1,16 +1,18 @@
 <?php
 /*
-$Id: wishlist_help.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
 define('NAVBAR_TITLE', 'My Wishlist F.A.Q.');
+define('NAVBAR_TITLE_1', 'Wishlist F.A.Q.');
+
 define('HEADING_TITLE', 'My Wishlist F.A.Q.');
 
 define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');

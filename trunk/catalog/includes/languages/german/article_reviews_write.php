@@ -1,24 +1,21 @@
 <?php
 /*
-$Id: article_reviews_write.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Reviews');
-define('HEADING_TITLE', 'Write Review of \'');
+define('NAVBAR_TITLE', 'Bewertungen');
+define('HEADING_TITLE', 'Bewerten Sie \'');
 
-define('SUB_TITLE_FROM', 'From:');
-define('SUB_TITLE_REVIEW', 'Your Review:');
-define('SUB_TITLE_RATING', 'Rating:');
+define('SUB_TITLE_FROM', 'Von:');
+define('SUB_TITLE_REVIEW', 'Ihre Bewertung:');
 
-define('TEXT_APPROVAL_WARNING', 'Note: Your review will not appear until it has been approved.');
-define('TEXT_BAD', '<small><font color="#ff0000"><b>Poor</b></font></small>');
-define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excellent</b></font></small>');
+define('TEXT_APPROVAL_WARNING', 'Hinweis: Ihre Bewertung wird veröffentlicht, sobald sie freigegeben worden ist.');
 
 ?>

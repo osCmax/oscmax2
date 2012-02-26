@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: compatibility.php 1739 2007-12-20 00:52:16Z user $
+$Id$
 
-  osCMax Power E-Commerce
+  osCmax e-Commerce
   http://www.oscmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -17,8 +17,8 @@
     $HTTP_SESSION_VARS =& $_SESSION;
     $HTTP_SERVER_VARS =& $_SERVER;
   } else {
-    if (!is_array($HTTP_GET_VARS)) $HTTP_GET_VARS = array();
-    if (!is_array($HTTP_POST_VARS)) $HTTP_POST_VARS = array();
+    if (!is_array($_GET)) $_GET = array();
+    if (!is_array($_POST)) $_POST = array();
     if (!is_array($HTTP_COOKIE_VARS)) $HTTP_COOKIE_VARS = array();
   }
 

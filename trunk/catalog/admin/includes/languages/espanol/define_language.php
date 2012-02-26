@@ -1,18 +1,18 @@
 <?php
 /*
-$Id: define_language.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Editor de Idiomas');
+define('HEADING_TITLE', 'Editor de idiomas');
 
 define('TEXT_FILE_DOES_NOT_EXIST', 'No existe fichero.');
 
-define('ERROR_FILE_NOT_WRITEABLE', 'Error: No puedo escribir sobre este fichero. Asigne correctamente permisos a: %s');
+define('ERROR_FILE_NOT_WRITEABLE', 'Error: No puedo escribir en este fichero. Asigne correctamente permisos a: %s');
 ?>

@@ -1,15 +1,11 @@
 <?php
 /*
-  $Id: affiliate_password.php,v 2.00 2003/10/12
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -24,10 +20,10 @@
 // needs to be included earlier to set the success message in the messageStack
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_PASSWORD);
 
-  if (isset($HTTP_POST_VARS['action']) && ($HTTP_POST_VARS['action'] == 'process')) {
-    $password_current = tep_db_prepare_input($HTTP_POST_VARS['password_current']);
-    $password_new = tep_db_prepare_input($HTTP_POST_VARS['password_new']);
-    $password_confirmation = tep_db_prepare_input($HTTP_POST_VARS['password_confirmation']);
+  if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
+    $password_current = tep_db_prepare_input($_POST['password_current']);
+    $password_new = tep_db_prepare_input($_POST['password_new']);
+    $password_confirmation = tep_db_prepare_input($_POST['password_confirmation']);
 
     $error = false;
 
@@ -66,5 +62,6 @@
   $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_AFFILIATE, '', 'SSL'));
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_AFFILIATE_PASSWORD, '', 'SSL'));
   $content = affiliate_password; 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
    require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

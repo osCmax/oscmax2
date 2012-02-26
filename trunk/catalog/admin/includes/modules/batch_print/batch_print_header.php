@@ -1,22 +1,28 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
-<script language="JavaScript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
-<script language="javascript">
-var dateAvailable=new ctlSpiffyCalendarBox("dateAvailable", "batch", "startdate","btnDate1","",scBTNMODE_CUSTOMBLUE);
-var dateAvailable1=new ctlSpiffyCalendarBox("dateAvailable1", "batch", "enddate","btnDate2","",scBTNMODE_CUSTOMBLUE);
-
-</script>
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
-<div id="spiffycalendar" class="text"></div>  
+
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
@@ -35,5 +41,21 @@ var dateAvailable1=new ctlSpiffyCalendarBox("dateAvailable1", "batch", "enddate"
           </tr>
         </table></td>
       </tr>
+      <?php if ((isset($message)) &&($message <> '')) {
+		  	$message_type = substr($message,0,3);
+			$message_check = substr(SUCCESS_1,0,3);
+				if ($message_type == $message_check) { ?>
+                  <tr>
+                    <td class="messageStackSuccess"><?php echo $message; ?></td>
+                  </tr>
+	            <?php } else { ?>    
+                  <tr>
+                    <td class="messageStackWarning"><?php echo $message; ?></td>
+                  </tr>
+    	        <?php } ?>
+	  		<tr>
+        		<td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
+      		</tr>
+	  <?php } ?>
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <td>

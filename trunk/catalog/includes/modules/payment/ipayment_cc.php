@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: ipayment_cc.php 1815 2008-01-14 10:55:23Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -139,13 +139,13 @@
     }
 
     function before_process() {
-      global $HTTP_GET_VARS, $order, $currency;
+      global $_GET, $order, $currency;
 
-      if ($HTTP_GET_VARS['ret_errorcode'] != '0') {
-        tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error=' . $this->code . '&error=' . tep_output_string_protected($HTTP_GET_VARS['ret_errormsg'])));
+      if ($_GET['ret_errorcode'] != '0') {
+        tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error=' . $this->code . '&error=' . tep_output_string_protected($_GET['ret_errormsg'])));
       }
 
-      if (tep_not_null(MODULE_PAYMENT_IPAYMENT_CC_SECRET_HASH_PASSWORD) && ($HTTP_GET_VARS['ret_param_checksum'] != md5(MODULE_PAYMENT_IPAYMENT_CC_USER_ID . ($this->format_raw($order->info['total']) * 100) . $currency . $HTTP_GET_VARS['ret_authcode'] . $HTTP_GET_VARS['ret_booknr'] . MODULE_PAYMENT_IPAYMENT_CC_SECRET_HASH_PASSWORD))) {
+      if (tep_not_null(MODULE_PAYMENT_IPAYMENT_CC_SECRET_HASH_PASSWORD) && ($_GET['ret_param_checksum'] != md5(MODULE_PAYMENT_IPAYMENT_CC_USER_ID . ($this->format_raw($order->info['total']) * 100) . $currency . $_GET['ret_authcode'] . $_GET['ret_booknr'] . MODULE_PAYMENT_IPAYMENT_CC_SECRET_HASH_PASSWORD))) {
         tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error=' . $this->code));
       }
 
@@ -157,10 +157,10 @@
     }
 
     function get_error() {
-      global $HTTP_GET_VARS;
+      global $_GET;
 
       $error = array('title' => MODULE_PAYMENT_IPAYMENT_CC_ERROR_HEADING,
-                     'error' => ((isset($HTTP_GET_VARS['error'])) ? stripslashes(urldecode($HTTP_GET_VARS['error'])) : MODULE_PAYMENT_IPAYMENT_CC_ERROR_MESSAGE));
+                     'error' => ((isset($_GET['error'])) ? stripslashes(urldecode($_GET['error'])) : MODULE_PAYMENT_IPAYMENT_CC_ERROR_MESSAGE));
 
       return $error;
     }

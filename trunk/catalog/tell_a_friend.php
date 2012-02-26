@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: tell_a_friend.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -23,43 +23,43 @@ $Id: tell_a_friend.php 3 2006-05-27 04:59:07Z user $
   }
 
   $valid_product = false;
-  if (isset($HTTP_GET_VARS['products_id'])) {
-    $product_info_query = tep_db_query("select pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+  if (isset($_GET['products_id'])) {
+    $product_info_query = tep_db_query("select pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
     if (tep_db_num_rows($product_info_query)) {
       $valid_product = true;
 
       $product_info = tep_db_fetch_array($product_info_query);
     } else {
-      tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['products_id']));
+      tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id']));
     }
   }
 
 // BOF: MOD - Article Manager
 //if ($valid_product == false) {
-//  tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['products_id']));
+//  tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id']));
   $valid_article = false;
-  if (isset($HTTP_GET_VARS['articles_id'])) {
-    $article_info_query = tep_db_query("select pd.articles_name from " . TABLE_ARTICLES . " p, " . TABLE_ARTICLES_DESCRIPTION . " pd where p.articles_status = '1' and p.articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and p.articles_id = pd.articles_id and pd.language_id = '" . (int)$languages_id . "'");
+  if (isset($_GET['articles_id'])) {
+    $article_info_query = tep_db_query("select pd.articles_name from " . TABLE_ARTICLES . " p, " . TABLE_ARTICLES_DESCRIPTION . " pd where p.articles_status = '1' and p.articles_id = '" . (int)$_GET['articles_id'] . "' and p.articles_id = pd.articles_id and pd.language_id = '" . (int)$languages_id . "'");
     if (tep_db_num_rows($article_info_query)) {
       $valid_article = true;
 
       $article_info = tep_db_fetch_array($article_info_query);
     } else {
-      tep_redirect(tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $HTTP_GET_VARS['articles_id']));
+      tep_redirect(tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $_GET['articles_id']));
     }
 // EOF: MOD - Article Manager
   }
 
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_TELL_A_FRIEND);
 
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
+  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
     $error = false;
 
-    $to_email_address = tep_db_prepare_input($HTTP_POST_VARS['to_email_address']);
-    $to_name = tep_db_prepare_input($HTTP_POST_VARS['to_name']);
-    $from_email_address = tep_db_prepare_input($HTTP_POST_VARS['from_email_address']);
-    $from_name = tep_db_prepare_input($HTTP_POST_VARS['from_name']);
-    $message = tep_db_prepare_input($HTTP_POST_VARS['message']);
+    $to_email_address = tep_db_prepare_input($_POST['to_email_address']);
+    $to_name = tep_db_prepare_input($_POST['to_name']);
+    $from_email_address = tep_db_prepare_input($_POST['from_email_address']);
+    $from_name = tep_db_prepare_input($_POST['from_name']);
+    $message = tep_db_prepare_input($_POST['message']);
 
     if (empty($from_name)) {
       $error = true;
@@ -98,14 +98,14 @@ $Id: tell_a_friend.php 3 2006-05-27 04:59:07Z user $
         $email_body .= $message . "\n\n";
       }
 
-      $email_body .= sprintf(TEXT_EMAIL_LINK, tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['products_id'], 'NONSSL', false)) . "\n\n" .
+      $email_body .= sprintf(TEXT_EMAIL_LINK, tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id'], 'NONSSL', false)) . "\n\n" .
                      sprintf(TEXT_EMAIL_SIGNATURE, STORE_NAME . "\n" . HTTP_SERVER . DIR_WS_CATALOG . "\n");
 
       tep_mail($to_name, $to_email_address, $email_subject, $email_body, $from_name, $from_email_address);
 
       $messageStack->add_session('header', sprintf(TEXT_EMAIL_SUCCESSFUL_SENT, $product_info['products_name'], tep_output_string_protected($to_name)), 'success');
 
-      tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['products_id']));
+      tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id']));
 // BOF: MOD - Article Manager
       // if article
     } else if ($valid_article) {
@@ -116,14 +116,14 @@ $Id: tell_a_friend.php 3 2006-05-27 04:59:07Z user $
         $email_body .= $message . "\n\n";
       }
 
-      $email_body .= sprintf(TEXT_EMAIL_LINK_ARTICLE, tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $HTTP_GET_VARS['articles_id'])) . "\n\n" .
+      $email_body .= sprintf(TEXT_EMAIL_LINK_ARTICLE, tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $_GET['articles_id'])) . "\n\n" .
                      sprintf(TEXT_EMAIL_SIGNATURE, STORE_NAME . "\n" . HTTP_SERVER . DIR_WS_CATALOG . "\n");
 
       tep_mail($to_name, $to_email_address, $email_subject, $email_body, $from_name, $from_email_address);
 
       $messageStack->add_session('header', sprintf(TEXT_EMAIL_SUCCESSFUL_SENT, $article_info['articles_name'], tep_output_string_protected($to_name)), 'success');
 
-      tep_redirect(tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $HTTP_GET_VARS['articles_id']));
+      tep_redirect(tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $_GET['articles_id']));
       }
 // EOF: MOD - Article Manager
     }
@@ -137,16 +137,17 @@ $Id: tell_a_friend.php 3 2006-05-27 04:59:07Z user $
 
 // LINE ADDED: MOD - Article Manager
   if ($valid_product) {
-    $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_TELL_A_FRIEND, 'products_id=' . $HTTP_GET_VARS['products_id']));
+    $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_TELL_A_FRIEND, 'products_id=' . $_GET['products_id']));
 // BOF: MOD - Article Manager
   } else if ($valid_article) {
-    $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_TELL_A_FRIEND, 'articles_id=' . $HTTP_GET_VARS['articles_id']));
+    $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_TELL_A_FRIEND, 'articles_id=' . $_GET['articles_id']));
       }
 // EOF: MOD - Article Manager
 
   $content = CONTENT_TELL_A_FRIEND;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

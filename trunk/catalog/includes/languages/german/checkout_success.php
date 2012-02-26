@@ -1,30 +1,30 @@
 <?php
 /*
-$Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Kasse');
+define('NAVBAR_TITLE_1', 'Bestellung abschließen');
 define('NAVBAR_TITLE_2', 'Erfolg');
 
-define('HEADING_TITLE', 'Ihr Bestellung ist ausgef&uuml;hrt worden.');
+define('HEADING_TITLE', 'Ihr Bestellung wurde übermittelt.');
 
-define('TEXT_SUCCESS', 'Ihre Bestellung ist eingegangen und wird bearbeitet! Die Lieferung erfolgt innerhalb von ca. 2-5 Werktagen.');
-define('TEXT_NOTIFY_PRODUCTS', 'Bitte benachrichtigen Sie mich &uuml;ber Aktuelles zu folgenden Produkten:');
-define('TEXT_SEE_ORDERS', 'Sie k&ouml;nnen Ihre Bestellung(en) auf der Seite <a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '"><u>\'Ihr Konto\'</a></u> jederzeit einsehen und sich dort auch Ihre <a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '"><u>\'Bestell&uuml;bersicht\'</u></a> anzeigen lassen.');
-define('TEXT_CONTACT_STORE_OWNER', 'Falls Sie Fragen bez&uuml;glich Ihrer Bestellung haben, wenden Sie sich an unseren <a href="' . tep_href_link(FILENAME_CONTACT_US) . '"><u>Vertrieb</u></a>.');
-define('TEXT_THANKS_FOR_SHOPPING', 'Wir danken Ihnen f&uuml;r Ihren Online-Einkauf!');
+define('TEXT_SUCCESS', 'Ihre Bestellung wurde übermittelt! Die Lieferung erfolgt innerhalb von ca. 2-5 Werktagen.');
+define('TEXT_NOTIFY_PRODUCTS', 'Bitte benachrichtigen Sie mich über Neuigkeiten bei den folgenden Produkten:');
+define('TEXT_SEE_ORDERS', 'Sie können Ihre Bestellübersicht auf der Seite <a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '"><u>\'Ihr Konto\'</a></u> jederzeit einsehen und sich dort auch Ihre <a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '"><u>\'Bestell&uuml;bersicht\'</u></a> anzeigen lassen.');
+define('TEXT_CONTACT_STORE_OWNER', 'Falls Sie Fragen zu Ihrer Bestellung haben, wenden Sie sich an unseren <a href="' . tep_href_link(FILENAME_CONTACT_US) . '"><u>Vertrieb</u></a>.');
+define('TEXT_THANKS_FOR_SHOPPING', 'Vielen Dank für Ihren Einkauf!');
 
-define('TABLE_HEADING_COMMENTS', 'Enter a comment for the order processed');
+define('TABLE_HEADING_COMMENTS', 'Fügen Sie eine Anmerkung zu Ihrer Bestellung ein');
 
-define('TABLE_HEADING_DOWNLOAD_DATE', 'herunterladen m&ouml;glich bis:');
-define('TABLE_HEADING_DOWNLOAD_COUNT', 'max. Anz. Downloads');
-define('HEADING_DOWNLOAD', 'Artikel herunterladen:');
-define('FOOTER_DOWNLOAD', 'Sie k&ouml;nnen Ihre Artikel auch sp&auml;ter unter \'%s\' herunterladen');
+define('TABLE_HEADING_DOWNLOAD_DATE', 'Ablaufdatum:');
+define('TABLE_HEADING_DOWNLOAD_COUNT', ' verbleibende Downloads');
+define('HEADING_DOWNLOAD', 'Laden Sie hier Ihre Artikel herunter:');
+define('FOOTER_DOWNLOAD', 'Sie können Ihre Artikel auch später unter \'%s\' herunterladen');
 ?>

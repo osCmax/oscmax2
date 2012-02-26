@@ -1,23 +1,19 @@
 <?php
 /*
-$Id: affiliate_logout.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'The Affiliate Program');
-define('HEADING_TITLE', 'The Affiliate Program');
+define('NAVBAR_TITLE','Programa de Afiliados');
+define('HEADING_TITLE','Programa de Afiliados');
 
-define('TEXT_INFORMATION', 'You were logged out successfully.');
-define('TEXT_INFORMATION_ERROR_1', 'You could not be logged out.');
-define('TEXT_INFORMATION_ERROR_2', 'You were not logged in and can therefore not be logged out.');
+define('TEXT_INFORMATION','Cerró la sesión con éxito.');
+define('TEXT_INFORMATION_ERROR_1','No se ha podido cerrar la sesión.');
+define('TEXT_INFORMATION_ERROR_2','No pudo iniciar la sesión y por lo tanto no puede cerrarla.');
 ?>

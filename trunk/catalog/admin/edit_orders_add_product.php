@@ -1,17 +1,13 @@
 <?php
 /*
-  $Id: edit_orders_add_product.php v5.0.5 08/27/2007 djmonkey1 Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2007 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
-  For Order Editor support or to post bug reports, feature requests, etc, please visit the Order Editor support thread:
-  http://forums.oscommerce.com/index.php?showtopic=54032
-
 */
 
   require('includes/application_top.php');
@@ -265,6 +261,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <?php if ( (isset($_GET['submitForm'])) && ($_GET['submitForm'] == 'yes') ) {
         echo '<script language="javascript" type="text/javascript"><!--' . "\n" .
              '  window.opener.document.edit_order.subaction.value = "add_product";' . "\n" . 

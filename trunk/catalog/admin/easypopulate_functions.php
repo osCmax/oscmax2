@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: easypopulate_functions.php,v 2.76a 2006/10/16 22:50:52 surfalot Exp $
+$Id$
 
-  Designed for osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

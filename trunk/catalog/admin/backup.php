@@ -1,18 +1,18 @@
 <?php
 /*
-$Id: backup.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
 
-  $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   if (tep_not_null($action)) {
     switch ($action) {
@@ -28,11 +28,11 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
         $backup_file = 'db_' . DB_DATABASE . '-' . date('YmdHis') . '.sql';
         $fp = fopen(DIR_FS_BACKUP . $backup_file, 'w');
 
-        $schema = '# osCMax Open Source Shopping Cart' . "\n" .
+        $schema = '# osCmax Open Source Shopping Cart' . "\n" .
                   '# http://www.oscmax.com' . "\n" .
                   '#' . "\n" .
                   '# Database Backup For ' . STORE_NAME . "\n" .
-                  '# Copyright (c) osCMax ' . date('Y') . ' ' . STORE_OWNER . "\n" .
+                  '# Copyright (c) osCmax ' . date('Y') . ' ' . STORE_OWNER . "\n" .
                   '#' . "\n" .
                   '# Database: ' . DB_DATABASE . "\n" .
                   '# Database Server: ' . DB_SERVER . "\n" .
@@ -127,8 +127,8 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
 
         fclose($fp);
 
-        if (isset($HTTP_POST_VARS['download']) && ($HTTP_POST_VARS['download'] == 'yes')) {
-          switch ($HTTP_POST_VARS['compress']) {
+        if (isset($_POST['download']) && ($_POST['download'] == 'yes')) {
+          switch ($_POST['compress']) {
             case 'gzip':
               exec(LOCAL_EXE_GZIP . ' ' . DIR_FS_BACKUP . $backup_file);
               $backup_file .= '.gz';
@@ -146,7 +146,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
 
           exit;
         } else {
-          switch ($HTTP_POST_VARS['compress']) {
+          switch ($_POST['compress']) {
             case 'gzip':
               exec(LOCAL_EXE_GZIP . ' ' . DIR_FS_BACKUP . $backup_file);
               break;
@@ -165,11 +165,11 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
         tep_set_time_limit(0);
 
         if ($action == 'restorenow') {
-          $read_from = $HTTP_GET_VARS['file'];
+          $read_from = $_GET['file'];
 
-          if (file_exists(DIR_FS_BACKUP . $HTTP_GET_VARS['file'])) {
-            $restore_file = DIR_FS_BACKUP . $HTTP_GET_VARS['file'];
-            $extension = substr($HTTP_GET_VARS['file'], -3);
+          if (file_exists(DIR_FS_BACKUP . $_GET['file'])) {
+            $restore_file = DIR_FS_BACKUP . $_GET['file'];
+            $extension = substr($_GET['file'], -3);
 
             if ( ($extension == 'sql') || ($extension == '.gz') || ($extension == 'zip') ) {
               switch ($extension) {
@@ -281,15 +281,15 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
         tep_redirect(tep_href_link(FILENAME_BACKUP));
         break;
       case 'download':
-        $extension = substr($HTTP_GET_VARS['file'], -3);
+        $extension = substr($_GET['file'], -3);
 
         if ( ($extension == 'zip') || ($extension == '.gz') || ($extension == 'sql') ) {
-          if ($fp = fopen(DIR_FS_BACKUP . $HTTP_GET_VARS['file'], 'rb')) {
-            $buffer = fread($fp, filesize(DIR_FS_BACKUP . $HTTP_GET_VARS['file']));
+          if ($fp = fopen(DIR_FS_BACKUP . $_GET['file'], 'rb')) {
+            $buffer = fread($fp, filesize(DIR_FS_BACKUP . $_GET['file']));
             fclose($fp);
 
             header('Content-type: application/x-octet-stream');
-            header('Content-disposition: attachment; filename=' . $HTTP_GET_VARS['file']);
+            header('Content-disposition: attachment; filename=' . $_GET['file']);
 
             echo $buffer;
 
@@ -300,9 +300,9 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
         }
         break;
       case 'deleteconfirm':
-        if (strstr($HTTP_GET_VARS['file'], '..')) tep_redirect(tep_href_link(FILENAME_BACKUP));
+        if (strstr($_GET['file'], '..')) tep_redirect(tep_href_link(FILENAME_BACKUP));
 
-        tep_remove(DIR_FS_BACKUP . '/' . $HTTP_GET_VARS['file']);
+        tep_remove(DIR_FS_BACKUP . '/' . $_GET['file']);
 
         if (!$tep_remove_error) {
           $messageStack->add_session(SUCCESS_BACKUP_DELETED, 'success');
@@ -331,9 +331,10 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -382,7 +383,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
 
       $check = 0;
 
-      if ((!isset($HTTP_GET_VARS['file']) || (isset($HTTP_GET_VARS['file']) && ($HTTP_GET_VARS['file'] == $entry))) && !isset($buInfo) && ($action != 'backup') && ($action != 'restorelocal')) {
+      if ((!isset($_GET['file']) || (isset($_GET['file']) && ($_GET['file'] == $entry))) && !isset($buInfo) && ($action != 'backup') && ($action != 'restorelocal')) {
         $file_array['file'] = $entry;
         $file_array['date'] = date(PHP_DATE_TIME_FORMAT, filemtime(DIR_FS_BACKUP . $entry));
         $file_array['size'] = number_format(filesize(DIR_FS_BACKUP . $entry)) . ' bytes';
@@ -397,16 +398,16 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
 
       if (isset($buInfo) && is_object($buInfo) && ($entry == $buInfo->file)) {
         echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)">' . "\n";
-        $onclick_link = 'file=' . $buInfo->file . '&action=restore';
+        $onclick_link = 'file=' . $buInfo->file . '&amp;action=restore';
       } else {
         echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)">' . "\n";
         $onclick_link = 'file=' . $entry;
       }
 ?>
-                <td class="dataTableContent" onclick="document.location.href='<?php echo tep_href_link(FILENAME_BACKUP, $onclick_link); ?>'"><?php echo '<a href="' . tep_href_link(FILENAME_BACKUP, 'action=download&file=' . $entry) . '">' . tep_image(DIR_WS_ICONS . 'file_download.gif', ICON_FILE_DOWNLOAD) . '</a>&nbsp;' . $entry; ?></td>
-                <td class="dataTableContent" align="center" onclick="document.location.href='<?php echo tep_href_link(FILENAME_BACKUP, $onclick_link); ?>'"><?php echo date(PHP_DATE_TIME_FORMAT, filemtime(DIR_FS_BACKUP . $entry)); ?></td>
-                <td class="dataTableContent" align="right" onclick="document.location.href='<?php echo tep_href_link(FILENAME_BACKUP, $onclick_link); ?>'"><?php echo number_format(filesize(DIR_FS_BACKUP . $entry)); ?> bytes</td>
-                <td class="dataTableContent" align="right"><?php if (isset($buInfo) && is_object($buInfo) && ($entry == $buInfo->file)) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_BACKUP, 'file=' . $entry) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" onClick="document.location.href='<?php echo tep_href_link(FILENAME_BACKUP, $onclick_link); ?>'"><?php echo '<a href="' . tep_href_link(FILENAME_BACKUP, 'action=download&amp;file=' . $entry) . '">' . tep_image(DIR_WS_ICONS . 'file_download.gif', ICON_FILE_DOWNLOAD) . '</a>&nbsp;' . $entry; ?></td>
+                <td class="dataTableContent" align="center" onClick="document.location.href='<?php echo tep_href_link(FILENAME_BACKUP, $onclick_link); ?>'"><?php echo date(PHP_DATE_TIME_FORMAT, filemtime(DIR_FS_BACKUP . $entry)); ?></td>
+                <td class="dataTableContent" align="right" onClick="document.location.href='<?php echo tep_href_link(FILENAME_BACKUP, $onclick_link); ?>'"><?php echo number_format(filesize(DIR_FS_BACKUP . $entry)); ?> bytes</td>
+                <td class="dataTableContent" align="right"><?php if (isset($buInfo) && is_object($buInfo) && ($entry == $buInfo->file)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_BACKUP, 'file=' . $entry) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
@@ -454,7 +455,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
       $heading[] = array('text' => '<b>' . $buInfo->date . '</b>');
 
       $contents[] = array('text' => tep_break_string(sprintf(TEXT_INFO_RESTORE, DIR_FS_BACKUP . (($buInfo->compression != TEXT_NO_EXTENSION) ? substr($buInfo->file, 0, strrpos($buInfo->file, '.')) : $buInfo->file), ($buInfo->compression != TEXT_NO_EXTENSION) ? TEXT_INFO_UNPACK : ''), 35, ' '));
-      $contents[] = array('align' => 'center', 'text' => '<br><a href="' . tep_href_link(FILENAME_BACKUP, 'file=' . $buInfo->file . '&action=restorenow') . '">' . tep_image_button('button_restore.gif', IMAGE_RESTORE) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_BACKUP, 'file=' . $buInfo->file) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br><a href="' . tep_href_link(FILENAME_BACKUP, 'file=' . $buInfo->file . '&amp;action=restorenow') . '">' . tep_image_button('button_restore.gif', IMAGE_RESTORE) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_BACKUP, 'file=' . $buInfo->file) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'restorelocal':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_RESTORE_LOCAL . '</b>');
@@ -468,7 +469,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
     case 'delete':
       $heading[] = array('text' => '<b>' . $buInfo->date . '</b>');
 
-      $contents = array('form' => tep_draw_form('delete', FILENAME_BACKUP, 'file=' . $buInfo->file . '&action=deleteconfirm'));
+      $contents = array('form' => tep_draw_form('delete', FILENAME_BACKUP, 'file=' . $buInfo->file . '&amp;action=deleteconfirm'));
       $contents[] = array('text' => TEXT_DELETE_INTRO);
       $contents[] = array('text' => '<br><b>' . $buInfo->file . '</b>');
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_BACKUP, 'file=' . $buInfo->file) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
@@ -477,7 +478,7 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
       if (isset($buInfo) && is_object($buInfo)) {
         $heading[] = array('text' => '<b>' . $buInfo->date . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_BACKUP, 'file=' . $buInfo->file . '&action=restore') . '">' . tep_image_button('button_restore.gif', IMAGE_RESTORE) . '</a> <a href="' . tep_href_link(FILENAME_BACKUP, 'file=' . $buInfo->file . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_BACKUP, 'file=' . $buInfo->file . '&amp;action=restore') . '">' . tep_image_button('button_restore.gif', IMAGE_RESTORE) . '</a> <a href="' . tep_href_link(FILENAME_BACKUP, 'file=' . $buInfo->file . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
         $contents[] = array('text' => '<br>' . TEXT_INFO_DATE . ' ' . $buInfo->date);
         $contents[] = array('text' => TEXT_INFO_SIZE . ' ' . $buInfo->size);
         $contents[] = array('text' => '<br>' . TEXT_INFO_COMPRESSION . ' ' . $buInfo->compression);
@@ -492,6 +493,14 @@ $Id: backup.php 3 2006-05-27 04:59:07Z user $
     echo $box->infoBox($heading, $contents);
 
     echo '            </td>' . "\n";
+  } else {
+	$heading[] = array('text' => HEADING_NO_BACKUP);
+    $contents[] = array('text' => TEXT_NO_BACKUP);  
+	  
+	echo '            <td width="25%" valign="top">';
+	$box = new box;
+    echo $box->infoBox($heading, $contents);
+    echo '            </td>';  
   }
 ?>
           </tr>

@@ -1,10 +1,11 @@
 <?php
 /*
-$Id: coupon_admin.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -48,7 +49,6 @@ define('TEXT_REDEMPTIONS_CUSTOMER', 'For this Customer');
 define('TEXT_NO_FREE_SHIPPING', 'No Free Shipping');
 
 define('NOTICE_EMAIL_SENT_TO', 'Notice: Email sent to: %s');
-define('ERROR_NO_CUSTOMER_SELECTED', 'Error: No customer has been selected.');
 define('COUPON_NAME', 'Coupon Name');
 //define('COUPON_VALUE', 'Coupon Value');
 define('COUPON_AMOUNT', 'Coupon Amount');
@@ -68,21 +68,18 @@ define('DATE_MODIFIED', 'Date Modified');
 define('TEXT_HEADING_NEW_COUPON', 'Create New Coupon');
 define('TEXT_NEW_INTRO', 'Please fill out the following information for the new coupon.<br>');
 
-
 define('COUPON_NAME_HELP', 'A short name for the coupon');
 define('COUPON_AMOUNT_HELP', 'The value of the discount for the coupon, either fixed or add a % on the end for a percentage discount.');
 define('COUPON_CODE_HELP', 'You can enter your own code here, or leave blank for an auto generated one.');
 define('COUPON_STARTDATE_HELP', 'The date the coupon will be valid from');
 define('COUPON_FINISHDATE_HELP', 'The date the coupon expires');
-define('COUPON_FREE_SHIP_HELP', 'The coupon gives free shipping on an order. Note. This overrides the coupon_amount figure but respects the minimum order value');
+define('COUPON_FREE_SHIP_HELP', 'The coupon gives free shipping on an order. <br><b>Note:</b> This overrides the Coupon Amount figure but respects the minimum order value');
 define('COUPON_DESC_HELP', 'A description of the coupon for the customer');
 define('COUPON_MIN_ORDER_HELP', 'The minimum order value before the coupon is valid');
 define('COUPON_USES_COUPON_HELP', 'The maximum number of times the coupon can be used, leave blank if you want no limit.');
 define('COUPON_USES_USER_HELP', 'Number of times a user can use the coupon, leave blank for no limit.');
 define('COUPON_PRODUCTS_HELP', 'A comma separated list of product_ids that this coupon can be used with. Leave blank for no restrictions.');
 define('COUPON_CATEGORIES_HELP', 'A comma separated list of cpaths that this coupon can be used with, leave blank for no restrictions.');
-define('ERROR_NO_COUPON_AMOUNT', 'Error: No coupon amount has been entered. Either enter an amount or select free shipping.');
-define('ERROR_COUPON_EXISTS', 'Error: A coupon with the same coupon code already exists.');
 define('COUPON_BUTTON_EMAIL_VOUCHER', 'Email Voucher');
 define('COUPON_BUTTON_EDIT_VOUCHER', 'Edit Voucher');
 define('COUPON_BUTTON_DELETE_VOUCHER', 'Delete Voucher');
@@ -90,4 +87,16 @@ define('COUPON_BUTTON_VOUCHER_REPORT', 'Voucher Report');
 define('COUPON_BUTTON_PREVIEW', 'Preview Coupon');
 define('COUPON_STATUS', 'Status');
 define('COUPON_STATUS_HELP', 'Set to ' . IMAGE_ICON_STATUS_RED . ' to disable customers\' ability to use the coupon.');
+define('COUPON_BUTTON_BACK', 'Back');
+define('COUPON_BUTTON_CONFIRM', 'Confirm');
+
+define('TEXT_ENTRY_REQUIRED', '&nbsp;<span style="color: #ff0000;">*</span>');
+
+define('ERROR_NO_CUSTOMER_SELECTED', 'Error: No customer has been selected.');
+define('ERROR_NO_COUPON_AMOUNT', 'Error: No coupon amount has been entered. Either enter an amount or select free shipping.');
+define('ERROR_COUPON_EXISTS', 'Error: A coupon with the same coupon code already exists.');
+define('ERROR_MISSING_COUPON_NAME', 'Error: You have not entered a coupon name in language ');
+define('ERROR_MISSING_START_DATE', 'Error: You must enter <b>Start Date</b> for your coupon');
+define('ERROR_MISSING_FINISH_DATE', 'Error: You must enter <b>End Date</b> for your coupon');
+
 ?>

@@ -1,24 +1,20 @@
 <?php
 /*
-$Id: create_account.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-   
- THIS IS BETA - Use at your own risk!
-  Step-By-Step Manual Order Entry Verion 0.5
-  Customer Entry through Admin
 */
 
   require('includes/application_top.php');
   // +Country-State Selector
   require(DIR_WS_FUNCTIONS . 'ajax.php');
-if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates' && isset($HTTP_POST_VARS['country'])) {
-	ajax_get_zones_html(tep_db_prepare_input($HTTP_POST_VARS['country']), true);
+if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($_POST['country']), true);
 } else {
   // -Country-State Selector
 
@@ -31,6 +27,7 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
   <title><?php echo TITLE ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <?php require('includes/form_check.js.php'); ?>
 <script language="javascript" type="text/javascript"><!--
 function getObject(name) { 
@@ -93,7 +90,7 @@ function getStatesRequest(request, div_element) {
 }
 //--></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php
   require(DIR_WS_INCLUDES . 'header.php');
@@ -109,14 +106,23 @@ function getStatesRequest(request, div_element) {
 <!-- left_navigation_eof //-->
     </table></td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><form name="account_edit" method="post" <?php echo 'action="' . tep_href_link(FILENAME_CREATE_ACCOUNT_PROCESS, '', 'SSL') . '"'; ?> onSubmit="return check_form();"><input type="hidden" name="action" value="process"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <td width="75%" valign="top"><form name="account_edit" method="post" <?php echo 'action="' . tep_href_link(FILENAME_CREATE_ACCOUNT_PROCESS, '', 'SSL') . '"'; ?> onSubmit="return check_form();"><input type="hidden" name="action" value="process"><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-          </tr>
-        </table></td>
+        <td>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+            </tr>
+          </table>
+        </td>
       </tr>
+
+      <?php if ( (isset($_GET['account'])) && ($_GET['account'] == 'success') ) { ?>     
+      <tr>
+        <td class="messageStackSuccess"><?php echo TEXT_ACCOUNT_CREATED; ?></td>
+      </tr>
+      <?php } ?>
+
 <?php
   if (sizeof($navigation->snapshot) > 0) {
 ?>
@@ -132,7 +138,7 @@ function getStatesRequest(request, div_element) {
       <tr>
         <td>
 <?php
-  //$email_address = tep_db_prepare_input($HTTP_GET_VARS['email_address']);
+  //$email_address = tep_db_prepare_input($_GET['email_address']);
    // +Country-State Selector 
 if (!isset($country)){$country = DEFAULT_COUNTRY;}
 // -Country-State Selector
@@ -145,12 +151,17 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
         </td>
       </tr>
       <tr>
-        <td align="right" class="main"><br><?php echo tep_image_submit('button_confirm.gif', IMAGE_BUTTON_CONTINUE); ?></td>
+        <td align="right" class="main"><br><?php echo tep_image_submit('button_create_order.gif', IMAGE_BUTTON_CREATE); ?></td>
       </tr>
     </table></form></td>
 <!-- body_text_eof //-->
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
-    </table></td>
+    <td width="25%" valign="top">
+      <table border="0" cellspacing="0" cellpadding="2">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+    </td>
   </tr>
 </table>
 <!-- body_eof //-->

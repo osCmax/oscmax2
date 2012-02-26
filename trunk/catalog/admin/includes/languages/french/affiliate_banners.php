@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: affiliate_banners.php,v 2.0 2002/09/29 SDK
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2002 -2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -63,4 +63,12 @@ define('ERROR_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Erreur: Dossier cible n\'existe 
 define('ERROR_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Erreur: Dossier cible n\'est pas en mode écriture.');
 define('ERROR_IMAGE_DOES_NOT_EXIST', 'Erreur: Image inexistante.');
 define('ERROR_IMAGE_IS_NOT_WRITEABLE', 'Erreur: Image impossible à enlever.');
+define('TEXT_VALID_CATEGORIES_ID','Category');
+
+define('TEXT_AFFILIATE_VALIDCATS','Cliquez ici:');
+
+define('TEXT_AFFILIATE_CATEGORY_BANNER_VIEW','pour afficher les catégories disponibles.');
+
+define('TEXT_AFFILIATE_CATEGORY_BANNER_HELP','Sélectionnez le numéro de catégorie dans la fenêtre et entrez le numéro dans le champ ID de catégorie.');
+
 ?>

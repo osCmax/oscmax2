@@ -1,24 +1,15 @@
 <?php
 /*
-$Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-
-// Set the local configuration parameters - mainly for developers
-  if (file_exists(DIR_WS_INCLUDES . 'local/affiliate_configure.php')) include(DIR_WS_INCLUDES . 'local/affiliate_configure.php');
-
-  require(DIR_WS_INCLUDES . 'affiliate_configure.php');
   require(DIR_WS_FUNCTIONS . 'affiliate_functions.php');
 
 // define the database table names used in the contribution
@@ -47,28 +38,6 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_AFFILIATE_NEWS', 'affiliate_news.php');
   define('FILENAME_AFFILIATE_NEWSLETTER', 'affiliate_newsletter.php');
 
-  define('FILENAME_AFFILIATE_HELP_1', 'affiliate_help1.php');
-  define('FILENAME_AFFILIATE_HELP_2', 'affiliate_help2.php');
-  define('FILENAME_AFFILIATE_HELP_3', 'affiliate_help3.php');
-  define('FILENAME_AFFILIATE_HELP_4', 'affiliate_help4.php');
-  define('FILENAME_AFFILIATE_HELP_5', 'affiliate_help5.php');
-  define('FILENAME_AFFILIATE_HELP_6', 'affiliate_help6.php');
-  define('FILENAME_AFFILIATE_HELP_7', 'affiliate_help7.php');
-  define('FILENAME_AFFILIATE_HELP_8', 'affiliate_help8.php');
-  define('FILENAME_AFFILIATE_HELP_9', 'affiliate_help9.php');
-  define('FILENAME_AFFILIATE_HELP_10', 'affiliate_help10.php');
-  define('FILENAME_AFFILIATE_HELP_11', 'affiliate_help11.php');
-  define('FILENAME_AFFILIATE_HELP_12', 'affiliate_help12.php');
-  define('FILENAME_AFFILIATE_HELP_13', 'affiliate_help13.php');
-  define('FILENAME_AFFILIATE_HELP_14', 'affiliate_help14.php');
-  define('FILENAME_AFFILIATE_HELP_15', 'affiliate_help15.php');
-  define('FILENAME_AFFILIATE_HELP_16', 'affiliate_help16.php');
-  define('FILENAME_AFFILIATE_HELP_17', 'affiliate_help17.php');
-  define('FILENAME_AFFILIATE_HELP_18', 'affiliate_help18.php');
-  define('FILENAME_AFFILIATE_HELP_19', 'affiliate_help19.php');
-  define('FILENAME_AFFILIATE_HELP_20', 'affiliate_help20.php');
-  define('FILENAME_AFFILIATE_HELP_21', 'affiliate_help21.php');
-  define('FILENAME_AFFILIATE_HELP_22', 'affiliate_help22.php');
   define('FILENAME_AFFILIATE_BANNERS_CATEGORY', 'affiliate_banners_category.php');
   define('FILENAME_AFFILIATE_BANNERS_BUILD_CAT', 'affiliate_banners_build_cat.php');
   define('FILENAME_AFFILIATE_VALIDCATS', 'affiliate_validcats.php');
@@ -94,17 +63,17 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_AFFILIATE_PAYMENT', 'affiliate_payment.php');
 
 // include the language translations
-  require(DIR_WS_LANGUAGES . 'affiliate_' . $language . '.php');
+  require(DIR_WS_LANGUAGES . $language . '/affiliate.php');
 
   $affiliate_clientdate = (date ("Y-m-d H:i:s"));
-  $affiliate_clientbrowser = $_SERVER["HTTP_USER_AGENT"];
-  $affiliate_clientip = $_SERVER["REMOTE_ADDR"];
-  $affiliate_clientreferer = $_SERVER["HTTP_REFERER"];
+  $affiliate_clientbrowser = isset($_SERVER["HTTP_USER_AGENT"]);
+  $affiliate_clientip = isset($_SERVER["REMOTE_ADDR"]);
+  $affiliate_clientreferer = isset($_SERVER["HTTP_REFERER"]);
 
-  if (!$_SESSION['affiliate_ref']) {
+  if (!isset($_SESSION['affiliate_ref'])) {
     tep_session_register('affiliate_ref');
     tep_session_register('affiliate_clickthroughs_id');
-    if (($_GET['ref'] || $_POST['ref'])) {
+    if ((isset($_GET['ref']) || isset($_POST['ref']))) {
       if ($_GET['ref']) $affiliate_ref = $_GET['ref'];
       if ($_POST['ref']) $affiliate_ref = $_POST['ref'];
       if ($_GET['products_id']) $affiliate_products_id = $_GET['products_id'];
@@ -146,7 +115,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
  // Set Cookie if the customer comes back and orders it counts
     setcookie('affiliate_ref', $affiliate_ref, time() + AFFILIATE_COOKIE_LIFETIME);
     }
-    if ($HTTP_COOKIE_VARS['affiliate_ref']) { // Customer comes back and is registered in cookie
+    if (isset($_COOKIE['affiliate_ref'])) { // Customer comes back and is registered in cookie
       $affiliate_ref = $_COOKIE['affiliate_ref'];
     }
   }
@@ -158,7 +127,7 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   if (!isset($request_type)) $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
 
 // Emulate the breadcrumb class
-  if (!class_exists(breadcrumb)) {
+  if (!class_exists('breadcrumb')) {
     class breadcrumb {
       function add($title, $link = '') {
         global $location;

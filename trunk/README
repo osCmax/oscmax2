@@ -1,50 +1,91 @@
-osCMax v2.0 Release notes March 2009
-Copyright (c) AABox Web Hosting, osCDox, osCMax 2003-2009
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+  
+
+osCmax v2.5 Release Notes October 2010
+Copyright (c) osCmax 2003-2010
 
 ------------------------------------------------------------------------------
-1. Introduction To osCMax
+1. Introduction To osCmax
 ------------------------------------------------------------------------------
 
-osCMax is based on the ecommerce application osCommerce 2.2RC2a and is an
+osCmax is based on the ecommerce application osCommerce 2.2RC2a and is an
 extension of that application.
 
-It is a marked improvement over standard osCommerce in many ways. osCMax
+It is a marked improvement over standard osCommerce in many ways. osCmax
 is packed with the most requested features that are missing from standard osC-
-ommerce.
+ommerce. In addition, osCmax has many features and enhancements that are not
+available in any mods currently released for osCmax.
 
-osCMax continues the tradition of using the open source platforms of PHP and
+osCmax continues the tradition of using the open source platforms of PHP and
 MySQL to drive its success as one of the best e-commerce solutions available
 today.
 
-osCMax is able to run on any PHP5 enabled web server, on any
+osCmax is able to run on any PHP5 enabled web server, on any
 environment that PHP and MySQL supports, which includes Linux, Solaris, BSD,
 and Microsoft Windows environments.
 
-Join the osCMax community at http://oscmax.com to get support, encouragement,
+Join the osCmax community at http://www.oscmax.com to get support, encouragement,
 and see what is happening with this exciting project.
 
 ------------------------------------------------------------------------------
-2. osCMax Project History
+2. osCmax Project History
 ------------------------------------------------------------------------------
 
-osCMax 1.0 was realeased in 2003 as an alternative to the standard osCommerce
+osCmax 1.0 was realeased in 2003 as an alternative to the standard osCommerce
 MS2 release. This was done for many reasons, but primarily to help e-commerce
 developers speed up their time to market without having to do extensive re-coding
 of the base osCommerce package.
 
 While osCommerce MS2 is an excellent base platform, it is very difficult to modify
-aesthetically, and entails editing virtually every catalog file. osCMax solves
+aesthetically, and entails editing virtually every catalog file. osCmax solves
 that by incorporating an excellent template system that allows clean and easy
 editing of 2 files instead of 40 to 50.
 
 osCommerce MS2 is also lacking in many of the extra features that are really
 necessary for ease of use. The addition of many extra features as standard
-in osCMax is what has driven the project from the start.
+in osCmax is what has driven the project from the start.
 
-osCMax was orginally named MS2-MAX, and with the 1.7 release has been renamed.
+osCmax was orginally named MS2-MAX, and with the 1.7 release was been renamed.
 Version 1.7 was released in September 2004 and has been used by over 10,000
 internet stores.
 
-osCMax v2.0 was released in May 2005 and is a major update to the previous
+osCmax v2.0 RC1 was released in May 2005 and is a major update to the previous
 code base. It has been optimized for greater speed, security and reliability.
-You will find it is the most robust release of the osCMAx line to date.
+You will find it is the most robust release of the osCmax line to date.
+
+osCmax v2.0 RC2
+
+osCmax v2.0 RC3
+
+osCmax v2.0 
+
+osCmax v2.0.1 
+
+osCmax v2.0.2 
+
+osCmax v2.0.3 
+
+osCmax v2.0.4 
+
+osCmax v2.0.15 
+
+osCmax v2.0.25 
+
+osCmax v2.5 Beta 1
+
+osCmax v2.5 Beta 2
+
+osCmax v2.5 Beta 3
+
+osCmax v2.5 RC 1
+
+osCmax v2.5 RC 2
+
+osCmax v2.5.0  - Feb 20th, 2012

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -13,30 +13,51 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
 define('HEADING_TITLE', 'Hersteller');
 
 define('TABLE_HEADING_MANUFACTURERS', 'Hersteller');
+// BOF Open Featured Sets
+define('TABLE_HEADING_MANUFACTURER_FEATURED', 'Hersteller mit Produkten');
+define('TABLE_HEADING_MANUFACTURERS_FEATURED', 'Empfohlene Hersteller');
+// EOF Open Featured Sets
 define('TABLE_HEADING_ACTION', 'Aktion');
 
 define('TEXT_HEADING_NEW_MANUFACTURER', 'Neuer Hersteller');
 define('TEXT_HEADING_EDIT_MANUFACTURER', 'Hersteller bearbeiten');
-define('TEXT_HEADING_DELETE_MANUFACTURER', 'Hersteller l&ouml;schen');
+define('TEXT_HEADING_DELETE_MANUFACTURER', 'Hersteller löschen');
 
 define('TEXT_MANUFACTURERS', 'Hersteller:');
-define('TEXT_DATE_ADDED', 'hinzugef&uuml;gt am:');
-define('TEXT_LAST_MODIFIED', 'letzte &Auml;nderung am:');
-define('TEXT_PRODUCTS', 'Artikel:');
-define('TEXT_IMAGE_NONEXISTENT', 'BILD NICHT VORHANDEN');
+// BOF Open Featured Sets
+define('TEXT_MANUFACTURER_FEATURED', 'Empfohlener Hersteller mit Produkten');
+define('TEXT_MANUFACTURER_YES', 'Ja');
+define('TEXT_MANUFACTURER_NO', 'Nein');
+define('TEXT_MANUFACTURER_FEATURED_DATE', 'Empfohlen bis ');
+define('TEXT_MANUFACTURERS_FEATURED', 'Empfohlene Hersteller');
+define('TEXT_MANUFACTURERS_YES', 'Ja');
+define('TEXT_MANUFACTURERS_NO', 'Nein');
+define('TEXT_MANUFACTURERS_FEATURED_DATE', 'Empfohlen bis ');
+// EOF Open Featured Sets
+define('TEXT_DATE_ADDED', 'Hinzugefügt am:');
+define('TEXT_LAST_MODIFIED', 'Zuletzt geändert am:');
+define('TEXT_PRODUCTS', 'Produkte:');
+define('TEXT_IMAGE_NONEXISTENT', 'BILD EXISTIERT NICHT');
 
-define('TEXT_NEW_INTRO', 'Bitte geben Sie den neuen Hersteller mit allen relevanten Daten ein.');
-define('TEXT_EDIT_INTRO', 'Bitte f&uuml;hren Sie alle notwendigen &Auml;nderungen durch');
+define('TEXT_NEW_INTRO', 'Geben Sie den neuen Hersteller mit allen relevanten Daten ein.');
+define('TEXT_EDIT_INTRO', 'Führen Sie die gewünschten Änderungen durch.');
 
 define('TEXT_MANUFACTURERS_NAME', 'Herstellername:');
-define('TEXT_MANUFACTURERS_IMAGE', 'Herstellerbild:');
+define('TEXT_MANUFACTURERS_IMAGE', 'Herstellerlogo:');
 define('TEXT_MANUFACTURERS_URL', 'Hersteller URL:');
+define('TEXT_MANUFACTURERS_DESCRIPTION','Beschreibung:');
 
-define('TEXT_DELETE_INTRO', 'Sind Sie sicher, dass Sie diesen Hersteller l&ouml;schen m&ouml;chten?');
-define('TEXT_DELETE_IMAGE', 'Hersteller Image l&ouml;schen?');
-define('TEXT_DELETE_PRODUCTS', 'Alle Artikel von diesem Hersteller l&ouml;schen? (inkl. Bewertungen, Angebote und Neuerscheinungen)');
-define('TEXT_DELETE_WARNING_PRODUCTS', '<b>WARNUNG:</b> Es existieren noch %s Artikel, welche mit diesem Hersteller verbunden sind!');
+define('TEXT_DELETE_INTRO', 'Sind Sie sicher, dass Sie diesen Hersteller löschen möchten?');
+define('TEXT_DELETE_IMAGE', 'Herstellerlogo löschen?');
+define('TEXT_DELETE_PRODUCTS', 'Alle Artikel dieses Herstellers löschen? (inkl. Bewertungen, Angebote und Neuerscheinungen)');
+define('TEXT_DELETE_WARNING_PRODUCTS', '<b>WARNUNG:</b> Es existieren noch %s Artikel, welche mit diesem Hersteller verknüpft sind!');
 
-define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Fehler: Das Verzeichnis %s ist schreibgesch&uuml;tzt. Bitte korrigieren Sie die Zugriffsrechte zu diesem Verzeichnis!');
+define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Fehler: Das Verzeichnis %s ist schreibgeschützt. Bitte korrigieren Sie die Zugriffsrechte zu diesem Verzeichnis!');
 define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Verzeichnis %s existiert nicht!');
+
+define('MANUFACTURERS_FEATURED_HELP','Ausgewählte Hersteller');
+define('MANUFACTURERS_FEATURED_HELP_TEXT','Diese Einstellung fügt den Herstellers zu einer Gruppe von Herstellern auf der Indexseite Ihres Shops hinzu.');
+define('MANUFACTURER_FEATURED_HELP','Ausgewählter Hersteller');
+define('MANUFACTURER_FEATURED_HELP_TEXT','Diese Einstellung erzeugt eine Infobox auf der Indexseite Ihres Shops, die diesen Hersteller und einige seiner Produkte enthält.');
+
 ?>

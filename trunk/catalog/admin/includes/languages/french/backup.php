@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: backup.php,v 1.1.1.1.2.1 2005/06/12 00:04:01 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -46,4 +46,8 @@ define('SUCCESS_LAST_RESTORE_CLEARED', 'Succ&egrave;s: La date de derniere resta
 define('SUCCESS_DATABASE_SAVED', 'Succ&egrave;s: La base de donn&eacute;es a &eacute;t&eacute; sauv&eacute;e.');
 define('SUCCESS_DATABASE_RESTORED', 'Succ&egrave;s: La base de donn&eacute;es a &eacute;t&eacute; restaur&eacute;.');
 define('SUCCESS_BACKUP_DELETED', 'Succ&egrave;s: La base de donn&eacute;es a &eacute;t&eacute; supprim&eacute;.');
+define('HEADING_NO_BACKUP','<b>Sauvegarde ne sont pas disponibles</b>');
+
+define('TEXT_NO_BACKUP','S\'il vous plaît assurer que vous avez fait une sauvegarde de votre magasin. Cliquez sur le bouton <b>de sauvegarde</b> en créer un.');
+
 ?>

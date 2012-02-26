@@ -1,23 +1,15 @@
 <?php
 /*
-$Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-// Set the local configuration parameters - mainly for developers
-  if (file_exists(DIR_WS_INCLUDES . 'local/affiliate_configure.php')) include(DIR_WS_INCLUDES . 'local/affiliate_configure.php');
-
-//  require(DIR_WS_INCLUDES . 'affiliate_configure.php');
   require(DIR_WS_FUNCTIONS . 'affiliate_functions.php');
 
   define('FILENAME_AFFILIATE', 'affiliate_affiliates.php');
@@ -46,7 +38,6 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('FILENAME_AFFILIATE_VALIDPRODUCTS', 'affiliate_validproducts.php');
   define('FILENAME_AFFILIATE_VALIDCATS', 'affiliate_validcats.php');
   define('FILENAME_CATALOG_AFFILIATE_PAYMENT_INFO','affiliate_payment.php');
-  define('FILENAME_CATALOG_PRODUCT_INFO', 'product_info.php');
 
   define('TABLE_AFFILIATE', 'affiliate_affiliate');
   define('TABLE_AFFILIATE_NEWS', 'affiliate_news');
@@ -61,11 +52,12 @@ $Id: affiliate_application_top.php 14 2006-07-28 17:42:07Z user $
   define('TABLE_PRODUCTS_XSELL', 'products_xsell'); //X-Sell
 
 // include the language translations
-  require(DIR_WS_LANGUAGES . 'affiliate_' . $language . '.php');
+  require(DIR_WS_LANGUAGES . $language . '/affiliate.php');
 
 // If an order is deleted delete the sale too (optional)
-  if ($HTTP_GET_VARS['action'] == 'deleteconfirm' && basename($HTTP_SERVER_VARS['SCRIPT_FILENAME']) == FILENAME_ORDERS && AFFILIATE_DELETE_ORDERS == 'true') {
-    $affiliate_oID = tep_db_prepare_input($HTTP_GET_VARS['oID']);
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
+  if ($action == 'deleteconfirm' && basename($HTTP_SERVER_VARS['SCRIPT_FILENAME']) == FILENAME_ORDERS && AFFILIATE_DELETE_ORDERS == 'true') {
+    $affiliate_oID = tep_db_prepare_input($_GET['oID']);
     tep_db_query("delete from " . TABLE_AFFILIATE_SALES . " where affiliate_orders_id = '" . tep_db_input($affiliate_oID) . "' and affiliate_billing_status != 1");
   }
 ?>

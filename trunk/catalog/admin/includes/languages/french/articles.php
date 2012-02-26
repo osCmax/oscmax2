@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: articles.php, v1.0 2003/12/04 12:00:00 ra Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -38,7 +38,7 @@ define('TEXT_ARTICLE_DATE_ADDED', 'Cet article a &eacute;t&eacute; ajout&eacute;
 define('TEXT_ARTICLE_DATE_AVAILABLE', 'Cet article sera publi&eacute; le %s.');
 
 define('TEXT_EDIT_INTRO', 'Veuillez faire les changements n&eacute;cessaires');
-define('TEXT_EDIT_TOPICS_ID', 'Rubrique ID:');
+define('TEXT_EDIT_TOPICS_ID', 'ID de secci&oacute;n:');
 define('TEXT_EDIT_TOPICS_NAME', 'Nom de la rubrique:');
 define('TEXT_EDIT_SORT_ORDER', 'Ordre de tri:');
 
@@ -90,5 +90,12 @@ define('ERROR_CANNOT_LINK_TO_SAME_TOPIC', 'Erreur: impossible de cr&eacute;er un
 define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Erreur: le r&eacute;pertoire image de la boutique est verrouill&eacute; en &eacute;criture: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Erreur: le r&eacute;pertoire image de la boutique est inexistant: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CANNOT_MOVE_TOPIC_TO_PARENT', 'Erreur: Une rubrique ne peut &ecirc;tre d&eacute;plac&eacute; dans une sous-rubrique.');
+define('TEXT_ARTICLES_SHOW_ON_INDEX','Voir cet article sur votre page d\'accueil?');
+
+define('DO_SHOW_ON_INDEX','Oui');
+
+define('DO_NOT_SHOW_ON_INDEX','Non');
+
+define('IMAGE_SHOW_ON_INDEX','Cet article est indiqué sur votre page d\'accueil.');
 
 ?>

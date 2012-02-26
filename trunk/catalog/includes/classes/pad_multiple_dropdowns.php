@@ -1,25 +1,26 @@
 <?php
 /*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+/*
       QT Pro Version 4.1
   
       pad_multiple_dropdowns.php
-  
-      Contribution extension to:
-        osCMax Power E-Commerce
-        http://oscdox.com
-     
-      Copyright 2006 osCMax2004, 2005 Ralph Day
-      Released under the GNU General Public License
   
       Based on prior works released under the GNU General Public License:
         QT Pro prior versions
           Ralph Day, October 2004
           Tom Wojcik aka TomThumb 2004/07/03 based on work by Michael Coffman aka coffman
-          FREEZEHELL - 08/11/2003 freezehell@hotmail.com Copyright 2006 osCMax2003 IBWO
+          FREEZEHELL - 08/11/2003 freezehell@hotmail.com Copyright 2003 IBWO
           Joseph Shain, January 2003
-        osCommerce MS2
-          Copyright 2006 osCMax
-      Modifications made:
+        Modifications made:
           11/2004 - Created
           12/2004 - Fix _draw_out_of_stock_message_js to add semicolon to end of js stock array
           03/2005 - Remove '&' for pass by reference from parameters to call of
@@ -88,7 +89,7 @@
               unset($attributes[$o]['ovals'][$a]);
             }
           }
-          $out.='<tr><td align="right" class=main><b>'.$attributes[$o]['oname'].":</b></td><td class=main>".tep_draw_pull_down_menu('id['.$attributes[$o]['oid'].']',array_values($attributes[$o]['ovals']),$attributes[$o]['default'], "onchange=\"stkmsg(this.form);\"")."</td></tr>\n";
+          $out .= '<tr><td align="right" class="main"><b>' . $attributes[$o]['oname'] . ':</b></td><td class="main" align="left">' . tep_draw_pull_down_menu('id['.$attributes[$o]['oid'] . ']',array_values($attributes[$o]['ovals']),$attributes[$o]['default'], 'onchange="stkmsg(this.form);"') . '</td></tr>';
         }        
         $out.=$this->_draw_out_of_stock_message_js($attributes);
         
@@ -116,10 +117,10 @@
     function _draw_out_of_stock_message_js($attributes) {
       $out='';
       
-      $out.="<tr><td>&nbsp</td><td><span id=\"oosmsg\" class=errorBox></span>\n";
+      $out.="<tr><td>&nbsp;</td><td><span id=\"oosmsg\" class=errorBox></span>\n";
   
       if (($this->out_of_stock_msgline == 'True' | $this->no_add_out_of_stock == 'True')) {
-        $out.="<SCRIPT LANGUAGE=\"JavaScript\"><!--\n";
+        $out.="<script type=\"text/javascript\" language=\"JavaScript\"><!--\n";
         $combinations = array();
         $selected_combination = 0;
         $this->_build_attributes_combinations($attributes, false, 'None', $combinations, $selected_combination);
@@ -169,7 +170,7 @@
           $out.="  }\n";
           $out.="  document.cart_quantity.onsubmit=chksel;\n";
         }
-        $out.="//--></SCRIPT>\n";
+        $out.="//--></script>\n";
       }
       $out.="</td></tr>\n";
       

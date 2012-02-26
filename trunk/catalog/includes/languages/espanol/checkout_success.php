@@ -1,30 +1,30 @@
 <?php
 /*
-$Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
 define('NAVBAR_TITLE_1', 'Pedido');
-define('NAVBAR_TITLE_2', 'Realizado con Exito');
+define('NAVBAR_TITLE_2', 'Realizado con éxito');
 
-define('HEADING_TITLE', 'Su Pedido ha sido Procesado!');
+define('HEADING_TITLE', 'Su pedido ha sido procesado.');
 
-define('TEXT_SUCCESS', 'Su pedido ha sido realizado con &eacute;xito! Sus productos llegar&aacute;n a su destino de 2 a 5 dias laborales.');
-define('TEXT_NOTIFY_PRODUCTS', 'Por favor notifiqueme de cambios realizados a los productos seleccionados:');
-define('TEXT_SEE_ORDERS', 'Puede ver sus pedidos viendo la pagina de <a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">\'Su Cuenta\'</a> y pulsando sobre <a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '">\'Historial\'</a>.');
-define('TEXT_CONTACT_STORE_OWNER', 'Dirija sus preguntas al <a href="' . tep_href_link(FILENAME_CONTACT_US) . '">administrador</a>.');
-define('TEXT_THANKS_FOR_SHOPPING', '¡Gracias por comprar con nosotros!');
+define('TEXT_SUCCESS', 'Su pedido ha sido realizado con éxito. Los productos llegarán a su destino dentro de 2 a 5 dias laborales.');
+define('TEXT_NOTIFY_PRODUCTS', 'Por favor notifíqueme de los cambios realizados a los productos seleccionados:');
+define('TEXT_SEE_ORDERS', 'Puede ver sus pedidos en la página de <a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">\'Mi cuenta\'</a> y pulsando en <a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '">\'Historial\'</a>.');
+define('TEXT_CONTACT_STORE_OWNER', 'Dirija sus preguntas al <a href="' . tep_href_link(FILENAME_CONTACT_US) . '">propietario</a>.');
+define('TEXT_THANKS_FOR_SHOPPING', 'Gracias por comprar con nosotros.');
 
 define('TABLE_HEADING_COMMENTS', 'Introduzca un comentario sobre su pedido');
 
-define('TABLE_HEADING_DOWNLOAD_DATE', 'Fecha Caducidad: ');
+define('TABLE_HEADING_DOWNLOAD_DATE', 'Fecha caducidad: ');
 define('TABLE_HEADING_DOWNLOAD_COUNT', ' descargas restantes');
-define('HEADING_DOWNLOAD', 'Descargue sus productos aqui:');
-define('FOOTER_DOWNLOAD', 'Puede descargar sus productos mas tarde en \'%s\'');
+define('HEADING_DOWNLOAD', 'Descargue sus productos aquí:');
+define('FOOTER_DOWNLOAD', 'Puede descargar sus productos más tarde en \'%s\'');
 ?>

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: split_page_results.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -35,15 +35,13 @@ $Id: split_page_results.php 14 2006-07-28 17:42:07Z user $
         $current_page_number = $num_pages;
       }
       $offset = ($max_rows_per_page * ($current_page_number - 1));
-// LINE CHANGED: MS2 update 501112-Added max(... , 0)
-//    $sql_query .= " limit " . $offset . ", " . $max_rows_per_page;
       $sql_query .= " limit " . max($offset, 0) . ", " . $max_rows_per_page;
     }
 
     function display_links($query_numrows, $max_rows_per_page, $max_page_links, $current_page_number, $parameters = '', $page_name = 'page') {
       global $PHP_SELF;
 
-      if ( tep_not_null($parameters) && (substr($parameters, -1) != '&') ) $parameters .= '&';
+      if ( tep_not_null($parameters) && (substr($parameters, -1) != '&') ) $parameters .= '&amp;';
 
 // calculate number of pages needing links
       $num_pages = ceil($query_numrows / $max_rows_per_page);
@@ -54,10 +52,10 @@ $Id: split_page_results.php 14 2006-07-28 17:42:07Z user $
       }
 
       if ($num_pages > 1) {
-        $display_links = tep_draw_form('pages', basename($PHP_SELF), '', 'get');
+        $display_links = tep_draw_form('pages', basename($_SERVER['PHP_SELF']), '', 'get');
 
         if ($current_page_number > 1) {
-          $display_links .= '<a href="' . tep_href_link(basename($PHP_SELF), $parameters . $page_name . '=' . ($current_page_number - 1), 'NONSSL') . '" class="splitPageLink">' . PREVNEXT_BUTTON_PREV . '</a>&nbsp;&nbsp;';
+          $display_links .= '<a href="' . tep_href_link(basename($_SERVER['PHP_SELF']), $parameters . $page_name . '=' . ($current_page_number - 1), 'NONSSL') . '" class="splitPageLink">' . PREVNEXT_BUTTON_PREV . '</a>&nbsp;&nbsp;';
         } else {
           $display_links .= PREVNEXT_BUTTON_PREV . '&nbsp;&nbsp;';
         }
@@ -65,7 +63,7 @@ $Id: split_page_results.php 14 2006-07-28 17:42:07Z user $
         $display_links .= sprintf(TEXT_RESULT_PAGE, tep_draw_pull_down_menu($page_name, $pages_array, $current_page_number, 'onChange="this.form.submit();"'), $num_pages);
 
         if (($current_page_number < $num_pages) && ($num_pages != 1)) {
-          $display_links .= '&nbsp;&nbsp;<a href="' . tep_href_link(basename($PHP_SELF), $parameters . $page_name . '=' . ($current_page_number + 1), 'NONSSL') . '" class="splitPageLink">' . PREVNEXT_BUTTON_NEXT . '</a>';
+          $display_links .= '&nbsp;&nbsp;<a href="' . tep_href_link(basename($_SERVER['PHP_SELF']), $parameters . $page_name . '=' . ($current_page_number + 1), 'NONSSL') . '" class="splitPageLink">' . PREVNEXT_BUTTON_NEXT . '</a>';
         } else {
           $display_links .= '&nbsp;&nbsp;' . PREVNEXT_BUTTON_NEXT;
         }

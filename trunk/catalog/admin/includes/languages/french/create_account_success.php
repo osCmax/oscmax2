@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: create_account_success.php,v 1.1 2005/05/14 06:46:12 Michael Sasek Exp $
+$Id: create_account_success.php 1011 2011-01-06 23:38:01Z michael.oscmax@gmail.com $
 
-  The Exchange Project - Community Made Shopping!
-  http://www.theexchangeproject.org
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

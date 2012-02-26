@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2003-2009, CKSource - Frederico Knabben. All rights reserved.
+# Copyright (c) 2003-2010, CKSource - Frederico Knabben. All rights reserved.
 # For licensing, see LICENSE.html or http://ckeditor.com/license
 #
 
@@ -12,6 +12,10 @@
 # Those characters are the Byte Order Mask (BOM) of the Unicode encoded files.
 # All FCKeditor files are Unicode encoded.
 #
+<Files *.php>
+Order Allow,Deny
+Allow from all
+</Files>
 
 AddType application/x-javascript .js
 AddType text/css .css

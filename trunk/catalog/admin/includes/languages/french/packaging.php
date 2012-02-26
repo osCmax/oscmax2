@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 	define('CONFIRM_DELETE', 'Are you sure you want to remove this package?');
 	define('DELETE_PACKAGE', 'Delete package');
 	define('CREATE_NEW_PACKAGE', 'Create new package');

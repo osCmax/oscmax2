@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: article_reviews.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -37,8 +37,6 @@ define('TEXT_INFO_ARTICLES_AVERAGE_RATING', 'Average Rating:');
 define('TEXT_IMAGE_NONEXISTENT', 'IMAGE DOES NOT EXIST');
 
 define('TEXT_OF_5_STARS', '%s of 5 Stars!');
-define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excellent</b></font></small>');
-define('TEXT_BAD', '<small><font color="#ff0000"><b>Poor</b></font></small>');
 define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Delete Review');
 /* <Mav was here!> */
 define('TEXT_APPROVED', 'Approved') ;
@@ -48,4 +46,7 @@ define('TEXT_YES', 'Yes') ;
 define('TEXT_NO', 'No') ;
 /* </Mav was here!> */
 
+define('HEADING_NO_ARTICLE_REVIEWS', 'Article Reviews');
+define('TEXT_NO_ARTICLE_REVIEWS', 'There are currently no review of any of your articles.  <br><br>When a customer reviews one you will see it displayed to the left.  You will then need to a approve/reject the article before it is displayed in your store.');
+define('TEXT_CUSTOMER_RATING', 'Customer Rating:');
 ?>

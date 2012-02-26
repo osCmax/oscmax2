@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: articles.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -27,7 +27,7 @@ define('TEXT_SUBTOPICS', 'Subtopics:');
 define('TEXT_ARTICLES', 'Articles:');
 define('TEXT_ARTICLES_AVERAGE_RATING', 'Average Rating:');
 define('TEXT_ARTICLES_HEAD_TITLE_TAG', 'HTML Page Title:');
-define('TEXT_ARTICLES_HEAD_DESC_TAG', 'Meta Description:<br><small>(Article Abstract =<br>first %s charachters)</small>');
+define('TEXT_ARTICLES_HEAD_DESC_TAG', 'Meta Description:<br><small>(Article Abstract =<br>first %s characters)</small>');
 define('TEXT_ARTICLES_HEAD_KEYWORDS_TAG', 'Meta Keywords:');
 define('TEXT_DATE_ADDED', 'Date Added:');
 define('TEXT_DATE_AVAILABLE', 'Date Expected:');
@@ -91,4 +91,8 @@ define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Error: Catalog images dir
 define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Error: Catalog images directory does not exist: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CANNOT_MOVE_TOPIC_TO_PARENT', 'Error: Topic cannot be moved into child topic.');
 
+define('TEXT_ARTICLES_SHOW_ON_INDEX', 'Show this article on your home page?');
+define('DO_SHOW_ON_INDEX', 'Yes');
+define('DO_NOT_SHOW_ON_INDEX', 'No');
+define('IMAGE_SHOW_ON_INDEX', 'This article is shown on your home page.');
 ?>

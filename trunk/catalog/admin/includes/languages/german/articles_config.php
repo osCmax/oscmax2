@@ -1,23 +1,23 @@
 <?php
 /*
-$Id: articles_config.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Articles Configuration');
+define('HEADING_TITLE','Artikel Einstellungen');
 
-define('TABLE_HEADING_CONFIGURATION_TITLE', 'Title');
-define('TABLE_HEADING_CONFIGURATION_VALUE', 'Value');
-define('TABLE_HEADING_ACTION', 'Action');
+define('TABLE_HEADING_CONFIGURATION_TITLE','Titel');
+define('TABLE_HEADING_CONFIGURATION_VALUE', 'Wert');
+define('TABLE_HEADING_ACTION','Aktion');
 
-define('TEXT_INFO_EDIT_INTRO', 'Please make any necessary changes');
-define('TEXT_INFO_DATE_ADDED', 'Date Added:');
-define('TEXT_INFO_LAST_MODIFIED', 'Last Modified:');
+define('TEXT_INFO_EDIT_INTRO','Führen Sie die gewünschten Änderungen durch.');
+define('TEXT_INFO_DATE_ADDED','Hinzugefügt am:');
+define('TEXT_INFO_LAST_MODIFIED','Zuletzt geändert am:');
 
 ?>

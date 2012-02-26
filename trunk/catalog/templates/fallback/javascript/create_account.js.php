@@ -1,3 +1,81 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
+<link rel="stylesheet" type="text/css" href="ext/jQuery/themes/smoothness/ui.all.css">
+<script type="text/javascript">    
+document.write("\<script src='//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' type='text/javascript'>\<\/script>");
+document.write("\<script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js' type='text/javascript'>\<\/script>");
+</script>
+
+<script type="text/javascript">
+function switchMAT() { 
+	if($("#MAT").attr("checked")) {
+		$("#MATtd").attr("class", "messageStackSuccess");
+		$('#disableMAT').hide();
+    	$('#enableMAT').show();
+	} else {
+		$("#MATtd").attr("class", "messageStackAlert");
+		$('#disableMAT').show();
+    	$('#enableMAT').hide();
+	}
+}
+
+function warnMAT() {
+		$("#MATtd").attr("class", "messageStackWarning");
+}
+
+</script>
+
+
+<?php require('includes/javascript/password_strength.js'); ?>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#password_st").password_strength();
+	$('#enableMAT').hide();
+	
+	if($("#MAT").attr("checked")) {
+		$("#MATtd").attr("class", "messageStackSuccess");
+		$('#disableMAT').hide();
+    	$('#enableMAT').show();
+	}
+	
+    $('#conditions').each(function() {
+		var $link = $(this);
+		var $dialog = $('<div><\/div>')
+			.load($link.attr('href'))
+			.dialog({
+				autoOpen: false,
+				title: $link.attr('title'),
+				width: 700,
+				height: 400,
+				modal: true,
+				buttons: { "Ok": function() { 
+				  $(this).dialog("close"); 
+				  $("#MAT").attr("checked", true); 
+				  $("#MATtd").attr("class", "messageStackSuccess"); 
+				  $('#disableMAT').hide();	
+				  $('#enableMAT').show();
+				} }
+			});
+
+		$link.click(function() {
+			$dialog.dialog('open');
+            
+			return false;
+		});
+	});
+});
+</script>
 <script language="javascript" type="text/javascript"><!--
 var form = "";
 var submitted = false;
@@ -89,25 +167,86 @@ function check_form(form_name) {
 
   error = false;
   form = form_name;
-  error_message = "<?php echo JS_ERROR; ?>";
+  error_message = "<?php echo JS_ERROR; ?>\r\n\n";
 
-<?php if (ACCOUNT_GENDER == 'true') echo '  check_radio("gender", "' . ENTRY_GENDER_ERROR . '");' . "\n"; ?>
+<?php 
+  if (ACCOUNT_GENDER == 'true') {
+    if (tep_not_null(ENTRY_GENDER_TEXT)) { ?>
+	  check_radio("gender", "<?php echo ENTRY_GENDER_ERROR; ?>");
+	<?php
+	}
+  }
 
-  check_input("firstname", <?php echo ENTRY_FIRST_NAME_MIN_LENGTH; ?>, "<?php echo ENTRY_FIRST_NAME_ERROR; ?>");
-  check_input("lastname", <?php echo ENTRY_LAST_NAME_MIN_LENGTH; ?>, "<?php echo ENTRY_LAST_NAME_ERROR; ?>");
+  if (tep_not_null(ENTRY_FIRST_NAME_TEXT)) { ?>
+    check_input("firstname", <?php echo ENTRY_FIRST_NAME_MIN_LENGTH; ?>, "<?php echo ENTRY_FIRST_NAME_ERROR; ?>");
+  <?php
+  }
+  
+  if (tep_not_null(ENTRY_LAST_NAME_TEXT)) { ?>
+    check_input("lastname", <?php echo ENTRY_LAST_NAME_MIN_LENGTH; ?>, "<?php echo ENTRY_LAST_NAME_ERROR; ?>");
+  <?php
+  }
+  
+  if (ACCOUNT_DOB == 'true') {
+    if (tep_not_null(ENTRY_DATE_OF_BIRTH_TEXT)) { ?>
+	  check_input("dob", <?php echo ENTRY_DOB_MIN_LENGTH; ?>, "<?php echo ENTRY_DATE_OF_BIRTH_ERROR; ?>");
+	<?php
+	}
+  }
 
-<?php if (ACCOUNT_DOB == 'true') echo '  check_input("dob", ' . ENTRY_DOB_MIN_LENGTH . ', "' . ENTRY_DATE_OF_BIRTH_ERROR . '");' . "\n"; ?>
+  if (tep_not_null(ENTRY_EMAIL_ADDRESS_TEXT)) { ?>
+    check_input("email_address", <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_EMAIL_ADDRESS_ERROR; ?>");
+  <?php
+  }
+   
+  if (ACCOUNT_COMPANY == 'true') {
+    if (tep_not_null(ENTRY_COMPANY_TEXT)) { ?>
+	  check_input("company", <?php echo ENTRY_COMPANY_MIN_LENGTH; ?>, "<?php echo ENTRY_COMPANY_ERROR; ?>");
+	<?php
+	}
+	if (tep_not_null(ENTRY_COMPANY_TAX_ID_TEXT)) { ?>
+	  check_input("company_tax_id", <?php echo ENTRY_COMPANY_MIN_LENGTH; ?>, "<?php echo ENTRY_COMPANY_TAX_ID_ERROR; ?>");
+	<?php
+	}	
+  }
+  
+  if (tep_not_null(ENTRY_STREET_ADDRESS_TEXT)) { ?>
+    check_input("street_address", <?php echo ENTRY_STREET_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_STREET_ADDRESS_ERROR; ?>");
+  <?php
+  }
 
-  check_input("email_address", <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_EMAIL_ADDRESS_ERROR; ?>");
-  check_input("street_address", <?php echo ENTRY_STREET_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_STREET_ADDRESS_ERROR; ?>");
-  check_input("postcode", <?php echo ENTRY_POSTCODE_MIN_LENGTH; ?>, "<?php echo ENTRY_POST_CODE_ERROR; ?>");
-  check_input("city", <?php echo ENTRY_CITY_MIN_LENGTH; ?>, "<?php echo ENTRY_CITY_ERROR; ?>");
+  if (tep_not_null(ENTRY_POST_CODE_TEXT)) { ?>
+    check_input("postcode", <?php echo ENTRY_POSTCODE_MIN_LENGTH; ?>, "<?php echo ENTRY_POST_CODE_ERROR; ?>");
+  <?php
+  }
 
-<?php if (ACCOUNT_STATE == 'true') echo '  check_input("state", ' . ENTRY_STATE_MIN_LENGTH . ', "' . ENTRY_STATE_ERROR . '");' . "\n"; ?>
+  if (tep_not_null(ENTRY_CITY_TEXT)) { ?>
+    check_input("city", <?php echo ENTRY_CITY_MIN_LENGTH; ?>, "<?php echo ENTRY_CITY_ERROR; ?>");
+  <?php
+  }
+  
+  if (ACCOUNT_STATE == 'true') {
+    if (tep_not_null(ENTRY_STATE_TEXT)) { ?>
+	  check_input("state", <?php echo ENTRY_STATE_MIN_LENGTH; ?>, "<?php echo ENTRY_STATE_ERROR; ?>");
+	<?php
+	}
+  }
+  
+  if (tep_not_null(ENTRY_COUNTRY_TEXT)) { ?>
+    check_select("country", "", "<?php echo ENTRY_COUNTRY_ERROR; ?>");
+  <?php
+  }
 
-  check_select("country", "", "<?php echo ENTRY_COUNTRY_ERROR; ?>");
-
-  check_input("telephone", <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>, "<?php echo ENTRY_TELEPHONE_NUMBER_ERROR; ?>");
+  if (tep_not_null(ENTRY_TELEPHONE_NUMBER_TEXT)) { ?>
+    check_input("telephone", <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>, "<?php echo ENTRY_TELEPHONE_NUMBER_ERROR; ?>");
+  <?php
+  }
+  
+  if (tep_not_null(ENTRY_FAX_NUMBER_TEXT)) { ?>
+    check_input("fax", <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>, "<?php echo ENTRY_FAX_NUMBER_ERROR; ?>");
+  <?php
+  }
+?>
 
   check_password("password", "confirmation", <?php echo ENTRY_PASSWORD_MIN_LENGTH; ?>, "<?php echo ENTRY_PASSWORD_ERROR; ?>", "<?php echo ENTRY_PASSWORD_ERROR_NOT_MATCHING; ?>");
   check_password_new("password_current", "password_new", "password_confirmation", <?php echo ENTRY_PASSWORD_MIN_LENGTH; ?>, "<?php echo ENTRY_PASSWORD_ERROR; ?>", "<?php echo ENTRY_PASSWORD_NEW_ERROR; ?>", "<?php echo ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING; ?>");
@@ -120,8 +259,16 @@ function check_form(form_name) {
     return true;
   }
 }
-//--></script>
 
+<?php /* BOF: Country-State Selector */ ?>
+function refresh_form(form_name) {
+   form_name.action.value = 'refresh';
+   form_name.state.value = '';
+   form_name.submit();
+   return true;
+   }
+<?php /* EOF: Country-State Selector */ ?>
+//--></script>
 <script language="javascript" type="text/javascript"><!--
 function getObject(name) { 
    var ns4 = (document.layers) ? true : false; 

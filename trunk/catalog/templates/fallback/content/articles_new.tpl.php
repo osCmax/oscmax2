@@ -1,13 +1,28 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <table border="0" width="100%" cellspacing="3" cellpadding="3">
   <tr> 
     <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr> 
-          <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+          <td>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr> 
                 <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
               </tr>
-            </table></td>
+            </table>
+          </td>
         </tr>
         <tr> 
           <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -20,12 +35,14 @@
   //$articles_new_split = new splitPageResults($listing_sql, MAX_NEW_ARTICLES_PER_PAGE);
 
 ?>
-
-<?php include(DIR_WS_MODULES . FILENAME_ARTICLE_LISTING); ?></td>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-      </table></td>
+        <tr>
+          <td><?php include(DIR_WS_MODULES . FILENAME_ARTICLE_LISTING); ?></td>
+        </tr>
+        <tr>
+          <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+        </tr>
+      </table>
+    </td>
     <!-- body_text_eof //-->
   </tr>
 </table>

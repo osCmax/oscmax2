@@ -1,24 +1,20 @@
 <?php
 /*
-  $Id: affiliate_password_forgotten.php,v 1.4 2003/02/14 00:01:46 harley_vb Exp $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Login');
-define('NAVBAR_TITLE_2', 'Password forgotten?');
-define('HEADING_TITLE', 'What was my password?');
-define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><b>ATTENTION:</b></font> The e-mail address you\'ve entered is not registered. Please try again.');
-define('EMAIL_PASSWORD_REMINDER_SUBJECT', STORE_NAME . ' - New Affiliate Password');
-define('EMAIL_PASSWORD_REMINDER_BODY', 'We got a new password request from ' . $REMOTE_ADDR . ' for your affiliate account.' . "\n\n" . 'Your new password for your affiliate account at \'' . STORE_NAME . '\' is:' . "\n\n" . '   %s' . "\n\n");
-define('TEXT_PASSWORD_SENT', 'A new password has been sent to your registered e-mail account.');
+define('NAVBAR_TITLE_1', 'Inicio de sesión');
+define('NAVBAR_TITLE_2', '¿Ha olvidado la contraseña?');
+define('HEADING_TITLE', '¿Cuál era mi contraseña?');
+define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><b>ATENCIÓN:</b></font> La dirección e-mail que ha introducido no está en nuestros archivos. Por favor inténtelo de nuevo.');
+define('EMAIL_PASSWORD_REMINDER_SUBJECT', STORE_NAME . ' - Nueva contraseña de afiliado');
+define('EMAIL_PASSWORD_REMINDER_BODY', 'Tnemos una petición de nueva contraseña desde ' . $REMOTE_ADDR . ' para su cuenta de afiliado.' . "\n\n" . 'Su nueva contraseña para su cuenta de afiliado en \'' . STORE_NAME . '\' es:' . "\n\n" . '   %s' . "\n\n");
+define('TEXT_PASSWORD_SENT', 'Se ha enviado una nueva contraseña a su dirección e-mail que consta en nuestro archivos.');
 ?>

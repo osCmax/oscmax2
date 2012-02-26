@@ -1,32 +1,30 @@
 <?php
 /*
-      QT Pro Version 4.0
-  
-      stock.php language file
-  
-      Contribution extension to:
-        osCMax Power E-Commerce
-        http://oscdox.com
-     
-      Copyright 2006 osCMax2004 Ralph Day
-      Released under the GNU General Public License
-  
-      Based on prior works released under the GNU General Public License:
-        QT Pro prior versions
-          Ralph Day, October 2004
-          Tom Wojcik aka TomThumb 2004/07/03 based on work by Michael Coffman aka coffman
-          FREEZEHELL - 08/11/2003 freezehell@hotmail.com Copyright 2006 osCMax2003 IBWO
-          Joseph Shain, January 2003
-        osCommerce MS2
-          Copyright 2006 osCMax
-          
-      Modifications made:
-        11/2004 - none in this version
-  
-*******************************************************************************************
-  
-  
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
-define('PRODUCTS_STOCK',"Products stock");
-define('TABLE_TITLE_ATTRIBUTES',"Attributes");
+
+define('PRODUCTS_STOCK', 'Produktlagerstand');
+define('TABLE_TITLE_ATTRIBUTES', 'Attribute');
+define('TABLE_HEADING_QTY', 'Menge');
+
+define('TABLE_HEADING_QTPRO', 'QTPro Doctor');
+define('TABLE_HEADING_LINKS', 'Links');
+
+define('TEXT_EDIT_PRODUCT', 'Dieses Produkt bearbeiten');
+define('TEXT_GOTO_LOW_STOCK', 'Bericht über niedrige Lagerstände anzeigen');
+define('TEXT_GOTO_PRODUCT', 'Zu diesem Produkt gehen in ');
+define('TEXT_LOST_PRODUCT', '<span style="font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #FF1111; font-weight: normal; text-decoration: none;">Warnung! Dieses Produkt scheint in keiner Kategorie zu existieren. Ihre Kunden werden es nicht finden können.</span>');
+
+define('HEADING_DEFAULT_STOCK', 'Produktlagerstand');
+define('TEXT_DEFAULT_STOCK','Bitte wählen Sie das Produktattribut aus den Dropdown Menüs und klicken Sie auf <b>Hinzufügen</b> um diese Kompination zu erstellen.<br><br>QTPro wird automatisch den Gesamtlagerstand für dieses Produkt auf den kombinierten Lagerstand der Attribute setzen.<br><br>Überprüfen Sie <b>QTPro Doctor</b> für Ihre aktuellen Lagerstandseingstellungen. Wenn Sie eine Warnung erhalten, lesen Sie bitte die nachstehenden Lösungsvorschläge. Wenn eine automatische Lösung möglich ist, wird diese am Ende der Box angezeigt.');
+
+define('TEXT_UPDATE', 'Aktualisieren');
+define('TEXT_ADD', 'Hinzufügen');
 ?>

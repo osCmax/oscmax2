@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: articles.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -225,11 +225,11 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
 //! Cache the authors box
 // Cache the authors box
   function tep_cache_authors_box($auto_expire = false, $refresh = false) {
-    global $HTTP_GET_VARS, $language;
+    global $_GET, $language;
 
     $authors_id = '';
-    if (isset($HTTP_GET_VARS['authors_id']) && tep_not_null($HTTP_GET_VARS['authors_id'])) {
-      $authors_id = $HTTP_GET_VARS['authors_id'];
+    if (isset($_GET['authors_id']) && tep_not_null($_GET['authors_id'])) {
+      $authors_id = $_GET['authors_id'];
     }
 
     if (($refresh == true) || !read_cache($cache_output, 'authors_box-' . $language . '.cache' . $authors_id, $auto_expire)) {

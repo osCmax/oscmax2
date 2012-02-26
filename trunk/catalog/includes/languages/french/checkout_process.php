@@ -1,14 +1,13 @@
 <?php
 /*
-  $Id: checkout_process.php,v 1.1.1.1.2.1 2005/06/12 00:03:46 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  Translated by Gunt - Contact : webmaster@webdesigner.com.fr
 */
 
 define('EMAIL_TEXT_SUBJECT', 'Traitement de la commande');
@@ -23,7 +22,7 @@ define('EMAIL_TEXT_TOTAL', 'Total:    ');
 define('EMAIL_TEXT_DELIVERY_ADDRESS', 'Adresse de livraison');
 define('EMAIL_TEXT_BILLING_ADDRESS', 'Adresse de facturation');
 define('EMAIL_TEXT_PAYMENT_METHOD', 'M&eacute;thode de paiement');
-
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
 define('TEXT_EMAIL_VIA', 'via');
+define('EMAIL_WARNING','ATTENTION: Cet e-mail nous a été donné par quelqu\'un qui a visité notre boutique en ligne. Si cela n\'a pas été fait par vous s\'il vous plaît écrivez-nous à ' . STORE_OWNER_EMAIL_ADDRESS . 'Merci de magasiner avec nous et ont une belle journée.');
 ?>

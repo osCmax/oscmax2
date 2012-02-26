@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: specials.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -35,4 +35,11 @@ define('TEXT_INFO_STATUS_CHANGE', 'Status Change:');
 
 define('TEXT_INFO_HEADING_DELETE_SPECIALS', 'Delete Special');
 define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to delete the special products price?');
+
+define('HEADING_NO_SPECIALS', '<b>No Special Offers Set</b>');
+define('TEXT_NO_SPECIALS', 'Please click <b>New Product</b> to create a new Special Offer for your store.');
+
+define('TEXT_SPECIALS_HELP', 'Specials Help');
+define('TEXT_NEVER', 'Never');
+define('TEXT_CURRENTLY_ACTIVE', 'Currently Active');
 ?>

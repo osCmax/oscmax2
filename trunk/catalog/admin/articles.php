@@ -1,25 +1,25 @@
 <?php
 /*
-$Id: articles.php 17 2006-08-04 18:04:08Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
 
-  $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   if (tep_not_null($action)) {
     switch ($action) {
       case 'setflag':
-        if ( ($HTTP_GET_VARS['flag'] == '0') || ($HTTP_GET_VARS['flag'] == '1') ) {
-          if (isset($HTTP_GET_VARS['aID'])) {
-            tep_set_article_status($HTTP_GET_VARS['aID'], $HTTP_GET_VARS['flag']);
+        if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') ) {
+          if (isset($_GET['aID'])) {
+            tep_set_article_status($_GET['aID'], $_GET['flag']);
           }
 
           if (USE_CACHE == 'true') {
@@ -27,22 +27,22 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
           }
         }
 
-        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $HTTP_GET_VARS['tPath'] . '&aID=' . $HTTP_GET_VARS['aID']));
+        tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $_GET['tPath'] . '&aID=' . $_GET['aID']));
         break;
       case 'new_topic':
       case 'edit_topic':
-        $HTTP_GET_VARS['action']=$HTTP_GET_VARS['action'] . '_ACD';
+        $_GET['action']=$_GET['action'] . '_ACD';
         break;
       case 'insert_topic':
       case 'update_topic':
-        if ( ($HTTP_POST_VARS['edit_x']) || ($HTTP_POST_VARS['edit_y']) ) {
-          $HTTP_GET_VARS['action'] = 'edit_topic_ACD';
+        if ( ($_POST['edit_x']) || ($_POST['edit_y']) ) {
+          $_GET['action'] = 'edit_topic_ACD';
         } else {
-        if (isset($HTTP_POST_VARS['topics_id'])) $topics_id = tep_db_prepare_input($HTTP_POST_VARS['topics_id']);
+        if (isset($_POST['topics_id'])) $topics_id = tep_db_prepare_input($_POST['topics_id']);
           if ($topics_id == '') {
-            $topics_id = tep_db_prepare_input($HTTP_GET_VARS['tID']);
+            $topics_id = tep_db_prepare_input($_GET['tID']);
             }
-        $sort_order = tep_db_prepare_input($HTTP_POST_VARS['sort_order']);
+        $sort_order = tep_db_prepare_input($_POST['sort_order']);
 
         $sql_data_array = array('sort_order' => $sort_order);
 
@@ -68,9 +68,9 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
 
           $language_id = $languages[$i]['id'];
 
-          $sql_data_array = array('topics_name' => tep_db_prepare_input($HTTP_POST_VARS['topics_name'][$language_id]),
-                                  'topics_heading_title' => tep_db_prepare_input($HTTP_POST_VARS['topics_heading_title'][$language_id]),
-                                  'topics_description' => tep_db_prepare_input($HTTP_POST_VARS['topics_description'][$language_id]));
+          $sql_data_array = array('topics_name' => tep_db_prepare_input($_POST['topics_name'][$language_id]),
+                                  'topics_heading_title' => tep_db_prepare_input($_POST['topics_heading_title'][$language_id]),
+                                  'topics_description' => tep_db_prepare_input($_POST['topics_description'][$language_id]));
 
           if ($action == 'insert_topic') {
             $insert_sql_data = array('topics_id' => $topics_id,
@@ -92,8 +92,8 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
         break;
         }
       case 'delete_topic_confirm':
-        if (isset($HTTP_POST_VARS['topics_id'])) {
-          $topics_id = tep_db_prepare_input($HTTP_POST_VARS['topics_id']);
+        if (isset($_POST['topics_id'])) {
+          $topics_id = tep_db_prepare_input($_POST['topics_id']);
 
           $topics = tep_get_topic_tree($topics_id, '', '0', '', true);
           $articles = array();
@@ -142,9 +142,9 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
         tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath));
         break;
       case 'delete_article_confirm':
-        if (isset($HTTP_POST_VARS['articles_id']) && isset($HTTP_POST_VARS['article_topics']) && is_array($HTTP_POST_VARS['article_topics'])) {
-          $article_id = tep_db_prepare_input($HTTP_POST_VARS['articles_id']);
-          $article_topics = $HTTP_POST_VARS['article_topics'];
+        if (isset($_POST['articles_id']) && isset($_POST['article_topics']) && is_array($_POST['article_topics'])) {
+          $article_id = tep_db_prepare_input($_POST['articles_id']);
+          $article_topics = $_POST['article_topics'];
 
           for ($i=0, $n=sizeof($article_topics); $i<$n; $i++) {
             tep_db_query("delete from " . TABLE_ARTICLES_TO_TOPICS . " where articles_id = '" . (int)$article_id . "' and topics_id = '" . (int)$article_topics[$i] . "'");
@@ -165,9 +165,9 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
         tep_redirect(tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath));
         break;
       case 'move_topic_confirm':
-        if (isset($HTTP_POST_VARS['topics_id']) && ($HTTP_POST_VARS['topics_id'] != $HTTP_POST_VARS['move_to_topic_id'])) {
-          $topics_id = tep_db_prepare_input($HTTP_POST_VARS['topics_id']);
-          $new_parent_id = tep_db_prepare_input($HTTP_POST_VARS['move_to_topic_id']);
+        if (isset($_POST['topics_id']) && ($_POST['topics_id'] != $_POST['move_to_topic_id'])) {
+          $topics_id = tep_db_prepare_input($_POST['topics_id']);
+          $new_parent_id = tep_db_prepare_input($_POST['move_to_topic_id']);
 
           $path = explode('_', tep_get_generated_topic_path_ids($new_parent_id));
 
@@ -188,8 +188,8 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
 
         break;
       case 'move_article_confirm':
-        $articles_id = tep_db_prepare_input($HTTP_POST_VARS['articles_id']);
-        $new_parent_id = tep_db_prepare_input($HTTP_POST_VARS['move_to_topic_id']);
+        $articles_id = tep_db_prepare_input($_POST['articles_id']);
+        $new_parent_id = tep_db_prepare_input($_POST['move_to_topic_id']);
 
         $duplicate_check_query = tep_db_query("select count(*) as total from " . TABLE_ARTICLES_TO_TOPICS . " where articles_id = '" . (int)$articles_id . "' and topics_id = '" . (int)$new_parent_id . "'");
         $duplicate_check = tep_db_fetch_array($duplicate_check_query);
@@ -203,25 +203,26 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
         break;
       case 'insert_article':
       case 'update_article':
-        if (isset($HTTP_POST_VARS['edit_x']) || isset($HTTP_POST_VARS['edit_y'])) {
+        if (isset($_POST['edit_x']) || isset($_POST['edit_y'])) {
           $action = 'new_article';
         } else {
-          if (isset($HTTP_GET_VARS['aID'])) $articles_id = tep_db_prepare_input($HTTP_GET_VARS['aID']);
-          $articles_date_available = tep_db_prepare_input($HTTP_POST_VARS['articles_date_available']);
+          if (isset($_GET['aID'])) $articles_id = tep_db_prepare_input($_GET['aID']);
+          $articles_date_available = tep_db_prepare_input($_POST['articles_date_available']);
 
           $articles_date_available = (date('Y-m-d') < $articles_date_available) ? $articles_date_available : 'null';
 
           $sql_data_array = array('articles_date_available' => $articles_date_available,
-                                  'articles_status' => tep_db_prepare_input($HTTP_POST_VARS['articles_status']),
-                                  'authors_id' => tep_db_prepare_input($HTTP_POST_VARS['authors_id']));
+                                  'articles_status' => tep_db_prepare_input($_POST['articles_status']),
+								  'articles_index_status' => tep_db_prepare_input($_POST['articles_index_status']),
+                                  'authors_id' => tep_db_prepare_input($_POST['authors_id']));
 
           if ($action == 'insert_article') {
             // If expected article then articles_date _added becomes articles_date_available
-            if (isset($HTTP_POST_VARS['articles_date_available']) && tep_not_null($HTTP_POST_VARS['articles_date_available'])) {
-              $insert_sql_data = array('articles_date_added' => tep_db_prepare_input($HTTP_POST_VARS['articles_date_available']));
-            } else {
+            //if (isset($_POST['articles_date_available']) && tep_not_null($_POST['articles_date_available'])) {
+            //  $insert_sql_data = array('articles_date_added' => tep_db_prepare_input($_POST['articles_date_available']));
+            //} else {
               $insert_sql_data = array('articles_date_added' => 'now()');
-            }
+            //}
             $sql_data_array = array_merge($sql_data_array, $insert_sql_data);
 
             tep_db_perform(TABLE_ARTICLES, $sql_data_array);
@@ -231,9 +232,9 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
           } elseif ($action == 'update_article') {
             $update_sql_data = array('articles_last_modified' => 'now()');
             // If expected article then articles_date _added becomes articles_date_available
-            if (isset($HTTP_POST_VARS['articles_date_available']) && tep_not_null($HTTP_POST_VARS['articles_date_available'])) {
-              $update_sql_data = array('articles_date_added' => tep_db_prepare_input($HTTP_POST_VARS['articles_date_available']));
-            }
+            //if (isset($_POST['articles_date_available']) && tep_not_null($_POST['articles_date_available'])) {
+            //  $update_sql_data = array('articles_date_added' => tep_db_prepare_input($_POST['articles_date_available']));
+            //}
 
             $sql_data_array = array_merge($sql_data_array, $update_sql_data);
 
@@ -244,12 +245,12 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
           for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
             $language_id = $languages[$i]['id'];
 
-            $sql_data_array = array('articles_name' => tep_db_prepare_input($HTTP_POST_VARS['articles_name'][$language_id]),
-                                    'articles_description' => tep_db_prepare_input($HTTP_POST_VARS['articles_description'][$language_id]),
-                                    'articles_url' => tep_db_prepare_input($HTTP_POST_VARS['articles_url'][$language_id]),
-                                    'articles_head_title_tag' => tep_db_prepare_input($HTTP_POST_VARS['articles_head_title_tag'][$language_id]),
-                                    'articles_head_desc_tag' => tep_db_prepare_input($HTTP_POST_VARS['articles_head_desc_tag'][$language_id]),
-                                    'articles_head_keywords_tag' => tep_db_prepare_input($HTTP_POST_VARS['articles_head_keywords_tag'][$language_id]));
+            $sql_data_array = array('articles_name' => tep_db_prepare_input($_POST['articles_name'][$language_id]),
+                                    'articles_description' => tep_db_prepare_input($_POST['articles_description'][$language_id]),
+                                    'articles_url' => tep_db_prepare_input($_POST['articles_url'][$language_id]),
+                                    'articles_head_title_tag' => tep_db_prepare_input($_POST['articles_head_title_tag'][$language_id]),
+                                    'articles_head_desc_tag' => tep_db_prepare_input($_POST['articles_head_desc_tag'][$language_id]),
+                                    'articles_head_keywords_tag' => tep_db_prepare_input($_POST['articles_head_keywords_tag'][$language_id]));
 
             if ($action == 'insert_article') {
               $insert_sql_data = array('articles_id' => $articles_id,
@@ -271,11 +272,11 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
         }
         break;
       case 'copy_to_confirm':
-        if (isset($HTTP_POST_VARS['articles_id']) && isset($HTTP_POST_VARS['topics_id'])) {
-          $articles_id = tep_db_prepare_input($HTTP_POST_VARS['articles_id']);
-          $topics_id = tep_db_prepare_input($HTTP_POST_VARS['topics_id']);
+        if (isset($_POST['articles_id']) && isset($_POST['topics_id'])) {
+          $articles_id = tep_db_prepare_input($_POST['articles_id']);
+          $topics_id = tep_db_prepare_input($_POST['topics_id']);
 
-          if ($HTTP_POST_VARS['copy_as'] == 'link') {
+          if ($_POST['copy_as'] == 'link') {
             if ($topics_id != $current_topic_id) {
               $check_query = tep_db_query("select count(*) as total from " . TABLE_ARTICLES_TO_TOPICS . " where articles_id = '" . (int)$articles_id . "' and topics_id = '" . (int)$topics_id . "'");
               $check = tep_db_fetch_array($check_query);
@@ -285,11 +286,11 @@ $Id: articles.php 17 2006-08-04 18:04:08Z user $
             } else {
               $messageStack->add_session(ERROR_CANNOT_LINK_TO_SAME_TOPIC, 'error');
             }
-          } elseif ($HTTP_POST_VARS['copy_as'] == 'duplicate') {
+          } elseif ($_POST['copy_as'] == 'duplicate') {
             $article_query = tep_db_query("select articles_date_available, authors_id from " . TABLE_ARTICLES . " where articles_id = '" . (int)$articles_id . "'");
             $article = tep_db_fetch_array($article_query);
 
-            tep_db_query("insert into " . TABLE_ARTICLES . " (articles_date_added, articles_date_available, articles_status, authors_id) values (now(), '" . tep_db_input($article['articles_date_available']) . "', '0', '" . (int)$article['authors_id'] . "')");
+            tep_db_query("insert into " . TABLE_ARTICLES . " (articles_date_added, articles_date_available, articles_status, articles_index_status, authors_id) values (now(), '" . tep_db_input($article['articles_date_available']) . "', '0', '0', '" . (int)$article['authors_id'] . "')");
             $dup_articles_id = tep_db_insert_id();
 
             $description_query = tep_db_query("select language_id, articles_name, articles_description, articles_url, articles_head_title_tag, articles_head_desc_tag, articles_head_keywords_tag from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$articles_id . "'");
@@ -335,13 +336,13 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 // EOF: WebMakers.com Changed: Header Tag Controller v1.0
 ?>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <!-- CKeditor -->
 <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
 <!-- CKeditor End -->
-<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
-<div id="spiffycalendar" class="text"></div>
+<body onLoad="SetFocus();">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -349,35 +350,39 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
 <!-- left_navigation //-->
 <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
 <!-- left_navigation_eof //-->
-    </table></td>
+      </table>
+    </td>
 <!-- body_text //-->
-     <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <td width="100%" valign="top">
+      
  <?php
    //----- new_topic / edit_topic  -----
-  if ($HTTP_GET_VARS['action'] == 'new_topic_ACD' || $HTTP_GET_VARS['action'] == 'edit_topic_ACD') {
-    if ( ($HTTP_GET_VARS['tID']) && (!$HTTP_POST_VARS) ) {
-      $topics_query = tep_db_query("select t.topics_id, td.topics_name, td.topics_heading_title, td.topics_description, t.parent_id, t.sort_order, t.date_added, t.last_modified from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = '" . $HTTP_GET_VARS['tID'] . "' and t.topics_id = td.topics_id and td.language_id = '" . $languages_id . "' order by t.sort_order, td.topics_name");
+  if ($_GET['action'] == 'new_topic_ACD' || $_GET['action'] == 'edit_topic_ACD') {
+    if ( ($_GET['tID']) && (!$_POST) ) {
+      $topics_query = tep_db_query("select t.topics_id, td.topics_name, td.topics_heading_title, td.topics_description, t.parent_id, t.sort_order, t.date_added, t.last_modified from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = '" . $_GET['tID'] . "' and t.topics_id = td.topics_id and td.language_id = '" . $languages_id . "' order by t.sort_order, td.topics_name");
       $topic = tep_db_fetch_array($topics_query);
 
       $tInfo = new objectInfo($topic);
-    } elseif ($HTTP_POST_VARS) {
-      $tInfo = new objectInfo($HTTP_POST_VARS);
-      $topics_name = $HTTP_POST_VARS['topics_name'];
-      $topics_heading_title = $HTTP_POST_VARS['topics_heading_title'];
-      $topics_description = $HTTP_POST_VARS['topics_description'];
-      $topics_url = $HTTP_POST_VARS['topics_url'];
+    } elseif ($_POST) {
+      $tInfo = new objectInfo($_POST);
+      $topics_name = $_POST['topics_name'];
+      $topics_heading_title = $_POST['topics_heading_title'];
+      $topics_description = $_POST['topics_description'];
+      $topics_url = $_POST['topics_url'];
     } else {
       $tInfo = new objectInfo(array());
     }
 
     $languages = tep_get_languages();
 
-    $text_new_or_edit = ($HTTP_GET_VARS['action']=='new_topic_ACD') ? TEXT_INFO_HEADING_NEW_TOPIC : TEXT_INFO_HEADING_EDIT_TOPIC;
+    $text_new_or_edit = ($_GET['action']=='new_topic_ACD') ? TEXT_INFO_HEADING_NEW_TOPIC : TEXT_INFO_HEADING_EDIT_TOPIC;
 ?>
+    <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -389,97 +394,116 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
-      <tr><?php echo tep_draw_form('new_topic', FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $HTTP_GET_VARS['tID'] . '&action=new_topic_preview', 'post', 'enctype="multipart/form-data"'); ?>
-        <td><table border="0" cellspacing="0" cellpadding="2">
-<?php
-    for ($i=0; $i<sizeof($languages); $i++) {
-?>
-          <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_EDIT_TOPICS_NAME; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('topics_name[' . $languages[$i]['id'] . ']', (($topics_name[$languages[$i]['id']]) ? stripslashes($topics_name[$languages[$i]['id']]) : tep_get_topic_name($tInfo->topics_id, $languages[$i]['id']))); ?></td>
-          </tr>
-<?php
-    }
-?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-<?php
-    for ($i=0; $i<sizeof($languages); $i++) {
-?>
-          <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_EDIT_TOPICS_HEADING_TITLE; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('topics_heading_title[' . $languages[$i]['id'] . ']', (($topics_name[$languages[$i]['id']]) ? stripslashes($topics_name[$languages[$i]['id']]) : tep_get_topic_heading_title($tInfo->topics_id, $languages[$i]['id']))); ?></td>
-          </tr>
-<?php
-    }
-?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-<?php
-    for ($i=0; $i<sizeof($languages); $i++) {
-?>
-          <tr>
-            <td class="main" valign="top"><?php if ($i == 0) echo TEXT_EDIT_TOPICS_DESCRIPTION; ?></td>
-            <td><table border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="main" valign="top"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-// Line Changed - MOD: Ajustable Editor Window
-                	 //echo tep_draw_fckeditor('topics_description[' . $languages[$i]['id'] . ']', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
-					 echo (tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>'; 
-                     
-               } else { echo tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
-              }
-              ?>
-             </tr>
-            </table></td>
-          </tr>
-<?php
-    }
-?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_EDIT_SORT_ORDER; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('sort_order', $tInfo->sort_order, 'size="2"'); ?></td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-        </table></td>
-      </tr>
       <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+        <td><?php echo tep_draw_form('new_topic', FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $_GET['tID'] . '&amp;action=new_topic_preview', 'post', 'enctype="multipart/form-data"'); ?>
+        <table border="0" cellspacing="0" cellpadding="2">
+		  <tr>
+            <td>
+            <!-- TOPICS TABS START --> 
+            <!-- // NEW TOPIC TAB HEADER LOOP START //-->
+            <div id="articletabs">
+                <ul>
+                    <?php
+                    $languages = tep_get_languages();
+                    for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
+                    ?>
+                        <li><a href="#articletabs-<?php echo $j; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$j]['directory'] . '/images/' . $languages[$j]['image'], $languages[$j]['name']); ?></a></li>
+                    <?php } ?> 
+                </ul>
+            <!-- // NEW TOPIC TAB HEADER LOOP END //-->
+
+            <!-- // NEW TOPIC CONTENT LOOP START //-->
+            <?php
+              $languages = tep_get_languages();
+              for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+            ?>
+            
+                <div id="articletabs-<?php echo $i; ?>">
+                    <table width="100%">
+                      <tr>
+                        <td class="main"><?php echo TEXT_EDIT_TOPICS_NAME; ?></td>
+                        <td class="main"><?php echo tep_draw_input_field('topics_name[' . $languages[$i]['id'] . ']', (($topics_name[$languages[$i]['id']]) ? stripslashes($topics_name[$languages[$i]['id']]) : tep_get_topic_name($tInfo->topics_id, $languages[$i]['id']))); ?></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                      </tr>
+                      <tr>
+                        <td class="main"><?php echo TEXT_EDIT_TOPICS_HEADING_TITLE; ?></td>
+                        <td class="main"><?php echo tep_draw_input_field('topics_heading_title[' . $languages[$i]['id'] . ']', (($topics_name[$languages[$i]['id']]) ? stripslashes($topics_name[$languages[$i]['id']]) : tep_get_topic_heading_title($tInfo->topics_id, $languages[$i]['id']))); ?></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                      </tr>
+                      <tr>
+                        <td class="main" valign="top"><?php echo TEXT_EDIT_TOPICS_DESCRIPTION; ?></td>
+                        <td><table border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="main" valign="top"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
+                                    echo (tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', '100', '20', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>'; 
+                                 
+                           } else { echo tep_draw_textarea_field('topics_description[' . $languages[$i]['id'] . ']', '70', '15', (isset($topics_description[$languages[$i]['id']]) ? $topics_description[$languages[$i]['id']] : tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']))) . '</td>' ;
+                          }
+                          ?>
+                         </tr>
+                        </table></td>
+                      </tr>  
+                    </table>
+                </div>
+              <?php } // end for ?>
+            <!-- // NEW TOPIC CONTENT LOOP END //-->    
+            </div>
+            <!-- TOPICS TABS END --> 
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+            <tr>
+              <td>
+                <table width="500">
+                  <tr>
+                    <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . TEXT_EDIT_SORT_ORDER; ?></td>
+                    <td class="main"><?php echo tep_draw_input_field('sort_order', $tInfo->sort_order, 'size="2"'); ?></td>
+                  </tr>
+                </table>
+              </td>      
+            </tr>
+            <tr>
+              <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+            </tr>
+            <tr>
+              <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+            </tr>
+            <tr>
+              <td class="main" align="right"><?php echo tep_draw_hidden_field('topics_date_added', (($tInfo->date_added) ? $tInfo->date_added : date('Y-m-d'))) . tep_draw_hidden_field('parent_id', $tInfo->parent_id) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $_GET['tID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+            </tr>
+        </table>
+        </form></td>
       </tr>
-      <tr>
-        <td class="main" align="right"><?php echo tep_draw_hidden_field('topics_date_added', (($tInfo->date_added) ? $tInfo->date_added : date('Y-m-d'))) . tep_draw_hidden_field('parent_id', $tInfo->parent_id) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $HTTP_GET_VARS['tID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
-      </form></tr>
+	</table>
 
 <?php
-
   //----- new_topic_preview -----
-  } elseif ($HTTP_GET_VARS['action'] == 'new_topic_preview') {
-    if ($HTTP_POST_VARS) {
-      $tInfo = new objectInfo($HTTP_POST_VARS);
-      $topics_name = $HTTP_POST_VARS['topics_name'];
-      $topics_heading_title = $HTTP_POST_VARS['topics_heading_title'];
-      $topics_description = $HTTP_POST_VARS['topics_description'];
+  // } elseif ($action == 'new_topic_preview') {
+  } elseif ($_GET['action'] == 'new_topic_preview') {
+    if ($_POST) {
+      $tInfo = new objectInfo($_POST);
+      $topics_name = $_POST['topics_name'];
+      $topics_heading_title = $_POST['topics_heading_title'];
+      $topics_description = $_POST['topics_description'];
     } else {
-      $topic_query = tep_db_query("select t.topics_id, td.language_id, td.topics_name, td.topics_heading_title, td.topics_description, t.sort_order, t.date_added, t.last_modified from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = td.topics_id and t.topics_id = '" . $HTTP_GET_VARS['tID'] . "'");
+      $topic_query = tep_db_query("select t.topics_id, td.language_id, td.topics_name, td.topics_heading_title, td.topics_description, t.sort_order, t.date_added, t.last_modified from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = td.topics_id and t.topics_id = '" . $_GET['tID'] . "'");
       $topic = tep_db_fetch_array($topic_query);
 
       $tInfo = new objectInfo($topic);
     }
 
-    $form_action = ($HTTP_GET_VARS['tID']) ? 'update_topic' : 'insert_topic';
-
-    echo tep_draw_form($form_action, FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $HTTP_GET_VARS['tID'] . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
+    $form_action = ($_GET['tID']) ? 'update_topic' : 'insert_topic';
+    echo tep_draw_form($form_action, FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $_GET['tID'] . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
 
     $languages = tep_get_languages();
     for ($i=0; $i<sizeof($languages); $i++) {
-      if ($HTTP_GET_VARS['read'] == 'only') {
+      if ($_GET['read'] == 'only') {
         $tInfo->topics_name = tep_get_topic_name($tInfo->topics_id, $languages[$i]['id']);
         $tInfo->topics_heading_title = tep_get_topic_heading_title($tInfo->topics_id, $languages[$i]['id']);
         $tInfo->topics_description = tep_get_topic_description($tInfo->topics_id, $languages[$i]['id']);
@@ -489,50 +513,52 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         $tInfo->topics_description = tep_db_prepare_input($topics_description[$languages[$i]['id']]);
       }
 ?>
+    <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $tInfo->topics_heading_title; ?></td>
-          </tr>
-        </table></td>
+        <td><?php echo tep_draw_form($form_action, FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $_GET['tID'] . '&amp;action=' . $form_action, 'post', 'enctype="multipart/form-data"'); ?>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $tInfo->topics_heading_title; ?></td>
+            </tr>
+            <tr>
+              <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+            </tr>
+            <tr>
+              <td class="main"><?php echo $tInfo->topics_description; ?></td>
+            </tr>
+          </table>
+        </form></td>
       </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-      <tr>
-        <td class="main"><?php echo $tInfo->topics_description; ?></td>
-      </tr>
-
 <?php
     }
-    if ($HTTP_GET_VARS['read'] == 'only') {
-      if ($HTTP_GET_VARS['origin']) {
-        $pos_params = strpos($HTTP_GET_VARS['origin'], '?', 0);
+    if ($_GET['read'] == 'only') {
+      if ($_GET['origin']) {
+        $pos_params = strpos($_GET['origin'], '?', 0);
         if ($pos_params != false) {
-          $back_url = substr($HTTP_GET_VARS['origin'], 0, $pos_params);
-          $back_url_params = substr($HTTP_GET_VARS['origin'], $pos_params + 1);
+          $back_url = substr($_GET['origin'], 0, $pos_params);
+          $back_url_params = substr($_GET['origin'], $pos_params + 1);
         } else {
-          $back_url = $HTTP_GET_VARS['origin'];
+          $back_url = $_GET['origin'];
           $back_url_params = '';
         }
       } else {
         $back_url = FILENAME_ARTICLES;
-        $back_url_params = 'tPath=' . $tPath . '&tID=' . $tInfo->topics_id;
+        $back_url_params = 'tPath=' . $tPath . '&amp;tID=' . $tInfo->topics_id;
       }
 ?>
-      <tr>
-        <td align="right"><?php echo '<a href="' . tep_href_link($back_url, $back_url_params, 'NONSSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
-      </tr>
+            <tr>
+              <td align="right"><?php echo '<a href="' . tep_href_link($back_url, $back_url_params, 'NONSSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
+            </tr>
 <?php
     } else {
 ?>
-      <tr>
-        <td align="right" class="smallText">
+            <tr>
+              <td align="right" class="smallText">
 <?php
 /* Re-Post all POST'ed variables */
-      reset($HTTP_POST_VARS);
-      while (list($key, $value) = each($HTTP_POST_VARS)) {
-        if (!is_array($HTTP_POST_VARS[$key])) {
+      reset($_POST);
+      while (list($key, $value) = each($_POST)) {
+        if (!is_array($_POST[$key])) {
           echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
         }
       }
@@ -545,14 +571,17 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 
       echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="edit"') . '&nbsp;&nbsp;';
 
-      if ($HTTP_GET_VARS['tID']) {
+      if ($_GET['tID']) {
         echo tep_image_submit('button_update.gif', IMAGE_UPDATE);
       } else {
         echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
       }
-      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $HTTP_GET_VARS['tID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
+      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $_GET['tID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
 ?></td>
-      </form></tr>
+            </tr>
+     </form>       
+            
+            
 <?php
     }
   } elseif ($action == 'new_article') {
@@ -567,23 +596,24 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
                        'articles_last_modified' => '',
                        'articles_date_available' => '',
                        'articles_status' => '',
+					   'articles_index_status' => '',
                        'authors_id' => '');
 
     $aInfo = new objectInfo($parameters);
 
-    if (isset($HTTP_GET_VARS['aID']) && empty($HTTP_POST_VARS)) {
-      $article_query = tep_db_query("select ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_id, a.articles_date_added, a.articles_last_modified, date_format(a.articles_date_available, '%Y-%m-%d') as articles_date_available, a.articles_status, a.authors_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = '" . (int)$HTTP_GET_VARS['aID'] . "' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "'");
+    if (isset($_GET['aID']) && empty($_POST)) {
+      $article_query = tep_db_query("select ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_id, a.articles_date_added, a.articles_last_modified, date_format(a.articles_date_available, '%Y-%m-%d') as articles_date_available, a.articles_status, a.articles_index_status, a.authors_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = '" . (int)$_GET['aID'] . "' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "'");
       $article = tep_db_fetch_array($article_query);
 
       $aInfo->objectInfo($article);
-    } elseif (tep_not_null($HTTP_POST_VARS)) {
-      $aInfo->objectInfo($HTTP_POST_VARS);
-      $articles_name = $HTTP_POST_VARS['articles_name'];
-      $articles_description = $HTTP_POST_VARS['articles_description'];
-      $articles_url = $HTTP_POST_VARS['articles_url'];
-      $articles_head_title_tag = $HTTP_POST_VARS['articles_head_title_tag'];
-      $articles_head_desc_tag = $HTTP_POST_VARS['articles_head_desc_tag'];
-      $articles_head_keywords_tag = $HTTP_POST_VARS['articles_head_keywords_tag'];
+    } elseif (tep_not_null($_POST)) {
+      $aInfo->objectInfo($_POST);
+      $articles_name = $_POST['articles_name'];
+      $articles_description = $_POST['articles_description'];
+      $articles_url = $_POST['articles_url'];
+      $articles_head_title_tag = $_POST['articles_head_title_tag'];
+      $articles_head_desc_tag = $_POST['articles_head_desc_tag'];
+      $articles_head_keywords_tag = $_POST['articles_head_keywords_tag'];
     }
 
     $authors_array = array(array('id' => '', 'text' => TEXT_NONE));
@@ -601,15 +631,17 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       case '1':
       default: $in_status = true; $out_status = false;
     }
+	
+	if (!isset($aInfo->articles_index_status)) $aInfo->articles_index_status = '0';
+    switch ($aInfo->articles_index_status) {
+      case '0': $in_index_status = false; $out_index_status = true; break;
+      case '1':
+      default: $in_index_status = true; $out_index_status = false;
+    }
+	
 ?>
-<link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
-<script language="JavaScript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
-<script language="javascript">
-<!--
-  var dateAvailable = new ctlSpiffyCalendarBox("dateAvailable", "new_article", "articles_date_available","btnDate1","<?php echo $aInfo->articles_date_available; ?>",scBTNMODE_CUSTOMBLUE);
--->
-</script>
-    <?php echo tep_draw_form('new_article', FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($HTTP_GET_VARS['aID']) ? '&aID=' . $HTTP_GET_VARS['aID'] : '') . '&action=article_preview', 'post', 'enctype="multipart/form-data"'); ?>
+
+    <?php echo tep_draw_form('new_article', FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($_GET['aID']) ? '&amp;aID=' . $_GET['aID'] : '') . '&amp;action=article_preview', 'post', 'enctype="multipart/form-data"'); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -632,13 +664,19 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo TEXT_ARTICLES_DATE_AVAILABLE; ?><br><small>(YYYY-MM-DD)</small></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;'; ?><script language="javascript">dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script></td>
+            <td class="main"><?php echo TEXT_ARTICLES_SHOW_ON_INDEX; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('articles_index_status', '0', $out_index_status) . '&nbsp;' . DO_NOT_SHOW_ON_INDEX . '&nbsp;' . tep_draw_radio_field('articles_index_status', '1', $in_index_status) . '&nbsp;' . DO_SHOW_ON_INDEX; ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
+            <td class="main"><?php echo TEXT_ARTICLES_DATE_AVAILABLE; ?><br><small><?php echo TEXT_YYYY_MM_DD; ?></small></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;'; ?><?php echo tep_draw_input_field('articles_date_available', (isset($aInfo->articles_date_available) ? $aInfo->articles_date_available : ''), 'id="articles"'); ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
           <tr>
             <td class="main"><?php echo TEXT_ARTICLES_AUTHOR; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('authors_id', $authors_array, $aInfo->authors_id); ?></td>
@@ -646,156 +684,144 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
+          
           <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_ARTICLES_NAME; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('articles_name[' . $languages[$i]['id'] . ']', (isset($articles_name[$languages[$i]['id']]) ? $articles_name[$languages[$i]['id']] : tep_get_articles_name($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
-          </tr>
-<?php
-    }
-?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
-          <tr bgcolor="#ffffcc">
-            <td class="main"><?php if ($i == 0) echo TEXT_ARTICLES_HEAD_TITLE_TAG; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('articles_head_title_tag[' . $languages[$i]['id'] . ']', (isset($articles_head_title_tag[$languages[$i]['id']]) ? $articles_head_title_tag[$languages[$i]['id']] : tep_get_articles_head_title_tag($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
-          </tr>
-<?php
-    }
-?>
-          <tr bgcolor="#ffffcc">
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
-          <tr bgcolor="#ffffcc">
-            <td class="main" valign="top"><?php if ($i == 0) echo sprintf(TEXT_ARTICLES_HEAD_DESC_TAG, MAX_ARTICLE_ABSTRACT_LENGTH); ?></td>
-            <td><table border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
-                <td class="main"><?php echo tep_draw_textarea_field('articles_head_desc_tag[' . $languages[$i]['id'] . ']', 'soft', '70', '5', (isset($articles_head_desc_tag[$languages[$i]['id']]) ? $articles_head_desc_tag[$languages[$i]['id']] : tep_get_articles_head_desc_tag($aInfo->articles_id, $languages[$i]['id']))); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-<?php
-    }
-?>
-          <tr bgcolor="#ffffcc">
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
-          <tr bgcolor="#ffffcc">
-            <td class="main" valign="top"><?php if ($i == 0) echo TEXT_ARTICLES_HEAD_KEYWORDS_TAG; ?></td>
-            <td><table border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
-                <td class="main"><?php echo tep_draw_textarea_field('articles_head_keywords_tag[' . $languages[$i]['id'] . ']', 'soft', '70', '5', (isset($articles_head_keywords_tag[$languages[$i]['id']]) ? $articles_head_keywords_tag[$languages[$i]['id']] : tep_get_articles_head_keywords_tag($aInfo->articles_id, $languages[$i]['id']))); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-<?php
-    }
-?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
+            <td colspan="2">
 
+<!-- ARTICLE TABS START --> 
+<!-- // NEW ARTICLE TAB HEADER LOOP START //-->
+<div id="articletabs">
+	<ul>
+		<?php
+        $languages = tep_get_languages();
+        for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
+        ?>
+        	<li><a href="#articletabs-<?php echo $j; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$j]['directory'] . '/images/' . $languages[$j]['image'], $languages[$j]['name']); ?></a></li>
+        <?php } ?> 
+	</ul>
+<!-- // NEW ARTICLE TAB HEADER LOOP END //-->
+
+
+<!-- // NEW ARTICLE CONTENT LOOP START //-->
 <?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+  $languages = tep_get_languages();
+  for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
 ?>
+
+	<div id="articletabs-<?php echo $i; ?>">
+		<table width="100%">
           <tr>
-            <td class="main" valign="top"><?php if ($i == 0) echo TEXT_ARTICLES_DESCRIPTION; ?></td>
-            <td><table border="0" cellspacing="0" cellpadding="0">
+            <td class="main"><?php echo TEXT_ARTICLES_NAME; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('articles_name[' . $languages[$i]['id'] . ']', (isset($articles_name[$languages[$i]['id']]) ? $articles_name[$languages[$i]['id']] : tep_get_articles_name($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo TEXT_ARTICLES_HEAD_TITLE_TAG; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('articles_head_title_tag[' . $languages[$i]['id'] . ']', (isset($articles_head_title_tag[$languages[$i]['id']]) ? $articles_head_title_tag[$languages[$i]['id']] : tep_get_articles_head_title_tag($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+          <tr>
+            <td class="main" valign="top"><?php echo sprintf(TEXT_ARTICLES_HEAD_DESC_TAG, MAX_ARTICLE_ABSTRACT_LENGTH); ?></td>
+            <td>
+            <table border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
-                <td class="main"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-                	 //echo tep_draw_fckeditor('articles_description[' . $languages[$i]['id'] . ']', '550', '300', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']))) . '</td>' ;
-					 echo (tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', 'soft', '100%', '20', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id'])), 'class="ckeditor"')) . '</td>';
+                <td class="main" valign="top"></td>
+                <td class="main"><?php echo tep_draw_textarea_field('articles_head_desc_tag[' . $languages[$i]['id'] . ']', '70', '5', (isset($articles_head_desc_tag[$languages[$i]['id']]) ? $articles_head_desc_tag[$languages[$i]['id']] : tep_get_articles_head_desc_tag($aInfo->articles_id, $languages[$i]['id']))); ?></td>
+              </tr>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+          <tr>
+            <td class="main" valign="top"><?php echo TEXT_ARTICLES_HEAD_KEYWORDS_TAG; ?></td>
+            <td>
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="main" valign="top"></td>
+                <td class="main"><?php echo tep_draw_textarea_field('articles_head_keywords_tag[' . $languages[$i]['id'] . ']', '70', '5', (isset($articles_head_keywords_tag[$languages[$i]['id']]) ? $articles_head_keywords_tag[$languages[$i]['id']] : tep_get_articles_head_keywords_tag($aInfo->articles_id, $languages[$i]['id']))); ?></td>
+              </tr>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+          <tr>
+            <td class="main" valign="top"><?php echo TEXT_ARTICLES_DESCRIPTION; ?></td>
+            <td>
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td class="main" valign="top"></td>
+                  <td class="main"><?php if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
+					    echo (tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', '100', '20', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id'])), 'class="ckeditor"')) . '';
 					 
-               } else { echo tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']))) . '</td>' ;
+               } else { echo tep_draw_textarea_field('articles_description[' . $languages[$i]['id'] . ']', '70', '15', (isset($articles_description[$languages[$i]['id']]) ? $articles_description[$languages[$i]['id']] : tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']))) . '' ;
               }
               ?>
-
-              </tr>
-            </table></td>
+			      </td>
+                </tr>
+              </table>
+            </td>
           </tr>
-<?php
-    }
-?>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
           <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_ARTICLES_URL . '<br><small>' . TEXT_ARTICLES_URL_WITHOUT_HTTP . '</small>'; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('articles_url[' . $languages[$i]['id'] . ']', (isset($articles_url[$languages[$i]['id']]) ? $articles_url[$languages[$i]['id']] : tep_get_articles_url($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
-          </tr>
+            <td class="main"><?php echo TEXT_ARTICLES_URL . '<br><small>' . TEXT_ARTICLES_URL_WITHOUT_HTTP . '</small>'; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('articles_url[' . $languages[$i]['id'] . ']', (isset($articles_url[$languages[$i]['id']]) ? $articles_url[$languages[$i]['id']] : tep_get_articles_url($aInfo->articles_id, $languages[$i]['id'])), 'size="35"'); ?></td>
+           </tr>
+        </table>
+	</div>
+
+<!-- // NEW ARTICLE CONTENT LOOP END //-->
+
 <?php
     }
 ?>
+</div>
+<!-- // NEW ARTICLE CONTENT LOOP END //-->
+<!-- ARTICLE TABS END --> 
+
         </table></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main" align="right"><?php echo tep_draw_hidden_field('articles_date_added', (tep_not_null($aInfo->articles_date_added) ? $aInfo->articles_date_added : date('Y-m-d'))) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($HTTP_GET_VARS['aID']) ? '&aID=' . $HTTP_GET_VARS['aID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+        <td class="main" align="right"><?php echo tep_draw_hidden_field('articles_date_added', (tep_not_null($aInfo->articles_date_added) ? $aInfo->articles_date_added : date('Y-m-d'))) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($_GET['aID']) ? '&amp;aID=' . $_GET['aID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
       </tr>
     </table></form>
 <?php
-  //MaxiDVD Added WYSIWYG HTML Area Box + Admin Function v1.7 - 2.2 MS2 Articles Description HTML - </form>
-  if (ARTICLE_WYSIWYG_ENABLE == 'Enable') {
-?>
-            <script language="JavaScript1.2" defer>
-             var config = new Object();  // create new config object
-             config.width = "<?php echo ARTICLE_MANAGER_WYSIWYG_WIDTH; ?>px";
-             config.height = "<?php echo ARTICLE_MANAGER_WYSIWYG_HEIGHT; ?>px";
-             config.bodyStyle = 'background-color: <?php echo ARTICLE_MANAGER_WYSIWYG_BG_COLOUR; ?>; font-family: "<?php echo ARTICLE_MANAGER_WYSIWYG_FONT_TYPE; ?>"; color: <?php echo ARTICLE_MANAGER_WYSIWYG_FONT_COLOUR; ?>; font-size: <?php echo ARTICLE_MANAGER_WYSIWYG_FONT_SIZE; ?>pt;';
-             config.debug = <?php echo ARTICLE_MANAGER_WYSIWYG_DEBUG; ?>;
-          <?php for ($i = 0, $n = sizeof($languages); $i < $n; $i++) { ?>
-             editor_generate('articles_description[<?php echo $languages[$i]['id']; ?>]',config);
-          <?php } ?>
-             config.height = "35px";
-             config.bodyStyle = 'background-color: white; font-family: Arial; color: black; font-size: 12px;';
-             config.toolbar = [ ['InsertImageURL'] ];
-             config.OscImageRoot = '<?php trim(HTTP_SERVER . DIR_WS_CATALOG_IMAGES) ?>';
-            </script>
-<?php
-  }
   } elseif ($action == 'article_preview') {
-    if (tep_not_null($HTTP_POST_VARS)) {
-      $aInfo = new objectInfo($HTTP_POST_VARS);
-      $articles_name = $HTTP_POST_VARS['articles_name'];
-      $articles_description = $HTTP_POST_VARS['articles_description'];
-      $articles_url = $HTTP_POST_VARS['articles_url'];
-      $articles_head_title_tag = $HTTP_POST_VARS['articles_head_title_tag'];
-      $articles_head_desc_tag = $HTTP_POST_VARS['articles_head_desc_tag'];
-      $articles_head_keywords_tag = $HTTP_POST_VARS['articles_head_keywords_tag'];
+    if (tep_not_null($_POST)) {
+      $aInfo = new objectInfo($_POST);
+      $articles_name = $_POST['articles_name'];
+      $articles_description = $_POST['articles_description'];
+      $articles_url = $_POST['articles_url'];
+      $articles_head_title_tag = $_POST['articles_head_title_tag'];
+      $articles_head_desc_tag = $_POST['articles_head_desc_tag'];
+      $articles_head_keywords_tag = $_POST['articles_head_keywords_tag'];
     } else {
-      $article_query = tep_db_query("select a.articles_id, ad.language_id, ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a.authors_id  from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = ad.articles_id and a.articles_id = '" . (int)$HTTP_GET_VARS['aID'] . "'");
+      $article_query = tep_db_query("select a.articles_id, ad.language_id, ad.articles_name, ad.articles_description, ad.articles_url, ad.articles_head_title_tag, ad.articles_head_desc_tag, ad.articles_head_keywords_tag, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a.articles_index_status, a.authors_id  from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = ad.articles_id and a.articles_id = '" . (int)$_GET['aID'] . "'");
       $article = tep_db_fetch_array($article_query);
 
       $aInfo = new objectInfo($article);
     }
 
-    $form_action = (isset($HTTP_GET_VARS['aID'])) ? 'update_article' : 'insert_article';
+    $form_action = (isset($_GET['aID'])) ? 'update_article' : 'insert_article';
 
-    echo tep_draw_form($form_action, FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($HTTP_GET_VARS['aID']) ? '&aID=' . $HTTP_GET_VARS['aID'] : '') . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
+    echo tep_draw_form($form_action, FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($_GET['aID']) ? '&amp;aID=' . $_GET['aID'] : '') . '&amp;action=' . $form_action, 'post', 'enctype="multipart/form-data"');
+	echo '<table border="0" width="100%" cellspacing="0" cellpadding="2">';
 
     $languages = tep_get_languages();
     for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-      if (isset($HTTP_GET_VARS['read']) && ($HTTP_GET_VARS['read'] == 'only')) {
+      if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
         $aInfo->articles_name = tep_get_articles_name($aInfo->articles_id, $languages[$i]['id']);
         $aInfo->articles_description = tep_get_articles_description($aInfo->articles_id, $languages[$i]['id']);
         $aInfo->articles_url = tep_get_articles_url($aInfo->articles_id, $languages[$i]['id']);
@@ -811,13 +837,14 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         $aInfo->articles_head_keywords_tag = tep_db_prepare_input($articles_head_keywords_tag[$languages[$i]['id']]);
       }
 ?>
-    <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading" colspan="2"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $aInfo->articles_name; ?></td>
-          </tr>
-        </table></td>
+        <td>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading" colspan="2"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $aInfo->articles_name; ?></td>
+            </tr>
+          </table>
+        </td>
       </tr>
 <?php
       if ($aInfo->articles_description) {
@@ -867,19 +894,19 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <?php
     }
 
-    if (isset($HTTP_GET_VARS['read']) && ($HTTP_GET_VARS['read'] == 'only')) {
-      if (isset($HTTP_GET_VARS['origin'])) {
-        $pos_params = strpos($HTTP_GET_VARS['origin'], '?', 0);
+    if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
+      if (isset($_GET['origin'])) {
+        $pos_params = strpos($_GET['origin'], '?', 0);
         if ($pos_params != false) {
-          $back_url = substr($HTTP_GET_VARS['origin'], 0, $pos_params);
-          $back_url_params = substr($HTTP_GET_VARS['origin'], $pos_params + 1);
+          $back_url = substr($_GET['origin'], 0, $pos_params);
+          $back_url_params = substr($_GET['origin'], $pos_params + 1);
         } else {
-          $back_url = $HTTP_GET_VARS['origin'];
+          $back_url = $_GET['origin'];
           $back_url_params = '';
         }
       } else {
         $back_url = FILENAME_ARTICLES;
-        $back_url_params = 'tPath=' . $tPath . '&aID=' . $aInfo->articles_id;
+        $back_url_params = 'tPath=' . $tPath . '&amp;aID=' . $aInfo->articles_id;
       }
 ?>
       <tr>
@@ -892,9 +919,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         <td align="right" class="smallText">
 <?php
 /* Re-Post all POST'ed variables */
-      reset($HTTP_POST_VARS);
-      while (list($key, $value) = each($HTTP_POST_VARS)) {
-        if (!is_array($HTTP_POST_VARS[$key])) {
+      reset($_POST);
+      while (list($key, $value) = each($_POST)) {
+        if (!is_array($_POST[$key])) {
           echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
         }
       }
@@ -910,12 +937,12 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 
       echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="edit"') . '&nbsp;&nbsp;';
 
-      if (isset($HTTP_GET_VARS['aID'])) {
+      if (isset($_GET['aID'])) {
         echo tep_image_submit('button_update.gif', IMAGE_UPDATE);
       } else {
         echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
       }
-      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($HTTP_GET_VARS['aID']) ? '&aID=' . $HTTP_GET_VARS['aID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
+      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . (isset($_GET['aID']) ? '&amp;aID=' . $_GET['aID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
 ?></td>
       </tr>
     </table></form>
@@ -925,47 +952,53 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
-            <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="smallText" align="right">
-<?php
-    echo tep_draw_form('search', FILENAME_ARTICLES, '', 'get');
-    echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search');
-    echo '</form>';
-?>
-                </td>
-              </tr>
-              <tr>
-                <td class="smallText" align="right">
+        <td>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+              <td class="pageHeading" align="right">&nbsp;</td>
+              <td align="right">
+                <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td class="smallText" align="right">
+					<?php
+                        echo tep_draw_form('search', FILENAME_ARTICLES, '', 'get');
+                        echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search');
+                        echo '</form>';
+                    ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="smallText" align="right">
 <?php
     echo tep_draw_form('goto', FILENAME_ARTICLES, '', 'get');
     echo HEADING_TITLE_GOTO . ' ' . tep_draw_pull_down_menu('tPath', tep_get_topic_tree(), $current_topic_id, 'onChange="this.form.submit();"');
     echo '</form>';
 ?>
-                </td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
       </tr>
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_TOPICS_ARTICLES; ?></td>
-                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_STATUS; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
-              </tr>
+        <td>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td valign="top">
+                <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                  <tr class="dataTableHeadingRow">
+                    <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_TOPICS_ARTICLES; ?></td>
+                    <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_STATUS; ?></td>
+                    <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
+                  </tr>
 <?php
     $topics_count = 0;
     $rows = 0;
-    if (isset($HTTP_GET_VARS['search'])) {
-      $search = tep_db_prepare_input($HTTP_GET_VARS['search']);
+    if (isset($_GET['search'])) {
+      $search = tep_db_prepare_input($_GET['search']);
 
       $topics_query = tep_db_query("select t.topics_id, td.topics_name, t.parent_id, t.sort_order, t.date_added, t.last_modified from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = td.topics_id and td.language_id = '" . (int)$languages_id . "' and td.topics_name like '%" . tep_db_input($search) . "%' order by t.sort_order, td.topics_name");
     } else {
@@ -976,9 +1009,9 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       $rows++;
 
 // Get parent_id for subtopics if search
-      if (isset($HTTP_GET_VARS['search'])) $tPath= $topics['parent_id'];
+      if (isset($_GET['search'])) $tPath= $topics['parent_id'];
 
-      if ((!isset($HTTP_GET_VARS['tID']) && !isset($HTTP_GET_VARS['aID']) || (isset($HTTP_GET_VARS['tID']) && ($HTTP_GET_VARS['tID'] == $topics['topics_id']))) && !isset($tInfo) && (substr($action, 0, 3) != 'new')) {
+      if ((!isset($_GET['tID']) && !isset($_GET['aID']) || (isset($_GET['tID']) && ($_GET['tID'] == $topics['topics_id']))) && !isset($tInfo) && (substr($action, 0, 3) != 'new')) {
         $topic_childs = array('childs_count' => tep_childs_in_topic_count($topics['topics_id']));
         $topic_articles = array('articles_count' => tep_articles_in_topic_count($topics['topics_id']));
 
@@ -989,30 +1022,30 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       if (isset($tInfo) && is_object($tInfo) && ($topics['topics_id'] == $tInfo->topics_id) ) {
         echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ARTICLES, tep_get_topic_path($topics['topics_id'])) . '\'">' . "\n";
       } else {
-        echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $topics['topics_id']) . '\'">' . "\n";
+        echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $topics['topics_id']) . '\'">' . "\n";
       }
 ?>
                 <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_ARTICLES, tep_get_topic_path($topics['topics_id'])) . '">' . tep_image(DIR_WS_ICONS . 'folder.gif', ICON_FOLDER) . '</a>&nbsp;<b>' . $topics['topics_name'] . '</b>'; ?></td>
                 <td class="dataTableContent" align="center">&nbsp;</td>
-                <td class="dataTableContent" align="right"><?php if (isset($tInfo) && is_object($tInfo) && ($topics['topics_id'] == $tInfo->topics_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $topics['topics_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if (isset($tInfo) && is_object($tInfo) && ($topics['topics_id'] == $tInfo->topics_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $topics['topics_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
 
     $articles_count = 0;
-    if (isset($HTTP_GET_VARS['search'])) {
-      $articles_query = tep_db_query("select a.articles_id, ad.articles_name, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a2t.topics_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t where a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and a.articles_id = a2t.articles_id and ad.articles_name like '%" . tep_db_input($search) . "%' order by ad.articles_name");
+    if (isset($_GET['search'])) {
+      $articles_query = tep_db_query("select a.articles_id, ad.articles_name, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a.articles_index_status, a2t.topics_id from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t where a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and a.articles_id = a2t.articles_id and ad.articles_name like '%" . tep_db_input($search) . "%' order by ad.articles_name");
     } else {
-      $articles_query = tep_db_query("select a.articles_id, ad.articles_name, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t where a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and a.articles_id = a2t.articles_id and a2t.topics_id = '" . (int)$current_topic_id . "' order by ad.articles_name");
+      $articles_query = tep_db_query("select a.articles_id, ad.articles_name, a.articles_date_added, a.articles_last_modified, a.articles_date_available, a.articles_status, a.articles_index_status from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad, " . TABLE_ARTICLES_TO_TOPICS . " a2t where a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "' and a.articles_id = a2t.articles_id and a2t.topics_id = '" . (int)$current_topic_id . "' order by ad.articles_name");
     }
     while ($articles = tep_db_fetch_array($articles_query)) {
       $articles_count++;
       $rows++;
 
 // Get topics_id for article if search
-      if (isset($HTTP_GET_VARS['search'])) $tPath = $articles['topics_id'];
+      if (isset($_GET['search'])) $tPath = $articles['topics_id'];
 
-      if ( (!isset($HTTP_GET_VARS['aID']) && !isset($HTTP_GET_VARS['tID']) || (isset($HTTP_GET_VARS['aID']) && ($HTTP_GET_VARS['aID'] == $articles['articles_id']))) && !isset($aInfo) && !isset($tInfo) && (substr($action, 0, 3) != 'new')) {
+      if ( (!isset($_GET['aID']) && !isset($_GET['tID']) || (isset($_GET['aID']) && ($_GET['aID'] == $articles['articles_id']))) && !isset($aInfo) && !isset($tInfo) && (substr($action, 0, 3) != 'new')) {
 // find out the rating average from customer reviews
         $reviews_query = tep_db_query("select (avg(reviews_rating) / 5 * 100) as average_rating from " . TABLE_ARTICLE_REVIEWS . " where articles_id = '" . (int)$articles['articles_id'] . "'");
         $reviews = tep_db_fetch_array($reviews_query);
@@ -1021,21 +1054,27 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       }
 
       if (isset($aInfo) && is_object($aInfo) && ($articles['articles_id'] == $aInfo->articles_id) ) {
-        echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $articles['articles_id'] . '&action=article_preview&read=only') . '\'">' . "\n";
+        echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $articles['articles_id'] . '&amp;action=article_preview&amp;read=only') . '\'">' . "\n";
       } else {
-        echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $articles['articles_id']) . '\'">' . "\n";
+        echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $articles['articles_id']) . '\'">' . "\n";
       }
 ?>
-                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $articles['articles_id'] . '&action=article_preview&read=only') . '">' . tep_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $articles['articles_name']; ?></td>
+                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $articles['articles_id'] . '&amp;action=article_preview&amp;read=only') . '">' . tep_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $articles['articles_name']; ?></td>
                 <td class="dataTableContent" align="center">
 <?php
-      if ($articles['articles_status'] == '1') {
-        echo tep_image(DIR_WS_IMAGES . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'action=setflag&flag=0&aID=' . $articles['articles_id'] . '&tPath=' . $tPath) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+	  if ($articles['articles_index_status'] == '1') {
+        echo tep_image(DIR_WS_ICONS .  'warning.gif', IMAGE_SHOW_ON_INDEX, 10, 10) . '&nbsp;&nbsp;';
+	  } else {
+		echo tep_draw_separator('pixel_trans.gif', '10', '10') . '&nbsp;&nbsp;';
+	  }
+	  
+	  if ($articles['articles_status'] == '1') {
+        echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'action=setflag&amp;flag=0&amp;aID=' . $articles['articles_id'] . '&amp;tPath=' . $tPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
       } else {
-        echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'action=setflag&flag=1&aID=' . $articles['articles_id'] . '&tPath=' . $tPath) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+        echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'action=setflag&amp;flag=1&amp;aID=' . $articles['articles_id'] . '&amp;tPath=' . $tPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
       }
 ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($aInfo) && is_object($aInfo) && ($articles['articles_id'] == $aInfo->articles_id)) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $articles['articles_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if (isset($aInfo) && is_object($aInfo) && ($articles['articles_id'] == $aInfo->articles_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $articles['articles_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
@@ -1051,17 +1090,20 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       }
     }
 
-    $tPath_back = (tep_not_null($tPath_back)) ? 'tPath=' . $tPath_back . '&' : '';
+    $tPath_back = (tep_not_null($tPath_back)) ? 'tPath=' . $tPath_back . '&amp;' : '';
 ?>
               <tr>
-                <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td class="smallText"><?php echo TEXT_TOPICS . '&nbsp;' . $topics_count . '<br>' . TEXT_ARTICLES . '&nbsp;' . $articles_count; ?></td>
-                    <td align="right" class="smallText"><?php if (sizeof($tPath_array) > 0) echo '<a href="' . tep_href_link(FILENAME_ARTICLES, $tPath_back . 'tID=' . $current_topic_id) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>&nbsp;'; if (!isset($HTTP_GET_VARS['search'])) echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&action=new_topic') . '">' . tep_image_button('button_new_topic.gif', IMAGE_NEW_TOPIC) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&action=new_article') . '">' . tep_image_button('button_new_article.gif', IMAGE_NEW_ARTICLE) . '</a>'; ?>&nbsp;</td>
-                  </tr>
-                </table></td>
+                <td colspan="3">
+                  <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                    <tr>
+                      <td class="smallText"><?php echo TEXT_TOPICS . '&nbsp;' . $topics_count . '<br>' . TEXT_ARTICLES . '&nbsp;' . $articles_count; ?></td>
+                      <td align="right" class="smallText"><?php if (sizeof($tPath_array) > 0) echo '<a href="' . tep_href_link(FILENAME_ARTICLES, $tPath_back . 'tID=' . $current_topic_id) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>&nbsp;'; if (!isset($_GET['search'])) echo '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;action=new_topic') . '">' . tep_image_button('button_new_topic.gif', IMAGE_NEW_TOPIC) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;action=new_article') . '">' . tep_image_button('button_new_article.gif', IMAGE_NEW_ARTICLE) . '</a>'; ?>&nbsp;</td>
+                    </tr>
+                  </table>
+                </td>
               </tr>
-            </table></td>
+            </table>
+          </td>
 <?php
     $heading = array();
     $contents = array();
@@ -1069,7 +1111,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       case 'new_topic':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_TOPIC . '</b>');
 
-        $contents = array('form' => tep_draw_form('newtopic', FILENAME_ARTICLES, 'action=insert_topic&tPath=' . $tPath, 'post', 'enctype="multipart/form-data"'));
+        $contents = array('form' => tep_draw_form('newtopic', FILENAME_ARTICLES, 'action=insert_topic&amp;tPath=' . $tPath, 'post', 'enctype="multipart/form-data"'));
         $contents[] = array('text' => TEXT_NEW_TOPIC_INTRO);
 
         $topic_inputs_string = '';
@@ -1085,7 +1127,7 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
       case 'edit_topic':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT_TOPIC . '</b>');
 
-        $contents = array('form' => tep_draw_form('topics', FILENAME_ARTICLES, 'action=update_topic&tPath=' . $tPath, 'post', 'enctype="multipart/form-data"') . tep_draw_hidden_field('topics_id', $tInfo->topics_id));
+        $contents = array('form' => tep_draw_form('topics', FILENAME_ARTICLES, 'action=update_topic&amp;tPath=' . $tPath, 'post', 'enctype="multipart/form-data"') . tep_draw_hidden_field('topics_id', $tInfo->topics_id));
         $contents[] = array('text' => TEXT_EDIT_INTRO);
 
         $topic_inputs_string = '';
@@ -1096,30 +1138,30 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 
         $contents[] = array('text' => '<br>' . TEXT_EDIT_TOPICS_NAME . $topic_inputs_string);
         $contents[] = array('text' => '<br>' . TEXT_EDIT_SORT_ORDER . '<br>' . tep_draw_input_field('sort_order', $tInfo->sort_order, 'size="2"'));
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $tInfo->topics_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $tInfo->topics_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'delete_topic':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_TOPIC . '</b>');
 
-        $contents = array('form' => tep_draw_form('topics', FILENAME_ARTICLES, 'action=delete_topic_confirm&tPath=' . $tPath) . tep_draw_hidden_field('topics_id', $tInfo->topics_id));
+        $contents = array('form' => tep_draw_form('topics', FILENAME_ARTICLES, 'action=delete_topic_confirm&amp;tPath=' . $tPath) . tep_draw_hidden_field('topics_id', $tInfo->topics_id));
         $contents[] = array('text' => TEXT_DELETE_TOPIC_INTRO);
         $contents[] = array('text' => '<br><b>' . $tInfo->topics_name . '</b>');
         if ($tInfo->childs_count > 0) $contents[] = array('text' => '<br>' . sprintf(TEXT_DELETE_WARNING_CHILDS, $tInfo->childs_count));
         if ($tInfo->articles_count > 0) $contents[] = array('text' => '<br>' . sprintf(TEXT_DELETE_WARNING_ARTICLES, $tInfo->articles_count));
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $tInfo->topics_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $tInfo->topics_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'move_topic':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_MOVE_TOPIC . '</b>');
 
-        $contents = array('form' => tep_draw_form('topics', FILENAME_ARTICLES, 'action=move_topic_confirm&tPath=' . $tPath) . tep_draw_hidden_field('topics_id', $tInfo->topics_id));
+        $contents = array('form' => tep_draw_form('topics', FILENAME_ARTICLES, 'action=move_topic_confirm&amp;tPath=' . $tPath) . tep_draw_hidden_field('topics_id', $tInfo->topics_id));
         $contents[] = array('text' => sprintf(TEXT_MOVE_TOPICS_INTRO, $tInfo->topics_name));
         $contents[] = array('text' => '<br>' . sprintf(TEXT_MOVE, $tInfo->topics_name) . '<br>' . tep_draw_pull_down_menu('move_to_topic_id', tep_get_topic_tree(), $current_topic_id));
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_move.gif', IMAGE_MOVE) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $tInfo->topics_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_move.gif', IMAGE_MOVE) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $tInfo->topics_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'delete_article':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_ARTICLE . '</b>');
 
-        $contents = array('form' => tep_draw_form('articles', FILENAME_ARTICLES, 'action=delete_article_confirm&tPath=' . $tPath) . tep_draw_hidden_field('articles_id', $aInfo->articles_id));
+        $contents = array('form' => tep_draw_form('articles', FILENAME_ARTICLES, 'action=delete_article_confirm&amp;tPath=' . $tPath) . tep_draw_hidden_field('articles_id', $aInfo->articles_id));
         $contents[] = array('text' => TEXT_DELETE_ARTICLE_INTRO);
         $contents[] = array('text' => '<br><b>' . $aInfo->articles_name . '</b>');
 
@@ -1136,26 +1178,26 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
         $article_topics_string = substr($article_topics_string, 0, -4);
 
         $contents[] = array('text' => '<br>' . $article_topics_string);
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $aInfo->articles_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $aInfo->articles_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'move_article':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_MOVE_ARTICLE . '</b>');
 
-        $contents = array('form' => tep_draw_form('articles', FILENAME_ARTICLES, 'action=move_article_confirm&tPath=' . $tPath) . tep_draw_hidden_field('articles_id', $aInfo->articles_id));
+        $contents = array('form' => tep_draw_form('articles', FILENAME_ARTICLES, 'action=move_article_confirm&amp;tPath=' . $tPath) . tep_draw_hidden_field('articles_id', $aInfo->articles_id));
         $contents[] = array('text' => sprintf(TEXT_MOVE_ARTICLES_INTRO, $aInfo->articles_name));
         $contents[] = array('text' => '<br>' . TEXT_INFO_CURRENT_TOPICS . '<br><b>' . tep_output_generated_topic_path($aInfo->articles_id, 'article') . '</b>');
         $contents[] = array('text' => '<br>' . sprintf(TEXT_MOVE, $aInfo->articles_name) . '<br>' . tep_draw_pull_down_menu('move_to_topic_id', tep_get_topic_tree(), $current_topic_id));
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_move.gif', IMAGE_MOVE) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $aInfo->articles_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_move.gif', IMAGE_MOVE) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $aInfo->articles_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'copy_to':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_COPY_TO . '</b>');
 
-        $contents = array('form' => tep_draw_form('copy_to', FILENAME_ARTICLES, 'action=copy_to_confirm&tPath=' . $tPath) . tep_draw_hidden_field('articles_id', $aInfo->articles_id));
+        $contents = array('form' => tep_draw_form('copy_to', FILENAME_ARTICLES, 'action=copy_to_confirm&amp;tPath=' . $tPath) . tep_draw_hidden_field('articles_id', $aInfo->articles_id));
         $contents[] = array('text' => TEXT_INFO_COPY_TO_INTRO);
         $contents[] = array('text' => '<br>' . TEXT_INFO_CURRENT_TOPICS . '<br><b>' . tep_output_generated_topic_path($aInfo->articles_id, 'article') . '</b>');
         $contents[] = array('text' => '<br>' . TEXT_TOPICS . '<br>' . tep_draw_pull_down_menu('topics_id', tep_get_topic_tree(), $current_topic_id));
         $contents[] = array('text' => '<br>' . TEXT_HOW_TO_COPY . '<br>' . tep_draw_radio_field('copy_as', 'link', true) . ' ' . TEXT_COPY_AS_LINK . '<br>' . tep_draw_radio_field('copy_as', 'duplicate') . ' ' . TEXT_COPY_AS_DUPLICATE);
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_copy.gif', IMAGE_COPY) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $aInfo->articles_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_copy.gif', IMAGE_COPY) . ' <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $aInfo->articles_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
 
       default:
@@ -1163,17 +1205,18 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
           if (isset($tInfo) && is_object($tInfo)) { // topic info box contents
             $heading[] = array('text' => '<b>' . $tInfo->topics_name . '</b>');
 
-            $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $tInfo->topics_id . '&action=edit_topic') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $tInfo->topics_id . '&action=delete_topic') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&tID=' . $tInfo->topics_id . '&action=move_topic') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a>');
+            $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $tInfo->topics_id . '&amp;action=edit_topic') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $tInfo->topics_id . '&amp;action=delete_topic') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;tID=' . $tInfo->topics_id . '&amp;action=move_topic') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a>');
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($tInfo->date_added));
             if (tep_not_null($tInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($tInfo->last_modified));
             $contents[] = array('text' => '<br>' . TEXT_SUBTOPICS . ' ' . $tInfo->childs_count . '<br>' . TEXT_ARTICLES . ' ' . $tInfo->articles_count);
           } elseif (isset($aInfo) && is_object($aInfo)) { // article info box contents
             $heading[] = array('text' => '<b>' . tep_get_articles_name($aInfo->articles_id, $languages_id) . '</b>');
 
-            $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $aInfo->articles_id . '&action=new_article') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $aInfo->articles_id . '&action=delete_article') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $aInfo->articles_id . '&action=move_article') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a> <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&aID=' . $aInfo->articles_id . '&action=copy_to') . '">' . tep_image_button('button_copy_to.gif', IMAGE_COPY_TO) . '</a>');            $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($aInfo->articles_date_added));
+            $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $aInfo->articles_id . '&amp;action=new_article') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $aInfo->articles_id . '&amp;action=delete_article') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $aInfo->articles_id . '&amp;action=move_article') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a> <a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $tPath . '&amp;aID=' . $aInfo->articles_id . '&amp;action=copy_to') . '">' . tep_image_button('button_copy_to.gif', IMAGE_COPY_TO) . '</a>');            $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($aInfo->articles_date_added));
             if (tep_not_null($aInfo->articles_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($aInfo->articles_last_modified));
             if (date('Y-m-d') < $aInfo->articles_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . tep_date_short($aInfo->articles_date_available));
             $contents[] = array('text' => '<br>' . TEXT_ARTICLES_AVERAGE_RATING . ' ' . number_format($aInfo->average_rating, 2) . '%');
+			if ($aInfo->articles_index_status == '1') $contents[] = array('text' => '<br>' . tep_image(DIR_WS_ICONS .  'warning.gif', IMAGE_SHOW_ON_INDEX, 10, 10) . '&nbsp;&nbsp;' . IMAGE_SHOW_ON_INDEX);
           }
         } else { // create topic/article info
           $heading[] = array('text' => '<b>' . EMPTY_TOPIC . '</b>');
@@ -1199,11 +1242,11 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <?php
   }
 ?>
-    </td>
+
 <!-- body_text_eof //-->
-  </tr>
 </table>
 <!-- body_eof //-->
+
 
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
@@ -1211,5 +1254,4 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 <br>
 </body>
 </html>
-<?php require(DIR_WS_INCLUDES . 'application_bottom.php');
-?>
+<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

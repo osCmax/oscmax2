@@ -1,9 +1,13 @@
 <?php
 /*
+$Id$
 
-  WebMakers.com Added: Downloads Controller Functions
-  NOTE: Some function may already exist in other Add-Ons I have created.
+  osCmax e-Commerce
+  http://www.oscmax.com
 
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 ?>
 <?php

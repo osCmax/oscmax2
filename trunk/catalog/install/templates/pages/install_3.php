@@ -1,79 +1,110 @@
 <?php
 /*
-$Id: install_3.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
+
+  // Check language pack for installer
+  if (isset($_GET['language'])) {
+    $language_selected = ($_GET['language']);
+  } elseif (isset($_POST['language'])) {
+	$language_selected = ($_POST['language']);  
+  } else {
+	$language_selected = 'english';
+  }
+
+$dir_fs_document_root = $HTTP_POST_VARS['DIR_FS_DOCUMENT_ROOT'];
+  if ((substr($dir_fs_document_root, -1) != '\\') && (substr($dir_fs_document_root, -1) != '/')) {
+    if (strrpos($dir_fs_document_root, '\\') !== false) {
+      $dir_fs_document_root .= '\\';
+    } else {
+      $dir_fs_document_root .= '/';
+    }
+  }
+
 ?>
 
+<div id="menublock">
+  <ul id="menutabs">
+    <li><a href="index.php" id="first"><?php echo TAB_START; ?></a></li>
+    <li><a href="install.php?step=1&language=<?php echo $language_selected; ?>"><?php echo TAB_DATABASE_SERVER; ?></a></li>
+    <li><a href="install.php?step=2&language=<?php echo $language_selected; ?>"><?php echo TAB_WEB_SERVER; ?></a></li>
+    <li><a href="#" id="active"><?php echo TAB_STORE_SETTINGS; ?></a></li>
+    <li><a href="#" id="last"><?php echo TAB_FINISHED; ?></a></li>
+  </ul>
+</div>
+
 <div class="mainBlock">
-  <div class="stepsBox">
-    <ol>
-      <li>Database Server</li>
-      <li>Web Server</li>
-      <li style="font-weight: bold;">Online Store Settings</li>
-      <li>Finished!</li>
-    </ol>
-  </div>
-
-  <h1>New Installation</h1>
-
-  <p>This web-based installation routine will correctly setup and configure osCMax Power E-Commerce to run on this server.</p>
-  <p>Please follow the on-screen instructions that will take you through the database server, web server, and store configuration options. If help is needed at any stage, please consult the documentation or seek help at the community support forums.</p>
+  <?php echo TEXT_STORE_SETUP; ?>
 </div>
 
 <div class="contentBlock">
-  <div class="infoPane">
-    <h3>Step 3: Online Store Settings</h3>
-
-    <div class="infoPaneContents">
-      <p>Here you can define the name of your online store and the contact information for the store owner.</p>
-      <p>The administrator username and password are used to log into the protected administration tool section.</p>
-    </div>
-  </div>
-
   <div class="contentPane">
-    <h2>Online Store Settings</h2>
+<?php if (!is_writable($dir_fs_document_root . 'includes/') || !is_writable($dir_fs_document_root . 'admin/includes/')) { ?>
+   <table border="0" width="100%" cellspacing="0" cellpadding="5" class="inputForm">
+      <tr>
+        <td class="inputField"><?php echo TEXT_NO_CONFIG_PERMISSIONS . '<br /><img src="images/failed.gif" align="left" hspace="5" vspace="5" border="0">'; ?></td>
+        <td class="inputDescription"><?php echo TEXT_NO_CONFIG_PERMISSIONS_DESC . '<br /><strong>' . $dir_fs_document_root . 'includes' . '<br />' .  $dir_fs_document_root . 'admin/includes</strong><br /><br />'; ?></td>
+      </tr>
+<?php } else { ?> 
+    <form name="installForm" id="installForm" action="install.php?step=4" method="post">
 
-    <form name="install" id="installForm" action="install.php?step=4" method="post">
+    <table border="0" width="100%" cellspacing="0" cellpadding="5" class="inputForm">
+      <tr>
+        <td class="inputField"><?php echo TEXT_STORE_NAME . '<br />' . osc_draw_input_field('CFG_STORE_NAME', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_STORE_NAME_DESC; ?></td>
+      </tr>
+      <tr>
+        <td class="inputField"><?php echo TEXT_FIRST_NAME . '<br />' . osc_draw_input_field('CFG_STORE_OWNER_FIRSTNAME', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_FIRST_NAME_DESC; ?></td>
+      </tr>
+      <tr>
+        <td class="inputField"><?php echo TEXT_LAST_NAME . '<br />' . osc_draw_input_field('CFG_STORE_OWNER_LASTNAME', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_LAST_NAME_DESC; ?></td>
+      </tr>
+      <tr>
+        <td class="inputField"><?php echo TEXT_EMAIL . '<br />' . osc_draw_input_field('CFG_STORE_OWNER_EMAIL_ADDRESS', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_EMAIL_DESC; ?></td>
+      </tr>
+      <tr>
+        <td class="inputField"><?php echo TEXT_USERNAME . '<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_USERNAME', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_USERNAME_DESC; ?></td>
+      </tr>
+      <tr>
+        <td class="inputField"><?php echo TEXT_PASSWORD . '<br />' . osc_draw_password_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_PASSWORD_DESC; ?></td>
+      </tr>
 
-    <table border="0" width="99%" cellspacing="0" cellpadding="5" class="inputForm">
+<?php if (is_writable($dir_fs_document_root) && is_writable($dir_fs_document_root . 'admin')) { ?>
       <tr>
-        <td class="inputField"><?php echo 'Store Name<br />' . osc_draw_input_field('CFG_STORE_NAME', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The name of the online store that is presented to the public.</td>
+        <td class="inputField"><?php echo TEXT_ADMIN_FOLDER_NAME . '<br />' . osc_draw_input_field('CFG_ADMIN_FOLDER', 'admin', 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_CHANGE_ADMIN_FOLDER; ?></td>
       </tr>
+<?php } else { ?>
       <tr>
-        <td class="inputField"><?php echo 'Store Owner First Name<br />' . osc_draw_input_field('CFG_STORE_OWNER_FIRSTNAME', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The first name of the store owner that is presented to the public.</td>
+        <td class="inputField"><?php echo TEXT_ADMIN_FOLDER_NAME . '<br /><img src="images/failed.gif" align="left" hspace="5" vspace="5" border="0">';?></td>
+        <td class="inputDescription"><?php echo TEXT_ADMIN_NO_PERMISSION; ?></td>
       </tr>
-      <tr>
-        <td class="inputField"><?php echo 'Store Owner Last Name<br />' . osc_draw_input_field('CFG_STORE_OWNER_LASTNAME', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The last name of the store owner that is presented to the public.</td>
-      </tr>
-      <tr>
-        <td class="inputField"><?php echo 'Store Owner E-Mail Address<br />' . osc_draw_input_field('CFG_STORE_OWNER_EMAIL_ADDRESS', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The e-mail address of the store owner that is presented to the public.</td>
-      </tr>
-      <tr>
-        <td class="inputField"><?php echo 'Administrator Username<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_USERNAME', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The administrator username to use for the administration tool.</td>
-      </tr>
-      <tr>
-        <td class="inputField"><?php echo 'Administrator Password<br />' . osc_draw_password_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text"'); ?></td>
-        <td class="inputDescription">The password to use for the administrator account.</td>
-      </tr>
+<?php } ?>
     </table>
 
-    <p align="right"><input type="image" src="images/button_continue.gif" border="0" alt="Continue" id="inputButton" />&nbsp;&nbsp;<a href="index.php"><img src="images/button_cancel.gif" border="0" alt="Cancel" /></a></p>
+<div id="buttons">
+  <table width="100%">
+    <tr>
+      <td align="right"><input type="image" src="includes/languages/<?php echo $language_selected; ?>/images/buttons/button_continue.gif" alt="<?php echo IMAGE_CONTINUE; ?>" id="inputButton" /></td>
+    </tr>
+  </table>
+</div>
 
 <?php
-  reset($HTTP_POST_VARS);
-  while (list($key, $value) = each($HTTP_POST_VARS)) {
+  reset($_POST);
+  while (list($key, $value) = each($_POST)) {
     if (($key != 'x') && ($key != 'y')) {
       if (is_array($value)) {
         for ($i=0, $n=sizeof($value); $i<$n; $i++) {
@@ -87,5 +118,6 @@ $Id: install_3.php 3 2006-05-27 04:59:07Z user $
 ?>
 
     </form>
+<?php } ?>    
   </div>
 </div>

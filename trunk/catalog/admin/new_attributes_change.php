@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 // I found the easiest way to do this is just delete the current attributes & start over =)
 MYSQL_QUERY( "DELETE FROM products_attributes WHERE products_id = '$current_product_id'" );
 
@@ -18,25 +29,25 @@ for ($i = 0; $i < sizeof($optionValues); $i++) {
        }
 
 
-    $value_price =  $HTTP_POST_VARS[$optionValues[$i] . '_price'];
+    $value_price =  $_POST[$optionValues[$i] . '_price'];
 
-    $value_prefix = $HTTP_POST_VARS[$optionValues[$i] . '_prefix'];
+    $value_prefix = $_POST[$optionValues[$i] . '_prefix'];
     
     if ( $optionTypeInstalled == "1" ) {
                                        	
-        $value_type = $HTTP_POST_VARS[$optionValues[$i] . '_type'];
-        $value_qty = $HTTP_POST_VARS[$optionValues[$i] . '_qty'];
-        $value_order = $HTTP_POST_VARS[$optionValues[$i] . '_order'];
-        $value_linked = $HTTP_POST_VARS[$optionValues[$i] . '_linked'];
+        $value_type = $_POST[$optionValues[$i] . '_type'];
+        $value_qty = $_POST[$optionValues[$i] . '_qty'];
+        $value_order = $_POST[$optionValues[$i] . '_order'];
+        $value_linked = $_POST[$optionValues[$i] . '_linked'];
         
         MYSQL_QUERY( "INSERT INTO products_attributes ( products_id, options_id, options_values_id, options_values_price, price_prefix, options_type_id, options_values_qty, attribute_order, collegamento )
                      VALUES( '$current_product_id', '$optionsID', '$optionValues[$i]', '$value_price', '$value_prefix', '$value_type', '$value_qty', '$value_order', '$value_linked' )" ) or die(mysql_error());
                      
     } else if ( $optionSortCopyInstalled == "1" ) {
                                                   	
-        $value_sort = $HTTP_POST_VARS[$optionValues[$i] . '_sort'];
-        $value_weight = $HTTP_POST_VARS[$optionValues[$i] . '_weight'];
-        $value_weight_prefix = $HTTP_POST_VARS[$optionValues[$i] . '_weight_prefix'];
+        $value_sort = $_POST[$optionValues[$i] . '_sort'];
+        $value_weight = $_POST[$optionValues[$i] . '_weight'];
+        $value_weight_prefix = $_POST[$optionValues[$i] . '_weight_prefix'];
 
         MYSQL_QUERY( "INSERT INTO products_attributes ( products_id, options_id, options_values_id, options_values_price, price_prefix, products_options_sort_order, products_attributes_weight, products_attributes_weight_prefix )
                      VALUES( '$current_product_id', '$optionsID', '$optionValues[$i]', '$value_price', '$value_prefix', '$value_sort', '$value_weight', '$value_weight_prefix' )" ) or die(mysql_error());
@@ -51,15 +62,15 @@ for ($i = 0; $i < sizeof($optionValues); $i++) {
 }
 
 // For text input option type feature by chandra
-if ( $optionTypeTextInstalled == "1" && is_array( $HTTP_POST_VARS['optionValuesText'] )) {
+if ( $optionTypeTextInstalled == "1" && is_array( $_POST['optionValuesText'] )) {
    
    for ($i = 0; $i < sizeof($optionValuesText); $i++) {
                                                       	
-        $value_price =  $HTTP_POST_VARS[$optionValuesText[$i] . '_price'];
+        $value_price =  $_POST[$optionValuesText[$i] . '_price'];
 
-        $value_prefix = $HTTP_POST_VARS[$optionValuesText[$i] . '_prefix'];
+        $value_prefix = $_POST[$optionValuesText[$i] . '_prefix'];
         
-        $value_product_id = $HTTP_POST_VARS[$optionValuesText[$i] . '_options_id'];
+        $value_product_id = $_POST[$optionValuesText[$i] . '_options_id'];
         
         MYSQL_QUERY( "INSERT INTO products_attributes ( products_id, options_id, options_values_id, options_values_price, price_prefix )
         VALUES( '$current_product_id', '$value_product_id', '0', '$value_price', '$value_prefix' )" ) or die(mysql_error());
@@ -67,14 +78,5 @@ if ( $optionTypeTextInstalled == "1" && is_array( $HTTP_POST_VARS['optionValuesT
    }
    
 }
-
-
-
-
-
-
-
-
-
 
 ?>

@@ -1,18 +1,13 @@
 <?php
 /*
-  $Id: attributeManager.php,v 1.0 21/02/06 Sam West$
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
-  Tradução para Português do Brasil de AJAX-AttributeManager-V2.7
-  
-  por Valmy Gomes
-  http://www.lgz.com.br
-  valmygomes@legalzona.com.br
-  valmygomes@hotmail.com
 */
 
 //attributeManagerPrompts.inc.php

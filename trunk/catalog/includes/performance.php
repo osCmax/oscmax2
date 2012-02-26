@@ -1,12 +1,12 @@
 <?php
 /*
-$Id: performance.php 3 2006-05-27 04:59:07Z user $
+$Id$
   orig : performance.php,v 1.5 2004/11/21 00:04:53 Chemo Exp $
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -16,20 +16,23 @@ $Id: performance.php 3 2006-05-27 04:59:07Z user $
     $time_end = explode(' ', microtime());
     $parse_time = number_format(($time_end[1] + $time_end[0] - ($time_start[1] + $time_start[0])), 3);
     echo '<div align="center"><span class="smallText">Current Parse Time: <b>' . $parse_time . ' s</b> with <b>' . sizeof($debug['QUERIES']) . ' queries</b></span></div>';
+	
     if (DISPLAY_QUERIES == 'true') {
-      echo '<b>QUERY DEBUG:</b> ';
-      print_array($debug);
-      echo '<hr>';
-      echo '<b>SESSION:</b> ';
-      print_array($_SESSION);
-      echo '<hr>';
-      echo '<b>COOKIE:</b> ';
-      print_array($_COOKIE);
-      echo '<b>POST:</b> ';
-      print_array($_POST);
-      echo '<hr>';
-      echo '<b>GET:</b> ';
-      print_array($_GET);
+      echo '<p class="main"><b>QUERY DEBUG:</b> ';
+      print_r($debug);
+      echo '</p><hr>';
+      echo '<p class="main"><b>SESSION:</b> ';
+      print_r($_SESSION);
+      echo '</p><hr>';
+      echo '<p class="main"><b>COOKIE:</b> ';
+      print_r($_COOKIE);
+	  echo '</p><hr>';
+      echo '<p class="main"><b>POST:</b> ';
+      print_r($_POST);
+      echo '</p><hr>';
+      echo '<p class="main"><b>GET:</b>';
+      print_r($_GET);
+	  echo '</p>';
     } # END if request
   }
   unset($debug);

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: categories.php,v 1.1.1.1.2.1 2005/06/12 00:04:01 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
   
   Released under the GNU General Public License
 */
@@ -16,6 +16,7 @@ define('HEADING_TITLE_GOTO', 'Aller &aacute;:');
 
 define('TABLE_HEADING_ID', 'ID');
 define('TABLE_HEADING_CATEGORIES_PRODUCTS', 'Cat&eacute;gories / Produits');
+define('TABLE_HEADING_MODEL_NUMBER', 'Mod&egrave;le');
 define('TABLE_HEADING_ACTION', 'Action');
 define('TABLE_HEADING_STATUS', 'Statut');
 
@@ -94,4 +95,10 @@ define('ERROR_CANNOT_LINK_TO_SAME_CATEGORY', 'Erreur: Impossible de lier des pro
 define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Erreur: Impossible d\'&eacute;crire dans le r&eacute;pertoire images: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Erreur: Le r&eacute;pertoire d\'images n\'existe pas: ' . DIR_FS_CATALOG_IMAGES);
 define('ERROR_CANNOT_MOVE_CATEGORY_TO_PARENT', 'Erreur: La cat&eacute;gorie ne peut pas &ecirc;tre d&eacute;plac&eacute;e dans la sous-cat&eacute;gorie.');
+
+// BOF indvship 4.5
+define('TEXT_PRODUCTS_ZIPCODE', 'Shipping zip code: ');
+define('TEXT_INDIV_SHIPPING_PRICE', 'Shipping price: ');
+define('TEXT_INDIV_ADDITIONAL_PRICE', 'Each additional price: ');
+// EOF indvship 4.5
 ?>

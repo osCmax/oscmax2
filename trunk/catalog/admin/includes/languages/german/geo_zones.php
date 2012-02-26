@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: geo_zones.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -21,28 +21,28 @@ define('TEXT_INFO_HEADING_NEW_ZONE', 'Neue Steuerzone');
 define('TEXT_INFO_NEW_ZONE_INTRO', 'Bitte geben Sie die neue Steuerzone mit allen relevanten Daten ein');
 
 define('TEXT_INFO_HEADING_EDIT_ZONE', 'Steuerzone bearbeiten');
-define('TEXT_INFO_EDIT_ZONE_INTRO', 'Bitte f&uuml;hren Sie alle notwendigen &Auml;nderungen durch.');
+define('TEXT_INFO_EDIT_ZONE_INTRO', 'Bitte führen Sie die gewünschten Änderungen durch.');
 
-define('TEXT_INFO_HEADING_DELETE_ZONE', 'Steuerzone l&ouml;schen');
-define('TEXT_INFO_DELETE_ZONE_INTRO', 'Sind Sie sicher, dass Sie diese Steuerzone l&ouml;schen wollen?');
+define('TEXT_INFO_HEADING_DELETE_ZONE', 'Steuerzone löschen');
+define('TEXT_INFO_DELETE_ZONE_INTRO', 'Sind Sie sicher, dass Sie diese Steuerzone löschen möchten?');
 
 define('TEXT_INFO_HEADING_NEW_SUB_ZONE', 'Neue Unterzone');
 define('TEXT_INFO_NEW_SUB_ZONE_INTRO', 'Bitte geben Sie die neue Unterzone mit allen relevanten Daten ein');
 
 define('TEXT_INFO_HEADING_EDIT_SUB_ZONE', 'Unterzone bearbeiten');
-define('TEXT_INFO_EDIT_SUB_ZONE_INTRO', 'Bitte f&uuml;hren Sie alle notwendigen &Auml;nderungen durch.');
+define('TEXT_INFO_EDIT_SUB_ZONE_INTRO', 'Bitte füren Sie die gewünschten Änderungen durch.');
 
-define('TEXT_INFO_HEADING_DELETE_SUB_ZONE', 'Unterzone l&ouml;schen');
-define('TEXT_INFO_DELETE_SUB_ZONE_INTRO', 'Sind Sie sicher, dass Sie diese Unterzone l&ouml;schen wollen?');
+define('TEXT_INFO_HEADING_DELETE_SUB_ZONE', 'Unterzone löschen');
+define('TEXT_INFO_DELETE_SUB_ZONE_INTRO', 'Sind Sie sicher, dass Sie diese Unterzone löschen wollen?');
 
-define('TEXT_INFO_DATE_ADDED', 'hinzugef&uuml;gt am:');
-define('TEXT_INFO_LAST_MODIFIED', 'letzte &Auml;nderung:');
+define('TEXT_INFO_DATE_ADDED', 'Hinzugefügt am:');
+define('TEXT_INFO_LAST_MODIFIED', 'Zuletzt geändert am:');
 define('TEXT_INFO_ZONE_NAME', 'Name der Steuerzone:');
 define('TEXT_INFO_NUMBER_ZONES', 'Anzahl der Steuerzonen:');
 define('TEXT_INFO_ZONE_DESCRIPTION', 'Beschreibung:');
 define('TEXT_INFO_COUNTRY', 'Land:');
 define('TEXT_INFO_COUNTRY_ZONE', 'Bundesland:');
-define('TYPE_BELOW', 'Alle Bundesl&auml;nder');
-define('PLEASE_SELECT', 'Alle Bundesl&auml;nder');
-define('TEXT_ALL_COUNTRIES', 'Alle L&auml;nder');
+define('TYPE_BELOW', 'Alle Bundesländer');
+define('PLEASE_SELECT', 'Alle Bundesländer');
+define('TEXT_ALL_COUNTRIES', 'Alle Länder');
 ?>

@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_affiliates.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -18,43 +14,44 @@ define('HEADING_TITLE', 'Afiliados');
 define('HEADING_TITLE_SEARCH', 'Buscar:');
 
 define('TABLE_HEADING_FIRSTNAME', 'Nombre');
-define('TABLE_HEADING_LASTNAME', 'Apellido');
-define('TABLE_HEADING_COMMISSION','Commission');
-define('TABLE_HEADING_USERHOMEPAGE', 'Homepage');
-define('TABLE_HEADING_ACCOUNT_CREATED', 'Cuenta Creada');
-define('TABLE_HEADING_ACTION', 'Accion');
-define('TABLE_HEADING_AFFILIATE_ID','Afiliado ID');
-define('TABLE_HEADING_AFFILIATE_STATUS', 'Status');
+define('TABLE_HEADING_LASTNAME', 'Apellidos');
+define('TABLE_HEADING_COMMISSION','Comisión');
+define('TABLE_HEADING_USERHOMEPAGE', 'Página web');
+define('TABLE_HEADING_ACCOUNT_CREATED', 'Cuenta creada');
+define('TABLE_HEADING_ACTION', 'Acción');
+define('TABLE_HEADING_AFFILIATE_ID','ID Afiliado');
+define('TABLE_HEADING_AFFILIATE_STATUS', 'Estado');
 
-define('TEXT_DATE_ACCOUNT_CREATED', 'Cuenta Creada:');
-define('TEXT_DATE_ACCOUNT_LAST_MODIFIED', 'Ultima Modificacion:');
-define('TEXT_INFO_DATE_LAST_LOGON', 'Ultima Visita:');
-define('TEXT_INFO_NUMBER_OF_LOGONS', 'Numero de visitas:');
-define('TEXT_INFO_COMMISSION','Commission');
-define('TEXT_INFO_NUMBER_OF_SALES', 'Numero de Ventas:');
-define('TEXT_INFO_COUNTRY', 'Pais:');
-define('TEXT_INFO_SALES_TOTAL', 'Total Ventas:');
-define('TEXT_INFO_AFFILIATE_TOTAL', 'Commission:');
-define('TEXT_DELETE_INTRO', 'Seguro que desea eliminar este Afiliado?');
-define('TEXT_INFO_HEADING_DELETE_CUSTOMER', 'Eliminar Afiliado');
-define('TEXT_DISPLAY_NUMBER_OF_AFFILIATES', 'Viendo del <b>%d</b> al <b>%d</b> (de <b>%d</b> Afiliados)');
+define('TEXT_DATE_ACCOUNT_CREATED', 'Cuenta creada:');
+define('TEXT_DATE_ACCOUNT_LAST_MODIFIED', 'Última modificación:');
+define('TEXT_INFO_DATE_LAST_LOGON', 'Última visita:');
+define('TEXT_INFO_NUMBER_OF_LOGONS', 'Número de visitas:');
+define('TEXT_INFO_COMMISSION','Comisión');
+define('TEXT_INFO_NUMBER_OF_SALES', 'Numero de ventas:');
+define('TEXT_INFO_COUNTRY', 'País:');
+define('TEXT_INFO_SALES_TOTAL', 'Total ventas:');
+define('TEXT_INFO_AFFILIATE_TOTAL', 'Comisión total:');
+define('TEXT_DELETE_INTRO', 'Seguro que quieres eliminar este afiliado?');
+define('TEXT_INFO_HEADING_DELETE_CUSTOMER', 'Eliminar afiliado');
+define('TEXT_DISPLAY_NUMBER_OF_AFFILIATES', 'Mostrando del <b>%d</b> al <b>%d</b> (de <b>%d</b> afiliados)');
 
-define('ENTRY_AFFILIATE_PAYMENT_DETAILS', 'Payable to:');
-define('ENTRY_AFFILIATE_PAYMENT_CHECK','Check Payee Name:');
-define('ENTRY_AFFILIATE_PAYMENT_PAYPAL','PayPal Cuenta Email:');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_NAME','Bank Name:');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NAME','Account Name:');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER','Account Number:');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER','ABA/BSB number (branch number)');
-define('ENTRY_AFFILIATE_PAYMENT_BANK_SWIFT_CODE','SWIFT Code ');
+define('ENTRY_AFFILIATE_PAYMENT_DETAILS', 'Pagadero a:');
+define('ENTRY_AFFILIATE_PAYMENT_CHECK','Beneficiario de cheques:');
+define('ENTRY_AFFILIATE_PAYMENT_PAYPAL','E-mail de cuenta PayPal:');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_NAME','Nombre del banco:');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NAME','Titular de la cuenta:');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER','Número de cuenta:');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER','Número de sucursal:');
+define('ENTRY_AFFILIATE_PAYMENT_BANK_SWIFT_CODE','Código SWIFT ');
 define('ENTRY_AFFILIATE_COMPANY','Empresa');
-define('ENTRY_AFFILIATE_COMPANY_TAXID','Tax-Id.:');
-define('ENTRY_AFFILIATE_HOMEPAGE','Homepage');
-define('ENTRY_AFFILIATE_COMMISSION',' Pay Per Sale Payment % Rate');
+define('ENTRY_AFFILIATE_COMPANY_TAXID','NIF:');
+define('ENTRY_AFFILIATE_HOMEPAGE','Página web');
+define('ENTRY_AFFILIATE_COMMISSION','Porcentaje de pago por venta');
 
-define('CATEGORY_COMMISSION','Individuell Commission');
-define('CATEGORY_PAYMENT_DETAILS','You get your money by:');
+define('CATEGORY_COMMISSION','Comisión individual');
+define('CATEGORY_PAYMENT_DETAILS','Consigues tu dinero por:');
 
-define('TYPE_BELOW', 'Escriba debajo');
-define('PLEASE_SELECT', 'Seleccione');
+define('PLEASE_SELECT', 'Selecciona');
+define('TYPE_BELOW', 'Escriba a continuación');
+
 ?>

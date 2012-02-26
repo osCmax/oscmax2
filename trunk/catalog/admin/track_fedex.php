@@ -1,6 +1,14 @@
 <?php
+/*
+$Id$
 
-// track_fedex.php
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
 
   require('includes/application_top.php');
 
@@ -8,9 +16,9 @@
 	
 	$debug = 0; // 1 for yes, 0 for no
 	
-	$action = $HTTP_GET_VARS['action'];
-	$order = $HTTP_GET_VARS['oID'];
-	$tracking_number = $HTTP_GET_VARS['num'];
+	$action = $_GET['action'];
+	$order = $_GET['oID'];
+	$tracking_number = $_GET['num'];
 
 	include(DIR_WS_INCLUDES . 'fedexdc.php');
 
@@ -50,9 +58,10 @@ if ($debug) {
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php
   require(DIR_WS_INCLUDES . 'header.php');
@@ -78,7 +87,7 @@ if ($debug) {
 							echo ', ' . ORDER_NUMBER . $order;
 							}
 						?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
             <td class="pageHeading" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_ORDERS, tep_get_all_get_params(array('action'))) . 'oID=' . $order . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
           </tr>
         </table></td>

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -13,13 +13,13 @@ $Id: checkout_success.php 3 2006-05-27 04:59:07Z user $
 define('NAVBAR_TITLE_1', 'Checkout');
 define('NAVBAR_TITLE_2', 'Success');
 
-define('HEADING_TITLE', 'Your Order Has Been Processed!');
+define('HEADING_TITLE', 'Your Order Has Been Processed.');
 
-define('TEXT_SUCCESS', 'Your order has been successfully processed! Your products will arrive at their destination within 2-5 working days.');
+define('TEXT_SUCCESS', 'Your order has been successfully processed. Your products will arrive at their destination within 2-5 working days.');
 define('TEXT_NOTIFY_PRODUCTS', 'Please notify me of updates to the products I have selected below:');
 define('TEXT_SEE_ORDERS', 'You can view your order history by going to the <a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">\'My Account\'</a> page and by clicking on <a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '">\'History\'</a>.');
 define('TEXT_CONTACT_STORE_OWNER', 'Please direct any questions you have to the <a href="' . tep_href_link(FILENAME_CONTACT_US) . '">store owner</a>.');
-define('TEXT_THANKS_FOR_SHOPPING', 'Thanks for shopping with us online!');
+define('TEXT_THANKS_FOR_SHOPPING', 'Thanks for shopping with us online.');
 
 define('TABLE_HEADING_COMMENTS', 'Enter a comment for the order processed');
 

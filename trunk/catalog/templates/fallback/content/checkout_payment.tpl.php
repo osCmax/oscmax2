@@ -1,37 +1,49 @@
-    <?php echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onsubmit="return check_form();"'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+      echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onsubmit="return check_form();"'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_payment.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+<?php 
+//---PayPal WPP Modification START ---//
+  tep_paypal_wpp_checkout_payment_error_display();
+//---PayPal WPP Modification END ---// 
+?>
 <?php
-  if (isset($HTTP_GET_VARS['payment_error']) && is_object(${$HTTP_GET_VARS['payment_error']}) && ($error = ${$HTTP_GET_VARS['payment_error']}->get_error())) {
+  if ( isset($_GET['payment_error']) && is_object(${$_GET['payment_error']}) && ($error = ${$_GET['payment_error']}->get_error()) || ( isset($_GET['payment_success']) && is_object(${$_GET['payment_success']}) && ($error = ${$_GET['payment_success']}->get_error()) )) {
+	  $class = 'messageStackWarning';
+	  if (isset($_GET['payment_success'])) { $class = 'messageStackSuccess'; }
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main"><b><?php echo tep_output_string_protected($error['title']); ?></b></td>
+            <td class="main"><b><?php echo $error['title']; ?></b></td>
           </tr>
         </table></td>
       </tr>
       <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBoxNotice">
-          <tr class="infoBoxNoticeContents">
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td class="main" width="100%" valign="top"><?php echo tep_output_string_protected($error['error']); ?></td>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
+        <td class="<?php echo $class; ?>"><?php echo $error['error']; ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -58,7 +70,7 @@
 
   for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
     echo '                <tr>' . "\n" .
-         '                  <td width="10%" class="main" align="right" valign="top" width="30">' . $order->products[$i]['qty'] . ' x</td>' . "\n" .
+         '                  <td width="10%" class="main" align="right" valign="top">' . $order->products[$i]['qty'] . ' x</td>' . "\n" .
          '                  <td width="60%" class="main" valign="top">' . $order->products[$i]['name'];
 
    if (STOCK_CHECK == 'true') {
@@ -97,6 +109,9 @@
       </tr>
 <?php // #################### THIS MOD WAS OPTIONAL! ###################### ?>
 <?php // End - CREDIT CLASS Gift Voucher Contribution ?>
+<?php //---PayPal WPP Modification START ---//-- ?>
+<?php if (!$ec_enabled || isset($_GET['ec_cancel']) || (!tep_session_is_registered('paypal_ec_payer_id') && !tep_session_is_registered('paypal_ec_payer_info'))) { ?>
+<?php //---PayPal WPP Modification END ---//-- ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
@@ -113,7 +128,7 @@
                 <td class="main" width="50%" valign="top"><?php echo TEXT_SELECTED_BILLING_DESTINATION; ?><br><br><?php echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL') . '">' . tep_image_button('button_change_address.gif', IMAGE_BUTTON_CHANGE_ADDRESS) . '</a>'; ?></td>
                 <td align="right" width="50%" valign="top"><table border="0" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td class="main" align="center" valign="top"><b><?php echo TITLE_BILLING_ADDRESS; ?></b><br><?php echo tep_image(DIR_WS_IMAGES . 'arrow_south_east.gif'); ?></td>
+                    <td class="main" align="center" valign="top"><b><?php echo TITLE_BILLING_ADDRESS; ?></b><br><?php echo tep_image(DIR_WS_ICONS . 'arrow_south_east.gif'); ?></td>
                     <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td> 
                     <td class="main" valign="top"><?php echo tep_address_label($customer_id, $billto, true, ' ', '<br>'); ?></td>
                     <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td> 
@@ -145,14 +160,23 @@
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
+  // *** BEGIN GOOGLE CHECKOUT ***
+  // Skips Google Checkout as a payment option on the payments page since that option
+  // is provided in the checkout page.
   $selection = $payment_modules->selection();
-
+  for ($i = 0, $n = sizeof($selection); $i < $n; $i++) {
+    if ($selection[$i]['id'] == 'googlecheckout') {
+      array_splice($selection, $i, 1);
+      break;   
+    }
+  }
+  // *** END GOOGLE CHECKOUT ***
   if (sizeof($selection) > 1) {
 ?>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
                 <td class="main" width="50%" valign="top"><?php echo TEXT_SELECT_PAYMENT_METHOD; ?></td>
-                <td class="main" width="50%" valign="top" align="right"><b><?php echo TITLE_PLEASE_SELECT; ?></b><br><?php echo tep_image(DIR_WS_IMAGES . 'arrow_east_south.gif'); ?></td>
+                <td class="main" width="50%" valign="top" align="right"><b><?php echo TITLE_PLEASE_SELECT; ?></b><br><?php echo tep_image(DIR_WS_ICONS . 'arrow_east_south.gif'); ?></td>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
 <?php
@@ -180,14 +204,18 @@
     }
 ?>
                     <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                    <td class="main" colspan="3"><b><?php echo $selection[$i]['module']; ?></b></td>
+                    <td class="main" colspan="3"><b><label for="radio<?php echo $radio_buttons; ?>"><?php echo $selection[$i]['module']; ?></label></b></td>
                     <td class="main" align="right">
 <?php
     if (sizeof($selection) > 1) {
-      echo tep_draw_radio_field('payment', $selection[$i]['id'], ($selection[$i]['id'] == $payment));
+// multiple choices, first one ($i is 0) is preselected
+      echo tep_draw_radio_field('payment', $selection[$i]['id'], $i==0, ' id="radio' . $radio_buttons . '"');
     } else {
-      echo tep_draw_hidden_field('payment', $selection[$i]['id']);
+// only one choice: show the radio button, but preselected and don't let the user change it
+//    echo tep_draw_hidden_field('payment', $selection[$i]['id']);
+      echo tep_draw_radio_field('payment', $selection[$i]['id'], true, 'readonly="readonly"');
     }
+
 ?>
                     </td>
                     <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
@@ -232,8 +260,12 @@
     $radio_buttons++;
   }
 // Start - CREDIT CLASS Gift Voucher Contribution
-if (tep_session_is_registered('customer_id')) {
-if ($gv_result['amount']>0){
+  if(MODULE_ORDER_TOTAL_COUPON_STATUS == 'true')
+  if (tep_session_is_registered('customer_id')) {
+	  $gv_query = tep_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id = '" . $customer_id . "'");
+  	$gv_result = tep_db_fetch_array($gv_query);
+
+    if ($gv_result['amount']>0){
   echo '              <tr><td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td><td colspan=2>' . "\n" .
        '              <table border="0" cellpadding="2" cellspacing="0" width="100%"><tr class="moduleRow" onmouseover="rowOverEffect(this)" onclick="clearRadeos()" onmouseout="rowOutEffect(this)" >' . "\n" .
        '              <td width="10">' .  tep_draw_separator('pixel_trans.gif', '10', '1') .'</td><td class="main">' . $gv_result['text'];
@@ -247,6 +279,13 @@ if ($gv_result['amount']>0){
           </tr>
         </table></td>
       </tr>
+<?php 
+//---PayPal WPP Modification START ---//
+  } else {
+    tep_paypal_wpp_switch_checkout_method(FILENAME_CHECKOUT_PAYMENT);
+  }
+//---PayPal WPP Modification END ---//
+?>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
@@ -262,12 +301,51 @@ if ($gv_result['amount']>0){
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td><?php echo tep_draw_textarea_field('comments', 'soft', '60', '5', $comments); ?></td>
+                <td><?php echo tep_draw_textarea_field('comments', '60', '5', $comments); ?></td>
               </tr>
             </table></td>
           </tr>
         </table></td>
       </tr>
+
+<?php if (MATC == 'true') { ?>
+
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td>
+          <table border="0" width="100%" cellspacing="1" cellpadding="2">
+            <tr>
+              <td id="MATCtd" class="messageStackAlert" align="center"><?php echo tep_draw_checkbox_field('MATC','true', false, 'id="MATC" onClick="javascript:switchMATC()"'); ?><?php echo TERMS_PART_1; ?><a id="conditions" href="<?php echo $HTTP_SERVER . DIR_WS_CATALOG . 'conditions.php?info_id=11&languages_id=' . (isset($languages_id) ? $languages_id : '1'); ?>" title="<?php echo TERMS_PART_2; ?>"><?php echo TERMS_PART_2; ?></a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+	  <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+          <tr class="infoBoxContents">
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+                <td class="main"><b><?php echo TITLE_CONTINUE_CHECKOUT_PROCEDURE . '</b><br>' . TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?></td>
+                <td class="main" align="right">
+                  <span id="enableMATC"><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></span>
+                  <span id="disableMATC" style="cursor: pointer;"><?php echo tep_image_button('button_MAT.gif', IMAGE_BUTTON_MAT, ' onClick="javascript:warnMATC()"'); ?></span>
+                </td>
+                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+      
+<?php } else { ?>
+      
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
@@ -285,6 +363,8 @@ if ($gv_result['amount']>0){
           </tr>
         </table></td>
       </tr>
+<?php } ?>
+
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
@@ -300,7 +380,7 @@ if ($gv_result['amount']>0){
             <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
-                <td><?php echo tep_image(DIR_WS_IMAGES . 'checkout_bullet.gif'); ?></td>
+                <td><?php echo tep_image(DIR_WS_ICONS . 'checkout_bullet.gif'); ?></td>
                 <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
               </tr>
             </table></td>

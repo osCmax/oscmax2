@@ -1,31 +1,31 @@
 <?php
 /*
-$Id: checkout_shipping.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Realizar Pedido');
-define('NAVBAR_TITLE_2', 'Forma de Env&iacute;o');
+define('NAVBAR_TITLE_1', 'Realizar pedido');
+define('NAVBAR_TITLE_2', 'Forma de envío');
 
-define('HEADING_TITLE', 'Datos del Env&iacute;o');
+define('HEADING_TITLE', 'Datos del envío');
 
-define('TABLE_HEADING_SHIPPING_ADDRESS', 'Direcci&oacute;n de Entrega');
-define('TEXT_CHOOSE_SHIPPING_DESTINATION', 'Escoja una direcci&oacute;n de su libreta para la entrega de los productos de este pedido.');
-define('TITLE_SHIPPING_ADDRESS', 'Direcci&oacute;n de Entrega:');
+define('TABLE_HEADING_SHIPPING_ADDRESS', 'Dirección de entrega');
+define('TEXT_CHOOSE_SHIPPING_DESTINATION', 'Seleccione una dirección de su agenda para la entrega del pedido.');
+define('TITLE_SHIPPING_ADDRESS', 'Dirección de entrega:');
 
-define('TABLE_HEADING_SHIPPING_METHOD', 'Forma de Env&iacute;o');
-define('TEXT_CHOOSE_SHIPPING_METHOD', 'Seleccione la forma de env&iacute;o preferida para la entrega de este pedido.');
+define('TABLE_HEADING_SHIPPING_METHOD', 'Forma de envío');
+define('TEXT_CHOOSE_SHIPPING_METHOD', 'Seleccione la forma de envío preferida para la entrega de este pedido.');
 define('TITLE_PLEASE_SELECT', 'Seleccione');
-define('TEXT_ENTER_SHIPPING_INFORMATION', 'Esta es la unica forma de env&iacute;o disponible para su pedido.');
+define('TEXT_ENTER_SHIPPING_INFORMATION', 'Esta es la unica forma de envío disponible para su pedido.');
 
-define('TABLE_HEADING_COMMENTS', 'Agregue Los Comentarios Sobre Su Orden');
+define('TABLE_HEADING_COMMENTS', 'Puede añadir comentarios sobre su pedido');
 
-define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continuar con el Proceso de Compra');
+define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continuar con el proceso de compra');
 define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'para seleccionar la forma de pago.');
 ?>

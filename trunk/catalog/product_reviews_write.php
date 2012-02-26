@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -21,10 +21,22 @@ $Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
   require(DIR_WS_FUNCTIONS . 'dynamic_mopics.php');
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot();
-    tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+    tep_redirect(tep_href_link(FILENAME_LOGIN, 'review_message=1', 'SSL'));
   }
 
-  $product_info_query = tep_db_query("select p.products_id, p.products_model, p.products_image, p.products_price, p.products_tax_class_id, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+//  $product_info_query = tep_db_query("select p.products_id, p.products_model, p.products_image, p.products_price, p.products_tax_class_id, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['products_id'] . "' and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+
+// BOF Separate Pricing Per Customer 
+ 
+  if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+    $customer_group_id = $_SESSION['sppc_customer_group_id'];
+  } else {
+    $customer_group_id = '0';
+  }
+
+  $product_info_query = tep_db_query("select p.products_id, p.products_model, p.products_image, p.products_price, p.products_tax_class_id, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = '" . (int)$_GET['products_id'] . "' and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
+// EOF Separate Pricing Per Customer, Hide products and categories from groups 
+
   if (!tep_db_num_rows($product_info_query)) {
     tep_redirect(tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params(array('action'))));
   } else {
@@ -34,9 +46,9 @@ $Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
   $customer_query = tep_db_query("select customers_firstname, customers_lastname from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$customer_id . "'");
   $customer = tep_db_fetch_array($customer_query);
 
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
-    $rating = tep_db_prepare_input($HTTP_POST_VARS['rating']);
-    $review = tep_db_prepare_input($HTTP_POST_VARS['review']);
+  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
+    $rating = tep_db_prepare_input(isset($_POST['rating']) ? $_POST['rating'] : '');
+    $review = tep_db_prepare_input($_POST['review']);
 
     $error = false;
     if (strlen($review) < REVIEW_TEXT_MIN_LENGTH) {
@@ -52,31 +64,32 @@ $Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
     }
 
     if ($error == false) {
-      tep_db_query("insert into " . TABLE_REVIEWS . " (products_id, customers_id, customers_name, reviews_rating, date_added) values ('" . (int)$HTTP_GET_VARS['products_id'] . "', '" . (int)$customer_id . "', '" . tep_db_input($customer['customers_firstname']) . ' ' . tep_db_input($customer['customers_lastname']) . "', '" . tep_db_input($rating) . "', now())");
+      tep_db_query("insert into " . TABLE_REVIEWS . " (products_id, customers_id, customers_name, reviews_rating, date_added) values ('" . (int)$_GET['products_id'] . "', '" . (int)$customer_id . "', '" . tep_db_input($customer['customers_firstname']) . ' ' . tep_db_input($customer['customers_lastname']) . "', '" . tep_db_input($rating) . "', now())");
       $insert_id = tep_db_insert_id();
 
       tep_db_query("insert into " . TABLE_REVIEWS_DESCRIPTION . " (reviews_id, languages_id, reviews_text) values ('" . (int)$insert_id . "', '" . (int)$languages_id . "', '" . tep_db_input($review) . "')");
 
-      tep_redirect(tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params(array('action'))));
+      tep_redirect(tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params(array('action')) . 'message=display'));
     }
   }
 
-// BOF: MOD - Separate Pricing Per Customer
-  if(!tep_session_is_registered('sppc_customer_group_id')) { 
-  $customer_group_id = '0';
-  } else {
-   $customer_group_id = $sppc_customer_group_id;
-  }
+// BOF: MOD - Separate Pricing Per Customer 
+// deleted for Hide products and categories from groups
+//  if(!tep_session_is_registered('sppc_customer_group_id')) { 
+//  $customer_group_id = '0';
+//  } else {
+//   $customer_group_id = $sppc_customer_group_id;
+//  }
   
      if ($customer_group_id !='0') {
-	$customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and customers_group_id =  '" . $customer_group_id . "'");
+	$customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$_GET['products_id'] . "' and customers_group_id =  '" . $customer_group_id . "' and customers_group_price != null");
 	  if ($customer_group_price = tep_db_fetch_array($customer_group_price_query)) {
 	    $product_info['products_price'] = $customer_group_price['customers_group_price'];
 	  }
      }
 // EOF: MOD - Separate Pricing Per Customer
   if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
-    $products_price = '<<span style="text-decoration:line-through">>' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span> <span class="productSpecialPrice">' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span>';
+    $products_price = '<span style="text-decoration:line-through">' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span> <span class="productSpecialPrice">' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span>';
   } else {
     $products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
   }
@@ -92,9 +105,10 @@ $Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params()));
 
   $content = CONTENT_PRODUCT_REVIEWS_WRITE;
-  $javascript = $content . '.js';
+  $javascript = $content . '.js.php';
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

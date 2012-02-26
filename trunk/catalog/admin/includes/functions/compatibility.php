@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: compatibility.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -29,60 +29,32 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
     reset($ar);
   }
 
-  if (PHP_VERSION >= 4.1) {
+// Always PHP_VERSION >= 4.1
     $HTTP_GET_VARS =& $_GET;
     $HTTP_POST_VARS =& $_POST;
     $HTTP_COOKIE_VARS =& $_COOKIE;
     $HTTP_SESSION_VARS =& $_SESSION;
     $HTTP_POST_FILES =& $_FILES;
     $HTTP_SERVER_VARS =& $_SERVER;
-  } else {
-    if (!is_array($HTTP_GET_VARS)) $HTTP_GET_VARS = array();
-    if (!is_array($HTTP_POST_VARS)) $HTTP_POST_VARS = array();
-    if (!is_array($HTTP_COOKIE_VARS)) $HTTP_COOKIE_VARS = array();
-  }
 
 // handle magic_quotes_gpc turned off.
   if (!get_magic_quotes_gpc()) {
-    do_magic_quotes_gpc($HTTP_GET_VARS);
-    do_magic_quotes_gpc($HTTP_POST_VARS);
+    do_magic_quotes_gpc($_GET);
+    do_magic_quotes_gpc($_POST);
     do_magic_quotes_gpc($HTTP_COOKIE_VARS);
   }
 
-  if (!function_exists('is_numeric')) {
-    function is_numeric($param) {
-      return ereg("^[0-9]{1,50}.?[0-9]{0,50}$", $param);
-    }
-  }
-
-  if (!function_exists('is_uploaded_file')) {
-    function is_uploaded_file($filename) {
-      if (!$tmp_file = get_cfg_var('upload_tmp_dir')) {
-        $tmp_file = dirname(tempnam('', ''));
-      }
-
-      if (strchr($tmp_file, '/')) {
-        if (substr($tmp_file, -1) != '/') $tmp_file .= '/';
-      } elseif (strchr($tmp_file, '\\')) {
-        if (substr($tmp_file, -1) != '\\') $tmp_file .= '\\';
-      }
-
-      return file_exists($tmp_file . basename($filename));
-    }
-  }
-
-  if (!function_exists('move_uploaded_file')) {
-    function move_uploaded_file($file, $target) {
-      return copy($file, $target);
-    }
+// set default timezone if none exists (PHP 5.3 throws an E_WARNING)
+  if ((strlen(ini_get('date.timezone')) < 1) && function_exists('date_default_timezone_set')) {
+    date_default_timezone_set(@date_default_timezone_get());
   }
 
   if (!function_exists('checkdnsrr')) {
     function checkdnsrr($host, $type) {
       if(tep_not_null($host) && tep_not_null($type)) {
-        @exec("nslookup -type=$type $host", $output);
+        @exec("nslookup -type=" . escapeshellarg($type) . " " . escapeshellarg($host), $output);
         while(list($k, $line) = each($output)) {
-          if(eregi("^$host", $line)) {
+          if(preg_match("/^$host/i", $line)) {
             return true;
           }
         }
@@ -91,78 +63,6 @@ $Id: compatibility.php 3 2006-05-27 04:59:07Z user $
     }
   }
 
-  if (!function_exists('in_array')) {
-    function in_array($lookup_value, $lookup_array) {
-      reset($lookup_array);
-      while (list($key, $value) = each($lookup_array)) {
-        if ($value == $lookup_value) return true;
-      }
-
-      return false;
-    }
-  }
-
-  if (!function_exists('array_merge')) {
-    function array_merge($array1, $array2, $array3 = '') {
-      if ($array3 == '') $array3 = array();
-
-      while (list($key, $val) = each($array1)) $array_merged[$key] = $val;
-      while (list($key, $val) = each($array2)) $array_merged[$key] = $val;
-
-      if (sizeof($array3) > 0) while (list($key, $val) = each($array3)) $array_merged[$key] = $val;
-
-      return (array)$array_merged;
-    }
-  }
-
-  if (!function_exists('array_shift')) {
-    function array_shift(&$array) {
-      $i = 0;
-      $shifted_array = array();
-      reset($array);
-      while (list($key, $value) = each($array)) {
-        if ($i > 0) {
-          $shifted_array[$key] = $value;
-        } else {
-          $return = $array[$key];
-        }
-        $i++;
-      }
-      $array = $shifted_array;
-
-      return $return;
-    }
-  }
-
-  if (!function_exists('array_reverse')) {
-    function array_reverse($array) {
-      $reversed_array = array();
-
-      for ($i=sizeof($array)-1; $i>=0; $i--) {
-        $reversed_array[] = $array[$i];
-      }
-
-      return $reversed_array;
-    }
-  }
-
-  if (!function_exists('array_slice')) {
-    function array_slice($array, $offset, $length = '0') {
-      $length = abs($length);
-
-      if ($length == 0) {
-        $high = sizeof($array);
-      } else {
-        $high = $offset+$length;
-      }
-
-      for ($i=$offset; $i<$high; $i++) {
-        $new_array[$i-$offset] = $array[$i];
-      }
-
-      return $new_array;
-    }
-  }
 /*
  * http_build_query() natively supported from PHP 5.0
  * From Pear::PHP_Compat

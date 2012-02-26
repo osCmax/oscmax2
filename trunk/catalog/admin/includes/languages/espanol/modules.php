@@ -1,24 +1,24 @@
 <?php
 /*
-$Id: modules.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE_MODULES_PAYMENT', 'M&oacute;dulos de Pago');
-define('HEADING_TITLE_MODULES_SHIPPING', 'M&oacute;dulos de Envio');
-define('HEADING_TITLE_MODULES_ORDER_TOTAL', 'M&oacute;dules de Totalizaci&oacute;n');
+define('HEADING_TITLE_MODULES_PAYMENT', 'Módulos de pago');
+define('HEADING_TITLE_MODULES_SHIPPING', 'Módulos de envio');
+define('HEADING_TITLE_MODULES_ORDER_TOTAL', 'Módulos de totalización');
 
-define('TABLE_HEADING_MODULES', 'M&oacute;dulos');
+define('TABLE_HEADING_MODULES', 'Módulos');
 define('TABLE_HEADING_SORT_ORDER', 'Orden');
-define('TABLE_HEADING_ACTION', 'Acci&oacute;n');
+define('TABLE_HEADING_ACTION', 'Acción');
 
-define('TEXT_INFO_VERSION', 'Versi&oacute;n:');
-define('TEXT_INFO_ONLINE_STATUS', 'online status');
-define('TEXT_MODULE_DIRECTORY', 'Directorio de m&oacute;dulos:');
+define('TEXT_INFO_VERSION', 'Versión:');
+define('TEXT_INFO_ONLINE_STATUS', 'estado online');
+define('TEXT_MODULE_DIRECTORY', 'Directorio de módulos:');
 ?>

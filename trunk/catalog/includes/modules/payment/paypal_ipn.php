@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -82,8 +82,6 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
 
     function confirmation() {
       global $cartID, $cart_PayPal_IPN_ID, $customer_id, $languages_id, $order, $order_total_modules;
-      // Line Added - osCAffiliate support
-      global $affiliate_ref, $affiliate_clientdate, $affiliate_clientbrowser, $affiliate_clientip, $affiliate_clickthroughs_id, $HTTP_SESSION_VARS;
 
      // if (tep_session_is_registered('cartID')) {
      if (array_key_exists('cartID', $_SESSION)) {
@@ -282,8 +280,6 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
       $confirmation = array('title' => MODULE_PAYMENT_PAYPAL_IPN_TEXT_LAST_CONFIRM, 'fields' => array());
       return $confirmation;
       // EOF Confirmation Info added by AlexStudio
-        // Include OSC-AFFILIATE
- 	 require(DIR_WS_INCLUDES . 'affiliate_checkout_process.php');     
     }
 
     function process_button() {
@@ -450,7 +446,7 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
         $parameters['redirect_cmd'] = '_xclick';
         $parameters['item_name'] = STORE_NAME;
 		///CCGV extras by Alexander Dimelow - better to calculate separate otherwise the shipping Free vaucher/code never will work
-		 $shipping = number_format($order_total['ot_shipping'] * $currencies->get_value($my_currency), $currencies->get_decimal_places($my_currency));
+		 $shipping['cost'] = number_format($order_total['ot_shipping'] * $currencies->get_value($my_currency), $currencies->get_decimal_places($my_currency));
         // BOF shipping & handling fix by AlexStudio
         if(MOVE_TAX_TO_TOTAL_AMOUNT == 'True') {
 			///CCGV extras by Alexander Dimelow
@@ -613,7 +609,9 @@ $Id: paypal_ipn.php 14 2006-07-28 17:42:07Z user $
     function before_process() {
       global $cart, $order_total_modules; //mg - added $order_total_modules as fix for Bugfix 157
       //global $cart;
-	  
+/* One Page Checkout - BEGIN */
+      global $$payment, $onePageCheckout;
+/* One Page Checkout - END */	  
 	   $order_total_modules->apply_credit();//ICW ADDED FOR CREDIT CLASS SYSTEM
 
       $cart->reset(true);

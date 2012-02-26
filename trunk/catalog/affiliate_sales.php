@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_sales.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -38,11 +34,12 @@ $Id: affiliate_sales.php 14 2006-07-28 17:42:07Z user $
     order by affiliate_date DESC
     ";
 
-  $affiliate_sales_split = new splitPageResults($affiliate_sales_raw, MAX_DISPLAY_SEARCH_RESULTS);
+  $affiliate_sales_split = new splitPageResults($affiliate_sales_raw, MAX_CATALOG_DISPLAY_SEARCH_RESULTS);
 
-  $content = affiliate_sales; 
+  $content = 'affiliate_sales'; 
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 
 ?>

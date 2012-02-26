@@ -1,30 +1,30 @@
 <?php
 /*
-$Id: checkout_confirmation.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Realizar Pedido');
-define('NAVBAR_TITLE_2', 'Confirmaci&oacute;n');
+define('NAVBAR_TITLE_1', 'Realizar pedido');
+define('NAVBAR_TITLE_2', 'Confirmación');
 
-define('HEADING_TITLE', 'Estoy preparado para Comprar!');
+define('HEADING_TITLE', 'Confirmar pedido');
 
-define('HEADING_DELIVERY_ADDRESS', 'Direcci&oacute;n de Entrega');
-define('HEADING_SHIPPING_METHOD', 'Forma de Envio');
+define('HEADING_DELIVERY_ADDRESS', 'Dirección de entrega');
+define('HEADING_SHIPPING_METHOD', 'Forma de envío');
 define('HEADING_PRODUCTS', 'Producto');
 define('HEADING_TAX', 'Impuestos');
 define('HEADING_TOTAL', 'Total');
-define('HEADING_BILLING_INFORMATION', 'Datos de Facturaci&oacute;n');
-define('HEADING_BILLING_ADDRESS', 'Direcci&oacute;n de Facturaci&oacute;n');
+define('HEADING_BILLING_INFORMATION', 'Datos de facturación');
+define('HEADING_BILLING_ADDRESS', 'Dirección de facturación');
 define('HEADING_PAYMENT_METHOD', 'Forma de Pago');
-define('HEADING_PAYMENT_INFORMATION', 'Datos del Pago');
-define('HEADING_ORDER_COMMENTS', 'Comentarios Sobre Su Orden');
+define('HEADING_PAYMENT_INFORMATION', 'Datos del pago');
+define('HEADING_ORDER_COMMENTS', 'Comentarios sobre su pedido');
 
-define('TEXT_EDIT', 'Cambio');
+define('TEXT_EDIT', 'Modificar');
 ?>

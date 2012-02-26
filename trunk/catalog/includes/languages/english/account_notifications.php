@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: account_notifications.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -13,7 +13,7 @@ $Id: account_notifications.php 3 2006-05-27 04:59:07Z user $
 define('NAVBAR_TITLE_1', 'My Account');
 define('NAVBAR_TITLE_2', 'Product Notifications');
 
-define('HEADING_TITLE', 'Product Notifications');
+define('HEADING_TITLE', 'My Product Notifications');
 
 define('MY_NOTIFICATIONS_TITLE', 'My Product Notifications');
 define('MY_NOTIFICATIONS_DESCRIPTION', 'The product notification list allows you to stay up to date on products you find of interest.<br><br>To be up to date on all product changes, select <b>Global Product Notifications</b>.');

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: payment.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -24,13 +24,13 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
 // BOF: MOD - Separate Pricing Per Customer, next line original code
 //      $this->modules = explode(';', MODULE_PAYMENT_INSTALLED);
         global $sppc_customer_group_id, $customer_id;
-        if(!tep_session_is_registered('sppc_customer_group_id')) { 
-          $customer_group_id = '0';
+        if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+          $customer_group_id = $_SESSION['sppc_customer_group_id'];
         } else {
-         $customer_group_id = $sppc_customer_group_id;
+          $customer_group_id = '0';
         }
         $customer_payment_query = tep_db_query("select IF(c.customers_payment_allowed <> '', c.customers_payment_allowed, cg.group_payment_allowed) as payment_allowed from " . TABLE_CUSTOMERS . " c, " . TABLE_CUSTOMERS_GROUPS . " cg where c.customers_id = '" . $customer_id . "' and cg.customers_group_id =  '" . $customer_group_id . "'");
-        if ($customer_payment = tep_db_fetch_array($customer_payment_query)  ) {  
+        if ($customer_payment = tep_db_fetch_array($customer_payment_query)  ) {
           if (tep_not_null($customer_payment['payment_allowed'])) {
             $temp_payment_array = explode(';', $customer_payment['payment_allowed']);
             $installed_modules = explode(';', MODULE_PAYMENT_INSTALLED);
@@ -39,9 +39,9 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
             if ( in_array($installed_modules[$n], $temp_payment_array ) ) {
               $payment_array[] = $installed_modules[$n];
             }
-	  } // end for loop
-	  $this->modules = $payment_array;
-          } else {  
+         } // end for loop
+        $this->modules = $payment_array;
+          } else {
             $this->modules = explode(';', MODULE_PAYMENT_INSTALLED);
           }
         } else { // default
@@ -77,7 +77,7 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
         }
 
         for ($i=0, $n=sizeof($include_modules); $i<$n; $i++) {
-          include(DIR_WS_LANGUAGES . $language . '/modules/payment/' . $include_modules[$i]['file']);
+          include(DIR_WS_LANGUAGES . $language . '/' . $include_modules[$i]['file']);
           include(DIR_WS_MODULES . 'payment/' . $include_modules[$i]['file']);
 
           $GLOBALS[$include_modules[$i]['class']] = new $include_modules[$i]['class'];
@@ -85,7 +85,7 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
 
 // if there is only one payment method, select it as default because in
 // checkout_confirmation.php the $payment variable is being assigned the
-// $HTTP_POST_VARS['payment'] value which will be empty (no radio button selection possible)
+// $_POST['payment'] value which will be empty (no radio button selection possible)
         if ( (tep_count_payment_modules() == 1) && (!isset($GLOBALS[$payment]) || (isset($GLOBALS[$payment]) && !is_object($GLOBALS[$payment]))) ) {
           $payment = $include_modules[0]['class'];
         }
@@ -104,7 +104,7 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
    The following method is a work-around to implementing the method in all
    payment modules available which would break the modules in the contributions
    section. This should be looked into again post 2.2.
-*/   
+*/
     function update_status() {
       if (is_array($this->modules)) {
         if (is_object($GLOBALS[$this->selected_module])) {
@@ -112,8 +112,6 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
             if (method_exists($GLOBALS[$this->selected_module], 'update_status')) {
               $GLOBALS[$this->selected_module]->update_status();
             }
-          } else { // PHP3 compatibility
-            @call_user_method('update_status', $GLOBALS[$this->selected_module]);
           }
         }
       }
@@ -122,8 +120,8 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
 // BOF - CREDIT CLASS Gift Voucher Contribution
 // function javascript_validation() {
   function javascript_validation($coversAll) {
-	//added the $coversAll to be able to pass whether or not the voucher will cover the whole
-	//price or not.  If it does, then let checkout proceed when just it is passed.
+  //added the $coversAll to be able to pass whether or not the voucher will cover the whole
+  //price or not.  If it does, then let checkout proceed when just it is passed.
       $js = '';
       if (is_array($this->modules)) {
         if ($coversAll) {
@@ -134,12 +132,12 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
           $addThis='';
         }
 // EOF - CREDIT CLASS Gift Voucher Contribution
-        $js = '<script language="javascript"><!-- ' . "\n" .
+        $js = '<script type="text/javascript"><!-- ' . "\n" .
               'function check_form() {' . "\n" .
               '  var error = 0;' . "\n" .
               '  var error_message = "' . JS_ERROR . '";' . "\n" .
 // BOF - CREDIT CLASS Gift Voucher Contribution
-              '  var payment_value = null;' . "\n" .$addThis . 
+              '  var payment_value = null;' . "\n" .$addThis .
 // EOF - CREDIT CLASS Gift Voucher Contribution
               '  if (document.checkout_payment.payment.length) {' . "\n" .
               '    for (var i=0; i<document.checkout_payment.payment.length; i++) {' . "\n" .
@@ -203,10 +201,10 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
         reset($this->modules);
         while (list(, $value) = each($this->modules)) {
           $class = substr($value, 0, strrpos($value, '.'));
-          if ($GLOBALS[$class]->enabled) {
+        //OPC  //if ($GLOBALS[$class]->enabled) {
             $selection = $GLOBALS[$class]->selection();
             if (is_array($selection)) $selection_array[] = $selection;
-          }
+       //OPC   //}
         }
       }
 
@@ -215,9 +213,9 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
 // check credit covers was setup to test whether credit covers is set in other parts of the code
   function check_credit_covers() {
-  	global $credit_covers;
+    global $credit_covers;
 
-  	return $credit_covers;
+    return $credit_covers;
   }
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
     function pre_confirmation_check() {
@@ -276,5 +274,22 @@ $Id: payment.php 3 2006-05-27 04:59:07Z user $
         }
       }
     }
+    //---PayPal WPP Modification START ---//
+    function ec_step1() {
+      if (is_array($this->modules)) {
+        if (is_object($GLOBALS[$this->selected_module]) && ($GLOBALS[$this->selected_module]->enabled) ) {
+          return $GLOBALS[$this->selected_module]->ec_step1();
+        }
+      }
+    }
+
+    function ec_step2() {
+      if (is_array($this->modules)) {
+        if (is_object($GLOBALS[$this->selected_module]) && ($GLOBALS[$this->selected_module]->enabled) ) {
+          return $GLOBALS[$this->selected_module]->ec_step2();
+        }
+      }
+    }
+    //---PayPal WPP Modification END---//
   }
 ?>

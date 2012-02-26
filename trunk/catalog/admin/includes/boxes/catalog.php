@@ -1,57 +1,34 @@
 <?php
 /*
-$Id: catalog.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 ?>
-<!-- catalog //-->
-          <tr>
-            <td>
+<!-- catalog-->
 <?php
-  $heading = array();
-  $contents = array();
-
-  $heading[] = array('text'  => BOX_HEADING_CATALOG,
-                     'link'  => tep_href_link(FILENAME_CATEGORIES, 'selected_box=catalog'));
-
-  if ($selected_box == 'catalog') {
-// BOF: MOD - Admin w/access levels
-// old    $contents[] = array('text'  => '<a href="' . tep_href_link(FILENAME_CATEGORIES, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CATALOG_CATEGORIES_PRODUCTS . '</a><br>' .
-//                                   '<a href="' . tep_href_link(FILENAME_CATEGORIES, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CATALOG_CATEGORIES_PRODUCTS . '</a><br>' .
-//                                   '<a href="' . tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES . '</a><br>' .
-//                                   '<a href="' . tep_href_link(FILENAME_MANUFACTURERS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CATALOG_MANUFACTURERS . '</a><br>' .
-//                                   '<a href="' . tep_href_link(FILENAME_REVIEWS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CATALOG_REVIEWS . '</a><br>' .
-//                                   '<a href="' . tep_href_link(FILENAME_SPECIALS, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CATALOG_SPECIALS . '</a><br>' .
-//                                   '<a href="' . tep_href_link(FILENAME_PRODUCTS_EXPECTED, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CATALOG_PRODUCTS_EXPECTED . '</a>');
-// Added Line For WYSIWYG HTML Area
-//                                '<a href="' . tep_href_link(FILENAME_DEFINE_MAINPAGE, '', 'NONSSL') . '" class="menuBoxContentLink">' . BOX_CATALOG_DEFINE_MAINPAGE . '</a>');
-    $contents[] = array('text'  => tep_admin_files_boxes(FILENAME_CATEGORIES, BOX_CATALOG_CATEGORIES_PRODUCTS, TOP) .
-                                   tep_admin_files_boxes(FILENAME_PRODUCTS_ATTRIBUTES, BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES, TOP) .
-                                   tep_admin_files_boxes(FILENAME_MANUFACTURERS, BOX_CATALOG_MANUFACTURERS, TOP) .
-                                   tep_admin_files_boxes(FILENAME_REVIEWS, BOX_CATALOG_REVIEWS, TOP) .
-                                   tep_admin_files_boxes(FILENAME_SPECIALS, BOX_CATALOG_SPECIALS, TOP) .
-                                   tep_admin_files_boxes(FILENAME_XSELL_PRODUCTS, BOX_CATALOG_XSELL_PRODUCTS, TOP) .
-                                   tep_admin_files_boxes(FILENAME_EASYPOPULATE, BOX_CATALOG_EASYPOPULATE, TOP) .
-                                   tep_admin_files_boxes(FILENAME_NEW_ATTRIBUTES, BOX_CATALOG_ATTRIBUTE_MANAGER, TOP) .
-                                   tep_admin_files_boxes(FILENAME_PRODUCTS_EXPECTED, BOX_CATALOG_PRODUCTS_EXPECTED, TOP) .
-// Added: info boxes
-                                   tep_admin_files_boxes(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, TOP) .
-                                   tep_admin_files_boxes(FILENAME_DEFINE_PRIVACY, BOX_CATALOG_DEFINE_PRIVACY, TOP) .
-                                   tep_admin_files_boxes(FILENAME_DEFINE_CONDITIONS, BOX_CATALOG_DEFINE_CONDITIONS, TOP) .
-                                   tep_admin_files_boxes(FILENAME_DEFINE_SHIPPING, BOX_CATALOG_DEFINE_SHIPPING, TOP));
+  $contents = '';
+  $contents = (                    tep_admin_jqmenu(FILENAME_CATEGORIES, BOX_CATALOG_CATEGORIES_PRODUCTS, 'TOP') .
+                                   tep_admin_jqmenu(FILENAME_PRODUCTS_ATTRIBUTES, BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES, 'TOP') .
+								   tep_admin_jqmenu(FILENAME_DISCOUNT_CATEGORIES, BOX_CATALOG_CATEGORIES_DISCOUNT_CATEGORIES, 'TOP') .
+                                   tep_admin_jqmenu(FILENAME_MANUFACTURERS, BOX_CATALOG_MANUFACTURERS, 'TOP') .
+                                   tep_admin_jqmenu(FILENAME_REVIEWS, BOX_CATALOG_REVIEWS, 'TOP') .
+                                   tep_admin_jqmenu(FILENAME_SPECIALS, BOX_CATALOG_SPECIALS, 'TOP') .
+                                   tep_admin_jqmenu(FILENAME_SPECIALS_BY_CAT, BOX_CATALOG_SPECIALS_BY_CAT, 'TOP') .
+                                   tep_admin_jqmenu(FILENAME_XSELL_PRODUCTS, BOX_CATALOG_XSELL_PRODUCTS, 'TOP') .
+                                   tep_admin_jqmenu(FILENAME_EASYPOPULATE, BOX_CATALOG_EASYPOPULATE, 'TOP') .
+								   tep_admin_jqmenu(FILENAME_FEEDMACHINE, BOX_CATALOG_FEEDMACHINE, 'TOP') .
+                                   tep_admin_jqmenu(FILENAME_NEW_ATTRIBUTES, BOX_CATALOG_ATTRIBUTE_MANAGER, 'TOP') .
+                                   tep_admin_jqmenu(FILENAME_PRODUCTS_EXPECTED, BOX_CATALOG_PRODUCTS_EXPECTED, 'TOP') . 
+								   tep_admin_jqmenu(FILENAME_EXTRA_FIELDS, BOX_CATALOG_PRODUCTS_EXTRA_FIELDS, 'TOP') . 
+								   tep_admin_jqmenu(FILENAME_EXTRA_VALUES, BOX_CATALOG_PRODUCTS_EXTRA_VALUES, 'TOP'));
 // EOF: MOD - Admin w/access levels
 
-  }
-
-  $box = new box;
-  echo $box->menuBox($heading, $contents);
+  print_r($contents);
 ?>
-            </td>
-          </tr>
 <!-- catalog_eof //-->

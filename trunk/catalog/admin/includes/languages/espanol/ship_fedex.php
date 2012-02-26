@@ -1,50 +1,51 @@
 <?php
 /*
-$Id: ship_fedex.php 1 2009-01-20 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
-	define('HEADING_TITLE','Options for FedEx Shipment');
-	define('IMAGE_SUBMIT','Submit');
-	define('ORDER_HISTORY_DELIVERED','Scheduled shipment, tracking number ');
-	define('ORDER_HISTORY_CANCELLED','Cancelled shipment');
-	define('NO_ORDER_NUMBER_ERROR','No order number specified!');
-	define('ERROR_FEDEX_QUOTES_NOT_INSTALLED','Could not find a FedEx account number. Is FedEx RealTime Quotes installed and configured?');
-	define('SHIPMENT_REQUEST_DATA','Shipment request data, package number ');
-	define('MANIFEST_DATA','Manifest data, package number ');
-	define('RUNNING_IN_DEBUG','Running in debug mode, no ship request made');
-	define('ERROR_NO_ORDER_SPECIFIED','ERROR: There is no order specified!');
-	define('ORDER_NUMBER','Order number ');
-	define('COULD_NOT_DELETE_ENTRIES','Could not delete manifest entries.');
+
+	define('HEADING_TITLE','Opciones para envío por FedEx');
+	define('IMAGE_SUBMIT','Enviar');
+	define('ORDER_HISTORY_DELIVERED','Envío programado, número de seguimiento ');
+	define('ORDER_HISTORY_CANCELLED','Envío cancelado');
+	define('NO_ORDER_NUMBER_ERROR','¡No se ha especificado un número de pedido!');
+	define('ERROR_FEDEX_QUOTES_NOT_INSTALLED','No se ha podido encontrar un número de cuenta FedEx. ¿Está instalado y configurado FedEx RealTime Quotes?');
+	define('SHIPMENT_REQUEST_DATA','Información solicitud envío, número de paquete ');
+	define('MANIFEST_DATA','Información lista de carga, número de paquete ');
+	define('RUNNING_IN_DEBUG','Ejecutándose en modo depuración de errores, no se ha hecho solicitud de envío');
+	define('ERROR_NO_ORDER_SPECIFIED','ERROR: ¡No se ha especificado un pedido!');
+	define('ORDER_NUMBER','Número de pedido ');
+	define('COULD_NOT_DELETE_ENTRIES','No se ha podido eliminar entradas de la lista de carga.');
 	define('ERROR','ERROR: ');
-	define('ENTER_PACKAGE_WEIGHT','You must enter a package weight.');
-	define('ENTER_NUMBER_PACKAGES','You must enter the number of packages.');
+	define('ENTER_PACKAGE_WEIGHT','Se debe especificar el peso del paquete.');
+	define('ENTER_NUMBER_PACKAGES','Se debe especificar el número de paquetes.');
 
 	define('EMAIL_SEPARATOR', '------------------------------------------------------');
-    define('EMAIL_TEXT_SUBJECT', 'Order Update');
-    define('EMAIL_TEXT_ORDER_NUMBER', 'Order Number:');
-    define('EMAIL_TEXT_INVOICE_URL', 'Detailed Invoice:');
-    define('EMAIL_TEXT_DATE_ORDERED', 'Date Ordered:');
-    define('EMAIL_TEXT_STATUS_UPDATE', 'Your order status is ' . '%s' . "\n\n" . 'Please reply to this email if you have any questions.' . "\n");
-    define('EMAIL_TEXT_COMMENTS_UPDATE', 'Comments: ' . "%s\n");
-    define('EMAIL_TEXT_TRACKING_NUMBER', 'You can track your packages by clicking the link below.');
+    define('EMAIL_TEXT_SUBJECT', 'Actualización del pedido');
+    define('EMAIL_TEXT_ORDER_NUMBER', 'Número de pedido:');
+    define('EMAIL_TEXT_INVOICE_URL', 'Detalles del pedido:');
+    define('EMAIL_TEXT_DATE_ORDERED', 'Fecha del pedido:');
+    define('EMAIL_TEXT_STATUS_UPDATE', 'El estado de su pedido es ' . '%s' . "\n\n" . 'Por favor conteste a este e-mail si tiene alguna pregunta.' . "\n");
+    define('EMAIL_TEXT_COMMENTS_UPDATE', 'Comentarios: ' . "%s\n");
+    define('EMAIL_TEXT_TRACKING_NUMBER', 'Puede hacer un seguimiento de su paquete pulsando el enlace a continuación.');
     define('URL_TO_TRACK1', 'http://www.fedex.com/cgi-bin/tracking?action=track&tracknumbers=');
 		
 // form field titles
-	define('NUMBER_OF_PACKAGES','Number of Packages:');
-	define('OVERSIZED','Oversized?');
-	define('PACKAGING_TYPE','Packaging Type ("other" for ground shipments):');
-	define('TYPE_OF_SERVICE','Type of Service:');
-	define('PAYMENT_TYPE','Payment Type:');
-	define('DROPOFF_TYPE','Dropoff Type:');
-	define('PICKUP_DATE','Pickup date (yyyymmdd):');
+	define('NUMBER_OF_PACKAGES','Número de paquetes:');
+	define('OVERSIZED','¿Se ha pasado de tamaño?');
+	define('PACKAGING_TYPE','Tipo de paquete ("other" para envíos por tierra):');
+	define('TYPE_OF_SERVICE','Tipo de servicio:');
+	define('PAYMENT_TYPE','Tipo de pago:');
+	define('DROPOFF_TYPE','Tipo de entrega:');
+	define('PICKUP_DATE','Fecha de recogida (yyyymmdd):');
 
-	define('TOTAL_WEIGHT','Total weight for all packages:');
-	define('PACKAGE_WEIGHT','Package Weight:');
+	define('TOTAL_WEIGHT','Peso total de todos los paquetes:');
+	define('PACKAGE_WEIGHT','Peso del paquete:');
 	
 ?>

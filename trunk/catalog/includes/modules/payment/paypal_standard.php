@@ -1,21 +1,20 @@
 <?php
 /*
-  $Id: paypal_standard.php 1803 2008-01-11 18:16:37Z hpdl $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2008 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
-
   class paypal_standard {
     var $code, $title, $description, $enabled;
 
 // class constructor
     function paypal_standard() {
-      global $order, $order_total_modules;
+      global $order;
 
       $this->signature = 'paypal|paypal_standard|1.0|2.2';
 
@@ -68,6 +67,9 @@
 
     function selection() {
       global $cart_PayPal_Standard_ID;
+/* One Page Checkout - BEGIN */
+      global $onePageCheckout;
+/* One Page Checkout - END */
 
       if (tep_session_is_registered('cart_PayPal_Standard_ID')) {
         $order_id = substr($cart_PayPal_Standard_ID, strpos($cart_PayPal_Standard_ID, '-')+1);
@@ -398,7 +400,7 @@
 
     function before_process() {
       global $customer_id, $order, $order_totals, $sendto, $billto, $languages_id, $payment, $currencies, $cart, $cart_PayPal_Standard_ID, $order_total_modules;
-      global $$payment;
+      global $$payment, $onePageCheckout;
 
       $order_id = substr($cart_PayPal_Standard_ID, strpos($cart_PayPal_Standard_ID, '-')+1);
 
@@ -592,6 +594,19 @@
       for ($i=0, $n=sizeof($order_totals); $i<$n; $i++) {
         $email_order .= strip_tags($order_totals[$i]['title']) . ' ' . strip_tags($order_totals[$i]['text']) . "\n";
       }
+	  
+	  /* One Page Checkout - BEGIN */
+  $sendToFormatted = tep_address_label($customer_id, $sendto, 0, '', "\n");
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $sendToFormatted = $onePageCheckout->getAddressFormatted('sendto');
+  }
+  
+  $billToFormatted = tep_address_label($customer_id, $billto, 0, '', "\n");
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $billToFormatted = $onePageCheckout->getAddressFormatted('billto');
+  }
+/* One Page Checkout - END */
+  
 
       if ($order->content_type != 'virtual') {
         $email_order .= "\n" . EMAIL_TEXT_DELIVERY_ADDRESS . "\n" .

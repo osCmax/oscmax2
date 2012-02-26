@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: articles.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -37,16 +37,24 @@ $Id: articles.php 3 2006-05-27 04:59:07Z user $
     }
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLES);
+  
+  if ( ($topic_depth == 'articles') || (isset($_GET['authors_id'])) ) {
+    require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLES);
+  } elseif ($topic_depth == 'top') {
+    require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLES_TOP);
+  } elseif ($topic_depth == 'nested') {
+    require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLES_NESTED);
+  }
 
-  if ($topic_depth == 'top' && !isset($HTTP_GET_VARS['authors_id'])) {
+  if ($topic_depth == 'top' && !isset($_GET['authors_id'])) {
     $breadcrumb->add(NAVBAR_TITLE_DEFAULT, tep_href_link(FILENAME_ARTICLES));
   }
 
 
  $content = CONTENT_ARTICLES_MAIN;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
  
  require(DIR_WS_INCLUDES . 'application_bottom.php'); 

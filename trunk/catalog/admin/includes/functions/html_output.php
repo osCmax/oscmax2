@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: html_output.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -64,9 +64,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
 ////
 // The HTML image wrapper function
-// LINE CHNAGED: MS2 update 501112 - changed 'params' to 'parameters'
   function tep_image($src, $alt = '', $width = '', $height = '', $parameters = '') {
-// BOF: MS2 update 501112-Added all 'tep_not_null()'
     $image = '<img src="' . tep_output_string($src) . '" border="0" alt="' . tep_output_string($alt) . '"';
 
     if (tep_not_null($alt)) {
@@ -79,7 +77,6 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
     if (tep_not_null($parameters)) $image .= ' ' . $parameters;
 
-// EOF: MS2 update 501112
     $image .= '>';
 
     return $image;
@@ -91,7 +88,7 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
   function tep_image_submit($image, $alt = '', $parameters = '') {
     global $language;
 
-    $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image) . '" border="0" alt="' . tep_output_string($alt) . '"';
+    $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image) . '" alt="' . tep_output_string($alt) . '"';
 
     if (tep_not_null($alt)) $image_submit .= ' title=" ' . tep_output_string($alt) . ' "';
 
@@ -105,13 +102,13 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Draw a 1 pixel black line
   function tep_black_line() {
-    return tep_image(DIR_WS_IMAGES . 'pixel_black.gif', '', '100%', '1');
+    return tep_image(DIR_WS_ICONS . 'pixel_black.gif', '', '100%', '1');
   }
 
 ////
 // Output a separator either through whitespace, or with an image
   function tep_draw_separator($image = 'pixel_black.gif', $width = '100%', $height = '1') {
-    return tep_image(DIR_WS_IMAGES . $image, '', $width, $height);
+    return tep_image(DIR_WS_ICONS . $image, '', $width, $height);
   }
 
 ////
@@ -174,14 +171,14 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a form input field
   function tep_draw_input_field($name, $value = '', $parameters = '', $required = false, $type = 'text', $reinsert_value = true) {
-    global $HTTP_GET_VARS, $HTTP_POST_VARS;
+    global $_GET, $_POST;
     $field = '<input type="' . tep_output_string($type) . '" name="' . tep_output_string($name) . '"';
 
-    if ( ($reinsert_value == true) && ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) ) {
-      if (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) {
-        $value = stripslashes($HTTP_GET_VARS[$name]);
-      } elseif (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) {
-        $value = stripslashes($HTTP_POST_VARS[$name]);
+    if ( ($reinsert_value == true) && ( (isset($_GET[$name]) && is_string($_GET[$name])) || (isset($_POST[$name]) && is_string($_POST[$name])) ) ) {
+      if (isset($_GET[$name]) && is_string($_GET[$name])) {
+        $value = stripslashes($_GET[$name]);
+      } elseif (isset($_POST[$name]) && is_string($_POST[$name])) {
+        $value = stripslashes($_POST[$name]);
       }
     }
 
@@ -226,12 +223,12 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 //      $selection .= ' CHECKED';
 //    }
   function tep_draw_selection_field($name, $type, $value = '', $checked = false, $compare = '', $parameter = '') {
-    global $HTTP_GET_VARS, $HTTP_POST_VARS;
+    global $_GET, $_POST;
     $selection = '<input type="' . $type . '" name="' . $name . '"';
     if ($value != '') {
       $selection .= ' value="' . $value . '"';
     }
-    if ( ($checked == true) || (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name]) && (($HTTP_GET_VARS[$name] == 'on') || (stripslashes($HTTP_GET_VARS[$name]) == $value))) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name]) && (($HTTP_POST_VARS[$name] == 'on') || (stripslashes($HTTP_POST_VARS[$name]) == $value))) || (tep_not_null($compare) && ($value == $compare)) ) {
+    if ( ($checked == true) || (isset($_GET[$name]) && is_string($_GET[$name]) && (($_GET[$name] == 'on') || (stripslashes($_GET[$name]) == $value))) || (isset($_POST[$name]) && is_string($_POST[$name]) && (($_POST[$name] == 'on') || (stripslashes($_POST[$name]) == $value))) || (tep_not_null($compare) && ($value == $compare)) ) {
       $selection .= ' CHECKED';
     }
     if ($parameter != '') {
@@ -257,22 +254,21 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
 ////
 // Output a form textarea field
-  function tep_draw_textarea_field($name, $wrap, $width, $height, $text = '', $parameters = '', $reinsert_value = true) {
-    global $HTTP_GET_VARS, $HTTP_POST_VARS;
-    $field = '<textarea name="' . tep_output_string($name) . '" wrap="' . tep_output_string($wrap) . '" cols="' . tep_output_string($width) . '" rows="' . tep_output_string($height) . '"';
+  function tep_draw_textarea_field($name, $width, $height, $text = '', $parameters = '', $reinsert_value = true) {
+    global $_GET, $_POST;
+    $field = '<textarea name="' . tep_output_string($name) . '" cols="' . tep_output_string($width) . '" rows="' . tep_output_string($height) . '"';
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
     $field .= '>';
 
-    if ( ($reinsert_value == true) && ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) ) {
-      if (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) {
-        $field .= tep_output_string_protected(stripslashes($HTTP_GET_VARS[$name]));
-      } elseif (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) {
-        $field .= tep_output_string_protected(stripslashes($HTTP_POST_VARS[$name]));
+    if ( ($reinsert_value == true) && ( (isset($_GET[$name]) && is_string($_GET[$name])) || (isset($_POST[$name]) && is_string($_POST[$name])) ) ) {
+      if (isset($_GET[$name]) && is_string($_GET[$name])) {
+        $field .= tep_output_string_protected(stripslashes($_GET[$name]));
+      } elseif (isset($_POST[$name]) && is_string($_POST[$name])) {
+        $field .= tep_output_string_protected(stripslashes($_POST[$name]));
       }
     } elseif (tep_not_null($text)) {
-// LINE CHANGED: MS2 update 501112 - Added 'tep_output_string_protected()'
       $field .= tep_output_string_protected($text);
     }
 
@@ -281,35 +277,19 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
     return $field;
   }
 
-// BOF: MOD - WYSIWYG FCKeditor
-// Output a form textarea field w/ fckeditor
-  function tep_draw_fckeditor($name, $width, $height, $text) {
-
-	$oFCKeditor = new FCKeditor($name);
-	$oFCKeditor -> Width  = $width;
-	$oFCKeditor -> Height = $height;
-	$oFCKeditor -> BasePath	= (DIR_WS_FCKEDITOR);
-	$oFCKeditor -> Value = $text;
-
-    $field = $oFCKeditor->Create($name);
-
-    return $field;
-  }
-// EOF: MOD - WYSIWYG FCKeditor
-
 ////
 // Output a form hidden field
   function tep_draw_hidden_field($name, $value = '', $parameters = '') {
-    global $HTTP_GET_VARS, $HTTP_POST_VARS;
+    global $_GET, $_POST;
     $field = '<input type="hidden" name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($value)) {
       $field .= ' value="' . tep_output_string($value) . '"';
-    } elseif ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) {
-      if ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) ) {
-        $field .= ' value="' . tep_output_string(stripslashes($HTTP_GET_VARS[$name])) . '"';
-      } elseif ( (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) {
-        $field .= ' value="' . tep_output_string(stripslashes($HTTP_POST_VARS[$name])) . '"';
+    } elseif ( (isset($_GET[$name]) && is_string($_GET[$name])) || (isset($_POST[$name]) && is_string($_POST[$name])) ) {
+      if ( (isset($_GET[$name]) && is_string($_GET[$name])) ) {
+        $field .= ' value="' . tep_output_string(stripslashes($_GET[$name])) . '"';
+      } elseif ( (isset($_POST[$name]) && is_string($_POST[$name])) ) {
+        $field .= ' value="' . tep_output_string(stripslashes($_POST[$name])) . '"';
       }
     }
 
@@ -335,18 +315,18 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 ////
 // Output a form pull down menu
   function tep_draw_pull_down_menu($name, $values, $default = '', $parameters = '', $required = false) {
-    global $HTTP_GET_VARS, $HTTP_POST_VARS;
+    global $_GET, $_POST;
     $field = '<select name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
     $field .= '>';
 
-    if (empty($default) && ( (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) || (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) ) ) {
-      if (isset($HTTP_GET_VARS[$name]) && is_string($HTTP_GET_VARS[$name])) {
-        $default = stripslashes($HTTP_GET_VARS[$name]);
-      } elseif (isset($HTTP_POST_VARS[$name]) && is_string($HTTP_POST_VARS[$name])) {
-        $default = stripslashes($HTTP_POST_VARS[$name]);
+    if (empty($default) && ( (isset($_GET[$name]) && is_string($_GET[$name])) || (isset($_POST[$name]) && is_string($_POST[$name])) ) ) {
+      if (isset($_GET[$name]) && is_string($_GET[$name])) {
+        $default = stripslashes($_GET[$name]);
+      } elseif (isset($_POST[$name]) && is_string($_POST[$name])) {
+        $default = stripslashes($_POST[$name]);
       }
     }
 
@@ -364,4 +344,126 @@ $Id: html_output.php 14 2006-07-28 17:42:07Z user $
 
     return $field;
   }
+// +Country-State Selector
+// Adapted from functions in catalog/includes/general.php and html_output.php for Country-State Selector
+// Returns an array with countries
+// TABLES: countries
+  function css_get_countries($countries_id = '', $with_iso_codes = false) {
+    $countries_array = array();
+    if (tep_not_null($countries_id)) {
+      if ($with_iso_codes == true) {
+        $countries = tep_db_query("select countries_name, countries_iso_code_2, countries_iso_code_3 from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "' order by countries_name");
+        $countries_values = tep_db_fetch_array($countries);
+        $countries_array = array('countries_name' => $countries_values['countries_name'],
+                                 'countries_iso_code_2' => $countries_values['countries_iso_code_2'],
+                                 'countries_iso_code_3' => $countries_values['countries_iso_code_3']);
+      } else {
+        $countries = tep_db_query("select countries_name from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "'");
+        $countries_values = tep_db_fetch_array($countries);
+        $countries_array = array('countries_name' => $countries_values['countries_name']);
+      }
+    } else {
+      $countries = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . " order by countries_name");
+      while ($countries_values = tep_db_fetch_array($countries)) {
+        $countries_array[] = array('countries_id' => $countries_values['countries_id'],
+                                   'countries_name' => $countries_values['countries_name']);
+      }
+    }
+
+    return $countries_array;
+  }
+
+////
+// Creates a pull-down list of countries
+  function css_get_country_list($name, $selected = '', $parameters = '') {
+    $countries_array = array();
+
+    $countries = css_get_countries();
+
+    for ($i=0, $n=sizeof($countries); $i<$n; $i++) {
+      $countries_array[] = array('id' => $countries[$i]['countries_id'], 'text' => $countries[$i]['countries_name']);
+    }
+
+    return tep_draw_pull_down_menu($name, $countries_array, $selected, $parameters);
+  }
+ // -Country-State Selector
+ 
+////
+// jQuery Button Builder
+ function tep_draw_button($title = null, $icon = null, $link = null, $priority = null, $params = null) {
+    static $button_counter = 1;
+
+    $types = array('submit', 'button', 'reset');
+
+    if ( !isset($params['type']) ) {
+      $params['type'] = 'submit';
+    }
+
+    if ( !in_array($params['type'], $types) ) {
+      $params['type'] = 'submit';
+    }
+
+    if ( ($params['type'] == 'submit') && isset($link) ) {
+      $params['type'] = 'button';
+    }
+
+    if (!isset($priority)) {
+      $priority = 'secondary';
+    }
+
+    $button = '<span class="tdbLink">';
+
+    if ( ($params['type'] == 'button') && isset($link) ) {
+      $button .= '<a id="tdb' . $button_counter . '" href="' . $link . '"';
+
+      if ( isset($params['newwindow']) ) {
+        $button .= ' target="_blank"';
+      }
+    } else {
+      $button .= '<button id="tdb' . $button_counter . '" type="' . tep_output_string($params['type']) . '"';
+    }
+
+    if ( isset($params['params']) ) {
+      $button .= ' ' . $params['params'];
+    }
+
+    $button .= '>' . $title;
+
+    if ( ($params['type'] == 'button') && isset($link) ) {
+      $button .= '</a>';
+    } else {
+      $button .= '</button>';
+    }
+
+    $button .= '</span><script type="text/javascript">$("#tdb' . $button_counter . '").button(';
+
+    $args = array();
+
+    if ( isset($icon) ) {
+      if ( !isset($params['iconpos']) ) {
+        $params['iconpos'] = 'left';
+      }
+
+      if ( $params['iconpos'] == 'left' ) {
+        $args[] = 'icons:{primary:"ui-icon-' . $icon . '"}';
+      } else {
+        $args[] = 'icons:{secondary:"ui-icon-' . $icon . '"}';
+      }
+    }
+
+    if (empty($title)) {
+      $args[] = 'text:false';
+    }
+
+    if (!empty($args)) {
+      $button .= '{' . implode(',', $args) . '}';
+    }
+
+    $button .= ').addClass("ui-priority-' . $priority . '").parent().removeClass("tdbLink");</script>';
+
+    $button_counter++;
+
+    return $button;
+  }
+  // jQuery Button Builder
 ?>

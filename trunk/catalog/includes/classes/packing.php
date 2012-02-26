@@ -1,15 +1,18 @@
 <?php
 /*
-  $Id: packing.php, v1.0 2007/12/24 JanZ Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2007 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
+*/
+
+/*
   Adapted from the UPSXML contribution
-  
+
   dimensions support = 0: no dimensions support
   dimensions support = 1: ready-to-ship support only
   dimensions support = 2: full dimensions support
@@ -27,7 +30,7 @@
         $this->totalWeight = 0;
         $this->item = array();
 
-        
+
         if (defined('SHIPPING_DIMENSIONS_SUPPORT') && SHIPPING_DIMENSIONS_SUPPORT == 'Ready-to-ship only') {
           $this->dimensions_support = 1;
         } elseif (defined('SHIPPING_DIMENSIONS_SUPPORT') && SHIPPING_DIMENSIONS_SUPPORT == 'With product dimensions') {
@@ -37,11 +40,11 @@
         }
 
         if (defined('SHIPPING_STORE_BOXES_USED') && SHIPPING_STORE_BOXES_USED == 'true') {
-          $this->store_boxes_used = 1; 
+          $this->store_boxes_used = 1;
         } else {
           $this->store_boxes_used = 0;
         }
-        
+
         if (method_exists($cart, 'get_products_for_packaging') ) {
           $productsArray = $cart->get_products_for_packaging();
         } else {
@@ -52,8 +55,8 @@
           // debug only
           // echo '<pre>Products to pack:<br>';
           // print_r($productsArray);
-         // exit; 
-        } 
+         // exit;
+        }
 
         if ($this->dimensions_support == 2) {
             // sort $productsArray according to ready-to-ship (first) and not-ready-to-ship (last)
@@ -100,7 +103,7 @@
                 $total_non_ready_to_ship_weight += ($non_ready_to_shipArray[$x]['weight'] * $non_ready_to_shipArray[$x]['quantity']);
                 $total_non_ready_to_ship_value += ($non_ready_to_shipArray[$x]['final_price'] * $non_ready_to_shipArray[$x]['quantity']);
             } // end for ($x = 0 ; count($non_ready_to_shipArray) ; $x++)
-      
+
             if (tep_not_null($non_ready_to_shipArray)) {
                 // adapted code from includes/classes/shipping.php
                 $shipping_non_ready_to_ship_boxes = 1;
@@ -123,7 +126,7 @@
             } // end if (tep_not_null($non_ready_to_shipArray))
        } // if/else ($this->dimensions_support == '#')
     } // end function packing($dimensions_support = '0')
-    
+
     //********************************************
     function _addItem($length, $width, $height, $weight, $price = 0 ) {
         // Add box or item to shipment list. Round weights to 1 decimal places.
@@ -156,7 +159,8 @@
             'height' => $package['package_height'],
             'empty_weight' => $package['package_empty_weight'],
             'max_weight' => $package['package_max_weight'],
-            'volume' => $package['volume']);
+            'volume' => $package['volume'],
+            'price' => $package['package_cost']);
 // sort dimensions from low to high, used in the function fitsInBox
             $dimensions = array($package['package_length'], $package['package_width'], $package['package_height']);
             sort($dimensions);
@@ -199,8 +203,8 @@
                    if ($this->fitsInBox($product, $emptyBoxesArray[$x])) {
                      $product['ready_to_ship'] = '0';
                      $product['largest_box_it_will_fit'] = $x;
-                   } 
-                 } // end for ($x = 0; $x <= $index_of_largest_box; $x++) 
+                   }
+                 } // end for ($x = 0; $x <= $index_of_largest_box; $x++)
             } // end if ((int)$product['ready_to_ship'] == 0)
 
             for ($j = 0; $j < $productsArray[$i]['quantity']; $j++) {
@@ -243,7 +247,7 @@
     function fitsInBox($product, $box) {
         if ($product['x'] > $box['x'] || $product['y'] > $box['y'] || $product['z'] > $box['z']) {
             return false;
-        } 
+        }
 
         if ($product['volume'] <= $box['remaining_volume']) {
             if ($box['max_weight'] == 0 || ($box['current_weight'] + $product['weight'] <= $box['max_weight'])) {
@@ -260,9 +264,9 @@
         $box['current_weight'] += $product['weight'];
         $box['price'] += $product['final_price'];
         return $box;
-    } 
-    //*********************    
-    function fitProductsInBox($productsRemaining, $emptyBox, $packedBoxesArray, $box_no, $index_of_largest_box) { 
+    }
+    //*********************
+    function fitProductsInBox($productsRemaining, $emptyBox, $packedBoxesArray, $box_no, $index_of_largest_box) {
         $currentBox = $emptyBox;
         $productsRemainingSkipped = array();
         $productsRemainingNotSkipped = array();
@@ -320,7 +324,7 @@
             } // end else
         } // end for ($p = 0; $p < count($productsRemaining); $p++)
     } // end function fitProductsInBox
-    
+
 // ******************************
   function more_dimensions_to_productsArray($productsArray) {
     $counter = 0;

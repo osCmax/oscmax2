@@ -1,13 +1,13 @@
 <?php
 /*
-$Id: ot_coupon.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
-Released under the GNU General Public License
+  Released under the GNU General Public License
 */
 
 class ot_coupon {
@@ -94,11 +94,11 @@ global $customer_id, $currencies, $language;
 
 function collect_posts() {
 // All tep_redirect URL parameters modified for this function in v5.13 by Rigadin
-global $HTTP_POST_VARS, $customer_id, $currencies, $cc_id;
-	if ($HTTP_POST_VARS['gv_redeem_code']) {
+global $_POST, $customer_id, $currencies, $cc_id;
+	if ($_POST['gv_redeem_code']) {
 
 // get some info from the coupon table
-	$coupon_query=tep_db_query("select coupon_id, coupon_amount, coupon_type, coupon_minimum_order,uses_per_coupon, uses_per_user, restrict_to_products,restrict_to_categories from " . TABLE_COUPONS . " where coupon_code='".$HTTP_POST_VARS['gv_redeem_code']."' and coupon_active='Y'");
+	$coupon_query=tep_db_query("select coupon_id, coupon_amount, coupon_type, coupon_minimum_order,uses_per_coupon, uses_per_user, restrict_to_products,restrict_to_categories from " . TABLE_COUPONS . " where coupon_code='".$_POST['gv_redeem_code']."' and coupon_active='Y'");
 	$coupon_result=tep_db_fetch_array($coupon_query);
 
 	if ($coupon_result['coupon_type'] != 'G') {
@@ -107,13 +107,13 @@ global $HTTP_POST_VARS, $customer_id, $currencies, $cc_id;
 			tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_INVALID_REDEEM_COUPON), 'SSL'));
 		}
 
-		$date_query=tep_db_query("select coupon_start_date from " . TABLE_COUPONS . " where coupon_start_date <= now() and coupon_code='".$HTTP_POST_VARS['gv_redeem_code']."'");
+		$date_query=tep_db_query("select coupon_start_date from " . TABLE_COUPONS . " where coupon_start_date <= now() and coupon_code='".$_POST['gv_redeem_code']."'");
 
 		if (tep_db_num_rows($date_query)==0) {
 			tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_INVALID_STARTDATE_COUPON), 'SSL'));
 		}
 
-		$date_query=tep_db_query("select coupon_expire_date from " . TABLE_COUPONS . " where coupon_expire_date >= now() and coupon_code='".$HTTP_POST_VARS['gv_redeem_code']."'");
+		$date_query=tep_db_query("select coupon_expire_date from " . TABLE_COUPONS . " where coupon_expire_date >= now() and coupon_code='".$_POST['gv_redeem_code']."'");
 
     if (tep_db_num_rows($date_query)==0) {
 			tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_INVALID_FINISDATE_COUPON), 'SSL'));
@@ -166,17 +166,19 @@ global $HTTP_POST_VARS, $customer_id, $currencies, $cc_id;
 // ccgv coupon restrictions error fix
 //  $err_msg = ERROR_REDEEMED_AMOUNT.ERROR_REDEEMED_AMOUNT_ZERO;
     $err_msg = ERROR_REDEEMED_AMOUNT_ZERO;
+	tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode($err_msg), 'SSL'));
     } else {
-      $err_msg = ERROR_REDEEMED_AMOUNT.$coupon_amount_out;
+      $err_msg = ERROR_REDEEMED_AMOUNT . urlencode($coupon_amount_out);
+	  tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_success='.$this->code.'&error=' . urlencode($err_msg), 'SSL'));
     }
-    tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode($err_msg), 'SSL'));
+    
 //**si** 09-11-05 end
 
     // $_SESSION['cc_id'] = $coupon_result['coupon_id']; //Fred commented out, do not use $_SESSION[] due to backward comp. Reference the global var instead.
     } // ENDIF valid coupon code
   } // ENDIF code entered
   // v5.13a If no code entered and coupon redeem button pressed, give an alarm
-  if ($HTTP_POST_VARS['submit_redeem_coupon_x']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
+  if ($_POST['submit_redeem_coupon_x']) tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_NO_REDEEM_CODE), 'SSL'));
 }
 
 function calculate_credit($amount) {
@@ -349,7 +351,8 @@ global $customer_id, $order, $cc_id, $cart;
 							$tod_amount = $order->info['tax_groups'][$tax_desc] * $od_amount/100;
 						}
 						$order->info['tax_groups'][$tax_desc] -= $tod_amount;
-						$order->info['total'] -= $tod_amount; //  need to modify total ...OLD
+						// Bug Fix #977
+						//$order->info['total'] -= $tod_amount; //  need to modify total ...OLD
 						$order->info['tax'] -= $tod_amount; //Fred - added
 					} else {
 						for ($p=0; $p<sizeof($valid_array); $p++) {
@@ -359,7 +362,8 @@ global $customer_id, $order, $cc_id, $cart;
 								//Fred $tod_amount[$tax_desc] += ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio; //OLD
 								$tod_amount = ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio; // calc total tax Fred - added
 								$order->info['tax_groups'][$tax_desc] -= ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio;
-								$order->info['total'] -= ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio; // adjust total
+								// Bug Fix #977
+								//$order->info['total'] -= ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio; // adjust total
 								$order->info['tax'] -= ($valid_array[$p]['products_price'] * $tax_rate)/100 * $ratio; // adjust tax -- Fred - added
 							}
 						}
@@ -388,7 +392,8 @@ global $customer_id, $order, $cc_id, $cart;
 							}
 						}
 					}
-					$order->info['total'] -= $tod_amount; //OLD
+					// Bug Fix #977
+					//$order->info['total'] -= $tod_amount; //OLD
 					$order->info['tax'] -= $tod_amount; //Fred - added
 			}
 			if ($get_result['coupon_type'] =='P') {
@@ -410,7 +415,8 @@ global $customer_id, $order, $cc_id, $cart;
 						}
 					}
 				}
-				$order->info['total'] -= $tod_amount; // have to modify total also
+				// // Bug Fix #977
+				//$order->info['total'] -= $tod_amount; // have to modify total also
 				$order->info['tax'] -= $tod_amount;
 			}
 		}
@@ -565,10 +571,10 @@ function product_price($product_id) {
 
 // START added by Rigadin in v5.13, needed to show module errors on checkout_payment page
     function get_error() {
-      global $HTTP_GET_VARS;
+      global $_GET;
 
       $error = array('title' => MODULE_ORDER_TOTAL_COUPON_TEXT_ERROR,
-                     'error' => stripslashes(urldecode($HTTP_GET_VARS['error'])));
+                     'error' => stripslashes(urldecode($_GET['error'])));
 
       return $error;
     }

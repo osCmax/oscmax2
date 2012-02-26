@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: validcategories.php,v 0.01 2002/08/17 15:38:34 Richard Fielder
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax2002 Richard Fielder
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -34,7 +34,7 @@ td {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: xx-small}
 </td>
 </tr>
 <?php
-   $coupon_get=tep_db_query("select restrict_to_categories from " . TABLE_COUPONS . " where coupon_id='".$HTTP_GET_VARS['cid']."'");
+   $coupon_get=tep_db_query("select restrict_to_categories from " . TABLE_COUPONS . " where coupon_id='".$_GET['cid']."'");
    $get_result=tep_db_fetch_array($coupon_get);
    echo "<tr><th>Category ID</th><th>Category Name</th></tr><tr>";
    $cat_ids = split("[,]", $get_result['restrict_to_categories']);

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: order_total.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -22,7 +22,7 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
 
         reset($this->modules);
         while (list(, $value) = each($this->modules)) {
-          include(DIR_WS_LANGUAGES . $language . '/modules/order_total/' . $value);
+          include(DIR_WS_LANGUAGES . $language . '/' . $value);
           include(DIR_WS_MODULES . 'order_total/' . $value);
 
           $class = substr($value, 0, strrpos($value, '.'));
@@ -194,16 +194,16 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
 // with an error
 //
     function collect_posts() {
-      global $HTTP_POST_VARS,$HTTP_SESSION_VARS;
+      global $_POST,$HTTP_SESSION_VARS;
       if (MODULE_ORDER_TOTAL_INSTALLED) {
         reset($this->modules);
         while (list(, $value) = each($this->modules)) {
           $class = substr($value, 0, strrpos($value, '.'));
           if ( ($GLOBALS[$class]->enabled && $GLOBALS[$class]->credit_class) ) {
             $post_var = 'c' . $GLOBALS[$class]->code;
-            if ($HTTP_POST_VARS[$post_var]) {
+            if ($_POST[$post_var]) {
               if (!tep_session_is_registered($post_var)) tep_session_register($post_var);
-      				$post_var = $HTTP_POST_VARS[$post_var];
+      				$post_var = $_POST[$post_var];
             }
             $GLOBALS[$class]->collect_posts();
           }
@@ -261,7 +261,7 @@ $Id: order_total.php 3 2006-05-27 04:59:07Z user $
 // Called in checkout process to clear session variables created by each credit class module.
 //
     function clear_posts() {
-      global $HTTP_POST_VARS,$HTTP_SESSION_VARS;
+      global $_POST,$HTTP_SESSION_VARS;
       if (MODULE_ORDER_TOTAL_INSTALLED) {
         reset($this->modules);
         while (list(, $value) = each($this->modules)) {

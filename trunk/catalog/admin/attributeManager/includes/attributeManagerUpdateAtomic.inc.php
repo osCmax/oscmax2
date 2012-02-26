@@ -1,15 +1,13 @@
 <?php
 /*
-  $Id: attributeManagerUpdateAtomic.inc.php,v 1.0 21/02/06 Sam West$
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
-  Copyright © 2006 Kangaroo Partners
-  http://kangaroopartners.com
-  osc@kangaroopartners.com
 */
 
 require_once('attributeManager/classes/attributeManagerConfig.class.php');
@@ -28,6 +26,12 @@ if(is_array(${AM_SESSION_VAR_NAME}) && is_numeric($products_id)){
         		'options_values_price' => amDB::input($newAttribute['price']),
         		'price_prefix' => amDB::input($newAttribute['prefix'])
         	);
+
+            if (AM_USE_MPW) {
+              $newAttributeData['options_values_weight'] = amDB::input($newAttribute['weight']);
+              $newAttributeData['weight_prefix'] = amDB::input($newAttribute['weight_prefix']);
+            }
+
         	if (AM_USE_SORT_ORDER) {
         		$newAttributeData[AM_FIELD_OPTION_VALUE_SORT_ORDER] = amDB::input($newAttribute['sortOrder']);
         	}

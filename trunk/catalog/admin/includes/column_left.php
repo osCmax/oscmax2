@@ -1,68 +1,22 @@
 <?php
 /*
-$Id: column_left.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
-
-// BOF: MOD - Admin w/access levels
-// OLD LINES:
-//  require(DIR_WS_BOXES . 'configuration.php');
-//  require(DIR_WS_BOXES . 'catalog.php');
-//  require(DIR_WS_BOXES . 'modules.php');
-//  require(DIR_WS_BOXES . 'customers.php');
-//  require(DIR_WS_BOXES . 'taxes.php');
-//  require(DIR_WS_BOXES . 'localization.php');
-//  require(DIR_WS_BOXES . 'reports.php');
-//  require(DIR_WS_BOXES . 'tools.php');
-
-  if (tep_admin_check_boxes('administrator.php') == true) {
-    require(DIR_WS_BOXES . 'administrator.php');
+  $column_left_query_raw = "select quick_links_image, quick_links_name, quick_links_sort_order, quick_links_link, quick_links_target, quick_links_cg from " . TABLE_QUICK_LINKS . " where FIND_IN_SET( '" . $login_groups_id . "', quick_links_cg) order by quick_links_sort_order";
+  $column_left_query = tep_db_query($column_left_query_raw);
+  while ($column_left = tep_db_fetch_array($column_left_query)) {
+?>
+<tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)">
+  <td class="dataTableContent"><a href="<?php if (substr($column_left['quick_links_link'], 0, 4) == 'http') { echo $column_left['quick_links_link']; } else { echo tep_href_link($column_left['quick_links_link'], '', 'NONSSL'); } ?>" target="<?php echo $column_left['quick_links_target']; ?>"><?php echo tep_image(DIR_WS_IMAGES . 'quick_links/' . $column_left['quick_links_image'] , $column_left['quick_links_name']); ?></a></td>
+  <td class="dataTableContent"><a href="<?php if (substr($column_left['quick_links_link'], 0, 4) == 'http') { echo $column_left['quick_links_link']; } else { echo tep_href_link($column_left['quick_links_link'], '', 'NONSSL'); } ?>" target="<?php echo $column_left['quick_links_target']; ?>"><?php echo $column_left['quick_links_name']; ?></a></td>
+</tr>
+<?php
   }
-  if (tep_admin_check_boxes('configuration.php') == true) {
-    require(DIR_WS_BOXES . 'configuration.php');
-  }
-  if (tep_admin_check_boxes('catalog.php') == true) {
-    require(DIR_WS_BOXES . 'catalog.php');
-  }
-  if (tep_admin_check_boxes('modules.php') == true) {
-    require(DIR_WS_BOXES . 'modules.php');
-  }
-  if (tep_admin_check_boxes('customers.php') == true) {
-    require(DIR_WS_BOXES . 'customers.php');
-   }
-  if (tep_admin_check_boxes('taxes.php') == true) {
-    require(DIR_WS_BOXES . 'taxes.php');
-  }
-  if (tep_admin_check_boxes('localization.php') == true) {
-    require(DIR_WS_BOXES . 'localization.php');
-  }
-  if (tep_admin_check_boxes('reports.php') == true) {
-    require(DIR_WS_BOXES . 'reports.php');
-  }
-  if (tep_admin_check_boxes('tools.php') == true) {
-    require(DIR_WS_BOXES . 'tools.php');
-  }
-// ADDED: Affiliate
-  if (tep_admin_check_boxes('affiliate.php') == true) {
-    require(DIR_WS_BOXES . 'affiliate.php');
-  }
-// ADDED: CREDIT CLASS Gift Voucher Contribution
-  if (tep_admin_check_boxes('gv_admin.php') == true) {
-    require(DIR_WS_BOXES . 'gv_admin.php');
-  }
-// ADDED: Infoboxes
-  if (tep_admin_check_boxes('info_boxes.php') == true) {
-    require(DIR_WS_BOXES . 'info_boxes.php');
-  }
-// ADDED: Articles
-  if (tep_admin_check_boxes('articles.php') == true) {
-    require(DIR_WS_BOXES . 'articles.php');
-  }
-// EOF: MOD - Admin w/access levels
 ?>

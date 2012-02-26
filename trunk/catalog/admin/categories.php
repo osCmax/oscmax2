@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: categories.php 16 2006-07-30 03:27:26Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -13,25 +13,136 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
   require('includes/application_top.php');
 // LINE ADDED: Categories Description 1.5
   require('includes/functions/categories_description.php');
-
+  
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
-  $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
-// BOF instant update & image directory 
+// BOF QPBPP for SPPC
+// include the admin version of price formatter for the price breaks contribution
+  require(DIR_WS_CLASSES . 'PriceFormatterAdmin.php');
+  $pf = new PriceFormatter;
+// EOF QPBPP for SPPC
+
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
+// BOF: Extra Product Fields
+  function get_exclude_list($value_id) {
+    $exclude_list = array();
+    $query = tep_db_query('select value_id1 from ' . TABLE_EPF_EXCLUDE . ' where value_id2 = ' . (int)$value_id);
+    while ($check = tep_db_fetch_array($query)) {
+      $exclude_list[] = $check['value_id1'];
+    }
+    $query = tep_db_query('select value_id2 from ' . TABLE_EPF_EXCLUDE . ' where value_id1 = ' . (int)$value_id);
+    while ($check = tep_db_fetch_array($query)) {
+      $exclude_list[] = $check['value_id2'];
+    }
+    return $exclude_list;
+  }
+  function get_children($value_id) {
+    return explode(',', $value_id . tep_list_epf_children($value_id));
+  }
+  function get_parent_list($value_id) {
+    $sql = tep_db_query("select parent_id from " . TABLE_EPF_VALUES . " where value_id = " . (int)$value_id);
+    $value = tep_db_fetch_array($sql);
+    if ($value['parent_id'] > 0) {
+      return get_parent_list($value['parent_id']) . ',' . $value_id;
+    } else {
+      return $value_id;
+    }
+  }
+  function get_category_children($parent_id) {
+    $cat_list = array($parent_id);
+    $query = tep_db_query('select categories_id from ' . TABLE_CATEGORIES . ' where parent_id = ' . (int)$parent_id);
+    while ($cat = tep_db_fetch_array($query)) {
+      $children = get_category_children($cat['categories_id']);
+      $cat_list = array_merge($cat_list, $children);
+    }
+    return $cat_list;
+  }
+  // get categories for current product
+  $product_categories = array($HTTP_GET_VARS['cPath']);
+  if (($action == 'new_product') && isset($HTTP_GET_VARS['pID'])) {
+    $query = tep_db_query('select categories_id from ' . TABLE_PRODUCTS_TO_CATEGORIES . ' where products_id = ' . (int)$HTTP_GET_VARS['pID']);
+    while ($cat = tep_db_fetch_array($query)) {
+      $product_categories[] = $cat['categories_id'];
+    }    
+  }
+  $epf_query = tep_db_query("select * from " . TABLE_EPF . " e join " . TABLE_EPF_LABELS . " l where (e.epf_status or e.epf_show_in_admin) and (e.epf_id = l.epf_id) order by e.epf_order");
+  $epf = array();
+  $xfields = array();
+  $link_groups = array();
+  $linked_fields = array();
+  while ($e = tep_db_fetch_array($epf_query)) {  // retrieve all active extra fields for all languages
+    $field = 'extra_value';
+    if ($e['epf_uses_value_list']) {
+      if ($e['epf_multi_select']) {
+        $field .= '_ms';
+      } else {
+        $field .= '_id';
+      }
+    }
+    $field .= $e['epf_id'];
+    $values = '';
+    if ($e['epf_uses_value_list'] && $e['epf_active_for_language'] && ($e['epf_has_linked_field'] || $e['epf_multi_select'])) { // if field requires javascript during entry
+      $values = array();
+      $value_query = tep_db_query('select value_id, value_depends_on from ' . TABLE_EPF_VALUES . ' where epf_id = ' . (int)$e['epf_id'] . ' and languages_id = ' . (int)$e['languages_id']);
+      while ($v = tep_db_fetch_array($value_query)) {
+        $values[] = $v['value_id'];
+        if ($e['epf_has_linked_field'] && $e['epf_multi_select'] && ($v['value_depends_on'] != 0)) {
+          $linked_fields[$e['epf_links_to']][$e['languages_id']][$v['value_depends_on']][] = $v['value_id'];
+          if (!in_array($v['value_depends_on'], $link_groups[$e['epf_links_to']][$e['languages_id']])) $link_groups[$e['epf_links_to']][$e['languages_id']][] = $v['value_depends_on'];
+        }
+      }
+    }
+    if ($e['epf_all_categories']) {
+      $hidden_field = false;
+    } else {
+      $hidden_field = true;
+      $base_categories = explode('|', $e['epf_category_ids']);
+      $all_epf_categories = array();
+      foreach ($base_categories as $cat) {
+        $children = get_category_children($cat);
+        $all_epf_categories = array_merge($all_epf_categories, $children);
+      }
+      foreach ($all_epf_categories as $cat) {
+        if (in_array($cat, $product_categories)) $hidden_field = false;
+      }
+    }
+    $epf[] = array('id' => $e['epf_id'],
+                   'label' => $e['epf_label'],
+                   'uses_list' => $e['epf_uses_value_list'],
+                   'multi_select' => $e['epf_multi_select'],
+                   'show_chain' => $e['epf_show_parent_chain'],
+                   'checkbox' => $e['epf_checked_entry'],
+                   'display_type' => $e['epf_value_display_type'],
+                   'columns' => $e['epf_num_columns'],
+                   'linked' => $e['epf_has_linked_field'],
+                   'links_to' => $e['epf_links_to'],
+                   'size' => $e['epf_size'],
+                   'language' => $e['languages_id'],
+                   'language_active' => $e['epf_active_for_language'],
+                   'values' => $values,
+                   'textarea' => $e['epf_textarea'],
+                   'field' => $field,
+                   'hidden' => $hidden_field);
+    if (!in_array( $field, $xfields))
+      $xfields[] = $field; // build list of distinct fields    
+  }
+// EOF: Extra Product Fields
+
+// BOF instant update & image directory
   require_once('includes/functions/instant_update.php');
-// EOF instant update & image directory	
-// Ultimate SEO URLs v2.1
-// If the action will affect the cache entries
-    if ( preg_match("{(insert|update|setflag)}i", $action) ) include_once('includes/reset_seo_cache.php');
-
-
-  if (tep_not_null($action)) {
+// EOF instant update & image directory
+ if (tep_not_null($action)) {
+    // ULTIMATE Seo Urls 5 by FWR Media
+    // If the action will affect the cache entries
+    if ( $action == 'insert' || $action == 'update' || $action == 'setflag' ) {
+      tep_reset_cache_data_seo_urls('reset');
+    }
     switch ($action) {
       case 'setflag':
-        if ( ($HTTP_GET_VARS['flag'] == '0') || ($HTTP_GET_VARS['flag'] == '1') ) {
-          if (isset($HTTP_GET_VARS['pID'])) {
-            tep_set_product_status($HTTP_GET_VARS['pID'], $HTTP_GET_VARS['flag']);
+        if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') ) {
+          if (isset($_GET['pID'])) {
+            tep_set_product_status($_GET['pID'], $_GET['flag']);
           }
 
           if (USE_CACHE == 'true') {
@@ -40,35 +151,88 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
           }
         }
 
-        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $HTTP_GET_VARS['cPath'] . '&pID=' . $HTTP_GET_VARS['pID']));
+        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&pID=' . $_GET['pID']));
         break;
+
+// BOF Open Featured Sets
+      case 'setflag_featured':
+        if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') ) {
+          if (isset($_GET['pID'])) {
+            tep_set_product_featured($_GET['pID'], $_GET['flag']);
+          }
+
+          if (USE_CACHE == 'true') {
+            tep_reset_cache_block('categories');
+            tep_reset_cache_block('also_purchased');
+          }
+        }
+
+        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&pID=' . $_GET['pID']));
+        break;
+
+      case 'setflag_categories_featured':
+        if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') ) {
+          if (isset($_GET['cID'])) {
+            tep_set_categories_featured($_GET['cID'], $_GET['flag']);
+          }
+
+          if (USE_CACHE == 'true') {
+            tep_reset_cache_block('categories');
+          }
+        }
+        if ($categories['parent_id'] == '0') {
+          tep_redirect(tep_href_link(FILENAME_CATEGORIES));
+        } else {
+          tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath));
+        }
+     //   tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath']));
+        break;
+// EOF Open Featured Sets
+
 // BOF: MOD for Categories Description 1.5
       case 'new_category':
       case 'edit_category':
         if (ALLOW_CATEGORY_DESCRIPTIONS == 'true')
-          $HTTP_GET_VARS['action']=$HTTP_GET_VARS['action'] . '_ACD';
+          $_GET['action']=$_GET['action'] . '_ACD';
         break;
 // EOF: MOD for Categories Description 1.5
       case 'insert_category':
       case 'update_category':
 // BOF: MOD for Categories Description 1.5
-        if ( ($HTTP_POST_VARS['edit_x']) || ($HTTP_POST_VARS['edit_y']) ) {
-          $HTTP_GET_VARS['action'] = 'edit_category_ACD';
+        if ( ($_POST['edit_x']) || ($_POST['edit_y']) ) {
+          $_GET['action'] = 'edit_category_ACD';
         } else {
 // EOF: MOD for Categories Description 1.5
-          if (isset($HTTP_POST_VARS['categories_id'])) $categories_id = tep_db_prepare_input($HTTP_POST_VARS['categories_id']);
+          if (isset($_POST['categories_id'])) $categories_id = tep_db_prepare_input($_POST['categories_id']);
 // BOF: MOD for Categories Description 1.5
           if ($categories_id == '') {
-             $categories_id = tep_db_prepare_input($HTTP_GET_VARS['cID']);
+             $categories_id = tep_db_prepare_input($_GET['cID']);
            }
 // EOF: MOD for Categories Description 1.5
-          $sort_order = tep_db_prepare_input($HTTP_POST_VARS['sort_order']);
+//          $sort_order = tep_db_prepare_input($_POST['sort_order']);
 
-        $sql_data_array = array('sort_order' => (int)$sort_order);
+//        $sql_data_array = array('sort_order' => (int)$sort_order);
+// BOF Separate Pricing Per Customer, hide categories from groups
+        $hide_cats_from_these_groups = '@,';
+          if ( $_POST['hide_cat'] ) { // if any of the checkboxes are checked
+              foreach($_POST['hide_cat'] as $val) {
+              $hide_cats_from_these_groups .= tep_db_prepare_input($val).',';
+              } // end foreach
+           }
+           $hide_cats_from_these_groups = substr($hide_cats_from_these_groups,0,strlen($hide_cats_from_these_groups)-1); // remove last comma
+
+        $sort_order = tep_db_prepare_input($_POST['sort_order']);
+
+        $sql_data_array = array('sort_order' => $sort_order, 'categories_hide_from_groups' => $hide_cats_from_these_groups);
+// EOF Separate Pricing Per Customer, hide categories from groups
 
           if ($action == 'insert_category') {
             $insert_sql_data = array('parent_id' => $current_category_id,
-                                     'date_added' => 'now()');
+// BOF Open Featured Sets
+                                     'date_added' => 'now()',
+				   					 'categories_featured' => tep_db_prepare_input($_POST['categories_featured']),
+				   					 'categories_featured_until' => tep_db_prepare_input($_POST['categories_featured_until']));
+// EOF Open Featured Sets
 
             $sql_data_array = array_merge($sql_data_array, $insert_sql_data);
 
@@ -76,7 +240,11 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
             $categories_id = tep_db_insert_id();
             } elseif ($action == 'update_category') {
-              $update_sql_data = array('last_modified' => 'now()');
+// BOF Open Featured Sets
+            $update_sql_data = array('last_modified' => 'now()',
+				   					 'categories_featured' => tep_db_prepare_input($_POST['categories_featured']),
+				   					 'categories_featured_until' => tep_db_prepare_input($_POST['categories_featured_until']));
+// EOF Open Featured Sets
 
               $sql_data_array = array_merge($sql_data_array, $update_sql_data);
 
@@ -85,7 +253,7 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
             $languages = tep_get_languages();
             for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-              $categories_name_array = $HTTP_POST_VARS['categories_name'];
+              $categories_name_array = $_POST['categories_name'];
 
               $language_id = $languages[$i]['id'];
 
@@ -93,9 +261,9 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
 // BOF: MOD for Categories Description 1.5
               if (ALLOW_CATEGORY_DESCRIPTIONS == 'true') {
-                $sql_data_array = array('categories_name' => tep_db_prepare_input($HTTP_POST_VARS['categories_name'][$language_id]),
-                                        'categories_heading_title' => tep_db_prepare_input($HTTP_POST_VARS['categories_heading_title'][$language_id]),
-                                        'categories_description' => tep_db_prepare_input($HTTP_POST_VARS['categories_description'][$language_id]));
+                $sql_data_array = array('categories_name' => tep_db_prepare_input($_POST['categories_name'][$language_id]),
+                                        'categories_heading_title' => tep_db_prepare_input($_POST['categories_heading_title'][$language_id]),
+                                        'categories_description' => tep_db_prepare_input($_POST['categories_description'][$language_id]));
               }
 // EOF: MOD for Categories Description 1.5
               if ($action == 'insert_category') {
@@ -109,23 +277,25 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                 tep_db_perform(TABLE_CATEGORIES_DESCRIPTION, $sql_data_array, 'update', "categories_id = '" . (int)$categories_id . "' and language_id = '" . (int)$languages[$i]['id'] . "'");
               }
             }
-
+			
 // BOF: MOD for Categories Description 1.5
 //OLD-    if ($categories_image = new upload('categories_image', DIR_FS_CATALOG_IMAGES)) {
 //          tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . //tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
-//Added the following to replacce above code
-          if (ALLOW_CATEGORY_DESCRIPTIONS == 'true') {
-            tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . $HTTP_POST_VARS['categories_image'] . "' where categories_id = '" .  tep_db_input($categories_id) . "'");
-            $categories_image = '';
-          } else {
-        $categories_image = new upload('categories_image');
-		        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
 
-        if ($categories_image->parse() && $categories_image->save()) {
-              tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
-            }
-// EOF: MOD for Categories Description 1.5
-          }
+// copy image only if modified
+ 	        $categories_image = new upload('categories_image');
+ 	        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
+ 	        if ($categories_image->parse() && $categories_image->save()) {
+ 	          $categories_image_name = $categories_image->filename;
+ 	          // BOF Image Resize
+ 	            require_once('includes/functions/image_resize.php');
+ 	            image_resize(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image->filename, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT, '80');
+ 	          // EOF Image Resize
+ 	        } else { 
+ 	          $categories_image_name = $_POST['categories_previous_image'];
+ 	        }
+			
+			tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . $categories_image_name . "' where categories_id = '" .  tep_db_input($categories_id) . "'");
 
           if (USE_CACHE == 'true') {
             tep_reset_cache_block('categories');
@@ -138,8 +308,8 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 // EOF: MOD for Categories Description 1.5
         break;
       case 'delete_category_confirm':
-        if (isset($HTTP_POST_VARS['categories_id'])) {
-          $categories_id = tep_db_prepare_input($HTTP_POST_VARS['categories_id']);
+        if (isset($_POST['categories_id'])) {
+          $categories_id = tep_db_prepare_input($_POST['categories_id']);
 
           $categories = tep_get_category_tree($categories_id, '', '0', '', true);
           $products = array();
@@ -189,16 +359,20 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath));
         break;
       case 'delete_product_confirm':
-        if (isset($HTTP_POST_VARS['products_id']) && isset($HTTP_POST_VARS['product_categories']) && is_array($HTTP_POST_VARS['product_categories'])) {
-          $product_id = tep_db_prepare_input($HTTP_POST_VARS['products_id']);
-          $product_categories = $HTTP_POST_VARS['product_categories'];
+        if (isset($_POST['products_id']) && isset($_POST['product_categories']) && is_array($_POST['product_categories'])) {
+          $product_id = tep_db_prepare_input($_POST['products_id']);
+          $product_categories = $_POST['product_categories'];
 
           for ($i=0, $n=sizeof($product_categories); $i<$n; $i++) {
             tep_db_query("delete from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$product_id . "' and categories_id = '" . (int)$product_categories[$i] . "'");
-        
+
 // LINE ADDED: MOD - Separate Price per Customer
            tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . tep_db_input($product_id) . "' ");
           }
+
+// BOF QPBPP for SPPC
+            tep_db_query("delete from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id = '" . (int)$product_id . "'");
+// EOF QPBPP for SPPC
 
           $product_categories_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$product_id . "'");
           $product_categories = tep_db_fetch_array($product_categories_query);
@@ -216,9 +390,9 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath));
         break;
       case 'move_category_confirm':
-        if (isset($HTTP_POST_VARS['categories_id']) && ($HTTP_POST_VARS['categories_id'] != $HTTP_POST_VARS['move_to_category_id'])) {
-          $categories_id = tep_db_prepare_input($HTTP_POST_VARS['categories_id']);
-          $new_parent_id = tep_db_prepare_input($HTTP_POST_VARS['move_to_category_id']);
+        if (isset($_POST['categories_id']) && ($_POST['categories_id'] != $_POST['move_to_category_id'])) {
+          $categories_id = tep_db_prepare_input($_POST['categories_id']);
+          $new_parent_id = tep_db_prepare_input($_POST['move_to_category_id']);
 
           $path = explode('_', tep_get_generated_category_path_ids($new_parent_id));
 
@@ -240,8 +414,8 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
         break;
       case 'move_product_confirm':
-        $products_id = tep_db_prepare_input($HTTP_POST_VARS['products_id']);
-        $new_parent_id = tep_db_prepare_input($HTTP_POST_VARS['move_to_category_id']);
+        $products_id = tep_db_prepare_input($_POST['products_id']);
+        $new_parent_id = tep_db_prepare_input($_POST['move_to_category_id']);
 
         $duplicate_check_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$products_id . "' and categories_id = '" . (int)$new_parent_id . "'");
         $duplicate_check = tep_db_fetch_array($duplicate_check_query);
@@ -256,37 +430,63 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         break;
       case 'insert_product':
       case 'update_product':
-        if (isset($HTTP_POST_VARS['edit_x']) || isset($HTTP_POST_VARS['edit_y'])) {
+        if (isset($_POST['edit_x']) || isset($_POST['edit_y'])) {
           $action = 'new_product';
         } else {
-          if (isset($HTTP_GET_VARS['pID'])) $products_id = tep_db_prepare_input($HTTP_GET_VARS['pID']);
-          $products_date_available = tep_db_prepare_input($HTTP_POST_VARS['products_date_available']);
+          if (isset($_GET['pID'])) $products_id = tep_db_prepare_input($_GET['pID']);
+          $products_date_available = tep_db_prepare_input($_POST['products_date_available']);
 
           $products_date_available = (date('Y-m-d') < $products_date_available) ? $products_date_available : 'null';
+// BOF Separate Pricing Per Customer, hide products and categories from groups
+    $hide_from_these_groups = '@,';
+             if ( $_POST['hide'] ) { // if any of the checkboxes are checked
+                 foreach($_POST['hide'] as $val) {
+                 $hide_from_these_groups .= tep_db_prepare_input($val).',';
+                 } // end foreach
+              }
+     $hide_from_these_groups = substr($hide_from_these_groups,0,strlen($hide_from_these_groups)-1); // remove last comma
+// EOF Separate Pricing Per Customer, hide products and categories from groups
 
-          $sql_data_array = array('products_quantity' => (int)tep_db_prepare_input($HTTP_POST_VARS['products_quantity']),
-//LINE ADDED: MOD - indvship
-                                  'products_ship_price' => tep_db_prepare_input($HTTP_POST_VARS['products_ship_price']), //indvship
-                                  'products_model' => tep_db_prepare_input($HTTP_POST_VARS['products_model']),
-                                  'products_price' => tep_db_prepare_input($HTTP_POST_VARS['products_price']),
+          $sql_data_array = array('products_quantity' => (int)tep_db_prepare_input($_POST['products_quantity']),
+                                  'products_model' => tep_db_prepare_input($_POST['products_model']),
+//LINE ADDED: MSRP								  
+								  'products_msrp' => tep_db_prepare_input($_POST['products_msrp']),
+                                  'products_price' => tep_db_prepare_input($_POST['products_price']),
+// BOF QPBPP for SPPC
+                                  'products_qty_blocks' => (($i = (int)tep_db_prepare_input($_POST['products_qty_blocks'][0])) < 1) ? 1 : $i,
+                                  'products_min_order_qty' => (($min_i = (int)tep_db_prepare_input($_POST['products_min_order_qty'][0])) < 1) ? 1 : $min_i,
+// EOF QPBPP for SPPC
                                   'products_date_available' => $products_date_available,
-                                  'products_weight' => (float)tep_db_prepare_input($HTTP_POST_VARS['products_weight']),
-                                  'products_height' => tep_db_prepare_input($HTTP_POST_VARS['products_height']),
-                                  'products_length' => tep_db_prepare_input($HTTP_POST_VARS['products_length']),
-                                  'products_width' => tep_db_prepare_input($HTTP_POST_VARS['products_width']),
-                                  'products_ready_to_ship' => tep_db_prepare_input($HTTP_POST_VARS['products_ready_to_ship']),
-                                  'products_status' => tep_db_prepare_input($HTTP_POST_VARS['products_status']),
-                                  'products_tax_class_id' => tep_db_prepare_input($HTTP_POST_VARS['products_tax_class_id']),
-                                  'manufacturers_id' => (int)tep_db_prepare_input($HTTP_POST_VARS['manufacturers_id']));
+                                  'products_weight' => (float)tep_db_prepare_input($_POST['products_weight']),
+// BOF Open Featured Sets
+                                  'products_featured' => tep_db_prepare_input($_POST['products_featured']),
+     				  			  'products_featured_until' => tep_db_prepare_input($_POST['products_featured_until']),
+// EOF Open Featured Sets
+                                  'products_height' => tep_db_prepare_input($_POST['products_height']),
+                                  'products_length' => tep_db_prepare_input($_POST['products_length']),
+                                  'products_width' => tep_db_prepare_input($_POST['products_width']),
+                                  'products_ready_to_ship' => tep_db_prepare_input($_POST['products_ready_to_ship']),
+                                  'products_status' => tep_db_prepare_input($_POST['products_status']),
+                                  'products_tax_class_id' => tep_db_prepare_input($_POST['products_tax_class_id']),
+// BOF Separate Price Per Customer, hide for these groups modification
+                                  'products_hide_from_groups' => $hide_from_these_groups,
+// EOF Separate Price Per Customer, hide for these groups modification
+                                  'manufacturers_id' => (int)tep_db_prepare_input($_POST['manufacturers_id']));
 		//++++ QT Pro: Begin Added code
 			if($product_investigation['has_tracked_options'] or $product_investigation['stock_entries_count'] > 0){
 				//Do not modify the stock from this page if the product has database entries or has tracked options
 				unset($sql_data_array['products_quantity']);
 			}
+
 		//++++ QT Pro: End Added code
 
-          if (isset($HTTP_POST_VARS['products_image']) && tep_not_null($HTTP_POST_VARS['products_image']) && ($HTTP_POST_VARS['products_image'] != 'none')) {
-            $sql_data_array['products_image'] = tep_db_prepare_input($HTTP_POST_VARS['products_image']);
+          if (isset($_POST['products_image']) && tep_not_null($_POST['products_image']) && ($_POST['products_image'] != 'none')) {
+			// Added to allow deletion of existing database entry when using admin/includes/functions/instant_update.php
+			if (($_POST['products_image']) == '**delete**') {
+			  $sql_data_array['products_image'] = '';	
+			} else {
+              $sql_data_array['products_image'] = tep_db_prepare_input($_POST['products_image']);
+			}
           }
 
           if ($action == 'insert_product') {
@@ -305,46 +505,186 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
             tep_db_perform(TABLE_PRODUCTS, $sql_data_array, 'update', "products_id = '" . (int)$products_id . "'");
           }
-          
-//BOF: MOD - AJAX Attribute Manager 
-          require_once('attributeManager/includes/attributeManagerUpdateAtomic.inc.php'); 
-//EOF: MOD - AJAX Attribute Manager 
+
+//BOF: MOD - AJAX Attribute Manager
+          require_once('attributeManager/includes/attributeManagerUpdateAtomic.inc.php');
+//EOF: MOD - AJAX Attribute Manager
 
 
-// BOF: MOD - Separate Price per Customer
-          $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id != '0' order by customers_group_id");
-          while ($customers_group = tep_db_fetch_array($customers_group_query))  { // Gets all of the customers groups
-            $attributes_query = tep_db_query("select customers_group_id, customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where ((products_id = '" . $products_id . "') && (customers_group_id = " . $customers_group['customers_group_id'] . ")) order by customers_group_id");
-            $attributes = tep_db_fetch_array($attributes_query);
-            if (tep_db_num_rows($attributes_query) > 0) {
-              if ($HTTP_POST_VARS['sppcoption'][$customers_group['customers_group_id']]) {// this is checking if the check box is checked
-                if ( ($HTTP_POST_VARS['sppcprice'][$customers_group['customers_group_id']] <> $attributes['customers_group_price']) && ($attributes['customers_group_id'] == $customers_group['customers_group_id']) ) {
-                tep_db_query("update " . TABLE_PRODUCTS_GROUPS . " set customers_group_price = '" . $HTTP_POST_VARS['sppcprice'][$customers_group['customers_group_id']] . "' where customers_group_id = '" . $attributes['customers_group_id'] . "' and products_id = '" . $products_id . "'");
-                  $attributes = tep_db_fetch_array($attributes_query);
-                }
-                elseif (($HTTP_POST_VARS['sppcprice'][$customers_group['customers_group_id']] == $attributes['customers_group_price'])) {
-                $attributes = tep_db_fetch_array($attributes_query);
-                }
-              }
-              else {
-                tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where customers_group_id = '" . $customers_group['customers_group_id'] . "' and products_id = '" . $products_id . "'");
-                $attributes = tep_db_fetch_array($attributes_query);
-              }
-            }
-            elseif (($HTTP_POST_VARS['sppcoption'][$customers_group['customers_group_id']]) && ($HTTP_POST_VARS['sppcprice'][$customers_group['customers_group_id']] != '')) {
-              tep_db_query("insert into " . TABLE_PRODUCTS_GROUPS . " (products_id, customers_group_id, customers_group_price) values ('" . $products_id . "', '" . $customers_group['customers_group_id'] . "', '" . $HTTP_POST_VARS['sppcprice'][$customers_group['customers_group_id']] . "')");
-              $attributes = tep_db_fetch_array($attributes_query);
-            }
-          }
-// EOF: MOD - Separate Price per Customer
+// BOF QPBPP for SPPC
+// BOF entries in products_groups
+ $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id != '0' order by customers_group_id");
+while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets all of the customers groups
+  {
+  $attributes_query = tep_db_query("select customers_group_id, customers_group_price, products_qty_blocks, products_min_order_qty from " . TABLE_PRODUCTS_GROUPS . " where ((products_id = '" . $products_id . "') && (customers_group_id = " . $customers_group['customers_group_id'] . ")) order by customers_group_id");
+  $attributes = tep_db_fetch_array($attributes_query);
+// set default values for quantity blocks and min order quantity
+  $pg_products_qty_blocks = 1;
+  $pg_products_min_order_qty = 1;
+  $delete_row_from_pg = false;
+
+  if (isset($_POST['products_qty_blocks'][$customers_group['customers_group_id']]) && (int)$_POST['products_qty_blocks'][$customers_group['customers_group_id']] > 1) {
+     $pg_products_qty_blocks = (int)$_POST['products_qty_blocks'][$customers_group['customers_group_id']];
+  }
+  if (isset($_POST['products_min_order_qty'][$customers_group['customers_group_id']]) && (int)$_POST['products_min_order_qty'][$customers_group['customers_group_id']] > 1) {
+     $pg_products_min_order_qty = (int)$_POST['products_min_order_qty'][$customers_group['customers_group_id']];
+  }
+  if ($_POST['sppcprice'][$customers_group['customers_group_id']] == '' && $pg_products_qty_blocks == 1 && $pg_products_min_order_qty == 1) {
+    $delete_row_from_pg = true; // no need to have default values for qty blocks and min order qty in the table
+  }
+  if ($_POST['sppcprice'][$customers_group['customers_group_id']] == '') {
+    $pg_cg_group_price = 'null';
+  } else {
+    $pg_cg_group_price = "'" . (float)$_POST['sppcprice'][$customers_group['customers_group_id']] . "'";
+  }
+
+  if (tep_db_num_rows($attributes_query) > 0 && $delete_row_from_pg == false) {
+// there is already a row inserted in products_groups, update instead of insert
+    if ($_POST['sppcoption'][$customers_group['customers_group_id']]) { // this is checking if the check box is checked
+        tep_db_query("update " . TABLE_PRODUCTS_GROUPS . " set customers_group_price = " . $pg_cg_group_price . ", products_qty_blocks = " . $pg_products_qty_blocks . ", products_min_order_qty = " . $pg_products_min_order_qty . " where customers_group_id = '" . $attributes['customers_group_id'] . "' and products_id = '" . $products_id . "'");
+    }
+    else {
+      tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where customers_group_id = '" . $customers_group['customers_group_id'] . "' and products_id = '" . $products_id . "'");
+    }
+  } elseif (tep_db_num_rows($attributes_query) > 0 && $delete_row_from_pg == true) {
+      tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where customers_group_id = '" . $customers_group['customers_group_id'] . "' and products_id = '" . $products_id . "'");
+  } elseif (($_POST['sppcoption'][$customers_group['customers_group_id']]) && $delete_row_from_pg == false) {
+    tep_db_query("insert into " . TABLE_PRODUCTS_GROUPS . " (products_id, customers_group_id, customers_group_price, products_qty_blocks, products_min_order_qty) values ('" . $products_id . "', '" . $customers_group['customers_group_id'] . "', " . $pg_cg_group_price . ", " . $pg_products_qty_blocks . ", " . $pg_products_min_order_qty . ")");
+  }
+} // end while ($customers_group = tep_db_fetch_array($customers_group_query))
+// EOF entries in products_groups
+
+// BOF entries in products_to_discount_categories
+  foreach ($_POST['discount_categories_id'] as $dc_cg_id => $dc_id) {
+    $current_discount_category = (int)$_POST['current_discount_cat_id'][$dc_cg_id];
+    $new_discount_category = (int)$dc_id;
+    $discount_category_result = qpbpp_insert_update_discount_cats($products_id, $current_discount_category, $new_discount_category, $dc_cg_id);
+      if ($discount_category_result == false) {
+          $messageStack->add_session(ERROR_UPDATE_INSERT_DISCOUNT_CATEGORY, 'error');
+       }
+  } // end foreach ($_POST['discount_categories_id'] as $dc_cg_id => $dc_id
+// EOF entries in products_to_discount_categories
+
+// BOF entries in products_price_break
+  foreach ($_POST['products_price_break'] as $pbb_cg_id => $price_break_array) {
+    foreach ($price_break_array as $key1 => $products_price) {
+      $pb_action = 'insert'; // re-set default to insert
+      $where_clause = '';
+      if (isset($_POST['products_delete'][$pbb_cg_id][$key1]) && $_POST['products_delete'][$pbb_cg_id][$key1] == 'y' && isset($_POST['products_price_break_id'][$pbb_cg_id][$key1])) {
+        $delete_from_ppb_array[] = (int)$_POST['products_price_break_id'][$pbb_cg_id][$key1];
+        continue;
+      }
+      if (!tep_not_null($products_price)) {
+        continue; // if price is empty this price break is unused
+      } elseif (!tep_not_null($_POST['products_qty'][$pbb_cg_id][$key1])) {
+        continue; // if qty is not entered we will not update or insert this in the table
+      } else {
+        $sql_price_break_data_array = array(
+           'products_id' => (int)$products_id,
+           'products_price' => (float)$products_price,
+           'products_qty' => (int)$_POST['products_qty'][$pbb_cg_id][$key1],
+           'customers_group_id' => $pbb_cg_id
+           );
+
+        if (isset($_POST['products_price_break_id'][$pbb_cg_id][$key1]) && (int)$_POST['products_price_break_id'][$pbb_cg_id][$key1] > 0) {
+          $pb_action = 'update';
+          $where_clause = " products_price_break_id = '" . (int)$_POST['products_price_break_id'][$pbb_cg_id][$key1] . "'";
+        }
+        tep_db_perform(TABLE_PRODUCTS_PRICE_BREAK, $sql_price_break_data_array, $pb_action, $where_clause);
+      } // end if/else (!tep_not_null($products_price))
+    } // end foreach ($price_break_array as $key1 => $products_price)
+  } // end foreach ($_POST['products_price_break'] as $pbb_cg_id => $price_break_array)
+
+// delete the unwanted price breaks using their products_price_break_id's
+    if (isset($delete_from_ppb_array) && sizeof($delete_from_ppb_array > 0) && tep_not_null($delete_from_ppb_array[0])) {
+      tep_db_query("delete from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_price_break_id in (" . implode(',', $delete_from_ppb_array) . ")");
+    }
+// EOF entries in products_price_break
+// EOF QPBPP for SPPC
 
           $languages = tep_get_languages();
           for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
             $language_id = $languages[$i]['id'];
 
-            $sql_data_array = array('products_name' => tep_db_prepare_input($HTTP_POST_VARS['products_name'][$language_id]),
-                                    'products_description' => tep_db_prepare_input($HTTP_POST_VARS['products_description'][$language_id]),
-                                    'products_url' => tep_db_prepare_input($HTTP_POST_VARS['products_url'][$language_id]));
+            $sql_data_array = array('products_name' => tep_db_prepare_input($_POST['products_name'][$language_id]),
+// BOF Open Featured Sets
+                                    'products_short' => tep_db_prepare_input($_POST['products_short'][$language_id]),
+// EOF Open Featured Sets
+                                    'products_description' => tep_db_prepare_input($_POST['products_description'][$language_id]),
+// BOF: Tabs by PGM
+									'tab1' => tep_db_prepare_input($_POST['tab1'][$language_id]),
+									'tab2' => tep_db_prepare_input($_POST['tab2'][$language_id]),
+									'tab3' => tep_db_prepare_input($_POST['tab3'][$language_id]),
+									'tab4' => tep_db_prepare_input($_POST['tab4'][$language_id]),
+									'tab5' => tep_db_prepare_input($_POST['tab5'][$language_id]),
+									'tab6' => tep_db_prepare_input($_POST['tab6'][$language_id]),
+// EOF: Tabs by PGM
+                                    'products_url' => tep_db_prepare_input($_POST['products_url'][$language_id]));
+
+ // BOF: Extra Product Fields
+            foreach ($epf as $e) {
+              if ($e['language'] == $language_id) {
+                if ($e['language_active']) {
+                  if ($e['multi_select']) {
+                    if (empty($_POST[$e['field']][$language_id])) {
+                      $value = 'null';
+                    } else {
+                      //validate multi-select values in case JavaScript was turned off and couldn't prevent errors
+                      $value_list = $_POST[$e['field']][$language_id];
+                      if ($e['linked']) { // validate linked values if field is linked
+                        $link_validated_list = array();
+                        $lv = 0;
+                        foreach ($epf as $lf) {
+                          if ($lf['id'] == $e['links_to']) {
+                            $lv = (int)$_POST[$lf['field']][$language_id];
+                          }
+                        }
+                        $validation_query_raw = 'select value_id from ' . TABLE_EPF_VALUES . ' where epf_id = ' . (int)$e['id'] . ' and languages_id = ' . (int)$e['language'] . ' and ';
+                        if ($lv == 0) {
+                          $validation_query_raw .= 'value_depends_on = 0';
+                        } else {
+                          $validation_query_raw .= '(value_depends_on in (0,' . get_parent_list($lv) . '))';
+                        }
+                        $validation_query = tep_db_query($validation_query_raw);
+                        $valid_values = array();
+                        while ($valid = tep_db_fetch_array($validation_query)) {
+                          $valid_values[] = $valid['value_id'];
+                        }
+                        foreach ($value_list as $v) {
+                          if (in_array($v, $valid_values)) $link_validated_list[] = $v;
+                        }
+                      } else {
+                        $link_validated_list = $value_list;
+                      }
+                      $validated_value_list = array(); // validate excluded values
+                      $excluded_values = array();
+                      foreach ($link_validated_list as $v) {
+                        if (!in_array($v, $excluded_values)) {
+                          $validated_value_list[] = $v;
+                          $tmp = get_exclude_list($v);
+                          $excluded_values = array_merge($excluded_values, $tmp);
+                        }
+                      }
+                      $value = '|';
+                      $sort_query = tep_db_query('select value_id from ' . TABLE_EPF_VALUES . ' where epf_id = ' . (int)$e['id'] . ' and languages_id = ' . (int)$e['language'] . ' order by sort_order, epf_value');
+                      while ($val = tep_db_fetch_array($sort_query)) { // store input values in sorted order
+                        if (in_array($val['value_id'], $validated_value_list))
+                          $value .= tep_db_prepare_input($val['value_id']) . '|';
+                      }
+                    }
+                  } else {
+                    $value = tep_db_prepare_input($_POST[$e['field']][$language_id]);
+                    if ($value == '')
+                      $value = (($e['uses_list'] && !$e['multi_select']) ? 0 : 'null');
+                  }
+                  $extra = array($e['field'] => $value);
+                } else {
+                  $extra = array($e['field'] => (($e['uses_list'] && !$e['multi_select']) ? 0 : 'null'));
+                }
+                $sql_data_array = array_merge($sql_data_array, $extra);
+              }
+            }
+// EOF: Extra Product Fields
 
             if ($action == 'insert_product') {
               $insert_sql_data = array('products_id' => $products_id,
@@ -357,6 +697,26 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
               tep_db_perform(TABLE_PRODUCTS_DESCRIPTION, $sql_data_array, 'update', "products_id = '" . (int)$products_id . "' and language_id = '" . (int)$language_id . "'");
             }
           }
+// BOF indvship 4.5
+          $sql_shipping_array = array('products_ship_zip' => tep_db_prepare_input($_POST['products_ship_zip']),
+'products_ship_methods_id' => tep_db_prepare_input($_POST['products_ship_methods_id']),
+'products_ship_price' => round(tep_db_prepare_input($_POST['products_ship_price']),4),
+'products_ship_price_two' => round(tep_db_prepare_input($_POST['products_ship_price_two']),4));
+          $sql_shipping_id_array = array('products_id' => (int)$products_id); 
+          $products_ship_query = tep_db_query("SELECT * FROM " . TABLE_PRODUCTS_SHIPPING . " WHERE products_id = " . (int)$products_id);
+          if(tep_db_num_rows($products_ship_query) >0) {
+            if (($_POST['products_ship_zip'] == '')&&($_POST['products_ship_methods_id'] == '')&&($_POST['products_ship_price'] == '')&&($_POST['products_ship_price_two'] == '')){
+              tep_db_query("DELETE FROM " . TABLE_PRODUCTS_SHIPPING . " where products_id = '" . (int)$products_id . "'");
+            } else {
+              tep_db_perform(TABLE_PRODUCTS_SHIPPING, $sql_shipping_array, 'update', "products_id = '" . (int)$products_id . "'");
+            }
+          } else {
+            if (($_POST['products_ship_zip'] != '')||($_POST['products_ship_methods_id'] != '')||($_POST['products_ship_price'] != '')||($_POST['products_ship_price_two'] != '')){
+              $sql_ship_array = array_merge($sql_shipping_array, $sql_shipping_id_array);
+              tep_db_perform(TABLE_PRODUCTS_SHIPPING, $sql_ship_array, 'insert');
+            }
+          }
+// EOF indvship 4.5
 
           if (USE_CACHE == 'true') {
             tep_reset_cache_block('categories');
@@ -369,11 +729,11 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
         }
         break;
       case 'copy_to_confirm':
-        if (isset($HTTP_POST_VARS['products_id']) && isset($HTTP_POST_VARS['categories_id'])) {
-          $products_id = tep_db_prepare_input($HTTP_POST_VARS['products_id']);
-          $categories_id = tep_db_prepare_input($HTTP_POST_VARS['categories_id']);
+        if (isset($_POST['products_id']) && isset($_POST['categories_id'])) {
+          $products_id = tep_db_prepare_input($_POST['products_id']);
+          $categories_id = tep_db_prepare_input($_POST['categories_id']);
 
-          if ($HTTP_POST_VARS['copy_as'] == 'link') {
+          if ($_POST['copy_as'] == 'link') {
             if ($categories_id != $current_category_id) {
               $check_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$products_id . "' and categories_id = '" . (int)$categories_id . "'");
               $check = tep_db_fetch_array($check_query);
@@ -383,24 +743,71 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
             } else {
               $messageStack->add_session(ERROR_CANNOT_LINK_TO_SAME_CATEGORY, 'error');
             }
-          } elseif ($HTTP_POST_VARS['copy_as'] == 'duplicate') {
-// LINE MODED: Added "products_ship_price and dimensions for upsxml"
-            $product_query = tep_db_query("select products_ship_price, products_quantity, products_model, products_image, products_price, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_tax_class_id, manufacturers_id from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
+          } elseif ($_POST['copy_as'] == 'duplicate') {
+// LINE MODED: Added "dimensions for upsxml"
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+// LINE MODED: Open Feature Sets: Added "products_featured, products_featured_until"
+// LINE MODED: MSRP: Added "products_msrp,"
+            $product_query = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
             $product = tep_db_fetch_array($product_query);
 
 // LINE CHANGED: MS2 update 501112 - Added :(empty($product['products_date_available']) ? "null" : ...{some code}... ") . "
-// LINE MODED: Added "products_ship_price and dimensions for upsxml"
-            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_ship_price, products_image, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . $product['products_ship_price'] . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "')");  
+// LINE MODED: Added "dimensions for upsxml"
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+// LINE MODED: Open Feature Sets: Added "products_featured, products_featured_until"
+            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, products_model, products_image, products_msrp, products_price, products_date_added, products_date_available, products_weight, products_length, products_width, products_height, products_ready_to_ship, products_status, products_tax_class_id, manufacturers_id, products_qty_blocks, products_min_order_qty, products_featured, products_featured_until, products_hide_from_groups) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_msrp']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '" . $product['products_length'] . "', '" . $product['products_width'] . "', '" . $product['products_height']. "', '" . $product['products_ready_to_ship'] . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "', '" . (int)$product['products_qty_blocks'] . "', '" . (int)$product['products_min_order_qty'] . "', '" . (int)$product['products_featured'] . "', '" . (int)$product['products_featured_until'] . "', '" . $product['products_hide_from_groups'] . "')");
             $dup_products_id = tep_db_insert_id();
 
-            $description_query = tep_db_query("select language_id, products_name, products_description, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
+// Tabs by PGM LINE EDIT
+// LINE MODED: Open Feature Sets: Added "products_short"
+//            $description_query = tep_db_query("select language_id, products_name, products_description, products_short, tab1, tab2, tab3, tab4, tab5, tab6, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
+// LINE MODED: description copy modified to work with Extra Product Fields
+            $description_query = tep_db_query("select * from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
+//          $description_query = tep_db_query("select language_id, products_name, products_description, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
             while ($description = tep_db_fetch_array($description_query)) {
-              tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
+// Tabs by PGM LINE EDIT
+// LINE MODED: Open Feature Sets: Added "products_short"
+//              tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_short, tab1, tab2, tab3, tab4, tab5, tab6, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_short']) . "', '" . tep_db_input($description['tab1']) . "', '" . tep_db_input($description['tab2']) . "', '" . tep_db_input($description['tab3']) . "', '" . tep_db_input($description['tab4']) . "', '" . tep_db_input($description['tab5']) . "', '" . tep_db_input($description['tab6']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
+// LINE MODED: Extra product Fields fix when copying duplicates
+              $description['products_id'] = $dup_products_id;
+              $description['products_viewed'] = 0;
+              tep_db_perform(TABLE_PRODUCTS_DESCRIPTION, $description);
             }
+
+// BOF indvship 4.5
+            $shipping_query = tep_db_query("select products_ship_methods_id, products_ship_zip from " . TABLE_PRODUCTS_SHIPPING . " where products_id = '" . (int)$products_id . "'");
+            while ($shipping = tep_db_fetch_array($shipping_query)) {
+              tep_db_query("insert into " . TABLE_PRODUCTS_SHIPPING . " (products_id, products_ship_methods_id, products_ship_zip) values ('" . (int)$dup_products_id . "', '" . tep_db_input($shipping['products_ship_methods_id']) . "', '" . tep_db_input($shipping['products_ship_zip']) . "')");
+            } 
+// EOF indvship 4.5
+// BOF: PGM Adds code to copy QPBPP for SPPC
+            $qpbpp_query = tep_db_query("select * from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id = '" . (int)$products_id . "'");
+            while ($qpbpp = tep_db_fetch_array($qpbpp_query)) {
+			  tep_db_query("insert into " . TABLE_PRODUCTS_PRICE_BREAK . " (products_id, products_price, products_qty, customers_group_id) values ('" . (int)$dup_products_id . "', '" . $qpbpp['products_price'] . "', '" . tep_db_input($qpbpp['products_qty']) . "', '" . tep_db_input($qpbpp['customers_group_id']) . "')");	
+			}
+// EOF: PGM Adds code to copy QPBPP for SPPC
+
+// BOF: PGM Adds code to copy Quantity Blocks and Minimum Order for QPBPP for SPPC
+            $qb_query = tep_db_query("select * from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$products_id . "'");
+            while ($qb = tep_db_fetch_array($qb_query)) {
+			  tep_db_query("insert into " . TABLE_PRODUCTS_GROUPS . " (customers_group_id, customers_group_price, products_id, products_price, products_qty_blocks, products_min_order_qty) values ('" . tep_db_input($qb['customers_group_id']) . "', '" . tep_db_input($qb['customers_group_price']) . "', '" . (int)$dup_products_id . "', '" . $qb['products_price'] . "', '" . tep_db_input($qb['products_qty_blocks']) . "', '" . tep_db_input($qb['products_min_order_qty']) . "')");	
+			}
+// EOF: PGM Adds code to copy Quantity Blocks and Minimum Order for QPBPP for SPPC
+
+// BOF: PGM Adds code to copy Attributes
+            $attribute_copy_query = tep_db_query("select * from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$products_id . "'");
+            while ($attribute_copy = tep_db_fetch_array($attribute_copy_query)) {
+			  tep_db_query("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " (products_id, options_id, options_values_id, options_values_price, price_prefix, weight_prefix, options_values_weight) values ('" . (int)$dup_products_id . "', '" . $attribute_copy['options_id'] . "', '" . tep_db_input($attribute_copy['options_values_id']) . "', '" . $attribute_copy['options_values_price'] . "', '" . $attribute_copy['price_prefix'] . "', '" . $attribute_copy['weight_prefix'] . "', '" . tep_db_input($attribute_copy['options_values_weight']) . "')");	
+			}
+// EOF: PGM Adds code to copy Attributes
+		
+
+//	      tep_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_url, products_viewed) values ('" . (int)$dup_products_id . "', '" . (int)$description['language_id'] . "', '" . tep_db_input($description['products_name']) . "', '" . tep_db_input($description['products_description']) . "', '" . tep_db_input($description['products_url']) . "', '0')");
 
             tep_db_query("insert into " . TABLE_PRODUCTS_TO_CATEGORIES . " (products_id, categories_id) values ('" . (int)$dup_products_id . "', '" . (int)$categories_id . "')");
             $products_id = $dup_products_id;
-          }
+
+          } // end elseif ($_POST['copy_as'] == 'duplicate')
 
           if (USE_CACHE == 'true') {
             tep_reset_cache_block('categories');
@@ -417,14 +824,14 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 
 // check if the catalog image directory exists
   if (is_dir(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR)) {
-    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR)) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
+    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR)) $messageStack->add(ERROR_CATALOG_BIGIMAGES_DIRECTORY_NOT_WRITEABLE, 'error');
   } else {
-    $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
+    $messageStack->add(ERROR_CATALOG_BIGIMAGES_DIRECTORY_DOES_NOT_EXIST, 'error');
   }
   if (is_dir(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR)) {
-    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR)) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
+    if (!is_writeable(DIR_FS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR)) $messageStack->add(ERROR_CATALOG_THUMBS_DIRECTORY_NOT_WRITEABLE, 'error');
   } else {
-    $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
+    $messageStack->add(ERROR_CATALOG_THUMBS_DIRECTORY_DOES_NOT_EXIST, 'error');
   }
   //++++ QT Pro: Begin Changed code
   if($product_investigation['any_problems']){
@@ -439,23 +846,104 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
+
+<script type="text/javascript" src="includes/general.js"></script>
 <!-- CKeditor -->
-<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'?>"></script>
+<script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/ckeditor/ckeditor.js'; ?>"></script>
 <!-- CKeditor End -->
 <!-- AJAX Attribute Manager  -->
 <?php require_once( 'attributeManager/includes/attributeManagerHeader.inc.php' )?>
 <!-- AJAX Attribute Manager  end -->
-<!--// SLIMBOX2 -->
-	<link rel="stylesheet" href="../slimbox2/slimbox2.css" type="text/css" media="screen">
-    <script type="text/javascript" src="../slimbox2/jquery.js"></script>
-	<script type="text/javascript" src="../slimbox2/slimbox2.js"></script>
-<!--// SLIMBOX2 -->
+<?php 
+// BOF: Extra Product Fields
+if ($action == 'new_product') {
+  foreach ($epf as $e) {
+    if ($e['language_active']) {
+      if ($e['multi_select']) {
+        echo '<script language="javascript" type="text/javascript">' . "\n";
+        echo "function process_" . $e['field'] . '_' . $e['language'] . "(id) {\n";
+        echo "  var thisbox = document.getElementById('ms' + id);\n";
+        echo "  if (thisbox.checked) {\n";
+        echo "    switch (id) {\n";
+        foreach ($e['values'] as $val) {
+          $el = get_exclude_list($val);
+          if (!empty($el)) {
+            echo "      case " . $val . ":\n";
+            foreach($el as $i) {
+              echo "        var cb = document.getElementById('ms" . $i . "');\n";
+              echo "        cb.checked = false;\n";
+            }
+            echo "        break;\n";
+          }
+        }
+        echo "      default: ;\n";
+        echo "    }\n";
+        echo "  }\n";
+        echo "}\n";
+        echo "</script>\n";
+      } elseif ($e['uses_list'] && $e['linked']) {
+        echo '<script language="javascript" type="text/javascript">' . "\n";
+        if ($e['checkbox']) {
+          echo "function process_" . $e['field'] . '_' . $e['language'] . "(id) {\n";
+        } else {
+          echo "function process_" . $e['field'] . '_' . $e['language'] . "() {\n";
+          echo "  var id = document.getElementById('lv" . $e['id'] . '_' . $e['language'] . "').value;\n";
+        }
+        if (!empty($link_groups[$e['id']][$e['language']])) {
+          foreach ($link_groups[$e['id']][$e['language']] as $val) {
+            echo "  var lf = document.getElementById('lf" . $e['id'] . '_' . $e['language'] . '_' . $val . "');\n";
+            echo "  lf.style.display = 'none'; lf.disabled = true;\n";
+            foreach ($linked_fields[$e['id']][$e['language']][$val] as $id) {
+              echo "  document.getElementById('ms" . $id . "').disabled = true;\n";
+            }
+          }
+          foreach ($link_groups[$e['id']][$e['language']] as $val) {
+            echo "  if (";
+            $first = true;
+            $enables = '';
+            foreach(get_children($val) as $x) {
+              if ($first) {
+                $first = false;
+              } else {
+                echo ' || ';
+              }
+              echo '(id == ' . $x . ')';
+            }
+            echo ") {\n";
+            echo "    var lf = document.getElementById('lf" . $e['id'] . '_' . $e['language'] . '_' . $val . "');\n";
+            echo "    lf.style.display = ''; lf.disabled = false;\n";
+            foreach ($linked_fields[$e['id']][$e['language']][$val] as $id) {
+              $enables .= "    document.getElementById('ms" . $id . "').disabled = false;\n";
+            }
+            echo $enables;
+            echo "  }\n";
+          }
+          foreach ($linked_fields[$e['id']][$e['language']] as $group) {
+            foreach ($group as $id) {
+              echo "  var lv = document.getElementById('ms" . $id . "');\n";
+              echo "  if (lv.disabled == true) { lv.checked = false; }\n";
+            }
+          }
+        }
+        echo "}\n";
+        echo "</script>\n";
+      }
+    }
+  }
+} // EOF: Extra Product Fields
+?>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="goOnLoad();">
-<div id="spiffycalendar" class="text"></div>
+<body onLoad="document.search_products.search.focus(); goOnLoad();">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+
+<!--// SLIMBOX2 -->
+	<link rel="stylesheet" href="<?php echo DIR_WS_INCLUDES . 'javascript/slimbox2.css'; ?>" type="text/css" media="screen">
+    <script type="text/javascript" src="<?php echo DIR_WS_INCLUDES . 'javascript/slimbox2.js'; ?>"></script>
+    <?php include(DIR_WS_INCLUDES . 'javascript/sbcustom.php'); ?>
+<!--// SLIMBOX2 -->
+
 <!-- header_eof //-->
 
 <!-- body //-->
@@ -464,34 +952,37 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
     <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
 <!-- left_navigation //-->
 <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+
 <!-- left_navigation_eof //-->
     </table></td>
 <!-- body_text //-->
-<?php // BOF: MOD  new_category / edit_category (when ALLOW_CATEGORY_DESCRIPTIONS is 'true') 
+<?php // BOF: MOD  new_category / edit_category (when ALLOW_CATEGORY_DESCRIPTIONS is 'true')
 //    <td width="100%" valign="top">
 //  if ($action == 'new_product') {
 ?>
        <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
   <?php   //----- new_category / edit_category (when ALLOW_CATEGORY_DESCRIPTIONS is 'true') -----
-  if ($HTTP_GET_VARS['action'] == 'new_category_ACD' || $HTTP_GET_VARS['action'] == 'edit_category_ACD') {
-    if ( ($HTTP_GET_VARS['cID']) && (!$HTTP_POST_VARS) ) {
-      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . $HTTP_GET_VARS['cID'] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . $languages_id . "' order by c.sort_order, cd.categories_name");
+  if (isset($_GET['action']) && ($_GET['action'] == 'new_category_ACD' ||  $_GET['action'] == 'edit_category_ACD')) {
+    if ( ($_GET['cID']) && (!$_POST) ) {
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.categories_featured, c.categories_featured_until, c.categories_hide_from_groups from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . $_GET['cID'] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . $languages_id . "' order by c.sort_order, cd.categories_name");
       $category = tep_db_fetch_array($categories_query);
 
       $cInfo = new objectInfo($category);
-    } elseif ($HTTP_POST_VARS) {
-      $cInfo = new objectInfo($HTTP_POST_VARS);
-      $categories_name = $HTTP_POST_VARS['categories_name'];
-      $categories_heading_title = $HTTP_POST_VARS['categories_heading_title'];
-      $categories_description = $HTTP_POST_VARS['categories_description'];
-      $categories_url = $HTTP_POST_VARS['categories_url'];
+    } elseif ($_POST) {
+      $cInfo = new objectInfo($_POST);
+      $categories_name = $_POST['categories_name'];
+      $categories_heading_title = $_POST['categories_heading_title'];
+      $categories_description = $_POST['categories_description'];
+      $categories_url = $_POST['categories_url'];
     } else {
       $cInfo = new objectInfo(array());
     }
 
     $languages = tep_get_languages();
 
-    $text_new_or_edit = ($HTTP_GET_VARS['action']=='new_category_ACD') ? TEXT_INFO_HEADING_NEW_CATEGORY : TEXT_INFO_HEADING_EDIT_CATEGORY;
+    $text_new_or_edit = ($_GET['action']=='new_category_ACD') ? TEXT_INFO_HEADING_NEW_CATEGORY : TEXT_INFO_HEADING_EDIT_CATEGORY;
+	
+	$form_action = ($_GET['cID']) ? 'update_category' : 'insert_category';
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -504,65 +995,108 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
-      <tr><?php echo tep_draw_form('new_category', FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $HTTP_GET_VARS['cID'] . '&action=new_category_preview', 'post', 'enctype="multipart/form-data"'); ?>
-        <td><table border="0" cellspacing="0" cellpadding="2">
-<?php
-    for ($i=0; $i<sizeof($languages); $i++) {
-?>
+      <tr>
+        <td><?php echo tep_draw_form($form_action, FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;cID=' . $_GET['cID'] . '&amp;action=' . $form_action, 'post', 'enctype="multipart/form-data"'); ?>
+        <table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_EDIT_CATEGORIES_NAME; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('categories_name[' . $languages[$i]['id'] . ']', (($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : tep_get_category_name($cInfo->categories_id, $languages[$i]['id']))); ?></td>
+          	<td colspan="2">
+            <div id="categorytabs">
+      	    <ul>
+				<?php for ($i=0; $i<sizeof($languages); $i++) { ?>
+                    <li>
+                      <a href="#categorytabs-<?php echo $i ?>">
+                         <?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>
+                      </a>
+                    </li>
+                <?php } ?>
+  			</ul>
+
+            <?php for ($i=0; $i<sizeof($languages); $i++) { ?>
+            
+            <div id="categorytabs-<?php echo $i ?>">
+              <table width="100%">
+                <tr>
+            	  <td class="main"><?php echo TEXT_EDIT_CATEGORIES_NAME; ?></td>
+            	  <td class="main"><?php echo tep_draw_input_field('categories_name[' . $languages[$i]['id'] . ']', (($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : tep_get_category_name($cInfo->categories_id, $languages[$i]['id']))); ?></td>
+          		</tr>
+				<tr>
+            	  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          		</tr>
+                <tr>
+            	  <td class="main"><?php echo TEXT_EDIT_CATEGORIES_HEADING_TITLE; ?></td>
+            	  <td class="main"><?php echo tep_draw_input_field('categories_heading_title[' . $languages[$i]['id'] . ']', (($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : tep_get_category_heading_title($cInfo->categories_id, $languages[$i]['id']))); ?></td>
+          		</tr>
+                <tr>
+            	  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          		</tr>
+                <tr>
+            	  <td class="main" valign="top"><?php echo TEXT_EDIT_CATEGORIES_DESCRIPTION; ?></td>
+            	  <td></td>
+          		</tr>
+                <tr>
+                  <td colspan="2" valign="top" class="main">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="2" valign="top" class="main">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              		  <tr>
+                	    <td valign="top" class="main">
+                		<?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
+						  echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id'])),'id="category_description' . $languages[$i]['id'] . '" class="ckeditor"') . '</td>';
+			            } else { 
+						  echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
+            			} // EOF: CKeditor
+                		?>
+                        </td>
+               		  </tr>
+             		</table>
+                  </td>
+                </tr>
+              </table>
+            </div>       
+            <?php } ?>
+            </div>
+            </td>
           </tr>
-<?php
-    }
-?>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php
-    for ($i=0; $i<sizeof($languages); $i++) {
-?>
           <tr>
-            <td class="main"><?php if ($i == 0) echo TEXT_EDIT_CATEGORIES_HEADING_TITLE; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('categories_heading_title[' . $languages[$i]['id'] . ']', (($categories_name[$languages[$i]['id']]) ? stripslashes($categories_name[$languages[$i]['id']]) : tep_get_category_heading_title($cInfo->categories_id, $languages[$i]['id']))); ?></td>
+            <td class="main">
+           	<?php // EOF Open Featured Sets
+ 			  echo  TEXT_CATEGORIES_FEATURED . '</td><td class="main">' . tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_radio_field('categories_featured', '1', $in_fc_status) . '&nbsp;' . TEXT_CATEGORIES_YES . '&nbsp;' . tep_draw_radio_field('categories_featured', '0', $out_fc_status) . '&nbsp;' . TEXT_CATEGORIES_NO; ?>
+            </td>
           </tr>
-<?php
-    }
-?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-<?php
-    for ($i=0; $i<sizeof($languages); $i++) {
-?>
-          <tr>
-            <td class="main" valign="top"><?php if ($i == 0) echo TEXT_EDIT_CATEGORIES_DESCRIPTION; ?></td>
-            <td><table border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
-                <td class="main">
-                <?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
-// Line Changed - MOD: Ajustable Editor Window
-                  // BOF: CKeditor
-		  //echo tep_draw_fckeditor ('categories_description[' . $languages[$i]['id'] . ']', HTML_AREA_WYSIWYG_EDITOR_WIDTH, HTML_AREA_WYSIWYG_EDITOR_HEIGHT, (isset($categories_description[$languages[$i]['id']]) ? stripslashes($categories_description[$languages[$i]['id']]) : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
-                           echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','soft','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id'])),'id = category_description[' . $languages[$i]['id'] . '] class="ckeditor"') . '</td>';
-		  } else { echo tep_draw_textarea_field('categories_description[' . $languages[$i]['id'].']','soft','70','15',(isset($categories_description[$languages[$i]['id']]) ? $categories_description[$languages[$i]['id']] : tep_get_category_description($cInfo->categories_id, $languages[$i]['id']))) . '</td>';
-                } // EOF: CKeditor
-                ?>
-		
-		
-		
-		
-              </tr>
-            </table></td>
-          </tr>
-<?php
-    }
-?>
-          <tr>
+		  <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
+            <td class="main"><?php
+   			  echo TEXT_CATEGORIES_FEATURED_DATE . '<small>(YYYY-MM-DD)</small></td><td class="main">' . tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_input_field('categories_featured_until', $cInfo->categories_featured_until, 'id="categories_featured_until"'); ?></td>
+            <?php // EOF Open Featured Sets ?>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+          <?php // BOF SPPC hide products and categories from groups
+ 	      echo '<td class="main"> ' . TEXT_HIDE_CATEGORIES_FROM_GROUPS . '</td><td class="main">';
+		  $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id");
+          while ($customer_groups = tep_db_fetch_array($customers_group_query)) {
+            $customers_groups[] = array('id' => $customer_groups['customers_group_id'], 'text' => $customer_groups['customers_group_name']);
+          }
+		  
+          $hide_cat_from_groups_array = explode(',', $cInfo->categories_hide_from_groups);
+          $hide_cat_from_groups_array = array_slice($hide_cat_from_groups_array, 1); // remove "@" from the array
+		 
+	      for ($i = 0; $i < count($customers_groups); $i++) {
+       	    echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_checkbox_field('hide_cat[' . $customers_groups[$i]['id'] . ']',  $customers_groups[$i]['id'] , (in_array($customers_groups[$i]['id'], $hide_cat_from_groups_array)) ? 1: 0) . '&#160;&#160;' . $customers_groups[$i]['text'];
+          }
+    	  echo '</td>';
+ 		  // EOF SPPC hide products and categories from groups ?>
+ 	      </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
           <tr>
             <td class="main"><?php echo TEXT_EDIT_CATEGORIES_IMAGE; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_file_field('categories_image') . '<br>' . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $cInfo->categories_image . tep_draw_hidden_field('categories_previous_image', $cInfo->categories_image); ?></td>
@@ -577,142 +1111,54 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-      <tr>
-        <td class="main" align="right"><?php echo tep_draw_hidden_field('categories_date_added', (($cInfo->date_added) ? $cInfo->date_added : date('Y-m-d'))) . tep_draw_hidden_field('parent_id', $cInfo->parent_id) . tep_image_submit('button_preview.gif', IMAGE_PREVIEW) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $HTTP_GET_VARS['cID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
-      </form></tr>
-<?php
-
-  //----- new_category_preview (active when ALLOW_CATEGORY_DESCRIPTIONS is 'true') -----
-  } elseif ($HTTP_GET_VARS['action'] == 'new_category_preview') {
-    if ($HTTP_POST_VARS) {
-      $cInfo = new objectInfo($HTTP_POST_VARS);
-      $categories_name = $HTTP_POST_VARS['categories_name'];
-      $categories_heading_title = $HTTP_POST_VARS['categories_heading_title'];
-      $categories_description = $HTTP_POST_VARS['categories_description'];
-
-// copy image only if modified
-        $categories_image = new upload('categories_image');
-        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR);
-        if ($categories_image->parse() && $categories_image->save()) {
-          $categories_image_name = $categories_image->filename;
-        } else {
-        $categories_image_name = $HTTP_POST_VARS['categories_previous_image'];
-      }
-#     if ( ($categories_image != 'none') && ($categories_image != '') ) {
-#       $image_location = DIR_FS_CATALOG_IMAGES . $categories_image_name;
-#       if (file_exists($image_location)) @unlink($image_location);
-#       copy($categories_image, $image_location);
-#     } else {
-#       $categories_image_name = $HTTP_POST_VARS['categories_previous_image'];
-#     }
-    } else {
-      $category_query = tep_db_query("select c.categories_id, cd.language_id, cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image, c.sort_order, c.date_added, c.last_modified from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and c.categories_id = '" . $HTTP_GET_VARS['cID'] . "'");
-      $category = tep_db_fetch_array($category_query);
-
-      $cInfo = new objectInfo($category);
-      $categories_image_name = $cInfo->categories_image;
-    }
-
-    $form_action = ($HTTP_GET_VARS['cID']) ? 'update_category' : 'insert_category';
-
-    echo tep_draw_form($form_action, FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $HTTP_GET_VARS['cID'] . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
-
-    $languages = tep_get_languages();
-    for ($i=0; $i<sizeof($languages); $i++) {
-      if ($HTTP_GET_VARS['read'] == 'only') {
-        $cInfo->categories_name = tep_get_category_name($cInfo->categories_id, $languages[$i]['id']);
-        $cInfo->categories_heading_title = tep_get_category_heading_title($cInfo->categories_id, $languages[$i]['id']);
-        $cInfo->categories_description = tep_get_category_description($cInfo->categories_id, $languages[$i]['id']);
-      } else {
-        $cInfo->categories_name = tep_db_prepare_input($categories_name[$languages[$i]['id']]);
-        $cInfo->categories_heading_title = tep_db_prepare_input($categories_heading_title[$languages[$i]['id']]);
-        $cInfo->categories_description = tep_db_prepare_input($categories_description[$languages[$i]['id']]);
-      }
-?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $cInfo->categories_heading_title; ?></td>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-        </table></td>
+          <tr>
+            <td></td>
+            <td class="main">
+			<?php 
+			echo tep_draw_hidden_field('categories_date_added', (($cInfo->date_added) ? $cInfo->date_added : date('Y-m-d'))) . tep_draw_hidden_field('parent_id', $cInfo->parent_id);
+			if ($_GET['cID']) {
+              echo tep_image_submit('button_update.gif', IMAGE_UPDATE);
+            } else {
+              echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
+            }
+	        echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;cID=' . $_GET['cID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+          </tr>
+        </table>
+        </form>
+        </td>
       </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-      <tr>
-        <td class="main"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image_name, $cInfo->categories_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'align="right" hspace="5" vspace="5"') . $cInfo->categories_description; ?></td>
-      </tr>
-
+    </table>
 <?php
-    }
-    if ($HTTP_GET_VARS['read'] == 'only') {
-      if ($HTTP_GET_VARS['origin']) {
-        $pos_params = strpos($HTTP_GET_VARS['origin'], '?', 0);
-        if ($pos_params != false) {
-          $back_url = substr($HTTP_GET_VARS['origin'], 0, $pos_params);
-          $back_url_params = substr($HTTP_GET_VARS['origin'], $pos_params + 1);
-        } else {
-          $back_url = $HTTP_GET_VARS['origin'];
-          $back_url_params = '';
-        }
-      } else {
-        $back_url = FILENAME_CATEGORIES;
-        $back_url_params = 'cPath=' . $cPath . '&cID=' . $cInfo->categories_id;
-      }
-?>
-      <tr>
-        <td align="right"><?php echo '<a href="' . tep_href_link($back_url, $back_url_params, 'NONSSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
-      </tr>
-<?php
-    } else {
-?>
-      <tr>
-        <td align="right" class="smallText">
-<?php
-/* Re-Post all POST'ed variables */
-      reset($HTTP_POST_VARS);
-      while (list($key, $value) = each($HTTP_POST_VARS)) {
-        if (!is_array($HTTP_POST_VARS[$key])) {
-          echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
-        }
-      }
-      $languages = tep_get_languages();
-      for ($i=0; $i<sizeof($languages); $i++) {
-        echo tep_draw_hidden_field('categories_name[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($categories_name[$languages[$i]['id']])));
-        echo tep_draw_hidden_field('categories_heading_title[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($categories_heading_title[$languages[$i]['id']])));
-        echo tep_draw_hidden_field('categories_description[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($categories_description[$languages[$i]['id']])));
-      }
-      echo tep_draw_hidden_field('X_categories_image', stripslashes($categories_image_name));
-      echo tep_draw_hidden_field('categories_image', stripslashes($categories_image_name));
-
-      echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="edit"') . '&nbsp;&nbsp;';
-
-      if ($HTTP_GET_VARS['cID']) {
-        echo tep_image_submit('button_update.gif', IMAGE_UPDATE);
-      } else {
-        echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
-      }
-      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $HTTP_GET_VARS['cID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
-?></td>
-      </form></tr>
-<?php
-    }
 
   } elseif ($action == 'new_product') {
-// EOF: MOD  new_category / edit_category (when ALLOW_CATEGORY_DESCRIPTIONS is 'true') 
-    $parameters = array('products_name' => '',
+   $parameters = array('products_name' => '',
                        'products_description' => '',
+// BOF Open Featured Sets
+                       'products_short' => '',
+// EOF Open Featured Sets
+// BOF: Tabs by PGM
+                       'tab1' => '',
+                       'tab2' => '',
+                       'tab3' => '',
+                       'tab4' => '',
+                       'tab5' => '',
+                       'tab6' => '',
+// EOF: Tabs by PGM
                        'products_url' => '',
                        'products_id' => '',
                        'products_quantity' => '',
                        'products_model' => '',
                        'products_image' => '',
+// LINED ADDED: MSRP
+					   'products_msrp' => '',
                        'products_price' => '',
+// BOF QPBPP for SPPC
+                       'products_qty_blocks' => '',
+                       'products_min_order_qty' => '',
+// EOF QPBPP for SPPC
                        'products_weight' => '',
                        'products_length' => '',
                        'products_width' => '',
@@ -721,24 +1167,120 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                        'products_date_added' => '',
                        'products_last_modified' => '',
                        'products_date_available' => '',
+// BOF Open Featured Sets
+                       'products_featured' => '',
+                       'products_featured_until' => '',
+// EOF Open Featured Sets
                        'products_status' => '',
-                       'products_tax_class_id' => '',
+// LINE MODED: Default Product Tax Class
+                       'products_tax_class_id' => DEFAULT_PRODUCT_TAX_CLASS,
+// BOF SPPC hide from groups mod
+                       'products_hide_from_groups' => '',
+// EOF SPPC hide from groups mod
                        'manufacturers_id' => '');
+
+// BOF: Extra Product Fields
+    foreach ($xfields as $f) {
+      $parameters = array_merge($parameters, array($f => ''));
+    }
+// EOF: Extra Product Fields
 
     $pInfo = new objectInfo($parameters);
 
-    if (isset($HTTP_GET_VARS['pID']) && empty($HTTP_POST_VARS)) {
-//LINE MODED: Added "p.products_ship_price"
-      $product_query = tep_db_query("select p.products_ship_price, pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+    if (isset($_GET['pID']) && empty($_POST)) { // BOF SPPC hide from groups mod
+// BOF indvship 4.5
+      $products_shipping_query = tep_db_query("SELECT * FROM " . TABLE_PRODUCTS_SHIPPING . " WHERE products_id=" . (int)$_GET['pID']);
+      while ($products_shipping = tep_db_fetch_array($products_shipping_query)) {
+        $products_ship_zip = $products_shipping['products_ship_zip'];
+        $products_ship_methods_id = $products_shipping['products_ship_methods_id'];
+        $products_ship_price = $products_shipping['products_ship_price'];
+        $products_ship_price_two = $products_shipping['products_ship_price_two'];
+      }
+      $shipping=array('products_ship_methods_id' => $products_ship_methods_id,
+      'products_ship_zip' => $products_ship_zip,
+      'products_ship_price' => $products_ship_price,
+      'products_ship_price_two' => $products_ship_price_two);
+      $pInfo->objectInfo($shipping);
+// EOF indvship 4.5
+//    $product_query = tep_db_query("select pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id,                              p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+//LINE MODED: SPPC hide from groups mod & Tabs by PGM
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+// LINE MODED: Open Feature Sets : Added ", p.products_featured, p.products_featured_until"
+// BOF: Extra Product Fields
+//	  $product_query = tep_db_query("select pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+//LINE MODED: MSRP: Added "p.products_msrp,"
+	  $query = "select pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until ";
+	foreach ($xfields as $f) {
+      $query .= ", pd." . $f;
+      }
+      $query .= " from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'";
+	  $product_query = tep_db_query($query);
+// EOF: Extra Product Fields
+
+// EOF SPPC hide from groups mod
       $product = tep_db_fetch_array($product_query);
 
       $pInfo->objectInfo($product);
-    } elseif (tep_not_null($HTTP_POST_VARS)) {
-      $pInfo->objectInfo($HTTP_POST_VARS);
-      $products_name = $HTTP_POST_VARS['products_name'];
-      $products_description = $HTTP_POST_VARS['products_description'];
-      $products_url = $HTTP_POST_VARS['products_url'];
-    }
+
+// BOF QPBPP for SPPC
+// move retail settings for quantity blocks and min order qty to an array indexed
+// by customer_group_id, as we will get back in $_POST values
+      unset($pInfo->products_qty_blocks);
+      $pInfo->products_qty_blocks[0] = $product['products_qty_blocks'];
+      unset($pInfo->products_min_order_qty);
+      $pInfo->products_min_order_qty[0] = $product['products_min_order_qty'];
+// next is getting the group prices, products_qty_blocks, and products_min_order_qty for groups
+      $cg_prices_query = tep_db_query("select customers_group_id, customers_group_price, products_qty_blocks, products_min_order_qty from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $pInfo->products_id . "' order by customers_group_id");
+      while ($cg_prices = tep_db_fetch_array($cg_prices_query)) {
+// and adding them to $pInfo for later use
+        if (tep_not_null($cg_prices['customers_group_price'])) {
+        $pInfo->sppcprice[$cg_prices['customers_group_id']] = $cg_prices['customers_group_price'];
+        }
+        $pInfo->products_qty_blocks[$cg_prices['customers_group_id']] = $cg_prices['products_qty_blocks'];
+        $pInfo->products_min_order_qty[$cg_prices['customers_group_id']] = $cg_prices['products_min_order_qty'];
+      } // end while ($cg_prices = tep_db_fetch_array($cg_prices_query))
+
+      $price_breaks_array = array();
+      $price_breaks_query = tep_db_query("select products_price_break_id, products_price, products_qty, customers_group_id from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id = '" . tep_db_input($pInfo->products_id) . "' order by customers_group_id, products_qty");
+      while ($price_break = tep_db_fetch_array($price_breaks_query)) {
+        $pInfo->products_price_break[$price_break['customers_group_id']][] = $price_break['products_price'];
+        $pInfo->products_qty[$price_break['customers_group_id']][] = $price_break['products_qty'];
+        $pInfo->products_price_break_id[$price_break['customers_group_id']][] = $price_break['products_price_break_id'];
+      }
+      $product_discount_categories = array();
+      $products_discount_query = tep_db_query("select customers_group_id, discount_categories_id from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " where products_id = '" . tep_db_input($pInfo->products_id) . "' order by customers_group_id");
+      while ($products_discount_results = tep_db_fetch_array($products_discount_query)) {
+        $pInfo->discount_categories_id[$products_discount_results['customers_group_id']] = $products_discount_results['discount_categories_id'];
+      }
+// EOF QPBPP for SPPC
+
+    } elseif (tep_not_null($_POST)) {
+      $pInfo->objectInfo($_POST);
+      $products_name = $_POST['products_name'];
+// BOF Open Featured Sets
+      $products_short = $_POST['products_short'];
+// EOF Open Featured Sets
+      $products_description = $_POST['products_description'];
+// BOF: Tabs by PGM
+      $tab1 = $_POST['tab1'];
+      $tab2 = $_POST['tab2'];
+      $tab3 = $_POST['tab3'];
+      $tab4 = $_POST['tab4'];
+      $tab5 = $_POST['tab5'];
+      $tab6 = $_POST['tab6'];
+// EOF: Tabs by PGM
+      $products_url = $_POST['products_url'];
+// BOF Open Featured Sets
+      $products_featured = $_POST['products_featured'];
+      $products_featured_until = $_POST['products_featured_until'];
+// EOF Open Featured Sets
+// BOF: Extra Product Fields
+      $extra = array();
+      foreach ($xfields as $f) {
+        $extra[$f] = $_POST[$f];
+      } // end for each
+// EOF: Extra Product Fields
+    } // end elseif
 
     $manufacturers_array = array(array('id' => '', 'text' => TEXT_NONE));
     $manufacturers_query = tep_db_query("select manufacturers_id, manufacturers_name from " . TABLE_MANUFACTURERS . " order by manufacturers_name");
@@ -754,6 +1296,15 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
                                  'text' => $tax_class['tax_class_title']);
     }
 
+// BOF QPBPP for SPPC
+    $discount_categories_array = array(array('id' => '0', 'text' => TEXT_NONE));
+    $discount_categories_query = tep_db_query("select discount_categories_id, discount_categories_name from " . TABLE_DISCOUNT_CATEGORIES . " order by discount_categories_name");
+    while ($discount_categories = tep_db_fetch_array($discount_categories_query)) {
+      $discount_categories_array[] = array('id' => $discount_categories['discount_categories_id'],
+                                           'text' => $discount_categories['discount_categories_name']);
+    }
+// EOF QPBPP for SPPC
+
     $languages = tep_get_languages();
 
     if (!isset($pInfo->products_status)) $pInfo->products_status = '1';
@@ -762,13 +1313,19 @@ $Id: categories.php 16 2006-07-30 03:27:26Z user $
       case '1':
       default: $in_status = true; $out_status = false;
     }
+
+// BOF Open Featured Sets
+	if (empty($pInfo->products_featured)) $pInfo->products_featured = '0';
+    switch ($pInfo->products_featured) {
+      case '0': $in_f_status = false; $out_f_status = true; break;
+      case '1':
+      default: $in_f_status = true; $out_f_status = false;
+    }
+// EOF Open Featured Sets
+
 ?>
-<link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
-<script language="JavaScript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
-<script language="javascript"><!--
-  var dateAvailable = new ctlSpiffyCalendarBox("dateAvailable", "new_product", "products_date_available","btnDate1","<?php echo $pInfo->products_date_available; ?>",scBTNMODE_CUSTOMBLUE);
-//--></script>
-<script language="javascript"><!--
+
+<script type="text/javascript"><!--
 var tax_rates = new Array();
 <?php
     for ($i=0, $n=sizeof($tax_class_array); $i<$n; $i++) {
@@ -797,6 +1354,10 @@ function updateGross() {
   var taxRate = getTaxRate();
   var grossValue = document.forms["new_product"].products_price.value;
 
+/* BOF QPBPP for SPPC - auto-update Retail readonly price field */
+  document.forms["new_product"].products_price_retail_net.value = document.forms["new_product"].products_price.value;
+/* EOF QPBPP for SPPC - auto-update Retail readonly price field */
+
   if (taxRate > 0) {
     grossValue = grossValue * ((taxRate / 100) + 1);
   }
@@ -813,9 +1374,37 @@ function updateNet() {
   }
 
   document.forms["new_product"].products_price.value = doRound(netValue, 4);
+
+/* BOF QPBPP for SPPC - auto-update Retail readonly price field */
+  document.forms["new_product"].products_price_retail_net.value = document.forms["new_product"].products_price.value;
+/* EOF QPBPP for SPPC - auto-update Retail readonly price field */
 }
+
+function updateMSRPGross() {
+  var taxRate = getTaxRate();
+  var grossValue = document.forms["new_product"].products_msrp.value;
+
+  if (taxRate > 0) {
+    grossValue = grossValue * ((taxRate / 100) + 1);
+  }
+
+  document.forms["new_product"].products_msrp_gross.value = doRound(grossValue, 4);
+}
+
+function updateMSRPNet() {
+  var taxRate = getTaxRate();
+  var netValue = document.forms["new_product"].products_msrp_gross.value;
+
+  if (taxRate > 0) {
+    netValue = netValue / ((taxRate / 100) + 1);
+  }
+
+  document.forms["new_product"].products_msrp.value = doRound(netValue, 4);
+
+}
+
 //--></script>
-    <?php echo tep_draw_form('new_product', FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : '') . '&action=new_product_preview', 'post', 'enctype="multipart/form-data"'); ?>
+    <?php echo tep_draw_form('new_product', FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&amp;pID=' . $_GET['pID'] : '') . '&amp;action=new_product_preview', 'post', 'enctype="multipart/form-data"'); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -834,9 +1423,22 @@ function updateNet() {
             <td class="main"><?php echo TEXT_PRODUCTS_STATUS; ?></td>
             <td class="main" colspan="2">
             <?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE .
-            tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_DATE_AVAILABLE . '&nbsp;<small>(YYYY-MM-DD)</small>&nbsp;'; ?>
-            <script language="javascript">dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script></td>
+            tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_DATE_AVAILABLE . '&nbsp;<small>' . TEXT_YYYY_MM_DD . '</small>&nbsp;' .  tep_draw_input_field('products_date_available', $pInfo->products_date_available, 'id="product_available"'); ?>
+            </td>
           </tr>
+<?php
+// BOF Open Featured Sets
+?>
+		  <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo TEXT_PRODUCTS_FEATURED; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_featured', '1', $in_f_status) . '&nbsp;' . TEXT_PRODUCT_YES . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . tep_draw_radio_field('products_featured', '0', $out_f_status) . '&nbsp;' . TEXT_PRODUCT_NO . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . TEXT_FEATURED_UNTIL; ?><small><?php echo TEXT_YYYY_MM_DD; ?></small>&nbsp; <?php echo tep_draw_input_field('products_featured_until', $pInfo->products_featured_until, 'id="products_featured_until"'); ?> </td>
+          </tr>
+<?php
+// EOF Open Featured Sets
+?>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
@@ -856,7 +1458,7 @@ function updateNet() {
             <td class="main"><?php if ($i == 0) echo TEXT_PRODUCTS_NAME; ?></td>
 <?php /* LINE CHANGED: MS2 update 501112 - Added: stripslashes(...) */ ?>
             <td class="main">
-            <?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (isset($products_name[$languages[$i]['id']]) ? stripslashes($products_name[$languages[$i]['id']]) : tep_get_products_name($pInfo->products_id, $languages[$i]['id']))) .
+            <?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (isset($products_name[$languages[$i]['id']]) ? stripslashes($products_name[$languages[$i]['id']]) : tep_get_products_name($pInfo->products_id, $languages[$i]['id'])), ' size="60"') .
             tep_draw_separator('pixel_trans.gif', '15', '12') ; ?>
             <?php if ($i == 0) {
                         echo TEXT_PRODUCTS_URL . TEXT_PRODUCTS_URL_WITHOUT_HTTP . tep_draw_separator('pixel_trans.gif', '30', '12');
@@ -872,75 +1474,194 @@ function updateNet() {
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_TAX_CLASS; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('products_tax_class_id', $tax_class_array, $pInfo->products_tax_class_id, 'onchange="updateGross()"'); ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('products_tax_class_id', $tax_class_array, $pInfo->products_tax_class_id, 'onchange="updateGross(); updateMSRPGross();"'); ?></td>
           </tr>
           <tr bgcolor="#ebebff">
-            <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET; ?></td>
+            <td class="main"><?php echo TEXT_PRODUCTS_PRICE_MSRP; ?><?php echo '<span title="' . HEADING_MSRP_HELP . '|' . TEXT_MSRP_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png'); ?></span></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_msrp', $pInfo->products_msrp, 'onKeyUp="updateMSRPGross()"') . 
+			tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_MSRP_GROSS . '&nbsp;' . tep_draw_input_field('products_msrp_gross', $pInfo->products_msrp, 'OnKeyUp="updateMSRPNet()"'); ?></td>
+          </tr>
+          <tr bgcolor="#ebebff">
+            <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET; ?><?php echo '<span title="' . HEADING_PRICE_HELP . '|' . TEXT_PRICE_HELP . '">' . tep_image(DIR_WS_ICONS . 'help.png'); ?></span></td>
             <td class="main" colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price', $pInfo->products_price, 'onKeyUp="updateGross()"') .
             tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_PRICE_GROSS . '&nbsp;' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'OnKeyUp="updateNet()"'); ?></td>
           </tr>
-<script language="javascript"><!--
-updateGross();
-//--></script>
 
+<!-- BOF Separate Pricing Per Customer - QPBPP for SPPC - in tabbed menu -->
 <?php
-// BOF: MOD - Separate Pricing Per Customer
-    $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " where customers_group_id != '0' order by customers_group_id");
+// the query is changed to also get the results for group 0 (retail) so that the
+// results of the query can be used for others mods (like hide products, QPBPP for SPPC) too
+    $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id");
     $header = false;
-    while ($customers_group = tep_db_fetch_array($customers_group_query)) {
-
-     if (tep_db_num_rows($customers_group_query) > 0) {
-       $attributes_query = tep_db_query("select customers_group_id, customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $pInfo->products_id . "' and customers_group_id = '" . $customers_group['customers_group_id'] . "' order by customers_group_id");
-     } else {
-         $attributes = array('customers_group_id' => 'new');
+    if (!tep_db_num_rows($customers_group_query) > 0) {
+      $messageStack->add_session(ERROR_ALL_CUSTOMER_GROUPS_DELETED, 'error');
+   } else {
+// to avoid confusion and/or duplication of code we re-use some code originally used
+// for the "hide products for customers groups for sppc" mod here so both can co-exist
+     while ($customers_group = tep_db_fetch_array($customers_group_query)) {
+       $_hide_customers_group[] = $customers_group;
      }
- if (!$header) { ?>
-
-    <tr bgcolor="#ebebff">
-    <td class="main" colspan="2" style="font-style: italic"><?php echo TEXT_SPPC_HELP; ?>
-<?php if (isset($pInfo->sppcoption[$customers_group['customers_group_id']])) { // when a preview was done and the back button used
-print (TEXT_SPPC_WARNING);
-} ?>
-</td>
-    </tr>
- <?php
- $header = true;
- } // end if (!header), makes sure this is only shown once
- ?>
-      <tr bgcolor="#ebebff">
-      <td class="main"><?php
-      echo tep_draw_checkbox_field('sppcoption[' . $customers_group['customers_group_id'] . ']', 'sppcoption[' . $customers_group['customers_group_id'] . ']', true) . '&nbsp;' . $customers_group['customers_group_name'];
-?>
- &nbsp;</td>
-       <td class="main"><?php
-       if ($attributes = tep_db_fetch_array($attributes_query)) {
-       echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('sppcprice[' . $customers_group['customers_group_id'] . ']', $attributes['customers_group_price']);
-       }  else {
-         if (isset($pInfo->sppcprice[$customers_group['customers_group_id']])) { // when a preview was done and the back button used
-           $sppc_cg_price = $pInfo->sppcprice[$customers_group['customers_group_id']];
-         } else { // nothing in the db, nothing in the post variables
-           $sppc_cg_price = '';
-         }
-     echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('sppcprice[' . $customers_group['customers_group_id'] . ']', $sppc_cg_price );
-   }  ?></td>
-    </tr>
+   } ?>
+          <tr>
+            <td colspan="2">
+              <div id="qpbpp" class="cgtabs">
+                <ul class="tabnav"> <?php
+                  foreach ($_hide_customers_group as $key => $cust_groups) {
+                    echo '  <li><a href="#pricebreak-' . $cust_groups['customers_group_id'] . '">' . $cust_groups['customers_group_name'] . '</a></li>' ."\n";
+                  }
+                ?>
+                </ul>
 <?php
-        } // end while ($customers_group = tep_db_fetch_array($customers_group_query))
+ foreach ($_hide_customers_group as $key => $cust_groups) {
+   $CustGroupID = $cust_groups['customers_group_id'];
 ?>
+                  <div id="pricebreak-<?php echo $CustGroupID; ?>" class="tabdiv">
+                    <table border="0" width="100%">
+                      <tr bgcolor="#ebebff">
+                        <td class="main"><?php echo ENTRY_CUSTOMERS_GROUP_NAME ?></td>
+                        <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $cust_groups['customers_group_name']; ?></td>
+                      </tr>
+                      <tr bgcolor="#fffff">
+                        <td class="main" colspan="2"><small><i><?php if ($CustGroupID != 0) echo TEXT_CUSTOMERS_GROUPS_NOTE; ?></i></small></td>
+                      </tr>
+                      <tr bgcolor="#fffff">
+                        <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET ?></td>
+                        <td class="main"><?php
+                        if ($CustGroupID != 0) {
+                          if (isset($pInfo->sppcoption)) {
+                            echo tep_draw_checkbox_field('sppcoption[' . $CustGroupID . ']', 'sppcoption[' . $CustGroupID . ']', (isset($pInfo->sppcoption[$CustGroupID])) ? 1: 0);
+                          } else {
+                            echo tep_draw_checkbox_field('sppcoption[' . $CustGroupID . ']', 'sppcoption[' . $CustGroupID . ']', true);
+                          }
+                            if (isset($pInfo->sppcprice[$CustGroupID])) {
+                              $sppc_cg_price = $pInfo->sppcprice[$CustGroupID];
+                            } else { // nothing in the db, nothing in the post variables
+                              $sppc_cg_price = '';
+                            }
+                            echo '&nbsp;' . tep_draw_input_field('sppcprice[' . $CustGroupID . ']', $sppc_cg_price );
+                        } else {
+                          echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_retail_net', $pInfo->products_price, 'readonly');
+                        } // end if/else ($CustGroupID != 0) ?>
+                        </td>
+                      </tr>
+                      <tr bgcolor="#ebebff">
+                        <td class="main"><?php echo TEXT_DISCOUNT_CATEGORY ?></td>
+                        <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('discount_categories_id[' . $CustGroupID . ']', $discount_categories_array, $pInfo->discount_categories_id[$CustGroupID]) . tep_draw_hidden_field('current_discount_cat_id[' . $CustGroupID . ']', (isset($pInfo->current_discount_cat_id[$CustGroupID]) ? (int)$pInfo->current_discount_cat_id[$CustGroupID] : $pInfo->discount_categories_id[$CustGroupID])); ?></td>
+                      </tr>
+                      <tr bgcolor="#ffffff">
+                        <td class="main"><?php echo TEXT_PRODUCTS_QTY_BLOCKS; ?></td>
+                        <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_qty_blocks[' . $CustGroupID . ']', $pInfo->products_qty_blocks[$CustGroupID], 'size="10"') . "&nbsp;" . TEXT_PRODUCTS_QTY_BLOCKS_HELP; ?></td>
+                      </tr>
+                      <tr bgcolor="#ebebff">
+                        <td class="main"><?php echo TEXT_PRODUCTS_MIN_ORDER_QTY; ?></td>
+                        <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_min_order_qty[' . $CustGroupID . ']', $pInfo->products_min_order_qty[$CustGroupID], 'size="10"') . "&nbsp;" . TEXT_PRODUCTS_MIN_ORDER_QTY_HELP; ?></td>
+                      </tr>
+<?php
+    $i = 0; // for alternate coloring of rows (zebra striping)
+    for ($count = 0; $count <= (PRICE_BREAK_NOF_LEVELS - 1); $count++) {
+      $bgcolor = ($i++ & 1) ? '#ebebff' : '#ffffff'; // for zebra striping	  
+?>
+                      <tr bgcolor="<?php echo $bgcolor; ?>">
+                        <td class="main"><?php echo TEXT_PRODUCTS_PRICE  . " " . ($count + 1); ?></td>
+                        <td class="main" align="left"> <?php
+                            if(is_array($pInfo->products_price_break[$CustGroupID]) && array_key_exists($count, $pInfo->products_price_break[$CustGroupID])) {
+                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', $pInfo->products_qty[$CustGroupID][$count], 'size="10"');
+                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;        
+							  echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', $pInfo->products_price_break[$CustGroupID][$count], 'size="10"');
+                              echo tep_draw_hidden_field('products_price_break_id[' . $CustGroupID .'][' . $count . ']', $pInfo->products_price_break_id[$CustGroupID][$count]);
+// only show a delete box for a price break that has been set (needed for when the
+// back button is used after a preview
+                              if (isset($pInfo->products_price_break_id[$CustGroupID][$count]) && tep_not_null($pInfo->products_price_break_id[$CustGroupID][$count])) {
+                                echo tep_draw_separator('pixel_trans.gif', '24', '15') . tep_draw_checkbox_field('products_delete[' . $CustGroupID .'][' . $count . ']', 'y', (isset($pInfo->products_delete[$CustGroupID][$count]) ? 1 : 0)) . TEXT_PRODUCTS_DELETE;
+                              }
+                            } else {
+							  echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
+					          echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;
+                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
+                            } 
+							?>
+                        </td>
+                      </tr>
+<?php
+   } // end for ($count = 0; $count <= (PRICE_BREAK_NOF_LEVELS - 1); $count++)
+?>
+                    </table>
+                  </div>
+<?php
+ } // end foreach ($_hide_customers_group as $key => $cust_groups)
+?>
+              </div>
+            </td>
+          </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<!-- EOF: MOD - Separate Pricing Per Customer  -->
-          <!-- AJAX Attribute Manager  -->
+<!-- EOF  Separate Pricing Per Customer - QPBPP for SPPC - in tabbed menu -->
+
+
+<script type="text/javascript"><!--
+updateGross();
+updateMSRPGross();
+//--></script>
+
+<!-- AJAX Attribute Manager  -->
           <tr>
           	<td colspan="2"><?php require_once( 'attributeManager/includes/attributeManagerPlaceHolder.inc.php' )?></td>
           </tr>
-          <!-- AJAX Attribute Manager end -->
+<!-- AJAX Attribute Manager end -->
+
+<!-- BOF SPPC hide from groups mod -->
+          <tr>
+            <td colspan="2" class="main" ><?php echo TEXT_HIDE_PRODUCTS_FROM_GROUP; ?></td>
+          </tr>
+<?php
+   $hide_from_groups_array = explode(',',$pInfo->products_hide_from_groups);
+   $hide_from_groups_array = array_slice($hide_from_groups_array, 1); // remove "@" from the array
+
+   foreach ($_hide_customers_group as $key => $hide_customers_group) {
+?>
+      <tr bgcolor="#ebebff">
+       <td class="main" colspan="2"><?php
+      if (isset($pInfo->hide)) {
+        echo tep_draw_checkbox_field('hide[' . $hide_customers_group['customers_group_id'] . ']',  $hide_customers_group['customers_group_id'] , (isset($pInfo->hide[ $hide_customers_group['customers_group_id']])) ? 1: 0);
+      } else {
+        echo tep_draw_checkbox_field('hide[' . $hide_customers_group['customers_group_id'] . ']',  $hide_customers_group['customers_group_id'] , (in_array($hide_customers_group['customers_group_id'], $hide_from_groups_array)) ? 1: 0);
+      } ?>&#160;&#160;<?php echo $hide_customers_group['customers_group_name']; ?></td>
+      </tr>
+<?php
+        } // end foreach ($_hide_customers_group as $key => $hide_customers_group)
+?>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+<!-- EOF SPPC hide from groups mod -->
+<?php
+// BOF: Tabs by PGM
+if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
+// EOF: Tabs by PGM
+?>
+
+<?php
+// BOF Open Featured Sets
+    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+?>
+          <tr>
+            <td class="main" valign="top"><?php if ($i == 0) echo TEXT_PRODUCTS_SHORT; ?></td>
+            <td><table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
+                <td class="main"><?php echo tep_draw_textarea_field('products_short[' . $languages[$i]['id'] . ']', '70', '4', (isset($products_short[$languages[$i]['id']]) ? $products_short[$languages[$i]['id']] : tep_get_products_short($pInfo->products_id, $languages[$i]['id']))); ?></td>
+              </tr>
+            </table></td>
+          </tr>
+<?php
+    }
+// EOF Open Featured Sets
+?>
+
 <?php
     for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
 ?>
@@ -950,16 +1671,16 @@ print (TEXT_SPPC_WARNING);
               <tr>
                 <td class="main" valign="top"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']); ?>&nbsp;</td>
 <?php // BOF: MOD WYSIWYG Editor
-/*              <td class="main"><?php echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($products_description[$languages[$i]['id']]) ? $products_description[$languages[$i]['id']] : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))); ?></td> */?>
+/*              <td class="main"><?php echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', '70', '15', (isset($products_description[$languages[$i]['id']]) ? $products_description[$languages[$i]['id']] : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))); ?></td> */?>
                 <td class="main"><?php if(HTML_AREA_WYSIWYG_DISABLE == 'Enable') {
       // BOF: MOD CKeditor
-      echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '10', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])),'id = products_description[' . $languages[$i]['id'] . '] class="ckeditor"');	
+      echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', '70', '10', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])),'id = products_description[' . $languages[$i]['id'] . '] class="ckeditor"');
       //echo tep_draw_fckeditor ('products_description[' . $languages[$i]['id'] . ']', '550', '300', (isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))) . '</td>';
       // EOF: MOD CKeditor
 
     } else {
 
-      echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'].']','soft','70','15',(isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))) . '</td>';
+      echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'].']','70','15',(isset($products_description[$languages[$i]['id']]) ? stripslashes($products_description[$languages[$i]['id']]) : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))) . '</td>';
     }
 // EOF: MOD WYSIWYG Editor ?>
               </tr>
@@ -968,6 +1689,13 @@ print (TEXT_SPPC_WARNING);
 <?php
     }
 ?>
+
+<?php
+// BOF: Tabs by PGM
+} else { include ('includes/modules/product_tabs.php'); }
+// EOF: Tabs by PGM
+?>
+
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
@@ -978,12 +1706,12 @@ print (TEXT_SPPC_WARNING);
 			{
 		  	?>
 			<td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;<a href="' . tep_href_link("stock.php", 'product_id=' . $pInfo->products_id) . ' " target="_blank">' . tep_image_button('button_stock.gif', "Stock") . '</a>'?></td>
-			<?php 
-			
+			<?php
+
 			}else{
 			?>
 			<td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_quantity', $pInfo->products_quantity); ?></td>
-			<?php 
+			<?php
 			}
 			//++++ QT Pro: End Changed code
 		  	?>
@@ -993,35 +1721,11 @@ print (TEXT_SPPC_WARNING);
           </tr>
 
 <!-- image directory -->
-          <tr>
-            <td class="main" bgcolor="#DDDDDD"><?php echo TEXT_PRODUCTS_IMAGE_DIRECTORY; ?></td>
-						<?php // place allowed sub-dirs in array, non-recursive
-						$dir_array = array();
-						if ($handle = opendir($root_images_dir)) {
-								while (false !== ($file = readdir($handle))) {
-								if ($file != "." && $file != "..") {
-										if (is_dir($root_images_dir.$file) && !in_array($file,$exclude_folders)) $dir_array[] = preg_replace("/\/\//si", "/", $file);
-								}
-						}
-						closedir($handle);
-						sort($dir_array);
-						} else { die("<center><br><br><b> " . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_1 . " (" . $root_images_dir . ") " . TEXT_PRODUCTS_DIRECTORY_DONT_EXIST_2 . "</b></center><br><br>");}
- 					 $drop_array[0] = array('id' => '', 'text' => TEXT_PRODUCTS_IMAGE_ROOT_DIRECTORY);
-
-					 foreach($dir_array as $img_dir) {
-					   $drop_array[] = array('id' => $img_dir, 'text' => $img_dir);
-					 }
- ?>
-            <td class="main" bgcolor="#DDDDDD"><?php echo tep_draw_separator('pixel_trans.gif', '25', '15') . tep_draw_pull_down_menu('directory', $drop_array) . tep_draw_separator('pixel_trans.gif', '25', '15') . TEXT_PRODUCTS_IMAGE_NEW_FOLDER . tep_draw_separator('pixel_trans.gif', '20', '15') . tep_draw_input_field('new_directory'); ?></td>
-          </tr>
-          <tr>
-            <td colspan="2" bgcolor="#DDDDDD"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
+          
 <!-- eof image directory -->
           <tr>
-            <td class="main" bgcolor="#DDDDDD"><?php echo TEXT_PRODUCTS_IMAGE; ?></td>
-            <td class="main" bgcolor="#DDDDDD"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_file_field('products_image') . '&nbsp;' . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $pInfo->products_image . tep_draw_hidden_field('products_previous_image', $pInfo->products_image); ?></td>
-          </tr>         
+            <?php require (DIR_WS_INCLUDES . 'modules/product_image_upload.php'); ?>
+          </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
@@ -1029,15 +1733,106 @@ print (TEXT_SPPC_WARNING);
             <td class="main"><?php echo TEXT_PRODUCTS_WEIGHT; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_weight', $pInfo->products_weight); ?></td>
           </tr>
+<?php  
+// BOF: Extra Product Fields
+          foreach ($epf as $e) {
+        	  for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+        	    if ($e['language'] == $languages[$i]['id']) {
+        	      if ($e['language_active']) {
+      	          $currentval = (isset($extra[$e['field']][$languages[$i]['id']]) ? stripslashes($extra[$e['field']][$languages[$i]['id']]) : tep_get_product_extra_value($e['id'], $pInfo->products_id, $languages[$i]['id']));
+        	        if ($e['uses_list']) {
+        	          if ($e['multi_select']) {
+           	          $currentval = (isset($extra[$e['field']][$languages[$i]['id']]) ? $extra[$e['field']][$languages[$i]['id']] : explode('|', trim(tep_get_product_extra_value($e['id'], $pInfo->products_id, $languages[$i]['id']), '|')));
+        	            $value_query = tep_db_query('select value_id, value_depends_on from ' . TABLE_EPF_VALUES . ' where epf_id = ' . (int) $e['id'] . ' and languages_id = ' . (int)$e['language'] . ' order by value_depends_on, sort_order, epf_value');
+        	            $epfvals = array(array());
+        	            while ($val = tep_db_fetch_array($value_query)) {
+        	              $epfvals[$val['value_depends_on']][] = $val['value_id'];
+        	            }
+        	            $inp = '';
+        	            if ($e['linked']) {
+        	              $tmp =  (isset($extra['extra_value_id' . $e['links_to']][$languages[$i]['id']]) ? stripslashes($extra['extra_value_id' . $e['links_to']][$languages[$i]['id']]) : tep_get_product_extra_value($e['links_to'], $pInfo->products_id, $languages[$i]['id']));
+        	              $tmp = get_parent_list($tmp);
+        	              $current_linked_val = explode(',', $tmp);
+        	            } else {
+        	              $current_linked_val = array(0);
+        	            }
+        	            foreach ($epfvals as $key => $vallist) {
+                        $col = 0;
+                        if ($e['linked']) {
+                          $tparms = ' id="lf' . $e['links_to'] . '_' . $languages[$i]['id'] . '_' . $key . '"';
+                          if (($key != 0) && !in_array($key, $current_linked_val))
+                            $tparms .= ' style="display: none" disabled';
+                        } else {
+                          $tparms = '';
+                        }
+                        $inp .= '<table' . $tparms . '><tr>';
+                        foreach ($vallist as $value) {
+                          $col++;
+                          if ($col > $e['columns']) {
+                            $inp .= '</tr><tr>';
+                            $col = 1;
+                          }
+                          $inp .= '<td>' . tep_draw_checkbox_field($e['field'] . "[" . $languages[$i]['id'] . "][]", $value, in_array($value, $currentval), '', 'onClick="process_' . $e['field'] . '_' . $e['language'] . '(' . $value . ')" id="ms' . $value . '"') . '</td><td>' . ($value == '0' ? TEXT_NOT_APPLY : tep_get_extra_field_list_value($value, false, $e['display_type'])) . '<td><td>&nbsp;</td>';
+                        }
+                        $inp .= '</tr></table>';
+        	            }
+        	          } else {
+          	          $epfvals = tep_build_epf_pulldown($e['id'], $languages[$i]['id'], array(array('id' => 0, 'text' => TEXT_NOT_APPLY)));
+          	          if ($e['checkbox']) {
+                        $col = 0;
+                        $inp = '<table><tr>';
+                        foreach ($epfvals as $value) {
+                          $col++;
+                          if ($col > $e['columns']) {
+                            $inp .= '</tr><tr>';
+                            $col = 1;
+                          }
+                          $inp .= '<td>' . tep_draw_radio_field($e['field'] . "[" . $languages[$i]['id'] . "]", $value['id'], false, $currentval, ($e['linked'] ? 'onClick="process_' . $e['field'] . '_' . $e['language'] . '(' . $value['id'] . ')"' : '')) . '</td><td>' . ($value['id'] == '0' ? TEXT_NOT_APPLY : tep_get_extra_field_list_value($value['id'], false, $e['display_type'])) . '<td><td>&nbsp;</td>';
+                        }
+                        $inp .= '</tr></table>';
+          	          } else {
+          	            $inp = tep_draw_pull_down_menu($e['field'] . "[" . $languages[$i]['id'] . "]",  $epfvals, $currentval, ($e['linked'] ? 'onChange="process_' . $e['field'] . '_' . $e['language'] . '()" id="lv' . $e['id'] . '_' . $languages[$i]['id'] . '"' : ''));
+          	          }
+        	          }
+        	        } else {
+        	          if ($e['textarea']) {
+          	            $inp = tep_draw_textarea_field($e['field'] . "[" . $languages[$i]['id'] . "]", '70', '5', $currentval, 'id="' . $e['field'] . "_" . $languages[$i]['id'] . '"');
+        	          } else {
+          	            $inp = tep_draw_input_field($e['field'] . "[" . $languages[$i]['id'] . "]", $currentval, "maxlength=" . $e['size'] . " size=" . $e['size']);
+        	          }
+        	        }
+?>
+          <tr bgcolor="#ebebff" <?php if ($e['hidden']) echo 'style="display: none"'; ?>>
+            <td class="main"><?php echo $e['label']; ?>:</td>
+            <td class="main"><?php echo tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $inp; ?></td>
+          </tr>
+<?php
+                }
+              }
+            }
+          } 
+// EOF: Extra Product Fields
+?>        
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-<?php // EOF: MOD - indvship ?>
+	  <?php if (MODULE_SHIPPING_INDVSHIP_STATUS == 'True') { // BOF indvship 4.5 ?> <!-- Zipcode -->
           <tr bgcolor="#ebebff">
-            <td class="main"><?php echo 'Indv. Shipping Price:'; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_ship_price', $pInfo->products_ship_price); ?></td>
+            <td class="main"><?php echo TEXT_PRODUCTS_ZIPCODE; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_ship_zip', $pInfo->products_ship_zip); if(tep_not_null($pInfo->products_ship_zip)); ?></td>
+          </tr> <!-- end Zipcode --> <!-- Indvship -->
+          <tr bgcolor="#ebebff">
+            <td class="main"><?php echo TEXT_INDIV_SHIPPING_PRICE; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_ship_price', $pInfo->products_ship_price); if(tep_not_null($pInfo->products_ship_price)); ?></td>
           </tr>
-<?php // EOF: MOD - indvship ?>
+          <tr bgcolor="#ebebff">
+            <td class="main"><?php echo TEXT_INDIV_ADDITIONAL_PRICE; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_ship_price_two', $pInfo->products_ship_price_two); if(tep_not_null($pInfo->products_ship_price_two)); ?></td>
+          </tr> <!-- end Indvship -->
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+          <?php  } // EOF indvship 4.5 ?>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_SHIPPING_DIMENSIONS; ?></td>
             <td class="main" colspan="2">
@@ -1045,10 +1840,12 @@ print (TEXT_SPPC_WARNING);
             tep_draw_separator('pixel_trans.gif', '10', '12') . TEXT_PRODUCTS_WIDTH .  '&nbsp;' . tep_draw_input_field('products_width', $pInfo->products_width) .
             tep_draw_separator('pixel_trans.gif', '10', '12') . TEXT_PRODUCTS_HEIGHT .  '&nbsp;' . tep_draw_input_field('products_height', $pInfo->products_height); ?></td>
           </tr>
+          <?php if (MODULE_SHIPPING_FEDEX1_STATUS == 'True') { ?>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_READY_TO_SHIP; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_checkbox_field('products_ready_to_ship', '1', (($product['products_ready_to_ship'] == '1') ? true : false)); ?></td>
           </tr>
+          <?php } ?>
         </table></td>
       </tr>
       <tr>
@@ -1056,64 +1853,245 @@ print (TEXT_SPPC_WARNING);
       </tr>
       <tr>
 <!-- instant update -->
-       <td class="main" align="right"><?php echo (isset($_GET['pID']) ? TEXT_PRODUCTS_UPDATE_PRODUCT : TEXT_PRODUCTS_INSERT_PRODUCT ) . TEXT_PRODUCTS_WITHOUT_PREVIEW; ?><input type="checkbox" name="instant_update" ></td>
-<!-- EOF instant update  -->           
-        <td class="main" align="right"><?php echo tep_draw_hidden_field('products_date_added', (tep_not_null($pInfo->products_date_added) ? $pInfo->products_date_added : date('Y-m-d'))) . tep_image_submit('button_update.gif', TEXT_PRODUCTS_UPDATE_PRODUCT) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+       <td class="main" align="right"><?php echo (isset($_GET['pID']) ? TEXT_PRODUCTS_UPDATE_PRODUCT : TEXT_PRODUCTS_INSERT_PRODUCT ) . TEXT_PRODUCTS_WITHOUT_PREVIEW; ?><input type="checkbox" name="instant_update" checked></td>
+<!-- EOF instant update  -->
+        <td class="main" align="right"><?php echo tep_draw_hidden_field('products_date_added', (tep_not_null($pInfo->products_date_added) ? $pInfo->products_date_added : date('Y-m-d'))) . tep_image_submit('button_update.gif', TEXT_PRODUCTS_UPDATE_PRODUCT) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&amp;pID=' . $_GET['pID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
       </tr>
     </table></form>
 <?php
   } elseif ($action == 'new_product_preview') {
-    if (tep_not_null($HTTP_POST_VARS)) {
-      $pInfo = new objectInfo($HTTP_POST_VARS);
-      $products_name = $HTTP_POST_VARS['products_name'];
-      $products_description = $HTTP_POST_VARS['products_description'];
-      $products_url = $HTTP_POST_VARS['products_url'];
-    } else {
+	  
+    if (tep_not_null($_POST)) {
+      $pInfo = new objectInfo($_POST);
+      $products_name = $_POST['products_name'];
+      $products_description = $_POST['products_description'];
+// BOF Open Featured Sets
+      $products_short = $_POST['products_short'];
+// EOF Open Featured Sets
+// BOF: Tabs by PGM
+      $tab1 = $_POST['tab1'];
+      $tab2 = $_POST['tab2'];
+      $tab3 = $_POST['tab3'];
+      $tab4 = $_POST['tab4'];
+      $tab5 = $_POST['tab5'];
+      $tab6 = $_POST['tab6'];
+// EOF: Tabs by PGM
+      $products_url = $_POST['products_url'];
+// BOF: Extra Product Fields
+      $extra = array();
+      foreach ($xfields as $f) {
+        $extra[$f] = $_POST[$f];
+      }
+// EOF: Extra Product Fields
+	  
 // LINE CHANGED: Added p.products_shipped_price and dimensions for upsxml
-      $product_query = tep_db_query("select p.products_ship_price, p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "'");
+//    $product_query = tep_db_query("select p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'");
+// LINE MODED: Tabs by PGM
+
+// BOF QPBPP for SPPC
+      $price_breaks_array = array();
+      if (isset($_POST['products_price_break'][0]) && isset($_POST['products_qty'][0])) {
+        foreach ($_POST['products_price_break'][0] as $index => $products_price ) {
+          if (tep_not_null($products_price) && tep_not_null($_POST['products_qty'][0][$index]) && !isset($_POST['products_delete'][0][$index])) {
+            $price_breaks_array[] = array(
+              'products_price' => $products_price,
+              'products_qty' => $_POST['products_qty'][0][$index]);
+          }
+        } // end foreach ($_POST['products_price_break'][0] as ...
+      usort($price_breaks_array, "sortByQty");
+      } // end if (isset($_POST['products_price_break'][0]) && ...
+// EOF QPBPP for SPPC
+
+      } else {
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+// LINE MODED: Open Feature Sets : Added ", pd.products_short"
+//      $product_query = tep_db_query("select p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty  from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'");
+
+// BOF: Extra Product Fields
+// LINE MODED: MSRP: Added "p.products_msrp,"
+        $query = "select p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty ";
+	  foreach ($xfields as $f) {
+        $query .= ', pd.' . $f;
+      }       
+	    $query .= " from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . (int)$_GET['pID'] . "'";
+	    $product_query = tep_db_query($query);
+// EOF: Extra Product Fields
+
       $product = tep_db_fetch_array($product_query);
 
       $pInfo = new objectInfo($product);
       $products_image_name = $pInfo->products_image;
+
+// move retail settings for quantity blocks and min order qty to an array indexed
+// by customer_group_id, like we get back in $_POST values
+      unset($pInfo->products_qty_blocks);
+      $pInfo->products_qty_blocks[0] = $product['products_qty_blocks'];
+      unset($pInfo->products_min_order_qty);
+      $pInfo->products_min_order_qty[0] = $product['products_min_order_qty'];
+// price_breaks_array is taken care of by PriceFormatterAdmin.php
+// EOF QPBPP for SPPC
+// BOF indvship 4.5
+      $products_shipping_query = tep_db_query("SELECT * FROM " . TABLE_PRODUCTS_SHIPPING . " WHERE products_id=" . (int)$_GET['pID']);
+      while ($products_shipping = tep_db_fetch_array($products_shipping_query)) {
+        $products_ship_methods_id = $products_shipping['products_ship_methods_id'];
+        $products_ship_zip = $products_shipping['products_ship_zip'];
+        $products_ship_price = $products_shipping['products_ship_price'];
+        $products_ship_price_two = $products_shipping['products_ship_price_two'];
+      }
+      $shipping=array('products_ship_methods_id' => $products_ship_methods_id,
+      'products_ship_zip' => $products_ship_zip,
+      'products_ship_price' => $products_ship_price,
+      'products_ship_price_two' => $products_ship_price_two);
+      $pInfo->objectInfo($shipping);
+// EOF indvship 4.5
     }
 
-    $form_action = (isset($HTTP_GET_VARS['pID'])) ? 'update_product' : 'insert_product';
+    $form_action = (isset($_GET['pID'])) ? 'update_product' : 'insert_product';
 
-    echo tep_draw_form($form_action, FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : '') . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"');
+    echo tep_draw_form($form_action, FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&amp;pID=' . $_GET['pID'] : '') . '&amp;action=' . $form_action, 'post', 'enctype="multipart/form-data"');
 
+?>
+  <table>
+    <tr>
+      <td>
+	  <!-- // PREVIEW TAB HEADER LOOP START //-->
+      <div id="previewtabs">
+	    <ul>
+	    <?php
+        $languages = tep_get_languages();
+        for ($j=0, $n=sizeof($languages); $j<$n; $j++) {
+        ?>
+          <li><a href="#previewtabs-<?php echo $j; ?>"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$j]['directory'] . '/images/' . $languages[$j]['image'], $languages[$j]['name']); ?></a></li>
+        <?php } ?> 
+	    </ul>
+      <!-- // PREVIEW TAB HEADER LOOP END //-->
+
+    <?php
     $languages = tep_get_languages();
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-      if (isset($HTTP_GET_VARS['read']) && ($HTTP_GET_VARS['read'] == 'only')) {
+    for ($i=0, $n=sizeof($languages); $i<$n; $i++) { // Language loop starts
+	
+      if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
         $pInfo->products_name = tep_get_products_name($pInfo->products_id, $languages[$i]['id']);
+// BOF Open Featured Sets
+        $pInfo->products_short = tep_get_products_short($pInfo->products_id, $languages[$i]['id']);
+// EOF Open Featured Sets
         $pInfo->products_description = tep_get_products_description($pInfo->products_id, $languages[$i]['id']);
+// BOF: Tabs by PGM
+        $pInfo->tab1 = tep_get_tab1($pInfo->products_id, $languages[$i]['id']);
+        $pInfo->tab2 = tep_get_tab2($pInfo->products_id, $languages[$i]['id']);
+        $pInfo->tab3 = tep_get_tab3($pInfo->products_id, $languages[$i]['id']);
+        $pInfo->tab4 = tep_get_tab4($pInfo->products_id, $languages[$i]['id']);
+        $pInfo->tab5 = tep_get_tab5($pInfo->products_id, $languages[$i]['id']);
+        $pInfo->tab6 = tep_get_tab6($pInfo->products_id, $languages[$i]['id']);
+// EOF: Tabs by PGM
         $pInfo->products_url = tep_get_products_url($pInfo->products_id, $languages[$i]['id']);
       } else {
         $pInfo->products_name = tep_db_prepare_input($products_name[$languages[$i]['id']]);
+// BOF Open Featured Sets
+        $pInfo->products_short = tep_db_prepare_input($products_short[$languages[$i]['id']]);
+// EOF Open Featured Sets
         $pInfo->products_description = tep_db_prepare_input($products_description[$languages[$i]['id']]);
+// BOF: Tabs by PGM
+        $pInfo->tab1 = tep_db_prepare_input($tab1[$languages[$i]['id']]);
+        $pInfo->tab2 = tep_db_prepare_input($tab2[$languages[$i]['id']]);
+        $pInfo->tab3 = tep_db_prepare_input($tab3[$languages[$i]['id']]);
+        $pInfo->tab4 = tep_db_prepare_input($tab4[$languages[$i]['id']]);
+        $pInfo->tab5 = tep_db_prepare_input($tab5[$languages[$i]['id']]);
+        $pInfo->tab6 = tep_db_prepare_input($tab6[$languages[$i]['id']]);
+// EOF: Tabs by PGM
         $pInfo->products_url = tep_db_prepare_input($products_url[$languages[$i]['id']]);
       }
 ?>
+    <div id="previewtabs-<?php echo $i; ?>">
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $pInfo->products_name; ?></td>
-            <td class="pageHeading" align="right"><?php echo $currencies->format($pInfo->products_price); ?></td>
-          </tr>
-        </table></td>
+        <td>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="pageHeading"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $pInfo->products_name; ?></td>
+              <td class="pageHeading" align="right"><?php
+// BOF QPBPP for SPPC
+            $pf->loadProduct((int)$_GET['pID'], $pInfo->products_price, $pInfo->products_tax_class_id, (int)$pInfo->products_qty_blocks[0], $price_breaks_array, (int)$pInfo->products_min_order_qty[0]);
+            echo $pf->getPriceString();
+// EOF QPBPP for SPPC ?></td>
+
+<?php //BOF: MSRP
+            $pricing = '<table class="PriceList" border="0" width="100%" cellspacing="0" cellpadding="0">';
+            $new_price = tep_get_products_special_price($HTTP_GET_VARS['pID']);
+            if ($pInfo->products_msrp > $pInfo->products_price)
+              $pricing .= '<tr><td>' . TEXT_PRODUCTS_MSRP . '</td><td align=right>' . $currencies->format($pInfo->products_msrp) . '</td><td></td></tr>';
+            $pricing .= '<tr><td>' . TEXT_PRODUCTS_OUR_PRICE . '</td><td align=right>' . $currencies->format($pInfo->products_price) . '</td><td></td></tr>';
+            if ($new_price != '')
+              {$pricing .= '<tr class="specialPrice"><td>' . TEXT_PRODUCTS_SALE . '</td><td align=right>' . $currencies->format($new_price) . '</td><td></td></tr>';}
+            if ($pInfo->products_msrp > $pInfo->products_price)
+              {if ($new_price != '')
+                {$pricing .= '<tr><td>' . TEXT_PRODUCTS_SAVINGS . '</td><td align=right>' . $currencies->format($pInfo->products_msrp -  $new_price) . '</td><td class="SavingsPercent">&nbsp;('. number_format(100 - (($new_price / $pInfo->products_msrp) * 100)) . '%)</td></tr>';}
+              else
+                {$pricing .= '<tr><td>' . TEXT_PRODUCTS_SAVINGS . '</td><td align=right>' . $currencies->format($pInfo->products_msrp -  $pInfo->products_price) . '</td><td class="SavingsPercent">&nbsp;('. number_format(100 - (($pInfo->products_price / $pInfo->products_msrp) * 100)) . '%)</td></tr>';}}
+            else
+              {if ($new_price != '')
+                {$pricing .= '<tr><td>' . TEXT_PRODUCTS_SAVINGS . '</td><td align=right>' . $currencies->format($pInfo->products_price -  $new_price) . '</td><td class="SavingsPercent">&nbsp;('. number_format(100 - (($new_price / $pInfo->products_price) * 100)) . '%)</td></tr>';}}
+            $pricing .= '</table>';
+            ?>
+              <td align="right" valign="top" width="10%"><?php echo $pricing; ?></td>
+<?php //EOF: MSRP ?>
+            </tr>
+          </table>
+        </td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main" valign="top" width="70%">
-                        <?php echo $pInfo->products_description; ?>
-        </td>
-        <td width="25%">
-		<?php echo '<a href="' . $html_images_dir . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image($html_thumbs . $products_image_name, $product_info['products_name'], PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, 'hspace="4" vspace="4" align="right"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?> 
+        <td>
+          <table width="100%">
+            <tr>
+              <td class="main" valign="top" width="75%"><?php echo $pInfo->products_description; ?></td>
+              <td width="25%" align="center"><?php echo '<a href="' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image_name, $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?></td>
+            </tr>
+          </table>
         </td>
       </tr>
 <?php
+// BOF: Extra Product Fields
+         foreach ($epf as $e) {
+           if ($e['language'] == $languages[$i]['id']) {
+             if ($e['language_active']) {
+               if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
+                 $value = tep_get_product_extra_value($e['id'], $pInfo->products_id, $languages[$i]['id']);
+                 if ($e['multi_select'] && ($value != '')) {
+                   $value = explode('|', trim($value, '|'));
+                 }
+               } else {
+                 if ($e['multi_select']) {
+                   $value = $extra[$e['field']][$languages[$i]['id']];
+                 } else {
+                   $value = tep_db_prepare_input($extra[$e['field']][$languages[$i]['id']]);
+                   if ($e['uses_list'] && ($value == 0)) $value = '';
+                 }
+               }
+               if (tep_not_null($value)) {
+                 echo '<tr><td class="main"><b>' . $e['label'] . ': </b>';
+                 if ($e['uses_list']) {
+                   if ($e['multi_select']) {
+                     $output = array();
+                     foreach ($value as $val) {
+                       $output[] = tep_get_extra_field_list_value($val, $e['show_chain'], $e['display_type']);
+                     }
+                     echo implode(', ', $output);
+                   } else {
+                     echo tep_get_extra_field_list_value($value, $e['show_chain'], $e['display_type']);
+                   }
+                 } else {
+                   echo $value;
+                 }
+                 echo "</td></tr>\n";
+               }
+             }
+           }
+         }
+// EOF: Extra Product Fields
+	
       if ($pInfo->products_url) {
 ?>
       <tr>
@@ -1147,43 +2125,100 @@ print (TEXT_SPPC_WARNING);
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
 <?php
-    }
+ 	// BOF Open Featured Sets
+?>
 
-    if (isset($HTTP_GET_VARS['read']) && ($HTTP_GET_VARS['read'] == 'only')) {
-      if (isset($HTTP_GET_VARS['origin'])) {
-        $pos_params = strpos($HTTP_GET_VARS['origin'], '?', 0);
+	  <tr>
+        <td class="main"><b><?php echo TABLE_HEADING_FEATURED_PREVIEW; ?></b><br>
+		  <table border="1" width="450" cellspacing="0" cellpadding="16">
+		    <tr>
+		  	  <td>
+		        <table border="0" width="100%" cellspacing="0" cellpadding="2"> 
+				  <tr>
+					<td width="<?php echo SMALL_IMAGE_WIDTH + 10; ?>" rowspan="4" align="right" valign="top" class="main"><?php echo tep_image(DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image_name, $pInfo->products_name, 0, 0, 'align="right" hspace="5" vspace="5"'); ?></td>
+					<td width="80%" valign="top" class="main"><div align="left"><?php echo '<b><u>' . $pInfo->products_name . '</u></b>'; ?></div></td>
+				  </tr>
+				  <tr>
+					<td valign="top" class="smallText"><?php
+					  if ($pInfo->products_short != '') {
+						  echo $pInfo->products_short;
+					  } else {
+					   $bah = explode(" ", $pInfo->products_description);
+					   for($desc=0 ; $desc<MAX_FEATURED_WORD_DESCRIPTION; $desc++)
+						  {
+						  echo "$bah[$desc] ";
+						  }
+						  echo '&nbsp;<a target="_blank" href="'.HTTP_CATALOG_SERVER.DIR_WS_CATALOG.'product_info.php?products_id='.(isset($_GET['pID'])?$_GET['pID']:'').'"><u>'.TEXT_MORE_INFO.'</u></a>';
+					  }
+					?>
+					</td>
+				  </tr>
+				  <tr>
+					<td valign="top" class="main">&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td align="left" valign="top" class="smallText"><?php echo tep_draw_separator('pixel_trans.gif', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo '<img src=' . HTTP_CATALOG_SERVER . DIR_WS_CATALOG_LANGUAGES . $language . '/images/buttons/button_buy_now.gif>';?></td>
+				  </tr>
+				</table>
+			  </td>
+		    </tr>
+		  </table>
+	    </td>
+      </tr>
+    </table>
+    </div>
+
+<?php
+ 	// EOF Open Featured Sets
+	    } // end language loop - next line closes the tabs div
+?>
+      </div>
+    </td>
+  </tr>
+</table>
+<?php
+
+
+    if (isset($_GET['read']) && ($_GET['read'] == 'only')) {
+      if (isset($_GET['origin'])) {
+        $pos_params = strpos($_GET['origin'], '?', 0);
         if ($pos_params != false) {
-          $back_url = substr($HTTP_GET_VARS['origin'], 0, $pos_params);
-          $back_url_params = substr($HTTP_GET_VARS['origin'], $pos_params + 1);
+          $back_url = substr($_GET['origin'], 0, $pos_params);
+          $back_url_params = substr($_GET['origin'], $pos_params + 1);
         } else {
-          $back_url = $HTTP_GET_VARS['origin'];
+          $back_url = $_GET['origin'];
           $back_url_params = '';
         }
       } else {
         $back_url = FILENAME_CATEGORIES;
-        $back_url_params = 'cPath=' . $cPath . '&pID=' . $pInfo->products_id;
+        $back_url_params = 'cPath=' . $cPath . '&amp;pID=' . $pInfo->products_id;
       }
 ?>
       <tr>
-        <td align="right"><?php echo '<a href="' . tep_href_link($back_url, $back_url_params, 'NONSSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
+        <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link($back_url, $back_url_params, 'NONSSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
       </tr>
 <?php
     } else {
 ?>
       <tr>
-        <td align="right" class="smallText">
+        <td align="right" class="smallText" colspan="2">
 <?php
 /* Re-Post all POST'ed variables */
-      reset($HTTP_POST_VARS);
-      while (list($key, $value) = each($HTTP_POST_VARS)) {
-// BOF: MOD - Separate Pricing Per Customer
-//        if (!is_array($HTTP_POST_VARS[$key])) {
-          if (is_array($value)) {
-            while (list($k, $v) = each($value)) {
+      reset($_POST);
+      while (list($key, $value) = each($_POST)) {
+// BOF Separate Pricing per Customer adapted for QPBPP for SPPC
+        if (is_array($value)) {
+          while (list($k, $v) = each($value)) {
+            if (is_array($v)) {
+              foreach ($v as $subkey => $subvalue) {
+                echo tep_draw_hidden_field($key . '[' . $k . '][' . $subkey . ']', htmlspecialchars(stripslashes($subvalue)));
+              }
+            } else {
               echo tep_draw_hidden_field($key . '[' . $k . ']', htmlspecialchars(stripslashes($v)));
             }
-          } else {
-// EOF: MOD - Separate Pricing Per Customer
+          }
+        } else {
+// EOF Separate Pricing per Customer adapted for QPBPP for SPPC
 
           echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
         }
@@ -1191,19 +2226,45 @@ print (TEXT_SPPC_WARNING);
       $languages = tep_get_languages();
       for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
         echo tep_draw_hidden_field('products_name[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($products_name[$languages[$i]['id']])));
+// BOF Open Featured Sets
+        echo tep_draw_hidden_field('products_short[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($products_short[$languages[$i]['id']])));
+// EOF Open Featured Sets
         echo tep_draw_hidden_field('products_description[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($products_description[$languages[$i]['id']])));
+// BOF: Tabs by PGM
+        echo tep_draw_hidden_field('tab1[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab1[$languages[$i]['id']])));
+        echo tep_draw_hidden_field('tab2[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab2[$languages[$i]['id']])));
+        echo tep_draw_hidden_field('tab3[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab3[$languages[$i]['id']])));
+        echo tep_draw_hidden_field('tab4[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab4[$languages[$i]['id']])));
+        echo tep_draw_hidden_field('tab5[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab5[$languages[$i]['id']])));
+        echo tep_draw_hidden_field('tab6[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($tab6[$languages[$i]['id']])));
+// EOF: Tabs by PGM
         echo tep_draw_hidden_field('products_url[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($products_url[$languages[$i]['id']])));
-      }
+// BOF: Extra Product Fields
+        foreach ($epf as $e) {
+          if ($e['language'] == $languages[$i]['id']) {
+            if ($e['language_active']) {
+              if ($e['multi_select']) {
+                foreach ($extra[$e['field']][$languages[$i]['id']] as $value) {
+                  echo tep_draw_hidden_field($e['field'] . '[' . $languages[$i]['id'] . '][]', htmlspecialchars(stripslashes($value)));
+                }
+              } else {
+                echo tep_draw_hidden_field($e['field'] . '[' . $languages[$i]['id'] . ']', htmlspecialchars(stripslashes($extra[$e['field']][$languages[$i]['id']])));
+              }
+            }
+          }
+        }
+// EOF: Extra Product Fields
+	  } // end for
       echo tep_draw_hidden_field('products_image', stripslashes($products_image_name));
 
       echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="edit"') . '&nbsp;&nbsp;';
 
-      if (isset($HTTP_GET_VARS['pID'])) {
+      if (isset($_GET['pID'])) {
         echo tep_image_submit('button_update.gif', IMAGE_UPDATE);
       } else {
         echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
       }
-      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
+      echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&amp;pID=' . $_GET['pID'] : '')) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
 ?></td>
       </tr>
     </table></form>
@@ -1211,12 +2272,11 @@ print (TEXT_SPPC_WARNING);
     }
   } else {
 ?>
-    <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
             <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="smallText" align="right">
@@ -1246,27 +2306,52 @@ print (TEXT_SPPC_WARNING);
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CATEGORIES_PRODUCTS; ?></td>
+<?php // BOF add model number to listing ?>
+                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MODEL_NUMBER; ?></td>
+<?php // EOF add model number to listing ?>
+<?php // BOF SPPC hide products and categories from groups ?>
+                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_HIDE_CATEGORIES; ?></td>
+<?php // EOF SPPC hide products and categories from groups ?>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_STATUS; ?></td>
+<?php // BOF Open Featured Sets ?>
+                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_FEATURED; ?></td>
+<?php // EOF Open Featured Sets?>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
+//    $categories_count = 0;
+//     $rows = 0;
+//     if (isset($_GET['search'])) {
+//       $search = tep_db_prepare_input($_GET['search']);
+//
+//       $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and cd.categories_name like '%" . tep_db_input($search) . "%' order by c.sort_order, cd.categories_name");
+//     } else {
+//       $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by c.sort_order, cd.categories_name");
+//     }
     $categories_count = 0;
     $rows = 0;
-    if (isset($HTTP_GET_VARS['search'])) {
-      $search = tep_db_prepare_input($HTTP_GET_VARS['search']);
-
-      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and cd.categories_name like '%" . tep_db_input($search) . "%' order by c.sort_order, cd.categories_name");
-    } else {
-      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by c.sort_order, cd.categories_name");
+// BOF SPPC hide products and categories from groups
+    $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id");
+    while ($customer_groups = tep_db_fetch_array($customers_group_query)) {
+      $customers_groups[] = array('id' => $customer_groups['customers_group_id'], 'text' => $customer_groups['customers_group_name']);
     }
+    if (isset($_GET['search'])) {
+      $search = tep_db_prepare_input($_GET['search']);
+//LINE MODED: Open Feature Sets: Added ", c.categories_featured, c.categories_featured_until"
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.categories_hide_from_groups, c.categories_featured, c.categories_featured_until from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and cd.categories_name like '%" . tep_db_input($search) . "%' order by c.sort_order, cd.categories_name");
+    } else {
+//LINE MODED: Open Feature Sets: Added ", c.categories_featured, c.categories_featured_until"
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.categories_hide_from_groups, c.categories_featured, c.categories_featured_until from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by c.sort_order, cd.categories_name");
+    }
+// EOF SPPC hide products and categories from groups
     while ($categories = tep_db_fetch_array($categories_query)) {
       $categories_count++;
       $rows++;
 
 // Get parent_id for subcategories if search
-      if (isset($HTTP_GET_VARS['search'])) $cPath= $categories['parent_id'];
+      if (isset($_GET['search'])) $cPath= $categories['parent_id'];
 
-      if ((!isset($HTTP_GET_VARS['cID']) && !isset($HTTP_GET_VARS['pID']) || (isset($HTTP_GET_VARS['cID']) && ($HTTP_GET_VARS['cID'] == $categories['categories_id']))) && !isset($cInfo) && (substr($action, 0, 3) != 'new')) {
+      if ((!isset($_GET['cID']) && !isset($_GET['pID']) || (isset($_GET['cID']) && ($_GET['cID'] == $categories['categories_id']))) && !isset($cInfo) && (substr($action, 0, 3) != 'new')) {
         $category_childs = array('childs_count' => tep_childs_in_category_count($categories['categories_id']));
         $category_products = array('products_count' => tep_products_in_category_count($categories['categories_id']));
 
@@ -1277,32 +2362,107 @@ print (TEXT_SPPC_WARNING);
       if (isset($cInfo) && is_object($cInfo) && ($categories['categories_id'] == $cInfo->categories_id) ) {
         echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CATEGORIES, tep_get_path($categories['categories_id'])) . '\'">' . "\n";
       } else {
-        echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $categories['categories_id']) . '\'">' . "\n";
+        echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;cID=' . $categories['categories_id']) . '\'">' . "\n";
       }
 ?>
                 <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, tep_get_path($categories['categories_id'])) . '">' . tep_image(DIR_WS_ICONS . 'folder.gif', ICON_FOLDER) . '</a>&nbsp;<b>' . $categories['categories_name'] . '</b>'; ?></td>
+
+<?php // BOF add model number to listing ?>
+                <td class="dataTableHeadingContent">&nbsp;</td>
+<?php // EOF add model number to listing ?>
+
+<?php // BOF SPPC hide products and categories from groups ?>
+       <td class="dataTableContent" align="center"><?php
+    $hide_cat_from_groups_array = explode(',', $categories['categories_hide_from_groups']);
+    $hide_cat_from_groups_array = array_slice($hide_cat_from_groups_array, 1); // remove "@" from the array
+   $category_hidden_from_string = '';
+   if (LAYOUT_HIDE_FROM == '1') {
+         for ($i = 0; $i < count($customers_groups); $i++) {
+           if (in_array($customers_groups[$i]['id'], $hide_cat_from_groups_array)) {
+           $category_hidden_from_string .= $customers_groups[$i]['text'] . ', ';
+           }
+         } // end for ($i = 0; $i < count($customers_groups); $i++)
+         $category_hidden_from_string = rtrim($category_hidden_from_string); // remove space on the right
+         $category_hidden_from_string = substr($category_hidden_from_string,0,strlen($category_hidden_from_string) -1); // remove last comma
+         if (!tep_not_null($category_hidden_from_string)) {
+         $category_hidden_from_string = TEXT_GROUPS_NONE;
+         }
+         $category_hidden_from_string = TEXT_HIDDEN_FROM_GROUPS . $category_hidden_from_string;
+         // if the string in the database field is @, everything will work fine, however tep_not_null
+         // will not discover the associative array is empty therefore the second check on the value
+     if (tep_not_null($hide_cat_from_groups_array) && tep_not_null($hide_cat_from_groups_array[0])) {
+        echo tep_image(DIR_WS_ICONS . 'tick_black.gif', $category_hidden_from_string, 20, 16);
+      } else {
+        echo tep_draw_separator('pixel_trans.gif', '20', '16');
+     }
+   } else {
+// default layout: icons for all groups
+      for ($i = 0; $i < count($customers_groups); $i++) {
+        if (in_array($customers_groups[$i]['id'], $hide_cat_from_groups_array)) {
+          echo tep_image(DIR_WS_ICONS . 'icon_tick.gif', $customers_groups[$i]['text'], 11, 11) . '&nbsp;&nbsp;';
+        } else {
+          echo tep_draw_separator('pixel_trans.gif', '11', '11') . '&nbsp;&nbsp;';
+        }
+      }
+   }
+?></td><?php // EOF SPPC hide products and categories from groups ?>
                 <td class="dataTableContent" align="center">&nbsp;</td>
-                <td class="dataTableContent" align="right"><?php if (isset($cInfo) && is_object($cInfo) && ($categories['categories_id'] == $cInfo->categories_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $categories['categories_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+<?php
+ 	// BOF Open Featured Sets
+?>
+				<td class="dataTableContent" align="center">
+<?php
+	 if (!isset($cInfo) && is_object($cInfo) && ($cInfo->categories_featured)) $cInfo->categories_featured = '0';
+    switch ($cInfo->categories_featured) {
+      case '0': $in_fc_status = false; $out_fc_status = true; break;
+      case '1':
+      default: $in_fc_status = true; $out_fc_status = false;
+	  }
+
+      if ($categories['categories_featured'] == '1') {
+        echo tep_image(DIR_WS_ICONS . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag_categories_featured&amp;flag=0&amp;cPath=' . $cPath . '&amp;cID=' . $categories['categories_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+      } else {
+        echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag_categories_featured&amp;flag=1&amp;cPath=' . $cPath . '&amp;cID=' . $categories['categories_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+      }
+ 	// EOF Open Featured Sets
+?></td>
+<td class="dataTableContent" align="right">
+<?php
+
+                if (!(isset($cInfo) && is_object($cInfo) && ($categories['categories_id'] == $cInfo->categories_id))) { echo ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;cID=' . $categories['categories_id']) . '&amp;action=edit_category' . '">' . tep_image(DIR_WS_ICONS . 'page_white_edit.png', IMAGE_ICON_EDIT) . '</a>&nbsp;'; }
+?>
+                <?php if (isset($cInfo) && is_object($cInfo) && ($categories['categories_id'] == $cInfo->categories_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;cID=' . $categories['categories_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
 
     $products_count = 0;
-    if (isset($HTTP_GET_VARS['search'])) {
+    if (isset($_GET['search'])) {
 // LINE CHANGED: Added p.products_shipped_price
-     $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and (pd.products_name like '%" . tep_db_input($search) . "%' or p.products_model like '%" . tep_db_input($search) . "%') order by pd.products_name");
+//    $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status,                              p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and (pd.products_name like '%" . tep_db_input($search) . "%' or p.products_model like '%" . tep_db_input($search) . "%') order by pd.products_name");
+// BOF SPPC hide products from groups
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+// LINE MODED: Open Feature Sets: Added ", p.products_featured, p.products_featured_until"
+// LINE MODED: MSRP
+      $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_msrp, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_hide_from_groups, p.products_qty_blocks, p.products_min_order_qty, p2c.categories_id, p.products_featured, p.products_featured_until from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and (pd.products_name like '%" . tep_db_input($search) . "%' or p.products_model like '%" . tep_db_input($search) . "%') order by pd.products_name");
+
     } else {
-// LINE CHANGED: Added p.products_shipped_price   
-     $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by pd.products_name");
+// LINE CHANGED: Added p.products_shipped_price
+//    $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status from ". TABLE_PRODUCTS .                                                        " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by pd.products_name");
+// LINE MODED: Separate Pricing Per Customer adapted for QPBPP for SPPC v4.2
+// LINE MODED: Open Feature Sets: Added ", p.products_featured, p.products_featured_until"
+// LINE MODED: MSRP
+      $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_quantity, p.products_image, p.products_msrp, p.products_price, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_hide_from_groups, p.products_qty_blocks, p.products_min_order_qty, p.products_featured, p.products_featured_until, p.products_model from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by pd.products_name");
+// EOF SPPC hide products from groups
     }
     while ($products = tep_db_fetch_array($products_query)) {
       $products_count++;
       $rows++;
 
 // Get categories_id for product if search
-      if (isset($HTTP_GET_VARS['search'])) $cPath = $products['categories_id'];
+      if (isset($_GET['search'])) $cPath = $products['categories_id'];
 
-      if ( (!isset($HTTP_GET_VARS['pID']) && !isset($HTTP_GET_VARS['cID']) || (isset($HTTP_GET_VARS['pID']) && ($HTTP_GET_VARS['pID'] == $products['products_id']))) && !isset($pInfo) && !isset($cInfo) && (substr($action, 0, 3) != 'new')) {
+      if ( (!isset($_GET['pID']) && !isset($_GET['cID']) || (isset($_GET['pID']) && ($_GET['pID'] == $products['products_id']))) && !isset($pInfo) && !isset($cInfo) && (substr($action, 0, 3) != 'new')) {
 // find out the rating average from customer reviews
         $reviews_query = tep_db_query("select (avg(reviews_rating) / 5 * 100) as average_rating from " . TABLE_REVIEWS . " where products_id = '" . (int)$products['products_id'] . "'");
         $reviews = tep_db_fetch_array($reviews_query);
@@ -1311,21 +2471,77 @@ print (TEXT_SPPC_WARNING);
       }
 
       if (isset($pInfo) && is_object($pInfo) && ($products['products_id'] == $pInfo->products_id) ) {
-        echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products['products_id'] . '&action=new_product_preview&read=only') . '\'">' . "\n";
+        echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id'] . '&amp;action=new_product_preview&amp;read=only') . '\'">' . "\n";
       } else {
-        echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products['products_id']) . '\'">' . "\n";
+        echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id']) . '\'">' . "\n";
       }
 ?>
-                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products['products_id'] . '&action=new_product_preview&read=only') . '">' . tep_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $products['products_name']; ?></td>
+                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id'] . '&amp;action=new_product_preview&amp;read=only') . '">' . tep_image(DIR_WS_ICONS . 'page_white_text.png', ICON_PREVIEW) . '</a>&nbsp;' . $products['products_name']; ?></td>
+<?php // BOF add model number to listing ?>
+                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id'] . '&amp;action=new_product_preview&amp;read=only') . '">' . '</a>&nbsp;' . $products['products_model']  ; ?></td>
+<?php // EOF add model number to listing ?>
+<?php  //BOF SPPC hide products and categories from groups ?>
+      <td class="dataTableContent" align="center"><?php
+    $hide_prods_from_groups_array = explode(',', $products['products_hide_from_groups']);
+    $hide_prods_from_groups_array = array_slice($hide_prods_from_groups_array, 1); // remove "@" from the array
+      if (LAYOUT_HIDE_FROM == '1') {
+        $product_hidden_from_string = '';
+         for ($i = 0; $i < count($customers_groups); $i++) {
+           if (in_array($customers_groups[$i]['id'], $hide_prods_from_groups_array)) {
+           $product_hidden_from_string .= $customers_groups[$i]['text'] . ', ';
+           }
+         } // end for ($i = 0; $i < count($customers_groups); $i++)
+         $product_hidden_from_string = rtrim($product_hidden_from_string); // remove space on the right
+         $product_hidden_from_string = substr($product_hidden_from_string,0,strlen($product_hidden_from_string) -1); // remove last comma
+   if (tep_not_null($hide_prods_from_groups_array)&& tep_not_null($hide_prods_from_groups_array[0])) {
+         $product_hidden_from_string = TEXT_GROUPS_NONE;
+         }
+         $product_hidden_from_string = TEXT_HIDDEN_FROM_GROUPS . $product_hidden_from_string;
+   if (tep_not_null($hide_prods_from_groups_array)) {
+        echo tep_image(DIR_WS_ICONS . 'tick_black.gif', $product_hidden_from_string, 20, 16);
+     } else {
+        echo tep_draw_separator('pixel_trans.gif', '20', '16');
+     }
+   } else {
+// default layout: icons for all groups
+      for ($i = 0; $i < count($customers_groups); $i++) {
+        if (in_array($customers_groups[$i]['id'], $hide_prods_from_groups_array)) {
+          echo tep_image(DIR_WS_ICONS . 'icon_tick.gif', $customers_groups[$i]['text'], 11, 11) . '&nbsp;&nbsp;';
+        } else {
+          echo tep_draw_separator('pixel_trans.gif', '11', '11') . '&nbsp;&nbsp;';
+        }
+      }
+   } // end if/else (LAYOUT_HIDE_FROM == '1')
+?></td><?php // EOF SPPC hide products and categories from groups ?>
                 <td class="dataTableContent" align="center">
 <?php
       if ($products['products_status'] == '1') {
-        echo tep_image(DIR_WS_IMAGES . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&flag=0&pID=' . $products['products_id'] . '&cPath=' . $cPath) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+        echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=0&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
       } else {
-        echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&flag=1&pID=' . $products['products_id'] . '&cPath=' . $cPath) . '">' . tep_image(DIR_WS_IMAGES . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_IMAGES . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+        echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=1&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
       }
 ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($pInfo) && is_object($pInfo) && ($products['products_id'] == $pInfo->products_id)) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products['products_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+<?php
+ 	// BOF Open Featured Sets
+?>
+                <td class="dataTableContent" align="center">
+<?php
+      if ($products['products_featured'] == '1') {
+        echo tep_image(DIR_WS_ICONS . 'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag_featured&amp;flag=0&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+      } else {
+        echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag_featured&amp;flag=1&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+      }
+?></td>
+<?php
+ 	// BOF Open Featured Sets
+?>
+                <td class="dataTableContent" align="right">
+				<?php
+                //BOF Quicker Product Edit
+                if (!(isset($pInfo) && is_object($pInfo) && ($products['products_id'] == $pInfo->products_id))) { echo ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id']) . '&amp;action=new_product' . '">' . tep_image(DIR_WS_ICONS . 'page_white_edit.png', IMAGE_ICON_EDIT) . '</a>&nbsp;';}
+                //EOF Quicker Product Edit
+
+				if (isset($pInfo) && is_object($pInfo) && ($products['products_id'] == $pInfo->products_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
@@ -1341,13 +2557,13 @@ print (TEXT_SPPC_WARNING);
       }
     }
 
-    $cPath_back = (tep_not_null($cPath_back)) ? 'cPath=' . $cPath_back . '&' : '';
+    $cPath_back = (tep_not_null($cPath_back)) ? 'cPath=' . $cPath_back . '&amp;' : '';
 ?>
               <tr>
-                <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <td colspan="6"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText"><?php echo TEXT_CATEGORIES . '&nbsp;' . $categories_count . '<br>' . TEXT_PRODUCTS . '&nbsp;' . $products_count; ?></td>
-                    <td align="right" class="smallText"><?php if (sizeof($cPath_array) > 0) echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, $cPath_back . 'cID=' . $current_category_id) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>&nbsp;'; if (!isset($HTTP_GET_VARS['search'])) echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&action=new_category') . '">' . tep_image_button('button_new_category.gif', IMAGE_NEW_CATEGORY) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&action=new_product') . '">' . tep_image_button('button_new_product.gif', IMAGE_NEW_PRODUCT) . '</a>'; ?>&nbsp;</td>
+                    <td align="right" class="smallText"><?php if (sizeof($cPath_array) > 0) echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, $cPath_back . 'cID=' . $current_category_id) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>&nbsp;'; if (!isset($_GET['search'])) echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;action=new_category') . '">' . tep_image_button('button_new_category.gif', IMAGE_NEW_CATEGORY) . '</a>&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;action=new_product') . '">' . tep_image_button('button_new_product.gif', IMAGE_NEW_PRODUCT) . '</a>'; ?>&nbsp;</td>
                   </tr>
                 </table></td>
               </tr>
@@ -1355,11 +2571,17 @@ print (TEXT_SPPC_WARNING);
 <?php
     $heading = array();
     $contents = array();
+// BOF SPPC hide products and categories from groups
+    $hide_cat_from_groups_array = explode(',',$cInfo->categories_hide_from_groups);
+    $hide_cat_from_groups_array = array_slice($hide_cat_from_groups_array, 1); // remove "@" from the array
+    $hide_product_from_groups_array = explode(',',$pInfo->products_hide_from_groups);
+    $hide_product_from_groups_array = array_slice($hide_product_from_groups_array, 1); // remove "@" from the array
+// EOF SPPC hide products and categories from groups
     switch ($action) {
       case 'new_category':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_CATEGORY . '</b>');
 
-        $contents = array('form' => tep_draw_form('newcategory', FILENAME_CATEGORIES, 'action=insert_category&cPath=' . $cPath, 'post', 'enctype="multipart/form-data"'));
+        $contents = array('form' => tep_draw_form('newcategory', FILENAME_CATEGORIES, 'action=insert_category&amp;cPath=' . $cPath, 'post', 'enctype="multipart/form-data"'));
         $contents[] = array('text' => TEXT_NEW_CATEGORY_INTRO);
 
         $category_inputs_string = '';
@@ -1371,12 +2593,24 @@ print (TEXT_SPPC_WARNING);
         $contents[] = array('text' => '<br>' . TEXT_CATEGORIES_NAME . $category_inputs_string);
         $contents[] = array('text' => '<br>' . TEXT_CATEGORIES_IMAGE . '<br>' . tep_draw_file_field('categories_image'));
         $contents[] = array('text' => '<br>' . TEXT_SORT_ORDER . '<br>' . tep_draw_input_field('sort_order', '', 'size="2"'));
+// BOF Open Featured Sets
+ 		$contents[] = array('text' => '<br>' . TEXT_CATEGORIES_FEATURED . '<br>' . tep_draw_radio_field('categories_featured', '1', $in_fc_status) . '&nbsp;' . TEXT_CATEGORIES_YES . '&nbsp;' . tep_draw_radio_field('categories_featured', '0', $out_fc_status) . '&nbsp;' . TEXT_CATEGORIES_NO);
+ 		$contents[] = array('text' => '<br>' . TEXT_CATEGORIES_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $cInfo->categories_featured_until . '<br><script type="text/javascript">CategoriesFeaturedUntil.writeControl(); CategoriesFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+// EOF Open Featured Sets
+// BOF SPPC hide products and categories from groups
+        $category_hide_string = '<br>'. "\n" . TEXT_HIDE_CATEGORIES_FROM_GROUPS;
+          for ($i = 0; $i < count($customers_groups); $i++) {
+            $category_hide_string .= '<br>' . "\n" . tep_draw_checkbox_field('hide_cat[' . $customers_groups[$i]['id'] . ']',  $customers_groups[$i]['id'] , 0) . '&#160;&#160;' . $customers_groups[$i]['text'];
+          }
+        $contents[] = array('text' => $category_hide_string);
+// EOF SPPC hide products and categories from groups
         $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'edit_category':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT_CATEGORY . '</b>');
 
-        $contents = array('form' => tep_draw_form('categories', FILENAME_CATEGORIES, 'action=update_category&cPath=' . $cPath, 'post', 'enctype="multipart/form-data"') . tep_draw_hidden_field('categories_id', $cInfo->categories_id));
+
+        $contents = array('form' => tep_draw_form('categories', FILENAME_CATEGORIES, 'action=update_category&amp;cPath=' . $cPath, 'post', 'enctype="multipart/form-data"') . tep_draw_hidden_field('categories_id', $cInfo->categories_id));
         $contents[] = array('text' => TEXT_EDIT_INTRO);
 
         $category_inputs_string = '';
@@ -1389,30 +2623,41 @@ print (TEXT_SPPC_WARNING);
         $contents[] = array('text' => '<br>' . tep_image(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name) . '<br>' . DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . '<br><b>' . $cInfo->categories_image . '</b>');
         $contents[] = array('text' => '<br>' . TEXT_EDIT_CATEGORIES_IMAGE . '<br>' . tep_draw_file_field('categories_image'));
         $contents[] = array('text' => '<br>' . TEXT_EDIT_SORT_ORDER . '<br>' . tep_draw_input_field('sort_order', $cInfo->sort_order, 'size="2"'));
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $cInfo->categories_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+// EOF Open Featured Sets
+ 		$contents[] = array('text' => '<br>' . TEXT_CATEGORIES_FEATURED . '<br>' . tep_draw_radio_field('categories_featured', '1', $in_fc_status) . '&nbsp;' . TEXT_CATEGORIES_YES . '&nbsp;' . tep_draw_radio_field('categories_featured', '0', $out_fc_status) . '&nbsp;' . TEXT_CATEGORIES_NO);
+ 		$contents[] = array('text' => '<br>' . TEXT_CATEGORIES_FEATURED_DATE . '<small>(YYYY-MM-DD)</small><br>' . $cInfo->categories_featured_until . '<br><script type="text/javascript">CategoriesEditFeaturedUntil.writeControl(); CategoriesEditFeaturedUntil.dateFormat="yyyy-MM-dd";</script>');
+// EOF Open Featured Sets
+// BOF SPPC hide products and categories from groups
+        $category_hide_string = '<br>'. "\n" . TEXT_HIDE_CATEGORIES_FROM_GROUPS;
+         for ($i = 0; $i < count($customers_groups); $i++) {
+            $category_hide_string .= '<br>' . "\n" . tep_draw_checkbox_field('hide_cat[' . $customers_groups[$i]['id'] . ']',  $customers_groups[$i]['id'] , (in_array($customers_groups[$i]['id'], $hide_cat_from_groups_array)) ? 1: 0) . '&#160;&#160;' . $customers_groups[$i]['text'];
+          }
+        $contents[] = array('text' => $category_hide_string);
+// EOF SPPC hide products and categories from groups
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;cID=' . $cInfo->categories_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'delete_category':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_CATEGORY . '</b>');
 
-        $contents = array('form' => tep_draw_form('categories', FILENAME_CATEGORIES, 'action=delete_category_confirm&cPath=' . $cPath) . tep_draw_hidden_field('categories_id', $cInfo->categories_id));
+        $contents = array('form' => tep_draw_form('categories', FILENAME_CATEGORIES, 'action=delete_category_confirm&amp;cPath=' . $cPath) . tep_draw_hidden_field('categories_id', $cInfo->categories_id));
         $contents[] = array('text' => TEXT_DELETE_CATEGORY_INTRO);
         $contents[] = array('text' => '<br><b>' . $cInfo->categories_name . '</b>');
         if ($cInfo->childs_count > 0) $contents[] = array('text' => '<br>' . sprintf(TEXT_DELETE_WARNING_CHILDS, $cInfo->childs_count));
         if ($cInfo->products_count > 0) $contents[] = array('text' => '<br>' . sprintf(TEXT_DELETE_WARNING_PRODUCTS, $cInfo->products_count));
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $cInfo->categories_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;cID=' . $cInfo->categories_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'move_category':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_MOVE_CATEGORY . '</b>');
 
-        $contents = array('form' => tep_draw_form('categories', FILENAME_CATEGORIES, 'action=move_category_confirm&cPath=' . $cPath) . tep_draw_hidden_field('categories_id', $cInfo->categories_id));
+        $contents = array('form' => tep_draw_form('categories', FILENAME_CATEGORIES, 'action=move_category_confirm&amp;cPath=' . $cPath) . tep_draw_hidden_field('categories_id', $cInfo->categories_id));
         $contents[] = array('text' => sprintf(TEXT_MOVE_CATEGORIES_INTRO, $cInfo->categories_name));
         $contents[] = array('text' => '<br>' . sprintf(TEXT_MOVE, $cInfo->categories_name) . '<br>' . tep_draw_pull_down_menu('move_to_category_id', tep_get_category_tree(), $current_category_id));
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_move.gif', IMAGE_MOVE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $cInfo->categories_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_move.gif', IMAGE_MOVE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;cID=' . $cInfo->categories_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'delete_product':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_PRODUCT . '</b>');
 
-        $contents = array('form' => tep_draw_form('products', FILENAME_CATEGORIES, 'action=delete_product_confirm&cPath=' . $cPath) . tep_draw_hidden_field('products_id', $pInfo->products_id));
+        $contents = array('form' => tep_draw_form('products', FILENAME_CATEGORIES, 'action=delete_product_confirm&amp;cPath=' . $cPath) . tep_draw_hidden_field('products_id', $pInfo->products_id));
         $contents[] = array('text' => TEXT_DELETE_PRODUCT_INTRO);
         $contents[] = array('text' => '<br><b>' . $pInfo->products_name . '</b>');
 
@@ -1429,26 +2674,26 @@ print (TEXT_SPPC_WARNING);
         $product_categories_string = substr($product_categories_string, 0, -4);
 
         $contents[] = array('text' => '<br>' . $product_categories_string);
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $pInfo->products_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'move_product':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_MOVE_PRODUCT . '</b>');
 
-        $contents = array('form' => tep_draw_form('products', FILENAME_CATEGORIES, 'action=move_product_confirm&cPath=' . $cPath) . tep_draw_hidden_field('products_id', $pInfo->products_id));
+        $contents = array('form' => tep_draw_form('products', FILENAME_CATEGORIES, 'action=move_product_confirm&amp;cPath=' . $cPath) . tep_draw_hidden_field('products_id', $pInfo->products_id));
         $contents[] = array('text' => sprintf(TEXT_MOVE_PRODUCTS_INTRO, $pInfo->products_name));
         $contents[] = array('text' => '<br>' . TEXT_INFO_CURRENT_CATEGORIES . '<br><b>' . tep_output_generated_category_path($pInfo->products_id, 'product') . '</b>');
         $contents[] = array('text' => '<br>' . sprintf(TEXT_MOVE, $pInfo->products_name) . '<br>' . tep_draw_pull_down_menu('move_to_category_id', tep_get_category_tree(), $current_category_id));
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_move.gif', IMAGE_MOVE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_move.gif', IMAGE_MOVE) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $pInfo->products_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       case 'copy_to':
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_COPY_TO . '</b>');
 
-        $contents = array('form' => tep_draw_form('copy_to', FILENAME_CATEGORIES, 'action=copy_to_confirm&cPath=' . $cPath) . tep_draw_hidden_field('products_id', $pInfo->products_id));
+        $contents = array('form' => tep_draw_form('copy_to', FILENAME_CATEGORIES, 'action=copy_to_confirm&amp;cPath=' . $cPath) . tep_draw_hidden_field('products_id', $pInfo->products_id));
         $contents[] = array('text' => TEXT_INFO_COPY_TO_INTRO);
         $contents[] = array('text' => '<br>' . TEXT_INFO_CURRENT_CATEGORIES . '<br><b>' . tep_output_generated_category_path($pInfo->products_id, 'product') . '</b>');
         $contents[] = array('text' => '<br>' . TEXT_CATEGORIES . '<br>' . tep_draw_pull_down_menu('categories_id', tep_get_category_tree(), $current_category_id));
         $contents[] = array('text' => '<br>' . TEXT_HOW_TO_COPY . '<br>' . tep_draw_radio_field('copy_as', 'link', true) . ' ' . TEXT_COPY_AS_LINK . '<br>' . tep_draw_radio_field('copy_as', 'duplicate') . ' ' . TEXT_COPY_AS_DUPLICATE);
-        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_copy.gif', IMAGE_COPY) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_copy.gif', IMAGE_COPY) . ' <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $pInfo->products_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;
       default:
         if ($rows > 0) {
@@ -1461,26 +2706,117 @@ print (TEXT_SPPC_WARNING);
             $category_path_string = substr($category_path_string, 0, -1);
             $heading[] = array('text' => '<b>' . $cInfo->categories_name . '</b>');
 
-            $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=edit_category') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=delete_category') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=move_category') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a>');
+            $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&amp;cID=' . $cInfo->categories_id . '&amp;action=edit_category') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&amp;cID=' . $cInfo->categories_id . '&amp;action=delete_category') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&amp;cID=' . $cInfo->categories_id . '&amp;action=move_category') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a>');
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
             if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
 //            $contents[] = array('text' => '<br>' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
-            $contents[] = array('text' => '<br>' . tep_info_image(CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
+            $contents[] = array('align' => 'center', 'text' => '<br>' . tep_info_image(CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
             $contents[] = array('text' => '<br>' . TEXT_SUBCATEGORIES . ' ' . $cInfo->childs_count . '<br>' . TEXT_PRODUCTS . ' ' . $cInfo->products_count);
+// BOF SPPC hide products and categories from groups
+       $category_hidden_from_string = '';
+         for ($i = 0; $i < count($customers_groups); $i++) {
+           if (in_array($customers_groups[$i]['id'], $hide_cat_from_groups_array)) {
+           $category_hidden_from_string .= $customers_groups[$i]['text'] . ', ';
+           }
+         } // end for ($i = 0; $i < count($customers_groups); $i++)
+         $category_hidden_from_string = rtrim($category_hidden_from_string); // remove space on the right
+         $category_hidden_from_string = substr($category_hidden_from_string,0,strlen($category_hidden_from_string) -1); // remove last comma
+         if (!tep_not_null($category_hidden_from_string)) {
+         $category_hidden_from_string = TEXT_GROUPS_NONE;
+         }
+         $category_hidden_from_string = '<br>'. "\n" . TEXT_HIDDEN_FROM_GROUPS . $category_hidden_from_string;
+            $contents[] = array('text' => $category_hidden_from_string);
+// EOF SPPC hide products and categories from groups
           } elseif (isset($pInfo) && is_object($pInfo)) { // product info box contents
             $heading[] = array('text' => '<b>' . tep_get_products_name($pInfo->products_id, $languages_id) . '</b>');
 
 // LINE CHANGED: MOD - QT Pro
 //          $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=new_product') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=delete_product') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=move_product') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=copy_to') . '">' . tep_image_button('button_copy_to.gif', IMAGE_COPY_TO) . '</a>');
-            $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=new_product') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=delete_product') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=move_product') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=copy_to') . '">' . tep_image_button('button_copy_to.gif', IMAGE_COPY_TO) . '</a><a href="' . tep_href_link("stock.php", 'product_id=' . $pInfo->products_id) . '">' . tep_image_button('button_stock.gif', "Stock") . '</a>');
+            $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $pInfo->products_id . '&amp;action=new_product') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $pInfo->products_id . '&amp;action=delete_product') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $pInfo->products_id . '&amp;action=move_product') . '">' . tep_image_button('button_move.gif', IMAGE_MOVE) . '</a> <a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $pInfo->products_id . '&amp;action=copy_to') . '">' . tep_image_button('button_copy_to.gif', IMAGE_COPY_TO) . '</a> <a href="' . tep_href_link("stock.php", 'product_id=' . $pInfo->products_id) . '">' . tep_image_button('button_stock.gif', "Stock") . '</a>');
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($pInfo->products_date_added));
             if (tep_not_null($pInfo->products_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($pInfo->products_last_modified));
             if (date('Y-m-d') < $pInfo->products_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . tep_date_short($pInfo->products_date_available));
 // BOF: MoPics in Admin
-           $contents[] = array('text' => 'Main Image (shown as a thumbnail):<br />' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '<br /><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /><br>');
+           $contents[] = array('text' => TEXT_THUMBNAIL_IMAGE . '<br /><br /><center><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /></center>');
 // EOF: MoPics in Admin
-            $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price) . '<br>' . TEXT_PRODUCTS_QUANTITY_INFO . ' ' . $pInfo->products_quantity);
+
+// BOF: MSRP
+			if ($pInfo->products_msrp > $pInfo->products_price) {
+			  if ($new_price = tep_get_products_special_price($pInfo->products_id)) {
+				$products_price = '<span class="oldPrice">' . $currencies->format($pInfo->products_msrp) . '</span> <span class="listPrice">' . $currencies->format($pInfo->products_price) . '</span> <span class="specialPrice">' . $currencies->format($new_price) . '</span>';
+			  } else {
+				$products_price = '<span class="oldPrice">' . $currencies->format($pInfo->products_msrp) . '</span> ' . $currencies->format($pInfo->products_price);
+			  }
+			} else {
+			  if ($new_price = tep_get_products_special_price($pInfo->products_id)) {
+				$products_price = '<span class="oldPrice">' . $currencies->format($pInfo->products_price) . '</span> <span class="specialPrice">' . $currencies->format($new_price) . '</span>';
+			  } else {
+				$products_price = $currencies->format($pInfo->products_price);
+			  }
+			};
+// EOF: MSRP
+					$contents[] = array('text' => '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $products_price . '<br>' . TEXT_PRODUCTS_QUANTITY_INFO . ' ' . $pInfo->products_quantity);
+
             $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_AVERAGE_RATING . ' ' . number_format($pInfo->average_rating, 2) . '%');
+
+//BOF QPBPP for SPPC v4.2
+            $retail_price = $pInfo->products_price;
+            unset($pInfo->products_price);
+            $pInfo->products_price[0] = $retail_price;
+            $retail_products_qty_blocks = $pInfo->products_qty_blocks;
+            unset($pInfo->products_qty_blocks);
+            $pInfo->products_qty_blocks[0] = $retail_products_qty_blocks;
+            $retail_products_min_order_qty = $pInfo->products_min_order_qty;
+            unset($pInfo->products_min_order_qty);
+            $pInfo->products_min_order_qty[0] = $retail_products_min_order_qty;
+// query the customer groups together with discount categories first, then products_groups
+// for group prices, quantity blocks and min order quantities and lastly for price breaks.
+// the first query needs minimum MySQL version to be 4.1 (release date february 2003...)
+            $customer_groups_dc_query = tep_db_query("select cg.customers_group_id, cg.customers_group_name, dc.discount_categories_name from " . TABLE_CUSTOMERS_GROUPS . " cg left join (select customers_group_id, discount_categories_id from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " ptdc where ptdc.products_id = '" . $pInfo->products_id. "') as p2dc on p2dc.customers_group_id = cg.customers_group_id left join " . TABLE_DISCOUNT_CATEGORIES . " dc on p2dc.discount_categories_id = dc.discount_categories_id order by customers_group_id");
+            while ($customer_groups_dc_results =  tep_db_fetch_array($customer_groups_dc_query)) {
+              $customer_groups[$customer_groups_dc_results['customers_group_id']] = $customer_groups_dc_results['customers_group_name'];
+              $discount_categories[$customer_groups_dc_results['customers_group_id']] = $customer_groups_dc_results['discount_categories_name'];
+            }
+            if (count($customer_groups) > 1) {
+              $cg_group_price_query = tep_db_query("select customers_group_id, customers_group_price, products_qty_blocks, products_min_order_qty from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $pInfo->products_id. "'");
+              while ($cg_group_price_results = tep_db_fetch_array($cg_group_price_query)) {
+                $pInfo->products_price[$cg_group_price_results['customers_group_id']] = $cg_group_price_results['customers_group_price'];
+                $pInfo->products_qty_blocks[$cg_group_price_results['customers_group_id']] = $cg_group_price_results['products_qty_blocks'];
+                $pInfo->products_min_order_qty[$cg_group_price_results['customers_group_id']] = $cg_group_price_results['products_min_order_qty'];
+              }
+            } // end if (count($customer_groups) > 1)
+            $price_break_query = tep_db_query("select customers_group_id, products_price, products_qty from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id = '" . $pInfo->products_id. "' order by customers_group_id, products_qty");
+            while ($price_break_results = tep_db_fetch_array($price_break_query)) {
+              $price_breaks[$price_break_results['customers_group_id']][] = $price_break_results;
+            }
+            foreach ($customer_groups as $cg_id => $cg_name) {
+              $price_break_info = TEXT_PRICE_BREAK_INFO;
+              if (isset($price_breaks[$cg_id])) {
+                foreach ($price_breaks[$cg_id] as $key => $price_break) {
+                  $price_break_info .= $currencies->format($price_break['products_price']) . ' (' . $price_break['products_qty'] . ') <b>::</b> ';
+                }
+                $price_break_info = substr($price_break_info, 0, -10);
+              }
+              $contents[] = array('text' => '<p class="infoBoxHeading" style="font-weight:bold;">&nbsp;' . $cg_name . '</p><p>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . (isset($pInfo->products_price[$cg_id]) ? $currencies->format($pInfo->products_price[$cg_id]) : " - ") . '<br>' . TEXT_PRODUCTS_QTY_BLOCKS . ' ' . (isset($pInfo->products_qty_blocks[$cg_id]) ? $pInfo->products_qty_blocks[$cg_id] : "1") . '<br>' . TEXT_PRODUCTS_MIN_ORDER_QTY . ' ' . (isset($pInfo->products_min_order_qty[$cg_id]) ? $pInfo->products_min_order_qty[$cg_id] : "1") . '<br>'. TEXT_DISCOUNT_CATEGORY . ' ' . (isset($discount_categories[$cg_id]) ? $discount_categories[$cg_id] : TEXT_NONE) . '<br>' . $price_break_info . '</p>');
+            }
+//EOF QPBPP for SPPC
+
+
+// BOF SPPC hide products and categories from groups
+       $product_hidden_from_string = '';
+         for ($i = 0; $i < count($customers_groups); $i++) {
+           if (in_array($customers_groups[$i]['id'], $hide_product_from_groups_array)) {
+             $product_hidden_from_string .= $customers_groups[$i]['text'] . ', ';
+           }
+         } // end for ($i = 0; $i < count($customers_groups); $i++)
+         $product_hidden_from_string = rtrim($product_hidden_from_string); // remove space on the right
+         $product_hidden_from_string = substr($product_hidden_from_string,0,strlen($product_hidden_from_string) -1); // remove last comma
+         if (!tep_not_null($product_hidden_from_string)) {
+           $product_hidden_from_string = TEXT_GROUPS_NONE;
+         }
+         $product_hidden_from_string = '<br>'. "\n" . TEXT_HIDDEN_FROM_GROUPS . $product_hidden_from_string;
+            $contents[] = array('text' => $product_hidden_from_string);
+// EOF SPPC hide products and categories from groups
           }
         } else { // create category/product info
           $heading[] = array('text' => '<b>' . EMPTY_CATEGORY . '</b>');

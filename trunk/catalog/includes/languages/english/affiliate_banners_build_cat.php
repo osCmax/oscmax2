@@ -1,20 +1,16 @@
 <?php
 /*
-  $Id: affiliate_banners_build.php,v 2.00 2003/10/12
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
+define('NAVBAR_TITLE', 'Build Category Link');
 define('HEADING_TITLE', 'Affiliate Program - Build a CATEGORY Link');
 
 define('TEXT_AFFILIATE_NAME', 'Banner Name:');

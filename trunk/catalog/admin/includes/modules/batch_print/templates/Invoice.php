@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 // set paper type and size
 if ($pageloop == "0") {
 $pdf = new Cezpdf(A4,portrait);
@@ -56,7 +67,7 @@ $y = $pdf->ezText(STORE_NAME_ADDRESS,COMPANY_HEADER_FONT_SIZE);
 $y -= 10; 
 
 // logo image  set to right of the above .. change first number to move sideways    
-$pdf->addJpegFromFile(BATCH_PRINT_INC . 'templates/' . 'invoicelogo.jpg',365,730,85,85); 
+$pdf->addJpegFromFile('../images/' . 'store_logo.jpg',365,730,85,80); 
 
 // extra info boxs to be used by staff
 $pdf->setStrokeColor(0,0,0);
@@ -80,7 +91,7 @@ $dup_y = $y;
 $y = $pdf->ezText("<b>" . TEXT_ORDER_NUMBER . " </b>" . $orders['orders_prefix'] . $orders['orders_id'] ."\n\n",SUB_HEADING_FONT_SIZE);
 
 // order date
-if ($HTTP_POST_VARS['show_order_date']) { 
+if ($_POST['show_order_date']) { 
 	$pdf->ezSetY($dup_y);
 	$pdf->ezText("<b>" . TEXT_ORDER_DATE . " </b>" . date(TEXT_ORDER_FORMAT, strtotime($order->info['date_purchased'])) ."\n\n",SUB_HEADING_FONT_SIZE,array('justification'=>'right'));
 	}
@@ -146,15 +157,15 @@ $pdf->addText($indent,$pos -= GENERAL_LEADING,GENERAL_FONT_SIZE,$country);
 
 
 // phone and email statments .. added blank lines if turned off so as to maintain layout
-if ($HTTP_POST_VARS['show_phone'] || $HTTP_POST_VARS['show_email'] ) {
+if ($_POST['show_phone'] || $_POST['show_email'] ) {
 
 $pos -= SECTION_DIVIDER;
 $pdf->ezSetY($pos - 40 );
 
-if ($HTTP_POST_VARS['show_phone']) {
+if ($_POST['show_phone']) {
 $pos = $pdf->ezText("<b>" . ENTRY_PHONE . "</b> " . $order->customer['telephone'],GENERAL_FONT_SIZE);
 
-}  if ($HTTP_POST_VARS['show_email']) {
+}  if ($_POST['show_email']) {
 $pos = $pdf->ezText("<b>" . ENTRY_EMAIL . "</b> " .$order->customer['email_address'],GENERAL_FONT_SIZE);
 }
 } else {
@@ -172,18 +183,9 @@ $pos = $pdf->ezText("");
  $pdf->ezSetY($pos);
  
 // payment method  
-if ($HTTP_POST_VARS['show_pay_method']) {
+if ($_POST['show_pay_method']) {
 $pos = $pdf->ezText("<b>" . ENTRY_PAYMENT_METHOD . "</b> " . str_replace($vilains , $cools, $order->info['payment_method']),GENERAL_FONT_SIZE);
 
-if ($order->info['payment_method'] == PAYMENT_TYPE) {
-$pos = $pdf->ezText("<b>" . ENTRY_PAYMENT_TYPE . "</b> " . $order->info['cc_type'],GENERAL_FONT_SIZE);
-$pos = $pdf->ezText("<b>" . ENTRY_CC_OWNER . "</b> " . $order->info['cc_owner'],GENERAL_FONT_SIZE);
-		if ($HTTP_POST_VARS['show_cc']) {
-		$pos = $pdf->ezText("<b>" . ENTRY_CC_NUMBER . "</b> " . $order->info['cc_number'],GENERAL_FONT_SIZE);
-		}
-		
-		$pos = $pdf->ezText("<b>" . ENTRY_CC_EXP . "</b> " . $order->info['cc_expires'],GENERAL_FONT_SIZE);
-	}
 
 }
 $pos -= SECTION_DIVIDER;
@@ -286,7 +288,7 @@ $pdf->addText($x,$pos,PRODUCT_TOTALS_FONT_SIZE,$order->totals[$i]['text'], $orde
 $pos -= SECTION_DIVIDER;
 
 
-$innum = $orders['orders_prefix'].$orders['orders_id'];
+$innum = $orders['orders_prefix'] . $orders['orders_id'];
 $orders_comments_query = tep_db_query("select comments,date_added from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '$innum' order by date_added");
 if (tep_db_num_rows($orders_comments_query)) {
     while ($orders_comments = tep_db_fetch_array($orders_comments_query)) {

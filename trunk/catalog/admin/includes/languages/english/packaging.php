@@ -1,4 +1,15 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 	define('CONFIRM_DELETE', 'Are you sure you want to remove this package?');
 	define('DELETE_PACKAGE', 'Delete package');
 	define('CREATE_NEW_PACKAGE', 'Create new package');
@@ -35,4 +46,8 @@
 	define('NEW_PACKAGE', 'Create new package');
 	define('NO_PACKAGES_DEFINED', "No packages have been defined.");
 	define('UPDATE_PACKAGE', 'Update package');
+	
+	define('IMAGE_NEW_PACKAGE', 'New Package');
+	define('IMAGE_SAVE_AS_NEW', 'Save these values as a new package.');
+	define('IMAGE_UPDATE_PACKAGE', 'Update the package with these values.');
 ?>

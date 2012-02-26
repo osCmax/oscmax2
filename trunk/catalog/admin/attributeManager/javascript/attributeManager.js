@@ -1,3 +1,14 @@
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
 var placeHolderDiv;
 var url = 'attributeManager/attributeManager.php';
 var debug = false;
@@ -135,17 +146,50 @@ function amUpdate(optionId, optionValueId, optionSender) {
 		setDropDownValue('prefix_'+optionValueId,'%2B','s');//+
 	}
 
-	amSendRequest('amAction=update&option_id='+optionId+'&option_value_id='+optionValueId+'&price='+getDropDownValue('price_'+optionValueId)+'&prefix='+getDropDownValue('prefix_'+optionValueId)+'&sortOrder='+getDropDownValue('sortOrder_'+optionValueId),'',false);
+    weight_prefix=getDropDownValue('weight_prefix_'+optionValueId);
+    weight=getDropDownValue('weight_'+optionValueId);
+    if ((weight != null) && (weight_prefix != null)) {
+      if((optionSender=='weight_prefix')&&((weight_prefix=='')||(weight_prefix==' '))){
+        weight='0';
+      }
+      if(weight.indexOf('-')==0){
+        weight_prefix='-';
+        setDropDownValue('weight_prefix_'+optionValueId,'-','s');
+        weight=weight.substr(1);
+      }
+      weight=parseFloat(weight);
+      if(isNaN(weight)){
+        weight=0;
+      }else{
+        weight*=1000;
+        weight=Math.round(weight);
+        weight=weight/1000;
+      }
+      weight=weight+'';
+      if(weight.indexOf(".")<0){
+        weight+='.';
+      }
+      while(weight.length-weight.indexOf(".")<5){
+        weight+='0';
+      }
+      setDropDownValue('weight_'+optionValueId,weight,'i');
+
+      if((weight!='0.000')&&((weight_prefix=='')||(weight_prefix==' '))){
+        setDropDownValue('weight_prefix_'+optionValueId,'%2B','s');//+
+      }
+    }
+
+	amSendRequest('amAction=update&option_id='+optionId+'&option_value_id='+optionValueId+'&price='+getDropDownValue('price_'+optionValueId)+'&prefix='+getDropDownValue('prefix_'+optionValueId)+'&sortOrder='+getDropDownValue('sortOrder_'+optionValueId)+'&weight='+getDropDownValue('weight_'+optionValueId)+'&weight_prefix='+getDropDownValue('weight_prefix_'+optionValueId),'',false);
 	getElement('price_'+optionValueId).blur();
-	var el = getElement('sortOrder_'+optionValueId);
+    if ((weight != null) && (weight_prefix != null)) getElement('weight_'+optionValueId).blur();
+    var el = getElement('sortOrder_'+optionValueId);
 	if(el != null) el.blur();
 	return false;
 }
 
-// QT Pro Plugin
+// QT Pro Plugin, modified by RusNN
 function amUpdateProductStockQuantity(products_stock_id) {
-	customPrompt('debug','products_stock_id:'+products_stock_id+'productStockQuantity:'+getDropDownValue('productStockQuantity_'+products_stock_id));
-	//amSendRequest('amAction=updateProductStockQuantity&products_stock_id='+products_stock_id+'&productStockQuantity='+getDropDownValue('productStockQuantity_'+products_stock_id),'',false);
+	amSendRequest('amAction=updateProductStockQuantity&products_stock_id='+products_stock_id+'&productStockQuantity='+getDropDownValue('productStockQuantity_'+products_stock_id));
 	return false;
 }
 
@@ -154,13 +198,13 @@ function checkBox(id) {
 
     if(check[id] != true) //if a value is not true, use this rather than == false, 'cos the first time no value will be set and it will be undefined, not true or false
         {
-        document.getElementById('imgCheck_' + id).src = "attributeManager/images/icon_up.png"; //change the image
+        document.getElementById('imgCheck_' + id).src = "attributeManager/images/icon_unchecked.gif"; // change the image
         document.getElementById('stockTracking_' + id).value = "1"; //change the field value
         check[id] = true; //change the value for this checkbox in the array
         }
     else
         {
-        document.getElementById('imgCheck_' + id).src = "attributeManager/images/icon_down.png";
+        document.getElementById('imgCheck_' + id).src = "attributeManager/images/icon_checked.gif";
         document.getElementById('stockTracking_' + id).value = "0";
         check[id] = false;
         }
@@ -186,12 +230,14 @@ function amAddAttributeToProduct() {
 	var optionValue = getDropDownValue('optionValueDropDown');
 	var pricePrefix = getDropDownValue('prefix_0');
 	var price = getDropDownValue('newPrice');
+  var weightPrefix = getDropDownValue('weight_prefix_0');
+  var weight = getDropDownValue('newWeight');
 //	var sortOrder = getDropDownValue('newSort');
 	var sortOrder = -1;
 	
 	if(0 == option || 0 == optionValue)
 		return false;
-	amSendRequest('amAction=addAttributeToProduct&option_id='+option+'&option_value_id='+optionValue+'&prefix='+pricePrefix+'&price='+price+'&sortOrder='+sortOrder);
+	amSendRequest('amAction=addAttributeToProduct&option_id='+option+'&option_value_id='+optionValue+'&prefix='+pricePrefix+'&price='+price+'&sortOrder='+sortOrder+'&weight_prefix='+weightPrefix+'&weight='+weight);
 	return false;
 }
 
@@ -205,7 +251,7 @@ function amRemoveOptionValueFromProduct() {
 	return false;
 }
 
-// Begin QT Pro Plugin - added by Phocea
+// Begin QT Pro Plugin - added by Phocea, modified by RusNN
 function amAddStockToProduct(dropDownOptionsList) {
 	// we rebuild the array
   	var dropDownOptions = dropDownOptionsList.split(/,/);
@@ -225,14 +271,13 @@ function amAddStockToProduct(dropDownOptionsList) {
  		stockOptions = stockOptions + dropDownOptions[i]+'='+optionValue[i]+'&';
  	}
 	
-	//customPrompt('debug',stockOptions+'stockQuantity:'+stockQuantity);
-	amSendRequest('amAction=addStockToProduct&stockOptions='+stockOptions+'stockQuantity='+stockQuantity);
-	//amSendRequest('amAction=RemoveStockOptionValueFromProduct&option_id='+stockQuantity);
+	amSendRequest('amAction=addStockToProduct&'+stockOptions+'stockQuantity='+stockQuantity);
 	return false;
 }
 
 function amRemoveStockOptionValueFromProduct() {
-	amSendRequest('amAction=RemoveStockOptionValueFromProduct&option_id='+getPromptHiddenValue('option_id'));
+	amSendRequest('amAction=removeStockOptionValueFromProduct&option_id='+getPromptHiddenValue('option_id'));
+    removeCustomPrompt();
 	return false;
 }
 // End QT Pro Plugin - added by Phocea
@@ -241,7 +286,6 @@ function amAddOptionValueToProduct(optionId) {
 	var optionValueId = getDropDownValue('new_option_value_'+optionId);
 	if(0 == optionValueId)
 		return false;
-//	amSendRequest('amAction=addOptionValueToProduct&option_id='+optionId+'&option_value_id='+optionValueId,'',true,'currentAttributes');
 	amSendRequest('amAction=addOptionValueToProduct&option_id='+optionId+'&option_value_id='+optionValueId,'',true,'currentAttributes');
 	return false;
 }
@@ -249,7 +293,6 @@ function amAddOptionValueToProduct(optionId) {
 function amAddNewOptionValueToProduct() {
 	var optionId = getPromptHiddenValue('option_id');
 	var optionValues = getAllPromptTextValues();
-	//amSendRequest('amAction=addNewOptionValueToProduct&option_values='+optionValues+'&option_id='+optionId,'',true,'currentAttributes');
 	amSendRequest('amAction=addNewOptionValueToProduct&option_values='+optionValues+'&option_id='+optionId,'',true,'currentAttributes');
 	removeCustomPrompt();
 	return false;

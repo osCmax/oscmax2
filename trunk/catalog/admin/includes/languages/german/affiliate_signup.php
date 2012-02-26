@@ -1,36 +1,26 @@
 <?php
 /*
-  $Id: affiliate_signup.php,v 1.7 2003/02/15 18:34:44 harley_vb Exp $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Partnerprogramm');
-define('HEADING_TITLE', 'Anmeldung zu unserem Partnerprogramm');
+define('NAVBAR_TITLE', 'Affiliateprogramm');
+define('HEADING_TITLE', 'Anmeldung zu unserem Affiliateprogramm');
 
-define('MAIL_AFFILIATE_SUBJECT', 'Willkommen zum Partnerprogramm von' . STORE_NAME);
-define('MAIL_AFFILIATE_HEADER', 'Verehrter Partner
-
-Vielen Dank für Ihre Anmeldung bei unserem Partnerprogramm.
-
-Ihre Anmeldeinformationen:
-**************************
-
-');
-define('MAIL_AFFILIATE_ID', 'Ihre Partner-ID ist: ');
-define('MAIL_AFFILIATE_USERNAME', 'Ihr Benutzername ist: ');
-define('MAIL_AFFILIATE_PASSWORD', 'Ihr Passwort ist: ');
-define('MAIL_AFFILIATE_LINK', 'Melden Sie sich hier an: ');
-define('MAIL_AFFILIATE_FOOTER', 'Wir freuen uns auf eine gute Zusammenarbeit mit Ihnen!
-
-Ihr Partnerprogramm Team');
+define('MAIL_AFFILIATE_SUBJECT', 'Willkommen zum Affiliateprogramm von' . STORE_NAME);
+define('MAIL_GREET_NONE', 'Hallo %s' . "\n\n");//em001
+define('MAIL_AFFILIATE_HEADER', 'Wir freuen uns, dass Sie am Affiliateprogramm von<b>' . STORE_NAME . '</b>teilnehmen.' . "\n\n" . 'Ihre Anmeldeinformationen:
+**********************************************'."\n\n");
+define('MAIL_AFFILIATE_ID', 'Ihre Partner-ID lautet: %s' . "\n");
+define('MAIL_AFFILIATE_USERNAME', 'Ihr Benutzername lautet: %s' . "\n");
+define('MAIL_AFFILIATE_PASSWORD', 'Ihr Passwort lautet: %s' . "\n");
+define('MAIL_AFFILIATE_LINK', 'Melden Sie sich hier an: %s');
+define('MAIL_AFFILIATE_FOOTER', 'Wir wünschen Ihnen viel Erfolg!'."\n\n".'Ihr <b>' . STORE_NAME . '</b> Affiliate Team' . "\n" . AFFILIATE_EMAIL_ADDRESS);
+define('IMAGE_BUTTON_MAT', 'Bitte akzeptieren Sie unsere Affiliate-AGB');
 ?>

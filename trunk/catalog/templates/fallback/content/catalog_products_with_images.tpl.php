@@ -1,26 +1,41 @@
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
 <!-- body_text //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?>
-            	<?php if (PRODUCT_LIST_CATALOG_CURRENCY == 'show') { require(DIR_WS_BOXES . 'currencies.php'); } ?>
-            </td>
-          </tr>
-        </table></td>
-      </tr>    
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td colspan="<?php echo $count_rows; ?>"><?php echo tep_draw_separator(); ?></td>
-          </tr>
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <?php
-	  if (isset($HTTP_GET_VARS['listing'])) { 
-	  	$listing = $HTTP_GET_VARS['listing'];
-	  }
-          switch ($listing) {
+  <tr>
+    <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+  </tr>
+  <tr>
+    <td class="productinfo_header">
+      <table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="pageHeading"><?php echo HEADING_TITLE; ?><?php if (PRODUCT_LIST_CATALOG_CURRENCY == 'show') { require(DIR_WS_BOXES . 'currencies.php'); } ?></td>
+        </tr>
+      </table>
+    </td>
+  </tr>    
+  <tr>
+    <td>
+      <table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table border="0" width="100%" cellspacing="0" cellpadding="2">
+            <?php
+	        if (isset($_GET['listing'])) { 
+	  	      $listing = $_GET['listing'];
+	        }
+		  
+            switch ($listing) {
               case "image":
               $order = "p.products_image,";
               break;
@@ -87,228 +102,172 @@
               case "date-desc":
               $order = "p.products_date_added DESC, pd.products_name";
               break;
-		  default:
+		    default:
               $order = "cd.categories_name, pd.products_name";
-          }
-          ?>
-             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr class="dataTableHeadingRow">
-<?PHP
+            }
+            ?>
+              <tr>
+                <td valign="top">
+                  <table border="0" width="100%" cellspacing="0" cellpadding="2" class="productListing-list">
+                    <tr>
+<?php
    $count_rows=0;
    if (PRODUCT_LIST_CATALOG_IMAGE == 'show') {
 		  $count_rows++;
 ?>
-                <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="15%" rowspan="1"  align="right" valign="bottom">
-			&nbsp;<br>&nbsp;
-			</td>
-			<td width="85%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_IMAGES; ?>
-			</td>
-			</tr>
-			</table>
-							  </td>
-<?PHP }
+                    <td class="productListing-heading" align="center">
+			          <table border="0" cellspacing="0" cellpadding="2">
+			            <tr>
+			              <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_IMAGES; ?></td>
+			            </tr>
+			          </table>
+				    </td>
+<?php }
   if (PRODUCT_LIST_CATALOG_OPTIONS == 'show') {
 		  $count_rows++;
 ?>
-                <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="15%" rowspan="1"  align="right" valign="bottom">
-			&nbsp;<br>&nbsp;
-			</td>
-			<td width="70%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_OPTIONS; ?>
-			</td>
-			</tr>
-			</table>
-							  </td>
-<?PHP }
+                    <td class="productListing-heading" align="center">
+			          <table border="0" cellspacing="0" cellpadding="2">
+			            <tr>
+			              <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_OPTIONS; ?></td>
+			            </tr>
+			          </table>
+				    </td>
+<?php }
   if (PRODUCT_LIST_CATALOG_DATE == 'show') {
 		  $count_rows++;
 ?>
-                <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="17%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-asc', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
-			<td width="83%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_DATE; ?>
-			</td>
-			</tr>
-			</table>
-							  </td>
-<?PHP }
+                    <td class="productListing-heading" align="center">
+			          <table border="0" cellspacing="0" cellpadding="2">
+			            <tr>
+			              <td width="15" align="right" valign="middle"><?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-asc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'up_off.png', IMAGE_BUTTON_UPSORT) . '</a><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=date-desc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'down_off.png', IMAGE_BUTTON_DOWNSORT). '</a>'?></td>
+			              <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_DATE; ?></td>
+			            </tr>
+			          </table>
+				    </td>
+<?php }
   if (PRODUCT_LIST_CATALOG_MANUFACTURERS == 'show') {
 		  $count_rows++;
 ?>
-                <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="30%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=manufacturers', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=manufacturers-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
-			<td width="70%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_MANUFACTURERS; ?>
-			</td>
-			</tr>
-			</table>
-						  	</td>
+                    <td class="productListing-heading" align="center">
+			          <table border="0" cellspacing="0" cellpadding="2">
+			            <tr>
+			              <td width="15" align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=manufacturers', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'up_off.png', IMAGE_BUTTON_UPSORT) . '</a><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=manufacturers-desc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'down_off.png', IMAGE_BUTTON_DOWNSORT) . '</a>'?></td>
+			              <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_MANUFACTURERS; ?></td>
+			            </tr>
+			          </table>
+				    </td>
 
-<?PHP }
+<?php }
   if (PRODUCT_LIST_CATALOG_NAME == 'show') {
 		  $count_rows++;
 ?>
-                <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="30%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=name', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=name-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
-
-			<td width="70%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_PRODUCTS; ?>
-			</td>
-			</tr>
-			</table>
-						  	</td>
-<?PHP }
+                    <td class="productListing-heading" align="center">
+			          <table border="0" cellspacing="0" cellpadding="2">
+			            <tr>
+			              <td width="15" align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=name', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'up_off.png', IMAGE_BUTTON_UPSORT) . '</a><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=name-desc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'down_off.png', IMAGE_BUTTON_DOWNSORT) . '</a>'?></td>
+			              <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
+			            </tr>
+			          </table>
+			        </td>
+<?php }
   if (PRODUCT_LIST_CATALOG_DESCRIPTION == 'show') {
 		  $count_rows++;
 ?>
-                <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="30%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=products_description', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=products_description-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
+                    <td class="productListing-heading" align="center">
+		    	      <table border="0" cellspacing="0" cellpadding="2">
+			            <tr>
+			              <td width="15" align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=products_description', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'up_off.png', IMAGE_BUTTON_UPSORT) . '</a><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=products_description-desc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'down_off.png', IMAGE_BUTTON_DOWNSORT). '</a>'?></td>
+			              <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_DESCRIPTION; ?></td>
+			            </tr>
+			          </table>
+				    </td>
 
-			<td width="70%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_DESCRIPTION; ?>
-			</td>
-			</tr>
-			</table>
-						  	</td>
-
-<?PHP }
+<?php }
   if (PRODUCT_LIST_CATALOG_CATEGORIES == 'show') {
 		  $count_rows++;
 ?>
-                <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="17%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=categories', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=categories-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
-
-			<td width="83%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_CATEGORIES; ?>
-			</td>
-			</tr>
-			</table>
-							  </td>
-<?PHP }
+                    <td class="productListing-heading" align="center">
+			          <table border="0" cellspacing="0" cellpadding="2">
+			            <tr>
+			              <td width="15" align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=categories', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'up_off.png', IMAGE_BUTTON_UPSORT) . '</a><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=categories-desc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'down_off.png', IMAGE_BUTTON_DOWNSORT). '</a>'?></td>
+			              <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_CATEGORIES; ?></td>
+			            </tr>
+			          </table>
+				    </td>
+<?php }
    if (PRODUCT_LIST_CATALOG_MODEL == 'show') {
 		  $count_rows++;
 ?>
-		    <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="25%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=model', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=model-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
-
-			</td>
-			<td width="75%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_MODEL; ?>
-			</td>
-			</tr>
-			</table>
-							  </td>
-<?PHP }
+		            <td class="productListing-heading" align="center">
+			          <table border="0" cellspacing="0" cellpadding="2">
+			            <tr>
+			              <td width="15" align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=model', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'up_off.png', IMAGE_BUTTON_UPSORT) . '</a><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=model-desc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'down_off.png', IMAGE_BUTTON_DOWNSORT). '</a>'?></td>
+			              <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_MODEL; ?></td>
+			            </tr>
+			          </table>
+			   	    </td>
+<?php }
    if (PRODUCT_LIST_CATALOG_UPC == 'show') {
 		  $count_rows++;
 ?>
-		    <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="25%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=upc', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=upc-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
-
-			</td>
-			<td width="75%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_UPC; ?>
-			</td>
-			</tr>
-			</table>
-							  </td>
-<?PHP }
+		            <td class="productListing-heading" align="center">
+			          <table border="0" cellspacing="0" cellpadding="2">
+			            <tr>
+			              <td width="15" align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=upc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'up_off.png', IMAGE_BUTTON_UPSORT) . '</a><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=upc-desc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'down_off.png', IMAGE_BUTTON_DOWNSORT). '</a>'?></td>
+			              <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_UPC; ?></td>
+			            </tr>
+			          </table>
+				    </td>
+<?php }
    if (PRODUCT_LIST_CATALOG_QUANTITY == 'show') {
 		  $count_rows++;
 ?>
-		    <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="25%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=quantity', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=quantity-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
-
-			</td>
-			<td width="75%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_QUANTITY; ?>
-			</td>
-			</tr>
-			</table>
-							  </td>
-<?PHP }
+		            <td class="productListing-heading" align="center">
+			          <table border="0" cellspacing="0" cellpadding="2">
+		  	            <tr>
+			              <td width="15" align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=quantity', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'up_off.png', IMAGE_BUTTON_UPSORT) . '</a><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=quantity-desc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'down_off.png', IMAGE_BUTTON_DOWNSORT). '</a>'?></td>
+                          <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_QUANTITY; ?></td>
+			            </tr>
+			          </table>
+			        </td>
+<?php }
    if (PRODUCT_LIST_CATALOG_WEIGHT == 'show') {
 		  $count_rows++;
 ?>
-		    <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="25%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=weight', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=weight-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
-
-			</td>
-			<td width="75%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_WEIGHT; ?>
-			</td>
-			</tr>
-			</table>
-							  </td>
-<?PHP }
+		            <td class="productListing-heading" align="center">
+			          <table border="0" cellspacing="0" cellpadding="2">
+			            <tr>
+			              <td width="15" align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=weight', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'up_off.png', IMAGE_BUTTON_UPSORT) . '</a><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=weight-desc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'down_off.png', IMAGE_BUTTON_DOWNSORT). '</a>'?></td>
+                          <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_WEIGHT; ?></td>
+			            </tr>
+			          </table>
+			        </td>
+<?php }
    if (PRODUCT_LIST_CATALOG_PRICE == 'show') {
 		  $count_rows++;
 ?>
-		    <td class="TableHeading" align="center">
-			<table border="0" cellspacing="0" cellpadding="2">
-			<tr>
-			<td width="30%" align="right" valign="bottom">
-			<?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=price', 'NONSSL') . '">' . tep_image_button('printable_catalog_up.gif', IMAGE_BUTTON_UPSORT) . '</a><br><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=price-desc', 'NONSSL') . '">' . tep_image_button('printable_catalog_down.gif', IMAGE_BUTTON_DOWNSORT). '</a></td>'?>
-
-			</td>
-			<td width="70%" rowspan="2" align="left" class="TableHeading">
-			<?php echo TABLE_HEADING_PRICE; ?>
-			</td>
-			</tr>
-			</table>
-							  </td>
+		            <td class="productListing-heading" align="center">
+			          <table border="0" cellspacing="0" cellpadding="2">
+			            <tr>
+			              <td width="15" align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=price', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'up_off.png', IMAGE_BUTTON_UPSORT) . '</a><a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES , 'listing=price-desc', 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'down_off.png', IMAGE_BUTTON_DOWNSORT). '</a>'?></td>
+                          <td align="left" class="productListing-heading"><?php echo TABLE_HEADING_PRICE; ?></td>
+			            </tr>
+			          </table>
+	 		        </td>
 <?php
   }
 ?>
-                </tr>
-              <tr>
-                <td colspan="<?php echo $count_rows; ?>"><?php echo tep_draw_separator(); ?></td>
-              </tr>
-                <tr>
-
+                  </tr>
 
 <?php
   if (strlen($listing)>0) { $sort = $listing; } else { $sort = ""; }
-  if ($HTTP_GET_VARS['page'] > 1) {
-          $rows = $HTTP_GET_VARS['page'] * 20 - 20;
-          $page = $HTTP_GET_VARS['page'];
+  if ($_GET['page'] > 1) {
+          $rows = $_GET['page'] * 20 - 20;
+          $page = $_GET['page'];
   }
-  if ($HTTP_GET_VARS['page']<= 0) ($page --);
-  if ($HTTP_GET_VARS['page']== 1) ($page ++);
+  if ($_GET['page']<= 0) ($page --);
+  if ($_GET['page']== 1) ($page ++);
   if ($page <=0 ) $page = 1;
 
     $customers_group_id = '0';
@@ -345,25 +304,22 @@
     }
  ?>
 
-              <tr class="tableRow">
-<?PHP if (PRODUCT_LIST_CATALOG_IMAGE == 'show') { ?>
-<?PHP if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') { ?>
-               <td class="main" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products['products_id'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>'; ?>&nbsp;</td>
-<?PHP } else { ?>
-               <td class="main" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>'; ?>&nbsp;</td>
-<?PHP } ?>
-<?PHP } ?>
-<?PHP if (PRODUCT_LIST_CATALOG_OPTIONS == 'show') { ?>
-                <td class="main" align="left">
+                  <tr>
 
+<?php if (PRODUCT_LIST_CATALOG_IMAGE == 'show') { ?>
+                    <td class="productListing-data-list" align="center"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products['products_image'], $products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>'; ?>&nbsp;</td>
+<?php } ?>
+
+<?php if (PRODUCT_LIST_CATALOG_OPTIONS == 'show') { ?>
+                    <td class="productListing-data-list" align="left">
 <?php
     // Get the options:
     $products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . $products['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . $languages_id . "'");
     $products_attributes = tep_db_fetch_array($products_attributes_query);
     if ($products_attributes['total'] > 0) {
-		  $opt_x = 0;
+      $opt_x = 0;
       $opt_y = 0;
-			$max_y = 0;
+	  $max_y = 0;
       unset($products_options_array);
       $products_options_name_query = tep_db_query("select distinct popt.products_options_id, popt.products_options_name from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . $products['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . $languages_id . "'");
       while ($products_options_name = tep_db_fetch_array($products_options_name_query)) {
@@ -376,97 +332,100 @@
  				  $products_option_name=$products_options['products_options_values_name'];
           if ($products_options['options_values_price'] != '0') {
             $produkt_option_name.= ' (' . $products_options['price_prefix'] . $currencies->display_price($products_options['options_values_price'], tep_get_tax_rate($products['products_tax_class_id'])) .') ';
-          }
+          } // end if
           $products_options_array[$opt_x][$opt_y] = $products_option_name;
-        }
+        } // end while
 		  $opt_x++;
-		  }
+	  } // end while
+	  
 ?>
-	               <table border="1" cellspacing="0" cellpadding="0">
-								   <tr>
+	                  <table border="0" cellspacing="0" cellpadding="0">
 <?php
       // Start Output:
       $out_x = 0;
       $out_y = 0;
 
 			for ($out_y = 0; $out_y <= $max_y; $out_y++) {
-				  echo "<tr>";
-					for ($out_x = 0; $out_x < $opt_x; $out_x++) {
-			  		echo '<td class="smallText" align="center">' .  $products_options_array[$out_x][$out_y] . '&nbsp;</td>';
-		  		}
-			    echo "</tr>";
-			}
+		      echo "<tr>";
+			  for ($out_x = 0; $out_x < $opt_x; $out_x++) {
+			    echo '<td class="smallText" align="center">' .  $products_options_array[$out_x][$out_y] . '&nbsp;</td>';
+		  	  } // end for
+			  echo "</tr>";
+			} // edn for
 ?>
-								 </table>
+				      </table>
 <?php
 
-		}
+	} // end if ($products_attributes['total'] > 0)
 ?>
-		&nbsp;</td>
-<?PHP if (PRODUCT_LIST_CATALOG_DATE == 'show') { ?>
-                <td class="main" align="center"><div align=left><?php
-									if (PRODUCT_LIST_CATALOG_DATE_SHOW == 'show') echo tep_date_short($products['products_date_added']); ?>&nbsp;</div></td>
-<?PHP } ?>
-<?PHP } ?>
-<?PHP if (PRODUCT_LIST_CATALOG_MANUFACTURERS == 'show') { ?>
-                <td class="main" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '">' . $products['manufacturers_name'] . '</a>'; ?>&nbsp;</div></td>
-<?PHP } ?>
-<?PHP if (PRODUCT_LIST_CATALOG_NAME == 'show') { ?>
-<?PHP if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') { ?>
-                <td class="main" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products['products_id'], 'NONSSL') . '">' . $products['products_name'] . '</a>'; ?>&nbsp;</div></td>
-<?PHP } else { ?>
-                <td class="main" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '">' . $products['products_name'] . '</a>'; ?>&nbsp;</div></td>
-<?PHP } ?>
-<?PHP } ?>
-<?PHP if (PRODUCT_LIST_CATALOG_DESCRIPTION == 'show') { ?>
-               <td class="main" align="center"><?php echo substr(nl2br($products['products_description']), 0, $description_length); ?>...&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '"><i>More Info</i>...</a>'; ?></td>
-<?PHP } ?>
-<?PHP if (PRODUCT_LIST_CATALOG_CATEGORIES == 'show') { ?>
-                <td class="main" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'cPath=' . $products['categories_id'], 'NONSSL') . '">' . $products['categories_name'] . '</a>'; ?>&nbsp;</div></td>
-<?PHP } ?>
-<?PHP if (PRODUCT_LIST_CATALOG_MODEL == 'show') { ?>
-                <td class="main" align="center"><div align=left><?php echo $products['products_model']; ?>&nbsp;</div></td>
-<?PHP } ?>
-<?PHP if (PRODUCT_LIST_CATALOG_UPC == 'show') { ?>
-                <td class="main" align="center"><div align=left><?php echo $products['products_upc']; ?>&nbsp;</div></td>
-<?PHP } ?>
-<?PHP if (PRODUCT_LIST_CATALOG_QUANTITY == 'show') { ?>
-                <td class="main" align="center"><div align=left><?php echo $products['products_quantity']; ?>&nbsp;</div></td>
-<?PHP } ?>
-<?PHP if (PRODUCT_LIST_CATALOG_WEIGHT == 'show') { ?>
-                <td class="main" align="center"><div align=left><?php echo $products['products_weight']; ?>&nbsp;</div></td>
-<?PHP } ?>
-<?PHP if (PRODUCT_LIST_CATALOG_PRICE == 'show') { ?>
-		    <td class="main" align="center"><div align=left><B>
+		            </td>
+<?php } // end if (PRODUCT_LIST_CATALOG_OPTIONS == 'show') ?>
+
+
+<?php if (PRODUCT_LIST_CATALOG_DATE == 'show') { ?>
+                    <td class="productListing-data-list" align="center"><div align=left><?php
+									if (PRODUCT_LIST_CATALOG_DATE_SHOW == 'show') { 
+									  echo tep_date_short($products['products_date_added']); 
+									} ?>&nbsp;</div></td>
+<?php } ?>
+
+<?php if (PRODUCT_LIST_CATALOG_MANUFACTURERS == 'show') { ?>
+                    <td class="productListing-data-list" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '">' . $products['manufacturers_name'] . '</a>'; ?>&nbsp;</div></td>
+<?php } ?>
+<?php if (PRODUCT_LIST_CATALOG_NAME == 'show') { ?>
+                    <td class="productListing-data-list" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '">' . $products['products_name'] . '</a>'; ?>&nbsp;</div></td>
+<?php } ?>
+<?php if (PRODUCT_LIST_CATALOG_DESCRIPTION == 'show') { ?>
+                    <td class="productListing-data-list" align="center"><?php echo substr(nl2br($products['products_description']), 0, $description_length); ?>...&nbsp;<?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, '&products_id=' . $products['products_id'], 'NONSSL') . '"><i>More Info</i>...</a>'; ?></td>
+<?php } ?>
+<?php if (PRODUCT_LIST_CATALOG_CATEGORIES == 'show') { ?>
+                    <td class="productListing-data-list" align="center"><div align=left><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, 'cPath=' . $products['categories_id'], 'NONSSL') . '">' . $products['categories_name'] . '</a>'; ?>&nbsp;</div></td>
+<?php } ?>
+<?php if (PRODUCT_LIST_CATALOG_MODEL == 'show') { ?>
+                    <td class="productListing-data-list" align="center"><div align=left><?php echo $products['products_model']; ?>&nbsp;</div></td>
+<?php } ?>
+<?php if (PRODUCT_LIST_CATALOG_UPC == 'show') { ?>
+                    <td class="productListing-data-list" align="center"><div align=left><?php echo $products['products_upc']; ?>&nbsp;</div></td>
+<?php } ?>
+<?php if (PRODUCT_LIST_CATALOG_QUANTITY == 'show') { ?>
+                    <td class="productListing-data-list" align="center"><div align=left><?php echo $products['products_quantity']; ?>&nbsp;</div></td>
+<?php } ?>
+<?php if (PRODUCT_LIST_CATALOG_WEIGHT == 'show') { ?>
+                    <td class="productListing-data-list" align="center"><div align=left><?php echo $products['products_weight']; ?>&nbsp;</div></td>
+<?php } ?>
+<?php if (PRODUCT_LIST_CATALOG_PRICE == 'show') { ?>
+		            <td class="productListing-data-list" align="center"><div align=left><b>
 <?php
   if (PRODUCT_LIST_CUSTOMER_DISCOUNT == 'show') {
 //  echo $currencies->format($products['final_price']-($products['final_price']*$discount/100));
     echo $currencies->display_price(($products['final_price'] ? $products['final_price'] : $products['products_price']), tep_get_tax_rate($products['products_tax_class_id']));
   }
-?></B>&nbsp;</div></td>
-<?PHP } ?>
-              </tr>
+?></b>&nbsp;</div></td>
+<?php } ?>
+                  </tr>
 
 <?php
   }
 ?>
-              <tr>
-                 <td colspan="<?php echo $count_rows; ?>"><?php echo tep_draw_separator(); ?></td>
-              </tr>
-        </table></td>
-	  <tr>
-	    <td colspan="3">
-
-		<center>
+                </table>
+              </td>
+            </tr>
+	        <tr>
+	          <td colspan="3" align="right">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                  <tr>
+  	                <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+                  </tr>
+                </table>
+                <table class="filterbox" width="100%" cellpadding="2" cellspacing="0" border="0">
+                  <tr>
+                    <td class="smallText" align="right">
 <?php
-if($page != 1)
-
-{
-	$pageprev = $page - 1;
-	echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $pageprev, 'NONSSL') . '">' . BOX_CATALOG_PREV . '</a> ';
-} else {
-        echo(BOX_CATALOG_PREV."&nbsp;");
+if($page != 1) {
+  $pageprev = $page - 1;
+  echo '<a class="pageResults" href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $pageprev, 'NONSSL') . '">' . BOX_CATALOG_PREV . '</a> ';
 }
+
 //PRODUCT_LIST_PAGEBREAK_NUMBERS_PERPAGE
 $displaycount_number = (mysql_result(mysql_query("SELECT configuration_value from  " . TABLE_CONFIGURATION . " WHERE configuration_key = 'PRODUCT_LIST_PAGEBREAK_NUMBERS_PERPAGE'"), 0 , 0)) - 2;
 $numofpages = $totalrows / $limit;
@@ -476,17 +435,14 @@ $displaycount = $numofpages < $displaycount_number ? $numofpages : $displaycount
 $startpage = $page > $displaycount / 2 ? floor($page - $displaycount / 2) : 1;
 
 
-for($i = $startpage; $i <= $startpage + $displaycount; $i++)
-{
-    if($i > $numofpages)
-    {
+for($i = $startpage; $i <= $startpage + $displaycount; $i++) {
+    if($i > $numofpages) {
         break;
-    }else
-    if($i == $page)
-    {
-        if($i>0) echo("[<b>".$i."</b>]&nbsp;");
-    } else {
-		if($i>0) echo '[<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $i, 'NONSSL') . '">' . $i . '</a>]&nbsp;';
+    } else
+      if($i == $page) {
+        if($i>0) echo('<span class="pageResult">' . $i . '</span>&nbsp;'); 
+	  } else {
+		if($i>0) echo '<a class="pageResults" href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $i, 'NONSSL') . '">' . $i . '</a>&nbsp;';
 	}
 }
 
@@ -496,38 +452,29 @@ for($i = $startpage; $i <= $startpage + $displaycount; $i++)
 	if($i == $page)
 
 	{
-		if($i>0) echo("[<b>".$i."</b>]&nbsp;");
+		if($i>0) echo('<span class="pageResult">' . $i . '</span>&nbsp;');
 	} else {
-		if($i>0) echo '[<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $i, 'NONSSL') . '">' . $i . '</a>]&nbsp;';
+		if($i>0) echo '<a class="pageResults" href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $i, 'NONSSL') . '">' . $i . '</a>&nbsp;';
 	}
 }
 
 if(($totalrows - ($limit * $page)) > 0)
 {
 	$pagenext = $page + 1;
-	echo '<a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $pagenext, 'NONSSL') . '">' . BOX_CATALOG_NEXT . '</a>';
-} else {
-	echo("&nbsp; ".BOX_CATALOG_NEXT);
+	echo '<a class="pageResults" href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, 'listing=' . $sort . '&page=' . $pagenext, 'NONSSL') . '">' . BOX_CATALOG_NEXT . '</a>&nbsp;';
 }
-mysql_free_result($result);
+    mysql_free_result($result);
 ?>
-	      <center>
-            </td>
-	  </tr>
-              <tr>
-                <td colspan="<?php echo $count_rows; ?>"><?php echo tep_draw_separator(); ?></td>
-              </tr>
-          <tr>
-            <td colspan="<?php echo $count_rows; ?>"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td class="smallText">&nbsp;</td>
-                <td align="right" class="smallText">&nbsp;</td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-      </tr>
-    </table></td>
+	                  </td>
+                    </tr>
+                  </table>  
+                </td>
+	          </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
 <!-- body_text_eof //-->
   </tr>
 </table>

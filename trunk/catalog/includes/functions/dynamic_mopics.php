@@ -1,10 +1,11 @@
 <?php
 /*
-$Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  Dynamic MoPics version 3.000, built for osCommerce MS2
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2004-2005 Josh Dechant
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -35,6 +36,6 @@ $Id: dynamic_mopics.php 3 2006-05-27 04:59:07Z user $
 	}
 	
 	function mopics_get_imagebase($image, $pre_append = '') {
-		return $pre_append . substr($image, ((DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR == 'true') ? strlen(DYNAMIC_MOPICS_THUMBS_DIR) : 0), ((DYNAMIC_MOPICS_MAINTHUMB_IN_THUMBS_DIR == 'true') ? (strrpos($image, '.') - strlen(DYNAMIC_MOPICS_THUMBS_DIR)) : strrpos($image, '.')) );
+		return $pre_append . substr($image, 0, strrpos($image, '.') );
 	}
 ?>

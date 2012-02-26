@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: account_edit.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -25,14 +25,14 @@ $Id: account_edit.php 3 2006-05-27 04:59:07Z user $
 // needs to be included earlier to set the success message in the messageStack
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ACCOUNT_EDIT);
 
-  if (isset($HTTP_POST_VARS['action']) && ($HTTP_POST_VARS['action'] == 'process')) {
-    if (ACCOUNT_GENDER == 'true') $gender = tep_db_prepare_input($HTTP_POST_VARS['gender']);
-    $firstname = tep_db_prepare_input($HTTP_POST_VARS['firstname']);
-    $lastname = tep_db_prepare_input($HTTP_POST_VARS['lastname']);
-    if (ACCOUNT_DOB == 'true') $dob = tep_db_prepare_input($HTTP_POST_VARS['dob']);
-    $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
-    $telephone = tep_db_prepare_input($HTTP_POST_VARS['telephone']);
-    $fax = tep_db_prepare_input($HTTP_POST_VARS['fax']);
+  if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
+    if (ACCOUNT_GENDER == 'true') $gender = tep_db_prepare_input($_POST['gender']);
+    $firstname = tep_db_prepare_input($_POST['firstname']);
+    $lastname = tep_db_prepare_input($_POST['lastname']);
+    if (ACCOUNT_DOB == 'true') $dob = tep_db_prepare_input($_POST['dob']);
+    $email_address = tep_db_prepare_input($_POST['email_address']);
+    $telephone = tep_db_prepare_input($_POST['telephone']);
+    $fax = tep_db_prepare_input($_POST['fax']);
 
     $error = false;
 
@@ -127,7 +127,8 @@ $Id: account_edit.php 3 2006-05-27 04:59:07Z user $
   $content = CONTENT_ACCOUNT_EDIT;
   $javascript = 'form_check.js.php';
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

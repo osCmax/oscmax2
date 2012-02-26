@@ -1,19 +1,15 @@
 <?php
 /*
-$Id: affiliate_details_ok.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Your Account Details were changed!');
+define('NAVBAR_TITLE','Programa de afiliados');
+define('HEADING_TITLE','Datos de cuenta cambiados');
 ?>

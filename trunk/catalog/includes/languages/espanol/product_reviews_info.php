@@ -1,22 +1,22 @@
 <?php
 /*
-$Id: product_reviews_info.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
 define('NAVBAR_TITLE', 'Comentarios');
-define('HEADING_TITLE', ' %s Comentarios');
+define('HEADING_TITLE', ' %s comentarios');
 define('SUB_TITLE_PRODUCT', 'Producto:');
 define('SUB_TITLE_FROM', 'De:');
 define('SUB_TITLE_DATE', 'Fecha:');
 define('SUB_TITLE_REVIEW', 'Comentario:');
-define('SUB_TITLE_RATING', 'Evaluaci&oacute;n:');
-define('TEXT_OF_5_STARS', '%s de 5 Estrellas!');
-define('TEXT_CLICK_TO_ENLARGE', 'Haga Click para agrandar');
+define('SUB_TITLE_RATING', 'Valoración:');
+define('TEXT_OF_5_STARS', '%s de 5 estrellas');
+define('TEXT_CLICK_TO_ENLARGE', 'Pulse aquí para ampliar');
 ?>

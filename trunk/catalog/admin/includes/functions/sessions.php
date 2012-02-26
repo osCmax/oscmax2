@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: sessions.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -68,19 +68,19 @@ $Id: sessions.php 3 2006-05-27 04:59:07Z user $
   }
 
   function tep_session_start() {
-    global $HTTP_GET_VARS, $HTTP_POST_VARS, $HTTP_COOKIE_VARS;
+    global $_GET, $_POST, $HTTP_COOKIE_VARS;
 
     $sane_session_id = true;
 
-    if (isset($HTTP_GET_VARS[tep_session_name()])) {
-      if (preg_match('/^[a-zA-Z0-9]+$/', $HTTP_GET_VARS[tep_session_name()]) == false) {
-        unset($HTTP_GET_VARS[tep_session_name()]);
+    if (isset($_GET[tep_session_name()])) {
+      if (preg_match('/^[a-zA-Z0-9]+$/', $_GET[tep_session_name()]) == false) {
+        unset($_GET[tep_session_name()]);
 
         $sane_session_id = false;
       }
-    } elseif (isset($HTTP_POST_VARS[tep_session_name()])) {
-      if (preg_match('/^[a-zA-Z0-9]+$/', $HTTP_POST_VARS[tep_session_name()]) == false) {
-        unset($HTTP_POST_VARS[tep_session_name()]);
+    } elseif (isset($_POST[tep_session_name()])) {
+      if (preg_match('/^[a-zA-Z0-9]+$/', $_POST[tep_session_name()]) == false) {
+        unset($_POST[tep_session_name()]);
 
         $sane_session_id = false;
       }
@@ -101,33 +101,21 @@ $Id: sessions.php 3 2006-05-27 04:59:07Z user $
   }
 
   function tep_session_register($variable) {
-    if (PHP_VERSION < 4.3) {
-      return session_register($variable);
+    if (isset($GLOBALS[$variable])) {
+      $_SESSION[$variable] =& $GLOBALS[$variable];
     } else {
-      if (isset($GLOBALS[$variable])) {
-        $_SESSION[$variable] =& $GLOBALS[$variable];
-      } else {
-        $_SESSION[$variable] = null;
-      }
+      $_SESSION[$variable] = null;
     }
 
     return false;
   }
 
   function tep_session_is_registered($variable) {
-    if (PHP_VERSION < 4.3) {
-      return session_is_registered($variable);
-    } else {
-      return isset($_SESSION) && array_key_exists($variable, $_SESSION);
-    }
+    return isset($_SESSION) && array_key_exists($variable, $_SESSION);
   }
 
   function tep_session_unregister($variable) {
-    if (PHP_VERSION < 4.3) {
-      return session_unregister($variable);
-    } else {
-      unset($_SESSION[$variable]);
-    }
+    unset($_SESSION[$variable]);
   }
 
   function tep_session_id($sessid = '') {
@@ -147,11 +135,7 @@ $Id: sessions.php 3 2006-05-27 04:59:07Z user $
   }
 
   function tep_session_close() {
-    if (PHP_VERSION >= '4.0.4') {
-      return session_write_close();
-    } elseif (function_exists('session_close')) {
-      return session_close();
-    }
+    return session_write_close();
   }
 
   function tep_session_destroy() {

@@ -1,15 +1,11 @@
 <?php
 /*
-  $Id: affiliate_newsletter.php,v 2.00 2003/10/12
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -27,9 +23,9 @@
   $newsletter_query = tep_db_query("select affiliate_newsletter from " . TABLE_AFFILIATE . " where affiliate_id = '" . (int)$affiliate_id . "'");
   $newsletter = tep_db_fetch_array($newsletter_query);
 
-  if (isset($HTTP_POST_VARS['action']) && ($HTTP_POST_VARS['action'] == 'process')) {
-    if (isset($HTTP_POST_VARS['newsletter_affiliate']) && is_numeric($HTTP_POST_VARS['newsletter_affiliate'])) {
-      $newsletter_affiliate = tep_db_prepare_input($HTTP_POST_VARS['newsletter_affiliate']);
+  if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
+    if (isset($_POST['newsletter_affiliate']) && is_numeric($_POST['newsletter_affiliate'])) {
+      $newsletter_affiliate = tep_db_prepare_input($_POST['newsletter_affiliate']);
     } else {
       $newsletter_affiliate = '0';
     }
@@ -48,5 +44,6 @@
   $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_AFFILIATE_SUMMARY, '', 'SSL'));
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_AFFILIATE_NEWSLETTER, '', 'SSL'));
   $content = affiliate_newsletter; 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
    require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

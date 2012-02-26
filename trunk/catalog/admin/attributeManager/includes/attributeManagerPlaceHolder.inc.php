@@ -1,12 +1,15 @@
 <?php
 /*
-  $Id: attributeManagerPlaceHolder.inc.php,v 1.0 21/02/06 Sam West$
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
+*/
+/*  
   Copyright © 2006 Kangaroo Partners
   http://kangaroopartners.com
   osc@kangaroopartners.com
@@ -25,7 +28,7 @@ if( isset($_GET['pID'])){
 
 } else {
 		echo '<div id="topBar">';
-		echo '<table><tr><td>' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO).  '</td><td>' . AM_AJAX_FIRST_SAVE . '</td></tr></table>';
+		echo '<table><tr><td>' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO).  '</td><td>' . AM_AJAX_FIRST_SAVE . '</td></tr></table>';
 		echo '</div>';
 }
 ?>

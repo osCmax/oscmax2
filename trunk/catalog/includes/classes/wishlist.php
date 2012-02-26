@@ -1,8 +1,10 @@
 <?php
 /*
-  $Id: wishlist.php,v 3.0  2005/08/24 Dennis Blake
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+$Id$
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -21,7 +23,7 @@
 		if (!tep_session_is_registered('customer_id')) return false;
 
 	// merge current wishlist items in database
-		if (is_array($this->wishID)) {
+		if (isset($this->wishID) && is_array($this->wishID)) {
         	reset($this->wishID);
 
 			while (list($wishlist_id, ) = each($this->wishID)) {

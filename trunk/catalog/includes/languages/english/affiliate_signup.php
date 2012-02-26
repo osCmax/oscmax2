@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -26,4 +22,5 @@ define('MAIL_AFFILIATE_USERNAME', 'Your Affiliate Username is: %s' . "\n");
 define('MAIL_AFFILIATE_PASSWORD', 'Your Password is: %s' . "\n");
 define('MAIL_AFFILIATE_LINK', 'Link to your account: %s');
 define('MAIL_AFFILIATE_FOOTER', 'Have fun earning referral fees!'."\n\n".'Your <b>' . STORE_NAME . '</b> Affiliate Team' . "\n" . AFFILIATE_EMAIL_ADDRESS);
+define('IMAGE_BUTTON_MAT', 'Please Accept Terms');
 ?>

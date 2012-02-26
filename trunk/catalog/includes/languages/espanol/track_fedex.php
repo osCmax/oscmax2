@@ -1,14 +1,25 @@
 <?php
-  define('NAVBAR_TITLE','Shipment Tracking Information');
-  define('HEADING_TITLE','Shipment Tracking Information');
-  define('PACKAGE_IN_TRANSIT','This package is currently in transit. Last known status:');
-  define('PACKAGE_NOT_IN_SYSTEM','Your package is not in the tracking system yet. Please check back later.');
-  define('PACKAGE_DELIVERED_ON','This package was delivered on');
-  define('PACKAGE_SIGNED_BY','Signed for by');
-  define('DELIVERED_FRONTDOOR','Package left at front door, no signature required.');
-  define('DELIVERED_SIDEDOOR','Package left at side door, no signature required.');
-  define('DELIVERED_GARAGE','Package left at garage, no signature required.');
-  define('DELIVERED_BACKDOOR','Package left at back door, no signature required.');
-  define('PACKAGE_DESTINATION','Package destination:');
-  define('PACKAGE_STATUS','Package delivery status:');
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+  define('NAVBAR_TITLE','Información de seguimiento del envío');
+  define('HEADING_TITLE','Información de seguimiento del envío');
+  define('PACKAGE_IN_TRANSIT','Este paquete se encuentra actualmente en tránsito. Último estado conocido:');
+  define('PACKAGE_NOT_IN_SYSTEM','El paquete no se ha introducido todavía en el sistema de seguimiento. Por favor compruébalo más tarde.');
+  define('PACKAGE_DELIVERED_ON','Este paquete fue entregado el');
+  define('PACKAGE_SIGNED_BY','Firmado por');
+  define('DELIVERED_FRONTDOOR','Paquete dejado en la puerta principal, no se requiere la firma.');
+  define('DELIVERED_SIDEDOOR','Paquete dejado en la puerta lateral, no se requiere la firma.');
+  define('DELIVERED_GARAGE','Paquete dejado en el garaje, no se requiere la firma.');
+  define('DELIVERED_BACKDOOR','Paquete dejó en la puerta trasera, no se requiere la firma.');
+  define('PACKAGE_DESTINATION','Destino del paquete:');
+  define('PACKAGE_STATUS','Estado de la entrega del paquete:');
 ?>

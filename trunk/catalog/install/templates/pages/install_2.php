@@ -1,14 +1,23 @@
 <?php
 /*
-$Id: install_2.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
+
+  // Check language pack for installer
+  if (isset($_GET['language'])) {
+    $language_selected = ($_GET['language']);
+  } elseif (isset($_POST['language'])) {
+	$language_selected = ($_POST['language']);  
+  } else {
+	$language_selected = 'english';
+  }
 
   $www_location = 'http://' . $HTTP_SERVER_VARS['HTTP_HOST'];
 
@@ -23,52 +32,48 @@ $Id: install_2.php 3 2006-05-27 04:59:07Z user $
   $dir_fs_www_root = osc_realpath(dirname(__FILE__) . '/../../../') . '/';
 ?>
 
+
+<div id="menublock">
+  <ul id="menutabs">
+    <li><a href="index.php" id="first"><?php echo TAB_START; ?></a></li>
+    <li><a href="install.php?step=1&language=<?php echo $language_selected; ?>"><?php echo TAB_DATABASE_SERVER; ?></a></li>
+    <li><a href="#" id="active"><?php echo TAB_WEB_SERVER; ?></a></li>
+    <li><a href="#"><?php echo TAB_STORE_SETTINGS; ?></a></li>
+    <li><a href="#" id="last"><?php echo TAB_FINISHED; ?></a></li>
+  </ul>
+</div>
+
 <div class="mainBlock">
-  <div class="stepsBox">
-    <ol>
-      <li>Database Server</li>
-      <li style="font-weight: bold;">Web Server</li>
-      <li>Online Store Settings</li>
-      <li>Finished!</li>
-    </ol>
-  </div>
-
-  <h1>New Installation</h1>
-
-  <p>This web-based installation routine will correctly setup and configure osCMax Power E-Commerce to run on this server.</p>
-  <p>Please follow the on-screen instructions that will take you through the database server, web server, and store configuration options. If help is needed at any stage, please consult the documentation or seek help at the community support forums.</p>
+      <?php echo TEXT_WEB_SERVER; ?>
 </div>
 
 <div class="contentBlock">
-  <div class="infoPane">
-    <h3>Step 2: Web Server</h3>
-
-    <div class="infoPaneContents">
-      <p>The web server takes care of serving the pages of your online store to your guests and customers. The web server parameters make sure the links to the pages point to the correct location.</p>
-    </div>
-  </div>
-
   <div class="contentPane">
-    <h2>Web Server</h2>
 
-    <form name="install" id="installForm" action="install.php?step=3" method="post">
+    <form name="installForm" id="installForm" action="install.php?step=3" method="post">
 
-    <table border="0" width="99%" cellspacing="0" cellpadding="5" class="inputForm">
+    <table border="0" width="100%" cellspacing="0" cellpadding="5" class="inputForm">
       <tr>
-        <td class="inputField"><?php echo 'WWW Address<br />' . osc_draw_input_field('HTTP_WWW_ADDRESS', $www_location, 'class="text"'); ?></td>
-        <td class="inputDescription">The web address to the online store.</td>
+        <td class="inputField"><?php echo TEXT_WWW_ADDRESS . '<br />' . osc_draw_input_field('HTTP_WWW_ADDRESS', $www_location, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_WEB_ADDRESS; ?></td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Webserver Root Directory<br />' . osc_draw_input_field('DIR_FS_DOCUMENT_ROOT', $dir_fs_www_root, 'class="text"'); ?></td>
-        <td class="inputDescription">The directory where the online store is installed on the server.</td>
+        <td class="inputField"><?php echo TEXT_WEBSERVER_ROOT_DIR . '<br />' . osc_draw_input_field('DIR_FS_DOCUMENT_ROOT', $dir_fs_www_root, 'class="text"'); ?></td>
+        <td class="inputDescription"><?php echo TEXT_WEBSERVER_DIRECTORY; ?></td>
       </tr>
     </table>
 
-    <p align="right"><input type="image" src="images/button_continue.gif" border="0" alt="Continue" id="inputButton" />&nbsp;&nbsp;<a href="index.php"><img src="images/button_cancel.gif" border="0" alt="Cancel" /></a></p>
+<div id="buttons">
+  <table width="100%">
+    <tr>
+      <td align="right"><input type="image" src="includes/languages/<?php echo $language_selected; ?>/images/buttons/button_continue.gif" alt="<?php echo IMAGE_CONTINUE; ?>" id="inputButton" /></td>
+    </tr>
+  </table>
+</div>
 
 <?php
-  reset($HTTP_POST_VARS);
-  while (list($key, $value) = each($HTTP_POST_VARS)) {
+  reset($_POST);
+  while (list($key, $value) = each($_POST)) {
     if (($key != 'x') && ($key != 'y')) {
       if (is_array($value)) {
         for ($i=0, $n=sizeof($value); $i<$n; $i++) {

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: tax_classes.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -15,14 +15,14 @@ define('HEADING_TITLE', 'Steuerklassen');
 define('TABLE_HEADING_TAX_CLASSES', 'Steuerklassen');
 define('TABLE_HEADING_ACTION', 'Aktion');
 
-define('TEXT_INFO_EDIT_INTRO', 'Bitte f&uuml;hren Sie alle notwendigen &Auml;nderungen durch');
-define('TEXT_INFO_CLASS_TITLE', 'Name der Steuerklasse:');
+define('TEXT_INFO_EDIT_INTRO', 'Führen Sie die gewünschten Änderungen durch.');
+define('TEXT_INFO_CLASS_TITLE', 'Steuerklassenbezeichnung:');
 define('TEXT_INFO_CLASS_DESCRIPTION', 'Beschreibung:');
-define('TEXT_INFO_DATE_ADDED', 'hinzugef&uuml;gt am:');
-define('TEXT_INFO_LAST_MODIFIED', 'letzte &Auml;nderung:');
+define('TEXT_INFO_DATE_ADDED', 'Hinzugefügt am:');
+define('TEXT_INFO_LAST_MODIFIED', 'Zuletzt geändert am:');
 define('TEXT_INFO_INSERT_INTRO', 'Bitte geben Sie die neue Steuerklasse mit allen relevanten Daten ein');
-define('TEXT_INFO_DELETE_INTRO', 'Sind Sie sicher, dass Sie diese Steuerklasse l&ouml;schen m&ouml;chten?');
-define('TEXT_INFO_HEADING_NEW_TAX_CLASS', 'neue Steuerklasse');
+define('TEXT_INFO_DELETE_INTRO', 'Sind Sie sicher, dass Sie diese Steuerklasse löschen möchten?');
+define('TEXT_INFO_HEADING_NEW_TAX_CLASS', 'Neue Steuerklasse');
 define('TEXT_INFO_HEADING_EDIT_TAX_CLASS', 'Steuerklasse bearbeiten');
-define('TEXT_INFO_HEADING_DELETE_TAX_CLASS', 'Steuerklasse l&ouml;schen');
+define('TEXT_INFO_HEADING_DELETE_TAX_CLASS', 'Steuerklasse löschen');
 ?>

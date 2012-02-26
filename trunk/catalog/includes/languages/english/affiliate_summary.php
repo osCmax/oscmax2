@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_summary.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -42,25 +38,35 @@ define('TEXT_VISITS', 'Visits: ');
 define('TEXT_TRANSACTIONS', 'Transactions: ');
 define('TEXT_CONVERSION', 'Conversion: ');
 define('TEXT_AMOUNT', 'Sales Amount: ');
-define('TEXT_AVERAGE', 'Sales Average: ');
+define('TEXT_SALES_AVERAGE', 'Sales Average: ');
 define('TEXT_COMMISSION_RATE', 'Commission Rate: ');
 define('TEXT_PAYPERSALE_RATE', 'Pay Per Sale Rate: ');
 define('TEXT_CLICKTHROUGH_RATE', 'Clickthrough Rate: ');
 define('TEXT_COMMISSION', 'Commission: ');
 define('HEADING_SUMMARY_HELP', 'Affiliate Help');
-define('TEXT_SUMMARY_HELP', '[?]');
-define('TEXT_SUMMARY', 'Click on [?] to see a description of each category.');
+define('TEXT_CLICKS_1', 'Hover over ');
+define('TEXT_CLICKS_2', ' to see a description of each category.');
+
+define('HEADING_IMPRESSIONS_HELP', 'Impressions Help');
 define('TEXT_IMPRESSIONS_HELP', '<b>Impressions:</b> displays the total number of times a banner or link has been displayed in the given time period.');
+define('HEADING_VISITS_HELP', 'Visits Help');
 define('TEXT_VISITS_HELP', '<b>Visits:</b> represents the total number of click-throughs by visitors from your website.');
+define('HEADING_TRANSACTIONS_HELP', 'Transactions Help');
 define('TEXT_TRANSACTIONS_HELP', '<b>Transactions:</b> represents the total number of successful transactions credited to your account.');
+define('HEADING_CONVERSION_HELP', 'Conversions Help');
 define('TEXT_CONVERSION_HELP', '<b>Conversions:</b> represents the percentage of visitors (click-throughs) completing a transaction.');
+define('HEADING_AMOUNT_HELP', 'Sales Amount Help');
 define('TEXT_AMOUNT_HELP', '<b>Sales Amount:</b> represents the total sales value of delivered orders credited to your account.');
+define('HEADING_AVERAGE_HELP', 'Sales Average Help');
 define('TEXT_AVERAGE_HELP', '<b>Sales Average:</b> represents the average sales value credited to your account.');
+define('HEADING_COMMISSION_RATE_HELP', 'Commission Rate Help');
 define('TEXT_COMMISSION_RATE_HELP', '<b>Commission Rate:</b> represents the rate you are paid for sales as a percentage.');
+define('HEADING_CLICKTHROUGH_RATE_HELP', 'Clickthrough Rate Help');
 define('TEXT_CLICKTHROUGH_RATE_HELP', '<b>Clickthrough Rate:</b> represents the rate you are paid for clickthroughs on a per click basis.');
+define('HEADING_PAY_PER_SALE_RATE_HELP', 'Pay Per Sale Rate Help');
 define('TEXT_PAY_PER_SALE_RATE_HELP', '<b>Pay Per Sale Rate:</b> represents the rate you are paid for sales on a sale by sale basis.');
+define('HEADING_COMMISSION_HELP', 'Commission Rate Help');
 define('TEXT_COMMISSION_HELP', '<b>Commission Rate:</b> represents the total commission owed to you.');
-define('TEXT_CLOSE_WINDOW', 'Close Window [x]');
 
 define('TEXT_GREETING','Welcome ');
 define('TEXT_AFFILIATE_ID', 'Your Affiliate ID: ');

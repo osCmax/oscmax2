@@ -1,28 +1,28 @@
 <?php
 /*
-  $Id: wishlist_email.php,v 1 2003/11/20
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
 
-define('NAVBAR_TITLE', 'Send your Wishlist');
-define('HEADING_TITLE', 'Send your Wishlist to a friend');
-define('FORM_TITLE_CUSTOMER_DETAILS', 'Your Details');
-define('FORM_FIELD_CUSTOMER_NAME', 'Your Name:');
-define('FORM_FIELD_CUSTOMER_EMAIL', 'Your Email Address:');
-define('FORM_TITLE_FRIEND_DETAILS', 'Your Friend\'s Details');
-define('FORM_FIELD_FRIEND_NAME', 'Your Friend\'s Name:');
-define('FORM_FIELD_FRIEND_EMAIL', 'Your Friend\'s Email Address:');
-define('FORM_TITLE_FRIEND_MESSAGE', 'Add a Personal Message Here');
-define('FORM_FIELD_TEXT_AREA', 'Here\'s whats on My Wishlist:'. "\n\n");
-define('TEXT_EMAIL_SUCCESSFUL_SENT', 'Your email has been successfully sent to <b>%s</b>.');
-define('TEXT_EMAIL_SUBJECT', 'Your friend %s\'s Wishlist at %s');
-define('TEXT_EMAIL_INTRO', 'Hi %s,' . "\n\n" . '%s has created a Wishlist at%s %s and would like to share it with you.');
-define('TEXT_EMAIL_SIGNATURE', 'Thank You from,' . "\n" );
+define('NAVBAR_TITLE', 'Enviar favoritos');
+define('HEADING_TITLE', 'Enviar favoritos a un amigo');
+define('FORM_TITLE_CUSTOMER_DETAILS', 'Sus datos');
+define('FORM_FIELD_CUSTOMER_NAME', 'Su nombre:');
+define('FORM_FIELD_CUSTOMER_EMAIL', 'Su correo electrónico:');
+define('FORM_TITLE_FRIEND_DETAILS', 'Datos de su amigo');
+define('FORM_FIELD_FRIEND_NAME', 'Nombre del amigo:');
+define('FORM_FIELD_FRIEND_EMAIL', 'Correo electrónico del amigo:');
+define('FORM_TITLE_FRIEND_MESSAGE', 'Añadir un mensaje personal aquí');
+define('FORM_FIELD_TEXT_AREA', 'Lo que hay en mis favoritos:'. "\n\n");
+define('TEXT_EMAIL_SUCCESSFUL_SENT', 'El e-mail ha sido enviado correctamente a <b>%s</b>.');
+define('TEXT_EMAIL_SUBJECT', 'Favoritos de tu amigo %s en %s');
+define('TEXT_EMAIL_INTRO', 'Hola %s,' . "\n\n" . '%s tiene favoritos en%s %s y le gustaría compartirlos contigo.');
+define('TEXT_EMAIL_SIGNATURE', 'Gracias desde,' . "\n" );
 ?>

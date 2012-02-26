@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: affiliate_banners.php,v 2.0 2002/09/29 SDK
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2002 -2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -40,7 +40,7 @@ define('TEXT_BANNERS_LINKED_PRODUCT','Product ID');
 define('TEXT_BANNERS_LINKED_PRODUCT_NOTE','If you want to link the Banner to a specific product enter its Products ID here. If you want to link to the default page enter "0"');
 
 define('TEXT_BANNERS_DATE_ADDED', 'Date Added:');
-define('TEXT_BANNERS_STATUS_CHANGE', 'Last Editied: %s');
+define('TEXT_BANNERS_STATUS_CHANGE', 'Last Edited: %s');
 
 define('TEXT_AFFILIATE_VALIDPRODUCTS', 'Click Here:');
 define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_VIEW', 'to view available products.');

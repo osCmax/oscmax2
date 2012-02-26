@@ -13,7 +13,7 @@ and include it in your main_page.tpl.php files for example.
 <?php
 if ((TEMPLATE_SWITCHING_ALLOWED == 'true') && (TEMPLATE_SWITCHING_MENU == 'true'))
 {
-  echo '<div id="templateSwitcher" style="text-align: center; margin: 0px auto; font-size: 12px; border-top: 1px solid #777; border-bottom: 1px solid #777; background: #c0c0c0;">';
+  echo '<div id="templateSwitcher" style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#ddd; border:solid 1px #333; padding:5px; text-align:center;">';
   echo 'Switch template:';
   $dir =  getcwd()."/templates/" ; /* get the current path and add "/templates/" to the end */
   if (is_dir($dir))
@@ -44,9 +44,14 @@ if ((TEMPLATE_SWITCHING_ALLOWED == 'true') && (TEMPLATE_SWITCHING_MENU == 'true'
   }
 if (is_array ($ts_template_array)) sort ($ts_template_array,SORT_STRING);
 foreach ($ts_template_array as $file) {
-  echo "<a style=\"color: blue; text-decoration: underline; margin: 5px;\" href=\"" . tep_href_link('index.php', 'tplDir='.$file) . "\">$file</a>"; 
+  $current_template = str_replace("templates/", "" , DIR_WS_TEMPLATES);
+  $current_template = str_replace("/", "", $current_template);
+  if ($current_template == $file) {
+    echo "<a style=\"color: red; text-decoration: underline; margin: 5px;\" href=\"" . tep_href_link('index.php', 'tplDir='.$file) . "\">$file</a>"; 
+  } else {
+	echo "<a style=\"color: blue; text-decoration: underline; margin: 5px;\" href=\"" . tep_href_link('index.php', 'tplDir='.$file) . "\">$file</a>";  
+  }
 }  
-echo '<br>Current template directory: ' .  '<span style="color: #f35c00; font-weight: bold;">' . DIR_WS_TEMPLATES . '</span>';
 echo '</div>';
 }
 ?>

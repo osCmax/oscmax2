@@ -1,4 +1,11 @@
-# $Id: .htaccess 1775 2008-01-09 19:26:55Z hpdl $
+# $Id$
+#
+#  osCmax e-Commerce
+#  http://www.oscmax.com
+#
+#  Copyright 2000 - 2011 osCmax
+#
+#  Released under the GNU General Public License
 #
 # This is used with Apache WebServers
 # The following blocks direct HTTP requests in this directory recursively

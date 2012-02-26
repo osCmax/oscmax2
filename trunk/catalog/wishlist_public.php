@@ -1,10 +1,10 @@
 <?php
 /*
-$Id: wishlist_public.php 3 2006-05-27 04:59:07Z user $
-  osCMax Power E-Commerce
-  http://oscdox.com
+$Id$
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
   Released under the GNU General Public License
 */
 
@@ -15,7 +15,7 @@ $Id: wishlist_public.php 3 2006-05-27 04:59:07Z user $
   require('includes/application_top.php');
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_WISHLIST);
 
-if(!isset($_GET['public_id']) && !isset($HTTP_POST_VARS['add_wishprod'])) {
+if(!isset($_GET['public_id']) && !isset($_POST['add_wishprod'])) {
   	tep_redirect(tep_href_link(FILENAME_DEFAULT));
 }
 
@@ -30,11 +30,11 @@ if((isset($_GET['public_id'])) && ($_GET['public_id'] == '')) {
 	$customer = tep_db_fetch_array($customer_query);
 
 // ADD PRODUCT TO SHOPPING CART
-  if (isset($HTTP_POST_VARS['add_wishprod'])) {
-	if(isset($HTTP_POST_VARS['add_prod_x'])) {
-		foreach ($HTTP_POST_VARS['add_wishprod'] as $value) {
+  if (isset($_POST['add_wishprod'])) {
+	if(isset($_POST['add_prod_x'])) {
+		foreach ($_POST['add_wishprod'] as $value) {
 			$product_id = tep_get_prid($value);
-			$cart->add_cart($product_id, $cart->get_quantity(tep_get_uprid($product_id, $HTTP_POST_VARS['id'][$value]))+1, $HTTP_POST_VARS['id'][$value]); 
+			$cart->add_cart($product_id, $cart->get_quantity(tep_get_uprid($product_id, $_POST['id'][$value]))+1, $_POST['id'][$value]); 
 		}
 	tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
 	}
@@ -44,6 +44,7 @@ if((isset($_GET['public_id'])) && ($_GET['public_id'] == '')) {
   $breadcrumb->add(NAVBAR_TITLE_WISHLIST, tep_href_link(FILENAME_WISHLIST, '', 'SSL'));
   $content = CONTENT_WISHLIST_PUBLIC;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 
 ?>

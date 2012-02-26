@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: stats_monthly_sales.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -40,7 +40,7 @@ define('TABLE_HEADING_SALES', 'Product<br> sales');
 define('TABLE_HEADING_NONTAXED', 'Exempt<br> sales');
 define('TABLE_HEADING_TAXED', 'Taxable<br> sales');
 define('TABLE_HEADING_TAX_COLL', 'Taxes<br> collected');
-define('TABLE_HEADING_SHIPHNDL', 'Shipping<br> & Handling');
+define('TABLE_HEADING_SHIPHNDL', 'Shipping<br> &amp; Handling');
 define('TABLE_HEADING_LOWORDER', 'Low Order<br> Fees');
 define('TABLE_HEADING_OTHER', 'Gift<br> Vouchers');  // could be any other extra class value
 define('TABLE_FOOTER_YTD','YTD');
@@ -52,6 +52,7 @@ define('TEXT_HELP', '<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title>Monthly Sales/Tax Report</title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 </head>
 <BODY>
 <center>
@@ -80,7 +81,7 @@ On the left, the month and year of the row are stated.  The other columns are, l
 <li class="smallText"><b>Nontaxed sales</b> - the subtotal of sales which were not taxed, and 
 <li class="smallText"><b>Taxed sales</b> - the subtotal of sales which were taxed
 <li class="smallText"><b>Taxes collected</b> - the amount collected from customers for taxes
-<li class="smallText"><b>Shipping & handling</b> - the total shipping and handling charges collected  
+<li class="smallText"><b>Shipping &amp; handling</b> - the total shipping and handling charges collected  
 <li class="smallText"><b>Low order fees</b> and <b>Gift Vouchers</b> - if the store has low order fees enabled, and/or gift vouchers, the totals of these are shown in separate columns
 </ul>
 <p class="main" align="justify">

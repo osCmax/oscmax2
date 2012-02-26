@@ -1,43 +1,43 @@
 <?php
 /*
-$Id: gv_send.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Send Gift Voucher');
-define('NAVBAR_TITLE', 'Send Gift Voucher');
-define('EMAIL_SUBJECT', 'Enquiry from ' . STORE_NAME);
-define('HEADING_TEXT','<br>Please enter the details of the Gift Voucher you wish to send below. For more information, please see our <a href="' . tep_href_link(FILENAME_GV_FAQ,'','NONSSL').'">'.GV_FAQ.'.</a><br>');
-define('ENTRY_NAME', 'Recipient\'s Name:');
-define('ENTRY_EMAIL', 'Recipient\'s E-Mail Address:');
-define('ENTRY_MESSAGE', 'Message to Recipient:');
-define('ENTRY_AMOUNT', 'Amount of Gift Voucher:');
-define('ERROR_ENTRY_AMOUNT_CHECK', '&nbsp;&nbsp;<span class="errorText">Invalid Amount</span>');
-define('ERROR_ENTRY_EMAIL_ADDRESS_CHECK', '&nbsp;&nbsp;<span class="errorText">Invalid Email Address</span>');
-define('MAIN_MESSAGE', 'You have decided to post a gift voucher worth %s to %s who\'s email address is %s<br><br>The text accompanying the email will read<br><br>Dear %s<br><br>
-                        You have been sent a Gift Voucher worth %s by %s');
+define('HEADING_TITLE','Enviar cheque regalo');
+define('NAVBAR_TITLE','Enviar cheque regalo');
+define('EMAIL_SUBJECT', 'Mensaje de ' . STORE_NAME);
+define('HEADING_TEXT','<br>Por favor, introduzca los detalles del cheque regalo que desea enviar a continuación. Para obtener más información, consulte nuestras ');
+define('ENTRY_NAME','Nombre del beneficiario:');
+define('ENTRY_EMAIL','E-mail del destinatario:');
+define('ENTRY_MESSAGE','Mensaje para el destinatario:');
+define('ENTRY_AMOUNT','Importe del cheque regalo:');
+define('ERROR_ENTRY_AMOUNT_CHECK','&nbsp;&nbsp;<span class="errorText">Importe no válido</span>');
+define('ERROR_ENTRY_EMAIL_ADDRESS_CHECK', '&nbsp;&nbsp;<span class="errorText">Dirección e-mail no válida</span>');
+define('MAIN_MESSAGE', 'Ha decidido enviar un cheque regalo por valor de %s a %s cuya dirección de e-mail es %s<br><br>El texto que acompañará al e-mail será<br><br>Estimado/a %s<br><br>
+                        Has sido obsequiado con un cheque regalo por valor de %s por %s');
 
-define('PERSONAL_MESSAGE', '%s says');
-define('TEXT_SUCCESS', 'Congratulations, your Gift Voucher has successfully been sent');
+define('PERSONAL_MESSAGE','%s dice');
+define('TEXT_SUCCESS','Felicidades, tu cheque regalo ha sido enviado con éxito');
 
 
 define('EMAIL_SEPARATOR', '----------------------------------------------------------------------------------------');
-define('EMAIL_GV_TEXT_HEADER', 'Congratulations, You have received a gift voucher worth %s');
-define('EMAIL_GV_TEXT_SUBJECT', 'A gift from %s');
-define('EMAIL_GV_FROM', 'This Gift Voucher has been sent to you by %s');
-define('EMAIL_GV_MESSAGE', 'With a message saying ');
-define('EMAIL_GV_SEND_TO', 'Hi, %s');
-define('EMAIL_GV_REDEEM', 'To redeem this Gift Voucher, please click on the link below. Please also write down the redemption code which is %s. In case you have problems.');
-define('EMAIL_GV_LINK', 'To redeem please click ');
-define('EMAIL_GV_VISIT', ' or visit ');
-define('EMAIL_GV_ENTER', ' and enter the code ');
-define('EMAIL_GV_FIXED_FOOTER', 'If you are having problems redeeming the Gift Voucher using the automated link above, ' . "\n" . 
-                                'you can also enter the Gift Voucher code during the checkout process at our store.' . "\n\n");
+define('EMAIL_GV_TEXT_HEADER','Felicidades, ha recibido un cheque regalo por valor de %s');
+define('EMAIL_GV_TEXT_SUBJECT','Un regalo de %s');
+define('EMAIL_GV_FROM','Este cheque regalo ha sido enviada por %s');
+define('EMAIL_GV_MESSAGE','Con un mensaje que dice: ');
+define('EMAIL_GV_SEND_TO','Hola, %s');
+define('EMAIL_GV_REDEEM','Para canjear este cheque regalo, por favor pulsa en el enlace de abajo. Por favor escriba también el código de canjeo que es %s por si surgiera algún problema.');
+define('EMAIL_GV_LINK','Para canjear por favor pulse en ');
+define('EMAIL_GV_VISIT',' o visite ');
+define('EMAIL_GV_ENTER',' e introduzca el código ');
+define('EMAIL_GV_FIXED_FOOTER','Si tiene problemas para canjear el cheque regalo mediante el enlace automatizado de arriba, ' . "\n" .
+								'también puede introducir el código del cheque regalo durante el proceso de compra en nuestra tienda.' . "\n\n");
 define('EMAIL_GV_SHOP_FOOTER', '');
 ?>

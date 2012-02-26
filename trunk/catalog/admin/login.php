@@ -1,37 +1,45 @@
 <?php
 /*
-$Id: login.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
 
-  if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'process')) {
-    $username = tep_db_prepare_input($HTTP_POST_VARS['username']);
-    $password = tep_db_prepare_input($HTTP_POST_VARS['password']);
+  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
+    $username = tep_db_prepare_input($_POST['username']);
+    $password = tep_db_prepare_input($_POST['password']);
 
 // Check if usename exists
     $check_admin_query = tep_db_query("select admin_id as login_id, admin_groups_id as login_groups_id, admin_username as login_username, admin_password as login_password, admin_modified as login_modified, admin_logdate as login_logdate, admin_lognum as login_lognum from " . TABLE_ADMIN . " where admin_username = '" . tep_db_input($username) . "'");
     if (!tep_db_num_rows($check_admin_query)) {
-      $HTTP_GET_VARS['login'] = 'fail';
+
+//Added by PGM
+    tep_db_query("insert into " . TABLE_ADMIN_LOG . " values (NULL, '" . $username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Username', now())");
+
+      $_GET['login'] = 'fail';
     } else {
       $check_admin = tep_db_fetch_array($check_admin_query);
       // Check that password is good
       if (!tep_validate_password($password, $check_admin['login_password'])) {
-        $HTTP_GET_VARS['login'] = 'fail';
+
+//Added by PGM
+    tep_db_query("insert into " . TABLE_ADMIN_LOG . " values (NULL, '" . $username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Wrong Password', now())");
+
+        $_GET['login'] = 'fail';
       } else {
         if (tep_session_is_registered('password_forgotten')) {
           tep_session_unregister('password_forgotten');
         }
 
         $login_id = $check_admin['login_id'];
-        $login_groups_id = $check_admin[login_groups_id];
+        $login_groups_id = $check_admin['login_groups_id'];
         $login_username = $check_admin['login_username'];
         $login_logdate = $check_admin['login_logdate'];
         $login_lognum = $check_admin['login_lognum'];
@@ -43,6 +51,9 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 
         //$date_now = date('Ymd');
         tep_db_query("update " . TABLE_ADMIN . " set admin_logdate = now(), admin_lognum = admin_lognum+1 where admin_id = '" . $login_id . "'");
+
+//Added by PGM
+    tep_db_query("insert into " . TABLE_ADMIN_LOG . " values (NULL, '" . $login_username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged In', now())");
 
 // There is no more default ADMIN - so don't need to check for DEFAULT user
 //      if (($login_lognum == 0) || !($login_logdate) || ($login_email_address == 'admin@localhost') || ($login_modified == '0000-00-00 00:00:00')) {
@@ -65,31 +76,31 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body onLoad="document.login.username.focus()">
 
-<table border="0" width="600" height="100%" cellspacing="0" cellpadding="0" align="center" valign="middle">
-  <tr>
-    <td><table border="0" width="600" height="440" cellspacing="0" cellpadding="1" align="center" valign="middle">
-      <tr bgcolor="#000000">
-        <td><table border="0" width="600" height="440" cellspacing="0" cellpadding="0">
-          <tr bgcolor="#ffffff" height="50">
-            <td height="50"><?php echo '<a href="http://www.oscmax.com">' . tep_image(DIR_WS_IMAGES . 'oscmax-logo.png', 'osCMax v2.0', '85', '80') . '</a>'; ?></td>
-            <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.aabox.com/" target="_blank" class="headerLink">osCMax Hosting</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.oscdox.com" class="headerLink">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp;</td>
+<table border="0" width="600" cellspacing="0" cellpadding="0" align="center" style="height:100%;">
+  <tr valign="middle">
+    <td><table border="0" width="600" cellspacing="0" cellpadding="1" align="center" style="height:440px;">
+      <tr bgcolor="#000000" valign="middle">
+        <td><table border="0" width="600" cellspacing="0" cellpadding="0" style="height:440px">
+          <tr bgcolor="#ffffff">
+            <td height="50"><?php echo '<a href="http://www.oscmax.com">' . tep_image(DIR_WS_ADMIN . DIR_WS_ICONS . 'logo.png', PROJECT_VERSION, '187', '54') . '</a>'; ?></td>
+            <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.oscmax.com/" target="_blank" class="headerLink">' . HEADER_TITLE_AABOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://shop.oscmax.com" class="headerLink">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://wiki.oscdox.com" class="headerLink">Wiki</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp;</td>
           </tr>
           <tr bgcolor="#E7E7E7">
             <td colspan="2" align="center" valign="middle">
                           <?php echo tep_draw_form('login', FILENAME_LOGIN, 'action=process'); ?>
-                            <table width="280" border="0" cellspacing="0" cellpadding="2">
+                            <table width="320" border="0" cellspacing="0" cellpadding="2">
                               <tr>
                                 <td class="login_heading" valign="top">&nbsp;<b><?php echo HEADING_RETURNING_ADMIN; ?></b></td>
                               </tr>
                               <tr>
                                 <td height="100%" valign="top" align="center">
-                                <table border="0" height="100%" cellspacing="0" cellpadding="1" bgcolor="#666666">
+                                <table border="0" cellspacing="0" cellpadding="1" bgcolor="#666666" style="height:100%; width:100%;">
                                   <tr><td>
-                                    <table border="0" width="100%" height="100%" cellspacing="3" cellpadding="2" bgcolor="#F3F3F3">
+                                    <table border="0" width="100%" cellspacing="3" cellpadding="2" bgcolor="#F3F3F3" style="height:100%">
 <?php
-  if ($HTTP_GET_VARS['login'] == 'fail') {
+  if (isset($_GET['login']) && ($_GET['login'] == 'fail')) {
     $info_message = TEXT_LOGIN_ERROR;
   }
 
@@ -108,15 +119,15 @@ $Id: login.php 3 2006-05-27 04:59:07Z user $
   }
 ?>
                             <tr>
-                              <td class="login"><?php echo ENTRY_USERNAME; ?></td>
+                              <td class="login" align="right"><?php echo ENTRY_USERNAME; ?></td>
                               <td class="login"><?php echo tep_draw_input_field('username'); ?></td>
                             </tr>
                             <tr>
-                              <td class="login"><?php echo ENTRY_PASSWORD; ?></td>
+                              <td class="login" align="right"><?php echo ENTRY_PASSWORD; ?></td>
                               <td class="login"><?php echo tep_draw_password_field('password'); ?></td>
                             </tr>
                             <tr>
-                              <td colspan="2" align="right" valign="top"><?php echo tep_image_submit('button_confirm.gif', IMAGE_BUTTON_LOGIN); ?></td>
+                              <td colspan="2" align="right" valign="top"><?php echo tep_image_submit('button_confirm.gif', IMAGE_BUTTON_LOGIN); ?>&nbsp;</td>
                             </tr>
                           </table>
                         </td></tr>

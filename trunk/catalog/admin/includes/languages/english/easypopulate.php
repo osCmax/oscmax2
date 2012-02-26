@@ -1,11 +1,13 @@
 <?php
 /*
-$Id: easypopulate.php 3 2006-05-27 04:59:07Z user $
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
   Released under the GNU General Public License
-
-  Borja Bravo Alférez
-  Item Consulting, 
-
 */
 
 define('EP', 			'EasyPopulate');

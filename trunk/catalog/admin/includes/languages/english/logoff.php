@@ -1,17 +1,17 @@
 <?php
 /*
-  $Id $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
 define('HEADING_TITLE', 'Log Off');
 define('NAVBAR_TITLE', 'Log Off');
-define('TEXT_MAIN', 'You have been logged-off from <b>Admin</b> area. It is safe to leave the computer now. Click back to relogin');
+define('TEXT_MAIN', 'You have been logged-off from <b>Admin</b> area. It is safe to leave the computer now. Click the back button to relogin.');
 define('TEXT_RELOGIN', 're-login');
 ?>

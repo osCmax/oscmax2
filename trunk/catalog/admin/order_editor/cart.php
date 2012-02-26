@@ -1,11 +1,10 @@
 <?php
 /*
-  $Id: cart.php v5.0 07/19/2007 djmonkey1 Exp $
+$Id$
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2007 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -99,7 +98,7 @@ var $shiptotal;
         $qty = $this->contents[$products_id]['qty'];
 
 // products price
-        $product_query = tep_db_query("select products_id, products_price, products_ship_price, products_tax_class_id, products_weight from " . TABLE_PRODUCTS . " where products_id='" . tep_get_prid($products_id) . "'");
+        $product_query = tep_db_query("select products_id, products_price, products_tax_class_id, products_weight from " . TABLE_PRODUCTS . " where products_id='" . tep_get_prid($products_id) . "'");
         if ($product = tep_db_fetch_array($product_query)) {
           $prid = $product['products_id'];
           $products_tax = tep_get_tax_rate($product['products_tax_class_id']);

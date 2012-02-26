@@ -1,23 +1,23 @@
 <?php
 /*
-  $Id: server_info.php 1785 2008-01-10 15:07:07Z hpdl $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2008 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
 
-  if(isset($HTTP_GET_VARS['action'])){
-  	$doctor_action = $HTTP_GET_VARS['action'];
+  if(isset($_GET['action'])){
+  	$doctor_action = $_GET['action'];
   }
   
-  if(isset($HTTP_GET_VARS['pID'])){
-  	$products_id = $HTTP_GET_VARS['pID'];
+  if(isset($_GET['pID'])){
+  	$products_id = $_GET['pID'];
   }
   
 ?>
@@ -27,8 +27,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -36,23 +37,16 @@
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
 <!-- left_navigation //-->
 <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
 <!-- left_navigation_eof //-->
-    </table></td>
+      </table>
+    </td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <!--<tr>
-        <td>
-		<table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo 'QTPro Doctor';//echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right">&nbsp;</td>
-          </tr>
-        </table>
-		</td>
-      </tr>-->
+    <td width="75%" valign="top">
+    <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td>
 		<?php 
@@ -65,31 +59,29 @@
 					}
 				break;
 				case 'amputate':
-					print qtpro_doctor_amputate_bad_from_product($products_id).' database entries where amputated';
+				 	print '<p class="messageStackWarning">' . tep_image(DIR_WS_ICONS . 'database_error.png', '', '') . '&nbsp;&nbsp;' . qtpro_doctor_amputate_bad_from_product($products_id) . ' database entries were amputated</p>';
 					qtpro_update_summary_stock($products_id);
 				break;
 				case 'chuck_trash':
-					print qtpro_chuck_trash().' database entries where identified as trash and deleted.';
+					print '<p class="messageStackWarning">' . tep_image(DIR_WS_ICONS . 'database_error.png') . '&nbsp;&nbsp;' . qtpro_chuck_trash() . ' database entries were identified as trash and deleted.</p>';
 				break;
 				case 'update_summary':
 					qtpro_update_summary_stock($products_id);
-					print 'The summary stock for the product was updated.';
+					print '<p class="messageStackSuccess">' . tep_image(DIR_WS_ICONS . 'tick.png') . '&nbsp;&nbsp;The summary stock for the product was updated.</p>';
 				break;
-				
-				
-				
 				default:
-					print "<h1 class=\"pageHeading\">QTPro Doctor - Overview</h1>";
-					print "You currently have <b>". qtpro_normal_product_count()."</b> products in your store.<br>";
-					print "<b>".qtpro_tracked_product_count()."</b> of them have options with tracked stock.<br>";
-					print "In the database we currently have <b>". qtpro_number_of_trash_stock_rows() . "</b> trash rows.";
-					//print "<b>".qtpro_sick_product_count()."</b> of the producks with tracked stock is sick.<br><br>";
-					qtpro_doctor_formulate_database_investigation();
-
 					
-				break;
-			
+				break;			
 			}
+			
+					print "<h1 class=\"pageHeading\">QTPro Doctor - Overview</h1>";
+					print "<table><tr><td class='main'>You currently have <b>" . qtpro_normal_product_count() . " active</b> and <b>" . qtpro_inactive_product_count() . " inactive</b> products in your store</td></tr>";
+					print "<tr><td class='main'><b>" . qtpro_tracked_product_count() . "</b> of the active stocks and <b>" . qtpro_inactive_tracked_product_count() . "</b> of the inactive stocks have options with tracked stock.</td></tr>";
+					print "<tr><td class='main'>In the database we currently have <b>" . qtpro_number_of_trash_stock_rows() . "</b> trash rows.</td></tr></table>";
+					//print "<b>".qtpro_sick_product_count()."</b> of the products with tracked stock is sick.<br><br>";
+					qtpro_doctor_formulate_database_investigation();
+					qtpro_doctor_formulate_inactive_database_investigation();
+
 		?>
 
 		</td>
@@ -99,6 +91,9 @@
       </tr>
     </table>
 	</td>
+    <td width="25%">
+      <!-- Placeholder for right hand column -->
+    </td>
 <!-- body_text_eof //-->
   </tr>
 </table>

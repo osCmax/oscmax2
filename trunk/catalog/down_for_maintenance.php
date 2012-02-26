@@ -1,6 +1,6 @@
 <?php
 /*
-$Id: down_for_maintenance.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
   Created by: Linda McGrath osCOMMERCE@WebMakers.com
   
@@ -9,10 +9,10 @@ $Id: down_for_maintenance.php 3 2006-05-27 04:59:07Z user $
 
   down_for_maintenance.php v1.1
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -30,7 +30,8 @@ $Id: down_for_maintenance.php 3 2006-05-27 04:59:07Z user $
 
   $content = CONTENT_DOWN_FOR_MAINT;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
 
  require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

@@ -1,23 +1,13 @@
 <?php
 /*
-$Id: packaging.php 3 2006-05-27 04:59:07Z user $
-    
-    Copyright 2006 osCMax2003 Torin Walker
-    
-    This program is free software; you can redistribute it and/or modify it under the terms
-    of the GNU General Public License as published by the Free Software Foundation; either
-    version 2 of the License, or (at your option) any later version.
-    
-    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU General Public License for more details.
-    
-    You should have received a copy of the GNU General Public License along with this program;
-    If not, you may obtain one by writing to and requesting one from
-    
-    The Free Software Foundation, Inc.,
-    59 Temple Place, Suite 330,
-    Boston, MA 02111-1307 USA
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 
 require('includes/application_top.php');
@@ -31,8 +21,9 @@ $currencies = new currencies();
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -42,19 +33,19 @@ $currencies = new currencies();
   <tr>
     <td width="<?php echo BOX_WIDTH; ?>" valign="top">
       <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
+      <!-- left_navigation //-->
+      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+      <!-- left_navigation_eof //-->
       </table>
-        </td>
+    </td>
 <!-- body_text //-->
-        <td width="100%" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td class="pageHeading"><?php echo HEADING_TITLE; ?>
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td class="dataTableContent" width="75%" valign="top">
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <tr>
+          <td class="pageHeading"><?php echo HEADING_TITLE; ?>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="dataTableContent" width="75%" valign="top">
 <?php
 $activeid = $_GET['id'];
 
@@ -137,7 +128,7 @@ function getPackages() {
 function DisplayPackages($activeid,$error) {
 ?>
 
-    <table border="0" width="100%" cellspacing="0" cellpadding="2" width="100%">
+    <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr class="dataTableHeadingRow">
         <td class="dataTableHeadingContent"><?php echo HEADING_NAME; ?></td>
         <td class="dataTableHeadingContent" align="left"><?php echo HEADING_DESCRIPTION; ?></td>
@@ -153,7 +144,7 @@ function DisplayPackages($activeid,$error) {
     <?php
     $packages = getPackages();
     if (count($packages) == 0) {
-        echo                         '<tr><td colspan="8">' . NO_PACKAGES_DEFINED . '</td></tr>';
+        echo                         '<tr><td colspan="8">' . NO_PACKAGES_DEFINED;
     }
     if ($error != "") {
         echo '<SPAN class="errorText">'.$error.'</SPAN>';
@@ -179,18 +170,18 @@ function DisplayPackages($activeid,$error) {
         echo '<td class="dataTableContent" align="center"><br>' . $packages[$i]['cost'] . '</td>';
 
         if ($activeid == $packages[$i]['id'] ) { 
-            echo '<td>' . tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); 
+            echo '<td>' . tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); 
         } else { 
-            echo '<td><a href="' . tep_href_link(FILENAME_PACKAGING, 'id=' . $packages[$i]['id'] ). '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', ICON_INFO) . '</a>'; 
+            echo '<td><a href="' . tep_href_link(FILENAME_PACKAGING, 'id=' . $packages[$i]['id'] ). '">' . tep_image(DIR_WS_ICONS . 'information.png', ICON_INFO) . '</a>'; 
         }
     }
     echo '</td></tr></table><br>'."\n";
-    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=shownewpackageform') .  '">'.tep_image_button('button_new_package.gif', 'New Package').'</a>&nbsp;';
+    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=shownewpackageform') .  '">'.tep_image_button('button_new_package.gif', IMAGE_NEW_PACKAGE).'</a>&nbsp;';
     if ($activeid == "") {
         $activeid = $packages[0]['id'];
         }
-    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=showupdatepackageform&id='.$activeid.'') . '">'.tep_image_button('button_edit.gif', IMAGE_EDIT).'</a>&nbsp;' ;	 
-    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=showconfirmdeletepackageform&id='.$activeid.'') . '">'.tep_image_button('button_delete.gif', IMAGE_DELETE).'</a>' ;
+    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=showupdatepackageform&amp;id='.$activeid.'') . '">'.tep_image_button('button_edit.gif', IMAGE_EDIT).'</a>&nbsp;' ;	 
+    echo '<a href="' . tep_href_link( FILENAME_PACKAGING , 'Action=showconfirmdeletepackageform&amp;id='.$activeid.'') . '">'.tep_image_button('button_delete.gif', IMAGE_DELETE).'</a>' ;
    echo '</td><td class="infoBoxContent" valign="top">'."\n";
 }
 
@@ -218,7 +209,7 @@ function showNewPackageForm() {
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_EMPTY_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_EMPTY_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("empty_weight").'</td></tr>'."\n";
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_MAX_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_MAX_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("max_weight").'</td></tr>'."\n";
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_COST.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_COST_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("cost", $cost).'</td></tr>';
-    echo '<tr><td colspan="2">'. tep_image_submit('button_update.gif', 'Save these values as a new package.') ;
+    echo '<tr><td colspan="2">'. tep_image_submit('button_update.gif', IMAGE_SAVE_AS_NEW) ;
     echo '&nbsp;&nbsp;<a href="' . tep_href_link( FILENAME_PACKAGING ) . '">'.tep_image_button('button_cancel.gif', IMAGE_CANCEL) .'</A>' ;	 
     echo "</td></tr></table>" ;
     echo ("</form>");
@@ -248,7 +239,7 @@ function showUpdatePackageForm() {
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_EMPTY_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_EMPTY_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("empty_weight", $activepackage['empty_weight']).'</td></tr>'."\n";
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_MAX_WEIGHT.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_MAX_WEIGHT_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("max_weight", $activepackage['max_weight']).'</td></tr>'."\n";
     echo '<tr><td class="infoBoxContent"><b>'.HEADING_COST.'</b></td></tr><tr><td class="infoBoxContent">'.HEADING_COST_TEXT.'</td></tr><tr><td class="infoBoxContent">'.tep_draw_input_field("cost", $activepackage['cost']).'</td></tr>';
-    echo '<tr><td colspan="2">'. tep_image_submit('button_update.gif', 'Update the package with these values.') ;
+    echo '<tr><td colspan="2">'. tep_image_submit('button_update.gif', IMAGE_UPDATE_PACKAGE) ;
     echo '&nbsp;&nbsp;<a href="' . tep_href_link( FILENAME_PACKAGING,'id='.$activepackage['id'] ) . '">'.tep_image_button('button_cancel.gif', IMAGE_CANCEL) .'</a>'."\n";	 
     echo "</td></tr></table>\n" ;
     echo ("</form>\n");
@@ -316,9 +307,14 @@ function showPackageInfoForm() {
       </tr>
     </table> 
   </td>
-<!-- body_text_eof //--></tr>
+  </tr>
+  </table>
+  </td>
+  
+<!-- body_text_eof //-->
+</tr>
 <!-- body_eof //-->
-
+</table>
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->

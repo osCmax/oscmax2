@@ -1,18 +1,18 @@
 <?php
 /*
-$Id: stats_products_viewed.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'meist besuchte Artikel');
+define('HEADING_TITLE', 'Meistbesuchte Artikel');
 
 define('TABLE_HEADING_NUMBER', 'Nr.');
-define('TABLE_HEADING_PRODUCTS', 'Artikel');
-define('TABLE_HEADING_VIEWED', 'Besucher');
+define('TABLE_HEADING_PRODUCTS', 'Produkte');
+define('TABLE_HEADING_VIEWED', 'Besucht');
 ?>

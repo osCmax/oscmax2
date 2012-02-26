@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: packingslip.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -15,7 +15,7 @@ $Id: packingslip.php 3 2006-05-27 04:59:07Z user $
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
-  $oID = tep_db_prepare_input($HTTP_GET_VARS['oID']);
+  $oID = tep_db_prepare_input($_GET['oID']);
   $orders_query = tep_db_query("select orders_id from " . TABLE_ORDERS . " where orders_id = '" . (int)$oID . "'");
 
   include(DIR_WS_CLASSES . 'order.php');
@@ -27,15 +27,16 @@ $Id: packingslip.php 3 2006-05-27 04:59:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- body_text //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
   <tr>
     <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td class="pageHeading"><?php echo nl2br(STORE_NAME_ADDRESS); ?></td>
-        <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . 'store_logo.gif', STORE_NAME); ?></td>
+        <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_CATALOG . 'templates/' . DIR_WS_TEMPLATES_DEFAULT . '/images/' . STORE_LOGO, STORE_NAME); ?></td>
       </tr>
     </table></td>
   </tr>
@@ -105,7 +106,7 @@ if ($the_customers_fax) {
       </tr>
 <!-- add date/time // -->
       <tr>
-        <td class="main"><b>Date & Time</b></td>
+        <td class="main"><b>Date &amp; Time</b></td>
         <td class="main"><?php echo tep_datetime_short($order->info['date_purchased']); ?></td>
       </tr>
       <tr>
@@ -143,9 +144,13 @@ if ($the_customers_fax) {
         }
       }
 
-      echo '        </td>' . "\n" .
-           '        <td class="dataTableContent" valign="top">' . $order->products[$i]['model'] . '</td>' . "\n" .
-           '      </tr>' . "\n";
+      echo '            </td>' . "\n";
+      if(tep_not_null($order->products[$i]['code'])){
+         echo '            <td class="dataTableContent" valign="top">' .  $order->products[$i]['code'] . '</td>' . "\n" ;
+       } else {
+         echo '            <td class="dataTableContent" valign="top">' .  $order->products[$i]['model'] . '</td>' . "\n" ;
+       }
+      echo '      </tr>' . "\n";
     }
 ?>
     </table></td>

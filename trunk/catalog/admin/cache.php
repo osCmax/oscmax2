@@ -1,22 +1,22 @@
 <?php
 /*
-$Id: cache.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
 
-  $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   if (tep_not_null($action)) {
     if ($action == 'reset') {
-      tep_reset_cache_block($HTTP_GET_VARS['block']);
+      tep_reset_cache_block($_GET['block']);
     }
 
     tep_redirect(tep_href_link(FILENAME_CACHE));
@@ -35,9 +35,10 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -79,31 +80,56 @@ $Id: cache.php 3 2006-05-27 04:59:07Z user $
       }
     }
 
-    for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
-      $cached_file = ereg_replace('-language', '-' . $language, $cache_blocks[$i]['file']);
-
-      if (file_exists(DIR_FS_CACHE . $cached_file)) {
-        $cache_mtime = strftime(DATE_TIME_FORMAT, filemtime(DIR_FS_CACHE . $cached_file));
-      } else {
-        $cache_mtime = TEXT_FILE_DOES_NOT_EXIST;
+//    for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
+//       $cached_file = ereg_replace('-language', '-' . $language, $cache_blocks[$i]['file']);
+// 
+//       if (file_exists(DIR_FS_CACHE . $cached_file)) {
+//         $cache_mtime = strftime(DATE_TIME_FORMAT, filemtime(DIR_FS_CACHE . $cached_file));
+//       } else {
+//         $cache_mtime = TEXT_FILE_DOES_NOT_EXIST;
+//         $dir = dir(DIR_FS_CACHE);
+// 
+//         while ($cache_file = $dir->read()) {
+//           $cached_file = ereg_replace('-language', '-' . $language, $cache_blocks[$i]['file']);
+// 
+//           if (ereg('^' . $cached_file, $cache_file)) {
+//             $cache_mtime = strftime(DATE_TIME_FORMAT, filemtime(DIR_FS_CACHE . $cache_file));
+//             break;
+//           }
+//         }
+// 
+//         $dir->close();
+//       }
+// adapted for Hide products and categories from customer groups for SPPC 2008/08/02
         $dir = dir(DIR_FS_CACHE);
+        $cached_file_array = array();
 
         while ($cache_file = $dir->read()) {
-          $cached_file = ereg_replace('-language', '-' . $language, $cache_blocks[$i]['file']);
+          if (strstr($cache_file, '.cache')) {
+          $cached_file_array[] = explode('.cache' , $cache_file);
+          }
+        }
+          $dir->close();
 
-          if (ereg('^' . $cached_file, $cache_file)) {
-            $cache_mtime = strftime(DATE_TIME_FORMAT, filemtime(DIR_FS_CACHE . $cache_file));
+      for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
+        $cache_mtime = TEXT_FILE_DOES_NOT_EXIST;
+        $cache_block_file = ereg_replace('-language', '-' . $language, $cache_blocks[$i]['file']);
+
+      foreach($cached_file_array as $key => $sub_cached_file_array) {
+         // if the file name starts with the kind of file we are looking for, example: categories_box-english
+           if (strpos($sub_cached_file_array[0], $cache_block_file, 0) !== false) {
+            $name_of_file = $sub_cached_file_array[0] . '.cache' . $sub_cached_file_array[1];
+            $cache_mtime = strftime(DATE_TIME_FORMAT, filemtime(DIR_FS_CACHE . $name_of_file));
+            // if one file per kind exist, then we know if there is at least one cache file so break
             break;
           }
         }
 
-        $dir->close();
-      }
 ?>
-              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)">
+              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
                 <td class="dataTableContent"><?php echo $cache_blocks[$i]['title']; ?></td>
                 <td class="dataTableContent" align="right"><?php echo $cache_mtime; ?></td>
-                <td class="dataTableContent" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_CACHE, 'action=reset&block=' . $cache_blocks[$i]['code'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . 'icon_reset.gif', 'Reset', 13, 13) . '</a>'; ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_CACHE, 'action=reset&amp;block=' . $cache_blocks[$i]['code'], 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'icon_reset.gif', 'Reset', 13, 13) . '</a>'; ?>&nbsp;</td>
               </tr>
 <?php
     }

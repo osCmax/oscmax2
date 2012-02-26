@@ -1,13 +1,11 @@
 <?php
 /*
-  $Id: gv_send.php,v 1.1.2.1 2003/04/18 17:25:44 wilt Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
-
-  French version Copyrite 2003 - Configure That! Computer Services
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -15,7 +13,7 @@
 define('HEADING_TITLE', 'Envoyer un ch&egrave;que cadeau');
 define('NAVBAR_TITLE', 'Envoyer un ch&egrave;que cadeau');
 define('EMAIL_SUBJECT', 'Envoyez par ' . STORE_NAME);
-define('HEADING_TEXT','<br>Remplissez ci-dessous le formulaire pour envoyer un ch&egrave;que cadeau &agrave; un(e) ami(e) ou un membre de la famille. Pour plus d\'information, veuillez consulter notre <a href="' . tep_href_link(FILENAME_GV_FAQ,'','NONSSL').'">'.FAQ.'.</a><br><br>');
+define('HEADING_TEXT','<br>Remplissez ci-dessous le formulaire pour envoyer un ch&egrave;que cadeau &agrave; un(e) ami(e) ou un membre de la famille. Pour plus d\'information, veuillez consulter notre ');
 define('ENTRY_NAME', 'Nom du destinataire :');
 define('ENTRY_EMAIL', 'Adresse email du destinataire :');
 define('ENTRY_MESSAGE', 'Votre Message :');

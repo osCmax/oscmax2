@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: gv_redeem.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Gift Voucher System v1.0
   Copyright 2006 osCMax2001, 2002 Ian C Wilson
@@ -24,12 +24,12 @@ $Id: gv_redeem.php 14 2006-07-28 17:42:07Z user $
 // if the customer is not logged on, redirect them to the login page
 if (!tep_session_is_registered('customer_id')) {
 $navigation->set_snapshot();
-tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+tep_redirect(tep_href_link(FILENAME_LOGIN, 'gv_message=1', 'SSL'));
 }
 // check for a voucher number in the url
-  if (isset($HTTP_GET_VARS['gv_no'])) {
+  if (isset($_GET['gv_no'])) {
     $error = true;
- $voucher_number=tep_db_prepare_input($HTTP_GET_VARS['gv_no']);
+ $voucher_number=tep_db_prepare_input($_GET['gv_no']);
     $gv_query = tep_db_query("select c.coupon_id, c.coupon_amount from " . TABLE_COUPONS . " c, " . TABLE_COUPON_EMAIL_TRACK . " et where coupon_code = '" . addslashes($voucher_number) . "' and c.coupon_id = et.coupon_id");
     if (tep_db_num_rows($gv_query) >0) {
       $coupon = tep_db_fetch_array($gv_query);
@@ -64,7 +64,8 @@ tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
 
   $content = CONTENT_GV_REDEEM;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 
   ?>

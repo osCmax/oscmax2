@@ -1,24 +1,21 @@
 <?php
 /*
-$Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Meinungen');
+define('NAVBAR_TITLE', 'Bewertungen');
 
-define('SUB_TITLE_FROM', 'Autor:');
-define('SUB_TITLE_REVIEW', 'Ihre Meinung:');
-define('SUB_TITLE_RATING', 'Bewertung:');
+define('SUB_TITLE_FROM', 'Von:');
+define('SUB_TITLE_REVIEW', 'Ihre Bewertung:');
 
-define('TEXT_NO_HTML', '<small><font color="#ff0000"><b>ACHTUNG:</b></font></small>&nbsp;HTML wird nicht unterst&uuml;tzt!');
-define('TEXT_BAD', '<small><font color="#ff0000"><b>SCHLECHT</b></font></small>');
-define('TEXT_GOOD', '<small><font color="#ff0000"><b>SEHR GUT</b></font></small>');
+define('TEXT_NO_HTML', '<small><font color="#ff0000"><b>HINWEIS:</b></font></small>&nbsp;HTML wird nicht unterstützt!');
 
-define('TEXT_CLICK_TO_ENLARGE', 'F&uuml;r eine gr&ouml;ssere Darstellung<br>klicken Sie auf das Bild.');
+define('TEXT_CLICK_TO_ENLARGE', 'Bild vergrößern.');
 ?>

@@ -1,74 +1,70 @@
 <?php
 /*
-$Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
-  
-  Contribution based on:
-  
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Affiliate Payment');
-define('HEADING_TITLE_SEARCH', 'Search:');
-define('HEADING_TITLE_STATUS','Status:');
+define('HEADING_TITLE', 'Pagos de afiliados');
+define('HEADING_TITLE_SEARCH', 'Buscar:');
+define('HEADING_TITLE_STATUS','Estado:');
 
-define('TEXT_ALL_PAYMENTS','All Payments');
-define('TEXT_NO_PAYMENT_HISTORY', 'No Payment History Available');
+define('TEXT_ALL_PAYMENTS','Todos los pagos');
+define('TEXT_NO_PAYMENT_HISTORY', 'No hay diponible un historial de pagos');
 
-define('TABLE_HEADING_ACTION', 'Action');
-define('TABLE_HEADING_STATUS', 'Status');
-define('TABLE_HEADING_AFILIATE_NAME', 'Affiliate');
-define('TABLE_HEADING_PAYMENT','Payment (incl.)');
-define('TABLE_HEADING_NET_PAYMENT','Payment (excl.)');
-define('TABLE_HEADING_DATE_BILLED','Date Billed');
-define('TABLE_HEADING_NEW_VALUE', 'New Value');
-define('TABLE_HEADING_OLD_VALUE', 'Old Value');
-define('TABLE_HEADING_AFFILIATE_NOTIFIED', 'Affiliate Notified');
-define('TABLE_HEADING_DATE_ADDED', 'Date Added');
+define('TABLE_HEADING_ACTION', 'Acción');
+define('TABLE_HEADING_STATUS', 'Estado');
+define('TABLE_HEADING_AFILIATE_NAME', 'Afiliado');
+define('TABLE_HEADING_PAYMENT','Pago (imp. incl.)');
+define('TABLE_HEADING_NET_PAYMENT','Pago (sin imp.)');
+define('TABLE_HEADING_DATE_BILLED','Fecha de facturación');
+define('TABLE_HEADING_NEW_VALUE', 'Nuevo importe');
+define('TABLE_HEADING_OLD_VALUE', 'Importe anterior');
+define('TABLE_HEADING_AFFILIATE_NOTIFIED', 'Afiliado notificado');
+define('TABLE_HEADING_DATE_ADDED', 'Fecha realizado');
 
-define('TEXT_DATE_PAYMENT_BILLED','Billed:');
-define('TEXT_DATE_ORDER_LAST_MODIFIED','Last modified:');
+define('TEXT_DATE_PAYMENT_BILLED','Facturado:');
+define('TEXT_DATE_ORDER_LAST_MODIFIED','Útlima modificación:');
 define('TEXT_AFFILIATE_PAYMENT','Affiliate earned payment');
-define('TEXT_AFFILIATE_BILLED','Paymentday');
-define('TEXT_AFFILIATE','Affiliate');
-define('TEXT_INFO_DELETE_INTRO','Are you sure you want to delete this payment?');
-define('TEXT_DISPLAY_NUMBER_OF_PAYMENTS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> payments)');
+define('TEXT_AFFILIATE_BILLED','Liquidación');
+define('TEXT_AFFILIATE','Afiliado');
+define('TEXT_INFO_DELETE_INTRO','¿Seguro que quieres eliminar este pago?');
+define('TEXT_DISPLAY_NUMBER_OF_PAYMENTS', 'Mostrando del <b>%d</b> al <b>%d</b> (de <b>%d</b> pagos)');
 
-define('TEXT_AFFILIATE_PAYING_POSSIBILITIES','You can pay your Affiliate by:');
-define('TEXT_AFFILIATE_PAYMENT_CHECK','Check:');
-define('TEXT_AFFILIATE_PAYMENT_CHECK_PAYEE','Payable to:');
+define('TEXT_AFFILIATE_PAYING_POSSIBILITIES','Puedes pagar a tu afiliado mediante:');
+define('TEXT_AFFILIATE_PAYMENT_CHECK','Cheque:');
+define('TEXT_AFFILIATE_PAYMENT_CHECK_PAYEE','Beneficiario:');
 define('TEXT_AFFILIATE_PAYMENT_PAYPAL','PayPal:');
-define('TEXT_AFFILIATE_PAYMENT_PAYPAL_EMAIL','PayPal Acount Email:');
-define('TEXT_AFFILIATE_PAYMENT_BANK_TRANSFER','Banktransfer:');
-define('TEXT_AFFILIATE_PAYMENT_BANK_NAME','Bank Name:');
-define('TEXT_AFFILIATE_PAYMENT_BANK_ACCOUNT_NAME','Account Name:');
-define('TEXT_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER','Account Number:');
-define('TEXT_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER','ABA/BSB number (branch number):');
-define('TEXT_AFFILIATE_PAYMENT_BANK_SWIFT_CODE','SWIFT Code:');
+define('TEXT_AFFILIATE_PAYMENT_PAYPAL_EMAIL','E-mail de cuenta PayPal:');
+define('TEXT_AFFILIATE_PAYMENT_BANK_TRANSFER','Transferencia bancaria:');
+define('TEXT_AFFILIATE_PAYMENT_BANK_NAME','Nombre del banco:');
+define('TEXT_AFFILIATE_PAYMENT_BANK_ACCOUNT_NAME','Titular de la cuenta:');
+define('TEXT_AFFILIATE_PAYMENT_BANK_ACCOUNT_NUMBER','Número de cuenta:');
+define('TEXT_AFFILIATE_PAYMENT_BANK_BRANCH_NUMBER','Número de sucursal:');
+define('TEXT_AFFILIATE_PAYMENT_BANK_SWIFT_CODE','Código SWIFT:');
 
-define('TEXT_INFO_HEADING_DELETE_PAYMENT','Delete Payment');
+define('TEXT_INFO_HEADING_DELETE_PAYMENT','Eliminar pago');
 
-define('IMAGE_AFFILIATE_BILLING','Start Billing Engine');
+define('IMAGE_AFFILIATE_BILLING','Comenzar facturación');
 
-define('ERROR_PAYMENT_DOES_NOT_EXIST','Payment does not exist');
+define('ERROR_PAYMENT_DOES_NOT_EXIST','No existe el pago');
 
-define('SUCCESS_BILLING','Your Affiliates have been sucessfully billed');
-define('SUCCESS_PAYMENT_UPDATED','The Payment status has been updated successfully');
+define('SUCCESS_BILLING','Se ha facturado correctamente a tus afiliados');
+define('SUCCESS_PAYMENT_UPDATED','Se ha actualizado correctamente el estado del pago');
 
-define('PAYMENT_STATUS','Payment Status');
-define('PAYMENT_NOTIFY_AFFILIATE', 'Notify Affiliate');
+define('PAYMENT_STATUS','Estado del pago');
+define('PAYMENT_NOTIFY_AFFILIATE', 'Notificar al afiliado');
 
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
-define('EMAIL_TEXT_SUBJECT', 'Payment Update');
-define('EMAIL_TEXT_AFFILIATE_PAYMENT_NUMBER', 'Payment Number:');
-define('EMAIL_TEXT_INVOICE_URL', 'Detailed Invoice:');
-define('EMAIL_TEXT_PAYMENT_BILLED', 'Date billed');
-define('EMAIL_TEXT_STATUS_UPDATE', 'Your payment has been updated to the following status.' . "\n\n" . 'New status: %s' . "\n\n" . 'Please reply to this email if you have any questions.' . "\n");
-define('EMAIL_TEXT_NEW_PAYMENT', 'A new invoice arrived to your payments' . "\n");
+define('EMAIL_TEXT_SUBJECT', 'Actualización de pago');
+define('EMAIL_TEXT_AFFILIATE_PAYMENT_NUMBER', 'Pago número:');
+define('EMAIL_TEXT_INVOICE_URL', 'Factura detallada:');
+define('EMAIL_TEXT_PAYMENT_BILLED', 'Fecha de facturación');
+define('EMAIL_TEXT_STATUS_UPDATE', 'se ha actualizado tu pago al siguiente estado.' . "\n\n" . 'Nuevo estado: %s' . "\n\n" . 'Por favor conteste a este e-mail si tiene cualquier duda.' . "\n");
+define('EMAIL_TEXT_NEW_PAYMENT', 'Ha llegado una nueva factura a tus pagos' . "\n");
 ?>

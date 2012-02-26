@@ -1,37 +1,33 @@
 <?php
 /*
-  $Id: affiliate_news.php,v 2.00 2003/10/12
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Affiliate News / Announcements');
+define('NAVBAR_TITLE', 'Affiliateprogramm');
+define('HEADING_TITLE', 'Affiliateprogramm - News');
 
-define('TABLE_HEADING_AFFILIATE_NEWS_HEADLINE', 'Headline');
-define('TABLE_HEADING_AFFILIATE_NEWS_ACTION', 'Action');
-define('TABLE_HEADING_AFFILIATE_NEWS_STATUS', 'Status');
+define('TABLE_HEADING_AFFILIATE_NEWS', 'Affiliate - News');
 
-define('TEXT_NEWS_ITEMS', 'News Items:');
-define('TEXT_INFO_HEADING_DELETE_ITEM', 'Delete Item');
-define('TEXT_DELETE_ITEM_INTRO', 'Are you sure you want to permanently delete this item?');
+define('TEXT_AFFILIATE_NAME', 'Bannername:');
+define('TEXT_INFORMATION', 'Lesen Sie die Nachrichten zum Affiliateprogramm');
+define('TEXT_AFFILIATE_INFO', 'Kopieren Sie den folgenden Code und fügen Sie ihn in Ihre Website ein');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER', 'Link erstellen');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO', 'Geben Sie die Nummer des Produktes ein, auf das Sie verlinken wollen:');
 
-define('TEXT_AFFILIATE_NEWS_HEADLINE', 'Headline');
-define('TEXT_AFFILIATE_NEWS_CONTENT', 'Content');
+define('IMAGE_BUTTON_BUILD_A_LINK','Link auf Produktbanner erstellen');
 
-define('IMAGE_NEW_NEWS_ITEM', 'New news item');
-
+//add on \admin\includes\english\affiliate_news.php
 // npe admin begin #add
-define('TEXT_AFFILIATE_NEWS_CONTENT_DELETE', 'Delete displayed news in this language!');
-define('EMPTY_CATEGORY', 'Empty news');
-define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'There are no news which can be displayed to your affiliate partners.');
+define('TEXT_AFFILIATE_NEWS_CONTENT_DELETE', 'Gelesene Nachrichten in dieser Sprache löschen!');
+define('EMPTY_CATEGORY', 'Keine Nachrichten vorhanden');
+define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Es existieren keine Nachrichten, die Ihren Affiliates angezeigt werden können.');
 // npe admin begin #add
+
 ?>

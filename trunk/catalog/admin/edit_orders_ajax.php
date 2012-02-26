@@ -1,18 +1,14 @@
 <?php
-  /*
-  $Id: edit_orders_ajax.php v5.0.5 08/27/2007 djmonkey1 Exp $
+/*
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2007 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
-  For Order Editor support or to post bug reports, feature requests, etc, please visit the Order Editor support thread:
-  http://forums.oscommerce.com/index.php?showtopic=54032
-  
-  */
+*/
   
   require('includes/application_top.php');
   
@@ -401,7 +397,7 @@ if ($action == 'update_downloads') {
                 <td align="right" rowspan="2" valign="top" nowrap class="dataTableRow" style="border: 1px solid #C9C9C9;">
                 <table border="0" cellspacing="0" cellpadding="2">
                   <tr class="dataTableHeadingRow">
-        <td class="dataTableHeadingContent" width="15" nowrap onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_TOTALS); ?>')"; onMouseout="hideddrivetip()"><img src="images/icon_info.gif" border="0" width="13" height="13"></td>
+        <td class="dataTableHeadingContent" width="15" nowrap onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_TOTALS); ?>')"; onMouseout="hideddrivetip()"><img src="images/icons/information.png" border="0" width="13" height="13"></td>
                     <td class="dataTableHeadingContent" nowrap><?php echo TABLE_HEADING_OT_TOTALS; ?></td>
                     <td class="dataTableHeadingContent" colspan="2" nowrap><?php echo TABLE_HEADING_OT_VALUES; ?></td>
                   </tr>
@@ -606,16 +602,16 @@ if (tep_db_num_rows($orders_history_query)) {
          '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .
          '    <td class="smallText" align="center">';
     if ($orders_history['customer_notified'] == '1') {
-      echo tep_image(DIR_WS_ICONS . 'tick.gif', ICON_TICK) . "</td>\n";
+      echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK) . "</td>\n";
     } else {
-      echo tep_image(DIR_WS_ICONS . 'cross.gif', ICON_CROSS) . "</td>\n";
+      echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS) . "</td>\n";
     }
     echo '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .
          '    <td class="smallText" align="left">' . $orders_status_array[$orders_history['orders_status_id']] . '</td>' . "\n";
     echo '    <td class="dataTableHeadingContent" align="left" width="10">&nbsp;</td>' . "\n" .
          '    <td class="smallText" align="left">' . 
   
-  tep_draw_textarea_field("update_comments[" . $orders_history['orders_status_history_id'] . "][comments]", "soft", "40", "5", 
+  tep_draw_textarea_field("update_comments[" . $orders_history['orders_status_history_id'] . "][comments]", "40", "5", 
   "" .	tep_db_output($orders_history['comments']) . "", "onChange=\"updateCommentsField('update', '" . $orders_history['orders_status_history_id'] . "', 'false', encodeURIComponent(this.value))\"") . '' . "\n" .
 		 
 		 '    </td>' . "\n";
@@ -684,7 +680,7 @@ if (tep_db_num_rows($orders_history_query)) {
                 <td align="right" rowspan="2" valign="top" nowrap class="dataTableRow" style="border: 1px solid #C9C9C9;">
                 <table border="0" cellspacing="0" cellpadding="2">
                   <tr class="dataTableHeadingRow">
-        <td class="dataTableHeadingContent" width="15" nowrap onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_TOTALS); ?>')"; onMouseout="hideddrivetip()"><img src="images/icon_info.gif" border="0" width="13" height="13" onLoad="reloadTotals()"></td>
+        <td class="dataTableHeadingContent" width="15" nowrap onMouseover="ddrivetip('<?php echo oe_html_no_quote(HINT_TOTALS); ?>')"; onMouseout="hideddrivetip()"><img src="images/icons/information.png" border="0" width="13" height="13" onLoad="reloadTotals()"></td>
                     <td class="dataTableHeadingContent" nowrap><?php echo TABLE_HEADING_OT_TOTALS; ?></td>
                     <td class="dataTableHeadingContent" colspan="2" nowrap><?php echo TABLE_HEADING_OT_VALUES; ?></td>
                   </tr>
@@ -835,7 +831,7 @@ if (tep_db_num_rows($orders_history_query)) {
 		                if ($order->delivery['suburb']) {
 		                  $email_order .= $order->delivery['suburb'] . "\n";
 	                    }
-		$email_order .= $order->customer['city'] . "\n";
+		$email_order .= $order->delivery['city'] . "\n";
 		                if ($order->delivery['state']) {
 		                  $email_order .= $order->delivery['state'] . "\n";
 	                    }
@@ -853,7 +849,7 @@ if (tep_db_num_rows($orders_history_query)) {
 		                if ($order->billing['suburb']) {
 		                  $email_order .= $order->billing['suburb'] . "\n";
 	                    }
-		$email_order .= $order->customer['city'] . "\n";
+		$email_order .= $order->billing['city'] . "\n";
 		                if ($order->billing['state']) {
 		                  $email_order .= $order->billing['state'] . "\n";
 	                    }

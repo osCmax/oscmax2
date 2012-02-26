@@ -1,52 +1,54 @@
 <?php
 /*
-  $Id: wishlist_help.php,v 1 2002/11/09
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Meine Wunschliste F.A.Q.');
-define('HEADING_TITLE', 'Meine Wunschliste F.A.Q.');
+define('NAVBAR_TITLE', 'Wunschliste - Häufig gestellte Fragen');
+define('HEADING_TITLE', 'Wunschliste - Häufig gestellte Fragen');
 
-define('TEXT_CLOSE_WINDOW', '<u>Fenster schliessen</u> [x]');
+define('HEADING_TITLE', 'Wunschliste - Häufig gestellte Fragen');
 
-define('TEXT_INFORMATION', '<b>What is ' . BOX_HEADING_CUSTOMER_WISHLIST . '?</b><br>' .
-BOX_HEADING_CUSTOMER_WISHLIST . ' is a convenient way for you to save a reminder of an item you would like to purchase later or an item that is not currently in stock.
+define('TEXT_CLOSE_WINDOW', '<u>Fenster schließen</u> [x]');
+
+define('TEXT_INFORMATION', '<b>Was ist die ' . BOX_HEADING_CUSTOMER_WISHLIST . '?</b><br>' .
+BOX_HEADING_CUSTOMER_WISHLIST . ' ist eine komfortable Möglichkeit, Produkte vorzumerken, die Sie später kaufen wollen oder gerade nicht auf Lager sind.
 <br>
 <br>
-<b>How do I add items to ' . BOX_HEADING_CUSTOMER_WISHLIST . '? </b><br>
-To add an item to ' . BOX_HEADING_CUSTOMER_WISHLIST . ', just click the "Add to Wishlist" button for any item that interests you. The "Add to Wishlist" button appears next to the "Add to Cart" button in the product info pages.
+<b>Wie füge ich Produkte zur ' . BOX_HEADING_CUSTOMER_WISHLIST . ' hinzu? </b><br>
+Um ein Produkt der ' . BOX_HEADING_CUSTOMER_WISHLIST . ' hinzuzufügen, klicken Sie einfach bei jedem Produkt, dass Sie interessiert, auf "Zur Wunschliste hinzufügen". Der Button erscheint neben dem "In den Warenkorb" Button auf der jeweiligen Produktseite.
 <br>
 <br>
-<b>Can I add "out-of-stock" items or "coming-soon items"?</b><br>
-Yes. You can add any item you choose to ' . BOX_HEADING_CUSTOMER_WISHLIST .
+<b>Kann ich nicht lagernde oder noch nicht verfügbare Produkte hinzufügen?</b><br>
+Ja. Sie können jedes Produkt der ' . BOX_HEADING_CUSTOMER_WISHLIST . ' hinzufügen.' .	
 '<br>
 <br>
-<b>How do I view ' . BOX_HEADING_CUSTOMER_WISHLIST . '?</b><br>
-On the right column is a "' . BOX_HEADING_CUSTOMER_WISHLIST . '" box.  This box shows the current status of ' . BOX_HEADING_CUSTOMER_WISHLIST . '.  If there are 5 or less items in ' . BOX_HEADING_CUSTOMER_WISHLIST . ', they will be listed here.  If there are more than 5 items, there will be a simple counter with the total number of items in ' . BOX_HEADING_CUSTOMER_WISHLIST . '.
+<b>Wie kann ich mir die  ' . BOX_HEADING_CUSTOMER_WISHLIST . ' anzeigen lassen?</b><br>
+In der Spalte rechts befindet sich eine "' . BOX_HEADING_CUSTOMER_WISHLIST . '"-Box, in der der aktuelle Inhalt der ' . BOX_HEADING_CUSTOMER_WISHLIST . ' angezeigt wird. Wenn sich 5 oder weniger Artikel in der ' . BOX_HEADING_CUSTOMER_WISHLIST . ', befinden, werden sie direkt aufgelistet. Bei mehr als fünf Produkten wird nur die Anzahl der Produkte angezeigt.
 <br>
 <br>
-' . BOX_HEADING_CUSTOMER_WISHLIST . ' may be viewed at any time by clicking either the link found in the "' . BOX_HEADING_CUSTOMER_WISHLIST . '" box (<i><u>View ' . BOX_HEADING_CUSTOMER_WISHLIST . '</u> [+]</i>).  or by clicking the right arrow on the "' . BOX_HEADING_CUSTOMER_WISHLIST . '" box.
+Die ' . BOX_HEADING_CUSTOMER_WISHLIST . ' können Sie jederzeit durch einen Klick auf den Link in der "' . BOX_HEADING_CUSTOMER_WISHLIST . '"-Box (<i><u>' . BOX_HEADING_CUSTOMER_WISHLIST . ' anzeigen</u> [+]</i>).  oder durch Klick auf den Pfeil auf der "' . BOX_HEADING_CUSTOMER_WISHLIST . '"-Box.
 <br>
 <br>
-<b>How do I move ' . BOX_HEADING_CUSTOMER_WISHLIST . ' items to my Shopping Cart?</b><br>
-To move ' . BOX_HEADING_CUSTOMER_WISHLIST . ' items to the Shopping Cart, either click "Move to Cart" under the product name in the "' . BOX_HEADING_CUSTOMER_WISHLIST . '" box (if the ' . BOX_HEADING_CUSTOMER_WISHLIST . ' items are shown in the box) or click on "Move to Cart" underneath the item on the ' . BOX_HEADING_CUSTOMER_WISHLIST . ' main page and voila! The item is moved to the Cart.
+<b>Wie kann ich Produkte von der ' . BOX_HEADING_CUSTOMER_WISHLIST . ' in meinen Warenkorb verschieben?</b><br>
+Um Produkte von der ' . BOX_HEADING_CUSTOMER_WISHLIST . ' in den Warenkorb zu verschieben, klicken Sie entweder unter dem Produktnamen auf "In den Warenkorb verschieben" in der "' . BOX_HEADING_CUSTOMER_WISHLIST . '"-Box oder klicken Sie auf der Wunschlistenseite auf "In den Warenkorb" unter dem Produkt.
 <br>
 <br>
-<b>How do I remove items from ' . BOX_HEADING_CUSTOMER_WISHLIST . '?</b><br>
-To remove items from ' . BOX_HEADING_CUSTOMER_WISHLIST . ', either click "Delete" under the item\'s name in the "' . BOX_HEADING_CUSTOMER_WISHLIST . '" box or click "Delete" underneath the item on the ' . BOX_HEADING_CUSTOMER_WISHLIST . ' main page of the item(s) you would like to remove. 
+<b>Wie lösche ich Produkte von der ' . BOX_HEADING_CUSTOMER_WISHLIST . '?</b><br>
+Um Produkte von der  ' . BOX_HEADING_CUSTOMER_WISHLIST . ' zu löschen, klicken Sie entweder auf "Löschen" unter dem Produkt in der "' . BOX_HEADING_CUSTOMER_WISHLIST . '"-Box oder klicken Sie "Löschen" unter dem Produkt in der ' . BOX_HEADING_CUSTOMER_WISHLIST . '-Hauptseite. 
 <br>
 <br>
 <!-- BoF Modification by: Talon177 -->
-<b> Can I make ' . BOX_HEADING_CUSTOMER_WISHLIST . ' available to others? </b><br>
+<b> Kann ich meine ' . BOX_HEADING_CUSTOMER_WISHLIST . ' Anderen zukommen lassen? </b><br>
 <!-- EoF Modification by: Talon177 -->
 <!-- BoF Modification by: Talon177 & Rob Woodgate -->
-Sorry. Currently ' . BOX_HEADING_CUSTOMER_WISHLIST . ' is only accessible when you are logged in to your account. Therefore, you are the only one that can see it.  However, you can email your wishlist to a friend by visiting the ' . BOX_HEADING_CUSTOMER_WISHLIST . ' main page, entering their email address into the \'send your wishlist to a friend\' box and clicking the email envelope.
+Derzeit leider nicht. Ihre ' . BOX_HEADING_CUSTOMER_WISHLIST . ' ist nur verfügbar, wenn Sie angemeldet sind. Daher kann Therefore, you are the only one that can see it.  Sie können aber Ihre ' . BOX_HEADING_CUSTOMER_WISHLIST . ' versenden, indem Sie einen oder mehrere Empfänger in auf der Wunschlistenseite bestimmen.
 <!-- EoF Modification by: Talon177 & Rob Woodgate-->
 <br>
 <br>');

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: edit_orders.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -34,7 +34,7 @@ define('TABLE_HEADING_OT_VALUES', 'Value:');
 define('TABLE_HEADING_SHIPPING_QUOTES', 'Shipping Quotes:');
 define('TABLE_HEADING_NO_SHIPPING_QUOTES', 'There are no shipping quotes to display!');
 
-define('TABLE_HEADING_CUSTOMER_NOTIFIED', 'Customer<br>Notified');
+define('TABLE_HEADING_CUSTOMER_NOTIFIED', 'Customer Notified');
 define('TABLE_HEADING_DATE_ADDED', 'Date Added');
 
 define('ENTRY_CUSTOMER', 'Customer');

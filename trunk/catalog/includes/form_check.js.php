@@ -1,16 +1,16 @@
 <?php
 /*
-$Id: form_check.js.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 ?>
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 var form = "";
 var submitted = false;
 var error = false;
@@ -122,7 +122,7 @@ function check_form(form_name) {
 
 <?php
 // PWA BOF
-  if (!isset($HTTP_GET_VARS['guest'])) {
+  if (!isset($_GET['guest'])) {
 ?>
   check_password("password", "confirmation", <?php echo ENTRY_PASSWORD_MIN_LENGTH; ?>, "<?php echo ENTRY_PASSWORD_ERROR; ?>", "<?php echo ENTRY_PASSWORD_ERROR_NOT_MATCHING; ?>");
   check_password_new("password_current", "password_new", "password_confirmation", <?php echo ENTRY_PASSWORD_MIN_LENGTH; ?>, "<?php echo ENTRY_PASSWORD_ERROR; ?>", "<?php echo ENTRY_PASSWORD_NEW_ERROR; ?>", "<?php echo ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING; ?>");

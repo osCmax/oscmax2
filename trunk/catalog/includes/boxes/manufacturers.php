@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -21,17 +21,23 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
 <!-- manufacturers //-->
 <?php
     $boxHeading = BOX_HEADING_MANUFACTURERS;
-    $corner_left = 'square';
-    $corner_right = 'square';
-    $box_base_name = 'manufacturers'; // for easy unique box template setup (added BTSv1.2)
-
-    $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
+	
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
+  $boxContent_attributes = '';
+  $boxLink = '';
+  $box_base_name = 'manufacturers'; // for easy unique box template setup (added BTSv1.2)
+  $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
+	
     if ($number_of_rows <= MAX_DISPLAY_MANUFACTURERS_IN_A_LIST) {
 // Display a list
       $boxContent = '';
       while ($manufacturers = tep_db_fetch_array($manufacturers_query)) {
         $manufacturers_name = ((strlen($manufacturers['manufacturers_name']) > MAX_DISPLAY_MANUFACTURER_NAME_LEN) ? substr($manufacturers['manufacturers_name'], 0, MAX_DISPLAY_MANUFACTURER_NAME_LEN) . '..' : $manufacturers['manufacturers_name']);
-        if (isset($HTTP_GET_VARS['manufacturers_id']) && ($HTTP_GET_VARS['manufacturers_id'] == $manufacturers['manufacturers_id'])) $manufacturers_name = '<b>' . $manufacturers_name .'</b>';
+        if (isset($_GET['manufacturers_id']) && ($_GET['manufacturers_id'] == $manufacturers['manufacturers_id'])) $manufacturers_name = '<b>' . $manufacturers_name .'</b>';
         $boxContent .= '<a href="' . tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $manufacturers['manufacturers_id']) . '">' . $manufacturers_name . '</a><br>';
       }
 
@@ -52,9 +58,9 @@ $Id: manufacturers.php 3 2006-05-27 04:59:07Z user $
 
       $boxContent = tep_draw_form('manufacturers', tep_href_link(FILENAME_DEFAULT, '', 'NONSSL', false), 'get');
 /* moved style to stylesheet BTSv1-1
-      $boxContent .= tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, (isset($HTTP_GET_VARS['manufacturers_id']) ? $HTTP_GET_VARS['manufacturers_id'] : ''), 'onChange="this.form.submit();" size="' . MAX_MANUFACTURERS_LIST . '" style="width: 100%"');
+      $boxContent .= tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, (isset($_GET['manufacturers_id']) ? $_GET['manufacturers_id'] : ''), 'onChange="this.form.submit();" size="' . MAX_MANUFACTURERS_LIST . '" style="width: 100%"');
 */
-      $boxContent .= tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, (isset($HTTP_GET_VARS['manufacturers_id']) ? $HTTP_GET_VARS['manufacturers_id'] : ''), 'onChange="this.form.submit();" size="' . MAX_MANUFACTURERS_LIST . '"');
+      $boxContent .= tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, (isset($_GET['manufacturers_id']) ? $_GET['manufacturers_id'] : ''), 'onChange="this.form.submit();" size="' . MAX_MANUFACTURERS_LIST . '"');
       $boxContent .= tep_hide_session_id();
 	  $boxContent .= '</form>';
     }

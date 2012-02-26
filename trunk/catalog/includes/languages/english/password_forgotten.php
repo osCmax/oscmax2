@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: password_forgotten.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -20,7 +20,7 @@ define('TEXT_MAIN', 'If you\'ve forgotten your password, enter your e-mail addre
 define('TEXT_NO_EMAIL_ADDRESS_FOUND', 'Error: The E-Mail Address was not found in our records, please try again.');
 
 define('EMAIL_PASSWORD_REMINDER_SUBJECT', STORE_NAME . ' - New Password');
-define('EMAIL_PASSWORD_REMINDER_BODY', 'A new password was requested from ' . $REMOTE_ADDR . '.' . "\n\n" . 'Your new password to \'' . STORE_NAME . '\' is:' . "\n\n" . '   %s' . "\n\n");
+define('EMAIL_PASSWORD_REMINDER_BODY', 'A new password was requested from ' . isset($REMOTE_ADDR) . '.' . "\n\n" . 'Your new password to \'' . STORE_NAME . '\' is:' . "\n\n" . '   %s' . "\n\n");
 
 define('SUCCESS_PASSWORD_SENT', 'Success: A new password has been sent to your e-mail address.');
 ?>

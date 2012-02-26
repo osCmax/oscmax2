@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -16,6 +16,11 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
+/* One Page Checkout - BEGIN */
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      tep_redirect(tep_href_link(FILENAME_CHECKOUT, $_SERVER['QUERY_STRING'], 'SSL'));
+  }
+/* One Page Checkout - END */
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   if (tep_session_is_registered('cot_gv')) tep_session_unregister('cot_gv');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
@@ -108,8 +113,8 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
   if (!tep_session_is_registered('comments')) tep_session_register('comments');
-  if (isset($HTTP_POST_VARS['comments']) && tep_not_null($HTTP_POST_VARS['comments'])) {
-    $comments = tep_db_prepare_input($HTTP_POST_VARS['comments']);
+  if (isset($_POST['comments']) && tep_not_null($_POST['comments'])) {
+    $comments = tep_db_prepare_input($_POST['comments']);
   }
 
   $total_weight = $cart->show_weight();
@@ -127,10 +132,11 @@ $Id: checkout_payment.php 3 2006-05-27 04:59:07Z user $
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
 
   $content = CONTENT_CHECKOUT_PAYMENT;
-  
+
   $javascript = $content . '.js.php';
-  
-  include (bts_select('main', $content_template)); // BTSv1.5
+
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

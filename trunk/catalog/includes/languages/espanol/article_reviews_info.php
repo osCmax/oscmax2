@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: article_reviews_info.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -16,6 +16,6 @@ define('SUB_TITLE_ARTICLE', 'Noticia:');
 define('SUB_TITLE_FROM', 'De:');
 define('SUB_TITLE_DATE', 'Fecha:');
 define('SUB_TITLE_REVIEW', 'Comentario:');
-define('SUB_TITLE_RATING', 'Puntuaci&oacute;n:');
+define('SUB_TITLE_RATING', 'Valoración:');
 define('TEXT_OF_5_STARS', '%s de 5 estrellas');
 ?>

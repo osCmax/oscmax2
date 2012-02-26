@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: admin_account.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -26,16 +26,16 @@ define('TEXT_INFO_CREATED', '<b>Account Created: </b>');
 define('TEXT_INFO_LOGDATE', '<b>Last Access: </b>');
 define('TEXT_INFO_LOGNUM', '<b>Log Number: </b>');
 define('TEXT_INFO_GROUP', '<b>Group Level: </b>');
-define('TEXT_INFO_ERROR', '<font color="red">Email address has already been used! Please try again.</font>');
+define('TEXT_INFO_ERROR', 'Email address has already been used! Please try again.');
 define('TEXT_INFO_MODIFIED', 'Modified: ');
 
 define('TEXT_INFO_HEADING_DEFAULT', 'Edit Account ');
 define('TEXT_INFO_HEADING_CONFIRM_PASSWORD', 'Password Confirmation ');
 define('TEXT_INFO_INTRO_CONFIRM_PASSWORD', 'Password:');
-define('TEXT_INFO_INTRO_CONFIRM_PASSWORD_ERROR', '<font color="red"><b>ERROR:</b> wrong password!</font>');
-define('TEXT_INFO_INTRO_DEFAULT', 'Click <b>edit button</b> below to change your account.');
-define('TEXT_INFO_INTRO_DEFAULT_FIRST_TIME', '<br><b>WARNING:</b><br>Hello <b>%s</b>, you just come here for the first time. We recommend you to change your password!');
-define('TEXT_INFO_INTRO_DEFAULT_FIRST', '<br><b>WARNING:</b><br>Hello <b>%s</b>, we recommend you to change your email (<font color="red">admin@localhost</font>) and password!');
+define('TEXT_INFO_INTRO_CONFIRM_PASSWORD_ERROR', 'Incorrect password');
+define('TEXT_INFO_INTRO_DEFAULT', 'Click <b>edit</b>  button below to make changes to your account.');
+define('TEXT_INFO_INTRO_DEFAULT_FIRST_TIME', '<b>%s</b>, we have detected that you have not changed your password since it was setup. We recommend you to change your password now.');
+define('TEXT_INFO_INTRO_DEFAULT_FIRST', '<b>WARNING:</b><br>Hello <b>%s</b>, we recommend you to change your email (<font color="red">admin@localhost</font>) and password!');
 define('TEXT_INFO_INTRO_EDIT_PROCESS', 'All fields are required. Click save to submit.');
 
 define('JS_ALERT_USERNAME',         '- Required: Username \n');

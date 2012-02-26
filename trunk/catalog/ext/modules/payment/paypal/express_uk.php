@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: express_uk.php 1803 2008-01-11 18:16:37Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -17,8 +17,8 @@
   if (!tep_session_is_registered('customer_id')) {
     $snapshot = array('page' => 'ext/modules/payment/paypal/express_uk.php',
                       'mode' => $request_type,
-                      'get' => $HTTP_GET_VARS,
-                      'post' => $HTTP_POST_VARS);
+                      'get' => $_GET,
+                      'post' => $_POST);
 
     $navigation->set_snapshot($snapshot);
 
@@ -30,7 +30,7 @@
     tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/modules/payment/paypal_uk_express.php');
+  require(DIR_WS_LANGUAGES . $language . '/paypal_uk_express.php');
   require('includes/modules/payment/paypal_uk_express.php');
 
   $paypal_uk_express = new paypal_uk_express();
@@ -69,10 +69,10 @@
                   'TENDER' => 'P',
                   'TRXTYPE' => ((MODULE_PAYMENT_PAYPAL_UK_EXPRESS_TRANSACTION_METHOD == 'Sale') ? 'S' : 'A'));
 
-  switch ($HTTP_GET_VARS['osC_Action']) {
+  switch ($_GET['osC_Action']) {
     case 'retrieve':
       $params['ACTION'] = 'G';
-      $params['TOKEN'] = $HTTP_GET_VARS['token'];
+      $params['TOKEN'] = $_GET['token'];
 
       $post_string = '';
 
@@ -82,7 +82,7 @@
 
       $post_string = substr($post_string, 0, -1);
 
-      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUEST-ID: ' . md5($cartID . tep_session_id() . rand())));
+      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUE$Id$
       $response_array = array();
       parse_str($response, $response_array);
 
@@ -159,7 +159,7 @@
             if ( ($pass == true) && ($order->info['total'] >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) ) {
               $free_shipping = true;
 
-              include(DIR_WS_LANGUAGES . $language . '/modules/order_total/ot_shipping.php');
+              include(DIR_WS_LANGUAGES . $language . '/ot_shipping.php');
             }
           }
 
@@ -283,7 +283,7 @@
 
       $post_string = substr($post_string, 0, -1);
 
-      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUEST-ID: ' . md5($cartID . tep_session_id() . rand())));
+      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUE$Id$
       $response_array = array();
       parse_str($response, $response_array);
 

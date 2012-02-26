@@ -1,18 +1,18 @@
 
 <?php
 /* 
-$Id: articles_xsell.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-osCMax Power E-Commerce 
-  http://oscdox.com
+  osCmax e-Commerce 
+  http://www.oscmax.com
 
-Copyright 2006 osCMax 
+  Copyright 2000 - 2011 osCmax 
 
-Released under the GNU General Public License 
-*/ 
+  Released under the GNU General Public License 
+*/
 
-if ($HTTP_GET_VARS['articles_id']) {
-$xsell_query = tep_db_query("select distinct a.products_id, a.products_image, ad.products_name from " . TABLE_ARTICLES_XSELL . " ax, " . TABLE_PRODUCTS . " a, " . TABLE_PRODUCTS_DESCRIPTION . " ad where ax.articles_id = '" . $HTTP_GET_VARS['articles_id'] . "' and ax.xsell_id = a.products_id and a.products_id = ad.products_id and ad.language_id = '" . $languages_id . "' and a.products_status = '1' order by ax.sort_order asc limit " . MAX_DISPLAY_ARTICLES_XSELL);
+if ($_GET['articles_id']) {
+$xsell_query = tep_db_query("select distinct a.products_id, a.products_image, ad.products_name from " . TABLE_ARTICLES_XSELL . " ax, " . TABLE_PRODUCTS . " a, " . TABLE_PRODUCTS_DESCRIPTION . " ad where ax.articles_id = '" . $_GET['articles_id'] . "' and ax.xsell_id = a.products_id and a.products_id = ad.products_id and ad.language_id = '" . $languages_id . "' and a.products_status = '1' order by ax.sort_order asc limit " . MAX_DISPLAY_ARTICLES_XSELL);
 $num_products_xsell = tep_db_num_rows($xsell_query); 
 if ($num_products_xsell >= MIN_DISPLAY_ARTICLES_XSELL) {
 ?> 

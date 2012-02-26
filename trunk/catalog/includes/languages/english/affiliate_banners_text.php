@@ -1,23 +1,23 @@
 <?php
 /*
-  $Id: affiliate_banners_text.php,v 2.00 2003/10/12
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
+define('NAVBAR_TITLE', 'Text Only Links');
 define('HEADING_TITLE', 'Affiliate Program - Text Links');
 
 define('TEXT_AFFILIATE_NAME', 'Link Name:');
 define('TEXT_INFORMATION', 'Choose the link you want to display on your website from the choices below:');
-define('TEXT_AFFILIATE_INFO', 'Copy the code shown below and paste into your website');
+define('TEXT_AFFILIATE_INFO', 'Copy the code shown below and paste into your website: ');
+define('TEXT_AFFILIATE_WEBSITE_BANNER', 'WebSite Banner: ');
+define('TEXT_AFFILIATE_PRODUCT_BANNER', 'Product Banner: ');
+define('TEXT_AFFILIATE_CATEGORY_BANNER', 'Category Banner: ');
+
 ?>

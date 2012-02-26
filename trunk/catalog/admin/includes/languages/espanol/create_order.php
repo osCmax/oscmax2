@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: create_order.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
   
@@ -15,101 +15,118 @@ $Id: create_order.php 3 2006-05-27 04:59:07Z user $
 
 // ### END ORDER MAKER ###
 // pull down default text
-define('PULL_DOWN_DEFAULT', 'Please Select');
-define('TYPE_BELOW', 'Type Below');
+define('PULL_DOWN_DEFAULT', 'Por favor selecciona');
+define('TYPE_BELOW', 'Escribe a continuación');
 
-define('JS_ERROR', 'Errors have occured during the process of your form!\nPlease make the following corrections:\n\n');
+define('JS_ERROR', '¡Se han producido errores al procesar tu formulario!\nPor favor realiza las siguientes correcciones:\n\n');
 
-define('JS_GENDER', '* The \'Gender\' value must be chosen.\n');
-define('JS_FIRST_NAME', '* The \'First Name\' entry must have at least ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' characters.\n');
-define('JS_LAST_NAME', '* The \'Last Name\' entry must have at least ' . ENTRY_LAST_NAME_MIN_LENGTH . ' characters.\n');
-define('JS_DOB', '* The \'Date of Birth\' entry must be in the format: xx/xx/xxxx (month/day/year).\n');
-define('JS_EMAIL_ADDRESS', '* The \'E-Mail Address\' entry must have at least ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' characters.\n');
-define('JS_ADDRESS', '* The \'Street Address\' entry must have at least ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' characters.\n');
-define('JS_POST_CODE', '* The \'Post Code\' entry must have at least ' . ENTRY_POSTCODE_MIN_LENGTH . ' characters.\n');
-define('JS_CITY', '* The \'Suburb\' entry must have at least ' . ENTRY_CITY_MIN_LENGTH . ' characters.\n');
-define('JS_STATE', '* The \'State\' entry must be selected.\n');
-define('JS_STATE_SELECT', '-- Select Above --');
-define('JS_ZONE', '* The \'State\' entry must be selected from the list for this country.\n');
-define('JS_COUNTRY', '* The \'Country\' entry must be selected.\n');
-define('JS_TELEPHONE', '* The \'Telephone Number\' entry must have at least ' . ENTRY_TELEPHONE_MIN_LENGTH . ' characters.\n');
-define('JS_PASSWORD', '* The \'Password\' and \'Confirmation\' entries must match and have at least ' . ENTRY_PASSWORD_MIN_LENGTH . ' characters.\n');
+define('JS_GENDER', '* Debe especificar el \'Sexo\'.\n');
+define('JS_FIRST_NAME', '* El campo \'Nombre\' debe tener al menos ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' caracteres.\n');
+define('JS_LAST_NAME', '* El campo \'Apellidos\' debe tener al menos ' . ENTRY_LAST_NAME_MIN_LENGTH . ' caracteres.\n');
+define('JS_DOB', '* El campo \'Fecha de nacimiento\' debe tener el formato: xx/xx/xxxx (día/mes/año).\n');
+define('JS_EMAIL_ADDRESS', '* El campo \'Dirección e-mail\' debe tener al menos ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' caracteres.\n');
+define('JS_ADDRESS', '* El campo \'Dirección\' debe tener al menos ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' caracteres.\n');
+define('JS_POST_CODE', '* El campo \'Código postal\' debe tener al menos ' . ENTRY_POSTCODE_MIN_LENGTH . ' caracteres.\n');
+define('JS_CITY', '* El campo \'Población\' debe tener al menos ' . ENTRY_CITY_MIN_LENGTH . ' caracteres.\n');
+define('JS_STATE', '* Debe seleccionar \'Provincia\'.\n');
+define('JS_STATE_SELECT', '-- Seleccionar arriba --');
+define('JS_ZONE', '* Debe seleccionar \'Provincia\' de la lista de este país.\n');
+define('JS_COUNTRY', '* Debe seleccionar \'País\'.\n');
+define('JS_TELEPHONE', '* El campo \'Teléfono\' debe tener al menos ' . ENTRY_TELEPHONE_MIN_LENGTH . ' caracteres.\n');
+define('JS_PASSWORD', '* Los campos \'Contraseña\' y \'Confirmación\' deben coincidir y tener al menos ' . ENTRY_PASSWORD_MIN_LENGTH . ' caracteres.\n');
 
-define('CATEGORY_COMPANY', 'Company Details');
-define('CATEGORY_PERSONAL', 'Personal Details');
-define('CATEGORY_ADDRESS', 'Address');
-define('CATEGORY_CONTACT', 'Contact Information');
-define('CATEGORY_OPTIONS', 'Options');
-define('CATEGORY_PASSWORD', 'Password');
-define('CATEGORY_CORRECT', 'If this is the right customer, press the Confirm button below.');
+define('CATEGORY_COMPANY', 'Empresa');
+define('CATEGORY_PERSONAL', 'Personal');
+define('CATEGORY_ADDRESS', 'Dirección');
+define('CATEGORY_CONTACT', 'Contacto');
+define('CATEGORY_OPTIONS', 'Opciones');
+define('CATEGORY_PASSWORD', 'Contraseña');
+define('CATEGORY_CORRECT', 'Si este es el cliente correcto, pulsa el botón Confirmar más abajo.');
 define('ENTRY_CUSTOMERS_ID', 'ID:');
 define('ENTRY_CUSTOMERS_ID_TEXT', '&nbsp;');
-define('ENTRY_COMPANY', 'Company Name:');
+define('ENTRY_COMPANY', 'Empresa:');
 define('ENTRY_COMPANY_ERROR', '');
 define('ENTRY_COMPANY_TEXT', '');
-define('ENTRY_GENDER', 'Gender:');
+define('ENTRY_GENDER', 'Sexo:');
+define('ENTRY_GENDER_FEMALE', 'Mujer:');
+define('ENTRY_GENDER_MALE', 'Hombre:');
 define('ENTRY_GENDER_ERROR', '&nbsp;');
 define('ENTRY_GENDER_TEXT', '&nbsp;');
-define('ENTRY_FIRST_NAME', 'First Name:');
-define('ENTRY_FIRST_NAME_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' chars</font></small>');
+define('ENTRY_FIRST_NAME', 'Nombre:');
+define('ENTRY_FIRST_NAME_ERROR', '&nbsp;<small><font color="#FF0000">mín. ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' caracteres</font></small>');
 define('ENTRY_FIRST_NAME_TEXT', '&nbsp;');
-define('ENTRY_LAST_NAME', 'Last Name:');
-define('ENTRY_LAST_NAME_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_LAST_NAME_MIN_LENGTH . ' chars</font></small>');
+define('ENTRY_LAST_NAME', 'Apellidos:');
+define('ENTRY_LAST_NAME_ERROR', '&nbsp;<small><font color="#FF0000">mín. ' . ENTRY_LAST_NAME_MIN_LENGTH . ' caracteres</font></small>');
 define('ENTRY_LAST_NAME_TEXT', '&nbsp;');
-define('ENTRY_DATE_OF_BIRTH', 'Date of Birth:');
-define('ENTRY_DATE_OF_BIRTH_ERROR', '&nbsp;<small><font color="#FF0000">(eg. 05/21/1970)</font></small>');
-define('ENTRY_DATE_OF_BIRTH_TEXT', '&nbsp;<small>(eg. 05/21/1970) ');
-define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
-define('ENTRY_EMAIL_ADDRESS_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' chars</font></small>');
-define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', '&nbsp;<small><font color="#FF0000">Your email address doesn\'t appear to be valid!</font></small>');
-define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', '&nbsp;<small><font color="#FF0000">email address already exists!</font></small>');
+define('ENTRY_DATE_OF_BIRTH', 'Fecha de nacimiento:');
+define('ENTRY_DATE_OF_BIRTH_ERROR', '&nbsp;<small><font color="#FF0000">(p.ej. 21/05/1970)</font></small>');
+define('ENTRY_DATE_OF_BIRTH_TEXT', '&nbsp;<small>(p.ej. 21/05/1970) ');
+define('ENTRY_EMAIL_ADDRESS', 'Dirección e-mail:');
+define('ENTRY_EMAIL_ADDRESS_ERROR', '&nbsp;<small><font color="#FF0000">mín. ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' caracteres</font></small>');
+define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', '&nbsp;<small><font color="#FF0000">¡Esa dirección e-mail no parece ser válida!</font></small>');
+define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', '&nbsp;<small><font color="#FF0000">¡Esta dirección e-mail ya existe!</font></small>');
 define('ENTRY_EMAIL_ADDRESS_TEXT', '&nbsp;');
-define('ENTRY_STREET_ADDRESS', 'Street Address:');
-define('ENTRY_STREET_ADDRESS_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' chars</font></small>');
+define('ENTRY_STREET_ADDRESS', 'Dirección:');
+define('ENTRY_STREET_ADDRESS_ERROR', '&nbsp;<small><font color="#FF0000">mín. ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' caracteres</font></small>');
 define('ENTRY_STREET_ADDRESS_TEXT', '&nbsp;');
-define('ENTRY_SUBURB', 'Suburb:');
+define('ENTRY_SUBURB', 'Línea 2 de dirección:');
 define('ENTRY_SUBURB_ERROR', '');
 define('ENTRY_SUBURB_TEXT', '');
-define('ENTRY_POST_CODE', 'Post Code:');
-define('ENTRY_POST_CODE_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_POSTCODE_MIN_LENGTH . ' chars</font></small>');
+define('ENTRY_POST_CODE', 'Código postal:');
+define('ENTRY_POST_CODE_ERROR', '&nbsp;<small><font color="#FF0000">mín. ' . ENTRY_POSTCODE_MIN_LENGTH . ' caracteres</font></small>');
 define('ENTRY_POST_CODE_TEXT', '&nbsp;');
-define('ENTRY_CITY', 'Suburb:');
-define('ENTRY_CITY_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_CITY_MIN_LENGTH . ' chars</font></small>');
+define('ENTRY_CITY', 'Población:');
+define('ENTRY_CITY_ERROR', '&nbsp;<small><font color="#FF0000">mín. ' . ENTRY_CITY_MIN_LENGTH . ' caracteres</font></small>');
 define('ENTRY_CITY_TEXT', '&nbsp;');
-define('ENTRY_STATE', 'State/Province:');
+define('ENTRY_STATE', 'Provincia:');
 define('ENTRY_STATE_ERROR', '&nbsp;');
 define('ENTRY_STATE_TEXT', '&nbsp;');
-define('ENTRY_COUNTRY', 'Country:');
+define('ENTRY_COUNTRY', 'País:');
 define('ENTRY_COUNTRY_ERROR', '');
 define('ENTRY_COUNTRY_TEXT', '&nbsp;');
-define('ENTRY_TELEPHONE_NUMBER', 'Telephone Number:');
-define('ENTRY_TELEPHONE_NUMBER_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_TELEPHONE_MIN_LENGTH . ' chars</font></small>');
+define('ENTRY_TELEPHONE_NUMBER', 'Teléfono:');
+define('ENTRY_TELEPHONE_NUMBER_ERROR', '&nbsp;<small><font color="#FF0000">mín. ' . ENTRY_TELEPHONE_MIN_LENGTH . ' caracteres</font></small>');
 define('ENTRY_TELEPHONE_NUMBER_TEXT', '&nbsp;');
-define('ENTRY_FAX_NUMBER', 'Fax Number:');
+define('ENTRY_FAX_NUMBER', 'Fax:');
 define('ENTRY_FAX_NUMBER_ERROR', '');
 define('ENTRY_FAX_NUMBER_TEXT', '');
-define('ENTRY_NEWSLETTER', 'Newsletter:');
+define('ENTRY_NEWSLETTER', 'Boletín de noticias:');
 define('ENTRY_NEWSLETTER_TEXT', '');
-define('ENTRY_NEWSLETTER_YES', 'Subscribed');
-define('ENTRY_NEWSLETTER_NO', 'Unsubscribed');
+define('ENTRY_NEWSLETTER_YES', 'Suscrito');
+define('ENTRY_NEWSLETTER_NO', 'No suscrito');
 define('ENTRY_NEWSLETTER_ERROR', '');
-define('ENTRY_PASSWORD', 'Password:');
-define('ENTRY_PASSWORD_CONFIRMATION', 'Password Confirmation:');
+define('ENTRY_PASSWORD', 'Contraseña:');
+define('ENTRY_PASSWORD_CONFIRMATION', 'Confirmación contraseña:');
 define('ENTRY_PASSWORD_CONFIRMATION_TEXT', '&nbsp;');
-define('ENTRY_PASSWORD_ERROR', '&nbsp;<small><font color="#FF0000">min ' . ENTRY_PASSWORD_MIN_LENGTH . ' chars</font></small>');
+define('ENTRY_PASSWORD_ERROR', '&nbsp;<small><font color="#FF0000">mín. ' . ENTRY_PASSWORD_MIN_LENGTH . ' caracteres</font></small>');
 define('ENTRY_PASSWORD_TEXT', '&nbsp;');
-define('PASSWORD_HIDDEN', '--HIDDEN--');
+define('PASSWORD_HIDDEN', '--OCULTO--');
 // ### END ORDER MAKER ###
+define('CREATE_ORDER_TEXT_EXISTING_CUST', 'Cuenta de cliente existente');
+define('CREATE_ORDER_TEXT_NEW_CUST', 'Nueva cuenta de cliente');
+define('CREATE_ORDER_TEXT_NO_CUST', 'Sin cuenta de cliente');
 
-define('HEADING_TITLE', 'Step-by-Step Manual Order Entry');
-define('HEADING_CREATE', 'Confirm client details:'); 
+define('HEADING_TITLE', 'Nuevo pedido');
+define('TEXT_SELECT_CUST', '- Selecciona un cliente -'); 
+ 
+define('TEXT_SELECT_CURRENCY', '- Selecciona una moneda -');
+define('TEXT_SELECT_CURRENCY_TITLE', 'Selecciona una moneda');
+define('BUTTON_TEXT_SELECT_CUST', 'Selecciona un cliente:'); 
+define('TEXT_OR_BY', 'o selecciónalo por ID cliente:'); 
+define('TEXT_STEP_1', 'Elige un cliente para rellenar automáticamente el formulario o introduce los datos de tu elección.');
+define('TEXT_STEP_2', 'Paso 2 - Confirma los datos de cliente existente o introduce nuevos datos de cliente/envío/facturación.');
+define('BUTTON_SUBMIT', 'Selecciona');
+define('ENTRY_CURRENCY','Moneda: ');
+define('ENTRY_ADMIN','Pedido introducido por:');
+define('TEXT_CS','Servicio de atención al cliente');
 
-define('TEXT_SELECT_CUST', 'Select a client:'); 
-define('TEXT_SELECT_CURRENCY', 'Select currency:');
-define('BUTTON_TEXT_SELECT_CUST', 'Select a client:'); 
-define('TEXT_OR_BY', 'or set client ID:'); 
-define('TEXT_STEP_1', 'Step 1 - Choose a client and verify the details');
-define('BUTTON_SUBMIT', 'confirm');
-define('ENTRY_CURRENCY','Devise');
-define('CATEGORY_ORDER_DETAILS','Choose currency:');
+define('ACCOUNT_EXTRAS','Extras cuenta');
+define('ENTRY_ACCOUNT_PASSWORD','Contraseña');
+define('ENTRY_NEWSLETTER_SUBSCRIBE','Boletín de noticias');
+define('ENTRY_ACCOUNT_PASSWORD_TEXT','');
+define('ENTRY_NEWSLETTER_SUBSCRIBE_TEXT','1 = suscrito, or 0 (cero) = no suscrito.');
+define('CATEGORY_ORDER_DETAILS', 'Elige moneda:');
+define('TEXT_CREATE_ORDER', 'Generar pedido');
+
+define('IMAGE_BUTTON_CONFIRM', 'Confirmar');
 ?>

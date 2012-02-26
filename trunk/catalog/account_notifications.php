@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: account_notifications.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -28,14 +28,14 @@ $Id: account_notifications.php 3 2006-05-27 04:59:07Z user $
   $global_query = tep_db_query("select global_product_notifications from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . (int)$customer_id . "'");
   $global = tep_db_fetch_array($global_query);
 
-  if (isset($HTTP_POST_VARS['action']) && ($HTTP_POST_VARS['action'] == 'process')) {
-    if (isset($HTTP_POST_VARS['product_global']) && is_numeric($HTTP_POST_VARS['product_global'])) {
-      $product_global = tep_db_prepare_input($HTTP_POST_VARS['product_global']);
+  if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
+    if (isset($_POST['product_global']) && is_numeric($_POST['product_global'])) {
+      $product_global = tep_db_prepare_input($_POST['product_global']);
     } else {
       $product_global = '0';
     }
 
-    (array)$products = $HTTP_POST_VARS['products'];
+    (array)$products = $_POST['products'];
 
     if ($product_global != $global['global_product_notifications']) {
       $product_global = (($global['global_product_notifications'] == '1') ? '0' : '1');
@@ -78,7 +78,8 @@ $Id: account_notifications.php 3 2006-05-27 04:59:07Z user $
   $content = CONTENT_ACCOUNT_NOTIFICATIONS;
   $javascript = $content . '.js';
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

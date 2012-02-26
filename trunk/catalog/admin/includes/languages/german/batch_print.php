@@ -1,21 +1,31 @@
 <?php
 /*
-  $Id:Batch_print.php, user Exp $
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 define('TEXT_ORDER_NUMBERS_RANGES', 'Bestellnummer(n), entweder einzelne Nummer # oder von - bis, # - #, oder #,#,#');
-define('HEADING_TITLE', 'Batch Print Center');
+define('TEXT_DIR_ERROR', ' Fehler: Es ist ein Problem aufgetreten beim Öffnen des Verzeichnisses ');
+define('TEXT_BPC_OPTIONS', 'Batch Print Center Optionen');
+define('TEXT_BPC_NO_OPTIONS', 'Für Ihre ausgewählte Option sind keine Optionen verfügbar.');
+define('HEADING_TITLE', 'Seriendruck Center');
 define('TABLE_HEADING_COMMENTS', 'Kommentare');
-define('TABLE_HEADING_PRODUCTS_MODEL', 'Modell');
+define('TABLE_HEADING_PRODUCTS_MODEL', 'Artikelnummer');
 define('TABLE_HEADING_PRODUCTS', 'Produkte');
-define('TABLE_HEADING_TAX', 'MwSt.');
+define('TABLE_HEADING_TAX', 'USt.');
 define('TABLE_HEADING_TOTAL', 'Gesamt');
-define('TABLE_HEADING_PRICE_EXCLUDING_TAX', 'Nettopreis');
-define('TABLE_HEADING_PRICE_INCLUDING_TAX', 'Preis inkl. MwSt.');
-define('TABLE_HEADING_TOTAL_EXCLUDING_TAX', 'Gesamt (netto)');
-define('TABLE_HEADING_TOTAL_INCLUDING_TAX', 'Gesamt (inkl. MwSt.)');
+define('TABLE_HEADING_PRICE_EXCLUDING_TAX', 'Preis exkl. USt.');
+define('TABLE_HEADING_PRICE_INCLUDING_TAX', 'Preis inkl. USt.');
+define('TABLE_HEADING_TOTAL_EXCLUDING_TAX', 'Gesamt (exkl. Ust.)');
+define('TABLE_HEADING_TOTAL_INCLUDING_TAX', 'Gesamt (inkl. Ust.)');
 define('ENTRY_SOLD_TO', 'Rechnungsadresse:');
 define('ENTRY_SHIP_TO', 'Lieferadresse:');
-define('ENTRY_PAYMENT_METHOD', 'Zahlungsweise:');
+define('ENTRY_PAYMENT_METHOD', 'Zahlungsart:');
 define('ENTRY_PAYMENT_TYPE', 'Kreditkarte:');
 define('PAYMENT_TYPE', 'Kreditkarte');
 define('ENTRY_CC_OWNER', 'Inhaber:');
@@ -24,14 +34,14 @@ define('ENTRY_CC_EXP', 'Gültig bis:');
 define('ENTRY_SUB_TOTAL', 'Zwischensumme:');
 define('ENTRY_PHONE', 'Telefonnr.:');
 define('ENTRY_EMAIL', 'E-Mail:');
-define('ENTRY_TAX', 'MwSt.:');
+define('ENTRY_TAX', 'USt.:');
 define('ENTRY_SHIPPING', 'Versandkosten:');
 define('ENTRY_TOTAL', 'Gesamt:');
 define('TEXT_ORDER_NUMBER','Bestellnummer:');
 define('TEXT_ORDER_DATE','Bestelldatum:');
 define('TEXT_ORDER_FORMAT','F j, Y');
-define('TEXT_CHOOSE_TEMPLATE','Bitte wählen sie das gewünschte Template aus');
-define('TEXT_CHOOSE_TEMPLATE','Bitte geben sie entweder die Bestellnummern einzeln oder "von-bis" ein:<br>(z.B. 2577,2580-2585,2588)');
+define('TEXT_CHOOSE_TEMPLATE','Bitte wählen Sie die gewünschte Vorlage aus');
+define('TEXT_CHOOSE_TEMPLATE','Bitte geben Sie entweder die Bestellnummern einzeln oder "von-bis" ein:<br>(z.B. 2577,2580-2585,2588)');
 define('TEXT_DATES_ORDERS_EXTRACTRED','Oder die Bestelldaten:<br>(Bitte im Format JJJJ-MM-TT Format)');
 define('TEXT_FROM','Von:');
 define('TEXT_TO','Lieferung: ');
@@ -50,22 +60,21 @@ define('TEXT_SHOW_OREDERS_COMMENTS','Bestellungen ohne Kommentar anzeigen?<br>(B
 define('TEXT_NOTIFY_CUSTOMER','Den Kunden per E-Mail benachrichtigen?<br>(Der Kunde wird per eMail mit den Kommentaren in der batch print language-Datei benachrichtigt.)');
 define('TEXT_BANK','Bank: ');
 define('TEXT_POST','Post: ');
-define('TEXT_SALES','Sales: ');
+define('TEXT_SALES','Umsätze: ');
 define('TEXT_PACKED_BY','Gepackt von:  ______________________');
 define('TEXT_VERIFIED_BY','Geprüft von:  ______________________');
 define('TEXT_DEAR','Sehr geehrte(r) ');
-define('TEXT_THX_CHRISMAS','Vielen Dank für ihre Unterstützung -----');
-define('TEXT_RETURNS_LABEL', 'Rücksende-Label Bestellung: ');
-define('TEXT_SHIPPING_LABEL', 'Versand-Label Bestellung: ');
+define('TEXT_THX_CHRISMAS','Vielen Dank für Ihre Unterstützung -----');
+define('TEXT_RETURNS_LABEL', 'Rücksende-Etikett Bestellung: ');
+define('TEXT_SHIPPING_LABEL', 'Versand-Etikett Bestellung: ');
 define('SHIP_FROM_COUNTRY', '');  //eg. 'United Kingdom'
-define('WEBSITE', 'www.Your site.com');
-define('TEXT_RETURNS', 'Wir hoffen dass Sie es nicht brauchen werden, haben aber für den Fall der Fälle ein Rücksende-Label beigepackt. Bitte beachten Sie unsere Hinweise unter www.Your site.com/shipping.php');
+define('WEBSITE', 'www.Ihre Seite.com');
+define('TEXT_RETURNS', 'Wir hoffen, dass Sie es nicht brauchen werden, haben aber für den Fall der Fälle ein Rücksende-Label beigepackt. Bitte beachten Sie unsere Hinweise unter www.Your site.com/shipping.php');
 define('TEXT_TO', 'An:');
-
 // Change this to a general comment that you would like
 define('BATCH_COMMENTS','Automatische Benachrichtung zu Ihrer Bestellung.');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
-define('EMAIL_TEXT_SUBJECT', 'Update ihrer Bestellung');
+define('EMAIL_TEXT_SUBJECT', 'Aktualisierung der Besellung');
 define('EMAIL_TEXT_ORDER_NUMBER', 'Bestellnummer:');
 define('EMAIL_TEXT_INVOICE_URL', 'Detaillierte Rechnung:');
 define('EMAIL_TEXT_DATE_ORDERED', 'Bestelldatum:');
@@ -78,12 +87,18 @@ define('GREY', '0.9,0.9,0.9');
 define('DARK_GREY', '0.7,0.7,0.7');
 
 // Error and Messages
-$error['ERROR_INVALID_INPUT'] = 'Interner Fehler: Nicht erkannte oder ungültige Eingabe.';
-$error['ERROR_BAD_DATE'] =  'Ungültiges Datum! Bitte geben sie das Datum im Format JJJJ-MM-DD ein!';
-$error['ERROR_BAD_INVOICENUMBERS'] =  'Ungültige Bestellungsnummer, bitte geben sie eine gültige Nummer ein. (z.B. 2577,2580-2585,2588)';
-$error['NO_ORDERS'] =  'Es wurden keine Bestellungen für den Export ausgewählt, bitte passen Sie ihre Optionen an.';
-$error['SET_PERMISSIONS'] = 'Verzeichnis schreibgeschützt!  Bitte setzen sie die Zugriffsrechte für Ihr temp_pdf Verzeichnis auf CHMOD 0777';
-$error['FAILED_TO_OPEN'] = 'Datei kann nicht zum schreiben geöffnet werden, bitte überprüfen Sie die Zugriffsberechtigungen.';
+$error['ERROR_INVALID_INPUT'] = 'Fehler: Nicht erkannte oder ungültige Eingabe.';
+$error['ERROR_BAD_START_DATE'] =  'Fehler: Ungültiges Datum! Bitte geben Sie das Datum im Format JJJJ-MM-TT ein!';
+$error['ERROR_BAD_END_DATE'] =  'Fehler: Ungültiges Datum! Bitte geben Sie das Datum im Format JJJJ-MM-TT ein!';
+$error['ERROR_BAD_INVOICENUMBERS'] =  'Fehler: Ungültige Rechnungsnummer! Bitte geben Sie eine gültige Nummer ein. (z.B. 2577,2580-2585,2588)';
+$error['NO_ORDERS'] =  'Fehler: Es wurden keine Bestellungen für den Export ausgewählt, bitte passen Sie ihre Optionen an.';
+$error['SET_PERMISSIONS'] = 'Fehler: Das Verzeichnis ist schreibgeschützt!  Bitte setzen Sie die Zugriffsrechte für Ihr temp_pdf Verzeichnis auf CHMOD 0777';
+$error['FAILED_TO_OPEN'] = 'Fehler: Die Datei kann nicht zum Schreiben geöffnet werden! Bitte überprüfen Sie die Zugriffsberechtigungen.';
+
+define('SUCCESS_1', 'Erfolg: PDF mit ');
+define('SUCCESS_2', ' Einträgen wurde erfolgreich erstellt. Bitte ');
+define('SUCCESS_3', 'klicken Sie hier');
+define('SUCCESS_4', ', umd die Datei zu öffnen.');
 
 // PDF FONT SIZES
 define('COMPANY_HEADER_FONT_SIZE','14');
@@ -146,5 +161,23 @@ define('BATCH_PDF_FILE', 'batch_orders.pdf');
 //define('PRODUCT_LISTING_BKGD_COLOR',GREY);
 //define('MODEL_COLUMN_SIZE', '37');
 //define('PRICING_COLUMN_SIZES', '67');
+
+define('FOOTER_TEXT', 'Vielen Dank, dass Sie bei ' . STORE_NAME . ' eingekauft haben.');
+
+// Filename defines to allow multilanguage use
+define('TEXT_MISSING_FILENAME', 'Fehlende Sprachdefinition für');
+define('TEXT_CHRISTMAS_CARD', 'Weihnachtskarte');
+define('TEXT_GRID', 'Gitter');
+define('TEXT_INTEGRATED_PACKING', 'Integrierte Verpackung');
+define('TEXT_INTEGRATED_PACKING2', 'Integrierte Verpackung 2');
+define('TEXT_INVOICE', 'Rechnung');
+define('TEXT_INVOICE_S3', 'Rechnung (verwendet S3 bedrucktes Rechnungsformular)');
+define('TEXT_LABELS', 'Etiketten');
+define('TEXT_LABELWRITER', 'Etikettendrucker');
+define('TEXT_LETTERHEAD', 'Briefkopf');
+define('TEXT_NULL', 'Null');
+define('TEXT_ORDER_STATUS_CHANGE_ONLY', 'Nur Status der Bestellung ändern');
+define('TEXT_PACKING_SLIP_AND_INVOICE', 'Packliste und Rechnung');
+define('TEXT_PACKING_SLIP', 'Packliste');
 
 ?>

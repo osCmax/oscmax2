@@ -1,14 +1,13 @@
 <?php
 /*
-$Id: stats_recover_cart_sales.php 14 2006-07-28 17:42:07Z user $
-  Recover Cart Sales Report v2.23
+$Id$
 
-  contrib: JM Ivler 11/20/03
-  (c) Ivler/ osCommerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
 */
 
   require('includes/application_top.php');
@@ -31,9 +30,10 @@ $Id: stats_recover_cart_sales.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <script language="javascript" src="includes/menu.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 
 <!-- header //-->
 
@@ -52,22 +52,17 @@ return $ndate;
 ?>
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-<?php
-		if ($menu_dhtml == false ) {     // add for dhtml_menu
-			echo '<td width="' . BOX_WIDTH . '" valign="top">';
-			echo '<table border="0" width="' . BOX_WIDTH . '" cellspacing="1" cellpadding="1" class="columnLeft">';
-			echo '<!-- left_navigation //-->';
-			require(DIR_WS_INCLUDES . 'column_left.php');
-			echo '<!-- left_navigation_eof //-->';
-			echo '</table>';
-			echo '</td>';
-		} else {
-		}
-?>
+	<td width="' . BOX_WIDTH . '" valign="top">
+	  <table border="0" width="' . BOX_WIDTH . '" cellspacing="1" cellpadding="1" class="columnLeft">
+	    <!-- left_navigation //-->
+	    <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+	    <!-- left_navigation_eof //-->
+	  </table>';
+	</td>
 <!-- body_text //-->
-    <td width="100%" valign="top">
+    <td width="100%" valign="top" class="main">
+    <?php echo TEXT_WORKING; ?>
         <table border="0" width="100%" cellspacing="0" cellpadding="0">
-Working...
           <tr>
           	<td colspan="6">
 <!-- new header -->
@@ -171,8 +166,9 @@ Working...
 		  <td class="main" align="right"><b><?php echo $currencies->format(tep_round($total_recovered, 2)) ?></b></font></td>
 		  <td class="main">&nbsp;</td>
 		</tr>
-Done!
+    <?php echo TEXT_DONE; ?>
     </table>
+
 <!-- body_text_eof //-->
 	</td>
  </tr>

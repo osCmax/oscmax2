@@ -1,28 +1,28 @@
 <?php
 /*
-$Id: tax_classes.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Tipos de Impuesto');
+define('HEADING_TITLE', 'Tipos de impuestos');
 
-define('TABLE_HEADING_TAX_CLASSES', 'Tipos de Impuesto');
-define('TABLE_HEADING_ACTION', 'Acci&oacute;n');
+define('TABLE_HEADING_TAX_CLASSES', 'Tipos de impuestos');
+define('TABLE_HEADING_ACTION', 'Acción');
 
-define('TEXT_INFO_EDIT_INTRO', 'Haga los cambios necesarios');
-define('TEXT_INFO_CLASS_TITLE', 'Nombre del Impuesto:');
-define('TEXT_INFO_CLASS_DESCRIPTION', 'Descripci&oacute;n:');
-define('TEXT_INFO_DATE_ADDED', 'Creado:');
-define('TEXT_INFO_LAST_MODIFIED', 'Modificado:');
-define('TEXT_INFO_INSERT_INTRO', 'Introduzca los datos del nuevo tipo de impuesto');
-define('TEXT_INFO_DELETE_INTRO', 'Seguro que desea eliminar este tipo de impuesto?');
-define('TEXT_INFO_HEADING_NEW_TAX_CLASS', 'Nuevo Tipo de Impuesto');
-define('TEXT_INFO_HEADING_EDIT_TAX_CLASS', 'Editar Tipo de Impuesto');
-define('TEXT_INFO_HEADING_DELETE_TAX_CLASS', 'Eliminar Tipo de Impuesto');
+define('TEXT_INFO_EDIT_INTRO', 'Realiza los cambios necesarios');
+define('TEXT_INFO_CLASS_TITLE', 'Nombre del impuesto:');
+define('TEXT_INFO_CLASS_DESCRIPTION', 'Descripción:');
+define('TEXT_INFO_DATE_ADDED', 'Fecha creación:');
+define('TEXT_INFO_LAST_MODIFIED', 'Última modificación:');
+define('TEXT_INFO_INSERT_INTRO', 'Introduce los datos del nuevo tipo de impuesto');
+define('TEXT_INFO_DELETE_INTRO', '¿Seguro que quieres eliminar este tipo de impuesto?');
+define('TEXT_INFO_HEADING_NEW_TAX_CLASS', 'Nuevo tipo de impuesto');
+define('TEXT_INFO_HEADING_EDIT_TAX_CLASS', 'Editar tipo de impuesto');
+define('TEXT_INFO_HEADING_DELETE_TAX_CLASS', 'Eliminar tipo de impuesto');
 ?>

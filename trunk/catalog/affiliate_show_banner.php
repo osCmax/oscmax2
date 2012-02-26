@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_show_banner.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -30,17 +26,25 @@ $Id: affiliate_show_banner.php 14 2006-07-28 17:42:07Z user $
   define('TABLE_AFFILIATE_BANNERS_HISTORY', 'affiliate_banners_history');
   define('TABLE_AFFILIATE_BANNERS', 'affiliate_banners');
   define('TABLE_PRODUCTS', 'products');
+  define('TABLE_CONFIGURATION', 'configuration');
 
 // Set the local configuration parameters - mainly for developers
-  if (file_exists('includes/local/configure.php')) include('includes/local/configure.php');
+//  if (file_exists('includes/local/configure.php')) include('includes/local/configure.php');
   require('includes/configure.php');
-  if (file_exists('includes/local/affiliate_configure.php')) include('includes/local/affiliate_configure.php');
+//  if (file_exists('includes/local/affiliate_configure.php')) include('includes/local/affiliate_configure.php');
 //  require('includes/affiliate_configure.php');
 
 // include the database functions
   require(DIR_WS_FUNCTIONS . 'database.php');
 // make a connection to the database... now
   tep_db_connect() or die('Unable to connect to database server!');
+
+  
+// set the application parameters
+  $configuration_query = tep_db_query('select configuration_key as cfgKey, configuration_value as cfgValue from ' . TABLE_CONFIGURATION);
+  while ($configuration = tep_db_fetch_array($configuration_query)) {
+    define($configuration['cfgKey'], $configuration['cfgValue']);
+  }
 
   function affiliate_show_banner($pic) {
 //Read Pic and send it to browser
@@ -56,7 +60,7 @@ $Id: affiliate_show_banner.php 14 2006-07-28 17:42:07Z user $
       $img_name=$pic;
     }
 $len = filesize($pic);
-    header ("Content-type: image/$img_type");
+header ("Content-type: image/$img_type");
 header ("Content-Length: $len");
 header ("Content-Disposition: inline; filename=images/$img_name");
 fpassthru($fp);
@@ -70,8 +74,8 @@ exit();
   function affiliate_debug($banner,$sql) {
 ?>
     <table border=1 cellpadding=2 cellspacing=2>
-      <tr><td colspan=2>Check the pathes! (catalog/includes/configure.php)</td></tr>
-      <tr><td>absolute path to picture:</td><td><?php echo DIR_FS_CATALOG . DIR_WS_IMAGES . $banner; ?></td></tr>
+      <tr><td colspan=2>Check the paths! (catalog/includes/configure.php)</td></tr>
+      <tr><td>Absolute path to picture:</td><td><?php echo DIR_FS_CATALOG . DIR_WS_IMAGES . $banner; ?></td></tr>
       <tr><td>build with:</td><td><?php echo DIR_FS_CATALOG . DIR_WS_IMAGES . $banner ?></td></tr>
       <tr><td>DIR_FS_CATALOG</td><td><?php echo DIR_FS_CATALOG; ?></td></tr>
       <tr><td>DIR_WS_CATALOG</td><td><?php echo DIR_WS_CATALOG ; ?></td></tr>
@@ -112,23 +116,23 @@ if (isset($_POST['affiliate_pbanner_id'])) $prod_banner_id = $_POST['affiliate_p
     $sql = "select affiliate_banners_image, affiliate_products_id from " . TABLE_AFFILIATE_BANNERS . " where affiliate_banners_id = '" . $banner_id  . "' and affiliate_status = 1";
     $banner_values = tep_db_query($sql);
     if ($banner_array = tep_db_fetch_array($banner_values)) {
-      $banner = $banner_array['affiliate_banners_image'];
+      $banner = 'banners/' . $banner_array['affiliate_banners_image'];
       $products_id = $banner_array['affiliate_products_id']; 
     }
   }
 
-  if ($prod_banner_id) {
+  if (isset($_GET['affiliate_pbanner_id']) || isset($_POST['affiliate_pbanner_id']) ) {
     $banner_id = 1; // Banner ID for these Banners is one
     $sql = "select products_image from " . TABLE_PRODUCTS . " where products_id = '" . $prod_banner_id  . "' and products_status = 1";
     $banner_values = tep_db_query($sql);
     if ($banner_array = tep_db_fetch_array($banner_values)) {
-      $banner = $banner_array['products_image'];
+      $banner = DYNAMIC_MOPICS_THUMBS_DIR . $banner_array['products_image'];
       $products_id = $prod_banner_id;
     }
   }
 
 // DebugModus
-  if (AFFILIATE_SHOW_BANNERS_DEBUG == 'true') affiliate_debug($banner,$sql);
+ if (AFFILIATE_SHOW_BANNERS_DEBUG == 'true') affiliate_debug($banner,$sql);
 
   if ($banner) {
     $pic = DIR_WS_IMAGES . $banner;

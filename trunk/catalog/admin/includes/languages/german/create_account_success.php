@@ -1,19 +1,19 @@
 <?php
 /*
-$Id: create_account_success.php 3 2006-05-27 04:59:07Z user $
+$Id: create_account_success.php 1011 2011-01-06 23:38:01Z michael.oscmax@gmail.com $
 
-  The Exchange Project - Community Made Shopping!
-  http://www.theexchangeproject.org
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2000,2001 The Exchange Project
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Create an Account');
-define('NAVBAR_TITLE_2', 'Success');
-define('HEADING_TITLE', 'Customer\'s Account Has Been Created!');
-define('TEXT_ACCOUNT_CREATED', 'Congratulations! The new account has been successfully created! You can now take a <a href="' . "create_order.php" . '"> manual order</a>. <p><p>
+define('NAVBAR_TITLE_1', 'Konto erstellen');
+define('NAVBAR_TITLE_2', 'Erfolg');
+define('HEADING_TITLE', 'Das Kundenkonto wurde erstellt!');
+define('TEXT_ACCOUNT_CREATED', 'Das neue Kundenkonto wurde erfolgreich erstellt. Sie können nun eine <a href="' . "create_order.php" . '">manuelle Bestellung</a> erfassen. <p><p>
 
-Or press the BACK button to go to the Admin Index Page....');
+oder klicken Sie auf ZURÜCK, um zur Admin Hauptseite zu gelangen.');
 ?>

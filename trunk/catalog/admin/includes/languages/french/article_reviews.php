@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: article_reviews.php, v1.0 2003/12/04 12:00:00 ra Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -40,12 +40,15 @@ define('TEXT_OF_5_STARS', '%s sur 5 &eacute;toiles!');
 define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excellent</b></font></small>');
 define('TEXT_BAD', '<small><font color="#ff0000"><b>Mauvais</b></font></small>');
 define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Effacer commentaire');
-/* <Mav was here!> */
+
 define('TEXT_APPROVED', 'Accept&eacute;') ;
 define('TEXT_APPROVE', 'Accepter') ;
 define('TEXT_DISAPPROVE', 'Refuser') ;
 define('TEXT_YES', 'Oui') ;
 define('TEXT_NO', 'Non') ;
-/* </Mav was here!> */
+
+define('TEXT_CUSTOMER_RATING','Évaluation de la clientèle:');
+
+define('TEXT_NO_ARTICLE_REVIEWS','Il n\'y a actuellement aucun avis de l\'un de vos articles. <br><br> Quand un client commentaires celui que vous verrez affiché à gauche. Vous devrez ensuite à un approuver ou de rejeter l\'article avant de l\'afficher dans votre magasin.');
 
 ?>

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: customers.php,v 1.3.2.1 2005/06/12 00:04:01 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -21,9 +21,9 @@ define('TABLE_HEADING_REQUEST_AUTHENTICATION', 'AD');
 define('ENTRY_CUSTOMERS_PAYMENT_SET', 'Placez les modules de paiement pour le client');
 define('ENTRY_CUSTOMERS_PAYMENT_DEFAULT', 'Employer arrangement groupe ou configuration');
 define('ENTRY_CUSTOMERS_PAYMENT_SET_EXPLAIN', 'Si vous choisissez <b><i>Placez des modules de paiement pour le client</i></b> mais ne vérifiez aucune de ces boîtes, arrangements de défaut (des arrangements ou configuration de groupe) sera toujours employé.');
-define('ENTRY_CUSTOMERS_SHIPPING_SET', 'Placez les modules d'expédition pour le client');
+define('ENTRY_CUSTOMERS_SHIPPING_SET', 'Placez les modules d\'expédition pour le client');
 define('ENTRY_CUSTOMERS_SHIPPING_DEFAULT', 'Employez les arrangements du groupe ou de la configuration');
-define('ENTRY_CUSTOMERS_SHIPPING_SET_EXPLAIN', 'Si vous choisissez <b><i>placez des modules d'expédition pour le client</i></b> mais ne vérifiez aucune de ces boîtes, arrangements de défaut (des arrangements ou configuration de groupe) sera toujours employé.');
+define('ENTRY_CUSTOMERS_SHIPPING_SET_EXPLAIN', 'Si vous choisissez <b><i>placez des modules d\'expédition pour le client</i></b> mais ne vérifiez aucune de ces boîtes, arrangements de défaut (des arrangements ou configuration de groupe) sera toujours employé.');
 // EOF: MOD - Separate Pricing Per Customer
 define('TABLE_HEADING_ACCOUNT_CREATED', 'Compte cr&eacute;&eacute;');
 define('TABLE_HEADING_ACTION', 'Action');

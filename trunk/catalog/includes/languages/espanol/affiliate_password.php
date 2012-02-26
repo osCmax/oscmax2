@@ -1,27 +1,23 @@
 <?php
 /*
-  $Id: affiliate_banners.php,v 2.00 2003/10/12
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Affiliate Program');
-define('NAVBAR_TITLE_2', 'Change Password');
+define('NAVBAR_TITLE_1', 'Programa de afiliados');
+define('NAVBAR_TITLE_2', 'Cambiar contraseña');
 
-define('HEADING_TITLE', 'My Password');
+define('HEADING_TITLE', 'Mi contraseña');
 
-define('MY_PASSWORD_TITLE', 'My Password');
+define('MY_PASSWORD_TITLE', 'Mi contraseña');
 
-define('SUCCESS_PASSWORD_UPDATED', 'Your password has been successfully updated.');
-define('ERROR_CURRENT_PASSWORD_NOT_MATCHING', 'Your Current Password did not match the password in our records. Please try again.');
+define('SUCCESS_PASSWORD_UPDATED', 'Su contraseña se ha actualizado correctamente.');
+define('ERROR_CURRENT_PASSWORD_NOT_MATCHING', 'Su contraseña actual no coincide con la contraseña en nuestros archivos. Por favor, inténtelo de nuevo.');
 
 ?>

@@ -1,15 +1,11 @@
 <?php
 /*
-  $Id: affiliate_validcats.php,v 2.00 2003/10/12
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -33,20 +29,20 @@ if ( file_exists(DIR_WS_INCLUDES . 'header_tags.php') ) {
 		  <?php
 		}
 		?>
-<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<link rel="stylesheet" type="text/css" href="templates/fallback/stylesheet.css">
 <head>
-<body marginwidth="10" marginheight="10" topmargin="10" bottommargin="10" leftmargin="10" rightmargin="10">
+<body>
  
-	<table width="580" class="infoBoxContents">
+	<table width="580" class="infoBox">
 <tr>
-<td colspan="2" class="infoBoxHeading" align="center"><?php echo TEXT_VALID_CATEGORIES_LIST; ?></td>
+<td colspan="2" class="infoBoxHeading"><?php echo TEXT_VALID_CATEGORIES_LIST; ?></td>
 </tr>
 <?php
     echo "<tr><td><b>". TEXT_VALID_CATEGORIES_ID . "</b></td><td><b>" . TEXT_VALID_CATEGORIES_NAME . "</b></td></tr><tr>";
     $result = mysql_query("SELECT * FROM categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '" . $languages_id . "' ORDER BY categories_description.categories_name");
     if ($row = mysql_fetch_array($result)) {
         do {
-            echo "<td class='infoBoxContents'>&nbsp".$row["categories_id"]."</td>\n";
+            echo "<td class='infoBoxContents'>&nbsp;".$row["categories_id"]."</td>\n";
             echo "<td class='infoBoxContents'>".$row["categories_name"]."</td>\n";
             echo "</tr>\n";
         }

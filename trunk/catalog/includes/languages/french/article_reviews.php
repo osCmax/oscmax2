@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: article_reviews.php,v 1.1.2.1 2005/06/12 00:03:46 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -17,5 +17,7 @@ define('TEXT_NO_ARTICLE_REVIEWS', 'There are currently no aproved reviews for th
 define('TEXT_OF_5_STARS', '%s out of 5 Stars');
 define('TEXT_REVIEW_VIEWS', 'Number of times read: ');
 define('TEXT_READ_REVIEW', 'Read Review...');
+
+define('TEXT_ARTICLE_REVIEW_SUBMITTED','Merci de nous envoyer votre avis sur cet article. Il sera publié une fois qu\'il a été approuvé.');
 
 ?>

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: ups.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -77,7 +77,7 @@ revised by Fritz Clapp as UPS Choice 1.8 2003/08/02
 
 // class methods
     function quote($method = '') {
-      global $HTTP_POST_VARS, $order, $shipping_weight, $shipping_num_boxes;
+      global $_POST, $order, $shipping_weight, $shipping_num_boxes;
 
       if ( (tep_not_null($method)) && (isset($this->types[$method])) ) {
         $prod = $method;

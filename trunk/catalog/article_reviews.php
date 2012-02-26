@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: article_reviews.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -17,7 +17,7 @@ $Id: article_reviews.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
-  $article_info_query = tep_db_query("select a.articles_id, ad.articles_name from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = '" . (int)$HTTP_GET_VARS['articles_id'] . "' and a.articles_status = '1' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "'");
+  $article_info_query = tep_db_query("select a.articles_id, ad.articles_name from " . TABLE_ARTICLES . " a, " . TABLE_ARTICLES_DESCRIPTION . " ad where a.articles_id = '" . (int)$_GET['articles_id'] . "' and a.articles_status = '1' and a.articles_id = ad.articles_id and ad.language_id = '" . (int)$languages_id . "'");
   if (!tep_db_num_rows($article_info_query)) {
     tep_redirect(tep_href_link(FILENAME_REVIEWS));
   } else {
@@ -32,7 +32,8 @@ $Id: article_reviews.php 3 2006-05-27 04:59:07Z user $
   
   $content = CONTENT_ARTICLES_REVIEWS;
 
-  include (bts_select('main', $content_template)); // BTSv1.5 
+  include (bts_select('main')); // BTSv1.5
+ 
   
    require(DIR_WS_INCLUDES . 'application_bottom.php');
    

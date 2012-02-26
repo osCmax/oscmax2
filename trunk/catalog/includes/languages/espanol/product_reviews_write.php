@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -13,12 +13,9 @@ $Id: product_reviews_write.php 3 2006-05-27 04:59:07Z user $
 define('NAVBAR_TITLE', 'Comentarios');
 
 define('SUB_TITLE_FROM', 'De:');
-define('SUB_TITLE_REVIEW', 'Comentario:');
-define('SUB_TITLE_RATING', 'Evaluaci&oacute;n:');
+define('SUB_TITLE_REVIEW', 'Escriba el comentario:');
 
-define('TEXT_NO_HTML', '<small><font color="#ff0000"><b>NOTA:</b></font></small>&nbsp;No se traducir&aacute; el codigo HTML!');
-define('TEXT_BAD', '<small><font color="#ff0000"><b>MALO</b></font></small>');
-define('TEXT_GOOD', '<small><font color="#ff0000"><b>BUENO</b></font></small>');
+define('TEXT_NO_HTML', '<small><font color="#ff0000"><b>NOTA:</b></font></small>&nbsp;El codigo HTML no se interpreta');
 
-define('TEXT_CLICK_TO_ENLARGE', 'Haga Click para agrandar');
+define('TEXT_CLICK_TO_ENLARGE', 'Pulse aquí para ampliar');
 ?>

@@ -1,23 +1,20 @@
 <?php
 /*
-$Id: create_account_process.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-   
-  Step-By-Step Manual Order Entry Verion 1.0
-  Customer Entry through Admin
 */
 
   require('includes/application_top.php');
   // +Country-State Selector
   require(DIR_WS_FUNCTIONS . 'ajax.php');
-if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates' && isset($HTTP_POST_VARS['country'])) {
-	ajax_get_zones_html(tep_db_prepare_input($HTTP_POST_VARS['country']), true);
+if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($_POST['country']), true);
 } else {
   // -Country-State Selector
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CREATE_ACCOUNT_PROCESS);
@@ -113,28 +110,30 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
     return $valid_address;
   }  */
 
-if (!@$HTTP_POST_VARS['action']) {
+if (!@$_POST['action']) {
    tep_redirect(tep_href_link(FILENAME_CREATE_ACCOUNT, '', 'NONSSL'));
  }
 
-  $gender = tep_db_prepare_input($HTTP_POST_VARS['gender']);
-  $firstname = tep_db_prepare_input($HTTP_POST_VARS['firstname']);
-  $lastname = tep_db_prepare_input($HTTP_POST_VARS['lastname']);
-  $dob = tep_db_prepare_input($HTTP_POST_VARS['dob']);
-  $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
-  $telephone = tep_db_prepare_input($HTTP_POST_VARS['telephone']);
-  $fax = tep_db_prepare_input($HTTP_POST_VARS['fax']);
-  $newsletter = tep_db_prepare_input($HTTP_POST_VARS['newsletter']);
-  //$password = tep_db_prepare_input($HTTP_POST_VARS['password']);
-  $confirmation = tep_db_prepare_input($HTTP_POST_VARS['confirmation']);
-  $street_address = tep_db_prepare_input($HTTP_POST_VARS['street_address']);
-  $company = tep_db_prepare_input($HTTP_POST_VARS['company']);
-  $suburb = tep_db_prepare_input($HTTP_POST_VARS['suburb']);
-  $postcode = tep_db_prepare_input($HTTP_POST_VARS['postcode']);
-  $city = tep_db_prepare_input($HTTP_POST_VARS['city']);
-  $zone_id = tep_db_prepare_input($HTTP_POST_VARS['zone_id']);
-  $state = tep_db_prepare_input($HTTP_POST_VARS['state']);
-  $country = tep_db_prepare_input($HTTP_POST_VARS['country']);
+  $gender = tep_db_prepare_input($_POST['gender']);
+  $firstname = tep_db_prepare_input($_POST['firstname']);
+  $lastname = tep_db_prepare_input($_POST['lastname']);
+  $dob = tep_db_prepare_input($_POST['dob']);
+  $email_address = tep_db_prepare_input($_POST['email_address']);
+  $telephone = tep_db_prepare_input($_POST['telephone']);
+  $fax = tep_db_prepare_input($_POST['fax']);
+  $newsletter = tep_db_prepare_input($_POST['newsletter']);
+  $customers_group = tep_db_prepare_input($_POST['customers_group_id']);
+  
+  //$password = tep_db_prepare_input($_POST['password']);
+  $confirmation = tep_db_prepare_input($_POST['confirmation']);
+  $street_address = tep_db_prepare_input($_POST['street_address']);
+  $company = tep_db_prepare_input($_POST['company']);
+  $suburb = tep_db_prepare_input($_POST['suburb']);
+  $postcode = tep_db_prepare_input($_POST['postcode']);
+  $city = tep_db_prepare_input($_POST['city']);
+  $zone_id = tep_db_prepare_input($_POST['zone_id']);
+  $state = tep_db_prepare_input($_POST['state']);
+  $country = tep_db_prepare_input($_POST['country']);
 
     
   /////////////////      RAMDOMIZING SCRIPT BY PATRIC VEVERKA       \\\\\\\\\\\\\\\\\\
@@ -189,6 +188,15 @@ $password = $l1.$r1.$l2.$l3.$r2;
     }
   }
 
+  if (ACCOUNT_COMPANY == 'true') {
+    if (strlen($company) < ENTRY_COMPANY_MIN_LENGTH) {
+      $error = true;
+      $entry_company_error = true;
+    } else {
+      $entry_company_error = false;
+    }
+  }
+
   if (strlen($email_address) < ENTRY_EMAIL_ADDRESS_MIN_LENGTH) {
     $error = true;
     $entry_email_address_error = true;
@@ -232,9 +240,9 @@ $password = $l1.$r1.$l2.$l3.$r2;
   }
 
     if (ACCOUNT_STATE == 'true') {
-      $state = tep_db_prepare_input($HTTP_POST_VARS['state']);
-      if (isset($HTTP_POST_VARS['zone_id'])) {
-        $zone_id = tep_db_prepare_input($HTTP_POST_VARS['zone_id']);
+      $state = tep_db_prepare_input($_POST['state']);
+      if (isset($_POST['zone_id'])) {
+        $zone_id = tep_db_prepare_input($_POST['zone_id']);
       } else {
         $zone_id = false;
       }
@@ -266,6 +274,7 @@ $password = $l1.$r1.$l2.$l3.$r2;
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
   <title><?php echo TITLE ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 <?php require('includes/form_check.js.php'); ?>
 <script language="javascript" type="text/javascript"><!--
 function getObject(name) { 
@@ -328,7 +337,7 @@ function getStatesRequest(request, div_element) {
 }
 //--></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php
   require(DIR_WS_INCLUDES . 'header.php');
@@ -338,19 +347,24 @@ function getStatesRequest(request, div_element) {
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
-<!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-<!-- left_navigation_eof //-->
-    </table></td>
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+        <!-- left_navigation //-->
+        <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+        <!-- left_navigation_eof //-->
+      </table>
+    </td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><form name="account_edit" method="post" <?php echo 'action="' . tep_href_link(FILENAME_CREATE_ACCOUNT_PROCESS, '', 'SSL') . '"'; ?> onSubmit="return check_form();"><input type="hidden" name="action" value="process"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <td width="75%" valign="top"><form name="account_edit" method="post" <?php echo 'action="' . tep_href_link(FILENAME_CREATE_ACCOUNT_PROCESS, '', 'SSL') . '"'; ?> onSubmit="return check_form();"><input type="hidden" name="action" value="process"><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
           </tr>
         </table></td>
+      </tr>
+      <tr>
+        <td class="messageStackError"><?php echo TEXT_ACCOUNT_PROBLEM; ?></td>
       </tr>
 <?php
   if (sizeof($navigation->snapshot) > 0) {
@@ -367,7 +381,7 @@ function getStatesRequest(request, div_element) {
       <tr>
         <td>
 <?php
-  //$email_address = tep_db_prepare_input($HTTP_GET_VARS['email_address']);
+  //$email_address = tep_db_prepare_input($_GET['email_address']);
   $account['entry_country_id'] = STORE_COUNTRY;
 
   require(DIR_WS_MODULES . 'account_details.php');
@@ -375,12 +389,18 @@ function getStatesRequest(request, div_element) {
         </td>
       </tr>
       <tr>
-        <td align="right" class="main"><br><?php echo tep_image_submit('button_confirm.gif', IMAGE_BUTTON_CONTINUE); ?></td>
+        <td align="right" class="main"><br><?php echo tep_image_submit('button_create_order.gif', IMAGE_BUTTON_CREATE); ?></td>
       </tr>
-    </table></form></td>
+    </table></form>
+    </td>
 <!-- body_text_eof //-->
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
-    </table></td>
+    <td width="25%" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+    </td>
   </tr>
 </table>
 <!-- body_eof //-->
@@ -399,6 +419,7 @@ function getStatesRequest(request, div_element) {
                            'customers_telephone' => $telephone,
                            'customers_fax' => $fax,
                            'customers_newsletter' => $newsletter,
+						   'customers_group_id' => $customers_group,
                            'customers_password' => tep_encrypt_password($password));
                            //'customers_password' => $password,
                            //'customers_default_address_id' => 1);
@@ -456,7 +477,7 @@ $customer_default_address_id = $address_id;
     $name = $firstname . " " . $lastname;
 
     if (ACCOUNT_GENDER == 'true') {
-       if ($HTTP_POST_VARS['gender'] == 'm') {
+       if ($_POST['gender'] == 'm') {
          $email_text = EMAIL_GREET_MR;
        } else {
          $email_text = EMAIL_GREET_MS;
@@ -468,7 +489,7 @@ $customer_default_address_id = $address_id;
     $email_text .= EMAIL_WELCOME . EMAIL_PASS_1 . $password . EMAIL_PASS_2 . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;
     tep_mail($name, $email_address, EMAIL_SUBJECT, nl2br($email_text), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
-    tep_redirect(tep_href_link(FILENAME_CREATE_ACCOUNT_SUCCESS, '', 'SSL'));
+    tep_redirect(tep_href_link(FILENAME_CREATE_ACCOUNT . '?account=success', '', 'SSL'));
   }
 // +Country-State Selector 
 }

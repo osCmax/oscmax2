@@ -1,20 +1,20 @@
 <?php
 /*
-$Id: cookie_usage.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Cookie Usage');
-define('HEADING_TITLE', 'Cookie Usage');
+define('NAVBAR_TITLE', 'Verwendung von Cookies');
+define('HEADING_TITLE', 'Verwendung von Cookies');
 
-define('TEXT_INFORMATION', 'Ihr Browser erlaubt keine Cookies.<br><br>Damit Sie Ihren Einkauf fortsetzen k&ouml;nnen, sollten Sie es dieser Site erlauben, Cookies zu setzen.<br><br>F&uuml;r den <b>Internet Explorer</b> gehen Sie dazu bitte folgendermassen vor:<br><ol><li>Im Men&uuml; <b>Extras</b> w&auml;hlen Sie <b>Internetoptionen</b></li><li>Dort klicken Sie auf <b>Sicherheit-Stufe anpassen</b></li><li>Im unteren Bereich findet sich eine Drop-Down-Box, in der Sie <b>Mittel</b> w&auml;hlen.</li><li>Klicken Sie nun auf <b>Zur&uuml;cksetzen</b></li></ol>Diese Massnahme dient Ihrer Sicherheit. Sollten dadurch Probleme enstehen, bitten wir um Entschuldigung. Bitte setzen Sie sich mit uns in Verbindung, wenn Sie Fragen zu diesem Problem haben.');
+define('TEXT_INFORMATION', 'Ihr Browser erlaubt keine Cookies.<br><br>Damit Sie Ihren Einkauf fortsetzen können, sollten Sie dieser Site erlauben, Cookies zu setzen.<br><br>Für den <b>Internet Explorer</b> gehen Sie dazu bitte folgendermassen vor:<br><ol><li>Im Menü <b>Extras</b> wählen Sie <b>Internetoptionen</b></li><li>Dort klicken Sie auf <b>Sicherheit-Stufe anpassen</b></li><li>Im unteren Bereich findet sich eine Drop-Down-Box, in der Sie <b>Mittel</b> wählen.</li><li>Klicken Sie nun auf <b>Zurücksetzen</b></li></ol>Diese Massnahme dient Ihrer Sicherheit. Sollten dadurch Probleme enstehen, bitten wir um Entschuldigung. Bitte setzen Sie sich mit uns in Verbindung, wenn Sie Fragen zu diesem Problem haben.');
 
-define('BOX_INFORMATION_HEADING', 'Cookies und Ihre Privatsph&auml;re und Sicherheit');
-define('BOX_INFORMATION', 'Durch den Einsatz von Cookies wird die Sicherheit verbessert und Ihre Privatsph&auml;re besser gesch&uuml;tzt.<br><br>Im Cookie sind keine pers&ouml;nlichen Daten enthalten.');
+define('BOX_INFORMATION_HEADING', 'Cookies und Ihre Privatsphäre und Sicherheit');
+define('BOX_INFORMATION', 'Durch den Einsatz von Cookies wird die Sicherheit verbessert und Ihre Privatsphäre besser geschützt.<br><br>Im Cookie sind keine persönlichen Daten enthalten.');
 ?>

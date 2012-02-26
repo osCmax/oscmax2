@@ -1,4 +1,14 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
 
 // Change to your default language ID if it differs.
   $languageFilter = "1";

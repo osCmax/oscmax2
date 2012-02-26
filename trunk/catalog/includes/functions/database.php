@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: database.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -41,9 +41,13 @@ global $$link, $debug;
     if (defined('STORE_DB_TRANSACTIONS') && (STORE_DB_TRANSACTIONS == 'true')) {
       error_log('QUERY ' . $query . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
     }
-
+	$start_time = microtime( true ); 
     $result = mysql_query($query, $$link) or tep_db_error($query, mysql_errno(), mysql_error());
-
+    
+	if ( class_exists( 'KissER' ) ) {
+      KissER::q( round( ( microtime( true ) - $start_time ), 4 ), $query );
+    } 
+	
     if (defined('STORE_DB_TRANSACTIONS') && (STORE_DB_TRANSACTIONS == 'true')) {
        $result_error = mysql_error();
        error_log('RESULT ' . $result . ' ' . $result_error . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
@@ -111,7 +115,7 @@ global $$link, $debug;
 
   function tep_db_insert_id($link = 'db_link') {
     global $$link;
-    return mysql_insert_id($$link);
+    return mysql_insert_id();
   }
 
   function tep_db_free_result($db_query) {
@@ -173,16 +177,19 @@ global $$link, $debug;
     $last_update_table_specials = "2000-01-01 12:00:00";
     $table_srp_exists = false;
     while ($list_tables = tep_db_fetch_array($result)) {
-    if ($list_tables['Name'] == TABLE_SPECIALS_RETAIL_PRICES) {
-      $table_srp_exists = true;
-      $last_update_table_srp = $list_tables['Update_time'];
-    }
-    if ($list_tables['Name'] == TABLE_SPECIALS) {
-      $last_update_table_specials = $list_tables['Update_time'];
-    }
-  } // end while
+      if ($list_tables['Name'] == TABLE_SPECIALS_RETAIL_PRICES) {
+        $table_srp_exists = true;
+        $last_update_table_srp = $list_tables['Update_time'];
+      }
+      if ($list_tables['Name'] == TABLE_SPECIALS) {
+        $last_update_table_specials = $list_tables['Update_time'];
+      }
+    } // end while
+	
+  // Check to force update in case the above are NULL
+  if(empty($last_update_table_srp) || empty($last_update_table_specials)) { $force_update = 'true'; } else { $force_update = 'false'; }
 
-  if(!$table_srp_exists || ($last_update_table_specials > $last_update_table_srp)) {
+  if(!$table_srp_exists || ($last_update_table_specials > $last_update_table_srp) || $force_update == 'true') {
     if ($table_srp_exists) { 
       $query1 = "truncate " . TABLE_SPECIALS_RETAIL_PRICES . "";
         if (tep_db_query($query1)) {
@@ -219,7 +226,9 @@ global $$link, $debug;
   if ($table_pgp_exists == false) {
     $create_table_sql = "create table " . TABLE_PRODUCTS_GROUP_PRICES.$customer_group_id . " (products_id int NOT NULL default '0', products_price decimal(15,4) NOT NULL default '0.0000', specials_new_products_price decimal(15,4) default NULL, status tinyint, primary key (products_id) )" ;
     $fill_table_sql1 = "insert into " . TABLE_PRODUCTS_GROUP_PRICES.$customer_group_id ." select p.products_id, p.products_price, NULL as specials_new_products_price, NULL as status FROM " . TABLE_PRODUCTS . " p";
-    $update_table_sql1 = "update " . TABLE_PRODUCTS_GROUP_PRICES.$customer_group_id ." ppt left join " . TABLE_PRODUCTS_GROUPS . " pg using(products_id) set ppt.products_price = pg.customers_group_price where ppt.products_id = pg.products_id and pg.customers_group_id ='" . $customer_group_id . "'";
+// BOF QPBPP for SPPC
+      $update_table_sql1 = "update " . TABLE_PRODUCTS_GROUP_PRICES.$customer_group_id ." ppt left join " . TABLE_PRODUCTS_GROUPS . " pg using(products_id) set ppt.products_price = pg.customers_group_price where pg.customers_group_price != null and ppt.products_id = pg.products_id and pg.customers_group_id ='" . $customer_group_id . "'";
+// EOF QPBPP for SPPC
     $update_table_sql2 = "update " . TABLE_PRODUCTS_GROUP_PRICES.$customer_group_id ." ppt left join " . TABLE_SPECIALS . " s using(products_id) set ppt.specials_new_products_price = s.specials_new_products_price, ppt.status = s.status where ppt.products_id = s.products_id and s.customers_group_id = '" . $customer_group_id . "'";
     if ( tep_db_query($create_table_sql) && tep_db_query($fill_table_sql1) && tep_db_query($update_table_sql1) && tep_db_query($update_table_sql2) ) {
       return true;
@@ -229,7 +238,9 @@ global $$link, $debug;
   if ( ($last_update_table_pgp < $last_update_table_products && (time() - $last_update_table_products > (int)MAXIMUM_DELAY_UPDATE_PG_PRICES_TABLE * 60) ) || $last_update_table_specials > $last_update_table_pgp || $last_update_table_products_groups > $last_update_table_pgp ) { // then the table should be updated
     $empty_query = "truncate " . TABLE_PRODUCTS_GROUP_PRICES.$customer_group_id . "";
     $fill_table_sql1 = "insert into " . TABLE_PRODUCTS_GROUP_PRICES.$customer_group_id ." select p.products_id, p.products_price, NULL as specials_new_products_price, NULL as status FROM " . TABLE_PRODUCTS . " p";
-    $update_table_sql1 = "update " . TABLE_PRODUCTS_GROUP_PRICES.$customer_group_id ." ppt left join " . TABLE_PRODUCTS_GROUPS . " pg using(products_id) set ppt.products_price = pg.customers_group_price where ppt.products_id = pg.products_id and pg.customers_group_id ='" . $customer_group_id . "'";
+// BOF QPBPP for SPPC
+      $update_table_sql1 = "update " . TABLE_PRODUCTS_GROUP_PRICES.$customer_group_id ." ppt left join " . TABLE_PRODUCTS_GROUPS . " pg using(products_id) set ppt.products_price = pg.customers_group_price where pg.customers_group_price != null and ppt.products_id = pg.products_id and pg.customers_group_id ='" . $customer_group_id . "'";
+// EOF QPBPP for SPPC
     $update_table_sql2 = "update " . TABLE_PRODUCTS_GROUP_PRICES.$customer_group_id ." ppt left join " . TABLE_SPECIALS . " s using(products_id) set ppt.specials_new_products_price = s.specials_new_products_price, ppt.status = s.status where ppt.products_id = s.products_id and s.customers_group_id = '" . $customer_group_id . "'";
     if ( tep_db_query($empty_query) && tep_db_query($fill_table_sql1) && tep_db_query($update_table_sql1) && tep_db_query($update_table_sql2) ) {
       return true;

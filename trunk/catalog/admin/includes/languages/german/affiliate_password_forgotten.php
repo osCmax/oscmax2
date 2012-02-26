@@ -1,24 +1,21 @@
 <?php
 /*
-  $Id: affiliate_password_forgotten.php,v 1.4 2003/02/14 00:01:46 harley_vb Exp $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
+define('NAVBAR_TITLE', 'Passwort zum Affiliateprogramm vergessen');
 define('NAVBAR_TITLE_1', 'Anmelden');
-define('NAVBAR_TITLE_2', 'Passwort zum Partnerprogramm vergessen');
-define('HEADING_TITLE', 'Wie war noch mal mein Passwort?');
-define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><b>ACHTUNG:</b></font> Die eingegebene eMail-Adresse ist nicht registriert. Bitte versuchen Sie es noch einmal.');
-define('EMAIL_PASSWORD_REMINDER_SUBJECT', STORE_NAME . ' - Neues Passwort zum Partnerprogramm');
-define('EMAIL_PASSWORD_REMINDER_BODY', 'Über die Adresse ' . $REMOTE_ADDR . ' haben wir eine Anfrage zur Passworterneuerung für Ihren Zugang zum Partnerprogramm erhalten.' . "\n\n" . 'Ihr neues Passwort für Ihren Zugang zum Partnerprogramm von \'' . STORE_NAME . '\' lautet ab sofort:' . "\n\n" . '   %s' . "\n\n");
-define('TEXT_PASSWORD_SENT', 'Ein neues Passwort wurde per eMail verschickt.');
+define('NAVBAR_TITLE_2', 'Passwort zum Affiliateprogramm vergessen');
+define('HEADING_TITLE', 'Ich habe mein Affiliatepasswort vergessen.');
+define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><b>ACHTUNG:</b></font> Die eingegebene E-Mail-Adresse ist nicht registriert. Bitte versuchen Sie es noch einmal.');
+define('EMAIL_PASSWORD_REMINDER_SUBJECT', STORE_NAME . ' - Neues Passwort zum Affiliateprogramm');
+define('EMAIL_PASSWORD_REMINDER_BODY', 'Über die Adresse ' . $REMOTE_ADDR . ' haben wir eine Anfrage zur Passworterneuerung für Ihren Zugang zum Affiliateprogramm erhalten.' . "\n\n" . 'Ihr neues Passwort für Ihren Zugang zum Affiliateprogramm von \'' . STORE_NAME . '\' lautet ab sofort:' . "\n\n" . '   %s' . "\n\n");
+define('TEXT_PASSWORD_SENT', 'Ein neues Passwort wurde an Ihre E-Mail-Adresse verschickt.');
 ?>

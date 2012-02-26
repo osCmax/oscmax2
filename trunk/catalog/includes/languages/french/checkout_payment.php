@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: checkout_payment.php,v 1.1.1.1.2.1 2005/06/12 00:03:46 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -34,4 +34,8 @@ define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'Confirmer cette commande.');
 define('HEADING_PRODUCTS', 'Produits command&eacute;s');
 define('TEXT_EDIT', '&Eacute;diter');
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
+define('TERMS_PART_1','S\'il vous plaît confirmer que vous avez lu notre');
+
+define('TERMS_PART_2','<b><u>Termes et Conditions</u></b>');
+
 ?>

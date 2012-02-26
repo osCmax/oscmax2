@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_faq.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -30,9 +26,10 @@ $Id: affiliate_faq.php 14 2006-07-28 17:42:07Z user $
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_AFFILIATE_FAQ));
 
-  $content = affiliate_faq; 
+  $content = 'affiliate_faq'; 
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 
 ?>

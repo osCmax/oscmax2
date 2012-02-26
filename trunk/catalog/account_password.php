@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: account_password.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -25,10 +25,10 @@ $Id: account_password.php 3 2006-05-27 04:59:07Z user $
 // needs to be included earlier to set the success message in the messageStack
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ACCOUNT_PASSWORD);
 
-  if (isset($HTTP_POST_VARS['action']) && ($HTTP_POST_VARS['action'] == 'process')) {
-    $password_current = tep_db_prepare_input($HTTP_POST_VARS['password_current']);
-    $password_new = tep_db_prepare_input($HTTP_POST_VARS['password_new']);
-    $password_confirmation = tep_db_prepare_input($HTTP_POST_VARS['password_confirmation']);
+  if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
+    $password_current = tep_db_prepare_input($_POST['password_current']);
+    $password_new = tep_db_prepare_input($_POST['password_new']);
+    $password_confirmation = tep_db_prepare_input($_POST['password_confirmation']);
 
     $error = false;
 
@@ -70,9 +70,10 @@ $Id: account_password.php 3 2006-05-27 04:59:07Z user $
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL'));
 
   $content = CONTENT_ACCOUNT_PASSWORD;
-  $javascript = 'form_check.js.php';
+  $javascript = $content . '.js.php';
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

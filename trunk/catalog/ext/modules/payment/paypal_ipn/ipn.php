@@ -1,16 +1,13 @@
 <?php
 /*
-$Id: ipn.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2006 osCMax2004 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  Original Authors: Harald Ponce de Leon, Mark Evans 
-  Updates by PandA.nl, Navyhost, Zoeticlight, David, gravyface, AlexStudio, windfjf, Monika in Germany and Terra
-  v2.3 updated by AlexStudio
 */
 
   chdir('../../../../');
@@ -265,6 +262,17 @@ $Id: ipn.php 3 2006-05-27 04:59:07Z user $
           }
 
           // BOF content type fix by AlexStudio
+      /* One Page Checkout - BEGIN */
+      $sendToFormatted = tep_address_label($customer_id, $sendto, 0, '', "\n");
+      if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+          $sendToFormatted = $onePageCheckout->getAddressFormatted('sendto');
+      }
+
+      $billToFormatted = tep_address_label($customer_id, $billto, 0, '', "\n");
+      if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+          $billToFormatted = $onePageCheckout->getAddressFormatted('billto');
+      }
+    /* One Page Checkout - END */
           if ($content_type != 'virtual') {
           // EOF content type fix by AlexStudio
             $email_order .= "\n" . EMAIL_TEXT_DELIVERY_ADDRESS . "\n" . 

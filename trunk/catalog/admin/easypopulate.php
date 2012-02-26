@@ -1,17 +1,17 @@
 <?php
 /*
-  $Id: easypopulate.php,v 2.76g 2007/01/20 22:50:52 surfalot Exp $
+$Id$
 
-  Designed for osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2007 Todd Holforty mtholforty(at)surfalot(dot)com 
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
 // Current EP Version
-define ('EP_CURRENT_VERSION', '2.76g-MS2');
+define ('EP_CURRENT_VERSION', '2.76i-MS2');
 
 require('includes/application_top.php');
 require_once('includes/database_tables.php');
@@ -231,7 +231,7 @@ define ('EP_MAX_CATEGORIES', 7); // default is 7
 define ('EP_PRODUCTS_WITH_ATTRIBUTES', true);  // default is true
 
 // change this to true, if you use QTYpro and want to set attributes stock with EP.
-define ('EP_PRODUCTS_ATTRIBUTES_STOCK', false); // default is false
+define ('EP_PRODUCTS_ATTRIBUTES_STOCK', true); // default is false
 
 // change this if you want to download only selected product options (attributes).
 // If you have a lot of product options, and your output file exceeds 256 columns, 
@@ -297,8 +297,8 @@ $custom_fields = array();
 // may need to incorporate custom code to correctly import your data.
 //
 
-$custom_fields[TABLE_PRODUCTS] = array(); // this line is used if you have no custom fields to import/export
-$custom_fields[TABLE_PRODUCTS_DESCRIPTION] = array(); // this line is used if you have no custom fields to import/export
+$custom_fields[TABLE_PRODUCTS] = array('products_msrp' => 'msrp', 'products_hide_from_groups' => 'hide from groups', 'products_qty_blocks' => 'qty blocks', 'products_min_order_qty' => 'min order qty'); // this line is used if you have no custom fields to import/export
+$custom_fields[TABLE_PRODUCTS_DESCRIPTION] = array('tab1' => 'tab1', 'tab1' => 'tab1', 'tab2' => 'tab2', 'tab3' => 'tab3', 'tab4' => 'tab4', 'tab5' => 'tab5', 'tab6' => 'tab6'); // this line is used if you have no custom fields to import/export
 
 //
 // FINAL NOTE: this currently only works with the "products" & "products_description" table.
@@ -326,7 +326,7 @@ define ('EP_FROOGLE_PRODUCT_INFO_PATH', HTTP_CATALOG_SERVER . DIR_WS_CATALOG . "
 
 // **** Froogle product image path ****
 // Set this to the path to your images directory
-define ('EP_FROOGLE_IMAGE_PATH', HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES. DYNAMICS_MOPICS_THUMBS_DIR);
+define ('EP_FROOGLE_IMAGE_PATH', HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES. DYNAMIC_MOPICS_PRODUCTS_DIR);
 
 // **** Froogle - search engine friendly setting
 // if your store has SEARCH ENGINE FRIENDLY URLS set, then turn this to true
@@ -348,24 +348,31 @@ define ('EP_FROOGLE_CURRENCY', 'USD');  // default is 'USD'
 
 // More Pics 6 v1.3
 define ('EP_MORE_PICS_6_SUPPORT', false);  // default is false
-//
+
 // Header Tags Controller Support v2.0
 define ('EP_HTC_SUPPORT', false);  // default is false
-//
-// Separate Pricing Per Customer (SPPC)
-define ('EP_SPPC_SUPPORT', false);  // default is false
 
-// ///////////////////////////////////////////////////////////////////////////////
-// The following items are not complete and untested. Experiment at your own risk.
-// ///////////////////////////////////////////////////////////////////////////////
+// Separate Pricing Per Customer (SPPC) v4.1.x
+define ('EP_SPPC_SUPPORT', true);  // default is false
 
-//
-// Extra Fields Contribution (***UNTESTED AND MAY NOT BE FUNCTIONAL***)
+// X-Sell 2.6 Support
+define ('EP_XSELL_SUPPORT', true);  // default is false
+
+// Additional Images v2.1.1
+define ('EP_ADDITIONAL_IMAGES', false);  // default is false
+define ('EP_ADDITIONAL_IMAGES_MAX', 6);  // default is 6, maximum number of columns
+
+// Multi Vendor System (MVS) 1.2 support
+define ('EP_MVS_SUPPORT', false);  // default is false
+
+// Extra Fields Contribution 
 define ('EP_EXTRA_FIELDS_SUPPORT', false);  // default is false
-//
-// Unknown Image Contrib (***UNTESTED AND MAY NOT BE FUNCTIONAL***)
-define ('EP_UNKNOWN_ADD_IMAGES_SUPPORT', false);  // default is false
 
+// UltraPics 2.05 LightBox Contrib (***FUNCTIONAL***)
+define ('EP_ULTRPICS_SUPPORT', false);  // default is false
+
+// PDF File Upload and Display v2.01 (***FUNCTIONAL***)
+define ('EP_PDF_UPLOAD_SUPPORT', false);  // default is false
 
 //*******************************
 //*******************************
@@ -390,7 +397,7 @@ define ('EP_UNKNOWN_ADD_IMAGES_SUPPORT', false);  // default is false
   class epbox extends tableBlock {
     // constructor
     function epbox($contents, $direct_ouput = true) {
-      $this->table_width = '';
+      $this->table_width = '100%';
       if (!empty($contents) && $direct_ouput == true) {
         echo $this->tableBlock($contents);
       }
@@ -465,6 +472,16 @@ $default_these[] = 'v_products_image';
 foreach ($custom_fields[TABLE_PRODUCTS] as $key => $name) { 
   $default_these[] = 'v_' . $key;
 }
+if (EP_MVS_SUPPORT == true) { 
+  $default_these[] = 'v_vendor';
+}
+if (EP_ADDITIONAL_IMAGES == true) { 
+  $default_these[] = 'v_products_image_description';
+  for ($i=2;$i<=EP_ADDITIONAL_IMAGES_MAX+1;$i++) {
+    $default_these[] = 'v_products_image_' . $i;
+    $default_these[] = 'v_products_image_description_' . $i;
+  }
+}
 if (EP_MORE_PICS_6_SUPPORT == true) { 
   $default_these[] = 'v_products_subimage1';
   $default_these[] = 'v_products_subimage2';
@@ -473,16 +490,28 @@ if (EP_MORE_PICS_6_SUPPORT == true) {
   $default_these[] = 'v_products_subimage5';
   $default_these[] = 'v_products_subimage6';
 }
-if (EP_UNKNOWN_ADD_IMAGES_SUPPORT == true) { 
-  $default_these[] = 'v_products_mimage';
-  $default_these[] = 'v_products_bimage';
-  $default_these[] = 'v_products_subimage1';
-  $default_these[] = 'v_products_bsubimage1';
-  $default_these[] = 'v_products_subimage2';
-  $default_these[] = 'v_products_bsubimage2';
-  $default_these[] = 'v_products_subimage3';
-  $default_these[] = 'v_products_bsubimage3';
+if (EP_ULTRPICS_SUPPORT == true) { 
+  $default_these[] = 'v_products_image_med';
+  $default_these[] = 'v_products_image_lrg';
+  $default_these[] = 'v_products_image_sm_1';
+  $default_these[] = 'v_products_image_xl_1';
+  $default_these[] = 'v_products_image_sm_2';
+  $default_these[] = 'v_products_image_xl_2';
+  $default_these[] = 'v_products_image_sm_3';
+  $default_these[] = 'v_products_image_xl_3';
+  $default_these[] = 'v_products_image_sm_4';
+  $default_these[] = 'v_products_image_xl_4';
+  $default_these[] = 'v_products_image_sm_5';
+  $default_these[] = 'v_products_image_xl_5';
+  $default_these[] = 'v_products_image_sm_6';
+  $default_these[] = 'v_products_image_xl_6';
 }
+
+if (EP_PDF_UPLOAD_SUPPORT == true) { 
+  $default_these[] = 'v_products_pdfupload';
+  $default_these[] = 'v_products_fileupload';
+}
+
 $default_these[] = 'v_categories_id';
 $default_these[] = 'v_products_price';
 $default_these[] = 'v_products_quantity';
@@ -560,10 +589,17 @@ if ( !empty($_GET['download']) && ($_GET['download'] == 'stream' or $_GET['downl
     $filestring .= $endofrow;
 
     if ($_GET['download'] == 'activestream'){
-      header("Content-type: application/vnd.ms-excel");
+//		header('Content-Transfer-Encoding: none');
+        if (EP_EXCEL_SAFE_OUTPUT == true) {
+		header("Content-type: text/x-csv");
+//		header('Content-type: text/x-csv; charset="utf-8"');
+//		header("Content-type: application/vnd.ms-excel");
+//		header('Content-type: application/vnd.ms-excel; charset="utf-8"');
+		} else {
+		header("Content-type: text/plain");
+		}
       header("Content-disposition: attachment; filename=$EXPORT_TIME" . ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"));
       // Changed if using SSL, helps prevent program delay/timeout (add to backup.php also)
-      //    header("Pragma: no-cache");
       if ($request_type== 'NONSSL'){
         header("Pragma: no-cache");
       } else {
@@ -615,7 +651,7 @@ if ( !empty($_GET['download']) && ($_GET['download'] == 'stream' or $_GET['downl
                 if ($num_of_langs == 1){
                     $row['v_froogle_products_url_' . $lid] = EP_FROOGLE_PRODUCT_INFO_PATH . '?products_id=' . $row['v_products_id'];
                 } else {
-                    $row['v_froogle_products_url_' . $lid] = EP_FROOGLE_PRODUCT_INFO_PATH . '?products_id=' . $row['v_products_id'] . '&language=' . $lid;
+                    $row['v_froogle_products_url_' . $lid] = EP_FROOGLE_PRODUCT_INFO_PATH . '?products_id=' . $row['v_products_id'] . '&amp;language=' . $lid;
                 }
             }
 
@@ -638,6 +674,24 @@ if ( !empty($_GET['download']) && ($_GET['download'] == 'stream' or $_GET['downl
             // end support for Header Controller 2.0
 		
         }
+
+            if (EP_ADDITIONAL_IMAGES == true) {
+              $i = 2;
+              $ai_result = tep_db_query("SELECT * FROM ".TABLE_ADDITIONAL_IMAGES."  WHERE products_id = " . $row['v_products_id'] . " limit " . EP_ADDITIONAL_IMAGES_MAX);
+              while ($ai_row = tep_db_fetch_array($ai_result)) {
+                $row['v_products_image_'.$i] = (!empty($ai_row['popup_images'])?$ai_row['popup_images']:$ai_row['thumb_images']);
+                $row['v_products_image_description_'.$i] = $ai_row['images_description'];
+                $i++;
+              }
+            }
+		
+		
+            if (EP_MVS_SUPPORT == true) { 
+              $vend_result = tep_db_query("select vendors_name from ".TABLE_VENDORS." where vendors_id = " . $row['v_vendor_id'] . "");
+              if ($vend_row = tep_db_fetch_array($vend_result)) {
+                $row['v_vendor'] = $vend_row['vendors_name'];
+              }
+            }
 
 		// for the categories, we need to keep looping until we find the root category
 		// start with v_categories_id
@@ -803,6 +857,28 @@ if ( !empty($_GET['download']) && ($_GET['download'] == 'stream' or $_GET['downl
         }
         // VJ product attribs end
 
+        // this is for the cross sell contribution
+        if (isset($filelayout['v_cross_sell'])){
+            $px_models = '';
+			$sql2 = "SELECT
+                    px.products_id,
+                    px.xsell_id,
+					p.products_model
+                FROM
+                    ".TABLE_PRODUCTS_XSELL." px, 
+					".TABLE_PRODUCTS." p
+                WHERE
+                px.xsell_id = p.products_id and 
+                px.products_id = " . $row['v_products_id'] . "
+                ";
+            $cross_sell_result = tep_db_query($sql2);
+			while( $cross_sell_row = tep_db_fetch_array($cross_sell_result) ){
+				$px_models .= $cross_sell_row['products_model'] . ',';
+			}
+			if (strlen($px_models) > 0) { $px_models = substr($px_models, 0, -1); }
+			$row['v_cross_sell'] = $px_models;
+		}
+
         // this is for the separate price per customer module
         if (isset($filelayout['v_customer_price_1'])){
             $sql2 = "SELECT
@@ -818,12 +894,38 @@ if ( !empty($_GET['download']) && ($_GET['download'] == 'stream' or $_GET['downl
             $result2 = tep_db_query($sql2);
             $ll = 1;
             $row2 =  tep_db_fetch_array($result2);
+	    
+            // do pricing specials
+            if (isset($filelayout['v_customer_specials_price_1'])){
+              $sppc_specials = array();
+              $specials_result = tep_db_query("SELECT specials_new_products_price, status, customers_group_id FROM ".TABLE_SPECIALS." WHERE products_id = " . $row['v_products_id'] . " and customers_group_id <> 0 and expires_date < CURRENT_TIMESTAMP ORDER BY specials_id DESC");
+              while( $specials_result_row = tep_db_fetch_array($specials_result) ){
+                $sppc_specials[$specials_result_row['customers_group_id']] = $specials_result_row['specials_new_products_price'];
+              }
+            }
+			
             while( $row2 ){
                 $row['v_customer_group_id_' . $ll]     = $row2['customers_group_id'];
                 $row['v_customer_price_' . $ll]     = $row2['customers_group_price'];
+                // do pricing specials
+                if (isset($filelayout['v_customer_specials_price_1'])){
+                  $row['v_customer_specials_price_' . $ll]     = $sppc_specials[$ll];
+                }
                 $row2 = tep_db_fetch_array($result2);
                 $ll++;
             }
+            // do pricing specials
+            $specials_result = tep_db_query("SELECT specials_new_products_price, status FROM ".TABLE_SPECIALS." WHERE products_id = " . $row['v_products_id'] . " and customers_group_id <> 0 and expires_date < CURRENT_TIMESTAMP ORDER BY specials_id DESC");
+            if( $specials_result_row = tep_db_fetch_array($specials_result) ){
+              if ($specials_result_row['status'] == 1) {
+                $row['v_products_specials_price']     = $specials_result_row['specials_new_products_price'];
+              } else {
+                $row['v_products_specials_price']     = $specials_result_row['specials_new_products_price'];
+              }
+            } else {
+              $row['v_products_specials_price']     = '';
+            }
+
         }
 
         if ($dltype == 'froogle'){
@@ -858,6 +960,20 @@ if ( !empty($_GET['download']) && ($_GET['download'] == 'stream' or $_GET['downl
         $row['v_products_price']    = $row['v_products_price'] +
                 (EP_PRICE_WITH_TAX == true ? round( ($row['v_products_price'] * $row_tax_multiplier / 100), EP_PRECISION) : 0);
 
+        // do pricing specials
+        if (EP_SPPC_SUPPORT == true) { $SPPC_extra_query = 'and customers_group_id = 0 '; } else { $SPPC_extra_query = ''; }
+        if (isset($filelayout['v_products_specials_price'])){
+            $specials_result = tep_db_query("SELECT specials_new_products_price, status FROM ".TABLE_SPECIALS." WHERE products_id = " . $row['v_products_id'] . " " . $SPPC_extra_query . "and (expires_date < CURRENT_TIMESTAMP or expires_date is null) ORDER BY specials_id DESC");
+            if( $specials_result_row = tep_db_fetch_array($specials_result) ){
+              if ($specials_result_row['status'] == 1) {
+                $row['v_products_specials_price']     = $specials_result_row['specials_new_products_price'];
+              } else {
+                $row['v_products_specials_price']     = $specials_result_row['specials_new_products_price'];
+              }
+            } else {
+              $row['v_products_specials_price']     = '';
+            }
+        }
 
         // Now set the status to a word the user specd in the config vars
         if ( $row['v_status'] == '1' ){
@@ -906,10 +1022,17 @@ if ( !empty($_GET['download']) && ($_GET['download'] == 'stream' or $_GET['downl
         //*******************************
         // STREAM FILE
         //*******************************
-        header("Content-type: application/vnd.ms-excel");
+//		header('Content-Transfer-Encoding: none');
+        if (EP_EXCEL_SAFE_OUTPUT == true) {
+		header("Content-type: text/x-csv");
+//		header('Content-type: text/x-csv; charset="utf-8"');
+//		header("Content-type: application/vnd.ms-excel");
+//		header('Content-type: application/vnd.ms-excel; charset="utf-8"');
+		} else {
+		header("Content-type: text/plain");
+		}
         header("Content-disposition: attachment; filename=$EXPORT_TIME" . ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"));
         // Changed if using SSL, helps prevent program delay/timeout (add to backup.php also)
-        //    header("Pragma: no-cache");
         if ($request_type== 'NONSSL'){
           header("Pragma: no-cache");
         } else {
@@ -948,6 +1071,8 @@ if ( !empty($_GET['download']) && ($_GET['download'] == 'stream' or $_GET['downl
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
+<script type="text/javascript" src="includes/general.js"></script>
 <script type="text/javascript"><!--
   function switchForm( field ) {
     var d = document;
@@ -1022,7 +1147,7 @@ if ( !empty($_GET['download']) && ($_GET['download'] == 'stream' or $_GET['downl
   }
 //--></script> 
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
@@ -1213,13 +1338,15 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
 
     $infp = fopen(EP_TEMP_DIRECTORY . $file['name'], "r");
 
+    $ext_tmp = substr( $file['name'], -3 , 3 );
+	
     //toprow has the field headers
     $toprow = fgets($infp,32768);
 
     $filecount = 1;
 
-    echo "Creating file EP_Split" . $filecount . '.'.((EP_EXCEL_SAFE_OUTPUT==true)?'csv':'txt').' ...  ';
-    $tmpfname = EP_TEMP_DIRECTORY . "EP_Split" . $filecount.'.'.((EP_EXCEL_SAFE_OUTPUT==true)?'csv':'txt');
+    echo "Creating file EP_Split" . $filecount . '.'.$ext_tmp.' ...  ';
+    $tmpfname = EP_TEMP_DIRECTORY . "EP_Split" . $filecount.'.'.$ext_tmp;
     $fp = fopen( $tmpfname, "w+");
     fwrite($fp, $toprow);
 
@@ -1240,8 +1367,8 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
                 fclose($fp);
                 // increment filecount
                 $filecount++;
-                echo "Creating file EP_Split" . $filecount . '.'.((EP_EXCEL_SAFE_OUTPUT==true)?'csv':'txt').' ...  ';
-                $tmpfname = EP_TEMP_DIRECTORY . "EP_Split" . $filecount.'.'.((EP_EXCEL_SAFE_OUTPUT==true)?'csv':'txt');
+                echo "Creating file EP_Split" . $filecount . '.'.$ext_tmp.' ...  ';
+                $tmpfname = EP_TEMP_DIRECTORY . "EP_Split" . $filecount.'.'.$ext_tmp;
                 //Open next file name
                 $fp = fopen( $tmpfname, "w+");
                 fwrite($fp, $toprow);
@@ -1268,8 +1395,39 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
 
       <table width="<?php if (EP_SHOW_EP_SETTINGS == true) { echo '95'; } else { echo '75'; } ?>%" cellpadding="5" cellspacing="0" style="border-collapse:collapse;">
         <tr>
-          <td width="75%" style="border-style:solid; border-width:thin; border-color:#CCCCCC;"><span style="font-size:10px;background-color:#FFFFCC; width:100%;">&nbsp; &nbsp;Please <a href="backup.php<?php if (defined('SID') && tep_not_null(SID)) { echo '?'.tep_session_name().'='.tep_session_id(); } ?>" style="font-size:10px;background-color:#FFFFCC;text-decoration:underline;">backup your database</a> before performing any Easy Populate operations!&nbsp; &nbsp;</span><br />
-           <form enctype="multipart/form-data" action="easypopulate.php?split=0<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>" method="post"><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
+          <td width="75%" style="border-style:solid; border-width:thin; border-color:#CCCCCC;">
+          
+            <table width="100%">
+              <tr>
+                <td class="messageStackAlert">Please <a href="backup.php<?php if (defined('SID') && tep_not_null(SID)) { echo '?'.tep_session_name().'='.tep_session_id(); } ?>" style="text-decoration:underline;">backup your database</a> before performing any Easy Populate operations.</td>
+              </tr>
+            </table>
+            <?php
+			  $model_query_raw = "select products_id from " . TABLE_PRODUCTS . " where products_model = '' or products_model is null";
+              $model_query = tep_db_query($model_query_raw);
+			  $blank_total = tep_db_num_rows($model_query);
+			  $count = 0;
+              if ($blank_total > 0) { ?>
+			    <table width="100%">
+                  <tr>
+                    <td class="messageStackWarning">The following products are missing their Model and as such will not work with EasyPopulate:<br>
+                    <?php
+                    while ($blank_models = tep_db_fetch_array($model_query)) {
+					  $count++;
+			          echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $blank_models['products_id'] . '&action=new_product') . '">' . $blank_models['products_id'] . '</a>';
+					  if ($count <> $blank_total) {
+					    echo ', ';
+					  } else {
+						echo '.';
+					  }
+			        }
+				    ?>
+				    </td>
+                  </tr>
+                </table>
+              <?php } ?>
+
+           <form enctype="multipart/form-data" action="easypopulate.php?split=0<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>" method="post"><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
                 <p style="margin-top: 18px; margin-bottom: 8px;"><b>Upload and Import EP File</b></p>
                 <p style="margin-top: 0px;">
                   <input type="hidden" name="MAX_FILE_SIZE" value="100000000">
@@ -1284,7 +1442,7 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
                 </p>
               </form>
 
-           <form enctype="multipart/form-data" action="easypopulate.php?split=1<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>" method="post"><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
+           <form enctype="multipart/form-data" action="easypopulate.php?split=1<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>" method="post"><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
                 <p style="margin-top: 18px; margin-bottom: 8px;"><b>Upload and Split EP File</b></p>
                 <p style="margin-top: 0px;">
                   <input type="hidden" name="MAX_FILE_SIZE" value="1000000000">
@@ -1305,7 +1463,7 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
                         while (false!== ($file = readdir($handle))) {
                           if ($file!= "." && $file!= ".." &&!is_dir($file)) {
                            $namearr = split('\.',$file);
-                           if ($namearr[count($namearr)-1] == ((EP_EXCEL_SAFE_OUTPUT==true)?'csv':'txt')) $the_array[] = $file;
+                           if ($namearr[count($namearr)-1] == 'csv' || $namearr[count($namearr)-1] == 'txt') $the_array[] = $file;
                           }
                         }
                         closedir($handle);
@@ -1334,8 +1492,8 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
 
         <p style="margin-top: 24px; margin-bottom: 8px;"><b>Export EP or Froogle Products File</b></p>
         <p style="margin-top: 0px;"><!-- Download file links -  Add your custom fields here -->
+        <?php echo tep_draw_form('custom', 'easypopulate.php', ((defined('SID') && tep_not_null(SID)) ? tep_session_name().'='.tep_session_id() : ''), 'get','id="custom"'); ?><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
           <table border="0" cellpadding="0" cellspacing="0" style="border: 1px solid #666666; padding: 3px;">
-          <?php echo tep_draw_form('custom', 'easypopulate.php', 'id="custom"' . ((defined('SID') && tep_not_null(SID)) ? '&'.tep_session_name().'='.tep_session_id() : ''), 'get'); ?><?php if (defined('SID') && tep_not_null(SID)) { echo tep_draw_hidden_field(tep_session_name(), tep_session_id()); } ?>
           <tr><td class="smallText"><?php 
           
           echo tep_draw_pull_down_menu('download',array( 0 => array( "id" => 'activestream', 'text' => 'Download on-the-fly' ), 1 => array( "id" => 'stream', 'text' => 'Create then Download' ), 2 => array( "id" => 'tempfile', 'text' => 'Create in Temp Dir' )));
@@ -1350,6 +1508,7 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
           if (EP_PRODUCTS_WITH_ATTRIBUTES == true) {
             $cells[0][] = array('text' => '<table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">' . tep_draw_checkbox_field('epcust_attributes', 'show', (!empty($_GET['epcust_attributes'])?true:false)) . '</td><td class="smallText"> attributes' . '</td></tr></table>');
           }
+
           $cells[0][] = array('text' => '<table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">' . tep_draw_checkbox_field('epcust_category', 'show', (!empty($_GET['epcust_category'])?true:false)) . '</td><td class="smallText"> categories' . '</td></tr></table>');
           $cells[0][] = array('text' => '<table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">' . tep_draw_checkbox_field('epcust_manufacturer', 'show', (!empty($_GET['epcust_manufacturer'])?true:false)) . '</td><td class="smallText"> manufacturer' . '</td></tr></table>');
 
@@ -1363,9 +1522,19 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
 
           $tmp_row_count = 2;
           $tmp_col_count = 0;
+          $cells[$tmp_row_count][$tmp_col_count++] = array('text' => '<table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">' . tep_draw_checkbox_field('epcust_specials_price', 'show', (!empty($_GET['epcust_specials_price'])?true:false)) . '</td><td class="smallText"> specials' . '</td></tr></table>');
+          if (EP_ADDITIONAL_IMAGES == true) {
+            $cells[$tmp_row_count][$tmp_col_count++] = array('text' => '<table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">' . tep_draw_checkbox_field('epcust_add_images', 'show', (!empty($_GET['epcust_sppc'])?true:false)) . '</td><td class="smallText"> add images' . '</td></tr></table>');
+          }
+          if (EP_MVS_SUPPORT == true) { 
+            $cells[$tmp_row_count][$tmp_col_count++] = array('text' => '<table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">' . tep_draw_checkbox_field('epcust_vendor', 'show', (!empty($_GET['epcust_vendor'])?true:false)) . '</td><td class="smallText"> vendor' . '</td></tr></table>');
+          }
+          if (EP_XSELL_SUPPORT == true) { 
+            $cells[$tmp_row_count][$tmp_col_count++] = array('text' => '<table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">' . tep_draw_checkbox_field('epcust_cross_sell', 'show', (!empty($_GET['epcust_cross_sell'])?true:false)) . '</td><td class="smallText"> x-sell' . '</td></tr></table>');
+          }
+
           foreach ($custom_fields[TABLE_PRODUCTS] as $key => $name) { 
-            $cells[$tmp_row_count][] = array('text' => '<table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">' . tep_draw_checkbox_field('epcust_' . $key, 'show', (!empty($_GET['epcust_' . $key])?true:false)) . '</td><td class="smallText"> ' . $name . '</td></tr></table>');
-            $tmp_col_count += 1;
+            $cells[$tmp_row_count][$tmp_col_count++] = array('text' => '<table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">' . tep_draw_checkbox_field('epcust_' . $key, 'show', (!empty($_GET['epcust_' . $key])?true:false)) . '</td><td class="smallText"> ' . $name . '</td></tr></table>');
             if ($tmp_col_count >= 7) { 
               $tmp_row_count += 1; 
               $tmp_col_count = 0; 
@@ -1373,8 +1542,7 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
           }
 
           foreach ($custom_fields[TABLE_PRODUCTS_DESCRIPTION] as $key => $name) { 
-            $cells[$tmp_row_count][] = array('text' => '<table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">' . tep_draw_checkbox_field('epcust_' . $key, 'show', (!empty($_GET['epcust_' . $key])?true:false)) . '</td><td class="smallText"> ' . $name . '</td></tr></table>');
-            $tmp_col_count += 1;
+            $cells[$tmp_row_count][$tmp_col_count++] = array('text' => '<table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">' . tep_draw_checkbox_field('epcust_' . $key, 'show', (!empty($_GET['epcust_' . $key])?true:false)) . '</td><td class="smallText"> ' . $name . '</td></tr></table>');
             if ($tmp_col_count >= 7) { 
               $tmp_row_count += 1; 
               $tmp_col_count = 0; 
@@ -1400,25 +1568,25 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
           
           echo tep_draw_input_field('submit', 'Build File', ' style="padding: 0px"', false, 'submit');
           ?></td></tr>
-          </form>
           </table>
-        </p><br /><br />
+          </form>
+        <br /><br />
 
         <font size="-2">Quick Links</font>
         <table width="100%" border="0" cellpadding="3" cellspacing="3"><tr><td width="50%" valign="top" bgcolor="#EEEEEE">
         <p style="margin-top: 8px;"><b>Create then Download Files</b><br />
         <font size="-2">Create entire file in server memory then stream download after completed.</font></p>
         <p><!-- Download file links -  Add your custom fields here -->
-          <a href="easypopulate.php?download=stream&dltype=full<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Complete<?php if (EP_SPPC_SUPPORT == true) { echo ' w/SPPC'; } ?></b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
+          <a href="easypopulate.php?download=stream&amp;dltype=full<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Complete<?php if (EP_SPPC_SUPPORT == true) { echo ' w/SPPC'; } ?></b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
 <?php if (EP_EXTRA_FIELDS_SUPPORT == true) { ?>
-          <a href="easypopulate.php?download=stream&dltype=extra_fields<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Extra Fields</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
+          <a href="easypopulate.php?download=stream&amp;dltype=extra_fields<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Extra Fields</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
 <?php } ?>
-          <a href="easypopulate.php?download=stream&dltype=priceqty<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Price/Qty<?php if (EP_SPPC_SUPPORT == true) { echo ' w/SPPC'; } ?></b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
-          <a href="easypopulate.php?download=stream&dltype=category<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Category</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
-          <a href="easypopulate.php?download=stream&dltype=froogle<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Froogle</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file</a><br />
+          <a href="easypopulate.php?download=stream&amp;dltype=priceqty<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Price/Qty<?php if (EP_SPPC_SUPPORT == true) { echo ' w/SPPC'; } ?></b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
+          <a href="easypopulate.php?download=stream&amp;dltype=category<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Category</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file to edit</a><br />
+          <a href="easypopulate.php?download=stream&amp;dltype=froogle<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Froogle</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file</a><br />
           <!-- VJ product attributes begin //-->
           <?php if (EP_PRODUCTS_WITH_ATTRIBUTES == true) { ?>
-          <a href="easypopulate.php?download=stream&dltype=attrib<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Attributes</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file</a><br />
+          <a href="easypopulate.php?download=stream&amp;dltype=attrib<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Download <b>Model/Attributes</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file</a><br />
           <?php } ?>
           <!-- VJ product attributes end //-->
         </p><br />
@@ -1426,22 +1594,26 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
         <p style="margin-top: 8px;"><b>Create Files in Temp Dir</b><br />
         <font size="-2">Create entire file in server memory then save to Temp Dir after completed.</font></p>
         <p>
-          <a href="easypopulate.php?download=tempfile&dltype=full<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Complete</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
-          <a href="easypopulate.php?download=tempfile&dltype=priceqty<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Price/Qty</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
-          <a href="easypopulate.php?download=tempfile&dltype=category<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Category</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
-          <a href="easypopulate.php?download=tempfile&dltype=froogle<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Froogle</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
+          <a href="easypopulate.php?download=tempfile&amp;dltype=full<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Complete</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
+          <a href="easypopulate.php?download=tempfile&amp;dltype=priceqty<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Price/Qty</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
+          <a href="easypopulate.php?download=tempfile&amp;dltype=category<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Category</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
+          <a href="easypopulate.php?download=tempfile&amp;dltype=froogle<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Froogle</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
           <!-- VJ product attributes begin //-->
           <?php if (EP_PRODUCTS_WITH_ATTRIBUTES == true) { ?>
-          <a href="easypopulate.php?download=tempfile&dltype=attrib<?php if (defined('SID') && tep_not_null(SID)) { echo '&'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Attributes</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
+          <a href="easypopulate.php?download=tempfile&amp;dltype=attrib<?php if (defined('SID') && tep_not_null(SID)) { echo '&amp;'.tep_session_name().'='.tep_session_id(); } ?>">Create <b>Model/Attributes</b> <?php echo ((EP_EXCEL_SAFE_OUTPUT == true)?".csv":".txt"); ?> file in temp dir</a><br />
           <?php } ?>
           <!-- VJ product attributes end //-->
         </p><br />
         </td></tr></table>
 
           </td>
-          
+
+          <td width="25%" valign="top" style="border-style:solid; border-width:thin; border-color:#CCCCCC;">
+          <p style="margin-top: 8px;"><a href="EPDocumentation/index.html" target="_blank" style="font-size:16px; text-decoration:underline;">EP Documentation</a></p>
+
           <?php if (EP_SHOW_EP_SETTINGS == true) { ?>
-          <td width="25%" valign="top" style="border-style:solid; border-width:thin; border-color:#CCCCCC;"><p style="margin-top: 8px;"><b>Settings & Info</b></p>
+          <hr style="color:#666666;">
+          <p style="margin-top: 8px;"><b>Settings &amp; Info</b></p>
           <table border="0" cellpadding="0" cellspacing="0"><tr><td class="smallText">
           
              <p>EP vers: <?php echo EP_CURRENT_VERSION; ?><br />
@@ -1487,19 +1659,24 @@ if (!empty($_POST['localfile']) or (isset($_FILES['usrfl']) && isset($_GET['spli
              Category depth: <?php echo EP_MAX_CATEGORIES; ?><br />
              Enable attributes: <?php echo (EP_PRODUCTS_WITH_ATTRIBUTES?'true':'false'); ?><br />
              SEF Froogle URLS: <?php echo (EP_FROOGLE_SEF_URLS?'true':'false'); ?><br />
-
+             <br />
+             <u>Other Support:</u><br />
+             MVS Support: <?php echo (EP_MVS_SUPPORT?'true':'false'); ?><br />
+             Additional Images: <?php echo (EP_ADDITIONAL_IMAGES?'true':'false'); ?><br />
              More Pics: <?php echo (EP_MORE_PICS_6_SUPPORT?'true':'false'); ?><br />
-             Unknown Pics: <?php echo (EP_UNKNOWN_ADD_IMAGES_SUPPORT?'true':'false'); ?><br />
+             UltraPics Pics: <?php echo (EP_ULTRPICS_SUPPORT?'true':'false'); ?><br />
              HTC: <?php echo (EP_HTC_SUPPORT?'true':'false'); ?><br />
              SPPC: <?php echo (EP_SPPC_SUPPORT?'true':'false'); ?><br />
              Extra Fields: <?php echo (EP_EXTRA_FIELDS_SUPPORT?'true':'false'); ?><br />
+             PDF Upload: <?php echo (EP_PDF_UPLOAD_SUPPORT?'true':'false'); ?><br />
+             Cross Sell: <?php echo (EP_XSELL_SUPPORT?'true':'false'); ?><br />
              <br />
              <div style="padding: 10px; background-color: #ffffCC">Please see the manual in this contribution's package for help in changing these settings.</div>
-             </td></tr></table>
 
+          </td></tr></table>
+          <?php } ?>
 
           </td>
-          <?php } ?>
         </tr>
       </table>
     </td>
@@ -1575,6 +1752,20 @@ function ep_create_filelayout($dltype, $attribute_options_array, $languages, $cu
         }
     }
 
+
+    if (EP_ADDITIONAL_IMAGES == true) { 
+      $ep_additional_layout_product .= '$filelayout[\'v_products_image_description\'] = $iii++;
+                                       ';
+	  for ($i=2;$i<=EP_ADDITIONAL_IMAGES_MAX+1;$i++) {
+        $ep_additional_layout_product .= '$filelayout[\'v_products_image_'.$i.'\'] = $iii++;
+                                          $filelayout[\'v_products_image_description_'.$i.'\'] = $iii++;
+                                          ';
+	  }
+	} 
+    if (EP_ADDITIONAL_IMAGES == true) { 
+      $ep_additional_layout_product_select .= 'p.products_image_description as v_products_image_description,';
+    }    
+
     if (EP_MORE_PICS_6_SUPPORT == true) { 
       $ep_additional_layout_product .= '$filelayout[\'v_products_subimage1\'] = $iii++;
                                         $filelayout[\'v_products_subimage2\'] = $iii++;
@@ -1588,22 +1779,53 @@ function ep_create_filelayout($dltype, $attribute_options_array, $languages, $cu
       $ep_additional_layout_product_select .= 'p.products_subimage1 as v_products_subimage1, p.products_subimage2 as v_products_subimage2, p.products_subimage3 as v_products_subimage3, p.products_subimage4 as v_products_subimage4, p.products_subimage5 as v_products_subimage5, p.products_subimage6 as v_products_subimage6,';
     }    
 
-    if (EP_UNKNOWN_ADD_IMAGES_SUPPORT == true) { 
-      $ep_additional_layout_product .= '$filelayout[\'v_products_mimage\'] = $iii++;
-                                        $filelayout[\'v_products_bimage\'] = $iii++;
-                                        $filelayout[\'v_products_subimage1\'] = $iii++;
-                                        $filelayout[\'v_products_bsubimage1\'] = $iii++;
-                                        $filelayout[\'v_products_subimage2\'] = $iii++;
-                                        $filelayout[\'v_products_bsubimage2\'] = $iii++;
-                                        $filelayout[\'v_products_subimage3\'] = $iii++;
-                                        $filelayout[\'v_products_bsubimage3\'] = $iii++;
+    if (EP_ULTRPICS_SUPPORT == true) { 
+      $ep_additional_layout_product .= '$filelayout[\'v_products_image_med\'] = $iii++;
+					$filelayout[\'v_products_image_lrg\'] = $iii++;
+					$filelayout[\'v_products_image_sm_1\'] = $iii++;
+					$filelayout[\'v_products_image_xl_1\'] = $iii++;
+					$filelayout[\'v_products_image_sm_2\'] = $iii++;
+					$filelayout[\'v_products_image_xl_2\'] = $iii++;
+					$filelayout[\'v_products_image_sm_3\'] = $iii++;
+					$filelayout[\'v_products_image_xl_3\'] = $iii++;
+					$filelayout[\'v_products_image_sm_4\'] = $iii++;
+					$filelayout[\'v_products_image_xl_4\'] = $iii++;
+					$filelayout[\'v_products_image_sm_5\'] = $iii++;
+					$filelayout[\'v_products_image_xl_5\'] = $iii++;
+					$filelayout[\'v_products_image_sm_6\'] = $iii++;
+					$filelayout[\'v_products_image_xl_6\'] = $iii++;
                                         ';
     }
-    if (EP_UNKNOWN_ADD_IMAGES_SUPPORT == true) { 
-      $ep_additional_layout_product_select .= 'p.products_mimage as v_products_mimage, p.products_bimage as v_products_bimage, p.products_subimage1 as v_products_subimage1, p.products_bsubimage1 as v_products_bsubimage1, p.products_subimage2 as v_products_subimage2, p.products_bsubimage2 as v_products_bsubimage2, p.products_subimage3 as v_products_subimage3, p.products_bsubimage3 as v_products_bsubimage3,';
+    if (EP_ULTRPICS_SUPPORT == true) { 
+      $ep_additional_layout_product_select .= 'p.products_image_med as v_products_image_med, p.products_image_lrg as v_products_image_lrg, p.products_image_sm_1 as v_products_image_sm_1, p.products_image_xl_1 as v_products_image_xl_1, p.products_image_sm_2 as v_products_image_sm_2, p.products_image_xl_2 as v_products_image_xl_2, p.products_image_sm_3 as v_products_image_sm_3, p.products_image_xl_3 as v_products_image_xl_3, p.products_image_sm_4 as v_products_image_sm_4, p.products_image_xl_4 as v_products_image_xl_4, p.products_image_sm_5 as v_products_image_sm_5, p.products_image_xl_5 as v_products_image_xl_5, p.products_image_sm_6 as v_products_image_sm_6,p.products_image_xl_6 as v_products_image_xl_6,';
+    }
+	
+    if (EP_PDF_UPLOAD_SUPPORT == true) { 
+      $ep_additional_layout_product .= '$filelayout[\'v_products_pdfupload\'] = $iii++;
+					$filelayout[\'v_products_fileupload\'] = $iii++;
+					';
+    }
+	
+    if (EP_PDF_UPLOAD_SUPPORT == true) {
+      $ep_additional_layout_product_select .='p.products_pdfupload as v_products_pdfupload,p.products_fileupload as v_products_fileupload,';
     }
     
     if (EP_SPPC_SUPPORT == true) { 
+      if (!empty($_GET['epcust_specials_price'])) { 
+      $ep_additional_layout_pricing .= '$filelayout[\'v_customer_price_1\'] = $iii++;
+                                        $filelayout[\'v_customer_specials_price_1\'] = $iii++;
+                                        $filelayout[\'v_customer_group_id_1\'] = $iii++;
+                                        $filelayout[\'v_customer_price_2\'] = $iii++;
+                                        $filelayout[\'v_customer_specials_price_2\'] = $iii++;
+                                        $filelayout[\'v_customer_group_id_2\'] = $iii++;
+                                        $filelayout[\'v_customer_price_3\'] = $iii++;
+                                        $filelayout[\'v_customer_specials_price_3\'] = $iii++;
+                                        $filelayout[\'v_customer_group_id_3\'] = $iii++;
+                                        $filelayout[\'v_customer_price_4\'] = $iii++;
+                                        $filelayout[\'v_customer_specials_price_4\'] = $iii++;
+                                        $filelayout[\'v_customer_group_id_4\'] = $iii++;
+                                        ';
+      } else {
       $ep_additional_layout_pricing .= '$filelayout[\'v_customer_price_1\'] = $iii++;
                                         $filelayout[\'v_customer_group_id_1\'] = $iii++;
                                         $filelayout[\'v_customer_price_2\'] = $iii++;
@@ -1613,13 +1835,17 @@ function ep_create_filelayout($dltype, $attribute_options_array, $languages, $cu
                                         $filelayout[\'v_customer_price_4\'] = $iii++;
                                         $filelayout[\'v_customer_group_id_4\'] = $iii++;
                                         ';
+      }
     }
-    
     if (EP_HTC_SUPPORT == true) {
       $ep_additional_layout_product_description .= '$filelayout[\'v_products_head_title_tag_\'.$lang[\'id\']]    = $iii++;
                                                     $filelayout[\'v_products_head_desc_tag_\'.$lang[\'id\']]     = $iii++;
                                                     $filelayout[\'v_products_head_keywords_tag_\'.$lang[\'id\']] = $iii++;
                                                     ';
+    }
+    
+    if (EP_MVS_SUPPORT == true) {
+      $ep_additional_layout_product_select .= 'p.vendors_id as v_vendor_id,';
     }
 
     // /////////////////////////////////////////////////////////////////////
@@ -1657,6 +1883,11 @@ function ep_create_filelayout($dltype, $attribute_options_array, $languages, $cu
         }
 
         $filelayout['v_products_price']    = $iii++;
+        $filelayout['v_products_specials_price'] = $iii++;
+
+        if (EP_MVS_SUPPORT == true) { 
+          $filelayout['v_vendor']    = $iii++;
+        }
 
         if (!empty($ep_additional_layout_pricing)) {
           eval($ep_additional_layout_pricing);
@@ -1774,7 +2005,7 @@ function ep_create_filelayout($dltype, $attribute_options_array, $languages, $cu
             }
         }
 
-        if (!empty($_GET['epcust_image'])) {
+        if (!empty($_GET['epcust_image']) || !empty($_GET['epcust_add_images'])) {
           $filelayout['v_products_image'] = $iii++;
           
           if (!empty($ep_additional_layout_product)) {
@@ -1790,6 +2021,7 @@ function ep_create_filelayout($dltype, $attribute_options_array, $languages, $cu
         }
 
         if (!empty($_GET['epcust_price'])) { $filelayout['v_products_price'] = $iii++; }
+        if (!empty($_GET['epcust_specials_price'])) { $filelayout['v_products_specials_price'] = $iii++; }
         if (!empty($_GET['epcust_quantity'])) { $filelayout['v_products_quantity'] = $iii++; }
         if (!empty($_GET['epcust_weight'])) { $filelayout['v_products_weight'] = $iii++; }
         if (!empty($_GET['epcust_avail'])) { $filelayout['v_date_avail'] = $iii++; }
@@ -1838,8 +2070,19 @@ function ep_create_filelayout($dltype, $attribute_options_array, $languages, $cu
           }
           // VJ product attribs end
         }
+        if (EP_MVS_SUPPORT == true) {
+          if (!empty($_GET['epcust_vendor'])) { $filelayout['v_vendor'] = $iii++; }
+        }
+
+        if (!empty($_GET['epcust_sppc'])) {
+         if (!empty($ep_additional_layout_pricing)) {
+          eval($ep_additional_layout_pricing);
+         }
+        }
+
         if (!empty($_GET['epcust_tax_class'])) { $filelayout['v_tax_class_title'] = $iii++; }
         if (!empty($_GET['epcust_comment'])) { $filelayout['v_products_comment'] = $iii++; }
+        if (!empty($_GET['epcust_cross_sell'])) { $filelayout['v_cross_sell'] = $iii++; }
 
         $filelayout_sql = "SELECT
             p.products_id as v_products_id,
@@ -2112,6 +2355,7 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
     // first do product extra fields
     if (isset($items[$filelayout['v_products_extra_fields_id']]) ){    
     
+        $v_products_model = $items[$filelayout['v_products_model']];
         // EP for product extra fields Contrib by minhmaster DEVSOFTVN ==========
         $v_products_extra_fields_id = $items[$filelayout['v_products_extra_fields_id']];
 //        $v_products_id    =    $items[$filelayout['v_products_id']];
@@ -2150,7 +2394,27 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
         $product_categories = tep_db_fetch_array($product_categories_query);
 
         if ($product_categories['total'] == '0') {
-           tep_remove_product($row['v_products_id']);
+          // gather product attribute data
+          $result = tep_db_query("select pov.products_options_values_id from " . TABLE_PRODUCTS_ATTRIBUTES . " pa left join " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov on pa.options_values_id=pov.products_options_values_id where pa.products_id = '" . (int)$row['v_products_id'] . "'");
+          $remove_attribs = array();
+          while ($tmp_attrib = tep_db_fetch_array($result)) {
+            $remove_attribs[] = $tmp_attrib;
+          }
+
+          // check each attribute name for links to other products
+          foreach ($remove_attribs as $rakey => $ravalue) {
+            $product_attribs_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_ATTRIBUTES . " where options_values_id = '" . (int)$ravalue['products_options_values_id'] . "'");
+            $product_attribs = tep_db_fetch_array($product_attribs_query);
+            // if no other products linked, remove attribute name
+            if ((int)$product_attribs['total'] == 1) {
+              tep_db_query("delete from " . TABLE_PRODUCTS_OPTIONS_VALUES. " where products_options_values_id = '" . (int)$ravalue['products_options_values_id'] . "'");
+            }
+          }
+          // remove attribute records
+          tep_db_query("delete from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$row['v_products_id'] . "'");
+
+          // remove product
+          tep_remove_product($row['v_products_id']);
         }
 
         if (USE_CACHE == 'true') {
@@ -2160,7 +2424,7 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
         echo "Deleted product " . $items[$filelayout['v_products_model']] . " from the database<br />";
         
       } else {
-          echo "Did not delete " . $items['v_products_model'] . " since it is not unique ";
+          echo "Did not delete " . $items['v_products_model'] . " since it is not unique<br> ";
       }
   
     // //////////////////////////////////
@@ -2174,19 +2438,30 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
         //
         // /////////////////////////////////////////////////////////////////////
         $ep_additional_select = '';
+	
+        if (EP_ADDITIONAL_IMAGES == true) {
+          $ep_additional_select .= 'p.products_image_description as v_products_image_description,';
+        }
 
         if (EP_MORE_PICS_6_SUPPORT == true) { 
           $ep_additional_select .= 'p.products_subimage1 as v_products_subimage1,p.products_subimage2 as v_products_subimage2,p.products_subimage3 as v_products_subimage3,p.products_subimage4 as v_products_subimage4,p.products_subimage5 as v_products_subimage5,p.products_subimage6 as v_products_subimage6,';
         }    
 
-        if (EP_UNKNOWN_ADD_IMAGES_SUPPORT == true) { 
-          $ep_additional_select .= 'p.products_mimage as v_products_mimage,p.products_bimage as v_products_bimage,p.products_subimage1 as v_products_subimage1,p.products_bsubimage1 as v_products_bsubimage1,p.products_subimage2 as v_products_subimage2,p.products_bsubimage2 as v_products_bsubimage2,p.products_subimage3 as v_products_subimage3,p.products_bsubimage3 as v_products_bsubimage3,';
+        if (EP_ULTRPICS_SUPPORT == true) { 
+          $ep_additional_select .= 'products_image_med as v_products_image_med,products_image_lrg as v_products_image_lrg,products_image_sm_1 as v_products_image_sm_1,products_image_xl_1 as v_products_image_xl_1,products_image_sm_2 as v_products_image_sm_2,products_image_xl_2 as v_products_image_xl_2,products_image_sm_3 as v_products_image_sm_3,products_image_xl_3 as v_products_image_xl_3,products_image_sm_4 as v_products_image_sm_4,products_image_xl_4 as v_products_image_xl_4,products_image_sm_5 as v_products_image_sm_5,products_image_xl_5 as v_products_image_xl_5,products_image_sm_6 as v_products_image_sm_6,products_image_xl_6 as v_products_image_xl_6,';
+        }
+		
+        if (EP_PDF_UPLOAD_SUPPORT == true) { 
+          $ep_additional_select .='p.products_pdfupload as v_products_pdfupload, p.products_fileupload as v_products_fileupload,';
+        }
+
+        if (EP_MVS_SUPPORT == true) {
+          $ep_additional_select .= 'vendors_id as v_vendor_id,';
         }
 
         foreach ($custom_fields[TABLE_PRODUCTS] as $key => $name) { 
           $ep_additional_select .= 'p.' . $key . ' as v_' . $key . ',';
         }
-
 
         // /////////////////////////////////////////////////////////////////////
         // End: Support for other contributions in products table
@@ -2344,6 +2619,11 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                     $row['v_manufacturers_name'] = $row2['manufacturers_name'];
                 }
 
+                if (EP_MVS_SUPPORT == true) {
+                  $result2 = tep_db_query("select vendors_name from ".TABLE_VENDORS." WHERE vendors_id = " . $row['v_vendor_id']);
+                  $row2 =  tep_db_fetch_array($result2);		
+                  $row['v_vendor'] = $row2['vendors_name'];
+                }
 
                 //elari -
                 //We check the value of tax class and title instead of the id
@@ -2367,7 +2647,9 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
             // loop above for existing records, or not set at all (null values) the array values 
             // are handled separatly, although they will set variables in this loop, we won't use them.
             foreach( $filelayout as $key => $value ){
-                $$key = $items[ $value ];
+                if (!($key == 'v_date_added' && empty($items[ $value ]))) {
+                     $$key = $items[ $value ];
+                }
             }
         
             //elari... we get the tax_clas_id from the tax_title
@@ -2426,7 +2708,7 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
             }
         
             if (empty($v_date_avail)) {
-                $v_date_avail = "'" . '0000-00-00 00:00:00' . "'";
+                $v_date_avail = 'NULL';
             } else {
                 $v_date_avail = "'" . date("Y-m-d H:i:s",strtotime($v_date_avail)) . "'";
             }
@@ -2559,7 +2841,7 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                  ".TABLE_CATEGORIES_DESCRIPTION." as des
                             WHERE
                                 cat.categories_id = des.categories_id AND
-                                des.language_id = " . $lang['id'] . " AND
+                                des.language_id = " . $baselang_id . " AND
                                 cat.parent_id = " . $theparent_id . " AND
                                 des.categories_name like '" . tep_db_input($thiscategoryname) . "'";
                         $result = tep_db_query($sql);
@@ -2570,9 +2852,15 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
 							foreach( $row as $item ){
                                 $thiscategoryid = $item;
                             }
+							$cat_image = '';
+							if (!empty($v_categories_image[$categorylevel])) {
+							   $cat_image = "categories_image='".tep_db_input($v_categories_image[$categorylevel])."', ";
+							} elseif (isset($filelayout['v_categories_image_' . $categorylevel])) {
+							   $cat_image = "categories_image='', ";
+							} 
                             $query = "UPDATE ".TABLE_CATEGORIES."
                                       SET 
-                                        categories_image='".tep_db_input($v_categories_image[$categorylevel])."', 
+                                        $cat_image
                                         last_modified = '".date("Y-m-d H:i:s")."'
                                       WHERE 
                                         categories_id = '".$row['categories_id']."'
@@ -2635,6 +2923,13 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                   print_el($item);
                 }
         
+                // find the vendor id from the name imported
+                if (EP_MVS_SUPPORT == true) {
+                  $vend_result = tep_db_query("SELECT vendors_id FROM ".TABLE_VENDORS." WHERE vendors_name = '". $v_vendor . "'");
+                  $vend_row = tep_db_fetch_array($vend_result);
+                  $v_vendor_id = $vend_row['vendors_id'];
+                }
+
                 // process the PRODUCTS table
                 $result = tep_db_query("SELECT products_id FROM ".TABLE_PRODUCTS." WHERE (products_model = '". $v_products_model . "')");
         
@@ -2652,6 +2947,11 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                     $ep_additional_fields = '';
                     $ep_additional_data = '';
 
+                    if (EP_ADDITIONAL_IMAGES == true) { 
+                      $ep_additional_fields .= 'products_image_description,';
+                      $ep_additional_data .= "'".tep_db_input($v_products_image_description)."',";
+                    } 
+			
                     foreach ($custom_fields[TABLE_PRODUCTS] as $key => $name) { 
                       $ep_additional_fields .= $key . ',';
                     }
@@ -2666,10 +2966,21 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                       $ep_additional_data .= "'$v_products_subimage1','$v_products_subimage2','$v_products_subimage3','$v_products_subimage4','$v_products_subimage5','$v_products_subimage6',";
                     }    
         
-                    if (EP_UNKNOWN_ADD_IMAGES_SUPPORT == true) { 
-                      $ep_additional_fields .= 'products_mimage,products_bimage,products_subimage1,products_bsubimage1,products_subimage2,products_bsubimage2,products_subimage3,products_bsubimage3,';
-                      $ep_additional_data .= "'$v_products_mimage','$v_products_bimage','$v_products_subimage1','$v_products_bsubimage1','$v_products_subimage2','$v_products_bsubimage2','$v_products_subimage3','$v_products_bsubimage3',";
+                    if (EP_ULTRPICS_SUPPORT == true) { 
+                      $ep_additional_fields .= 'products_image_med,products_image_lrg,products_image_sm_1,products_image_xl_1,products_image_sm_2,products_image_xl_2,products_image_sm_3,products_image_xl_3,products_image_sm_4,products_image_xl_4,products_image_sm_5,products_image_xl_5,products_image_sm_6,products_image_xl_6,';
+                      $ep_additional_data .= "'$v_products_image_med','$v_products_image_lrg','$v_products_image_sm_1','$v_products_image_xl_1','$v_products_image_sm_2','$v_products_image_xl_2','$v_products_image_sm_3','$v_products_image_xl_3','$v_products_image_sm_4','$v_products_image_xl_4','$v_products_image_sm_5','$v_products_image_xl_5','$v_products_image_sm_6','$v_products_image_xl_6',";
                     }
+					
+                    if (EP_PDF_UPLOAD_SUPPORT == true) { 
+                      $ep_additional_fields .= 'products_pdfupload,products_fileupload,';
+                      $ep_additional_data .= "'$v_products_pdfupload','$v_products_fileupload',";
+                    }
+					
+                    if (EP_MVS_SUPPORT == true) {
+                      $ep_additional_fields .= 'vendors_id,';
+                      $ep_additional_data .= "'$v_vendor_id',";
+                    }
+			
                     // /////////////////////////////////////////////////////////////////////
                     // End: Support for other contributions
                     // /////////////////////////////////////////////////////////////////////
@@ -2726,22 +3037,44 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                       $ep_additional_updates .= $key . "='" . $$tmp_var . "',";
                     }
 
+                    if (EP_ADDITIONAL_IMAGES == true && isset($v_products_image_description)) { 
+                      $ep_additional_updates .= "products_image_description='".tep_db_input($v_products_image_description)."',";
+                    } 
+
                     if (EP_MORE_PICS_6_SUPPORT == true) { 
                       $ep_additional_updates .= "products_subimage1='$v_products_subimage1',products_subimage2='$v_products_subimage2',products_subimage3='$v_products_subimage3',products_subimage4='$v_products_subimage4',products_subimage5='$v_products_subimage5',products_subimage6='$v_products_subimage6',";
                     }    
 
-                    if (EP_UNKNOWN_ADD_IMAGES_SUPPORT == true) { 
-                      $ep_additional_updates .= "products_mimage='$v_products_mimage',products_bimage='$v_products_bimage',products_subimage1='$v_products_subimage1',products_bsubimage1='$v_products_bsubimage1',products_subimage2='$v_products_subimage2',products_bsubimage2='$v_products_bsubimage2',products_subimage3='$v_products_subimage3',products_bsubimage3='$v_products_bsubimage3',";
+                    if (EP_ULTRPICS_SUPPORT == true) { 
+                      $ep_additional_updates .= "products_image_med='$v_products_image_med',products_image_lrg='$v_products_image_lrg',products_image_sm_1='$v_products_image_sm_1',products_image_xl_1='$v_products_image_xl_1',products_image_sm_2='$v_products_image_sm_2',products_image_xl_2='$v_products_image_xl_2',products_image_sm_3='$v_products_image_sm_3',products_image_xl_3='$v_products_image_xl_3',products_image_sm_4='$v_products_image_sm_4',products_image_xl_4='$v_products_image_xl_4',products_image_sm_5='$v_products_image_sm_5',products_image_xl_5='$v_products_image_xl_5',products_image_sm_6='$v_products_image_sm_6',products_image_xl_6='$v_products_image_xl_6',";
                     }
+					
+                    if (EP_PDF_UPLOAD_SUPPORT == true) { 					
+                      $ep_additional_updates .= "products_pdfupload='$v_products_pdfupload',products_fileupload='$v_products_fileupload',";
+                    }
+					
+                    if (EP_MVS_SUPPORT == true) {
+                      $ep_additional_updates .= "vendors_id='$v_vendor_id',";
+                    }
+			
                     // /////////////////////////////////////////////////////////////////////
                     // End: Support for other contributions
                     // /////////////////////////////////////////////////////////////////////
-
-
+                    // only include the products image if it has been included in the spreadsheet
+                    $tmp_products_image_update = '';
+                    if (isset($v_products_image)) {
+                      $tmp_products_image_update = "products_image=".(!empty($v_products_image)?"'".$v_products_image."'":'NULL').", 
+										    ";
+                      if (EP_ADDITIONAL_IMAGES == true && isset($filelayout['v_products_image'])) { 
+                        $tmp_products_image_update .= "products_image_med=NULL, 
+                                                     products_image_pop=NULL, ";
+                      }
+                    }
+			
                     $query = "UPDATE ".TABLE_PRODUCTS."
                               SET
                                 products_price='$v_products_price', 
-                                products_image=".(!empty($v_products_image)?"'".$v_products_image."'":'NULL').", 
+                                $tmp_products_image_update 
                                 $ep_additional_updates
                                 products_weight='$v_products_weight', 
                                 products_tax_class_id='$v_tax_class_id', 
@@ -2758,8 +3091,66 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                     tep_db_query($query);
                   }
                 }
+		
+		  if (isset($v_products_specials_price)) {
+		      if (EP_SPPC_SUPPORT == true) { $SPPC_extra_query = ' and customers_group_id = 0'; } else { $SPPC_extra_query = ''; }
+			  $result = tep_db_query('select * from '.TABLE_SPECIALS.' WHERE products_id = ' . $v_products_id . $SPPC_extra_query );
+
+			  if ($v_products_specials_price == '') {
+			  
+				  $result = tep_db_query('DELETE FROM '.TABLE_SPECIALS.' WHERE products_id = ' . $v_products_id . $SPPC_extra_query );
+			      if (EP_SPPC_SUPPORT == true) { 
+				    $result = tep_db_query('DELETE FROM specials_retail_prices WHERE products_id = ' . $v_products_id );
+			      }
+
+			  } else {
+				  if ($specials = tep_db_fetch_array($result)) {
+					  $sql_data_array = array('products_id' => $v_products_id,
+											  'specials_new_products_price' => $v_products_specials_price,
+											  'specials_last_modified' => 'now()'
+					  );
+					  tep_db_perform(TABLE_SPECIALS, $sql_data_array, 'update', 'specials_id = '.$specials['specials_id']);
+					  
+			          if (EP_SPPC_SUPPORT == true) { 
+					    $sql_data_array = array('products_id' => $v_products_id,
+											    'specials_new_products_price' => $v_products_specials_price
+					    );
+					    tep_db_perform('specials_retail_prices', $sql_data_array, 'update', 'products_id = '.$v_products_id);
+				      }
+				  } else {
+					  $sql_data_array = array('products_id' => $v_products_id,
+											  'specials_new_products_price' => $v_products_specials_price,
+											  'specials_date_added' => 'now()',
+											  'status' => '1'
+					  );
+		              if (EP_SPPC_SUPPORT == true) { $sql_data_array = array_merge($sql_data_array,array('customers_group_id' => '0')); }
+					  tep_db_perform(TABLE_SPECIALS, $sql_data_array, 'insert');
+					  
+			          if (EP_SPPC_SUPPORT == true) { 
+					    $sql_data_array = array('products_id' => $v_products_id,
+											    'specials_new_products_price' => $v_products_specials_price,
+											    'status' => '1',
+											    'customers_group_id' => '0'
+					    );
+					    tep_db_perform('specials_retail_prices', $sql_data_array, 'insert');
+				      }
+				  }
+			  }
+          }
+			
         
-        
+			if (EP_ADDITIONAL_IMAGES == true) { 
+			  if (isset($filelayout['v_products_image_2'])) {
+				  tep_db_query("delete from " . TABLE_ADDITIONAL_IMAGES . " where products_id = '" . (int)$v_products_id . "'");
+				  for ($i=2;$i<=EP_ADDITIONAL_IMAGES_MAX+1;$i++) {
+					$ai_description_var = 'v_products_image_description_'.$i;
+					$ai_image_var = 'v_products_image_'.$i;
+					if (!empty($$ai_image_var) || !empty($$ai_description_var)) {
+					  tep_db_query("insert into " . TABLE_ADDITIONAL_IMAGES . " (products_id, images_description, thumb_images) values ('" . (int)$v_products_id . "', '" . tep_db_input($$ai_description_var) . "', '" . tep_db_input($$ai_image_var) . "')");
+					}
+				  }
+			  }
+			}
                 // process the PRODUCTS_DESCRIPTION table
                 foreach ($languages as $tkey => $lang){
 
@@ -2875,8 +3266,25 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                         // already in this category, nothing to do!
                     }
                 }
-            
         
+                // this is for the cross sell contribution
+                if (isset($v_cross_sell)){
+                  tep_db_query("delete from ".TABLE_PRODUCTS_XSELL." where products_id = " . $v_products_id . " or xsell_id = " . $v_products_id . "");
+                  if (!empty($v_cross_sell)){
+                    $xsells_array = explode(',',$v_cross_sell);
+                      foreach ($xsells_array as $xs_key => $xs_model ) {
+                        $cross_sell_sql = "select products_id from ".TABLE_PRODUCTS." where products_model = '" . trim($xs_model) . "' limit 1";
+                        $cross_sell_result = tep_db_query($cross_sell_sql);
+                        $cross_sell_row = tep_db_fetch_array($cross_sell_result);
+                        
+                        tep_db_query("insert into ".TABLE_PRODUCTS_XSELL." (products_id, xsell_id, sort_order) 
+                                      values ( ".$v_products_id.", ".$cross_sell_row['products_id'].", 1)");
+                        tep_db_query("insert into ".TABLE_PRODUCTS_XSELL." (products_id, xsell_id, sort_order) 
+								  values ( ".$cross_sell_row['products_id'].", ".$v_products_id.", 1)");
+                    }
+                  }
+		}
+
                 // for the separate prices per customer (SPPC) module
                 $ll=1;
                 if (isset($v_customer_price_1)){
@@ -2903,7 +3311,9 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                         ' . $v_customer_group_id_1 . ',
                                         ' . $v_customer_price_1 . ',
                                         ' . $v_products_id . ',
-										' . $v_products_price .'
+					' . $v_products_price . ',
+					' . $v_products_qty_blocks . ',
+					' . $v_products_min_order_qty . '
                                         )'
                                     );
                     }
@@ -2916,7 +3326,9 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                         ' . $v_customer_group_id_2 . ',
                                         ' . $v_customer_price_2 . ',
                                         ' . $v_products_id . ',
-										' . $v_products_price .'
+					' . $v_products_price . ',
+					' . $v_products_qty_blocks . ',
+					' . $v_products_min_order_qty . '
                                         )'
                                     );
                     }
@@ -2929,7 +3341,9 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                         ' . $v_customer_group_id_3 . ',
                                         ' . $v_customer_price_3 . ',
                                         ' . $v_products_id . ',
-										' . $v_products_price .'
+					' . $v_products_price . ',
+					' . $v_products_qty_blocks . ',
+					' . $v_products_min_order_qty . '
                                         )'
                                     );
                     }
@@ -2942,11 +3356,39 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
                                         ' . $v_customer_group_id_4 . ',
                                         ' . $v_customer_price_4 . ',
                                         ' . $v_products_id . ',
-										' . $v_products_price .'
+					' . $v_products_price . ',
+					' . $v_products_qty_blocks . ',
+					' . $v_products_min_order_qty . '
                                         )'
                                     );
                     }
-        
+
+                    if (isset($v_customer_specials_price_1)) {
+                    $result = tep_db_query('select * from '.TABLE_SPECIALS.' WHERE products_id = ' . $v_products_id . ' and customers_group_id = 1' );
+
+                      if ($v_customer_specials_price_1 == '') {
+			  
+                        $result = tep_db_query('DELETE FROM '.TABLE_SPECIALS.' WHERE products_id = ' . $v_products_id . ' and customers_group_id = 1' );
+
+                      } else {
+                        if ($specials = tep_db_fetch_array($result)) {
+					  $sql_data_array = array('products_id' => $v_products_id,
+											  'specials_new_products_price' => $v_customer_specials_price_1,
+											  'specials_last_modified' => 'now()'
+					  );
+					  tep_db_perform(TABLE_SPECIALS, $sql_data_array, 'update', 'specials_id = '.$specials['specials_id']);
+                        } else {
+					  $sql_data_array = array('products_id' => $v_products_id,
+											  'specials_new_products_price' => $v_customer_specials_price_1,
+											  'specials_date_added' => 'now()',
+											  'status' => '1',
+											  'customers_group_id' => '1'
+					  );
+					  tep_db_perform(TABLE_SPECIALS, $sql_data_array, 'insert');
+                        }
+                      }
+                    }
+			
                 }
                 // end: separate prices per customer (SPPC) module
         
@@ -3079,7 +3521,7 @@ function process_row( $item1, $filelayout, $filelayout_count, $default_these, $e
         
                                 $attribute_values_price_prefix = ($$v_attribute_values_price_var < 0) ? '-' : '+';
                                 // if negative, remove the negative sign for storing since the prefix is stored in another field.
-                                if ( $$v_attribute_values_price_var < 0 ) $$v_attribute_values_price_var = strval(-((int)$$v_attribute_values_price_var));
+                                if ( $$v_attribute_values_price_var < 0 ) $$v_attribute_values_price_var = strval(-((float)$$v_attribute_values_price_var));
         
                                 // options_values_prices table update begin
                                 // insert into options_values_prices table if no price exists

@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: products_attributes.php,v 1.2.2.1 2005/06/12 00:04:23 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -34,4 +34,6 @@ define('TEXT_WARNING_OF_DELETE', 'Certains produits utilisent cette option - il 
 define('TEXT_OK_TO_DELETE', 'Cette option n\'est utilis&eacute;e par aucun produit - Il est possible de la supprimer.');
 define('TEXT_OPTION_ID', 'ID option');
 define('TEXT_OPTION_NAME', 'Nom de l\'option');
+define('TABLE_HEADING_OPT_TYPE', 'Type');
+define('TABLE_HEADING_OPT_LENGTH', 'Length');
 ?>

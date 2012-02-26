@@ -1,30 +1,33 @@
 <?php
 /*
-$Id: create_account_process.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('EMAIL_PASS_1', 'Please take note of your password ');
-define('EMAIL_PASS_2', ' modifiable on line while accèdant on your new account.' . "\n\n");
+define('EMAIL_PASS_1', 'Bitte beachten Sie, daß Sie Ihr Passwort ');
+define('EMAIL_PASS_2', ' ändern können, wenn Sie mit Ihrem Konto angemeldet sind.' . "\n\n");
 
-define('NAVBAR_TITLE', 'Create an Account');
-define('HEADING_TITLE', 'Account Information');
-define('HEADING_NEW', 'Order Process');
-define('NAVBAR_NEW_TITLE', 'Order Process');
+define('NAVBAR_TITLE', 'Konto erstellen');
+define('HEADING_TITLE', 'Kontoinformationen');
+define('HEADING_NEW', 'Bestellvorgang');
+define('NAVBAR_NEW_TITLE', 'Bestellvorgang');
 
-define('EMAIL_SUBJECT', 'Welcome to ' . STORE_NAME);
-define('EMAIL_GREET_MR', 'Dear Mr. ' . stripslashes($HTTP_POST_VARS['lastname']) . ',' . "\n\n");
-define('EMAIL_GREET_MS', 'Dear Ms. ' . stripslashes($HTTP_POST_VARS['lastname']) . ',' . "\n\n");
-define('EMAIL_GREET_NONE', 'Dear ' . stripslashes($HTTP_POST_VARS['firstname']) . ',' . "\n\n");
-define('EMAIL_WELCOME', 'We welcome you to <b>' . STORE_NAME . '</b>.' . "\n\n");
-define('EMAIL_TEXT', 'You can now take part in the <b>various services</b> we have to offer you. Some of these services include:' . "\n\n" . '<li><b>Permanent Cart</b> - Any products added to your online cart remain there until you remove them, or check them out.' . "\n" . '<li><b>Address Book</b> - We can now deliver your products to another address other than yours! This is perfect to send birthday gifts direct to the birthday-person themselves.' . "\n" . '<li><b>Order History</b> - View your history of purchases that you have made with us.' . "\n" . '<li><b>Products Reviews</b> - Share your opinions on products with our other customers.' . "\n\n");
-define('EMAIL_CONTACT', 'For help with any of our online services, please email the store-owner: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n\n");
-define('EMAIL_WARNING', '<b>Note:</b> This email address was given to us by one of our customers. If you did not signup to be a member, please send a email to ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n");
-
+define('EMAIL_SUBJECT', 'Willkommen zu ' . STORE_NAME);
+define('EMAIL_GREET_MR', 'Sehr geehrter Herr ' . stripslashes($_POST['lastname']) . ',' . "\n\n");
+define('EMAIL_GREET_MS', 'Sehr geehrte Frau ' . stripslashes($_POST['lastname']) . ',' . "\n\n");
+define('EMAIL_GREET_NONE', 'Sehr geehrte ' . stripslashes($_POST['firstname']) . ',' . "\n\n");
+define('EMAIL_WELCOME', 'willkommen zu <b>' . STORE_NAME . '</b>.' . "\n\n");
+define('EMAIL_TEXT', 'Sie können jetzt unseren <b>Online-Service</b> nutzen. Der Service bietet unter anderem:' . "\n\n" . '<li><b>Kundenwarenkorb</b> - Jeder Artikel bleibt registriert bis Sie zur Kasse gehen, oder die Produkte aus dem Warenkorb entfernen.' . "\n" . '<li><b>Adressbuch</b> - Wir können jetzt die Produkte zu der von Ihnen ausgesuchten Adresse senden. Der perfekte Weg ein Geburtstagsgeschenk zu versenden.' . "\n" . '<li><b>Vorherige Bestellungen</b> - Sie können jederzeit Ihre vorherigen Bestellungen überprüfen.' . "\n" . '<li><b>Meinungen über Produkte</b> - Teilen Sie Ihre Meinung zu unseren Produkten mit anderen Kunden.' . "\n\n");
+define('EMAIL_CONTACT', 'Falls Sie Fragen zu unserem Kunden-Service haben, wenden Sie sich bitte an den Vertrieb: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n\n");
+define('EMAIL_WARNING', '<b>Achtung:</b> Diese eMail-Adresse wurde uns von einem Kunden bekannt gegeben. Falls Sie sich nicht angemeldet haben, senden Sie bitte eine eMail an ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n");
+define('TEXT_ACCOUNT_PROBLEM', 'Sie haben das Formular nicht korrekt ausgefüllt. Bitte korrigieren Sie die folgenden Angaben.');
+define('IMAGE_BUTTON_CREATE', 'Konto erstellen');
+define('ENTRY_STATE_TEXT', '&nbsp;<span class="errorText">* (Erst Land auswählen)</span>');
+define('ENTRY_CUSTOMER_GROUP', 'Kundengruppe');
 ?>

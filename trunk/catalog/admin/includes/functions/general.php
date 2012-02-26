@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: general.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -56,6 +56,23 @@ function tep_admin_files_boxes($filename, $sub_box_name, $target_window) {
     $sub_boxes = '<a href="' . tep_href_link($filename) . '" class="menuBoxContentLink" target="_' . $target_window . '">' . $sub_box_name . '</a><br>';
   }
   return $sub_boxes;
+}
+
+////
+//Return Superfish code for menu items that can be accessed by user - PGM
+function tep_admin_jqmenu($filename, $sub_box_name, $target_window, $submenu = '') {
+  global $login_groups_id;
+  $menu_items = '';
+
+  $dbquery = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where FIND_IN_SET( '" . $login_groups_id . "', admin_groups_id) and admin_files_is_boxes = '0' and admin_files_name = '" . $filename . "'");
+  if (tep_db_num_rows($dbquery)) {
+	if ($submenu == 'submenu') {
+      $menu_items = '<li><a href="' . tep_href_link($filename) . '" target="_' . strtolower($target_window) . '">' . $sub_box_name . '</a>';
+	} else {
+	  $menu_items = '<li><a href="' . tep_href_link($filename) . '" target="_' . strtolower($target_window) . '">' . $sub_box_name . '</a></li>';
+	}
+  }
+  return $menu_items;
 }
 
 ////
@@ -120,9 +137,9 @@ function tep_selected_file($filename) {
   }
 
   function tep_sanitize_string($string) {
-    $string = ereg_replace(' +', ' ', $string);
-
-    return preg_replace("/[<>]/", '_', $string);
+    $patterns = array ('/ +/','/[<>]/');
+    $replace = array (' ', '_');
+    return preg_replace($patterns, $replace, trim($string));
   }
 
   function tep_customers_name($customers_id) {
@@ -170,14 +187,14 @@ function tep_selected_file($filename) {
   }
 
   function tep_get_all_get_params($exclude_array = '') {
-    global $HTTP_GET_VARS;
+    global $_GET;
 
     if ($exclude_array == '') $exclude_array = array();
 
     $get_url = '';
 
-    reset($HTTP_GET_VARS);
-    while (list($key, $value) = each($HTTP_GET_VARS)) {
+    reset($_GET);
+    while (list($key, $value) = each($_GET)) {
       if (($key != tep_session_name()) && ($key != 'error') && (!in_array($key, $exclude_array))) $get_url .= $key . '=' . $value . '&';
     }
 
@@ -214,7 +231,7 @@ function tep_selected_file($filename) {
     if (@date('Y', mktime($hour, $minute, $second, $month, $day, $year)) == $year) {
       return date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, $year));
     } else {
-      return ereg_replace('2037' . '$', $year, date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037)));
+      return preg_replace('/2037$/', $year, date(DATE_FORMAT, mktime($hour, $minute, $second, $month, $day, 2037)));
     }
 
   }
@@ -298,7 +315,7 @@ function tep_selected_file($filename) {
                  $sde=1;
              }
          }
-         $select_string .= '<option value="' . $products['products_id'] . '">' . $products['products_name'] . ' (' . $price_string . ')</option>\n';
+         $select_string .= '<option value="' . $products['products_id'] . '">' . $products['products_name'] . ' (' . $price_string . ')</option>';
 // EOF: MOD - Separate Price Per Customer
       }
     }
@@ -457,20 +474,20 @@ function tep_selected_file($filename) {
     $address_format_query = tep_db_query("select address_format as format from " . TABLE_ADDRESS_FORMAT . " where address_format_id = '" . (int)$address_format_id . "'");
     $address_format = tep_db_fetch_array($address_format_query);
 
-    $company = tep_output_string_protected($address['company']);
+    $company = tep_output_string_protected(ucwords($address['company']));
     if (isset($address['firstname']) && tep_not_null($address['firstname'])) {
-      $firstname = tep_output_string_protected($address['firstname']);
-      $lastname = tep_output_string_protected($address['lastname']);
+      $firstname = tep_output_string_protected (ucwords($address['firstname']));
+      $lastname = tep_output_string_protected(ucwords($address['lastname']));
     } elseif (isset($address['name']) && tep_not_null($address['name'])) {
-      $firstname = tep_output_string_protected($address['name']);
+      $firstname = tep_output_string_protected(ucwords($address['name']));
       $lastname = '';
     } else {
       $firstname = '';
       $lastname = '';
     }
-    $street = tep_output_string_protected($address['street_address']);
-    $suburb = tep_output_string_protected($address['suburb']);
-    $city = tep_output_string_protected($address['city']);
+    $street = tep_output_string_protected(ucwords($address['street_address']));
+    $suburb = tep_output_string_protected(ucwords($address['suburb']));
+    $city = tep_output_string_protected(ucwords($address['city']));
     $state = tep_output_string_protected($address['state']);
     if (isset($address['country_id']) && tep_not_null($address['country_id'])) {
       $country = tep_get_country_name($address['country_id']);
@@ -627,6 +644,61 @@ function tep_selected_file($filename) {
     return $product['products_description'];
   }
 
+// BOF Open Featured Sets
+  function tep_get_products_short($product_id, $language_id) {
+    $product_query = tep_db_query("select products_short from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . $product_id . "' and language_id = '" . $language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['products_short'];
+  }
+// EOF Open Featured Sets
+
+// BOF: Tabs by PGM
+
+  function tep_get_tab1($product_id, $language_id) {
+    $product_query = tep_db_query("select tab1 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab1'];
+  }
+
+  function tep_get_tab2($product_id, $language_id) {
+    $product_query = tep_db_query("select tab2 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab2'];
+  }
+
+  function tep_get_tab3($product_id, $language_id) {
+    $product_query = tep_db_query("select tab3 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab3'];
+  }
+
+  function tep_get_tab4($product_id, $language_id) {
+    $product_query = tep_db_query("select tab4 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab4'];
+  }
+
+  function tep_get_tab5($product_id, $language_id) {
+    $product_query = tep_db_query("select tab5 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab5'];
+  }
+
+  function tep_get_tab6($product_id, $language_id) {
+    $product_query = tep_db_query("select tab6 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['tab6'];
+  }
+
+// EOF: Tabs by PGM
+
   function tep_get_products_url($product_id, $language_id) {
     $product_query = tep_db_query("select products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
     $product = tep_db_fetch_array($product_query);
@@ -642,6 +714,13 @@ function tep_selected_file($filename) {
     $manufacturer = tep_db_fetch_array($manufacturer_query);
 
     return $manufacturer['manufacturers_url'];
+  }
+  
+  function tep_get_manufacturer_description($manufacturer_id, $language_id) {
+    $manufacturer_query = tep_db_query("select manufacturers_description from " . TABLE_MANUFACTURERS_INFO . " where manufacturers_id = '" . (int)$manufacturer_id . "' and languages_id = '" . (int)$language_id . "'");
+    $manufacturer = tep_db_fetch_array($manufacturer_query);
+
+    return $manufacturer['manufacturers_description'];
   }
 
 ////
@@ -774,6 +853,12 @@ function tep_selected_file($filename) {
     return tep_draw_pull_down_menu('configuration_value', tep_get_country_zones(STORE_COUNTRY), $zone_id);
   }
 
+          /* One Page Checkout - BEGIN*/
+        function tep_cfg_pull_down_zone_list_one_page($zone_id) {
+    return tep_draw_pull_down_menu('configuration_value', tep_get_country_zones(ONEPAGE_AUTO_SHOW_DEFAULT_COUNTRY), $zone_id);
+  }
+          /* One Page Checkout - END*/
+
   function tep_cfg_pull_down_tax_classes($tax_class_id, $key = '') {
     $name = (($key) ? 'configuration[' . $key . ']' : 'configuration_value');
 
@@ -808,7 +893,7 @@ function tep_selected_file($filename) {
 ////
 // Function to read in text area in admin
  function tep_cfg_textarea($text) {
-    return tep_draw_textarea_field('configuration_value', false, 35, 5, $text);
+    return tep_draw_textarea_field('configuration_value', '35', '5', $text);
   }
 
   function tep_cfg_get_zone_name($zone_id) {
@@ -833,17 +918,6 @@ function tep_selected_file($filename) {
       return -1;
     }
   }
-////
-// Sets the status of countries
-  function tep_set_active_country($countries_id, $active) {
-    if ($active == '1') {
-      return tep_db_query("update " . TABLE_COUNTRIES . " set active = '1' where countries_id = '" . (int)$countries_id . "'");
-    } elseif ($active == '0') {
-      return tep_db_query("update " . TABLE_COUNTRIES . " set active = '0' where countries_id = '" . (int)$countries_id . "'");
-    } else {
-      return -1;
-    }
-  }
 
 ////
 // Sets the status of a product
@@ -851,17 +925,70 @@ function tep_selected_file($filename) {
     if ($status == '1') {
       return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '1', products_last_modified = now() where products_id = '" . (int)$products_id . "'");
     } elseif ($status == '0') {
-      return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0', products_last_modified = now() where products_id = '" . (int)$products_id . "'");
+	  // BOF Open Featured Sets
+      return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0',  products_featured = '0', products_last_modified = now() where products_id = '" . (int)$products_id . "'");
+ 	// EOF Open Featured Set
+    } else {
+      return -1;
+    }
+  }
+
+// BOF Open Featured Sets
+////
+// Sets the featured status of a product
+  function tep_set_product_featured($products_id, $featured) {
+    if ($featured == '1') {
+      return tep_db_query("update " . TABLE_PRODUCTS . " set products_featured = '1', products_last_modified = now(), products_featured_until = '". date('Y/m/d', time() + 86400 * DAYS_UNTIL_FEATURED_PRODUCTS)."' where products_id = '" . (int)$products_id . "'");
+    } elseif ($featured == '0') {
+      return tep_db_query("update " . TABLE_PRODUCTS . " set products_featured = '0', products_last_modified = now(), products_featured_until = NULL where products_id = '" . (int)$products_id . "'");
     } else {
       return -1;
     }
   }
 
 ////
+// Sets the featured status of manufacturers
+  function tep_set_manufacturers_featured($manufacturers_id, $featured) {
+    if ($featured == '1') {
+      return tep_db_query("update " . TABLE_MANUFACTURERS . " set manufacturers_featured = '1', last_modified = now(), manufacturers_featured_until = '". date('Y/m/d', time() + 86400 * DAYS_UNTIL_FEATURED_MANUFACTURERS)."' where manufacturers_id = '" . (int)$manufacturers_id . "'");
+    } elseif ($featured == '0') {
+      return tep_db_query("update " . TABLE_MANUFACTURERS . " set manufacturers_featured = '0', last_modified = now(), manufacturers_featured_until = NULL where manufacturers_id = '" . (int)$manufacturers_id . "'");
+    } else {
+      return -1;
+    }
+  }
+
+////
+// Sets the featured status of manufacturer
+  function tep_set_manufacturer_featured($manufacturers_id, $featured) {
+    if ($featured == '1') {
+      return tep_db_query("update " . TABLE_MANUFACTURERS . " set manufacturer_featured = '1', last_modified = now(), manufacturer_featured_until = '". date('Y/m/d', time() + 86400 * DAYS_UNTIL_FEATURED_MANUFACTURER)."' where manufacturers_id = '" . (int)$manufacturers_id . "'");
+    } elseif ($featured == '0') {
+      return tep_db_query("update " . TABLE_MANUFACTURERS . " set manufacturer_featured = '0', last_modified = now(), manufacturer_featured_until = NULL where manufacturers_id = '" . (int)$manufacturers_id . "'");
+    } else {
+      return -1;
+    }
+  }
+
+////
+// Sets the featured status of categories
+  function tep_set_categories_featured($categories_id, $featured) {
+    if ($featured == '1') {
+      return tep_db_query("update " . TABLE_CATEGORIES . " set categories_featured = '1', last_modified = now(), categories_featured_until = '". date('Y/m/d', time() + 86400 * DAYS_UNTIL_FEATURED_CATEGORIES)."' where categories_id = '" . (int)$categories_id . "'");
+    } elseif ($featured == '0') {
+      return tep_db_query("update " . TABLE_CATEGORIES . " set categories_featured = '0', last_modified = now(), categories_featured_until = NULL where categories_id = '" . (int)$categories_id . "'");
+    } else {
+      return -1;
+    }
+  }
+// EOF Open Featured Sets
+
+
+////
 // Sets the status of a product on special
   function tep_set_specials_status($specials_id, $status) {
     if ($status == '1') {
-      return tep_db_query("update " . TABLE_SPECIALS . " set status = '1', expires_date = NULL, date_status_change = NULL where specials_id = '" . (int)$specials_id . "'");
+      return tep_db_query("update " . TABLE_SPECIALS . " set status = '1', date_status_change = now() where specials_id = '" . (int)$specials_id . "'");
     } elseif ($status == '0') {
       return tep_db_query("update " . TABLE_SPECIALS . " set status = '0', date_status_change = now() where specials_id = '" . (int)$specials_id . "'");
     } else {
@@ -873,25 +1000,20 @@ function tep_selected_file($filename) {
 // Return a product's special price (returns nothing if there is no offer)
 // TABLES: products
   function tep_get_products_special_price($product_id) {
-// BOF: MOD - Separate Pricing Per Customer
-//  $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status");
-    global $sppc_customer_group_id;
+// BOF Separate Pricing Per Customer
+  if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+    $customer_group_id = $_SESSION['sppc_customer_group_id'];
+  } else {
+    $customer_group_id = '0';
+  }
 
-    if(!tep_session_is_registered('sppc_customer_group_id')) {
-      $customer_group_id = '0';
-    } else {
-      $customer_group_id = $sppc_customer_group_id;
-    }
     $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status and customers_group_id = '" . (int)$customer_group_id . "'");
-// EOF: MOD - Separate_Pricing Per Customer
-
+// EOF Separate Pricing Per Customer
     $product = tep_db_fetch_array($product_query);
 
     return $product['specials_new_products_price'];
   }
 
-
-////
 // Sets timeout for the current script.
 // Cant be used in safe mode.
   function tep_set_time_limit($limit) {
@@ -910,7 +1032,8 @@ function tep_selected_file($filename) {
 
       $string .= '<br><input type="radio" name="' . $name . '" value="' . $select_array[$i] . '"';
 
-      if ($key_value == $select_array[$i]) $string .= ' CHECKED';
+      if (strtolower($key_value) == strtolower($select_array[$i])) $string .= ' CHECKED';
+	  if ($key_value == 1 && strtolower($select_array[$i]) == 'true') $string .= ' CHECKED';
 
       $string .= '> ' . $select_array[$i];
     }
@@ -925,6 +1048,18 @@ function tep_selected_file($filename) {
     while (list($key, $value) = each($select_array)) {
       if (is_int($key)) $key = $value;
       $string .= '<br><input type="radio" name="configuration[' . $key_name . ']" value="' . $key . '"';
+      if ($key_value == $key) $string .= ' CHECKED';
+      $string .= '> ' . $value;
+    }
+
+    return $string;
+  }
+  
+  function tep_select_option($select_array, $key_name, $key_value) {
+    reset($select_array);
+    while (list($key, $value) = each($select_array)) {
+      if (is_int($key)) $key = $value;
+      $string .= '<br><input type="radio" name="' . $key_name . '" value="' . $key . '"';
       if ($key_value == $key) $string .= ' CHECKED';
       $string .= '> ' . $value;
     }
@@ -970,15 +1105,15 @@ function tep_selected_file($filename) {
     $string .= '<center>';
 
     for ($i=0; $i<sizeof($select_array); $i++) {
-	$current_key_value = current($key_values);
+        $current_key_value = current($key_values);
 
       $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
       $string .= '<br><input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
-	$string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
-	next($key_values);
-	$current_key_value = current($key_values);
-	$string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
-	next($key_values);
+        $string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
+        next($key_values);
+        $current_key_value = current($key_values);
+        $string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>oz</i>';
+        next($key_values);
     }
     $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
 
@@ -990,15 +1125,15 @@ function tep_selected_file($filename) {
     $string .= '<center>';
 
     for ($i=0; $i<sizeof($select_array); $i++) {
-	$current_key_value = current($key_values);
+        $current_key_value = current($key_values);
 
       $name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
       $string .= '<br><input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
-	$string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
-	next($key_values);
-	$current_key_value = current($key_values);
-	$string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
-	next($key_values);
+        $string .= ' <b><</b> ' . $select_array[$i] . ' <u><b><</b></u>';
+        next($key_values);
+        $current_key_value = current($key_values);
+        $string .= '<input type="text" name="' . $name . '" size="3" value="' . $current_key_value . '"><i>lbs</i>';
+        next($key_values);
     }
     $string .= '<input type="hidden" name="' . $name . '" value="--none--">';
 
@@ -1009,7 +1144,7 @@ function tep_selected_file($filename) {
 ////
 // Retreive server information
   function tep_get_system_information() {
-    global $HTTP_SERVER_VARS;
+    global $_SERVER;
 
     $db_query = tep_db_query("select now() as datetime");
     $db = tep_db_fetch_array($db_query);
@@ -1022,7 +1157,7 @@ function tep_selected_file($filename) {
                  'host' => $host,
                  'ip' => gethostbyname($host),
                  'uptime' => @exec('uptime'),
-                 'http_server' => $HTTP_SERVER_VARS['SERVER_SOFTWARE'],
+                 'http_server' => $_SERVER['SERVER_SOFTWARE'],
                  'php' => PHP_VERSION,
                  'zend' => (function_exists('zend_version') ? zend_version() : ''),
                  'db_server' => DB_SERVER,
@@ -1123,8 +1258,8 @@ function tep_selected_file($filename) {
     $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
     if ($duplicate_image['total'] < 2) {
-      if (file_exists(DIR_FS_CATALOG_IMAGES . $product_image['products_image'])) {
-        @unlink(DIR_FS_CATALOG_IMAGES . $product_image['products_image']);
+      if (file_exists(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $category_image['categories_image'])) {
+        @unlink(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $category_image['categories_image']);
       }
     }
 
@@ -1132,17 +1267,21 @@ function tep_selected_file($filename) {
     tep_db_query("delete from " . TABLE_PRODUCTS . " where products_id = '" . (int)$product_id . "'");
 // LINE ADDED: MOD - Separate Price per Customer
     tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$product_id . "'");
+// BOF QPBPP for SPPC
+    tep_db_query("delete from " . TABLE_PRODUCTS_PRICE_BREAK . " where products_id = '" . (int)$product_id . "'");
+    tep_db_query("delete from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " where products_id = '" . (int)$product_id . "'");
+// EOF QPBPP for SPPC
     tep_db_query("delete from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$product_id . "'");
     tep_db_query("delete from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "'");
     tep_db_query("delete from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'");
     tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
     tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
- 
-// BOF: MOD - Wishlist addition to delete products from the wishlist when deleted 
-    tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = '" . (int)$product_id . "'"); 
-    tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'"); 
-// EOF: MOD - Wishlist addition to delete products from the wishlist when deleted 
- 
+
+// BOF: MOD - Wishlist addition to delete products from the wishlist when deleted
+    tep_db_query("delete from " . TABLE_WISHLIST . " where products_id = '" . (int)$product_id . "'");
+    tep_db_query("delete from " . TABLE_WISHLIST_ATTRIBUTES . " where products_id = '" . (int)$product_id . "'");
+// EOF: MOD - Wishlist addition to delete products from the wishlist when deleted
+
     $product_reviews_query = tep_db_query("select reviews_id from " . TABLE_REVIEWS . " where products_id = '" . (int)$product_id . "'");
     while ($product_reviews = tep_db_fetch_array($product_reviews_query)) {
       tep_db_query("delete from " . TABLE_REVIEWS_DESCRIPTION . " where reviews_id = '" . (int)$product_reviews['reviews_id'] . "'");
@@ -1153,9 +1292,9 @@ function tep_selected_file($filename) {
       tep_reset_cache_block('categories');
       tep_reset_cache_block('also_purchased');
     }
-	//++++ QT Pro: Begin Changed code
-	qtpro_doctor_amputate_all_from_product($product_id);
-	//++++ QT Pro: End Changed code
+        //++++ QT Pro: Begin Changed code
+        qtpro_doctor_amputate_all_from_product($product_id);
+        //++++ QT Pro: End Changed code
   }
 
   function tep_remove_order($order_id, $restock = false) {
@@ -1169,19 +1308,19 @@ function tep_selected_file($filename) {
         $product_stock_adjust = 0;
         if (tep_not_null($order['products_stock_attributes'])) {
           if ($order['products_stock_attributes'] != '$$DOWNLOAD$$') {
-            $attributes_stock_query = tep_db_query("SELECT products_stock_quantity 
-                                                    FROM " . TABLE_PRODUCTS_STOCK . " 
-                                                    WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "' 
+            $attributes_stock_query = tep_db_query("SELECT products_stock_quantity
+                                                    FROM " . TABLE_PRODUCTS_STOCK . "
+                                                    WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "'
                                                     AND products_id = '" . (int)$order['products_id'] . "'");
             if (tep_db_num_rows($attributes_stock_query) > 0) {
                 $attributes_stock_values = tep_db_fetch_array($attributes_stock_query);
-                tep_db_query("UPDATE " . TABLE_PRODUCTS_STOCK . " 
-                              SET products_stock_quantity = products_stock_quantity + '" . (int)$order['products_quantity'] . "' 
-                              WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "' 
+                tep_db_query("UPDATE " . TABLE_PRODUCTS_STOCK . "
+                              SET products_stock_quantity = products_stock_quantity + '" . (int)$order['products_quantity'] . "'
+                              WHERE products_stock_attributes = '" . $order['products_stock_attributes'] . "'
                               AND products_id = '" . (int)$order['products_id'] . "'");
                 $product_stock_adjust = min($order['products_quantity'],  $order['products_quantity']+$attributes_stock_values['products_stock_quantity']);
             } else {
-                tep_db_query("INSERT into " . TABLE_PRODUCTS_STOCK . " 
+                tep_db_query("INSERT into " . TABLE_PRODUCTS_STOCK . "
                               (products_id, products_stock_attributes, products_stock_quantity)
                               VALUES ('" . (int)$order['products_id'] . "', '" . $order['products_stock_attributes'] . "', '" . (int)$order['products_quantity'] . "')");
                 $product_stock_adjust = $order['products_quantity'];
@@ -1189,9 +1328,9 @@ function tep_selected_file($filename) {
           }
         } else {
             $product_stock_adjust = $order['products_quantity'];
-        } 
-        tep_db_query("UPDATE " . TABLE_PRODUCTS . " 
-                      SET products_quantity = products_quantity + " . $product_stock_adjust . ", products_ordered = products_ordered - " . (int)$order['products_quantity'] . " 
+        }
+        tep_db_query("UPDATE " . TABLE_PRODUCTS . "
+                      SET products_quantity = products_quantity + " . $product_stock_adjust . ", products_ordered = products_ordered - " . (int)$order['products_quantity'] . "
                       WHERE products_id = '" . (int)$order['products_id'] . "'");
 //++++ QT Pro: End Changed Code
       }
@@ -1201,9 +1340,44 @@ function tep_selected_file($filename) {
     tep_db_query("delete from " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " where orders_id = '" . (int)$order_id . "'");
     tep_db_query("delete from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$order_id . "'");
     tep_db_query("delete from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . (int)$order_id . "'");
+    // *** BEGIN GOOGLE CHECKOUT ***
+    require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/includes/functions/general.php');
+    // *** END GOOGLE CHECKOUT ***
   }
 
-  function tep_reset_cache_block($cache_block) {
+//  function tep_reset_cache_block($cache_block) {
+//     global $cache_blocks;
+//
+//     for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
+//       if ($cache_blocks[$i]['code'] == $cache_block) {
+//         if ($cache_blocks[$i]['multiple']) {
+//           if ($dir = @opendir(DIR_FS_CACHE)) {
+//             while ($cache_file = readdir($dir)) {
+//               $cached_file = $cache_blocks[$i]['file'];
+//               $languages = tep_get_languages();
+//               for ($j=0, $k=sizeof($languages); $j<$k; $j++) {
+//                 $cached_file_unlink = ereg_replace('-language', '-' . $languages[$j]['directory'], $cached_file);
+//                 if (ereg('^' . $cached_file_unlink, $cache_file)) {
+//                   @unlink(DIR_FS_CACHE . $cache_file);
+//                 }
+//               }
+//             }
+//             closedir($dir);
+//           }
+//         } else {
+//           $cached_file = $cache_blocks[$i]['file'];
+//           $languages = tep_get_languages();
+//           for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+//             $cached_file = ereg_replace('-language', '-' . $languages[$i]['directory'], $cached_file);
+//             @unlink(DIR_FS_CACHE . $cached_file);
+//           }
+//         }
+//         break;
+//       }
+//     }
+//   }
+//  adapted for Hide products and categories from customer groups for SPPC 2008/08/02
+   function tep_reset_cache_block($cache_block) {
     global $cache_blocks;
 
     for ($i=0, $n=sizeof($cache_blocks); $i<$n; $i++) {
@@ -1214,8 +1388,10 @@ function tep_selected_file($filename) {
               $cached_file = $cache_blocks[$i]['file'];
               $languages = tep_get_languages();
               for ($j=0, $k=sizeof($languages); $j<$k; $j++) {
-                $cached_file_unlink = ereg_replace('-language', '-' . $languages[$j]['directory'], $cached_file);
-                if (ereg('^' . $cached_file_unlink, $cache_file)) {
+                $cached_file_unlink = preg_replace('/-language/', '-' . $languages[$j]['directory'], $cached_file);
+                // if the file name starts with one of those we are looking for and is a cache file (by
+                // checking if it contains the string ".cache" we delete the cache file
+                if (preg_match('/^' . $cached_file_unlink .'/', $cache_file)) {
                   @unlink(DIR_FS_CACHE . $cache_file);
                 }
               }
@@ -1223,10 +1399,12 @@ function tep_selected_file($filename) {
             closedir($dir);
           }
         } else {
+          // not used using hide products or regular osC, but if so, it assumes the $cache_blocks[$i]['file'] does
+          // contain the .cache on the end for example whatever_box-language.cache
           $cached_file = $cache_blocks[$i]['file'];
           $languages = tep_get_languages();
           for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-            $cached_file = ereg_replace('-language', '-' . $languages[$i]['directory'], $cached_file);
+            $cached_file = preg_replace('/-language/', '-' . $languages[$i]['directory'], $cached_file);
             @unlink(DIR_FS_CACHE . $cached_file);
           }
         }
@@ -1350,7 +1528,7 @@ function tep_selected_file($filename) {
     if (SEND_EMAILS != 'true') return false;
 
     // Instantiate a new mail object
-    $message = new email(array('X-Mailer: osCMax'));
+    $message = new email(array('X-Mailer: osCmax Mailer'));
 
     // Build the text version
     $text = strip_tags($email_text);
@@ -1399,12 +1577,46 @@ function tep_selected_file($filename) {
 ////
 // Wrapper function for round() for php3 compatibility
   function tep_round($value, $precision) {
-    if (PHP_VERSION < 4) {
-      $exp = pow(10, $precision);
-      return round($value * $exp) / $exp;
-    } else {
-      return round($value, $precision);
+    return round($value, $precision);
+  }
+
+////
+// Round up function for non whole numbers by GREG DEETH
+// The value for the precision variable determines how many digits after the decimal and rounds the last digit up to the next value
+// Precision = 0 -> xx.xxxx = x+
+// Precision = 1 -> xx.xxxx = xx.+
+// Precision = 2 -> xx.xxxx = xx.x+
+  function tep_round_up($number, $precision) {
+    $number_whole = '';
+    $num_left_dec = 0;
+    $num_right_dec = 0;
+    $num_digits = strlen($number);
+    $number_out = '';
+    $i = 0;
+    while ($i + 1 <= strlen($number))
+    {
+        $current_digit = substr($number, $i, ($i + 1) - $num_digits);
+        if ($current_digit == '.') {
+            $i = $num_digits + 1;
+            $num_left_dec = strlen($number_whole);
+            $num_right_dec = ($num_left_dec + 1) - $num_digits;
+        } else {
+            $number_whole = $number_whole . $current_digit;
+            $i = $i + 1;
+        }
     }
+    if ($num_digits > 3 && $precision < ($num_digits - $num_left_dec - 1) && $precision >= 0) {
+        $i = $precision;
+        $addable = 1;
+        while ($i > 0) {
+            $addable = $addable * .1;
+            $i = $i - 1;
+        } 
+        $number_out = substr($number, 0, $num_right_dec + $precision) + $addable;
+    } else {
+        $number_out = $number;
+    }
+    return $number_out;
   }
 
 ////
@@ -1469,8 +1681,7 @@ function tep_selected_file($filename) {
   function tep_call_function($function, $parameter, $object = '') {
     if ($object == '') {
       return call_user_func($function, $parameter);
-    } elseif (PHP_VERSION < 4) {
-      return call_user_method($function, $object, $parameter);
+
     } else {
       return call_user_func(array($object, $function), $parameter);
     }
@@ -1552,7 +1763,7 @@ function tep_selected_file($filename) {
 // nl2br() prior PHP 4.2.0 did not convert linefeeds on all OSs (it only converted \n)
   function tep_convert_linefeeds($from, $to, $string) {
     if ((PHP_VERSION < "4.0.5") && is_array($from)) {
-      return ereg_replace('(' . implode('|', $from) . ')', $to, $string);
+      return preg_replace('/(' . implode('|', $from) . ')/', $to, $string);
     } else {
       return str_replace($from, $to, $string);
     }
@@ -1579,6 +1790,41 @@ function tep_selected_file($filename) {
 
     return $tmp_array;
   }
+
+// BOF Open Featured Sets
+////
+// Alias function for featured configuration values in the Administration Tool
+  function tep_cfg_select_featured($select_array, $key_value, $key = '') {
+    $string = '';
+
+    for ($i=0, $n=sizeof($select_array); $i<$n; $i++) {
+      $name = ((tep_not_null($key)) ? 'configuration[' . $key . ']' : 'configuration_value');
+
+      $string .= '<input type="radio" name="' . $name . '" value="' . $select_array[$i] . '"';
+
+      if ($key_value == $select_array[$i]) $string .= ' CHECKED';
+
+      $string .= '> ' . $select_array[$i];
+    }
+
+    return $string;
+  }
+
+////
+// Alias function for Store configuration values in the Administration Tool
+  function tep_cfg_select_color($key_value, $key = '') {
+    $string = '';
+
+    $name = ((tep_not_null($key)) ? 'configuration[' . $key . ']' : 'configuration_value');
+
+    $string .= '<SCRIPT LANGUAGE="JavaScript"> var cp = new ColorPicker(\'window\'); </SCRIPT>';
+    $string .= '<br><table border="0" cellspacing="0" cellpadding="0"><tr><td><input type="text" name="' . $name . '" id="' . $name . '" value="' . $key_value . '" size="6"></td><td>&nbsp;</td>';
+    $string .= '<td><a href="javascript:;" onclick="cp.select(document.configuration.'.$name.',\'pick\');return false;" name="pick" id="pick">'.tep_image_button('button_pick_color.gif', IMAGE_PICK_COLOR).'</a></td></tr></table><br>';
+
+    return $string;
+  }
+// EOF Open Featured Sets
+
 
 //++++ QT Pro: Begin Changed code
 require(DIR_WS_FUNCTIONS . 'qtpro_functions.php');
@@ -1608,7 +1854,7 @@ require(DIR_WS_FUNCTIONS . 'qtpro_functions.php');
   for ($i=0, $n=sizeof($directory_array); $i<$n; $i++) {
     $file = $directory_array[$i];
 
-    include(DIR_FS_CATALOG_LANGUAGES . $language . '/modules/payment/' . $file);
+    include(DIR_FS_CATALOG_LANGUAGES . $language . '/' . $file);
     include($module_directory . $file);
 
     $class = substr($file, 0, strrpos($file, '.'));
@@ -1616,17 +1862,17 @@ require(DIR_WS_FUNCTIONS . 'qtpro_functions.php');
       $module = new $class;
       if ($module->check() > 0) {
         // If module enabled create array of titles
-      	$enabled_payment[] = array('id' => $module->title, 'text' => $module->title);
-		
+        $enabled_payment[] = array('id' => $module->title, 'text' => $module->title);
+
       }
    }
  }
- 				
-    $enabled_payment[] = array('id' => 'Other', 'text' => 'Other');	
-		
-		//draw the dropdown menu for payment methods and default to the order value
-	  return tep_draw_pull_down_menu('configuration_value', $enabled_payment, '', ''); 
-		}
+
+    $enabled_payment[] = array('id' => 'Other', 'text' => 'Other');
+
+                //draw the dropdown menu for payment methods and default to the order value
+          return tep_draw_pull_down_menu('configuration_value', $enabled_payment, '', '');
+                }
 /////end payment method dropdown
 // EOF: MOD - Order Editor
 
@@ -1667,22 +1913,49 @@ require(DIR_WS_FUNCTIONS . 'qtpro_functions.php');
   }
 // EOF: MOD - FedEx functions
 
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-// Funtion to reset SEO URLs database cache entries
-  function tep_reset_cache_data_seo_urls($action){
-    switch ($action){
-      case 'reset':
-        tep_db_query("DELETE FROM cache WHERE cache_name LIKE '%seo_urls%'");
-        tep_db_query("UPDATE configuration SET configuration_value='false' WHERE configuration_key='SEO_URLS_CACHE_RESET'");
+// ULTIMATE Seo Urls 5 by FWR Media
+// Reset the seo urls cache
+function tep_reset_cache_data_seo_urls($action = false){
+  if ( $action == 'reset' ){
+    $usu5_path = DIR_FS_CATALOG . DIR_WS_MODULES . 'ultimate_seo_urls5' . DIRECTORY_SEPARATOR;
+    switch( SEO_URLS_CACHE_SYSTEM ){
+      case 'FileSystem':
+        $path_to_cache = realpath($usu5_path . 'cache') . DIRECTORY_SEPARATOR;
+        $it = new DirectoryIterator($path_to_cache);
+        while( $it->valid() ){
+          if ( !$it->isDot() && is_readable($path_to_cache . $it->getFilename()) && (substr($it->getFilename(), -6) == '.cache') ){
+            unlink($path_to_cache . $it->getFilename());
+          }
+          $it->next();
+        }
         break;
-      default:
+      case 'Database':
+        tep_db_query("TRUNCATE TABLE `usu_cache`");
+        break;
+      case 'Memcached':
+        if ( class_exists('Memcache') ){
+          include_once $usu5_path . 'interfaces' . DIRECTORY_SEPARATOR . 'Interface_Cache.php';
+          include_once $usu5_path . 'classes' . DIRECTORY_SEPARATOR . 'Usu_Cache_Memcached.php';
+          $mc = new Usu_Cache_Memcached('dummy');
+          $mc->flushOut();
+        }
         break;
     }
-    # The return value is used to set the value upon viewing
-    # It's NOT returining a false to indicate failure!!
-    return 'false';
+    tep_db_query("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value='false' WHERE configuration_key='SEO_URLS_CACHE_RESET'");
   }
-// EOF: MOD - Ultimate SEO URLs - by Chemo
+}
+
+
+  function tep_get_products_seo_url($product_id, $language_id = 0) {
+    global $languages_id;
+
+    if ($language_id == 0) $language_id = $languages_id;
+    $product_query = tep_db_query("select products_seo_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['products_seo_url'];
+  }
+// EOF: ULTIMATE Seo Urls 5 by FWR Media
 
 // BOF: MOD - WebMakers.com Pull the shipping method used on an order
 // Return orders shipping method
@@ -1729,4 +2002,189 @@ require(DIR_WS_FUNCTIONS . 'qtpro_functions.php');
     }
   }
 // <<< END REGISTER_GLOBALS
+
+//BOF QPBPP for SPPC
+function qpbpp_insert_update_discount_cats($products_id, $current_discount_categories_id, $new_discount_categories_id, $customers_group_id) {
+  if (!tep_not_null($products_id)) {
+    return false; // if $products_id is not set stop here
+  }
+  if ($current_discount_categories_id == $new_discount_categories_id) {
+    return true; // if they are the same no update is necessary
+  }
+  if ($current_discount_categories_id == 0 && $new_discount_categories_id > 0) {
+    // insert needed
+    tep_db_query("insert into " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " (products_id, discount_categories_id, customers_group_id) values ('" . (int)$products_id . "', '" . (int)$new_discount_categories_id . "', '" . (int)$customers_group_id . "')");
+    return true;
+  }
+  if ($current_discount_categories_id > 0 && $new_discount_categories_id == 0) {
+    // delete needed
+    tep_db_query("delete from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " where products_id = '" . (int)$products_id . "' and customers_group_id = '" . (int)$customers_group_id . "'");
+    return true;
+  }
+  if ($current_discount_categories_id > 0 && ($current_discount_categories_id !== $new_discount_categories_id)) {
+    // update needed
+    tep_db_query("update " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " set discount_categories_id = '" . (int)$new_discount_categories_id . "' where products_id = '" . (int)$products_id . "' and discount_categories_id = '" . (int)$current_discount_categories_id . "' and customers_group_id = '" . (int)$customers_group_id . "'");
+    return true;
+  }
+  return false; // for good measure
+}
+
+  function sortByQty($a, $b) {
+    if ($a['products_qty'] == $b['products_qty']) {
+      return 0;
+    }
+     if ($a['products_qty'] < $b['products_qty']) {
+      return -1;
+    }
+      return 1;
+  }
+//EOF QPBPP for SPPC
+
+// for customer comments
+  function tep_cfg_pull_down_status_change_cancel_list($order_status_id, $key = '') {
+    global $languages_id;
+
+    $name = (($key) ? 'configuration[' . $key . ']' : 'configuration_value');
+
+    $statuses_array = array(array('id' => '0', 'text' => TEXT_DEFAULT));
+    $statuses_query = tep_db_query("select orders_status_id, orders_status_name from " . TABLE_ORDERS_STATUS . " where language_id = '" . $languages_id . "' order by orders_status_id");
+    while ($statuses = tep_db_fetch_array($statuses_query)) {
+      $statuses_array[] = array('id' => $statuses['orders_status_id'],
+                                'text' => $statuses['orders_status_name']);
+    }
+
+    return tep_draw_pull_down_menu($name, $statuses_array, $order_status_id);
+  }
+
+// Function to create pulldown menu for templates by PGM
+function tep_cfg_pull_down_templates() {
+  $dir_array = array();
+  $name = (($key) ? 'configuration[' . $key . ']' : 'configuration_value');
+
+  if ($handle = opendir(DIR_FS_CATALOG.'templates/')) {
+    while (false !== ($file = readdir($handle))) {
+      if ($file != "." && $file != ".." && $file !=".svn") {
+        if (is_dir(DIR_FS_CATALOG.'templates/'.$file)) $dir_array[] = array('id' => $file, 'text' => $file);
+      }
+    }
+
+  closedir($handle);
+  sort($dir_array);
+
+  } else { die("<center><b>No Template Folders!</b></center>");}
+
+  return tep_draw_pull_down_menu($name, $dir_array, '');
+}
+
+// strips apostrophes from strings
+  function tep_html_noquote($string) {
+    $string=str_replace('&#39;', '', $string);
+    $string=str_replace("'", "", $string);
+    $string=str_replace('"', '', $string);
+    $string=preg_replace("/\\r\\n|\\n|\\r/", "<BR>", $string);
+  return $string;
+  }
+
+// BOF: Extra Product Fields
+  function tep_get_extra_field_list_value($value_id, $show_chain = false, $display_type = 0) {
+    $sql = tep_db_query("select epf_value, value_image, parent_id from " . TABLE_EPF_VALUES . " where value_id = " . (int)$value_id);
+    $value = tep_db_fetch_array($sql);
+    $display = $value['epf_value'];
+    if (tep_not_null($value['value_image'])) {
+      if ($display_type == 2) {
+      	$browser = (isset($_SERVER['HTTP_USER_AGENT']) ? strtolower($_SERVER['HTTP_USER_AGENT']) : '');
+      	$pos = strpos($browser, 'msie');
+      	if ($pos !== false) { // using Internet Explorer requires different display type for inline tables
+       	  $vpos = strpos($browser, ';', $pos);
+      	  $version = substr($browser, $pos +5, $vpos - $pos - 5);
+      	  if ($version < 9) {
+      	    $tt = 'inline';
+      	  } else {
+      	    $tt = 'inline-table';
+      	  }
+       	} else {
+      	  $tt = 'inline-table';
+        }
+        $display = '<table style="display: ' . $tt . '; vertical-align: middle; text-align: center"><tr><td>' . tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'epf/' . $value['value_image'], $value['epf_value']) . '<br />' . $value['epf_value'] . '</td></tr></table>';
+      } elseif ($display_type == 1) {
+        $display = tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'epf/' . $value['value_image'], $value['epf_value']);
+      }
+    }
+    if ($show_chain && ($value['parent_id'] > 0)) {
+      return tep_get_extra_field_list_value($value['parent_id'], true, $display_type) . ' | ' . $display;
+    } else {
+      return $display;
+    }
+  }
+  
+  function tep_list_epf_children($parent_id) {
+    $sql = tep_db_query("select value_id from " . TABLE_EPF_VALUES . " where parent_id = " . (int)$parent_id);
+    $list = '';
+    while ($i = tep_db_fetch_array($sql)) {
+      $list .= ',' . $i['value_id'] . tep_list_epf_children($i['value_id']);
+    }
+    return $list;
+  }
+  
+  function tep_build_epf_pulldown($epf_id, $languages_id, $value_array = '', $parent_id = 0, $indent = '') {
+    if (!is_array($value_array)) $value_array = array();
+    $sql = tep_db_query("select epf_value, value_id from " . TABLE_EPF_VALUES . " where epf_id = " . (int)$epf_id . " and languages_id = " . (int)$languages_id . " and parent_id = " . (int)$parent_id . " order by sort_order, epf_value");
+    while ($v = tep_db_fetch_array($sql)) {
+      $value_array[] = array('id' => $v['value_id'], 'text' => $indent . $v['epf_value']);
+      $value_array = tep_build_epf_pulldown($epf_id, $languages_id, $value_array, $v['value_id'], $indent . '&middot;');
+    }
+    return $value_array;
+  }
+  
+  function tep_get_product_extra_value($epf_id, $product_id, $language_id) {
+    $epf_query = tep_db_query("select epf_id, epf_uses_value_list, epf_multi_select from " . TABLE_EPF . " where epf_id = " . (int)$epf_id);
+    $e = tep_db_fetch_array($epf_query);
+    $field = 'extra_value';
+    if ($e['epf_uses_value_list']) {
+      if ($e['epf_multi_select']) {
+        $field .= '_ms';
+      } else {
+        $field .= '_id';
+      }
+    }
+    $field .= $e['epf_id'];
+    $product_query = tep_db_query("select " . $field . " from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+    return $product[$field];
+  }
+// EOF: Extra Product Fields
+
+// BOF: Attribute Sort with Clone Tool
+  function tep_attribute_sort($attributes_id) {
+    global $languages_id;
+    $attributes_sort = tep_db_query("select products_attributes_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_attributes_id = '" . (int)$attributes_id . "'");
+    $attributes_sort_values = tep_db_fetch_array($attributes_sort);
+
+    return $attributes_sort_values['products_attributes_sort_order'];
+  }
+// EOF: Attribute Sort with Clone Tool
+
+// BOF: BEGIN NEXT AND PREVIOUS ORDERS DISPLAY IN ADMIN   
+  function get_order_id($orderid,$mode='next') {
+    if ($mode=='prev') 
+      $op = '<';
+    elseif ($mode=='next')
+      $op = '>';
+
+    if ($op == '<' or $op == '>')
+      $nextprev_resource = tep_db_query("select orders_id from " . TABLE_ORDERS . " where orders_id $op '" . (int)$orderid . "' order by orders_id");
+
+    if($mode == 'prev') {
+      while($nextprev_values = tep_db_fetch_array($nextprev_resource)) {
+        $nextprev_value = $nextprev_values;
+      }
+    } else if($mode == 'next')
+     $nextprev_value = tep_db_fetch_array($nextprev_resource);
+
+    if(!empty($nextprev_value['orders_id']))
+      return $nextprev_value['orders_id'];
+    else
+      return false;
+  }
+// EOF: BEGIN NEXT AND PREVIOUS ORDERS DISPLAY IN ADMIN 
 ?>

@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_invoice.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -19,7 +15,7 @@ $Id: affiliate_invoice.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
-  $payments_query = tep_db_query("select * from " . TABLE_AFFILIATE_PAYMENT . " where affiliate_payment_id = '" . $HTTP_GET_VARS['pID'] . "'");
+  $payments_query = tep_db_query("select * from " . TABLE_AFFILIATE_PAYMENT . " where affiliate_payment_id = '" . $_GET['pID'] . "'");
   $payments = tep_db_fetch_array($payments_query);
 
   $affiliate_address['firstname'] = $payments['affiliate_firstname'];
@@ -37,8 +33,9 @@ $Id: affiliate_invoice.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 
 <!-- body_text //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -47,7 +44,7 @@ $Id: affiliate_invoice.php 14 2006-07-28 17:42:07Z user $
       <tr>
         <td class="pageHeading"><?php echo nl2br(STORE_NAME_ADDRESS); ?></td>
         <td class="pageHeading" align="center"><?php echo HEADING_TITLE; ?></td>
-        <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'oscommerce.gif', 'osCommerce', '204', '50'); ?></td>
+        <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . STORE_LOGO, STORE_NAME); ?></td>
       </tr>
     </table></td>
   </tr>
@@ -93,7 +90,7 @@ $Id: affiliate_invoice.php 14 2006-07-28 17:42:07Z user $
         <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_COMMISSION_VALUE; ?></td>
       </tr>
 <?php
-  $affiliate_payment_query = tep_db_query("select * from " . TABLE_AFFILIATE_PAYMENT . " where affiliate_payment_id = '" . $HTTP_GET_VARS['pID'] . "'");
+  $affiliate_payment_query = tep_db_query("select * from " . TABLE_AFFILIATE_PAYMENT . " where affiliate_payment_id = '" . $_GET['pID'] . "'");
   $affiliate_payment = tep_db_fetch_array($affiliate_payment_query);
   $affiliate_sales_query = tep_db_query("select * from " . TABLE_AFFILIATE_SALES . " where affiliate_payment_id = '" . $payments['affiliate_payment_id'] . "' order by affiliate_payment_date desc");
   while ($affiliate_sales = tep_db_fetch_array($affiliate_sales_query)) {

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: general.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -18,19 +18,23 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   }
 
 ////
+// ULTIMATE Seo Urls 5 by FWR Media
 // Redirect to another page or site
   function tep_redirect($url) {
-// BOF: MS2 update 501112 - Added
     if ( (strstr($url, "\n") != false) || (strstr($url, "\r") != false) ) {
       tep_redirect(tep_href_link(FILENAME_DEFAULT, '', 'NONSSL', false));
     }
-// EOF: MS2 update 501112 - Added
+
     if ( (ENABLE_SSL == true) && (getenv('HTTPS') == 'on') ) { // We are loading an SSL page
       if (substr($url, 0, strlen(HTTP_SERVER)) == HTTP_SERVER) { // NONSSL url
         $url = HTTPS_SERVER . substr($url, strlen(HTTP_SERVER)); // Change it to SSL
       }
     }
 
+    if ( false !== strpos($url, '&amp;') ){
+      $url = str_replace('&amp;', '&', $url);
+    }
+    session_write_close();
     header('Location: ' . $url);
 
     tep_exit();
@@ -101,12 +105,13 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 //  $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status");
     global $sppc_customer_group_id;
 
-    if(!tep_session_is_registered('sppc_customer_group_id')) {
-      $customer_group_id = '0';
-    } else {
-      $customer_group_id = $sppc_customer_group_id;
-    }
-    $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status and customers_group_id = '" . (int)$customer_group_id . "'");
+  if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+    $customer_group_id = $_SESSION['sppc_customer_group_id'];
+  } else {
+    $customer_group_id = '0';
+  }
+
+    $product_query = tep_db_query("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status ='1' and customers_group_id = '" . (int)$customer_group_id . "'");
 // EOF: MOD - Separate_Pricing Per Customer
 
     $product = tep_db_fetch_array($product_query);
@@ -126,21 +131,21 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   function tep_get_products_stock($products_id, $attributes=array()) {
     global $languages_id;
     $products_id = tep_get_prid($products_id);
-    if (sizeof($attributes)>0) {
+    if (sizeof($attributes) > 0) {
       $all_nonstocked = true;
       $attr_list='';
       $options_list=implode(",",array_keys($attributes));
-      $track_stock_query=tep_db_query("select products_options_id, products_options_track_stock from " . TABLE_PRODUCTS_OPTIONS . " where products_options_id in ($options_list) and language_id= '" . (int)$languages_id . "order by products_options_id'");
-      while($track_stock_array=tep_db_fetch_array($track_stock_query)) {
+      $track_stock_query=tep_db_query("select products_options_id, products_options_track_stock from " . TABLE_PRODUCTS_OPTIONS . " where products_options_id in ($options_list) and language_id= '" . (int)$languages_id . "' order by products_options_id");
+      while($track_stock_array = tep_db_fetch_array($track_stock_query)) {
         if ($track_stock_array['products_options_track_stock']) {
-          $attr_list.=$track_stock_array['products_options_id'] . '-' . $attributes[$track_stock_array['products_options_id']] . ',';
-          $all_nonstocked=false;
+          $attr_list .= $track_stock_array['products_options_id'] . '-' . $attributes[$track_stock_array['products_options_id']] . ',';
+          $all_nonstocked = false;
         }
       }
       $attr_list=substr($attr_list,0,strlen($attr_list)-1);
     }
 
-    if ((sizeof($attributes)==0) | ($all_nonstocked)) {
+    if ((sizeof($attributes) == 0) || (isset($all_nonstocked) && ($all_nonstocked))) {
       $stock_query = tep_db_query("select products_quantity as quantity from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
     } else {
       $stock_query=tep_db_query("select products_stock_quantity as quantity from " . TABLE_PRODUCTS_STOCK . " where products_id='". (int)$products_id . "' and products_stock_attributes='$attr_list'");
@@ -198,15 +203,15 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 ////
 // Return all HTTP GET variables, except those passed as a parameter
   function tep_get_all_get_params($exclude_array = '') {
-    global $HTTP_GET_VARS;
+    global $_GET;
 
     if (!is_array($exclude_array)) $exclude_array = array();
 
     $get_url = '';
-    if (is_array($HTTP_GET_VARS) && (sizeof($HTTP_GET_VARS) > 0)) {
-      reset($HTTP_GET_VARS);
-      while (list($key, $value) = each($HTTP_GET_VARS)) {
-        if ( (strlen($value) > 0) && ($key != tep_session_name()) && ($key != 'error') && (!in_array($key, $exclude_array)) && ($key != 'x') && ($key != 'y') ) {
+    if (is_array($_GET) && (sizeof($_GET) > 0)) {
+      reset($_GET);
+      while (list($key, $value) = each($_GET)) {
+        if ( is_string($value) && (strlen($value) > 0) && ($key != tep_session_name()) && ($key != 'error') && (!in_array($key, $exclude_array)) && ($key != 'x') && ($key != 'y') ) {
           $get_url .= $key . '=' . rawurlencode(stripslashes($value)) . '&';
         }
       }
@@ -222,22 +227,17 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     $countries_array = array();
     if (tep_not_null($countries_id)) {
       if ($with_iso_codes == true) {
-        // Ajax Country-state selector
-        //$countries = tep_db_query("select countries_name, countries_iso_code_2, countries_iso_code_3 from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "' order by countries_name");
         $countries = tep_db_query("select countries_name, countries_iso_code_2, countries_iso_code_3 from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "' and active = 1 order by countries_name");
-
         $countries_values = tep_db_fetch_array($countries);
         $countries_array = array('countries_name' => $countries_values['countries_name'],
                                  'countries_iso_code_2' => $countries_values['countries_iso_code_2'],
                                  'countries_iso_code_3' => $countries_values['countries_iso_code_3']);
       } else {
-        $countries = tep_db_query("select countries_name from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "'");
+        $countries = tep_db_query("select countries_name from " . TABLE_COUNTRIES . " where countries_id = '" . (int)$countries_id . "' and active = 1");
         $countries_values = tep_db_fetch_array($countries);
         $countries_array = array('countries_name' => $countries_values['countries_name']);
       }
     } else {
-      // Ajax Country-state selector 
-      //$countries = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . " order by countries_name");
       $countries = tep_db_query("select countries_id, countries_name from " . TABLE_COUNTRIES . " where active = 1 order by countries_name");
       while ($countries_values = tep_db_fetch_array($countries)) {
         $countries_array[] = array('countries_id' => $countries_values['countries_id'],
@@ -405,10 +405,10 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 // BOF: MOD - Separate Pricing Per Customer, show_tax modification
     global $customer_zone_id, $customer_country_id, $osC_Tax, $sppc_customer_group_tax_exempt;
 
-     if(!tep_session_is_registered('sppc_customer_group_tax_exempt')) {
+     if (!isset($_SESSION['sppc_customer_group_tax_exempt'])) {
      $customer_group_tax_exempt = '0';
      } else {
-     $customer_group_tax_exempt = $sppc_customer_group_tax_exempt;
+       $customer_group_tax_exempt = $_SESSION['sppc_customer_group_tax_exempt'];
      }
 
      if ($customer_group_tax_exempt == '1') {
@@ -436,11 +436,11 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 //    if ( (DISPLAY_PRICE_WITH_TAX == 'true') && ($tax > 0) ) {
     global $sppc_customer_group_show_tax;
     global $sppc_customer_group_tax_exempt;
-     if(!tep_session_is_registered('sppc_customer_group_show_tax')) {
-     $customer_group_show_tax = '1';
-     } else {
-     $customer_group_show_tax = $sppc_customer_group_show_tax;
-     }
+      if (!isset($_SESSION['sppc_customer_group_show_tax'])) {
+        $customer_group_show_tax = '1';
+      } else {
+        $customer_group_show_tax = $_SESSION['sppc_customer_group_show_tax'];
+      }
 
  //    echo '<br>cg_tax_exempt: ';
  //    echo $sppc_customer_group_tax_exempt;
@@ -460,17 +460,37 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 ////
 // Return the number of products in a category
 // TABLES: products, products_to_categories, categories
+//  function tep_count_products_in_category($category_id, $include_inactive = false) {
+//     $products_count = 0;
+//     if ($include_inactive == true) {
+//       $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$category_id . "'");
+//     } else {
+//       $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = p2c.products_id and p.products_status = '1' and p2c.categories_id = '" . (int)$category_id . "'");
+//     }
+//     $products = tep_db_fetch_array($products_query);
+//     $products_count += $products['total'];
+// 
+//     $child_categories_query = tep_db_query("select categories_id from " . TABLE_CATEGORIES . " where parent_id = '" . (int)$category_id . "'");
   function tep_count_products_in_category($category_id, $include_inactive = false) {
+  // BOF Separate Pricing Per Customer, hide products and categories for groups
+     global $sppc_customer_group_id;
+     if(!tep_session_is_registered('sppc_customer_group_id')) { 
+     $customer_group_id = '0';
+     } else {
+      $customer_group_id = $sppc_customer_group_id;
+     }
     $products_count = 0;
     if ($include_inactive == true) {
-      $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$category_id . "'");
+      $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$category_id . "' and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
     } else {
-      $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = p2c.products_id and p.products_status = '1' and p2c.categories_id = '" . (int)$category_id . "'");
-    }
-    $products = tep_db_fetch_array($products_query);
+      $products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = p2c.products_id and p.products_status = '1' and p2c.categories_id = '" . (int)$category_id . "' and find_in_set('".$customer_group_id."', products_hide_from_groups) = 0 and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
+    }   
+        $products = tep_db_fetch_array($products_query);
     $products_count += $products['total'];
+// no need to find child categories that are hidden from this customer or have a higher level category that is hidden
+    $child_categories_query = tep_db_query("select categories_id from " . TABLE_CATEGORIES . " where parent_id = '" . (int)$category_id . "' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0");
+// EOF Separate Pricing Per Customer, hide products and categories for groups
 
-    $child_categories_query = tep_db_query("select categories_id from " . TABLE_CATEGORIES . " where parent_id = '" . (int)$category_id . "'");
     if (tep_db_num_rows($child_categories_query)) {
       while ($child_categories = tep_db_fetch_array($child_categories_query)) {
         $products_count += tep_count_products_in_category($child_categories['categories_id'], $include_inactive);
@@ -605,7 +625,16 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 
     if (!is_array($categories_array)) $categories_array = array();
 
-    $categories_query = tep_db_query("select c.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where parent_id = '" . (int)$parent_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+//    $categories_query = tep_db_query("select c.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where parent_id = '" . (int)$parent_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+    // BOF SPPC Hide categories for groups
+    if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
+      $customer_group_id = $_SESSION['sppc_customer_group_id'];
+    } else {
+     $customer_group_id = '0';
+    }
+    
+    $categories_query = tep_db_query("select c.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where parent_id = '" . (int)$parent_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and find_in_set('" . $customer_group_id . "', categories_hide_from_groups) = 0 order by sort_order, cd.categories_name");
+    // EOF SPPC Hide categories for groups
     while ($categories = tep_db_fetch_array($categories_query)) {
       $categories_array[] = array('id' => $categories['categories_id'],
                                   'text' => $indent . $categories['categories_name']);
@@ -879,8 +908,8 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
       $size = sizeof($format_string_array);
       for ($i=0; $i<$size; $i++) {
         if ($format_string_array[$i] == 'mm' || $format_string_array[$i] == 'mmm') $month = $date_to_check_array[$i];
-        if ($format_string_array[$i] == 'dd') $day = $date_to_check_array[$i];
-        if ( ($format_string_array[$i] == 'yyyy') || ($format_string_array[$i] == 'aaaa') ) $year = $date_to_check_array[$i];
+        if ($format_string_array[$i] == 'dd' || $format_string_array[$i] == 'tt') $day = $date_to_check_array[$i];
+        if ($format_string_array[$i] == 'yyyy' || $format_string_array[$i] == 'aaaa' || $format_string_array[$i] == 'jjjj') $year = $date_to_check_array[$i];
       }
     } else {
       if (strlen($format_string) == 8 || strlen($format_string) == 9) {
@@ -956,7 +985,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 
     if ($sortby) {
       $sort_prefix = '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('page', 'info', 'sort')) . 'page=1&sort=' . $colnum . ($sortby == $colnum . 'a' ? 'd' : 'a')) . '" title="' . tep_output_string(TEXT_SORT_PRODUCTS . ($sortby == $colnum . 'd' || substr($sortby, 0, 1) != $colnum ? TEXT_ASCENDINGLY : TEXT_DESCENDINGLY) . TEXT_BY . $heading) . '" class="productListing-heading">' ;
-      $sort_suffix = (substr($sortby, 0, 1) == $colnum ? (substr($sortby, 1, 1) == 'a' ? '+' : '-') : '') . '</a>';
+      $sort_suffix = '&nbsp;' . (substr($sortby, 0, 1) == $colnum ? (substr($sortby, 1, 1) == 'a' ? tep_image(DIR_WS_ICONS . 'down_off.png') : tep_image(DIR_WS_ICONS . 'up_off.png')) : '' ) . '</a>';
     }
 
     return $sort_prefix . $heading . $sort_suffix;
@@ -1003,19 +1032,15 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
 ////
 // Return a product ID with attributes
   function tep_get_uprid($prid, $params) {
-// LINE ADDED: MS2 update 501112
     if (is_numeric($prid)) {
-      $uprid = $prid;
-// BOF: MS2 update 501112 - Added
-//  if ( (is_array($params)) && (!strstr($prid, '{')) ) {
+      $uprid = (int)$prid;
+
       if (is_array($params) && (sizeof($params) > 0)) {
         $attributes_check = true;
         $attributes_ids = '';
+
         reset($params);
-// EOF: MS2 update 501112 - Added
         while (list($option, $value) = each($params)) {
-// BOF: MS2 update 501112 - Added
-//      $uprid = $uprid . '{' . $option . '}' . $value;
           if (is_numeric($option) && is_numeric($value)) {
             $attributes_ids .= '{' . (int)$option . '}' . (int)$value;
           } else {
@@ -1056,7 +1081,6 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
         }
       } else {
         return false;
-// EOF: MS2 update 501112 - Added
       }
     }
 
@@ -1068,14 +1092,11 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   function tep_get_prid($uprid) {
     $pieces = explode('{', $uprid);
 
-// LINE ADDED: MS2 update 501112
     if (is_numeric($pieces[0])) {
-      return $pieces[0];
-// BOF: MS2 update 501112 - Added
+      return (int)$pieces[0];
     } else {
       return false;
     }
-// EOF: MS2 update 501112 - Added
   }
 
 ////
@@ -1084,7 +1105,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     global $customer_id, $customer_first_name;
 
     if (tep_session_is_registered('customer_first_name') && tep_session_is_registered('customer_id')) {
-      $greeting_string = sprintf(TEXT_GREETING_PERSONAL, tep_output_string_protected($customer_first_name), tep_href_link(FILENAME_PRODUCTS_NEW));
+      $greeting_string = sprintf(TEXT_GREETING_PERSONAL, tep_output_string_protected($customer_first_name), tep_href_link(FILENAME_DEFAULT, "new_products=1"));
     } else {
       $greeting_string = sprintf(TEXT_GREETING_GUEST, tep_href_link(FILENAME_LOGIN, '', 'SSL'), tep_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL'));
     }
@@ -1122,7 +1143,7 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     $from_email_name = preg_replace('/[\n|\r].*/', '', $from_email_name);
 
     // Instantiate a new mail object
-    $message = new email(array('X-Mailer: osCMax Mailer'));
+    $message = new email(array('X-Mailer: osCmax Mailer'));
 
     // Build the text version
     $text = strip_tags($email_text);
@@ -1337,28 +1358,64 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     setcookie($name, $value, $expire, $path, (tep_not_null($domain) ? $domain : ''), $secure);
   }
 
+  function tep_validate_ip_address($ip_address) {
+    if (function_exists('filter_var') && defined('FILTER_VALIDATE_IP')) {
+      return filter_var($ip_address, FILTER_VALIDATE_IP, array('flags' => FILTER_FLAG_IPV4));
+    }
+
+    if (preg_match('/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/', $ip_address)) {
+      $parts = explode('.', $ip_address);
+
+      foreach ($parts as $ip_parts) {
+        if ( (intval($ip_parts) > 255) || (intval($ip_parts) < 0) ) {
+          return false; // number is not within 0-255
+        }
+      }
+
+      return true;
+    }
+
+    return false;
+  }
+
   function tep_get_ip_address() {
     global $HTTP_SERVER_VARS;
 
-    if (isset($HTTP_SERVER_VARS)) {
-      if (isset($HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'])) {
-        $ip = $HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'];
-      } elseif (isset($HTTP_SERVER_VARS['HTTP_CLIENT_IP'])) {
-        $ip = $HTTP_SERVER_VARS['HTTP_CLIENT_IP'];
-      } else {
-        $ip = $HTTP_SERVER_VARS['REMOTE_ADDR'];
-      }
-    } else {
-      if (getenv('HTTP_X_FORWARDED_FOR')) {
-        $ip = getenv('HTTP_X_FORWARDED_FOR');
-      } elseif (getenv('HTTP_CLIENT_IP')) {
-        $ip = getenv('HTTP_CLIENT_IP');
-      } else {
-        $ip = getenv('REMOTE_ADDR');
+    $ip_address = null;
+    $ip_addresses = array();
+
+    if (isset($HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR']) && !empty($HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'])) {
+      foreach ( array_reverse(explode(',', $HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'])) as $x_ip ) {
+        $x_ip = trim($x_ip);
+
+        if (tep_validate_ip_address($x_ip)) {
+          $ip_addresses[] = $x_ip;
+        }
       }
     }
 
-    return $ip;
+    if (isset($HTTP_SERVER_VARS['HTTP_CLIENT_IP']) && !empty($HTTP_SERVER_VARS['HTTP_CLIENT_IP'])) {
+      $ip_addresses[] = $HTTP_SERVER_VARS['HTTP_CLIENT_IP'];
+    }
+
+    if (isset($HTTP_SERVER_VARS['HTTP_X_CLUSTER_CLIENT_IP']) && !empty($HTTP_SERVER_VARS['HTTP_X_CLUSTER_CLIENT_IP'])) {
+      $ip_addresses[] = $HTTP_SERVER_VARS['HTTP_X_CLUSTER_CLIENT_IP'];
+    }
+
+    if (isset($HTTP_SERVER_VARS['HTTP_PROXY_USER']) && !empty($HTTP_SERVER_VARS['HTTP_PROXY_USER'])) {
+      $ip_addresses[] = $HTTP_SERVER_VARS['HTTP_PROXY_USER'];
+    }
+
+    $ip_addresses[] = $HTTP_SERVER_VARS['REMOTE_ADDR'];
+
+    foreach ( $ip_addresses as $ip ) {
+      if (!empty($ip) && tep_validate_ip_address($ip)) {
+        $ip_address = $ip;
+        break;
+      }
+    }
+
+    return $ip_address;
   }
 
   function tep_count_customer_orders($id = '', $check_session = true) {
@@ -1420,23 +1477,6 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_FUNCTIONS . 'downloads_controller.php');
 // EOF: MOD - Downloads Controller
 
-// BOF: MOD - Ultimate SEO URLs - by Chemo
-// Funtion to reset SEO URLs database cache entries
-  function tep_reset_cache_data_seo_urls($action){
-    switch ($action){
-      case 'reset':
-        tep_db_query("DELETE FROM cache WHERE cache_name LIKE '%seo_urls%'");
-        tep_db_query("UPDATE configuration SET configuration_value='false' WHERE configuration_key='SEO_URLS_CACHE_RESET'");
-        break;
-      default:
-        break;
-    }
-    # The return value is used to set the value upon viewing
-    # It's NOT returining a false to indicate failure!!
-    return 'false';
-  }
-// EOF: MOD - Ultimate SEO URLs - by Chemo
-
 // BOF: MOD - FedEx
 // link to fedex shipment tracker
   function tep_track_fedex($order_id) {
@@ -1450,79 +1490,137 @@ $Id: general.php 14 2006-07-28 17:42:07Z user $
     return $trackLink;
   }
 // EOF: MOD - FedEx
+// BOF SPPC, hide products and categories from groups
+  function tep_get_hide_status_single($customer_group_id, $pid_for_hide) {
+      $hide_query = tep_db_query("select find_in_set('" . $customer_group_id . "', products_hide_from_groups) as hide_or_not, find_in_set('" . $customer_group_id . "', categories_hide_from_groups) as in_hidden_category from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id = '" . $pid_for_hide . "'");
+// since a product can be in more than one category (linked products) we have 
+// to check for the possibility of more than one row returned
+       while ($_hide_product_array = tep_db_fetch_array($hide_query)) {
+         $hide_product_array[] = $_hide_product_array; 
+       }
+      if (is_array($hide_product_array)) { // if products_id exists
+        foreach ($hide_product_array as $key => $hide_product_sub_array) {
+          if ($hide_product_sub_array['hide_or_not'] != '0') { 
+            $hide_product = true; 
+           }
+// if the product is also present in a category that is not hidden it should be  
+// possible to buy it, delete it, get notifications etcetera
+           elseif ($hide_product_sub_array['in_hidden_category'] == '0') {
+             $hide_product = false; 
+// no need to continue with foreach
+           break;
+         } elseif ($hide_product_sub_array['in_hidden_category'] != '0') {
+           $hide_product = true;
+         } 
+       } // end  foreach ($hide_product_array as $key => $hide_product_sub_array)
+      } else { // if a product_id doesn't exist
+        $hide_product = true;
+      }
+   return $hide_product;
+   }
 
-// BOF: Mod - Validate SEO URLs
-  function tep_validate_seo_urls() {
-    global $HTTP_GET_VARS, $request_type;
-    ( $request_type == 'NONSSL' ? $fwr_server_port = HTTP_SERVER : $fwr_server_port = HTTPS_SERVER );
-    $querystring = str_replace('?', '&', $_SERVER['REQUEST_URI']);
-    if (isset($HTTP_GET_VARS['products_id']))
-    $get_id_vars = str_replace(strstr($HTTP_GET_VARS['products_id'], '{'), '', $HTTP_GET_VARS['products_id']); // Remove attributes
-    $qs_parts = explode('&', $querystring); // explode the querystring into an array
-    $count = count($qs_parts);
-    $added_uri = array();
-    $remove_nasties = array('%3C', '%3E', '<', '>', ':/', 'http', 'HTTP'); // We do tep_sanitize_string() later anyway
-    for ( $i=0; $i<$count; $i++ ) { // We don't want to introduce vulnerability do we :)
-      switch($qs_parts[$i]) {
-        case(false !== strpos($qs_parts[$i], '.html')):
-          $core = urldecode($qs_parts[$i]); // Found the path
-          ( (strstr($core, '{') !== false) ? ($core = str_replace(strstr($core, '{'), '', $core) . '.html') : NULL ); // Remove attributes
-          break;
-        case(false !== strpos($qs_parts[$i], 'osCsid')):
-          $seo_sid = $qs_parts[$i]; // Found the osCsid
-          break;
-        default:
-          $added_uri[] = ( urldecode(str_replace($remove_nasties, '', $qs_parts[$i])) ); // Found the additional querystring (e.g. &page=3&sort=2a from split_page_results)
+  function tep_get_hide_status($hide_status_products, $customer_group_id, $temp_post_get_array) {
+      foreach ($temp_post_get_array as $key => $value) {
+        $int_products_id = tep_get_prid($value);
+// the November 13 updated MS2.2 function tep_get_prid 
+// can return false with an invalid products_id 
+        if ($int_products_id != false ) {
+          $int_products_id_array[] = $int_products_id;
         }
-      }
-      $do_validation = true; // Set to false later if it is not an seo url so that other .html files pass through unhindered
-      // If -x- is in the querystring create var $querytype which is a string which explodes into an array on -
-      ( strpos($_SERVER['REQUEST_URI'], '-p-') ? ($querytype = 'filename_product_info-products_id=' . $get_id_vars) :
-      ( strpos($_SERVER['REQUEST_URI'], '-c-') ? ($querytype = 'filename_default-cPath=' . $HTTP_GET_VARS['cPath']) :
-      ( strpos($_SERVER['REQUEST_URI'], '-m-') ? ($querytype = 'filename_default-manufacturers_id=' . $HTTP_GET_VARS['manufacturers_id']) :
-      ( strpos($_SERVER['REQUEST_URI'], '-pi-') ? ($querytype = 'filename_popup_image-pID=' . $HTTP_GET_VARS['pID']) :
-      ( strpos($_SERVER['REQUEST_URI'], '-t-') ? ($querytype = 'filename_articles-tPath=' . $HTTP_GET_VARS['tPath']) :
-      ( strpos($_SERVER['REQUEST_URI'], '-a-') ? ($querytype = 'filename_article_info-articles_id=' . $HTTP_GET_VARS['articles_id']) :
-      ( strpos($_SERVER['REQUEST_URI'], '-pr-') ? ($querytype = 'filename_product_reviews-products_id=' . $get_id_vars) :
-      ( strpos($_SERVER['REQUEST_URI'], '-pri-') ? ($querytype = 'filename_product_reviews_info-products_id=' . $get_id_vars) :
-      ( strpos($_SERVER['REQUEST_URI'], '-prw-') ? ($querytype = 'filename_product_reviews_write-products_id=' . $get_id_vars) :
-      ( strpos($_SERVER['REQUEST_URI'], '-i-') ? ($querytype = 'filename_information-info_id=' . $HTTP_GET_VARS['info_id']) :
-      ( strpos($_SERVER['REQUEST_URI'], '-links-') ? ($querytype = 'filename_links-lPath=' . $HTTP_GET_VARS['lPath']) :
-      $do_validation = false )))))))))) );
+        $list_of_products_ids = implode(',', $int_products_id_array);
+     } // end foreach ($temp_post_get_array as $key => $value)
 
-      if ( true === $do_validation ) { // It's an SEO URL so we will validate it
-        $validate_array = explode('-', $querytype); // Gives e.g. $validate_array[0] = filename_default, $validate_array[1] = products_id=xx
-        $linkreturned = tep_href_link(constant(strtoupper($validate_array[0])), $validate_array[1]); // Get a propper new SEO link
-        // Rebuild the extra querystring
-        ( (strpos($linkreturned, '?') !== false) ? ($seperator = '&') : ($seperator = '?') ); // Is there an osCsid on $linkreturned?
-        $count = count($added_uri); // Count the extra querystring items
-        for ($i=0; $i<$count; $i++)
-        if ($i == 0) $linkreturned = $linkreturned . $seperator . tep_sanitize_string($added_uri[$i]); //add the first using seperator ? or &
-        else $linkreturned = $linkreturned . '&' . tep_sanitize_string($added_uri[$i]); // Just add "&" this time
-        $linkreturnedstripped = str_replace( strstr($linkreturned, '?'), '', $linkreturned); // Strip osCsid to allow a match with $core
-        $linktest = str_replace($fwr_server_port . DIR_WS_HTTP_CATALOG, '', $linkreturned); // Pair the url down to the querystring
-        if (strpos($linktest, '-') === 0) { // If the link returned by seo.class.php has no text mysite.com/-c-xxx.html
-        four_o_four_die(); // Product/category does not exist so die here with a 404
-        exit;
-      } else if ( $fwr_server_port . $core != $linkreturnedstripped ) { // Link looks bad so 301
-        $linkreturned = str_replace('&amp;', '&', $linkreturned); // Just in case those sneaky W3C urls tried to throw in an &amp;
-        header("HTTP/1.0 301 Moved Permanently"); // redirect to the good version
-        header("Location: $linkreturned"); // 301 redirect
-        exit;
-      }
-    } // We're not doing validation as the -p-, -c- etc was not found
+     $hide_query = tep_db_query("select p.products_id, find_in_set('".$customer_group_id."', products_hide_from_groups) as hide_or_not, find_in_set('".$customer_group_id."', categories_hide_from_groups) as in_hidden_category from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c using(products_id) left join " . TABLE_CATEGORIES . " c using(categories_id) where p.products_id in (" . $list_of_products_ids . ")");
+// since a product can be in more than one category (linked products) we have to check for the
+// possibility of more than one row returned for each products_id where "hide_or_not"
+// is the same for every row, but "in_hidden_category" can be different
+       unset($int_products_id_array); // start over
+         $int_products_id_array = array();
+         if (tep_not_null($hide_status_products)) {
+           foreach($hide_status_products as $key => $subarray) {
+             $int_products_id_array[] = $hide_status_products['products_id'];
+            }
+         } // end if (tep_not_null($hide_status_products))
+      while ($hide_products_array = tep_db_fetch_array($hide_query)) {
+        $cat_hidden = '1';
+        $prod_hidden = '0';
+          if ($hide_products_array['hide_or_not'] != '0') {
+            $prod_hidden = '1';
+          } elseif ($hide_products_array['in_hidden_category'] == '0') {
+             $cat_hidden = '0';
+          }
+          if ($prod_hidden == '0' && $cat_hidden == '0') { 
+            $hidden = '0'; 
+          } else {
+            $hidden = '1';
+           }
+            if (in_array($hide_products_array['products_id'], $int_products_id_array)) {
+              foreach($hide_status_products as $key => $subarray) {
+                if ($subarray['products_id'] == $hide_products_array['products_id']) {
+                  if ($subarray['hidden'] == '1' && $subarray['prod_hidden'] == '0' && $cat_hidden == '0') {
+// product is not a hidden one and now found to be in a category that is not hidden
+                  $hide_status_products[$key]['hidden'] = '0';
+                  }
+                } // end if ($subarray['products_id'] == $hide_products_array['products_id'])
+               } // end foreach ($hide_status_products as $key => $subarray)
+            } else { 
+              $hide_status_products[] = array('products_id' => $hide_products_array['products_id'], 'hidden' => $hidden, 'prod_hidden' => $prod_hidden);
+            }
+        $int_products_id_array[] = $hide_products_array['products_id'];
+      } // end while
+     return $hide_status_products;
   }
+// EOF SPPC, hide products and categories from groups
 
-  function four_o_four_die() { // 404 then redirect doesn't work as Google records a 302 so we need to die here with a 404
-    echo
-      header("HTTP/1.0 404 Not Found") .
-      '<p align="left" style="font-size: large;">&nbsp;&nbsp;404 Page not found!</p>
-      <div align="center" style="width: 100%; margin-top: 70px;">
-      <div align="center" style="font-family: verdana; font-size: 0.8em; color: #818181; padding: 90px 10px 90px 10px; width: 60%; border: 1px solid #818181;">
-      This product/category does not exist it may have been deleted.<p />
-      To return to ' . STORE_NAME .
-      '. Please click here <a href="' . tep_href_link(FILENAME_DEFAULT) . '" title="' . STORE_NAME . '">back to ' . STORE_NAME . '</a>
-      </div></div>';
+// BOF: for Extra Product Fields
+  function tep_get_extra_field_list_value($value_id, $show_chain = false, $display_type = 0) {
+    $sql = tep_db_query("select epf_value, value_image, parent_id from " . TABLE_EPF_VALUES . " where value_id = " . (int)$value_id);
+    $value = tep_db_fetch_array($sql);
+    $display = $value['epf_value'];
+    if (tep_not_null($value['value_image'])) {
+      if ($display_type == 2) {
+      	$browser = (isset($_SERVER['HTTP_USER_AGENT']) ? strtolower($_SERVER['HTTP_USER_AGENT']) : '');
+      	$pos = strpos($browser, 'msie');
+      	if ($pos !== false) { // using Internet Explorer requires different display type for inline tables
+       	  $vpos = strpos($browser, ';', $pos);
+      	  $version = substr($browser, $pos + 5, $vpos - $pos - 5);
+      	  if ($version < 9) {
+      	    $tt = 'inline';
+      	  } else {
+      	    $tt = 'inline-table';
+      	  }
+       	} else {
+      	  $tt = 'inline-table';
+        }
+        $display = '<table style="display: ' . $tt . '; vertical-align: middle; text-align: center"><tr><td>' . tep_image(DIR_WS_IMAGES . 'epf/' . $value['value_image'], $value['epf_value']) . '<br />' . $value['epf_value'] . '</td></tr></table>';
+      } elseif ($display_type == 1) {
+        $display = tep_image(DIR_WS_IMAGES . 'epf/' . $value['value_image'], $value['epf_value']);
+      }
+    }
+    if ($show_chain && ($value['parent_id'] > 0)) {
+      return tep_get_extra_field_list_value($value['parent_id'], true, $display_type) . ' | ' . $display;
+    } else {
+      return $display;
+    }
   }
-// EOF: Mod - Validate SEO URLs
+  
+  function tep_list_epf_children($parent_id) {
+    $sql = tep_db_query("select value_id from " . TABLE_EPF_VALUES . " where parent_id = " . (int)$parent_id);
+    $list = '';
+    while ($i = tep_db_fetch_array($sql)) {
+      $list .= ',' . $i['value_id'] . tep_list_epf_children($i['value_id']);
+    }
+    return $list;
+  }
+  
+  function tep_build_epf_pulldown($epf_id, $languages_id, $value_array = '', $parent_id = 0, $indent = '') {
+    if (!is_array($value_array)) $value_array = array();
+    $sql = tep_db_query("select epf_value, value_id from " . TABLE_EPF_VALUES . " where epf_id = " . (int)$epf_id . " and languages_id = " . (int)$languages_id . " and parent_id = " . (int)$parent_id . " order by sort_order, epf_value");
+    while ($v = tep_db_fetch_array($sql)) {
+      $value_array[] = array('id' => $v['value_id'], 'text' => $indent . $v['epf_value']);
+      $value_array = tep_build_epf_pulldown($epf_id, $languages_id, $value_array, $v['value_id'], $indent . '&middot;');
+    }
+    return $value_array;
+  }
+// EOF: for Extra Product Fields  
 ?>

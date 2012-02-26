@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: cc.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -94,12 +94,12 @@ $Id: cc.php 14 2006-07-28 17:42:07Z user $
     }
 
     function before_process() {
-      global $HTTP_POST_VARS, $order;
+      global $_POST, $order;
 
       include(DIR_WS_CLASSES . 'cc_validation.php');
 
       $cc_validation = new cc_validation();
-      $result = $cc_validation->validate($HTTP_POST_VARS['cc_number_nh-dns'], $HTTP_POST_VARS['cc_expires_month'], $HTTP_POST_VARS['cc_expires_year'], $HTTP_POST_VARS['cc_checkcode'], $HTTP_POST_VARS['cc_card_type']);
+      $result = $cc_validation->validate($_POST['cc_number_nh-dns'], $_POST['cc_expires_month'], $_POST['cc_expires_year'], $_POST['cc_checkcode'], $_POST['cc_card_type']);
       $error = '';
       switch ($result) {
         case -1:
@@ -116,21 +116,21 @@ $Id: cc.php 14 2006-07-28 17:42:07Z user $
       }
 
       if ( ($result == false) || ($result < 1) ) {
-        $payment_error_return = 'payment_error=' . $this->code . '&error=' . urlencode($error) . '&cc_owner=' . urlencode($HTTP_POST_VARS['cc_owner']) . '&cc_expires_month=' . $HTTP_POST_VARS['cc_expires_month'] . '&cc_expires_year=' . $HTTP_POST_VARS['cc_expires_year'];
+        $payment_error_return = 'payment_error=' . $this->code . '&error=' . urlencode($error) . '&cc_owner=' . urlencode($_POST['cc_owner']) . '&cc_expires_month=' . $_POST['cc_expires_month'] . '&cc_expires_year=' . $_POST['cc_expires_year'];
 
         tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, $payment_error_return, 'SSL', true, false));
       }
 
-      $order->info['cc_owner'] = $HTTP_POST_VARS['cc_owner'];
+      $order->info['cc_owner'] = $_POST['cc_owner'];
       $order->info['cc_type'] = $cc_validation->cc_type;
-      $order->info['cc_number'] = $HTTP_POST_VARS['cc_number_nh-dns'];
-      $order->info['cc_expires'] = $HTTP_POST_VARS['cc_expires_month'] . $HTTP_POST_VARS['cc_expires_year'];
+      $order->info['cc_number'] = $_POST['cc_number_nh-dns'];
+      $order->info['cc_expires'] = $_POST['cc_expires_month'] . $_POST['cc_expires_year'];
 
       if ( (defined('MODULE_PAYMENT_CC_EMAIL')) && (tep_validate_email(MODULE_PAYMENT_CC_EMAIL)) ) {
-        $len = strlen($HTTP_POST_VARS['cc_number_nh-dns']);
+        $len = strlen($_POST['cc_number_nh-dns']);
 
-        $this->cc_middle = substr($HTTP_POST_VARS['cc_number_nh-dns'], 4, ($len-8));
-        $order->info['cc_number'] = substr($HTTP_POST_VARS['cc_number_nh-dns'], 0, 4) . str_repeat('X', (strlen($HTTP_POST_VARS['cc_number_nh-dns']) - 8)) . substr($HTTP_POST_VARS['cc_number_nh-dns'], -4);
+        $this->cc_middle = substr($_POST['cc_number_nh-dns'], 4, ($len-8));
+        $order->info['cc_number'] = substr($_POST['cc_number_nh-dns'], 0, 4) . str_repeat('X', (strlen($_POST['cc_number_nh-dns']) - 8)) . substr($_POST['cc_number_nh-dns'], -4);
       }
     }
 
@@ -145,10 +145,10 @@ $Id: cc.php 14 2006-07-28 17:42:07Z user $
     }
 
     function get_error() {
-      global $HTTP_GET_VARS;
+      global $_GET;
 
       $error = array('title' => MODULE_PAYMENT_CC_TEXT_ERROR,
-                     'error' => stripslashes(urldecode($HTTP_GET_VARS['error'])));
+                     'error' => stripslashes(urldecode($_GET['error'])));
 
       return $error;
     }

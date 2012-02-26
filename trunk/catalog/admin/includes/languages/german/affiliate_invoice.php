@@ -1,32 +1,29 @@
 <?php
 /*
-$Id: affiliate_invoice.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Provisionsabrechnung');
+define('HEADING_TITLE', 'Affiliate-Abrechnung');
 
-define('TEXT_AFFILIATE', 'Partner');
-define('TEXT_AFFILIATE_PAYMENT', 'Provisionszahlung');
-define('TEXT_AFFILIATE_BILLED', 'Abrechnungsdatum');
+define ('TEXT_AFFILIATE','Affiliate');
+define ('TEXT_AFFILIATE_PAYMENT','Zahlung');
+define ('TEXT_AFFILIATE_BILLED','Abrechnungstag');
 define('TABLE_HEADING_ORDER_ID', 'Bestell-Nr.');
 define('TABLE_HEADING_ORDER_DATE', 'Datum');
-define('TABLE_HEADING_ORDER_VALUE', 'Netto Bestellwert');
-define('TABLE_HEADING_COMMISSION_RATE', '% Provision');
-define('TABLE_HEADING_COMMISSION_VALUE', 'Provision');
+define('TABLE_HEADING_ORDER_VALUE', 'Bestellwert');
+define('TABLE_HEADING_COMMISSION_RATE', 'Provisionsrate');
+define('TABLE_HEADING_COMMISSION_VALUE', 'Provisionshöhe');
+define('TABLE_HEADING_TOTAL','Gesamtsumme');
 
 define('TEXT_SUB_TOTAL', 'Zwischensumme');
-define('TEXT_TAX', 'MwSt.');
-define('TEXT_TOTAL', 'Summe');
+define('TEXT_TAX', 'USt.');
+define('TEXT_TOTAL', 'Gesamt');
 define('ENTRY_PERCENT', '%');
 ?>

@@ -1,13 +1,27 @@
-    <?php
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
       // Modify form processing depending on whether product or article
       if ($valid_product) {
-        echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&products_id=' . $HTTP_GET_VARS['products_id']));
+        echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&products_id=' . $_GET['products_id']));
         } else if ($valid_article) {
-          echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&articles_id=' . $HTTP_GET_VARS['articles_id']));
+          echo tep_draw_form('email_friend', tep_href_link(FILENAME_TELL_A_FRIEND, 'action=process&articles_id=' . $_GET['articles_id']));
       }
     ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading">
             <?php
@@ -20,7 +34,7 @@
               echo sprintf(HEADING_TITLE, $title);
             ?>
              </td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_contact_us.gif', sprintf(HEADING_TITLE, $product_info['products_name']), HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -96,7 +110,7 @@
           <tr>
             <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
               <tr class="infoBoxContents">
-                <td><?php echo tep_draw_textarea_field('message', 'soft', 40, 8); ?></td>
+                <td><?php echo tep_draw_textarea_field('message', 40, 8); ?></td>
               </tr>
             </table></td>
           </tr>
@@ -114,9 +128,9 @@
                 <td><?php
                     // Modify back button depending on whether product or article
                     if ($valid_product) {
-                      echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['products_id']) . '">' . tep_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>';
+                      echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id']) . '">' . tep_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>';
                       } else if ($valid_article) {
-                        echo '<a href="' . tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $HTTP_GET_VARS['articles_id']) . '">' . tep_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>';
+                        echo '<a href="' . tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $_GET['articles_id']) . '">' . tep_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>';
                     }
                        ?></td>
                 <td align="right"><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></td>

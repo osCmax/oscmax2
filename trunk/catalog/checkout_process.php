@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: checkout_process.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -18,11 +18,21 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
   tep_session_unregister('shipping');
 }
 // EOF: Downloads Controller - Free Shipping
+/* One Page Checkout - BEGIN */
 // if the customer is not logged on, redirect them to the login page
-  if (!tep_session_is_registered('customer_id')) {
-    $navigation->set_snapshot(array('mode' => 'SSL', 'page' => FILENAME_CHECKOUT_PAYMENT));
-    tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+//  if (!tep_session_is_registered('customer_id')) {
+//    $navigation->set_snapshot(array('mode' => 'SSL', 'page' => FILENAME_CHECKOUT_PAYMENT));
+//    tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+//  }
+/* One Page Checkout - BEGIN */  
+  if (ONEPAGE_LOGIN_REQUIRED == 'true'){
+      if (!tep_session_is_registered('customer_id')) {
+          $navigation->set_snapshot(array('mode' => 'SSL', 'page' => FILENAME_CHECKOUT_PAYMENT));
+          tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+      }
   }
+/* One Page Checkout - END */  
+
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
   if ($cart->count_contents() < 1) {
@@ -31,7 +41,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
   if (!tep_session_is_registered('shipping') || !tep_session_is_registered('sendto')) {
-    tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+/* One Page Checkout - BEGIN */  
+//    tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+/* One Page Checkout - END */ 
   }
 
   if ( (tep_not_null(MODULE_PAYMENT_INSTALLED)) && (!tep_session_is_registered('payment')) ) {
@@ -46,11 +58,17 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
   }
 
   include(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_PROCESS);
+/* One Page Checkout - BEGIN */ 
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      require('includes/classes/onepage_checkout.php');
+      $onePageCheckout = new osC_onePageCheckout();
+  }
+/* One Page Checkout - END */
 
 // load selected payment module
   require(DIR_WS_CLASSES . 'payment.php');
 // LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
-  if ($credit_covers) $payment='credit covers';
+  if ($credit_covers) $payment='credit_covers';
   $payment_modules = new payment($payment);
 
 // load the selected shipping module
@@ -59,6 +77,29 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 
   require(DIR_WS_CLASSES . 'order.php');
   $order = new order;
+
+/* One Page Checkout - BEGIN */
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $onePageCheckout->loadSessionVars();
+      $onePageCheckout->fixTaxes();
+      
+      /*
+       * This error report is due to the fact that we cannot duplicate some errors.
+       * please forward this email always if you recieve it
+       */
+      if ($order->customer['email_address'] == '' || $order->customer['firstname'] == '' || $order->billing['firstname'] == '' || $order->delivery['firstname'] == ''){
+        ob_start();
+        echo 'ONEPAGE::' . serialize($onepage);
+        echo 'SESSION::' . serialize($_SESSION);
+        echo 'SERVER::' . serialize($_SERVER);
+        echo 'ORDER::' . serialize($order);
+        $content = ob_get_contents();
+        mail(ONEPAGE_DEBUG_EMAIL_ADDRESS, 'Order Error: Please forward to I.T. Web Experts', $content);
+        unset($content);
+        ob_end_clean();
+      }
+  }
+/* One Page Checkout - END */
 
 // Stock Check
   $any_out_of_stock = false;
@@ -184,9 +225,11 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
           $stock_query_raw .= " AND pa.options_id = '" . $products_attributes[0]['option_id'] . "' AND pa.options_values_id = '" . $products_attributes[0]['value_id'] . "'";
         }
         $stock_query = tep_db_query($stock_query_raw);
-      } else {
-        $stock_query = tep_db_query("select products_quantity from " . TABLE_PRODUCTS . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
-      }
+// BOF: QT Pro 
+//      } else {
+//       $stock_query = tep_db_query("select products_quantity from " . TABLE_PRODUCTS . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+//      }
+// EOF: QT Pro
       if (tep_db_num_rows($stock_query) > 0) {
         $stock_values = tep_db_fetch_array($stock_query);
         $actual_stock_bought = $order->products[$i]['qty'];
@@ -230,16 +273,18 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 // do not decrement quantities if products_attributes_filename exists
         if (!$download_selected) {
           $stock_left = $stock_values['products_quantity'] - $actual_stock_bought;
-          tep_db_query("UPDATE " . TABLE_PRODUCTS . " 
+          tep_db_query("UPDATE " . TABLE_PRODUCTS . "
                         SET products_quantity = products_quantity - '" . $actual_stock_bought . "' 
                         WHERE products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
 // EOF: MOD - QT Pro
-          if ( ($stock_left < 1) && (STOCK_ALLOW_CHECKOUT == 'false') ) {
+          if ( ($stock_left < 1) && (STOCK_SET_INACTIVE == 'true') ) {
             tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0' where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
         }
       }
     }
-
+// BOF: QT Pro 
+    }
+// EOF: QT Pro
 // Update products_ordered (for bestsellers list)
     tep_db_query("update " . TABLE_PRODUCTS . " set products_ordered = products_ordered + " . sprintf('%d', $order->products[$i]['qty']) . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
 // LINE ADDED: MOD - QT Pro
@@ -247,6 +292,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
     $sql_data_array = array('orders_id' => $insert_id,
                             'products_id' => tep_get_prid($order->products[$i]['id']),
                             'products_model' => $order->products[$i]['model'],
+                            'products_code' => $order->products[$i]['code'],
                             'products_name' => $order->products[$i]['name'],
                             'products_price' => $order->products[$i]['price'],
                             'final_price' => $order->products[$i]['final_price'],
@@ -268,20 +314,22 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
       $attributes_exist = '1';
       for ($j=0, $n2=sizeof($order->products[$i]['attributes']); $j<$n2; $j++) {
         if (DOWNLOAD_ENABLED == 'true') {
-          $attributes_query = "select popt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix, pad.products_attributes_maxdays, pad.products_attributes_maxcount , pad.products_attributes_filename
-                               from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa
+//Line Modded for More Product Weight - pgm
+          $attributes_query = "select popt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix, pa.options_values_weight, pa.weight_prefix, pad.products_attributes_maxdays, pad.products_attributes_maxcount , pad.products_attributes_filename 
+                               from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa 
                                left join " . TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD . " pad
                                 on pa.products_attributes_id=pad.products_attributes_id
-                               where pa.products_id = '" . $order->products[$i]['id'] . "'
-                                and pa.options_id = '" . $order->products[$i]['attributes'][$j]['option_id'] . "'
-                                and pa.options_id = popt.products_options_id
-                                and pa.options_values_id = '" . $order->products[$i]['attributes'][$j]['value_id'] . "'
-                                and pa.options_values_id = poval.products_options_values_id
-                                and popt.language_id = '" . $languages_id . "'
+                               where pa.products_id = '" . $order->products[$i]['id'] . "' 
+                                and pa.options_id = '" . $order->products[$i]['attributes'][$j]['option_id'] . "' 
+                                and pa.options_id = popt.products_options_id 
+                                and pa.options_values_id = '" . $order->products[$i]['attributes'][$j]['value_id'] . "' 
+                                and pa.options_values_id = poval.products_options_values_id 
+                                and popt.language_id = '" . $languages_id . "' 
                                 and poval.language_id = '" . $languages_id . "'";
           $attributes = tep_db_query($attributes_query);
         } else {
-          $attributes = tep_db_query("select popt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . $order->products[$i]['id'] . "' and pa.options_id = '" . $order->products[$i]['attributes'][$j]['option_id'] . "' and pa.options_id = popt.products_options_id and pa.options_values_id = '" . $order->products[$i]['attributes'][$j]['value_id'] . "' and pa.options_values_id = poval.products_options_values_id and popt.language_id = '" . $languages_id . "' and poval.language_id = '" . $languages_id . "'");
+//Line Modded for More Product Weight - pgm
+          $attributes = tep_db_query("select popt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix, pa.options_values_weight, pa.weight_prefix from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . $order->products[$i]['id'] . "' and pa.options_id = '" . $order->products[$i]['attributes'][$j]['option_id'] . "' and pa.options_id = popt.products_options_id and pa.options_values_id = '" . $order->products[$i]['attributes'][$j]['value_id'] . "' and pa.options_values_id = poval.products_options_values_id and popt.language_id = '" . $languages_id . "' and poval.language_id = '" . $languages_id . "'");
         }
         $attributes_values = tep_db_fetch_array($attributes);
 
@@ -291,7 +339,11 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 //                              'products_options_values' => $attributes_values['products_options_values_name'],
                                 'products_options_values' => $order->products[$i]['attributes'][$j]['value'],
                                 'options_values_price' => $attributes_values['options_values_price'],
-                                'price_prefix' => $attributes_values['price_prefix']);
+// START: More Product Weight
+                                'price_prefix' => $attributes_values['price_prefix'],
+                                'options_values_weight' => $attributes_values['options_values_weight'], 
+                                'weight_prefix' => $attributes_values['weight_prefix']);
+// END: More Product Weight
         tep_db_perform(TABLE_ORDERS_PRODUCTS_ATTRIBUTES, $sql_data_array);
 
         if ((DOWNLOAD_ENABLED == 'true') && isset($attributes_values['products_attributes_filename']) && tep_not_null($attributes_values['products_attributes_filename'])) {
@@ -310,7 +362,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
     $total_tax += tep_calculate_tax($total_products_price, $products_tax) * $order->products[$i]['qty'];
     $total_cost += $total_products_price;
 
-    $products_ordered .= $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . ' (' . $order->products[$i]['model'] . ') = ' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . $products_ordered_attributes . "\n";
+    $products_ordered .= $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . ' (' . $order->products[$i]['code'] . ') = ' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . $products_ordered_attributes . "\n";
   }
 
 // LINE ADDED: MOD - CREDIT CLASS Gift Voucher Contribution
@@ -339,17 +391,35 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
     $email_order .= strip_tags($order_totals[$i]['title']) . ' ' . strip_tags($order_totals[$i]['text']) . "\n";
   }
 
+/* One Page Checkout - BEGIN */
+  $sendToFormatted = tep_address_label($customer_id, $sendto, 0, '', "\n");
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $sendToFormatted = $onePageCheckout->getAddressFormatted('sendto');
+  }
+  
+  $billToFormatted = tep_address_label($customer_id, $billto, 0, '', "\n");
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $billToFormatted = $onePageCheckout->getAddressFormatted('billto');
+  }
+/* One Page Checkout - END */
+
   if ($order->content_type != 'virtual') {
     $email_order .= "\n" . EMAIL_TEXT_DELIVERY_ADDRESS . "\n" . 
                     EMAIL_SEPARATOR . "\n" .
-                    tep_address_label($customer_id, $sendto, 0, '', "\n") . "\n";
+		    /* One Page Checkout - Begin */
+                    //tep_address_label($customer_id, $sendto, 0, '', "\n") . "\n";
+		    $sendToFormatted . "\n";
+		    /* One Page Checkout - End */
   }
 
   $email_order .= "\n" . EMAIL_TEXT_BILLING_ADDRESS . "\n" .
                   EMAIL_SEPARATOR . "\n" .
-                  tep_address_label($customer_id, $billto, 0, '', "\n") . "\n\n";
+		  /* One Page Checkout - Begin */
+                  //tep_address_label($customer_id, $billto, 0, '', "\n") . "\n\n";
+		  $billToFormatted . "\n";
+		  /* One Page Checkout - End */
   if (is_object($$payment)) {
-    $email_order .= EMAIL_TEXT_PAYMENT_METHOD . "\n" . 
+    $email_order .= "\n" . EMAIL_TEXT_PAYMENT_METHOD . "\n" . 
                     EMAIL_SEPARATOR . "\n";
     $payment_class = $$payment;
     $email_order .= $order->info['payment_method'] . "\n\n";
@@ -374,6 +444,12 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
   $payment_modules->after_process();
 
   $cart->reset(true);
+
+/* One Page Checkout - BEGIN */
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      $onepage['info']['order_id'] = $insert_id;
+  }
+/* One Page Checkout - END */
 
 // unregister session variables used during checkout
   tep_session_unregister('sendto');

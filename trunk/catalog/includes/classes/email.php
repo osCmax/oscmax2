@@ -1,20 +1,13 @@
 <?php
 /*
-$Id: email.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
-  mail.php - a class to assist in building mime-HTML eMails
-
-  The original class was made by Richard Heyes <richard@phpguru.org>
-  and can be found here: http://www.phpguru.org
-
-  Renamed and Modified by Jan Wildeboer for osCommerce
 */
 
   class email {
@@ -146,6 +139,9 @@ $Id: email.php 14 2006-07-28 17:42:07Z user $
  */
 
     function add_text($text = '') {
+	  // BOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
+      if (strtolower(CHARSET) != 'utf-8') $text = utf8_encode($text);
+      // EOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
       $this->text = tep_convert_linefeeds(array("\r\n", "\n", "\r"), $this->lf, $text);
     }
 
@@ -156,6 +152,10 @@ $Id: email.php 14 2006-07-28 17:42:07Z user $
  */
 
     function add_html($html, $text = NULL, $images_dir = NULL) {
+	  // BOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
+      if (strtolower(CHARSET) != 'utf-8') $html = utf8_encode($html);
+      if (strtolower(CHARSET) != 'utf-8') $text = utf8_encode($text);
+      // EOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
       $this->html = tep_convert_linefeeds(array("\r\n", "\n", "\r"), '<br>', $html);
       $this->html_text = tep_convert_linefeeds(array("\r\n", "\n", "\r"), $this->lf, $text);
 

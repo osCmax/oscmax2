@@ -1,20 +1,23 @@
 <?php
 /*
-$Id: products_expected.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'erwartete Artikel');
+define('HEADING_TITLE', 'Künftige Produkte');
 
-define('TABLE_HEADING_PRODUCTS', 'Artikel');
-define('TABLE_HEADING_DATE_EXPECTED', 'verf&uuml;gbar ab:');
+define('TABLE_HEADING_PRODUCTS', 'Produkte');
+define('TABLE_HEADING_DATE_EXPECTED', 'Erscheint ab:');
 define('TABLE_HEADING_ACTION', 'Aktion');
 
-define('TEXT_INFO_DATE_EXPECTED', 'verf&uuml;gbar ab:');
+define('TEXT_INFO_DATE_EXPECTED', 'Erscheint ab:');
+
+define('HEADING_NO_PRODUCTS_EXPECTED', '<b>Keine kommenden Produkte</b>');
+define('TEXT_NO_PRODUCTS_EXPECTED', 'Es existieren derzeit keine künftigen Produkte. Wenn Sie eines erstellen möchten, dann erstellen Sie ein neues Produkt und tragen in das Feld Erscheinungsdatum ein zukünftiges Datum ein.');
 ?>

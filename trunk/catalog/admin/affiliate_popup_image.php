@@ -1,26 +1,22 @@
 <?php
 /*
-$Id: affiliate_popup_image.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax2001 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
 
-  reset($HTTP_GET_VARS);
-  while (list($key, ) = each($HTTP_GET_VARS)) {
+  reset($_GET);
+  while (list($key, ) = each($_GET)) {
     switch ($key) {
       case 'banner':
-        $banners_id = tep_db_prepare_input($HTTP_GET_VARS['banner']);
+        $banners_id = tep_db_prepare_input($_GET['banner']);
 
         $banner_query = tep_db_query("select affiliate_banners_title, affiliate_banners_image, affiliate_banners_html_text from " . TABLE_AFFILIATE_BANNERS . " where affiliate_banners_id = '" . tep_db_input($banners_id) . "'");
         $banner = tep_db_fetch_array($banner_query);
@@ -30,7 +26,7 @@ $Id: affiliate_popup_image.php 3 2006-05-27 04:59:07Z user $
         if ($banner['affiliate_banners_html_text']) {
           $image_source = $banner['affiliate_banners_html_text'];
         } elseif ($banner['affiliate_banners_image']) {
-          $image_source = tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $banner['affiliate_banners_image'], $page_title);
+          $image_source = tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'banners/' . $banner['affiliate_banners_image'], $page_title);
         }
         break;
     }
@@ -40,17 +36,15 @@ $Id: affiliate_popup_image.php 3 2006-05-27 04:59:07Z user $
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <title><?php echo $page_title; ?></title>
-<script language="javascript"><!--
-var i=0;
+<script type="text/javascript"><!--
 
 function resize() {
-  if (navigator.appName == 'Netscape') i = 40;
-  window.resizeTo(document.images[0].width + 30, document.images[0].height + 60 - i);
+  window.resizeTo(document.images[0].width + 30, document.images[0].height + 90);
 }
 //--></script>
 </head>
 
-<body onload="resize();">
+<body onLoad="resize();">
 
 <?php echo $image_source; ?>
 

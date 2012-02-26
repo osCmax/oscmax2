@@ -1,15 +1,13 @@
 <?php
 /*
-  $Id: attributeManagerPrompts.inc.php,v 1.0 21/02/06 Sam West$
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
-  Copyright © 2006 Kangaroo Partners
-  http://kangaroopartners.com
-  osc@kangaroopartners.com
 */
 
 function yesNoButtons($section) {
@@ -51,7 +49,7 @@ if(AM_USE_SORT_ORDER) {
 }
 
 if(AM_USE_QT_PRO) {
-	$return .='	<td>'.AM_AJAX_TRACK_STOCK.' <img src="attributeManager/images/icon_up.png" id="imgCheck_1" onclick="checkBox(1)" title="'.AM_AJAX_TRACK_STOCK_IMGALT.'" />
+	$return .='	<td>'.AM_AJAX_TRACK_STOCK.' <img src="attributeManager/images/icon_unchecked.gif" id="imgCheck_1" onclick="checkBox(1)" title="'.AM_AJAX_TRACK_STOCK_IMGALT.'" />
 		    '. tep_draw_hidden_field('stockTracking_1', '0', $style).'
 			</td>';
 } else {

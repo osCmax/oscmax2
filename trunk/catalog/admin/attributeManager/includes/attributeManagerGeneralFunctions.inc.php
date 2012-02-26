@@ -1,12 +1,15 @@
 <?php
 /*
-  $Id: attributeManagerGeneralFunctions.inc.php,v 1.0 21/02/06 Sam West$
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  
+*/
+/*  
   Copyright © 2006 Kangaroo Partners
   http://kangaroopartners.com
   osc@kangaroopartners.com
@@ -24,6 +27,23 @@ function drawDropDownPrefix($params,$selected = '') {
 		$params
 	);
 }
+
+// SATRT: More Product Weight added by RusNN
+if (AM_USE_MPW) {
+  function drawDropDownWeightPrefix($params,$selected = '') {
+    return tep_draw_pull_down_menu(
+      "weight_prefix",
+      array(
+        array('id'=>'','text'=>''),
+        array('id'=>urlencode('+'),'text'=>'+'),
+        array('id'=>'-','text'=>'-')
+      ),
+      ($selected == '+') ? urlencode('+') : $selected,
+      $params
+    );
+  }
+}
+// END More Product Weight added by RusNN
 
 function &amGetAttributeManagerInstance($get) {
 	

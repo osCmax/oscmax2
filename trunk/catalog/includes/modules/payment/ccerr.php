@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: cod.php,v 1.28 2003/02/14 05:51:31 hpdl Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -59,10 +59,10 @@
     }
 
     function get_error() {
-      global $HTTP_GET_VARS;
+      global $_GET;
 
       $error = array('title' => 'Error',
-                     'error' => stripslashes(urldecode($HTTP_GET_VARS['error'])));
+                     'error' => stripslashes(urldecode($_GET['error'])));
 
       return $error;
     }

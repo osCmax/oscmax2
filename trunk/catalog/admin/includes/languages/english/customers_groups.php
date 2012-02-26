@@ -1,6 +1,13 @@
 <?php
 /*
-   for Separate Pricing Per Customer v4 2005/03/03
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 define('HEADING_TITLE', 'Groups');
 define('HEADING_TITLE_SEARCH', 'Search:');
@@ -29,4 +36,11 @@ define('TEXT_DISPLAY_NUMBER_OF_CUSTOMERS_GROUPS', 'Displaying <b>%d</b> to <b>%d
 define('TEXT_INFO_HEADING_DELETE_GROUP', 'Delete Group');
 
 define('ERROR_CUSTOMERS_GROUP_NAME', 'Please enter a Group Name');
+define('TEXT_SORT', 'Sort ');
+define('TEXT_ABC', ' --> A-B-C From Top');
+define('TEXT_ZYX', ' --> Z-Y-X From Top');
+
+define('TEXT_MAXIMUM_LENGTH', '&#160;&#160;Maximum length: 32 characters');
+define('TEXT_GROUP_SHOW_TEXT_1', '&#160;&#160;This Setting only works when <b>Display Prices with Tax</b>');
+define('TEXT_GROUP_SHOW_TEXT_2', 'is set to true in the Configuration for your store and Tax Exempt (below) to <b>No</b>.');
 ?>

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: checkout_new_address.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -89,7 +89,7 @@ $Id: checkout_new_address.php 14 2006-07-28 17:42:07Z user $
   }
 ?>
   <tr>
-    <td class="main"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
+    <td class="main"><?php echo ENTRY_COUNTRY; ?><div id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></div></td>
 				<?php // +Country-State Selector ?>
     <td class="main"><?php echo tep_get_country_list('country',$country,'onChange="getStates(this.value,\'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
 				<?php // -Country-State Selector ?>

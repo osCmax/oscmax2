@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: stats_customers.php,v 1.9 2002/03/30 15:03:59 harley_vb Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */

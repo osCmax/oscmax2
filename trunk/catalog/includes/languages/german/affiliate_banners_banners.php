@@ -1,23 +1,19 @@
 <?php
 /*
-  $Id: affiliate_banners_banners.php,v 2.00 2003/10/12
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program - Banners');
+define('NAVBAR_TITLE', 'Website Banner');
+define('HEADING_TITLE', 'Affiliateprogramm - Homepage Links');
 
-define('TEXT_AFFILIATE_NAME', 'Banner Name:');
-define('TEXT_INFORMATION', 'Choose the banner you want to display on your website from the choices below:');
-define('TEXT_AFFILIATE_INFO', 'Copy the code shown below and paste into your website');
+define('TEXT_AFFILIATE_NAME', 'Bannername:');
+define('TEXT_INFORMATION', 'Dieser Bannertyp verlinkt nicht auf eine Kategorie oder ein Produkt, sondern direkt auf unsere Homepage. Wählen Sie aus den nachstehenden Bannern jenes, das Sie auf Ihrer Webseite verwenden möchten:');
+define('TEXT_AFFILIATE_INFO', 'Kopieren Sie den nachfolgenden Code und fügen Sie ihn in Ihre Website ein.');
 ?>

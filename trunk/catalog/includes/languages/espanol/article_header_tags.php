@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: article_header_tags.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -24,8 +24,8 @@ $Id: article_header_tags.php 3 2006-05-27 04:59:07Z user $
    // The HEAD_TITLE_TAG_ALL is included BEFORE the specific one for the page
    // The HEAD_DESC_TAG_ALL is included AFTER the specific one for the page
    // The HEAD_KEY_TAG_ALL is included AFTER the specific one for the page
-   define('HEAD_TITLE_TAG_ALL','Site Name');
-   define('HEAD_DESC_TAG_ALL','This is a description for the entire site.');
+   define('HEAD_TITLE_TAG_ALL','Nombre del sitio');
+   define('HEAD_DESC_TAG_ALL','Esta es una descripción para el sitio entero.');
    define('HEAD_KEY_TAG_ALL','keyword1, keyword2, keyword3');
 
 /* End of Indented Section */

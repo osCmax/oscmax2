@@ -1,33 +1,29 @@
 <?php
 /*
-$Id: stats_recover_cart_sales.php 3 2006-05-27 04:59:07Z user $
-  Recover Cart Sales ENGLISH Language File v2.22
+$Id$
 
-  Recover Cart Sales contribution: JM Ivler 11/23/03
-  Copyright (c) 2003-2005 JM Ivler / Ideas From the Deep / OSCommerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
-  Modifed by Aalst (stats_recover_cart_sales.php,v 1.2 .. 1.36)
-  aalst@aalst.com
-
-  Modifed by Lane (stats_recover_cart_sales.php,v 1.4d .. 2.22)
-  lane@ifd.com www.osc-modsquad.com / www.ifd.com
 */
 
 define('HEADING_TITLE', 'Recover Cart Sales Report v2.22');
-define('DAYS_FIELD_PREFIX', 'Show for last ');
-define('DAYS_FIELD_POSTFIX', ' days ');
-define('DAYS_FIELD_BUTTON', 'Go');
-define('TABLE_HEADING_SCART_ID', 'SCart ID');
-define('TABLE_HEADING_SCART_DATE', 'Date Added');
-define('TABLE_HEADING_CUSTOMER', 'Customer Name');
-define('TABLE_HEADING_ORDER_DATE', 'Order Date');
-define('TABLE_HEADING_ORDER_STATUS', 'Status');
-define('TABLE_HEADING_ORDER_AMOUNT', 'Amount');
-define('TOTAL_RECORDS', 'Examined Records:');
-define('TOTAL_SALES', 'Recovered Sales:');
-define('TOTAL_SALES_EXPLANATION', ' (Possible sales from customers who abandoned carts & were notified via RCS)');
-define('TOTAL_RECOVERED', 'Total Recovered:');
+define('DAYS_FIELD_PREFIX', 'Mostrar últimos ');
+define('DAYS_FIELD_POSTFIX', ' días ');
+define('DAYS_FIELD_BUTTON', 'Ir');
+define('TABLE_HEADING_SCART_ID', 'ID SCart');
+define('TABLE_HEADING_SCART_DATE', 'Fecha añadido');
+define('TABLE_HEADING_CUSTOMER', 'Nombre cliente');
+define('TABLE_HEADING_ORDER_DATE', 'Fecha pedido');
+define('TABLE_HEADING_ORDER_STATUS', 'Estado');
+define('TABLE_HEADING_ORDER_AMOUNT', 'Importe');
+define('TOTAL_RECORDS', 'Registros examinados:');
+define('TOTAL_SALES', 'Ventas recuperadas:');
+define('TOTAL_SALES_EXPLANATION', ' (Ventas potenciales de clientes que abandonaron carritos y fueron notificados vía "Recuperación de carritos")');
+define('TOTAL_RECOVERED', 'Total recuperado:');
+define('TEXT_WORKING', 'Procesando ... ');
+define('TEXT_DONE', '¡Terminado!');
 ?>

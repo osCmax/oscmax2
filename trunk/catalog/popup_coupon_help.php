@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: popup_coupon_help.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -27,68 +27,94 @@ $Id: popup_coupon_help.php 3 2006-05-27 04:59:07Z user $
 <style type="text/css"><!--
 BODY { margin-bottom: 10px; margin-left: 10px; margin-right: 10px; margin-top: 10px; }
 //--></style>
-<body marginwidth="10" marginheight="10" topmargin="10" bottommargin="10" leftmargin="10" rightmargin="10">
+<body>
 
 <?php
 // v5.13: security flaw fixed in query
-//  $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . $HTTP_GET_VARS['cID'] . "'");
-  $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . intval($HTTP_GET_VARS['cID']) . "'");
+//  $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . $_GET['cID'] . "'");
+  $coupon_query = tep_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . intval($_GET['cID']) . "'");
   $coupon = tep_db_fetch_array($coupon_query);
-  $coupon_desc_query = tep_db_query("select * from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . $HTTP_GET_VARS['cID'] . "' and language_id = '" . $languages_id . "'");
+  $coupon_desc_query = tep_db_query("select * from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . $_GET['cID'] . "' and language_id = '" . $languages_id . "'");
   $coupon_desc = tep_db_fetch_array($coupon_desc_query);
-  $text_coupon_help = TEXT_COUPON_HELP_HEADER;
-  //$text_coupon_help .= sprintf(TEXT_COUPON_HELP_NAME, $coupon_desc['coupon_name']);
-  //if (tep_not_null($coupon_desc['coupon_description'])) $text_coupon_help .= sprintf(TEXT_COUPON_HELP_DESC, $coupon_desc['coupon_description']);
-  //$coupon_amount = $coupon['coupon_amount'];
+  $text_coupon_help = '';
+  
+  $text_coupon_help .= sprintf(TEXT_COUPON_HELP_NAME, $coupon_desc['coupon_name']);
+  
+  if (tep_not_null($coupon_desc['coupon_description'])) $text_coupon_help .= sprintf(TEXT_COUPON_HELP_DESC, $coupon_desc['coupon_description']);
+  
+  $coupon_amount = $coupon['coupon_amount'];
   switch ($coupon['coupon_type']) {
     case 'F':
-    //$text_coupon_help .= sprintf(TEXT_COUPON_HELP_FIXED, $currencies->format($coupon['coupon_amount']));
+    $text_coupon_help .= sprintf(TEXT_COUPON_HELP_FIXED, $currencies->format($coupon['coupon_amount']));
     break;
     case 'P':
-    //$text_coupon_help .= sprintf(TEXT_COUPON_HELP_FIXED, number_format($coupon['coupon_amount'],2). '%');
+    $text_coupon_help .= sprintf(TEXT_COUPON_HELP_FIXED, number_format($coupon['coupon_amount'],2). '%');
     break;
     case 'S':
-    //$text_coupon_help .= TEXT_COUPON_HELP_FREESHIP;
+    $text_coupon_help .= TEXT_COUPON_HELP_FREESHIP;
     break;
     default:
   }
-  //if ($coupon['coupon_minimum_order'] > 0 ) $text_coupon_help .= sprintf(TEXT_COUPON_HELP_MINORDER, $currencies->format($coupon['coupon_minimum_order']));
-  //$text_coupon_help .= sprintf(TEXT_COUPON_HELP_DATE, tep_date_short($coupon['coupon_start_date']),tep_date_short($coupon['coupon_expire_date']));
-  //$text_coupon_help .= '<b>' . TEXT_COUPON_HELP_RESTRICT . '</b>';
-  //$text_coupon_help .= '<br><br>' .  TEXT_COUPON_HELP_CATEGORIES;
-  //$coupon_get=tep_db_query("select restrict_to_categories from " . TABLE_COUPONS . " where coupon_id='".$HTTP_GET_VARS['cID']."'");
-  //$get_result=tep_db_fetch_array($coupon_get);
-
-  $cat_ids = explode("[,]", $get_result['restrict_to_categories']);
+  if ($coupon['coupon_minimum_order'] > 0 ) $text_coupon_help .= sprintf(TEXT_COUPON_HELP_MINORDER, $currencies->format($coupon['coupon_minimum_order']));
+  
+  if ($coupon['coupon_start_date'] != 0 && $coupon['coupon_expire_date'] != 0) {
+    $text_coupon_help .= sprintf(TEXT_COUPON_HELP_DATE, tep_date_short($coupon['coupon_start_date']),tep_date_short($coupon['coupon_expire_date']));
+  }
+  
+  
+  // Coupon Category and Product Restrictions
+  // Build Category Restrictions
+  $coupon_get = tep_db_query("SELECT restrict_to_categories FROM " . TABLE_COUPONS . " WHERE coupon_id='" . $_GET['cID'] . "'");
+  $get_result = tep_db_fetch_array($coupon_get);
+  if (substr($get_result['restrict_to_categories'], -1) == ',') { // removes trailing ,
+    $clean_cat_ids = substr($get_result['restrict_to_categories'], 0, -1); 
+  } else {
+    $clean_cat_ids = $get_result['restrict_to_categories'];
+  }
+  
+  $cat_ids = explode(",", $clean_cat_ids);
+  
+  $cats = '';
   for ($i = 0; $i < count($cat_ids); $i++) {
     $result = tep_db_query("SELECT * FROM categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '" . $languages_id . "' and categories.categories_id='" . $cat_ids[$i] . "'");
     if ($row = tep_db_fetch_array($result)) {
-    //$cats .= '<br>' . $row["categories_name"];
+      $cats .= '<br>' . $row["categories_name"];
     }
   }
-  if ($cats=='') $cats = '<br>NONE';
-  //$text_coupon_help .= $cats;
-  //$text_coupon_help .= '<br><br>' .  TEXT_COUPON_HELP_PRODUCTS;
-  //$coupon_get=tep_db_query("select restrict_to_products from " . TABLE_COUPONS . "  where coupon_id='".$HTTP_GET_VARS['cID']."'");
-  //$get_result=tep_db_fetch_array($coupon_get);
-
-  $pr_ids = explode("[,]", $get_result['restrict_to_products']);
+  
+  // Build Product Restrictions
+  $coupon_get = tep_db_query("SELECT restrict_to_products FROM " . TABLE_COUPONS . " WHERE coupon_id='" . $_GET['cID'] . "'");
+  $get_result = tep_db_fetch_array($coupon_get);
+  if (substr($get_result['restrict_to_products'], -1) == ',') { // removes trailing ,
+    $clean_product_ids = substr($get_result['restrict_to_products'], 0, -1);
+  } else {
+    $clean_product_ids = $get_result['restrict_to_products'];
+  }
+  
+  $pr_ids = explode(",", $clean_product_ids);
+    
+  $prods = '';
   for ($i = 0; $i < count($pr_ids); $i++) {
     $result = tep_db_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '" . $languages_id . "'and products.products_id = '" . $pr_ids[$i] . "'");
     if ($row = tep_db_fetch_array($result)) {
-      //$prods .= '<br>' . $row["products_name"];
+      $prods .= '<br>' . $row['products_name'];
     }
   }
-  if ($prods=='') $prods = '<br>NONE';
-  //$text_coupon_help .= $prods;
+  
+  // Only add to output if they are not blank
+  if (($prods != '') || ($cats != '')) {
+    $text_coupon_help .= '<b>' . TEXT_COUPON_HELP_RESTRICT . '</b>';
+    if ($cats != '') $text_coupon_help .= '<br><br><b>' .  TEXT_COUPON_HELP_CATEGORIES . '</b>' . $cats;
+	if ($prods != '') $text_coupon_help .= '<br><br><b>' .  TEXT_COUPON_HELP_PRODUCTS . '</b>' . $prods;  
+  }
 
-
+  // Add header
   $info_box_contents = array();
   $info_box_contents[] = array('text' => HEADING_COUPON_HELP);
-
-
+  
   new infoBoxHeading($info_box_contents, true, true);
 
+  // Add content
   $info_box_contents = array();
   $info_box_contents[] = array('text' => $text_coupon_help);
 

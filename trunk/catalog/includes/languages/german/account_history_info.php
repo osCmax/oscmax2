@@ -1,17 +1,17 @@
 <?php
 /*
-$Id: account_history_info.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Ihr Konto');
-define('NAVBAR_TITLE_2', 'Get&auml;tigte Bestellung');
+define('NAVBAR_TITLE_1', 'Mein Konto');
+define('NAVBAR_TITLE_2', 'Historie');
 define('NAVBAR_TITLE_3', 'Bestellnummer %s');
 
 define('HEADING_TITLE', 'Bestellinformationen');
@@ -20,22 +20,26 @@ define('HEADING_ORDER_NUMBER', 'Bestellnummer %s');
 define('HEADING_ORDER_DATE', 'Bestelldatum:');
 define('HEADING_ORDER_TOTAL', 'Summe:');
 
-define('HEADING_DELIVERY_ADDRESS', 'Lieferanschrift');
+define('HEADING_DELIVERY_ADDRESS', 'Lieferadresse');
 define('HEADING_SHIPPING_METHOD', 'Versandart');
 
 define('HEADING_PRODUCTS', 'Produkte');
-define('HEADING_TAX', 'MwSt.');
+define('HEADING_TAX', 'USt.');
 define('HEADING_TOTAL', 'Summe');
 
 define('HEADING_BILLING_INFORMATION', 'Rechnungsinformationen');
 define('HEADING_BILLING_ADDRESS', 'Rechnungsadresse');
-define('HEADING_PAYMENT_METHOD', 'Zahlungsweise');
+define('HEADING_PAYMENT_METHOD', 'Zahlungsart');
 
 define('HEADING_ORDER_HISTORY', 'Bestellhistorie');
 define('HEADING_COMMENT', 'Kommentar');
 define('TEXT_NO_COMMENTS_AVAILABLE', 'Kein Kommentar vorhanden.');
 
-define('TABLE_HEADING_DOWNLOAD_DATE', 'Herunterladen m&ouml;glich bis:');
-define('TABLE_HEADING_DOWNLOAD_COUNT', 'max. Anz. Downloads');
+define('TABLE_HEADING_DOWNLOAD_DATE', 'Link verfällt am:');
+define('TABLE_HEADING_DOWNLOAD_COUNT', 'verbleibende Downloads');
 define('HEADING_DOWNLOAD', 'Artikel herunterladen:');
+
+// Customer Comments contrib
+define ('ADD_COMMENTS', 'Kommentare oder Fragen zu dieser Bestellung hinzufügen');
+// Customer Comments contrib
 ?>

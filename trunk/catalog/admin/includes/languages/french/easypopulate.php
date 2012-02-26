@@ -1,13 +1,14 @@
 <?php
 /*
-  $Id: easypopulate.php,v 1.1.1.1 2005/01/15 06:43:48 Michael Sasek Exp $
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
   Released under the GNU General Public License
-
-  Borja Bravo Alférez
-  Item Consulting, 
-
 */
-
 define('EP', 			'EasyPopulate');
 define('DEFAULT LANGUAGE', 	'Default language');
 

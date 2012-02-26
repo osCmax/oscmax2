@@ -1,21 +1,21 @@
 <?php
 /*
-$Id: account_edit.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Mi Cuenta');
-define('NAVBAR_TITLE_2', 'Editar Cuenta');
+define('NAVBAR_TITLE_1', 'Mi cuenta');
+define('NAVBAR_TITLE_2', 'Editar cuenta');
 
-define('HEADING_TITLE', 'Datos de Mi Cuenta');
+define('HEADING_TITLE', 'Datos de Mi cuenta');
 
-define('MY_ACCOUNT_TITLE', 'Mi Cuenta');
+define('MY_ACCOUNT_TITLE', 'Mi cuenta');
 
 define('SUCCESS_ACCOUNT_UPDATED', 'Se ha actualizado su cuenta correctamente.');
 ?>

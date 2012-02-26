@@ -1,38 +1,34 @@
 <?php
 /*
-  $Id: affiliate_banner_statistics.php,v 2.00 2003/10/12
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Banner Statistics');
+define('HEADING_TITLE', 'Bannerstatistik');
 
-define('TABLE_HEADING_SOURCE', 'Source');
-define('TABLE_HEADING_VIEWS', 'Views');
-define('TABLE_HEADING_CLICKS', 'Clicks');
+define('TABLE_HEADING_SOURCE', 'Quelle');
+define('TABLE_HEADING_VIEWS', 'Angezeigt');
+define('TABLE_HEADING_CLICKS', 'Klicks');
 
 define('TEXT_BANNERS_DATA', 'D<br>a<br>t<br>a');
-define('TEXT_BANNERS_DAILY_STATISTICS', '%s Daily Statistics For %s %s');
-define('TEXT_BANNERS_MONTHLY_STATISTICS', '%s Monthly Statistics For %s');
-define('TEXT_BANNERS_YEARLY_STATISTICS', '%s Yearly Statistics');
+define('TEXT_BANNERS_DAILY_STATISTICS', '%s Tägliche Statistik für %s %s');
+define('TEXT_BANNERS_MONTHLY_STATISTICS', '%s Monatliche Statistik für %s');
+define('TEXT_BANNERS_YEARLY_STATISTICS', '%s Jährliche Statistik für');
 
-define('STATISTICS_TYPE_DAILY', 'Daily');
-define('STATISTICS_TYPE_MONTHLY', 'Monthly');
-define('STATISTICS_TYPE_YEARLY', 'Yearly');
+define('STATISTICS_TYPE_DAILY', 'Täglich');
+define('STATISTICS_TYPE_MONTHLY', 'Monatlich');
+define('STATISTICS_TYPE_YEARLY', 'Jährlich');
 
-define('TITLE_TYPE', 'Type:');
-define('TITLE_YEAR', 'Year:');
-define('TITLE_MONTH', 'Month:');
+define('TITLE_TYPE', 'Art:');
+define('TITLE_YEAR', 'Jahr:');
+define('TITLE_MONTH', 'Monat:');
 
-define('ERROR_GRAPHS_DIRECTORY_DOES_NOT_EXIST', 'Error: Graphs directory does not exist. Please create a \'graphs\' directory inside \'images\'.');
-define('ERROR_GRAPHS_DIRECTORY_NOT_WRITEABLE', 'Error: Graphs directory is not writeable.');
+define('ERROR_GRAPHS_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Diagrammverzeichnis existiert nicht. Erstellen Sie das Unterverzeichnis \'graphs\' im Verzeichnis \'images\'.');
+define('ERROR_GRAPHS_DIRECTORY_NOT_WRITEABLE', 'Fehler: Das Diagrammverzeichnis ist schreibgeschützt.');
 ?>

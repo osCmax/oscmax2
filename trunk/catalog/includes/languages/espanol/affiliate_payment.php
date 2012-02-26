@@ -1,37 +1,37 @@
 <?php
 /*
-$Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program: Payment');
+define('NAVBAR_TITLE','Informe de pagos');
+define('HEADING_TITLE','Programa de afiliados: Pagos');
 
-define('TEXT_AFFILIATE_HEADER', 'Your Payments:');
+define('TEXT_AFFILIATE_HEADER','Sus pagos:');
 
-define('TABLE_HEADING_DATE', 'Payment Date');
-define('TABLE_HEADING_PAYMENT', 'Affiliate Earnings');
-define('TABLE_HEADING_STATUS', 'Payment Status');
-define('TABLE_HEADING_PAYMENT_ID','Payment-ID');
-define('TEXT_DISPLAY_NUMBER_OF_PAYMENTS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> payments)');
-define('TEXT_INFORMATION_PAYMENT_TOTAL', 'Your current earnings amount to:');
-define('TEXT_NO_PAYMENTS', 'No payments have been recorded yet.');
-define('TEXT_PAYMENT_HELP', ' <font color="#FFFFFF">[?]</font>');
-define('TEXT_PAYMENT', 'Click on [?] to see a description of each category.');
-define('HEADING_PAYMENT_HELP', 'Affiliate Help');
-define('TEXT_DATE_HELP', '<i>Date</i> represents the date of the payment made to the affiliate.');
-define('TEXT_PAYMENT_ID_HELP', '<i>Payment-ID</i> represents the payment number associated to the payment.');
-define('TEXT_PAYMENT_HELP', '<i>Affiliate Earnings</i> represents the value of payment made to the affiliate.');
-define('TEXT_STATUS_HELP', '<i>Payment Status</i> represents the status of the payment made to the affiliate');
-define('TEXT_CLOSE_WINDOW', 'Close Window [x]');
+define('TABLE_HEADING_DATE','Fecha de pago');
+define('TABLE_HEADING_PAYMENT','Ganancias de afiliado');
+define('TABLE_HEADING_STATUS','Estado del pago');
+define('TABLE_HEADING_PAYMENT_ID','Nº de pago');
+define('TEXT_DISPLAY_NUMBER_OF_PAYMENTS','Mostrando <b>%d</b> a <b>%d</b> (de <b>%d</b> pagos)');
+define('TEXT_INFORMATION_PAYMENT_TOTAL','Sus ganancias actuales ascienden a:');
+define('TEXT_NO_PAYMENTS','No se ha registrado ningún pago todavía.');
+
+define('TEXT_CLICKS_1','Haga clic en el');
+define('TEXT_CLICKS_2',' para ver una descripción de cada categoría.');
+
+define('HEADING_DATE_HELP','Ayuda de fecha');
+define('TEXT_DATE_HELP','<i>Fecha</i> representa la fecha del pago realizado al afiliado.');
+define('HEADING_PAYMENT_ID_HELP','Ayuda de nº de pago');
+define('TEXT_PAYMENT_ID_HELP','<i>Nº de pago</i> representa el número de pago asociado al pago.');
+define('HEADING_PAYMENT_HELP', 'Ayuda de ganancias de afiliado');
+define('TEXT_PAYMENT_HELP','<i>Ganancias de afiliado</i> representa el valor del pago abonado al afiliado.');
+define('HEADING_STATUS_HELP','Ayuda de estado del pago');
+define('TEXT_STATUS_HELP','<i>Estado del pago</i> representa el estado del pago realizado al afiliado');
 ?>

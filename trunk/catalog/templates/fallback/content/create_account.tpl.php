@@ -1,13 +1,27 @@
+<?php
+/*
+$Id$
 
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+?>
     <!-- PWA BOF -->
-    <?php echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, (isset($HTTP_GET_VARS['guest'])? 'guest=guest':''), 'SSL'), 'post', 'onSubmit="return check_form(create_account);"') . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <?php echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, (isset($_GET['guest'])? 'guest=guest':''), 'SSL'), 'post', 'onSubmit="return check_form(create_account);"') . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
     <!-- PWA EOF -->
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+      </tr>
+	  <tr>
+        <td class="productinfo_header"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <?php
             // PWA BOF
-            if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest'])){
+            if (!isset($_GET['guest']) && !isset($_POST['guest'])){
             ?>
               <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
             <?php }else{ ?>
@@ -15,7 +29,7 @@
             <?php }
             // PWA EOF 
             ?>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_account.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
           </tr>
         </table></td>
       </tr>
@@ -23,7 +37,7 @@
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
-        <td class="smallText"><br><?php echo sprintf(TEXT_ORIGIN_LOGIN, tep_href_link(FILENAME_LOGIN, tep_get_all_get_params(), 'SSL')); ?></td>
+        <td class="messageStackAlert"><?php echo sprintf(TEXT_ORIGIN_LOGIN, tep_href_link(FILENAME_LOGIN, tep_get_all_get_params(), 'SSL')); ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -167,7 +181,7 @@
   }
 ?>
               <tr>
-                <td class="main"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
+                <td class="main" width="150"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></span></td>
 				<?php // +Country-State Selector ?>
                 <td class="main"><?php echo tep_get_country_list('country',$country,'onChange="getStates(this.value, \'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
 				<?php // -Country-State Selector ?>
@@ -203,7 +217,7 @@
       </tr>
 <?php
 // PWA BOF
-  if (!isset($HTTP_GET_VARS['guest']) && !isset($HTTP_POST_VARS['guest'])) {
+  if (!isset($_GET['guest']) && !isset($_POST['guest'])) {
 // PWA EOF
 ?>
       <tr>
@@ -216,6 +230,10 @@
               <tr>
                 <td class="main" width="150"><?php echo ENTRY_NEWSLETTER; ?></td>
                 <td class="main"><?php echo tep_draw_checkbox_field('newsletter', '1') . '&nbsp;' . (tep_not_null(ENTRY_NEWSLETTER_TEXT) ? '<span class="inputRequirement">' . ENTRY_NEWSLETTER_TEXT . '</span>': ''); ?></td>
+              </tr>
+              <tr>
+                <td class="main"><?php echo ENTRY_NEWSLETTER_TYPE; ?></td>
+                <td class="main"><?php echo tep_draw_radio_field('EMAILTYPE', 'html', true) . '&nbsp;&nbsp;' . MAILCHIMP_HTML . '&nbsp;&nbsp;' . tep_draw_radio_field('EMAILTYPE', 'text', false) . '&nbsp;&nbsp;' . MAILCHIMP_TEXT; ?></td>
               </tr>
             </table></td>
           </tr>
@@ -233,7 +251,8 @@
             <td><table border="0" cellspacing="2" cellpadding="2">
               <tr>
                 <td class="main" width="150"><?php echo ENTRY_PASSWORD; ?></td>
-                <td class="main"><?php echo tep_draw_password_field('password') . '&nbsp;' . (tep_not_null(ENTRY_PASSWORD_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_TEXT . '</span>': ''); ?></td>
+                <td class="main"><?php echo tep_draw_password_field_st('password') . '&nbsp;' . (tep_not_null(ENTRY_PASSWORD_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_TEXT . '</span>': ''); ?>
+</td>
               </tr>
               <tr>
                 <td class="main" width="150"><?php echo ENTRY_PASSWORD_CONFIRMATION; ?></td>
@@ -255,6 +274,21 @@
 <?php } 
 // PWA EOF
 ?>
+<?php if (MAT == 'true') { ?>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td>
+          <table border="0" width="100%" cellspacing="1" cellpadding="2">
+            <tr>
+              <td id="MATtd" class="messageStackAlert" align="center"><?php echo tep_draw_checkbox_field('MAT','true', false, 'id="MAT" onClick="javascript:switchMAT()"'); ?><?php echo TERMS_PART_1; ?> 
+              <a id="conditions" href="<?php echo $HTTP_SERVER . DIR_WS_CATALOG . 'conditions.php?info_id=11&amp;languages_id=' . (isset($languages_id) ? $languages_id : '1'); ?>"><?php echo TERMS_PART_2; ?></a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
@@ -264,11 +298,35 @@
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></td>
+                <td align="right">
+                  <span id="enableMAT"><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></span>
+                  <span id="disableMAT" style="cursor: pointer;"><?php echo tep_image_button('button_MAT.gif', IMAGE_BUTTON_MAT, ' onClick="javascript:warnMAT()"'); ?></span>
+                </td>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
             </table></td>
           </tr>
         </table></td>
       </tr>
-    </table></form>
+      
+<?php } else { ?>
+
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+          <tr class="infoBoxContents">
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+                <td align="right"><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></td>
+                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+<?php } // end MAT if ?>     
+    </table>
+</form>

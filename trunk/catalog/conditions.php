@@ -1,14 +1,14 @@
 <?php
 /*
-$Id: conditions.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-*/
+  */
 
 // Most of this file is changed or moved to BTS - Basic Template System - format.
 // For adding in contribution or modification - parts of this file has been moved to: catalog\templates\fallback\contents\<filename>.tpl.php as a default (sub 'fallback' with your current template to see if there is a template specife change).
@@ -17,14 +17,20 @@ $Id: conditions.php 3 2006-05-27 04:59:07Z user $
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CONDITIONS);
+		$info_id = intval($_GET['info_id']);
+		$languages_id = intval($_GET['languages_id']);
+		$information_query = tep_db_query("SELECT information_title, information_description FROM " . TABLE_INFORMATION . " WHERE information_id='" . $info_id . "' and language_id='" . (int)$languages_id . "'");
+		$information = tep_db_fetch_array($information_query);
+		$title = stripslashes($information['information_title']);
+		$page_description = stripslashes($information['information_description']);
+	
+		// Added as noticed by infopages module
+		if (!preg_match("/([\<])([^\>]{1,})*([\>])/i", $page_description)) 
+		{
+		  	$page_description = str_replace("\r\n", "<br>\r\n", $page_description); 
+		}
 
-  $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_CONDITIONS));
-
-  $content = CONTENT_CONDITIONS;
-  $content_template = TEMPLATENAME_CONDITIONS;
-
-  include (bts_select('main', $content_template)); // BTSv1.5
-
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  echo $page_description;
+  
+  require(DIR_WS_INCLUDES . 'application_bottom.php'); 
 ?>

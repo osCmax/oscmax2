@@ -1,21 +1,16 @@
 <?php
 /*
-  $Id $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  Incluye La Contribución:
-  Tenga acceso con la cuenta llana (v. 2.2a) para el área del Admin del osCommerce (MS2
-
-  Este archivo puede ser suprimido si inhabilita la contribución antedicha
 */
-
-define('HEADING_TITLE', 'Access Negado');
-define('NAVBAR_TITLE', 'No tienes Permnisos de Acceso');
-define('TEXT_MAIN', '&nbsp;Por favor contacta tu <b>Administrator Web</b> para pedir <br>&nbsp;mas permisos o cualquier problema.<br>&nbsp;');
-define('TEXT_BACK', 'vovler');
+define('HEADING_TITLE', 'Aceso Denegado');
+define('NAVBAR_TITLE', 'No tienes permisos de acceso');
+define('TEXT_MAIN', '&nbsp;Por favor ponte en contacto con tu <b>Administrador web</b> para pedir más permisos o por si encontraste algún problema.<br>&nbsp;<br>&nbsp;Si deseas obtener más información acerca de esto - <a href="http://wiki.oscdox.com/v2.5/files_access" target="_blank" style="color:#0000ff">por favor lee este artículo en el wiki.</a><br><br>');
+define('TEXT_BACK', 'volver');
 ?>

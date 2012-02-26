@@ -1,36 +1,32 @@
 <?php
 /*
-  $Id: affiliate_signup.php,v 1.7 2003/02/15 18:34:44 harley_vb Exp $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliates');
-define('HEADING_TITLE', 'Register to our Affiliate Program');
+define('NAVBAR_TITLE', 'Afiliados');
+define('HEADING_TITLE', 'Regístrese en nuestro Programa de afiliados');
 
-define('MAIL_AFFILIATE_SUBJECT', 'Welcome to the Affiliate Program of' . STORE_NAME);
-define('MAIL_AFFILIATE_HEADER', 'Dear Affiliate,
+define('MAIL_AFFILIATE_SUBJECT', 'Bienvenido al Programa de afiliados de' . STORE_NAME);
+define('MAIL_AFFILIATE_HEADER', 'Estimado afiliado,
 
-we appreciate your registration to our affiliate program.
+apreciamos enormemente su registro en nuestro Programa de afiliados.
 
-Your login informations:
-**************************
+Su información de inicio de sesión:
+************************************
 
 ');
-define('MAIL_AFFILIATE_ID', 'Your Partner-ID is: ');
-define('MAIL_AFFILIATE_USERNAME', 'Your username is: ');
-define('MAIL_AFFILIATE_PASSWORD', 'Your password is: ');
-define('MAIL_AFFILIATE_LINK', 'Login here ');
-define('MAIL_AFFILIATE_FOOTER', 'We\'re looking forward for a good partnership!
+define('MAIL_AFFILIATE_ID', 'Su ID de afiliado es: ');
+define('MAIL_AFFILIATE_USERNAME', 'Su nobre de usuario es: ');
+define('MAIL_AFFILIATE_PASSWORD', 'Su contraseña es: ');
+define('MAIL_AFFILIATE_LINK', 'Inicie sesión aquí ');
+define('MAIL_AFFILIATE_FOOTER', '¡Le deseamos una fructífera relación!
 
 Your Affiliates Team');
 ?>

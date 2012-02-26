@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_signup.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -30,35 +26,35 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
   // -Country-State Selector
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_SIGNUP);
 
-  if (isset($HTTP_POST_VARS['action'])) {
-    $a_gender = tep_db_prepare_input($HTTP_POST_VARS['a_gender']);
-    $a_firstname = tep_db_prepare_input($HTTP_POST_VARS['a_firstname']);
-    $a_lastname = tep_db_prepare_input($HTTP_POST_VARS['a_lastname']);
-    $a_dob = tep_db_prepare_input($HTTP_POST_VARS['a_dob']);
-    $a_email_address = tep_db_prepare_input($HTTP_POST_VARS['a_email_address']);
-    $a_company = tep_db_prepare_input($HTTP_POST_VARS['a_company']);
-    $a_company_taxid = tep_db_prepare_input($HTTP_POST_VARS['a_company_taxid']);
-    $a_payment_check = tep_db_prepare_input($HTTP_POST_VARS['a_payment_check']);
-    $a_payment_paypal = tep_db_prepare_input($HTTP_POST_VARS['a_payment_paypal']);
-    $a_payment_bank_name = tep_db_prepare_input($HTTP_POST_VARS['a_payment_bank_name']);
-    $a_payment_bank_branch_number = tep_db_prepare_input($HTTP_POST_VARS['a_payment_bank_branch_number']);
-    $a_payment_bank_swift_code = tep_db_prepare_input($HTTP_POST_VARS['a_payment_bank_swift_code']);
-    $a_payment_bank_account_name = tep_db_prepare_input($HTTP_POST_VARS['a_payment_bank_account_name']);
-    $a_payment_bank_account_number = tep_db_prepare_input($HTTP_POST_VARS['a_payment_bank_account_number']);
-    $a_street_address = tep_db_prepare_input($HTTP_POST_VARS['a_street_address']);
-    $a_suburb = tep_db_prepare_input($HTTP_POST_VARS['a_suburb']);
-    $a_postcode = tep_db_prepare_input($HTTP_POST_VARS['a_postcode']);
-    $a_city = tep_db_prepare_input($HTTP_POST_VARS['a_city']);
-    $a_country=tep_db_prepare_input($HTTP_POST_VARS['a_country']);
-    $a_zone_id = tep_db_prepare_input($HTTP_POST_VARS['a_zone_id']);
-    $a_state = tep_db_prepare_input($HTTP_POST_VARS['a_state']);
-    $a_telephone = tep_db_prepare_input($HTTP_POST_VARS['a_telephone']);
-    $a_fax = tep_db_prepare_input($HTTP_POST_VARS['a_fax']);
-    $a_homepage = tep_db_prepare_input($HTTP_POST_VARS['a_homepage']);
-    $a_password = tep_db_prepare_input($HTTP_POST_VARS['a_password']);
-    $a_newsletter = tep_db_prepare_input($HTTP_POST_VARS['a_newsletter']);
-    $a_confirmation = tep_db_prepare_input($HTTP_POST_VARS['a_confirmation']);
-    $a_agb = tep_db_prepare_input($HTTP_POST_VARS['a_agb']);
+  if (isset($_POST['action'])) {
+    $a_gender = tep_db_prepare_input($_POST['a_gender']);
+    $a_firstname = tep_db_prepare_input($_POST['a_firstname']);
+    $a_lastname = tep_db_prepare_input($_POST['a_lastname']);
+    $a_dob = tep_db_prepare_input($_POST['a_dob']);
+    $a_email_address = tep_db_prepare_input($_POST['a_email_address']);
+    $a_company = tep_db_prepare_input($_POST['a_company']);
+    $a_company_taxid = tep_db_prepare_input($_POST['a_company_taxid']);
+    $a_payment_check = tep_db_prepare_input($_POST['a_payment_check']);
+    $a_payment_paypal = tep_db_prepare_input($_POST['a_payment_paypal']);
+    $a_payment_bank_name = tep_db_prepare_input($_POST['a_payment_bank_name']);
+    $a_payment_bank_branch_number = tep_db_prepare_input($_POST['a_payment_bank_branch_number']);
+    $a_payment_bank_swift_code = tep_db_prepare_input($_POST['a_payment_bank_swift_code']);
+    $a_payment_bank_account_name = tep_db_prepare_input($_POST['a_payment_bank_account_name']);
+    $a_payment_bank_account_number = tep_db_prepare_input($_POST['a_payment_bank_account_number']);
+    $a_street_address = tep_db_prepare_input($_POST['a_street_address']);
+    $a_suburb = tep_db_prepare_input($_POST['a_suburb']);
+    $a_postcode = tep_db_prepare_input($_POST['a_postcode']);
+    $a_city = tep_db_prepare_input($_POST['a_city']);
+    $a_country=tep_db_prepare_input($_POST['a_country']);
+    $a_zone_id = tep_db_prepare_input($_POST['a_zone_id']);
+    $a_state = tep_db_prepare_input($_POST['a_state']);
+    $a_telephone = tep_db_prepare_input($_POST['a_telephone']);
+    $a_fax = tep_db_prepare_input($_POST['a_fax']);
+    $a_homepage = tep_db_prepare_input($_POST['a_homepage']);
+    $a_password = tep_db_prepare_input($_POST['a_password']);
+    $a_newsletter = tep_db_prepare_input($_POST['a_newsletter']);
+    $a_confirmation = tep_db_prepare_input($_POST['a_confirmation']);
+    $a_agb = tep_db_prepare_input($_POST['a_agb']);
 
     $error = false; // reset error flag
 
@@ -276,7 +272,8 @@ if (!isset($country)){$a_country = DEFAULT_COUNTRY;}
 
   $content = affiliate_signup;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 // +Country-State Selector 

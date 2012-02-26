@@ -1,12 +1,22 @@
 <?php
 /*
-  $Id:Batch_print.php, user Exp $
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
 define('TEXT_ORDER_NUMBERS_RANGES', 'Order Number (s), either one # or  range, # - #, or #,#,#');
+define('TEXT_DIR_ERROR', ' Error: Problem opening directory ');
+define('TEXT_BPC_OPTIONS', 'Batch Print Center Options');
+define('TEXT_BPC_NO_OPTIONS', 'There are no options available for your selected option.');
 define('HEADING_TITLE', 'Batch Print Center');
 define('TABLE_HEADING_COMMENTS', 'Comments');
 define('TABLE_HEADING_PRODUCTS_MODEL', 'Model');
-define('TABLE_HEADING_PRODUCTS', 'Products');
+define('TABLE_HEADING_PRODUCTS', 'Description');
 define('TABLE_HEADING_TAX', 'Tax');
 define('TABLE_HEADING_TOTAL', 'Total');
 define('TABLE_HEADING_PRICE_EXCLUDING_TAX', 'Price (ex)');
@@ -32,9 +42,9 @@ define('TEXT_ORDER_DATE','Order Date:');
 define('TEXT_ORDER_FORMAT','F j, Y');
 define('TEXT_CHOOSE_TEMPLATE','Choose the template of file you wish to print');
 define('TEXT_CHOOSE_TEMPLATE','Please either enter the order numbers/ranges you want extracted to PDF:<br>(eg. 2577,2580-2585,2588)');
-define('TEXT_DATES_ORDERS_EXTRACTRED','Or enter the dates of orders you want extracted to PDF:<br>(enter date in YYYY-MM-DD format)');
+define('TEXT_DATES_ORDERS_EXTRACTRED','<b>Or</b> enter the dates of orders you want extracted to PDF:<br>(enter dates in YYYY-MM-DD format) If both blank will show ALL (Limit: 500)');
 define('TEXT_FROM','From:');
-define('TEXT_TO','Delivery: ');
+define('TEXT_TO','To: ');
 define('TEXT_PRINTING_LABELS_BILLING_DELIVERY','When Printing Labels :- Use Billing Address or Delivery Address?');
 define('TEXT_DELIVERY','Delivery: ');
 define('TEXT_BILLING','Billing: ');
@@ -77,12 +87,18 @@ define('GREY', '0.9,0.9,0.9');
 define('DARK_GREY', '0.7,0.7,0.7');
 
 // Error and Messages
-$error['ERROR_INVALID_INPUT'] = 'Internal Error: Unrecognized or invalid script input.';
-$error['ERROR_BAD_DATE'] =  'Invalid date, Please enter a valid date in Year-Month-Day (0000-00-00) format.';
-$error['ERROR_BAD_INVOICENUMBERS'] =  'Invalid Invoice numbers, Please enter a valid format. (eg. 2577,2580-2585,2588)';
-$error['NO_ORDERS'] =  'There were no orders selected for export, try changing your order options.';
-$error['SET_PERMISSIONS'] = 'Can\'t write to directory!  Please set the permissions of your temp_pdf folder to CHMOD 0777';
-$error['FAILED_TO_OPEN'] = 'Could not open file for writing, make sure correct permissions are set';
+$error['ERROR_INVALID_INPUT'] = 'Error: Internal Error: Unrecognized or invalid script input.';
+$error['ERROR_BAD_START_DATE'] =  'Error: Invalid start date, Please enter a valid date in Year-Month-Day (0000-00-00) format.';
+$error['ERROR_BAD_END_DATE'] =  'Error: Invalid end date, Please enter a valid date in Year-Month-Day (0000-00-00) format.';
+$error['ERROR_BAD_INVOICENUMBERS'] =  'Error: Invalid Invoice numbers, Please enter a valid format. (eg. 2577,2580-2585,2588)';
+$error['NO_ORDERS'] =  'Error: There were no orders selected for export, try changing your order options.';
+$error['SET_PERMISSIONS'] = 'Error: Can\'t write to directory!  Please set the permissions of your temp_pdf folder to CHMOD 0755';
+$error['FAILED_TO_OPEN'] = 'Error: Could not open file for writing, make sure correct permissions are set';
+
+define('SUCCESS_1', 'Success: PDF of ');
+define('SUCCESS_2', ' record(s) was created successfully. Please ');
+define('SUCCESS_3', 'click here');
+define('SUCCESS_4', ' to open the file.');
 
 // PDF FONT SIZES
 define('COMPANY_HEADER_FONT_SIZE','14');
@@ -145,5 +161,23 @@ define('BATCH_PDF_FILE', 'batch_orders.pdf');
 //define('PRODUCT_LISTING_BKGD_COLOR',GREY);
 //define('MODEL_COLUMN_SIZE', '37');
 //define('PRICING_COLUMN_SIZES', '67');
+
+define('FOOTER_TEXT', 'Thank you for shopping with us at ' . STORE_NAME);
+
+// Filename defines to allow multilanguage use
+define('TEXT_MISSING_FILENAME', 'Missing language define for');
+define('TEXT_CHRISTMAS_CARD', 'Christmas Card');
+define('TEXT_GRID', 'Grid');
+define('TEXT_INTEGRATED_PACKING', 'Integrated Packing');
+define('TEXT_INTEGRATED_PACKING2', 'Integrated Packing 2');
+define('TEXT_INVOICE', 'Invoice');
+define('TEXT_INVOICE_S3', 'Invoice (uses S3 printed invoice paper)');
+define('TEXT_LABELS', 'Labels');
+define('TEXT_LABELWRITER', 'Labelwriter');
+define('TEXT_LETTERHEAD', 'Letterhead');
+define('TEXT_NULL', 'Null');
+define('TEXT_ORDER_STATUS_CHANGE_ONLY', 'Order Status change only');
+define('TEXT_PACKING_SLIP_AND_INVOICE', 'Packing Slip and Invoice');
+define('TEXT_PACKING_SLIP', 'Packing Slip');
 
 ?>

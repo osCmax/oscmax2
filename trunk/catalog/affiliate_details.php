@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -22,11 +18,11 @@ $Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
   require('includes/application_top.php');
   // +Country-State Selector
   require(DIR_WS_FUNCTIONS . 'ajax.php');
-if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates' && isset($HTTP_POST_VARS['country'])) {
-	ajax_get_zones_html(tep_db_prepare_input($HTTP_POST_VARS['country']), true);
+if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['country'])) {
+	ajax_get_zones_html(tep_db_prepare_input($_POST['country']), true);
 } else {
   // -Country-State Selector
-  $details == 'true';
+  $details = 'true';
   if (!tep_session_is_registered('affiliate_id')) {
     $navigation->set_snapshot();
     tep_redirect(tep_href_link(FILENAME_AFFILIATE, '', 'SSL'));
@@ -35,37 +31,40 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_DETAILS);
 // BOF: MOD - Country-State Selector
   $refresh = false;
-  if (isset($HTTP_POST_VARS['action']) && (($HTTP_POST_VARS['action'] == 'process') || ($HTTP_POST_VARS['action'] == 'refresh'))) {
-    if ($HTTP_POST_VARS['action'] == 'process')  $process = true;
-	if ($HTTP_POST_VARS['action'] == 'refresh') $refresh = true;
+  if (isset($_POST['action']) && (($_POST['action'] == 'process') || ($_POST['action'] == 'refresh'))) {
+    if ($_POST['action'] == 'process')  $process = true;
+	if ($_POST['action'] == 'refresh') $refresh = true;
 // EOF: MOD - Country-State Selector
 
-    $a_gender = tep_db_prepare_input($HTTP_POST_VARS['a_gender']);
-    $a_firstname = tep_db_prepare_input($HTTP_POST_VARS['a_firstname']);
-    $a_lastname = tep_db_prepare_input($HTTP_POST_VARS['a_lastname']);
-    $a_dob = tep_db_prepare_input($HTTP_POST_VARS['a_dob']);
-    $a_email_address = tep_db_prepare_input($HTTP_POST_VARS['a_email_address']);
-    $a_company = tep_db_prepare_input($HTTP_POST_VARS['a_company']);
-    $a_company_taxid = tep_db_prepare_input($HTTP_POST_VARS['a_company_taxid']);
-    $a_payment_check = tep_db_prepare_input($HTTP_POST_VARS['a_payment_check']);
-    $a_payment_paypal = tep_db_prepare_input($HTTP_POST_VARS['a_payment_paypal']);
-    $a_payment_bank_name = tep_db_prepare_input($HTTP_POST_VARS['a_payment_bank_name']);
-    $a_payment_bank_branch_number = tep_db_prepare_input($HTTP_POST_VARS['a_payment_bank_branch_number']);
-    $a_payment_bank_swift_code = tep_db_prepare_input($HTTP_POST_VARS['a_payment_bank_swift_code']);
-    $a_payment_bank_account_name = tep_db_prepare_input($HTTP_POST_VARS['a_payment_bank_account_name']);
-    $a_payment_bank_account_number = tep_db_prepare_input($HTTP_POST_VARS['a_payment_bank_account_number']);
-    $a_street_address = tep_db_prepare_input($HTTP_POST_VARS['a_street_address']);
-    $a_suburb = tep_db_prepare_input($HTTP_POST_VARS['a_suburb']);
-    $a_postcode = tep_db_prepare_input($HTTP_POST_VARS['a_postcode']);
-    $a_city = tep_db_prepare_input($HTTP_POST_VARS['a_city']);
-    $a_country=tep_db_prepare_input($HTTP_POST_VARS['a_country']);
-    $a_zone_id = tep_db_prepare_input($HTTP_POST_VARS['a_zone_id']);
-    $a_state = tep_db_prepare_input($HTTP_POST_VARS['a_state']);
-    $a_telephone = tep_db_prepare_input($HTTP_POST_VARS['a_telephone']);
-    $a_fax = tep_db_prepare_input($HTTP_POST_VARS['a_fax']);
-    $a_homepage = tep_db_prepare_input($HTTP_POST_VARS['a_homepage']);
-    $a_password = tep_db_prepare_input($HTTP_POST_VARS['a_password']);
+    $a_gender = tep_db_prepare_input($_POST['a_gender']);
+    $a_firstname = tep_db_prepare_input($_POST['a_firstname']);
+    $a_lastname = tep_db_prepare_input($_POST['a_lastname']);
+    $a_dob = tep_db_prepare_input($_POST['a_dob']);
+    $a_email_address = tep_db_prepare_input($_POST['a_email_address']);
+    $a_company = tep_db_prepare_input($_POST['a_company']);
+    $a_company_taxid = tep_db_prepare_input($_POST['a_company_taxid']);
+    $a_payment_check = tep_db_prepare_input($_POST['a_payment_check']);
+    $a_payment_paypal = tep_db_prepare_input($_POST['a_payment_paypal']);
+    $a_payment_bank_name = tep_db_prepare_input($_POST['a_payment_bank_name']);
+    $a_payment_bank_branch_number = tep_db_prepare_input($_POST['a_payment_bank_branch_number']);
+    $a_payment_bank_swift_code = tep_db_prepare_input($_POST['a_payment_bank_swift_code']);
+    $a_payment_bank_account_name = tep_db_prepare_input($_POST['a_payment_bank_account_name']);
+    $a_payment_bank_account_number = tep_db_prepare_input($_POST['a_payment_bank_account_number']);
+    $a_street_address = tep_db_prepare_input($_POST['a_street_address']);
+    $a_suburb = tep_db_prepare_input($_POST['a_suburb']);
+    $a_postcode = tep_db_prepare_input($_POST['a_postcode']);
+    $a_city = tep_db_prepare_input($_POST['a_city']);
+    $a_country=tep_db_prepare_input($_POST['a_country']);
+    $a_zone_id = tep_db_prepare_input($_POST['a_zone_id']);
+    $a_state = tep_db_prepare_input($_POST['a_state']);
+    $a_telephone = tep_db_prepare_input($_POST['a_telephone']);
+    $a_fax = tep_db_prepare_input($_POST['a_fax']);
+    $a_homepage = tep_db_prepare_input($_POST['a_homepage']);
+    $a_password = tep_db_prepare_input($_POST['a_password']);
 
+// BOF: MOD - Country-State Selector
+	if ($process) {
+// EOF: MOD - Country-State Selector
     $error = false; // reset error flag
 
     if (ACCOUNT_GENDER == 'true') {
@@ -135,24 +134,6 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
       $entry_city_error = false;
     }
 
-    if (is_numeric($country) == false) {
-      $error = true;
-
-      $messageStack->add('create_account', ENTRY_COUNTRY_ERROR);
-    }
-
-    if (ACCOUNT_STATE == 'true') {
-      // +Country-State Selector
-      if ($zone_id == 0) {
-      // -Country-State Selector
-
-        if (strlen($state) < ENTRY_STATE_MIN_LENGTH) {
-          $error = true;
-
-          $messageStack->add('create_account', ENTRY_STATE_ERROR);
-        }
-      }
-    }
     if (strlen($a_telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
       $error = true;
       $entry_telephone_error = true;
@@ -254,15 +235,22 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
       tep_redirect(tep_href_link(FILENAME_AFFILIATE_DETAILS_OK, '', 'SSL'));
     }
   }
+ // +Country-State Selector 
+if (!isset($country)){$country = DEFAULT_COUNTRY;}
+// -Country-State Selector
 // BOF: MOD - Country-State Selector
  }
-if ($HTTP_POST_VARS['action'] == 'refresh') {$state = '';}
-if (!isset($country)){$country = DEFAULT_COUNTRY;}
+if (isset($_POST['action']) && $_POST['action'] == 'refresh') { $state = ''; }
+if (!isset($country)) { $country = DEFAULT_COUNTRY; }
 // EOF: MOD - Country-State Selector
-  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_AFFILIATE_DETAILS, '', 'SSL'));
+
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_AFFILIATE_DETAILS, '', 'SSL'));
 
-  $content = affiliate_details;
-  include (bts_select('main', $content_template)); // BTSv1.5
+  $content = 'affiliate_details';
+  include (bts_select('main')); // BTSv1.5
+
   require(DIR_WS_INCLUDES . 'application_bottom.php');
+// +Country-State Selector 
+}
+// -Country-State Selector 
 ?>

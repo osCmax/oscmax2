@@ -1,27 +1,23 @@
 <?php
 /*
-  $Id: affiliate_banners.php,v 2.00 2003/10/12
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Affiliate Program');
-define('NAVBAR_TITLE_2', 'Newsletter Subscriptions');
+define('NAVBAR_TITLE_1','Programa de afiliados');
+define('NAVBAR_TITLE_2','Suscripción al boletín');
 
-define('HEADING_TITLE', 'Newsletter Subscriptions');
+define('HEADING_TITLE','Suscripción al boletín');
 
-define('MY_NEWSLETTERS_TITLE', 'My Newsletter Subscriptions');
-define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER', 'Affiliate Newsletter');
-define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER_DESCRIPTION', 'Including affiliate news, new products, special offers, and other promotional announcements.');
+define('MY_NEWSLETTERS_TITLE','Mi suscripción al boletín');
+define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER','Boletín de afiliado');
+define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER_DESCRIPTION','Incluyendo noticias de afiliados, nuevos productos, ofertas especiales y otros anuncios promocionales.');
 
-define('SUCCESS_NEWSLETTER_UPDATED', 'Your newsletter subscriptions have been successfully updated.');
+define('SUCCESS_NEWSLETTER_UPDATED','Su suscripción al boletín se ha actualizado correctamente.');
 ?>

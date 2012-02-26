@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_clicks.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -36,16 +32,17 @@ $Id: affiliate_clicks.php 14 2006-07-28 17:42:07Z user $
     left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on (pd.products_id = p.products_id and pd.language_id = '" . $languages_id . "') 
     where a.affiliate_id = '" . $affiliate_id . "'  ORDER BY a.affiliate_clientdate desc
     ";
-  $affiliate_clickthroughs_split = new splitPageResults($affiliate_clickthroughs_raw, MAX_DISPLAY_SEARCH_RESULTS);
+  $affiliate_clickthroughs_split = new splitPageResults($affiliate_clickthroughs_raw, MAX_CATALOG_DISPLAY_SEARCH_RESULTS);
 
   $affiliate_clickthroughs_numrows_raw = "select count(*) as count from " . TABLE_AFFILIATE_CLICKTHROUGHS . " where affiliate_id = '" . $affiliate_id . "'";
   $affiliate_clickthroughs_query = tep_db_query($affiliate_clickthroughs_numrows_raw);
   $affiliate_clickthroughs_numrows = tep_db_fetch_array($affiliate_clickthroughs_query);
   $affiliate_clickthroughs_numrows =$affiliate_clickthroughs_numrows['count'];
 
-  $content = affiliate_clicks;
+  $content = 'affiliate_clicks';
    
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 
 ?>

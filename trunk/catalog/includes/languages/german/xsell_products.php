@@ -1,16 +1,16 @@
 <?php
 /*
-  $Id: xsell_products.php, v1
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-  define('TEXT_BUY', 'Buy 1 \'');
-  define('TEXT_NOW', '\' now');
+  define('TEXT_BUY','1 x \'');
+  define('TEXT_NOW','\' jetzt kaufen');
 
 ?>

@@ -1,34 +1,30 @@
 <?php
 /*
-$Id: login.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-if ($HTTP_GET_VARS['origin'] == FILENAME_CHECKOUT_PAYMENT) {
-  define('NAVBAR_TITLE', 'Order');
-  define('HEADING_TITLE', 'Ordering online is easy.');
-  define('TEXT_STEP_BY_STEP', 'We\'ll walk you through the process, step by step.');
-} else {
-  define('NAVBAR_TITLE', 'Login');
-  define('HEADING_TITLE', 'Welcome, Please Sign In');
-  define('TEXT_STEP_BY_STEP', ''); // should be empty
-}
+define('TEXT_CREATE_FIRST_ADMINISTRATOR', 'No administrators exist in the database table. Please fill in the following information to create the first administrator. (A manual login is still required after this step)');
 
+define('ERROR_INVALID_ADMINISTRATOR', 'Error: Invalid administrator login attempt.');
+
+define('BUTTON_LOGIN', 'Login');
+define('BUTTON_CREATE_ADMINISTRATOR', 'Create Administrator');
+define('NAVBAR_TITLE', 'Login');
+define('HEADING_TITLE', 'Admin Login');
+define('TEXT_STEP_BY_STEP', ''); // should be empty
 define('HEADING_RETURNING_ADMIN', 'Login Panel:');
 define('HEADING_PASSWORD_FORGOTTEN', 'Password Forgotten:');
 define('TEXT_RETURNING_ADMIN', 'Staff only!');
-define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
 define('ENTRY_USERNAME', 'Username:');
-define('ENTRY_PASSWORD', 'Password:');
 define('ENTRY_FIRSTNAME', 'First Name:');
 define('ENTRY_LASTNAME', 'Last Name:');
-define('IMAGE_BUTTON_LOGIN', 'Submit');
 
 define('TEXT_PASSWORD_FORGOTTEN', 'Password forgotten?');
 
@@ -39,4 +35,6 @@ define('TEXT_FORGOTTEN_SUCCESS', 'The new password have sent to your email addre
 
 define('ADMIN_EMAIL_SUBJECT', 'New Password');
 define('ADMIN_EMAIL_TEXT', 'Hi %s,' . "\n\n" . 'You can access the admin panel with the following password. Once you access the admin, please change your password!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is an automated response, please do not reply!');
+
+define('IMAGE_BUTTON_LOGIN', 'Login');
 ?>

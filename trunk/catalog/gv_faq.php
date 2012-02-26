@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: gv_faq.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Gift Voucher System v1.0
   Copyright 2006 osCMax2001, 2002 Ian C Wilson
@@ -27,7 +27,8 @@ $Id: gv_faq.php 14 2006-07-28 17:42:07Z user $
 
   $content = CONTENT_GV_FAQ;
 
-  include (bts_select('main', $content_template)); // BTSv1.5
+  include (bts_select('main')); // BTSv1.5
+
 
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 
   ?>

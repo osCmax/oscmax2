@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: order_history.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -20,11 +20,17 @@ $Id: order_history.php 3 2006-05-27 04:59:07Z user $
 ?>
 <!-- customer_orders //-->
 <?php
-      $boxHeading = BOX_HEADING_CUSTOMER_ORDERS;
-      $corner_left = 'square';
-      $corner_right = 'square';
-      $box_base_name = 'order_history'; // for easy unique box template setup (added BTSv1.2)
-      $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
+  $boxHeading = BOX_HEADING_CUSTOMER_ORDERS;
+  
+  $corner_top_left = 'rounded';
+  $corner_top_right = 'rounded';
+  $corner_bottom_left = 'rounded';
+  $corner_bottom_right = 'rounded'; 
+  
+  $boxContent_attributes = '';
+  $boxLink = '<a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY) . '">' . tep_image(bts_select('images', 'infobox/arrow_right.png'), ICON_ARROW_RIGHT) . '</a>';
+  $box_base_name = 'order_history'; // for easy unique box template setup (added BTSv1.2)  
+  $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
       $product_ids = '';
       while ($orders = tep_db_fetch_array($orders_query)) {
@@ -41,10 +47,6 @@ $Id: order_history.php 3 2006-05-27 04:59:07Z user $
                                    '  </tr>';
       }
       $boxContent .= '</table>';
-
-
-
-
 
 include (bts_select('boxes', $box_base_name)); // BTS 1.5
     }

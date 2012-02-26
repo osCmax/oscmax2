@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_sales.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -19,17 +15,17 @@ $Id: affiliate_sales.php 14 2006-07-28 17:42:07Z user $
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
-  if ($HTTP_GET_VARS['acID'] > 0) {
+  if ($_GET['acID'] > 0) {
 
     $affiliate_sales_raw = "
       select asale.*, os.orders_status_name as orders_status, a.affiliate_firstname, a.affiliate_lastname from " . TABLE_AFFILIATE_SALES . " asale 
       left join " . TABLE_ORDERS . " o on (asale.affiliate_orders_id = o.orders_id) 
       left join " . TABLE_ORDERS_STATUS . " os on (o.orders_status = os.orders_status_id and language_id = " . $languages_id . ") 
       left join " . TABLE_AFFILIATE . " a on (a.affiliate_id = asale.affiliate_id) 
-      where asale.affiliate_id = '" . $HTTP_GET_VARS['acID'] . "' 
+      where asale.affiliate_id = '" . $_GET['acID'] . "' 
       order by affiliate_date desc 
       ";
-    $affiliate_sales_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $affiliate_sales_raw, $affiliate_sales_numrows);
+    $affiliate_sales_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $affiliate_sales_raw, $affiliate_sales_numrows);
 
   } else {
 
@@ -40,7 +36,7 @@ $Id: affiliate_sales.php 14 2006-07-28 17:42:07Z user $
       left join " . TABLE_AFFILIATE . " a  on (a.affiliate_id = asale.affiliate_id) 
       order by affiliate_date desc 
       ";
-    $affiliate_sales_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $affiliate_sales_raw, $affiliate_sales_numrows);
+    $affiliate_sales_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $affiliate_sales_raw, $affiliate_sales_numrows);
   }
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -49,8 +45,9 @@ $Id: affiliate_sales.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -71,7 +68,7 @@ $Id: affiliate_sales.php 14 2006-07-28 17:42:07Z user $
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
             <td class="pageHeading" align="right">&nbsp;</td>
 <?php 
-  if ($HTTP_GET_VARS['acID'] > 0) {
+  if ($_GET['acID'] > 0) {
 ?>
             <td class="pageHeading" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_STATISTICS, tep_get_all_get_params(array('action'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
 <?php
@@ -130,8 +127,8 @@ $Id: affiliate_sales.php 14 2006-07-28 17:42:07Z user $
           <tr>
             <td colspan="7"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td class="smallText" valign="top"><?php echo $affiliate_sales_split->display_count($affiliate_sales_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_SALES); ?></td>
-                <td class="smallText" align="right"><?php echo $affiliate_sales_split->display_links($affiliate_sales_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></td>
+                <td class="smallText" valign="top"><?php echo $affiliate_sales_split->display_count($affiliate_sales_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_SALES); ?></td>
+                <td class="smallText" align="right"><?php echo $affiliate_sales_split->display_links($affiliate_sales_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></td>
               </tr>
             </table></td>
           </tr>

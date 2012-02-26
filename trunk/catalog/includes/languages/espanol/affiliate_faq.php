@@ -1,88 +1,84 @@
 <?php
 /*
-$Id: affiliate_faq.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program FAQ');
-define('HEADING_TITLE', 'Affiliate Program - Frequently Asked Questions');
+define('NAVBAR_TITLE','FAQ del Programa de afiliados');
+define('HEADING_TITLE','Programa de afiliados - Preguntas más frecuentes');
 
-define('TEXT_INFORMATION', '' . STORE_NAME . ' has compiled this info so that you may be better informed about our affiliate program.<br>
- If you have any questions please <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT). '">' . BOX_AFFILIATE_CONTACT . '</a> for more information.<br>
+define('TEXT_INFORMATION', '' . STORE_NAME . ' ha recopilado esta información para que pueda estar mejor informado acerca de nuestro Programa de afiliados.<br>
+ Si tiene cualquier pregunta por favor <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT). '">' . BOX_AFFILIATE_CONTACT . '</a> para más información.<br>
 <ul>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#1">Question 1?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#2">Question 2?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#3">Question 3?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#4">Question 4?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#5">Question 5?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#6">Question 6?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#7">Question 7?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#8">Question 8?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#9">Question 9?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#10">Question 10?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#11">Question 11?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#12">Question 12?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#1">¿Pregunta 1?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#2">¿Pregunta 2?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#3">¿Pregunta 3?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#4">¿Pregunta 4?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#5">¿Pregunta 5?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#6">¿Pregunta 6?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#7">¿Pregunta 7?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#8">¿Pregunta 8?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#9">¿Pregunta 9?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#10">¿Pregunta 10?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#11">¿Pregunta 11?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#12">¿Pregunta 12?</a>
 </ul>
 <hr width ="90%">
-<BR>
-<FONT COLOR="#000000" size="4"><B><U>Frequently Asked Questions</U></B></FONT>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 1?</font><a name="1"></a><br>
-Answer 1.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<br />
+<font color="#000000" size="4"><b><u>Preguntas más frecuentes - FAQ</u></b></font>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 1?</font><a name="1"></a><br>
+Respuesta 1.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 2?</font><a name="2"></a><br>
-Answer 2.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 2?</font><a name="2"></a><br>
+Respuesta 2.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 3?</font><a name="3"></a><br>
-Answer 3.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 3?</font><a name="3"></a><br>
+Respuesta 3.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 4?</font><a name="4"></a><br>
-Answer 4.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 4?</font><a name="4"></a><br>
+Respuesta 4.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 5?</font><a name="5"></a><br>
-Answer 5.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 5?</font><a name="5"></a><br>
+Respuesta 5.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 6?</font><a name="6"></a><br>
-Answer 6.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 6?</font><a name="6"></a><br>
+Respuesta 6.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 7?</font><a name="7"></a><br>
-Answer 7.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 7?</font><a name="7"></a><br>
+Respuesta 7.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 8?</font><a name="8"></a><br>
-Answer 8.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 8?</font><a name="8"></a><br>
+Respuesta 8.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 9?</font><a name="9"></a><br>
-Answer 9.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 9?</font><a name="9"></a><br>
+Respuesta 9.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 10?</font><a name="10"></a><br>
-Answer 10.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 10?</font><a name="10"></a><br>
+Respuesta 10.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 11?</font><a name="11"></a><br>
-Answer 11.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 11?</font><a name="11"></a><br>
+Respuesta 11.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 12?</font><a name="12"></a><br>
-Answer 12.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">¿Pregunta 12?</font><a name="12"></a><br>
+Respuesta 12.</p>
+<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">arriba</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
 ');
 ?>

@@ -1,15 +1,11 @@
 <?php
 /*
-  $Id: affiliate_account_details.php,v 2.0 2002/09/29 SDK
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -22,7 +18,7 @@
     <td class="formAreaTitle"><?php echo CATEGORY_PERSONAL; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
 <?php
@@ -145,7 +141,7 @@
     <td class="formAreaTitle"><br><?php echo CATEGORY_COMPANY; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -195,7 +191,7 @@
     <td class="formAreaTitle"><br><?php echo CATEGORY_PAYMENT_DETAILS; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
 <?php
@@ -346,7 +342,7 @@
     <td class="formAreaTitle"><br><?php echo CATEGORY_ADDRESS; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -445,7 +441,7 @@
   }
 ?>
           <tr>
-            <td class="main" width="230">&nbsp;<?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
+            <td class="main" width="230">&nbsp;<?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></span></td>
 			<?php // +Country-State Selector ?>
             <td class="main">&nbsp;&nbsp;<?php echo tep_get_country_list('a_country', $affiliate['affiliate_country_id'],'onChange="getStates(this.value,\'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
             <?php // -Country-State Selector ?>
@@ -463,7 +459,7 @@
     <td class="formAreaTitle"><br><?php echo CATEGORY_CONTACT; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -531,7 +527,7 @@
     <td class="formAreaTitle"><br><?php echo CATEGORY_PASSWORD; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -540,12 +536,12 @@
 <?php
     if ($error == true) {
       if ($entry_password_error == true) {
-        echo tep_draw_password_field('a_password') . '&nbsp;<span class="inputRequirement">' . ENTRY_PASSWORD_ERROR . '</span>';
+        echo tep_draw_password_field_st('a_password') . '&nbsp;<span class="inputRequirement">' . ENTRY_PASSWORD_ERROR . '</span>';
       } else {
         echo PASSWORD_HIDDEN . tep_draw_hidden_field('a_password') . tep_draw_hidden_field('a_confirmation');
       }
     } else {
-      echo tep_draw_password_field('a_password') . '&nbsp;<span class="inputRequirement">' . ENTRY_PASSWORD_TEXT . '</span>';
+      echo tep_draw_password_field_st('a_password') . '&nbsp;<span class="inputRequirement">' . ENTRY_PASSWORD_TEXT . '</span>';
     }
 ?>
             </td>
@@ -575,7 +571,7 @@
         <td class="main"><b><?php echo CATEGORY_OPTIONS; ?></b></td>
       </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -603,25 +599,36 @@
   <tr>
     <td class="formAreaTitle"><br></td>
   </tr>
-  <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+
       <tr>
-        <td class="main"><table border="0" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="main">&nbsp;</td>
-            <td class="main">&nbsp;
-<?php 
-	echo tep_draw_checkbox_field('a_agb', $value = '1', $checked = $affiliate['affiliate_agb']) . ENTRY_AFFILIATE_ACCEPT_AGB . '<b><a href="javascript:popupWindow(\'' . tep_href_link(FILENAME_AFFILIATE_TERMS_POPUP, '', 'SSL') . '\')">' . ENTRY_AFFILIATE_ACCEPT_AGB_TEXT . '</a></b>';
-    if ($entry_agb_error == true) {
-      echo "<br>".ENTRY_AFFILIATE_AGB_ERROR;
-    }
-?>
-            </td>
+        <td>
+          <table border="0" width="100%" cellspacing="1" cellpadding="2">
+            <tr>
+              <td id="MATtd" class="messageStackAlert" align="center"><?php echo tep_draw_checkbox_field('a_agb', $value = '1', $checked = $affiliate['affiliate_agb'], 'id="MAT" onClick="javascript:switchMAT()"') . ENTRY_AFFILIATE_ACCEPT_AGB . '<b>'; ?><a id="conditions" href="<?php echo $HTTP_SERVER . DIR_WS_CATALOG . 'conditions.php?info_id=14&amp;languages_id=' . (isset($languages_id) ? $languages_id : '1'); ?>" title="<?php echo ENTRY_AFFILIATE_ACCEPT_AGB_TEXT; ?>"><?php echo ENTRY_AFFILIATE_ACCEPT_AGB_TEXT; ?></a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+          <tr class="infoBoxContents">
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+                <td align="right">
+                  <span id="enableMAT"><?php echo tep_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></span>
+                  <span id="disableMAT" style="cursor: pointer;"><?php echo tep_image_button('button_MAT.gif', IMAGE_BUTTON_MAT, ' onClick="javascript:warnMAT()"'); ?></span>
+                </td>
+                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+              </tr>
+            </table></td>
           </tr>
         </table></td>
       </tr>
-    </table></td>
-  </tr>
 <?php
   }
 ?>

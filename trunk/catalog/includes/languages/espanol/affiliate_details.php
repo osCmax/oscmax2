@@ -1,21 +1,17 @@
 <?php
 /*
-$Id: affiliate_details.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program Account Details');
-define('NAVBAR_TITLE', 'The Affiliate Program');
-define('NAVBAR_TITLE_2', 'Editar Affiliate Cuenta');
-define('HEADING_TITLE', 'The Affiliate Program - Your Account Details<br><small>You may edit any information below:</small>');
+define('NAVBAR_TITLE','Datos de la cuenta del Programa de afiliados');
+define('NAVBAR_TITLE_1', 'Programa de afiliados');
+define('NAVBAR_TITLE_2', 'Editar cuenta de afiliado');
+define('HEADING_TITLE','Programa de Afiliados - datos de cuenta <br> <small>Puede editar cualquier información a continuación:</small>');
 ?>

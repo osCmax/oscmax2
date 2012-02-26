@@ -1,15 +1,11 @@
 <?php
 /*
-$Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -28,7 +24,7 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
     $payments_status_array[$payments_status['affiliate_payment_status_id']] = $payments_status['affiliate_payment_status_name'];
   }
 
-  switch ($HTTP_GET_VARS['action']) {
+  switch ($_GET['action']) {
     case 'start_billing':
 // Billing can be a lengthy process
       tep_set_time_limit(0);
@@ -130,8 +126,8 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
       tep_redirect(tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('action')) . 'action=edit'));
       break;
     case 'update_payment':
-      $pID = tep_db_prepare_input($HTTP_GET_VARS['pID']);
-      $status = tep_db_prepare_input($HTTP_POST_VARS['status']);
+      $pID = tep_db_prepare_input($_GET['pID']);
+      $status = tep_db_prepare_input($_POST['status']);
 
       $payment_updated = false;
       $check_status_query = tep_db_query("select af.affiliate_email_address, ap.affiliate_lastname, ap.affiliate_firstname, ap.affiliate_payment_status, ap.affiliate_payment_date, ap.affiliate_payment_date from " . TABLE_AFFILIATE_PAYMENT . " ap, " . TABLE_AFFILIATE . " af where affiliate_payment_id = '" . tep_db_input($pID) . "' and af.affiliate_id = ap.affiliate_id ");
@@ -140,7 +136,7 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
         tep_db_query("update " . TABLE_AFFILIATE_PAYMENT . " set affiliate_payment_status = '" . tep_db_input($status) . "', affiliate_last_modified = now() where affiliate_payment_id = '" . tep_db_input($pID) . "'");
         $affiliate_notified = '0';
 // Notify Affiliate
-        if ($HTTP_POST_VARS['notify'] == 'on') {
+        if ($_POST['notify'] == 'on') {
           $email = STORE_NAME . "\n" . EMAIL_SEPARATOR . "\n" . EMAIL_TEXT_AFFILIATE_PAYMENT_NUMBER . ' ' . $pID . "\n" . EMAIL_TEXT_INVOICE_URL . ' ' . tep_catalog_href_link(FILENAME_CATALOG_AFFILIATE_PAYMENT_INFO, 'payment_id=' . $pID, 'SSL') . "\n" . EMAIL_TEXT_PAYMENT_BILLED . ' ' . tep_date_long($check_status['affiliate_payment_date']) . "\n\n" . sprintf(EMAIL_TEXT_STATUS_UPDATE, $payments_status_array[$status]);
           tep_mail($check_status['affiliate_firstname'] . ' ' . $check_status['affiliate_lastname'], $check_status['affiliate_email_address'], EMAIL_TEXT_SUBJECT, nl2br($email), STORE_OWNER, AFFILIATE_EMAIL_ADDRESS);
           $affiliate_notified = '1';
@@ -157,7 +153,7 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
       tep_redirect(tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('action')) . 'action=edit'));
       break;
     case 'deleteconfirm':
-      $pID = tep_db_prepare_input($HTTP_GET_VARS['pID']);
+      $pID = tep_db_prepare_input($_GET['pID']);
 
       tep_db_query("delete from " . TABLE_AFFILIATE_PAYMENT . " where affiliate_payment_id = '" . tep_db_input($pID) . "'");
       tep_db_query("delete from " . TABLE_AFFILIATE_PAYMENT_STATUS_HISTORY . " where affiliate_payment_id = '" . tep_db_input($pID) . "'");
@@ -166,8 +162,8 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
       break;
   }
 
-  if ( ($HTTP_GET_VARS['action'] == 'edit') && tep_not_null($HTTP_GET_VARS['pID']) ) {
-    $pID = tep_db_prepare_input($HTTP_GET_VARS['pID']);
+  if ( ($_GET['action'] == 'edit') && tep_not_null($_GET['pID']) ) {
+    $pID = tep_db_prepare_input($_GET['pID']);
     $payments_query = tep_db_query("select p.*,  a.affiliate_payment_check, a.affiliate_payment_paypal, a.affiliate_payment_bank_name, a.affiliate_payment_bank_branch_number, a.affiliate_payment_bank_swift_code, a.affiliate_payment_bank_account_name, a.affiliate_payment_bank_account_number from " .  TABLE_AFFILIATE_PAYMENT . " p, " . TABLE_AFFILIATE . " a where affiliate_payment_id = '" . tep_db_input($pID) . "' and a.affiliate_id = p.affiliate_id");
     $payments_exists = true;
     if (!$payments = tep_db_fetch_array($payments_query)) {
@@ -182,8 +178,9 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php
   require(DIR_WS_INCLUDES . 'header.php');
@@ -193,15 +190,18 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
 <!-- body //-->
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
-    <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
+    <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+      <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
 <!-- left_navigation //-->
 <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
 <!-- left_navigation_eof //-->
-    </table></td>
+      </table>
+    </td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <td width="100%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
-  if ( ($HTTP_GET_VARS['action'] == 'edit') && ($payments_exists) ) {
+  if ( ($_GET['action'] == 'edit') && ($payments_exists) ) {
     $affiliate_address['firstname'] = $payments['affiliate_firstname'];
     $affiliate_address['lastname'] = $payments['affiliate_lastname'];
     $affiliate_address['street_address'] = $payments['affiliate_street_address'];
@@ -215,7 +215,7 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
             <td class="pageHeading" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('action'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
           </tr>
         </table></td>
@@ -320,9 +320,9 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
              '            <td class="smallText" align="center">' . tep_date_short($affiliate_history['affiliate_date_added']) . '</td>' . "\n" .
              '            <td class="smallText" align="center">';
         if ($affiliate_history['affiliate_notified'] == '1') {
-          echo tep_image(DIR_WS_ICONS . 'tick.gif', ICON_TICK);
+          echo tep_image(DIR_WS_ICONS . 'tick.png', ICON_TICK);
         } else {
-          echo tep_image(DIR_WS_ICONS . 'cross.gif', ICON_CROSS);
+          echo tep_image(DIR_WS_ICONS . 'cross.png', ICON_CROSS);
         }
         echo '          </tr>' . "\n";
       }
@@ -335,7 +335,7 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
         </table></td>
       </tr>
       <tr>
-        <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_INVOICE, 'pID=' . $HTTP_GET_VARS['pID']) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('action'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
+        <td colspan="2" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_INVOICE, 'pID=' . $_GET['pID']) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('action'))) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
       </tr>
 <?php
   } else {
@@ -344,17 +344,10 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
-            <td class="pageHeading"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, 'pID=' . $pInfo->affiliate_payment_id. '&action=start_billing' ) . '">' . tep_image_button('button_affiliate_billing.gif', IMAGE_AFFILIATE_BILLING) . '</a>'; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
-            <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <tr><?php echo tep_draw_form('orders', FILENAME_AFFILIATE_PAYMENT, '', 'get'); ?>
-                <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('sID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?></td>
-              </form></tr>
-              <tr><?php echo tep_draw_form('status', FILENAME_AFFILIATE_PAYMENT, '', 'get'); ?>
-                <td class="smallText" align="right"><?php echo HEADING_TITLE_STATUS . ' ' . tep_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_PAYMENTS)), $payments_statuses), '', 'onChange="this.form.submit();"'); ?></td>
-              </form></tr>
-            </table></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
+            <td class="pageHeading"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, 'pID=' . $pInfo->affiliate_payment_id. '&amp;action=start_billing' ) . '">' . tep_image_button('button_affiliate_billing.gif', IMAGE_AFFILIATE_BILLING) . '</a>'; ?></td>
+            <td class="pageHeading" align="right">&nbsp;</td>
+            <td class="smallText" align="right"><?php echo tep_draw_form('status', FILENAME_AFFILIATE_PAYMENT, '', 'get'); ?><?php echo HEADING_TITLE_STATUS . ' ' . tep_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_PAYMENTS)), $payments_statuses), '', 'onChange="this.form.submit();"'); ?></form>&nbsp;&nbsp;<?php echo tep_draw_form('orders', FILENAME_AFFILIATE_PAYMENT, '', 'get'); ?><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('sID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?></form></td>
           </tr>
         </table></td>
       </tr>
@@ -371,35 +364,35 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-    if ($HTTP_GET_VARS['sID']) {
+    if ($_GET['sID']) {
       // Search only payment_id by now
-      $sID = tep_db_prepare_input($HTTP_GET_VARS['sID']);
+      $sID = tep_db_prepare_input($_GET['sID']);
       $payments_query_raw = "select p.* , s.affiliate_payment_status_name from " . TABLE_AFFILIATE_PAYMENT . " p , " . TABLE_AFFILIATE_PAYMENT_STATUS . " s where p.affiliate_payment_id = '" . tep_db_input($sID) . "' and p.affiliate_payment_status = s.affiliate_payment_status_id and s.affiliate_language_id = '" . $languages_id . "' order by p.affiliate_payment_id DESC";
-    } elseif (is_numeric($HTTP_GET_VARS['status'])) {
-      $status = tep_db_prepare_input($HTTP_GET_VARS['status']);
+    } elseif (is_numeric($_GET['status'])) {
+      $status = tep_db_prepare_input($_GET['status']);
       $payments_query_raw = "select p.* , s.affiliate_payment_status_name from " . TABLE_AFFILIATE_PAYMENT . " p , " . TABLE_AFFILIATE_PAYMENT_STATUS . " s where s.affiliate_payment_status_id = '" . tep_db_input($status) . "' and p.affiliate_payment_status = s.affiliate_payment_status_id and s.affiliate_language_id = '" . $languages_id . "' order by p.affiliate_payment_id DESC";
     } else {
       $payments_query_raw = "select p.* , s.affiliate_payment_status_name from " . TABLE_AFFILIATE_PAYMENT . " p , " . TABLE_AFFILIATE_PAYMENT_STATUS . " s where p.affiliate_payment_status = s.affiliate_payment_status_id and s.affiliate_language_id = '" . $languages_id . "' order by p.affiliate_payment_id DESC";
     }
-    $payments_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $payments_query_raw, $payments_query_numrows);
+    $payments_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $payments_query_raw, $payments_query_numrows);
     $payments_query = tep_db_query($payments_query_raw);
     while ($payments = tep_db_fetch_array($payments_query)) {
-      if (((!$HTTP_GET_VARS['pID']) || ($HTTP_GET_VARS['pID'] == $payments['affiliate_payment_id'])) && (!$pInfo)) {
+      if (((!$_GET['pID']) || ($_GET['pID'] == $payments['affiliate_payment_id'])) && (!$pInfo)) {
         $pInfo = new objectInfo($payments);
       }
 
       if ( (is_object($pInfo)) && ($payments['affiliate_payment_id'] == $pInfo->affiliate_payment_id) ) {
-        echo '              <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'hand\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID', 'action')) . 'pID=' . $pInfo->affiliate_payment_id . '&action=edit') . '\'">' . "\n";
+        echo '              <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'hand\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID', 'action')) . 'pID=' . $pInfo->affiliate_payment_id . '&amp;action=edit') . '\'">' . "\n";
       } else {
         echo '              <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'hand\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID')) . 'pID=' . $payments['affiliate_payment_id']) . '\'">' . "\n";
       }
 ?>
-                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID', 'action')) . 'pID=' . $pInfo->affiliate_payment_id . '&action=edit') . '">' . tep_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $payments['affiliate_firstname'] . ' ' . $payments['affiliate_lastname']; ?></td>
+                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID', 'action')) . 'pID=' . $pInfo->affiliate_payment_id . '&amp;action=edit') . '">' . tep_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $payments['affiliate_firstname'] . ' ' . $payments['affiliate_lastname']; ?></td>
                 <td class="dataTableContent" align="right"><?php echo $currencies->format(strip_tags($payments['affiliate_payment'])); ?></td>
                 <td class="dataTableContent" align="right"><?php echo $currencies->format(strip_tags($payments['affiliate_payment'] + $payments['affiliate_payment_tax'])); ?></td>
                 <td class="dataTableContent" align="center"><?php echo tep_date_short($payments['affiliate_payment_date']); ?></td>
                 <td class="dataTableContent" align="right"><?php echo $payments['affiliate_payment_status_name']; ?></td>
-                <td class="dataTableContent" align="right"><?php if ( (is_object($pInfo)) && ( $payments['affiliate_payment_id'] == $pInfo->affiliate_payment_id) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID')) . 'pID=' . $payments['affiliate_payment_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($pInfo)) && ( $payments['affiliate_payment_id'] == $pInfo->affiliate_payment_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID')) . 'pID=' . $payments['affiliate_payment_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
@@ -407,8 +400,8 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
               <tr>
                 <td colspan="6"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td class="smallText" valign="top"><?php echo $payments_split->display_count($payments_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_PAYMENTS); ?></td>
-                    <td class="smallText" align="right"><?php echo $payments_split->display_links($payments_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page'], tep_get_all_get_params(array('page', 'pID', 'action'))); ?></td>
+                    <td class="smallText" valign="top"><?php echo $payments_split->display_count($payments_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_PAYMENTS); ?></td>
+                    <td class="smallText" align="right"><?php echo $payments_split->display_links($payments_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'pID', 'action'))); ?></td>
                   </tr>
                 </table></td>
               </tr>
@@ -416,11 +409,11 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
 <?php
   $heading = array();
   $contents = array();
-  switch ($HTTP_GET_VARS['action']) {
+  switch ($_GET['action']) {
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_PAYMENT . '</b>');
 
-      $contents = array('form' => tep_draw_form('payment', FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID', 'action')) . 'pID=' . $pInfo->affiliate_payment_id. '&action=deleteconfirm'));
+      $contents = array('form' => tep_draw_form('payment', FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID', 'action')) . 'pID=' . $pInfo->affiliate_payment_id. '&amp;action=deleteconfirm'));
       $contents[] = array('text' => TEXT_INFO_DELETE_INTRO . '<br>');
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID', 'action')) . 'pID=' . $pInfo->affiliate_payment_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
@@ -428,7 +421,7 @@ $Id: affiliate_payment.php 14 2006-07-28 17:42:07Z user $
       if (is_object($pInfo)) {
         $heading[] = array('text' => '<b>[' . $pInfo->affiliate_payment_id . ']&nbsp;&nbsp;' . tep_datetime_short($pInfo->affiliate_payment_date) . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID', 'action')) . 'pID=' . $pInfo->affiliate_payment_id . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID', 'action')) . 'pID=' . $pInfo->affiliate_payment_id  . '&action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID', 'action')) . 'pID=' . $pInfo->affiliate_payment_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_AFFILIATE_PAYMENT, tep_get_all_get_params(array('pID', 'action')) . 'pID=' . $pInfo->affiliate_payment_id  . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
         $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_AFFILIATE_INVOICE, 'pID=' . $pInfo->affiliate_payment_id ) . '" TARGET="_blank">' . tep_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> ');
       }
       break;

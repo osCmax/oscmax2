@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: create_order_details.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -68,12 +68,14 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
     <td class="formAreaTitle"><?php echo CATEGORY_CORRECT; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
-      <tr>
-        <td class="main"><table border="0" cellspacing="0" cellpadding="2">
-                    <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_CUSTOMERS_ID; ?></td>
-            <td class="main">&nbsp;
+    <td class="main">
+      <table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+        <tr>
+          <td class="main">
+            <table border="0" cellspacing="0" cellpadding="2">
+              <tr>
+                <td class="main" width="150">&nbsp;<?php echo ENTRY_CUSTOMERS_ID; ?></td>
+                <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
     echo $account['customers_id'];
@@ -81,11 +83,12 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
   } else {
     echo tep_draw_input_field('customers_id', $account['customers_id']) . '&nbsp;' . ENTRY_CUSTOMERS_ID_TEXT;
   }
-?></td>
-          </tr>
-		  <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_FIRST_NAME; ?></td>
-            <td class="main">&nbsp;
+?>
+                </td>
+              </tr>
+		      <tr>
+                <td class="main">&nbsp;<?php echo ENTRY_FIRST_NAME; ?></td>
+                <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
     echo $account['customers_firstname'];
@@ -116,7 +119,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
   if ($is_read_only) {
     echo $account['customers_email_address'];
   } else {
-    echo tep_draw_input_field('email_address', $account['customers_email_address']) . '&nbsp;' . ENTRY_EMAIL_ADDRESS_TEXT;
+    echo tep_draw_input_field('email_address', $account['customers_email_address'], ' size="40"') . '&nbsp;' . ENTRY_EMAIL_ADDRESS_TEXT;
   }
 ?></td>
           </tr>
@@ -160,7 +163,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_STREET_ADDRESS; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_STREET_ADDRESS; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
@@ -220,7 +223,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
     if ($is_read_only) {
       echo sbs_get_zone_name($address['entry_country_id'], $account['entry_zone_id'], $account['entry_state']);
     } else {
-      echo tep_draw_input_field('state', sbs_get_zone_name($address['entry_country_id'], $address['entry_zone_id'], $address['entry_state'])) . '&nbsp; *';
+      echo tep_draw_input_field('state', sbs_get_zone_name($address['entry_country_id'], $address['entry_zone_id'], $address['entry_state'])) . '&nbsp; <font color="#FF0000">*</font>';
     }
 ?></td>
              </tr>
@@ -234,7 +237,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 	if ($is_read_only) {
            echo tep_get_country_name($address['entry_country_id']);
 	} else { 
-	echo tep_draw_input_field('country', tep_get_country_name($address['entry_country_id'])) . '&nbsp; *' ;
+	echo tep_draw_input_field('country', tep_get_country_name($address['entry_country_id'])) . '&nbsp; <font color="#FF0000">*</font>' ;
 
      }
 ?>
@@ -258,7 +261,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
+            <td class="main" width="150">&nbsp;<?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
             <td class="main">&nbsp;
 <?php
   if ($is_read_only) {
@@ -291,8 +294,8 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
             <tr>
               <td class="main"><table border="0" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td class="main">&nbsp;<?php echo ENTRY_CURRENCY; ?></td>
-                    <td class="main"><?php echo $SelectCurrencyBox ?></td>
+                    <td class="main" width="150">&nbsp;<?php echo ENTRY_CURRENCY; ?></td>
+                    <td class="main">&nbsp;<?php echo $SelectCurrencyBox ?></td>
                   </tr>
                 </table></td>
             </tr>

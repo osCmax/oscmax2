@@ -1,24 +1,15 @@
 <?php
 /*
-$Id: upsxml.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-    Original Copyright 2006 osCMax2003 Torin Walker
-    This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License
-    as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU General Public License for more details.
-    You should have received a copy of the GNU General Public License along with this program;
-    If not, you may obtain one by writing to and requesting one from:
-    The Free Software Foundation, Inc.,
-    59 Temple Place, Suite 330,
-    Boston, MA 02111-1307 USA
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-    Written by Torin Walker.
-    Some code/style borrowed from both Fritz Clapp's UPS Choice 1.7 Module,
-    and Kelvin, Kenneth, and Tom St.Croix's Canada Post 3.1 Module.
-    Insurance support by Joe McFrederick
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
 */
+
 
 // Incorporate the XML conversion library 
   if (PHP_VERSION >= '5.0.0') { // PHP 5 does not need to use call-time pass by reference
@@ -227,7 +218,7 @@ class upsxml {
 
     // class methods
     function quote($method = '') {
-        global $HTTP_POST_VARS, $order, $shipping_weight, $shipping_num_boxes, $total_weight, $boxcount, $cart, $packing;
+        global $_POST, $order, $shipping_weight, $shipping_num_boxes, $total_weight, $boxcount, $cart, $packing;
         // UPS purports that if the origin is left out, it defaults to the account's location. Yeah, right.
         $state = $order->delivery['state'];
         $zone_query = tep_db_query("select zone_code from " . TABLE_ZONES . " where zone_name = '" .  tep_db_input($order->delivery['state']) . "'");

@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: address_book_details.php 10 2006-06-22 03:56:08Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -44,12 +44,12 @@ $Id: address_book_details.php 10 2006-06-22 03:56:08Z user $
   }
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_FIRST_NAME; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('firstname', $entry['entry_firstname']) . '&nbsp;' . (tep_not_null(ENTRY_FIRST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_FIRST_NAME_TEXT . '</span>': ''); ?></td>
+            <td class="main" width="100"><?php echo ENTRY_FIRST_NAME; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('firstname', isset($entry['entry_firstname']) ? $entry['entry_firstname'] : '') . '&nbsp;' . (tep_not_null(ENTRY_FIRST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_FIRST_NAME_TEXT . '</span>': ''); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo ENTRY_LAST_NAME; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('lastname', $entry['entry_lastname']) . '&nbsp;' . (tep_not_null(ENTRY_LAST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_LAST_NAME_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('lastname', isset($entry['entry_lastname']) ? $entry['entry_lastname'] : '') . '&nbsp;' . (tep_not_null(ENTRY_LAST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_LAST_NAME_TEXT . '</span>': ''); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -59,7 +59,7 @@ $Id: address_book_details.php 10 2006-06-22 03:56:08Z user $
 ?>
           <tr>
             <td class="main"><?php echo ENTRY_COMPANY; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('company', $entry['entry_company']) . '&nbsp;' . (tep_not_null(ENTRY_COMPANY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COMPANY_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('company', isset($entry['entry_company']) ? $entry['entry_company'] : '') . '&nbsp;' . (tep_not_null(ENTRY_COMPANY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COMPANY_TEXT . '</span>': ''); ?></td>
           </tr>
 <?php // BOF: MOD - Separate Pricing Per Customer
    if (tep_not_null($entry['entry_company_tax_id'])) {
@@ -86,25 +86,25 @@ $Id: address_book_details.php 10 2006-06-22 03:56:08Z user $
 ?>
           <tr>
             <td class="main"><?php echo ENTRY_STREET_ADDRESS; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('street_address', $entry['entry_street_address']) . '&nbsp;' . (tep_not_null(ENTRY_STREET_ADDRESS_TEXT) ? '<span class="inputRequirement">' . ENTRY_STREET_ADDRESS_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('street_address', isset($entry['entry_street_address']) ? $entry['entry_street_address'] : '') . '&nbsp;' . (tep_not_null(ENTRY_STREET_ADDRESS_TEXT) ? '<span class="inputRequirement">' . ENTRY_STREET_ADDRESS_TEXT . '</span>': ''); ?></td>
           </tr>
 <?php
   if (ACCOUNT_SUBURB == 'true') {
 ?>
           <tr>
             <td class="main"><?php echo ENTRY_SUBURB; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('suburb', $entry['entry_suburb']) . '&nbsp;' . (tep_not_null(ENTRY_SUBURB_TEXT) ? '<span class="inputRequirement">' . ENTRY_SUBURB_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('suburb', isset($entry['entry_suburb']) ? $entry['entry_suburb'] : '') . '&nbsp;' . (tep_not_null(ENTRY_SUBURB_TEXT) ? '<span class="inputRequirement">' . ENTRY_SUBURB_TEXT . '</span>': ''); ?></td>
           </tr>
 <?php
   }
 ?>
           <tr>
             <td class="main"><?php echo ENTRY_POST_CODE; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('postcode', $entry['entry_postcode']) . '&nbsp;' . (tep_not_null(ENTRY_POST_CODE_TEXT) ? '<span class="inputRequirement">' . ENTRY_POST_CODE_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('postcode', isset($entry['entry_postcode']) ? $entry['entry_postcode'] : '') . '&nbsp;' . (tep_not_null(ENTRY_POST_CODE_TEXT) ? '<span class="inputRequirement">' . ENTRY_POST_CODE_TEXT . '</span>': ''); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo ENTRY_CITY; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('city', $entry['entry_city']) . '&nbsp;' . (tep_not_null(ENTRY_CITY_TEXT) ? '<span class="inputRequirement">' . ENTRY_CITY_TEXT . '</span>': ''); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('city', isset($entry['entry_city']) ? $entry['entry_city'] : '') . '&nbsp;' . (tep_not_null(ENTRY_CITY_TEXT) ? '<span class="inputRequirement">' . ENTRY_CITY_TEXT . '</span>': ''); ?></td>
           </tr>
 <?php
   if (ACCOUNT_STATE == 'true') {
@@ -112,25 +112,26 @@ $Id: address_book_details.php 10 2006-06-22 03:56:08Z user $
           <tr>
             <td class="main"><?php echo ENTRY_STATE; ?></td>
             <td class="main">
-<div id="states">
+                <div id="states">
 				<?php
 				// +Country-State Selector
-				echo ajax_get_zones_html($entry['entry_country_id'],($entry['entry_zone_id'] == 0 ? $entry['entry_state'] : $entry['entry_zone_id']), false);
+				echo ajax_get_zones_html($entry['entry_country_id'], ((isset($entry['entry_zone_id']) && $entry['entry_zone_id'] != 0) ? $entry['entry_zone_id'] : 0), false);
 				// -Country-State Selector
 				?>
-				</div></td>
+				</div>
+            </td>
           </tr>
 <?php
   }
 ?>
           <tr>
-            <td class="main"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
+            <td class="main"><?php echo ENTRY_COUNTRY; ?><div id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></div></td>
 			<?php // +Country-State Selector ?>
             <td class="main"><?php echo tep_get_country_list('country', $entry['entry_country_id'],'onChange="getStates(this.value,\'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); ?></td>
             <?php // -Country-State Selector ?>
           </tr>
 <?php
-  if ((isset($HTTP_GET_VARS['edit']) && ($customer_default_address_id != $HTTP_GET_VARS['edit'])) || (isset($HTTP_GET_VARS['edit']) == false) ) {
+  if ((isset($_GET['edit']) && ($customer_default_address_id != $_GET['edit'])) || (isset($_GET['edit']) == false) ) {
 ?>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

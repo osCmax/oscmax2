@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: login.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -26,9 +26,20 @@ define('TEXT_RETURNING_CUSTOMER', 'I am a returning customer.');
 define('TEXT_PASSWORD_FORGOTTEN', 'Password forgotten? Click here.');
 
 define('TEXT_LOGIN_ERROR', 'Error: No match for E-Mail Address and/or Password.');
-define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>Note:</b></font> Your &quot;Visitors Cart&quot; contents will be merged with your &quot;Members Cart&quot; contents once you have logged on. <a href="javascript:session_win();">[More Info]</a>');
+define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>Note:</b></font> The contents of your cart will remain after you have logged in.');
 
 // LINE ADDED: MOD - Separate Pricing Per Customer
 // define the email address that can change customer_group_id on login
 define('SPPC_TOGGLE_LOGIN_PASSWORD', 'root@localhost');
+define('PWA_FAIL_ACCOUNT_EXISTS','An account already exists for the email address {EMAIL_ADDRESS}. You must login here with the password for that account before proceeding to checkout.');
+
+define('HEADING_CHECKOUT','<font size="2">Proceed Directly to Checkout</font>');
+
+define('TEXT_CHECKOUT_INTRODUCTION','Proceed to Checkout without creating an account. By choosing this option none of your user information will be kept in our records, and you will not be able to review your order status, nor keep track of your previous orders.');
+
+define('PROCEED_TO_CHECKOUT','Proceed to Checkout without Registering');
+
+define('TEXT_GV_LOGIN_NEEDED', 'You need to be logged in to redeem your voucher.  Please create a new account or login below.');
+define('TEXT_REVIEW_LOGIN_NEEDED', 'You need to be logged in to write a review.  Please create a new account or login below.');
+
 ?>

@@ -1,14 +1,13 @@
 <?php
 /*
-  $Id: login.php,v 1.2.2.1 2005/06/12 00:04:34 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  Translated by Gunt - Contact : webmaster@webdesigner.com.fr
 */
 
 define('NAVBAR_TITLE', 'Ouverture de session');
@@ -24,7 +23,7 @@ define('TEXT_RETURNING_CUSTOMER', 'J\'ai d&eacute;j&agrave; command&eacute;.');
 define('TEXT_PASSWORD_FORGOTTEN', 'Vous avez oubli&eacute; votre mot de passe? Cliquez ici.');
 
 define('TEXT_LOGIN_ERROR', 'Erreur: aucun r&eacute;sultat &agrave; cette adresse &eacute;lectronique et/ou mot de passe.');
-define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>REMARQUE:</b></font> Le contenu de votre &quot;panier visiteurs&quot; sera ajout&eacute; &agrave; celui de votre &quot;panier membres&quot; d&egrave;s que vous aurez ouvert une session. <a href="javascript:session_win();">[Plus d\'info]</a>');
+define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>REMARQUE:</b></font> Le contenu de votre &quot;panier visiteurs&quot; sera ajout&eacute; &agrave; celui de votre &quot;panier membres&quot; d&egrave;s que vous aurez ouvert une session.');
 
 //BOF - Checkout Without Account v0.70 changes
 define('PWA_FAIL_ACCOUNT_EXISTS', 'Un compte existe déjà pour cette adresse e-mail <i>{EMAIL_ADDRESS}</i>.  Vous devez vous identifier avant de procéder à la commande.');
@@ -35,6 +34,10 @@ define('PROCEED_TO_CHECKOUT', 'Procédez à la commande sans enregistrement.');
 
 // BOF Separate Pricing Per Customer
 // define the email address that can change customer_group_id on login
-define('SPPC_TOGGLE_LOGIN_PASSWORD', '');
+define('SPPC_TOGGLE_LOGIN_PASSWORD','root@localhost');
 // EOF Separate Pricing Per Customer
+define('TEXT_GUEST_INTRODUCTION','<b>Voulez-vous d\'aller directement à la procédure de paiement?</b> <br><br> Souhaitez-vous commander sans créer un compte client? S\'il vous plaît noter que l\'ensemble de nos services ne seront pas disponibles pour les clients qui ne souhaitent pas créer un compte. En outre, vous ne pouvez pas afficher l\'état de votre commande, et chaque fois que vous magasinez avec nous, vous devrez entrer de nouveau toutes vos données. <br><br> Création d\'un compte est gratuite. Si vous souhaitez encore passer à la caisse s\'il vous plaît cliquer sur le bouton de commande sur votre droite.');
+
+define('TEXT_GV_LOGIN_NEEDED', 'Vous devez être connecté pour échanger votre bon. S\'il vous plaît créer un nouveau compte ou se connecter ci-dessous');
+
 ?>

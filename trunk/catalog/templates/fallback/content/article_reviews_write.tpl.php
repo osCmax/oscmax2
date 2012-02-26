@@ -1,4 +1,16 @@
-  	 <?php echo tep_draw_form('article_reviews_write', tep_href_link(FILENAME_ARTICLE_REVIEWS_WRITE, 'action=process&articles_id=' . $HTTP_GET_VARS['articles_id']), 'post', 'onSubmit="return checkForm();"'); ?> 
+<?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+  echo tep_draw_form('article_reviews_write', tep_href_link(FILENAME_ARTICLE_REVIEWS_WRITE, 'action=process&articles_id=' . $_GET['articles_id']), 'post', 'onSubmit="return checkForm();"'); ?> 
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -38,10 +50,10 @@
                   <tr class="infoBoxContents">
                     <td><table border="0" width="100%" cellspacing="2" cellpadding="2">
                       <tr>
-                        <td class="main"><?php echo tep_draw_textarea_field('review', 'soft', 60, 15); ?></td>
+                        <td class="main"><?php echo tep_draw_textarea_field('review', 60, 15); ?></td>
                       </tr>
                       <tr>
-                        <td class="main"><?php echo '<b>' . SUB_TITLE_RATING . '</b> ' . TEXT_BAD . ' ' . tep_draw_radio_field('rating', '1') . ' ' . tep_draw_radio_field('rating', '2') . ' ' . tep_draw_radio_field('rating', '3') . ' ' . tep_draw_radio_field('rating', '4') . ' ' . tep_draw_radio_field('rating', '5') . ' ' . TEXT_GOOD; ?></td>
+                        <td class="main"><?php echo TEXT_RATING; ?> <span id="stars-cap"></span><div id="stars-wrapper1"><?php echo tep_draw_radio_field('rating', '1', '', 'title="' . TEXT_POOR . '"') . ' ' . tep_draw_radio_field('rating', '2', '', 'title="' . TEXT_FAIR . '"') . ' ' . tep_draw_radio_field('rating', '3','','title="' . TEXT_AVERAGE . '"') . ' ' . tep_draw_radio_field('rating', '4','','title="' . TEXT_GOOD . '"') . ' ' . tep_draw_radio_field('rating', '5','','title="' . TEXT_EXCELLENT . '"'); ?></div></td>
                       </tr>
                     </table></td>
                   </tr>

@@ -1,18 +1,18 @@
 <?php
 /*
-  $Id: stats_customers.php,v 1.9 2002/03/30 15:03:59 harley_vb Exp $
+$Id$
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Aktuelles Kundenguthaben');
+define('HEADING_TITLE', 'Informe de créditos de cliente');
 
-define('TABLE_HEADING_NUMBER', 'Nr.');
-define('TABLE_HEADING_CUSTOMERS', 'Customer');
-define('TABLE_HEADING_TOTAL_PURCHASED', 'Credit');
+define('TABLE_HEADING_NUMBER', 'Nº');
+define('TABLE_HEADING_CUSTOMERS', 'Cliente');
+define('TABLE_HEADING_TOTAL_PURCHASED', 'Crédito');
 ?>

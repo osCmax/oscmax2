@@ -1,14 +1,13 @@
 <?php
 /*
-  $Id: product_info.php,v 1.3.2.1 2005/06/12 00:04:34 Michael Sasek Exp $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-  Translated by Gunt - Contact : webmaster@webdesigner.com.fr
 */
 
 define('TEXT_PRODUCT_NOT_FOUND', 'Produit non trouv&eacute;!');
@@ -34,4 +33,60 @@ define('TEXT_OUT_OF_STOCK', 'Hors stock');
 define('TEXT_OUT_OF_STOCK_MESSAGE', 'La combinaison des options que vous avez choisi est impossible car certains produits sont hors stock.  Sélectionnez une autre combinaison SVP.');
 define('TEXT_SELECT_OPTIONS', 'Vous devez sélectionner des otions pur ce produit avant de l\'ajouter à votre panier.');
 // EOF: MOD - QT Pro
+define('TAB6','Tab 6');
+
+define('TAB0','Description');
+
+define('TAB1','Tab 1');
+
+define('TAB2','Tab 2');
+
+define('TAB3','Tab 3');
+
+define('TAB4','Tab 4');
+
+define('TAB5','Tab 5');
+
+define('STOCK_LIST_IN_PI_TEXT_HEADING','Actuellement en stock:');
+
+define('STOCK_LIST_IN_PI_TEXT_PRICE','Prix');
+
+define('STOCK_LIST_IN_PI_TEXT_STOCK','Qté.');
+
+define('PRODUCT_ADDED_TO_WISHLIST','Le produit a été ajouté à votre liste');
+
+define('TEXT_ENTER_QUANTITY','Quantité');
+
+define('TEXT_PRICE_PER_PIECE','Prix');
+
+define('TEXT_SAVINGS','Votre épargne');
+
+define('MINIMUM_ORDER_TEXT','Minimum de commande:');
+
+define('PB_DROPDOWN_BETWEEN','à');
+
+define('PB_DROPDOWN_AFTER','chaque');
+
+define('PB_FROM','à partir de');
+
+define('PREV_NEXT_OF','des');
+
+define('PREV_NEXT_IN','dans');
+
+define('ALT_PREVIOUS_PRODUCT','Article précédent');
+
+define('ALT_NEXT_PRODUCT','Produit suivant');
+
+define('ALT_FIRST_PRODUCT','Premier produit');
+
+define('ALT_LAST_PRODUCT','Dernière produit');
+
+// start indvship
+define('TEXT_FREE_SHIPPING', '<i>(Free Shipping for this Item)</i>');
+define('TEXT_ADDITIONAL_SHIPPING', '<i>(This item requires additional shipping of $');
+define('TEXT_ADDITIONAL_SHIPPING_2', ' for the first item, and $');
+define('TEXT_ADDITIONAL_SHIPPING_3', ' for each additional item + regular shipping costs.)</i>');
+define('TEXT_ADDITIONAL_SHIPPING_4', ' + regular shipping costs.)</i>');
+// end indvship
+
 ?>

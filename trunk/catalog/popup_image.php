@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: popup_image.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -23,14 +23,9 @@ $Id: popup_image.php 3 2006-05-27 04:59:07Z user $
 // LINE ADDED
   require(DIR_WS_LANGUAGES . $_SESSION['language'] . '/' . FILENAME_POPUP_IMAGE);
 
-// BOF: MOD - Search engine friendly urls
-  if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') {
-    if (isset($HTTP_GET_VARS)) $_GET =& $HTTP_GET_VARS;
-  }
-// EOF: MOD - Search engine friendly urls
   $navigation->remove_current_page();
 
-  $products_query = tep_db_query("select pd.products_name, p.products_image from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on p.products_id = pd.products_id where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and pd.language_id = '" . (int)$languages_id . "'");
+  $products_query = tep_db_query("select pd.products_name, p.products_image from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on p.products_id = pd.products_id where p.products_status = '1' and p.products_id = '" . (int)$_GET['pID'] . "' and pd.language_id = '" . (int)$languages_id . "'");
   $product_info = tep_db_fetch_array($products_query);
 
 // BOF: MOD - dynamic mopics functions

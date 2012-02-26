@@ -1,26 +1,26 @@
 <?php
 /*
-$Id: address_book.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Ihr Konto');
+define('NAVBAR_TITLE_1', 'Mein Konto');
 define('NAVBAR_TITLE_2', 'Adressbuch');
 
-define('HEADING_TITLE', 'Mein Pers&ouml;nliches Adressbuch');
+define('HEADING_TITLE', 'Mein Adressbuch');
 
-define('PRIMARY_ADDRESS_TITLE', 'Standardadresse');
-define('PRIMARY_ADDRESS_DESCRIPTION', 'Diese Adresse wird automatisch als Liefer- und Rechnungsadresse gew&auml;hlt wenn Sie eine Bestellung aufgeben.<br><br>Diese Adresse wird auch als Basis f&uuml;r die Berechnung eventueller Steuern udn Versandkosten verwendet.');
+define('PRIMARY_ADDRESS_TITLE', 'Hauptadresse');
+define('PRIMARY_ADDRESS_DESCRIPTION', 'Diese Adresse wird bei Bestellungen standardmäßig als Liefer- und Rechnungsadresse gewählt.<br><br>Diese Adresse stellt auch die Grundlage für Steuerberechnungen und Versandkosten dar.');
 
-define('ADDRESS_BOOK_TITLE', 'Adressbucheintr&auml;ge');
+define('ADDRESS_BOOK_TITLE', 'Adressbucheinträge');
 
-define('PRIMARY_ADDRESS', '(Standardadresse)');
+define('PRIMARY_ADDRESS', '(Hauptadresse)');
 
-define('TEXT_MAXIMUM_ENTRIES', '<font color="#ff0000"><b>Hinweis:</b></font> Ihnen stehen %s Adressbucheintr&auml;ge zur Verf&uuml;gung!');
+define('TEXT_MAXIMUM_ENTRIES', '<font color="#ff0000"><b>Hinweis:</b></font> Ihnen stehen maximal %s Adressbucheinträge zur Verfügung!');
 ?>

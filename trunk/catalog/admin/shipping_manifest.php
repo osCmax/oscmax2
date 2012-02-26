@@ -1,9 +1,19 @@
 <?php
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.osCmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
 
   require('includes/application_top.php');
 
-	if ($HTTP_GET_VARS['pickup_date']) {
-		$pickup_date = $HTTP_GET_VARS['pickup_date'];
+	if ($_GET['pickup_date']) {
+		$pickup_date = $_GET['pickup_date'];
 		}
 	else {
 		$latest_date = tep_db_query("select pickup_date from " . TABLE_SHIPPING_MANIFEST . " order by pickup_date desc limit 1");
@@ -11,7 +21,7 @@
 		$pickup_date = $pickup_date['pickup_date'];
 		}
 
-	if ($HTTP_GET_VARS['action'] == 'purge') {
+	if ($_GET['action'] == 'purge') {
 		$purge_manifest_date = tep_db_query("delete from " . TABLE_SHIPPING_MANIFEST . " where pickup_date = '" . $pickup_date . "'");
 		if ($purge_manifest_date) {
 			tep_redirect(FILENAME_SHIPPING_MANIFEST);

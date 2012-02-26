@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: account_history_info.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -38,4 +38,8 @@ define('TEXT_NO_COMMENTS_AVAILABLE', 'No comments available.');
 define('TABLE_HEADING_DOWNLOAD_DATE', 'Link expires: ');
 define('TABLE_HEADING_DOWNLOAD_COUNT', ' downloads remaining');
 define('HEADING_DOWNLOAD', 'Download links');
+
+// Customer Comments contrib
+ define ('ADD_COMMENTS', 'Add Comments or Questions to this Order');
+// Customer Comments contrib
 ?>

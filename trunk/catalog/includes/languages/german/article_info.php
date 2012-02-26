@@ -1,25 +1,24 @@
 <?php
 /*
-$Id: article_info.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_ARTICLE_NOT_FOUND', 'Article Not Found');
-define('TEXT_ARTICLE_NOT_FOUND', 'Sorry, but the article you requested is not available in this site.');
-define('TEXT_MORE_INFORMATION', 'For more information, please visit this articles <a href="%s" target="_blank"><u>web page</u></a>.');
-define('TEXT_DATE_ADDED', 'This article was published on %s.');
-define('TEXT_DATE_AVAILABLE', '<font color="#FF0000">This article will be published on %s.</font>');
-define('TEXT_BY', 'by ');
-define('TEXT_CURRENT_REVIEWS', 'Current Reviews:');
-define('BOX_TEXT_TELL_A_FRIEND', 'Tell a friend'); 
-define('TEXT_TELL_A_FRIEND', 'Tell a friend about this article:');
-define('TEXT_XSELL_ARTICLES', 'Products related to this article:');
-define('HEADING_TITLE', 'Articles');
+define('HEADING_ARTICLE_NOT_FOUND', 'Artikel nicht gefunden');
+define('TEXT_ARTICLE_NOT_FOUND', 'Leider ist der Artikel, den Sie suchen, nicht vorhanden.');
+define('TEXT_MORE_INFORMATION', 'Für weitere Informationen besuchen Sie bitte die Seite des <a href="%s" target="_blank"><u>Artikels</u></a>.');
+define('TEXT_DATE_ADDED', 'Dieser Artikel wurde am %s veröffentlicht.');
+define('TEXT_DATE_AVAILABLE', '<font color="#FF0000">Dieser Artikel wird veröffentlich am %s.</font>');
+define('TEXT_CURRENT_REVIEWS', 'Aktuelle Bewertungen:');
+define('BOX_TEXT_TELL_A_FRIEND', 'Weiterempfehlen'); 
+define('TEXT_TELL_A_FRIEND', 'Artikel weiterempfehlen:');
+define('TEXT_XSELL_ARTICLES', 'Produkte, die mit diesem Artikel in Verbindung stehen:');
+define('HEADING_TITLE', 'Artikel');
 
 ?>

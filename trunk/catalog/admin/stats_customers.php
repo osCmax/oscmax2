@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: stats_customers.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -21,9 +21,10 @@ $Id: stats_customers.php 3 2006-05-27 04:59:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -51,14 +52,20 @@ $Id: stats_customers.php 3 2006-05-27 04:59:07Z user $
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
+
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NUMBER; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_TOTAL_PURCHASED; ?>&nbsp;</td>
+                <td class="dataTableHeadingContent" align="right"><?php if (!isset($orderby) or ($orderby == "sold" and $sorted == "ASC"))  $to_sort = "DESC"; else $to_sort = "ASC"; echo '<a href="' . tep_href_link('stats_customers.php', 'orderby=sold&amp;sorted='. $to_sort) . '" class="main"><b>' . TEXT_NUM_ORDERS . '</b></a>';  ?></td>
+                <td class="dataTableHeadingContent" align="right"><?php  if (!isset($orderby) or ($orderby == "value" and $sorted == "ASC"))  $to_sort = "DESC"; else $to_sort = "ASC"; echo '<a href="' . tep_href_link('stats_customers.php', 'orderby=value&amp;sorted='. $to_sort) . '" class="main"><b>' . TABLE_HEADING_TOTAL_PURCHASED . '</b></a>';  ?></td>
               </tr>
 <?php
-  if (isset($HTTP_GET_VARS['page']) && ($HTTP_GET_VARS['page'] > 1)) $rows = $HTTP_GET_VARS['page'] * MAX_DISPLAY_SEARCH_RESULTS - MAX_DISPLAY_SEARCH_RESULTS;
-  $customers_query_raw = "select c.customers_firstname, c.customers_lastname, sum(op.products_quantity * op.final_price) as ordersum from " . TABLE_CUSTOMERS . " c, " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where c.customers_id = o.customers_id and o.orders_id = op.orders_id group by c.customers_firstname, c.customers_lastname order by ordersum DESC";
-  $customers_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_query_raw, $customers_query_numrows);
+  if (isset($_GET['page']) && ($_GET['page'] > 1)) $rows = $_GET['page'] * 50 - 50;
+    if ($orderby == "value") {$db_orderby = "ordersum";}
+    elseif ($orderby == "sold") {$db_orderby = "ordertotal";}
+    else {$db_orderby = "ordersum DESC";}
+
+  $customers_query_raw = "select c.customers_firstname, c.customers_lastname, c.customers_id, count(DISTINCT o.orders_id) as ordertotal, sum(op.products_quantity * op.final_price) as ordersum from " . TABLE_CUSTOMERS . " c, " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where c.customers_id = o.customers_id and o.orders_id = op.orders_id group by c.customers_firstname, c.customers_lastname order by $db_orderby $sorted";
+  $customers_split = new splitPageResults($_GET['page'], '50', $customers_query_raw, $customers_query_numrows);
 // fix counted customers
   $customers_query_numrows = tep_db_query("select customers_id from " . TABLE_ORDERS . " group by customers_id");
   $customers_query_numrows = tep_db_num_rows($customers_query_numrows);
@@ -72,9 +79,10 @@ $Id: stats_customers.php 3 2006-05-27 04:59:07Z user $
       $rows = '0' . $rows;
     }
 ?>
-              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<?php echo tep_href_link(FILENAME_CUSTOMERS, 'search=' . $customers['customers_lastname'], 'NONSSL'); ?>'">
+              <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="document.location.href='<?php echo tep_href_link(FILENAME_ORDERS, 'cID=' . $customers['customers_id'], 'NONSSL'); ?>'">
                 <td class="dataTableContent"><?php echo $rows; ?>.</td>
-                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS, 'search=' . $customers['customers_lastname'], 'NONSSL') . '">' . $customers['customers_firstname'] . ' ' . $customers['customers_lastname'] . '</a>'; ?></td>
+                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS, 'cID=' . $customers['customers_id'] . '&amp;action=edit', 'SSL') . '">' . $customers['customers_firstname'] . ' ' . $customers['customers_lastname'] . '</a>'; ?></td>
+                <td class="dataTableContent" align="right"><?php echo $customers['ordertotal']; ?>&nbsp;</td>
                 <td class="dataTableContent" align="right"><?php echo $currencies->format($customers['ordersum']); ?>&nbsp;</td>
               </tr>
 <?php
@@ -85,8 +93,8 @@ $Id: stats_customers.php 3 2006-05-27 04:59:07Z user $
           <tr>
             <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
-                <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $HTTP_GET_VARS['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
-                <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $HTTP_GET_VARS['page']); ?>&nbsp;</td>
+                <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, '50', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
+                <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, '50', MAX_DISPLAY_PAGE_LINKS, $_GET['page'], "orderby=" . $orderby . "&amp;sorted=" . $sorted); ?>&nbsp;</td>
               </tr>
             </table></td>
           </tr>

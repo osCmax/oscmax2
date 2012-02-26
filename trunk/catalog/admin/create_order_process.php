@@ -1,51 +1,51 @@
 <?php
 /*
-$Id: create_order_process.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CREATE_ORDER_PROCESS);
- // if ($HTTP_POST_VARS['action'] != 'process') {
+ // if ($_POST['action'] != 'process') {
   //  tep_redirect(tep_href_link(FILENAME_CREATE_ORDER, '', 'SSL'));
   //}
-  $customer_id = tep_db_prepare_input($HTTP_POST_VARS['customers_id']);
-  $gender = tep_db_prepare_input($HTTP_POST_VARS['gender']);
-  $firstname = tep_db_prepare_input($HTTP_POST_VARS['firstname']);
-  $lastname = tep_db_prepare_input($HTTP_POST_VARS['lastname']);
-  $dob = tep_db_prepare_input($HTTP_POST_VARS['dob']);
-  $email_address = tep_db_prepare_input($HTTP_POST_VARS['email_address']);
-  $telephone = tep_db_prepare_input($HTTP_POST_VARS['telephone']);
-  $fax = tep_db_prepare_input($HTTP_POST_VARS['fax']);
-  $newsletter = tep_db_prepare_input($HTTP_POST_VARS['newsletter']);
-  $password = tep_db_prepare_input($HTTP_POST_VARS['password']);
-  $confirmation = tep_db_prepare_input($HTTP_POST_VARS['confirmation']);
-  $street_address = tep_db_prepare_input($HTTP_POST_VARS['street_address']);
-  $company = tep_db_prepare_input($HTTP_POST_VARS['company']);
-  $suburb = tep_db_prepare_input($HTTP_POST_VARS['suburb']);
-  $postcode = tep_db_prepare_input($HTTP_POST_VARS['postcode']);
-  $city = tep_db_prepare_input($HTTP_POST_VARS['city']);
-  $zone_id = tep_db_prepare_input($HTTP_POST_VARS['zone_id']);
-  $state = tep_db_prepare_input($HTTP_POST_VARS['state']);
-  $country = tep_db_prepare_input($HTTP_POST_VARS['country']);
+  $customer_id = tep_db_prepare_input($_POST['customers_id']);
+  $gender = tep_db_prepare_input($_POST['gender']);
+  $firstname = tep_db_prepare_input($_POST['firstname']);
+  $lastname = tep_db_prepare_input($_POST['lastname']);
+  $dob = tep_db_prepare_input($_POST['dob']);
+  $email_address = tep_db_prepare_input($_POST['email_address']);
+  $telephone = tep_db_prepare_input($_POST['telephone']);
+  $fax = tep_db_prepare_input($_POST['fax']);
+  $newsletter = tep_db_prepare_input($_POST['newsletter']);
+  $password = tep_db_prepare_input($_POST['password']);
+  $confirmation = tep_db_prepare_input($_POST['confirmation']);
+  $street_address = tep_db_prepare_input($_POST['street_address']);
+  $company = tep_db_prepare_input($_POST['company']);
+  $suburb = tep_db_prepare_input($_POST['suburb']);
+  $postcode = tep_db_prepare_input($_POST['postcode']);
+  $city = tep_db_prepare_input($_POST['city']);
+  $zone_id = tep_db_prepare_input($_POST['zone_id']);
+  $state = tep_db_prepare_input($_POST['state']);
+  $country = tep_db_prepare_input($_POST['country']);
   $format_id = tep_get_address_format_id($address['country_id']);
   $size = "1";
-  $payment_method = DEFAULT_PAYMENT_METHOD;
+  $payment_method = ORDER_EDITOR_DEFAULT_PAYMENT_METHOD;
   $new_value = "1";
   $error = false; // reset error flag
   $temp_amount = "0";
   $temp_amount = number_format($temp_amount, 2, '.', '');
   
   $currency_text = DEFAULT_CURRENCY . ", 1";
-  if(IsSet($HTTP_POST_VARS['Currency']))
+  if(IsSet($_POST['Currency']))
   {
-  	$currency_text = tep_db_prepare_input($HTTP_POST_VARS['Currency']);
+  	$currency_text = tep_db_prepare_input($_POST['Currency']);
   }
   
   $currency_array = explode(",", $currency_text);

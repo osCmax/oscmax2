@@ -1,18 +1,24 @@
 <?php
 /*
-$Id: modules.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
+  include('includes/languages/' . $language . '/configuration.php');
 
-  $set = (isset($HTTP_GET_VARS['set']) ? $HTTP_GET_VARS['set'] : '');
+  // *** BEGIN GOOGLE CHECKOUT ***
+  if (defined('MODULE_PAYMENT_GOOGLECHECKOUT_STATUS') && MODULE_PAYMENT_GOOGLECHECKOUT_STATUS == 'True') {
+  require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/modules1.php');
+  }
+  // *** END GOOGLE CHECKOUT ***
+  $set = (isset($_GET['set']) ? $_GET['set'] : '');
 
   if (tep_not_null($set)) {
     switch ($set) {
@@ -38,26 +44,36 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
     }
   }
 
-  $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
+  $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   if (tep_not_null($action)) {
     switch ($action) {
       case 'save':
-        while (list($key, $value) = each($HTTP_POST_VARS['configuration'])) {
+        // *** BEGIN GOOGLE CHECKOUT ***
+        if (defined('MODULE_PAYMENT_GOOGLECHECKOUT_STATUS') && MODULE_PAYMENT_GOOGLECHECKOUT_STATUS == 'True') {
+        require(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/modules2.php');
+        }
+        // *** END GOOGLE CHECKOUT ***
+        while (list($key, $value) = each($_POST['configuration'])) {
 // BOF: LINES ADDED
           if( is_array( $value ) ){
           $value = implode( ", ", $value);
-		  $value = ereg_replace (", --none--", "", $value);
+            $value = preg_replace('/, --none--/', '', $value);
 		    }
 // EOF: LINES ADDED
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . $value . "' where configuration_key = '" . $key . "'");
         }
-        tep_redirect(tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $HTTP_GET_VARS['module']));
+		
+		// Configuration Cache modification start
+        require ('includes/configuration_cache.php');
+        // Configuration Cache modification end
+		
+        tep_redirect(tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $_GET['module']));
         break;
       case 'install':
       case 'remove':
         $file_extension = substr($PHP_SELF, strrpos($PHP_SELF, '.'));
-        $class = basename($HTTP_GET_VARS['module']);
+        $class = basename($_GET['module']);
         if (file_exists($module_directory . $class . $file_extension)) {
           include($module_directory . $class . $file_extension);
           $module = new $class;
@@ -78,9 +94,10 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.2.custom.css">
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -131,7 +148,7 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
   for ($i=0, $n=sizeof($directory_array); $i<$n; $i++) {
     $file = $directory_array[$i];
 
-    include(DIR_FS_CATALOG_LANGUAGES . $language . '/modules/' . $module_type . '/' . $file);
+    include(DIR_FS_CATALOG_LANGUAGES . $language . '/' . $file);
     include($module_directory . $file);
 
     $class = substr($file, 0, strrpos($file, '.'));
@@ -145,7 +162,7 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
         }
       }
 
-      if ((!isset($HTTP_GET_VARS['module']) || (isset($HTTP_GET_VARS['module']) && ($HTTP_GET_VARS['module'] == $class))) && !isset($mInfo)) {
+      if ((!isset($_GET['module']) || (isset($_GET['module']) && ($_GET['module'] == $class))) && !isset($mInfo)) {
         $module_info = array('code' => $module->code,
                              'title' => $module->title,
                              'description' => $module->description,
@@ -173,17 +190,17 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
 
       if (isset($mInfo) && is_object($mInfo) && ($class == $mInfo->code) ) {
         if ($module->check() > 0) {
-          echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $class . '&action=edit') . '\'">' . "\n";
+          echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&amp;module=' . $class . '&amp;action=edit') . '\'">' . "\n";
         } else {
           echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)">' . "\n";
         }
       } else {
-        echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $class) . '\'">' . "\n";
+        echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&amp;module=' . $class) . '\'">' . "\n";
       }
 ?>
                 <td class="dataTableContent"><?php echo $module->title; ?></td>
                 <td class="dataTableContent" align="right"><?php if (is_numeric($module->sort_order)) echo $module->sort_order; ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($mInfo) && is_object($mInfo) && ($class == $mInfo->code) ) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $class) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if (isset($mInfo) && is_object($mInfo) && ($class == $mInfo->code) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&amp;module=' . $class) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
@@ -195,9 +212,15 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
     $check = tep_db_fetch_array($check_query);
     if ($check['configuration_value'] != implode(';', $installed_modules)) {
       tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . implode(';', $installed_modules) . "', last_modified = now() where configuration_key = '" . $module_key . "'");
+	  // Configuration Cache modification start
+      require ('includes/configuration_cache.php');
+      // Configuration Cache modification end
     }
   } else {
     tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Installed Modules', '" . $module_key . "', '" . implode(';', $installed_modules) . "', 'This is automatically updated. No need to edit.', '6', '0', now())");
+	// Configuration Cache modification start
+    require ('includes/configuration_cache.php');
+    // Configuration Cache modification end
   }
 ?>
               <tr>
@@ -213,8 +236,17 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
       $keys = '';
       reset($mInfo->keys);
       while (list($key, $value) = each($mInfo->keys)) {
-        $keys .= '<b>' . $value['title'] . '</b><br>' . $value['description'] . '<br>';
-
+		if (constant($value['title'])) {
+			$keys .= '<b>' . constant($value['title']) . '</b><br>';
+		} else {
+			$keys .= '<b>' . $value['title'] . '</b><br>';
+		}
+		if (constant($value['description'])) {
+			$keys .= constant($value['description']) . '<br>';
+		} else {
+			$keys .= $value['description'] . '<br>';
+		}
+	
         if ($value['set_function']) {
           eval('$keys .= ' . $value['set_function'] . "'" . $value['value'] . "', '" . $key . "');");
         } else {
@@ -226,9 +258,9 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
 
       $heading[] = array('text' => '<b>' . $mInfo->title . '</b>');
 
-      $contents = array('form' => tep_draw_form('modules', FILENAME_MODULES, 'set=' . $set . '&module=' . $HTTP_GET_VARS['module'] . '&action=save'));
+      $contents = array('form' => tep_draw_form('modules', FILENAME_MODULES, 'set=' . $set . '&amp;module=' . $_GET['module'] . '&amp;action=save'));
       $contents[] = array('text' => $keys);
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . ' <a href="' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $HTTP_GET_VARS['module']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . ' <a href="' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&amp;module=' . $_GET['module']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     default:
       $heading[] = array('text' => '<b>' . $mInfo->title . '</b>');
@@ -237,7 +269,11 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
         $keys = '';
         reset($mInfo->keys);
         while (list(, $value) = each($mInfo->keys)) {
-          $keys .= '<b>' . $value['title'] . '</b><br>';
+		  if (constant($value['title'])) {
+			$keys .= '<b>' . constant($value['title']) . '</b><br>';
+		  } else {
+			$keys .= '<b>' . $value['title'] . '</b><br>';
+		  }
           if ($value['use_function']) {
             $use_function = $value['use_function'];
             if (preg_match('/->/', $use_function)) {
@@ -257,16 +293,16 @@ $Id: modules.php 3 2006-05-27 04:59:07Z user $
         }
         $keys = substr($keys, 0, strrpos($keys, '<br><br>'));
 
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $mInfo->code . '&action=remove') . '">' . tep_image_button('button_module_remove.gif', IMAGE_MODULE_REMOVE) . '</a> <a href="' . tep_href_link(FILENAME_MODULES, 'set=' . $set . (isset($HTTP_GET_VARS['module']) ? '&module=' . $HTTP_GET_VARS['module'] : '') . '&action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&amp;module=' . $mInfo->code . '&amp;action=remove') . '">' . tep_image_button('button_module_remove.gif', IMAGE_MODULE_REMOVE) . '</a> <a href="' . tep_href_link(FILENAME_MODULES, 'set=' . $set . (isset($_GET['module']) ? '&amp;module=' . $_GET['module'] : '') . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a>');
         if (isset($mInfo->signature) && (list($scode, $smodule, $sversion, $soscversion) = explode('|', $mInfo->signature))) {
-          $contents[] = array('text' => '<br>' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '&nbsp;<b>' . TEXT_INFO_VERSION . '</b> ' . $sversion . ' (<a href="http://sig.oscommerce.com/' . $mInfo->signature . '" target="_blank">' . TEXT_INFO_ONLINE_STATUS . '</a>)');
+          $contents[] = array('text' => '<br>' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '&nbsp;<b>' . TEXT_INFO_VERSION . '</b> ' . $sversion . ' (<a href="http://sig.oscommerce.com/' . $mInfo->signature . '" target="_blank">' . TEXT_INFO_ONLINE_STATUS . '</a>)');
         }
         $contents[] = array('text' => '<br>' . $mInfo->description);
         $contents[] = array('text' => '<br>' . $keys);
       } else {
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $mInfo->code . '&action=install') . '">' . tep_image_button('button_module_install.gif', IMAGE_MODULE_INSTALL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_MODULES, 'set=' . $set . '&amp;module=' . $mInfo->code . '&amp;action=install') . '">' . tep_image_button('button_module_install.gif', IMAGE_MODULE_INSTALL) . '</a>');
         if (isset($mInfo->signature) && (list($scode, $smodule, $sversion, $soscversion) = explode('|', $mInfo->signature))) {
-          $contents[] = array('text' => '<br>' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '&nbsp;<b>' . TEXT_INFO_VERSION . '</b> ' . $sversion . ' (<a href="http://sig.oscommerce.com/' . $mInfo->signature . '" target="_blank">' . TEXT_INFO_ONLINE_STATUS . '</a>)');
+          $contents[] = array('text' => '<br>' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '&nbsp;<b>' . TEXT_INFO_VERSION . '</b> ' . $sversion . ' (<a href="http://sig.oscommerce.com/' . $mInfo->signature . '" target="_blank">' . TEXT_INFO_ONLINE_STATUS . '</a>)');
         }
         $contents[] = array('text' => '<br>' . $mInfo->description);
       }

@@ -1,4 +1,16 @@
-<script language="javascript" type="text/javascript"><!--
+<script language="javascript" type="text/javascript">
+/*
+$Id$
+
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
+
+  Released under the GNU General Public License
+*/
+
+<!--
 var i=0;
 function resize() {
   if (navigator.appName == 'Netscape') i=10;

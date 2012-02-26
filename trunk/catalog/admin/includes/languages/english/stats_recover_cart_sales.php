@@ -1,19 +1,13 @@
 <?php
 /*
-$Id: stats_recover_cart_sales.php 3 2006-05-27 04:59:07Z user $
-  Recover Cart Sales ENGLISH Language File v2.22
+$Id$
 
-  report_recover_cart_sales contrib: JM Ivler 11/23/03
-  (c) Ivler/ osCommerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
+
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-
-  Modifed by Aalst (stats_recover_cart_sales.php,v 1.2 .. 1.36)
-  aalst@aalst.com
-
-  Modifed by Lane (stats_recover_cart_sales.php,v 1.4d .. 2.22)
-  lane@ifd.com www.osc-modsquad.com / www.ifd.com
 */
 
 define('HEADING_TITLE', 'Recover Cart Sales Report v2.22');
@@ -30,4 +24,6 @@ define('TOTAL_RECORDS', 'Examined Records:');
 define('TOTAL_SALES', 'Recovered Sales:');
 define('TOTAL_SALES_EXPLANATION', ' (Possible sales from customers who abandoned carts & were notified via RCS)');
 define('TOTAL_RECOVERED', 'Total Recovered:');
+define('TEXT_WORKING', 'Working ... ');
+define('TEXT_DONE', 'Done!');
 ?>

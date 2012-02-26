@@ -1,33 +1,29 @@
 <?php
 /*
-$Id: affiliate_invoice.php 14 2006-07-28 17:42:07Z user $
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCMax Power E-Commerce
-  http://oscdox.com
-
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Affiliate Invoice');
+define('HEADING_TITLE', 'Factura afiliado');
 
-define ('TEXT_AFFILIATE','Affiliate');
-define ('TEXT_AFFILIATE_PAYMENT','Payment');
-define ('TEXT_AFFILIATE_BILLED','Billing Day');
-define('TABLE_HEADING_ORDER_ID', 'Order ID');
-define('TABLE_HEADING_ORDER_DATE', 'Date');
-define('TABLE_HEADING_ORDER_VALUE', 'Order Value');
-define('TABLE_HEADING_COMMISSION_RATE', 'Commission Rate');
-define('TABLE_HEADING_COMMISSION_VALUE', 'Commission Value');
+define ('TEXT_AFFILIATE','Afiliado');
+define ('TEXT_AFFILIATE_PAYMENT','Pago');
+define ('TEXT_AFFILIATE_BILLED','Día de facturación');
+define('TABLE_HEADING_ORDER_ID', 'ID de pedido');
+define('TABLE_HEADING_ORDER_DATE', 'Fecha');
+define('TABLE_HEADING_ORDER_VALUE', 'Valor del pedido');
+define('TABLE_HEADING_COMMISSION_RATE', 'Porcentaje de comisión');
+define('TABLE_HEADING_COMMISSION_VALUE', 'Comisión');
 define('TABLE_HEADING_TOTAL', 'Total');
 
-define('TEXT_SUB_TOTAL', 'Sub-Total');
-define('TEXT_TAX', 'Tax');
+define('TEXT_SUB_TOTAL', 'Subtotal');
+define('TEXT_TAX', 'Impuestos');
 define('TEXT_TOTAL', 'Total');
 define('ENTRY_PERCENT', '%');
 ?>

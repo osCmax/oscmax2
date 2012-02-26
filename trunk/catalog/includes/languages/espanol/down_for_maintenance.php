@@ -1,19 +1,19 @@
 <?php
 /*
-$Id: down_for_maintenance.php 3 2006-05-27 04:59:07Z user $
+$Id$
   
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Down for Maintenance');
-define('HEADING_TITLE', 'Down for Maintenance ...');
-define('DOWN_FOR_MAINTENANCE_TEXT_INFORMATION', 'The site is currently down for maintenance. Please excuse the dust, and try back later.');
-define('TEXT_MAINTENANCE_ON_AT_TIME', 'The Admin / Webmaster has enabled maintenance at : ');
-define('TEXT_MAINTENANCE_PERIOD', 'Maintenance period : ');
-define('DOWN_FOR_MAINTENANCE_STATUS_TEXT', 'To verify the site status ... Click here:');
+define('NAVBAR_TITLE','Cerrado por mantenimiento');
+define('HEADING_TITLE','Cerrado por mantenimiento ...');
+define('DOWN_FOR_MAINTENANCE_TEXT_INFORMATION','El sitio web está actualmente cerrado por mantenimiento. Por favor, disculpe las molestias e inténtelo de nuevo más tarde.');
+define('TEXT_MAINTENANCE_ON_AT_TIME','Fecha y hora de comienzo del mantenimiento: ');
+define('TEXT_MAINTENANCE_PERIOD','Período de mantenimiento: ');
+define('DOWN_FOR_MAINTENANCE_STATUS_TEXT','Para comprobar el estado del sitio pulse aquí:');
 ?>

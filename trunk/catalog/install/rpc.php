@@ -1,11 +1,11 @@
 <?php
 /*
-  $Id: rpc.php 1768 2008-01-07 17:38:40Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -17,13 +17,13 @@
 
   $dir_fs_www_root = dirname(__FILE__);
 
-  if (isset($HTTP_GET_VARS['action']) && !empty($HTTP_GET_VARS['action'])) {
-    switch ($HTTP_GET_VARS['action']) {
+  if (isset($_GET['action']) && !empty($_GET['action'])) {
+    switch ($_GET['action']) {
       case 'dbCheck':
-        $db = array('DB_SERVER' => trim(rawurldecode($HTTP_GET_VARS['server'])),
-                    'DB_SERVER_USERNAME' => trim(rawurldecode($HTTP_GET_VARS['username'])),
-                    'DB_SERVER_PASSWORD' => trim(rawurldecode($HTTP_GET_VARS['password'])),
-                    'DB_DATABASE' => trim(rawurldecode($HTTP_GET_VARS['name']))
+        $db = array('DB_SERVER' => trim(rawurldecode($_GET['server'])),
+                    'DB_SERVER_USERNAME' => trim(rawurldecode($_GET['username'])),
+                    'DB_SERVER_PASSWORD' => trim(rawurldecode($_GET['password'])),
+                    'DB_DATABASE' => trim(rawurldecode($_GET['name']))
                    );
 
         $db_error = false;
@@ -45,16 +45,16 @@
         break;
 
       case 'dbImport':
-        $db = array('DB_SERVER' => trim(rawurldecode($HTTP_GET_VARS['server'])),
-                    'DB_SERVER_USERNAME' => trim(rawurldecode($HTTP_GET_VARS['username'])),
-                    'DB_SERVER_PASSWORD' => trim(rawurldecode($HTTP_GET_VARS['password'])),
-                    'DB_DATABASE' => trim(rawurldecode($HTTP_GET_VARS['name'])),
+        $db = array('DB_SERVER' => trim(rawurldecode($_GET['server'])),
+                    'DB_SERVER_USERNAME' => trim(rawurldecode($_GET['username'])),
+                    'DB_SERVER_PASSWORD' => trim(rawurldecode($_GET['password'])),
+                    'DB_DATABASE' => trim(rawurldecode($_GET['name'])),
                    );
 
         osc_db_connect($db['DB_SERVER'], $db['DB_SERVER_USERNAME'], $db['DB_SERVER_PASSWORD']);
 
         $db_error = false;
-        $sql_file = $dir_fs_www_root . '/osCMax.sql';
+        $sql_file = $dir_fs_www_root . '/oscmax.sql';
 
         osc_set_time_limit(0);
         osc_db_install($db['DB_DATABASE'], $sql_file);

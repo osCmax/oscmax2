@@ -1,21 +1,20 @@
 <?php
 /*
-$Id: upcoming_products.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-  $expected_query = tep_db_query("select p.products_id, pd.products_name, products_date_available as date_expected from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where to_days(products_date_available) >= to_days(now()) and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' order by " . EXPECTED_PRODUCTS_FIELD . " " . EXPECTED_PRODUCTS_SORT . " limit " . MAX_DISPLAY_UPCOMING_PRODUCTS);
+  $expected_query = tep_db_query("select p.products_id, pd.products_name, p.products_date_available as date_expected from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where to_days(products_date_available) >= to_days(now()) and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_status = '1' and find_in_set('" . $customer_group_id . "', p.products_hide_from_groups) = '0' order by " . EXPECTED_PRODUCTS_FIELD . " " . EXPECTED_PRODUCTS_SORT . " limit " . MAX_DISPLAY_UPCOMING_PRODUCTS);
   if (tep_db_num_rows($expected_query) > 0) {
 ?>
 <!-- upcoming_products //-->
-          <tr>
-            <td><br><table border="0" width="100%" cellspacing="0" cellpadding="2">
+            <table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td class="tableHeading">&nbsp;<?php echo TABLE_HEADING_UPCOMING_PRODUCTS; ?>&nbsp;</td>
                 <td align="right" class="tableHeading">&nbsp;<?php echo TABLE_HEADING_DATE_EXPECTED; ?>&nbsp;</td>
@@ -42,8 +41,10 @@ $Id: upcoming_products.php 3 2006-05-27 04:59:07Z user $
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator(); ?></td>
               </tr>
-            </table></td>
-          </tr>
+              <tr>
+                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+              </tr>
+            </table>
 <!-- upcoming_products_eof //-->
 <?php
   }

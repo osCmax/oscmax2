@@ -1,20 +1,20 @@
 <?php
 /*
-$Id: packingslip.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('TABLE_HEADING_COMMENTS', 'Kommentar');
-define('TABLE_HEADING_PRODUCTS_MODEL', 'Artikel-Nr.');
-define('TABLE_HEADING_PRODUCTS', 'Artikel');
+define('TABLE_HEADING_COMMENTS', 'Kommentare');
+define('TABLE_HEADING_PRODUCTS_MODEL', 'Art-Nr');
+define('TABLE_HEADING_PRODUCTS', 'Produkte');
 
-define('ENTRY_SOLD_TO', 'Rechnungsanschrift:');
-define('ENTRY_SHIP_TO', 'Lieferanschrift:');
-define('ENTRY_PAYMENT_METHOD', 'Zahlungsweise:');
+define('ENTRY_SOLD_TO', 'Rechnungsadresse:');
+define('ENTRY_SHIP_TO', 'Lieferadresse:');
+define('ENTRY_PAYMENT_METHOD', 'Zahlungsart:');
 ?>

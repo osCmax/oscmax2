@@ -1,16 +1,13 @@
 <?php
 /*
-$Id: account_details.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2006 osCMax2005 osCMax, 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
-   
-  Step-By-Step Manual Order Entry Verion 0.5
-  Customer Entry through Admin
 */
 
   $newsletter_array = array(array('id' => '1',
@@ -313,7 +310,7 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 ?>
           <tr>
             <td class="main" width="170">&nbsp;<?php echo ENTRY_STATE; ?></td>
-                      <td class="main"><div id="states">
+            <td class="main"><div id="states">&nbsp;
 <?php
     $state = sbs_get_zone_name($country, $zone_id);
     if ($is_read_only) {
@@ -324,35 +321,38 @@ function sbs_get_country_list($name, $selected = '', $parameters = '') {
 				echo ajax_get_zones_html($country,'',false);
 				// -Country-State Selector
     }
-?></td>
-              </tr>
+?>
+            </div></td>
+          </tr>
 <?php
      }
 ?>
-             <tr>
-                <td class="main"><?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_IMAGES . 'ajax-loader.gif'); ?></span></td>
-				<?php // +Country-State Selector ?>
-                <td class="main">
+          <tr>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_COUNTRY; ?><span id="indicator"><?php echo tep_image(DIR_WS_ICONS . 'ajax-loader.gif'); ?></span></td>
+			<?php // +Country-State Selector ?>
+            <td class="main">&nbsp;
 <?php
       $account['entry_country_id'] = STORE_COUNTRY;
-	 if ($is_read_only) {       echo tep_get_country_name($account['entry_country_id']);     } 
-elseif 
-($error) {
-       if ($entry_country_error) {
-        
-		 echo sbs_get_country_list('country') . '&nbsp;' . ENTRY_COUNTRY_ERROR;
-       } else {
-         echo tep_get_country_name($country) . tep_draw_hidden_field('country');
-       }
+	  if ($is_read_only) {       
+	    echo tep_get_country_name($account['entry_country_id']);     
+      } elseif ($error) {
+        if ($entry_country_error) {    
+		  echo sbs_get_country_list('country') . '&nbsp;' . ENTRY_COUNTRY_ERROR;
+        } else {
+          echo tep_get_country_name($country) . tep_draw_hidden_field('country');
+        }
      } else {
-	 		echo sbs_get_country_list('country',$country,'onChange="getStates(this.value, \'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); 
-			// -Country-State Selector
+	   echo sbs_get_country_list('country',$country,'onChange="getStates(this.value, \'states\');"') . '&nbsp;' . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''); 
+	   // -Country-State Selector
      }
-?></td>
+?>
+            </td>
           </tr>
-        </table></td>
-      </tr>
-    </table></td>
+        </table>
+      </td>
+    </tr>
+  </table>
+</td>
   </tr>
   <tr>
     <td class="formAreaTitle"><br><?php echo CATEGORY_CONTACT; ?></td>
@@ -424,12 +424,27 @@ elseif
   }
 ?></td>
           </tr>
+          <tr>
+            <td class="main" width="170">&nbsp;<?php echo ENTRY_CUSTOMER_GROUP; ?></td>
+            <td class="main">&nbsp;
+			
+			<?php 
+			  $existing_customers_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id ");
+			  while ($existing_customers =  tep_db_fetch_array($existing_customers_query)) {
+                $existing_customers_array[] = array("id" => $existing_customers['customers_group_id'], "text" => "&#160;".$existing_customers['customers_group_name']."&#160;");
+			  }
+			 
+			  if ($processed == true) {
+                echo $customers_group . tep_draw_hidden_field('customers_group_id');
+              } else {
+                echo tep_draw_pull_down_menu('customers_group_id', $existing_customers_array, $account['customers_group_id']);
+              } ?></td>
         </table></td>
       </tr>
     </table></td>
   </tr>
 
-<?php
+<?php /* 
   if (!$is_read_only) {
 ?>
   <tr>
@@ -465,7 +480,7 @@ elseif
 ?></td>
           </tr>
 <?php
-    }
+    } 
 ?>
         </table></td>
       </tr>
@@ -476,4 +491,5 @@ elseif
 <?php
   }
 ?>
+*/ ?>
 </table>

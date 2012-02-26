@@ -1,11 +1,11 @@
 <?php
 /*
-$Id: logoff.php 3 2006-05-27 04:59:07Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.osCmax.com
 
-  Copyright 2009 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -15,6 +15,10 @@ $Id: logoff.php 3 2006-05-27 04:59:07Z user $
   @include(DIR_WS_LANGUAGES . $language . '/' . FILENAME_LOGOFF);
 
 //tep_session_destroy();
+
+//Added by PGM
+tep_db_query("insert into " . TABLE_ADMIN_LOG . " values ('', '" . $login_username . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Logged Out', now())");
+
   tep_session_unregister('login_id');
   tep_session_unregister('login_username');
   tep_session_unregister('login_groups_id');
@@ -27,31 +31,34 @@ $Id: logoff.php 3 2006-05-27 04:59:07Z user $
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body>
 
-<table border="0" width="600" height="100%" cellspacing="0" cellpadding="0" align="center" valign="middle">
-  <tr>
-    <td><table border="0" width="600" height="440" cellspacing="0" cellpadding="1" align="center" valign="middle">
-      <tr bgcolor="#000000">
-        <td><table border="0" width="600" height="440" cellspacing="0" cellpadding="0">
-          <tr bgcolor="#ffffff" height="50">
-            <td height="50"><?php echo '<a href="http://www.oscmax.com">' . tep_image(DIR_WS_IMAGES . 'oscmax-logo.png', 'osCMax v2.0', '85', '80') . '</a>'; ?></td>
-            <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.aabox.com" target="_blank" class="headerLink">osCMax Hosting</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.oscdox.com" class="headerLink">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp;</td>
+<table border="0" width="600" cellspacing="0" cellpadding="0" align="center" style="height:100%;">
+  <tr valign="middle">
+    <td><table border="0" width="600" cellspacing="0" cellpadding="1" align="center" style="height:440;">
+      <tr bgcolor="#000000" valign="middle">
+        <td><table border="0" width="600" cellspacing="0" cellpadding="0" style="height:440;">
+          <tr bgcolor="#ffffff">
+            <td height="50"><?php echo '<a href="http://www.oscmax.com">' . tep_image(DIR_WS_ADMIN . DIR_WS_ICONS . 'logo.png', PROJECT_VERSION, '187', '54') . '</a>'; ?></td>
+            <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.aabox.com" target="_blank" class="headerLink">osCmax Hosting</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://shop.oscmax.com/" class="headerLink"  target="_blank">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://wiki.oscdox.com/" class="headerLink" target="_blank">Wiki</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp;</td>
           </tr>
           <tr bgcolor="#E7E7E7">
             <td colspan="2" align="center" valign="middle">
-                  <table width="280" border="0" cellspacing="0" cellpadding="2">
+                  <table width="320" border="0" cellspacing="0" cellpadding="2">
                     <tr>
                       <td class="login_heading" valign="top"><b><?php echo HEADING_TITLE; ?></b></td>
                     </tr>
                     <tr>
-                      <td class="login_heading"><?php echo TEXT_MAIN; ?></td>
-                    </tr>
-                    <tr>
-                      <td class="login_heading" align="right"><?php echo '<a class="login_heading" href="' . tep_href_link(FILENAME_LOGIN, '', 'SSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '30'); ?></td>
+                      <td>
+					    <table border="0" width="100%" cellspacing="3" cellpadding="2" bgcolor="#F3F3F3" style="height:100%; border: 1px solid #666666;">
+						  <tr>
+						    <td class="login"><?php echo TEXT_MAIN; ?></td>
+                          </tr>
+                          <tr>
+                            <td class="login_heading" align="right"><?php echo '<a class="login_heading" href="' . tep_href_link(FILENAME_LOGIN, '', 'SSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
+                          </tr>	
+                        </table>
+                      </td>
                     </tr>
                   </table>
                 </td>

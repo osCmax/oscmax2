@@ -1,36 +1,32 @@
 <?php
 /*
-  $Id: affiliate_banners_build.php,v 2.00 2003/10/12
+$Id$
 
-  OSC-Affiliate
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Contribution based on:
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2002 - 2003 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program - Build a CATEGORY Link');
+define('NAVBAR_TITLE','Crear un enlace de categoría');
+define('HEADING_TITLE','Programa de Afiliados - Crear un enlace de categoría');
 
-define('TEXT_AFFILIATE_NAME', 'Banner Name:');
-define('TEXT_INFORMATION', 'Enter the CATEGORY number of the CATEGORY you wish to build a link for:');
-define('TEXT_AFFILIATE_INFO', 'Copy the code shown below and paste into your website');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER','BUILD-A-CATEGORY-LINK');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO','Enter the CATEGORY number you wish to link to and press the enter&nbsp;');
-define('TEXT_AFFILIATE_VALIDPRODUCTS', 'Click Here:');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_VIEW', 'to view available categories.');
-define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_HELP', 'Select the category number from the popup window and enter the number in the Build Category Link field.');
+define('TEXT_AFFILIATE_NAME','Nombre del banner:');
+define('TEXT_INFORMATION','Introduzca el número de la categoría para el que desea crear un enlace:');
+define('TEXT_AFFILIATE_INFO','Copia el código que se muestra a continuación y pegarlo en su página web');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER','Crear un enlace de categoría');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_INFO','Introduzca el número de categoría para el que desea crear un enlace:');
+define('TEXT_AFFILIATE_VALIDPRODUCTS','Haga clic aquí:');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_VIEW','para ver las categorías disponibles.');
+define('TEXT_AFFILIATE_INDIVIDUAL_BANNER_HELP','Seleccione el número de categoría de la ventana emergente e introduzca el número número en el campo de crear enlace.');
 
-define('TEXT_VALID_CATEGORIES_LIST', 'Available Categories List');
-define('TEXT_VALID_CATEGORIES_ID', 'Categories #');
-define('TEXT_VALID_CATEGORIES_NAME', 'Categories Name');
+define('TEXT_VALID_CATEGORIES_LIST','Lista de categorías disponibles');
+define('TEXT_VALID_CATEGORIES_ID','Nº de categoría');
+define('TEXT_VALID_CATEGORIES_NAME','Nombre de categoría');
 
-define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');
+define('TEXT_CLOSE_WINDOW','<u>Cerrar Ventana</u> [x]');
 
-define('IMAGE_BUTTON_BUILD_A_LINK', 'BUILD-A-LINK');
+define('IMAGE_BUTTON_BUILD_A_LINK', 'Crear un enlace');
 ?>

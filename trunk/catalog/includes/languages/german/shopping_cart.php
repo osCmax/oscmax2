@@ -1,27 +1,34 @@
 <?php
 /*
-  $Id: shopping_cart.php 1739 2007-12-20 00:52:16Z user $
+$Id$
 
-  osCMax Power E-Commerce
-  http://oscdox.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright 2008 osCMax
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
 
 define('NAVBAR_TITLE', 'Warenkorb');
-define('HEADING_TITLE', 'Ihr Warenkorb enth&auml;lt :');
+define('NAVBAR_TITLE_BASKET','Inhalt des Warenkorbs');
+define('HEADING_TITLE', 'Ihr Warenkorb enthält:');
+define('HEADING_TITLE_BASKET','Inhalt des Warenkorbs');
 define('TABLE_HEADING_REMOVE', 'Entfernen');
-define('TABLE_HEADING_QUANTITY', 'Anzahl');
-define('TABLE_HEADING_MODEL', 'Artikelnr.');
-define('TABLE_HEADING_PRODUCTS', 'Artikel');
+define('TABLE_HEADING_QUANTITY', 'Menge');
+define('TABLE_HEADING_MODEL', 'Artikelnummer');
+define('TABLE_HEADING_PRODUCTS', 'Produkt(e)');
 define('TABLE_HEADING_TOTAL', 'Summe');
-define('TEXT_CART_EMPTY', 'Sie haben noch nichts in Ihrem Warenkorb.');
+define('TEXT_CART_EMPTY', 'Ihr Warenkorb ist leer.');
+define('TEXT_CART_EMPTY_BASKET','Ihr Warenkorb ist leer.');
 define('SUB_TITLE_SUB_TOTAL', 'Zwischensumme:');
-define('SUB_TITLE_TOTAL', 'Summe:');
+define('SUB_TITLE_TOTAL', 'Gesamtsumme:');
 
-define('OUT_OF_STOCK_CANT_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' markierten Produkte, sind leider nicht in der von Ihnen gew&uuml;nschten Menge auf Lager.<br>Bitte reduzieren Sie Ihre Bestellmenge f&uuml;r die gekennzeichneten Produkte, vielen Dank');
-define('OUT_OF_STOCK_CAN_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' markierten Produkte, sind leider nicht in der von Ihnen gew&uuml;nschten Menge auf Lager.<br>Die bestellte Menge wird kurzfristig von uns geliefert, wenn Sie es w&uuml;nschen nehmen wir auch eine Teillieferung vor.');
+define('OUT_OF_STOCK_CANT_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' markierten Produkte, sind leider nicht in ausreichender Menge lagernd.<br>Bitte reduzieren Sie Ihre Bestellmenge bei den mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' gekennzeichneten Produkte');
+define('OUT_OF_STOCK_CAN_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' markierten Produkte, sind leider nicht in ausreichender Menge lagernd.<br>Sie können die Bestellung dennoch durchführen und die verfügbare Menge für eine prompte Lieferung bei Bestellungsabschluss anpassen.');
 define('TEXT_ALTERNATIVE_CHECKOUT_METHODS', '- ODER -');
+define('CLEAR_CART', 'Sind Sie sicher, dass Sie Ihren gesamten Warenkorb leeren möchten?');
+
+define('IMAGE_CLEAR_CART', 'Warenkorb leeren');
+define('IMAGE_CLEAR_BASKET', 'Warenkorb leeren');
 ?>

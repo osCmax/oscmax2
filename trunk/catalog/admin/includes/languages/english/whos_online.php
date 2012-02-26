@@ -1,18 +1,11 @@
 <?php
 /*
-  $Id: whos_online.php,v 3.5.4 2008/7/8 SteveDallas Exp $
-  
-  2008 Jul 08 v3.5.4 Glen Hoag aka SteveDallas Modified TEXT_NUMBER_OF_CUSTOMERS for formatting change
-  2008 Jun 13 v3.5   Glen Hoag aka SteveDallas Moved version number out of language files
-                                               Added string TEXT_ACTIVE_CUSTOMERS
-                                               Added string TEXT_SHOW_BOTS
+$Id$
 
-  updated version number because of version number jumble and provide installation instructions.
-  corection french by azer
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+  osCmax e-Commerce
+  http://www.oscmax.com
 
-  Copyright (c) 2002 osCommerce
+  Copyright 2000 - 2011 osCmax
 
   Released under the GNU General Public License
 */
@@ -37,7 +30,6 @@ define('TABLE_HEADING_LAST_PAGE_URL', 'Last URL');
 define('TABLE_HEADING_ACTION', 'Action');
 define('TABLE_HEADING_SHOPPING_CART', 'Shopping cart');
 define('TEXT_SHOPPING_CART_SUBTOTAL', 'Subtotal');
-define('TEXT_NUMBER_OF_CUSTOMER', 'Visitors online (Considered inactive after 5 minutes. Removed after 15 minutes)');
 define('TEXT_NUMBER_OF_CUSTOMERS', 'Visitors online (Considered inactive after 5 minutes. Removed after 15 minutes)');
 define('TABLE_HEADING_HTTP_REFERER', 'Referer?');
 define('TEXT_HTTP_REFERER_URL', 'HTTP Referer URL');
@@ -55,6 +47,7 @@ define('TABLE_HEADING_USER_SESSION', 'Session?');
 define('TEXT_IN_SESSION', 'Yes');
 define('TEXT_NO_SESSION', 'No');
 
+define('TEXT_NUMBER_OF_CUSTOMER', 'Number of customers');
 define('TEXT_OSCID', 'osCsid');
 define('TEXT_PROFILE_DISPLAY', 'Profile display');
 define('TEXT_USER_AGENT', 'User agent');

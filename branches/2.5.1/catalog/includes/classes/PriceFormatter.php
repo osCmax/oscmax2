@@ -32,6 +32,7 @@ class PriceFormatter {
     $this->lowPrice = -1;
     $this->hasSpecialPrice = false; //tep_not_null($this->specialPrice);
     $this->specialPrice = NULL; //$prices['specials_new_products_price'];
+	$this->productsQuantity = 0;
   }
 
   function loadProduct($product_id, $language_id = 1, $listing = NULL, $price_breaks_from_listing = NULL) {
@@ -146,6 +147,7 @@ class PriceFormatter {
     $this->price_breaks = $price_formatter_data['price_breaks'];
     $this->specialPrice = $price_formatter_data['specials_new_products_price'];
     $this->hasSpecialPrice = tep_not_null($this->specialPrice);
+	$this->productsQuantity = $price_formatter_data['products_quantity'];
 
     //Custom      
     $this->hasQuantityPrice = false;
@@ -547,7 +549,7 @@ class PriceFormatter {
     return $lc_text;
   }
   */
-// added for Separate Pricing Per Customer, returns customer_group_id
+    // added for Separate Pricing Per Customer, returns customer_group_id
     function get_customer_group_id() {
       if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
         $_cg_id = $_SESSION['sppc_customer_group_id'];
@@ -556,5 +558,26 @@ class PriceFormatter {
       }
       return $_cg_id;
     }
+	
+	// PGM adds new function to create buttons throughout the store
+	function getProductButtons($products_id, $page_sent, $products_model = '', $products_name = '') {
+	  $button_output = '';
+	  
+	  // Add more info button if enabled
+	  if (SHOW_MORE_INFO == 'True') {
+        $button_output .= '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products_id) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>&nbsp;';
+	  }
+	  
+	  // Now generate the relevant 'buy now' button
+	  if ($this->thePrice == CALL_FOR_PRICE_VALUE) { // Call for price
+	    $button_output .= '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $products_model) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $products_name) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $products_id . '%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
+	  } elseif ($this->productsQuantity < 1 && STOCK_IMAGE_SWITCH == 'true') { // Out of Stock
+	    $button_output .= tep_image_submit('button_out_of_stock.gif', IMAGE_OUT_OF_STOCK);
+	  } else {
+		$button_output .= '<a href="' . tep_href_link($page_sent, tep_get_all_get_params(array('action')) . 'action=buy_now&product_to_buy_id=' . $products_id . '&products_id=' . $products_id) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>';
+	  }
+	  
+	  return $button_output;
+	}
 }
 ?>

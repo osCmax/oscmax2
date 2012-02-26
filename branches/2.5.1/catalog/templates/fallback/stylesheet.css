@@ -64,7 +64,7 @@ TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-e
 a.productListing-heading { text-decoration:none; }
 TABLE.productListing-list { border-left: 1px; border-right: 1px; border-style: solid; border-color: #dddddd; }
 TABLE.productinfo_msrp { border: 1px; border-style: solid; border-color: #dddddd; border-spacing: 1px; background-color: #ffffff; }
-td.productListing-data { width:33%; border: 1px; border-style: solid; border-color: #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: black; vertical-align:bottom; }
+td.productListing-data { width:33%; border: 1px; border-style: solid; border-color: #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: black; }
 td.productListing-data a:hover { text-decoration:none; }
 td.productListing-data-spacer { width:10px; max-width:10px; border-collapse:collapse; border-style:none; }
 td.productListing-data-blank { min-width:10px; border-style:none; }

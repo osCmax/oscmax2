@@ -1,1 +1,0 @@
-<P><FONT face=Arial>Enter your privacy policy through the admin panel. Click on the&nbsp;<STRONG>Privacy Page</STRONG> link under the <STRONG>Catalog</STRONG> section of the admin and use the wysiwyg HTML editor.</FONT></P>

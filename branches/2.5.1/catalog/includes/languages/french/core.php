@@ -437,4 +437,9 @@ define('BOX_TEXT_REMOVE','Supprimer');
 
 define('TEXT_MISSING_IMAGE','Désolé, l\'image du produit n\'est pas disponible actuellement');
 
+// BOF qpbpp
+define('TEXT_PRICE_BREAKS','De');
+define('TEXT_ON_SALE','Disponibles à la vente');
+// EOF qpbpp
+
 ?>

@@ -56,10 +56,6 @@ $get_vars = '';
       }
     }
 
-// BOF QPBPP for SPPC
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PRODUCT_LISTING);
-// EOF QPBPP for SPPC
-
 // set gridlist session variable to list
 $_SESSION['gridlist'] = 'list';
 

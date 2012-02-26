@@ -1,0 +1,8 @@
+<?php
+/* BTSv1.4 */
+  if(is_file(DIR_WS_TEMPLATES . TEMPLATENAME_POPUP)) {
+	  require(DIR_WS_TEMPLATES . TEMPLATENAME_POPUP);
+  } else {
+	  require(DIR_WS_TEMPLATES_FALLBACK . TEMPLATENAME_POPUP);	  
+  }
+?>

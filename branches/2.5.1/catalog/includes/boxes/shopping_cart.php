@@ -76,7 +76,7 @@ if (BASKET_CART == 'cart') {
 
   if ($cart->count_contents() > 0) {
     $boxContent .= tep_draw_separator();
-    $boxContent .= '<div align="right">' . $currencies->format($cart->show_total()) . '</div>';
+    $boxContent .= '<div align="right">' . $currencies->format($cart->show_total(true)) . '</div>';
 
   }
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution

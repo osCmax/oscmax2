@@ -119,8 +119,16 @@ class osC_onePageCheckout {
     }
     if (tep_not_null($onepage['info']['shipping_method'])){
       $shipping = $onepage['info']['shipping_method'];
+		// BOF: MOD INDVSHIP
+	  	if (array_key_exists('invcost', $shipping) && $shipping['invcost'] > 0) {
+			$iship_cost = $GLOBALS['currencies']->format($shipping['invcost']);
+      		$order->info['shipping_method'] = $shipping['title'] . " (included $iship_cost individual products shipping)";
+      		$order->info['shipping_cost'] = $shipping['cost'] + $shipping['invcost'];
+		} else {
       $order->info['shipping_method'] = $shipping['title'];
       $order->info['shipping_cost'] = $shipping['cost'];
+		};
+		// EOF: MOD INDVSHIP
     }
     if (tep_not_null($onepage['info']['comments'])){
 
@@ -664,6 +672,11 @@ class osC_onePageCheckout {
               'title' => (($shipping == 'free_free') ?  FREE_SHIPPING_TITLE : $quote[0]['module'] . ' (' . $quote[0]['methods'][0]['title'] . ')'),
               'cost' => (($shipping == 'free_free')?'0':$quote[0]['methods'][0]['cost'])
               );
+				// BOF: MOD INDVSHIP
+				if ($module != 'indvship') {
+					$shipping['invcost'] = $shipping_modules->get_shiptotal();
+				};
+				// EOF: MOD INDVSHIP
               $onepage['info']['shipping_method'] = $shipping;
             }
           }

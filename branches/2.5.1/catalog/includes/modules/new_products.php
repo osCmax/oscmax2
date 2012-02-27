@@ -38,28 +38,11 @@ $Id$
     while ($new_products = tep_db_fetch_array($new_products_query)) {
 		
 	  $pf->loadProduct($new_products['products_id'], $languages_id, NULL, NULL);
-	
-      // Add More Info button if required 
-	  if (SHOW_MORE_INFO == 'True') {
-        $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a> ';
-	  } else {
-	    $more_info = '';
-	  }
-
-      if ($pf->getPrice() == CALL_FOR_PRICE_VALUE) {
 		
         $box_content[$row][$col] = array('align' => 'center',
                                          'params' => 'class="smallText" width="33%" valign="top"',
-                                         'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $new_products['products_image'], $new_products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products['products_id']) . '">' . $new_products['products_name'] . '</a><br>' . $pf->getPriceStringShort() . '<br>' . $more_info . '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $new_products['products_model']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $new_products['products_name']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $new_products['products_id'] . '%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>');
+                                         'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $new_products['products_image'], $new_products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products['products_id']) . '">' . $new_products['products_name'] . '</a><br>' . $pf->getPriceStringShort() . '<br>' . $pf->getProductButtons($new_products['products_id'], basename($PHP_SELF), $new_products['products_model'], $new_products['products_name']));
 									   
-      } else {
-		
-        $box_content[$row][$col] = array('align' => 'center',
-                                         'params' => 'class="smallText" width="33%" valign="top"',
-                                         'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $new_products['products_image'], $new_products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products['products_id']) . '">' . $new_products['products_name'] . '</a><br>' . $pf->getPriceStringShort() . '<br>' . $more_info . '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'pName')) . 'action=buy_now&products_id=' . $new_products['products_id']) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>');
-									   
-      } // end if ($listing[$x]['products_price'] == CALL_FOR_PRICE_VALUE)
-	
       $col ++;
       if ($col > 2) {
         $col = 0;

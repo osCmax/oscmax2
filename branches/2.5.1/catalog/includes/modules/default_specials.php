@@ -59,3 +59,4 @@ $Id$
 <!-- default_specials_eof //-->
 <?php
   } // if (($no_of_default_specials = tep_db_num_rows($default_specials_query)) > 0)
+?>

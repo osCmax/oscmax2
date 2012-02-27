@@ -574,7 +574,7 @@ class PriceFormatter {
 	  } elseif ($this->productsQuantity < 1 && STOCK_IMAGE_SWITCH == 'true') { // Out of Stock
 	    $button_output .= tep_image_submit('button_out_of_stock.gif', IMAGE_OUT_OF_STOCK);
 	  } else {
-		$button_output .= '<a href="' . tep_href_link($page_sent, tep_get_all_get_params(array('action')) . 'action=buy_now&product_to_buy_id=' . $products_id . '&products_id=' . $products_id) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>';
+		$button_output .= '<a href="' . tep_href_link($page_sent, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $products_id) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>';
 	  }
 	  
 	  return $button_output;

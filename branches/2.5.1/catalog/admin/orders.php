@@ -143,20 +143,20 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
           require_once(DIR_FS_CATALOG . 'googlecheckout/inserts/admin/orders2.php');
           } else {
           // *** END GOOGLE CHECKOUT ***
-	  // Add Comments to email
-           $customer_notified = isset($customer_notified)?$customer_notified:'0';
-           if (isset($_POST['notify']) && ($_POST['notify'] == 'on')) {
-              $notify_comments = '';
-              if (isset($_POST['notify_comments']) && ($_POST['notify_comments'] == 'on')) {
-                 $notify_comments = sprintf(EMAIL_TEXT_COMMENTS_UPDATE, $comments) . "\n\n";
-               }
-	    }
-	  // Build and send emails
+          $customer_notified = '0';
+          if (isset($_POST['notify']) && ($_POST['notify'] == 'on')) {
+            $notify_comments = '';
+            if (isset($_POST['notify_comments']) && ($_POST['notify_comments'] == 'on')) {
+              $notify_comments = sprintf(EMAIL_TEXT_COMMENTS_UPDATE, $comments) . "\n\n";
+            }
+
             $email = STORE_NAME . "\n" . EMAIL_SEPARATOR . "\n" . EMAIL_TEXT_ORDER_NUMBER . ' ' . $oID . "\n" . EMAIL_TEXT_INVOICE_URL . ' ' . tep_catalog_href_link(FILENAME_CATALOG_ACCOUNT_HISTORY_INFO, 'order_id=' . $oID, 'SSL') . "\n" . EMAIL_TEXT_DATE_ORDERED . ' ' . tep_date_long($check_status['date_purchased']) . "\n\n" . $notify_comments . sprintf(EMAIL_TEXT_STATUS_UPDATE, $orders_status_array[$status]);
+
             tep_mail($check_status['customers_name'], $check_status['customers_email_address'], EMAIL_TEXT_SUBJECT, $email, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+
             $customer_notified = '1';
-          // End send emails
-	  }
+          }
+         }
           tep_db_query("insert into " . TABLE_ORDERS_STATUS_HISTORY . " (orders_id, orders_status_id, date_added, customer_notified, comments) values ('" . (int)$oID . "', '" . tep_db_input($status) . "', now(), '" . tep_db_input($customer_notified) . "', '" . tep_db_input($comments)  . "')");
 
           $order_updated = true;

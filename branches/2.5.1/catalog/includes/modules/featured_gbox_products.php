@@ -66,7 +66,7 @@ if (sizeof($featured_products_array) <> '0') {
 if (FEATURED_SET_SHOW_BUY_NOW_BUTTONS=='true') {
   //original buy now link
   //$buy_now_link = '<a href="' . tep_href_link(FILENAME_DEFAULT, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $featured_products_array[$i]['id'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>';
-  $buy_now_link = $pf->getProductButtons($featured_products_array[$i]['id'], basename($PHP_SELF), $featured_products_array[$i]['products_model'], $featured_products_array[$i]['products_name']);
+  $buy_now_link = $pf->getProductButtons($featured_products_array[$i]['id'], basename($PHP_SELF), $featured_products_array[$i]['model'], $featured_products_array[$i]['name']);
   //sid killer buy now link
   //$buy_now_link = '<br><form name="buy_now" method="post" action="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now', 'NONSSL') . '"><input type="hidden" name="products_id" value="' . $featured_products_array[$i]['id'] . '">' . tep_image_submit('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</form>';
 } else {

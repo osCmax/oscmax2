@@ -38,7 +38,7 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
   
   for($i=0,$col=1; $i<sizeof($featured_manufacturer_products_array); $i++,$col++) {
   
-  	$pf->loadProduct($featured_products_array[$i]['id'], $languages_id, NULL, NULL);
+  	$pf->loadProduct($featured_manufacturer_products_array[$i]['pid'], $languages_id, NULL, NULL);
 
     $products_price = $pf->getPriceStringShort() . '<br>';
 	
@@ -61,7 +61,7 @@ if (sizeof($featured_manufacturer_products_array) <> '0') {
     $info_box_contents[0]['text'] .= '<td valign="top" align="center" width="'.floor(100/$num_columns).'%">';
 
     if (FEATURED_SET_SHOW_BUY_NOW_BUTTONS=='true') {
-      $buy_now_link = $pf->getProductButtons($featured_products_array[$i]['id'], basename($PHP_SELF), $featured_products_array[$i]['products_model'], $featured_products_array[$i]['products_name']);
+      $buy_now_link = $pf->getProductButtons($featured_manufacturer_products_array[$i]['pid'], basename($PHP_SELF), $featured_manufacturer_products_array[$i]['pmodel'], $featured_manufacturer_products_array[$i]['pname']);
       //sid killer buy now button: http://www.oscommerce.com/community/contributions,952
       //$buy_now_link = '<br><form name="buy_now" method="post" action="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now', 'NONSSL') . '"><input type="hidden" name="products_id" value="' . $featured_manufacturer_products_array[$i]['pid'] . '">' . tep_image_submit('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</form>';
     } else {

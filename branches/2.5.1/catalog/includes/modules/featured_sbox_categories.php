@@ -22,24 +22,9 @@ if (sizeof($featured_categories_array) <> '0') {
 
   for($i=0,$col=1; $i<sizeof($featured_categories_array); $i++,$col++) { 
 
-    // BOF Separate Price per Customer
-    if(!tep_session_is_registered('sppc_customer_group_id')) { 
-      $customer_group_id = '0';
-    } else {
-      $customer_group_id = $sppc_customer_group_id;
-    }
-    $scustomer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$featured_categories_array[$i]['pid']. "' and customers_group_id =  '" . $customer_group_id . "'");
-    if ($scustomer_group_price = tep_db_fetch_array($scustomer_group_price_query)) {
-      $featured_categories_array[$i]['pprice'] = $scustomer_group_price['customers_group_price'];
-	}
-    // EOF Separate Price per Customer
-	
-    $special_price = tep_get_products_special_price($featured_categories_array[$i]['pid']);
-	if ($special_price) {
-      $products_price = '<s>' .  $currencies->display_price($featured_categories_array[$i]['pprice'], tep_get_tax_rate($featured_categories_array[$i]['ptax_class_id'])) . '</s>&nbsp;&nbsp;<span class="productSpecialPrice">' . $currencies->display_price($special_price, tep_get_tax_rate($featured_categories_array[$i]['ptax_class_id'])) . '</span>'; 
-    } else { 
-      $products_price = $currencies->display_price($featured_categories_array[$i]['pprice'], tep_get_tax_rate($featured_categories_array[$i]['ptax_class_id'])); 
-    } 
+   	$pf->loadProduct($featured_products_array[$i]['id'], $languages_id, NULL, NULL);
+
+    $products_price = $pf->getPriceStringShort() . '<br>';
 	
     if ($featured_categories_array[$i]['pshortdescription'] != '') { 
       $current_description = $featured_categories_array[$i]['pshortdescription']; 
@@ -59,19 +44,8 @@ if (sizeof($featured_categories_array) <> '0') {
 	
     echo '<td valign="top" align="center" width="'.floor(100/$num_columns).'%">';
 
-    if (SHOW_MORE_INFO == 'True') {
-      $more_info = '<br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a> ';
-	} else {
-	  $more_info = '<br>';	
-	}
-
     if (FEATURED_SET_SHOW_BUY_NOW_BUTTONS=='true') {
-	  if ($featured_categories_array[$i]['pprice'] == CALL_FOR_PRICE_VALUE) {
-        //original buy now button
-        $buy_now_link = '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $featured_categories_array[$i]['pmodel']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $featured_categories_array[$i]['pname']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $featured_categories_array[$i]['pid'] . '%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
-	  } else {
-		$buy_now_link = '<a href="' . tep_href_link(FILENAME_DEFAULT, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>';
-	  }
+	 $buy_now_link = $pf->getProductButtons($featured_products_array[$i]['id'], basename($PHP_SELF), $featured_products_array[$i]['products_model'], $featured_products_array[$i]['products_name']);
       //sid killer buy now button: http://www.oscommerce.com/community/contributions,952
       //$buy_now_link = '<br><form name="buy_now" method="post" action="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now', 'NONSSL') . '"><input type="hidden" name="products_id" value="' . $featured_categories_array[$i]['pid'] . '">' . tep_image_submit('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</form>';
     } else {
@@ -85,7 +59,7 @@ if (sizeof($featured_categories_array) <> '0') {
     echo '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25);
     echo '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>';
     echo $current_description; 
-    echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . str_replace('&nbsp;&nbsp;','<br>',$products_price) . '' . $more_info . $buy_now_link . '</td></tr></table>';
+    echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . str_replace('&nbsp;&nbsp;','<br>',$products_price) . '' . $buy_now_link . '</td></tr></table>';
   }
 
 
@@ -102,7 +76,7 @@ if (sizeof($featured_categories_array) <> '0') {
 	$info_box_contents = array();
     $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25) . '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>');
     $info_box_contents[0]['text'] .= $current_description; 
-    $info_box_contents[0]['text'] .= '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . str_replace('&nbsp;&nbsp;','<br>',$products_price) . '' . $more_info . $buy_now_link . '</td></tr></table>';
+    $info_box_contents[0]['text'] .= '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . str_replace('&nbsp;&nbsp;','<br>',$products_price) . '' . $buy_now_link . '</td></tr></table>';
     new infoBox($info_box_contents);
   }
 
@@ -112,7 +86,7 @@ if (sizeof($featured_categories_array) <> '0') {
     echo '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25);
     echo '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>';
     echo $current_description; 
-    echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . str_replace('&nbsp;&nbsp;','<br>',$products_price) . '' . $more_info . $buy_now_link . '</td>'.(((FEATURED_CATEGORIES_COLUMNS>1)&&(($col/$num_columns)!=floor($col/$num_columns)))?'<td align="center" width="'.CATEGORIES_LINE_THICKNESS.'" style="height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px;"><div style="background-color: #'.CATEGORIES_LINE_COLOR.'; height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px; width: '.CATEGORIES_LINE_THICKNESS.'px;">' . tep_draw_separator('pixel_trans.gif', CATEGORIES_LINE_THICKNESS, CATEGORIES_VLINE_IMAGE_HEIGHT) . '</div></td>':'').'</tr></table>';
+    echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . str_replace('&nbsp;&nbsp;','<br>',$products_price) . '' . $buy_now_link . '</td>'.(((FEATURED_CATEGORIES_COLUMNS>1)&&(($col/$num_columns)!=floor($col/$num_columns)))?'<td align="center" width="'.CATEGORIES_LINE_THICKNESS.'" style="height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px;"><div style="background-color: #'.CATEGORIES_LINE_COLOR.'; height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px; width: '.CATEGORIES_LINE_THICKNESS.'px;">' . tep_draw_separator('pixel_trans.gif', CATEGORIES_LINE_THICKNESS, CATEGORIES_VLINE_IMAGE_HEIGHT) . '</div></td>':'').'</tr></table>';
   }
 
 
@@ -129,7 +103,7 @@ if (sizeof($featured_categories_array) <> '0') {
 	$info_box_contents = array();
     $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25) . '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>');
     $info_box_contents[0]['text'] .= $current_description; 
-    $info_box_contents[0]['text'] .= '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . str_replace('&nbsp;&nbsp;','<br>',$products_price) . '' . $more_info . $buy_now_link . '</td></tr></table>';
+    $info_box_contents[0]['text'] .= '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . str_replace('&nbsp;&nbsp;','<br>',$products_price) . '' . $buy_now_link . '</td></tr></table>';
     new infoBox($info_box_contents);
     //echo '<img src="images/info_box_' . FEATURED_CATEGORIES_SET_STYLE_SHADOW . '_shadow.gif" width="100%" height="13" alt="">';
   }
@@ -140,7 +114,7 @@ if (sizeof($featured_categories_array) <> '0') {
   if ((FEATURED_CATEGORIES_SET == '2') && (FEATURED_CATEGORIES_SET_STYLE == '1')) { 
     echo '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td align="left" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td></tr><tr><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div></td></tr><tr><td valign="top" class="featuredCategories">';
     echo $current_description; 
-    echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td></tr><tr><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td></tr></table>';
+    echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td></tr><tr><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td></tr></table>';
   }
 
 
@@ -157,7 +131,7 @@ if (sizeof($featured_categories_array) <> '0') {
     $info_box_contents = array();
     $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td align="left" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td></tr><tr><td align="center" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div></td></tr><tr><td valign="top" class="featuredCategories">');
     $info_box_contents[0]['text'] .= $current_description; 
-	$info_box_contents[0]['text'] .= '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td></tr><tr><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td></tr></table>';
+	$info_box_contents[0]['text'] .= '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td></tr><tr><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td></tr></table>';
     new infoBox($info_box_contents);
   }
 
@@ -166,7 +140,7 @@ if (sizeof($featured_categories_array) <> '0') {
   if ((FEATURED_CATEGORIES_SET == '2') && (FEATURED_CATEGORIES_SET_STYLE == '3')) {
     echo '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td align="left" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td></tr><tr><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div></td></tr><tr><td align="left" valign="top" class="featuredCategories">';
     echo $current_description; 
-    echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a><br>' . tep_draw_separator('pixel_trans.gif', '10', '6') . '<br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td>'.(((FEATURED_CATEGORIES_COLUMNS>1)&&(($col/$num_columns)!=floor($col/$num_columns)))?'<td align="center" width="'.CATEGORIES_LINE_THICKNESS.'" style="height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px;"><div style="background-color: #'.CATEGORIES_LINE_COLOR.'; height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px; width: '.CATEGORIES_LINE_THICKNESS.'px;">' . tep_draw_separator('pixel_trans.gif', CATEGORIES_LINE_THICKNESS, CATEGORIES_VLINE_IMAGE_HEIGHT) . '</div></td>':'').'</tr></table>';
+    echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a><br>' . tep_draw_separator('pixel_trans.gif', '10', '6') . '<br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td>'.(((FEATURED_CATEGORIES_COLUMNS>1)&&(($col/$num_columns)!=floor($col/$num_columns)))?'<td align="center" width="'.CATEGORIES_LINE_THICKNESS.'" style="height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px;"><div style="background-color: #'.CATEGORIES_LINE_COLOR.'; height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px; width: '.CATEGORIES_LINE_THICKNESS.'px;">' . tep_draw_separator('pixel_trans.gif', CATEGORIES_LINE_THICKNESS, CATEGORIES_VLINE_IMAGE_HEIGHT) . '</div></td>':'').'</tr></table>';
   }
 
 
@@ -183,7 +157,7 @@ if (sizeof($featured_categories_array) <> '0') {
     $info_box_contents = array();
     $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td align="left" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td></tr><tr><td align="center" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div></td></tr><tr><td valign="top" class="featuredCategories">');
     $info_box_contents[0]['text'] .= $current_description; 
-	$info_box_contents[0]['text'] .= '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td></tr><tr><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td></tr></table>';
+	$info_box_contents[0]['text'] .= '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td></tr><tr><td align="left" valign="top" class="featuredCategories">' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td></tr></table>';
     new infoBox($info_box_contents);
     //echo '<img src="images/info_box_' . FEATURED_CATEGORIES_SET_STYLE_SHADOW . '_shadow.gif" width="100%" height="13" alt="">';
   }
@@ -193,7 +167,7 @@ if (sizeof($featured_categories_array) <> '0') {
 
   if ((FEATURED_CATEGORIES_SET == '3') && (FEATURED_CATEGORIES_SET_STYLE == '1')) {
     echo '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25);
-    echo '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>';
+    echo '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>';
     echo $current_description; 
     echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td></tr></table>';
   }
@@ -210,7 +184,7 @@ if (sizeof($featured_categories_array) <> '0') {
     }
 	
     $info_box_contents = array();
-    $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25) . '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>');
+    $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25) . '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>');
     $info_box_contents[0]['text'] .= $current_description; 
 	$info_box_contents[0]['text'] .= '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td></tr></table>';
     new infoBox($info_box_contents);
@@ -220,7 +194,7 @@ if (sizeof($featured_categories_array) <> '0') {
 
   if ((FEATURED_CATEGORIES_SET == '3') && (FEATURED_CATEGORIES_SET_STYLE == '3')) {
     echo '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25);
-    echo '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>';
+    echo '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>';
     echo $current_description; 
     echo '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td>'.(((FEATURED_CATEGORIES_COLUMNS>1)&&(($col/$num_columns)!=floor($col/$num_columns)))?'<td align="center" width="'.CATEGORIES_LINE_THICKNESS.'" style="height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px;"><div style="background-color: #'.CATEGORIES_LINE_COLOR.'; height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px; width: '.CATEGORIES_LINE_THICKNESS.'px;">' . tep_draw_separator('pixel_trans.gif', CATEGORIES_LINE_THICKNESS, CATEGORIES_VLINE_IMAGE_HEIGHT) . '</div></td>':'').'</tr></table>';
   }
@@ -237,7 +211,7 @@ if (sizeof($featured_categories_array) <> '0') {
     }
 	
     $info_box_contents = array();
-    $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25) . '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>');
+    $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td width="' . (SMALL_IMAGE_WIDTH + 25) . '" align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td><td align="left" valign="top" class="featuredCategories"><div align="left"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>');
     $info_box_contents[0]['text'] .= $current_description; 
 	$info_box_contents[0]['text'] .= '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '"><font color="#FF0000">' . TEXT_MORE_INFO . '</font></a>&nbsp;</td></tr></table>';
     new infoBox($info_box_contents);
@@ -249,7 +223,7 @@ if (sizeof($featured_categories_array) <> '0') {
 
   if ((FEATURED_CATEGORIES_SET == '4') && (FEATURED_CATEGORIES_SET_STYLE == '1')) {
     echo '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . 
-	  tep_draw_separator('pixel_trans.gif', '1', '6')  . '<br><div align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>' .  OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td></tr></table>';
+	  tep_draw_separator('pixel_trans.gif', '1', '6')  . '<br><div align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>' .  OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td></tr></table>';
   }
 
 
@@ -265,7 +239,7 @@ if (sizeof($featured_categories_array) <> '0') {
 	
     $info_box_contents = array();
     $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . tep_draw_separator('pixel_trans.gif', '1', '6') . 
-      '<br><div align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>' .  OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td></tr></table>');
+      '<br><div align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>' .  OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td></tr></table>');
     new infoBox($info_box_contents);
   }
 
@@ -273,7 +247,7 @@ if (sizeof($featured_categories_array) <> '0') {
 
   if ((FEATURED_CATEGORIES_SET == '4') && (FEATURED_CATEGORIES_SET_STYLE == '3')) {
     echo '<table border="0" width="100%" cellspacing="0" cellpadding="0"><tr><td style="height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px;"><table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . tep_draw_separator('pixel_trans.gif', '1', '6') . '<br><div align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . 
-	  $featured_categories_array[$i]['pname'] . '</a></div>' .  OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td></tr></table></td>'.(((FEATURED_CATEGORIES_COLUMNS>1)&&(($col/$num_columns)!=floor($col/$num_columns)))?'<td align="center" width="'.CATEGORIES_LINE_THICKNESS.'" style="height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px;"><div style="background-color: #'.CATEGORIES_LINE_COLOR.'; height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px; width: '.CATEGORIES_LINE_THICKNESS.'px;">' . tep_draw_separator('pixel_trans.gif', CATEGORIES_LINE_THICKNESS, CATEGORIES_VLINE_IMAGE_HEIGHT) . '</div></td>':'').'</tr></table>';
+	  $featured_categories_array[$i]['pname'] . '</a></div>' .  OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td></tr></table></td>'.(((FEATURED_CATEGORIES_COLUMNS>1)&&(($col/$num_columns)!=floor($col/$num_columns)))?'<td align="center" width="'.CATEGORIES_LINE_THICKNESS.'" style="height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px;"><div style="background-color: #'.CATEGORIES_LINE_COLOR.'; height: '.CATEGORIES_VLINE_IMAGE_HEIGHT.'px; width: '.CATEGORIES_LINE_THICKNESS.'px;">' . tep_draw_separator('pixel_trans.gif', CATEGORIES_LINE_THICKNESS, CATEGORIES_VLINE_IMAGE_HEIGHT) . '</div></td>':'').'</tr></table>';
   }
 
 
@@ -289,7 +263,7 @@ if (sizeof($featured_categories_array) <> '0') {
 	
     $info_box_contents = array();
     $info_box_contents[] = array('text' => '<table border="0" width="100%" cellspacing="0" cellpadding="'.CATEGORIES_CELLPADDING.'"><tr><td align="center" valign="top" class="featuredCategories"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $featured_categories_array[$i]['pimage'], $featured_categories_array[$i]['pname'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br>' . tep_draw_separator('pixel_trans.gif', '1', '6') . 
-      '<br><div align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>' .  OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $more_info . $buy_now_link . '</td></tr></table>');
+      '<br><div align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_categories_array[$i]['pid'], 'NONSSL') . '">' . $featured_categories_array[$i]['pname'] . '</a></div>' .  OPEN_FEATURED_TABLE_HEADING_PRICE . $products_price . '' . $buy_now_link . '</td></tr></table>');
     new contentBox($info_box_contents);
     //echo '<img src="images/info_box_' . FEATURED_CATEGORIES_SET_STYLE_SHADOW . '_shadow.gif" width="100%" height="13" alt="">';
   }

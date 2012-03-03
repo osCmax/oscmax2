@@ -171,7 +171,7 @@ ul.semtabs li.active a { background-color: #ffffff; border-bottom: 1px solid #ff
 td.articleTextBox { border-left: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 10px; padding-left: 10px; padding-right: 10px;}
 
 /* BOF: Open Featured Products */
-TD.featuredProducts, TD.featuredCategories, TD.featuredManufacturers, TD.featuredManufacturerWP { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; }
+TD.featuredProducts, TD.featuredCategories, TD.featuredManufacturers, TD.featuredManufacturerWP { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 TD.featuredProducts A, TD.featuredCategories A, TD.featuredManufacturers A, TD.featuredManufacturerWP A { color: #000000; text-decoration: none; }
 TD.featuredProducts A:hover, TD.featuredCategories A:hover, TD.featuredManufacturers A:hover, TD.featuredManufacturerWP A:hover { color: #AABBDD;
   text-decoration: underline; }

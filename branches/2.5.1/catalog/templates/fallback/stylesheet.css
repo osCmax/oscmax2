@@ -411,3 +411,8 @@ background-position: top center; color: white; font-weight: bold; margin-left: 1
 	border:1px solid #000;
 }
 /* EOF: Cloud Zoom */
+
+/* BOF: Tax and Shipping Display */
+.tax_near_price { font-size: 9px; }
+a.shipping_link { text-decoration:underline; font-size: 9px; }
+/* EOF: Tax and Shipping Display */

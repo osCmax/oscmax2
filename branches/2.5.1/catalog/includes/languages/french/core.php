@@ -442,4 +442,10 @@ define('TEXT_PRICE_BREAKS','De');
 define('TEXT_ON_SALE','Disponibles à la vente');
 // EOF qpbpp
 
+// BOF Show tax and Shipping near price
+define('TAX_RATE_NEAR_PRICE_INC', 'Inc Tax of ');
+define('TAX_RATE_NEAR_PRICE_EX', 'Ex Tax of ');
+define('TEXT_SHIPPING_NEAR_PRICE', 'Shipping');
+// EOF Show tax and Shipping near price
+
 ?>

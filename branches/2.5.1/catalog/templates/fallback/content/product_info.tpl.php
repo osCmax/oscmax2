@@ -136,7 +136,7 @@ $Id$
         <td class="productinfo_header" colspan="3">
           <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
-              <td class="pageHeading" valign="top"><?php echo $product_info['products_name'] . $min_order_text; ?></td>
+              <td class="pageHeading" valign="top" width="70%"><?php echo $product_info['products_name'] . $min_order_text; ?></td>
               <td class="pageHeading" align="right" valign="top">
               <?php 
               if ( ($hi_product_price == CALL_FOR_PRICE_VALUE) || ($lo_product_price == CALL_FOR_PRICE_VALUE) ){

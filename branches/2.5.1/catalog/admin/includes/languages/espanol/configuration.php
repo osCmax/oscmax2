@@ -64,6 +64,10 @@ define('CT_NEW_SIGNUP_DISCOUNT_COUPON', 'Código de vale descuento de bienvenida'
 define('CD_NEW_SIGNUP_DISCOUNT_COUPON', 'Código de vale descuento de bienvenida: si no quieres que se envíe un vale en el e-mail generado al crear una cuenta déjalo en blanco, en caso contrario introduce el código del vale que deseas utilizar');
 define('CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Importe de cheque regalo de bienvenida');
 define('CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Importe de cheque regalo de bienvenida: si no quieres que se envíe un cheque regalo en el e-mail generado al crear una cuenta poner a 0, en caso contrario introduce aquí la cantidad p.ej. 10.00 o 50.00 sin símbolos de moneda');
+define('CT_SHOW_TAX_RATE_NEAR_PRICE', 'Display tax rate near price?');
+define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'Some countries require you to show the tax rate included near where the price is displayed.');
+define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Display link to shipping charges near the price?');
+define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Some countries require you to display a link to your shipping charges near the price.  Requires <b>Display tax rate near price</b> to be enabled.');
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Nombre');

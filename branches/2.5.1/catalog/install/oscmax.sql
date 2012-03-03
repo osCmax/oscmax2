@@ -1812,9 +1812,11 @@ INSERT INTO configuration VALUES (15, 'CT_STORE_NAME_ADDRESS', 'STORE_NAME_ADDRE
 INSERT INTO configuration VALUES (16, 'CT_SHOW_COUNTS', 'SHOW_COUNTS', 'false', 'CD_SHOW_COUNTS', '1', '19', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 INSERT INTO configuration VALUES (17, 'CT_TAX_DECIMAL_PLACES', 'TAX_DECIMAL_PLACES', '2', 'CD_TAX_DECIMAL_PLACES', '1', '20', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (18, 'CT_DISPLAY_PRICE_WITH_TAX', 'DISPLAY_PRICE_WITH_TAX', 'false', 'CD_DISPLAY_PRICE_WITH_TAX', '1', '21', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
-INSERT INTO configuration VALUES (2657, 'CT_DEFAULT_PRODUCT_TAX_CLASS', 'DEFAULT_PRODUCT_TAX_CLASS', '1', 'CD_DEFAULT_PRODUCT_TAX_CLASS', '1', '22', now(), now(), 'tep_get_tax_class_title', 'tep_cfg_pull_down_tax_classes(');
-INSERT INTO configuration VALUES (456, 'CT_NEW_SIGNUP_DISCOUNT_COUPON', 'NEW_SIGNUP_DISCOUNT_COUPON', '', 'CD_NEW_SIGNUP_DISCOUNT_COUPON', '1', '23', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2657, 'CT_DEFAULT_PRODUCT_TAX_CLASS', 'DEFAULT_PRODUCT_TAX_CLASS', '1', 'CD_DEFAULT_PRODUCT_TAX_CLASS', '1', '24', now(), now(), 'tep_get_tax_class_title', 'tep_cfg_pull_down_tax_classes(');
+INSERT INTO configuration VALUES (456, 'CT_NEW_SIGNUP_DISCOUNT_COUPON', 'NEW_SIGNUP_DISCOUNT_COUPON', '', 'CD_NEW_SIGNUP_DISCOUNT_COUPON', '1', '25', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (455, 'CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', '0', 'CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', '1', '24', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (3305, 'CT_SHOW_TAX_RATE_NEAR_PRICE', 'SHOW_TAX_RATE_NEAR_PRICE', 'false', 'CD_SHOW_TAX_RATE_NEAR_PRICE', '1', '22', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
+INSERT INTO configuration VALUES (3306, 'CT_SHOW_SHIPPING_NEAR_PRICE', 'SHOW_SHIPPING_NEAR_PRICE', 'false', 'CD_SHOW_SHIPPING_NEAR_PRICE', '1', '23', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 
 # Configuration ID: 2 - Minimum Values
 INSERT INTO configuration VALUES (19, 'CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'ENTRY_FIRST_NAME_MIN_LENGTH', '2', 'CD_ENTRY_FIRST_NAME_MIN_LENGTH', '2', '1', NULL, now(), NULL, NULL);

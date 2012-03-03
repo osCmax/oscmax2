@@ -64,6 +64,10 @@ define('CT_NEW_SIGNUP_DISCOUNT_COUPON', 'Welcome Discount Coupon Code');
 define('CD_NEW_SIGNUP_DISCOUNT_COUPON', 'Welcome Discount Coupon Code: if you do not want to send a coupon in your create account email leave blank else place the coupon code you wish to use');
 define('CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Welcome Gift Voucher Amount');
 define('CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Welcome Gift Voucher Amount: If you do not wish to send a Gift Voucher in your create account email put 0 for no amount else if you do place the amount here i.e. 10.00 or 50.00 no currency signs');
+define('CT_SHOW_TAX_RATE_NEAR_PRICE', 'Display tax rate near price?');
+define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'Some countries require you to show the tax rate included near where the price is displayed.');
+define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Display link to shipping charges near the price?');
+define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Some countries require you to display a link to your shipping charges near the price.  Requires <b>Display tax rate near price</b> to be enabled.');
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'First Name');

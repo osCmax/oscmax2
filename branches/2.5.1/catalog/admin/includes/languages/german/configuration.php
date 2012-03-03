@@ -64,6 +64,10 @@ define('CT_NEW_SIGNUP_DISCOUNT_COUPON', 'Neukunden-Gutscheincode');
 define('CD_NEW_SIGNUP_DISCOUNT_COUPON', 'Neukunden-Gutscheincode: Wenn Sie keinen Gutschein mit den Bestätigungs-E-Mails für neu erstellte Konten versenden möchten, lassen Sie dieses Feld leer. Falls Sie Neukunden jedoch einen Gutschein zusenden möchten, legen Sie einen Gutscheincode fest.');
 define('CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Nettowert des Neukunden-Gutscheines');
 define('CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Nettowert des Neukunden-Gutscheines: Wenn Sie keinen Gutschein mit den Bestätigungs-E-Mails für neu erstellte Konten versenden möchten, tragen Sie hier 0 ein. Wenn Sie einen Gutschein versenden möchten, legen Sie hier den Nettowert fest. ACHTUNG: Verwenden Sie Punkt statt Komma und keine Währungsangaben, wie zB 10.00 oder 50.00.');
+define('CT_SHOW_TAX_RATE_NEAR_PRICE', 'Display tax rate near price?');
+define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'Some countries require you to show the tax rate included near where the price is displayed.');
+define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Display link to shipping charges near the price?');
+define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Some countries require you to display a link to your shipping charges near the price.  Requires <b>Display tax rate near price</b> to be enabled.');
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Vorname');

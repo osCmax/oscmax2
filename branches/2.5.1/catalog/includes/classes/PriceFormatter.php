@@ -287,6 +287,22 @@ class PriceFormatter {
       return round ($percentage) . '%';
     }
   }
+  
+  function addTaxShippingDisplay() {
+    // Add functionality to display tax rate and shipping link near prices
+    $ts_text = '';
+	if ($this->thePrice != CALL_FOR_PRICE_VALUE && SHOW_TAX_RATE_NEAR_PRICE == 'true') {
+	  if (DISPLAY_PRICE_WITH_TAX == 'true') {
+	    $ts_text .= '<br><span class="tax_near_price">' . TAX_RATE_NEAR_PRICE_INC . tep_get_tax_rate($this->taxClass) . '%</span>&nbsp;';
+	  } else {
+	    $ts_text .= '<br><span class="tax_near_price">' . TAX_RATE_NEAR_PRICE_EX . tep_get_tax_rate($this->taxClass) . '%</span>&nbsp;';
+	  }
+	  if (SHOW_SHIPPING_NEAR_PRICE == 'true') {
+	    $ts_text .= '<a href="' . tep_href_link(FILENAME_INFORMATION, 'info_id=8') . '" class="shipping_link">' . TEXT_SHIPPING_NEAR_PRICE . '</a>&nbsp;';
+	  }
+    }
+	return $ts_text;
+  }
 
   function getPriceString($style='productPriceInBox') {
     global $currencies;
@@ -397,6 +413,7 @@ class PriceFormatter {
         . '&nbsp;';
       }
     }
+	$lc_text .= $this->addTaxShippingDisplay();
     return $lc_text;
   }
 
@@ -423,7 +440,9 @@ class PriceFormatter {
         $lc_text = '&nbsp;<big>'
         . $currencies->display_price($this->thePrice, tep_get_tax_rate($this->taxClass))
         . '&nbsp;</big>';
+		
     }
+	$lc_text .= $this->addTaxShippingDisplay();
     return $lc_text;
   }
 
@@ -462,6 +481,7 @@ class PriceFormatter {
 		 $dropdown = tep_draw_pull_down_menu('price_breaks', $dropdown_price_breaks, '0', 'style="font-weight: normal"');
      $dropdown .= '&nbsp;<span class="smallText">' . PB_FROM . '</span>&nbsp;' . $currencies->display_price($this->lowPrice, tep_get_tax_rate($this->taxClass)) . "\n";
 
+     $dropdown .= $this->addTaxShippingDisplay();
      return $dropdown;
   }
   

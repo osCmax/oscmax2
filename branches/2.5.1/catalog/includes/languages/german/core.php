@@ -468,4 +468,10 @@ define('TEXT_REPLACEMENT_SUGGESTION', 'Meinten Sie: ');
 define('TEXT_PRICE_BREAKS', 'Ab');
 define('TEXT_ON_SALE', '');
 // EOF qpbpp
+
+// BOF Show tax and Shipping near price
+define('TAX_RATE_NEAR_PRICE_INC', 'Inc Tax of ');
+define('TAX_RATE_NEAR_PRICE_EX', 'Ex Tax of ');
+define('TEXT_SHIPPING_NEAR_PRICE', 'Shipping');
+// EOF Show tax and Shipping near price
 ?>

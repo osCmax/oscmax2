@@ -41,6 +41,10 @@ $Id$
     $info_box_contents[0][] = array('align' => 'center',
                                     'params' => 'class="productListing-heading"',
                                     'text' => TABLE_HEADING_QUANTITY);
+									
+	$info_box_contents[0][] = array('align' => 'center',
+                                    'params' => 'class="productListing-heading"',
+                                    'text' => TABLE_HEADING_PRICE);
 
     $info_box_contents[0][] = array('align' => 'right',
                                     'params' => 'class="productListing-heading"',
@@ -128,7 +132,11 @@ $Id$
       $info_box_contents[$cur_row][] = array('align' => 'center',
                                              'params' => 'class="productListing-data-list" valign="top"',
                                              'text' => tep_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'size="4" style="width:30px; text-align:center;" onblur="document.cart_quantity.submit();"') . tep_draw_hidden_field('products_id[]', $products[$i]['id']));
-
+											 
+	  $info_box_contents[$cur_row][] = array('align' => 'center',
+                                             'params' => 'class="productListing-data-list" valign="top"',
+                                             'text' => '<b>' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), 1));
+	  
       $info_box_contents[$cur_row][] = array('align' => 'right',
                                              'params' => 'class="productListing-data-list" valign="top"',
                                              'text' => '<b>' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</b>');

@@ -364,6 +364,8 @@ define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Forma de mostrar precios de atributos');
 define('CD_ATTRIBUTE_PRICE_DISPLAY', '¿Quieres que se muestren los precios de los atributos como valores separados (p.ej. +2.00€) o como el total del precio del producto más el precio del atributo? (p.ej. 25.00€)');
 define('CT_PRODUCT_LIST_BESTSELLER', 'Ordenar según los más vendidos');
 define('CD_PRODUCT_LIST_BESTSELLER', '¿Quieres permitir que se puedan ordenar los productos según los más vendidos?');
+define('CT_PRODUCT_LIST_DATE_ADDED', 'Display product added/expected date');
+define('CD_PRODUCT_LIST_DATE_ADDED', 'Would you like to show the product added or product expected date on the product page?');
 
 
 // Configuration ID: 9 - Stock

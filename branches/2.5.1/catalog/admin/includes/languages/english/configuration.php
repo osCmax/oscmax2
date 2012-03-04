@@ -364,7 +364,8 @@ define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Attribute Price Display Method');
 define('CD_ATTRIBUTE_PRICE_DISPLAY', 'Do you want to display your attribute prices as seperate values (eg. +$2.00) or as a combined total of the product price and the attribute price? (eg. $25.00)');
 define('CT_PRODUCT_LIST_BESTSELLER', 'Display Bestsellers in filter box');
 define('CD_PRODUCT_LIST_BESTSELLER', 'Would you like to allow Bestsellers to be a sort option');
-
+define('CT_PRODUCT_LIST_DATE_ADDED', 'Display product added/expected date');
+define('CD_PRODUCT_LIST_DATE_ADDED', 'Would you like to show the product added or product expected date on the product page?');
 
 // Configuration ID: 9 - Stock
 define('CT_STOCK_CHECK', 'Check stock level');

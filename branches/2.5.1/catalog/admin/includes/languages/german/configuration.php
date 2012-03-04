@@ -364,7 +364,8 @@ define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Attributpreis Anzeigemethode');
 define('CD_ATTRIBUTE_PRICE_DISPLAY', 'Möchten Sie die Attributpreise als tatsächlichen Attributpreis (zB. +2,00 €) oder als Summe aus Produktpreis und Attributpreis (zB. 25,00 €) anzeigen?');
 define('CT_PRODUCT_LIST_BESTSELLER', 'Bestseller in Filterbox anzeigen');
 define('CD_PRODUCT_LIST_BESTSELLER', 'Möchten Sie Bestseller als Sortieroption anbieten?');
-
+define('CT_PRODUCT_LIST_DATE_ADDED', 'Display product added/expected date');
+define('CD_PRODUCT_LIST_DATE_ADDED', 'Would you like to show the product added or product expected date on the product page?');
 
 // Configuration ID: 9 - Stock
 define('CT_STOCK_CHECK', 'Lagerstand prüfen');

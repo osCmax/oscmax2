@@ -64,10 +64,10 @@ define('CT_NEW_SIGNUP_DISCOUNT_COUPON', 'Neukunden-Gutscheincode');
 define('CD_NEW_SIGNUP_DISCOUNT_COUPON', 'Neukunden-Gutscheincode: Wenn Sie keinen Gutschein mit den Bestätigungs-E-Mails für neu erstellte Konten versenden möchten, lassen Sie dieses Feld leer. Falls Sie Neukunden jedoch einen Gutschein zusenden möchten, legen Sie einen Gutscheincode fest.');
 define('CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Nettowert des Neukunden-Gutscheines');
 define('CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Nettowert des Neukunden-Gutscheines: Wenn Sie keinen Gutschein mit den Bestätigungs-E-Mails für neu erstellte Konten versenden möchten, tragen Sie hier 0 ein. Wenn Sie einen Gutschein versenden möchten, legen Sie hier den Nettowert fest. ACHTUNG: Verwenden Sie Punkt statt Komma und keine Währungsangaben, wie zB 10.00 oder 50.00.');
-define('CT_SHOW_TAX_RATE_NEAR_PRICE', 'Display tax rate near price?');
-define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'Some countries require you to show the tax rate included near where the price is displayed.');
-define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Display link to shipping charges near the price?');
-define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Some countries require you to display a link to your shipping charges near the price.  Requires <b>Display tax rate near price</b> to be enabled.');
+define('CT_SHOW_TAX_RATE_NEAR_PRICE', 'Steuersatz bei anzeigen?');
+define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'In manchen Ländern muß der Steuersatz neben dem Preis angezeigt werden.');
+define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Link auf Versandkosten bei Preis anzeigen?');
+define('CD_SHOW_SHIPPING_NEAR_PRICE', 'In manchen Ländern muß ein Link auf die Versandkostenseite neben dem Preis angezeigt werden. Dazu muß zusätzlich <b>Steuersatz bei Preis anzeigen</b> aktiviert sein.');
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Vorname');
@@ -825,8 +825,8 @@ define('CT_SUSPEND_FEATURED_SETS_EXPIRING', '<font color=green>Ablaufdatum ausse
 define('CD_SUSPEND_FEATURED_SETS_EXPIRING', 'Möchten Sie das Ablaufdatum für Empfohlene Produkte/Kategorien aussetzen? Alle Empfehlungen bleiben aktiv, solange die Einstellung true ist.');
 define('CT_FEATURED_SET_SHOW_BUY_NOW_BUTTONS', '<font color=green>"Jetzt Kaufen" Button anzeigen</font>');
 define('CD_FEATURED_SET_SHOW_BUY_NOW_BUTTONS', 'Möchten Sie den "Jetzt kaufen" Button bei den empfohlenen Produkten anzeigen?');
-define('CT_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', '<font color=green>Limit Descriptions by Words or Chars</font>');
-define('CD_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', 'Would you like to limit the description size by number of words or by number of characters?');
+define('CT_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', '<font color=green>Beschreibung nach Wörtern oder Zeichen begrenzen</font>');
+define('CD_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', 'Möchten Sie die Länge der Beschreibung nach Wörtern oder Zeichen begrenzen?');
 
 define('CT_FEATURED_PRODUCTS_DISPLAY', '<b>Empfohlene Produkte anzeigen</b>');
 define('CD_FEATURED_PRODUCTS_DISPLAY', 'Empfohlene Produkte anzeigen?');

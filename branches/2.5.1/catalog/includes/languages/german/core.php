@@ -470,8 +470,8 @@ define('TEXT_ON_SALE', '');
 // EOF qpbpp
 
 // BOF Show tax and Shipping near price
-define('TAX_RATE_NEAR_PRICE_INC', 'Inc Tax of ');
-define('TAX_RATE_NEAR_PRICE_EX', 'Ex Tax of ');
-define('TEXT_SHIPPING_NEAR_PRICE', 'Shipping');
+define('TAX_RATE_NEAR_PRICE_INC', 'Inkl. USt. von ');
+define('TAX_RATE_NEAR_PRICE_EX', 'Exkl. USt. von ');
+define('TEXT_SHIPPING_NEAR_PRICE', 'Versandkosten');
 // EOF Show tax and Shipping near price
 ?>

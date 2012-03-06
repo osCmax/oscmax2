@@ -13,8 +13,8 @@ $Id$
 define('TEXT_PRODUCT_NOT_FOUND', 'Produkt nicht gefunden!');
 define('TEXT_CURRENT_REVIEWS', 'Aktuelle Produktbewertungen:');
 define('TEXT_MORE_INFORMATION', 'Für weitere Informationen besuchen Sie bitte diese <a href="%s" target="_blank"><u>Webseite</u></a>.');
-define('TEXT_DATE_ADDED', 'Dieses Produkt haben wir am %s in unseren Katalog aufgenommen.');
-define('TEXT_DATE_AVAILABLE', '<font color="#ff0000">Dieses Produkt wird ab dem %s vorrätig sein.</font>');
+define('TEXT_DATE_ADDED', 'Dieses Produkt ist seit %s gelistet.');
+define('TEXT_DATE_AVAILABLE', '<font color="#ff0000">Dieses Produkt wird ab dem %s verfügbar sein.</font>');
 define('TEXT_ALSO_PURCHASED_PRODUCTS', 'Kunden, die dieses Produkt gekauft haben, haben auch folgende Produkte gekauft:');
 define('TEXT_PRODUCT_OPTIONS', 'Verfügbare Optionen:');
 define('TEXT_CLICK_TO_ENLARGE', 'Bild vergrößern');

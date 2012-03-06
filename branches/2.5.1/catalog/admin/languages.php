@@ -90,6 +90,9 @@ $Id$
 
         if (isset($_POST['default']) && ($_POST['default'] == 'on')) {
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_input($code) . "' where configuration_key = 'DEFAULT_LANGUAGE'");
+		  // Configuration Cache modification start
+          require ('includes/configuration_cache.php');
+          // Configuration Cache modification end
         }
 
         tep_redirect(tep_href_link(FILENAME_LANGUAGES, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'lID=' . $insert_id));
@@ -107,6 +110,9 @@ $Id$
 
         if ($_POST['default'] == 'on') {
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_input($code) . "' where configuration_key = 'DEFAULT_LANGUAGE'");
+		  // Configuration Cache modification start
+          require ('includes/configuration_cache.php');
+          // Configuration Cache modification end
         }
 
         tep_redirect(tep_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $_GET['lID']));

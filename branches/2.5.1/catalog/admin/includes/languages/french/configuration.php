@@ -625,7 +625,7 @@ define('CD_SLIMBOX_COUNTER', 'Customize the text which appears when multiple ima
 define('CT_CLOUDZOOM_WIDTH', 'Image Zoomer Width');
 define('CD_CLOUDZOOM_WIDTH', 'The width of the zoom window in pixels. If <b>auto</b> is specified, the width will be the same as the small image.');
 define('CT_CLOUDZOOM_HEIGHT', 'Image Zoomer Height');
-define('CD_CLOUDZOOM_HEIGHT', 'The width of the zoom window in pixels. If <b>auto</b> is specified, the width will be the same as the small image.');
+define('CD_CLOUDZOOM_HEIGHT', 'The height of the zoom window in pixels. If <b>auto</b> is specified, the height will be the same as the small image.');
 define('CT_CLOUDZOOM_POSITION', 'Image Zoomer Position');
 define('CD_CLOUDZOOM_POSITION', 'Specifies the position of the zoom window relative to the small image. Allowable values are <b>left, right, top, bottom, inside</b> or you can specifiy the id of an html element to place the zoom window in e.g. position: <b>element1 right</b>');
 define('CT_CLOUDZOOM_ADJUSTX', 'X Axis Adjustment');

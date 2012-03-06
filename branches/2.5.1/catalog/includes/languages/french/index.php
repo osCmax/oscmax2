@@ -10,11 +10,11 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('TABLE_HEADING_NEW_PRODUCTS', 'Nouveaux produits pour %s');
+define('TABLE_HEADING_NEW_PRODUCTS', 'Nouveaux produits');
 define('TABLE_HEADING_UPCOMING_PRODUCTS', 'Prochains produits');
 define('TABLE_HEADING_DATE_EXPECTED', 'Date pr&eacute;vue');
 // MOD - default specials - line added
-define('TABLE_HEADING_DEFAULT_SPECIALS', 'Sp&eacute;ciaux Pour %s');
+define('TABLE_HEADING_DEFAULT_SPECIALS', 'Sp&eacute;ciaux');
 
   define('TABLE_HEADING_IMAGE', '');
   define('TABLE_HEADING_MODEL', 'Mod&egrave;le');

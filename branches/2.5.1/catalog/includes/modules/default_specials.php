@@ -21,7 +21,7 @@ $Id$
 
 <?php
   $info_box_contents = array();
-  $info_box_contents[] = array('align' => 'left', 'text' => '<a href="' . tep_href_link(FILENAME_DEFAULT, "show_specials=1") . '" class="headerNavigation">' . sprintf(TABLE_HEADING_DEFAULT_SPECIALS, strftime('%B') . '</a>'));																																																																																					
+  $info_box_contents[] = array('align' => 'left', 'text' => '<a href="' . tep_href_link(FILENAME_DEFAULT, "show_specials=1") . '" class="headerNavigation">' . TABLE_HEADING_DEFAULT_SPECIALS . '</a>');																																																																																					
   new infoBoxHeading($info_box_contents, true, true, tep_href_link(FILENAME_DEFAULT, "show_specials=1"));
 
   $row = 0;

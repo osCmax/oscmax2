@@ -28,7 +28,7 @@ $Id$
 
     // Add heading to infobox	
 	$box_content = array();
-    $box_content[] = array('align' => 'left', 'text' => '<a href="' . tep_href_link(FILENAME_DEFAULT, "new_products=1") . '" class="headerNavigation">' . sprintf(TABLE_HEADING_NEW_PRODUCTS, strftime('%B')) . '</a>');
+    $box_content[] = array('align' => 'left', 'text' => '<a href="' . tep_href_link(FILENAME_DEFAULT, "new_products=1") . '" class="headerNavigation">' . TABLE_HEADING_NEW_PRODUCTS . '</a>');
     new infoBoxHeading($box_content, true, true, tep_href_link(FILENAME_DEFAULT, "new_products=1"));
   
     $row = 0;

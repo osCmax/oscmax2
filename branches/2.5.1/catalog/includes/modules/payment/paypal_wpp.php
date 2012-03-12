@@ -239,13 +239,41 @@ $Id$
     /*
      * User's payment information seen on checkout_confirmation.php
      */
+// BOF: MOD - OPC Fix for Paypal WPP
     function confirmation() {
-      global $_POST, $_SESSION;
+      global $order, $_POST, $_SESSION;
 
+      $start_month = array(array('id' => '', 'text' => ''));
+      for ($i=1; $i < 13; $i++) {
+        $dropdown_item = array('id' => sprintf('%02d', $i), 'text' => $i . ' - ' . strftime('%B',mktime(0,0,0,$i,1,2000)));
+        $expires_month[] = $dropdown_item;
+        $start_month[] = $dropdown_item;
+      }
+      $start_year = array(array('id' => '', 'text' => ''));
+      $today = getdate(); 
+      for ($i=$today['year']; $i > $today['year'] - 30; $i--) {
+        $dropdown_item = array('id' => strftime('%Y',mktime(0,0,0,1,1,$i)), 'text' => strftime('%Y',mktime(0,0,0,1,1,$i)));
+        $start_year[] = $dropdown_item;
+      }
+      $today = getdate(); 
+      for ($i=$today['year']; $i <= $today['year']+10; $i++) {
+        $dropdown_item = array('id' => strftime('%y',mktime(0,0,0,1,1,$i)), 'text' => strftime('%Y',mktime(0,0,0,1,1,$i)));
+        $expires_year[] = $dropdown_item;
+      }
+      $accepted_card_types = array(array('id' => 'Visa', 'text' => 'Visa'),
+                                   array('id' => 'MasterCard', 'text' => 'MasterCard'),
+                                   array('id' => 'Discover', 'text' => 'Discover'));
+      //Amex is not supported for UK merchants
+      if (MODULE_PAYMENT_PAYPAL_DP_UK_ENABLED != 'Yes') {
+        $accepted_card_types[] = array('id' => 'Amex', 'text' => 'American Express');
+      } else {
+        $accepted_card_types[] = array('id' => 'Solo', 'text' => 'Solo');
+        $accepted_card_types[] = array('id' => 'Maestro', 'text' => 'Maestro');
+      }
       if (tep_session_is_registered('paypal_ec_token') && tep_session_is_registered('paypal_ec_payer_id') && tep_session_is_registered('paypal_ec_payer_info')) {
         $confirmation = array('title' => MODULE_PAYMENT_PAYPAL_EC_TEXT_TITLE, 'fields' => array());
       } else {
-        $confirmation = array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_TITLE,
+        /* $confirmation = array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_TITLE,
                               'fields' => array(array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_CREDIT_CARD_FIRSTNAME,
                                                       'field' => $_POST['paypalwpp_cc_firstname']),
                                                 array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_CREDIT_CARD_LASTNAME,
@@ -256,7 +284,22 @@ $Id$
                                                       'field' => str_repeat('X', (strlen($_POST['paypalwpp_cc_number']) - 4)) . substr($_POST['paypalwpp_cc_number'], -4)),
                                                 array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_CREDIT_CARD_EXPIRES,
                                                       'field' => strftime('%B, %Y', mktime(0,0,0,$_POST['paypalwpp_cc_expires_month'], 1, '20' . $_POST['paypalwpp_cc_expires_year'])))));
-  
+        */
+	      $confirmation  = array('id' => $this->code,
+                         'module' => MODULE_PAYMENT_PAYPAL_DP_TEXT_TITLE . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . tep_image(DIR_WS_INCLUDES . 'paypal_wpp/images/credit_cards.gif', $this->title),
+                         'fields' => array(array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_CREDIT_CARD_FIRSTNAME,
+                                                 'field' => tep_draw_input_field('paypalwpp_cc_firstname', $order->billing['firstname'])),
+                                           array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_CREDIT_CARD_LASTNAME,
+                                                 'field' => tep_draw_input_field('paypalwpp_cc_lastname', $order->billing['lastname'])),
+                                           array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_CREDIT_CARD_TYPE,
+                                                 'field' => tep_draw_pull_down_menu('paypalwpp_cc_type', $accepted_card_types)),                                                                                                              
+                                           array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_CREDIT_CARD_NUMBER,
+                                                 'field' => tep_draw_input_field('paypalwpp_cc_number', (MODULE_PAYMENT_PAYPAL_DP_SERVER == 'sandbox' ? $this->cc_test_number : ''))),
+                                           array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_CREDIT_CARD_EXPIRES,
+                                                 'field' => tep_draw_pull_down_menu('paypalwpp_cc_expires_month', $expires_month) . '&nbsp;' . tep_draw_pull_down_menu('paypalwpp_cc_expires_year', $expires_year)),
+                                           array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_CREDIT_CARD_CHECKNUMBER,
+                                                 'field' => tep_draw_input_field('paypalwpp_cc_checkcode', '', 'size="4" maxlength="4"') . (!$this->is_admin ? '&nbsp;<a href="javascript:void(0);" onclick="javascript:window.open(\'' . tep_href_link(DIR_WS_INCLUDES . 'paypal_wpp/' . FILENAME_CVV2INFO, '', 'SSL') . '\',\'cardsecuritycode\',\'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=350\');">' . MODULE_PAYMENT_PAYPAL_DP_TEXT_CREDIT_CARD_CHECKNUMBER_LOCATION . '</a>' : '' ))));
+// EOF: MOD - OPC Fix for Paypal WPP
         if (tep_not_null($_POST['paypalwpp_cc_checkcode'])) {
           $confirmation['fields'][] = array('title' => MODULE_PAYMENT_PAYPAL_DP_TEXT_CREDIT_CARD_CHECKNUMBER,
                                             'field' => $_POST['paypalwpp_cc_checkcode']);

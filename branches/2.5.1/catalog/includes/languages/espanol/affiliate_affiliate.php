@@ -20,7 +20,7 @@ define('TEXT_AFFILIATE_PASSWORD', 'Contraseña:');
 
 define('HEADING_NEW_AFFILIATE', 'Nuevo afiliado');
 define('TEXT_NEW_AFFILIATE','Soy un nuevo afiliado.');
-define('TEXT_NEW_AFFILIATE_INTRODUCTION', 'Al crear una cuenta de afiliado en '. STORE_NAME . ' será capaz de obtener ingresos extra por remitir visitantes de su sitio web a nosotros. ');
+define('TEXT_NEW_AFFILIATE_INTRODUCTION', 'Al crear una cuenta de afiliado en %s será capaz de obtener ingresos extra por remitir visitantes de su sitio web a nosotros. ');
 define('TEXT_NEW_AFFILIATE_TERMS','Términos y Condiciones del Programa de afiliados');
 
 define('HEADING_RETURNING_AFFILIATE', 'Soy afiliado');

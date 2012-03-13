@@ -505,6 +505,7 @@ define('IMAGE_SUMMARY', 'Summary');
 define('IMAGE_BROWSE', 'Browse');
 define('IMAGE_MISSING', 'Missing');
 define('IMAGE_ORPHANS', 'Orphans');
+define('IMAGE_REGENERATE', 'Regenerate');
 define('IMAGE_REGENERATE_ALL', 'Regenerate all images for this product');
 define('IMAGE_REGENERATE_EVERYTHING', 'Regenerate all your images');
 define('IMAGE_MC_SYNC', 'Sync with MailChimp');

@@ -458,6 +458,7 @@ define('IMAGE_SUMMARY', 'Resumen');
 define('IMAGE_BROWSE', 'Examinar');
 define('IMAGE_MISSING', 'Perdidas');
 define('IMAGE_ORPHANS', 'Huérfanas');
+define('IMAGE_REGENERATE', 'Regenerar');
 define('IMAGE_REGENERATE_ALL', 'Regenerar todas las imágenes de este producto');
 define('IMAGE_REGENERATE_EVERYTHING', 'Regenerar todas las imágenes');
 define('IMAGE_MC_SYNC', 'Sincronizar con MailChimp');

@@ -148,20 +148,23 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 // Hide Left Column if not to show
 // BOF One Page Checkout custom column code
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false') {
-       		if (LEFT_COLUMN_SHOW != 'false' and $pfile != 'checkout.php') { ?>
-       <td width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top">
-					<table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
-                    <tr>   
-		    		<td class="leftcol" width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
-		    		<!-- left_navigation //-->
-		    		<?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
-		    		<!-- left_navigation_eof //-->
-		    </table></td>
-		          </table>
-    	</td>
-			<?php
-	        } //End Show/Hide left column
-     // One Page Checkout - Left Column display
+  if (LEFT_COLUMN_SHOW != 'false' and $pfile != 'checkout.php') { ?>
+    <td width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top">
+	  <table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
+        <tr>   
+		  <td class="leftcol" width="<?php echo BOX_WIDTH_LEFT; ?>" valign="top">
+            <table border="0" width="<?php echo BOX_WIDTH_LEFT; ?>" cellspacing="0" cellpadding="2">
+		      <!-- left_navigation //-->
+		      <?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
+		      <!-- left_navigation_eof //-->
+		    </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  <?php
+  } //End Show/Hide left column
+    // One Page Checkout - Left Column display
 		 if ($pfile == 'checkout.php') {  
 	      if (ONEPAGE_SHOW_OSC_COLUMNS == 'true') {  
 			?>

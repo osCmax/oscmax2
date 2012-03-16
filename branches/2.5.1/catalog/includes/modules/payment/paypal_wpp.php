@@ -349,7 +349,8 @@ $Id$
         if (!tep_session_is_registered('paypal_error')) tep_session_register('paypal_error');
         $_SESSION['paypal_error'] = $error_msg;
         
-        if ($this->dynamo_checkout) {
+// Bug Fix #871 Added "|| ONEPAGE_CHECKOUT_ENABLED == 'True'" for OnePage checkout
+        if ($this->dynamo_checkout || ONEPAGE_CHECKOUT_ENABLED == 'True') {
           tep_redirect(tep_href_link(FILENAME_CHECKOUT, '', 'SSL', true, false));
           exit;
         }
@@ -1583,7 +1584,8 @@ $Id$
           if ($response['DoExpressCheckoutPaymentResponse'][0]['Errors'][0]['ErrorCode'] == '') {
             $this->away_with_you(MODULE_PAYMENT_PAYPAL_EC_TEXT_DECLINED . 'No response from PayPal<br>No response was received from PayPal.  Please contact the store owner for assistance.', true);
           } else {
-            $this->away_with_you(MODULE_PAYMENT_PAYPAL_DP_TEXT_ERROR . $this->return_transaction_errors($response['DoExpressCheckoutPaymentResponse'][0]['Errors']), true);
+//Bug Fix #871 changed to not kill session vars on errors.
+            $this->away_with_you(MODULE_PAYMENT_PAYPAL_DP_TEXT_ERROR . $this->return_transaction_errors($response['DoExpressCheckoutPaymentResponse'][0]['Errors']), ONEPAGE_CHECKOUT_ENABLED != 'True');
           }
         } else {
           $details = $response['DoExpressCheckoutPaymentResponse'][0]['DoExpressCheckoutPaymentResponseDetails'][0]['PaymentInfo'][0];

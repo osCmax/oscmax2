@@ -39,6 +39,10 @@ $Id$
   if ($paymentMethod == ''){
 	$paymentMethod = ONEPAGE_DEFAULT_PAYMENT;
   }
+//---PayPal WPP Modification START ---//-- ?>
+<?php if (!$ec_enabled || isset($_GET['ec_cancel']) || (!tep_session_is_registered('paypal_ec_payer_id') && !tep_session_is_registered('paypal_ec_payer_info'
+))) { ?>
+<?php //---PayPal WPP Modification END ---//--
 
   if (sizeof($selection) > 1) {
 ?>
@@ -58,7 +62,8 @@ $Id$
  </tr>
 <?php
   }
-
+?>
+<?php
   $radio_buttons = 0;
   for ($i=0, $n=sizeof($selection); $i<$n; $i++) {
 ?>
@@ -116,6 +121,13 @@ $Id$
 <?php
 	$radio_buttons++;
   }
+//---PayPal WPP Modification START ---//
+  } else {
+	$onepage['info']['payment_method'] = 'paypal_wpp';
+    tep_paypal_wpp_switch_checkout_method(FILENAME_CHECKOUT);
+	echo tep_draw_hidden_field('payment', 'paypal_wpp');
+  }
+//---PayPal WPP Modification END ---//
 
   // Start - CREDIT CLASS Gift Voucher Contribution
   if(MODULE_ORDER_TOTAL_COUPON_STATUS == 'true')

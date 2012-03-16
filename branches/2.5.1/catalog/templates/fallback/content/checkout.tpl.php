@@ -63,6 +63,9 @@ $Id$
 	</tr>
 <?php
   }
+// -- PayPal WPP
+  tep_paypal_wpp_checkout_payment_error_display();
+// EOF PayPal WPP
 ?>
 	<tr>
 	 <td class="main" width="50%"><?php

@@ -151,7 +151,8 @@ if ($num_products_ap != 0) { // Check query is not blank
      
 	  $info_box_contents[$row][$col] = array('align' => 'center',
                                              'params' => 'class="smallText" width="33%" valign="top"',
-                                             'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $ap['products_image'], $ap['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . $ap['products_name'] .'</a><br>' . $pf->getPriceStringShort() . '<br>' .$more_info . ' <a href="' . tep_href_link( FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id'] .  '&amp;action=buy_now&product_to_buy_id=' . $ap['products_id'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', '' . $ap['products_name'] . '') .'</a>');
+                                             'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $ap['products_image'], $ap['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . $ap['products_name'] .'</a><br>' . $pf->getPriceStringShort() . '<br>' . $pf->getProductButtons($ap['products_id'], FILENAME_PRODUCT_INFO, $ap['products_model'], $ap['products_name']));
+											 
       $col ++;
         if ($col > 2) {
           $col = 0;

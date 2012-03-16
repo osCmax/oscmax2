@@ -73,8 +73,6 @@ class attributeManagerConfig {
 		 * Sort order tables
 		 */
 		$this->add('AM_FIELD_OPTION_SORT_ORDER', 'products_options_sort_order'); // Sort column on Products_options table
-//		$this->add('AM_FIELD_OPTION_VALUE_SORT_ORDER', 'products_attributes_sort_order'); // Sort column on product_attributes table
-//		PTF until Attribute Manager attribute handling is finalised
 		$this->add('AM_FIELD_OPTION_VALUE_SORT_ORDER', 'products_options_sort_order'); // Sort column on product_attributes table
 	
 		/**

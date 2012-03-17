@@ -74,12 +74,18 @@ $Id$
 // Outputs a button in the selected language
  function tep_image_submit($image, $alt = '', $parameters = '') {
     global $language;
-
-    if(is_file(DIR_WS_TEMPLATES . $language. '/images/buttons/' . $image)) {
-        $image_submit = '<input type="image" src="' .
-            tep_output_string(DIR_WS_TEMPLATES . $language. '/images/buttons/' . $image) . '" class="img" alt="' . tep_output_string($alt) . '"';
-    } else {
-        $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image) . '" class="img" alt="' . tep_output_string($alt) . '"';
+	
+	$file_parts = explode('.', $image);
+    $file_types = array('png', 'gif', 'jpg', 'jpeg');
+	
+	foreach ($file_types as $file_type) {
+      if (is_file(DIR_WS_TEMPLATES . $language. '/images/buttons/' . $file_parts[0] . '.' . $file_type)) {
+        $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_TEMPLATES . $language. '/images/buttons/' . $file_parts[0] . '.' . $file_type) . '" class="img" alt="' . tep_output_string($alt) . '"';
+      }
+	}
+	
+	if (!isset($image_submit)) {
+      $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image) . '" class="img" alt="' . tep_output_string($alt) . '"';
     }
 
     if (tep_not_null($alt)) $image_submit .= ' title=" ' . tep_output_string($alt) . ' "';
@@ -95,11 +101,16 @@ $Id$
 // Output a function button in the selected language
   function tep_image_button($image, $alt = '', $parameters = '') {
     global $language;
-    if(is_file(DIR_WS_TEMPLATES . $language .'/images/buttons/' . $image)) {
-        return tep_image(DIR_WS_TEMPLATES . $language .'/images/buttons/' . $image, $alt, '', '', $parameters);
-    } else {
-        return tep_image(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image, $alt, '', '', $parameters);
+        
+    $file_parts = explode('.', $image);
+    $file_types = array('png', 'gif', 'jpg', 'jpeg');
+        
+    foreach ($file_types as $file_type) {
+      if (is_file(DIR_WS_TEMPLATES . $language .'/images/buttons/' . $file_parts[0] . '.' . $file_type)) {
+        return tep_image(DIR_WS_TEMPLATES . $language .'/images/buttons/' . $file_parts[0] . '.' . $file_type, $alt, '', '', $parameters);
+      }
     }
+    return tep_image(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image, $alt, '', '', $parameters);
   }
 
 ////

@@ -34,20 +34,16 @@ $Id$
             <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
-            <tr>
+      <?php 
+	  if ($info_id == DEFINE_AFFILIATE_INFO_INFO_NO) { ?>
+      <tr>
         <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td align="right">
-				  <?php 
-				  if ($info_id == DEFINE_AFFILIATE_INFO_INFO_NO) {
-				    echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_SUMMARY) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>';
-				  } else {
-				    echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>'; 
-				  }
-				  ?>
+                <td align="right">  
+				  <?php echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_SUMMARY) . '">' . tep_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>'; ?>
                 </td>
                 <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
@@ -55,5 +51,6 @@ $Id$
           </tr>
         </table></td>
       </tr>
+      <?php } ?>    
 	</table>
 <!-- body_text_eof //-->

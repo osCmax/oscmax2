@@ -31,6 +31,18 @@ if(!strstr($info_group['locked'], 'visible')) {
 <?php
 }
 
+if(!strstr($info_group['locked'], 'show_in_infobox')) {
+?>
+	<tr>
+		<td class="main"><?php echo PUBLIC_INFORMATION; ?></td>
+		<td class="main"><?php echo tep_draw_radio_field('show_in_infobox', '1', true, $edit['show_in_infobox']) . '&nbsp;&nbsp;' . STATUS_ACTIVE . '&nbsp;&nbsp;' . tep_draw_radio_field('show_in_infobox', '0', false, $edit['show_in_infobox']) . '&nbsp;&nbsp;' . STATUS_INACTIVE; ?></td>
+	</tr>
+	<tr>
+		<td colspan="2" height="10"></td>
+	</tr>
+<?php
+}
+
 if(!strstr($info_group['locked'], 'parent_id')) {
 ?>
 	<tr>

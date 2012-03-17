@@ -69,6 +69,7 @@ function tep_update_information_languages($language_id = 0) {
 					$sql_data_array = array(
 						'language_id' 				=> $_language_id,
 						'visible' 					=> tep_db_prepare_input($information['visible']),
+						'show_in_infobox' 			=> tep_db_prepare_input($information['show_in_infobox']),
 						'sort_order' 				=> tep_db_prepare_input($information['sort_order']),
 						'information_id'			=> tep_db_prepare_input($information['information_id']),
 						'information_group_id' 		=> tep_db_prepare_input($information['information_group_id']),
@@ -126,6 +127,7 @@ switch($information_action) {
 		'information_group_id' => tep_db_prepare_input($gID)
 	);
 	if(isset($_POST['visible']))					$sql_data_array['visible'] = tep_db_prepare_input($_POST['visible']);
+	if(isset($_POST['show_in_infobox']))			$sql_data_array['show_in_infobox'] = tep_db_prepare_input($_POST['show_in_infobox']);
 	if(isset($_POST['sort_order']))					$sql_data_array['sort_order'] = tep_db_prepare_input($_POST['sort_order']);
 	if(isset($_POST['parent_id']))					$sql_data_array['parent_id'] = tep_db_prepare_input($_POST['parent_id']);
 	if(isset($_POST['information_title']))			$sql_data_array['information_title'] = tep_db_prepare_input($_POST['information_title'][$language_id]);
@@ -146,6 +148,7 @@ switch($information_action) {
 			'information_group_id' => tep_db_prepare_input($gID)
 		);
 		if(isset($_POST['visible']))					$sql_data_array['visible'] = tep_db_prepare_input($_POST['visible']);
+		if(isset($_POST['show_in_infobox']))			$sql_data_array['show_in_infobox'] = tep_db_prepare_input($_POST['show_in_infobox']);
 		if(isset($_POST['sort_order']))					$sql_data_array['sort_order'] = tep_db_prepare_input($_POST['sort_order']);
 		if(isset($_POST['parent_id']))					$sql_data_array['parent_id'] = tep_db_prepare_input($_POST['parent_id']);
 		if(isset($_POST['information_title']))			$sql_data_array['information_title'] = tep_db_prepare_input($_POST['information_title'][$language_id]);
@@ -170,6 +173,7 @@ switch($information_action) {
 			$language_id = $languages[$i]['id'];
 			$sql_data_array = array();
 			if(isset($_POST['visible']))					$sql_data_array['visible'] = tep_db_prepare_input($_POST['visible']);
+			if(isset($_POST['show_in_infobox']))			$sql_data_array['show_in_infobox'] = tep_db_prepare_input($_POST['show_in_infobox']);
 			if(isset($_POST['sort_order']))					$sql_data_array['sort_order'] = tep_db_prepare_input($_POST['sort_order']);
 			if(isset($_POST['parent_id']))					$sql_data_array['parent_id'] = tep_db_prepare_input($_POST['parent_id']);
 			if(isset($_POST['information_title']))			$sql_data_array['information_title'] = tep_db_prepare_input($_POST['information_title'][$language_id]);
@@ -244,7 +248,7 @@ case "Added":
 		$edit = tep_get_information_entry($information_id);
 		$data = tep_get_information_list();
 		$button = array("Update");
-		$title = EDIT_ID_INFORMATION . " $information_id";
+		$title = EDIT_ID_INFORMATION . " $information_id" . ' - ' . $edit[information_title];
 		echo tep_draw_form('edit', FILENAME_INFORMATION_MANAGER, 'information_action=Update');
 		echo tep_draw_hidden_field('information_id', $information_id);
 		echo tep_draw_hidden_field('gID', $_GET['gID']);

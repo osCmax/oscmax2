@@ -16,6 +16,7 @@ define('HEADING_TITLE', 'Ihr Warenkorb enthält:');
 define('HEADING_TITLE_BASKET','Inhalt des Warenkorbs');
 define('TABLE_HEADING_REMOVE', 'Entfernen');
 define('TABLE_HEADING_QUANTITY', 'Menge');
+define('TABLE_HEADING_PRICE', 'Preis');
 define('TABLE_HEADING_MODEL', 'Artikelnummer');
 define('TABLE_HEADING_PRODUCTS', 'Produkt(e)');
 define('TABLE_HEADING_TOTAL', 'Summe');

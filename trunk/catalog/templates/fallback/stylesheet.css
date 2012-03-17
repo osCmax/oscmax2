@@ -60,7 +60,7 @@ TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd,
 TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.productListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even { background: #ffffff; vertical-align:top; }
 
 /* Product Info*/
-.productListing-heading { font-family: Verdana, Arial, sans-serif; font-size: 10px; background: #bbbbbb; color: #FFFFFF; font-weight: bold; padding-top: 3px; }
+.productListing-heading { font-family: Verdana, Arial, sans-serif; font-size: 10px; background: #bbbbbb; color: #000000; font-weight: bold; padding-top: 3px; }
 a.productListing-heading { text-decoration:none; }
 TABLE.productListing-list { border-left: 1px; border-right: 1px; border-style: solid; border-color: #dddddd; }
 TABLE.productinfo_msrp { border: 1px; border-style: solid; border-color: #dddddd; border-spacing: 1px; background-color: #ffffff; }

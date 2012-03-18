@@ -468,7 +468,7 @@ function format_size($size) {
                 sort($server_images_lg);
                 for ($i = 0; $i < count($server_images_lg); ++$i) { 
                   for ($j = 0; $j < 9; ++$j) { 
-	                if (strpos(strtolower($server_images_lg[$i]),strtolower('_' . $j))) {
+	                if (strpos(strtolower($server_images_lg[$i]),strtolower('_' . $j . '.'))) {
 		              unset($server_images_lg[$i]);
 	                }
 	              }
@@ -480,7 +480,7 @@ function format_size($size) {
                 sort($server_images_md);
                 for ($i = 0; $i < count($server_images_md); ++$i) { 
                   for ($j = 0; $j < 9; ++$j) { 
-	                if (strpos(strtolower($server_images_md[$i]),strtolower('_' . $j))) {
+	                if (strpos(strtolower($server_images_md[$i]),strtolower('_' . $j . '.'))) {
 		              unset($server_images_md[$i]);
 	                }
 	              }
@@ -492,7 +492,7 @@ function format_size($size) {
                 sort($server_images_sm);
                 for ($i = 0; $i < count($server_images_sm); ++$i) { 
                   for ($j = 0; $j < 9; ++$j) { 
-	                if (strpos(strtolower($server_images_sm[$i]),strtolower('_' . $j))) {
+	                if (strpos(strtolower($server_images_sm[$i]),strtolower('_' . $j . '.'))) {
 		              unset($server_images_sm[$i]);
 	                }
 	              }

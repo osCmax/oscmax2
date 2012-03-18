@@ -128,7 +128,7 @@ define('BOX_TELL_A_FRIEND_TEXT', 'Cuéntale a un amigo que conoces este producto.
 define('BOX_HEADING_MAILCHIMP', 'Boletín');
 define('MAILCHIMP_INTRO_TEXT', 'Si desea suscribirse a nuestro boletín, por favor introduzca aquí su email:');
 define('MAILCHIMP_INTRO_TEXT_SUBSCRIBED', 'Actualmente se encuentra suscrito a nuestro boletín');
-define('MAILCHIMP_INTRO_TEXT_UNSUBSCRIBED', 'Si desea suscribirse a nuestro boletín, por favor introduzca aquí su email:');
+define('MAILCHIMP_INTRO_TEXT_UNSUBSCRIBED', 'Si desea cancelar la suscribción a nuestro boletín, por favor introduzca aquí su email:');
 define('MAILCHIMP_EXISTING_USER_UNSUBSCRIBED', 'Actualmente <strong>no</strong> se encuentra suscrito a nuestro boletín');
 define('MAILCHIMP_HTML', 'HTML');
 define('MAILCHIMP_TEXT', 'Texto');
@@ -176,7 +176,7 @@ define('CATEGORY_OPTIONS', 'Opciones');
 define('CATEGORY_PASSWORD', 'Contraseña');
 
 define('ENTRY_COMPANY', 'Nombre de la empresa:');
-define('ENTRY_COMPANY_ERROR', 'Por favor introduzca el nombre de su empresea');
+define('ENTRY_COMPANY_ERROR', 'Por favor introduzca el nombre de su empresa');
 define('ENTRY_COMPANY_TEXT', '*');
 define('ENTRY_COMPANY_TAX_ID', 'NIF empresa:');
 define('ENTRY_COMPANY_TAX_ID_ERROR', 'Por favor introduzca el NIF de su empresa');
@@ -350,7 +350,7 @@ define('TEXT_CCVAL_ERROR_INVALID_DATE', 'La fecha de caducidad de la tarjeta de 
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'El número de la tarjeta de crédito es incorrecto. Compruebe el número e inténtelo de nuevo.');
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Los primeros cuatro digitos de su tarjeta son: %s. Si este número es correcto, no aceptamos este tipo de tarjetas. Si es incorrecto, inténtelo de nuevo.');
 define('WARNING_JAVASCRIPT_DISABLED', 'Alerta: Se ha detectado que tiene Javascript desactivado. Para conseguir una mejor experiencia debería activarlo. Si necesita ayuda con esto por favor <b>pulse aquí.</b>');
-define('WARNING_IE6_DETECTED', 'Advertencia: Se ha detectado que está usando Internet Explorer 6, cuya tecnología es obsoleta. Le recomendamos fervientemente que <b>actualice su navegador</b>. Pruebe con los navegadores más populares como <a href="http://www.microsoft.com/spain/windows/internet-explorer/default.aspx"><b>Internet Explorer</b></a>, <a href="http://www.mozilla-europe.org/es/firefox/"><b>Firefox</b></a> ó <a href="http://www.google.com/chrome?hl=es"><b>Chrome</b></a>');
+define('WARNING_IE6_DETECTED', 'Advertencia: Se ha detectado que está usando Internet Explorer 6, cuya tecnología es obsoleta. Le recomendamos que <b>actualice su navegador</b> urgentemente. Pruebe con los navegadores más populares como <a href="http://www.microsoft.com/spain/windows/internet-explorer/default.aspx"><b>Internet Explorer</b></a>, <a href="http://www.mozilla-europe.org/es/firefox/"><b>Firefox</b></a> ó <a href="http://www.google.com/chrome?hl=es"><b>Chrome</b></a>');
 
 define('FOOTER_TEXT_BODY', 'Todo el contenido e imágenes Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a><br> Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCmax</a><br>Desarrollado con <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
 
@@ -399,7 +399,7 @@ define('QUANTITY_BLOCKS_NOTICE', '%s sólo se puede pedir como un múltiplo de %d.
 // EOF: QPBPP for SPPC
 
 // BOF: Customer Comments contrib
-define('SUCCESS_ORDER_UPDATED', 'Correcto: El pedido se a actualizado correctamente.');
+define('SUCCESS_ORDER_UPDATED', 'Correcto: El pedido se ha actualizado correctamente.');
 define('WARNING_ORDER_NOT_UPDATED', 'Advertencia: No hay cambios. El pedido no ha cambiado.');
 // EOF: Customer Comments contrib
 
@@ -483,8 +483,8 @@ define('TEXT_ON_SALE','');
 // EOF qpbpp
 
 // BOF Show tax and Shipping near price
-define('TAX_RATE_NEAR_PRICE_INC', 'Inc Tax of ');
-define('TAX_RATE_NEAR_PRICE_EX', 'Ex Tax of ');
-define('TEXT_SHIPPING_NEAR_PRICE', 'Shipping');
+define('TAX_RATE_NEAR_PRICE_INC', 'Impuestos incluidos ');
+define('TAX_RATE_NEAR_PRICE_EX', 'Impuestos no incluidos ');
+define('TEXT_SHIPPING_NEAR_PRICE', 'Envíos');
 // EOF Show tax and Shipping near price
 ?>

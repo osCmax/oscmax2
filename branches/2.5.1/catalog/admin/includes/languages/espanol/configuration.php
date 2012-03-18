@@ -64,10 +64,10 @@ define('CT_NEW_SIGNUP_DISCOUNT_COUPON', 'Código de vale descuento de bienvenida'
 define('CD_NEW_SIGNUP_DISCOUNT_COUPON', 'Código de vale descuento de bienvenida: si no quieres que se envíe un vale en el e-mail generado al crear una cuenta déjalo en blanco, en caso contrario introduce el código del vale que deseas utilizar');
 define('CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Importe de cheque regalo de bienvenida');
 define('CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Importe de cheque regalo de bienvenida: si no quieres que se envíe un cheque regalo en el e-mail generado al crear una cuenta poner a 0, en caso contrario introduce aquí la cantidad p.ej. 10.00 o 50.00 sin símbolos de moneda');
-define('CT_SHOW_TAX_RATE_NEAR_PRICE', 'Display tax rate near price?');
-define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'Some countries require you to show the tax rate included near where the price is displayed.');
-define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Display link to shipping charges near the price?');
-define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Some countries require you to display a link to your shipping charges near the price.  Requires <b>Display tax rate near price</b> to be enabled.');
+define('CT_SHOW_TAX_RATE_NEAR_PRICE', '¿Mostrar tasas de impuestos junto al precio?');
+define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'Algunos países necesitan que se muestren las tasas de impuestos junto al precio.');
+define('CT_SHOW_SHIPPING_NEAR_PRICE', '¿Mostrar enlace a los gastos de envío junto al precio?');
+define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Algunos países necesitan que se muestre un enlace a los gastos de envio junto al precio. Requiere <b>Mostrar tasas de impuestos junto al precio</b> para poder activarlo.');
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Nombre');
@@ -364,8 +364,8 @@ define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Forma de mostrar precios de atributos');
 define('CD_ATTRIBUTE_PRICE_DISPLAY', '¿Quieres que se muestren los precios de los atributos como valores separados (p.ej. +2.00€) o como el total del precio del producto más el precio del atributo? (p.ej. 25.00€)');
 define('CT_PRODUCT_LIST_BESTSELLER', 'Ordenar según los más vendidos');
 define('CD_PRODUCT_LIST_BESTSELLER', '¿Quieres permitir que se puedan ordenar los productos según los más vendidos?');
-define('CT_PRODUCT_LIST_DATE_ADDED', 'Mostrar producto añadido/Fecha prevista');
-define('CD_PRODUCT_LIST_DATE_ADDED', 'Le gustaría mostrar el producto añadido o Fecha prevista en la página de producto?');
+define('CT_PRODUCT_LIST_DATE_ADDED', 'Mostrar fecha de producto añadido/previsto');
+define('CD_PRODUCT_LIST_DATE_ADDED', '¿Te gustaría mostrar las fechas de producto añadido o previsto en la página de producto?');
 
 
 // Configuration ID: 9 - Stock
@@ -643,7 +643,7 @@ define('CT_CLOUDZOOM_ADJUSTY', 'Ajuste en eje Y');
 define('CD_CLOUDZOOM_ADJUSTY', 'Permite ajustar con precisión la posición y de la ventana de zoom en píxeles.');
 define('CT_CLOUDZOOM_TINT', 'Tinte del zoomer de imagen');
 define('CD_CLOUDZOOM_TINT', 'Especifica un color de tinte que cubrirá la imagen pequeña. Los colores se deben especificar en formato hexadecimal, p.ej. #aa00aa. No funciona con softFocus.');
-define('CT_CLOUDZOOM_TINTOPACITY', 'Opcidad del tinte del zoomer de imagen');
+define('CT_CLOUDZOOM_TINTOPACITY', 'Opacidad del tinte del zoomer de imagen');
 define('CD_CLOUDZOOM_TINTOPACITY', 'Opacidad del tinte, donde 0 es totalmente transparente y 1 es totalmente opaco.');
 define('CT_CLOUDZOOM_LENSOPACITY', 'Opacidad de lente del zoomer de imagen');
 define('CD_CLOUDZOOM_LENSOPACITY', 'Opacidad de la lente del puntero del ratón, donde 0 es totalmente transparente, y 1 es totalmente opaco. En los modos tinta y soft-focus, será siempre transparente.');
@@ -657,7 +657,7 @@ define('CT_CLOUDZOOM_TITLEOPACITY', 'Opacidad del título en el zoomer de imagen'
 define('CD_CLOUDZOOM_TITLEOPACITY', 'Especifica la opacidad del título si se muestra, donde 0 es totalmente transparente, y 1 es totalmente opaco.	');
 
 // Configuration ID: 50 - Product Information
-define('CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Impedir añadir productos agotados a carrito');
+define('CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Impide añadir productos agotados al carrito');
 define('CD_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Impide que una combinación de atributos agotados se añadan al carrito.');
 define('CT_PRODINFO_ATTRIBUTE_OUT_OF_STOCK_MSGLINE', 'Mostrar línea mensaje agotado');
 define('CD_PRODINFO_ATTRIBUTE_OUT_OF_STOCK_MSGLINE', 'Controla si se muestra una línea con un mensaje que indica que se han seleccionado unos atributos agotados.');

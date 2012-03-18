@@ -130,8 +130,6 @@ TD.formAreaTitle { font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 1
 SPAN.markProductOutOfStock { font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 12px; color: #c76170; font-weight: bold; }
 .productSpecialPrice { font-family: Verdana, Arial, sans-serif; color: #ff0000; }
 
-SPAN.errorText { font-family: Verdana, Arial, sans-serif; color: #ff0000; }
-
 .moduleRow { border: 1px solid #BBC3D3 }
 .moduleRowOver { background-color: #D7E9F7; cursor: pointer; }
 .moduleRowSelected { background-color: #E9F4FC; }
@@ -142,7 +140,10 @@ SPAN.errorText { font-family: Verdana, Arial, sans-serif; color: #ff0000; }
 /* BOF: PGM Restyled Message Boxes */
 .messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color: #ffe6e6; border:solid 1px #ff8e90; padding:5px; }
 .messageStackSuccess { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#CCFFCC; border:solid 1px #006600; padding:5px; }
-.messageStackAlert{ font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#FFFF99; border:solid 1px #FFCC00; padding:5px; }
+.messageStackAlert { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#FFFF99; border:solid 1px #FFCC00; padding:5px; }
+
+span.errorText { font-family: Verdana, Arial, sans-serif; color: #ff0000; }
+span.notice { font-family: Verdana, Arial, sans-serif; color: #ff0000; }
 /* EOF: PGM Restyled Message Boxes */
 
 /* input requirement */

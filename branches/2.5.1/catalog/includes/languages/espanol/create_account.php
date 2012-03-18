@@ -18,7 +18,7 @@ define('HEADING_TITLE_PWA', 'Datos de facturación y envío');
 
 define('HEADING_TITLE', 'Datos de mi cuenta');
 
-define('TEXT_ORIGIN_LOGIN', '<font color="#FF0000"><small><b>NOTA:</b></font></small> Si ya tiene una cuenta, por favor <a href="%s"><u>inicie sesión</u></a>.');
+define('TEXT_ORIGIN_LOGIN', '<span class="notice"><small><b>NOTA:</b></span></small> Si ya tiene una cuenta, por favor <a href="%s"><u>inicie sesión</u></a>.');
 
 define('EMAIL_ACCOUNT_DETAILS', 'Detalles de la cuenta: ');
 define('EMAIL_ACCOUNT_USERNAME', 'Nombre de usuario: ');

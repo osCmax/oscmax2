@@ -28,5 +28,5 @@ define('TEXT_RETURNING_AFFILIATE', 'Ich bin bereits Affiliate.');
 
 define('TEXT_AFFILIATE_PASSWORD_FORGOTTEN', 'Passwort vergessen? Hier klicken.');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>FEHLER:</b></font> Affiliate E-Mail und/oder Passwort stimmen nicht überein.');
+define('TEXT_LOGIN_ERROR', '<span class="errorText"><b>FEHLER:</b></span> Affiliate E-Mail und/oder Passwort stimmen nicht überein.');
 ?>

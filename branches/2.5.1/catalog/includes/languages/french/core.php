@@ -160,7 +160,7 @@ define('CATEGORY_OPTIONS', 'Options');
 define('CATEGORY_PASSWORD', 'Votre mot de passe');
 
 define('ENTRY_COMPANY', 'Soci&eacute;t&eacute;:');
-define('ENTRY_COMPANY_ERROR', ' <small><font color="#FF0000">min ' . ENTRY_COMPANY_LENGTH . ' caract&egrave;res</font></small>');
+define('ENTRY_COMPANY_ERROR', ' <small><span class="notice">min ' . ENTRY_COMPANY_LENGTH . ' caract&egrave;res</span></small>');
 define('ENTRY_COMPANY_TEXT', ' <small><font color="#0000bb">requis</font></small>');
 // BOF: MOD - Separate Pricing Per Customer
 define('ENTRY_COMPANY_TAX_ID', 'Num&eacute;ro de TVA intracom.:');

@@ -28,5 +28,5 @@ define('TEXT_RETURNING_AFFILIATE','Ya estoy registrado como afiliado.');
 
 define('TEXT_AFFILIATE_PASSWORD_FORGOTTEN', '¿Ha olvidado su contraseña? Haga clic en este enlace y se la enviamos.');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> El \'e-mail\' y/o la \'Contraseña\' no figuran en nuestros datos.');
+define('TEXT_LOGIN_ERROR', '<span class="notice"><b>ERROR:</b></span> El \'e-mail\' y/o la \'Contraseña\' no figuran en nuestros datos.');
 ?>

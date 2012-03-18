@@ -22,5 +22,5 @@ define('ADDRESS_BOOK_TITLE', 'Adressbucheinträge');
 
 define('PRIMARY_ADDRESS', '(Hauptadresse)');
 
-define('TEXT_MAXIMUM_ENTRIES', '<font color="#ff0000"><b>Hinweis:</b></font> Ihnen stehen maximal %s Adressbucheinträge zur Verfügung!');
+define('TEXT_MAXIMUM_ENTRIES', '<span class="notice"><b>Hinweis:</b></span> Ihnen stehen maximal %s Adressbucheinträge zur Verfügung!');
 ?>

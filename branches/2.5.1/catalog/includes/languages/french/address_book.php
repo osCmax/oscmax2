@@ -23,5 +23,5 @@ define('ADDRESS_BOOK_TITLE', 'Entr&eacute;es du carnet d\'adresses');
 
 define('PRIMARY_ADDRESS', '(Adresse principale)');
 
-define('TEXT_MAXIMUM_ENTRIES', '<font color="#ff0000"><b>REMARQUE:</b></font> Un maximum de %s entr&eacute;es dans le carnet d\'adresses autoris&eacute;es.');
+define('TEXT_MAXIMUM_ENTRIES', '<span class="notice"><b>REMARQUE:</b></span> Un maximum de %s entr&eacute;es dans le carnet d\'adresses autoris&eacute;es.');
 ?>

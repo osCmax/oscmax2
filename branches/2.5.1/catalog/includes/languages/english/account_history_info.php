@@ -42,4 +42,6 @@ define('HEADING_DOWNLOAD', 'Download links');
 // Customer Comments contrib
  define ('ADD_COMMENTS', 'Add Comments or Questions to this Order');
 // Customer Comments contrib
+
+define('TEXT_MISSING_DOWNLOAD', 'File not found!')
 ?>

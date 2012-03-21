@@ -42,4 +42,6 @@ define('HEADING_DOWNLOAD', 'Descarga tus productos aquí');
 // Customer Comments contrib
  define ('ADD_COMMENTS', 'Añadir comentarios o preguntas a este pedido');
 // Customer Comments contrib
+
+define('TEXT_MISSING_DOWNLOAD', 'Fichero no encontrado.');
 ?>

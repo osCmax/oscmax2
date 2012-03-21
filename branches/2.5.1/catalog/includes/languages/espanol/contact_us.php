@@ -13,7 +13,7 @@ $Id$
 define('HEADING_TITLE', 'Contacte con nosotros');
 define('NAVBAR_TITLE', 'Contacte con nosotros');
 define('TEXT_SUCCESS', 'Su consulta ha sido enviada al encargado de la tienda.');
-define('EMAIL_SUBJECT', 'Consulta desde ' . STORE_NAME);
+define('EMAIL_SUBJECT', 'Consulta desde %s');
 
 define('ENTRY_NAME', 'Nombre completo:');
 define('ENTRY_EMAIL', 'Dirección de email:');

@@ -199,6 +199,18 @@ $Id$
                 </td>
                 <!-- Thumbnails Ends -->
               </tr>
+            
+            <!-- Conditional AddThis Starts -->
+            <?php if (ADD_THIS_ENABLED == 'true') { ?>
+              <tr>
+                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+              </tr>
+              <tr>
+                <td class="productinfo_boxes"><?php echo stripslashes(ADD_THIS_CODE); ?></td>      
+              </tr>
+            <?php } ?>
+            <!-- Conditional AddThis Starts -->
+            
               
             <!-- Conditional URL Starts -->
             <?php if (tep_not_null($product_info['products_url'])) { ?>

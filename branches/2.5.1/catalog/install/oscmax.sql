@@ -432,7 +432,7 @@ CREATE TABLE configuration (
   configuration_id int NOT NULL auto_increment,
   configuration_title varchar(255) NOT NULL,
   configuration_key varchar(255) NOT NULL,
-  configuration_value varchar(255) NOT NULL,
+  configuration_value varchar(512) NOT NULL,
   configuration_description varchar(255) NOT NULL,
   configuration_group_id int NOT NULL,
   sort_order int(5) NULL,
@@ -1780,6 +1780,8 @@ INSERT INTO admin_files VALUES(218, 'paypal_wpp_capture.php', 'FILE_PAYPAL', 0, 
 INSERT INTO admin_files VALUES(219, 'paypal_wpp_charge.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
 INSERT INTO admin_files VALUES(220, 'paypal_wpp_include.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
 INSERT INTO admin_files VALUES(221, 'paypal_wpp_refund.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
+INSERT INTO admin_files VALUES(222, 'configuration.php?gID=208', 'BOX_CONFIGURATION_ADDTHIS', 0, 2, '1', 26);
+
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
@@ -2377,6 +2379,14 @@ INSERT INTO configuration VALUES (3301, 'CT_STORE_OPENING_HOURS_TEXT', 'STORE_OP
 INSERT INTO configuration VALUES (3302, 'CT_SHOW_EMAIL_ADDRESS', 'SHOW_EMAIL_ADDRESS', 'true', 'CD_SHOW_EMAIL_ADDRESS', 207, 3, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
 INSERT INTO configuration VALUES (3303, 'CT_SHOW_MAILING_ADDRESS', 'SHOW_MAILING_ADDRESS', 'true', 'CD_SHOW_MAILING_ADDRESS', 207, 4, now(), now(), NULL, 'tep_cfg_select_option(array(''false'',''true''),');
 
+# Configuration ID: 208 - Add This
+INSERT INTO configuration VALUES (3512, 'CT_ADD_THIS_ENABLED', 'ADD_THIS_ENABLED', 'true', 'CD_ADD_THIS_ENABLED', '208', '1', '', now(), '', 'tep_cfg_select_option(array(''true'',''false''),');
+INSERT INTO configuration VALUES (3513, 'CT_ADD_THIS_CODE', 'ADD_THIS_CODE', '', 'CD_ADD_THIS_CODE', '208', '2', '', now(), '', 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES (3514, 'CT_ADD_THIS_JAVASCRIPT', 'ADD_THIS_JAVASCRIPT', '', 'CD_ADD_THIS_JAVASCRIPT', '208', '3', '', now(), '', 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES (3515, 'CT_ADD_THIS_ADDRESS_BAR', 'ADD_THIS_ADDRESS_BAR', '', 'CD_ADD_THIS_ADDRESS_BAR', '208', '4', '', now(), '', 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES (3516, 'CT_ADD_THIS_ARTICLES', 'ADD_THIS_ARTICLES', 'true', 'CD_ADD_THIS_ARTICLES', '208', '5', '', now(), '', 'tep_cfg_select_option(array(''true'',''false''),');
+
+
 # Configuration ID: 456 - Articles
 INSERT INTO configuration VALUES (505, 'CT_DISPLAY_NEW_ARTICLES', 'DISPLAY_NEW_ARTICLES', 'false', 'CD_DISPLAY_NEW_ARTICLES', 456, 1, NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (506, 'CT_NEW_ARTICLES_DAYS_DISPLAY', 'NEW_ARTICLES_DAYS_DISPLAY', '30', 'CD_NEW_ARTICLES_DAYS_DISPLAY', 456, 2, NULL, now(), NULL, NULL);
@@ -2466,6 +2476,7 @@ INSERT INTO configuration_group VALUES (204, 'BOX_CONFIGURATION_SLIDESHOW_SETTIN
 INSERT INTO configuration_group VALUES (205, 'BOX_CONFIGURATION_CORNER_BANNERS', 'Corner Banners', 205, 1);
 INSERT INTO configuration_group VALUES (206, 'BOX_CONFIGURATION_MC', 'MailChimp Newsletters', 206, 1);
 INSERT INTO configuration_group VALUES (207, 'BOX_CONFIGURATION_CONTACT', 'Contact Us Form', 207, 1);
+INSERT INTO configuration_group VALUES (208, 'BOX_CONFIGURATION_ADDTHIS', 'AddThis', 208, 1);
 INSERT INTO configuration_group VALUES (456, 'BOX_CONFIGURATION_ARTICLES', 'Settings for Articles', 456, 1);
 INSERT INTO configuration_group VALUES (7575, 'BOX_CONFIGURATION_OPC', 'Settings for one page checkout', 16, 1);
 

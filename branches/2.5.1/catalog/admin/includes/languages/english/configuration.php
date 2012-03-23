@@ -1095,6 +1095,19 @@ define('CD_SHOW_EMAIL_ADDRESS', 'Do you want to show your email address on the c
 define('CT_SHOW_MAILING_ADDRESS', 'Show mailing address');
 define('CD_SHOW_MAILING_ADDRESS', 'Do you want to show your mailing address on the contact us page?');
 
+// Configuration ID: 208 - AddThis
+define('CT_ADD_THIS_ENABLED', 'Enable AddThis');
+define('CD_ADD_THIS_ENABLED', 'Do you want to enable the AddThis module?');
+define('CT_ADD_THIS_CODE', 'AddThis Button Code');
+define('CD_ADD_THIS_CODE', 'Paste your button code from the AddThis website.  You need to put in the button code between the divs.');
+define('CT_ADD_THIS_JAVASCRIPT', 'AddThis Javascript Code');
+define('CD_ADD_THIS_JAVASCRIPT', 'Paste the javascript code from the AddThis website.  Please include the script tags on either side.');
+define('CT_ADD_THIS_ADDRESS_BAR', 'AddThis Address Bar Javascript Code');
+define('CD_ADD_THIS_ADDRESS_BAR', 'Paste the address bar javascript code from the AddThis website.  Please include the script tags on either side.');
+define('CT_ADD_THIS_ARTICLES', 'AddThis on articles pages?');
+define('CD_ADD_THIS_ARTICLES', 'Do you want to display the AddThis buttons on your article pages as well as the product pages?');
+
+
 // Configuration ID: 456 - Articles
 define('CT_DISPLAY_NEW_ARTICLES', 'Display New Articles Link');
 define('CD_DISPLAY_NEW_ARTICLES', 'Display a link to New Articles in the Articles box?');

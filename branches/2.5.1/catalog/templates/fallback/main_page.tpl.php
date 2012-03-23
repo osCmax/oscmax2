@@ -286,6 +286,11 @@ if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exist
         require (DIR_WS_JAVASCRIPT . 'slideshow_init.js.php');
     }
   }
+
+if (ADD_THIS_ENABLED == 'true') { 
+  echo stripslashes(ADD_THIS_JAVASCRIPT);
+  if (ADD_THIS_ADDRESS_BAR != '') { echo stripslashes(ADD_THIS_ADDRESS_BAR); }
+}
 ?>
 
 <script type="text/javascript"><!--

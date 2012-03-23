@@ -246,6 +246,7 @@ define('BOX_CONFIGURATION_RECAPTCHA', 'reCaptcha Form');
 define('BOX_CONFIGURATION_NOTIFICATIONS', 'Notifications');
 define('BOX_CONFIGURATION_SLIDESHOW', 'Slideshow');
 define('BOX_CONFIGURATION_SLIDESHOW_SETTINGS', 'Slideshow Settings');
+define('BOX_CONFIGURATION_ADDTHIS', 'AddThis');
 
 define('BOX_CONFIGURATION_GOOGLE', 'Google');
 define('BOX_CONFIGURATION_GOOGLE_ANALYTICS', 'Google Analytics');

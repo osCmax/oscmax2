@@ -39,7 +39,7 @@ $Id$
   <!--<td class="main" valign="top"><?php echo $order->products[$i]['model'];?></td>-->
   <td class="main" valign="top"><?php echo $order->products[$i]['name'] . $stockCheck . $productAttributes;?></td>
   <td class="main" valign="top"><?php
-   echo tep_draw_input_field('qty[' . $order->products[$i]['id'] . ']', $order->products[$i]['qty'], 'size="3" onkeyup="$(\'input[name^=qty]\').attr(\'readonly\', true); $(\'#updateCartButton\').trigger(\'click\')"');
+   echo tep_draw_input_field('qty[' . $order->products[$i]['id'] . ']', $order->products[$i]['qty'], 'size="3" onkeyup=" if($(\'input[name^=qty]\').val() != \'\'){$(\'input[name^=qty]\').attr(\'readonly\', true); $(\'#updateCartButton\').trigger(\'click\')}"');
   ?></td>
   <td class="main" align="right" valign="top"><?php
    echo $currencies->display_price($order->products[$i]['final_price'],$order->products[$i]['tax']);

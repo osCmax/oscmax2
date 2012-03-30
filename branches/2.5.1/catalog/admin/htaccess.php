@@ -67,9 +67,35 @@ $Id$
  *
  */
  
+  require('includes/application_top.php');
 ?>
-<html>
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html <?php echo HTML_PARAMS; ?>>
 <head>
+<meta http-equiv="Content-Type"
+	content="text/html; charset=<?php echo 'CHARSET'; ?>">
+  <title>.htaccess .htpasswd pair for Google Checkout Basic authentication on CGI php installations</title>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css"
+	href="includes/javascript/jquery-ui-1.8.2.custom.css">
+<style type="text/css">
+body {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 90%;
+	text-align: center;
+}
+table {
+	margin: 0 auto;
+	text-align: left;
+}
+.required {
+	border: #ff0000 solid 1px;
+	margin: 1px;
+}
+.feedback {
+	text-align: left;
+}
+</style>
 	<script language="JavaScript" type="text/javascript">
 	  function checkCreate(){
 	 		var check = document.getElementById('check');
@@ -82,10 +108,10 @@ $Id$
 	 		}
 	  }
 	</script>
-  <title>.htaccess .htpasswd pair for Google Checkout Basic authentication on CGI php installations</title>
 </head>
 <body>  
 <?
+require(DIR_WS_INCLUDES . 'header.php'); 
 
 if(isset($_POST['submit'])) {
 
@@ -117,7 +143,7 @@ if(isset($_POST['submit'])) {
 		
 		$htaccess = 'AuthName "Google checkout Basic Authentication"' . "\n";
 		$htaccess .= 'AuthType Basic' . "\n";
-		$htaccess .= 'AuthUserFile ' . $_POST['path'] . "/.htpasswd\n";
+		$htaccess .= 'AuthUserFile ' . tep_db_prepare_input(strip_tags($path)) . "/.htpasswd\n";
 		$htaccess .= 'require valid-user';
 		echo "<xmp>.htaccess file:\n<<<Start---\n";
 		echo $htaccess;
@@ -125,18 +151,21 @@ if(isset($_POST['submit'])) {
 		
 		$htpasswd = "";
 		if(isset($_POST['sb'])) {
-			$sb_user = @$_POST['sb_id'];
-			$sb_pass = @$_POST['sb_key'];
+			$sb_user = tep_db_prepare_input(strip_tags(@$_POST['sb_id']));
+			$sb_pass = tep_db_prepare_input(strip_tags(@$_POST['sb_key']));
 			$sb_crypt_pass = rand_salt_crypt($sb_pass);
 	
 			$htpasswd .= $sb_user . ":" . $sb_crypt_pass ."\n";
 		}
 		if(isset($_POST['gc'])) {
-			$gc_user = @$_POST['gc_id'];
-			$gc_pass = @$_POST['gc_key'];
+			$gc_user = tep_db_prepare_input(strip_tags(@$_POST['gc_id']));
+			$gc_pass = tep_db_prepare_input(strip_tags(@$_POST['gc_key']));
 			$gc_crypt_pass = rand_salt_crypt($gc_pass);
 	
 			$htpasswd .= $gc_user . ":" . $gc_crypt_pass ."\n";
+		}
+		if(isset($_POST['path'])) {
+			$path = tep_db_prepare_input(strip_tags(@$_POST['path']));
 		}
 
 		echo "\n\n.htpasswd file:\n<<<Start---\n";
@@ -144,8 +173,8 @@ if(isset($_POST['submit'])) {
 		echo "---End>>>\n</xmp>\n";
 		
 		if(isset($_POST['create'])){
-		  $htaccess_file = fopen($_POST['path']. "/.htaccess", w);
-		  $htpasswd_file = fopen($_POST['path']. "/.htpasswd", w);
+		  $htaccess_file = fopen($path . "/.htaccess", w);
+		  $htpasswd_file = fopen($path . "/.htpasswd", w);
 		  fwrite($htaccess_file, $htaccess);
 		  fwrite($htpasswd_file, $htpasswd);
 		  fclose($htaccess_file);
@@ -171,7 +200,8 @@ if(isset($_POST['submit'])) {
 if(!isset($_POST['path']) || empty($_POST['path'])){
   
   chdir("../googlecheckout");
-  $_POST['path'] = isset($_GET['url'])?$_GET['url']:getcwd();
+  $_POST['path'] = isset($_GET['url'])?$_GET['url']:tep_db_prepare_input(strip_tags(getcwd()));
+  $path = tep_db_prepare_input(strip_tags($_POST['path']));
   
 }
 // For function rand_salt_crypt()
@@ -209,6 +239,22 @@ function rand_salt_crypt( $pass )
   return crypt($pass, $salt);
 }
 ?>
+<!-- body //-->
+<table border="0" width="100%" cellspacing="2" cellpadding="2">
+	<tr>
+		<td width="<?php echo BOX_WIDTH; ?>" valign="top">
+		<table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1"
+			cellpadding="1" class="columnLeft">
+			<!-- left_navigation //-->
+			<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+			<!-- left_navigation_eof //-->
+		</table>
+		</td>
+		<!-- body_text //-->
+		<td width="100%" valign="top">
+		<table border="0" width="100%" cellspacing="0" cellpadding="2">
+			<tr>
+				<td>
   <h2 align=center>.htaccess .htpasswd pair for Google Checkout Basic authentication on CGI php installations</h2>
   <form action="" method="post">
   <table border=1 cellpadding=2 cellspacing=0 align=center>
@@ -216,30 +262,30 @@ function rand_salt_crypt( $pass )
       <th align="center" colspan="2">Sandbox Account: <input type="checkbox" value="true" name="sb"<?php echo (!isset($_POST['submit']) || isset($_POST['sb']))?' checked':'';?>/></th>
     </tr>
     <tr>
-      <th align="right">Mercha$Id$
-      <td><input type="text" value="<?=@$_POST['sb_id'];?>" name="sb_id" size="40"/></td>
+      <th align="right">Merchant ID: </th>
+      <td><input type="text" value="<?=tep_output_string(strip_tags(@$_POST['sb_id']));?>" name="sb_id" size="40"/></td>
     </tr>
     <tr>
       <th align="right">Merchant Key: </th>
-      <td><input type="text" value="<?=@$_POST['sb_key'];?>" name="sb_key" size="40"/></td>
+      <td><input type="text" value="<?=tep_output_string(strip_tags(@$_POST['sb_key']));?>" name="sb_key" size="40"/></td>
     </tr>
     <tr>
       <th align="center" colspan="2">Checkout Account: <input type="checkbox" value="true" name="gc"<?php echo (!isset($_POST['submit']) || isset($_POST['gc']))?' checked':'';?>/></th>
     </tr>
     <tr>
-      <th align="right">Mercha$Id$
-      <td><input type="text" value="<?=@$_POST['gc_id'];?>" name="gc_id" size="40"/></td>
+      <th align="right">Merchant ID: </th>
+      <td><input type="text" value="<?=tep_output_string(strip_tags(@$_POST['gc_id']));?>" name="gc_id" size="40"/></td>
     </tr>
     <tr>
       <th align="right">Merchant Key: </th>
-      <td><input type="text" value="<?=@$_POST['gc_key'];?>" name="gc_key" size="40"/></td>
+      <td><input type="text" value="<?=tep_output_string(strip_tags(@$_POST['gc_key']));?>" name="gc_key" size="40"/></td>
     </tr>
     <tr>
       <th align="center" colspan="2">&nbsp</th>
     </tr>
     <tr>
       <th align="right">Absolute <i>dir</i> to googlecheckout/ :</th>
-      <td><input type="text" value="<?=@$_POST['path'];?>" name="path" size="40"/>
+      <td><input type="text" value="<?=tep_output_string(strip_tags(@$_POST['path']));?>" name="path" size="40"/>
       <br /><small>( ie. <b>/home/ropu/public_html/catalog/googlecheckout</b> )</small>
       </td>
     </tr>
@@ -259,5 +305,22 @@ function rand_salt_crypt( $pass )
     </tr>    
   </table>
   </form>
+		</td>
+			</tr>
+			<tr>
+				<td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+			</tr>
+		</table>
+		</td>
+		<td width="25%"><!-- Placeholder for right hand column --></td>
+		<!-- body_text_eof //-->
+	</tr>
+</table>
+<!-- body_eof //-->
+<!-- footer //-->
+<?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
+<!-- footer_eof //-->
+<br>
 </body>
 </html>
+<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

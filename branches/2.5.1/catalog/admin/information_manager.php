@@ -244,7 +244,7 @@ case "Added":
 	break;
 
   case "Edit":
-	if ($information_id = $_REQUEST['information_id']) {
+	if ($information_id = (int)$_REQUEST['information_id']) {
 		$edit = tep_get_information_entry($information_id);
 		$data = tep_get_information_list();
 		$button = array("Update");
@@ -266,12 +266,12 @@ case "Added":
 		tep_db_query("update " . TABLE_INFORMATION . " set visible = '1' where information_id = '" . (int)$_GET['information_id'] . "'");
 	}
 	$data=tep_get_information_list();
-	$title="$confirm $vivod $information_id " . SUCCED_INFORMATION . "";
+	$title="$confirm $vivod (int)$information_id " . SUCCED_INFORMATION . "";
 	include('information_list.php');
 	break;
 
   case "Delete":
-	if ($information_id = $_GET['information_id']) {
+	if ($information_id = (int)$_GET['information_id']) {
 		$delete = tep_get_information_entry($information_id);
 		$data = tep_get_information_list();
 		$title = DELETE_CONFIRMATION_ID_INFORMATION . " $information_id";
@@ -291,7 +291,7 @@ case "Added":
 
 
   case "DelSure":
-	if ($information_id = $_GET['information_id']) {
+	if ($information_id = (int)$_GET['information_id']) {
 		tep_db_query("delete from " . TABLE_INFORMATION . " where information_id = '" . (int)$information_id . "'");
 		$data = tep_get_information_list();
 		$title = "$confirm " . DELETED_ID_INFORMATION . " $information_id " . SUCCED_INFORMATION . "";

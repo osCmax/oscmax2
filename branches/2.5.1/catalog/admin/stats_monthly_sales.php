@@ -53,13 +53,14 @@ if (isset($_GET['show'])) {
 	$status = '';
 	if ($_GET['status']) $status = tep_db_prepare_input($_GET['status']);
 	// construct query for selected detail
-	$detail_query_raw = "select sum(round(ot.value,2)) amount, ot.title description from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where ";
+	$detail_query_raw = "SELECT sum(ot.value) amount, ot.title description from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) WHERE ";
 	if ($status<>'') $detail_query_raw .= "o.orders_status ='" . $status . "' and ";
 	$detail_query_raw .= "ot.class = '" . $ot_type . "' and month(o.date_purchased)= '" . $sel_month . "' and year(o.date_purchased)= '" . $sel_year . "'";
 	if ($sel_day<>0) $detail_query_raw .= " and dayofmonth(o.date_purchased) = '" . $sel_day . "'";
 	$detail_query_raw .= " group by ot.title";
 	$detail_query = tep_db_query($detail_query_raw);
 	echo "<!doctype html public \"-//W3C//DTD HTML 4.01 Transitional//EN\"><html " . HTML_PARAMS . "><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=" . CHARSET . "\">" . "<title>" . TEXT_DETAIL . "</title><link rel=\"stylesheet\" type=\"text/css\" href=\"includes/stylesheet.css\"></head><body><br><table width=\"80%\" align=center><caption align=center>";
+	if ($sel_day<>0) echo $sel_day . "/" ;
 	echo $sel_year . "/" . $sel_month;
 	if ($sel_day<>0) echo "/" . $sel_day;
 	if ($status<>'') echo "<br>" . HEADING_TITLE_STATUS . ":" . "&nbsp;" . $status;
@@ -142,7 +143,7 @@ $sel_month = 0;
 $orders_status_text = TEXT_ALL_ORDERS;
 if ($_GET['status']) {
   $status = tep_db_prepare_input($_GET['status']);
-  $orders_status_query = tep_db_query("select orders_status_name from " . TABLE_ORDERS_STATUS . " where language_id = '" . $languages_id . "' and orders_status_id =" . $status);
+  $orders_status_query = tep_db_query("select orders_status_name from " . TABLE_ORDERS_STATUS . " where language_id = '" . $languages_id . "' and orders_status_id = '" . tep_db_input($status) . "'");
   while ($orders_status = tep_db_fetch_array($orders_status_query)) {
 	  $orders_status_text = $orders_status['orders_status_name'];}
 				};	
@@ -268,6 +269,7 @@ if ($sel_month == 0) mirror_out(TABLE_HEADING_YEAR); else mirror_out(TABLE_HEADI
 <td class="dataTableHeadingContent" width='70' align='right' valign="bottom"><?php mirror_out(TABLE_HEADING_TAXED); ?></td>
 <td class="dataTableHeadingContent" width='70' align='right' valign="bottom"><?php mirror_out(TABLE_HEADING_TAX_COLL); ?></td>
 <td class="dataTableHeadingContent" width='70' align='right' valign="bottom"><?php mirror_out(TABLE_HEADING_SHIPHNDL); ?></td>
+<td class="dataTableHeadingContent" width='70' align='right' valign="bottom"><?php mirror_out(TABLE_HEADING_SHIP_TAX); ?></td>
 <?php 
 if ($loworder) { ?>
 <td class="dataTableHeadingContent" width='70' align='right' valign="bottom"><?php mirror_out(TABLE_HEADING_LOWORDER); ?></td>
@@ -285,16 +287,17 @@ if ($extra_class) { ?>
 	$footer_sales_taxed = 0;
 	$footer_tax_coll = 0;
 	$footer_shiphndl = 0;
+	$footer_shipping_tax = 0;
 	$footer_loworder = 0;
 	$footer_other = 0;
 // new line for CSV
 $csv_accum .= "\n";
 // order totals, the driving force 
 $status = '';
-$sales_query_raw = "select sum(round(ot.value,2)) gross_sales, monthname(o.date_purchased) row_month, year(o.date_purchased) row_year, month(o.date_purchased) i_month, dayofmonth(o.date_purchased) row_day  from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where ";
+$sales_query_raw = "SELECT sum(ot.value) gross_sales, monthname(o.date_purchased) row_month, year(o.date_purchased) row_year, month(o.date_purchased) i_month, dayofmonth(o.date_purchased) row_day  from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) WHERE ";
 if ($_GET['status']) {
   $status = tep_db_prepare_input($_GET['status']);
-  $sales_query_raw .= "o.orders_status =" . $status . " and ";
+  $sales_query_raw .= "o.orders_status = '" . tep_db_input($status) . "' and ";
 	};
 $sales_query_raw .= "ot.class = " . $class_val_total;
 if ($sel_month<>0) $sales_query_raw .= " and month(o.date_purchased) = " . $sel_month;
@@ -342,6 +345,9 @@ while ($sales = tep_db_fetch_array($sales_query)) {
 <td class="dataTableHeadingContent" width='70' align="right">
 <?php mirror_out(number_format($footer_shiphndl,2)); ?>
 </td>
+<td class="dataTableHeadingContent" width='70' align="right">
+<?php mirror_out(number_format(($footer_shipping_tax <= 0) ? 0 : $footer_shipping_tax,2)); ?>
+</td>
 <?php if ($loworder) { ?>
 <td class="dataTableHeadingContent" width='70' align="right">
 <?php mirror_out(number_format($footer_loworder,2)); ?>
@@ -359,6 +365,7 @@ $footer_sales_nontaxed = 0;
 $footer_sales_taxed = 0;
 $footer_tax_coll = 0;
 $footer_shiphndl = 0;
+$footer_shipping_tax = 0;
 $footer_loworder = 0;
 $footer_other = 0;
 // new line for CSV
@@ -368,19 +375,34 @@ $csv_accum .= "\n";
 <?php };
 //
 // determine net sales for row
-$net_sales_query_raw = "select sum(round(ot.value,2)) net_sales from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where ";
+// Retrieve totals for products that are zero VAT rated
+$net_sales_query_raw = "SELECT sum( op.final_price * op.products_quantity ) net_sales FROM " . TABLE_ORDERS . " o INNER JOIN " . TABLE_ORDERS_PRODUCTS . " op ON ( o.orders_id = op.orders_id ) WHERE op.products_tax =0 AND";
+
+if ($status<>'') $net_sales_query_raw .= " o.orders_status ='" . $status . "' AND ";
+
+$net_sales_query_raw .= " o.date_purchased BETWEEN '" . $sales['row_year'] . "-" . $sales['i_month'] . "-01' AND '" . $sales['row_year'] . "-" . $sales['i_month'] . "-31 23:59'";
+
+if ($sel_month<>0) $net_sales_query_raw .= " AND dayofmonth(o.date_purchased) = '" . $sales['row_day'] . "'";
+
+$net_sales_query = tep_db_query($net_sales_query_raw);
+$net_sales_this_row = 0;
+if (tep_db_num_rows($net_sales_query) > 0)
+	$zero_rated_sales_this_row = tep_db_fetch_array($net_sales_query);
+
+// Retrieve totals for products that are NOT zero VAT rated
+$net_sales_query_raw = "SELECT sum(op.final_price * op.products_quantity) net_sales, sum(op.final_price * op.products_quantity * (1 + (op.products_tax / 100.0))) gross_sales, sum((op.final_price * op.products_quantity * (1 + (op.products_tax / 100.0))) - (op.final_price * op.products_quantity)) tax FROM " . TABLE_ORDERS . " o INNER JOIN " . TABLE_ORDERS_PRODUCTS . " op ON (o.orders_id = op.orders_id) WHERE op.products_tax <> 0 AND ";
 if ($status<>'') $net_sales_query_raw .= "o.orders_status ='" . $status . "' and ";
-$net_sales_query_raw .= "ot.class = " . $class_val_subtotal . " and month(o.date_purchased)= '" . $sales['i_month'] . "' and year(o.date_purchased)= '" . $sales['row_year'] . "'";
+$net_sales_query_raw .= " o.date_purchased BETWEEN '" . $sales['row_year'] . "-" . $sales['i_month'] . "-01' AND '" . $sales['row_year'] . "-" . $sales['i_month'] . "-31 23:59'";
 if ($sel_month<>0) $net_sales_query_raw .= " and dayofmonth(o.date_purchased) = '" . $sales['row_day'] . "'";
 $net_sales_query = tep_db_query($net_sales_query_raw);
 $net_sales_this_row = 0;
 if (tep_db_num_rows($net_sales_query)>0)	
 	$net_sales_this_row = tep_db_fetch_array($net_sales_query);
-//
-// determine tax collected for row
-$tax_coll_query_raw = "select sum(round(ot.value,2)) tax_coll from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where ";
+
+// Total tax. This is needed so we can calculate any tax that has been added to the postage
+$tax_coll_query_raw = "SELECT sum(ot.value) tax_coll FROM " . TABLE_ORDERS . " o INNER JOIN " . TABLE_ORDERS_TOTAL . " ot ON (o.orders_id = ot.orders_id) WHERE ";
 if ($status<>'') $tax_coll_query_raw .= "o.orders_status ='" . $status . "' and ";
-$tax_coll_query_raw .= "ot.class = " . $class_val_tax . " and month(o.date_purchased)= '" . $sales['i_month'] . "' and year(o.date_purchased)= '" . $sales['row_year'] . "'";
+$tax_coll_query_raw .= "ot.class = " . $class_val_tax . " AND o.date_purchased BETWEEN '" . $sales['row_year'] . "-" . $sales['i_month'] . "-01' AND '" . $sales['row_year'] . "-" . $sales['i_month'] . "-31 23:59'";
 if ($sel_month<>0) $tax_coll_query_raw .= " and dayofmonth(o.date_purchased) = '" . $sales['row_day'] . "'";
 $tax_coll_query = tep_db_query($tax_coll_query_raw);
 $tax_this_row = 0;
@@ -388,9 +410,9 @@ if (tep_db_num_rows($tax_coll_query)>0)
 	$tax_this_row = tep_db_fetch_array($tax_coll_query);
 //
 // shipping and handling charges for row
-$shiphndl_query_raw = "select sum(round(ot.value,2)) shiphndl from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where ";
+$shiphndl_query_raw = "SELECT sum(ot.value) shiphndl from " . TABLE_ORDERS . " o INNER JOIN " . TABLE_ORDERS_TOTAL . " ot ON (o.orders_id = ot.orders_id) WHERE ";
 if ($status<>'') $shiphndl_query_raw .= "o.orders_status ='" . $status . "' and ";
-$shiphndl_query_raw .= "ot.class = " . $class_val_shiphndl . " and month(o.date_purchased)= '" . $sales['i_month'] . "' and year(o.date_purchased)= '" . $sales['row_year'] . "'";
+$shiphndl_query_raw .= "ot.class = " . $class_val_shiphndl . " AND o.date_purchased BETWEEN '" . $sales['row_year'] . "-" . $sales['i_month'] . "-01' AND '" . $sales['row_year'] . "-" . $sales['i_month'] . "-31 23:59'";
 if ($sel_month<>0) $shiphndl_query_raw .= " and dayofmonth(o.date_purchased) = '" . $sales['row_day'] . "'";
 $shiphndl_query = tep_db_query($shiphndl_query_raw);
 $shiphndl_this_row = 0;
@@ -400,9 +422,9 @@ if (tep_db_num_rows($shiphndl_query)>0)
 // low order fees for row
 $loworder_this_row = 0;
 if ($loworder) {
-	$loworder_query_raw = "select sum(round(ot.value,2)) loworder from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where ";
+	$loworder_query_raw = "SELECT sum(ot.value) loworder from " . TABLE_ORDERS . " o INNER JOIN " . TABLE_ORDERS_TOTAL . " ot ON (o.orders_id = ot.orders_id) WHERE ";
 	if ($status<>'') $loworder_query_raw .= "o.orders_status ='" . $status . "' and ";
-	$loworder_query_raw .= "ot.class = " . $class_val_loworder . " and month(o.date_purchased)= '" . $sales['i_month'] . "' and year(o.date_purchased)= '" . $sales['row_year'] . "'";
+	$loworder_query_raw .= "ot.class = " . $class_val_loworder . " AND o.date_purchased BETWEEN '" . $sales['row_year'] . "-" . $sales['i_month'] . "-01' AND '" . $sales['row_year'] . "-" . $sales['i_month'] . "-31 23:59'";
 	if ($sel_month<>0) $loworder_query_raw .= " and dayofmonth(o.date_purchased) = '" . $sales['row_day'] . "'";
 	$loworder_query = tep_db_query($loworder_query_raw);
 	if (tep_db_num_rows($loworder_query)>0)	
@@ -412,37 +434,28 @@ if ($loworder) {
 // additional column if extra class value in orders_total table
 $other_this_row = 0;
 if ($extra_class) { 
-	$other_query_raw = "select sum(round(ot.value,2)) other from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where ";
+	$other_query_raw = "SELECT sum(ot.value) other from " . TABLE_ORDERS . " o INNER JOIN " . TABLE_ORDERS_TOTAL . " ot ON (o.orders_id = ot.orders_id) WHERE ";
 	if ($status<>'') $other_query_raw .= "o.orders_status ='" . $status . "' and ";
-	$other_query_raw .= "ot.class <> " . $class_val_subtotal . " and class <> " . $class_val_tax . " and class <> " . $class_val_shiphndl . " and class <> " . $class_val_loworder . " and class <> " . $class_val_total . " and month(o.date_purchased)= '" . $sales['i_month'] . "' and year(o.date_purchased)= '" . $sales['row_year'] . "'";
+	$other_query_raw .= "ot.class <> " . $class_val_subtotal . " AND class <> " . $class_val_tax . " AND class <> " . $class_val_shiphndl . " AND class <> " . $class_val_loworder . " AND class <> " . $class_val_total . " AND o.date_purchased BETWEEN '" . $sales['row_year'] . "-" . $sales['i_month'] . "-01' AND '" . $sales['row_year'] . "-" . $sales['i_month'] . "-31 23:59'";
 	if ($sel_month<>0) $other_query_raw .= " and dayofmonth(o.date_purchased) = '" . $sales['row_day'] . "'";
 	$other_query = tep_db_query($other_query_raw);
 	if (tep_db_num_rows($other_query)>0)	
 	$other_this_row = tep_db_fetch_array($other_query);
 	};
-//
-// sum of order subtotals taxed
-	$taxed_query_raw = "select sum(round(t0.value,2)) taxed_sales, monthname(o.date_purchased) row_month, month(o.date_purchased) i_month from " . TABLE_ORDERS_TOTAL . " t0, " .  TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " t1 on (o.orders_id = t1.orders_id) where t0.orders_id=t1.orders_id ";
-	if ($status<>'') $taxed_query_raw .= " and o.orders_status ='" . $status . "'";
-	$taxed_query_raw .= " and t0.class = " . $class_val_subtotal . " and t1.class = " . $class_val_tax  . " and t1.value>0 and month(o.date_purchased)= '" . $sales['i_month'] . "' and year(o.date_purchased)= '" . $sales['row_year'] . "'";
-	if ($sel_month<>0) {
-		$taxed_query_raw .= " and dayofmonth(o.date_purchased) = '" . $sales['row_day'] . "' group by o.date_purchased";
-	} else {
-		$taxed_query_raw .= " group by month(o.date_purchased)";
-	};
-	$taxed_query = tep_db_query($taxed_query_raw);
-	$taxed_this_row = tep_db_fetch_array($taxed_query);
-//
-// sum of order subtotals not taxed
-	$nontaxed_this_row_value = $net_sales_this_row['net_sales'] - $taxed_this_row['taxed_sales'];
-//
+
+// Correct any rounding errors
+	$net_sales_this_row['net_sales'] = (floor(($net_sales_this_row['net_sales'] * 100) + 0.5)) / 100;
+	$net_sales_this_row['tax'] = (floor(($net_sales_this_row['tax'] * 100) + 0.5)) / 100;
+	$zero_rated_sales_this_row['net_sales'] = (floor(($zero_rated_sales_this_row['net_sales'] * 100) + 0.5)) / 100;
+	$tax_this_row['tax_coll'] = (floor(($tax_this_row['tax_coll'] * 100) + 0.5)) / 100;
 // accumulate row results in footer
-	$footer_gross += $sales['gross_sales'];
-	$footer_sales += $net_sales_this_row['net_sales'];
-	$footer_sales_nontaxed += $nontaxed_this_row_value;
-	$footer_sales_taxed += $taxed_this_row['taxed_sales'];
-	$footer_tax_coll += $tax_this_row['tax_coll'];
-	$footer_shiphndl += $shiphndl_this_row['shiphndl'];
+	$footer_gross += $sales['gross_sales']; // Gross Income
+	$footer_sales += $net_sales_this_row['net_sales'] + $zero_rated_sales_this_row['net_sales']; // Product Sales
+	$footer_sales_nontaxed += $zero_rated_sales_this_row['net_sales']; // Nontaxed Sales
+	$footer_sales_taxed += $net_sales_this_row['net_sales']; // Taxed Sales
+	$footer_tax_coll += $net_sales_this_row['tax']; // Taxes Collected
+	$footer_shiphndl += $shiphndl_this_row['shiphndl']; // Shipping & handling
+        $footer_shipping_tax += ($tax_this_row['tax_coll'] - $net_sales_this_row['tax']); // Shipping Tax
 	$footer_loworder += $loworder_this_row['loworder'];
 	if ($extra_class) $footer_other += $other_this_row['other'];
 ?>
@@ -464,22 +477,23 @@ $last_row_year = $sales['row_year']; // save this row's year to check for annual
 ?>
 </td>
 <td class="dataTableContent" width='70' align="right"><?php mirror_out(number_format($sales['gross_sales'],2)); ?></td>
+<td class="dataTableContent" width='70' align="right"><?php mirror_out(number_format($net_sales_this_row['net_sales'] + $zero_rated_sales_this_row['net_sales'],2)); ?></td>
+<td class="dataTableContent" width='70' align="right"><?php mirror_out(number_format($zero_rated_sales_this_row['net_sales'],2)); ?></td>
 <td class="dataTableContent" width='70' align="right"><?php mirror_out(number_format($net_sales_this_row['net_sales'],2)); ?></td>
-<td class="dataTableContent" width='70' align="right"><?php mirror_out(number_format($nontaxed_this_row_value,2)); ?></td>
-<td class="dataTableContent" width='70' align="right"><?php mirror_out(number_format($taxed_this_row['taxed_sales'],2)); ?></td>
 <td class="dataTableContent" width='70' align="right">
 <?php 
 	// make this a link to the detail popup if nonzero
-	if (!$print && ($tax_this_row['tax_coll']>0)) {
-		echo "<a href=\"#\" onClick=\"window.open('" . $_SERVER['PHP_SELF'] . "?&amp;show=ot_tax&amp;year=" . $sales['row_year'] . "&amp;month=" . $sales['i_month'];
-		if ($sel_month<>0) echo "&amp;day=" . $sales['row_day'];
-		if ($status<>'') echo "&amp;status=" . $status;
+	if (!$print && ($net_sales_this_row['tax']>0)) {
+		if ($sel_month<>0) $taxpopup = "&amp;day=" . $sales['row_day'];
+		if ($status<>'') $taxpopup .= "&amp;status=" . $status;
+		echo "<a href=\"#\" onClick=\"window.open('" . tep_href_link(basename($PHP_SELF), "&amp;show=ot_tax&amp;year=" . $sales['row_year'] . "&amp;month=" . $sales['i_month'] . $taxpopup);		
 		echo "','detail',config='height=200,width=400,scrollbars=1, resizable=1')\" title=\"Show detail\">";
 	};
-	mirror_out(number_format($tax_this_row['tax_coll'],2)); 
-	if (!$print && $tax_this_row['tax_coll']>0) echo "</a>";
+	mirror_out(number_format($net_sales_this_row['tax'],2)); 
+	if (!$print && $net_sales_this_row['tax']>0) echo "</a>";
 ?></td>
 <td class="dataTableContent" width='70' align="right"><?php mirror_out(number_format($shiphndl_this_row['shiphndl'],2)); ?></td>
+<td class="dataTableContent" width='70' align="right"><?php $sh_tax = $tax_this_row['tax_coll'] - $net_sales_this_row['tax']; mirror_out(number_format(($sh_tax <= 0) ? 0 : $sh_tax,2)); ?></td>
 <?php if ($loworder) { ?>
 <td class="dataTableContent" width='70' align="right"><?php mirror_out(number_format($loworder_this_row['loworder'],2)); ?></td>
 <?php }; ?>
@@ -526,6 +540,9 @@ if ($rows==$num_rows){
 <td class="dataTableHeadingContent" width='70' align="right">
 <?php mirror_out(number_format($footer_shiphndl,2)); ?>
 </td>
+<td class="dataTableHeadingContent" width='70' align="right">
+<?php mirror_out(number_format(($footer_shipping_tax <= 0) ? 0 : $footer_shipping_tax,2)); ?>
+</td>
 <?php if ($loworder) { ?>
 <td class="dataTableHeadingContent" width='70' align="right">
 <?php mirror_out(number_format($footer_loworder,2)); ?>
@@ -543,6 +560,7 @@ $footer_sales_nontaxed = 0;
 $footer_sales_taxed = 0;
 $footer_tax_coll = 0;
 $footer_shiphndl = 0;
+$footer_shipping_tax = 0;
 $footer_loworder = 0;
 $footer_other = 0;
 // new line for CSV

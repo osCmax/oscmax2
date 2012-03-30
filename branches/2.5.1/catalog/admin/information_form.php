@@ -12,7 +12,7 @@ $Id$
 ?>
 <table>
 <tr>
-	<td class="pageHeading"><?php echo $title ?></td>
+	<td class="pageHeading"><?php echo tep_output_string($title); ?></td>
 </tr>
 <tr>
 	<td>

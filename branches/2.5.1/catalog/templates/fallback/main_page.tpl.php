@@ -287,7 +287,7 @@ if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exist
     }
   }
 
-if (ADD_THIS_ENABLED == 'true') { 
+if ( (ADD_THIS_ENABLED == 'true' && $pfile =='product_info.php') || (ADD_THIS_ENABLED == 'true' && ADD_THIS_ARTICLES == 'true' && $pfile == 'article_info.php') ) { 
   echo stripslashes(ADD_THIS_JAVASCRIPT);
   if (ADD_THIS_ADDRESS_BAR != '') { echo stripslashes(ADD_THIS_ADDRESS_BAR); }
 }

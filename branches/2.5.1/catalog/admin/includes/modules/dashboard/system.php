@@ -231,6 +231,24 @@ $system_permission_warnings = 0;
   </tr>
   <?php } ?>
   <!-- End check download directory -->
+  
+  <!-- Start check cache directory -->
+  <?php  
+  if (is_dir(DIR_FS_CACHE)) {
+    if (!is_writeable(DIR_FS_CACHE)) { ?>
+  <tr>
+	<td class="messageStackError"><?php echo tep_image(DIR_WS_ICONS . 'error.gif') . ' ' . ERROR_CACHE_DIRECTORY_NOT_WRITEABLE; ?></td>
+  </tr>
+  <?php
+	}
+  } else {
+  ?>
+  <tr>
+	<td class="messageStackError"><?php echo tep_image(DIR_WS_ICONS . 'error.gif') . ' ' . ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST; ?></td>
+  </tr>
+  <?php
+  } ?>
+  <!-- End check cache directory -->
 
   <!-- Start display of final message for system_permission_errors -->
   <?php

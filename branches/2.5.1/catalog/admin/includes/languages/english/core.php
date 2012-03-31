@@ -675,5 +675,6 @@ define('TEXT_FORUM', 'Forum');
 define('TEXT_WIKI', 'Wiki Help Documents');
 define('TEXT_COPYRIGHT', 'Copyright');
 
-
+define('ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST', 'Error: Cache directory does not exist. Please set this Administrator -> Cache.');
+define('ERROR_CACHE_DIRECTORY_NOT_WRITEABLE', 'Error: Cache directory is not writeable.');
 ?>

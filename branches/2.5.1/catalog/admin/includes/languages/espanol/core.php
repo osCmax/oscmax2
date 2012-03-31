@@ -628,5 +628,6 @@ define('TEXT_FORUM', 'Foros');
 define('TEXT_WIKI', 'Wiki de documentación de ayuda');
 define('TEXT_COPYRIGHT', 'Copyright');
 
-
+define('ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST', 'Error: No existe el directorio para la caché. Especifique un directorio valido en Configuración->Caché.');
+define('ERROR_CACHE_DIRECTORY_NOT_WRITEABLE', 'Error: No se puede escribir en el directorio para la caché.');
 ?>

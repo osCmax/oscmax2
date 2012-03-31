@@ -183,6 +183,7 @@ define('BOX_CONFIGURATION_RECAPTCHA', 'Formulario reCaptcha');
 define('BOX_CONFIGURATION_NOTIFICATIONS', 'Notificaciones');
 define('BOX_CONFIGURATION_SLIDESHOW', 'Presentación diapositivas');
 define('BOX_CONFIGURATION_SLIDESHOW_SETTINGS', 'Configuración presentación');
+define('BOX_CONFIGURATION_ADDTHIS', 'AddThis');
 
 define('BOX_CONFIGURATION_GOOGLE', 'Google');
 define('BOX_CONFIGURATION_GOOGLE_ANALYTICS', 'Google Analytics');

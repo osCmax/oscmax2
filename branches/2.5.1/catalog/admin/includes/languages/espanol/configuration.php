@@ -44,7 +44,7 @@ define('CT_ENGLISH_SWITCH', 'Utilizar idioma inglés UK o USA');
 define('CD_ENGLISH_SWITCH', 'Configurar la tienda con el inglés de Reino Unido o de Estado Unidos (Formato de fecha, dirección, fecha de nacimiento, etc.)');
 define('CT_SEND_EXTRA_ORDER_EMAILS_TO', 'Enviar e-mails adicionales de pedidos a');
 define('CD_SEND_EXTRA_ORDER_EMAILS_TO', 'Enviar e-mails adicionales a las siguientes direcciones de e-mail, con este formato: Nombre 1 &lt;dirección@email&gt;, Nombre 2 &lt;dirección@email&gt;');
-define('CT_DISPLAY_CART', 'Mostrar carrito después de añadir producto');
+define('CT_DISPLAY_CART', 'Mostrar el carrito después de añadir un producto');
 define('CD_DISPLAY_CART', 'Muestra el carrito de la compra después de añadir un producto (o devolverlo)');
 define('CT_ALLOW_GUEST_TO_TELL_A_FRIEND', 'Permitir a un invitado contárselo a un amigo');
 define('CD_ALLOW_GUEST_TO_TELL_A_FRIEND', 'Permite que los invitados hablen a un amigo acerca de un producto');
@@ -71,33 +71,33 @@ define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Algunos países necesitan que se muestre u
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Nombre');
-define('CD_ENTRY_FIRST_NAME_MIN_LENGTH', 'Longitud mínima de nombre');
+define('CD_ENTRY_FIRST_NAME_MIN_LENGTH', 'Longitud mínima del nombre');
 define('CT_ENTRY_LAST_NAME_MIN_LENGTH', 'Apellidos');
-define('CD_ENTRY_LAST_NAME_MIN_LENGTH', 'Longitud mínima de apellidos');
+define('CD_ENTRY_LAST_NAME_MIN_LENGTH', 'Longitud mínima de los apellidos');
 define('CT_ENTRY_DOB_MIN_LENGTH', 'Fecha de nacimiento');
-define('CD_ENTRY_DOB_MIN_LENGTH', 'Longitud mínima de fecha de nacimiento');
+define('CD_ENTRY_DOB_MIN_LENGTH', 'Longitud mínima de la fecha de nacimiento');
 define('CT_ENTRY_EMAIL_ADDRESS_MIN_LENGTH', 'Dirección e-mail');
-define('CD_ENTRY_EMAIL_ADDRESS_MIN_LENGTH', 'Longitud mínima de dirección de e-mail');
+define('CD_ENTRY_EMAIL_ADDRESS_MIN_LENGTH', 'Longitud mínima de la dirección de e-mail');
 define('CT_ENTRY_STREET_ADDRESS_MIN_LENGTH', 'Dirección');
-define('CD_ENTRY_STREET_ADDRESS_MIN_LENGTH', 'Longitud mínima de dirección física');
+define('CD_ENTRY_STREET_ADDRESS_MIN_LENGTH', 'Longitud mínima de la dirección física');
 define('CT_ENTRY_COMPANY_MIN_LENGTH', 'empresa');
-define('CD_ENTRY_COMPANY_MIN_LENGTH', 'Longitud mínima de empresa');
+define('CD_ENTRY_COMPANY_MIN_LENGTH', 'Longitud mínima de la empresa');
 define('CT_ENTRY_POSTCODE_MIN_LENGTH', 'Código postal');
-define('CD_ENTRY_POSTCODE_MIN_LENGTH', 'Longitud mínima de código postal');
+define('CD_ENTRY_POSTCODE_MIN_LENGTH', 'Longitud mínima del código postal');
 define('CT_ENTRY_CITY_MIN_LENGTH', 'Población');
-define('CD_ENTRY_CITY_MIN_LENGTH', 'Longitud mínima de población');
+define('CD_ENTRY_CITY_MIN_LENGTH', 'Longitud mínima de la población');
 define('CT_ENTRY_STATE_MIN_LENGTH', 'Provincia');
-define('CD_ENTRY_STATE_MIN_LENGTH', 'Longitud mínima de provincia');
-define('CT_ENTRY_TELEPHONE_MIN_LENGTH', 'Número teléfono');
-define('CD_ENTRY_TELEPHONE_MIN_LENGTH', 'Longitud mínima de número de teléfono');
+define('CD_ENTRY_STATE_MIN_LENGTH', 'Longitud mínima de la provincia');
+define('CT_ENTRY_TELEPHONE_MIN_LENGTH', 'Número de teléfono');
+define('CD_ENTRY_TELEPHONE_MIN_LENGTH', 'Longitud mínima del número de teléfono');
 define('CT_ENTRY_PASSWORD_MIN_LENGTH', 'Contraseña');
-define('CD_ENTRY_PASSWORD_MIN_LENGTH', 'Longitud mínima de contraseña');
-define('CT_CC_OWNER_MIN_LENGTH', 'Titular tarjeta crédito');
-define('CD_CC_OWNER_MIN_LENGTH', 'Longitud mínima de titular de tarjeta de crédito');
-define('CT_CC_NUMBER_MIN_LENGTH', 'Número tarjeta crédito');
-define('CD_CC_NUMBER_MIN_LENGTH', 'Longitud mínima de número de tarjeta de crédito');
+define('CD_ENTRY_PASSWORD_MIN_LENGTH', 'Longitud mínima de la contraseña');
+define('CT_CC_OWNER_MIN_LENGTH', 'Titular de la tarjeta crédito');
+define('CD_CC_OWNER_MIN_LENGTH', 'Longitud mínima del titular de la tarjeta de crédito');
+define('CT_CC_NUMBER_MIN_LENGTH', 'Número de la tarjeta crédito');
+define('CD_CC_NUMBER_MIN_LENGTH', 'Longitud mínima del número de la tarjeta de crédito');
 define('CT_REVIEW_TEXT_MIN_LENGTH', 'Texto comentarios');
-define('CD_REVIEW_TEXT_MIN_LENGTH', 'Longitud mínima de texto de los comentarios');
+define('CD_REVIEW_TEXT_MIN_LENGTH', 'Longitud mínima del texto de los comentarios');
 define('CT_MIN_DISPLAY_BESTSELLERS', 'Los más vendidos');
 define('CD_MIN_DISPLAY_BESTSELLERS', 'Mínimo número de productos más vendidos a mostrar');
 define('CT_MIN_DISPLAY_ALSO_PURCHASED', 'También compraron');
@@ -106,14 +106,14 @@ define('CD_MIN_DISPLAY_ALSO_PURCHASED', 'Mínimo número de productos a mostrar en
 // Configuration ID: 3 - Maximum Values
 define('CT_MAX_ADDRESS_BOOK_ENTRIES', 'Entradas en agenda de direcciones');
 define('CD_MAX_ADDRESS_BOOK_ENTRIES', 'Máximo número de entradas en la agenda de direcciones que se permite tener a un cliente');
-define('CT_MAX_CATALOG_DISPLAY_SEARCH_RESULTS', 'Resultados de búsqueda en catálogo');
+define('CT_MAX_CATALOG_DISPLAY_SEARCH_RESULTS', 'Resultados de búsqueda en el catálogo');
 define('CD_MAX_CATALOG_DISPLAY_SEARCH_RESULTS', 'Cantidad de productos a listar en el catálogo');
-define('CT_MAX_DISPLAY_SEARCH_RESULTS', 'Resultados en listados administración');
+define('CT_MAX_DISPLAY_SEARCH_RESULTS', 'Resultados en listados de administración');
 define('CD_MAX_DISPLAY_SEARCH_RESULTS', 'Cantidad de productos o artículos a listar dentro del panel de administración');
 define('CT_MAX_DISPLAY_PAGE_LINKS', 'Enlaces a página');
 define('CD_MAX_DISPLAY_PAGE_LINKS', 'Número de enlaces con \'número\' usados para páginas de resultados');
 define('CT_MAX_DISPLAY_SPECIAL_PRODUCTS', 'Productos en oferta');
-define('CD_MAX_DISPLAY_SPECIAL_PRODUCTS', 'Máximo número de productos de oferta a mostrar');
+define('CD_MAX_DISPLAY_SPECIAL_PRODUCTS', 'Máximo número de productos en oferta a mostrar');
 define('CT_MAX_DISPLAY_NEW_PRODUCTS', 'Módulo nuevos productos');
 define('CD_MAX_DISPLAY_NEW_PRODUCTS', 'Máximo número de productos nuevos a mostrar en una categoría');
 define('CT_MAX_DISPLAY_UPCOMING_PRODUCTS', 'Productos próximamente disponibles');
@@ -122,7 +122,7 @@ define('CT_MAX_DISPLAY_MANUFACTURERS_IN_A_LIST', 'Lista de fabricantes');
 define('CD_MAX_DISPLAY_MANUFACTURERS_IN_A_LIST', 'Utilizado en la sección de fabricantes; cuando el número de fabricantes es mayor que este número se muestra una lista desplegable en lugar de la lista predeterminada');
 define('CT_MAX_MANUFACTURERS_LIST', 'Tamaño selección de fabricantes');
 define('CD_MAX_MANUFACTURERS_LIST', 'Utilizado en la sección de fabricantes; cuando este valor es \'1\' se usará la clásica lista desplegable para la sección de fabricantes. Con otro valor se mostrará una lista con el número especificado de filas.');
-define('CT_MAX_DISPLAY_MANUFACTURER_NAME_LEN', 'Longitud nombre fabricantes');
+define('CT_MAX_DISPLAY_MANUFACTURER_NAME_LEN', 'Longitud del nombre de fabricantes');
 define('CD_MAX_DISPLAY_MANUFACTURER_NAME_LEN', 'Utilizado en la sección de fabricantes; longitud máxima del nombre de los fabricantes a mostrar');
 define('CT_MAX_DISPLAY_NEW_REVIEWS', 'Nuevos comentarios');
 define('CD_MAX_DISPLAY_NEW_REVIEWS', 'Máximo número de comentarios nuevos que se mostrarán');
@@ -339,7 +339,7 @@ define('CD_PRODUCT_LIST_FILTER', '¿Quieres mostrar filtro de categoría/fabricant
 define('CT_PREV_NEXT_BAR_LOCATION', 'Localización barra navegación Anterior/Siguiente (1-arriba, 2-abajo, 3-ambos)');
 define('CD_PREV_NEXT_BAR_LOCATION', 'Establece la localización de la barra de navegación Anterior/Siguiente (1-arriba, 2-abajo, 3-ambos)');
 define('CT_PRODUCT_CORNER_BANNER', 'Mostrar banners esquina');
-define('CD_PRODUCT_CORNER_BANNER', '¿Quieres mostrar los banners en la esquina de la imágen de producto?<br><br><b>Tene en cuenta que hay que ponerlo a 1 para que funcione correctamente ya que se necesita que se muestre antes que todas las demás características del listado de productos</b>');
+define('CD_PRODUCT_CORNER_BANNER', '¿Quieres mostrar los banners en la esquina de la imágen de producto?<br><br><b>Ten en cuenta que hay que ponerlo a 1 para que funcione correctamente ya que se necesita que se muestre antes que todas las demás características del listado de productos</b>');
 define('CT_ALLOW_CATEGORY_DESCRIPTIONS', 'Mostrar descripciones categoría');
 define('CD_ALLOW_CATEGORY_DESCRIPTIONS', '¿Quieres mostrar las descripciones de categoría en la tienda?');
 define('CT_PRODUCT_LIST_NUM_COLUMNS', 'Número de columnas de listados de productos');
@@ -657,7 +657,7 @@ define('CT_CLOUDZOOM_TITLEOPACITY', 'Opacidad del título en el zoomer de imagen'
 define('CD_CLOUDZOOM_TITLEOPACITY', 'Especifica la opacidad del título si se muestra, donde 0 es totalmente transparente, y 1 es totalmente opaco.	');
 
 // Configuration ID: 50 - Product Information
-define('CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Impide añadir productos agotados al carrito');
+define('CT_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Impedir añadir productos agotados al carrito');
 define('CD_PRODINFO_ATTRIBUTE_NO_ADD_OUT_OF_STOCK', 'Impide que una combinación de atributos agotados se añadan al carrito.');
 define('CT_PRODINFO_ATTRIBUTE_OUT_OF_STOCK_MSGLINE', 'Mostrar línea mensaje agotado');
 define('CD_PRODINFO_ATTRIBUTE_OUT_OF_STOCK_MSGLINE', 'Controla si se muestra una línea con un mensaje que indica que se han seleccionado unos atributos agotados.');
@@ -1094,6 +1094,18 @@ define('CT_SHOW_EMAIL_ADDRESS', 'Mostrar dirección e-mail');
 define('CD_SHOW_EMAIL_ADDRESS', '¿Quieres que se muestre tu dirección de e-mail en la página del formulario de contacto?');
 define('CT_SHOW_MAILING_ADDRESS', 'Mostrar dirección tienda');
 define('CD_SHOW_MAILING_ADDRESS', '¿Quieres que se muestre la dirección de la tienda en la página del formulario de contacto?');
+
+// Configuration ID: 208 - AddThis
+define('CT_ADD_THIS_ENABLED', 'Habilitar AddThis');
+define('CD_ADD_THIS_ENABLED', '¿Quieres habilitar el modulo AddThis?');
+define('CT_ADD_THIS_CODE', 'Código del botón AddThis');
+define('CD_ADD_THIS_CODE', 'Pega tu código del botón desde la web de AddThis. Necesitas meter el código de botón entre los divs.');
+define('CT_ADD_THIS_JAVASCRIPT', 'Código Javascript de AddThis');
+define('CD_ADD_THIS_JAVASCRIPT', 'Pega el código javascript desde la web de AddThis. Por favor incluye las etiquetas script a cada lado.');
+define('CT_ADD_THIS_ADDRESS_BAR', 'Código Javascript de la barra de direcciones AddThis');
+define('CD_ADD_THIS_ADDRESS_BAR', 'Pega el código javascript de la barra de direcciones desde la Web de AddThis. Por favor incluye la etiqueta script a cada lado.');
+define('CT_ADD_THIS_ARTICLES', '¿AddThis en páginas de artículos?');
+define('CD_ADD_THIS_ARTICLES', '¿Quieres mostrar los botones AddThis en tus páginas de artículos así como en las páginas de productos?');
 
 // Configuration ID: 456 - Articles
 define('CT_DISPLAY_NEW_ARTICLES', 'Mostrar enlace nuevas noticias');

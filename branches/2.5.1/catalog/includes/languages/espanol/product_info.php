@@ -75,6 +75,4 @@ define('TEXT_ADDITIONAL_SHIPPING_2', '€ por el primer artículo, y ');
 define('TEXT_ADDITIONAL_SHIPPING_3', '€ por cada artículo adicional además de los gastos de envío normales.)</i>');
 define('TEXT_ADDITIONAL_SHIPPING_4', '€ además de los gastos de envío normales.)</i>');
 // end indvship
-
-define('PRODUCT_HAS_OPTIONS_MESSAGE', 'Este producto tiene las opciones que deben ser seleccionados antes de que se puede comprar.');
 ?>

@@ -128,7 +128,7 @@ define('BOX_TELL_A_FRIEND_TEXT', 'Cuéntale a un amigo que conoces este producto.
 define('BOX_HEADING_MAILCHIMP', 'Boletín');
 define('MAILCHIMP_INTRO_TEXT', 'Si desea suscribirse a nuestro boletín, por favor introduzca aquí su email:');
 define('MAILCHIMP_INTRO_TEXT_SUBSCRIBED', 'Actualmente se encuentra suscrito a nuestro boletín');
-define('MAILCHIMP_INTRO_TEXT_UNSUBSCRIBED', 'Si desea cancelar la suscribción a nuestro boletín, por favor introduzca aquí su email:');
+define('MAILCHIMP_INTRO_TEXT_UNSUBSCRIBED', 'Si desea suscribirse a nuestro boletín, por favor introduzca aquí su email:');
 define('MAILCHIMP_EXISTING_USER_UNSUBSCRIBED', 'Actualmente <strong>no</strong> se encuentra suscrito a nuestro boletín');
 define('MAILCHIMP_HTML', 'HTML');
 define('MAILCHIMP_TEXT', 'Texto');
@@ -337,7 +337,7 @@ define('TEXT_UNKNOWN_TAX_RATE', 'Impuesto desconocido');
 
 define('TEXT_REQUIRED', '<span class="errorText">Obligatorio</span>');
 
-define('ERROR_TEP_MAIL', '<font face="Verdana, Arial" size="2" color="#ff0000"><b><small>Error:</small> No he podido enviar el email con el servidor SMTP especificado. Revisa la configuración del archivo php.ini y corrija el servidor SMTP si es necesario.</b></font>');
+define('ERROR_TEP_MAIL', '<span class="errorText"><b><small>Error:</small> No se ha podido enviar el email con el servidor SMTP especificado. Revisa la configuración del archivo php.ini y corrija el servidor SMTP si es necesario.</b></span>');
 define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Advertencia: El directorio de instalación existe en: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/install. Por razones de seguridad, elimine este directorio completamente.');
 define('WARNING_CONFIG_FILE_WRITEABLE', 'Advertencia: Se puede escribir en el fichero de configuración: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/includes/configure.php. En determinadas circunstancias esto puede suponer un riesgo de seguridad - por favor corrija los permisos de este fichero.');
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Advertencia: El directorio para guardar datos de sesión no existe: ' . tep_session_save_path() . '. Las sesiones no funcionarán hasta que no se cree el directorio.');

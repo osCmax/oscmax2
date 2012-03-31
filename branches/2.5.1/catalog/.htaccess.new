@@ -90,3 +90,17 @@
 #ErrorDocument 505 /catalog/http_error.php?error_id=505
 #ErrorDocument 504 /catalog/http_error.php?error_id=504 
 # EOF: HTTP Error Logging
+
+# BOF: Set Expires for common file types
+# ExpiresActive on
+# ExpiresDefault "access plus 24 hours"
+# ExpiresByType image/jpg "access plus 1 months"
+# ExpiresByType image/gif "access plus 1 months"
+# ExpiresByType image/jpeg "access plus 1 months"
+# ExpiresByType image/png "access plus 1 months"
+# ExpiresByType text/css "access plus 1 months"
+# ExpiresByType text/javascript "access plus 1 months"
+# ExpiresByType application/javascript "access plus 1 months"
+# AddType image/x-icon .ico
+# ExpiresByType image/x-icon "access plus 1 months"
+# EOF: Set Expires for common file types

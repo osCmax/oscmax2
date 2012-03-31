@@ -140,8 +140,45 @@ $Id$
         }
       }
     }
-    sort($directory_array);
-    $dir->close();
+    // sort($directory_array);
+	
+    if ($set != 'ordertotal') {
+      sort($directory_array);
+    } else {
+      $dir->close();
+
+      // go find out what is installed and sort them
+	  $cpy = $directory_array;
+	  $ordered_array = array();
+
+	  // casting the configuration_value column will allow the values to be sorted numericaly
+	  $key_value_query = tep_db_query("select configuration_key from " . TABLE_CONFIGURATION . " where configuration_key like 'MODULE_ORDER_TOTAL_%_SORT_ORDER' or configuration_key = 'MODULE_LOYALTY_DISCOUNT_SORT_ORDER' ORDER BY CAST(configuration_value AS UNSIGNED INTEGER)");
+
+	  // for every module installed find it and remove it from the directory list
+	  while ($key_value = tep_db_fetch_array($key_value_query)) {
+		if ($key_value['configuration_key'] == 'MODULE_LOYALTY_DISCOUNT_SORT_ORDER') {
+		  $class = 'ot_loyalty_discount.php';
+		} else {
+	      $class = 'ot_'. strtolower( substr($key_value['configuration_key'], 19, -11) ). '.php';
+		}
+	    $found = array_search($class, $directory_array);
+		if ( $found===FALSE ) {
+		  // do nothings as we will add back any missing or uninstalled items later
+		} else {
+		  unset($directory_array[$found]);
+	      array_push($ordered_array, $class);
+		}
+	  }
+
+	  // for all uninstalled items add them onto the end of the list
+	  foreach ($directory_array as $key => $value) {
+	    array_push($ordered_array, $value);
+	  }
+	  
+	  // set the newly ordered list back to the correct variable
+	  $directory_array = $ordered_array;
+
+	}
   }
 
   $installed_modules = array();

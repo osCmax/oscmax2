@@ -96,6 +96,9 @@ $Id$
     if ($this->include_shipping == 'false') $order_total=$order_total-$order->info['shipping_cost'];
     return $order_total;
   }
+/* Bug fix #996 - fixes loyalty discount problems with One Page checkout
+
+   *** Original function left in for reference until more live testing is completed. ***
 
 	function get_cum_order_total() {
 	  global $order, $customer_id;
@@ -119,6 +122,37 @@ $Id$
 	  return $cum_order_total;
 	  }
 	}
+*/
+    function get_cum_order_total() {
+      global $order, $customer_id;
+      if (!(isset($_SESSION['login_id']) && $_SESSION['login_id'])){
+      $cum_order_total = 0;
+      $this->cum_order_total = $cum_order_total;
+        return $cum_order_total;
+    } else {
+    $history_query_raw = "select o.date_purchased, ot.value as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id) where o.customers_id = '" . $customer_id . "' and ot.class = 'ot_subtotal' and o.orders_status = '" . $this->loyalty_order_status . "' order by date_purchased DESC";
+        $history_query = tep_db_query($history_query_raw);
+      if (tep_db_num_rows($history_query)) {
+      $cum_order_total = 0;
+      $cutoff_date = $this->get_cutoff_date();
+      while ($history = tep_db_fetch_array($history_query)) {
+        if ($this->get_date_in_period($cutoff_date, $history['date_purchased']) == true){
+        $cum_order_total = $cum_order_total + $history['order_total'];
+        }
+      }
+      $this->cum_order_total = $cum_order_total;
+      return $cum_order_total;
+
+
+      } else {
+      $cum_order_total = 0;
+      $this->cum_order_total = $cum_order_total;
+      return $cum_order_total;
+      }
+    }
+   }
+      
+/* End Bug Fix #996 */
 
 	function get_cutoff_date() {
 	  $rightnow = time();

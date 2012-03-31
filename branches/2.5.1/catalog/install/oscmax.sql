@@ -1820,6 +1820,7 @@ INSERT INTO configuration VALUES (456, 'CT_NEW_SIGNUP_DISCOUNT_COUPON', 'NEW_SIG
 INSERT INTO configuration VALUES (455, 'CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', '0', 'CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', '1', '24', NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (3305, 'CT_SHOW_TAX_RATE_NEAR_PRICE', 'SHOW_TAX_RATE_NEAR_PRICE', 'false', 'CD_SHOW_TAX_RATE_NEAR_PRICE', '1', '22', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 INSERT INTO configuration VALUES (3306, 'CT_SHOW_SHIPPING_NEAR_PRICE', 'SHOW_SHIPPING_NEAR_PRICE', 'false', 'CD_SHOW_SHIPPING_NEAR_PRICE', '1', '23', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
+INSERT INTO configuration VALUES (3308, 'CT_CATEGORY_DROPDOWN_SWITCH', 'DISABLE_CATEGORY_DROPDOWN_SWITCH', 'false', 'CD_CATEGORY_DROPDOWN_SWITCH', '1', '26', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 
 # Configuration ID: 2 - Minimum Values
 INSERT INTO configuration VALUES (19, 'CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'ENTRY_FIRST_NAME_MIN_LENGTH', '2', 'CD_ENTRY_FIRST_NAME_MIN_LENGTH', '2', '1', NULL, now(), NULL, NULL);

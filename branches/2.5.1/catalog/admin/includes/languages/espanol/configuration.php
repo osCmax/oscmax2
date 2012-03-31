@@ -68,6 +68,8 @@ define('CT_SHOW_TAX_RATE_NEAR_PRICE', '¿Mostrar tasas de impuestos junto al prec
 define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'Algunos países necesitan que se muestren las tasas de impuestos junto al precio.');
 define('CT_SHOW_SHIPPING_NEAR_PRICE', '¿Mostrar enlace a los gastos de envío junto al precio?');
 define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Algunos países necesitan que se muestre un enlace a los gastos de envio junto al precio. Requiere <b>Mostrar tasas de impuestos junto al precio</b> para poder activarlo.');
+define('CT_CATEGORY_DROPDOWN_SWITCH', 'Disable Category Dropdown List in Admin?');
+define('CD_CATEGORY_DROPDOWN_SWITCH', 'This option enables or disables the dropdown list of categories on the Products/Categories entry page in your admin panel. In stores with more than a few hundred categories, this should be set to True to speed up page rendering.');
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Nombre');

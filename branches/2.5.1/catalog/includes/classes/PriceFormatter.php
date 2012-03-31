@@ -588,13 +588,16 @@ class PriceFormatter {
         $button_output .= '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products_id) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>&nbsp;';
 	  }
 	  
+	  // We need to know if we are on the product_info page or not to send to the correct page
+	  if ($page_sent == FILENAME_PRODUCT_INFO) { $product_link = '&product_to_buy_id=' . $products_id; } else { $product_link = '&products_id=' . $products_id; }
+	  
 	  // Now generate the relevant 'buy now' button
 	  if ($this->thePrice == CALL_FOR_PRICE_VALUE) { // Call for price
 	    $button_output .= '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $products_model) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $products_name) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $products_id . '%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
 	  } elseif ($this->productsQuantity < 1 && STOCK_IMAGE_SWITCH == 'true') { // Out of Stock
 	    $button_output .= tep_image_submit('button_out_of_stock.gif', IMAGE_OUT_OF_STOCK);
 	  } else {
-		$button_output .= '<a href="' . tep_href_link($page_sent, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $products_id) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>';
+		$button_output .= '<a href="' . tep_href_link($page_sent, tep_get_all_get_params(array('action')) . 'action=buy_now' . $product_link) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>';
 	  }
 	  
 	  return $button_output;

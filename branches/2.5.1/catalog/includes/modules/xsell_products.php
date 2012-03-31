@@ -73,12 +73,6 @@ if ($num_products_xsell != 0) { // Check query is not blank
       while ($xsell = tep_db_fetch_array($xsell_query)) {
  
         $pf->loadProduct($xsell['products_id'], $languages_id, NULL, NULL);
-		  
-		  if (SHOW_MORE_INFO == 'True') {
-            $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>';
-		  } else {
-			$more_info = '';
-		  }
 
 		  $display_code = '<td width="33%" class="smallText"><br><center><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $xsell['products_image'], $xsell['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . $xsell['products_name'] .'</a><br>' . $pf->getPriceStringShort() . '<br>' . $pf->getProductButtons($xsell['products_id'], FILENAME_PRODUCT_INFO, $xsell['products_model'], $xsell['products_name']) . '</a></center></td>';
  
@@ -151,12 +145,6 @@ if ($num_products_xsell != 0) { // Check query is not blank
       while ($xsell = tep_db_fetch_array($xsell_query)) {
  
         $pf->loadProduct($xsell['products_id'], $languages_id, NULL, NULL);
-		
-		if (SHOW_MORE_INFO == 'True') {
-          $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>';
-		} else {
-		  $more_info = '';
-		}
      
 	  $info_box_contents[$row][$col] = array('align' => 'center',
                                              'params' => 'class="smallText" width="33%" valign="top"',

@@ -75,4 +75,6 @@ define('TEXT_ADDITIONAL_SHIPPING_2', ' für den ersten Posten und $');
 define('TEXT_ADDITIONAL_SHIPPING_3', ' für jeden zusätzlichen Posten + den üblichen Versandkosten.)</i>');
 define('TEXT_ADDITIONAL_SHIPPING_4', ' + den üblichen Versandkosten.)</i>');
 // end indvship
+
+define('PRODUCT_HAS_OPTIONS_MESSAGE', 'Dieses Produkt verfügt über Optionen, die ausgewählt werden, bevor sie gekauft werden muss.');
 ?>

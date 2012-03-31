@@ -30,13 +30,6 @@ $Id$
   while ($default_specials = tep_db_fetch_array($default_specials_query)) {
 	  
 	$pf->loadProduct($default_specials['products_id'], $languages_id, NULL, NULL);
-	  
-	// Add More Info button if required  
-    if (SHOW_MORE_INFO == 'True') {
-      $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $default_specials['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a> ';
-    } else {
-      $more_info = '';
-    }
 		
     $info_box_contents[$row][$col] = array ('align' => 'center',
                                             'params' =>'class="smallText"',

@@ -118,20 +118,35 @@ $Id$
 // EOF QPBPP for SPPC
 ?> 
    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+     <tr>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+     </tr>
 	<?php // BOF: Mod - Wishlist
 	      //DISPLAY PRODUCT WAS ADDED TO WISHLIST IF WISHLIST REDIRECT IS ENABLED
       if(tep_session_is_registered('wishlist_id')) { ?>
       <tr>
         <td colspan="3" class="messageStackSuccess"><?php echo PRODUCT_ADDED_TO_WISHLIST; ?></td>
       </tr>
+      <tr>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
 	<?php
       tep_session_unregister('wishlist_id');
       }
 	      // EOF: Mod - Wishlist
-	?>
-      <tr>
-        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+		  
+	  // Add message to request that product options are selected
+	  if (isset($_GET['opts']) && $_GET['opts'] == 1) { ?>
+	  <tr>
+        <td colspan="3" class="messageStackAlert"><?php echo PRODUCT_HAS_OPTIONS_MESSAGE; ?></td>
       </tr>
+      <tr>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+	  <?php
+      }
+	  ?>
+      
 	  <tr>
         <td class="productinfo_header" colspan="3">
           <table border="0" cellspacing="0" cellpadding="0" width="100%">

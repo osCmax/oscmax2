@@ -2312,7 +2312,7 @@ INSERT INTO configuration VALUES (2521, 'CT_RIGHT_COLUMN_SHOW', 'RIGHT_COLUMN_SH
 INSERT INTO configuration VALUES (2642, 'CT_AJAX_SEARCH_SUGGEST', 'AJAX_SEARCH_SUGGEST', 'false', 'CD_AJAX_SEARCH_SUGGEST', 201, 25, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
 INSERT INTO configuration VALUES (2654, 'CT_USE_XSELL_HORIZ_SCROLLER', 'USE_XSELL_HORIZ_SCROLLER', 'false', 'CD_USE_XSELL_HORIZ_SCROLLER', 201, 26, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
 INSERT INTO configuration VALUES (2658, 'CT_USE_AP_HORIZ_SCROLLER', 'USE_AP_HORIZ_SCROLLER', 'false', 'CD_USE_AP_HORIZ_SCROLLER', 201, 27, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
-INSERT INTO configuration VALUES (2660, 'CT_SCROLLER_WIDTH', 'SCROLLER_WIDTH', '607', 'CD_SCROLLER_WIDTH', 201, 28, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2660, 'CT_SCROLLER_WIDTH', 'SCROLLER_WIDTH', '603', 'CD_SCROLLER_WIDTH', 201, 28, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2661, 'CT_SCROLLER_HEIGHT', 'SCROLLER_HEIGHT', '200', 'CD_SCROLLER_HEIGHT', 201, 29, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2664, 'CT_BASKET_CART', 'BASKET_CART', 'cart', 'CD_BASKET_CART', 201, 30, NULL, now(), NULL, 'tep_cfg_select_option(array(''cart'', ''basket''),');
 INSERT INTO configuration VALUES (2663, 'CT_DEFINE_MAINPAGE_TEXT_INFO_NO', 'DEFINE_MAINPAGE_TEXT_INFO_NO', '13', 'CD_DEFINE_MAINPAGE_TEXT_INFO_NO', 201, 31, now(), now(), NULL, NULL);

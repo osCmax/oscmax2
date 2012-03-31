@@ -63,14 +63,8 @@ if ($num_products_ap != 0) { // Check query is not blank
       while ($ap = tep_db_fetch_array($ap_query)) {
  
         $pf->loadProduct($ap['products_id'], $languages_id, NULL, NULL);
-				  
-		  if (SHOW_MORE_INFO == 'True') {
-            $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>';
-		  } else {
-			$more_info = '';
-		  }
 
-		  $display_code_ap = '<td width="33%" class="smallText"><br><center><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $ap['products_image'], $ap['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . $ap['products_name'] .'</a><br>' . $pf->getPriceStringShort() . '<br>' . $more_info . ' <a href="' . tep_href_link( FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id'] .  '&amp;action=buy_now&product_to_buy_id=' . $ap['products_id'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', '' . $ap['products_name'] . '') .'</a></center></td>';
+		  $display_code_ap = '<td width="33%" class="smallText"><br><center><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $ap['products_image'], $ap['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . $ap['products_name'] .'</a><br>' . $pf->getPriceStringShort() . '<br>' . $pf->getProductButtons($ap['products_id'], FILENAME_PRODUCT_INFO, $ap['products_model'], $ap['products_name']) . '</a></center></td>';
  
 	  if  (($div3rows_ap <> $row) && ($col == 0)) {
 		$output_ap .= '<div><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr valign="middle">' . $display_code_ap;
@@ -142,12 +136,6 @@ if ($num_products_ap != 0) { // Check query is not blank
 	  while ($ap = tep_db_fetch_array($ap_query)) {
 	  
         $pf->loadProduct($ap['products_id'], $languages_id, NULL, NULL); 
-		
-		if (SHOW_MORE_INFO == 'True') {
-          $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $ap['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>';
-		} else {
-			$more_info = '';
-		}
      
 	  $info_box_contents[$row][$col] = array('align' => 'center',
                                              'params' => 'class="smallText" width="33%" valign="top"',

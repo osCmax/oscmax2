@@ -75,4 +75,6 @@ define('TEXT_ADDITIONAL_SHIPPING_2', ' for the first item, and $');
 define('TEXT_ADDITIONAL_SHIPPING_3', ' for each additional item + regular shipping costs.)</i>');
 define('TEXT_ADDITIONAL_SHIPPING_4', ' + regular shipping costs.)</i>');
 // end indvship
+
+define('PRODUCT_HAS_OPTIONS_MESSAGE', 'This product has options that must be selected before it can be purchased.');
 ?>

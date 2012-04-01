@@ -191,7 +191,7 @@ table {
 				break;
 				
 			case 'v2.5.0':
-			     $file = fopen('upgrade/2.5.0_to_2.5.1_.sql', 'r');
+			     $file = fopen('upgrade/2.5.0_to_2.5.1.sql', 'r');
 			     ?>
    			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 				<table border="0" width="100%" cellspacing="0" cellpadding="0">

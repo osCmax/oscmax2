@@ -82,6 +82,7 @@ On the left, the month and year of the row are stated.  The other columns are, l
 <li class="smallText"><b>Taxed sales</b> - the subtotal of sales which were taxed
 <li class="smallText"><b>Taxes collected</b> - the amount collected from customers for taxes
 <li class="smallText"><b>Shipping & handling</b> - the total shipping and handling charges collected  
+<li class="smallText"><b>Tax on shipping</b> - Tax on shipping and handling charges
 <li class="smallText"><b>Low order fees</b> and <b>Gift Vouchers</b> - if the store has low order fees enabled, and/or gift vouchers, the totals of these are shown in separate columns
 </ul>
 <p class="main" align="justify">

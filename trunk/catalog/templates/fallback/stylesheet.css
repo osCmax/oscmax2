@@ -64,7 +64,7 @@ TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-e
 a.productListing-heading { text-decoration:none; }
 TABLE.productListing-list { border-left: 1px; border-right: 1px; border-style: solid; border-color: #dddddd; }
 TABLE.productinfo_msrp { border: 1px; border-style: solid; border-color: #dddddd; border-spacing: 1px; background-color: #ffffff; }
-td.productListing-data { width:33%; border: 1px; border-style: solid; border-color: #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: black; vertical-align:bottom; }
+td.productListing-data { width:33%; border: 1px; border-style: solid; border-color: #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: black; }
 td.productListing-data a:hover { text-decoration:none; }
 td.productListing-data-spacer { width:10px; max-width:10px; border-collapse:collapse; border-style:none; }
 td.productListing-data-blank { min-width:10px; border-style:none; }
@@ -130,8 +130,6 @@ TD.formAreaTitle { font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 1
 SPAN.markProductOutOfStock { font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 12px; color: #c76170; font-weight: bold; }
 .productSpecialPrice { font-family: Verdana, Arial, sans-serif; color: #ff0000; }
 
-SPAN.errorText { font-family: Verdana, Arial, sans-serif; color: #ff0000; }
-
 .moduleRow { border: 1px solid #BBC3D3 }
 .moduleRowOver { background-color: #D7E9F7; cursor: pointer; }
 .moduleRowSelected { background-color: #E9F4FC; }
@@ -142,7 +140,10 @@ SPAN.errorText { font-family: Verdana, Arial, sans-serif; color: #ff0000; }
 /* BOF: PGM Restyled Message Boxes */
 .messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color: #ffe6e6; border:solid 1px #ff8e90; padding:5px; }
 .messageStackSuccess { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#CCFFCC; border:solid 1px #006600; padding:5px; }
-.messageStackAlert{ font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#FFFF99; border:solid 1px #FFCC00; padding:5px; }
+.messageStackAlert { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height:1.5; background-color:#FFFF99; border:solid 1px #FFCC00; padding:5px; }
+
+span.errorText { font-family: Verdana, Arial, sans-serif; color: #ff0000; }
+span.notice { font-family: Verdana, Arial, sans-serif; color: #ff0000; }
 /* EOF: PGM Restyled Message Boxes */
 
 /* input requirement */
@@ -171,7 +172,7 @@ ul.semtabs li.active a { background-color: #ffffff; border-bottom: 1px solid #ff
 td.articleTextBox { border-left: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; font-family: Verdana, Arial, sans-serif; font-size: 10px; padding-left: 10px; padding-right: 10px;}
 
 /* BOF: Open Featured Products */
-TD.featuredProducts, TD.featuredCategories, TD.featuredManufacturers, TD.featuredManufacturerWP { font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; }
+TD.featuredProducts, TD.featuredCategories, TD.featuredManufacturers, TD.featuredManufacturerWP { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 TD.featuredProducts A, TD.featuredCategories A, TD.featuredManufacturers A, TD.featuredManufacturerWP A { color: #000000; text-decoration: none; }
 TD.featuredProducts A:hover, TD.featuredCategories A:hover, TD.featuredManufacturers A:hover, TD.featuredManufacturerWP A:hover { color: #AABBDD;
   text-decoration: underline; }
@@ -269,27 +270,6 @@ a.left, a.left_ap { margin-left:1px }
 a.left:hover, a.left_ap:hover { background-position:-24px 0 }
 a.left:active, a.left_ap:active { background-position:-48px 0 }
 /* EOF: Scrollable - product_info thumbnail scroller */
-
-/* BOF: fwr_suckertree_css_menu - index category infobox */
-.menudiv { font: 10px Verdana, Arial, sans-serif; }
-.menudiv ul{ margin: 0; padding: 0; list-style-type: none; width: auto; /* Width of Menu Items */ /* border-bottom: 1px solid #ccc; */ }	
-.menudiv ul li{ position: relative; }
-/*Sub level menu items */
-.menudiv ul li ul{ position: absolute; background: #f8f8f9; width: 129px; /*sub menu width*/ top: 0; visibility: hidden; border: 1px solid #ccc; z-index: 2000; }
-/* Sub level menu links style */
-.menudiv ul li a{ display: block; overflow: auto; /*force hasLayout in IE7 */ color: #000; text-decoration: none; background: #ffffff; padding: 1px 5px; /* border: 1px solid #ccc; */ border-bottom: 0; z-index: 2000; }
-.menudiv ul li a:visited{}
-.menudiv ul li a:hover{ color: #a00; background: #ffffcc; }
-.menudiv .subfolderstyle{ background: url(images/fwr_arrow.gif) no-repeat center right; }
-/* Holly Hack for IE \*/
-* html .menudiv ul li { float: left; height: 1%; }
-* html .menudiv ul li a { height: 1%; }
-.sitemap { font: 10px Verdana, Arial, sans-serif; }
-.sitemap a { color: #000; }
-.sitemap a:hover { color: red; background: #ffffcc; }
-.sitemap ul { list-style-image : url(images/fwr_arrow.gif); }
-.sitemap ul li ul { list-style-image : url(images/fwr_arrow_red.gif); }
-/* EOF: fwr_suckertree_css_menu - index category infobox */
 
 /* BOF: SLIMBOX */
 #lbOverlay { position: fixed; z-index: 9999;left: 0; top: 0; width: 100%; height: 100%; background-color: #000; cursor: pointer; }
@@ -411,3 +391,8 @@ background-position: top center; color: white; font-weight: bold; margin-left: 1
 	border:1px solid #000;
 }
 /* EOF: Cloud Zoom */
+
+/* BOF: Tax and Shipping Display */
+.tax_near_price { font-size: 9px; }
+a.shipping_link { text-decoration:underline; font-size: 9px; }
+/* EOF: Tax and Shipping Display */

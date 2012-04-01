@@ -64,6 +64,7 @@ $Id$
     elseif ($orderby == "sold") {$db_orderby = "ordertotal";}
     else {$db_orderby = "ordersum DESC";}
 
+$sorted = in_array($sorted, array('ASC','DESC')) ? $sorted : '';
   $customers_query_raw = "select c.customers_firstname, c.customers_lastname, c.customers_id, count(DISTINCT o.orders_id) as ordertotal, sum(op.products_quantity * op.final_price) as ordersum from " . TABLE_CUSTOMERS . " c, " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where c.customers_id = o.customers_id and o.orders_id = op.orders_id group by c.customers_firstname, c.customers_lastname order by $db_orderby $sorted";
   $customers_split = new splitPageResults($_GET['page'], '50', $customers_query_raw, $customers_query_numrows);
 // fix counted customers

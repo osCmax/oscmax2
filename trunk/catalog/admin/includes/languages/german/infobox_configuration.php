@@ -24,7 +24,7 @@ define('TEXT_INFO_DATE_ADDED', 'Hinzugefügt am:');
 define('TEXT_INFO_LAST_MODIFIED', 'Zuletzt geändert am:');
 define('TEXT_INFO_HEADING_NEW_INFOBOX', 'Neue Infobox hinzufügen');
 define('TEXT_INFO_INSERT_INTRO', 'Ein Beispiel für eine<b> what\'s_new.php</b> Infobox wird angezeigt.');
-define('TEXT_INFO_DELETE_INTRO', '<P STYLE="color: red; font-weight: bold;">Confirm OK to delete the Infobox');
+define('TEXT_INFO_DELETE_INTRO', '<p style="color: red; font-weight: bold;">Confirm OK to delete the Infobox</p>');
 define('TEXT_INFO_HEADING_DELETE_INFOBOX', 'Infobox löschen?');
 
 define('IMAGE_INFOBOX_STATUS_GREEN', 'Links');

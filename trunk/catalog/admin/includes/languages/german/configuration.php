@@ -64,6 +64,13 @@ define('CT_NEW_SIGNUP_DISCOUNT_COUPON', 'Neukunden-Gutscheincode');
 define('CD_NEW_SIGNUP_DISCOUNT_COUPON', 'Neukunden-Gutscheincode: Wenn Sie keinen Gutschein mit den Bestätigungs-E-Mails für neu erstellte Konten versenden möchten, lassen Sie dieses Feld leer. Falls Sie Neukunden jedoch einen Gutschein zusenden möchten, legen Sie einen Gutscheincode fest.');
 define('CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Nettowert des Neukunden-Gutscheines');
 define('CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Nettowert des Neukunden-Gutscheines: Wenn Sie keinen Gutschein mit den Bestätigungs-E-Mails für neu erstellte Konten versenden möchten, tragen Sie hier 0 ein. Wenn Sie einen Gutschein versenden möchten, legen Sie hier den Nettowert fest. ACHTUNG: Verwenden Sie Punkt statt Komma und keine Währungsangaben, wie zB 10.00 oder 50.00.');
+define('CT_SHOW_TAX_RATE_NEAR_PRICE', 'Steuersatz bei anzeigen?');
+define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'In manchen Ländern muß der Steuersatz neben dem Preis angezeigt werden.');
+define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Link auf Versandkosten bei Preis anzeigen?');
+define('CD_SHOW_SHIPPING_NEAR_PRICE', 'In manchen Ländern muß ein Link auf die Versandkostenseite neben dem Preis angezeigt werden. Dazu muß zusätzlich <b>Steuersatz bei Preis anzeigen</b> aktiviert sein.');
+define('CT_CATEGORY_DROPDOWN_SWITCH', 'Disable Category Dropdown List in Admin?');
+define('CD_CATEGORY_DROPDOWN_SWITCH', 'This option enables or disables the dropdown list of categories on the Products/Categories entry page in your admin panel. In stores with more than a few hundred categories, this should be set to True to speed up page rendering.');
+
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Vorname');
@@ -360,7 +367,8 @@ define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Attributpreis Anzeigemethode');
 define('CD_ATTRIBUTE_PRICE_DISPLAY', 'Möchten Sie die Attributpreise als tatsächlichen Attributpreis (zB. +2,00 €) oder als Summe aus Produktpreis und Attributpreis (zB. 25,00 €) anzeigen?');
 define('CT_PRODUCT_LIST_BESTSELLER', 'Bestseller in Filterbox anzeigen');
 define('CD_PRODUCT_LIST_BESTSELLER', 'Möchten Sie Bestseller als Sortieroption anbieten?');
-
+define('CT_PRODUCT_LIST_DATE_ADDED', 'Display product added/expected date');
+define('CD_PRODUCT_LIST_DATE_ADDED', 'Would you like to show the product added or product expected date on the product page?');
 
 // Configuration ID: 9 - Stock
 define('CT_STOCK_CHECK', 'Lagerstand prüfen');
@@ -629,7 +637,7 @@ define('CD_SLIMBOX_COUNTER', 'Customize the text which appears when multiple ima
 define('CT_CLOUDZOOM_WIDTH', 'Image Zoomer Width');
 define('CD_CLOUDZOOM_WIDTH', 'The width of the zoom window in pixels. If <b>auto</b> is specified, the width will be the same as the small image.');
 define('CT_CLOUDZOOM_HEIGHT', 'Image Zoomer Height');
-define('CD_CLOUDZOOM_HEIGHT', 'The width of the zoom window in pixels. If <b>auto</b> is specified, the width will be the same as the small image.');
+define('CD_CLOUDZOOM_HEIGHT', 'The height of the zoom window in pixels. If <b>auto</b> is specified, the height will be the same as the small image.');
 define('CT_CLOUDZOOM_POSITION', 'Image Zoomer Position');
 define('CD_CLOUDZOOM_POSITION', 'Specifies the position of the zoom window relative to the small image. Allowable values are <b>left, right, top, bottom, inside</b> or you can specifiy the id of an html element to place the zoom window in e.g. position: <b>element1 right</b>');
 define('CT_CLOUDZOOM_ADJUSTX', 'X Axis Adjustment');
@@ -820,8 +828,8 @@ define('CT_SUSPEND_FEATURED_SETS_EXPIRING', '<font color=green>Ablaufdatum ausse
 define('CD_SUSPEND_FEATURED_SETS_EXPIRING', 'Möchten Sie das Ablaufdatum für Empfohlene Produkte/Kategorien aussetzen? Alle Empfehlungen bleiben aktiv, solange die Einstellung true ist.');
 define('CT_FEATURED_SET_SHOW_BUY_NOW_BUTTONS', '<font color=green>"Jetzt Kaufen" Button anzeigen</font>');
 define('CD_FEATURED_SET_SHOW_BUY_NOW_BUTTONS', 'Möchten Sie den "Jetzt kaufen" Button bei den empfohlenen Produkten anzeigen?');
-define('CT_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', '<font color=green>Limit Descriptions by Words or Chars</font>');
-define('CD_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', 'Would you like to limit the description size by number of words or by number of characters?');
+define('CT_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', '<font color=green>Beschreibung nach Wörtern oder Zeichen begrenzen</font>');
+define('CD_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', 'Möchten Sie die Länge der Beschreibung nach Wörtern oder Zeichen begrenzen?');
 
 define('CT_FEATURED_PRODUCTS_DISPLAY', '<b>Empfohlene Produkte anzeigen</b>');
 define('CD_FEATURED_PRODUCTS_DISPLAY', 'Empfohlene Produkte anzeigen?');

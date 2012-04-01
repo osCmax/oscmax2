@@ -114,8 +114,19 @@ $Id$
               </tr>
 <?php
     } else {
+// MOD: BOF indvship 4.5
+        for ($i=0, $n=sizeof($quotes); $i<$n; $i++) {
+            if(($quotes[$i]['id']== 'indvship') && (sizeof($quotes) > 1 && sizeof($quotes[0]) > 1)){
+            echo '<tr><td>&nbsp;</td>
+            <td colSpan="2" class="main">You have '.$shipping_modules->get_indvcount().' product with individual shipping total of '.$currencies->format($shipping_modules->get_shiptotal()).'. This total will be ADDED to the shipping method selected.</td><td>&nbsp;</td>
+            </tr>';}
+        };
+// end indvship
       $radio_buttons = 0;
       for ($i=0, $n=sizeof($quotes); $i<$n; $i++) {
+//start indvship
+            if(($quotes[$i]['id']== 'indvship' && $n != 1) ){ continue; };
+// MOD: EOF indvship 4.5
 ?>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>

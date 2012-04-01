@@ -2290,9 +2290,11 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
               <tr>
                 <td class="smallText" align="right">
 <?php
+if (DISABLE_CATEGORY_DROPDOWN_SWITCH == 'false') {
     echo tep_draw_form('goto', FILENAME_CATEGORIES, '', 'get');
     echo HEADING_TITLE_GOTO . ' ' . tep_draw_pull_down_menu('cPath', tep_get_category_tree(), $current_category_id, 'onChange="this.form.submit();"');
     echo tep_hide_session_id() . '</form>';
+}
 ?>
                 </td>
               </tr>

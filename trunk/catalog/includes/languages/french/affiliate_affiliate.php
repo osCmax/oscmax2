@@ -20,7 +20,7 @@ define('TEXT_AFFILIATE_PASSWORD', 'Mot de passe :');
 
 define('HEADING_NEW_AFFILIATE', 'Nouvel affilié');
 define('TEXT_NEW_AFFILIATE', 'Je suis un nouvel affilié.');
-define('TEXT_NEW_AFFILIATE_INTRODUCTION', 'En créant un compte affilié sur ' . STORE_NAME . ' vous pourrez gagner des revenus supplémentaires en envoyant vos visiteurs sur notre site internet.');
+define('TEXT_NEW_AFFILIATE_INTRODUCTION', 'En créant un compte affilié sur %s vous pourrez gagner des revenus supplémentaires en envoyant vos visiteurs sur notre site internet.');
 define('TEXT_NEW_AFFILIATE_TERMS', 'Termes et Conditions de l\'affiliation. Cliquez ici.');
 
 define('HEADING_RETURNING_AFFILIATE', 'Déjà inscrit');

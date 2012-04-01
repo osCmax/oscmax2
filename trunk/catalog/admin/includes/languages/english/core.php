@@ -246,6 +246,7 @@ define('BOX_CONFIGURATION_RECAPTCHA', 'reCaptcha Form');
 define('BOX_CONFIGURATION_NOTIFICATIONS', 'Notifications');
 define('BOX_CONFIGURATION_SLIDESHOW', 'Slideshow');
 define('BOX_CONFIGURATION_SLIDESHOW_SETTINGS', 'Slideshow Settings');
+define('BOX_CONFIGURATION_ADDTHIS', 'AddThis');
 
 define('BOX_CONFIGURATION_GOOGLE', 'Google');
 define('BOX_CONFIGURATION_GOOGLE_ANALYTICS', 'Google Analytics');
@@ -505,6 +506,7 @@ define('IMAGE_SUMMARY', 'Summary');
 define('IMAGE_BROWSE', 'Browse');
 define('IMAGE_MISSING', 'Missing');
 define('IMAGE_ORPHANS', 'Orphans');
+define('IMAGE_REGENERATE', 'Regenerate');
 define('IMAGE_REGENERATE_ALL', 'Regenerate all images for this product');
 define('IMAGE_REGENERATE_EVERYTHING', 'Regenerate all your images');
 define('IMAGE_MC_SYNC', 'Sync with MailChimp');
@@ -673,5 +675,6 @@ define('TEXT_FORUM', 'Forum');
 define('TEXT_WIKI', 'Wiki Help Documents');
 define('TEXT_COPYRIGHT', 'Copyright');
 
-
+define('ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST', 'Error: Cache directory does not exist. Please set this Administrator -> Cache.');
+define('ERROR_CACHE_DIRECTORY_NOT_WRITEABLE', 'Error: Cache directory is not writeable.');
 ?>

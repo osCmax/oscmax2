@@ -32,7 +32,7 @@ define('TERTIARY_SECTION', ',  ');
   $mt_keywords_string ='';
   $mt_categories_query = tep_db_query("select cd.categories_name from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."'");
   while ($mt_categories = tep_db_fetch_array($mt_categories_query))  {
-    $mt_keywords_string .= $mt_categories['categories_name'] . ',';
+    $mt_keywords_string .= str_replace(array("'", '"'), "", $mt_categories['categories_name']) . ',';
   }
   define('WEB_SITE_KEYWORDS', $mt_keywords_string . $mt_extra_keywords);
 
@@ -181,9 +181,9 @@ define('TERTIARY_SECTION', ',  ');
       $mt_category_query = tep_db_query("select categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . (int)$current_category_id . "' and language_id = '" . (int)$languages_id . "'");
       $mt_category = tep_db_fetch_array($mt_category_query);
 
-      define('META_TAG_TITLE', $mt_category['categories_name'] . PRIMARY_SECTION . TITLE . $web_site_tagline);
-    	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_category['categories_name'] . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
-    	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_category['categories_name']);
+      define('META_TAG_TITLE', str_replace(array("'", '"'), "", $mt_categories['categories_name']) . PRIMARY_SECTION . TITLE . $web_site_tagline);
+    	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . str_replace(array("'", '"'), "", $mt_categories['categories_name']) . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
+    	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . str_replace(array("'", '"'), "", $mt_categories['categories_name']));
       break;
     case CONTENT_INDEX_PRODUCTS:
       if (isset($_GET['manufacturers_id'])) {
@@ -197,9 +197,9 @@ define('TERTIARY_SECTION', ',  ');
         $mt_category_query = tep_db_query("select categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . (int)$current_category_id . "' and language_id = '" . (int)$languages_id . "'");
         $mt_category = tep_db_fetch_array($mt_category_query);
 
-  	  define('META_TAG_TITLE', $mt_category['categories_name'] . PRIMARY_SECTION . TITLE . $web_site_tagline);
-  	  define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . $mt_category['categories_name'] . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
-  	  define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . $mt_category['categories_name']);
+  	  define('META_TAG_TITLE', str_replace(array("'", '"'), "", $mt_categories['categories_name']) . PRIMARY_SECTION . TITLE . $web_site_tagline);
+  	  define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . str_replace(array("'", '"'), "", $mt_categories['categories_name']) . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
+  	  define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . str_replace(array("'", '"'), "", $mt_categories['categories_name']));
       }
       break;
     case CONTENT_POPUP_IMAGE:

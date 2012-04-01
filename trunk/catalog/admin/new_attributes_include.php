@@ -9,19 +9,21 @@ $Id$
 
   Released under the GNU General Public License
 */
+
+
 ?>
 <tr>
-  <td class="pageHeading" colspan="3"><?php echo $pageTitle; ?></td>
+  <td class="pageHeading" colspan="3"><?php echo tep_output_string($pageTitle); ?></td>
 </tr>
 <tr>
   <td>
   <form action="<?php echo $PHP_SELF ?>" method="post" name="submit_attributes">
-  <input type="hidden" name="current_product_id" value="<?php echo $current_product_id; ?>">
+  <input type="hidden" name="current_product_id" value="<?php echo tep_output_string($current_product_id); ?>">
   <input type="hidden" name="action" value="change">
   <table width="100%" border="0" cellpadding="2" cellspacing="0">
 <?php
 
-if ( $cPath ) echo "<input type=\"hidden\" name=\"cPathID\" value=\"" . $cPath . "\">";
+if ( $cPath ) echo "<input type=\"hidden\" name=\"cPathID\" value=\"" . tep_output_string($cPath) . "\">";
 
 require( 'new_attributes_functions.php');
 
@@ -30,7 +32,7 @@ $tempTextID= "1999043";
 
 // Lets get all of the possible options
 $query = "SELECT * FROM products_options where products_options_id LIKE '%' AND language_id = '$languageFilter'";
-$result = mysql_query($query) or die(mysql_error());
+$result = tep_db_query($query) or die(mysql_error());
 $matches = mysql_num_rows($result);
 if ($matches) {
   while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
@@ -65,7 +67,7 @@ if ($matches) {
         
 // Find all of the Current Option's Available Values
         $query2 = "SELECT * FROM products_options_values_to_products_options WHERE products_options_id = '$current_product_option_id' ORDER BY products_options_values_id DESC";
-        $result2 = mysql_query($query2) or die(mysql_error());
+        $result2 = tep_db_query($query2) or die(mysql_error());
         $matches2 = mysql_num_rows($result2);
         if ($matches2) {
            $i = "0";
@@ -90,27 +92,27 @@ if ($matches) {
                                 $current_value_id = $tempTextID;
 
                                 echo '<input type="checkbox" name="optionValuesText[]" value="' . $current_value_id . '"' . $CHECKED . '>&nbsp;&nbsp;' . $current_value_name . '&nbsp;&nbsp;';
-                                echo '<input type="hidden" name="' . $current_value_id . '_options_id" value="' . $current_product_option_id . '">';
+                                echo '<input type="hidden" name="' . $current_value_id . '_options_id" value="' . tep_output_string($current_product_option_id) . '">';
                                 
                         } else {
 
-                        echo "<input type=\"checkbox\" name=\"optionValues[]\" value=\"" . $current_value_id . "\"" . $CHECKED . ">&nbsp;&nbsp;" . $current_value_name . "&nbsp;&nbsp;";
+                        echo "<input type=\"checkbox\" name=\"optionValues[]\" value=\"" . tep_output_string($current_value_id) . "\"" . $CHECKED . ">&nbsp;&nbsp;" . $current_value_name . "&nbsp;&nbsp;";
                         
                         }
 
                         echo "</td>";
-                        echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_price\" value=\"" . $attribute_value_price . "\" size=\"10\"></td>";
+                        echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_price\" value=\"" . tep_output_string($attribute_value_price) . "\" size=\"10\"></td>";
 
                         if ( $optionTypeInstalled == "1" ) {
                                 extraValues( $current_value_id, $current_product_id );
 
-                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_prefix\" value=\"" . $attribute_prefix . "\" size=\"4\"></TD>";
+                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_prefix\" value=\"" . tep_output_string($attribute_prefix) . "\" size=\"4\"></TD>";
                                 echo "<td class=\"main\" align=\"left\"><select name=\"" . $current_value_id . "_type\">";
                                 displayOptionTypes( $attribute_type );
                                 echo "</select></td>";
-                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_qty\" value=\"" . $attribute_qty . "\" size=\"4\"></td>";
-                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_order\" value=\"" . $attribute_order . "\" size=\"4\"></td>";
-                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_linked\" value=\"" . $attribute_linked . "\" size=\"4\"></td>";
+                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_qty\" value=\"" . tep_output_string($attribute_qty) . "\" size=\"4\"></td>";
+                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_order\" value=\"" . tep_output_string($attribute_order) . "\" size=\"4\"></td>";
+                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_linked\" value=\"" . tep_output_string($attribute_linked) . "\" size=\"4\"></td>";
                                 echo "<td class=\"main\" align=\"left\">" . $current_value_id . "</td>";
                                 
                         } else {
@@ -121,11 +123,11 @@ if ($matches) {
                                                                	
                                 getSortCopyValues( $current_value_id, $current_product_id );
 
-                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_weight\" value=\"" . $attribute_weight . "\" size=\"10\"></TD>";
+                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_weight\" value=\"" . tep_output_string($attribute_weight) . "\" size=\"10\"></TD>";
                                 echo "<td class=\"main\" align=\"left\"><select name=\"" . $current_value_id . "_weight_prefix\">";
                                 sortCopyWeightPrefix( $attribute_weight_prefix );
                                 echo "</select></td>";
-                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_sort\" value=\"" . $attribute_sort . "\" size=\"4\"></td>";
+                                echo "<td class=\"main\" align=\"left\"><input type=\"text\" name=\"" . $current_value_id . "_sort\" value=\"" . tep_output_string($attribute_sort) . "\" size=\"4\"></td>";
                                 
                         }
 

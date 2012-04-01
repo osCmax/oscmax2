@@ -12,7 +12,7 @@ $Id$
 ?>
 <table>
 <tr>
-	<td class="pageHeading"><?php echo $title ?></td>
+	<td class="pageHeading"><?php echo tep_output_string($title); ?></td>
 </tr>
 <tr>
 	<td>
@@ -24,6 +24,18 @@ if(!strstr($info_group['locked'], 'visible')) {
 	<tr>
 		<td class="main"><?php echo ENTRY_STATUS; ?></td>
 		<td class="main"><?php echo tep_draw_radio_field('visible', '1', true, $edit['visible']) . '&nbsp;&nbsp;' . STATUS_ACTIVE . '&nbsp;&nbsp;' . tep_draw_radio_field('visible', '0', false, $edit['visible']) . '&nbsp;&nbsp;' . STATUS_INACTIVE; ?></td>
+	</tr>
+	<tr>
+		<td colspan="2" height="10"></td>
+	</tr>
+<?php
+}
+
+if(!strstr($info_group['locked'], 'show_in_infobox')) {
+?>
+	<tr>
+		<td class="main"><?php echo PUBLIC_INFORMATION; ?></td>
+		<td class="main"><?php echo tep_draw_radio_field('show_in_infobox', '1', true, $edit['show_in_infobox']) . '&nbsp;&nbsp;' . STATUS_ACTIVE . '&nbsp;&nbsp;' . tep_draw_radio_field('show_in_infobox', '0', false, $edit['show_in_infobox']) . '&nbsp;&nbsp;' . STATUS_INACTIVE; ?></td>
 	</tr>
 	<tr>
 		<td colspan="2" height="10"></td>

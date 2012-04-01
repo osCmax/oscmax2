@@ -16,6 +16,7 @@ $Id$
     var $contents, $total, $weight, $cartID, $content_type;
     // LINE ADDED indvship 4.5
     var $shiptotal;
+	var $items_count;
 
 
     function shoppingCart() {
@@ -80,7 +81,11 @@ $Id$
 
       $products_query = tep_db_query("select cb.products_id, ptdc.discount_categories_id, customers_basket_quantity from " . TABLE_CUSTOMERS_BASKET . " cb left join (select products_id, discount_categories_id from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " where customers_group_id = '" . $this->cg_id . "') as ptdc on cb.products_id = ptdc.products_id where customers_id = '" . (int)$customer_id . "'");
       while ($products = tep_db_fetch_array($products_query)) {
-        $this->contents[$products['products_id']] = array('qty' => $products['customers_basket_quantity'], 'discount_categories_id' => $products['discount_categories_id']);
+// EOF Attribute Product Codes
+        $this->contents[$products['products_id']] = array(
+				'qty' => $products['customers_basket_quantity'], 
+				'discount_categories_id' => $products['discount_categories_id']
+		);
 // EOF QPBPP for SPPC
 
 // attributes
@@ -241,6 +246,7 @@ $Id$
     }
 
     function count_contents() {  // get total number of items in cart
+	  if ($this->items_count > 0) {return $this->items_count;};
       $total_items = 0;
       if (is_array($this->contents)) {
         reset($this->contents);
@@ -298,7 +304,7 @@ $Id$
       return substr($product_id_list, 2);
     }
 
-    function calculate() {
+    function calculate($include_indvship = false) {
       global $currencies, $languages_id, $pfs; // for QPBPP added: $languages_id, $pfs
 
 //  LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
@@ -306,6 +312,7 @@ $Id$
 
       $this->total = 0;
       $this->weight = 0;
+      $this->items_count = 0;
 
 
       if (!is_array($this->contents)) return 0;
@@ -386,6 +393,12 @@ $Id$
               $products_price = $customer_group_price['customers_group_price'];
             }
           }*/
+		// do not count in total products with individual shipping set :)
+        $products_shipping_query = tep_db_query("select products_ship_price, products_ship_price_two, products_ship_zip, products_ship_methods_id from " . TABLE_PRODUCTS_SHIPPING . " where products_id = '" . $product['products_id'] . "'");
+        $products_shipping = tep_db_fetch_array($products_shipping_query);
+		if (!$include_indvship && MODULE_SHIPPING_INDVSHIP_STATUS && tep_not_null($products_shipping['products_ship_price'])) {
+			continue;
+		};
 	  
 	  
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
@@ -396,6 +409,7 @@ $Id$
 
           $this->total += $currencies->calculate_price($products_price, $products_tax, $qty);
           $this->weight += ($qty * $products_weight);
+          $this->items_count += $qty;
         }
 
 // attributes price
@@ -548,35 +562,35 @@ $Id$
       return $products_array;
     }
 
-    function show_total() {
-      $this->calculate();
+    function show_total($include_indvship = false) {
+      $this->calculate($include_indvship);
 
       return $this->total;
     }
 
 // BOF: MOD - Separate item shipping
 function get_shiptotal() {
-    $this->calculate();
+    	$this->calculate(true);
 
     return $this->shiptotal;
     }
 // EOF: MOD - Separate item shipping
 
-    function show_weight() {
-      $this->calculate();
+    function show_weight($include_indvship = false) {
+      $this->calculate($include_indvship);
 
       return $this->weight;
     }
 
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
-    function show_total_virtual() {
-      $this->calculate();
+    function show_total_virtual($include_indvship = false) {
+      $this->calculate($include_indvship);
 
       return $this->total_virtual;
     }
 
-    function show_weight_virtual() {
-      $this->calculate();
+    function show_weight_virtual($include_indvship = false) {
+      $this->calculate($include_indvship);
 
       return $this->weight_virtual;
     }
@@ -709,6 +723,12 @@ function get_shiptotal() {
               $no_count=true;
             }
           }
+        // do not count in total products with individual shipping set :)
+        $products_shipping_query = tep_db_query("select products_ship_price, products_ship_price_two, products_ship_zip, products_ship_methods_id from " . TABLE_PRODUCTS_SHIPPING . " where products_id = '" . $products_id . "'");
+        $products_shipping = tep_db_fetch_array($products_shipping_query);
+        if (MODULE_SHIPPING_INDVSHIP_STATUS && tep_not_null($products_shipping['products_ship_price'])) {
+            $no_count = true;
+        }
           if (!$no_count) $total_items += $this->get_quantity($products_id);
         }
       }

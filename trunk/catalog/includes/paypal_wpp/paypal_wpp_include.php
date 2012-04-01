@@ -35,6 +35,11 @@ $Id$
     if ($return_to != FILENAME_SHOPPING_CART && $return_to != FILENAME_CHECKOUT_SHIPPING) {
       $return_to = FILENAME_CHECKOUT_SHIPPING;
     }
+// OnePage checkout
+  if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
+      //$return_to = FILENAME_CHECKOUT;
+  }
+// EOF OnePage checkout
 ?>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -315,6 +320,7 @@ $Id$
         $ec_enabled = false;
       }
       break;
+    case FILENAME_CHECKOUT:
     case FILENAME_CHECKOUT_SHIPPING:
       if ($ec_enabled) {
         if (isset($_GET['ec_cancel']) || (tep_session_is_registered('paypal_ec_token') && !tep_session_is_registered('paypal_ec_payer_id') && !tep_session_is_registered('paypal_ec_payer_info'))) {

@@ -21,6 +21,9 @@ $Id$
           /* One Page Checkout - BEGIN*/
           if ($_GET['gID'] == 7575){
               tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . $_POST['configuration_value'] . "', last_modified = now() where configuration_id = '" . (int)$_GET['cID'] . "'");
+			  // Configuration Cache modification start
+              require ('includes/configuration_cache.php');
+              // Configuration Cache modification end
               tep_redirect(tep_href_link(FILENAME_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $_GET['cID']));
           }
           /* One Page Checkout - END*/      

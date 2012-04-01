@@ -19,6 +19,4 @@ define('TABLE_HEADING_ACTION', 'Acción');
 define('TEXT_FILE_DOES_NOT_EXIST', 'El fichero no existe');
 define('TEXT_CACHE_DIRECTORY', 'Directorio para la caché: ');
 
-define('ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST', 'Error: No existe el directorio para la caché. Especifique un directorio valido en Configuración->Caché.');
-define('ERROR_CACHE_DIRECTORY_NOT_WRITEABLE', 'Error: No se puede escribir en el directorio para la caché.');
 ?>

@@ -39,7 +39,8 @@ $Id$
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
       <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="4" class="infoBox">
+        <td>
+          
 <!-- list of products -->
 <?php
     while ($downloads = tep_db_fetch_array($downloads_query)) {
@@ -48,34 +49,47 @@ $Id$
       $download_timestamp = mktime(23, 59, 59, $dt_month, $dt_day + $downloads['download_maxdays'], $dt_year);
       $download_expiry = date('Y-m-d H:i:s', $download_timestamp);
 ?>
-          <tr class="infoBoxContents">
-
+          <table border="0" width="100%" cellspacing="1" cellpadding="4" class="infoBox">
+            <tr class="infoBoxContents">
+              <td class="main" colspan="3">&nbsp;<?php echo $downloads['products_name']; ?></td>
+		    </tr>
+            <tr class="infoBoxContents">
+          
 <?php
 // The link will appear only if:
 // - Download remaining count is > 0, AND
 // - The file is present in the DOWNLOAD directory, AND EITHER
 // - No expiry date is enforced (maxdays == 0), OR
 // - The expiry date is not reached
+
       
 	  echo '            <td class="main" align="left">&nbsp;<b>' . $downloads['download_count'] . '</b>' . TABLE_HEADING_DOWNLOAD_COUNT . '</td>' . "\n";
 	  
 	  if ($downloads['download_maxdays'] != 0) {
         echo '            <td class="main">' . TABLE_HEADING_DOWNLOAD_DATE . ' ' . tep_date_long($download_expiry) . '</td>' . "\n";
 	  } else {
-		echo '            <td></td>';
+		echo '<td>&nbsp;</td>';
 	  }
-      if ( ($downloads['download_count'] > 0) && (file_exists(DIR_FS_DOWNLOAD . $downloads['orders_products_filename'])) && ( ($downloads['download_maxdays'] == 0) || ($download_timestamp > time())) ) {
+      
+	  if ( ($downloads['download_count'] > 0) && (file_exists(DIR_FS_DOWNLOAD . $downloads['orders_products_filename'])) && ( ($downloads['download_maxdays'] == 0) || ($download_timestamp > time())) ) {
         echo '           <td class="main" align="right"><a href="' . tep_href_link(FILENAME_DOWNLOAD, 'order=' . $last_order . '&id=' . $downloads['orders_products_download_id']) . '">' . tep_image_button('button_download.gif', '') . '</a></td>' . "\n";
       } else {
-        echo '           <td class="main">' . $downloads['products_name'] . '</td>' . "\n";
-      }
-
-      echo '          </tr>' . "\n";
-    }
+	    echo '<td class="main" align="right">' . TEXT_MISSING_DOWNLOAD . '</td>';
+	  }
+	  ?>
+            </tr>
+          </table>
+          <table border="0" width="100%" cellspacing="0" cellpadding="0" >
+            <tr>
+              <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+            </tr>
+          </table>
+      <?php
+    } // end while
 // LINE REMOVED: MOD - Downloads Controller Show Button
 ?>
-          </tr>  
-        </table></td>
+            
+        </td>
       </tr>
 <?php
     if (!strstr($PHP_SELF, FILENAME_ACCOUNT_HISTORY_INFO)) {

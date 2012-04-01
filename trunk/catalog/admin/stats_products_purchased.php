@@ -171,7 +171,7 @@ $Id$
                 
 <?php
 	// generate query string
-	$products_query_raw = "select o.customers_name, op.products_id, m.manufacturers_name, op.products_model, op.products_name, sum(op.products_quantity) as quantitysum, sum(op.products_price*op.products_quantity)as gross FROM " . TABLE_ORDERS . " as o, " . TABLE_ORDERS_PRODUCTS . " as op, " . TABLE_MANUFACTURERS . " as m, " . TABLE_PRODUCTS . " as p WHERE ";
+	$products_query_raw = "select o.customers_name, op.products_id, m.manufacturers_name, op.products_model, op.products_name, sum(op.products_quantity) as quantitysum, sum(op.products_price*op.products_quantity)as gross FROM " . TABLE_ORDERS . " as o, " . TABLE_ORDERS_PRODUCTS . " as op, " . TABLE_MANUFACTURERS . " as m, " . TABLE_PRODUCTS . " as p WHERE o.orders_id = op.orders_id and op.products_id = p.products_id and ";
 	
 	if($month > 0)
 		$products_query_raw .= " month(o.date_purchased) = " . $month . " and ";
@@ -181,14 +181,15 @@ $Id$
 	
 	if($status > 0)
 		$products_query_raw .= "o.orders_status = " . $status . " and ";
-		
-	$products_query_raw .= " o.orders_id = op.orders_id and op.products_id = p.products_id and p.manufacturers_id = m.manufacturers_id ";
 	
 	if (isset($_GET['manufacturers_id']) && $_GET['manufacturers_id'] > 0) {
-		$products_query_raw .= " and p.manufacturers_id = " . $_GET['manufacturers_id'] . " ";
+		$products_query_raw .= " p.manufacturers_id = m.manufacturers_id and p.manufacturers_id = " . $_GET['manufacturers_id'] . " and ";
 	}
 	
-	$products_query_raw .=(isset($keywords) ? " AND (op.products_name LIKE '%" . $keywords . "%' OR op.products_model LIKE '%" . $keywords . "%' OR manufacturers_name LIKE '%" . $keywords . "%' OR manufacturers_name LIKE '%" . $keywords . "%' OR o.customers_name LIKE '%" . $keywords . "%') " : '');
+	$products_query_raw .= (isset($keywords) ? " (op.products_name LIKE '%" . $keywords . "%' OR op.products_model LIKE '%" . $keywords . "%' OR manufacturers_name LIKE '%" . $keywords . "%' OR manufacturers_name LIKE '%" . $keywords . "%' OR o.customers_name LIKE '%" . $keywords . "%') and " : '');
+	
+	// need to remove a trailing 'and' before using GROUP
+	if (substr($products_query_raw, -4) == 'and ') { $products_query_raw = substr($products_query_raw, 0, -4); }
 	
 	$products_query_raw .= " GROUP BY op.products_id ORDER BY ";
 	
@@ -204,7 +205,7 @@ $Id$
 	$products_query_raw .= " LIMIT " . $max;
 	// end of generate query string
 		
-  //echo $products_query_raw . '<br><br>';
+  // echo $products_query_raw . '<br><br>';
   
   $rows = 0;
   $products_query = tep_db_query($products_query_raw);

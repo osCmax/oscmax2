@@ -23,6 +23,8 @@ $boxLink = '';
 $box_base_name = 'mailchimp'; // for easy unique box template setup (added BTSv1.2)
 $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
 
+unset($boxContent);
+
 if ( (MAILCHIMP_ENABLE == 'true') && (MAILCHIMP_API <> '') && (MAILCHIMP_ID <> '') && (MAILCHIMP_URL <> '') && (MAILCHIMP_U <> '') ) {
   if ((!strstr($_SERVER['PHP_SELF'],'login.php')) && (!strstr($_SERVER['PHP_SELF'],'create_account.php')) && (!strstr($_SERVER['PHP_SELF'],'Order_Info.php')) && (!strstr($_SERVER['PHP_SELF'],'Order_Info_Process.php')) && (!tep_session_is_registered('customer_id'))) {
     if (!tep_session_is_registered('customer_id')) {		
@@ -58,6 +60,8 @@ if ( (MAILCHIMP_ENABLE == 'true') && (MAILCHIMP_API <> '') && (MAILCHIMP_ID <> '
   if (MAILCHIMP_ENABLE == 'false') { $boxContent .= '<br>' . MAILCHIMP_NEED_ENABLING . '<br>'; }
 } // end if
 
-include (bts_select('boxes', $box_base_name)); // BTS 1.5
+if (isset($boxContent)) {
+  include (bts_select('boxes', $box_base_name)); // BTS 1.5
+}
 ?>
 <!-- mailchimp eof //-->

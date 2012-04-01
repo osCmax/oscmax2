@@ -14,7 +14,7 @@ define('HEADING_ARTICLE_NOT_FOUND', 'Noticia no encontrada');
 define('TEXT_ARTICLE_NOT_FOUND', 'Disculpe, pero la noticia requerida no está disponible en esta web.');
 define('TEXT_MORE_INFORMATION', 'Para obtener más información, pulse <a href="%s" target="_blank"><u>aquí</u></a>.');
 define('TEXT_DATE_ADDED', 'Esta noticia ha sido publicada el %s.');
-define('TEXT_DATE_AVAILABLE', '<font color="#FF0000">Esta noticia será publicada el %s.</font>');
+define('TEXT_DATE_AVAILABLE', '<span class="notice">Esta noticia será publicada el %s.</span>');
 define('TEXT_CURRENT_REVIEWS', 'Comentarios actuales:');
 define('BOX_TEXT_TELL_A_FRIEND', 'Cuéntaselo a un amigo');
 define('TEXT_TELL_A_FRIEND', 'Háblale a un amigo de esta noticia:');

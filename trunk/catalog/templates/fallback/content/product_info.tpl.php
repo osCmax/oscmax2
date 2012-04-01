@@ -118,25 +118,40 @@ $Id$
 // EOF QPBPP for SPPC
 ?> 
    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+     <tr>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+     </tr>
 	<?php // BOF: Mod - Wishlist
 	      //DISPLAY PRODUCT WAS ADDED TO WISHLIST IF WISHLIST REDIRECT IS ENABLED
       if(tep_session_is_registered('wishlist_id')) { ?>
       <tr>
         <td colspan="3" class="messageStackSuccess"><?php echo PRODUCT_ADDED_TO_WISHLIST; ?></td>
       </tr>
+      <tr>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
 	<?php
       tep_session_unregister('wishlist_id');
       }
 	      // EOF: Mod - Wishlist
-	?>
-      <tr>
-        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
+		  
+	  // Add message to request that product options are selected
+	  if (isset($_GET['opts']) && $_GET['opts'] == 1) { ?>
+	  <tr>
+        <td colspan="3" class="messageStackAlert"><?php echo PRODUCT_HAS_OPTIONS_MESSAGE; ?></td>
       </tr>
+      <tr>
+        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+	  <?php
+      }
+	  ?>
+      
 	  <tr>
         <td class="productinfo_header" colspan="3">
           <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
-              <td class="pageHeading" valign="top"><?php echo $product_info['products_name'] . $min_order_text; ?></td>
+              <td class="pageHeading" valign="top" width="70%"><?php echo $product_info['products_name'] . $min_order_text; ?></td>
               <td class="pageHeading" align="right" valign="top">
               <?php 
               if ( ($hi_product_price == CALL_FOR_PRICE_VALUE) || ($lo_product_price == CALL_FOR_PRICE_VALUE) ){
@@ -199,6 +214,18 @@ $Id$
                 </td>
                 <!-- Thumbnails Ends -->
               </tr>
+            
+            <!-- Conditional AddThis Starts -->
+            <?php if (ADD_THIS_ENABLED == 'true') { ?>
+              <tr>
+                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+              </tr>
+              <tr>
+                <td class="productinfo_boxes"><?php echo stripslashes(ADD_THIS_CODE); ?></td>      
+              </tr>
+            <?php } ?>
+            <!-- Conditional AddThis Starts -->
+            
               
             <!-- Conditional URL Starts -->
             <?php if (tep_not_null($product_info['products_url'])) { ?>
@@ -424,12 +451,17 @@ $Id$
 			  }
 			  ?>	  
               </td>
-              <?php if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) { ?>
-              <td align="center" class="smallText" width="60%"><?php echo sprintf(TEXT_DATE_AVAILABLE, tep_date_short($product_info['products_date_available'])); ?></td>
-              <?php } else { ?>
-              <td align="center" class="smallText" width="60%"><?php echo sprintf(TEXT_DATE_ADDED, tep_date_short($product_info['products_date_added'])); ?></td>
-              <?php } ?>
-              <td align="right" width="20%">&nbsp;</td>
+              <td align="center" class="smallText" width="60%">
+              <?php 
+			  if (PRODUCT_LIST_DATE_ADDED == 'true') {
+			    if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) {
+                  echo sprintf(TEXT_DATE_AVAILABLE, tep_date_short($product_info['products_date_available']));
+                } else {
+                  echo sprintf(TEXT_DATE_ADDED, tep_date_short($product_info['products_date_added']));
+                } 
+              } ?>
+              </td>
+              <td align="right" width="20%"></td>
             </tr>
           </table>
         </td>

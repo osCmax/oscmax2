@@ -32,7 +32,7 @@ $Id$
     $boxContent = '<b>' . BOX_AFFILIATE_YOUR_ACCOUNT . '</b><br>' .
 	    '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_SUMMARY, '', 'SSL') . '">' . BOX_AFFILIATE_SUMMARY . '</a><br>' . 
         '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_ACCOUNT, '', 'SSL'). '">' . BOX_AFFILIATE_ACCOUNT . '</a><br>' .
-		'&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_FAQ, '', 'SSL') . '">' . BOX_AFFILIATE_FAQ . '</a><br>' .
+		'&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_INFORMATION, 'info_id=16') . '">' . BOX_AFFILIATE_FAQ . '</a><br>' .
 		'&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CONTACT_US, 'source=affiliate&amp;enquiry=' . TEXT_AFFILIATE_CONTACT_TEXT) . '">' . BOX_AFFILIATE_CONTACT . '</a><br>' .
         '<b>' . BOX_AFFILIATE_BANNERS . '</b><br>' . 
         '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_BANNERS, '', 'SSL') . '">' . BOX_AFFILIATE_BANNERS_BANNERS . '</a><br>' .

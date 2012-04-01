@@ -468,7 +468,7 @@ function format_size($size) {
                 sort($server_images_lg);
                 for ($i = 0; $i < count($server_images_lg); ++$i) { 
                   for ($j = 0; $j < 9; ++$j) { 
-	                if (strpos(strtolower($server_images_lg[$i]),strtolower('_' . $j))) {
+	                if (strpos(strtolower($server_images_lg[$i]),strtolower('_' . $j . '.'))) {
 		              unset($server_images_lg[$i]);
 	                }
 	              }
@@ -480,7 +480,7 @@ function format_size($size) {
                 sort($server_images_md);
                 for ($i = 0; $i < count($server_images_md); ++$i) { 
                   for ($j = 0; $j < 9; ++$j) { 
-	                if (strpos(strtolower($server_images_md[$i]),strtolower('_' . $j))) {
+	                if (strpos(strtolower($server_images_md[$i]),strtolower('_' . $j . '.'))) {
 		              unset($server_images_md[$i]);
 	                }
 	              }
@@ -492,7 +492,7 @@ function format_size($size) {
                 sort($server_images_sm);
                 for ($i = 0; $i < count($server_images_sm); ++$i) { 
                   for ($j = 0; $j < 9; ++$j) { 
-	                if (strpos(strtolower($server_images_sm[$i]),strtolower('_' . $j))) {
+	                if (strpos(strtolower($server_images_sm[$i]),strtolower('_' . $j . '.'))) {
 		              unset($server_images_sm[$i]);
 	                }
 	              }
@@ -704,7 +704,7 @@ function format_size($size) {
 							}
                             $contents[] = array('text' => '<center><table cellpadding="2" cellspacing="2" class="smallText"><tr><td colspan="3"><b>' . TEXT_MAIN_IMAGE . '</b>' . $iInfo->products_image . '</td></tr><tr><td>&nbsp;</td><td><b>' . TABLE_HEADING_WIDTH . '</b></td><td><b> ' . TABLE_HEADING_HEIGHT . '</b></td><td><b>' . TEXT_FILE_SIZE . '</b></td></tr><tr><td>' . TEXT_SMALL_IMAGE . '</td><td align="center">' . $width_sm . '</td><td align="center">' . $height_sm . '</td><td align="center">' . format_size($image_file_size_sm) . '</td></tr><tr><td>' . TEXT_PRODUCT_IMAGE . '</td><td align="center">' . $width_md . '</td><td align="center">' . $height_md . '</td><td align="center">' . format_size($image_file_size_md) . '</td></tr><tr><td>' . TEXT_LARGE_IMAGE . '</td><td align="center">' . $width_lg . '</td><td align="center">' . $height_lg . '</td><td align="center">' . format_size($image_file_size_lg) . '</td></tr></table></center><br>');
 							if (file_exists($root_images_dir . $iInfo->products_image)) { 
-						      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, tep_get_all_get_params(array('image'))) . 'image=' . $iInfo->products_image . '">' . tep_image_button('button_regenerate.gif', IMAGE_REGENERATE) . '</a><br><hr>');
+						      $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, tep_get_all_get_params(array('image'))) . '&amp;image=' . $iInfo->products_image . '">' . tep_image_button('button_regenerate.gif', IMAGE_REGENERATE) . '</a><br><hr>');
 							} else {
 							  $contents[] = array('align' => 'center', 'text' => TEXT_MISSING_FROM . '<b>' . DYNAMIC_MOPICS_BIGIMAGES_DIR . '</b>' . TEXT_NO_GENERATE . '<br><hr>');
 							      $missing_big_images++;

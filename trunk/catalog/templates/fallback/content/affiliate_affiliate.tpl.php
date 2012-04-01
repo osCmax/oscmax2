@@ -59,7 +59,7 @@ $Id$
                           <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td> 
                         </tr> 
                         <tr> 
-                          <td class="main" valign="top"><?php echo TEXT_NEW_AFFILIATE . '<br><br>' . TEXT_NEW_AFFILIATE_INTRODUCTION; ?></td> 
+                          <td class="main" valign="top"><?php echo TEXT_NEW_AFFILIATE . '<br><br>' . sprintf(TEXT_NEW_AFFILIATE_INTRODUCTION, STORE_NAME); ?></td> 
                         </tr> 
                         <tr> 
                           <td class="smallText" colspan="2"><b><a id="conditions" href="<?php echo $HTTP_SERVER . DIR_WS_CATALOG . 'conditions.php?info_id=14&amp;languages_id=' . (isset($languages_id) ? $languages_id : '1'); ?>" title="<?php echo TEXT_NEW_AFFILIATE_TERMS; ?>"> <?php echo TEXT_NEW_AFFILIATE_TERMS; ?></a></b></td> 

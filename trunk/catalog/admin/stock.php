@@ -49,7 +49,7 @@ $Id$
   } else {
     $VARS=$_POST;
   }
-  if ($VARS['action']=="Add") {
+  if ($VARS['action']==TEXT_ADD) {
     $inputok = true;
     if (!(is_numeric($VARS['product_id']) and ($VARS['product_id']==(int)$VARS['product_id']))) $inputok = false;
     while(list($v1,$v2)=each($VARS)) {
@@ -84,15 +84,13 @@ $Id$
       }
     }
   }
-  if ($VARS['action']=="Update") {
+  if ($VARS['action']==TEXT_UPDATE) {
     tep_db_query("update " . TABLE_PRODUCTS . " set products_quantity=" . (int)$VARS['quantity'] . " where products_id=" . (int)$VARS['product_id']);
     if (($VARS['quantity']<1) && (STOCK_ALLOW_CHECKOUT == 'false')) {
       tep_db_query("update " . TABLE_PRODUCTS . " set products_status='0' where products_id=" . (int)$VARS['product_id']);
     }
   }
-  if ($VARS['action']=="Apply to all") {
-
-  }
+  
   $q=tep_db_query($sql="select products_name,products_options_name as _option,products_attributes.options_id as _option_id,products_options_values_name as _value,products_attributes.options_values_id as _value_id from ".
                   "products_description, products_attributes,products_options,products_options_values where ".
                   "products_attributes.products_id=products_description.products_id and ".

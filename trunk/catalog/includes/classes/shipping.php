@@ -12,14 +12,18 @@ $Id$
 
   class shipping {
     var $modules;
+    //BOF: MOD INDVSHIP
+	var $shiptotal;
+	var $only_indv;
+    //EOF: MOD INDVSHIP
 
 // class constructor
     function shipping($module = '') {
 // LINE CHANGED: MOD - Downloads Controller - Added $cart
       global $language, $PHP_SELF, $cart;
 
-// LINE ADDED: MOD - Individual Shipping Prices
-      $shiptotal = $cart->get_shiptotal();
+// LINE ADDED: MOD - Individual Shipping Prices 4.5
+      $shiptotal = $this->get_shiptotal();
 
       if (defined('MODULE_SHIPPING_INSTALLED') && tep_not_null(MODULE_SHIPPING_INSTALLED)) {
 // BOF: MOD - Separate Pricing Per Customer, next line original code
@@ -60,10 +64,13 @@ $Id$
 // Show either normal shipping modules or free shipping module when Free Shipping Module is On
           // Free Shipping Only
           if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $cart->show_weight()==0) {
-            $include_modules[] = array('class'=> 'freeshipper', 'file' => 'freeshipper.php'); }
+            $include_modules[] = array('class'=> 'freeshipper', 'file' => 'freeshipper.php'); 
+		  }
+          //BOF: MOD INDIVSHIP 4.5
           if (tep_get_configuration_key_value('MODULE_SHIPPING_INDVSHIP_STATUS') and $shiptotal) {
             $include_modules[] = array('class'=> 'indvship', 'file' => 'indvship.php');
-          } else {
+		  };
+		  if (!$this->only_indv) {
           // All Other Shipping Modules
             while (list(, $value) = each($this->modules)) {
               $class = substr($value, 0, strrpos($value, '.'));
@@ -72,6 +79,7 @@ $Id$
                 $include_modules[] = array('class' => $class, 'file' => $value);} }
             }
 // EOF: MOD - Downloads Controller - Free Shipping and Payments
+// EOF: MOD INDIVSHIP 4.5
           }
         }
 
@@ -128,7 +136,63 @@ $Id$
 
       return $quotes_array;
     }
+// BOF: MOD - INDIVSHIP 4.5
+	function get_shiptotal() {
+	  global $cart, $order;
+	  $this->shiptotal = '';
+	  $products = $cart->get_products();
+		$this->only_indv = true;
+	  for ($i=0, $n=sizeof($products); $i<$n; $i++) {
+	    if (tep_not_null($products[$i]['products_ship_price'])) {
+	      $products_ship_price = $products[$i]['products_ship_price'];
+	      $products_ship_price_two = $products[$i]['products_ship_price_two'];
+	      $products_ship_zip = $products[$i]['products_ship_zip'];
+	      $qty = $products[$i]['quantity'];
+	      if(tep_not_null($products_ship_price) ||tep_not_null($products_ship_price_two)){
+	        $this->shiptotal += ($products_ship_price);
+	        if ($qty > 1) {
+	          if (tep_not_null($products_ship_price_two)) {
+	            $this->shiptotal += ($products_ship_price_two * ($qty-1));
+	          } else {
+	            $this->shiptotal += ($products_ship_price * ($qty-1));
+	          }
+	        }/////////////NOT HERE <<------------
+	      }
+	    } else {
+			$this->only_indv = false;
+		};
+	  }// CHECK TO SEE IF SHIPPING TO HOME COUNTRY, IF NOT INCREASE SHIPPING COSTS BY AMOUNT SET IN ADMIN/////////////move back here <<------------
+	  if (($order->delivery['country']['id']) != INDIVIDUAL_SHIP_HOME_COUNTRY) {
+	    if(INDIVIDUAL_SHIP_INCREASE > '0' || $this->shiptotal > '0') {
+	      $this->shiptotal *= INDIVIDUAL_SHIP_INCREASE;
+	    } else {
+		  $this->shiptotal += INDIVIDUAL_SHIP_INCREASE *  $this->get_indvcount();
+	    }
+	    return $this->shiptotal;
+		// not sure why this is needed, but it now works correctly for home country - by Ed
+	  } else {
+	  	 $this->shiptotal *= 1;
+	     return $this->shiptotal;
+	  }
+	}
 
+	function get_indvcount() {
+	  global $cart;
+	  $this->indvcount = '';
+	  $products = $cart->get_products();
+	  for ($i=0, $n=sizeof($products); $i<$n; $i++) {
+	    if (tep_not_null($products[$i]['products_ship_price'])) {
+	      $products_ship_price = $products[$i]['products_ship_price'];//}
+	      $products_ship_price_two = $products[$i]['products_ship_price_two'];
+	      if(is_numeric($products_ship_price)){
+	        $this->indvcount += '1';
+	      }
+	    }
+	  }
+	  return $this->indvcount;
+	}
+
+// EOF: MOD - INDVSHIP 4.5
     function cheapest() {
       if (is_array($this->modules)) {
         $rates = array();

@@ -13,7 +13,7 @@ $Id$
 define('HEADING_TITLE', 'Kontakt');
 define('NAVBAR_TITLE', 'Kontakt');
 define('TEXT_SUCCESS', 'Ihre Anfrage wurde erfolgreich an den Shopbetreiber gesendet.');
-define('EMAIL_SUBJECT', 'Anfrage von ' . STORE_NAME);
+define('EMAIL_SUBJECT', 'Anfrage von %s');
 
 define('ENTRY_NAME', 'Vollständiger Name:');
 define('ENTRY_EMAIL', 'E-Mail-Adresse:');

@@ -120,6 +120,7 @@ $Id$
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT);
 
   $action = (isset($_POST['action']) ? $_POST['action'] : '');
+	Header("X-Received-Action: $action");
   if (isset($_POST['updateQuantities_x'])){
 	  $action = 'updateQuantities';
   }
@@ -265,7 +266,7 @@ $Id$
   function fixSeoLink($url){
 	  return str_replace('&amp;', '&', $url);
   }
-  if( ($total_weight == 0) && (ONEPAGE_CHECKOUT_HIDE_SHIPPING == 'true') ) { $onepage['shippingEnabled'] = false; }
+  if( ($total_weight == 0) && (ONEPAGE_CHECKOUT_HIDE_SHIPPING == 'true') && (!$shipping_modules->get_shiptotal())) { $onepage['shippingEnabled'] = false; }
 
 
 

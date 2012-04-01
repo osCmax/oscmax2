@@ -60,7 +60,7 @@ $Id$
 // Show either normal payment modules or free payment module when Free Shipping Module is On
           // Free Payment Only
 
-          if (tep_get_configuration_key_value('MODULE_PAYMENT_FREECHARGER_STATUS') and ($cart->show_total()==0 and $cart->show_weight==0)) {
+          if (tep_get_configuration_key_value('MODULE_PAYMENT_FREECHARGER_STATUS') && ($cart->show_total()==0 && $cart->show_weight()==0)) {
             $this->selected_module = $module;
             $include_modules[] = array('class'=> 'freecharger', 'file' => 'freecharger.php');
           } else {

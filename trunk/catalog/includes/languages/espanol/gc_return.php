@@ -17,7 +17,7 @@ define('TEXT_PRODUCT_NOT_FOUND','¡Producto no encontrado!');
 define('TEXT_CURRENT_REVIEWS','Comentarios:');
 define('TEXT_MORE_INFORMATION','Para obtener más información, visite la <u><a href=\"%s\" target=\"_blank\">página web</a></u> del producto.');
 define('TEXT_DATE_ADDED','Este producto está en nuestro catálogo desde el %s.');
-define('TEXT_DATE_AVAILABLE', '<font color="#ff0000">Este producto estará disponible el %s.</font>');
+define('TEXT_DATE_AVAILABLE', '<span class="notice">Este producto estará disponible el %s.</span>');
 define('TEXT_ALSO_PURCHASED_PRODUCTS','Clientes que adquirieron este producto también compraron');
 define('TEXT_PRODUCT_OPTIONS','Opciones disponibles:');
 define('TEXT_CLICK_TO_ENLARGE','Pulse aquí para ampliar');

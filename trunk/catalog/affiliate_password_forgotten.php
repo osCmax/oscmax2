@@ -25,7 +25,7 @@ $Id$
       $newpass = tep_create_random_value(ENTRY_PASSWORD_MIN_LENGTH);
       $crypted_password = tep_encrypt_password($newpass);
       tep_db_query("update " . TABLE_AFFILIATE . " set affiliate_password = '" . $crypted_password . "' where affiliate_id = '" . $check_affiliate['affiliate_id'] . "'");
-      tep_mail($check_affiliate['affiliate_firstname'] . " " . $check_affiliate['affiliate_lastname'], $_POST['email_address'], EMAIL_PASSWORD_REMINDER_SUBJECT, nl2br(sprintf(EMAIL_PASSWORD_REMINDER_BODY, $newpass)), STORE_OWNER, AFFILIATE_EMAIL_ADDRESS);
+      tep_mail($check_affiliate['affiliate_firstname'] . " " . $check_affiliate['affiliate_lastname'], $_POST['email_address'], sprintf(EMAIL_PASSWORD_REMINDER_SUBJECT, STORE_NAME), nl2br(sprintf(EMAIL_PASSWORD_REMINDER_BODY, STORE_NAME, $newpass)), STORE_OWNER, AFFILIATE_EMAIL_ADDRESS);
       tep_redirect(tep_href_link(FILENAME_AFFILIATE, 'info_message=' . urlencode(TEXT_PASSWORD_SENT), 'SSL', true, false));
     } else {
       tep_redirect(tep_href_link(FILENAME_AFFILIATE_PASSWORD_FORGOTTEN, 'email=nonexistent', 'SSL'));

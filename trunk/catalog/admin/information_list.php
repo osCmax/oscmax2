@@ -21,6 +21,7 @@ $Id$
 	    <td align="left" class="dataTableHeadingContent"><?php echo ENTRY_TITLE;?></td>
 	    <td align="left" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo ENTRY_PARENT_PAGE; } else { echo '&nbsp;'; }?></td>
         <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo ENTRY_EXTERNAL_URL; } else { echo '&nbsp;'; }?></td>
+	    <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo PUBLIC_INFORMATION_2; } else { echo '&nbsp;'; }?></td>
 	    <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo PUBLIC_INFORMATION; } else { echo '&nbsp;'; }?></td>
 	    <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo ENTRY_SORT_ORDER; } else { echo '&nbsp;'; }?></td>
 	    <td align="center" class="dataTableHeadingContent" colspan=2><?php echo ACTION_INFORMATION;?></td>
@@ -59,6 +60,16 @@ if (sizeof($data) > 0) {
 		  } // end if ($val['visible'] == 1)
 		} // end if ($_GET['gID'] == '1')
 ?></td>
+        <td width="10%" align="center" class="dataTableContent">
+		<?php 
+		if ($_GET['gID'] == '1') { 
+		  if ($val['show_in_infobox'] == '1') {
+		    echo tep_image(DIR_WS_ICONS . 'icon_status_yellow.gif', IMAGE_ICON_STATUS_GREEN, 10, 10); 
+		  } else { 
+		    echo tep_image(DIR_WS_ICONS . 'icon_status_yellow_light.gif', IMAGE_ICON_STATUS_RED, 10, 10); 
+		  }
+		} ?>
+        </td>
 	    <td width="10%" align="center" class="dataTableContent"><?php if ($_GET['gID'] == '1') { echo $val['sort_order']; } else { echo '&nbsp;'; } ?></td>
         <td align=center class="dataTableContent">
 		<?php echo '<a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, "gID=$gID&amp;information_action=Edit&amp;information_id=$val[information_id]", 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'page_white_edit.png', EDIT_ID_INFORMATION . " $val[information_title]") . '</a>'; ?></td>

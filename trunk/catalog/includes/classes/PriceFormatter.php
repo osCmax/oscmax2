@@ -32,6 +32,7 @@ class PriceFormatter {
     $this->lowPrice = -1;
     $this->hasSpecialPrice = false; //tep_not_null($this->specialPrice);
     $this->specialPrice = NULL; //$prices['specials_new_products_price'];
+	$this->productsQuantity = 0;
   }
 
   function loadProduct($product_id, $language_id = 1, $listing = NULL, $price_breaks_from_listing = NULL) {
@@ -146,6 +147,7 @@ class PriceFormatter {
     $this->price_breaks = $price_formatter_data['price_breaks'];
     $this->specialPrice = $price_formatter_data['specials_new_products_price'];
     $this->hasSpecialPrice = tep_not_null($this->specialPrice);
+	$this->productsQuantity = $price_formatter_data['products_quantity'];
 
     //Custom      
     $this->hasQuantityPrice = false;
@@ -285,6 +287,22 @@ class PriceFormatter {
       return round ($percentage) . '%';
     }
   }
+  
+  function addTaxShippingDisplay() {
+    // Add functionality to display tax rate and shipping link near prices
+    $ts_text = '';
+	if ($this->thePrice != CALL_FOR_PRICE_VALUE && SHOW_TAX_RATE_NEAR_PRICE == 'true') {
+	  if (DISPLAY_PRICE_WITH_TAX == 'true') {
+	    $ts_text .= '<br><span class="tax_near_price">' . TAX_RATE_NEAR_PRICE_INC . tep_get_tax_rate($this->taxClass) . '%</span>&nbsp;';
+	  } else {
+	    $ts_text .= '<br><span class="tax_near_price">' . TAX_RATE_NEAR_PRICE_EX . tep_get_tax_rate($this->taxClass) . '%</span>&nbsp;';
+	  }
+	  if (SHOW_SHIPPING_NEAR_PRICE == 'true') {
+	    $ts_text .= '<a href="' . tep_href_link(FILENAME_INFORMATION, 'info_id=8') . '" class="shipping_link">' . TEXT_SHIPPING_NEAR_PRICE . '</a>&nbsp;';
+	  }
+    }
+	return $ts_text;
+  }
 
   function getPriceString($style='productPriceInBox') {
     global $currencies;
@@ -395,6 +413,7 @@ class PriceFormatter {
         . '&nbsp;';
       }
     }
+	$lc_text .= $this->addTaxShippingDisplay();
     return $lc_text;
   }
 
@@ -421,7 +440,9 @@ class PriceFormatter {
         $lc_text = '&nbsp;<big>'
         . $currencies->display_price($this->thePrice, tep_get_tax_rate($this->taxClass))
         . '&nbsp;</big>';
+		
     }
+	$lc_text .= $this->addTaxShippingDisplay();
     return $lc_text;
   }
 
@@ -460,6 +481,7 @@ class PriceFormatter {
 		 $dropdown = tep_draw_pull_down_menu('price_breaks', $dropdown_price_breaks, '0', 'style="font-weight: normal"');
      $dropdown .= '&nbsp;<span class="smallText">' . PB_FROM . '</span>&nbsp;' . $currencies->display_price($this->lowPrice, tep_get_tax_rate($this->taxClass)) . "\n";
 
+     $dropdown .= $this->addTaxShippingDisplay();
      return $dropdown;
   }
   
@@ -547,7 +569,7 @@ class PriceFormatter {
     return $lc_text;
   }
   */
-// added for Separate Pricing Per Customer, returns customer_group_id
+    // added for Separate Pricing Per Customer, returns customer_group_id
     function get_customer_group_id() {
       if (isset($_SESSION['sppc_customer_group_id']) && $_SESSION['sppc_customer_group_id'] != '0') {
         $_cg_id = $_SESSION['sppc_customer_group_id'];
@@ -556,5 +578,29 @@ class PriceFormatter {
       }
       return $_cg_id;
     }
+	
+	// PGM adds new function to create buttons throughout the store
+	function getProductButtons($products_id, $page_sent, $products_model = '', $products_name = '') {
+	  $button_output = '';
+	  
+	  // Add more info button if enabled
+	  if (SHOW_MORE_INFO == 'True') {
+        $button_output .= '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products_id) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>&nbsp;';
+	  }
+	  
+	  // We need to know if we are on the product_info page or not to send to the correct page
+	  if ($page_sent == FILENAME_PRODUCT_INFO) { $product_link = '&product_to_buy_id=' . $products_id; } else { $product_link = '&products_id=' . $products_id; }
+	  
+	  // Now generate the relevant 'buy now' button
+	  if ($this->thePrice == CALL_FOR_PRICE_VALUE) { // Call for price
+	    $button_output .= '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $products_model) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $products_name) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $products_id . '%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
+	  } elseif ($this->productsQuantity < 1 && STOCK_IMAGE_SWITCH == 'true') { // Out of Stock
+	    $button_output .= tep_image_submit('button_out_of_stock.gif', IMAGE_OUT_OF_STOCK);
+	  } else {
+		$button_output .= '<a href="' . tep_href_link($page_sent, tep_get_all_get_params(array('action')) . 'action=buy_now' . $product_link) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>';
+	  }
+	  
+	  return $button_output;
+	}
 }
 ?>

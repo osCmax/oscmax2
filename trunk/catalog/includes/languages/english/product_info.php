@@ -14,7 +14,7 @@ define('TEXT_PRODUCT_NOT_FOUND', 'Product not found!');
 define('TEXT_CURRENT_REVIEWS', 'Current Reviews:');
 define('TEXT_MORE_INFORMATION', 'For more information, please visit this <a href="%s" target="_blank"><u>webpage</u></a>.');
 define('TEXT_DATE_ADDED', 'This product was added to our catalog on %s.');
-define('TEXT_DATE_AVAILABLE', '<font color="#ff0000">This product will be in stock on %s.</font>');
+define('TEXT_DATE_AVAILABLE', '<span class="notice">This product will be in stock on %s.</span>');
 define('TEXT_ALSO_PURCHASED_PRODUCTS', 'Customers who bought this product also purchased');
 define('TEXT_PRODUCT_OPTIONS', 'Available Options:');
 define('TEXT_CLICK_TO_ENLARGE', 'Click to enlarge');
@@ -75,4 +75,6 @@ define('TEXT_ADDITIONAL_SHIPPING_2', ' for the first item, and $');
 define('TEXT_ADDITIONAL_SHIPPING_3', ' for each additional item + regular shipping costs.)</i>');
 define('TEXT_ADDITIONAL_SHIPPING_4', ' + regular shipping costs.)</i>');
 // end indvship
+
+define('PRODUCT_HAS_OPTIONS_MESSAGE', 'This product has options that must be selected before it can be purchased.');
 ?>

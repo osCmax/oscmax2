@@ -176,7 +176,7 @@ define('CATEGORY_OPTIONS', 'Opciones');
 define('CATEGORY_PASSWORD', 'Contraseña');
 
 define('ENTRY_COMPANY', 'Nombre de la empresa:');
-define('ENTRY_COMPANY_ERROR', 'Por favor introduzca el nombre de su empresea');
+define('ENTRY_COMPANY_ERROR', 'Por favor introduzca el nombre de su empresa');
 define('ENTRY_COMPANY_TEXT', '*');
 define('ENTRY_COMPANY_TAX_ID', 'NIF empresa:');
 define('ENTRY_COMPANY_TAX_ID_ERROR', 'Por favor introduzca el NIF de su empresa');
@@ -337,7 +337,7 @@ define('TEXT_UNKNOWN_TAX_RATE', 'Impuesto desconocido');
 
 define('TEXT_REQUIRED', '<span class="errorText">Obligatorio</span>');
 
-define('ERROR_TEP_MAIL', '<font face="Verdana, Arial" size="2" color="#ff0000"><b><small>Error:</small> No he podido enviar el email con el servidor SMTP especificado. Revisa la configuración del archivo php.ini y corrija el servidor SMTP si es necesario.</b></font>');
+define('ERROR_TEP_MAIL', '<span class="errorText"><b><small>Error:</small> No se ha podido enviar el email con el servidor SMTP especificado. Revisa la configuración del archivo php.ini y corrija el servidor SMTP si es necesario.</b></span>');
 define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Advertencia: El directorio de instalación existe en: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/install. Por razones de seguridad, elimine este directorio completamente.');
 define('WARNING_CONFIG_FILE_WRITEABLE', 'Advertencia: Se puede escribir en el fichero de configuración: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/includes/configure.php. En determinadas circunstancias esto puede suponer un riesgo de seguridad - por favor corrija los permisos de este fichero.');
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Advertencia: El directorio para guardar datos de sesión no existe: ' . tep_session_save_path() . '. Las sesiones no funcionarán hasta que no se cree el directorio.');
@@ -350,7 +350,7 @@ define('TEXT_CCVAL_ERROR_INVALID_DATE', 'La fecha de caducidad de la tarjeta de 
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'El número de la tarjeta de crédito es incorrecto. Compruebe el número e inténtelo de nuevo.');
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Los primeros cuatro digitos de su tarjeta son: %s. Si este número es correcto, no aceptamos este tipo de tarjetas. Si es incorrecto, inténtelo de nuevo.');
 define('WARNING_JAVASCRIPT_DISABLED', 'Alerta: Se ha detectado que tiene Javascript desactivado. Para conseguir una mejor experiencia debería activarlo. Si necesita ayuda con esto por favor <b>pulse aquí.</b>');
-define('WARNING_IE6_DETECTED', 'Advertencia: Se ha detectado que está usando Internet Explorer 6, cuya tecnología es obsoleta. Le recomendamos fervientemente que <b>actualice su navegador</b>. Pruebe con los navegadores más populares como <a href="http://www.microsoft.com/spain/windows/internet-explorer/default.aspx"><b>Internet Explorer</b></a>, <a href="http://www.mozilla-europe.org/es/firefox/"><b>Firefox</b></a> ó <a href="http://www.google.com/chrome?hl=es"><b>Chrome</b></a>');
+define('WARNING_IE6_DETECTED', 'Advertencia: Se ha detectado que está usando Internet Explorer 6, cuya tecnología es obsoleta. Le recomendamos que <b>actualice su navegador</b> urgentemente. Pruebe con los navegadores más populares como <a href="http://www.microsoft.com/spain/windows/internet-explorer/default.aspx"><b>Internet Explorer</b></a>, <a href="http://www.mozilla-europe.org/es/firefox/"><b>Firefox</b></a> ó <a href="http://www.google.com/chrome?hl=es"><b>Chrome</b></a>');
 
 define('FOOTER_TEXT_BODY', 'Todo el contenido e imágenes Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a><br> Copyright &copy; 2000 - ' . date("Y") .  '<a href="http://oscmax.com"> osCmax</a><br>Desarrollado con <a href="http://www.oscmax.com" target="_blank">' . PROJECT_VERSION . '</a>');
 
@@ -399,7 +399,7 @@ define('QUANTITY_BLOCKS_NOTICE', '%s sólo se puede pedir como un múltiplo de %d.
 // EOF: QPBPP for SPPC
 
 // BOF: Customer Comments contrib
-define('SUCCESS_ORDER_UPDATED', 'Correcto: El pedido se a actualizado correctamente.');
+define('SUCCESS_ORDER_UPDATED', 'Correcto: El pedido se ha actualizado correctamente.');
 define('WARNING_ORDER_NOT_UPDATED', 'Advertencia: No hay cambios. El pedido no ha cambiado.');
 // EOF: Customer Comments contrib
 
@@ -476,4 +476,15 @@ define('TEXT_QUESTION_PRODUCT_NAME', 'Nombre%20del%20producto:');
 define('DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'NOTA: Las descargas no están disponibles hasta que no se ha confirmado el pago.');
 
 define('TEXT_REPLACEMENT_SUGGESTION', 'Quiso decir: ');
+
+// BOF qpbpp
+define('TEXT_PRICE_BREAKS','Desde ');
+define('TEXT_ON_SALE','');
+// EOF qpbpp
+
+// BOF Show tax and Shipping near price
+define('TAX_RATE_NEAR_PRICE_INC', 'Impuestos incluidos ');
+define('TAX_RATE_NEAR_PRICE_EX', 'Impuestos no incluidos ');
+define('TEXT_SHIPPING_NEAR_PRICE', 'Envíos');
+// EOF Show tax and Shipping near price
 ?>

@@ -13,8 +13,8 @@ $Id$
 define('TEXT_PRODUCT_NOT_FOUND', 'Produkt nicht gefunden!');
 define('TEXT_CURRENT_REVIEWS', 'Aktuelle Produktbewertungen:');
 define('TEXT_MORE_INFORMATION', 'Für weitere Informationen besuchen Sie bitte diese <a href="%s" target="_blank"><u>Webseite</u></a>.');
-define('TEXT_DATE_ADDED', 'Dieses Produkt haben wir am %s in unseren Katalog aufgenommen.');
-define('TEXT_DATE_AVAILABLE', '<font color="#ff0000">Dieses Produkt wird ab dem %s vorrätig sein.</font>');
+define('TEXT_DATE_ADDED', 'Dieses Produkt ist seit %s gelistet.');
+define('TEXT_DATE_AVAILABLE', '<span class="notice">Dieses Produkt wird ab dem %s verfügbar sein.</span>');
 define('TEXT_ALSO_PURCHASED_PRODUCTS', 'Kunden, die dieses Produkt gekauft haben, haben auch folgende Produkte gekauft:');
 define('TEXT_PRODUCT_OPTIONS', 'Verfügbare Optionen:');
 define('TEXT_CLICK_TO_ENLARGE', 'Bild vergrößern');
@@ -75,4 +75,6 @@ define('TEXT_ADDITIONAL_SHIPPING_2', ' für den ersten Posten und $');
 define('TEXT_ADDITIONAL_SHIPPING_3', ' für jeden zusätzlichen Posten + den üblichen Versandkosten.)</i>');
 define('TEXT_ADDITIONAL_SHIPPING_4', ' + den üblichen Versandkosten.)</i>');
 // end indvship
+
+define('PRODUCT_HAS_OPTIONS_MESSAGE', 'Dieses Produkt verfügt über Optionen, die ausgewählt werden, bevor sie gekauft werden muss.');
 ?>

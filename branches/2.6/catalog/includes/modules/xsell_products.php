@@ -11,7 +11,7 @@ Released under the GNU General Public License
 */ 
 
 if ($_GET['products_id']) { 
-  $xsell_query = tep_db_query("select distinct p.products_id, p.products_image, pd.products_name, p.products_tax_class_id, products_price from " . TABLE_PRODUCTS_XSELL . " xp, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where xp.products_id = '" . $HTTP_GET_VARS['products_id'] . "' and xp.xsell_id = p.products_id and p.products_id = pd.products_id and pd.language_id = '" . $languages_id . "' and p.products_status = '1' and find_in_set('" . $customer_group_id . "', p.products_hide_from_groups) = '0' order by xp.sort_order asc limit " . MAX_DISPLAY_ALSO_PURCHASED);
+  $xsell_query = tep_db_query("select distinct p.products_id, p.products_image, pd.products_name from " . TABLE_PRODUCTS_XSELL . " xp, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where xp.products_id = '" . $HTTP_GET_VARS['products_id'] . "' and xp.xsell_id = p.products_id and p.products_id = pd.products_id and pd.language_id = '" . $languages_id . "' and p.products_status = '1' and find_in_set('" . $customer_group_id . "', p.products_hide_from_groups) = '0' order by xp.sort_order asc limit " . MAX_DISPLAY_ALSO_PURCHASED);
 $num_products_xsell = tep_db_num_rows($xsell_query); 
 if ($num_products_xsell != 0) { // Check query is not blank
 
@@ -72,28 +72,9 @@ if ($num_products_xsell != 0) { // Check query is not blank
 
       while ($xsell = tep_db_fetch_array($xsell_query)) {
  
-        $xsell['specials_new_products_price'] = tep_get_products_special_price($xsell['products_id']); 
-		  if ($xsell['specials_new_products_price']) { 
-            $xsell_price =  '<span style="text-decoration:line-through">' . $currencies->display_price($xsell['products_price'], tep_get_tax_rate($xsell['products_tax_class_id'])) . '</span>&nbsp;&nbsp;'; 
-            $xsell_price .= '<span class="productSpecialPrice">' . $currencies->display_price($xsell['specials_new_products_price'], tep_get_tax_rate($xsell['products_tax_class_id'])) . '</span>'; 
-          } else { 
-			// BOF Separate Price per Customer  
-            $customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$xsell['products_id']. "' and customers_group_id =  '" . $customer_group_id . "'");
-              if ($customer_group_price = tep_db_fetch_array($customer_group_price_query)) {
-                $xsell_price = $currencies->display_price($customer_group_price['customers_group_price'], tep_get_tax_rate($xsell['products_tax_class_id']));
-	          } else {  
-            // EOF Separate Price per Customer
-                $xsell_price =  $currencies->display_price($xsell['products_price'], tep_get_tax_rate($xsell['products_tax_class_id']));
-			  }
-	      } 
-		  
-		  if (SHOW_MORE_INFO == 'True') {
-            $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>';
-		  } else {
-			$more_info = '';
-		  }
+        $pf->loadProduct($xsell['products_id'], $languages_id, NULL, NULL);
 
-		  $display_code = '<td width="33%" class="smallText"><br><center><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $xsell['products_image'], $xsell['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . $xsell['products_name'] .'</a><br>' . $xsell_price . '<br>' . $more_info . ' <a href="' . tep_href_link( FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id'] .  '&amp;action=buy_now&product_to_buy_id=' . $xsell['products_id'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', '' . $xsell['products_name'] . '') .'</a></center></td>';
+		  $display_code = '<td width="33%" class="smallText"><br><center><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $xsell['products_image'], $xsell['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . $xsell['products_name'] .'</a><br>' . $pf->getPriceStringShort() . '<br>' . $pf->getProductButtons($xsell['products_id'], FILENAME_PRODUCT_INFO, $xsell['products_model'], $xsell['products_name']) . '</a></center></td>';
  
 	  if  (($div3rows_xs <> $row) && ($col == 0)) {
 		$output .= '<div><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr valign="middle">' . $display_code;
@@ -163,31 +144,11 @@ if ($num_products_xsell != 0) { // Check query is not blank
       $info_box_contents = array();
       while ($xsell = tep_db_fetch_array($xsell_query)) {
  
-        $xsell['specials_new_products_price'] = tep_get_products_special_price($xsell['products_id']); 
-
-		if ($xsell['specials_new_products_price']) { 
-      	  $xsell_price =  '<span style="text-decoration:line-through">' . $currencies->display_price($xsell['products_price'], tep_get_tax_rate($xsell['products_tax_class_id'])) . '</span>&nbsp;&nbsp;'; 
-      	  $xsell_price .= '<span class="productSpecialPrice">' . $currencies->display_price($xsell['specials_new_products_price'], tep_get_tax_rate($xsell['products_tax_class_id'])) . '</span>'; 
-    	} else {  
-	      // BOF Separate Price per Customer  
-            $customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . (int)$xsell['products_id']. "' and customers_group_id =  '" . $customer_group_id . "'");
-              if ($customer_group_price = tep_db_fetch_array($customer_group_price_query)) {
-                $xsell_price = $currencies->display_price($customer_group_price['customers_group_price'], tep_get_tax_rate($xsell['products_tax_class_id']));
-	          } else {  
-            // EOF Separate Price per Customer
-                $xsell_price =  $currencies->display_price($xsell['products_price'], tep_get_tax_rate($xsell['products_tax_class_id']));
-			  }
-		} 
-		
-		if (SHOW_MORE_INFO == 'True') {
-          $more_info = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>';
-		} else {
-		  $more_info = '';
-		}
+        $pf->loadProduct($xsell['products_id'], $languages_id, NULL, NULL);
      
 	  $info_box_contents[$row][$col] = array('align' => 'center',
                                              'params' => 'class="smallText" width="33%" valign="top"',
-                                             'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $xsell['products_image'], $xsell['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . $xsell['products_name'] .'</a><br>' . $xsell_price . '<br>' . $more_info . ' <a href="' . tep_href_link( FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id'] .  '&amp;action=buy_now&product_to_buy_id=' . $xsell['products_id'], 'NONSSL') . '">' . tep_image_button('button_buy_now.gif', '' . $xsell['products_name'] . '') .'</a>');
+                                             'text' => '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $xsell['products_image'], $xsell['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . $xsell['products_name'] .'</a><br>' . $pf->getPriceStringShort() . '<br>' . $pf->getProductButtons($xsell['products_id'], FILENAME_PRODUCT_INFO, $xsell['products_model'], $xsell['products_name']));
       $col ++;
         if ($col > 2) {
           $col = 0;

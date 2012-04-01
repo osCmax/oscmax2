@@ -324,7 +324,7 @@ define('TEXT_UNKNOWN_TAX_RATE', 'Unknown tax rate');
 
 define('TEXT_REQUIRED', '<span class="errorText">Required</span>');
 
-define('ERROR_TEP_MAIL', '<font face="Verdana, Arial" size="2" color="#ff0000"><b><small>TEP ERROR:</small> Cannot send the email through the specified SMTP server. Please check your php.ini setting and correct the SMTP server if necessary.</b></font>');
+define('ERROR_TEP_MAIL', '<span class="errorText"><b><small>TEP ERROR:</small> Cannot send the email through the specified SMTP server. Please check your php.ini setting and correct the SMTP server if necessary.</b></span>');
 define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Warning: Installation directory exists at: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/install. Please remove this directory for security reasons.');
 define('WARNING_CONFIG_FILE_WRITEABLE', 'Warning: I am able to write to the configuration file: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/includes/configure.php. This is a potential security risk - please set the right user permissions on this file.');
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Warning: The sessions directory does not exist: ' . tep_session_save_path() . '. Sessions will not work until this directory is created.');
@@ -463,4 +463,15 @@ define('TEXT_QUESTION_PRODUCT_NAME', 'Product%20Name:');
 define('DOWNLOADS_CONTROLLER_ON_HOLD_MSG', 'NOTE: Downloads are not available until payment has been confirmed.');
 
 define('TEXT_REPLACEMENT_SUGGESTION', 'Did you mean: ');
+
+// BOF qpbpp
+define('TEXT_PRICE_BREAKS', 'From ');
+define('TEXT_ON_SALE', '');
+// EOF qpbpp
+
+// BOF Show tax and Shipping near price
+define('TAX_RATE_NEAR_PRICE_INC', 'Inc Tax of ');
+define('TAX_RATE_NEAR_PRICE_EX', 'Ex Tax of ');
+define('TEXT_SHIPPING_NEAR_PRICE', 'Shipping');
+// EOF Show tax and Shipping near price
 ?>

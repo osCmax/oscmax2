@@ -16,6 +16,7 @@ define('HEADING_TITLE', 'Mon panier');
 define('HEADING_TITLE_BASKET', 'Mon panier');
 define('TABLE_HEADING_REMOVE', 'Supprimer');
 define('TABLE_HEADING_QUANTITY', 'Qt&eacute;.');
+define('TABLE_HEADING_PRICE', 'Prix');
 define('TABLE_HEADING_MODEL', 'Mod&egrave;le');
 define('TABLE_HEADING_PRODUCTS', 'Produit(s)');
 define('TABLE_HEADING_TOTAL', 'Total');

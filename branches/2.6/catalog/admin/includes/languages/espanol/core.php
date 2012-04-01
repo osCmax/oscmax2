@@ -183,6 +183,7 @@ define('BOX_CONFIGURATION_RECAPTCHA', 'Formulario reCaptcha');
 define('BOX_CONFIGURATION_NOTIFICATIONS', 'Notificaciones');
 define('BOX_CONFIGURATION_SLIDESHOW', 'Presentación diapositivas');
 define('BOX_CONFIGURATION_SLIDESHOW_SETTINGS', 'Configuración presentación');
+define('BOX_CONFIGURATION_ADDTHIS', 'AddThis');
 
 define('BOX_CONFIGURATION_GOOGLE', 'Google');
 define('BOX_CONFIGURATION_GOOGLE_ANALYTICS', 'Google Analytics');
@@ -458,6 +459,7 @@ define('IMAGE_SUMMARY', 'Resumen');
 define('IMAGE_BROWSE', 'Examinar');
 define('IMAGE_MISSING', 'Perdidas');
 define('IMAGE_ORPHANS', 'Huérfanas');
+define('IMAGE_REGENERATE', 'Regenerar');
 define('IMAGE_REGENERATE_ALL', 'Regenerar todas las imágenes de este producto');
 define('IMAGE_REGENERATE_EVERYTHING', 'Regenerar todas las imágenes');
 define('IMAGE_MC_SYNC', 'Sincronizar con MailChimp');
@@ -626,5 +628,6 @@ define('TEXT_FORUM', 'Foros');
 define('TEXT_WIKI', 'Wiki de documentación de ayuda');
 define('TEXT_COPYRIGHT', 'Copyright');
 
-
+define('ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST', 'Error: No existe el directorio para la caché. Especifique un directorio valido en Configuración->Caché.');
+define('ERROR_CACHE_DIRECTORY_NOT_WRITEABLE', 'Error: No se puede escribir en el directorio para la caché.');
 ?>

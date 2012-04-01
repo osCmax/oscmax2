@@ -75,6 +75,7 @@ $Id$
             </tr>
 <?php
     }
+
 if (DISPLAY_DATE_ADDED_ARTICLE_LISTING == 'true') {
     if ($article_info['articles_date_available'] > date('Y-m-d H:i:s')) {
 ?>
@@ -90,11 +91,22 @@ if (DISPLAY_DATE_ADDED_ARTICLE_LISTING == 'true') {
 <?php
     }
 }
+
+if (ADD_THIS_ENABLED == 'true' && ADD_THIS_ARTICLES == 'true') { ?>
+            <tr>
+              <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+            </tr>
+            <tr>
+              <td class="productinfo_boxes"><?php echo stripslashes(ADD_THIS_CODE); ?></td>      
+            </tr>      
+<?php }	
+
 ?>
             <tr>
               <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
             </tr>
 <?php
+
   if (ENABLE_ARTICLE_REVIEWS == 'true') {
     $reviews_query = tep_db_query("SELECT COUNT(*) as count from " . TABLE_ARTICLE_REVIEWS . " ar, " . TABLE_ARTICLE_REVIEWS_DESCRIPTION . " ard where ar.articles_id = '" . (int)$_GET['articles_id'] . "' and ar.approved = '1' and ard.reviews_id = ar.reviews_id and ard.languages_id = '" . (int)$languages_id . "'");
     $reviews = tep_db_fetch_array($reviews_query);

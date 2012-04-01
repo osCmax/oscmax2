@@ -139,7 +139,7 @@ $Id$
                 }
                                 
                 if (isset($_GET['search'])) { 
-                  $search_string = " and ((pd.products_name like '%" . tep_db_prepare_input($_GET['search']) . "%') or (p.products_model like '%" . tep_db_prepare_input($_GET['search']) . "%'))"; 
+                  $search_string = " and ((pd.products_name like '%" . tep_db_prepare_input(addslashes($_GET['search'])) . "%') or (p.products_model like '%" . tep_db_prepare_input(addslashes($_GET['search'])) . "%'))";
                 } else { 
                   $search_string = "";
                 }
@@ -302,7 +302,7 @@ $Id$
 		    } // end while ($xsell = tep_db_fetch_array($xsell_query))
             $num_xsell = tep_db_num_rows($xsell_query);
 		    if (isset($_GET['search_add_xsell'])) {
-		      $products_query_raw = 'select distinct p.products_id, p.products_image, p.products_model, p.products_price, pd.products_name from '.TABLE_PRODUCTS.' p, '.TABLE_PRODUCTS_DESCRIPTION.' pd where p.products_id = pd.products_id and ((pd.products_name like "%' . tep_db_prepare_input($_GET['search_add_xsell']) . '%") or (p.products_model like "%' . tep_db_prepare_input($_GET['search_add_xsell']) . '%")) and pd.language_id = "'.(int)$languages_id.'" group by p.products_id order by pd.products_name asc';
+		      $products_query_raw = 'select distinct p.products_id, p.products_image, p.products_model, p.products_price, pd.products_name from '.TABLE_PRODUCTS.' p, '.TABLE_PRODUCTS_DESCRIPTION.' pd where p.products_id = pd.products_id and ((pd.products_name like "%' . tep_db_prepare_input(addslashes($_GET['search_add_xsell'])) . '%") or (p.products_model like "%' . tep_db_prepare_input(addslashes($_GET['search_add_xsell'])) . '%")) and pd.language_id = "'.(int)$languages_id.'" group by p.products_id order by pd.products_name asc';
 		    } else {
 		      $products_query_raw = 'select distinct p.products_id, p.products_image, p.products_model, pd.products_name, p.products_price from '.TABLE_PRODUCTS.' p, '.TABLE_PRODUCTS_DESCRIPTION.' pd where p.products_id = pd.products_id and pd.language_id = "'.(int)$languages_id.'" group by p.products_id order by pd.products_name asc';
 		    } // end if (isset($_GET['search']))
@@ -408,8 +408,8 @@ $Id$
               
 						<?php
 				        if (isset($_GET['search_new_xsell'])) { // A Sub-Search is used
-						  $search = tep_db_prepare_input($_GET['search_new_xsell']);
-						  $products_query_raw = "select distinct p.products_id, p.products_model, p.products_image, pd.products_name, p.products_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and p.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and ((pd.products_name like '%" . tep_db_prepare_input($search) . "%') or (p.products_model like '%" . tep_db_prepare_input($search) . "%')) " . $search_string . $category_filter . $list_string . " order by p.products_model";
+						  $search = tep_db_prepare_input(addslashes($_GET['search_new_xsell']));
+						  $products_query_raw = "select distinct p.products_id, p.products_model, p.products_image, pd.products_name, p.products_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and p.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and ((pd.products_name like '%" . tep_db_prepare_input(addslashes($search)) . "%') or (p.products_model like '%" . tep_db_prepare_input(addslashes($search)) . "%')) " . tep_db_prepare_input(addslashes($search_string)) . $category_filter . $list_string . " order by p.products_model";
 						} else {
                           $products_query_raw = 'select distinct p.products_id, p.products_model, pd.products_name, p.products_id, p.products_image from ' . TABLE_PRODUCTS . ' p, ' . TABLE_PRODUCTS_DESCRIPTION . ' pd, ' . TABLE_PRODUCTS_TO_CATEGORIES . ' p2c where p.products_id = pd.products_id ' . $search_string . ' and pd.language_id = "'.(int)$languages_id.'" and p.products_id = p2c.products_id ' . $category_filter . $list_string . ' group by p.products_id order by p.products_id asc';
 				        }
@@ -482,7 +482,7 @@ $Id$
               <?php
 				if (isset($_GET['search_edit_xsell'])) {
 		          $search = tep_db_prepare_input($_GET['search_edit_xsell']);
-				  $products_query_raw = 'select distinct p.products_id, p.products_model, pd.products_name, p.products_image, p.products_price, p.products_tax_class_id, p.products_id from '.TABLE_PRODUCTS.' p, ' . TABLE_PRODUCTS_DESCRIPTION . ' pd, ' . TABLE_PRODUCTS_XSELL . ' x, ' . TABLE_PRODUCTS_TO_CATEGORIES . ' p2c where p.products_id = x.products_id and p.products_id = p2c.products_id and p.products_id = pd.products_id and ((pd.products_name like "%' . tep_db_prepare_input($search) . '%") or (p.products_model like "%' . tep_db_prepare_input($search) . '%")) and pd.language_id = "' . (int)$languages_id . '" ' . $list_string_ex . ' group by p.products_id order by pd.products_name asc';
+				  $products_query_raw = 'select distinct p.products_id, p.products_model, pd.products_name, p.products_image, p.products_price, p.products_tax_class_id, p.products_id from '.TABLE_PRODUCTS.' p, ' . TABLE_PRODUCTS_DESCRIPTION . ' pd, ' . TABLE_PRODUCTS_XSELL . ' x, ' . TABLE_PRODUCTS_TO_CATEGORIES . ' p2c where p.products_id = x.products_id and p.products_id = p2c.products_id and p.products_id = pd.products_id and ((pd.products_name like "%' . tep_db_prepare_input(addslashes($search)) . '%") or (p.products_model like "%' . tep_db_prepare_input(addslashes($search)) . '%")) and pd.language_id = "' . (int)$languages_id . '" ' . $list_string_ex . ' group by p.products_id order by pd.products_name asc';
 				} else { 
 		          $products_query_raw = 'select distinct p.products_id, p.products_model, pd.products_name, p.products_image, p.products_price, p.products_tax_class_id, p.products_id from '.TABLE_PRODUCTS.' p, ' . TABLE_PRODUCTS_DESCRIPTION . ' pd, ' . TABLE_PRODUCTS_XSELL . ' x, ' . TABLE_PRODUCTS_TO_CATEGORIES . ' p2c where p.products_id = x.products_id and p.products_id = p2c.products_id and p.products_id = pd.products_id and pd.language_id = "' . (int)$languages_id . '" ' . $list_string_ex . ' group by p.products_id order by pd.products_name asc';
 				} // end if (isset($_GET['search_edit_xsell']))

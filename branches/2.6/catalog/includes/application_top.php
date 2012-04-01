@@ -43,7 +43,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 
 // define the project version
-  define('PROJECT_VERSION', 'osCmax v2.5.0');
+  define('PROJECT_VERSION', 'osCmax v2.5.1');
 
 // some code to solve compatibility issues
   require(DIR_WS_FUNCTIONS . 'compatibility.php');
@@ -465,18 +465,18 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
     if (DISPLAY_CART == 'true') {
       $goto =  FILENAME_SHOPPING_CART;
 // LINE MOD: Ultimate SEO URLs v2.1 removed 'cName', 'pName'
-     $parameters = array('action', 'cPath', 'products_id', 'pid');
+     $parameters = array('action', 'cPath', 'products_id', 'pid', 'opts');
     } else {
       $goto = basename($PHP_SELF);
       if ($_GET['action'] == 'buy_now') {
 // LINE MOD: Ultimate SEO URLs v2.1 removed 'pName'
         if (isset($_GET['product_to_buy_id'])) {
-          $parameters = array('action', 'pid', 'products_to_but_id');
+          $parameters = array('action', 'pid', 'opts');
 		} else {
-          $parameters = array('action', 'pid', 'products_id');
+          $parameters = array('action', 'pid', 'products_id', 'opts');
 		}
       } else {
-        $parameters = array('action', 'pid');
+        $parameters = array('action', 'pid', 'opts');
       }
     }
     switch ($_GET['action']) {
@@ -527,13 +527,14 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
       case 'buy_now' :       
 	      if (isset($_GET['product_to_buy_id'])) {
             if (tep_has_product_attributes($_GET['product_to_buy_id'])) {
-              tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['product_to_buy_id']));
+              tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['product_to_buy_id'] . '&opts=1'));
             } else {
               $cart->add_cart($_GET['product_to_buy_id'], $cart->get_quantity($_GET['product_to_buy_id'])+1);
+			  tep_redirect(tep_href_link($goto, 'products_id=' . $_GET['products_id']));
             }
 		  } elseif (isset($_GET['products_id'])) {
             if (tep_has_product_attributes($_GET['products_id'])) {
-              tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id']));
+              tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id'] . '&opts=1'));
             } else {
               $cart->add_cart($_GET['products_id'], $cart->get_quantity($_GET['products_id'])+1);
             }
@@ -594,7 +595,7 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
                               break;
       case 'cust_order' :     if (tep_session_is_registered('customer_id') && isset($_GET['pid'])) {
                                 if (tep_has_product_attributes($_GET['pid'])) {
-                                  tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['pid']));
+                                  tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['pid'] . '&opts=1'));
                                 } else {
                                   $cart->add_cart($_GET['pid'], $cart->get_quantity($_GET['pid'])+1);
                                 }

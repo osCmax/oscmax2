@@ -14,7 +14,7 @@ define('TABLE_HEADING_NEW_PRODUCTS', 'New Products');
 define('TABLE_HEADING_UPCOMING_PRODUCTS', 'Upcoming Products');
 define('TABLE_HEADING_DATE_EXPECTED', 'Date Expected');
 // LINE ADDED: MOD - default specials
-define('TABLE_HEADING_DEFAULT_SPECIALS', 'Specials For %s');
+define('TABLE_HEADING_DEFAULT_SPECIALS', 'Specials');
 define('TABLE_HEADING_DEFAULT_ARTICLES', 'Articles');
 
   define('TABLE_HEADING_IMAGE', '');

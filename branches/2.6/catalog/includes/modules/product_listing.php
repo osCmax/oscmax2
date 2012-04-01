@@ -56,10 +56,6 @@ $get_vars = '';
       }
     }
 
-// BOF QPBPP for SPPC
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PRODUCT_LISTING);
-// EOF QPBPP for SPPC
-
 // set gridlist session variable to list
 $_SESSION['gridlist'] = 'list';
 
@@ -403,9 +399,9 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
             // end extra product fields
             $lc_align = '';
             if (isset($_GET['manufacturers_id'])) {
-              $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $_GET['manufacturers_id'] . '&products_id=' . $listing[$x]['products_id']) . '"><b>' . $listing[$x]['products_name'] . '</b>' . $short /*begin epf*/ . $extra /*end epf*/ . '</a>';
+              $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $_GET['manufacturers_id'] . '&products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] . $short /*begin epf*/ . $extra /*end epf*/ . '</a>';
             } else {
-              $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing[$x]['products_id']) . '"><b>' . $listing[$x]['products_name'] . '</b>' . $short /*begin epf*/ . $extra /*end epf*/ . '</a>&nbsp;';
+              $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] . $short /*begin epf*/ . $extra /*end epf*/ . '</a>&nbsp;';
             }
             break;
           case 'PRODUCT_LIST_MANUFACTURER':
@@ -436,13 +432,7 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
             break;
           case 'PRODUCT_LIST_BUY_NOW':
             $lc_align = 'center';
-			if ($pf->getPrice() == CALL_FOR_PRICE_VALUE){ //fix for call for price
-			  $lc_text = '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $listing[$x]['products_model']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $listing[$x]['products_name']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $listing[$x]['products_id'] . '%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP) . '</a>';
-			} elseif ($listing[$x]['products_quantity'] < 1 && STOCK_IMAGE_SWITCH == 'true') {
-			  $lc_text = tep_image_submit('button_out_of_stock.gif', IMAGE_OUT_OF_STOCK);
-			} else {
-              $lc_text = '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $listing[$x]['products_id']) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a>&nbsp;';
-			}
+			$lc_text = $pf->getProductButtons($listing[$x]['products_id'], basename($PHP_SELF), $listing[$x]['products_model'], $listing[$x]['products_name']);
             break;
 // EOF: MOD - Separate Pricing per Customer - Added on may lines [$x]
         }

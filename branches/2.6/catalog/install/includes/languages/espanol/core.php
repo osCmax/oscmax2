@@ -89,7 +89,6 @@ define('TEXT_ADMIN_NO_PERMISSION', 'No se ha podido obtener el permiso de ficher
 define('TEXT_NO_CONFIG_PERMISSIONS', 'El instalador no puede crar tus ficheros configure.php. <br/> Los permisos son incorrectos en varios directorios.');
 define('TEXT_NO_CONFIG_PERMISSIONS_DESC', ' Es necesario que cambies los permisos a 755 o 777 en los siguientes directorios. <br />Una vez hecho esto, carga de nuevo esta página y podrás continuar con la instalación. Si todavía ves este error tras cambiar los permisos y refrescar la página, lee la documentación para una <a href="http://wiki.oscdox.com/v2.5/installation_troubleshooting" target="_blank">Resolución de problemas</a> en profundidad. <br><br>Cambia los permisos a 755 o 777 (consejo, prueba primero con 755. Si no funciona, prueba con 777) en los siguientes directorios:<br><br>');
 
-
 // Finished
 define('TEXT_FINISHED', '<h1>Instalación completada</h1><p>¡Enhorabuena por instalar y configurar osCmax como tu solución de tienda online!</p><p>Te deseamos todo lo mejor para el éxito de tu tienda online y te damos la bienvenida para que te unas y participes en nuestra comunidad.</p><p align="right"><i><b>- El equipo de osCmax</b></i></p>');
 define('TEXT_ADMIN_RENAMED_1', '¡Felicidades! La carpeta admin se ha renombrado como ');

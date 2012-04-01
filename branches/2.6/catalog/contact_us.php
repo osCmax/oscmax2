@@ -96,9 +96,9 @@ if (RECAPTCHA_ON == 'true') {
 
     if ($error == false) {
 	  if ($source == 'affiliate') {
-		tep_mail(STORE_OWNER, AFFILIATE_EMAIL_ADDRESS, $reason . ': ' . EMAIL_SUBJECT, $enquiry, $name, $email_address);
+		tep_mail(STORE_OWNER, AFFILIATE_EMAIL_ADDRESS, $reason . ': ' . sprintf(EMAIL_SUBJECT, $name), $enquiry, $name, $email_address);
 	  } else {
-        tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, $reason . ': ' . EMAIL_SUBJECT, $enquiry, $name, $email_address);
+        tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, $reason . ': ' . sprintf(EMAIL_SUBJECT, $name), $enquiry, $name, $email_address);
 	  }
       tep_redirect(tep_href_link(FILENAME_CONTACT_US, 'action=success'));
 // EOF: Remove blank emails

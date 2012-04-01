@@ -93,7 +93,7 @@ if (isset($product_info_values) && is_object($product_info_values)) {
 				</li>
 <?php
                 // Now lets generate an image string for Slimbox to open
-				$sb_string .= '["' . $image_lg . '", "' . $product_info['products_name'] . '"],';
+				$sb_string .= '["' . $image_lg . '", "' . htmlspecialchars($product_info['products_name']) . '"],';
 				$sb_image_string .= ', ' . $image_lg;
 				
 			} else {

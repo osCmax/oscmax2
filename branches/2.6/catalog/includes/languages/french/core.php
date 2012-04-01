@@ -160,7 +160,7 @@ define('CATEGORY_OPTIONS', 'Options');
 define('CATEGORY_PASSWORD', 'Votre mot de passe');
 
 define('ENTRY_COMPANY', 'Soci&eacute;t&eacute;:');
-define('ENTRY_COMPANY_ERROR', 'Â <small><font color="#FF0000">min ' . ENTRY_COMPANY_LENGTH . ' caract&egrave;res</font></small>');
+define('ENTRY_COMPANY_ERROR', 'Â <small><span class="notice">min ' . ENTRY_COMPANY_LENGTH . ' caract&egrave;res</span></small>');
 define('ENTRY_COMPANY_TEXT', 'Â <small><font color="#0000bb">requis</font></small>');
 // BOF: MOD - Separate Pricing Per Customer
 define('ENTRY_COMPANY_TAX_ID', 'Num&eacute;ro de TVA intracom.:');
@@ -436,5 +436,16 @@ define('TEXT_SPECIALS', 'Specials');
 define('BOX_TEXT_REMOVE','Supprimer');
 
 define('TEXT_MISSING_IMAGE','Désolé, l\'image du produit n\'est pas disponible actuellement');
+
+// BOF qpbpp
+define('TEXT_PRICE_BREAKS','De');
+define('TEXT_ON_SALE','Disponibles à la vente');
+// EOF qpbpp
+
+// BOF Show tax and Shipping near price
+define('TAX_RATE_NEAR_PRICE_INC', 'Inc Tax of ');
+define('TAX_RATE_NEAR_PRICE_EX', 'Ex Tax of ');
+define('TEXT_SHIPPING_NEAR_PRICE', 'Shipping');
+// EOF Show tax and Shipping near price
 
 ?>

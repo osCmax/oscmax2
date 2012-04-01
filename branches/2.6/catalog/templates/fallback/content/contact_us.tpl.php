@@ -145,7 +145,7 @@ $Id$
                 <td class="smallText"><?php echo EMAIL_US; ?></td>
               </tr>
 			  <tr>
-                <td class="smallText"><?php echo EMAIL_FROM; ?><br><br></td>
+                <td class="smallText"><a href="mailto:<?php echo EMAIL_FROM; ?>"><?php echo EMAIL_FROM; ?></a><br><br></td>
               </tr>
 			<?php } ?>
 			<?php if (SHOW_MAILING_ADDRESS == 'true') { ?>

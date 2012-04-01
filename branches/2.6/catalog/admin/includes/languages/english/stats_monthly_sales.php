@@ -41,6 +41,7 @@ define('TABLE_HEADING_NONTAXED', 'Exempt<br> sales');
 define('TABLE_HEADING_TAXED', 'Taxable<br> sales');
 define('TABLE_HEADING_TAX_COLL', 'Taxes<br> collected');
 define('TABLE_HEADING_SHIPHNDL', 'Shipping<br> &amp; Handling');
+define('TABLE_HEADING_SHIP_TAX', 'Tax on<br /> shipping');
 define('TABLE_HEADING_LOWORDER', 'Low Order<br> Fees');
 define('TABLE_HEADING_OTHER', 'Gift<br> Vouchers');  // could be any other extra class value
 define('TABLE_FOOTER_YTD','YTD');

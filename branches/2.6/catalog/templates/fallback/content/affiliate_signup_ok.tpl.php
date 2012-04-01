@@ -18,7 +18,7 @@ $Id$
     <td class="productinfo_header">
       <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
-          <td valign="top" class="main"><div align="center" class="pageHeading"><?php echo HEADING_TITLE; ?></div><br><?php echo TEXT_ACCOUNT_CREATED; ?></td>
+          <td valign="top" class="main"><div align="center" class="pageHeading"><?php echo HEADING_TITLE; ?></div><br><?php echo TEXT_ACCOUNT_CREATED . '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'source=affiliate&amp;enquiry=' . TEXT_AFFILIATE_CONTACT_TEXT) . '">' . TEXT_CONTACT_US; ?>.</a></td>
         </tr>
       </table>
     </td>

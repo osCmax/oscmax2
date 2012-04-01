@@ -233,13 +233,14 @@ $Id$
                              'entry_zone_id' => $shipping_address['entry_zone_id']);
       }
 //BOF indvship 4.5
-      if($shipping['id']==indvship_indvship){
+      if($shipping['id']=='indvship_indvship'){
         $shipping_cost = $shipping['cost'];
         $shipping_title = $shipping['title'];
       } else {
         $shipping_cost = $shipping['cost'] + $shipping['invcost'];
         if ($shipping['invcost'] > 0) {
-          $shipping_title = $shipping['title']. ' Plus Flat Rate Shipping';
+		  $iship_cost = $currencies->format($shipping['invcost']);
+          $shipping_title = $shipping['title']. " (included $iship_cost individual products shipping)";
         } else {
           $shipping_title = $shipping['title'];
         }

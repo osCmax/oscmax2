@@ -673,5 +673,6 @@ define('TEXT_FORUM', 'Forum');
 define('TEXT_WIKI', 'Wiki Hilfe');
 define('TEXT_COPYRIGHT', 'Copyright');
 
-
+define('ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Cacheverzeichnis ist nicht vorhanden. Bitte setzen Sie die Einstellungen in Konfiguration->Cache');
+define('ERROR_CACHE_DIRECTORY_NOT_WRITEABLE', 'Fehler: Das Cacheverzeichnis ist schreibgeschützt.');
 ?>

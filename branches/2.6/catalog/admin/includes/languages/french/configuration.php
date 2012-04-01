@@ -64,6 +64,13 @@ define('CT_NEW_SIGNUP_DISCOUNT_COUPON', 'Welcome Discount Coupon Code');
 define('CD_NEW_SIGNUP_DISCOUNT_COUPON', 'Welcome Discount Coupon Code: if you do not want to send a coupon in your create account email leave blank else place the coupon code you wish to use');
 define('CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Welcome Gift Voucher Amount');
 define('CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Welcome Gift Voucher Amount: If you do not wish to send a Gift Voucher in your create account email put 0 for no amount else if you do place the amount here i.e. 10.00 or 50.00 no currency signs');
+define('CT_SHOW_TAX_RATE_NEAR_PRICE', 'Display tax rate near price?');
+define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'Some countries require you to show the tax rate included near where the price is displayed.');
+define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Display link to shipping charges near the price?');
+define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Some countries require you to display a link to your shipping charges near the price.  Requires <b>Display tax rate near price</b> to be enabled.');
+define('CT_CATEGORY_DROPDOWN_SWITCH', 'Disable Category Dropdown List in Admin?');
+define('CD_CATEGORY_DROPDOWN_SWITCH', 'This option enables or disables the dropdown list of categories on the Products/Categories entry page in your admin panel. In stores with more than a few hundred categories, this should be set to True to speed up page rendering.');
+
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'First Name');
@@ -356,6 +363,8 @@ define('CT_PRODUCT_REVIEWS_ENABLE', 'Enable customer product reviews?');
 define('CD_PRODUCT_REVIEWS_ENABLE', 'Do you want to allow customers to write product reviews?');
 define('CT_PRODUCT_SHORT_DESCRIPTION', 'Display Short Description');
 define('CD_PRODUCT_SHORT_DESCRIPTION', 'Do you want to display the short description in the list results?');
+define('CT_PRODUCT_LIST_DATE_ADDED', 'Display product added/expected date');
+define('CD_PRODUCT_LIST_DATE_ADDED', 'Would you like to show the product added or product expected date on the product page?');
 
 // Configuration ID: 9 - Stock
 define('CT_STOCK_CHECK', 'Check stock level');
@@ -619,7 +628,7 @@ define('CD_SLIMBOX_COUNTER', 'Customize the text which appears when multiple ima
 define('CT_CLOUDZOOM_WIDTH', 'Image Zoomer Width');
 define('CD_CLOUDZOOM_WIDTH', 'The width of the zoom window in pixels. If <b>auto</b> is specified, the width will be the same as the small image.');
 define('CT_CLOUDZOOM_HEIGHT', 'Image Zoomer Height');
-define('CD_CLOUDZOOM_HEIGHT', 'The width of the zoom window in pixels. If <b>auto</b> is specified, the width will be the same as the small image.');
+define('CD_CLOUDZOOM_HEIGHT', 'The height of the zoom window in pixels. If <b>auto</b> is specified, the height will be the same as the small image.');
 define('CT_CLOUDZOOM_POSITION', 'Image Zoomer Position');
 define('CD_CLOUDZOOM_POSITION', 'Specifies the position of the zoom window relative to the small image. Allowable values are <b>left, right, top, bottom, inside</b> or you can specifiy the id of an html element to place the zoom window in e.g. position: <b>element1 right</b>');
 define('CT_CLOUDZOOM_ADJUSTX', 'X Axis Adjustment');

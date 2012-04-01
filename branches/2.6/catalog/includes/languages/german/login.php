@@ -26,7 +26,7 @@ define('TEXT_RETURNING_CUSTOMER', 'Ich bin bereits Kunde.');
 define('TEXT_PASSWORD_FORGOTTEN', 'Passwort vergessen? Hier klicken.');
 
 define('TEXT_LOGIN_ERROR', 'Fehler: Die E-Mail-Adresse und/oder das Passwort sind nicht korrekt.');
-define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>Hinweis:</b></font> Der Inhalt Ihres Warenkorbes bleibt erhalten, wenn Sie sich anmelden.');
+define('TEXT_VISITORS_CART', '<span class="notice"><b>Hinweis:</b></span> Der Inhalt Ihres Warenkorbes bleibt erhalten, wenn Sie sich anmelden.');
 
 // LINE ADDED: MOD - Separate Pricing Per Customer
 // define the email address that can change customer_group_id on login

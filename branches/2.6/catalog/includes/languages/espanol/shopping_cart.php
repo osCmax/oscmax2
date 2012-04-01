@@ -16,6 +16,7 @@ define('HEADING_TITLE', '¿Que hay en mi carrito?');
 define('HEADING_TITLE_BASKET', '¿Que hay en mi cesta?');
 define('TABLE_HEADING_REMOVE', 'Quitar');
 define('TABLE_HEADING_QUANTITY', 'Cantidad');
+define('TABLE_HEADING_PRICE', 'Precio');
 define('TABLE_HEADING_MODEL', 'Modelo');
 define('TABLE_HEADING_PRODUCTS', 'Producto(s)');
 define('TABLE_HEADING_TOTAL', 'Total');

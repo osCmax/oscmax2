@@ -28,7 +28,7 @@ $Id$
   $box_id = $box_base_name . 'Box';  // for CSS styling paulm (editted BTSv1.2)
   
   $boxContent = tep_draw_form('quick_find', tep_href_link(FILENAME_ADVANCED_SEARCH_RESULT, '', 'NONSSL', false), 'get');
-  $boxContent .= tep_draw_hidden_field('search_in_description','1') . tep_draw_input_field('keywords', '', 'id="txtSearch"  size="10" maxlength="30" style="width: ' . ($box_width-30) . 'px"') . '&nbsp;' . tep_hide_session_id() . tep_image_submit('button_quick_find.gif', BOX_HEADING_SEARCH) . '<br>' . BOX_SEARCH_TEXT . '<br><a href="' . tep_href_link(FILENAME_ADVANCED_SEARCH) . '"><b>' . BOX_SEARCH_ADVANCED_SEARCH . '</b></a>';
+  $boxContent .= tep_draw_hidden_field('search_in_description','1') . tep_draw_input_field('keywords', '', 'id="txtSearch"  size="10" maxlength="30" style="width: ' . ($box_width-40) . 'px"') . '&nbsp;' . tep_hide_session_id() . tep_image_submit('button_quick_find.gif', BOX_HEADING_SEARCH) . '<br>' . BOX_SEARCH_TEXT . '<br><a href="' . tep_href_link(FILENAME_ADVANCED_SEARCH) . '"><b>' . BOX_SEARCH_ADVANCED_SEARCH . '</b></a>';
   $boxContent .= '</form>' .
                   '<br><a href="' . tep_href_link(FILENAME_ADVANCED_SEARCH_RESULT, '&amp;pfrom=0&amp;pto=10000000', 'NONSSL') . '">' . BOX_INFORMATION_ALLPRODS . '</a><br>';
   include (bts_select('boxes', $box_base_name)); // BTS 1.5

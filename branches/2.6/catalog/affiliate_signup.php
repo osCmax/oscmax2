@@ -247,14 +247,14 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
       // build the message content
 	  $name = $a_firstname . ' ' . $a_lastname;    
 	  $email_text = sprintf(MAIL_GREET_NONE, $a_firstname);
-          $email_text .= MAIL_AFFILIATE_HEADER;
+      $email_text .= sprintf(MAIL_AFFILIATE_HEADER, STORE_NAME);
 	  $email_text .= sprintf(MAIL_AFFILIATE_ID, $affiliate_id);
 	  $email_text .= sprintf(MAIL_AFFILIATE_USERNAME, $a_email_address);
 	  $email_text .= sprintf(MAIL_AFFILIATE_PASSWORD, $a_password);
 	  $email_text .= sprintf(MAIL_AFFILIATE_LINK, HTTP_SERVER . DIR_WS_CATALOG . FILENAME_AFFILIATE) . "\n\n";
-	  $email_text .= MAIL_AFFILIATE_FOOTER;
+	  $email_text .= sprintf(MAIL_AFFILIATE_FOOTER, STORE_NAME, AFFILIATE_EMAIL_ADDRESS);
 
-      tep_mail($name, $a_email_address, MAIL_AFFILIATE_SUBJECT, $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+      tep_mail($name, $a_email_address, sprintf(MAIL_AFFILIATE_SUBJECT, STORE_NAME), $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
     
       tep_session_register('affiliate_id');
       $affiliate_email = $a_email_address;

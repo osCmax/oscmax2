@@ -73,7 +73,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 // LINE CHANGED: MOD - CREDIT CLASS Gift Voucher Contribution
 //  if ($order->content_type == 'virtual') {
 // LINE MODED: PGM: Added zero weight check for virtual products with attributes
-  if (($order->content_type == 'virtual') || ($order->content_type == 'virtual_weight') || $cart->show_weight() == 0 ) {
+  if (($order->content_type == 'virtual') || ($order->content_type == 'virtual_weight') || $cart->show_weight(true) == 0 ) {
     if (!tep_session_is_registered('shipping')) tep_session_register('shipping');
     $shipping = false;
     $sendto = false;
@@ -161,9 +161,9 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
               $shipping = array('id' => $shipping,
                                 'title' => (($free_shipping == true) ?  $quote[0]['methods'][0]['title'] : $quote[0]['module'] . ' (' . $quote[0]['methods'][0]['title'] . ')'),
 																// start indvship 4.5
-                                'cost' => $quote[0]['methods'][0]['cost']);
-                                //'cost' => $quote[0]['methods'][0]['cost'],
-                                //'invcost' => $shipping_modules->get_shiptotal());
+                                //'cost' => $quote[0]['methods'][0]['cost']);
+                                'cost' => $quote[0]['methods'][0]['cost'],
+                                'invcost' => $shipping_modules->get_shiptotal());
                                 // end indvship 4.5
 
 //---PayPal WPP Modification START ---//

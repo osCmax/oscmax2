@@ -19,7 +19,7 @@ function tep_admin_check_login() {
   } else {
     $filename = basename( $PHP_SELF );
     if ($filename != FILENAME_DEFAULT && $filename != FILENAME_FORBIDDEN && $filename != FILENAME_LOGOFF && $filename != FILENAME_ADMIN_ACCOUNT && $filename != FILENAME_POPUP_IMAGE && $filename != 'packingslip.php' && $filename != 'invoice.php') {
-      $db_file_query = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where FIND_IN_SET( '" . $login_groups_id . "', admin_groups_id) and admin_files_name = '" . $filename . "'");
+      $db_file_query = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where FIND_IN_SET( '" . tep_db_input($login_groups_id) . "', admin_groups_id) and admin_files_name = '" . tep_db_input($filename) . "'");
       if (!tep_db_num_rows($db_file_query)) {
         tep_redirect(tep_href_link(FILENAME_FORBIDDEN));
       }

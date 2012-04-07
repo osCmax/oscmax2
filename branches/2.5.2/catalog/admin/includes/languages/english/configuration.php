@@ -39,6 +39,10 @@ define('CD_EXPECTED_PRODUCTS_SORT', 'This is the sort order used in the expected
 define('CT_EXPECTED_PRODUCTS_FIELD', 'Expected Sort Field');
 define('CD_EXPECTED_PRODUCTS_FIELD', 'The column to sort by in the expected products box.');
 define('CT_USE_DEFAULT_LANGUAGE_CURRENCY', 'Switch To Default Language Currency');
+define('CT_FORCE_CATALOG_LANGUAGE', 'Do you want to force the catalog to use the default language?');
+define('CD_FORCE_CATALOG_LANGUAGE', 'If you set this to true then the catalog will be opened in the langauge set in Localization -> Languages -> Set as default.  If it is set to false then the system will detect the user\'s browser language and use that.');
+define('CT_FORCE_ADMIN_LANGUAGE', 'Do you want to force the admin panel to use the default language?');
+define('CD_FORCE_ADMIN_LANGUAGE', 'If you set this to true then the admin panel will be opened in the langauge set in Localization -> Languages -> Set as default.  If it is set to false then the system will detect the user\'s browser language and use that.');
 define('CD_USE_DEFAULT_LANGUAGE_CURRENCY', 'Automatically switch to the language\'s currency when it is changed');
 define('CT_ENGLISH_SWITCH', 'Use UK or US English Language');
 define('CD_ENGLISH_SWITCH', 'Would you like to setup your store using UK or US English. (Date format, Address Titles, DoB, etc.)');

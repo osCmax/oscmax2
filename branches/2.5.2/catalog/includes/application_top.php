@@ -299,7 +299,9 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
     if (isset($_GET['language']) && tep_not_null($_GET['language'])) {
       $lng->set_language($_GET['language']);
-    } else {
+    } elseif (FORCE_CATALOG_LANGUAGE == 'true') {
+	  $lng->set_language(DEFAULT_LANGUAGE);
+	} else {
       $lng->get_browser_language();
     }
 

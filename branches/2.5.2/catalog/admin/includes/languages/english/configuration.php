@@ -807,6 +807,11 @@ define('CT_RECAPTCHA_PUBLIC_KEY', 'Public Key');
 define('CD_RECAPTCHA_PUBLIC_KEY', 'Enter your reCaptcha Public Key');
 define('CT_RECAPTCHA_PRIVATE_KEY', 'Private Key');
 define('CD_RECAPTCHA_PRIVATE_KEY', 'Enter your reCaptcha Private Key');
+define('CT_RECAPTCHA_EMAIL_URL', 'Enter your reCaptcha email protection URL');
+define('CD_RECAPTCHA_EMAIL_URL', 'If you want to use the reCaptcha mailhide functionality then please enter the URL supplied for your chosen email address.  <u><a href="http://www.google.com/recaptcha/mailhide/" target="_blank"><br><br>You can get one of these from Google reCaptcha</a></u>.');
+define('CT_RECAPTCHA_EMAIL_FROM', 'Enter your disguised email address used in reCaptcha');
+define('CD_RECAPTCHA_EMAIL_FROM', 'Please enter a partial or disguised email address to be shown in your store.  For example: john...@email.com <br><br>Or enter <b>CLICK</b> to show the multi-lingual \'Click to reveal\' text');
+
 
 // Configuration ID: 88 - Price Breaks 
 define('CT_PRICE_BREAK_NOF_LEVELS', 'Maximum number of price break levels');

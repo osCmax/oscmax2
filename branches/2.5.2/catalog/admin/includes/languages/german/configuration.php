@@ -41,7 +41,7 @@ define('CD_EXPECTED_PRODUCTS_FIELD', 'Nach welchem Kriterium sollen die künftige
 define('CT_USE_DEFAULT_LANGUAGE_CURRENCY', 'Zur Standardwährung wechseln');
 define('CD_USE_DEFAULT_LANGUAGE_CURRENCY', 'Automatisch zur Standardwährung der jeweils ausgewählten Sprache wechseln.');
 define('CT_ENGLISH_SWITCH', 'Britisches oder US Englisch');
-define('CD_ENGLISH_SWITCH', 'Diese Einstellung wirkt sich nur bei Verwendung der englischen Sprache aus. (Datumsformat, Adressen, Format Geburtsdatum, usw.)');
+define('CD_ENGLISH_SWITCH', 'Diese Einstellung wirkt sich nur bei Verwendung der englischen Sprache aus. (Datumsformat, Adressen, Geburtsdatumsformat, usw.)');
 define('CT_SEND_EXTRA_ORDER_EMAILS_TO', 'Zusätzliche E-Mails senden an');
 define('CD_SEND_EXTRA_ORDER_EMAILS_TO', 'Zusätzliche E-Mails senden in diesem Format: Name 1 &lt;email@adresse1&gt;, Name 2 &lt;email@adresse2&gt;');
 define('CT_DISPLAY_CART', 'Warenkorb anzeigen, nachdem Produkt hinzugefügt wurde');
@@ -64,13 +64,12 @@ define('CT_NEW_SIGNUP_DISCOUNT_COUPON', 'Neukunden-Gutscheincode');
 define('CD_NEW_SIGNUP_DISCOUNT_COUPON', 'Neukunden-Gutscheincode: Wenn Sie keinen Gutschein mit den Bestätigungs-E-Mails für neu erstellte Konten versenden möchten, lassen Sie dieses Feld leer. Falls Sie Neukunden jedoch einen Gutschein zusenden möchten, legen Sie einen Gutscheincode fest.');
 define('CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Nettowert des Neukunden-Gutscheines');
 define('CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Nettowert des Neukunden-Gutscheines: Wenn Sie keinen Gutschein mit den Bestätigungs-E-Mails für neu erstellte Konten versenden möchten, tragen Sie hier 0 ein. Wenn Sie einen Gutschein versenden möchten, legen Sie hier den Nettowert fest. ACHTUNG: Verwenden Sie Punkt statt Komma und keine Währungsangaben, wie zB 10.00 oder 50.00.');
-define('CT_SHOW_TAX_RATE_NEAR_PRICE', 'Steuersatz bei anzeigen?');
+define('CT_SHOW_TAX_RATE_NEAR_PRICE', 'Steuersatz in Preisnähe anzeigen?');
 define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'In manchen Ländern muß der Steuersatz neben dem Preis angezeigt werden.');
-define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Link auf Versandkosten bei Preis anzeigen?');
+define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Link auf Versandkosten in Preisnähe anzeigen?');
 define('CD_SHOW_SHIPPING_NEAR_PRICE', 'In manchen Ländern muß ein Link auf die Versandkostenseite neben dem Preis angezeigt werden. Dazu muß zusätzlich <b>Steuersatz bei Preis anzeigen</b> aktiviert sein.');
-define('CT_CATEGORY_DROPDOWN_SWITCH', 'Disable Category Dropdown List in Admin?');
-define('CD_CATEGORY_DROPDOWN_SWITCH', 'This option enables or disables the dropdown list of categories on the Products/Categories entry page in your admin panel. In stores with more than a few hundred categories, this should be set to True to speed up page rendering.');
-
+define('CT_CATEGORY_DROPDOWN_SWITCH', 'Dropdown-Kategorieliste im Admin deaktivieren?');
+define('CD_CATEGORY_DROPDOWN_SWITCH', 'Diese Option aktiviert bzw. deaktiviert die Dropdown-Kategorieliste auf der Produkt/Kategoriestartseite im Adminpanel. In Shops mit mehr als ein paar hundert Kategorien sollte die Einstellung True lauten, um den Seitenaufbau zu beschleunigen.');
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Vorname');
@@ -367,15 +366,15 @@ define('CT_ATTRIBUTE_PRICE_DISPLAY', 'Attributpreis Anzeigemethode');
 define('CD_ATTRIBUTE_PRICE_DISPLAY', 'Möchten Sie die Attributpreise als tatsächlichen Attributpreis (zB. +2,00 €) oder als Summe aus Produktpreis und Attributpreis (zB. 25,00 €) anzeigen?');
 define('CT_PRODUCT_LIST_BESTSELLER', 'Bestseller in Filterbox anzeigen');
 define('CD_PRODUCT_LIST_BESTSELLER', 'Möchten Sie Bestseller als Sortieroption anbieten?');
-define('CT_PRODUCT_LIST_DATE_ADDED', 'Display product added/expected date');
-define('CD_PRODUCT_LIST_DATE_ADDED', 'Would you like to show the product added or product expected date on the product page?');
+define('CT_PRODUCT_LIST_DATE_ADDED', 'Anzeigen, seit wann/ab wann ein Produkt gelisted/lagernd ist');
+define('CD_PRODUCT_LIST_DATE_ADDED', 'Möchten Sie auf der Produktseite angeben, seit wann ein Produkt in Ihrem Shop gelistet wurde bzw. ab wann ein Produkt lagernd sein wird?');
 
 // Configuration ID: 9 - Stock
 define('CT_STOCK_CHECK', 'Lagerstand prüfen');
 define('CD_STOCK_CHECK', 'Möchten Sie die Verfügbarkeit Ihrer Produkte prüfen lassen?');
 define('CT_STOCK_LIMITED', 'Lagerbuchung');
-define('CD_STOCK_LIMITED', 'Möchten Sie den Lagerstand bei Bestellungen aktualisieren?');
-define('CT_STOCK_ALLOW_CHECKOUT', 'Abschließen einer Bestellung zulassen');
+define('CD_STOCK_LIMITED', 'Möchten Sie den Lagerstand bei einer Bestellung aktualisieren?');
+define('CT_STOCK_ALLOW_CHECKOUT', 'Abschließen einer Bestellung erlauben');
 define('CD_STOCK_ALLOW_CHECKOUT', 'Möchten Sie Ihren Kunden erlauben, eine Bestellung trotz zu geringem Lagerstand abzuschließen?');
 define('CT_STOCK_MARK_PRODUCT_OUT_OF_STOCK', 'Produkt als Nicht Lagernd markieren');
 define('CD_STOCK_MARK_PRODUCT_OUT_OF_STOCK', 'Möchten Sie einen Hinweis ausgeben, wenn der Lagerstand eines Produktes für eine Bestellung nicht ausreichend ist?');
@@ -387,7 +386,6 @@ define('CT_STOCK_IMAGE_SWITCH', 'Button "In den Warenkorb" umschalten?');
 define('CD_STOCK_IMAGE_SWITCH', 'Button "In den Warenkorb" in "Nicht lagernd" ändern, falls das Produkt nicht lagernd ist.');
 define('CT_STOCK_SET_INACTIVE', 'Nicht lagernde Produkte während des Bezahlvorganges deaktivieren');
 define('CD_STOCK_SET_INACTIVE', 'Produkte werden automatisch inaktiv, falls der Lagerstand während des Bezahlvorganges unter 1 fällt.');
-
 
 // Configuration ID: 10 - Logging
 define('CT_STORE_PAGE_PARSE_TIME', 'Store Page Parse Time');
@@ -672,8 +670,8 @@ define('CT_PRODINFO_ATTRIBUTE_PLUGIN', 'Produkt Info Attribut Display Plugin');
 define('CD_PRODINFO_ATTRIBUTE_PLUGIN', 'Das Plugin zeigt Attribute auf der Produktinformationsseite an.');
 
 // Configuration ID: 55 - Page Cache Settings
-define('CT_ENABLE_PAGE_CACHE', 'Enable Page Cache');
-define('CD_ENABLE_PAGE_CACHE', 'Enable the page cache features to reduce server load and faster page renders?<br><br>Contribution by: <b>Chemo</b>');
+define('CT_ENABLE_PAGE_CACHE', 'Seiten-Cache aktivieren');
+define('CD_ENABLE_PAGE_CACHE', 'Möchten Sie den Seiten-Cache aktivieren, um den Server weniger zu belasten und Seiten schneller auszuliefern?<br><br>Contribution by: <b>Chemo</b>');
 define('CT_PAGE_CACHE_LIFETIME', 'Cache Lifetime');
 define('CD_PAGE_CACHE_LIFETIME', 'How long to cache the pages (in minutes) ?<br><br>Contribution by: <b>Chemo</b>');
 define('CT_PAGE_CACHE_DEBUG_MODE', 'Turn on Debug Mode?');
@@ -962,28 +960,28 @@ define('CT_LEFT_COLUMN_SHOW', 'Linke Spalte anzeigen/ausblenden');
 define('CD_LEFT_COLUMN_SHOW', 'Möchten Sie die linke Spalte in Ihren Template anzeigen?');
 define('CT_RIGHT_COLUMN_SHOW', 'Rechte Spalte anzeigen/ausblenden');
 define('CD_RIGHT_COLUMN_SHOW', 'Möchten Sie die rechte Spalte in Ihren Template anzeigen?');
-define('CT_TEMPLATE_SWITCHING_ALLOWED', 'Templateumschaltung zulassen');
-define('CD_TEMPLATE_SWITCHING_ALLOWED', 'Allow template switching through the url (for easy new template testing).  <br><br>Simply switch template by appending <b>?tplDir=compromise</b> to your catalog index page.');
+define('CT_TEMPLATE_SWITCHING_ALLOWED', 'Templatewechsel zulassen');
+define('CD_TEMPLATE_SWITCHING_ALLOWED', 'Templatewechsel via URL zulassen (für das vereinfachte Testen von neuen Templates).<br><br>Wechseln Sie das Template einfach durch das Anhängen von <b>?tplDir=compromise</b> an Ihre catalog index Seite.');
 define('CT_DIR_WS_TEMPLATES_DEFAULT', 'Standardmäßiges Templateverzeichnis');
 define('CD_DIR_WS_TEMPLATES_DEFAULT', 'Unterverzeichnis (in templates/), das die standardmäßigen Templatedateien beinhaltet.');
 define('CT_TEMPLATE_SWITCHING_MENU', 'Template Switching Menu Display');
 define('CD_TEMPLATE_SWITCHING_MENU', 'Do you want to display a list of all the templates available in your store to allow people to switch easily? (Templates starting with an _ will not display).');
-define('CT_AJAX_SEARCH_SUGGEST', 'Do you want to use an AJAX search suggest on the Search Infobox?');
-define('CD_AJAX_SEARCH_SUGGEST', 'Would you like to use an AJAX Search Suggest?');
-define('CT_USE_XSELL_HORIZ_SCROLLER', 'Do you want to use a scroller in Cross Sell module on product info?');
-define('CD_USE_XSELL_HORIZ_SCROLLER', 'Would you like to use a scroller on the Cross Sell infobox?');
-define('CT_USE_AP_HORIZ_SCROLLER', 'Do you want to use a scroller in Also Purchased module on product info?');
-define('CD_USE_AP_HORIZ_SCROLLER', 'Would you like to use a scroller on the Also Purchased infobox?');
+define('CT_AJAX_SEARCH_SUGGEST', 'AJAX-Suchvorschläge in der Such-Infobox verwenden?');
+define('CD_AJAX_SEARCH_SUGGEST', 'Möchten Sie AJAX-Suchvorschläge in der Such-Infobox verwenden?');
+define('CT_USE_XSELL_HORIZ_SCROLLER', 'Scroller im Cross-Sell-Modul auf der Produktinfo-Seite verwenden?');
+define('CD_USE_XSELL_HORIZ_SCROLLER', 'Möchten Sie einen Scroller im Cross-Sell-Modul auf der Produkteinfo-Seite verwenden?');
+define('CT_USE_AP_HORIZ_SCROLLER', 'Scroller im "Kauften-auch-Modul auf der Produktinfo-Seite verwenden?');
+define('CD_USE_AP_HORIZ_SCROLLER', 'Möchten Sie einen Scroller im "Kauften-auch-Modul auf der Produktinfo-Seite verwenden?');
 define('CT_DEFINE_AFFILIATE_INFO_INFO_NO', 'Affiliate Info Information Manager Info Number');
 define('CD_DEFINE_AFFILIATE_INFO_INFO_NO', 'What number is the Affiliate Info in the Information Manager? (Default: 15)');
 define('CT_DEFINE_MAINPAGE_TEXT_INFO_NO', 'Main Page Text Information Manager Info Number');
 define('CD_DEFINE_MAINPAGE_TEXT_INFO_NO', 'What number is the Main Page in the Information Manager? (Default: 13)');
 define('CT_BASKET_CART', 'Use Basket or Cart');
 define('CD_BASKET_CART', 'What do you want to call the thing your customers put their products in?');
-define('CT_SCROLLER_WIDTH', 'Scroller Width');
-define('CD_SCROLLER_WIDTH', 'What width should the horizontal scroller be in pixels? (Only enter the number)');
-define('CT_SCROLLER_HEIGHT', 'Scroller Height');
-define('CD_SCROLLER_HEIGHT', 'What height should the horizontal scroller be in pixels? (Only enter the number)');
+define('CT_SCROLLER_WIDTH', 'Scrollerbreite');
+define('CD_SCROLLER_WIDTH', 'Welche Breite in Pixel soll der horizontale Scroller haben? (Geben Sie nur die Zahl ein.)');
+define('CT_SCROLLER_HEIGHT', 'Scrollerhöhe');
+define('CD_SCROLLER_HEIGHT', 'Welche Höhe in Pixel soll der horizontale Scroller haben? (Geben Sie nur die Zahl ein.)');
 
 // Configuration ID: 203 - Notifications
 define('CT_MAT', 'AGB bei Kontoerstellung');
@@ -1099,6 +1097,19 @@ define('CD_SHOW_EMAIL_ADDRESS', 'Möchten Sie Ihre E-Mail-Adresse auf der Kontakt
 define('CT_SHOW_MAILING_ADDRESS', 'Postanschrift anzeigen');
 define('CD_SHOW_MAILING_ADDRESS', 'Möchten Sie Ihre Postanschrift auf der Kontaktseite anzeigen?');
 
+// Configuration ID: 208 - AddThis
+define('CT_ADD_THIS_ENABLED', 'AddThis aktivieren');
+define('CD_ADD_THIS_ENABLED', 'Möchten Sie das AddThis Modul aktivieren?');
+define('CT_ADD_THIS_CODE', 'AddThis Button Code');
+define('CD_ADD_THIS_CODE', 'Fügen Sie Ihren Button Code von der AddThis Webseite ein. Sie müssen den Button Code zwischen den divs einfügen.');
+define('CT_ADD_THIS_JAVASCRIPT', 'AddThis Javascript Code');
+define('CD_ADD_THIS_JAVASCRIPT', 'Fügen Sie den Javascript Code von der AddThis Webseite ein.');
+define('CT_ADD_THIS_ADDRESS_BAR', 'AddThis Address Bar Javascript Code');
+define('CD_ADD_THIS_ADDRESS_BAR', 'Fügen Sie den Address Bar Javascript Code von der AddThis Webseite einschließlich der script tags vorne und hinten ein.');
+define('CT_ADD_THIS_ARTICLES', 'AddThis auf Artikelseiten?');
+define('CD_ADD_THIS_ARTICLES', 'Möchten Sie die AddThis Buttons neben den Produktseiten auch auf den Artikelseiten anzeigen lassen?');
+
+
 // Configuration ID: 456 - Articles
 define('CT_DISPLAY_NEW_ARTICLES', 'Display New Articles Link');
 define('CD_DISPLAY_NEW_ARTICLES', 'Display a link to New Articles in the Articles box?');
@@ -1146,16 +1157,16 @@ define('CT_ARTICLE_WYSIWYG_ENABLE', 'Use WYSIWYG CKEditor?');
 define('CD_ARTICLE_WYSIWYG_ENABLE', 'Use WYSIWYG CKEditor in Articles and Topic/Author Descriptions?');
 
 // Configuration ID: 7575 - One Page Checkout
-define('CT_ONEPAGE_CHECKOUT_ENABLED', 'Enable One Page Checkout');
-define('CD_ONEPAGE_CHECKOUT_ENABLED', 'Enable one page checkout?');
+define('CT_ONEPAGE_CHECKOUT_ENABLED', 'One Page Checkout aktivieren');
+define('CD_ONEPAGE_CHECKOUT_ENABLED', 'Möchten Sie One Page Checkout aktiveren?');
 define('CT_ONEPAGE_DEFAULT_COUNTRY', 'Default Address Country');
 define('CD_ONEPAGE_DEFAULT_COUNTRY', 'Default country for new address and for checking out without account');
 define('CT_ONEPAGE_ACCOUNT_CREATE', 'Account Creation');
 define('CD_ONEPAGE_ACCOUNT_CREATE', '<b>required</b> - Password is required<br><b>optional</b> - Password is optional; no account created if empty<br><b>create</b> - Password is optional - account created with random password');
 define('CT_ONEPAGE_SHOW_CUSTOM_COLUMN', 'Show Custom Right Column');
 define('CD_ONEPAGE_SHOW_CUSTOM_COLUMN', 'Show custom right column');
-define('CT_ONEPAGE_LOGIN_REQUIRED', 'Require Login');
-define('CD_ONEPAGE_LOGIN_REQUIRED', 'Require customer to be logged in to proceed through checkout');
+define('CT_ONEPAGE_LOGIN_REQUIRED', 'Anmeldung erforderlich?');
+define('CD_ONEPAGE_LOGIN_REQUIRED', 'Kunden müssen sich während des Bestellvorganges anmelden.');
 define('CT_ONEPAGE_SHOW_OSC_COLUMNS', 'Show Oscommerce Columns');
 define('CD_ONEPAGE_SHOW_OSC_COLUMNS', 'Show default oscommerce left and right columns');
 define('CT_ONEPAGE_BOX_ONE_HEADING', 'Custom Colum Box #1 Heading');

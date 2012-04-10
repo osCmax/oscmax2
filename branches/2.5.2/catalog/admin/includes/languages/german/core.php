@@ -246,6 +246,7 @@ define('BOX_CONFIGURATION_RECAPTCHA', 'reCaptcha Formular');
 define('BOX_CONFIGURATION_NOTIFICATIONS', 'Benachrichtigungen');
 define('BOX_CONFIGURATION_SLIDESHOW', 'Diashow');
 define('BOX_CONFIGURATION_SLIDESHOW_SETTINGS', 'Diashoweinstellungen');
+define('BOX_CONFIGURATION_ADDTHIS', 'AddThis');
 
 define('BOX_CONFIGURATION_GOOGLE', 'Google');
 define('BOX_CONFIGURATION_GOOGLE_ANALYTICS', 'Google Analytics');
@@ -505,6 +506,7 @@ define('IMAGE_SUMMARY', 'Zusammenfassung');
 define('IMAGE_BROWSE', 'Browse');
 define('IMAGE_MISSING', 'Fehlend');
 define('IMAGE_ORPHANS', 'Verwaist');
+define('IMAGE_REGENERATE', 'Regenerieren');
 define('IMAGE_REGENERATE_ALL', 'Alle Bilder zu diesem Produkt regenerieren');
 define('IMAGE_REGENERATE_EVERYTHING', 'Alle Bilder regenerieren');
 define('IMAGE_MC_SYNC', 'Mit MailChimp synchronisieren');

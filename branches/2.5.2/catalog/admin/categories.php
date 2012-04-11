@@ -2047,7 +2047,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
           <table width="100%">
             <tr>
               <td class="main" valign="top" width="75%"><?php echo $pInfo->products_description; ?></td>
-              <td width="25%" align="center"><?php echo '<a href="' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image_name, $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?></td>
+              <td width="25%" align="center"><?php echo '<a href="' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image_name, $product_info['products_name'], SMALL_IMAGE_WIDTH, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?></td>
             </tr>
           </table>
         </td>
@@ -2712,7 +2712,7 @@ if (DISABLE_CATEGORY_DROPDOWN_SWITCH == 'false') {
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
             if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
 //            $contents[] = array('text' => '<br>' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
-            $contents[] = array('align' => 'center', 'text' => '<br>' . tep_info_image(CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
+            $contents[] = array('align' => 'center', 'text' => '<br>' . tep_info_image(CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH) . '<br>' . $cInfo->categories_image);
             $contents[] = array('text' => '<br>' . TEXT_SUBCATEGORIES . ' ' . $cInfo->childs_count . '<br>' . TEXT_PRODUCTS . ' ' . $cInfo->products_count);
 // BOF SPPC hide products and categories from groups
        $category_hidden_from_string = '';
@@ -2739,7 +2739,7 @@ if (DISABLE_CATEGORY_DROPDOWN_SWITCH == 'false') {
             if (tep_not_null($pInfo->products_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($pInfo->products_last_modified));
             if (date('Y-m-d') < $pInfo->products_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . tep_date_short($pInfo->products_date_available));
 // BOF: MoPics in Admin
-           $contents[] = array('text' => TEXT_THUMBNAIL_IMAGE . '<br /><br /><center><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /></center>');
+           $contents[] = array('text' => TEXT_THUMBNAIL_IMAGE . '<br /><br /><center><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" /></center>');
 // EOF: MoPics in Admin
 
 // BOF: MSRP

@@ -188,11 +188,11 @@ $Id$
 
       $info_box_contents = array();
       $info_box_contents[] = array(array('params' => 'class="contentBoxHeading"',
-                                         'text' => tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_left.png')),
+                                         'text' => tep_image(bts_select('images', 'infobox/top_left.png'))),
                                    array('params' => 'class="contentBoxHeading" width="100%"',
                                          'text' => $contents[0]['text']),
                                    array('params' => 'class="contentBoxHeading"',
-                                         'text' => tep_image(DIR_WS_TEMPLATES . 'images/infobox/top_right.png')));
+                                         'text' => tep_image(bts_select('images', 'infobox/top_right.png'))));
 
       $this->tableBox($info_box_contents, true);
     }

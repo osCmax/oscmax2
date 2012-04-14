@@ -18,7 +18,7 @@ define('HEADING_TITLE', 'Welcome, Please Sign In');
 
 define('HEADING_NEW_CUSTOMER', 'New Customer');
 define('TEXT_NEW_CUSTOMER', 'I am a new customer.');
-define('TEXT_NEW_CUSTOMER_INTRODUCTION', 'By creating an account at ' . STORE_NAME . ' you will be able to shop faster, be up to date on an orders status, and keep track of the orders you have previously made.');
+define('TEXT_NEW_CUSTOMER_INTRODUCTION', 'By creating an account at %s you will be able to shop faster, be up to date on an orders status, and keep track of the orders you have previously made.');
 
 define('HEADING_RETURNING_CUSTOMER', 'Returning Customer');
 define('TEXT_RETURNING_CUSTOMER', 'I am a returning customer.');

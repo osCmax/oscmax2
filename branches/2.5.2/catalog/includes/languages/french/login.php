@@ -15,7 +15,7 @@ define('HEADING_TITLE', 'Bienvenue, veuillez ouvrir une session');
 
 define('HEADING_NEW_CUSTOMER', 'Nouveau client');
 define('TEXT_NEW_CUSTOMER', 'Je suis un nouveau client.');
-define('TEXT_NEW_CUSTOMER_INTRODUCTION', 'En cr&eacute;ant votre compte sur ' . STORE_NAME . ' vous pourrez faire vos achats plus rapidements, garder votre panier d\'une visite &agrave; l\'autre et suivre vos commandes.');
+define('TEXT_NEW_CUSTOMER_INTRODUCTION', 'En cr&eacute;ant votre compte sur %s vous pourrez faire vos achats plus rapidements, garder votre panier d\'une visite &agrave; l\'autre et suivre vos commandes.');
 
 define('HEADING_RETURNING_CUSTOMER', 'Client enregistr&eacute;');
 define('TEXT_RETURNING_CUSTOMER', 'J\'ai d&eacute;j&agrave; command&eacute;.');

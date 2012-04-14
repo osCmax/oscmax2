@@ -26,7 +26,7 @@ $Id$
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>
               <tr>
-                <td class="main"><?php echo TEXT_ACCOUNT_CREATED; ?></td>
+                <td class="main"><?php echo TEXT_ACCOUNT_CREATED; ?><a href="<?php echo tep_href_link(FILENAME_CONTACT_US); ?>"><?php echo TEXT_STORE_OWNER; ?></a><?php echo TEXT_EMAIL_SENT; ?><a href="<?php echo tep_href_link(FILENAME_CONTACT_US); ?>"><?php echo TEXT_CONTACT_US; ?></a></td>
               </tr>
             </table></td>
           </tr>

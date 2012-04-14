@@ -23,14 +23,14 @@ define('TEXT_ORIGIN_LOGIN', '<span class="notice"><small><b>NOTA:</b></span></sm
 define('EMAIL_ACCOUNT_DETAILS', 'Detalles de la cuenta: ');
 define('EMAIL_ACCOUNT_USERNAME', 'Nombre de usuario: ');
 define('EMAIL_ACCOUNT_PASSWORD','Contraseña: ');
-define('EMAIL_SUBJECT', 'Bienvenido/a a ' . STORE_NAME);
-define('EMAIL_GREET_MR', 'Estimado Sr.' . stripslashes($_POST['lastname']) . ',' . "\n\n");
-define('EMAIL_GREET_MS', 'Estimada Sra.' . stripslashes($_POST['lastname']) . ',' . "\n\n");
-define('EMAIL_GREET_NONE', 'Estimado/a ' . stripslashes($_POST['firstname']) . ',' . "\n\n");
-define('EMAIL_WELCOME', 'Le damos la bienvenida a <b>' . STORE_NAME . '</b>.' . "\n\n");
+define('EMAIL_SUBJECT', 'Bienvenido/a a ');
+define('EMAIL_GREET_MR', 'Estimado Sr. %s,' . "\n\n");
+define('EMAIL_GREET_MS', 'Estimada Sra. %s,' . "\n\n");
+define('EMAIL_GREET_NONE', 'Estimado/a %s,' . "\n\n");
+define('EMAIL_WELCOME', 'Le damos la bienvenida a <b>%s</b>.' . "\n\n");
 define('EMAIL_TEXT', 'A partir de ahora puede disfrutar de los <b>distintos servicios</b> que le ofrecemos. Algunos de estos servicios son:' . "\n\n" . '<li><b>Carrito permanente</b> - Cualquier producto añadido a su carrito permanecerá ahí hasta que lo quite o realizce el pedido.' . "\n" . '<li><b>Agenda de direcciones</b> - Podemos enviarle los productos a otras direcciones aparte de la suya. Perfecto para enviar regalos directamente a la persona destinataria.' . "\n" . '<li><b>Historial de pedidos</b> - Vea la relación de pedidos que ha realizado con nosotros.' . "\n" . '<li><b>Comentarios de productos</b> - Comparta su opinión sobre los productos con otros clientes.' . "\n\n");
-define('EMAIL_CONTACT', 'Para cualquier consulta sobre nuestros servicios, por favor escriba al propietario: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n\n");
-define('EMAIL_WARNING', '<b>Nota:</b> Esta dirección fue suministrada por uno de nuestros clientes. Si usted no se ha inscrito como cliente, por favor comuníquelo a ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n");
+define('EMAIL_CONTACT', 'Para cualquier consulta sobre nuestros servicios, por favor escriba al propietario: %s.' . "\n\n");
+define('EMAIL_WARNING', '<b>Nota:</b> Esta dirección fue suministrada por uno de nuestros clientes. Si usted no se ha inscrito como cliente, por favor comuníquelo a %s.' . "\n");
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
 define('EMAIL_GV_INCENTIVE_HEADER', "\n\n" .'Como parte de nuestra bienvenida a los nuevos clientes, le obsequiamos con un cheque regalos por valor de %s');
 define('EMAIL_GV_REDEEM', 'El código para canjear el cheque regalo es %s, podrá introducir este código cuando realice una compra ');

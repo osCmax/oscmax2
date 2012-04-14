@@ -23,14 +23,14 @@ define('TEXT_ORIGIN_LOGIN', '<span class="notice"><small><b>ACHTUNG:</b></span><
 define('EMAIL_ACCOUNT_DETAILS', 'Konto-Details: ');
 define('EMAIL_ACCOUNT_USERNAME', 'Benutzername: ');
 define('ACCOUNT_PASSWORD', 'Passwort: ');
-define('EMAIL_SUBJECT', 'Willkommen bei ' . STORE_NAME);
+define('EMAIL_SUBJECT', 'Willkommen bei ');
 define('EMAIL_GREET_MR', 'Sehr geehrter Herr %s!' . "\n\n");
 define('EMAIL_GREET_MS', 'Sehr geehrte Frau %s!' . "\n\n");
 define('EMAIL_GREET_NONE', 'Hallo %S' . "\n\n");
-define('EMAIL_WELCOME', 'Willkommen bei <b>' . STORE_NAME . '</b>.' . "\n\n");
+define('EMAIL_WELCOME', 'Willkommen bei <b>%s</b>.' . "\n\n");
 define('EMAIL_TEXT', 'Sie können jetzt alle Funktionen des <b>Online-Shops</b> nutzen. Der Service bietet unter anderem:' . "\n\n" . '<li><b>Kundenwarenkorb</b> - Jeder Artikel bleibt registriert bis Sie zur Kasse gehen, oder die Produkte aus dem Warenkorb entfernen.' . "\n" . '<li><b>Adressbuch</b> - Wir können jetzt die Produkte zu der von Ihnen ausgesuchten Adresse senden. Der perfekte Weg ein Geburtstagsgeschenk zu versenden.' . "\n" . '<li><b>Vorherige Bestellungen</b> - Sie können jederzeit Ihre vorherigen Bestellungen überprüfen.' . "\n" . '<li><b>Meinungen über Produkte</b> - Teilen Sie Ihre Meinung zu unseren Produkten mit anderen Kunden.' . "\n\n");
-define('EMAIL_CONTACT', 'Falls Sie Fragen zum Onlineshop haben, wenden Sie sich bitte an den Shopbetreiber: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n\n");
-define('EMAIL_WARNING', '<b>Hinweis:</b> Diese E-Mail-Adresse wurde uns von einem Kunden bekannt gegeben. Falls Sie sich nicht angemeldet haben, senden Sie bitte eine eMail an ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n");
+define('EMAIL_CONTACT', 'Falls Sie Fragen zum Onlineshop haben, wenden Sie sich bitte an den Shopbetreiber: %s.' . "\n\n");
+define('EMAIL_WARNING', '<b>Hinweis:</b> Diese E-Mail-Adresse wurde uns von einem Kunden bekannt gegeben. Falls Sie sich nicht angemeldet haben, senden Sie bitte eine eMail an %s.' . "\n");
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
 define('EMAIL_GV_INCENTIVE_HEADER', "\n\n" . 'Als Wilkommensgeschenk für Neukunden haben wir einen Geschenkgutschein im Wert von %s an Sie gesendet');
 define('EMAIL_GV_REDEEM', 'Der Gutscheincode lautet %s und kann entweder bei Ihrem nächsten Einkauf eingelöst werden,');

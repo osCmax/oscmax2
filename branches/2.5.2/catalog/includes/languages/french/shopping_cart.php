@@ -24,11 +24,8 @@ define('TEXT_CART_EMPTY', 'Votre panier est vide!');
 define('TEXT_CART_EMPTY_BASKET', 'Votre panier est vide!');
 define('SUB_TITLE_SUB_TOTAL', 'Sous-Total:');
 define('SUB_TITLE_TOTAL', 'Total:');
-
-define('OUT_OF_STOCK_CANT_CHECKOUT', 'Les produits marqu&eacute;s ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' ne sont pas en stock dans la quantit&eacute; d&eacute;sir&eacute;e.<br>Merci de corriger la quantit&eacute; des articles marqu&eacute;s (' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ')');
-define('OUT_OF_STOCK_CAN_CHECKOUT', 'Les produits marqu&eacute;s avec ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' ne sont pas en stock dans la quantit&eacute; d&eacute;sir&eacute;e.<br>Vous pouvez n&eacute;anmoins les acheter ils vous seront d&eacute;livr&eacute;s d&egrave;s disponibilit&eacute;.');
+define('OUT_OF_STOCK_CANT_CHECKOUT', 'Les produits marqu&eacute;s %s ne sont pas en stock dans la quantit&eacute; d&eacute;sir&eacute;e.<br>Merci de corriger la quantit&eacute; des articles marqu&eacute;s (%s)');
+define('OUT_OF_STOCK_CAN_CHECKOUT', 'Les produits marqu&eacute;s avec %s ne sont pas en stock dans la quantit&eacute; d&eacute;sir&eacute;e.<br>Vous pouvez n&eacute;anmoins les acheter ils vous seront d&eacute;livr&eacute;s d&egrave;s disponibilit&eacute;.');
 define('TEXT_ALTERNATIVE_CHECKOUT_METHODS','- OU -');
-
 define('CLEAR_CART','Etes-vous sûr de vouloir effacer toute votre panier?');
-
 ?>

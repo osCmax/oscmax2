@@ -12,7 +12,6 @@ $Id$
 
 define('HEADING_TITLE', 'Envoyer un ch&egrave;que cadeau');
 define('NAVBAR_TITLE', 'Envoyer un ch&egrave;que cadeau');
-define('EMAIL_SUBJECT', 'Envoyez par ' . STORE_NAME);
 define('HEADING_TEXT','<br>Remplissez ci-dessous le formulaire pour envoyer un ch&egrave;que cadeau &agrave; un(e) ami(e) ou un membre de la famille. Pour plus d\'information, veuillez consulter notre ');
 define('ENTRY_NAME', 'Nom du destinataire :');
 define('ENTRY_EMAIL', 'Adresse email du destinataire :');

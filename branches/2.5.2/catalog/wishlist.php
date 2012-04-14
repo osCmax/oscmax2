@@ -103,7 +103,7 @@ if (RECAPTCHA_ON == 'true') {
 	
 			$from_name = $customer['customers_firstname'] . ' ' . $customer['customers_lastname'];
 			$from_email = $customer['customers_email_address'];
-			$subject = $customer['customers_firstname'] . ' ' . WISHLIST_EMAIL_SUBJECT;
+			$subject = $customer['customers_firstname'] . ' ' . WISHLIST_EMAIL_SUBJECT . STORE_NAME;
 			$link = HTTP_SERVER . DIR_WS_CATALOG . FILENAME_WISHLIST_PUBLIC . "?public_id=" . $customer_id;
 	
 		//REPLACE VARIABLES FROM DEFINE
@@ -111,7 +111,7 @@ if (RECAPTCHA_ON == 'true') {
 			$arr2 = array($from_name, $link);
 			$replace = str_replace($arr1, $arr2, WISHLIST_EMAIL_LINK);
 			$message = tep_db_prepare_input($_POST['message']);
-			$body = $message . $replace;
+			$body = $message . $replace . "\n\n" . STORENAME;
 		} else {
 			if(strlen($_POST['your_name']) < '1') {
 				$error = true;
@@ -136,7 +136,7 @@ if (RECAPTCHA_ON == 'true') {
 
 			$from_name = stripslashes($_POST['your_name']);
 			$from_email = $_POST['your_email'];
-			$subject = $from_name . ' ' . WISHLIST_EMAIL_SUBJECT;
+			$subject = $from_name . ' ' . WISHLIST_EMAIL_SUBJECT . STORE_NAME;
 			$message = stripslashes($_POST['message']);
 
 			$z = 0;
@@ -145,7 +145,7 @@ if (RECAPTCHA_ON == 'true') {
 				$prods .= stripslashes($name) . "  " . stripslashes($_POST['prod_att'][$z]) . "\n" . $_POST['prod_link'][$z] . "\n\n";
 				$z++;
 			}
-			$body = $message . "\n\n" . $prods . "\n\n" . WISHLIST_EMAIL_GUEST;
+			$body = $message . "\n\n" . $prods . "\n\n" . WISHLIST_EMAIL_GUEST . "\n\n" . STORE_NAME;
 	  	}
 
 		//Check each posted name => email for errors.

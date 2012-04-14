@@ -34,14 +34,14 @@ define('TEXT_ITEM_NOT_AVAILABLE','Point n\'est plus disponible');
 define('WISHLIST_EMAIL_TEXT','Si vous souhaitez envoyer votre liste de cadeaux à plusieurs amis ou en famille, il suffit d\'entrer leur nom et e-mails dans chaque rangée. Vous n\'avez pas à remplir toutes les cases, il vous suffit de remplir pour les personnes que soit le nombre que vous voulez envoyer votre lien à la liste de souhaits. Ensuite, remplissez un court message que vous souhaitez inclure dans votre e-mail dans la zone de texte. Ce message sera ajouté à tous les emails que vous envoyez.');
 
 define('WISHLIST_EMAIL_TEXT_GUEST','Si vous souhaitez envoyer votre liste de cadeaux à plusieurs amis ou en famille, il suffit d\'entrer leur nom et e-mail  dans chaque rangée. Vous n\'avez pas à remplir toutes les cases, vous pouvez vous suffit de remplir pour les personnes que soit le nombre que vous voulez envoyer votre lien à la liste de souhaits. Ensuite, remplissez un court message que vous souhaitez inclure dans votre e-mail dans la zone de texte. Ce message sera ajouté à tous les emails que vous envoyez.');
-
-define('WISHLIST_EMAIL_SUBJECT','vous a envoyé leur liste de souhaits à partir de ' . STORE_NAME);
+// Customers name will be automatically added to the beginning of this and store name to the end.
+define('WISHLIST_EMAIL_SUBJECT','vous a envoyé leur liste de souhaits à partir de ');
 
 define('WISHLIST_SENT','Votre liste de cadeaux a été envoyé.');
 
-define('WISHLIST_EMAIL_LINK', ' $from_name\'s public la liste de souhaits se trouve ici: $link Merci, ' . STORE_NAME);
+define('WISHLIST_EMAIL_LINK', ' $from_name\'s public la liste de souhaits se trouve ici: $link Merci, ');
 
-define('WISHLIST_EMAIL_GUEST', 'Je vous remercie, ' . STORE_NAME);
+define('WISHLIST_EMAIL_GUEST', 'Je vous remercie, ');
 
 define('ERROR_YOUR_NAME', 'S\'il vous plaît entrer votre nom.');
 

@@ -26,18 +26,17 @@ define('TEXT_ITEM_NOT_AVAILABLE','El artículo ya no está disponible');
 define('TEXT_DISPLAY_NUMBER_OF_WISHLIST','Mostrando <b>%d</b> a <b>%d</b> (<b>%d</b> elementos de sus favoritos.)');
 define('WISHLIST_EMAIL_TEXT','Si desea enviar por correo sus favoritos a varios amigos o familiares, simplemente introduzca sus nombres y los correos electrónicos en cada fila. No tiene que rellenar cada campo, sólo las filas necesarias según las personas a las que desee enviar los favoritos. Después introduzca un breve mensaje que le gustaría incluir en su email. Este mensaje será añadido a todos los correos electrónicos que envíe.');
 define('WISHLIST_EMAIL_TEXT_GUEST','Si desea enviar por correo sus favoritos a varios amigos o familiares, por favor, introduzca sus nombre y los correos electrónicos en cada fila. No tiene que rellenar cada campo, sólo las filas necesarias según las personas a las que desee enviar los favoritos. Después introduzca un breve mensaje que le gustaría incluir en su email. Este mensaje será añadido a todos los correos electrónicos que envíe.');
-define('WISHLIST_EMAIL_SUBJECT','le ha enviado sus favoritos de ' . STORE_NAME);  //Customers name will be automatically added to the beginning of this.
+// Customers name will be automatically added to the beginning of this and store name to the end.
+define('WISHLIST_EMAIL_SUBJECT','le ha enviado sus favoritos de ');
 define('WISHLIST_SENT','Se han enviado sus favoritos.');
 define('WISHLIST_EMAIL_LINK', '
 
 $from_name\'s public Wish List is located here:
 $link
 
-Thank you,
-' . STORE_NAME); //$from_name = Customers name  $link = public wishlist link
+Thank you,'); //$from_name = Customers name  $link = public wishlist link
 
-define('WISHLIST_EMAIL_GUEST', 'Thank you,
-' . STORE_NAME);
+define('WISHLIST_EMAIL_GUEST', 'Thank you,');
 
 define('ERROR_YOUR_NAME','Por favor, introduzca su nombre.');
 define('ERROR_YOUR_EMAIL','Por favor, introduzca su correo electrónico.');

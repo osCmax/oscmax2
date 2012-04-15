@@ -83,6 +83,14 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 // set php_self in the local scope
   $PHP_SELF = usu5_base_filename();
 
+// Security Pro by FWR Media
+  include_once DIR_WS_MODULES . 'fwr_media_security_pro.php';
+  $security_pro = new Fwr_Media_Security_Pro;
+  // If you need to exclude a file from cleansing then you can add it like below
+  //$security_pro->addExclusion( 'some_file.php' );
+  $security_pro->cleanse( $PHP_SELF );
+  // End - Security Pro by FWR Media
+
   if ($request_type == 'NONSSL') {
     define('DIR_WS_CATALOG', DIR_WS_HTTP_CATALOG);
   } else {

@@ -376,7 +376,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
                  EMAIL_TEXT_DATE_ORDERED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
  // PWA BOF
   if ($order->customer['is_dummy_account']) {
-    $email_order .= EMAIL_WARNING . "\n\n";
+    $email_order .= sprintf(EMAIL_WARNING, STORE_OWNER_EMAIL_ADDRESS) . "\n\n";
   }
   // PWA EOF
   if ($order->info['comments']) {

@@ -50,7 +50,14 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
       $catlevel .= $i;
     }	
 
-	$boxContent .=' class="level' . $catlevel . '"><td width="' . $box_width . '" class="menuItem">';
+	$boxContent .=' class="level' . $catlevel . '">';
+	
+	// Add control for detecting last item in menu
+	if ($tree[$counter]['next_id'] != false) {
+	  $boxContent .= '<td width="' . $box_width . '" class="menuItem">';
+	} else {
+	  $boxContent .= '<td width="' . $box_width . '" class="menuItemLast">';
+	}
 
 	for ($i=0; $i<$tree[$counter]['level']; $i++) {
       $boxContent .= "&nbsp;&nbsp;";
@@ -100,11 +107,12 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
 
 /////////////ADD IN PLUS SIGN ////////////////////////
 
-	 if (tep_has_category_subcategories($counter)) {
-      $boxContent .= '<td width="10" class="menuItem"><a class="' . $catlevel . 'level" href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_ICONS . 'plus.gif', '') . '</a></td>';
-    }
-    else {
-      $boxContent .= '<td width="10" class="menuItem">&nbsp;</td>';
+	if (tep_has_category_subcategories($counter)) {
+	  if ($tree[$counter]['next_id'] != false) { 
+        $boxContent .= '<td width="10" class="menuItem"><a class="' . $catlevel . 'level" href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_ICONS . 'plus.gif', '') . '</a></td>';
+	  } else {
+	    $boxContent .= '<td width="10" class="menuItemLast"><a class="' . $catlevel . 'level" href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_ICONS . 'plus.gif', '') . '</a></td>';
+	  }
     }
 	
 //////////////////////////////////////////////////////

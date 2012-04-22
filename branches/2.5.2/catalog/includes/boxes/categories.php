@@ -40,7 +40,7 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
     $boxContent .= '<table border="0" cellpadding="0" cellspacing="0" width="100%">';
 
 // BoF - Contribution Category Box Enhancement 1.1
-    global $tree, $boxContent, $cPath_array, $cat_name, $customer_group_id;
+    global $tree, $boxContent, $cPath_array, $cat_name, $customer_group_id, $box_width;
 
     $cPath_new = 'cPath=' . $tree[$counter]['path'];
 
@@ -50,7 +50,7 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
       $catlevel .= $i;
     }	
 
-	$boxContent .=' class="level' . $catlevel . '"><td width="' . $box_width . '" class="boxText">';
+	$boxContent .=' class="level' . $catlevel . '"><td width="' . $box_width . '" class="menuItem">';
 
 	for ($i=0; $i<$tree[$counter]['level']; $i++) {
       $boxContent .= "&nbsp;&nbsp;";
@@ -101,10 +101,10 @@ if(defined('FWR_SUCKERTREE_MENU_ON') && 'true' === FWR_SUCKERTREE_MENU_ON) {
 /////////////ADD IN PLUS SIGN ////////////////////////
 
 	 if (tep_has_category_subcategories($counter)) {
-      $boxContent .= '<td width="10"><a class="' . $catlevel . 'level" href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_ICONS . 'plus.gif', '') . '</a></td>';
+      $boxContent .= '<td width="10" class="menuItem"><a class="' . $catlevel . 'level" href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_ICONS . 'plus.gif', '') . '</a></td>';
     }
     else {
-      $boxContent .= '<td width="10">&nbsp;</td>';
+      $boxContent .= '<td width="10" class="menuItem">&nbsp;</td>';
     }
 	
 //////////////////////////////////////////////////////

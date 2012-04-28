@@ -55,8 +55,10 @@ $Id$
       $customer_group_id = $sppc_customer_group_id;
      }
    // EOF Separate Pricing Per Customer
-  $select_column_list = '';
+  
+  $select_column_list = 'p.products_model, pd.products_name, m.manufacturers_name, p.products_quantity, p.products_image, p.products_weight, p.products_ordered, ';
 
+/*
   for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
     switch ($column_list[$i]) {
       case 'PRODUCT_LIST_MODEL':
@@ -79,6 +81,7 @@ $Id$
         break;
     }
   }
+*/
 
    // BOF Separate Pricing Per Customer
    $status_tmp_product_prices_table = false;

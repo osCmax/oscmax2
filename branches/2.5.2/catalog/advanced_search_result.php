@@ -245,7 +245,7 @@ $Id$
   
   if (!isset($last_search_insert)) { $last_search_insert = ''; }
   
-  $search_enhancements_keywords = $_GET['keywords'];
+  $search_enhancements_keywords = (isset($_GET['keywords']) ? $_GET['keywords'] : '');
   $search_enhancements_keywords = strip_tags($search_enhancements_keywords);
   $search_enhancements_keywords = addslashes($search_enhancements_keywords);  
 

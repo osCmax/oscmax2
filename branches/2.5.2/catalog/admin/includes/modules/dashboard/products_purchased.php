@@ -36,9 +36,9 @@ $Id$
                   $rows = '0' . $rows;
                 }
             ?>
-                          <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="document.location.href='<?php echo tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&amp;read=only&amp;pID=' . $products['products_id'] . '&amp;origin=' . FILENAME_STATS_PRODUCTS_PURCHASED . '?page=' . $_GET['page'], 'NONSSL'); ?>'">
+                          <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" onClick="document.location.href='<?php echo tep_href_link(FILENAME_CATEGORIES, 'action=new_product&amp;pID=' . $products['products_id'] . '&amp;origin=' . FILENAME_STATS_PRODUCTS_PURCHASED, 'NONSSL'); ?>'">
                             <td class="dataTableContent"><?php echo $rows; ?>.</td>
-                            <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&amp;read=only&amp;pID=' . $products['products_id'] . '&amp;origin=' . FILENAME_STATS_PRODUCTS_PURCHASED . '?page=' . $_GET['page'], 'NONSSL') . '">' . $products['products_name'] . '</a>'; ?></td>
+                            <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=new_product&amp;pID=' . $products['products_id'] . '&amp;origin=' . FILENAME_STATS_PRODUCTS_PURCHASED, 'NONSSL') . '">' . $products['products_name'] . '</a>'; ?></td>
                             <td class="dataTableContent" align="center"><?php echo $products['products_ordered']; ?>&nbsp;</td>
                           </tr>
             <?php

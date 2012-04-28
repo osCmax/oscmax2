@@ -10,6 +10,14 @@ $Id$
   Released under the GNU General Public License
 */
 
+  $_GET['action'] = (isset($_GET['action']) ? $_GET['action'] : '');
+  $_GET['cID'] = (isset($_GET['cID']) ? $_GET['cID'] : '');
+  $_GET['cPath'] = (isset($_GET['cPath']) ? $_GET['cPath'] : '');
+  $_GET['cInfo'] = (isset($_GET['cInfo']) ? $_GET['cInfo'] : '');
+  $_GET['fID'] = (isset($_GET['fID']) ? $_GET['fID'] : '');
+  $_GET['fInfo'] = (isset($_GET['fInfo']) ? $_GET['fInfo'] : '');
+  $_GET['none'] = (isset($_GET['none']) ? $_GET['none'] : '');
+
   require('includes/application_top.php');
 
   $current_boxes = DIR_FS_ADMIN . DIR_WS_BOXES;
@@ -200,7 +208,7 @@ $Id$
                                                }
                                              ?>
                 </td>
-                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($boxes[$i]['admin_boxes_id'] == $cInfo->admin_boxes_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cID=' . $db_cat['admin_boxes_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($boxes[$i]['admin_boxes_id'] == $cInfo->admin_boxes_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cID=' . $boxes[$i]['admin_boxes_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
    $i++;

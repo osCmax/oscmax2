@@ -41,7 +41,7 @@ define('TABLE_HEADING_GROUPS_CATEGORIES', 'Categories Permission');
 
 define('TEXT_INFO_HEADING_DEFAULT', 'Admin Member ');
 define('TEXT_INFO_HEADING_DELETE', 'Delete Permission ');
-define('TEXT_INFO_HEADING_EDIT', 'Edit Category / ');
+define('TEXT_INFO_HEADING_EDIT', 'Edit Admin Member');
 define('TEXT_INFO_HEADING_NEW', 'New Admin Member ');
 
 define('TEXT_INFO_DEFAULT_INTRO', 'Member group');
@@ -79,7 +79,7 @@ define('ADMIN_EMAIL_EDIT_TEXT', 'Hi %s,' . "\n\n" . 'Your personal information h
 define('TEXT_INFO_HEADING_DEFAULT_GROUPS', 'Admin Group ');
 define('TEXT_INFO_HEADING_DELETE_GROUPS', 'Delete Group ');
 
-define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>NOTE:</b><ul><li><b>edit:</b> edit group name.</li><li><b>delete:</b> delete group.</li><li><b>define:</b> define group access.</li></ul>');
+define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>NOTE:</b><ul><li><b>new permission:</b> define/edit file access.</li><li><b>edit:</b> edit group name.</li><li><b>delete:</b> delete group.</li></ul>');
 define('TEXT_INFO_DELETE_GROUPS_INTRO', 'It\'s also will delete member of this group. Are you sure want to delete <b>%s</b> group?');
 define('TEXT_INFO_DELETE_GROUPS_INTRO_NOT', 'You can not delete this groups!');
 define('TEXT_INFO_GROUPS_INTRO', 'Give an unique group name. Click next to submit.');

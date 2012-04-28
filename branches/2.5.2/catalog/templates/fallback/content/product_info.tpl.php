@@ -272,7 +272,7 @@ $Id$
                     // EOF: Tabs by PGM
 					
 					// start indvship
-					$extra_shipping_query = tep_db_query("select products_ship_price, products_ship_price_two from " . TABLE_PRODUCTS_SHIPPING . " where products_id = '" . (int)$products_id . "'");
+					$extra_shipping_query = tep_db_query("select products_ship_price, products_ship_price_two from " . TABLE_PRODUCTS_SHIPPING . " where products_id = '" . (int)$_GET['products_id'] . "'");
 					if (tep_db_num_rows($extra_shipping_query)) {
 					  $extra_shipping = tep_db_fetch_array($extra_shipping_query);
 					  if($extra_shipping['products_ship_price'] == '0.00'){
@@ -339,7 +339,7 @@ $Id$
                 <td class="productinfo_boxes">
                 <?php
 				//++++ QT Pro: Begin Changed code
-				$products_id=(preg_match("/^\d{1,10}(\{\d{1,10}\}\d{1,10})*$/",$_GET['products_id']) ? $_GET['products_id'] : (int)$_GET['products_id']);
+				$products_id = (preg_match("/^\d{1,10}(\{\d{1,10}\}\d{1,10})*$/",$_GET['products_id']) ? $_GET['products_id'] : (int)$_GET['products_id']);
 				require(DIR_WS_CLASSES . 'pad_' . PRODINFO_ATTRIBUTE_PLUGIN . '.php');
 				$class = 'pad_' . PRODINFO_ATTRIBUTE_PLUGIN;
 				$pad = new $class($products_id);

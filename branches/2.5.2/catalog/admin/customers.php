@@ -206,6 +206,13 @@ $Id$
       } else {
         $entry_telephone_error = false;
       }
+	  
+	  if ($_POST['customers_new_password'] != $_POST['customers_repeat_password']) {
+        $error = true;
+        $entry_password_error = true;
+      } else {
+        $entry_password_error = false;
+      }
 
       $check_email = tep_db_query("select customers_email_address from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($customers_email_address) . "' and customers_id != '" . (int)$customers_id . "'");
       if (tep_db_num_rows($check_email)) {
@@ -266,7 +273,12 @@ $Id$
         }
 
         tep_db_perform(TABLE_ADDRESS_BOOK, $sql_data_array, 'update', "customers_id = '" . (int)$customers_id . "' and address_book_id = '" . (int)$default_address_id . "'");
-
+		
+		// Password update fields
+		if ($_POST['customers_new_password'] == $_POST['customers_repeat_password'] && $_POST['customers_new_password'] != '') {
+		  tep_db_query("update " . TABLE_CUSTOMERS . " set customers_password='" . tep_encrypt_password(tep_db_prepare_input($_POST['customers_new_password'])) . "' WHERE customers_id='" . (int)$customers_id . "'");  
+        }
+		
         tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $customers_id));
 
         } else if ($error == true) {
@@ -421,6 +433,11 @@ function check_form() {
 
   if (customers_email_address.length < <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>) {
     error_message = error_message + "<?php echo JS_EMAIL_ADDRESS; ?>";
+    error = 1;
+  }
+  
+  if (document.customers.customers_new_password.value != document.customers.customers_repeat_password.value) {
+    error_message = error_message + "<?php echo JS_PASSWORD_DONT_MATCH; ?>";
     error = 1;
   }
 
@@ -618,6 +635,26 @@ function refresh_form(form_name) {
     echo tep_draw_input_field('customers_email_address', $cInfo->customers_email_address, 'maxlength="96"', true);
   }
 ?></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+        </tr>
+        <tr>
+          <td class="formAreaTitle"><?php echo CATEGORY_PASSWORD; ?></td>
+        </tr>
+        <tr>
+          <td class="formArea">
+            <table border="0" cellspacing="2" cellpadding="2"> 
+              <tr>
+                <td class="main" width="150"><?php echo ENTRY_PASSWORD; ?></td>
+                <td class="main"><?php echo tep_draw_input_field('customers_new_password', ''); ?></td>
+              </tr>
+              <tr>
+                <td class="main"><?php echo ENTRY_PASSWORD_CONFIRMATION; ?></td>
+                <td class="main"><?php echo tep_draw_input_field('customers_repeat_password', ''); ?></td>
               </tr>
             </table>
           </td>

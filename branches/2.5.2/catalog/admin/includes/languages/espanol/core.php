@@ -317,6 +317,7 @@ define('JS_ZONE', '* Debe seleccionar \'Provincia\' de la lista de este país.\n'
 define('JS_COUNTRY', '* Debe seleccionar \'País\'.\n');
 define('JS_TELEPHONE', '* El campo \'Teléfono\' debe tener al menos ' . ENTRY_TELEPHONE_MIN_LENGTH . ' caracteres.\n');
 define('JS_PASSWORD', '* Los campos \'Contraseña\' y \'Confirmación\' deben coincidir y tener al menos ' . ENTRY_PASSWORD_MIN_LENGTH . ' caracteres.\n');
+define('JS_PASSWORD_DONT_MATCH', 'The entered passwords do not match');
 
 define('JS_ORDER_DOES_NOT_EXIST', '¡El número de pedido %s no existe!');
 

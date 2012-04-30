@@ -376,6 +376,7 @@ define('JS_STATE_SELECT', '-- Select Above --');
 define('JS_COUNTRY', '* The \'Country\' value must be chosen.\n');
 define('JS_TELEPHONE', '* The \'Telephone Number\' entry must have at least ' . ENTRY_TELEPHONE_MIN_LENGTH . ' characters.\n');
 define('JS_PASSWORD', '* The \'Password\' and \'Confirmation\' entries must match and have at least ' . ENTRY_PASSWORD_MIN_LENGTH . ' characters.\n');
+define('JS_PASSWORD_DONT_MATCH', 'The entered passwords do not match');
 
 define('JS_ORDER_DOES_NOT_EXIST', 'Order Number %s does not exist!');
 

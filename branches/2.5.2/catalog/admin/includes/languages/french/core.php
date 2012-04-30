@@ -323,6 +323,7 @@ define('JS_ZONE', '* La \'Zone\' doit être sélectionnée dans la liste selon le p
 define('JS_COUNTRY', '* Le \'Pays\' doit être sélectionné.\n');
 define('JS_TELEPHONE', '* Le \'Téléphone\' doit avoir au moins ' . ENTRY_TELEPHONE_MIN_LENGTH . ' caractères.\n');
 define('JS_PASSWORD', '* Le \'Mot de passe\' et sa \'Confirmation\' doivent avoir au moins ' . ENTRY_PASSWORD_MIN_LENGTH . ' caractères.\n');
+define('JS_PASSWORD_DONT_MATCH', 'The entered passwords do not match');
 
 define('JS_ORDER_DOES_NOT_EXIST', 'Le numéro de commande %s n\'existe pas&nbsp;!');
 

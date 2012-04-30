@@ -376,6 +376,7 @@ define('JS_STATE_SELECT', '-- Oben ausw‰hlen --');
 define('JS_COUNTRY', '* Ein \'Land\' muﬂ ausgew‰hlt werden.\n');
 define('JS_TELEPHONE', '* Die \'Telefonnnummer\' muﬂ mindestens ' . ENTRY_TELEPHONE_MIN_LENGTH . ' Zeichen enthalten.\n');
 define('JS_PASSWORD', '* Das \'Passwort\' und die \'Best‰tigung\' muﬂ ¸bereinstimmen und mindestens ' . ENTRY_PASSWORD_MIN_LENGTH . ' Zeichen enthalten.\n');
+define('JS_PASSWORD_DONT_MATCH', 'The entered passwords do not match');
 
 define('JS_ORDER_DOES_NOT_EXIST', 'Bestellnummer %s existiert nicht!');
 

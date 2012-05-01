@@ -18,5 +18,4 @@ define('TABLE_HEADING_ACTION', 'Acción');
 
 define('TEXT_FILE_DOES_NOT_EXIST', 'El fichero no existe');
 define('TEXT_CACHE_DIRECTORY', 'Directorio para la caché: ');
-
 ?>

@@ -12,7 +12,7 @@ $Id$
 
 define('TOP_BAR_TITLE', 'Catálogo imprimible');
 define('TEXT_EMAIL', 'Email: ');
-define('TEXT_SUBJECT_TO_CHANGE', '>Nota: Todos los precios están sujetos a cambio sin previo aviso. Todos los productos serán facturados con la moneda de nuestra tienda sólamente. Este catálogo está actualizado al día de la impresión.');
+define('TEXT_SUBJECT_TO_CHANGE', 'Nota: Todos los precios están sujetos a cambio sin previo aviso. Todos los productos serán facturados con la moneda de nuestra tienda sólamente. Este catálogo está actualizado al día de la impresión.');
 define('TABLE_HEADING_IMAGES', 'Imagen');
 define('TABLE_HEADING_MANUFACTURERS', 'Fabricante');
 define('TABLE_HEADING_PRODUCTS', 'Nombre');

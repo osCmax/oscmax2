@@ -39,6 +39,10 @@ define('CD_EXPECTED_PRODUCTS_SORT', 'Este es el orden utilizado en la caja de pr
 define('CT_EXPECTED_PRODUCTS_FIELD', 'Campo de orden de Próximamente');
 define('CD_EXPECTED_PRODUCTS_FIELD', 'La columna por la que se ordena en la caja de productos disponibles próximamente.');
 define('CT_USE_DEFAULT_LANGUAGE_CURRENCY', 'Cambiar a moneda de idioma predeterminado');
+define('CT_FORCE_CATALOG_LANGUAGE', '¿Quieres forzar al catálogo a usar el idioma predeterminado?');
+define('CD_FORCE_CATALOG_LANGUAGE', 'Si se configura como true entonces el catálogo se abrirá en el idioma configurado en Localización -> Idiomas -> Establecer como predeterminado. Si se configura como false entonces el sistema detectará el idioma del navegador del usuario y utilizará ese.');
+define('CT_FORCE_ADMIN_LANGUAGE', '¿Quieres forzar al panel de administración a usar el idioma predeterminado?');
+define('CD_FORCE_ADMIN_LANGUAGE', 'Si se configura como true entonces el panel de administración se abrirá en el idioma configurado en Localización -> Idiomas -> Establecer como predeterminado. Si se configura como false entonces el sistema detectará el idioma del navegador del usuario y utilizará ese.');
 define('CD_USE_DEFAULT_LANGUAGE_CURRENCY', 'Cambiar automáticamente a la moneda del idioma cuando se cambie el idioma');
 define('CT_ENGLISH_SWITCH', 'Utilizar idioma inglés UK o USA');
 define('CD_ENGLISH_SWITCH', 'Configurar la tienda con el inglés de Reino Unido o de Estado Unidos (Formato de fecha, dirección, fecha de nacimiento, etc.)');
@@ -67,9 +71,9 @@ define('CD_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'Importe de cheque regalo de bienven
 define('CT_SHOW_TAX_RATE_NEAR_PRICE', '¿Mostrar tasas de impuestos junto al precio?');
 define('CD_SHOW_TAX_RATE_NEAR_PRICE', 'Algunos países necesitan que se muestren las tasas de impuestos junto al precio.');
 define('CT_SHOW_SHIPPING_NEAR_PRICE', '¿Mostrar enlace a los gastos de envío junto al precio?');
-define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Algunos países necesitan que se muestre un enlace a los gastos de envio junto al precio. Requiere <b>Mostrar tasas de impuestos junto al precio</b> para poder activarlo.');
-define('CT_CATEGORY_DROPDOWN_SWITCH', 'Desactivar la lista desplegable de categorías en Admin?');
-define('CD_CATEGORY_DROPDOWN_SWITCH', 'Esta opción, activa o desactiva la lista desplegable de las categorias en la página de entrada de productos/categorias del apartado Administración. En tiendas con cientos de categorias, ha de estar activado (True) para acelerar la actualización de la página.');
+define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Algunos países necesitan que se muestre un enlace a los gastos de envío junto al precio. Requiere <b>Mostrar tasas de impuestos junto al precio</b> para poder activarlo.');
+define('CT_CATEGORY_DROPDOWN_SWITCH', '¿Desactivar la lista desplegable de categorías en Admin?');
+define('CD_CATEGORY_DROPDOWN_SWITCH', 'Esta opción activa o desactiva la lista desplegable de las categorías en la página de entrada de productos/categorías del panel de Administración. En tiendas con cientos de categorías, ha de estar activado (True) para acelerar la actualización de la página.');
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Nombre');
@@ -82,7 +86,7 @@ define('CT_ENTRY_EMAIL_ADDRESS_MIN_LENGTH', 'Dirección e-mail');
 define('CD_ENTRY_EMAIL_ADDRESS_MIN_LENGTH', 'Longitud mínima de la dirección de e-mail');
 define('CT_ENTRY_STREET_ADDRESS_MIN_LENGTH', 'Dirección');
 define('CD_ENTRY_STREET_ADDRESS_MIN_LENGTH', 'Longitud mínima de la dirección física');
-define('CT_ENTRY_COMPANY_MIN_LENGTH', 'empresa');
+define('CT_ENTRY_COMPANY_MIN_LENGTH', 'Empresa');
 define('CD_ENTRY_COMPANY_MIN_LENGTH', 'Longitud mínima de la empresa');
 define('CT_ENTRY_POSTCODE_MIN_LENGTH', 'Código postal');
 define('CD_ENTRY_POSTCODE_MIN_LENGTH', 'Longitud mínima del código postal');
@@ -803,6 +807,11 @@ define('CT_RECAPTCHA_PUBLIC_KEY', 'Clave pública');
 define('CD_RECAPTCHA_PUBLIC_KEY', 'Introduce tu clave pública de reCaptcha');
 define('CT_RECAPTCHA_PRIVATE_KEY', 'Clave privada');
 define('CD_RECAPTCHA_PRIVATE_KEY', 'Introduce tu clave privada de reCaptcha');
+define('CT_RECAPTCHA_EMAIL_URL', 'Introduce tu URL de protección de email de reCaptcha');
+define('CD_RECAPTCHA_EMAIL_URL', 'Si quieres usar la funcionalidad de reCaptcha mailhide, por favor introduce la URL suministrada para tu dirección de email escogida.  <u><a href="http://www.google.com/recaptcha/mailhide/" target="_blank"><br><br>Puedes conseguir una de estas desde Google reCaptcha</a></u>.');
+define('CT_RECAPTCHA_EMAIL_FROM', 'Introduce tu dirección de email enmascarada utilizada en reCaptcha');
+define('CD_RECAPTCHA_EMAIL_FROM', 'Por favor introduce una dirección de email parcial o enmascarada para que se muestr en tu tienda. Por ejemplo: john...@email.com <br><br>O introduce <b>CLICK</b> para mostrar el texto multilingüe \'Pulsar para revelar\'');
+
 
 // Configuration ID: 88 - Price Breaks 
 define('CT_PRICE_BREAK_NOF_LEVELS', 'Máximo número de niveles de precios por volumen');

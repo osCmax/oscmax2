@@ -205,7 +205,7 @@ define('TEXT_THUMBNAIL_IMAGE', 'Imagen en miniatura:');
 
 // BOF indvship 4.5
 define('TEXT_PRODUCTS_ZIPCODE', 'Codigo postal de origen: ');
-define('TEXT_INDIV_SHIPPING_PRICE', 'Gastos de envio para una unidad: ');
-define('TEXT_INDIV_ADDITIONAL_PRICE', 'Gastos de envio para más unidades de este producto: ');
+define('TEXT_INDIV_SHIPPING_PRICE', 'Gastos de envío para una unidad: ');
+define('TEXT_INDIV_ADDITIONAL_PRICE', 'Gastos de envío para más unidades de este producto: ');
 // EOF indvship 4.5
 ?>

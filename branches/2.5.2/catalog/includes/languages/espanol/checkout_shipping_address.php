@@ -27,5 +27,5 @@ define('TABLE_HEADING_NEW_SHIPPING_ADDRESS', 'Nueva dirección de entrega');
 define('TEXT_CREATE_NEW_SHIPPING_ADDRESS', 'Rellene el siguiente formulario para añadir una nueva dirección en su agenda y usarla como dirección de entrega de este pedido.');
 
 define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continuar con el proceso de compra');
-define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'para seleccionar la forma de envio.');
+define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'para seleccionar la forma de envío.');
 ?>

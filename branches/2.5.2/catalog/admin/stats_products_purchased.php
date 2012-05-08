@@ -36,7 +36,10 @@ $Id$
   
   if(tep_not_null($_GET['gross']))
   	$gross = $_GET['gross'];
-
+	
+  if(tep_not_null($_GET['show_breakdown']))
+    $show_breakdown = $_GET['show_breakdown'];
+	
   $months = array();
   $months[] = array('id' => 0, 'text' => TEXT_SELECT_MONTH);
   $months[] = array('id' => 1, 'text' => TEXT_JANUARY);
@@ -116,10 +119,10 @@ $Id$
                 <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
                 <td class="smallText" align="right">
                 <?php 
-				  echo ENTRY_DISPLAY . '&nbsp;' .tep_draw_pull_down_menu('max', $max_display, $max_results, 'onChange="this.form.submit();"') . '&nbsp;';
-			      echo ENTRY_STATUS . '&nbsp;' . tep_draw_pull_down_menu('status', $statuses, $status, 'onchange=\'this.form.submit();\'') . '&nbsp;';
-	              echo ENTRY_MONTH . '&nbsp;' . tep_draw_pull_down_menu('month', $months, $month, 'onchange=\'this.form.submit();\'') . '&nbsp;';
-			      echo ENTRY_YEAR . '&nbsp;' . tep_draw_pull_down_menu('year', $years, $year, 'onchange=\'this.form.submit();\'') . '&nbsp;';
+				  echo ENTRY_DISPLAY . '&nbsp;' .tep_draw_pull_down_menu('max', $max_display, $max_results) . '&nbsp;';
+			      echo ENTRY_STATUS . '&nbsp;' . tep_draw_pull_down_menu('status', $statuses, $status) . '&nbsp;';
+	              echo ENTRY_MONTH . '&nbsp;' . tep_draw_pull_down_menu('month', $months, $month) . '&nbsp;';
+			      echo ENTRY_YEAR . '&nbsp;' . tep_draw_pull_down_menu('year', $years, $year) . '&nbsp;';
 			     ?>
                 </td>
               </tr>
@@ -130,7 +133,7 @@ $Id$
 	      <td>
 		    <table border="0" align="right" cellspacing="0" cellpadding="2">
 		      <tr>
-			    <td class="smallText" valign="top">
+			    <td class="smallText" valign="middle">
 <?php
 	$manufacturers_query = tep_db_query("select manufacturers_id, manufacturers_name from " . TABLE_MANUFACTURERS . " order by manufacturers_name");
      $manufacturers_array = array();
@@ -141,7 +144,8 @@ $Id$
                                        'text' => $manufacturers_name);
 	}    
 	
-	echo ENTRY_KEYWORDS . '&nbsp;&nbsp;' . tep_draw_input_field('keywords', $keywords, 'size="20"') . '</td><td>';
+	echo ENTRY_ORDER_BREAKDOWN . '&nbsp;' . tep_draw_checkbox_field('show_breakdown', $show_breakdown);
+	echo ENTRY_KEYWORDS . '&nbsp;&nbsp;' . tep_draw_input_field('keywords', $keywords, 'size="20"');
 	echo '&nbsp;' . '<a href="javascript:document.forms[\'date_range\'].submit();">' . tep_image_button('button_search.gif', IMAGE_SEARCH) . '</a>&nbsp;';
 	echo '<a href="' . tep_href_link(FILENAME_STATS_PRODUCTS_PURCHASED) . '">' . tep_image_button('button_reset.gif', IMAGE_RESET) . '</a>';
     
@@ -165,7 +169,9 @@ $Id$
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MODEL; ?></td>
                       <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_PURCHASED; ?></td>
+                      <?php if ($show_breakdown == 'on') { ?>
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
+                      <?php } ?>
                       <td class="dataTableHeadingContent" align="right"><?php echo tep_draw_checkbox_field('gross', $gross, '', '', ' onClick="document.forms[\'date_range\'].submit();"') . TABLE_HEADING_GROSS; ?></td>
                     </tr>      
                 
@@ -220,6 +226,8 @@ $Id$
      $rows = '0' . $rows;
     }
 	
+  //Lets make this conditional to reduce server loading
+  if ($show_breakdown == 'on') {	
 	// While running this query lets build a list of the customers who purchased the products for each product
 	$customers_query_raw = "SELECT o.customers_id, o.orders_id, o.customers_name, count(o.customers_id) as multiorder, sum(op.products_quantity) as quantity FROM " . TABLE_ORDERS . " as o, " . TABLE_ORDERS_PRODUCTS . " as op WHERE o.orders_id = op.orders_id AND op.products_id = '" . $products['products_id'] . "' GROUP BY o.customers_id";
 	$customers_query = tep_db_query($customers_query_raw);
@@ -239,6 +247,8 @@ $Id$
 	  }
 	  $customers_string .= '<br>'; 
 	}
+  } // end if ($show_breakdown == 'on')
+
 ?>
                     <tr bgcolor="<?php echo ((++$cnt)%2 == 0) ? '#E0E0E0' : '#FFFFFF' ?>" id="defaultSelected" class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)" valign="top">
                       <td class="dataTableContent">&nbsp;<?php echo $rows; ?>.</td>
@@ -246,7 +256,9 @@ $Id$
                       <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=new_product_preview&read=only&pID=' . $products['products_id']) . '">' . $products['products_name'] . '</a>'; ?></td>
                       <td class="dataTableContent"><?php echo $products['products_model']; ?>
                       <td class="dataTableContent" align="center"><?php echo $products['quantitysum']; ?>&nbsp;</td>
+                      <?php if ($show_breakdown == 'on') { ?>
                       <td class="dataTableContent"><?php echo $customers_string; ?></td>
+                      <?php } ?>
                       <td class="dataTableContent" align="right"><?php echo sprintf('%01.2f', $products['gross']); ?>&nbsp;</td>
                     </tr>
 <?php
@@ -261,7 +273,9 @@ $Id$
 			          <td class="dataTableContent"></td>
 			          <td class="dataTableContent"></td>
 			          <td class="dataTableContent" align="center"><b><?php echo $totalquantity; ?></b>&nbsp;</td>
+                      <?php if ($show_breakdown == 'on') { ?>
                       <td class="dataTableContent"></td>
+                      <?php } ?>
 			          <td class="dataTableContent" align="right"><b><?php echo TEXT_TOTAL . '&nbsp;' ?><?php echo $currencies->display_price($totalgross,'',1); ?></b>&nbsp;</td>
 		 	        </tr> 
                   <?php } ?>

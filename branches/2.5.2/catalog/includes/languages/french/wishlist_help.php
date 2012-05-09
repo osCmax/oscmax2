@@ -10,41 +10,47 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'My Wish List F.A.Q.');
-define('NAVBAR_TITLE_1', 'Wish List F.A.Q.');
+define('NAVBAR_TITLE', 'Foire aux questions de ma liste de souhaits');
+define('NAVBAR_TITLE_1', 'Foire aux questions de la liste de souhaits');
 
-define('HEADING_TITLE', 'My Wish List F.A.Q.');
+define('HEADING_TITLE', 'Foire aux questions de ma liste de souhaits');
 
-define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');
+define('TEXT_CLOSE_WINDOW','<u>Fermer la fen&ecirc;tre</u> [x]');
 
-define('TEXT_INFORMATION', '<b>What is My Wish List?</b><br>My Wish List is a convenient way for you to save a reminder of an item you would like to purchase later or an item that is not currently in stock.
+define('TEXT_INFORMATION', '<b>Qu\'est-ce la' . BOX_HEADING_CUSTOMER_WISHLIST . '?</b><br>' .
+BOX_HEADING_CUSTOMER_WISHLIST . ' est une manière commode de réserver les articles que vous voulez acheter plus tard ou qui ne sont pas en stock actuellement.
 <br>
 <br>
-<b>How do I add items to My Wish List? </b><br>
-To add an item to My Wish List, just click the "Add to Wishlist" button for any item that interests you. The "Add to Wishlist" button appears next to the "Add to Cart" button in the product info pages.
+<b>Comment puis-je ajouter des produits à ' . BOX_HEADING_CUSTOMER_WISHLIST . '? </b><br>
+Pour ajouter un article à ' . BOX_HEADING_CUSTOMER_WISHLIST . ', il suffit de cliquer sur n\'importe quel produit qui vous intéresse "Ajouter à ma liste de souhaits" Le bouton apparaît à côté de celui "Ajouter au panier" sur la page du produit.
 <br>
 <br>
-<b>Can I add "out-of-stock" items or "coming-soon items"?</b><br>
-Yes. You can add any item you choose to My Wish List.
+<b>Puis-je ajouter des artcicles qui ne sont pas de stock ou des produits à venir"?</b><br>
+Oui. Vous pouvez ajouter tout article que vous choisissez de ' . BOX_HEADING_CUSTOMER_WISHLIST .
+'<br>
+<br>
+<b>Comment je peut afficher la ' . BOX_HEADING_CUSTOMER_WISHLIST . '?</b><br>
+Sur la colonne de droite se trouve la case de "' . BOX_HEADING_CUSTOMER_WISHLIST . '".  Dans cette case s\'affiche le contenu de ' . BOX_HEADING_CUSTOMER_WISHLIST . '.  S\'il y a 5 ou moins d\'articles dans la ' . BOX_HEADING_CUSTOMER_WISHLIST . ', ils s\y afficheront. S\'il ya plus de 5 articles, il y aura un simple compteur avec le nombre total d\'article dans ' . BOX_HEADING_CUSTOMER_WISHLIST . '.
 <br>
 <br>
-<b>How do I view My Wish List?</b><br>
-On the right column is a "My Wish List" box.  This box shows the current status of My Wish List.  If there are 5 or less items in My Wish List, they will be listed here.  If there are more than 5 items, there will be a simple counter with the total number of items in My Wish List.
+' . BOX_HEADING_CUSTOMER_WISHLIST . ' Vous pouvez à tout moment en cliquant sur le lien dans la case "' . BOX_HEADING_CUSTOMER_WISHLIST . '" (<i><u>l\'afficher ' . BOX_HEADING_CUSTOMER_WISHLIST . '</u> [+]</i>).  ou en cliquant sur la flèche à droite sur la case de "' . BOX_HEADING_CUSTOMER_WISHLIST . '".
 <br>
 <br>
-My Wish List may be viewed at any time by clicking either the link found in the "My Wish List" box (<i><u>View My Wish List</u> [+]</i>).  or by clicking the right arrow on the "My Wish List" box.
+<b>Comment puis-je déplacer les produits ' . BOX_HEADING_CUSTOMER_WISHLIST . ' dans mon panier?</b><br>
+Pour déplacer les produits de la ' . BOX_HEADING_CUSTOMER_WISHLIST . ' dans le panier d\'achat, vous cliquez "Ajouter au panier" endesous du nom du produits dans la case de "' . BOX_HEADING_CUSTOMER_WISHLIST . '" (si la case ' . BOX_HEADING_CUSTOMER_WISHLIST . ' affiche les articles) ou cliquez "Mettre dans la panier" sous l\'élément de la ' . BOX_HEADING_CUSTOMER_WISHLIST . ' de la page principale et voila! Les articles se trouve dans votre panier.
 <br>
 <br>
-<b>How do I move My Wish List items to my Shopping Cart?</b><br>
-To move My Wish List items to the Shopping Cart, either click "Move to Cart" under the product name in the "My Wish List" box (if the My Wish List items are shown in the box) or click on "Move to Cart" underneath the item on the My Wish List main page and voila! The item is moved to the Cart.
+<b>Comment puis-je supprimer des articles de la ' . BOX_HEADING_CUSTOMER_WISHLIST . '?</b><br>
+Pour supprimer des article de la ' . BOX_HEADING_CUSTOMER_WISHLIST . ', vous cliquer "Supprimer" endesous du mon de l\'article dans la case "' . BOX_HEADING_CUSTOMER_WISHLIST . '" ou vous cliquez "Effacer" en dessous de l\'article ' . BOX_HEADING_CUSTOMER_WISHLIST . ' de la page du produit que vous voulez éffacer.
 <br>
 <br>
-<b>How do I remove items from My Wish List?</b><br>
-To remove items from My Wish List, either click "Delete" under the item\'s name in the "My Wish List" box or click "Delete" underneath the item on the My Wish List main page of the item(s) you would like to remove. 
-<br>
-<br>
-<b> Can I make My Wish List available to others? </b><br>
-Sorry. Currently My Wish List is only accessible when you are logged in to your account. Therefore, you are the only one that can see it.  However, you can email your wishlist to a friend by visiting the My Wish List main page, entering their email address into the \'send your wishlist to a friend\' box and clicking the email envelope.
+<!-- BoF Modification by: Talon177 -->
+<b> Est-ce que je peut rendre ma ' . BOX_HEADING_CUSTOMER_WISHLIST . ' accessible aux autres? </b><br>
+<!-- EoF Modification by: Talon177 -->
+<!-- BoF Modification by: Talon177 & Rob Woodgate -->
+Désolé. Actuellement votre ' . BOX_HEADING_CUSTOMER_WISHLIST . ' n\'est que accessible lorsque vous êtes connecté à votre compte. Par conséquent, vous êtes le seul qui puisseiez la voir. Cependant, vous pouvez envoyer un courriel de votre liste de souhaits à un ami en visitant la page ' . BOX_HEADING_CUSTOMER_WISHLIST . ', en saisisant son adresse courriel dans \'Envoyer votre liste de souhaits\' à ami et en cliquant sur l\'icone courriel.
+Désolé. Actuellement votre ' . BOX_HEADING_CUSTOMER_WISHLIST . ' n\'est que accessible lorsque vous êtes connecté à votre compte. Par conséquent, vous êtes le seul qui puisseiez la voir. Cependant, vous pouvez envoyer un courriel de votre liste de souhaits à un ami en visitant la page ' . BOX_HEADING_CUSTOMER_WISHLIST . ', en saisisant son adresse courriel dans \'Envoyer votre liste de souhaits\' à ami et en cliquant sur l\'icone courriel.
+<!-- EoF Modification by: Talon177 & Rob Woodgate-->
 <br>
 <br>');
 ?>

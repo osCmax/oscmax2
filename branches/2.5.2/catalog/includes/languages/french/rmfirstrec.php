@@ -12,14 +12,14 @@ $Id: rmfirstrec.php 982 2011-01-06 02:53:12Z michael.oscmax@gmail.com $
 
 define('MODULE_SHIPPING_RMFIRSTREC_TEXT_TITLE', 'Royal Mail 1st Class Recorded');
 define('MODULE_SHIPPING_RMFIRSTREC_TEXT_DESCRIPTION', 'Royal Mail First Class Recorded');
-define('MODULE_SHIPPING_RMFIRSTREC_TEXT_WAY', 'Delivery Weight');
-define('MODULE_SHIPPING_RMFIRSTREC_TEXT_ITEM', 'package of');
-define('MODULE_SHIPPING_RMFIRSTREC_TEXT_ITEMS', 'packages of');
+define('MODULE_SHIPPING_RMFIRSTREC_TEXT_WAY', 'Poits du colis');
+define('MODULE_SHIPPING_RMFIRSTREC_TEXT_ITEM', 'paquet de');
+define('MODULE_SHIPPING_RMFIRSTREC_TEXT_ITEMS', 'paquets de');
 define('MODULE_SHIPPING_RMFIRSTREC_TEXT_UNITS', 'Kg\'s');
-define('MODULE_SHIPPING_RMFIRSTREC_INVALID_ZONE', 'Sorry, this shipping method is only available for UK customers');
-define('MODULE_SHIPPING_RMFIRSTREC_UNDEFINED_RATE', 'The shipping rate cannot be determined at this time');
-define('MODULE_SHIPPING_RMFIRSTREC_DELIVERY_NO_INSURANCE', 'Uninsured');
-define('MODULE_SHIPPING_RMFIRSTREC_DELIVERY_INSURANCE', 'Insured upto &pound;');
-define('MODULE_SHIPPING_RMFIRSTREC_DELIVERY_SHIPPING_TIME', 'ships normally within 1 to 3 days');
+define('MODULE_SHIPPING_RMFIRSTREC_INVALID_ZONE', 'Désolé, ce mode de livraison est uniquement disponible pour les clients au Royaume-Uni');
+define('MODULE_SHIPPING_RMFIRSTREC_UNDEFINED_RATE', 'Les frais de livraison ne peut être déterminée en ce momente');
+define('MODULE_SHIPPING_RMFIRSTREC_DELIVERY_NO_INSURANCE', 'Non assurés');
+define('MODULE_SHIPPING_RMFIRSTREC_DELIVERY_INSURANCE', 'assuré jusqu\'à &pound;');
+define('MODULE_SHIPPING_RMFIRSTREC_DELIVERY_SHIPPING_TIME', 'Normalement expédier dans les 1 à 3 jours');
 
 ?>

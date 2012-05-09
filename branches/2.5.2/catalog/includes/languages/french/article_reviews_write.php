@@ -10,12 +10,12 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Reviews');
-define('HEADING_TITLE', 'Write Review of \'');
+define('NAVBAR_TITLE', 'Commentaire');
+define('HEADING_TITLE', 'Ecrire in commentaire de \'');
 
-define('SUB_TITLE_FROM', 'From:');
-define('SUB_TITLE_REVIEW', 'Your Review:');
-define('SUB_TITLE_RATING', 'Rating:');
+define('SUB_TITLE_FROM', 'De:');
+define('SUB_TITLE_REVIEW', 'Vos commentaires:');
 
-define('TEXT_APPROVAL_WARNING', 'Note: Your review will not appear until it has been approved.');
+define('TEXT_APPROVAL_WARNING', 'Note: Votre commentaire n\'apparaîtra après avoir été approuvé.');
+
 ?>

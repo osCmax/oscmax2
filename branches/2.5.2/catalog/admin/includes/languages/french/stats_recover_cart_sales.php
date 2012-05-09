@@ -24,4 +24,6 @@ define('TOTAL_RECORDS', 'Enregistrement examinés:');
 define('TOTAL_SALES', 'Ventes:');
 define('TOTAL_SALES_EXPLANATION', ' clients notifiés ont acheté');
 define('TOTAL_RECOVERED', 'Total Recouvré:');
+define('TEXT_WORKING', 'Working ... ');
+define('TEXT_DONE', 'Terminé!');
 ?>

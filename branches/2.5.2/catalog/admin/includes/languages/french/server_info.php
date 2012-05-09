@@ -12,7 +12,7 @@ $Id$
 
 define('HEADING_TITLE', 'Informations serveur');
 
-define('TITLE_SERVER_HOST', 'H&ocirc;te:');
+define('TITLE_SERVER_HOST', 'Serveur h&ocirc;te:');
 define('TITLE_SERVER_OS', 'Syst&egrave;me d\'exploitation:');
 define('TITLE_SERVER_DATE', 'Date du serveur:');
 define('TITLE_SERVER_UP_TIME', 'Temps de fonctionnement:');

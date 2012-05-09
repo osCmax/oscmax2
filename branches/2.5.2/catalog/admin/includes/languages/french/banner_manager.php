@@ -31,6 +31,7 @@ define('TEXT_BANNERS_OR_AT', ', ou &agrave;');
 define('TEXT_BANNERS_IMPRESSIONS', 'Impressions/Vues.');
 define('TEXT_BANNERS_SCHEDULED_AT', 'Planifi&eacute; le:');
 define('TEXT_BANNERS_BANNER_NOTE', '<b>Remarque sur la banni&egrave;res:</b><ul><li>Utilisez une image ou du texte HTML pour la banni&egrave;re mais pas les deux.</li><li>Le texte HTML a priorit&eacute; sur l\'image</li></ul>');
+define('TEXT_BANNERS_GROUP_NOTE', '<b>Banner Groups:</b><ul><li>all - displays in the footer on all pages</li><li>index - displays on the index page in the main content area</li><li>product - displays on the product_info page</li><li>You can change the sort order of display in Configuration -> Templates -> Page Modules</li></ul>');
 define('TEXT_BANNERS_INSERT_NOTE', '<b>Remarque sur l\'image:</b><ul><li>Le r&eacute;pertoire de destination lors du transfert doit avoir les bonnes permissions (&eacute;criture) sur le serveur!</li><li>Ne remplissez pas la cible de l\'image (\'Sauvegarder dans\') si vous ne transf&eacute;rez pas d\'image sur le serveur web (dans le cas ou vous utilisez une image d&eacute;ja pr&eacute;sente sur celui-ci).</li><li>La cible de l\'image (\'Sauvegarder dans\') doit pointer sur un r&eacute;pertoire existant et le slash de fin doit &ecirc;tre pr&eacute;sent (ex., banners/).</li></ul>');
 define('TEXT_BANNERS_EXPIRCY_NOTE', '<b>Remarque sur l\'expiration:</b><ul><li>Only one of the two fields should be submitted</li><li>If the banner is not to expire automatically, then leave these fields blank</li></ul>');
 define('TEXT_BANNERS_SCHEDULE_NOTE', '<b>Remarque sur la planification:</b><ul><li>Si la date de planification est pr&eacute;cis&eacute;e, la banni&egrave;re sera activ&eacute;e seulement &agrave; partir de cette date.</li><li>Toutes las banni&egrave;res planifi&eacute;es seront marqu&eacute;es inactives jusqu\'&agrave; ce que la date de planification soit atteinte. Elles seront alors actives.</li></ul>');
@@ -64,4 +65,6 @@ define('ERROR_UNKNOWN_STATUS_FLAG', 'Erreur: Statut flag inconnu.');
 
 define('ERROR_GRAPHS_DIRECTORY_DOES_NOT_EXIST', 'Erreurr: Le r&eacute;pertoire de banni&egrave;res n\'existe pas. Cr&eacute;er un r&eacute;pertoire \'graphs\' dans \'images\'.');
 define('ERROR_GRAPHS_DIRECTORY_NOT_WRITEABLE', 'Erreur: Le r&eacute;pertoire de banni&egrave;res n\'est pas autoris&eacute; en &eacute;criture.');
+
+define('TEXT_BANNERS_HELP', 'Banner Manager Help');
 ?>

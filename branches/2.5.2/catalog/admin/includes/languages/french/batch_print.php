@@ -9,7 +9,10 @@ $Id$
 
   Released under the GNU General Public License
 */
-
+define('TEXT_ORDER_NUMBERS_RANGES', 'Order Number (s), either one # or  range, # - #, or #,#,#');
+define('TEXT_DIR_ERROR', ' Error: Problem opening directory ');
+define('TEXT_BPC_OPTIONS', 'Batch Print Center Options');
+define('TEXT_BPC_NO_OPTIONS', 'There are no options available for your selected option.');
 define('HEADING_TITLE', 'Batch Order Center');
 define('TABLE_HEADING_COMMENTS', 'Commentaires');
 define('TABLE_HEADING_PRODUCTS_MODEL', 'Modéle');
@@ -31,7 +34,7 @@ define('ENTRY_CC_EXP', 'Expiration Date:');
 define('ENTRY_SUB_TOTAL', 'Sous-Total :');
 define('ENTRY_PHONE', 'Téléphone:');
 define('ENTRY_EMAIL', 'E-Mail:');
-define('ENTRY_TAX', 'Taxe :');
+define('ENTRY_TAX', 'TVA:');
 define('ENTRY_SHIPPING', 'Exp&eacute;dition :');
 define('ENTRY_TOTAL', 'Total:');
 define('TEXT_ORDER_NUMBER','Numéro de Commande:');
@@ -68,9 +71,8 @@ define('SHIP_FROM_COUNTRY', '');  //eg. 'United Kingdom'
 define('WEBSITE', 'www.Your site.com');
 define('TEXT_RETURNS', 'Nous espérons que vous n\'en aurez pas besoin, mais nous vous avons fourni une étiquette de retours à tout hasard.Politique de retours sur www.Your site.com/shipping.php');
 define('TEXT_TO', 'To:');
-
 // Change this to a general comment that you would like
-define('BATCH_COMMENTS','Avis de mise à jour d\'ordre automatique.');
+define('BATCH_COMMENTS', 'Avis de mise à jour d\'ordre automatique.');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
 define('EMAIL_TEXT_SUBJECT', 'Mise à jour de la commande');
 define('EMAIL_TEXT_ORDER_NUMBER', 'Num&eacute;ro de commande :');
@@ -92,6 +94,11 @@ $error['ERROR_BAD_INVOICENUMBERS'] =  'Invalid Invoice numbers, Please enter a v
 $error['NO_ORDERS'] =  'There were no orders selected for export, try changing your order options.';
 $error['SET_PERMISSIONS'] = 'Can\'t write to directory!  Please set the permissions of your temp_pdf folder to CHMOD 0777';
 $error['FAILED_TO_OPEN'] = 'Could not open file for writing, make sure correct permissions are set';
+
+define('SUCCESS_1', 'Success: PDF of ');
+define('SUCCESS_2', ' record(s) was created successfully. Please ');
+define('SUCCESS_3', 'click here');
+define('SUCCESS_4', ' to open the file.');
 
 // PDF FONT SIZES
 define('COMPANY_HEADER_FONT_SIZE','14');
@@ -154,5 +161,23 @@ define('BATCH_PDF_FILE', 'batch_orders.pdf');
 //define('PRODUCT_LISTING_BKGD_COLOR',GREY);
 //define('MODEL_COLUMN_SIZE', '37');
 //define('PRICING_COLUMN_SIZES', '67');
+
+define('FOOTER_TEXT', 'Thank you for shopping with us at ' . STORE_NAME);
+
+// Filename defines to allow multilanguage use
+define('TEXT_MISSING_FILENAME', 'Missing language define for');
+define('TEXT_CHRISTMAS_CARD', 'Christmas Card');
+define('TEXT_GRID', 'Grid');
+define('TEXT_INTEGRATED_PACKING', 'Integrated Packing');
+define('TEXT_INTEGRATED_PACKING2', 'Integrated Packing 2');
+define('TEXT_INVOICE', 'Invoice');
+define('TEXT_INVOICE_S3', 'Invoice (uses S3 printed invoice paper)');
+define('TEXT_LABELS', 'Labels');
+define('TEXT_LABELWRITER', 'Labelwriter');
+define('TEXT_LETTERHEAD', 'Letterhead');
+define('TEXT_NULL', 'Null');
+define('TEXT_ORDER_STATUS_CHANGE_ONLY', 'Order Status change only');
+define('TEXT_PACKING_SLIP_AND_INVOICE', 'Packing Slip and Invoice');
+define('TEXT_PACKING_SLIP', 'Packing Slip');
 
 ?>

@@ -9,6 +9,7 @@ $Id$
 
   Released under the GNU General Public License
 */
+
 define('EP', 			'EasyPopulate');
 define('DEFAULT LANGUAGE', 	'Default language');
 
@@ -29,8 +30,8 @@ define('SPLIT_FILE', 'Split file ');
 define('DOWNLOAD', 'Download ');
 define('CREATE', 'Create');
 
-define('TAB_LIMITED_TEXT',' tab-delimited .txt file to edit');
-define('TAB_LIMITED_TEMP_TEXT',' tab-delimited .txt file to edit');
+define('TAB_LIMITED_TEXT', ' tab-delimited .txt file to edit');
+define('TAB_LIMITED_TEMP_TEXT', ' tab-delimited .txt file to edit');
 
 define('COMPLETE', 'complete');
 define('MODEL_PRICE_QTY', 'Model/Price/Qty');

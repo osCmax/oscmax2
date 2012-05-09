@@ -26,5 +26,5 @@ define('TEXT_INFO_EMAIL_ADDRESS', 'Adresse email :');
 define('TEXT_INFO_DATE_REDEEMED', 'Date de validation :');
 define('TEXT_INFO_IP_ADDRESS', 'Adresse IP :');
 define('TEXT_INFO_CUSTOMERS_ID', 'Identifiant du client :');
-define('TEXT_INFO_NOT_REDEEMED', '<b><font color="red">Non valid&eacute;</font></b>');
+define('TEXT_INFO_NOT_REDEEMED', 'Non valid&eacute;');
 ?>

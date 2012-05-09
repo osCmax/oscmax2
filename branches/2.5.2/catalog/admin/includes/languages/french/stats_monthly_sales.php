@@ -40,8 +40,7 @@ define('TABLE_HEADING_SALES', 'Product<br> sales');
 define('TABLE_HEADING_NONTAXED', 'Exempt<br> sales');
 define('TABLE_HEADING_TAXED', 'Taxable<br> sales');
 define('TABLE_HEADING_TAX_COLL', 'Taxes<br> collected');
-define('TABLE_HEADING_SHIPHNDL', 'Shipping<br> & Handling');
-define('TABLE_HEADING_SHIP_TAX', 'Tax on<br /> shipping');
+define('TABLE_HEADING_SHIPHNDL', 'Shipping<br> &amp; Handling');
 define('TABLE_HEADING_LOWORDER', 'Low Order<br> Fees');
 define('TABLE_HEADING_OTHER', 'Gift<br> Vouchers');  // could be any other extra class value
 define('TABLE_FOOTER_YTD','YTD');
@@ -82,7 +81,7 @@ On the left, the month and year of the row are stated.  The other columns are, l
 <li class="smallText"><b>Nontaxed sales</b> - the subtotal of sales which were not taxed, and 
 <li class="smallText"><b>Taxed sales</b> - the subtotal of sales which were taxed
 <li class="smallText"><b>Taxes collected</b> - the amount collected from customers for taxes
-<li class="smallText"><b>Shipping & handling</b> - the total shipping and handling charges collected  
+<li class="smallText"><b>Shipping &amp; handling</b> - the total shipping and handling charges collected  
 <li class="smallText"><b>Low order fees</b> and <b>Gift Vouchers</b> - if the store has low order fees enabled, and/or gift vouchers, the totals of these are shown in separate columns
 </ul>
 <p class="main" align="justify">

@@ -38,5 +38,7 @@ define ('TEXT_REDEEM_COUPON_MESSAGE_HEADER', 'Vous avez utilisé un chèque cadeau
 define ('TEXT_REDEEM_COUPON_MESSAGE_AMOUNT', "\n\n" . 'La valeur du chèque cadeau était %s');
 define ('TEXT_REDEEM_COUPON_MESSAGE_BODY', "\n\n" . 'Vous pouvez maintenant visiter notre site, vous connecter sur votre compte et l\'utiliser.');
 define ('TEXT_REDEEM_COUPON_MESSAGE_FOOTER', "\n\n");
-
+//Added line
+define ('TEXT_EMAIL_BUTTON_TEXT', 'Le bouton \'Précédent\' est désactivé lorsque vous utilisez l'éditeur WYSIWYG');
+define ('TEXT_EMAIL_BUTTON_HTML', '<br>Retour à la page précédente');
 ?>

@@ -26,7 +26,7 @@ define('TEXT_NEWSLETTER_CONTENT', 'Contenu:');
 define('TEXT_NEWSLETTER_DATE_ADDED', 'Date Ajoutée:');
 define('TEXT_NEWSLETTER_DATE_SENT', 'Date Envoyée:');
 
-define('TEXT_INFO_DELETE_INTRO', 'Êtes-vous certain de vouloir effacer cette nouveau(elle)sletter?');
+define('TEXT_INFO_DELETE_INTRO', 'Etes-vous certain de vouloir effacer cette nouveau(elle)sletter?');
 
 define('TEXT_PLEASE_WAIT', 'S\'il vous plait, patientez .. envois d\'e-mail en cours ..<br><br>NE PAS INTERROMPRE LA PROCEDURE !');
 define('TEXT_FINISHED_SENDING_EMAILS', 'Envoi des e-mails terminé !');

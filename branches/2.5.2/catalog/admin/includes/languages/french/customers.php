@@ -37,6 +37,12 @@ define('TEXT_INFO_NUMBER_OF_REVIEWS', 'Nombre de critiques:');
 define('TEXT_DELETE_INTRO', 'Etes vous sur de vouloir supprimer ce client?');
 define('TEXT_DELETE_REVIEWS', 'Supprimer %s critique(s)');
 define('TEXT_INFO_HEADING_DELETE_CUSTOMER', 'Supprimer client');
-define('TYPE_BELOW', 'Type ci-dessous');
-define('PLEASE_SELECT', 'Choisissez en un');
+define('PLEASE_SELECT', 'Select One');
+
+define('IMAGE_BUTTON_ADD_COMMENT', 'Add Comment');
+define('TEXT_COMMENTS', 'Comments');
+define('TEXT_ADD_A_COMMENT', 'Add a comment:');
+define('TEXT_NOTES', 'Notes:');
+define('TEXT_AUTHOR', 'Author:');
+define('IMAGE_BUTTON_LOGIN_AS', 'Login as customer');
 ?>

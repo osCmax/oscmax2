@@ -1486,6 +1486,7 @@ CREATE TABLE IF NOT EXISTS pm_configuration (
   pm_filename varchar(255) NOT NULL,
   pm_active varchar(255) NOT NULL,
   pm_page varchar(255) NOT NULL,
+  pm_cg_hide varchar(255) NOT NULL,
   pm_sort_order int(11) NOT NULL,
   last_modified datetime NOT NULL,
   date_added datetime NOT NULL,
@@ -2867,25 +2868,25 @@ INSERT INTO orders_premade_comments VALUES (1, 'Thank you for your custom', 'Tha
 INSERT INTO orders_premade_comments VALUES (2, 'Out of stock when ordered', 'Unfortunately, your item was out of stock when the order was placed. It will despatch as soon as we receive it.');
 
 #Page Module Controller
-INSERT INTO pm_configuration VALUES (1, 'Specials', 'Special Products Module', 'default_specials.php', 'yes', 'index', 4, now(), now());
-INSERT INTO pm_configuration VALUES (2, 'New Products', 'New Products Module', 'new_products.php', 'yes', 'index', 5, now(), now());
-INSERT INTO pm_configuration VALUES (3, 'Upcoming Products', 'Upcoming products module', 'upcoming_products.php', 'yes', 'index', 7, now(), now());
-INSERT INTO pm_configuration VALUES (4, 'Cross Sell Module', 'Cross Sell Module', 'xsell_products.php', 'yes', 'product_info', 1, now(), now());
-INSERT INTO pm_configuration VALUES (5, 'Also Purchased Module', 'Also Purchased Module', 'also_purchased_products.php', 'yes', 'product_info', 2, now(), now());
-INSERT INTO pm_configuration VALUES (6, 'Previous Next Module', 'Previous Next Module', 'products_next_previous.php', 'yes', 'product_info', 4, now(), now());
-INSERT INTO pm_configuration VALUES (7, 'Counter', '', 'counter.php', 'yes', 'all', 2, now(), now());
-INSERT INTO pm_configuration VALUES (8, 'Copyright', '', 'copyright.php', 'yes', 'all', 4, now(), now());
-INSERT INTO pm_configuration VALUES (9, 'Articles', '', 'index_articles.php', 'yes', 'index', 8, now(), now());
-INSERT INTO pm_configuration VALUES (10, 'Greeting', '', 'index_greeting.php', 'yes', 'index', 2, now(), now());
-INSERT INTO pm_configuration VALUES (11, 'Define Mainpage', '', 'index_define_mainpage.php', 'yes', 'index', 3, now(), now());
-INSERT INTO pm_configuration VALUES (12, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'index', 6, now(), now());
-INSERT INTO pm_configuration VALUES (13, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'product_info', 3, now(), now());
-INSERT INTO pm_configuration VALUES (14, 'Slideshow', '', 'slideshow.php', 'yes', 'index', 1, now(), now());
-INSERT INTO pm_configuration VALUES (15, 'New Products', '', 'new_products.php', 'yes', 'nested', 1, now(), now());
-INSERT INTO pm_configuration VALUES (16, 'Banner', '', 'banner_index.php', 'yes', 'index', 9, now(), now());
-INSERT INTO pm_configuration VALUES (17, 'Banner', '', 'banner_all.php', 'yes', 'all', 3, now(), now());
-INSERT INTO pm_configuration VALUES (18, 'Banner', '', 'banner_product.php', 'yes', 'product_info', 5, now(), now());
-INSERT INTO pm_configuration VALUES (19, 'Recently Viewed', '', 'recently_viewed_products.php', 'yes', 'all', 1, now(), now());
+INSERT INTO pm_configuration VALUES (1, 'Specials', 'Special Products Module', 'default_specials.php', 'yes', 'index', '', 4, now(), now());
+INSERT INTO pm_configuration VALUES (2, 'New Products', 'New Products Module', 'new_products.php', 'yes', 'index', '', 5, now(), now());
+INSERT INTO pm_configuration VALUES (3, 'Upcoming Products', 'Upcoming products module', 'upcoming_products.php', 'yes', 'index', '', 7, now(), now());
+INSERT INTO pm_configuration VALUES (4, 'Cross Sell Module', 'Cross Sell Module', 'xsell_products.php', 'yes', 'product_info', '', 1, now(), now());
+INSERT INTO pm_configuration VALUES (5, 'Also Purchased Module', 'Also Purchased Module', 'also_purchased_products.php', 'yes', 'product_info', '', 2, now(), now());
+INSERT INTO pm_configuration VALUES (6, 'Previous Next Module', 'Previous Next Module', 'products_next_previous.php', 'yes', 'product_info', '', 4, now(), now());
+INSERT INTO pm_configuration VALUES (7, 'Counter', '', 'counter.php', 'yes', 'all', '', 2, now(), now());
+INSERT INTO pm_configuration VALUES (8, 'Copyright', '', 'copyright.php', 'yes', 'all', '', 4, now(), now());
+INSERT INTO pm_configuration VALUES (9, 'Articles', '', 'index_articles.php', 'yes', 'index', '', 8, now(), now());
+INSERT INTO pm_configuration VALUES (10, 'Greeting', '', 'index_greeting.php', 'yes', 'index', '', 2, now(), now());
+INSERT INTO pm_configuration VALUES (11, 'Define Mainpage', '', 'index_define_mainpage.php', 'yes', 'index', '', 3, now(), now());
+INSERT INTO pm_configuration VALUES (12, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'index', '', 6, now(), now());
+INSERT INTO pm_configuration VALUES (13, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'product_info', '', 3, now(), now());
+INSERT INTO pm_configuration VALUES (14, 'Slideshow', '', 'slideshow.php', 'yes', 'index', '', 1, now(), now());
+INSERT INTO pm_configuration VALUES (15, 'New Products', '', 'new_products.php', 'yes', 'nested', '', 1, now(), now());
+INSERT INTO pm_configuration VALUES (16, 'Banner', '', 'banner_index.php', 'yes', 'index', '', 9, now(), now());
+INSERT INTO pm_configuration VALUES (17, 'Banner', '', 'banner_all.php', 'yes', 'all', '', 3, now(), now());
+INSERT INTO pm_configuration VALUES (18, 'Banner', '', 'banner_product.php', 'yes', 'product_info', '', 5, now(), now());
+INSERT INTO pm_configuration VALUES (19, 'Recently Viewed', '', 'recently_viewed_products.php', 'yes', 'all', '', 1, now(), now());
 
 
 #Fix for Articles to display if they are not in a topic

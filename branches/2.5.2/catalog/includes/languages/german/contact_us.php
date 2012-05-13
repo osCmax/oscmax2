@@ -35,4 +35,5 @@ define('REASON_3', 'Versand');
 define('REASON_4', 'Rücksendung');
 define('REASON_5', 'Marketing');
 define('REASON_6', 'Sonstiges');
+define('TEXT_REVEAL_EMAIL', 'E-Mailadresse anzeigen');
 ?>

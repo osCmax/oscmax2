@@ -16,6 +16,7 @@ define('TABLE_HEADING_PM_TITLE', 'Modultitel');
 define('TABLE_HEADING_PM_FILENAME', 'Moduldateiname');
 define('TABLE_HEADING_PM_PAGE', 'Modul Anzeigeseite');
 define('TABLE_HEADING_PM_ACTIVE', 'Status');
+define('TABLE_HEADING_PM_CG_HIDE', 'Bei Kundengruppen verstecken');
 define('TABLE_HEADING_PM_SORT_ORDER', 'Sortierung');
 
 define('TEXT_INFO_HEADING_EDIT_PM_CONFIGURATION', 'Seitenmodul bearbeiten');
@@ -30,6 +31,7 @@ define('TEXT_INFO_EDIT_INTRO', 'Führen Sie die gewünschten Änderungen durch. All
 define('TEXT_PM_TITLE', 'Seitenmodultitel');
 define('TEXT_PM_FILENAME', 'Seitenmoduldateiname');
 define('TEXT_PM_PAGE',' Modul Anzeigeseite');
+define('TEXT_PM_CG_HIDE', 'Vor diesen Kundengruppen verstecken: (zB. 0,1,2)');
 define('TEXT_PM_ACTIVE', 'Dieses Modul aktivieren?');
 define('TEXT_PM_SORT_ORDER', 'Sortierung');
 ?>

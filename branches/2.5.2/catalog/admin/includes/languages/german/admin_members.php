@@ -41,7 +41,7 @@ define('TABLE_HEADING_GROUPS_CATEGORIES', 'Kategorieberechtigungen');
 
 define('TEXT_INFO_HEADING_DEFAULT', 'Verwaltungsbenutzer ');
 define('TEXT_INFO_HEADING_DELETE', 'Berechtigung löschen ');
-define('TEXT_INFO_HEADING_EDIT', 'Kategorie bearbeiten / ');
+define('TEXT_INFO_HEADING_EDIT', 'Admin Benutzer bearbeiten');
 define('TEXT_INFO_HEADING_NEW', 'Neuer Verwaltungsbenutzer ');
 
 define('TEXT_INFO_DEFAULT_INTRO', 'Benutzergruppe');
@@ -79,7 +79,7 @@ define('ADMIN_EMAIL_EDIT_TEXT', 'Hallo %s,' . "\n\n" . 'Ihre persönlichen Inform
 define('TEXT_INFO_HEADING_DEFAULT_GROUPS', 'Verwaltungsgruppe ');
 define('TEXT_INFO_HEADING_DELETE_GROUPS', 'Gruppe löschen ');
 
-define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>ANMERKUNG:</b><ul><li><b>Ändern:</b> Ändern des Gruppennamens.</li><li><b>Löschen:</b> Gruppe entfernen.</li><li><b>Definieren:</b> Definieren Sie die Gruppenberechtigung.</li></ul>');
+define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>ANMERKUNG:</b><ul><li><b>Neue Berechtigung:</b> Dateizugriff definieren/ändern.</li><li><b>Bearbeiten:</b> Gruppenamen bearbeiten.</li><li><b>Löschen:</b> Gruppe löschen.</li></ul>');
 define('TEXT_INFO_DELETE_GROUPS_INTRO', 'Es werden auch alle Benutzer dieser Gruppe gelöscht werden. Sind Sie sicher, dass Sie die Gruppe <b>%s</b> löschen möchten?');
 define('TEXT_INFO_DELETE_GROUPS_INTRO_NOT', 'Diese Gruppe kann nicht gelöscht werden!');
 define('TEXT_INFO_GROUPS_INTRO', 'Geben Sie einen eindeutigen Gruppennamen an. Klicken Sie zum Speichern auf Weiter.');

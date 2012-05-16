@@ -74,7 +74,7 @@ if ($num_products_xsell != 0) { // Check query is not blank
  
         $pf->loadProduct($xsell['products_id'], $languages_id, NULL, NULL);
 
-		  $display_code = '<td width="33%" class="smallText"><br><center><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $xsell['products_image'], $xsell['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . $xsell['products_name'] .'</a><br>' . $pf->getPriceStringShort() . '<br>' . $pf->getProductButtons($xsell['products_id'], FILENAME_PRODUCT_INFO, $xsell['products_model'], $xsell['products_name']) . '</a></center></td>';
+		  $display_code = '<td width="33%" class="smallText"><br><center><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . tep_image(DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $xsell['products_image'], $xsell['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $xsell['products_id']) . '">' . $xsell['products_name'] .'</a><br>' . $pf->getPriceStringShort() . '<br>' . $pf->getProductButtons($xsell['products_id'], FILENAME_PRODUCT_INFO, $xsell['products_model'], $xsell['products_name']) . '</center></td>';
  
 	  if  (($div3rows_xs <> $row) && ($col == 0)) {
 		$output .= '<div><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr valign="middle">' . $display_code;

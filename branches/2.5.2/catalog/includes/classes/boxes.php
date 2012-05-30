@@ -118,13 +118,12 @@ $Id$
       }
 
       $info_box_contents = array();
-      $info_box_contents[] = array(array('params' => 'class="infoBoxHeading"',
-                                         'text' => $left_corner),
+	  $info_box_contents[] = array(array('text' => $left_corner),
                                    array('params' => 'width="100%" class="infoBoxHeading"',
                                          'text' => $contents[0]['text']),
                                    array('params' => 'class="infoBoxHeading"',
                                          'text' => $right_arrow),
-                                   array('params' => 'class="infoBoxHeading" nowrap',
+                                   array('params' => 'nowrap',
                                          'text' => $right_corner));
 
       $this->tableBox($info_box_contents, true);
@@ -152,13 +151,12 @@ $Id$
       }
 	  
 	  $info_box_contents = array();
-      $info_box_contents[] = array(array('params' => 'class="infoBoxHeading"',
-                                         'text' => $left_corner),
+	  $info_box_contents[] = array(array('text' => $left_corner),
                                    array('params' => 'width="100%" class="infoBoxHeading"',
                                          'text' => $contents[0]['text']),
                                    array('params' => 'class="infoBoxHeading"',
                                          'text' => $right_arrow),
-                                   array('params' => 'class="infoBoxHeading" nowrap',
+                                   array('params' => 'nowrap',
                                          'text' => $right_corner));
 
       $this->tableBox($info_box_contents, true);
@@ -187,12 +185,10 @@ $Id$
       $this->table_cellpadding = '0';
 
       $info_box_contents = array();
-      $info_box_contents[] = array(array('params' => 'class="contentBoxHeading"',
-                                         'text' => tep_image(bts_select('images', 'infobox/top_left.png'))),
+      $info_box_contents[] = array(array('text' => tep_image(bts_select('images', 'infobox/top_left.png'))),
                                    array('params' => 'class="contentBoxHeading" width="100%"',
                                          'text' => $contents[0]['text']),
-                                   array('params' => 'class="contentBoxHeading"',
-                                         'text' => tep_image(bts_select('images', 'infobox/top_right.png'))));
+                                   array('text' => tep_image(bts_select('images', 'infobox/top_right.png'))));
 
       $this->tableBox($info_box_contents, true);
     }

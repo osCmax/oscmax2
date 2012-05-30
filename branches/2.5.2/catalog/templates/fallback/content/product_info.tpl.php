@@ -328,7 +328,7 @@ $Id$
             
 			<!-- Conditional Atrributes Starts -->              
             <?php
-    		$products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$_GET['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");
+		$products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$_GET['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");
     		$products_attributes = tep_db_fetch_array($products_attributes_query);
     
 			if ($products_attributes['total'] > 0) { ?>
@@ -408,7 +408,7 @@ $Id$
 						    <td class="main" align="right" rowspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $product_info['products_model']) . '%0D%0A' .  TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $product_info['products_name']) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' .  $product_info['products_id'] .'%0D%0A%0D%0A') . '">' . tep_image_button('button_cfp.gif', IMAGE_BUTTON_CFP); ?></a></td>
                         <?php } else { ?>  
                        	  	<td align="center"><img src="<?php echo DIR_WS_ICONS . 'plus.png' ?>" onclick="TextBox_AddToIntValue('product-quantity-product.id', +<?php echo $qtyBlocks; ?>, <?php echo $min_order_qty; ?>)" alt="<?php echo $qtyBlocks; ?>" class="plusminus"></td>
-                          	<td rowspan="2" align="center"><?php echo tep_draw_input_field('cart_quantity', $pf->adjustQty(1), 'size="2" id="product-quantity-product.id" '); ?></td>
+                          	<td rowspan="2" align="center"><?php echo tep_draw_input_field('cart_quantity', max($qtyBlocks, $min_order_qty, 1), 'size="2" id="product-quantity-product.id" '); ?></td>
                             <?php // START: PGM Edit to switch Add to Cart image if stock = 0
 							  if ($product_info['products_quantity'] == 0 && STOCK_IMAGE_SWITCH == 'true') { ?>
 							    <td class="main" align="right" rowspan="2"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_image_submit('button_out_of_stock.gif', IMAGE_OUT_OF_STOCK); ?></td>

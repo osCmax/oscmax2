@@ -364,7 +364,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
            break; // EOF Separate Pricing per Customer
           case 'PRODUCT_LIST_BUY_NOW':
            $lc_align = 'center';
-		   $lc_text = $pf->getProductButtons($listing[$x]['products_id'], basename($PHP_SELF), $listing[$x]['products_model'], $listing[$x]['products_name']);
+		   $lc_text = $pf->getProductButtons($listing[$x]['products_id'], basename($PHP_SELF), $listing[$x]['products_model'], $listing[$x]['products_name'], $cPath);
            break;
         }
         $product_contents[] = $lc_text;

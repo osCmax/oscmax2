@@ -59,6 +59,11 @@ if (RECAPTCHA_ON == 'true') {
 ****************** ADD PRODUCT TO SHOPPING CART ********************
 *******************************************************************/
 
+  // Check to see if any checkboxes were selected
+  if(isset($_POST['add_prod_x']) && (!isset($_POST['add_wishprod']))) {
+    $messageStack->add('wishlist', WISHLIST_NO_CHECKBOX_SELECTED_BUY, 'warning');
+  }
+
   if (isset($_POST['add_wishprod'])) {
 	if(isset($_POST['add_prod_x'])) {
 		foreach ($_POST['add_wishprod'] as $value) {
@@ -72,7 +77,12 @@ if (RECAPTCHA_ON == 'true') {
 /*******************************************************************
 ****************** DELETE PRODUCT FROM WISHLIST ********************
 *******************************************************************/
-
+  
+  // Check to see if any checkboxes were selected
+  if(isset($_POST['delete_prod_x']) && (!isset($_POST['add_wishprod']))) {
+    $messageStack->add('wishlist', WISHLIST_NO_CHECKBOX_SELECTED_DELETE, 'warning');
+  }
+  
   if (isset($_POST['add_wishprod'])) {
 	if(isset($_POST['delete_prod_x'])) {
 		foreach ($_POST['add_wishprod'] as $value) {

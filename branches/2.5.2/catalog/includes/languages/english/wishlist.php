@@ -52,4 +52,7 @@ define('CLEAR_WISHLIST', 'Are you sure you want to clear your entire wishlist?')
 
 define('IMAGE_CLEAR_WISHLIST', 'Clear Wishlist');
 define('IMAGE_DELETE_WISHLIST', 'Delete From Wishlist');
+
+define('WISHLIST_NO_CHECKBOX_SELECTED_BUY', 'Please select the checkbox next to the product you wish to add from your Wish List.');
+define('WISHLIST_NO_CHECKBOX_SELECTED_DELETE', 'Please select the checkbox next to the product you wish to delete from your Wish List.');
 ?>

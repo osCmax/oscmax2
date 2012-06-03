@@ -34,7 +34,7 @@ $tplDir = bts_template_switch();
 
 function bts_select($template_type, $filename = '') {
   // $content_template ??
-  global $content_template, $content, $box_base_name;
+  global $content_template, $content, $box_base_name, $language;
 
   switch ($template_type) {
 
@@ -159,7 +159,15 @@ function bts_select($template_type, $filename = '') {
       return (FALSE);
     }
     break;
-
+	
+	case 'language':
+	if (is_file(DIR_WS_TEMPLATES . 'includes/languages/' . $language . '/' . $filename)) {
+	    $path = DIR_WS_TEMPLATES . 'includes/languages/' . $language . '/' . $filename;
+	} else {
+        $path = DIR_WS_INCLUDES . 'languages/' . $language . '/' . $filename;
+    }
+	break;
+	
     default:
     // exit ('Error bts_select()! No template selected for template type: ');
     echo ('Error: bts_select()! No template selected for template type: ' . $template_type);

@@ -17,13 +17,23 @@ $Id: slideshow.php 3 2010-03-31 user pgm
 
   if (tep_not_null($action)) {
     switch ($action) {
+	  case 'setflag': 
+        if (($_GET['flag'] == 'no') || ($_GET['flag'] == 'yes')) {
+          if ($_GET['tID']) {
+            tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_active = '" . $_GET['flag'] . "' where slideshow_id = '" . $_GET['tID'] . "'");
+          }
+        }
+ 	    tep_redirect(tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&tID=' . $_GET['tID']));
+        break;
       case 'insert':
         $slideshow_title = tep_db_prepare_input($_POST['slideshow_title']);
         $slideshow_link = tep_db_prepare_input($_POST['slideshow_link']);
         $slideshow_target = tep_db_prepare_input($_POST['slideshow_target']);
+		$slideshow_active = tep_db_prepare_input($_POST['slideshow_active']);
+		$slideshow_cg_hide = tep_db_prepare_input($_POST['slideshow_cg_hide']);
         $slideshow_sort_order = tep_db_prepare_input($_POST['slideshow_sort_order']);
 
-        tep_db_query("insert into " . TABLE_SLIDESHOW . " (slideshow_id, slideshow_title, slideshow_link, slideshow_target, slideshow_sort_order, date_added) values ('', '" . addslashes($slideshow_title) . "', '" . tep_db_input($slideshow_link) . "', '" . tep_db_input($slideshow_target) . "', '" . tep_db_input($slideshow_sort_order) . "', now())");
+        tep_db_query("insert into " . TABLE_SLIDESHOW . " (slideshow_id, slideshow_title, slideshow_link, slideshow_target, slideshow_cg_hide, slideshow_sort_order, date_added) values ('', '" . addslashes($slideshow_title) . "', '" . tep_db_input($slideshow_link) . "', '" . tep_db_input($slideshow_target) . "', '" . tep_db_input($slideshow_active) . "', '" . tep_db_input($slideshow_cg_hide) . "', '" . tep_db_input($slideshow_sort_order) . "', now())");
 		
 		$slideshow_id = tep_db_insert_id();
 		
@@ -41,9 +51,11 @@ $Id: slideshow.php 3 2010-03-31 user pgm
         $slideshow_title = tep_db_prepare_input($_POST['slideshow_title']);
         $slideshow_link = tep_db_prepare_input($_POST['slideshow_link']);
         $slideshow_target = tep_db_prepare_input($_POST['slideshow_target']);
+		$slideshow_active = tep_db_prepare_input($_POST['slideshow_active']);
+		$slideshow_cg_hide = tep_db_prepare_input($_POST['slideshow_cg_hide']);
         $slideshow_sort_order = tep_db_prepare_input($_POST['slideshow_sort_order']);
 
-        tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_id = '" . (int)$slideshow_id . "', slideshow_title = '" . addslashes($slideshow_title) . "', slideshow_link = '" . tep_db_input($slideshow_link) . "', slideshow_target = '" . tep_db_input($slideshow_target) . "', slideshow_sort_order = '" . tep_db_input($slideshow_sort_order) . "', last_modified = now() where slideshow_id = '" . (int)$slideshow_id . "'");
+        tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_id = '" . (int)$slideshow_id . "', slideshow_title = '" . addslashes($slideshow_title) . "', slideshow_link = '" . tep_db_input($slideshow_link) . "', slideshow_target = '" . tep_db_input($slideshow_target) . "', slideshow_active = '" . tep_db_input($slideshow_active) . "', slideshow_cg_hide = '" . tep_db_input($slideshow_cg_hide) . "', slideshow_sort_order = '" . tep_db_input($slideshow_sort_order) . "', last_modified = now() where slideshow_id = '" . (int)$slideshow_id . "'");
 		
 		if($_FILES['slideshow_image']['name'] != '') {
           if ($slideshow_image = new upload('slideshow_image', DIR_FS_CATALOG_IMAGES . 'slideshow/')) {
@@ -114,11 +126,13 @@ $Id: slideshow.php 3 2010-03-31 user pgm
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_SLIDESHOW_TITLE; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_SLIDESHOW_LINK; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_SLIDESHOW_TARGET; ?></td>
+                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_SLIDESHOW_ACTIVE; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_SLIDESHOW_CG_HIDE; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_SLIDESHOW_SORT_ORDER; ?>&nbsp;</td>
                 <td class="dataTableHeadingContent" align="right">&nbsp;</td>
               </tr>
 <?php
-  $slideshow_query_raw = "select slideshow_id, slideshow_image, slideshow_title, slideshow_sort_order, slideshow_link, slideshow_target, date_added, last_modified from " . TABLE_SLIDESHOW . " order by slideshow_sort_order";
+  $slideshow_query_raw = "select slideshow_id, slideshow_image, slideshow_title, slideshow_sort_order, slideshow_link, slideshow_target, slideshow_active, slideshow_cg_hide, date_added, last_modified from " . TABLE_SLIDESHOW . " order by slideshow_sort_order";
   $slideshow_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $slideshow_query_raw, $slideshow_query_numrows);
   $slideshow_query = tep_db_query($slideshow_query_raw);
   while ($links = tep_db_fetch_array($slideshow_query)) {
@@ -136,6 +150,16 @@ $Id: slideshow.php 3 2010-03-31 user pgm
                 <td class="dataTableContent"><?php echo $links['slideshow_title']; ?></td>
                 <td class="dataTableContent"><?php echo $links['slideshow_link']; ?></td>
                 <td class="dataTableContent"><?php echo $links['slideshow_target']; ?></td>
+                <td class="dataTableContent" align="center">
+					<?php
+                          if ($links['slideshow_active'] == 'yes') {
+                            echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'action=setflag&amp;flag=no&amp;page=' . $_GET['page'] . '&amp;tID=' . $links['slideshow_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+                          } else {
+                            echo '<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'action=setflag&amp;flag=yes&amp;page=' . $_GET['page'] . '&amp;tID=' . $links['slideshow_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+                          }
+                    ?>
+				</td>
+                <td class="dataTableContent" align="center"><?php echo $links['slideshow_cg_hide']; ?></td>
                 <td class="dataTableContent" align="center"><?php echo $links['slideshow_sort_order']; ?></td>
                 <td class="dataTableContent" align="right"><?php if (isset($trInfo) && is_object($trInfo) && ($links['slideshow_id'] == $trInfo->slideshow_id)) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $links['slideshow_id']) . '">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
@@ -143,7 +167,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
   }
 ?>
               <tr>
-                <td colspan="6"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <td colspan="8"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText" valign="top"><?php echo $slideshow_split->display_count($slideshow_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_SLIDESHOW); ?></td>
                     <td class="smallText" align="right"><?php echo $slideshow_split->display_links($slideshow_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
@@ -152,7 +176,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
   if (empty($action)) {
 ?>
                   <tr>
-                    <td colspan="6" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
+                    <td colspan="8" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;action=new') . '">' . tep_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
                   </tr>
 <?php
   }
@@ -174,6 +198,12 @@ $Id: slideshow.php 3 2010-03-31 user pgm
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TITLE . '<br>' . tep_draw_input_field('slideshow_title', '', ' size=32'));
 	  $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_LINK . '<br>' . tep_draw_input_field('slideshow_link', '', ' size=32'));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TARGET . '<br>' . tep_draw_input_field('slideshow_target'));
+	  $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_ACTIVE . '<br>' . tep_select_option(array('yes', 'no'), slideshow_active, 'yes'));
+      $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_CG_HIDE . '<br>' . tep_draw_input_field('slideshow_cg_hide'));
+	  $admin_group_query = tep_db_query("select admin_groups_id, admin_groups_name from " . TABLE_ADMIN_GROUPS . " order by admin_groups_id");
+      while ($admin_groups = tep_db_fetch_array($admin_group_query)) {
+	  $contents[] = array('text' => $admin_groups['admin_groups_id'] . ' = ' . $admin_groups['admin_groups_name']);  
+	  }
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_SORT_ORDER . '<br>' . tep_draw_input_field('slideshow_sort_order'));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
@@ -186,6 +216,12 @@ $Id: slideshow.php 3 2010-03-31 user pgm
 	  $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TITLE . '<br>' . tep_draw_input_field('slideshow_title', $trInfo->slideshow_title, ' size=32'));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_LINK . '<br>' . tep_draw_input_field('slideshow_link', $trInfo->slideshow_link, ' size=32'));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TARGET . '<br>' . tep_draw_input_field('slideshow_target', $trInfo->slideshow_target));
+	  $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_ACTIVE . '<br>' . tep_select_option(array('yes', 'no'), slideshow_active, $trInfo->slideshow_active));
+      $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_CG_HIDE . '<br>' . tep_draw_input_field('slideshow_cg_hide', $trInfo->slideshow_cg_hide));
+	  $admin_group_query = tep_db_query("select admin_groups_id, admin_groups_name from " . TABLE_ADMIN_GROUPS . " order by admin_groups_id");
+      while ($admin_groups = tep_db_fetch_array($admin_group_query)) {
+	  $contents[] = array('text' => $admin_groups['admin_groups_id'] . ' = ' . $admin_groups['admin_groups_name']);  
+	  }
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_SORT_ORDER . '<br>' . tep_draw_input_field('slideshow_sort_order', $trInfo->slideshow_sort_order));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;

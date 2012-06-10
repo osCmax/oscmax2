@@ -19,8 +19,8 @@ $Id$
       <tr>
         <td>
           <?php
-          $slideshow_query = tep_db_query("select slideshow_image from " . TABLE_SLIDESHOW . " order by slideshow_sort_order"); 
-          $slideshow = tep_db_fetch_array($slideshow_query); 
+          $slideshow_query = tep_db_query("select slideshow_image from " . TABLE_SLIDESHOW . " where NOT find_in_set('" . $customer_group_id . "', slideshow_cg_hide) and slideshow_active = 'yes' order by slideshow_sort_order"); 
+		  $slideshow = tep_db_fetch_array($slideshow_query); 
           $images_string = HTTP_SERVER . DIR_WS_HTTP_CATALOG . DIR_WS_IMAGES . 'slideshow/' . $slideshow['slideshow_image'] ;
           ?>
            <div style="background-image:url( <?php echo $images_string; ?>);height:<?php echo SLIDESHOW_HEIGHT;?>px;width:<?php echo SLIDESHOW_WIDTH;?>px">

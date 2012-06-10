@@ -1500,6 +1500,8 @@ CREATE TABLE IF NOT EXISTS slideshow (
   slideshow_title varchar(255) NOT NULL,
   slideshow_link varchar(255) NOT NULL,
   slideshow_target varchar(255) NOT NULL,
+  slideshow_active varchar(3) NOT NULL,
+  slideshow_cg_hide varchar(255) NOT NULL,
   slideshow_sort_order int(11) NOT NULL,
   date_added datetime NOT NULL,
   last_modified datetime DEFAULT NULL,

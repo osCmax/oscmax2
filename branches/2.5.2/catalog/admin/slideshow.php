@@ -33,7 +33,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
 		$slideshow_cg_hide = tep_db_prepare_input($_POST['slideshow_cg_hide']);
         $slideshow_sort_order = tep_db_prepare_input($_POST['slideshow_sort_order']);
 
-        tep_db_query("insert into " . TABLE_SLIDESHOW . " (slideshow_id, slideshow_title, slideshow_link, slideshow_target, slideshow_cg_hide, slideshow_sort_order, date_added) values ('', '" . addslashes($slideshow_title) . "', '" . tep_db_input($slideshow_link) . "', '" . tep_db_input($slideshow_target) . "', '" . tep_db_input($slideshow_active) . "', '" . tep_db_input($slideshow_cg_hide) . "', '" . tep_db_input($slideshow_sort_order) . "', now())");
+        tep_db_query("insert into " . TABLE_SLIDESHOW . " (slideshow_id, slideshow_title, slideshow_link, slideshow_target, slideshow_active, slideshow_cg_hide, slideshow_sort_order, date_added) values ('', '" . addslashes($slideshow_title) . "', '" . tep_db_input($slideshow_link) . "', '" . tep_db_input($slideshow_target) . "', '" . tep_db_input($slideshow_active) . "', '" . tep_db_input($slideshow_cg_hide) . "', '" . tep_db_input($slideshow_sort_order) . "', now())");
 		
 		$slideshow_id = tep_db_insert_id();
 		
@@ -200,9 +200,9 @@ $Id: slideshow.php 3 2010-03-31 user pgm
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TARGET . '<br>' . tep_draw_input_field('slideshow_target'));
 	  $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_ACTIVE . '<br>' . tep_select_option(array('yes', 'no'), slideshow_active, 'yes'));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_CG_HIDE . '<br>' . tep_draw_input_field('slideshow_cg_hide'));
-	  $admin_group_query = tep_db_query("select admin_groups_id, admin_groups_name from " . TABLE_ADMIN_GROUPS . " order by admin_groups_id");
-      while ($admin_groups = tep_db_fetch_array($admin_group_query)) {
-	  $contents[] = array('text' => $admin_groups['admin_groups_id'] . ' = ' . $admin_groups['admin_groups_name']);  
+	  $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id");
+      while ($customers_group = tep_db_fetch_array($customers_group_query)) {
+        $contents[] = array('text' => $customers_group['customers_group_id'] . ' = ' . $customers_group['customers_group_name']);
 	  }
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_SORT_ORDER . '<br>' . tep_draw_input_field('slideshow_sort_order'));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
@@ -218,9 +218,9 @@ $Id: slideshow.php 3 2010-03-31 user pgm
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_TARGET . '<br>' . tep_draw_input_field('slideshow_target', $trInfo->slideshow_target));
 	  $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_ACTIVE . '<br>' . tep_select_option(array('yes', 'no'), slideshow_active, $trInfo->slideshow_active));
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_CG_HIDE . '<br>' . tep_draw_input_field('slideshow_cg_hide', $trInfo->slideshow_cg_hide));
-	  $admin_group_query = tep_db_query("select admin_groups_id, admin_groups_name from " . TABLE_ADMIN_GROUPS . " order by admin_groups_id");
-      while ($admin_groups = tep_db_fetch_array($admin_group_query)) {
-	  $contents[] = array('text' => $admin_groups['admin_groups_id'] . ' = ' . $admin_groups['admin_groups_name']);  
+	  $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id");
+      while ($customers_group = tep_db_fetch_array($customers_group_query)) {
+        $contents[] = array('text' => $customers_group['customers_group_id'] . ' = ' . $customers_group['customers_group_name']);
 	  }
       $contents[] = array('text' => '<br>' . TEXT_SLIDESHOW_SORT_ORDER . '<br>' . tep_draw_input_field('slideshow_sort_order', $trInfo->slideshow_sort_order));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_SLIDESHOW, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->slideshow_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');

@@ -17,13 +17,17 @@ define('TABLE_HEADING_SLIDESHOW_IMAGE', 'Imagen diapositiva');
 define('TABLE_HEADING_SLIDESHOW_TITLE', 'Título diapositiva');
 define('TABLE_HEADING_SLIDESHOW_LINK', 'Enlace');
 define('TABLE_HEADING_SLIDESHOW_TARGET', 'Objetivo');
+define('TABLE_HEADING_SLIDESHOW_ACTIVE', 'Estado');
+define('TABLE_HEADING_SLIDESHOW_CG_HIDE', 'Ocultar a grupo clientes');
 define('TABLE_HEADING_SLIDESHOW_SORT_ORDER', 'Orden');
 
 define('TEXT_SLIDESHOW_INSERT_INTRO', 'Por favor inserta una nueva diapositiva:');
 define('TEXT_SLIDESHOW_TITLE', 'Título diapositiva'); 
 define('TEXT_SLIDESHOW_IMAGE', 'Imagen diapositiva');
 define('TEXT_SLIDESHOW_LINK', 'Enlace diapositiva');
+define('TEXT_SLIDESHOW_ACTIVE', 'Activar la diapositiva?');
 define('TEXT_SLIDESHOW_TARGET', 'Objetivo');
+define('TEXT_SLIDESHOW_CG_HIDE', 'Lista de Grupo de clientes a ocultar: (eg. 0,1,2)');
 define('TEXT_SLIDESHOW_SORT_ORDER', 'Orden');
 
 define('TEXT_SLIDESHOW_DATE_ADDED', 'Añadido: ');

@@ -17,7 +17,7 @@ $Id$
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_WISHLIST_HELP);
+  require(bts_select('language', FILENAME_WISHLIST_HELP));
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_WISHLIST_HELP, '', 'NONSSL'));
 

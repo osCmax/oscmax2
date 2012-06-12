@@ -36,7 +36,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
   }
 
 // needs to be included earlier to set the success message in the messageStack
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_PAYMENT_ADDRESS);
+  require(bts_select('language', FILENAME_CHECKOUT_PAYMENT_ADDRESS));
 
   $error = false;
   $process = false;

@@ -27,8 +27,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
     $navigation->set_snapshot();
     tep_redirect(tep_href_link(FILENAME_AFFILIATE, '', 'SSL'));
   }
-  
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_DETAILS);
+
+  require(bts_select('language', FILENAME_AFFILIATE_DETAILS));
 // BOF: MOD - Country-State Selector
   $refresh = false;
   if (isset($_POST['action']) && (($_POST['action'] == 'process') || ($_POST['action'] == 'refresh'))) {

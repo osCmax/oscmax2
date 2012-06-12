@@ -18,7 +18,7 @@ $Id$
   }
 
 // needs to be included earlier to set the success message in the messageStack
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_NEWSLETTER);
+  require(bts_select('language', FILENAME_AFFILIATE_NEWSLETTER));
 
   $newsletter_query = tep_db_query("select affiliate_newsletter from " . TABLE_AFFILIATE . " where affiliate_id = '" . (int)$affiliate_id . "'");
   $newsletter = tep_db_fetch_array($newsletter_query);

@@ -125,8 +125,8 @@ $Id$
 // load all enabled payment modules
   require(DIR_WS_CLASSES . 'payment.php');
   $payment_modules = new payment;
-
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_PAYMENT);
+  
+  require(bts_select('language', FILENAME_CHECKOUT_PAYMENT));
 
   $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));

@@ -57,7 +57,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
     }
   }
 
-  include(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_PROCESS);
+  require(bts_select('language', FILENAME_CHECKOUT_PROCESS));
 /* One Page Checkout - BEGIN */ 
   if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
       require('includes/classes/onepage_checkout.php');

@@ -21,7 +21,8 @@ $Id$
     include(DIR_WS_CLASSES . 'payment.php');
     $payment_modules = new payment;
   }
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_SHOPPING_CART);
+  
+  require(bts_select('language', FILENAME_SHOPPING_CART));
 
 if (BASKET_CART == 'cart') {
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_SHOPPING_CART));

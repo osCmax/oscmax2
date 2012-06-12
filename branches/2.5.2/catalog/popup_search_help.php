@@ -19,7 +19,7 @@ $Id$
 
   $navigation->remove_current_page();
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ADVANCED_SEARCH);
+  require(bts_select('language', FILENAME_ADVANCED_SEARCH));
 
 //MODIFIED -MOVED to BTS
   $content = CONTENT_POPUP_SEARCH_HELP;

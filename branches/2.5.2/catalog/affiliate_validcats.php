@@ -12,7 +12,7 @@ $Id$
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_BANNERS_BUILD_CAT);
+  require(bts_select('language', FILENAME_AFFILIATE_BANNERS_BUILD_CAT));
 
   $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_AFFILIATE_BANNERS_BUILD));
 ?>

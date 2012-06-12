@@ -46,7 +46,7 @@ global $customer_group_id;
   tep_information_customer_greeting_define();
 // EOF: Information Pages Unlimited
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_DEFAULT);
+  require(bts_select('language', FILENAME_DEFAULT));
 
   if ($category_depth == 'nested') {
 // BOF: MOD - Categories Description 1.5

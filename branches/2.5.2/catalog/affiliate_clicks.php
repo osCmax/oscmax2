@@ -22,7 +22,7 @@ $Id$
     tep_redirect(tep_href_link(FILENAME_AFFILIATE, '', 'SSL'));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_CLICKS);
+  require(bts_select('language', FILENAME_AFFILIATE_CLICKS));
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_AFFILIATE_CLICKS, '', 'SSL'));
 

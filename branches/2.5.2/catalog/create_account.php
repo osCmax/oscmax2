@@ -27,7 +27,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
   if (isset($_GET['guest']) && $cart->count_contents() < 1) tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
 // PWA BOF
 // needs to be included earlier to set the success message in the messageStack
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CREATE_ACCOUNT);
+  require(bts_select('language', FILENAME_CREATE_ACCOUNT));
 
   $process = false;
   if (isset($_POST['action']) && ($_POST['action'] == 'process')) {

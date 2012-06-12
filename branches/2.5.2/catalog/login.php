@@ -22,7 +22,7 @@ $Id$
     tep_redirect(tep_href_link(FILENAME_COOKIE_USAGE));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_LOGIN);
+  require(bts_select('language', FILENAME_LOGIN));
 
   $error = false;
   // BOF PHONE ORDER

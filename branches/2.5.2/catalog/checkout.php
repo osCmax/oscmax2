@@ -117,7 +117,7 @@ $Id$
   $order_total_modules = new order_total;
   $order_total_modules->process();
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT);
+  require(bts_select('language', FILENAME_CHECKOUT));
 
   $action = (isset($_POST['action']) ? $_POST['action'] : '');
 	Header("X-Received-Action: $action");

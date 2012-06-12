@@ -24,7 +24,7 @@ if (isset($HTTP_POST_VARS['action']) && $HTTP_POST_VARS['action'] == 'getStates'
 	ajax_get_zones_html(tep_db_prepare_input($HTTP_POST_VARS['country']), true);
 } else {
   // -Country-State Selector
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_SIGNUP);
+  require(bts_select('language', FILENAME_AFFILIATE_SIGNUP));
 
   if (isset($_POST['action'])) {
     $a_gender = tep_db_prepare_input($_POST['a_gender']);

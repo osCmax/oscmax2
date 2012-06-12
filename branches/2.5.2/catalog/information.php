@@ -17,7 +17,7 @@ $Id$
 
   require('includes/application_top.php');
   
-  require (DIR_WS_LANGUAGES . $language . '/' . FILENAME_INFORMATION);
+  require(bts_select('language', FILENAME_INFORMATION));
 		
 	// Added for information pages
 	if (!isset($_GET['info_id']) || !tep_not_null($_GET['info_id']) || !is_numeric($_GET['info_id']) ) {

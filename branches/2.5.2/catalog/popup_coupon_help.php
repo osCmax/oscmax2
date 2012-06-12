@@ -14,7 +14,7 @@ $Id$
 
   $navigation->remove_current_page();
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_POPUP_COUPON_HELP);
+  require(bts_select('language', FILENAME_POPUP_COUPON_HELP));
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>

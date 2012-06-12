@@ -23,15 +23,14 @@ $Id$
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
-
-  require(DIR_WS_LANGUAGES . $language . '/' . DOWN_FOR_MAINTENANCE_FILENAME);
-
+  
+  require(bts_select('language', DOWN_FOR_MAINTENANCE_FILENAME));
+  
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(DOWN_FOR_MAINTENANCE_FILENAME));
 
   $content = CONTENT_DOWN_FOR_MAINT;
 
   include (bts_select('main')); // BTSv1.5
 
-
-
- require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
+  require(DIR_WS_INCLUDES . 'application_bottom.php');
+?>

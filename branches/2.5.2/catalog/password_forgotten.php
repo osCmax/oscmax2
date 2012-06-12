@@ -17,7 +17,7 @@ $Id$
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PASSWORD_FORGOTTEN);
+  require(bts_select('language', FILENAME_PASSWORD_FORGOTTEN));
 
   if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
     $email_address = tep_db_prepare_input($_POST['email_address']);

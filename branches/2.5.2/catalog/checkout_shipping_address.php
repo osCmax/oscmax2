@@ -37,7 +37,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($P_POST[
   }
 
   // needs to be included earlier to set the success message in the messageStack
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_SHIPPING_ADDRESS);
+  require(bts_select('language', FILENAME_CHECKOUT_SHIPPING_ADDRESS));
 
   require(DIR_WS_CLASSES . 'order.php');
   $order = new order;

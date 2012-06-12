@@ -17,7 +17,7 @@ $Id$
 
   require('includes/application_top.php');
 
- if (tep_session_is_registered('customer_id')) {
+  if (tep_session_is_registered('customer_id')) {
     $account = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from " . TABLE_CUSTOMERS . " where customers_id = '" . $customer_id . "'");
     $account_values = tep_db_fetch_array($account);
   } elseif (ALLOW_GUEST_TO_TELL_A_FRIEND == 'false') {
@@ -25,7 +25,7 @@ $Id$
     tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
   }
 
- require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_WISHLIST_SEND);
+  require(bts_select('language', FILENAME_WISHLIST_SEND));
 
  $wishliststring = FORM_FIELD_TEXT_AREA;
  $wishlist_query_raw = "select tab2.products_id, tab1.products_name from " . TABLE_WISHLIST . " as tab2, " . TABLE_PRODUCTS_DESCRIPTION . " as tab1 where tab2.customers_id='" . (int)$customer_id . "' and tab1.products_id = tab2.products_id and tab1.language_id = '" . (int)$languages_id . "' order by products_name";

@@ -11,7 +11,7 @@ $Id$
 */
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_HTTP_ERROR);
+  require(bts_select('language', FILENAME_HTTP_ERROR));
 
   $content = http_error; 
 

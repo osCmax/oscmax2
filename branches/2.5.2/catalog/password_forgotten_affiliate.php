@@ -17,7 +17,7 @@ $Id: password_forgotten_affiliate.php 956 2011-01-05 19:10:37Z michael.oscmax@gm
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PASSWORD_FORGOTTEN_AFFILIATE);
+  require(bts_select('language', FILENAME_PASSWORD_FORGOTTEN_AFFILIATE));
 
   if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
     $email_address = tep_db_prepare_input($_POST['email_address']);

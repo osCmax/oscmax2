@@ -23,6 +23,31 @@ $Id$
 
   if (tep_not_null($action)) {
     switch ($action) {
+	  case 'deladdress':
+        if ((!isset($_GET['cID']) || !isset($_GET['add_id'])) && ($_GET['add_id'] != $cInfo->customers_default_address_id)) // if either id not set
+          tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('action', 'add_id'))));
+
+        $check_default_query = tep_db_query("select customers_default_address_id as defid from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$_GET['cID'] . "'");
+
+        if ($default = tep_db_fetch_array($check_default_query)) {
+          if ($_GET['add_id'] == $default['defid']) {// may not delete default address
+            tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('action')) . 'action=deladdress'));
+          } else {
+            tep_db_query("delete from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$_GET['cID'] . "' and address_book_id = '" . (int)$_GET['add_id'] . "'");
+            tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('action', 'add_id')) . 'action=edit'));
+          }
+        } else { // no match on cID
+          tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action', 'add_id'))));
+        }
+        break;
+     case 'addaddress':
+            $sql_data_array = array('customers_id' => $_GET['cID']);
+            tep_db_perform(TABLE_ADDRESS_BOOK, $sql_data_array);
+            $get_address_id = tep_db_query("SELECT address_book_id FROM address_book WHERE customers_id = '" . (int)$_GET['cID'] . "' ORDER BY address_book_id DESC LIMIT 1"); 
+            $address_id = tep_db_fetch_array($get_address_id);
+            $new_address_id = $address_id['address_book_id'];
+            tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action','add_id')) . 'cID=' . $_GET['cID'] . '&action=edit&add_id=' . $new_address_id));
+            break;
 	  case 'mailchimp':
 	    include_once(DIR_WS_CLASSES . "MCAPI.class.php");
         $api = new MCAPI(MAILCHIMP_API);
@@ -79,6 +104,8 @@ $Id$
         $customers_id = tep_db_prepare_input($_GET['cID']);
         $customers_firstname = tep_db_prepare_input($_POST['customers_firstname']);
         $customers_lastname = tep_db_prepare_input($_POST['customers_lastname']);
+		$entry_firstname = tep_db_prepare_input($_POST['entry_firstname']);
+        $entry_lastname = tep_db_prepare_input($_POST['entry_lastname']);
         $customers_email_address = tep_db_prepare_input($_POST['customers_email_address']);
         $customers_telephone = tep_db_prepare_input($_POST['customers_telephone']);
         $customers_fax = tep_db_prepare_input($_POST['customers_fax']);
@@ -118,7 +145,7 @@ $Id$
         $customers_gender = tep_db_prepare_input($_POST['customers_gender']);
         $customers_dob = tep_db_prepare_input($_POST['customers_dob']);
 
-        $default_address_id = tep_db_prepare_input($_POST['default_address_id']);
+        $default_address_id = (isset($_GET['add_id']) ? tep_db_prepare_input($_GET['add_id']) : tep_db_prepare_input($_POST['default_address_id']));
         $entry_street_address = tep_db_prepare_input($_POST['entry_street_address']);
         $entry_suburb = tep_db_prepare_input($_POST['entry_suburb']);
         $entry_postcode = tep_db_prepare_input($_POST['entry_postcode']);
@@ -135,19 +162,36 @@ $Id$
         }
         if ($refresh != 'true') {
         // -Country-State Selector
+
+// Admin edit any customer address begin
         if (strlen($customers_firstname) < ENTRY_FIRST_NAME_MIN_LENGTH) {
+          $error = true;
+          $customers_firstname_error = true;
+        } else {
+          $customers_firstname_error = false;
+        }
+
+        if (strlen($customers_lastname) < ENTRY_LAST_NAME_MIN_LENGTH) {
+          $error = true;
+          $customers_lastname_error = true;
+        } else {
+          $customers_lastname_error = false;
+        }
+
+        if (strlen($entry_firstname) < ENTRY_FIRST_NAME_MIN_LENGTH) {
           $error = true;
           $entry_firstname_error = true;
         } else {
           $entry_firstname_error = false;
         }
 
-        if (strlen($customers_lastname) < ENTRY_LAST_NAME_MIN_LENGTH) {
+        if (strlen($entry_lastname) < ENTRY_LAST_NAME_MIN_LENGTH) {
           $error = true;
           $entry_lastname_error = true;
         } else {
           $entry_lastname_error = false;
         }
+// Admin edit any customer address end
 
         if (ACCOUNT_DOB == 'true') {
           if (checkdate(substr(tep_date_raw($customers_dob), 4, 2), substr(tep_date_raw($customers_dob), 6, 2), substr(tep_date_raw($customers_dob), 0, 4))) {
@@ -238,6 +282,8 @@ $Id$
                                 'customers_shipment_allowed' => $customers_shipment_allowed);
 // EOF: MOD - Separate Pricing per Customer
 
+
+		if(isset($_POST['setdefault'])) $sql_data_array['customers_default_address_id'] = $default_address_id;
         if (ACCOUNT_GENDER == 'true') $sql_data_array['customers_gender'] = $customers_gender;
         if (ACCOUNT_DOB == 'true') $sql_data_array['customers_dob'] = tep_date_raw($customers_dob);
 
@@ -247,8 +293,8 @@ $Id$
 
         if ($entry_zone_id > 0) $entry_state = '';
 
-        $sql_data_array = array('entry_firstname' => $customers_firstname,
-                                'entry_lastname' => $customers_lastname,
+        $sql_data_array = array('entry_firstname' => $entry_firstname,
+                                'entry_lastname' => $entry_lastname,
                                 'entry_street_address' => $entry_street_address,
                                 'entry_postcode' => $entry_postcode,
                                 'entry_city' => $entry_city,
@@ -279,7 +325,9 @@ $Id$
 		  tep_db_query("update " . TABLE_CUSTOMERS . " set customers_password='" . tep_encrypt_password(tep_db_prepare_input($_POST['customers_new_password'])) . "' WHERE customers_id='" . (int)$customers_id . "'");  
         }
 		
-        tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $customers_id));
+        //tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action', 'add_id')) . 'cID=' . $customers_id));
+		
+		tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('action')) . 'action=edit'));
 
         } else if ($error == true) {
           $cInfo = new objectInfo($_POST);
@@ -332,7 +380,15 @@ $Id$
       default:
 // BOF: MOD - Separate Pricing per Customer
 //  old    $customers_query  =  tep_db_query("select  c.customers_id,  c.customers_gender,  c.customers_firstname,  c.customers_lastname,  c.customers_dob,  c.customers_email_address,  a.entry_company,  a.entry_street_address,  a.entry_suburb,  a.entry_postcode,  a.entry_city,  a.entry_state,  a.entry_zone_id,  a.entry_country_id,  c.customers_telephone,  c.customers_fax,  c.customers_newsletter,  c.customers_default_address_id  from  "  .  TABLE_CUSTOMERS  .  "  c  left  join  "  .  TABLE_ADDRESS_BOOK  .  "  a  on  c.customers_default_address_id  =  a.address_book_id  where  a.customers_id  =  c.customers_id  and  c.customers_id  =  '"  .  (int)$_GET['cID']  .  "'");
-        $customers_query = tep_db_query("select c.customers_id, c.customers_gender, c.customers_firstname, c.customers_lastname, c.customers_dob, c.customers_email_address, a.entry_company, a.entry_company_tax_id, a.entry_street_address, a.entry_suburb, a.entry_postcode, a.entry_city, a.entry_state, a.entry_zone_id, a.entry_country_id, c.customers_telephone, c.customers_fax, c.customers_newsletter, c.customers_group_id,  c.customers_group_ra, c.customers_payment_allowed, c.customers_shipment_allowed, c.customers_default_address_id from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_default_address_id = a.address_book_id where a.customers_id = c.customers_id and c.customers_id = '" . (int)$_GET['cID'] . "'");
+                $customers_query = tep_db_query("select c.customers_id, c.customers_gender, c.customers_firstname, c.customers_lastname, c.customers_dob, c.customers_email_address, a.entry_firstname, a.entry_lastname, a.entry_company, a.entry_company_tax_id, a.entry_street_address, a.entry_suburb, a.entry_postcode, a.entry_city, a.entry_state, a.entry_zone_id, a.entry_country_id, c.customers_telephone, c.customers_fax, c.customers_newsletter, c.customers_group_id, c.customers_group_ra, c.customers_payment_allowed, c.customers_shipment_allowed, c.customers_default_address_id from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on a.address_book_id = " . (isset($_GET['add_id']) ? (int)$_GET['add_id'] : 'c.customers_default_address_id') . " where a.customers_id = c.customers_id and c.customers_id = '" . (int)$_GET['cID'] . "'");
+
+//        $customers = tep_db_fetch_array($customers_query);
+//        $cInfo = new objectInfo($customers);
+
+        $customer_address_query = tep_db_query("select address_book_id from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$_GET['cID'] . "'");
+        $aid_list = array();
+        while ($a = tep_db_fetch_array($customer_address_query))
+          { $aid_list[] = $a['address_book_id'];}
 
         $module_directory = DIR_FS_CATALOG_MODULES . 'payment/';
         $ship_module_directory = DIR_FS_CATALOG_MODULES . 'shipping/';
@@ -398,6 +454,10 @@ function check_form() {
 
   var customers_firstname = document.customers.customers_firstname.value;
   var customers_lastname = document.customers.customers_lastname.value;
+/* Admin edit any customer address */
+  var entry_firstname = document.customers.entry_firstname.value;
+  var entry_lastname = document.customers.entry_lastname.value;
+/* Admin edit any customer address */
 <?php if (ACCOUNT_COMPANY == 'true') echo 'var entry_company = document.customers.entry_company.value;' . "\n"; ?>
 <?php if (ACCOUNT_DOB == 'true') echo 'var customers_dob = document.customers.customers_dob.value;' . "\n"; ?>
   var customers_email_address = document.customers.customers_email_address.value;
@@ -423,6 +483,18 @@ function check_form() {
     error_message = error_message + "<?php echo JS_LAST_NAME; ?>";
     error = 1;
   }
+  
+/* Admin edit any customer address */
+  if (entry_firstname.length < <?php echo ENTRY_FIRST_NAME_MIN_LENGTH; ?>) {
+    error_message = error_message + "<?php echo JS_FIRST_NAME; ?>";
+    error = 1;
+  }
+
+  if (entry_lastname.length < <?php echo ENTRY_LAST_NAME_MIN_LENGTH; ?>) {
+    error_message = error_message + "<?php echo JS_LAST_NAME; ?>";
+    error = 1;
+  }
+/* Admin edit any customer address */
 
 <?php if (ACCOUNT_DOB == 'true') { ?>
   if (customers_dob.length < <?php echo ENTRY_DOB_MIN_LENGTH; ?>) {
@@ -523,6 +595,7 @@ function refresh_form(form_name) {
     $newsletter_array = array(array('id' => '1', 'text' => ENTRY_NEWSLETTER_YES),
                               array('id' => '0', 'text' => ENTRY_NEWSLETTER_NO));
 ?>
+
         <tr>
           <td><?php echo tep_draw_form('customers', FILENAME_CUSTOMERS, tep_get_all_get_params(array('action')) . 'action=update', 'post', 'onSubmit="return check_form();"') . tep_draw_hidden_field('default_address_id', $cInfo->customers_default_address_id); ?>
             <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -533,7 +606,7 @@ function refresh_form(form_name) {
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
-      <tr><?php echo tep_draw_form('customers', FILENAME_CUSTOMERS, tep_get_all_get_params(array('action')) . 'action=update', 'post', 'onSubmit="return check_form();"') . tep_draw_hidden_field('default_address_id', $cInfo->customers_default_address_id); ?>
+              <tr><?php echo tep_draw_form('customers', FILENAME_CUSTOMERS, tep_get_all_get_params(array('action')) . 'action=update', 'post', 'onSubmit="return check_form();"') . tep_draw_hidden_field('default_address_id', $cInfo->customers_default_address_id); ?>
          <?php
           // +Country-State Selector
          echo tep_draw_hidden_field('refresh','false'); 
@@ -542,7 +615,8 @@ function refresh_form(form_name) {
                 <td class="formAreaTitle"><?php echo CATEGORY_PERSONAL; ?></td>
               </tr>
               <tr>
-                <td class="formArea"><table border="0" cellspacing="2" cellpadding="2">
+                <td class="formArea">
+                  <table border="0" cellspacing="2" cellpadding="2">
 <?php
     if (ACCOUNT_GENDER == 'true') {
 ?>
@@ -727,13 +801,85 @@ function refresh_form(form_name) {
 ?>
         <tr>
           <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-        </tr>
+        </tr>        
         <tr>
-          <td class="formAreaTitle"><?php echo CATEGORY_ADDRESS; ?></td>
+          <td>
+            <table border="0" cellspacing="0" cellpadding="0" width="100%">
+              <tr>
+                <td class="formAreaTitle" valign="bottom"><?php echo CATEGORY_ADDRESS; ?></td>
+                <td class="main" align="right">
+                  <?php      
+  //Admin edit any customer address begin
+  if ($action != 'update') { // only display if no update entry error
+?>
+
+<form>
+<?php
+
+$afl = array();
+foreach ($aid_list as $a) {
+  $afl[] = array('id' => tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('add_id')) . 'add_id=' . $a), 'text' => $a);
+}
+
+  echo SELECT_ADDRESS . tep_draw_pull_down_menu('add_id', $afl, tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('add_id')) . 'add_id=' . (isset($_GET['add_id']) ? $_GET['add_id'] : $cInfo->customers_default_address_id)), 'ONCHANGE="location = this.options[this.selectedIndex].value;"'); ?>
+</form>
+
+<?php
+if (isset($_GET['add_id']) && ($_GET['add_id'] != $cInfo->customers_default_address_id)) { // if not default address
+  echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=deladdress') . '">' . tep_image_button('button_delete.gif', DELETE_ADDRESS) . '</a>';
+} 
+?>
+
+<?php
+  }
+//Admin edit any customer address end
+?>
+
+				<?php 
+				echo '<a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&amp;action=addaddress') . '">' . tep_image_button('button_new.gif', IMAGE_NEW) . '</a>'; 
+				?>
+                </td>
+              </tr>
+            </table>
+          </td>
         </tr>
         <tr>
           <td class="formArea">
             <table border="0" cellspacing="2" cellpadding="2">
+              <tr>
+                <td class="main"><?php echo ENTRY_FIRST_NAME; ?></td>
+                <td class="main">
+
+<?php
+  if ($error == true) {
+    if ($entry_firstname_error == true) {
+      echo tep_draw_input_field('entry_firstname', $cInfo->entry_firstname, 'maxlength="32"') . '&nbsp;' . ENTRY_FIRST_NAME_ERROR;
+    } else {
+      echo $cInfo->entry_firstname . tep_draw_hidden_field('entry_firstname');
+    }
+  } else {
+    echo tep_draw_input_field('entry_firstname', $cInfo->entry_firstname, 'maxlength="32"', true);
+  }
+?>
+			    </td>
+              </tr>
+              <tr>
+                <td class="main"><?php echo ENTRY_LAST_NAME; ?></td>
+                <td class="main">
+
+<?php
+  if ($error == true) {
+    if ($entry_lastname_error == true) {
+      echo tep_draw_input_field('entry_lastname', $cInfo->entry_lastname, 'maxlength="32"') . '&nbsp;' . ENTRY_LAST_NAME_ERROR;
+    } else {
+      echo $cInfo->entry_lastname . tep_draw_hidden_field('entry_lastname');
+    }
+  } else {
+    echo tep_draw_input_field('entry_lastname', $cInfo->entry_lastname, 'maxlength="32"', true);
+  }
+?></td>
+
+              </tr>
               <tr>
                 <td class="main" width="150"><?php echo ENTRY_STREET_ADDRESS; ?></td>
                 <td class="main">
@@ -1071,8 +1217,9 @@ echo css_get_country_list('entry_country_id',  $cInfo->entry_country_id,'onChang
           <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
         </tr>
         <tr>
-          <td align="right" class="main"><?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE) . ' <a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('action'))) .'">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+          <td align="right" class="main"><?php echo tep_image_submit('button_update.gif', IMAGE_UPDATE) . ' <a href="' . tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('action', 'add_id'))) .'">' . tep_image_button('button_back.gif', IMAGE_CANCEL) . '</a>'; ?></td>
         </tr></form>
+      </table>
       
 <?php
   } else {

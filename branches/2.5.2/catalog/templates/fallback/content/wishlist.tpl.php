@@ -128,7 +128,7 @@ $Id$
       }
 
 // CHECK TO SEE IF PRODUCT IS NO LONGER AVAILABLE
-      if($products['products_status'] == 0) {
+      if($products['products_status'] != 1) {
          echo '<br /><font color="#FF0000"><b>' . TEXT_ITEM_NOT_AVAILABLE . '</b></font>';
       }
   
@@ -140,7 +140,7 @@ $Id$
 <?php
 
 // PREVENT THE ITEM FROM BEING ADDED TO CART IF NO LONGER AVAILABLE
-      if($products['products_status'] != 0) {
+      if ($products['products_status'] == 1) {
         echo tep_draw_checkbox_field('add_wishprod[]',$wishlist_id);
       }
 ?>

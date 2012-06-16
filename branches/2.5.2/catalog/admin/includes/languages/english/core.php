@@ -458,6 +458,8 @@ define('IMAGE_EMAIL', 'Email');
 define('IMAGE_FILE_MANAGER', 'File Manager');
 define('IMAGE_ICON_STATUS_GREEN', 'Active');
 define('IMAGE_ICON_STATUS_GREEN_LIGHT', 'Set Active');
+define('IMAGE_ICON_STATUS_YELLOW', 'Discontinued');
+define('IMAGE_ICON_STATUS_YELLOW_LIGHT', 'Set Discontinued');  
 define('IMAGE_ICON_STATUS_RED', 'Inactive');
 define('IMAGE_ICON_STATUS_RED_LIGHT', 'Set Inactive');
 define('IMAGE_ICON_INFO', 'Info');

@@ -922,8 +922,8 @@ function tep_selected_file($filename) {
 ////
 // Sets the status of a product
   function tep_set_product_status($products_id, $status) {
-    if ($status == '1') {
-      return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '1', products_last_modified = now() where products_id = '" . (int)$products_id . "'");
+    if ($status == '1' || $status == '2') {
+      return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '" . $status . "', products_last_modified = now() where products_id = '" . (int)$products_id . "'");
     } elseif ($status == '0') {
 	  // BOF Open Featured Sets
       return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0',  products_featured = '0', products_last_modified = now() where products_id = '" . (int)$products_id . "'");

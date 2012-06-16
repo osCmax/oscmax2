@@ -140,7 +140,7 @@ $Id$
     }
     switch ($action) {
       case 'setflag':
-        if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') ) {
+        if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') || ($_GET['flag'] == '2') ) {
           if (isset($_GET['pID'])) {
             tep_set_product_status($_GET['pID'], $_GET['flag']);
           }
@@ -1309,9 +1309,10 @@ if ($action == 'new_product') {
 
     if (!isset($pInfo->products_status)) $pInfo->products_status = '1';
     switch ($pInfo->products_status) {
-      case '0': $in_status = false; $out_status = true; break;
-      case '1':
-      default: $in_status = true; $out_status = false;
+      case '0': $in_status = false; $discontinued_status = false; $out_status = true; break; 
+      case '2': $in_status = false; $discontinued_status = true; $out_status = false; break; 
+      case '1': 
+      default: $in_status = true; $discontinued_status = false; $out_status = false; 
     }
 
 // BOF Open Featured Sets
@@ -1422,7 +1423,7 @@ function updateMSRPNet() {
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_STATUS; ?></td>
             <td class="main" colspan="2">
-            <?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE .
+            <?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '2', $discontinued_status) . '&nbsp;' . TEXT_PRODUCT_DISCONTINUED .'&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE .
             tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_DATE_AVAILABLE . '&nbsp;<small>' . TEXT_YYYY_MM_DD . '</small>&nbsp;' .  tep_draw_input_field('products_date_available', $pInfo->products_date_available, 'id="product_available"'); ?>
             </td>
           </tr>
@@ -2517,11 +2518,13 @@ if (DISABLE_CATEGORY_DROPDOWN_SWITCH == 'false') {
 ?></td><?php // EOF SPPC hide products and categories from groups ?>
                 <td class="dataTableContent" align="center">
 <?php
-      if ($products['products_status'] == '1') {
-        echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=0&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
-      } else {
-        echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=1&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
-      }
+    if ($products['products_status'] == '1') {
+      echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=2&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_yellow_light.gif', IMAGE_ICON_STATUS_YELLOW_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=0&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+    } elseif ($products['products_status'] == '2') {
+      echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=1&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS .  'icon_status_yellow.gif', IMAGE_ICON_STATUS_YELLOW, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=0&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+    } else {
+      echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=1&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=2&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_yellow_light.gif', IMAGE_ICON_STATUS_YELLOW_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS .  'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+    } 
 ?></td>
 <?php
  	// BOF Open Featured Sets

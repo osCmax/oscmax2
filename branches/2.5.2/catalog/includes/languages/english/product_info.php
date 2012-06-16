@@ -77,4 +77,5 @@ define('TEXT_ADDITIONAL_SHIPPING_4', ' + regular shipping costs.)</i>');
 // end indvship
 
 define('PRODUCT_HAS_OPTIONS_MESSAGE', 'This product has options that must be selected before it can be purchased.');
+define('TEXT_PRODUCT_DISCONTINUED', 'Discontinued');
 ?>

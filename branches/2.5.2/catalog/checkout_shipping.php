@@ -68,6 +68,15 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
   if (!tep_session_is_registered('cartID')) tep_session_register('cartID');
   $cartID = $cart->cartID;
 
+if (CHECKOUT_SHIPPING_DATE == 'true') {
+  // ship date
+  if (!tep_session_is_registered('delivery_date')) tep_session_register('delivery_date');
+  if (tep_not_null($_POST['delivery_date'])) {
+    $delivery_date = tep_db_prepare_input($_POST['delivery_date']);
+  }
+  // eof ship date
+} // end if (CHECKOUT_SHIPPING_DATE == 'true')
+
 // if the order contains only virtual products, forward the customer to the billing page as
 // a shipping address is not needed
 // LINE CHANGED: MOD - CREDIT CLASS Gift Voucher Contribution
@@ -201,7 +210,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
 
   $content = CONTENT_CHECKOUT_SHIPPING;
-  $javascript = $content . '.js';
+  $javascript = $content . '.js.php';
 
   include (bts_select('main')); // BTSv1.5
 

@@ -116,6 +116,15 @@ $Id$
   if (isset($_POST['comments']) && tep_not_null($_POST['comments'])) {
     $comments = tep_db_prepare_input($_POST['comments']);
   }
+  
+if (CHECKOUT_SHIPPING_DATE == 'true') {  
+  // ship date
+  if (!tep_session_is_registered('delivery_date')) tep_session_register('delivery_date');
+  if (isset($_POST['delivery_date']) && tep_not_null($_POST['delivery_date'])) {
+    $delivery_date = tep_db_prepare_input($_POST['delivery_date']);
+  }
+  // eof ship date
+} // end if (CHECKOUT_SHIPPING_DATE == 'true')
 
   $total_weight = $cart->show_weight();
   $total_count = $cart->count_contents();

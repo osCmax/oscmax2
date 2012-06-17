@@ -54,6 +54,15 @@ $Id$
     $comments = tep_db_prepare_input($_POST['comments']);
   }
 
+if (CHECKOUT_SHIPPING_DATE == 'true') {  
+  // ship date
+  if (!tep_session_is_registered('datum')) tep_session_register('datum');
+  if (tep_not_null($_POST['datum'])) {
+    $delivery_date = tep_db_prepare_input($_POST['datum']);
+  }
+  // eof ship date
+} // end if (CHECKOUT_SHIPPING_DATE == 'true')
+
 // load the selected payment module
   require(DIR_WS_CLASSES . 'payment.php');
 // Start - CREDIT CLASS Gift Voucher Contribution

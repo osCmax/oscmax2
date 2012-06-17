@@ -44,4 +44,6 @@ define('HEADING_DOWNLOAD', 'Download links');
 // Customer Comments contrib
 
 define('TEXT_MISSING_DOWNLOAD', 'File not found.');
+// ship date
+define('HEADING_SHIPPING_DATE', 'Preferred Delivery Date');
 ?>

@@ -13,7 +13,8 @@ $Id$
 define('NAVBAR_TITLE_1', 'Checkout');
 define('NAVBAR_TITLE_2', 'Success');
 define('HEADING_TITLE', 'Your Order Has Been Processed.');
-define('TEXT_SUCCESS', 'Your order has been successfully processed. Your products will arrive at their destination within 2-5 working days.');
+// ship date amended
+define('TEXT_SUCCESS', 'Your order has been successfully processed. Your products should arrive at their destination on your preferred shipping date (please note we cannot guarantee delivery on this day).');
 define('TEXT_NOTIFY_PRODUCTS', 'Please notify me of updates to the products I have selected below:');
 define('TEXT_SEE_ORDERS', 'You can view your order history by going to the ');
 define('TEXT_SEE_ORDERS_1', ' page and by clicking on ');

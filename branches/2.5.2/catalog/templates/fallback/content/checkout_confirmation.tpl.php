@@ -50,7 +50,20 @@ $Id$
                 <td class="main"><?php echo tep_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br>'); ?></td>
               </tr>
 <?php
-    if ($order->info['shipping_method']) {
+  if (tep_not_null($order->info['delivery_date']) && (CHECKOUT_SHIPPING_DATE == 'true')) {
+?>
+              <!-- ship date -->
+              <tr>
+                <td class="main"><?php echo '<b>' . HEADING_SHIPPING_DATE . '</b> <a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
+              </tr>
+              <tr>
+                <td class="main"><?php echo tep_date_long($order->info['delivery_date']); ?></td>
+              </tr>
+              <!-- eof ship date -->
+<?php
+  } // end if (tep_not_null($order->info['delivery_date']) && (CHECKOUT_SHIPPING_DATE == 'true'))
+  
+  if ($order->info['shipping_method']) {
 ?>
               <tr>
                 <td class="main"><?php echo '<b>' . HEADING_SHIPPING_METHOD . '</b> <a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>

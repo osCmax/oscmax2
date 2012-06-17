@@ -152,7 +152,10 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
                           'delivery_postcode' => $order->delivery['postcode'], 
                           'delivery_state' => $order->delivery['state'], 
                           'delivery_country' => $order->delivery['country']['title'], 
-                          'delivery_address_format_id' => $order->delivery['format_id'], 
+                          'delivery_address_format_id' => $order->delivery['format_id'],
+// ship date
+                          'delivery_date' => $order->info['delivery_date'],
+// eof ship date 
                           'billing_name' => $order->billing['firstname'] . ' ' . $order->billing['lastname'], 
                           'billing_company' => $order->billing['company'],
                           'billing_street_address' => $order->billing['street_address'], 

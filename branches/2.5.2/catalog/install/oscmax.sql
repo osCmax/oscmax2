@@ -803,6 +803,7 @@ CREATE TABLE orders (
   delivery_state varchar(32),
   delivery_country varchar(32) NOT NULL,
   delivery_address_format_id int(5) NOT NULL,
+  delivery_date DATETIME NOT NULL,
   billing_name varchar(64) NOT NULL,
   billing_company varchar(32),
   billing_street_address varchar(64) NOT NULL,
@@ -1894,6 +1895,8 @@ INSERT INTO configuration VALUES (1450, 'CT_PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SH
 INSERT INTO configuration VALUES (2511, 'CT_CUSTOMER_COMMENTS_NOTIFY', 'CUSTOMER_COMMENTS_NOTIFY', 'false', 'CD_CUSTOMER_COMMENTS_NOTIFY', 5, '50', NULL , now(), NULL , 'tep_cfg_select_option(array(''true'', ''false''),' );
 INSERT INTO configuration VALUES (2512, 'CT_CUSTOMER_COMMENTS_NEW_STATUS', 'CUSTOMER_COMMENTS_NEW_STATUS', '4', 'CD_CUSTOMER_COMMENTS_NEW_STATUS', 5, '51', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
 INSERT INTO configuration VALUES (2513, 'CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'CUSTOMER_COMMENTS_NEW_STATUS_DL', '5', 'CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 5, '52', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
+INSERT INTO configuration VALUES (2516, 'CT_CHECKOUT_SHIPPING_DATE', 'CHECKOUT_SHIPPING_DATE', 'false', 'CD_CHECKOUT_SHIPPING_DATE', 5, '53', NULL , now(), NULL , 'tep_cfg_select_option(array(''true'', ''false''),' );
+
 
 # Configuration ID: 6 - Module Options - Hidden from Admin
 INSERT INTO configuration VALUES (68, 'CT_MODULE_PAYMENT_INSTALLED', 'MODULE_PAYMENT_INSTALLED', '', 'CD_MODULE_PAYMENT_INSTALLED', '6', '0', NULL, now(), NULL, NULL);

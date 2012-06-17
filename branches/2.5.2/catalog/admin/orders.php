@@ -218,7 +218,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
   //---PayPal WPP Modification END ---//
 ?>
 </head>
-<body onload="document.search_orders.q.focus()">
+<body onLoad="document.search_orders.q.focus()">
 <!-- header //-->
 <?php
   require(DIR_WS_INCLUDES . 'header.php');
@@ -324,6 +324,12 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
             <td class="main"><b><?php echo ENTRY_PAYMENT_METHOD; ?></b></td>
             <td class="main"><?php echo $order->info['payment_method']; ?></td>
           </tr>
+<!-- ship date -->
+          <tr>
+            <td class="main"><b><?php echo DELIVERY_DATE; ?></b></td>
+            <td class="main"><?php echo tep_date_long($order->info['delivery_date']); ?></td>
+          </tr>
+<!-- ship date -->
 <?php
     if (tep_not_null($order->info['cc_type']) || tep_not_null($order->info['cc_owner']) || tep_not_null($order->info['cc_number'])) {
 ?>

@@ -466,6 +466,9 @@ $Id$
                                   'products_length' => tep_db_prepare_input($_POST['products_length']),
                                   'products_width' => tep_db_prepare_input($_POST['products_width']),
                                   'products_ready_to_ship' => tep_db_prepare_input($_POST['products_ready_to_ship']),
+// BOF FedEx Web Services
+                                  'products_ship_sep' => (isset($_POST['products_ship_sep']) ? '1':'0'),
+// EOF FedEx Web Services
                                   'products_status' => tep_db_prepare_input($_POST['products_status']),
                                   'products_tax_class_id' => tep_db_prepare_input($_POST['products_tax_class_id']),
 // BOF Separate Price Per Customer, hide for these groups modification
@@ -1177,7 +1180,10 @@ if ($action == 'new_product') {
 // BOF SPPC hide from groups mod
                        'products_hide_from_groups' => '',
 // EOF SPPC hide from groups mod
-                       'manufacturers_id' => '');
+                       'manufacturers_id' => '',
+// BOF FedEx Webservices					   
+					   'products_ship_sep' => '');
+// EOF FedEx Webservices
 
 // BOF: Extra Product Fields
     foreach ($xfields as $f) {
@@ -1209,7 +1215,8 @@ if ($action == 'new_product') {
 // BOF: Extra Product Fields
 //	  $product_query = tep_db_query("select pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
 //LINE MODED: MSRP: Added "p.products_msrp,"
-	  $query = "select pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until ";
+//Line Moded: FedEx Webservices
+	  $query = "select pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_ship_sep, p.products_featured, p.products_featured_until ";
 	foreach ($xfields as $f) {
       $query .= ", pd." . $f;
       }
@@ -1813,7 +1820,19 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
             }
           } 
 // EOF: Extra Product Fields
+// BOF: FedEx Webservices
+        if (MODULE_SHIPPING_FEDEX_WEB_SERVICES_STATUS == 'true') {
 ?>        
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo TEXT_SHIP_SEPARATELY; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_checkbox_field('products_ship_sep', $pInfo->products_ship_sep, '', "1"); ?></td>
+          </tr>
+<?php } 
+// EOF: FedEx Webservices
+?>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
@@ -1910,7 +1929,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 
 // BOF: Extra Product Fields
 // LINE MODED: MSRP: Added "p.products_msrp,"
-        $query = "select p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty ";
+        $query = "select p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_ship_sep, p.manufacturers_id,  p.products_qty_blocks, p.products_min_order_qty ";
 	  foreach ($xfields as $f) {
         $query .= ', pd.' . $f;
       }       

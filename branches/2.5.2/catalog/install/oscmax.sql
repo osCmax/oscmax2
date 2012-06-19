@@ -992,6 +992,7 @@ CREATE TABLE products (
   products_hide_from_groups VARCHAR(255) NOT NULL DEFAULT '@',
   products_qty_blocks INT(4) NOT NULL default '1',
   products_min_order_qty INT(4) NOT NULL default '1',
+  products_ship_sep tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY  (products_id),
   KEY idx_products_model (products_model),
   KEY idx_products_date_added (products_date_added)

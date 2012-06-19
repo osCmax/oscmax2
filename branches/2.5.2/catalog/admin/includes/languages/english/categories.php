@@ -209,4 +209,6 @@ define('TEXT_PRODUCTS_ZIPCODE', 'Shipping zip code: ');
 define('TEXT_INDIV_SHIPPING_PRICE', 'Shipping price for this item: ');
 define('TEXT_INDIV_ADDITIONAL_PRICE', 'Shipping price for each additional: ');
 // EOF indvship 4.5
+
+define('TEXT_SHIP_SEPARATELY', 'FedEx Ship Separately:');
 ?>

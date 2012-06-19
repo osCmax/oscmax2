@@ -32,7 +32,7 @@ INSERT INTO configuration VALUES ('', 'CT_RECAPTCHA_EMAIL_FROM', 'RECAPTCHA_EMAI
 
 /* SYNC TABLE : `db_version` */
 
-UPDATE `db_version` SET `database_version`='v2.5.2'
+UPDATE `db_version` SET `database_version`='v2.5.2';
 
 
 COMMIT;

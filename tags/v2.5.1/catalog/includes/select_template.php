@@ -1,0 +1,8 @@
+<?php
+/* BTSv1.4 */
+  if(is_file(DIR_WS_TEMPLATES . TEMPLATENAME_MAIN_PAGE)) {
+	  require(DIR_WS_TEMPLATES . TEMPLATENAME_MAIN_PAGE);
+  } else {
+	  require(DIR_WS_TEMPLATES_FALLBACK . TEMPLATENAME_MAIN_PAGE);	  
+  }
+?>

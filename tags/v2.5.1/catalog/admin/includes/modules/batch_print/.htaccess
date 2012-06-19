@@ -1,0 +1,13 @@
+#$Id: $
+#
+#  osCmax e-Commerce
+#  http://www.osCmax.com
+#
+#  Copyright 2000 - 2011 osCmax
+#
+# Released under the GNU General Public License
+
+<FilesMatch "\.(pdf)$">
+Header set Cache-Control "no-store, no-cache, must-revalidate"
+Header set Expires "Thu, 01 Jan 2009 20:00:00 GMT"
+</FilesMatch>

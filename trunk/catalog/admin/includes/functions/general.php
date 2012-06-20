@@ -19,7 +19,7 @@ function tep_admin_check_login() {
   } else {
     $filename = basename( $PHP_SELF );
     if ($filename != FILENAME_DEFAULT && $filename != FILENAME_FORBIDDEN && $filename != FILENAME_LOGOFF && $filename != FILENAME_ADMIN_ACCOUNT && $filename != FILENAME_POPUP_IMAGE && $filename != 'packingslip.php' && $filename != 'invoice.php') {
-      $db_file_query = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where FIND_IN_SET( '" . $login_groups_id . "', admin_groups_id) and admin_files_name = '" . $filename . "'");
+      $db_file_query = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where FIND_IN_SET( '" . tep_db_input($login_groups_id) . "', admin_groups_id) and admin_files_name = '" . tep_db_input($filename) . "'");
       if (!tep_db_num_rows($db_file_query)) {
         tep_redirect(tep_href_link(FILENAME_FORBIDDEN));
       }
@@ -922,8 +922,8 @@ function tep_selected_file($filename) {
 ////
 // Sets the status of a product
   function tep_set_product_status($products_id, $status) {
-    if ($status == '1') {
-      return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '1', products_last_modified = now() where products_id = '" . (int)$products_id . "'");
+    if ($status == '1' || $status == '2') {
+      return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '" . $status . "', products_last_modified = now() where products_id = '" . (int)$products_id . "'");
     } elseif ($status == '0') {
 	  // BOF Open Featured Sets
       return tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0',  products_featured = '0', products_last_modified = now() where products_id = '" . (int)$products_id . "'");
@@ -2187,4 +2187,19 @@ function tep_cfg_pull_down_templates() {
       return false;
   }
 // EOF: BEGIN NEXT AND PREVIOUS ORDERS DISPLAY IN ADMIN 
+
+
+// Return a formatted address
+// TABLES: customers, address_book
+  function tep_address_label($customers_id, $address_id = 1, $html = false, $boln = '', $eoln = "\n") {
+    if (is_array($address_id) && !empty($address_id)) {
+      return tep_address_format($address_id['address_format_id'], $address_id, $html, $boln, $eoln);
+    }
+
+    $address_query = tep_db_query("select entry_firstname as firstname, entry_lastname as lastname, entry_company as company, entry_street_address as street_address, entry_suburb as suburb, entry_city as city, entry_postcode as postcode, entry_state as state, entry_zone_id as zone_id, entry_country_id as country_id from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customers_id . "' and address_book_id = '" . (int)$address_id . "'");
+    $address = tep_db_fetch_array($address_query);
+    $format_id = tep_get_address_format_id($address['country_id']);
+    return tep_address_format($format_id, $address, $html, $boln, $eoln);
+  }
+// Admin edit any customer address end
 ?>

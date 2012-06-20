@@ -203,7 +203,7 @@ $Id$
               $tmp_html .= tep_draw_radio_field('id[' . $stocked['oid'] . ']', $products_options_array['id'], $checked);
               $checked = false;
               $tmp_html .= $products_options_array['text'] ;
-              $tmp_html .=$products_options_name['products_options_comment'] ;
+              // $tmp_html .=$products_options_name['products_options_comment'] ;
               $tmp_html .= '&nbsp;';
             }
             $tmp_html .= '<br/>';
@@ -216,7 +216,7 @@ $Id$
               $tmp_html .= '';
               $tmp_html .= tep_draw_checkbox_field('id[' . $stocked['oid'] . ']', $products_options_array['id']);
               $tmp_html .= $products_options_array['text'] ;
-              $tmp_html .=$products_options_name['products_options_comment'] ;
+              // $tmp_html .=$products_options_name['products_options_comment'] ;
               $tmp_html .= '&nbsp;';
             }
             $tmp_html .= '';
@@ -266,7 +266,7 @@ $Id$
 //            $tmp_html = 'tep_draw_input_field(' . $nonstocked['oid'] . ' , ' . products_id['attributes_values'][$nonstocked['oid']]->products_model . ')' ;
 //	      $tmp_html .= tep_draw_input_field('id[' . $nonstocked['oid'] . ']', $this->products_id['attributes'][$products_options_name['products_options_id']]);
 	      $tmp_html .='&nbsp;' . $products_options_array['text'];
-              $tmp_html .=$products_options_name['products_options_comment'] ;
+              // $tmp_html . =$products_options_name['products_options_comment'] ;
               $tmp_html .= '&nbsp;';
 	    }
             $out .= '<tr class="options"><td align="right" class="options"><b>' . $nonstocked['oname'] . ':</b></td>
@@ -281,7 +281,7 @@ $Id$
               $tmp_html .= '';
             $tmp_html = '<textarea wrap="soft" name="id[' . $nonstocked['oid'] . ']"  rows=5 value="' . $cart->contents[$_GET['products_id']]['attributes_values'][$nonstocked['oid']] . '" class="inputbox"></textarea>' ;
             $tmp_html .= $products_options_array['text'] ;
-              $tmp_html .=$products_options_name['products_options_comment'] ;
+              // $tmp_html .= $products_options_name['products_options_comment'] ;
               $tmp_html .= '<br/>';
             }
             $tmp_html .= '';
@@ -297,7 +297,7 @@ $Id$
               $tmp_html .= tep_draw_radio_field('id[' . $nonstocked['oid'] . ']', $products_options_array['id'], $checked);
               $checked = false;
               $tmp_html .= $products_options_array['text'] ;
-              $tmp_html .=$products_options_name['products_options_comment'] ;
+              // $tmp_html .= $products_options_name['products_options_comment'] ;
               $tmp_html .= '&nbsp;';
             }
             $tmp_html .= '';
@@ -312,7 +312,7 @@ $Id$
               $tmp_html .= '';
               $tmp_html .= tep_draw_checkbox_field('id[' . $nonstocked['oid'] . ']', $products_options_array['id']);
               $tmp_html .= $products_options_array['text'];
-              $tmp_html .= $products_options_name['products_options_comment'];
+              // $tmp_html .= $products_options_name['products_options_comment'];
               $tmp_html .= '&nbsp;';
             }
             $tmp_html .= '';
@@ -410,7 +410,7 @@ $Id$
 	  
       while ($products_options_name = tep_db_fetch_array($products_options_name_query)) {
         $products_options_array = array();
-        $products_options_query = tep_db_query("select pov.products_options_values_id, pov.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov where pa.products_id = '" . (int)$this->products_id . "' and pa.options_id = '" . (int)$products_options_name['products_options_id'] . "' and pa.options_values_id = pov.products_options_values_id and pov.language_id = '" . (int)$languages_id . "' order by pa.products_options_sort_order, pa.options_values_price");
+        $products_options_query = tep_db_query("select pov.products_options_values_id, pov.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov where pa.products_id = '" . (int)$this->products_id . "' and pa.options_id = '" . (int)$products_options_name['products_options_id'] . "' and pa.options_values_id = pov.products_options_values_id and pov.language_id = '" . (int)$languages_id . "' order by pa.products_options_sort_order, pov.products_options_values_name, pa.options_values_price");
         while ($products_options = tep_db_fetch_array($products_options_query)) {
 
 $products_options_array[] = array('id' => $products_options['products_options_values_id'], 'text' => $products_options['products_options_values_name']);

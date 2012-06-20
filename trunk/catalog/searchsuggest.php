@@ -35,7 +35,7 @@
 	   $search = addslashes($_GET['keywords']);
 	   //Get every page title for the site.
        // $sql = "SELECT * FROM products_description join products on products_description.products_id=products.products_id WHERE products.products_status=1 AND products.products_carrot=0 and products.products_id = products_description.products_id and products_description.language_id = '" . (int)$languages_id . "' and products_description.products_name like('%" . tep_db_input($_GET['search']) . "%') LIMIT 15";
-       $sql = "select pd.products_name, p.products_id from " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS . " p on pd.products_id = p.products_id WHERE p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and pd.products_name like('%" . tep_db_input($_GET['keywords']) . "%') ORDER BY pd.products_name LIMIT 15";
+       $sql = "select pd.products_name, p.products_id from " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS . " p on pd.products_id = p.products_id WHERE p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and pd.products_name like('%" . tep_db_input($_GET['keywords']) . "%') and find_in_set('" . $customer_group_id . "', p.products_hide_from_groups) = 0 ORDER BY pd.products_name LIMIT 15";
 
 /**
  * Set XML HTTP Header for ajax response

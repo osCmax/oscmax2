@@ -26,18 +26,17 @@ define('TEXT_ITEM_NOT_AVAILABLE', 'Produkt nicht mehr verfügbar');
 define('TEXT_DISPLAY_NUMBER_OF_WISHLIST', '<b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Artikeln auf Ihrer Wunschliste)');
 define('WISHLIST_EMAIL_TEXT', 'Wenn Sie Ihre Wunschliste an mehrere Empfänger versenden möchten, geben Sie deren Namen und E-Mail-Adressen in die Felder ein. Sie müssen jedoch nicht alle Felder ausfüllen. Verfassen Sie eine kurze Nachricht, die in allen versendeten E-Mails enthalten sein wird.');
 define('WISHLIST_EMAIL_TEXT_GUEST', 'Wenn Sie Ihre Wunschliste an mehrere Empfänger versenden möchten, geben Sie deren Namen und E-Mail-Adressen in die Felder ein. Sie müssen jedoch nicht alle Felder ausfüllen. Verfassen Sie eine kurze Nachricht, die in allen versendeten E-Mails enthalten sein wird.');
-define('WISHLIST_EMAIL_SUBJECT', 'hat Ihnen eine Wunschliste bei ' . STORE_NAME . ' gesendet.');  //Customers name will be automatically added to the beginning of this.
+// Customers name will be automatically added to the beginning of this and store name to the end.
+define('WISHLIST_EMAIL_SUBJECT', 'hat Ihnen eine Wunschliste bei gesendet. ');
 define('WISHLIST_SENT', 'Ihre Wunschliste wurde versendet.');
 define('WISHLIST_EMAIL_LINK', '
 
 $from_name\'s öffentliche Wunschliste befindet sich hier:
 $link
 
-Vielen Dank,
-' . STORE_NAME); //$from_name = Customers name  $link = public wishlist link
+Vielen Dank,'); //$from_name = Customers name  $link = public wishlist link
 
-define('WISHLIST_EMAIL_GUEST', 'Vielen Dank,
-' . STORE_NAME);
+define('WISHLIST_EMAIL_GUEST', 'Vielen Dank,');
 
 define('ERROR_YOUR_NAME' , 'Bitte geben Sie Ihren Namen ein.');
 define('ERROR_YOUR_EMAIL' , 'Bitte geben Sie Ihre E-Mail-Adresse ein.');

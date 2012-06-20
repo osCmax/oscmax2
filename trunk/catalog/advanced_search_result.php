@@ -17,7 +17,7 @@ $Id$
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ADVANCED_SEARCH);
+  require(bts_select('language', FILENAME_ADVANCED_SEARCH));
   
 // begin Extra Product Fields
   $epf_query = tep_db_query("select * from " . TABLE_EPF . " e join " . TABLE_EPF_LABELS . " l where e.epf_status and (e.epf_id = l.epf_id) and (l.languages_id = " . (int)$languages_id . ") and l.epf_active_for_language order by e.epf_order");
@@ -245,7 +245,7 @@ $Id$
   
   if (!isset($last_search_insert)) { $last_search_insert = ''; }
   
-  $search_enhancements_keywords = $_GET['keywords'];
+  $search_enhancements_keywords = (isset($_GET['keywords']) ? $_GET['keywords'] : '');
   $search_enhancements_keywords = strip_tags($search_enhancements_keywords);
   $search_enhancements_keywords = addslashes($search_enhancements_keywords);  
 

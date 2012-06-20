@@ -13,14 +13,14 @@ $Id$
 define('NAVBAR_TITLE_1', 'Commande');
 define('NAVBAR_TITLE_2', 'Changer l\'adresse d\'exp&eacute;dition');
 
-define('HEADING_TITLE', 'Information livraison');
+define('HEADING_TITLE', 'Information de livraison');
 
 define('TABLE_HEADING_SHIPPING_ADDRESS', 'Addresse d\'exp&eacute;dition');
-define('TEXT_SELECTED_SHIPPING_DESTINATION', 'Veuillez choisir dans votre carnet d\'adresses l\'adresse o&ucirc; vous voudriez que les articles soient livr&eacute;s.');
+define('TEXT_SELECTED_SHIPPING_DESTINATION', 'Veuillez choisir dans votre carnet l\'adresse o&ucirc; vous voudriez que les articles soient livr&eacute;s.');
 define('TITLE_SHIPPING_ADDRESS', 'Addresse d\'exp&eacute;dition:');
 
-define('TABLE_HEADING_ADDRESS_BOOK_ENTRIES', 'Entr&eacute;es du carnet d\'adresses');
-define('TEXT_SELECT_OTHER_SHIPPING_DESTINATION', 'Veuillez choisir l\'adresse d\'exp&eacute;dition  si les articles de cette commande doivent &ecirc;tre livr&eacute;s ailleurs.');
+define('TABLE_HEADING_ADDRESS_BOOK_ENTRIES', 'Données du carnet d\'adresses');
+define('TEXT_SELECT_OTHER_SHIPPING_DESTINATION', 'Veuillez choisir l\'adresse d\'exp&eacute;dition si les articles de cette commande doivent &ecirc;tre livr&eacute;s ailleurs.');
 define('TITLE_PLEASE_SELECT', 'Veuillez choisir');
 
 define('TABLE_HEADING_NEW_SHIPPING_ADDRESS', 'Nouvelle addresse d\'exp&eacute;dition');

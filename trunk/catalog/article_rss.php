@@ -20,7 +20,7 @@ $Id$
 //1234567890123456789 
 //2007-01-01 15:48:04
 
-    require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLE_RSS);
+    require(bts_select('language', FILENAME_ARTICLE_RSS));
 
     $language_query = tep_db_query("select code from " . TABLE_LANGUAGES . " where languages_id = '" . (int)$languages_id . "'");
         $language_code = tep_db_fetch_array($language_query);

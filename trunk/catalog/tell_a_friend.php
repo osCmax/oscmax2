@@ -50,7 +50,7 @@ $Id$
 // EOF: MOD - Article Manager
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_TELL_A_FRIEND);
+  require(bts_select('language', FILENAME_TELL_A_FRIEND));
 
   if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
     $error = false;

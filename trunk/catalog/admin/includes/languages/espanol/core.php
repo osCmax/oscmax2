@@ -317,6 +317,7 @@ define('JS_ZONE', '* Debe seleccionar \'Provincia\' de la lista de este país.\n'
 define('JS_COUNTRY', '* Debe seleccionar \'País\'.\n');
 define('JS_TELEPHONE', '* El campo \'Teléfono\' debe tener al menos ' . ENTRY_TELEPHONE_MIN_LENGTH . ' caracteres.\n');
 define('JS_PASSWORD', '* Los campos \'Contraseña\' y \'Confirmación\' deben coincidir y tener al menos ' . ENTRY_PASSWORD_MIN_LENGTH . ' caracteres.\n');
+define('JS_PASSWORD_DONT_MATCH', 'Las contraseñas introducidas no coinciden');
 
 define('JS_ORDER_DOES_NOT_EXIST', '¡El número de pedido %s no existe!');
 
@@ -419,7 +420,7 @@ define('IMAGE_MODULE_INSTALL', 'Instalar Módulo');
 define('IMAGE_MODULE_REMOVE', 'Quitar Módulo');
 define('IMAGE_MOVE', 'Mover');
 define('IMAGE_NEW_BANNER', 'Nuevo banner');
-define('IMAGE_NEW_CATEGORY', 'Nueva categoria');
+define('IMAGE_NEW_CATEGORY', 'Nueva categoría');
 define('IMAGE_NEW_COUNTRY', 'Nuevo país');
 define('IMAGE_NEW_CURRENCY', 'Nueva moneda');
 define('IMAGE_NEW_FILE', 'Nuevo fichero');

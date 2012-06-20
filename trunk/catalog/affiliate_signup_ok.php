@@ -17,7 +17,7 @@ $Id$
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_SIGNUP_OK);
+  require(bts_select('language', FILENAME_AFFILIATE_SIGNUP_OK));
 
   $breadcrumb->add(NAVBAR_TITLE);
 

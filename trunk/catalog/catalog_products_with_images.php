@@ -23,7 +23,7 @@ $Id$
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CATALOG_PRODUCTS_WITH_IMAGES);
+  require(bts_select('language', FILENAME_CATALOG_PRODUCTS_WITH_IMAGES));
 
   // Use $location if you have a pre breadcrumb release of OSC then comment out $breadcrumb line
   //$location = ' &raquo; <a href="' . tep_href_link(FILENAME_CATALOG_PRODUCTS_WITH_IMAGES, '', 'NONSSL') . '" class="headerNavigation">' . NAVBAR_TITLE . '</a>';
@@ -35,7 +35,6 @@ $Id$
 
   include (bts_select('main')); // BTSv1.5
 
-
-   require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require(DIR_WS_INCLUDES . 'application_bottom.php');
    
 ?>

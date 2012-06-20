@@ -246,7 +246,7 @@ $Id$
     }
 
     function count_contents() {  // get total number of items in cart
-	  if ($this->items_count > 0) {return $this->items_count;};
+	  // if ($this->items_count > 0) { return $this->items_count; }
       $total_items = 0;
       if (is_array($this->contents)) {
         reset($this->contents);
@@ -254,7 +254,6 @@ $Id$
           $total_items += $this->get_quantity($products_id);
         }
       }
-
       return $total_items;
     }
 

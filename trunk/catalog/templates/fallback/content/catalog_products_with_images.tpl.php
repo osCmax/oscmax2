@@ -19,7 +19,15 @@ $Id$
     <td class="productinfo_header">
       <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
-          <td class="pageHeading"><?php echo HEADING_TITLE; ?><?php if (PRODUCT_LIST_CATALOG_CURRENCY == 'show') { require(DIR_WS_BOXES . 'currencies.php'); } ?></td>
+          <td class="main">
+		  <?php 
+		  echo STORE_NAME . '<br>' . nl2br(STORE_NAME_ADDRESS) . '<br>';
+		  echo TEXT_EMAIL . '<a href="mailto:' . STORE_OWNER_EMAIL_ADDRESS . '">' . STORE_OWNER_EMAIL_ADDRESS . '</a><br><br>';
+		  echo TEXT_SUBJECT_TO_CHANGE;
+		  if (PRODUCT_LIST_CATALOG_CURRENCY == 'show') { 
+		    require(DIR_WS_BOXES . 'currencies.php'); 
+		  }
+		  ?></td>
         </tr>
       </table>
     </td>

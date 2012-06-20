@@ -35,4 +35,5 @@ define('REASON_3', 'Entregas');
 define('REASON_4', 'Devoluciones');
 define('REASON_5', 'Marketing');
 define('REASON_6', 'Otro');
+define('TEXT_REVEAL_EMAIL', 'Pulsar para revelar email');
 ?>

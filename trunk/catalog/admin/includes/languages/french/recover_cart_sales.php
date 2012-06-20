@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('MESSAGE_STACK_CUSTOMER_ID', 'Panier pour Client-ID ');
+define('MESSAGE_STACK_CUSTOMER_ID', 'Panier pour client ');
 define('MESSAGE_STACK_DELETE_SUCCESS', ' suppression réussie');
 define('HEADING_TITLE', 'Traiter les paniers non validés v2.22');
 define('HEADING_EMAIL_SENT', 'rapport par e-mail');
@@ -18,14 +18,33 @@ define('EMAIL_TEXT_LOGIN', 'Login to your account here:');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
 define('EMAIL_TEXT_SUBJECT', 'Demande de '.  STORE_NAME );
 define('EMAIL_TEXT_SALUTATION', 'Dear ' );
-define('EMAIL_TEXT_NEWCUST_INTRO', "\n\n" . 'Vous avez choisi ' . STORE_NAME .
-                                   ' pour vos achats. ');
+define('EMAIL_TEXT_NEWCUST_INTRO', "\n\n" . 'Vous avez choisi ' . STORE_NAME . ' pour vos achats. ');
 define('EMAIL_TEXT_CURCUST_INTRO', "\n\n" . 'Nous vous remercions des achats que vous avez déja passés sur ' . STORE_NAME . '. ');
 define('EMAIL_TEXT_BODY_HEADER', 'Nous avons remarqué que lors d\'une visite sur notre boutique vous avez choisi les articles suivants:' . "\n\n");
-define('EMAIL_TEXT_BODY_FOOTER', 'Nous serions intéressés pour savoir ce qui s\'est produit et s\'il y avait une raison pour laquelle vous
-avez décidé de ne pas acheter avec ' . STORE_NAME . '.' .
+
+
+
+
+
+
+define('EMAIL_TEXT_BODY_FOOTER', 'Nous serions intéressés pour savoir ce qui s\'est produit et s\'il y avait une raison pour laquelle vous avez décidé de ne pas acheter avec ' . STORE_NAME . '.' .
                                  "\n\n" . 'Auriez vous l\'amabilité de nous expliquer la raison de la non finalisation de votre commande? Toujours soucieux de proposer le meilleur service, votre expérience nous permettrait d\'améliorer nos propositions.' .
                                  "\n\n" . 'Cordialement,' ."\n\n");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 define('DAYS_FIELD_PREFIX', 'Montrer depuis les derniers ');
 define('DAYS_FIELD_POSTFIX', ' jours ');
 define('DAYS_FIELD_BUTTON', 'Go');
@@ -46,4 +65,5 @@ define('TEXT_SEND_EMAIL', 'Envoyer e-mail');
 define('TEXT_RETURN', '[Retour]');
 define('TEXT_NOT_CONTACTED', 'Non contacté');
 define('PSMSG', 'facultatif PS Message: ');
+define('TEXT_NO_CARTS_FOUND', 'No abandoned carts found for the date range specified.');
 ?>

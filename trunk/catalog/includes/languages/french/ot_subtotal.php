@@ -10,6 +10,6 @@ $Id$
   Released under the GNU General Public License
 */
 
-  define('MODULE_ORDER_TOTAL_SUBTOTAL_TITLE', 'Sous-Total');
-  define('MODULE_ORDER_TOTAL_SUBTOTAL_DESCRIPTION', 'Commande Sous-Total');
+  define('MODULE_ORDER_TOTAL_SUBTOTAL_TITLE', 'Sous-total');
+  define('MODULE_ORDER_TOTAL_SUBTOTAL_DESCRIPTION', 'Sous-total de la commande');
 ?>

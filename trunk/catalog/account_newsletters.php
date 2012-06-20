@@ -23,7 +23,7 @@ $Id$
   }
 
 // needs to be included earlier to set the success message in the messageStack
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ACCOUNT_NEWSLETTERS);
+  require(bts_select('language', FILENAME_ACCOUNT_NEWSLETTERS));
 
   $newsletter_query = tep_db_query("select customers_newsletter, customers_email_address, customers_newsletter_type from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$customer_id . "'");
   $newsletter = tep_db_fetch_array($newsletter_query);

@@ -57,7 +57,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
     }
   }
 
-  include(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_PROCESS);
+  require(bts_select('language', FILENAME_CHECKOUT_PROCESS));
 /* One Page Checkout - BEGIN */ 
   if (ONEPAGE_CHECKOUT_ENABLED == 'True'){
       require('includes/classes/onepage_checkout.php');
@@ -152,7 +152,10 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
                           'delivery_postcode' => $order->delivery['postcode'], 
                           'delivery_state' => $order->delivery['state'], 
                           'delivery_country' => $order->delivery['country']['title'], 
-                          'delivery_address_format_id' => $order->delivery['format_id'], 
+                          'delivery_address_format_id' => $order->delivery['format_id'],
+// ship date
+                          'delivery_date' => $order->info['delivery_date'],
+// eof ship date 
                           'billing_name' => $order->billing['firstname'] . ' ' . $order->billing['lastname'], 
                           'billing_company' => $order->billing['company'],
                           'billing_street_address' => $order->billing['street_address'], 
@@ -376,7 +379,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
                  EMAIL_TEXT_DATE_ORDERED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
  // PWA BOF
   if ($order->customer['is_dummy_account']) {
-    $email_order .= EMAIL_WARNING . "\n\n";
+    $email_order .= sprintf(EMAIL_WARNING, STORE_OWNER_EMAIL_ADDRESS) . "\n\n";
   }
   // PWA EOF
   if ($order->info['comments']) {

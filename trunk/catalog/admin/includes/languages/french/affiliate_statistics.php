@@ -19,13 +19,13 @@ define('TEXT_AFFILIATE_NAME', 'Nom de l\'affilié: ');
 define('TEXT_AFFILIATE_JOINDATE', 'Date d\'inscription de l\'affilié: ');
 define('TEXT_CONVERSION', 'Conversion: ');
 define('TEXT_AMOUNT', 'Ventes totales des affiliés: ');
-define('TEXT_AVERAGE', 'Déboursement/Vente Moyen d\'affilié: ');
+define('TEXT_AFFILIATE_AVERAGE', 'Déboursement/Vente Moyen d\'affilié: ');
 define('TEXT_COMMISSION_RATE', 'Taux de commissionnement: ');
 define('TEXT_PAYPERSALE_RATE', 'Taux de commisionnement par vente: ');
 define('TEXT_CLICKTHROUGH_RATE', 'Taux de clics: ');
 define('TEXT_COMMISSION', 'Commission totale affiliés : ');
-define('TEXT_SUMMARY_HELP', '[?]');
-define('TEXT_SUMMARY', 'Cliquez sur [?] pour avoir une aide pour chaque catégorie.');
+define('TEXT_SUMMARY_1', 'Hover over ');
+define('TEXT_SUMMARY_2', ' to see a description of each category.');
 define('HEADING_SUMMARY_HELP', 'Aide pour les affiliés');
 define('TEXT_IMPRESSIONS_HELP', '<i>Impressions</i> affiche le nombre total de fois où une bannière (ou un lien) a été affiché dans la période donnée.');
 define('TEXT_VISITS_HELP', '<i>Visites</i> représente le nombre total de clics par visiteurs à partir de votre site.');
@@ -37,5 +37,4 @@ define('TEXT_COMMISSION_RATE_HELP', '<i>Taux de commissionnement</i>  représente
 define('TEXT_CLICKTHROUGH_RATE_HELP', '<i>Taux de clics</i>  représente le taux auquel vous êtes payé pour les cliccs de redirection sur une base classique de clics');
 define('TEXT_PAY_PER_SALE_RATE_HELP', '<i>Taux de commisionnement par vente</i>  représente le taux auquel vous êtes payé pour les ventes sur une base : une vente à une vente.');
 define('TEXT_COMMISSION_HELP', '<i>Commission</i>  représente le total de commission qui vous est du');
-define('TEXT_CLOSE_WINDOW', 'Fermer cette fenêtre [x]');
 ?>

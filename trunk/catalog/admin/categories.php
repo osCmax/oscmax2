@@ -140,7 +140,7 @@ $Id$
     }
     switch ($action) {
       case 'setflag':
-        if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') ) {
+        if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') || ($_GET['flag'] == '2') ) {
           if (isset($_GET['pID'])) {
             tep_set_product_status($_GET['pID'], $_GET['flag']);
           }
@@ -466,6 +466,9 @@ $Id$
                                   'products_length' => tep_db_prepare_input($_POST['products_length']),
                                   'products_width' => tep_db_prepare_input($_POST['products_width']),
                                   'products_ready_to_ship' => tep_db_prepare_input($_POST['products_ready_to_ship']),
+// BOF FedEx Web Services
+                                  'products_ship_sep' => (isset($_POST['products_ship_sep']) ? '1':'0'),
+// EOF FedEx Web Services
                                   'products_status' => tep_db_prepare_input($_POST['products_status']),
                                   'products_tax_class_id' => tep_db_prepare_input($_POST['products_tax_class_id']),
 // BOF Separate Price Per Customer, hide for these groups modification
@@ -1177,7 +1180,10 @@ if ($action == 'new_product') {
 // BOF SPPC hide from groups mod
                        'products_hide_from_groups' => '',
 // EOF SPPC hide from groups mod
-                       'manufacturers_id' => '');
+                       'manufacturers_id' => '',
+// BOF FedEx Webservices					   
+					   'products_ship_sep' => '');
+// EOF FedEx Webservices
 
 // BOF: Extra Product Fields
     foreach ($xfields as $f) {
@@ -1209,7 +1215,8 @@ if ($action == 'new_product') {
 // BOF: Extra Product Fields
 //	  $product_query = tep_db_query("select pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
 //LINE MODED: MSRP: Added "p.products_msrp,"
-	  $query = "select pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_featured, p.products_featured_until ";
+//Line Moded: FedEx Webservices
+	  $query = "select pd.products_name, pd.products_description, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_qty_blocks, p.products_min_order_qty, p.products_weight, products_length, products_width, products_height, products_ready_to_ship, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.products_hide_from_groups, p.manufacturers_id, p.products_ship_sep, p.products_featured, p.products_featured_until ";
 	foreach ($xfields as $f) {
       $query .= ", pd." . $f;
       }
@@ -1309,9 +1316,10 @@ if ($action == 'new_product') {
 
     if (!isset($pInfo->products_status)) $pInfo->products_status = '1';
     switch ($pInfo->products_status) {
-      case '0': $in_status = false; $out_status = true; break;
-      case '1':
-      default: $in_status = true; $out_status = false;
+      case '0': $in_status = false; $discontinued_status = false; $out_status = true; break; 
+      case '2': $in_status = false; $discontinued_status = true; $out_status = false; break; 
+      case '1': 
+      default: $in_status = true; $discontinued_status = false; $out_status = false; 
     }
 
 // BOF Open Featured Sets
@@ -1422,7 +1430,7 @@ function updateMSRPNet() {
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_STATUS; ?></td>
             <td class="main" colspan="2">
-            <?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE .
+            <?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '2', $discontinued_status) . '&nbsp;' . TEXT_PRODUCT_DISCONTINUED .'&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE .
             tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_DATE_AVAILABLE . '&nbsp;<small>' . TEXT_YYYY_MM_DD . '</small>&nbsp;' .  tep_draw_input_field('products_date_available', $pInfo->products_date_available, 'id="product_available"'); ?>
             </td>
           </tr>
@@ -1812,7 +1820,19 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
             }
           } 
 // EOF: Extra Product Fields
+// BOF: FedEx Webservices
+        if (MODULE_SHIPPING_FEDEX_WEB_SERVICES_STATUS == 'true') {
 ?>        
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo TEXT_SHIP_SEPARATELY; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_checkbox_field('products_ship_sep', $pInfo->products_ship_sep, '', "1"); ?></td>
+          </tr>
+<?php } 
+// EOF: FedEx Webservices
+?>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
@@ -1909,7 +1929,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 
 // BOF: Extra Product Fields
 // LINE MODED: MSRP: Added "p.products_msrp,"
-        $query = "select p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.manufacturers_id, p.products_qty_blocks, p.products_min_order_qty ";
+        $query = "select p.products_id, pd.language_id, pd.products_name, pd.products_description, pd.products_short, pd.tab1, pd.tab2, pd.tab3, pd.tab4, pd.tab5, pd.tab6, pd.products_url, p.products_quantity, p.products_model, p.products_image, p.products_msrp, p.products_price, p.products_weight, p.products_length, p.products_width, p.products_height, p.products_ready_to_ship, p.products_date_added, p.products_last_modified, p.products_date_available, p.products_status, p.products_ship_sep, p.manufacturers_id,  p.products_qty_blocks, p.products_min_order_qty ";
 	  foreach ($xfields as $f) {
         $query .= ', pd.' . $f;
       }       
@@ -2047,7 +2067,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
           <table width="100%">
             <tr>
               <td class="main" valign="top" width="75%"><?php echo $pInfo->products_description; ?></td>
-              <td width="25%" align="center"><?php echo '<a href="' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image_name, $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?></td>
+              <td width="25%" align="center"><?php echo '<a href="' . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_BIGIMAGES_DIR . $products_image_name . '" target="_blank" rel="lightbox[group]" title="'.$product_info['products_name'].'" >' . tep_image(DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $products_image_name, $product_info['products_name'], SMALL_IMAGE_WIDTH, 'hspace="4" vspace="4"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?></td>
             </tr>
           </table>
         </td>
@@ -2517,11 +2537,13 @@ if (DISABLE_CATEGORY_DROPDOWN_SWITCH == 'false') {
 ?></td><?php // EOF SPPC hide products and categories from groups ?>
                 <td class="dataTableContent" align="center">
 <?php
-      if ($products['products_status'] == '1') {
-        echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=0&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
-      } else {
-        echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=1&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
-      }
+    if ($products['products_status'] == '1') {
+      echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=2&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_yellow_light.gif', IMAGE_ICON_STATUS_YELLOW_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=0&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+    } elseif ($products['products_status'] == '2') {
+      echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=1&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS .  'icon_status_yellow.gif', IMAGE_ICON_STATUS_YELLOW, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=0&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+    } else {
+      echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=1&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&amp;flag=2&amp;pID=' . $products['products_id'] . '&amp;cPath=' . $cPath) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_yellow_light.gif', IMAGE_ICON_STATUS_YELLOW_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS .  'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+    } 
 ?></td>
 <?php
  	// BOF Open Featured Sets
@@ -2712,7 +2734,7 @@ if (DISABLE_CATEGORY_DROPDOWN_SWITCH == 'false') {
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
             if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
 //            $contents[] = array('text' => '<br>' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
-            $contents[] = array('align' => 'center', 'text' => '<br>' . tep_info_image(CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br>' . $cInfo->categories_image);
+            $contents[] = array('align' => 'center', 'text' => '<br>' . tep_info_image(CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH) . '<br>' . $cInfo->categories_image);
             $contents[] = array('text' => '<br>' . TEXT_SUBCATEGORIES . ' ' . $cInfo->childs_count . '<br>' . TEXT_PRODUCTS . ' ' . $cInfo->products_count);
 // BOF SPPC hide products and categories from groups
        $category_hidden_from_string = '';
@@ -2739,7 +2761,7 @@ if (DISABLE_CATEGORY_DROPDOWN_SWITCH == 'false') {
             if (tep_not_null($pInfo->products_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($pInfo->products_last_modified));
             if (date('Y-m-d') < $pInfo->products_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . tep_date_short($pInfo->products_date_available));
 // BOF: MoPics in Admin
-           $contents[] = array('text' => TEXT_THUMBNAIL_IMAGE . '<br /><br /><center><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" height="' . SMALL_IMAGE_HEIGHT . '" /></center>');
+           $contents[] = array('text' => TEXT_THUMBNAIL_IMAGE . '<br /><br /><center><img src="' . HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $image_subdirectory . $pInfo->products_image . '" width="' . SMALL_IMAGE_WIDTH . '" /></center>');
 // EOF: MoPics in Admin
 
 // BOF: MSRP

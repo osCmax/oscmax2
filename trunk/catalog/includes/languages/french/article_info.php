@@ -10,15 +10,15 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_ARTICLE_NOT_FOUND', 'Article Not Found');
-define('TEXT_ARTICLE_NOT_FOUND', 'Sorry, but the article you requested is not available in this site.');
-define('TEXT_MORE_INFORMATION', 'For more information, please visit this articles <a href="%s" target="_blank"><u>web page</u></a>.');
-define('TEXT_DATE_ADDED', 'This article was published on %s.');
-define('TEXT_DATE_AVAILABLE', '<span class="notice">This article will be published on %s.</span>');
-define('TEXT_CURRENT_REVIEWS', 'Current Reviews:');
-define('BOX_TEXT_TELL_A_FRIEND', 'Tell a friend'); 
-define('TEXT_TELL_A_FRIEND', 'Tell a friend about this article:');
-define('TEXT_XSELL_ARTICLES', 'Products related to this article:');
+define('HEADING_ARTICLE_NOT_FOUND', 'Article pas trouvé');
+define('TEXT_ARTICLE_NOT_FOUND', 'Désolé, mais l\'article que vous avez demandé n\'est pas disponible sur ce site.');
+define('TEXT_MORE_INFORMATION', 'Pour plus d\'informations, consultez ces articles <a href="%s" target="_blank"><u>page web</u></a>.');
+define('TEXT_DATE_ADDED', 'Cet article a été mise en ligne le %s.');
+define('TEXT_DATE_AVAILABLE', '<font color="#FF0000">Cet article sera sera mise en ligne le %s.</font>');
+define('TEXT_CURRENT_REVIEWS', 'Commentaires actuelles:');
+define('BOX_TEXT_TELL_A_FRIEND', 'Recommander à un ami');
+define('TEXT_TELL_A_FRIEND', 'Recommander cet article à un ami:');
+define('TEXT_XSELL_ARTICLES', 'Produits liés à cet article:');
 define('HEADING_TITLE', 'Articles');
 
 ?>

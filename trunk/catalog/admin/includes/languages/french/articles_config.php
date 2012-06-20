@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Configuration des Articles');
+define('HEADING_TITLE', 'Configuration des articles');
 
 define('TABLE_HEADING_CONFIGURATION_TITLE', 'Titre');
 define('TABLE_HEADING_CONFIGURATION_VALUE', 'Valeur');

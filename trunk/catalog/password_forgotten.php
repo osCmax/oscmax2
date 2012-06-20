@@ -17,7 +17,7 @@ $Id$
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PASSWORD_FORGOTTEN);
+  require(bts_select('language', FILENAME_PASSWORD_FORGOTTEN));
 
   if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
     $email_address = tep_db_prepare_input($_POST['email_address']);
@@ -31,7 +31,7 @@ $Id$
 
       tep_db_query("update " . TABLE_CUSTOMERS . " set customers_password = '" . tep_db_input($crypted_password) . "' where customers_id = '" . (int)$check_customer['customers_id'] . "'");
 
-      tep_mail($check_customer['customers_firstname'] . ' ' . $check_customer['customers_lastname'], $email_address, EMAIL_PASSWORD_REMINDER_SUBJECT, sprintf(EMAIL_PASSWORD_REMINDER_BODY, $new_password), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+      tep_mail($check_customer['customers_firstname'] . ' ' . $check_customer['customers_lastname'], $email_address, STORE_NAME . EMAIL_PASSWORD_REMINDER_SUBJECT, sprintf(EMAIL_PASSWORD_REMINDER_BODY, isset($REMOTE_ADDR), STORE_NAME, $new_password), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
       $messageStack->add_session('login', SUCCESS_PASSWORD_SENT, 'success');
 

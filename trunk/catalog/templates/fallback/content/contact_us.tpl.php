@@ -145,7 +145,12 @@ $Id$
                 <td class="smallText"><?php echo EMAIL_US; ?></td>
               </tr>
 			  <tr>
+              <?php if (RECAPTCHA_EMAIL_URL != '' && RECAPTCHA_EMAIL_FROM != '') { ?>
+                <td class="smallText"><a href="<?php echo RECAPTCHA_EMAIL_URL; ?>" onclick="window.open('<?php echo RECAPTCHA_EMAIL_URL; ?>', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0, menubar=0,resizable=0,width=510,height=340'); return false;" title="<?php echo TEXT_REVEAL_EMAIL; ?>">
+				<?php if (RECAPTCHA_EMAIL_FROM == 'CLICK') { echo TEXT_REVEAL_EMAIL; } else { echo RECAPTCHA_EMAIL_FROM; } ?></a><br><br></td>
+              <?php } else { ?>  
                 <td class="smallText"><a href="mailto:<?php echo EMAIL_FROM; ?>"><?php echo EMAIL_FROM; ?></a><br><br></td>
+              <?php } ?>  
               </tr>
 			<?php } ?>
 			<?php if (SHOW_MAILING_ADDRESS == 'true') { ?>

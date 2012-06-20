@@ -16,7 +16,8 @@ $Id$
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLES_NEW);
+  
+  require(bts_select('language', FILENAME_ARTICLES_NEW));
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_ARTICLES_NEW));
 

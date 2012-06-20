@@ -21,7 +21,7 @@ $Id$
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_GV_FAQ);
+  require(bts_select('language', FILENAME_GV_FAQ));
 
   $breadcrumb->add(NAVBAR_TITLE); 
 
@@ -29,6 +29,5 @@ $Id$
 
   include (bts_select('main')); // BTSv1.5
 
-
   require(DIR_WS_INCLUDES . 'application_bottom.php'); 
-  ?>
+?>

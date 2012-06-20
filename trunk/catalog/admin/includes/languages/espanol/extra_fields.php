@@ -23,7 +23,7 @@ define('BUTTON_EDIT_VALUES', 'Editar lista de valores');
 define('ENTRY_LABEL', 'Etiqueta: ');
 define('ENTRY_ACTIVE', '<b>Campo activo</b>');
 define('ENTRY_ACTIVATE_NOW', 'Mostrar campo a los clientes: ');
-define('ENTRY_SHOW_ADMIN', 'Mostrar campo en el panel de administracón incluso si está oculto para los clientes: ');
+define('ENTRY_SHOW_ADMIN', 'Mostrar campo en el panel de administración incluso si está oculto para los clientes: ');
 define('ENTRY_ORDER', 'Orden: ');
 define('ENTRY_VALUE_LIST', 'Utilizar una lista de valores: ');
 define('ENTRY_SEARCH', 'Habilitar Búsqueda avanzada para este campo: ');

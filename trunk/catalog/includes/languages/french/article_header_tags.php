@@ -17,16 +17,16 @@ $Id$
    global details from header_tags.php into the indented section below  */
 
    // Define your email address to appear on all pages
-   define('HEAD_REPLY_TAG_ALL','admin@sitename.com');
+   define('HEAD_REPLY_TAG_ALL','info@shisha.lu');
 
    // For all pages not defined or left blank, and for articles not defined
    // These are included unless you set the toggle switch in each section below to OFF ( '0' )
    // The HEAD_TITLE_TAG_ALL is included BEFORE the specific one for the page
    // The HEAD_DESC_TAG_ALL is included AFTER the specific one for the page
    // The HEAD_KEY_TAG_ALL is included AFTER the specific one for the page
-   define('HEAD_TITLE_TAG_ALL','Site Name');
-   define('HEAD_DESC_TAG_ALL','This is a description for the entire site.');
-   define('HEAD_KEY_TAG_ALL','keyword1, keyword2, keyword3');
+   define('HEAD_TITLE_TAG_ALL', 'Shisha.lu');
+   define('HEAD_DESC_TAG_ALL', 'Description du site entier.');
+   define('HEAD_KEY_TAG_ALL', 'motclef1, motclef2, motclef3 , ne pas dépasser les 250 lettres beaucoup de moteur ne lisent pas le rest');
 
 /* End of Indented Section */
 

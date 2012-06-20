@@ -43,7 +43,7 @@ $Id$
       $image .= ' title=" ' . tep_output_string($alt) . ' "';
     }
 
-    if ( (CONFIG_CALCULATE_IMAGE_SIZE == 'true') && (empty($width) || empty($height)) ) {
+    if ( (CONFIG_CALCULATE_IMAGE_SIZE == 'true') && $alt != TEXT_MISSING_IMAGE && (empty($width) || empty($height)) ) {
       if ($image_size = @getimagesize($src)) {
         if (empty($width) && tep_not_null($height)) {
           $ratio = $height / $image_size[1];

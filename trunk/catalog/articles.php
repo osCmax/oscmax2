@@ -39,11 +39,12 @@ $Id$
 
   
   if ( ($topic_depth == 'articles') || (isset($_GET['authors_id'])) ) {
-    require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLES);
+	
+    require(bts_select('language', FILENAME_ARTICLES));
   } elseif ($topic_depth == 'top') {
-    require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLES_TOP);
+	require(bts_select('language', FILENAME_ARTICLES_TOP));
   } elseif ($topic_depth == 'nested') {
-    require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLES_NESTED);
+	require(bts_select('language', FILENAME_ARTICLES_NESTED));
   }
 
   if ($topic_depth == 'top' && !isset($_GET['authors_id'])) {

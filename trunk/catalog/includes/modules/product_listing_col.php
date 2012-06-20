@@ -159,7 +159,7 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   }
   
   // Display search term alternative
-  echo $pw_string;
+  if (isset($pw_string)) echo $pw_string;
 
   $list_box_contents = array();
 
@@ -364,7 +364,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
            break; // EOF Separate Pricing per Customer
           case 'PRODUCT_LIST_BUY_NOW':
            $lc_align = 'center';
-		   $lc_text = $pf->getProductButtons($listing[$x]['products_id'], basename($PHP_SELF), $listing[$x]['products_model'], $listing[$x]['products_name']);
+		   $lc_text = $pf->getProductButtons($listing[$x]['products_id'], basename($PHP_SELF), $listing[$x]['products_model'], $listing[$x]['products_name'], $cPath);
            break;
         }
         $product_contents[] = $lc_text;

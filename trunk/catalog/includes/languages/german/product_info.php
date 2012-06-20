@@ -14,7 +14,7 @@ define('TEXT_PRODUCT_NOT_FOUND', 'Produkt nicht gefunden!');
 define('TEXT_CURRENT_REVIEWS', 'Aktuelle Produktbewertungen:');
 define('TEXT_MORE_INFORMATION', 'Für weitere Informationen besuchen Sie bitte diese <a href="%s" target="_blank"><u>Webseite</u></a>.');
 define('TEXT_DATE_ADDED', 'Dieses Produkt ist seit %s gelistet.');
-define('TEXT_DATE_AVAILABLE', '<span class="notice">Dieses Produkt wird ab dem %s verfügbar sein.</span>');
+define('TEXT_DATE_AVAILABLE', '<span class="notice">Dieses Produkt ist ab dem %s erhältlich.</span>');
 define('TEXT_ALSO_PURCHASED_PRODUCTS', 'Kunden, die dieses Produkt gekauft haben, haben auch folgende Produkte gekauft:');
 define('TEXT_PRODUCT_OPTIONS', 'Verfügbare Optionen:');
 define('TEXT_CLICK_TO_ENLARGE', 'Bild vergrößern');
@@ -26,7 +26,7 @@ define('TEXT_NO_MOPICS', 'Es sind keine weiteren Bilder vorhanden');
 // EOF: MOD - Dynamic MoPics v3.000
 // BOF: MOD - QT Pro
 define('TEXT_OUT_OF_STOCK', 'Nicht lagernd');
-define('TEXT_OUT_OF_STOCK_MESSAGE', 'Die ausgewählten Optionen sind derzeit leider nicht lagernd. Wählen Sie bitte andere Optionen aus.');
+define('TEXT_OUT_OF_STOCK_MESSAGE', 'Die von Ihnen ausgewählten Optionen sind derzeit leider nicht lagernd. Wählen Sie bitte andere Optionen aus.');
 define('TEXT_SELECT_OPTIONS', 'Sie müssen Optionen auswählen, um dieses Produkt in den Warenkorb legen zu können.');
 define('STOCK_LIST_IN_PI_TEXT_HEADING', 'Derzeit lagernd:');
 define('STOCK_LIST_IN_PI_TEXT_PRICE', 'Preis');
@@ -76,5 +76,5 @@ define('TEXT_ADDITIONAL_SHIPPING_3', ' für jeden zusätzlichen Posten + den üblic
 define('TEXT_ADDITIONAL_SHIPPING_4', ' + den üblichen Versandkosten.)</i>');
 // end indvship
 
-define('PRODUCT_HAS_OPTIONS_MESSAGE', 'Dieses Produkt verfügt über Optionen, die ausgewählt werden, bevor sie gekauft werden muss.');
+define('PRODUCT_HAS_OPTIONS_MESSAGE', 'Bitte wählen Sie aus Optionen aus, um dieses Produkt kaufen zu können.');
 ?>

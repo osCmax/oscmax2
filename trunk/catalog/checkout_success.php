@@ -27,7 +27,7 @@ $Id$
               tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
           }
       }else{
-          require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT);
+		  require(bts_select('language', FILENAME_CHECKOUT));
           require_once('includes/functions/password_funcs.php');
           require('includes/classes/onepage_checkout.php');
           $onePageCheckout = new osC_onePageCheckout();
@@ -63,7 +63,7 @@ $Id$
     tep_redirect(tep_href_link(FILENAME_DEFAULT, $notify_string));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_SUCCESS);
+  require(bts_select('language', FILENAME_CHECKOUT_SUCCESS));
 
   $breadcrumb->add(NAVBAR_TITLE_1);
   $breadcrumb->add(NAVBAR_TITLE_2);

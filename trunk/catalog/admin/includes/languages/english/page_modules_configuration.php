@@ -16,6 +16,7 @@ define('TABLE_HEADING_PM_TITLE', 'Module Title');
 define('TABLE_HEADING_PM_FILENAME', 'Module Filename');
 define('TABLE_HEADING_PM_PAGE', 'Module Display Page');
 define('TABLE_HEADING_PM_ACTIVE', 'Status');
+define('TABLE_HEADING_PM_CG_HIDE', 'Customer Group Hide');
 define('TABLE_HEADING_PM_SORT_ORDER', 'Sort Order');
 
 define('TEXT_INFO_HEADING_EDIT_PM_CONFIGURATION', 'Edit Page Module');
@@ -30,6 +31,7 @@ define('TEXT_INFO_EDIT_INTRO', 'Please enter the information requested below. Al
 define('TEXT_PM_TITLE', 'Page Module Title');
 define('TEXT_PM_FILENAME', 'Page Module Filename');
 define('TEXT_PM_PAGE',' Module Display Page');
+define('TEXT_PM_CG_HIDE', 'List customer groups to hide from: (eg. 0,1,2)');
 define('TEXT_PM_ACTIVE', 'Activate the module?');
 define('TEXT_PM_SORT_ORDER', 'Sort Order');
 ?>

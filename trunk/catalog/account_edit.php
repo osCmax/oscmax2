@@ -23,7 +23,7 @@ $Id$
   }
 
 // needs to be included earlier to set the success message in the messageStack
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ACCOUNT_EDIT);
+  require(bts_select('language', FILENAME_ACCOUNT_EDIT));
 
   if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
     if (ACCOUNT_GENDER == 'true') $gender = tep_db_prepare_input($_POST['gender']);

@@ -14,6 +14,7 @@ define('HEADING_TITLE', 'Products Purchased Report');
 
 define('ENTRY_YEAR', 'Year:');
 define('ENTRY_MONTH', 'Month:');
+define('ENTRY_ORDER_BREAKDOWN', 'Show customer breakdown:');
 define('ENTRY_KEYWORDS', 'Keywords:');
 define('ENTRY_STATUS', 'Status:');
 define('ENTRY_MANUFACTURER', 'Manufacturer:');

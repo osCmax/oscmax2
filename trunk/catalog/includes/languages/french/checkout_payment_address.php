@@ -13,14 +13,14 @@ $Id$
 define('NAVBAR_TITLE_1', 'Commande');
 define('NAVBAR_TITLE_2', 'Changer l\'adresse de facturation');
 
-define('HEADING_TITLE', 'Information paiement');
+define('HEADING_TITLE', 'Information du paiement');
 
 define('TABLE_HEADING_PAYMENT_ADDRESS', 'Adresse de facturation');
 define('TEXT_SELECTED_PAYMENT_DESTINATION', 'Ceci est l\'adresse s&eacute;l&eacute;ctionn&eacute;e, o&ugrave; la facture de cette commande sera exp&eacute;di&eacute;e.');
 define('TITLE_PAYMENT_ADDRESS', 'Adresse de facturation:');
 
-define('TABLE_HEADING_ADDRESS_BOOK_ENTRIES', 'Entr&eacute;es du carnet d\'adresses');
-define('TEXT_SELECT_OTHER_PAYMENT_DESTINATION', 'Veuillez choisir l\'adresse de facturation  si la facture de cette commande doit &ecirc;tre envoy&eacute;e ailleurs.');
+define('TABLE_HEADING_ADDRESS_BOOK_ENTRIES', 'Contenu du carnet d\'adresses');
+define('TEXT_SELECT_OTHER_PAYMENT_DESTINATION', 'Veuillez choisir l\'adresse de facturation, si la facture de cette commande doit &ecirc;tre envoy&eacute;e ailleurs.');
 define('TITLE_PLEASE_SELECT', 'Veuillez choisir');
 
 define('TABLE_HEADING_NEW_PAYMENT_ADDRESS', 'Nouvelle adresse de facturation');

@@ -14,6 +14,7 @@ define('HEADING_TITLE', 'Umsatzbericht Produkte');
 
 define('ENTRY_YEAR', 'Jahr:');
 define('ENTRY_MONTH', 'Monat:');
+define('ENTRY_ORDER_BREAKDOWN', 'Kundenaufschlüsselung anzeigen:');
 define('ENTRY_KEYWORDS', 'Keywords:');
 define('ENTRY_STATUS', 'Status:');
 define('ENTRY_MANUFACTURER', 'Hersteller:');

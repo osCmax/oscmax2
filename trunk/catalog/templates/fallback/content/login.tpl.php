@@ -128,7 +128,7 @@ $Id$
                           <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
                         </tr>
                         <tr>
-                          <td class="main" valign="top"><?php echo TEXT_NEW_CUSTOMER . '<br><br>' . TEXT_NEW_CUSTOMER_INTRODUCTION; ?></td>
+                          <td class="main" valign="top"><?php echo TEXT_NEW_CUSTOMER . '<br><br>' . sprintf(TEXT_NEW_CUSTOMER_INTRODUCTION, STORE_NAME); ?></td>
                         </tr>
                         <tr>
                           <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

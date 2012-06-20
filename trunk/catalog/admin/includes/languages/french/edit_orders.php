@@ -48,20 +48,21 @@ define('ENTRY_CREDIT_CARD_OWNER', 'Propri&eacute;taire de la carte :');
 define('ENTRY_CREDIT_CARD_NUMBER', 'Num&eacute;ro de carte :');
 define('ENTRY_CREDIT_CARD_EXPIRES', 'Date d\'expiration :');
 define('ENTRY_SUB_TOTAL', 'Sous-Total :');
+define('ENTRY_TYPE_BELOW', 'Type below');
 
 //the definition of ENTRY_TAX is important when dealing with certain tax components and scenarios
-define('ENTRY_TAX', 'Taxe');
+define('ENTRY_TAX', 'TVA');
 //do not use a colon (:) in the defintion, ie 'VAT' is ok, but 'VAT:' is not
 
-define('ENTRY_SHIPPING', 'Frais de port :');
-define('ENTRY_TOTAL', 'Total :');
+define('ENTRY_SHIPPING', 'Frais de port:');
+define('ENTRY_TOTAL', 'Total:');
 define('ENTRY_STATUS', 'Statut :');
-define('ENTRY_NOTIFY_CUSTOMER', 'Notifier le client :');
-define('ENTRY_NOTIFY_COMMENTS', 'Envoyer les commentaires :');
+define('ENTRY_NOTIFY_CUSTOMER', 'Notifier le client:');
+define('ENTRY_NOTIFY_COMMENTS', 'Envoyer les commentaires:');
 define('ENTRY_CURRENCY_TYPE', 'Monnaie');
-define('ENTRY_CURRENCY_VALUE', 'Indice de la monnaie :');
+define('ENTRY_CURRENCY_VALUE', 'Indice de la monnaie:');
 
-define('TEXT_INFO_PAYMENT_METHOD', 'Moyen de paiement :');
+define('TEXT_INFO_PAYMENT_METHOD', 'Moyen de paiement:');
 define('TEXT_NO_ORDER_PRODUCTS', 'Cette commande ne contient aucun produit');
 define('TEXT_ADD_NEW_PRODUCT', 'Ajouter des produits');
 define('TEXT_PACKAGE_WEIGHT_COUNT', 'Poid du colis : %s  |  Nombre de produits : %s');
@@ -104,6 +105,7 @@ define('EMAIL_TEXT_STATUS_UPDATE2', 'Si vous avez des questions, merci de r&eacu
 define('EMAIL_TEXT_COMMENTS_UPDATE', 'Les commentaires associ&eacute;s &agrave; cette mise &agrave; jour sont :' . "\n\n%s\n\n");
 
 define('ERROR_ORDER_DOES_NOT_EXIST', 'Erreur : cette commande n\'existe pas.');
+define('ERROR_NO_ORDER_SELECTED', 'You have not selected an order to edit, or the order ID variable has not been set.');
 define('SUCCESS_ORDER_UPDATED', 'Succ&egrave;s : La commande a bien &eacute;t&eacute; mise &agrave; jour.');
 define('SUCCESS_EMAIL_SENT', 'Termin&eacute;: La commande a &eacute;t&eacute; mise à jour et un email a &eacute;t&eacute; envoy&eacute;.');
 
@@ -122,16 +124,13 @@ define('HINT_TOTAL_INCL', 'Total (TTC)');
 
 //new order confirmation email- this is a separate email from order status update
 define('ENTRY_SEND_NEW_ORDER_CONFIRMATION', 'Nouvelle confirmation de commande :');
-define('EMAIL_TEXT_SUBJECT', 'Notification de commande');
 define('EMAIL_TEXT_DATE_MODIFIED', 'Date de modification :');
 define('EMAIL_TEXT_PRODUCTS', 'Produit');
 define('EMAIL_TEXT_DELIVERY_ADDRESS', 'Adresse de livraison');
 define('EMAIL_TEXT_BILLING_ADDRESS', 'Adresse de facturation');
 define('EMAIL_TEXT_PAYMENT_METHOD', 'Moyen de paiement');
-
 // If you want to include extra payment information, enter text below (use <br> for line breaks):
-//define('EMAIL_TEXT_PAYMENT_INFO', ''); 
-
+//define('EMAIL_TEXT_PAYMENT_INFO', ''); //why would this be useful???
 // If you want to include footer text, enter text below (use <br> for line breaks):
 define('EMAIL_TEXT_FOOTER', '');
 //end email
@@ -156,6 +155,4 @@ define('AJAX_NEW_ORDER_EMAIL', 'Etes vous sure de vouloir envoyer un nouvel emai
 define('AJAX_INPUT_NEW_EMAIL_COMMENTS', 'Inscrire, si vous le souhaitez, vos commentaires ici.');
 define('AJAX_SUCCESS_EMAIL_SENT', 'Termin&eacute; ! Un nouvel email de confirmation de commande a &eacute;t&eacute; envoy&eacute; &agrave; %s');
 define('AJAX_WORKING', 'Veuillez patienter....');
-
-
 ?>

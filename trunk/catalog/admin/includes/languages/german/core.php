@@ -246,6 +246,7 @@ define('BOX_CONFIGURATION_RECAPTCHA', 'reCaptcha Formular');
 define('BOX_CONFIGURATION_NOTIFICATIONS', 'Benachrichtigungen');
 define('BOX_CONFIGURATION_SLIDESHOW', 'Diashow');
 define('BOX_CONFIGURATION_SLIDESHOW_SETTINGS', 'Diashoweinstellungen');
+define('BOX_CONFIGURATION_ADDTHIS', 'AddThis');
 
 define('BOX_CONFIGURATION_GOOGLE', 'Google');
 define('BOX_CONFIGURATION_GOOGLE_ANALYTICS', 'Google Analytics');
@@ -375,6 +376,7 @@ define('JS_STATE_SELECT', '-- Oben auswählen --');
 define('JS_COUNTRY', '* Ein \'Land\' muß ausgewählt werden.\n');
 define('JS_TELEPHONE', '* Die \'Telefonnnummer\' muß mindestens ' . ENTRY_TELEPHONE_MIN_LENGTH . ' Zeichen enthalten.\n');
 define('JS_PASSWORD', '* Das \'Passwort\' und die \'Bestätigung\' muß übereinstimmen und mindestens ' . ENTRY_PASSWORD_MIN_LENGTH . ' Zeichen enthalten.\n');
+define('JS_PASSWORD_DONT_MATCH', 'Die eingegebenen Passwörter stimmen nicht überein.');
 
 define('JS_ORDER_DOES_NOT_EXIST', 'Bestellnummer %s existiert nicht!');
 
@@ -444,7 +446,7 @@ define('ENTRY_CUSTOMERS_GROUP_RA_ERROR', '');
 // images
 define('IMAGE_ANI_SEND_EMAIL', 'E-Mail versenden');
 define('IMAGE_BACK', 'Zurück');
-define('IMAGE_BACKUP', 'Backup');
+define('IMAGE_BACKUP', 'Sicherung');
 define('IMAGE_CANCEL', 'Abbrechen');
 define('IMAGE_CONFIRM', 'Bestätigen');
 define('IMAGE_COPY', 'Kopieren');
@@ -491,7 +493,7 @@ define('IMAGE_SEND_EMAIL', 'E-mail versenden');
 define('IMAGE_UNLOCK', 'Entsperren');
 define('IMAGE_UPDATE', 'Aktualisieren');
 define('IMAGE_UPDATE_CURRENCIES', 'Wechselkurs aktualisieren');
-define('IMAGE_UPLOAD', 'Upload');
+define('IMAGE_UPLOAD', 'Hochladen');
 define('IMAGE_PREV_ORDER', 'Vorherige Bestellung');
 define('IMAGE_NEXT_ORDER', 'Nächste Bestellung');
 // BOF QPBPP for SPPC
@@ -505,6 +507,7 @@ define('IMAGE_SUMMARY', 'Zusammenfassung');
 define('IMAGE_BROWSE', 'Browse');
 define('IMAGE_MISSING', 'Fehlend');
 define('IMAGE_ORPHANS', 'Verwaist');
+define('IMAGE_REGENERATE', 'Regenerieren');
 define('IMAGE_REGENERATE_ALL', 'Alle Bilder zu diesem Produkt regenerieren');
 define('IMAGE_REGENERATE_EVERYTHING', 'Alle Bilder regenerieren');
 define('IMAGE_MC_SYNC', 'Mit MailChimp synchronisieren');

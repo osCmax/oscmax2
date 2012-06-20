@@ -41,6 +41,7 @@ define('TABLE_HEADING_NONTAXED', 'Steuerfreie<br> Verkäufe');
 define('TABLE_HEADING_TAXED', 'Steuerbare<br> Verkäufe');
 define('TABLE_HEADING_TAX_COLL', 'Eingehobene<br> Steuern');
 define('TABLE_HEADING_SHIPHNDL', 'Versand<br> & Manipulation');
+define('TABLE_HEADING_SHIP_TAX', 'Steuer auf<br /> Frachtkosten');
 define('TABLE_HEADING_LOWORDER', 'Mindermengen<br> Zuschlag');
 define('TABLE_HEADING_OTHER', 'Geschenks<br> Gutscheine');  // could be any other extra class value
 define('TABLE_FOOTER_YTD','YTD');
@@ -75,14 +76,13 @@ The summary of daily activity within any month may be displayed by clicking on t
 <b>What the columns represent (headers explained)</b>
 <p class="smallText" align="justify">
 On the left, the month and year of the row are stated.  The other columns are, left to right:
-<ul><li class="smallText"><b>Gross Income</b> - thetotal of all orders  
+<ul><li class="smallText"><b>Gross Income</b> - the total of all orders  
 <li class="smallText"><b>Order Subtotal</b> - the total sales of products purchased in the month
 <br>Then, the product sales are broken into two categories:
 <li class="smallText"><b>Nontaxed sales</b> - the subtotal of sales which were not taxed, and 
 <li class="smallText"><b>Taxed sales</b> - the subtotal of sales which were taxed
 <li class="smallText"><b>Taxes collected</b> - the amount collected from customers for taxes
-<li class="smallText"><b>Shipping & handling</b> - the total shipping and handling charges collected  
-<li class="smallText"><b>Tax on shipping</b> - Tax on shipping and handling charges
+<li class="smallText"><b>Shipping &amp; handling</b> - the total shipping and handling charges collected  
 <li class="smallText"><b>Low order fees</b> and <b>Gift Vouchers</b> - if the store has low order fees enabled, and/or gift vouchers, the totals of these are shown in separate columns
 </ul>
 <p class="main" align="justify">

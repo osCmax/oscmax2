@@ -1,6 +1,6 @@
 <?php
 /*
-$Id: stats_http_error.php 1011 2011-01-06 23:38:01Z michael.oscmax@gmail.com $
+$Id: stats_http_error.php 1244 2011-03-14 19:13:02Z cottonbarn $
 
   osCmax e-Commerce
   http://www.oscmax.com
@@ -21,4 +21,5 @@ define('TABLE_HEADING_REFERER', 'Referer');
 define('TABLE_HEADING_ERROR_TYPE', 'Error Type');
 
 define('TEXT_DISPLAY_NUMBER_OF_ERRORS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> errors)');
+define('TEXT_HTTP_LOG_OPTIMISED', 'Http Error Log data reset (Log start number continues from previous record).  Http Error Log table has been optimized.');
 ?>

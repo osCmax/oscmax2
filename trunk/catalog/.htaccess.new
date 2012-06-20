@@ -104,3 +104,13 @@
 # AddType image/x-icon .ico
 # ExpiresByType image/x-icon "access plus 1 months"
 # EOF: Set Expires for common file types
+
+# BOF: Redirect non-www to www - uncomment all lines below and ensure #RewriteEngine On has been uncommented above
+# RewriteCond %{HTTPS} off
+# RewriteCond %{HTTP_HOST} !^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# RewriteCond %{HTTPS} on
+# RewriteCond %{HTTP_HOST} !^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+# EOF: Redirect non-www to www

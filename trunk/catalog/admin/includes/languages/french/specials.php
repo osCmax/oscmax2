@@ -35,4 +35,11 @@ define('TEXT_INFO_STATUS_CHANGE', 'Changement de statut:');
 
 define('TEXT_INFO_HEADING_DELETE_SPECIALS', 'Supprimer promotion');
 define('TEXT_INFO_DELETE_INTRO', 'Etes vous sur de vouloir supprimer cette promotion?');
+
+define('HEADING_NO_SPECIALS', '<b>No Special Offers Set</b>');
+define('TEXT_NO_SPECIALS', 'Please click <b>New Product</b> to create a new Special Offer for your store.');
+
+define('TEXT_SPECIALS_HELP', 'Specials Help');
+define('TEXT_NEVER', 'Never');
+define('TEXT_CURRENTLY_ACTIVE', 'Currently Active');
 ?>

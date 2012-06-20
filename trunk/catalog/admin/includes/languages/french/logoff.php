@@ -9,7 +9,6 @@ $Id $
 
   Released under the GNU General Public License
 */
-// translation by CRDD (coroidedroite@yahoo.fr)
 
 define('HEADING_TITLE', 'Se connecter');
 define('NAVBAR_TITLE', 'Se d&eacute;connecter');

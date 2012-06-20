@@ -193,6 +193,35 @@ $Id$
       </tr>
 <?php
   }
+
+if (CHECKOUT_SHIPPING_DATE == 'true') {
+?>
+<!-- ship date -->
+      <tr>
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+          <tr>
+            <td class="main"><b><?php echo TABLE_HEADING_SHIPPING_DATE; ?></b></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+          <tr class="infoBoxContents">
+            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+              <tr>
+                <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
+                <td class="main" width="100%" valign="top"><?php echo TEXT_CHOOSE_SHIPPING_DATE . '<br><br>' . tep_draw_input_field('delivery_date', '', 'id="delivery_date"'); ?></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+<!-- eof ship date -->
+<?php
+} // end if (CHECKOUT_SHIPPING_DATE == 'true')
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">

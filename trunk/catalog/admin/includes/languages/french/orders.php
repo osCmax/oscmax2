@@ -6,7 +6,7 @@ $Id$
   http://www.oscmax.com
 
   Copyright 2000 - 2011 osCmax
-  
+
   Released under the GNU General Public License
 */
 // LINE ADDED: MOD - ORDER EDIT
@@ -15,8 +15,12 @@ define('TABLE_HEADING_EDIT_ORDERS', 'To modify the order');
 define('HEADING_TITLE', 'Commandes');
 define('HEADING_TITLE_SEARCH', 'ID commande:');
 define('HEADING_TITLE_STATUS', 'Statut:');
-
+//BOF: Orders search by customers info
+define('HEADING_TITLE_SEARCH_ALL', 'Search (order id, customer or company name):');
+//EOF: Orders search by customers info
+define('TABLE_HEADING_ORDER_NUM', '#');
 define('TABLE_HEADING_COMMENTS', 'Commentaires');
+define('TABLE_HEADING_NEW_COMMENTS', 'Add New Comment');
 define('TABLE_HEADING_CUSTOMERS', 'Clients');
 define('TABLE_HEADING_ORDER_TOTAL', 'Total commande');
 define('TABLE_HEADING_DATE_PURCHASED', 'Date d\'achat');
@@ -33,7 +37,7 @@ define('TABLE_HEADING_TOTAL_EXCLUDING_TAX', 'Total (ht)');
 define('TABLE_HEADING_TOTAL_INCLUDING_TAX', 'Total (ttc)');
 
 define('TABLE_HEADING_CUSTOMER_NOTIFIED', 'Client notifi&eacute;');
-define('TABLE_HEADING_DATE_ADDED', 'Date d\'ajout');
+define('TABLE_HEADING_DATE_ADDED', 'Date d\'ajouté');
 
 define('ENTRY_CUSTOMER', 'Client:');
 define('ENTRY_SOLD_TO', 'VENDU A:');
@@ -78,4 +82,20 @@ define('EMAIL_TEXT_COMMENTS_UPDATE', 'Les commentaires de votre commande sontS' 
 define('ERROR_ORDER_DOES_NOT_EXIST', 'Erreur: La commande n\'existe pas.');
 define('SUCCESS_ORDER_UPDATED', 'Succ&egrave;s: Commande mis &agrave; jour avec succ&egrave;s.');
 define('WARNING_ORDER_NOT_UPDATED', 'Attention: Aucune modification n\'a &eacute;t&eacute; effectu&eacute;. La commande n\'a pas &eacute;t&eacute; mis &agrave; jour.');
+
+define('HEADING_CANNED_COMMENTS_HELP', 'Premade Comments Help');
+define('TEXT_CANNED_COMMENTS_HELP', 'In order to create new premade comments please go to <b>Localization --> Premade Comments</b> menu and follow the onscreen instructions.  If you need further help please read the <b>Wiki</b>.');
+
+define('TABLE_HEADING_AUTHOR', 'Author');
+define('TABLE_HEADING_CUSTOMER_COMMENTS', 'Customer Comments');
+define('TEXT_ACTIVE', 'Active');
+define('TABLE_HEADING_ORDER_COMMENTS', 'Order Comments');
+define('TABLE_HEADING_NEW_ORDER_COMMENTS', 'Add New Order Comment');
+define('TEXT_ORDER_SUMMARY', 'Order Summary');
+
+define('TEXT_ORDER_ID', 'Order No:');
+define('TEXT_ORDER_DATE_TIME', 'Order Date &amp; Time');
+
+define('OPTION_SELECT_COMMENT', 'Select a comment ...');
+define('OPTION_NAME_OF_CUSTOMER', 'Customer name');
 ?>

@@ -35,7 +35,7 @@ $Id$
 
   $articles_name = $review['articles_name'];
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ARTICLE_REVIEWS_INFO);
+  require(bts_select('language', FILENAME_ARTICLE_REVIEWS_INFO));
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_ARTICLE_REVIEWS, tep_get_all_get_params()));
 

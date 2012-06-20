@@ -803,6 +803,7 @@ CREATE TABLE orders (
   delivery_state varchar(32),
   delivery_country varchar(32) NOT NULL,
   delivery_address_format_id int(5) NOT NULL,
+  delivery_date DATETIME NOT NULL,
   billing_name varchar(64) NOT NULL,
   billing_company varchar(32),
   billing_street_address varchar(64) NOT NULL,
@@ -991,6 +992,7 @@ CREATE TABLE products (
   products_hide_from_groups VARCHAR(255) NOT NULL DEFAULT '@',
   products_qty_blocks INT(4) NOT NULL default '1',
   products_min_order_qty INT(4) NOT NULL default '1',
+  products_ship_sep tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY  (products_id),
   KEY idx_products_model (products_model),
   KEY idx_products_date_added (products_date_added)
@@ -1486,6 +1488,7 @@ CREATE TABLE IF NOT EXISTS pm_configuration (
   pm_filename varchar(255) NOT NULL,
   pm_active varchar(255) NOT NULL,
   pm_page varchar(255) NOT NULL,
+  pm_cg_hide varchar(255) NOT NULL,
   pm_sort_order int(11) NOT NULL,
   last_modified datetime NOT NULL,
   date_added datetime NOT NULL,
@@ -1499,6 +1502,8 @@ CREATE TABLE IF NOT EXISTS slideshow (
   slideshow_title varchar(255) NOT NULL,
   slideshow_link varchar(255) NOT NULL,
   slideshow_target varchar(255) NOT NULL,
+  slideshow_active varchar(3) NOT NULL,
+  slideshow_cg_hide varchar(255) NOT NULL,
   slideshow_sort_order int(11) NOT NULL,
   date_added datetime NOT NULL,
   last_modified datetime DEFAULT NULL,
@@ -1821,6 +1826,8 @@ INSERT INTO configuration VALUES (455, 'CT_NEW_SIGNUP_GIFT_VOUCHER_AMOUNT', 'NEW
 INSERT INTO configuration VALUES (3305, 'CT_SHOW_TAX_RATE_NEAR_PRICE', 'SHOW_TAX_RATE_NEAR_PRICE', 'false', 'CD_SHOW_TAX_RATE_NEAR_PRICE', '1', '22', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 INSERT INTO configuration VALUES (3306, 'CT_SHOW_SHIPPING_NEAR_PRICE', 'SHOW_SHIPPING_NEAR_PRICE', 'false', 'CD_SHOW_SHIPPING_NEAR_PRICE', '1', '23', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 INSERT INTO configuration VALUES (3308, 'CT_CATEGORY_DROPDOWN_SWITCH', 'DISABLE_CATEGORY_DROPDOWN_SWITCH', 'false', 'CD_CATEGORY_DROPDOWN_SWITCH', '1', '26', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
+INSERT INTO configuration VALUES (3309, 'CT_FORCE_CATALOG_LANGUAGE', 'FORCE_CATALOG_LANGUAGE', 'false', 'CD_FORCE_CATALOG_LANGUAGE', '1', '10', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
+INSERT INTO configuration VALUES (3310, 'CT_FORCE_ADMIN_LANGUAGE', 'FORCE_ADMIN_LANGUAGE', 'false', 'CD_FORCE_ADMIN_LANGUAGE', '1', '10', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 
 # Configuration ID: 2 - Minimum Values
 INSERT INTO configuration VALUES (19, 'CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'ENTRY_FIRST_NAME_MIN_LENGTH', '2', 'CD_ENTRY_FIRST_NAME_MIN_LENGTH', '2', '1', NULL, now(), NULL, NULL);
@@ -1889,6 +1896,8 @@ INSERT INTO configuration VALUES (1450, 'CT_PURCHASE_WITHOUT_ACCOUNT_SEPARATE_SH
 INSERT INTO configuration VALUES (2511, 'CT_CUSTOMER_COMMENTS_NOTIFY', 'CUSTOMER_COMMENTS_NOTIFY', 'false', 'CD_CUSTOMER_COMMENTS_NOTIFY', 5, '50', NULL , now(), NULL , 'tep_cfg_select_option(array(''true'', ''false''),' );
 INSERT INTO configuration VALUES (2512, 'CT_CUSTOMER_COMMENTS_NEW_STATUS', 'CUSTOMER_COMMENTS_NEW_STATUS', '4', 'CD_CUSTOMER_COMMENTS_NEW_STATUS', 5, '51', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
 INSERT INTO configuration VALUES (2513, 'CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'CUSTOMER_COMMENTS_NEW_STATUS_DL', '5', 'CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 5, '52', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
+INSERT INTO configuration VALUES (2516, 'CT_CHECKOUT_SHIPPING_DATE', 'CHECKOUT_SHIPPING_DATE', 'false', 'CD_CHECKOUT_SHIPPING_DATE', 5, '53', NULL , now(), NULL , 'tep_cfg_select_option(array(''true'', ''false''),' );
+
 
 # Configuration ID: 6 - Module Options - Hidden from Admin
 INSERT INTO configuration VALUES (68, 'CT_MODULE_PAYMENT_INSTALLED', 'MODULE_PAYMENT_INSTALLED', '', 'CD_MODULE_PAYMENT_INSTALLED', '6', '0', NULL, now(), NULL, NULL);
@@ -2222,6 +2231,9 @@ INSERT INTO configuration VALUES (1999, 'CT_SHOW_SITEMAP', 'SHOW_SITEMAP', 'true
 INSERT INTO configuration VALUES (2505, 'CT_RECAPTCHA_ON', 'RECAPTCHA_ON', 'false', 'CD_RECAPTCHA_ON', 87, 1, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 INSERT INTO configuration VALUES (2506, 'CT_RECAPTCHA_PUBLIC_KEY', 'RECAPTCHA_PUBLIC_KEY', '', 'CD_RECAPTCHA_PUBLIC_KEY', 87, 2, NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (2507, 'CT_RECAPTCHA_PRIVATE_KEY', 'RECAPTCHA_PRIVATE_KEY', '', 'CD_RECAPTCHA_PRIVATE_KEY', 87, 3, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2550, 'CT_RECAPTCHA_EMAIL_URL', 'RECAPTCHA_EMAIL_URL', '', 'CD_RECAPTCHA_EMAIL_URL', 87, 4, NULL, now(), NULL, 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES (2551, 'CT_RECAPTCHA_EMAIL_FROM', 'RECAPTCHA_EMAIL_FROM', 'CLICK', 'CD_RECAPTCHA_EMAIL_FROM', 87, 5, NULL, now(), NULL, NULL);
+
 
 # Configuration ID: 88 - Price Breaks
 INSERT INTO configuration VALUES (2509, 'CT_PRICE_BREAK_NOF_LEVELS', 'PRICE_BREAK_NOF_LEVELS', '10', 'CD_PRICE_BREAK_NOF_LEVELS', 88, 1, now(), now(), NULL, NULL);
@@ -2862,25 +2874,25 @@ INSERT INTO orders_premade_comments VALUES (1, 'Thank you for your custom', 'Tha
 INSERT INTO orders_premade_comments VALUES (2, 'Out of stock when ordered', 'Unfortunately, your item was out of stock when the order was placed. It will despatch as soon as we receive it.');
 
 #Page Module Controller
-INSERT INTO pm_configuration VALUES (1, 'Specials', 'Special Products Module', 'default_specials.php', 'yes', 'index', 4, now(), now());
-INSERT INTO pm_configuration VALUES (2, 'New Products', 'New Products Module', 'new_products.php', 'yes', 'index', 5, now(), now());
-INSERT INTO pm_configuration VALUES (3, 'Upcoming Products', 'Upcoming products module', 'upcoming_products.php', 'yes', 'index', 7, now(), now());
-INSERT INTO pm_configuration VALUES (4, 'Cross Sell Module', 'Cross Sell Module', 'xsell_products.php', 'yes', 'product_info', 1, now(), now());
-INSERT INTO pm_configuration VALUES (5, 'Also Purchased Module', 'Also Purchased Module', 'also_purchased_products.php', 'yes', 'product_info', 2, now(), now());
-INSERT INTO pm_configuration VALUES (6, 'Previous Next Module', 'Previous Next Module', 'products_next_previous.php', 'yes', 'product_info', 4, now(), now());
-INSERT INTO pm_configuration VALUES (7, 'Counter', '', 'counter.php', 'yes', 'all', 2, now(), now());
-INSERT INTO pm_configuration VALUES (8, 'Copyright', '', 'copyright.php', 'yes', 'all', 4, now(), now());
-INSERT INTO pm_configuration VALUES (9, 'Articles', '', 'index_articles.php', 'yes', 'index', 8, now(), now());
-INSERT INTO pm_configuration VALUES (10, 'Greeting', '', 'index_greeting.php', 'yes', 'index', 2, now(), now());
-INSERT INTO pm_configuration VALUES (11, 'Define Mainpage', '', 'index_define_mainpage.php', 'yes', 'index', 3, now(), now());
-INSERT INTO pm_configuration VALUES (12, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'index', 6, now(), now());
-INSERT INTO pm_configuration VALUES (13, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'product_info', 3, now(), now());
-INSERT INTO pm_configuration VALUES (14, 'Slideshow', '', 'slideshow.php', 'yes', 'index', 1, now(), now());
-INSERT INTO pm_configuration VALUES (15, 'New Products', '', 'new_products.php', 'yes', 'nested', 1, now(), now());
-INSERT INTO pm_configuration VALUES (16, 'Banner', '', 'banner_index.php', 'yes', 'index', 9, now(), now());
-INSERT INTO pm_configuration VALUES (17, 'Banner', '', 'banner_all.php', 'yes', 'all', 3, now(), now());
-INSERT INTO pm_configuration VALUES (18, 'Banner', '', 'banner_product.php', 'yes', 'product_info', 5, now(), now());
-INSERT INTO pm_configuration VALUES (19, 'Recently Viewed', '', 'recently_viewed_products.php', 'yes', 'all', 1, now(), now());
+INSERT INTO pm_configuration VALUES (1, 'Specials', 'Special Products Module', 'default_specials.php', 'yes', 'index', '', 4, now(), now());
+INSERT INTO pm_configuration VALUES (2, 'New Products', 'New Products Module', 'new_products.php', 'yes', 'index', '', 5, now(), now());
+INSERT INTO pm_configuration VALUES (3, 'Upcoming Products', 'Upcoming products module', 'upcoming_products.php', 'yes', 'index', '', 7, now(), now());
+INSERT INTO pm_configuration VALUES (4, 'Cross Sell Module', 'Cross Sell Module', 'xsell_products.php', 'yes', 'product_info', '', 1, now(), now());
+INSERT INTO pm_configuration VALUES (5, 'Also Purchased Module', 'Also Purchased Module', 'also_purchased_products.php', 'yes', 'product_info', '', 2, now(), now());
+INSERT INTO pm_configuration VALUES (6, 'Previous Next Module', 'Previous Next Module', 'products_next_previous.php', 'yes', 'product_info', '', 4, now(), now());
+INSERT INTO pm_configuration VALUES (7, 'Counter', '', 'counter.php', 'yes', 'all', '', 2, now(), now());
+INSERT INTO pm_configuration VALUES (8, 'Copyright', '', 'copyright.php', 'yes', 'all', '', 4, now(), now());
+INSERT INTO pm_configuration VALUES (9, 'Articles', '', 'index_articles.php', 'yes', 'index', '', 8, now(), now());
+INSERT INTO pm_configuration VALUES (10, 'Greeting', '', 'index_greeting.php', 'yes', 'index', '', 2, now(), now());
+INSERT INTO pm_configuration VALUES (11, 'Define Mainpage', '', 'index_define_mainpage.php', 'yes', 'index', '', 3, now(), now());
+INSERT INTO pm_configuration VALUES (12, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'index', '', 6, now(), now());
+INSERT INTO pm_configuration VALUES (13, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'product_info', '', 3, now(), now());
+INSERT INTO pm_configuration VALUES (14, 'Slideshow', '', 'slideshow.php', 'yes', 'index', '', 1, now(), now());
+INSERT INTO pm_configuration VALUES (15, 'New Products', '', 'new_products.php', 'yes', 'nested', '', 1, now(), now());
+INSERT INTO pm_configuration VALUES (16, 'Banner', '', 'banner_index.php', 'yes', 'index', '', 9, now(), now());
+INSERT INTO pm_configuration VALUES (17, 'Banner', '', 'banner_all.php', 'yes', 'all', '', 3, now(), now());
+INSERT INTO pm_configuration VALUES (18, 'Banner', '', 'banner_product.php', 'yes', 'product_info', '', 5, now(), now());
+INSERT INTO pm_configuration VALUES (19, 'Recently Viewed', '', 'recently_viewed_products.php', 'yes', 'all', '', 1, now(), now());
 
 
 #Fix for Articles to display if they are not in a topic

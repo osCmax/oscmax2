@@ -270,6 +270,7 @@ $Id$
                           'subtotal' => 0,
                           'tax' => 0,
                           'tax_groups' => array(),
+						  'delivery_date' => (isset($GLOBALS['delivery_date']) ? $GLOBALS['delivery_date'] : ''),
                           'comments' => (tep_session_is_registered('comments') && !empty($comments) ? $comments : ''));
 
       if (isset($GLOBALS[$payment]) && is_object($GLOBALS[$payment])) {

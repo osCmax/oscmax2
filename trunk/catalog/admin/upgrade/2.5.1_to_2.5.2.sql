@@ -8,8 +8,7 @@
 
 /* Alter table in target */
 ALTER TABLE `orders` 
-	ADD COLUMN `delivery_date` DATETIME  NOT NULL after `addresss_format_id`;
-	
+	ADD COLUMN `delivery_date` DATETIME  NOT NULL after `customers_addresss_format_id`;
 
 /* Alter table in target */
 ALTER TABLE `products` 
@@ -18,6 +17,11 @@ ALTER TABLE `products`
 /* Alter table in target */
 ALTER TABLE `pm_configuration` 
 	ADD COLUMN `pm_cg_hide` varchar(255) NOT NULL after `pm_page`;
+
+/* Alter table in target */
+ALTER TABLE `slideshow` 
+	ADD COLUMN `slideshow_active` varchar(3) NOT NULL after `slideshow_target`;
+	ADD COLUMN `slideshow_cg_hide` varchar(255) NOT NULL after `slideshow_active`;
 
 
 SET AUTOCOMMIT = 0;

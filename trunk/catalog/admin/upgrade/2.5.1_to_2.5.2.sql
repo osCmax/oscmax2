@@ -8,7 +8,7 @@
 
 /* Alter table in target */
 ALTER TABLE `orders` 
-	ADD COLUMN `delivery_date` DATETIME  NOT NULL after `customers_addresss_format_id`;
+	ADD COLUMN `delivery_date` DATETIME  NOT NULL after `customers_address_format_id`;
 
 /* Alter table in target */
 ALTER TABLE `products` 

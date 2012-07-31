@@ -103,7 +103,7 @@ $y -= 10;
 	$totalsy = 230;
 	$pdf->ezSetY($totalsy);
 	for ($j = 0, $n = sizeof($order->totals); $j < $n; $j++) {
-	  $pdf->ezText($order->totals[$j]['text'], PRODUCT_TOTALS_FONT_SIZE, array('justification' => 'right', 'right' => 10));	
+	  $pdf->ezText(html_entity_decode($order->totals[$j]['text']), PRODUCT_TOTALS_FONT_SIZE, array('justification' => 'right', 'right' => 10));	
 	}
 
 
@@ -381,7 +381,7 @@ $pos -= PRODUCT_TABLE_BOTTOM_MARGIN;
 	$totalsy = 230;
 	$pdf->ezSetY($totalsy);
 	for ($j = 0, $n = sizeof($order->totals); $j < $n; $j++) {
-	  $pdf->ezText($order->totals[$j]['text'], PRODUCT_TOTALS_FONT_SIZE, array('justification' => 'right', 'right' => 10));	
+	  $pdf->ezText(html_entity_decode($order->totals[$j]['text']), PRODUCT_TOTALS_FONT_SIZE, array('justification' => 'right', 'right' => 10));	
 	}
 }
 

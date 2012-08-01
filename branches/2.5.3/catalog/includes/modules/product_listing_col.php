@@ -242,7 +242,7 @@ for ($x = 0; $x < $no_of_listings; $x++) {
 		  
 		  // Last Few Remaining Corner Banner
 		  if (CB_LAST_FEW == 'true') { 
-		    if ($listing[$x]['products_quantity'] <= CB_LAST_FEW_NO) {
+		    if ($listing[$x]['products_quantity'] <= CB_LAST_FEW_NO && $listing[$x]['products_quantity'] > 0) {
 	 	      $lc_text = '<img class="corner_banner" src="' . DIR_WS_IMAGES . 'corner_banners/' . $language . '/last_few.png" alt="">';
             }	
 		  }

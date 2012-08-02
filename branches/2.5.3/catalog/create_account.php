@@ -357,7 +357,7 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
       tep_mail($name, $email_address, EMAIL_SUBJECT . STORE_NAME, $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
 // Add MailChimp Subscription
-if (MAILCHIMP_ENABLE == 'true') {
+if (MAILCHIMP_ENABLE == 'true' && $newsletter == '1') {
   require DIR_WS_FUNCTIONS . 'mailchimp_functions.php';
   mc_add_email($email_address, $email_format);
 } // end if 

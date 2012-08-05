@@ -143,12 +143,18 @@ define('TABLE_EPF_EXCLUDE', 'extra_value_exclude');
 // EOF: Extra Product Fields
 
 // BOF: Information Pages Unlimited
-  define('TABLE_INFORMATION', 'information');
-  define('TABLE_INFORMATION_GROUP', 'information_group');
+define('TABLE_INFORMATION', 'information');
+define('TABLE_INFORMATION_GROUP', 'information_group');
 // EOF: Information Pages Unlimited
 
 // BOF: Products Option Types
 define('TABLE_PRODUCTS_OPTIONS_TYPES', 'products_options_types');
 define('TABLE_PRODUCTS_OPTIONS_DESCRIPTION', 'products_options_description');
 // EOF: Products Option Types
+
+// BOF Customers extra fields
+define('TABLE_EXTRA_FIELDS', 'extra_fields');
+define('TABLE_EXTRA_FIELDS_INFO', 'extra_fields_info');
+define('TABLE_CUSTOMERS_TO_EXTRA_FIELDS', 'customers_to_extra_fields');
+// EOF Customers extra fields
 ?>

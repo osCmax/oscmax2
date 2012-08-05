@@ -259,4 +259,8 @@ define('FILENAME_CONFIGURATION_ADDTHIS', FILENAME_CONFIGURATION . '?gID=208');
 // Configuration Cache modification start
 define('FILENAME_CONFIGURATION_CACHE', '../cache/cachefile.inc.php') ; 
 // Configuration Cache modification end
+
+// BOF Customers extra fields
+define('FILENAME_CUSTOMERS_EXTRA_FIELDS','customers_extra_fields.php');
+// EOF Customers extra fields
 ?>

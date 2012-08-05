@@ -1583,6 +1583,32 @@ CREATE TABLE IF NOT EXISTS google_configuration (
   google_configuration_value text
 );
 
+DROP TABLE IF EXISTS customers_to_extra_fields;
+CREATE TABLE IF NOT EXISTS customers_to_extra_fields (
+  customers_id int(11) NOT NULL default '0',
+  fields_id int(11) NOT NULL default '0',
+  value text
+);
+
+
+DROP TABLE IF EXISTS extra_fields;
+CREATE TABLE IF NOT EXISTS extra_fields (
+  fields_id int(11) NOT NULL auto_increment,
+  fields_input_type int(11) NOT NULL default '0',
+  fields_input_value text NOT NULL,
+  fields_status tinyint(2) NOT NULL default '0',
+  fields_required_status tinyint(2) NOT NULL default '0',
+  fields_size int(5) NOT NULL default '0',
+  fields_cef_cg_hide varchar(255) NOT NULL,
+  PRIMARY KEY  (fields_id)
+);
+
+DROP TABLE IF EXISTS extra_fields_info;
+CREATE TABLE IF NOT EXISTS extra_fields_info (
+  fields_id int(11) NOT NULL default '0',
+  languages_id int(11) NOT NULL default '0',
+  fields_name varchar(32) NOT NULL default ''
+);
 
 # data
 
@@ -1786,7 +1812,7 @@ INSERT INTO admin_files VALUES(219, 'paypal_wpp_charge.php', 'FILE_PAYPAL', 0, 5
 INSERT INTO admin_files VALUES(220, 'paypal_wpp_include.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
 INSERT INTO admin_files VALUES(221, 'paypal_wpp_refund.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
 INSERT INTO admin_files VALUES(222, 'configuration.php?gID=208', 'BOX_CONFIGURATION_ADDTHIS', 0, 2, '1', 26);
-
+INSERT INTO admin_files VALUES(223, 'customers_extra_fields.php', 'BOX_CUSTOMERS_EXTRA_FIELDS_MANAGER', 0, 5, '1', 0);
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');

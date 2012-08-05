@@ -137,4 +137,10 @@ define('TABLE_EPF_EXCLUDE', 'extra_value_exclude');
 // EOF: Product Option Types
 
   define('TABLE_SEARCH_QUERIES', 'search_queries');
+  
+// BOF Customers extra fields
+  define('TABLE_EXTRA_FIELDS','extra_fields');
+  define('TABLE_EXTRA_FIELDS_INFO','extra_fields_info');
+  define('TABLE_CUSTOMERS_TO_EXTRA_FIELDS','customers_to_extra_fields');
+// EOF Customers extra fields
 ?>

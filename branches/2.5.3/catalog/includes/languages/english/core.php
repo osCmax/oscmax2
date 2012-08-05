@@ -474,4 +474,9 @@ define('TAX_RATE_NEAR_PRICE_INC', 'Inc Tax of ');
 define('TAX_RATE_NEAR_PRICE_EX', 'Ex Tax of ');
 define('TEXT_SHIPPING_NEAR_PRICE', 'Shipping');
 // EOF Show tax and Shipping near price
+
+// BOF Customers extra fields
+define('ENTRY_EXTRA_FIELDS_ERROR', 'Field %s must contain a minimum of %d characters');
+define('CATEGORY_EXTRA_FIELDS', 'Other Information');
+// EOF Customers extra fields   
 ?>

@@ -59,9 +59,9 @@ $Id$
     return $cat_list;
   }
   // get categories for current product
-  $product_categories = array($HTTP_GET_VARS['cPath']);
-  if (($action == 'new_product') && isset($HTTP_GET_VARS['pID'])) {
-    $query = tep_db_query('select categories_id from ' . TABLE_PRODUCTS_TO_CATEGORIES . ' where products_id = ' . (int)$HTTP_GET_VARS['pID']);
+  $product_categories = array($_GET['cPath']);
+  if (($action == 'new_product') && isset($_GET['pID'])) {
+    $query = tep_db_query('select categories_id from ' . TABLE_PRODUCTS_TO_CATEGORIES . ' where products_id = ' . (int)$_GET['pID']);
     while ($cat = tep_db_fetch_array($query)) {
       $product_categories[] = $cat['categories_id'];
     }    
@@ -2037,7 +2037,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 
 <?php //BOF: MSRP
             $pricing = '<table class="PriceList" border="0" width="100%" cellspacing="0" cellpadding="0">';
-            $new_price = tep_get_products_special_price($HTTP_GET_VARS['pID']);
+            $new_price = tep_get_products_special_price($_GET['pID']);
             if ($pInfo->products_msrp > $pInfo->products_price)
               $pricing .= '<tr><td>' . TEXT_PRODUCTS_MSRP . '</td><td align=right>' . $currencies->format($pInfo->products_msrp) . '</td><td></td></tr>';
             $pricing .= '<tr><td>' . TEXT_PRODUCTS_OUR_PRICE . '</td><td align=right>' . $currencies->format($pInfo->products_price) . '</td><td></td></tr>';

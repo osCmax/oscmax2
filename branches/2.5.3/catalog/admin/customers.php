@@ -1065,7 +1065,7 @@ echo css_get_country_list('entry_country_id',  $cInfo->entry_country_id,'onChang
           <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
         </tr>
         <!-- // BOF Customers extra fields -->
-        <?php echo tep_get_extra_fields($cInfo->customers_id,$languages_id)?>
+        <?php echo tep_get_extra_fields($cInfo->customers_id, $languages_id, $cInfo->customers_group_id); ?>
         <!-- // EOF Customers extra fields -->
         <tr>
           <td class="formAreaTitle"><?php echo CATEGORY_OPTIONS; ?></td>

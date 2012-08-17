@@ -2205,7 +2205,7 @@ function tep_cfg_pull_down_templates() {
 
 // BOF Customers extra fields
    	 function tep_get_extra_fields($customer_id,$languages_id,$customer_group_id){
-          $extra_fields_query = tep_db_query("select ce.fields_id, ce.fields_input_type, ce.fields_input_value, ce.fields_required_status, cei.fields_name, ce.fields_status, ce.fields_input_type from " . TABLE_EXTRA_FIELDS . " ce, " . TABLE_EXTRA_FIELDS_INFO . " cei where where NOT find_in_set('" . $customer_group_id . "', ce.fields_cef_cg_hide) and ce.fields_status=1 and cei.fields_id=ce.fields_id and cei.languages_id =" . $languages_id);
+          $extra_fields_query = tep_db_query("select ce.fields_id, ce.fields_input_type, ce.fields_input_value, ce.fields_required_status, cei.fields_name, ce.fields_status, ce.fields_input_type from " . TABLE_EXTRA_FIELDS . " ce, " . TABLE_EXTRA_FIELDS_INFO . " cei where NOT find_in_set('" . $customer_group_id . "', ce.fields_cef_cg_hide) and ce.fields_status=1 and cei.fields_id=ce.fields_id and cei.languages_id =" . $languages_id);
           $extra_fields_string ='';
           if(tep_db_num_rows($extra_fields_query)>0){
              $extra_fields_string .= '<tr><td class="formAreaTitle"><b>' . CATEGORY_EXTRA_FIELDS .'</b></td></tr>';

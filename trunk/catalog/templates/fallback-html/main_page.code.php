@@ -375,7 +375,8 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_COLUMN_RIGHT_OFF =='
 if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false') {
   echo '<!-- footer //-->';
 echo FOOTER_TEXT_BODY;
-{banner}
+/* MF - line below commented out */
+//{banner}
   echo '<!-- footer_eof //-->';
 }
 //end{footer}

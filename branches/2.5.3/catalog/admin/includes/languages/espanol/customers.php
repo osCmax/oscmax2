@@ -45,4 +45,6 @@ define('TEXT_ADD_A_COMMENT', 'Añadir un comentario:');
 define('TEXT_NOTES', 'Notas:');
 define('TEXT_AUTHOR', 'Autor:');
 define('IMAGE_BUTTON_LOGIN_AS', 'Iniciar sesión como cliente');
+
+define('SELECT_ADDRESS', 'Seleccione la dirección del cliente que desea editar: ');
 ?>

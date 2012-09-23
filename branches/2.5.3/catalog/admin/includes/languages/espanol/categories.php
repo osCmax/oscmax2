@@ -72,6 +72,7 @@ define('TEXT_SORT_ORDER', 'Orden:');
 define('TEXT_PRODUCTS_STATUS', 'Estado:');
 define('TEXT_PRODUCTS_DATE_AVAILABLE', 'Fecha disponibilidad:');
 define('TEXT_PRODUCT_AVAILABLE', 'Activo');
+define('TEXT_PRODUCT_DISCONTINUED', 'Descatalogado');
 define('TEXT_PRODUCT_NOT_AVAILABLE', 'Inactivo');
 define('TEXT_PRODUCTS_MANUFACTURER', 'Fabricante:');
 define('TEXT_PRODUCTS_NAME', 'Nombre del producto:');

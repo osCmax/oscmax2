@@ -44,4 +44,6 @@ define ('ADD_COMMENTS', 'Kommentare oder Fragen zu dieser Bestellung hinzufügen'
 // Customer Comments contrib
 
 define('TEXT_MISSING_DOWNLOAD', 'Datei nicht gefunden.');
+// ship date
+define('HEADING_SHIPPING_DATE', 'Gewünschtes Lieferdatum');
 ?>

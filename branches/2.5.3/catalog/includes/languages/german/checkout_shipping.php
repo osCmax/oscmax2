@@ -28,4 +28,8 @@ define('TABLE_HEADING_COMMENTS', 'Sie können hier Anmerkungen zu Ihrer Bestellun
 
 define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Weiter zur Zahlungsart');
 define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'Wählen Sie eine Zahlungsart im nächsten Schritt aus.');
+
+// ship date
+define('TABLE_HEADING_SHIPPING_DATE', 'Gewünschtes Lieferdatum');
+define('TEXT_CHOOSE_SHIPPING_DATE', 'Wir versenden Ihre Bestellung so schnell wie möglich. <b>Oder</b> geben Sie ein Wunschlieferdatum an.');
 ?>

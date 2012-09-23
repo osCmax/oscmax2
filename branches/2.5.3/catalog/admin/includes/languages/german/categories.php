@@ -72,6 +72,7 @@ define('TEXT_SORT_ORDER', 'Sortierung:');
 define('TEXT_PRODUCTS_STATUS', 'Status:');
 define('TEXT_PRODUCTS_DATE_AVAILABLE', 'Lagernd ab:');
 define('TEXT_PRODUCT_AVAILABLE', 'Lagernd');
+define('TEXT_PRODUCT_DISCONTINUED', 'Nicht mehr lieferbar');
 define('TEXT_PRODUCT_NOT_AVAILABLE', 'Nicht Lagernd');
 define('TEXT_PRODUCTS_MANUFACTURER', 'Hersteller:');
 define('TEXT_PRODUCTS_NAME', 'Produktbezeichnung:');

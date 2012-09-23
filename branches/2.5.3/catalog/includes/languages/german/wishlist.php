@@ -52,4 +52,7 @@ define('CLEAR_WISHLIST', 'Möchten Sie wirklich Ihre gesamte Wunschliste leeren?'
 
 define('IMAGE_CLEAR_WISHLIST', 'Wunschliste leeren');
 define('IMAGE_DELETE_WISHLIST', 'Von der Wunschliste löschen');
+
+define('WISHLIST_NO_CHECKBOX_SELECTED_BUY', 'Bitte haken Sie das Produkt an, welches Sie von Ihrer Wunschliste hinzufügen möchten.');
+define('WISHLIST_NO_CHECKBOX_SELECTED_DELETE', 'Bitte haken Sie das Produkt an, welches Sie von Ihrer Wunschliste löschen möchten.');
 ?>

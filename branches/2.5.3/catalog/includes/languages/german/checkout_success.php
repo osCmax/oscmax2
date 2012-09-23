@@ -25,4 +25,5 @@ define('TABLE_HEADING_DOWNLOAD_DATE', 'Ablaufdatum:');
 define('TABLE_HEADING_DOWNLOAD_COUNT', ' verbleibende Downloads');
 define('HEADING_DOWNLOAD', 'Laden Sie hier Ihre Artikel herunter:');
 define('FOOTER_DOWNLOAD', 'Sie können Ihre Artikel auch später unter \'%s\' herunterladen');
+define('FOOTER_DOWNLOAD', 'Sie können IhreProdukte auch zu einem späteren Zeitpunkt unter \'%s\' downloaden.');
 ?>

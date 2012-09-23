@@ -27,4 +27,7 @@ define('HEADING_PAYMENT_INFORMATION', 'Datos del pago');
 define('HEADING_ORDER_COMMENTS', 'Comentarios sobre su pedido');
 
 define('TEXT_EDIT', 'Modificar');
+
+// ship date
+define('HEADING_SHIPPING_DATE', 'Fecha de reparto preferida');
 ?>

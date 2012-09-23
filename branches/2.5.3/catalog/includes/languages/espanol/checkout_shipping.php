@@ -28,4 +28,8 @@ define('TABLE_HEADING_COMMENTS', 'Puede añadir comentarios sobre su pedido');
 
 define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continuar con el proceso de compra');
 define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'para seleccionar la forma de pago.');
+
+// ship date
+define('TABLE_HEADING_SHIPPING_DATE', 'Fecha de reparto preferida');
+define('TEXT_CHOOSE_SHIPPING_DATE', 'Realizaremos el reparto de su pedido lo antes posible <b>O</b> puede especificar una fecha de reparto preferida.');
 ?>

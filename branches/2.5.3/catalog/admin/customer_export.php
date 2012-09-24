@@ -167,6 +167,7 @@ else
     							  a.entry_street_address,
     							  a.entry_postcode,
     							  zo.zone_name,
+								  a.entry_city,
     							  a.entry_state,
     							  a.entry_suburb,
     							  co.countries_name

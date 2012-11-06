@@ -143,7 +143,7 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
   }
 ?>
               <tr>
-                <td colspan="6"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <td colspan="7"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
                     <td class="smallText" valign="top"><?php echo $pm_split->display_count($pm_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_PM_CONFIGURATION); ?></td>
                     <td class="smallText" align="right"><?php echo $pm_split->display_links($pm_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>

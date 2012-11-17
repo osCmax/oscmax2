@@ -202,6 +202,8 @@ define('CT_CUSTOMER_COMMENTS_NEW_STATUS', 'Establecer estado pedido: cuando el c
 define('CD_CUSTOMER_COMMENTS_NEW_STATUS', 'Establecer el estado al que se cambia el pedido cuando el cliente hace un comentario');
 define('CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Establecer estado pedido: (permite descargas) cuando el cliente escribe comentario de pedido');
 define('CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Establecer el estado al que se cambia el pedido cuando el cliente hace un comentario');
+define('CT_CHECKOUT_SHIPPING_DATE', 'Allow customer to request a shipping date?');
+define('CD_CHECKOUT_SHIPPING_DATE', 'Do you want to allow the customer to select preferred shipping date when checking out?');
 
 // Configuration ID: 6 - Module Options - Hidden from Admin Panel
 define('CT_MODULE_PAYMENT_INSTALLED', 'Módulos instalados');

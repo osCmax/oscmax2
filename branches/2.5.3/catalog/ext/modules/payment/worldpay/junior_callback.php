@@ -67,7 +67,7 @@ if($RBSDebugActive){
       }
 
       if ($pass == true) {
-        include('includes/languages/' . basename($_POST['M_lang']) . '/modules/payment/worldpay_junior.php');
+        include('includes/languages/' . basename($_POST['M_lang']) . '/worldpay_junior.php');
 
         $order_query = tep_db_query("select orders_status, currency, currency_value from " . TABLE_ORDERS . " where orders_id = '" . (int)$_POST['cartId'] . "' and customers_id = '" . (int)$_POST['M_cid'] . "'");
         if (tep_db_num_rows($order_query) > 0) {
@@ -130,7 +130,7 @@ if($RBSDebugActive){
         }
       }
     }else{
-		include('includes/languages/' . basename($_POST['M_lang']) . '/modules/payment/worldpay_junior.php');
+		include('includes/languages/' . basename($_POST['M_lang']) . '/worldpay_junior.php');
 	  ?>
 <meta http-equiv="refresh" content="5;url=<?php echo tep_href_link(FILENAME_CHECKOUT_PAYMENT, tep_session_name() . '=' . $_POST['M_sid'] . '&hash=' . $_POST['M_hash'], 'SSL', false); ?>" />
 <style>

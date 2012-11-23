@@ -13,7 +13,7 @@ $Id$
   define('ACTION_INFORMATION', 'Action');
   define('ACTIVATION_ID_INFORMATION', 'Activate');
   define('ADD_INFORMATION', 'Add new information');
-  define('ADD_QUEUE_INFORMATION', ' Add information to queue');
+  define('ADD_QUEUE_INFORMATION', ' new information page inserted.');
   define('ALERT_INFORMATION', 'Empty information system');
   define('ANSWER_INFORMATION', 'Answer');
   define('CONFIRM_INFORMATION', 'Confirm');
@@ -41,11 +41,12 @@ $Id$
   define('MANAGER_INFORMATION', 'Information Manager');
   define('NO_INFORMATION', 'No');
   define('PUBLIC_INFORMATION', 'Listed in Infobox');
+  define('ENTRY_CUSTOMER_GROUP_HIDE', 'Customer Group Hide');
   define('PUBLIC_INFORMATION_2', 'Active');
   define('SORT_BY', 'In information Page this Sort by');
   define('STATUS_ACTIVE', 'Active');
   define('STATUS_INACTIVE', 'Inactive');
-  define('SUCCED_INFORMATION', ' Succeed');
+  define('SUCCED_INFORMATION', ' Success');
 //  define('TITLE', 'Information system');
   define('VIEW_INFORMATION', 'Information View');
   define('VISIBLE_INFORMATION', 'Visible');
@@ -59,7 +60,7 @@ $Id$
   define('ENTRY_EXTERNAL_URL','External URL');
   define('IMAGE_ICON_EXTERNAL_URL', 'This information page is linked to an external site.');
   define('TEXT_INCLUDE_HTTP', '<i>Include http://</i>');
-  define('TEXT_UPDATE_SUCCESS', 'Updated Successfully');
+  define('TEXT_UPDATE_SUCCESS', 'updated successfully');
   define('TEXT_GREETING_PERSONAL', 'Greeting to known user');
   define('TEXT_GREETING_PERSONAL_RELOGON', 'Message to check correct user is logged in');
   define('TEXT_GREETING_GUEST', 'Greeting to unknown user');

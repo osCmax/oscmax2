@@ -42,7 +42,27 @@ if(!strstr($info_group['locked'], 'show_in_infobox')) {
 	</tr>
 <?php
 }
+if(!strstr($info_group['locked'], 'info_cg_hide')) {
+?>
+    <tr>
+		<td class="main"><?php echo ENTRY_CUSTOMER_GROUP_HIDE; ?></td>
+		<td class="main"><?php if ($edit[info_cg_hide]) {$hide=$edit[info_cg_hide];}; echo tep_draw_input_field('info_cg_hide', "$hide", 'size=30'); ?></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="main">
+        <?php
+        $customers_group_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id");
+        while ($customers_group = tep_db_fetch_array($customers_group_query)) {
+          echo $customers_group['customers_group_id'] . ' = ' . $customers_group['customers_group_name'] . '<br>';
+	    }
+		?></td>
+    <tr>
+		<td colspan="2" height="10"></td>
+	</tr>
 
+<?php
+}
 if(!strstr($info_group['locked'], 'parent_id')) {
 ?>
 	<tr>
@@ -143,8 +163,10 @@ if(!strstr($info_group['locked'], 'information_target')) {
 	<tr>
 		<td colspan="2" align="right"><?php
 				// Decide when to show the buttons (Determine or 'locked' is active)
-				if( (empty($info_group['locked'])) || ($_GET['information_action'] == 'Edit')) {
-					echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
+				if ($_GET['information_action'] == 'Edit') {
+				  echo tep_image_submit('button_update.gif', IMAGE_UPDATE);
+				} else {
+				  echo tep_image_submit('button_insert.gif', IMAGE_INSERT);
 				}
 				echo '&nbsp;<a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, "gID=" . $gID, 'NONSSL') . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>';
 			?></td>

@@ -712,6 +712,7 @@ CREATE TABLE information (
   visible enum('1','0') NOT NULL DEFAULT '1',
   show_in_infobox enum('1','0') NOT NULL DEFAULT '1',
   language_id int(11) NOT NULL DEFAULT '0',
+  info_cg_hide varchar(255) DEFAULT NULL,
   PRIMARY KEY (information_id,language_id)
 );
 
@@ -2973,7 +2974,7 @@ INSERT INTO `information` VALUES(16, 1, 'FAQ del Programa de afiliados', '<p>\r\
 
 
 INSERT INTO information_group VALUES(1, 'Information pages', 'Information pages', 1, 1, '');
-INSERT INTO information_group VALUES(2, 'Welcome message', 'Welcome message', 2, 1, 'information_title, sort_order, parent_id, visible');
+INSERT INTO information_group VALUES(2, 'Welcome message', 'Welcome message', 2, 1, 'information_title, sort_order, parent_id, visible, info_cg_hide, show_in_infobox, information_url, information_target');
 
 
 INSERT INTO google_configuration VALUES('GOOGLE_ANALYTICS_ID', 'NONE');

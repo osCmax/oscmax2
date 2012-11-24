@@ -10,6 +10,15 @@ $Id$
   Released under the GNU General Public License
 */
 ?>
+
+<!-- reCAPTCHA - start -->
+<?php if (RECAPTCHA_ON == 'true' && RECAPTCHA_CREATE_ACCOUNT == 'true') { ?>
+<script type="text/javascript">
+var RecaptchaOptions = { theme : '<?php echo RECAPTCHA_STYLE; ?>', tabindex : 3, lang : '<?php echo in_array($code, array('en', 'fr', 'de', 'es')) ? $code : 'en' ?>' };
+</script>
+<?php } ?>
+<!-- reCAPTCHA - end -->
+
     <!-- PWA BOF -->
     <?php echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, (isset($_GET['guest'])? 'guest=guest':''), 'SSL'), 'post', 'onSubmit="return check_form(create_account);"') . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
     <!-- PWA EOF -->
@@ -279,6 +288,31 @@ $Id$
 <?php } 
 // PWA EOF
 ?>
+
+<!-- reCAPTCHA - start -->
+<?php if (RECAPTCHA_ON == 'true' && RECAPTCHA_CREATE_ACCOUNT == 'true') { ?>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td class="main"><b><?php echo CATEGORY_RECAPTCHA; ?></b></td>
+      </tr>
+      <tr>
+        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+          <tr class="infoBoxContents">
+            <td><table border="0" cellspacing="2" cellpadding="2">
+              <tr>
+                <td class="main" width="150"><?php echo ENTRY_RECAPTCHA; ?></td>
+                <td class="main"><?php echo recaptcha_get_html(RECAPTCHA_PUBLIC_KEY); ?></td>
+</td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+<?php } ?>
+<!-- reCAPTCHA - end -->
+
 <?php if (MAT == 'true') { ?>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

@@ -815,6 +815,16 @@ define('CT_RECAPTCHA_EMAIL_URL', 'Introduce tu URL de protección de email de reC
 define('CD_RECAPTCHA_EMAIL_URL', 'Si quieres usar la funcionalidad de reCaptcha mailhide, por favor introduce la URL suministrada para tu dirección de email escogida.  <u><a href="http://www.google.com/recaptcha/mailhide/" target="_blank"><br><br>Puedes conseguir una de estas desde Google reCaptcha</a></u>.');
 define('CT_RECAPTCHA_EMAIL_FROM', 'Introduce tu dirección de email enmascarada utilizada en reCaptcha');
 define('CD_RECAPTCHA_EMAIL_FROM', 'Por favor introduce una dirección de email parcial o enmascarada para que se muestr en tu tienda. Por ejemplo: john...@email.com <br><br>O introduce <b>CLICK</b> para mostrar el texto multilingüe \'Pulsar para revelar\'');
+define('CT_RECAPTCHA_CREATE_ACCOUNT', 'Do you want to use reCaptcha on Create Account page?');
+define('CD_RECAPTCHA_CREATE_ACCOUNT', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_CONTACT_US', 'Do you want to use reCaptcha on Contact Us page?');
+define('CD_RECAPTCHA_CONTACT_US', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'Do you want to use reCaptcha on Product Reviews page?');
+define('CD_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_WISHLIST', 'Do you want to use reCaptcha on Wish List page?');
+define('CD_RECAPTCHA_WISHLIST', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_STYLE', 'Which style do you want your reCaptcha form to use?');
+define('CD_RECAPTCHA_STYLE', 'ReCaptcha has 4 standard style and a custom one.  For more details please visit their <a href="https://developers.google.com/recaptcha/docs/customization" target="_blank">website.</a>.');
 
 
 // Configuration ID: 88 - Price Breaks 

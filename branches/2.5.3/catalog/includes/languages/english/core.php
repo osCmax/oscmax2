@@ -479,4 +479,12 @@ define('TEXT_SHIPPING_NEAR_PRICE', 'Shipping');
 define('ENTRY_EXTRA_FIELDS_ERROR', 'Field %s must contain a minimum of %d characters');
 define('CATEGORY_EXTRA_FIELDS', 'Other Information');
 // EOF Customers extra fields   
+
+// BOF reCaptcha
+define('ENTRY_SECURITY_CHECK', 'Security Check:');
+define('ENTRY_SECURITY_CHECK_ERROR', 'The Security Check code wasn\'t typed correctly. Try again.');
+define('SECURITY_PROMPT', 'Please complete the <b>security question</b> shown to the right -->');
+define('CATEGORY_RECAPTCHA', 'Security check question');
+define('ENTRY_RECAPTCHA', 'Security question:');
+// EOF reCaptcha
 ?>

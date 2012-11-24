@@ -20,7 +20,7 @@ $Id$
   require(bts_select('language', FILENAME_CONTACT_US));
 
 // start modification for reCaptcha
-if (RECAPTCHA_ON == 'true') {
+if (RECAPTCHA_ON == 'true' && RECAPTCHA_CONTACT_US == 'true') {
   require_once('includes/classes/recaptchalib.php');
   $publickey = RECAPTCHA_PUBLIC_KEY;
   $privatekey = RECAPTCHA_PRIVATE_KEY;
@@ -38,7 +38,7 @@ if (RECAPTCHA_ON == 'true') {
     $enquiry = tep_db_prepare_input($_POST['enquiry']);
 
 // start modification for reCaptcha
-if (RECAPTCHA_ON == 'true') {
+if (RECAPTCHA_ON == 'true' && RECAPTCHA_CONTACT_US == 'true') {
 
 	// the response from reCAPTCHA
     $resp = null;
@@ -86,7 +86,7 @@ $_POST['name'] = str_replace("Content-Type:","",$_POST['name']);
     }
 
 // start modification for reCaptcha
-if (RECAPTCHA_ON == 'true') {
+if (RECAPTCHA_ON == 'true' && RECAPTCHA_CONTACT_US == 'true') {
 	if (!$resp->is_valid) { 
 	    $error = true;
         $messageStack->add('contact', ENTRY_SECURITY_CHECK_ERROR . " (reCAPTCHA output: " . $resp->error . ")");

@@ -815,6 +815,16 @@ define('CT_RECAPTCHA_EMAIL_URL', 'reCaptcha E-Mailschutz URL');
 define('CD_RECAPTCHA_EMAIL_URL', 'Wenn Sie den reCaptcha E-Mailschutz verwenden möchten, geben Sie die generierte URL für Ihre gewählte E-Mailadresse an. <u><a href="http://www.google.com/recaptcha/mailhide/" target="_blank"><br><br>Sie erhalten diese von Google reCaptcha</a></u>.');
 define('CT_RECAPTCHA_EMAIL_FROM', 'Verschleierte E-Mailadresse für reCaptcha');
 define('CD_RECAPTCHA_EMAIL_FROM', 'Geben Sie eine unvollständige oder verschleierte E-Mailadresse an, die in Ihrem Shop angezeigt werden soll. Zum Beispiel: johann...@email.com <br><br>oder geben Sie <b>CLICK</b> an, um den mehrsprachigenen Text \'Click to reveal\' anzuzeigen.');
+define('CT_RECAPTCHA_CREATE_ACCOUNT', 'Do you want to use reCaptcha on Create Account page?');
+define('CD_RECAPTCHA_CREATE_ACCOUNT', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_CONTACT_US', 'Do you want to use reCaptcha on Contact Us page?');
+define('CD_RECAPTCHA_CONTACT_US', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'Do you want to use reCaptcha on Product Reviews page?');
+define('CD_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_WISHLIST', 'Do you want to use reCaptcha on Wish List page?');
+define('CD_RECAPTCHA_WISHLIST', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_STYLE', 'Which style do you want your reCaptcha form to use?');
+define('CD_RECAPTCHA_STYLE', 'ReCaptcha has 4 standard style and a custom one.  For more details please visit their <a href="https://developers.google.com/recaptcha/docs/customization" target="_blank">website.</a>.');
 
 
 // Configuration ID: 88 - Price Breaks 

@@ -16,6 +16,14 @@ $Id$
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
+  
+  // start modification for reCaptcha
+  if (RECAPTCHA_ON == 'true' && RECAPTCHA_CREATE_ACCOUNT == 'true') {
+    require_once('includes/classes/recaptchalib.php');
+    $publickey = RECAPTCHA_PUBLIC_KEY;
+    $privatekey = RECAPTCHA_PRIVATE_KEY;
+  }
+  // end modification for reCaptcha
 
   // +Country-State Selector
   require(DIR_WS_FUNCTIONS . 'ajax.php');
@@ -75,6 +83,20 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
     $confirmation = tep_db_prepare_input($_POST['confirmation']);
 
     $error = false;
+
+    // start modification for reCaptcha
+    if (RECAPTCHA_ON == 'true' && RECAPTCHA_CREATE_ACCOUNT == 'true') {
+
+	  // the response from reCAPTCHA
+      $resp = null;
+
+	  // was there a reCaptcha response?
+      $resp = recaptcha_check_answer ($privatekey,
+      $_SERVER["REMOTE_ADDR"],
+      $_POST["recaptcha_challenge_field"],
+      $_POST["recaptcha_response_field"]);
+    }
+    // end modification for reCaptcha
 
     if (ACCOUNT_GENDER == 'true') {
       if ( ($gender != 'm') && ($gender != 'f') ) {
@@ -169,6 +191,15 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
 
       $messageStack->add('create_account', ENTRY_TELEPHONE_NUMBER_ERROR);
     }
+	
+	// start modification for reCaptcha
+    if (RECAPTCHA_ON == 'true' && RECAPTCHA_CREATE_ACCOUNT == 'true') {
+	  if (!$resp->is_valid) { 
+	    $error = true;
+        $messageStack->add('create_account', ENTRY_SECURITY_CHECK_ERROR);
+      }
+    }
+    // end modification for reCaptcha
 
 // PWA BOF
     if (!isset($_GET['guest']) && !isset($_POST['guest'])) {

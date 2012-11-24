@@ -2258,10 +2258,15 @@ INSERT INTO configuration VALUES (1999, 'CT_SHOW_SITEMAP', 'SHOW_SITEMAP', 'true
 
 # Configuration ID: 87 - reCaptcha
 INSERT INTO configuration VALUES (2505, 'CT_RECAPTCHA_ON', 'RECAPTCHA_ON', 'false', 'CD_RECAPTCHA_ON', 87, 1, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO configuration VALUES (2506, 'CT_RECAPTCHA_PUBLIC_KEY', 'RECAPTCHA_PUBLIC_KEY', '', 'CD_RECAPTCHA_PUBLIC_KEY', 87, 2, NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (2507, 'CT_RECAPTCHA_PRIVATE_KEY', 'RECAPTCHA_PRIVATE_KEY', '', 'CD_RECAPTCHA_PRIVATE_KEY', 87, 3, NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (2550, 'CT_RECAPTCHA_EMAIL_URL', 'RECAPTCHA_EMAIL_URL', '', 'CD_RECAPTCHA_EMAIL_URL', 87, 4, NULL, now(), NULL, 'tep_cfg_textarea(');
-INSERT INTO configuration VALUES (2551, 'CT_RECAPTCHA_EMAIL_FROM', 'RECAPTCHA_EMAIL_FROM', 'CLICK', 'CD_RECAPTCHA_EMAIL_FROM', 87, 5, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2506, 'CT_RECAPTCHA_PUBLIC_KEY', 'RECAPTCHA_PUBLIC_KEY', '', 'CD_RECAPTCHA_PUBLIC_KEY', 87, 3, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2507, 'CT_RECAPTCHA_PRIVATE_KEY', 'RECAPTCHA_PRIVATE_KEY', '', 'CD_RECAPTCHA_PRIVATE_KEY', 87, 4, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2550, 'CT_RECAPTCHA_EMAIL_URL', 'RECAPTCHA_EMAIL_URL', '', 'CD_RECAPTCHA_EMAIL_URL', 87, 5, NULL, now(), NULL, 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES (2551, 'CT_RECAPTCHA_EMAIL_FROM', 'RECAPTCHA_EMAIL_FROM', 'CLICK', 'CD_RECAPTCHA_EMAIL_FROM', 87, 6, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2552, 'CT_RECAPTCHA_CREATE_ACCOUNT', 'RECAPTCHA_CREATE_ACCOUNT', 'true', 'CD_RECAPTCHA_CREATE_ACCOUNT', 87, 7, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2553, 'CT_RECAPTCHA_CONTACT_US', 'RECAPTCHA_CONTACT_US', 'true', 'CD_RECAPTCHA_CONTACT_US', 87, 8, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2554, 'CT_RECAPTCHA_STYLE', 'RECAPTCHA_STYLE', 'white', 'CD_RECAPTCHA_STYLE', 87, 2, NULL, now(), NULL, 'tep_cfg_select_option(array(''white'', ''red'', ''blackglass'',''clean'',''custom''),');
+INSERT INTO configuration VALUES (2555, 'CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'true', 'CD_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 87, 9, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2556, 'CT_RECAPTCHA_WISHLIST', 'RECAPTCHA_WISHLIST', 'true', 'CD_RECAPTCHA_WISHLIST', 87, 10, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 
 
 # Configuration ID: 88 - Price Breaks

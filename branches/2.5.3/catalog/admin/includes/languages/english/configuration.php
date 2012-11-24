@@ -815,6 +815,16 @@ define('CT_RECAPTCHA_EMAIL_URL', 'Enter your reCaptcha email protection URL');
 define('CD_RECAPTCHA_EMAIL_URL', 'If you want to use the reCaptcha mailhide functionality then please enter the URL supplied for your chosen email address.  <u><a href="http://www.google.com/recaptcha/mailhide/" target="_blank"><br><br>You can get one of these from Google reCaptcha</a></u>.');
 define('CT_RECAPTCHA_EMAIL_FROM', 'Enter your disguised email address used in reCaptcha');
 define('CD_RECAPTCHA_EMAIL_FROM', 'Please enter a partial or disguised email address to be shown in your store.  For example: john...@email.com <br><br>Or enter <b>CLICK</b> to show the multi-lingual \'Click to reveal\' text');
+define('CT_RECAPTCHA_CREATE_ACCOUNT', 'Do you want to use reCaptcha on Create Account page?');
+define('CD_RECAPTCHA_CREATE_ACCOUNT', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_CONTACT_US', 'Do you want to use reCaptcha on Contact Us page?');
+define('CD_RECAPTCHA_CONTACT_US', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'Do you want to use reCaptcha on Product Reviews page?');
+define('CD_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_WISHLIST', 'Do you want to use reCaptcha on Wish List page?');
+define('CD_RECAPTCHA_WISHLIST', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
+define('CT_RECAPTCHA_STYLE', 'Which style do you want your reCaptcha form to use?');
+define('CD_RECAPTCHA_STYLE', 'ReCaptcha has 4 standard style and a custom one.  For more details please visit their <a href="https://developers.google.com/recaptcha/docs/customization" target="_blank">website.</a>.');
 
 
 // Configuration ID: 88 - Price Breaks 

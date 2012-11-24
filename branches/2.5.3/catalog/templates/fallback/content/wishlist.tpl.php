@@ -10,6 +10,15 @@ $Id$
   Released under the GNU General Public License
 */
 ?>
+
+<!-- reCAPTCHA - start -->
+<?php if (RECAPTCHA_ON == 'true' && RECAPTCHA_WISHLIST == 'true') { ?>
+<script type="text/javascript">
+var RecaptchaOptions = { theme : '<?php echo RECAPTCHA_STYLE; ?>', tabindex : 3, lang : '<?php echo in_array($code, array('en', 'fr', 'de', 'es')) ? $code : 'en' ?>' };
+</script>
+<?php } ?>
+<!-- reCAPTCHA - end -->
+
 <!-- body_text //-->
 <?php echo tep_draw_form('wishlist_form', tep_href_link(FILENAME_WISHLIST)); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -222,18 +231,12 @@ $Id$
                 <td class="main"><?php echo TEXT_YOUR_EMAIL; ?></td>
                 <td class="main"><?php echo tep_draw_input_field('your_email', (isset($your_email) ? $your_email : '')); ?></td>
               </tr>
-<?php if (RECAPTCHA_ON == 'true') { ?>
+<?php if (RECAPTCHA_ON == 'true' && RECAPTCHA_WISHLIST == 'true') { ?>
 <!-- start modification for reCaptcha -->
               <tr>
                 <td class="smallText" colspan="2"><b><?php echo WISHLIST_SECURITY_CHECK; ?></b></td>
               </tr>
-              <tr>
-								<script>
-								var RecaptchaOptions = {
-								   theme : 'white',
-								   tabindex : 3
-								};
-								</script>              	
+              <tr>            	
                 <td class="main" align="center" colspan="2"><?php echo recaptcha_get_html($publickey); ?></td>
               </tr>
 <!-- end modification for reCaptcha -->
@@ -300,6 +303,16 @@ $Id$
         <tr>
           <td colspan="2" class="main"><?php echo TEXT_MESSAGE .  tep_draw_textarea_field('message', 45, 5); ?></td>
         </tr>
+        <?php if (RECAPTCHA_ON == 'true'  && RECAPTCHA_WISHLIST == 'true') { ?>
+<!-- start modification for reCaptcha -->
+              <tr>
+                <td class="smallText" colspan="2"><b><?php echo WISHLIST_SECURITY_CHECK; ?></b></td>
+              </tr>
+              <tr>            	
+                <td class="main" align="center" colspan="2"><?php echo recaptcha_get_html($publickey); ?></td>
+              </tr>
+<!-- end modification for reCaptcha -->
+<?php } ?>
         <tr>
           <td colspan="2" align="right"><?php echo tep_image_submit('button_send.gif', IMAGE_BUTTON_SEND, 'name="email_prod" value="email_prod"'); ?></td>
         </tr>

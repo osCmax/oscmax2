@@ -9,7 +9,17 @@ $Id$
 
   Released under the GNU General Public License
 */
+?>
 
+<!-- reCAPTCHA - start -->
+<?php if (RECAPTCHA_ON == 'true' && RECAPTCHA_PRODUCT_REVIEWS_WRITE == 'true') { ?>
+<script type="text/javascript">
+var RecaptchaOptions = { theme : '<?php echo RECAPTCHA_STYLE; ?>', tabindex : 3, lang : '<?php echo in_array($code, array('en', 'fr', 'de', 'es')) ? $code : 'en' ?>' };
+</script>
+<?php } ?>
+<!-- reCAPTCHA - end -->
+
+<?php
     echo tep_draw_form('product_reviews_write', tep_href_link(FILENAME_PRODUCT_REVIEWS_WRITE, 'action=process&products_id=' . $_GET['products_id']), 'post', 'onSubmit="return checkForm();"'); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
@@ -110,6 +120,26 @@ $Id$
           </table>
         </td>
       </tr>
+      
+      
+      <!-- reCAPTCHA - start -->
+      <?php if (RECAPTCHA_ON == 'true' && RECAPTCHA_PRODUCT_REVIEWS_WRITE == 'true') { ?>
+      <tr>
+        <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10') . '<br><b>' . CATEGORY_RECAPTCHA . '</b>'; ?></td>
+      </tr>
+      <tr>
+        <td class="productinfo_buttons">
+          <table border="0" width="100%" cellspacing="0" cellpadding="2">
+            <tr>
+              <td class="main"><?php echo ENTRY_RECAPTCHA; ?></td>
+              <td><?php echo recaptcha_get_html($publickey); ?></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      
+      <?php } ?>
+      <!-- reCAPTCHA - end -->
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>

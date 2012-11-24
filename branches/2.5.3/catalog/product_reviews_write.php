@@ -16,6 +16,14 @@ $Id$
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
+  
+  // start modification for reCaptcha
+  if (RECAPTCHA_ON == 'true' && RECAPTCHA_PRODUCT_REVIEWS_WRITE == 'true') {
+    require_once('includes/classes/recaptchalib.php');
+    $publickey = RECAPTCHA_PUBLIC_KEY;
+    $privatekey = RECAPTCHA_PRIVATE_KEY;
+  }
+  // end modification for reCaptcha
 
 // LINE ADDED: MOD - Added for Dynamic MoPics v3.000
   require(DIR_WS_FUNCTIONS . 'dynamic_mopics.php');
@@ -51,17 +59,39 @@ $Id$
     $review = tep_db_prepare_input($_POST['review']);
 
     $error = false;
+	
+	// start modification for reCaptcha
+    if (RECAPTCHA_ON == 'true' && RECAPTCHA_PRODUCT_REVIEWS_WRITE == 'true') {
+
+	  // the response from reCAPTCHA
+      $resp = null;
+
+	  // was there a reCaptcha response?
+      $resp = recaptcha_check_answer ($privatekey,
+      $_SERVER["REMOTE_ADDR"],
+      $_POST["recaptcha_challenge_field"],
+      $_POST["recaptcha_response_field"]);
+    }
+    // end modification for reCaptcha
+	
     if (strlen($review) < REVIEW_TEXT_MIN_LENGTH) {
       $error = true;
-
       $messageStack->add('review', JS_REVIEW_TEXT);
     }
 
     if (($rating < 1) || ($rating > 5)) {
       $error = true;
-
       $messageStack->add('review', JS_REVIEW_RATING);
     }
+	
+	// start modification for reCaptcha
+    if (RECAPTCHA_ON == 'true' && RECAPTCHA_PRODUCT_REVIEWS_WRITE == 'true') {
+	  if (!$resp->is_valid) { 
+	    $error = true;
+        $messageStack->add('review', ENTRY_SECURITY_CHECK_ERROR);
+      }
+    }
+    // end modification for reCaptcha
 
     if ($error == false) {
       tep_db_query("insert into " . TABLE_REVIEWS . " (products_id, customers_id, customers_name, reviews_rating, date_added) values ('" . (int)$_GET['products_id'] . "', '" . (int)$customer_id . "', '" . tep_db_input($customer['customers_firstname']) . ' ' . tep_db_input($customer['customers_lastname']) . "', '" . tep_db_input($rating) . "', now())");

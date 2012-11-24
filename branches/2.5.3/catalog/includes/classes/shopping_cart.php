@@ -79,19 +79,23 @@ $Id$
           $this->cg_id = '0';
         }
 
-      $products_query = tep_db_query("select cb.products_id, ptdc.discount_categories_id, customers_basket_quantity from " . TABLE_CUSTOMERS_BASKET . " cb left join (select products_id, discount_categories_id from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " where customers_group_id = '" . $this->cg_id . "') as ptdc on cb.products_id = ptdc.products_id where customers_id = '" . (int)$customer_id . "'");
+      $products_query = tep_db_query("select p.products_status, cb.products_id, ptdc.discount_categories_id, customers_basket_quantity from " . TABLE_PRODUCTS . " p, " . TABLE_CUSTOMERS_BASKET . " cb left join (select products_id, discount_categories_id from " . TABLE_PRODUCTS_TO_DISCOUNT_CATEGORIES . " where customers_group_id = '" . $this->cg_id . "') as ptdc on cb.products_id = ptdc.products_id where customers_id = '" . (int)$customer_id . "' and cb.products_id = p.products_id");
       while ($products = tep_db_fetch_array($products_query)) {
-// EOF Attribute Product Codes
-        $this->contents[$products['products_id']] = array(
-				'qty' => $products['customers_basket_quantity'], 
-				'discount_categories_id' => $products['discount_categories_id']
-		);
-// EOF QPBPP for SPPC
+        if ($products['products_status'] == 1) {
+          // EOF Attribute Product Codes
+          $this->contents[$products['products_id']] = array(
+                                                            'qty' => $products['customers_basket_quantity'], 
+                                                            'discount_categories_id' => $products['discount_categories_id']
+                                                           );
+          // EOF QPBPP for SPPC
 
-// attributes
-        $attributes_query = tep_db_query("select products_options_id, products_options_value_id from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products['products_id']) . "'");
-        while ($attributes = tep_db_fetch_array($attributes_query)) {
-          $this->contents[$products['products_id']]['attributes'][$attributes['products_options_id']] = $attributes['products_options_value_id'];
+          // attributes
+          $attributes_query = tep_db_query("select products_options_id, products_options_value_id from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products['products_id']) . "'");
+          while ($attributes = tep_db_fetch_array($attributes_query)) {
+            $this->contents[$products['products_id']]['attributes'][$attributes['products_options_id']] = $attributes['products_options_value_id'];
+          }
+        } else {
+          $this->remove($products['products_id']);
         }
       }
 

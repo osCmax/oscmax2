@@ -519,14 +519,9 @@ $Id$
                     $i++;
                   } // end foreach
 
-        $separator = '-';
-    //  if (count($attribute_code_array) > 1) {
-        //      $separator = '-';
-        //} elseif (count($attribute_code_array) == 1) {
-        //  $separator = '/';
-        //}
+    //  $separator = '-';
 
-                  $products_code = $products['products_model'] . $separator . implode("-", $attribute_code_array);
+                  $products_code = $products['products_model'] . CODE_SUFFIX_SEPERATOR . implode(CODE_SUFFIX_SEPERATOR, $attribute_code_array);
                 } else {
                   $products_code = $products['products_model'];
                 }

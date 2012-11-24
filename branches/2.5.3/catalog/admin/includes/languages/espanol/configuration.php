@@ -74,6 +74,8 @@ define('CT_SHOW_SHIPPING_NEAR_PRICE', '¿Mostrar enlace a los gastos de envío jun
 define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Algunos países necesitan que se muestre un enlace a los gastos de envío junto al precio. Requiere <b>Mostrar tasas de impuestos junto al precio</b> para poder activarlo.');
 define('CT_CATEGORY_DROPDOWN_SWITCH', '¿Desactivar la lista desplegable de categorías en Admin?');
 define('CD_CATEGORY_DROPDOWN_SWITCH', 'Esta opción activa o desactiva la lista desplegable de las categorías en la página de entrada de productos/categorías del panel de Administración. En tiendas con cientos de categorías, ha de estar activado (True) para acelerar la actualización de la página.');
+define('CT_CODE_SUFFIX_SEPERATOR', 'Code Suffix Seperator'); 
+define('CD_CODE_SUFFIX_SEPERATOR', 'Enter the character you wish to use when adding an options code suffix onto a products model number.'); 
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Nombre');

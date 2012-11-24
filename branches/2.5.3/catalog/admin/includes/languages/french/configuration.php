@@ -70,6 +70,8 @@ define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Display link to shipping charges near the
 define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Some countries require you to display a link to your shipping charges near the price.  Requires <b>Display tax rate near price</b> to be enabled.');
 define('CT_CATEGORY_DROPDOWN_SWITCH', 'Disable Category Dropdown List in Admin?');
 define('CD_CATEGORY_DROPDOWN_SWITCH', 'This option enables or disables the dropdown list of categories on the Products/Categories entry page in your admin panel. In stores with more than a few hundred categories, this should be set to True to speed up page rendering.');
+define('CT_CODE_SUFFIX_SEPERATOR', 'Code Suffix Seperator'); 
+define('CD_CODE_SUFFIX_SEPERATOR', 'Enter the character you wish to use when adding an options code suffix onto a products model number.'); 
 
 
 // Configuration ID: 2 - Minimumm Values

@@ -74,6 +74,8 @@ define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Link auf Versandkosten in Preisn‰he anzei
 define('CD_SHOW_SHIPPING_NEAR_PRICE', 'In manchen L‰ndern muﬂ ein Link auf die Versandkostenseite neben dem Preis angezeigt werden. Dazu muﬂ zus‰tzlich <b>Steuersatz bei Preis anzeigen</b> aktiviert sein.');
 define('CT_CATEGORY_DROPDOWN_SWITCH', 'Dropdown-Kategorieliste im Admin deaktivieren?');
 define('CD_CATEGORY_DROPDOWN_SWITCH', 'Diese Option aktiviert bzw. deaktiviert die Dropdown-Kategorieliste auf der Produkt/Kategoriestartseite im Adminpanel. In Shops mit mehr als ein paar hundert Kategorien sollte die Einstellung True lauten, um den Seitenaufbau zu beschleunigen.');
+define('CT_CODE_SUFFIX_SEPERATOR', 'Code Suffix Seperator'); 
+define('CD_CODE_SUFFIX_SEPERATOR', 'Enter the character you wish to use when adding an options code suffix onto a products model number.'); 
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Vorname');

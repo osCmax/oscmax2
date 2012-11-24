@@ -506,18 +506,18 @@ $Id$
 // EOF QPBPP for SPPC
 // BOF Attribute Product Codes
                 $attribute_code_array = array();
+                $attribute_code_query_raw = '';
                 if (isset($this->contents[$products_id]['attributes']) && is_array($this->contents[$products_id]['attributes'])) {
-                  $i = 0;
-                  foreach ($this->contents[$products_id]['attributes'] as $attributes) {
-                    $option = array_keys($this->contents[$products_id]['attributes']);
-                    $value = $this->contents[$products_id]['attributes'];
-                    $attribute_code_query = tep_db_query("select code_suffix, suffix_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$products_id . "' and options_id = '" . (int)$option[$i] . "' and options_values_id = '" . (int)$value[$option[$i]] . "' order by suffix_sort_order ASC");
-                    $attribute_code = tep_db_fetch_array($attribute_code_query);
+                  foreach ($this->contents[$products_id]['attributes'] as $option => $value) {
+                    if ($attribute_code_query_raw != '') $attribute_code_query_raw .= ' or ';
+                    $attribute_code_query_raw .= "(options_id = '" . (int)$option . "' and options_values_id = '" . (int)$value . "')";
+                  }
+                  $attribute_code_query = tep_db_query("select code_suffix from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$products_id . "' and (" . $attribute_code_query_raw . ") order by suffix_sort_order ASC");
+                  while ($attribute_code = tep_db_fetch_array($attribute_code_query)) {
                     if (tep_not_null($attribute_code['code_suffix'])) {
-                      $attribute_code_array[(int)$attribute_code['suffix_sort_order']] = $attribute_code['code_suffix'];
-                    } // end if
-                    $i++;
-                  } // end foreach
+                      $attribute_code_array[] = $attribute_code['code_suffix'];
+                    }
+                  }
 
     //  $separator = '-';
 

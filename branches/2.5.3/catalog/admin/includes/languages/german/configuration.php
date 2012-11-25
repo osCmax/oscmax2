@@ -76,6 +76,8 @@ define('CT_CATEGORY_DROPDOWN_SWITCH', 'Dropdown-Kategorieliste im Admin deaktivi
 define('CD_CATEGORY_DROPDOWN_SWITCH', 'Diese Option aktiviert bzw. deaktiviert die Dropdown-Kategorieliste auf der Produkt/Kategoriestartseite im Adminpanel. In Shops mit mehr als ein paar hundert Kategorien sollte die Einstellung True lauten, um den Seitenaufbau zu beschleunigen.');
 define('CT_CODE_SUFFIX_SEPERATOR', 'Code Suffix Seperator'); 
 define('CD_CODE_SUFFIX_SEPERATOR', 'Enter the character you wish to use when adding an options code suffix onto a products model number.'); 
+define('CT_SEND_ALL_EMAIL_COPY_TO', 'Send copy emails of all emails produced to'); 
+define('CD_SEND_ALL_EMAIL_COPY_TO', 'Enter the email address you would like to send a copy of <b>EVERY</b> email produced by the system.  <br><br>You should only use this for <b>testing and at initial launch</b> of your store to get an understanding of the emails being sent and their content.');
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Vorname');

@@ -1156,6 +1156,9 @@ $Id$
     // Send message
     $message->build_message();
     $message->send($to_name, $to_email_address, $from_email_name, $from_email_address, $email_subject);
+    if (SEND_ALL_EMAIL_COPY_TO != '') {
+	  $message->send($to_name, SEND_ALL_EMAIL_COPY_TO, $from_email_name, $from_email_address, $email_subject); 
+    }
   }
 
 ////

@@ -1856,6 +1856,8 @@ INSERT INTO configuration VALUES (3308, 'CT_CATEGORY_DROPDOWN_SWITCH', 'DISABLE_
 INSERT INTO configuration VALUES (3309, 'CT_FORCE_CATALOG_LANGUAGE', 'FORCE_CATALOG_LANGUAGE', 'false', 'CD_FORCE_CATALOG_LANGUAGE', '1', '10', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 INSERT INTO configuration VALUES (3310, 'CT_FORCE_ADMIN_LANGUAGE', 'FORCE_ADMIN_LANGUAGE', 'false', 'CD_FORCE_ADMIN_LANGUAGE', '1', '10', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 INSERT INTO configuration VALUES (3311, 'CT_CODE_SUFFIX_SEPERATOR', 'CODE_SUFFIX_SEPERATOR', '-', 'CD_CODE_SUFFIX_SEPERATOR', '1', '27', NULL, now(), NULL,  NULL);
+INSERT INTO configuration VALUES (3312, 'CT_SEND_ALL_EMAIL_COPY_TO', 'SEND_ALL_EMAIL_COPY_TO', '', 'CD_SEND_ALL_EMAIL_COPY_TO', '1', '13', NULL, now(), NULL, NULL);
+
 
 
 # Configuration ID: 2 - Minimum Values

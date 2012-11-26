@@ -685,7 +685,7 @@ $customer = tep_db_fetch_array($customer_query);
       $coupon_amount = (($coupon_amount == round($coupon_amount)) ? number_format($coupon_amount) : number_format($coupon_amount, 2)) . '%';
     }
     if ($coupon['coupon_type']=='S') {
-      $coupon_free_ship .= true;
+      $coupon_free_ship = true;
     }
     $coupon_min_order = (($coupon['coupon_minimum_order'] == round($coupon['coupon_minimum_order'])) ? number_format($coupon['coupon_minimum_order'], 2) : number_format($coupon['coupon_minimum_order'], 2));
     $coupon_code = $coupon['coupon_code'];
@@ -775,7 +775,7 @@ $customer = tep_db_fetch_array($customer_query);
                 </tr>
                 <tr>
                   <td align="left" class="main"><?php echo COUPON_FREE_SHIP; ?></td>
-                  <td align="left"><?php echo tep_draw_checkbox_field('coupon_free_ship', $coupon_free_ship); ?></td>
+                  <td align="left"><?php echo tep_draw_checkbox_field('coupon_free_ship', '1', $coupon_free_ship); ?></td>
                   <td align="left" class="main"><?php echo COUPON_FREE_SHIP_HELP; ?></td>
                 </tr>
                 <tr>

@@ -64,8 +64,10 @@ $Id$
 $codep_query = tep_db_query("select c.configuration_value, ab.entry_postcode from " . TABLE_CONFIGURATION . " c, " . TABLE_ADDRESS_BOOK . " ab where c.configuration_key = 'MODULE_SHIPPING_SPU_ZIP' and ab.customers_id = '" . (int)$customer_id . "'");
 $codep = tep_db_fetch_array($codep_query);
 $dept_allow = split("[, ]", $codep['configuration_value']);
-$cust_cp = substr($codep['entry_postcode'], 0, 2);
-if((in_array($cust_cp, $dept_allow))||($codep['configuration_value'] == '')){
+$dept_allow_uc = array_map('strtoupper', $dept_allow);
+$cust_cp = ((preg_match("/^[A-Z][0-9]/", strtoupper($codep['entry_postcode']))) ? substr($codep['entry_postcode'], 0, 1) : substr($codep['entry_postcode'], 0, 2));
+
+if ((in_array(strtoupper($cust_cp), $dept_allow_uc)) || ($codep['configuration_value'] == '')) {
 	      $this->quotes = array('id' => $this->code,
                             'module' => MODULE_SHIPPING_SPU_TEXT_TITLE,
                             'methods' => array(array('id' => $this->code,
@@ -89,7 +91,7 @@ return $this->quotes;
     function install() {
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Store Pick Up', 'MODULE_SHIPPING_SPU_STATUS', 'True', 'Do you want to offer Store Pickup?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Store Pickup Cost', 'MODULE_SHIPPING_SPU_COST', '0.00', 'What is the pickup cost? (The Handling fee will NOT be added.)', '6', '0', now())");
-  	  tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Shipping Zone', 'MODULE_SHIPPING_SPU_ZONE', '0', 'If a zone is selected, only enable this shipping method for that zone.', '6', '0', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(', now())");																																																																																										  	  tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Store Pick Up Zip Code Allowed', 'MODULE_SHIPPING_SPU_ZIP', '', 'First two characters of the post/zip code allowed for store pickup.  Leave blank for unrestricted pickup.', '6', '0', now())");
+  	  tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Shipping Zone', 'MODULE_SHIPPING_SPU_ZONE', '0', 'If a zone is selected, only enable this shipping method for that zone.', '6', '0', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(', now())");																																																																																										  	  tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Store Pick Up Zip Code Allowed', 'MODULE_SHIPPING_SPU_ZIP', '', 'First one or two characters of the post/zip code allowed for store pickup.  Leave blank for unrestricted pickup. (You may enter multiple codes separated by commas.)', '6', '0', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_SHIPPING_SPU_SORT_ORDER', '0', 'Sort order of display.', '6', '0', now())");
     }
 

@@ -146,7 +146,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
           $customer_notified = '0';
           if (isset($_POST['notify']) && ($_POST['notify'] == 'on')) {
             $notify_comments = '';
-            if (isset($_POST['notify_comments']) && ($_POST['notify_comments'] == 'on')) {
+            if (isset($_POST['notify_comments']) && ($_POST['notify_comments'] == 'on') && (strlen($comments) > 0)) {
               $notify_comments = sprintf(EMAIL_TEXT_COMMENTS_UPDATE, $comments) . "\n\n";
             }
 

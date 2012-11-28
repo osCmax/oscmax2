@@ -1619,7 +1619,7 @@ INSERT INTO address_format VALUES (2,'$firstname $lastname$cr$streets$cr$city,$s
 INSERT INTO address_format VALUES (3,'$firstname $lastname$cr$streets$cr$city$cr$postcode - $statecomma$country','$state / $country');
 INSERT INTO address_format VALUES (4,'$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country','$postcode / $country');
 INSERT INTO address_format VALUES (5,'$firstname $lastname$cr$streets$cr$postcode $city$cr$country','$city / $country');
-INSERT INTO address_format VALUES (6,'$firstname $lastname$cr$streets$cr$suburb$cr$city$cr$state$cr$postcode$cr$country','$city / $country');
+INSERT INTO address_format VALUES (6,'$firstname $lastname$cr$streets$cr$city$cr$state$cr$postcode$cr$country','$city / $country');
 
 
 INSERT INTO admin_files VALUES(1, 'administrator.php', 'BOX_HEADING_ADMINISTRATOR', 1, 0, '1', 1);

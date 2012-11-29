@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Programme de partenariat');
-define('HEADING_TITLE', 'Programme de partenariat - D&eacute;connection');
+define('NAVBAR_TITLE', 'Programme d\'affiliation');
+define('HEADING_TITLE', 'Programme d\'affiliation - D&eacute;connection');
 
-define('TEXT_INFORMATION', 'Vous &ecirc;tes bien d&eacute;connect&eacute;.');
-define('TEXT_INFORMATION_ERROR_1', 'Vous ne pourriez pas &ecirc;tre d&eacute;connect&eacute;.');
-define('TEXT_INFORMATION_ERROR_2', 'Vous n\'&ecirc;tes pas connect&eacute; donc vous ne pouvez pas &ecirc;tre d&eacute;connect&eacute;.');
+define('TEXT_INFORMATION', 'Vous êtes bien d&eacute;connect&eacute;.');
+define('TEXT_INFORMATION_ERROR_1', 'Vous ne pourriez pas être d&eacute;connect&eacute;.');
+define('TEXT_INFORMATION_ERROR_2', 'Vous n\'êtes pas connect&eacute; donc ne pas être d&eacute;connect&eacute;.');
 ?>

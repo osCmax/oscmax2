@@ -9,7 +9,7 @@ $Id: article_rss.php 982 2011-01-06 02:53:12Z michael.oscmax@gmail.com $
 
   Released under the GNU General Public License
 */
-define('NEWS_TITLE', 'Flux RSS des articles');
-define('NEWS_DESCRIPTION', 'Flux RSS des nouvelles');
+define('NEWS_TITLE','Fil RSS des Articles');
+define('NEWS_DESCRIPTION','Nouvelles RSS');
 
 ?>

@@ -10,6 +10,6 @@ $Id$
   Released under the GNU General Public License
 */
 
-  define('MODULE_ORDER_TOTAL_LOWORDERFEE_TITLE', 'Frais de commande minimum');
-  define('MODULE_ORDER_TOTAL_LOWORDERFEE_DESCRIPTION', 'Frais de commande minimum');
+  define('MODULE_ORDER_TOTAL_LOWORDERFEE_TITLE', 'Tarif faible commande');
+  define('MODULE_ORDER_TOTAL_LOWORDERFEE_DESCRIPTION', 'Tarif faible commande');
 ?>

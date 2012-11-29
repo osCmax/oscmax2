@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Commentaires');
-define('HEADING_TITLE', 'Lisez ce que autres en disent');
+define('NAVBAR_TITLE', 'Critiques');
+define('HEADING_TITLE', 'Lisez ce que les autres pensent');
 define('TEXT_OF_5_STARS', '%s sur 5 &eacute;toiles!');
 ?>

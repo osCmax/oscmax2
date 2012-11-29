@@ -10,7 +10,6 @@ $Id: password_forgotten.php 980 2011-01-06 02:19:55Z michael.oscmax@gmail.com $
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Mot de passe oubli&eacute;');
 define('NAVBAR_TITLE_1', 'Ouverture session');
 define('NAVBAR_TITLE_2', 'Mot de passe oubli&eacute;');
 

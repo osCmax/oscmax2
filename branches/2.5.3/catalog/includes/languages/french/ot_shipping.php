@@ -11,8 +11,8 @@ $Id$
 */
 
   define('MODULE_ORDER_TOTAL_SHIPPING_TITLE', 'Exp&eacute;dition');
-  define('MODULE_ORDER_TOTAL_SHIPPING_DESCRIPTION', 'Coût d\'expédition de la commande');
+  define('MODULE_ORDER_TOTAL_SHIPPING_DESCRIPTION', 'Co&ugrave;t d\'Exp&eacute;dition');
 
-  define('FREE_SHIPPING_TITLE', 'Livraison gratuite');
-  define('FREE_SHIPPING_DESCRIPTION', 'Livraison gratuite pour les commandes sup&eacute;rieures &agrave; %s');
+  define('FREE_SHIPPING_TITLE', 'Exp&eacute;dition gratuite');
+  define('FREE_SHIPPING_DESCRIPTION', 'Exp&eacute;dition gratuite pour les commandes sup&eacute;rieures &agrave; %s');
 ?>

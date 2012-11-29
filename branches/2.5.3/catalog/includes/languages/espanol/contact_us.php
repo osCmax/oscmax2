@@ -20,10 +20,7 @@ define('ENTRY_EMAIL', 'Dirección de email:');
 define('ENTRY_ENQUIRY', 'Consulta:');
 
 define('ENTRY_EMAIL_CONTENT_CHECK_ERROR', 'Falta el contenido, por favor escriba un mensaje.');
-define('ENTRY_SECURITY_CHECK', 'Control de seguridad:');
-define('ENTRY_SECURITY_CHECK_ERROR', 'El código de comprobación de seguridad escrito incorrectamente. Inténtelo de nuevo.');
 define('INSTRUCTIONS_TEXT', 'Por favor, no dude en utilizar este formulario para ponerse en contacto con nosotros. También puede hacerlo utilizando los datos que aparecen a la derecha.');
-define('SECURITY_PROMPT', 'Por favor, responda la <b>pregunta de seguridad</b> mostrada a la derecha ->');
 define('OPENING_HOURS', '<b>Horario de apertura:</b>');
 define('EMAIL_US', '<b>Envíenos un correo electrónico:</b>');
 define('PHONE_US', '<b>Llámenos:</b>');

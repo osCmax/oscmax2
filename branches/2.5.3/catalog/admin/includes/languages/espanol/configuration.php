@@ -74,10 +74,10 @@ define('CT_SHOW_SHIPPING_NEAR_PRICE', '¿Mostrar enlace a los gastos de envío jun
 define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Algunos países necesitan que se muestre un enlace a los gastos de envío junto al precio. Requiere <b>Mostrar tasas de impuestos junto al precio</b> para poder activarlo.');
 define('CT_CATEGORY_DROPDOWN_SWITCH', '¿Desactivar la lista desplegable de categorías en Admin?');
 define('CD_CATEGORY_DROPDOWN_SWITCH', 'Esta opción activa o desactiva la lista desplegable de las categorías en la página de entrada de productos/categorías del panel de Administración. En tiendas con cientos de categorías, ha de estar activado (True) para acelerar la actualización de la página.');
-define('CT_CODE_SUFFIX_SEPERATOR', 'Code Suffix Seperator'); 
-define('CD_CODE_SUFFIX_SEPERATOR', 'Enter the character you wish to use when adding an options code suffix onto a products model number.'); 
-define('CT_SEND_ALL_EMAIL_COPY_TO', 'Send copy emails of all emails produced to'); 
-define('CD_SEND_ALL_EMAIL_COPY_TO', 'Enter the email address you would like to send a copy of <b>EVERY</b> email produced by the system.  <br><br>You should only use this for <b>testing and at initial launch</b> of your store to get an understanding of the emails being sent and their content.');
+define('CT_CODE_SUFFIX_SEPERATOR', 'Código sufijo Seperator');
+define('CD_CODE_SUFFIX_SEPERATOR', 'Introduzca el carácter que desea utilizar cuando se añade un código de sufijo opcional en el número de modelo de los productos.');
+define('CT_SEND_ALL_EMAIL_COPY_TO', 'Enviar una copia de todos los emails producidos a');
+define('CD_SEND_ALL_EMAIL_COPY_TO', 'Introduzca la dirección de correo electrónico que desea enviar una copia de todos los correos electrónicos producidos por el sistema. <br><br>Sólo debe utilizar esto para las <b>pruebas y la apertura inicial</b> de su tienda para obtener una comprensión de los mensajes de correo electrónico enviados y su contenido.');
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Nombre');
@@ -206,8 +206,8 @@ define('CT_CUSTOMER_COMMENTS_NEW_STATUS', 'Establecer estado pedido: cuando el c
 define('CD_CUSTOMER_COMMENTS_NEW_STATUS', 'Establecer el estado al que se cambia el pedido cuando el cliente hace un comentario');
 define('CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Establecer estado pedido: (permite descargas) cuando el cliente escribe comentario de pedido');
 define('CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Establecer el estado al que se cambia el pedido cuando el cliente hace un comentario');
-define('CT_CHECKOUT_SHIPPING_DATE', 'Allow customer to request a shipping date?');
-define('CD_CHECKOUT_SHIPPING_DATE', 'Do you want to allow the customer to select preferred shipping date when checking out?');
+define('CT_CHECKOUT_SHIPPING_DATE', 'Permitir al cliente solicitar una fecha de envío?');
+define('CD_CHECKOUT_SHIPPING_DATE', 'Desea permitir que el cliente pueda seleccionar la fecha de envío preferido al finalizar la compra?');
 
 // Configuration ID: 6 - Module Options - Hidden from Admin Panel
 define('CT_MODULE_PAYMENT_INSTALLED', 'Módulos instalados');
@@ -817,16 +817,16 @@ define('CT_RECAPTCHA_EMAIL_URL', 'Introduce tu URL de protección de email de reC
 define('CD_RECAPTCHA_EMAIL_URL', 'Si quieres usar la funcionalidad de reCaptcha mailhide, por favor introduce la URL suministrada para tu dirección de email escogida.  <u><a href="http://www.google.com/recaptcha/mailhide/" target="_blank"><br><br>Puedes conseguir una de estas desde Google reCaptcha</a></u>.');
 define('CT_RECAPTCHA_EMAIL_FROM', 'Introduce tu dirección de email enmascarada utilizada en reCaptcha');
 define('CD_RECAPTCHA_EMAIL_FROM', 'Por favor introduce una dirección de email parcial o enmascarada para que se muestr en tu tienda. Por ejemplo: john...@email.com <br><br>O introduce <b>CLICK</b> para mostrar el texto multilingüe \'Pulsar para revelar\'');
-define('CT_RECAPTCHA_CREATE_ACCOUNT', 'Do you want to use reCaptcha on Create Account page?');
-define('CD_RECAPTCHA_CREATE_ACCOUNT', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
-define('CT_RECAPTCHA_CONTACT_US', 'Do you want to use reCaptcha on Contact Us page?');
-define('CD_RECAPTCHA_CONTACT_US', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
-define('CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'Do you want to use reCaptcha on Product Reviews page?');
-define('CD_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
-define('CT_RECAPTCHA_WISHLIST', 'Do you want to use reCaptcha on Wish List page?');
-define('CD_RECAPTCHA_WISHLIST', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
-define('CT_RECAPTCHA_STYLE', 'Which style do you want your reCaptcha form to use?');
-define('CD_RECAPTCHA_STYLE', 'ReCaptcha has 4 standard style and a custom one.  For more details please visit their <a href="https://developers.google.com/recaptcha/docs/customization" target="_blank">website.</a>.');
+define('CT_RECAPTCHA_CREATE_ACCOUNT', 'Quieres usar reCaptcha en la página Crear cuenta?');
+define('CD_RECAPTCHA_CREATE_ACCOUNT', 'Puede controlar la visualización de los formuladios de reCAPTCHA para cada página. El módulo debe ser habilitado para que esta opción funcione.');
+define('CT_RECAPTCHA_CONTACT_US', '¿Quieres usar reCaptcha en la página Contacto?');
+define('CD_RECAPTCHA_CONTACT_US', 'Puede controlar la visualización de los formuladios de reCAPTCHA para cada página. El módulo debe ser habilitado para que esta opción funcione.');
+define('CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'Quieres usar reCaptcha en la página comentarios de producto?');
+define('CD_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'Puede controlar la visualización de los formuladios de reCAPTCHA para cada página. El módulo debe ser habilitado para que esta opción funcione.');
+define('CT_RECAPTCHA_WISHLIST', 'Quieres usar reCaptcha en la página lista de favoritos?');
+define('CD_RECAPTCHA_WISHLIST', 'Puede controlar la visualización de los formuladios de reCAPTCHA para cada página. El módulo debe ser habilitado para que esta opción funcione.');
+define('CT_RECAPTCHA_STYLE', '¿Qué estilo quieres usar para el formulario reCaptcha?');
+define('CD_RECAPTCHA_STYLE', 'ReCAPTCHA tiene 4 estilos estándar y uno personalizado. Para más detalles por favor visite su <a href="https://developers.google.com/recaptcha/docs/customization" target="_blank">sitio Web.</a>.');
 
 
 // Configuration ID: 88 - Price Breaks 

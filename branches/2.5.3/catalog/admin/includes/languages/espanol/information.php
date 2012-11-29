@@ -41,7 +41,7 @@ $Id$
   define('MANAGER_INFORMATION', 'Administrador de páginas de información');
   define('NO_INFORMATION', 'No');
   define('PUBLIC_INFORMATION', 'Listado en Infobox');
-  define('ENTRY_CUSTOMER_GROUP_HIDE', 'Customer Group Hide');
+  define('ENTRY_CUSTOMER_GROUP_HIDE', 'Ocultar grupo de clientes');
   define('PUBLIC_INFORMATION_2', 'Activo');
   define('SORT_BY', 'En la página de información se ordena por');
   define('STATUS_ACTIVE', 'Activo');

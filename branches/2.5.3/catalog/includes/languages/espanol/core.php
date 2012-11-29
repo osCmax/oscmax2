@@ -487,4 +487,12 @@ define('TAX_RATE_NEAR_PRICE_INC', 'Impuestos incluidos ');
 define('TAX_RATE_NEAR_PRICE_EX', 'Impuestos no incluidos ');
 define('TEXT_SHIPPING_NEAR_PRICE', 'Envíos');
 // EOF Show tax and Shipping near price
+
+// BOF reCaptcha
+define('ENTRY_SECURITY_CHECK', 'Control de seguridad:');
+define('ENTRY_SECURITY_CHECK_ERROR', 'Código de comprobación de seguridad escrito incorrectamente. Inténtelo de nuevo.');
+define('SECURITY_PROMPT', 'Por favor, responda la pregunta de seguridad mostrada a la derecha ->');
+define('CATEGORY_RECAPTCHA', 'Pregunta del control de seguridad');
+define('ENTRY_RECAPTCHA', 'Pregunta de seguridad:');
+// EOF reCaptcha
 ?>

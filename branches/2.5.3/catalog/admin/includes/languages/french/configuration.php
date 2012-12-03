@@ -205,6 +205,8 @@ define('CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Set Order Status: (allows download
 define('CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Set the order status that is changed to when the customer makes a comment');
 define('CT_CHECKOUT_SHIPPING_DATE', 'Allow customer to request a shipping date?');
 define('CD_CHECKOUT_SHIPPING_DATE', 'Do you want to allow the customer to select preferred shipping date when checking out?');
+define('CT_ACCOUNT_EMAIL_CONFIRMATION', 'Ask customer to reconfirm email address?');
+define('CD_ACCOUNT_EMAIL_CONFIRMATION', 'Do you want to ask your customers to enter their email address twice to reduce errors?');
 
 // Configuration ID: 6 - Module Options - Hidden from Admin Panel
 define('CT_MODULE_PAYMENT_INSTALLED', 'Installed Modules');

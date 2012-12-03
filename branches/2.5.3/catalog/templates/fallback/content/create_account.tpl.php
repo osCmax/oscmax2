@@ -107,6 +107,12 @@ var RecaptchaOptions = { theme : '<?php echo RECAPTCHA_STYLE; ?>', tabindex : 3,
                 <td class="main" width="150"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
                 <td class="main"><?php echo tep_draw_input_field('email_address') . '&nbsp;' . (tep_not_null(ENTRY_EMAIL_ADDRESS_TEXT) ? '<span class="inputRequirement">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>': ''); ?></td>
               </tr>
+              <?php if (ACCOUNT_EMAIL_CONFIRMATION == 'true') { ?>
+              <tr>
+                <td class="main" width="150"><?php echo ENTRY_EMAIL_CONFIRMATION; ?></td>
+                <td class="main"><?php echo tep_draw_input_field('email_confirmation') . '&nbsp;' . (tep_not_null(ENTRY_EMAIL_CONFIRMATION_TEXT) ? '<span class="inputRequirement">' . ENTRY_EMAIL_CONFIRMATION_TEXT . '</span>': ''); ?></td>
+              </tr>
+              <?php } ?>
             </table></td>
           </tr>
         </table></td>

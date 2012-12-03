@@ -1928,6 +1928,7 @@ INSERT INTO configuration VALUES (2511, 'CT_CUSTOMER_COMMENTS_NOTIFY', 'CUSTOMER
 INSERT INTO configuration VALUES (2512, 'CT_CUSTOMER_COMMENTS_NEW_STATUS', 'CUSTOMER_COMMENTS_NEW_STATUS', '4', 'CD_CUSTOMER_COMMENTS_NEW_STATUS', 5, '51', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
 INSERT INTO configuration VALUES (2513, 'CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'CUSTOMER_COMMENTS_NEW_STATUS_DL', '5', 'CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 5, '52', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
 INSERT INTO configuration VALUES (2516, 'CT_CHECKOUT_SHIPPING_DATE', 'CHECKOUT_SHIPPING_DATE', 'false', 'CD_CHECKOUT_SHIPPING_DATE', 5, '53', NULL , now(), NULL , 'tep_cfg_select_option(array(''true'', ''false''),' );
+INSERT INTO configuration VALUES (2517, 'CT_ACCOUNT_EMAIL_CONFIRMATION', 'ACCOUNT_EMAIL_CONFIRMATION', 'false', 'CD_ACCOUNT_EMAIL_CONFIRMATION', 5, '6', NULL , now(), NULL , 'tep_cfg_select_option(array(''true'', ''false''),' );
 
 
 # Configuration ID: 6 - Module Options - Hidden from Admin

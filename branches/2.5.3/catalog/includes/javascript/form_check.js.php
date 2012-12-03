@@ -110,7 +110,12 @@ function check_form(form_name) {
 
 <?php if (ACCOUNT_DOB == 'true') echo '  check_input("dob", ' . ENTRY_DOB_MIN_LENGTH . ', "' . ENTRY_DATE_OF_BIRTH_ERROR . '");' . "\n"; ?>
 
+<?php if (ACCOUNT_EMAIL_CONFIRMATION == 'true') { ?>
+  check_password("email_address", "email_confirmation", <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_EMAIL_ADDRESS_ERROR; ?>", "<?php echo ENTRY_EMAIL_ERROR_NOT_MATCHING; ?>");
+<?php } else { ?>
   check_input("email_address", <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_EMAIL_ADDRESS_ERROR; ?>");
+<?php } ?>
+
   
 <?php 
   if (ACCOUNT_COMPANY == 'true') {

@@ -52,6 +52,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
     $lastname = tep_db_prepare_input($_POST['lastname']);
     if (ACCOUNT_DOB == 'true') $dob = tep_db_prepare_input($_POST['dob']);
     $email_address = tep_db_prepare_input($_POST['email_address']);
+	if (ACCOUNT_EMAIL_CONFIRMATION == 'true') $email_confirmation = tep_db_prepare_input($_POST['email_confirmation']); 
     // BOF Separate Pricing Per Customer, added: field for tax id number
     if (ACCOUNT_COMPANY == 'true') { 
       $company = tep_db_prepare_input($_POST['company']);
@@ -147,6 +148,12 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
 
            $messageStack->add('create_account', ENTRY_EMAIL_ADDRESS_ERROR_EXISTS);
       }
+    }
+	
+	if ($email_address != $email_confirmation) {
+      $error = true;
+
+      $messageStack->add('create_account', ENTRY_EMAIL_ERROR_NOT_MATCHING);
     }
 
     if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH) {

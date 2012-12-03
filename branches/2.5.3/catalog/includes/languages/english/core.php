@@ -190,6 +190,9 @@ define('ENTRY_LAST_NAME_TEXT', '*');
 define('ENTRY_DATE_OF_BIRTH', 'Date of Birth:');
 // if you are looking for the DOB error message and * - look in locale.php
 define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
+define('ENTRY_EMAIL_CONFIRMATION', 'E-Mail Confirmation:');
+define('ENTRY_EMAIL_CONFIRMATION_TEXT', '*');
+define('ENTRY_EMAIL_ERROR_NOT_MATCHING', 'The E-Mail Confirmation must match your E-Mail Address.');
 define('ENTRY_EMAIL_ADDRESS_ERROR', 'Your E-Mail Address must contain a minimum of ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' characters.');
 define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'Your E-Mail Address does not appear to be valid - please make any necessary corrections.');
 define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', 'Your E-Mail Address already exists in our records - please log in with the e-mail address or create an account with a different address.');

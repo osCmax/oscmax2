@@ -193,10 +193,17 @@ function check_form(form_name) {
 	<?php
 	}
   }
-
-  if (tep_not_null(ENTRY_EMAIL_ADDRESS_TEXT)) { ?>
-    check_input("email_address", <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_EMAIL_ADDRESS_ERROR; ?>");
+  
+  if (ACCOUNT_EMAIL_CONFIRMATION == 'true') {
+    if (tep_not_null(ENTRY_EMAIL_CONFIRMATION_TEXT)) { ?>
+      check_password("email_address", "email_confirmation", <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_EMAIL_ADDRESS_ERROR; ?>", "<?php echo ENTRY_EMAIL_ERROR_NOT_MATCHING; ?>");
   <?php
+  	}
+  } else {
+	if (tep_not_null(ENTRY_EMAIL_ADDRESS_TEXT)) { ?>
+      check_input("email_address", <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>, "<?php echo ENTRY_EMAIL_ADDRESS_ERROR; ?>");
+  <?php 
+    }
   }
    
   if (ACCOUNT_COMPANY == 'true') {

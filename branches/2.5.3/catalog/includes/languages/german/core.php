@@ -477,4 +477,17 @@ define('TAX_RATE_NEAR_PRICE_INC', 'Inkl. USt. von ');
 define('TAX_RATE_NEAR_PRICE_EX', 'Exkl. USt. von ');
 define('TEXT_SHIPPING_NEAR_PRICE', 'Versandkosten');
 // EOF Show tax and Shipping near price
+
+// BOF Customers extra fields
+define('ENTRY_EXTRA_FIELDS_ERROR', 'Das Feld %s muss mindestens %d Zeichen enthalten');
+define('CATEGORY_EXTRA_FIELDS', 'Weitere Informationen');
+// EOF Customers extra fields   
+
+// BOF reCaptcha
+define('ENTRY_SECURITY_CHECK', 'Sicherheitsabfrage:');
+define('ENTRY_SECURITY_CHECK_ERROR', 'Die Sicherheitsabfrage wurde nicht korrekt beantwortet. Bitte versuchen Sie es noch einmal.');
+define('SECURITY_PROMPT', 'Bitte vervollständigen Sie die <b>Sicherheitsabfrage</b> auf der rechten Seite -->');
+define('CATEGORY_RECAPTCHA', 'Sicherheitsabfrage');
+define('ENTRY_RECAPTCHA', 'Sicherheitsabfrage:');
+// EOF reCaptcha
 ?>

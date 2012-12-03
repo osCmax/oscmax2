@@ -680,4 +680,10 @@ define('TEXT_COPYRIGHT', 'Copyright');
 
 define('ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Cacheverzeichnis ist nicht vorhanden. Bitte setzen Sie die Einstellungen in Konfiguration->Cache');
 define('ERROR_CACHE_DIRECTORY_NOT_WRITEABLE', 'Fehler: Das Cacheverzeichnis ist schreibgeschützt.');
+
+// BOF Customers extra fields
+define('BOX_CUSTOMERS_EXTRA_FIELDS_MANAGER', 'Kunden-Extra-Felder');
+define('ENTRY_EXTRA_FIELDS_ERROR', 'Feld %s muss mindestens %d Zeichen enthalten');
+define('TEXT_DISPLAY_NUMBER_OF_FIELDS', '<b>%d</b> bis <b>%d</b> (von <b>%d</b> Feldern) anzeigen');
+// EOF Customers extra fields
 ?>

@@ -74,10 +74,11 @@ define('CT_SHOW_SHIPPING_NEAR_PRICE', 'Link auf Versandkosten in Preisnähe anzei
 define('CD_SHOW_SHIPPING_NEAR_PRICE', 'In manchen Ländern muß ein Link auf die Versandkostenseite neben dem Preis angezeigt werden. Dazu muß zusätzlich <b>Steuersatz bei Preis anzeigen</b> aktiviert sein.');
 define('CT_CATEGORY_DROPDOWN_SWITCH', 'Dropdown-Kategorieliste im Admin deaktivieren?');
 define('CD_CATEGORY_DROPDOWN_SWITCH', 'Diese Option aktiviert bzw. deaktiviert die Dropdown-Kategorieliste auf der Produkt/Kategoriestartseite im Adminpanel. In Shops mit mehr als ein paar hundert Kategorien sollte die Einstellung True lauten, um den Seitenaufbau zu beschleunigen.');
-define('CT_CODE_SUFFIX_SEPERATOR', 'Code Suffix Seperator'); 
-define('CD_CODE_SUFFIX_SEPERATOR', 'Enter the character you wish to use when adding an options code suffix onto a products model number.'); 
-define('CT_SEND_ALL_EMAIL_COPY_TO', 'Send copy emails of all emails produced to'); 
-define('CD_SEND_ALL_EMAIL_COPY_TO', 'Enter the email address you would like to send a copy of <b>EVERY</b> email produced by the system.  <br><br>You should only use this for <b>testing and at initial launch</b> of your store to get an understanding of the emails being sent and their content.');
+define('CT_CODE_SUFFIX_SEPERATOR', 'Art-Nr Suffix Seperator'); 
+define('CD_CODE_SUFFIX_SEPERATOR', 'Geben Sie das Zeichen an, welches zwischen Artikelnummer und zusätzlicher Optionserweiterung angezeigt werden soll.'); 
+define('CT_SEND_ALL_EMAIL_COPY_TO', 'Kopie aller ausgehenden E-Mails senden an'); 
+define('CD_SEND_ALL_EMAIL_COPY_TO', 'Geben Sie eine E-Mail-Adresse an, an die Sie eine Kopie <b>ALLER</b> von osCmax versendeten E-Mails senden möchten.<br><br>Diese Option sollten Sie nur zu <b>Testzwecken</b> Ihres Shops verwenden, um Ihnen mehr Einblick den Inhalt der von osCmax versendeten E-Mails zu ermöglichen.');
+
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Vorname');
@@ -206,9 +207,9 @@ define('CT_CUSTOMER_COMMENTS_NEW_STATUS', 'Bestellstatus setzen: Wenn Kunde eine
 define('CD_CUSTOMER_COMMENTS_NEW_STATUS', 'Der Bestellstatus wird auf den definierten Status gesetzt, wenn ein Kunde einen Bestellkommentar schreibt.');
 define('CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Bestellstatus setzen: (Download erlaubt) Wenn Kunde einen Bestellkommentar schreibt');
 define('CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Der Bestellstatus wird auf den definierten Status gesetzt, wenn ein Kunde einen Bestellkommentar schreibt');
-define('CT_CHECKOUT_SHIPPING_DATE', 'Allow customer to request a shipping date?');
-define('CD_CHECKOUT_SHIPPING_DATE', 'Do you want to allow the customer to select preferred shipping date when checking out?');
-define('CT_ACCOUNT_EMAIL_CONFIRMATION', 'Ask customer to reconfirm email address?');
+define('CT_CHECKOUT_SHIPPING_DATE', 'Angabe des gewünschten Versanddatums anbieten?');
+define('CD_CHECKOUT_SHIPPING_DATE', 'Möchten Sie Ihren Kunden während des Bestellvorganges anbieten, ein Wunschversanddatum anzugeben?');
+define('CT_ACCOUNT_EMAIL_CONFIRMATION', 'Ask customer to reconfirm email address?');		
 define('CD_ACCOUNT_EMAIL_CONFIRMATION', 'Do you want to ask your customers to enter their email address twice to reduce errors?');
 
 // Configuration ID: 6 - Module Options - Hidden from Admin Panel
@@ -819,15 +820,15 @@ define('CT_RECAPTCHA_EMAIL_URL', 'reCaptcha E-Mailschutz URL');
 define('CD_RECAPTCHA_EMAIL_URL', 'Wenn Sie den reCaptcha E-Mailschutz verwenden möchten, geben Sie die generierte URL für Ihre gewählte E-Mailadresse an. <u><a href="http://www.google.com/recaptcha/mailhide/" target="_blank"><br><br>Sie erhalten diese von Google reCaptcha</a></u>.');
 define('CT_RECAPTCHA_EMAIL_FROM', 'Verschleierte E-Mailadresse für reCaptcha');
 define('CD_RECAPTCHA_EMAIL_FROM', 'Geben Sie eine unvollständige oder verschleierte E-Mailadresse an, die in Ihrem Shop angezeigt werden soll. Zum Beispiel: johann...@email.com <br><br>oder geben Sie <b>CLICK</b> an, um den mehrsprachigenen Text \'Click to reveal\' anzuzeigen.');
-define('CT_RECAPTCHA_CREATE_ACCOUNT', 'Do you want to use reCaptcha on Create Account page?');
+define('CT_RECAPTCHA_CREATE_ACCOUNT', 'reCaptcha beim Anlegen eines neuen Kontos verwenden?');
 define('CD_RECAPTCHA_CREATE_ACCOUNT', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
-define('CT_RECAPTCHA_CONTACT_US', 'Do you want to use reCaptcha on Contact Us page?');
+define('CT_RECAPTCHA_CONTACT_US', 'reCaptcha auf der Kontaktseite verwenden?');
 define('CD_RECAPTCHA_CONTACT_US', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
-define('CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'Do you want to use reCaptcha on Product Reviews page?');
+define('CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'reCaptcha bei Produktbewertungen verwenden?');
 define('CD_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
-define('CT_RECAPTCHA_WISHLIST', 'Do you want to use reCaptcha on Wish List page?');
+define('CT_RECAPTCHA_WISHLIST', 'reCaptcha bei der Wunschliste verwenden?');
 define('CD_RECAPTCHA_WISHLIST', 'You can control the display of reCaptcha forms for each page.  The module must be enabled for this setting to work.');
-define('CT_RECAPTCHA_STYLE', 'Which style do you want your reCaptcha form to use?');
+define('CT_RECAPTCHA_STYLE', 'Welchen Stil soll das reCaptcha Formular verwenden?');
 define('CD_RECAPTCHA_STYLE', 'ReCaptcha has 4 standard style and a custom one.  For more details please visit their <a href="https://developers.google.com/recaptcha/docs/customization" target="_blank">website.</a>.');
 
 

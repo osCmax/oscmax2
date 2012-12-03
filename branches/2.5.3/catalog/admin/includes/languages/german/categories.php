@@ -206,7 +206,9 @@ define('TEXT_THUMBNAIL_IMAGE', 'Vorschaubild:');
 
 // BOF indvship 4.5
 define('TEXT_PRODUCTS_ZIPCODE', 'Postleitzahl: ');
-define('TEXT_INDIV_SHIPPING_PRICE', 'Indiv. Versandkosten: ');
-define('TEXT_INDIV_ADDITIONAL_PRICE', 'Each additional price: ');
+define('TEXT_INDIV_SHIPPING_PRICE', 'Versandkosten für dieses Produkt: ');
+define('TEXT_INDIV_ADDITIONAL_PRICE', 'Versandkosten für jedes zusätzliche Produkt: ');
 // EOF indvship 4.5
+
+define('TEXT_SHIP_SEPARATELY', 'FedEx Ship Separately:');
 ?>

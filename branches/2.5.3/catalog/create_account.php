@@ -150,10 +150,12 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
       }
     }
 	
-	if ($email_address != $email_confirmation) {
-      $error = true;
+	if (ACCOUNT_EMAIL_CONFIRMATION == 'true') {
+	  if ($email_address != $email_confirmation) {
+        $error = true;
 
-      $messageStack->add('create_account', ENTRY_EMAIL_ERROR_NOT_MATCHING);
+        $messageStack->add('create_account', ENTRY_EMAIL_ERROR_NOT_MATCHING);
+	  }
     }
 
     if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH) {

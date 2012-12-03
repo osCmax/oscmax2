@@ -165,14 +165,10 @@ $(document).ready(function(){
     } else {
       $rID = tep_db_prepare_input($_GET['rID']);
 
-      $reviews_query = tep_db_query("select r.reviews_id, r.products_id, r.customers_name, r.date_added, r.last_modified, r.reviews_read, rd.reviews_text, r.reviews_rating from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd where r.reviews_id = '" . (int)$rID . "' and r.reviews_id = rd.reviews_id");
+      $reviews_query = tep_db_query('SELECT r.reviews_id, r.customers_name, r.reviews_rating, r.date_added, rd.reviews_text, pd.products_name FROM ' . TABLE_REVIEWS . ' r, ' . TABLE_REVIEWS_DESCRIPTION . ' rd, ' . TABLE_PRODUCTS_DESCRIPTION . ' pd WHERE r.reviews_id=rd.reviews_id AND r.products_id=pd.products_id AND r.reviews_id=' . (int)$rID);
       $reviews = tep_db_fetch_array($reviews_query);
 
-      $articles_name_query = tep_db_query("select articles_name from " . TABLE_ARTICLES_DESCRIPTION . " where articles_id = '" . (int)$reviews['articles_id'] . "' and language_id = '" . (int)$languages_id . "'");
-      $articles_name = tep_db_fetch_array($articles_name_query);
-
-      $rInfo_array = array_merge($reviews, $articles, $articles_name);
-      $rInfo = new objectInfo($rInfo_array);
+      $rInfo = new objectInfo($reviews);
     }
 ?>
       <tr><?php echo tep_draw_form('update', FILENAME_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $_GET['rID'] . '&amp;action=update', 'post', 'enctype="multipart/form-data"'); ?>
@@ -299,7 +295,7 @@ $(document).ready(function(){
       if (isset($rInfo) && is_object($rInfo)) {
         $heading[] = array('text' => '<b>' . $rInfo->products_name . '</b>');
 
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $rInfo->reviews_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $rInfo->reviews_id . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . tep_href_link(FILENAME_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $rInfo->reviews_id . '&amp;action=preview') . '">' . tep_image_button('button_preview.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $rInfo->reviews_id . '&amp;action=edit') . '">' . tep_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . tep_href_link(FILENAME_REVIEWS, 'page=' . $_GET['page'] . '&amp;rID=' . $rInfo->reviews_id . '&amp;action=delete') . '">' . tep_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
         $contents[] = array('text' => '<br>' . TEXT_INFO_DATE_ADDED . ' ' . tep_date_short($rInfo->date_added));
         if (tep_not_null($rInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($rInfo->last_modified));
 		$contents[] = array('align' => 'center', 'text' => '<br>' . tep_image(DIR_WS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $rInfo->products_image, $rInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT));

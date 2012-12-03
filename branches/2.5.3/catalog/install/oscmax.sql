@@ -1237,7 +1237,7 @@ DROP TABLE IF EXISTS specials;
 CREATE TABLE specials (
   specials_id int NOT NULL auto_increment,
   products_id int NOT NULL,
-  specials_new_products_price decimal(15,4) NOT NULL,
+  specials_new_products_price decimal(15,5) NOT NULL,
   specials_date_added datetime,
   specials_last_modified datetime,
   expires_date datetime,

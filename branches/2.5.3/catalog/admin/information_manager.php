@@ -270,7 +270,7 @@ case "Added":
 		tep_db_query("update " . TABLE_INFORMATION . " set visible = '1' where information_id = '" . (int)$_GET['information_id'] . "'");
 	}
 	$data=tep_get_information_list();
-	$title="$confirm $vivod (int)$information_id " . SUCCED_INFORMATION . "";
+	$title="$confirm $vivod '" . (int)$_GET['information_id'] . "' " . SUCCED_INFORMATION . "";
 	include('information_list.php');
 	break;
 

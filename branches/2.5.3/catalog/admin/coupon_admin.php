@@ -73,7 +73,7 @@ $Id$
   }
 
   if ($_GET['mail_sent_to']) {
-    $messageStack->add(sprintf(NOTICE_EMAIL_SENT_TO, $_GET['mail_sent_to']), 'notice');
+    $messageStack->add(sprintf(NOTICE_EMAIL_SENT_TO, $_GET['mail_sent_to']), 'success');
   }
 
   $coupon_id = ((isset($_GET['cid'])) ? tep_db_prepare_input($_GET['cid']) : '');
@@ -391,20 +391,6 @@ $customer = tep_db_fetch_array($customer_query);
                               </tr>
                               <tr>
                                 <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_COUPON_ADMIN) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
-                              </tr>
-                              <tr>
-                                <td class="smallText">
-                                <?php
-                                if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {
-							      echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="back"');
-                                }
-								if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {
-							      echo(TEXT_EMAIL_BUTTON_HTML);
-                                } else { 
-								  echo(TEXT_EMAIL_BUTTON_TEXT);
-								}
-								?>
-                                </td>
                               </tr>
                             </table>
                           </td>

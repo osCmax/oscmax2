@@ -12,6 +12,7 @@ $Id$
   define('IMAGE_REDEEM_VOUCHER','Appliquer le code de coupon');
   define('MODULE_ORDER_TOTAL_GV_TITLE', 'Ch&egrave;que cadeau');
   define('MODULE_ORDER_TOTAL_GV_HEADER', 'Ch&egrave;que cadeau/Coupons de r&eacute;duction');
+  define('MODULE_ORDER_TOTAL_GV_CLAIMED', 'You have sucessfully redeemed a coupon.');
   define('MODULE_ORDER_TOTAL_GV_DESCRIPTION', 'Ch&egrave;que cadeau');
   define('SHIPPING_NOT_INCLUDED', ' [Livraison non incluse]');
   define('TAX_NOT_INCLUDED', ' [Taxe non incluse]');

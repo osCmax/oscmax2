@@ -491,6 +491,7 @@ CREATE TABLE coupons (
   uses_per_user int(5) NOT NULL default '0',
   restrict_to_products varchar(255) default NULL,
   restrict_to_categories varchar(255) default NULL,
+  coupon_exclude_cg varchar(32) NOT NULL,
   restrict_to_customers text,
   coupon_active char(1) NOT NULL default 'Y',
   date_created datetime NOT NULL default '0000-00-00 00:00:00',

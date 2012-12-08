@@ -51,6 +51,8 @@ $Id$
 // if we have been here before and are coming back get rid of the credit covers variable
   if(tep_session_is_registered('credit_covers')) tep_session_unregister('credit_covers');
   if(tep_session_is_registered('cot_gv')) tep_session_unregister('cot_gv');
+  if (isset($_GET['remove_coupon'])) tep_session_unregister('cc_id');
+
 // EOF - MOD: CREDIT CLASS Gift Voucher Contribution
 
 // Stock Check

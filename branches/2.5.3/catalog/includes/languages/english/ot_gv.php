@@ -12,6 +12,7 @@ $Id$
   define('IMAGE_REDEEM_VOUCHER', 'Apply Coupon Code');
   define('MODULE_ORDER_TOTAL_GV_TITLE', 'Gift Vouchers (-) ');
   define('MODULE_ORDER_TOTAL_GV_HEADER', 'Enter code below if you have any gift vouchers or coupons you have not redeemed yet.');
+  define('MODULE_ORDER_TOTAL_GV_CLAIMED', 'You have sucessfully redeemed a coupon.');
   define('MODULE_ORDER_TOTAL_GV_DESCRIPTION', 'Gift Vouchers');
   define('SHIPPING_NOT_INCLUDED', ' [Shipping not included]');
   define('TAX_NOT_INCLUDED', ' [Tax not included]');

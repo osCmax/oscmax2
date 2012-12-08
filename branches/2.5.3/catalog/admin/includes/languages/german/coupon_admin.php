@@ -99,4 +99,7 @@ define('ERROR_MISSING_COUPON_NAME', 'Fehler: Sie haben keinen Gutscheinnamen ver
 define('ERROR_MISSING_START_DATE', 'Fehler: Sie müssen ein <b>Startdatum</b> für Ihren Gutschein eingeben.');
 define('ERROR_MISSING_FINISH_DATE', 'Fehler: Sie müssen ein <b>Ablaufdatum</b> für Ihren Gutschein eingeben.');
 
+define('COUPON_EXCLUDE_CG', 'Exclude customer group');
+define('COUPON_EXCLUDE_CG_HELP', 'A comma separated list of customer group ids that the coupon CAN NOT be used by.');
+
 ?>

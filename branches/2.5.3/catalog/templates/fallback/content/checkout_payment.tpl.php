@@ -142,16 +142,16 @@ $Id$
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+      <?php
+// BOF - CREDIT CLASS Gift Voucher Contribution
+        echo $order_total_modules->credit_selection();
+// EOF - CREDIT CLASS Gift Voucher Contribution ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
             <td class="main"><b><?php echo TABLE_HEADING_PAYMENT_METHOD; ?></b></td>
           </tr>
         </table></td>
-<?php
-// BOF - CREDIT CLASS Gift Voucher Contribution
-        echo $order_total_modules->credit_selection();
-// EOF - CREDIT CLASS Gift Voucher Contribution ?>
       </tr>
       <tr>
 <?php // BOF - CREDIT CLASS Gift Voucher Contribution ?>

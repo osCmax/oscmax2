@@ -99,4 +99,7 @@ define('ERROR_MISSING_COUPON_NAME', 'Error: You have not entered a coupon name i
 define('ERROR_MISSING_START_DATE', 'Error: You must enter <b>Start Date</b> for your coupon');
 define('ERROR_MISSING_FINISH_DATE', 'Error: You must enter <b>End Date</b> for your coupon');
 
+define('COUPON_EXCLUDE_CG', 'Exclude customer group');
+define('COUPON_EXCLUDE_CG_HELP', 'A comma separated list of customer group ids that the coupon CAN NOT be used by.');
+
 ?>

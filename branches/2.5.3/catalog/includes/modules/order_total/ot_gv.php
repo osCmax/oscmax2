@@ -16,7 +16,12 @@ $Id$
     function ot_gv() {
       $this->code = 'ot_gv';
       $this->title = MODULE_ORDER_TOTAL_GV_TITLE;
-      $this->header = MODULE_ORDER_TOTAL_GV_HEADER;
+	  // Change the header if coupon has been claimed
+	  if (!tep_session_is_registered('cc_id')) {
+        $this->header = MODULE_ORDER_TOTAL_GV_HEADER;
+	  } else {
+		$this->header = MODULE_ORDER_TOTAL_GV_CLAIMED;
+	  }
       $this->description = MODULE_ORDER_TOTAL_GV_DESCRIPTION;
       $this->user_prompt = MODULE_ORDER_TOTAL_GV_USER_PROMPT;
       $this->enabled = MODULE_ORDER_TOTAL_GV_STATUS;

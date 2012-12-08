@@ -78,27 +78,47 @@ function use_credit_amount() {
 
 
 function credit_selection() {
-global $customer_id, $currencies, $language;
+global $customer_id, $currencies, $language, $cc_id, $languages_id;
   // START Checkout Display Fix by BTBlomberg
-  $selection_string  = '<tr><td></td><td>';		
-  $selection_string .= tep_draw_form('checkout_payment_gift', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post');
-  $selection_string .= '<table border="0" width="100%"><tr><td class="main" width="275">';
-  $selection_string .= TEXT_ENTER_GV_CODE . tep_draw_input_field('gv_redeem_code', TEXT_GV_CODE_INPUT_DEFAULT) ;
-  $selection_string .= '</td><td align="left">';
-  $selection_string .= tep_image_submit('button_redeem.gif', IMAGE_REDEEM_VOUCHER, 'onclick="return submitFunction()"');
-  $selection_string .= '</td></tr></table></form></td></tr>';
+  if (tep_session_is_registered('cc_id')) {
+    $selection_string  = '<tr><td></td><td>';		
+    $selection_string .= '<table border="0" width="100%"><tr><td class="main" width="275">';
+	
+	// Now lets get the name of the coupon and the description
+	$coupon_desc_query = tep_db_query("select c.coupon_code, cd.coupon_name, cd.coupon_description from " . TABLE_COUPONS . " c, " . TABLE_COUPONS_DESCRIPTION . " cd where c.coupon_id = cd.coupon_id and c.coupon_id = '" . $cc_id . "' and cd.language_id = '" . $languages_id . "'");
+	$coupon = tep_db_fetch_array($coupon_desc_query);
+	
+    $selection_string .= TEXT_COUPON_REDEEMED . $coupon['coupon_code'];
+    $selection_string .= '</td><td align="right">';
+    $selection_string .= '<a href="' . tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'remove_coupon', 'SSL') . '">' . tep_image_button('button_wishlist_remove.gif', IMAGE_REMOVE). '</a>';
+    $selection_string .= '</td></tr>';
+	if ($coupon['coupon_description'] != '') $selection_string .= '<tr><td class="main" colspan="2">' . $coupon['coupon_description'] . '</td></tr>';
+	$selection_string .= '</table></td></tr>';
 	// END Checkout Display Fix by BTBlomberg
 	return $selection_string;
+  // They already entered a coupon code
+  } else {
+  // Let them enter one
+    $selection_string  = '<tr><td></td><td>';		
+    $selection_string .= tep_draw_form('checkout_payment_gift', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post');
+    $selection_string .= '<table border="0" width="100%"><tr><td class="main" width="275">';
+    $selection_string .= TEXT_ENTER_GV_CODE . tep_draw_input_field('gv_redeem_code', TEXT_GV_CODE_INPUT_DEFAULT) ;
+    $selection_string .= '</td><td align="right">';
+    $selection_string .= tep_image_submit('button_redeem.gif', IMAGE_REDEEM_VOUCHER, 'onclick="return submitFunction()"');
+    $selection_string .= '</td></tr></table></form></td></tr>';
+	// END Checkout Display Fix by BTBlomberg
+	return $selection_string;
+  }
 }
 
 
 function collect_posts() {
 // All tep_redirect URL parameters modified for this function in v5.13 by Rigadin
-global $_POST, $customer_id, $currencies, $cc_id;
+global $_POST, $customer_id, $currencies, $cc_id, $customer_group_id;
 	if ($_POST['gv_redeem_code']) {
 
 // get some info from the coupon table
-	$coupon_query=tep_db_query("select coupon_id, coupon_amount, coupon_type, coupon_minimum_order,uses_per_coupon, uses_per_user, restrict_to_products,restrict_to_categories from " . TABLE_COUPONS . " where coupon_code='".$_POST['gv_redeem_code']."' and coupon_active='Y'");
+	$coupon_query=tep_db_query("select coupon_id, coupon_amount, coupon_type, coupon_minimum_order,uses_per_coupon, uses_per_user, restrict_to_products,restrict_to_categories, coupon_exclude_cg from " . TABLE_COUPONS . " where coupon_code='".$_POST['gv_redeem_code']."' and coupon_active='Y'");
 	$coupon_result=tep_db_fetch_array($coupon_query);
 
 	if ($coupon_result['coupon_type'] != 'G') {
@@ -129,6 +149,12 @@ global $_POST, $customer_id, $currencies, $cc_id;
 		if (tep_db_num_rows($coupon_count_customer)>=$coupon_result['uses_per_user'] && $coupon_result['uses_per_user'] > 0) {
 			tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_INVALID_USES_USER_COUPON . $coupon_result['uses_per_user'] . TIMES ), 'SSL'));
 		}
+		
+		// Exclude coupons by customer group
+		if (strpos($coupon_result['coupon_exclude_cg'], $customer_group_id) !== false) {
+		  tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error='.$this->code.'&error=' . urlencode(ERROR_EXCLUDE_CG), 'SSL'));
+		}
+		
 //**si** 09-11-05
 /*
 		if ($coupon_result['coupon_type']=='S') {

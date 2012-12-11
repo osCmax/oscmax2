@@ -622,7 +622,7 @@ $customer = tep_db_fetch_array($customer_query);
       </tr>
       
       <tr>
-        <td align="left" class="main"><?php echo COUPON_EXLCUDE_CG; ?></td>
+        <td align="left" class="main"><?php echo COUPON_EXCLUDE_CG; ?></td>
         <td align="left" class="main"><?php echo $_POST['coupon_exclude_cg']; ?></td>
       </tr>
 

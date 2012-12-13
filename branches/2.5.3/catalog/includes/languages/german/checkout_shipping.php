@@ -32,4 +32,6 @@ define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'Wählen Sie eine Zahlungsart im nächs
 // ship date
 define('TABLE_HEADING_SHIPPING_DATE', 'Gewünschtes Lieferdatum');
 define('TEXT_CHOOSE_SHIPPING_DATE', 'Wir versenden Ihre Bestellung so schnell wie möglich. <b>Oder</b> geben Sie ein Wunschlieferdatum an.');
+
+define('TEXT_INDV_SHIP', 'You have %s product with individual shipping total of %s. This total will be added to the shipping method selected.');
 ?>

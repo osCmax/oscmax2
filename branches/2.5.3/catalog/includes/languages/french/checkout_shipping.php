@@ -28,4 +28,6 @@ define('TABLE_HEADING_COMMENTS', 'Ajoutez des commentaires au sujet de votre com
 
 define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continuer la proc&eacute;dure de commande');
 define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'pour choisir la m&eacute;thode pr&eacute;f&eacute;r&eacute;e de paiement.');
+
+define('TEXT_INDV_SHIP', 'You have %s product with individual shipping total of %s. This total will be added to the shipping method selected.');
 ?>

@@ -32,4 +32,6 @@ define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'para seleccionar la forma de pago.')
 // ship date
 define('TABLE_HEADING_SHIPPING_DATE', 'Fecha de reparto preferida');
 define('TEXT_CHOOSE_SHIPPING_DATE', 'Realizaremos el reparto de su pedido lo antes posible <b>O</b> puede especificar una fecha de reparto preferida.');
+
+define('TEXT_INDV_SHIP', 'You have %s product with individual shipping total of %s. This total will be added to the shipping method selected.');
 ?>

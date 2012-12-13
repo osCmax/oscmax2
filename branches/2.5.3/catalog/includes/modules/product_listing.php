@@ -62,9 +62,9 @@ $_SESSION['gridlist'] = 'list';
 $listing_split = new splitPageResults($listing_sql, $max_results, 'p.products_id');
   if ( (PREV_NEXT_BAR_LOCATION == '1') || (PREV_NEXT_BAR_LOCATION == '3') ) {
 
-$list = '<table align="left"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '"> ' . tep_image(DIR_WS_ICONS . 'list.png', 'View as List') . '</a></td><td class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '">' . TEXT_VIEW_AS_LIST . '</a></td></tr></table>';
+$list = '<table align="left"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '"> ' . tep_image(DIR_WS_ICONS . 'list.png', TEXT_VIEW_AS_LIST) . '</a></td><td class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '">' . TEXT_VIEW_AS_LIST . '</a></td></tr></table>';
 
-$grid = '<table align="left"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '"> ' . tep_image(DIR_WS_ICONS . 'grid.png', 'View as Grid') . '</a></td><td class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '">' . TEXT_VIEW_AS_GRID . '</a></td></tr></table>';
+$grid = '<table align="left"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '"> ' . tep_image(DIR_WS_ICONS . 'grid.png', TEXT_VIEW_AS_GRID) . '</a></td><td class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=grid') . '">' . TEXT_VIEW_AS_GRID . '</a></td></tr></table>';
 
 // BOF SPPC Hide products and categories from groups
   $page =  $_SERVER["SCRIPT_NAME"];

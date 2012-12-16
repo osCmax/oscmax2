@@ -87,4 +87,6 @@ define('TEXT_DELETE_ORPHANS', 'Delete Orphan Images');
 define('TEXT_CONFIRM_DELETE_ORPHANS', 'Please confirm that you wish to delete all your orphan images.<br><br>  This action <b>can not be undone</b> and it is <i>strongly recommended</i> that you <b>back up your data</b> prior to using this function.');
 define('TEXT_ORPHAN_REMOVED', 'orphan(s) image removed.');
 
+define('TEXT_IMAGE_SIZE', 'Hide images < than: ');
+define('TEXT_FILTER', 'Filter by category: ');
 ?>

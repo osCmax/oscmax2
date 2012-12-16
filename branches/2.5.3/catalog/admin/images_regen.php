@@ -68,7 +68,16 @@ function format_size($size) {
           <table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
               <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-              <td class="pageHeading" align="right">&nbsp;</td>
+              <td align="right" class="main">
+              
+              <?php if ($action == 'browse') {
+				echo tep_draw_form('filter', FILENAME_IMAGES_REGEN, tep_get_all_get_params(array()), 'post');
+                echo tep_hide_session_id();
+				echo TEXT_IMAGE_SIZE . tep_draw_input_field('max_image_size', (isset($_POST['max_image_size']) ? $_POST['max_image_size'] : ''), 'size=5') . 'kB &nbsp; ';
+                echo TEXT_FILTER . tep_draw_pull_down_menu('categories_id', tep_get_category_tree(), '', 'onChange="this.form.submit();"');
+				echo '</form>';
+              } ?>
+              </td>
             </tr>
             <?php if ($action == 'regenerate_all') { ?>
 		    <tr>
@@ -125,8 +134,14 @@ function format_size($size) {
                     <td class="dataTableHeadingContent" align="center">&nbsp;</td>
                     <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
                   </tr>
-                    <?php				
-                    $images_query_raw = "select p.products_id, p.products_image, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'";
+                    
+					<?php			
+					$cat_filter = '';
+					if (isset($_POST['categories_id']) && $_POST['categories_id'] != '0') {
+					  $cat_filter = ' and p2c.categories_id = ' . (int)$_POST['categories_id'];
+					}
+					
+                    $images_query_raw = "select distinct p.products_id, p.products_image, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and p.products_id = p2c.products_id " . $cat_filter . " and pd.language_id = '" . (int)$languages_id . "'";
                     $images_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $images_query_raw, $images_query_numrows);
                     $images_query = tep_db_query($images_query_raw);
                     while ($images = tep_db_fetch_array($images_query)) {
@@ -209,6 +224,8 @@ function format_size($size) {
 					    } // end if
 					  } // end while
 					} // end for
+					
+					if (!isset($_POST['max_image_size']) || ($image_file_size_lg > ($_POST['max_image_size'] * 1024))) {
 					  
 			        if (isset($iInfo) && is_object($iInfo) && ($images['products_id'] == $iInfo->products_id) ) {
                       echo '<tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_IMAGES_REGEN, 'page=' . $_GET['page'] . '&amp;iID=' . $iInfo->products_id . '&amp;action=browse') . '\'">' . "\n";
@@ -233,7 +250,10 @@ function format_size($size) {
                       </td>
                       <td class="dataTableContent" align="right"><?php if (isset($iInfo) && is_object($iInfo) && ($images['products_id'] == $iInfo->products_id) ) { echo tep_image(DIR_WS_ICONS . 'icon_arrow_right.gif'); } else { echo '<a href="' . tep_href_link(FILENAME_IMAGES_REGEN, 'page=' . $_GET['page'] . '&amp;iID=' . $images['products_id']) . '&amp;action=browse">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
                   </tr>
+                  
+                  
 				  <?php
+					  }
 					}
 				  ?>
                   <tr>

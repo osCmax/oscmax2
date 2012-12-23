@@ -71,9 +71,10 @@ function format_size($size) {
               <td align="right" class="main">
               
               <?php if ($action == 'browse') {
-				echo tep_draw_form('filter', FILENAME_IMAGES_REGEN, tep_get_all_get_params(array()), 'post');
+				echo tep_draw_form('filter', FILENAME_IMAGES_REGEN, tep_get_all_get_params(array()), 'get');
                 echo tep_hide_session_id();
-				echo TEXT_IMAGE_SIZE . tep_draw_input_field('max_image_size', (isset($_POST['max_image_size']) ? $_POST['max_image_size'] : ''), 'size=5') . 'kB &nbsp; ';
+				echo tep_draw_hidden_field('action', 'browse');
+				echo TEXT_IMAGE_SIZE . tep_draw_input_field('max_image_size', (isset($_GET['max_image_size']) ? $_GET['max_image_size'] : ''), 'size=5') . 'kB &nbsp; ';
                 echo TEXT_FILTER . tep_draw_pull_down_menu('categories_id', tep_get_category_tree(), '', 'onChange="this.form.submit();"');
 				echo '</form>';
               } ?>
@@ -137,8 +138,8 @@ function format_size($size) {
                     
 					<?php			
 					$cat_filter = '';
-					if (isset($_POST['categories_id']) && $_POST['categories_id'] != '0') {
-					  $cat_filter = ' and p2c.categories_id = ' . (int)$_POST['categories_id'];
+					if (isset($_GET['categories_id']) && $_GET['categories_id'] != '0') {
+					  $cat_filter = ' and p2c.categories_id = ' . (int)$_GET['categories_id'];
 					}
 					
                     $images_query_raw = "select distinct p.products_id, p.products_image, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = pd.products_id and p.products_id = p2c.products_id " . $cat_filter . " and pd.language_id = '" . (int)$languages_id . "'";
@@ -228,9 +229,9 @@ function format_size($size) {
 					if (!isset($_POST['max_image_size']) || ($image_file_size_lg > ($_POST['max_image_size'] * 1024))) {
 					  
 			        if (isset($iInfo) && is_object($iInfo) && ($images['products_id'] == $iInfo->products_id) ) {
-                      echo '<tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_IMAGES_REGEN, 'page=' . $_GET['page'] . '&amp;iID=' . $iInfo->products_id . '&amp;action=browse') . '\'">' . "\n";
+                      echo '<tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_IMAGES_REGEN, tep_get_all_get_params(array('browse')) . 'page=' . $_GET['page'] . '&amp;iID=' . $iInfo->products_id . '&amp;action=browse') . '\'">' . "\n";
                     } else {
-                      echo '<tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_IMAGES_REGEN, 'page=' . $_GET['page'] . '&amp;iID=' . $images['products_id']) . '&amp;action=browse' . '\'">' . "\n";
+                      echo '<tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_IMAGES_REGEN, tep_get_all_get_params(array('browse')) . 'page=' . $_GET['page'] . '&amp;iID=' . $images['products_id']) . '&amp;action=browse' . '\'">' . "\n";
     }
 	                  ?>
 					  <td class="dataTableContent"><?php echo $images['products_id']; ?></td>

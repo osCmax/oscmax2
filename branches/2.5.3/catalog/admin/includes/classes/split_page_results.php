@@ -26,7 +26,8 @@ $Id$
       $pos_order_by = strpos($sql_query, ' order by', $pos_from);
       if (($pos_order_by < $pos_to) && ($pos_order_by != false)) $pos_to = $pos_order_by;
 
-      $reviews_count_query = tep_db_query("select count(*) as total " . substr($sql_query, $pos_from, ($pos_to - $pos_from)));
+      //$reviews_count_query = tep_db_query("select count(*) as total " . substr($sql_query, $pos_from, ($pos_to - $pos_from))); 
+      $reviews_count_query = tep_db_query("select count(*) as total from (" . $sql_query . ") AS derivedtable1");
       $reviews_count = tep_db_fetch_array($reviews_count_query);
       $query_num_rows = $reviews_count['total'];
 

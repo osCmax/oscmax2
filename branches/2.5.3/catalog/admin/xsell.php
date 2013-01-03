@@ -482,9 +482,9 @@ $Id$
               <?php
 				if (isset($_GET['search_edit_xsell'])) {
 		          $search = tep_db_prepare_input($_GET['search_edit_xsell']);
-				  $products_query_raw = 'select distinct p.products_id, p.products_model, pd.products_name, p.products_image, p.products_price, p.products_tax_class_id, p.products_id from '.TABLE_PRODUCTS.' p, ' . TABLE_PRODUCTS_DESCRIPTION . ' pd, ' . TABLE_PRODUCTS_XSELL . ' x, ' . TABLE_PRODUCTS_TO_CATEGORIES . ' p2c where p.products_id = x.products_id and p.products_id = p2c.products_id and p.products_id = pd.products_id and ((pd.products_name like "%' . tep_db_prepare_input(addslashes($search)) . '%") or (p.products_model like "%' . tep_db_prepare_input(addslashes($search)) . '%")) and pd.language_id = "' . (int)$languages_id . '" ' . $list_string_ex . ' group by p.products_id order by pd.products_name asc';
+				  $products_query_raw = 'select distinct p.products_id, p.products_model, pd.products_name, p.products_image, p.products_price, p.products_tax_class_id from '.TABLE_PRODUCTS.' p, ' . TABLE_PRODUCTS_DESCRIPTION . ' pd, ' . TABLE_PRODUCTS_XSELL . ' x, ' . TABLE_PRODUCTS_TO_CATEGORIES . ' p2c where p.products_id = x.products_id and p.products_id = p2c.products_id and p.products_id = pd.products_id and ((pd.products_name like "%' . tep_db_prepare_input(addslashes($search)) . '%") or (p.products_model like "%' . tep_db_prepare_input(addslashes($search)) . '%")) and pd.language_id = "' . (int)$languages_id . '" ' . $list_string_ex . ' group by p.products_id order by pd.products_name asc';
 				} else { 
-		          $products_query_raw = 'select distinct p.products_id, p.products_model, pd.products_name, p.products_image, p.products_price, p.products_tax_class_id, p.products_id from '.TABLE_PRODUCTS.' p, ' . TABLE_PRODUCTS_DESCRIPTION . ' pd, ' . TABLE_PRODUCTS_XSELL . ' x, ' . TABLE_PRODUCTS_TO_CATEGORIES . ' p2c where p.products_id = x.products_id and p.products_id = p2c.products_id and p.products_id = pd.products_id and pd.language_id = "' . (int)$languages_id . '" ' . $list_string_ex . ' group by p.products_id order by pd.products_name asc';
+		          $products_query_raw = 'select distinct p.products_id, p.products_model, pd.products_name, p.products_image, p.products_price, p.products_tax_class_id from '.TABLE_PRODUCTS.' p, ' . TABLE_PRODUCTS_DESCRIPTION . ' pd, ' . TABLE_PRODUCTS_XSELL . ' x, ' . TABLE_PRODUCTS_TO_CATEGORIES . ' p2c where p.products_id = x.products_id and p.products_id = p2c.products_id and p.products_id = pd.products_id and pd.language_id = "' . (int)$languages_id . '" ' . $list_string_ex . ' group by p.products_id order by pd.products_name asc';
 				} // end if (isset($_GET['search_edit_xsell']))
 				$products_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $products_query_raw, $products_query_numrows);
 			    $products_query_numrows = tep_db_query($products_query_raw);
@@ -508,7 +508,7 @@ $Id$
 		        <td class="dataTableContent" valign="top">
                   <table border="0" width="100%" cellspacing="0" cellpadding="0">
 	              <?php
-		          $products_cross_query = tep_db_query('select p.products_id, p.products_model, pd.products_name, p.products_id, x.products_id, x.xsell_id, x.sort_order, x.ID from '.TABLE_PRODUCTS.' p, '.TABLE_PRODUCTS_DESCRIPTION.' pd, '.TABLE_PRODUCTS_XSELL.' x where x.xsell_id = p.products_id and x.products_id = "'.$products['products_id'].'" and p.products_id = pd.products_id and pd.language_id = "'.(int)$languages_id.'" order by x.sort_order asc');
+		          $products_cross_query = tep_db_query('select p.products_id, p.products_model, pd.products_name, x.products_id, x.xsell_id, x.sort_order, x.ID from '.TABLE_PRODUCTS.' p, '.TABLE_PRODUCTS_DESCRIPTION.' pd, '.TABLE_PRODUCTS_XSELL.' x where x.xsell_id = p.products_id and x.products_id = "'.$products['products_id'].'" and p.products_id = pd.products_id and pd.language_id = "'.(int)$languages_id.'" order by x.sort_order asc');
 			      $i=0;
 			      while ($products_cross = tep_db_fetch_array($products_cross_query)) {
 			        $i++;
@@ -587,7 +587,7 @@ $Id$
 		        <td class="dataTableContent" valign="top">
                   <table border="0" width="100%" cellspacing="0" cellpadding="0">
 	<?php
-		$products_cross_query = tep_db_query('select p.products_id, p.products_model, pd.products_name, p.products_id, x.products_id, x.xsell_id, x.sort_order, x.ID from '.TABLE_PRODUCTS.' p, '.TABLE_PRODUCTS_DESCRIPTION.' pd, '.TABLE_PRODUCTS_XSELL.' x where x.xsell_id = p.products_id and x.products_id = "'.$products['products_id'].'" and p.products_id = pd.products_id and pd.language_id = "'.(int)$languages_id.'" order by x.sort_order asc');
+		$products_cross_query = tep_db_query('select p.products_id, p.products_model, pd.products_name, x.products_id, x.xsell_id, x.sort_order, x.ID from '.TABLE_PRODUCTS.' p, '.TABLE_PRODUCTS_DESCRIPTION.' pd, '.TABLE_PRODUCTS_XSELL.' x where x.xsell_id = p.products_id and x.products_id = "'.$products['products_id'].'" and p.products_id = pd.products_id and pd.language_id = "'.(int)$languages_id.'" order by x.sort_order asc');
 			$i=0;
 			while ($products_cross = tep_db_fetch_array($products_cross_query)) {
 			  $i++;

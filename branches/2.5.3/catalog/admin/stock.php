@@ -202,7 +202,7 @@ $Id$
                                 }
                               } else {
                                 $i=1;
-                                echo "<td class=dataTableHeadingContent valign=\"middle\">" . TABLE_HEADING_QTY . "</td>";
+                                echo "<form action=$PHP_SELF method=get><td class=dataTableHeadingContent valign=\"middle\">" . TABLE_HEADING_QTY . "</td>";
                               }
                               echo "<td class=dataTableHeadingRow valign=\"middle\"><input style=\"margin-top:18px\" type=text name=quantity size=4 value=\"" . $db_quantity . "\"><input type=hidden name=product_id value=\"" . $VARS['product_id'] . "\">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow valign=\"middle\">&nbsp;<input type=submit name=action value=" . ($flag ? TEXT_ADD : TEXT_UPDATE) . ">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow>&nbsp;</td>";
                             ?>

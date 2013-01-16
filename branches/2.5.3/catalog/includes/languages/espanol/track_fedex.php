@@ -19,7 +19,7 @@ $Id$
   define('DELIVERED_FRONTDOOR','Paquete dejado en la puerta principal, no se requiere la firma.');
   define('DELIVERED_SIDEDOOR','Paquete dejado en la puerta lateral, no se requiere la firma.');
   define('DELIVERED_GARAGE','Paquete dejado en el garaje, no se requiere la firma.');
-  define('DELIVERED_BACKDOOR','Paquete dejó en la puerta trasera, no se requiere la firma.');
+  define('DELIVERED_BACKDOOR','Paquete dejado en la puerta trasera, no se requiere la firma.');
   define('PACKAGE_DESTINATION','Destino del paquete:');
   define('PACKAGE_STATUS','Estado de la entrega del paquete:');
 ?>

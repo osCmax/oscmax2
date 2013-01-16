@@ -21,6 +21,6 @@ define('MAIL_AFFILIATE_ID', 'Su ID de afiliado es: %s' . "\n");
 define('MAIL_AFFILIATE_USERNAME', 'Su nombre de usuario es: %s' . "\n");
 define('MAIL_AFFILIATE_PASSWORD', 'Su contraseña es: %s' . "\n");
 define('MAIL_AFFILIATE_LINK', 'Enlace a su cuenta: %s');
-define('MAIL_AFFILIATE_FOOTER', '¿Diviértase ganando comisiones por referencias!'."\n\n".'Su equipo del Programa de afiliados de <b>%s</b>' . "\n" . '%s');
+define('MAIL_AFFILIATE_FOOTER', '¡Diviértase ganando comisiones por referencias!'."\n\n".'Su equipo del Programa de afiliados de %s' . "\n" . '%s');
 define('IMAGE_BUTTON_MAT', 'Por favor, acepte los Términos y Condiciones');
 ?>

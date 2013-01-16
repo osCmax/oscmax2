@@ -19,6 +19,6 @@ define('MODULE_SHIPPING_RMAIRSURE_TEXT_UNITS', 'Kg\'s');
 define('MODULE_SHIPPING_RMAIRSURE_INVALID_ZONE', 'Lo sentimos, esta forma de envío sólo está disponible para clientes de fuera del Reino Unido');
 define('MODULE_SHIPPING_RMAIRSURE_UNDEFINED_RATE', 'Los gastos de envío no se pueden determinar en este momento');
 define('MODULE_SHIPPING_RMAIRSURE_DELIVERY_NO_INSURANCE', 'Sin seguro');
-define('MODULE_SHIPPING_RMAIRSURE_DELIVERY_INSURANCE', 'Asegurado hasta &pound;');
+define('MODULE_SHIPPING_RMAIRSURE_DELIVERY_INSURANCE', 'Asegurado hasta &libra;');
 define('MODULE_SHIPPING_RMAIRSURE_DELIVERY_SHIPPING_TIME', 'se envía normalmente entre 3 y 5 días después de realizar el pedido');
 ?>

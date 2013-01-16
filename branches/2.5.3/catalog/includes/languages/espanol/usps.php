@@ -17,5 +17,5 @@ define('MODULE_SHIPPING_USPS_TEXT_DAY', 'Día');
 define('MODULE_SHIPPING_USPS_TEXT_DAYS', 'Días');
 define('MODULE_SHIPPING_USPS_TEXT_WEEKS', 'Semanas');
 define('MODULE_SHIPPING_USPS_TEXT_ESTIMATED', '---Tiempo de entrega aprox. ');
-define('MODULE_SHIPPING_USPS_TEXT_INSURED', '---Aseurado por ');
+define('MODULE_SHIPPING_USPS_TEXT_INSURED', '---Asegurado por ');
 ?>

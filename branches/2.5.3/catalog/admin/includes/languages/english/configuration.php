@@ -355,7 +355,7 @@ define('CD_PRODUCT_LIST_FILTER', 'Do you want to display the Category/Manufactur
 define('CT_PREV_NEXT_BAR_LOCATION', 'Location of Prev/Next Navigation Bar (1-top; 2-bottom; 3-both)');
 define('CD_PREV_NEXT_BAR_LOCATION', 'Sets the location of the Prev/Next Navigation Bar (1-top; 2-bottom; 3-both)');
 define('CT_PRODUCT_CORNER_BANNER', 'Display Corner Banners');
-define('CD_PRODUCT_CORNER_BANNER', 'Do you want to display the Corner Banners?<br><br><b>Please note that this must be set to 1 to work properly as it needs to be shown before all other Product Listing items</b>');
+define('CD_PRODUCT_CORNER_BANNER', 'Do you want to display the Corner Banners?<br><br><b>Please note that this must be set to 1 to work properly, if turned off (0) then column titles will not line up over their respective elements. Adjust Corner Banner behaviour in >>Configuration>>Templates>>Corner Banners</b>');
 define('CT_ALLOW_CATEGORY_DESCRIPTIONS', 'Display Category Descriptions');
 define('CD_ALLOW_CATEGORY_DESCRIPTIONS', 'Do you want to display category descriptions in your store?');
 define('CT_PRODUCT_LIST_NUM_COLUMNS', 'Number of Columns for product listings');

@@ -116,10 +116,10 @@ CREATE TABLE affiliate_affiliate (
   affiliate_payment_bank_swift_code varchar(64) NOT NULL,
   affiliate_payment_bank_account_name varchar(64) NOT NULL,
   affiliate_payment_bank_account_number varchar(64) NOT NULL,
-  affiliate_date_of_last_logon datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_date_of_last_logon datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_number_of_logons int NOT NULL default '0',
-  affiliate_date_account_created datetime NOT NULL default '0000-00-00 00:00:00',
-  affiliate_date_account_last_modified datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_date_account_created datetime NOT NULL default '0001-01-01 01:01:01',
+  affiliate_date_account_last_modified datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_lft int NOT NULL,
   affiliate_rgt int NOT NULL,
   affiliate_root int NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE affiliate_banners (
   affiliate_expires_impressions int(7) default '0',
   affiliate_expires_date datetime default NULL,
   affiliate_date_scheduled datetime default NULL,
-  affiliate_date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_date_added datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_date_status_change datetime default NULL,
   affiliate_status int(1) NOT NULL default '1',
   PRIMARY KEY (affiliate_banners_id)
@@ -153,7 +153,7 @@ CREATE TABLE affiliate_banners_history (
   affiliate_banners_affiliate_id int NOT NULL default '0',
   affiliate_banners_shown int NOT NULL default '0',
   affiliate_banners_clicks tinyint(4) NOT NULL default '0',
-  affiliate_banners_history_date date NOT NULL default '0000-00-00',
+  affiliate_banners_history_date date NOT NULL default '0001-01-01',
   PRIMARY KEY (affiliate_banners_history_id, affiliate_banners_products_id)
 );
 
@@ -161,7 +161,7 @@ DROP TABLE IF EXISTS affiliate_clickthroughs;
 CREATE TABLE affiliate_clickthroughs (
   affiliate_clickthrough_id int NOT NULL auto_increment,
   affiliate_id int NOT NULL default '0',
-  affiliate_clientdate datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_clientdate datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_clientbrowser varchar(200) default 'Could Not Find This Data',
   affiliate_clientip varchar(50) default 'Could Not Find This Data',
   affiliate_clientreferer varchar(200) default 'none detected (maybe a direct link)',
@@ -174,7 +174,7 @@ CREATE TABLE affiliate_clickthroughs (
 DROP TABLE IF EXISTS affiliate_news;
 CREATE TABLE affiliate_news (
   news_id int NOT NULL auto_increment,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  date_added datetime NOT NULL default '0001-01-01 01:01:01',
   news_status tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (news_id)
 );
@@ -185,7 +185,7 @@ CREATE TABLE affiliate_newsletters (
   title varchar(255) NOT NULL,
   content text NOT NULL,
   module varchar(255) NOT NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  date_added datetime NOT NULL default '0001-01-01 01:01:01',
   date_sent datetime default NULL,
   `status` int(1) default NULL,
   locked int(1) default '0',
@@ -211,8 +211,8 @@ CREATE TABLE affiliate_payment (
   affiliate_payment decimal(15,2) NOT NULL default '0.00',
   affiliate_payment_tax decimal(15,2) NOT NULL default '0.00',
   affiliate_payment_total decimal(15,2) NOT NULL default '0.00',
-  affiliate_payment_date datetime NOT NULL default '0000-00-00 00:00:00',
-  affiliate_payment_last_modified datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_payment_date datetime NOT NULL default '0001-01-01 01:01:01',
+  affiliate_payment_last_modified datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_payment_status int(5) NOT NULL default '0',
   affiliate_firstname varchar(32) NOT NULL,
   affiliate_lastname varchar(32) NOT NULL,
@@ -224,7 +224,7 @@ CREATE TABLE affiliate_payment (
   affiliate_company varchar(60) NOT NULL,
   affiliate_state varchar(32) NOT NULL default '0',
   affiliate_address_format_id int(5) NOT NULL default '0',
-  affiliate_last_modified datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_last_modified datetime NOT NULL default '0001-01-01 01:01:01',
   PRIMARY KEY (affiliate_payment_id)
 );
 
@@ -245,7 +245,7 @@ CREATE TABLE affiliate_payment_status_history (
   affiliate_payment_id int NOT NULL default '0',
   affiliate_new_value int(5) NOT NULL default '0',
   affiliate_old_value int(5) default NULL,
-  affiliate_date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_date_added datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_notified int(1) default '0',
   PRIMARY KEY (affiliate_status_history_id)
 );
@@ -253,7 +253,7 @@ CREATE TABLE affiliate_payment_status_history (
 DROP TABLE IF EXISTS affiliate_sales;
 CREATE TABLE affiliate_sales (
   affiliate_id int NOT NULL default '0',
-  affiliate_date datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_date datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_browser varchar(100) NOT NULL,
   affiliate_ipaddress varchar(20) NOT NULL,
   affiliate_orders_id int NOT NULL default '0',
@@ -485,8 +485,8 @@ CREATE TABLE coupons (
   coupon_code varchar(32) NOT NULL,
   coupon_amount decimal(8,4) NOT NULL default '0.0000',
   coupon_minimum_order decimal(8,4) NOT NULL default '0.0000',
-  coupon_start_date datetime NOT NULL default '0000-00-00 00:00:00',
-  coupon_expire_date datetime NOT NULL default '0000-00-00 00:00:00',
+  coupon_start_date datetime NOT NULL default '0001-01-01 01:01:01',
+  coupon_expire_date datetime NOT NULL default '0001-01-01 01:01:01',
   uses_per_coupon int(5) NOT NULL default '1',
   uses_per_user int(5) NOT NULL default '0',
   restrict_to_products varchar(255) default NULL,
@@ -494,8 +494,8 @@ CREATE TABLE coupons (
   coupon_exclude_cg varchar(32) NOT NULL,
   restrict_to_customers text,
   coupon_active char(1) NOT NULL default 'Y',
-  date_created datetime NOT NULL default '0000-00-00 00:00:00',
-  date_modified datetime NOT NULL default '0000-00-00 00:00:00',
+  date_created datetime NOT NULL default '0001-01-01 01:01:01',
+  date_modified datetime NOT NULL default '0001-01-01 01:01:01',
   PRIMARY KEY (coupon_id)
 );
 
@@ -546,7 +546,7 @@ CREATE TABLE coupon_redeem_track (
   unique_id int NOT NULL auto_increment,
   coupon_id int NOT NULL default '0',
   customer_id int NOT NULL default '0',
-  redeem_date datetime NOT NULL default '0000-00-00 00:00:00',
+  redeem_date datetime NOT NULL default '0001-01-01 01:01:01',
   redeem_ip varchar(32) NOT NULL,
   order_id int NOT NULL default '0',
   PRIMARY KEY (unique_id)
@@ -575,7 +575,7 @@ CREATE TABLE customers (
   customers_gender char(1) NOT NULL,
   customers_firstname varchar(32) NOT NULL,
   customers_lastname varchar(32) NOT NULL,
-  customers_dob datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+  customers_dob datetime DEFAULT '0001-01-01 01:01:01' NOT NULL,
   customers_email_address varchar(96) NOT NULL,
   customers_default_address_id int,
   customers_telephone varchar(32) NOT NULL,
@@ -1224,7 +1224,7 @@ CREATE TABLE shipping_manifest (
   package_weight char(3) NOT NULL,
   package_value varchar(4) NOT NULL,
   oversized int(1) NOT NULL default '0',
-  pickup_date date NOT NULL default '0000-00-00',
+  pickup_date date NOT NULL default '0001-01-01',
   shipping_type varchar(64) NOT NULL,
   residential char(1) NOT NULL,
   cod int(1) NOT NULL default '0',
@@ -1293,7 +1293,7 @@ CREATE TABLE theme_configuration (
   location int(5) NOT NULL default '0',
   sort_order int(5) default NULL,
   last_modified datetime default NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  date_added datetime NOT NULL default '0001-01-01 01:01:01',
   box_heading varchar(64) NOT NULL,
   PRIMARY KEY (configuration_id)
 );

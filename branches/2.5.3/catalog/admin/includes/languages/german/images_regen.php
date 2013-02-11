@@ -87,7 +87,6 @@ define('TEXT_DELETE_ORPHANS', 'Verwaiste Bilder löschen');
 define('TEXT_CONFIRM_DELETE_ORPHANS', 'Möchten Sie wirklich alle verwaisten Bilder löschen?<br><br>  Dieser Vorgang <b>kann nicht rückgängig gemacht werden</b> und Sie sollten daher <i>unbedingt</i> eine <b>Sicherung Ihrer Daten</b> anlegen, bevor Sie diese Funktion nutzen.');
 define('TEXT_ORPHAN_REMOVED', 'verwaiste Bilder entfernt.');
 
-define('TEXT_IMAGE_SIZE', 'Hide images < than: ');
-define('TEXT_FILTER', 'Filter by category: ');
-
+define('TEXT_IMAGE_SIZE', 'Bilder < als verstecken: ');
+define('TEXT_FILTER', 'Nach Kategorie filtern: ');
 ?>

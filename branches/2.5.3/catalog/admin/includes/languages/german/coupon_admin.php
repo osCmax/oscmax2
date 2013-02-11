@@ -78,8 +78,8 @@ define('COUPON_DESC_HELP', 'Die Beschreibung des Gutscheines für den Kunden');
 define('COUPON_MIN_ORDER_HELP', 'Die Mindestbestellmenge, unter der der Gutschein nicht verwendet werden kann');
 define('COUPON_USES_COUPON_HELP', 'Legen Sie fest, wie oft der Gutschein maximal verwendet werden kann. Lassen Sie das Feld leer, wenn Sie eine unbegrenzte Verwendung wünschen.');
 define('COUPON_USES_USER_HELP', 'Legen Sie fest, wie oft der Gutschein von einem einzelnen Kunden maximal verwendet werden kann. Lassen Sie das Feld leer, wenn Sie eine unbegrenzte Verwendung wünschen.');
-define('COUPON_PRODUCTS_HELP', 'Eine kommaseparierte Liste von Produkt IDs, für die dieser Gutschein gilt. Lassen Sie das Feld leer, wenn Sie den Gutschein nicht auf bestimmte Produkte beschränken möchten.');
-define('COUPON_CATEGORIES_HELP', 'Eine kommaseparierte Liste von cpaths, für die dieser Gutschein gilt. Lassen Sie das Feld leer, wenn Sie den Gutschein nicht auf bestimmte Kategorien beschränken möchten.');
+define('COUPON_PRODUCTS_HELP', 'Eine kommagetrennte Liste von Produkt-IDs, für die dieser Gutschein gilt. Lassen Sie das Feld leer, wenn Sie den Gutschein nicht auf bestimmte Produkte beschränken möchten.');
+define('COUPON_CATEGORIES_HELP', 'Eine kommagetrennte Liste von cpaths, für die dieser Gutschein gilt. Lassen Sie das Feld leer, wenn Sie den Gutschein nicht auf bestimmte Kategorien beschränken möchten.');
 define('COUPON_BUTTON_EMAIL_VOUCHER', 'Gutschein versenden');
 define('COUPON_BUTTON_EDIT_VOUCHER', 'Gutschein bearbeiten');
 define('COUPON_BUTTON_DELETE_VOUCHER', 'Gutschein löschen');
@@ -99,7 +99,7 @@ define('ERROR_MISSING_COUPON_NAME', 'Fehler: Sie haben keinen Gutscheinnamen ver
 define('ERROR_MISSING_START_DATE', 'Fehler: Sie müssen ein <b>Startdatum</b> für Ihren Gutschein eingeben.');
 define('ERROR_MISSING_FINISH_DATE', 'Fehler: Sie müssen ein <b>Ablaufdatum</b> für Ihren Gutschein eingeben.');
 
-define('COUPON_EXCLUDE_CG', 'Exclude customer group');
-define('COUPON_EXCLUDE_CG_HELP', 'A comma separated list of customer group ids that the coupon CAN NOT be used by.');
+define('COUPON_EXCLUDE_CG', 'Kundengruppe ausschließen');
+define('COUPON_EXCLUDE_CG_HELP', 'Eine kommagetrennte Liste von Kundengruppen-IDs, die den Gutschein NICHT einlösen können.');
 
 ?>

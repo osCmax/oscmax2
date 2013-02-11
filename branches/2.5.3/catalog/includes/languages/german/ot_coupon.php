@@ -30,6 +30,6 @@ $Id$
   define('REDEEMED_RESTRICTIONS', ' [Es gelten Beschränkungen für Produkte bzw. Kategorien]');
   define('TEXT_ENTER_COUPON_CODE', 'Geben Sie Ihren Gutscheincode ein&nbsp;&nbsp;');
   define('MODULE_ORDER_TOTAL_COUPON_TEXT_ERROR', 'Eingelöster Gutschein');
-  define('TEXT_COUPON_REDEEMED', 'Coupon code: ');
-  define('ERROR_EXCLUDE_CG', 'Sorry - You are not eligible to use this coupon.');
+  define('TEXT_COUPON_REDEEMED', 'Gutscheincode: ');
+  define('ERROR_EXCLUDE_CG', 'Sie sind nicht berechtigt, diesen Gutschein einzulösen.');
 ?>

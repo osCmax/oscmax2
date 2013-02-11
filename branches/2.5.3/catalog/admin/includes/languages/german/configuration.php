@@ -209,8 +209,9 @@ define('CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Bestellstatus setzen: (Download er
 define('CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Der Bestellstatus wird auf den definierten Status gesetzt, wenn ein Kunde einen Bestellkommentar schreibt');
 define('CT_CHECKOUT_SHIPPING_DATE', 'Angabe des gewünschten Versanddatums anbieten?');
 define('CD_CHECKOUT_SHIPPING_DATE', 'Möchten Sie Ihren Kunden während des Bestellvorganges anbieten, ein Wunschversanddatum anzugeben?');
-define('CT_ACCOUNT_EMAIL_CONFIRMATION', 'Ask customer to reconfirm email address?');		
-define('CD_ACCOUNT_EMAIL_CONFIRMATION', 'Do you want to ask your customers to enter their email address twice to reduce errors?');
+define('CT_ACCOUNT_EMAIL_CONFIRMATION', 'Kunde muß E-Mail-Adresse bestätigen?');		
+define('CD_ACCOUNT_EMAIL_CONFIRMATION', 'Sollen Ihre Kunden ihre E-Mail-Adresse zweimal eingeben müssen, um Fehleingaben zu vermeiden?');
+
 
 // Configuration ID: 6 - Module Options - Hidden from Admin Panel
 define('CT_MODULE_PAYMENT_INSTALLED', 'Installierte Module');

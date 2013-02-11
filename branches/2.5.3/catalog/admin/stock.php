@@ -83,15 +83,15 @@ $Id$
       $list=tep_db_fetch_array($q);
       $summa= (empty($list[summa])) ? 0 : $list[summa];
       tep_db_query("update " . TABLE_PRODUCTS . " set products_quantity=$summa where products_id=" . (int)$VARS['product_id']);
-      if (($summa<1) && (STOCK_ALLOW_CHECKOUT == 'false')) {
-        tep_db_query("update " . TABLE_PRODUCTS . " set products_status='0' where products_id=" . (int)$VARS['product_id']);
+      if (($summa<1) && (STOCK_ALLOW_CHECKOUT == 'false') && (STOCK_SET_INACTIVE == 'true')) {
+        tep_db_query("update " . TABLE_PRODUCTS . " set products_status='2' where products_id=" . (int)$VARS['product_id']);
       }
     }
   }
   if ($VARS['action']==TEXT_UPDATE) {
     tep_db_query("update " . TABLE_PRODUCTS . " set products_quantity=" . (int)$VARS['quantity'] . " where products_id=" . (int)$VARS['product_id']);
-    if (($VARS['quantity']<1) && (STOCK_ALLOW_CHECKOUT == 'false')) {
-      tep_db_query("update " . TABLE_PRODUCTS . " set products_status='0' where products_id=" . (int)$VARS['product_id']);
+    if (($VARS['quantity']<1) && (STOCK_ALLOW_CHECKOUT == 'false') && (STOCK_SET_INACTIVE == 'true')) {
+      tep_db_query("update " . TABLE_PRODUCTS . " set products_status='2' where products_id=" . (int)$VARS['product_id']);
     }
   }
   

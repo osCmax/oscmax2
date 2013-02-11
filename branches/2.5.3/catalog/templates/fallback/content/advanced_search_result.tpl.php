@@ -393,11 +393,8 @@ foreach ($epf as $e) {
         // previous request
         if (isset($_SESSION['gridlist'])) { $gridlist = $_SESSION['gridlist']; }
 
-        if ($gridlist == 'list') {
-          include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
-        } else {
-          include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING_COL);
-        }
+        include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
+        
 // EOF:$Id$
 ?>
         </td>

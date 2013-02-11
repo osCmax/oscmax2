@@ -9,11 +9,18 @@ $Id$
 
   Released under the GNU General Public License
 */
+
+if ($gridlist == 'list') {
+  $_SESSION['gridlist'] = 'list';
+} else {
+  $_SESSION['gridlist'] = 'grid';
+}
+
 ?>
 <!-- PGM fix for Corner Banners in Internet Explorer -->
 <!--[if lte IE 8]>
 <style>
-img.corner_banner { display:inline-block; margin-left:-7px; margin-top:-7px; position:absolute; } 
+img.corner_banner { display:inline-block; margin-left:-<?php echo (($gridlist == 'list') ? '7' : '105'); ?>px; margin-top:-7px; position:absolute; } 
 </style>
 <![endif]-->
 
@@ -22,7 +29,6 @@ img.corner_banner { display:inline-block; margin-left:-7px; margin-top:-7px; pos
 
 if (tep_not_null($_GET['sort'])) $_GET['sort'] = $_GET['sort'];
 $max_results = (tep_not_null(isset($_GET['max'])) ? $_GET['max'] : MAX_CATALOG_DISPLAY_SEARCH_RESULTS);
-
 
 // sort order array
 for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
@@ -34,7 +40,7 @@ for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
         case 'PRODUCT_LIST_PRICE':
 		  $sort_array[] = array('id' => $i . 'a', 'text' => TEXT_PRICE_LOW_HIGH);
 		  $sort_array[] = array('id' => $i . 'd', 'text' => TEXT_PRICE_HIGH_LOW);
-          break;	
+          break;
 		case 'PRODUCT_LIST_BESTSELLER':
 		  $sort_array[] = array('id' => $i . 'd', 'text' => TEXT_PRICE_BESTSELLER);
           break;
@@ -55,9 +61,6 @@ $get_vars = '';
         $get_vars .= tep_draw_hidden_field($key, $value);
       }
     }
-
-// set gridlist session variable to list
-$_SESSION['gridlist'] = 'list';
 
 $listing_split = new splitPageResults($listing_sql, $max_results, 'p.products_id');
   if ( (PREV_NEXT_BAR_LOCATION == '1') || (PREV_NEXT_BAR_LOCATION == '3') ) {
@@ -163,82 +166,78 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   if (isset($pw_string)) echo $pw_string;
 
   $list_box_contents = array();
-  $lc_text = '';
-  $lc_align = '';
-  $short = '';
+  if ($gridlist == 'list') {
+    $lc_text = '';
+    $lc_align = '';
+    $short = '';
 
-  for ($col=0, $n=sizeof($column_list); $col<$n; $col++) {
-    switch ($column_list[$col]) {
-	  case 'PRODUCT_LIST_BESTSELLER':
-		$lc_text = '';
-		break;
-	  case 'PRODUCT_CORNER_BANNER':
-		$lc_text = '';
-		break;
-      case 'PRODUCT_LIST_MODEL':
-        $lc_text = TABLE_HEADING_MODEL;
-        $lc_align = '';
-// LINE ADDED
-        $lc_class = 'class="headerNavigation"';
-        break;
-      case 'PRODUCT_LIST_NAME':
-        $lc_text = TABLE_HEADING_PRODUCTS;
-        $lc_align = '';
-// LINE ADDED
-        $lc_class = 'class="headerNavigation"';
-        break;
-      case 'PRODUCT_LIST_MANUFACTURER':
-        $lc_text = TABLE_HEADING_MANUFACTURER;
-        $lc_align = '';
-// LINE ADDED
-        $lc_class = 'class="headerNavigation"';
-        break;
-      case 'PRODUCT_LIST_PRICE':
-        $lc_text = TABLE_HEADING_PRICE;
-        $lc_align = 'right';
-// LINE ADDED
-        $lc_class = 'class="headerNavigation"';
-        break;
-      case 'PRODUCT_LIST_QUANTITY':
-        $lc_text = TABLE_HEADING_QUANTITY;
-        $lc_align = 'right';
-// LINE ADDED
-        $lc_class = 'class="headerNavigation"';
-        break;
-      case 'PRODUCT_LIST_WEIGHT':
-        $lc_text = TABLE_HEADING_WEIGHT;
-        $lc_align = 'right';
-// LINE ADDED
-        $lc_class = 'class="headerNavigation"';
-        break;
-      case 'PRODUCT_LIST_IMAGE':
-        $lc_text = TABLE_HEADING_IMAGE;
-        $lc_align = 'center';
-// LINE ADDED
-        $lc_class = 'class="headerNavigation"';
-        break;
-      case 'PRODUCT_LIST_BUY_NOW':
-// Bugfix 0000069        
-//      $lc_text = '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'pName')) . 'action=buy_now&products_id=' . $listing['products_id']) . '">' . tep_image_button('button_buy_now.gif', IMAGE_BUTTON_BUY_NOW) . '</a> ';
-        $lc_text = TABLE_HEADING_BUY_NOW;
-// LINE ADDED
-        $lc_align = 'center';
-        break;
+    for ($col=0, $n=sizeof($column_list); $col<$n; $col++) {
+      switch ($column_list[$col]) {
+	    case 'PRODUCT_LIST_BESTSELLER':
+		  $lc_text = '';
+		  break;
+	    case 'PRODUCT_CORNER_BANNER':
+		  $lc_text = '';
+		  break;
+        case 'PRODUCT_LIST_MODEL':
+          $lc_text = TABLE_HEADING_MODEL;
+          $lc_align = '';
+          $lc_class = 'class="headerNavigation"';
+          break;
+        case 'PRODUCT_LIST_NAME':
+          $lc_text = TABLE_HEADING_PRODUCTS;
+          $lc_align = '';
+          $lc_class = 'class="headerNavigation"';
+          break;
+        case 'PRODUCT_LIST_MANUFACTURER':
+          $lc_text = TABLE_HEADING_MANUFACTURER;
+          $lc_align = '';
+          $lc_class = 'class="headerNavigation"';
+          break;
+        case 'PRODUCT_LIST_PRICE':
+          $lc_text = TABLE_HEADING_PRICE;
+          $lc_align = 'right';
+          $lc_class = 'class="headerNavigation"';
+          break;
+        case 'PRODUCT_LIST_QUANTITY':
+          $lc_text = TABLE_HEADING_QUANTITY;
+          $lc_align = 'right';
+          $lc_class = 'class="headerNavigation"';
+          break;
+        case 'PRODUCT_LIST_WEIGHT':
+          $lc_text = TABLE_HEADING_WEIGHT;
+          $lc_align = 'right';
+          $lc_class = 'class="headerNavigation"';
+          break;
+        case 'PRODUCT_LIST_IMAGE':
+          $lc_text = TABLE_HEADING_IMAGE;
+          $lc_align = 'center';
+          $lc_class = 'class="headerNavigation"';
+          break;
+        case 'PRODUCT_LIST_BUY_NOW':
+          $lc_text = TABLE_HEADING_BUY_NOW;
+          $lc_align = 'center';
+          break;
+      }
+
+      if ( ($column_list[$col] != 'PRODUCT_LIST_BUY_NOW') && ($column_list[$col] != 'PRODUCT_LIST_IMAGE') && ($column_list[$col] != 'PRODUCT_LIST_BESTSELLER') && ($column_list[$col] != 'PRODUCT_CORNER_BANNER')) {
+        $lc_text = tep_create_sort_heading($_GET['sort'], $col, $lc_text);
+      }
+
+      if ($column_list[$col] != 'PRODUCT_CORNER_BANNER') { // extra if to remove header for corner banners
+      $list_box_contents[0][] = array('align' => $lc_align,
+	                                  'params' => 'class="productListing-heading" style="cellpadding: 3px"',
+//                                      'params' => $lc_class,
+                                      'text' => '&nbsp;' . $lc_text . '&nbsp;');
+	  }
     }
-
-    if ( ($column_list[$col] != 'PRODUCT_LIST_BUY_NOW') && ($column_list[$col] != 'PRODUCT_LIST_IMAGE') && ($column_list[$col] != 'PRODUCT_LIST_BESTSELLER') && ($column_list[$col] != 'PRODUCT_CORNER_BANNER')) {
-      $lc_text = tep_create_sort_heading($_GET['sort'], $col, $lc_text);
-    }
-
-    if ($column_list[$col] != 'PRODUCT_CORNER_BANNER') { // extra if to remove header for corner banners
-    $list_box_contents[0][] = array('align' => $lc_align,
-	                                'params' => 'class="productListing-heading" style="cellpadding: 3px"',
-//                                    'params' => $lc_class,
-                                    'text' => '&nbsp;' . $lc_text . '&nbsp;');
-	}
-  }
+}
 
   if ($listing_split->number_of_rows > 0) {
+    if ($gridlist == 'grid') {
+      $row = 0;
+      $column = 0;
+    }
     $rows = 0;
     $listing_query = tep_db_query($listing_split->sql_query);
 // BOF: Separate Pricing per Customer
@@ -272,33 +271,58 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
   }
 }
 
-//    while ($listing = tep_db_fetch_array($listing_query)) { (was original code)
+if ($gridlist != 'list') {
+// WARNING the code assumes there are three products per row.
+  $counter = $row;
+  $class_for_buy_now = 'class="productListing-odd"';
+  $list_box_contents[$row] = array('params' => 'class="productListing-odd"');
+}
+
 	for ($x = 0; $x < $no_of_listings; $x++) {
 // EOF: MOD - Separate Pricing per Customer
 
       $rows++;
 
-      if (($rows/2) == floor($rows/2)) {
-        $list_box_contents[] = array('params' => 'class="productListing-even"');
+      if ($gridlist == 'list') {
+		// List View
+        if (($rows/2) == floor($rows/2)) {
+          $list_box_contents[] = array('params' => 'class="productListing-even"');
+        } else {
+          $list_box_contents[] = array('params' => 'class="productListing-odd"');
+        }
+
+        $cur_row = sizeof($list_box_contents) - 1;
       } else {
-        $list_box_contents[] = array('params' => 'class="productListing-odd"');
+		// Grid View
+        if (($rows/2) == floor($rows/2) && ($row > $counter)) {
+          $list_box_contents[$row] = array('params' => 'class="productListing-even"');
+          $class_for_buy_now = 'class="productListing-even"';
+          $counter = $row;
+        } else {
+          if ($row > $counter) {
+            $list_box_contents[$row] = array('params' => 'class="productListing-odd"');
+            $class_for_buy_now = 'class="productListing-odd"';
+            $counter = $row;
+          }
+        }
+        $product_contents = array();
       }
 
-      $cur_row = sizeof($list_box_contents) - 1;
-
       for ($col=0, $n=sizeof($column_list); $col<$n; $col++) {
-		  
+        
 		// Load product using PriceFormatter class
 		$price_breaks_from_listing = array();
         if (isset($price_breaks_array[$listing[$x]['products_id']])) {
           $price_breaks_from_listing = $price_breaks_array[$listing[$x]['products_id']];
         }
-        $pf->loadProduct($listing[$x]['products_id'], $languages_id, NULL, $price_breaks_from_listing); 
+        $pf->loadProduct($listing[$x]['products_id'], $languages_id, NULL, $price_breaks_from_listing);
 		
         $lc_align = '';
 
         switch ($column_list[$col]) {
-	
+		  case 'PRODUCT_LIST_BESTSELLER':
+		  $lc_text = '';
+		  break;
 		  case 'PRODUCT_CORNER_BANNER':
 		  $lc_text = '&nbsp;';
 		  
@@ -360,9 +384,6 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
 		    $lc_text = $lc_inc_link;
 		  }
 		  break;
-		  case 'PRODUCT_LIST_BESTSELLER':
-		  $lc_text = '';
-		  break;
           case 'PRODUCT_LIST_MODEL':
             $lc_align = '';
             $lc_text = '&nbsp;' . $listing[$x]['products_model'] . '&nbsp;';
@@ -392,16 +413,18 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
                 }
               }
             }
-			// add short description
-			if (PRODUCT_SHORT_DESCRIPTION == 'true') {
-			  $short = $listing[$x]['products_short'];
-			}
+            if ($gridlist == 'list') {
+              // add short description
+              if (PRODUCT_SHORT_DESCRIPTION == 'true') {
+                $short = $listing[$x]['products_short'];
+              }
+            }
             // end extra product fields
             $lc_align = '';
             if (isset($_GET['manufacturers_id'])) {
-              $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $_GET['manufacturers_id'] . '&products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] . $short /*begin epf*/ . $extra /*end epf*/ . '</a>';
+              $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $_GET['manufacturers_id'] . '&products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] . (($gridlist == 'list') ? $short : '') /*begin epf*/ . $extra /*end epf*/ . '</a>';
             } else {
-              $lc_text = '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] . $short /*begin epf*/ . $extra /*end epf*/ . '</a>&nbsp;';
+              $lc_text = '&nbsp;<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing[$x]['products_id']) . '">' . $listing[$x]['products_name'] . (($gridlist == 'list') ? $short : '') /*begin epf*/ . $extra /*end epf*/ . '</a>&nbsp;';
             }
             break;
           case 'PRODUCT_LIST_MANUFACTURER':
@@ -432,18 +455,70 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
             break;
           case 'PRODUCT_LIST_BUY_NOW':
             $lc_align = 'center';
-			$lc_text = $pf->getProductButtons($listing[$x]['products_id'], basename($PHP_SELF), $listing[$x]['products_model'], $listing[$x]['products_name'], $cPath);
+            $lc_text = $pf->getProductButtons($listing[$x]['products_id'], basename($PHP_SELF), $listing[$x]['products_model'], $listing[$x]['products_name'], $cPath);
             break;
 // EOF: MOD - Separate Pricing per Customer - Added on may lines [$x]
         }
-
-        $list_box_contents[$cur_row][] = array('align' => $lc_align,
-                                               'params' => 'class="productListing-data-list"',
-                                               'text'  => $lc_text);
+		
+        if ($gridlist == 'list') {
+          $list_box_contents[$cur_row][] = array('align' => $lc_align,
+                                                 'params' => 'class="productListing-data-list"',
+                                                 'text'  => $lc_text);
+        } else {
+          $product_contents[] = $lc_text;
+        }
+		
       }
+      
+	  if ($gridlist == 'grid') {
+		// Grid View
+        $lc_text = implode('<br>', $product_contents);
+
+	    // Hack to remove <br> from front of string in case it starts with a line break.
+	    if (substr($lc_text, 0, 4) == '<br>') { $lc_text = substr($lc_text, 4); }
+
+	    $list_box_contents[$row][$column] = array('align' => 'center',
+                                                  'params' => 'class="productListing-data"',
+                                                  'text'  => $lc_text);
+
+	    $column ++;
+
+	    //Adds a spacer column between the product column - checks if it is the last column - if it is leave it out.
+	    if ($column != PRODUCT_LIST_NUM_COLUMNS + 2) { // Adds 2 to the column count to allow for spacers
+	    $list_box_contents[$row][$column] = array('align' => 'center',
+                                                  'params' => 'class="productListing-data-spacer"',
+                                                  'text'  => tep_draw_separator('pixel_trans.gif', '10', '10'));
+	    $column ++;
+	    }
+
+			  if ($column >= PRODUCT_LIST_NUM_COLUMNS + (PRODUCT_LIST_NUM_COLUMNS-1)) {
+        	    $row ++;
+			    // Add a row spacer between the product rows
+			    $list_box_contents[$row][0] = array('align' => 'center',
+                                                  'params' => 'class="productListing-data-spacer"',
+                                                  'text'  => tep_draw_separator('pixel_trans.gif', '10', '10'));
+
+			    $row ++;
+        	    $column = 0;
+			  }
+      } // end if ($gridlist == 'grid')
     }
 
-    new productListingBoxList($list_box_contents);
+    if ($gridlist == 'list') {
+      new productListingBoxList($list_box_contents);
+    } else {
+      if ($column > 0){
+    	  for ($x = $column; $x < PRODUCT_LIST_NUM_COLUMNS + (PRODUCT_LIST_NUM_COLUMNS-1); $x++){ // Adds 2 to the column count to allow for spacers
+
+    		  $list_box_contents[$row][$column] = array('align' => 'center',
+                                                'params' => 'class="productListing-data-blank" ',
+                                                'text'  => "&nbsp;");
+ 				  $column++;
+
+    	  }
+      }
+      new productListingBox($list_box_contents);
+	}
   } else {
     $list_box_contents = array();
 
@@ -454,8 +529,7 @@ echo tep_draw_separator('pixel_trans.gif', '100%', '10');
     new productListingBox($list_box_contents);
   }
 
-if ( ($listing_split->number_of_rows > 0) && ((PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3')) ) {
-?>
+if ( ($listing_split->number_of_rows > 0) && ((PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3')) ) { ?>
 <table width="100%" cellspacing="0" cellpadding="0" border="0">
   <tr>
     <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -468,6 +542,4 @@ if ( ($listing_split->number_of_rows > 0) && ((PREV_NEXT_BAR_LOCATION == '2') ||
     <td class="smallText" align="right"><?php echo $page_count; ?></td>
   </tr>
 </table>
-<?php
-}
-?>
+<?php } ?>

@@ -1364,6 +1364,8 @@ function updateGross() {
 
 /* BOF QPBPP for SPPC - auto-update Retail readonly price field */
   document.forms["new_product"].products_price_retail_net.value = document.forms["new_product"].products_price.value;
+// Price Break Percent by SMurphy - LINE INSERT
+  document.forms["new_product"].products_price_retail_net.onkeyup();
 /* EOF QPBPP for SPPC - auto-update Retail readonly price field */
 
   if (taxRate > 0) {
@@ -1385,6 +1387,8 @@ function updateNet() {
 
 /* BOF QPBPP for SPPC - auto-update Retail readonly price field */
   document.forms["new_product"].products_price_retail_net.value = document.forms["new_product"].products_price.value;
+// Price Break Percent Mod by SMurphy
+  document.forms["new_product"].products_price_retail_net.onkeyup(); 
 /* EOF QPBPP for SPPC - auto-update Retail readonly price field */
 }
 
@@ -1411,6 +1415,131 @@ function updateMSRPNet() {
 
 }
 
+// Easy Price Break Pricing by SMurphy - START
+function updatePriceBreakGross(CustGroupID, count) {
+  var netPriceElement = "products_price_break[" + CustGroupID + "][" + count + "]";
+  var grossPriceElement = "products_price_break_gross[" + CustGroupID + "][" + count + "]";
+
+  var taxRate = getTaxRate();
+  var netValue = document.forms["new_product"].elements[netPriceElement].value;
+
+  if (netValue == "") {
+    document.forms["new_product"].elements[grossPriceElement].value = "";
+  } else {
+    if (taxRate > 0) {
+      grossValue = netValue * ((taxRate / 100) + 1);
+    } else {
+      grossValue = netValue;
+    }
+
+    document.forms["new_product"].elements[grossPriceElement].value = doRound(grossValue, 4);
+  }
+
+  updatePriceBreakPercent(CustGroupID, count);
+}
+
+function updatePriceBreakNet(CustGroupID, count) {
+  var netPriceElement = "products_price_break[" + CustGroupID + "][" + count + "]";
+  var grossPriceElement = "products_price_break_gross[" + CustGroupID + "][" + count + "]";
+
+  var taxRate = getTaxRate();
+  var grossValue = document.forms["new_product"].elements[grossPriceElement].value;
+  var netValue = 0;
+
+  if (grossValue == "") {
+    document.forms["new_product"].elements[netPriceElement].value = "";
+  } else {
+    if (taxRate > 0) {
+      netValue = grossValue / ((taxRate / 100) + 1);
+    } else {
+      netValue = grossValue;
+    }
+
+    document.forms["new_product"].elements[netPriceElement].value = doRound(netValue, 4);
+  }
+
+  updatePriceBreakPercent(CustGroupID, count);
+}
+
+function updatePriceBreakPercent(CustGroupID, count) {
+  var netPriceElement = "products_price_break[" + CustGroupID + "][" + count + "]";
+  var precentPriceElement = "products_price_break_percent[" + CustGroupID + "][" + count + "]";
+  var productPriceElement = getProductPriceElement(CustGroupID);
+
+  var productsPrice = document.forms["new_product"].elements[productPriceElement].value;
+  var netValue = document.forms["new_product"].elements[netPriceElement].value;
+
+  if (netValue == "") {
+    document.forms["new_product"].elements[precentPriceElement].value = "";
+  } else {
+<?php
+    if (PRICE_BREAK_PERCENT_BEHAVIOUR == 'Off Price') {
+      echo '    var percentValue = 100 - ((netValue / productsPrice) * 100);';
+    } else {
+      echo '    var percentValue = (netValue / productsPrice) * 100;';
+    }
+?>
+  
+    document.forms["new_product"].elements[precentPriceElement].value = doRound(percentValue, 4);
+  }
+}
+
+function updatePriceBreakNetGross(CustGroupID, count) {
+  var netPriceElement = "products_price_break[" + CustGroupID + "][" + count + "]";
+  var grossPriceElement = "products_price_break_gross[" + CustGroupID + "][" + count + "]";
+  var precentPriceElement = "products_price_break_percent[" + CustGroupID + "][" + count + "]";
+  var productPriceElement = getProductPriceElement(CustGroupID);
+
+  var taxRate = getTaxRate();
+  var productsPrice = document.forms["new_product"].elements[productPriceElement].value;
+  var percentValue = document.forms["new_product"].elements[precentPriceElement].value;
+
+  if (percentValue == "") {
+    document.forms["new_product"].elements[netPriceElement].value = "";
+    document.forms["new_product"].elements[grossPriceElement].value = "";
+  } else {
+<?php
+    if (PRICE_BREAK_PERCENT_BEHAVIOUR == 'Off Price') {
+      echo '    var netValue = (1 - (percentValue / 100)) * productsPrice;';
+    } else {
+      echo '    var netValue = (percentValue / 100) * productsPrice;';
+    }
+?>
+    if (taxRate > 0) {
+      grossValue = netValue * ((taxRate / 100) + 1);
+    } else {
+      grossValue = netValue;
+    }
+
+    document.forms["new_product"].elements[netPriceElement].value = doRound(netValue, 4);
+    document.forms["new_product"].elements[grossPriceElement].value = doRound(grossValue, 4);
+  }
+}
+
+function updatePriceBreakCustGroupPercent(CustGroupID, totalCount) {
+  for (var i = 0; i < totalCount; i++) {
+	var precentPriceElement = "products_price_break_percent[" + CustGroupID + "][" + i + "]";
+
+    if ("<?php echo PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR; ?>" == "Update Prices" && document.forms["new_product"].elements[precentPriceElement].value != "") {
+      updatePriceBreakNetGross(CustGroupID, i);
+    } else {
+      updatePriceBreakGross(CustGroupID, i);
+    }
+  }
+}
+
+function getProductPriceElement(CustGroupID) {
+  if (CustGroupID == 0) {
+    return "products_price_retail_net";
+  } else {
+    if (document.forms["new_product"].elements["sppcprice[" + CustGroupID + "]"].value == "") {
+      return "products_price_retail_net";
+    } else {
+      return "sppcprice[" + CustGroupID + "]";
+    }
+  }
+}
+// Easy Price Break Pricing by SMurphy - END
 //--></script>
     <?php echo tep_draw_form('new_product', FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($_GET['pID']) ? '&amp;pID=' . $_GET['pID'] : '') . '&amp;action=new_product_preview', 'post', 'enctype="multipart/form-data"'); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -1549,9 +1678,11 @@ function updateMSRPNet() {
                             } else { // nothing in the db, nothing in the post variables
                               $sppc_cg_price = '';
                             }
-                            echo '&nbsp;' . tep_draw_input_field('sppcprice[' . $CustGroupID . ']', $sppc_cg_price );
+// Easy Price Break Pricing by SMurphy - LINE EDIT
+                            echo '&nbsp;' . tep_draw_input_field('sppcprice[' . $CustGroupID . ']', $sppc_cg_price, 'onkeyup="updatePriceBreakCustGroupPercent(' . $CustGroupID . ', ' . PRICE_BREAK_NOF_LEVELS . ')"');
                         } else {
-                          echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_retail_net', $pInfo->products_price, 'readonly');
+// Easy Price Break Pricing Mod by SMurphy - LINE EDIT
+                          echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_retail_net', $pInfo->products_price, 'onkeyup="updatePriceBreakCustGroupPercent(0, ' . PRICE_BREAK_NOF_LEVELS . ')" readonly');
                         } // end if/else ($CustGroupID != 0) ?>
                         </td>
                       </tr>
@@ -1577,8 +1708,12 @@ function updateMSRPNet() {
                         <td class="main" align="left"> <?php
                             if(is_array($pInfo->products_price_break[$CustGroupID]) && array_key_exists($count, $pInfo->products_price_break[$CustGroupID])) {
                               echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', $pInfo->products_qty[$CustGroupID][$count], 'size="10"');
-                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;        
-							  echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', $pInfo->products_price_break[$CustGroupID][$count], 'size="10"');
+// Easy Price Break Pricing by SMurphy - START
+							  echo tep_draw_separator('pixel_trans.gif', '6', '15') . TEXT_PRODUCTS_QTY;   
+							  echo tep_draw_separator('pixel_trans.gif', '6', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', $pInfo->products_price_break[$CustGroupID][$count], 'onkeyup="updatePriceBreakGross(' . $CustGroupID . ', ' . $count . ')" size="10"') . '(Net)';
+							  echo tep_draw_separator('pixel_trans.gif', '6', '15') . '&nbsp;' . tep_draw_input_field('products_price_break_gross[' . $CustGroupID .'][' . $count . ']', '', 'onkeyup="updatePriceBreakNet(' . $CustGroupID . ', ' . $count . ')" size="10"') . '(Gross)';
+							  echo tep_draw_separator('pixel_trans.gif', '6', '15') . '&nbsp;' . tep_draw_input_field('products_price_break_percent[' . $CustGroupID .'][' . $count . ']', '', 'onkeyup="updatePriceBreakNetGross(' . $CustGroupID . ', ' . $count . ')" size="10"') . '(%)';
+// Easy Price Break Pricing by SMurphy - END
                               echo tep_draw_hidden_field('products_price_break_id[' . $CustGroupID .'][' . $count . ']', $pInfo->products_price_break_id[$CustGroupID][$count]);
 // only show a delete box for a price break that has been set (needed for when the
 // back button is used after a preview
@@ -1587,8 +1722,12 @@ function updateMSRPNet() {
                               }
                             } else {
 							  echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_qty[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
-					          echo tep_draw_separator('pixel_trans.gif', '24', '15') . TEXT_PRODUCTS_QTY;
-                              echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', '', 'size="10"');
+// Easy Price Break Pricing Mod by SMurphy - START
+					          echo tep_draw_separator('pixel_trans.gif', '6', '15') . TEXT_PRODUCTS_QTY;
+					          echo tep_draw_separator('pixel_trans.gif', '6', '15') . '&nbsp;' . tep_draw_input_field('products_price_break[' . $CustGroupID .'][' . $count . ']', '', 'onkeyup="updatePriceBreakGross(' . $CustGroupID . ', ' . $count . ')" size="10"') . '(Net)';
+					          echo tep_draw_separator('pixel_trans.gif', '6', '15') . '&nbsp;' . tep_draw_input_field('products_price_break_gross[' . $CustGroupID .'][' . $count . ']', '', 'onkeyup="updatePriceBreakNet(' . $CustGroupID . ', ' . $count . ')" size="10"') . '(Gross)';
+					          echo tep_draw_separator('pixel_trans.gif', '6', '15') . '&nbsp;' . tep_draw_input_field('products_price_break_percent[' . $CustGroupID .'][' . $count . ']', '', 'onkeyup="updatePriceBreakNetGross(' . $CustGroupID . ', ' . $count . ')" size="10"') . '(%)';
+// Easy Price Break Pricing Mod by SMurphy - END
                             } 
 							?>
                         </td>

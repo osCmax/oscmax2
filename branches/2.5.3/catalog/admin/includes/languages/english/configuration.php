@@ -840,6 +840,10 @@ define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Number of price breaks for dropdown'
 define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Set the number of price breaks at which you want to show a dropdown plus "from Low Price" instead of a table');
 define('CT_PRICE_BREAK_PRICE', 'Quantity price break display');
 define('CD_PRICE_BREAK_PRICE', 'Set the price you would like to display when the product has quantity price breaks. (High = highest price, Low = lowest price, Off = removes From and displays high price)');
+define('CT_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Price Break Percentage Behaviour');
+define('CD_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Off Price: The percentage entered will be the percentage you wish to take off the original product price.<br>(e.g. 25% when the product price is 100.00 will charge the customer 75.00)<br><br>To Pay: The percentage entered will be the percentage of the original product price that you wish to charge the customer.<br>(e.g. 25% when the product price is 100.00 will charge the customer 25.00)');
+define('CT_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Product Price Change Behaviour');
+define('CD_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Update Percent: When the products price is changed, only the percentage field will update to show what percent the price break is of the original product price.<br><br>Update Prices: When the products price is changed, the price break prices will be recalculated from the original products price using the percentage originally specified.');
 
 // Configuration ID: 89 - Google Maps
 define('CT_GOOGLE_MAPS_KEY', 'Google Maps Key');

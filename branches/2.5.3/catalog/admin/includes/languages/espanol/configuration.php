@@ -838,6 +838,10 @@ define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Número de precios por volumen para d
 define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Configura el número de precios por volumen a partir del cual se mostrará un desplegable y "desde" en lugar de una tabla');
 define('CT_PRICE_BREAK_PRICE', 'Forma de mostrar precio por volumen');
 define('CD_PRICE_BREAK_PRICE', 'Configura el precio que quieres que se muestre en el catálogo cuando el producto tiene precios varios niveles de precios por volumen. (High = precio más alto, Low = precio más bajo, Off = quita el Desde y muestra el precio más alto)');
+define('CT_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Price Break Percentage Behaviour');
+define('CD_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Off Price: The percentage entered will be the percentage you wish to take off the original product price.<br>(e.g. 25% when the product price is 100.00 will charge the customer 75.00)<br><br>To Pay: The percentage entered will be the percentage of the original product price that you wish to charge the customer.<br>(e.g. 25% when the product price is 100.00 will charge the customer 25.00)');
+define('CT_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Product Price Change Behaviour');
+define('CD_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Update Percent: When the products price is changed, only the percentage field will update to show what percent the price break is of the original product price.<br><br>Update Prices: When the products price is changed, the price break prices will be recalculated from the original products price using the percentage originally specified.');
 
 // Configuration ID: 89 - Google Maps
 define('CT_GOOGLE_MAPS_KEY', 'Clave de Google Maps');

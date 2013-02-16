@@ -840,6 +840,10 @@ define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Staffelpreisanzahl für Dropdown');
 define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Geben Sie der Anzahl der Preisstaffeln an, ab der ein Dropdown-Menü anstatt einer Tabelle angezeigt werden soll.');
 define('CT_PRICE_BREAK_PRICE', 'Anzeigeart der Staffelpreise');
 define('CD_PRICE_BREAK_PRICE', 'Wie möchten Sie den Preis von Produkten mit Staffelpreisen anzeigen (High = Höchster Preis, Low = Niedrigster Preis, Off = zeigt kein "Ab" vor dem Preis an und listet den höchsten Preis.)?');
+define('CT_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Price Break Percentage Behaviour');
+define('CD_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Off Price: The percentage entered will be the percentage you wish to take off the original product price.<br>(e.g. 25% when the product price is 100.00 will charge the customer 75.00)<br><br>To Pay: The percentage entered will be the percentage of the original product price that you wish to charge the customer.<br>(e.g. 25% when the product price is 100.00 will charge the customer 25.00)');
+define('CT_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Product Price Change Behaviour');
+define('CD_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Update Percent: When the products price is changed, only the percentage field will update to show what percent the price break is of the original product price.<br><br>Update Prices: When the products price is changed, the price break prices will be recalculated from the original products price using the percentage originally specified.');
 
 // Configuration ID: 89 - Google Maps
 define('CT_GOOGLE_MAPS_KEY', 'Google Maps Schlüssel');

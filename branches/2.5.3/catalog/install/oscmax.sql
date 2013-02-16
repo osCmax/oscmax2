@@ -2277,6 +2277,9 @@ INSERT INTO configuration VALUES (2556, 'CT_RECAPTCHA_WISHLIST', 'RECAPTCHA_WISH
 INSERT INTO configuration VALUES (2509, 'CT_PRICE_BREAK_NOF_LEVELS', 'PRICE_BREAK_NOF_LEVELS', '10', 'CD_PRICE_BREAK_NOF_LEVELS', 88, 1, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2510, 'CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'NOF_PRICE_BREAKS_FOR_DROPDOWN', '5', 'CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 88, 2, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2999, 'CT_PRICE_BREAK_PRICE', 'PRICE_BREAK_PRICE', 'off', 'CD_PRICE_BREAK_PRICE', 88, 3, now(), now(), NULL, 'tep_cfg_select_option(array(\'high\',\'low\',\'off\'),');
+INSERT INTO configuration VALUES (2670, 'CT_PRICE_BREAK_PERCENT_BEHAVIOUR', 'PRICE_BREAK_PERCENT_BEHAVIOUR', 'Off Price', 'CD_PRICE_BREAK_PERCENT_BEHAVIOUR', 88, 4, now(), now(), NULL, 'tep_cfg_select_option(array(\'Off Price\', \'To Pay\'),');
+INSERT INTO configuration VALUES (2671, 'CT_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Update Percent', 'CD_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 88, 5, now(), now(), NULL, 'tep_cfg_select_option(array(\'Update Percent\', \'Update Prices\'),');
+
 
 # Configuration ID: 89 - Google Maps
 INSERT INTO configuration VALUES ('77', 'CT_GOOGLE_MAPS_KEY', 'GOOGLE_MAPS_KEY', 'YOURKEY', 'CD_GOOGLE_MAPS_KEY', '89', '25', NULL, now(), NULL, 'tep_cfg_textarea(');

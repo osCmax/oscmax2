@@ -1233,4 +1233,16 @@ define('CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'If the product weight = 0 then the 
 define('CT_ONEPAGE_ADDR_LAYOUT', 'Addresses Layout');
 define('CD_ONEPAGE_ADDR_LAYOUT', 'You can have the address boxes on One Page Checkout display either vertically (one on top of the other) or horizontally (side by side)');
 
+// Defines for multilingual shipping settings
+// Shipping Module: flat.php
+define('CT_MODULE_SHIPPING_FLAT_STATUS', 'Enable Flat Shipping');
+define('CD_MODULE_SHIPPING_FLAT_STATUS', 'Do you want to offer flat rate shipping?');
+define('CT_MODULE_SHIPPING_FLAT_COST', 'Shipping Cost');
+define('CD_MODULE_SHIPPING_FLAT_COST', 'The shipping cost for all orders using this shipping method.');
+define('CT_MODULE_SHIPPING_FLAT_TAX_CLASS', 'Tax Class');
+define('CD_MODULE_SHIPPING_FLAT_TAX_CLASS', 'Use the following tax class on the shipping fee.');
+define('CT_MODULE_SHIPPING_FLAT_ZONE', 'Shipping Zone');
+define('CD_MODULE_SHIPPING_FLAT_ZONE', 'If a zone is selected, only enable this shipping method for that zone.');
+define('CT_MODULE_SHIPPING_FLAT_SORT_ORDER', 'Sort Order');
+define('CD_MODULE_SHIPPING_FLAT_SORT_ORDER', 'Sort order of display.');
 ?>

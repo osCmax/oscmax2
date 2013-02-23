@@ -1258,4 +1258,18 @@ define('CD_MODULE_SHIPPING_FREESHIPPER_ZONE', 'If a zone is selected, only enabl
 define('CT_MODULE_SHIPPING_FREESHIPPER_SORT_ORDER', 'Sort Order');
 define('CD_MODULE_SHIPPING_FREESHIPPER_SORT_ORDER', 'Sort order of display.');
 
+// Shipping Module: indvship.php
+define('CT_MODULE_SHIPPING_INDVSHIP_STATUS', 'Enable Individual Shipping Prices');
+define('CD_MODULE_SHIPPING_INDVSHIP_STATUS', 'Do you want to offer individual shipping prices?');
+define('CT_MODULE_SHIPPING_INDVSHIP_TAX_CLASS', 'Tax Class');
+define('CD_MODULE_SHIPPING_INDVSHIP_TAX_CLASS', 'Use the following tax class on the shipping fee.');
+define('CT_MODULE_SHIPPING_INDVSHIP_ZONE', 'Shipping Zone');
+define('CD_MODULE_SHIPPING_INDVSHIP_ZONE', 'If a zone is selected, only enable this shipping method for that zone.');
+define('CT_MODULE_SHIPPING_INDVSHIP_SORT_ORDER', 'Sort Order');
+define('CD_MODULE_SHIPPING_INDVSHIP_SORT_ORDER', 'Sort order of display.');
+define('CT_MODULE_SHIPPING_INDVSHIP_STATES', 'Higher Rated States');
+define('CD_MODULE_SHIPPING_INDVSHIP_STATES', 'Higher rate States');
+define('CT_MODULE_SHIPPING_INDVSHIP_HANDLING', 'Handling Fee');
+define('CD_MODULE_SHIPPING_INDVSHIP_HANDLING', 'Handling fee for these States.');
+
 ?>

@@ -1245,4 +1245,17 @@ define('CT_MODULE_SHIPPING_FLAT_ZONE', 'Shipping Zone');
 define('CD_MODULE_SHIPPING_FLAT_ZONE', 'If a zone is selected, only enable this shipping method for that zone.');
 define('CT_MODULE_SHIPPING_FLAT_SORT_ORDER', 'Sort Order');
 define('CD_MODULE_SHIPPING_FLAT_SORT_ORDER', 'Sort order of display.');
+
+// Shipping Module: freeshipper.php
+define('CT_MODULE_SHIPPING_FREESHIPPER_STATUS', 'Enable Free Shipping');
+define('CD_MODULE_SHIPPING_FREESHIPPER_STATUS', 'Do you want to offer Free shipping?');
+define('CT_MODULE_SHIPPING_FREESHIPPER_COST', 'Free Shipping Cost');
+define('CD_MODULE_SHIPPING_FREESHIPPER_COST', 'What is the Shipping cost? The Handling fee will also be added.');
+define('CT_MODULE_SHIPPING_FREESHIPPER_TAX_CLASS', 'Tax Class');
+define('CD_MODULE_SHIPPING_FREESHIPPER_TAX_CLASS', 'Use the following tax class on the shipping fee.');
+define('CT_MODULE_SHIPPING_FREESHIPPER_ZONE', 'Shipping Zone');
+define('CD_MODULE_SHIPPING_FREESHIPPER_ZONE', 'If a zone is selected, only enable this shipping method for that zone.');
+define('CT_MODULE_SHIPPING_FREESHIPPER_SORT_ORDER', 'Sort Order');
+define('CD_MODULE_SHIPPING_FREESHIPPER_SORT_ORDER', 'Sort order of display.');
+
 ?>

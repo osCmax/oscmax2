@@ -1230,4 +1230,40 @@ define('CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'Si el peso del producto = 0 entonce
 define('CT_ONEPAGE_ADDR_LAYOUT', 'Disposición de direcciones');
 define('CD_ONEPAGE_ADDR_LAYOUT', 'Las secciones de direcciones en el Pedido en una página se pueden mostrar organizadas en forma vertical (una encima de la otra) u horizontal (una al lado de la otra)');
 
+// Defines for multilingual shipping settings
+// Commonly used shipping module language defines
+define('CT_MODULE_SHIPPING_STATUS', 'Enable shipping module?');
+define('CD_MODULE_SHIPPING_STATUS', 'Do you want to enable this shipping module?');
+define('CT_MODULE_SHIPPING_COST', 'Shipping Cost');
+define('CD_MODULE_SHIPPING_COST', 'The shipping cost for all orders using this shipping method.');
+define('CT_MODULE_SHIPPING_TAX_CLASS', 'Tax Class');
+define('CD_MODULE_SHIPPING_TAX_CLASS', 'Use the following tax class on the shipping fee.');
+define('CT_MODULE_SHIPPING_HANDLING', 'Handling Fee');
+define('CD_MODULE_SHIPPING_HANDLING', 'Handling fee for this shipping method.');
+define('CT_MODULE_SHIPPING_ZONE', 'Shipping Zone');
+define('CD_MODULE_SHIPPING_ZONE', 'If a zone is selected, only enable this shipping method for that zone.');
+define('CT_MODULE_SHIPPING_SORT_ORDER', 'Sort Order');
+define('CD_MODULE_SHIPPING_SORT_ORDER', 'Sort order of display.');
+
+// Shipping Module: indvship.php
+define('CT_MODULE_SHIPPING_INDVSHIP_STATES', 'Higher Rated States');
+define('CD_MODULE_SHIPPING_INDVSHIP_STATES', 'Higher rate States');
+define('CT_MODULE_SHIPPING_INDVSHIP_HANDLING', 'Handling Fee');
+define('CD_MODULE_SHIPPING_INDVSHIP_HANDLING', 'Handling fee for these States.');
+
+// Shipping Module: spu.php
+define('CT_MODULE_SHIPPING_SPU_ZIP', 'Store Pick Up Post/Zip Code Allowed');
+define('CD_MODULE_SHIPPING_SPU_ZIP', 'First one or two characters of the post/zip code allowed for store pickup.  Leave blank for unrestricted pickup. (You may enter multiple codes separated by commas.)');
+
+// Shipping Module: table.php
+define('CT_MODULE_SHIPPING_TABLE_COST', 'Shipping Table');
+define('CD_MODULE_SHIPPING_TABLE_COST', 'The shipping cost is based on the total cost or weight of items. Example: 25:8.50,50:5.50,etc.. Up to 25 charge 8.50, from there to 50 charge 5.50, etc');
+define('CT_MODULE_SHIPPING_TABLE_MODE', 'Table Calculation Method');
+define('CD_MODULE_SHIPPING_TABLE_MODE', 'The shipping cost is based on the order total or the total weight of the items ordered.');
+
+// Shipping Module: zones.php
+define('CD_MODULE_SHIPPING_ZONE_COUNTRIES', 'Comma separated list of two character ISO country codes that are part of Zone');
+define('CD_MODULE_SHIPPING_ZONE_COST', 'Shipping rates to this Zone. Destinations based on a group of maximum order weights. Example: 3:8.50,7:10.50, ... Weights less than or equal to 3 would cost 8.50 for destinations in Zone');
+define('CD_MODULE_SHIPPING_ZONES_HANDLING', 'Handling Fee for this shipping zone');
+
 ?>

@@ -17,7 +17,7 @@ $Id$
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_SSL_CHECK);
+  require(bts_select('language', FILENAME_SSL_CHECK));
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_SSL_CHECK));
 

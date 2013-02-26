@@ -147,13 +147,13 @@ $Id$
       if (STOCK_ALLOW_CHECKOUT == 'true') {
 ?>
       <tr>
-        <td class="messageStackAlert" align="center"><?php echo OUT_OF_STOCK_CAN_CHECKOUT; ?></td>
+        <td class="messageStackAlert"><?php echo sprintf(OUT_OF_STOCK_CAN_CHECKOUT, STOCK_MARK_PRODUCT_OUT_OF_STOCK); ?></td>
       </tr>
 <?php
       } else {
 ?>
       <tr>
-        <td class="messageStackWarning" align="center"><?php echo OUT_OF_STOCK_CANT_CHECKOUT; ?></td>
+        <td class="messageStackWarning"><?php echo sprintf(OUT_OF_STOCK_CANT_CHECKOUT, STOCK_MARK_PRODUCT_OUT_OF_STOCK, STOCK_MARK_PRODUCT_OUT_OF_STOCK); ?></td>
       </tr>
 <?php
       } ?>

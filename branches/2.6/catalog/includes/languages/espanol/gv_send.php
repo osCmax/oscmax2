@@ -12,7 +12,6 @@ $Id$
 
 define('HEADING_TITLE','Enviar cheque regalo');
 define('NAVBAR_TITLE','Enviar cheque regalo');
-define('EMAIL_SUBJECT', 'Mensaje de ' . STORE_NAME);
 define('HEADING_TEXT','<br>Por favor, introduzca los detalles del cheque regalo que desea enviar a continuación. Para obtener más información, consulte nuestras ');
 define('ENTRY_NAME','Nombre del beneficiario:');
 define('ENTRY_EMAIL','E-mail del destinatario:');

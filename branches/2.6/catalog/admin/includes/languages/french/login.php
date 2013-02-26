@@ -10,31 +10,31 @@ $Id$
   Released under the GNU General Public License
 */
 
-if ($_GET['origin'] == FILENAME_CHECKOUT_PAYMENT) {
-  define('NAVBAR_TITLE', 'Order');
-  define('HEADING_TITLE', 'Ordering online is easy.');
-  define('TEXT_STEP_BY_STEP', 'We\'ll walk you through the process, step by step.');
-} else {
+define('TEXT_CREATE_FIRST_ADMINISTRATOR', 'No administrators exist in the database table. Please fill in the following information to create the first administrator. (A manual login is still required after this step)');
+
+define('ERROR_INVALID_ADMINISTRATOR', 'Error: Invalid administrator login attempt.');
+
+define('BUTTON_LOGIN', 'Login');
+define('BUTTON_CREATE_ADMINISTRATOR', 'Create Administrator');
 define('NAVBAR_TITLE', 'Login');
-define('HEADING_TITLE', 'Bienvenu, veuillez vous identifier.');
+define('HEADING_TITLE', 'Admin Login');
 define('TEXT_STEP_BY_STEP', ''); // should be empty
-}
+define('HEADING_RETURNING_ADMIN', 'Login Panel:');
+define('HEADING_PASSWORD_FORGOTTEN', 'Password Forgotten:');
+define('TEXT_RETURNING_ADMIN', 'Staff only!');
+define('ENTRY_USERNAME', 'Username:');
+define('ENTRY_FIRSTNAME', 'First Name:');
+define('ENTRY_LASTNAME', 'Last Name:');
 
-define('HEADING_RETURNING_ADMIN', 'Panneau Login:');
-define('HEADING_PASSWORD_FORGOTTEN', 'Mot de passe oubli&eacute;?');
-define('TEXT_RETURNING_ADMIN', 'Staff uniquement!');
-define('ENTRY_EMAIL_ADDRESS', 'E-Mail:');
-define('ENTRY_PASSWORD', 'Mot de passe:');
-define('ENTRY_FIRSTNAME', 'Pr&eacute;nom:');
-define('ENTRY_LASTNAME', 'Nom de famille:');
+define('TEXT_PASSWORD_FORGOTTEN', 'Password forgotten?');
 
-define('TEXT_PASSWORD_FORGOTTEN', 'Mot de passe oubli&eacute;?');
+define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> Wrong username or password!');
+define('TEXT_FORGOTTEN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> first name and password not match!');
+define('TEXT_FORGOTTEN_FAIL', 'You have try over 3 times. For security reason, please contact your Web Administrator to get new password.<br>&nbsp;<br>&nbsp;');
+define('TEXT_FORGOTTEN_SUCCESS', 'The new password have sent to your email address. Please check your email and click back to login.<br>&nbsp;<br>&nbsp;');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERREUR:</b></font> Login ou mot de passe erron&eacute;!');
-define('TEXT_FORGOTTEN_ERROR', '<font color="#ff0000"><b>ERREUR:</b></font> le pr&eacute;nom et le mot de passe ne correspondent pas!');
-define('TEXT_FORGOTTEN_FAIL', 'Vous avez essay&eacute ; trois fois. Pour des raisons de s&eacute;curit&eacute;, veuillez contacter votre administrateur web pour obtenir un nouveau mot de passe.<br>&nbsp;<br>&nbsp;');
-define('TEXT_FORGOTTEN_SUCCESS', 'Le nouveau mot de passe a &eacute;t&eacute; envoy&eacute à votre adresse email. Veuillez la consulter et revenez vous identifier.<br>&nbsp;<br>&nbsp;');
+define('ADMIN_EMAIL_SUBJECT', 'New Password');
+define('ADMIN_EMAIL_TEXT', 'Hi %s,' . "\n\n" . 'You can access the admin panel with the following password. Once you access the admin, please change your password!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is an automated response, please do not reply!');
 
-define('ADMIN_EMAIL_SUBJECT', 'Nouveau mot de passe');
-define('ADMIN_EMAIL_TEXT', 'Bonjour %s,' . "\n\n" . 'Vous pouvez acceder au module administration avec le mot de passe suivant. Une fois connect&eacute;, veuillez le modifier!' . "\n\n" . 'Site : %s' . "\n" . 'Login: %s' . "\n" . 'Mot de passe: %s' . "\n\n" . 'Merci!' . "\n" . '%s' . "\n\n" . 'Ceci est un email automatique, veuillez ne pas r&eacute;pondre &agrave; ce message!');
+define('IMAGE_BUTTON_LOGIN', 'Login');
 ?>

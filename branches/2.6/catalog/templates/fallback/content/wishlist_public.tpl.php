@@ -147,7 +147,7 @@ $Id$
 ******* CHECK TO SEE IF PRODUCT HAS BEEN ADDED TO THEIR CART *******
 *******************************************************************/
 
-		if($cart->in_cart($wishlist[products_id])) {
+		if ($cart->in_cart($wishlist[products_id])) {
 			echo '<br /><font color="#FF0000"><b>>' . TEXT_ITEM_IN_CART . '</b></font>';
 		}
 
@@ -155,7 +155,7 @@ $Id$
 ********** CHECK TO SEE IF PRODUCT IS NO LONGER AVAILABLE **********
 *******************************************************************/
 
- 		if($products['products_status'] == 0) {
+ 		if ($products['products_status'] != 1) {
    			echo '<br /><font color="#FF0000"><b>' . TEXT_ITEM_NOT_AVAILABLE . '</b></font>';
   		}
 
@@ -170,7 +170,7 @@ $Id$
 * PREVENT THE ITEM FROM BEING ADDED TO CART IF NO LONGER AVAILABLE *
 *******************************************************************/
 
-			if($products['products_status'] != 0) {
+			if ($products['products_status'] == 1) {
 				echo tep_draw_checkbox_field('add_wishprod[]',$wishlist[products_id]);
 			}
 ?>					</td>

@@ -27,7 +27,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
   if (isset($_GET['guest']) && $cart->count_contents() < 1) tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
 // PWA BOF
 // needs to be included earlier to set the success message in the messageStack
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CREATE_ACCOUNT);
+  require(bts_select('language', FILENAME_CREATE_ACCOUNT));
 
   $process = false;
   if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
@@ -305,7 +305,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
 	  $email_text .= EMAIL_ACCOUNT_DETAILS . "\n" . EMAIL_ACCOUNT_USERNAME . $email_address . "\n" . EMAIL_ACCOUNT_PASSWORD  . $password . "\n\n";
 	  // EOF PHONE ORDER
 
-      $email_text .= EMAIL_WELCOME . EMAIL_TEXT . EMAIL_CONTACT . EMAIL_WARNING;
+      $email_text .= sprintf(EMAIL_WELCOME, STORE_NAME) . EMAIL_TEXT . sprintf(EMAIL_CONTACT, STORE_OWNER_EMAIL_ADDRESS) . sprintf(EMAIL_WARNING, STORE_OWNER_EMAIL_ADDRESS);
 
 // BOF - MOD: CREDIT CLASS Gift Voucher Contribution
   if (NEW_SIGNUP_GIFT_VOUCHER_AMOUNT > 0) {
@@ -354,7 +354,7 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
       }
 // BOF: MOD - GV_REDEEM_EXPLOIT_FIX (GVREF)
 
-      tep_mail($name, $email_address, EMAIL_SUBJECT, $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+      tep_mail($name, $email_address, EMAIL_SUBJECT . STORE_NAME, $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
 // Add MailChimp Subscription
 if (MAILCHIMP_ENABLE == 'true') {

@@ -376,6 +376,7 @@ define('JS_STATE_SELECT', '-- Select Above --');
 define('JS_COUNTRY', '* The \'Country\' value must be chosen.\n');
 define('JS_TELEPHONE', '* The \'Telephone Number\' entry must have at least ' . ENTRY_TELEPHONE_MIN_LENGTH . ' characters.\n');
 define('JS_PASSWORD', '* The \'Password\' and \'Confirmation\' entries must match and have at least ' . ENTRY_PASSWORD_MIN_LENGTH . ' characters.\n');
+define('JS_PASSWORD_DONT_MATCH', 'The entered passwords do not match');
 
 define('JS_ORDER_DOES_NOT_EXIST', 'Order Number %s does not exist!');
 
@@ -457,6 +458,8 @@ define('IMAGE_EMAIL', 'Email');
 define('IMAGE_FILE_MANAGER', 'File Manager');
 define('IMAGE_ICON_STATUS_GREEN', 'Active');
 define('IMAGE_ICON_STATUS_GREEN_LIGHT', 'Set Active');
+define('IMAGE_ICON_STATUS_YELLOW', 'Discontinued');
+define('IMAGE_ICON_STATUS_YELLOW_LIGHT', 'Set Discontinued');  
 define('IMAGE_ICON_STATUS_RED', 'Inactive');
 define('IMAGE_ICON_STATUS_RED_LIGHT', 'Set Inactive');
 define('IMAGE_ICON_INFO', 'Info');

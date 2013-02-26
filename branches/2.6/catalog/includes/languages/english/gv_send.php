@@ -12,7 +12,6 @@ $Id$
 
 define('HEADING_TITLE', 'Send Gift Certificate');
 define('NAVBAR_TITLE', 'Send Gift Certificate');
-define('EMAIL_SUBJECT', 'Enquiry from ' . STORE_NAME);
 define('HEADING_TEXT','<br>Please enter below the details of the Gift Certificate you wish to send. For more information, please see our ');
 define('ENTRY_NAME', 'Recipient\'s Name:');
 define('ENTRY_EMAIL', 'Recipient\'s E-Mail Address:');

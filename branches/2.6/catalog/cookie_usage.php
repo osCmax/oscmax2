@@ -18,14 +18,13 @@ $Id$
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_COOKIE_USAGE);
+  require(bts_select('language', FILENAME_COOKIE_USAGE));
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_COOKIE_USAGE));
 
   $content = CONTENT_COOKIE_USAGE;
 
   include (bts_select('main')); // BTSv1.5
-
 
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>

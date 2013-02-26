@@ -11,18 +11,18 @@ $Id$
 */
 
 
-define('NAVBAR_TITLE', 'Send your Wishlist');
-define('HEADING_TITLE', 'Send your Wishlist to a friend');
-define('FORM_TITLE_CUSTOMER_DETAILS', 'Your Details');
-define('FORM_FIELD_CUSTOMER_NAME', 'Your Name:');
-define('FORM_FIELD_CUSTOMER_EMAIL', 'Your Email Address:');
-define('FORM_TITLE_FRIEND_DETAILS', 'Your Friend\'s Details');
-define('FORM_FIELD_FRIEND_NAME', 'Your Friend\'s Name:');
-define('FORM_FIELD_FRIEND_EMAIL', 'Your Friend\'s Email Address:');
-define('FORM_TITLE_FRIEND_MESSAGE', 'Add a Personal Message Here');
-define('FORM_FIELD_TEXT_AREA', 'Here\'s whats on My Wishlist:'. "\n\n");
-define('TEXT_EMAIL_SUCCESSFUL_SENT', 'Your email has been successfully sent to <b>%s</b>.');
-define('TEXT_EMAIL_SUBJECT', 'Your friend %s\'s Wishlist at %s');
-define('TEXT_EMAIL_INTRO', 'Hi %s,' . "\n\n" . '%s has created a Wishlist at%s %s and would like to share it with you.');
-define('TEXT_EMAIL_SIGNATURE', 'Thank You from,' . "\n" );
+define('NAVBAR_TITLE', 'Envoyer ma liste de souhaits');
+define('HEADING_TITLE', 'Envoyer votre liste de souhaits à un ami');
+define('FORM_TITLE_CUSTOMER_DETAILS', 'Vos coordonnées');
+define('FORM_FIELD_CUSTOMER_NAME', 'Votre nom:');
+define('FORM_FIELD_CUSTOMER_EMAIL', 'Votre adresse courriel:');
+define('FORM_TITLE_FRIEND_DETAILS', 'Les coordonnées du destinataire');
+define('FORM_FIELD_FRIEND_NAME', 'Le nom de votre ami(e):');
+define('FORM_FIELD_FRIEND_EMAIL', 'L\'adresse courriel de votre ami(e):');
+define('FORM_TITLE_FRIEND_MESSAGE', 'Ajouter un message personnel ici');
+define('FORM_FIELD_TEXT_AREA', 'Voici ce que ma liste de souhaits contient:'. "\n\n");
+define('TEXT_EMAIL_SUCCESSFUL_SENT', 'Votre courriel a été envoyé avec succès à <b>%s</b>.');
+define('TEXT_EMAIL_SUBJECT', 'Voici la liste de souhaits de ton ami(e) %s\'s chez %s');
+define('TEXT_EMAIL_INTRO', 'Bonjour, %s,' . "\n\n" . '%s à crée une liste de souhaits chez%s %s et il/elle voudrait le partager avec vous.');
+define('TEXT_EMAIL_SIGNATURE', 'Sincèrement,' . "\n" );
 ?>

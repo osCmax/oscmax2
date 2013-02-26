@@ -11,7 +11,7 @@ $Id$
 */
 
 // PWA BOF
-define('EMAIL_WARNING', 'ATTENTION: This email address was given to us by someone who visited our online store. If this was not done by you please email us at  ' . STORE_OWNER_EMAIL_ADDRESS . ' Thank you for shopping with us and have a great day.');
+define('EMAIL_WARNING', 'ATTENTION: This email address was given to us by someone who visited our online store. If this was not done by you please email us at %s. Thank you for shopping with us and have a great day.');
 // PWA EOF
 define('EMAIL_TEXT_SUBJECT', 'Order Process');
 define('EMAIL_TEXT_ORDER_NUMBER', 'Order Number:');

@@ -41,7 +41,7 @@ define('TABLE_HEADING_NONTAXED', 'Ventas libres <br> de impuestos');
 define('TABLE_HEADING_TAXED', 'Ventas sujetas<br> a impuestos');
 define('TABLE_HEADING_TAX_COLL', 'Impuestos<br> cobrados');
 define('TABLE_HEADING_SHIPHNDL', 'Envío y<br> manipulación');
-define('TABLE_HEADING_SHIP_TAX', 'Impuestos del<br /> envio');
+define('TABLE_HEADING_SHIP_TAX', 'Impuestos<br /> del envío');
 define('TABLE_HEADING_LOWORDER', 'Cargos por<br> pedido mínimo');
 define('TABLE_HEADING_OTHER', 'Cheques<br> regalo');  // could be any other extra class value
 define('TABLE_FOOTER_YTD','YTD');

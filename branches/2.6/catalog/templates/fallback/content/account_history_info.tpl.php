@@ -60,6 +60,21 @@ $Id$
               </tr>
 <?php
     }
+
+    if (CHECKOUT_SHIPPING_DATE == 'true') {
+?>
+
+<!-- ship date -->
+              <tr>
+                <td class="main"><?php echo '<b>' . HEADING_SHIPPING_DATE . '</b>'; ?></td>
+              </tr>
+              <tr>
+                <td class="main"><?php echo tep_date_long($order->info['delivery_date']); ?></td>
+              </tr> 
+<!-- eof ship date -->
+
+<?php
+	} // end if (CHECKOUT_SHIPPING_DATE != 'true')
 ?>
             </table></td>
 <?php

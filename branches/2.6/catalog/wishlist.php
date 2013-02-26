@@ -15,7 +15,8 @@ $Id$
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_WISHLIST);
+  
+  require(bts_select('language', FILENAME_WISHLIST));
 
 if (RECAPTCHA_ON == 'true') {
 
@@ -59,6 +60,11 @@ if (RECAPTCHA_ON == 'true') {
 ****************** ADD PRODUCT TO SHOPPING CART ********************
 *******************************************************************/
 
+  // Check to see if any checkboxes were selected
+  if(isset($_POST['add_prod_x']) && (!isset($_POST['add_wishprod']))) {
+    $messageStack->add('wishlist', WISHLIST_NO_CHECKBOX_SELECTED_BUY, 'warning');
+  }
+
   if (isset($_POST['add_wishprod'])) {
 	if(isset($_POST['add_prod_x'])) {
 		foreach ($_POST['add_wishprod'] as $value) {
@@ -72,7 +78,12 @@ if (RECAPTCHA_ON == 'true') {
 /*******************************************************************
 ****************** DELETE PRODUCT FROM WISHLIST ********************
 *******************************************************************/
-
+  
+  // Check to see if any checkboxes were selected
+  if(isset($_POST['delete_prod_x']) && (!isset($_POST['add_wishprod']))) {
+    $messageStack->add('wishlist', WISHLIST_NO_CHECKBOX_SELECTED_DELETE, 'warning');
+  }
+  
   if (isset($_POST['add_wishprod'])) {
 	if(isset($_POST['delete_prod_x'])) {
 		foreach ($_POST['add_wishprod'] as $value) {
@@ -103,7 +114,7 @@ if (RECAPTCHA_ON == 'true') {
 	
 			$from_name = $customer['customers_firstname'] . ' ' . $customer['customers_lastname'];
 			$from_email = $customer['customers_email_address'];
-			$subject = $customer['customers_firstname'] . ' ' . WISHLIST_EMAIL_SUBJECT;
+			$subject = $customer['customers_firstname'] . ' ' . WISHLIST_EMAIL_SUBJECT . STORE_NAME;
 			$link = HTTP_SERVER . DIR_WS_CATALOG . FILENAME_WISHLIST_PUBLIC . "?public_id=" . $customer_id;
 	
 		//REPLACE VARIABLES FROM DEFINE
@@ -111,7 +122,7 @@ if (RECAPTCHA_ON == 'true') {
 			$arr2 = array($from_name, $link);
 			$replace = str_replace($arr1, $arr2, WISHLIST_EMAIL_LINK);
 			$message = tep_db_prepare_input($_POST['message']);
-			$body = $message . $replace;
+			$body = $message . $replace . "\n\n" . STORENAME;
 		} else {
 			if(strlen($_POST['your_name']) < '1') {
 				$error = true;
@@ -136,7 +147,7 @@ if (RECAPTCHA_ON == 'true') {
 
 			$from_name = stripslashes($_POST['your_name']);
 			$from_email = $_POST['your_email'];
-			$subject = $from_name . ' ' . WISHLIST_EMAIL_SUBJECT;
+			$subject = $from_name . ' ' . WISHLIST_EMAIL_SUBJECT . STORE_NAME;
 			$message = stripslashes($_POST['message']);
 
 			$z = 0;
@@ -145,7 +156,7 @@ if (RECAPTCHA_ON == 'true') {
 				$prods .= stripslashes($name) . "  " . stripslashes($_POST['prod_att'][$z]) . "\n" . $_POST['prod_link'][$z] . "\n\n";
 				$z++;
 			}
-			$body = $message . "\n\n" . $prods . "\n\n" . WISHLIST_EMAIL_GUEST;
+			$body = $message . "\n\n" . $prods . "\n\n" . WISHLIST_EMAIL_GUEST . "\n\n" . STORE_NAME;
 	  	}
 
 		//Check each posted name => email for errors.

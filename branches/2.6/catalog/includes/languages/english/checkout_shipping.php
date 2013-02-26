@@ -28,4 +28,8 @@ define('TABLE_HEADING_COMMENTS', 'Add Comments About Your Order');
 
 define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continue Checkout Procedure');
 define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'to select the preferred payment method.');
+
+// ship date
+define('TABLE_HEADING_SHIPPING_DATE', 'Preferred Delivery Date');
+define('TEXT_CHOOSE_SHIPPING_DATE', 'We will deliver your order as soon as possible <b>OR</b> you can specify a preferred delivery date.');
 ?>

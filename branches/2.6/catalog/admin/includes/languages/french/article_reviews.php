@@ -37,18 +37,16 @@ define('TEXT_INFO_ARTICLES_AVERAGE_RATING', 'Note moyenne:');
 define('TEXT_IMAGE_NONEXISTENT', 'IMAGE INEXISTANTE');
 
 define('TEXT_OF_5_STARS', '%s sur 5 &eacute;toiles!');
-define('TEXT_GOOD', '<small><font color="#ff0000"><b>Excellent</b></font></small>');
-define('TEXT_BAD', '<small><font color="#ff0000"><b>Mauvais</b></font></small>');
-define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Effacer commentaire');
-
+define('TEXT_INFO_HEADING_DELETE_REVIEW', 'Delete Review');
+/* <Mav was here!> */
 define('TEXT_APPROVED', 'Accept&eacute;') ;
 define('TEXT_APPROVE', 'Accepter') ;
 define('TEXT_DISAPPROVE', 'Refuser') ;
 define('TEXT_YES', 'Oui') ;
 define('TEXT_NO', 'Non') ;
+/* </Mav was here!> */
 
-define('TEXT_CUSTOMER_RATING','Évaluation de la clientèle:');
-
-define('TEXT_NO_ARTICLE_REVIEWS','Il n\'y a actuellement aucun avis de l\'un de vos articles. <br><br> Quand un client commentaires celui que vous verrez affiché à gauche. Vous devrez ensuite à un approuver ou de rejeter l\'article avant de l\'afficher dans votre magasin.');
-
+define('HEADING_NO_ARTICLE_REVIEWS', 'Article Reviews');
+define('TEXT_NO_ARTICLE_REVIEWS', 'Il n\'y a actuellement aucun avis de l\'un de vos articles. <br><br> Quand un client commentaires celui que vous verrez affiché à gauche. Vous devrez ensuite à un approuver ou de rejeter l\'article avant de l\'afficher dans votre magasin.');
+define('TEXT_CUSTOMER_RATING', 'Évaluation de la clientèle:');
 ?>

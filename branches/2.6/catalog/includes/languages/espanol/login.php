@@ -18,7 +18,7 @@ define('HEADING_TITLE', 'Bienvenido, por favor regístrese o inicie su sesión');
 
 define('HEADING_NEW_CUSTOMER', 'Nuevo cliente');
 define('TEXT_NEW_CUSTOMER', 'Soy un nuevo cliente.');
-define('TEXT_NEW_CUSTOMER_INTRODUCTION', 'Al crear una cuenta en ' . STORE_NAME . ' podrá realizar sus compras rápidamente, revisar el estado de sus pedidos y llevar un seguimiento de sus pedidos anteriores.');
+define('TEXT_NEW_CUSTOMER_INTRODUCTION', 'Al crear una cuenta en %s podrá realizar sus compras rápidamente, revisar el estado de sus pedidos y llevar un seguimiento de sus pedidos anteriores.');
 
 define('HEADING_RETURNING_CUSTOMER', 'Ya soy cliente');
 define('TEXT_RETURNING_CUSTOMER', 'He comprado otras veces.');

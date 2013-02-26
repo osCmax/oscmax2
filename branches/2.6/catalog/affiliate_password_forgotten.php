@@ -15,7 +15,7 @@ $Id$
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_PASSWORD_FORGOTTEN);
+  require(bts_select('language', FILENAME_AFFILIATE_PASSWORD_FORGOTTEN));
 
   if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
     $check_affiliate_query = tep_db_query("select affiliate_firstname, affiliate_lastname, affiliate_password, affiliate_id from " . TABLE_AFFILIATE . " where affiliate_email_address = '" . $_POST['email_address'] . "'");

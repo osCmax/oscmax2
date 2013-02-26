@@ -57,8 +57,9 @@ tep_redirect(tep_href_link(FILENAME_LOGIN, 'gv_message=1', 'SSL'));
     $gv_update = tep_db_query("update " . TABLE_COUPONS . " set coupon_active = 'N' where coupon_id = '" . $coupon['coupon_id'] . "'");
     tep_gv_account_update($customer_id, $gv_id);
     tep_session_unregister('gv_id');   
-  } 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_GV_REDEEM);
+  }
+  
+  require(bts_select('language', FILENAME_GV_REDEEM)); 
 
   $breadcrumb->add(NAVBAR_TITLE); 
 

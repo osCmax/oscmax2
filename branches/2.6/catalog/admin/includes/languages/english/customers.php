@@ -45,4 +45,6 @@ define('TEXT_ADD_A_COMMENT', 'Add a comment:');
 define('TEXT_NOTES', 'Notes:');
 define('TEXT_AUTHOR', 'Author:');
 define('IMAGE_BUTTON_LOGIN_AS', 'Login as customer');
+
+define('SELECT_ADDRESS', 'Select customer address to edit: ');
 ?>

@@ -30,8 +30,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
   }
 
 // needs to be included earlier to set the success message in the messageStack
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ADDRESS_BOOK_PROCESS);
-
+  require(bts_select('language', FILENAME_ADDRESS_BOOK_PROCESS));
+  
   if (isset($_GET['action']) && ($_GET['action'] == 'deleteconfirm') && isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     tep_db_query("delete from " . TABLE_ADDRESS_BOOK . " where address_book_id = '" . (int)$_GET['delete'] . "' and customers_id = '" . (int)$customer_id . "'");
 

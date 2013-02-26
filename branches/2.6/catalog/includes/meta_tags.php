@@ -119,8 +119,8 @@ define('TERTIARY_SECTION', ',  ');
     	break;
     case CONTENT_ARTICLES_REVIEWS:
       define('META_TAG_TITLE', HEADING_TITLE . PRIMARY_SECTION . TITLE . $web_site_tagline);
-    	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE_1 . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
-    	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . NAVBAR_TITLE_1);
+    	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
+    	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . NAVBAR_TITLE);
     	break;
     case CONTENT_ARTICLES_REVIEWS_INFO:
       define('META_TAG_TITLE', HEADING_TITLE . PRIMARY_SECTION . TITLE . $web_site_tagline);
@@ -129,8 +129,8 @@ define('TERTIARY_SECTION', ',  ');
     	break;
     case CONTENT_ARTICLES_REVIEWS_WRITE:
       define('META_TAG_TITLE', HEADING_TITLE . PRIMARY_SECTION . TITLE . $web_site_tagline);
-    	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE_1 . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
-    	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . NAVBAR_TITLE_1);
+    	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . NAVBAR_TITLE . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
+    	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . NAVBAR_TITLE);
     	break;
     case CONTENT_ARTICLES_NEW:
       define('META_TAG_TITLE', HEADING_TITLE . PRIMARY_SECTION . TITLE . $web_site_tagline);
@@ -181,9 +181,9 @@ define('TERTIARY_SECTION', ',  ');
       $mt_category_query = tep_db_query("select categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . (int)$current_category_id . "' and language_id = '" . (int)$languages_id . "'");
       $mt_category = tep_db_fetch_array($mt_category_query);
 
-      define('META_TAG_TITLE', str_replace(array("'", '"'), "", $mt_categories['categories_name']) . PRIMARY_SECTION . TITLE . $web_site_tagline);
-    	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . str_replace(array("'", '"'), "", $mt_categories['categories_name']) . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
-    	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . str_replace(array("'", '"'), "", $mt_categories['categories_name']));
+      define('META_TAG_TITLE', str_replace(array("'", '"'), "", $mt_category['categories_name']) . PRIMARY_SECTION . TITLE . $web_site_tagline);
+    	define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . str_replace(array("'", '"'), "", $mt_category['categories_name']) . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
+    	define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . str_replace(array("'", '"'), "", $mt_category['categories_name']));
       break;
     case CONTENT_INDEX_PRODUCTS:
       if (isset($_GET['manufacturers_id'])) {
@@ -197,9 +197,9 @@ define('TERTIARY_SECTION', ',  ');
         $mt_category_query = tep_db_query("select categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . (int)$current_category_id . "' and language_id = '" . (int)$languages_id . "'");
         $mt_category = tep_db_fetch_array($mt_category_query);
 
-  	  define('META_TAG_TITLE', str_replace(array("'", '"'), "", $mt_categories['categories_name']) . PRIMARY_SECTION . TITLE . $web_site_tagline);
-  	  define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . str_replace(array("'", '"'), "", $mt_categories['categories_name']) . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
-  	  define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . str_replace(array("'", '"'), "", $mt_categories['categories_name']));
+  	  define('META_TAG_TITLE', str_replace(array("'", '"'), "", $mt_category['categories_name']) . PRIMARY_SECTION . TITLE . $web_site_tagline);
+  	  define('META_TAG_DESCRIPTION', TITLE . PRIMARY_SECTION . str_replace(array("'", '"'), "", $mt_category['categories_name']) . SECONDARY_SECTION . WEB_SITE_KEYWORDS);
+  	  define('META_TAG_KEYWORDS', WEB_SITE_KEYWORDS . str_replace(array("'", '"'), "", $mt_category['categories_name']));
       }
       break;
     case CONTENT_POPUP_IMAGE:

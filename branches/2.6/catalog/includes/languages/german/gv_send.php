@@ -12,7 +12,6 @@ $Id$
 
 define('HEADING_TITLE', 'Gutschein versenden');
 define('NAVBAR_TITLE', 'Gutschein versenden');
-define('EMAIL_SUBJECT', 'Nachricht von ' . STORE_NAME);
 define('HEADING_TEXT','<br>Bitte vervollständigen Sie die folgenden Angaben zum Gutschein aus. Weitere Informationenen finden Sie hier: ');
 define('ENTRY_NAME', 'Empfängername:');
 define('ENTRY_EMAIL', 'Empfänger E-Mail-Adresse:');

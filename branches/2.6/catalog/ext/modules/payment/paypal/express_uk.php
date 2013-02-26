@@ -82,7 +82,8 @@ $Id$
 
       $post_string = substr($post_string, 0, -1);
 
-      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUE$Id$
+      /* MF - Added string termination to line below */
+      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUE$Id$'));
       $response_array = array();
       parse_str($response, $response_array);
 
@@ -282,8 +283,8 @@ $Id$
       }
 
       $post_string = substr($post_string, 0, -1);
-
-      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUE$Id$
+      /* MF - Added string termination to line below */
+      $response = $paypal_uk_express->sendTransactionToGateway($api_url, $post_string, array('X-VPS-REQUE$Id$'));
       $response_array = array();
       parse_str($response, $response_array);
 

@@ -10,6 +10,6 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Programme d\'affiliation');
-define('HEADING_TITLE', 'Vos modifications ont été faites !');
+define('NAVBAR_TITLE', 'Programme de partenariat');
+define('HEADING_TITLE', 'Vos modifications ont &eacute;t&eacute; enregistrées !');
 ?>

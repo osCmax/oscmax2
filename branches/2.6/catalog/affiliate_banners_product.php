@@ -17,7 +17,7 @@ $Id$
     tep_redirect(tep_href_link(FILENAME_AFFILIATE, '', 'SSL'));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_BANNERS_PRODUCT);
+  require(bts_select('language', FILENAME_AFFILIATE_BANNERS_PRODUCT));
   
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_AFFILIATE_BANNERS_BANNERS));
 	

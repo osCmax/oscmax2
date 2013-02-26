@@ -28,7 +28,7 @@ if( isset($_GET['pID'])){
 
 } else {
 		echo '<div id="topBar">';
-		echo '<table><tr><td>' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO).  '</td><td>' . AM_AJAX_FIRST_SAVE . '</td></tr></table>';
+		echo '<table width="100%"><tr><td class="messageStackAlert">' . tep_image(DIR_WS_ICONS . 'information.png', IMAGE_ICON_INFO) . '&nbsp;' . AM_AJAX_FIRST_SAVE . '</td></tr></table>';
 		echo '</div>';
 }
 ?>

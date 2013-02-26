@@ -9,12 +9,13 @@ $Id$
 
   Released under the GNU General Public License
 */
-define('NAVBAR_TITLE', 'Mot de passe affilié perdu');
+
+define('NAVBAR_TITLE', 'Mot de passe du partenariat perdu');
 define('NAVBAR_TITLE_1', 'Connexion');
-define('NAVBAR_TITLE_2', 'Mot de passe affilié perdu');
-define('HEADING_TITLE', 'J\'ai perdu mon mot de passe affilié !');
-define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<span class="notice"><b>NOTE:</b></span> L\'adresse e-mail n\'a pas été trouvé dans nos bases. Veuillez renouveler votre demande s\'il vous plait.');
-define('EMAIL_PASSWORD_REMINDER_SUBJECT', '%s - Mot de passe Nouvel Affilié');
-define('EMAIL_PASSWORD_REMINDER_BODY', 'Une demande de nouveau mot de passe a été demandée.' . "\n\n" . 'Votre nouveau mot de passe pour %s est :' . "\n\n" . '   %s' . "\n\n");
-define('TEXT_PASSWORD_SENT', 'Un nouveau mot de passe a été envoyé sur votre e-mail');
+define('NAVBAR_TITLE_2', 'Mot de passe du partenariat perdu');
+define('HEADING_TITLE', 'J\'ai perdu mon mot de passe du partenariat!');
+define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<span class="warning"><b>NOTE:</b></span> L\'adresse du couriel n\'a pas &eacute;t&eacute; trouv&eacute; dans notre base de données. S\'il vous plait réessayez.');
+define('EMAIL_PASSWORD_REMINDER_SUBJECT', STORE_NAME . ' - Nouveau mot de passe de partenaire');
+define('EMAIL_PASSWORD_REMINDER_BODY', 'Une demande d\'un nouveau mot de passe a &eacute;t&eacute; demand&eacute;e de la part de ' . $REMOTE_ADDR . '.' . "\n\n" . 'Votre nouveau mot de passe de partenaire pour \'' . STORE_NAME . '\' est :' . "\n\n" . '   %s' . "\n\n");
+define('TEXT_PASSWORD_SENT', 'Un nouveau mot de passe a &eacute;t&eacute; envoy&eacute; vers votre couriel');
 ?>

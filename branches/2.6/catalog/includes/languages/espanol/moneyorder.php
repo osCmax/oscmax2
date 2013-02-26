@@ -11,6 +11,6 @@ $Id$
 */
 
   define('MODULE_PAYMENT_MONEYORDER_TEXT_TITLE', 'Cheque/Transferencia bancaria');
-  define('MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION', 'Pagadero a:&nbsp;' . MODULE_PAYMENT_MONEYORDER_PAYTO . '<br><br>Enviar a:<br>' . nl2br(STORE_NAME_ADDRESS) . '<br><br>' . 'Su pedido se enviará en cuanto se reciba el pago.');
-  define('MODULE_PAYMENT_MONEYORDER_TEXT_EMAIL_FOOTER', "Pagadero a: ". MODULE_PAYMENT_MONEYORDER_PAYTO . "\n\nEnviar a:\n" . STORE_NAME_ADDRESS . "\n\n" . 'Su pedido se enviará en cuanto se reciba el pago.');
+  define('MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION', 'Pagadero a:&nbsp;%s<br><br>Enviar a:<br>%s<br><br>Su pedido se enviará en cuanto se reciba el pago.');
+  define('MODULE_PAYMENT_MONEYORDER_TEXT_EMAIL_FOOTER', 'Pagadero a: %s\n\nEnviar a:\n%s\n\nSu pedido se enviará en cuanto se reciba el pago.');
 ?>

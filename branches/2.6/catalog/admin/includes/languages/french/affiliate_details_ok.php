@@ -10,6 +10,6 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Affiliates - Your Account');
-define('HEADING_TITLE', 'Your Account data has been updated!');
+define('NAVBAR_TITLE', 'Affiliés - Votre compte');
+define('HEADING_TITLE', 'Vos données de votre compte ont été mis à jour!');
 ?>

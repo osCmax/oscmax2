@@ -14,7 +14,7 @@ define('HEADING_TITLE', 'Envoyer Email aux affiliés');
 
 define('TEXT_AFFILIATE', 'Affilié:');
 define('TEXT_SUBJECT', 'Sujet:');
-define('TEXT_FROM', 'From:');
+define('TEXT_FROM', 'De:');
 define('TEXT_MESSAGE', 'Message:');
 define('TEXT_SELECT_AFFILIATE', 'Sélectionnez un affilié');
 define('TEXT_ALL_AFFILIATES', 'Tous les Affiliés');

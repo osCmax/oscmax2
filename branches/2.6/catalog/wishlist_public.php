@@ -13,7 +13,8 @@ $Id$
 //       catalog\templates\fallback\contents\<filename>.tpl.php as a default (sub 'fallback' with your current template to see if there is a template specife change).
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
   require('includes/application_top.php');
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_WISHLIST);
+
+  require(bts_select('language', FILENAME_WISHLIST));
 
 if(!isset($_GET['public_id']) && !isset($_POST['add_wishprod'])) {
   	tep_redirect(tep_href_link(FILENAME_DEFAULT));

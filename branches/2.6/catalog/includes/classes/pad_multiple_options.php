@@ -100,7 +100,7 @@ $Id$
               $tmp_html .= tep_draw_radio_field('id[' . $attributes[$o]['oid'] . ']', $products_options_array['id'], $checked);
               $checked = false;
               $tmp_html .= $products_options_array['text'] ;
-              $tmp_html .=$products_options_name['products_options_comment'] ;
+              // $tmp_html .= $products_options_name['products_options_comment'] ;
               $tmp_html .= "&nbsp;";
             }
             $tmp_html .= '<br/>';

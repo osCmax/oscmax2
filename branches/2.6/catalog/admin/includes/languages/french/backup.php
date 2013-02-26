@@ -46,8 +46,8 @@ define('SUCCESS_LAST_RESTORE_CLEARED', 'Succ&egrave;s: La date de derniere resta
 define('SUCCESS_DATABASE_SAVED', 'Succ&egrave;s: La base de donn&eacute;es a &eacute;t&eacute; sauv&eacute;e.');
 define('SUCCESS_DATABASE_RESTORED', 'Succ&egrave;s: La base de donn&eacute;es a &eacute;t&eacute; restaur&eacute;.');
 define('SUCCESS_BACKUP_DELETED', 'Succ&egrave;s: La base de donn&eacute;es a &eacute;t&eacute; supprim&eacute;.');
-define('HEADING_NO_BACKUP','<b>Sauvegarde ne sont pas disponibles</b>');
 
-define('TEXT_NO_BACKUP','S\'il vous plaît assurer que vous avez fait une sauvegarde de votre magasin. Cliquez sur le bouton <b>de sauvegarde</b> en créer un.');
+define('HEADING_NO_BACKUP', '<b>Sauvegarde ne sont pas disponibles</b>');
+define('TEXT_NO_BACKUP', 'S\'il vous plaît assurer que vous avez fait une sauvegarde de votre magasin. Cliquez sur le bouton <b>de sauvegarde</b> en créer un.');
 
 ?>

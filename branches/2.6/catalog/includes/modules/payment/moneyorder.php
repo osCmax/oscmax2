@@ -19,7 +19,7 @@ $Id$
 
       $this->code = 'moneyorder';
       $this->title = MODULE_PAYMENT_MONEYORDER_TEXT_TITLE;
-      $this->description = MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION;
+      $this->description = sprintf(MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION, MODULE_PAYMENT_MONEYORDER_PAYTO, nl2br(STORE_NAME_ADDRESS));
       $this->sort_order = MODULE_PAYMENT_MONEYORDER_SORT_ORDER;
       $this->enabled = ((MODULE_PAYMENT_MONEYORDER_STATUS == 'True') ? true : false);
 
@@ -29,7 +29,7 @@ $Id$
 
       if (is_object($order)) $this->update_status();
     
-      $this->email_footer = MODULE_PAYMENT_MONEYORDER_TEXT_EMAIL_FOOTER;
+      $this->email_footer = sprintf(MODULE_PAYMENT_MONEYORDER_TEXT_EMAIL_FOOTER, MODULE_PAYMENT_MONEYORDER_PAYTO, STORE_NAME_ADDRESS);
     }
 
 // class methods
@@ -69,7 +69,7 @@ $Id$
     }
 
     function confirmation() {
-      return array('title' => MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION);
+      return array('title' => sprintf(MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION, MODULE_PAYMENT_MONEYORDER_PAYTO, nl2br(STORE_NAME_ADDRESS)));
     }
 
     function process_button() {

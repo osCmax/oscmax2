@@ -18,7 +18,7 @@ define('HEADING_TITLE', 'Herzlich Willkommen! Bitte melden Sie sich an');
 
 define('HEADING_NEW_CUSTOMER', 'Neuer Kunde');
 define('TEXT_NEW_CUSTOMER', 'Ich bin ein neuer Kunde.');
-define('TEXT_NEW_CUSTOMER_INTRODUCTION', 'Durch Ihre Anmeldung bei ' . STORE_NAME . ' sind Sie in der Lage, schneller zu bestellen, kennen jederzeit den Status Ihrer Bestellungen und haben immer eine aktuelle Übersicht über Ihre bisherigen Bestellungen.');
+define('TEXT_NEW_CUSTOMER_INTRODUCTION', 'Durch Ihre Anmeldung bei %s sind Sie in der Lage, schneller zu bestellen, kennen jederzeit den Status Ihrer Bestellungen und haben immer eine aktuelle Übersicht über Ihre bisherigen Bestellungen.');
 
 define('HEADING_RETURNING_CUSTOMER', 'Bestehender Kunde');
 define('TEXT_RETURNING_CUSTOMER', 'Ich bin bereits Kunde.');

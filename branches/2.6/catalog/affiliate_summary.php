@@ -21,9 +21,9 @@ $Id$
     $navigation->set_snapshot();
     tep_redirect(tep_href_link(FILENAME_AFFILIATE, '', 'SSL'));
   }
-
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_AFFILIATE_SUMMARY);
-
+  
+  require(bts_select('language', FILENAME_AFFILIATE_SUMMARY));
+  
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_AFFILIATE_SUMMARY));
 
   $affiliate_banner_history_raw = "select sum(affiliate_banners_shown) as count from " . TABLE_AFFILIATE_BANNERS_HISTORY .  " where affiliate_banners_affiliate_id  = '" . $affiliate_id . "'";

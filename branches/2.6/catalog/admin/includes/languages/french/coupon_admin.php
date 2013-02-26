@@ -13,6 +13,7 @@ define('TEXT_COUPON_REDEEMED', 'Redeemed Coupons');
 define('REDEEM_DATE_LAST', 'Date Last Redeemed');
 define('TOP_BAR_TITLE', 'Statistique');
 define('HEADING_TITLE', 'Coupons de r&eacute;duction');
+define('HEADING_TITLE_PREVIEW', 'Discount Coupons Preview');
 define('HEADING_TITLE_STATUS', 'Statut : ');
 define('TEXT_CUSTOMER', 'Client :');
 define('TEXT_COUPON', 'Nom du coupon :');
@@ -48,7 +49,6 @@ define('TEXT_REDEMPTIONS_CUSTOMER', 'Pour ce client');
 define('TEXT_NO_FREE_SHIPPING', 'Aucune livraison gratuite');
 
 define('NOTICE_EMAIL_SENT_TO', 'Note : Email envoy&eacute; a %s');
-define('ERROR_NO_CUSTOMER_SELECTED', 'Erreur : aucun client n\'a &eacute;t&eacute; s&eacute;lectionn&eacute;.');
 define('COUPON_NAME', 'Nom du coupon');
 //define('COUPON_VALUE', 'Valeur du coupon');
 define('COUPON_AMOUNT', 'Valeur du coupon');
@@ -68,7 +68,6 @@ define('DATE_MODIFIED', 'Date de modification');
 define('TEXT_HEADING_NEW_COUPON', 'Cr&eacute;er un nouveau coupon');
 define('TEXT_NEW_INTRO', 'Remplissez les diff&eacute;rentes informations du coupon.<br>');
 
-
 define('COUPON_NAME_HELP', 'Mettre un nom court pour le coupon');
 define('COUPON_AMOUNT_HELP', 'Mettre une valeur pour une remise fixe ou bien ajouter % sur la fin pour une remise en pourcentage.');
 define('COUPON_CODE_HELP', 'Vous pouvez personnaliser votre propre code. Laisser vide le formulaire pour obtenir un code automatiquement.');
@@ -81,12 +80,23 @@ define('COUPON_USES_COUPON_HELP', 'Le maximum de fois que le coupon peut etre ut
 define('COUPON_USES_USER_HELP', 'Le maximum de fois qu\'un client peut utiliser ce coupon. Laisser vide le formulaire si vous ne voulez aucune limite.');
 define('COUPON_PRODUCTS_HELP', 'Liste des identifiants des produits (s&eacute;par&eacute; par une virgule) qui peuvent &ecirc;tre associ&eacute;s au coupon. Laisser vide le formulaire si on ne veut pas de limite.');
 define('COUPON_CATEGORIES_HELP', 'Liste des cat&eacute;gories qui peuvent etre associ&eacute;s au coupon. Laisser vide si on ne veut pas de limite.');
-define('ERROR_NO_COUPON_AMOUNT', 'Erreur : Vous n\'avez pas remplis le minimum pour valider coupon');
-define('ERROR_COUPON_EXISTS', 'Error: A coupon with the same coupon code already exists.');
 define('COUPON_BUTTON_EMAIL_VOUCHER', 'Email Voucher');
 define('COUPON_BUTTON_EDIT_VOUCHER', 'Edit Voucher');
 define('COUPON_BUTTON_DELETE_VOUCHER', 'Delete Voucher');
 define('COUPON_BUTTON_VOUCHER_REPORT', 'Voucher Report');
+define('COUPON_BUTTON_PREVIEW', 'Preview Coupon');
 define('COUPON_STATUS', 'Status');
 define('COUPON_STATUS_HELP', 'Set to ' . IMAGE_ICON_STATUS_RED . ' to disable customers\' ability to use the coupon.');
+define('COUPON_BUTTON_BACK', 'Back');
+define('COUPON_BUTTON_CONFIRM', 'Confirm');
+
+define('TEXT_ENTRY_REQUIRED', '&nbsp;<span style="color: #ff0000;">*</span>');
+
+define('ERROR_NO_CUSTOMER_SELECTED', 'Erreur : aucun client n\'a &eacute;t&eacute; s&eacute;lectionn&eacute;.');
+define('ERROR_NO_COUPON_AMOUNT', 'Erreur : Vous n\'avez pas remplis le minimum pour valider coupon');
+define('ERROR_COUPON_EXISTS', 'Error: A coupon with the same coupon code already exists.');
+define('ERROR_MISSING_COUPON_NAME', 'Error: You have not entered a coupon name in language ');
+define('ERROR_MISSING_START_DATE', 'Error: You must enter <b>Start Date</b> for your coupon');
+define('ERROR_MISSING_FINISH_DATE', 'Error: You must enter <b>End Date</b> for your coupon');
+
 ?>

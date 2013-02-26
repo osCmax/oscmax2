@@ -49,6 +49,9 @@ $Id$
 
         if (isset($_POST['default']) && ($_POST['default'] == 'on')) {
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_input($orders_status_id) . "' where configuration_key = 'DEFAULT_ORDERS_STATUS_ID'");
+		  // Configuration Cache modification start
+          require ('includes/configuration_cache.php');
+          // Configuration Cache modification end
         }
 
         tep_redirect(tep_href_link(FILENAME_ORDERS_STATUS, 'page=' . $_GET['page'] . '&oID=' . $orders_status_id));
@@ -61,6 +64,9 @@ $Id$
 
         if ($orders_status['configuration_value'] == $oID) {
           tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '' where configuration_key = 'DEFAULT_ORDERS_STATUS_ID'");
+		  // Configuration Cache modification start
+          require ('includes/configuration_cache.php');
+          // Configuration Cache modification end
         }
 
         tep_db_query("delete from " . TABLE_ORDERS_STATUS . " where orders_status_id = '" . tep_db_input($oID) . "'");

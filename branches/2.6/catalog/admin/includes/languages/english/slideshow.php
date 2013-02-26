@@ -17,13 +17,17 @@ define('TABLE_HEADING_SLIDESHOW_IMAGE', 'Slide Image');
 define('TABLE_HEADING_SLIDESHOW_TITLE', 'Slide Title');
 define('TABLE_HEADING_SLIDESHOW_LINK', 'Link');
 define('TABLE_HEADING_SLIDESHOW_TARGET', 'Target');
+define('TABLE_HEADING_SLIDESHOW_ACTIVE', 'Status');
+define('TABLE_HEADING_SLIDESHOW_CG_HIDE', 'Customer Group Hide');
 define('TABLE_HEADING_SLIDESHOW_SORT_ORDER', 'Sort Order');
 
 define('TEXT_SLIDESHOW_INSERT_INTRO', 'Please insert a new slide:');
 define('TEXT_SLIDESHOW_TITLE', 'Slide Title'); 
 define('TEXT_SLIDESHOW_IMAGE', 'Slide Image');
 define('TEXT_SLIDESHOW_LINK', 'Slide Link');
+define('TEXT_SLIDESHOW_ACTIVE', 'Activate the slide?');
 define('TEXT_SLIDESHOW_TARGET', 'Target');
+define('TEXT_SLIDESHOW_CG_HIDE', 'List customer groups to hide from: (eg. 0,1,2)');
 define('TEXT_SLIDESHOW_SORT_ORDER', 'Sort Order');
 
 define('TEXT_SLIDESHOW_DATE_ADDED', 'Added: ');

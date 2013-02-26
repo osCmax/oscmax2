@@ -35,4 +35,5 @@ define('REASON_3', 'Delivery');
 define('REASON_4', 'Returns');
 define('REASON_5', 'Marketing');
 define('REASON_6', 'Other');
+define('TEXT_REVEAL_EMAIL', 'Click to reveal email');
 ?>

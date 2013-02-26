@@ -29,7 +29,7 @@ $Id$
     tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_GV_SEND);
+  require(bts_select('language', FILENAME_GV_SEND));
 
   if (($_POST['back_x']) || ($_POST['back_y'])) {
     $_GET['action'] = '';

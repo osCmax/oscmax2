@@ -10,10 +10,18 @@ $Id$
   Released under the GNU General Public License
 */
 
+  $_GET['action'] = (isset($_GET['action']) ? $_GET['action'] : '');
+  $_GET['gID'] = (isset($_GET['gID']) ? $_GET['gID'] : '');
+  $_GET['gPath'] = (isset($_GET['gPath']) ? $_GET['gPath'] : '');
+  $_GET['mID'] = (isset($_GET['mID']) ? $_GET['mID'] : '');
+  $_GET['mInfo'] = (isset($_GET['mInfo']) ? $_GET['mInfo'] : '');
+  $_GET['page'] = (isset($_GET['page']) ? $_GET['page'] : '');
+  $_GET['error'] = (isset($_GET['error']) ? $_GET['error'] : '');
+
   require('includes/application_top.php');
 
   $current_boxes = DIR_FS_ADMIN . DIR_WS_BOXES;
-
+  
   if ($_GET['action']) {
     switch ($_GET['action']) {
       case 'member_new':
@@ -414,7 +422,7 @@ $Id$
     case 'new_member':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW . '</b>');
 
-      $contents = array('form' => tep_draw_form('newmember', FILENAME_ADMIN_MEMBERS, 'action=member_new&amp;page=' . $page . '&amp;mID=' . $_GET['mID'], 'post', 'enctype="multipart/form-data"'));
+      $contents = array('form' => tep_draw_form('newmember', FILENAME_ADMIN_MEMBERS, 'action=member_new&amp;page=' . $_GET['page'] . '&amp;mID=' . $_GET['mID'], 'post', 'enctype="multipart/form-data"'));
       if ($_GET['error']) {
         $contents[] = array('text' => '<table width="100%"><tr><td class="messageStackAlert">' . tep_image(DIR_WS_ICONS . 'warning.gif', ICON_WARNING) . '&nbsp;' . TEXT_INFO_ERROR . '</td></tr></table>');
       }
@@ -433,9 +441,9 @@ $Id$
       break;
 
     case 'edit_member':
-      $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW . '</b>');
+      $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT . '</b>');
 
-      $contents = array('form' => tep_draw_form('newmember', FILENAME_ADMIN_MEMBERS, 'action=member_edit&amp;page=' . $page . '&amp;mID=' . $_GET['mID'], 'post', 'enctype="multipart/form-data"'));
+      $contents = array('form' => tep_draw_form('newmember', FILENAME_ADMIN_MEMBERS, 'action=member_edit&amp;page=' . $_GET['page'] . '&amp;mID=' . $_GET['mID'], 'post', 'enctype="multipart/form-data"'));
       if ($_GET['error']) {
         $contents[] = array('text' => TEXT_INFO_ERROR);
       }
@@ -455,7 +463,7 @@ $Id$
         }
         $contents[] = array('text' => '<br>&nbsp;' . TEXT_INFO_GROUP . '<br>&nbsp;' . tep_draw_pull_down_menu('admin_groups_id', $groups_array, $mInfo->admin_groups_id));
       }
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT, 'onClick="validateForm();return document.returnValue"') . ' <a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $_GET['mID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_INSERT, 'onClick="validateForm();return document.returnValue"') . ' <a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $_GET['mID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
 
     case 'del_member':
@@ -463,7 +471,7 @@ $Id$
       if ($mInfo->admin_id == 1 || $mInfo->admin_email_address == STORE_OWNER_EMAIL_ADDRESS) {
         $contents[] = array('align' => 'center', 'text' => '<br><a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $mInfo->admin_id) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a><br>&nbsp;');
       } else {
-        $contents = array('form' => tep_draw_form('edit', FILENAME_ADMIN_MEMBERS, 'action=member_delete&amp;page=' . $page . '&amp;mID=' . $admin['admin_id'], 'post', 'enctype="multipart/form-data"'));
+        $contents = array('form' => tep_draw_form('edit', FILENAME_ADMIN_MEMBERS, 'action=member_delete&amp;page=' . $_GET['page'] . '&amp;mID=' . $admin['admin_id'], 'post', 'enctype="multipart/form-data"'));
         $contents[] = array('text' => tep_draw_hidden_field('admin_id', $mInfo->admin_id));
         $contents[] = array('align' => 'center', 'text' =>  sprintf(TEXT_INFO_DELETE_INTRO, $mInfo->admin_username));
         $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . tep_href_link(FILENAME_ADMIN_MEMBERS, 'page=' . $_GET['page'] . '&amp;mID=' . $_GET['mID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');

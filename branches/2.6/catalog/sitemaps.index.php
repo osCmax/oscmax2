@@ -30,7 +30,8 @@
  */
   $language = $_GET['language'];
   require('includes/application_top.php');
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_GOOGLE_SITEMAPS);
+  
+  require(bts_select('language', FILENAME_GOOGLE_SITEMAPS));
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_GOOGLE_SITEMAPS));
 	
 	chdir('../');

@@ -13,7 +13,7 @@ $Id$
   $count = 1;
   $images_string = '';
   $clean_images_string = '';
-  $slideshow_query_raw = "select slideshow_id, slideshow_image, slideshow_title, slideshow_sort_order, slideshow_link, slideshow_target, date_added, last_modified from " . TABLE_SLIDESHOW . " order by slideshow_sort_order";
+  $slideshow_query_raw = "select slideshow_id, slideshow_image, slideshow_title, slideshow_sort_order, slideshow_link, slideshow_target, slideshow_cg_hide, date_added, last_modified from " . TABLE_SLIDESHOW . " where NOT find_in_set('" . $customer_group_id . "', slideshow_cg_hide) and slideshow_active = 'yes' order by slideshow_sort_order";
   $slideshow_query = tep_db_query($slideshow_query_raw);
   while ($slideshow = tep_db_fetch_array($slideshow_query)) {
 	$images_string .= '{url: "' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . DIR_WS_IMAGES . 'slideshow/' . $slideshow['slideshow_image'] . '", description:"' . $slideshow['slideshow_title'] . '", link: "' . $slideshow['slideshow_link'] . '", target: "' . $slideshow['slideshow_target'] . '" },  ';

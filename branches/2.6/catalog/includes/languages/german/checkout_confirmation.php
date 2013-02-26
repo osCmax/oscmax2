@@ -10,10 +10,10 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Bestellung abgeschlossen');
-define('NAVBAR_TITLE_2', 'Bestätigung');
+define('NAVBAR_TITLE_1', 'Bestellungsübersicht');
+define('NAVBAR_TITLE_2', 'Übersicht');
 
-define('HEADING_TITLE', 'Bestellungbestätigung');
+define('HEADING_TITLE', 'Bestellungsübersicht');
 
 define('HEADING_DELIVERY_ADDRESS', 'Versandadresse');
 define('HEADING_SHIPPING_METHOD', 'Versandart');
@@ -24,7 +24,7 @@ define('HEADING_BILLING_INFORMATION', 'Rechnungsinformationen');
 define('HEADING_BILLING_ADDRESS', 'Rechnungsadresse');
 define('HEADING_PAYMENT_METHOD', 'Zahlungsart');
 define('HEADING_PAYMENT_INFORMATION', 'Zahlungsinformationen');
-define('HEADING_ORDER_COMMENTS', 'Anmerkung zu Ihrer Bestellung');
+define('HEADING_ORDER_COMMENTS', 'Ihre Anmerkungen zu dieser Bestellung:');
 
 define('TEXT_EDIT', 'Bearbeiten');
 ?>

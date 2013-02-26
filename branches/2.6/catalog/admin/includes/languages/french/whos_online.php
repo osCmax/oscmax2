@@ -31,7 +31,6 @@ define('TABLE_HEADING_ACTION', 'Action');
 define('TABLE_HEADING_SHOPPING_CART', 'Panier');
 define('TEXT_SHOPPING_CART_SUBTOTAL', 'Sous Total');
 define('TEXT_NUMBER_OF_CUSTOMER', 'Visiteur en ligne (Considéré inactif au-delà de 5 minutes. Supprimé après 15 minutes)');
-define('TEXT_NUMBER_OF_CUSTOMERS', 'Visiteurs en ligne (Considéré inactif au-delà de 5 minutes. Supprimé après 15 minutes)');
 define('TABLE_HEADING_HTTP_REFERER', 'Referer?');
 define('TEXT_HTTP_REFERER_URL', 'HTTP Referer URL');
 define('TEXT_HTTP_REFERER_FOUND', 'Oui');
@@ -48,6 +47,7 @@ define('TABLE_HEADING_USER_SESSION', 'Session?');
 define('TEXT_IN_SESSION', 'Oui');
 define('TEXT_NO_SESSION', 'Non');
 
+define('TEXT_NUMBER_OF_CUSTOMER', 'Nombre de clients');
 define('TEXT_OSCID', 'osCsid');
 define('TEXT_PROFILE_DISPLAY', 'Affichage du Profil');
 define('TEXT_USER_AGENT', 'User Agent');

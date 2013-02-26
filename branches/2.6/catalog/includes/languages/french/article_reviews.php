@@ -10,14 +10,13 @@ $Id$
   Released under the GNU General Public License
 */
 
-define('HEADING_TITLE', 'Reviews of ');
-define('NAVBAR_TITLE', 'Reviews');
+define('HEADING_TITLE', 'Commentaires de ');
+define('NAVBAR_TITLE', 'Commentaires');
 
-define('TEXT_NO_ARTICLE_REVIEWS', 'There are currently no aproved reviews for this article.');
-define('TEXT_OF_5_STARS', '%s out of 5 Stars');
-define('TEXT_REVIEW_VIEWS', 'Number of times read: ');
-define('TEXT_READ_REVIEW', 'Read Review...');
-
-define('TEXT_ARTICLE_REVIEW_SUBMITTED','Merci de nous envoyer votre avis sur cet article. Il sera publié une fois qu\'il a été approuvé.');
+define('TEXT_NO_ARTICLE_REVIEWS', 'Il n\'y a actuellement aucun commentaire approuvé pour cet article.');
+define('TEXT_OF_5_STARS', '%s sur 5 étoiles');
+define('TEXT_REVIEW_VIEWS', 'Nombre de fois lu: ');
+define('TEXT_READ_REVIEW', 'Lire un commentaire...');
+define('TEXT_ARTICLE_REVIEW_SUBMITTED', 'Merci de nous envoyer votre commentaire sur cet article. Il sera publi&eacute; une fois qu\'il a &eacute;t&eacute; approuv&eacute;.');
 
 ?>

@@ -56,6 +56,7 @@ $Id$
                       <td class="dataTableHeadingContent"><?php echo TITLE_FIRSTNAME; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TITLE_LASTNAME; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TITLE_EMAIL; ?></td>
+                      <td class="dataTableHeadingContent"><?php echo TITLE_NEWSLETTER; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TITLE_GENDER; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TITLE_DOB; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TITLE_COMPANY; ?></td>
@@ -73,6 +74,7 @@ $Id$
     							  c.customers_lastname,
     							  c.customers_firstname,
     							  c.customers_email_address,
+								  c.customers_newsletter,
     							  c.customers_gender,
     							  c.customers_dob,
     							  c.customers_telephone,
@@ -81,11 +83,12 @@ $Id$
     							  a.entry_street_address,
     							  a.entry_postcode,
     							  a.entry_city,
-    							  a.entry_state,
+    							  zo.zone_name,
     							  a.entry_suburb,
     							  co.countries_name
     							   from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_id = a.customers_id and c.customers_default_address_id = a.address_book_id
-    							   left join " . TABLE_COUNTRIES . " co on co.countries_id = a.entry_country_id
+    							   left join " . TABLE_COUNTRIES . " co on co.countries_id = a.entry_country_id 
+								   left join " . TABLE_ZONES . " zo on zo.zone_id = a.entry_zone_id  
     							   order by c.customers_lastname, c.customers_firstname";
     $customers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_query_raw, $customers_query_numrows);
     $customers_query = tep_db_query($customers_query_raw);
@@ -97,13 +100,14 @@ $Id$
                       <td class="dataTableContent"><?php echo $customers['customers_firstname']; ?></td>
                       <td class="dataTableContent"><?php echo $customers['customers_lastname']; ?></td>
                       <td class="dataTableContent"><?php echo $customers['customers_email_address']; ?></td>
+                      <td class="dataTableContent"><?php echo $customers['customers_newsletter']; ?></td>
                       <td class="dataTableContent"><?php echo $customers['customers_gender']; ?></td>
                       <td class="dataTableContent"><?php echo tep_date_short($customers['customers_dob']); ?></td>
                       <td class="dataTableContent"><?php echo $customers['entry_company']; ?></td>
                       <td class="dataTableContent"><?php echo $customers['entry_street_address']; ?></td>
                       <td class="dataTableContent"><?php echo $customers['entry_postcode']; ?></td>
                       <td class="dataTableContent"><?php echo $customers['entry_city']; ?></td>
-                      <td class="dataTableContent"><?php echo $customers['entry_state']; ?></td>
+                      <td class="dataTableContent"><?php echo $customers['zone_name']; ?></td>
                       <td class="dataTableContent"><?php echo $customers['entry_suburb']; ?></td>
                       <td class="dataTableContent"><?php echo $customers['countries_name']; ?></td>
                       <td class="dataTableContent"><?php echo $customers['customers_telephone']; ?></td>
@@ -149,11 +153,12 @@ else
 {
 	if($_POST['separator']!="") $sep=stripcslashes($_POST['separator']); else $sep="\t";
 	$sep= str_replace('\t', "\011", $sep);
-	$contents="customers_id".$sep."customers_lastname".$sep."customers_firstname".$sep."customers_email_address".$sep."customers_gender".$sep."customers_dob".$sep."entry_company".$sep."entry_street_address".$sep."entry_postcode".$sep."entry_city".$sep."entry_state".$sep."entry_suburb".$sep."countries_name".$sep."customers_telephone".$sep."customers_fax\n";
+	$contents="customers_id".$sep."customers_lastname".$sep."customers_firstname".$sep."customers_email_address".$sep."customers_newsletter".$sep."customers_gender".$sep."customers_dob".$sep."entry_company".$sep."entry_street_address".$sep."entry_postcode".$sep."entry_city".$sep."zone_name".$sep."entry_suburb".$sep."countries_name".$sep."customers_telephone".$sep."customers_fax\n";
 	$customers_query_raw = "select c.customers_id,
     							  c.customers_lastname,
     							  c.customers_firstname,
     							  c.customers_email_address,
+								  c.customers_newsletter,
     							  c.customers_gender,
     							  c.customers_dob,
     							  c.customers_telephone,
@@ -161,12 +166,13 @@ else
     							  a.entry_company,
     							  a.entry_street_address,
     							  a.entry_postcode,
-    							  a.entry_city,
+    							  zo.zone_name,
     							  a.entry_state,
     							  a.entry_suburb,
     							  co.countries_name
     							   from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_id = a.customers_id and c.customers_default_address_id = a.address_book_id
     							   left join " . TABLE_COUNTRIES . " co on co.countries_id = a.entry_country_id
+								   left join " . TABLE_ZONES . " zo on zo.zone_id = a.entry_zone_id 
     							   order by c.customers_lastname, c.customers_firstname";
     $customers_query = tep_db_query($customers_query_raw);
     while ($row = tep_db_fetch_array($customers_query)) {
@@ -175,13 +181,14 @@ else
 		$contents.=$row['customers_lastname'].$sep;
 		$contents.=$row['customers_firstname'].$sep;
 		$contents.=$row['customers_email_address'].$sep;
+		$contents.=$row['customers_newsletter'].$sep;
 		$contents.=$row['customers_gender'].$sep;
 		$contents.=tep_date_short($row['customers_dob']).$sep;
 		$contents.=$row['entry_company'].$sep;
 		$contents.=$row['entry_street_address'].$sep;
 		$contents.=$row['entry_postcode'].$sep;
 		$contents.=$row['entry_city'].$sep;
-		$contents.=$row['entry_state'].$sep;
+		$contents.=$row['zone_name'].$sep;
 		$contents.=$row['entry_suburb'].$sep;
 		$contents.=$row['countries_name'].$sep;
         $contents.=$row['customers_telephone'].$sep;

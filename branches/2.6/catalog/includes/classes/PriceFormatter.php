@@ -580,12 +580,12 @@ class PriceFormatter {
     }
 	
 	// PGM adds new function to create buttons throughout the store
-	function getProductButtons($products_id, $page_sent, $products_model = '', $products_name = '') {
+	function getProductButtons($products_id, $page_sent, $products_model = '', $products_name = '', $cPath = '') {
 	  $button_output = '';
 	  
 	  // Add more info button if enabled
 	  if (SHOW_MORE_INFO == 'True') {
-        $button_output .= '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products_id) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>&nbsp;';
+        $button_output .= '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $products_id) . '">' . tep_image_button('button_more_info.gif', IMAGE_BUTTON_MORE_INFO) . '</a>&nbsp;';
 	  }
 	  
 	  // We need to know if we are on the product_info page or not to send to the correct page

@@ -201,10 +201,10 @@ $Id$
         reset($this->modules);
         while (list(, $value) = each($this->modules)) {
           $class = substr($value, 0, strrpos($value, '.'));
-        //OPC  //if ($GLOBALS[$class]->enabled) {
+          if ($GLOBALS[$class]->enabled) {
             $selection = $GLOBALS[$class]->selection();
             if (is_array($selection)) $selection_array[] = $selection;
-       //OPC   //}
+          }
         }
       }
 

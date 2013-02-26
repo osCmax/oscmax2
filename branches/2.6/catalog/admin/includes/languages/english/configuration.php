@@ -39,6 +39,10 @@ define('CD_EXPECTED_PRODUCTS_SORT', 'This is the sort order used in the expected
 define('CT_EXPECTED_PRODUCTS_FIELD', 'Expected Sort Field');
 define('CD_EXPECTED_PRODUCTS_FIELD', 'The column to sort by in the expected products box.');
 define('CT_USE_DEFAULT_LANGUAGE_CURRENCY', 'Switch To Default Language Currency');
+define('CT_FORCE_CATALOG_LANGUAGE', 'Do you want to force the catalog to use the default language?');
+define('CD_FORCE_CATALOG_LANGUAGE', 'If you set this to true then the catalog will be opened in the langauge set in Localization -> Languages -> Set as default.  If it is set to false then the system will detect the user\'s browser language and use that.');
+define('CT_FORCE_ADMIN_LANGUAGE', 'Do you want to force the admin panel to use the default language?');
+define('CD_FORCE_ADMIN_LANGUAGE', 'If you set this to true then the admin panel will be opened in the langauge set in Localization -> Languages -> Set as default.  If it is set to false then the system will detect the user\'s browser language and use that.');
 define('CD_USE_DEFAULT_LANGUAGE_CURRENCY', 'Automatically switch to the language\'s currency when it is changed');
 define('CT_ENGLISH_SWITCH', 'Use UK or US English Language');
 define('CD_ENGLISH_SWITCH', 'Would you like to setup your store using UK or US English. (Date format, Address Titles, DoB, etc.)');
@@ -803,6 +807,11 @@ define('CT_RECAPTCHA_PUBLIC_KEY', 'Public Key');
 define('CD_RECAPTCHA_PUBLIC_KEY', 'Enter your reCaptcha Public Key');
 define('CT_RECAPTCHA_PRIVATE_KEY', 'Private Key');
 define('CD_RECAPTCHA_PRIVATE_KEY', 'Enter your reCaptcha Private Key');
+define('CT_RECAPTCHA_EMAIL_URL', 'Enter your reCaptcha email protection URL');
+define('CD_RECAPTCHA_EMAIL_URL', 'If you want to use the reCaptcha mailhide functionality then please enter the URL supplied for your chosen email address.  <u><a href="http://www.google.com/recaptcha/mailhide/" target="_blank"><br><br>You can get one of these from Google reCaptcha</a></u>.');
+define('CT_RECAPTCHA_EMAIL_FROM', 'Enter your disguised email address used in reCaptcha');
+define('CD_RECAPTCHA_EMAIL_FROM', 'Please enter a partial or disguised email address to be shown in your store.  For example: john...@email.com <br><br>Or enter <b>CLICK</b> to show the multi-lingual \'Click to reveal\' text');
+
 
 // Configuration ID: 88 - Price Breaks 
 define('CT_PRICE_BREAK_NOF_LEVELS', 'Maximum number of price break levels');

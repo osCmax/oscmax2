@@ -17,6 +17,7 @@ define('TITLE_ID', 'ID');
 define('TITLE_FIRSTNAME', 'Vorname');
 define('TITLE_LASTNAME', 'Nachname');
 define('TITLE_EMAIL', 'E-Mail');
+define('TITLE_NEWSLETTER', 'Newsletter');
 define('TITLE_GENDER', 'Geschlecht');
 define('TITLE_DOB', 'Geburtstag');
 define('TITLE_COMPANY', 'Firma');
@@ -29,5 +30,5 @@ define('TITLE_COUNTRY', 'Land');
 define('TITLE_PHONE', 'Telefon');
 define('TITLE_FAX', 'Fax');
 
-define('TEXT_SEPARATOR', 'Separator:');
+define('TEXT_SEPARATOR', 'Trennzeichen:');
 ?>

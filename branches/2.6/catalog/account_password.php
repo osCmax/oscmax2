@@ -23,7 +23,7 @@ $Id$
   }
 
 // needs to be included earlier to set the success message in the messageStack
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ACCOUNT_PASSWORD);
+  require(bts_select('language', FILENAME_ACCOUNT_PASSWORD));
 
   if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
     $password_current = tep_db_prepare_input($_POST['password_current']);

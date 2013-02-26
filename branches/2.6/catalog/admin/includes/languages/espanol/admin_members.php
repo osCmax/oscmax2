@@ -41,7 +41,7 @@ define('TABLE_HEADING_GROUPS_CATEGORIES', 'Permisos de categorías');
 
 define('TEXT_INFO_HEADING_DEFAULT', 'Miembro de administración ');
 define('TEXT_INFO_HEADING_DELETE', 'Eliminar miembro ');
-define('TEXT_INFO_HEADING_EDIT', 'Editar categoría / ');
+define('TEXT_INFO_HEADING_EDIT', 'Editar miembro de administración');
 define('TEXT_INFO_HEADING_NEW', 'Nuevo miembro de administración ');
 
 define('TEXT_INFO_DEFAULT_INTRO', 'Grupo de miembro');
@@ -79,7 +79,7 @@ define('ADMIN_EMAIL_EDIT_TEXT', 'Hola %s,' . "\n\n" . 'Tus datos personales han 
 define('TEXT_INFO_HEADING_DEFAULT_GROUPS', 'Grupo de administración ');
 define('TEXT_INFO_HEADING_DELETE_GROUPS', 'Eliminar grupo ');
 
-define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>NOTA:</b><li><b>editar:</b> para modificar el nombre del grupo.</li><li><b>eliminar:</b> para eliminar el grupo.</li><li><b>definir:</b> para definir permisos del grupo.</li>');
+define('TEXT_INFO_DEFAULT_GROUPS_INTRO', '<b>NOTA:</b><li><b>nuevos permisos:</b> definir/editar el acceso a los ficheros.</li><li><b>modificar:</b> modificar el nombre del grupo.</li><li><b>eliminar:</b> eliminar el grupo.</li>');
 define('TEXT_INFO_DELETE_GROUPS_INTRO', 'Esto eliminará también los miembros del grupo. ¿Quieres eliminar el grupo <b>%s</b>?');
 define('TEXT_INFO_DELETE_GROUPS_INTRO_NOT', '¡No puedes eliminar este grupo!');
 define('TEXT_INFO_GROUPS_INTRO', 'Elige un nombre de grupo único. Pulsa <b>Guardar</b> para crearlo.');

@@ -38,7 +38,7 @@ $Id$
 
     echo '</p>';
   } else {
-    echo TEXT_SEE_ORDERS . '<br><br>' . TEXT_CONTACT_STORE_OWNER;
+    echo  TEXT_SEE_ORDERS . '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '"><u>' . LOGIN_BOX_MY_ACCOUNT . '</u></a>' . TEXT_SEE_ORDERS_1 . '<a href="' . tep_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL') . '"><u>' . LOGIN_BOX_ACCOUNT_HISTORY . '</u></a><br><br>' . TEXT_CONTACT_STORE_OWNER . '<a href="' . tep_href_link(FILENAME_CONTACT_US) . '"><u>' . TEXT_STORE_OWNER . '</u></a>';
     }
 /* One Page Checkout - BEGIN */
   }

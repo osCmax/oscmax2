@@ -17,6 +17,7 @@ define('TITLE_ID', 'cID');
 define('TITLE_FIRSTNAME', 'Firstname');
 define('TITLE_LASTNAME', 'Lastname');
 define('TITLE_EMAIL', 'E-mail');
+define('TITLE_NEWSLETTER', 'Newsletter');
 define('TITLE_GENDER', 'Genre');
 define('TITLE_DOB', 'DOB');
 define('TITLE_COMPANY', 'Company');

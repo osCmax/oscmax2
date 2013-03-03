@@ -117,18 +117,18 @@ UPDATE `address_format` SET `address_format_id`='6', `address_format`='$firstnam
 
 /* SYNC TABLE : `admin_files` */
 
-INSERT INTO `admin_files` VALUES ('223', 'customers_extra_fields.php', 'BOX_CUSTOMERS_EXTRA_FIELDS_MANAGER', '0', '5', '1', '0');
+INSERT INTO `admin_files` VALUES ('', 'customers_extra_fields.php', 'BOX_CUSTOMERS_EXTRA_FIELDS_MANAGER', '0', '5', '1', '0');
 
 /* SYNC TABLE : `configuration` */
 
-INSERT INTO `configuration` VALUES ('3312', 'CT_SEND_ALL_EMAIL_COPY_TO', 'SEND_ALL_EMAIL_COPY_TO', '', 'CD_SEND_ALL_EMAIL_COPY_TO', '1', '13', NULL, '0001-01-01 01:01:01', NULL, NULL);
-INSERT INTO `configuration` VALUES ('2556', 'CT_RECAPTCHA_WISHLIST', 'RECAPTCHA_WISHLIST', 'true', 'CD_RECAPTCHA_WISHLIST', '87', '10', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO `configuration` VALUES ('2555', 'CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'true', 'CD_RECAPTCHA_PRODUCT_REVIEWS_WRITE', '87', '9', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO `configuration` VALUES ('2554', 'CT_RECAPTCHA_STYLE', 'RECAPTCHA_STYLE', 'white', 'CD_RECAPTCHA_STYLE', '87', '2', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'white\', \'red\', \'blackglass\',\'clean\',\'custom\'),');
-INSERT INTO `configuration` VALUES ('2553', 'CT_RECAPTCHA_CONTACT_US', 'RECAPTCHA_CONTACT_US', 'true', 'CD_RECAPTCHA_CONTACT_US', '87', '8', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO `configuration` VALUES ('2552', 'CT_RECAPTCHA_CREATE_ACCOUNT', 'RECAPTCHA_CREATE_ACCOUNT', 'true', 'CD_RECAPTCHA_CREATE_ACCOUNT', '87', '7', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO `configuration` VALUES ('2517', 'CT_ACCOUNT_EMAIL_CONFIRMATION', 'ACCOUNT_EMAIL_CONFIRMATION', 'false', 'CD_ACCOUNT_EMAIL_CONFIRMATION', '5', '6', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO `configuration` VALUES ('3311', 'CT_CODE_SUFFIX_SEPERATOR', 'CODE_SUFFIX_SEPERATOR', '-', 'CD_CODE_SUFFIX_SEPERATOR', '1', '27', NULL, '0001-01-01 01:01:01', NULL, NULL);
+INSERT INTO `configuration` VALUES ('', 'CT_SEND_ALL_EMAIL_COPY_TO', 'SEND_ALL_EMAIL_COPY_TO', '', 'CD_SEND_ALL_EMAIL_COPY_TO', '1', '13', NULL, '0001-01-01 01:01:01', NULL, NULL);
+INSERT INTO `configuration` VALUES ('', 'CT_RECAPTCHA_WISHLIST', 'RECAPTCHA_WISHLIST', 'true', 'CD_RECAPTCHA_WISHLIST', '87', '10', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO `configuration` VALUES ('', 'CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'true', 'CD_RECAPTCHA_PRODUCT_REVIEWS_WRITE', '87', '9', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO `configuration` VALUES ('', 'CT_RECAPTCHA_STYLE', 'RECAPTCHA_STYLE', 'white', 'CD_RECAPTCHA_STYLE', '87', '2', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'white\', \'red\', \'blackglass\',\'clean\',\'custom\'),');
+INSERT INTO `configuration` VALUES ('', 'CT_RECAPTCHA_CONTACT_US', 'RECAPTCHA_CONTACT_US', 'true', 'CD_RECAPTCHA_CONTACT_US', '87', '8', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO `configuration` VALUES ('', 'CT_RECAPTCHA_CREATE_ACCOUNT', 'RECAPTCHA_CREATE_ACCOUNT', 'true', 'CD_RECAPTCHA_CREATE_ACCOUNT', '87', '7', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO `configuration` VALUES ('', 'CT_ACCOUNT_EMAIL_CONFIRMATION', 'ACCOUNT_EMAIL_CONFIRMATION', 'false', 'CD_ACCOUNT_EMAIL_CONFIRMATION', '5', '6', NULL, '0001-01-01 01:01:01', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO `configuration` VALUES ('', 'CT_CODE_SUFFIX_SEPERATOR', 'CODE_SUFFIX_SEPERATOR', '-', 'CD_CODE_SUFFIX_SEPERATOR', '1', '27', NULL, '0001-01-01 01:01:01', NULL, NULL);
 
 /* SYNC TABLE : `db_version` */
 

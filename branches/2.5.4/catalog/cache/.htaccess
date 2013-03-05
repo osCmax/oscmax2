@@ -1,0 +1,28 @@
+#$Id: .htaccess 988 2011-01-06 04:42:31Z michael.oscmax@gmail.com $
+#
+#  osCmax e-Commerce
+#  http://www.osCmax.com
+#
+#  Copyright 2000 - 2011 osCmax
+#
+# Released under the GNU General Public License
+# This is used with Apache WebServers
+# The following blocks direct HTTP requests in this directory recursively
+#
+# For this to work, you must include the parameter 'Limit' to the AllowOverride configuration
+#
+# Example:
+#
+#<Directory "/usr/local/apache/htdocs">
+#  AllowOverride Limit
+#
+# 'All' with also work. (This configuration is in your apache/conf/httpd.conf file)
+#
+# This does not affect PHP include/require functions
+#
+# Example: http://server/catalog/includes/application_top.php will not work
+
+<FilesMatch "\.(ser|php|cache|htaccess)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>

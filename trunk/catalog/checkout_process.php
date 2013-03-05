@@ -117,7 +117,7 @@ if (tep_get_configuration_key_value('MODULE_SHIPPING_FREESHIPPER_STATUS') and $c
 
   $payment_modules->update_status();
 
-  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) && (!$credit_covers) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
     tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   }
 

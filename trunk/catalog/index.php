@@ -345,28 +345,28 @@ global $customer_group_id;
 
       switch ($column_list[$sort_col]) {
         case 'PRODUCT_LIST_MODEL':
-          $listing_sql .= " order by p.products_model" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by " . $new_products_sort . "p.products_model" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
         case 'PRODUCT_LIST_NAME':
-          $listing_sql .= " order by pd.products_name" . ($sort_order == 'd' ? ' desc' : '');
+          $listing_sql .= " order by " . $new_products_sort . "pd.products_name" . ($sort_order == 'd' ? ' desc' : '');
           break;
         case 'PRODUCT_LIST_MANUFACTURER':
-          $listing_sql .= " order by m.manufacturers_name" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by " . $new_products_sort . "m.manufacturers_name" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
         case 'PRODUCT_LIST_QUANTITY':
-          $listing_sql .= " order by p.products_quantity" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by " . $new_products_sort . "p.products_quantity" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
         case 'PRODUCT_LIST_IMAGE':
-          $listing_sql .= " order by pd.products_name";
+          $listing_sql .= " order by " . $new_products_sort . "pd.products_name";
           break;
         case 'PRODUCT_LIST_WEIGHT':
-          $listing_sql .= " order by p.products_weight" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by " . $new_products_sort . "p.products_weight" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
         case 'PRODUCT_LIST_PRICE':
-          $listing_sql .= " order by final_price" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by " . $new_products_sort . "final_price" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
 		case 'PRODUCT_LIST_BESTSELLER':
-          $listing_sql .= " order by products_ordered" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by " . $new_products_sort . "products_ordered" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
       }
     }

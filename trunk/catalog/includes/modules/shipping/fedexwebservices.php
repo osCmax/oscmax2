@@ -124,7 +124,7 @@ class fedexwebservices {
     $postcode = str_replace(array(' ', '-'), '', $order->delivery['postcode']);
     $country_id = $order->delivery['country']['iso_code_2'];
 
-    $totals = $order->info['subtotal'] = $_SESSION['cart']->show_total();
+    $totals = $order->info['subtotal'] || $_SESSION['cart']->show_total();
     $this->_setInsuranceValue($totals);
 
     $request['WebAuthenticationDetail'] = array('UserCredential' =>

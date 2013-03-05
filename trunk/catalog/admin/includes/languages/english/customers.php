@@ -47,4 +47,8 @@ define('TEXT_AUTHOR', 'Author:');
 define('IMAGE_BUTTON_LOGIN_AS', 'Login as customer');
 
 define('SELECT_ADDRESS', 'Select customer address to edit: ');
+
+// BOF Customers extra fields
+define('CATEGORY_EXTRA_FIELDS', 'Customer extra fields');
+// EOF Customers extra fields
 ?>

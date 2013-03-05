@@ -43,7 +43,7 @@ define('TABLE_HEADING_MANUFACTURER', 'Fabricant');
 define('TABLE_HEADING_QUANTITY', 'Quantit&eacute;');
 define('TABLE_HEADING_PRICE', 'Prix');
 define('TABLE_HEADING_WEIGHT', 'Poids');
-define('TABLE_HEADING_BUY_NOW', 'Acheter maintenant');
+define('TABLE_HEADING_BUY_NOW', 'Acheter');
 
 define('TEXT_NO_PRODUCTS', 'Il n\'y a aucun produit correspondant &agrave; vos crit&egrave;res de recherche.');
 
@@ -55,9 +55,12 @@ define('ERROR_PRICE_FROM_MUST_BE_NUM', 'Le prix du champ "Prix &agrave; partir d
 define('ERROR_PRICE_TO_MUST_BE_NUM', 'Le prix du champ "Prix jusqu\'&agrave;" ne doit contenir que des chiffres.');
 define('ERROR_PRICE_TO_LESS_THAN_PRICE_FROM', 'Le prix du champ "Prix jusqu\'&agrave;" doit &ecirc;tre sup&eacute;rieure ou &eacute;gale au prix du champ "Prix &agrave; partir de".');
 define('ERROR_INVALID_KEYWORDS', 'Mots-cl&eacute;s invalides.');
+define('TEXT_OPTIONAL','Entr&eacute;es dans le champs ci-dessous sont facultatives si les crit&egrave;res de recherche est laiss&eacute;e en blanc. Dans ce cas, au moins un champ ci-dessous doit avoir une entr&eacute;e.');
 
-define('TEXT_OPTIONAL', 'Entr&eacute;es dans le champs ci-dessous sont facultatives si les crit&egrave;res de recherche est laiss&eacute;e en blanc. Dans ce cas, au moins un champ ci-dessous doit avoir une entr&eacute;e.');
-define('TEXT_FOR_FIELD', 'Pour ce champ correspond');
-define('TEXT_MATCH_ANY', 'TOUTE valeur s&eacute;lectionn&eacute;e ou');
-define('TEXT_MATCH_ALL', 'TOUTES les valeurs s&eacute;lectionn&eacute;es');
+define('TEXT_FOR_FIELD','Pour ce domaine match');
+
+define('TEXT_MATCH_ANY','TOUTE valeur s&eacute;lectionn&eacute;e ou');
+
+define('TEXT_MATCH_ALL','TOUTES les valeurs s&eacute;lectionn&eacute;es');
+
 ?>

@@ -18,7 +18,7 @@ $Id$
   
   require(bts_select('language', FILENAME_WISHLIST));
 
-if (RECAPTCHA_ON == 'true') {
+if (RECAPTCHA_ON == 'true' && RECAPTCHA_WISHLIST == 'true') {
 
   // start modification for reCaptcha
   require_once('includes/classes/recaptchalib.php');
@@ -136,7 +136,7 @@ if (RECAPTCHA_ON == 'true') {
 				$guest_errors .= "<div class=\"messageStackError\"><img src=\"images/icons/error.gif\" /> " . ERROR_VALID_EMAIL . "</div>";
 			}
 
-			if (RECAPTCHA_ON == 'true') {
+			if (RECAPTCHA_ON == 'true' && RECAPTCHA_WISHLIST == 'true') {
 			// reCAPTCHA
 			if (!$resp->is_valid) { 
 	    		$error = true;

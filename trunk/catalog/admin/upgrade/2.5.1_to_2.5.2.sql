@@ -21,6 +21,7 @@ ALTER TABLE `pm_configuration`
 /* Alter table in target */
 ALTER TABLE `slideshow` 
 	ADD COLUMN `slideshow_active` varchar(3) NOT NULL after `slideshow_target`;
+ALTER TABLE `slideshow`
 	ADD COLUMN `slideshow_cg_hide` varchar(255) NOT NULL after `slideshow_active`;
 
 

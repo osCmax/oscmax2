@@ -116,10 +116,10 @@ CREATE TABLE affiliate_affiliate (
   affiliate_payment_bank_swift_code varchar(64) NOT NULL,
   affiliate_payment_bank_account_name varchar(64) NOT NULL,
   affiliate_payment_bank_account_number varchar(64) NOT NULL,
-  affiliate_date_of_last_logon datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_date_of_last_logon datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_number_of_logons int NOT NULL default '0',
-  affiliate_date_account_created datetime NOT NULL default '0000-00-00 00:00:00',
-  affiliate_date_account_last_modified datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_date_account_created datetime NOT NULL default '0001-01-01 01:01:01',
+  affiliate_date_account_last_modified datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_lft int NOT NULL,
   affiliate_rgt int NOT NULL,
   affiliate_root int NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE affiliate_banners (
   affiliate_expires_impressions int(7) default '0',
   affiliate_expires_date datetime default NULL,
   affiliate_date_scheduled datetime default NULL,
-  affiliate_date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_date_added datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_date_status_change datetime default NULL,
   affiliate_status int(1) NOT NULL default '1',
   PRIMARY KEY (affiliate_banners_id)
@@ -153,7 +153,7 @@ CREATE TABLE affiliate_banners_history (
   affiliate_banners_affiliate_id int NOT NULL default '0',
   affiliate_banners_shown int NOT NULL default '0',
   affiliate_banners_clicks tinyint(4) NOT NULL default '0',
-  affiliate_banners_history_date date NOT NULL default '0000-00-00',
+  affiliate_banners_history_date date NOT NULL default '0001-01-01',
   PRIMARY KEY (affiliate_banners_history_id, affiliate_banners_products_id)
 );
 
@@ -161,7 +161,7 @@ DROP TABLE IF EXISTS affiliate_clickthroughs;
 CREATE TABLE affiliate_clickthroughs (
   affiliate_clickthrough_id int NOT NULL auto_increment,
   affiliate_id int NOT NULL default '0',
-  affiliate_clientdate datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_clientdate datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_clientbrowser varchar(200) default 'Could Not Find This Data',
   affiliate_clientip varchar(50) default 'Could Not Find This Data',
   affiliate_clientreferer varchar(200) default 'none detected (maybe a direct link)',
@@ -174,7 +174,7 @@ CREATE TABLE affiliate_clickthroughs (
 DROP TABLE IF EXISTS affiliate_news;
 CREATE TABLE affiliate_news (
   news_id int NOT NULL auto_increment,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  date_added datetime NOT NULL default '0001-01-01 01:01:01',
   news_status tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (news_id)
 );
@@ -185,7 +185,7 @@ CREATE TABLE affiliate_newsletters (
   title varchar(255) NOT NULL,
   content text NOT NULL,
   module varchar(255) NOT NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  date_added datetime NOT NULL default '0001-01-01 01:01:01',
   date_sent datetime default NULL,
   `status` int(1) default NULL,
   locked int(1) default '0',
@@ -211,8 +211,8 @@ CREATE TABLE affiliate_payment (
   affiliate_payment decimal(15,2) NOT NULL default '0.00',
   affiliate_payment_tax decimal(15,2) NOT NULL default '0.00',
   affiliate_payment_total decimal(15,2) NOT NULL default '0.00',
-  affiliate_payment_date datetime NOT NULL default '0000-00-00 00:00:00',
-  affiliate_payment_last_modified datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_payment_date datetime NOT NULL default '0001-01-01 01:01:01',
+  affiliate_payment_last_modified datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_payment_status int(5) NOT NULL default '0',
   affiliate_firstname varchar(32) NOT NULL,
   affiliate_lastname varchar(32) NOT NULL,
@@ -224,7 +224,7 @@ CREATE TABLE affiliate_payment (
   affiliate_company varchar(60) NOT NULL,
   affiliate_state varchar(32) NOT NULL default '0',
   affiliate_address_format_id int(5) NOT NULL default '0',
-  affiliate_last_modified datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_last_modified datetime NOT NULL default '0001-01-01 01:01:01',
   PRIMARY KEY (affiliate_payment_id)
 );
 
@@ -245,7 +245,7 @@ CREATE TABLE affiliate_payment_status_history (
   affiliate_payment_id int NOT NULL default '0',
   affiliate_new_value int(5) NOT NULL default '0',
   affiliate_old_value int(5) default NULL,
-  affiliate_date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_date_added datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_notified int(1) default '0',
   PRIMARY KEY (affiliate_status_history_id)
 );
@@ -253,7 +253,7 @@ CREATE TABLE affiliate_payment_status_history (
 DROP TABLE IF EXISTS affiliate_sales;
 CREATE TABLE affiliate_sales (
   affiliate_id int NOT NULL default '0',
-  affiliate_date datetime NOT NULL default '0000-00-00 00:00:00',
+  affiliate_date datetime NOT NULL default '0001-01-01 01:01:01',
   affiliate_browser varchar(100) NOT NULL,
   affiliate_ipaddress varchar(20) NOT NULL,
   affiliate_orders_id int NOT NULL default '0',
@@ -485,16 +485,17 @@ CREATE TABLE coupons (
   coupon_code varchar(32) NOT NULL,
   coupon_amount decimal(8,4) NOT NULL default '0.0000',
   coupon_minimum_order decimal(8,4) NOT NULL default '0.0000',
-  coupon_start_date datetime NOT NULL default '0000-00-00 00:00:00',
-  coupon_expire_date datetime NOT NULL default '0000-00-00 00:00:00',
+  coupon_start_date datetime NOT NULL default '0001-01-01 01:01:01',
+  coupon_expire_date datetime NOT NULL default '0001-01-01 01:01:01',
   uses_per_coupon int(5) NOT NULL default '1',
   uses_per_user int(5) NOT NULL default '0',
   restrict_to_products varchar(255) default NULL,
   restrict_to_categories varchar(255) default NULL,
+  coupon_exclude_cg varchar(32) NOT NULL,
   restrict_to_customers text,
   coupon_active char(1) NOT NULL default 'Y',
-  date_created datetime NOT NULL default '0000-00-00 00:00:00',
-  date_modified datetime NOT NULL default '0000-00-00 00:00:00',
+  date_created datetime NOT NULL default '0001-01-01 01:01:01',
+  date_modified datetime NOT NULL default '0001-01-01 01:01:01',
   PRIMARY KEY (coupon_id)
 );
 
@@ -545,7 +546,7 @@ CREATE TABLE coupon_redeem_track (
   unique_id int NOT NULL auto_increment,
   coupon_id int NOT NULL default '0',
   customer_id int NOT NULL default '0',
-  redeem_date datetime NOT NULL default '0000-00-00 00:00:00',
+  redeem_date datetime NOT NULL default '0001-01-01 01:01:01',
   redeem_ip varchar(32) NOT NULL,
   order_id int NOT NULL default '0',
   PRIMARY KEY (unique_id)
@@ -574,7 +575,7 @@ CREATE TABLE customers (
   customers_gender char(1) NOT NULL,
   customers_firstname varchar(32) NOT NULL,
   customers_lastname varchar(32) NOT NULL,
-  customers_dob datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+  customers_dob datetime DEFAULT '0001-01-01 01:01:01' NOT NULL,
   customers_email_address varchar(96) NOT NULL,
   customers_default_address_id int,
   customers_telephone varchar(32) NOT NULL,
@@ -712,6 +713,7 @@ CREATE TABLE information (
   visible enum('1','0') NOT NULL DEFAULT '1',
   show_in_infobox enum('1','0') NOT NULL DEFAULT '1',
   language_id int(11) NOT NULL DEFAULT '0',
+  info_cg_hide varchar(255) DEFAULT NULL,
   PRIMARY KEY (information_id,language_id)
 );
 
@@ -1222,7 +1224,7 @@ CREATE TABLE shipping_manifest (
   package_weight char(3) NOT NULL,
   package_value varchar(4) NOT NULL,
   oversized int(1) NOT NULL default '0',
-  pickup_date date NOT NULL default '0000-00-00',
+  pickup_date date NOT NULL default '0001-01-01',
   shipping_type varchar(64) NOT NULL,
   residential char(1) NOT NULL,
   cod int(1) NOT NULL default '0',
@@ -1236,7 +1238,7 @@ DROP TABLE IF EXISTS specials;
 CREATE TABLE specials (
   specials_id int NOT NULL auto_increment,
   products_id int NOT NULL,
-  specials_new_products_price decimal(15,4) NOT NULL,
+  specials_new_products_price decimal(15,5) NOT NULL,
   specials_date_added datetime,
   specials_last_modified datetime,
   expires_date datetime,
@@ -1291,7 +1293,7 @@ CREATE TABLE theme_configuration (
   location int(5) NOT NULL default '0',
   sort_order int(5) default NULL,
   last_modified datetime default NULL,
-  date_added datetime NOT NULL default '0000-00-00 00:00:00',
+  date_added datetime NOT NULL default '0001-01-01 01:01:01',
   box_heading varchar(64) NOT NULL,
   PRIMARY KEY (configuration_id)
 );
@@ -1583,6 +1585,32 @@ CREATE TABLE IF NOT EXISTS google_configuration (
   google_configuration_value text
 );
 
+DROP TABLE IF EXISTS customers_to_extra_fields;
+CREATE TABLE IF NOT EXISTS customers_to_extra_fields (
+  customers_id int(11) NOT NULL default '0',
+  fields_id int(11) NOT NULL default '0',
+  value text
+);
+
+
+DROP TABLE IF EXISTS extra_fields;
+CREATE TABLE IF NOT EXISTS extra_fields (
+  fields_id int(11) NOT NULL auto_increment,
+  fields_input_type int(11) NOT NULL default '0',
+  fields_input_value text NOT NULL,
+  fields_status tinyint(2) NOT NULL default '0',
+  fields_required_status tinyint(2) NOT NULL default '0',
+  fields_size int(5) NOT NULL default '0',
+  fields_cef_cg_hide varchar(255) NOT NULL,
+  PRIMARY KEY  (fields_id)
+);
+
+DROP TABLE IF EXISTS extra_fields_info;
+CREATE TABLE IF NOT EXISTS extra_fields_info (
+  fields_id int(11) NOT NULL default '0',
+  languages_id int(11) NOT NULL default '0',
+  fields_name varchar(32) NOT NULL default ''
+);
 
 # data
 
@@ -1592,7 +1620,7 @@ INSERT INTO address_format VALUES (2,'$firstname $lastname$cr$streets$cr$city,$s
 INSERT INTO address_format VALUES (3,'$firstname $lastname$cr$streets$cr$city$cr$postcode - $statecomma$country','$state / $country');
 INSERT INTO address_format VALUES (4,'$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country','$postcode / $country');
 INSERT INTO address_format VALUES (5,'$firstname $lastname$cr$streets$cr$postcode $city$cr$country','$city / $country');
-INSERT INTO address_format VALUES (6,'$firstname $lastname$cr$streets$cr$suburb$cr$city$cr$state$cr$postcode$cr$country','$city / $country');
+INSERT INTO address_format VALUES (6,'$firstname $lastname$cr$streets$cr$city$cr$state$cr$postcode$cr$country','$city / $country');
 
 
 INSERT INTO admin_files VALUES(1, 'administrator.php', 'BOX_HEADING_ADMINISTRATOR', 1, 0, '1', 1);
@@ -1786,7 +1814,7 @@ INSERT INTO admin_files VALUES(219, 'paypal_wpp_charge.php', 'FILE_PAYPAL', 0, 5
 INSERT INTO admin_files VALUES(220, 'paypal_wpp_include.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
 INSERT INTO admin_files VALUES(221, 'paypal_wpp_refund.php', 'FILE_PAYPAL', 0, 5, '1,2', 99);
 INSERT INTO admin_files VALUES(222, 'configuration.php?gID=208', 'BOX_CONFIGURATION_ADDTHIS', 0, 2, '1', 26);
-
+INSERT INTO admin_files VALUES(223, 'customers_extra_fields.php', 'BOX_CUSTOMERS_EXTRA_FIELDS_MANAGER', 0, 5, '1', 0);
 
 
 INSERT INTO admin_groups VALUES (1,'Top Administrator');
@@ -1828,6 +1856,10 @@ INSERT INTO configuration VALUES (3306, 'CT_SHOW_SHIPPING_NEAR_PRICE', 'SHOW_SHI
 INSERT INTO configuration VALUES (3308, 'CT_CATEGORY_DROPDOWN_SWITCH', 'DISABLE_CATEGORY_DROPDOWN_SWITCH', 'false', 'CD_CATEGORY_DROPDOWN_SWITCH', '1', '26', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 INSERT INTO configuration VALUES (3309, 'CT_FORCE_CATALOG_LANGUAGE', 'FORCE_CATALOG_LANGUAGE', 'false', 'CD_FORCE_CATALOG_LANGUAGE', '1', '10', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
 INSERT INTO configuration VALUES (3310, 'CT_FORCE_ADMIN_LANGUAGE', 'FORCE_ADMIN_LANGUAGE', 'false', 'CD_FORCE_ADMIN_LANGUAGE', '1', '10', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\',  \'false\'), ');
+INSERT INTO configuration VALUES (3311, 'CT_CODE_SUFFIX_SEPERATOR', 'CODE_SUFFIX_SEPERATOR', '-', 'CD_CODE_SUFFIX_SEPERATOR', '1', '27', NULL, now(), NULL,  NULL);
+INSERT INTO configuration VALUES (3312, 'CT_SEND_ALL_EMAIL_COPY_TO', 'SEND_ALL_EMAIL_COPY_TO', '', 'CD_SEND_ALL_EMAIL_COPY_TO', '1', '13', NULL, now(), NULL, NULL);
+
+
 
 # Configuration ID: 2 - Minimum Values
 INSERT INTO configuration VALUES (19, 'CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'ENTRY_FIRST_NAME_MIN_LENGTH', '2', 'CD_ENTRY_FIRST_NAME_MIN_LENGTH', '2', '1', NULL, now(), NULL, NULL);
@@ -1897,6 +1929,7 @@ INSERT INTO configuration VALUES (2511, 'CT_CUSTOMER_COMMENTS_NOTIFY', 'CUSTOMER
 INSERT INTO configuration VALUES (2512, 'CT_CUSTOMER_COMMENTS_NEW_STATUS', 'CUSTOMER_COMMENTS_NEW_STATUS', '4', 'CD_CUSTOMER_COMMENTS_NEW_STATUS', 5, '51', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
 INSERT INTO configuration VALUES (2513, 'CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'CUSTOMER_COMMENTS_NEW_STATUS_DL', '5', 'CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 5, '52', now(), now(), 'tep_get_orders_status_name', 'tep_cfg_pull_down_status_change_cancel_list(');
 INSERT INTO configuration VALUES (2516, 'CT_CHECKOUT_SHIPPING_DATE', 'CHECKOUT_SHIPPING_DATE', 'false', 'CD_CHECKOUT_SHIPPING_DATE', 5, '53', NULL , now(), NULL , 'tep_cfg_select_option(array(''true'', ''false''),' );
+INSERT INTO configuration VALUES (2517, 'CT_ACCOUNT_EMAIL_CONFIRMATION', 'ACCOUNT_EMAIL_CONFIRMATION', 'false', 'CD_ACCOUNT_EMAIL_CONFIRMATION', 5, '6', NULL , now(), NULL , 'tep_cfg_select_option(array(''true'', ''false''),' );
 
 
 # Configuration ID: 6 - Module Options - Hidden from Admin
@@ -2229,16 +2262,24 @@ INSERT INTO configuration VALUES (1999, 'CT_SHOW_SITEMAP', 'SHOW_SITEMAP', 'true
 
 # Configuration ID: 87 - reCaptcha
 INSERT INTO configuration VALUES (2505, 'CT_RECAPTCHA_ON', 'RECAPTCHA_ON', 'false', 'CD_RECAPTCHA_ON', 87, 1, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
-INSERT INTO configuration VALUES (2506, 'CT_RECAPTCHA_PUBLIC_KEY', 'RECAPTCHA_PUBLIC_KEY', '', 'CD_RECAPTCHA_PUBLIC_KEY', 87, 2, NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (2507, 'CT_RECAPTCHA_PRIVATE_KEY', 'RECAPTCHA_PRIVATE_KEY', '', 'CD_RECAPTCHA_PRIVATE_KEY', 87, 3, NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (2550, 'CT_RECAPTCHA_EMAIL_URL', 'RECAPTCHA_EMAIL_URL', '', 'CD_RECAPTCHA_EMAIL_URL', 87, 4, NULL, now(), NULL, 'tep_cfg_textarea(');
-INSERT INTO configuration VALUES (2551, 'CT_RECAPTCHA_EMAIL_FROM', 'RECAPTCHA_EMAIL_FROM', 'CLICK', 'CD_RECAPTCHA_EMAIL_FROM', 87, 5, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2506, 'CT_RECAPTCHA_PUBLIC_KEY', 'RECAPTCHA_PUBLIC_KEY', '', 'CD_RECAPTCHA_PUBLIC_KEY', 87, 3, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2507, 'CT_RECAPTCHA_PRIVATE_KEY', 'RECAPTCHA_PRIVATE_KEY', '', 'CD_RECAPTCHA_PRIVATE_KEY', 87, 4, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2550, 'CT_RECAPTCHA_EMAIL_URL', 'RECAPTCHA_EMAIL_URL', '', 'CD_RECAPTCHA_EMAIL_URL', 87, 5, NULL, now(), NULL, 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES (2551, 'CT_RECAPTCHA_EMAIL_FROM', 'RECAPTCHA_EMAIL_FROM', 'CLICK', 'CD_RECAPTCHA_EMAIL_FROM', 87, 6, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2552, 'CT_RECAPTCHA_CREATE_ACCOUNT', 'RECAPTCHA_CREATE_ACCOUNT', 'true', 'CD_RECAPTCHA_CREATE_ACCOUNT', 87, 7, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2553, 'CT_RECAPTCHA_CONTACT_US', 'RECAPTCHA_CONTACT_US', 'true', 'CD_RECAPTCHA_CONTACT_US', 87, 8, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2554, 'CT_RECAPTCHA_STYLE', 'RECAPTCHA_STYLE', 'white', 'CD_RECAPTCHA_STYLE', 87, 2, NULL, now(), NULL, 'tep_cfg_select_option(array(''white'', ''red'', ''blackglass'',''clean'',''custom''),');
+INSERT INTO configuration VALUES (2555, 'CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'true', 'CD_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 87, 9, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
+INSERT INTO configuration VALUES (2556, 'CT_RECAPTCHA_WISHLIST', 'RECAPTCHA_WISHLIST', 'true', 'CD_RECAPTCHA_WISHLIST', 87, 10, NULL, now(), NULL, 'tep_cfg_select_option(array(''true'', ''false''),');
 
 
 # Configuration ID: 88 - Price Breaks
 INSERT INTO configuration VALUES (2509, 'CT_PRICE_BREAK_NOF_LEVELS', 'PRICE_BREAK_NOF_LEVELS', '10', 'CD_PRICE_BREAK_NOF_LEVELS', 88, 1, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2510, 'CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'NOF_PRICE_BREAKS_FOR_DROPDOWN', '5', 'CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 88, 2, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2999, 'CT_PRICE_BREAK_PRICE', 'PRICE_BREAK_PRICE', 'off', 'CD_PRICE_BREAK_PRICE', 88, 3, now(), now(), NULL, 'tep_cfg_select_option(array(\'high\',\'low\',\'off\'),');
+INSERT INTO configuration VALUES (2670, 'CT_PRICE_BREAK_PERCENT_BEHAVIOUR', 'PRICE_BREAK_PERCENT_BEHAVIOUR', 'Off Price', 'CD_PRICE_BREAK_PERCENT_BEHAVIOUR', 88, 4, now(), now(), NULL, 'tep_cfg_select_option(array(\'Off Price\', \'To Pay\'),');
+INSERT INTO configuration VALUES (2671, 'CT_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Update Percent', 'CD_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 88, 5, now(), now(), NULL, 'tep_cfg_select_option(array(\'Update Percent\', \'Update Prices\'),');
+
 
 # Configuration ID: 89 - Google Maps
 INSERT INTO configuration VALUES ('77', 'CT_GOOGLE_MAPS_KEY', 'GOOGLE_MAPS_KEY', 'YOURKEY', 'CD_GOOGLE_MAPS_KEY', '89', '25', NULL, now(), NULL, 'tep_cfg_textarea(');
@@ -2434,7 +2475,7 @@ INSERT INTO configuration VALUES (3074, 'CT_ONEPAGE_SHOW_OSC_COLUMNS', 'ONEPAGE_
 INSERT INTO configuration VALUES (3075, 'CT_ONEPAGE_BOX_ONE_HEADING', 'ONEPAGE_BOX_ONE_HEADING', '100% Private Secure SSL Transaction', 'CD_ONEPAGE_BOX_ONE_HEADING', 7575, 15, NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (3076, 'CT_ONEPAGE_BOX_ONE_CONTENT', 'ONEPAGE_BOX_ONE_CONTENT', 'Your shopping cart transaction is taking place on an encrypted SSL webpage; meaning it is secure and safe. We respect all of your private information and none of it will be shared with anyone in anyway.', 'CD_ONEPAGE_BOX_ONE_CONTENT', 7575, 16, NULL, now(), NULL, 'tep_cfg_textarea(');
 INSERT INTO configuration VALUES (3077, 'CT_ONEPAGE_BOX_TWO_HEADING', 'ONEPAGE_BOX_TWO_HEADING', 'Ordering Information', 'CD_ONEPAGE_BOX_TWO_HEADING', 7575, 17, NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (3078, 'CT_ONEPAGE_BOX_TWO_CONTENT', 'ONEPAGE_BOX_TWO_CONTENT', '<b>Processing Time</b><br>We will process your order as quickly as possible. Typical processing time for orders shipped ground is 1 � 2 days. For expedited shipping (2 day or overnight) we make every effort to ship the order the same day if ordered before 2pm.<br><br><b>Order Tracking</b><br>After your order is placed you can login anytime 24/7 to view the status of your order. When your order is shipped you will receive a shipment notification with a tracking number.', 'CD_ONEPAGE_BOX_TWO_CONTENT', 7575, 18, NULL, now(), NULL, 'tep_cfg_textarea(');
+INSERT INTO configuration VALUES (3078, 'CT_ONEPAGE_BOX_TWO_CONTENT', 'ONEPAGE_BOX_TWO_CONTENT', '<b>Processing Time</b><br>We will process your order as quickly as possible. Typical processing time for orders shipped ground is 1  2 days. For expedited shipping (2 day or overnight) we make every effort to ship the order the same day if ordered before 2pm.<br><br><b>Order Tracking</b><br>After your order is placed you can login anytime 24/7 to view the status of your order. When your order is shipped you will receive a shipment notification with a tracking number.', 'CD_ONEPAGE_BOX_TWO_CONTENT', 7575, 18, NULL, now(), NULL, 'tep_cfg_textarea(');
 INSERT INTO configuration VALUES (3079, 'CT_ONEPAGE_DEBUG_EMAIL_ADDRESS', 'ONEPAGE_DEBUG_EMAIL_ADDRESS', 'set.me.to.valid@email.address', 'CD_ONEPAGE_DEBUG_EMAIL_ADDRESS', 7575, 19, NULL, now(), NULL, NULL);
 INSERT INTO configuration VALUES (3080, 'CT_ONEPAGE_CHECKOUT_SHOW_ADDRESS_INPUT_FIELDS', 'ONEPAGE_CHECKOUT_SHOW_ADDRESS_INPUT_FIELDS', 'False', 'CD_ONEPAGE_CHECKOUT_SHOW_ADDRESS_INPUT_FIELDS', 7575, 20, NULL, now(), NULL, 'tep_cfg_select_option(array(''False'',''True''),');
 INSERT INTO configuration VALUES (3081, 'CT_ONEPAGE_CHECKOUT_LOADER_POPUP', 'ONEPAGE_CHECKOUT_LOADER_POPUP', 'True', 'CD_ONEPAGE_CHECKOUT_LOADER_POPUP', 7575, 21, NULL, now(), NULL, 'tep_cfg_select_option(array(''False'',''True''),');
@@ -2736,7 +2777,7 @@ INSERT INTO `countries` VALUES(239, 'Zimbabwe', 'ZW', 'ZWE', 1, 1);
 
 INSERT INTO currencies VALUES (1,'US Dollar','USD','$','','.',',','2','1.0000',now());
 INSERT INTO currencies VALUES (2,'Euro','EUR','','EUR','.',',','2','1.0000',now());
-INSERT INTO currencies VALUES (3,'UK Pound','GBP','�','','.',',','2','1.0000',now());
+INSERT INTO currencies VALUES (3,'UK Pound','GBP','£','','.',',','2','1.0000',now());
 
 
 INSERT INTO customers_groups VALUES (0,'Retail','1','0','','');
@@ -2748,7 +2789,7 @@ INSERT INTO db_version VALUES ('v2.5.1');
 
 INSERT INTO languages VALUES (1,'English','en','icon.gif','english',1,'');
 INSERT INTO languages VALUES (2,'Deutsch','de','icon.gif','german',2,'');
-INSERT INTO languages VALUES (3,'Espa�ol','es','icon.gif','espanol',3,'');
+INSERT INTO languages VALUES (3,'Español','es','icon.gif','espanol',3,'');
 
 INSERT INTO orders_status VALUES (1,1,'Pending',1,0);
 INSERT INTO orders_status VALUES (1,2,'Offen',1,0);
@@ -2900,54 +2941,52 @@ INSERT INTO topics VALUES (0, NULL, 0, 0, now(), NULL);
 INSERT INTO topics_description VALUES (0, 1, 'Miscellaneous Articles', 'Miscellaneous', 'Articles that do not fall into a specific category.');
 
 #Example Slideshow Slides
-INSERT INTO slideshow VALUES (1, 'osCmax - eCommerce to the max', 'http://www.oscmax.com/', '_top', 1, now(), now(), 'example_oscmax1.jpg');
-INSERT INTO slideshow VALUES (2, 'osCmax v2.5 User Manual', 'http://shop.oscmax.com/oscmax-v250-user-manual-p-3.html', '_top', 2, now(), now(), 'oscmax_2.5_manual.jpg');
-INSERT INTO slideshow VALUES (3, 'AABox - Pro web hosting', 'http://www.aabox.com/', '_top', 2, now(), now(), 'example_oscmax2.jpg');
-INSERT INTO slideshow VALUES (4, 'ejSolutions', 'http://www.ejsolutions.co.uk/', '_top', 3, now(), now(), 'example_oscmax3.jpg');
+INSERT INTO slideshow VALUES (1, 'osCmax - eCommerce to the max', 'http://www.oscmax.com/', '_top', 'yes', '', 1, now(), now(), 'example_oscmax1.jpg');
+INSERT INTO slideshow VALUES (2, 'osCmax v2.5 User Manual', 'http://shop.oscmax.com/oscmax-v250-user-manual-p-3.html', '_top', 'yes', '', 2, now(), now(), 'oscmax_2.5_manual.jpg');
+INSERT INTO slideshow VALUES (3, 'AABox - Pro web hosting', 'http://www.aabox.com/', '_top', 'yes', '', 2, now(), now(), 'example_oscmax2.jpg');
+INSERT INTO slideshow VALUES (4, 'ejSolutions', 'http://www.ejsolutions.co.uk/', '_top', 'yes', '', 3, now(), now(), 'example_oscmax3.jpg');
 
 #Information Pages
-INSERT INTO information VALUES (1, 2, 'TEXT_GREETING_PERSONAL', 'Welcome back <span class="greetUser">%s!</span> Would you like to see which <a href="%s"><u>new products</u></a> are available to purchase?', '', '_top', 0, 1, '1', '1', 1);
-INSERT INTO information VALUES (1, 2, 'TEXT_GREETING_PERSONAL', 'Sch&ouml;n das Sie wieder da sind <span class="greetUser">%s!</span> M&ouml;chten Sie die <a href="%s"><u>neue Produkte</u></a> ansehen?', '', '_top', 0, 1, '1', '1', 2);
-INSERT INTO information VALUES (1, 2, 'TEXT_GREETING_PERSONAL', '�Bienvenido de nuevo <span class="greetUser">%s!</span> �Le gustar�a ver qu� <a href="%s"><u>nuevos productos</u></a> hay disponibles?', '', '_top',  0, 1, '1', '1', 3);
-INSERT INTO information VALUES (2, 2, 'TEXT_GREETING_PERSONAL_RELOGON', '<small>If you are not %s, please <a href="%s"><u>log yourself in</u></a> with your account information.</small>', '', '_top', 0, 2, '1', '1', 1);
-INSERT INTO information VALUES (2, 2, 'TEXT_GREETING_PERSONAL_RELOGON', '<small>Wenn Sie nicht %s sind, melden Sie sich bitte <a href="%s"><u>hier</u></a> mit Ihrem Kundenkonto an.</small>', '', '_top', 0, 2, '1', '1', 2);
-INSERT INTO information VALUES (2, 2, 'TEXT_GREETING_PERSONAL_RELOGON', '<small>Si no es %s, por favor <a href="%s"><u>entre aqu�</u></a> e introduzca sus datos.</small>', '', '_top', 0, 2, '1', '1', 3);
-INSERT INTO information VALUES (3, 2, 'TEXT_GREETING_GUEST', 'Welcome <span class="greetUser">Guest!</span> Would you like to <a href="%s"><u>log yourself in</u></a>? Or would you prefer to <a href="%s"><u>create an account</u></a>?', '', '_top', 0, 3, '1', '1', 1);
-INSERT INTO information VALUES (3, 2, 'TEXT_GREETING_GUEST', 'Herzlich Willkommen <span class="greetUser">Gast!</span> M&ouml;chten Sie sich <a href="%s"><u>anmelden</u></a>? Oder wollen Sie ein <a href="%s"><u>Kundenkonto</u></a> er&ouml;ffnen?', '', '_top', 0, 3, '1', '1', 2);
-INSERT INTO information VALUES (3, 2, 'TEXT_GREETING_GUEST', '�Bienvenido <span class="greetUser">Invitado!</span> �Le gustar�a <a href="%s"><u>entrar en su cuenta</u></a> o preferir�a <a href="%s"><u>crear una cuenta nueva</u></a>?', '', '_top', 0, 3, '1', '1', 3);
-
-
-INSERT INTO information VALUES (8, 1, 'Shipping &amp; Returns', '<p>\r\n	This Page is for your shipping policies. Edit this in your admin panel under Configuration &gt;&gt; Templates &gt;&gt; Information Pages</p>', '', '_top', 0, 3, '1', '1', 1);
-INSERT INTO information VALUES (8, 1, 'Versandkosten und R�cksendungen', '<p>\r\n	&nbsp;</p>\r\n<div style="font-family: Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">\r\n	<p>\r\n		This Page is for your shipping policies. Edit this in your admin panel under Configuration &gt;&gt; Templates &gt;&gt; Information Pages</p>\r\n</div>', '', '_top', 0, 3, '1', '1', 2);
-INSERT INTO information VALUES (8, 1, 'Env�os/Devoluciones', '<p>\r\n	&nbsp;</p>\r\n<div style="font-family: Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">\r\n	<p>\r\n		Esta p�gina es para las pol�ticas de env�o. Ed�tala en el panel de administraci�n en la secci�n Configuraci�n &gt;&gt; Plantillas &gt;&gt; P�ginas de informaci�n</p>\r\n</div>', '', '_top', 0, 3, '1', '1', 3);
-INSERT INTO information VALUES (9, 1, 'Gift Voucher FAQ', '<p>\r\n	<b>Purchasing Gift Vouchers</b></p>\r\n<p>\r\n	Gift Vouchers are purchased just like any other item in our store. You can pay for them using the store&#39;s standard payment method(s). Once purchased the value of the Gift Voucher will be added to your own personal Gift Voucher Account. If you have funds in your Gift Voucher Account, you will notice that the amount now shows in the Shopping Cart box, and also provides a link to a page where you can send the Gift Voucher to someone via email.</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	<b>How to Send Gift Vouchers</b></p>\r\n<p>\r\n	To send a Gift Voucher that you have purchased, you need to go to our Send Gift Voucher Page. You can find the link to this page in the Shopping Cart Box in the right hand column of each page. When you send a Gift Voucher, you need to specify the following:<br />\r\n	<br />\r\n	The name of the person you are sending the Gift Voucher to.<br />\r\n	The email address of the person you are sending the Gift Voucher to.<br />\r\n	The amount you want to send. (Note you don&#39;t have to send the full amount that is in your Gift Voucher Account.)&nbsp;<br />\r\n	A short message which will appear in the email.<br />\r\n	<br />\r\n	Please ensure that you have entered all of the information correctly, although you will be given the opportunity to change this as much as you want before the email is actually sent.</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	<b>Buying with Gift Vouchers</b></p>\r\n<p>\r\n	If you have funds in your Gift Voucher Account, you can use those funds to purchase other items in our store. At the checkout stage, an extra box will appear. Clicking this box will apply those funds in your Gift Voucher Account. Please note, you will still have to select another payment method if there is not enough in your Gift Voucher Account to cover the cost of your purchase. If you have more funds in your Gift Voucher Account than the total cost of your purchase the balance will be left in your Gift Voucher Account for the future.</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	<b>Redeeming Gift Vouchers</b></p>\r\n<p>\r\n	If you receive a Gift Voucher by email it will contain details of who sent you the Gift Voucher, along with possibly a short message from them. The Email will also contain the Gift Voucher Number. It is probably a good idea to print out this email for future reference. You can now redeem the Gift Voucher in two ways:</p>\r\n<ol>\r\n	<li>\r\n		By clicking on the link contained within the email for this express purpose. This will take you to the store&#39;s Redeem Voucher page. you will then be requested to create an account, before the Gift Voucher is validated and placed in your Gift Voucher Account ready for you to spend it on whatever you want.<br />\r\n		&nbsp;</li>\r\n	<li>\r\n		During the checkout process, on the same page that you select a payment method there will be a box to enter a Redeem Code. Enter the code here, and click the redeem button. The code will be validated and added to your Gift Voucher account. You can then use the amount to purchase any item from our store</li>\r\n</ol>', '', '_top', 0, 4, '1', '1', 1);
-INSERT INTO information VALUES (9, 1, 'Geschenkgutschein FAQ', '<p><b>Geschenkgutscheine kaufen</b></p><p>Geschenkgutscheine k&ouml;nnen Sie genau so wie jedes andere Produkt in unserem Shop erwerben. Die Bezahlung erfolgt &uuml;ber die angebotenen Zahlungsarten. Danach wird der Gutschein Ihrem pers&ouml;nlichen Gutscheinkonto hinzugef&uuml;gt. In diesem Fall wird der Gutscheinwert in Ihrem Warenkorb angezeigt. Dort finden Sie auch einen Link, &uuml;ber den Sie den Gutschein an jemanden per E-Mail verschenken k&ouml;nnen.</p><p>&nbsp;</p><p><b>Geschenkgutscheine versenden</b></p><p>Einen Geschenkgutschein, den Sie erworben haben,&nbsp; versenden Sie &uuml;ber die Seite &quot;Geschenkgutschein versenden&quot;.&nbsp; Den Link zu dieser Seite finden Sie im Warenkorbfenster in der rechten Spalte auf jeder Seite. Beim Versand eines Geschenkgutscheines m&uuml;ssen Sie Folgendes angeben:<br /><br />Der Name des Empf&auml;ngers<br />Die E-Mail-Adresse des Empf&auml;ngers&#39;<br />Den Wert des Gutscheines (Hinweis: Es mu&szlig; sich nicht um den Gesamtbetrag Ihres Gutscheinkontos handeln.)&nbsp;<br />Eine Nachricht an den Gutscheinempf&auml;nger<br /><br />Bitte versichern Sie sich, dass alle Angaben korrekt sind. Sie k&ouml;nnen die Angaben jedoch vor dem tats&auml;chlichen Versand der E-Mail unbegrenzt &auml;ndern.</p><p>&nbsp;</p><p><b>Mit Geschenkgutscheinen einkaufen</b></p><p>Falls Sie ein Guthaben auf Ihrem Geschenkgutscheinkonto haben, k&ouml;nnen Sie damit in unserem Shop einkaufen. W&auml;hrend des Bestellvorganges erscheint eine zus&auml;tzliche Box. Ein Klick auf diese Box zieht Ihr Guthaben vom Rechnungsbetrag ab. Falls das Guthaben nicht f&uuml;r den gesamten Rechnungsbetrag ausreicht, w&auml;hlen Sie bitte f&uuml;r den Rest eine der angebotenen Zahlungsarten. Falls Ihr Guthaben den Rechnungsbetrag &uuml;bersteigt, verbleibt die Differenz auf Ihrem Guthabenkonto.</p><p>&nbsp;</p><p><b>Geschenkgutscheine</b></p><p>Wenn&nbsp; Sie einen Geschenkgutschein per E-Mail erhalten haben, so enth&auml;lt finden Sie darin neben dem Absender und eventuell einer kurzen Nachricht die Gutscheinnummer. Sie k&ouml;nnen den Gutschein auf zweierlei Arten einl&ouml;sen:</p><ol><li>Klicken Sie auf den Link, der Sie auf eine Seite unseres Shops leitet, wo Sie den Gutschein mit Ihrem Kundenkonto verkn&uuml;pfen k&ouml;nnen. Nachdem der Gutschein von uns freigeschaltet wurde, k&ouml;nnen Sie den Betrag nach Belieben f&uuml;r Eink&auml;ufe in unserem Shop verwenden.<br />&nbsp;</li><li>W&auml;hrend des Bestellvorganges k&ouml;nnen Sie die Gutscheinnummer direkt in ein Formularfeld eingeben. Durch einen Klick auf &quot;Einl&ouml;sen&quot; wird der Betrag Ihrem Gutscheink&ouml;nto hinzugef&uuml;gt und kann f&uuml;r Eink&auml;ufe verwendet werden.</li></ol>', '', '_top', 0, 4, '1', '1', 2);
-INSERT INTO information VALUES (9, 1, 'FAQ cheques regalo', '', '', '_top', 0, 4, '1', '1', 3);
-INSERT INTO information VALUES (10, 1, 'Privacy Notice', '<p>\r\n	Privacy Policy</p>', '', '_top', 0, 5, '1', '1', 1);
-INSERT INTO information VALUES (10, 1, 'Privatsph�re und Datenschutz', '', '', '_top', 0, 5, '1', '1', 2);
-INSERT INTO information VALUES (10, 1, 'Privacidad', '', '', '_top', 0, 5, '1', '1', 3);
-INSERT INTO information VALUES (11, 1, 'Conditions of Use', '<p>\r\n	Conditions of Use</p>', '', '_top', 0, 6, '1', '1', 1);
-INSERT INTO information VALUES (11, 1, 'AGB', '<p>Unsere Allgemeinen Gesch&auml;ftsbedingungen</p>', '', '_top', 0, 6, '1', '1', 2);
-INSERT INTO information VALUES (11, 1, 'Condiciones de uso', '<p>\r\n	Condiciones de uso</p>', '', '_top', 0, 6, '1', '1', 3);
-INSERT INTO information VALUES (12, 1, 'Down for maintenance', '<p>The site is currently down for maintenance. Please excuse the dust, and try back later.</p>', '', '_top', 0, 2, '0', '1', 1);
-INSERT INTO information VALUES (12, 1, 'Wartungsarbeiten', '<p>Diese Website ist derzeit wegen Wartungsarbeiten leider nicht erreichbar. Bitte besuchen Sie uns sp&auml;ter noch einmal.</p>', '', '_top', 0, 2, '0', '1', 2);
-INSERT INTO information VALUES (12, 1, 'Cerrado por mantenimiento', '<p>El sitio est� actualmente cerrado por mantenimiento. Por favor, int�ntelo de nuevo m�s tarde.</p>', '', '_top', 0, 2, '0', '1', 3);
-INSERT INTO information VALUES (13, 1, 'Index Page Text', '<p><font face="arial, helvetica, sans-serif">To modify the content of this page, go to your Admin Panel -> Configuration -> Templates -> Information Pages.</font></p><hr /><p><font face="arial, helvetica, sans-serif">This is osCmax v2.5, the power e-commerce shopping cart system.</font></p><p><font face="Arial">The official <strong><em>osCmax </em></strong>Support Site is <a href="http://www.oscmax.com/"><font color="#800080">http://www.oscmax.com</font></a> . There are very active support forums, the wiki, documentation, downloads, and everything else related to <strong><em>osCmax.</em></strong></font></p>', '', '_top', 0, 1, '0', '1', 1);
-INSERT INTO information VALUES (13, 1, 'Index-Seite Text', '<p><font face="arial, helvetica, sans-serif">&Auml;ndern Sie diesen Text im Admin Panel unter -&gt; Einstellungen -&gt; Templates -&gt; Informationsseiten.</font></p><hr /><p><font face="arial, helvetica, sans-serif">Dies ist osCmax v2.5, das m&auml;chtige Onlineshop-System.</font></p><p><font face="Arial">Die offizielle osCmax Support Seite finden Sie unter <a href="http://www.oscmax.com">http://www.oscmax.com</a>. Es existieren dort sehr aktive Support-Foren, ein Wiki, Anleitungen, Downloads und vieles mehr.</font></p>', '', '_top', 0, 1, '0', '1', 2);
-INSERT INTO information VALUES (13, 1, 'Texto p�gina inicio', '<p><font face="arial, helvetica, sans-serif">Para modificar el contenido de esta p�gina, vaya al Panel de administraci�n -> Configuraci�n -> Plantillas -> P�ginas de informaci�n.</font></p><hr /><p><font face="arial, helvetica, sans-serif">Esto es osCmax v2.5, completo sistema de compras de comercio electr�nico.</font></p><p><font face="Arial">El sitio web de soporte es <a href="http://www.oscmax.com/"><font color="#800080">http://www.oscmax.com</font></a>. Hay foros de soporte muy activos, wiki, documentaci�n, descargas y todo lo relacionado con <strong><em>osCmax.</em></strong>.</font></p>', '', '_top', 0, 1, '0', '1', 3);
-INSERT INTO information VALUES (14, 1, 'Affiliate Terms and Conditions', '<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n	<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(255, 0, 0); font-weight: bold; ">By filling out the signup form you acknowledge that you have read the terms and conditions below for the YOURCOMPANYNAMEorWEBSITE AFFILIATE Program, understand, and agree with them.</span></p>\r\n<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n	<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>1. Joining the Program</b><br />\r\n	By filling out the signup form you will automatically become an AFFILIATE and are bound by the terms of this agreement. Your participation in the program is solely for this purpose: to legally advertise our website to receive a commission on products purchased by your referral individuals.</span></p>\r\n<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n	<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>2. Payment Schedule</b></span></p>\r\n<ol type="a">\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Eligible payments - all AFFILIATE monies due for orders generated as a result of AFFILIATE links/Web Site will be held for 30 days after the Shipping Date of an order. Orders are typically shipped 1-7 days after a order is placed. This allows us ample time to compensate for returns, exchanges or canceled orders. Payments will be calculated and checks sent out to AFFILIATE during the last week of any given month according to the terms and conditions of this document.</span></li>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">AFFILIATE Payments - payment to AFFILIATE will not be rendered for amounts less than $10.00 USD unless requested by AFFILIATE. Example: if you have a total of $50.00 in sales you would have $5.00 in your affiliate account, thus your account will carry over ino the next months cycle. When your account total reaches $10.00 or more you will be sent a check provided all orders associated meet the condiditons set forth in (a) above.</span></li>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Store Credit (Doggie Dollars) can be issued upon request in lieu of payment by check to AFFILIATE.</span></li>\r\n</ol>\r\n<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n	&nbsp;</p>\r\n<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n	<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>3. Revocation of AFFILIATE Status</b><br />\r\n	Your AFFILIATE application and status in the program may be suspended or terminated for any of the following reasons:</span></p>\r\n<p>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Inappropriate advertisements (False claims, misleading hyperlinks)</span></li>\r\n</p>\r\n<p>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Spamming (mass email, mass newsgroup posting, etc...)</span></li>\r\n</p>\r\n<p>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Advertising on sites containing/promoting illegal activities</span></li>\r\n</p>\r\n<p>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Violation of intellectual property rights.</span>\r\n		<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n			<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>4. AFFILIATE Links</b><br />\r\n			You may use graphic and text links both on your Web Site and in emails. The site may also be advertised &quot;offline&quot; in classified ads, magazines, and newpapers. You may use the graphics and text provided to you by us, or you may create your own as long as they are approved by us first.</span></p>\r\n		<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n			<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>5. AFFILIATE Tracking</b><br />\r\n			When a web surfer clicks through your AFFILIATE link, a cookie is set in their browser that contains your AFFILIATE username. Also, their IP address is tracked in the database along with your AFFILIATE name. When this person decides to buy a product, the script will look for this cookie and/or try to match their IP address to identify the AFFILIATE who will be awarded the commission. Visitors sent through your AFFILIATE link may make a purchase later in time and the commission will still be awarded if the cookie is present in their browser and/or the are using the same IP address as the one logged in the database.</span></p>\r\n		<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n			<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>6. Terms of the agreement</b><br />\r\n			These terms will begin upon your signup with the AFFILIATE program and will end when your AFFILIATE account is terminated. The terms of this agreement may be modified by us at any time. If any modification to the terms is unnacceptable to you, your only choice is to terminate your AFFILIATE account. Your continuing participation in the program will constitute your acceptance of any change.</span></p>\r\n		<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n			<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>7. Liability</b><br />\r\n			We will not be liable for indirect or accidental damages (loss of revenue, commissions) due to AFFILIATE tracking failures, loss of database files, and any results of &quot;intents of harm&quot; to the program or our website. We do not make any expressed or implied warranties with respect to the AFFILIATE program and/or products sold at this site. We make no claim that the operation of the AFFILIATE program and our website will be error-free and we will not be liable for any interruptions or errors.&nbsp;<br />\r\n			<br />\r\n			Affiliate further agrees and warrants that it will comply with all local, state and federal laws (including, but not limited to, the &quot;CAN-SPAM&quot; Act, effective January 1, 2004) regarding the sending of e-mails.&nbsp;<br />\r\n			<br />\r\n			AFFILIATE shall indemnify and hold YOURCOMPANYNAMEorWEBSITE harmless from any and all legal actions, damages or liabilities incurred from the day-to-day operations of AFFILIATE. Under no circumstances will YOURCOMPANYNAMEorWEBSITE be liable whether in tort, contract or otherwise for indirect, incidental, consequential, special or exemplary damages (including but not limited to damages for any loss of revenue, profits, business interruption, loss of business information or data, loss of goodwill, work stoppage, hardware or software failure, or other pecuniary loss) arising from or relating to any provision of this Agreement or the program. Without limiting the foregoing, YOURCOMPANYNAMEorWEBSITE aggregate liability arising with respect to this Agreement will not exceed the total fees paid or payable to AFFILIATE under this agreement.&nbsp;<br />\r\n			<br />\r\n			YOURCOMPANYNAMEorWEBSITE will own all right, title and interest in and to all information that is created or collected in the operation of the YOURCOMPANYNAMEorWEBSITE Web site and reserves the right to amend or terminate this Agreement at any time, with or without notice to AFFILIATE.&nbsp;<br />\r\n			<br />\r\n			The laws of the State of California shall govern this Agreement. Should there be any legal dispute between the parties, then both parties agree to take the matter before arbitration/mediation in Placer County , CA should YOURCOMPANYNAMEorWEBSITE request arbitration/mediation in lieu of formal legal process. Both parties mutually agree that the sole legal venue for all disputes shall be in the Placer County General District Court, CA.</span></p>\r\n		<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n			<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(255, 0, 0); font-weight: bold; ">By filling out the signup form you acknowledge that you have read the terms and conditions above for the YOURCOMPANYNAMEorWEBSITE AFFILIATE Program, understand, and agree with them.</span></span></p>\r\n	</li>\r\n</p>', '', '_top', 0, 7, '0', '1', 1);
-INSERT INTO information VALUES (14, 1, 'Affiliate AGB', 'Legen Sie Ihre Affiliate-Bedingungen hier.', '', '_top', 0, 7, '0', '1', 2);
-INSERT INTO information VALUES (14, 1, 'T�rminos y condiciones afiliados ', 'Introduzca aqu� los t�rminos y condiciones de afiliados.', '', '_top', 0, 7, '0', '1', 3);
-INSERT INTO `information` VALUES(15, 1, 'Affiliate Information', '<p>\r\n	Your Affiliate Information goes in here</p>', '', '_top', 0, 8, '1', '1', 1);
-INSERT INTO `information` VALUES(15, 1, 'Affiliate-Information', '<p>F&uuml;gen Sie hier Ihre Informationen zum Affiliateprogramm ein.</p>', '', '_top', 0, 8, '1', '1', 2);
-INSERT INTO `information` VALUES(15, 1, 'Informaci�n afiliado', '<p>\r\n	Su informaci�n de afiliado va aqu�</p>', '', '_top', 0, 8, '1', '1', 3);
-INSERT INTO `information` VALUES(16, 1, 'Affiliate Program FAQ', '<p>\r\n	Your Affiliate FAQ goes in here</p>', '', '_top', 0, 8, '1', '0', 1);
-INSERT INTO `information` VALUES(16, 1, 'Affiliateprogramm FAQ', '<p>F&uuml;gen Sie hier Ihre FAQ Informationen zum Affiliateprogramm ein.</p>', '', '_top', 0, 8, '1', '0', 2);
-INSERT INTO `information` VALUES(16, 1, 'FAQ del Programa de afiliados', '<p>\r\n	Su informaci�n FAQ de afiliado va aqu�</p>', '', '_top', 0, 8, '1', '0', 3);
+INSERT INTO information VALUES (1, 2, 'TEXT_GREETING_PERSONAL', 'Welcome back <span class="greetUser">%s!</span> Would you like to see which <a href="%s"><u>new products</u></a> are available to purchase?', '', '_top', 0, 1, '1', '1', 1, NULL);
+INSERT INTO information VALUES (1, 2, 'TEXT_GREETING_PERSONAL', 'Sch&ouml;n das Sie wieder da sind <span class="greetUser">%s!</span> M&ouml;chten Sie die <a href="%s"><u>neue Produkte</u></a> ansehen?', '', '_top', 0, 1, '1', '1', 2, NULL);
+INSERT INTO information VALUES (1, 2, 'TEXT_GREETING_PERSONAL', '¡Bienvenido de nuevo <span class="greetUser">%s!</span> ¿Le gustaría ver qué <a href="%s"><u>nuevos productos</u></a> hay disponibles?', '', '_top',  0, 1, '1', '1', 3, NULL);
+INSERT INTO information VALUES (2, 2, 'TEXT_GREETING_PERSONAL_RELOGON', '<small>If you are not %s, please <a href="%s"><u>log yourself in</u></a> with your account information.</small>', '', '_top', 0, 2, '1', '1', 1, NULL);
+INSERT INTO information VALUES (2, 2, 'TEXT_GREETING_PERSONAL_RELOGON', '<small>Wenn Sie nicht %s sind, melden Sie sich bitte <a href="%s"><u>hier</u></a> mit Ihrem Kundenkonto an.</small>', '', '_top', 0, 2, '1', '1', 2, NULL);
+INSERT INTO information VALUES (2, 2, 'TEXT_GREETING_PERSONAL_RELOGON', '<small>Si no es %s, por favor <a href="%s"><u>entre aquí</u></a> e introduzca sus datos.</small>', '', '_top', 0, 2, '1', '1', 3, NULL);
+INSERT INTO information VALUES (3, 2, 'TEXT_GREETING_GUEST', 'Welcome <span class="greetUser">Guest!</span> Would you like to <a href="%s"><u>log yourself in</u></a>? Or would you prefer to <a href="%s"><u>create an account</u></a>?', '', '_top', 0, 3, '1', '1', 1, NULL);
+INSERT INTO information VALUES (3, 2, 'TEXT_GREETING_GUEST', 'Herzlich Willkommen <span class="greetUser">Gast!</span> M&ouml;chten Sie sich <a href="%s"><u>anmelden</u></a>? Oder wollen Sie ein <a href="%s"><u>Kundenkonto</u></a> er&ouml;ffnen?', '', '_top', 0, 3, '1', '1', 2, NULL);
+INSERT INTO information VALUES (3, 2, 'TEXT_GREETING_GUEST', '¡Bienvenido <span class="greetUser">Invitado!</span> ¿Le gustaría <a href="%s"><u>entrar en su cuenta</u></a> o preferiría <a href="%s"><u>crear una cuenta nueva</u></a>?', '', '_top', 0, 3, '1', '1', 3, NULL);
+INSERT INTO information VALUES (8, 1, 'Shipping &amp; Returns', '<p>\r\n	This Page is for your shipping policies. Edit this in your admin panel under Configuration &gt;&gt; Templates &gt;&gt; Information Pages</p>', '', '_top', 0, 3, '1', '1', 1, NULL);
+INSERT INTO information VALUES (8, 1, 'Versandkosten und Rücksendungen', '<p>\r\n	&nbsp;</p>\r\n<div style="font-family: Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">\r\n	<p>\r\n		This Page is for your shipping policies. Edit this in your admin panel under Configuration &gt;&gt; Templates &gt;&gt; Information Pages</p>\r\n</div>', '', '_top', 0, 3, '1', '1', 2, NULL);
+INSERT INTO information VALUES (8, 1, 'Envíos/Devoluciones', '<p>\r\n	&nbsp;</p>\r\n<div style="font-family: Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">\r\n	<p>\r\n		Esta página es para las políticas de envío. Edítala en el panel de administración en la sección Configuración &gt;&gt; Plantillas &gt;&gt; Páginas de información</p>\r\n</div>', '', '_top', 0, 3, '1', '1', 3, NULL);
+INSERT INTO information VALUES (9, 1, 'Gift Voucher FAQ', '<p>\r\n	<b>Purchasing Gift Vouchers</b></p>\r\n<p>\r\n	Gift Vouchers are purchased just like any other item in our store. You can pay for them using the store&#39;s standard payment method(s). Once purchased the value of the Gift Voucher will be added to your own personal Gift Voucher Account. If you have funds in your Gift Voucher Account, you will notice that the amount now shows in the Shopping Cart box, and also provides a link to a page where you can send the Gift Voucher to someone via email.</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	<b>How to Send Gift Vouchers</b></p>\r\n<p>\r\n	To send a Gift Voucher that you have purchased, you need to go to our Send Gift Voucher Page. You can find the link to this page in the Shopping Cart Box in the right hand column of each page. When you send a Gift Voucher, you need to specify the following:<br />\r\n	<br />\r\n	The name of the person you are sending the Gift Voucher to.<br />\r\n	The email address of the person you are sending the Gift Voucher to.<br />\r\n	The amount you want to send. (Note you don&#39;t have to send the full amount that is in your Gift Voucher Account.)&nbsp;<br />\r\n	A short message which will appear in the email.<br />\r\n	<br />\r\n	Please ensure that you have entered all of the information correctly, although you will be given the opportunity to change this as much as you want before the email is actually sent.</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	<b>Buying with Gift Vouchers</b></p>\r\n<p>\r\n	If you have funds in your Gift Voucher Account, you can use those funds to purchase other items in our store. At the checkout stage, an extra box will appear. Clicking this box will apply those funds in your Gift Voucher Account. Please note, you will still have to select another payment method if there is not enough in your Gift Voucher Account to cover the cost of your purchase. If you have more funds in your Gift Voucher Account than the total cost of your purchase the balance will be left in your Gift Voucher Account for the future.</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	<b>Redeeming Gift Vouchers</b></p>\r\n<p>\r\n	If you receive a Gift Voucher by email it will contain details of who sent you the Gift Voucher, along with possibly a short message from them. The Email will also contain the Gift Voucher Number. It is probably a good idea to print out this email for future reference. You can now redeem the Gift Voucher in two ways:</p>\r\n<ol>\r\n	<li>\r\n		By clicking on the link contained within the email for this express purpose. This will take you to the store&#39;s Redeem Voucher page. you will then be requested to create an account, before the Gift Voucher is validated and placed in your Gift Voucher Account ready for you to spend it on whatever you want.<br />\r\n		&nbsp;</li>\r\n	<li>\r\n		During the checkout process, on the same page that you select a payment method there will be a box to enter a Redeem Code. Enter the code here, and click the redeem button. The code will be validated and added to your Gift Voucher account. You can then use the amount to purchase any item from our store</li>\r\n</ol>', '', '_top', 0, 4, '1', '1', 1, NULL);
+INSERT INTO information VALUES (9, 1, 'Geschenkgutschein FAQ', '<p><b>Geschenkgutscheine kaufen</b></p><p>Geschenkgutscheine k&ouml;nnen Sie genau so wie jedes andere Produkt in unserem Shop erwerben. Die Bezahlung erfolgt &uuml;ber die angebotenen Zahlungsarten. Danach wird der Gutschein Ihrem pers&ouml;nlichen Gutscheinkonto hinzugef&uuml;gt. In diesem Fall wird der Gutscheinwert in Ihrem Warenkorb angezeigt. Dort finden Sie auch einen Link, &uuml;ber den Sie den Gutschein an jemanden per E-Mail verschenken k&ouml;nnen.</p><p>&nbsp;</p><p><b>Geschenkgutscheine versenden</b></p><p>Einen Geschenkgutschein, den Sie erworben haben,&nbsp; versenden Sie &uuml;ber die Seite &quot;Geschenkgutschein versenden&quot;.&nbsp; Den Link zu dieser Seite finden Sie im Warenkorbfenster in der rechten Spalte auf jeder Seite. Beim Versand eines Geschenkgutscheines m&uuml;ssen Sie Folgendes angeben:<br /><br />Der Name des Empf&auml;ngers<br />Die E-Mail-Adresse des Empf&auml;ngers&#39;<br />Den Wert des Gutscheines (Hinweis: Es mu&szlig; sich nicht um den Gesamtbetrag Ihres Gutscheinkontos handeln.)&nbsp;<br />Eine Nachricht an den Gutscheinempf&auml;nger<br /><br />Bitte versichern Sie sich, dass alle Angaben korrekt sind. Sie k&ouml;nnen die Angaben jedoch vor dem tats&auml;chlichen Versand der E-Mail unbegrenzt &auml;ndern.</p><p>&nbsp;</p><p><b>Mit Geschenkgutscheinen einkaufen</b></p><p>Falls Sie ein Guthaben auf Ihrem Geschenkgutscheinkonto haben, k&ouml;nnen Sie damit in unserem Shop einkaufen. W&auml;hrend des Bestellvorganges erscheint eine zus&auml;tzliche Box. Ein Klick auf diese Box zieht Ihr Guthaben vom Rechnungsbetrag ab. Falls das Guthaben nicht f&uuml;r den gesamten Rechnungsbetrag ausreicht, w&auml;hlen Sie bitte f&uuml;r den Rest eine der angebotenen Zahlungsarten. Falls Ihr Guthaben den Rechnungsbetrag &uuml;bersteigt, verbleibt die Differenz auf Ihrem Guthabenkonto.</p><p>&nbsp;</p><p><b>Geschenkgutscheine</b></p><p>Wenn&nbsp; Sie einen Geschenkgutschein per E-Mail erhalten haben, so enth&auml;lt finden Sie darin neben dem Absender und eventuell einer kurzen Nachricht die Gutscheinnummer. Sie k&ouml;nnen den Gutschein auf zweierlei Arten einl&ouml;sen:</p><ol><li>Klicken Sie auf den Link, der Sie auf eine Seite unseres Shops leitet, wo Sie den Gutschein mit Ihrem Kundenkonto verkn&uuml;pfen k&ouml;nnen. Nachdem der Gutschein von uns freigeschaltet wurde, k&ouml;nnen Sie den Betrag nach Belieben f&uuml;r Eink&auml;ufe in unserem Shop verwenden.<br />&nbsp;</li><li>W&auml;hrend des Bestellvorganges k&ouml;nnen Sie die Gutscheinnummer direkt in ein Formularfeld eingeben. Durch einen Klick auf &quot;Einl&ouml;sen&quot; wird der Betrag Ihrem Gutscheink&ouml;nto hinzugef&uuml;gt und kann f&uuml;r Eink&auml;ufe verwendet werden.</li></ol>', '', '_top', 0, 4, '1', '1', 2, NULL);
+INSERT INTO information VALUES (9, 1, 'FAQ cheques regalo', '', '', '_top', 0, 4, '1', '1', 3, NULL);
+INSERT INTO information VALUES (10, 1, 'Privacy Notice', '<p>\r\n	Privacy Policy</p>', '', '_top', 0, 5, '1', '1', 1, NULL);
+INSERT INTO information VALUES (10, 1, 'Privatsphäre und Datenschutz', '', '', '_top', 0, 5, '1', '1', 2, NULL);
+INSERT INTO information VALUES (10, 1, 'Privacidad', '', '', '_top', 0, 5, '1', '1', 3, NULL);
+INSERT INTO information VALUES (11, 1, 'Conditions of Use', '<p>\r\n	Conditions of Use</p>', '', '_top', 0, 6, '1', '1', 1, NULL);
+INSERT INTO information VALUES (11, 1, 'AGB', '<p>Unsere Allgemeinen Gesch&auml;ftsbedingungen</p>', '', '_top', 0, 6, '1', '1', 2, NULL);
+INSERT INTO information VALUES (11, 1, 'Condiciones de uso', '<p>\r\n	Condiciones de uso</p>', '', '_top', 0, 6, '1', '1', 3, NULL);
+INSERT INTO information VALUES (12, 1, 'Down for maintenance', '<p>The site is currently down for maintenance. Please excuse the dust, and try back later.</p>', '', '_top', 0, 2, '0', '1', 1, NULL);
+INSERT INTO information VALUES (12, 1, 'Wartungsarbeiten', '<p>Diese Website ist derzeit wegen Wartungsarbeiten leider nicht erreichbar. Bitte besuchen Sie uns sp&auml;ter noch einmal.</p>', '', '_top', 0, 2, '0', '1', 2, NULL);
+INSERT INTO information VALUES (12, 1, 'Cerrado por mantenimiento', '<p>El sitio está actualmente cerrado por mantenimiento. Por favor, inténtelo de nuevo más tarde.</p>', '', '_top', 0, 2, '0', '1', 3, NULL);
+INSERT INTO information VALUES (13, 1, 'Index Page Text', '<p><font face="arial, helvetica, sans-serif">To modify the content of this page, go to your Admin Panel -> Configuration -> Templates -> Information Pages.</font></p><hr /><p><font face="arial, helvetica, sans-serif">This is osCmax v2.5, the power e-commerce shopping cart system.</font></p><p><font face="Arial">The official <strong><em>osCmax </em></strong>Support Site is <a href="http://www.oscmax.com/"><font color="#800080">http://www.oscmax.com</font></a> . There are very active support forums, the wiki, documentation, downloads, and everything else related to <strong><em>osCmax.</em></strong></font></p>', '', '_top', 0, 1, '0', '1', 1, NULL);
+INSERT INTO information VALUES (13, 1, 'Index-Seite Text', '<p><font face="arial, helvetica, sans-serif">&Auml;ndern Sie diesen Text im Admin Panel unter -&gt; Einstellungen -&gt; Templates -&gt; Informationsseiten.</font></p><hr /><p><font face="arial, helvetica, sans-serif">Dies ist osCmax v2.5, das m&auml;chtige Onlineshop-System.</font></p><p><font face="Arial">Die offizielle osCmax Support Seite finden Sie unter <a href="http://www.oscmax.com">http://www.oscmax.com</a>. Es existieren dort sehr aktive Support-Foren, ein Wiki, Anleitungen, Downloads und vieles mehr.</font></p>', '', '_top', 0, 1, '0', '1', 2, NULL);
+INSERT INTO information VALUES (13, 1, 'Texto página inicio', '<p><font face="arial, helvetica, sans-serif">Para modificar el contenido de esta página, vaya al Panel de administración -> Configuración -> Plantillas -> Páginas de información.</font></p><hr /><p><font face="arial, helvetica, sans-serif">Esto es osCmax v2.5, completo sistema de compras de comercio electrónico.</font></p><p><font face="Arial">El sitio web de soporte es <a href="http://www.oscmax.com/"><font color="#800080">http://www.oscmax.com</font></a>. Hay foros de soporte muy activos, wiki, documentación, descargas y todo lo relacionado con <strong><em>osCmax.</em></strong>.</font></p>', '', '_top', 0, 1, '0', '1', 3, NULL);
+INSERT INTO information VALUES (14, 1, 'Affiliate Terms and Conditions', '<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n	<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(255, 0, 0); font-weight: bold; ">By filling out the signup form you acknowledge that you have read the terms and conditions below for the YOURCOMPANYNAMEorWEBSITE AFFILIATE Program, understand, and agree with them.</span></p>\r\n<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n	<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>1. Joining the Program</b><br />\r\n	By filling out the signup form you will automatically become an AFFILIATE and are bound by the terms of this agreement. Your participation in the program is solely for this purpose: to legally advertise our website to receive a commission on products purchased by your referral individuals.</span></p>\r\n<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n	<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>2. Payment Schedule</b></span></p>\r\n<ol type="a">\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Eligible payments - all AFFILIATE monies due for orders generated as a result of AFFILIATE links/Web Site will be held for 30 days after the Shipping Date of an order. Orders are typically shipped 1-7 days after a order is placed. This allows us ample time to compensate for returns, exchanges or canceled orders. Payments will be calculated and checks sent out to AFFILIATE during the last week of any given month according to the terms and conditions of this document.</span></li>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">AFFILIATE Payments - payment to AFFILIATE will not be rendered for amounts less than $10.00 USD unless requested by AFFILIATE. Example: if you have a total of $50.00 in sales you would have $5.00 in your affiliate account, thus your account will carry over ino the next months cycle. When your account total reaches $10.00 or more you will be sent a check provided all orders associated meet the condiditons set forth in (a) above.</span></li>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Store Credit (Doggie Dollars) can be issued upon request in lieu of payment by check to AFFILIATE.</span></li>\r\n</ol>\r\n<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n	&nbsp;</p>\r\n<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n	<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>3. Revocation of AFFILIATE Status</b><br />\r\n	Your AFFILIATE application and status in the program may be suspended or terminated for any of the following reasons:</span></p>\r\n<p>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Inappropriate advertisements (False claims, misleading hyperlinks)</span></li>\r\n</p>\r\n<p>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Spamming (mass email, mass newsgroup posting, etc...)</span></li>\r\n</p>\r\n<p>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Advertising on sites containing/promoting illegal activities</span></li>\r\n</p>\r\n<p>\r\n	<li>\r\n		<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); ">Violation of intellectual property rights.</span>\r\n		<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n			<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>4. AFFILIATE Links</b><br />\r\n			You may use graphic and text links both on your Web Site and in emails. The site may also be advertised &quot;offline&quot; in classified ads, magazines, and newpapers. You may use the graphics and text provided to you by us, or you may create your own as long as they are approved by us first.</span></p>\r\n		<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n			<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>5. AFFILIATE Tracking</b><br />\r\n			When a web surfer clicks through your AFFILIATE link, a cookie is set in their browser that contains your AFFILIATE username. Also, their IP address is tracked in the database along with your AFFILIATE name. When this person decides to buy a product, the script will look for this cookie and/or try to match their IP address to identify the AFFILIATE who will be awarded the commission. Visitors sent through your AFFILIATE link may make a purchase later in time and the commission will still be awarded if the cookie is present in their browser and/or the are using the same IP address as the one logged in the database.</span></p>\r\n		<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n			<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>6. Terms of the agreement</b><br />\r\n			These terms will begin upon your signup with the AFFILIATE program and will end when your AFFILIATE account is terminated. The terms of this agreement may be modified by us at any time. If any modification to the terms is unnacceptable to you, your only choice is to terminate your AFFILIATE account. Your continuing participation in the program will constitute your acceptance of any change.</span></p>\r\n		<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n			<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><b>7. Liability</b><br />\r\n			We will not be liable for indirect or accidental damages (loss of revenue, commissions) due to AFFILIATE tracking failures, loss of database files, and any results of &quot;intents of harm&quot; to the program or our website. We do not make any expressed or implied warranties with respect to the AFFILIATE program and/or products sold at this site. We make no claim that the operation of the AFFILIATE program and our website will be error-free and we will not be liable for any interruptions or errors.&nbsp;<br />\r\n			<br />\r\n			Affiliate further agrees and warrants that it will comply with all local, state and federal laws (including, but not limited to, the &quot;CAN-SPAM&quot; Act, effective January 1, 2004) regarding the sending of e-mails.&nbsp;<br />\r\n			<br />\r\n			AFFILIATE shall indemnify and hold YOURCOMPANYNAMEorWEBSITE harmless from any and all legal actions, damages or liabilities incurred from the day-to-day operations of AFFILIATE. Under no circumstances will YOURCOMPANYNAMEorWEBSITE be liable whether in tort, contract or otherwise for indirect, incidental, consequential, special or exemplary damages (including but not limited to damages for any loss of revenue, profits, business interruption, loss of business information or data, loss of goodwill, work stoppage, hardware or software failure, or other pecuniary loss) arising from or relating to any provision of this Agreement or the program. Without limiting the foregoing, YOURCOMPANYNAMEorWEBSITE aggregate liability arising with respect to this Agreement will not exceed the total fees paid or payable to AFFILIATE under this agreement.&nbsp;<br />\r\n			<br />\r\n			YOURCOMPANYNAMEorWEBSITE will own all right, title and interest in and to all information that is created or collected in the operation of the YOURCOMPANYNAMEorWEBSITE Web site and reserves the right to amend or terminate this Agreement at any time, with or without notice to AFFILIATE.&nbsp;<br />\r\n			<br />\r\n			The laws of the State of California shall govern this Agreement. Should there be any legal dispute between the parties, then both parties agree to take the matter before arbitration/mediation in Placer County , CA should YOURCOMPANYNAMEorWEBSITE request arbitration/mediation in lieu of formal legal process. Both parties mutually agree that the sole legal venue for all disputes shall be in the Placer County General District Court, CA.</span></p>\r\n		<p style="font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; ">\r\n			<span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(0, 0, 0); "><span style="font-family: verdana, tahoma, arial; font-size: 10pt; color: rgb(255, 0, 0); font-weight: bold; ">By filling out the signup form you acknowledge that you have read the terms and conditions above for the YOURCOMPANYNAMEorWEBSITE AFFILIATE Program, understand, and agree with them.</span></span></p>\r\n	</li>\r\n</p>', '', '_top', 0, 7, '0', '1', 1, NULL);
+INSERT INTO information VALUES (14, 1, 'Affiliate AGB', 'Legen Sie Ihre Affiliate-Bedingungen hier.', '', '_top', 0, 7, '0', '1', 2, NULL);
+INSERT INTO information VALUES (14, 1, 'Términos y condiciones afiliados ', 'Introduzca aquí los términos y condiciones de afiliados.', '', '_top', 0, 7, '0', '1', 3, NULL);
+INSERT INTO `information` VALUES(15, 1, 'Affiliate Information', '<p>\r\n	Your Affiliate Information goes in here</p>', '', '_top', 0, 8, '1', '1', 1, NULL);
+INSERT INTO `information` VALUES(15, 1, 'Affiliate-Information', '<p>F&uuml;gen Sie hier Ihre Informationen zum Affiliateprogramm ein.</p>', '', '_top', 0, 8, '1', '1', 2, NULL);
+INSERT INTO `information` VALUES(15, 1, 'Información afiliado', '<p>\r\n	Su información de afiliado va aquí</p>', '', '_top', 0, 8, '1', '1', 3, NULL);
+INSERT INTO `information` VALUES(16, 1, 'Affiliate Program FAQ', '<p>\r\n	Your Affiliate FAQ goes in here</p>', '', '_top', 0, 8, '1', '0', 1, NULL);
+INSERT INTO `information` VALUES(16, 1, 'Affiliateprogramm FAQ', '<p>F&uuml;gen Sie hier Ihre FAQ Informationen zum Affiliateprogramm ein.</p>', '', '_top', 0, 8, '1', '0', 2, NULL);
+INSERT INTO `information` VALUES(16, 1, 'FAQ del Programa de afiliados', '<p>\r\n	Su información FAQ de afiliado va aquí</p>', '', '_top', 0, 8, '1', '0', 3, NULL);
 
 
 INSERT INTO information_group VALUES(1, 'Information pages', 'Information pages', 1, 1, '');
-INSERT INTO information_group VALUES(2, 'Welcome message', 'Welcome message', 2, 1, 'information_title, sort_order, parent_id, visible');
+INSERT INTO information_group VALUES(2, 'Welcome message', 'Welcome message', 2, 1, 'information_title, sort_order, parent_id, visible, info_cg_hide, show_in_infobox, information_url, information_target');
 
 
 INSERT INTO google_configuration VALUES('GOOGLE_ANALYTICS_ID', 'NONE');
@@ -3093,7 +3132,7 @@ INSERT INTO zones VALUES (124, 5, 'ENC', 'Encamp');
 INSERT INTO zones VALUES (125, 5, 'ESE', 'Escaldes-Engordany');
 INSERT INTO zones VALUES (126, 5, 'LMA', 'La Massana');
 INSERT INTO zones VALUES (127, 5, 'ORD', 'Ordino');
-INSERT INTO zones VALUES (128, 5, 'SJL', 'Sant JuliÃ  de LÃ²ria');
+INSERT INTO zones VALUES (128, 5, 'SJL', 'Sant Julià de Lòria');
 INSERT INTO zones VALUES (129, 6, 'BGO', 'Bengo');
 INSERT INTO zones VALUES (130, 6, 'BGU', 'Benguela');
 INSERT INTO zones VALUES (131, 6, 'BIE', 'Bie');
@@ -3184,9 +3223,9 @@ INSERT INTO zones VALUES (215, 13, 'TAS', 'Tasmania');
 INSERT INTO zones VALUES (216, 13, 'VIC', 'Victoria');
 INSERT INTO zones VALUES (217, 13, 'WA', 'Western Australia');
 INSERT INTO zones VALUES (218, 14, 'BUR', 'Burgenland');
-INSERT INTO zones VALUES (219, 14, 'KAR', 'K&auml;rnten');
-INSERT INTO zones VALUES (220, 14, 'NOS', 'Nieder&ouml;sterreich');
-INSERT INTO zones VALUES (221, 14, 'OOS', 'Ober&ouml;sterreich');
+INSERT INTO zones VALUES (219, 14, 'KAR', 'Kärnten');
+INSERT INTO zones VALUES (220, 14, 'NOS', 'Niederösterreich');
+INSERT INTO zones VALUES (221, 14, 'OOS', 'Oberösterreich');
 INSERT INTO zones VALUES (222, 14, 'SAL', 'Salzburg');
 INSERT INTO zones VALUES (223, 14, 'STE', 'Steiermark');
 INSERT INTO zones VALUES (224, 14, 'TIR', 'Tirol');
@@ -3579,7 +3618,7 @@ INSERT INTO zones VALUES (610, 36, 'TK', 'Takeo');
 INSERT INTO zones VALUES (611, 37, 'ADA', 'Adamawa (Adamaoua)');
 INSERT INTO zones VALUES (612, 37, 'CEN', 'Centre');
 INSERT INTO zones VALUES (613, 37, 'EST', 'East (Est)');
-INSERT INTO zones VALUES (614, 37, 'EXN', 'ExtrÃªme-Nord');
+INSERT INTO zones VALUES (614, 37, 'EXN', 'Extrême-Nord');
 INSERT INTO zones VALUES (615, 37, 'LIT', 'Littoral');
 INSERT INTO zones VALUES (616, 37, 'NOR', 'North (Nord)');
 INSERT INTO zones VALUES (617, 37, 'NOT', 'Northwest (Nord-Ouest)');
@@ -3630,7 +3669,7 @@ INSERT INTO zones VALUES (661, 41, 'HKO', 'Haute-Kotto');
 INSERT INTO zones VALUES (662, 41, 'HMB', 'Haut-Mbomou');
 INSERT INTO zones VALUES (663, 41, 'KEM', 'Kemo');
 INSERT INTO zones VALUES (664, 41, 'LOB', 'Lobaye');
-INSERT INTO zones VALUES (665, 41, 'MKD', 'MambÃ©rÃ©-KadÃ©Ã¯');
+INSERT INTO zones VALUES (665, 41, 'MKD', 'Mambéré-Kadéï');
 INSERT INTO zones VALUES (666, 41, 'MBO', 'Mbomou');
 INSERT INTO zones VALUES (667, 41, 'NMM', 'Nana-Mambere');
 INSERT INTO zones VALUES (668, 41, 'OMP', 'Ombella-M''Poko');
@@ -3975,7 +4014,7 @@ INSERT INTO zones VALUES (1006, 62, 'GPS', 'Gal&aacute;pagos');
 INSERT INTO zones VALUES (1007, 62, 'GUA', 'Guayas');
 INSERT INTO zones VALUES (1008, 62, 'IMB', 'Imbabura');
 INSERT INTO zones VALUES (1009, 62, 'LOJ', 'Loja');
-INSERT INTO zones VALUES (1010, 62, 'LRO', 'Los RÃ­os');
+INSERT INTO zones VALUES (1010, 62, 'LRO', 'Los Ríos');
 INSERT INTO zones VALUES (1011, 62, 'MAN', 'Manab&iacute;');
 INSERT INTO zones VALUES (1012, 62, 'MSA', 'Morona Santiago');
 INSERT INTO zones VALUES (1013, 62, 'NAP', 'Napo');
@@ -4234,7 +4273,7 @@ INSERT INTO zones VALUES (1265, 75, 'SAI', 'Saint-Laurent-Du-Maroni');
 INSERT INTO zones VALUES (1266, 75, 'APA', 'Apatou');
 INSERT INTO zones VALUES (1267, 75, 'GRA', 'Grand-Santi');
 INSERT INTO zones VALUES (1268, 75, 'PAP', 'Papa&iuml;chton');
-INSERT INTO zones VALUES (1269, 75, 'SA&Uuml;', 'Sa&uuml;l');
+INSERT INTO zones VALUES (1269, 75, 'SAÜ', 'Saül');
 INSERT INTO zones VALUES (1270, 75, 'MAR', 'Maripasoula');
 INSERT INTO zones VALUES (1271, 75, 'CAM', 'Camopi');
 INSERT INTO zones VALUES (1272, 75, 'SAI', 'Saint-Georges');
@@ -4294,7 +4333,7 @@ INSERT INTO zones VALUES (1325, 80, 'RL', 'Racha Lechkhumi and Kvemo Svanet');
 INSERT INTO zones VALUES (1326, 80, 'SZ', 'Samegrelo-Zemo Svaneti');
 INSERT INTO zones VALUES (1327, 80, 'SJ', 'Samtskhe-Javakheti');
 INSERT INTO zones VALUES (1328, 80, 'SK', 'Shida Kartli');
-INSERT INTO zones VALUES (1329, 81, 'BAW', 'Baden-W&uuml;rttemberg');
+INSERT INTO zones VALUES (1329, 81, 'BAW', 'Baden-Württemberg');
 INSERT INTO zones VALUES (1330, 81, 'BAY', 'Bayern');
 INSERT INTO zones VALUES (1331, 81, 'BER', 'Berlin');
 INSERT INTO zones VALUES (1332, 81, 'BRG', 'Brandenburg');
@@ -4727,7 +4766,7 @@ INSERT INTO zones VALUES (1758, 105, 'EN', 'Enna');
 INSERT INTO zones VALUES (1759, 105, 'FE', 'Ferrara');
 INSERT INTO zones VALUES (1760, 105, 'FI', 'Firenze');
 INSERT INTO zones VALUES (1761, 105, 'FG', 'Foggia');
-INSERT INTO zones VALUES (1762, 105, 'FO', 'ForlÃ¬');
+INSERT INTO zones VALUES (1762, 105, 'FO', 'Forlì');
 INSERT INTO zones VALUES (1763, 105, 'FR', 'Frosinone');
 INSERT INTO zones VALUES (1764, 105, 'GE', 'Genova');
 INSERT INTO zones VALUES (1765, 105, 'GO', 'Gorizia');
@@ -5513,7 +5552,7 @@ INSERT INTO zones VALUES (2544, 140, 'OR', 'Orhei');
 INSERT INTO zones VALUES (2545, 140, 'SO', 'Soroca');
 INSERT INTO zones VALUES (2546, 140, 'TI', 'Tighina');
 INSERT INTO zones VALUES (2547, 140, 'UN', 'Ungheni');
-INSERT INTO zones VALUES (2548, 140, 'SN', 'StÃ¢nga Nistrului');
+INSERT INTO zones VALUES (2548, 140, 'SN', 'Stânga Nistrului');
 INSERT INTO zones VALUES (2549, 141, 'FV', 'Fontvieille');
 INSERT INTO zones VALUES (2550, 141, 'LC', 'La Condamine');
 INSERT INTO zones VALUES (2551, 141, 'MV', 'Monaco-Ville');
@@ -6015,7 +6054,7 @@ INSERT INTO zones VALUES (3046, 172, 'AGU', 'Aguada');
 INSERT INTO zones VALUES (3047, 172, 'AGU', 'Aguadilla');
 INSERT INTO zones VALUES (3048, 172, 'AGU', 'Aguas Buenas');
 INSERT INTO zones VALUES (3049, 172, 'AIB', 'Aibonito');
-INSERT INTO zones VALUES (3050, 172, 'A-A', 'AÃ±asco');
+INSERT INTO zones VALUES (3050, 172, 'A-A', 'Añasco');
 INSERT INTO zones VALUES (3051, 172, 'ARE', 'Arecibo');
 INSERT INTO zones VALUES (3052, 172, 'ARR', 'Arroyo');
 INSERT INTO zones VALUES (3053, 172, 'BAR', 'Barceloneta');
@@ -6038,7 +6077,7 @@ INSERT INTO zones VALUES (3069, 172, 'CUL', 'Culebra');
 INSERT INTO zones VALUES (3070, 172, 'DOR', 'Dorado');
 INSERT INTO zones VALUES (3071, 172, 'FAJ', 'Fajardo');
 INSERT INTO zones VALUES (3072, 172, 'FLO', 'Florida.');
-INSERT INTO zones VALUES (3073, 172, 'GUÂ¡', 'GuÃ¡nica');
+INSERT INTO zones VALUES (3073, 172, 'GU¡', 'Guánica');
 INSERT INTO zones VALUES (3074, 172, 'GUA', 'Guayama');
 INSERT INTO zones VALUES (3075, 172, 'GUA', 'Guayanilla');
 INSERT INTO zones VALUES (3076, 172, 'GUA', 'Guaynabo');
@@ -6054,23 +6093,23 @@ INSERT INTO zones VALUES (3085, 172, 'LAJ', 'Lajas');
 INSERT INTO zones VALUES (3086, 172, 'LAR', 'Lares');
 INSERT INTO zones VALUES (3087, 172, 'LAS', 'Las Mar&iacute;as');
 INSERT INTO zones VALUES (3088, 172, 'LAS', 'Las Piedras');
-INSERT INTO zones VALUES (3089, 172, 'LOÃ•', 'LoÃ­za');
+INSERT INTO zones VALUES (3089, 172, 'LOÕ', 'Loíza');
 INSERT INTO zones VALUES (3090, 172, 'LUQ', 'Luquillo');
 INSERT INTO zones VALUES (3091, 172, 'MAN', 'Manat&iacute;');
 INSERT INTO zones VALUES (3092, 172, 'MAR', 'Maricao');
 INSERT INTO zones VALUES (3093, 172, 'MAU', 'Maunabo');
-INSERT INTO zones VALUES (3094, 172, 'MAY', 'Mayag&uuml;ez');
+INSERT INTO zones VALUES (3094, 172, 'MAY', 'Mayagüez');
 INSERT INTO zones VALUES (3095, 172, 'MOC', 'Moca');
 INSERT INTO zones VALUES (3096, 172, 'MOR', 'Morovis');
 INSERT INTO zones VALUES (3097, 172, 'NAG', 'Naguabo');
 INSERT INTO zones VALUES (3098, 172, 'NAR', 'Naranjito');
 INSERT INTO zones VALUES (3099, 172, 'ORO', 'Orocovis');
 INSERT INTO zones VALUES (3100, 172, 'PAT', 'Patillas');
-INSERT INTO zones VALUES (3101, 172, 'PE-', 'PeÃ±uelas');
+INSERT INTO zones VALUES (3101, 172, 'PE-', 'Peñuelas');
 INSERT INTO zones VALUES (3102, 172, 'PON', 'Ponce');
 INSERT INTO zones VALUES (3103, 172, 'QUE', 'Quebradillas');
 INSERT INTO zones VALUES (3104, 172, 'RIN', 'Rinc&oacute;n');
-INSERT INTO zones VALUES (3105, 172, 'RÃ•O', 'RÃ­o Grande');
+INSERT INTO zones VALUES (3105, 172, 'RÕO', 'Río Grande');
 INSERT INTO zones VALUES (3106, 172, 'SAB', 'Sabana Grande');
 INSERT INTO zones VALUES (3107, 172, 'SAL', 'Salinas');
 INSERT INTO zones VALUES (3108, 172, 'SAN', 'San Germ&aacute;n');
@@ -6352,10 +6391,10 @@ INSERT INTO zones VALUES (3383, 189, 'PR', 'Presovsky');
 INSERT INTO zones VALUES (3384, 189, 'TC', 'Trenciansky');
 INSERT INTO zones VALUES (3385, 189, 'TV', 'Trnavsky');
 INSERT INTO zones VALUES (3386, 189, 'ZI', 'Zilinsky');
-INSERT INTO zones VALUES (3387, 190, '4', 'Å tajerska');
+INSERT INTO zones VALUES (3387, 190, '4', 'Å tajerska');
 INSERT INTO zones VALUES (3388, 190, '2A', 'Gorenjska');
 INSERT INTO zones VALUES (3389, 190, '5', 'Prekmurje');
-INSERT INTO zones VALUES (3390, 190, '3', 'KoroÅ¡ka');
+INSERT INTO zones VALUES (3390, 190, '3', 'Koroška');
 INSERT INTO zones VALUES (3391, 190, '2B', 'Notranjska');
 INSERT INTO zones VALUES (3392, 190, '1', 'Primorska');
 INSERT INTO zones VALUES (3393, 190, '2C', 'Dolenjska');
@@ -6506,24 +6545,24 @@ INSERT INTO zones VALUES (3537, 202, 'S', 'Shishelweni');
 INSERT INTO zones VALUES (3538, 203, 'K', 'Blekinge');
 INSERT INTO zones VALUES (3539, 203, 'W', 'Dalama');
 INSERT INTO zones VALUES (3540, 203, 'I', 'Gotland');
-INSERT INTO zones VALUES (3541, 203, 'X', 'G&auml;vleborg');
+INSERT INTO zones VALUES (3541, 203, 'X', 'Gävleborg');
 INSERT INTO zones VALUES (3542, 203, 'N', 'Halland');
-INSERT INTO zones VALUES (3543, 203, 'Z', 'J&auml;mtland');
-INSERT INTO zones VALUES (3544, 203, 'F', 'J&ouml;nk&ouml;ping');
+INSERT INTO zones VALUES (3543, 203, 'Z', 'Jämtland');
+INSERT INTO zones VALUES (3544, 203, 'F', 'Jönköping');
 INSERT INTO zones VALUES (3545, 203, 'H', 'Kalmar');
 INSERT INTO zones VALUES (3546, 203, 'G', 'Kronoberg');
 INSERT INTO zones VALUES (3547, 203, 'BD', 'Norrbotten');
 INSERT INTO zones VALUES (3548, 203, 'M', 'Sk&aring;ne');
 INSERT INTO zones VALUES (3549, 203, 'AB', 'Stockholm');
-INSERT INTO zones VALUES (3550, 203, 'D', 'S&ouml;dermanland');
+INSERT INTO zones VALUES (3550, 203, 'D', 'Södermanland');
 INSERT INTO zones VALUES (3551, 203, 'C', 'Uppsala');
-INSERT INTO zones VALUES (3552, 203, 'S', 'V&auml;rmland');
-INSERT INTO zones VALUES (3553, 203, 'AC', 'V&auml;sterbotten');
-INSERT INTO zones VALUES (3554, 203, 'Y', 'V&auml;sternorrland');
-INSERT INTO zones VALUES (3555, 203, 'U', 'V&auml;stmanland');
-INSERT INTO zones VALUES (3556, 203, 'O', 'V&auml;stra G&ouml;taland');
-INSERT INTO zones VALUES (3557, 203, 'T', '&Ouml;rebro');
-INSERT INTO zones VALUES (3558, 203, 'E', '&Ouml;sterg&ouml;tland');
+INSERT INTO zones VALUES (3552, 203, 'S', 'Värmland');
+INSERT INTO zones VALUES (3553, 203, 'AC', 'Västerbotten');
+INSERT INTO zones VALUES (3554, 203, 'Y', 'Västernorrland');
+INSERT INTO zones VALUES (3555, 203, 'U', 'Västmanland');
+INSERT INTO zones VALUES (3556, 203, 'O', 'Västra Götaland');
+INSERT INTO zones VALUES (3557, 203, 'T', 'Örebro');
+INSERT INTO zones VALUES (3558, 203, 'E', 'Östergötland');
 INSERT INTO zones VALUES (3559, 204, 'AG', 'Aargau');
 INSERT INTO zones VALUES (3560, 204, 'AR', 'Appenzell Ausserrhoden');
 INSERT INTO zones VALUES (3561, 204, 'AI', 'Appenzell Innerrhoden');
@@ -6533,7 +6572,7 @@ INSERT INTO zones VALUES (3564, 204, 'BE', 'Bern');
 INSERT INTO zones VALUES (3565, 204, 'FR', 'Fribourg');
 INSERT INTO zones VALUES (3566, 204, 'GE', 'Gen&egrave;ve');
 INSERT INTO zones VALUES (3567, 204, 'GL', 'Glarus');
-INSERT INTO zones VALUES (3568, 204, 'GR', 'Graub&uuml;nden');
+INSERT INTO zones VALUES (3568, 204, 'GR', 'Graubünden');
 INSERT INTO zones VALUES (3569, 204, 'JU', 'Jura');
 INSERT INTO zones VALUES (3570, 204, 'LU', 'Lucerne');
 INSERT INTO zones VALUES (3571, 204, 'NE', 'Neuch&acirc;tel');
@@ -6549,7 +6588,7 @@ INSERT INTO zones VALUES (3580, 204, 'UR', 'Uri');
 INSERT INTO zones VALUES (3581, 204, 'VS', 'Valais');
 INSERT INTO zones VALUES (3582, 204, 'VD', 'Vaud');
 INSERT INTO zones VALUES (3583, 204, 'ZG', 'Zug');
-INSERT INTO zones VALUES (3584, 204, 'ZH', 'Z&uuml;rich');
+INSERT INTO zones VALUES (3584, 204, 'ZH', 'Zürich');
 INSERT INTO zones VALUES (3585, 205, 'HA', 'Al Hasakah');
 INSERT INTO zones VALUES (3586, 205, 'LA', 'Al Ladhiqiyah');
 INSERT INTO zones VALUES (3587, 205, 'QU', 'Al Qunaytirah');
@@ -7275,3 +7314,9 @@ INSERT INTO zones VALUES (4306, 239, 'MV', 'Masvingo');
 INSERT INTO zones VALUES (4307, 239, 'MN', 'Matabeleland North');
 INSERT INTO zones VALUES (4308, 239, 'MS', 'Matabeleland South');
 INSERT INTO zones VALUES (4309, 239, 'MD', 'Midlands');
+INSERT INTO zones VALUES (4310, 222, 'Antrim', 'Antrim');
+INSERT INTO zones VALUES (4311, 222, 'Armagh', 'Armagh');
+INSERT INTO zones VALUES (4312, 222, 'Down', 'Down');
+INSERT INTO zones VALUES (4313, 222, 'Fermanagh', 'Fermanagh');
+INSERT INTO zones VALUES (4314, 222, 'Londonderry', 'Londonderry');
+INSERT INTO zones VALUES (4315, 222, 'Tyrone', 'Tyrone');

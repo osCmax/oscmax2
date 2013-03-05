@@ -12,7 +12,7 @@ $Id$
 
 ////
 function tep_information_show_category($information_group_id = 1) {
-	global $sitemapString, $languages_id;
+	global $sitemapString, $languages_id, $customer_group_id;
 	$information_tree = array();
 	$informationString = '';
 	$parent_child_selected = '';
@@ -20,7 +20,7 @@ function tep_information_show_category($information_group_id = 1) {
 
 	// Retrieve information from db
 	// ID set by module for Information box
-	$information_query = tep_db_query("SELECT information_id, information_title, information_url, information_target, parent_id FROM " . TABLE_INFORMATION . " WHERE visible='1' and show_in_infobox='1' and language_id='" . (int)$languages_id ."' and information_group_id = '" . (int)$information_group_id . "' ORDER BY sort_order");
+	$information_query = tep_db_query("SELECT information_id, information_title, information_url, information_target, parent_id, info_cg_hide FROM " . TABLE_INFORMATION . " WHERE visible='1' and show_in_infobox='1' and NOT find_in_set('" . $customer_group_id . "', info_cg_hide) and language_id='" . (int)$languages_id ."' and information_group_id = '" . (int)$information_group_id . "' ORDER BY sort_order");
 	while($information = tep_db_fetch_array($information_query)) {
 		$information_tree[$information['information_id']] = array(
 			'info_title' 	=> $information['information_title'],

@@ -411,6 +411,8 @@ define('IMAGE_EMAIL', 'E-mail');
 define('IMAGE_FILE_MANAGER', 'Administrador archivos');
 define('IMAGE_ICON_STATUS_GREEN', 'Activado');
 define('IMAGE_ICON_STATUS_GREEN_LIGHT', 'Activar');
+define('IMAGE_ICON_STATUS_YELLOW', 'Descatalogado');
+define('IMAGE_ICON_STATUS_YELLOW_LIGHT', 'Marcar Descatalogado');
 define('IMAGE_ICON_STATUS_RED', 'Desactivado');
 define('IMAGE_ICON_STATUS_RED_LIGHT', 'Desactivar');
 define('IMAGE_ICON_INFO', 'Info');

@@ -72,6 +72,7 @@ define('TEXT_SORT_ORDER', 'Sortierung:');
 define('TEXT_PRODUCTS_STATUS', 'Status:');
 define('TEXT_PRODUCTS_DATE_AVAILABLE', 'Lagernd ab:');
 define('TEXT_PRODUCT_AVAILABLE', 'Lagernd');
+define('TEXT_PRODUCT_DISCONTINUED', 'Nicht mehr lieferbar');
 define('TEXT_PRODUCT_NOT_AVAILABLE', 'Nicht Lagernd');
 define('TEXT_PRODUCTS_MANUFACTURER', 'Hersteller:');
 define('TEXT_PRODUCTS_NAME', 'Produktbezeichnung:');
@@ -205,7 +206,9 @@ define('TEXT_THUMBNAIL_IMAGE', 'Vorschaubild:');
 
 // BOF indvship 4.5
 define('TEXT_PRODUCTS_ZIPCODE', 'Postleitzahl: ');
-define('TEXT_INDIV_SHIPPING_PRICE', 'Indiv. Versandkosten: ');
-define('TEXT_INDIV_ADDITIONAL_PRICE', 'Each additional price: ');
+define('TEXT_INDIV_SHIPPING_PRICE', 'Versandkosten für dieses Produkt: ');
+define('TEXT_INDIV_ADDITIONAL_PRICE', 'Versandkosten für jedes zusätzliche Produkt: ');
 // EOF indvship 4.5
+
+define('TEXT_SHIP_SEPARATELY', 'FedEx Ship Separately:');
 ?>

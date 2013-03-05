@@ -130,11 +130,7 @@ class PriceFormatterStore {
           $price_breaks_array[$price_break['products_id']][] = array('products_price' => $price_break['products_price'], 'products_qty' => $price_break['products_qty']);
         }
 		
-		if(isset($price_break_array)) {
-          $no_of_pricebreaks = count($price_breaks_array);
-		} else {
-		  $no_of_pricebreaks = 0;
-		}
+		$no_of_pricebreaks = count($price_breaks_array);
         
 		if ($no_of_pricebreaks > 0) {
           foreach ($this->priceFormatterData as $products_id => $price_break_array) {

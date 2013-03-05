@@ -208,6 +208,7 @@ $Id$
           $sql_data_array = array('orders_id' => $insert_id,
                                   'products_id' => tep_get_prid($order->products[$i]['id']),
                                   'products_model' => $order->products[$i]['model'],
+								  'products_code' => $order->products[$i]['code'],
                                   'products_name' => $order->products[$i]['name'],
                                   'products_price' => $order->products[$i]['price'],
                                   'final_price' => $order->products[$i]['final_price'],

@@ -190,6 +190,9 @@ define('ENTRY_LAST_NAME_TEXT', '*');
 define('ENTRY_DATE_OF_BIRTH', 'Geburtsdatum:');
 // if you are looking for the DOB error message and * - look in locale.php
 define('ENTRY_EMAIL_ADDRESS', 'E-Mail-Adresse:');
+define('ENTRY_EMAIL_CONFIRMATION', 'E-Mail bestätigen:');
+define('ENTRY_EMAIL_CONFIRMATION_TEXT', '*');
+define('ENTRY_EMAIL_ERROR_NOT_MATCHING', 'Ihre eingegebenen E-Mail-Adressen müssen übereinstimmen.');
 define('ENTRY_EMAIL_ADDRESS_ERROR', 'Die E-Mail-Adresse muss mindestens ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' Zeichen enthalten.');
 define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'Die E-Mail-Adresse scheint nicht gültig zu sein - bitte korrigieren.');
 define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', 'Die E-Mail-Adresse ist bereits gespeichert - bitte melden Sie sich mit dieser Adresse an oder eröffnen Sie ein neues Konto mit einer anderen Adresse.');
@@ -474,4 +477,17 @@ define('TAX_RATE_NEAR_PRICE_INC', 'Inkl. USt. von ');
 define('TAX_RATE_NEAR_PRICE_EX', 'Exkl. USt. von ');
 define('TEXT_SHIPPING_NEAR_PRICE', 'Versandkosten');
 // EOF Show tax and Shipping near price
+
+// BOF Customers extra fields
+define('ENTRY_EXTRA_FIELDS_ERROR', 'Das Feld %s muss mindestens %d Zeichen enthalten');
+define('CATEGORY_EXTRA_FIELDS', 'Weitere Informationen');
+// EOF Customers extra fields   
+
+// BOF reCaptcha
+define('ENTRY_SECURITY_CHECK', 'Sicherheitsabfrage:');
+define('ENTRY_SECURITY_CHECK_ERROR', 'Die Sicherheitsabfrage wurde nicht korrekt beantwortet. Bitte versuchen Sie es noch einmal.');
+define('SECURITY_PROMPT', 'Bitte vervollständigen Sie die <b>Sicherheitsabfrage</b> auf der rechten Seite -->');
+define('CATEGORY_RECAPTCHA', 'Sicherheitsabfrage');
+define('ENTRY_RECAPTCHA', 'Sicherheitsabfrage:');
+// EOF reCaptcha
 ?>

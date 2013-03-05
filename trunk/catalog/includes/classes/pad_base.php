@@ -392,6 +392,7 @@ $Id$
       global $currencies;
       global $cart;
 	  global $hi_product_price;
+	  global $new_price;
 
       if (!($build_stocked | $build_nonstocked)) return null;
 
@@ -419,11 +420,11 @@ $products_options_array[] = array('id' => $products_options['products_options_va
     if (ATTRIBUTE_PRICE_DISPLAY == 'combined') {
     // Code to show the attribute price combined with the base cost
       if ($products_options['price_prefix'] == '+') {
-        $real_price = ($hi_product_price) + ($products_options['options_values_price']);
-        $products_options_array[sizeof($products_options_array)-1]['text'] .= ' (' . $currencies->display_price($real_price, tep_get_tax_rate($product_info['products_tax_class_id'])) .') ';
+        $real_price = ($new_price == '' ? $hi_product_price : $new_price) + ($products_options['options_values_price']);
+        $products_options_array[sizeof($products_options_array)-1]['text'] .= ' (' . $currencies->display_price($real_price, tep_get_tax_rate($this->products_tax_class_id)) .') ';
       } else {
-        $real_price = ($hi_product_price) - ($products_options['options_values_price']);
-        $products_options_array[sizeof($products_options_array)-1]['text'] .= ' (' . $currencies->display_price($real_price, tep_get_tax_rate($product_info['products_tax_class_id'])) .') ';
+        $real_price = ($new_price == '' ? $hi_product_price : $new_price) - ($products_options['options_values_price']);
+        $products_options_array[sizeof($products_options_array)-1]['text'] .= ' (' . $currencies->display_price($real_price, tep_get_tax_rate($this->products_tax_class_id)) .') ';
       } 	  
     } else {
 	// Standard method showing attribute price seperately

@@ -44,4 +44,6 @@ define('HEADING_DOWNLOAD', 'Descarga tus productos aquí');
 // Customer Comments contrib
 
 define('TEXT_MISSING_DOWNLOAD', 'Fichero no encontrado.');
+// ship date
+define('HEADING_SHIPPING_DATE', 'Fecha de reparto preferida');
 ?>

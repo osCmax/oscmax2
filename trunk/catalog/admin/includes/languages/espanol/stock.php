@@ -27,4 +27,6 @@ define('TEXT_DEFAULT_STOCK','Por favor selecciona los atributos del producto de 
 
 define('TEXT_UPDATE', 'Actualizar');
 define('TEXT_ADD', 'Añadir');
+define('TEXT_MODIFY', 'Modify');
+define('TEXT_REMOVE', 'Remove');
 ?>

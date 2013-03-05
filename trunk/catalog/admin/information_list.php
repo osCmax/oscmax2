@@ -23,6 +23,7 @@ $Id$
         <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo ENTRY_EXTERNAL_URL; } else { echo '&nbsp;'; }?></td>
 	    <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo PUBLIC_INFORMATION_2; } else { echo '&nbsp;'; }?></td>
 	    <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo PUBLIC_INFORMATION; } else { echo '&nbsp;'; }?></td>
+        <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo ENTRY_CUSTOMER_GROUP_HIDE; } else { echo '&nbsp;'; }?></td>
 	    <td align="center" class="dataTableHeadingContent"><?php if ($_GET['gID'] == '1') { echo ENTRY_SORT_ORDER; } else { echo '&nbsp;'; }?></td>
 	    <td align="center" class="dataTableHeadingContent" colspan=2><?php echo ACTION_INFORMATION;?></td>
       </tr>
@@ -70,7 +71,8 @@ if (sizeof($data) > 0) {
 		  }
 		} ?>
         </td>
-	    <td width="10%" align="center" class="dataTableContent"><?php if ($_GET['gID'] == '1') { echo $val['sort_order']; } else { echo '&nbsp;'; } ?></td>
+	    <td align="center" class="dataTableContent"><?php if ($_GET['gID'] == '1') { echo $val['info_cg_hide']; } else { echo '&nbsp;'; } ?></td>
+        <td width="10%" align="center" class="dataTableContent"><?php if ($_GET['gID'] == '1') { echo $val['sort_order']; } else { echo '&nbsp;'; } ?></td>
         <td align=center class="dataTableContent">
 		<?php echo '<a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, "gID=$gID&amp;information_action=Edit&amp;information_id=$val[information_id]", 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'page_white_edit.png', EDIT_ID_INFORMATION . " $val[information_title]") . '</a>'; ?></td>
 		<?php echo ( empty($info_group['locked']) ? '<td align=center class="dataTableContent"><a href="' . tep_href_link(FILENAME_INFORMATION_MANAGER, "gID=$gID&amp;information_action=Delete&amp;information_id=$val[information_id]", 'NONSSL') . '">' . tep_image(DIR_WS_ICONS . 'delete.gif', DELETE_ID_INFORMATION . " $val[information_title]") . '</a></td>' : null); ?>

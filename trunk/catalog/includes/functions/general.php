@@ -1156,6 +1156,9 @@ $Id$
     // Send message
     $message->build_message();
     $message->send($to_name, $to_email_address, $from_email_name, $from_email_address, $email_subject);
+    if (SEND_ALL_EMAIL_COPY_TO != '') {
+	  $message->send($to_name, SEND_ALL_EMAIL_COPY_TO, $from_email_name, $from_email_address, $email_subject); 
+    }
   }
 
 ////
@@ -1623,4 +1626,71 @@ $Id$
     return $value_array;
   }
 // EOF: for Extra Product Fields  
+
+// BOF Customers extra fields
+      function tep_get_extra_fields($customer_id,$languages_id,$customer_group_id){
+          $extra_fields_query = tep_db_query("select ce.fields_id, ce.fields_input_type, ce.fields_input_value, ce.fields_required_status, cei.fields_name, ce.fields_status, ce.fields_input_type from " . TABLE_EXTRA_FIELDS . " ce, " . TABLE_EXTRA_FIELDS_INFO . " cei where NOT find_in_set('" . $customer_group_id . "', ce.fields_cef_cg_hide) and ce.fields_status=1 and cei.fields_id=ce.fields_id and cei.languages_id =" . $languages_id);
+          $extra_fields_string ='';
+          if(tep_db_num_rows($extra_fields_query)>0){
+             $extra_fields_string .= '<tr><td class="formAreaTitle"><b>' . CATEGORY_EXTRA_FIELDS .'</b></td></tr>';
+             $extra_fields_string .= '<td class="formArea"><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+                                     <tr class="infoBoxContents"><td><table border="0" cellspacing="2" cellpadding="2">';
+             while($extra_fields = tep_db_fetch_array($extra_fields_query)){
+                  $value='';
+                  if(isset($customer_id)){
+                          $value_query = tep_db_query("select value from " . TABLE_CUSTOMERS_TO_EXTRA_FIELDS . " where customers_id=" . $customer_id . " and fields_id=" . $extra_fields['fields_id']);
+                          $value_info = tep_db_fetch_array($value_query);
+                          $value_list = explode("\n", $value_info['value']);
+                          for($i = 0, $n = sizeof($value_list); $i < $n; $i++)
+                          {
+                            $value_list[$i] = trim($value_list[$i]);
+													}
+													$value = $value_list[0];
+                  }
+                  $extra_fields_string .='<tr>
+                                        <td class="main" valign="top" width="150">' . $extra_fields['fields_name'] . ': </td><td class="main" valign="top">';
+
+
+									$select_values_list = explode("\n", $extra_fields['fields_input_value']);
+									$select_values = array();
+									foreach($select_values_list as $item)
+									{
+									  $item = trim($item);
+                    $select_values[] = array('id' => $item, 'text' => $item);
+									}
+
+									switch($extra_fields['fields_input_type'])
+									{
+									  case  0: $extra_fields_string .= tep_draw_input_field('fields_' . $extra_fields['fields_id'],$value). (($extra_fields['fields_required_status']==1) ? '<span class="inputRequirement"> *</span>': ''); break;
+									  case  1: $extra_fields_string .= tep_draw_textarea_field('fields_' . $extra_fields['fields_id'], 50, 6,$value,'style="width:400px;"'). (($extra_fields['fields_required_status']==1) ? '<span class="inputRequirement"> *</span>': ''); break;
+									  case  2:
+									  	foreach($select_values_list as $item)
+											{
+                          $item = trim($item);
+                      		$extra_fields_string .= tep_draw_selection_field('fields_' . $extra_fields['fields_id'], 'radio', $item, (($value == $item)?(true):(false))).$item. (($extra_fields['fields_required_status']==1) ? '<span class="inputRequirement"> *</span>': '').'<br>';
+                      		$extra_fields['fields_required_status']  = 0;
+											}
+									    break;
+									  case  3:
+											$cnt = 1;
+									  	foreach($select_values_list as $item)
+											{
+											    $item = trim($item);
+                      		$extra_fields_string .= tep_draw_selection_field('fields_' . $extra_fields['fields_id'] . '_' . ($cnt++), 'checkbox', $item, ((@in_array($item, $value_list))?(true):(false))).$item. (($extra_fields['fields_required_status']==1) ? '<span class="inputRequirement"> *</span>': '').'<br>';
+                      		$extra_fields['fields_required_status']  = 0;
+											}
+											$extra_fields_string .= tep_draw_hidden_field('fields_' . $extra_fields['fields_id'] . '_total' , $cnt);
+									    break;
+									  case  4: $extra_fields_string .= tep_draw_pull_down_menu('fields_' . $extra_fields['fields_id'], $select_values, $value).(($extra_fields['fields_required_status']==1) ? '<span class="inputRequirement"> *</span>': ''); break;
+									  default: $extra_fields_string .= tep_draw_input_field('fields_' . $extra_fields['fields_id'],$value). (($extra_fields['fields_required_status']==1) ? '<span class="inputRequirement"> *</span>': ''); break;
+									}
+
+                 	$extra_fields_string .=' '  .'</td></tr>';
+             }
+             $extra_fields_string .= '</table></td></tr></table></td></tr>';
+             $extra_fields_string .= '<tr><td>' .  tep_draw_separator('pixel_trans.gif', '100%', '10') . '</td></tr>';
+          }
+          return $extra_fields_string;
+  }
+// EOF Customers extra fields
 ?>

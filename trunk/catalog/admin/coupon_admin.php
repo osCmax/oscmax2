@@ -73,7 +73,7 @@ $Id$
   }
 
   if ($_GET['mail_sent_to']) {
-    $messageStack->add(sprintf(NOTICE_EMAIL_SENT_TO, $_GET['mail_sent_to']), 'notice');
+    $messageStack->add(sprintf(NOTICE_EMAIL_SENT_TO, $_GET['mail_sent_to']), 'success');
   }
 
   $coupon_id = ((isset($_GET['cid'])) ? tep_db_prepare_input($_GET['cid']) : '');
@@ -160,6 +160,7 @@ $Id$
                                 'coupon_minimum_order' => tep_db_prepare_input($_POST['coupon_min_order']),
                                 'restrict_to_products' => tep_db_prepare_input($_POST['coupon_products']),
                                 'restrict_to_categories' => tep_db_prepare_input($_POST['coupon_categories']),
+								'coupon_exclude_cg' => tep_db_prepare_input($_POST['coupon_exclude_cg']),
                                 'coupon_start_date' => tep_db_prepare_input($_POST['coupon_startdate']),
                                 'coupon_expire_date' => tep_db_prepare_input($_POST['coupon_finishdate']),
                                 'date_created' => tep_db_prepare_input($_POST['date_created']),
@@ -391,20 +392,6 @@ $customer = tep_db_fetch_array($customer_query);
                               <tr>
                                 <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_COUPON_ADMIN) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . tep_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
                               </tr>
-                              <tr>
-                                <td class="smallText">
-                                <?php
-                                if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {
-							      echo tep_image_submit('button_back.gif', IMAGE_BACK, 'name="back"');
-                                }
-								if (HTML_AREA_WYSIWYG_DISABLE_EMAIL == 'Disable') {
-							      echo(TEXT_EMAIL_BUTTON_HTML);
-                                } else { 
-								  echo(TEXT_EMAIL_BUTTON_TEXT);
-								}
-								?>
-                                </td>
-                              </tr>
                             </table>
                           </td>
                         </tr>
@@ -633,6 +620,11 @@ $customer = tep_db_fetch_array($customer_query);
         <td align="left" class="main"><?php echo COUPON_CATEGORIES; ?></td>
         <td align="left" class="main"><?php echo $_POST['coupon_categories']; ?></td>
       </tr>
+      
+      <tr>
+        <td align="left" class="main"><?php echo COUPON_EXCLUDE_CG; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_exclude_cg']; ?></td>
+      </tr>
 
 <?php
     echo tep_draw_hidden_field('coupon_status', $_POST['coupon_status']);
@@ -652,6 +644,7 @@ $customer = tep_db_fetch_array($customer_query);
     echo tep_draw_hidden_field('coupon_categories', $_POST['coupon_categories']);
     echo tep_draw_hidden_field('coupon_startdate', $_POST['coupon_startdate']);
     echo tep_draw_hidden_field('coupon_finishdate', $_POST['coupon_finishdate']);
+	echo tep_draw_hidden_field('coupon_exclude_cg', $_POST['coupon_exclude_cg']);
     echo tep_draw_hidden_field('date_created', $_POST['date_created']);
 ?>
        <tr>
@@ -677,7 +670,7 @@ $customer = tep_db_fetch_array($customer_query);
       $coupon_name[$language_id] = $coupon['coupon_name'];
       $coupon_desc[$language_id] = $coupon['coupon_description'];
     }
-    $coupon_query = tep_db_query("select coupon_active, coupon_code, coupon_amount, coupon_type, coupon_minimum_order, coupon_start_date, coupon_expire_date, date_created, uses_per_coupon, uses_per_user, restrict_to_products, restrict_to_categories from " . TABLE_COUPONS . " where coupon_id = '" . (int)$coupon_id . "'");
+    $coupon_query = tep_db_query("select coupon_active, coupon_code, coupon_amount, coupon_type, coupon_minimum_order, coupon_start_date, coupon_expire_date, date_created, uses_per_coupon, uses_per_user, restrict_to_products, restrict_to_categories, coupon_exclude_cg from " . TABLE_COUPONS . " where coupon_id = '" . (int)$coupon_id . "'");
     $coupon = tep_db_fetch_array($coupon_query);
     $coupon_amount = (($coupon['coupon_amount'] == round($coupon['coupon_amount'])) ? number_format($coupon['coupon_amount'], 2) : number_format($coupon['coupon_amount'], 2));
     if ($coupon['coupon_type']=='P') {
@@ -685,7 +678,7 @@ $customer = tep_db_fetch_array($customer_query);
       $coupon_amount = (($coupon_amount == round($coupon_amount)) ? number_format($coupon_amount) : number_format($coupon_amount, 2)) . '%';
     }
     if ($coupon['coupon_type']=='S') {
-      $coupon_free_ship .= true;
+      $coupon_free_ship = true;
     }
     $coupon_min_order = (($coupon['coupon_minimum_order'] == round($coupon['coupon_minimum_order'])) ? number_format($coupon['coupon_minimum_order'], 2) : number_format($coupon['coupon_minimum_order'], 2));
     $coupon_code = $coupon['coupon_code'];
@@ -695,6 +688,7 @@ $customer = tep_db_fetch_array($customer_query);
     $coupon_categories = $coupon['restrict_to_categories'];
     $date_created = $coupon['date_created'];
     $coupon_status = $coupon['coupon_active'];
+	$coupon_exclude_cg = $coupon['coupon_exclude_cg'];
   case 'new':
 // molafish: set default if not editing an existing coupon or showing an error
     if ($_GET['action'] == 'new' && !$_GET['oldaction'] == 'new') {
@@ -775,7 +769,7 @@ $customer = tep_db_fetch_array($customer_query);
                 </tr>
                 <tr>
                   <td align="left" class="main"><?php echo COUPON_FREE_SHIP; ?></td>
-                  <td align="left"><?php echo tep_draw_checkbox_field('coupon_free_ship', $coupon_free_ship); ?></td>
+                  <td align="left"><?php echo tep_draw_checkbox_field('coupon_free_ship', '1', $coupon_free_ship); ?></td>
                   <td align="left" class="main"><?php echo COUPON_FREE_SHIP_HELP; ?></td>
                 </tr>
                 <tr>
@@ -819,6 +813,22 @@ $customer = tep_db_fetch_array($customer_query);
                   <td align="left" class="main"><?php echo COUPON_CATEGORIES; ?></td>
                   <td align="left"><?php echo tep_draw_input_field('coupon_categories', $coupon_categories); ?> <input type=button name=open_popup ONCLICK="window.open('treeview.php', 'popuppage', 'scrollbars=yes,resizable=yes,menubar=yes,width=400,height=600'); " value=" View "></td>
                   <td align="left" class="main"><?php echo COUPON_CATEGORIES_HELP; ?></td>
+                </tr>
+                <tr>
+                  <td align="left" class="main"><?php echo COUPON_EXCLUDE_CG; ?></td>
+                  <td align="left"><?php echo tep_draw_input_field('coupon_exclude_cg', $coupon_exclude_cg); ?></td>
+                  <td align="left" class="main">
+				  <?php 
+				  $existing_customers_query = tep_db_query("select customers_group_id, customers_group_name from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_id ");
+				  $customer_group_string = '';
+				  while ($existing_customers =  tep_db_fetch_array($existing_customers_query)) {
+				    $customer_group_string .= $existing_customers['customers_group_id'] . ' - ' . $existing_customers['customers_group_name'] . ', ';
+				  }
+				  
+				  $customer_group_string = substr($customer_group_string, 0, -2);
+				  echo COUPON_EXCLUDE_CG_HELP . '<br>(' . $customer_group_string . ')';
+				  ?>
+                  </td>
                 </tr>
                 <tr>
                   <td align="right" colspan="2"><?php echo tep_draw_hidden_field('date_created', $date_created); ?><?php echo tep_image_submit('button_preview.gif', COUPON_BUTTON_PREVIEW); ?><?php echo '&nbsp;&nbsp;<a href="' . tep_href_link('coupon_admin.php', ''); ?>"><?php echo tep_image_button('button_cancel.gif', IMAGE_CANCEL); ?></a></td>

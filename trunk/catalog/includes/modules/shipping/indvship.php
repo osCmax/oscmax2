@@ -128,12 +128,12 @@ $products = $cart->get_products();
 	}
 
 	function install() {
-		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Individual Shipping Prices', 'MODULE_SHIPPING_INDVSHIP_STATUS', 'True', 'Do you want to offer individual shipping prices?', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
-		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Tax Class', 'MODULE_SHIPPING_INDVSHIP_TAX_CLASS', '0', 'Use the following tax class on the shipping fee.', '6', '0', 'tep_get_tax_class_title', 'tep_cfg_pull_down_tax_classes(', now())");
-		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Shipping Zone', 'MODULE_SHIPPING_INDVSHIP_ZONE', '0', 'If a zone is selected, only enable this shipping method for that zone.', '6', '0', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(', now())");
-		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_SHIPPING_INDVSHIP_SORT_ORDER', '0', 'Sort order of display.', '6', '0', now())");
-	 tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Higher Rated States', 'MODULE_SHIPPING_INDVSHIP_STATES', 'alaska,hawaii', 'Higher rate States', '6', '0', now())");
-	 tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Handling Fee', 'MODULE_SHIPPING_INDVSHIP_HANDLING', '4.95', 'Handling fee for these States.', '6', '0', now())");
+		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('CT_MODULE_SHIPPING_STATUS', 'MODULE_SHIPPING_INDVSHIP_STATUS', 'True', 'CD_MODULE_SHIPPING_STATUS', '6', '0', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('CT_MODULE_SHIPPING_TAX_CLASS', 'MODULE_SHIPPING_INDVSHIP_TAX_CLASS', '0', 'CD_MODULE_SHIPPING_TAX_CLASS', '6', '0', 'tep_get_tax_class_title', 'tep_cfg_pull_down_tax_classes(', now())");
+		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('CT_MODULE_SHIPPING_ZONE', 'MODULE_SHIPPING_INDVSHIP_ZONE', '0', 'CD_MODULE_SHIPPING_ZONE', '6', '0', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(', now())");
+		tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('CT_MODULE_SHIPPING_SORT_ORDER', 'MODULE_SHIPPING_INDVSHIP_SORT_ORDER', '0', 'CD_MODULE_SHIPPING_SORT_ORDER', '6', '0', now())");
+	 tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('CT_MODULE_SHIPPING_INDVSHIP_STATES', 'MODULE_SHIPPING_INDVSHIP_STATES', 'alaska,hawaii', 'CD_MODULE_SHIPPING_INDVSHIP_STATES', '6', '0', now())");
+	 tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('CT_MODULE_SHIPPING_INDVSHIP_HANDLING', 'MODULE_SHIPPING_INDVSHIP_HANDLING', '4.95', 'CD_MODULE_SHIPPING_INDVSHIP_HANDLING', '6', '0', now())");
  	}
 
 	function remove() {
@@ -142,7 +142,7 @@ $products = $cart->get_products();
 	}
 
 	function keys() {
-		return array('MODULE_SHIPPING_INDVSHIP_STATUS', 'MODULE_SHIPPING_INDVSHIP_TAX_CLASS', 'MODULE_SHIPPING_INDVSHIP_ZONE', 'MODULE_SHIPPING_INDVSHIP_SORT_ORDER');
+	  return array('MODULE_SHIPPING_INDVSHIP_STATUS', 'MODULE_SHIPPING_INDVSHIP_TAX_CLASS', 'MODULE_SHIPPING_INDVSHIP_ZONE', 'MODULE_SHIPPING_INDVSHIP_SORT_ORDER', 'MODULE_SHIPPING_INDVSHIP_HANDLING', 'MODULE_SHIPPING_INDVSHIP_STATES');
 	}
 }
 ?>

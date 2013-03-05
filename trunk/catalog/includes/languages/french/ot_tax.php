@@ -10,6 +10,6 @@ $Id$
   Released under the GNU General Public License
 */
 
-  define('MODULE_ORDER_TOTAL_TAX_TITLE', 'TVA');
-  define('MODULE_ORDER_TOTAL_TAX_DESCRIPTION', 'TVA de la commande');
+  define('MODULE_ORDER_TOTAL_TAX_TITLE', 'TVA (19.6%)');
+  define('MODULE_ORDER_TOTAL_TAX_DESCRIPTION', 'Commande TVA');
 ?>

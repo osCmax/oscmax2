@@ -202,7 +202,7 @@ define('BOX_CONFIGURATION_MIN_VALUES', 'Mindestwerte');
 define('BOX_CONFIGURATION_MAX_VALUES', 'Höchstwerte');
 define('BOX_CONFIGURATION_IMAGES', 'Bilder');
 define('BOX_CONFIGURATION_CUSTOMER_DETAILS', 'Kundendaten');
-define('BOX_CONFIGURATION_SHIPPING', 'Versandart');
+define('BOX_CONFIGURATION_SHIPPING', 'Versand / Verpackung');
 define('BOX_CONFIGURATION_PAGE_CACHE', 'Page Cache Einstellungen');
 define('BOX_CONFIGURATION_PRODUCT_SETTINGS', 'Produkteinstellungen');
 define('BOX_CONFIGURATION_PRODUCT_LISTING', 'Produktliste');
@@ -458,6 +458,8 @@ define('IMAGE_EMAIL', 'E-Mail');
 define('IMAGE_FILE_MANAGER', 'Datei Manager');
 define('IMAGE_ICON_STATUS_GREEN', 'Aktiv');
 define('IMAGE_ICON_STATUS_GREEN_LIGHT', 'Aktivieren');
+define('IMAGE_ICON_STATUS_YELLOW', 'Nicht mehr lieferbar');
+define('IMAGE_ICON_STATUS_YELLOW_LIGHT', 'Als nicht mehr lieferbar markieren');  
 define('IMAGE_ICON_STATUS_RED', 'Inaktiv');
 define('IMAGE_ICON_STATUS_RED_LIGHT', 'Deaktivieren');
 define('IMAGE_ICON_INFO', 'Info');
@@ -678,4 +680,10 @@ define('TEXT_COPYRIGHT', 'Copyright');
 
 define('ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Cacheverzeichnis ist nicht vorhanden. Bitte setzen Sie die Einstellungen in Konfiguration->Cache');
 define('ERROR_CACHE_DIRECTORY_NOT_WRITEABLE', 'Fehler: Das Cacheverzeichnis ist schreibgeschützt.');
+
+// BOF Customers extra fields
+define('BOX_CUSTOMERS_EXTRA_FIELDS_MANAGER', 'Kunden-Extra-Felder');
+define('ENTRY_EXTRA_FIELDS_ERROR', 'Feld %s muss mindestens %d Zeichen enthalten');
+define('TEXT_DISPLAY_NUMBER_OF_FIELDS', '<b>%d</b> bis <b>%d</b> (von <b>%d</b> Feldern) anzeigen');
+// EOF Customers extra fields
 ?>

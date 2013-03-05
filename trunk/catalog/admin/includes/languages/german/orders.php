@@ -98,4 +98,7 @@ define('TEXT_ORDER_DATE_TIME', 'Bestellt am');
 
 define('OPTION_SELECT_COMMENT', 'Kommentar auswählen...');
 define('OPTION_NAME_OF_CUSTOMER', 'Kundenname');
+
+// ship date
+define('DELIVERY_DATE', 'Gewünschtes Lieferdatum:');
 ?>

@@ -169,7 +169,7 @@ $Id$
               <tr>
 								<script>
 								var RecaptchaOptions = {
-								   theme : 'white',
+								   theme : '<?php echo RECAPTCHA_STYLE; ?>',
 								   tabindex : 3
 								};
 								</script>              	

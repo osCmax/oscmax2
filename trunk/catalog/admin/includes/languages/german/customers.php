@@ -45,4 +45,10 @@ define('TEXT_ADD_A_COMMENT', 'Kommentar hinzufügen:');
 define('TEXT_NOTES', 'Anmerkungen:');
 define('TEXT_AUTHOR', 'Autor:');
 define('IMAGE_BUTTON_LOGIN_AS', 'Als Kunde anmelden');
+
+define('SELECT_ADDRESS', 'Wählen Sie den Kunden, den Sie bearbeiten möchten: ');
+
+// BOF Customers extra fields
+define('CATEGORY_EXTRA_FIELDS', 'Kunden-Extra-Felder');
+// EOF Customers extra fields
 ?>

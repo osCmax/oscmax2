@@ -361,7 +361,17 @@ foreach ($epf as $e) {
         $order_str .= "p.products_weight " . ($sort_order == 'd' ? "desc" : "") . ", pd.products_name";
         break;
       case 'PRODUCT_LIST_PRICE':
-        $order_str .= "final_price " . ($sort_order == 'd' ? "desc" : "") . ", pd.products_name";
+        //BOF: Bug Fix 1277 - fix price sort order in advanced search
+        //$order_str .= "final_price " . ($sort_order == 'd' ? "desc" : "") . ", pd.products_name";
+          switch ($sort_order) {
+            case 'a':
+              $order_str .= "final_price" . ($sort_order == 'a' ? "" : "") . ", p.products_price ASC";
+            break;
+            case 'd':
+              $order_str .= "final_price" . ($sort_order == 'd' ? "" : "") . ", p.products_price DESC";
+            break;
+          }
+        //EOF: Bug Fix 1277  
         break;
 	  case 'PRODUCT_LIST_BESTSELLER':
         $order_str .= " products_ordered " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
@@ -383,11 +393,8 @@ foreach ($epf as $e) {
         // previous request
         if (isset($_SESSION['gridlist'])) { $gridlist = $_SESSION['gridlist']; }
 
-        if ($gridlist == 'list') {
-          include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
-        } else {
-          include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING_COL);
-        }
+        include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
+        
 // EOF:$Id$
 ?>
         </td>

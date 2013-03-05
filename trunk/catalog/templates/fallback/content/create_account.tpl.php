@@ -10,6 +10,15 @@ $Id$
   Released under the GNU General Public License
 */
 ?>
+
+<!-- reCAPTCHA - start -->
+<?php if (RECAPTCHA_ON == 'true' && RECAPTCHA_CREATE_ACCOUNT == 'true') { ?>
+<script type="text/javascript">
+var RecaptchaOptions = { theme : '<?php echo RECAPTCHA_STYLE; ?>', tabindex : 3, lang : '<?php echo in_array($code, array('en', 'fr', 'de', 'es')) ? $code : 'en' ?>' };
+</script>
+<?php } ?>
+<!-- reCAPTCHA - end -->
+
     <!-- PWA BOF -->
     <?php echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, (isset($_GET['guest'])? 'guest=guest':''), 'SSL'), 'post', 'onSubmit="return check_form(create_account);"') . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
     <!-- PWA EOF -->
@@ -98,6 +107,12 @@ $Id$
                 <td class="main" width="150"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
                 <td class="main"><?php echo tep_draw_input_field('email_address') . '&nbsp;' . (tep_not_null(ENTRY_EMAIL_ADDRESS_TEXT) ? '<span class="inputRequirement">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>': ''); ?></td>
               </tr>
+              <?php if (ACCOUNT_EMAIL_CONFIRMATION == 'true') { ?>
+              <tr>
+                <td class="main" width="150"><?php echo ENTRY_EMAIL_CONFIRMATION; ?></td>
+                <td class="main"><?php echo tep_draw_input_field('email_confirmation') . '&nbsp;' . (tep_not_null(ENTRY_EMAIL_CONFIRMATION_TEXT) ? '<span class="inputRequirement">' . ENTRY_EMAIL_CONFIRMATION_TEXT . '</span>': ''); ?></td>
+              </tr>
+              <?php } ?>
             </table></td>
           </tr>
         </table></td>
@@ -215,6 +230,11 @@ $Id$
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+      
+      <!-- // BOF Customers extra fields -->
+      <?php echo tep_get_extra_fields($customer_id, $languages_id, $customer_group_id);?>
+      <!-- // EOF Customers extra fields -->
+
 <?php
 // PWA BOF
   if (!isset($_GET['guest']) && !isset($_POST['guest'])) {
@@ -274,6 +294,31 @@ $Id$
 <?php } 
 // PWA EOF
 ?>
+
+<!-- reCAPTCHA - start -->
+<?php if (RECAPTCHA_ON == 'true' && RECAPTCHA_CREATE_ACCOUNT == 'true') { ?>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+      </tr>
+      <tr>
+        <td class="main"><b><?php echo CATEGORY_RECAPTCHA; ?></b></td>
+      </tr>
+      <tr>
+        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+          <tr class="infoBoxContents">
+            <td><table border="0" cellspacing="2" cellpadding="2">
+              <tr>
+                <td class="main" width="150"><?php echo ENTRY_RECAPTCHA; ?></td>
+                <td class="main"><?php echo recaptcha_get_html(RECAPTCHA_PUBLIC_KEY); ?></td>
+</td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+<?php } ?>
+<!-- reCAPTCHA - end -->
+
 <?php if (MAT == 'true') { ?>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

@@ -63,7 +63,9 @@ $Id$
   define('FILENAME_AFFILIATE_PAYMENT', 'affiliate_payment.php');
 
 // include the language translations
-  require(DIR_WS_LANGUAGES . $language . '/affiliate.php');
+  //Line Changed Bug Fix #1316 http://bugtrack.oscmax.com/view.php?id=1316
+  //require(DIR_WS_LANGUAGES . $language . '/affiliate.php');
+  require(bts_select('language', 'affiliate.php'));
 
   $affiliate_clientdate = (date ("Y-m-d H:i:s"));
   $affiliate_clientbrowser = isset($_SERVER["HTTP_USER_AGENT"]);

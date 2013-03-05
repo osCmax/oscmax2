@@ -76,7 +76,8 @@ function tep_update_information_languages($language_id = 0) {
 						'information_title' 		=> tep_db_prepare_input($information['information_title']),
 						'information_description' 	=> tep_db_prepare_input($information['information_description']),
 						'information_url' 		    => tep_db_prepare_input($information['information_url']),
-						'information_target'    	=> tep_db_prepare_input($information['information_target'])
+						'information_target'    	=> tep_db_prepare_input($information['information_target']),
+						'info_cg_hide'          	=> tep_db_prepare_input($information['info_cg_hide'])
 					);
 					tep_db_perform(TABLE_INFORMATION, $sql_data_array);
 				}
@@ -134,6 +135,7 @@ switch($information_action) {
 	if(isset($_POST['information_description']))	$sql_data_array['information_description'] = tep_db_prepare_input($_POST['information_description'][$language_id]);
 	if(isset($_POST['information_url']))			$sql_data_array['information_url'] = tep_db_prepare_input($_POST['information_url']);
 	if(isset($_POST['information_target']))	        $sql_data_array['information_target'] = tep_db_prepare_input($_POST['information_target']);
+	if(isset($_POST['info_cg_hide']))    	        $sql_data_array['info_cg_hide'] = tep_db_prepare_input($_POST['info_cg_hide']);
 
 	tep_db_perform(TABLE_INFORMATION, $sql_data_array);
 
@@ -155,11 +157,12 @@ switch($information_action) {
 		if(isset($_POST['information_description']))	$sql_data_array['information_description'] = tep_db_prepare_input($_POST['information_description'][$language_id]);
 		if(isset($_POST['information_url']))			$sql_data_array['information_url'] = tep_db_prepare_input($_POST['information_url']);
 	    if(isset($_POST['information_target']))	        $sql_data_array['information_target'] = tep_db_prepare_input($_POST['information_target']);
+		if(isset($_POST['info_cg_hide']))	            $sql_data_array['info_cg_hide'] = tep_db_prepare_input($_POST['info_cg_hide']);
 
 		if(count($sql_data_array) > 1) {
 			if(tep_db_perform(TABLE_INFORMATION, $sql_data_array)){
-              $messageStack->add_session(SUCCED_INFORMATION . ADD_QUEUE_INFORMATION, 'success');
-            }else{
+              $messageStack->add_session($languages[$i]['name'] . ' ' . SUCCED_INFORMATION . ADD_QUEUE_INFORMATION, 'success');
+            } else {
               $messageStack->add_session(ERROR_ADDING, 'error');
 		    }
 		}
@@ -180,11 +183,12 @@ switch($information_action) {
 			if(isset($_POST['information_description']))	$sql_data_array['information_description'] = tep_db_prepare_input($_POST['information_description'][$language_id]);
             if(isset($_POST['information_url']))			$sql_data_array['information_url'] = tep_db_prepare_input($_POST['information_url']);
 	        if(isset($_POST['information_target']))	        $sql_data_array['information_target'] = tep_db_prepare_input($_POST['information_target']);
+			if(isset($_POST['info_cg_hide']))	            $sql_data_array['info_cg_hide'] = tep_db_prepare_input($_POST['info_cg_hide']);
 	
 			if(count($sql_data_array) > 0) {
 				$sql_data_array['information_group_id'] = tep_db_prepare_input($gID);
 				if (tep_db_perform(TABLE_INFORMATION, $sql_data_array, 'update', "information_id = '" . (int)$_POST['information_id'] . "' and language_id = '" . (int)$language_id . "'")){
-                  $messageStack->add_session(TEXT_UPDATE_SUCCESS, 'success');
+                  $messageStack->add_session($languages[$i]['name'] . ' ' . TEXT_UPDATE_SUCCESS, 'success');
                 }
 			}
 		}
@@ -266,7 +270,7 @@ case "Added":
 		tep_db_query("update " . TABLE_INFORMATION . " set visible = '1' where information_id = '" . (int)$_GET['information_id'] . "'");
 	}
 	$data=tep_get_information_list();
-	$title="$confirm $vivod (int)$information_id " . SUCCED_INFORMATION . "";
+	$title="$confirm $vivod '" . (int)$_GET['information_id'] . "' " . SUCCED_INFORMATION . "";
 	include('information_list.php');
 	break;
 

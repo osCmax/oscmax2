@@ -43,7 +43,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 
 // define the project version
-  define('PROJECT_VERSION', 'osCmax v2.5.2');
+  define('PROJECT_VERSION', 'osCmax v2.5.3');
 
 // some code to solve compatibility issues
   require(DIR_WS_FUNCTIONS . 'compatibility.php');
@@ -316,9 +316,6 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
     $language = $lng->language['directory'];
     $languages_id = $lng->language['id'];
   }
-
-// include the language translations
-  require(DIR_WS_LANGUAGES . $language . '/core.php');
   
 // BOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
   switch (strtolower(CHARSET)) {
@@ -331,11 +328,15 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 // EOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
 
+// LINE ADDED: MOD - BTS
+  require(DIR_WS_INCLUDES . 'configure_bts.php');
+  
+// include the language translations
+  require(bts_select('language', 'core.php'));
 // include the language locale
-  require(DIR_WS_LANGUAGES . $language . '/locale/locale.php');
+  require(bts_select('language', 'locale/locale.php'));
 // LINE ADDED - CREDIT CLASS Gift Voucher Contribution
-  require(DIR_WS_LANGUAGES . $language . '/add_ccgvdc.php');
-
+  require(bts_select('language', 'add_ccgvdc.php'));
 
 // BOF: MOD
 // ULTIMATE Seo Urls 5 by FWR Media
@@ -824,9 +825,6 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
   //---PayPal WPP Modification START ---//
   include(DIR_WS_INCLUDES . 'paypal_wpp/paypal_wpp_include.php');
   //---PayPal WPP Modification END ---//
-// LINE ADDED: MOD - BTS
-  require(DIR_WS_INCLUDES . 'configure_bts.php');
-
 
 // BOF: MOD - Page cache contribution - by Chemo
 // Define the pages to be cached in the $cache_pages array

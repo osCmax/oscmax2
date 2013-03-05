@@ -194,6 +194,9 @@ define('ENTRY_DATE_OF_BIRTH', 'Fecha de nacimiento:');
 define('ENTRY_DATE_OF_BIRTH_ERROR', 'Su fecha de nacimiento debe tener este formato: DD/MM/AAAA (p.ej. 21/05/1970)');
 define('ENTRY_DATE_OF_BIRTH_TEXT', '* (p.ej. 21/05/1970)');
 define('ENTRY_EMAIL_ADDRESS', 'Dirección e-mail:');
+define('ENTRY_EMAIL_CONFIRMATION', 'E-Mail Confirmation:');
+define('ENTRY_EMAIL_CONFIRMATION_TEXT', '*');
+define('ENTRY_EMAIL_ERROR_NOT_MATCHING', 'The E-Mail Confirmation must match your E-Mail Address.');
 define('ENTRY_EMAIL_ADDRESS_ERROR', 'Su dirección de e-mail debe tener al menos ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' letras.');
 define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'Su dirección de e-mail no parece válida - por favor haga los cambios necesarios.');
 define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', 'Su dirección de e-mail ya figura entre nuestros clientes - puede entrar a su cuenta con esta dirección o crear una cuenta nueva con una dirección diferente.');
@@ -341,8 +344,8 @@ define('ERROR_TEP_MAIL', '<span class="errorText"><b><small>Error:</small> No se
 define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Advertencia: El directorio de instalación existe en: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/install. Por razones de seguridad, elimine este directorio completamente.');
 define('WARNING_CONFIG_FILE_WRITEABLE', 'Advertencia: Se puede escribir en el fichero de configuración: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/includes/configure.php. En determinadas circunstancias esto puede suponer un riesgo de seguridad - por favor corrija los permisos de este fichero.');
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Advertencia: El directorio para guardar datos de sesión no existe: ' . tep_session_save_path() . '. Las sesiones no funcionarán hasta que no se cree el directorio.');
-define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Avertencia: No puedo escribir en el directorio para datos de sesión: ' . tep_session_save_path() . '. Las sesiones no funcionarán hasta que no se establezcan correctamente los permisos del directorio.');
-define('WARNING_SEO_PHP_VERSION_LOW', 'Avertencia: Tu servidor web está funcionando con la versión de PHP ' . PHP_VERSION . ' que no es suficiente para el funcionamiento de SEO URLs. Por favor deshabilita este módulo hasta que hayas actualizado la versión de PHP.');
+define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Advertencia: No puedo escribir en el directorio para datos de sesión: ' . tep_session_save_path() . '. Las sesiones no funcionarán hasta que no se establezcan correctamente los permisos del directorio.');
+define('WARNING_SEO_PHP_VERSION_LOW', 'Advertencia: Tu servidor web está funcionando con la versión de PHP ' . PHP_VERSION . ' que no es suficiente para el funcionamiento de SEO URLs. Por favor deshabilita este módulo hasta que hayas actualizado la versión de PHP.');
 define('WARNING_SESSION_AUTO_START', 'Advertencia: session.auto_start esta activado - desactiva esta característica en el fichero php.ini y reinicia el servidor web.');
 define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Advertencia: El directorio para productos descargables no existe: ' . DIR_FS_DOWNLOAD . '. Los productos descargables no funcionarán hasta que este directorio exista y sea válido.');
 
@@ -487,4 +490,12 @@ define('TAX_RATE_NEAR_PRICE_INC', 'Impuestos incluidos ');
 define('TAX_RATE_NEAR_PRICE_EX', 'Impuestos no incluidos ');
 define('TEXT_SHIPPING_NEAR_PRICE', 'Envíos');
 // EOF Show tax and Shipping near price
+
+// BOF reCaptcha
+define('ENTRY_SECURITY_CHECK', 'Control de seguridad:');
+define('ENTRY_SECURITY_CHECK_ERROR', 'Código de comprobación de seguridad escrito incorrectamente. Inténtelo de nuevo.');
+define('SECURITY_PROMPT', 'Por favor, responda la pregunta de seguridad mostrada a la derecha ->');
+define('CATEGORY_RECAPTCHA', 'Pregunta del control de seguridad');
+define('ENTRY_RECAPTCHA', 'Pregunta de seguridad:');
+// EOF reCaptcha
 ?>

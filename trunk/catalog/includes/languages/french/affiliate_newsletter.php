@@ -1,6 +1,6 @@
 <?php
 /*
-$Id: affiliate_newsletter.php 982 2011-07-27 15:32 contact@sputnik.lu $
+$Id: affiliate_newsletter.php 982 2011-01-06 02:53:12Z michael.oscmax@gmail.com $
 
   osCmax e-Commerce
   http://www.oscmax.com
@@ -10,14 +10,14 @@ $Id: affiliate_newsletter.php 982 2011-07-27 15:32 contact@sputnik.lu $
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE_1', 'Programme de partenariat');
-define('NAVBAR_TITLE_2', 'Abonnements au bulletin d\'information');
+define('NAVBAR_TITLE_1','Programme d\'affiliation');
+define('NAVBAR_TITLE_2','Abonnements Newsletter');
 
-define('HEADING_TITLE', 'Abonnements au bulletin d\'information');
+define('HEADING_TITLE','Abonnements Newsletter');
 
-define('MY_NEWSLETTERS_TITLE', 'Mes abonnements au bulletin d\'information');
-define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER', 'Bulletin d\'information partenaire');
-define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER_DESCRIPTION', 'Conteint les nouvelles du partenariat, de nouveaux produits, offres sp&eacute;ciales, et d\'autres annonces promotionnelles.');
+define('MY_NEWSLETTERS_TITLE','Mes abonnements Newsletter');
+define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER','Affiliation Newsletter');
+define('MY_NEWSLETTERS_AFFILIATE_NEWSLETTER_DESCRIPTION','Y compris les nouvelles d\'affiliation, de nouveaux produits, offres sp&eacute;ciales, et d\'autres annonces promotionnelles.');
 
-define('SUCCESS_NEWSLETTER_UPDATED', 'Votre abonnement au bulletin d\'information à &eacute;t&eacute; mis &agrave; jour.');
+define('SUCCESS_NEWSLETTER_UPDATED','Votre abonnement à un bulletin ont &eacute;t&eacute; mis à jour.');
 ?>

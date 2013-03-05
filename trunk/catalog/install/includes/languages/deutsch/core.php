@@ -36,8 +36,8 @@ define('IMAGE_CATALOG', 'Catalog');
 
 // Start Page
 define('TEXT_WELCOME_TO_OSCMAX', 'Willkommen bei osCmax ');
-define('TEXT_INDEX_MAIN_BLOCK', '<p>Mit osCmax können Sie weltweit Produkte über Ihren eigenen Online-Shop vertreiben. Verwalten Sie Produkte, Kunden, Bestellungen, Newsletter, Sonderangebote und mehr, um Ihren Onlineshop zum Erfolg zu führen.</p>
-  <p>osCmax basiert auf osCommerce Online Merchant 2.2 und macht die Entwicklung Ihrer Site schneller und einfacher als jemals zuvor. osCmax ist mit osCommerce Online Merchant 2.2 abwärtskompatibel. Somit profitieren Sie von der größten Community einer Shoplösung: Über 140,000 registrierte Shop-Betreiber und Entwickler geben Hilfestellung und haben über 4.000 Erweiterungen entwickelt, die die Funktionalität und das Potential Ihres Shops erweitern.</p>
+define('TEXT_INDEX_MAIN_BLOCK', '<p>Mit osCmax können Sie weltweit Produkte über Ihren eigenen Online-Shop vertreiben. Verwalten Sie Produkte, Kunden, Bestellungen, Newsletter, Sonderangebote und mehr und führen Sie so Ihren Onlineshop zum Erfolg.</p>
+  <p>osCmax basiert auf osCommerce Online Merchant 2.2 und macht die Entwicklung Ihrer Site schneller und einfacher als jemals zuvor. osCmax ist mit osCommerce Online Merchant 2.2 abwärtskompatibel. Somit profitieren Sie von der größten Community einer Shoplösung: Über 140.000 registrierte Shop-Betreiber und Entwickler geben Hilfestellung und haben über 4.000 Erweiterungen entwickelt, die die Funktionalität und das Potential Ihres Shops erweitern.</p>
   <p>osCmax und seine Erweiterungen sind kostenlos unter Verwendung einer Open-Source-Lizenz verfügbar, damit Sie schneller und ohne Einschränkungen oder Lizenzgebühren online verkaufen können.</p><p>&nbsp;</p><p>&nbsp;</p><br />');
 define('TEXT_REGISTER_GLOBALS_ERROR', 'Die Kompatibilität mit register_globals wird seit PHP 4.3+ unterstützt. Diese Einstellung <u>muss aktiviert werden</u>, da eine ältere PHP Version verwendet wird.');
 define('TEXT_PERMISSIONS_ERROR', '<p>Der Webserver kann die Installationsparameter nicht in seine Konfigurationsdateien speichern.</p><p>Bei den folgenden Dateien müssen die Zugriffsberechtigungen auf world-writeable (chmod 777) gesetzt werden:</p><p></p>');
@@ -57,7 +57,7 @@ define('TEXT_DATABASE_PASSWORD_DESC', 'Das Passwort wird zur Verbindungsaufnahme
 define('TEXT_DATABASE_NAME', 'Datenbankname');
 define('TEXT_DATABASE_NAME_DESC', 'Diese Datenbank wird die Shopdaten speichern.');
 define('TEXT_DATABASE_SUCCESS', 'Datenbank erfolgreich importiert.');
-define('TEXT_DATABASE_IMPORTING', 'Die Datenbankstruktur wird jetzt importiert. Bitte haben Sie Geduld während dieses Vorganges.');
+define('TEXT_DATABASE_IMPORTING', 'Die Datenbankstruktur wird jetzt importiert. Bitte unterbrechen Sie diesen Vorgang nicht!');
 define('TEXT_DATABASE_PROBLEM', 'Beim Datenbankimport ist ein Fehler aufgetreten:<br><br>%s<br><br>Bitte überprüfen Sie die Verbindungsparameter und versuchen Sie es erneut.');
 define('TEXT_DATBASE_CONNECTION_ERROR', 'Beim Verbindungsversuch mit dem Datenbankserver ist ein Fehler aufgetreten:<br><br>%s<br><br>Bitte überprüfen Sie die Verbindungsparameter und versuchen Sie es erneut.');
 define('TEXT_TESTING_DATABASE', 'Die Verbindung zur Datenbank wird überprüft.');
@@ -84,7 +84,7 @@ define('TEXT_USERNAME_DESC', 'Der Benutzername wird für den Zugang zum Administr
 define('TEXT_PASSWORD', 'Administrator Passwort');
 define('TEXT_PASSWORD_DESC', 'Das Passwort für das Administrator-Konto.');
 define('TEXT_ADMIN_FOLDER_NAME', 'Verzeichnisname des Administrations-Bereiches');
-define('TEXT_CHANGE_ADMIN_FOLDER', 'In diesem Verzeichnis befindet sich der Administrations-Bereich. Aus Sicherheitsgründen sollte der <b>Verzeichnisname unbedingt geändert werden</b>, da der Standardname <b>admin</b> unsicher ist. Weitere Informationen zum Thema Sicherheit finden Sie im <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">Wiki</a>.');
+define('TEXT_CHANGE_ADMIN_FOLDER', 'In diesem Verzeichnis befindet sich der Administrations-Bereich. Aus Sicherheitsgründen sollte der <b>Verzeichnisname unbedingt geändert werden</b>, da der standardmäßig verwendete Name <b>admin</b> unsicher ist. Weitere Informationen zum Thema Sicherheit finden Sie im <a href="http://wiki.oscdox.com/v2.5/setting_up_security" target="_blank">Wiki</a>.');
 define('TEXT_ADMIN_NO_PERMISSION', 'Sie besitzen keine ausreichende Berechtigung, um das <b>admin/</b> Verzeichnis umzubenennen. Sie sollten das Verzeichnis umbenennen, um die Sicherheit Ihres Onlineshops zu verbessern. Passen Sie Ihre Servereinstellungen an und folgen Sie <a href="http://wiki.oscdox.com/v2.1/setting_up_security" target="_blank">dieser Anleitung</a> zur manuellen Umbenennung.');
 define('TEXT_NO_CONFIG_PERMISSIONS', 'Der Installer kann Ihre configure.php Dateien nicht erstellen. <br/> Die Zugriffsrechte sind inkorrekt bei mehreren Verzeichnissen!');
 define('TEXT_NO_CONFIG_PERMISSIONS_DESC', ' Sie müssen die Zugriffsrechte auf 755 or 777 bei den folgenden Verzeichnissen ändern. <br />Sobald dies geschehen ist, laden Sie diese Seite neu und Sie können die Installation fortsetzen. Falls Sie dennoch weiterhin diesen Fehler sehen, lesen Sie  die Dokumentation <a href="http://wiki.oscdox.com/v2.5/installation_troubleshooting" target="_blank">Troubleshooting</a>. <br><br>Ändern Sie die Zugriffsrechte auf 755 oder 777 (Tip: Versuchen Sie zuerst 755. Falls das nicht funktioniert, versuchen Sie 777.) bei den folgenden Verzeichnissen:<br><br>');

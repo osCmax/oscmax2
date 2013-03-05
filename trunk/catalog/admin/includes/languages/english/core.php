@@ -680,4 +680,10 @@ define('TEXT_COPYRIGHT', 'Copyright');
 
 define('ERROR_CACHE_DIRECTORY_DOES_NOT_EXIST', 'Error: Cache directory does not exist. Please set this Administrator -> Cache.');
 define('ERROR_CACHE_DIRECTORY_NOT_WRITEABLE', 'Error: Cache directory is not writeable.');
+
+// BOF Customers extra fields
+define('BOX_CUSTOMERS_EXTRA_FIELDS_MANAGER', 'Customers Extra Fields');
+define('ENTRY_EXTRA_FIELDS_ERROR', 'Field %s must contain a minimum of %d characters');
+define('TEXT_DISPLAY_NUMBER_OF_FIELDS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Fields)');
+// EOF Customers extra fields
 ?>

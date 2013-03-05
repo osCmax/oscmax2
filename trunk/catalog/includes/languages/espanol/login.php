@@ -26,7 +26,7 @@ define('TEXT_RETURNING_CUSTOMER', 'He comprado otras veces.');
 define('TEXT_PASSWORD_FORGOTTEN', '¿Ha olvidado su contraseña? Siga este enlace y se la enviamos.');
 
 define('TEXT_LOGIN_ERROR', 'Error: \'E-mail\' y/o \'Contraseña\' no coinciden con nuestros datos.');
-define('TEXT_VISITORS_CART', '<span class="notice"><b>NOTA:</b></span> Cuando inicie su sesión los contenidos de su carrito parmanecerán en el carrito.');
+define('TEXT_VISITORS_CART', '<span class="notice">NOTA:</span> Cuando inicie su sesión los contenidos de su carrito permanecerán en el carrito.');
 
 // LINE ADDED: MOD - Separate Pricing Per Customer
 // define the email address that can change customer_group_id on login

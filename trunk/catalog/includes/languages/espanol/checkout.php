@@ -74,12 +74,12 @@ define('EMAIL_GREET_MR', 'Estimado Sr. %s,' . "\n\n");
 define('EMAIL_GREET_MS', 'Estimada Sra. %s,' . "\n\n");
 define('EMAIL_GREET_NONE', 'Estimado/a %s' . "\n\n");
 define('EMAIL_WELCOME', 'Le damos la bienvenida a <b>' . STORE_NAME . '</b>.' . "\n\n");
-define('EMAIL_TEXT', 'A partir de ahora puede disfrutar de los <b>distintos servicios</b> que le ofrecemos. Algunos de estos servicios son:' . "\n\n" . '<li><b>Carrito permanente</b> - Cualquier producto añadido a su carrito permanecerá ahí hasta que lo quite o realizce el pedido.' . "\n" . '<li><b>Agenda de direcciones</b> - Podemos enviarle los productos a otras direcciones aparte de la suya. Perfecto para enviar regalos directamente a la persona destinataria.' . "\n" . '<li><b>Historial de pedidos</b> - Vea la relación de pedidos que ha realizado con nosotros.' . "\n" . '<li><b>Comentarios de productos</b> - Comparta su opinión sobre los productos con otros clientes.' . "\n\n");
+define('EMAIL_TEXT', 'A partir de ahora puede disfrutar de los <b>distintos servicios</b> que le ofrecemos. Algunos de estos servicios son:' . "\n\n" . '<li><b>Carrito permanente</b> - Cualquier producto añadido a su carrito permanecerá ahí hasta que lo quite o realice el pedido.' . "\n" . '<li><b>Agenda de direcciones</b> - Podemos enviarle los productos a otras direcciones aparte de la suya. Perfecto para enviar regalos directamente a la persona destinataria.' . "\n" . '<li><b>Historial de pedidos</b> - Vea la relación de pedidos que ha realizado con nosotros.' . "\n" . '<li><b>Comentarios de productos</b> - Comparta su opinión sobre los productos con otros clientes.' . "\n\n");
 define('EMAIL_CONTACT', 'Para cualquier consulta sobre nuestros servicios, por favor escriba al propietario: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n\n");
 define('EMAIL_WARNING', '<b>Nota:</b> Esta dirección fue suministrada por uno de nuestros clientes. Si usted no se ha inscrito como cliente, por favor comuníquelo a ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n");
 
 // Start - CREDIT CLASS Gift Voucher Contribution
-define('EMAIL_GV_INCENTIVE_HEADER', "\n\n" .'Como parte de nuestra bienvenida a los nuevos clientes, le obsequiamos con un cheque regalos por valor de %s');
+define('EMAIL_GV_INCENTIVE_HEADER', "\n\n" .'Como parte de nuestra bienvenida a los nuevos clientes, le obsequiamos con un cheque regalo por valor de %s');
 define('EMAIL_GV_REDEEM', 'El código para canjear el cheque regalo es %s, podrá introducir este código cuando realice una compra ');
 define('EMAIL_GV_LINK', 'o pulsando en este enlace ');
 define('EMAIL_COUPON_INCENTIVE_HEADER', 'Felicidades, para hacer de su primera visita a nuestra tienda online una experiencia más gratificante le obsequiamos con un vale descuento.' . "\n" .
@@ -111,7 +111,7 @@ define('TABLE_HEADING_REDEEM_SYSTEM', 'Canjear puntos ');
 define('TABLE_HEADING_REFERRAL', 'Programa de referencias');
 define('TEXT_REDEEM_SYSTEM_START', 'Tiene un saldo de %s, le gustaría utilizarlo para el pago en este pedido?<br />El total estimado de la compra es: %s .');
 define('TEXT_REDEEM_SYSTEM_SPENDING', 'Marque aquí para utilizar el máximo de puntos permitido para este pedido. (%s puntos %s)&nbsp;&nbsp;->');
-define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">El importe total de la compra es superior al máximo de puntos permitodo, también necesitará seleccionar una forma de pago</span>');
+define('TEXT_REDEEM_SYSTEM_NOTE', '<span class="pointWarning">El importe total de la compra es superior al máximo de puntos permitido, también necesitará seleccionar una forma de pago</span>');
 define('TEXT_REFERRAL_REFERRED', 'Si un amigo le ha hablado de nosotros por favor indique aquí su dirección de email. ');
 // Points/Rewards Module V2.1rc2a EOF
 define('TERMS_PART_1', 'Por favor confirme que ha leído nuestros ');

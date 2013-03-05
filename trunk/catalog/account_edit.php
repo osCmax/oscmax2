@@ -90,6 +90,17 @@ $Id$
       $messageStack->add('account_edit', ENTRY_TELEPHONE_NUMBER_ERROR);
     }
 
+    // BOF Customers extra fields
+    $extra_fields_query = tep_db_query("select ce.fields_id, ce.fields_input_type, ce.fields_required_status, cei.fields_name, ce.fields_status, ce.fields_input_type, ce.fields_size from " . TABLE_EXTRA_FIELDS . " ce, " . TABLE_EXTRA_FIELDS_INFO . " cei where NOT find_in_set('" . $customer_group_id . "', ce.fields_cef_cg_hide) and ce.fields_status=1 and ce.fields_required_status=1 and cei.fields_id=ce.fields_id and cei.languages_id =" . $languages_id);
+    while($extra_fields = tep_db_fetch_array($extra_fields_query)){
+      if (strlen($_POST['fields_' . $extra_fields['fields_id']])<$extra_fields['fields_size']){
+        $error = true;
+        $string_error = sprintf(ENTRY_EXTRA_FIELDS_ERROR, $extra_fields['fields_name'], $extra_fields['fields_size']);
+        $messageStack->add('account_edit', $string_error);
+      }
+    }
+// EOF Customers extra fields
+
     if ($error == false) {
       $sql_data_array = array('customers_firstname' => $firstname,
                               'customers_lastname' => $lastname,
@@ -108,6 +119,35 @@ $Id$
                               'entry_lastname' => $lastname);
 
       tep_db_perform(TABLE_ADDRESS_BOOK, $sql_data_array, 'update', "customers_id = '" . (int)$customer_id . "' and address_book_id = '" . (int)$customer_default_address_id . "'");
+
+     // BOF Customers extra fields
+     $customers_id = (int)$_SESSION['customer_id'];
+     tep_db_query("delete from " . TABLE_CUSTOMERS_TO_EXTRA_FIELDS . " where customers_id=" . (int)$customers_id);
+   	   $extra_fields_query = tep_db_query("select ce.fields_id from " . TABLE_EXTRA_FIELDS . " ce where ce.fields_status=1 ");
+       while($extra_fields = tep_db_fetch_array($extra_fields_query)) {
+	     if (isset($_POST['fields_' . $extra_fields['fields_id']])){
+           $sql_data_array = array('customers_id' => (int)$customers_id,
+                                   'fields_id' => $extra_fields['fields_id'],
+                                   'value' => $_POST['fields_' . $extra_fields['fields_id']]);
+       	 } else	{
+		   $sql_data_array = array('customers_id' => (int)$customers_id,
+                                   'fields_id' => $extra_fields['fields_id'],
+                                   'value' => '');
+		   $is_add = false;
+		   for ($i = 1; $i <= $_POST['fields_' . $extra_fields['fields_id'] . '_total']; $i++) {
+		     if (isset($_POST['fields_' . $extra_fields['fields_id'] . '_' . $i])) {
+			   if ($is_add) {
+                 $sql_data_array['value'] .= "\n";
+			   } else {
+                 $is_add = true;
+			   }
+             $sql_data_array['value'] .= $_POST['fields_' . $extra_fields['fields_id'] . '_' . $i];
+			 }
+		   }
+		 }
+		 tep_db_perform(TABLE_CUSTOMERS_TO_EXTRA_FIELDS, $sql_data_array);
+       }
+       // EOF Customers extra fields
 
 // reset the session variables
       $customer_first_name = $firstname;

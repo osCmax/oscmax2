@@ -11,8 +11,9 @@ $Id$
 */
   define('IMAGE_REDEEM_VOUCHER', 'Gutscheincode einlösen');
   define('MODULE_ORDER_TOTAL_GV_TITLE', 'Geschenkgutscheine (-)');
-  define('MODULE_ORDER_TOTAL_GV_HEADER', 'Gutscheine');
-  define('MODULE_ORDER_TOTAL_GV_DESCRIPTION', 'Geben Sie den Code ein, falls Sie einen Gutschein noch nicht eingelöst haben.');
+  define('MODULE_ORDER_TOTAL_GV_HEADER', 'Geben Sie den Code ein, falls Sie einen Gutschein noch nicht eingelöst haben.');
+  define('MODULE_ORDER_TOTAL_GV_CLAIMED', 'Ihr Gutschein wurde erfolgreich eingelöst.');
+  define('MODULE_ORDER_TOTAL_GV_DESCRIPTION', 'Geschenkgutscheine');
   define('SHIPPING_NOT_INCLUDED', ' [Versand nicht enthalten]');
   define('TAX_NOT_INCLUDED', ' [USt. nicht enthalten]');
   define('MODULE_ORDER_TOTAL_GV_USER_PROMPT', ' <b>davon Gutscheine verwenden</b>');

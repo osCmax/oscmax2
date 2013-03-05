@@ -49,7 +49,7 @@ $Id$
   } else {
     $VARS=$_POST;
   }
-  if ($VARS['action']==TEXT_ADD) {
+  if ($VARS['action']==TEXT_ADD || $VARS['action']==TEXT_MODIFY || $VARS['action']==TEXT_REMOVE) {
     $inputok = true;
     if (!(is_numeric($VARS['product_id']) and ($VARS['product_id']==(int)$VARS['product_id']))) $inputok = false;
     while(list($v1,$v2)=each($VARS)) {
@@ -58,7 +58,11 @@ $Id$
         else $inputok = false;
       }
     }
-    if (!(is_numeric($VARS['quantity']) and ($VARS['quantity']==(int)$VARS['quantity']))) $inputok = false;
+    if ($VARS['action']==TEXT_REMOVE) {
+      $VARS['quantity'] = 0;
+    } elseif (!(is_numeric($VARS['quantity']) and ($VARS['quantity']==(int)$VARS['quantity']))) {
+      $inputok = false;
+    }
 
     if (($inputok)) {
       sort($val_array, SORT_NUMERIC);
@@ -79,15 +83,15 @@ $Id$
       $list=tep_db_fetch_array($q);
       $summa= (empty($list[summa])) ? 0 : $list[summa];
       tep_db_query("update " . TABLE_PRODUCTS . " set products_quantity=$summa where products_id=" . (int)$VARS['product_id']);
-      if (($summa<1) && (STOCK_ALLOW_CHECKOUT == 'false')) {
-        tep_db_query("update " . TABLE_PRODUCTS . " set products_status='0' where products_id=" . (int)$VARS['product_id']);
+      if (($summa<1) && (STOCK_ALLOW_CHECKOUT == 'false') && (STOCK_SET_INACTIVE == 'true')) {
+        tep_db_query("update " . TABLE_PRODUCTS . " set products_status='2' where products_id=" . (int)$VARS['product_id']);
       }
     }
   }
   if ($VARS['action']==TEXT_UPDATE) {
     tep_db_query("update " . TABLE_PRODUCTS . " set products_quantity=" . (int)$VARS['quantity'] . " where products_id=" . (int)$VARS['product_id']);
-    if (($VARS['quantity']<1) && (STOCK_ALLOW_CHECKOUT == 'false')) {
-      tep_db_query("update " . TABLE_PRODUCTS . " set products_status='0' where products_id=" . (int)$VARS['product_id']);
+    if (($VARS['quantity']<1) && (STOCK_ALLOW_CHECKOUT == 'false') && (STOCK_SET_INACTIVE == 'true')) {
+      tep_db_query("update " . TABLE_PRODUCTS . " set products_status='2' where products_id=" . (int)$VARS['product_id']);
     }
   }
   
@@ -154,7 +158,7 @@ $Id$
             <td width="75%">
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td><form action="<?php echo $PHP_SELF;?>" method=get>
+                  <td>
                     <table border="0" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
                         <td valign="top">
@@ -172,10 +176,10 @@ $Id$
                                 $q=tep_db_query("select * from " . TABLE_PRODUCTS_STOCK . " where products_id=" . $VARS['product_id'] . " order by products_stock_attributes");
                                 while($rec=tep_db_fetch_array($q)) {
                                   $val_array=explode(",",$rec[products_stock_attributes]);
-                                  echo "<tr>";
+                                  echo "<tr><form action=$PHP_SELF method=get><input type=hidden name=product_id value=" . $VARS['product_id'] . ">";
                                   foreach($val_array as $val) {
                                     if (preg_match("/^(\d+)-(\d+)$/",$val,$m1)) {
-                                      echo "<td class=smallText>&nbsp;&nbsp;&nbsp;".tep_values_name($m1[2])."</td>";
+                                      echo "<td class=smallText>&nbsp;&nbsp;&nbsp;".tep_values_name($m1[2])."<input type=hidden name=option" . $m1[1] . " value=" . $m1[2] . "></td>";
                                     } else {
                                       echo "<td>&nbsp;</td>";
                                     }
@@ -183,9 +187,9 @@ $Id$
                                   for($i=0;$i<sizeof($options)-sizeof($val_array);$i++) {
                                     echo "<td>&nbsp;</td>";
                                   }
-                                  echo "<td class=smallText>&nbsp;&nbsp;&nbsp;&nbsp;$rec[products_stock_quantity]</td><td>&nbsp;</td></tr>";
+                                  echo "<td class=smallText>&nbsp;&nbsp;&nbsp;&nbsp;<input style=\"margin-top: -8px;\" type=text name=quantity size=4 value=$rec[products_stock_quantity]></td><td><input type=submit name=action value=" . TEXT_MODIFY . "><input type=submit name=action value=" . TEXT_REMOVE . "></td></form></tr>";
                                 }
-                                echo "<tr>";
+                                echo "<tr><form action=$PHP_SELF method=get>";
                                 reset($options);
                                 $i=0;
                                 while(list($k,$v)=each($options)) {
@@ -198,16 +202,16 @@ $Id$
                                 }
                               } else {
                                 $i=1;
-                                echo "<td class=dataTableHeadingContent valign=\"middle\">" . TABLE_HEADING_QTY . "</td>";
+                                echo "<form action=$PHP_SELF method=get><td class=dataTableHeadingContent valign=\"middle\">" . TABLE_HEADING_QTY . "</td>";
                               }
-                              echo "<td class=dataTableHeadingRow valign=\"middle\"><input type=text name=quantity size=4 value=\"" . $db_quantity . "\"><input type=hidden name=product_id value=\"" . $VARS['product_id'] . "\">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow valign=\"middle\">&nbsp;<input type=submit name=action value=" . ($flag ? TEXT_ADD : TEXT_UPDATE) . ">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow>&nbsp;</td>";
+                              echo "<td class=dataTableHeadingRow valign=\"middle\"><input style=\"margin-top:18px\" type=text name=quantity size=4 value=\"" . $db_quantity . "\"><input type=hidden name=product_id value=\"" . $VARS['product_id'] . "\">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow valign=\"middle\">&nbsp;<input type=submit name=action value=" . ($flag ? TEXT_ADD : TEXT_UPDATE) . ">&nbsp;</td><td width=\"100%\" class=dataTableHeadingRow>&nbsp;</td>";
                             ?>
-                            </tr>
+                            </form></tr>
                           </table>
                         </td>
                       </tr>
                     </table>
-                  </form></td>
+                  </td>
                 </tr>
                 <tr>
                   <td><br>

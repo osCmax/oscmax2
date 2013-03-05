@@ -77,4 +77,6 @@ define('TEXT_ADDITIONAL_SHIPPING_4', '€ además de los gastos de envío normales.)
 // end indvship
 
 define('PRODUCT_HAS_OPTIONS_MESSAGE', 'Este producto tiene opciones que deben ser seleccionadas antes de que se pueda comprar.');
+define('TEXT_PRODUCT_DISCONTINUED', 'Descatalogado');
+
 ?>

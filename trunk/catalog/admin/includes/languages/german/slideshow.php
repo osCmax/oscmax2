@@ -17,13 +17,17 @@ define('TABLE_HEADING_SLIDESHOW_IMAGE', 'Slide Bild');
 define('TABLE_HEADING_SLIDESHOW_TITLE', 'Slide Titel');
 define('TABLE_HEADING_SLIDESHOW_LINK', 'Link');
 define('TABLE_HEADING_SLIDESHOW_TARGET', 'Ziel');
+define('TABLE_HEADING_SLIDESHOW_ACTIVE', 'Status');
+define('TABLE_HEADING_SLIDESHOW_CG_HIDE', 'Vor welchen Kundengruppen verstecken');
 define('TABLE_HEADING_SLIDESHOW_SORT_ORDER', 'Sortierung');
 
 define('TEXT_SLIDESHOW_INSERT_INTRO', 'Bitte fügen Sie ein neues Slide ein:');
 define('TEXT_SLIDESHOW_TITLE', 'Slidetitel'); 
 define('TEXT_SLIDESHOW_IMAGE', 'Slidebild');
 define('TEXT_SLIDESHOW_LINK', 'Slidelink');
+define('TEXT_SLIDESHOW_ACTIVE', 'Dia aktivieren?');
 define('TEXT_SLIDESHOW_TARGET', 'Ziel');
+define('TEXT_SLIDESHOW_CG_HIDE', 'Vor welchen Kundengruppen verstecken: (zB. 0,1,2)');
 define('TEXT_SLIDESHOW_SORT_ORDER', 'Sortierung');
 
 define('TEXT_SLIDESHOW_DATE_ADDED', 'Hinzugefügt am: ');

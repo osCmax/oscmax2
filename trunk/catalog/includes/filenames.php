@@ -193,7 +193,7 @@ $Id$
 
 // BOF: MOD Xsell Products
   define('FILENAME_XSELL_PRODUCTS', 'xsell_products.php');
-  define('FILENAME_PRODUCT_LISTING_COL', 'product_listing_col.php');
+  define('FILENAME_PRODUCT_LISTING_COL', 'product_listing.php');
 // EOF: MOD Xsell Products
 // LINE ADDED: MOD - allprods modification
   define('FILENAME_ALLPRODS', 'allprods.php');

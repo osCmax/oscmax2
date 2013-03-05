@@ -27,4 +27,6 @@ define('TEXT_DEFAULT_STOCK','Bitte wählen Sie das Produktattribut aus den Dropdo
 
 define('TEXT_UPDATE', 'Aktualisieren');
 define('TEXT_ADD', 'Hinzufügen');
+define('TEXT_MODIFY', 'Bearbeiten');
+define('TEXT_REMOVE', 'Entfernen');
 ?>

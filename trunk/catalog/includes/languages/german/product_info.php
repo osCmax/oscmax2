@@ -77,4 +77,5 @@ define('TEXT_ADDITIONAL_SHIPPING_4', ' + den üblichen Versandkosten.)</i>');
 // end indvship
 
 define('PRODUCT_HAS_OPTIONS_MESSAGE', 'Bitte wählen Sie aus Optionen aus, um dieses Produkt kaufen zu können.');
+define('TEXT_PRODUCT_DISCONTINUED', 'Nicht mehr lieferbar');
 ?>

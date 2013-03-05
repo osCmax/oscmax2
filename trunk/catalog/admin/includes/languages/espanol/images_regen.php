@@ -87,4 +87,7 @@ define('TEXT_DELETE_ORPHANS', 'Borrar imágenes huérfanas');
 define('TEXT_CONFIRM_DELETE_ORPHANS', 'Por favor, confirma que quieres eliminar todas las imágenes huérfanas.<br><br>  Esta acción <b>no se puede deshacer</b> y se <i>recomienda encarecidamente</i> que <b>hagas una copia de seguridad de tus datos</b> antes de usar esta función.');
 define('TEXT_ORPHAN_REMOVED', 'imágen(es) huérfana(s) eliminada(s).');
 
+define('TEXT_IMAGE_SIZE', 'Hide images < than: ');
+define('TEXT_FILTER', 'Filter by category: ');
+
 ?>

@@ -19,6 +19,6 @@ define('MODULE_SHIPPING_RMSPECIAL_TEXT_UNITS', 'Kg\'s');
 define('MODULE_SHIPPING_RMSPECIAL_INVALID_ZONE', 'Lo sentimos, esta forma de envío sólo está disponible para clientes del Reino Unido');
 define('MODULE_SHIPPING_RMSPECIAL_UNDEFINED_RATE', 'Los gastos de envío no se pueden determinar en este momento');
 define('MODULE_SHIPPING_RMSPECIAL_DELIVERY_NO_INSURANCE', 'Sin seguro');
-define('MODULE_SHIPPING_RMSPECIAL_DELIVERY_INSURANCE', 'Asegurado hasta &pound;');
+define('MODULE_SHIPPING_RMSPECIAL_DELIVERY_INSURANCE', 'Asegurado hasta &libra;');
 define('MODULE_SHIPPING_RMSPECIAL_DELIVERY_SHIPPING_TIME', 'se envía normalmente al día siguiente de realizar el pedido');
 ?>

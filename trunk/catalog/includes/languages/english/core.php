@@ -190,6 +190,9 @@ define('ENTRY_LAST_NAME_TEXT', '*');
 define('ENTRY_DATE_OF_BIRTH', 'Date of Birth:');
 // if you are looking for the DOB error message and * - look in locale.php
 define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
+define('ENTRY_EMAIL_CONFIRMATION', 'E-Mail Confirmation:');
+define('ENTRY_EMAIL_CONFIRMATION_TEXT', '*');
+define('ENTRY_EMAIL_ERROR_NOT_MATCHING', 'The E-Mail Confirmation must match your E-Mail Address.');
 define('ENTRY_EMAIL_ADDRESS_ERROR', 'Your E-Mail Address must contain a minimum of ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' characters.');
 define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'Your E-Mail Address does not appear to be valid - please make any necessary corrections.');
 define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', 'Your E-Mail Address already exists in our records - please log in with the e-mail address or create an account with a different address.');
@@ -474,4 +477,17 @@ define('TAX_RATE_NEAR_PRICE_INC', 'Inc Tax of ');
 define('TAX_RATE_NEAR_PRICE_EX', 'Ex Tax of ');
 define('TEXT_SHIPPING_NEAR_PRICE', 'Shipping');
 // EOF Show tax and Shipping near price
+
+// BOF Customers extra fields
+define('ENTRY_EXTRA_FIELDS_ERROR', 'Field %s must contain a minimum of %d characters');
+define('CATEGORY_EXTRA_FIELDS', 'Other Information');
+// EOF Customers extra fields   
+
+// BOF reCaptcha
+define('ENTRY_SECURITY_CHECK', 'Security Check:');
+define('ENTRY_SECURITY_CHECK_ERROR', 'The Security Check code wasn\'t typed correctly. Try again.');
+define('SECURITY_PROMPT', 'Please complete the <b>security question</b> shown to the right -->');
+define('CATEGORY_RECAPTCHA', 'Security check question');
+define('ENTRY_RECAPTCHA', 'Security question:');
+// EOF reCaptcha
 ?>

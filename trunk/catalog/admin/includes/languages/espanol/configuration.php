@@ -74,6 +74,10 @@ define('CT_SHOW_SHIPPING_NEAR_PRICE', '¿Mostrar enlace a los gastos de envío jun
 define('CD_SHOW_SHIPPING_NEAR_PRICE', 'Algunos países necesitan que se muestre un enlace a los gastos de envío junto al precio. Requiere <b>Mostrar tasas de impuestos junto al precio</b> para poder activarlo.');
 define('CT_CATEGORY_DROPDOWN_SWITCH', '¿Desactivar la lista desplegable de categorías en Admin?');
 define('CD_CATEGORY_DROPDOWN_SWITCH', 'Esta opción activa o desactiva la lista desplegable de las categorías en la página de entrada de productos/categorías del panel de Administración. En tiendas con cientos de categorías, ha de estar activado (True) para acelerar la actualización de la página.');
+define('CT_CODE_SUFFIX_SEPERATOR', 'Código sufijo Seperator');
+define('CD_CODE_SUFFIX_SEPERATOR', 'Introduzca el carácter que desea utilizar cuando se añade un código de sufijo opcional en el número de modelo de los productos.');
+define('CT_SEND_ALL_EMAIL_COPY_TO', 'Enviar una copia de todos los emails producidos a');
+define('CD_SEND_ALL_EMAIL_COPY_TO', 'Introduzca la dirección de correo electrónico que desea enviar una copia de todos los correos electrónicos producidos por el sistema. <br><br>Sólo debe utilizar esto para las <b>pruebas y la apertura inicial</b> de su tienda para obtener una comprensión de los mensajes de correo electrónico enviados y su contenido.');
 
 // Configuration ID: 2 - Minimumm Values
 define('CT_ENTRY_FIRST_NAME_MIN_LENGTH', 'Nombre');
@@ -202,6 +206,10 @@ define('CT_CUSTOMER_COMMENTS_NEW_STATUS', 'Establecer estado pedido: cuando el c
 define('CD_CUSTOMER_COMMENTS_NEW_STATUS', 'Establecer el estado al que se cambia el pedido cuando el cliente hace un comentario');
 define('CT_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Establecer estado pedido: (permite descargas) cuando el cliente escribe comentario de pedido');
 define('CD_CUSTOMER_COMMENTS_NEW_STATUS_DL', 'Establecer el estado al que se cambia el pedido cuando el cliente hace un comentario');
+define('CT_CHECKOUT_SHIPPING_DATE', 'Permitir al cliente solicitar una fecha de envío?');
+define('CD_CHECKOUT_SHIPPING_DATE', 'Desea permitir que el cliente pueda seleccionar la fecha de envío preferido al finalizar la compra?');
+define('CT_ACCOUNT_EMAIL_CONFIRMATION', 'Ask customer to reconfirm email address?');
+define('CD_ACCOUNT_EMAIL_CONFIRMATION', 'Do you want to ask your customers to enter their email address twice to reduce errors?');
 
 // Configuration ID: 6 - Module Options - Hidden from Admin Panel
 define('CT_MODULE_PAYMENT_INSTALLED', 'Módulos instalados');
@@ -811,6 +819,16 @@ define('CT_RECAPTCHA_EMAIL_URL', 'Introduce tu URL de protección de email de reC
 define('CD_RECAPTCHA_EMAIL_URL', 'Si quieres usar la funcionalidad de reCaptcha mailhide, por favor introduce la URL suministrada para tu dirección de email escogida.  <u><a href="http://www.google.com/recaptcha/mailhide/" target="_blank"><br><br>Puedes conseguir una de estas desde Google reCaptcha</a></u>.');
 define('CT_RECAPTCHA_EMAIL_FROM', 'Introduce tu dirección de email enmascarada utilizada en reCaptcha');
 define('CD_RECAPTCHA_EMAIL_FROM', 'Por favor introduce una dirección de email parcial o enmascarada para que se muestr en tu tienda. Por ejemplo: john...@email.com <br><br>O introduce <b>CLICK</b> para mostrar el texto multilingüe \'Pulsar para revelar\'');
+define('CT_RECAPTCHA_CREATE_ACCOUNT', 'Quieres usar reCaptcha en la página Crear cuenta?');
+define('CD_RECAPTCHA_CREATE_ACCOUNT', 'Puede controlar la visualización de los formuladios de reCAPTCHA para cada página. El módulo debe ser habilitado para que esta opción funcione.');
+define('CT_RECAPTCHA_CONTACT_US', '¿Quieres usar reCaptcha en la página Contacto?');
+define('CD_RECAPTCHA_CONTACT_US', 'Puede controlar la visualización de los formuladios de reCAPTCHA para cada página. El módulo debe ser habilitado para que esta opción funcione.');
+define('CT_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'Quieres usar reCaptcha en la página comentarios de producto?');
+define('CD_RECAPTCHA_PRODUCT_REVIEWS_WRITE', 'Puede controlar la visualización de los formuladios de reCAPTCHA para cada página. El módulo debe ser habilitado para que esta opción funcione.');
+define('CT_RECAPTCHA_WISHLIST', 'Quieres usar reCaptcha en la página lista de favoritos?');
+define('CD_RECAPTCHA_WISHLIST', 'Puede controlar la visualización de los formuladios de reCAPTCHA para cada página. El módulo debe ser habilitado para que esta opción funcione.');
+define('CT_RECAPTCHA_STYLE', '¿Qué estilo quieres usar para el formulario reCaptcha?');
+define('CD_RECAPTCHA_STYLE', 'ReCAPTCHA tiene 4 estilos estándar y uno personalizado. Para más detalles por favor visite su <a href="https://developers.google.com/recaptcha/docs/customization" target="_blank">sitio Web.</a>.');
 
 
 // Configuration ID: 88 - Price Breaks 
@@ -820,6 +838,10 @@ define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Número de precios por volumen para d
 define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Configura el número de precios por volumen a partir del cual se mostrará un desplegable y "desde" en lugar de una tabla');
 define('CT_PRICE_BREAK_PRICE', 'Forma de mostrar precio por volumen');
 define('CD_PRICE_BREAK_PRICE', 'Configura el precio que quieres que se muestre en el catálogo cuando el producto tiene precios varios niveles de precios por volumen. (High = precio más alto, Low = precio más bajo, Off = quita el Desde y muestra el precio más alto)');
+define('CT_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Price Break Percentage Behaviour');
+define('CD_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Off Price: The percentage entered will be the percentage you wish to take off the original product price.<br>(e.g. 25% when the product price is 100.00 will charge the customer 75.00)<br><br>To Pay: The percentage entered will be the percentage of the original product price that you wish to charge the customer.<br>(e.g. 25% when the product price is 100.00 will charge the customer 25.00)');
+define('CT_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Product Price Change Behaviour');
+define('CD_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Update Percent: When the products price is changed, only the percentage field will update to show what percent the price break is of the original product price.<br><br>Update Prices: When the products price is changed, the price break prices will be recalculated from the original products price using the percentage originally specified.');
 
 // Configuration ID: 89 - Google Maps
 define('CT_GOOGLE_MAPS_KEY', 'Clave de Google Maps');
@@ -1207,5 +1229,41 @@ define('CT_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'No mostrar secciones de selección d
 define('CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'Si el peso del producto = 0 entonces el sistema asumirá que el producto es virtual, o sea descargable. Como tal no es necesario que se muestre la sección de dirección de envío.');
 define('CT_ONEPAGE_ADDR_LAYOUT', 'Disposición de direcciones');
 define('CD_ONEPAGE_ADDR_LAYOUT', 'Las secciones de direcciones en el Pedido en una página se pueden mostrar organizadas en forma vertical (una encima de la otra) u horizontal (una al lado de la otra)');
+
+// Defines for multilingual shipping settings
+// Commonly used shipping module language defines
+define('CT_MODULE_SHIPPING_STATUS', 'Enable shipping module?');
+define('CD_MODULE_SHIPPING_STATUS', 'Do you want to enable this shipping module?');
+define('CT_MODULE_SHIPPING_COST', 'Shipping Cost');
+define('CD_MODULE_SHIPPING_COST', 'The shipping cost for all orders using this shipping method.');
+define('CT_MODULE_SHIPPING_TAX_CLASS', 'Tax Class');
+define('CD_MODULE_SHIPPING_TAX_CLASS', 'Use the following tax class on the shipping fee.');
+define('CT_MODULE_SHIPPING_HANDLING', 'Handling Fee');
+define('CD_MODULE_SHIPPING_HANDLING', 'Handling fee for this shipping method.');
+define('CT_MODULE_SHIPPING_ZONE', 'Shipping Zone');
+define('CD_MODULE_SHIPPING_ZONE', 'If a zone is selected, only enable this shipping method for that zone.');
+define('CT_MODULE_SHIPPING_SORT_ORDER', 'Sort Order');
+define('CD_MODULE_SHIPPING_SORT_ORDER', 'Sort order of display.');
+
+// Shipping Module: indvship.php
+define('CT_MODULE_SHIPPING_INDVSHIP_STATES', 'Higher Rated States');
+define('CD_MODULE_SHIPPING_INDVSHIP_STATES', 'Higher rate States');
+define('CT_MODULE_SHIPPING_INDVSHIP_HANDLING', 'Handling Fee');
+define('CD_MODULE_SHIPPING_INDVSHIP_HANDLING', 'Handling fee for these States.');
+
+// Shipping Module: spu.php
+define('CT_MODULE_SHIPPING_SPU_ZIP', 'Store Pick Up Post/Zip Code Allowed');
+define('CD_MODULE_SHIPPING_SPU_ZIP', 'First one or two characters of the post/zip code allowed for store pickup.  Leave blank for unrestricted pickup. (You may enter multiple codes separated by commas.)');
+
+// Shipping Module: table.php
+define('CT_MODULE_SHIPPING_TABLE_COST', 'Shipping Table');
+define('CD_MODULE_SHIPPING_TABLE_COST', 'The shipping cost is based on the total cost or weight of items. Example: 25:8.50,50:5.50,etc.. Up to 25 charge 8.50, from there to 50 charge 5.50, etc');
+define('CT_MODULE_SHIPPING_TABLE_MODE', 'Table Calculation Method');
+define('CD_MODULE_SHIPPING_TABLE_MODE', 'The shipping cost is based on the order total or the total weight of the items ordered.');
+
+// Shipping Module: zones.php
+define('CD_MODULE_SHIPPING_ZONE_COUNTRIES', 'Comma separated list of two character ISO country codes that are part of Zone');
+define('CD_MODULE_SHIPPING_ZONE_COST', 'Shipping rates to this Zone. Destinations based on a group of maximum order weights. Example: 3:8.50,7:10.50, ... Weights less than or equal to 3 would cost 8.50 for destinations in Zone');
+define('CD_MODULE_SHIPPING_ZONES_HANDLING', 'Handling Fee for this shipping zone');
 
 ?>

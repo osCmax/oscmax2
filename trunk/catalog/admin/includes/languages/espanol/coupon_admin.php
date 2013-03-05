@@ -99,4 +99,7 @@ define('ERROR_MISSING_COUPON_NAME', 'Error: No se ha introducido un nombre de va
 define('ERROR_MISSING_START_DATE', 'Error: Se debe especificar una <b>Fecha de inicio</b> para el vale');
 define('ERROR_MISSING_FINISH_DATE', 'Error: Se debe especificar una <b>Fecha de finalización</b> para el vale');
 
+define('COUPON_EXCLUDE_CG', 'Exclude customer group');
+define('COUPON_EXCLUDE_CG_HELP', 'A comma separated list of customer group ids that the coupon CAN NOT be used by.');
+
 ?>

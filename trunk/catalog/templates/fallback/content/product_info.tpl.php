@@ -11,7 +11,7 @@ $Id$
 */
   
       echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
-<?php echo tep_draw_hidden_field('products_id', isset($_GET['products_id'])) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART, ' style="position: absolute; left: -1000px"'); // Bug fix: 378?>
+<?php echo tep_draw_hidden_field('products_id', (isset($_GET['products_id']) ? $_GET['products_id'] : '0')) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART, ' style="position: absolute; left: -1000px"'); // Bug fix: 378 ?>
 <?php
   if ($product_check['total'] < 1) {
 //  adapted for Separate Pricing Per Customer v4.2 2007/06/23, Hide products and categories from groups 2008/08/05
@@ -75,13 +75,15 @@ $Id$
 	$lo_product_price = $pf->getLowPrice();
 // EOF QPBPP for SPPC
 
+    //check if on special offer
+	$new_price = tep_get_products_special_price($product_info['products_id']);
+
 // BOF: MSRP
   if ($product_info['products_msrp'] != '' && $product_info['products_msrp'] != 0) { // If MSRP blank then hide everything
     if ($product_info['products_msrp'] > $product_info['products_price']) { // If MSRP > Price then show MSRP price 
 	  //Draw MSRP table
 	  $msrp_products_price = '<table class="productinfo_msrp" align="right" border="0" width="100%" cellspacing="0" cellpadding="0">';
-      //check if on special offer
-	  $new_price = tep_get_products_special_price($product_info['products_id']);
+      
       //Add MSRP
       $msrp_products_price .= '<tr class="PriceListBIG"><td align="right">' . TEXT_PRODUCTS_MSRP  . $currencies->display_price($product_info['products_msrp'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</td></tr>';
 	

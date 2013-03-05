@@ -105,6 +105,9 @@ $Id$
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
+      <!-- // BOF Customers extra fields -->
+      <?php echo tep_get_extra_fields($customer_id, $languages_id,$customer_group_id)?>
+      <!-- // EOF Customers extra fields -->
       <tr>
         <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
           <tr class="infoBoxContents">

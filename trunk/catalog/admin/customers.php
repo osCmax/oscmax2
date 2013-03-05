@@ -258,6 +258,17 @@ $Id$
         $entry_password_error = false;
       }
 
+      // BOF Customers extra fields
+      $extra_fields_query = tep_db_query("select ce.fields_id, ce.fields_input_type, ce.fields_required_status, cei.fields_name, ce.fields_status, ce.fields_input_type, ce.fields_size from " . TABLE_EXTRA_FIELDS . " ce, " . TABLE_EXTRA_FIELDS_INFO . " cei where ce.fields_status=1 and ce.fields_required_status=1 and cei.fields_id=ce.fields_id and cei.languages_id =" . $languages_id);
+        while($extra_fields = tep_db_fetch_array($extra_fields_query)){
+          if (strlen($_POST['fields_' . $extra_fields['fields_id']])<$extra_fields['fields_size']) {
+            $error = true;
+            $string_error = sprintf(ENTRY_EXTRA_FIELDS_ERROR, $extra_fields['fields_name'], $extra_fields['fields_size']);
+            $messageStack->add($string_error);
+          }
+        }
+      // EOF Customers extra fields
+
       $check_email = tep_db_query("select customers_email_address from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($customers_email_address) . "' and customers_id != '" . (int)$customers_id . "'");
       if (tep_db_num_rows($check_email)) {
         $error = true;
@@ -319,6 +330,34 @@ $Id$
         }
 
         tep_db_perform(TABLE_ADDRESS_BOOK, $sql_data_array, 'update', "customers_id = '" . (int)$customers_id . "' and address_book_id = '" . (int)$default_address_id . "'");
+		
+		// BOF Customers extra fields
+        tep_db_query("delete from " . TABLE_CUSTOMERS_TO_EXTRA_FIELDS . " where customers_id=" . (int)$customers_id);
+   	  	  $extra_fields_query = tep_db_query("select ce.fields_id from " . TABLE_EXTRA_FIELDS . " ce where ce.fields_status=1 ");
+    	  while ($extra_fields = tep_db_fetch_array($extra_fields_query)) {
+		    if(isset($_POST['fields_' . $extra_fields['fields_id']])) {
+              $sql_data_array = array('customers_id' => (int)$customers_id,
+                                      'fields_id' => $extra_fields['fields_id'],
+                                      'value' => $_POST['fields_' . $extra_fields['fields_id']]);
+       		} else {
+			  $sql_data_array = array('customers_id' => (int)$customers_id,
+                                      'fields_id' => $extra_fields['fields_id'],
+                                      'value' => '');
+			  $is_add = false;
+			  for ($i = 1; $i <= $_POST['fields_' . $extra_fields['fields_id'] . '_total']; $i++) {
+			    if(isset($_POST['fields_' . $extra_fields['fields_id'] . '_' . $i])) {
+				  if($is_add) {
+                    $sql_data_array['value'] .= "\n";
+				  } else {
+                    $is_add = true;
+				  }
+              	$sql_data_array['value'] .= $_POST['fields_' . $extra_fields['fields_id'] . '_' . $i];
+				}
+			  }
+			}
+			tep_db_perform(TABLE_CUSTOMERS_TO_EXTRA_FIELDS, $sql_data_array);
+      	  }
+         // EOF Customers extra fields
 		
 		// Password update fields
 		if ($_POST['customers_new_password'] == $_POST['customers_repeat_password'] && $_POST['customers_new_password'] != '') {
@@ -655,7 +694,7 @@ function refresh_form(form_name) {
 ?></td>
               </tr>
               <tr>
-                <td class="main"  width="150"><?php echo ENTRY_LAST_NAME; ?></td>
+                <td class="main" width="150"><?php echo ENTRY_LAST_NAME; ?></td>
                 <td class="main">
 <?php
   if ($error == true) {
@@ -1025,6 +1064,9 @@ echo css_get_country_list('entry_country_id',  $cInfo->entry_country_id,'onChang
         <tr>
           <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
         </tr>
+        <!-- // BOF Customers extra fields -->
+        <?php echo tep_get_extra_fields($cInfo->customers_id, $languages_id, $cInfo->customers_group_id); ?>
+        <!-- // EOF Customers extra fields -->
         <tr>
           <td class="formAreaTitle"><?php echo CATEGORY_OPTIONS; ?></td>
         </tr>

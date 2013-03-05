@@ -35,32 +35,30 @@ function tep_date_raw($date, $reverse = false) {
   }
 }
 
-date_default_timezone_set('Europe/Paris');
-
 // if USE_DEFAULT_LANGUAGE_CURRENCY is true, use the following currency, instead of the applications default currency (used when changing language)
 define('LANGUAGE_CURRENCY', 'EUR');
 
 // LINE ADDED: Country-State Selector
-define ('DEFAULT_COUNTRY', '73');
+define ('DEFAULT_COUNTRY', '81');
 
 // text for date of birth example
-define('DOB_FORMAT_STRING', 'dd/mm/yyyy');
-define('ENTRY_DATE_OF_BIRTH_ERROR', 'Votre date de naissance doit être dans ce format: DD/MM/YYYY (EX 21/05/1970)');
-define('ENTRY_DATE_OF_BIRTH_TEXT', '* (EX. 21/05/1970)');
+define('DOB_FORMAT_STRING', 'JJ.MM.AAAA');
+define('ENTRY_DATE_OF_BIRTH_ERROR', 'Entrez votre date de naissance dans ce format: JJ/MM/AAAA (ex. 21/05/1970)');
+define('ENTRY_DATE_OF_BIRTH_TEXT', '* (ex. 21.05.1970)');
 
 // text for addresses
-define('ENTRY_SUBURB', 'Adresse 2:');
+define('ENTRY_SUBURB', 'Addresse 2:');
 define('ENTRY_SUBURB_ERROR', '');
 define('ENTRY_SUBURB_TEXT', '');
 define('ENTRY_POST_CODE', 'Code postal:');
-define('ENTRY_POST_CODE_ERROR', 'Votre code postal doit contenir un minimum de ' . ENTRY_POSTCODE_MIN_LENGTH . ' caractères.');
+define('ENTRY_POST_CODE_ERROR', 'Votre code postal doit cotenir au moins ' . ENTRY_POSTCODE_MIN_LENGTH . ' caractères.');
 define('ENTRY_POST_CODE_TEXT', '*');
 define('ENTRY_STATE', 'Région:');
-define('ENTRY_STATE_ERROR', 'Votre région doit contenir un minimum de ' . ENTRY_STATE_MIN_LENGTH . ' caractères.');
-define('ENTRY_STATE_ERROR_SELECT', 'S\'il vous plaît sélectionner une région dans la menu déroulant.');
+define('ENTRY_STATE_ERROR', 'Votre pays doit contenir un minimum de ' . ENTRY_STATE_MIN_LENGTH . ' charactèrs.');
+define('ENTRY_STATE_ERROR_SELECT', 'S\'il vous plaît sélectionner un comté dans le menu déroulant.');
 
 // BOF: MSRP
-define('TEXT_PRODUCTS_MSRP', '&nbsp;PR:&nbsp;');
-define('TEXT_PRODUCTS_SAVINGS_RRP', '&nbsp;Vous&nbsp;économisez&nbsp;(de&nbsp;pr):&nbsp;');
+define('TEXT_PRODUCTS_MSRP', '&nbsp;MSRP:&nbsp;');
+define('TEXT_PRODUCTS_SAVINGS_RRP', '&nbsp;You&nbsp;Save&nbsp;(Off&nbsp;MSRP):&nbsp;');
 // EOF: MSRP
 ?>

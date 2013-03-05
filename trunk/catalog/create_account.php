@@ -16,6 +16,14 @@ $Id$
 // (Sub 'fallback' with your current template to see if there is a template specific file.)
 
   require('includes/application_top.php');
+  
+  // start modification for reCaptcha
+  if (RECAPTCHA_ON == 'true' && RECAPTCHA_CREATE_ACCOUNT == 'true') {
+    require_once('includes/classes/recaptchalib.php');
+    $publickey = RECAPTCHA_PUBLIC_KEY;
+    $privatekey = RECAPTCHA_PRIVATE_KEY;
+  }
+  // end modification for reCaptcha
 
   // +Country-State Selector
   require(DIR_WS_FUNCTIONS . 'ajax.php');
@@ -44,6 +52,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
     $lastname = tep_db_prepare_input($_POST['lastname']);
     if (ACCOUNT_DOB == 'true') $dob = tep_db_prepare_input($_POST['dob']);
     $email_address = tep_db_prepare_input($_POST['email_address']);
+	if (ACCOUNT_EMAIL_CONFIRMATION == 'true') $email_confirmation = tep_db_prepare_input($_POST['email_confirmation']); 
     // BOF Separate Pricing Per Customer, added: field for tax id number
     if (ACCOUNT_COMPANY == 'true') { 
       $company = tep_db_prepare_input($_POST['company']);
@@ -75,6 +84,20 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
     $confirmation = tep_db_prepare_input($_POST['confirmation']);
 
     $error = false;
+
+    // start modification for reCaptcha
+    if (RECAPTCHA_ON == 'true' && RECAPTCHA_CREATE_ACCOUNT == 'true') {
+
+	  // the response from reCAPTCHA
+      $resp = null;
+
+	  // was there a reCaptcha response?
+      $resp = recaptcha_check_answer ($privatekey,
+      $_SERVER["REMOTE_ADDR"],
+      $_POST["recaptcha_challenge_field"],
+      $_POST["recaptcha_response_field"]);
+    }
+    // end modification for reCaptcha
 
     if (ACCOUNT_GENDER == 'true') {
       if ( ($gender != 'm') && ($gender != 'f') ) {
@@ -126,6 +149,14 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
            $messageStack->add('create_account', ENTRY_EMAIL_ADDRESS_ERROR_EXISTS);
       }
     }
+	
+	if (ACCOUNT_EMAIL_CONFIRMATION == 'true') {
+	  if ($email_address != $email_confirmation) {
+        $error = true;
+
+        $messageStack->add('create_account', ENTRY_EMAIL_ERROR_NOT_MATCHING);
+	  }
+    }
 
     if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH) {
       $error = true;
@@ -169,6 +200,15 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
 
       $messageStack->add('create_account', ENTRY_TELEPHONE_NUMBER_ERROR);
     }
+	
+	// start modification for reCaptcha
+    if (RECAPTCHA_ON == 'true' && RECAPTCHA_CREATE_ACCOUNT == 'true') {
+	  if (!$resp->is_valid) { 
+	    $error = true;
+        $messageStack->add('create_account', ENTRY_SECURITY_CHECK_ERROR);
+      }
+    }
+    // end modification for reCaptcha
 
 // PWA BOF
     if (!isset($_GET['guest']) && !isset($_POST['guest'])) {
@@ -186,6 +226,17 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
 // PWA BOF
 } 
 // PWA EOF
+
+// BOF Customers extra fields
+      $extra_fields_query = tep_db_query("select ce.fields_id, ce.fields_input_type, ce.fields_required_status, cei.fields_name, ce.fields_status, ce.fields_input_type, ce.fields_size from " . TABLE_EXTRA_FIELDS . " ce, " . TABLE_EXTRA_FIELDS_INFO . " cei where NOT find_in_set('" . $customer_group_id . "', ce.fields_cef_cg_hide) and ce.fields_status=1 and ce.fields_required_status=1 and cei.fields_id=ce.fields_id and cei.languages_id =" . $languages_id);
+      while($extra_fields = tep_db_fetch_array($extra_fields_query)) {
+        if (strlen($_POST['fields_' . $extra_fields['fields_id']])<$extra_fields['fields_size']) {
+          $error = true;
+          $string_error = sprintf(ENTRY_EXTRA_FIELDS_ERROR, $extra_fields['fields_name'], $extra_fields['fields_size']);
+          $messageStack->add('create_account', $string_error);
+        }
+      }
+// EOF Customers extra fields
 
     if ($error == false) {
 		// PWA BOF 2b
@@ -224,7 +275,34 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
       tep_db_perform(TABLE_CUSTOMERS, $sql_data_array);
 
       $customer_id = tep_db_insert_id();
-
+	  
+	  // BOF Customers extra fields
+   	  	$extra_fields_query = tep_db_query("select ce.fields_id from " . TABLE_EXTRA_FIELDS . " ce where ce.fields_status=1 ");
+    	while ($extra_fields = tep_db_fetch_array($extra_fields_query)) {
+		  if (isset($_POST['fields_' . $extra_fields['fields_id']])) {
+            $sql_data_array = array('customers_id' => (int)$customer_id,
+                                    'fields_id' => $extra_fields['fields_id'],
+                                    'value' => $_POST['fields_' . $extra_fields['fields_id']]);
+       	  } else {
+			$sql_data_array = array('customers_id' => (int)$customer_id,
+                                    'fields_id' => $extra_fields['fields_id'],
+                                    'value' => '');
+			$is_add = false;
+			for ($i = 1; $i <= $_POST['fields_' . $extra_fields['fields_id'] . '_total']; $i++) {
+			  if (isset($_POST['fields_' . $extra_fields['fields_id'] . '_' . $i])) {
+				if ($is_add) {
+				  $sql_data_array['value'] .= "\n";
+				} else {
+                  $is_add = true;
+				} // end if ($is_add)
+              $sql_data_array['value'] .= $_POST['fields_' . $extra_fields['fields_id'] . '_' . $i];
+			  } // end if (isset($_POST['fields_' . $extra_fields['fields_id'] . '_' . $i]))
+			} // end for
+		  } // end if (isset($_POST['fields_' . $extra_fields['fields_id']]))
+		  tep_db_perform(TABLE_CUSTOMERS_TO_EXTRA_FIELDS, $sql_data_array);
+      	} // end while
+      // EOF Customers extra fields
+	  
       $sql_data_array = array('customers_id' => $customer_id,
                               'entry_firstname' => $firstname,
                               'entry_lastname' => $lastname,
@@ -357,7 +435,7 @@ if (!isset($country)){$country = DEFAULT_COUNTRY;}
       tep_mail($name, $email_address, EMAIL_SUBJECT . STORE_NAME, $email_text, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
 // Add MailChimp Subscription
-if (MAILCHIMP_ENABLE == 'true') {
+if (MAILCHIMP_ENABLE == 'true' && $newsletter == '1') {
   require DIR_WS_FUNCTIONS . 'mailchimp_functions.php';
   mc_add_email($email_address, $email_format);
 } // end if 

@@ -184,6 +184,16 @@ define('CT_POPUP_IMAGE_WIDTH', 'Anchura imagen emergente producto');
 define('CD_POPUP_IMAGE_WIDTH', 'Limita el tamaño \(ampliado\) de la imagen ampliada del producto durante las actualizaciones de producto. SE DEBE especificar.');
 define('CT_POPUP_IMAGE_HEIGHT', 'Altura imagen emergente producto');
 define('CD_POPUP_IMAGE_HEIGHT', 'Limita el tamaño \(ampliado\) de la imagen ampliada del producto durante las actualizaciones de producto. SE DEBE especificar.');
+define('CT_POPUP_IMAGE_RESIZE', 'Resize your large images when uploading or regenerating?');
+define('CD_POPUP_IMAGE_RESIZE', 'Do you want the system to resize your large images when you upload them and when you are using the image manager to regenerate your images? (default: false)');
+define('CT_SMALL_IMAGE_COMPRESSION', 'Small image phpThumb compression rate');
+define('CD_SMALL_IMAGE_COMPRESSION', 'Small image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 75)');
+define('CT_SUBCATEGORY_IMAGE_COMPRESSION', 'Subcategory image phpThumb compression rate');
+define('CD_SUBCATEGORY_IMAGE_COMPRESSION', 'Subcategory image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 75)');
+define('CT_PRODUCT_IMAGE_COMPRESSION', 'Product image phpThumb compression rate');
+define('CD_PRODUCT_IMAGE_COMPRESSION', 'Product image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 80)');
+define('CT_POPUP_IMAGE_COMPRESSION', 'Product Popup image phpThumb compression rate');
+define('CD_POPUP_IMAGE_COMPRESSION', 'Product Popup image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 85)');
 
 // Configuration ID: 5 - Customer Details
 define('CT_ACCOUNT_GENDER', 'Sexo');
@@ -1024,7 +1034,7 @@ define('CD_JAVASCRIPT_CHECK', '¿Quieres comprobar si el cliente tiene Javascript
 define('CT_IE6_CHECK', '¿Comprobar Internet Explorer 6?');
 define('CD_IE6_CHECK', '¿Quieres comprobar si el cliente está usando y pedirle que actualice su navegador?');
 
-// Configuration ID: 204 - presentación de diapositivas Settings Corner Banners
+// Configuration ID: 204 - presentación de diapositivas Settings
 define('CT_DISPLAY_SLIDESHOW', '¿Habilitar presentación de diapositivas?');
 define('CD_DISPLAY_SLIDESHOW', '¿Quieres habilitar la presentación de diapositivas?');
 define('CT_SLIDESHOW_WIDTH', 'Configurar anchura de presentación de diapositivas');
@@ -1075,6 +1085,9 @@ define('CT_SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', 'Color fondo miniatura acti
 define('CD_SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', '¿De qué color quieres que sea el fondo de la miniatura activa?');
 define('CT_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 'Color fuente miniatura activa');
 define('CD_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', '¿De qué color quieres que sea la fuente de la miniatura activa?');
+define('CT_SLIDESHOW_COMPRESSION', 'Slideshow image phpThumb compression rate');
+define('CD_SLIDESHOW_COMPRESSION', 'Slideshow image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 85)');
+
 
 // Configuration ID: 205 - Corner Banners
 define('CT_CB_LAST_FEW', '¿Banner de esquina Últimas unidades?');

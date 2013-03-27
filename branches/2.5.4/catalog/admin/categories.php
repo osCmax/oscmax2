@@ -289,7 +289,7 @@ $Id$
  	          $categories_image_name = $categories_image->filename;
  	          // BOF Image Resize
  	            require_once('includes/functions/image_resize.php');
- 	            image_resize(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image->filename, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT, '80');
+ 	            image_resize(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image->filename, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT, SUBCATEGORY_IMAGE_COMPRESSION);
  	          // EOF Image Resize
  	        } else { 
  	          $categories_image_name = $_POST['categories_previous_image'];

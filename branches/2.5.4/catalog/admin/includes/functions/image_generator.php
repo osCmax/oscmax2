@@ -29,27 +29,32 @@ $Id$
             mkdir($root_thumbs_dir . $dir);
 	}	
 
-// Start image generation        
+// Check to see if we need to resize and compress the big image first
+if (POPUP_IMAGE_RESIZE == 'true') { // only resize big image if asked
+  require('image_resize.php');
+  image_resize($source_bigimage, POPUP_IMAGE_WIDTH, POPUP_IMAGE_HEIGHT, POPUP_IMAGE_COMPRESSION);
+}
 
+
+// Start image generation        
 include_once( DIR_FS_CATALOG . 'ext/phpthumb/phpthumb.class.php');
 
-// create phpThumb object
-$phpThumb = new phpThumb();
-        if (PRODUCT_IMAGE_WIDTH !='') {
-            // create 2 sizes of image based on width
-            $resized_images = array(SMALL_IMAGE_WIDTH => $root_thumbs_dir, PRODUCT_IMAGE_WIDTH => $root_products_dir);
-            foreach ($resized_images as $resized_width => $dest_dir) {
-	// this is very important when using a single object to process multiple images
-	$phpThumb->resetObject();
+  // create phpThumb object
+  $phpThumb = new phpThumb();
+    if (PRODUCT_IMAGE_WIDTH !='') {
+      // create 2 sizes of image based on width
+      $resized_images = array(SMALL_IMAGE_WIDTH => $root_thumbs_dir, PRODUCT_IMAGE_WIDTH => $root_products_dir);
+      foreach ($resized_images as $resized_width => $dest_dir) {
+	    // this is very important when using a single object to process multiple images
+	    $phpThumb->resetObject();
 
-	// set data source -- do this first, any settings must be made AFTER this call
+	    // set data source -- do this first, any settings must be made AFTER this call
+   	    $phpThumb->setSourceFilename($source_bigimage);	
+	    $output_filename = $dest_dir . $dir . $products_image_name;
 
-	$phpThumb->setSourceFilename($source_bigimage);	
-	$output_filename = $dest_dir . $dir . $products_image_name;
-
-	// set parameters (see "URL Parameters" in phpthumb.readme.txt)
+	    // set parameters (see "URL Parameters" in phpthumb.readme.txt)
 		$phpThumb->setParameter('config_cache_directory', $cache_dir); //doesn't work!
-                $phpThumb->setParameter('w', $resized_width);
+        $phpThumb->setParameter('w', $resized_width);
 
                 if ($dest_dir == $root_products_dir) {
                 	if (PRODUCT_IMAGE_WIDTH == '') {
@@ -57,7 +62,7 @@ $phpThumb = new phpThumb();
                 	} else {
                  	  $phpThumb->setParameter('w', PRODUCT_IMAGE_WIDTH);  
                  	}             		 
-                    $phpThumb->setParameter('q', 80);  //maintain high quality for product image
+                    $phpThumb->setParameter('q', PRODUCT_IMAGE_COMPRESSION); 
                 }
 
                 if ($dest_dir == $root_thumbs_dir) {
@@ -66,7 +71,7 @@ $phpThumb = new phpThumb();
                 	} else {
                  	  $phpThumb->setParameter('w', SMALL_IMAGE_WIDTH);  
                  	}             		 
-                    $phpThumb->setParameter('q', 75);  //maintain high quality for product image
+                    $phpThumb->setParameter('q', SMALL_IMAGE_COMPRESSION);  
                 }                
 		// generate & output thumbnail
 		if ($phpThumb->GenerateThumbnail()) { // this line is VERY important, do not remove it!
@@ -90,11 +95,11 @@ $phpThumb = new phpThumb();
                 $phpThumb->resetObject();
 
                 // set data source -- do this first, any settings must be made AFTER this call
-		$phpThumb->setSourceFilename($source_bigimage);
-		$output_filename = $dest_dir . $dir . $products_image_name;
+		        $phpThumb->setSourceFilename($source_bigimage);
+		        $output_filename = $dest_dir . $dir . $products_image_name;
 
                 // set parameters (see "URL Parameters" in phpthumb.readme.txt)
-		$phpThumb->setParameter('config_cache_directory', $cache_dir); //doesn't work!
+		        $phpThumb->setParameter('config_cache_directory', $cache_dir); //doesn't work!
                 $phpThumb->setParameter('h', $resized_height);
 
                 if ($dest_dir == $root_products_dir) {
@@ -103,7 +108,7 @@ $phpThumb = new phpThumb();
                 	} else {
                  	  $phpThumb->setParameter('w', PRODUCT_IMAGE_WIDTH);  
                  	}             		 
-                    $phpThumb->setParameter('q', 80);  //maintain high quality for product image
+                    $phpThumb->setParameter('q', PRODUCT_IMAGE_COMPRESSION);
                 }
 
                 if ($dest_dir == $root_thumbs_dir) {
@@ -112,20 +117,20 @@ $phpThumb = new phpThumb();
                 	} else {
                  	  $phpThumb->setParameter('w', SMALL_IMAGE_WIDTH);  
                  	}             		 
-                    $phpThumb->setParameter('q', 75);  //maintain high quality for product image
+                    $phpThumb->setParameter('q', SMALL_IMAGE_COMPRESSION);  
                 }                
                 // generate & output thumbnail
                 if ($phpThumb->GenerateThumbnail()) { // this line is VERY important, do not remove it!
                     if ($phpThumb->RenderToFile($output_filename)) {
                     // do something on success
-				echo "#";
+				      echo "#";
                     } else {
-                    // do something with debug/error messages
-                     echo 'Failed:<pre>'.implode("\n\n", $phpThumb->debugmessages).'</pre>';
+                      // do something with debug/error messages
+                      echo 'Failed:<pre>'.implode("\n\n", $phpThumb->debugmessages).'</pre>';
                     }
                 } else {
-                // do something with debug/error messages
-                 echo 'Failed:<pre>'.$phpThumb->fatalerror."\n\n".implode("\n\n", $phpThumb->debugmessages).'</pre>';
+                  // do something with debug/error messages
+                  echo 'Failed:<pre>'.$phpThumb->fatalerror."\n\n".implode("\n\n", $phpThumb->debugmessages).'</pre>';
                 }
             }        
         }

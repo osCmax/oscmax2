@@ -185,6 +185,16 @@ define('CT_SLIMBOX_FADE', 'Overlay Fade Duration');
 define('CD_SLIMBOX_FADE', 'The duration of overlay fade-in and fade-out animations (msec). Set to 1 to disable.<br>Default is 400.');
 define('CT_SLIMBOX_RESIZE', 'Resize Duration');
 define('CD_SLIMBOX_RESIZE', 'The duration of resize animation for width and height (msec). Set to 1 to disable.<br>Default is 400.');
+define('CT_POPUP_IMAGE_RESIZE', 'Resize your large images when uploading or regenerating?');
+define('CD_POPUP_IMAGE_RESIZE', 'Do you want the system to resize your large images when you upload them and when you are using the image manager to regenerate your images? (default: false)');
+define('CT_SMALL_IMAGE_COMPRESSION', 'Small image phpThumb compression rate');
+define('CD_SMALL_IMAGE_COMPRESSION', 'Small image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 75)');
+define('CT_SUBCATEGORY_IMAGE_COMPRESSION', 'Subcategory image phpThumb compression rate');
+define('CD_SUBCATEGORY_IMAGE_COMPRESSION', 'Subcategory image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 75)');
+define('CT_PRODUCT_IMAGE_COMPRESSION', 'Product image phpThumb compression rate');
+define('CD_PRODUCT_IMAGE_COMPRESSION', 'Product image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 80)');
+define('CT_POPUP_IMAGE_COMPRESSION', 'Product Popup image phpThumb compression rate');
+define('CD_POPUP_IMAGE_COMPRESSION', 'Product Popup image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 85)');
 
 // Configuration ID: 5 - Customer Details
 define('CT_ACCOUNT_GENDER', 'Geschlecht');
@@ -1026,7 +1036,7 @@ define('CD_JAVASCRIPT_CHECK', 'Möchten Sie überprüfen, ob der Kunde Javascript a
 define('CT_IE6_CHECK', 'Internet Explorer 6 prüfen?');
 define('CD_IE6_CHECK', 'Möchten Sie überprüfen, ob der Kunde IE6 verwendet und ihm ein Update seines Browsers vorschlagen?');
 
-// Configuration ID: 204 - SlideShow Settings Corner Banners
+// Configuration ID: 204 - SlideShow Settings
 define('CT_DISPLAY_SLIDESHOW', 'Enable Slideshow?');
 define('CD_DISPLAY_SLIDESHOW', 'Do you want to enable the slideshow?');
 define('CT_SLIDESHOW_WIDTH', 'Set Slideshow width');
@@ -1077,6 +1087,9 @@ define('CT_SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', 'Active Thumbnail backgroun
 define('CD_SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', 'What color would you like the background of the active thumbnail to be?');
 define('CT_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 'Active Thumbnail font color');
 define('CD_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 'What color would you like the font of the active thumbnail to be?');
+define('CT_SLIDESHOW_COMPRESSION', 'Slideshow image phpThumb compression rate');
+define('CD_SLIDESHOW_COMPRESSION', 'Slideshow image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 85)');
+
 
 // Configuration ID: 205 - Corner Banners
 define('CT_CB_LAST_FEW', 'Restposten-Eckbanner?');

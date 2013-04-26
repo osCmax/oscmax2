@@ -18,6 +18,10 @@ define('HEADER_TITLE_LOGOFF', 'Abmelden');
 // Admin Account
 define('BOX_HEADING_MY_ACCOUNT', 'Mein Konto');
 
+define('TEXT_SESSION_EXPIRE_WARNING', 'Warning - your session is going to expire in <b>2</b> minutes.');
+define('TEXT_SESSION_EXPIRED', 'Sorry your session expired - please log in again.');
+
+
 // configuration box text in includes/boxes/administrator.php
 define('BOX_HEADING_ADMINISTRATOR', 'Administrator');
 define('BOX_ADMINISTRATOR_MEMBERS', 'Verwaltungsmitglieder');

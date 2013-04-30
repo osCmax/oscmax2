@@ -22,7 +22,6 @@ $Id$
   define('CONTENT_ADDRESS_BOOK_PROCESS', 'address_book_process');
   define('CONTENT_ADVANCED_SEARCH', 'advanced_search');
   define('CONTENT_ADVANCED_SEARCH_RESULT', 'advanced_search_result');
-  define('CONTENT_ALSO_PURCHASED_PRODUCTS', 'also_purchased_products');
   define('CONTENT_CHECKOUT_CONFIRMATION', 'checkout_confirmation');
   define('CONTENT_CHECKOUT_PAYMENT', 'checkout_payment');
   define('CONTENT_CHECKOUT_PAYMENT_ADDRESS', 'checkout_payment_address');
@@ -71,7 +70,6 @@ $Id$
   define('CONTENT_GV_REDEEM', 'gv_redeem');
   define('CONTENT_GV_SEND', 'gv_send');
   define('CONTENT_PRINTABLE_CATALOG', 'catalog_products_with_images');
-  define('CONTENT_ALLPRODS', 'allprods');
   define('CONTENT_DOWN_FOR_MAINT', 'down_for_maintenance');
 //BTS for Articles 1.0
   define('CONTENT_ARTICLES', 'article_info');
@@ -104,7 +102,6 @@ $Id$
   define('FILENAME_ADDRESS_BOOK_PROCESS', CONTENT_ADDRESS_BOOK_PROCESS . '.php');
   define('FILENAME_ADVANCED_SEARCH', CONTENT_ADVANCED_SEARCH . '.php');
   define('FILENAME_ADVANCED_SEARCH_RESULT', CONTENT_ADVANCED_SEARCH_RESULT . '.php');
-  define('FILENAME_ALSO_PURCHASED_PRODUCTS', CONTENT_ALSO_PURCHASED_PRODUCTS . '.php');
   define('FILENAME_ARTICLE_INFO', 'article_info.php');
   define('FILENAME_ARTICLE_LISTING', 'article_listing.php');
   define('FILENAME_ARTICLE_REVIEWS', 'article_reviews.php');

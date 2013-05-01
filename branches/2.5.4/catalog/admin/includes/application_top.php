@@ -110,7 +110,7 @@ $Id$
   }
 
 // set the language
-  if (!tep_session_is_registered('language') || isset($_GET['language'])) {
+  if (!tep_session_is_registered('language') || isset($_GET['language']) || strlen(trim($_SESSION['language'])) <1 ) {
     if (!tep_session_is_registered('language')) {
       tep_session_register('language');
       tep_session_register('languages_id');

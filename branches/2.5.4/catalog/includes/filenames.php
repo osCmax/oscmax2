@@ -22,6 +22,7 @@ $Id$
   define('CONTENT_ADDRESS_BOOK_PROCESS', 'address_book_process');
   define('CONTENT_ADVANCED_SEARCH', 'advanced_search');
   define('CONTENT_ADVANCED_SEARCH_RESULT', 'advanced_search_result');
+  define('CONTENT_ALSO_PURCHASED_PRODUCTS', 'also_purchased_products');
   define('CONTENT_CHECKOUT_CONFIRMATION', 'checkout_confirmation');
   define('CONTENT_CHECKOUT_PAYMENT', 'checkout_payment');
   define('CONTENT_CHECKOUT_PAYMENT_ADDRESS', 'checkout_payment_address');
@@ -29,8 +30,6 @@ $Id$
   define('CONTENT_CHECKOUT_SHIPPING_ADDRESS', 'checkout_shipping_address');
   define('CONTENT_CHECKOUT_SUCCESS', 'checkout_success');
   define('CONTENT_CONTACT_US', 'contact_us');
-  define('CONTENT_CONDITIONS', 'conditions');
-  define('CONTENT_CONDITIONS_CONTENT', 'conditions_content');
   define('CONTENT_COOKIE_USAGE', 'cookie_usage');
   define('CONTENT_CREATE_ACCOUNT', 'create_account');
   define('CONTENT_CREATE_ACCOUNT_SUCCESS', 'create_account_success');
@@ -39,30 +38,21 @@ $Id$
   define('CONTENT_INDEX_NESTED', 'index_nested');
   define('CONTENT_INDEX_PRODUCTS', 'index_products');
   define('CONTENT_INFORMATION', 'information');
-  define('CONTENT_INFO_SHOPPING_CART', 'info_shopping_cart');
   define('CONTENT_LOGIN', 'login');
   define('CONTENT_LOGOFF', 'logoff');
-  define('CONTENT_NEW_PRODUCTS', 'new_products');
   define('CONTENT_PASSWORD_FORGOTTEN', 'password_forgotten');
   define('CONTENT_PASSWORD_FORGOTTEN_AFFILIATE', 'password_forgotten_affiliate');
   define('CONTENT_POPUP_IMAGE', 'popup_image');
   define('CONTENT_POPUP_SEARCH_HELP', 'popup_search_help');
-  define('CONTENT_PRIVACY', 'privacy');
-  define('CONTENT_PRIVACY_CONTENT', 'privacy_content');
   define('CONTENT_PRODUCT_INFO', 'product_info');
   define('CONTENT_PRODUCT_LISTING', 'product_listing');
   define('CONTENT_PRODUCT_REVIEWS', 'product_reviews');
   define('CONTENT_PRODUCT_REVIEWS_INFO', 'product_reviews_info');
   define('CONTENT_PRODUCT_REVIEWS_WRITE', 'product_reviews_write');
-  define('CONTENT_PRODUCTS_NEW', 'products_new');
   define('CONTENT_REVIEWS', 'reviews');
-  define('CONTENT_SHIPPING', 'shipping');
-  define('CONTENT_SHIPPING_CONTENT', 'shipping_content');
   define('CONTENT_SHOPPING_CART', 'shopping_cart');
-  define('CONTENT_SPECIALS', 'specials');
   define('CONTENT_SSL_CHECK', 'ssl_check');
   define('CONTENT_TELL_A_FRIEND', 'tell_a_friend');
-  define('CONTENT_UPCOMING_PRODUCTS', 'upcoming_products');
   define('CONTENT_CHECKOUT_PROCESS', 'checkout_process');
 // LINE ADDED: Google Checkout
   define('CONTENT_GC_RETURN', 'gc_return');
@@ -102,6 +92,7 @@ $Id$
   define('FILENAME_ADDRESS_BOOK_PROCESS', CONTENT_ADDRESS_BOOK_PROCESS . '.php');
   define('FILENAME_ADVANCED_SEARCH', CONTENT_ADVANCED_SEARCH . '.php');
   define('FILENAME_ADVANCED_SEARCH_RESULT', CONTENT_ADVANCED_SEARCH_RESULT . '.php');
+  define('FILENAME_ALSO_PURCHASED_PRODUCTS', CONTENT_ALSO_PURCHASED_PRODUCTS . '.php');
   define('FILENAME_ARTICLE_INFO', 'article_info.php');
   define('FILENAME_ARTICLE_LISTING', 'article_listing.php');
   define('FILENAME_ARTICLE_REVIEWS', 'article_reviews.php');
@@ -127,8 +118,6 @@ $Id$
   define('FILENAME_CHECKOUT_SHIPPING_ADDRESS', CONTENT_CHECKOUT_SHIPPING_ADDRESS . '.php');
   define('FILENAME_CHECKOUT_SUCCESS', CONTENT_CHECKOUT_SUCCESS . '.php');
   define('FILENAME_CONTACT_US', CONTENT_CONTACT_US . '.php');
-  define('FILENAME_CONDITIONS', CONTENT_CONDITIONS . '.php');
-  define('FILENAME_CONDITIONS_CONTENT', CONTENT_CONDITIONS_CONTENT . '.php');
   define('FILENAME_COOKIE_USAGE', CONTENT_COOKIE_USAGE . '.php');
   define('FILENAME_CREATE_ACCOUNT', CONTENT_CREATE_ACCOUNT . '.php');
   define('FILENAME_CREATE_ACCOUNT_SUCCESS', CONTENT_CREATE_ACCOUNT_SUCCESS . '.php');
@@ -138,34 +127,25 @@ $Id$
   define('FILENAME_DOWNLOAD', CONTENT_DOWNLOAD . '.php');
 // LINE ADDED: Google Checkout
   define('FILENAME_GC_RETURN', CONTENT_GC_RETURN . '.php');
-  define('FILENAME_INFO_SHOPPING_CART', CONTENT_INFO_SHOPPING_CART . '.php');
   define('FILENAME_LOGIN', CONTENT_LOGIN . '.php');
   define('FILENAME_LOGOFF', CONTENT_LOGOFF . '.php');
-  define('FILENAME_NEW_PRODUCTS', CONTENT_NEW_PRODUCTS . '.php');
   define('FILENAME_PASSWORD_FORGOTTEN', CONTENT_PASSWORD_FORGOTTEN . '.php');
   define('FILENAME_PASSWORD_FORGOTTEN_AFFILIATE', CONTENT_PASSWORD_FORGOTTEN_AFFILIATE . '.php');
   define('FILENAME_POPUP_CVS_HELP', 'popup_cvs_help.php');
   define('FILENAME_POPUP_IMAGE', CONTENT_POPUP_IMAGE . '.php');
   define('FILENAME_POPUP_INFOBOX_HELP', 'popup_infobox_help.php');
   define('FILENAME_POPUP_SEARCH_HELP', CONTENT_POPUP_SEARCH_HELP . '.php');
-  define('FILENAME_PRIVACY', CONTENT_PRIVACY . '.php');
-  define('FILENAME_PRIVACY_CONTENT', CONTENT_PRIVACY_CONTENT . '.php');
   define('FILENAME_PRODUCT_INFO', CONTENT_PRODUCT_INFO . '.php');
   define('FILENAME_PRODUCT_LISTING', CONTENT_PRODUCT_LISTING . '.php');
   define('FILENAME_PRODUCT_REVIEWS', CONTENT_PRODUCT_REVIEWS . '.php');
   define('FILENAME_PRODUCT_REVIEWS_INFO', CONTENT_PRODUCT_REVIEWS_INFO . '.php');
   define('FILENAME_PRODUCT_REVIEWS_WRITE', CONTENT_PRODUCT_REVIEWS_WRITE . '.php');
-  define('FILENAME_PRODUCTS_NEW', CONTENT_PRODUCTS_NEW . '.php');
   define('FILENAME_REDIRECT', 'redirect.php');
   define('FILENAME_REVIEWS', CONTENT_REVIEWS . '.php');
-  define('FILENAME_SHIPPING', CONTENT_SHIPPING . '.php');
-  define('FILENAME_SHIPPING_CONTENT', CONTENT_SHIPPING_CONTENT . '.php');
   define('FILENAME_SHOPPING_CART', CONTENT_SHOPPING_CART . '.php');
   define('FILENAME_SITEMAP', 'sitemap.php');
-  define('FILENAME_SPECIALS', CONTENT_SPECIALS . '.php');
   define('FILENAME_SSL_CHECK', CONTENT_SSL_CHECK . '.php');
   define('FILENAME_TELL_A_FRIEND', CONTENT_TELL_A_FRIEND . '.php');
-  define('FILENAME_UPCOMING_PRODUCTS', CONTENT_UPCOMING_PRODUCTS . '.php');
 
 // BOF: MOD - Affiliate Mod
   define('CONTENT_AFFILIATE', 'affiliate_affiliate');

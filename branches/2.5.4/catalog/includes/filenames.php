@@ -215,6 +215,7 @@ $Id$
   define('FILENAME_NESTED_PAGE_MODULES', 'nested_page_modules.php');
   define('FILENAME_PI_PAGE_MODULES', 'pi_page_modules.php');
   define('FILENAME_COMMON_PAGE_MODULES', 'common_page_modules.php');
+  define('FILENAME_FOOTER_PAGE_MODULES', 'footer_page_modules.php');
 // EOF: Page Module Controller  
 
 // BOF: Open Featured Sets

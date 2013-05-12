@@ -128,4 +128,11 @@ define('WARNING_PHP_FILES_IN_THUMBS', 'Warning: You have files in ' . DIR_FS_CAT
 define('DASHBOARD_AFFILIATE_EMAIL_ERROR', 'Warning: The Affiliate Infobox is active in your store but you have not changed the default email address.  Please either <u><a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=28', 'NONSSL') . '">disable this module</a></u> or <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=35&amp;cID=1204&amp;action=edit', 'NONSSL') . '"> update the email address</a></u>.');
 
 define('SET_DEFAULT', 'Set as default tab:');
+
+define('DASHBOARD_REVIEWS', 'Product & Article Reviews');
+define('DASHBOARD_REVIEW_COMPLETE', 'You have no pending reviews to approve.');
+define('DASHBOARD_REVIEWS_PRODUCTS_OPEN', 'You have %s new product review(s) awaiting approval (or deletion).');
+define('DASHBOARD_REVIEWS_ARTICLES_OPEN', 'You have %s new article review(s) awaiting approval (or deletion).');
+define('DASHBOARD_GOTO_PRODUCT_REVIEWS', 'Open Product Reviews');
+define('DASHBOARD_GOTO_ARTICLE_REVIEWS', 'Open Article Reviews');
 ?>

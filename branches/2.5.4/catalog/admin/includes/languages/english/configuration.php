@@ -888,7 +888,7 @@ define('CD_DAYS_UNTIL_FEATURED_PRODUCTS', 'How many days do you want to add to t
 define('CT_FEATURED_SET', 'Choose a featured products set layout');
 define('CD_FEATURED_SET', '1= side by side<br>2= over under<br>3= image; price over under; description side<br>4= image; price over under');
 define('CT_FEATURED_SET_STYLE', 'Choose a featured products set style');
-define('CD_FEATURED_SET_STYLE', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed<br>5= boxed w/box header<br>6= shadowboxed w/box header');
+define('CD_FEATURED_SET_STYLE', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed <em>(disabled)</em><br>5= boxed w/box header<br>6= shadowboxed w/box header <em>(disabled)</em>');
 define('CT_FEATURED_PRODUCTS_GROUPING', 'Choose a box grouping method');
 define('CD_FEATURED_PRODUCTS_GROUPING', 'gbox= grouped in one box<br>sbox= each product in separate box');
 define('CT_FEATURED_PRODUCTS_SORT_ORDER', 'Set the sort order for the feature products.');

@@ -656,8 +656,8 @@ CREATE TABLE customers_notes (
 
 DROP TABLE IF EXISTS customers_wishlist;
 CREATE TABLE `customers_wishlist` (
-  `products_id` tinytext NOT NULL,
-  `customers_id` int(13) NOT NULL default '0'
+  `products_id` int(11) NOT NULL,
+  `customers_id` int(11) NOT NULL default '0'
 );
 
 
@@ -665,7 +665,7 @@ DROP TABLE IF EXISTS customers_wishlist_attributes;
 CREATE TABLE `customers_wishlist_attributes` (
   `customers_wishlist_attributes_id` int(11) NOT NULL auto_increment,
   `customers_id` int(11) NOT NULL default '0',
-  `products_id` tinytext NOT NULL,
+  `products_id` int(11) NOT NULL,
   `products_options_id` int(11) NOT NULL default '0',
   `products_options_value_id` int(11) NOT NULL default '0',
   PRIMARY KEY (`customers_wishlist_attributes_id`)

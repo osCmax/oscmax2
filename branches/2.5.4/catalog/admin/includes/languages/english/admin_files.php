@@ -39,6 +39,7 @@ define('TEXT_INFO_HEADING_DELETE_FILE', 'Remove Confirmation');
 define('TEXT_INFO_HEADING_NEW_FILE', 'Store Files');
 
 define('TEXT_INFO_DEFAULT_FILE_INTRO', 'Click <b>store files</b> button to insert new file to current box: ');
+define('TEXT_INFO_NEW_FILE_ADDITIONAL', 'If you need to add a parameter to the URL please enter it here.  (Don\'t forget to put the preceeding question mark in the string.)');
 define('TEXT_INFO_DELETE_FILE_INTRO', 'Remove <font color="red"><b>%s</b></font> from <b>%s</b> box? ');
 define('TEXT_INFO_NEW_FILE_INTRO', 'Check the <font color="red"><b>left menu</b></font> to make sure you store the right files.');
 

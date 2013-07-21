@@ -40,7 +40,7 @@ $Id$
         tep_redirect(tep_href_link(FILENAME_ADMIN_FILES));
         break;
       case 'file_store':
-        $sql_data_array = array('admin_files_name' => tep_db_prepare_input($_POST['admin_files_name']),
+        $sql_data_array = array('admin_files_name' => tep_db_prepare_input($_POST['admin_files_name']) . tep_db_prepare_input($_POST['admin_files_additional']),
                                 'admin_files_to_boxes' => tep_db_prepare_input($_POST['admin_files_to_boxes']));
         tep_db_perform(TABLE_ADMIN_FILES, $sql_data_array);
         $admin_files_id = tep_db_insert_id();
@@ -264,6 +264,7 @@ $Id$
         $contents[] = array('text' => '<b>' . TEXT_INFO_NEW_FILE_BOX .  ucfirst(substr_replace ($current_box['admin_box_name'], '', -4)) . '</b>');
         $contents[] = array('text' => TEXT_INFO_NEW_FILE_INTRO );
         $contents[] = array('align' => 'left', 'text' => '<br>&nbsp;' . tep_draw_pull_down_menu('admin_files_name', $show, $show));
+		$contents[] = array('align' => 'left', 'text' => '<br>' . TEXT_INFO_NEW_FILE_ADDITIONAL . '<br>' . tep_draw_input_field('admin_files_additional',''));
         $contents[] = array('text' => tep_draw_hidden_field('admin_files_to_boxes', $_GET['cPath']));
         $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_ADMIN_FILES, 'cPath=' . $_GET['cPath']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         break;

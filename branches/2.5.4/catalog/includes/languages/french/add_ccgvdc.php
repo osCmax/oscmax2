@@ -18,10 +18,9 @@ define('ERROR_REDEEMED_AMOUNT','Le coupon a &eacute;t&eacute; appliqu&eacute;e a
 define('ERROR_NO_REDEEM_CODE','Vous n\'avez pas entrer un code d\'activation.');  
 define('ERROR_NO_INVALID_REDEEM_GV','Code Ch&egrave;ques-cadeaux Blancs'); 
 define('TABLE_HEADING_CREDIT','Ch&egrave;ques Cadeaux');
-define('GV_HAS_VOUCHERA', 'You have funds in your Gift Voucher Account. If you want <br>
-                         you can send those funds by <a class="pageResults" href="');
+define('GV_HAS_VOUCHERA', 'Vous avez des sous dans votre compte chèque cadeau. <br>Si vous voulez vous pouvez envoyer ces fonds <a class="pageResults" href="');
        
-define('GV_HAS_VOUCHERB', '"><b>email</b></a> to someone'); 
+define('GV_HAS_VOUCHERB', '"><b>par courriel </b></a> à quelqu\'un'); 
 define('ENTRY_AMOUNT_CHECK_ERROR','Vous n\'avez pas assez de fonds pour envoyer ce montant.'); 
 define('BOX_SEND_TO_FRIEND','Envoyer Ch&egrave;ques cadeaux');
 

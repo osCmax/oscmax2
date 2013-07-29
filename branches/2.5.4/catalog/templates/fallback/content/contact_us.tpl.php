@@ -97,7 +97,7 @@ $Id$
                 <td class="main"><?php echo ENTRY_EMAIL; ?></td>
               </tr>
               <tr>
-                <td class="main"><?php echo tep_draw_input_field('email', '','value="' . $email .'" size="40" '); ?></td>
+                <td class="main"><?php echo tep_draw_input_field('email', '','value="' . $email .'" size="40" ','email'); ?></td>
               </tr>
               <tr>
               <td class="main"><?php echo ENTRY_REASON; ?>

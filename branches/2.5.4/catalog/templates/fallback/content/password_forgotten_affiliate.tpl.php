@@ -51,7 +51,7 @@ echo tep_draw_form('password_forgotten', tep_href_link(FILENAME_PASSWORD_FORGOTT
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
               </tr>
               <tr>
-                <td class="main" align="center"><?php echo '' . ENTRY_EMAIL_ADDRESS . ' ' . tep_draw_input_field('email_address'); ?></td>
+                <td class="main" align="center"><?php echo '' . ENTRY_EMAIL_ADDRESS . ' ' . tep_draw_input_field('email_address','','size="40"','email'); ?></td>
               </tr>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>

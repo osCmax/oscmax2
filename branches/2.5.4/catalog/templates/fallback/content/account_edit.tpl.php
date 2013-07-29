@@ -86,15 +86,15 @@ $Id$
 ?>
                   <tr>
                     <td class="main"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
-                    <td class="main"><?php echo tep_draw_input_field('email_address', $account['customers_email_address']) . '&nbsp;' . (tep_not_null(ENTRY_EMAIL_ADDRESS_TEXT) ? '<span class="inputRequirement">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>': ''); ?></td>
+                    <td class="main"><?php echo tep_draw_input_field('email_address', $account['customers_email_address'],'','email') . '&nbsp;' . (tep_not_null(ENTRY_EMAIL_ADDRESS_TEXT) ? '<span class="inputRequirement">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>': ''); ?></td>
                   </tr>
                   <tr>
                     <td class="main"><?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
-                    <td class="main"><?php echo tep_draw_input_field('telephone', $account['customers_telephone']) . '&nbsp;' . (tep_not_null(ENTRY_TELEPHONE_NUMBER_TEXT) ? '<span class="inputRequirement">' . ENTRY_TELEPHONE_NUMBER_TEXT . '</span>': ''); ?></td>
+                    <td class="main"><?php echo tep_draw_input_field('telephone', $account['customers_telephone'],'','number') . '&nbsp;' . (tep_not_null(ENTRY_TELEPHONE_NUMBER_TEXT) ? '<span class="inputRequirement">' . ENTRY_TELEPHONE_NUMBER_TEXT . '</span>': ''); ?></td>
                   </tr>
                   <tr>
                     <td class="main"><?php echo ENTRY_FAX_NUMBER; ?></td>
-                    <td class="main"><?php echo tep_draw_input_field('fax', $account['customers_fax']) . '&nbsp;' . (tep_not_null(ENTRY_FAX_NUMBER_TEXT) ? '<span class="inputRequirement">' . ENTRY_FAX_NUMBER_TEXT . '</span>': ''); ?></td>
+                    <td class="main"><?php echo tep_draw_input_field('fax', $account['customers_fax'],'','number') . '&nbsp;' . (tep_not_null(ENTRY_FAX_NUMBER_TEXT) ? '<span class="inputRequirement">' . ENTRY_FAX_NUMBER_TEXT . '</span>': ''); ?></td>
                   </tr>
                 </table></td>
               </tr>

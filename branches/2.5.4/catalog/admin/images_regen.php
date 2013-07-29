@@ -848,7 +848,7 @@ function listDirectory($path) {
   @ini_set('max_execution_time', 3600);
   $handle = @opendir($path);
   while (false !== ($file = readdir($handle))) {
-    if ($file == '.' || $file == '..' || $file == '.svn') continue;
+    if ($file == '.' || $file == '..' || $file == '.svn' || $file == '.htaccess' || $file == 'index.php') continue;
 	  if ( is_dir("$path$file")) {  // Directory
         $source_bigimage = listDirectory("$path$file");
       } else {  // File
@@ -869,7 +869,7 @@ function listDirectory_onlymissing($path) {
   $regen_image_set_count = '0'; 
 
   while (false !== ($file = readdir($handle))) {
-    if ($file == '.' || $file == '..' || $file == '.svn') continue;
+    if ($file == '.' || $file == '..' || $file == '.svn' || $file == '.htaccess' || $file == 'index.php') continue;
 	  if ( is_dir("$path$file")) {  // Directory
         $source_bigimage = listDirectory("$path$file");
       } else {  // File

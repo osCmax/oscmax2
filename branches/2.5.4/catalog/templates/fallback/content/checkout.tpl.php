@@ -200,7 +200,7 @@ $Id$
 			ob_end_clean();
 		}
 
-		$paymentMethod = '<div id="noPaymentAddress" class="main noAddress" align="center" style="font-size:15px;' . (isset($_SESSION['customer_id']) ? 'display:none;' : '') . '">Please fill in your <b>billing address</b> for payment options</div><div id="paymentMethods"' . (!isset($_SESSION['customer_id']) ? ' style="display:none;"' : '') . '>' . $paymentMethod . '</div>';
+		$paymentMethod = '<div id="noPaymentAddress" class="main noAddress" align="center" style="font-size:15px;' . (isset($_SESSION['customer_id']) ? 'display:none;' : '') . '">Please fill in your <b>billing address</b> for payment options.</div><div id="paymentMethods"' . (!isset($_SESSION['customer_id']) ? ' style="display:none;"' : '') . '>' . $paymentMethod . '</div>';
 		buildInfobox($header, $paymentMethod);
 	   ?></td>
 	  </tr>

@@ -12,8 +12,7 @@ $Id$
 ?>
 <!-- body_text //-->
 <noscript>
- <table width="100%"><tr><td class="messageStackError"><?php echo TEXT_NO_JAVASCRIPT; ?></td></tr></table>
- <?php echo TEXT_ENABLE_JAVSCRIPT_INSTRUCTIONS; ?>
+  <table width="100%"><tr><td class="messageStackError"><?php echo TEXT_NO_JAVASCRIPT; ?><?php echo TEXT_ENABLE_JAVSCRIPT_INSTRUCTIONS; ?></td></tr></table> 
 </noscript>
 <div id="pageContentContainer" style="display:none;">
    <?php echo tep_draw_form('checkout', tep_href_link(FILENAME_CHECKOUT, '', $request_type)) . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">

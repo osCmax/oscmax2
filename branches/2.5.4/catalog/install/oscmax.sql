@@ -1488,7 +1488,7 @@ CREATE TABLE IF NOT EXISTS pm_configuration (
   pm_title varchar(255) NOT NULL,
   pm_description varchar(255) NOT NULL,
   pm_filename varchar(255) NOT NULL,
-  pm_active varchar(255) NOT NULL,
+  pm_active BOOLEAN NOT NULL default '1',
   pm_page varchar(255) NOT NULL,
   pm_cg_hide varchar(255) NOT NULL,
   pm_sort_order int(11) NOT NULL,

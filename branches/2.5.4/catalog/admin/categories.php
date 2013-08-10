@@ -2316,7 +2316,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 					<td valign="top" class="main">&nbsp;</td>
 				  </tr>
 				  <tr>
-					<td align="left" valign="top" class="smallText"><?php echo tep_draw_separator('pixel_trans.gif', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo '<img src=' . HTTP_CATALOG_SERVER . DIR_WS_CATALOG_LANGUAGES . $language . '/images/buttons/button_buy_now.gif>';?></td>
+					<td align="left" valign="top" class="smallText"><?php echo tep_draw_separator('pixel_trans.gif', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo tep_image_button('button_buy_now.gif'); ?></td>
 				  </tr>
 				</table>
 			  </td>

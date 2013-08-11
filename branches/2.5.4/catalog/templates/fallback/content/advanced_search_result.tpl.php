@@ -88,7 +88,7 @@ $Id$
    $status_tmp_special_prices_table = false;
    $status_need_to_get_prices = false;
    // find out if sorting by price has been requested
-   if ( (isset($_GET['sort'])) && (ereg('[1-8][ad]', $_GET['sort'])) && (substr($_GET['sort'], 0, 1) <= sizeof($column_list)) ){
+   if ( (isset($_GET['sort'])) && (preg_match('/^[0-8][ad]$/', $_GET['sort'])) && (substr($_GET['sort'], 0, 1) <= sizeof($column_list)) ){
     $_sort_col = substr($_GET['sort'], 0 , 1);
     if ($column_list[$_sort_col-1] == 'PRODUCT_LIST_PRICE') {
       $status_need_to_get_prices = true;
@@ -329,7 +329,7 @@ foreach ($epf as $e) {
   if ( (DISPLAY_PRICE_WITH_TAX == 'true') && (tep_not_null($pfrom) || tep_not_null($pto)) ) {
     $where_str .= " group by p.products_id, tr.tax_priority";
   }
-  if ( (!isset($_GET['sort'])) || (!ereg('[1-8][ad]', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
+  if ( (!isset($_GET['sort'])) || (!preg_match('/^[0-8][ad]$/', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
     for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
       if ($column_list[$i] == 'PRODUCT_LIST_NAME') {
         $_GET['sort'] = $i . 'a';
@@ -342,7 +342,7 @@ foreach ($epf as $e) {
     $sort_order = substr($_GET['sort'], 1);
     $order_str = ' order by ';
     switch ($column_list[$sort_col]) {
-      case 'PRODUCT_LIST_MODEL':
+	  case 'PRODUCT_LIST_MODEL':
         $order_str .= "p.products_model " . ($sort_order == 'd' ? "desc" : "") . ", pd.products_name";
         break;
       case 'PRODUCT_LIST_NAME':
@@ -374,14 +374,13 @@ foreach ($epf as $e) {
         //EOF: Bug Fix 1277  
         break;
 	  case 'PRODUCT_LIST_BESTSELLER':
-        $order_str .= " products_ordered " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
+        $order_str .= " p.products_ordered " . ($sort_order == 'd' ? 'desc' : '') . ", pd.products_name";
         break;
     }
   }
 
   $listing_sql = $select_str . $from_str . $where_str . $order_str;
 
-// BOF:$Id$
         // initial set from admin
         if ( (!isset($_GET['gridlist'])) && (!isset($_SESSION['gridlist'])) ) {
 		  if (PRODUCT_LIST_TYPE == 0) { $gridlist = 'list'; } else { $gridlist = 'grid'; }
@@ -395,7 +394,6 @@ foreach ($epf as $e) {
 
         include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
         
-// EOF:$Id$
 ?>
         </td>
       </tr>

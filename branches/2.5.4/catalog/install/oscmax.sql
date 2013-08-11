@@ -904,6 +904,22 @@ CREATE TABLE orders_status_history (
   KEY idx_orders_status_history_orders_id (orders_id)
 );
 
+DROP TABLE IF EXISTS orders_status_history_transactions;
+CREATE TABLE orders_status_history_transactions (
+  orders_status_history_id int(11) NOT NULL,
+  transaction_id varchar(64) NOT NULL,
+  transaction_type varchar(32) NOT NULL,
+  payment_type varchar(32) NOT NULL,
+  payment_status varchar(32) NOT NULL,
+  transaction_amount decimal(7,2) NOT NULL,
+  module_code varchar(32) NOT NULL,
+  transaction_avs varchar(64) NOT NULL,
+  transaction_cvv2 varchar(64) NOT NULL,
+  transaction_msgs varchar(255) NOT NULL,
+  PRIMARY KEY (orders_status_history_id),
+  KEY transaction_id (transaction_id)
+);
+
 DROP TABLE IF EXISTS orders_total;
 CREATE TABLE orders_total (
   orders_total_id int unsigned NOT NULL auto_increment,

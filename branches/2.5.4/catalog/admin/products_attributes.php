@@ -30,9 +30,9 @@ $Id$
 		$clone_product_id_from = $HTTP_POST_VARS['clone_products_id_from'];
 		$clone_product_id_to = $HTTP_POST_VARS['clone_products_id_to'];
 		tep_db_query("delete from ".TABLE_PRODUCTS_ATTRIBUTES." WHERE products_id='".$clone_product_id_to."'");
-		$attributes = tep_db_query("select products_id, options_id, options_values_id, options_values_price, price_prefix, products_options_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES ." where products_id='".$clone_product_id_from."'");
-		while($attributes_values = tep_db_fetch_array($attributes)) {
-          tep_db_query("INSERT INTO " . TABLE_PRODUCTS_ATTRIBUTES . " ( products_id, options_id, options_values_id, options_values_price, price_prefix, products_options_sort_order) VALUES (".$clone_product_id_to.", ".$attributes_values['options_id'].", ".$attributes_values['options_values_id'].", ".$attributes_values['options_values_price'].", '".$attributes_values['price_prefix']."' , ".$attributes_values['products_options_sort_order'].")");
+		$attributes = tep_db_query("select products_id, options_id, options_values_id, options_values_price, price_prefix, weight_prefix, options_values_weight, products_options_sort_order from " . TABLE_PRODUCTS_ATTRIBUTES ." where products_id='".$clone_product_id_from."'");
+		while($attributes_values = tep_db_fetch_array($attributes)) {	
+          tep_db_query("INSERT INTO " . TABLE_PRODUCTS_ATTRIBUTES . " ( products_id, options_id, options_values_id, options_values_price, price_prefix, weight_prefix, options_values_weight, products_options_sort_order ) VALUES (".$clone_product_id_to.", ".$attributes_values['options_id'].", ".$attributes_values['options_values_id'].", ".$attributes_values['options_values_price'].", '".$attributes_values['price_prefix']."', '".$attributes_values['weight_prefix']."', '".$attributes_values['options_values_weight']."', ".$attributes_values['products_options_sort_order'].")");
 		}	
         tep_redirect(tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, $page_info));
         break;

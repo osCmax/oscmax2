@@ -365,7 +365,7 @@ define('CD_PRODUCT_LIST_FILTER', 'Möchten Sie den Kategorie/Herstellerfilter anz
 define('CT_PREV_NEXT_BAR_LOCATION', 'Position der Zurück/Weiter Navigationsleiste (1-oben; 2-unten; 3-beides)');
 define('CD_PREV_NEXT_BAR_LOCATION', 'Wählen Sie die Positionierung der Zurück/Weiter Navigationsleiste aus (1-oben; 2-unten; 3-beides)');
 define('CT_PRODUCT_CORNER_BANNER', 'Eckbanner anzeigen');
-define('CD_PRODUCT_CORNER_BANNER', 'Möchten Sie die Eckbanner anzeigen?<br><br><b>Bitte beachten Sie, dass Sie zur fehlerfreien Benutzung den Wert auf 1 setzen müssen, da die Eckbanner vor allen weiteren Produktlistenelementen angezeigt werden muss.</b>');
+define('CD_PRODUCT_CORNER_BANNER', 'Möchten Sie die Eckbanner anzeigen?<br><br><b>Bitte beachten Sie, dass Sie zur fehlerfreien Benutzung den Wert auf 1 setzen müssen. Wenn sie ausgeschaltet sind (0), werden die Spaltentitel nicht über den zugehörigen Spalten angezeigt. Stellen Sie das Verhalten der Eckbanner in >>Einstellungen>>Templates>>Eckbanner ein. </b>');
 define('CT_ALLOW_CATEGORY_DESCRIPTIONS', 'Kategoriebeschreibungen anzeigen');
 define('CD_ALLOW_CATEGORY_DESCRIPTIONS', 'Möchten Sie die Kategoriebeschreibungen in Ihrem Shop anzeigen?');
 define('CT_PRODUCT_LIST_NUM_COLUMNS', 'Spaltenanzahl der Produktliste');
@@ -850,8 +850,8 @@ define('CT_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Staffelpreisanzahl für Dropdown');
 define('CD_NOF_PRICE_BREAKS_FOR_DROPDOWN', 'Geben Sie der Anzahl der Preisstaffeln an, ab der ein Dropdown-Menü anstatt einer Tabelle angezeigt werden soll.');
 define('CT_PRICE_BREAK_PRICE', 'Anzeigeart der Staffelpreise');
 define('CD_PRICE_BREAK_PRICE', 'Wie möchten Sie den Preis von Produkten mit Staffelpreisen anzeigen (High = Höchster Preis, Low = Niedrigster Preis, Off = zeigt kein "Ab" vor dem Preis an und listet den höchsten Preis.)?');
-define('CT_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Price Break Percentage Behaviour');
-define('CD_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Off Price: The percentage entered will be the percentage you wish to take off the original product price.<br>(e.g. 25% when the product price is 100.00 will charge the customer 75.00)<br><br>To Pay: The percentage entered will be the percentage of the original product price that you wish to charge the customer.<br>(e.g. 25% when the product price is 100.00 will charge the customer 25.00)');
+define('CT_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Staffelpreis Prozentsatzverhalten');
+define('CD_PRICE_BREAK_PERCENT_BEHAVIOUR', 'Preisreduktion: Der angegebene Prozentsatz wird vom Grundpreis abgezogen.<br>(zB 25%: Wenn der Preis 100.00 beträgt, wird dem Kunden 75.00 verrechnet.)<br><br>Neuer Preis: Der angegebene Prozentsatz ist der neue Preis, basierend auf dem Grundpreis.<br>(zB 25%: Wenn der Preis 100.00 beträgt, wird dem Kunden 25.00 verrechnet.)');
 define('CT_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Product Price Change Behaviour');
 define('CD_PRICE_BREAK_PRICE_CHANGE_BEHAVIOUR', 'Update Percent: When the products price is changed, only the percentage field will update to show what percent the price break is of the original product price.<br><br>Update Prices: When the products price is changed, the price break prices will be recalculated from the original products price using the percentage originally specified.');
 
@@ -1090,7 +1090,6 @@ define('CD_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 'What color would you like the fo
 define('CT_SLIDESHOW_COMPRESSION', 'Slideshow image phpThumb compression rate');
 define('CD_SLIDESHOW_COMPRESSION', 'Slideshow image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 85)');
 
-
 // Configuration ID: 205 - Corner Banners
 define('CT_CB_LAST_FEW', 'Restposten-Eckbanner?');
 define('CD_CB_LAST_FEW', 'Möchten Sie den Restposten-Eckbanner anzeigen?<br><center><img src="../images/corner_banners/german/last_few.png" alt="Restposten"></center>');
@@ -1246,27 +1245,26 @@ define('CD_ONEPAGE_CHECKOUT_HIDE_SHIPPING', 'If the product weight = 0 then the 
 define('CT_ONEPAGE_ADDR_LAYOUT', 'Addresses Layout');
 define('CD_ONEPAGE_ADDR_LAYOUT', 'You can have the address boxes on One Page Checkout display either vertically (one on top of the other) or horizontally (side by side)');
 
-
 // Defines for multilingual shipping settings
 // Commonly used shipping module language defines
-define('CT_MODULE_SHIPPING_STATUS', 'Enable shipping module?');
-define('CD_MODULE_SHIPPING_STATUS', 'Do you want to enable this shipping module?');
-define('CT_MODULE_SHIPPING_COST', 'Shipping Cost');
+define('CT_MODULE_SHIPPING_STATUS', 'Versandart aktivieren?');
+define('CD_MODULE_SHIPPING_STATUS', 'Möchten Sie diese Versandart aktivieren?');
+define('CT_MODULE_SHIPPING_COST', 'Versandkosten');
 define('CD_MODULE_SHIPPING_COST', 'The shipping cost for all orders using this shipping method.');
-define('CT_MODULE_SHIPPING_TAX_CLASS', 'Tax Class');
-define('CD_MODULE_SHIPPING_TAX_CLASS', 'Use the following tax class on the shipping fee.');
-define('CT_MODULE_SHIPPING_HANDLING', 'Handling Fee');
-define('CD_MODULE_SHIPPING_HANDLING', 'Handling fee for this shipping method.');
-define('CT_MODULE_SHIPPING_ZONE', 'Shipping Zone');
-define('CD_MODULE_SHIPPING_ZONE', 'If a zone is selected, only enable this shipping method for that zone.');
-define('CT_MODULE_SHIPPING_SORT_ORDER', 'Sort Order');
-define('CD_MODULE_SHIPPING_SORT_ORDER', 'Sort order of display.');
+define('CT_MODULE_SHIPPING_TAX_CLASS', 'Steuerklasse');
+define('CD_MODULE_SHIPPING_TAX_CLASS', 'Diese Steuerklasse für die Versandkosten benutzen.');
+define('CT_MODULE_SHIPPING_HANDLING', 'Bearbeitungsgebühr');
+define('CD_MODULE_SHIPPING_HANDLING', 'Diese Bearbeitungsgebühr für diese Versandart benutzen.');
+define('CT_MODULE_SHIPPING_ZONE', 'Versandzone');
+define('CD_MODULE_SHIPPING_ZONE', 'Wenn Sie diese Versandart auf eine Zone beschränken möchen, so wählen Sie eine Versandzone.');
+define('CT_MODULE_SHIPPING_SORT_ORDER', 'Sortierung	');
+define('CD_MODULE_SHIPPING_SORT_ORDER', 'Sortierreihenfolge.');
 
 // Shipping Module: indvship.php
 define('CT_MODULE_SHIPPING_INDVSHIP_STATES', 'Higher Rated States');
 define('CD_MODULE_SHIPPING_INDVSHIP_STATES', 'Higher rate States');
-define('CT_MODULE_SHIPPING_INDVSHIP_HANDLING', 'Handling Fee');
-define('CD_MODULE_SHIPPING_INDVSHIP_HANDLING', 'Handling fee for these States.');
+define('CT_MODULE_SHIPPING_INDVSHIP_HANDLING', 'Bearbeitungsgebühr');
+define('CD_MODULE_SHIPPING_INDVSHIP_HANDLING', 'Bearbeitungsgebühr für diese Staaten.');
 
 // Shipping Module: spu.php
 define('CT_MODULE_SHIPPING_SPU_ZIP', 'Store Pick Up Post/Zip Code Allowed');

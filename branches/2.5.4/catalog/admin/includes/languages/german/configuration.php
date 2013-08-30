@@ -873,7 +873,7 @@ define('CT_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', '<font color=green>Beschreibung 
 define('CD_OPEN_FEATURED_LIMIT_DESCRIPTION_BY', 'Möchten Sie die Länge der Beschreibung nach Wörtern oder Zeichen begrenzen?');
 
 define('CT_FEATURED_PRODUCTS_DISPLAY', '<b>Empfohlene Produkte anzeigen</b>');
-define('CD_FEATURED_PRODUCTS_DISPLAY', 'Empfohlene Produkte anzeigen?');
+define('CD_FEATURED_PRODUCTS_DISPLAY', 'Möchten Sie die Empfohlenen Produkte anzeigen?');
 define('CT_FEATURED_PRODUCTS_POSITION', 'Layoutposition der empfohlenen Produkte');
 define('CD_FEATURED_PRODUCTS_POSITION', '1= Oben<br>2= Oben mittig<br>3= Unten mittig<br>4= Unten<br>');
 define('CT_MAX_DISPLAY_FEATURED_PRODUCTS', 'Höchstanzahl der empfohlenen Produkte');
@@ -887,7 +887,7 @@ define('CD_DAYS_UNTIL_FEATURED_PRODUCTS', 'Wie viele Tage ab dem aktuellen Datum
 define('CT_FEATURED_SET', 'Layout der empfohlenen Produkte');
 define('CD_FEATURED_SET', '1= Nebeneinander<br>2= Untereinander<br>3= Bild; Preis darunter; Beschreibung seitlich<br>4= Bild; Preis darunter');
 define('CT_FEATURED_SET_STYLE', 'Anzeigeart der empfohlenen Produkte');
-define('CD_FEATURED_SET_STYLE', '1= Einfach<br>2= Rahmen<br>3= Trennstrich<br>4= shadowboxed<br>5= Rahmen mit Titelzeile<br>6= shadowboxed mit Titelleiste');
+define('CD_FEATURED_SET_STYLE', '1= Einfach<br>2= Rahmen<br>3= Trennstrich<br>4= shadowboxed <em>(inaktiv)</em> <br>5= Rahmen mit Titelzeile<br>6= shadowboxed mit Titelleiste <em>(inaktiv)</em>');
 define('CT_FEATURED_PRODUCTS_GROUPING', 'Boxgruppierungsmethode');
 define('CD_FEATURED_PRODUCTS_GROUPING', 'gbox= zusammengefasst in einer Box<br>sbox= Jedes Produkt in einer separaten Box');
 define('CT_FEATURED_PRODUCTS_SORT_ORDER', 'Sortierung der empfohlenen Produkte');
@@ -903,8 +903,8 @@ define('CD_FEATURED_LINE_THICKNESS', 'Geben Sie die Stärke der senkrechten Trenn
 define('CT_FEATURED_LINE_COLOR', 'Farbe der senkrechten Trennlinie bei Produkten');
 define('CD_FEATURED_LINE_COLOR', 'Geben Sie die Farbe der senkrechten Trennlinie an.<br><br>Geben Sie eine sechsstellige hexadezimale Zahl ein oder wählen Sie eine Farbe aus der Palette.<br>');
 
-define('CT_FEATURED_MANUFACTURERS_DISPLAY', '<b>Empfohlene Hersteller anzeigen</b>');
-define('CD_FEATURED_MANUFACTURERS_DISPLAY', 'Empfohlene Hersteller anzeigen?');
+define('CT_FEATURED_MANUFACTURERS_DISPLAY', '<b>Empfohlene Hersteller anzeigen?</b>');
+define('CD_FEATURED_MANUFACTURERS_DISPLAY', 'Möchten Sie die Empfohlenen Hersteller anzeigen?');
 define('CT_FEATURED_MANUFACTURERS_POSITION', 'Layoutposition der empfohlenen Hersteller');
 define('CD_FEATURED_MANUFACTURERS_POSITION', '1= Oben<br>2= Oben mittig<br>3= Unten mittig<br>4= Unten<br>');
 define('CT_MAX_DISPLAY_FEATURED_MANUFACTURERS', 'Höchstanzahl der empfohlenen Hersteller');
@@ -959,8 +959,8 @@ define('CD_MANUFACTURER_LINE_THICKNESS', 'Sets the thickness of the separator li
 define('CT_MANUFACTURER_LINE_COLOR', 'Manufacturer with products separator line color');
 define('CD_MANUFACTURER_LINE_COLOR', 'Sets the color of the lines.<br><br>Enter a six digit hex number or click Pick Color to select one from a pallet.<br>');
 
-define('CT_FEATURED_CATEGORIES_DISPLAY', '<b>Display featured categories</b>');
-define('CD_FEATURED_CATEGORIES_DISPLAY', 'Show featured categories?');
+define('CT_FEATURED_CATEGORIES_DISPLAY', '<b>Empfohlene Kategorien anzeigen?</b>');
+define('CD_FEATURED_CATEGORIES_DISPLAY', 'Möchten Sie die Empfohlenen Kategorien anzeigen?');
 define('CT_FEATURED_CATEGORIES_POSITION', 'Layout position of featured categories');
 define('CD_FEATURED_CATEGORIES_POSITION', '1= Top<br>2= Top Middle<br>3= Bottom Middle<br>4= Bottom.<br>');
 define('CT_MAX_DISPLAY_FEATURED_CATEGORIES', 'Featured categories maximum');
@@ -1037,8 +1037,8 @@ define('CT_IE6_CHECK', 'Internet Explorer 6 prüfen?');
 define('CD_IE6_CHECK', 'Möchten Sie überprüfen, ob der Kunde IE6 verwendet und ihm ein Update seines Browsers vorschlagen?');
 
 // Configuration ID: 204 - SlideShow Settings
-define('CT_DISPLAY_SLIDESHOW', 'Enable Slideshow?');
-define('CD_DISPLAY_SLIDESHOW', 'Do you want to enable the slideshow?');
+define('CT_DISPLAY_SLIDESHOW', 'Diashow aktivieren?');
+define('CD_DISPLAY_SLIDESHOW', 'Möchten Sie die Diashow aktivieren?');
 define('CT_SLIDESHOW_WIDTH', 'Set Slideshow width');
 define('CD_SLIDESHOW_WIDTH', 'What width do you want your slideshow? (default: 640)');
 define('CT_SLIDESHOW_HEIGHT', 'Set Slideshow height');
@@ -1277,7 +1277,7 @@ define('CT_MODULE_SHIPPING_TABLE_MODE', 'Table Calculation Method');
 define('CD_MODULE_SHIPPING_TABLE_MODE', 'The shipping cost is based on the order total or the total weight of the items ordered.');
 
 // Shipping Module: zones.php
-define('CD_MODULE_SHIPPING_ZONE_COUNTRIES', 'Comma separated list of two character ISO country codes that are part of Zone');
-define('CD_MODULE_SHIPPING_ZONE_COST', 'Shipping rates to this Zone. Destinations based on a group of maximum order weights. Example: 3:8.50,7:10.50, ... Weights less than or equal to 3 would cost 8.50 for destinations in Zone');
-define('CD_MODULE_SHIPPING_ZONES_HANDLING', 'Handling Fee for this shipping zone');
+define('CD_MODULE_SHIPPING_ZONE_COUNTRIES', 'Kommaseparierte Liste der ISO Ländercodes, die Teil dieser Zone sind');
+define('CD_MODULE_SHIPPING_ZONE_COST', 'Versandkosten für diese Zone. Destinations based on a group of maximum order weights. Example: 3:8.50,7:10.50, ... Weights less than or equal to 3 would cost 8.50 for destinations in Zone');
+define('CD_MODULE_SHIPPING_ZONES_HANDLING', 'Bearbeitungsgebühr für diese Versandzone.');
 ?>

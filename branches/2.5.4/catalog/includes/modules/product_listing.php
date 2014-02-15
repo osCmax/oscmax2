@@ -63,6 +63,13 @@ $get_vars = '';
     }
 
 $listing_split = new splitPageResults($listing_sql, $max_results, 'p.products_id');
+
+if ($listing_split->number_of_rows > 0) {
+  $page_count = TEXT_PAGE . $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y')));
+} else {
+  $page_count = '';
+}
+
   if ( (PREV_NEXT_BAR_LOCATION == '1') || (PREV_NEXT_BAR_LOCATION == '3') ) {
 
 $list = '<table align="left"><tr><td width="20" align="center"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '"> ' . tep_image(DIR_WS_ICONS . 'list.png', TEXT_VIEW_AS_LIST) . '</a></td><td class="smallText"><a class="filterbox" href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('gridlist')). 'gridlist=list') . '">' . TEXT_VIEW_AS_LIST . '</a></td></tr></table>';
@@ -103,12 +110,6 @@ $grid = '<table align="left"><tr><td width="20" align="center"><a href="' . tep_
 		$filter .= $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS);
 	  }
 	} // end PRODUCT FILTER if
-
-if ($listing_split->number_of_rows > 0) {
-  $page_count = TEXT_PAGE . $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y')));
-} else {
-  $page_count = '';
-}
 
 $filterbox_left = '<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr><td class="smallText">' . $filter . '</td></tr><tr><td class="smallText">' . TEXT_RESULTS_PAGE . tep_draw_form('maxdisplay', tep_href_link(basename($PHP_SELF), '', $request_type, false), 'get') . $get_vars . (isset($_GET['sort']) ? tep_draw_hidden_field('sort', $_GET['sort']) : '') .  tep_draw_pull_down_menu('max', $max_display, $max_results, 'onChange="this.form.submit();"') . tep_hide_session_id().'</form></td></tr></table>';
 
@@ -469,7 +470,7 @@ if ($gridlist != 'list') {
         }
 		
       }
-      
+
 	  if ($gridlist == 'grid') {
 		// Grid View
         $lc_text = implode('<br>', $product_contents);

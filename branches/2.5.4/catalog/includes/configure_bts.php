@@ -151,7 +151,6 @@ function bts_select($template_type, $filename = '') {
        }
     break;
 
-
     case 'common':
     if (is_file(DIR_WS_TEMPLATES_BASE . $filename)) {
 	    $path = (DIR_WS_TEMPLATES_BASE . $filename);
@@ -165,6 +164,14 @@ function bts_select($template_type, $filename = '') {
 	    $path = DIR_WS_TEMPLATES . 'includes/languages/' . $language . '/' . $filename;
 	} else {
         $path = DIR_WS_INCLUDES . 'languages/' . $language . '/' . $filename;
+    }
+	break;
+	
+	case 'include':
+	if (is_file(DIR_WS_TEMPLATES . 'includes/' . $filename)) {
+	    $path = DIR_WS_TEMPLATES . 'includes/' . $filename;
+	} else {
+        $path = DIR_WS_INCLUDES . '/' . $filename;
     }
 	break;
 	

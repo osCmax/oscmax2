@@ -24,7 +24,7 @@ $Id$
 
     if ( ($column['cfgvalue'] == 'yes') && ($column['cfgcol'] == 'right')) {
       if ( file_exists(DIR_WS_BOXES . $column['cfgtitle'] . '.php') ) {
-        require(DIR_WS_BOXES . $column['cfgtitle'] . '.php');
+        require(bts_select('include', 'boxes/' . $column['cfgtitle'] . '.php'));
       } 
     }
   }

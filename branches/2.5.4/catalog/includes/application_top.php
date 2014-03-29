@@ -655,8 +655,8 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
   require(DIR_WS_CLASSES . 'split_page_results.php');
 
 // infobox
-  require(DIR_WS_CLASSES . 'boxes.php');
-
+  require(bts_select('include', 'classes/boxes.php'));
+  
 // auto activate and expire banners
   require(DIR_WS_FUNCTIONS . 'banner.php');
   tep_activate_banners();

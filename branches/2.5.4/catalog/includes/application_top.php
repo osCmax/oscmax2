@@ -137,7 +137,6 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
 // define general functions used application-wide
   require(DIR_WS_FUNCTIONS . 'general.php');
-  require(DIR_WS_FUNCTIONS . 'html_output.php');
 
 // set the cookie domain
   $cookie_domain = (($request_type == 'NONSSL') ? HTTP_COOKIE_DOMAIN : HTTPS_COOKIE_DOMAIN);
@@ -330,6 +329,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
 // LINE ADDED: MOD - BTS
   require(DIR_WS_INCLUDES . 'configure_bts.php');
+  require(bts_select('include', 'functions/html_output.php'));
   
 // include the language translations
   require(bts_select('language', 'core.php'));

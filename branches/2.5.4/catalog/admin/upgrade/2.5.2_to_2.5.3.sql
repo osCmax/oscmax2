@@ -94,7 +94,7 @@ CREATE TABLE `extra_fields_info`(
 
 /* Alter table in target */
 ALTER TABLE `information` 
-	ADD COLUMN `info_cg_hide` varchar(255) NULL after `language_id`;
+	ADD COLUMN `info_cg_hide` varchar(255) DEFAULT NULL after `language_id`;
 
 /* Alter table in target */
 ALTER TABLE `shipping_manifest` 

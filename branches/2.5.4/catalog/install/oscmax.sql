@@ -2808,7 +2808,7 @@ INSERT INTO customers_groups VALUES (0,'Retail','1','0','','');
 INSERT INTO customers_groups VALUES (1,'Wholesale','0','0','','');
 
 
-INSERT INTO db_version VALUES ('v2.5.1');
+INSERT INTO db_version VALUES ('v2.5.4');
 
 
 INSERT INTO languages VALUES (1,'English','en','icon.gif','english',1,'');

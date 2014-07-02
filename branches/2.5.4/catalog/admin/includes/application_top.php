@@ -29,7 +29,7 @@ $Id$
   require('includes/configure.php');
 
 // Define the project version
-  define('PROJECT_VERSION', 'osCmax v2.5.3');
+  define('PROJECT_VERSION', 'osCmax v2.5.4');
 
 // some code to solve compatibility issues
   require(DIR_WS_FUNCTIONS . 'compatibility.php');

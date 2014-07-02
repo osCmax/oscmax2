@@ -251,8 +251,32 @@ table {
 				<?php
 				break;
 
-				case 'v2.5.3':
-					  if (PROJECT_VERSION !== 'osCmax v2.5.3') { 
+			case 'v2.5.3':
+			     $file = fopen('upgrade/2.5.3_to_2.5.4.sql', 'r');
+			     ?>
+   			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+    				<td>Your current osCmax file set version is <strong><?php echo PROJECT_VERSION; ?></strong><br>To upgrade your database to osCmax v2.5.4, click the Upgrade button.</td>
+    			</tr>
+					<tr>
+						<td><br>Check to display sql output: <input type="checkbox" name="contents" value="1" /><br></td>
+					</tr>
+					<tr>
+					    <td>
+					    <br><strong>Before proceeding, please make a backup of your database.<br><br></strong>
+					    </td>
+					</tr>    
+				</table>
+				<button id="Button" type="submit" name="upgrade" value="upgrade">Upgrade</button>
+				</form>
+				<?php
+				break;
+
+
+
+				case 'v2.5.4':
+					  if (PROJECT_VERSION !== 'osCmax v2.5.4') { 
 					?>
 				<table border="0" width="100%" cellspacing="0" cellpadding="0">
 					<tr>

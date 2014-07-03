@@ -36,7 +36,7 @@ INSERT INTO configuration VALUES (2641, 'CT_SLIDESHOW_COMPRESSION', 'SLIDESHOW_C
 
 /* SYNC TABLE : db_version */
 
-UPDATE db_version SET database_version='v2.5.4u';
+UPDATE db_version SET database_version='v2.5.4';
 
 
 UPDATE configuration SET sort_order = 5,last_modified = now() WHERE configuration_id = 55;

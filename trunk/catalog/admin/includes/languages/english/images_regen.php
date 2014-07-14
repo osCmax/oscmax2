@@ -12,6 +12,7 @@ $Id$
 
 define('HEADING_TITLE', 'Product Image Management');
 define('TABLE_HEADING_PRODUCT_ID', 'ID');
+define('TABLE_HEADING_PRODUCT_MODEL', 'Model');
 define('TABLE_HEADING_PRODUCT_NAME', 'Product');
 define('TABLE_HEADING_PRODUCT_IMAGE', 'Image Name');
 define('TABLE_HEADING_MISSING_PRODUCT_IMAGE', 'Missing Image Name');

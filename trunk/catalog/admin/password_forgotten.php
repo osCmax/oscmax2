@@ -52,6 +52,12 @@ $Id$
       }
     }
   }
+  
+  if (isset($_GET['login']) && ($_GET['login'] == 'success') ) {
+    $success_message = TEXT_FORGOTTEN_SUCCESS;
+  } elseif (isset($_GET['login']) && ($_GET['login'] == 'fail') ) {
+    $info_message = TEXT_FORGOTTEN_ERROR;
+  }
 
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -60,101 +66,53 @@ $Id$
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <meta name="robots" content="noindex,nofollow">
 <title><?php echo TITLE; ?></title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/javascript/jquery-ui-1.8.9.custom.css">
 </head>
-<body onLoad="document.login.username.focus()">
+<script type="text/javascript">    
+document.write("\<script src='//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' type='text/javascript'>\<\/script>");
+document.write("\<script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js' type='text/javascript'>\<\/script>");
+</script>
+<body onLoad="document.login.username.focus()" style="background-image: url(images/icons/background.png)">
 
-<table border="0" width="600" cellspacing="0" cellpadding="0" align="center" style="height:100%;">
-  <tr valign="middle">
-    <td><table border="0" width="600" cellspacing="0" cellpadding="1" align="center" style="height:440;">
-      <tr bgcolor="#000000" valign="middle">
-        <td><table border="0" width="600" cellspacing="0" cellpadding="0" style="height:440;">
-          <tr bgcolor="#ffffff">
-            <td height="50"><?php echo '<a href="http://www.oscmax.com">' . tep_image(DIR_WS_ADMIN . DIR_WS_ICONS . 'logo.png', PROJECT_VERSION, '187', '54') . '</a>'; ?></td>
-            <td align="right" class="text" nowrap><?php echo '&nbsp;&nbsp;<a href="http://www.oscmax.com/" target="_blank" class="headerLink">' . HEADER_TITLE_AABOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://shop.oscmax.com" class="headerLink">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://wiki.oscdox.com" class="headerLink">Wiki</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?>&nbsp;&nbsp;</td>
-          </tr>
-          <tr bgcolor="#E7E7E7">
-            <td colspan="2" align="center" valign="middle">
-                <?php echo tep_draw_form('login', FILENAME_PASSWORD_FORGOTTEN, 'action=process'); ?>
-                            <table width="320" border="0" cellspacing="0" cellpadding="2">
-                              <tr>
-                                <td class="login_heading" valign="top">&nbsp;<b><?php echo HEADING_PASSWORD_FORGOTTEN; ?></b></td>
-                              </tr>
-                              <tr>
-                                <td width="100%" valign="top" align="center" style="height:100%">
-                                <table border="0" width="100%" cellspacing="0" cellpadding="1" bgcolor="#666666" style="height:100%; width:100%;">
-                                  <tr><td><table border="0" width="100%" cellspacing="3" cellpadding="2" bgcolor="#F3F3F3" style="height:100%;">
-
-<?php
-  if (isset($_GET['login']) && ($_GET['login'] == 'success') ) {
-    $success_message = TEXT_FORGOTTEN_SUCCESS;
-  } elseif (isset($_GET['login']) && ($_GET['login'] == 'fail') ) {
-    $info_message = TEXT_FORGOTTEN_ERROR;
-  }
-  if (tep_session_is_registered('password_forgotten')) {
-?>
-                                    <tr>
-                                      <td class="smallText"><?php echo TEXT_FORGOTTEN_FAIL; ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td align="center" valign="top"><?php echo '<a href="' . tep_href_link(FILENAME_LOGIN, '' , 'SSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
-                                    </tr>
-<?php
-  } elseif (isset($success_message)) {
-?>
-                                    <tr>
-                                      <td class="smallText"><?php echo $success_message; ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td align="center" valign="top"><?php echo '<a href="' . tep_href_link(FILENAME_LOGIN, '' , 'SSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
-                                    </tr>
-<?php
-  } else {
-    if (isset($info_message)) {
-?>
-                                    <tr>
-                                      <td colspan="2" class="smallText" align="center"><?php echo $info_message; ?><?php echo tep_draw_hidden_field('log_times', $log_times); ?></td>
-                                    </tr>
-<?php
-    } else {
-?>
-                                    <tr>
-                                      <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?><?php echo tep_draw_hidden_field('log_times', '0'); ?></td>
-                                    </tr>
-<?php
-    }
-?>                                    
-                                    <tr>
-                                      <td class="login" align="right"><?php echo ENTRY_USERNAME; ?></td>
-                                      <td class="login"><?php echo tep_draw_input_field('username'); ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="login" align="right"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
-                                      <td class="login"><?php echo tep_draw_input_field('email_address'); ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td colspan="2" align="right" valign="top"><?php echo '<a href="' . tep_href_link(FILENAME_LOGIN, '' , 'SSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a> ' . tep_image_submit('button_confirm.gif', IMAGE_BUTTON_LOGIN); ?>&nbsp;</td>
-                                    </tr>
-<?php
-  }
-?>   
-                                  </table></td></tr>
-                                </table>
-                                </td>
-                              </tr>
-                            </table>
-                          </form>
-
-            </td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php require(DIR_WS_INCLUDES . 'footer.php'); ?></td>
-      </tr>
-    </table></td>
-  </tr>
-</table>
+<div id="login_container">
+  <div id="login_panel">
+    <div id="login_header"><?php echo STORE_NAME; ?>
+      <span id="login_logo"><?php echo '<a href="http://www.oscmax.com">' . tep_image(DIR_WS_ADMIN . DIR_WS_ICONS . 'logo.png', PROJECT_VERSION, '187', '54') . '</a>'; ?></span>
+    </div>
+    <div id="login_links"><?php echo '&nbsp;&nbsp;<a href="http://www.oscmax.com/" target="_blank">' . HEADER_TITLE_AABOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://shop.oscmax.com">' . HEADER_TITLE_OSCDOX . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://wiki.oscdox.com">Wiki</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . HEADER_TITLE_ADMINISTRATION . '</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="' . tep_catalog_href_link() . '">' . HEADER_TITLE_ONLINE_CATALOG . '</a>'; ?></div>
+    <div id="login_body">
+      
+      <div id="login_input_container">
+        <?php echo tep_draw_form('login', FILENAME_PASSWORD_FORGOTTEN, 'action=process'); ?>
+        <?php
+		if (tep_session_is_registered('password_forgotten')) {
+		  echo '<div class="messageWarning">' . TEXT_FORGOTTEN_FAIL . '</div>';
+		} elseif (isset($success_message)) {
+		  echo '<div class="messageSuccess">' . $success_message . '</div>';	
+		} elseif (isset($info_message)) {
+		  echo '<div class="messageWarning">' . $info_message . '</div>';
+		  echo tep_draw_hidden_field('log_times', $log_times);
+	    } else {
+		  echo '<div class="login_spacer"></div>';
+		  echo tep_draw_hidden_field('log_times', '0');
+		}
+		?>
+        
+          <div class="login_text_holder"><?php echo ENTRY_USERNAME; ?></div>
+          <div class="login_input_holder"><?php echo tep_draw_input_field('username', '', ' class="login_input"'); ?></div>
+          <div class="login_text_holder"><?php echo ENTRY_EMAIL_ADDRESS; ?></div>
+	      <div class="login_input_holder"><?php echo tep_draw_input_field('email_address', '', ' class="login_input"'); ?></div>
+          <div class="password_forgotten">
+          <?php echo '<a href="' . tep_href_link(FILENAME_LOGIN, '' , 'SSL') . '"><button type="button" class="login_back" style="display:inline-block">Back</button></a>';?>
+          <button type="submit" class="login_button" style="float:right">Send password</button>
+          </div>
+          </form>
+      </div>
+    </div>
+  </div>
+  <div id="login_powered_by"><?php require(DIR_WS_INCLUDES . 'footer.php'); ?></div>
+</div>
 
 </body>
 

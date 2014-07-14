@@ -28,8 +28,8 @@ define('ENTRY_LASTNAME', 'Nachname:');
 
 define('TEXT_PASSWORD_FORGOTTEN', 'Passwort vergessen?');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>FEHLER:</b></font> Benutzername oder Passwort falsch!');
-define('TEXT_FORGOTTEN_ERROR', '<font color="#ff0000"><b>FEHLER:</b></font> Vorname und Passwort stimmen nicht überein!');
+define('TEXT_LOGIN_ERROR', 'Benutzername oder Passwort falsch!');
+define('TEXT_FORGOTTEN_ERROR', 'Benutzername oder und Passwort stimmen nicht überein!');
 define('TEXT_FORGOTTEN_FAIL', 'Sie mehr als dreimal versucht, sich anzumelden. Bitte fragen Sie Ihren Web Administrator aus Sicherheitsgründen nach einem neuen Passwort.<br>&nbsp;<br>&nbsp;');
 define('TEXT_FORGOTTEN_SUCCESS', 'Das neue Passwort wurde an Ihre E-Mail-Adresse versendet. Bitte prüfen Sie Ihre E-Mails und klicken Sie auf Zurück, um sich anzumelden.<br>&nbsp;<br>&nbsp;');
 

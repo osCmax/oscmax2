@@ -28,10 +28,10 @@ define('ENTRY_LASTNAME', 'Last Name:');
 
 define('TEXT_PASSWORD_FORGOTTEN', 'Password forgotten?');
 
-define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> Wrong username or password!');
-define('TEXT_FORGOTTEN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> first name and password not match!');
-define('TEXT_FORGOTTEN_FAIL', 'You have try over 3 times. For security reason, please contact your Web Administrator to get new password.<br>&nbsp;<br>&nbsp;');
-define('TEXT_FORGOTTEN_SUCCESS', 'The new password have sent to your email address. Please check your email and click back to login.<br>&nbsp;<br>&nbsp;');
+define('TEXT_LOGIN_ERROR', ' Wrong username or password!');
+define('TEXT_FORGOTTEN_ERROR', 'Your username or email are not recognised.');
+define('TEXT_FORGOTTEN_FAIL', 'You have tried over 3 times. For security reasons, please contact your Web Administrator to get new password.');
+define('TEXT_FORGOTTEN_SUCCESS', 'Your new password has been sent to your email address. Please check your email and click back to login.');
 
 define('ADMIN_EMAIL_SUBJECT', 'New Password');
 define('ADMIN_EMAIL_TEXT', 'Hi %s,' . "\n\n" . 'You can access the admin panel with the following password. Once you access the admin, please change your password!' . "\n\n" . 'Website : %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is an automated response, please do not reply!');

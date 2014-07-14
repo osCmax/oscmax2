@@ -81,7 +81,7 @@ $Id$
         </table>
       </td>
       <td width="50%" align="center">
-        <?php // include('includes/modules/dashboard/sales_summary.php'); ?>
+        <?php include('includes/modules/dashboard/review_checking.php'); ?>
       </td>
     </tr>
   </table>

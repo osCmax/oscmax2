@@ -153,6 +153,10 @@ document.write("\<script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jqu
 		$("#single_value3").toggle();
 		$("#single_value4").toggle();                                                
     });   
+	
+	setTimeout(function() { $('#timeoutwarning').slideDown(); }, (<?php echo $SESS_LIFE; ?>-120)*1000);
+	setTimeout(function() { window.location.replace("login.php?session_expired"); }, <?php echo $SESS_LIFE; ?>*1000);
+
    
 });
 
@@ -187,7 +191,7 @@ document.status.comments.value += newmessage;
   $my_userid_query = tep_db_query ("select a.admin_id, a.admin_username, g.admin_groups_name from " . TABLE_ADMIN . " a, " . TABLE_ADMIN_GROUPS . " g where a.admin_id= " . $login_id . " and g.admin_groups_id= " . $login_groups_id . "");
   $myLogin = tep_db_fetch_array($my_userid_query);
 ?>
-
+<div id="timeoutwarning" class="messageStackAlert" style="display:none;"><?php echo tep_image(DIR_WS_ICONS . 'warning.gif', ICON_WARNING) . '&nbsp;' .  TEXT_SESSION_EXPIRE_WARNING; ?></div>
 <table border="0" width="100%" cellspacing="0" cellpadding="0" bgcolor="#F0F1F1">
 <tr valign="top">
   <td width="33%" align="left"><a href="http://www.oscmax.com/" target="_blank" class="header"><?php echo tep_image(DIR_WS_ADMIN . DIR_WS_ICONS . 'logo.png'); ?></a></td>

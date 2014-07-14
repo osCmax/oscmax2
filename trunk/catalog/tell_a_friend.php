@@ -38,7 +38,11 @@ $Id$
 //if ($valid_product == false) {
 //  tep_redirect(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id']));
   $valid_article = false;
-  if (isset($_GET['articles_id'])) {
+  
+  $_artid = isset($_GET['articles_id']) ? $_GET['articles_id'] : (isset($_POST['articles_id']) ? $_POST['articles_id'] : null);
+  $_GET['articles_id'] = $_artid;
+  
+  if (isset($_artid )) {
     $article_info_query = tep_db_query("select pd.articles_name from " . TABLE_ARTICLES . " p, " . TABLE_ARTICLES_DESCRIPTION . " pd where p.articles_status = '1' and p.articles_id = '" . (int)$_GET['articles_id'] . "' and p.articles_id = pd.articles_id and pd.language_id = '" . (int)$languages_id . "'");
     if (tep_db_num_rows($article_info_query)) {
       $valid_article = true;

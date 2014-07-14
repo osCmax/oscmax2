@@ -133,7 +133,7 @@ $(document).ready(function(){
               <td class="smallText" align="right"><?php echo ENTRY_REVIEW_TEXT; ?></td>
             </tr>
             <tr>
-              <td class="main"><?php echo TEXT_CUSTOMER_RATING . '<br>' . tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'icons/stars_' . $rInfo->reviews_rating . '.gif'); ?></td>
+              <td class="main"><?php echo TEXT_CUSTOMER_RATING . '<br>' . tep_image(DIR_WS_CATALOG_IMAGES . 'icons/stars_' . $rInfo->reviews_rating . '.gif'); ?></td>
             </tr>
             <tr>
               <td class="main"><?php echo TEXT_RATING; ?><span id="stars-cap"></span><div id="stars-wrapper">
@@ -300,7 +300,7 @@ $(document).ready(function(){
         if (tep_not_null($rInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($rInfo->last_modified));
 		$contents[] = array('align' => 'center', 'text' => '<br>' . tep_image(DIR_WS_CATALOG_IMAGES . DYNAMIC_MOPICS_THUMBS_DIR . $rInfo->products_image, $rInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT));
         $contents[] = array('text' => '<br>' . TEXT_INFO_REVIEW_AUTHOR . ' ' . $rInfo->customers_name);
-        $contents[] = array('text' => TEXT_INFO_REVIEW_RATING . ' ' . tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'icons/stars_' . $rInfo->reviews_rating . '.gif'));
+        $contents[] = array('text' => TEXT_INFO_REVIEW_RATING . ' ' . tep_image(DIR_WS_CATALOG_IMAGES . 'icons/stars_' . $rInfo->reviews_rating . '.gif'));
         $contents[] = array('text' => TEXT_INFO_REVIEW_READ . ' ' . $rInfo->reviews_read);
         $contents[] = array('text' => '<br>' . TEXT_INFO_REVIEW_SIZE . ' ' . $rInfo->reviews_text_size . ' bytes');
         $contents[] = array('text' => '<br>' . TEXT_INFO_REVIEW_RATING . ' ' . number_format($rInfo->average_rating, 2) . '%');

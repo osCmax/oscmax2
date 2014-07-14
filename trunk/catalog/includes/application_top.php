@@ -43,7 +43,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 
 // define the project version
-  define('PROJECT_VERSION', 'osCmax v2.5.3');
+  define('PROJECT_VERSION', 'osCmax v2.5.4');
 
 // some code to solve compatibility issues
   require(DIR_WS_FUNCTIONS . 'compatibility.php');
@@ -137,7 +137,6 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
 // define general functions used application-wide
   require(DIR_WS_FUNCTIONS . 'general.php');
-  require(DIR_WS_FUNCTIONS . 'html_output.php');
 
 // set the cookie domain
   $cookie_domain = (($request_type == 'NONSSL') ? HTTP_COOKIE_DOMAIN : HTTPS_COOKIE_DOMAIN);
@@ -296,7 +295,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   require(DIR_WS_CLASSES . 'email.php');
 
 // set the language
-  if (!tep_session_is_registered('language') || isset($_GET['language'])) {
+  if (!tep_session_is_registered('language') || isset($_GET['language']) || strlen(trim($_SESSION['language'])) <1 ) {
     if (!tep_session_is_registered('language')) {
       tep_session_register('language');
       tep_session_register('languages_id');
@@ -330,6 +329,7 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
 
 // LINE ADDED: MOD - BTS
   require(DIR_WS_INCLUDES . 'configure_bts.php');
+  require(bts_select('include', 'functions/html_output.php'));
   
 // include the language translations
   require(bts_select('language', 'core.php'));
@@ -655,8 +655,8 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
   require(DIR_WS_CLASSES . 'split_page_results.php');
 
 // infobox
-  require(DIR_WS_CLASSES . 'boxes.php');
-
+  require(bts_select('include', 'classes/boxes.php'));
+  
 // auto activate and expire banners
   require(DIR_WS_FUNCTIONS . 'banner.php');
   tep_activate_banners();

@@ -14,7 +14,11 @@ $Id$
   define('FILENAME_PAYPAL_WPP_3DS', 'paypal_wpp_3ds.php');
   
   include(DIR_FS_CATALOG . DIR_WS_INCLUDES . 'modules/payment/paypal_wpp.php');
-  include(DIR_WS_INCLUDES . 'paypal_wpp/languages/' . $language . '/paypal_wpp.php');
+  if (is_file(DIR_WS_INCLUDES . 'paypal_wpp/languages/' . $language . '/paypal_wpp.php')) {
+    include(DIR_WS_INCLUDES . 'paypal_wpp/languages/' . $language . '/paypal_wpp.php');
+  } else {
+    include(DIR_WS_INCLUDES . 'paypal_wpp/languages/english/paypal_wpp.php');
+  }
   
   /* Database Define */
   define('TABLE_ORDERS_STATUS_HISTORY_TRANSACTIONS', 'orders_status_history_transactions');

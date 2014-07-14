@@ -18,7 +18,7 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
     switch ($action) {
 		
 	  case 'setflag': 
-        if (($_GET['flag'] == 'no') || ($_GET['flag'] == 'yes')) {
+        if (($_GET['flag'] == '0') || ($_GET['flag'] == '1')) {
           if ($_GET['tID']) {
             tep_db_query("update " . TABLE_PM_CONFIGURATION . " set pm_active = '" . $_GET['flag'] . "' where pm_id = '" . $_GET['tID'] . "'");
           }
@@ -128,10 +128,10 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
                 <td class="dataTableContent"><?php echo $links['pm_page']; ?></td>               
                 <td class="dataTableContent" align="center">
 					<?php
-                          if ($links['pm_active'] == 'yes') {
-                            echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&amp;flag=no&amp;page=' . $_GET['page'] . '&amp;tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
+                          if ($links['pm_active'] == '1') {
+                            echo tep_image(DIR_WS_ICONS .  'icon_status_green.gif', IMAGE_ICON_STATUS_GREEN, 10, 10) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&amp;flag=0&amp;page=' . $_GET['page'] . '&amp;tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_red_light.gif', IMAGE_ICON_STATUS_RED_LIGHT, 10, 10) . '</a>';
                           } else {
-                            echo '<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&amp;flag=yes&amp;page=' . $_GET['page'] . '&amp;tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
+                            echo '<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'action=setflag&amp;flag=1&amp;page=' . $_GET['page'] . '&amp;tID=' . $links['pm_id']) . '">' . tep_image(DIR_WS_ICONS . 'icon_status_green_light.gif', IMAGE_ICON_STATUS_GREEN_LIGHT, 10, 10) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_ICONS . 'icon_status_red.gif', IMAGE_ICON_STATUS_RED, 10, 10);
                           }
                     ?>
 				</td>
@@ -174,7 +174,7 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
       $contents[] = array('text' => '<br>' . TEXT_PM_TITLE . '<br>' . tep_draw_input_field('pm_title'));
       $contents[] = array('text' => '<br>' . TEXT_PM_FILENAME . '<br>' . tep_draw_input_field('pm_filename', ''));
 	  $contents[] = array('text' => '<br>' . TEXT_PM_PAGE . '<br>' . tep_draw_input_field('pm_page', 'index'));
-	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_select_option(array('yes', 'no'), pm_active, $trInfo->pm_active));
+	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_select_option(array('1', '0'), pm_active, $trInfo->pm_active));
 	  $contents[] = array('text' => '<br>' . TEXT_PM_CG_HIDE . '<br>' . tep_draw_input_field('pm_cg_hide', ''));
       $contents[] = array('text' => '<br>' . TEXT_PM_SORT_ORDER . '<br>' . tep_draw_input_field('pm_sort_order'));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_insert.gif', IMAGE_INSERT) . '&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
@@ -188,7 +188,7 @@ $Id: page_modules_configuration.php 3 2010-03-31 user pgm
       $contents[] = array('text' => '<br>' . TEXT_PM_TITLE . '<br>' . tep_draw_input_field('pm_title', $trInfo->pm_title));		
 	  $contents[] = array('text' => '<br>' . TEXT_PM_FILENAME . '<br>' . tep_draw_input_field('pm_filename', $trInfo->pm_filename));
       $contents[] = array('text' => '<br>' . TEXT_PM_PAGE . '<br>' . tep_draw_input_field('pm_page', $trInfo->pm_page));
-	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_select_option(array('yes', 'no'), pm_active, $trInfo->pm_active));
+	  $contents[] = array('text' => '<br>' . TEXT_PM_ACTIVE . '<br>' . tep_select_option(array('1', '0'), pm_active, $trInfo->pm_active));
 	  $contents[] = array('text' => '<br>' . TEXT_PM_CG_HIDE . '<br>' . tep_draw_input_field('pm_cg_hide', $trInfo->pm_cg_hide));
       $contents[] = array('text' => '<br>' . TEXT_PM_SORT_ORDER . '<br>' . tep_draw_input_field('pm_sort_order', $trInfo->pm_sort_order));
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . tep_href_link(FILENAME_PM_CONFIGURATION, 'page=' . $_GET['page'] . '&amp;tID=' . $trInfo->pm_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');

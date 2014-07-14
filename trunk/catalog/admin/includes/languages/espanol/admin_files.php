@@ -25,6 +25,7 @@ define('TEXT_COUNT_FILES', 'Fichero(s): ');
 define('TEXT_INFO_HEADING_DEFAULT_BOXES','Menús:');
 
 define('TEXT_INFO_DEFAULT_BOXES_INTRO', 'Simplemente pulsa sobre el boton verde para instalar el menú o el botón rojo para desinstalarlo.<br><br><b>AVISO:</b> Si desinstalas un menú, los ficheros incluidos en él también se quitarán.');
+define('TEXT_INFO_NEW_FILE_ADDITIONAL', 'If you need to add a parameter to the URL please enter it here.  (Don\'t forget to put the preceeding question mark in the string.)');
 define('TEXT_INFO_DEFAULT_BOXES_INSTALLED', ' instalado');
 define('TEXT_INFO_DEFAULT_BOXES_NOT_INSTALLED', ' no instalado');
 

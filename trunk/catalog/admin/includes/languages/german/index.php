@@ -128,4 +128,11 @@ define('WARNING_PHP_FILES_IN_THUMBS', 'Warnung: Es befinden sich Dateien in ' . 
 define('DASHBOARD_AFFILIATE_EMAIL_ERROR', 'Warnung: Die Affiliate Infobox ist in Ihrem Shop aktiviert, aber Sie haben die Standard-E-Mail-Adresse nicht geändert. Bitte <u><a href="' . tep_href_link(FILENAME_INFOBOX_CONFIGURATION, 'gID=1&amp;cID=28', 'NONSSL') . '">deaktivieren Sie dieses Modul</a></u>, oder <u><a href="' . tep_href_link(FILENAME_CONFIGURATION, 'gID=35&amp;cID=1204&amp;action=edit', 'NONSSL') . '"> ändern Sie die E-Mail-Adresse</a></u>.');
 
 define('SET_DEFAULT', 'Standardmäßiger Tab:');
+
+define('DASHBOARD_REVIEWS', 'Produkt- und Artilelbewertungen');
+define('DASHBOARD_REVIEW_COMPLETE', 'Es existieren keine freizugebenden Bewertungen.');
+define('DASHBOARD_REVIEWS_PRODUCTS_OPEN', 'Geben Sie %s neue Produktbewertungen frei oder löschen Sie diese..');
+define('DASHBOARD_REVIEWS_ARTICLES_OPEN', 'Geben Sie %s neue Artikelbewertungen frei oder löschen Sie diese.');
+define('DASHBOARD_GOTO_PRODUCT_REVIEWS', 'Zu den Produktbewertungen');
+define('DASHBOARD_GOTO_ARTICLE_REVIEWS', 'Zu den Artikelbewertungen');
 ?>

@@ -656,8 +656,8 @@ CREATE TABLE customers_notes (
 
 DROP TABLE IF EXISTS customers_wishlist;
 CREATE TABLE `customers_wishlist` (
-  `products_id` tinytext NOT NULL,
-  `customers_id` int(13) NOT NULL default '0'
+  `products_id` int(11) NOT NULL,
+  `customers_id` int(11) NOT NULL default '0'
 );
 
 
@@ -665,7 +665,7 @@ DROP TABLE IF EXISTS customers_wishlist_attributes;
 CREATE TABLE `customers_wishlist_attributes` (
   `customers_wishlist_attributes_id` int(11) NOT NULL auto_increment,
   `customers_id` int(11) NOT NULL default '0',
-  `products_id` tinytext NOT NULL,
+  `products_id` int(11) NOT NULL,
   `products_options_id` int(11) NOT NULL default '0',
   `products_options_value_id` int(11) NOT NULL default '0',
   PRIMARY KEY (`customers_wishlist_attributes_id`)
@@ -902,6 +902,22 @@ CREATE TABLE orders_status_history (
   comments text,
   PRIMARY KEY (orders_status_history_id),
   KEY idx_orders_status_history_orders_id (orders_id)
+);
+
+DROP TABLE IF EXISTS orders_status_history_transactions;
+CREATE TABLE orders_status_history_transactions (
+  orders_status_history_id int(11) NOT NULL,
+  transaction_id varchar(64) NOT NULL,
+  transaction_type varchar(32) NOT NULL,
+  payment_type varchar(32) NOT NULL,
+  payment_status varchar(32) NOT NULL,
+  transaction_amount decimal(7,2) NOT NULL,
+  module_code varchar(32) NOT NULL,
+  transaction_avs varchar(64) NOT NULL,
+  transaction_cvv2 varchar(64) NOT NULL,
+  transaction_msgs varchar(255) NOT NULL,
+  PRIMARY KEY (orders_status_history_id),
+  KEY transaction_id (transaction_id)
 );
 
 DROP TABLE IF EXISTS orders_total;
@@ -1488,7 +1504,7 @@ CREATE TABLE IF NOT EXISTS pm_configuration (
   pm_title varchar(255) NOT NULL,
   pm_description varchar(255) NOT NULL,
   pm_filename varchar(255) NOT NULL,
-  pm_active varchar(255) NOT NULL,
+  pm_active tinyint(1) NOT NULL default '1',
   pm_page varchar(255) NOT NULL,
   pm_cg_hide varchar(255) NOT NULL,
   pm_sort_order int(11) NOT NULL,
@@ -1903,19 +1919,25 @@ INSERT INTO configuration VALUES (53, 'CT_MAX_DISPLAY_ORDER_HISTORY', 'MAX_DISPL
 INSERT INTO configuration VALUES (54, 'CT_MAX_QTY_IN_CART', 'MAX_QTY_IN_CART', '99', 'CD_MAX_QTY_IN_CART', '3', '19', NULL, now(), NULL, NULL);
 
 # Configuration ID: 4 - Images
-INSERT INTO configuration VALUES (55, 'CT_SMALL_IMAGE_WIDTH', 'SMALL_IMAGE_WIDTH', '120', 'CD_SMALL_IMAGE_WIDTH', '4', '2', NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (56, 'CT_SMALL_IMAGE_HEIGHT', 'SMALL_IMAGE_HEIGHT', '', 'CD_SMALL_IMAGE_HEIGHT', '4', '3', NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (57, 'CT_HEADING_IMAGE_WIDTH', 'HEADING_IMAGE_WIDTH', '100', 'CD_HEADING_IMAGE_WIDTH', '4', '4', NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (58, 'CT_HEADING_IMAGE_HEIGHT', 'HEADING_IMAGE_HEIGHT', '', 'CD_HEADING_IMAGE_HEIGHT', '4', '5', NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (59, 'CT_SUBCATEGORY_IMAGE_WIDTH', 'SUBCATEGORY_IMAGE_WIDTH', '100', 'CD_SUBCATEGORY_IMAGE_WIDTH', '4', '6', NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (60, 'CT_SUBCATEGORY_IMAGE_HEIGHT', 'SUBCATEGORY_IMAGE_HEIGHT', '57', 'CD_SUBCATEGORY_IMAGE_HEIGHT', '4', '7', NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (61, 'CT_CONFIG_CALCULATE_IMAGE_SIZE', 'CONFIG_CALCULATE_IMAGE_SIZE', 'true', 'CD_CONFIG_CALCULATE_IMAGE_SIZE', '4', '8', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (55, 'CT_SMALL_IMAGE_WIDTH', 'SMALL_IMAGE_WIDTH', '120', 'CD_SMALL_IMAGE_WIDTH', '4', '5', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (56, 'CT_SMALL_IMAGE_HEIGHT', 'SMALL_IMAGE_HEIGHT', '', 'CD_SMALL_IMAGE_HEIGHT', '4', '6', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (57, 'CT_HEADING_IMAGE_WIDTH', 'HEADING_IMAGE_WIDTH', '100', 'CD_HEADING_IMAGE_WIDTH', '4', '8', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (58, 'CT_HEADING_IMAGE_HEIGHT', 'HEADING_IMAGE_HEIGHT', '', 'CD_HEADING_IMAGE_HEIGHT', '4', '9', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (59, 'CT_SUBCATEGORY_IMAGE_WIDTH', 'SUBCATEGORY_IMAGE_WIDTH', '100', 'CD_SUBCATEGORY_IMAGE_WIDTH', '4', '10', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (60, 'CT_SUBCATEGORY_IMAGE_HEIGHT', 'SUBCATEGORY_IMAGE_HEIGHT', '', 'CD_SUBCATEGORY_IMAGE_HEIGHT', '4', '11', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (61, 'CT_CONFIG_CALCULATE_IMAGE_SIZE', 'CONFIG_CALCULATE_IMAGE_SIZE', 'true', 'CD_CONFIG_CALCULATE_IMAGE_SIZE', '4', '4', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES (62, 'CT_CATEGORY_IMAGE_REQUIRED', 'CATEGORY_IMAGE_REQUIRED', 'true', 'CD_CATEGORY_IMAGE_REQUIRED', '4', '1', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (2103, 'CT_PRODUCT_IMAGE_REPLACE', 'PRODUCT_IMAGE_REPLACE', 'true', 'CD_PRODUCT_IMAGE_REPLACE', '4', '1', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
-INSERT INTO configuration VALUES (595, 'CT_PRODUCT_IMAGE_WIDTH', 'PRODUCT_IMAGE_WIDTH', '300', 'CD_PRODUCT_IMAGE_WIDTH', 4, 20, NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (596, 'CT_PRODUCT_IMAGE_HEIGHT', 'PRODUCT_IMAGE_HEIGHT', '', 'CD_PRODUCT_IMAGE_HEIGHT', 4, 21, NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (597, 'CT_POPUP_IMAGE_WIDTH', 'POPUP_IMAGE_WIDTH', '800', 'CD_POPUP_IMAGE_WIDTH', 4, 22, NULL, now(), NULL, NULL);
-INSERT INTO configuration VALUES (598, 'CT_POPUP_IMAGE_HEIGHT', 'POPUP_IMAGE_HEIGHT', '600', 'CD_POPUP_IMAGE_HEIGHT', 4, 23, NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (2103, 'CT_PRODUCT_IMAGE_REPLACE', 'PRODUCT_IMAGE_REPLACE', 'true', 'CD_PRODUCT_IMAGE_REPLACE', '4', '2', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (595, 'CT_PRODUCT_IMAGE_WIDTH', 'PRODUCT_IMAGE_WIDTH', '300', 'CD_PRODUCT_IMAGE_WIDTH', '4', '20', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (596, 'CT_PRODUCT_IMAGE_HEIGHT', 'PRODUCT_IMAGE_HEIGHT', '', 'CD_PRODUCT_IMAGE_HEIGHT', '4', '21', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (597, 'CT_POPUP_IMAGE_WIDTH', 'POPUP_IMAGE_WIDTH', '800', 'CD_POPUP_IMAGE_WIDTH', '4', '24', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (598, 'CT_POPUP_IMAGE_HEIGHT', 'POPUP_IMAGE_HEIGHT', '600', 'CD_POPUP_IMAGE_HEIGHT', '4', '25', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (600, 'CT_POPUP_IMAGE_RESIZE', 'POPUP_IMAGE_RESIZE', 'true', 'CD_POPUP_IMAGE_RESIZE', '4', '3', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
+INSERT INTO configuration VALUES (601, 'CT_SMALL_IMAGE_COMPRESSION', 'SMALL_IMAGE_COMPRESSION', '75', 'CD_SMALL_IMAGE_COMPRESSION', '4', '7', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (602, 'CT_SUBCATEGORY_IMAGE_COMPRESSION', 'SUBCATEGORY_IMAGE_COMPRESSION', '75', 'CD_SUBCATEGORY_IMAGE_COMPRESSION', '4', '12', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (603, 'CT_PRODUCT_IMAGE_COMPRESSION', 'PRODUCT_IMAGE_COMPRESSION', '80', 'CD_PRODUCT_IMAGE_COMPRESSION', '4', '22', NULL, now(), NULL, NULL);
+INSERT INTO configuration VALUES (604, 'CT_POPUP_IMAGE_COMPRESSION', 'POPUP_IMAGE_COMPRESSION', '85', 'CD_POPUP_IMAGE_COMPRESSION', '4', '26', NULL, now(), NULL, NULL);
+
 
 # Configuration ID: 5 - Customer Details
 INSERT INTO configuration VALUES (63, 'CT_ACCOUNT_GENDER', 'ACCOUNT_GENDER', 'false', 'CD_ACCOUNT_GENDER', '5', '1', NULL, now(), NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
@@ -2403,6 +2425,8 @@ INSERT INTO configuration VALUES (2637, 'CT_SLIDESHOW_THUMB_FONT_SIZE', 'SLIDESH
 INSERT INTO configuration VALUES (2638, 'CT_SLIDESHOW_THUMB_ACTIVE_BORDER_COLOR', 'SLIDESHOW_THUMB_ACTIVE_BORDER_COLOR', '#333333', 'CD_SLIDESHOW_THUMB_ACTIVE_BORDER_COLOR', 204, 22, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2639, 'CT_SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', 'SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', '#dddddd', 'CD_SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', 204, 23, now(), now(), NULL, NULL);
 INSERT INTO configuration VALUES (2640, 'CT_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 'SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', '#000000', 'CD_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 204, 24, now(), now(), NULL, NULL);
+INSERT INTO configuration VALUES (2641, 'CT_SLIDESHOW_COMPRESSION', 'SLIDESHOW_COMPRESSION', '85', 'CD_SLIDESHOW_COMPRESSION', 204, '25', NULL, now(), NULL, NULL);
+
 
 # Configuration ID: 205 - Corner Banners
 INSERT INTO configuration VALUES (2644, 'CT_CB_LAST_FEW', 'CB_LAST_FEW', 'true', 'CD_CB_LAST_FEW', 205, 1, now(), now(), NULL, 'tep_cfg_select_option(array(\'true\',\'false\'),');
@@ -2784,7 +2808,7 @@ INSERT INTO customers_groups VALUES (0,'Retail','1','0','','');
 INSERT INTO customers_groups VALUES (1,'Wholesale','0','0','','');
 
 
-INSERT INTO db_version VALUES ('v2.5.1');
+INSERT INTO db_version VALUES ('v2.5.4');
 
 
 INSERT INTO languages VALUES (1,'English','en','icon.gif','english',1,'');
@@ -2915,25 +2939,25 @@ INSERT INTO orders_premade_comments VALUES (1, 'Thank you for your custom', 'Tha
 INSERT INTO orders_premade_comments VALUES (2, 'Out of stock when ordered', 'Unfortunately, your item was out of stock when the order was placed. It will despatch as soon as we receive it.');
 
 #Page Module Controller
-INSERT INTO pm_configuration VALUES (1, 'Specials', 'Special Products Module', 'default_specials.php', 'yes', 'index', '', 4, now(), now());
-INSERT INTO pm_configuration VALUES (2, 'New Products', 'New Products Module', 'new_products.php', 'yes', 'index', '', 5, now(), now());
-INSERT INTO pm_configuration VALUES (3, 'Upcoming Products', 'Upcoming products module', 'upcoming_products.php', 'yes', 'index', '', 7, now(), now());
-INSERT INTO pm_configuration VALUES (4, 'Cross Sell Module', 'Cross Sell Module', 'xsell_products.php', 'yes', 'product_info', '', 1, now(), now());
-INSERT INTO pm_configuration VALUES (5, 'Also Purchased Module', 'Also Purchased Module', 'also_purchased_products.php', 'yes', 'product_info', '', 2, now(), now());
-INSERT INTO pm_configuration VALUES (6, 'Previous Next Module', 'Previous Next Module', 'products_next_previous.php', 'yes', 'product_info', '', 4, now(), now());
-INSERT INTO pm_configuration VALUES (7, 'Counter', '', 'counter.php', 'yes', 'all', '', 2, now(), now());
-INSERT INTO pm_configuration VALUES (8, 'Copyright', '', 'copyright.php', 'yes', 'all', '', 4, now(), now());
-INSERT INTO pm_configuration VALUES (9, 'Articles', '', 'index_articles.php', 'yes', 'index', '', 8, now(), now());
-INSERT INTO pm_configuration VALUES (10, 'Greeting', '', 'index_greeting.php', 'yes', 'index', '', 2, now(), now());
-INSERT INTO pm_configuration VALUES (11, 'Define Mainpage', '', 'index_define_mainpage.php', 'yes', 'index', '', 3, now(), now());
-INSERT INTO pm_configuration VALUES (12, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'index', '', 6, now(), now());
-INSERT INTO pm_configuration VALUES (13, 'Open Feature Sets', '', 'featured_sets.php', 'yes', 'product_info', '', 3, now(), now());
-INSERT INTO pm_configuration VALUES (14, 'Slideshow', '', 'slideshow.php', 'yes', 'index', '', 1, now(), now());
-INSERT INTO pm_configuration VALUES (15, 'New Products', '', 'new_products.php', 'yes', 'nested', '', 1, now(), now());
-INSERT INTO pm_configuration VALUES (16, 'Banner', '', 'banner_index.php', 'yes', 'index', '', 9, now(), now());
-INSERT INTO pm_configuration VALUES (17, 'Banner', '', 'banner_all.php', 'yes', 'all', '', 3, now(), now());
-INSERT INTO pm_configuration VALUES (18, 'Banner', '', 'banner_product.php', 'yes', 'product_info', '', 5, now(), now());
-INSERT INTO pm_configuration VALUES (19, 'Recently Viewed', '', 'recently_viewed_products.php', 'yes', 'all', '', 1, now(), now());
+INSERT INTO pm_configuration VALUES (1, 'Specials', 'Special Products Module', 'default_specials.php', '1', 'index', '', 4, now(), now());
+INSERT INTO pm_configuration VALUES (2, 'New Products', 'New Products Module', 'new_products.php', '1', 'index', '', 5, now(), now());
+INSERT INTO pm_configuration VALUES (3, 'Upcoming Products', 'Upcoming products module', 'upcoming_products.php', '1', 'index', '', 7, now(), now());
+INSERT INTO pm_configuration VALUES (4, 'Cross Sell Module', 'Cross Sell Module', 'xsell_products.php', '1', 'product_info', '', 1, now(), now());
+INSERT INTO pm_configuration VALUES (5, 'Also Purchased Module', 'Also Purchased Module', 'also_purchased_products.php', '1', 'product_info', '', 2, now(), now());
+INSERT INTO pm_configuration VALUES (6, 'Previous Next Module', 'Previous Next Module', 'products_next_previous.php', '1', 'product_info', '', 4, now(), now());
+INSERT INTO pm_configuration VALUES (7, 'Counter', '', 'counter.php', '1', 'all', '', 2, now(), now());
+INSERT INTO pm_configuration VALUES (8, 'Copyright', '', 'copyright.php', '1', 'all', '', 4, now(), now());
+INSERT INTO pm_configuration VALUES (9, 'Articles', '', 'index_articles.php', '1', 'index', '', 8, now(), now());
+INSERT INTO pm_configuration VALUES (10, 'Greeting', '', 'index_greeting.php', '1', 'index', '', 2, now(), now());
+INSERT INTO pm_configuration VALUES (11, 'Define Mainpage', '', 'index_define_mainpage.php', '1', 'index', '', 3, now(), now());
+INSERT INTO pm_configuration VALUES (12, 'Open Feature Sets', '', 'featured_sets.php', '1', 'index', '', 6, now(), now());
+INSERT INTO pm_configuration VALUES (13, 'Open Feature Sets', '', 'featured_sets.php', '1', 'product_info', '', 3, now(), now());
+INSERT INTO pm_configuration VALUES (14, 'Slideshow', '', 'slideshow.php', '1', 'index', '', 1, now(), now());
+INSERT INTO pm_configuration VALUES (15, 'New Products', '', 'new_products.php', '1', 'nested', '', 1, now(), now());
+INSERT INTO pm_configuration VALUES (16, 'Banner', '', 'banner_index.php', '1', 'index', '', 9, now(), now());
+INSERT INTO pm_configuration VALUES (17, 'Banner', '', 'banner_all.php', '1', 'all', '', 3, now(), now());
+INSERT INTO pm_configuration VALUES (18, 'Banner', '', 'banner_product.php', '1', 'product_info', '', 5, now(), now());
+INSERT INTO pm_configuration VALUES (19, 'Recently Viewed', '', 'recently_viewed_products.php', '1', 'all', '', 1, now(), now());
 
 
 #Fix for Articles to display if they are not in a topic

@@ -66,9 +66,11 @@ $Id$
 		    copy($root_images_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, $root_products_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext);
 	        copy($root_images_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, $root_thumbs_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext);
 	        // now lets resize them all to the correct dimensions
-			image_resize($root_images_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, POPUP_IMAGE_WIDTH, POPUP_IMAGE_HEIGHT, '100');
-            image_resize($root_products_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, '100');
-			image_resize($root_thumbs_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, '100');		
+			if (POPUP_IMAGE_RESIZE == 'true') { // only resize big image if asked
+			  image_resize($root_images_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, POPUP_IMAGE_WIDTH, POPUP_IMAGE_HEIGHT, POPUP_IMAGE_COMPRESSION);
+			}
+			image_resize($root_products_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, PRODUCT_IMAGE_COMPRESSION);
+			image_resize($root_thumbs_dir . ($dir ? $dir .'/' : '') . $base_image . '_' . $img . $ext, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, SMALL_IMAGE_COMPRESSION);		
 		  } else {
 			// set the image path in the database to include the $dir path if needed
 			$products_image_name =  ($dir ? $dir . '/' : '') . $products_image->filename;
@@ -76,9 +78,11 @@ $Id$
 			copy($root_images_dir . ($dir ? $dir .'/' : '') . $products_image->filename, $root_products_dir . ($dir ? $dir .'/' : '') . $products_image->filename);
 	        copy($root_images_dir . ($dir ? $dir .'/' : '') . $products_image->filename, $root_thumbs_dir . ($dir ? $dir .'/' : '') . $products_image->filename);
 			// and then resize them
-			image_resize($root_images_dir . ($dir ? $dir .'/' : '') . $products_image->filename, POPUP_IMAGE_WIDTH, POPUP_IMAGE_HEIGHT, '100');
-            image_resize($root_products_dir . ($dir ? $dir .'/' : '') . $products_image->filename, PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, '100');
-			image_resize($root_thumbs_dir . ($dir ? $dir .'/' : '') . $products_image->filename, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, '100');
+			if (POPUP_IMAGE_RESIZE == 'true') { // only resize big image if asked
+			  image_resize($root_images_dir . ($dir ? $dir .'/' : '') . $products_image->filename, POPUP_IMAGE_WIDTH, POPUP_IMAGE_HEIGHT, POPUP_IMAGE_COMPRESSION);
+			}
+			image_resize($root_products_dir . ($dir ? $dir .'/' : '') . $products_image->filename, PRODUCT_IMAGE_WIDTH, PRODUCT_IMAGE_HEIGHT, PRODUCT_IMAGE_COMPRESSION);
+			image_resize($root_thumbs_dir . ($dir ? $dir .'/' : '') . $products_image->filename, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, SMALL_IMAGE_COMPRESSION);
 		  }
 	    }
 	  }

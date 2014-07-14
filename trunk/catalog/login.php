@@ -30,6 +30,11 @@ $Id$
   //if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
 
   if ((isset($_GET['action']) && ($_GET['action'] == 'process')) || ((isset($_POST['action']) && ($_POST['action'] == 'process')))) {
+    // reset cart if using admin login
+	if (isset($_POST['admin'])) {
+      $cart->reset();
+      $wishList->reset();
+    }	  
 
   // EOF PHONE ORDER
     $email_address = tep_db_prepare_input($_POST['email_address']);

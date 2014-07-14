@@ -25,7 +25,7 @@ if (sizeof($featured_products_array) <> '0') {
     $the_categories_name = tep_db_fetch_array($the_categories_name_query);
     $featured_product_category_name = $the_categories_name['categories_name'];
   }
-  if ((FEATURED_SET_STYLE == '5') || (FEATURED_SET_STYLE == '6')) {
+  if ((FEATURED_SET_STYLE == '5') || (FEATURED_SET_STYLE == '6') || (FEATURED_SET_STYLE == '2') || (FEATURED_SET_STYLE == '4')) {
     $info_box_heading = array();
     $info_box_heading[] = array('text' => (!empty($featured_product_category_name)?$featured_product_category_name.' ':'') . OPEN_FEATURED_BOX_HEADING );
 
@@ -243,7 +243,7 @@ if (FEATURED_SET_SHOW_BUY_NOW_BUTTONS=='true') {
   }
   
   if ((FEATURED_SET_STYLE == '4') || (FEATURED_SET_STYLE == '6')) {
-    //echo '<img src="images/info_box_' . FEATURED_SET_STYLE_SHADOW . '_shadow.gif" width="100%" height="13" alt="">';
+    //echo '<img src="images/icons/info_box_' . FEATURED_SET_STYLE_SHADOW . '_shadow.gif" width="100%" height="13" alt="">';
   }
   
   echo tep_draw_separator('pixel_trans.gif', '100%', '10');

@@ -393,10 +393,10 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
        }
       echo '            <td class="dataTableContent" align="right" valign="top">' . tep_display_tax_value($order->products[$i]['tax']) . '%</td>' . "\n" .
   // EOF: Attributes Product Codes
-           '            <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->format($order->products[$i]['final_price'], true, $order->info['currency'], $order->info['currency_value']) . '</b></td>' . "\n" .
-           '            <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->format(tep_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax'], true), true, $order->info['currency'], $order->info['currency_value']) . '</b></td>' . "\n" .
-           '            <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->format($order->products[$i]['final_price'] * $order->products[$i]['qty'], true, $order->info['currency'], $order->info['currency_value']) . '</b></td>' . "\n" .
-           '            <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->format(tep_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax'], true) * $order->products[$i]['qty'], true, $order->info['currency'], $order->info['currency_value']) . '</b></td>' . "\n";
+           '            <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->display_price($order->products[$i]['final_price'], 0, 1, $order->info['currency']) . '</b></td>' . "\n" .
+           '            <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], 1, $order->info['currency']) . '</b></td>' . "\n" .
+           '            <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->display_price($order->products[$i]['final_price'], 0, $order->products[$i]['qty'], $order->info['currency']) . '</b></td>' . "\n" .
+           '            <td class="dataTableContent" align="right" valign="top"><b>' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty'], $order->info['currency']) . '</b></td>' . "\n";
       echo '          </tr>' . "\n";
     }
 ?>
@@ -466,7 +466,7 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
       	</tr>
 <?php
 //---PayPal WPP Modification START ---//
-    $orders_history_query = tep_db_query("select orders_status_history_id, orders_status_id, date_added, customer_notified, comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . tep_db_input($oID) . "' order by date_added");
+    //$orders_history_query = tep_db_query("select orders_status_history_id, orders_status_id, date_added, customer_notified, comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . tep_db_input($oID) . "' order by date_added");
 //---PayPal WPP Modification END ---//
 	} // end if
 ?>
@@ -477,10 +477,10 @@ if ( isset($_GET['q']) && $_GET['q']!="" ) { // query is set in address
             <td class="dataTableHeadingContent" width="150" align="center"><?php echo TABLE_HEADING_CUSTOMER_NOTIFIED; ?></td>
             <td class="dataTableHeadingContent" width="180"><?php echo TABLE_HEADING_STATUS; ?></td>
             <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_ORDER_COMMENTS; ?></td>
-            <td class="dataTableHeadingContent"></td>
+            <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_TRANSACTION_INFO; ?></td>
           </tr>
 <?php
-    $orders_history_query = tep_db_query("select orders_status_id, date_added, customer_notified, comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . tep_db_input($oID) . "' order by date_added");
+    $orders_history_query = tep_db_query("select orders_status_history_id, orders_status_id, date_added, customer_notified, comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . tep_db_input($oID) . "' order by date_added");
     if (tep_db_num_rows($orders_history_query)) {
       while ($orders_history = tep_db_fetch_array($orders_history_query)) {
         echo '          <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">' . "\n" .

@@ -25,6 +25,7 @@ define('TEXT_COUNT_FILES', 'Datei(en): ');
 define('TEXT_INFO_HEADING_DEFAULT_BOXES', 'Boxen: ');
 
 define('TEXT_INFO_DEFAULT_BOXES_INTRO', 'Klicken Sie einfach auf den grünen oder roten Button, um die Box zu entfernen.<br><br><b>Warnung:</b> Wenn Sie eine Box entfernen, werden alle enthaltenen Dateien ebenfalls entfernt!');
+define('TEXT_INFO_NEW_FILE_ADDITIONAL', 'If you need to add a parameter to the URL please enter it here.  (Don\'t forget to put the preceeding question mark in the string.)');
 define('TEXT_INFO_DEFAULT_BOXES_INSTALLED', ' installiert');
 define('TEXT_INFO_DEFAULT_BOXES_NOT_INSTALLED', ' nicht installiert');
 

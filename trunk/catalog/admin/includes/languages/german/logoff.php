@@ -12,6 +12,6 @@ $Id$
 
 define('HEADING_TITLE', 'Abmelden');
 define('NAVBAR_TITLE', 'Abmelden');
-define('TEXT_MAIN', 'Sie haben sich vom <b>Adminbereich</b> abgemeldet. Sie können Ihren Computer nun verlassen. Klicken Sie auf Zurück, um sich neu anzumelden.');
-define('TEXT_RELOGIN', 'Wieder anmelden');
+define('TEXT_MAIN', 'Sie haben sich vom Adminbereich abgemeldet. Sie können Ihren Computer nun verlassen. Klicken Sie auf Zurück, um sich neu anzumelden.');
+define('TEXT_RELOGIN', 'Neu anmelden');
 ?>

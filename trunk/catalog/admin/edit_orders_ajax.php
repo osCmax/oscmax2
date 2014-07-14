@@ -835,7 +835,7 @@ if (tep_db_num_rows($orders_history_query)) {
 		                if ($order->delivery['state']) {
 		                  $email_order .= $order->delivery['state'] . "\n";
 	                    }
-		$email_order .= $order->customer['postcode'] . "\n" .
+		$email_order .= $order->delivery['postcode'] . "\n" .
 						$order->delivery['country'] . "\n";
 	  }
 
@@ -853,7 +853,7 @@ if (tep_db_num_rows($orders_history_query)) {
 		                if ($order->billing['state']) {
 		                  $email_order .= $order->billing['state'] . "\n";
 	                    }
-		$email_order .= $order->customer['postcode'] . "\n" .
+		$email_order .= $order->billing['postcode'] . "\n" .
 						$order->billing['country'] . "\n\n";
 
 	    $email_order .= EMAIL_TEXT_PAYMENT_METHOD . "\n" . 

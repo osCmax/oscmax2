@@ -18,4 +18,7 @@ define('MODULE_SHIPPING_USPS_TEXT_DAYS', ' Days');
 define('MODULE_SHIPPING_USPS_TEXT_WEEKS', ' Weeks');
 define('MODULE_SHIPPING_USPS_TEXT_ESTIMATED', '---Approx. delivery time ');
 define('MODULE_SHIPPING_USPS_TEXT_INSURED', '---Insured for ');
+
+define('MODULE_SHIPPING_USPS_TEXT_WEIGHT_DISPLAY', 'Service ');
+define('MODULE_SHIPPING_USPS_TEXT_BUSINESS', '- ');
 ?>

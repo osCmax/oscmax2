@@ -16,6 +16,9 @@ $Id$
 .orderEdit { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #70d250; text-decoration: underline; }
 img { border: 0; border-collapse: collapse; }
 BODY { background: #ffffff; color: #000000; margin: 0px; }
+.page { background-image: url(images/page_background.png); background-repeat: repeat-y; background-position: center; }
+.closing_shadow { background-image: url(images/page_footer.png); background-position: center; height: 12px; background-repeat: no-repeat;}
+.page_footer { padding-top:10px; }
 
 A { color: #000000; text-decoration: none; }
 A:hover { color: #666666; text-decoration: underline; }

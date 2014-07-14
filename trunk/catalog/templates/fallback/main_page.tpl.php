@@ -98,7 +98,7 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_HEADER_OFF =='false'
 
  
 ?>
-
+<div class="page">
 <!-- Store width controller -->
 <table width="<?php echo STORE_WIDTH; ?>" cellspacing="0" cellpadding="0" align="<?php echo STORE_ALIGN; ?>">
 <tr><td>
@@ -266,6 +266,13 @@ if (DOWN_FOR_MAINTENANCE == 'false' or DOWN_FOR_MAINTENANCE_FOOTER_OFF =='false'
 </td></tr>
 </table>
 <!-- Store width controller -->
+</div>
+<div class="closing_shadow"></div>
+<div class="page_footer">
+      <!-- Page Module Controller -->
+        <?php include (DIR_WS_MODULES . FILENAME_FOOTER_PAGE_MODULES); ?>
+      <!-- Page Module Controller -->
+</div>
 
 <?php 
 if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exists for this page it will be loaded

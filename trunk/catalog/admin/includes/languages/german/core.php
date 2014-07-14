@@ -18,6 +18,9 @@ define('HEADER_TITLE_LOGOFF', 'Abmelden');
 // Admin Account
 define('BOX_HEADING_MY_ACCOUNT', 'Mein Konto');
 
+define('TEXT_SESSION_EXPIRE_WARNING', 'Achtung: Ihre Sitzung läuft in <b>2</b> Minuten ab.');
+define('TEXT_SESSION_EXPIRED', 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich neu an.');
+
 // configuration box text in includes/boxes/administrator.php
 define('BOX_HEADING_ADMINISTRATOR', 'Administrator');
 define('BOX_ADMINISTRATOR_MEMBERS', 'Verwaltungsmitglieder');

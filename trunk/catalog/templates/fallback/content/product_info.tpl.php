@@ -14,7 +14,9 @@ $Id$
 <?php echo tep_draw_hidden_field('products_id', (isset($_GET['products_id']) ? $_GET['products_id'] : '0')) . tep_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART, ' style="position: absolute; left: -1000px"'); // Bug fix: 378 ?>
 <?php
   if ($product_check['total'] < 1) {
-//  adapted for Separate Pricing Per Customer v4.2 2007/06/23, Hide products and categories from groups 2008/08/05
+    // tell browsers that the page is a 404
+	header( "HTTP/1.0 404 Not Found" ); 
+    //  adapted for Separate Pricing Per Customer v4.2 2007/06/23, Hide products and categories from groups 2008/08/05
 // BOF Separate Pricing Per Customer, Hide products and categories from groups
       $hide_product = true; // needed for column_right
 // EOF Separate Pricing Per Customer, Hide products and categories from groups

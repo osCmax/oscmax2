@@ -1,6 +1,8 @@
 $Id$
 
-osCmax v2.5.0 (Feb 2012)
+osCmax v2.5.4 2nd July 2014) 
+PG Marshall (cottonbarn@googlemail.com)
+Ridexbuilder http://ejsolutions.co.uk
 ==========================
 osCmax v2.5.0 e-commerce software is a combination and extension of of many of the most popular mods/contributions and osCommerce 2.2 MS2. 
 The credit for the actual mods goes solely to the original authors of those mods and the many people who update them. 

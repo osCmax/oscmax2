@@ -25,6 +25,7 @@ define('TEXT_COUNT_FILES', 'Fichier(s): ');
 define('TEXT_INFO_HEADING_DEFAULT_BOXES', 'Boites: ');
 
 define('TEXT_INFO_DEFAULT_BOXES_INTRO', 'Cliquez sur le bouton vert pour installer une boite ou sur le bouton rouge pour la d&eacute;sinstaller.<br><br><b>ATTENTION:</b> Si vous d&eacute;sinstallez une boite, tous les fichiers que contient cette boite seront effac&eacute;s!');
+define('TEXT_INFO_NEW_FILE_ADDITIONAL', 'If you need to add a parameter to the URL please enter it here.  (Don\'t forget to put the preceeding question mark in the string.)');
 define('TEXT_INFO_DEFAULT_BOXES_INSTALLED', ' install&eacute;');
 define('TEXT_INFO_DEFAULT_BOXES_NOT_INSTALLED', ' desinstall&eacute;');
 

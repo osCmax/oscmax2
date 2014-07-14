@@ -366,7 +366,7 @@ global $customer_group_id;
           $listing_sql .= " order by " . $new_products_sort . "final_price" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
 		case 'PRODUCT_LIST_BESTSELLER':
-          $listing_sql .= " order by " . $new_products_sort . "products_ordered" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
+          $listing_sql .= " order by " . $new_products_sort . "p.products_ordered" . ($sort_order == 'd' ? ' desc' : '') . ", pd.products_name";
           break;
       }
     }

@@ -39,7 +39,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
 		
 		if($_FILES['slideshow_image']['name'] != '') {
           if ($slideshow_image = new upload('slideshow_image', DIR_FS_CATALOG_IMAGES . 'slideshow/')) {
-            image_resize(DIR_FS_CATALOG_IMAGES . 'slideshow/' . $slideshow_image->filename, SLIDESHOW_WIDTH, SLIDESHOW_HEIGHT, '100');
+            image_resize(DIR_FS_CATALOG_IMAGES . 'slideshow/' . $slideshow_image->filename, SLIDESHOW_WIDTH, SLIDESHOW_HEIGHT, SLIDESHOW_COMPRESSION);
             tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_image = '" . $slideshow_image->filename . "' where slideshow_id = '" . (int)$slideshow_id . "'");
           }
         }
@@ -59,7 +59,7 @@ $Id: slideshow.php 3 2010-03-31 user pgm
 		
 		if($_FILES['slideshow_image']['name'] != '') {
           if ($slideshow_image = new upload('slideshow_image', DIR_FS_CATALOG_IMAGES . 'slideshow/')) {
-            image_resize(DIR_FS_CATALOG_IMAGES . 'slideshow/' . $slideshow_image->filename, SLIDESHOW_WIDTH, SLIDESHOW_HEIGHT, '100');
+            image_resize(DIR_FS_CATALOG_IMAGES . 'slideshow/' . $slideshow_image->filename, SLIDESHOW_WIDTH, SLIDESHOW_HEIGHT, SLIDESHOW_COMPRESSION);
             tep_db_query("update " . TABLE_SLIDESHOW . " set slideshow_image = '" . $slideshow_image->filename . "' where slideshow_id = '" . (int)$slideshow_id . "'");
           }
         }

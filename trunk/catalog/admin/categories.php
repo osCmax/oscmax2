@@ -289,7 +289,7 @@ $Id$
  	          $categories_image_name = $categories_image->filename;
  	          // BOF Image Resize
  	            require_once('includes/functions/image_resize.php');
- 	            image_resize(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image->filename, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT, '80');
+ 	            image_resize(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $categories_image->filename, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT, SUBCATEGORY_IMAGE_COMPRESSION);
  	          // EOF Image Resize
  	        } else { 
  	          $categories_image_name = $_POST['categories_previous_image'];
@@ -2316,7 +2316,7 @@ if(USE_PRODUCT_DESCRIPTION_TABS != 'True') {
 					<td valign="top" class="main">&nbsp;</td>
 				  </tr>
 				  <tr>
-					<td align="left" valign="top" class="smallText"><?php echo tep_draw_separator('pixel_trans.gif', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo '<img src=' . HTTP_CATALOG_SERVER . DIR_WS_CATALOG_LANGUAGES . $language . '/images/buttons/button_buy_now.gif>';?></td>
+					<td align="left" valign="top" class="smallText"><?php echo tep_draw_separator('pixel_trans.gif', '1', '5') . '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price); ?><br><?php echo tep_image_button('button_buy_now.gif'); ?></td>
 				  </tr>
 				</table>
 			  </td>
@@ -2632,14 +2632,14 @@ if (DISABLE_CATEGORY_DROPDOWN_SWITCH == 'false') {
       }
 
       if (isset($pInfo) && is_object($pInfo) && ($products['products_id'] == $pInfo->products_id) ) {
-        echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id'] . '&amp;action=new_product_preview&amp;read=only') . '\'">' . "\n";
+        echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id'] . '&amp;action=new_product') . '\'">' . "\n";
       } else {
         echo '              <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id']) . '\'">' . "\n";
       }
 ?>
-                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id'] . '&amp;action=new_product_preview&amp;read=only') . '">' . tep_image(DIR_WS_ICONS . 'page_white_text.png', ICON_PREVIEW) . '</a>&nbsp;' . $products['products_name']; ?></td>
+                <td class="dataTableContent"><?php echo '<a href="' . HTTP_CATALOG_SERVER . DIR_WS_CATALOG, 'product_info.php?products_id=' . $products['products_id'] . '" target="_blank">' . tep_image(DIR_WS_ICONS . 'page_white_text.png', ICON_PREVIEW) . '</a>&nbsp;' . $products['products_name']; ?></td>
 <?php // BOF add model number to listing ?>
-                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id'] . '&amp;action=new_product_preview&amp;read=only') . '">' . '</a>&nbsp;' . $products['products_model']  ; ?></td>
+                <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&amp;pID=' . $products['products_id'] . '&amp;action=new_product') . '">' . '</a>&nbsp;' . $products['products_model']  ; ?></td>
 <?php // EOF add model number to listing ?>
 <?php  //BOF SPPC hide products and categories from groups ?>
       <td class="dataTableContent" align="center"><?php

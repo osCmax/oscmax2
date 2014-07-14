@@ -185,6 +185,17 @@ define('CT_POPUP_IMAGE_WIDTH', 'Product Popup Image Width');
 define('CD_POPUP_IMAGE_WIDTH', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.');
 define('CT_POPUP_IMAGE_HEIGHT', 'Product Popup Image Height');
 define('CD_POPUP_IMAGE_HEIGHT', 'Limits the popup product image \(enlarged\) size during product updates. MUST specify.');
+define('CT_POPUP_IMAGE_RESIZE', 'Resize your large images when uploading or regenerating?');
+define('CD_POPUP_IMAGE_RESIZE', 'Do you want the system to resize your large images when you upload them and when you are using the image manager to regenerate your images? (default: false)');
+define('CT_SMALL_IMAGE_COMPRESSION', 'Small image phpThumb compression rate');
+define('CD_SMALL_IMAGE_COMPRESSION', 'Small image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 75)');
+define('CT_SUBCATEGORY_IMAGE_COMPRESSION', 'Subcategory image phpThumb compression rate');
+define('CD_SUBCATEGORY_IMAGE_COMPRESSION', 'Subcategory image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 75)');
+define('CT_PRODUCT_IMAGE_COMPRESSION', 'Product image phpThumb compression rate');
+define('CD_PRODUCT_IMAGE_COMPRESSION', 'Product image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 80)');
+define('CT_POPUP_IMAGE_COMPRESSION', 'Product Popup image phpThumb compression rate');
+define('CD_POPUP_IMAGE_COMPRESSION', 'Product Popup image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 85)');
+
 
 // Configuration ID: 5 - Customer Details
 define('CT_ACCOUNT_GENDER', 'Gender');
@@ -877,7 +888,7 @@ define('CD_DAYS_UNTIL_FEATURED_PRODUCTS', 'How many days do you want to add to t
 define('CT_FEATURED_SET', 'Choose a featured products set layout');
 define('CD_FEATURED_SET', '1= side by side<br>2= over under<br>3= image; price over under; description side<br>4= image; price over under');
 define('CT_FEATURED_SET_STYLE', 'Choose a featured products set style');
-define('CD_FEATURED_SET_STYLE', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed<br>5= boxed w/box header<br>6= shadowboxed w/box header');
+define('CD_FEATURED_SET_STYLE', '1= plain<br>2= boxed<br>3= lined<br>4= shadowboxed <em>(disabled)</em><br>5= boxed w/box header<br>6= shadowboxed w/box header <em>(disabled)</em>');
 define('CT_FEATURED_PRODUCTS_GROUPING', 'Choose a box grouping method');
 define('CD_FEATURED_PRODUCTS_GROUPING', 'gbox= grouped in one box<br>sbox= each product in separate box');
 define('CT_FEATURED_PRODUCTS_SORT_ORDER', 'Set the sort order for the feature products.');
@@ -1026,7 +1037,7 @@ define('CD_JAVASCRIPT_CHECK', 'Do you want to check if the customer has got java
 define('CT_IE6_CHECK', 'Check for Internet Explorer 6?');
 define('CD_IE6_CHECK', 'Do you want to check if the customer is using IE6 and ask them to upgrade their browser?');
 
-// Configuration ID: 204 - SlideShow Settings Corner Banners
+// Configuration ID: 204 - SlideShow Settings
 define('CT_DISPLAY_SLIDESHOW', 'Enable Slideshow?');
 define('CD_DISPLAY_SLIDESHOW', 'Do you want to enable the slideshow?');
 define('CT_SLIDESHOW_WIDTH', 'Set Slideshow width');
@@ -1077,6 +1088,8 @@ define('CT_SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', 'Active Thumbnail backgroun
 define('CD_SLIDESHOW_THUMB_ACTIVE_BACKGROUND_COLOR', 'What color would you like the background of the active thumbnail to be?');
 define('CT_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 'Active Thumbnail font color');
 define('CD_SLIDESHOW_THUMB_ACTIVE_FONT_COLOR', 'What color would you like the font of the active thumbnail to be?');
+define('CT_SLIDESHOW_COMPRESSION', 'Slideshow image phpThumb compression rate');
+define('CD_SLIDESHOW_COMPRESSION', 'Slideshow image phpThumb compression rate - the smaller the number the smaller the resultant image. (default: 85)');
 
 // Configuration ID: 205 - Corner Banners
 define('CT_CB_LAST_FEW', 'Last Few Remaining corner banner?');

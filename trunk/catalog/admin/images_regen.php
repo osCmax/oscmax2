@@ -333,6 +333,7 @@ function format_size($size) {
                   <table border="0" width="100%" cellspacing="0" cellpadding="2">
                     <tr class="dataTableHeadingRow">
                       <td class="dataTableHeadingContent" align="center" width="30"><?php echo TABLE_HEADING_PRODUCT_ID; ?></td>
+                      <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCT_MODEL; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_PRODUCT_NAME; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_MISSING_PRODUCT_IMAGE; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_IMAGE_FOLDER; ?></td>
@@ -342,11 +343,12 @@ function format_size($size) {
 				  // Checking Large Images
 				  if (count($missing_images_lg) > 0) {
                     foreach ($missing_images_lg as $id => $files) { 
-                    $product_query = tep_db_query("SELECT products_name FROM products_description WHERE products_id = '" . (int)$id . "' AND language_id = '" . ($language_id > 0 ? (int)$language_id : '1') . "'");
+                    $product_query = tep_db_query("SELECT pd.products_name, p.products_model FROM products_description pd, products p WHERE pd.products_id = '" . (int)$id . "' AND pd.products_id = p.products_id AND pd.language_id = '" . ($language_id > 0 ? (int)$language_id : '1') . "'");
                     $product = tep_db_fetch_array($product_query);
                   ?>
                     <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
                       <td class="dataTableContent" align="center" width="30"><?php echo $id; ?></td>
+                      <td class="dataTableContent"><?php echo $product['products_model']; ?></td>
                       <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $id . '&action=new_product') . '">' . $product['products_name']; ?></a></td>
                       <td class="dataTableContent">
                       <?php     
@@ -366,11 +368,12 @@ function format_size($size) {
 				  // Checking Medium Images
 				  if (count($missing_images_md) > 0) {
                     foreach ($missing_images_md as $id => $files) { 
-                    $product_query = tep_db_query("SELECT products_name FROM products_description WHERE products_id = '" . (int)$id . "' AND language_id = '" . ($language_id > 0 ? (int)$language_id : '1') . "'");
+                    $product_query = tep_db_query("SELECT pd.products_name, p.products_model FROM products_description pd, products p WHERE pd.products_id = '" . (int)$id . "' AND pd.products_id = p.products_id AND pd.language_id = '" . ($language_id > 0 ? (int)$language_id : '1') . "'");
                     $product = tep_db_fetch_array($product_query);
                   ?>
                     <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
                       <td class="dataTableContent" align="center" width="30"><?php echo $id; ?></td>
+                      <td class="dataTableContent"><?php echo $product['products_model']; ?></td>
                       <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $id . '&action=new_product') . '">' . $product['products_name']; ?></a></td>
                       <td class="dataTableContent">
                       <?php     
@@ -390,11 +393,12 @@ function format_size($size) {
 				  // Checking Small Images
 				  if (count($missing_images_sm) > 0) {
                     foreach ($missing_images_sm as $id => $files) { 
-                    $product_query = tep_db_query("SELECT products_name FROM products_description WHERE products_id = '" . (int)$id . "' AND language_id = '" . ($language_id > 0 ? (int)$language_id : '1') . "'");
+                    $product_query = tep_db_query("SELECT pd.products_name, p.products_model FROM products_description pd, products p WHERE pd.products_id = '" . (int)$id . "' AND pd.products_id = p.products_id AND pd.language_id = '" . ($language_id > 0 ? (int)$language_id : '1') . "'");
                     $product = tep_db_fetch_array($product_query);
                   ?>
                     <tr class="dataTableRow" onMouseOver="rowOverEffect(this)" onMouseOut="rowOutEffect(this)">
                       <td class="dataTableContent" align="center" width="30"><?php echo $id; ?></td>
+                      <td class="dataTableContent"><?php echo $product['products_model']; ?></td>
                       <td class="dataTableContent"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'pID=' . $id . '&action=new_product') . '">' . $product['products_name']; ?></a></td>
                       <td class="dataTableContent">
                       <?php     
@@ -844,7 +848,7 @@ function listDirectory($path) {
   @ini_set('max_execution_time', 3600);
   $handle = @opendir($path);
   while (false !== ($file = readdir($handle))) {
-    if ($file == '.' || $file == '..' || $file == '.svn') continue;
+    if ($file == '.' || $file == '..' || $file == '.svn' || $file == '.htaccess' || $file == 'index.php') continue;
 	  if ( is_dir("$path$file")) {  // Directory
         $source_bigimage = listDirectory("$path$file");
       } else {  // File
@@ -865,7 +869,7 @@ function listDirectory_onlymissing($path) {
   $regen_image_set_count = '0'; 
 
   while (false !== ($file = readdir($handle))) {
-    if ($file == '.' || $file == '..' || $file == '.svn') continue;
+    if ($file == '.' || $file == '..' || $file == '.svn' || $file == '.htaccess' || $file == 'index.php') continue;
 	  if ( is_dir("$path$file")) {  // Directory
         $source_bigimage = listDirectory("$path$file");
       } else {  // File

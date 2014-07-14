@@ -18,6 +18,9 @@ define('HEADER_TITLE_LOGOFF', 'Logoff');
 // Admin Account
 define('BOX_HEADING_MY_ACCOUNT', 'My Account');
 
+define('TEXT_SESSION_EXPIRE_WARNING', 'Warning - your session is going to expire in <b>2</b> minutes.');
+define('TEXT_SESSION_EXPIRED', 'Sorry your session expired - please log in again.');
+
 // configuration box text in includes/boxes/administrator.php
 define('BOX_HEADING_ADMINISTRATOR', 'Administrator');
 define('BOX_ADMINISTRATOR_MEMBERS', 'Admin Members');
@@ -290,7 +293,7 @@ define('BOX_CUSTOMERS_GROUPS', 'Customers Groups');
 define('BOX_HEADING_LOCATION_AND_TAXES', 'Locations / Taxes');
 define('BOX_TAXES_COUNTRIES', 'Countries');
 define('BOX_TAXES_ZONES', 'Zones');
-define('BOX_TAXES_GEO_ZONES', 'Tax Zones');
+define('BOX_TAXES_GEO_ZONES', 'Tax / Shipping Zones');
 define('BOX_TAXES_TAX_CLASSES', 'Tax Classes');
 define('BOX_TAXES_TAX_RATES', 'Tax Rates');
 

@@ -135,7 +135,7 @@ $Id$
                   </tr>
                   <tr>
                     <td class="main"><?php echo FORM_FIELD_FRIEND_EMAIL; ?></td>
-                    <td class="main"><?php echo tep_draw_input_field('friendemail', (($friendemail_error == true) ? $_POST['friendemail'] : $_GET['send_to'])); if ($friendemail_error == true) echo ENTRY_EMAIL_ADDRESS_CHECK_ERROR; ?></td>
+                    <td class="main"><?php echo tep_draw_input_field('friendemail', (($friendemail_error == true) ? $_POST['friendemail'] : $_GET['send_to']),'','email'); if ($friendemail_error == true) echo ENTRY_EMAIL_ADDRESS_CHECK_ERROR; ?></td>
                   </tr>
                 </table></td>
               </tr>

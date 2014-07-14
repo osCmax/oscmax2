@@ -3,7 +3,7 @@ $Id$
 Steps to upgrade osCmax
 =======================
 *****************************************************************************************************************
-*** Note: this only applies to upgrading osCmax v2.5 Beta3, osCmax v2.5 RC1, osCmax v2.5 RC2 to osCmax v2.5.0 ***
+*** Note: this only applies to upgrading osCmax v2.5 Beta3, osCmax v2.5 RC1, osCmax v2.5 RC2 to osCmax v2.5.0. Plus all 2.5.x releases up to this version ***
 *** To upgrade v2.0.25 to v2.5.0 see the documentation here: http://wiki.oscdox.com/v2.5/upgrade              ***
 *****************************************************************************************************************
 

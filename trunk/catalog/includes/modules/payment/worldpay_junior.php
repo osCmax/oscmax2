@@ -35,7 +35,7 @@
 
       if (is_object($order)) $this->update_status();
 
-      $this->form_action_url = 'https://secure.wp3.rbsworldpay.com/wcc/purchase';
+      $this->form_action_url = 'https://secure.worldpay.com/wcc/purchase';
     }
 
 // class methods

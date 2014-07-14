@@ -49,7 +49,7 @@ if (!tep_session_is_registered('customer_id')) {
  // $boxContent = '<table border="0" width="100%" cellspacing="0" cellpadding="0">';
  // $boxContent .= '<tr><td align="center" valign="top">';
 	$boxContent = tep_draw_form('login', tep_href_link(FILENAME_LOGIN, 'action=process', 'SSL'));
-	$boxContent .= BOX_LOGINBOX_EMAIL . '<br>' . tep_draw_input_field('email_address', '', 'size="10" maxlength="100" style="width: ' . ($box_width-30) . 'px"') . '<br>';
+	$boxContent .= BOX_LOGINBOX_EMAIL . '<br>' . tep_draw_input_field('email_address', '', 'size="10" maxlength="100" style="width: ' . ($box_width-30) . 'px"','email') . '<br>';
 	$boxContent .= BOX_LOGINBOX_PASSWORD . '<br>' . tep_draw_password_field('password', '', 'size="10" maxlength="40" style="width: ' . ($box_width-30) . 'px"') . '<br>';
 	$boxContent .= '<table width="100%"><tr><td align="center">' . tep_image_submit('button_login.gif', IMAGE_BUTTON_LOGIN) . '</td></tr></table>';
 	$boxContent .= '</form>';

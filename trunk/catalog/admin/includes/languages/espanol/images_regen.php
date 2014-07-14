@@ -12,6 +12,7 @@ $Id: images_regen.php 1011 2011-01-06 23:38:01Z michael.oscmax@gmail.com $
 
 define('HEADING_TITLE', 'Administrador de imágenes de producto');
 define('TABLE_HEADING_PRODUCT_ID', 'ID');
+define('TABLE_HEADING_PRODUCT_MODEL', 'Model');
 define('TABLE_HEADING_PRODUCT_NAME', 'Producto');
 define('TABLE_HEADING_PRODUCT_IMAGE', 'Nombre imagen');
 define('TABLE_HEADING_MISSING_PRODUCT_IMAGE', 'Nombre imagen perdida');

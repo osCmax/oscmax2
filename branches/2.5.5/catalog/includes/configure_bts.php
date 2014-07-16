@@ -175,6 +175,22 @@ function bts_select($template_type, $filename = '') {
     }
 	break;
 	
+	case 'class':
+	if (is_file(DIR_WS_TEMPLATES . 'includes/classes/' . $filename)) {
+	    $path = DIR_WS_TEMPLATES . 'includes/classes/' . $filename;
+	} else {
+        $path = DIR_WS_INCLUDES . '/classes/' . $filename;
+    }
+	break;
+	
+	case 'function':
+	if (is_file(DIR_WS_TEMPLATES . 'includes/functions/' . $filename)) {
+	    $path = DIR_WS_TEMPLATES . 'includes/functions/' . $filename;
+	} else {
+        $path = DIR_WS_INCLUDES . '/functions/' . $filename;
+    }
+	break;
+	
     default:
     // exit ('Error bts_select()! No template selected for template type: ');
     echo ('Error: bts_select()! No template selected for template type: ' . $template_type);

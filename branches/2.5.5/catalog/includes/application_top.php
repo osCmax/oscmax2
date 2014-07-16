@@ -282,11 +282,14 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
+// LINE ADDED: MOD - BTS
+  require(DIR_WS_INCLUDES . 'configure_bts.php');
+
 // BOF QPBPP for SPPC
   // include the price formatter classes for the price breaks contribution
-  require(DIR_WS_CLASSES . 'PriceFormatter.php');
+  require(bts_select('class', 'PriceFormatter.php'));
   $pf = new PriceFormatter;
-  require(DIR_WS_CLASSES . 'PriceFormatterStore.php');
+  require(bts_select('class', 'PriceFormatterStore.php'));
   $pfs = new PriceFormatterStore;
 // EOF QPBPP for SPPC
 
@@ -327,9 +330,8 @@ $HTTP_GET_VARS = $_GET; $HTTP_POST_VARS = $_POST;
   }
 // EOF: [TiM's osC Solutions] ISO-8859-1/UTF-8 dual support
 
-// LINE ADDED: MOD - BTS
-  require(DIR_WS_INCLUDES . 'configure_bts.php');
-  require(bts_select('include', 'functions/html_output.php'));
+
+  require(bts_select('function', 'html_output.php'));
   
 // include the language translations
   require(bts_select('language', 'core.php'));
@@ -642,32 +644,32 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
   } // if (isset($_GET['action']))
 
 // include the who's online functions
-  require(DIR_WS_FUNCTIONS . 'whos_online.php');
+  require(bts_select('function', 'whos_online.php'));
   tep_update_whos_online();
 
 // include the password crypto functions
-  require(DIR_WS_FUNCTIONS . 'password_funcs.php');
+  require(bts_select('function', 'password_funcs.php'));
 
 // include validation functions (right now only email address)
-  require(DIR_WS_FUNCTIONS . 'validations.php');
+  require(bts_select('function', 'validations.php'));
 
 // split-page-results
-  require(DIR_WS_CLASSES . 'split_page_results.php');
+  require(bts_select('class', 'split_page_results.php'));
 
 // infobox
-  require(bts_select('include', 'classes/boxes.php'));
+  require(bts_select('class', 'boxes.php'));
   
 // auto activate and expire banners
-  require(DIR_WS_FUNCTIONS . 'banner.php');
+  require(bts_select('function', 'banner.php'));
   tep_activate_banners();
   tep_expire_banners();
 
 // auto expire special products
-  require(DIR_WS_FUNCTIONS . 'specials.php');
+  require(bts_select('function', 'specials.php'));
   tep_expire_specials();
 
 // BOF Open Featured Sets
-  require(DIR_WS_FUNCTIONS . 'featured_sets.php');
+  require(bts_select('function', 'featured_sets.php'));
   if (SUSPEND_FEATURED_SETS_EXPIRING=='false') {
     // auto expire featured products
     tep_expire_featured();
@@ -698,12 +700,13 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
   }
 
 // include the breadcrumb class and start the breadcrumb trail
-  require(DIR_WS_CLASSES . 'breadcrumb.php');
+
+  require(bts_select('class', 'breadcrumb.php'));
   $breadcrumb = new breadcrumb;
 
   $breadcrumb->add(HEADER_TITLE_TOP, HTTP_SERVER);
   $breadcrumb->add(HEADER_TITLE_CATALOG, tep_href_link(FILENAME_DEFAULT));
-
+  
 // add category names or the manufacturer name to the breadcrumb trail
 //   if (isset($cPath_array)) {
 //     for ($i=0, $n=sizeof($cPath_array); $i<$n; $i++) {
@@ -745,8 +748,8 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
   }
 
 // BOF: MOD - articles functions
-  require(DIR_WS_FUNCTIONS . 'articles.php');
-  require(DIR_WS_FUNCTIONS . 'article_header_tags.php');
+  require(bts_select('function', 'articles.php'));
+  require(bts_select('function', 'article_header_tags.php'));
 
 // calculate topic path
   if (isset($_GET['tPath'])) {
@@ -799,11 +802,11 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
   }
 
 // add only if Header Tags not already installed
-  require(DIR_WS_FUNCTIONS . 'clean_html_comments.php');
+  require(bts_select('function', 'clean_html_comments.php'));
 // EOF: MOD - articles functions
 
 // initialize the message stack for output messages
-  require(DIR_WS_CLASSES . 'message_stack.php');
+  require(bts_select('class', 'message_stack.php'));
   $messageStack = new messageStack;
 
 // set which precautions should be checked
@@ -814,16 +817,16 @@ if (tep_session_is_registered('customer_id') && (isset($_GET['products_id']) || 
   define('WARN_DOWNLOAD_DIRECTORY_NOT_READABLE', 'true');
 
 // BOF: MOD - NEW OSC tax class
-  require('includes/classes/tax.php');
+  require(bts_select('class', 'tax.php'));
   $osC_Tax = new osC_Tax;
 // EOF: MOD - NEW OSC tax class
 
-// LINE ADDED: MOD - OSC-AFFILIATE
-  require(DIR_WS_INCLUDES . 'affiliate_application_top.php');
-// LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
-  require(DIR_WS_INCLUDES . 'add_ccgvdc_application_top.php');
+  // LINE ADDED: MOD - OSC-AFFILIATE
+  require(bts_select('include', 'affiliate_application_top.php'));
+  // LINE ADDED - MOD: CREDIT CLASS Gift Voucher Contribution
+  require(bts_select('include', 'add_ccgvdc_application_top.php'));
   //---PayPal WPP Modification START ---//
-  include(DIR_WS_INCLUDES . 'paypal_wpp/paypal_wpp_include.php');
+  include(bts_select('include',  'paypal_wpp/paypal_wpp_include.php'));
   //---PayPal WPP Modification END ---//
 
 // BOF: MOD - Page cache contribution - by Chemo

@@ -100,7 +100,7 @@ global $customer_id, $currencies, $language, $cc_id, $languages_id;
   } else {
   // Let them enter one
     $selection_string  = '<tr><td></td><td>';		
-    $selection_string .= tep_draw_form('checkout_payment_gift', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post');
+    $selection_string .= tep_draw_form('checkout_payment_gift', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', $request_type), 'post');
     $selection_string .= '<table border="0" width="100%"><tr><td class="main" width="275">';
     $selection_string .= TEXT_ENTER_GV_CODE . tep_draw_input_field('gv_redeem_code', TEXT_GV_CODE_INPUT_DEFAULT) ;
     $selection_string .= '</td><td align="right">';

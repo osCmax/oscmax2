@@ -56,7 +56,7 @@ $Id$
                                        'text' => $manufacturers_name);
       }
 
-      $boxContent = tep_draw_form('manufacturers', tep_href_link(FILENAME_DEFAULT, '', 'NONSSL', false), 'get');
+      $boxContent = tep_draw_form('manufacturers', tep_href_link(FILENAME_DEFAULT, '', $request_type, false), 'get');
 /* moved style to stylesheet BTSv1-1
       $boxContent .= tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, (isset($_GET['manufacturers_id']) ? $_GET['manufacturers_id'] : ''), 'onChange="this.form.submit();" size="' . MAX_MANUFACTURERS_LIST . '" style="width: 100%"');
 */

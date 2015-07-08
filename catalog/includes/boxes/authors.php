@@ -59,7 +59,7 @@ $Id$
       }
 
       
-      $boxContent = tep_draw_form('authors', tep_href_link(FILENAME_ARTICLES, '', 'NONSSL', false), 'get');
+      $boxContent = tep_draw_form('authors', tep_href_link(FILENAME_ARTICLES, '', $request_type, false), 'get');
       $boxContent .= tep_draw_pull_down_menu('authors_id', $authors_array, (isset($_GET['authors_id']) ? $_GET['authors_id'] : ''), 'onChange="this.form.submit();" size="' . MAX_AUTHORS_LIST . '" style="width: 100%"') . tep_hide_session_id();
        $boxContent .= '</form>';
 

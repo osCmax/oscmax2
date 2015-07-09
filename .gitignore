@@ -5,8 +5,5 @@
 catalog/includes/configure.php
 catalog/admin/includes/configure.php
 
-# Exclude image folders
-catalog/images/
-
 # Exlude any Mac system files
 .DS_Store

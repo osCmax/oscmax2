@@ -665,7 +665,11 @@ define('TEXT_PRODUCTS', 'Products');
 define('TEXT_SEARCH', 'Search: ');
 define('TEXT_WELCOME', ' Welcome, ');
 
+// Log account creation - by SMurphy 
+define('TEXT_ACCOUNT_CREATED', 'Account Created');
 define('TEXT_WRONG_PASSWORD', 'Wrong Password');
+// Log password reset - by SMurphy 
+define('TEXT_PASSWORD_RESET', 'Password Reset'); 
 define('TEXT_WRONG_USERNAME', 'Wrong Username');
 define('TEXT_LOGGED_IN', 'Logged In');
 define('TEXT_LOGGED_OUT', 'Logged Out');

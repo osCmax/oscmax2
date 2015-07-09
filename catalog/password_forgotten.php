@@ -30,6 +30,9 @@ $Id$
       $crypted_password = tep_encrypt_password($new_password);
 
       tep_db_query("update " . TABLE_CUSTOMERS . " set guest_account='0', customers_password = '" . tep_db_input($crypted_password) . "' where customers_id = '" . (int)$check_customer['customers_id'] . "'");
+	  
+	  // Log password reset - by SMurphy 
+      tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Password Reset', now())");
 
       tep_mail($check_customer['customers_firstname'] . ' ' . $check_customer['customers_lastname'], $email_address, STORE_NAME . EMAIL_PASSWORD_REMINDER_SUBJECT, sprintf(EMAIL_PASSWORD_REMINDER_BODY, isset($REMOTE_ADDR), STORE_NAME, $new_password), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 

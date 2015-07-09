@@ -42,7 +42,7 @@ $Id$
       <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
     </tr>
     <tr>
-      <td><?php echo tep_draw_form('password_forgotten', tep_href_link(FILENAME_AFFILIATE_PASSWORD_FORGOTTEN, 'action=process', 'SSL')); ?><br>
+      <td><?php echo tep_draw_form('password_forgotten', tep_href_link(FILENAME_AFFILIATE_PASSWORD_FORGOTTEN, 'action=process', $request_type)); ?><br>
         <table border="0" width="100%" cellspacing="0" cellpadding="3">
      	  <tr>
             <td align="right" class="main"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>

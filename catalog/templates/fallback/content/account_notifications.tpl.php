@@ -9,7 +9,7 @@ $Id$
 
   Released under the GNU General Public License
 */
-      echo tep_draw_form('account_notifications', tep_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', 'SSL')) . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+      echo tep_draw_form('account_notifications', tep_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', $request_type)) . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
       </tr>

@@ -20,7 +20,7 @@ var RecaptchaOptions = { theme : '<?php echo RECAPTCHA_STYLE; ?>', tabindex : 3,
 <!-- reCAPTCHA - end -->
 
     <!-- PWA BOF -->
-    <?php echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, (isset($_GET['guest'])? 'guest=guest':''), 'SSL'), 'post', 'onSubmit="return check_form(create_account);"') . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <?php echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, (isset($_GET['guest'])? 'guest=guest':''), $request_type), 'post', 'onSubmit="return check_form(create_account);"') . tep_draw_hidden_field('action', 'process'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
     <!-- PWA EOF -->
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>

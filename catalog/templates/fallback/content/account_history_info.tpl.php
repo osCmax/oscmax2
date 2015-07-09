@@ -215,7 +215,7 @@ $Id$
            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
              <tr>
                <td>
-                 <?php echo tep_draw_form('status', tep_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'action=update_order&' . tep_get_all_get_params(array('action')) , 'SSL')); ?>
+                 <?php echo tep_draw_form('status', tep_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'action=update_order&' . tep_get_all_get_params(array('action')) , $request_type)); ?>
                  <table border="0" width="100%" cellspacing="0" cellpadding="0">
                    <tr>
                      <td><?php echo tep_draw_textarea_field('comments', '60', '5'); ?></td>

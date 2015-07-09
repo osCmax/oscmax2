@@ -43,7 +43,7 @@ $Id$
   } 
 ?> 
       <tr> 
-        <td><?php echo tep_draw_form('affiliate_login', tep_href_link(FILENAME_AFFILIATE, 'action=process', 'SSL')); ?>
+        <td><?php echo tep_draw_form('affiliate_login', tep_href_link(FILENAME_AFFILIATE, 'action=process', $request_type)); ?>
           <table border="0" width="100%" cellspacing="0" cellpadding="2" style="height:100%"> 
             <tr> 
               <td class="main" width="50%" valign="top"><b><?php echo HEADING_NEW_AFFILIATE; ?></b></td> 

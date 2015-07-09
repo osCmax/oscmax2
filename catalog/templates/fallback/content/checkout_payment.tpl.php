@@ -10,7 +10,7 @@ $Id$
   Released under the GNU General Public License
 */
 
-      echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onsubmit="return check_form();"'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+      echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', $request_type), 'post', 'onsubmit="return check_form();"'); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
       </tr>
@@ -155,7 +155,7 @@ $Id$
       </tr>
       <tr>
 <?php // BOF - CREDIT CLASS Gift Voucher Contribution ?>
-        <td><?php echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onsubmit="return check_form();"'); ?><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+        <td><?php echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', $request_type), 'post', 'onsubmit="return check_form();"'); ?><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
 <?php // EOF - CREDIT CLASS Gift Voucher Contribution ?>
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">

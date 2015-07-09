@@ -10,7 +10,7 @@ $Id: password_forgotten_affiliate.tpl.php 1452 2011-05-30 19:59:17Z cottonbarn $
   Released under the GNU General Public License
 */
 
-echo tep_draw_form('password_forgotten', tep_href_link(FILENAME_PASSWORD_FORGOTTEN_AFFILIATE, 'action=process', 'SSL')); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
+echo tep_draw_form('password_forgotten', tep_href_link(FILENAME_PASSWORD_FORGOTTEN_AFFILIATE, 'action=process', $request_type)); ?><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '4'); ?></td>
       </tr>

@@ -103,7 +103,7 @@ $Id$
           print ("\">\n<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\">\n");
           echo '<body bgcolor="#ffffff" style="margin:0">';
           print ("\n<table border=\"0\" width=\"100%\">\n<tr>\n<td style=\"vertical-align: middle\" align=\"middle\">\n");
-          echo tep_draw_form('login', tep_href_link(FILENAME_LOGIN, 'action=process&skip=true', 'SSL'));
+          echo tep_draw_form('login', tep_href_link(FILENAME_LOGIN, 'action=process&skip=true', $request_type));
           print ("\n<table border=\"0\" bgcolor=\"#f1f9fe\" cellspacing=\"10\" style=\"border: 1px solid #7b9ebd;\">\n<tr>\n<td class=\"main\">\n");
           $index = 0;
           while ($existing_customers =  tep_db_fetch_array($existing_customers_query)) {

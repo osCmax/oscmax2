@@ -145,14 +145,15 @@ echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet',
     <div class="col-md-12 column">
      <div class="row clearfix">
 
-	<div class="col-md-10 col-md-push-2">
-		<?php require(DIR_WS_INCLUDES . 'warnings.php'); ?>
-		<?php require (bts_select ('content')); // BTSv1.5 ?>
-	</div>
+		<div class="col-md-2">
+            <?php require(bts_select('column', 'column_left.php')); ?>
+        </div>
 
-	<div class="col-md-2 col-md-pull-10">
-		<?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
-	</div>
+        <div class="col-md-10">
+            <?php require(DIR_WS_INCLUDES . 'warnings.php'); ?>
+            <?php require (bts_select ('content')); ?>
+        </div>
+
 
       </div>
     </div>
@@ -172,11 +173,19 @@ echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet',
  
 </div>
 
-    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
+<script src="templates/bootstrap/javascript/bootstrap.min.js"></script>
+
+<?php
+  if (bts_select('javascript', $PHP_SELF)) { // if a specific javscript file exists for this page it will be loaded
+    require(bts_select('javascript', $PHP_SELF));
+  } else {
+    if (isset($javascript) && file_exists(DIR_WS_JAVASCRIPT . basename($javascript))) { require(DIR_WS_JAVASCRIPT . basename($javascript)); }
+  }
+?>
     
     <!--// SHOW HIDE BASKET v2-->
 <script type="text/javascript">

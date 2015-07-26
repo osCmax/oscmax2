@@ -7,3 +7,5 @@ catalog/admin/includes/configure.php
 
 # Exlude any Mac system files
 .DS_Store
+
+catalog/cache/cachefile.inc.php

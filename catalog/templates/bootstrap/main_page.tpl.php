@@ -144,17 +144,16 @@ echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet',
   <div class="row clearfix">
     <div class="col-md-12 column">
      <div class="row clearfix">
-
-		<div class="col-md-2">
-            <?php require(bts_select('column', 'column_left.php')); ?>
-        </div>
-
-        <div class="col-md-10">
-            <?php require(DIR_WS_INCLUDES . 'warnings.php'); ?>
-            <?php require (bts_select ('content')); ?>
-        </div>
-
-
+     
+     	<div class="col-md-10 col-md-push-2">
+			<?php require(DIR_WS_INCLUDES . 'warnings.php'); ?>
+			<?php require (bts_select ('content')); // BTSv1.5 ?>
+		</div>
+        
+        <div class="col-md-2 col-md-pull-10">
+			<?php require(bts_select('column', 'column_left.php')); // BTSv1.5 ?>
+		</div>
+        
       </div>
     </div>
   </div>

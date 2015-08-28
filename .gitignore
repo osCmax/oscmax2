@@ -1,0 +1,11 @@
+# Exclude .htaccess file
+.htaccess
+
+# Exclude config files
+catalog/includes/configure.php
+catalog/admin/includes/configure.php
+
+# Exlude any Mac system files
+.DS_Store
+
+catalog/cache/cachefile.inc.php

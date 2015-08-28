@@ -602,5 +602,28 @@ class PriceFormatter {
 	  
 	  return $button_output;
 	}
+	
+	function getBootstrapProductButtons($products_id, $page_sent, $products_model = '', $products_name = '', $cPath = '') {
+	  $button_output = '';
+	  
+	  // Add more info button if enabled
+	  if (SHOW_MORE_INFO == 'True') {
+        $button_output .= '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $products_id) . '" class="btn btn-default" role="button">' . IMAGE_BUTTON_MORE_INFO . '</a>&nbsp;';
+	  }
+	  
+	  // We need to know if we are on the product_info page or not to send to the correct page
+	  if ($page_sent == FILENAME_PRODUCT_INFO) { $product_link = '&product_to_buy_id=' . $products_id; } else { $product_link = '&products_id=' . $products_id; }
+	  
+	  // Now generate the relevant 'buy now' button
+	  if ($this->thePrice == CALL_FOR_PRICE_VALUE) { // Call for price
+	    $button_output .= '<a href="' . tep_href_link(FILENAME_CONTACT_US, 'enquiry=' . TEXT_QUESTION_PRICE_ENQUIRY . '%0D%0A%0D%0A' . TEXT_QUESTION_MODEL . '%20' . str_replace(' ', '%20', $products_model) . '%0D%0A' . TEXT_QUESTION_PRODUCT_NAME . '%20' . str_replace(' ', '%20', $products_name) . '%0D%0A' . TEXT_QUESTION_PRODUCT_ID . '%20' . $products_id . '%0D%0A%0D%0A') . '" class="btn btn-warning" role="button">' . IMAGE_BUTTON_CFP . '</a>';
+	  } elseif ($this->productsQuantity < 1 && STOCK_IMAGE_SWITCH == 'true') { // Out of Stock
+	    $button_output .= '<button class="btn btn-alert">' . IMAGE_OUT_OF_STOCK . '</button>';
+	  } else {
+		$button_output .= '<a href="' . tep_href_link($page_sent, tep_get_all_get_params(array('action')) . 'action=buy_now' . $product_link) . '" class="btn btn-success" role="button">' . IMAGE_BUTTON_BUY_NOW . '</a>';
+	  }
+	  
+	  return $button_output;
+	}
 }
 ?>

@@ -341,6 +341,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'getStates' && isset($_POST['
       tep_db_query("update " . TABLE_CUSTOMERS . " set customers_default_address_id = '" . (int)$address_id . "' where customers_id = '" . (int)$customer_id . "'");
 
       tep_db_query("insert into " . TABLE_CUSTOMERS_INFO . " (customers_info_id, customers_info_number_of_logons, customers_info_date_account_created) values ('" . (int)$customer_id . "', '0', now())");
+	  
+	  // Log account creation - by SMurphy 
+      tep_db_query("insert into " . TABLE_CUSTOMER_LOG . " values ('', '" . (addslashes($email_address)) . "', '" . $_SERVER['REMOTE_ADDR'] . "', 'Account Created', now())"); 
 
       if (SESSION_RECREATE == 'True') {
         tep_session_recreate();

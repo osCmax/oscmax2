@@ -50,6 +50,18 @@ $Id$
                     echo TEXT_WRONG_PASSWORD;
                   break;
 				  
+				  // BOF: Log password reset - by SMurphy 
+                  case 'Password Reset': 
+                    echo TEXT_PASSWORD_RESET; 
+                  break; 
+				  // EOF: Log password reset - by SMurphy 
+				  
+				  // BOF: Log account creation - by SMurphy 
+                  case 'Account Created': 
+                    echo TEXT_ACCOUNT_CREATED; 
+                  break; 
+				  // EOF: Log account creation - by SMurphy 
+				  
 		          case 'Wrong Username':
                     echo TEXT_WRONG_USERNAME;
                   break;

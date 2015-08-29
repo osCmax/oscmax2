@@ -172,6 +172,11 @@ echo '<link rel="stylesheet" type="text/css" href="' . (bts_select('stylesheet',
  
 </div>
 
+<!-- Scroll to top button -->
+<div id="top" class="scroll-top">
+	<span id="scrollTop-btn" class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+</div>
+
 <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
@@ -198,6 +203,22 @@ $("#cart").bind("mouseleave", function() {
 </script>
 <!--// SHOW HIDE BASKET v2-->
 
+<script type="text/javascript">
+	//Scroll to Top Button
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 500) {
+			$('#scrollTop-btn').parent().addClass('scrolled');
+		} else {
+			$('#scrollTop-btn').parent().removeClass('scrolled');
+		}
+	});
+	
+	$('#scrollTop-btn').click(function(){
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+  		return false;
+	});
+</script>
+
 <?php if (GOOGLE_ANALYTICS_STATUS == 'true') { ?>
 <!-- BOF: Google Analytics Code -->
 <script type="text/javascript">
@@ -223,5 +244,6 @@ include(DIR_WS_MODULES . 'analytics.php');
 </script>
 <!-- EOF: Google Analytics Code -->
 <?php } ?>
+
 </body>
 </html>

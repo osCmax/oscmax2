@@ -614,3 +614,34 @@ p.lead del {
 .navbar-no-margin {
   margin-bottom: 0 !important;
 }
+
+
+/* Scroll to top button ----------------------------------------------------- */
+
+.scroll-top {
+    position: fixed;
+    z-index: 15;
+    right: -58px;
+    bottom: 10px;
+    transition: right .3s;
+}
+
+.scroll-top span {
+    display: block;
+    float: left;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    font-size: 1.375em;
+    color: #fff;
+    background: #292c2e;
+    border-radius: 0;
+    padding-top: 7px;
+    margin: 0 7px;
+    cursor: pointer;
+    transition: background .3s;
+}
+
+.scroll-top.scrolled {
+    right: 3px;
+}

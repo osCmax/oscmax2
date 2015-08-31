@@ -1,0 +1,10 @@
+/* user.css ----------------------------------------------------------------- */
+
+label {
+  font-weight: normal;
+}
+
+.form-group.required .control-label:before {
+  content:"* ";
+  color:red;
+}

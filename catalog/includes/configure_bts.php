@@ -191,14 +191,6 @@ function bts_select($template_type, $filename = '') {
     }
 	break;
 	
-	case 'module':
-	if (is_file(DIR_WS_TEMPLATES . 'includes/modules/' . $filename)) {
-	    $path = DIR_WS_TEMPLATES . 'includes/modules/' . $filename;
-	} else {
-        $path = DIR_WS_INCLUDES . '/modules/' . $filename;
-    }
-	break;
-	
     default:
     // exit ('Error bts_select()! No template selected for template type: ');
     echo ('Error: bts_select()! No template selected for template type: ' . $template_type);

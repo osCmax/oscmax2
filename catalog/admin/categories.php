@@ -2775,7 +2775,7 @@ if (DISABLE_CATEGORY_DROPDOWN_SWITCH == 'false') {
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_EDIT_CATEGORY . '</b>');
 
 
-        $contents = array('form' => tep_draw_form('categories', FILENAME_CATEGORIES, 'action=update_category&amp;cPath=' . $cPath, 'post', 'enctype="multipart/form-data"') . tep_draw_hidden_field('categories_id', $cInfo->categories_id));
+        $contents = array('form' => tep_draw_form('categories', FILENAME_CATEGORIES, 'action=update_category&amp;cPath=' . $cPath, 'post', 'enctype="multipart/form-data"') . tep_draw_hidden_field('categories_id', $cInfo->categories_id)  . tep_draw_hidden_field('categories_previous_image', $cInfo->categories_image));
         $contents[] = array('text' => TEXT_EDIT_INTRO);
 
         $category_inputs_string = '';
@@ -2785,7 +2785,7 @@ if (DISABLE_CATEGORY_DROPDOWN_SWITCH == 'false') {
         }
 
         $contents[] = array('text' => '<br>' . TEXT_EDIT_CATEGORIES_NAME . $category_inputs_string);
-        $contents[] = array('text' => '<br>' . tep_image(DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name) . '<br>' . DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . '<br><b>' . $cInfo->categories_image . '</b>');
+        $contents[] = array('text' => '<br>' . tep_info_image(CATEGORY_IMAGES_DIR . $cInfo->categories_image, $cInfo->categories_name) . '<br>' . DIR_FS_CATALOG_IMAGES . CATEGORY_IMAGES_DIR . '<br><b>' . $cInfo->categories_image . '</b>');
         $contents[] = array('text' => '<br>' . TEXT_EDIT_CATEGORIES_IMAGE . '<br>' . tep_draw_file_field('categories_image'));
         $contents[] = array('text' => '<br>' . TEXT_EDIT_SORT_ORDER . '<br>' . tep_draw_input_field('sort_order', $cInfo->sort_order, 'size="2"'));
 // EOF Open Featured Sets

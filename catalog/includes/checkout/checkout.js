@@ -1146,7 +1146,7 @@ var checkout = {
 			if ($('.error_icon:visible', $('#billingAddress')).size() > 0){
 				errMsg += 'Please correct fields with errors in "Billing Address"' + "\n";
 			}
-			if($(':password[name="password"]').val() != '')
+			if($(':password[name="password"]').is(':visible') && $(':password[name="password"]').val() != '')
 			{
 				if($(':password[name="confirmation"]').val() == '' || $(':password[name="confirmation"]').val() != $(':password[name="password"]').val() )
 				{
